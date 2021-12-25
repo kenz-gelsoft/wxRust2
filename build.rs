@@ -1,5 +1,5 @@
 fn main() {
-    cxx_build::bridge("src/main.rs")
+    cxx_build::bridge("src/lib.rs")
         // from `wx-config --cflags`
         .include("/opt/homebrew/lib/wx/include/osx_cocoa-unicode-3.0")
         .include("/opt/homebrew/include/wx-3.0")

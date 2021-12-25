@@ -1,4 +1,4 @@
-#include "wxcxx/include/wxrust.h"
+#include "wx/include/wxrust.h"
 
 // wxApp
 wxIMPLEMENT_APP_NO_MAIN(WxRustApp);
