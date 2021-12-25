@@ -1,39 +1,38 @@
-use std::pin::Pin;
-
-#[cxx::bridge]
-mod ffi {
-    unsafe extern "C++" {
-        include!("wxcxx/include/wxrust.h");
-
-        fn WxRustAppSetOnInit(on_init: fn());
-
-        type wxFrame;
-        fn wxFrame_new(title: &str) -> *mut wxFrame;
-        fn Centre(self: Pin<&mut wxFrame>, direction: i32);
-        fn Show(self: Pin<&mut wxFrame>, b: bool) -> bool;
-
-        unsafe fn wxEntry(argc: &mut i32, argv: *mut *mut c_char) -> i32;
-    }
-}
-
 mod wx {
     use std::convert::TryInto;
     use std::os::raw::c_char;
+    use std::pin::Pin;
     use std::ptr;
 
+    #[cxx::bridge]
+    mod ffi {
+        unsafe extern "C++" {
+            include!("wxcxx/include/wxrust.h");
+    
+            fn WxRustAppSetOnInit(on_init: fn());
+    
+            type wxFrame;
+            fn wxFrame_new(title: &str) -> *mut wxFrame;
+            fn Centre(self: Pin<&mut wxFrame>, direction: i32);
+            fn Show(self: Pin<&mut wxFrame>, b: bool) -> bool;
+    
+            unsafe fn wxEntry(argc: &mut i32, argv: *mut *mut c_char) -> i32;
+        }
+    }
+    
     // wxApp
     pub enum App {}
     impl App {
         pub fn on_init(f: fn()) {
-            super::ffi::WxRustAppSetOnInit(f);
+            ffi::WxRustAppSetOnInit(f);
         }
     }
 
     // wxFrame
-    pub struct Frame(*mut super::ffi::wxFrame);
+    pub struct Frame(*mut ffi::wxFrame);
     impl Frame {
         pub fn new(title: &str) -> Frame {
-            Frame(super::ffi::wxFrame_new(title))
+            Frame(ffi::wxFrame_new(title))
         }
         pub fn centre(&mut self) {
             self.pinned().as_mut().Centre(0);
@@ -42,8 +41,8 @@ mod wx {
             self.pinned().as_mut().Show(true);
         }
         // private
-        fn pinned(&mut self) -> super::Pin<&mut super::ffi::wxFrame> {
-            unsafe { super::Pin::new_unchecked(&mut *self.0) }
+        fn pinned(&mut self) -> Pin<&mut ffi::wxFrame> {
+            unsafe { Pin::new_unchecked(&mut *self.0) }
         }
     }
 
@@ -57,7 +56,7 @@ mod wx {
         argv.push(ptr::null_mut()); // Nul terminator.    
         let mut argc: i32 = args.len().try_into().unwrap();
         unsafe {
-            super::ffi::wxEntry(&mut argc, argv.as_mut_ptr());
+            ffi::wxEntry(&mut argc, argv.as_mut_ptr());
         }
     }
 }
