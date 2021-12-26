@@ -1,5 +1,14 @@
 use std::process::Command;
 
+fn main() {
+    wx_config_cflags(&mut cxx_build::bridge("src/lib.rs"))
+        .file("src/wxrust.cc")
+        .flag_if_supported("-std=c++14")
+        .compile("cxx-demo");
+
+    print_wx_config_libs_for_cargo();
+}
+
 fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
     // from `wx-config --cflags`
     let cflags = wx_config(&["--cflags"]);
@@ -17,15 +26,6 @@ fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
         }
     }
     cc_build
-}
-
-fn main() {
-    wx_config_cflags(&mut cxx_build::bridge("src/lib.rs"))
-        .file("src/wxrust.cc")
-        .flag_if_supported("-std=c++14")
-        .compile("cxx-demo");
-
-    print_wx_config_libs_for_cargo();
 }
 
 fn print_wx_config_libs_for_cargo() {
