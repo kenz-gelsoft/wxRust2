@@ -1,3 +1,5 @@
+use std::process::Command;
+
 fn main() {
     cxx_build::bridge("src/lib.rs")
         // from `wx-config --cflags`
@@ -13,22 +15,30 @@ fn main() {
         .flag_if_supported("-std=c++14")
         .compile("cxx-demo");
 
-    // getopts 使って option parse すれば簡単に書けそう
     // from `wx-config --libs`
-    println!("cargo:rustc-link-search=native=/opt/homebrew/lib");
-    println!("cargo:rustc-link-lib=framework=IOKit");
-    println!("cargo:rustc-link-lib=framework=Carbon");
-    println!("cargo:rustc-link-lib=framework=Cocoa");
-    println!("cargo:rustc-link-lib=framework=AudioToolbox");
-    println!("cargo:rustc-link-lib=wx_baseu-3.0");
-    println!("cargo:rustc-link-lib=framework=System");
-    println!("cargo:rustc-link-lib=framework=OpenGL");
-    println!("cargo:rustc-link-lib=wx_osx_cocoau_xrc-3.0");
-    println!("cargo:rustc-link-lib=wx_osx_cocoau_html-3.0");
-    println!("cargo:rustc-link-lib=wx_osx_cocoau_qa-3.0");
-    println!("cargo:rustc-link-lib=wx_osx_cocoau_adv-3.0");
-    println!("cargo:rustc-link-lib=wx_osx_cocoau_core-3.0");
-    println!("cargo:rustc-link-lib=wx_baseu_xml-3.0");
-    println!("cargo:rustc-link-lib=wx_baseu_net-3.0");
-    println!("cargo:rustc-link-lib=wx_baseu-3.0");
+    let libs = wx_config(&["--libs"]);
+    let mut next_is_framework_name = false;
+    for arg in libs.split_whitespace() {
+        if next_is_framework_name {
+            println!("cargo:rustc-link-lib=framework={}", arg);
+            next_is_framework_name = false;
+        } else if arg == "-framework" {
+            next_is_framework_name = true;
+        } else if arg.starts_with("-L") {
+            println!("cargo:rustc-link-search=native={}", &arg[2..]);
+        } else if arg.starts_with("-l") {
+            println!("cargo:rustc-link-lib={}", &arg[2..]);
+        } else {
+            panic!("unsupported argument '{}'. please file a bug.", arg)
+        }
+    }
+}
+
+fn wx_config(args: &[&str]) -> String {
+	let output = Command::new("wx-config")
+        .args(args)
+        .output()
+        .expect("failed execute wx-config command.");
+	String::from_utf8_lossy(&output.stdout)
+        .to_string()
 }
