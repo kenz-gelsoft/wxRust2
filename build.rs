@@ -1,16 +1,24 @@
 use std::process::Command;
 
 fn main() {
-    cxx_build::bridge("src/lib.rs")
-        // from `wx-config --cflags`
-        .include("/opt/homebrew/lib/wx/include/osx_cocoa-unicode-3.0")
-        .include("/opt/homebrew/include/wx-3.0")
-        .define("_FILE_OFFSET_BITS", "64")
-        .define("WXUSINGDLL", None)
-        .define("__WXMAC__", None)
-        .define("__WXOSX__", None)
-        .define("__WXOSX_COCOA__", None)
-        // to here.
+    let mut cxx_build = cxx_build::bridge("src/lib.rs");
+    // from `wx-config --cflags`
+    let cflags = wx_config(&["--cflags"]);
+    for arg in cflags.split_whitespace() {
+        if arg.starts_with("-I") {
+            cxx_build.include(&arg[2..]);
+        } else if arg.starts_with("-D") {
+            let mut split = &mut arg[2..].split('=');
+            cxx_build.define(
+                split.next().unwrap(),
+                split.next().unwrap_or("")
+            );
+        } else {
+            panic!("unsupported argument '{}'. please file a bug.", arg)
+        }
+    }
+
+    cxx_build
         .file("src/wxrust.cc")
         .flag_if_supported("-std=c++14")
         .compile("cxx-demo");
