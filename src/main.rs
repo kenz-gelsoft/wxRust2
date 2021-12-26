@@ -1,8 +1,10 @@
 use wx;
+use wx::{App, Button, Frame};
 
 fn main() {
-    wx::App::on_init(|| {
-        let mut frame = wx::Frame::new("Hello, 世界");
+    App::on_init(|| {
+        let mut frame = Frame::new("Hello, 世界");
+        let button = Button::new(&mut frame, "Greet");
         frame.centre();
         frame.show();
     });

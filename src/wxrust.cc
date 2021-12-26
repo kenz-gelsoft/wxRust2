@@ -22,3 +22,8 @@ bool WxRustApp::OnInit() {
 wxFrame *wxFrame_new(rust::Str title) {
     return new wxFrame(NULL, -1, std::string(title));
 }
+
+// wxButton
+wxButton *wxButton_new(wxFrame &parent, rust::Str label) {
+    return new wxButton(&parent, wxID_ANY, std::string(label));
+}

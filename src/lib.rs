@@ -10,10 +10,15 @@ mod ffi {
 
         fn WxRustAppSetOnInit(on_init: fn());
 
+        type wxWindow;
+
         type wxFrame;
         fn wxFrame_new(title: &str) -> *mut wxFrame;
         fn Centre(self: Pin<&mut wxFrame>, direction: i32);
         fn Show(self: Pin<&mut wxFrame>, b: bool) -> bool;
+
+        type wxButton;
+        fn wxButton_new(parent: Pin<&mut wxFrame>, label: &str) -> *mut wxButton;
 
         unsafe fn wxEntry(argc: &mut i32, argv: *mut *mut c_char) -> i32;
     }
@@ -42,6 +47,14 @@ impl Frame {
     // private
     fn pinned(&mut self) -> Pin<&mut ffi::wxFrame> {
         unsafe { Pin::new_unchecked(&mut *self.0) }
+    }
+}
+
+// wxButton
+pub struct Button(*mut ffi::wxButton);
+impl Button {
+    pub fn new(parent: &mut Frame, label: &str) -> Button {
+        Button(ffi::wxButton_new(parent.pinned(), label))
     }
 }
 

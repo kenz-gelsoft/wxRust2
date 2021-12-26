@@ -12,3 +12,6 @@ class WxRustApp : public wxApp {
 
 // wxFrame
 wxFrame *wxFrame_new(rust::Str aTitle);
+
+// wxButton
+wxButton *wxButton_new(wxFrame &parent, rust::Str label);
