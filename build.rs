@@ -1,15 +1,14 @@
 use std::process::Command;
 
-fn main() {
-    let mut cxx_build = cxx_build::bridge("src/lib.rs");
+fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
     // from `wx-config --cflags`
     let cflags = wx_config(&["--cflags"]);
     for arg in cflags.split_whitespace() {
         if arg.starts_with("-I") {
-            cxx_build.include(&arg[2..]);
+            cc_build.include(&arg[2..]);
         } else if arg.starts_with("-D") {
-            let mut split = &mut arg[2..].split('=');
-            cxx_build.define(
+            let split = &mut arg[2..].split('=');
+            cc_build.define(
                 split.next().unwrap(),
                 split.next().unwrap_or("")
             );
@@ -17,12 +16,19 @@ fn main() {
             panic!("unsupported argument '{}'. please file a bug.", arg)
         }
     }
+    cc_build
+}
 
-    cxx_build
+fn main() {
+    wx_config_cflags(&mut cxx_build::bridge("src/lib.rs"))
         .file("src/wxrust.cc")
         .flag_if_supported("-std=c++14")
         .compile("cxx-demo");
 
+    print_wx_config_libs_for_cargo();
+}
+
+fn print_wx_config_libs_for_cargo() {
     // from `wx-config --libs`
     let libs = wx_config(&["--libs"]);
     let mut next_is_framework_name = false;
