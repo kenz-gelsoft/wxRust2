@@ -11,14 +11,14 @@ mod ffi {
         fn WxRustAppSetOnInit(on_init: fn());
 
         type wxWindow;
+        fn Centre(self: Pin<&mut wxWindow>, direction: i32);
+        fn Show(self: Pin<&mut wxWindow>, b: bool) -> bool;
 
         type wxFrame;
         fn wxFrame_new(title: &str) -> *mut wxFrame;
-        fn Centre(self: Pin<&mut wxFrame>, direction: i32);
-        fn Show(self: Pin<&mut wxFrame>, b: bool) -> bool;
 
         type wxButton;
-        fn wxButton_new(parent: Pin<&mut wxFrame>, label: &str) -> *mut wxButton;
+        fn wxButton_new(parent: Pin<&mut wxWindow>, label: &str) -> *mut wxButton;
 
         unsafe fn wxEntry(argc: &mut i32, argv: *mut *mut c_char) -> i32;
     }
@@ -32,21 +32,33 @@ impl App {
     }
 }
 
+// wxWindow
+pub struct Window(*mut ffi::wxWindow);
+impl WindowMethods for Window {
+    fn pinned(&mut self) -> Pin<&mut ffi::wxWindow> {
+        unsafe { Pin::new_unchecked(&mut *self.0) }
+    }
+}
+pub trait WindowMethods {
+    fn pinned(&mut self) -> Pin<&mut ffi::wxWindow>;
+    fn centre(&mut self) {
+        self.pinned().as_mut().Centre(0);
+    }
+    fn show(&mut self) {
+        self.pinned().as_mut().Show(true);
+    }
+}
+
 // wxFrame
 pub struct Frame(*mut ffi::wxFrame);
+impl WindowMethods for Frame {
+    fn pinned(&mut self) -> Pin<&mut ffi::wxWindow> {
+        unsafe { Pin::new_unchecked(&mut *(self.0 as *mut ffi::wxWindow)) }
+    }
+}
 impl Frame {
     pub fn new(title: &str) -> Frame {
         Frame(ffi::wxFrame_new(title))
-    }
-    pub fn centre(&mut self) {
-        self.pinned().as_mut().Centre(0);
-    }
-    pub fn show(&mut self) {
-        self.pinned().as_mut().Show(true);
-    }
-    // private
-    fn pinned(&mut self) -> Pin<&mut ffi::wxFrame> {
-        unsafe { Pin::new_unchecked(&mut *self.0) }
     }
 }
 

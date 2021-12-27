@@ -24,6 +24,6 @@ wxFrame *wxFrame_new(rust::Str title) {
 }
 
 // wxButton
-wxButton *wxButton_new(wxFrame &parent, rust::Str label) {
+wxButton *wxButton_new(wxWindow &parent, rust::Str label) {
     return new wxButton(&parent, wxID_ANY, std::string(label));
 }

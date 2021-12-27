@@ -1,5 +1,5 @@
 use wx;
-use wx::{App, Button, Frame};
+use wx::*;
 
 fn main() {
     App::on_init(|| {
