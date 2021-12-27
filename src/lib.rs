@@ -1,14 +1,23 @@
 use std::convert::TryInto;
+use std::mem;
 use std::os::raw::c_char;
 use std::pin::Pin;
 use std::ptr;
+
+// any pointer type used on ffi boundary.
+// we chose this type as it's handy in cxx.
+type UnsafeAnyPtr = *const c_char;
 
 #[cxx::bridge]
 mod ffi {
     unsafe extern "C++" {
         include!("wx/include/wxrust.h");
 
-        fn WxRustAppSetOnInit(on_init: fn());
+        unsafe fn WxRustAppSetOnInit(
+            // type alias can't be used in cxx:bridge.
+            f: unsafe fn(*const c_char),
+            param: *const c_char
+        );
 
         type wxWindow;
         fn Centre(self: Pin<&mut wxWindow>, direction: i32);
@@ -24,11 +33,35 @@ mod ffi {
     }
 }
 
+// Rust closure to wx calablle function+param pair.
+trait ToWxCallable {
+    unsafe fn to_wx_callable(&self) -> (fn(UnsafeAnyPtr), UnsafeAnyPtr);
+}
+impl<F> ToWxCallable for F where F: Fn() {
+    unsafe fn to_wx_callable(&self) -> (fn(UnsafeAnyPtr), UnsafeAnyPtr) {
+        unsafe fn call<F: Fn()>(closure: UnsafeAnyPtr) {
+            let closure = &*(closure as *const F);
+            closure();
+        }
+        // pass the pointer in the heap to avoid move.
+        let closure = Box::new(self);
+        (
+            mem::transmute::<_, fn(UnsafeAnyPtr)>(
+                call::<F> as UnsafeAnyPtr
+            ),
+            Box::into_raw(closure) as UnsafeAnyPtr
+        )
+    }
+}
+
 // wxApp
 pub enum App {}
 impl App {
-    pub fn on_init(f: fn()) {
-        ffi::WxRustAppSetOnInit(f);
+    pub fn on_init<F: Fn()>(closure: F) {
+        unsafe {
+            let (f, param) = closure.to_wx_callable();
+            ffi::WxRustAppSetOnInit(f, param);
+        }
     }
 }
 

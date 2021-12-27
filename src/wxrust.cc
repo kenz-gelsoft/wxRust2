@@ -3,18 +3,28 @@
 // wxApp
 wxIMPLEMENT_APP_NO_MAIN(WxRustApp);
 
-static rust::Fn<void()> globalOnInit;
-static bool globalOnInitSet = false;
-void WxRustAppSetOnInit(rust::Fn<void()> aOnInit) {
-    globalOnInit = aOnInit;
-    globalOnInitSet = true;
+struct WxRustClosure {
+    rust::Fn<void(unsafe_any_ptr)> f;
+    unsafe_any_ptr param;
+
+    void operator ()() const {
+        if (param) { // if set
+            f(param);
+        } else {
+            // TODO: provide debug info
+        }
+    }
+};
+
+static WxRustClosure globalOnInit;
+void WxRustAppSetOnInit(
+    rust::Fn<void(unsafe_any_ptr)> aFn,
+    unsafe_any_ptr aParam
+) {
+    globalOnInit = { aFn, aParam };
 }
 bool WxRustApp::OnInit() {
-    if (globalOnInitSet) {
-        (*globalOnInit)();
-    } else {
-        // TODO: provide debug info
-    }
+    globalOnInit();
     return true;
 }
 
