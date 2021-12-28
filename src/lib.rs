@@ -68,16 +68,16 @@ impl App {
 // wxWindow
 pub struct Window(*mut ffi::wxWindow);
 impl WindowMethods for Window {
-    fn pinned(&mut self) -> Pin<&mut ffi::wxWindow> {
+    fn pinned(&self) -> Pin<&mut ffi::wxWindow> {
         unsafe { Pin::new_unchecked(&mut *self.0) }
     }
 }
 pub trait WindowMethods {
-    fn pinned(&mut self) -> Pin<&mut ffi::wxWindow>;
-    fn centre(&mut self) {
+    fn pinned(&self) -> Pin<&mut ffi::wxWindow>;
+    fn centre(&self) {
         self.pinned().as_mut().Centre(0);
     }
-    fn show(&mut self) {
+    fn show(&self) {
         self.pinned().as_mut().Show(true);
     }
 }
@@ -85,7 +85,7 @@ pub trait WindowMethods {
 // wxFrame
 pub struct Frame(*mut ffi::wxFrame);
 impl WindowMethods for Frame {
-    fn pinned(&mut self) -> Pin<&mut ffi::wxWindow> {
+    fn pinned(&self) -> Pin<&mut ffi::wxWindow> {
         unsafe { Pin::new_unchecked(&mut *(self.0 as *mut ffi::wxWindow)) }
     }
 }
@@ -98,7 +98,7 @@ impl Frame {
 // wxButton
 pub struct Button(*mut ffi::wxButton);
 impl Button {
-    pub fn new(parent: &mut Frame, label: &str) -> Button {
+    pub fn new(parent: &Frame, label: &str) -> Button {
         Button(ffi::wxButton_new(parent.pinned(), label))
     }
 }
