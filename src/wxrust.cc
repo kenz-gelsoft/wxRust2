@@ -3,20 +3,7 @@
 // wxApp
 wxIMPLEMENT_APP_NO_MAIN(WxRustApp);
 
-struct WxRustClosure {
-    rust::Fn<void(unsafe_any_ptr)> f;
-    unsafe_any_ptr param;
-
-    void operator ()() const {
-        if (param) { // if set
-            f(param);
-        } else {
-            // TODO: provide debug info
-        }
-    }
-};
-
-static WxRustClosure globalOnInit;
+static WxRustClosure<int> globalOnInit;
 void WxRustAppSetOnInit(
     rust::Fn<void(unsafe_any_ptr)> aFn,
     unsafe_any_ptr aParam
@@ -24,13 +11,18 @@ void WxRustAppSetOnInit(
     globalOnInit = { aFn, aParam };
 }
 bool WxRustApp::OnInit() {
-    globalOnInit();
+    globalOnInit(/*unused*/0);
     return true;
 }
 
 // wxFrame
 wxFrame *wxFrame_new(rust::Str title) {
     return new wxFrame(NULL, -1, std::string(title));
+}
+
+// wxString
+wxString *wxString_from(rust::Str aString) {
+    return new wxString(std::string(aString).c_str(), wxConvUTF8);
 }
 
 // wxButton
