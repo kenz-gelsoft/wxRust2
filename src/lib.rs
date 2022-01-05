@@ -67,14 +67,19 @@ impl ffi::Closure {
     }
 }
 
-pub struct EvtHandler(*mut ffi::wxEvtHandler);
-impl EvtHandlerMethods for EvtHandler {
-    fn pinned(&self) -> Pin<&mut ffi::wxEvtHandler> {
-        unsafe { Pin::new_unchecked(&mut *self.0) }
-    }
+pub trait ObjectMethods {
+    unsafe fn as_ptr(&self) -> UnsafeAnyPtr;
 }
-pub trait EvtHandlerMethods {
-    fn pinned(&self) -> Pin<&mut ffi::wxEvtHandler>;
+
+pub struct EvtHandler(*mut ffi::wxEvtHandler);
+impl EvtHandlerMethods for EvtHandler {}
+impl ObjectMethods for EvtHandler {
+    unsafe fn as_ptr(&self) -> UnsafeAnyPtr { self.0 as _ }
+}
+pub trait EvtHandlerMethods: ObjectMethods {
+    fn pinned(&self) -> Pin<&mut ffi::wxEvtHandler> {
+        unsafe { Pin::new_unchecked(&mut *(self.as_ptr() as *mut _)) }
+    }
     fn bind<F: Fn() + 'static>(&self, event_type: ffi::EventType, closure: F) {
         ffi::Bind(self.pinned().as_mut(), event_type, &ffi::Closure::new(closure));
     }
@@ -90,27 +95,29 @@ impl App {
 
 // wxWindow
 pub struct Window(*mut ffi::wxWindow);
-impl WindowMethods for Window {
-    fn pinned(&self) -> Pin<&mut ffi::wxWindow> {
-        unsafe { Pin::new_unchecked(&mut *self.0) }
-    }
+impl EvtHandlerMethods for Window {}
+impl WindowMethods for Window {}
+impl ObjectMethods for Window {
+    unsafe fn as_ptr(&self) -> UnsafeAnyPtr { self.0 as _ }
 }
-pub trait WindowMethods {
-    fn pinned(&self) -> Pin<&mut ffi::wxWindow>;
+pub trait WindowMethods: EvtHandlerMethods {
+    fn pinned(&self) -> Pin<&mut ffi::wxWindow> {
+        unsafe { Pin::new_unchecked(&mut *(self.as_ptr() as *mut _)) }
+    }
     fn centre(&self) {
-        self.pinned().as_mut().Centre(0);
+        WindowMethods::pinned(self).as_mut().Centre(0);
     }
     fn show(&self) {
-        self.pinned().as_mut().Show(true);
+        WindowMethods::pinned(self).as_mut().Show(true);
     }
 }
 
 // wxFrame
 pub struct Frame(*mut ffi::wxFrame);
-impl WindowMethods for Frame {
-    fn pinned(&self) -> Pin<&mut ffi::wxWindow> {
-        unsafe { Pin::new_unchecked(&mut *(self.0 as *mut ffi::wxWindow)) }
-    }
+impl WindowMethods for Frame {}
+impl EvtHandlerMethods for Frame {}
+impl ObjectMethods for Frame {
+    unsafe fn as_ptr(&self) -> UnsafeAnyPtr { self.0 as _ }
 }
 impl Frame {
     pub fn new(title: &str) -> Frame {
@@ -121,35 +128,29 @@ impl Frame {
 // wxButton
 #[derive(Clone)]
 pub struct Button(*mut ffi::wxButton);
-impl EvtHandlerMethods for Button {
-    fn pinned(&self) -> Pin<&mut ffi::wxEvtHandler> {
-        unsafe { Pin::new_unchecked(&mut *(self.0 as *mut ffi::wxEvtHandler)) }
-    }
-}
-impl WindowMethods for Button {
-    fn pinned(&self) -> Pin<&mut ffi::wxWindow> {
-        unsafe { Pin::new_unchecked(&mut *(self.0 as *mut ffi::wxWindow)) }
-    }
+impl ButtonMethods for Button {}
+impl WindowMethods for Button {}
+impl EvtHandlerMethods for Button {}
+impl ObjectMethods for Button {
+    unsafe fn as_ptr(&self) -> UnsafeAnyPtr { self.0 as _ }
 }
 impl Button {
     pub fn new(parent: &Frame, label: &str) -> Button {
-        Button(ffi::wxButton_new(parent.pinned(), label))
+        Button(ffi::wxButton_new(WindowMethods::pinned(parent), label))
     }
 }
-impl ButtonMethods for Button {
+pub trait ButtonMethods: WindowMethods {
     fn pinned(&self) -> Pin<&mut ffi::wxButton> {
-        unsafe { Pin::new_unchecked(&mut *self.0) }
+        unsafe { Pin::new_unchecked(&mut *(self.as_ptr() as *mut _)) }
     }
-}
-pub trait ButtonMethods {
-    fn pinned(&self) -> Pin<&mut ffi::wxButton>;
     fn set_label(&self, s: &str) {
         unsafe {
             let label = ffi::wxString_from(s);
-            self.pinned().as_mut().SetLabel(&*label);
+            ButtonMethods::pinned(self).as_mut().SetLabel(&*label);
         }
     }
 }
+
 // wxEntry
 pub fn entry() {
     let args: Vec<String> = std::env::args().collect();
