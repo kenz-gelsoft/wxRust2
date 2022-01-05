@@ -6,8 +6,10 @@ fn main() {
         let frame = Frame::new("Hello, 世界");
         let button = Button::new(&frame, "Greet");
         button.set_label("clicked");
-        button.bind(wx::EventType::Button, || {
-            println!("hello");
+        let i = 3;
+        println!("i={}", i);
+        button.bind(wx::EventType::Button, move || {
+            println!("i={}", i);
         });
         frame.centre();
         frame.show();

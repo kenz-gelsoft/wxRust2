@@ -56,9 +56,9 @@ pub use ffi::EventType;
 trait ToWxCallable {
     unsafe fn to_wx_callable(&self) -> (fn(UnsafeAnyPtr), UnsafeAnyPtr);
 }
-impl<F> ToWxCallable for F where F: Fn() {
+impl<F> ToWxCallable for F where F: Fn() + 'static {
     unsafe fn to_wx_callable(&self) -> (fn(UnsafeAnyPtr), UnsafeAnyPtr) {
-        unsafe fn call<F: Fn()>(closure: UnsafeAnyPtr) {
+        unsafe fn call<F: Fn() + 'static>(closure: UnsafeAnyPtr) {
             let closure = &*(closure as *const F);
             closure();
         }
@@ -81,7 +81,7 @@ impl EvtHandlerMethods for EvtHandler {
 }
 pub trait EvtHandlerMethods {
     fn pinned(&self) -> Pin<&mut ffi::wxEvtHandler>;
-    fn bind<F: Fn()>(&self, event_type: ffi::EventType, closure: F) {
+    fn bind<F: Fn() + 'static>(&self, event_type: ffi::EventType, closure: F) {
         unsafe {
             let (f, param) = closure.to_wx_callable();
             ffi::Bind(self.pinned().as_mut(), event_type, f, param);
@@ -92,7 +92,7 @@ pub trait EvtHandlerMethods {
 // wxApp
 pub enum App {}
 impl App {
-    pub fn on_init<F: Fn()>(closure: F) {
+    pub fn on_init<F: Fn() + 'static>(closure: F) {
         unsafe {
             let (f, param) = closure.to_wx_callable();
             ffi::WxRustAppSetOnInit(f, param);
