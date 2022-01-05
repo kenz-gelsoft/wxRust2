@@ -19,7 +19,7 @@ mod ffi {
 
         unsafe fn WxRustAppSetOnInit(
             // type alias can't be used in cxx:bridge.
-            f: unsafe fn(*const c_char),
+            f: unsafe extern "C" fn(*const c_char),
             param: *const c_char
         );
 
@@ -28,7 +28,7 @@ mod ffi {
             handler: Pin<&mut wxEvtHandler>,
             eventType: EventType,
             // type alias can't be used in cxx:bridge.
-            f: unsafe fn(*const c_char),
+            f: unsafe extern "C" fn(*const c_char),
             param: *const c_char
         );
 
@@ -58,20 +58,15 @@ unsafe fn trampoline<F: Fn() + 'static>(closure: UnsafeAnyPtr) {
 }
 
 // Rust closure to wx calablle function+param pair.
-trait ToWxCallable {
-    unsafe fn to_wx_callable(&self) -> (fn(UnsafeAnyPtr), UnsafeAnyPtr);
-}
-impl<F> ToWxCallable for F where F: Fn() + 'static {
-    unsafe fn to_wx_callable(&self) -> (fn(UnsafeAnyPtr), UnsafeAnyPtr) {
-        // pass the pointer in the heap to avoid move.
-        let closure = Box::new(self);
-        (
-            mem::transmute::<_, fn(UnsafeAnyPtr)>(
-                trampoline::<F> as UnsafeAnyPtr
-            ),
-            Box::into_raw(closure) as UnsafeAnyPtr
-        )
-    }
+unsafe fn to_wx_callable<F: Fn() + 'static>(closure: F) -> (fn(UnsafeAnyPtr), UnsafeAnyPtr) {
+    // pass the pointer in the heap to avoid move.
+    let closure = Box::new(closure);
+    (
+        mem::transmute::<_, fn(UnsafeAnyPtr)>(
+            trampoline::<F> as UnsafeAnyPtr
+        ),
+        Box::into_raw(closure) as UnsafeAnyPtr
+    )
 }
 
 pub struct EvtHandler(*mut ffi::wxEvtHandler);
@@ -84,7 +79,7 @@ pub trait EvtHandlerMethods {
     fn pinned(&self) -> Pin<&mut ffi::wxEvtHandler>;
     fn bind<F: Fn() + 'static>(&self, event_type: ffi::EventType, closure: F) {
         unsafe {
-            let (f, param) = closure.to_wx_callable();
+            let (f, param) = to_wx_callable(closure);
             ffi::Bind(self.pinned().as_mut(), event_type, f, param);
         }
     }
@@ -95,7 +90,7 @@ pub enum App {}
 impl App {
     pub fn on_init<F: Fn() + 'static>(closure: F) {
         unsafe {
-            let (f, param) = closure.to_wx_callable();
+            let (f, param) = to_wx_callable(closure);
             ffi::WxRustAppSetOnInit(f, param);
         }
     }
