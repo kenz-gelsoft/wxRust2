@@ -52,21 +52,22 @@ mod ffi {
 
 pub use ffi::EventType;
 
+unsafe fn trampoline<F: Fn() + 'static>(closure: UnsafeAnyPtr) {
+    let closure = &*(closure as *const F);
+    closure();
+}
+
 // Rust closure to wx calablle function+param pair.
 trait ToWxCallable {
     unsafe fn to_wx_callable(&self) -> (fn(UnsafeAnyPtr), UnsafeAnyPtr);
 }
 impl<F> ToWxCallable for F where F: Fn() + 'static {
     unsafe fn to_wx_callable(&self) -> (fn(UnsafeAnyPtr), UnsafeAnyPtr) {
-        unsafe fn call<F: Fn() + 'static>(closure: UnsafeAnyPtr) {
-            let closure = &*(closure as *const F);
-            closure();
-        }
         // pass the pointer in the heap to avoid move.
         let closure = Box::new(self);
         (
             mem::transmute::<_, fn(UnsafeAnyPtr)>(
-                call::<F> as UnsafeAnyPtr
+                trampoline::<F> as UnsafeAnyPtr
             ),
             Box::into_raw(closure) as UnsafeAnyPtr
         )
