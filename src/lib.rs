@@ -119,6 +119,7 @@ impl Frame {
 }
 
 // wxButton
+#[derive(Clone)]
 pub struct Button(*mut ffi::wxButton);
 impl EvtHandlerMethods for Button {
     fn pinned(&self) -> Pin<&mut ffi::wxEvtHandler> {
