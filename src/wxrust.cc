@@ -4,11 +4,8 @@
 wxIMPLEMENT_APP_NO_MAIN(WxRustApp);
 
 static WxRustClosure<int> globalOnInit;
-void WxRustAppSetOnInit(
-    rust::Fn<void(unsafe_any_ptr)> aFn,
-    unsafe_any_ptr aParam
-) {
-    globalOnInit = { aFn, aParam };
+void WxRustAppSetOnInit(const Closure &closure) {
+    globalOnInit = closure;
 }
 bool WxRustApp::OnInit() {
     globalOnInit(/*unused*/0);

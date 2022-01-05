@@ -8,23 +8,24 @@
 using unsafe_any_ptr = const char *;
 
 // wxApp
-void WxRustAppSetOnInit(
-    rust::Fn<void(unsafe_any_ptr)> aFn,
-    unsafe_any_ptr aParam
-);
+void WxRustAppSetOnInit(const Closure &closure);
 class WxRustApp : public wxApp {
     virtual bool OnInit();
 };
 
 // wxEvtHandler
 template <typename T>
-struct WxRustClosure {
-    rust::Fn<void(unsafe_any_ptr)> f;
-    unsafe_any_ptr param;
+class WxRustClosure {
+    typedef void (*TrampolineFunc)(unsafe_any_ptr);
+    Closure mClosure;
+
+public:
+    WxRustClosure() : mClosure() {}
+    WxRustClosure(const Closure &closure) : mClosure(closure) {}
 
     void operator ()(T arg) const {
-        if (param) { // if set
-            f(param);
+        if (mClosure.param) { // if set
+            ((TrampolineFunc)mClosure.f)(mClosure.param);
         } else {
             // TODO: provide debug info
         }
@@ -39,13 +40,8 @@ inline wxEventTypeTag<wxCommandEvent> fromRustEventType(EventType eventType) {
     return wxEVT_BUTTON;
 }
 
-void Bind(
-    wxEvtHandler &evtHandler,
-    EventType eventType,
-    rust::Fn<void(unsafe_any_ptr)> aFn,
-    unsafe_any_ptr aParam
-) {
-    WxRustClosure<wxCommandEvent &> functor = { aFn, aParam };
+void Bind(wxEvtHandler &evtHandler, EventType eventType, const Closure &closure) {
+    WxRustClosure<wxCommandEvent &> functor(closure);
     evtHandler.Bind(fromRustEventType(eventType), functor);
 }
 

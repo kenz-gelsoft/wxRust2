@@ -1,5 +1,4 @@
 use std::convert::TryInto;
-use std::mem;
 use std::os::raw::c_char;
 use std::pin::Pin;
 use std::ptr;
@@ -14,22 +13,22 @@ mod ffi {
         Button,
     }
 
+    struct Closure {
+        // type alias can't be used in cxx:bridge.
+        f: *const c_char,
+        param: *const c_char,
+    }
+
     unsafe extern "C++" {
         include!("wx/include/wxrust.h");
 
-        unsafe fn WxRustAppSetOnInit(
-            // type alias can't be used in cxx:bridge.
-            f: unsafe extern "C" fn(*const c_char),
-            param: *const c_char
-        );
+        fn WxRustAppSetOnInit(closure: &Closure);
 
         type wxEvtHandler;
-        unsafe fn Bind(
+        fn Bind(
             handler: Pin<&mut wxEvtHandler>,
             eventType: EventType,
-            // type alias can't be used in cxx:bridge.
-            f: unsafe extern "C" fn(*const c_char),
-            param: *const c_char
+            closure: &Closure,
         );
 
         type wxWindow;
@@ -53,17 +52,19 @@ mod ffi {
 pub use ffi::EventType;
 
 // Rust closure to wx calablle function+param pair.
-unsafe fn to_wx_callable<F: Fn() + 'static>(closure: F) -> (fn(UnsafeAnyPtr), UnsafeAnyPtr) {
-    unsafe fn trampoline<F: Fn() + 'static>(closure: UnsafeAnyPtr) {
-        let closure = &*(closure as *const F);
-        closure();
+impl ffi::Closure {
+    fn new<F: Fn() + 'static>(closure: F) -> Self {
+        unsafe fn trampoline<F: Fn() + 'static>(closure: UnsafeAnyPtr) {
+            let closure = &*(closure as *const F);
+            closure();
+        }
+        // pass the pointer in the heap to avoid move.
+        let closure = Box::new(closure);
+        Self {
+            f: trampoline::<F> as UnsafeAnyPtr,
+            param: Box::into_raw(closure) as UnsafeAnyPtr,
+        }
     }
-    // pass the pointer in the heap to avoid move.
-    let closure = Box::new(closure);
-    (
-        mem::transmute(trampoline::<F> as UnsafeAnyPtr),
-        Box::into_raw(closure) as UnsafeAnyPtr
-    )
 }
 
 pub struct EvtHandler(*mut ffi::wxEvtHandler);
@@ -75,10 +76,7 @@ impl EvtHandlerMethods for EvtHandler {
 pub trait EvtHandlerMethods {
     fn pinned(&self) -> Pin<&mut ffi::wxEvtHandler>;
     fn bind<F: Fn() + 'static>(&self, event_type: ffi::EventType, closure: F) {
-        unsafe {
-            let (f, param) = to_wx_callable(closure);
-            ffi::Bind(self.pinned().as_mut(), event_type, f, param);
-        }
+        ffi::Bind(self.pinned().as_mut(), event_type, &ffi::Closure::new(closure));
     }
 }
 
@@ -86,10 +84,7 @@ pub trait EvtHandlerMethods {
 pub enum App {}
 impl App {
     pub fn on_init<F: Fn() + 'static>(closure: F) {
-        unsafe {
-            let (f, param) = to_wx_callable(closure);
-            ffi::WxRustAppSetOnInit(f, param);
-        }
+        ffi::WxRustAppSetOnInit(&ffi::Closure::new(closure));
     }
 }
 
