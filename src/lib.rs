@@ -140,10 +140,8 @@ impl Button {
 }
 pub trait ButtonMethods: WindowMethods {
     fn set_label(&self, s: &str) {
-        unsafe {
-            let label = ffi::NewString(s);
-            self.pinned::<ffi::wxButton>().as_mut().SetLabel(&*label);
-        }
+        let label = ffi::NewString(s);
+        self.pinned::<ffi::wxButton>().as_mut().SetLabel(&*label);
     }
 }
 
