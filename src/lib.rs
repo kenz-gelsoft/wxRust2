@@ -30,18 +30,15 @@ mod ffi {
         fn Show(self: Pin<&mut wxWindow>, b: bool) -> bool;
 
         type wxFrame;
-        fn wxFrame_new(title: &str) -> *mut wxFrame;
 
         type wxString;
-        fn wxString_from(s: &str) -> *mut wxString;
 
         type wxButton;
-        fn wxButton_new(parent: Pin<&mut wxWindow>, label: &str) -> *mut wxButton;
         fn SetLabel(self: Pin<&mut wxButton>, label: &wxString);
 
         unsafe fn wxEntry(argc: &mut i32, argv: *mut *mut c_char) -> i32;
     }
-    
+
     unsafe extern "C++" {
         fn AppSetOnInit(closure: &Closure);
         fn Bind(
@@ -49,6 +46,10 @@ mod ffi {
             eventType: EventType,
             closure: &Closure,
         );
+
+        fn NewFrame(title: &str) -> *mut wxFrame;
+        fn NewString(s: &str) -> *mut wxString;
+        fn NewButton(parent: Pin<&mut wxWindow>, label: &str) -> *mut wxButton;
     }
 }
 
@@ -121,7 +122,7 @@ impl ObjectMethods for Frame {
 }
 impl Frame {
     pub fn new(title: &str) -> Frame {
-        Frame(ffi::wxFrame_new(title))
+        Frame(ffi::NewFrame(title))
     }
 }
 
@@ -136,13 +137,13 @@ impl ObjectMethods for Button {
 }
 impl Button {
     pub fn new(parent: &Frame, label: &str) -> Button {
-        Button(ffi::wxButton_new(parent.pinned(), label))
+        Button(ffi::NewButton(parent.pinned(), label))
     }
 }
 pub trait ButtonMethods: WindowMethods {
     fn set_label(&self, s: &str) {
         unsafe {
-            let label = ffi::wxString_from(s);
+            let label = ffi::NewString(s);
             self.pinned::<ffi::wxButton>().as_mut().SetLabel(&*label);
         }
     }

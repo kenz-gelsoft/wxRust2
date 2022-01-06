@@ -13,19 +13,19 @@ namespace wxrust {
         globalOnInit(/*unused*/0);
         return true;
     }
-}
 
-// wxFrame
-wxFrame *wxFrame_new(rust::Str title) {
-    return new wxFrame(NULL, -1, std::string(title));
-}
+    // wxFrame
+    wxFrame *NewFrame(rust::Str title) {
+        return new wxFrame(NULL, -1, std::string(title));
+    }
 
-// wxString
-wxString *wxString_from(rust::Str aString) {
-    return new wxString(std::string(aString).c_str(), wxConvUTF8);
-}
+    // wxString
+    wxString *NewString(rust::Str aString) {
+        return new wxString(std::string(aString).c_str(), wxConvUTF8);
+    }
 
-// wxButton
-wxButton *wxButton_new(wxWindow &parent, rust::Str label) {
-    return new wxButton(&parent, wxID_ANY, std::string(label));
+    // wxButton
+    wxButton *NewButton(wxWindow &parent, rust::Str label) {
+        return new wxButton(&parent, wxID_ANY, std::string(label));
+    }
 }
