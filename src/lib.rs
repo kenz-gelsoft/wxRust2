@@ -3,6 +3,9 @@ use std::os::raw::c_char;
 use std::pin::Pin;
 use std::ptr;
 
+mod macros;
+use macros::wx_class;
+
 // any pointer type used on ffi boundary.
 // we chose this type as it's handy in cxx.
 type UnsafeAnyPtr = *const c_char;
@@ -76,21 +79,6 @@ pub trait ObjectMethods {
     fn pinned<T>(&self) -> Pin<&mut T> {
         unsafe { Pin::new_unchecked(&mut *(self.as_ptr() as *mut _)) }
     }
-}
-
-macro_rules! wx_class {
-    ( 
-        $type:ident($wxType:ident) impl $($methods:ident),*
-    ) => {
-        #[derive(Clone)]
-        pub struct $type(*mut ffi::$wxType);
-        $(
-            impl $methods for $type {}
-        )*
-        impl ObjectMethods for $type {
-            unsafe fn as_ptr(&self) -> UnsafeAnyPtr { self.0 as _ }
-        }
-    };
 }
 
 wx_class! { EvtHandler(wxEvtHandler) impl
