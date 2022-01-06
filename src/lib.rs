@@ -99,8 +99,8 @@ impl App {
 
 // wxWindow
 pub struct Window(*mut ffi::wxWindow);
-impl EvtHandlerMethods for Window {}
 impl WindowMethods for Window {}
+impl<T: WindowMethods> EvtHandlerMethods for T {}
 impl ObjectMethods for Window {
     unsafe fn as_ptr(&self) -> UnsafeAnyPtr { self.0 as _ }
 }
@@ -116,7 +116,6 @@ pub trait WindowMethods: EvtHandlerMethods {
 // wxFrame
 pub struct Frame(*mut ffi::wxFrame);
 impl WindowMethods for Frame {}
-impl EvtHandlerMethods for Frame {}
 impl ObjectMethods for Frame {
     unsafe fn as_ptr(&self) -> UnsafeAnyPtr { self.0 as _ }
 }
@@ -130,8 +129,7 @@ impl Frame {
 #[derive(Clone)]
 pub struct Button(*mut ffi::wxButton);
 impl ButtonMethods for Button {}
-impl WindowMethods for Button {}
-impl EvtHandlerMethods for Button {}
+impl<T: ButtonMethods> WindowMethods for T {}
 impl ObjectMethods for Button {
     unsafe fn as_ptr(&self) -> UnsafeAnyPtr { self.0 as _ }
 }
