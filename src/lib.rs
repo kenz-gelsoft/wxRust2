@@ -47,8 +47,8 @@ mod ffi {
             closure: &Closure,
         );
 
+        fn NewString(s: &str) -> UniquePtr<wxString>;
         fn NewFrame(title: &str) -> *mut wxFrame;
-        fn NewString(s: &str) -> *mut wxString;
         fn NewButton(parent: Pin<&mut wxWindow>, label: &str) -> *mut wxButton;
     }
 }

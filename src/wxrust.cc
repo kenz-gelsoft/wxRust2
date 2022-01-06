@@ -29,11 +29,11 @@ void Bind(wxEvtHandler &evtHandler, EventType eventType, const Closure &closure)
 }
 
 // Constructors
+std::unique_ptr<wxString> NewString(rust::Str aString) {
+    return std::make_unique<wxString>(std::string(aString).c_str(), wxConvUTF8);
+}
 wxFrame *NewFrame(rust::Str title) {
     return new wxFrame(NULL, -1, std::string(title));
-}
-wxString *NewString(rust::Str aString) {
-    return new wxString(std::string(aString).c_str(), wxConvUTF8);
 }
 wxButton *NewButton(wxWindow &parent, rust::Str label) {
     return new wxButton(&parent, wxID_ANY, std::string(label));
