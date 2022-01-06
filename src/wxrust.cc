@@ -1,40 +1,42 @@
 #include "wx/include/wxrust.h"
 
 namespace wxrust {
-    // wxApp
-    wxIMPLEMENT_APP_NO_MAIN(App);
 
-    static CxxClosure<int> globalOnInit;
-    void AppSetOnInit(const Closure &closure) {
-        globalOnInit = closure;
-    }
+// wxApp
+wxIMPLEMENT_APP_NO_MAIN(App);
 
-    bool App::OnInit() {
-        globalOnInit(/*unused*/0);
-        return true;
-    }
+static CxxClosure<int> globalOnInit;
+void AppSetOnInit(const Closure &closure) {
+    globalOnInit = closure;
+}
 
-    // wxEvtHandler
-    wxEventTypeTag<wxCommandEvent> FromRustEventType(EventType eventType) {
-        switch (eventType) {
-        case EventType::Button:
-            return wxEVT_BUTTON;
-        }
+bool App::OnInit() {
+    globalOnInit(/*unused*/0);
+    return true;
+}
+
+// wxEvtHandler
+wxEventTypeTag<wxCommandEvent> FromRustEventType(EventType eventType) {
+    switch (eventType) {
+    case EventType::Button:
         return wxEVT_BUTTON;
     }
-    void Bind(wxEvtHandler &evtHandler, EventType eventType, const Closure &closure) {
-        CxxClosure<wxCommandEvent &> functor(closure);
-        evtHandler.Bind(FromRustEventType(eventType), functor);
-    }
-
-    // Constructors
-    wxFrame *NewFrame(rust::Str title) {
-        return new wxFrame(NULL, -1, std::string(title));
-    }
-    wxString *NewString(rust::Str aString) {
-        return new wxString(std::string(aString).c_str(), wxConvUTF8);
-    }
-    wxButton *NewButton(wxWindow &parent, rust::Str label) {
-        return new wxButton(&parent, wxID_ANY, std::string(label));
-    }
+    return wxEVT_BUTTON;
 }
+void Bind(wxEvtHandler &evtHandler, EventType eventType, const Closure &closure) {
+    CxxClosure<wxCommandEvent &> functor(closure);
+    evtHandler.Bind(FromRustEventType(eventType), functor);
+}
+
+// Constructors
+wxFrame *NewFrame(rust::Str title) {
+    return new wxFrame(NULL, -1, std::string(title));
+}
+wxString *NewString(rust::Str aString) {
+    return new wxString(std::string(aString).c_str(), wxConvUTF8);
+}
+wxButton *NewButton(wxWindow &parent, rust::Str label) {
+    return new wxButton(&parent, wxID_ANY, std::string(label));
+}
+
+} // namespace wxrust

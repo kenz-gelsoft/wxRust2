@@ -6,38 +6,39 @@
 
 
 namespace wxrust {
-    using UnsafeAnyPtr = const char *;
 
-    // wxApp
-    void AppSetOnInit(const Closure &closure);
-    class App : public wxApp {
-        virtual bool OnInit();
-    };
+using UnsafeAnyPtr = const char *;
 
-    // wxEvtHandler
-    template <typename T>
-    class CxxClosure {
-        typedef void (*TrampolineFunc)(UnsafeAnyPtr);
-        Closure mClosure;
+// wxApp
+void AppSetOnInit(const Closure &closure);
+class App : public wxApp {
+    virtual bool OnInit();
+};
 
-    public:
-        CxxClosure() : mClosure() {}
-        CxxClosure(const Closure &closure) : mClosure(closure) {}
+// wxEvtHandler
+template <typename T>
+class CxxClosure {
+    typedef void (*TrampolineFunc)(UnsafeAnyPtr);
+    Closure mClosure;
 
-        void operator ()(T arg) const {
-            if (mClosure.param) { // if set
-                ((TrampolineFunc)mClosure.f)(mClosure.param);
-            } else {
-                // TODO: provide debug info
-            }
+public:
+    CxxClosure() : mClosure() {}
+    CxxClosure(const Closure &closure) : mClosure(closure) {}
+
+    void operator ()(T arg) const {
+        if (mClosure.param) { // if set
+            ((TrampolineFunc)mClosure.f)(mClosure.param);
+        } else {
+            // TODO: provide debug info
         }
-    };
+    }
+};
 
-    void Bind(wxEvtHandler &evtHandler, EventType eventType, const Closure &closure);
+void Bind(wxEvtHandler &evtHandler, EventType eventType, const Closure &closure);
 
-    // Constructors
-    wxFrame *NewFrame(rust::Str aTitle);
-    wxString *NewString(rust::Str aString);
-    wxButton *NewButton(wxWindow &parent, rust::Str label);
-}
+// Constructors
+wxFrame *NewFrame(rust::Str aTitle);
+wxString *NewString(rust::Str aString);
+wxButton *NewButton(wxWindow &parent, rust::Str label);
 
+} // namespace wxrust
