@@ -69,6 +69,9 @@ impl ffi::Closure {
 
 pub trait ObjectMethods {
     unsafe fn as_ptr(&self) -> UnsafeAnyPtr;
+    fn pinned<T>(&self) -> Pin<&mut T> {
+        unsafe { Pin::new_unchecked(&mut *(self.as_ptr() as *mut _)) }
+    }
 }
 
 pub struct EvtHandler(*mut ffi::wxEvtHandler);
@@ -77,11 +80,8 @@ impl ObjectMethods for EvtHandler {
     unsafe fn as_ptr(&self) -> UnsafeAnyPtr { self.0 as _ }
 }
 pub trait EvtHandlerMethods: ObjectMethods {
-    fn pinned(&self) -> Pin<&mut ffi::wxEvtHandler> {
-        unsafe { Pin::new_unchecked(&mut *(self.as_ptr() as *mut _)) }
-    }
     fn bind<F: Fn() + 'static>(&self, event_type: ffi::EventType, closure: F) {
-        ffi::Bind(self.pinned().as_mut(), event_type, &ffi::Closure::new(closure));
+        ffi::Bind(self.pinned::<ffi::wxEvtHandler>().as_mut(), event_type, &ffi::Closure::new(closure));
     }
 }
 
@@ -101,14 +101,11 @@ impl ObjectMethods for Window {
     unsafe fn as_ptr(&self) -> UnsafeAnyPtr { self.0 as _ }
 }
 pub trait WindowMethods: EvtHandlerMethods {
-    fn pinned(&self) -> Pin<&mut ffi::wxWindow> {
-        unsafe { Pin::new_unchecked(&mut *(self.as_ptr() as *mut _)) }
-    }
     fn centre(&self) {
-        WindowMethods::pinned(self).as_mut().Centre(0);
+        self.pinned::<ffi::wxWindow>().as_mut().Centre(0);
     }
     fn show(&self) {
-        WindowMethods::pinned(self).as_mut().Show(true);
+        self.pinned::<ffi::wxWindow>().as_mut().Show(true);
     }
 }
 
@@ -136,17 +133,14 @@ impl ObjectMethods for Button {
 }
 impl Button {
     pub fn new(parent: &Frame, label: &str) -> Button {
-        Button(ffi::wxButton_new(WindowMethods::pinned(parent), label))
+        Button(ffi::wxButton_new(parent.pinned(), label))
     }
 }
 pub trait ButtonMethods: WindowMethods {
-    fn pinned(&self) -> Pin<&mut ffi::wxButton> {
-        unsafe { Pin::new_unchecked(&mut *(self.as_ptr() as *mut _)) }
-    }
     fn set_label(&self, s: &str) {
         unsafe {
             let label = ffi::wxString_from(s);
-            ButtonMethods::pinned(self).as_mut().SetLabel(&*label);
+            self.pinned::<ffi::wxButton>().as_mut().SetLabel(&*label);
         }
     }
 }
