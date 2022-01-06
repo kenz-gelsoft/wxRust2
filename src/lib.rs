@@ -78,10 +78,23 @@ pub trait ObjectMethods {
     }
 }
 
-pub struct EvtHandler(*mut ffi::wxEvtHandler);
-impl EvtHandlerMethods for EvtHandler {}
-impl ObjectMethods for EvtHandler {
-    unsafe fn as_ptr(&self) -> UnsafeAnyPtr { self.0 as _ }
+macro_rules! wx_class {
+    ( 
+        $type:ident($wxType:ident) impl $($methods:ident),*
+    ) => {
+        #[derive(Clone)]
+        pub struct $type(*mut ffi::$wxType);
+        $(
+            impl $methods for $type {}
+        )*
+        impl ObjectMethods for $type {
+            unsafe fn as_ptr(&self) -> UnsafeAnyPtr { self.0 as _ }
+        }
+    };
+}
+
+wx_class! { EvtHandler(wxEvtHandler)
+    impl EvtHandlerMethods
 }
 pub trait EvtHandlerMethods: ObjectMethods {
     fn bind<F: Fn() + 'static>(&self, event_type: ffi::EventType, closure: F) {
@@ -98,11 +111,8 @@ impl App {
 }
 
 // wxWindow
-pub struct Window(*mut ffi::wxWindow);
-impl WindowMethods for Window {}
-impl<T: WindowMethods> EvtHandlerMethods for T {}
-impl ObjectMethods for Window {
-    unsafe fn as_ptr(&self) -> UnsafeAnyPtr { self.0 as _ }
+wx_class! { Window(wxWindow)
+    impl WindowMethods, EvtHandlerMethods
 }
 pub trait WindowMethods: EvtHandlerMethods {
     fn centre(&self) {
@@ -114,10 +124,8 @@ pub trait WindowMethods: EvtHandlerMethods {
 }
 
 // wxFrame
-pub struct Frame(*mut ffi::wxFrame);
-impl WindowMethods for Frame {}
-impl ObjectMethods for Frame {
-    unsafe fn as_ptr(&self) -> UnsafeAnyPtr { self.0 as _ }
+wx_class! { Frame(wxFrame)
+    impl WindowMethods, EvtHandlerMethods
 }
 impl Frame {
     pub fn new(title: &str) -> Frame {
@@ -126,12 +134,8 @@ impl Frame {
 }
 
 // wxButton
-#[derive(Clone)]
-pub struct Button(*mut ffi::wxButton);
-impl ButtonMethods for Button {}
-impl<T: ButtonMethods> WindowMethods for T {}
-impl ObjectMethods for Button {
-    unsafe fn as_ptr(&self) -> UnsafeAnyPtr { self.0 as _ }
+wx_class! { Button(wxButton)
+    impl ButtonMethods, WindowMethods, EvtHandlerMethods
 }
 impl Button {
     pub fn new(parent: &Frame, label: &str) -> Button {
