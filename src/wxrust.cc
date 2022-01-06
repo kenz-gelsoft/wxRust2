@@ -16,7 +16,7 @@ bool App::OnInit() {
 }
 
 // wxEvtHandler
-wxEventTypeTag<wxCommandEvent> FromRustEventType(EventType eventType) {
+wxEventTypeTag<wxCommandEvent> TypeTagOf(EventType eventType) {
     switch (eventType) {
     case EventType::Button:
         return wxEVT_BUTTON;
@@ -25,7 +25,7 @@ wxEventTypeTag<wxCommandEvent> FromRustEventType(EventType eventType) {
 }
 void Bind(wxEvtHandler &evtHandler, EventType eventType, const Closure &closure) {
     CxxClosure<wxCommandEvent &> functor(closure);
-    evtHandler.Bind(FromRustEventType(eventType), functor);
+    evtHandler.Bind(TypeTagOf(eventType), functor);
 }
 
 // Constructors
