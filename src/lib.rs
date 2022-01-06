@@ -23,14 +23,7 @@ mod ffi {
     unsafe extern "C++" {
         include!("wx/include/wxrust.h");
 
-        fn WxRustAppSetOnInit(closure: &Closure);
-
         type wxEvtHandler;
-        fn Bind(
-            handler: Pin<&mut wxEvtHandler>,
-            eventType: EventType,
-            closure: &Closure,
-        );
 
         type wxWindow;
         fn Centre(self: Pin<&mut wxWindow>, direction: i32);
@@ -47,6 +40,15 @@ mod ffi {
         fn SetLabel(self: Pin<&mut wxButton>, label: &wxString);
 
         unsafe fn wxEntry(argc: &mut i32, argv: *mut *mut c_char) -> i32;
+    }
+    
+    unsafe extern "C++" {
+        fn AppSetOnInit(closure: &Closure);
+        fn Bind(
+            handler: Pin<&mut wxEvtHandler>,
+            eventType: EventType,
+            closure: &Closure,
+        );
     }
 }
 
@@ -90,7 +92,7 @@ pub trait EvtHandlerMethods: ObjectMethods {
 pub enum App {}
 impl App {
     pub fn on_init<F: Fn() + 'static>(closure: F) {
-        ffi::WxRustAppSetOnInit(&ffi::Closure::new(closure));
+        ffi::AppSetOnInit(&ffi::Closure::new(closure));
     }
 }
 

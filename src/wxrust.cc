@@ -1,15 +1,18 @@
 #include "wx/include/wxrust.h"
 
-// wxApp
-wxIMPLEMENT_APP_NO_MAIN(WxRustApp);
+namespace wxrust {
+    // wxApp
+    wxIMPLEMENT_APP_NO_MAIN(App);
 
-static WxRustClosure<int> globalOnInit;
-void WxRustAppSetOnInit(const wxrust::Closure &closure) {
-    globalOnInit = closure;
-}
-bool WxRustApp::OnInit() {
-    globalOnInit(/*unused*/0);
-    return true;
+    static CxxClosure<int> globalOnInit;
+    void AppSetOnInit(const Closure &closure) {
+        globalOnInit = closure;
+    }
+
+    bool App::OnInit() {
+        globalOnInit(/*unused*/0);
+        return true;
+    }
 }
 
 // wxFrame
