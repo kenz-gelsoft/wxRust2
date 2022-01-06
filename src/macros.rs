@@ -1,5 +1,5 @@
 macro_rules! wx_class {
-    ( 
+    (
         $type:ident($wxType:ident) impl $($methods:ident),*
     ) => {
         #[derive(Clone)]

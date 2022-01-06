@@ -10,7 +10,7 @@ use macros::wx_class;
 // we chose this type as it's handy in cxx.
 type UnsafeAnyPtr = *const c_char;
 
-#[cxx::bridge(namespace="wxrust")]
+#[cxx::bridge(namespace = "wxrust")]
 mod ffi {
     enum EventType {
         Button,
@@ -22,7 +22,7 @@ mod ffi {
         param: *const c_char,
     }
 
-    #[namespace=""]
+    #[namespace = ""]
     unsafe extern "C++" {
         include!("wx/include/wxrust.h");
 
@@ -44,11 +44,7 @@ mod ffi {
 
     unsafe extern "C++" {
         fn AppSetOnInit(closure: &Closure);
-        fn Bind(
-            handler: Pin<&mut wxEvtHandler>,
-            eventType: EventType,
-            closure: &Closure,
-        );
+        fn Bind(handler: Pin<&mut wxEvtHandler>, eventType: EventType, closure: &Closure);
 
         fn NewString(s: &str) -> UniquePtr<wxString>;
         fn NewFrame(title: &str) -> *mut wxFrame;
@@ -86,7 +82,11 @@ wx_class! { EvtHandler(wxEvtHandler) impl
 }
 pub trait EvtHandlerMethods: ObjectMethods {
     fn bind<F: Fn() + 'static>(&self, event_type: ffi::EventType, closure: F) {
-        ffi::Bind(self.pinned::<ffi::wxEvtHandler>().as_mut(), event_type, &ffi::Closure::new(closure));
+        ffi::Bind(
+            self.pinned::<ffi::wxEvtHandler>().as_mut(),
+            event_type,
+            &ffi::Closure::new(closure),
+        );
     }
 }
 
@@ -148,7 +148,7 @@ pub fn entry() {
     for arg in &args {
         argv.push(arg.as_ptr() as *mut c_char);
     }
-    argv.push(ptr::null_mut()); // Nul terminator.    
+    argv.push(ptr::null_mut()); // Nul terminator.
     let mut argc: i32 = args.len().try_into().unwrap();
     unsafe {
         ffi::wxEntry(&mut argc, argv.as_mut_ptr());

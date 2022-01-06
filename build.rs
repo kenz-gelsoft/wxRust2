@@ -17,10 +17,7 @@ fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
             cc_build.include(&arg[2..]);
         } else if arg.starts_with("-D") {
             let split = &mut arg[2..].split('=');
-            cc_build.define(
-                split.next().unwrap(),
-                split.next().unwrap_or("")
-            );
+            cc_build.define(split.next().unwrap(), split.next().unwrap_or(""));
         } else {
             panic!("unsupported argument '{}'. please file a bug.", arg)
         }
@@ -49,10 +46,9 @@ fn print_wx_config_libs_for_cargo() {
 }
 
 fn wx_config(args: &[&str]) -> String {
-	let output = Command::new("wx-config")
+    let output = Command::new("wx-config")
         .args(args)
         .output()
         .expect("failed execute wx-config command.");
-	String::from_utf8_lossy(&output.stdout)
-        .to_string()
+    String::from_utf8_lossy(&output.stdout).to_string()
 }
