@@ -93,8 +93,8 @@ macro_rules! wx_class {
     };
 }
 
-wx_class! { EvtHandler(wxEvtHandler)
-    impl EvtHandlerMethods
+wx_class! { EvtHandler(wxEvtHandler) impl
+    EvtHandlerMethods
 }
 pub trait EvtHandlerMethods: ObjectMethods {
     fn bind<F: Fn() + 'static>(&self, event_type: ffi::EventType, closure: F) {
@@ -111,8 +111,9 @@ impl App {
 }
 
 // wxWindow
-wx_class! { Window(wxWindow)
-    impl WindowMethods, EvtHandlerMethods
+wx_class! { Window(wxWindow) impl
+    WindowMethods,
+    EvtHandlerMethods
 }
 pub trait WindowMethods: EvtHandlerMethods {
     fn centre(&self) {
@@ -124,8 +125,9 @@ pub trait WindowMethods: EvtHandlerMethods {
 }
 
 // wxFrame
-wx_class! { Frame(wxFrame)
-    impl WindowMethods, EvtHandlerMethods
+wx_class! { Frame(wxFrame) impl
+    WindowMethods,
+    EvtHandlerMethods
 }
 impl Frame {
     pub fn new(title: &str) -> Frame {
@@ -134,8 +136,10 @@ impl Frame {
 }
 
 // wxButton
-wx_class! { Button(wxButton)
-    impl ButtonMethods, WindowMethods, EvtHandlerMethods
+wx_class! { Button(wxButton) impl
+    ButtonMethods,
+    WindowMethods,
+    EvtHandlerMethods
 }
 impl Button {
     pub fn new(parent: &Frame, label: &str) -> Button {
