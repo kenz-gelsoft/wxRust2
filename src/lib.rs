@@ -149,7 +149,7 @@ impl Button {
 pub trait ButtonMethods: WindowMethods {
     fn set_label(&self, s: &str) {
         let label = ffi::NewString(s);
-        self.pinned::<ffi::wxButton>().as_mut().SetLabel(&*label);
+        self.pinned::<ffi::wxButton>().as_mut().SetLabel(&label);
     }
 }
 
