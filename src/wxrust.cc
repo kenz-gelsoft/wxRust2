@@ -14,17 +14,26 @@ namespace wxrust {
         return true;
     }
 
-    // wxFrame
+    // wxEvtHandler
+    wxEventTypeTag<wxCommandEvent> FromRustEventType(EventType eventType) {
+        switch (eventType) {
+        case EventType::Button:
+            return wxEVT_BUTTON;
+        }
+        return wxEVT_BUTTON;
+    }
+    void Bind(wxEvtHandler &evtHandler, EventType eventType, const Closure &closure) {
+        CxxClosure<wxCommandEvent &> functor(closure);
+        evtHandler.Bind(FromRustEventType(eventType), functor);
+    }
+
+    // Constructors
     wxFrame *NewFrame(rust::Str title) {
         return new wxFrame(NULL, -1, std::string(title));
     }
-
-    // wxString
     wxString *NewString(rust::Str aString) {
         return new wxString(std::string(aString).c_str(), wxConvUTF8);
     }
-
-    // wxButton
     wxButton *NewButton(wxWindow &parent, rust::Str label) {
         return new wxButton(&parent, wxID_ANY, std::string(label));
     }

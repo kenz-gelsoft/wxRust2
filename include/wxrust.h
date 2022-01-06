@@ -33,25 +33,11 @@ namespace wxrust {
         }
     };
 
-    inline wxEventTypeTag<wxCommandEvent> FromRustEventType(EventType eventType) {
-        switch (eventType) {
-        case EventType::Button:
-            return wxEVT_BUTTON;
-        }
-        return wxEVT_BUTTON;
-    }
-    void Bind(wxEvtHandler &evtHandler, EventType eventType, const Closure &closure) {
-        CxxClosure<wxCommandEvent &> functor(closure);
-        evtHandler.Bind(FromRustEventType(eventType), functor);
-    }
+    void Bind(wxEvtHandler &evtHandler, EventType eventType, const Closure &closure);
 
-    // wxFrame
+    // Constructors
     wxFrame *NewFrame(rust::Str aTitle);
-
-    // wxString
     wxString *NewString(rust::Str aString);
-
-    // wxButton
     wxButton *NewButton(wxWindow &parent, rust::Str label);
 }
 
