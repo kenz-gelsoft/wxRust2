@@ -8,7 +8,7 @@
 using unsafe_any_ptr = const char *;
 
 // wxApp
-void WxRustAppSetOnInit(const Closure &closure);
+void WxRustAppSetOnInit(const wxrust::Closure &closure);
 class WxRustApp : public wxApp {
     virtual bool OnInit();
 };
@@ -17,11 +17,11 @@ class WxRustApp : public wxApp {
 template <typename T>
 class WxRustClosure {
     typedef void (*TrampolineFunc)(unsafe_any_ptr);
-    Closure mClosure;
+    wxrust::Closure mClosure;
 
 public:
     WxRustClosure() : mClosure() {}
-    WxRustClosure(const Closure &closure) : mClosure(closure) {}
+    WxRustClosure(const wxrust::Closure &closure) : mClosure(closure) {}
 
     void operator ()(T arg) const {
         if (mClosure.param) { // if set
@@ -32,15 +32,15 @@ public:
     }
 };
 
-inline wxEventTypeTag<wxCommandEvent> fromRustEventType(EventType eventType) {
+inline wxEventTypeTag<wxCommandEvent> fromRustEventType(wxrust::EventType eventType) {
     switch (eventType) {
-    case EventType::Button:
+    case wxrust::EventType::Button:
         return wxEVT_BUTTON;
     }
     return wxEVT_BUTTON;
 }
 
-void Bind(wxEvtHandler &evtHandler, EventType eventType, const Closure &closure) {
+void Bind(wxEvtHandler &evtHandler, wxrust::EventType eventType, const wxrust::Closure &closure) {
     WxRustClosure<wxCommandEvent &> functor(closure);
     evtHandler.Bind(fromRustEventType(eventType), functor);
 }

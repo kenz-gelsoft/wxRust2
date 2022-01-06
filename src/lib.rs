@@ -7,7 +7,7 @@ use std::ptr;
 // we chose this type as it's handy in cxx.
 type UnsafeAnyPtr = *const c_char;
 
-#[cxx::bridge]
+#[cxx::bridge(namespace="wxrust")]
 mod ffi {
     enum EventType {
         Button,
@@ -19,6 +19,7 @@ mod ffi {
         param: *const c_char,
     }
 
+    #[namespace=""]
     unsafe extern "C++" {
         include!("wx/include/wxrust.h");
 

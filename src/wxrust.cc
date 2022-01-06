@@ -4,7 +4,7 @@
 wxIMPLEMENT_APP_NO_MAIN(WxRustApp);
 
 static WxRustClosure<int> globalOnInit;
-void WxRustAppSetOnInit(const Closure &closure) {
+void WxRustAppSetOnInit(const wxrust::Closure &closure) {
     globalOnInit = closure;
 }
 bool WxRustApp::OnInit() {
