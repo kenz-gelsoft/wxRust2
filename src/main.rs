@@ -2,7 +2,7 @@ use wx;
 use wx::*;
 
 fn main() {
-    App::on_init(|| {
+    wx::App::run(|| {
         let frame = Frame::new("Hello, 世界");
         let button = Button::new(&frame, "Greet");
         let i = 3;
@@ -15,6 +15,4 @@ fn main() {
         frame.centre();
         frame.show();
     });
-
-    wx::entry();
 }

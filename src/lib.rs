@@ -96,6 +96,10 @@ impl App {
     pub fn on_init<F: Fn() + 'static>(closure: F) {
         ffi::AppSetOnInit(&ffi::Closure::new(closure));
     }
+    pub fn run<F: Fn() + 'static>(closure: F) {
+        Self::on_init(closure);
+        entry();
+    }
 }
 
 // wxWindow
