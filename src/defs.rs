@@ -45,10 +45,8 @@ const wxPG_ATTR_MULTICHOICE_USERSTRINGMODE: &str = "UserStringMode";
 const wxPG_COLOUR_ALLOW_CUSTOM: &str = "AllowCustom";
 const wxPG_COLOUR_HAS_ALPHA: &str = "HasAlpha";
 const wxPG_PROP_MAX: i32 = wxPG_PROP_AUTO_UNSPECIFIED;
-const wxPG_PROP_PARENTAL_FLAGS: i32 =     ((wxPGPropertyFlags)(wxPG_PROP_AGGREGATE | \
-                         wxPG_PROP_CATEGORY | \
-                         wxPG_PROP_MISC_PARENT));
-const wxPG_STRING_STORED_FLAGS: i32 =     (wxPG_PROP_DISABLED|wxPG_PROP_HIDDEN|wxPG_PROP_NOEDITOR|wxPG_PROP_COLLAPSED);
+//  SKIP: wxPG_PROP_PARENTAL_FLAGS
+const wxPG_STRING_STORED_FLAGS: i32 = (wxPG_PROP_DISABLED|wxPG_PROP_HIDDEN|wxPG_PROP_NOEDITOR|wxPG_PROP_COLLAPSED);
 //  SKIP: wxNullProperty
 //  SKIP: wxPGChoicesEmptyData
 //  ENUM: wxPGPropertyFlags
@@ -177,7 +175,7 @@ const wxLAYOUT_BOTTOM: i32 = 0 + 4;
 
 //  SKIP: wxPG_LABEL
 const wxPG_LABEL_STRING: &str = "@!";
-const wxPG_COLOUR_BLACK: i32 = (*wxBLACK);
+//  SKIP: wxPG_COLOUR_BLACK
 //  SKIP: wxPG_COLOUR
 //  SKIP: wxPG_DEFAULT_IMAGE_SIZE
 //  ENUM: wxPG_PROPERTYVALUES_FLAGS
@@ -402,8 +400,7 @@ const wxPREVIEW_ZOOM: i32 = 8;
 const wxPREVIEW_FIRST: i32 = 16;
 const wxPREVIEW_LAST: i32 = 32;
 const wxPREVIEW_GOTO: i32 = 64;
-const wxPREVIEW_DEFAULT: i32 =                             (wxPREVIEW_PREVIOUS|wxPREVIEW_NEXT|wxPREVIEW_ZOOM\
-                            |wxPREVIEW_FIRST|wxPREVIEW_GOTO|wxPREVIEW_LAST);
+const wxPREVIEW_DEFAULT: i32 = (wxPREVIEW_PREVIOUS|wxPREVIEW_NEXT|wxPREVIEW_ZOOM|wxPREVIEW_FIRST|wxPREVIEW_GOTO|wxPREVIEW_LAST);
 const wxID_PREVIEW_CLOSE: i32 = 1;
 const wxID_PREVIEW_NEXT: i32 = 2;
 const wxID_PREVIEW_PREVIOUS: i32 = 3;
@@ -470,9 +467,7 @@ const wxHF_MERGE_BOOKS: i32 = 0x0100;
 const wxHF_ICONS_BOOK: i32 = 0x0200;
 const wxHF_ICONS_BOOK_CHAPTER: i32 = 0x0400;
 const wxHF_ICONS_FOLDER: i32 = 0x0000;
-const wxHF_DEFAULT_STYLE: i32 =                                      (wxHF_TOOLBAR | wxHF_CONTENTS | \
-                                     wxHF_INDEX | wxHF_SEARCH | \
-                                     wxHF_BOOKMARKS | wxHF_PRINT);
+const wxHF_DEFAULT_STYLE: i32 = (wxHF_TOOLBAR | wxHF_CONTENTS | wxHF_INDEX | wxHF_SEARCH | wxHF_BOOKMARKS | wxHF_PRINT);
 
 //  ENUM: Context
 const Context_Current: i32 = 0;
@@ -2942,13 +2937,7 @@ const WOW64ViewMode_Default: i32 = 0;
 const WOW64ViewMode_32: i32 = 0 + 1;
 const WOW64ViewMode_64: i32 = 0 + 2;
 
-const wxDEFAULT_FRAME_STYLE: i32 =                                (wxSYSTEM_MENU |          \
-                               wxRESIZE_BORDER |        \
-                               wxMINIMIZE_BOX |         \
-                               wxMAXIMIZE_BOX |         \
-                               wxCLOSE_BOX |            \
-                               wxCAPTION |              \
-                               wxCLIP_CHILDREN);
+const wxDEFAULT_FRAME_STYLE: i32 = (wxSYSTEM_MENU |          wxRESIZE_BORDER |        wxMINIMIZE_BOX |         wxMAXIMIZE_BOX |         wxCLOSE_BOX |            wxCAPTION |              wxCLIP_CHILDREN);
 //  ENUM: @50
 const wxUSER_ATTENTION_INFO: i32 = 1;
 const wxUSER_ATTENTION_ERROR: i32 = 2;
@@ -3388,9 +3377,7 @@ const wxBACKINGSTORE: i32 = wxRETAINED;
 const wxPOPUP_WINDOW: i32 = 0x00020000;
 const wxFULL_REPAINT_ON_RESIZE: i32 = 0x00010000;
 const wxNO_FULL_REPAINT_ON_RESIZE: i32 = 0;
-const wxWINDOW_STYLE_MASK: i32 =     (wxVSCROLL|wxHSCROLL|wxBORDER_MASK|wxALWAYS_SHOW_SB|wxCLIP_CHILDREN| \
-     wxCLIP_SIBLINGS|wxTRANSPARENT_WINDOW|wxTAB_TRAVERSAL|wxWANTS_CHARS| \
-     wxRETAINED|wxPOPUP_WINDOW|wxFULL_REPAINT_ON_RESIZE);
+const wxWINDOW_STYLE_MASK: i32 = (wxVSCROLL|wxHSCROLL|wxBORDER_MASK|wxALWAYS_SHOW_SB|wxCLIP_CHILDREN| wxCLIP_SIBLINGS|wxTRANSPARENT_WINDOW|wxTAB_TRAVERSAL|wxWANTS_CHARS| wxRETAINED|wxPOPUP_WINDOW|wxFULL_REPAINT_ON_RESIZE);
 const wxWS_EX_BLOCK_EVENTS: i32 = 0x00000002;
 const wxWS_EX_TRANSIENT: i32 = 0x00000004;
 const wxWS_EX_THEMED_BACKGROUND: i32 = 0x00000008;
@@ -3473,7 +3460,7 @@ const wxMORE: i32 = 0x00010000;
 const wxSETUP: i32 = 0x00020000;
 const wxICON_NONE: i32 = 0x00040000;
 const wxICON_AUTH_NEEDED: i32 = 0x00080000;
-const wxICON_MASK: i32 =     (wxICON_EXCLAMATION|wxICON_HAND|wxICON_QUESTION|wxICON_INFORMATION|wxICON_NONE);
+const wxICON_MASK: i32 = (wxICON_EXCLAMATION|wxICON_HAND|wxICON_QUESTION|wxICON_INFORMATION|wxICON_NONE);
 const wxNOT_FOUND: i32 = (-1);
 const wxPRINT_QUALITY_HIGH: i32 = -1;
 const wxPRINT_QUALITY_MEDIUM: i32 = -2;
@@ -4426,13 +4413,13 @@ const wxLB_ALIGN_MASK: i32 = wxBK_ALIGN_MASK;
 
 //  SKIP: wxPG_NULL_BITMAP
 //  SKIP: wxPG_INVALID_VALUE
-const wxPG_BASE_OCT: i32 = 8L;
-const wxPG_BASE_DEC: i32 = 10L;
-const wxPG_BASE_HEX: i32 = 16L;
-const wxPG_BASE_HEXL: i32 = 32L;
-const wxPG_PREFIX_NONE: i32 = 0L;
-const wxPG_PREFIX_0x: i32 = 1L;
-const wxPG_PREFIX_DOLLAR_SIGN: i32 = 2L;
+const wxPG_BASE_OCT: i32 = 8;
+const wxPG_BASE_DEC: i32 = 10;
+const wxPG_BASE_HEX: i32 = 16;
+const wxPG_BASE_HEXL: i32 = 32;
+const wxPG_PREFIX_NONE: i32 = 0;
+const wxPG_PREFIX_0x: i32 = 1;
+const wxPG_PREFIX_DOLLAR_SIGN: i32 = 2;
 //  ENUM: wxPG_GETPROPERTYVALUES_FLAGS
 //  ENUM: wxPG_MISC_ARG_FLAGS
 const wxPG_FULL_VALUE: i32 = 0x00000001;
@@ -6106,7 +6093,7 @@ const wxLIST_HITTEST_ONITEMSTATEICON: i32 = 0x0200;
 const wxLIST_HITTEST_TOLEFT: i32 = 0x0400;
 const wxLIST_HITTEST_TORIGHT: i32 = 0x0800;
 const wxLIST_HITTEST_ONITEM: i32 = (wxLIST_HITTEST_ONITEMICON | wxLIST_HITTEST_ONITEMLABEL | wxLIST_HITTEST_ONITEMSTATEICON);
-const wxLIST_GETSUBITEMRECT_WHOLEITEM: i32 = -1l;
+const wxLIST_GETSUBITEMRECT_WHOLEITEM: i32 = -1;
 //  ENUM: @32
 const wxLIST_NEXT_ABOVE: i32 = 0;
 const wxLIST_NEXT_ALL: i32 = 0 + 1;
@@ -6700,7 +6687,7 @@ const wxPG_PROP_SHOW_FULL_FILENAME: i32 = wxPG_PROP_CLASS_SPECIFIC_1;
 const wxPG_PROP_ACTIVE_BTN: i32 = wxPG_PROP_CLASS_SPECIFIC_1;
 const wxPG_PROP_USE_CHECKBOX: i32 = wxPG_PROP_CLASS_SPECIFIC_1;
 const wxPG_PROP_USE_DCC: i32 = wxPG_PROP_CLASS_SPECIFIC_2;
-const wxAEDIALOG_STYLE: i32 =     (wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxOK | wxCANCEL | wxCENTRE);
+const wxAEDIALOG_STYLE: i32 = (wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxOK | wxCANCEL | wxCENTRE);
 //  ENUM: wxPGNumericValidationConstants
 const wxPG_PROPERTY_VALIDATION_ERROR_MESSAGE: i32 = 0;
 const wxPG_PROPERTY_VALIDATION_SATURATE: i32 = 1;

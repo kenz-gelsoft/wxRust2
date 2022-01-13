@@ -55,11 +55,13 @@ blocklist = [
     'wxInvalidDateTime',
     'wxNullProperty',
     'wxPG_COLOUR',
+    'wxPG_COLOUR_BLACK',
     'wxPG_DEFAULT_IMAGE_SIZE',
     'wxPG_INVALID_VALUE',
     'wxPG_IT_CHILDREN',
     'wxPG_LABEL',
     'wxPG_NULL_BITMAP',
+    'wxPG_PROP_PARENTAL_FLAGS',
     'wxPGChoicesEmptyData',
     'wxTLS_TYPE',
     'wxTreeListEventHandler',
@@ -110,6 +112,7 @@ def parse_define(e):
     initializer = e.find('initializer')
     if initializer is not None:
         v = ''.join(initializer.itertext())
+        v = ''.join(map(lambda s: s.lstrip(), v.split('\\\n')))
         t = 'i32'
         if v == 'true' or v == 'false':
             t = 'bool'
@@ -119,6 +122,7 @@ def parse_define(e):
             t = '&str'
         elif "'" in v:
             t = 'char'
+        v = re.sub(r'(\d+)[Ll]', r'\1', v)
         v = re.sub(r'wxString\((".+")\)', r'\1', v)
         v = re.sub(r'wxS\((".+")\)', r'\1', v)
         v = re.sub(r'wxT\((".+")\)', r'\1', v)
