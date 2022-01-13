@@ -1,4 +1,7 @@
 #![allow(unused_parens)]
+
+use crate::manual::*;
+
 const wxNB_DEFAULT: i32 = wxBK_DEFAULT;
 const wxNB_TOP: i32 = wxBK_TOP;
 const wxNB_BOTTOM: i32 = wxBK_BOTTOM;
@@ -2778,7 +2781,7 @@ const wxID_HTML_COUNTINFO: i32 = wxID_HIGHEST + 10 + 24;
 // NODEF: wxEND_EVENT_TABLE
 //  ENUM: wxEventPropagation
 const wxEVENT_PROPAGATE_NONE: i32 = 0;
-const wxEVENT_PROPAGATE_MAX: i32 = INT_MAX;
+//  SKIP: wxEVENT_PROPAGATE_MAX
 //  ENUM: wxEventCategory
 const wxEVT_CATEGORY_UI: i32 = 1;
 const wxEVT_CATEGORY_USER_INPUT: i32 = 2;

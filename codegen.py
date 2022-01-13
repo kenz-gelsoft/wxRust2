@@ -6,6 +6,9 @@ import xml.etree.ElementTree as ET
 generated = set()
 def main():
     print('#![allow(unused_parens)]')
+    print()
+    print('use crate::manual::*;')
+    print()
     for file in xml_files_in('wxml/'):
         tree = ET.parse(file)
         root = tree.getroot()
@@ -20,7 +23,7 @@ def main():
             parse_enum(enum)
         
         if not empty:
-            print('')
+            print()
 
 def xml_files_in(dir):
     for path, _, files in os.walk(dir):
@@ -48,6 +51,7 @@ blocklist = [
     'wxBookCtrl',
     'wxDISABLE_DEBUG_SUPPORT',
     'wxDISABLE_ASSERTS_IN_RELEASE_BUILD',
+    'wxEVENT_PROPAGATE_MAX',
     'wxInvalidDateTime',
     'wxNullProperty',
     'wxPG_COLOUR',
