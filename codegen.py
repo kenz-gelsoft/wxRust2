@@ -42,6 +42,8 @@ def parse_define(e):
         t = 'i32'
         if v == 'true' or v == 'false':
             t = 'bool'
+        elif '.' in v:
+            t = 'f32'
         elif '"' in v:
             t = '&str'
         v = re.sub(r'wxString\((".+")\)', r'\1', v)
