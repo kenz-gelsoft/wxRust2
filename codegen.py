@@ -38,9 +38,9 @@ def parse_define(e):
     init = e.find('initializer')
     if init is not None:
         init = ''.join(init.itertext())
+        print('const %s: i32 = %s;' % (name, init))
     else:
-        init = '(none)'
-    print('const %s: i32 = %s;' % (name, init))
+        print('// NODEF: %s' % (name,))
 
 if __name__ == '__main__':
     main()

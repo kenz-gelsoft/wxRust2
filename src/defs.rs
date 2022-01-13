@@ -45,8 +45,8 @@ const wxHW_DEFAULT_STYLE: i32 = wxHW_SCROLLBAR_AUTO;
 const wxFRAME_NO_TASKBAR: i32 = 0x0002;
 const wxFRAME_TOOL_WINDOW: i32 = 0x0004;
 const wxFRAME_FLOAT_ON_PARENT: i32 = 0x0008;
-const wxDECLARE_APP: i32 = (none);
-const wxIMPLEMENT_APP: i32 = (none);
+// NODEF: wxDECLARE_APP
+// NODEF: wxIMPLEMENT_APP
 const wxPG_LABEL: i32 = (*wxPGProperty::sm_wxPG_LABEL);
 const wxPG_LABEL_STRING: i32 = wxS("@!");
 const wxPG_COLOUR_BLACK: i32 = (*wxBLACK);
@@ -70,8 +70,8 @@ const wxSW_3D: i32 = (wxSW_3DSASH | wxSW_3DBORDER);
 const wxBUFFER_VIRTUAL_AREA: i32 = 0x01;
 const wxBUFFER_CLIENT_AREA: i32 = 0x02;
 const wxBUFFER_USES_SHARED_BUFFER: i32 = 0x04;
-const WXTRACE: i32 = (none);
-const WXTRACELEVEL: i32 = (none);
+// NODEF: WXTRACE
+// NODEF: WXTRACELEVEL
 const wxSP_NOBORDER: i32 = 0x0000;
 const wxSP_THIN_SASH: i32 = 0x0000;
 const wxSP_NOSASH: i32 = 0x0010;
@@ -82,7 +82,7 @@ const wxSP_3DBORDER: i32 = 0x0200;
 const wxSP_NO_XP_THEME: i32 = 0x0400;
 const wxSP_BORDER: i32 = wxSP_3DBORDER;
 const wxSP_3D: i32 = (wxSP_3DBORDER | wxSP_3DSASH);
-const wxDYNLIB_FUNCTION: i32 = (none);
+// NODEF: wxDYNLIB_FUNCTION
 const wxDIALOG_NO_PARENT: i32 = 0x00000020;
 const wxDEFAULT_DIALOG_STYLE: i32 = (wxCAPTION | wxSYSTEM_MENU | wxCLOSE_BOX);
 const wxDIALOG_ADAPTATION_NONE: i32 = 0;
@@ -115,7 +115,7 @@ const wxID_PREVIEW_LAST: i32 = 7;
 const wxID_PREVIEW_GOTO: i32 = 8;
 const wxID_PREVIEW_ZOOM_IN: i32 = 9;
 const wxID_PREVIEW_ZOOM_OUT: i32 = 10;
-const wxGetVariantCast: i32 = (none);
+// NODEF: wxGetVariantCast
 const wxWIZARD_EX_HELPBUTTON: i32 = 0x00000010;
 const wxWIZARD_VALIGN_TOP: i32 = 0x01;
 const wxWIZARD_VALIGN_CENTRE: i32 = 0x02;
@@ -2358,20 +2358,20 @@ const wxSTC_CMD_SCROLLTOSTART: i32 = 2628;
 const wxSTC_CMD_SCROLLTOEND: i32 = 2629;
 const wxSTC_CMD_VCHOMEDISPLAY: i32 = 2652;
 const wxSTC_CMD_VCHOMEDISPLAYEXTEND: i32 = 2653;
-const wxDEFINE_EVENT: i32 = (none);
-const wxDECLARE_EVENT: i32 = (none);
-const wxDECLARE_EXPORTED_EVENT: i32 = (none);
-const wxEVENT_HANDLER_CAST: i32 = (none);
-const wx__DECLARE_EVT1: i32 = (none);
-const wx__DECLARE_EVT2: i32 = (none);
-const wx__DECLARE_EVT0: i32 = (none);
-const wxDECLARE_EVENT_TABLE: i32 = (none);
-const wxBEGIN_EVENT_TABLE: i32 = (none);
-const wxEND_EVENT_TABLE: i32 = (none);
-const wxPLURAL: i32 = (none);
-const wxGETTEXT_IN_CONTEXT: i32 = (none);
-const wxGETTEXT_IN_CONTEXT_PLURAL: i32 = (none);
-const wxTRANSLATE: i32 = (none);
+// NODEF: wxDEFINE_EVENT
+// NODEF: wxDECLARE_EVENT
+// NODEF: wxDECLARE_EXPORTED_EVENT
+// NODEF: wxEVENT_HANDLER_CAST
+// NODEF: wx__DECLARE_EVT1
+// NODEF: wx__DECLARE_EVT2
+// NODEF: wx__DECLARE_EVT0
+// NODEF: wxDECLARE_EVENT_TABLE
+// NODEF: wxBEGIN_EVENT_TABLE
+// NODEF: wxEND_EVENT_TABLE
+// NODEF: wxPLURAL
+// NODEF: wxGETTEXT_IN_CONTEXT
+// NODEF: wxGETTEXT_IN_CONTEXT_PLURAL
+// NODEF: wxTRANSLATE
 const wxBK_DEFAULT: i32 = 0x0000;
 const wxBK_TOP: i32 = 0x0010;
 const wxBK_BOTTOM: i32 = 0x0020;
@@ -2475,17 +2475,17 @@ const wxACC_EVENT_OBJECT_PARENTCHANGE: i32 = 0x800F;
 const wxACC_EVENT_OBJECT_HELPCHANGE: i32 = 0x8010;
 const wxACC_EVENT_OBJECT_DEFACTIONCHANGE: i32 = 0x8011;
 const wxACC_EVENT_OBJECT_ACCELERATORCHANGE: i32 = 0x8012;
-const wxLongLongFmtSpec: i32 = (none);
+// NODEF: wxLongLongFmtSpec
 const wxCLRP_USE_TEXTCTRL: i32 = (wxPB_USE_TEXTCTRL);
 const wxCLRP_DEFAULT_STYLE: i32 = 0;
 const wxCLRP_SHOW_LABEL: i32 = 0x0008;
 const wxCLRP_SHOW_ALPHA: i32 = 0x0010;
-const wxCRIT_SECT_DECLARE: i32 = (none);
-const wxCRIT_SECT_DECLARE_MEMBER: i32 = (none);
-const wxCRIT_SECT_LOCKER: i32 = (none);
-const wxCRITICAL_SECTION: i32 = (none);
-const wxLEAVE_CRIT_SECT: i32 = (none);
-const wxENTER_CRIT_SECT: i32 = (none);
+// NODEF: wxCRIT_SECT_DECLARE
+// NODEF: wxCRIT_SECT_DECLARE_MEMBER
+// NODEF: wxCRIT_SECT_LOCKER
+// NODEF: wxCRITICAL_SECTION
+// NODEF: wxLEAVE_CRIT_SECT
+// NODEF: wxENTER_CRIT_SECT
 const wxSTACKWALKER_MAX_DEPTH: i32 = (200);
 const wxRE_READONLY: i32 = 0x0010;
 const wxRE_MULTILINE: i32 = 0x0020;
@@ -2653,30 +2653,30 @@ const wxUINT32_MAX: i32 = UINT_MAX-or-LONG_MAX;
 const wxINT64_MIN: i32 = LLONG_MIN;
 const wxINT64_MAX: i32 = LLONG_MAX;
 const wxUINT64_MAX: i32 = ULLONG_MAX;
-const wxINT32_SWAP_ALWAYS: i32 = (none);
-const wxUINT32_SWAP_ALWAYS: i32 = (none);
-const wxINT16_SWAP_ALWAYS: i32 = (none);
-const wxUINT16_SWAP_ALWAYS: i32 = (none);
-const wxINT32_SWAP_ON_BE: i32 = (none);
-const wxUINT32_SWAP_ON_BE: i32 = (none);
-const wxINT16_SWAP_ON_BE: i32 = (none);
-const wxUINT16_SWAP_ON_BE: i32 = (none);
-const wxINT32_SWAP_ON_LE: i32 = (none);
-const wxUINT32_SWAP_ON_LE: i32 = (none);
-const wxINT16_SWAP_ON_LE: i32 = (none);
-const wxUINT16_SWAP_ON_LE: i32 = (none);
-const wxDECLARE_NO_ASSIGN_CLASS: i32 = (none);
-const wxDECLARE_NO_COPY_CLASS: i32 = (none);
-const wxDECLARE_NO_COPY_TEMPLATE_CLASS: i32 = (none);
-const wxDECLARE_NO_COPY_TEMPLATE_CLASS_2: i32 = (none);
-const wxDEPRECATED_MSG: i32 = (none);
-const wxDEPRECATED: i32 = (none);
-const wxDEPRECATED_BUT_USED_INTERNALLY: i32 = (none);
-const wxDEPRECATED_INLINE: i32 = (none);
-const wxDEPRECATED_ACCESSOR: i32 = (none);
-const wxDEPRECATED_BUT_USED_INTERNALLY_INLINE: i32 = (none);
-const wxOVERRIDE: i32 = (none);
-const wxSUPPRESS_GCC_PRIVATE_DTOR_WARNING: i32 = (none);
+// NODEF: wxINT32_SWAP_ALWAYS
+// NODEF: wxUINT32_SWAP_ALWAYS
+// NODEF: wxINT16_SWAP_ALWAYS
+// NODEF: wxUINT16_SWAP_ALWAYS
+// NODEF: wxINT32_SWAP_ON_BE
+// NODEF: wxUINT32_SWAP_ON_BE
+// NODEF: wxINT16_SWAP_ON_BE
+// NODEF: wxUINT16_SWAP_ON_BE
+// NODEF: wxINT32_SWAP_ON_LE
+// NODEF: wxUINT32_SWAP_ON_LE
+// NODEF: wxINT16_SWAP_ON_LE
+// NODEF: wxUINT16_SWAP_ON_LE
+// NODEF: wxDECLARE_NO_ASSIGN_CLASS
+// NODEF: wxDECLARE_NO_COPY_CLASS
+// NODEF: wxDECLARE_NO_COPY_TEMPLATE_CLASS
+// NODEF: wxDECLARE_NO_COPY_TEMPLATE_CLASS_2
+// NODEF: wxDEPRECATED_MSG
+// NODEF: wxDEPRECATED
+// NODEF: wxDEPRECATED_BUT_USED_INTERNALLY
+// NODEF: wxDEPRECATED_INLINE
+// NODEF: wxDEPRECATED_ACCESSOR
+// NODEF: wxDEPRECATED_BUT_USED_INTERNALLY_INLINE
+// NODEF: wxOVERRIDE
+// NODEF: wxSUPPRESS_GCC_PRIVATE_DTOR_WARNING
 const wxPG_IT_CHILDREN: i32 = ((A)<<16);
 const wxDVC_DEFAULT_RENDERER_SIZE: i32 = 20;
 const wxDVC_DEFAULT_WIDTH: i32 = 80;
@@ -2775,14 +2775,14 @@ const wxTR_ROW_LINES: i32 = 0x0400;
 const wxTR_HIDE_ROOT: i32 = 0x0800;
 const wxTR_FULL_ROW_HIGHLIGHT: i32 = 0x2000;
 const wxTR_DEFAULT_STYLE: i32 = (wxTR_HAS_BUTTONS | wxTR_LINES_AT_ROOT);
-const wxTheClipboard: i32 = (none);
+// NODEF: wxTheClipboard
 const wxCHK_2STATE: i32 = 0x4000;
 const wxCHK_3STATE: i32 = 0x1000;
 const wxCHK_ALLOW_3RD_STATE_FOR_USER: i32 = 0x2000;
-const wxT: i32 = (none);
-const wxT_2: i32 = (none);
-const wxS: i32 = (none);
-const _T: i32 = (none);
+// NODEF: wxT
+// NODEF: wxT_2
+// NODEF: wxS
+// NODEF: _T
 const wxTBK_BUTTONBAR: i32 = 0x0100;
 const wxTBK_HORZ_LAYOUT: i32 = 0x8000;
 const wxFLP_OPEN: i32 = 0x0400;
@@ -2798,67 +2798,67 @@ const wxDIRP_CHANGE_DIR: i32 = 0x0010;
 const wxDIRP_SMALL: i32 = wxPB_SMALL;
 const wxDIRP_USE_TEXTCTRL: i32 = (wxPB_USE_TEXTCTRL);
 const wxDIRP_DEFAULT_STYLE: i32 = (wxDIRP_DIR_MUST_EXIST);
-const wxCLASSINFO: i32 = (none);
-const wxDECLARE_ABSTRACT_CLASS: i32 = (none);
-const wxDECLARE_DYNAMIC_CLASS: i32 = (none);
-const wxDECLARE_CLASS: i32 = (none);
-const wxIMPLEMENT_ABSTRACT_CLASS: i32 = (none);
-const wxIMPLEMENT_ABSTRACT_CLASS2: i32 = (none);
-const wxIMPLEMENT_DYNAMIC_CLASS: i32 = (none);
-const wxIMPLEMENT_DYNAMIC_CLASS2: i32 = (none);
-const wxIMPLEMENT_CLASS: i32 = (none);
-const wxIMPLEMENT_CLASS2: i32 = (none);
-const wx_truncate_cast: i32 = (none);
-const wxConstCast: i32 = (none);
-const wxDynamicCast: i32 = (none);
-const wxDynamicCastThis: i32 = (none);
-const wxStaticCast: i32 = (none);
-const WXDEBUG_NEW: i32 = (none);
+// NODEF: wxCLASSINFO
+// NODEF: wxDECLARE_ABSTRACT_CLASS
+// NODEF: wxDECLARE_DYNAMIC_CLASS
+// NODEF: wxDECLARE_CLASS
+// NODEF: wxIMPLEMENT_ABSTRACT_CLASS
+// NODEF: wxIMPLEMENT_ABSTRACT_CLASS2
+// NODEF: wxIMPLEMENT_DYNAMIC_CLASS
+// NODEF: wxIMPLEMENT_DYNAMIC_CLASS2
+// NODEF: wxIMPLEMENT_CLASS
+// NODEF: wxIMPLEMENT_CLASS2
+// NODEF: wx_truncate_cast
+// NODEF: wxConstCast
+// NODEF: wxDynamicCast
+// NODEF: wxDynamicCastThis
+// NODEF: wxStaticCast
+// NODEF: WXDEBUG_NEW
 const wxPU_CONTAINS_CONTROLS: i32 = 0x0001;
 const wxIMAGELIST_DRAW_NORMAL: i32 = 0x0001;
 const wxIMAGELIST_DRAW_TRANSPARENT: i32 = 0x0002;
 const wxIMAGELIST_DRAW_SELECTED: i32 = 0x0004;
 const wxIMAGELIST_DRAW_FOCUSED: i32 = 0x0008;
-const wxDEBUG_LEVEL: i32 = (none);
-const __WXDEBUG__: i32 = (none);
-const wxASSERT: i32 = (none);
-const wxASSERT_LEVEL_2: i32 = (none);
-const wxASSERT_LEVEL_2_MSG: i32 = (none);
-const wxASSERT_MIN_BITSIZE: i32 = (none);
-const wxASSERT_MSG: i32 = (none);
-const wxASSERT_MSG_AT: i32 = (none);
-const wxCHECK: i32 = (none);
-const wxCHECK_MSG: i32 = (none);
-const wxCHECK_RET: i32 = (none);
-const wxCHECK2: i32 = (none);
-const wxCHECK2_MSG: i32 = (none);
-const wxCOMPILE_TIME_ASSERT: i32 = (none);
-const wxCOMPILE_TIME_ASSERT2: i32 = (none);
+// NODEF: wxDEBUG_LEVEL
+// NODEF: __WXDEBUG__
+// NODEF: wxASSERT
+// NODEF: wxASSERT_LEVEL_2
+// NODEF: wxASSERT_LEVEL_2_MSG
+// NODEF: wxASSERT_MIN_BITSIZE
+// NODEF: wxASSERT_MSG
+// NODEF: wxASSERT_MSG_AT
+// NODEF: wxCHECK
+// NODEF: wxCHECK_MSG
+// NODEF: wxCHECK_RET
+// NODEF: wxCHECK2
+// NODEF: wxCHECK2_MSG
+// NODEF: wxCOMPILE_TIME_ASSERT
+// NODEF: wxCOMPILE_TIME_ASSERT2
 const wxDISABLE_ASSERTS_IN_RELEASE_BUILD: i32 = wxDisableAsserts();
-const wxFAIL: i32 = (none);
-const wxFAIL_MSG: i32 = (none);
-const wxFAIL_MSG_AT: i32 = (none);
+// NODEF: wxFAIL
+// NODEF: wxFAIL_MSG
+// NODEF: wxFAIL_MSG_AT
 const wxGRID_AUTOSIZE: i32 = (-1);
-const wxCHECK_VERSION: i32 = (none);
-const wxCHECK_VERSION_FULL: i32 = (none);
+// NODEF: wxCHECK_VERSION
+// NODEF: wxCHECK_VERSION_FULL
 const wxInvalidDateTime: i32 = wxDefaultDateTime;
 const wxTIMER_CONTINUOUS: i32 = false;
 const wxTIMER_ONE_SHOT: i32 = true;
-const wxDISABLE_DEBUG_LOGGING_IN_RELEASE_BUILD: i32 = (none);
+// NODEF: wxDISABLE_DEBUG_LOGGING_IN_RELEASE_BUILD
 const wxCP_DEFAULT_STYLE: i32 = (wxTAB_TRAVERSAL | wxNO_BORDER);
 const wxCP_NO_TLW_RESIZE: i32 = (0x0002);
 const wxDEFAULT_DELIMITERS: i32 = " \t\r\n";
-const wxDROP_ICON: i32 = (none);
+// NODEF: wxDROP_ICON
 const wxFRAME_SHAPED: i32 = 0x0010;
 const wxTextEntryDialogStyle: i32 = (wxOK | wxCANCEL | wxCENTRE);
 const wxHLB_DEFAULT_STYLE: i32 = wxBORDER_SUNKEN;
 const wxHLB_MULTIPLE: i32 = wxLB_MULTIPLE;
 const wxPG_DEFAULT_STYLE: i32 = (0);
 const wxPGMAN_DEFAULT_STYLE: i32 = (0);
-const wxCHECK_GCC_VERSION: i32 = (none);
-const wxCHECK_SUNCC_VERSION: i32 = (none);
-const wxCHECK_VISUALC_VERSION: i32 = (none);
-const wxCHECK_W32API_VERSION: i32 = (none);
+// NODEF: wxCHECK_GCC_VERSION
+// NODEF: wxCHECK_SUNCC_VERSION
+// NODEF: wxCHECK_VISUALC_VERSION
+// NODEF: wxCHECK_W32API_VERSION
 const wxRICHTEXT_FIXED_WIDTH: i32 = 0x01;
 const wxRICHTEXT_FIXED_HEIGHT: i32 = 0x02;
 const wxRICHTEXT_VARIABLE_WIDTH: i32 = 0x04;
@@ -2902,23 +2902,23 @@ const wxRICHTEXT_HANDLER_SAVE_IMAGES_TO_BASE64: i32 = 0x0040;
 const wxRICHTEXT_HANDLER_NO_HEADER_FOOTER: i32 = 0x0080;
 const wxRICHTEXT_HANDLER_CONVERT_FACENAMES: i32 = 0x0100;
 const wxRICHTEXT_HANDLER_USE_CSS: i32 = 0x1000;
-const wxON_BLOCK_EXIT: i32 = (none);
-const wxON_BLOCK_EXIT0: i32 = (none);
-const wxON_BLOCK_EXIT1: i32 = (none);
-const wxON_BLOCK_EXIT2: i32 = (none);
-const wxON_BLOCK_EXIT3: i32 = (none);
-const wxON_BLOCK_EXIT_OBJ: i32 = (none);
-const wxON_BLOCK_EXIT_OBJ0: i32 = (none);
-const wxON_BLOCK_EXIT_OBJ1: i32 = (none);
-const wxON_BLOCK_EXIT_OBJ2: i32 = (none);
-const wxON_BLOCK_EXIT_OBJ3: i32 = (none);
-const wxON_BLOCK_EXIT_THIS: i32 = (none);
-const wxON_BLOCK_EXIT_THIS0: i32 = (none);
-const wxON_BLOCK_EXIT_THIS1: i32 = (none);
-const wxON_BLOCK_EXIT_THIS2: i32 = (none);
-const wxON_BLOCK_EXIT_THIS3: i32 = (none);
-const wxON_BLOCK_EXIT_SET: i32 = (none);
-const wxON_BLOCK_EXIT_NULL: i32 = (none);
+// NODEF: wxON_BLOCK_EXIT
+// NODEF: wxON_BLOCK_EXIT0
+// NODEF: wxON_BLOCK_EXIT1
+// NODEF: wxON_BLOCK_EXIT2
+// NODEF: wxON_BLOCK_EXIT3
+// NODEF: wxON_BLOCK_EXIT_OBJ
+// NODEF: wxON_BLOCK_EXIT_OBJ0
+// NODEF: wxON_BLOCK_EXIT_OBJ1
+// NODEF: wxON_BLOCK_EXIT_OBJ2
+// NODEF: wxON_BLOCK_EXIT_OBJ3
+// NODEF: wxON_BLOCK_EXIT_THIS
+// NODEF: wxON_BLOCK_EXIT_THIS0
+// NODEF: wxON_BLOCK_EXIT_THIS1
+// NODEF: wxON_BLOCK_EXIT_THIS2
+// NODEF: wxON_BLOCK_EXIT_THIS3
+// NODEF: wxON_BLOCK_EXIT_SET
+// NODEF: wxON_BLOCK_EXIT_NULL
 const wxLC_VRULES: i32 = 0x0001;
 const wxLC_HRULES: i32 = 0x0002;
 const wxLC_ICON: i32 = 0x0004;
@@ -2960,7 +2960,7 @@ const wxLIST_HITTEST_TOLEFT: i32 = 0x0400;
 const wxLIST_HITTEST_TORIGHT: i32 = 0x0800;
 const wxLIST_HITTEST_ONITEM: i32 = (wxLIST_HITTEST_ONITEMICON | wxLIST_HITTEST_ONITEMLABEL | wxLIST_HITTEST_ONITEMSTATEICON);
 const wxLIST_GETSUBITEMRECT_WHOLEITEM: i32 = -1l;
-const wxCHANGE_UMASK: i32 = (none);
+// NODEF: wxCHANGE_UMASK
 const wxRICHTEXT_ORGANISER_DELETE_STYLES: i32 = 0x0001;
 const wxRICHTEXT_ORGANISER_CREATE_STYLES: i32 = 0x0002;
 const wxRICHTEXT_ORGANISER_APPLY_STYLES: i32 = 0x0004;
@@ -2995,28 +2995,28 @@ const wxTE_WORDWRAP: i32 = 0x0001;
 const wxTE_BESTWRAP: i32 = 0x0000;
 const wxTE_RICH2: i32 = 0x8000;
 const wxTEXT_TYPE_ANY: i32 = 0;
-const WX_APPEND_ARRAY: i32 = (none);
-const WX_CLEAR_ARRAY: i32 = (none);
-const WX_DECLARE_OBJARRAY: i32 = (none);
-const WX_DECLARE_EXPORTED_OBJARRAY: i32 = (none);
-const WX_DECLARE_USER_EXPORTED_OBJARRAY: i32 = (none);
-const WX_DEFINE_ARRAY: i32 = (none);
-const WX_DEFINE_EXPORTED_ARRAY: i32 = (none);
-const WX_DEFINE_USER_EXPORTED_ARRAY: i32 = (none);
-const WX_DEFINE_OBJARRAY: i32 = (none);
-const WX_DEFINE_EXPORTED_OBJARRAY: i32 = (none);
-const WX_DEFINE_USER_EXPORTED_OBJARRAY: i32 = (none);
-const WX_DEFINE_SORTED_ARRAY: i32 = (none);
-const WX_DEFINE_SORTED_EXPORTED_ARRAY: i32 = (none);
-const WX_DEFINE_SORTED_USER_EXPORTED_ARRAY: i32 = (none);
-const WX_PREPEND_ARRAY: i32 = (none);
-const wxCONCAT: i32 = (none);
-const wxCONCAT3: i32 = (none);
-const wxCONCAT4: i32 = (none);
-const wxCONCAT5: i32 = (none);
-const wxSTRINGIZE: i32 = (none);
-const wxSTRINGIZE_T: i32 = (none);
-const __WXFUNCTION__: i32 = (none);
+// NODEF: WX_APPEND_ARRAY
+// NODEF: WX_CLEAR_ARRAY
+// NODEF: WX_DECLARE_OBJARRAY
+// NODEF: WX_DECLARE_EXPORTED_OBJARRAY
+// NODEF: WX_DECLARE_USER_EXPORTED_OBJARRAY
+// NODEF: WX_DEFINE_ARRAY
+// NODEF: WX_DEFINE_EXPORTED_ARRAY
+// NODEF: WX_DEFINE_USER_EXPORTED_ARRAY
+// NODEF: WX_DEFINE_OBJARRAY
+// NODEF: WX_DEFINE_EXPORTED_OBJARRAY
+// NODEF: WX_DEFINE_USER_EXPORTED_OBJARRAY
+// NODEF: WX_DEFINE_SORTED_ARRAY
+// NODEF: WX_DEFINE_SORTED_EXPORTED_ARRAY
+// NODEF: WX_DEFINE_SORTED_USER_EXPORTED_ARRAY
+// NODEF: WX_PREPEND_ARRAY
+// NODEF: wxCONCAT
+// NODEF: wxCONCAT3
+// NODEF: wxCONCAT4
+// NODEF: wxCONCAT5
+// NODEF: wxSTRINGIZE
+// NODEF: wxSTRINGIZE_T
+// NODEF: __WXFUNCTION__
 const wxICON_SCREEN_DEPTH: i32 = (-1);
 const wxSOUND_SYNC: i32 = 0;
 const wxSOUND_ASYNC: i32 = 1;
@@ -3036,12 +3036,12 @@ const wxFNTP_USEFONT_FOR_LABEL: i32 = 0x0010;
 const wxFONTBTN_DEFAULT_STYLE: i32 = (wxFNTP_FONTDESC_AS_LABEL | wxFNTP_USEFONT_FOR_LABEL);
 const wxFNTP_USE_TEXTCTRL: i32 = (wxPB_USE_TEXTCTRL);
 const wxFNTP_DEFAULT_STYLE: i32 = (wxFNTP_FONTDESC_AS_LABEL|wxFNTP_USEFONT_FOR_LABEL);
-const wxFORCE_LINK_THIS_MODULE: i32 = (none);
-const wxFORCE_LINK_MODULE: i32 = (none);
-const wxBITMAP: i32 = (none);
-const wxBITMAP_PNG: i32 = (none);
-const wxBITMAP_PNG_FROM_DATA: i32 = (none);
-const wxICON: i32 = (none);
+// NODEF: wxFORCE_LINK_THIS_MODULE
+// NODEF: wxFORCE_LINK_MODULE
+// NODEF: wxBITMAP
+// NODEF: wxBITMAP_PNG
+// NODEF: wxBITMAP_PNG_FROM_DATA
+// NODEF: wxICON
 const wxRICHTEXT_FORMAT_STYLE_EDITOR: i32 = 0x0001;
 const wxRICHTEXT_FORMAT_FONT: i32 = 0x0002;
 const wxRICHTEXT_FORMAT_TABS: i32 = 0x0004;
@@ -3081,8 +3081,8 @@ const wxHTML_COND_ISANCHOR: i32 = 1;
 const wxHTML_COND_ISIMAGEMAP: i32 = 2;
 const wxHTML_COND_USER: i32 = 10000;
 const wxTLS_TYPE: i32 = compiler-dependent-implementation;
-const wxTLS_VALUE: i32 = (none);
-const wxTLS_PTR: i32 = (none);
+// NODEF: wxTLS_VALUE
+// NODEF: wxTLS_PTR
 const wxPG_PROP_PASSWORD: i32 = wxPG_PROP_CLASS_SPECIFIC_2;
 const wxPG_PROP_STATIC_CHOICES: i32 = wxPG_PROP_CLASS_SPECIFIC_1;
 const wxPG_PROP_SHOW_FULL_FILENAME: i32 = wxPG_PROP_CLASS_SPECIFIC_1;
