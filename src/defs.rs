@@ -3446,23 +3446,23 @@ pub const wxOK_DEFAULT: u32 = 0x00000000  /* has no effect (default) */;
 pub const wxYES_DEFAULT: u32 = 0x00000000  /* has no effect (default) */;
 pub const wxNO_DEFAULT: u32 = 0x00000080  /* only valid with wxYES_NO */;
 pub const wxCANCEL_DEFAULT: u32 = 0x80000000  /* only valid with wxCANCEL */;
-pub const wxICON_EXCLAMATION: i32 = 0x00000100;
-pub const wxICON_HAND: i32 = 0x00000200;
-pub const wxICON_WARNING: i32 = wxICON_EXCLAMATION;
-pub const wxICON_ERROR: i32 = wxICON_HAND;
-pub const wxICON_QUESTION: i32 = 0x00000400;
-pub const wxICON_INFORMATION: i32 = 0x00000800;
-pub const wxICON_STOP: i32 = wxICON_HAND;
-pub const wxICON_ASTERISK: i32 = wxICON_INFORMATION;
+pub const wxICON_EXCLAMATION: u32 = 0x00000100;
+pub const wxICON_HAND: u32 = 0x00000200;
+pub const wxICON_WARNING: u32 = wxICON_EXCLAMATION;
+pub const wxICON_ERROR: u32 = wxICON_HAND;
+pub const wxICON_QUESTION: u32 = 0x00000400;
+pub const wxICON_INFORMATION: u32 = 0x00000800;
+pub const wxICON_STOP: u32 = wxICON_HAND;
+pub const wxICON_ASTERISK: u32 = wxICON_INFORMATION;
 pub const wxHELP: u32 = 0x00001000;
 pub const wxFORWARD: u32 = 0x00002000;
 pub const wxBACKWARD: u32 = 0x00004000;
 pub const wxRESET: u32 = 0x00008000;
 pub const wxMORE: u32 = 0x00010000;
 pub const wxSETUP: u32 = 0x00020000;
-pub const wxICON_NONE: i32 = 0x00040000;
-pub const wxICON_AUTH_NEEDED: i32 = 0x00080000;
-pub const wxICON_MASK: i32 = (wxICON_EXCLAMATION|wxICON_HAND|wxICON_QUESTION|wxICON_INFORMATION|wxICON_NONE);
+pub const wxICON_NONE: u32 = 0x00040000;
+pub const wxICON_AUTH_NEEDED: u32 = 0x00080000;
+pub const wxICON_MASK: u32 = (wxICON_EXCLAMATION|wxICON_HAND|wxICON_QUESTION|wxICON_INFORMATION|wxICON_NONE);
 pub const wxNOT_FOUND: u32 = (-1);
 pub const wxPRINT_QUALITY_HIGH: u32 = -1;
 pub const wxPRINT_QUALITY_MEDIUM: u32 = -2;
@@ -6113,8 +6113,8 @@ pub const wxLIST_FORMAT_RIGHT: u32 = 0 + 1;
 pub const wxLIST_FORMAT_CENTRE: u32 = 0 + 2;
 pub const wxLIST_FORMAT_CENTER: u32 = wxLIST_FORMAT_CENTRE;
 //  ENUM: @34
-pub const wxLIST_AUTOSIZE: i32 = -1;
-pub const wxLIST_AUTOSIZE_USEHEADER: i32 = -2;
+pub const wxLIST_AUTOSIZE: u32 = -1;
+pub const wxLIST_AUTOSIZE_USEHEADER: u32 = -2;
 //  ENUM: @35
 pub const wxLIST_RECT_BOUNDS: u32 = 0;
 pub const wxLIST_RECT_ICON: u32 = 0 + 1;
@@ -6307,11 +6307,11 @@ pub const wxTEXT_ATTR_UNDERLINE_SOLID: u32 = 0 + 1;
 pub const wxTEXT_ATTR_UNDERLINE_DOUBLE: u32 = 0 + 2;
 pub const wxTEXT_ATTR_UNDERLINE_SPECIAL: u32 = 0 + 3;
 //  ENUM: wxTextCtrlHitTestResult
-pub const wxTE_HT_UNKNOWN: i32 = -2;
-pub const wxTE_HT_BEFORE: i32 = -2 + 1;
-pub const wxTE_HT_ON_TEXT: i32 = -2 + 2;
-pub const wxTE_HT_BELOW: i32 = -2 + 3;
-pub const wxTE_HT_BEYOND: i32 = -2 + 4;
+pub const wxTE_HT_UNKNOWN: u32 = -2;
+pub const wxTE_HT_BEFORE: u32 = -2 + 1;
+pub const wxTE_HT_ON_TEXT: u32 = -2 + 2;
+pub const wxTE_HT_BELOW: u32 = -2 + 3;
+pub const wxTE_HT_BEYOND: u32 = -2 + 4;
 
 //  ENUM: ScaleMode
 pub const Scale_None: u32 = 0;
@@ -6410,42 +6410,42 @@ pub const wxTASKBAR_JUMP_LIST_DESTINATION: u32 = 0 + 2;
 // NODEF: wxSTRINGIZE_T
 // NODEF: __WXFUNCTION__
 
-pub const wxICON_SCREEN_DEPTH: i32 = (-1);
+pub const wxICON_SCREEN_DEPTH: u32 = (-1);
 
 //  ENUM: wxPenStyle
-pub const wxPENSTYLE_INVALID: i32 = -1;
-pub const wxPENSTYLE_SOLID: i32 = -1 + 1;
-pub const wxPENSTYLE_DOT: i32 = -1 + 2;
-pub const wxPENSTYLE_LONG_DASH: i32 = -1 + 3;
-pub const wxPENSTYLE_SHORT_DASH: i32 = -1 + 4;
-pub const wxPENSTYLE_DOT_DASH: i32 = -1 + 5;
-pub const wxPENSTYLE_USER_DASH: i32 = -1 + 6;
-pub const wxPENSTYLE_TRANSPARENT: i32 = -1 + 7;
-pub const wxPENSTYLE_STIPPLE_MASK_OPAQUE: i32 = -1 + 8;
-pub const wxPENSTYLE_STIPPLE_MASK: i32 = -1 + 9;
-pub const wxPENSTYLE_STIPPLE: i32 = -1 + 10;
-pub const wxPENSTYLE_BDIAGONAL_HATCH: i32 = -1 + 11;
-pub const wxPENSTYLE_CROSSDIAG_HATCH: i32 = -1 + 12;
-pub const wxPENSTYLE_FDIAGONAL_HATCH: i32 = -1 + 13;
-pub const wxPENSTYLE_CROSS_HATCH: i32 = -1 + 14;
-pub const wxPENSTYLE_HORIZONTAL_HATCH: i32 = -1 + 15;
-pub const wxPENSTYLE_VERTICAL_HATCH: i32 = -1 + 16;
-pub const wxPENSTYLE_FIRST_HATCH: i32 = -1 + 17;
-pub const wxPENSTYLE_LAST_HATCH: i32 = -1 + 18;
+pub const wxPENSTYLE_INVALID: u32 = -1;
+pub const wxPENSTYLE_SOLID: u32 = -1 + 1;
+pub const wxPENSTYLE_DOT: u32 = -1 + 2;
+pub const wxPENSTYLE_LONG_DASH: u32 = -1 + 3;
+pub const wxPENSTYLE_SHORT_DASH: u32 = -1 + 4;
+pub const wxPENSTYLE_DOT_DASH: u32 = -1 + 5;
+pub const wxPENSTYLE_USER_DASH: u32 = -1 + 6;
+pub const wxPENSTYLE_TRANSPARENT: u32 = -1 + 7;
+pub const wxPENSTYLE_STIPPLE_MASK_OPAQUE: u32 = -1 + 8;
+pub const wxPENSTYLE_STIPPLE_MASK: u32 = -1 + 9;
+pub const wxPENSTYLE_STIPPLE: u32 = -1 + 10;
+pub const wxPENSTYLE_BDIAGONAL_HATCH: u32 = -1 + 11;
+pub const wxPENSTYLE_CROSSDIAG_HATCH: u32 = -1 + 12;
+pub const wxPENSTYLE_FDIAGONAL_HATCH: u32 = -1 + 13;
+pub const wxPENSTYLE_CROSS_HATCH: u32 = -1 + 14;
+pub const wxPENSTYLE_HORIZONTAL_HATCH: u32 = -1 + 15;
+pub const wxPENSTYLE_VERTICAL_HATCH: u32 = -1 + 16;
+pub const wxPENSTYLE_FIRST_HATCH: u32 = -1 + 17;
+pub const wxPENSTYLE_LAST_HATCH: u32 = -1 + 18;
 //  ENUM: wxPenQuality
 pub const wxPEN_QUALITY_DEFAULT: u32 = 0;
 pub const wxPEN_QUALITY_LOW: u32 = 0 + 1;
 pub const wxPEN_QUALITY_HIGH: u32 = 0 + 2;
 //  ENUM: wxPenJoin
-pub const wxJOIN_INVALID: i32 = -1;
-pub const wxJOIN_BEVEL: i32 = 120;
-pub const wxJOIN_MITER: i32 = 120 + 1;
-pub const wxJOIN_ROUND: i32 = 120 + 2;
+pub const wxJOIN_INVALID: u32 = -1;
+pub const wxJOIN_BEVEL: u32 = 120;
+pub const wxJOIN_MITER: u32 = 120 + 1;
+pub const wxJOIN_ROUND: u32 = 120 + 2;
 //  ENUM: wxPenCap
-pub const wxCAP_INVALID: i32 = -1;
-pub const wxCAP_ROUND: i32 = 130;
-pub const wxCAP_PROJECTING: i32 = 130 + 1;
-pub const wxCAP_BUTT: i32 = 130 + 2;
+pub const wxCAP_INVALID: u32 = -1;
+pub const wxCAP_ROUND: u32 = 130;
+pub const wxCAP_PROJECTING: u32 = 130 + 1;
+pub const wxCAP_BUTT: u32 = 130 + 2;
 
 //  ENUM: wxRichTextStyleType
 pub const wxRICHTEXT_STYLE_ALL: u32 = 0;
@@ -6487,20 +6487,20 @@ pub const wxINTERPOLATION_FAST: u32 = 0 + 2;
 pub const wxINTERPOLATION_GOOD: u32 = 0 + 3;
 pub const wxINTERPOLATION_BEST: u32 = 0 + 4;
 //  ENUM: wxCompositionMode
-pub const wxCOMPOSITION_INVALID: i32 = -1;
-pub const wxCOMPOSITION_CLEAR: i32 = -1 + 1;
-pub const wxCOMPOSITION_SOURCE: i32 = -1 + 2;
-pub const wxCOMPOSITION_OVER: i32 = -1 + 3;
-pub const wxCOMPOSITION_IN: i32 = -1 + 4;
-pub const wxCOMPOSITION_OUT: i32 = -1 + 5;
-pub const wxCOMPOSITION_ATOP: i32 = -1 + 6;
-pub const wxCOMPOSITION_DEST: i32 = -1 + 7;
-pub const wxCOMPOSITION_DEST_OVER: i32 = -1 + 8;
-pub const wxCOMPOSITION_DEST_IN: i32 = -1 + 9;
-pub const wxCOMPOSITION_DEST_OUT: i32 = -1 + 10;
-pub const wxCOMPOSITION_DEST_ATOP: i32 = -1 + 11;
-pub const wxCOMPOSITION_XOR: i32 = -1 + 12;
-pub const wxCOMPOSITION_ADD: i32 = -1 + 13;
+pub const wxCOMPOSITION_INVALID: u32 = -1;
+pub const wxCOMPOSITION_CLEAR: u32 = -1 + 1;
+pub const wxCOMPOSITION_SOURCE: u32 = -1 + 2;
+pub const wxCOMPOSITION_OVER: u32 = -1 + 3;
+pub const wxCOMPOSITION_IN: u32 = -1 + 4;
+pub const wxCOMPOSITION_OUT: u32 = -1 + 5;
+pub const wxCOMPOSITION_ATOP: u32 = -1 + 6;
+pub const wxCOMPOSITION_DEST: u32 = -1 + 7;
+pub const wxCOMPOSITION_DEST_OVER: u32 = -1 + 8;
+pub const wxCOMPOSITION_DEST_IN: u32 = -1 + 9;
+pub const wxCOMPOSITION_DEST_OUT: u32 = -1 + 10;
+pub const wxCOMPOSITION_DEST_ATOP: u32 = -1 + 11;
+pub const wxCOMPOSITION_XOR: u32 = -1 + 12;
+pub const wxCOMPOSITION_ADD: u32 = -1 + 13;
 //  ENUM: wxGradientType
 pub const wxGRADIENT_NONE: u32 = 0;
 pub const wxGRADIENT_LINEAR: u32 = 0 + 1;
