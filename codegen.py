@@ -29,9 +29,19 @@ typedefs = [
 ]
 blocklist = [
     # complex defs
-    'wxNullProperty',
-    'wxPGChoicesEmptyData',
+    'wxBookCtrl',
     'wxDISABLE_DEBUG_SUPPORT',
+    'wxDISABLE_ASSERTS_IN_RELEASE_BUILD',
+    'wxInvalidDateTime',
+    'wxNullProperty',
+    'wxPG_COLOUR',
+    'wxPG_DEFAULT_IMAGE_SIZE',
+    'wxPG_INVALID_VALUE',
+    'wxPG_IT_CHILDREN',
+    'wxPG_LABEL',
+    'wxPG_NULL_BITMAP',
+    'wxPGChoicesEmptyData',
+    'wxTLS_TYPE',
     'wxTreeListEventHandler',
 
     # wxRichTextRange
@@ -50,8 +60,19 @@ blocklist = [
     'wxRICHTEXT_DEFAULT_TYPE_COLOUR',
     'wxRICHTEXT_DEFAULT_FOCUS_RECT_COLOUR',
 
-    # wxDefaultSize
-    'wxPG_DEFAULT_IMAGE_SIZE',
+    # min max defs
+    'wxINT8_MIN',
+    'wxINT8_MAX',
+    'wxUINT8_MAX',
+    'wxINT16_MIN',
+    'wxINT16_MAX',
+    'wxUINT16_MAX',
+    'wxINT32_MIN',
+    'wxINT32_MAX',
+    'wxUINT32_MAX',
+    'wxINT64_MIN',
+    'wxINT64_MAX',
+    'wxUINT64_MAX',
 ]
 def parse_define(e):
     name = e.findtext('name')

@@ -51,10 +51,10 @@ const wxFRAME_FLOAT_ON_PARENT: i32 = 0x0008;
 // NODEF: wxDECLARE_APP
 // NODEF: wxIMPLEMENT_APP
 //  SKIP: wxDISABLE_DEBUG_SUPPORT
-const wxPG_LABEL: i32 = (*wxPGProperty::sm_wxPG_LABEL);
+//  SKIP: wxPG_LABEL
 const wxPG_LABEL_STRING: &str = "@!";
 const wxPG_COLOUR_BLACK: i32 = (*wxBLACK);
-const wxPG_COLOUR: i32 = ((wxUint32)(R+(G<<8)+(B<<16)));
+//  SKIP: wxPG_COLOUR
 //  SKIP: wxPG_DEFAULT_IMAGE_SIZE
 const wxSTB_SIZEGRIP: i32 = 0x0010;
 const wxSTB_SHOW_TIPS: i32 = 0x0020;
@@ -2382,7 +2382,7 @@ const wxBK_BOTTOM: i32 = 0x0020;
 const wxBK_LEFT: i32 = 0x0040;
 const wxBK_RIGHT: i32 = 0x0080;
 const wxBK_ALIGN_MASK: i32 = (wxBK_TOP | wxBK_BOTTOM | wxBK_LEFT | wxBK_RIGHT);
-const wxBookCtrl: i32 = TheBestBookCtrlForTheCurrentPlatform;
+//  SKIP: wxBookCtrl
 const wxDEFAULT_FRAME_STYLE: i32 =                                (wxSYSTEM_MENU |          \
                                wxRESIZE_BORDER |        \
                                wxMINIMIZE_BOX |         \
@@ -2645,18 +2645,18 @@ const wxMINIMIZE_BOX: i32 = 0x0400;
 const wxMAXIMIZE_BOX: i32 = 0x0200;
 const wxTINY_CAPTION: i32 = 0x0080;
 const wxRESIZE_BORDER: i32 = 0x0040;
-const wxINT8_MIN: i32 = CHAR_MIN;
-const wxINT8_MAX: i32 = CHAR_MAX;
-const wxUINT8_MAX: i32 = UCHAR_MAX;
-const wxINT16_MIN: i32 = SHRT_MIN;
-const wxINT16_MAX: i32 = SHRT_MAX;
-const wxUINT16_MAX: i32 = USHRT_MAX;
-const wxINT32_MIN: i32 = INT_MIN-or-LONG_MIN;
-const wxINT32_MAX: i32 = INT_MAX-or-LONG_MAX;
-const wxUINT32_MAX: i32 = UINT_MAX-or-LONG_MAX;
-const wxINT64_MIN: i32 = LLONG_MIN;
-const wxINT64_MAX: i32 = LLONG_MAX;
-const wxUINT64_MAX: i32 = ULLONG_MAX;
+//  SKIP: wxINT8_MIN
+//  SKIP: wxINT8_MAX
+//  SKIP: wxUINT8_MAX
+//  SKIP: wxINT16_MIN
+//  SKIP: wxINT16_MAX
+//  SKIP: wxUINT16_MAX
+//  SKIP: wxINT32_MIN
+//  SKIP: wxINT32_MAX
+//  SKIP: wxUINT32_MAX
+//  SKIP: wxINT64_MIN
+//  SKIP: wxINT64_MAX
+//  SKIP: wxUINT64_MAX
 // NODEF: wxINT32_SWAP_ALWAYS
 // NODEF: wxUINT32_SWAP_ALWAYS
 // NODEF: wxINT16_SWAP_ALWAYS
@@ -2681,7 +2681,7 @@ const wxUINT64_MAX: i32 = ULLONG_MAX;
 // NODEF: wxDEPRECATED_BUT_USED_INTERNALLY_INLINE
 // NODEF: wxOVERRIDE
 // NODEF: wxSUPPRESS_GCC_PRIVATE_DTOR_WARNING
-const wxPG_IT_CHILDREN: i32 = ((A)<<16);
+//  SKIP: wxPG_IT_CHILDREN
 const wxDVC_DEFAULT_RENDERER_SIZE: i32 = 20;
 const wxDVC_DEFAULT_WIDTH: i32 = 80;
 const wxDVC_TOGGLE_DEFAULT_WIDTH: i32 = 30;
@@ -2700,8 +2700,8 @@ const wxLB_BOTTOM: i32 = wxBK_BOTTOM;
 const wxLB_LEFT: i32 = wxBK_LEFT;
 const wxLB_RIGHT: i32 = wxBK_RIGHT;
 const wxLB_ALIGN_MASK: i32 = wxBK_ALIGN_MASK;
-const wxPG_NULL_BITMAP: i32 = wxNullBitmap;
-const wxPG_INVALID_VALUE: i32 = INT_MAX;
+//  SKIP: wxPG_NULL_BITMAP
+//  SKIP: wxPG_INVALID_VALUE
 const wxPG_BASE_OCT: i32 = 8L;
 const wxPG_BASE_DEC: i32 = 10L;
 const wxPG_BASE_HEX: i32 = 16L;
@@ -2832,14 +2832,14 @@ const wxIMAGELIST_DRAW_FOCUSED: i32 = 0x0008;
 // NODEF: wxCHECK2_MSG
 // NODEF: wxCOMPILE_TIME_ASSERT
 // NODEF: wxCOMPILE_TIME_ASSERT2
-const wxDISABLE_ASSERTS_IN_RELEASE_BUILD: i32 = wxDisableAsserts();
+//  SKIP: wxDISABLE_ASSERTS_IN_RELEASE_BUILD
 // NODEF: wxFAIL
 // NODEF: wxFAIL_MSG
 // NODEF: wxFAIL_MSG_AT
 const wxGRID_AUTOSIZE: i32 = (-1);
 // NODEF: wxCHECK_VERSION
 // NODEF: wxCHECK_VERSION_FULL
-const wxInvalidDateTime: i32 = wxDefaultDateTime;
+//  SKIP: wxInvalidDateTime
 const wxTIMER_CONTINUOUS: bool = false;
 const wxTIMER_ONE_SHOT: bool = true;
 // NODEF: wxDISABLE_DEBUG_LOGGING_IN_RELEASE_BUILD
@@ -3067,7 +3067,7 @@ const wxHTML_INDENT_ALL: i32 = (wxHTML_INDENT_VERTICAL | wxHTML_INDENT_HORIZONTA
 const wxHTML_COND_ISANCHOR: i32 = 1;
 const wxHTML_COND_ISIMAGEMAP: i32 = 2;
 const wxHTML_COND_USER: i32 = 10000;
-const wxTLS_TYPE: i32 = compiler-dependent-implementation;
+//  SKIP: wxTLS_TYPE
 // NODEF: wxTLS_VALUE
 // NODEF: wxTLS_PTR
 const wxPG_PROP_PASSWORD: i32 = wxPG_PROP_CLASS_SPECIFIC_2;
