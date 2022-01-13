@@ -44,6 +44,7 @@ typedefs = [
 ]
 blocklist = [
     # complex defs
+    'Inv_Year',
     'wxBookCtrl',
     'wxDISABLE_DEBUG_SUPPORT',
     'wxDISABLE_ASSERTS_IN_RELEASE_BUILD',
@@ -88,6 +89,11 @@ blocklist = [
     'wxINT64_MIN',
     'wxINT64_MAX',
     'wxUINT64_MAX',
+
+    # broken initializer
+    'wxAUI_TBART_OVERFLOW_SIZE',
+    'wxFILE_EXISTS_NO_FOLLOW',
+    'wxPG_PROP_BEING_DELETED',
 ]
 def parse_define(e):
     name = e.findtext('name')
@@ -107,6 +113,8 @@ def parse_define(e):
             t = 'f32'
         elif '"' in v:
             t = '&str'
+        elif "'" in v:
+            t = 'char'
         v = re.sub(r'wxString\((".+")\)', r'\1', v)
         v = re.sub(r'wxS\((".+")\)', r'\1', v)
         v = re.sub(r'wxT\((".+")\)', r'\1', v)
@@ -121,7 +129,11 @@ def parse_enum(e):
     count = 0
     for v in e.findall('enumvalue'):
         vname = v.findtext('name')
+        if vname in generated:
+            continue
+        generated.add(vname)
         if vname in blocklist:
+            print('//  SKIP: %s' % (vname,))
             continue
         initializer = v.findtext('initializer')
         if initializer is None:
@@ -133,7 +145,10 @@ def parse_enum(e):
         else:
             current_initializer = initializer
             count = 1
-        print('const %s: i32 %s;' % (vname,initializer))
+        t = 'i32'
+        if "'" in initializer:
+            t = 'char'
+        print('const %s: %s %s;' % (vname, t, initializer))
 
 if __name__ == '__main__':
     main()

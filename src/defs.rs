@@ -68,10 +68,7 @@ const wxPG_PROP_USES_COMMON_VALUE: i32 = 0x00020000;
 const wxPG_PROP_AUTO_UNSPECIFIED: i32 = 0x00040000;
 const wxPG_PROP_CLASS_SPECIFIC_1: i32 = 0x00080000;
 const wxPG_PROP_CLASS_SPECIFIC_2: i32 = 0x00100000;
-const wxPG_PROP_BEING_DELETED: i32 = 0x00200000
-
-
-wxPG_PROP_CLASS_SPECIFIC_3          = 0x00400000;
+//  SKIP: wxPG_PROP_BEING_DELETED
 
 const wxHW_SCROLLBAR_NEVER: i32 = 0x0002;
 const wxHW_SCROLLBAR_AUTO: i32 = 0x0004;
@@ -4434,13 +4431,6 @@ const wxPG_PREFIX_NONE: i32 = 0L;
 const wxPG_PREFIX_0x: i32 = 1L;
 const wxPG_PREFIX_DOLLAR_SIGN: i32 = 2L;
 //  ENUM: wxPG_GETPROPERTYVALUES_FLAGS
-const wxPG_DONT_RECURSE: i32 = 0x00000000;
-const wxPG_KEEP_STRUCTURE: i32 = 0x00000010;
-const wxPG_RECURSE: i32 = 0x00000020;
-const wxPG_INC_ATTRIBUTES: i32 = 0x00000040;
-const wxPG_RECURSE_STARTS: i32 = 0x00000080;
-const wxPG_FORCE: i32 = 0x00000100;
-const wxPG_SORT_TOP_LEVEL_ONLY: i32 = 0x00000200;
 //  ENUM: wxPG_MISC_ARG_FLAGS
 const wxPG_FULL_VALUE: i32 = 0x00000001;
 const wxPG_REPORT_ERROR: i32 = 0x00000002;
@@ -4542,10 +4532,9 @@ const wxRE_NOTEOL: i32 = 64;
 
 //  ENUM: EntryType
 const Type_Unknown: i32 = 0;
-const Type_String: i32 = 0 + 1;
-const Type_Boolean: i32 = 0 + 2;
-const Type_Integer: i32 = 0 + 3;
-const Type_Float: i32 = 0 + 4;
+const Type_Boolean: i32 = 0 + 1;
+const Type_Integer: i32 = 0 + 2;
+const Type_Float: i32 = 0 + 3;
 
 //  ENUM: wxOwnerDrawnComboBoxPaintingFlags
 const wxODCB_PAINTING_CONTROL: i32 = 0x0001;
@@ -4592,27 +4581,6 @@ const wxIPC_UTF8TEXT: i32 =    17;
 const wxIPC_UTF32TEXT: i32 =   18;
 const wxIPC_UNICODETEXT: i32 = wxIPC_UTF16TEXT;
 const wxIPC_PRIVATE: i32 =     20;
-const wxIPC_INVALID: i32 =          0;
-const wxIPC_TEXT: i32 =             1;
-const wxIPC_BITMAP: i32 =           2;
-const wxIPC_METAFILE: i32 =         3;
-const wxIPC_SYLK: i32 =             4;
-const wxIPC_DIF: i32 =              5;
-const wxIPC_TIFF: i32 =             6;
-const wxIPC_OEMTEXT: i32 =          7;
-const wxIPC_DIB: i32 =              8;
-const wxIPC_PALETTE: i32 =          9;
-const wxIPC_PENDATA: i32 =          10;
-const wxIPC_RIFF: i32 =             11;
-const wxIPC_WAVE: i32 =             12;
-const wxIPC_UTF16TEXT: i32 =        13;
-const wxIPC_ENHMETAFILE: i32 =      14;
-const wxIPC_FILENAME: i32 =         15;
-const wxIPC_LOCALE: i32 =           16;
-const wxIPC_UTF8TEXT: i32 =         17;
-const wxIPC_UTF32TEXT: i32 =        18;
-const wxIPC_UNICODETEXT: i32 =        18 + 1;
-const wxIPC_PRIVATE: i32 =          20;
 
 const wxXML_NO_INDENTATION: i32 = (-1);
 //  ENUM: wxXmlNodeType
@@ -4634,48 +4602,6 @@ const wxXMLDOC_NONE: i32 = 0;
 const wxXMLDOC_KEEP_WHITESPACE_NODES: i32 = 0 + 1;
 
 //  ENUM: wxIPCFormat
-const wxIPC_INVALID: i32 =     0;
-const wxIPC_TEXT: i32 =        1;
-const wxIPC_BITMAP: i32 =      2;
-const wxIPC_METAFILE: i32 =    3;
-const wxIPC_SYLK: i32 =        4;
-const wxIPC_DIF: i32 =         5;
-const wxIPC_TIFF: i32 =        6;
-const wxIPC_OEMTEXT: i32 =     7;
-const wxIPC_DIB: i32 =         8;
-const wxIPC_PALETTE: i32 =     9;
-const wxIPC_PENDATA: i32 =     10;
-const wxIPC_RIFF: i32 =        11;
-const wxIPC_WAVE: i32 =        12;
-const wxIPC_UTF16TEXT: i32 =   13;
-const wxIPC_ENHMETAFILE: i32 = 14;
-const wxIPC_FILENAME: i32 =    15;
-const wxIPC_LOCALE: i32 =      16;
-const wxIPC_UTF8TEXT: i32 =    17;
-const wxIPC_UTF32TEXT: i32 =   18;
-const wxIPC_UNICODETEXT: i32 = wxIPC_UTF16TEXT;
-const wxIPC_PRIVATE: i32 =     20;
-const wxIPC_INVALID: i32 =          0;
-const wxIPC_TEXT: i32 =             1;
-const wxIPC_BITMAP: i32 =           2;
-const wxIPC_METAFILE: i32 =         3;
-const wxIPC_SYLK: i32 =             4;
-const wxIPC_DIF: i32 =              5;
-const wxIPC_TIFF: i32 =             6;
-const wxIPC_OEMTEXT: i32 =          7;
-const wxIPC_DIB: i32 =              8;
-const wxIPC_PALETTE: i32 =          9;
-const wxIPC_PENDATA: i32 =          10;
-const wxIPC_RIFF: i32 =             11;
-const wxIPC_WAVE: i32 =             12;
-const wxIPC_UTF16TEXT: i32 =        13;
-const wxIPC_ENHMETAFILE: i32 =      14;
-const wxIPC_FILENAME: i32 =         15;
-const wxIPC_LOCALE: i32 =           16;
-const wxIPC_UTF8TEXT: i32 =         17;
-const wxIPC_UTF32TEXT: i32 =        18;
-const wxIPC_UNICODETEXT: i32 =        18 + 1;
-const wxIPC_PRIVATE: i32 =          20;
 
 //  ENUM: @9
 const ShowBelow: i32 = 0x0000;
@@ -4861,10 +4787,7 @@ const wxAUI_TB_DEFAULT_STYLE: i32 = 0;
 //  ENUM: wxAuiToolBarArtSetting
 const wxAUI_TBART_SEPARATOR_SIZE: i32 = 0;
 const wxAUI_TBART_GRIPPER_SIZE: i32 = 1;
-const wxAUI_TBART_OVERFLOW_SIZE: i32 = 2
-
-    
-    wxAUI_TBART_DROPDOWN_SIZE = 3;
+//  SKIP: wxAUI_TBART_OVERFLOW_SIZE
 //  ENUM: wxAuiToolBarToolTextOrientation
 const wxAUI_TBTOOL_TEXT_LEFT: i32 = 0;
 const wxAUI_TBTOOL_TEXT_RIGHT: i32 = 1;
@@ -4886,48 +4809,9 @@ const wxCHOICE_HEIGHT: i32 = 200;
 const wxCHOICEDLG_STYLE: i32 = (wxDEFAULT_DIALOG_STYLE | wxOK | wxCANCEL | wxCENTRE | wxRESIZE_BORDER);
 
 //  ENUM: wxAuiToolBarStyle
-const wxAUI_TB_TEXT: i32 = 1 << 0;
-const wxAUI_TB_NO_TOOLTIPS: i32 = 1 << 1;
-const wxAUI_TB_NO_AUTORESIZE: i32 = 1 << 2;
-const wxAUI_TB_GRIPPER: i32 = 1 << 3;
-const wxAUI_TB_OVERFLOW: i32 = 1 << 4;
-const wxAUI_TB_VERTICAL: i32 = 1 << 5;
-const wxAUI_TB_HORZ_LAYOUT: i32 = 1 << 6;
-const wxAUI_TB_HORIZONTAL: i32 = 1 << 7;
-const wxAUI_TB_PLAIN_BACKGROUND: i32 = 1 << 8;
-const wxAUI_TB_HORZ_TEXT: i32 = (wxAUI_TB_HORZ_LAYOUT | wxAUI_TB_TEXT);
-const wxAUI_ORIENTATION_MASK: i32 = (wxAUI_TB_VERTICAL | wxAUI_TB_HORIZONTAL);
-const wxAUI_TB_DEFAULT_STYLE: i32 = 0;
 //  ENUM: wxAuiToolBarArtSetting
-const wxAUI_TBART_SEPARATOR_SIZE: i32 = 0;
-const wxAUI_TBART_GRIPPER_SIZE: i32 = 1;
-const wxAUI_TBART_OVERFLOW_SIZE: i32 = 2
-
-    
-    wxAUI_TBART_DROPDOWN_SIZE = 3;
 //  ENUM: wxAuiToolBarToolTextOrientation
-const wxAUI_TBTOOL_TEXT_LEFT: i32 = 0;
-const wxAUI_TBTOOL_TEXT_RIGHT: i32 = 1;
-const wxAUI_TBTOOL_TEXT_TOP: i32 = 2;
-const wxAUI_TBTOOL_TEXT_BOTTOM: i32 = 3;
 //  ENUM: wxAuiPaneDockArtSetting
-const wxAUI_DOCKART_SASH_SIZE: i32 = 0;
-const wxAUI_DOCKART_CAPTION_SIZE: i32 = 1;
-const wxAUI_DOCKART_GRIPPER_SIZE: i32 = 2;
-const wxAUI_DOCKART_PANE_BORDER_SIZE: i32 = 3;
-const wxAUI_DOCKART_PANE_BUTTON_SIZE: i32 = 4;
-const wxAUI_DOCKART_BACKGROUND_COLOUR: i32 = 5;
-const wxAUI_DOCKART_SASH_COLOUR: i32 = 6;
-const wxAUI_DOCKART_ACTIVE_CAPTION_COLOUR: i32 = 7;
-const wxAUI_DOCKART_ACTIVE_CAPTION_GRADIENT_COLOUR: i32 = 8;
-const wxAUI_DOCKART_INACTIVE_CAPTION_COLOUR: i32 = 9;
-const wxAUI_DOCKART_INACTIVE_CAPTION_GRADIENT_COLOUR: i32 = 10;
-const wxAUI_DOCKART_ACTIVE_CAPTION_TEXT_COLOUR: i32 = 11;
-const wxAUI_DOCKART_INACTIVE_CAPTION_TEXT_COLOUR: i32 = 12;
-const wxAUI_DOCKART_BORDER_COLOUR: i32 = 13;
-const wxAUI_DOCKART_GRIPPER_COLOUR: i32 = 14;
-const wxAUI_DOCKART_CAPTION_FONT: i32 = 15;
-const wxAUI_DOCKART_GRADIENT_TYPE: i32 = 16;
 
 //  ENUM: wxRibbonArtSetting
 const wxRIBBON_ART_TAB_SEPARATION_SIZE: i32 = 0;
@@ -5965,7 +5849,6 @@ const wxSTOCK_WITHOUT_ELLIPSIS: i32 = 4;
 const wxSTOCK_FOR_BUTTON: i32 = wxSTOCK_WITHOUT_ELLIPSIS | wxSTOCK_WITH_MNEMONIC;
 
 //  ENUM: @48
-const wxTP_DEFAULT: i32 = 0;
 
 const wxRICHTEXT_FIXED_WIDTH: i32 = 0x01;
 const wxRICHTEXT_FIXED_HEIGHT: i32 = 0x02;
@@ -6149,8 +6032,7 @@ const wxFILE_EXISTS_SYMLINK: i32 = 0x1004;
 const wxFILE_EXISTS_DEVICE: i32 = 0x0008;
 const wxFILE_EXISTS_FIFO: i32 = 0x0016;
 const wxFILE_EXISTS_SOCKET: i32 = 0x0032;
-const wxFILE_EXISTS_NO_FOLLOW: i32 = 0x1000
-    wxFILE_EXISTS_ANY       = 0x1FFF;
+//  SKIP: wxFILE_EXISTS_NO_FOLLOW
 
 //  ENUM: wxTaskBarIconType
 const wxTBI_DOCK: i32 = 0;
@@ -6171,9 +6053,6 @@ const wxMSGQUEUE_TIMEOUT: i32 = 0 + 1;
 const wxMSGQUEUE_MISC_ERROR: i32 = 0 + 2;
 
 //  ENUM: BufMode
-const read: i32 = 0;
-const write: i32 = 0 + 1;
-const read_write: i32 = 0 + 2;
 
 //  ENUM: Style
 const Style_None: i32 = 0x00;
@@ -6646,9 +6525,6 @@ const DontUseCellColours: i32 = DontUseCellFgCol |
                               DontUseCellBgCol;
 
 //  ENUM: wxMessageQueueError
-const wxMSGQUEUE_NO_ERROR: i32 = 0;
-const wxMSGQUEUE_TIMEOUT: i32 = 0 + 1;
-const wxMSGQUEUE_MISC_ERROR: i32 = 0 + 2;
 
 // NODEF: wxFORCE_LINK_THIS_MODULE
 // NODEF: wxFORCE_LINK_MODULE
@@ -6772,10 +6648,6 @@ const wxRICHTEXT_FORMAT_INDENTS_SPACING: i32 = 0x0010;
 
 
 //  ENUM: wxNumValidatorStyle
-const wxNUM_VAL_DEFAULT: i32 = 0;
-const wxNUM_VAL_THOUSANDS_SEPARATOR: i32 = 1;
-const wxNUM_VAL_ZERO_AS_BLANK: i32 = 2;
-const wxNUM_VAL_NO_TRAILING_ZEROES: i32 = 2 + 1;
 
 const wxGA_HORIZONTAL: i32 = wxHORIZONTAL;
 const wxGA_VERTICAL: i32 = wxVERTICAL;
@@ -6868,14 +6740,14 @@ const wxBU_NOTEXT: i32 = 0x0002;
 const wxBU_AUTODRAW: i32 = 0x0004;
 
 //  ENUM: wxTarType
-const wxTAR_REGTYPE: i32 = '0';
-const wxTAR_LNKTYPE: i32 = '1';
-const wxTAR_SYMTYPE: i32 = '2';
-const wxTAR_CHRTYPE: i32 = '3';
-const wxTAR_BLKTYPE: i32 = '4';
-const wxTAR_DIRTYPE: i32 = '5';
-const wxTAR_FIFOTYPE: i32 = '6';
-const wxTAR_CONTTYPE: i32 = '7';
+const wxTAR_REGTYPE: char = '0';
+const wxTAR_LNKTYPE: char = '1';
+const wxTAR_SYMTYPE: char = '2';
+const wxTAR_CHRTYPE: char = '3';
+const wxTAR_BLKTYPE: char = '4';
+const wxTAR_DIRTYPE: char = '5';
+const wxTAR_FIFOTYPE: char = '6';
+const wxTAR_CONTTYPE: char = '7';
 //  ENUM: wxTarFormat
 const wxTAR_USTAR: i32 = 0;
 const wxTAR_PAX: i32 = 0 + 1;
@@ -6886,7 +6758,6 @@ const wxHELP_SEARCH_INDEX: i32 = 0;
 const wxHELP_SEARCH_ALL: i32 = 0 + 1;
 
 //  ENUM: @3
-const NO_IMAGE: i32 = -1;
 
 //  ENUM: @0
 const WX_ANY_VALUE_BUFFER_SIZE: i32 = 16;
@@ -7002,7 +6873,7 @@ const Fri: i32 = 0 + 5;
 const Sat: i32 = 0 + 6;
 const Inv_WeekDay: i32 = 0 + 7;
 //  ENUM: Year
-const Inv_Year: i32 = SHRT_MIN;
+//  SKIP: Inv_Year
 //  ENUM: NameFlags
 const Name_Full: i32 = 0x01;
 const Name_Abbr: i32 = 0x02;
