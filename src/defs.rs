@@ -6011,7 +6011,7 @@ const wxPATH_NORM_CASE: i32 = 0x0008;
 const wxPATH_NORM_ABSOLUTE: i32 = 0x0010;
 const wxPATH_NORM_LONG: i32 =     0x0020;
 const wxPATH_NORM_SHORTCUT: i32 = 0x0040;
-const wxPATH_NORM_ALL: i32 = 0x00ff & ~wxPATH_NORM_CASE;
+const wxPATH_NORM_ALL: i32 = 0x00ff & !wxPATH_NORM_CASE;
 //  ENUM: @20
 const wxPATH_RMDIR_FULL: i32 = 1;
 const wxPATH_RMDIR_RECURSIVE: i32 = 2;

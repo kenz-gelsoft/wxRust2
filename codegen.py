@@ -153,6 +153,7 @@ def parse_enum(e):
         else:
             current_initializer = initializer
             count = 1
+        initializer = initializer.replace('~', '!') # special replacement for wxPATH_NORM_ALL
         t = 'i32'
         if "'" in initializer:
             t = 'char'

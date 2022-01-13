@@ -1,6 +1,6 @@
 #![allow(non_camel_case_types)]
 
-pub fn wxPG_IT_CHILDREN(A: i32) -> i32 {
+pub const fn wxPG_IT_CHILDREN(A: i32) -> i32 {
     (A) << 16
 }
 
