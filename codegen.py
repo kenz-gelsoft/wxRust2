@@ -116,7 +116,7 @@ def parse_define(e):
         v = ''.join(initializer.itertext())
         v = ''.join(map(lambda s: s.lstrip(), v.split('\\\n')))
         t = 'u32'
-        if isi32type(name):
+        if name in i32types:
             t = 'i32'
         if v == 'true' or v == 'false':
             t = 'bool'
@@ -134,7 +134,7 @@ def parse_define(e):
     else:
         print('// NODEF: %s' % (name,))
 
-i32_prefixes = [
+i32types = [
     '@26',
     '@15',
     'wxBitness',
@@ -181,11 +181,6 @@ i32_prefixes = [
     'wxPenCap',
     'wxCompositionMode',
 ]
-def isi32type(name):
-    for prefix in i32_prefixes:
-        if name.startswith(prefix):
-            return True
-    return False
 
 def parse_enum(e):
     name = e.findtext('name')
@@ -212,7 +207,7 @@ def parse_enum(e):
             count = 1
         initializer = initializer.replace('~', '!') # special replacement for wxPATH_NORM_ALL
         t = 'u32'
-        if isi32type(name):
+        if name in i32types:
             t = 'i32'
         if "'" in initializer:
             t = 'char'
