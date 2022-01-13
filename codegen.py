@@ -3,6 +3,7 @@ import re
 import xml.etree.ElementTree as ET
 
 # placde wxWidgets doxygen xml files in wxml/ dir and run this.
+generated = set()
 def main():
     for file in xml_files_in('wxml/'):
         tree = ET.parse(file)
@@ -53,6 +54,9 @@ blocklist = [
 ]
 def parse_define(e):
     name = e.findtext('name')
+    if name in generated:
+        return
+    generated.add(name)
     if name in blocklist or name in typedefs:
         print('//  SKIP: %s' % (name,))
         return
