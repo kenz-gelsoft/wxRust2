@@ -2842,8 +2842,8 @@ const wxGRID_AUTOSIZE: i32 = (-1);
 // NODEF: wxCHECK_VERSION
 // NODEF: wxCHECK_VERSION_FULL
 const wxInvalidDateTime: i32 = wxDefaultDateTime;
-const wxTIMER_CONTINUOUS: i32 = false;
-const wxTIMER_ONE_SHOT: i32 = true;
+const wxTIMER_CONTINUOUS: bool = false;
+const wxTIMER_ONE_SHOT: bool = true;
 // NODEF: wxDISABLE_DEBUG_LOGGING_IN_RELEASE_BUILD
 const wxCP_DEFAULT_STYLE: i32 = (wxTAB_TRAVERSAL | wxNO_BORDER);
 const wxCP_NO_TLW_RESIZE: i32 = (0x0002);

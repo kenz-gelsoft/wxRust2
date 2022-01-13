@@ -40,7 +40,9 @@ def parse_define(e):
     if initializer is not None:
         v = ''.join(initializer.itertext())
         t = 'i32'
-        if '"' in v:
+        if v == 'true' or v == 'false':
+            t = 'bool'
+        elif '"' in v:
             t = '&str'
         v = re.sub(r'wxString\((".+")\)', r'\1', v)
         v = re.sub(r'wxS\((".+")\)', r'\1', v)
