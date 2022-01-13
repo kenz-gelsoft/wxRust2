@@ -1,4 +1,5 @@
 import os
+import re
 import xml.etree.ElementTree as ET
 
 # placde wxWidgets doxygen xml files in wxml/ dir and run this.
@@ -35,10 +36,16 @@ def parse_define(e):
     name = e.findtext('name')
     if name in blocklist or name in typedefs:
         return
-    init = e.find('initializer')
-    if init is not None:
-        init = ''.join(init.itertext())
-        print('const %s: i32 = %s;' % (name, init))
+    initializer = e.find('initializer')
+    if initializer is not None:
+        v = ''.join(initializer.itertext())
+        t = 'i32'
+        if '"' in v:
+            t = '&str'
+        v = re.sub(r'wxString\((".+")\)', r'\1', v)
+        v = re.sub(r'wxS\((".+")\)', r'\1', v)
+        v = re.sub(r'wxT\((".+")\)', r'\1', v)
+        print('const %s: %s = %s;' % (name, t, v))
     else:
         print('// NODEF: %s' % (name,))
 
