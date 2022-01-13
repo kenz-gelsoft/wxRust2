@@ -31,10 +31,30 @@ blocklist = [
     'wxPGChoicesEmptyData',
     'wxDISABLE_DEBUG_SUPPORT',
     'wxTreeListEventHandler',
+
+    # wxRichTextRange
+    'wxRICHTEXT_ALL',
+    'wxRICHTEXT_NONE',
+    'wxRICHTEXT_NO_SELECTION',
+
+    # wxSize
+    'wxRICHTEXT_DEFAULT_OVERALL_SIZE',
+    'wxRICHTEXT_DEFAULT_IMAGE_SIZE',
+
+    # wxColour
+    'wxRICHTEXT_DEFAULT_UNFOCUSSED_BACKGROUND',
+    'wxRICHTEXT_DEFAULT_FOCUSSED_BACKGROUND',
+    'wxRICHTEXT_DEFAULT_UNSELECTED_BACKGROUND',
+    'wxRICHTEXT_DEFAULT_TYPE_COLOUR',
+    'wxRICHTEXT_DEFAULT_FOCUS_RECT_COLOUR',
+
+    # wxDefaultSize
+    'wxPG_DEFAULT_IMAGE_SIZE',
 ]
 def parse_define(e):
     name = e.findtext('name')
     if name in blocklist or name in typedefs:
+        print('//  SKIP: %s' % (name,))
         return
     initializer = e.find('initializer')
     if initializer is not None:
