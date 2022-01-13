@@ -38,8 +38,6 @@ const wxPG_PROP_PARENTAL_FLAGS: i32 =     ((wxPGPropertyFlags)(wxPG_PROP_AGGREGA
                          wxPG_PROP_CATEGORY | \
                          wxPG_PROP_MISC_PARENT));
 const wxPG_STRING_STORED_FLAGS: i32 =     (wxPG_PROP_DISABLED|wxPG_PROP_HIDDEN|wxPG_PROP_NOEDITOR|wxPG_PROP_COLLAPSED);
-const wxNullProperty: i32 = ((wxPGProperty*)NULL);
-const wxPGChoicesEmptyData: i32 = ((wxPGChoicesData*)NULL);
 const wxHW_SCROLLBAR_NEVER: i32 = 0x0002;
 const wxHW_SCROLLBAR_AUTO: i32 = 0x0004;
 const wxHW_NO_SELECTION: i32 = 0x0008;
@@ -49,8 +47,6 @@ const wxFRAME_TOOL_WINDOW: i32 = 0x0004;
 const wxFRAME_FLOAT_ON_PARENT: i32 = 0x0008;
 const wxDECLARE_APP: i32 = (none);
 const wxIMPLEMENT_APP: i32 = (none);
-const wxDISABLE_DEBUG_SUPPORT: i32 =     wxDISABLE_ASSERTS_IN_RELEASE_BUILD(); \
-    wxDISABLE_DEBUG_LOGGING_IN_RELEASE_BUILD();
 const wxPG_LABEL: i32 = (*wxPGProperty::sm_wxPG_LABEL);
 const wxPG_LABEL_STRING: i32 = wxS("@!");
 const wxPG_COLOUR_BLACK: i32 = (*wxBLACK);
@@ -2859,7 +2855,6 @@ const wxHLB_DEFAULT_STYLE: i32 = wxBORDER_SUNKEN;
 const wxHLB_MULTIPLE: i32 = wxLB_MULTIPLE;
 const wxPG_DEFAULT_STYLE: i32 = (0);
 const wxPGMAN_DEFAULT_STYLE: i32 = (0);
-const wxPGVFBFlags: i32 = unsigned char;
 const wxCHECK_GCC_VERSION: i32 = (none);
 const wxCHECK_SUNCC_VERSION: i32 = (none);
 const wxCHECK_VISUALC_VERSION: i32 = (none);
@@ -3118,4 +3113,3 @@ const wxDD_NEW_DIR_BUTTON: i32 = 0;
 const wxDD_DEFAULT_STYLE: i32 = (wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER);
 const wxPB_USE_TEXTCTRL: i32 = 0x0002;
 const wxPB_SMALL: i32 = 0x8000;
-const wxTreeListEventHandler: i32 =     wxEVENT_HANDLER_CAST(wxTreeListEventFunction, func);

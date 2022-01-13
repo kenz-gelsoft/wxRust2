@@ -21,8 +21,20 @@ def defines_in(root):
     for memberdef in memberdefs:
         yield memberdef
 
+typedefs = [
+    'wxPGVFBFlags',
+]
+blocklist = [
+    # complex defs
+    'wxNullProperty',
+    'wxPGChoicesEmptyData',
+    'wxDISABLE_DEBUG_SUPPORT',
+    'wxTreeListEventHandler',
+]
 def parse_define(e):
     name = e.findtext('name')
+    if name in blocklist or name in typedefs:
+        return
     init = e.find('initializer')
     if init is not None:
         init = ''.join(init.itertext())
