@@ -5,6 +5,8 @@ import xml.etree.ElementTree as ET
 # placde wxWidgets doxygen xml files in wxml/ dir and run this.
 generated = set()
 def main():
+    print('#![allow(dead_code)]')
+    print('#![allow(non_upper_case_globals)]')
     print('#![allow(unused_parens)]')
     print()
     print('use crate::manual::*;')
@@ -113,7 +115,9 @@ def parse_define(e):
     if initializer is not None:
         v = ''.join(initializer.itertext())
         v = ''.join(map(lambda s: s.lstrip(), v.split('\\\n')))
-        t = 'i32'
+        t = 'u32'
+        if isi32type(name):
+            t = 'i32'
         if v == 'true' or v == 'false':
             t = 'bool'
         elif '.' in v:
@@ -126,9 +130,17 @@ def parse_define(e):
         v = re.sub(r'wxString\((".+")\)', r'\1', v)
         v = re.sub(r'wxS\((".+")\)', r'\1', v)
         v = re.sub(r'wxT\((".+")\)', r'\1', v)
-        print('const %s: %s = %s;' % (name, t, v))
+        print('pub const %s: %s = %s;' % (name, t, v))
     else:
         print('// NODEF: %s' % (name,))
+
+i32_prefixes = [
+]
+def isi32type(name):
+    for prefix in i32_prefixes:
+        if name.startswith(prefix):
+            return True
+    return False
 
 def parse_enum(e):
     name = e.findtext('name')
@@ -154,10 +166,12 @@ def parse_enum(e):
             current_initializer = initializer
             count = 1
         initializer = initializer.replace('~', '!') # special replacement for wxPATH_NORM_ALL
-        t = 'i32'
+        t = 'u32'
+        if isi32type(vname):
+            t = 'i32'
         if "'" in initializer:
             t = 'char'
-        print('const %s: %s %s;' % (vname, t, initializer))
+        print('pub const %s: %s %s;' % (vname, t, initializer))
 
 if __name__ == '__main__':
     main()
