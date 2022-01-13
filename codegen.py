@@ -9,8 +9,18 @@ def main():
     for file in xml_files_in('wxml/'):
         tree = ET.parse(file)
         root = tree.getroot()
+        
+        empty = True
         for define in defines_in(root):
+            empty = False
             parse_define(define)
+
+        for enum in enums_in(root):
+            empty = False
+            parse_enum(enum)
+        
+        if not empty:
+            print('')
 
 def xml_files_in(dir):
     for path, _, files in os.walk(dir):
@@ -21,6 +31,11 @@ def xml_files_in(dir):
 
 def defines_in(root):
     memberdefs = root.findall(".//memberdef[@kind='define']")
+    for memberdef in memberdefs:
+        yield memberdef
+
+def enums_in(root):
+    memberdefs = root.findall(".//memberdef[@kind='enum']")
     for memberdef in memberdefs:
         yield memberdef
 
@@ -98,6 +113,27 @@ def parse_define(e):
         print('const %s: %s = %s;' % (name, t, v))
     else:
         print('// NODEF: %s' % (name,))
+
+def parse_enum(e):
+    name = e.findtext('name')
+    print('//  ENUM: %s' % (name,))
+    current_initializer = '= 0'
+    count = 0
+    for v in e.findall('enumvalue'):
+        vname = v.findtext('name')
+        if vname in blocklist:
+            continue
+        initializer = v.findtext('initializer')
+        if initializer is None:
+            if count:
+                initializer = '%s + %s' % (current_initializer, count)
+            else:
+                initializer = current_initializer
+            count += 1
+        else:
+            current_initializer = initializer
+            count = 1
+        print('const %s: i32 %s;' % (vname,initializer))
 
 if __name__ == '__main__':
     main()
