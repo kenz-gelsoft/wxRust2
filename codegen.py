@@ -5,6 +5,7 @@ import xml.etree.ElementTree as ET
 # placde wxWidgets doxygen xml files in wxml/ dir and run this.
 generated = set()
 def main():
+    print('#![allow(unused_parens)]')
     for file in xml_files_in('wxml/'):
         tree = ET.parse(file)
         root = tree.getroot()

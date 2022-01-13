@@ -1,3 +1,4 @@
+#![allow(unused_parens)]
 const wxNB_DEFAULT: i32 = wxBK_DEFAULT;
 const wxNB_TOP: i32 = wxBK_TOP;
 const wxNB_BOTTOM: i32 = wxBK_BOTTOM;
