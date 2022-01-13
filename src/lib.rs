@@ -6,6 +6,8 @@ use std::ptr;
 mod macros;
 use macros::wx_class;
 
+mod defs;
+
 // any pointer type used on ffi boundary.
 // we chose this type as it's handy in cxx.
 type UnsafeAnyPtr = *const c_char;
