@@ -135,6 +135,51 @@ def parse_define(e):
         print('// NODEF: %s' % (name,))
 
 i32_prefixes = [
+    '@26',
+    '@15',
+    'wxBitness',
+    'wxArchitecture',
+    'wxEndianness',
+    'wxMouseButton',
+    'wxID_RICHTEXT_PROPERTIES1',
+    'wxID_RICHTEXT_PROPERTIES2',
+    'wxID_RICHTEXT_PROPERTIES3',
+    'wxNOT_FOUND',
+    'wxPRINT_QUALITY_HIGH',
+    'wxPRINT_QUALITY_MEDIUM',
+    'wxPRINT_QUALITY_LOW',
+    'wxPRINT_QUALITY_DRAFT',
+    'wxTE_CENTRE',
+    'wxTE_CENTER',
+    'wxTE_RIGHT',
+    'wxAlignment',
+    'wxID_HTML_HELPFRAME',
+    'wxStandardID',
+    'wxItemKind',
+    'wxDVR_DEFAULT_ALIGNMENT',
+    'wxFontFamily',
+    'wxFontStyle',
+    'wxBrushStyle',
+    '@38',
+    'wxXML_NO_INDENTATION',
+    'wxDirTraverseResult',
+    'wxBITMAP_SCREEN_DEPTH',
+    '@23',
+    '@57',
+    'wxGRID_AUTOSIZE',
+    'wxBOM',
+    'wxStringTokenizerMode',
+    'wxFontSymbolicSize',
+    'wxFontEncoding',
+    'wxTextAttrBorderWidth',
+    'wxLIST_GETSUBITEMRECT_WHOLEITEM',
+    '@34',
+    'wxTextCtrlHitTestResult',
+    'wxICON_SCREEN_DEPTH',
+    'wxPenStyle',
+    'wxPenJoin',
+    'wxPenCap',
+    'wxCompositionMode',
 ]
 def isi32type(name):
     for prefix in i32_prefixes:
@@ -167,7 +212,7 @@ def parse_enum(e):
             count = 1
         initializer = initializer.replace('~', '!') # special replacement for wxPATH_NORM_ALL
         t = 'u32'
-        if isi32type(vname):
+        if isi32type(name):
             t = 'i32'
         if "'" in initializer:
             t = 'char'

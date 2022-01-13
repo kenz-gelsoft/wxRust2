@@ -9,38 +9,38 @@ pub const fn wxPG_IT_CHILDREN(A: u32) -> u32 {
 
 // wxDeprecatedGUIConstants
 /*  Text font families */
-pub const wxDEFAULT: u32 = 70;
-pub const wxDECORATIVE: u32 = 71;
-pub const wxROMAN: u32 = 72;
-pub const wxSCRIPT: u32 = 73;
-pub const wxSWISS: u32 = 74;
-pub const wxMODERN: u32 = 75;
-pub const wxTELETYPE: u32 = 76;
+pub const wxDEFAULT: i32 = 70;
+pub const wxDECORATIVE: i32 = 71;
+pub const wxROMAN: i32 = 72;
+pub const wxSCRIPT: i32 = 73;
+pub const wxSWISS: i32 = 74;
+pub const wxMODERN: i32 = 75;
+pub const wxTELETYPE: i32 = 76;
 
 /*  Proportional or Fixed width fonts (not yet used) */
-pub const wxVARIABLE: u32 = 80;
-pub const wxFIXED: u32 = 81;
+pub const wxVARIABLE: i32 = 80;
+pub const wxFIXED: i32 = 81;
 
-pub const wxNORMAL: u32 = 90;
-pub const wxLIGHT: u32 = 91;
-pub const wxBOLD: u32 = 92;
+pub const wxNORMAL: i32 = 90;
+pub const wxLIGHT: i32 = 91;
+pub const wxBOLD: i32 = 92;
 /*  Also wxNORMAL for normal (non-italic text) */
-pub const wxITALIC: u32 = 93;
-pub const wxSLANT: u32 = 94;
+pub const wxITALIC: i32 = 93;
+pub const wxSLANT: i32 = 94;
 
 /*  Pen styles */
-pub const wxSOLID: u32 = 100;
-pub const wxDOT: u32 = 101;
-pub const wxLONG_DASH: u32 = 102;
-pub const wxSHORT_DASH: u32 = 103;
-pub const wxDOT_DASH: u32 = 104;
-pub const wxUSER_DASH: u32 = 105;
+pub const wxSOLID: i32 = 100;
+pub const wxDOT: i32 = 101;
+pub const wxLONG_DASH: i32 = 102;
+pub const wxSHORT_DASH: i32 = 103;
+pub const wxDOT_DASH: i32 = 104;
+pub const wxUSER_DASH: i32 = 105;
 
-pub const wxTRANSPARENT: u32 = 106;
+pub const wxTRANSPARENT: i32 = 106;
 
 /*  Brush & Pen Stippling. Note that a stippled pen cannot be dashed!! */
 /*  Note also that stippling a Pen IS meaningful, because a Line is */
-pub const wxSTIPPLE_MASK_OPAQUE: u32 = 107;
-pub const wxSTIPPLE_MASK: u32 = 108;
+pub const wxSTIPPLE_MASK_OPAQUE: i32 = 107;
+pub const wxSTIPPLE_MASK: i32 = 108;
 /*  drawn with a Pen, and without any Brush -- and it can be stippled. */
-pub const wxSTIPPLE: u32 = 110;
+pub const wxSTIPPLE: i32 = 110;
