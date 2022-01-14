@@ -46,31 +46,31 @@ pub const wxPG_ATTR_SPINCTRL_MOTION: &str = "MotionSpin";
 pub const wxPG_ATTR_MULTICHOICE_USERSTRINGMODE: &str = "UserStringMode";
 pub const wxPG_COLOUR_ALLOW_CUSTOM: &str = "AllowCustom";
 pub const wxPG_COLOUR_HAS_ALPHA: &str = "HasAlpha";
-pub const wxPG_PROP_MAX: i32 = wxPG_PROP_AUTO_UNSPECIFIED;
+pub const wxPG_PROP_MAX: u32 = wxPG_PROP_AUTO_UNSPECIFIED;
 //  SKIP: wxPG_PROP_PARENTAL_FLAGS
-pub const wxPG_STRING_STORED_FLAGS: i32 = (wxPG_PROP_DISABLED|wxPG_PROP_HIDDEN|wxPG_PROP_NOEDITOR|wxPG_PROP_COLLAPSED);
+pub const wxPG_STRING_STORED_FLAGS: u32 = (wxPG_PROP_DISABLED|wxPG_PROP_HIDDEN|wxPG_PROP_NOEDITOR|wxPG_PROP_COLLAPSED);
 //  SKIP: wxNullProperty
 //  SKIP: wxPGChoicesEmptyData
 //  ENUM: wxPGPropertyFlags
-pub const wxPG_PROP_MODIFIED: i32 = 0x0001;
-pub const wxPG_PROP_DISABLED: i32 = 0x0002;
-pub const wxPG_PROP_HIDDEN: i32 = 0x0004;
-pub const wxPG_PROP_CUSTOMIMAGE: i32 = 0x0008;
-pub const wxPG_PROP_NOEDITOR: i32 = 0x0010;
-pub const wxPG_PROP_COLLAPSED: i32 = 0x0020;
-pub const wxPG_PROP_INVALID_VALUE: i32 = 0x0040;
-pub const wxPG_PROP_WAS_MODIFIED: i32 = 0x0200;
-pub const wxPG_PROP_AGGREGATE: i32 = 0x0400;
-pub const wxPG_PROP_CHILDREN_ARE_COPIES: i32 = 0x0800;
-pub const wxPG_PROP_PROPERTY: i32 = 0x1000;
-pub const wxPG_PROP_CATEGORY: i32 = 0x2000;
-pub const wxPG_PROP_MISC_PARENT: i32 = 0x4000;
-pub const wxPG_PROP_READONLY: i32 = 0x8000;
-pub const wxPG_PROP_COMPOSED_VALUE: i32 = 0x00010000;
-pub const wxPG_PROP_USES_COMMON_VALUE: i32 = 0x00020000;
-pub const wxPG_PROP_AUTO_UNSPECIFIED: i32 = 0x00040000;
-pub const wxPG_PROP_CLASS_SPECIFIC_1: i32 = 0x00080000;
-pub const wxPG_PROP_CLASS_SPECIFIC_2: i32 = 0x00100000;
+pub const wxPG_PROP_MODIFIED: u32 = 0x0001;
+pub const wxPG_PROP_DISABLED: u32 = 0x0002;
+pub const wxPG_PROP_HIDDEN: u32 = 0x0004;
+pub const wxPG_PROP_CUSTOMIMAGE: u32 = 0x0008;
+pub const wxPG_PROP_NOEDITOR: u32 = 0x0010;
+pub const wxPG_PROP_COLLAPSED: u32 = 0x0020;
+pub const wxPG_PROP_INVALID_VALUE: u32 = 0x0040;
+pub const wxPG_PROP_WAS_MODIFIED: u32 = 0x0200;
+pub const wxPG_PROP_AGGREGATE: u32 = 0x0400;
+pub const wxPG_PROP_CHILDREN_ARE_COPIES: u32 = 0x0800;
+pub const wxPG_PROP_PROPERTY: u32 = 0x1000;
+pub const wxPG_PROP_CATEGORY: u32 = 0x2000;
+pub const wxPG_PROP_MISC_PARENT: u32 = 0x4000;
+pub const wxPG_PROP_READONLY: u32 = 0x8000;
+pub const wxPG_PROP_COMPOSED_VALUE: u32 = 0x00010000;
+pub const wxPG_PROP_USES_COMMON_VALUE: u32 = 0x00020000;
+pub const wxPG_PROP_AUTO_UNSPECIFIED: u32 = 0x00040000;
+pub const wxPG_PROP_CLASS_SPECIFIC_1: u32 = 0x00080000;
+pub const wxPG_PROP_CLASS_SPECIFIC_2: u32 = 0x00100000;
 //  SKIP: wxPG_PROP_BEING_DELETED
 
 pub const wxHW_SCROLLBAR_NEVER: i32 = 0x0002;
@@ -189,12 +189,12 @@ pub const wxPG_RECURSE_STARTS: i32 = 0x00000080;
 pub const wxPG_FORCE: i32 = 0x00000100;
 pub const wxPG_SORT_TOP_LEVEL_ONLY: i32 = 0x00000200;
 
-pub const wxSTB_SIZEGRIP: i32 = 0x0010;
-pub const wxSTB_SHOW_TIPS: i32 = 0x0020;
+pub const wxSTB_SIZEGRIP: u32 = 0x0010;
+pub const wxSTB_SHOW_TIPS: u32 = 0x0020;
 pub const wxSTB_ELLIPSIZE_START: i32 = 0x0040;
 pub const wxSTB_ELLIPSIZE_MIDDLE: i32 = 0x0080;
-pub const wxSTB_ELLIPSIZE_END: i32 = 0x0100;
-pub const wxSTB_DEFAULT_STYLE: i32 = (wxSTB_SIZEGRIP|wxSTB_ELLIPSIZE_END|wxSTB_SHOW_TIPS|wxFULL_REPAINT_ON_RESIZE);
+pub const wxSTB_ELLIPSIZE_END: u32 = 0x0100;
+pub const wxSTB_DEFAULT_STYLE: u32 = (wxSTB_SIZEGRIP|wxSTB_ELLIPSIZE_END|wxSTB_SHOW_TIPS|wxFULL_REPAINT_ON_RESIZE);
 pub const wxSB_NORMAL: i32 = 0x0000;
 pub const wxSB_FLAT: i32 = 0x0001;
 pub const wxSB_RAISED: i32 = 0x0002;
@@ -362,7 +362,7 @@ pub const typePaneBorder: i32 = 0 + 7;
 pub const typePaneButton: i32 = 0 + 8;
 
 pub const wxDIALOG_NO_PARENT: i32 = 0x00000020;
-pub const wxDEFAULT_DIALOG_STYLE: i32 = (wxCAPTION | wxSYSTEM_MENU | wxCLOSE_BOX);
+pub const wxDEFAULT_DIALOG_STYLE: u32 = (wxCAPTION | wxSYSTEM_MENU | wxCLOSE_BOX);
 pub const wxDIALOG_ADAPTATION_NONE: i32 = 0;
 pub const wxDIALOG_ADAPTATION_STANDARD_SIZER: i32 = 1;
 pub const wxDIALOG_ADAPTATION_ANY_SIZER: i32 = 2;
@@ -382,7 +382,7 @@ pub const Reason_Mouse: i32 = 0;
 pub const Reason_Unknown: i32 = 0 + 1;
 
 pub const wxAC_NO_AUTORESIZE: i32 = (0x0010);
-pub const wxAC_DEFAULT_STYLE: i32 = (wxBORDER_NONE);
+pub const wxAC_DEFAULT_STYLE: u32 = (wxBORDER_NONE);
 //  ENUM: wxAnimationType
 pub const wxANIMATION_TYPE_INVALID: i32 = 0;
 pub const wxANIMATION_TYPE_GIF: i32 = 0 + 1;
@@ -581,7 +581,7 @@ pub const wxSTC_MARKNUM_FOLDERTAIL: i32 = 28;
 pub const wxSTC_MARKNUM_FOLDERSUB: i32 = 29;
 pub const wxSTC_MARKNUM_FOLDER: i32 = 30;
 pub const wxSTC_MARKNUM_FOLDEROPEN: i32 = 31;
-pub const wxSTC_MASK_FOLDERS: i32 = 0xFE000000;
+pub const wxSTC_MASK_FOLDERS: u32 = 0xFE000000;
 pub const wxSTC_MAX_MARGIN: i32 = 4;
 pub const wxSTC_MARGIN_SYMBOL: i32 = 0;
 pub const wxSTC_MARGIN_NUMBER: i32 = 1;
@@ -2939,7 +2939,7 @@ pub const WOW64ViewMode_Default: i32 = 0;
 pub const WOW64ViewMode_32: i32 = 0 + 1;
 pub const WOW64ViewMode_64: i32 = 0 + 2;
 
-pub const wxDEFAULT_FRAME_STYLE: i32 = (wxSYSTEM_MENU |          wxRESIZE_BORDER |        wxMINIMIZE_BOX |         wxMAXIMIZE_BOX |         wxCLOSE_BOX |            wxCAPTION |              wxCLIP_CHILDREN);
+pub const wxDEFAULT_FRAME_STYLE: u32 = (wxSYSTEM_MENU |          wxRESIZE_BORDER |        wxMINIMIZE_BOX |         wxMAXIMIZE_BOX |         wxCLOSE_BOX |            wxCAPTION |              wxCLIP_CHILDREN);
 //  ENUM: @50
 pub const wxUSER_ATTENTION_INFO: i32 = 1;
 pub const wxUSER_ATTENTION_ERROR: i32 = 2;
@@ -3170,18 +3170,18 @@ pub const wxROLE_SYSTEM_TOOLTIP: i32 = 0 + 59;
 pub const wxROLE_SYSTEM_WHITESPACE: i32 = 0 + 60;
 pub const wxROLE_SYSTEM_WINDOW: i32 = 0 + 61;
 //  ENUM: wxAccObject
-pub const wxOBJID_WINDOW: i32 =    0x00000000;
-pub const wxOBJID_SYSMENU: i32 =   0xFFFFFFFF;
-pub const wxOBJID_TITLEBAR: i32 =  0xFFFFFFFE;
-pub const wxOBJID_MENU: i32 =      0xFFFFFFFD;
-pub const wxOBJID_CLIENT: i32 =    0xFFFFFFFC;
-pub const wxOBJID_VSCROLL: i32 =   0xFFFFFFFB;
-pub const wxOBJID_HSCROLL: i32 =   0xFFFFFFFA;
-pub const wxOBJID_SIZEGRIP: i32 =  0xFFFFFFF9;
-pub const wxOBJID_CARET: i32 =     0xFFFFFFF8;
-pub const wxOBJID_CURSOR: i32 =    0xFFFFFFF7;
-pub const wxOBJID_ALERT: i32 =     0xFFFFFFF6;
-pub const wxOBJID_SOUND: i32 =     0xFFFFFFF5;
+pub const wxOBJID_WINDOW: u32 =    0x00000000;
+pub const wxOBJID_SYSMENU: u32 =   0xFFFFFFFF;
+pub const wxOBJID_TITLEBAR: u32 =  0xFFFFFFFE;
+pub const wxOBJID_MENU: u32 =      0xFFFFFFFD;
+pub const wxOBJID_CLIENT: u32 =    0xFFFFFFFC;
+pub const wxOBJID_VSCROLL: u32 =   0xFFFFFFFB;
+pub const wxOBJID_HSCROLL: u32 =   0xFFFFFFFA;
+pub const wxOBJID_SIZEGRIP: u32 =  0xFFFFFFF9;
+pub const wxOBJID_CARET: u32 =     0xFFFFFFF8;
+pub const wxOBJID_CURSOR: u32 =    0xFFFFFFF7;
+pub const wxOBJID_ALERT: u32 =     0xFFFFFFF6;
+pub const wxOBJID_SOUND: u32 =     0xFFFFFFF5;
 //  ENUM: wxAccSelectionFlags
 pub const wxACC_SEL_NONE: i32 = 0;
 pub const wxACC_SEL_TAKEFOCUS: i32 = 1;
@@ -3358,28 +3358,28 @@ pub const wxSIZE_ALLOW_MINUS_ONE: i32 = 0x0004;
 pub const wxSIZE_NO_ADJUSTMENTS: i32 = 0x0008;
 pub const wxSIZE_FORCE: i32 = 0x0010;
 pub const wxSIZE_FORCE_EVENT: i32 = 0x0020;
-pub const wxVSCROLL: i32 = 0x80000000;
-pub const wxHSCROLL: i32 = 0x40000000;
-pub const wxCAPTION: i32 = 0x20000000;
-pub const wxDOUBLE_BORDER: i32 = wxBORDER_DOUBLE;
-pub const wxSUNKEN_BORDER: i32 = wxBORDER_SUNKEN;
-pub const wxRAISED_BORDER: i32 = wxBORDER_RAISED;
-pub const wxBORDER: i32 = wxBORDER_SIMPLE;
-pub const wxSIMPLE_BORDER: i32 = wxBORDER_SIMPLE;
-pub const wxSTATIC_BORDER: i32 = wxBORDER_STATIC;
-pub const wxNO_BORDER: i32 = wxBORDER_NONE;
-pub const wxALWAYS_SHOW_SB: i32 = 0x00800000;
-pub const wxCLIP_CHILDREN: i32 = 0x00400000;
-pub const wxCLIP_SIBLINGS: i32 = 0x20000000;
-pub const wxTRANSPARENT_WINDOW: i32 = 0x00100000;
-pub const wxTAB_TRAVERSAL: i32 = 0x00080000;
-pub const wxWANTS_CHARS: i32 = 0x00040000;
-pub const wxRETAINED: i32 = 0x00000000;
-pub const wxBACKINGSTORE: i32 = wxRETAINED;
-pub const wxPOPUP_WINDOW: i32 = 0x00020000;
-pub const wxFULL_REPAINT_ON_RESIZE: i32 = 0x00010000;
+pub const wxVSCROLL: u32 = 0x80000000;
+pub const wxHSCROLL: u32 = 0x40000000;
+pub const wxCAPTION: u32 = 0x20000000;
+pub const wxDOUBLE_BORDER: u32 = wxBORDER_DOUBLE;
+pub const wxSUNKEN_BORDER: u32 = wxBORDER_SUNKEN;
+pub const wxRAISED_BORDER: u32 = wxBORDER_RAISED;
+pub const wxBORDER: u32 = wxBORDER_SIMPLE;
+pub const wxSIMPLE_BORDER: u32 = wxBORDER_SIMPLE;
+pub const wxSTATIC_BORDER: u32 = wxBORDER_STATIC;
+pub const wxNO_BORDER: u32 = wxBORDER_NONE;
+pub const wxALWAYS_SHOW_SB: u32 = 0x00800000;
+pub const wxCLIP_CHILDREN: u32 = 0x00400000;
+pub const wxCLIP_SIBLINGS: u32 = 0x20000000;
+pub const wxTRANSPARENT_WINDOW: u32 = 0x00100000;
+pub const wxTAB_TRAVERSAL: u32 = 0x00080000;
+pub const wxWANTS_CHARS: u32 = 0x00040000;
+pub const wxRETAINED: u32 = 0x00000000;
+pub const wxBACKINGSTORE: u32 = wxRETAINED;
+pub const wxPOPUP_WINDOW: u32 = 0x00020000;
+pub const wxFULL_REPAINT_ON_RESIZE: u32 = 0x00010000;
 pub const wxNO_FULL_REPAINT_ON_RESIZE: i32 = 0;
-pub const wxWINDOW_STYLE_MASK: i32 = (wxVSCROLL|wxHSCROLL|wxBORDER_MASK|wxALWAYS_SHOW_SB|wxCLIP_CHILDREN| wxCLIP_SIBLINGS|wxTRANSPARENT_WINDOW|wxTAB_TRAVERSAL|wxWANTS_CHARS| wxRETAINED|wxPOPUP_WINDOW|wxFULL_REPAINT_ON_RESIZE);
+pub const wxWINDOW_STYLE_MASK: u32 = (wxVSCROLL|wxHSCROLL|wxBORDER_MASK|wxALWAYS_SHOW_SB|wxCLIP_CHILDREN| wxCLIP_SIBLINGS|wxTRANSPARENT_WINDOW|wxTAB_TRAVERSAL|wxWANTS_CHARS| wxRETAINED|wxPOPUP_WINDOW|wxFULL_REPAINT_ON_RESIZE);
 pub const wxWS_EX_BLOCK_EVENTS: i32 = 0x00000002;
 pub const wxWS_EX_TRANSIENT: i32 = 0x00000004;
 pub const wxWS_EX_THEMED_BACKGROUND: i32 = 0x00000008;
@@ -3404,7 +3404,7 @@ pub const wxLB_NEEDED_SB: i32 = 0x0000;
 pub const wxLB_OWNERDRAW: i32 = 0x0100;
 pub const wxLB_ALWAYS_SB: i32 = 0x0200;
 pub const wxLB_NO_SB: i32 = 0x0400;
-pub const wxLB_HSCROLL: i32 = wxHSCROLL;
+pub const wxLB_HSCROLL: u32 = wxHSCROLL;
 pub const wxLB_INT_HEIGHT: i32 = 0x0800;
 pub const wxCB_SIMPLE: i32 = 0x0004;
 pub const wxCB_SORT: i32 = 0x0008;
@@ -3436,16 +3436,16 @@ pub const wxBI_EXPAND: i32 = wxEXPAND;
 pub const wxLI_HORIZONTAL: i32 = wxHORIZONTAL;
 pub const wxLI_VERTICAL: i32 = wxVERTICAL;
 pub const wxYES: i32 = 0x00000002;
-pub const wxOK: i32 = 0x00000004;
+pub const wxOK: u32 = 0x00000004;
 pub const wxNO: i32 = 0x00000008;
 pub const wxYES_NO: i32 = (wxYES | wxNO);
-pub const wxCANCEL: i32 = 0x00000010;
+pub const wxCANCEL: u32 = 0x00000010;
 pub const wxAPPLY: i32 = 0x00000020;
 pub const wxCLOSE: i32 = 0x00000040;
 pub const wxOK_DEFAULT: i32 = 0x00000000  /* has no effect (default) */;
 pub const wxYES_DEFAULT: i32 = 0x00000000  /* has no effect (default) */;
 pub const wxNO_DEFAULT: i32 = 0x00000080  /* only valid with wxYES_NO */;
-pub const wxCANCEL_DEFAULT: i32 = 0x80000000  /* only valid with wxCANCEL */;
+pub const wxCANCEL_DEFAULT: u32 = 0x80000000  /* only valid with wxCANCEL */;
 pub const wxICON_EXCLAMATION: i32 = 0x00000100;
 pub const wxICON_HAND: i32 = 0x00000200;
 pub const wxICON_WARNING: i32 = wxICON_EXCLAMATION;
@@ -3472,12 +3472,12 @@ pub const wxSTAY_ON_TOP: i32 = 0x8000;
 pub const wxICONIZE: i32 = 0x4000;
 pub const wxMINIMIZE: i32 = wxICONIZE;
 pub const wxMAXIMIZE: i32 = 0x2000;
-pub const wxCLOSE_BOX: i32 = 0x1000;
-pub const wxSYSTEM_MENU: i32 = 0x0800;
-pub const wxMINIMIZE_BOX: i32 = 0x0400;
-pub const wxMAXIMIZE_BOX: i32 = 0x0200;
+pub const wxCLOSE_BOX: u32 = 0x1000;
+pub const wxSYSTEM_MENU: u32 = 0x0800;
+pub const wxMINIMIZE_BOX: u32 = 0x0400;
+pub const wxMAXIMIZE_BOX: u32 = 0x0200;
 pub const wxTINY_CAPTION: i32 = 0x0080;
-pub const wxRESIZE_BORDER: i32 = 0x0040;
+pub const wxRESIZE_BORDER: u32 = 0x0040;
 //  SKIP: wxINT8_MIN
 //  SKIP: wxINT8_MAX
 //  SKIP: wxUINT8_MAX
@@ -3515,8 +3515,8 @@ pub const wxRESIZE_BORDER: i32 = 0x0040;
 // NODEF: wxOVERRIDE
 // NODEF: wxSUPPRESS_GCC_PRIVATE_DTOR_WARNING
 //  ENUM: wxGeometryCentre
-pub const wxCENTRE: i32 = 0x0001;
-pub const wxCENTER: i32 = wxCENTRE;
+pub const wxCENTRE: u32 = 0x0001;
+pub const wxCENTER: u32 = wxCENTRE;
 //  ENUM: wxOrientation
 pub const wxHORIZONTAL: i32 = 0x0004;
 pub const wxVERTICAL: i32 = 0x0008;
@@ -3562,15 +3562,15 @@ pub const wxSHAPED: i32 = 0x4000;
 pub const wxTILE: i32 = wxSHAPED | wxFIXED_MINSIZE;
 pub const wxSTRETCH_MASK: i32 = 0x7000;
 //  ENUM: wxBorder
-pub const wxBORDER_DEFAULT: i32 = 0;
-pub const wxBORDER_NONE: i32 = 0x00200000;
-pub const wxBORDER_STATIC: i32 = 0x01000000;
-pub const wxBORDER_SIMPLE: i32 = 0x02000000;
-pub const wxBORDER_RAISED: i32 = 0x04000000;
-pub const wxBORDER_SUNKEN: i32 = 0x08000000;
-pub const wxBORDER_DOUBLE: i32 = 0x10000000;
-pub const wxBORDER_THEME: i32 = wxBORDER_DOUBLE;
-pub const wxBORDER_MASK: i32 = 0x1f200000;
+pub const wxBORDER_DEFAULT: u32 = 0;
+pub const wxBORDER_NONE: u32 = 0x00200000;
+pub const wxBORDER_STATIC: u32 = 0x01000000;
+pub const wxBORDER_SIMPLE: u32 = 0x02000000;
+pub const wxBORDER_RAISED: u32 = 0x04000000;
+pub const wxBORDER_SUNKEN: u32 = 0x08000000;
+pub const wxBORDER_DOUBLE: u32 = 0x10000000;
+pub const wxBORDER_THEME: u32 = wxBORDER_DOUBLE;
+pub const wxBORDER_MASK: u32 = 0x1f200000;
 //  ENUM: wxBackgroundStyle
 pub const wxBG_STYLE_ERASE: i32 = 0;
 pub const wxBG_STYLE_SYSTEM: i32 = 0 + 1;
@@ -4078,41 +4078,41 @@ pub const wxUPDATE_UI_FROMIDLE: i32 = 0 + 2;
 
 //  SKIP: wxPG_IT_CHILDREN
 //  ENUM: wxPG_ITERATOR_FLAGS
-pub const wxPG_ITERATE_PROPERTIES: i32 = wxPG_PROP_PROPERTY |
+pub const wxPG_ITERATE_PROPERTIES: u32 = wxPG_PROP_PROPERTY |
                           wxPG_PROP_MISC_PARENT |
                           wxPG_PROP_AGGREGATE |
                           wxPG_PROP_COLLAPSED |
                           wxPG_IT_CHILDREN(wxPG_PROP_MISC_PARENT) |
                           wxPG_IT_CHILDREN(wxPG_PROP_CATEGORY);
-pub const wxPG_ITERATE_HIDDEN: i32 = wxPG_PROP_HIDDEN |
+pub const wxPG_ITERATE_HIDDEN: u32 = wxPG_PROP_HIDDEN |
                       wxPG_IT_CHILDREN(wxPG_PROP_COLLAPSED);
-pub const wxPG_ITERATE_FIXED_CHILDREN: i32 = wxPG_IT_CHILDREN(wxPG_PROP_AGGREGATE) |
+pub const wxPG_ITERATE_FIXED_CHILDREN: u32 = wxPG_IT_CHILDREN(wxPG_PROP_AGGREGATE) |
                               wxPG_ITERATE_PROPERTIES;
-pub const wxPG_ITERATE_CATEGORIES: i32 = wxPG_PROP_CATEGORY |
+pub const wxPG_ITERATE_CATEGORIES: u32 = wxPG_PROP_CATEGORY |
                           wxPG_IT_CHILDREN(wxPG_PROP_CATEGORY) |
                           wxPG_PROP_COLLAPSED;
-pub const wxPG_ITERATE_ALL_PARENTS: i32 = wxPG_PROP_MISC_PARENT |
+pub const wxPG_ITERATE_ALL_PARENTS: u32 = wxPG_PROP_MISC_PARENT |
                            wxPG_PROP_AGGREGATE |
                            wxPG_PROP_CATEGORY;
-pub const wxPG_ITERATE_ALL_PARENTS_RECURSIVELY: i32 = wxPG_ITERATE_ALL_PARENTS |
+pub const wxPG_ITERATE_ALL_PARENTS_RECURSIVELY: u32 = wxPG_ITERATE_ALL_PARENTS |
                                        wxPG_IT_CHILDREN(
                                                 wxPG_ITERATE_ALL_PARENTS);
-pub const wxPG_ITERATOR_FLAGS_ALL: i32 = wxPG_PROP_PROPERTY |
+pub const wxPG_ITERATOR_FLAGS_ALL: u32 = wxPG_PROP_PROPERTY |
                           wxPG_PROP_MISC_PARENT |
                           wxPG_PROP_AGGREGATE |
                           wxPG_PROP_HIDDEN |
                           wxPG_PROP_CATEGORY |
                           wxPG_PROP_COLLAPSED;
-pub const wxPG_ITERATOR_MASK_OP_ITEM: i32 = wxPG_ITERATOR_FLAGS_ALL;
-pub const wxPG_ITERATOR_MASK_OP_PARENT: i32 = wxPG_ITERATOR_FLAGS_ALL;
-pub const wxPG_ITERATE_VISIBLE: i32 = wxPG_ITERATE_PROPERTIES |
+pub const wxPG_ITERATOR_MASK_OP_ITEM: u32 = wxPG_ITERATOR_FLAGS_ALL;
+pub const wxPG_ITERATOR_MASK_OP_PARENT: u32 = wxPG_ITERATOR_FLAGS_ALL;
+pub const wxPG_ITERATE_VISIBLE: u32 = wxPG_ITERATE_PROPERTIES |
                        wxPG_PROP_CATEGORY |
                        wxPG_IT_CHILDREN(wxPG_PROP_AGGREGATE);
-pub const wxPG_ITERATE_ALL: i32 = wxPG_ITERATE_VISIBLE |
+pub const wxPG_ITERATE_ALL: u32 = wxPG_ITERATE_VISIBLE |
                    wxPG_ITERATE_HIDDEN;
-pub const wxPG_ITERATE_NORMAL: i32 = wxPG_ITERATE_PROPERTIES |
+pub const wxPG_ITERATE_NORMAL: u32 = wxPG_ITERATE_PROPERTIES |
                       wxPG_ITERATE_HIDDEN;
-pub const wxPG_ITERATE_DEFAULT: i32 = wxPG_ITERATE_NORMAL;
+pub const wxPG_ITERATE_DEFAULT: u32 = wxPG_ITERATE_NORMAL;
 
 //  ENUM: wxLanguage
 pub const wxLANGUAGE_DEFAULT: i32 = 0;
@@ -4600,11 +4600,11 @@ pub const ShowBelow: i32 = 0x0000;
 pub const ShowAbove: i32 = 0x0001;
 pub const CanDeferShow: i32 = 0x0002;
 
-pub const wxHL_CONTEXTMENU: i32 = 0x0001;
+pub const wxHL_CONTEXTMENU: u32 = 0x0001;
 pub const wxHL_ALIGN_LEFT: i32 = 0x0002;
 pub const wxHL_ALIGN_RIGHT: i32 = 0x0004;
-pub const wxHL_ALIGN_CENTRE: i32 = 0x0008;
-pub const wxHL_DEFAULT_STYLE: i32 = (wxHL_CONTEXTMENU|wxNO_BORDER|wxHL_ALIGN_CENTRE);
+pub const wxHL_ALIGN_CENTRE: u32 = 0x0008;
+pub const wxHL_DEFAULT_STYLE: u32 = (wxHL_CONTEXTMENU|wxNO_BORDER|wxHL_ALIGN_CENTRE);
 
 pub const wxPD_CAN_ABORT: i32 = 0x0001;
 pub const wxPD_APP_MODAL: i32 = 0x0002;
@@ -4618,7 +4618,7 @@ pub const wxPD_CAN_SKIP: i32 = 0x0080;
 pub const wxPG_COLOUR_WEB_BASE: i32 = 0x10000;
 pub const wxPG_COLOUR_CUSTOM: i32 = 0xFFFFFF;
 pub const wxPG_COLOUR_UNSPECIFIED: i32 = (wxPG_COLOUR_CUSTOM+1);
-pub const wxPG_PROP_TRANSLATE_CUSTOM: i32 = wxPG_PROP_CLASS_SPECIFIC_1;
+pub const wxPG_PROP_TRANSLATE_CUSTOM: u32 = wxPG_PROP_CLASS_SPECIFIC_1;
 
 pub const wxIMAGE_OPTION_QUALITY: &str = "quality";
 pub const wxIMAGE_OPTION_FILENAME: &str = "FileName";
@@ -4798,7 +4798,7 @@ pub const Source_Proxy: i32 = 0 + 1;
 
 pub const wxCHOICE_WIDTH: i32 = 150;
 pub const wxCHOICE_HEIGHT: i32 = 200;
-pub const wxCHOICEDLG_STYLE: i32 = (wxDEFAULT_DIALOG_STYLE | wxOK | wxCANCEL | wxCENTRE | wxRESIZE_BORDER);
+pub const wxCHOICEDLG_STYLE: u32 = (wxDEFAULT_DIALOG_STYLE | wxOK | wxCANCEL | wxCENTRE | wxRESIZE_BORDER);
 
 //  ENUM: wxAuiToolBarStyle
 //  ENUM: wxAuiToolBarArtSetting
@@ -5416,7 +5416,7 @@ pub const wxFLEX_GROWMODE_NONE: i32 = 0;
 pub const wxFLEX_GROWMODE_SPECIFIED: i32 = 0 + 1;
 pub const wxFLEX_GROWMODE_ALL: i32 = 0 + 2;
 
-pub const wxCP_DEFAULT_STYLE: i32 = (wxTAB_TRAVERSAL | wxNO_BORDER);
+pub const wxCP_DEFAULT_STYLE: u32 = (wxTAB_TRAVERSAL | wxNO_BORDER);
 pub const wxCP_NO_TLW_RESIZE: i32 = (0x0002);
 
 //  ENUM: wxFindReplaceFlags
@@ -5751,9 +5751,9 @@ pub const wxAUI_MGR_DEFAULT: i32 = wxAUI_MGR_ALLOW_FLOATING |
                         wxAUI_MGR_HINT_FADE |
                         wxAUI_MGR_NO_VENETIAN_BLINDS_FADE;
 
-pub const wxTextEntryDialogStyle: i32 = (wxOK | wxCANCEL | wxCENTRE);
+pub const wxTextEntryDialogStyle: u32 = (wxOK | wxCANCEL | wxCENTRE);
 
-pub const wxHLB_DEFAULT_STYLE: i32 = wxBORDER_SUNKEN;
+pub const wxHLB_DEFAULT_STYLE: u32 = wxBORDER_SUNKEN;
 pub const wxHLB_MULTIPLE: i32 = wxLB_MULTIPLE;
 
 //  ENUM: TransferMode
@@ -6203,7 +6203,7 @@ pub const wxTE_PROCESS_ENTER: i32 = 0x0400;
 pub const wxTE_PASSWORD: i32 = 0x0800;
 pub const wxTE_AUTO_URL: i32 = 0x1000;
 pub const wxTE_NOHIDESEL: i32 = 0x2000;
-pub const wxTE_DONTWRAP: i32 = wxHSCROLL;
+pub const wxTE_DONTWRAP: u32 = wxHSCROLL;
 pub const wxTE_CHARWRAP: i32 = 0x4000;
 pub const wxTE_WORDWRAP: i32 = 0x0001;
 pub const wxTE_BESTWRAP: i32 = 0x0000;
@@ -6683,13 +6683,13 @@ pub const wxPROPSHEET_SHRINKTOFIT: i32 = 0x0100;
 // NODEF: wxTLS_VALUE
 // NODEF: wxTLS_PTR
 
-pub const wxPG_PROP_PASSWORD: i32 = wxPG_PROP_CLASS_SPECIFIC_2;
-pub const wxPG_PROP_STATIC_CHOICES: i32 = wxPG_PROP_CLASS_SPECIFIC_1;
-pub const wxPG_PROP_SHOW_FULL_FILENAME: i32 = wxPG_PROP_CLASS_SPECIFIC_1;
-pub const wxPG_PROP_ACTIVE_BTN: i32 = wxPG_PROP_CLASS_SPECIFIC_1;
-pub const wxPG_PROP_USE_CHECKBOX: i32 = wxPG_PROP_CLASS_SPECIFIC_1;
-pub const wxPG_PROP_USE_DCC: i32 = wxPG_PROP_CLASS_SPECIFIC_2;
-pub const wxAEDIALOG_STYLE: i32 = (wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxOK | wxCANCEL | wxCENTRE);
+pub const wxPG_PROP_PASSWORD: u32 = wxPG_PROP_CLASS_SPECIFIC_2;
+pub const wxPG_PROP_STATIC_CHOICES: u32 = wxPG_PROP_CLASS_SPECIFIC_1;
+pub const wxPG_PROP_SHOW_FULL_FILENAME: u32 = wxPG_PROP_CLASS_SPECIFIC_1;
+pub const wxPG_PROP_ACTIVE_BTN: u32 = wxPG_PROP_CLASS_SPECIFIC_1;
+pub const wxPG_PROP_USE_CHECKBOX: u32 = wxPG_PROP_CLASS_SPECIFIC_1;
+pub const wxPG_PROP_USE_DCC: u32 = wxPG_PROP_CLASS_SPECIFIC_2;
+pub const wxAEDIALOG_STYLE: u32 = (wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxOK | wxCANCEL | wxCENTRE);
 //  ENUM: wxPGNumericValidationConstants
 pub const wxPG_PROPERTY_VALIDATION_ERROR_MESSAGE: i32 = 0;
 pub const wxPG_PROPERTY_VALIDATION_SATURATE: i32 = 1;
@@ -6766,7 +6766,7 @@ pub const wxDD_DIR_MUST_EXIST: i32 = 0x0200;
 pub const wxDD_MULTIPLE: i32 = 0x0400;
 pub const wxDD_SHOW_HIDDEN: i32 = 0x0001;
 pub const wxDD_NEW_DIR_BUTTON: i32 = 0;
-pub const wxDD_DEFAULT_STYLE: i32 = (wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER);
+pub const wxDD_DEFAULT_STYLE: u32 = (wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER);
 
 pub const wxPB_USE_TEXTCTRL: i32 = 0x0002;
 pub const wxPB_SMALL: i32 = 0x8000;
