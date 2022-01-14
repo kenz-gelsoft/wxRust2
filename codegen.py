@@ -10,25 +10,26 @@ PROLOGUE = '''\
 use crate::manual::*;
 '''
 
-# placde wxWidgets doxygen xml files in wxml/ dir and run this.
+# place wxWidgets doxygen xml files in wxml/ dir and run this.
 generated = set()
 def main():
-    print(PROLOGUE)
-    for file in xml_files_in('wxml/'):
-        tree = ET.parse(file)
-        root = tree.getroot()
-        
-        empty = True
-        for define in defines_in(root):
-            empty = False
-            parse_define(define)
+    with open('src/defs.rs', 'w') as f:
+        print(PROLOGUE, file=f)
+        for file in xml_files_in('wxml/'):
+            tree = ET.parse(file)
+            root = tree.getroot()
+            
+            empty = True
+            for define in defines_in(root):
+                empty = False
+                generate_define(define, f)
 
-        for enum in enums_in(root):
-            empty = False
-            parse_enum(enum)
-        
-        if not empty:
-            print()
+            for enum in enums_in(root):
+                empty = False
+                generate_enum(enum, f)
+            
+            if not empty:
+                print(file=f)
 
 def xml_files_in(dir):
     for path, _, files in os.walk(dir):
@@ -106,13 +107,14 @@ blocklist = [
     'wxFILE_EXISTS_NO_FOLLOW',
     'wxPG_PROP_BEING_DELETED',
 ]
-def parse_define(e):
+def generate_define(e, f):
     name = e.findtext('name')
     if name in generated:
         return
     generated.add(name)
     if name in blocklist or name in typedefs:
-        print('//  SKIP: %s' % (name,))
+        print('//  SKIP: %s' % (name,),
+                file=f)
         return
     initializer = e.find('initializer')
     if initializer is not None:
@@ -133,9 +135,11 @@ def parse_define(e):
         v = re.sub(r'wxString\((".+")\)', r'\1', v)
         v = re.sub(r'wxS\((".+")\)', r'\1', v)
         v = re.sub(r'wxT\((".+")\)', r'\1', v)
-        print('pub const %s: %s = %s;' % (name, t, v))
+        print('pub const %s: %s = %s;' % (name, t, v),
+                file=f)
     else:
-        print('// NODEF: %s' % (name,))
+        print('// NODEF: %s' % (name,),
+                file=f)
 
 u32types = [
     'wxAC_DEFAULT_STYLE',
@@ -202,9 +206,10 @@ u32types = [
     'wxWINDOW_STYLE_MASK',
 ]
 
-def parse_enum(e):
+def generate_enum(e, f):
     name = e.findtext('name')
-    print('//  ENUM: %s' % (name,))
+    print('//  ENUM: %s' % (name,),
+            file=f)
     current_initializer = '= 0'
     count = 0
     for v in e.findall('enumvalue'):
@@ -213,7 +218,8 @@ def parse_enum(e):
             continue
         generated.add(vname)
         if vname in blocklist:
-            print('//  SKIP: %s' % (vname,))
+            print('//  SKIP: %s' % (vname,),
+                    file=f)
             continue
         initializer = v.findtext('initializer')
         if initializer is None:
@@ -231,7 +237,8 @@ def parse_enum(e):
             t = 'u32'
         if "'" in initializer:
             t = 'char'
-        print('pub const %s: %s %s;' % (vname, t, initializer))
+        print('pub const %s: %s %s;' % (vname, t, initializer),
+                file=f)
 
 if __name__ == '__main__':
     main()
