@@ -3,7 +3,7 @@
 #![allow(non_snake_case)]
 #![allow(non_upper_case_globals)]
 
-pub const fn wxPG_IT_CHILDREN(A: u32) -> u32 {
+pub const fn wxPG_IT_CHILDREN(A: i32) -> i32 {
     (A) << 16
 }
 

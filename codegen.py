@@ -115,9 +115,9 @@ def parse_define(e):
     if initializer is not None:
         v = ''.join(initializer.itertext())
         v = ''.join(map(lambda s: s.lstrip(), v.split('\\\n')))
-        t = 'u32'
-        if name in i32types:
-            t = 'i32'
+        t = 'i32'
+        if name in u32types:
+            t = 'u32'
         if v == 'true' or v == 'false':
             t = 'bool'
         elif '.' in v:
@@ -134,52 +134,7 @@ def parse_define(e):
     else:
         print('// NODEF: %s' % (name,))
 
-i32types = [
-    '@26',
-    '@15',
-    'wxBitness',
-    'wxArchitecture',
-    'wxEndianness',
-    'wxMouseButton',
-    'wxID_RICHTEXT_PROPERTIES1',
-    'wxID_RICHTEXT_PROPERTIES2',
-    'wxID_RICHTEXT_PROPERTIES3',
-    'wxNOT_FOUND',
-    'wxPRINT_QUALITY_HIGH',
-    'wxPRINT_QUALITY_MEDIUM',
-    'wxPRINT_QUALITY_LOW',
-    'wxPRINT_QUALITY_DRAFT',
-    'wxTE_CENTRE',
-    'wxTE_CENTER',
-    'wxTE_RIGHT',
-    'wxAlignment',
-    'wxID_HTML_HELPFRAME',
-    'wxStandardID',
-    'wxItemKind',
-    'wxDVR_DEFAULT_ALIGNMENT',
-    'wxFontFamily',
-    'wxFontStyle',
-    'wxBrushStyle',
-    '@38',
-    'wxXML_NO_INDENTATION',
-    'wxDirTraverseResult',
-    'wxBITMAP_SCREEN_DEPTH',
-    '@23',
-    '@57',
-    'wxGRID_AUTOSIZE',
-    'wxBOM',
-    'wxStringTokenizerMode',
-    'wxFontSymbolicSize',
-    'wxFontEncoding',
-    'wxTextAttrBorderWidth',
-    'wxLIST_GETSUBITEMRECT_WHOLEITEM',
-    '@34',
-    'wxTextCtrlHitTestResult',
-    'wxICON_SCREEN_DEPTH',
-    'wxPenStyle',
-    'wxPenJoin',
-    'wxPenCap',
-    'wxCompositionMode',
+u32types = [
 ]
 
 def parse_enum(e):
@@ -206,9 +161,9 @@ def parse_enum(e):
             current_initializer = initializer
             count = 1
         initializer = initializer.replace('~', '!') # special replacement for wxPATH_NORM_ALL
-        t = 'u32'
-        if name in i32types:
-            t = 'i32'
+        t = 'i32'
+        if name in u32types:
+            t = 'u32'
         if "'" in initializer:
             t = 'char'
         print('pub const %s: %s %s;' % (vname, t, initializer))
