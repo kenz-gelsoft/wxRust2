@@ -2,15 +2,18 @@ import os
 import re
 import xml.etree.ElementTree as ET
 
+PROLOGUE = '''\
+#![allow(dead_code)]
+#![allow(non_upper_case_globals)]
+#![allow(unused_parens)]
+
+use crate::manual::*;
+'''
+
 # placde wxWidgets doxygen xml files in wxml/ dir and run this.
 generated = set()
 def main():
-    print('#![allow(dead_code)]')
-    print('#![allow(non_upper_case_globals)]')
-    print('#![allow(unused_parens)]')
-    print()
-    print('use crate::manual::*;')
-    print()
+    print(PROLOGUE)
     for file in xml_files_in('wxml/'):
         tree = ET.parse(file)
         root = tree.getroot()
