@@ -20,6 +20,21 @@ CXX_EPILOGUE = '''\
 }
 '''
 
+H_PROLOGUE = '''\
+#pragma once
+#include <wx/wx.h>
+
+#include "rust/cxx.h"
+#include "wx/src/generated.rs.h"
+
+
+namespace wxrust {
+'''
+H_EPILOGUE = '''\
+
+} // namespace wxrust
+'''
+
 type_mappings = {
     'long': 'i32',
     'wxWindowID': 'i32',
@@ -35,21 +50,27 @@ types = [
 
 # place wxWidgets doxygen xml files in wxml/ dir and run this.
 def main():
+    tree = ET.parse('wxml/classwx_button.xml')
+    root = tree.getroot()
+    
+    classes = []
+    for cls in classes_in(root):
+        classes.append(Class(cls))
+    
     with open('src/generated.rs', 'w') as f:
         print(PROLOGUE, file=f)
-        tree = ET.parse('wxml/classwx_button.xml')
-        root = tree.getroot()
-        
-        classes = []
-        for cls in classes_in(root):
-            classes.append(Class(cls))
-        
         print(CXX_PROLOGUE, file=f)
         for t in types:
             print('\t\ttype %s;' % (t,), file=f)
         for cls in classes:
             cls.print(2, f)
         print(CXX_EPILOGUE, file=f)
+
+    with open('include/wxrust2.h', 'w') as f:
+        print(H_PROLOGUE, file=f)
+        for cls in classes:
+            cls.print_constructor(f)
+        print(H_EPILOGUE, file=f)
 
 def classes_in(root):
     return root.findall(".//compounddef[@kind='class']")
@@ -70,6 +91,15 @@ class Class:
         for method in self.methods:
             print('%s%s' % (indent, method),
                     file=f)
+    
+    def print_constructor(self, f):
+        print('// CLASS: %s' % (self.name,),
+                file=f)
+        for method in self.methods:
+            constructor = method.gen_constructor()
+            if constructor is not None:
+                print('%s' % (constructor,),
+                        file=f)
 
 class Method:
     def __init__(self, classname, e):
@@ -92,6 +122,19 @@ class Method:
         if self.isconstructor:
             return '// %s' % (body,)
         return body
+
+    def gen_constructor(self):
+        body = '%s *%s(%s);' % (
+            self.name,
+            self.new_name(),
+            ', '.join(self.params),
+        )
+        if self.isconstructor:
+            return '%s' % (body,)
+        return None
+
+    def new_name(self):
+        return 'New%s' % (self.name[2:],)
 
 class CxxType:
     def __init__(self, s):
