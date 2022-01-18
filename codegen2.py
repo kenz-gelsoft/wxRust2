@@ -35,20 +35,21 @@ types = [
 
 # place wxWidgets doxygen xml files in wxml/ dir and run this.
 def main():
-    print(PROLOGUE)
-    tree = ET.parse('wxml/classwx_button.xml')
-    root = tree.getroot()
-    
-    classes = []
-    for cls in classes_in(root):
-        classes.append(Class(cls))
-    
-    print(CXX_PROLOGUE)
-    for t in types:
-        print('\t\ttype %s;' % (t,))
-    for cls in classes:
-        cls.print(2)
-    print(CXX_EPILOGUE)
+    with open('src/generated.rs', 'w') as f:
+        print(PROLOGUE, file=f)
+        tree = ET.parse('wxml/classwx_button.xml')
+        root = tree.getroot()
+        
+        classes = []
+        for cls in classes_in(root):
+            classes.append(Class(cls))
+        
+        print(CXX_PROLOGUE, file=f)
+        for t in types:
+            print('\t\ttype %s;' % (t,), file=f)
+        for cls in classes:
+            cls.print(2, f)
+        print(CXX_EPILOGUE, file=f)
 
 def classes_in(root):
     return root.findall(".//compounddef[@kind='class']")
@@ -60,12 +61,15 @@ class Class:
         for method in e.findall(".//memberdef[@kind='function']"):
             self.methods.append(Method(self.name, method))
     
-    def print(self, level):
+    def print(self, level, f):
         indent = '\t' * level
-        print('%s// CLASS: %s' % (indent, self.name))
-        print('%stype %s;' % (indent, self.name))
+        print('%s// CLASS: %s' % (indent, self.name),
+                file=f)
+        print('%stype %s;' % (indent, self.name),
+                file=f)
         for method in self.methods:
-            print('%s%s' % (indent, method))
+            print('%s%s' % (indent, method),
+                    file=f)
 
 class Method:
     def __init__(self, classname, e):
