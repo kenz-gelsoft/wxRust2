@@ -35,6 +35,18 @@ H_EPILOGUE = '''\
 } // namespace wxrust
 '''
 
+CC_PROLOGUE = '''\
+#include "wx/include/wxrust.h"
+
+namespace wxrust {
+
+// Constructors
+'''
+
+CC_EPILOGUE = '''\
+} // namespace wxrust
+'''
+
 type_mappings = {
     'long': 'i32',
     'wxWindowID': 'i32',
@@ -72,6 +84,12 @@ def main():
             cls.print_constructor(f)
         print(H_EPILOGUE, file=f)
 
+    with open('src/wxrust2.cc', 'w') as f:
+        print(CC_PROLOGUE, file=f)
+        for cls in classes:
+            cls.print_cc_constructor(f)
+        print(CC_EPILOGUE, file=f)
+
 def classes_in(root):
     return root.findall(".//compounddef[@kind='class']")
 
@@ -96,10 +114,19 @@ class Class:
         print('// CLASS: %s' % (self.name,),
                 file=f)
         for method in self.methods:
-            constructor = method.gen_constructor()
-            if constructor is not None:
-                print('%s' % (constructor,),
-                        file=f)
+            if not method.isconstructor:
+                continue
+            print('%s' % (method.gen_constructor(),),
+                    file=f)
+    
+    def print_cc_constructor(self, f):
+        print('// CLASS: %s' % (self.name,),
+                file=f)
+        for method in self.methods:
+            if not method.isconstructor:
+                continue
+            print('%s' % (method.gen_cc_constructor(),),
+                    file=f)
 
 class Method:
     def __init__(self, classname, e):
@@ -132,6 +159,20 @@ class Method:
         if self.isconstructor:
             return '%s' % (body,)
         return None
+    
+    def gen_cc_constructor(self):
+        cc_template = '''\
+%s *%s(%s) {
+    return new %s(%s);
+}
+'''
+        return cc_template % (
+            self.classname,
+            self.new_name(),
+            ', '.join(self.params),
+            self.classname,
+            ', '.join(self.params),
+        )
 
     def new_name(self):
         return 'New%s' % (self.name[2:],)
