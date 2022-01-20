@@ -135,30 +135,29 @@ class Method:
         self.classname = classname
         self.name = e.findtext('name')
         self.is_ctor = self.name == classname
-        self.params = [Param(SelfType(classname), 'self')]
+        self.this = Param(SelfType(classname), 'self')
+        self.params = []
         for param in e.findall('param'):
             ptype = ''.join(param.find('type').itertext())
             t = CxxType(ptype)
             pname = param.findtext('declname')
             self.params.append(Param(t, pname))
     
-    def params_str(self):
-        return ', '.join([str(p) for p in self.params])
+    def rust_params(self):
+        clone = self.params.copy()
+        clone.insert(0, self.this)
+        return ', '.join([str(p) for p in clone])
     
     def params_decl(self):
-        clone = self.params.copy()
-        clone.pop(0)
-        return ', '.join([p.decl_str() for p in clone])
+        return ', '.join([p.decl_str() for p in self.params])
     
     def call_params(self):
-        clone = self.params.copy()
-        clone.pop(0)
-        return ', '.join([p.call_str() for p in clone])
+        return ', '.join([p.call_str() for p in self.params])
     
     def __str__(self):
         body = 'unsafe fn %s(%s);' % (
             self.name,
-            self.params_str(),
+            self.rust_params(),
         )
         if self.is_ctor:
             return '// %s' % (body,)
