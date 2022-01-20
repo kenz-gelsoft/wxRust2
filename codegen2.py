@@ -139,12 +139,15 @@ class Method:
             ptype = ''.join(param.find('type').itertext())
             t = CxxType(ptype)
             pname = param.findtext('declname')
-            self.params.append('%s: %s' % (pname, t.rusttype()))
+            self.params.append(Param(t, pname))
+    
+    def params_str(self):
+        return ', '.join([str(p) for p in self.params])
     
     def __str__(self):
         body = 'unsafe fn %s(%s);' % (
             self.name,
-            ', '.join(self.params),
+            self.params_str(),
         )
         if self.isconstructor:
             return '// %s' % (body,)
@@ -154,7 +157,7 @@ class Method:
         body = '%s *%s(%s);' % (
             self.name,
             self.new_name(),
-            ', '.join(self.params),
+            self.params_str(),
         )
         if self.isconstructor:
             return '%s' % (body,)
@@ -169,13 +172,21 @@ class Method:
         return cc_template % (
             self.classname,
             self.new_name(),
-            ', '.join(self.params),
+            self.params_str(),
             self.classname,
-            ', '.join(self.params),
+            self.params_str(),
         )
 
     def new_name(self):
         return 'New%s' % (self.name[2:],)
+
+class Param:
+    def __init__(self, type, name):
+        self.type = type
+        self.name = name
+    
+    def __str__(self):
+        return '%s: %s' % (self.name, self.type.rusttype())
 
 class CxxType:
     def __init__(self, s):
