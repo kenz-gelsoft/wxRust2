@@ -145,10 +145,15 @@ class Method:
     def params_str(self):
         return ', '.join([str(p) for p in self.params])
     
-    def params_calling_str(self):
+    def params_decl(self):
         clone = self.params.copy()
         clone.pop(0)
-        return ', '.join([p.calling_str() for p in clone])
+        return ', '.join([p.decl_str() for p in clone])
+    
+    def call_params(self):
+        clone = self.params.copy()
+        clone.pop(0)
+        return ', '.join([p.call_str() for p in clone])
     
     def __str__(self):
         body = 'unsafe fn %s(%s);' % (
@@ -163,7 +168,7 @@ class Method:
         body = '%s *%s(%s);' % (
             self.name,
             self.new_name(),
-            self.params_str(),
+            self.params_decl(),
         )
         return '%s' % (body,)
     
@@ -176,9 +181,9 @@ class Method:
         return cc_template % (
             self.classname,
             self.new_name(),
-            self.params_str(),
+            self.params_decl(),
             self.classname,
-            self.params_calling_str(),
+            self.call_params(),
         )
 
     def new_name(self):
@@ -192,7 +197,10 @@ class Param:
     def __str__(self):
         return '%s: %s' % (self.name, self.type.rusttype())
     
-    def calling_str(self):
+    def decl_str(self):
+        return '%s %s' % (self.type.cxxtype, self.name)
+
+    def call_str(self):
         return self.name
 
 class SelfType:
@@ -204,7 +212,7 @@ class SelfType:
 
 class CxxType:
     def __init__(self, s):
-        self.origtype = s
+        self.cxxtype = s
         # print('parsing: |%s|' % (s,))
         matched = re.match(r'(const )?([^*&]*)([*&]+)?', s)
         self.basetype = None

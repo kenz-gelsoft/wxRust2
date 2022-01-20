@@ -8,8 +8,8 @@
 namespace wxrust {
 
 // CLASS: wxButton
-wxButton *NewButton(self: Pin<&mut wxButton>);
-wxButton *NewButton(self: Pin<&mut wxButton>, parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString);
+wxButton *NewButton();
+wxButton *NewButton(wxWindow * parent, wxWindowID id, const wxString & label, const wxPoint & pos, const wxSize & size, long style, const wxValidator & validator, const wxString & name);
 
 } // namespace wxrust
 
