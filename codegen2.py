@@ -81,13 +81,13 @@ def main():
     with open('include/wxrust2.h', 'w') as f:
         print(H_PROLOGUE, file=f)
         for cls in classes:
-            cls.print_constructor(f)
+            cls.print_ctors_to_h(f)
         print(H_EPILOGUE, file=f)
 
     with open('src/wxrust2.cc', 'w') as f:
         print(CC_PROLOGUE, file=f)
         for cls in classes:
-            cls.print_cc_constructor(f)
+            cls.print_ctors_to_cc(f)
         print(CC_EPILOGUE, file=f)
 
 def classes_in(root):
@@ -110,29 +110,31 @@ class Class:
             print('%s%s' % (indent, method),
                     file=f)
     
-    def print_constructor(self, f):
+    def print_ctors_to_h(self, f):
         print('// CLASS: %s' % (self.name,),
                 file=f)
-        for method in self.methods:
-            if not method.isconstructor:
-                continue
-            print('%s' % (method.gen_constructor(),),
+        for ctor in self.ctors():
+            print('%s' % (ctor.for_h(),),
                     file=f)
     
-    def print_cc_constructor(self, f):
+    def print_ctors_to_cc(self, f):
         print('// CLASS: %s' % (self.name,),
                 file=f)
-        for method in self.methods:
-            if not method.isconstructor:
-                continue
-            print('%s' % (method.gen_cc_constructor(),),
+        for ctor in self.ctors():
+            print('%s' % (ctor.for_cc(),),
                     file=f)
+
+    def ctors(self):
+        for method in self.methods:
+            if method.is_ctor:
+                yield method
+
 
 class Method:
     def __init__(self, classname, e):
         self.classname = classname
         self.name = e.findtext('name')
-        self.isconstructor = self.name == classname
+        self.is_ctor = self.name == classname
         self.params = [Param(SelfType(classname), 'self')]
         for param in e.findall('param'):
             ptype = ''.join(param.find('type').itertext())
@@ -153,21 +155,19 @@ class Method:
             self.name,
             self.params_str(),
         )
-        if self.isconstructor:
+        if self.is_ctor:
             return '// %s' % (body,)
         return body
 
-    def gen_constructor(self):
+    def for_h(self):
         body = '%s *%s(%s);' % (
             self.name,
             self.new_name(),
             self.params_str(),
         )
-        if self.isconstructor:
-            return '%s' % (body,)
-        return None
+        return '%s' % (body,)
     
-    def gen_cc_constructor(self):
+    def for_cc(self):
         cc_template = '''\
 %s *%s(%s) {
     return new %s(%s);
