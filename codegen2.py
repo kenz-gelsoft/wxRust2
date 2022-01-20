@@ -47,7 +47,7 @@ CC_EPILOGUE = '''\
 } // namespace wxrust
 '''
 
-type_mappings = {
+cxx_to_rust = {
     'long': 'i32',
     'wxWindowID': 'i32',
 }
@@ -139,20 +139,19 @@ class Method:
         self.params = []
         for param in e.findall('param'):
             ptype = ''.join(param.find('type').itertext())
-            t = CxxType(ptype)
             pname = param.findtext('declname')
-            self.params.append(Param(t, pname))
+            self.params.append(Param(CxxType(ptype), pname))
     
     def rust_params(self):
         clone = self.params.copy()
         clone.insert(0, self.this)
-        return ', '.join([str(p) for p in clone])
+        return ', '.join((str(p) for p in clone))
     
     def params_decl(self):
-        return ', '.join([p.decl_str() for p in self.params])
+        return ', '.join((p.cxx_decl() for p in self.params))
     
     def call_params(self):
-        return ', '.join([p.call_str() for p in self.params])
+        return ', '.join((p.cxx_call() for p in self.params))
     
     def __str__(self):
         body = 'unsafe fn %s(%s);' % (
@@ -194,24 +193,24 @@ class Param:
         self.name = name
     
     def __str__(self):
-        return '%s: %s' % (self.name, self.type.rusttype())
+        return '%s: %s' % (self.name, self.type.in_rust())
     
-    def decl_str(self):
-        return '%s %s' % (self.type.cxxtype, self.name)
+    def cxx_decl(self):
+        return '%s %s' % (self.type.in_cxx, self.name)
 
-    def call_str(self):
+    def cxx_call(self):
         return self.name
 
 class SelfType:
     def __init__(self, s):
         self.type = s
 
-    def rusttype(self):
+    def in_rust(self):
         return 'Pin<&mut %s>' % (self.type,)
 
 class CxxType:
     def __init__(self, s):
-        self.cxxtype = s
+        self.in_cxx = s
         # print('parsing: |%s|' % (s,))
         matched = re.match(r'(const )?([^*&]*)([*&]+)?', s)
         self.basetype = None
@@ -222,11 +221,11 @@ class CxxType:
         if self.indirection is None:
             self.indirection = ''
     
-    def rusttype(self):
+    def in_rust(self):
         if self.basetype:
             t = self.basetype
-            if t in type_mappings:
-                t = type_mappings[t]
+            if t in cxx_to_rust:
+                t = cxx_to_rust[t]
             mut = ''
             if self.indirection:
                 mut = self.mut and 'mut ' or ''
