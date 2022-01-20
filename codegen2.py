@@ -133,8 +133,7 @@ class Method:
         self.classname = classname
         self.name = e.findtext('name')
         self.isconstructor = self.name == classname
-        selftype = 'Pin<&mut %s>' % (classname,)
-        self.params = ['self: %s' % (selftype,)]
+        self.params = [Param(SelfType(classname), 'self')]
         for param in e.findall('param'):
             ptype = ''.join(param.find('type').itertext())
             t = CxxType(ptype)
@@ -143,6 +142,11 @@ class Method:
     
     def params_str(self):
         return ', '.join([str(p) for p in self.params])
+    
+    def params_calling_str(self):
+        clone = self.params.copy()
+        clone.pop(0)
+        return ', '.join([p.calling_str() for p in clone])
     
     def __str__(self):
         body = 'unsafe fn %s(%s);' % (
@@ -174,7 +178,7 @@ class Method:
             self.new_name(),
             self.params_str(),
             self.classname,
-            self.params_str(),
+            self.params_calling_str(),
         )
 
     def new_name(self):
@@ -187,6 +191,16 @@ class Param:
     
     def __str__(self):
         return '%s: %s' % (self.name, self.type.rusttype())
+    
+    def calling_str(self):
+        return self.name
+
+class SelfType:
+    def __init__(self, s):
+        self.type = s
+
+    def rusttype(self):
+        return 'Pin<&mut %s>' % (self.type,)
 
 class CxxType:
     def __init__(self, s):
