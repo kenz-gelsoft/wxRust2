@@ -15,15 +15,15 @@ mod ffi {
 		type wxWindow;
 		// CLASS: wxButton
 		type wxButton;
-		// unsafe fn wxButton(self: Pin<&mut wxButton>);
-		// unsafe fn wxButton(self: Pin<&mut wxButton>, parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString);
-		unsafe fn Create(self: Pin<&mut wxButton>, parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString);
-		unsafe fn GetAuthNeeded(self: Pin<&mut wxButton>);
-		unsafe fn GetLabel(self: Pin<&mut wxButton>);
-		unsafe fn SetAuthNeeded(self: Pin<&mut wxButton>, needed: bool);
-		unsafe fn SetDefault(self: Pin<&mut wxButton>);
-		unsafe fn SetLabel(self: Pin<&mut wxButton>, label: &wxString);
-		unsafe fn GetDefaultSize(self: Pin<&mut wxButton>, win: *mut wxWindow);
+		// fn wxButton(self: Pin<&mut wxButton>);
+		// fn wxButton(self: Pin<&mut wxButton>, parent: Pin<&mut wxWindow>, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString);
+		fn Create(self: Pin<&mut wxButton>, parent: Pin<&mut wxWindow>, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString);
+		fn GetAuthNeeded(self: Pin<&mut wxButton>);
+		fn GetLabel(self: Pin<&mut wxButton>);
+		fn SetAuthNeeded(self: Pin<&mut wxButton>, needed: bool);
+		fn SetDefault(self: Pin<&mut wxButton>);
+		fn SetLabel(self: Pin<&mut wxButton>, label: &wxString);
+		fn GetDefaultSize(self: Pin<&mut wxButton>, win: Pin<&mut wxWindow>);
 	}
 }
 

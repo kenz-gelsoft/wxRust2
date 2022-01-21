@@ -154,7 +154,7 @@ class Method:
         return ', '.join((p.cxx_call() for p in self.params))
     
     def __str__(self):
-        body = 'unsafe fn %s(%s);' % (
+        body = 'fn %s(%s);' % (
             self.name,
             self.rust_params(),
         )
@@ -226,10 +226,12 @@ class CxxType:
             t = self.basetype
             if t in cxx_to_rust:
                 t = cxx_to_rust[t]
-            mut = ''
-            if self.indirection:
-                mut = self.mut and 'mut ' or ''
-            return '%s%s%s' % (self.indirection, mut, t)
+            ref = self.indirection
+            if ref.startswith('*'):
+                ref = '&' + ref[1:]
+            if ref.startswith('&') and self.mut:
+                return 'Pin<%smut %s>' % (ref, t)
+            return '%s%s' % (ref, t)
 
         else:
             return None
