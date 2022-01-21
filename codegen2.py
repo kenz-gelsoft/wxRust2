@@ -114,15 +114,13 @@ class Class:
         print('// CLASS: %s' % (self.name,),
                 file=f)
         for ctor in self.ctors():
-            print('%s' % (ctor.for_h(),),
-                    file=f)
+            print(ctor.for_h(), file=f)
     
     def print_ctors_to_cc(self, f):
         print('// CLASS: %s' % (self.name,),
                 file=f)
         for ctor in self.ctors():
-            print('%s' % (ctor.for_cc(),),
-                    file=f)
+            print(ctor.for_cc(), file=f)
 
     def ctors(self):
         for method in self.methods:
@@ -168,7 +166,7 @@ class Method:
             self.new_name(),
             self.params_decl(),
         )
-        return '%s' % (body,)
+        return body
     
     def for_cc(self):
         cc_template = '''\
@@ -222,19 +220,15 @@ class CxxType:
             self.indirection = ''
     
     def in_rust(self):
-        if self.basetype:
-            t = self.basetype
-            if t in cxx_to_rust:
-                t = cxx_to_rust[t]
-            ref = self.indirection
-            if ref.startswith('*'):
-                ref = '&' + ref[1:]
-            if ref.startswith('&') and self.mut:
-                return 'Pin<%smut %s>' % (ref, t)
-            return '%s%s' % (ref, t)
-
-        else:
-            return None
+        t = self.basetype
+        if t in cxx_to_rust:
+            t = cxx_to_rust[t]
+        ref = self.indirection
+        if ref.startswith('*'):
+            ref = '&' + ref[1:]
+        if ref.startswith('&') and self.mut:
+            return 'Pin<%smut %s>' % (ref, t)
+        return '%s%s' % (ref, t)
 
 if __name__ == '__main__':
     main()
