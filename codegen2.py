@@ -11,12 +11,12 @@ PROLOGUE = '''\
 CXX_PROLOGUE = '''\
 #[cxx::bridge(namespace = "wxrust")]
 mod ffi {
-\t#[namespace = ""]
-\tunsafe extern "C++" {
-\t\tinclude!("wx/include/wxrust.h");
+    #[namespace = ""]
+    unsafe extern "C++" {
+        include!("wx/include/wxrust.h");
 '''
 CXX_EPILOGUE = '''\
-\t}
+    }
 }
 '''
 
@@ -70,10 +70,11 @@ def main():
         classes.append(Class(cls))
     
     with open('src/generated.rs', 'w') as f:
+        indent = ' ' * 4 * 2
         print(PROLOGUE, file=f)
         print(CXX_PROLOGUE, file=f)
         for t in types:
-            print('\t\ttype %s;' % (t,), file=f)
+            print('%stype %s;' % (indent,t), file=f)
         for cls in classes:
             cls.print(2, f)
         print(CXX_EPILOGUE, file=f)
@@ -101,7 +102,7 @@ class Class:
             self.methods.append(Method(self.name, method))
     
     def print(self, level, f):
-        indent = '\t' * level
+        indent = ' ' * 4 * level
         print('%s// CLASS: %s' % (indent, self.name),
                 file=f)
         print('%stype %s;' % (indent, self.name),
