@@ -53,6 +53,9 @@ cxx_to_rust = {
     'double': 'f64',
     'int': 'i32',
     'long': 'i32',
+    'unsigned int': 'u32',
+    'wxByte': 'u8',
+    'wxCoord': 'i32',
     'wxWindowID': 'i32',
 }
 
@@ -346,11 +349,7 @@ cxx_unsupported_types = [
 ]
 cxx_supported_value_types = [
     'bool',
-    'double',
-    'int',
-    'long',
     'void',
-    'wxWindowID', # i32
 ]
 class CxxType:
     def __init__(self, s):
@@ -384,8 +383,15 @@ class CxxType:
             return True
         if self.basetype in cxx_unsupported_types:
             return True
-        if self.basetype not in cxx_supported_value_types:
+        if not self._is_cxx_supported_value_type():
             return not self.indirection
+        return False
+    
+    def _is_cxx_supported_value_type(self):
+        if self.basetype in cxx_supported_value_types:
+            return True
+        if self.basetype in cxx_to_rust:
+            return True
         return False
     
     def is_ptr(self):

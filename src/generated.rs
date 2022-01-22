@@ -218,7 +218,7 @@ mod ffi {
         fn SetThemeEnabled(self: Pin<&mut wxWindow>, enable: bool);
         fn GetThemeEnabled(self: &wxWindow) -> bool;
         fn CanSetTransparent(self: Pin<&mut wxWindow>) -> bool;
-        // CXX_UNSUPPORTED: fn SetTransparent(self: Pin<&mut wxWindow>, alpha: wxByte) -> bool;
+        fn SetTransparent(self: Pin<&mut wxWindow>, alpha: u8) -> bool;
         unsafe fn GetEventHandler(self: &wxWindow) -> *mut wxEvtHandler;
         fn HandleAsNavigationKey(self: Pin<&mut wxWindow>, event: &wxKeyEvent) -> bool;
         fn HandleWindowEvent(self: &wxWindow, event: Pin<&mut wxEvent>) -> bool;
@@ -246,7 +246,7 @@ mod ffi {
         fn Lower(self: Pin<&mut wxWindow>);
         fn Raise(self: Pin<&mut wxWindow>);
         fn Hide(self: Pin<&mut wxWindow>) -> bool;
-        // CXX_UNSUPPORTED: fn HideWithEffect(self: Pin<&mut wxWindow>, effect: wxShowEffect, timeout: unsigned int) -> bool;
+        // CXX_UNSUPPORTED: fn HideWithEffect(self: Pin<&mut wxWindow>, effect: wxShowEffect, timeout: u32) -> bool;
         fn IsEnabled(self: &wxWindow) -> bool;
         // BLOCKED: fn IsExposed(self: &wxWindow, x: i32, y: i32) -> bool;
         // BLOCKED: fn IsExposed(self: &wxWindow, pt: Pin<&mut wxPoint>) -> bool;
@@ -257,7 +257,7 @@ mod ffi {
         fn Disable(self: Pin<&mut wxWindow>) -> bool;
         fn Enable(self: Pin<&mut wxWindow>, enable: bool) -> bool;
         fn Show(self: Pin<&mut wxWindow>, show: bool) -> bool;
-        // CXX_UNSUPPORTED: fn ShowWithEffect(self: Pin<&mut wxWindow>, effect: wxShowEffect, timeout: unsigned int) -> bool;
+        // CXX_UNSUPPORTED: fn ShowWithEffect(self: Pin<&mut wxWindow>, effect: wxShowEffect, timeout: u32) -> bool;
         // CXX_UNSUPPORTED: fn GetHelpText(self: &wxWindow) -> wxString;
         fn SetHelpText(self: Pin<&mut wxWindow>, helpText: &wxString);
         // CXX_UNSUPPORTED: fn GetHelpTextAtPoint(self: &wxWindow, point: &wxPoint, origin: wxHelpEvent::Origin) -> wxString;
@@ -281,7 +281,7 @@ mod ffi {
         fn GetId(self: &wxWindow) -> i32;
         // CXX_UNSUPPORTED: fn GetLabel(self: &wxWindow) -> wxString;
         // CXX_UNSUPPORTED: fn GetLayoutDirection(self: &wxWindow) -> wxLayoutDirection;
-        // CXX_UNSUPPORTED: fn AdjustForLayoutDirection(self: &wxWindow, x: wxCoord, width: wxCoord, widthTotal: wxCoord) -> wxCoord;
+        fn AdjustForLayoutDirection(self: &wxWindow, x: i32, width: i32, widthTotal: i32) -> i32;
         // CXX_UNSUPPORTED: fn GetName(self: &wxWindow) -> wxString;
         // CXX_UNSUPPORTED: fn GetWindowVariant(self: &wxWindow) -> wxWindowVariant;
         fn SetId(self: Pin<&mut wxWindow>, winid: i32);
@@ -317,7 +317,7 @@ mod ffi {
         fn SetCursor(self: Pin<&mut wxWindow>, cursor: &wxCursor) -> bool;
         fn WarpPointer(self: Pin<&mut wxWindow>, x: i32, y: i32);
         fn EnableTouchEvents(self: Pin<&mut wxWindow>, eventsMask: i32) -> bool;
-        // CXX_UNSUPPORTED: fn HitTest(self: &wxWindow, x: wxCoord, y: wxCoord) -> wxHitTest;
+        // CXX_UNSUPPORTED: fn HitTest(self: &wxWindow, x: i32, y: i32) -> wxHitTest;
         // CXX_UNSUPPORTED: fn HitTest(self: &wxWindow, pt: &wxPoint) -> wxHitTest;
         // CXX_UNSUPPORTED: fn GetBorder(self: &wxWindow, flags: i32) -> wxBorder;
         // CXX_UNSUPPORTED: fn GetBorder(self: &wxWindow) -> wxBorder;
