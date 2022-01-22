@@ -1,4 +1,5 @@
 #include "wx/include/wxrust.h"
+#include "wx/include/wxrust2.h"
 
 namespace wxrust {
 

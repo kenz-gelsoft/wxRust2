@@ -14,6 +14,7 @@ mod ffi {
     #[namespace = ""]
     unsafe extern "C++" {
         include!("wx/include/wxrust.h");
+        include!("wx/include/wxrust2.h");
 '''
 CXX_EPILOGUE = '''\
     }
@@ -37,6 +38,7 @@ H_EPILOGUE = '''\
 
 CC_PROLOGUE = '''\
 #include "wx/include/wxrust.h"
+#include "wx/include/wxrust2.h"
 
 namespace wxrust {
 
@@ -128,10 +130,15 @@ class Class:
             if method.is_ctor:
                 yield method
 
-
+blocklist = {
+    'wxButton': [
+        'GetAuthNeeded',
+    ]
+}
 class Method:
     def __init__(self, classname, e):
         self.classname = classname
+        self.returns = CxxType(''.join(e.find('type').itertext()))
         self.name = e.findtext('name')
         self.is_ctor = self.name == classname
         self.this = Param(SelfType(classname), 'self')
@@ -140,7 +147,13 @@ class Method:
             ptype = ''.join(param.find('type').itertext())
             pname = param.findtext('declname')
             self.params.append(Param(CxxType(ptype), pname))
-    
+
+    def is_blocked(self):
+        blocked_methods = blocklist[self.classname]
+        if blocked_methods:
+            return self.name in blocked_methods
+        return False
+
     def rust_params(self):
         clone = self.params.copy()
         clone.insert(0, self.this)
@@ -153,13 +166,46 @@ class Method:
         return ', '.join((p.cxx_call() for p in self.params))
     
     def __str__(self):
-        body = 'fn %s(%s);' % (
+        body = '%sfn %s(%s)%s;' % (
+            self.maybe_unsafe(),
             self.name,
             self.rust_params(),
+            self.returns_or_not(),
         )
-        if self.is_ctor:
-            return '// %s' % (body,)
+        suppressed = self.suppressed_reason()
+        if suppressed:
+            return '// %s: %s' % (suppressed, body)
         return body
+    
+    def maybe_unsafe(self):
+        return self.uses_ptr_type() and 'unsafe ' or ''
+    
+    def uses_ptr_type(self):
+        if self.returns.is_ptr():
+            return True
+        return any(p.type.is_ptr() for p in self.params)
+
+    def returns_or_not(self):
+        returns = self.returns.in_rust()
+        if returns in ['void', '']:
+            returns = ''
+        else:
+            returns = ' -> %s' % (returns,)
+        return returns
+    
+    def suppressed_reason(self):
+        if self.is_ctor:
+            return 'CTOR'
+        if self.uses_unsupported_type():
+            return 'CXX_UNSUPPORTED'
+        if self.is_blocked():
+            return 'BLOCKED'
+        return None
+    
+    def uses_unsupported_type(self):
+        if self.returns.not_supported():
+            return True
+        return any(p.type.not_supported() for p in self.params)
 
     def for_h(self):
         body = '%s *%s(%s);' % (
@@ -207,6 +253,13 @@ class SelfType:
     def in_rust(self):
         return 'Pin<&mut %s>' % (self.type,)
 
+cxx_unsupported_types = [
+    'long',
+]
+cxx_supported_value_types = [
+    'bool',
+    'void',
+]
 class CxxType:
     def __init__(self, s):
         self.in_cxx = s
@@ -225,11 +278,24 @@ class CxxType:
         if t in cxx_to_rust:
             t = cxx_to_rust[t]
         ref = self.indirection
-        if ref.startswith('*'):
-            ref = '&' + ref[1:]
+        mut = ''
+        if ref:
+            mut = self.mut and 'mut ' or ''
+        # if ref.startswith('*'):
+        #     ref = '&' + ref[1:]
         if ref.startswith('&') and self.mut:
             return 'Pin<%smut %s>' % (ref, t)
-        return '%s%s' % (ref, t)
+        return '%s%s%s' % (ref, mut, t)
+    
+    def not_supported(self):
+        if self.basetype in cxx_unsupported_types:
+            return True
+        if self.basetype not in cxx_supported_value_types:
+            return not self.indirection
+        return False
+    
+    def is_ptr(self):
+        return self.indirection.startswith('*')
 
 if __name__ == '__main__':
     main()
