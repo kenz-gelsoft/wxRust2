@@ -14,5 +14,14 @@ wxButton *NewButton(wxWindow * parent, wxWindowID id, const wxString & label, co
     return new wxButton(parent, id, label, pos, size, style, validator, name);
 }
 
+// CLASS: wxWindow
+wxWindow *NewWindow() {
+    return new wxWindow();
+}
+
+wxWindow *NewWindow(wxWindow * parent, wxWindowID id, const wxPoint & pos, const wxSize & size, long style, const wxString & name) {
+    return new wxWindow(parent, id, pos, size, style, name);
+}
+
 } // namespace wxrust
 

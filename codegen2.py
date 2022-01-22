@@ -50,6 +50,7 @@ CC_EPILOGUE = '''\
 '''
 
 cxx_to_rust = {
+    'int': 'i32',
     'long': 'i32',
     'wxWindowID': 'i32',
 }
@@ -59,18 +60,49 @@ types = [
     'wxSize',
     'wxString',
     'wxValidator',
-    'wxWindow',
+    # 'wxWindow',
+    'wxWindowList',
+    'wxRect',
+    'wxSizer',
+    'wxFont',
+    'wxRegion',
+    'wxColour',
+    'wxPalette',
+    'wxEvtHandler',
+    'wxKeyEvent',
+    'wxEvent',
+    'wxToolTip',
+    'wxMenu',
+    'wxAcceleratorTable',
+    # 'wxAccessible',
+    'wxDropTarget',
+    'wxLayoutConstraints',
+    'wxCaret',
+    'wxCursor',
+    'wxUpdateUIEvent',
+    'wxIdleEvent',
 ]
 
 # place wxWidgets doxygen xml files in wxml/ dir and run this.
 def main():
-    tree = ET.parse('wxml/classwx_button.xml')
-    root = tree.getroot()
-    
+    files = [
+        'wxml/classwx_button.xml',
+        'wxml/classwx_window.xml',
+    ]
     classes = []
-    for cls in classes_in(root):
-        classes.append(Class(cls))
+    for file in files:
+        for cls in parse_classes_in(file):
+            classes.append(cls)
     
+    generate_bindings_for(classes)
+
+def parse_classes_in(xmlfile):
+    tree = ET.parse(xmlfile)
+    root = tree.getroot()
+    for cls in root.findall(".//compounddef[@kind='class']"):
+        yield Class(cls)
+
+def generate_bindings_for(classes):    
     with open('src/generated.rs', 'w') as f:
         indent = ' ' * 4 * 2
         print(PROLOGUE, file=f)
@@ -93,15 +125,12 @@ def main():
             cls.print_ctors_to_cc(f)
         print(CC_EPILOGUE, file=f)
 
-def classes_in(root):
-    return root.findall(".//compounddef[@kind='class']")
-
 class Class:
     def __init__(self, e):
         self.name = e.findtext('compoundname')
         self.methods = []
         for method in e.findall(".//memberdef[@kind='function']"):
-            self.methods.append(Method(self.name, method))
+            self.methods.append(Method(self, method))
     
     def print(self, level, f):
         indent = ' ' * 4 * level
@@ -110,8 +139,9 @@ class Class:
         print('%stype %s;' % (indent, self.name),
                 file=f)
         for method in self.methods:
-            print('%s%s' % (indent, method),
-                    file=f)
+            for line in method.in_rust():
+                print('%s%s' % (indent, line),
+                        file=f)
     
     def print_ctors_to_h(self, f):
         print('// CLASS: %s' % (self.name,),
@@ -132,24 +162,111 @@ class Class:
 
 blocklist = {
     'wxButton': [
+        # wxButtonBase's methods
         'GetAuthNeeded',
-    ]
+    ],
+    'wxWindow': [
+        # wxWindowBase's methods
+        # or method qualifier treatment is needed
+        'AcceptsFocus',
+        'AcceptsFocusFromKeyboard',
+        'AcceptsFocusRecursively',
+        'AddChild',
+        'AddPendingEvent',
+        'CacheBestSize',
+        'CanAcceptFocus',
+        'CanAcceptFocusFromKeyboard',
+        'ClientToScreen',
+        'DisableFocusFromKeyboard',
+        'EnableVisibleFocus',
+        'FindFocus',
+        'FindWindow',
+        'FindWindowByLabel',
+        'FindWindowByName',
+        'GetAccessible',
+        'GetAutoLayout',
+        'GetCapture',
+        'GetCaret',
+        'GetChildren',
+        'GetClientSize',
+        'GetConstraints',
+        'GetContainingSizer',
+        'GetCursor',
+        'GetDropTarget',
+        'GetEventHandler',
+        'GetGrandParent',
+        'GetNextSibling',
+        'GetParent',
+        'GetPosition',
+        'GetPrevSibling',
+        'GetScreenPosition',
+        'GetSize',
+        'GetSizer',
+        'GetTextExtent',
+        'GetThemeEnabled',
+        'GetToolTip',
+        'GetUpdateRegion',
+        'GetVirtualSize',
+        'HandleWindowEvent',
+        'HasCapture',
+        'HasFocus',
+        'HasMultiplePages',
+        'InheritsBackgroundColour',
+        'InheritsForegroundColour',
+        'IsBeingDeleted',
+        'IsDescendant',
+        'IsDoubleBuffered',
+        'IsEnabled',
+        'IsExposed',
+        'IsFocusable',
+        'IsFrozen',
+        'IsRetained',
+        'IsShown',
+        'IsShownOnScreen',
+        'IsThisEnable',
+        'IsThisEnabled',
+        'IsTopLevel',
+        'IsTransparentBackgroundSupported',
+        'ProcessEvent',
+        'ProcessPendingEvents',
+        'ProcessThreadEvent',
+        'QueueEvent',
+        'RemoveChild',
+        'Reparent',
+        'SafelyProcessEvent',
+        'ScreenToClient',
+        'SendDestroyEvent',
+        'SetAccessible',
+        'SetDoubleBuffered',
+        'SetInitialBestSize',
+        'SetSize',
+        'ShouldInheritColours',
+        'UseBackgroundColour',
+        'UseBgCol',
+        'UseForegroundColour',
+    ],
 }
 class Method:
-    def __init__(self, classname, e):
-        self.classname = classname
+    def __init__(self, cls, e):
+        self.cls = cls
         self.returns = CxxType(''.join(e.find('type').itertext()))
         self.name = e.findtext('name')
-        self.is_ctor = self.name == classname
-        self.this = Param(SelfType(classname), 'self')
+        self.index = self.overload_index()
+        self.is_ctor = self.name == cls.name
+        self.this = Param(SelfType(cls.name), 'self')
         self.params = []
         for param in e.findall('param'):
             ptype = ''.join(param.find('type').itertext())
             pname = param.findtext('declname')
             self.params.append(Param(CxxType(ptype), pname))
 
+    def overload_index(self):
+        return sum(m.name == self.name for m in self.cls.methods)
+
     def is_blocked(self):
-        blocked_methods = blocklist[self.classname]
+        if self.cls.name not in blocklist:
+            return False
+        blocked_methods = blocklist[self.cls.name]
         if blocked_methods:
             return self.name in blocked_methods
         return False
@@ -164,8 +281,8 @@ class Method:
     
     def call_params(self):
         return ', '.join((p.cxx_call() for p in self.params))
-    
-    def __str__(self):
+
+    def in_rust(self):
         body = '%sfn %s(%s)%s;' % (
             self.maybe_unsafe(),
             self.name,
@@ -174,8 +291,18 @@ class Method:
         )
         suppressed = self.suppressed_reason()
         if suppressed:
-            return '// %s: %s' % (suppressed, body)
-        return body
+            return ['// %s: %s' % (suppressed, body)]
+        lines = [body]
+        overload = self.overload_name()
+        if overload:
+            lines.insert(0, overload)
+        # print(lines)
+        return lines
+    
+    def overload_name(self):
+        if self.index == 0:
+            return ''
+        return '#[rust_name = "%s%s"]' % (self.name, self.index)
     
     def maybe_unsafe(self):
         return self.uses_ptr_type() and 'unsafe ' or ''
@@ -222,10 +349,10 @@ class Method:
 }
 '''
         return cc_template % (
-            self.classname,
+            self.cls.name,
             self.new_name(),
             self.params_decl(),
-            self.classname,
+            self.cls.name,
             self.call_params(),
         )
 
@@ -253,6 +380,9 @@ class SelfType:
     def in_rust(self):
         return 'Pin<&mut %s>' % (self.type,)
 
+os_unsupported_types = [
+    'wxAccessible',
+]
 cxx_unsupported_types = [
     'long',
 ]
@@ -281,13 +411,15 @@ class CxxType:
         mut = ''
         if ref:
             mut = self.mut and 'mut ' or ''
-        # if ref.startswith('*'):
-        #     ref = '&' + ref[1:]
+            if ref.startswith('*') and not self.mut:
+                mut = 'const '
         if ref.startswith('&') and self.mut:
             return 'Pin<%smut %s>' % (ref, t)
         return '%s%s%s' % (ref, mut, t)
     
     def not_supported(self):
+        if self.basetype in os_unsupported_types:
+            return True
         if self.basetype in cxx_unsupported_types:
             return True
         if self.basetype not in cxx_supported_value_types:
