@@ -50,6 +50,7 @@ CC_EPILOGUE = '''\
 '''
 
 cxx_to_rust = {
+    'double': 'f64',
     'int': 'i32',
     'long': 'i32',
     'wxWindowID': 'i32',
@@ -130,7 +131,10 @@ class Class:
         self.name = e.findtext('compoundname')
         self.methods = []
         for method in e.findall(".//memberdef[@kind='function']"):
-            self.methods.append(Method(self, method))
+            m = Method(self, method)
+            if not m.is_public:
+                continue
+            self.methods.append(m)
     
     def print(self, level, f):
         indent = ' ' * 4 * level
@@ -162,98 +166,49 @@ class Class:
 
 blocklist = {
     'wxButton': [
-        # wxButtonBase's methods
-        'GetAuthNeeded',
+        # TODO: treat long correctly
+        'Create',
     ],
     'wxWindow': [
+        # TODO: treat long correctly
+        'Create',
         # wxWindowBase's methods
-        # or method qualifier treatment is needed
-        'AcceptsFocus',
-        'AcceptsFocusFromKeyboard',
-        'AcceptsFocusRecursively',
         'AddChild',
-        'AddPendingEvent',
-        'CacheBestSize',
-        'CanAcceptFocus',
-        'CanAcceptFocusFromKeyboard',
-        'ClientToScreen',
-        'DisableFocusFromKeyboard',
-        'EnableVisibleFocus',
         'FindFocus',
         'FindWindow',
+        'FindWindowById',
         'FindWindowByLabel',
         'FindWindowByName',
-        'GetAccessible',
-        'GetAutoLayout',
+        'FromDIP',
         'GetCapture',
-        'GetCaret',
-        'GetChildren',
-        'GetClientSize',
-        'GetConstraints',
-        'GetContainingSizer',
-        'GetCursor',
-        'GetDropTarget',
-        'GetEventHandler',
-        'GetGrandParent',
-        'GetNextSibling',
-        'GetParent',
-        'GetPosition',
-        'GetPrevSibling',
-        'GetScreenPosition',
-        'GetSize',
-        'GetSizer',
-        'GetTextExtent',
-        'GetThemeEnabled',
-        'GetToolTip',
-        'GetUpdateRegion',
-        'GetVirtualSize',
-        'HandleWindowEvent',
-        'HasCapture',
-        'HasFocus',
-        'HasMultiplePages',
-        'InheritsBackgroundColour',
-        'InheritsForegroundColour',
-        'IsBeingDeleted',
+        'GetExtraStyle',
+        'GetWindowStyle',
+        'GetWindowStyleFlag',
         'IsDescendant',
-        'IsDoubleBuffered',
-        'IsEnabled',
         'IsExposed',
-        'IsFocusable',
-        'IsFrozen',
-        'IsRetained',
-        'IsShown',
-        'IsShownOnScreen',
-        'IsThisEnable',
-        'IsThisEnabled',
-        'IsTopLevel',
-        'IsTransparentBackgroundSupported',
-        'ProcessEvent',
-        'ProcessPendingEvents',
-        'ProcessThreadEvent',
-        'QueueEvent',
+        'NewControlId',
         'RemoveChild',
         'Reparent',
-        'SafelyProcessEvent',
-        'ScreenToClient',
-        'SendDestroyEvent',
-        'SetAccessible',
-        'SetDoubleBuffered',
-        'SetInitialBestSize',
+        'SetExtraStyle',
         'SetSize',
-        'ShouldInheritColours',
-        'UseBackgroundColour',
-        'UseBgCol',
-        'UseForegroundColour',
+        'SetWindowStyle',
+        'SetWindowStyleFlag',
+        'ToDIP',
+        'UnreserveControlId',
+        'UpdateWindowUI',
     ],
 }
 class Method:
     def __init__(self, cls, e):
+        self.is_static = e.get('static') == 'yes'
+        self.is_public = e.get('prot') == 'public'
         self.__class = cls
         self.__returns = CxxType(''.join(e.find('type').itertext()))
         self.__name = e.findtext('name')
         self.__index = self._overload_index()
         self.is_ctor = self.__name == cls.name
-        self.__self_param = Param(SelfType(cls.name), 'self')
+        const = e.get('const') == 'yes'
+        self.__self_param = Param(SelfType(cls.name, const), 'self')
         self.__params = []
         for param in e.findall('param'):
             ptype = ''.join(param.find('type').itertext())
@@ -273,7 +228,8 @@ class Method:
 
     def _rust_params(self):
         params = self.__params.copy()
-        params.insert(0, self.__self_param)
+        if not self.is_static:
+            params.insert(0, self.__self_param)
         return ', '.join((str(p) for p in params))
     
     def _params_decl(self):
@@ -374,21 +330,27 @@ class Param:
         return self.name
 
 class SelfType:
-    def __init__(self, s):
+    def __init__(self, s, const):
         self.type = s
+        self.const = const
 
     def in_rust(self):
+        if self.const:
+            return '&%s' % (self.type)
         return 'Pin<&mut %s>' % (self.type,)
 
 os_unsupported_types = [
     'wxAccessible',
 ]
 cxx_unsupported_types = [
-    'long',
 ]
 cxx_supported_value_types = [
     'bool',
+    'double',
+    'int',
+    'long',
     'void',
+    'wxWindowID', # i32
 ]
 class CxxType:
     def __init__(self, s):
