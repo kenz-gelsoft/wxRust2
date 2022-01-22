@@ -146,16 +146,16 @@ class Class:
     def print_ctors_to_h(self, f):
         print('// CLASS: %s' % (self.name,),
                 file=f)
-        for ctor in self.ctors():
+        for ctor in self._ctors():
             print(ctor.for_h(), file=f)
     
     def print_ctors_to_cc(self, f):
         print('// CLASS: %s' % (self.name,),
                 file=f)
-        for ctor in self.ctors():
+        for ctor in self._ctors():
             print(ctor.for_cc(), file=f)
 
-    def ctors(self):
+    def _ctors(self):
         for method in self.methods:
             if method.is_ctor:
                 yield method
@@ -248,97 +248,97 @@ blocklist = {
 }
 class Method:
     def __init__(self, cls, e):
-        self.cls = cls
-        self.returns = CxxType(''.join(e.find('type').itertext()))
-        self.name = e.findtext('name')
-        self.index = self.overload_index()
-        self.is_ctor = self.name == cls.name
-        self.this = Param(SelfType(cls.name), 'self')
-        self.params = []
+        self.__class = cls
+        self.__returns = CxxType(''.join(e.find('type').itertext()))
+        self.__name = e.findtext('name')
+        self.__index = self._overload_index()
+        self.is_ctor = self.__name == cls.name
+        self.__self_param = Param(SelfType(cls.name), 'self')
+        self.__params = []
         for param in e.findall('param'):
             ptype = ''.join(param.find('type').itertext())
             pname = param.findtext('declname')
-            self.params.append(Param(CxxType(ptype), pname))
+            self.__params.append(Param(CxxType(ptype), pname))
 
-    def overload_index(self):
-        return sum(m.name == self.name for m in self.cls.methods)
+    def _overload_index(self):
+        return sum(m.__name == self.__name for m in self.__class.methods)
 
-    def is_blocked(self):
-        if self.cls.name not in blocklist:
+    def _is_blocked(self):
+        if self.__class.name not in blocklist:
             return False
-        blocked_methods = blocklist[self.cls.name]
+        blocked_methods = blocklist[self.__class.name]
         if blocked_methods:
-            return self.name in blocked_methods
+            return self.__name in blocked_methods
         return False
 
-    def rust_params(self):
-        clone = self.params.copy()
-        clone.insert(0, self.this)
-        return ', '.join((str(p) for p in clone))
+    def _rust_params(self):
+        params = self.__params.copy()
+        params.insert(0, self.__self_param)
+        return ', '.join((str(p) for p in params))
     
-    def params_decl(self):
-        return ', '.join((p.cxx_decl() for p in self.params))
+    def _params_decl(self):
+        return ', '.join((p.cxx_decl() for p in self.__params))
     
-    def call_params(self):
-        return ', '.join((p.cxx_call() for p in self.params))
+    def _call_params(self):
+        return ', '.join((p.cxx_call() for p in self.__params))
 
     def in_rust(self):
         body = '%sfn %s(%s)%s;' % (
-            self.maybe_unsafe(),
-            self.name,
-            self.rust_params(),
-            self.returns_or_not(),
+            self._maybe_unsafe(),
+            self.__name,
+            self._rust_params(),
+            self._returns_or_not(),
         )
-        suppressed = self.suppressed_reason()
+        suppressed = self._suppressed_reason()
         if suppressed:
             return ['// %s: %s' % (suppressed, body)]
         lines = [body]
-        overload = self.overload_name()
+        overload = self._overload_name()
         if overload:
             lines.insert(0, overload)
         # print(lines)
         return lines
     
-    def overload_name(self):
-        if self.index == 0:
+    def _overload_name(self):
+        if self.__index == 0:
             return ''
-        return '#[rust_name = "%s%s"]' % (self.name, self.index)
+        return '#[rust_name = "%s%s"]' % (self.__name, self.__index)
     
-    def maybe_unsafe(self):
-        return self.uses_ptr_type() and 'unsafe ' or ''
+    def _maybe_unsafe(self):
+        return self._uses_ptr_type() and 'unsafe ' or ''
     
-    def uses_ptr_type(self):
-        if self.returns.is_ptr():
+    def _uses_ptr_type(self):
+        if self.__returns.is_ptr():
             return True
-        return any(p.type.is_ptr() for p in self.params)
+        return any(p.type.is_ptr() for p in self.__params)
 
-    def returns_or_not(self):
-        returns = self.returns.in_rust()
+    def _returns_or_not(self):
+        returns = self.__returns.in_rust()
         if returns in ['void', '']:
             returns = ''
         else:
             returns = ' -> %s' % (returns,)
         return returns
     
-    def suppressed_reason(self):
+    def _suppressed_reason(self):
         if self.is_ctor:
             return 'CTOR'
-        if self.uses_unsupported_type():
+        if self._uses_unsupported_type():
             return 'CXX_UNSUPPORTED'
-        if self.is_blocked():
+        if self._is_blocked():
             return 'BLOCKED'
         return None
     
-    def uses_unsupported_type(self):
-        if self.returns.not_supported():
+    def _uses_unsupported_type(self):
+        if self.__returns.not_supported():
             return True
-        return any(p.type.not_supported() for p in self.params)
+        return any(p.type.not_supported() for p in self.__params)
 
     def for_h(self):
         body = '%s *%s(%s);' % (
-            self.name,
-            self.new_name(),
-            self.params_decl(),
+            self.__name,
+            self._new_name(),
+            self._params_decl(),
         )
         return body
     
@@ -349,15 +349,15 @@ class Method:
 }
 '''
         return cc_template % (
-            self.cls.name,
-            self.new_name(),
-            self.params_decl(),
-            self.cls.name,
-            self.call_params(),
+            self.__class.name,
+            self._new_name(),
+            self._params_decl(),
+            self.__class.name,
+            self._call_params(),
         )
 
-    def new_name(self):
-        return 'New%s' % (self.name[2:],)
+    def _new_name(self):
+        return 'New%s' % (self.__name[2:],)
 
 class Param:
     def __init__(self, type, name):
