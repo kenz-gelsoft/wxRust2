@@ -5,6 +5,11 @@ namespace wxrust {
 
 // Constructors
 
+// CLASS: wxAnyButton
+wxAnyButton *NewAnyButton() {
+    return new wxAnyButton();
+}
+
 // CLASS: wxButton
 wxButton *NewButton() {
     return new wxButton();

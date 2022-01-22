@@ -32,7 +32,6 @@ H_PROLOGUE = '''\
 namespace wxrust {
 '''
 H_EPILOGUE = '''\
-
 } // namespace wxrust
 '''
 
@@ -85,11 +84,13 @@ types = [
     'wxCursor',
     'wxUpdateUIEvent',
     'wxIdleEvent',
+    'wxBitmap',
 ]
 
 # place wxWidgets doxygen xml files in wxml/ dir and run this.
 def main():
     files = [
+        'wxml/classwx_any_button.xml',
         'wxml/classwx_button.xml',
         'wxml/classwx_window.xml',
     ]
@@ -141,6 +142,7 @@ class Class:
     
     def print(self, level, f):
         indent = ' ' * 4 * level
+        print(file=f)
         print('%s// CLASS: %s' % (indent, self.name),
                 file=f)
         print('%stype %s;' % (indent, self.name),
@@ -155,6 +157,7 @@ class Class:
                 file=f)
         for ctor in self._ctors():
             print(ctor.for_h(), file=f)
+        print(file=f)
     
     def print_ctors_to_cc(self, f):
         print('// CLASS: %s' % (self.name,),

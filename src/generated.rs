@@ -32,6 +32,30 @@ mod ffi {
         type wxCursor;
         type wxUpdateUIEvent;
         type wxIdleEvent;
+        type wxBitmap;
+
+        // CLASS: wxAnyButton
+        type wxAnyButton;
+        // CTOR: fn wxAnyButton(self: Pin<&mut wxAnyButton>);
+        // CXX_UNSUPPORTED: fn ~wxAnyButton(self: Pin<&mut wxAnyButton>);
+        // CXX_UNSUPPORTED: fn GetBitmap(self: &wxAnyButton) -> wxBitmap;
+        // CXX_UNSUPPORTED: fn GetBitmapCurrent(self: &wxAnyButton) -> wxBitmap;
+        // CXX_UNSUPPORTED: fn GetBitmapDisabled(self: &wxAnyButton) -> wxBitmap;
+        // CXX_UNSUPPORTED: fn GetBitmapFocus(self: &wxAnyButton) -> wxBitmap;
+        // CXX_UNSUPPORTED: fn GetBitmapLabel(self: &wxAnyButton) -> wxBitmap;
+        // CXX_UNSUPPORTED: fn GetBitmapPressed(self: &wxAnyButton) -> wxBitmap;
+        // CXX_UNSUPPORTED: fn SetBitmap(self: Pin<&mut wxAnyButton>, bitmap: &wxBitmap, dir: wxDirection);
+        fn SetBitmapCurrent(self: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
+        fn SetBitmapDisabled(self: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
+        fn SetBitmapFocus(self: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
+        fn SetBitmapLabel(self: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
+        fn SetBitmapPressed(self: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
+        // CXX_UNSUPPORTED: fn GetBitmapMargins(self: Pin<&mut wxAnyButton>) -> wxSize;
+        fn SetBitmapMargins(self: Pin<&mut wxAnyButton>, x: i32, y: i32);
+        #[rust_name = "SetBitmapMargins1"]
+        fn SetBitmapMargins(self: Pin<&mut wxAnyButton>, sz: &wxSize);
+        // CXX_UNSUPPORTED: fn SetBitmapPosition(self: Pin<&mut wxAnyButton>, dir: wxDirection);
+
         // CLASS: wxButton
         type wxButton;
         // CTOR: fn wxButton(self: Pin<&mut wxButton>);
@@ -43,6 +67,7 @@ mod ffi {
         unsafe fn SetDefault(self: Pin<&mut wxButton>) -> *mut wxWindow;
         fn SetLabel(self: Pin<&mut wxButton>, label: &wxString);
         // CXX_UNSUPPORTED: unsafe fn GetDefaultSize(win: *mut wxWindow) -> wxSize;
+
         // CLASS: wxWindow
         type wxWindow;
         fn AcceptsFocus(self: &wxWindow) -> bool;
