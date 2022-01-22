@@ -33,6 +33,26 @@ mod ffi {
         type wxUpdateUIEvent;
         type wxIdleEvent;
         type wxBitmap;
+        type wxCommandEvent;
+
+        // CLASS: wxControl
+        type wxControl;
+        // CTOR: unsafe fn wxControl(self: Pin<&mut wxControl>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString);
+        // CTOR: fn wxControl(self: Pin<&mut wxControl>);
+        // BLOCKED: unsafe fn Create(self: Pin<&mut wxControl>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
+        fn Command(self: Pin<&mut wxControl>, event: Pin<&mut wxCommandEvent>);
+        // CXX_UNSUPPORTED: fn GetLabel(self: &wxControl) -> wxString;
+        // CXX_UNSUPPORTED: fn GetLabelText(self: &wxControl) -> wxString;
+        // CXX_UNSUPPORTED: fn GetSizeFromTextSize(self: &wxControl, xlen: i32, ylen: i32) -> wxSize;
+        // CXX_UNSUPPORTED: fn GetSizeFromTextSize(self: &wxControl, tsize: &wxSize) -> wxSize;
+        // CXX_UNSUPPORTED: fn GetSizeFromText(self: &wxControl, text: &wxString) -> wxSize;
+        fn SetLabel(self: Pin<&mut wxControl>, label: &wxString);
+        fn SetLabelText(self: Pin<&mut wxControl>, text: &wxString);
+        fn SetLabelMarkup(self: Pin<&mut wxControl>, markup: &wxString) -> bool;
+        // CXX_UNSUPPORTED: fn GetLabelText(label: &wxString) -> wxString;
+        // CXX_UNSUPPORTED: fn RemoveMnemonics(str: &wxString) -> wxString;
+        // CXX_UNSUPPORTED: fn EscapeMnemonics(text: &wxString) -> wxString;
+        // CXX_UNSUPPORTED: fn Ellipsize(label: &wxString, dc: &wxDC, mode: wxEllipsizeMode, maxWidth: i32, flags: i32) -> wxString;
 
         // CLASS: wxAnyButton
         type wxAnyButton;

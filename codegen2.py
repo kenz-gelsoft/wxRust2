@@ -85,11 +85,13 @@ types = [
     'wxUpdateUIEvent',
     'wxIdleEvent',
     'wxBitmap',
+    'wxCommandEvent',
 ]
 
 # place wxWidgets doxygen xml files in wxml/ dir and run this.
 def main():
     files = [
+        'wxml/classwx_control.xml',
         'wxml/classwx_any_button.xml',
         'wxml/classwx_button.xml',
         'wxml/classwx_window.xml',
@@ -172,6 +174,10 @@ class Class:
 
 blocklist = {
     'wxButton': [
+        # TODO: treat long correctly
+        'Create',
+    ],
+    'wxControl': [
         # TODO: treat long correctly
         'Create',
     ],

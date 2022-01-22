@@ -5,6 +5,15 @@ namespace wxrust {
 
 // Constructors
 
+// CLASS: wxControl
+wxControl *NewControl(wxWindow * parent, wxWindowID id, const wxPoint & pos, const wxSize & size, long style, const wxValidator & validator, const wxString & name) {
+    return new wxControl(parent, id, pos, size, style, validator, name);
+}
+
+wxControl *NewControl() {
+    return new wxControl();
+}
+
 // CLASS: wxAnyButton
 wxAnyButton *NewAnyButton() {
     return new wxAnyButton();

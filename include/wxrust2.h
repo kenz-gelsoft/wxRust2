@@ -7,6 +7,10 @@
 
 namespace wxrust {
 
+// CLASS: wxControl
+wxControl *NewControl(wxWindow * parent, wxWindowID id, const wxPoint & pos, const wxSize & size, long style, const wxValidator & validator, const wxString & name);
+wxControl *NewControl();
+
 // CLASS: wxAnyButton
 wxAnyButton *NewAnyButton();
 
