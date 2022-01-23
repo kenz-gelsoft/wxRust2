@@ -2,6 +2,15 @@
 #![allow(non_upper_case_globals)]
 #![allow(unused_parens)]
 
+use std::os::raw::c_char;
+use std::pin::Pin;
+
+use crate::macros::wx_class;
+
+// any pointer type used on ffi boundary.
+// we chose this type as it's handy in cxx.
+type UnsafeAnyPtr = *const c_char;
+
 #[cxx::bridge(namespace = "wxrust")]
 mod ffi {
     #[namespace = ""]
@@ -451,5 +460,36 @@ mod ffi {
         fn SetLabel(self: Pin<&mut wxButton>, label: &wxString);
         // CXX_UNSUPPORTED: unsafe fn GetDefaultSize(win: *mut wxWindow) -> wxSize;
     }
+}
+
+pub trait ObjectMethods {
+    unsafe fn as_ptr(&self) -> UnsafeAnyPtr;
+    fn pinned<T>(&self) -> Pin<&mut T> {
+        unsafe { Pin::new_unchecked(&mut *(self.as_ptr() as *mut _)) }
+    }
+}
+
+// wxObject
+wx_class! { Object(wxObject) impl
+}
+
+// wxEvtHandler
+wx_class! { EvtHandler(wxEvtHandler) impl
+}
+
+// wxWindow
+wx_class! { Window(wxWindow) impl
+}
+
+// wxControl
+wx_class! { Control(wxControl) impl
+}
+
+// wxAnyButton
+wx_class! { AnyButton(wxAnyButton) impl
+}
+
+// wxButton
+wx_class! { Button(wxButton) impl
 }
 

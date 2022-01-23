@@ -9,6 +9,15 @@ PROLOGUE = '''\
 '''
 
 CXX_PROLOGUE = '''\
+use std::os::raw::c_char;
+use std::pin::Pin;
+
+use crate::macros::wx_class;
+
+// any pointer type used on ffi boundary.
+// we chose this type as it's handy in cxx.
+type UnsafeAnyPtr = *const c_char;
+
 #[cxx::bridge(namespace = "wxrust")]
 mod ffi {
     #[namespace = ""]
@@ -17,6 +26,13 @@ mod ffi {
         include!("wx/include/wxrust2.h");
 '''
 CXX_EPILOGUE = '''\
+    }
+}
+
+pub trait ObjectMethods {
+    unsafe fn as_ptr(&self) -> UnsafeAnyPtr;
+    fn pinned<T>(&self) -> Pin<&mut T> {
+        unsafe { Pin::new_unchecked(&mut *(self.as_ptr() as *mut _)) }
     }
 }
 '''
@@ -126,6 +142,9 @@ def generate_bindings_for(classes):
             cls.print(2, f)
         print(CXX_EPILOGUE, file=f)
 
+        for cls in classes:
+            cls.print_rs(f)
+
     with open('include/wxrust2.h', 'w') as f:
         print(H_PROLOGUE, file=f)
         for cls in classes:
@@ -160,6 +179,19 @@ class Class:
                 print('%s%s' % (indent, line),
                         file=f)
     
+    def print_rs(self, f):
+        rs_template = '''\
+// %s
+wx_class! { %s(%s) impl
+}
+'''
+        without_wx = self.name[2:]
+        print(rs_template % (
+            self.name,
+            without_wx,
+            self.name,
+        ), file=f)
+
     def print_ctors_to_h(self, f):
         print('// CLASS: %s' % (self.name,),
                 file=f)
