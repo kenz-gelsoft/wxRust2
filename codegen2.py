@@ -88,11 +88,14 @@ types = [
     'wxCommandEvent',
     'wxClientData',
     'wxEventFilter',
+    'wxClassInfo',
+    'wxObjectRefData',
 ]
 
 # place wxWidgets doxygen xml files in wxml/ dir and run this.
 def main():
     files = [
+        'wxml/classwx_object.xml',
         'wxml/classwx_evt_handler.xml',
         'wxml/classwx_window.xml',
         'wxml/classwx_control.xml',
@@ -176,6 +179,9 @@ class Class:
                 yield method
 
 blocklist = {
+    'wxObject': [
+        'operator delete',
+    ],
     'wxEvtHandler': [
         'AddFilter',
         'Bind',

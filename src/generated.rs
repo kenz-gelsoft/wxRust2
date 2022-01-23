@@ -35,6 +35,24 @@ mod ffi {
         type wxCommandEvent;
         type wxClientData;
         type wxEventFilter;
+        type wxClassInfo;
+        type wxObjectRefData;
+
+        // CLASS: wxObject
+        type wxObject;
+        // CTOR: fn wxObject(self: Pin<&mut wxObject>);
+        // CTOR: fn wxObject(self: Pin<&mut wxObject>, other: &wxObject);
+        // CXX_UNSUPPORTED: fn ~wxObject(self: Pin<&mut wxObject>);
+        unsafe fn GetClassInfo(self: &wxObject) -> *mut wxClassInfo;
+        unsafe fn GetRefData(self: &wxObject) -> *mut wxObjectRefData;
+        unsafe fn IsKindOf(self: &wxObject, info: *const wxClassInfo) -> bool;
+        fn IsSameAs(self: &wxObject, obj: &wxObject) -> bool;
+        fn Ref(self: Pin<&mut wxObject>, clone: &wxObject);
+        unsafe fn SetRefData(self: Pin<&mut wxObject>, data: *mut wxObjectRefData);
+        fn UnRef(self: Pin<&mut wxObject>);
+        fn UnShare(self: Pin<&mut wxObject>);
+        // BLOCKED: unsafe fn operator delete(self: Pin<&mut wxObject>, buf: *mut void);
+        // CXX_UNSUPPORTED: unsafe fn operator new(self: Pin<&mut wxObject>, size: size_t, filename: &wxString, lineNum: i32) -> *mut void;
 
         // CLASS: wxEvtHandler
         type wxEvtHandler;

@@ -5,6 +5,15 @@ namespace wxrust {
 
 // Constructors
 
+// CLASS: wxObject
+wxObject *NewObject() {
+    return new wxObject();
+}
+
+wxObject *NewObject(const wxObject & other) {
+    return new wxObject(other);
+}
+
 // CLASS: wxEvtHandler
 wxEvtHandler *NewEvtHandler() {
     return new wxEvtHandler();

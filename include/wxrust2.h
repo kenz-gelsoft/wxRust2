@@ -7,6 +7,10 @@
 
 namespace wxrust {
 
+// CLASS: wxObject
+wxObject *NewObject();
+wxObject *NewObject(const wxObject & other);
+
 // CLASS: wxEvtHandler
 wxEvtHandler *NewEvtHandler();
 
