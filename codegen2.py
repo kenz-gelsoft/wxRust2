@@ -71,7 +71,7 @@ types = [
     'wxRegion',
     'wxColour',
     'wxPalette',
-    'wxEvtHandler',
+    # 'wxEvtHandler',
     'wxKeyEvent',
     'wxEvent',
     'wxToolTip',
@@ -86,15 +86,18 @@ types = [
     'wxIdleEvent',
     'wxBitmap',
     'wxCommandEvent',
+    'wxClientData',
+    'wxEventFilter',
 ]
 
 # place wxWidgets doxygen xml files in wxml/ dir and run this.
 def main():
     files = [
+        'wxml/classwx_evt_handler.xml',
+        'wxml/classwx_window.xml',
         'wxml/classwx_control.xml',
         'wxml/classwx_any_button.xml',
         'wxml/classwx_button.xml',
-        'wxml/classwx_window.xml',
     ]
     classes = []
     for file in files:
@@ -173,13 +176,14 @@ class Class:
                 yield method
 
 blocklist = {
-    'wxButton': [
-        # TODO: treat long correctly
-        'Create',
-    ],
-    'wxControl': [
-        # TODO: treat long correctly
-        'Create',
+    'wxEvtHandler': [
+        'AddFilter',
+        'Bind',
+        'CallAfter',
+        'GetClientData',
+        'RemoveFilter',
+        'SetClientData',
+        'Unbind',
     ],
     'wxWindow': [
         # TODO: treat long correctly
@@ -208,6 +212,14 @@ blocklist = {
         'ToDIP',
         'UnreserveControlId',
         'UpdateWindowUI',
+    ],
+    'wxControl': [
+        # TODO: treat long correctly
+        'Create',
+    ],
+    'wxButton': [
+        # TODO: treat long correctly
+        'Create',
     ],
 }
 class Method:

@@ -20,7 +20,6 @@ mod ffi {
         type wxRegion;
         type wxColour;
         type wxPalette;
-        type wxEvtHandler;
         type wxKeyEvent;
         type wxEvent;
         type wxToolTip;
@@ -34,59 +33,46 @@ mod ffi {
         type wxIdleEvent;
         type wxBitmap;
         type wxCommandEvent;
+        type wxClientData;
+        type wxEventFilter;
 
-        // CLASS: wxControl
-        type wxControl;
-        // CTOR: unsafe fn wxControl(self: Pin<&mut wxControl>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString);
-        // CTOR: fn wxControl(self: Pin<&mut wxControl>);
-        // BLOCKED: unsafe fn Create(self: Pin<&mut wxControl>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
-        fn Command(self: Pin<&mut wxControl>, event: Pin<&mut wxCommandEvent>);
-        // CXX_UNSUPPORTED: fn GetLabel(self: &wxControl) -> wxString;
-        // CXX_UNSUPPORTED: fn GetLabelText(self: &wxControl) -> wxString;
-        // CXX_UNSUPPORTED: fn GetSizeFromTextSize(self: &wxControl, xlen: i32, ylen: i32) -> wxSize;
-        // CXX_UNSUPPORTED: fn GetSizeFromTextSize(self: &wxControl, tsize: &wxSize) -> wxSize;
-        // CXX_UNSUPPORTED: fn GetSizeFromText(self: &wxControl, text: &wxString) -> wxSize;
-        fn SetLabel(self: Pin<&mut wxControl>, label: &wxString);
-        fn SetLabelText(self: Pin<&mut wxControl>, text: &wxString);
-        fn SetLabelMarkup(self: Pin<&mut wxControl>, markup: &wxString) -> bool;
-        // CXX_UNSUPPORTED: fn GetLabelText(label: &wxString) -> wxString;
-        // CXX_UNSUPPORTED: fn RemoveMnemonics(str: &wxString) -> wxString;
-        // CXX_UNSUPPORTED: fn EscapeMnemonics(text: &wxString) -> wxString;
-        // CXX_UNSUPPORTED: fn Ellipsize(label: &wxString, dc: &wxDC, mode: wxEllipsizeMode, maxWidth: i32, flags: i32) -> wxString;
-
-        // CLASS: wxAnyButton
-        type wxAnyButton;
-        // CTOR: fn wxAnyButton(self: Pin<&mut wxAnyButton>);
-        // CXX_UNSUPPORTED: fn ~wxAnyButton(self: Pin<&mut wxAnyButton>);
-        // CXX_UNSUPPORTED: fn GetBitmap(self: &wxAnyButton) -> wxBitmap;
-        // CXX_UNSUPPORTED: fn GetBitmapCurrent(self: &wxAnyButton) -> wxBitmap;
-        // CXX_UNSUPPORTED: fn GetBitmapDisabled(self: &wxAnyButton) -> wxBitmap;
-        // CXX_UNSUPPORTED: fn GetBitmapFocus(self: &wxAnyButton) -> wxBitmap;
-        // CXX_UNSUPPORTED: fn GetBitmapLabel(self: &wxAnyButton) -> wxBitmap;
-        // CXX_UNSUPPORTED: fn GetBitmapPressed(self: &wxAnyButton) -> wxBitmap;
-        // CXX_UNSUPPORTED: fn SetBitmap(self: Pin<&mut wxAnyButton>, bitmap: &wxBitmap, dir: wxDirection);
-        fn SetBitmapCurrent(self: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
-        fn SetBitmapDisabled(self: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
-        fn SetBitmapFocus(self: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
-        fn SetBitmapLabel(self: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
-        fn SetBitmapPressed(self: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
-        // CXX_UNSUPPORTED: fn GetBitmapMargins(self: Pin<&mut wxAnyButton>) -> wxSize;
-        fn SetBitmapMargins(self: Pin<&mut wxAnyButton>, x: i32, y: i32);
-        #[rust_name = "SetBitmapMargins1"]
-        fn SetBitmapMargins(self: Pin<&mut wxAnyButton>, sz: &wxSize);
-        // CXX_UNSUPPORTED: fn SetBitmapPosition(self: Pin<&mut wxAnyButton>, dir: wxDirection);
-
-        // CLASS: wxButton
-        type wxButton;
-        // CTOR: fn wxButton(self: Pin<&mut wxButton>);
-        // CTOR: unsafe fn wxButton(self: Pin<&mut wxButton>, parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString);
-        // BLOCKED: unsafe fn Create(self: Pin<&mut wxButton>, parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
-        fn GetAuthNeeded(self: &wxButton) -> bool;
-        // CXX_UNSUPPORTED: fn GetLabel(self: &wxButton) -> wxString;
-        fn SetAuthNeeded(self: Pin<&mut wxButton>, needed: bool);
-        unsafe fn SetDefault(self: Pin<&mut wxButton>) -> *mut wxWindow;
-        fn SetLabel(self: Pin<&mut wxButton>, label: &wxString);
-        // CXX_UNSUPPORTED: unsafe fn GetDefaultSize(win: *mut wxWindow) -> wxSize;
+        // CLASS: wxEvtHandler
+        type wxEvtHandler;
+        unsafe fn QueueEvent(self: Pin<&mut wxEvtHandler>, event: *mut wxEvent);
+        fn AddPendingEvent(self: Pin<&mut wxEvtHandler>, event: &wxEvent);
+        // CXX_UNSUPPORTED: unsafe fn CallAfter(self: Pin<&mut wxEvtHandler>, method: *mut void(T::, x1: T1, None: ...);
+        // BLOCKED: fn CallAfter(self: Pin<&mut wxEvtHandler>, functor: &T);
+        fn ProcessEvent(self: Pin<&mut wxEvtHandler>, event: Pin<&mut wxEvent>) -> bool;
+        fn ProcessEventLocally(self: Pin<&mut wxEvtHandler>, event: Pin<&mut wxEvent>) -> bool;
+        fn SafelyProcessEvent(self: Pin<&mut wxEvtHandler>, event: Pin<&mut wxEvent>) -> bool;
+        fn ProcessPendingEvents(self: Pin<&mut wxEvtHandler>);
+        fn DeletePendingEvents(self: Pin<&mut wxEvtHandler>);
+        // CXX_UNSUPPORTED: unsafe fn Connect(self: Pin<&mut wxEvtHandler>, id: i32, lastId: i32, eventType: wxEventType, function: wxObjectEventFunction, userData: *mut wxObject, eventSink: *mut wxEvtHandler);
+        // CXX_UNSUPPORTED: unsafe fn Connect(self: Pin<&mut wxEvtHandler>, id: i32, eventType: wxEventType, function: wxObjectEventFunction, userData: *mut wxObject, eventSink: *mut wxEvtHandler);
+        // CXX_UNSUPPORTED: unsafe fn Connect(self: Pin<&mut wxEvtHandler>, eventType: wxEventType, function: wxObjectEventFunction, userData: *mut wxObject, eventSink: *mut wxEvtHandler);
+        // CXX_UNSUPPORTED: unsafe fn Disconnect(self: Pin<&mut wxEvtHandler>, eventType: wxEventType, function: wxObjectEventFunction, userData: *mut wxObject, eventSink: *mut wxEvtHandler) -> bool;
+        // CXX_UNSUPPORTED: unsafe fn Disconnect(self: Pin<&mut wxEvtHandler>, id: i32, eventType: wxEventType, function: wxObjectEventFunction, userData: *mut wxObject, eventSink: *mut wxEvtHandler) -> bool;
+        // CXX_UNSUPPORTED: unsafe fn Disconnect(self: Pin<&mut wxEvtHandler>, id: i32, lastId: i32, eventType: wxEventType, function: wxObjectEventFunction, userData: *mut wxObject, eventSink: *mut wxEvtHandler) -> bool;
+        // CXX_UNSUPPORTED: unsafe fn Bind(self: Pin<&mut wxEvtHandler>, eventType: &EventTag, functor: Functor, id: i32, lastId: i32, userData: *mut wxObject);
+        // BLOCKED: unsafe fn Bind(self: Pin<&mut wxEvtHandler>, eventType: &EventTag, method: *mut void(Class::, handler: *mut EventHandler, id: i32, lastId: i32, userData: *mut wxObject);
+        // CXX_UNSUPPORTED: unsafe fn Unbind(self: Pin<&mut wxEvtHandler>, eventType: &EventTag, functor: Functor, id: i32, lastId: i32, userData: *mut wxObject) -> bool;
+        // BLOCKED: unsafe fn Unbind(self: Pin<&mut wxEvtHandler>, eventType: &EventTag, method: *mut void(Class::, handler: *mut EventHandler, id: i32, lastId: i32, userData: *mut wxObject) -> bool;
+        // BLOCKED: unsafe fn GetClientData(self: &wxEvtHandler) -> *mut void;
+        unsafe fn GetClientObject(self: &wxEvtHandler) -> *mut wxClientData;
+        // BLOCKED: unsafe fn SetClientData(self: Pin<&mut wxEvtHandler>, data: *mut void);
+        unsafe fn SetClientObject(self: Pin<&mut wxEvtHandler>, data: *mut wxClientData);
+        fn GetEvtHandlerEnabled(self: &wxEvtHandler) -> bool;
+        unsafe fn GetNextHandler(self: &wxEvtHandler) -> *mut wxEvtHandler;
+        unsafe fn GetPreviousHandler(self: &wxEvtHandler) -> *mut wxEvtHandler;
+        fn SetEvtHandlerEnabled(self: Pin<&mut wxEvtHandler>, enabled: bool);
+        unsafe fn SetNextHandler(self: Pin<&mut wxEvtHandler>, handler: *mut wxEvtHandler);
+        unsafe fn SetPreviousHandler(self: Pin<&mut wxEvtHandler>, handler: *mut wxEvtHandler);
+        fn Unlink(self: Pin<&mut wxEvtHandler>);
+        fn IsUnlinked(self: &wxEvtHandler) -> bool;
+        // BLOCKED: unsafe fn AddFilter(filter: *mut wxEventFilter);
+        // BLOCKED: unsafe fn RemoveFilter(filter: *mut wxEventFilter);
+        // CTOR: fn wxEvtHandler(self: Pin<&mut wxEvtHandler>);
+        // CXX_UNSUPPORTED: fn ~wxEvtHandler(self: Pin<&mut wxEvtHandler>);
 
         // CLASS: wxWindow
         type wxWindow;
@@ -393,6 +379,59 @@ mod ffi {
         // CTOR: unsafe fn wxWindow(self: Pin<&mut wxWindow>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString);
         // CXX_UNSUPPORTED: fn ~wxWindow(self: Pin<&mut wxWindow>);
         // BLOCKED: unsafe fn Create(self: Pin<&mut wxWindow>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
+
+        // CLASS: wxControl
+        type wxControl;
+        // CTOR: unsafe fn wxControl(self: Pin<&mut wxControl>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString);
+        // CTOR: fn wxControl(self: Pin<&mut wxControl>);
+        // BLOCKED: unsafe fn Create(self: Pin<&mut wxControl>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
+        fn Command(self: Pin<&mut wxControl>, event: Pin<&mut wxCommandEvent>);
+        // CXX_UNSUPPORTED: fn GetLabel(self: &wxControl) -> wxString;
+        // CXX_UNSUPPORTED: fn GetLabelText(self: &wxControl) -> wxString;
+        // CXX_UNSUPPORTED: fn GetSizeFromTextSize(self: &wxControl, xlen: i32, ylen: i32) -> wxSize;
+        // CXX_UNSUPPORTED: fn GetSizeFromTextSize(self: &wxControl, tsize: &wxSize) -> wxSize;
+        // CXX_UNSUPPORTED: fn GetSizeFromText(self: &wxControl, text: &wxString) -> wxSize;
+        fn SetLabel(self: Pin<&mut wxControl>, label: &wxString);
+        fn SetLabelText(self: Pin<&mut wxControl>, text: &wxString);
+        fn SetLabelMarkup(self: Pin<&mut wxControl>, markup: &wxString) -> bool;
+        // CXX_UNSUPPORTED: fn GetLabelText(label: &wxString) -> wxString;
+        // CXX_UNSUPPORTED: fn RemoveMnemonics(str: &wxString) -> wxString;
+        // CXX_UNSUPPORTED: fn EscapeMnemonics(text: &wxString) -> wxString;
+        // CXX_UNSUPPORTED: fn Ellipsize(label: &wxString, dc: &wxDC, mode: wxEllipsizeMode, maxWidth: i32, flags: i32) -> wxString;
+
+        // CLASS: wxAnyButton
+        type wxAnyButton;
+        // CTOR: fn wxAnyButton(self: Pin<&mut wxAnyButton>);
+        // CXX_UNSUPPORTED: fn ~wxAnyButton(self: Pin<&mut wxAnyButton>);
+        // CXX_UNSUPPORTED: fn GetBitmap(self: &wxAnyButton) -> wxBitmap;
+        // CXX_UNSUPPORTED: fn GetBitmapCurrent(self: &wxAnyButton) -> wxBitmap;
+        // CXX_UNSUPPORTED: fn GetBitmapDisabled(self: &wxAnyButton) -> wxBitmap;
+        // CXX_UNSUPPORTED: fn GetBitmapFocus(self: &wxAnyButton) -> wxBitmap;
+        // CXX_UNSUPPORTED: fn GetBitmapLabel(self: &wxAnyButton) -> wxBitmap;
+        // CXX_UNSUPPORTED: fn GetBitmapPressed(self: &wxAnyButton) -> wxBitmap;
+        // CXX_UNSUPPORTED: fn SetBitmap(self: Pin<&mut wxAnyButton>, bitmap: &wxBitmap, dir: wxDirection);
+        fn SetBitmapCurrent(self: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
+        fn SetBitmapDisabled(self: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
+        fn SetBitmapFocus(self: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
+        fn SetBitmapLabel(self: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
+        fn SetBitmapPressed(self: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
+        // CXX_UNSUPPORTED: fn GetBitmapMargins(self: Pin<&mut wxAnyButton>) -> wxSize;
+        fn SetBitmapMargins(self: Pin<&mut wxAnyButton>, x: i32, y: i32);
+        #[rust_name = "SetBitmapMargins1"]
+        fn SetBitmapMargins(self: Pin<&mut wxAnyButton>, sz: &wxSize);
+        // CXX_UNSUPPORTED: fn SetBitmapPosition(self: Pin<&mut wxAnyButton>, dir: wxDirection);
+
+        // CLASS: wxButton
+        type wxButton;
+        // CTOR: fn wxButton(self: Pin<&mut wxButton>);
+        // CTOR: unsafe fn wxButton(self: Pin<&mut wxButton>, parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString);
+        // BLOCKED: unsafe fn Create(self: Pin<&mut wxButton>, parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
+        fn GetAuthNeeded(self: &wxButton) -> bool;
+        // CXX_UNSUPPORTED: fn GetLabel(self: &wxButton) -> wxString;
+        fn SetAuthNeeded(self: Pin<&mut wxButton>, needed: bool);
+        unsafe fn SetDefault(self: Pin<&mut wxButton>) -> *mut wxWindow;
+        fn SetLabel(self: Pin<&mut wxButton>, label: &wxString);
+        // CXX_UNSUPPORTED: unsafe fn GetDefaultSize(win: *mut wxWindow) -> wxSize;
     }
 }
 
