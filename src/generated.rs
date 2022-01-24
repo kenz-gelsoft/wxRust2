@@ -49,8 +49,8 @@ mod ffi {
 
         // CLASS: wxObject
         type wxObject;
-        // CTOR: fn wxObject(self: Pin<&mut wxObject>);
-        // CTOR: fn wxObject(self: Pin<&mut wxObject>, other: &wxObject);
+        // CTOR: fn wxObject();
+        // CTOR: fn wxObject(other: &wxObject);
         // CXX_UNSUPPORTED: fn ~wxObject(self: Pin<&mut wxObject>);
         unsafe fn GetClassInfo(self: &wxObject) -> *mut wxClassInfo;
         unsafe fn GetRefData(self: &wxObject) -> *mut wxObjectRefData;
@@ -98,7 +98,7 @@ mod ffi {
         fn IsUnlinked(self: &wxEvtHandler) -> bool;
         // BLOCKED: unsafe fn AddFilter(filter: *mut wxEventFilter);
         // BLOCKED: unsafe fn RemoveFilter(filter: *mut wxEventFilter);
-        // CTOR: fn wxEvtHandler(self: Pin<&mut wxEvtHandler>);
+        // CTOR: fn wxEvtHandler();
         // CXX_UNSUPPORTED: fn ~wxEvtHandler(self: Pin<&mut wxEvtHandler>);
 
         // CLASS: wxWindow
@@ -402,15 +402,15 @@ mod ffi {
         // BLOCKED: unsafe fn GetCapture() -> *mut wxWindow;
         // BLOCKED: fn NewControlId(count: i32) -> i32;
         // BLOCKED: fn UnreserveControlId(id: i32, count: i32);
-        // CTOR: fn wxWindow(self: Pin<&mut wxWindow>);
-        // CTOR: unsafe fn wxWindow(self: Pin<&mut wxWindow>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString);
+        // CTOR: fn wxWindow();
+        // CTOR: unsafe fn wxWindow(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString);
         // CXX_UNSUPPORTED: fn ~wxWindow(self: Pin<&mut wxWindow>);
         // BLOCKED: unsafe fn Create(self: Pin<&mut wxWindow>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
 
         // CLASS: wxControl
         type wxControl;
-        // CTOR: unsafe fn wxControl(self: Pin<&mut wxControl>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString);
-        // CTOR: fn wxControl(self: Pin<&mut wxControl>);
+        // CTOR: unsafe fn wxControl(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString);
+        // CTOR: fn wxControl();
         // BLOCKED: unsafe fn Create(self: Pin<&mut wxControl>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
         fn Command(self: Pin<&mut wxControl>, event: Pin<&mut wxCommandEvent>);
         // CXX_UNSUPPORTED: fn GetLabel(self: &wxControl) -> wxString;
@@ -428,7 +428,7 @@ mod ffi {
 
         // CLASS: wxAnyButton
         type wxAnyButton;
-        // CTOR: fn wxAnyButton(self: Pin<&mut wxAnyButton>);
+        // CTOR: fn wxAnyButton();
         // CXX_UNSUPPORTED: fn ~wxAnyButton(self: Pin<&mut wxAnyButton>);
         // CXX_UNSUPPORTED: fn GetBitmap(self: &wxAnyButton) -> wxBitmap;
         // CXX_UNSUPPORTED: fn GetBitmapCurrent(self: &wxAnyButton) -> wxBitmap;
@@ -450,8 +450,8 @@ mod ffi {
 
         // CLASS: wxButton
         type wxButton;
-        // CTOR: fn wxButton(self: Pin<&mut wxButton>);
-        // CTOR: unsafe fn wxButton(self: Pin<&mut wxButton>, parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString);
+        // CTOR: fn wxButton();
+        // CTOR: unsafe fn wxButton(parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString);
         // BLOCKED: unsafe fn Create(self: Pin<&mut wxButton>, parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
         fn GetAuthNeeded(self: &wxButton) -> bool;
         // CXX_UNSUPPORTED: fn GetLabel(self: &wxButton) -> wxString;
@@ -459,6 +459,22 @@ mod ffi {
         unsafe fn SetDefault(self: Pin<&mut wxButton>) -> *mut wxWindow;
         fn SetLabel(self: Pin<&mut wxButton>, label: &wxString);
         // CXX_UNSUPPORTED: unsafe fn GetDefaultSize(win: *mut wxWindow) -> wxSize;
+    }
+    unsafe extern "C++" {
+        unsafe fn NewObject() -> *mut wxObject;
+        #[rust_name = "NewObject1"]
+        unsafe fn NewObject1(other: &wxObject) -> *mut wxObject;
+        unsafe fn NewEvtHandler() -> *mut wxEvtHandler;
+        unsafe fn NewWindow() -> *mut wxWindow;
+        #[rust_name = "NewWindow1"]
+        unsafe fn NewWindow1(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxWindow;
+        unsafe fn NewControl(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> *mut wxControl;
+        #[rust_name = "NewControl1"]
+        unsafe fn NewControl1() -> *mut wxControl;
+        unsafe fn NewAnyButton() -> *mut wxAnyButton;
+        unsafe fn NewButton() -> *mut wxButton;
+        #[rust_name = "NewButton1"]
+        unsafe fn NewButton1(parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> *mut wxButton;
     }
 }
 
@@ -474,11 +490,11 @@ wx_class! { Object(wxObject) impl
 }
 
 impl wxObject {
-    pub fn new(self: Pin<&mut wxObject>) -> Object {
+    pub fn new() -> Object {
         Object(ffi::NewObject())
     }
-    pub fn new1(self: Pin<&mut wxObject>, other: &wxObject) -> Object {
-        Object(ffi::NewObject(other))
+    pub fn new1(other: &wxObject) -> Object {
+        Object(ffi::NewObject1(other))
     }
 }
 // wxEvtHandler
@@ -486,7 +502,7 @@ wx_class! { EvtHandler(wxEvtHandler) impl
 }
 
 impl wxEvtHandler {
-    pub fn new(self: Pin<&mut wxEvtHandler>) -> EvtHandler {
+    pub fn new() -> EvtHandler {
         EvtHandler(ffi::NewEvtHandler())
     }
 }
@@ -495,11 +511,11 @@ wx_class! { Window(wxWindow) impl
 }
 
 impl wxWindow {
-    pub fn new(self: Pin<&mut wxWindow>) -> Window {
+    pub fn new() -> Window {
         Window(ffi::NewWindow())
     }
-    pub fn new1(self: Pin<&mut wxWindow>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> Window {
-        Window(ffi::NewWindow(parent, id, pos, size, style, name))
+    pub fn new1(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> Window {
+        Window(ffi::NewWindow1(parent, id, pos, size, style, name))
     }
 }
 // wxControl
@@ -507,11 +523,11 @@ wx_class! { Control(wxControl) impl
 }
 
 impl wxControl {
-    pub fn new(self: Pin<&mut wxControl>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> Control {
+    pub fn new(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> Control {
         Control(ffi::NewControl(parent, id, pos, size, style, validator, name))
     }
-    pub fn new1(self: Pin<&mut wxControl>) -> Control {
-        Control(ffi::NewControl())
+    pub fn new1() -> Control {
+        Control(ffi::NewControl1())
     }
 }
 // wxAnyButton
@@ -519,7 +535,7 @@ wx_class! { AnyButton(wxAnyButton) impl
 }
 
 impl wxAnyButton {
-    pub fn new(self: Pin<&mut wxAnyButton>) -> AnyButton {
+    pub fn new() -> AnyButton {
         AnyButton(ffi::NewAnyButton())
     }
 }
@@ -528,10 +544,10 @@ wx_class! { Button(wxButton) impl
 }
 
 impl wxButton {
-    pub fn new(self: Pin<&mut wxButton>) -> Button {
+    pub fn new() -> Button {
         Button(ffi::NewButton())
     }
-    pub fn new1(self: Pin<&mut wxButton>, parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> Button {
-        Button(ffi::NewButton(parent, id, label, pos, size, style, validator, name))
+    pub fn new1(parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> Button {
+        Button(ffi::NewButton1(parent, id, label, pos, size, style, validator, name))
     }
 }

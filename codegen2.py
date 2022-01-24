@@ -25,6 +25,9 @@ mod ffi {
         include!("wx/include/wxrust.h");
         include!("wx/include/wxrust2.h");
 '''
+CXX_PROLOGUE2 = '''\
+    }
+    unsafe extern "C++" {'''
 CXX_EPILOGUE = '''\
     }
 }
@@ -140,6 +143,9 @@ def generate_bindings_for(classes):
             print('%stype %s;' % (indent,t), file=f)
         for cls in classes:
             cls.print(2, f)
+        print(CXX_PROLOGUE2, file=f)
+        for cls in classes:
+            cls.print_ffi2(2, f)
         print(CXX_EPILOGUE, file=f)
 
         for cls in classes:
@@ -176,6 +182,13 @@ class Class:
                 file=f)
         for method in self.methods:
             for line in method.in_rust():
+                print('%s%s' % (indent, line),
+                        file=f)
+
+    def print_ffi2(self, level, f):
+        indent = ' ' * 4 * level
+        for ctor in self._ctors():
+            for line in ctor.for_ffi():
                 print('%s%s' % (indent, line),
                         file=f)
 
@@ -298,7 +311,7 @@ class Method:
 
     def _rust_params(self):
         params = self.__params.copy()
-        if not self.is_static:
+        if not (self.is_static or self.is_ctor):
             params.insert(0, self.__self_param)
         return ', '.join((str(p) for p in params))
     
@@ -319,16 +332,26 @@ class Method:
         if suppressed:
             return ['// %s: %s' % (suppressed, body)]
         lines = [body]
-        overload = self._overload_name()
+        overload = self._rename()
         if overload:
             lines.insert(0, overload)
         # print(lines)
         return lines
-    
-    def _overload_name(self):
+
+    def _rename(self):
         if self.__index == 0:
             return ''
-        return '#[rust_name = "%s%s"]' % (self.__name, self.__index)
+        return '#[rust_name = "%s"]' % (self._overload_name(),)
+
+    def _overload_name(self):
+        name = self.__name
+        if self.is_ctor:
+            without_wx = self.__class.name[2:]
+            name = 'New%s' % (without_wx,)
+        index = self.__index
+        if self.__index == 0:
+            index = ''
+        return '%s%s' % (name, index)
     
     def _maybe_unsafe(self):
         return self._uses_ptr_type() and 'unsafe ' or ''
@@ -360,6 +383,18 @@ class Method:
             return True
         return any(p.type.not_supported() for p in self.__params)
 
+    def for_ffi(self):
+        rs_template = 'unsafe fn %s(%s) -> *mut %s;'
+        lines = [rs_template % (
+            self._overload_name(),
+            self._rust_params(),
+            self.__class.name,
+        )]
+        overload = self._rename()
+        if overload:
+            lines.insert(0, overload)
+        return lines
+
     def for_rs(self):
         rs_template = '''\
     pub fn %s(%s) -> %s {
@@ -374,14 +409,14 @@ class Method:
             self._rust_params(),
             without_wx,
             without_wx,
-            self._new_name(),
+            self._overload_name(),
             self._call_params(),
         )
 
     def for_h(self):
         body = '%s *%s(%s);' % (
             self.__name,
-            self._new_name(),
+            self._overload_name(),
             self._params_decl(),
         )
         return body
@@ -394,14 +429,11 @@ class Method:
 '''
         return cc_template % (
             self.__class.name,
-            self._new_name(),
+            self._overload_name(),
             self._params_decl(),
             self.__class.name,
             self._call_params(),
         )
-
-    def _new_name(self):
-        return 'New%s' % (self.__name[2:],)
 
 class Param:
     def __init__(self, type, name):

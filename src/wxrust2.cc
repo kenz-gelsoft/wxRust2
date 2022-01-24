@@ -10,7 +10,7 @@ wxObject *NewObject() {
     return new wxObject();
 }
 
-wxObject *NewObject(const wxObject & other) {
+wxObject *NewObject1(const wxObject & other) {
     return new wxObject(other);
 }
 
@@ -24,7 +24,7 @@ wxWindow *NewWindow() {
     return new wxWindow();
 }
 
-wxWindow *NewWindow(wxWindow * parent, wxWindowID id, const wxPoint & pos, const wxSize & size, long style, const wxString & name) {
+wxWindow *NewWindow1(wxWindow * parent, wxWindowID id, const wxPoint & pos, const wxSize & size, long style, const wxString & name) {
     return new wxWindow(parent, id, pos, size, style, name);
 }
 
@@ -33,7 +33,7 @@ wxControl *NewControl(wxWindow * parent, wxWindowID id, const wxPoint & pos, con
     return new wxControl(parent, id, pos, size, style, validator, name);
 }
 
-wxControl *NewControl() {
+wxControl *NewControl1() {
     return new wxControl();
 }
 
@@ -47,7 +47,7 @@ wxButton *NewButton() {
     return new wxButton();
 }
 
-wxButton *NewButton(wxWindow * parent, wxWindowID id, const wxString & label, const wxPoint & pos, const wxSize & size, long style, const wxValidator & validator, const wxString & name) {
+wxButton *NewButton1(wxWindow * parent, wxWindowID id, const wxString & label, const wxPoint & pos, const wxSize & size, long style, const wxValidator & validator, const wxString & name) {
     return new wxButton(parent, id, label, pos, size, style, validator, name);
 }
 
