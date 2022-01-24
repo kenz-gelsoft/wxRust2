@@ -178,7 +178,7 @@ class Class:
             for line in method.in_rust():
                 print('%s%s' % (indent, line),
                         file=f)
-    
+
     def print_rs(self, f):
         rs_template = '''\
 // %s
@@ -191,6 +191,14 @@ wx_class! { %s(%s) impl
             without_wx,
             self.name,
         ), file=f)
+        self.print_ctors_to_rs(f)
+
+    def print_ctors_to_rs(self, f):
+        print('impl %s {' % (self.name,),
+                file=f)
+        for ctor in self._ctors():
+            print(ctor.for_rs(), file=f)
+        print('}', file=f)
 
     def print_ctors_to_h(self, f):
         print('// CLASS: %s' % (self.name,),
@@ -351,6 +359,24 @@ class Method:
         if self.__returns.not_supported():
             return True
         return any(p.type.not_supported() for p in self.__params)
+
+    def for_rs(self):
+        rs_template = '''\
+    pub fn %s(%s) -> %s {
+        %s(ffi::%s(%s))
+    }'''
+        new_name = 'new'
+        if self.__index > 0:
+            new_name += str(self.__index)
+        without_wx = self.__class.name[2:]
+        return rs_template % (
+            new_name,
+            self._rust_params(),
+            without_wx,
+            without_wx,
+            self._new_name(),
+            self._call_params(),
+        )
 
     def for_h(self):
         body = '%s *%s(%s);' % (

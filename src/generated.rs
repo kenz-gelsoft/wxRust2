@@ -473,23 +473,65 @@ pub trait ObjectMethods {
 wx_class! { Object(wxObject) impl
 }
 
+impl wxObject {
+    pub fn new(self: Pin<&mut wxObject>) -> Object {
+        Object(ffi::NewObject())
+    }
+    pub fn new1(self: Pin<&mut wxObject>, other: &wxObject) -> Object {
+        Object(ffi::NewObject(other))
+    }
+}
 // wxEvtHandler
 wx_class! { EvtHandler(wxEvtHandler) impl
 }
 
+impl wxEvtHandler {
+    pub fn new(self: Pin<&mut wxEvtHandler>) -> EvtHandler {
+        EvtHandler(ffi::NewEvtHandler())
+    }
+}
 // wxWindow
 wx_class! { Window(wxWindow) impl
 }
 
+impl wxWindow {
+    pub fn new(self: Pin<&mut wxWindow>) -> Window {
+        Window(ffi::NewWindow())
+    }
+    pub fn new1(self: Pin<&mut wxWindow>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> Window {
+        Window(ffi::NewWindow(parent, id, pos, size, style, name))
+    }
+}
 // wxControl
 wx_class! { Control(wxControl) impl
 }
 
+impl wxControl {
+    pub fn new(self: Pin<&mut wxControl>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> Control {
+        Control(ffi::NewControl(parent, id, pos, size, style, validator, name))
+    }
+    pub fn new1(self: Pin<&mut wxControl>) -> Control {
+        Control(ffi::NewControl())
+    }
+}
 // wxAnyButton
 wx_class! { AnyButton(wxAnyButton) impl
 }
 
+impl wxAnyButton {
+    pub fn new(self: Pin<&mut wxAnyButton>) -> AnyButton {
+        AnyButton(ffi::NewAnyButton())
+    }
+}
 // wxButton
 wx_class! { Button(wxButton) impl
 }
 
+impl wxButton {
+    pub fn new(self: Pin<&mut wxButton>) -> Button {
+        Button(ffi::NewButton())
+    }
+    pub fn new1(self: Pin<&mut wxButton>, parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> Button {
+        Button(ffi::NewButton(parent, id, label, pos, size, style, validator, name))
+    }
+}
