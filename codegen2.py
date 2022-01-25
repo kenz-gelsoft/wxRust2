@@ -1,3 +1,4 @@
+from __future__ import with_statement
 import os
 import re
 import xml.etree.ElementTree as ET
@@ -200,8 +201,7 @@ class Class:
         rs_template = '''\
 // %s
 wx_class! { %s(%s) impl
-}
-'''
+}'''
         without_wx = self.name[2:]
         print(rs_template % (
             self.name,
@@ -211,11 +211,13 @@ wx_class! { %s(%s) impl
         self.print_ctors_to_rs(f)
 
     def print_ctors_to_rs(self, f):
-        print('impl %s {' % (self.name,),
+        without_wx = self.name[2:]
+        print('impl %s {' % (without_wx,),
                 file=f)
         for ctor in self._ctors():
             print(ctor.for_rs(), file=f)
         print('}', file=f)
+        print(file=f)
 
     def print_ctors_to_h(self, f):
         print('// CLASS: %s' % (self.name,),
@@ -313,11 +315,11 @@ class Method:
             return self.__name in blocked_methods
         return False
 
-    def _rust_params(self):
+    def _rust_params(self, with_ffi=False):
         params = self.__params.copy()
         if not (self.is_static or self.is_ctor):
             params.insert(0, self.__self_param)
-        return ', '.join((str(p) for p in params))
+        return ', '.join((p.rs_decl(with_ffi) for p in params))
     
     def _params_decl(self):
         return ', '.join((p.cxx_decl() for p in self.__params))
@@ -402,7 +404,7 @@ class Method:
     def for_rs(self):
         rs_template = '''\
     pub fn %s(%s) -> %s {
-        %s(ffi::%s(%s))
+        unsafe { %s(ffi::%s(%s)) }
     }'''
         new_name = 'new'
         if self.__index > 0:
@@ -410,7 +412,7 @@ class Method:
         without_wx = self.__class.name[2:]
         return rs_template % (
             new_name,
-            self._rust_params(),
+            self._rust_params(with_ffi=True),
             without_wx,
             without_wx,
             self._overload_name(),
@@ -444,8 +446,11 @@ class Param:
         self.type = type
         self.name = name
     
-    def __str__(self):
-        return '%s: %s' % (self.name, self.type.in_rust())
+    def rs_decl(self, with_ffi=False):
+        return '%s: %s' % (
+            self.name,
+            self.type.in_rust(with_ffi)
+        )
     
     def cxx_decl(self):
         return '%s %s' % (self.type.in_cxx(), self.name)
@@ -458,10 +463,12 @@ class SelfType:
         self.type = s
         self.const = const
 
-    def in_rust(self):
+    def in_rust(self, with_ffi=False):
+        t = self.type
+        t = prefixed(t, with_ffi)
         if self.const:
-            return '&%s' % (self.type)
-        return 'Pin<&mut %s>' % (self.type,)
+            return '&%s' % (t)
+        return 'Pin<&mut %s>' % (t,)
 
 os_unsupported_types = [
     'wxAccessible',
@@ -490,10 +497,11 @@ class CxxType:
             return cxx_to_cxx[self.origtype]
         return self.origtype
 
-    def in_rust(self):
+    def in_rust(self, with_ffi=False):
         t = self.basetype
         if t in cxx_to_rust:
             t = cxx_to_rust[t]
+        t = prefixed(t, with_ffi)
         ref = self.indirection
         mut = ''
         if ref:
@@ -522,6 +530,18 @@ class CxxType:
     
     def is_ptr(self):
         return self.indirection.startswith('*')
+
+rust_primitives = [
+    'i32',
+    'i64',
+]
+def prefixed(t, with_ffi):
+    if t in rust_primitives:
+        return t
+    if with_ffi:
+        t = 'ffi::%s' % (t,)
+    return t
+
 
 if __name__ == '__main__':
     main()

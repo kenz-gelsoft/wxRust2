@@ -488,66 +488,66 @@ pub trait ObjectMethods {
 // wxObject
 wx_class! { Object(wxObject) impl
 }
-
-impl wxObject {
+impl Object {
     pub fn new() -> Object {
-        Object(ffi::NewObject())
+        unsafe { Object(ffi::NewObject()) }
     }
-    pub fn new1(other: &wxObject) -> Object {
-        Object(ffi::NewObject1(other))
+    pub fn new1(other: &ffi::wxObject) -> Object {
+        unsafe { Object(ffi::NewObject1(other)) }
     }
 }
+
 // wxEvtHandler
 wx_class! { EvtHandler(wxEvtHandler) impl
 }
-
-impl wxEvtHandler {
+impl EvtHandler {
     pub fn new() -> EvtHandler {
-        EvtHandler(ffi::NewEvtHandler())
+        unsafe { EvtHandler(ffi::NewEvtHandler()) }
     }
 }
+
 // wxWindow
 wx_class! { Window(wxWindow) impl
 }
-
-impl wxWindow {
+impl Window {
     pub fn new() -> Window {
-        Window(ffi::NewWindow())
+        unsafe { Window(ffi::NewWindow()) }
     }
-    pub fn new1(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i64, name: &wxString) -> Window {
-        Window(ffi::NewWindow1(parent, id, pos, size, style, name))
+    pub fn new1(parent: *mut ffi::wxWindow, id: i32, pos: &ffi::wxPoint, size: &ffi::wxSize, style: i64, name: &ffi::wxString) -> Window {
+        unsafe { Window(ffi::NewWindow1(parent, id, pos, size, style, name)) }
     }
 }
+
 // wxControl
 wx_class! { Control(wxControl) impl
 }
-
-impl wxControl {
-    pub fn new(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i64, validator: &wxValidator, name: &wxString) -> Control {
-        Control(ffi::NewControl(parent, id, pos, size, style, validator, name))
+impl Control {
+    pub fn new(parent: *mut ffi::wxWindow, id: i32, pos: &ffi::wxPoint, size: &ffi::wxSize, style: i64, validator: &ffi::wxValidator, name: &ffi::wxString) -> Control {
+        unsafe { Control(ffi::NewControl(parent, id, pos, size, style, validator, name)) }
     }
     pub fn new1() -> Control {
-        Control(ffi::NewControl1())
+        unsafe { Control(ffi::NewControl1()) }
     }
 }
+
 // wxAnyButton
 wx_class! { AnyButton(wxAnyButton) impl
 }
-
-impl wxAnyButton {
+impl AnyButton {
     pub fn new() -> AnyButton {
-        AnyButton(ffi::NewAnyButton())
+        unsafe { AnyButton(ffi::NewAnyButton()) }
     }
 }
+
 // wxButton
 wx_class! { Button(wxButton) impl
 }
-
-impl wxButton {
+impl Button {
     pub fn new() -> Button {
-        Button(ffi::NewButton())
+        unsafe { Button(ffi::NewButton()) }
     }
-    pub fn new1(parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i64, validator: &wxValidator, name: &wxString) -> Button {
-        Button(ffi::NewButton1(parent, id, label, pos, size, style, validator, name))
+    pub fn new1(parent: *mut ffi::wxWindow, id: i32, label: &ffi::wxString, pos: &ffi::wxPoint, size: &ffi::wxSize, style: i64, validator: &ffi::wxValidator, name: &ffi::wxString) -> Button {
+        unsafe { Button(ffi::NewButton1(parent, id, label, pos, size, style, validator, name)) }
     }
 }
+
