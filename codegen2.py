@@ -67,10 +67,14 @@ CC_EPILOGUE = '''\
 } // namespace wxrust
 '''
 
+cxx_to_cxx = {
+    'long': 'int64_t',
+}
+
 cxx_to_rust = {
     'double': 'f64',
     'int': 'i32',
-    'long': 'i32',
+    'long': 'i64',
     'unsigned int': 'u32',
     'wxByte': 'u8',
     'wxCoord': 'i32',
@@ -444,7 +448,7 @@ class Param:
         return '%s: %s' % (self.name, self.type.in_rust())
     
     def cxx_decl(self):
-        return '%s %s' % (self.type.in_cxx, self.name)
+        return '%s %s' % (self.type.in_cxx(), self.name)
 
     def cxx_call(self):
         return self.name
@@ -470,7 +474,7 @@ cxx_supported_value_types = [
 ]
 class CxxType:
     def __init__(self, s):
-        self.in_cxx = s
+        self.origtype = s
         # print('parsing: |%s|' % (s,))
         matched = re.match(r'(const )?([^*&]*)([*&]+)?', s)
         self.basetype = None
@@ -481,6 +485,11 @@ class CxxType:
         if self.indirection is None:
             self.indirection = ''
     
+    def in_cxx(self):
+        if self.origtype in cxx_to_cxx:
+            return cxx_to_cxx[self.origtype]
+        return self.origtype
+
     def in_rust(self):
         t = self.basetype
         if t in cxx_to_rust:
