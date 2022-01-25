@@ -1,5 +1,3 @@
-from __future__ import with_statement
-import os
 import re
 import xml.etree.ElementTree as ET
 
@@ -69,13 +67,13 @@ CC_EPILOGUE = '''\
 '''
 
 cxx_to_cxx = {
-    'long': 'int64_t',
+    'long': 'int32_t',
 }
 
 cxx_to_rust = {
     'double': 'f64',
     'int': 'i32',
-    'long': 'i64',
+    'long': 'i32',
     'unsigned int': 'u32',
     'wxByte': 'u8',
     'wxCoord': 'i32',
