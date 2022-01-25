@@ -461,18 +461,18 @@ mod ffi {
         // CXX_UNSUPPORTED: unsafe fn GetDefaultSize(win: *mut wxWindow) -> wxSize;
     }
     unsafe extern "C++" {
-        unsafe fn NewObject() -> *mut wxObject;
+        fn NewObject() -> *mut wxObject;
         #[rust_name = "NewObject1"]
-        unsafe fn NewObject1(other: &wxObject) -> *mut wxObject;
-        unsafe fn NewEvtHandler() -> *mut wxEvtHandler;
-        unsafe fn NewWindow() -> *mut wxWindow;
+        fn NewObject1(other: &wxObject) -> *mut wxObject;
+        fn NewEvtHandler() -> *mut wxEvtHandler;
+        fn NewWindow() -> *mut wxWindow;
         #[rust_name = "NewWindow1"]
         unsafe fn NewWindow1(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxWindow;
         unsafe fn NewControl(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> *mut wxControl;
         #[rust_name = "NewControl1"]
-        unsafe fn NewControl1() -> *mut wxControl;
-        unsafe fn NewAnyButton() -> *mut wxAnyButton;
-        unsafe fn NewButton() -> *mut wxButton;
+        fn NewControl1() -> *mut wxControl;
+        fn NewAnyButton() -> *mut wxAnyButton;
+        fn NewButton() -> *mut wxButton;
         #[rust_name = "NewButton1"]
         unsafe fn NewButton1(parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> *mut wxButton;
     }
@@ -490,10 +490,10 @@ wx_class! { Object(wxObject) impl
 }
 impl Object {
     pub fn new() -> Object {
-        unsafe { Object(ffi::NewObject()) }
+        Object(ffi::NewObject())
     }
     pub fn new1(other: &ffi::wxObject) -> Object {
-        unsafe { Object(ffi::NewObject1(other)) }
+        Object(ffi::NewObject1(other))
     }
 }
 
@@ -502,7 +502,7 @@ wx_class! { EvtHandler(wxEvtHandler) impl
 }
 impl EvtHandler {
     pub fn new() -> EvtHandler {
-        unsafe { EvtHandler(ffi::NewEvtHandler()) }
+        EvtHandler(ffi::NewEvtHandler())
     }
 }
 
@@ -511,7 +511,7 @@ wx_class! { Window(wxWindow) impl
 }
 impl Window {
     pub fn new() -> Window {
-        unsafe { Window(ffi::NewWindow()) }
+        Window(ffi::NewWindow())
     }
     pub fn new1(parent: *mut ffi::wxWindow, id: i32, pos: &ffi::wxPoint, size: &ffi::wxSize, style: i32, name: &ffi::wxString) -> Window {
         unsafe { Window(ffi::NewWindow1(parent, id, pos, size, style, name)) }
@@ -526,7 +526,7 @@ impl Control {
         unsafe { Control(ffi::NewControl(parent, id, pos, size, style, validator, name)) }
     }
     pub fn new1() -> Control {
-        unsafe { Control(ffi::NewControl1()) }
+        Control(ffi::NewControl1())
     }
 }
 
@@ -535,7 +535,7 @@ wx_class! { AnyButton(wxAnyButton) impl
 }
 impl AnyButton {
     pub fn new() -> AnyButton {
-        unsafe { AnyButton(ffi::NewAnyButton()) }
+        AnyButton(ffi::NewAnyButton())
     }
 }
 
@@ -544,7 +544,7 @@ wx_class! { Button(wxButton) impl
 }
 impl Button {
     pub fn new() -> Button {
-        unsafe { Button(ffi::NewButton()) }
+        Button(ffi::NewButton())
     }
     pub fn new1(parent: *mut ffi::wxWindow, id: i32, label: &ffi::wxString, pos: &ffi::wxPoint, size: &ffi::wxSize, style: i32, validator: &ffi::wxValidator, name: &ffi::wxString) -> Button {
         unsafe { Button(ffi::NewButton1(parent, id, label, pos, size, style, validator, name)) }

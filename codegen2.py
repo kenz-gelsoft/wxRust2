@@ -317,17 +317,17 @@ class Method:
         params = self.__params.copy()
         if not (self.is_static or self.is_ctor):
             params.insert(0, self.__self_param)
-        return ', '.join((p.rs_decl(with_ffi) for p in params))
+        return ', '.join(p.rs_decl(with_ffi) for p in params)
     
     def _params_decl(self):
-        return ', '.join((p.cxx_decl() for p in self.__params))
+        return ', '.join(p.cxx_decl() for p in self.__params)
     
     def _call_params(self):
-        return ', '.join((p.cxx_call() for p in self.__params))
+        return ', '.join(p.cxx_call() for p in self.__params)
 
     def in_rust(self):
         body = '%sfn %s(%s)%s;' % (
-            self._maybe_unsafe(),
+            self._unsafe_or_not(),
             self.__name,
             self._rust_params(),
             self._returns_or_not(),
@@ -357,7 +357,7 @@ class Method:
             index = ''
         return '%s%s' % (name, index)
     
-    def _maybe_unsafe(self):
+    def _unsafe_or_not(self):
         return self._uses_ptr_type() and 'unsafe ' or ''
     
     def _uses_ptr_type(self):
@@ -388,8 +388,9 @@ class Method:
         return any(p.type.not_supported() for p in self.__params)
 
     def for_ffi(self):
-        rs_template = 'unsafe fn %s(%s) -> *mut %s;'
+        rs_template = '%sfn %s(%s) -> *mut %s;'
         lines = [rs_template % (
+            self._unsafe_or_not(),
             self._overload_name(),
             self._rust_params(),
             self.__class.name,
@@ -402,20 +403,28 @@ class Method:
     def for_rs(self):
         rs_template = '''\
     pub fn %s(%s) -> %s {
-        unsafe { %s(ffi::%s(%s)) }
+        %s
     }'''
         new_name = 'new'
         if self.__index > 0:
             new_name += str(self.__index)
         without_wx = self.__class.name[2:]
-        return rs_template % (
-            new_name,
-            self._rust_params(with_ffi=True),
-            without_wx,
+        body = '%s(ffi::%s(%s))' % (
             without_wx,
             self._overload_name(),
             self._call_params(),
         )
+        return rs_template % (
+            new_name,
+            self._rust_params(with_ffi=True),
+            without_wx,
+            self._wrap_if_unsafe(body),
+        )
+    
+    def _wrap_if_unsafe(self, t):
+        if self._uses_ptr_type():
+            return 'unsafe { %s }' % (t,)
+        return t
 
     def for_h(self):
         body = '%s *%s(%s);' % (
