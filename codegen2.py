@@ -229,6 +229,7 @@ wx_class! { %s(%s) impl
                 file=f)
         for ctor in self._ctors():
             print(ctor.for_cc(), file=f)
+        print(file=f)
 
     def _ctors(self):
         for method in self.methods:
@@ -438,8 +439,7 @@ class Method:
         cc_template = '''\
 %s *%s(%s) {
     return new %s(%s);
-}
-'''
+}'''
         return cc_template % (
             self.__class.name,
             self._overload_name(),
