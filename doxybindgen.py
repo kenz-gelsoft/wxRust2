@@ -1,156 +1,18 @@
-import xml.etree.ElementTree as ET
-from codegen.types import CxxType, SelfType
+import re
 
-PROLOGUE = '''\
-#![allow(dead_code)]
-#![allow(non_upper_case_globals)]
-#![allow(unused_parens)]
-'''
-
-CXX_PROLOGUE = '''\
-use std::os::raw::c_char;
-use std::pin::Pin;
-
-use crate::macros::wx_class;
-
-// any pointer type used on ffi boundary.
-// we chose this type as it's handy in cxx.
-type UnsafeAnyPtr = *const c_char;
-
-#[cxx::bridge(namespace = "wxrust")]
-mod ffi {
-    #[namespace = ""]
-    unsafe extern "C++" {
-        include!("wx/include/wxrust.h");
-        include!("wx/include/wxrust2.h");
-'''
-CXX_PROLOGUE2 = '''\
-    }
-    unsafe extern "C++" {'''
-CXX_EPILOGUE = '''\
-    }
+cxx_to_cxx = {
+    'long': 'int32_t',
 }
 
-pub trait ObjectMethods {
-    unsafe fn as_ptr(&self) -> UnsafeAnyPtr;
-    fn pinned<T>(&self) -> Pin<&mut T> {
-        unsafe { Pin::new_unchecked(&mut *(self.as_ptr() as *mut _)) }
-    }
+cxx_to_rust = {
+    'double': 'f64',
+    'int': 'i32',
+    'long': 'i32',
+    'unsigned int': 'u32',
+    'wxByte': 'u8',
+    'wxCoord': 'i32',
+    'wxWindowID': 'i32',
 }
-'''
-
-H_PROLOGUE = '''\
-#pragma once
-#include <wx/wx.h>
-
-#include "rust/cxx.h"
-#include "wx/src/generated.rs.h"
-
-
-namespace wxrust {
-'''
-H_EPILOGUE = '''\
-} // namespace wxrust
-'''
-
-CC_PROLOGUE = '''\
-#include "wx/include/wxrust.h"
-#include "wx/include/wxrust2.h"
-
-namespace wxrust {
-
-// Constructors
-'''
-
-CC_EPILOGUE = '''\
-} // namespace wxrust
-'''
-
-types = [
-    'wxPoint',
-    'wxSize',
-    'wxString',
-    'wxValidator',
-    # 'wxWindow',
-    'wxWindowList',
-    'wxRect',
-    'wxSizer',
-    'wxFont',
-    'wxRegion',
-    'wxColour',
-    'wxPalette',
-    # 'wxEvtHandler',
-    'wxKeyEvent',
-    'wxEvent',
-    'wxToolTip',
-    'wxMenu',
-    'wxAcceleratorTable',
-    # 'wxAccessible',
-    'wxDropTarget',
-    'wxLayoutConstraints',
-    'wxCaret',
-    'wxCursor',
-    'wxUpdateUIEvent',
-    'wxIdleEvent',
-    'wxBitmap',
-    'wxCommandEvent',
-    'wxClientData',
-    'wxEventFilter',
-    'wxClassInfo',
-    'wxObjectRefData',
-]
-
-# place wxWidgets doxygen xml files in wxml/ dir and run this.
-def main():
-    files = [
-        'wxml/classwx_object.xml',
-        'wxml/classwx_evt_handler.xml',
-        'wxml/classwx_window.xml',
-        'wxml/classwx_control.xml',
-        'wxml/classwx_any_button.xml',
-        'wxml/classwx_button.xml',
-    ]
-    classes = []
-    for file in files:
-        for cls in parse_classes_in(file):
-            classes.append(cls)
-    
-    generate_bindings_for(classes)
-
-def parse_classes_in(xmlfile):
-    tree = ET.parse(xmlfile)
-    root = tree.getroot()
-    for cls in root.findall(".//compounddef[@kind='class']"):
-        yield Class(cls)
-
-def generate_bindings_for(classes):    
-    with open('src/generated.rs', 'w') as f:
-        indent = ' ' * 4 * 2
-        print(PROLOGUE, file=f)
-        print(CXX_PROLOGUE, file=f)
-        for t in types:
-            print('%stype %s;' % (indent,t), file=f)
-        for cls in classes:
-            cls.print(2, f)
-        print(CXX_PROLOGUE2, file=f)
-        for cls in classes:
-            cls.print_ffi2(2, f)
-        print(CXX_EPILOGUE, file=f)
-
-        for cls in classes:
-            cls.print_rs(f)
-
-    with open('include/wxrust2.h', 'w') as f:
-        print(H_PROLOGUE, file=f)
-        for cls in classes:
-            cls.print_ctors_to_h(f)
-        print(H_EPILOGUE, file=f)
-
-    with open('src/wxrust2.cc', 'w') as f:
-        print(CC_PROLOGUE, file=f)
-        for cls in classes:
-            cls.print_ctors_to_cc(f)
-        print(CC_EPILOGUE, file=f)
 
 class Class:
     def __init__(self, e):
@@ -451,5 +313,87 @@ class Param:
     def cxx_call(self):
         return self.name
 
-if __name__ == '__main__':
-    main()
+class SelfType:
+    def __init__(self, s, const):
+        self.type = s
+        self.const = const
+
+    def in_rust(self, with_ffi=False):
+        t = self.type
+        t = prefixed(t, with_ffi)
+        if self.const:
+            return '&%s' % (t)
+        return 'Pin<&mut %s>' % (t,)
+
+os_unsupported_types = [
+    'wxAccessible',
+]
+cxx_unsupported_types = [
+]
+cxx_supported_value_types = [
+    'bool',
+    'void',
+]
+class CxxType:
+    def __init__(self, s):
+        self.origtype = s
+        # print('parsing: |%s|' % (s,))
+        matched = re.match(r'(const )?([^*&]*)([*&]+)?', s)
+        self.basetype = None
+        if matched:
+            self.mut = matched.group(1) is None
+            self.basetype = matched.group(2).strip()
+            self.indirection = matched.group(3)
+        if self.indirection is None:
+            self.indirection = ''
+    
+    def in_cxx(self):
+        if self.origtype in cxx_to_cxx:
+            return cxx_to_cxx[self.origtype]
+        return self.origtype
+
+    def in_rust(self, with_ffi=False):
+        t = self.basetype
+        if t in cxx_to_rust:
+            t = cxx_to_rust[t]
+        t = prefixed(t, with_ffi)
+        ref = self.indirection
+        mut = ''
+        if ref:
+            mut = self.mut and 'mut ' or ''
+            if ref.startswith('*') and not self.mut:
+                mut = 'const '
+        if ref.startswith('&') and self.mut:
+            return 'Pin<%smut %s>' % (ref, t)
+        return '%s%s%s' % (ref, mut, t)
+    
+    def not_supported(self):
+        if self.basetype in os_unsupported_types:
+            return True
+        if self.basetype in cxx_unsupported_types:
+            return True
+        if not self._is_cxx_supported_value_type():
+            return not self.indirection
+        return False
+    
+    def _is_cxx_supported_value_type(self):
+        if self.basetype in cxx_supported_value_types:
+            return True
+        if self.basetype in cxx_to_rust:
+            return True
+        return False
+    
+    def is_ptr(self):
+        return self.indirection.startswith('*')
+
+rust_primitives = [
+    'i32',
+    'i64',
+]
+def prefixed(t, with_ffi):
+    if t in rust_primitives:
+        return t
+    if with_ffi:
+        t = 'ffi::%s' % (t,)
+    return t
+
