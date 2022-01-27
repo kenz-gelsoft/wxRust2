@@ -131,14 +131,14 @@ def generate_bindings_for(classes):
         for t in types:
             print('%stype %s;' % (indent,t), file=f)
         for cls in classes:
-            cls.print(2, f)
+            cls.print_ffi_methods(f)
         print(CXX_PROLOGUE2, file=f)
         for cls in classes:
-            cls.print_ffi2(2, f)
+            cls.print_ffi_ctors(f)
         print(CXX_EPILOGUE, file=f)
 
         for cls in classes:
-            cls.print_rs(f)
+            cls.print_safer_binding(f)
 
     with open('include/wxrust2.h', 'w') as f:
         print(H_PROLOGUE, file=f)

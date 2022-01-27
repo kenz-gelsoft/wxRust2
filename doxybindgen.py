@@ -1,10 +1,10 @@
 import re
 
-cxx_to_cxx = {
+CXX2CXX = {
     'long': 'int32_t',
 }
 
-cxx_to_rust = {
+CXX2RUST = {
     'double': 'f64',
     'int': 'i32',
     'long': 'i32',
@@ -24,8 +24,8 @@ class Class:
                 continue
             self.methods.append(m)
     
-    def print(self, level, f):
-        indent = ' ' * 4 * level
+    def print_ffi_methods(self, f):
+        indent = ' ' * 4 * 2
         print(file=f)
         print('%s// CLASS: %s' % (indent, self.name),
                 file=f)
@@ -36,14 +36,14 @@ class Class:
                 print('%s%s' % (indent, line),
                         file=f)
 
-    def print_ffi2(self, level, f):
-        indent = ' ' * 4 * level
+    def print_ffi_ctors(self, f):
+        indent = ' ' * 4 * 2
         for ctor in self._ctors():
-            for line in ctor.for_ffi():
+            for line in ctor.ffi_lines():
                 print('%s%s' % (indent, line),
                         file=f)
 
-    def print_rs(self, f):
+    def print_safer_binding(self, f):
         rs_template = '''\
 // %s
 wx_class! { %s(%s) impl
@@ -84,7 +84,7 @@ wx_class! { %s(%s) impl
             if method.is_ctor:
                 yield method
 
-blocklist = {
+BLOCKLIST = {
     'wxObject': [
         'operator delete',
     ],
@@ -136,10 +136,10 @@ blocklist = {
 }
 class Method:
     def __init__(self, cls, e):
-        self.is_static = e.get('static') == 'yes'
         self.is_public = e.get('prot') == 'public'
-        self.__class = cls
+        self.__is_static = e.get('static') == 'yes'
         self.__returns = CxxType(''.join(e.find('type').itertext()))
+        self.__class = cls
         self.__name = e.findtext('name')
         self.__index = self._overload_index()
         self.is_ctor = self.__name == cls.name
@@ -155,24 +155,24 @@ class Method:
         return sum(m.__name == self.__name for m in self.__class.methods)
 
     def _is_blocked(self):
-        if self.__class.name not in blocklist:
+        if self.__class.name not in BLOCKLIST:
             return False
-        blocked_methods = blocklist[self.__class.name]
+        blocked_methods = BLOCKLIST[self.__class.name]
         if blocked_methods:
             return self.__name in blocked_methods
         return False
 
     def _rust_params(self, with_ffi=False):
         params = self.__params.copy()
-        if not (self.is_static or self.is_ctor):
+        if not (self.__is_static or self.is_ctor):
             params.insert(0, self.__self_param)
-        return ', '.join(p.rs_decl(with_ffi) for p in params)
+        return ', '.join(p.in_rust(with_ffi) for p in params)
     
-    def _params_decl(self):
-        return ', '.join(p.cxx_decl() for p in self.__params)
+    def _cxx_params(self):
+        return ', '.join(p.in_cxx() for p in self.__params)
     
     def _call_params(self):
-        return ', '.join(p.cxx_call() for p in self.__params)
+        return ', '.join(p.name for p in self.__params)
 
     def in_rust(self):
         body = '%sfn %s(%s)%s;' % (
@@ -236,7 +236,7 @@ class Method:
             return True
         return any(p.type.not_supported() for p in self.__params)
 
-    def for_ffi(self):
+    def ffi_lines(self):
         rs_template = '%sfn %s(%s) -> *mut %s;'
         lines = [rs_template % (
             self._unsafe_or_not(),
@@ -279,7 +279,7 @@ class Method:
         body = '%s *%s(%s);' % (
             self.__name,
             self._overload_name(),
-            self._params_decl(),
+            self._cxx_params(),
         )
         return body
     
@@ -291,7 +291,7 @@ class Method:
         return cc_template % (
             self.__class.name,
             self._overload_name(),
-            self._params_decl(),
+            self._cxx_params(),
             self.__class.name,
             self._call_params(),
         )
@@ -301,17 +301,14 @@ class Param:
         self.type = type
         self.name = name
     
-    def rs_decl(self, with_ffi=False):
+    def in_rust(self, with_ffi=False):
         return '%s: %s' % (
             self.name,
             self.type.in_rust(with_ffi)
         )
     
-    def cxx_decl(self):
+    def in_cxx(self):
         return '%s %s' % (self.type.in_cxx(), self.name)
-
-    def cxx_call(self):
-        return self.name
 
 class SelfType:
     def __init__(self, s, const):
@@ -325,73 +322,69 @@ class SelfType:
             return '&%s' % (t)
         return 'Pin<&mut %s>' % (t,)
 
-os_unsupported_types = [
+OS_UNSUPPORTED_TYPES = [
     'wxAccessible',
 ]
-cxx_unsupported_types = [
-]
-cxx_supported_value_types = [
+CXX_SUPPORTED_VALUE_TYPES = [
     'bool',
     'void',
 ]
 class CxxType:
     def __init__(self, s):
-        self.origtype = s
+        self.__srctype = s
         # print('parsing: |%s|' % (s,))
         matched = re.match(r'(const )?([^*&]*)([*&]+)?', s)
-        self.basetype = None
+        self.__typename = None
         if matched:
-            self.mut = matched.group(1) is None
-            self.basetype = matched.group(2).strip()
-            self.indirection = matched.group(3)
-        if self.indirection is None:
-            self.indirection = ''
+            self.__is_mut = matched.group(1) is None
+            self.__typename = matched.group(2).strip()
+            self.__indirection = matched.group(3)
+        if self.__indirection is None:
+            self.__indirection = ''
     
     def in_cxx(self):
-        if self.origtype in cxx_to_cxx:
-            return cxx_to_cxx[self.origtype]
-        return self.origtype
+        if self.__srctype in CXX2CXX:
+            return CXX2CXX[self.__srctype]
+        return self.__srctype
 
     def in_rust(self, with_ffi=False):
-        t = self.basetype
-        if t in cxx_to_rust:
-            t = cxx_to_rust[t]
+        t = self.__typename
+        if t in CXX2RUST:
+            t = CXX2RUST[t]
         t = prefixed(t, with_ffi)
-        ref = self.indirection
+        ref = self.__indirection
         mut = ''
         if ref:
-            mut = self.mut and 'mut ' or ''
-            if ref.startswith('*') and not self.mut:
+            mut = self.__is_mut and 'mut ' or ''
+            if ref.startswith('*') and not self.__is_mut:
                 mut = 'const '
-        if ref.startswith('&') and self.mut:
+        if ref.startswith('&') and self.__is_mut:
             return 'Pin<%smut %s>' % (ref, t)
         return '%s%s%s' % (ref, mut, t)
     
     def not_supported(self):
-        if self.basetype in os_unsupported_types:
-            return True
-        if self.basetype in cxx_unsupported_types:
+        if self.__typename in OS_UNSUPPORTED_TYPES:
             return True
         if not self._is_cxx_supported_value_type():
-            return not self.indirection
+            return not self.__indirection
         return False
     
     def _is_cxx_supported_value_type(self):
-        if self.basetype in cxx_supported_value_types:
+        if self.__typename in CXX_SUPPORTED_VALUE_TYPES:
             return True
-        if self.basetype in cxx_to_rust:
+        if self.__typename in CXX2RUST:
             return True
         return False
     
     def is_ptr(self):
-        return self.indirection.startswith('*')
+        return self.__indirection.startswith('*')
 
-rust_primitives = [
+RUST_PRIMITIVES = [
     'i32',
     'i64',
 ]
 def prefixed(t, with_ffi):
-    if t in rust_primitives:
+    if t in RUST_PRIMITIVES:
         return t
     if with_ffi:
         t = 'ffi::%s' % (t,)
