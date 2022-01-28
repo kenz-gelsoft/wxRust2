@@ -25,12 +25,15 @@ class Class:
             self.methods.append(m)
     
     def print_ffi_methods(self, f, blocklist):
+        template = '''\
+
+        // CLASS: %s
+        type %s;'''
+        print(template % (
+            self.name,
+            self.name
+        ), file=f)
         indent = ' ' * 4 * 2
-        print(file=f)
-        print('%s// CLASS: %s' % (indent, self.name),
-                file=f)
-        print('%stype %s;' % (indent, self.name),
-                file=f)
         for method in self.methods:
             for line in method.in_rust(blocklist):
                 print('%s%s' % (indent, line),
@@ -48,17 +51,18 @@ class Class:
 // %s
 wx_class! { %s(%s) impl
 }'''
-        without_wx = self.name[2:]
         print(rs_template % (
             self.name,
-            without_wx,
+            self.unprefixed(),
             self.name,
         ), file=f)
-        self.print_ctors_to_rs(f)
+        self._print_ctors_to_rs(f)
+    
+    def unprefixed(self):
+        return self.name[2:]
 
-    def print_ctors_to_rs(self, f):
-        without_wx = self.name[2:]
-        print('impl %s {' % (without_wx,),
+    def _print_ctors_to_rs(self, f):
+        print('impl %s {' % (self.unprefixed(),),
                 file=f)
         for ctor in self._ctors():
             print(ctor.for_rs(), file=f)
@@ -149,8 +153,7 @@ class Method:
     def _overload_name(self):
         name = self.__name
         if self.is_ctor:
-            without_wx = self.__class.name[2:]
-            name = 'New%s' % (without_wx,)
+            name = 'New%s' % (self.__class.unprefixed(),)
         index = self.__index
         if self.__index == 0:
             index = ''
@@ -207,16 +210,16 @@ class Method:
         new_name = 'new'
         if self.__index > 0:
             new_name += str(self.__index)
-        without_wx = self.__class.name[2:]
+        unprefixed = self.__class.unprefixed()
         body = '%s(ffi::%s(%s))' % (
-            without_wx,
+            unprefixed,
             self._overload_name(),
             self._call_params(),
         )
         return rs_template % (
             new_name,
             self._rust_params(with_ffi=True),
-            without_wx,
+            unprefixed,
             self._wrap_if_unsafe(body),
         )
     
