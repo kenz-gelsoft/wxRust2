@@ -100,6 +100,57 @@ types = [
     'wxObjectRefData',
 ]
 
+BLOCKLIST = {
+    'wxObject': [
+        'operator delete',
+    ],
+    'wxEvtHandler': [
+        'AddFilter',
+        'Bind',
+        'CallAfter',
+        'GetClientData',
+        'RemoveFilter',
+        'SetClientData',
+        'Unbind',
+    ],
+    'wxWindow': [
+        # TODO: treat long correctly
+        'Create',
+        # wxWindowBase's methods
+        'AddChild',
+        'FindFocus',
+        'FindWindow',
+        'FindWindowById',
+        'FindWindowByLabel',
+        'FindWindowByName',
+        'FromDIP',
+        'GetCapture',
+        'GetExtraStyle',
+        'GetWindowStyle',
+        'GetWindowStyleFlag',
+        'IsDescendant',
+        'IsExposed',
+        'NewControlId',
+        'RemoveChild',
+        'Reparent',
+        'SetExtraStyle',
+        'SetSize',
+        'SetWindowStyle',
+        'SetWindowStyleFlag',
+        'ToDIP',
+        'UnreserveControlId',
+        'UpdateWindowUI',
+    ],
+    'wxControl': [
+        # TODO: treat long correctly
+        'Create',
+    ],
+    'wxButton': [
+        # TODO: treat long correctly
+        'Create',
+    ],
+}
+
 # place wxWidgets doxygen xml files in wxml/ dir and run this.
 def main():
     files = [
@@ -131,7 +182,7 @@ def generate_bindings_for(classes):
         for t in types:
             print('%stype %s;' % (indent,t), file=f)
         for cls in classes:
-            cls.print_ffi_methods(f)
+            cls.print_ffi_methods(f, BLOCKLIST)
         print(CXX_PROLOGUE2, file=f)
         for cls in classes:
             cls.print_ffi_ctors(f)

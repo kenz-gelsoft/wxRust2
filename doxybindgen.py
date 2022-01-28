@@ -24,7 +24,7 @@ class Class:
                 continue
             self.methods.append(m)
     
-    def print_ffi_methods(self, f):
+    def print_ffi_methods(self, f, blocklist):
         indent = ' ' * 4 * 2
         print(file=f)
         print('%s// CLASS: %s' % (indent, self.name),
@@ -32,7 +32,7 @@ class Class:
         print('%stype %s;' % (indent, self.name),
                 file=f)
         for method in self.methods:
-            for line in method.in_rust():
+            for line in method.in_rust(blocklist):
                 print('%s%s' % (indent, line),
                         file=f)
 
@@ -84,56 +84,6 @@ wx_class! { %s(%s) impl
             if method.is_ctor:
                 yield method
 
-BLOCKLIST = {
-    'wxObject': [
-        'operator delete',
-    ],
-    'wxEvtHandler': [
-        'AddFilter',
-        'Bind',
-        'CallAfter',
-        'GetClientData',
-        'RemoveFilter',
-        'SetClientData',
-        'Unbind',
-    ],
-    'wxWindow': [
-        # TODO: treat long correctly
-        'Create',
-        # wxWindowBase's methods
-        'AddChild',
-        'FindFocus',
-        'FindWindow',
-        'FindWindowById',
-        'FindWindowByLabel',
-        'FindWindowByName',
-        'FromDIP',
-        'GetCapture',
-        'GetExtraStyle',
-        'GetWindowStyle',
-        'GetWindowStyleFlag',
-        'IsDescendant',
-        'IsExposed',
-        'NewControlId',
-        'RemoveChild',
-        'Reparent',
-        'SetExtraStyle',
-        'SetSize',
-        'SetWindowStyle',
-        'SetWindowStyleFlag',
-        'ToDIP',
-        'UnreserveControlId',
-        'UpdateWindowUI',
-    ],
-    'wxControl': [
-        # TODO: treat long correctly
-        'Create',
-    ],
-    'wxButton': [
-        # TODO: treat long correctly
-        'Create',
-    ],
-}
 class Method:
     def __init__(self, cls, e):
         self.is_public = e.get('prot') == 'public'
@@ -154,10 +104,10 @@ class Method:
     def _overload_index(self):
         return sum(m.__name == self.__name for m in self.__class.methods)
 
-    def _is_blocked(self):
-        if self.__class.name not in BLOCKLIST:
+    def _blocked_by(self, blocklist):
+        if self.__class.name not in blocklist:
             return False
-        blocked_methods = BLOCKLIST[self.__class.name]
+        blocked_methods = blocklist[self.__class.name]
         if blocked_methods:
             return self.__name in blocked_methods
         return False
@@ -174,14 +124,14 @@ class Method:
     def _call_params(self):
         return ', '.join(p.name for p in self.__params)
 
-    def in_rust(self):
+    def in_rust(self, blocklist):
         body = '%sfn %s(%s)%s;' % (
             self._unsafe_or_not(),
             self.__name,
             self._rust_params(),
             self._returns_or_not(),
         )
-        suppressed = self._suppressed_reason()
+        suppressed = self._suppressed_reason(blocklist)
         if suppressed:
             return ['// %s: %s' % (suppressed, body)]
         lines = [body]
@@ -222,12 +172,12 @@ class Method:
             returns = ' -> %s' % (returns,)
         return returns
     
-    def _suppressed_reason(self):
+    def _suppressed_reason(self, blocklist):
         if self.is_ctor:
             return 'CTOR'
         if self._uses_unsupported_type():
             return 'CXX_UNSUPPORTED'
-        if self._is_blocked():
+        if self._blocked_by(blocklist):
             return 'BLOCKED'
         return None
     
