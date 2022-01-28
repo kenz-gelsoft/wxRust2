@@ -174,18 +174,16 @@ def parse_classes_in(xmlfile):
     for cls in root.findall(".//compounddef[@kind='class']"):
         yield Class(cls)
 
-def generate_bindings_for(classes):    
-    with open('src/generated.rs', 'w') as f:
-        for chunk in generated_rs(classes):
-            print(chunk, file=f)
-
-    with open('include/wxrust2.h', 'w') as f:
-        for chunk in wxrust2_h(classes):
-            print(chunk, file=f)
-
-    with open('src/wxrust2.cc', 'w') as f:
-        for chunk in wxrust2_cc(classes):
-            print(chunk, file=f)
+def generate_bindings_for(classes):
+    to_be_generated = {
+        'src/generated.rs': generated_rs,
+        'include/wxrust2.h': wxrust2_h,
+        'src/wxrust2.cc': wxrust2_cc,
+    }
+    for path, generator in to_be_generated.items():
+        with open(path, 'w') as f:
+            for chunk in generator(classes):
+                print(chunk, file=f)
 
 def generated_rs(classes):
     yield PROLOGUE
