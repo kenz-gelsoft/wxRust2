@@ -24,64 +24,59 @@ class Class:
                 continue
             self.methods.append(m)
     
-    def print_ffi_methods(self, f, blocklist):
+    def ffi_methods(self, blocklist):
         template = '''\
 
         // CLASS: %s
         type %s;'''
-        print(template % (
+        yield template % (
             self.name,
             self.name
-        ), file=f)
+        )
         indent = ' ' * 4 * 2
         for method in self.methods:
             for line in method.in_rust(blocklist):
-                print('%s%s' % (indent, line),
-                        file=f)
+                yield '%s%s' % (indent, line)
 
-    def print_ffi_ctors(self, f):
+    def ffi_ctors(self):
         indent = ' ' * 4 * 2
         for ctor in self._ctors():
             for line in ctor.ffi_lines():
-                print('%s%s' % (indent, line),
-                        file=f)
+                yield '%s%s' % (indent, line)
 
-    def print_safer_binding(self, f):
+    def safer_binding(self):
         rs_template = '''\
 // %s
 wx_class! { %s(%s) impl
 }'''
-        print(rs_template % (
+        yield rs_template % (
             self.name,
             self.unprefixed(),
             self.name,
-        ), file=f)
-        self._print_ctors_to_rs(f)
+        )
+        for chunk in self._ctors_for_rs():
+            yield chunk
     
     def unprefixed(self):
         return self.name[2:]
 
-    def _print_ctors_to_rs(self, f):
-        print('impl %s {' % (self.unprefixed(),),
-                file=f)
+    def _ctors_for_rs(self):
+        yield 'impl %s {' % (self.unprefixed(),)
         for ctor in self._ctors():
-            print(ctor.for_rs(), file=f)
-        print('}', file=f)
-        print(file=f)
+            yield ctor.for_rs()
+        yield '}\n'
 
-    def print_ctors_to_h(self, f):
-        print('// CLASS: %s' % (self.name,),
-                file=f)
+    def ctors_for_h(self):
+        yield '// CLASS: %s' % (self.name,)
         for ctor in self._ctors():
-            print(ctor.for_h(), file=f)
-        print(file=f)
+            yield ctor.for_h()
+        yield ''
     
-    def print_ctors_to_cc(self, f):
-        print('// CLASS: %s' % (self.name,),
-                file=f)
+    def ctors_for_cc(self):
+        yield '// CLASS: %s' % (self.name,)
         for ctor in self._ctors():
-            print(ctor.for_cc(), file=f)
-        print(file=f)
+            yield ctor.for_cc()
+        yield ''
 
     def _ctors(self):
         for method in self.methods:

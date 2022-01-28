@@ -182,25 +182,30 @@ def generate_bindings_for(classes):
         for t in types:
             print('%stype %s;' % (indent,t), file=f)
         for cls in classes:
-            cls.print_ffi_methods(f, BLOCKLIST)
+            for chunk in cls.ffi_methods(BLOCKLIST):
+                print(chunk, file=f)
         print(CXX_PROLOGUE2, file=f)
         for cls in classes:
-            cls.print_ffi_ctors(f)
+            for chunk in cls.ffi_ctors():
+                print(chunk, file=f)
         print(CXX_EPILOGUE, file=f)
 
         for cls in classes:
-            cls.print_safer_binding(f)
+            for chunk in cls.safer_binding():
+                print(chunk, file=f)
 
     with open('include/wxrust2.h', 'w') as f:
         print(H_PROLOGUE, file=f)
         for cls in classes:
-            cls.print_ctors_to_h(f)
+            for chunk in cls.ctors_for_h():
+                print(chunk, file=f)
         print(H_EPILOGUE, file=f)
 
     with open('src/wxrust2.cc', 'w') as f:
         print(CC_PROLOGUE, file=f)
         for cls in classes:
-            cls.print_ctors_to_cc(f)
+            for chunk in cls.ctors_for_cc():
+                print(chunk, file=f)
         print(CC_EPILOGUE, file=f)
 
 if __name__ == '__main__':
