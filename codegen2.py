@@ -176,37 +176,49 @@ def parse_classes_in(xmlfile):
 
 def generate_bindings_for(classes):    
     with open('src/generated.rs', 'w') as f:
-        indent = ' ' * 4 * 2
-        print(PROLOGUE, file=f)
-        print(CXX_PROLOGUE, file=f)
-        for t in types:
-            print('%stype %s;' % (indent,t), file=f)
-        for cls in classes:
-            for chunk in cls.ffi_methods(BLOCKLIST):
-                print(chunk, file=f)
-        print(CXX_PROLOGUE2, file=f)
-        for cls in classes:
-            for chunk in cls.ffi_ctors():
-                print(chunk, file=f)
-        print(CXX_EPILOGUE, file=f)
-
-        for cls in classes:
-            for chunk in cls.safer_binding():
-                print(chunk, file=f)
+        for chunk in generated_rs(classes):
+            print(chunk, file=f)
 
     with open('include/wxrust2.h', 'w') as f:
-        print(H_PROLOGUE, file=f)
-        for cls in classes:
-            for chunk in cls.ctors_for_h():
-                print(chunk, file=f)
-        print(H_EPILOGUE, file=f)
+        for chunk in wxrust2_h(classes):
+            print(chunk, file=f)
 
     with open('src/wxrust2.cc', 'w') as f:
-        print(CC_PROLOGUE, file=f)
-        for cls in classes:
-            for chunk in cls.ctors_for_cc():
-                print(chunk, file=f)
-        print(CC_EPILOGUE, file=f)
+        for chunk in wxrust2_cc(classes):
+            print(chunk, file=f)
+
+def generated_rs(classes):
+    yield PROLOGUE
+    yield CXX_PROLOGUE
+    indent = ' ' * 4 * 2
+    for t in types:
+        yield '%stype %s;' % (indent,t)
+    for cls in classes:
+        for chunk in cls.ffi_methods(BLOCKLIST):
+            yield chunk
+    yield CXX_PROLOGUE2
+    for cls in classes:
+        for chunk in cls.ffi_ctors():
+            yield chunk
+    yield CXX_EPILOGUE
+
+    for cls in classes:
+        for chunk in cls.safer_binding():
+            yield chunk
+
+def wxrust2_h(classes):
+    yield H_PROLOGUE
+    for cls in classes:
+        for chunk in cls.ctors_for_h():
+            yield chunk
+    yield H_EPILOGUE
+
+def wxrust2_cc(classes):
+    yield CC_PROLOGUE
+    for cls in classes:
+        for chunk in cls.ctors_for_cc():
+            yield chunk
+    yield CC_EPILOGUE
 
 if __name__ == '__main__':
     main()
