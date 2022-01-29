@@ -1,4 +1,3 @@
-import xml.etree.ElementTree as ET
 from doxybindgen import Class
 
 types = [
@@ -88,7 +87,7 @@ BLOCKLIST = {
 
 # place wxWidgets doxygen xml files in wxml/ dir and run this.
 def main():
-    files = [
+    xmlfiles = [
         'wxml/classwx_object.xml',
         'wxml/classwx_evt_handler.xml',
         'wxml/classwx_window.xml',
@@ -97,19 +96,10 @@ def main():
         'wxml/classwx_button.xml',
     ]
     classes = []
-    for file in files:
-        for cls in parse_classes_in(file):
+    for file in xmlfiles:
+        for cls in Class.in_xml(file):
             classes.append(cls)
     
-    generate_bindings_for(classes)
-
-def parse_classes_in(xmlfile):
-    tree = ET.parse(xmlfile)
-    root = tree.getroot()
-    for cls in root.findall(".//compounddef[@kind='class']"):
-        yield Class(cls)
-
-def generate_bindings_for(classes):
     to_be_generated = {
         'src/generated.rs': generated_rs,
         'include/wxrust2.h': wxrust2_h,
@@ -165,7 +155,6 @@ pub trait ObjectMethods {
     }
 }
 '''
-
     for cls in classes:
         for chunk in cls.safer_binding():
             yield chunk

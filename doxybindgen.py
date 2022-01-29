@@ -1,3 +1,4 @@
+import xml.etree.ElementTree as ET
 import re
 
 CXX2CXX = {
@@ -15,6 +16,12 @@ CXX2RUST = {
 }
 
 class Class:
+    def in_xml(xmlfile):
+        tree = ET.parse(xmlfile)
+        root = tree.getroot()
+        for cls in root.findall(".//compounddef[@kind='class']"):
+            yield Class(cls)
+
     def __init__(self, e):
         self.name = e.findtext('compoundname')
         self.methods = []
