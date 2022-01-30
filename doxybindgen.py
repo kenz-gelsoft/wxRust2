@@ -209,9 +209,6 @@ class Method:
     pub fn %s(%s) -> %s {
         %s
     }'''
-        new_name = 'new'
-        if self.__index > 0:
-            new_name += str(self.__index)
         unprefixed = self.__class.unprefixed()
         body = '%s(ffi::%s(%s))' % (
             unprefixed,
@@ -219,12 +216,18 @@ class Method:
             self._call_params(),
         )
         return rs_template % (
-            new_name,
+            self._rust_method_name(),
             self._rust_params(with_ffi=True),
             unprefixed,
             self._wrap_if_unsafe(body),
         )
     
+    def _rust_method_name(self):
+        new_name = 'new'
+        if self.__index > 0:
+            new_name += str(self.__index)
+        return new_name
+
     def _wrap_if_unsafe(self, t):
         if self._uses_ptr_type():
             return 'unsafe { %s }' % (t,)
