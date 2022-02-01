@@ -105,6 +105,7 @@ class Method:
         self.__name = e.findtext('name')
         self.__index = self._overload_index()
         self.is_ctor = self.__name == cls.name
+        self.__is_dtor = self.__name.startswith('~')
         const = e.get('const') == 'yes'
         self.__self_param = Param(SelfType(cls.name, const), 'self')
         self.__params = []
@@ -175,9 +176,11 @@ class Method:
             returns = ' -> %s' % (returns,)
         return returns
     
-    def _suppressed_reason(self):
-        if self.is_ctor:
+    def _suppressed_reason(self, suppress_ctor=True):
+        if suppress_ctor and self.is_ctor:
             return 'CTOR'
+        if self.__is_dtor:
+            return 'DTOR'
         if self._uses_unsupported_type():
             return 'CXX_UNSUPPORTED'
         if self.__class.blocks(self.__name):
@@ -203,8 +206,9 @@ class Method:
         return lines
 
     def for_rs(self):
-        if self.__class.blocks(self.__name):
-            return '// BLOCKED: fn %s()' % (self.__name,)
+        suppress = self._suppressed_reason(suppress_ctor=False)
+        if suppress:
+            return '// %s: fn %s()' % (suppress, self.__name)
         rs_template = '''\
     pub fn %s(%s) -> %s {
         %s
@@ -335,6 +339,8 @@ class CxxType:
         return '%s%s%s' % (ref, mut, t)
     
     def not_supported(self):
+        if not self.__typename:
+            return False
         if self.__typename in OS_UNSUPPORTED_TYPES:
             return True
         if not self._is_cxx_supported_value_type():
