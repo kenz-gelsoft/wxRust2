@@ -106,9 +106,9 @@ class Method:
         self.__index = self._overload_index()
         self.is_ctor = self.__name == cls.name
         self.__is_dtor = self.__name.startswith('~')
-        if self.is_ctor:
-            self.__returns = CxxType('%s*' % (self.__class.name,))
         const = e.get('const') == 'yes'
+        if self.is_ctor:
+            self.__returns = SelfType(cls.name, const, ctor_retval=True)
         self.__self_param = Param(SelfType(cls.name, const), 'self')
         self.__params = []
         for param in e.findall('param'):
@@ -221,7 +221,7 @@ class Method:
         return rs_template % (
             self._rust_method_name(),
             self._rust_params(with_ffi=True, binding=True),
-            unprefixed,
+            self.__returns.in_rust(with_ffi=True, binding=True),
             self._wrap_if_unsafe(
                 self._wrap_return_type(
                     unprefixed, call
@@ -287,16 +287,22 @@ class Param:
         return self.name == 'self'
 
 class SelfType:
-    def __init__(self, s, const):
+    def __init__(self, s, const, ctor_retval=False):
         self.type = s
         self.const = const
+        self.__ctor_retval = ctor_retval
 
     def in_rust(self, with_ffi=False, binding=False):
         t = self.type
+        if self.__ctor_retval:
+            return t[2:]
         t = prefixed(t, with_ffi, binding)
         if self.const:
             return '&%s' % (t)
         return 'Pin<&mut %s>' % (t,)
+    
+    def not_supported(self):
+        return False
 
 OS_UNSUPPORTED_TYPES = [
     'wxAccessible',
