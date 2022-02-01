@@ -97,7 +97,7 @@ def main():
     ]
     classes = []
     for file in xmlfiles:
-        for cls in Class.in_xml(file):
+        for cls in Class.in_xml(file, BLOCKLIST):
             classes.append(cls)
     
     to_be_generated = {
@@ -136,7 +136,7 @@ mod ffi {
     for t in types:
         yield '%stype %s;' % (indent,t)
     for cls in classes:
-        for chunk in cls.ffi_methods(BLOCKLIST):
+        for chunk in cls.ffi_methods():
             yield chunk
     yield '''\
     }

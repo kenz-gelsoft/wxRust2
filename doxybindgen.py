@@ -16,22 +16,23 @@ CXX2RUST = {
 }
 
 class Class:
-    def in_xml(xmlfile):
+    def in_xml(xmlfile, blocklist):
         tree = ET.parse(xmlfile)
         root = tree.getroot()
         for cls in root.findall(".//compounddef[@kind='class']"):
-            yield Class(cls)
+            yield Class(cls, blocklist)
 
-    def __init__(self, e):
+    def __init__(self, e, blocklist):
         self.name = e.findtext('compoundname')
         self.methods = []
+        self.__blocklist = blocklist.get(self.name)
         for method in e.findall(".//memberdef[@kind='function']"):
             m = Method(self, method)
             if not m.is_public:
                 continue
             self.methods.append(m)
-    
-    def ffi_methods(self, blocklist):
+
+    def ffi_methods(self):
         template = '''\
 
         // CLASS: %s
@@ -42,7 +43,7 @@ class Class:
         )
         indent = ' ' * 4 * 2
         for method in self.methods:
-            for line in method.in_rust(blocklist):
+            for line in method.in_rust():
                 yield '%s%s' % (indent, line)
 
     def ffi_ctors(self):
@@ -89,6 +90,11 @@ wx_class! { %s(%s) impl
         for method in self.methods:
             if method.is_ctor:
                 yield method
+    
+    def blocks(self, name):
+        if self.__blocklist is None:
+            return False
+        return name in self.__blocklist
 
 class Method:
     def __init__(self, cls, e):
@@ -110,19 +116,11 @@ class Method:
     def _overload_index(self):
         return sum(m.__name == self.__name for m in self.__class.methods)
 
-    def _blocked_by(self, blocklist):
-        if self.__class.name not in blocklist:
-            return False
-        blocked_methods = blocklist[self.__class.name]
-        if blocked_methods:
-            return self.__name in blocked_methods
-        return False
-
-    def _rust_params(self, with_ffi=False):
+    def _rust_params(self, with_ffi=False, binding=False):
         params = self.__params.copy()
         if not (self.__is_static or self.is_ctor):
             params.insert(0, self.__self_param)
-        return ', '.join(p.in_rust(with_ffi) for p in params)
+        return ', '.join(p.in_rust(with_ffi, binding) for p in params)
     
     def _cxx_params(self):
         return ', '.join(p.in_cxx() for p in self.__params)
@@ -130,14 +128,14 @@ class Method:
     def _call_params(self):
         return ', '.join(p.name for p in self.__params)
 
-    def in_rust(self, blocklist):
+    def in_rust(self):
         body = '%sfn %s(%s)%s;' % (
             self._unsafe_or_not(),
             self.__name,
             self._rust_params(),
             self._returns_or_not(),
         )
-        suppressed = self._suppressed_reason(blocklist)
+        suppressed = self._suppressed_reason()
         if suppressed:
             return ['// %s: %s' % (suppressed, body)]
         lines = [body]
@@ -177,12 +175,12 @@ class Method:
             returns = ' -> %s' % (returns,)
         return returns
     
-    def _suppressed_reason(self, blocklist):
+    def _suppressed_reason(self):
         if self.is_ctor:
             return 'CTOR'
         if self._uses_unsupported_type():
             return 'CXX_UNSUPPORTED'
-        if self._blocked_by(blocklist):
+        if self.__class.blocks(self.__name):
             return 'BLOCKED'
         return None
     
@@ -205,6 +203,8 @@ class Method:
         return lines
 
     def for_rs(self):
+        if self.__class.blocks(self.__name):
+            return '// BLOCKED: fn %s()' % (self.__name,)
         rs_template = '''\
     pub fn %s(%s) -> %s {
         %s
@@ -217,16 +217,19 @@ class Method:
         )
         return rs_template % (
             self._rust_method_name(),
-            self._rust_params(with_ffi=True),
+            self._rust_params(with_ffi=True, binding=True),
             unprefixed,
             self._wrap_if_unsafe(body),
         )
     
     def _rust_method_name(self):
-        new_name = 'new'
+        method_name = self.__name
+        if self.is_ctor:
+            method_name = 'new'
         if self.__index > 0:
-            new_name += str(self.__index)
-        return new_name
+            method_name += str(self.__index)
+        return method_name
+
 
     def _wrap_if_unsafe(self, t):
         if self._uses_ptr_type():
@@ -259,23 +262,26 @@ class Param:
         self.type = type
         self.name = name
     
-    def in_rust(self, with_ffi=False):
+    def in_rust(self, with_ffi=False, binding=False):
         return '%s: %s' % (
             self.name,
-            self.type.in_rust(with_ffi)
+            self.type.in_rust(with_ffi, binding)
         )
     
     def in_cxx(self):
         return '%s %s' % (self.type.in_cxx(), self.name)
+    
+    def is_self(self):
+        return self.name == 'self'
 
 class SelfType:
     def __init__(self, s, const):
         self.type = s
         self.const = const
 
-    def in_rust(self, with_ffi=False):
+    def in_rust(self, with_ffi=False, binding=False):
         t = self.type
-        t = prefixed(t, with_ffi)
+        t = prefixed(t, with_ffi, binding)
         if self.const:
             return '&%s' % (t)
         return 'Pin<&mut %s>' % (t,)
@@ -305,7 +311,7 @@ class CxxType:
             return CXX2CXX[self.__srctype]
         return self.__srctype
 
-    def in_rust(self, with_ffi=False):
+    def in_rust(self, with_ffi=False, binding=False):
         t = self.__typename
         if t in CXX2RUST:
             t = CXX2RUST[t]
@@ -341,9 +347,11 @@ RUST_PRIMITIVES = [
     'i32',
     'i64',
 ]
-def prefixed(t, with_ffi):
+def prefixed(t, with_ffi, binding=False):
     if t in RUST_PRIMITIVES:
         return t
+    if binding:
+        t = t[2:]
     if with_ffi:
         t = 'ffi::%s' % (t,)
     return t
