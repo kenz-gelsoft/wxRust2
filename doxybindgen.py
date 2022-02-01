@@ -210,18 +210,26 @@ class Method:
         %s
     }'''
         unprefixed = self.__class.unprefixed()
-        body = '%s(ffi::%s(%s))' % (
-            unprefixed,
-            self._overload_name(),
+        call = '%s(%s)' % (
+            prefixed(self._overload_name(), with_ffi=True),
             self._call_params(),
         )
         return rs_template % (
             self._rust_method_name(),
             self._rust_params(with_ffi=True, binding=True),
             unprefixed,
-            self._wrap_if_unsafe(body),
+            self._wrap_if_unsafe(
+                self._wrap_return_type(
+                    unprefixed, call
+                )
+            ),
         )
-    
+
+    def _wrap_return_type(self, type, body):
+        if self.is_ctor:
+            return '%s(%s)' % (type, body)
+        return body
+
     def _rust_method_name(self):
         method_name = self.__name
         if self.is_ctor:
