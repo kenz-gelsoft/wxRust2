@@ -49,8 +49,8 @@ mod ffi {
 
         // CLASS: wxObject
         type wxObject;
-        // CTOR: fn wxObject();
-        // CTOR: fn wxObject(other: &wxObject);
+        // CTOR: fn wxObject() -> *mut wxObject;
+        // CTOR: fn wxObject(other: &wxObject) -> *mut wxObject;
         // DTOR: fn ~wxObject(self: Pin<&mut wxObject>);
         fn GetClassInfo(self: &wxObject) -> *mut wxClassInfo;
         fn GetRefData(self: &wxObject) -> *mut wxObjectRefData;
@@ -98,7 +98,7 @@ mod ffi {
         fn IsUnlinked(self: &wxEvtHandler) -> bool;
         // BLOCKED: unsafe fn AddFilter(filter: *mut wxEventFilter);
         // BLOCKED: unsafe fn RemoveFilter(filter: *mut wxEventFilter);
-        // CTOR: fn wxEvtHandler();
+        // CTOR: fn wxEvtHandler() -> *mut wxEvtHandler;
         // DTOR: fn ~wxEvtHandler(self: Pin<&mut wxEvtHandler>);
 
         // CLASS: wxWindow
@@ -402,15 +402,15 @@ mod ffi {
         // BLOCKED: fn GetCapture() -> *mut wxWindow;
         // BLOCKED: fn NewControlId(count: i32) -> i32;
         // BLOCKED: fn UnreserveControlId(id: i32, count: i32);
-        // CTOR: fn wxWindow();
-        // CTOR: unsafe fn wxWindow(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString);
+        // CTOR: fn wxWindow() -> *mut wxWindow;
+        // CTOR: unsafe fn wxWindow(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxWindow;
         // DTOR: fn ~wxWindow(self: Pin<&mut wxWindow>);
         // BLOCKED: unsafe fn Create(self: Pin<&mut wxWindow>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
 
         // CLASS: wxControl
         type wxControl;
-        // CTOR: unsafe fn wxControl(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString);
-        // CTOR: fn wxControl();
+        // CTOR: unsafe fn wxControl(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> *mut wxControl;
+        // CTOR: fn wxControl() -> *mut wxControl;
         // BLOCKED: unsafe fn Create(self: Pin<&mut wxControl>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
         fn Command(self: Pin<&mut wxControl>, event: Pin<&mut wxCommandEvent>);
         // CXX_UNSUPPORTED: fn GetLabel(self: &wxControl) -> wxString;
@@ -428,7 +428,7 @@ mod ffi {
 
         // CLASS: wxAnyButton
         type wxAnyButton;
-        // CTOR: fn wxAnyButton();
+        // CTOR: fn wxAnyButton() -> *mut wxAnyButton;
         // DTOR: fn ~wxAnyButton(self: Pin<&mut wxAnyButton>);
         // CXX_UNSUPPORTED: fn GetBitmap(self: &wxAnyButton) -> wxBitmap;
         // CXX_UNSUPPORTED: fn GetBitmapCurrent(self: &wxAnyButton) -> wxBitmap;
@@ -450,8 +450,8 @@ mod ffi {
 
         // CLASS: wxButton
         type wxButton;
-        // CTOR: fn wxButton();
-        // CTOR: unsafe fn wxButton(parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString);
+        // CTOR: fn wxButton() -> *mut wxButton;
+        // CTOR: unsafe fn wxButton(parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> *mut wxButton;
         // BLOCKED: unsafe fn Create(self: Pin<&mut wxButton>, parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
         fn GetAuthNeeded(self: &wxButton) -> bool;
         // CXX_UNSUPPORTED: fn GetLabel(self: &wxButton) -> wxString;

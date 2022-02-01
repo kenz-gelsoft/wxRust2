@@ -106,6 +106,8 @@ class Method:
         self.__index = self._overload_index()
         self.is_ctor = self.__name == cls.name
         self.__is_dtor = self.__name.startswith('~')
+        if self.is_ctor:
+            self.__returns = CxxType('%s*' % (self.__class.name,))
         const = e.get('const') == 'yes'
         self.__self_param = Param(SelfType(cls.name, const), 'self')
         self.__params = []
@@ -164,8 +166,6 @@ class Method:
         return self._uses_ptr_type() and 'unsafe ' or ''
     
     def _uses_ptr_type(self):
-        # if self.__returns.is_ptr():
-        #     return True
         return any(p.type.is_ptr() for p in self.__params)
 
     def _returns_or_not(self):
@@ -339,8 +339,6 @@ class CxxType:
         return '%s%s%s' % (ref, mut, t)
     
     def not_supported(self):
-        if not self.__typename:
-            return False
         if self.__typename in OS_UNSUPPORTED_TYPES:
             return True
         if not self._is_cxx_supported_value_type():
