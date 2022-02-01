@@ -164,8 +164,8 @@ class Method:
         return self._uses_ptr_type() and 'unsafe ' or ''
     
     def _uses_ptr_type(self):
-        if self.__returns.is_ptr():
-            return True
+        # if self.__returns.is_ptr():
+        #     return True
         return any(p.type.is_ptr() for p in self.__params)
 
     def _returns_or_not(self):

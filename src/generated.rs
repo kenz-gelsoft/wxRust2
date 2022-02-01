@@ -52,8 +52,8 @@ mod ffi {
         // CTOR: fn wxObject();
         // CTOR: fn wxObject(other: &wxObject);
         // DTOR: fn ~wxObject(self: Pin<&mut wxObject>);
-        unsafe fn GetClassInfo(self: &wxObject) -> *mut wxClassInfo;
-        unsafe fn GetRefData(self: &wxObject) -> *mut wxObjectRefData;
+        fn GetClassInfo(self: &wxObject) -> *mut wxClassInfo;
+        fn GetRefData(self: &wxObject) -> *mut wxObjectRefData;
         unsafe fn IsKindOf(self: &wxObject, info: *const wxClassInfo) -> bool;
         fn IsSameAs(self: &wxObject, obj: &wxObject) -> bool;
         fn Ref(self: Pin<&mut wxObject>, clone: &wxObject);
@@ -61,7 +61,7 @@ mod ffi {
         fn UnRef(self: Pin<&mut wxObject>);
         fn UnShare(self: Pin<&mut wxObject>);
         // BLOCKED: unsafe fn operator delete(self: Pin<&mut wxObject>, buf: *mut void);
-        // CXX_UNSUPPORTED: unsafe fn operator new(self: Pin<&mut wxObject>, size: size_t, filename: &wxString, lineNum: i32) -> *mut void;
+        // CXX_UNSUPPORTED: fn operator new(self: Pin<&mut wxObject>, size: size_t, filename: &wxString, lineNum: i32) -> *mut void;
 
         // CLASS: wxEvtHandler
         type wxEvtHandler;
@@ -84,13 +84,13 @@ mod ffi {
         // BLOCKED: unsafe fn Bind(self: Pin<&mut wxEvtHandler>, eventType: &EventTag, method: *mut void(Class::, handler: *mut EventHandler, id: i32, lastId: i32, userData: *mut wxObject);
         // CXX_UNSUPPORTED: unsafe fn Unbind(self: Pin<&mut wxEvtHandler>, eventType: &EventTag, functor: Functor, id: i32, lastId: i32, userData: *mut wxObject) -> bool;
         // BLOCKED: unsafe fn Unbind(self: Pin<&mut wxEvtHandler>, eventType: &EventTag, method: *mut void(Class::, handler: *mut EventHandler, id: i32, lastId: i32, userData: *mut wxObject) -> bool;
-        // BLOCKED: unsafe fn GetClientData(self: &wxEvtHandler) -> *mut void;
-        unsafe fn GetClientObject(self: &wxEvtHandler) -> *mut wxClientData;
+        // BLOCKED: fn GetClientData(self: &wxEvtHandler) -> *mut void;
+        fn GetClientObject(self: &wxEvtHandler) -> *mut wxClientData;
         // BLOCKED: unsafe fn SetClientData(self: Pin<&mut wxEvtHandler>, data: *mut void);
         unsafe fn SetClientObject(self: Pin<&mut wxEvtHandler>, data: *mut wxClientData);
         fn GetEvtHandlerEnabled(self: &wxEvtHandler) -> bool;
-        unsafe fn GetNextHandler(self: &wxEvtHandler) -> *mut wxEvtHandler;
-        unsafe fn GetPreviousHandler(self: &wxEvtHandler) -> *mut wxEvtHandler;
+        fn GetNextHandler(self: &wxEvtHandler) -> *mut wxEvtHandler;
+        fn GetPreviousHandler(self: &wxEvtHandler) -> *mut wxEvtHandler;
         fn SetEvtHandlerEnabled(self: Pin<&mut wxEvtHandler>, enabled: bool);
         unsafe fn SetNextHandler(self: Pin<&mut wxEvtHandler>, handler: *mut wxEvtHandler);
         unsafe fn SetPreviousHandler(self: Pin<&mut wxEvtHandler>, handler: *mut wxEvtHandler);
@@ -117,16 +117,16 @@ mod ffi {
         fn SetFocusFromKbd(self: Pin<&mut wxWindow>);
         // BLOCKED: unsafe fn AddChild(self: Pin<&mut wxWindow>, child: *mut wxWindow);
         fn DestroyChildren(self: Pin<&mut wxWindow>) -> bool;
-        // BLOCKED: unsafe fn FindWindow(self: &wxWindow, id: i32) -> *mut wxWindow;
-        // BLOCKED: unsafe fn FindWindow(self: &wxWindow, name: &wxString) -> *mut wxWindow;
+        // BLOCKED: fn FindWindow(self: &wxWindow, id: i32) -> *mut wxWindow;
+        // BLOCKED: fn FindWindow(self: &wxWindow, name: &wxString) -> *mut wxWindow;
         fn GetChildren(self: Pin<&mut wxWindow>) -> Pin<&mut wxWindowList>;
         #[rust_name = "GetChildren1"]
         fn GetChildren(self: &wxWindow) -> &wxWindowList;
         // BLOCKED: unsafe fn RemoveChild(self: Pin<&mut wxWindow>, child: *mut wxWindow);
-        unsafe fn GetGrandParent(self: &wxWindow) -> *mut wxWindow;
-        unsafe fn GetNextSibling(self: &wxWindow) -> *mut wxWindow;
-        unsafe fn GetParent(self: &wxWindow) -> *mut wxWindow;
-        unsafe fn GetPrevSibling(self: &wxWindow) -> *mut wxWindow;
+        fn GetGrandParent(self: &wxWindow) -> *mut wxWindow;
+        fn GetNextSibling(self: &wxWindow) -> *mut wxWindow;
+        fn GetParent(self: &wxWindow) -> *mut wxWindow;
+        fn GetPrevSibling(self: &wxWindow) -> *mut wxWindow;
         // BLOCKED: unsafe fn IsDescendant(self: &wxWindow, win: *mut wxWindow) -> bool;
         // BLOCKED: unsafe fn Reparent(self: Pin<&mut wxWindow>, newParent: *mut wxWindow) -> bool;
         fn AlwaysShowScrollbars(self: Pin<&mut wxWindow>, hflag: bool, vflag: bool);
@@ -277,12 +277,12 @@ mod ffi {
         fn GetThemeEnabled(self: &wxWindow) -> bool;
         fn CanSetTransparent(self: Pin<&mut wxWindow>) -> bool;
         fn SetTransparent(self: Pin<&mut wxWindow>, alpha: u8) -> bool;
-        unsafe fn GetEventHandler(self: &wxWindow) -> *mut wxEvtHandler;
+        fn GetEventHandler(self: &wxWindow) -> *mut wxEvtHandler;
         fn HandleAsNavigationKey(self: Pin<&mut wxWindow>, event: &wxKeyEvent) -> bool;
         fn HandleWindowEvent(self: &wxWindow, event: Pin<&mut wxEvent>) -> bool;
         fn ProcessWindowEvent(self: Pin<&mut wxWindow>, event: Pin<&mut wxEvent>) -> bool;
         fn ProcessWindowEventLocally(self: Pin<&mut wxWindow>, event: Pin<&mut wxEvent>) -> bool;
-        unsafe fn PopEventHandler(self: Pin<&mut wxWindow>, deleteHandler: bool) -> *mut wxEvtHandler;
+        fn PopEventHandler(self: Pin<&mut wxWindow>, deleteHandler: bool) -> *mut wxEvtHandler;
         unsafe fn PushEventHandler(self: Pin<&mut wxWindow>, handler: *mut wxEvtHandler);
         unsafe fn RemoveEventHandler(self: Pin<&mut wxWindow>, handler: *mut wxEvtHandler) -> bool;
         unsafe fn SetEventHandler(self: Pin<&mut wxWindow>, handler: *mut wxEvtHandler);
@@ -319,7 +319,7 @@ mod ffi {
         // CXX_UNSUPPORTED: fn GetHelpText(self: &wxWindow) -> wxString;
         fn SetHelpText(self: Pin<&mut wxWindow>, helpText: &wxString);
         // CXX_UNSUPPORTED: fn GetHelpTextAtPoint(self: &wxWindow, point: &wxPoint, origin: wxHelpEvent::Origin) -> wxString;
-        unsafe fn GetToolTip(self: &wxWindow) -> *mut wxToolTip;
+        fn GetToolTip(self: &wxWindow) -> *mut wxToolTip;
         // CXX_UNSUPPORTED: fn GetToolTipText(self: &wxWindow) -> wxString;
         fn SetToolTip(self: Pin<&mut wxWindow>, tipString: &wxString);
         #[rust_name = "SetToolTip1"]
@@ -331,7 +331,7 @@ mod ffi {
         unsafe fn PopupMenu(self: Pin<&mut wxWindow>, menu: *mut wxMenu, pos: &wxPoint) -> bool;
         #[rust_name = "PopupMenu1"]
         unsafe fn PopupMenu(self: Pin<&mut wxWindow>, menu: *mut wxMenu, x: i32, y: i32) -> bool;
-        unsafe fn GetValidator(self: Pin<&mut wxWindow>) -> *mut wxValidator;
+        fn GetValidator(self: Pin<&mut wxWindow>) -> *mut wxValidator;
         fn SetValidator(self: Pin<&mut wxWindow>, validator: &wxValidator);
         fn TransferDataFromWindow(self: Pin<&mut wxWindow>) -> bool;
         fn TransferDataToWindow(self: Pin<&mut wxWindow>) -> bool;
@@ -347,27 +347,27 @@ mod ffi {
         // CXX_UNSUPPORTED: fn SetLayoutDirection(self: Pin<&mut wxWindow>, dir: wxLayoutDirection);
         fn SetName(self: Pin<&mut wxWindow>, name: &wxString);
         // CXX_UNSUPPORTED: fn SetWindowVariant(self: Pin<&mut wxWindow>, variant: wxWindowVariant);
-        unsafe fn GetAcceleratorTable(self: Pin<&mut wxWindow>) -> *mut wxAcceleratorTable;
-        // CXX_UNSUPPORTED: unsafe fn GetAccessible(self: Pin<&mut wxWindow>) -> *mut wxAccessible;
+        fn GetAcceleratorTable(self: Pin<&mut wxWindow>) -> *mut wxAcceleratorTable;
+        // CXX_UNSUPPORTED: fn GetAccessible(self: Pin<&mut wxWindow>) -> *mut wxAccessible;
         fn SetAcceleratorTable(self: Pin<&mut wxWindow>, accel: &wxAcceleratorTable);
         // CXX_UNSUPPORTED: unsafe fn SetAccessible(self: Pin<&mut wxWindow>, accessible: *mut wxAccessible);
         fn Close(self: Pin<&mut wxWindow>, force: bool) -> bool;
         fn Destroy(self: Pin<&mut wxWindow>) -> bool;
         fn IsBeingDeleted(self: &wxWindow) -> bool;
-        unsafe fn GetDropTarget(self: &wxWindow) -> *mut wxDropTarget;
+        fn GetDropTarget(self: &wxWindow) -> *mut wxDropTarget;
         unsafe fn SetDropTarget(self: Pin<&mut wxWindow>, target: *mut wxDropTarget);
         fn DragAcceptFiles(self: Pin<&mut wxWindow>, accept: bool);
-        unsafe fn GetContainingSizer(self: &wxWindow) -> *mut wxSizer;
-        unsafe fn GetSizer(self: &wxWindow) -> *mut wxSizer;
+        fn GetContainingSizer(self: &wxWindow) -> *mut wxSizer;
+        fn GetSizer(self: &wxWindow) -> *mut wxSizer;
         unsafe fn SetSizer(self: Pin<&mut wxWindow>, sizer: *mut wxSizer, deleteOld: bool);
         unsafe fn SetSizerAndFit(self: Pin<&mut wxWindow>, sizer: *mut wxSizer, deleteOld: bool);
-        unsafe fn GetConstraints(self: &wxWindow) -> *mut wxLayoutConstraints;
+        fn GetConstraints(self: &wxWindow) -> *mut wxLayoutConstraints;
         unsafe fn SetConstraints(self: Pin<&mut wxWindow>, constraints: *mut wxLayoutConstraints);
         fn Layout(self: Pin<&mut wxWindow>) -> bool;
         fn SetAutoLayout(self: Pin<&mut wxWindow>, autoLayout: bool);
         fn GetAutoLayout(self: &wxWindow) -> bool;
         fn CaptureMouse(self: Pin<&mut wxWindow>);
-        unsafe fn GetCaret(self: &wxWindow) -> *mut wxCaret;
+        fn GetCaret(self: &wxWindow) -> *mut wxCaret;
         fn GetCursor(self: &wxWindow) -> &wxCursor;
         fn HasCapture(self: &wxWindow) -> bool;
         fn ReleaseMouse(self: Pin<&mut wxWindow>);
@@ -395,11 +395,11 @@ mod ffi {
         fn UnregisterHotKey(self: Pin<&mut wxWindow>, hotkeyId: i32) -> bool;
         // BLOCKED: fn UpdateWindowUI(self: Pin<&mut wxWindow>, flags: i32);
         // CXX_UNSUPPORTED: fn GetClassDefaultAttributes(variant: wxWindowVariant) -> wxVisualAttributes;
-        // BLOCKED: unsafe fn FindFocus() -> *mut wxWindow;
+        // BLOCKED: fn FindFocus() -> *mut wxWindow;
         // BLOCKED: unsafe fn FindWindowById(id: i32, parent: *const wxWindow) -> *mut wxWindow;
         // BLOCKED: unsafe fn FindWindowByLabel(label: &wxString, parent: *const wxWindow) -> *mut wxWindow;
         // BLOCKED: unsafe fn FindWindowByName(name: &wxString, parent: *const wxWindow) -> *mut wxWindow;
-        // BLOCKED: unsafe fn GetCapture() -> *mut wxWindow;
+        // BLOCKED: fn GetCapture() -> *mut wxWindow;
         // BLOCKED: fn NewControlId(count: i32) -> i32;
         // BLOCKED: fn UnreserveControlId(id: i32, count: i32);
         // CTOR: fn wxWindow();
@@ -456,7 +456,7 @@ mod ffi {
         fn GetAuthNeeded(self: &wxButton) -> bool;
         // CXX_UNSUPPORTED: fn GetLabel(self: &wxButton) -> wxString;
         fn SetAuthNeeded(self: Pin<&mut wxButton>, needed: bool);
-        unsafe fn SetDefault(self: Pin<&mut wxButton>) -> *mut wxWindow;
+        fn SetDefault(self: Pin<&mut wxButton>) -> *mut wxWindow;
         fn SetLabel(self: Pin<&mut wxButton>, label: &wxString);
         // CXX_UNSUPPORTED: unsafe fn GetDefaultSize(win: *mut wxWindow) -> wxSize;
     }
