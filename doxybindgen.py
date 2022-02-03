@@ -62,16 +62,16 @@ wx_class! { %s(%s) impl
             self.unprefixed(),
             self.name,
         )
-        for chunk in self._ctors_for_rs():
+        for chunk in self._methods_for_rs():
             yield chunk
     
     def unprefixed(self):
         return self.name[2:]
 
-    def _ctors_for_rs(self):
+    def _methods_for_rs(self):
         yield 'impl %s {' % (self.unprefixed(),)
-        for ctor in self._ctors():
-            yield ctor.for_rs()
+        for method in self.methods:
+            yield method.for_rs()
         yield '}\n'
 
     def ctors_for_h(self):
@@ -119,9 +119,12 @@ class Method:
     def _overload_index(self):
         return sum(m.__name == self.__name for m in self.__class.methods)
 
+    def _is_method_call(self):
+        return not (self.__is_static or self.is_ctor)
+
     def _rust_params(self, with_ffi=False, binding=False):
         params = self.__params.copy()
-        if not (self.__is_static or self.is_ctor):
+        if self._is_method_call():
             params.insert(0, self.__self_param)
         return ', '.join(p.in_rust(with_ffi, binding) for p in params)
     
@@ -218,6 +221,12 @@ class Method:
             prefixed(self._overload_name(), with_ffi=True),
             self._call_params(),
         )
+        if self._is_method_call():
+            call = 'self.pinned::<ffi::%s>().as_mut().%s(%s)' % (
+                self.__class.name,
+                self._overload_name(),
+                self._call_params(),
+            )
         returns_or_not = ''
         if not self.__returns.is_void():
             returns_or_not = ' -> %s' % (self.__returns.in_rust(with_ffi=True, binding=True),)
@@ -299,6 +308,8 @@ class SelfType:
         t = self.type
         if self.__ctor_retval:
             return t[2:]
+        if binding:
+            with_ffi = False
         t = prefixed(t, with_ffi, binding)
         if self.const:
             return '&%s' % (t)
@@ -374,8 +385,10 @@ class CxxType:
 
 RUST_PRIMITIVES = [
     'bool',
+    'f64',
     'i32',
     'i64',
+    'u8',
 ]
 def prefixed(t, with_ffi, binding=False):
     if t in RUST_PRIMITIVES:

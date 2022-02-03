@@ -74,6 +74,11 @@ BLOCKLIST = {
         'ToDIP',
         'UnreserveControlId',
         'UpdateWindowUI',
+
+        # TODO: dont return reference/temp value from self
+        'GetChildren',
+        'GetCursor', 
+        'GetUpdateRegion',
     ],
     'wxControl': [
         # TODO: treat long correctly
