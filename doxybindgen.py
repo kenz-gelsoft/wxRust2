@@ -210,7 +210,7 @@ class Method:
         if suppress:
             return '// %s: fn %s()' % (suppress, self.__name)
         rs_template = '''\
-    pub fn %s(%s) -> %s {
+    pub fn %s(%s)%s {
         %s
     }'''
         unprefixed = self.__class.unprefixed()
@@ -218,10 +218,13 @@ class Method:
             prefixed(self._overload_name(), with_ffi=True),
             self._call_params(),
         )
+        returns_or_not = ''
+        if not self.__returns.is_void():
+            returns_or_not = ' -> %s' % (self.__returns.in_rust(with_ffi=True, binding=True),)
         return rs_template % (
             self._rust_method_name(),
             self._rust_params(with_ffi=True, binding=True),
-            self.__returns.in_rust(with_ffi=True, binding=True),
+            returns_or_not,
             self._wrap_if_unsafe(
                 self._wrap_return_type(
                     unprefixed, call
@@ -303,6 +306,9 @@ class SelfType:
     
     def not_supported(self):
         return False
+    
+    def is_void(self):
+        return False
 
 OS_UNSUPPORTED_TYPES = [
     'wxAccessible',
@@ -360,8 +366,14 @@ class CxxType:
     
     def is_ptr(self):
         return self.__indirection.startswith('*')
+    
+    def is_void(self):
+        if self.is_ptr():
+            return False
+        return self.__typename == 'void'
 
 RUST_PRIMITIVES = [
+    'bool',
     'i32',
     'i64',
 ]
