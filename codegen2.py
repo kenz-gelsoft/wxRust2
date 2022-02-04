@@ -153,7 +153,7 @@ mod ffi {
     }
 }
 
-pub trait ObjectMethods {
+pub trait WxRustMethods {
     unsafe fn as_ptr(&self) -> UnsafeAnyPtr;
     fn pinned<T>(&self) -> Pin<&mut T> {
         unsafe { Pin::new_unchecked(&mut *(self.as_ptr() as *mut _)) }

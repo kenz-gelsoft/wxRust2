@@ -56,21 +56,33 @@ class Class:
         rs_template = '''\
 // %s
 wx_class! { %s(%s) impl
+    %sMethods
 }'''
         yield rs_template % (
             self.name,
             self.unprefixed(),
             self.name,
+            self.unprefixed(),
         )
+        for chunk in self._ctors_for_rs():
+            yield chunk
         for chunk in self._methods_for_rs():
             yield chunk
     
     def unprefixed(self):
         return self.name[2:]
 
-    def _methods_for_rs(self):
+    def _ctors_for_rs(self):
         yield 'impl %s {' % (self.unprefixed(),)
+        for ctor in self._ctors():
+            yield ctor.for_rs()
+        yield '}'
+
+    def _methods_for_rs(self):
+        yield 'trait %sMethods: WxRustMethods {' % (self.unprefixed(),)
         for method in self.methods:
+            if method.is_ctor:
+                continue
             yield method.for_rs()
         yield '}\n'
 
@@ -124,7 +136,7 @@ class Method:
 
     def _rust_params(self, with_ffi=False, binding=False):
         params = self.__params.copy()
-        if self._is_method_call():
+        if not binding and self._is_method_call():
             params.insert(0, self.__self_param)
         return ', '.join(p.in_rust(with_ffi, binding) for p in params)
     
@@ -166,7 +178,7 @@ class Method:
         return '%s%s' % (name, index)
     
     def _unsafe_or_not(self):
-        return self._uses_ptr_type() and 'unsafe ' or ''
+        return 'unsafe ' if self._uses_ptr_type() else ''
     
     def _uses_ptr_type(self):
         return any(p.type.is_ptr() for p in self.__params)
@@ -213,7 +225,7 @@ class Method:
         if suppress:
             return '// %s: fn %s()' % (suppress, self.__name)
         rs_template = '''\
-    pub fn %s(%s)%s {
+    %sfn %s(%s%s)%s {
         %s
     }'''
         unprefixed = self.__class.unprefixed()
@@ -229,9 +241,15 @@ class Method:
             )
         returns_or_not = ''
         if not self.__returns.is_void():
-            returns_or_not = ' -> %s' % (self.__returns.in_rust(with_ffi=True, binding=True),)
+            returns_or_not = ' -> %s' % (self.__returns.in_rust(
+                with_ffi=True,
+                binding=True
+            ),)
+        is_method = self._is_method_call()
         return rs_template % (
+            '' if is_method else 'pub ',
             self._rust_method_name(),
+            '&self, ' if is_method else '',
             self._rust_params(with_ffi=True, binding=True),
             returns_or_not,
             self._wrap_if_unsafe(
@@ -286,7 +304,7 @@ class Param:
         self.type = type
         self.name = name
     
-    def in_rust(self, with_ffi=False, binding=False):
+    def in_rust(self, with_ffi, binding):
         return '%s: %s' % (
             self.name,
             self.type.in_rust(with_ffi, binding)
@@ -308,8 +326,6 @@ class SelfType:
         t = self.type
         if self.__ctor_retval:
             return t[2:]
-        if binding:
-            with_ffi = False
         t = prefixed(t, with_ffi, binding)
         if self.const:
             return '&%s' % (t)
@@ -354,11 +370,11 @@ class CxxType:
         ref = self.__indirection
         mut = ''
         if ref:
-            mut = self.__is_mut and 'mut ' or ''
+            mut = 'mut ' if self.__is_mut else ''
             if ref.startswith('*') and not self.__is_mut:
                 mut = 'const '
         if ref.startswith('&') and self.__is_mut:
-            return 'Pin<%smut %s>' % (ref, t)
+            return 'Pin<&mut %s>' % (t,)
         return '%s%s%s' % (ref, mut, t)
     
     def not_supported(self):
@@ -390,12 +406,12 @@ RUST_PRIMITIVES = [
     'i64',
     'u8',
 ]
-def prefixed(t, with_ffi, binding=False):
+def prefixed(t, with_ffi=False, binding=False):
     if t in RUST_PRIMITIVES:
         return t
     if binding:
         t = t[2:]
-    if with_ffi:
+    elif with_ffi:
         t = 'ffi::%s' % (t,)
     return t
 
