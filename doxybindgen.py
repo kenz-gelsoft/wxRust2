@@ -136,7 +136,7 @@ class Method:
 
     def _rust_params(self, with_ffi=False, binding=False):
         params = self.__params.copy()
-        if not binding and self._is_method_call():
+        if self._is_method_call():
             params.insert(0, self.__self_param)
         return ', '.join(p.in_rust(with_ffi, binding) for p in params)
     
@@ -225,7 +225,7 @@ class Method:
         if suppress:
             return '// %s: fn %s()' % (suppress, self.__name)
         rs_template = '''\
-    %sfn %s(%s%s)%s {
+    %sfn %s(%s)%s {
         %s
     }'''
         unprefixed = self.__class.unprefixed()
@@ -249,7 +249,6 @@ class Method:
         return rs_template % (
             '' if is_method else 'pub ',
             self._rust_method_name(),
-            '&self, ' if is_method else '',
             self._rust_params(with_ffi=True, binding=True),
             returns_or_not,
             self._wrap_if_unsafe(
@@ -305,6 +304,8 @@ class Param:
         self.name = name
     
     def in_rust(self, with_ffi, binding):
+        if binding and isinstance(self.type, SelfType):
+            return '&self'
         return '%s: %s' % (
             self.name,
             self.type.in_rust(with_ffi, binding)
@@ -326,6 +327,8 @@ class SelfType:
         t = self.type
         if self.__ctor_retval:
             return t[2:]
+        if binding:
+            return '&self'
         t = prefixed(t, with_ffi, binding)
         if self.const:
             return '&%s' % (t)
