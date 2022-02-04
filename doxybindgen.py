@@ -241,10 +241,7 @@ class Method:
             )
         returns_or_not = ''
         if not self.__returns.is_void():
-            returns_or_not = ' -> %s' % (self.__returns.in_rust(
-                with_ffi=True,
-                binding=True
-            ),)
+            returns_or_not = ' -> %s' % (self.__returns.in_rust(with_ffi=True),)
         is_method = self._is_method_call()
         return rs_template % (
             '' if is_method else 'pub ',
@@ -308,7 +305,7 @@ class Param:
             return '&self'
         return '%s: %s' % (
             self.name,
-            self.type.in_rust(with_ffi, binding)
+            self.type.in_rust(with_ffi)
         )
     
     def in_cxx(self):
@@ -323,13 +320,11 @@ class SelfType:
         self.const = const
         self.__ctor_retval = ctor_retval
 
-    def in_rust(self, with_ffi=False, binding=False):
+    def in_rust(self, with_ffi=False):
         t = self.type
         if self.__ctor_retval:
             return t[2:]
-        if binding:
-            return '&self'
-        t = prefixed(t, with_ffi, binding)
+        t = prefixed(t, with_ffi)
         if self.const:
             return '&%s' % (t)
         return 'Pin<&mut %s>' % (t,)
@@ -365,7 +360,7 @@ class CxxType:
             return CXX2CXX[self.__srctype]
         return self.__srctype
 
-    def in_rust(self, with_ffi=False, binding=False):
+    def in_rust(self, with_ffi=False):
         t = self.__typename
         if t in CXX2RUST:
             t = CXX2RUST[t]
@@ -409,11 +404,9 @@ RUST_PRIMITIVES = [
     'i64',
     'u8',
 ]
-def prefixed(t, with_ffi=False, binding=False):
+def prefixed(t, with_ffi=False):
     if t in RUST_PRIMITIVES:
         return t
-    if binding:
-        t = t[2:]
     elif with_ffi:
         t = 'ffi::%s' % (t,)
     return t
