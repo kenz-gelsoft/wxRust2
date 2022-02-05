@@ -1,4 +1,4 @@
-from doxybindgen import Class, CxxClassBinding, RustClassBinding
+from doxybindgen.model import Class, CxxClassBinding, RustClassBinding
 
 types = [
     'wxPoint',
