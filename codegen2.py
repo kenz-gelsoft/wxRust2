@@ -179,7 +179,7 @@ namespace wxrust {
 '''
     for cls in classes:
         binding = CxxClassBinding(cls)
-        for chunk in binding.ctors_for_h():
+        for chunk in binding.decls_for_h():
             yield chunk
     yield '''\
 } // namespace wxrust
@@ -196,7 +196,7 @@ namespace wxrust {
 '''
     for cls in classes:
         binding = CxxClassBinding(cls)
-        for chunk in binding.ctors_for_cc():
+        for chunk in binding.defs_for_cc():
             yield chunk
     yield '''\
 } // namespace wxrust

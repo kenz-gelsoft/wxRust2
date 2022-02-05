@@ -205,16 +205,18 @@ class CxxClassBinding:
         self.__model = model
         self.__methods = [CxxMethodBinding(m) for m in model.methods]
 
-    def ctors_for_h(self):
+    def decls_for_h(self):
+        # only ctors for now
         yield '// CLASS: %s' % (self.__model.name,)
         for ctor in self._ctors():
-            yield ctor.for_h()
+            yield ctor.decl()
         yield ''
     
-    def ctors_for_cc(self):
+    def defs_for_cc(self):
+        # only ctors for now
         yield '// CLASS: %s' % (self.__model.name,)
         for ctor in self._ctors():
-            yield ctor.for_cc()
+            yield ctor.definition()
         yield ''
 
     def _ctors(self):
@@ -225,7 +227,7 @@ class CxxMethodBinding:
         self.__model = model
         self.is_ctor = model.is_ctor
 
-    def for_h(self):
+    def decl(self):
         body = '%s *%s(%s);' % (
             self.__model.name,
             self.__model.overload_name(),
@@ -233,7 +235,7 @@ class CxxMethodBinding:
         )
         return body
     
-    def for_cc(self):
+    def definition(self):
         cc_template = '''\
 %s *%s(%s) {
     return new %s(%s);
