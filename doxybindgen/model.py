@@ -62,9 +62,6 @@ class Method:
     def _overload_index(self):
         return sum(m.name == self.name for m in self.cls.methods)
 
-    def call_params(self):
-        return ', '.join(p.name for p in self.params)
-
     def overload_name(self):
         name = self.name
         if self.is_ctor:

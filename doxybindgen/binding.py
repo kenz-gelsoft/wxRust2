@@ -222,7 +222,7 @@ class RustMethodBinding:
         if binding and param.is_self():
             return '&self'
         return '%s: %s' % (
-            camel_to_snake(param.name) if binding else param.name,
+            camel_to_snake(param.name),
             param.type.in_rust(with_ffi)
         )
 
@@ -284,7 +284,7 @@ class CxxMethodBinding:
             self.__model.overload_name(),
             self._cxx_params(),
             self.__model.cls.name,
-            self.__model.call_params(),
+            self._call_params(),
         )
 
     def _cxx_params(self):
@@ -295,6 +295,9 @@ class CxxMethodBinding:
             param.type.in_cxx(),
             param.name,
         )
+
+    def _call_params(self):
+        return ', '.join(p.name for p in self.__model.params)
 
 def pascal_to_snake(pascal_case):
     def concat_caps(words):
