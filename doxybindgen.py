@@ -61,7 +61,8 @@ wx_class! { %s(%s) impl
     def _ctors_for_rs(self):
         yield 'impl %s {' % (self.__model.unprefixed(),)
         for ctor in self.__model.ctors():
-            yield ctor.for_rs()
+            binding = RustMethodBinding(ctor)
+            yield binding.for_rs()
         yield '}'
 
     def _methods_for_rs(self):
@@ -69,7 +70,8 @@ wx_class! { %s(%s) impl
         for method in self.__model.methods:
             if method.is_ctor:
                 continue
-            yield method.for_rs()
+            binding = RustMethodBinding(method)
+            yield binding.for_rs()
         yield '}\n'
 
 class CxxClassBinding:
@@ -121,15 +123,18 @@ class Class:
 class RustMethodBinding:
     def __init__(self, model):
         self.__model = model
+        self.__is_dtor = model.name.startswith('~')
+        self.__is_method_call = not (model.is_static or model.is_ctor)
+        self.__self_param = Param(SelfType(model.cls.name, model.const), 'self')
     
     def in_rust(self):
         body = '%sfn %s(%s)%s;' % (
             self._unsafe_or_not(),
             self.__model.name,
-            self.__model.rust_params(),
+            self._rust_params(),
             self._returns_or_not(),
         )
-        suppressed = self.__model.suppressed_reason()
+        suppressed = self._suppressed_reason()
         if suppressed:
             return ['// %s: %s' % (suppressed, body)]
         lines = [body]
@@ -152,7 +157,7 @@ class RustMethodBinding:
         lines = [rs_template % (
             self._unsafe_or_not(),
             self.__model.overload_name(),
-            self.__model.rust_params(),
+            self._rust_params(),
             self.__model.cls.name,
         )]
         overload = self._rename()
@@ -161,51 +166,117 @@ class RustMethodBinding:
         return lines
 
     def _unsafe_or_not(self):
-        return 'unsafe ' if self.__model.uses_ptr_type() else ''
+        return 'unsafe ' if self._uses_ptr_type() else ''
     
     def _rename(self):
         if self.__model.overload_index == 0:
             return ''
         return '#[rust_name = "%s"]' % (self.__model.overload_name(),)
 
+    def for_rs(self):
+        suppress = self._suppressed_reason(suppress_ctor=False)
+        if suppress:
+            return '// %s: fn %s()' % (suppress, self.__model.name)
+        rs_template = '''\
+    %sfn %s(%s)%s {
+        %s
+    }'''
+        unprefixed = self.__model.cls.unprefixed()
+        call = '%s(%s)' % (
+            prefixed(self.__model.overload_name(), with_ffi=True),
+            self.__model.call_params(),
+        )
+        if self.__is_method_call:
+            call = 'self.pinned::<ffi::%s>().as_mut().%s(%s)' % (
+                self.__model.cls.name,
+                self.__model.overload_name(),
+                self.__model.call_params(),
+            )
+        returns_or_not = ''
+        if not self.__model.returns.is_void():
+            returns_or_not = ' -> %s' % (self.__model.returns.in_rust(with_ffi=True),)
+        is_method = self.__is_method_call
+        return rs_template % (
+            '' if is_method else 'pub ',
+            self._rust_method_name(),
+            self._rust_params(with_ffi=True, binding=True),
+            returns_or_not,
+            self._wrap_if_unsafe(
+                self._wrap_return_type(
+                    unprefixed, call
+                )
+            ),
+        )
+
+    def _suppressed_reason(self, suppress_ctor=True):
+        if suppress_ctor and self.__model.is_ctor:
+            return 'CTOR'
+        if self.__is_dtor:
+            return 'DTOR'
+        if self._uses_unsupported_type():
+            return 'CXX_UNSUPPORTED'
+        if self.__model.cls.blocks(self.__model.name):
+            return 'BLOCKED'
+        return None
+    
+    def _uses_unsupported_type(self):
+        if self.__model.returns.not_supported():
+            return True
+        return any(p.type.not_supported() for p in self.__model.params)
+
+    def _rust_method_name(self):
+        method_name = self.__model.name
+        if self.__model.is_ctor:
+            method_name = 'new'
+        if self.__model.overload_index > 0:
+            method_name += str(self.__model.overload_index)
+        return method_name
+
+    def _rust_params(self, with_ffi=False, binding=False):
+        params = self.__model.params.copy()
+        if self.__is_method_call:
+            params.insert(0, self.__self_param)
+        return ', '.join(p.in_rust(with_ffi, binding) for p in params)
+    
+    def _wrap_if_unsafe(self, t):
+        if self._uses_ptr_type():
+            return 'unsafe { %s }' % (t,)
+        return t
+
+    def _wrap_return_type(self, type, body):
+        if self.__model.is_ctor:
+            return '%s(%s)' % (type, body)
+        return body
+
+    def _uses_ptr_type(self):
+        return any(p.type.is_ptr() for p in self.__model.params)
 
 class Method:
     def __init__(self, cls, e):
         self.is_public = e.get('prot') == 'public'
-        self.__is_static = e.get('static') == 'yes'
+        self.is_static = e.get('static') == 'yes'
         self.returns = CxxType(''.join(e.find('type').itertext()))
         self.cls = cls
         self.name = e.findtext('name')
         self.overload_index = self._overload_index()
         self.is_ctor = self.name == cls.name
-        self.__is_dtor = self.name.startswith('~')
-        const = e.get('const') == 'yes'
+        self.const = e.get('const') == 'yes'
         if self.is_ctor:
-            self.returns = SelfType(cls.name, const, ctor_retval=True)
-        self.__self_param = Param(SelfType(cls.name, const), 'self')
-        self.__params = []
+            self.returns = SelfType(cls.name, self.const, ctor_retval=True)
+        self.params = []
         for param in e.findall('param'):
             ptype = ''.join(param.find('type').itertext())
             pname = param.findtext('declname')
-            self.__params.append(Param(CxxType(ptype), pname))
+            self.params.append(Param(CxxType(ptype), pname))
 
     def _overload_index(self):
         return sum(m.name == self.name for m in self.cls.methods)
 
-    def _is_method_call(self):
-        return not (self.__is_static or self.is_ctor)
-
-    def rust_params(self, with_ffi=False, binding=False):
-        params = self.__params.copy()
-        if self._is_method_call():
-            params.insert(0, self.__self_param)
-        return ', '.join(p.in_rust(with_ffi, binding) for p in params)
-    
     def _cxx_params(self):
-        return ', '.join(p.in_cxx() for p in self.__params)
+        return ', '.join(p.in_cxx() for p in self.params)
     
-    def _call_params(self):
-        return ', '.join(p.name for p in self.__params)
+    def call_params(self):
+        return ', '.join(p.name for p in self.params)
 
     def overload_name(self):
         name = self.name
@@ -216,79 +287,6 @@ class Method:
             index = ''
         return '%s%s' % (name, index)
     
-    def uses_ptr_type(self):
-        return any(p.type.is_ptr() for p in self.__params)
-
-    def suppressed_reason(self, suppress_ctor=True):
-        if suppress_ctor and self.is_ctor:
-            return 'CTOR'
-        if self.__is_dtor:
-            return 'DTOR'
-        if self._uses_unsupported_type():
-            return 'CXX_UNSUPPORTED'
-        if self.cls.blocks(self.name):
-            return 'BLOCKED'
-        return None
-    
-    def _uses_unsupported_type(self):
-        if self.returns.not_supported():
-            return True
-        return any(p.type.not_supported() for p in self.__params)
-
-    def for_rs(self):
-        suppress = self.suppressed_reason(suppress_ctor=False)
-        if suppress:
-            return '// %s: fn %s()' % (suppress, self.name)
-        rs_template = '''\
-    %sfn %s(%s)%s {
-        %s
-    }'''
-        unprefixed = self.cls.unprefixed()
-        call = '%s(%s)' % (
-            prefixed(self.overload_name(), with_ffi=True),
-            self._call_params(),
-        )
-        if self._is_method_call():
-            call = 'self.pinned::<ffi::%s>().as_mut().%s(%s)' % (
-                self.cls.name,
-                self.overload_name(),
-                self._call_params(),
-            )
-        returns_or_not = ''
-        if not self.returns.is_void():
-            returns_or_not = ' -> %s' % (self.returns.in_rust(with_ffi=True),)
-        is_method = self._is_method_call()
-        return rs_template % (
-            '' if is_method else 'pub ',
-            self._rust_method_name(),
-            self.rust_params(with_ffi=True, binding=True),
-            returns_or_not,
-            self._wrap_if_unsafe(
-                self._wrap_return_type(
-                    unprefixed, call
-                )
-            ),
-        )
-
-    def _wrap_return_type(self, type, body):
-        if self.is_ctor:
-            return '%s(%s)' % (type, body)
-        return body
-
-    def _rust_method_name(self):
-        method_name = self.name
-        if self.is_ctor:
-            method_name = 'new'
-        if self.overload_index > 0:
-            method_name += str(self.overload_index)
-        return method_name
-
-
-    def _wrap_if_unsafe(self, t):
-        if self.uses_ptr_type():
-            return 'unsafe { %s }' % (t,)
-        return t
-
     def for_h(self):
         body = '%s *%s(%s);' % (
             self.name,
@@ -307,7 +305,7 @@ class Method:
             self.overload_name(),
             self._cxx_params(),
             self.cls.name,
-            self._call_params(),
+            self.call_params(),
         )
 
 class Param:
