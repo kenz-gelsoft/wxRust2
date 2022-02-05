@@ -37,7 +37,8 @@ class RustClassBinding:
     def ffi_ctors(self):
         indent = ' ' * 4 * 2
         for ctor in self.__model.ctors():
-            for line in ctor.ffi_lines():
+            binding = RustMethodBinding(ctor)
+            for line in binding.ffi_lines():
                 yield '%s%s' % (indent, line)
 
     def safer_binding(self):
@@ -123,7 +124,7 @@ class RustMethodBinding:
     
     def in_rust(self):
         body = '%sfn %s(%s)%s;' % (
-            self.__model.unsafe_or_not(),
+            self._unsafe_or_not(),
             self.__model.name,
             self.__model.rust_params(),
             self._returns_or_not(),
@@ -132,7 +133,7 @@ class RustMethodBinding:
         if suppressed:
             return ['// %s: %s' % (suppressed, body)]
         lines = [body]
-        overload = self.__model.rename()
+        overload = self._rename()
         if overload:
             lines.insert(0, overload)
         # print(lines)
@@ -146,15 +147,36 @@ class RustMethodBinding:
             returns = ' -> %s' % (returns,)
         return returns
     
+    def ffi_lines(self):
+        rs_template = '%sfn %s(%s) -> *mut %s;'
+        lines = [rs_template % (
+            self._unsafe_or_not(),
+            self.__model.overload_name(),
+            self.__model.rust_params(),
+            self.__model.cls.name,
+        )]
+        overload = self._rename()
+        if overload:
+            lines.insert(0, overload)
+        return lines
+
+    def _unsafe_or_not(self):
+        return 'unsafe ' if self.__model.uses_ptr_type() else ''
+    
+    def _rename(self):
+        if self.__model.overload_index == 0:
+            return ''
+        return '#[rust_name = "%s"]' % (self.__model.overload_name(),)
+
 
 class Method:
     def __init__(self, cls, e):
         self.is_public = e.get('prot') == 'public'
         self.__is_static = e.get('static') == 'yes'
         self.returns = CxxType(''.join(e.find('type').itertext()))
-        self.__class = cls
+        self.cls = cls
         self.name = e.findtext('name')
-        self.__index = self._overload_index()
+        self.overload_index = self._overload_index()
         self.is_ctor = self.name == cls.name
         self.__is_dtor = self.name.startswith('~')
         const = e.get('const') == 'yes'
@@ -168,7 +190,7 @@ class Method:
             self.__params.append(Param(CxxType(ptype), pname))
 
     def _overload_index(self):
-        return sum(m.name == self.name for m in self.__class.methods)
+        return sum(m.name == self.name for m in self.cls.methods)
 
     def _is_method_call(self):
         return not (self.__is_static or self.is_ctor)
@@ -185,24 +207,16 @@ class Method:
     def _call_params(self):
         return ', '.join(p.name for p in self.__params)
 
-    def rename(self):
-        if self.__index == 0:
-            return ''
-        return '#[rust_name = "%s"]' % (self._overload_name(),)
-
-    def _overload_name(self):
+    def overload_name(self):
         name = self.name
         if self.is_ctor:
-            name = 'New%s' % (self.__class.unprefixed(),)
-        index = self.__index
-        if self.__index == 0:
+            name = 'New%s' % (self.cls.unprefixed(),)
+        index = self.overload_index
+        if self.overload_index == 0:
             index = ''
         return '%s%s' % (name, index)
     
-    def unsafe_or_not(self):
-        return 'unsafe ' if self._uses_ptr_type() else ''
-    
-    def _uses_ptr_type(self):
+    def uses_ptr_type(self):
         return any(p.type.is_ptr() for p in self.__params)
 
     def suppressed_reason(self, suppress_ctor=True):
@@ -212,7 +226,7 @@ class Method:
             return 'DTOR'
         if self._uses_unsupported_type():
             return 'CXX_UNSUPPORTED'
-        if self.__class.blocks(self.name):
+        if self.cls.blocks(self.name):
             return 'BLOCKED'
         return None
     
@@ -220,19 +234,6 @@ class Method:
         if self.returns.not_supported():
             return True
         return any(p.type.not_supported() for p in self.__params)
-
-    def ffi_lines(self):
-        rs_template = '%sfn %s(%s) -> *mut %s;'
-        lines = [rs_template % (
-            self.unsafe_or_not(),
-            self._overload_name(),
-            self.rust_params(),
-            self.__class.name,
-        )]
-        overload = self.rename()
-        if overload:
-            lines.insert(0, overload)
-        return lines
 
     def for_rs(self):
         suppress = self.suppressed_reason(suppress_ctor=False)
@@ -242,15 +243,15 @@ class Method:
     %sfn %s(%s)%s {
         %s
     }'''
-        unprefixed = self.__class.unprefixed()
+        unprefixed = self.cls.unprefixed()
         call = '%s(%s)' % (
-            prefixed(self._overload_name(), with_ffi=True),
+            prefixed(self.overload_name(), with_ffi=True),
             self._call_params(),
         )
         if self._is_method_call():
             call = 'self.pinned::<ffi::%s>().as_mut().%s(%s)' % (
-                self.__class.name,
-                self._overload_name(),
+                self.cls.name,
+                self.overload_name(),
                 self._call_params(),
             )
         returns_or_not = ''
@@ -278,20 +279,20 @@ class Method:
         method_name = self.name
         if self.is_ctor:
             method_name = 'new'
-        if self.__index > 0:
-            method_name += str(self.__index)
+        if self.overload_index > 0:
+            method_name += str(self.overload_index)
         return method_name
 
 
     def _wrap_if_unsafe(self, t):
-        if self._uses_ptr_type():
+        if self.uses_ptr_type():
             return 'unsafe { %s }' % (t,)
         return t
 
     def for_h(self):
         body = '%s *%s(%s);' % (
             self.name,
-            self._overload_name(),
+            self.overload_name(),
             self._cxx_params(),
         )
         return body
@@ -302,10 +303,10 @@ class Method:
     return new %s(%s);
 }'''
         return cc_template % (
-            self.__class.name,
-            self._overload_name(),
+            self.cls.name,
+            self.overload_name(),
             self._cxx_params(),
-            self.__class.name,
+            self.cls.name,
             self._call_params(),
         )
 
