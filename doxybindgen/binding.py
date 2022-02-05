@@ -196,7 +196,7 @@ class RustMethodBinding:
         return ', '.join(self._rust_param(p, with_ffi, binding) for p in params)
 
     def _rust_param(self, param, with_ffi, binding):
-        if binding and isinstance(param.type, SelfType):
+        if binding and param.is_self():
             return '&self'
         return '%s: %s' % (
             param.name,
