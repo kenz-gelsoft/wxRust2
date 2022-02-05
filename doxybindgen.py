@@ -81,13 +81,15 @@ class CxxClassBinding:
     def ctors_for_h(self):
         yield '// CLASS: %s' % (self.__model.name,)
         for ctor in self.__model.ctors():
-            yield ctor.for_h()
+            binding = CxxMethodBinding(ctor)
+            yield binding.for_h()
         yield ''
     
     def ctors_for_cc(self):
         yield '// CLASS: %s' % (self.__model.name,)
         for ctor in self.__model.ctors():
-            yield ctor.for_cc()
+            binding = CxxMethodBinding(ctor)
+            yield binding.for_cc()
         yield ''
 
 class Class:
@@ -251,6 +253,34 @@ class RustMethodBinding:
     def _uses_ptr_type(self):
         return any(p.type.is_ptr() for p in self.__model.params)
 
+class CxxMethodBinding:
+    def __init__(self, model):
+        self.__model = model
+
+    def for_h(self):
+        body = '%s *%s(%s);' % (
+            self.__model.name,
+            self.__model.overload_name(),
+            self._cxx_params(),
+        )
+        return body
+    
+    def for_cc(self):
+        cc_template = '''\
+%s *%s(%s) {
+    return new %s(%s);
+}'''
+        return cc_template % (
+            self.__model.cls.name,
+            self.__model.overload_name(),
+            self._cxx_params(),
+            self.__model.cls.name,
+            self.__model.call_params(),
+        )
+
+    def _cxx_params(self):
+        return ', '.join(p.in_cxx() for p in self.__model.params)
+    
 class Method:
     def __init__(self, cls, e):
         self.is_public = e.get('prot') == 'public'
@@ -272,9 +302,6 @@ class Method:
     def _overload_index(self):
         return sum(m.name == self.name for m in self.cls.methods)
 
-    def _cxx_params(self):
-        return ', '.join(p.in_cxx() for p in self.params)
-    
     def call_params(self):
         return ', '.join(p.name for p in self.params)
 
@@ -287,27 +314,6 @@ class Method:
             index = ''
         return '%s%s' % (name, index)
     
-    def for_h(self):
-        body = '%s *%s(%s);' % (
-            self.name,
-            self.overload_name(),
-            self._cxx_params(),
-        )
-        return body
-    
-    def for_cc(self):
-        cc_template = '''\
-%s *%s(%s) {
-    return new %s(%s);
-}'''
-        return cc_template % (
-            self.cls.name,
-            self.overload_name(),
-            self._cxx_params(),
-            self.cls.name,
-            self.call_params(),
-        )
-
 class Param:
     def __init__(self, type, name):
         self.type = type
