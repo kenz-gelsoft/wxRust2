@@ -38,26 +38,30 @@ wx_class! { %s(%s) impl
             self.__model.name,
             self.__model.unprefixed(),
         )
-        for chunk in self._generate_impl_with_ctors():
-            yield chunk
-        for chunk in self._generate_trait_with_methods():
-            yield chunk
+        for line in self._generate_impl_with_ctors():
+            yield line
+        for line in self._generate_trait_with_methods():
+            yield line
 
     def _generate_impl_with_ctors(self):
+        indent = ' ' * 4 * 1
         yield 'impl %s {' % (self.__model.unprefixed(),)
         for ctor in self._ctors():
-            yield ctor.binding()
+            for line in ctor.binding():
+                yield '%s%s' % (indent, line)
         yield '}'
 
     def _ctors(self):
         return (m for m in self.__methods if m.is_ctor)
     
     def _generate_trait_with_methods(self):
+        indent = ' ' * 4 * 1
         yield 'trait %sMethods: WxRustMethods {' % (self.__model.unprefixed(),)
         for method in self.__methods:
             if method.is_ctor:
                 continue
-            yield method.binding()
+            for line in method.binding():
+                yield '%s%s' % (indent, line)
         yield '}\n'
 
 class RustMethodBinding:
@@ -117,11 +121,18 @@ class RustMethodBinding:
     def binding(self):
         suppress = self._suppressed_reason(suppress_ctor=False)
         if suppress:
-            return '// %s: fn %s()' % (suppress, self.__model.name)
-        rs_template = '''\
-    %sfn %s(%s)%s {
-        %s
-    }'''
+            yield '// %s: fn %s()' % (suppress, self.__model.name)
+            return
+        is_method = self.__is_method_call
+        returns_or_not = ''
+        if not self.__model.returns.is_void():
+            returns_or_not = ' -> %s' % (self.__model.returns.in_rust(with_ffi=True),)
+        yield '%sfn %s(%s)%s {' % (
+            '' if is_method else 'pub ',
+            self._rust_method_name(),
+            self._rust_params(with_ffi=True, binding=True),
+            returns_or_not,
+        )
         unprefixed = self.__model.cls.unprefixed()
         call = '%s(%s)' % (
             prefixed(self.__model.overload_name(), with_ffi=True),
@@ -133,21 +144,14 @@ class RustMethodBinding:
                 self.__model.overload_name(),
                 self.__model.call_params(),
             )
-        returns_or_not = ''
-        if not self.__model.returns.is_void():
-            returns_or_not = ' -> %s' % (self.__model.returns.in_rust(with_ffi=True),)
-        is_method = self.__is_method_call
-        return rs_template % (
-            '' if is_method else 'pub ',
-            self._rust_method_name(),
-            self._rust_params(with_ffi=True, binding=True),
-            returns_or_not,
+        yield '    %s' % (
             self._wrap_if_unsafe(
                 self._wrap_return_type(
                     unprefixed, call
                 )
             ),
         )
+        yield '}'
 
     def _suppressed_reason(self, suppress_ctor=True):
         if suppress_ctor and self.__model.is_ctor:
