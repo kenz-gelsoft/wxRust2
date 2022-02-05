@@ -59,24 +59,6 @@ wx_class! { %s(%s) impl
             yield binding.for_rs()
         yield '}\n'
 
-class CxxClassBinding:
-    def __init__(self, model):
-        self.__model = model
-
-    def ctors_for_h(self):
-        yield '// CLASS: %s' % (self.__model.name,)
-        for ctor in self.__model.ctors():
-            binding = CxxMethodBinding(ctor)
-            yield binding.for_h()
-        yield ''
-    
-    def ctors_for_cc(self):
-        yield '// CLASS: %s' % (self.__model.name,)
-        for ctor in self.__model.ctors():
-            binding = CxxMethodBinding(ctor)
-            yield binding.for_cc()
-        yield ''
-
 class RustMethodBinding:
     def __init__(self, model):
         self.__model = model
@@ -215,6 +197,24 @@ class RustMethodBinding:
 
     def _uses_ptr_type(self):
         return any(p.type.is_ptr() for p in self.__model.params)
+
+class CxxClassBinding:
+    def __init__(self, model):
+        self.__model = model
+
+    def ctors_for_h(self):
+        yield '// CLASS: %s' % (self.__model.name,)
+        for ctor in self.__model.ctors():
+            binding = CxxMethodBinding(ctor)
+            yield binding.for_h()
+        yield ''
+    
+    def ctors_for_cc(self):
+        yield '// CLASS: %s' % (self.__model.name,)
+        for ctor in self.__model.ctors():
+            binding = CxxMethodBinding(ctor)
+            yield binding.for_cc()
+        yield ''
 
 class CxxMethodBinding:
     def __init__(self, model):
