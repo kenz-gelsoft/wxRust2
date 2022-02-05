@@ -5,7 +5,7 @@ class RustClassBinding:
         self.__model = model
         self.__methods = [RustMethodBinding(m) for m in model.methods]
 
-    def ffi_methods(self):
+    def cxx_auto_bound_methods(self):
         template = '''\
 
         // CLASS: %s
@@ -16,10 +16,11 @@ class RustClassBinding:
         )
         indent = ' ' * 4 * 2
         for method in self.__methods:
-            for line in method.in_rust():
+            for line in method.cxx_auto_binding():
                 yield '%s%s' % (indent, line)
 
-    def ffi_ctors(self):
+    def generated_methods(self):
+        # only ctors for now
         indent = ' ' * 4 * 2
         for ctor in self._ctors():
             for line in ctor.ffi_lines():
@@ -37,26 +38,26 @@ wx_class! { %s(%s) impl
             self.__model.name,
             self.__model.unprefixed(),
         )
-        for chunk in self._ctors_for_rs():
+        for chunk in self._generate_impl_with_ctors():
             yield chunk
-        for chunk in self._methods_for_rs():
+        for chunk in self._generate_trait_with_methods():
             yield chunk
 
-    def _ctors_for_rs(self):
+    def _generate_impl_with_ctors(self):
         yield 'impl %s {' % (self.__model.unprefixed(),)
         for ctor in self._ctors():
-            yield ctor.for_rs()
+            yield ctor.binding()
         yield '}'
 
     def _ctors(self):
         return (m for m in self.__methods if m.is_ctor)
     
-    def _methods_for_rs(self):
+    def _generate_trait_with_methods(self):
         yield 'trait %sMethods: WxRustMethods {' % (self.__model.unprefixed(),)
         for method in self.__methods:
             if method.is_ctor:
                 continue
-            yield method.for_rs()
+            yield method.binding()
         yield '}\n'
 
 class RustMethodBinding:
@@ -67,7 +68,7 @@ class RustMethodBinding:
         self.__is_method_call = not (model.is_static or model.is_ctor)
         self.__self_param = Param(SelfType(model.cls.name, model.const), 'self')
     
-    def in_rust(self):
+    def cxx_auto_binding(self):
         body = '%sfn %s(%s)%s;' % (
             self._unsafe_or_not(),
             self.__model.name,
@@ -113,7 +114,7 @@ class RustMethodBinding:
             return ''
         return '#[rust_name = "%s"]' % (self.__model.overload_name(),)
 
-    def for_rs(self):
+    def binding(self):
         suppress = self._suppressed_reason(suppress_ctor=False)
         if suppress:
             return '// %s: fn %s()' % (suppress, self.__model.name)

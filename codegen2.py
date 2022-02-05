@@ -143,13 +143,13 @@ mod ffi {
     for t in types:
         yield '%stype %s;' % (indent,t)
     for cls in classes:
-        for chunk in cls.ffi_methods():
+        for chunk in cls.cxx_auto_bound_methods():
             yield chunk
     yield '''\
     }
     unsafe extern "C++" {'''
     for cls in classes:
-        for chunk in cls.ffi_ctors():
+        for chunk in cls.generated_methods():
             yield chunk
     yield '''\
     }
