@@ -1,4 +1,4 @@
-from doxybindgen import Class, RustClassBinding
+from doxybindgen import Class, CxxClassBinding, RustClassBinding
 
 types = [
     'wxPoint',
@@ -177,7 +177,8 @@ def wxrust2_h(classes):
 namespace wxrust {
 '''
     for cls in classes:
-        for chunk in cls.ctors_for_h():
+        binding = CxxClassBinding(cls)
+        for chunk in binding.ctors_for_h():
             yield chunk
     yield '''\
 } // namespace wxrust
@@ -193,7 +194,8 @@ namespace wxrust {
 // Constructors
 '''
     for cls in classes:
-        for chunk in cls.ctors_for_cc():
+        binding = CxxClassBinding(cls)
+        for chunk in binding.ctors_for_cc():
             yield chunk
     yield '''\
 } // namespace wxrust

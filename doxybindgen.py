@@ -69,7 +69,23 @@ wx_class! { %s(%s) impl
                 continue
             yield method.for_rs()
         yield '}\n'
+
+class CxxClassBinding:
+    def __init__(self, model):
+        self.__model = model
+
+    def ctors_for_h(self):
+        yield '// CLASS: %s' % (self.__model.name,)
+        for ctor in self.__model.ctors():
+            yield ctor.for_h()
+        yield ''
     
+    def ctors_for_cc(self):
+        yield '// CLASS: %s' % (self.__model.name,)
+        for ctor in self.__model.ctors():
+            yield ctor.for_cc()
+        yield ''
+
 class Class:
     def in_xml(xmlfile, blocklist):
         tree = ET.parse(xmlfile)
@@ -89,18 +105,6 @@ class Class:
 
     def unprefixed(self):
         return self.name[2:]
-
-    def ctors_for_h(self):
-        yield '// CLASS: %s' % (self.name,)
-        for ctor in self.ctors():
-            yield ctor.for_h()
-        yield ''
-    
-    def ctors_for_cc(self):
-        yield '// CLASS: %s' % (self.name,)
-        for ctor in self.ctors():
-            yield ctor.for_cc()
-        yield ''
 
     def ctors(self):
         for method in self.methods:
