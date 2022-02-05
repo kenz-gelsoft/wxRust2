@@ -83,17 +83,6 @@ class Param:
         self.type = type
         self.name = name
     
-    def in_rust(self, with_ffi, binding):
-        if binding and isinstance(self.type, SelfType):
-            return '&self'
-        return '%s: %s' % (
-            self.name,
-            self.type.in_rust(with_ffi)
-        )
-    
-    def in_cxx(self):
-        return '%s %s' % (self.type.in_cxx(), self.name)
-    
     def is_self(self):
         return self.name == 'self'
 

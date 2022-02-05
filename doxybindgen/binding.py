@@ -193,8 +193,16 @@ class RustMethodBinding:
         params = self.__model.params.copy()
         if self.__is_method_call:
             params.insert(0, self.__self_param)
-        return ', '.join(p.in_rust(with_ffi, binding) for p in params)
-    
+        return ', '.join(self._rust_param(p, with_ffi, binding) for p in params)
+
+    def _rust_param(self, param, with_ffi, binding):
+        if binding and isinstance(param.type, SelfType):
+            return '&self'
+        return '%s: %s' % (
+            param.name,
+            param.type.in_rust(with_ffi)
+        )
+
     def _wrap_if_unsafe(self, t):
         if self._uses_ptr_type():
             return 'unsafe { %s }' % (t,)
@@ -234,5 +242,10 @@ class CxxMethodBinding:
         )
 
     def _cxx_params(self):
-        return ', '.join(p.in_cxx() for p in self.__model.params)
+        return ', '.join(self._cxx_param(p) for p in self.__model.params)
 
+    def _cxx_param(self, param):
+        return '%s %s' % (
+            param.type.in_cxx(),
+            param.name,
+        )
