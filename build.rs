@@ -1,8 +1,13 @@
 use std::process::Command;
 
 fn main() {
-    wx_config_cflags(&mut cxx_build::bridge("src/lib.rs"))
+    let source_files = vec![
+        "src/lib.rs",
+        "src/generated.rs",
+    ];
+    wx_config_cflags(&mut cxx_build::bridges(source_files))
         .file("src/wxrust.cc")
+        .file("src/wxrust2.cc")
         .flag_if_supported("-std=c++14")
         .compile("cxx-demo");
 

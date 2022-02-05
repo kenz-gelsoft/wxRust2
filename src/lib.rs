@@ -9,6 +9,8 @@ use macros::wx_class;
 mod defs;
 mod manual;
 
+mod generated;
+
 // any pointer type used on ffi boundary.
 // we chose this type as it's handy in cxx.
 type UnsafeAnyPtr = *const c_char;
@@ -73,7 +75,7 @@ impl ffi::Closure {
     }
 }
 
-pub trait ObjectMethods {
+pub trait WxRustMethods {
     unsafe fn as_ptr(&self) -> UnsafeAnyPtr;
     fn pinned<T>(&self) -> Pin<&mut T> {
         unsafe { Pin::new_unchecked(&mut *(self.as_ptr() as *mut _)) }
@@ -83,7 +85,7 @@ pub trait ObjectMethods {
 wx_class! { EvtHandler(wxEvtHandler) impl
     EvtHandlerMethods
 }
-pub trait EvtHandlerMethods: ObjectMethods {
+pub trait EvtHandlerMethods: WxRustMethods {
     fn bind<F: Fn() + 'static>(&self, event_type: ffi::EventType, closure: F) {
         ffi::Bind(
             self.pinned::<ffi::wxEvtHandler>().as_mut(),
