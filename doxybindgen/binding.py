@@ -55,15 +55,14 @@ class RustClassBinding:
             )
 
     def _find_ancestors(self, classes):
-        current = self.__model
         base_classes = []
+        current = self.__model
         while current:
             base_classes.append(current.name)
             current = self._class_by_name(current.base, classes)
         return base_classes
 
     def _class_by_name(self, name, classes):
-        print(name)
         for cls in classes:
             if cls.name == name:
                 return cls
