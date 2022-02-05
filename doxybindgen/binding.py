@@ -166,13 +166,13 @@ class RustMethodBinding:
         unprefixed = self.__model.cls.unprefixed()
         call = '%s(%s)' % (
             prefixed(self.__model.overload_name(), with_ffi=True),
-            self.__model.call_params(),
+            self._call_params(),
         )
         if self.__is_instance_method:
             call = 'self.pinned::<ffi::%s>().as_mut().%s(%s)' % (
                 self.__model.cls.name,
                 self.__model.overload_name(),
-                self.__model.call_params(),
+                self._call_params(),
             )
         yield '    %s' % (
             self._wrap_if_unsafe(
@@ -182,6 +182,9 @@ class RustMethodBinding:
             ),
         )
         yield '}'
+
+    def _call_params(self):
+        return ', '.join(camel_to_snake(p.name) for p in self.__model.params)
 
     def _suppressed_reason(self, suppress_ctor=True):
         if suppress_ctor and self.__model.is_ctor:
@@ -200,7 +203,7 @@ class RustMethodBinding:
         return any(p.type.not_supported() for p in self.__model.params)
 
     def _rust_method_name(self):
-        method_name = self._snake_case(self.__model.name)
+        method_name = pascal_to_snake(self.__model.name)
         if self.__model.is_ctor:
             method_name = 'new'
         if self.__model.overload_index > 0:
@@ -209,26 +212,6 @@ class RustMethodBinding:
             method_name += '_'
         return method_name
     
-    def _snake_case(self, pascal_case):
-        words = re.findall(r'[A-Z][^A-Z]*', pascal_case)
-        if words:
-            snake_cased = '_'.join(w.lower() for w in self._concat_caps(words))
-            return snake_cased
-        return pascal_case
-
-    def _concat_caps(self, words):
-        buf = ''
-        for word in words:
-            if len(word) == 1:
-                buf += word
-                continue
-            if buf:
-                yield buf
-                buf = ''
-            yield word
-        if buf:
-            yield buf
-
     def _rust_params(self, with_ffi=False, binding=False):
         params = self.__model.params.copy()
         if self.__is_instance_method:
@@ -239,7 +222,7 @@ class RustMethodBinding:
         if binding and param.is_self():
             return '&self'
         return '%s: %s' % (
-            param.name,
+            camel_to_snake(param.name) if binding else param.name,
             param.type.in_rust(with_ffi)
         )
 
@@ -312,3 +295,28 @@ class CxxMethodBinding:
             param.type.in_cxx(),
             param.name,
         )
+
+def pascal_to_snake(pascal_case):
+    def concat_caps(words):
+        buf = ''
+        for word in words:
+            if len(word) == 1:
+                buf += word
+                continue
+            if buf:
+                yield buf
+                buf = ''
+            yield word
+        if buf:
+            yield buf
+    words = re.findall(r'[A-Z][^A-Z]*', pascal_case)
+    if words:
+        snake_cased = '_'.join(w.lower() for w in concat_caps(words))
+        return snake_cased
+    return pascal_case
+
+def camel_to_snake(camel_case):
+    if camel_case is None:
+        return None
+    pascal_case = camel_case[0].upper() + camel_case[1:]
+    return pascal_to_snake(pascal_case)

@@ -646,8 +646,8 @@ trait WindowMethods: EvtHandlerMethods {
     fn has_focus(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().HasFocus()
     }
-    fn set_can_focus(&self, canFocus: bool) {
-        self.pinned::<ffi::wxWindow>().as_mut().SetCanFocus(canFocus)
+    fn set_can_focus(&self, can_focus: bool) {
+        self.pinned::<ffi::wxWindow>().as_mut().SetCanFocus(can_focus)
     }
     fn enable_visible_focus(&self, enable: bool) {
         self.pinned::<ffi::wxWindow>().as_mut().EnableVisibleFocus(enable)
@@ -726,8 +726,8 @@ trait WindowMethods: EvtHandlerMethods {
     fn set_scroll_pos(&self, orientation: i32, pos: i32, refresh: bool) {
         self.pinned::<ffi::wxWindow>().as_mut().SetScrollPos(orientation, pos, refresh)
     }
-    fn set_scrollbar(&self, orientation: i32, position: i32, thumbSize: i32, range: i32, refresh: bool) {
-        self.pinned::<ffi::wxWindow>().as_mut().SetScrollbar(orientation, position, thumbSize, range, refresh)
+    fn set_scrollbar(&self, orientation: i32, position: i32, thumb_size: i32, range: i32, refresh: bool) {
+        self.pinned::<ffi::wxWindow>().as_mut().SetScrollbar(orientation, position, thumb_size, range, refresh)
     }
     fn begin_repositioning_children(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().BeginRepositioningChildren()
@@ -796,8 +796,8 @@ trait WindowMethods: EvtHandlerMethods {
         self.pinned::<ffi::wxWindow>().as_mut().GetDPIScaleFactor()
     }
     // CXX_UNSUPPORTED: fn GetWindowBorderSize()
-    fn inform_first_direction(&self, direction: i32, size: i32, availableOtherDir: i32) -> bool {
-        self.pinned::<ffi::wxWindow>().as_mut().InformFirstDirection(direction, size, availableOtherDir)
+    fn inform_first_direction(&self, direction: i32, size: i32, available_other_dir: i32) -> bool {
+        self.pinned::<ffi::wxWindow>().as_mut().InformFirstDirection(direction, size, available_other_dir)
     }
     fn invalidate_best_size(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().InvalidateBestSize()
@@ -845,11 +845,11 @@ trait WindowMethods: EvtHandlerMethods {
     // BLOCKED: fn SetSize()
     // BLOCKED: fn SetSize()
     // BLOCKED: fn SetSize()
-    fn set_size_hints(&self, minSize: &ffi::wxSize, maxSize: &ffi::wxSize, incSize: &ffi::wxSize) {
-        self.pinned::<ffi::wxWindow>().as_mut().SetSizeHints(minSize, maxSize, incSize)
+    fn set_size_hints(&self, min_size: &ffi::wxSize, max_size: &ffi::wxSize, inc_size: &ffi::wxSize) {
+        self.pinned::<ffi::wxWindow>().as_mut().SetSizeHints(min_size, max_size, inc_size)
     }
-    fn set_size_hints1(&self, minW: i32, minH: i32, maxW: i32, maxH: i32, incW: i32, incH: i32) {
-        self.pinned::<ffi::wxWindow>().as_mut().SetSizeHints1(minW, minH, maxW, maxH, incW, incH)
+    fn set_size_hints1(&self, min_w: i32, min_h: i32, max_w: i32, max_h: i32, inc_w: i32, inc_h: i32) {
+        self.pinned::<ffi::wxWindow>().as_mut().SetSizeHints1(min_w, min_h, max_w, max_h, inc_w, inc_h)
     }
     fn set_virtual_size(&self, width: i32, height: i32) {
         self.pinned::<ffi::wxWindow>().as_mut().SetVirtualSize(width, height)
@@ -932,8 +932,8 @@ trait WindowMethods: EvtHandlerMethods {
     // CXX_UNSUPPORTED: fn GetDPI()
     // CXX_UNSUPPORTED: fn GetFont()
     // CXX_UNSUPPORTED: fn GetForegroundColour()
-    fn get_text_extent(&self, string: &ffi::wxString, w: *mut i32, h: *mut i32, descent: *mut i32, externalLeading: *mut i32, font: *const ffi::wxFont) {
-        unsafe { self.pinned::<ffi::wxWindow>().as_mut().GetTextExtent(string, w, h, descent, externalLeading, font) }
+    fn get_text_extent(&self, string: &ffi::wxString, w: *mut i32, h: *mut i32, descent: *mut i32, external_leading: *mut i32, font: *const ffi::wxFont) {
+        unsafe { self.pinned::<ffi::wxWindow>().as_mut().GetTextExtent(string, w, h, descent, external_leading, font) }
     }
     // CXX_UNSUPPORTED: fn GetTextExtent()
     // BLOCKED: fn GetUpdateRegion()
@@ -941,11 +941,11 @@ trait WindowMethods: EvtHandlerMethods {
     fn has_transparent_background(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().HasTransparentBackground()
     }
-    fn refresh(&self, eraseBackground: bool, rect: *const ffi::wxRect) {
-        unsafe { self.pinned::<ffi::wxWindow>().as_mut().Refresh(eraseBackground, rect) }
+    fn refresh(&self, erase_background: bool, rect: *const ffi::wxRect) {
+        unsafe { self.pinned::<ffi::wxWindow>().as_mut().Refresh(erase_background, rect) }
     }
-    fn refresh_rect(&self, rect: &ffi::wxRect, eraseBackground: bool) {
-        self.pinned::<ffi::wxWindow>().as_mut().RefreshRect(rect, eraseBackground)
+    fn refresh_rect(&self, rect: &ffi::wxRect, erase_background: bool) {
+        self.pinned::<ffi::wxWindow>().as_mut().RefreshRect(rect, erase_background)
     }
     fn update(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().Update()
@@ -1020,8 +1020,8 @@ trait WindowMethods: EvtHandlerMethods {
     fn process_window_event_locally(&self, event: Pin<&mut ffi::wxEvent>) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().ProcessWindowEventLocally(event)
     }
-    fn pop_event_handler(&self, deleteHandler: bool) -> *mut ffi::wxEvtHandler {
-        self.pinned::<ffi::wxWindow>().as_mut().PopEventHandler(deleteHandler)
+    fn pop_event_handler(&self, delete_handler: bool) -> *mut ffi::wxEvtHandler {
+        self.pinned::<ffi::wxWindow>().as_mut().PopEventHandler(delete_handler)
     }
     fn push_event_handler(&self, handler: *mut ffi::wxEvtHandler) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().PushEventHandler(handler) }
@@ -1041,8 +1041,8 @@ trait WindowMethods: EvtHandlerMethods {
     // BLOCKED: fn GetExtraStyle()
     // BLOCKED: fn GetWindowStyleFlag()
     // BLOCKED: fn GetWindowStyle()
-    fn has_extra_style(&self, exFlag: i32) -> bool {
-        self.pinned::<ffi::wxWindow>().as_mut().HasExtraStyle(exFlag)
+    fn has_extra_style(&self, ex_flag: i32) -> bool {
+        self.pinned::<ffi::wxWindow>().as_mut().HasExtraStyle(ex_flag)
     }
     fn has_flag(&self, flag: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().HasFlag(flag)
@@ -1099,16 +1099,16 @@ trait WindowMethods: EvtHandlerMethods {
     }
     // CXX_UNSUPPORTED: fn ShowWithEffect()
     // CXX_UNSUPPORTED: fn GetHelpText()
-    fn set_help_text(&self, helpText: &ffi::wxString) {
-        self.pinned::<ffi::wxWindow>().as_mut().SetHelpText(helpText)
+    fn set_help_text(&self, help_text: &ffi::wxString) {
+        self.pinned::<ffi::wxWindow>().as_mut().SetHelpText(help_text)
     }
     // CXX_UNSUPPORTED: fn GetHelpTextAtPoint()
     fn get_tool_tip(&self) -> *mut ffi::wxToolTip {
         self.pinned::<ffi::wxWindow>().as_mut().GetToolTip()
     }
     // CXX_UNSUPPORTED: fn GetToolTipText()
-    fn set_tool_tip(&self, tipString: &ffi::wxString) {
-        self.pinned::<ffi::wxWindow>().as_mut().SetToolTip(tipString)
+    fn set_tool_tip(&self, tip_string: &ffi::wxString) {
+        self.pinned::<ffi::wxWindow>().as_mut().SetToolTip(tip_string)
     }
     fn set_tool_tip1(&self, tip: *mut ffi::wxToolTip) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().SetToolTip1(tip) }
@@ -1148,8 +1148,8 @@ trait WindowMethods: EvtHandlerMethods {
     }
     // CXX_UNSUPPORTED: fn GetLabel()
     // CXX_UNSUPPORTED: fn GetLayoutDirection()
-    fn adjust_for_layout_direction(&self, x: i32, width: i32, widthTotal: i32) -> i32 {
-        self.pinned::<ffi::wxWindow>().as_mut().AdjustForLayoutDirection(x, width, widthTotal)
+    fn adjust_for_layout_direction(&self, x: i32, width: i32, width_total: i32) -> i32 {
+        self.pinned::<ffi::wxWindow>().as_mut().AdjustForLayoutDirection(x, width, width_total)
     }
     // CXX_UNSUPPORTED: fn GetName()
     // CXX_UNSUPPORTED: fn GetWindowVariant()
@@ -1196,11 +1196,11 @@ trait WindowMethods: EvtHandlerMethods {
     fn get_sizer(&self) -> *mut ffi::wxSizer {
         self.pinned::<ffi::wxWindow>().as_mut().GetSizer()
     }
-    fn set_sizer(&self, sizer: *mut ffi::wxSizer, deleteOld: bool) {
-        unsafe { self.pinned::<ffi::wxWindow>().as_mut().SetSizer(sizer, deleteOld) }
+    fn set_sizer(&self, sizer: *mut ffi::wxSizer, delete_old: bool) {
+        unsafe { self.pinned::<ffi::wxWindow>().as_mut().SetSizer(sizer, delete_old) }
     }
-    fn set_sizer_and_fit(&self, sizer: *mut ffi::wxSizer, deleteOld: bool) {
-        unsafe { self.pinned::<ffi::wxWindow>().as_mut().SetSizerAndFit(sizer, deleteOld) }
+    fn set_sizer_and_fit(&self, sizer: *mut ffi::wxSizer, delete_old: bool) {
+        unsafe { self.pinned::<ffi::wxWindow>().as_mut().SetSizerAndFit(sizer, delete_old) }
     }
     fn get_constraints(&self) -> *mut ffi::wxLayoutConstraints {
         self.pinned::<ffi::wxWindow>().as_mut().GetConstraints()
@@ -1211,8 +1211,8 @@ trait WindowMethods: EvtHandlerMethods {
     fn layout(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().Layout()
     }
-    fn set_auto_layout(&self, autoLayout: bool) {
-        self.pinned::<ffi::wxWindow>().as_mut().SetAutoLayout(autoLayout)
+    fn set_auto_layout(&self, auto_layout: bool) {
+        self.pinned::<ffi::wxWindow>().as_mut().SetAutoLayout(auto_layout)
     }
     fn get_auto_layout(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().GetAutoLayout()
@@ -1239,8 +1239,8 @@ trait WindowMethods: EvtHandlerMethods {
     fn warp_pointer(&self, x: i32, y: i32) {
         self.pinned::<ffi::wxWindow>().as_mut().WarpPointer(x, y)
     }
-    fn enable_touch_events(&self, eventsMask: i32) -> bool {
-        self.pinned::<ffi::wxWindow>().as_mut().EnableTouchEvents(eventsMask)
+    fn enable_touch_events(&self, events_mask: i32) -> bool {
+        self.pinned::<ffi::wxWindow>().as_mut().EnableTouchEvents(events_mask)
     }
     // CXX_UNSUPPORTED: fn HitTest()
     // CXX_UNSUPPORTED: fn HitTest()
@@ -1280,11 +1280,11 @@ trait WindowMethods: EvtHandlerMethods {
     fn send_idle_events(&self, event: Pin<&mut ffi::wxIdleEvent>) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().SendIdleEvents(event)
     }
-    fn register_hot_key(&self, hotkeyId: i32, modifiers: i32, virtualKeyCode: i32) -> bool {
-        self.pinned::<ffi::wxWindow>().as_mut().RegisterHotKey(hotkeyId, modifiers, virtualKeyCode)
+    fn register_hot_key(&self, hotkey_id: i32, modifiers: i32, virtual_key_code: i32) -> bool {
+        self.pinned::<ffi::wxWindow>().as_mut().RegisterHotKey(hotkey_id, modifiers, virtual_key_code)
     }
-    fn unregister_hot_key(&self, hotkeyId: i32) -> bool {
-        self.pinned::<ffi::wxWindow>().as_mut().UnregisterHotKey(hotkeyId)
+    fn unregister_hot_key(&self, hotkey_id: i32) -> bool {
+        self.pinned::<ffi::wxWindow>().as_mut().UnregisterHotKey(hotkey_id)
     }
     // BLOCKED: fn UpdateWindowUI()
     // CXX_UNSUPPORTED: fn GetClassDefaultAttributes()
