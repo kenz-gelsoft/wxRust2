@@ -44,7 +44,7 @@ class Method:
     def __init__(self, cls, e):
         self.is_public = e.get('prot') == 'public'
         self.is_static = e.get('static') == 'yes'
-        self.returns = CxxType(''.join(e.find('type').itertext()))
+        self.returns = CxxType(e.find('type'))
         self.cls = cls
         self.name = e.findtext('name')
         self.overload_index = self._overload_index()
@@ -54,9 +54,9 @@ class Method:
             self.returns = SelfType(cls.name, self.const, ctor_retval=True)
         self.params = []
         for param in e.findall('param'):
-            ptype = ''.join(param.find('type').itertext())
+            ptype = CxxType(param.find('type'))
             pname = param.findtext('declname')
-            self.params.append(Param(CxxType(ptype), pname))
+            self.params.append(Param(ptype, pname))
 
     def _overload_index(self):
         return sum(m.name == self.name for m in self.cls.methods)
@@ -110,10 +110,10 @@ CXX_SUPPORTED_VALUE_TYPES = [
     'void',
 ]
 class CxxType:
-    def __init__(self, s):
-        self.__srctype = s
+    def __init__(self, e):
+        self.__srctype = ''.join(e.itertext())
         # print('parsing: |%s|' % (s,))
-        matched = re.match(r'(const )?([^*&]*)([*&]+)?', s)
+        matched = re.match(r'(const )?([^*&]*)([*&]+)?', self.__srctype)
         self.__typename = None
         if matched:
             self.__is_mut = matched.group(1) is None
