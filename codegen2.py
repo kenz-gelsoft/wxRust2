@@ -1,4 +1,5 @@
-from doxybindgen import Class
+from doxybindgen.model import Class
+from doxybindgen.binding import CxxClassBinding, RustClassBinding
 
 types = [
     'wxPoint',
@@ -137,17 +138,18 @@ mod ffi {
         include!("wx/include/wxrust.h");
         include!("wx/include/wxrust2.h");
 '''
+    classes = [RustClassBinding(cls) for cls in classes]
     indent = ' ' * 4 * 2
     for t in types:
         yield '%stype %s;' % (indent,t)
     for cls in classes:
-        for chunk in cls.ffi_methods():
+        for chunk in cls.cxx_auto_bound_methods():
             yield chunk
     yield '''\
     }
     unsafe extern "C++" {'''
     for cls in classes:
-        for chunk in cls.ffi_ctors():
+        for chunk in cls.generated_methods():
             yield chunk
     yield '''\
     }
@@ -176,7 +178,8 @@ def wxrust2_h(classes):
 namespace wxrust {
 '''
     for cls in classes:
-        for chunk in cls.ctors_for_h():
+        binding = CxxClassBinding(cls)
+        for chunk in binding.decls_for_h():
             yield chunk
     yield '''\
 } // namespace wxrust
@@ -192,7 +195,8 @@ namespace wxrust {
 // Constructors
 '''
     for cls in classes:
-        for chunk in cls.ctors_for_cc():
+        binding = CxxClassBinding(cls)
+        for chunk in binding.defs_for_cc():
             yield chunk
     yield '''\
 } // namespace wxrust
