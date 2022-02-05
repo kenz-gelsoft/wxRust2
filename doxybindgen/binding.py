@@ -3,6 +3,7 @@ from .model import Param, SelfType, prefixed
 class RustClassBinding:
     def __init__(self, model):
         self.__model = model
+        self.__methods = [RustMethodBinding(m) for m in model.methods]
 
     def ffi_methods(self):
         template = '''\
@@ -14,16 +15,14 @@ class RustClassBinding:
             self.__model.name
         )
         indent = ' ' * 4 * 2
-        for method in self.__model.methods:
-            binding = RustMethodBinding(method)
-            for line in binding.in_rust():
+        for method in self.__methods:
+            for line in method.in_rust():
                 yield '%s%s' % (indent, line)
 
     def ffi_ctors(self):
         indent = ' ' * 4 * 2
-        for ctor in self.__model.ctors():
-            binding = RustMethodBinding(ctor)
-            for line in binding.ffi_lines():
+        for ctor in self._ctors():
+            for line in ctor.ffi_lines():
                 yield '%s%s' % (indent, line)
 
     def safer_binding(self):
@@ -45,23 +44,25 @@ wx_class! { %s(%s) impl
 
     def _ctors_for_rs(self):
         yield 'impl %s {' % (self.__model.unprefixed(),)
-        for ctor in self.__model.ctors():
-            binding = RustMethodBinding(ctor)
-            yield binding.for_rs()
+        for ctor in self._ctors():
+            yield ctor.for_rs()
         yield '}'
 
+    def _ctors(self):
+        return (m for m in self.__methods if m.is_ctor)
+    
     def _methods_for_rs(self):
         yield 'trait %sMethods: WxRustMethods {' % (self.__model.unprefixed(),)
-        for method in self.__model.methods:
+        for method in self.__methods:
             if method.is_ctor:
                 continue
-            binding = RustMethodBinding(method)
-            yield binding.for_rs()
+            yield method.for_rs()
         yield '}\n'
 
 class RustMethodBinding:
     def __init__(self, model):
         self.__model = model
+        self.is_ctor = model.is_ctor
         self.__is_dtor = model.name.startswith('~')
         self.__is_method_call = not (model.is_static or model.is_ctor)
         self.__self_param = Param(SelfType(model.cls.name, model.const), 'self')
@@ -201,24 +202,27 @@ class RustMethodBinding:
 class CxxClassBinding:
     def __init__(self, model):
         self.__model = model
+        self.__methods = [CxxMethodBinding(m) for m in model.methods]
 
     def ctors_for_h(self):
         yield '// CLASS: %s' % (self.__model.name,)
-        for ctor in self.__model.ctors():
-            binding = CxxMethodBinding(ctor)
-            yield binding.for_h()
+        for ctor in self._ctors():
+            yield ctor.for_h()
         yield ''
     
     def ctors_for_cc(self):
         yield '// CLASS: %s' % (self.__model.name,)
-        for ctor in self.__model.ctors():
-            binding = CxxMethodBinding(ctor)
-            yield binding.for_cc()
+        for ctor in self._ctors():
+            yield ctor.for_cc()
         yield ''
 
+    def _ctors(self):
+        return (m for m in self.__methods if m.is_ctor)
+    
 class CxxMethodBinding:
     def __init__(self, model):
         self.__model = model
+        self.is_ctor = model.is_ctor
 
     def for_h(self):
         body = '%s *%s(%s);' % (

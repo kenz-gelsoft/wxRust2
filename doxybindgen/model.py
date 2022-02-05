@@ -35,11 +35,6 @@ class Class:
     def unprefixed(self):
         return self.name[2:]
 
-    def ctors(self):
-        for method in self.methods:
-            if method.is_ctor:
-                yield method
-    
     def blocks(self, name):
         if self.__blocklist is None:
             return False
