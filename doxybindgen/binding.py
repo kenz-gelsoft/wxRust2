@@ -69,7 +69,7 @@ class RustMethodBinding:
         self.__model = model
         self.is_ctor = model.is_ctor
         self.__is_dtor = model.name.startswith('~')
-        self.__is_method_call = not (model.is_static or model.is_ctor)
+        self.__is_instance_method = not (model.is_static or model.is_ctor)
         self.__self_param = Param(SelfType(model.cls.name, model.const), 'self')
     
     def cxx_auto_binding(self):
@@ -123,12 +123,11 @@ class RustMethodBinding:
         if suppress:
             yield '// %s: fn %s()' % (suppress, self.__model.name)
             return
-        is_method = self.__is_method_call
         returns_or_not = ''
         if not self.__model.returns.is_void():
             returns_or_not = ' -> %s' % (self.__model.returns.in_rust(with_ffi=True),)
         yield '%sfn %s(%s)%s {' % (
-            '' if is_method else 'pub ',
+            '' if self.__is_instance_method else 'pub ',
             self._rust_method_name(),
             self._rust_params(with_ffi=True, binding=True),
             returns_or_not,
@@ -138,7 +137,7 @@ class RustMethodBinding:
             prefixed(self.__model.overload_name(), with_ffi=True),
             self.__model.call_params(),
         )
-        if self.__is_method_call:
+        if self.__is_instance_method:
             call = 'self.pinned::<ffi::%s>().as_mut().%s(%s)' % (
                 self.__model.cls.name,
                 self.__model.overload_name(),
@@ -179,7 +178,7 @@ class RustMethodBinding:
 
     def _rust_params(self, with_ffi=False, binding=False):
         params = self.__model.params.copy()
-        if self.__is_method_call:
+        if self.__is_instance_method:
             params.insert(0, self.__self_param)
         return ', '.join(self._rust_param(p, with_ffi, binding) for p in params)
 
