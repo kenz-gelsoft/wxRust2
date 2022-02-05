@@ -1,4 +1,11 @@
 from .model import Param, SelfType, prefixed
+import re
+
+# Known, and problematic
+RUST_KEYWORDS = [
+    'move',
+    'ref',
+]
 
 class RustClassBinding:
     def __init__(self, model):
@@ -169,12 +176,33 @@ class RustMethodBinding:
         return any(p.type.not_supported() for p in self.__model.params)
 
     def _rust_method_name(self):
-        method_name = self.__model.name
+        method_name = self._snake_case(self.__model.name)
         if self.__model.is_ctor:
             method_name = 'new'
         if self.__model.overload_index > 0:
             method_name += str(self.__model.overload_index)
+        if method_name in RUST_KEYWORDS:
+            method_name += '_'
         return method_name
+    
+    def _snake_case(self, pascal_case):
+        words = re.findall(r'[A-Z][^A-Z]*', pascal_case)
+        if words:
+            snake_cased = '_'.join(w.lower() for w in self._concat_caps(words))
+            return snake_cased
+        return method_name
+
+    def _concat_caps(self, words):
+        buf = ''
+        for word in words:
+            if len(word) == 1:
+                buf += word
+                continue
+            if buf:
+                yield buf
+            yield word
+        if buf:
+            yield buf
 
     def _rust_params(self, with_ffi=False, binding=False):
         params = self.__model.params.copy()

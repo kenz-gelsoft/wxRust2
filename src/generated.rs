@@ -498,28 +498,28 @@ impl Object {
 }
 trait ObjectMethods: WxRustMethods {
     // DTOR: fn ~wxObject()
-    fn GetClassInfo(&self) -> *mut ffi::wxClassInfo {
+    fn get_class_info(&self) -> *mut ffi::wxClassInfo {
         self.pinned::<ffi::wxObject>().as_mut().GetClassInfo()
     }
-    fn GetRefData(&self) -> *mut ffi::wxObjectRefData {
+    fn get_ref_data(&self) -> *mut ffi::wxObjectRefData {
         self.pinned::<ffi::wxObject>().as_mut().GetRefData()
     }
-    fn IsKindOf(&self, info: *const ffi::wxClassInfo) -> bool {
+    fn is_kind_of(&self, info: *const ffi::wxClassInfo) -> bool {
         unsafe { self.pinned::<ffi::wxObject>().as_mut().IsKindOf(info) }
     }
-    fn IsSameAs(&self, obj: &ffi::wxObject) -> bool {
+    fn is_same_as(&self, obj: &ffi::wxObject) -> bool {
         self.pinned::<ffi::wxObject>().as_mut().IsSameAs(obj)
     }
-    fn Ref(&self, clone: &ffi::wxObject) {
+    fn ref_(&self, clone: &ffi::wxObject) {
         self.pinned::<ffi::wxObject>().as_mut().Ref(clone)
     }
-    fn SetRefData(&self, data: *mut ffi::wxObjectRefData) {
+    fn set_ref_data(&self, data: *mut ffi::wxObjectRefData) {
         unsafe { self.pinned::<ffi::wxObject>().as_mut().SetRefData(data) }
     }
-    fn UnRef(&self) {
+    fn un_ref(&self) {
         self.pinned::<ffi::wxObject>().as_mut().UnRef()
     }
-    fn UnShare(&self) {
+    fn un_share(&self) {
         self.pinned::<ffi::wxObject>().as_mut().UnShare()
     }
     // BLOCKED: fn operator delete()
@@ -536,27 +536,27 @@ impl EvtHandler {
     }
 }
 trait EvtHandlerMethods: WxRustMethods {
-    fn QueueEvent(&self, event: *mut ffi::wxEvent) {
+    fn queue_event(&self, event: *mut ffi::wxEvent) {
         unsafe { self.pinned::<ffi::wxEvtHandler>().as_mut().QueueEvent(event) }
     }
-    fn AddPendingEvent(&self, event: &ffi::wxEvent) {
+    fn add_pending_event(&self, event: &ffi::wxEvent) {
         self.pinned::<ffi::wxEvtHandler>().as_mut().AddPendingEvent(event)
     }
     // CXX_UNSUPPORTED: fn CallAfter()
     // BLOCKED: fn CallAfter()
-    fn ProcessEvent(&self, event: Pin<&mut ffi::wxEvent>) -> bool {
+    fn process_event(&self, event: Pin<&mut ffi::wxEvent>) -> bool {
         self.pinned::<ffi::wxEvtHandler>().as_mut().ProcessEvent(event)
     }
-    fn ProcessEventLocally(&self, event: Pin<&mut ffi::wxEvent>) -> bool {
+    fn process_event_locally(&self, event: Pin<&mut ffi::wxEvent>) -> bool {
         self.pinned::<ffi::wxEvtHandler>().as_mut().ProcessEventLocally(event)
     }
-    fn SafelyProcessEvent(&self, event: Pin<&mut ffi::wxEvent>) -> bool {
+    fn safely_process_event(&self, event: Pin<&mut ffi::wxEvent>) -> bool {
         self.pinned::<ffi::wxEvtHandler>().as_mut().SafelyProcessEvent(event)
     }
-    fn ProcessPendingEvents(&self) {
+    fn process_pending_events(&self) {
         self.pinned::<ffi::wxEvtHandler>().as_mut().ProcessPendingEvents()
     }
-    fn DeletePendingEvents(&self) {
+    fn delete_pending_events(&self) {
         self.pinned::<ffi::wxEvtHandler>().as_mut().DeletePendingEvents()
     }
     // CXX_UNSUPPORTED: fn Connect()
@@ -570,35 +570,35 @@ trait EvtHandlerMethods: WxRustMethods {
     // CXX_UNSUPPORTED: fn Unbind()
     // BLOCKED: fn Unbind()
     // BLOCKED: fn GetClientData()
-    fn GetClientObject(&self) -> *mut ffi::wxClientData {
+    fn get_client_object(&self) -> *mut ffi::wxClientData {
         self.pinned::<ffi::wxEvtHandler>().as_mut().GetClientObject()
     }
     // BLOCKED: fn SetClientData()
-    fn SetClientObject(&self, data: *mut ffi::wxClientData) {
+    fn set_client_object(&self, data: *mut ffi::wxClientData) {
         unsafe { self.pinned::<ffi::wxEvtHandler>().as_mut().SetClientObject(data) }
     }
-    fn GetEvtHandlerEnabled(&self) -> bool {
+    fn get_evt_handler_enabled(&self) -> bool {
         self.pinned::<ffi::wxEvtHandler>().as_mut().GetEvtHandlerEnabled()
     }
-    fn GetNextHandler(&self) -> *mut ffi::wxEvtHandler {
+    fn get_next_handler(&self) -> *mut ffi::wxEvtHandler {
         self.pinned::<ffi::wxEvtHandler>().as_mut().GetNextHandler()
     }
-    fn GetPreviousHandler(&self) -> *mut ffi::wxEvtHandler {
+    fn get_previous_handler(&self) -> *mut ffi::wxEvtHandler {
         self.pinned::<ffi::wxEvtHandler>().as_mut().GetPreviousHandler()
     }
-    fn SetEvtHandlerEnabled(&self, enabled: bool) {
+    fn set_evt_handler_enabled(&self, enabled: bool) {
         self.pinned::<ffi::wxEvtHandler>().as_mut().SetEvtHandlerEnabled(enabled)
     }
-    fn SetNextHandler(&self, handler: *mut ffi::wxEvtHandler) {
+    fn set_next_handler(&self, handler: *mut ffi::wxEvtHandler) {
         unsafe { self.pinned::<ffi::wxEvtHandler>().as_mut().SetNextHandler(handler) }
     }
-    fn SetPreviousHandler(&self, handler: *mut ffi::wxEvtHandler) {
+    fn set_previous_handler(&self, handler: *mut ffi::wxEvtHandler) {
         unsafe { self.pinned::<ffi::wxEvtHandler>().as_mut().SetPreviousHandler(handler) }
     }
-    fn Unlink(&self) {
+    fn unlink(&self) {
         self.pinned::<ffi::wxEvtHandler>().as_mut().Unlink()
     }
-    fn IsUnlinked(&self) -> bool {
+    fn is_unlinked(&self) -> bool {
         self.pinned::<ffi::wxEvtHandler>().as_mut().IsUnlinked()
     }
     // BLOCKED: fn AddFilter()
@@ -619,44 +619,44 @@ impl Window {
     }
 }
 trait WindowMethods: WxRustMethods {
-    fn AcceptsFocus(&self) -> bool {
+    fn accepts_focus(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().AcceptsFocus()
     }
-    fn AcceptsFocusFromKeyboard(&self) -> bool {
+    fn accepts_focus_from_keyboard(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().AcceptsFocusFromKeyboard()
     }
-    fn AcceptsFocusRecursively(&self) -> bool {
+    fn accepts_focus_recursively(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().AcceptsFocusRecursively()
     }
-    fn DisableFocusFromKeyboard(&self) {
+    fn disable_focus_from_keyboard(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().DisableFocusFromKeyboard()
     }
-    fn IsFocusable(&self) -> bool {
+    fn is_focusable(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().IsFocusable()
     }
-    fn CanAcceptFocus(&self) -> bool {
+    fn can_accept_focus(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().CanAcceptFocus()
     }
-    fn CanAcceptFocusFromKeyboard(&self) -> bool {
+    fn can_accept_focus_from_keyboard(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().CanAcceptFocusFromKeyboard()
     }
-    fn HasFocus(&self) -> bool {
+    fn has_focus(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().HasFocus()
     }
-    fn SetCanFocus(&self, canFocus: bool) {
+    fn set_can_focus(&self, canFocus: bool) {
         self.pinned::<ffi::wxWindow>().as_mut().SetCanFocus(canFocus)
     }
-    fn EnableVisibleFocus(&self, enable: bool) {
+    fn enable_visible_focus(&self, enable: bool) {
         self.pinned::<ffi::wxWindow>().as_mut().EnableVisibleFocus(enable)
     }
-    fn SetFocus(&self) {
+    fn set_focus(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().SetFocus()
     }
-    fn SetFocusFromKbd(&self) {
+    fn set_focus_from_kbd(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().SetFocusFromKbd()
     }
     // BLOCKED: fn AddChild()
-    fn DestroyChildren(&self) -> bool {
+    fn destroy_children(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().DestroyChildren()
     }
     // BLOCKED: fn FindWindow()
@@ -664,83 +664,83 @@ trait WindowMethods: WxRustMethods {
     // BLOCKED: fn GetChildren()
     // BLOCKED: fn GetChildren()
     // BLOCKED: fn RemoveChild()
-    fn GetGrandParent(&self) -> *mut ffi::wxWindow {
+    fn get_grand_parent(&self) -> *mut ffi::wxWindow {
         self.pinned::<ffi::wxWindow>().as_mut().GetGrandParent()
     }
-    fn GetNextSibling(&self) -> *mut ffi::wxWindow {
+    fn get_next_sibling(&self) -> *mut ffi::wxWindow {
         self.pinned::<ffi::wxWindow>().as_mut().GetNextSibling()
     }
-    fn GetParent(&self) -> *mut ffi::wxWindow {
+    fn get_parent(&self) -> *mut ffi::wxWindow {
         self.pinned::<ffi::wxWindow>().as_mut().GetParent()
     }
-    fn GetPrevSibling(&self) -> *mut ffi::wxWindow {
+    fn get_prev_sibling(&self) -> *mut ffi::wxWindow {
         self.pinned::<ffi::wxWindow>().as_mut().GetPrevSibling()
     }
     // BLOCKED: fn IsDescendant()
     // BLOCKED: fn Reparent()
-    fn AlwaysShowScrollbars(&self, hflag: bool, vflag: bool) {
+    fn always_show_scrollbars(&self, hflag: bool, vflag: bool) {
         self.pinned::<ffi::wxWindow>().as_mut().AlwaysShowScrollbars(hflag, vflag)
     }
-    fn GetScrollPos(&self, orientation: i32) -> i32 {
+    fn get_scroll_pos(&self, orientation: i32) -> i32 {
         self.pinned::<ffi::wxWindow>().as_mut().GetScrollPos(orientation)
     }
-    fn GetScrollRange(&self, orientation: i32) -> i32 {
+    fn get_scroll_range(&self, orientation: i32) -> i32 {
         self.pinned::<ffi::wxWindow>().as_mut().GetScrollRange(orientation)
     }
-    fn GetScrollThumb(&self, orientation: i32) -> i32 {
+    fn get_scroll_thumb(&self, orientation: i32) -> i32 {
         self.pinned::<ffi::wxWindow>().as_mut().GetScrollThumb(orientation)
     }
-    fn CanScroll(&self, orient: i32) -> bool {
+    fn can_scroll(&self, orient: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().CanScroll(orient)
     }
-    fn HasScrollbar(&self, orient: i32) -> bool {
+    fn has_scrollbar(&self, orient: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().HasScrollbar(orient)
     }
-    fn IsScrollbarAlwaysShown(&self, orient: i32) -> bool {
+    fn is_scrollbar_always_shown(&self, orient: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().IsScrollbarAlwaysShown(orient)
     }
-    fn ScrollLines(&self, lines: i32) -> bool {
+    fn scroll_lines(&self, lines: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().ScrollLines(lines)
     }
-    fn ScrollPages(&self, pages: i32) -> bool {
+    fn scroll_pages(&self, pages: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().ScrollPages(pages)
     }
-    fn ScrollWindow(&self, dx: i32, dy: i32, rect: *const ffi::wxRect) {
+    fn scroll_window(&self, dx: i32, dy: i32, rect: *const ffi::wxRect) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().ScrollWindow(dx, dy, rect) }
     }
-    fn LineUp(&self) -> bool {
+    fn line_up(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().LineUp()
     }
-    fn LineDown(&self) -> bool {
+    fn line_down(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().LineDown()
     }
-    fn PageUp(&self) -> bool {
+    fn page_up(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().PageUp()
     }
-    fn PageDown(&self) -> bool {
+    fn page_down(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().PageDown()
     }
-    fn SetScrollPos(&self, orientation: i32, pos: i32, refresh: bool) {
+    fn set_scroll_pos(&self, orientation: i32, pos: i32, refresh: bool) {
         self.pinned::<ffi::wxWindow>().as_mut().SetScrollPos(orientation, pos, refresh)
     }
-    fn SetScrollbar(&self, orientation: i32, position: i32, thumbSize: i32, range: i32, refresh: bool) {
+    fn set_scrollbar(&self, orientation: i32, position: i32, thumbSize: i32, range: i32, refresh: bool) {
         self.pinned::<ffi::wxWindow>().as_mut().SetScrollbar(orientation, position, thumbSize, range, refresh)
     }
-    fn BeginRepositioningChildren(&self) -> bool {
+    fn begin_repositioning_children(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().BeginRepositioningChildren()
     }
-    fn EndRepositioningChildren(&self) {
+    fn end_repositioning_children(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().EndRepositioningChildren()
     }
-    fn CacheBestSize(&self, size: &ffi::wxSize) {
+    fn cache_best_size(&self, size: &ffi::wxSize) {
         self.pinned::<ffi::wxWindow>().as_mut().CacheBestSize(size)
     }
     // CXX_UNSUPPORTED: fn ClientToWindowSize()
     // CXX_UNSUPPORTED: fn WindowToClientSize()
-    fn Fit(&self) {
+    fn fit(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().Fit()
     }
-    fn FitInside(&self) {
+    fn fit_inside(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().FitInside()
     }
     // CXX_UNSUPPORTED: fn FromDIP()
@@ -750,13 +750,13 @@ trait WindowMethods: WxRustMethods {
     // CXX_UNSUPPORTED: fn ToDIP()
     // BLOCKED: fn ToDIP()
     // CXX_UNSUPPORTED: fn GetBestSize()
-    fn GetBestHeight(&self, width: i32) -> i32 {
+    fn get_best_height(&self, width: i32) -> i32 {
         self.pinned::<ffi::wxWindow>().as_mut().GetBestHeight(width)
     }
-    fn GetBestWidth(&self, height: i32) -> i32 {
+    fn get_best_width(&self, height: i32) -> i32 {
         self.pinned::<ffi::wxWindow>().as_mut().GetBestWidth(height)
     }
-    fn GetClientSize(&self, width: *mut i32, height: *mut i32) {
+    fn get_client_size(&self, width: *mut i32, height: *mut i32) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().GetClientSize(width, height) }
     }
     // CXX_UNSUPPORTED: fn GetClientSize()
@@ -765,93 +765,93 @@ trait WindowMethods: WxRustMethods {
     // CXX_UNSUPPORTED: fn GetMaxSize()
     // CXX_UNSUPPORTED: fn GetMinClientSize()
     // CXX_UNSUPPORTED: fn GetMinSize()
-    fn GetMinWidth(&self) -> i32 {
+    fn get_min_width(&self) -> i32 {
         self.pinned::<ffi::wxWindow>().as_mut().GetMinWidth()
     }
-    fn GetMinHeight(&self) -> i32 {
+    fn get_min_height(&self) -> i32 {
         self.pinned::<ffi::wxWindow>().as_mut().GetMinHeight()
     }
-    fn GetMaxWidth(&self) -> i32 {
+    fn get_max_width(&self) -> i32 {
         self.pinned::<ffi::wxWindow>().as_mut().GetMaxWidth()
     }
-    fn GetMaxHeight(&self) -> i32 {
+    fn get_max_height(&self) -> i32 {
         self.pinned::<ffi::wxWindow>().as_mut().GetMaxHeight()
     }
-    fn GetSize(&self, width: *mut i32, height: *mut i32) {
+    fn get_size(&self, width: *mut i32, height: *mut i32) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().GetSize(width, height) }
     }
     // CXX_UNSUPPORTED: fn GetSize()
     // CXX_UNSUPPORTED: fn GetVirtualSize()
-    fn GetVirtualSize1(&self, width: *mut i32, height: *mut i32) {
+    fn get_virtual_size1(&self, width: *mut i32, height: *mut i32) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().GetVirtualSize1(width, height) }
     }
     // CXX_UNSUPPORTED: fn GetBestVirtualSize()
-    fn GetContentScaleFactor(&self) -> f64 {
+    fn get_content_scale_factor(&self) -> f64 {
         self.pinned::<ffi::wxWindow>().as_mut().GetContentScaleFactor()
     }
-    fn GetDPIScaleFactor(&self) -> f64 {
+    fn get_dpi_scale_dpi_factor_dpi(&self) -> f64 {
         self.pinned::<ffi::wxWindow>().as_mut().GetDPIScaleFactor()
     }
     // CXX_UNSUPPORTED: fn GetWindowBorderSize()
-    fn InformFirstDirection(&self, direction: i32, size: i32, availableOtherDir: i32) -> bool {
+    fn inform_first_direction(&self, direction: i32, size: i32, availableOtherDir: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().InformFirstDirection(direction, size, availableOtherDir)
     }
-    fn InvalidateBestSize(&self) {
+    fn invalidate_best_size(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().InvalidateBestSize()
     }
-    fn PostSizeEvent(&self) {
+    fn post_size_event(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().PostSizeEvent()
     }
-    fn PostSizeEventToParent(&self) {
+    fn post_size_event_to_parent(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().PostSizeEventToParent()
     }
-    fn SendSizeEvent(&self, flags: i32) {
+    fn send_size_event(&self, flags: i32) {
         self.pinned::<ffi::wxWindow>().as_mut().SendSizeEvent(flags)
     }
-    fn SendSizeEventToParent(&self, flags: i32) {
+    fn send_size_event_to_parent(&self, flags: i32) {
         self.pinned::<ffi::wxWindow>().as_mut().SendSizeEventToParent(flags)
     }
-    fn SetClientSize(&self, width: i32, height: i32) {
+    fn set_client_size(&self, width: i32, height: i32) {
         self.pinned::<ffi::wxWindow>().as_mut().SetClientSize(width, height)
     }
-    fn SetClientSize1(&self, size: &ffi::wxSize) {
+    fn set_client_size1(&self, size: &ffi::wxSize) {
         self.pinned::<ffi::wxWindow>().as_mut().SetClientSize1(size)
     }
-    fn SetClientSize2(&self, rect: &ffi::wxRect) {
+    fn set_client_size2(&self, rect: &ffi::wxRect) {
         self.pinned::<ffi::wxWindow>().as_mut().SetClientSize2(rect)
     }
-    fn SetContainingSizer(&self, sizer: *mut ffi::wxSizer) {
+    fn set_containing_sizer(&self, sizer: *mut ffi::wxSizer) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().SetContainingSizer(sizer) }
     }
-    fn SetInitialSize(&self, size: &ffi::wxSize) {
+    fn set_initial_size(&self, size: &ffi::wxSize) {
         self.pinned::<ffi::wxWindow>().as_mut().SetInitialSize(size)
     }
-    fn SetMaxClientSize(&self, size: &ffi::wxSize) {
+    fn set_max_client_size(&self, size: &ffi::wxSize) {
         self.pinned::<ffi::wxWindow>().as_mut().SetMaxClientSize(size)
     }
-    fn SetMaxSize(&self, size: &ffi::wxSize) {
+    fn set_max_size(&self, size: &ffi::wxSize) {
         self.pinned::<ffi::wxWindow>().as_mut().SetMaxSize(size)
     }
-    fn SetMinClientSize(&self, size: &ffi::wxSize) {
+    fn set_min_client_size(&self, size: &ffi::wxSize) {
         self.pinned::<ffi::wxWindow>().as_mut().SetMinClientSize(size)
     }
-    fn SetMinSize(&self, size: &ffi::wxSize) {
+    fn set_min_size(&self, size: &ffi::wxSize) {
         self.pinned::<ffi::wxWindow>().as_mut().SetMinSize(size)
     }
     // BLOCKED: fn SetSize()
     // BLOCKED: fn SetSize()
     // BLOCKED: fn SetSize()
     // BLOCKED: fn SetSize()
-    fn SetSizeHints(&self, minSize: &ffi::wxSize, maxSize: &ffi::wxSize, incSize: &ffi::wxSize) {
+    fn set_size_hints(&self, minSize: &ffi::wxSize, maxSize: &ffi::wxSize, incSize: &ffi::wxSize) {
         self.pinned::<ffi::wxWindow>().as_mut().SetSizeHints(minSize, maxSize, incSize)
     }
-    fn SetSizeHints1(&self, minW: i32, minH: i32, maxW: i32, maxH: i32, incW: i32, incH: i32) {
+    fn set_size_hints1(&self, minW: i32, minH: i32, maxW: i32, maxH: i32, incW: i32, incH: i32) {
         self.pinned::<ffi::wxWindow>().as_mut().SetSizeHints1(minW, minH, maxW, maxH, incW, incH)
     }
-    fn SetVirtualSize(&self, width: i32, height: i32) {
+    fn set_virtual_size(&self, width: i32, height: i32) {
         self.pinned::<ffi::wxWindow>().as_mut().SetVirtualSize(width, height)
     }
-    fn SetVirtualSize1(&self, size: &ffi::wxSize) {
+    fn set_virtual_size1(&self, size: &ffi::wxSize) {
         self.pinned::<ffi::wxWindow>().as_mut().SetVirtualSize1(size)
     }
     // CXX_UNSUPPORTED: fn FromDIP()
@@ -860,40 +860,40 @@ trait WindowMethods: WxRustMethods {
     // CXX_UNSUPPORTED: fn ToDIP()
     // CXX_UNSUPPORTED: fn ToDIP()
     // BLOCKED: fn ToDIP()
-    fn Center(&self, dir: i32) {
+    fn center(&self, dir: i32) {
         self.pinned::<ffi::wxWindow>().as_mut().Center(dir)
     }
-    fn CenterOnParent(&self, dir: i32) {
+    fn center_on_parent(&self, dir: i32) {
         self.pinned::<ffi::wxWindow>().as_mut().CenterOnParent(dir)
     }
-    fn Centre(&self, direction: i32) {
+    fn centre(&self, direction: i32) {
         self.pinned::<ffi::wxWindow>().as_mut().Centre(direction)
     }
-    fn CentreOnParent(&self, direction: i32) {
+    fn centre_on_parent(&self, direction: i32) {
         self.pinned::<ffi::wxWindow>().as_mut().CentreOnParent(direction)
     }
-    fn GetPosition(&self, x: *mut i32, y: *mut i32) {
+    fn get_position(&self, x: *mut i32, y: *mut i32) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().GetPosition(x, y) }
     }
     // CXX_UNSUPPORTED: fn GetPosition()
     // CXX_UNSUPPORTED: fn GetRect()
-    fn GetScreenPosition(&self, x: *mut i32, y: *mut i32) {
+    fn get_screen_position(&self, x: *mut i32, y: *mut i32) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().GetScreenPosition(x, y) }
     }
     // CXX_UNSUPPORTED: fn GetScreenPosition()
     // CXX_UNSUPPORTED: fn GetScreenRect()
     // CXX_UNSUPPORTED: fn GetClientAreaOrigin()
     // CXX_UNSUPPORTED: fn GetClientRect()
-    fn Move(&self, x: i32, y: i32, flags: i32) {
+    fn move_(&self, x: i32, y: i32, flags: i32) {
         self.pinned::<ffi::wxWindow>().as_mut().Move(x, y, flags)
     }
-    fn Move1(&self, pt: &ffi::wxPoint, flags: i32) {
+    fn move1(&self, pt: &ffi::wxPoint, flags: i32) {
         self.pinned::<ffi::wxWindow>().as_mut().Move1(pt, flags)
     }
-    fn SetPosition(&self, pt: &ffi::wxPoint) {
+    fn set_position(&self, pt: &ffi::wxPoint) {
         self.pinned::<ffi::wxWindow>().as_mut().SetPosition(pt)
     }
-    fn ClientToScreen(&self, x: *mut i32, y: *mut i32) {
+    fn client_to_screen(&self, x: *mut i32, y: *mut i32) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().ClientToScreen(x, y) }
     }
     // CXX_UNSUPPORTED: fn ClientToScreen()
@@ -901,386 +901,386 @@ trait WindowMethods: WxRustMethods {
     // CXX_UNSUPPORTED: fn ConvertDialogToPixels()
     // CXX_UNSUPPORTED: fn ConvertPixelsToDialog()
     // CXX_UNSUPPORTED: fn ConvertPixelsToDialog()
-    fn ScreenToClient(&self, x: *mut i32, y: *mut i32) {
+    fn screen_to_client(&self, x: *mut i32, y: *mut i32) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().ScreenToClient(x, y) }
     }
     // CXX_UNSUPPORTED: fn ScreenToClient()
-    fn ClearBackground(&self) {
+    fn clear_background(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().ClearBackground()
     }
-    fn Freeze(&self) {
+    fn freeze(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().Freeze()
     }
-    fn Thaw(&self) {
+    fn thaw(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().Thaw()
     }
-    fn IsFrozen(&self) -> bool {
+    fn is_frozen(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().IsFrozen()
     }
     // CXX_UNSUPPORTED: fn GetBackgroundColour()
     // CXX_UNSUPPORTED: fn GetBackgroundStyle()
-    fn GetCharHeight(&self) -> i32 {
+    fn get_char_height(&self) -> i32 {
         self.pinned::<ffi::wxWindow>().as_mut().GetCharHeight()
     }
-    fn GetCharWidth(&self) -> i32 {
+    fn get_char_width(&self) -> i32 {
         self.pinned::<ffi::wxWindow>().as_mut().GetCharWidth()
     }
     // CXX_UNSUPPORTED: fn GetDefaultAttributes()
     // CXX_UNSUPPORTED: fn GetDPI()
     // CXX_UNSUPPORTED: fn GetFont()
     // CXX_UNSUPPORTED: fn GetForegroundColour()
-    fn GetTextExtent(&self, string: &ffi::wxString, w: *mut i32, h: *mut i32, descent: *mut i32, externalLeading: *mut i32, font: *const ffi::wxFont) {
+    fn get_text_extent(&self, string: &ffi::wxString, w: *mut i32, h: *mut i32, descent: *mut i32, externalLeading: *mut i32, font: *const ffi::wxFont) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().GetTextExtent(string, w, h, descent, externalLeading, font) }
     }
     // CXX_UNSUPPORTED: fn GetTextExtent()
     // BLOCKED: fn GetUpdateRegion()
     // CXX_UNSUPPORTED: fn GetUpdateClientRect()
-    fn HasTransparentBackground(&self) -> bool {
+    fn has_transparent_background(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().HasTransparentBackground()
     }
-    fn Refresh(&self, eraseBackground: bool, rect: *const ffi::wxRect) {
+    fn refresh(&self, eraseBackground: bool, rect: *const ffi::wxRect) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().Refresh(eraseBackground, rect) }
     }
-    fn RefreshRect(&self, rect: &ffi::wxRect, eraseBackground: bool) {
+    fn refresh_rect(&self, rect: &ffi::wxRect, eraseBackground: bool) {
         self.pinned::<ffi::wxWindow>().as_mut().RefreshRect(rect, eraseBackground)
     }
-    fn Update(&self) {
+    fn update(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().Update()
     }
-    fn SetBackgroundColour(&self, colour: &ffi::wxColour) -> bool {
+    fn set_background_colour(&self, colour: &ffi::wxColour) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().SetBackgroundColour(colour)
     }
     // CXX_UNSUPPORTED: fn SetBackgroundStyle()
-    fn IsTransparentBackgroundSupported(&self, reason: *mut ffi::wxString) -> bool {
+    fn is_transparent_background_supported(&self, reason: *mut ffi::wxString) -> bool {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().IsTransparentBackgroundSupported(reason) }
     }
-    fn SetFont(&self, font: &ffi::wxFont) -> bool {
+    fn set_font(&self, font: &ffi::wxFont) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().SetFont(font)
     }
-    fn SetForegroundColour(&self, colour: &ffi::wxColour) -> bool {
+    fn set_foreground_colour(&self, colour: &ffi::wxColour) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().SetForegroundColour(colour)
     }
-    fn SetOwnBackgroundColour(&self, colour: &ffi::wxColour) {
+    fn set_own_background_colour(&self, colour: &ffi::wxColour) {
         self.pinned::<ffi::wxWindow>().as_mut().SetOwnBackgroundColour(colour)
     }
-    fn InheritsBackgroundColour(&self) -> bool {
+    fn inherits_background_colour(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().InheritsBackgroundColour()
     }
-    fn UseBgCol(&self) -> bool {
+    fn use_bg_col(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().UseBgCol()
     }
-    fn UseBackgroundColour(&self) -> bool {
+    fn use_background_colour(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().UseBackgroundColour()
     }
-    fn SetOwnFont(&self, font: &ffi::wxFont) {
+    fn set_own_font(&self, font: &ffi::wxFont) {
         self.pinned::<ffi::wxWindow>().as_mut().SetOwnFont(font)
     }
-    fn SetOwnForegroundColour(&self, colour: &ffi::wxColour) {
+    fn set_own_foreground_colour(&self, colour: &ffi::wxColour) {
         self.pinned::<ffi::wxWindow>().as_mut().SetOwnForegroundColour(colour)
     }
-    fn UseForegroundColour(&self) -> bool {
+    fn use_foreground_colour(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().UseForegroundColour()
     }
-    fn InheritsForegroundColour(&self) -> bool {
+    fn inherits_foreground_colour(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().InheritsForegroundColour()
     }
-    fn SetPalette(&self, pal: &ffi::wxPalette) {
+    fn set_palette(&self, pal: &ffi::wxPalette) {
         self.pinned::<ffi::wxWindow>().as_mut().SetPalette(pal)
     }
-    fn ShouldInheritColours(&self) -> bool {
+    fn should_inherit_colours(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().ShouldInheritColours()
     }
-    fn SetThemeEnabled(&self, enable: bool) {
+    fn set_theme_enabled(&self, enable: bool) {
         self.pinned::<ffi::wxWindow>().as_mut().SetThemeEnabled(enable)
     }
-    fn GetThemeEnabled(&self) -> bool {
+    fn get_theme_enabled(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().GetThemeEnabled()
     }
-    fn CanSetTransparent(&self) -> bool {
+    fn can_set_transparent(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().CanSetTransparent()
     }
-    fn SetTransparent(&self, alpha: u8) -> bool {
+    fn set_transparent(&self, alpha: u8) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().SetTransparent(alpha)
     }
-    fn GetEventHandler(&self) -> *mut ffi::wxEvtHandler {
+    fn get_event_handler(&self) -> *mut ffi::wxEvtHandler {
         self.pinned::<ffi::wxWindow>().as_mut().GetEventHandler()
     }
-    fn HandleAsNavigationKey(&self, event: &ffi::wxKeyEvent) -> bool {
+    fn handle_as_navigation_key(&self, event: &ffi::wxKeyEvent) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().HandleAsNavigationKey(event)
     }
-    fn HandleWindowEvent(&self, event: Pin<&mut ffi::wxEvent>) -> bool {
+    fn handle_window_event(&self, event: Pin<&mut ffi::wxEvent>) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().HandleWindowEvent(event)
     }
-    fn ProcessWindowEvent(&self, event: Pin<&mut ffi::wxEvent>) -> bool {
+    fn process_window_event(&self, event: Pin<&mut ffi::wxEvent>) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().ProcessWindowEvent(event)
     }
-    fn ProcessWindowEventLocally(&self, event: Pin<&mut ffi::wxEvent>) -> bool {
+    fn process_window_event_locally(&self, event: Pin<&mut ffi::wxEvent>) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().ProcessWindowEventLocally(event)
     }
-    fn PopEventHandler(&self, deleteHandler: bool) -> *mut ffi::wxEvtHandler {
+    fn pop_event_handler(&self, deleteHandler: bool) -> *mut ffi::wxEvtHandler {
         self.pinned::<ffi::wxWindow>().as_mut().PopEventHandler(deleteHandler)
     }
-    fn PushEventHandler(&self, handler: *mut ffi::wxEvtHandler) {
+    fn push_event_handler(&self, handler: *mut ffi::wxEvtHandler) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().PushEventHandler(handler) }
     }
-    fn RemoveEventHandler(&self, handler: *mut ffi::wxEvtHandler) -> bool {
+    fn remove_event_handler(&self, handler: *mut ffi::wxEvtHandler) -> bool {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().RemoveEventHandler(handler) }
     }
-    fn SetEventHandler(&self, handler: *mut ffi::wxEvtHandler) {
+    fn set_event_handler(&self, handler: *mut ffi::wxEvtHandler) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().SetEventHandler(handler) }
     }
-    fn SetNextHandler(&self, handler: *mut ffi::wxEvtHandler) {
+    fn set_next_handler(&self, handler: *mut ffi::wxEvtHandler) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().SetNextHandler(handler) }
     }
-    fn SetPreviousHandler(&self, handler: *mut ffi::wxEvtHandler) {
+    fn set_previous_handler(&self, handler: *mut ffi::wxEvtHandler) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().SetPreviousHandler(handler) }
     }
     // BLOCKED: fn GetExtraStyle()
     // BLOCKED: fn GetWindowStyleFlag()
     // BLOCKED: fn GetWindowStyle()
-    fn HasExtraStyle(&self, exFlag: i32) -> bool {
+    fn has_extra_style(&self, exFlag: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().HasExtraStyle(exFlag)
     }
-    fn HasFlag(&self, flag: i32) -> bool {
+    fn has_flag(&self, flag: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().HasFlag(flag)
     }
     // BLOCKED: fn SetExtraStyle()
     // BLOCKED: fn SetWindowStyleFlag()
     // BLOCKED: fn SetWindowStyle()
-    fn ToggleWindowStyle(&self, flag: i32) -> bool {
+    fn toggle_window_style(&self, flag: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().ToggleWindowStyle(flag)
     }
-    fn MoveAfterInTabOrder(&self, win: *mut ffi::wxWindow) {
+    fn move_after_in_tab_order(&self, win: *mut ffi::wxWindow) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().MoveAfterInTabOrder(win) }
     }
-    fn MoveBeforeInTabOrder(&self, win: *mut ffi::wxWindow) {
+    fn move_before_in_tab_order(&self, win: *mut ffi::wxWindow) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().MoveBeforeInTabOrder(win) }
     }
-    fn Navigate(&self, flags: i32) -> bool {
+    fn navigate(&self, flags: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().Navigate(flags)
     }
-    fn NavigateIn(&self, flags: i32) -> bool {
+    fn navigate_in(&self, flags: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().NavigateIn(flags)
     }
-    fn Lower(&self) {
+    fn lower(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().Lower()
     }
-    fn Raise(&self) {
+    fn raise(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().Raise()
     }
-    fn Hide(&self) -> bool {
+    fn hide(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().Hide()
     }
     // CXX_UNSUPPORTED: fn HideWithEffect()
-    fn IsEnabled(&self) -> bool {
+    fn is_enabled(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().IsEnabled()
     }
     // BLOCKED: fn IsExposed()
     // BLOCKED: fn IsExposed()
     // BLOCKED: fn IsExposed()
     // BLOCKED: fn IsExposed()
-    fn IsShown(&self) -> bool {
+    fn is_shown(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().IsShown()
     }
-    fn IsShownOnScreen(&self) -> bool {
+    fn is_shown_on_screen(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().IsShownOnScreen()
     }
-    fn Disable(&self) -> bool {
+    fn disable(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().Disable()
     }
-    fn Enable(&self, enable: bool) -> bool {
+    fn enable(&self, enable: bool) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().Enable(enable)
     }
-    fn Show(&self, show: bool) -> bool {
+    fn show(&self, show: bool) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().Show(show)
     }
     // CXX_UNSUPPORTED: fn ShowWithEffect()
     // CXX_UNSUPPORTED: fn GetHelpText()
-    fn SetHelpText(&self, helpText: &ffi::wxString) {
+    fn set_help_text(&self, helpText: &ffi::wxString) {
         self.pinned::<ffi::wxWindow>().as_mut().SetHelpText(helpText)
     }
     // CXX_UNSUPPORTED: fn GetHelpTextAtPoint()
-    fn GetToolTip(&self) -> *mut ffi::wxToolTip {
+    fn get_tool_tip(&self) -> *mut ffi::wxToolTip {
         self.pinned::<ffi::wxWindow>().as_mut().GetToolTip()
     }
     // CXX_UNSUPPORTED: fn GetToolTipText()
-    fn SetToolTip(&self, tipString: &ffi::wxString) {
+    fn set_tool_tip(&self, tipString: &ffi::wxString) {
         self.pinned::<ffi::wxWindow>().as_mut().SetToolTip(tipString)
     }
-    fn SetToolTip1(&self, tip: *mut ffi::wxToolTip) {
+    fn set_tool_tip1(&self, tip: *mut ffi::wxToolTip) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().SetToolTip1(tip) }
     }
-    fn UnsetToolTip(&self) {
+    fn unset_tool_tip(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().UnsetToolTip()
     }
-    fn GetPopupMenuSelectionFromUser(&self, menu: Pin<&mut ffi::wxMenu>, pos: &ffi::wxPoint) -> i32 {
+    fn get_popup_menu_selection_from_user(&self, menu: Pin<&mut ffi::wxMenu>, pos: &ffi::wxPoint) -> i32 {
         self.pinned::<ffi::wxWindow>().as_mut().GetPopupMenuSelectionFromUser(menu, pos)
     }
-    fn GetPopupMenuSelectionFromUser1(&self, menu: Pin<&mut ffi::wxMenu>, x: i32, y: i32) -> i32 {
+    fn get_popup_menu_selection_from_user1(&self, menu: Pin<&mut ffi::wxMenu>, x: i32, y: i32) -> i32 {
         self.pinned::<ffi::wxWindow>().as_mut().GetPopupMenuSelectionFromUser1(menu, x, y)
     }
-    fn PopupMenu(&self, menu: *mut ffi::wxMenu, pos: &ffi::wxPoint) -> bool {
+    fn popup_menu(&self, menu: *mut ffi::wxMenu, pos: &ffi::wxPoint) -> bool {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().PopupMenu(menu, pos) }
     }
-    fn PopupMenu1(&self, menu: *mut ffi::wxMenu, x: i32, y: i32) -> bool {
+    fn popup_menu1(&self, menu: *mut ffi::wxMenu, x: i32, y: i32) -> bool {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().PopupMenu1(menu, x, y) }
     }
-    fn GetValidator(&self) -> *mut ffi::wxValidator {
+    fn get_validator(&self) -> *mut ffi::wxValidator {
         self.pinned::<ffi::wxWindow>().as_mut().GetValidator()
     }
-    fn SetValidator(&self, validator: &ffi::wxValidator) {
+    fn set_validator(&self, validator: &ffi::wxValidator) {
         self.pinned::<ffi::wxWindow>().as_mut().SetValidator(validator)
     }
-    fn TransferDataFromWindow(&self) -> bool {
+    fn transfer_data_from_window(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().TransferDataFromWindow()
     }
-    fn TransferDataToWindow(&self) -> bool {
+    fn transfer_data_to_window(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().TransferDataToWindow()
     }
-    fn Validate(&self) -> bool {
+    fn validate(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().Validate()
     }
-    fn GetId(&self) -> i32 {
+    fn get_id(&self) -> i32 {
         self.pinned::<ffi::wxWindow>().as_mut().GetId()
     }
     // CXX_UNSUPPORTED: fn GetLabel()
     // CXX_UNSUPPORTED: fn GetLayoutDirection()
-    fn AdjustForLayoutDirection(&self, x: i32, width: i32, widthTotal: i32) -> i32 {
+    fn adjust_for_layout_direction(&self, x: i32, width: i32, widthTotal: i32) -> i32 {
         self.pinned::<ffi::wxWindow>().as_mut().AdjustForLayoutDirection(x, width, widthTotal)
     }
     // CXX_UNSUPPORTED: fn GetName()
     // CXX_UNSUPPORTED: fn GetWindowVariant()
-    fn SetId(&self, winid: i32) {
+    fn set_id(&self, winid: i32) {
         self.pinned::<ffi::wxWindow>().as_mut().SetId(winid)
     }
-    fn SetLabel(&self, label: &ffi::wxString) {
+    fn set_label(&self, label: &ffi::wxString) {
         self.pinned::<ffi::wxWindow>().as_mut().SetLabel(label)
     }
     // CXX_UNSUPPORTED: fn SetLayoutDirection()
-    fn SetName(&self, name: &ffi::wxString) {
+    fn set_name(&self, name: &ffi::wxString) {
         self.pinned::<ffi::wxWindow>().as_mut().SetName(name)
     }
     // CXX_UNSUPPORTED: fn SetWindowVariant()
-    fn GetAcceleratorTable(&self) -> *mut ffi::wxAcceleratorTable {
+    fn get_accelerator_table(&self) -> *mut ffi::wxAcceleratorTable {
         self.pinned::<ffi::wxWindow>().as_mut().GetAcceleratorTable()
     }
     // CXX_UNSUPPORTED: fn GetAccessible()
-    fn SetAcceleratorTable(&self, accel: &ffi::wxAcceleratorTable) {
+    fn set_accelerator_table(&self, accel: &ffi::wxAcceleratorTable) {
         self.pinned::<ffi::wxWindow>().as_mut().SetAcceleratorTable(accel)
     }
     // CXX_UNSUPPORTED: fn SetAccessible()
-    fn Close(&self, force: bool) -> bool {
+    fn close(&self, force: bool) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().Close(force)
     }
-    fn Destroy(&self) -> bool {
+    fn destroy(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().Destroy()
     }
-    fn IsBeingDeleted(&self) -> bool {
+    fn is_being_deleted(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().IsBeingDeleted()
     }
-    fn GetDropTarget(&self) -> *mut ffi::wxDropTarget {
+    fn get_drop_target(&self) -> *mut ffi::wxDropTarget {
         self.pinned::<ffi::wxWindow>().as_mut().GetDropTarget()
     }
-    fn SetDropTarget(&self, target: *mut ffi::wxDropTarget) {
+    fn set_drop_target(&self, target: *mut ffi::wxDropTarget) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().SetDropTarget(target) }
     }
-    fn DragAcceptFiles(&self, accept: bool) {
+    fn drag_accept_files(&self, accept: bool) {
         self.pinned::<ffi::wxWindow>().as_mut().DragAcceptFiles(accept)
     }
-    fn GetContainingSizer(&self) -> *mut ffi::wxSizer {
+    fn get_containing_sizer(&self) -> *mut ffi::wxSizer {
         self.pinned::<ffi::wxWindow>().as_mut().GetContainingSizer()
     }
-    fn GetSizer(&self) -> *mut ffi::wxSizer {
+    fn get_sizer(&self) -> *mut ffi::wxSizer {
         self.pinned::<ffi::wxWindow>().as_mut().GetSizer()
     }
-    fn SetSizer(&self, sizer: *mut ffi::wxSizer, deleteOld: bool) {
+    fn set_sizer(&self, sizer: *mut ffi::wxSizer, deleteOld: bool) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().SetSizer(sizer, deleteOld) }
     }
-    fn SetSizerAndFit(&self, sizer: *mut ffi::wxSizer, deleteOld: bool) {
+    fn set_sizer_and_fit(&self, sizer: *mut ffi::wxSizer, deleteOld: bool) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().SetSizerAndFit(sizer, deleteOld) }
     }
-    fn GetConstraints(&self) -> *mut ffi::wxLayoutConstraints {
+    fn get_constraints(&self) -> *mut ffi::wxLayoutConstraints {
         self.pinned::<ffi::wxWindow>().as_mut().GetConstraints()
     }
-    fn SetConstraints(&self, constraints: *mut ffi::wxLayoutConstraints) {
+    fn set_constraints(&self, constraints: *mut ffi::wxLayoutConstraints) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().SetConstraints(constraints) }
     }
-    fn Layout(&self) -> bool {
+    fn layout(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().Layout()
     }
-    fn SetAutoLayout(&self, autoLayout: bool) {
+    fn set_auto_layout(&self, autoLayout: bool) {
         self.pinned::<ffi::wxWindow>().as_mut().SetAutoLayout(autoLayout)
     }
-    fn GetAutoLayout(&self) -> bool {
+    fn get_auto_layout(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().GetAutoLayout()
     }
-    fn CaptureMouse(&self) {
+    fn capture_mouse(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().CaptureMouse()
     }
-    fn GetCaret(&self) -> *mut ffi::wxCaret {
+    fn get_caret(&self) -> *mut ffi::wxCaret {
         self.pinned::<ffi::wxWindow>().as_mut().GetCaret()
     }
     // BLOCKED: fn GetCursor()
-    fn HasCapture(&self) -> bool {
+    fn has_capture(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().HasCapture()
     }
-    fn ReleaseMouse(&self) {
+    fn release_mouse(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().ReleaseMouse()
     }
-    fn SetCaret(&self, caret: *mut ffi::wxCaret) {
+    fn set_caret(&self, caret: *mut ffi::wxCaret) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().SetCaret(caret) }
     }
-    fn SetCursor(&self, cursor: &ffi::wxCursor) -> bool {
+    fn set_cursor(&self, cursor: &ffi::wxCursor) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().SetCursor(cursor)
     }
-    fn WarpPointer(&self, x: i32, y: i32) {
+    fn warp_pointer(&self, x: i32, y: i32) {
         self.pinned::<ffi::wxWindow>().as_mut().WarpPointer(x, y)
     }
-    fn EnableTouchEvents(&self, eventsMask: i32) -> bool {
+    fn enable_touch_events(&self, eventsMask: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().EnableTouchEvents(eventsMask)
     }
     // CXX_UNSUPPORTED: fn HitTest()
     // CXX_UNSUPPORTED: fn HitTest()
     // CXX_UNSUPPORTED: fn GetBorder()
     // CXX_UNSUPPORTED: fn GetBorder()
-    fn DoUpdateWindowUI(&self, event: Pin<&mut ffi::wxUpdateUIEvent>) {
+    fn do_update_window_ui(&self, event: Pin<&mut ffi::wxUpdateUIEvent>) {
         self.pinned::<ffi::wxWindow>().as_mut().DoUpdateWindowUI(event)
     }
     // CXX_UNSUPPORTED: fn GetHandle()
-    fn HasMultiplePages(&self) -> bool {
+    fn has_multiple_pages(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().HasMultiplePages()
     }
-    fn InheritAttributes(&self) {
+    fn inherit_attributes(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().InheritAttributes()
     }
-    fn InitDialog(&self) {
+    fn init_dialog(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().InitDialog()
     }
-    fn IsDoubleBuffered(&self) -> bool {
+    fn is_double_buffered(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().IsDoubleBuffered()
     }
-    fn SetDoubleBuffered(&self, on: bool) {
+    fn set_double_buffered(&self, on: bool) {
         self.pinned::<ffi::wxWindow>().as_mut().SetDoubleBuffered(on)
     }
-    fn IsRetained(&self) -> bool {
+    fn is_retained(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().IsRetained()
     }
-    fn IsThisEnabled(&self) -> bool {
+    fn is_this_enabled(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().IsThisEnabled()
     }
-    fn IsTopLevel(&self) -> bool {
+    fn is_top_level(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().IsTopLevel()
     }
-    fn OnInternalIdle(&self) {
+    fn on_internal_idle(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().OnInternalIdle()
     }
-    fn SendIdleEvents(&self, event: Pin<&mut ffi::wxIdleEvent>) -> bool {
+    fn send_idle_events(&self, event: Pin<&mut ffi::wxIdleEvent>) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().SendIdleEvents(event)
     }
-    fn RegisterHotKey(&self, hotkeyId: i32, modifiers: i32, virtualKeyCode: i32) -> bool {
+    fn register_hot_key(&self, hotkeyId: i32, modifiers: i32, virtualKeyCode: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().RegisterHotKey(hotkeyId, modifiers, virtualKeyCode)
     }
-    fn UnregisterHotKey(&self, hotkeyId: i32) -> bool {
+    fn unregister_hot_key(&self, hotkeyId: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().UnregisterHotKey(hotkeyId)
     }
     // BLOCKED: fn UpdateWindowUI()
@@ -1310,7 +1310,7 @@ impl Control {
 }
 trait ControlMethods: WxRustMethods {
     // BLOCKED: fn Create()
-    fn Command(&self, event: Pin<&mut ffi::wxCommandEvent>) {
+    fn command(&self, event: Pin<&mut ffi::wxCommandEvent>) {
         self.pinned::<ffi::wxControl>().as_mut().Command(event)
     }
     // CXX_UNSUPPORTED: fn GetLabel()
@@ -1318,13 +1318,13 @@ trait ControlMethods: WxRustMethods {
     // CXX_UNSUPPORTED: fn GetSizeFromTextSize()
     // CXX_UNSUPPORTED: fn GetSizeFromTextSize()
     // CXX_UNSUPPORTED: fn GetSizeFromText()
-    fn SetLabel(&self, label: &ffi::wxString) {
+    fn set_label(&self, label: &ffi::wxString) {
         self.pinned::<ffi::wxControl>().as_mut().SetLabel(label)
     }
-    fn SetLabelText(&self, text: &ffi::wxString) {
+    fn set_label_text(&self, text: &ffi::wxString) {
         self.pinned::<ffi::wxControl>().as_mut().SetLabelText(text)
     }
-    fn SetLabelMarkup(&self, markup: &ffi::wxString) -> bool {
+    fn set_label_markup(&self, markup: &ffi::wxString) -> bool {
         self.pinned::<ffi::wxControl>().as_mut().SetLabelMarkup(markup)
     }
     // CXX_UNSUPPORTED: fn GetLabelText()
@@ -1351,26 +1351,26 @@ trait AnyButtonMethods: WxRustMethods {
     // CXX_UNSUPPORTED: fn GetBitmapLabel()
     // CXX_UNSUPPORTED: fn GetBitmapPressed()
     // CXX_UNSUPPORTED: fn SetBitmap()
-    fn SetBitmapCurrent(&self, bitmap: &ffi::wxBitmap) {
+    fn set_bitmap_current(&self, bitmap: &ffi::wxBitmap) {
         self.pinned::<ffi::wxAnyButton>().as_mut().SetBitmapCurrent(bitmap)
     }
-    fn SetBitmapDisabled(&self, bitmap: &ffi::wxBitmap) {
+    fn set_bitmap_disabled(&self, bitmap: &ffi::wxBitmap) {
         self.pinned::<ffi::wxAnyButton>().as_mut().SetBitmapDisabled(bitmap)
     }
-    fn SetBitmapFocus(&self, bitmap: &ffi::wxBitmap) {
+    fn set_bitmap_focus(&self, bitmap: &ffi::wxBitmap) {
         self.pinned::<ffi::wxAnyButton>().as_mut().SetBitmapFocus(bitmap)
     }
-    fn SetBitmapLabel(&self, bitmap: &ffi::wxBitmap) {
+    fn set_bitmap_label(&self, bitmap: &ffi::wxBitmap) {
         self.pinned::<ffi::wxAnyButton>().as_mut().SetBitmapLabel(bitmap)
     }
-    fn SetBitmapPressed(&self, bitmap: &ffi::wxBitmap) {
+    fn set_bitmap_pressed(&self, bitmap: &ffi::wxBitmap) {
         self.pinned::<ffi::wxAnyButton>().as_mut().SetBitmapPressed(bitmap)
     }
     // CXX_UNSUPPORTED: fn GetBitmapMargins()
-    fn SetBitmapMargins(&self, x: i32, y: i32) {
+    fn set_bitmap_margins(&self, x: i32, y: i32) {
         self.pinned::<ffi::wxAnyButton>().as_mut().SetBitmapMargins(x, y)
     }
-    fn SetBitmapMargins1(&self, sz: &ffi::wxSize) {
+    fn set_bitmap_margins1(&self, sz: &ffi::wxSize) {
         self.pinned::<ffi::wxAnyButton>().as_mut().SetBitmapMargins1(sz)
     }
     // CXX_UNSUPPORTED: fn SetBitmapPosition()
@@ -1390,17 +1390,17 @@ impl Button {
 }
 trait ButtonMethods: WxRustMethods {
     // BLOCKED: fn Create()
-    fn GetAuthNeeded(&self) -> bool {
+    fn get_auth_needed(&self) -> bool {
         self.pinned::<ffi::wxButton>().as_mut().GetAuthNeeded()
     }
     // CXX_UNSUPPORTED: fn GetLabel()
-    fn SetAuthNeeded(&self, needed: bool) {
+    fn set_auth_needed(&self, needed: bool) {
         self.pinned::<ffi::wxButton>().as_mut().SetAuthNeeded(needed)
     }
-    fn SetDefault(&self) -> *mut ffi::wxWindow {
+    fn set_default(&self) -> *mut ffi::wxWindow {
         self.pinned::<ffi::wxButton>().as_mut().SetDefault()
     }
-    fn SetLabel(&self, label: &ffi::wxString) {
+    fn set_label(&self, label: &ffi::wxString) {
         self.pinned::<ffi::wxButton>().as_mut().SetLabel(label)
     }
     // CXX_UNSUPPORTED: fn GetDefaultSize()
