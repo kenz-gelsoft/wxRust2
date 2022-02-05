@@ -15,6 +15,61 @@ CXX2RUST = {
     'wxWindowID': 'i32',
 }
 
+class RustClassBinding:
+    def __init__(self, model):
+        self.__model = model
+
+    def ffi_methods(self):
+        template = '''\
+
+        // CLASS: %s
+        type %s;'''
+        yield template % (
+            self.__model.name,
+            self.__model.name
+        )
+        indent = ' ' * 4 * 2
+        for method in self.__model.methods:
+            for line in method.in_rust():
+                yield '%s%s' % (indent, line)
+
+    def ffi_ctors(self):
+        indent = ' ' * 4 * 2
+        for ctor in self.__model.ctors():
+            for line in ctor.ffi_lines():
+                yield '%s%s' % (indent, line)
+
+    def safer_binding(self):
+        rs_template = '''\
+// %s
+wx_class! { %s(%s) impl
+    %sMethods
+}'''
+        yield rs_template % (
+            self.__model.name,
+            self.__model.unprefixed(),
+            self.__model.name,
+            self.__model.unprefixed(),
+        )
+        for chunk in self._ctors_for_rs():
+            yield chunk
+        for chunk in self._methods_for_rs():
+            yield chunk
+
+    def _ctors_for_rs(self):
+        yield 'impl %s {' % (self.__model.unprefixed(),)
+        for ctor in self.__model.ctors():
+            yield ctor.for_rs()
+        yield '}'
+
+    def _methods_for_rs(self):
+        yield 'trait %sMethods: WxRustMethods {' % (self.__model.unprefixed(),)
+        for method in self.__model.methods:
+            if method.is_ctor:
+                continue
+            yield method.for_rs()
+        yield '}\n'
+    
 class Class:
     def in_xml(xmlfile, blocklist):
         tree = ET.parse(xmlfile)
@@ -32,73 +87,22 @@ class Class:
                 continue
             self.methods.append(m)
 
-    def ffi_methods(self):
-        template = '''\
-
-        // CLASS: %s
-        type %s;'''
-        yield template % (
-            self.name,
-            self.name
-        )
-        indent = ' ' * 4 * 2
-        for method in self.methods:
-            for line in method.in_rust():
-                yield '%s%s' % (indent, line)
-
-    def ffi_ctors(self):
-        indent = ' ' * 4 * 2
-        for ctor in self._ctors():
-            for line in ctor.ffi_lines():
-                yield '%s%s' % (indent, line)
-
-    def safer_binding(self):
-        rs_template = '''\
-// %s
-wx_class! { %s(%s) impl
-    %sMethods
-}'''
-        yield rs_template % (
-            self.name,
-            self.unprefixed(),
-            self.name,
-            self.unprefixed(),
-        )
-        for chunk in self._ctors_for_rs():
-            yield chunk
-        for chunk in self._methods_for_rs():
-            yield chunk
-    
     def unprefixed(self):
         return self.name[2:]
 
-    def _ctors_for_rs(self):
-        yield 'impl %s {' % (self.unprefixed(),)
-        for ctor in self._ctors():
-            yield ctor.for_rs()
-        yield '}'
-
-    def _methods_for_rs(self):
-        yield 'trait %sMethods: WxRustMethods {' % (self.unprefixed(),)
-        for method in self.methods:
-            if method.is_ctor:
-                continue
-            yield method.for_rs()
-        yield '}\n'
-
     def ctors_for_h(self):
         yield '// CLASS: %s' % (self.name,)
-        for ctor in self._ctors():
+        for ctor in self.ctors():
             yield ctor.for_h()
         yield ''
     
     def ctors_for_cc(self):
         yield '// CLASS: %s' % (self.name,)
-        for ctor in self._ctors():
+        for ctor in self.ctors():
             yield ctor.for_cc()
         yield ''
 
-    def _ctors(self):
+    def ctors(self):
         for method in self.methods:
             if method.is_ctor:
                 yield method

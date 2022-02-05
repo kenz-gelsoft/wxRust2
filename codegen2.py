@@ -1,4 +1,4 @@
-from doxybindgen import Class
+from doxybindgen import Class, RustClassBinding
 
 types = [
     'wxPoint',
@@ -137,6 +137,7 @@ mod ffi {
         include!("wx/include/wxrust.h");
         include!("wx/include/wxrust2.h");
 '''
+    classes = [RustClassBinding(cls) for cls in classes]
     indent = ' ' * 4 * 2
     for t in types:
         yield '%stype %s;' % (indent,t)
