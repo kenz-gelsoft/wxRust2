@@ -138,17 +138,17 @@ mod ffi {
         include!("wx/include/wxrust.h");
         include!("wx/include/wxrust2.h");
 '''
-    classes = [RustClassBinding(cls) for cls in classes]
+    bindings = [RustClassBinding(cls) for cls in classes]
     indent = ' ' * 4 * 2
     for t in types:
         yield '%stype %s;' % (indent,t)
-    for cls in classes:
+    for cls in bindings:
         for chunk in cls.cxx_auto_bound_methods():
             yield chunk
     yield '''\
     }
     unsafe extern "C++" {'''
-    for cls in classes:
+    for cls in bindings:
         for chunk in cls.generated_methods():
             yield chunk
     yield '''\
@@ -162,8 +162,8 @@ pub trait WxRustMethods {
     }
 }
 '''
-    for cls in classes:
-        for chunk in cls.safer_binding():
+    for cls in bindings:
+        for chunk in cls.safer_binding(classes):
             yield chunk
 
 def wxrust2_h(classes):

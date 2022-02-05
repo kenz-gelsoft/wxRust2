@@ -33,22 +33,41 @@ class RustClassBinding:
             for line in ctor.ffi_lines():
                 yield '%s%s' % (indent, line)
 
-    def safer_binding(self):
-        rs_template = '''\
-// %s
-wx_class! { %s(%s) impl
-    %sMethods
-}'''
-        yield rs_template % (
-            self.__model.name,
-            self.__model.unprefixed(),
-            self.__model.name,
-            self.__model.unprefixed(),
+    def safer_binding(self, classes):
+        yield '// %s' % (
+            self.__model.name,            
         )
+        yield 'wx_class! { %s(%s) impl' % (
+            self.__model.unprefixed(),
+            self.__model.name,
+        )
+        yield ',\n'.join(self._ancestor_methods(classes))
+        yield '}'
         for line in self._generate_impl_with_ctors():
             yield line
         for line in self._generate_trait_with_methods():
             yield line
+    
+    def _ancestor_methods(self, classes):
+        for ancestor in self._find_ancestors(classes):
+            yield '    %sMethods' % (
+                ancestor[2:],
+            )
+
+    def _find_ancestors(self, classes):
+        current = self.__model
+        base_classes = []
+        while current:
+            base_classes.append(current.name)
+            current = self._class_by_name(current.base, classes)
+        return base_classes
+
+    def _class_by_name(self, name, classes):
+        print(name)
+        for cls in classes:
+            if cls.name == name:
+                return cls
+        return None
 
     def _generate_impl_with_ctors(self):
         indent = ' ' * 4 * 1
@@ -63,7 +82,13 @@ wx_class! { %s(%s) impl
     
     def _generate_trait_with_methods(self):
         indent = ' ' * 4 * 1
-        yield 'trait %sMethods: WxRustMethods {' % (self.__model.unprefixed(),)
+        base = self.__model.base
+        if not base:
+            base = '__WxRust'
+        yield 'trait %sMethods: %sMethods {' % (
+            self.__model.unprefixed(),
+            base[2:],
+        )
         for method in self.__methods:
             if method.is_ctor:
                 continue
@@ -190,7 +215,7 @@ class RustMethodBinding:
         if words:
             snake_cased = '_'.join(w.lower() for w in self._concat_caps(words))
             return snake_cased
-        return method_name
+        return pascal_case
 
     def _concat_caps(self, words):
         buf = ''

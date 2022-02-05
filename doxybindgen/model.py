@@ -24,6 +24,7 @@ class Class:
 
     def __init__(self, e, blocklist):
         self.name = e.findtext('compoundname')
+        self.base = e.findtext('basecompoundref')
         self.methods = []
         self.__blocklist = blocklist.get(self.name)
         for method in e.findall(".//memberdef[@kind='function']"):

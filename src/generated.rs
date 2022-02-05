@@ -528,14 +528,15 @@ trait ObjectMethods: WxRustMethods {
 
 // wxEvtHandler
 wx_class! { EvtHandler(wxEvtHandler) impl
-    EvtHandlerMethods
+    EvtHandlerMethods,
+    ObjectMethods
 }
 impl EvtHandler {
     pub fn new() -> EvtHandler {
         EvtHandler(ffi::NewEvtHandler())
     }
 }
-trait EvtHandlerMethods: WxRustMethods {
+trait EvtHandlerMethods: ObjectMethods {
     fn queue_event(&self, event: *mut ffi::wxEvent) {
         unsafe { self.pinned::<ffi::wxEvtHandler>().as_mut().QueueEvent(event) }
     }
@@ -608,7 +609,9 @@ trait EvtHandlerMethods: WxRustMethods {
 
 // wxWindow
 wx_class! { Window(wxWindow) impl
-    WindowMethods
+    WindowMethods,
+    EvtHandlerMethods,
+    ObjectMethods
 }
 impl Window {
     pub fn new() -> Window {
@@ -618,7 +621,7 @@ impl Window {
         unsafe { Window(ffi::NewWindow1(parent, id, pos, size, style, name)) }
     }
 }
-trait WindowMethods: WxRustMethods {
+trait WindowMethods: EvtHandlerMethods {
     fn accepts_focus(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().AcceptsFocus()
     }
@@ -1298,7 +1301,10 @@ trait WindowMethods: WxRustMethods {
 
 // wxControl
 wx_class! { Control(wxControl) impl
-    ControlMethods
+    ControlMethods,
+    WindowMethods,
+    EvtHandlerMethods,
+    ObjectMethods
 }
 impl Control {
     pub fn new(parent: *mut ffi::wxWindow, id: i32, pos: &ffi::wxPoint, size: &ffi::wxSize, style: i32, validator: &ffi::wxValidator, name: &ffi::wxString) -> Control {
@@ -1308,7 +1314,7 @@ impl Control {
         Control(ffi::NewControl1())
     }
 }
-trait ControlMethods: WxRustMethods {
+trait ControlMethods: WindowMethods {
     // BLOCKED: fn Create()
     fn command(&self, event: Pin<&mut ffi::wxCommandEvent>) {
         self.pinned::<ffi::wxControl>().as_mut().Command(event)
@@ -1335,14 +1341,18 @@ trait ControlMethods: WxRustMethods {
 
 // wxAnyButton
 wx_class! { AnyButton(wxAnyButton) impl
-    AnyButtonMethods
+    AnyButtonMethods,
+    ControlMethods,
+    WindowMethods,
+    EvtHandlerMethods,
+    ObjectMethods
 }
 impl AnyButton {
     pub fn new() -> AnyButton {
         AnyButton(ffi::NewAnyButton())
     }
 }
-trait AnyButtonMethods: WxRustMethods {
+trait AnyButtonMethods: ControlMethods {
     // DTOR: fn ~wxAnyButton()
     // CXX_UNSUPPORTED: fn GetBitmap()
     // CXX_UNSUPPORTED: fn GetBitmapCurrent()
@@ -1378,7 +1388,12 @@ trait AnyButtonMethods: WxRustMethods {
 
 // wxButton
 wx_class! { Button(wxButton) impl
-    ButtonMethods
+    ButtonMethods,
+    AnyButtonMethods,
+    ControlMethods,
+    WindowMethods,
+    EvtHandlerMethods,
+    ObjectMethods
 }
 impl Button {
     pub fn new() -> Button {
@@ -1388,7 +1403,7 @@ impl Button {
         unsafe { Button(ffi::NewButton1(parent, id, label, pos, size, style, validator, name)) }
     }
 }
-trait ButtonMethods: WxRustMethods {
+trait ButtonMethods: AnyButtonMethods {
     // BLOCKED: fn Create()
     fn get_auth_needed(&self) -> bool {
         self.pinned::<ffi::wxButton>().as_mut().GetAuthNeeded()
