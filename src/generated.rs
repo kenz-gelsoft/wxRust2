@@ -789,7 +789,7 @@ trait WindowMethods: WxRustMethods {
     fn get_content_scale_factor(&self) -> f64 {
         self.pinned::<ffi::wxWindow>().as_mut().GetContentScaleFactor()
     }
-    fn get_dpi_scale_dpi_factor_dpi(&self) -> f64 {
+    fn get_dpi_scale_factor(&self) -> f64 {
         self.pinned::<ffi::wxWindow>().as_mut().GetDPIScaleFactor()
     }
     // CXX_UNSUPPORTED: fn GetWindowBorderSize()

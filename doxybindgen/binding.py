@@ -200,6 +200,7 @@ class RustMethodBinding:
                 continue
             if buf:
                 yield buf
+                buf = ''
             yield word
         if buf:
             yield buf
