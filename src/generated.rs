@@ -46,6 +46,12 @@ mod ffi {
         type wxEventFilter;
         type wxClassInfo;
         type wxObjectRefData;
+        type wxMenuBar;
+        type wxToolBar;
+        type wxStatusBar;
+        type wxIconBundle;
+        type wxIcon;
+        type wxGraphicsPath;
 
         // CLASS: wxObject
         type wxObject;
@@ -458,6 +464,93 @@ mod ffi {
         fn SetDefault(self: Pin<&mut wxButton>) -> *mut wxWindow;
         fn SetLabel(self: Pin<&mut wxButton>, label: &wxString);
         // CXX_UNSUPPORTED: unsafe fn GetDefaultSize(win: *mut wxWindow) -> wxSize;
+
+        // CLASS: wxNonOwnedWindow
+        type wxNonOwnedWindow;
+        fn SetShape(self: Pin<&mut wxNonOwnedWindow>, region: &wxRegion) -> bool;
+        #[rust_name = "SetShape1"]
+        fn SetShape(self: Pin<&mut wxNonOwnedWindow>, path: &wxGraphicsPath) -> bool;
+
+        // CLASS: wxTopLevelWindow
+        type wxTopLevelWindow;
+        // CTOR: fn wxTopLevelWindow() -> TopLevelWindow;
+        // CTOR: unsafe fn wxTopLevelWindow(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> TopLevelWindow;
+        // DTOR: fn ~wxTopLevelWindow(self: Pin<&mut wxTopLevelWindow>);
+        // BLOCKED: unsafe fn Create(self: Pin<&mut wxTopLevelWindow>, parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
+        fn CanSetTransparent(self: Pin<&mut wxTopLevelWindow>) -> bool;
+        fn CenterOnScreen(self: Pin<&mut wxTopLevelWindow>, direction: i32);
+        fn CentreOnScreen(self: Pin<&mut wxTopLevelWindow>, direction: i32);
+        fn EnableCloseButton(self: Pin<&mut wxTopLevelWindow>, enable: bool) -> bool;
+        fn EnableMaximizeButton(self: Pin<&mut wxTopLevelWindow>, enable: bool) -> bool;
+        fn EnableMinimizeButton(self: Pin<&mut wxTopLevelWindow>, enable: bool) -> bool;
+        fn GetDefaultItem(self: &wxTopLevelWindow) -> *mut wxWindow;
+        // CXX_UNSUPPORTED: fn GetIcon(self: &wxTopLevelWindow) -> wxIcon;
+        // BLOCKED: fn GetIcons(self: &wxTopLevelWindow) -> &wxIconBundle;
+        // CXX_UNSUPPORTED: fn GetTitle(self: &wxTopLevelWindow) -> wxString;
+        fn Iconize(self: Pin<&mut wxTopLevelWindow>, iconize: bool);
+        fn IsActive(self: Pin<&mut wxTopLevelWindow>) -> bool;
+        fn IsAlwaysMaximized(self: &wxTopLevelWindow) -> bool;
+        fn IsFullScreen(self: &wxTopLevelWindow) -> bool;
+        fn IsIconized(self: &wxTopLevelWindow) -> bool;
+        fn IsMaximized(self: &wxTopLevelWindow) -> bool;
+        // BLOCKED: fn IsUsingNativeDecorations(self: &wxTopLevelWindow) -> bool;
+        fn Layout(self: Pin<&mut wxTopLevelWindow>) -> bool;
+        fn Maximize(self: Pin<&mut wxTopLevelWindow>, maximize: bool);
+        // BLOCKED: fn MSWGetSystemMenu(self: &wxTopLevelWindow) -> *mut wxMenu;
+        fn RequestUserAttention(self: Pin<&mut wxTopLevelWindow>, flags: i32);
+        fn Restore(self: Pin<&mut wxTopLevelWindow>);
+        // BLOCKED: fn RestoreToGeometry(self: Pin<&mut wxTopLevelWindow>, ser: Pin<&mut GeometrySerializer>) -> bool;
+        // BLOCKED: fn SaveGeometry(self: &wxTopLevelWindow, ser: &GeometrySerializer) -> bool;
+        unsafe fn SetDefaultItem(self: Pin<&mut wxTopLevelWindow>, win: *mut wxWindow) -> *mut wxWindow;
+        unsafe fn SetTmpDefaultItem(self: Pin<&mut wxTopLevelWindow>, win: *mut wxWindow) -> *mut wxWindow;
+        fn GetTmpDefaultItem(self: &wxTopLevelWindow) -> *mut wxWindow;
+        fn SetIcon(self: Pin<&mut wxTopLevelWindow>, icon: &wxIcon);
+        fn SetIcons(self: Pin<&mut wxTopLevelWindow>, icons: &wxIconBundle);
+        fn SetMaxSize(self: Pin<&mut wxTopLevelWindow>, size: &wxSize);
+        fn SetMinSize(self: Pin<&mut wxTopLevelWindow>, size: &wxSize);
+        fn SetSizeHints(self: Pin<&mut wxTopLevelWindow>, min_w: i32, min_h: i32, max_w: i32, max_h: i32, inc_w: i32, inc_h: i32);
+        #[rust_name = "SetSizeHints1"]
+        fn SetSizeHints(self: Pin<&mut wxTopLevelWindow>, min_size: &wxSize, max_size: &wxSize, inc_size: &wxSize);
+        fn SetTitle(self: Pin<&mut wxTopLevelWindow>, title: &wxString);
+        fn SetTransparent(self: Pin<&mut wxTopLevelWindow>, alpha: u8) -> bool;
+        fn ShouldPreventAppExit(self: &wxTopLevelWindow) -> bool;
+        fn OSXSetModified(self: Pin<&mut wxTopLevelWindow>, modified: bool);
+        fn OSXIsModified(self: &wxTopLevelWindow) -> bool;
+        fn SetRepresentedFilename(self: Pin<&mut wxTopLevelWindow>, filename: &wxString);
+        fn ShowWithoutActivating(self: Pin<&mut wxTopLevelWindow>);
+        fn EnableFullScreenView(self: Pin<&mut wxTopLevelWindow>, enable: bool) -> bool;
+        // BLOCKED: fn ShowFullScreen(self: Pin<&mut wxTopLevelWindow>, show: bool, style: i32) -> bool;
+        // BLOCKED: fn UseNativeDecorations(self: Pin<&mut wxTopLevelWindow>, native: bool);
+        // BLOCKED: fn UseNativeDecorationsByDefault(self: Pin<&mut wxTopLevelWindow>, native: bool);
+        // CXX_UNSUPPORTED: fn GetDefaultSize() -> wxSize;
+
+        // CLASS: wxFrame
+        type wxFrame;
+        // CTOR: fn wxFrame() -> Frame;
+        // CTOR: unsafe fn wxFrame(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> Frame;
+        // DTOR: fn ~wxFrame(self: Pin<&mut wxFrame>);
+        fn Centre(self: Pin<&mut wxFrame>, direction: i32);
+        // BLOCKED: unsafe fn Create(self: Pin<&mut wxFrame>, parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
+        // BLOCKED: fn CreateStatusBar(self: Pin<&mut wxFrame>, number: i32, style: i32, id: i32, name: &wxString) -> *mut wxStatusBar;
+        // BLOCKED: fn CreateToolBar(self: Pin<&mut wxFrame>, style: i32, id: i32, name: &wxString) -> *mut wxToolBar;
+        fn DoGiveHelp(self: Pin<&mut wxFrame>, text: &wxString, show: bool);
+        // CXX_UNSUPPORTED: fn GetClientAreaOrigin(self: &wxFrame) -> wxPoint;
+        fn GetMenuBar(self: &wxFrame) -> *mut wxMenuBar;
+        fn GetStatusBar(self: &wxFrame) -> *mut wxStatusBar;
+        fn GetStatusBarPane(self: &wxFrame) -> i32;
+        fn GetToolBar(self: &wxFrame) -> *mut wxToolBar;
+        // BLOCKED: fn OnCreateStatusBar(self: Pin<&mut wxFrame>, number: i32, style: i32, id: i32, name: &wxString) -> *mut wxStatusBar;
+        // BLOCKED: fn OnCreateToolBar(self: Pin<&mut wxFrame>, style: i32, id: i32, name: &wxString) -> *mut wxToolBar;
+        fn ProcessCommand(self: Pin<&mut wxFrame>, id: i32) -> bool;
+        unsafe fn SetMenuBar(self: Pin<&mut wxFrame>, menu_bar: *mut wxMenuBar);
+        unsafe fn SetStatusBar(self: Pin<&mut wxFrame>, status_bar: *mut wxStatusBar);
+        fn SetStatusBarPane(self: Pin<&mut wxFrame>, n: i32);
+        fn SetStatusText(self: Pin<&mut wxFrame>, text: &wxString, number: i32);
+        unsafe fn SetStatusWidths(self: Pin<&mut wxFrame>, n: i32, widths_field: *const i32);
+        unsafe fn SetToolBar(self: Pin<&mut wxFrame>, tool_bar: *mut wxToolBar);
+        // BLOCKED: fn MSWGetTaskBarButton(self: Pin<&mut wxFrame>) -> *mut wxTaskBarButton;
+        fn PushStatusText(self: Pin<&mut wxFrame>, text: &wxString, number: i32);
+        fn PopStatusText(self: Pin<&mut wxFrame>, number: i32);
     }
     unsafe extern "C++" {
         fn NewObject() -> *mut wxObject;
@@ -474,6 +567,12 @@ mod ffi {
         fn NewButton() -> *mut wxButton;
         #[rust_name = "NewButton1"]
         unsafe fn NewButton1(parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> *mut wxButton;
+        fn NewTopLevelWindow() -> *mut wxTopLevelWindow;
+        #[rust_name = "NewTopLevelWindow1"]
+        unsafe fn NewTopLevelWindow1(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxTopLevelWindow;
+        fn NewFrame() -> *mut wxFrame;
+        #[rust_name = "NewFrame1"]
+        unsafe fn NewFrame1(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxFrame;
     }
 }
 
@@ -1419,5 +1518,230 @@ trait ButtonMethods: AnyButtonMethods {
         self.pinned::<ffi::wxButton>().as_mut().SetLabel(label)
     }
     // CXX_UNSUPPORTED: fn GetDefaultSize()
+}
+
+// wxNonOwnedWindow
+wx_class! { NonOwnedWindow(wxNonOwnedWindow) impl
+    NonOwnedWindowMethods,
+    WindowMethods,
+    EvtHandlerMethods,
+    ObjectMethods
+}
+impl NonOwnedWindow {
+}
+trait NonOwnedWindowMethods: WindowMethods {
+    fn set_shape(&self, region: &ffi::wxRegion) -> bool {
+        self.pinned::<ffi::wxNonOwnedWindow>().as_mut().SetShape(region)
+    }
+    fn set_shape1(&self, path: &ffi::wxGraphicsPath) -> bool {
+        self.pinned::<ffi::wxNonOwnedWindow>().as_mut().SetShape1(path)
+    }
+}
+
+// wxTopLevelWindow
+wx_class! { TopLevelWindow(wxTopLevelWindow) impl
+    TopLevelWindowMethods,
+    NonOwnedWindowMethods,
+    WindowMethods,
+    EvtHandlerMethods,
+    ObjectMethods
+}
+impl TopLevelWindow {
+    pub fn new() -> TopLevelWindow {
+        TopLevelWindow(ffi::NewTopLevelWindow())
+    }
+    pub fn new1(parent: *mut ffi::wxWindow, id: i32, title: &ffi::wxString, pos: &ffi::wxPoint, size: &ffi::wxSize, style: i32, name: &ffi::wxString) -> TopLevelWindow {
+        unsafe { TopLevelWindow(ffi::NewTopLevelWindow1(parent, id, title, pos, size, style, name)) }
+    }
+}
+trait TopLevelWindowMethods: NonOwnedWindowMethods {
+    // DTOR: fn ~wxTopLevelWindow()
+    // BLOCKED: fn Create()
+    fn can_set_transparent(&self) -> bool {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().CanSetTransparent()
+    }
+    fn center_on_screen(&self, direction: i32) {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().CenterOnScreen(direction)
+    }
+    fn centre_on_screen(&self, direction: i32) {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().CentreOnScreen(direction)
+    }
+    fn enable_close_button(&self, enable: bool) -> bool {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().EnableCloseButton(enable)
+    }
+    fn enable_maximize_button(&self, enable: bool) -> bool {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().EnableMaximizeButton(enable)
+    }
+    fn enable_minimize_button(&self, enable: bool) -> bool {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().EnableMinimizeButton(enable)
+    }
+    fn get_default_item(&self) -> *mut ffi::wxWindow {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().GetDefaultItem()
+    }
+    // CXX_UNSUPPORTED: fn GetIcon()
+    // BLOCKED: fn GetIcons()
+    // CXX_UNSUPPORTED: fn GetTitle()
+    fn iconize(&self, iconize: bool) {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().Iconize(iconize)
+    }
+    fn is_active(&self) -> bool {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().IsActive()
+    }
+    fn is_always_maximized(&self) -> bool {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().IsAlwaysMaximized()
+    }
+    fn is_full_screen(&self) -> bool {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().IsFullScreen()
+    }
+    fn is_iconized(&self) -> bool {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().IsIconized()
+    }
+    fn is_maximized(&self) -> bool {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().IsMaximized()
+    }
+    // BLOCKED: fn IsUsingNativeDecorations()
+    fn layout(&self) -> bool {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().Layout()
+    }
+    fn maximize(&self, maximize: bool) {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().Maximize(maximize)
+    }
+    // BLOCKED: fn MSWGetSystemMenu()
+    fn request_user_attention(&self, flags: i32) {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().RequestUserAttention(flags)
+    }
+    fn restore(&self) {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().Restore()
+    }
+    // BLOCKED: fn RestoreToGeometry()
+    // BLOCKED: fn SaveGeometry()
+    fn set_default_item(&self, win: *mut ffi::wxWindow) -> *mut ffi::wxWindow {
+        unsafe { self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetDefaultItem(win) }
+    }
+    fn set_tmp_default_item(&self, win: *mut ffi::wxWindow) -> *mut ffi::wxWindow {
+        unsafe { self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetTmpDefaultItem(win) }
+    }
+    fn get_tmp_default_item(&self) -> *mut ffi::wxWindow {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().GetTmpDefaultItem()
+    }
+    fn set_icon(&self, icon: &ffi::wxIcon) {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetIcon(icon)
+    }
+    fn set_icons(&self, icons: &ffi::wxIconBundle) {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetIcons(icons)
+    }
+    fn set_max_size(&self, size: &ffi::wxSize) {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetMaxSize(size)
+    }
+    fn set_min_size(&self, size: &ffi::wxSize) {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetMinSize(size)
+    }
+    fn set_size_hints(&self, min_w: i32, min_h: i32, max_w: i32, max_h: i32, inc_w: i32, inc_h: i32) {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetSizeHints(min_w, min_h, max_w, max_h, inc_w, inc_h)
+    }
+    fn set_size_hints1(&self, min_size: &ffi::wxSize, max_size: &ffi::wxSize, inc_size: &ffi::wxSize) {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetSizeHints1(min_size, max_size, inc_size)
+    }
+    fn set_title(&self, title: &ffi::wxString) {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetTitle(title)
+    }
+    fn set_transparent(&self, alpha: u8) -> bool {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetTransparent(alpha)
+    }
+    fn should_prevent_app_exit(&self) -> bool {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().ShouldPreventAppExit()
+    }
+    fn osx_set_modified(&self, modified: bool) {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().OSXSetModified(modified)
+    }
+    fn osx_is_modified(&self) -> bool {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().OSXIsModified()
+    }
+    fn set_represented_filename(&self, filename: &ffi::wxString) {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetRepresentedFilename(filename)
+    }
+    fn show_without_activating(&self) {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().ShowWithoutActivating()
+    }
+    fn enable_full_screen_view(&self, enable: bool) -> bool {
+        self.pinned::<ffi::wxTopLevelWindow>().as_mut().EnableFullScreenView(enable)
+    }
+    // BLOCKED: fn ShowFullScreen()
+    // BLOCKED: fn UseNativeDecorations()
+    // BLOCKED: fn UseNativeDecorationsByDefault()
+    // CXX_UNSUPPORTED: fn GetDefaultSize()
+}
+
+// wxFrame
+wx_class! { Frame(wxFrame) impl
+    FrameMethods,
+    TopLevelWindowMethods,
+    NonOwnedWindowMethods,
+    WindowMethods,
+    EvtHandlerMethods,
+    ObjectMethods
+}
+impl Frame {
+    pub fn new() -> Frame {
+        Frame(ffi::NewFrame())
+    }
+    pub fn new1(parent: *mut ffi::wxWindow, id: i32, title: &ffi::wxString, pos: &ffi::wxPoint, size: &ffi::wxSize, style: i32, name: &ffi::wxString) -> Frame {
+        unsafe { Frame(ffi::NewFrame1(parent, id, title, pos, size, style, name)) }
+    }
+}
+trait FrameMethods: TopLevelWindowMethods {
+    // DTOR: fn ~wxFrame()
+    fn centre(&self, direction: i32) {
+        self.pinned::<ffi::wxFrame>().as_mut().Centre(direction)
+    }
+    // BLOCKED: fn Create()
+    // BLOCKED: fn CreateStatusBar()
+    // BLOCKED: fn CreateToolBar()
+    fn do_give_help(&self, text: &ffi::wxString, show: bool) {
+        self.pinned::<ffi::wxFrame>().as_mut().DoGiveHelp(text, show)
+    }
+    // CXX_UNSUPPORTED: fn GetClientAreaOrigin()
+    fn get_menu_bar(&self) -> *mut ffi::wxMenuBar {
+        self.pinned::<ffi::wxFrame>().as_mut().GetMenuBar()
+    }
+    fn get_status_bar(&self) -> *mut ffi::wxStatusBar {
+        self.pinned::<ffi::wxFrame>().as_mut().GetStatusBar()
+    }
+    fn get_status_bar_pane(&self) -> i32 {
+        self.pinned::<ffi::wxFrame>().as_mut().GetStatusBarPane()
+    }
+    fn get_tool_bar(&self) -> *mut ffi::wxToolBar {
+        self.pinned::<ffi::wxFrame>().as_mut().GetToolBar()
+    }
+    // BLOCKED: fn OnCreateStatusBar()
+    // BLOCKED: fn OnCreateToolBar()
+    fn process_command(&self, id: i32) -> bool {
+        self.pinned::<ffi::wxFrame>().as_mut().ProcessCommand(id)
+    }
+    fn set_menu_bar(&self, menu_bar: *mut ffi::wxMenuBar) {
+        unsafe { self.pinned::<ffi::wxFrame>().as_mut().SetMenuBar(menu_bar) }
+    }
+    fn set_status_bar(&self, status_bar: *mut ffi::wxStatusBar) {
+        unsafe { self.pinned::<ffi::wxFrame>().as_mut().SetStatusBar(status_bar) }
+    }
+    fn set_status_bar_pane(&self, n: i32) {
+        self.pinned::<ffi::wxFrame>().as_mut().SetStatusBarPane(n)
+    }
+    fn set_status_text(&self, text: &ffi::wxString, number: i32) {
+        self.pinned::<ffi::wxFrame>().as_mut().SetStatusText(text, number)
+    }
+    fn set_status_widths(&self, n: i32, widths_field: *const i32) {
+        unsafe { self.pinned::<ffi::wxFrame>().as_mut().SetStatusWidths(n, widths_field) }
+    }
+    fn set_tool_bar(&self, tool_bar: *mut ffi::wxToolBar) {
+        unsafe { self.pinned::<ffi::wxFrame>().as_mut().SetToolBar(tool_bar) }
+    }
+    // BLOCKED: fn MSWGetTaskBarButton()
+    fn push_status_text(&self, text: &ffi::wxString, number: i32) {
+        self.pinned::<ffi::wxFrame>().as_mut().PushStatusText(text, number)
+    }
+    fn pop_status_text(&self, number: i32) {
+        self.pinned::<ffi::wxFrame>().as_mut().PopStatusText(number)
+    }
 }
 

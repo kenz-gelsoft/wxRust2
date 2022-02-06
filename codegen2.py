@@ -33,6 +33,14 @@ types = [
     'wxEventFilter',
     'wxClassInfo',
     'wxObjectRefData',
+    # 'wxTaskBarButton',
+    'wxMenuBar',
+    'wxToolBar',
+    'wxStatusBar',
+    'wxIconBundle',
+    'wxIcon',
+    # 'GeometrySerializer',
+    'wxGraphicsPath',
 ]
 
 BLOCKLIST = {
@@ -89,6 +97,32 @@ BLOCKLIST = {
         # TODO: treat long correctly
         'Create',
     ],
+    'wxTopLevelWindow': [
+        # TODO: treat long correctly
+        'Create',
+        # wxTopLevelWindowMac's methods (on Mac)
+        'ShowFullScreen',
+        # Other platform specific
+        'IsUsingNativeDecorations',
+        'MSWGetSystemMenu',
+        'UseNativeDecorations',
+        'UseNativeDecorationsByDefault',
+        # Didn't support
+        'GetIcons',
+        'SaveGeometry',
+        'RestoreToGeometry',
+    ],
+    'wxFrame': [
+        # TODO: treat long correctly
+        'Create',
+        'CreateToolBar',
+        'OnCreateStatusBar',
+        # Other platform specific
+        'MSWGetTaskBarButton',
+        # wxFrameBase's methods
+        'CreateStatusBar',
+        'OnCreateToolBar',
+    ],
 }
 
 # place wxWidgets doxygen xml files in wxml/ dir and run this.
@@ -100,6 +134,9 @@ def main():
         'wxml/classwx_control.xml',
         'wxml/classwx_any_button.xml',
         'wxml/classwx_button.xml',
+        'wxml/classwx_non_owned_window.xml',
+        'wxml/classwx_top_level_window.xml',
+        'wxml/classwx_frame.xml',
     ]
     classes = []
     for file in xmlfiles:

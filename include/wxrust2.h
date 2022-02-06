@@ -29,5 +29,15 @@ wxAnyButton *NewAnyButton();
 wxButton *NewButton();
 wxButton *NewButton1(wxWindow * parent, wxWindowID id, const wxString & label, const wxPoint & pos, const wxSize & size, int32_t style, const wxValidator & validator, const wxString & name);
 
+// CLASS: wxNonOwnedWindow
+
+// CLASS: wxTopLevelWindow
+wxTopLevelWindow *NewTopLevelWindow();
+wxTopLevelWindow *NewTopLevelWindow1(wxWindow * parent, wxWindowID id, const wxString & title, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name);
+
+// CLASS: wxFrame
+wxFrame *NewFrame();
+wxFrame *NewFrame1(wxWindow * parent, wxWindowID id, const wxString & title, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name);
+
 } // namespace wxrust
 
