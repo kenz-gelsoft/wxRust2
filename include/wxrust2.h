@@ -39,5 +39,14 @@ wxTopLevelWindow *NewTopLevelWindow1(wxWindow * parent, wxWindowID id, const wxS
 wxFrame *NewFrame();
 wxFrame *NewFrame1(wxWindow * parent, wxWindowID id, const wxString & title, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name);
 
+// CLASS: wxPoint
+wxPoint *NewPoint();
+wxPoint *NewPoint1(int x, int y);
+wxPoint *NewPoint2(const wxRealPoint & pt);
+
+// CLASS: wxSize
+wxSize *NewSize();
+wxSize *NewSize1(int width, int height);
+
 } // namespace wxrust
 

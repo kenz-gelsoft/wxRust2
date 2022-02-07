@@ -2,8 +2,6 @@ from doxybindgen.model import Class
 from doxybindgen.binding import CxxClassBinding, RustClassBinding
 
 types = [
-    'wxPoint',
-    'wxSize',
     'wxString',
     'wxValidator',
     # 'wxWindow',
@@ -41,6 +39,7 @@ types = [
     'wxIcon',
     # 'GeometrySerializer',
     'wxGraphicsPath',
+    'wxRealPoint',
 ]
 
 BLOCKLIST = {
@@ -123,6 +122,26 @@ BLOCKLIST = {
         'CreateStatusBar',
         'OnCreateToolBar',
     ],
+    'wxPoint': [
+        'operator=',
+        'operator==',
+        'operator!=',
+        'operator+=',
+        'operator-=',
+        'operator/=',
+        'operator*=',
+    ],
+    'wxSize': [
+        'operator=',
+        'operator==',
+        'operator!=',
+        'operator+=',
+        'operator-=',
+        'operator/=',
+        'operator*=',
+        # Didn't support
+        'Scale',
+    ],
 }
 
 # place wxWidgets doxygen xml files in wxml/ dir and run this.
@@ -137,6 +156,8 @@ def main():
         'wxml/classwx_non_owned_window.xml',
         'wxml/classwx_top_level_window.xml',
         'wxml/classwx_frame.xml',
+        'wxml/classwx_point.xml',
+        'wxml/classwx_size.xml',
     ]
     classes = []
     for file in xmlfiles:

@@ -65,5 +65,24 @@ wxFrame *NewFrame1(wxWindow * parent, wxWindowID id, const wxString & title, con
     return new wxFrame(parent, id, title, pos, size, style, name);
 }
 
+// CLASS: wxPoint
+wxPoint *NewPoint() {
+    return new wxPoint();
+}
+wxPoint *NewPoint1(int x, int y) {
+    return new wxPoint(x, y);
+}
+wxPoint *NewPoint2(const wxRealPoint & pt) {
+    return new wxPoint(pt);
+}
+
+// CLASS: wxSize
+wxSize *NewSize() {
+    return new wxSize();
+}
+wxSize *NewSize1(int width, int height) {
+    return new wxSize(width, height);
+}
+
 } // namespace wxrust
 
