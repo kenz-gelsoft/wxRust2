@@ -11,12 +11,12 @@ mod manual;
 
 mod generated;
 
-// any pointer type used on ffi boundary.
+// any pointer type used on ffi_manual boundary.
 // we chose this type as it's handy in cxx.
 type UnsafeAnyPtr = *const c_char;
 
 #[cxx::bridge(namespace = "wxrust")]
-mod ffi {
+mod ffi_manual {
     enum EventType {
         Button,
     }
@@ -57,10 +57,10 @@ mod ffi {
     }
 }
 
-pub use ffi::EventType;
+pub use ffi_manual::EventType;
 
 // Rust closure to wx calablle function+param pair.
-impl ffi::Closure {
+impl ffi_manual::Closure {
     fn new<F: Fn() + 'static>(closure: F) -> Self {
         unsafe fn trampoline<F: Fn() + 'static>(closure: UnsafeAnyPtr) {
             let closure = &*(closure as *const F);
@@ -86,11 +86,11 @@ pub trait WxRustMethods {
 //     EvtHandlerMethods
 // }
 // pub trait EvtHandlerMethods: WxRustMethods {
-//     fn bind<F: Fn() + 'static>(&self, event_type: ffi::EventType, closure: F) {
-//         ffi::Bind(
-//             self.pinned::<ffi::wxEvtHandler>().as_mut(),
+//     fn bind<F: Fn() + 'static>(&self, event_type: ffi_manual::EventType, closure: F) {
+//         ffi_manual::Bind(
+//             self.pinned::<ffi_manual::wxEvtHandler>().as_mut(),
 //             event_type,
-//             &ffi::Closure::new(closure),
+//             &ffi_manual::Closure::new(closure),
 //         );
 //     }
 // }
@@ -99,7 +99,7 @@ pub trait WxRustMethods {
 pub enum App {}
 impl App {
     pub fn on_init<F: Fn() + 'static>(closure: F) {
-        ffi::AppSetOnInit(&ffi::Closure::new(closure));
+        ffi_manual::AppSetOnInit(&ffi_manual::Closure::new(closure));
     }
     pub fn run<F: Fn() + 'static>(closure: F) {
         Self::on_init(closure);
@@ -114,10 +114,10 @@ impl App {
 // }
 // pub trait WindowMethods: EvtHandlerMethods {
 //     fn centre(&self) {
-//         self.pinned::<ffi::wxWindow>().as_mut().Centre(0);
+//         self.pinned::<ffi_manual::wxWindow>().as_mut().Centre(0);
 //     }
 //     fn show(&self) {
-//         self.pinned::<ffi::wxWindow>().as_mut().Show(true);
+//         self.pinned::<ffi_manual::wxWindow>().as_mut().Show(true);
 //     }
 // }
 
@@ -128,7 +128,7 @@ impl App {
 // }
 // impl Frame {
 //     pub fn new(title: &str) -> Frame {
-//         Frame(ffi::NewFrame(title))
+//         Frame(ffi_manual::NewFrame(title))
 //     }
 // }
 
@@ -140,13 +140,13 @@ impl App {
 // }
 // impl Button {
 //     pub fn new(parent: &Frame, label: &str) -> Button {
-//         Button(ffi::NewButton(parent.pinned(), label))
+//         Button(ffi_manual::NewButton(parent.pinned(), label))
 //     }
 // }
 // pub trait ButtonMethods: WindowMethods {
 //     fn set_label(&self, s: &str) {
-//         let label = ffi::NewString(s);
-//         self.pinned::<ffi::wxButton>().as_mut().SetLabel(&label);
+//         let label = ffi_manual::NewString(s);
+//         self.pinned::<ffi_manual::wxButton>().as_mut().SetLabel(&label);
 //     }
 // }
 
@@ -160,6 +160,6 @@ pub fn entry() {
     argv.push(ptr::null_mut()); // Nul terminator.
     let mut argc: i32 = args.len().try_into().unwrap();
     unsafe {
-        ffi::wxEntry(&mut argc, argv.as_mut_ptr());
+        ffi_manual::wxEntry(&mut argc, argv.as_mut_ptr());
     }
 }
