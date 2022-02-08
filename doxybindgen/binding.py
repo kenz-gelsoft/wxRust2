@@ -84,7 +84,7 @@ class RustClassBinding:
         base = self.__model.base
         if not base:
             base = '__WxRust'
-        yield 'trait %sMethods: %sMethods {' % (
+        yield 'pub trait %sMethods: %sMethods {' % (
             self.__model.unprefixed(),
             base[2:],
         )

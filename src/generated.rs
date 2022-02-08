@@ -670,7 +670,7 @@ impl Object {
         Object(ffi::NewObject1(other))
     }
 }
-trait ObjectMethods: WxRustMethods {
+pub trait ObjectMethods: WxRustMethods {
     // DTOR: fn ~wxObject()
     fn get_class_info(&self) -> *mut ffi::wxClassInfo {
         self.pinned::<ffi::wxObject>().as_mut().GetClassInfo()
@@ -710,7 +710,7 @@ impl EvtHandler {
         EvtHandler(ffi::NewEvtHandler())
     }
 }
-trait EvtHandlerMethods: ObjectMethods {
+pub trait EvtHandlerMethods: ObjectMethods {
     fn queue_event(&self, event: *mut ffi::wxEvent) {
         unsafe { self.pinned::<ffi::wxEvtHandler>().as_mut().QueueEvent(event) }
     }
@@ -795,7 +795,7 @@ impl Window {
         unsafe { Window(ffi::NewWindow1(parent, id, pos, size, style, name)) }
     }
 }
-trait WindowMethods: EvtHandlerMethods {
+pub trait WindowMethods: EvtHandlerMethods {
     fn accepts_focus(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().AcceptsFocus()
     }
@@ -1488,7 +1488,7 @@ impl Control {
         Control(ffi::NewControl1())
     }
 }
-trait ControlMethods: WindowMethods {
+pub trait ControlMethods: WindowMethods {
     // BLOCKED: fn Create()
     fn command(&self, event: Pin<&mut ffi::wxCommandEvent>) {
         self.pinned::<ffi::wxControl>().as_mut().Command(event)
@@ -1526,7 +1526,7 @@ impl AnyButton {
         AnyButton(ffi::NewAnyButton())
     }
 }
-trait AnyButtonMethods: ControlMethods {
+pub trait AnyButtonMethods: ControlMethods {
     // DTOR: fn ~wxAnyButton()
     // CXX_UNSUPPORTED: fn GetBitmap()
     // CXX_UNSUPPORTED: fn GetBitmapCurrent()
@@ -1577,7 +1577,7 @@ impl Button {
         unsafe { Button(ffi::NewButton1(parent, id, label, pos, size, style, validator, name)) }
     }
 }
-trait ButtonMethods: AnyButtonMethods {
+pub trait ButtonMethods: AnyButtonMethods {
     // BLOCKED: fn Create()
     fn get_auth_needed(&self) -> bool {
         self.pinned::<ffi::wxButton>().as_mut().GetAuthNeeded()
@@ -1604,7 +1604,7 @@ wx_class! { NonOwnedWindow(wxNonOwnedWindow) impl
 }
 impl NonOwnedWindow {
 }
-trait NonOwnedWindowMethods: WindowMethods {
+pub trait NonOwnedWindowMethods: WindowMethods {
     fn set_shape(&self, region: &ffi::wxRegion) -> bool {
         self.pinned::<ffi::wxNonOwnedWindow>().as_mut().SetShape(region)
     }
@@ -1629,7 +1629,7 @@ impl TopLevelWindow {
         unsafe { TopLevelWindow(ffi::NewTopLevelWindow1(parent, id, title, pos, size, style, name)) }
     }
 }
-trait TopLevelWindowMethods: NonOwnedWindowMethods {
+pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     // DTOR: fn ~wxTopLevelWindow()
     // BLOCKED: fn Create()
     fn can_set_transparent(&self) -> bool {
@@ -1764,7 +1764,7 @@ impl Frame {
         unsafe { Frame(ffi::NewFrame1(parent, id, title, pos, size, style, name)) }
     }
 }
-trait FrameMethods: TopLevelWindowMethods {
+pub trait FrameMethods: TopLevelWindowMethods {
     // DTOR: fn ~wxFrame()
     fn centre(&self, direction: i32) {
         self.pinned::<ffi::wxFrame>().as_mut().Centre(direction)
@@ -1835,7 +1835,7 @@ impl Point {
         Point(ffi::NewPoint2(pt))
     }
 }
-trait PointMethods: WxRustMethods {
+pub trait PointMethods: WxRustMethods {
     fn is_fully_specified(&self) -> bool {
         self.pinned::<ffi::wxPoint>().as_mut().IsFullySpecified()
     }
@@ -1874,7 +1874,7 @@ impl Size {
         Size(ffi::NewSize1(width, height))
     }
 }
-trait SizeMethods: WxRustMethods {
+pub trait SizeMethods: WxRustMethods {
     // BLOCKED: fn operator=()
     // BLOCKED: fn operator==()
     // BLOCKED: fn operator!=()
