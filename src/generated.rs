@@ -12,7 +12,7 @@ use crate::macros::wx_class;
 type UnsafeAnyPtr = *const c_char;
 
 #[cxx::bridge(namespace = "wxrust")]
-pub mod ffi {
+mod ffi {
     #[namespace = ""]
     unsafe extern "C++" {
         include!("wx/include/wxrust.h");
@@ -1760,7 +1760,9 @@ impl Frame {
     pub fn new() -> Frame {
         Frame(ffi::NewFrame())
     }
-    pub fn new1(parent: *mut ffi::wxWindow, id: i32, title: &ffi::wxString, pos: &ffi::wxPoint, size: &ffi::wxSize, style: i32, name: &ffi::wxString) -> Frame {
+    pub fn new1(parent: *mut ffi::wxWindow, id: i32, title: &ffi::wxString, pos: &Point, size: &Size, style: i32, name: &ffi::wxString) -> Frame {
+        let pos = &pos.pinned::<ffi::wxPoint>();
+        let size = &size.pinned::<ffi::wxSize>();
         unsafe { Frame(ffi::NewFrame1(parent, id, title, pos, size, style, name)) }
     }
 }

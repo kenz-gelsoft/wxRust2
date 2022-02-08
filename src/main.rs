@@ -1,6 +1,5 @@
 use std::ptr;
 use wx;
-use wx::generated::WxRustMethods;
 use wx::*;
 
 fn main() {
@@ -10,8 +9,7 @@ fn main() {
         let default_pos = Point::new1(-1, -1);
         let default_size = Size::new1(-1, -1);
         let frame = Frame::new1(ptr::null_mut(), wxID_ANY, s.as_ref().unwrap(), 
-                &default_pos.pinned::<ffi::wxPoint>(),
-                &default_size.pinned::<ffi::wxSize>(),
+                &default_pos, &default_size,
                 wxDEFAULT_FRAME_STYLE as i32, s2.as_ref().unwrap());
         frame.show(true);
         // let frame = Frame::new("Hello, 世界");
