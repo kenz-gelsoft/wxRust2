@@ -82,18 +82,18 @@ pub trait WxRustMethods {
     }
 }
 
-wx_class! { EvtHandler(wxEvtHandler) impl
-    EvtHandlerMethods
-}
-pub trait EvtHandlerMethods: WxRustMethods {
-    fn bind<F: Fn() + 'static>(&self, event_type: ffi::EventType, closure: F) {
-        ffi::Bind(
-            self.pinned::<ffi::wxEvtHandler>().as_mut(),
-            event_type,
-            &ffi::Closure::new(closure),
-        );
-    }
-}
+// wx_class! { EvtHandler(wxEvtHandler) impl
+//     EvtHandlerMethods
+// }
+// pub trait EvtHandlerMethods: WxRustMethods {
+//     fn bind<F: Fn() + 'static>(&self, event_type: ffi::EventType, closure: F) {
+//         ffi::Bind(
+//             self.pinned::<ffi::wxEvtHandler>().as_mut(),
+//             event_type,
+//             &ffi::Closure::new(closure),
+//         );
+//     }
+// }
 
 // wxApp
 pub enum App {}
@@ -107,48 +107,48 @@ impl App {
     }
 }
 
-// wxWindow
-wx_class! { Window(wxWindow) impl
-    WindowMethods,
-    EvtHandlerMethods
-}
-pub trait WindowMethods: EvtHandlerMethods {
-    fn centre(&self) {
-        self.pinned::<ffi::wxWindow>().as_mut().Centre(0);
-    }
-    fn show(&self) {
-        self.pinned::<ffi::wxWindow>().as_mut().Show(true);
-    }
-}
+// // wxWindow
+// wx_class! { Window(wxWindow) impl
+//     WindowMethods,
+//     EvtHandlerMethods
+// }
+// pub trait WindowMethods: EvtHandlerMethods {
+//     fn centre(&self) {
+//         self.pinned::<ffi::wxWindow>().as_mut().Centre(0);
+//     }
+//     fn show(&self) {
+//         self.pinned::<ffi::wxWindow>().as_mut().Show(true);
+//     }
+// }
 
-// wxFrame
-wx_class! { Frame(wxFrame) impl
-    WindowMethods,
-    EvtHandlerMethods
-}
-impl Frame {
-    pub fn new(title: &str) -> Frame {
-        Frame(ffi::NewFrame(title))
-    }
-}
+// // wxFrame
+// wx_class! { Frame(wxFrame) impl
+//     WindowMethods,
+//     EvtHandlerMethods
+// }
+// impl Frame {
+//     pub fn new(title: &str) -> Frame {
+//         Frame(ffi::NewFrame(title))
+//     }
+// }
 
-// wxButton
-wx_class! { Button(wxButton) impl
-    ButtonMethods,
-    WindowMethods,
-    EvtHandlerMethods
-}
-impl Button {
-    pub fn new(parent: &Frame, label: &str) -> Button {
-        Button(ffi::NewButton(parent.pinned(), label))
-    }
-}
-pub trait ButtonMethods: WindowMethods {
-    fn set_label(&self, s: &str) {
-        let label = ffi::NewString(s);
-        self.pinned::<ffi::wxButton>().as_mut().SetLabel(&label);
-    }
-}
+// // wxButton
+// wx_class! { Button(wxButton) impl
+//     ButtonMethods,
+//     WindowMethods,
+//     EvtHandlerMethods
+// }
+// impl Button {
+//     pub fn new(parent: &Frame, label: &str) -> Button {
+//         Button(ffi::NewButton(parent.pinned(), label))
+//     }
+// }
+// pub trait ButtonMethods: WindowMethods {
+//     fn set_label(&self, s: &str) {
+//         let label = ffi::NewString(s);
+//         self.pinned::<ffi::wxButton>().as_mut().SetLabel(&label);
+//     }
+// }
 
 // wxEntry
 pub fn entry() {
