@@ -10,7 +10,7 @@ mod defs;
 pub use defs::*;
 mod manual;
 
-mod generated;
+pub mod generated;
 pub use generated::*;
 
 // any pointer type used on ffi_manual boundary.

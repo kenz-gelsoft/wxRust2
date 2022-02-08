@@ -640,7 +640,7 @@ pub mod ffi {
         fn NewFrame() -> *mut wxFrame;
         #[rust_name = "NewFrame1"]
         unsafe fn NewFrame1(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxFrame;
-        pub fn NewPoint() -> *mut wxPoint;
+        fn NewPoint() -> *mut wxPoint;
         #[rust_name = "NewPoint1"]
         fn NewPoint1(x: i32, y: i32) -> *mut wxPoint;
         #[rust_name = "NewPoint2"]
