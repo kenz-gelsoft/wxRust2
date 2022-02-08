@@ -7,16 +7,18 @@ mod macros;
 use macros::wx_class;
 
 mod defs;
+pub use defs::*;
 mod manual;
 
 mod generated;
+pub use generated::*;
 
 // any pointer type used on ffi_manual boundary.
 // we chose this type as it's handy in cxx.
 type UnsafeAnyPtr = *const c_char;
 
 #[cxx::bridge(namespace = "wxrust")]
-mod ffi_manual {
+pub mod ffi_manual {
     enum EventType {
         Button,
     }

@@ -1,8 +1,18 @@
+use std::ptr;
 use wx;
 use wx::*;
 
 fn main() {
     wx::App::run(|| {
+        unsafe {
+            let s = ffi_manual::NewString("Hello, 世界");
+            let s2 = ffi_manual::NewString("");
+            let default_pos = ffi::NewPoint1(-1, -1);
+            let default_size = ffi::NewSize1(-1, -1);
+            let frame = Frame::new1(ptr::null_mut(), wxID_ANY, s.as_ref().unwrap(), 
+                    &*default_pos, &*default_size, wxDEFAULT_FRAME_STYLE as i32, s2.as_ref().unwrap());
+            frame.show(true);
+        }
         // let frame = Frame::new("Hello, 世界");
         // let button = Button::new(&frame, "Greet");
         // let i = 3;

@@ -12,13 +12,13 @@ use crate::macros::wx_class;
 type UnsafeAnyPtr = *const c_char;
 
 #[cxx::bridge(namespace = "wxrust")]
-mod ffi {
+pub mod ffi {
     #[namespace = ""]
     unsafe extern "C++" {
         include!("wx/include/wxrust.h");
         include!("wx/include/wxrust2.h");
 
-        type wxString;
+        type wxString = crate::ffi_manual::wxString;
         type wxValidator;
         type wxWindowList;
         type wxRect;
@@ -640,7 +640,7 @@ mod ffi {
         fn NewFrame() -> *mut wxFrame;
         #[rust_name = "NewFrame1"]
         unsafe fn NewFrame1(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxFrame;
-        fn NewPoint() -> *mut wxPoint;
+        pub fn NewPoint() -> *mut wxPoint;
         #[rust_name = "NewPoint1"]
         fn NewPoint1(x: i32, y: i32) -> *mut wxPoint;
         #[rust_name = "NewPoint2"]
