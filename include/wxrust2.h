@@ -48,5 +48,8 @@ wxPoint *NewPoint2(const wxRealPoint & pt);
 wxSize *NewSize();
 wxSize *NewSize1(int width, int height);
 
+// CLASS: wxValidator
+wxValidator *NewValidator();
+
 } // namespace wxrust
 

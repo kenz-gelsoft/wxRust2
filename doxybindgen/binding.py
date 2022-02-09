@@ -195,6 +195,9 @@ class RustMethodBinding:
             return 'CTOR'
         if self.__is_dtor:
             return 'DTOR'
+        if self.__model.is_static:
+            # TODO: handle static methods specially
+            return 'STATIC'
         if self._uses_unsupported_type():
             return 'CXX_UNSUPPORTED'
         if self.__model.cls.blocks(self.__model.name):

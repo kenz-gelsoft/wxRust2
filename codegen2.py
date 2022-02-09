@@ -3,8 +3,6 @@ from doxybindgen.binding import CxxClassBinding, RustClassBinding
 
 types = [
     'wxString = crate::ffi_manual::wxString',
-    'wxValidator',
-    # 'wxWindow',
     'wxWindowList',
     'wxRect',
     'wxSizer',
@@ -12,7 +10,6 @@ types = [
     'wxRegion',
     'wxColour',
     'wxPalette',
-    # 'wxEvtHandler',
     'wxKeyEvent',
     'wxEvent',
     'wxToolTip',
@@ -158,6 +155,7 @@ def main():
         'wxml/classwx_frame.xml',
         'wxml/classwx_point.xml',
         'wxml/classwx_size.xml',
+        'wxml/classwx_validator.xml',
     ]
     classes = []
     for file in xmlfiles:

@@ -84,5 +84,10 @@ wxSize *NewSize1(int width, int height) {
     return new wxSize(width, height);
 }
 
+// CLASS: wxValidator
+wxValidator *NewValidator() {
+    return new wxValidator();
+}
+
 } // namespace wxrust
 
