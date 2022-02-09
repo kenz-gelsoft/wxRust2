@@ -134,18 +134,26 @@ class CxxType:
         return self.__srctype
 
     def marshal(self, name):
-        if not self._is_const_ref_to_binding():
-            return None
-        return 'let %s = &%s.pinned::<ffi::%s>();' % (
-            name,
-            name,
-            self.__typename
-        )
+        if self._is_const_ref_to_string():
+            return 'let %s = &crate::ffi_manual::NewString(%s);' % (
+                name,
+                name,
+            )
+        if self._is_const_ref_to_binding():
+            return 'let %s = &%s.pinned::<ffi::%s>();' % (
+                name,
+                name,
+                self.__typename
+            )
+        return None
 
     def in_rust(self, with_ffi=False, binding=False):
         t = self.__typename
-        if binding and self._is_const_ref_to_binding():
-            return '&%s' % (t[2:])
+        if binding:
+            if self._is_const_ref_to_string():
+                return '&str'
+            if self._is_const_ref_to_binding():
+                return '&%s' % (t[2:])
         if t in CXX2RUST:
             t = CXX2RUST[t]
         t = prefixed(t, with_ffi)
@@ -159,12 +167,16 @@ class CxxType:
             return 'Pin<&mut %s>' % (t,)
         return '%s%s%s' % (ref, mut, t)
 
+    def _is_const_ref_to_string(self):
+        return self._is_const_ref() and self.__typename == 'wxString'
+
     def _is_const_ref_to_binding(self):
+        return self._is_const_ref() and self.__typename in ALREADY_GENERATED_TYPES
+
+    def _is_const_ref(self):
         if self.__is_mut:
             return False
-        if not self.__indirection.startswith('&'):
-            return False
-        return self.__typename in ALREADY_GENERATED_TYPES
+        return self.__indirection.startswith('&')
 
     def not_supported(self):
         if self.__typename in OS_UNSUPPORTED_TYPES:
