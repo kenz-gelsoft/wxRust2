@@ -1339,7 +1339,8 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn get_validator(&self) -> *mut ffi::wxValidator {
         self.pinned::<ffi::wxWindow>().as_mut().GetValidator()
     }
-    fn set_validator(&self, validator: &ffi::wxValidator) {
+    fn set_validator(&self, validator: &Validator) {
+        let validator = &validator.pinned::<ffi::wxValidator>();
         self.pinned::<ffi::wxWindow>().as_mut().SetValidator(validator)
     }
     fn transfer_data_from_window(&self) -> bool {
@@ -1517,9 +1518,10 @@ wx_class! { Control(wxControl) impl
     ObjectMethods
 }
 impl Control {
-    pub fn new(parent: *mut ffi::wxWindow, id: i32, pos: &Point, size: &Size, style: i32, validator: &ffi::wxValidator, name: &str) -> Control {
+    pub fn new(parent: *mut ffi::wxWindow, id: i32, pos: &Point, size: &Size, style: i32, validator: &Validator, name: &str) -> Control {
         let pos = &pos.pinned::<ffi::wxPoint>();
         let size = &size.pinned::<ffi::wxSize>();
+        let validator = &validator.pinned::<ffi::wxValidator>();
         let name = &crate::ffi_manual::NewString(name);
         unsafe { Control(ffi::NewControl(parent, id, pos, size, style, validator, name)) }
     }
@@ -1616,12 +1618,16 @@ impl Button {
     pub fn new() -> Button {
         Button(ffi::NewButton())
     }
-    pub fn new1(parent: *mut ffi::wxWindow, id: i32, label: &str, pos: &Point, size: &Size, style: i32, validator: &ffi::wxValidator, name: &str) -> Button {
-        let label = &crate::ffi_manual::NewString(label);
-        let pos = &pos.pinned::<ffi::wxPoint>();
-        let size = &size.pinned::<ffi::wxSize>();
-        let name = &crate::ffi_manual::NewString(name);
-        unsafe { Button(ffi::NewButton1(parent, id, label, pos, size, style, validator, name)) }
+    pub fn new1(parent: &Frame, id: i32, label: &str, pos: &Point, size: &Size, style: i32, validator: &Validator, name: &str) -> Button {
+        unsafe {
+            let parent = Pin::<&mut ffi::wxWindow>::into_inner_unchecked(parent.pinned::<ffi::wxWindow>());
+            let label = &crate::ffi_manual::NewString(label);
+            let pos = &pos.pinned::<ffi::wxPoint>();
+            let size = &size.pinned::<ffi::wxSize>();
+            let validator = &validator.pinned::<ffi::wxValidator>();
+            let name = &crate::ffi_manual::NewString(name);
+            Button(ffi::NewButton1(parent, id, label, pos, size, style, validator, name))
+        }
     }
 }
 pub trait ButtonMethods: AnyButtonMethods {

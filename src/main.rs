@@ -9,7 +9,9 @@ fn main() {
         let frame = Frame::new1(ptr::null_mut(), wxID_ANY, "Hello, 世界", 
                 &default_pos, &default_size,
                 wxDEFAULT_FRAME_STYLE as i32, "");
-        // let button = Button::new(&frame, "Greet");
+        let default_validator = Validator::new();
+        let button = Button::new1(&frame, wxID_ANY, "Greet",
+                &default_pos, &default_size, 0, &default_validator, "");
         // let i = 3;
         // println!("i={}", i);
         // let button_copy = button.clone();

@@ -114,6 +114,7 @@ CXX_SUPPORTED_VALUE_TYPES = [
 ALREADY_GENERATED_TYPES = [
     'wxPoint',
     'wxSize',
+    'wxValidator',
 ]
 class CxxType:
     def __init__(self, e):
