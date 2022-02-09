@@ -9,8 +9,6 @@ fn main() {
         let frame = Frame::new1(ptr::null_mut(), wxID_ANY, "Hello, 世界", 
                 &default_pos, &default_size,
                 wxDEFAULT_FRAME_STYLE as i32, "");
-        frame.show(true);
-        // let frame = Frame::new("Hello, 世界");
         // let button = Button::new(&frame, "Greet");
         // let i = 3;
         // println!("i={}", i);
@@ -19,7 +17,8 @@ fn main() {
         //     println!("i={}", i);
         //     button_copy.set_label("clicked");
         // });
-        // frame.centre();
-        // frame.show();
+        // MEMO: we must choose a non-virtual overriden method
+        wx::FrameMethods::centre(&frame, wxBOTH);
+        frame.show(true);
     });
 }
