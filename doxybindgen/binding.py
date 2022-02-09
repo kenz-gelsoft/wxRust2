@@ -163,6 +163,10 @@ class RustMethodBinding:
             self._rust_params(with_ffi=True, binding=True),
             returns_or_not,
         )
+        for param in self.__model.params:
+            marshalling = param.type.marshal(camel_to_snake(param.name))
+            if marshalling:
+                yield '    %s' % (marshalling,)
         unprefixed = self.__model.cls.unprefixed()
         call = '%s(%s)' % (
             prefixed(self.__model.overload_name(), with_ffi=True),
@@ -223,7 +227,7 @@ class RustMethodBinding:
             return '&self'
         return '%s: %s' % (
             camel_to_snake(param.name),
-            param.type.in_rust(with_ffi)
+            param.type.in_rust(with_ffi, binding)
         )
 
     def _wrap_if_unsafe(self, t):

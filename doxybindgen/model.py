@@ -85,7 +85,10 @@ class SelfType:
         self.const = const
         self.__ctor_retval = ctor_retval
 
-    def in_rust(self, with_ffi=False):
+    def marshal(self, name):
+        return None
+
+    def in_rust(self, with_ffi=False, binding=False):
         t = self.type
         if self.__ctor_retval:
             return t[2:]
@@ -107,6 +110,11 @@ CXX_SUPPORTED_VALUE_TYPES = [
     'bool',
     'void',
 ]
+# This will be all types finally
+ALREADY_GENERATED_TYPES = [
+    'wxPoint',
+    'wxSize',
+]
 class CxxType:
     def __init__(self, e):
         self.__srctype = ''.join(e.itertext())
@@ -125,8 +133,19 @@ class CxxType:
             return CXX2CXX[self.__srctype]
         return self.__srctype
 
-    def in_rust(self, with_ffi=False):
+    def marshal(self, name):
+        if not self._is_const_ref_to_binding():
+            return None
+        return 'let %s = &%s.pinned::<ffi::%s>();' % (
+            name,
+            name,
+            self.__typename
+        )
+
+    def in_rust(self, with_ffi=False, binding=False):
         t = self.__typename
+        if binding and self._is_const_ref_to_binding():
+            return '&%s' % (t[2:])
         if t in CXX2RUST:
             t = CXX2RUST[t]
         t = prefixed(t, with_ffi)
@@ -139,7 +158,14 @@ class CxxType:
         if ref.startswith('&') and self.__is_mut:
             return 'Pin<&mut %s>' % (t,)
         return '%s%s%s' % (ref, mut, t)
-    
+
+    def _is_const_ref_to_binding(self):
+        if self.__is_mut:
+            return False
+        if not self.__indirection.startswith('&'):
+            return False
+        return self.__typename in ALREADY_GENERATED_TYPES
+
     def not_supported(self):
         if self.__typename in OS_UNSUPPORTED_TYPES:
             return True
