@@ -1789,9 +1789,11 @@ impl Frame {
     pub fn new() -> Frame {
         Frame(ffi::NewFrame())
     }
-    pub fn new1(parent: *mut ffi::wxWindow, id: i32, title: &ffi::wxString, pos: &Point, size: &Size, style: i32, name: &ffi::wxString) -> Frame {
+    pub fn new1(parent: *mut ffi::wxWindow, id: i32, title: &str, pos: &Point, size: &Size, style: i32, name: &str) -> Frame {
+        let title = &crate::ffi_manual::NewString(title);
         let pos = &pos.pinned::<ffi::wxPoint>();
         let size = &size.pinned::<ffi::wxSize>();
+        let name = &crate::ffi_manual::NewString(name);
         unsafe { Frame(ffi::NewFrame1(parent, id, title, pos, size, style, name)) }
     }
 }

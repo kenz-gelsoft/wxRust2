@@ -4,13 +4,11 @@ use wx::*;
 
 fn main() {
     wx::App::run(|| {
-        let s = ffi_manual::NewString("Hello, 世界");
-        let s2 = ffi_manual::NewString("");
         let default_pos = Point::new1(-1, -1);
         let default_size = Size::new1(-1, -1);
-        let frame = Frame::new1(ptr::null_mut(), wxID_ANY, &s, 
+        let frame = Frame::new1(ptr::null_mut(), wxID_ANY, "Hello, 世界", 
                 &default_pos, &default_size,
-                wxDEFAULT_FRAME_STYLE as i32, &s2);
+                wxDEFAULT_FRAME_STYLE as i32, "");
         frame.show(true);
         // let frame = Frame::new("Hello, 世界");
         // let button = Button::new(&frame, "Greet");
