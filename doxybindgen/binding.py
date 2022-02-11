@@ -172,7 +172,8 @@ class RustMethodBinding:
         for param in self.__model.params:
             marshalling = param.type.marshal(camel_to_snake(param.name))
             if marshalling:
-                yield '%s' % (marshalling,)
+                for line in marshalling:
+                    yield '%s' % (line,)
         unprefixed = self.__model.cls.unprefixed()
         call = '%s(%s)' % (
             prefixed(self.__model.overload_name(), with_ffi=True),

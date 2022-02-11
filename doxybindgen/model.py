@@ -140,32 +140,37 @@ class CxxType:
 
     def marshal(self, name):
         if self._is_const_ref_to_string():
-            return 'let %s = &crate::ffi_manual::NewString(%s);' % (
+            yield 'let %s = &crate::ffi_manual::NewString(%s);' % (
                 name,
                 name,
             )
         if self._is_const_ref_to_binding():
-            return 'let %s = &%s.pinned::<ffi::%s>();' % (
+            yield 'let %s = &%s.pinned::<ffi::%s>();' % (
                 name,
                 name,
                 self.__typename,
             )
         if self.is_ptr_to_binding():
-            return 'let %s = Pin::<&mut ffi::%s>::into_inner_unchecked(%s.pinned::<ffi::%s>());' % (
+            yield 'let %s = match %s {' % (
                 name,
+                name,
+            )
+            yield '    Some(r) => Pin::<&mut ffi::%s>::into_inner_unchecked(r.pinned::<ffi::%s>()),' % (
                 self.__typename,
-                name,
                 self.__typename,
             )
-        return None
+            yield '    None => ptr::null_mut(),'
+            yield '};'
 
     def in_rust(self, with_ffi=False, binding=False):
         t = self.__typename
         if binding:
             if self._is_const_ref_to_string():
                 return '&str'
-            if self._is_const_ref_to_binding() or self.is_ptr_to_binding():
+            if self._is_const_ref_to_binding():
                 return '&%s' % (t[2:])
+            if self.is_ptr_to_binding():
+                return 'Option<&%s>' % (t[2:])
         if t in CXX2RUST:
             t = CXX2RUST[t]
         t = prefixed(t, with_ffi)

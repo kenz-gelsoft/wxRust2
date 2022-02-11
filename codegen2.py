@@ -180,6 +180,7 @@ def generated_rs(classes):
 
 use std::os::raw::c_char;
 use std::pin::Pin;
+use std::ptr;
 
 use crate::macros::wx_class;
 
