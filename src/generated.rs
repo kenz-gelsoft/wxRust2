@@ -804,11 +804,14 @@ impl Window {
     pub fn new() -> Window {
         Window(ffi::NewWindow())
     }
-    pub fn new1(parent: *mut ffi::wxWindow, id: i32, pos: &Point, size: &Size, style: i32, name: &str) -> Window {
-        let pos = &pos.pinned::<ffi::wxPoint>();
-        let size = &size.pinned::<ffi::wxSize>();
-        let name = &crate::ffi_manual::NewString(name);
-        unsafe { Window(ffi::NewWindow1(parent, id, pos, size, style, name)) }
+    pub fn new1(parent: &Window, id: i32, pos: &Point, size: &Size, style: i32, name: &str) -> Window {
+        unsafe {
+            let parent = Pin::<&mut ffi::wxWindow>::into_inner_unchecked(parent.pinned::<ffi::wxWindow>());
+            let pos = &pos.pinned::<ffi::wxPoint>();
+            let size = &size.pinned::<ffi::wxSize>();
+            let name = &crate::ffi_manual::NewString(name);
+            Window(ffi::NewWindow1(parent, id, pos, size, style, name))
+        }
     }
 }
 pub trait WindowMethods: EvtHandlerMethods {
@@ -1136,8 +1139,10 @@ pub trait WindowMethods: EvtHandlerMethods {
     // CXX_UNSUPPORTED: fn GetFont()
     // CXX_UNSUPPORTED: fn GetForegroundColour()
     fn get_text_extent(&self, string: &str, w: *mut i32, h: *mut i32, descent: *mut i32, external_leading: *mut i32, font: *const ffi::wxFont) {
-        let string = &crate::ffi_manual::NewString(string);
-        unsafe { self.pinned::<ffi::wxWindow>().as_mut().GetTextExtent(string, w, h, descent, external_leading, font) }
+        unsafe {
+            let string = &crate::ffi_manual::NewString(string);
+            self.pinned::<ffi::wxWindow>().as_mut().GetTextExtent(string, w, h, descent, external_leading, font)
+        }
     }
     // CXX_UNSUPPORTED: fn GetTextExtent()
     // BLOCKED: fn GetUpdateRegion()
@@ -1257,11 +1262,17 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn toggle_window_style(&self, flag: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().ToggleWindowStyle(flag)
     }
-    fn move_after_in_tab_order(&self, win: *mut ffi::wxWindow) {
-        unsafe { self.pinned::<ffi::wxWindow>().as_mut().MoveAfterInTabOrder(win) }
+    fn move_after_in_tab_order(&self, win: &Window) {
+        unsafe {
+            let win = Pin::<&mut ffi::wxWindow>::into_inner_unchecked(win.pinned::<ffi::wxWindow>());
+            self.pinned::<ffi::wxWindow>().as_mut().MoveAfterInTabOrder(win)
+        }
     }
-    fn move_before_in_tab_order(&self, win: *mut ffi::wxWindow) {
-        unsafe { self.pinned::<ffi::wxWindow>().as_mut().MoveBeforeInTabOrder(win) }
+    fn move_before_in_tab_order(&self, win: &Window) {
+        unsafe {
+            let win = Pin::<&mut ffi::wxWindow>::into_inner_unchecked(win.pinned::<ffi::wxWindow>());
+            self.pinned::<ffi::wxWindow>().as_mut().MoveBeforeInTabOrder(win)
+        }
     }
     fn navigate(&self, flags: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().Navigate(flags)
@@ -1330,8 +1341,10 @@ pub trait WindowMethods: EvtHandlerMethods {
         self.pinned::<ffi::wxWindow>().as_mut().GetPopupMenuSelectionFromUser1(menu, x, y)
     }
     fn popup_menu(&self, menu: *mut ffi::wxMenu, pos: &Point) -> bool {
-        let pos = &pos.pinned::<ffi::wxPoint>();
-        unsafe { self.pinned::<ffi::wxWindow>().as_mut().PopupMenu(menu, pos) }
+        unsafe {
+            let pos = &pos.pinned::<ffi::wxPoint>();
+            self.pinned::<ffi::wxWindow>().as_mut().PopupMenu(menu, pos)
+        }
     }
     fn popup_menu1(&self, menu: *mut ffi::wxMenu, x: i32, y: i32) -> bool {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().PopupMenu1(menu, x, y) }
@@ -1518,12 +1531,15 @@ wx_class! { Control(wxControl) impl
     ObjectMethods
 }
 impl Control {
-    pub fn new(parent: *mut ffi::wxWindow, id: i32, pos: &Point, size: &Size, style: i32, validator: &Validator, name: &str) -> Control {
-        let pos = &pos.pinned::<ffi::wxPoint>();
-        let size = &size.pinned::<ffi::wxSize>();
-        let validator = &validator.pinned::<ffi::wxValidator>();
-        let name = &crate::ffi_manual::NewString(name);
-        unsafe { Control(ffi::NewControl(parent, id, pos, size, style, validator, name)) }
+    pub fn new(parent: &Window, id: i32, pos: &Point, size: &Size, style: i32, validator: &Validator, name: &str) -> Control {
+        unsafe {
+            let parent = Pin::<&mut ffi::wxWindow>::into_inner_unchecked(parent.pinned::<ffi::wxWindow>());
+            let pos = &pos.pinned::<ffi::wxPoint>();
+            let size = &size.pinned::<ffi::wxSize>();
+            let validator = &validator.pinned::<ffi::wxValidator>();
+            let name = &crate::ffi_manual::NewString(name);
+            Control(ffi::NewControl(parent, id, pos, size, style, validator, name))
+        }
     }
     pub fn new1() -> Control {
         Control(ffi::NewControl1())
@@ -1618,7 +1634,7 @@ impl Button {
     pub fn new() -> Button {
         Button(ffi::NewButton())
     }
-    pub fn new1(parent: &Frame, id: i32, label: &str, pos: &Point, size: &Size, style: i32, validator: &Validator, name: &str) -> Button {
+    pub fn new1(parent: &Window, id: i32, label: &str, pos: &Point, size: &Size, style: i32, validator: &Validator, name: &str) -> Button {
         unsafe {
             let parent = Pin::<&mut ffi::wxWindow>::into_inner_unchecked(parent.pinned::<ffi::wxWindow>());
             let label = &crate::ffi_manual::NewString(label);
@@ -1679,12 +1695,15 @@ impl TopLevelWindow {
     pub fn new() -> TopLevelWindow {
         TopLevelWindow(ffi::NewTopLevelWindow())
     }
-    pub fn new1(parent: *mut ffi::wxWindow, id: i32, title: &str, pos: &Point, size: &Size, style: i32, name: &str) -> TopLevelWindow {
-        let title = &crate::ffi_manual::NewString(title);
-        let pos = &pos.pinned::<ffi::wxPoint>();
-        let size = &size.pinned::<ffi::wxSize>();
-        let name = &crate::ffi_manual::NewString(name);
-        unsafe { TopLevelWindow(ffi::NewTopLevelWindow1(parent, id, title, pos, size, style, name)) }
+    pub fn new1(parent: &Window, id: i32, title: &str, pos: &Point, size: &Size, style: i32, name: &str) -> TopLevelWindow {
+        unsafe {
+            let parent = Pin::<&mut ffi::wxWindow>::into_inner_unchecked(parent.pinned::<ffi::wxWindow>());
+            let title = &crate::ffi_manual::NewString(title);
+            let pos = &pos.pinned::<ffi::wxPoint>();
+            let size = &size.pinned::<ffi::wxSize>();
+            let name = &crate::ffi_manual::NewString(name);
+            TopLevelWindow(ffi::NewTopLevelWindow1(parent, id, title, pos, size, style, name))
+        }
     }
 }
 pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
@@ -1748,11 +1767,17 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     }
     // BLOCKED: fn RestoreToGeometry()
     // BLOCKED: fn SaveGeometry()
-    fn set_default_item(&self, win: *mut ffi::wxWindow) -> *mut ffi::wxWindow {
-        unsafe { self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetDefaultItem(win) }
+    fn set_default_item(&self, win: &Window) -> *mut ffi::wxWindow {
+        unsafe {
+            let win = Pin::<&mut ffi::wxWindow>::into_inner_unchecked(win.pinned::<ffi::wxWindow>());
+            self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetDefaultItem(win)
+        }
     }
-    fn set_tmp_default_item(&self, win: *mut ffi::wxWindow) -> *mut ffi::wxWindow {
-        unsafe { self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetTmpDefaultItem(win) }
+    fn set_tmp_default_item(&self, win: &Window) -> *mut ffi::wxWindow {
+        unsafe {
+            let win = Pin::<&mut ffi::wxWindow>::into_inner_unchecked(win.pinned::<ffi::wxWindow>());
+            self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetTmpDefaultItem(win)
+        }
     }
     fn get_tmp_default_item(&self) -> *mut ffi::wxWindow {
         self.pinned::<ffi::wxTopLevelWindow>().as_mut().GetTmpDefaultItem()
@@ -1825,12 +1850,15 @@ impl Frame {
     pub fn new() -> Frame {
         Frame(ffi::NewFrame())
     }
-    pub fn new1(parent: *mut ffi::wxWindow, id: i32, title: &str, pos: &Point, size: &Size, style: i32, name: &str) -> Frame {
-        let title = &crate::ffi_manual::NewString(title);
-        let pos = &pos.pinned::<ffi::wxPoint>();
-        let size = &size.pinned::<ffi::wxSize>();
-        let name = &crate::ffi_manual::NewString(name);
-        unsafe { Frame(ffi::NewFrame1(parent, id, title, pos, size, style, name)) }
+    pub fn new1(parent: &Window, id: i32, title: &str, pos: &Point, size: &Size, style: i32, name: &str) -> Frame {
+        unsafe {
+            let parent = Pin::<&mut ffi::wxWindow>::into_inner_unchecked(parent.pinned::<ffi::wxWindow>());
+            let title = &crate::ffi_manual::NewString(title);
+            let pos = &pos.pinned::<ffi::wxPoint>();
+            let size = &size.pinned::<ffi::wxSize>();
+            let name = &crate::ffi_manual::NewString(name);
+            Frame(ffi::NewFrame1(parent, id, title, pos, size, style, name))
+        }
     }
 }
 pub trait FrameMethods: TopLevelWindowMethods {
@@ -2044,8 +2072,11 @@ pub trait ValidatorMethods: EvtHandlerMethods {
     fn get_window(&self) -> *mut ffi::wxWindow {
         self.pinned::<ffi::wxValidator>().as_mut().GetWindow()
     }
-    fn set_window(&self, window: *mut ffi::wxWindow) {
-        unsafe { self.pinned::<ffi::wxValidator>().as_mut().SetWindow(window) }
+    fn set_window(&self, window: &Window) {
+        unsafe {
+            let window = Pin::<&mut ffi::wxWindow>::into_inner_unchecked(window.pinned::<ffi::wxWindow>());
+            self.pinned::<ffi::wxValidator>().as_mut().SetWindow(window)
+        }
     }
     fn transfer_from_window(&self) -> bool {
         self.pinned::<ffi::wxValidator>().as_mut().TransferFromWindow()
@@ -2053,8 +2084,11 @@ pub trait ValidatorMethods: EvtHandlerMethods {
     fn transfer_to_window(&self) -> bool {
         self.pinned::<ffi::wxValidator>().as_mut().TransferToWindow()
     }
-    fn validate(&self, parent: *mut ffi::wxWindow) -> bool {
-        unsafe { self.pinned::<ffi::wxValidator>().as_mut().Validate(parent) }
+    fn validate(&self, parent: &Window) -> bool {
+        unsafe {
+            let parent = Pin::<&mut ffi::wxWindow>::into_inner_unchecked(parent.pinned::<ffi::wxWindow>());
+            self.pinned::<ffi::wxValidator>().as_mut().Validate(parent)
+        }
     }
     // STATIC: fn SuppressBellOnError()
     // STATIC: fn IsSilent()

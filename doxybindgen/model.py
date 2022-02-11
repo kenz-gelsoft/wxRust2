@@ -96,7 +96,10 @@ class SelfType:
         if self.const:
             return '&%s' % (t)
         return 'Pin<&mut %s>' % (t,)
-    
+
+    def is_ptr_to_binding(self):
+        return False
+
     def not_supported(self):
         return False
     
@@ -115,6 +118,7 @@ ALREADY_GENERATED_TYPES = [
     'wxPoint',
     'wxSize',
     'wxValidator',
+    'wxWindow',
 ]
 class CxxType:
     def __init__(self, e):
@@ -144,7 +148,14 @@ class CxxType:
             return 'let %s = &%s.pinned::<ffi::%s>();' % (
                 name,
                 name,
-                self.__typename
+                self.__typename,
+            )
+        if self.is_ptr_to_binding():
+            return 'let %s = Pin::<&mut ffi::%s>::into_inner_unchecked(%s.pinned::<ffi::%s>());' % (
+                name,
+                self.__typename,
+                name,
+                self.__typename,
             )
         return None
 
@@ -153,7 +164,7 @@ class CxxType:
         if binding:
             if self._is_const_ref_to_string():
                 return '&str'
-            if self._is_const_ref_to_binding():
+            if self._is_const_ref_to_binding() or self.is_ptr_to_binding():
                 return '&%s' % (t[2:])
         if t in CXX2RUST:
             t = CXX2RUST[t]
@@ -167,6 +178,10 @@ class CxxType:
         if ref.startswith('&') and self.__is_mut:
             return 'Pin<&mut %s>' % (t,)
         return '%s%s%s' % (ref, mut, t)
+
+    def is_ptr_to_binding(self):
+        # TODO: consider mutability
+        return self.is_ptr() and self.__typename in ALREADY_GENERATED_TYPES
 
     def _is_const_ref_to_string(self):
         return self._is_const_ref() and self.__typename == 'wxString'

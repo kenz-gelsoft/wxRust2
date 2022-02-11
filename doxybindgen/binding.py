@@ -163,10 +163,16 @@ class RustMethodBinding:
             self._rust_params(with_ffi=True, binding=True),
             returns_or_not,
         )
+        body_lines = list(self._binding_body())
+        for line in self._wrap_if_unsafe(body_lines):
+            yield '    %s' % (line,)
+        yield '}'
+
+    def _binding_body(self):
         for param in self.__model.params:
             marshalling = param.type.marshal(camel_to_snake(param.name))
             if marshalling:
-                yield '    %s' % (marshalling,)
+                yield '%s' % (marshalling,)
         unprefixed = self.__model.cls.unprefixed()
         call = '%s(%s)' % (
             prefixed(self.__model.overload_name(), with_ffi=True),
@@ -178,14 +184,9 @@ class RustMethodBinding:
                 self.__model.overload_name(),
                 self._call_params(),
             )
-        yield '    %s' % (
-            self._wrap_if_unsafe(
-                self._wrap_return_type(
-                    unprefixed, call
-                )
-            ),
+        yield self._wrap_return_type(
+            unprefixed, call
         )
-        yield '}'
 
     def _call_params(self):
         return ', '.join(camel_to_snake(p.name) for p in self.__model.params)
@@ -233,10 +234,21 @@ class RustMethodBinding:
             param.type.in_rust(with_ffi, binding)
         )
 
-    def _wrap_if_unsafe(self, t):
+    def _wrap_if_unsafe(self, lines):
+        to_be_generated = lines
         if self._uses_ptr_type():
-            return 'unsafe { %s }' % (t,)
-        return t
+            to_be_generated = self._unsafe_lines(lines)
+        for line in to_be_generated:
+            yield line
+    
+    def _unsafe_lines(self, lines):
+        if len(lines) < 2:
+            yield 'unsafe { %s }' % (lines[0],)
+        else:
+            yield 'unsafe {'
+            for line in lines:
+                yield '    %s' % (line,)
+            yield '}'
 
     def _wrap_return_type(self, type, body):
         if self.__model.is_ctor:
