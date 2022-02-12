@@ -10,13 +10,13 @@ fn main() {
         let button = Button::new1(Some(&frame), wxID_ANY, "Greet",
                 &Point::default(), &Size::default(), 0,
                 &Validator::default(), "");
-        // let i = 3;
-        // println!("i={}", i);
-        // let button_copy = button.clone();
-        // button.bind(wx::EventType::Button, move || {
-        //     println!("i={}", i);
-        //     button_copy.set_label("clicked");
-        // });
+        let i = 3;
+        println!("i={}", i);
+        let button_copy = button.clone();
+        button.bind(wx::EventType::Button, move || {
+            println!("i={}", i);
+            wx::ButtonMethods::set_label(&button_copy, "clicked");
+        });
         // MEMO: we must choose a non-virtual overriden method
         wx::FrameMethods::centre(&frame, wxBOTH);
         frame.show(true);

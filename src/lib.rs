@@ -35,16 +35,7 @@ pub mod ffi_manual {
 
         type wxEvtHandler;
 
-        type wxWindow;
-        fn Centre(self: Pin<&mut wxWindow>, direction: i32);
-        fn Show(self: Pin<&mut wxWindow>, b: bool) -> bool;
-
-        type wxFrame;
-
         type wxString;
-
-        type wxButton;
-        fn SetLabel(self: Pin<&mut wxButton>, label: &wxString);
 
         unsafe fn wxEntry(argc: &mut i32, argv: *mut *mut c_char) -> i32;
     }
@@ -54,8 +45,6 @@ pub mod ffi_manual {
         fn Bind(handler: Pin<&mut wxEvtHandler>, eventType: EventType, closure: &Closure);
 
         fn NewString(s: &str) -> UniquePtr<wxString>;
-        fn NewFrame(title: &str) -> *mut wxFrame;
-        fn NewButton(parent: Pin<&mut wxWindow>, label: &str) -> *mut wxButton;
     }
 }
 
@@ -77,25 +66,18 @@ impl ffi_manual::Closure {
     }
 }
 
-pub trait WxRustMethods {
-    unsafe fn as_ptr(&self) -> UnsafeAnyPtr;
-    fn pinned<T>(&self) -> Pin<&mut T> {
-        unsafe { Pin::new_unchecked(&mut *(self.as_ptr() as *mut _)) }
+pub trait Bindable {
+    fn bind<F: Fn() + 'static>(&self, event_type: ffi_manual::EventType, closure: F);
+}
+impl<T: EvtHandlerMethods> Bindable for T {
+    fn bind<F: Fn() + 'static>(&self, event_type: ffi_manual::EventType, closure: F) {
+        ffi_manual::Bind(
+            self.pinned::<ffi_manual::wxEvtHandler>().as_mut(),
+            event_type,
+            &ffi_manual::Closure::new(closure),
+        );
     }
 }
-
-// wx_class! { EvtHandler(wxEvtHandler) impl
-//     EvtHandlerMethods
-// }
-// pub trait EvtHandlerMethods: WxRustMethods {
-//     fn bind<F: Fn() + 'static>(&self, event_type: ffi_manual::EventType, closure: F) {
-//         ffi_manual::Bind(
-//             self.pinned::<ffi_manual::wxEvtHandler>().as_mut(),
-//             event_type,
-//             &ffi_manual::Closure::new(closure),
-//         );
-//     }
-// }
 
 // wxApp
 pub enum App {}
