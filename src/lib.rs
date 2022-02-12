@@ -109,49 +109,6 @@ impl App {
     }
 }
 
-// // wxWindow
-// wx_class! { Window(wxWindow) impl
-//     WindowMethods,
-//     EvtHandlerMethods
-// }
-// pub trait WindowMethods: EvtHandlerMethods {
-//     fn centre(&self) {
-//         self.pinned::<ffi_manual::wxWindow>().as_mut().Centre(0);
-//     }
-//     fn show(&self) {
-//         self.pinned::<ffi_manual::wxWindow>().as_mut().Show(true);
-//     }
-// }
-
-// // wxFrame
-// wx_class! { Frame(wxFrame) impl
-//     WindowMethods,
-//     EvtHandlerMethods
-// }
-// impl Frame {
-//     pub fn new(title: &str) -> Frame {
-//         Frame(ffi_manual::NewFrame(title))
-//     }
-// }
-
-// // wxButton
-// wx_class! { Button(wxButton) impl
-//     ButtonMethods,
-//     WindowMethods,
-//     EvtHandlerMethods
-// }
-// impl Button {
-//     pub fn new(parent: &Frame, label: &str) -> Button {
-//         Button(ffi_manual::NewButton(parent.pinned(), label))
-//     }
-// }
-// pub trait ButtonMethods: WindowMethods {
-//     fn set_label(&self, s: &str) {
-//         let label = ffi_manual::NewString(s);
-//         self.pinned::<ffi_manual::wxButton>().as_mut().SetLabel(&label);
-//     }
-// }
-
 // wxEntry
 pub fn entry() {
     let args: Vec<String> = std::env::args().collect();
