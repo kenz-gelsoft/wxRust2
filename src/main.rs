@@ -3,8 +3,7 @@ use wx::*;
 
 fn main() {
     wx::App::run(|| {
-        let window_none: Option<&Window> = None;
-        let frame = Frame::new1(window_none, wxID_ANY, "Hello, 世界", 
+        let frame = Frame::new1(Window::none(), wxID_ANY, "Hello, 世界", 
                 &Point::default(), &Size::default(),
                 wxDEFAULT_FRAME_STYLE as i32, "");
         let button = Button::new1(Some(&frame), wxID_ANY, "Greet",

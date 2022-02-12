@@ -69,11 +69,13 @@ class RustClassBinding:
         return None
 
     def _generate_impl_with_ctors(self):
-        indent = ' ' * 4 * 1
         yield 'impl %s {' % (self.__model.unprefixed(),)
         for ctor in self._ctors():
             for line in ctor.binding():
-                yield '%s%s' % (indent, line)
+                yield '    %s' % (line,)
+        yield "    pub fn none() -> Option<&'static Self> {"
+        yield '        None'
+        yield '    }'
         yield '}'
 
     def _ctors(self):

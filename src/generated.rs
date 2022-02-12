@@ -683,6 +683,9 @@ impl Object {
     pub fn new1(other: &ffi::wxObject) -> Object {
         Object(ffi::NewObject1(other))
     }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
 }
 pub trait ObjectMethods: WxRustMethods {
     // DTOR: fn ~wxObject()
@@ -722,6 +725,9 @@ wx_class! { EvtHandler(wxEvtHandler) impl
 impl EvtHandler {
     pub fn new() -> EvtHandler {
         EvtHandler(ffi::NewEvtHandler())
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
     }
 }
 pub trait EvtHandlerMethods: ObjectMethods {
@@ -816,6 +822,9 @@ impl Window {
             let name = &crate::ffi_manual::NewString(name);
             Window(ffi::NewWindow1(parent, id, pos, size, style, name))
         }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
     }
 }
 pub trait WindowMethods: EvtHandlerMethods {
@@ -1557,6 +1566,9 @@ impl Control {
     pub fn new1() -> Control {
         Control(ffi::NewControl1())
     }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
 }
 pub trait ControlMethods: WindowMethods {
     // BLOCKED: fn Create()
@@ -1597,6 +1609,9 @@ wx_class! { AnyButton(wxAnyButton) impl
 impl AnyButton {
     pub fn new() -> AnyButton {
         AnyButton(ffi::NewAnyButton())
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
     }
 }
 pub trait AnyButtonMethods: ControlMethods {
@@ -1661,6 +1676,9 @@ impl Button {
             Button(ffi::NewButton1(parent, id, label, pos, size, style, validator, name))
         }
     }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
 }
 pub trait ButtonMethods: AnyButtonMethods {
     // BLOCKED: fn Create()
@@ -1689,6 +1707,9 @@ wx_class! { NonOwnedWindow(wxNonOwnedWindow) impl
     ObjectMethods
 }
 impl NonOwnedWindow {
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
 }
 pub trait NonOwnedWindowMethods: WindowMethods {
     fn set_shape(&self, region: &ffi::wxRegion) -> bool {
@@ -1723,6 +1744,9 @@ impl TopLevelWindow {
             let name = &crate::ffi_manual::NewString(name);
             TopLevelWindow(ffi::NewTopLevelWindow1(parent, id, title, pos, size, style, name))
         }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
     }
 }
 pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
@@ -1888,6 +1912,9 @@ impl Frame {
             Frame(ffi::NewFrame1(parent, id, title, pos, size, style, name))
         }
     }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
 }
 pub trait FrameMethods: TopLevelWindowMethods {
     // DTOR: fn ~wxFrame()
@@ -1962,6 +1989,9 @@ impl Point {
     pub fn new2(pt: &ffi::wxRealPoint) -> Point {
         Point(ffi::NewPoint2(pt))
     }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
 }
 pub trait PointMethods: WxRustMethods {
     fn is_fully_specified(&self) -> bool {
@@ -2001,6 +2031,9 @@ impl Size {
     }
     pub fn new1(width: i32, height: i32) -> Size {
         Size(ffi::NewSize1(width, height))
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
     }
 }
 pub trait SizeMethods: WxRustMethods {
@@ -2090,6 +2123,9 @@ wx_class! { Validator(wxValidator) impl
 impl Validator {
     pub fn new() -> Validator {
         Validator(ffi::NewValidator())
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
     }
 }
 pub trait ValidatorMethods: EvtHandlerMethods {
