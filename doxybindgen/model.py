@@ -224,9 +224,7 @@ class CxxType:
     
     def make_generic(self, generic_name):
         self.generic_name = generic_name
-    
-    def trait_name(self):
-        return self.__typename[2:] + 'Methods'
+        return (generic_name, self.__typename[2:] + 'Methods')
 
 RUST_PRIMITIVES = [
     'bool',

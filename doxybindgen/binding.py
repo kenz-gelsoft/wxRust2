@@ -156,9 +156,7 @@ class RustMethodBinding:
             if param.type.is_ptr_to_binding():
                 count = len(generic_params)
                 name = chr(ord('T') + count)
-                trait = param.type.trait_name()
-                param.type.make_generic(name)
-                generic_params.append((name, trait))
+                generic_params.append(param.type.make_generic(name))
         return generic_params
 
     def binding(self):
