@@ -805,7 +805,7 @@ impl Window {
     pub fn new() -> Window {
         Window(ffi::NewWindow())
     }
-    pub fn new1(parent: Option<&Window>, id: i32, pos: &Point, size: &Size, style: i32, name: &str) -> Window {
+    pub fn new1<T: WindowMethods>(parent: Option<&T>, id: i32, pos: &Point, size: &Size, style: i32, name: &str) -> Window {
         unsafe {
             let parent = match parent {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
@@ -1266,7 +1266,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn toggle_window_style(&self, flag: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().ToggleWindowStyle(flag)
     }
-    fn move_after_in_tab_order(&self, win: Option<&Window>) {
+    fn move_after_in_tab_order<T: WindowMethods>(&self, win: Option<&T>) {
         unsafe {
             let win = match win {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
@@ -1275,7 +1275,7 @@ pub trait WindowMethods: EvtHandlerMethods {
             self.pinned::<ffi::wxWindow>().as_mut().MoveAfterInTabOrder(win)
         }
     }
-    fn move_before_in_tab_order(&self, win: Option<&Window>) {
+    fn move_before_in_tab_order<T: WindowMethods>(&self, win: Option<&T>) {
         unsafe {
             let win = match win {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
@@ -1541,7 +1541,7 @@ wx_class! { Control(wxControl) impl
     ObjectMethods
 }
 impl Control {
-    pub fn new(parent: Option<&Window>, id: i32, pos: &Point, size: &Size, style: i32, validator: &Validator, name: &str) -> Control {
+    pub fn new<T: WindowMethods>(parent: Option<&T>, id: i32, pos: &Point, size: &Size, style: i32, validator: &Validator, name: &str) -> Control {
         unsafe {
             let parent = match parent {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
@@ -1647,7 +1647,7 @@ impl Button {
     pub fn new() -> Button {
         Button(ffi::NewButton())
     }
-    pub fn new1(parent: Option<&Window>, id: i32, label: &str, pos: &Point, size: &Size, style: i32, validator: &Validator, name: &str) -> Button {
+    pub fn new1<T: WindowMethods>(parent: Option<&T>, id: i32, label: &str, pos: &Point, size: &Size, style: i32, validator: &Validator, name: &str) -> Button {
         unsafe {
             let parent = match parent {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
@@ -1711,7 +1711,7 @@ impl TopLevelWindow {
     pub fn new() -> TopLevelWindow {
         TopLevelWindow(ffi::NewTopLevelWindow())
     }
-    pub fn new1(parent: Option<&Window>, id: i32, title: &str, pos: &Point, size: &Size, style: i32, name: &str) -> TopLevelWindow {
+    pub fn new1<T: WindowMethods>(parent: Option<&T>, id: i32, title: &str, pos: &Point, size: &Size, style: i32, name: &str) -> TopLevelWindow {
         unsafe {
             let parent = match parent {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
@@ -1786,7 +1786,7 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     }
     // BLOCKED: fn RestoreToGeometry()
     // BLOCKED: fn SaveGeometry()
-    fn set_default_item(&self, win: Option<&Window>) -> *mut ffi::wxWindow {
+    fn set_default_item<T: WindowMethods>(&self, win: Option<&T>) -> *mut ffi::wxWindow {
         unsafe {
             let win = match win {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
@@ -1795,7 +1795,7 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
             self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetDefaultItem(win)
         }
     }
-    fn set_tmp_default_item(&self, win: Option<&Window>) -> *mut ffi::wxWindow {
+    fn set_tmp_default_item<T: WindowMethods>(&self, win: Option<&T>) -> *mut ffi::wxWindow {
         unsafe {
             let win = match win {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
@@ -1875,7 +1875,7 @@ impl Frame {
     pub fn new() -> Frame {
         Frame(ffi::NewFrame())
     }
-    pub fn new1(parent: Option<&Window>, id: i32, title: &str, pos: &Point, size: &Size, style: i32, name: &str) -> Frame {
+    pub fn new1<T: WindowMethods>(parent: Option<&T>, id: i32, title: &str, pos: &Point, size: &Size, style: i32, name: &str) -> Frame {
         unsafe {
             let parent = match parent {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
@@ -2100,7 +2100,7 @@ pub trait ValidatorMethods: EvtHandlerMethods {
     fn get_window(&self) -> *mut ffi::wxWindow {
         self.pinned::<ffi::wxValidator>().as_mut().GetWindow()
     }
-    fn set_window(&self, window: Option<&Window>) {
+    fn set_window<T: WindowMethods>(&self, window: Option<&T>) {
         unsafe {
             let window = match window {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
@@ -2115,7 +2115,7 @@ pub trait ValidatorMethods: EvtHandlerMethods {
     fn transfer_to_window(&self) -> bool {
         self.pinned::<ffi::wxValidator>().as_mut().TransferToWindow()
     }
-    fn validate(&self, parent: Option<&Window>) -> bool {
+    fn validate<T: WindowMethods>(&self, parent: Option<&T>) -> bool {
         unsafe {
             let parent = match parent {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),

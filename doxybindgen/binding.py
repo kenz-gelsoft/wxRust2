@@ -102,6 +102,7 @@ class RustMethodBinding:
         self.__is_dtor = model.name.startswith('~')
         self.__is_instance_method = not (model.is_static or model.is_ctor)
         self.__self_param = Param(SelfType(model.cls.name, model.const), 'self')
+        self.__generic_params = self._make_params_generic()
     
     def cxx_auto_binding(self):
         body = '%sfn %s(%s)%s;' % (
@@ -148,6 +149,17 @@ class RustMethodBinding:
         if self.__model.overload_index == 0:
             return ''
         return '#[rust_name = "%s"]' % (self.__model.overload_name(),)
+    
+    def _make_params_generic(self):
+        generic_params = []
+        for param in self.__model.params:
+            if param.type.is_ptr_to_binding():
+                count = len(generic_params)
+                name = chr(ord('T') + count)
+                trait = param.type.trait_name()
+                param.type.make_generic(name)
+                generic_params.append((name, trait))
+        return generic_params
 
     def binding(self):
         suppress = self._suppressed_reason(suppress_ctor=False)
@@ -157,9 +169,15 @@ class RustMethodBinding:
         returns_or_not = ''
         if not self.__model.returns.is_void():
             returns_or_not = ' -> %s' % (self.__model.returns.in_rust(with_ffi=True),)
-        yield '%sfn %s(%s)%s {' % (
+        gen_params = ''
+        if self.__generic_params:
+            gen_params = '<%s>' % (', '.join(
+                '%s: %s' % p for p in self.__generic_params)
+            )
+        yield '%sfn %s%s(%s)%s {' % (
             '' if self.__is_instance_method else 'pub ',
             self._rust_method_name(),
+            gen_params,
             self._rust_params(with_ffi=True, binding=True),
             returns_or_not,
         )
@@ -228,11 +246,15 @@ class RustMethodBinding:
         return ', '.join(self._rust_param(p, with_ffi, binding) for p in params)
 
     def _rust_param(self, param, with_ffi, binding):
-        if binding and param.is_self():
-            return '&self'
+        typename = param.type.in_rust(with_ffi, binding)
+        if binding:
+            if param.is_self():
+                return '&self'
+            elif param.type.generic_name:
+                typename = 'Option<&%s>' % (param.type.generic_name,)
         return '%s: %s' % (
             camel_to_snake(param.name),
-            param.type.in_rust(with_ffi, binding)
+            typename,
         )
 
     def _wrap_if_unsafe(self, lines):
