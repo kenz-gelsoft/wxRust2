@@ -123,7 +123,8 @@ mod ffi {
         // BLOCKED: unsafe fn AddChild(self: Pin<&mut wxWindow>, child: *mut wxWindow);
         fn DestroyChildren(self: Pin<&mut wxWindow>) -> bool;
         // BLOCKED: fn FindWindow(self: &wxWindow, id: i32) -> *mut wxWindow;
-        // BLOCKED: fn FindWindow(self: &wxWindow, name: &wxString) -> *mut wxWindow;
+        #[rust_name = "FindWindow1"]
+        fn FindWindow(self: &wxWindow, name: &wxString) -> *mut wxWindow;
         // BLOCKED: fn GetChildren(self: Pin<&mut wxWindow>) -> Pin<&mut wxWindowList>;
         // BLOCKED: fn GetChildren(self: &wxWindow) -> &wxWindowList;
         // BLOCKED: unsafe fn RemoveChild(self: Pin<&mut wxWindow>, child: *mut wxWindow);
@@ -158,7 +159,8 @@ mod ffi {
         fn FitInside(self: Pin<&mut wxWindow>);
         // CXX_UNSUPPORTED: fn FromDIP(self: &wxWindow, sz: &wxSize) -> wxSize;
         // CXX_UNSUPPORTED: fn FromDIP(self: &wxWindow, pt: &wxPoint) -> wxPoint;
-        // BLOCKED: fn FromDIP(self: &wxWindow, d: i32) -> i32;
+        #[rust_name = "FromDIP2"]
+        fn FromDIP(self: &wxWindow, d: i32) -> i32;
         // CXX_UNSUPPORTED: fn ToDIP(self: &wxWindow, sz: &wxSize) -> wxSize;
         // CXX_UNSUPPORTED: fn ToDIP(self: &wxWindow, pt: &wxPoint) -> wxPoint;
         // BLOCKED: fn ToDIP(self: &wxWindow, d: i32) -> i32;
@@ -202,10 +204,12 @@ mod ffi {
         fn SetMaxSize(self: Pin<&mut wxWindow>, size: &wxSize);
         fn SetMinClientSize(self: Pin<&mut wxWindow>, size: &wxSize);
         fn SetMinSize(self: Pin<&mut wxWindow>, size: &wxSize);
-        // BLOCKED: fn SetSize(self: Pin<&mut wxWindow>, x: i32, y: i32, width: i32, height: i32, size_flags: i32);
+        fn SetSize(self: Pin<&mut wxWindow>, x: i32, y: i32, width: i32, height: i32, size_flags: i32);
         // BLOCKED: fn SetSize(self: Pin<&mut wxWindow>, rect: &wxRect);
-        // BLOCKED: fn SetSize(self: Pin<&mut wxWindow>, size: &wxSize);
-        // BLOCKED: fn SetSize(self: Pin<&mut wxWindow>, width: i32, height: i32);
+        #[rust_name = "SetSize2"]
+        fn SetSize(self: Pin<&mut wxWindow>, size: &wxSize);
+        #[rust_name = "SetSize3"]
+        fn SetSize(self: Pin<&mut wxWindow>, width: i32, height: i32);
         fn SetSizeHints(self: Pin<&mut wxWindow>, min_size: &wxSize, max_size: &wxSize, inc_size: &wxSize);
         #[rust_name = "SetSizeHints1"]
         fn SetSizeHints(self: Pin<&mut wxWindow>, min_w: i32, min_h: i32, max_w: i32, max_h: i32, inc_w: i32, inc_h: i32);
@@ -310,9 +314,10 @@ mod ffi {
         fn Hide(self: Pin<&mut wxWindow>) -> bool;
         // CXX_UNSUPPORTED: fn HideWithEffect(self: Pin<&mut wxWindow>, effect: wxShowEffect, timeout: u32) -> bool;
         fn IsEnabled(self: &wxWindow) -> bool;
-        // BLOCKED: fn IsExposed(self: &wxWindow, x: i32, y: i32) -> bool;
+        fn IsExposed(self: &wxWindow, x: i32, y: i32) -> bool;
         // BLOCKED: fn IsExposed(self: &wxWindow, pt: Pin<&mut wxPoint>) -> bool;
-        // BLOCKED: fn IsExposed(self: &wxWindow, x: i32, y: i32, w: i32, h: i32) -> bool;
+        #[rust_name = "IsExposed2"]
+        fn IsExposed(self: &wxWindow, x: i32, y: i32, w: i32, h: i32) -> bool;
         // BLOCKED: fn IsExposed(self: &wxWindow, rect: Pin<&mut wxRect>) -> bool;
         fn IsShown(self: &wxWindow) -> bool;
         fn IsShownOnScreen(self: &wxWindow) -> bool;
@@ -881,7 +886,10 @@ pub trait WindowMethods: EvtHandlerMethods {
         self.pinned::<ffi::wxWindow>().as_mut().DestroyChildren()
     }
     // BLOCKED: fn FindWindow()
-    // BLOCKED: fn FindWindow()
+    fn find_window1(&self, name: &str) -> *mut ffi::wxWindow {
+        let name = &crate::ffi::NewString(name);
+        self.pinned::<ffi::wxWindow>().as_mut().FindWindow1(name)
+    }
     // BLOCKED: fn GetChildren()
     // BLOCKED: fn GetChildren()
     // BLOCKED: fn RemoveChild()
@@ -967,7 +975,9 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     // CXX_UNSUPPORTED: fn FromDIP()
     // CXX_UNSUPPORTED: fn FromDIP()
-    // BLOCKED: fn FromDIP()
+    fn from_dip2(&self, d: i32) -> i32 {
+        self.pinned::<ffi::wxWindow>().as_mut().FromDIP2(d)
+    }
     // CXX_UNSUPPORTED: fn ToDIP()
     // CXX_UNSUPPORTED: fn ToDIP()
     // BLOCKED: fn ToDIP()
@@ -1066,10 +1076,17 @@ pub trait WindowMethods: EvtHandlerMethods {
         let size = &size.pinned::<ffi::wxSize>();
         self.pinned::<ffi::wxWindow>().as_mut().SetMinSize(size)
     }
+    fn set_size(&self, x: i32, y: i32, width: i32, height: i32, size_flags: i32) {
+        self.pinned::<ffi::wxWindow>().as_mut().SetSize(x, y, width, height, size_flags)
+    }
     // BLOCKED: fn SetSize()
-    // BLOCKED: fn SetSize()
-    // BLOCKED: fn SetSize()
-    // BLOCKED: fn SetSize()
+    fn set_size2(&self, size: &Size) {
+        let size = &size.pinned::<ffi::wxSize>();
+        self.pinned::<ffi::wxWindow>().as_mut().SetSize2(size)
+    }
+    fn set_size3(&self, width: i32, height: i32) {
+        self.pinned::<ffi::wxWindow>().as_mut().SetSize3(width, height)
+    }
     fn set_size_hints(&self, min_size: &Size, max_size: &Size, inc_size: &Size) {
         let min_size = &min_size.pinned::<ffi::wxSize>();
         let max_size = &max_size.pinned::<ffi::wxSize>();
@@ -1324,9 +1341,13 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn is_enabled(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().IsEnabled()
     }
+    fn is_exposed(&self, x: i32, y: i32) -> bool {
+        self.pinned::<ffi::wxWindow>().as_mut().IsExposed(x, y)
+    }
     // BLOCKED: fn IsExposed()
-    // BLOCKED: fn IsExposed()
-    // BLOCKED: fn IsExposed()
+    fn is_exposed2(&self, x: i32, y: i32, w: i32, h: i32) -> bool {
+        self.pinned::<ffi::wxWindow>().as_mut().IsExposed2(x, y, w, h)
+    }
     // BLOCKED: fn IsExposed()
     fn is_shown(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().IsShown()

@@ -226,7 +226,7 @@ class RustMethodBinding:
             return 'STATIC'
         if self._uses_unsupported_type():
             return 'CXX_UNSUPPORTED'
-        if self.__model.cls.blocks(self.__model.name):
+        if self.__model.cls.blocks(self.__model.overload_name()):
             return 'BLOCKED'
         return None
     
