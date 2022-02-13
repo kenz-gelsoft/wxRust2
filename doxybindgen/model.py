@@ -141,7 +141,7 @@ class CxxType:
 
     def marshal(self, name):
         if self._is_const_ref_to_string():
-            yield 'let %s = &crate::ffi_manual::NewString(%s);' % (
+            yield 'let %s = &crate::ffi::NewString(%s);' % (
                 name,
                 name,
             )

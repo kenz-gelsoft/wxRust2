@@ -13,12 +13,12 @@ mod manual;
 pub mod generated;
 pub use generated::*;
 
-// any pointer type used on ffi_manual boundary.
+// any pointer type used on ffi boundary.
 // we chose this type as it's handy in cxx.
 type UnsafeAnyPtr = *const c_char;
 
 #[cxx::bridge(namespace = "wxrust")]
-pub mod ffi_manual {
+mod ffi {
     enum EventType {
         Button,
     }
@@ -48,10 +48,10 @@ pub mod ffi_manual {
     }
 }
 
-pub use ffi_manual::EventType;
+pub use ffi::EventType;
 
 // Rust closure to wx calablle function+param pair.
-impl ffi_manual::Closure {
+impl ffi::Closure {
     fn new<F: Fn() + 'static>(closure: F) -> Self {
         unsafe fn trampoline<F: Fn() + 'static>(closure: UnsafeAnyPtr) {
             let closure = &*(closure as *const F);
@@ -67,14 +67,14 @@ impl ffi_manual::Closure {
 }
 
 pub trait Bindable {
-    fn bind<F: Fn() + 'static>(&self, event_type: ffi_manual::EventType, closure: F);
+    fn bind<F: Fn() + 'static>(&self, event_type: ffi::EventType, closure: F);
 }
 impl<T: EvtHandlerMethods> Bindable for T {
-    fn bind<F: Fn() + 'static>(&self, event_type: ffi_manual::EventType, closure: F) {
-        ffi_manual::Bind(
-            self.pinned::<ffi_manual::wxEvtHandler>().as_mut(),
+    fn bind<F: Fn() + 'static>(&self, event_type: ffi::EventType, closure: F) {
+        ffi::Bind(
+            self.pinned::<ffi::wxEvtHandler>().as_mut(),
             event_type,
-            &ffi_manual::Closure::new(closure),
+            &ffi::Closure::new(closure),
         );
     }
 }
@@ -83,7 +83,7 @@ impl<T: EvtHandlerMethods> Bindable for T {
 pub enum App {}
 impl App {
     pub fn on_init<F: Fn() + 'static>(closure: F) {
-        ffi_manual::AppSetOnInit(&ffi_manual::Closure::new(closure));
+        ffi::AppSetOnInit(&ffi::Closure::new(closure));
     }
     pub fn run<F: Fn() + 'static>(closure: F) {
         Self::on_init(closure);
@@ -114,6 +114,6 @@ pub fn entry() {
     argv.push(ptr::null_mut()); // Nul terminator.
     let mut argc: i32 = args.len().try_into().unwrap();
     unsafe {
-        ffi_manual::wxEntry(&mut argc, argv.as_mut_ptr());
+        ffi::wxEntry(&mut argc, argv.as_mut_ptr());
     }
 }

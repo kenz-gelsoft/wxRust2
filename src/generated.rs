@@ -19,7 +19,7 @@ mod ffi {
         include!("wx/include/wxrust.h");
         include!("wx/include/wxrust2.h");
 
-        type wxString = crate::ffi_manual::wxString;
+        type wxString = crate::ffi::wxString;
         type wxWindowList;
         type wxRect;
         type wxSizer;
@@ -819,7 +819,7 @@ impl Window {
             };
             let pos = &pos.pinned::<ffi::wxPoint>();
             let size = &size.pinned::<ffi::wxSize>();
-            let name = &crate::ffi_manual::NewString(name);
+            let name = &crate::ffi::NewString(name);
             Window(ffi::NewWindow1(parent, id, pos, size, style, name))
         }
     }
@@ -1153,7 +1153,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     // CXX_UNSUPPORTED: fn GetForegroundColour()
     fn get_text_extent(&self, string: &str, w: *mut i32, h: *mut i32, descent: *mut i32, external_leading: *mut i32, font: *const ffi::wxFont) {
         unsafe {
-            let string = &crate::ffi_manual::NewString(string);
+            let string = &crate::ffi::NewString(string);
             self.pinned::<ffi::wxWindow>().as_mut().GetTextExtent(string, w, h, descent, external_leading, font)
         }
     }
@@ -1334,7 +1334,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     // CXX_UNSUPPORTED: fn ShowWithEffect()
     // CXX_UNSUPPORTED: fn GetHelpText()
     fn set_help_text(&self, help_text: &str) {
-        let help_text = &crate::ffi_manual::NewString(help_text);
+        let help_text = &crate::ffi::NewString(help_text);
         self.pinned::<ffi::wxWindow>().as_mut().SetHelpText(help_text)
     }
     // CXX_UNSUPPORTED: fn GetHelpTextAtPoint()
@@ -1343,7 +1343,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     // CXX_UNSUPPORTED: fn GetToolTipText()
     fn set_tool_tip(&self, tip_string: &str) {
-        let tip_string = &crate::ffi_manual::NewString(tip_string);
+        let tip_string = &crate::ffi::NewString(tip_string);
         self.pinned::<ffi::wxWindow>().as_mut().SetToolTip(tip_string)
     }
     fn set_tool_tip1(&self, tip: *mut ffi::wxToolTip) {
@@ -1398,12 +1398,12 @@ pub trait WindowMethods: EvtHandlerMethods {
         self.pinned::<ffi::wxWindow>().as_mut().SetId(winid)
     }
     fn set_label(&self, label: &str) {
-        let label = &crate::ffi_manual::NewString(label);
+        let label = &crate::ffi::NewString(label);
         self.pinned::<ffi::wxWindow>().as_mut().SetLabel(label)
     }
     // CXX_UNSUPPORTED: fn SetLayoutDirection()
     fn set_name(&self, name: &str) {
-        let name = &crate::ffi_manual::NewString(name);
+        let name = &crate::ffi::NewString(name);
         self.pinned::<ffi::wxWindow>().as_mut().SetName(name)
     }
     // CXX_UNSUPPORTED: fn SetWindowVariant()
@@ -1559,7 +1559,7 @@ impl Control {
             let pos = &pos.pinned::<ffi::wxPoint>();
             let size = &size.pinned::<ffi::wxSize>();
             let validator = &validator.pinned::<ffi::wxValidator>();
-            let name = &crate::ffi_manual::NewString(name);
+            let name = &crate::ffi::NewString(name);
             Control(ffi::NewControl(parent, id, pos, size, style, validator, name))
         }
     }
@@ -1581,15 +1581,15 @@ pub trait ControlMethods: WindowMethods {
     // CXX_UNSUPPORTED: fn GetSizeFromTextSize()
     // CXX_UNSUPPORTED: fn GetSizeFromText()
     fn set_label(&self, label: &str) {
-        let label = &crate::ffi_manual::NewString(label);
+        let label = &crate::ffi::NewString(label);
         self.pinned::<ffi::wxControl>().as_mut().SetLabel(label)
     }
     fn set_label_text(&self, text: &str) {
-        let text = &crate::ffi_manual::NewString(text);
+        let text = &crate::ffi::NewString(text);
         self.pinned::<ffi::wxControl>().as_mut().SetLabelText(text)
     }
     fn set_label_markup(&self, markup: &str) -> bool {
-        let markup = &crate::ffi_manual::NewString(markup);
+        let markup = &crate::ffi::NewString(markup);
         self.pinned::<ffi::wxControl>().as_mut().SetLabelMarkup(markup)
     }
     // STATIC: fn GetLabelText()
@@ -1668,11 +1668,11 @@ impl Button {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
                 None => ptr::null_mut(),
             };
-            let label = &crate::ffi_manual::NewString(label);
+            let label = &crate::ffi::NewString(label);
             let pos = &pos.pinned::<ffi::wxPoint>();
             let size = &size.pinned::<ffi::wxSize>();
             let validator = &validator.pinned::<ffi::wxValidator>();
-            let name = &crate::ffi_manual::NewString(name);
+            let name = &crate::ffi::NewString(name);
             Button(ffi::NewButton1(parent, id, label, pos, size, style, validator, name))
         }
     }
@@ -1693,7 +1693,7 @@ pub trait ButtonMethods: AnyButtonMethods {
         self.pinned::<ffi::wxButton>().as_mut().SetDefault()
     }
     fn set_label(&self, label: &str) {
-        let label = &crate::ffi_manual::NewString(label);
+        let label = &crate::ffi::NewString(label);
         self.pinned::<ffi::wxButton>().as_mut().SetLabel(label)
     }
     // STATIC: fn GetDefaultSize()
@@ -1738,10 +1738,10 @@ impl TopLevelWindow {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
                 None => ptr::null_mut(),
             };
-            let title = &crate::ffi_manual::NewString(title);
+            let title = &crate::ffi::NewString(title);
             let pos = &pos.pinned::<ffi::wxPoint>();
             let size = &size.pinned::<ffi::wxSize>();
-            let name = &crate::ffi_manual::NewString(name);
+            let name = &crate::ffi::NewString(name);
             TopLevelWindow(ffi::NewTopLevelWindow1(parent, id, title, pos, size, style, name))
         }
     }
@@ -1855,7 +1855,7 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
         self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetSizeHints1(min_size, max_size, inc_size)
     }
     fn set_title(&self, title: &str) {
-        let title = &crate::ffi_manual::NewString(title);
+        let title = &crate::ffi::NewString(title);
         self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetTitle(title)
     }
     fn set_transparent(&self, alpha: u8) -> bool {
@@ -1871,7 +1871,7 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
         self.pinned::<ffi::wxTopLevelWindow>().as_mut().OSXIsModified()
     }
     fn set_represented_filename(&self, filename: &str) {
-        let filename = &crate::ffi_manual::NewString(filename);
+        let filename = &crate::ffi::NewString(filename);
         self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetRepresentedFilename(filename)
     }
     fn show_without_activating(&self) {
@@ -1905,10 +1905,10 @@ impl Frame {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
                 None => ptr::null_mut(),
             };
-            let title = &crate::ffi_manual::NewString(title);
+            let title = &crate::ffi::NewString(title);
             let pos = &pos.pinned::<ffi::wxPoint>();
             let size = &size.pinned::<ffi::wxSize>();
-            let name = &crate::ffi_manual::NewString(name);
+            let name = &crate::ffi::NewString(name);
             Frame(ffi::NewFrame1(parent, id, title, pos, size, style, name))
         }
     }
@@ -1925,7 +1925,7 @@ pub trait FrameMethods: TopLevelWindowMethods {
     // BLOCKED: fn CreateStatusBar()
     // BLOCKED: fn CreateToolBar()
     fn do_give_help(&self, text: &str, show: bool) {
-        let text = &crate::ffi_manual::NewString(text);
+        let text = &crate::ffi::NewString(text);
         self.pinned::<ffi::wxFrame>().as_mut().DoGiveHelp(text, show)
     }
     // CXX_UNSUPPORTED: fn GetClientAreaOrigin()
@@ -1956,7 +1956,7 @@ pub trait FrameMethods: TopLevelWindowMethods {
         self.pinned::<ffi::wxFrame>().as_mut().SetStatusBarPane(n)
     }
     fn set_status_text(&self, text: &str, number: i32) {
-        let text = &crate::ffi_manual::NewString(text);
+        let text = &crate::ffi::NewString(text);
         self.pinned::<ffi::wxFrame>().as_mut().SetStatusText(text, number)
     }
     fn set_status_widths(&self, n: i32, widths_field: *const i32) {
@@ -1967,7 +1967,7 @@ pub trait FrameMethods: TopLevelWindowMethods {
     }
     // BLOCKED: fn MSWGetTaskBarButton()
     fn push_status_text(&self, text: &str, number: i32) {
-        let text = &crate::ffi_manual::NewString(text);
+        let text = &crate::ffi::NewString(text);
         self.pinned::<ffi::wxFrame>().as_mut().PushStatusText(text, number)
     }
     fn pop_status_text(&self, number: i32) {

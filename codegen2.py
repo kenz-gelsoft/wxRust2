@@ -2,7 +2,7 @@ from doxybindgen.model import Class
 from doxybindgen.binding import CxxClassBinding, RustClassBinding
 
 types = [
-    'wxString = crate::ffi_manual::wxString',
+    'wxString = crate::ffi::wxString',
     'wxWindowList',
     'wxRect',
     'wxSizer',

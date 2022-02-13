@@ -171,8 +171,8 @@ class RustMethodBinding:
             returns_or_not = ' -> %s' % (self.__model.returns.in_rust(with_ffi=True),)
         gen_params = ''
         if self.__generic_params:
-            gen_params = '<%s>' % (', '.join(
-                '%s: %s' % p for p in self.__generic_params)
+            gen_params = '<%s>' % (
+                ', '.join('%s: %s' % p for p in self.__generic_params),
             )
         yield '%sfn %s%s(%s)%s {' % (
             '' if self.__is_instance_method else 'pub ',
