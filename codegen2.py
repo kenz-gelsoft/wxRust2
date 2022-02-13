@@ -2,11 +2,7 @@ from doxybindgen.model import Class
 from doxybindgen.binding import CxxClassBinding, RustClassBinding
 
 types = [
-    'wxPoint',
-    'wxSize',
-    'wxString',
-    'wxValidator',
-    # 'wxWindow',
+    'wxString = crate::ffi::wxString',
     'wxWindowList',
     'wxRect',
     'wxSizer',
@@ -14,7 +10,6 @@ types = [
     'wxRegion',
     'wxColour',
     'wxPalette',
-    # 'wxEvtHandler',
     'wxKeyEvent',
     'wxEvent',
     'wxToolTip',
@@ -41,6 +36,7 @@ types = [
     'wxIcon',
     # 'GeometrySerializer',
     'wxGraphicsPath',
+    'wxRealPoint',
 ]
 
 BLOCKLIST = {
@@ -123,6 +119,26 @@ BLOCKLIST = {
         'CreateStatusBar',
         'OnCreateToolBar',
     ],
+    'wxPoint': [
+        'operator=',
+        'operator==',
+        'operator!=',
+        'operator+=',
+        'operator-=',
+        'operator/=',
+        'operator*=',
+    ],
+    'wxSize': [
+        'operator=',
+        'operator==',
+        'operator!=',
+        'operator+=',
+        'operator-=',
+        'operator/=',
+        'operator*=',
+        # Didn't support
+        'Scale',
+    ],
 }
 
 # place wxWidgets doxygen xml files in wxml/ dir and run this.
@@ -137,6 +153,9 @@ def main():
         'wxml/classwx_non_owned_window.xml',
         'wxml/classwx_top_level_window.xml',
         'wxml/classwx_frame.xml',
+        'wxml/classwx_point.xml',
+        'wxml/classwx_size.xml',
+        'wxml/classwx_validator.xml',
     ]
     classes = []
     for file in xmlfiles:
@@ -161,6 +180,7 @@ def generated_rs(classes):
 
 use std::os::raw::c_char;
 use std::pin::Pin;
+use std::ptr;
 
 use crate::macros::wx_class;
 

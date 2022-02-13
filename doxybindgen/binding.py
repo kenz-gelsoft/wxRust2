@@ -29,6 +29,10 @@ class RustClassBinding:
     def generated_methods(self):
         # only ctors for now
         indent = ' ' * 4 * 2
+        yield '%s// CLASS: %s' % (
+            indent,
+            self.__model.name,
+        )
         for ctor in self._ctors():
             for line in ctor.ffi_lines():
                 yield '%s%s' % (indent, line)
@@ -69,11 +73,13 @@ class RustClassBinding:
         return None
 
     def _generate_impl_with_ctors(self):
-        indent = ' ' * 4 * 1
         yield 'impl %s {' % (self.__model.unprefixed(),)
         for ctor in self._ctors():
             for line in ctor.binding():
-                yield '%s%s' % (indent, line)
+                yield '    %s' % (line,)
+        yield "    pub fn none() -> Option<&'static Self> {"
+        yield '        None'
+        yield '    }'
         yield '}'
 
     def _ctors(self):
@@ -84,7 +90,7 @@ class RustClassBinding:
         base = self.__model.base
         if not base:
             base = '__WxRust'
-        yield 'trait %sMethods: %sMethods {' % (
+        yield 'pub trait %sMethods: %sMethods {' % (
             self.__model.unprefixed(),
             base[2:],
         )
@@ -102,6 +108,7 @@ class RustMethodBinding:
         self.__is_dtor = model.name.startswith('~')
         self.__is_instance_method = not (model.is_static or model.is_ctor)
         self.__self_param = Param(SelfType(model.cls.name, model.const), 'self')
+        self.__generic_params = self._make_params_generic()
     
     def cxx_auto_binding(self):
         body = '%sfn %s(%s)%s;' % (
@@ -132,7 +139,7 @@ class RustMethodBinding:
         rs_template = '%sfn %s(%s) -> *mut %s;'
         lines = [rs_template % (
             self._unsafe_or_not(),
-            self.__model.overload_name(),
+            self.__model.overload_name(without_index=True),
             self._rust_params(),
             self.__model.cls.name,
         )]
@@ -147,7 +154,18 @@ class RustMethodBinding:
     def _rename(self):
         if self.__model.overload_index == 0:
             return ''
-        return '#[rust_name = "%s"]' % (self.__model.overload_name(),)
+        return '#[rust_name = "%s"]' % (
+            self.__model.overload_name(),
+        )
+    
+    def _make_params_generic(self):
+        generic_params = []
+        for param in self.__model.params:
+            if param.type.is_ptr_to_binding():
+                count = len(generic_params)
+                name = chr(ord('T') + count)
+                generic_params.append(param.type.make_generic(name))
+        return generic_params
 
     def binding(self):
         suppress = self._suppressed_reason(suppress_ctor=False)
@@ -157,12 +175,29 @@ class RustMethodBinding:
         returns_or_not = ''
         if not self.__model.returns.is_void():
             returns_or_not = ' -> %s' % (self.__model.returns.in_rust(with_ffi=True),)
-        yield '%sfn %s(%s)%s {' % (
+        gen_params = ''
+        if self.__generic_params:
+            gen_params = '<%s>' % (
+                ', '.join('%s: %s' % p for p in self.__generic_params),
+            )
+        yield '%sfn %s%s(%s)%s {' % (
             '' if self.__is_instance_method else 'pub ',
             self._rust_method_name(),
+            gen_params,
             self._rust_params(with_ffi=True, binding=True),
             returns_or_not,
         )
+        body_lines = list(self._binding_body())
+        for line in self._wrap_if_unsafe(body_lines):
+            yield '    %s' % (line,)
+        yield '}'
+
+    def _binding_body(self):
+        for param in self.__model.params:
+            marshalling = param.type.marshal(camel_to_snake(param.name))
+            if marshalling:
+                for line in marshalling:
+                    yield '%s' % (line,)
         unprefixed = self.__model.cls.unprefixed()
         call = '%s(%s)' % (
             prefixed(self.__model.overload_name(), with_ffi=True),
@@ -174,14 +209,9 @@ class RustMethodBinding:
                 self.__model.overload_name(),
                 self._call_params(),
             )
-        yield '    %s' % (
-            self._wrap_if_unsafe(
-                self._wrap_return_type(
-                    unprefixed, call
-                )
-            ),
+        yield self._wrap_return_type(
+            unprefixed, call
         )
-        yield '}'
 
     def _call_params(self):
         return ', '.join(camel_to_snake(p.name) for p in self.__model.params)
@@ -191,6 +221,9 @@ class RustMethodBinding:
             return 'CTOR'
         if self.__is_dtor:
             return 'DTOR'
+        if self.__model.is_static:
+            # TODO: handle static methods specially
+            return 'STATIC'
         if self._uses_unsupported_type():
             return 'CXX_UNSUPPORTED'
         if self.__model.cls.blocks(self.__model.name):
@@ -219,17 +252,32 @@ class RustMethodBinding:
         return ', '.join(self._rust_param(p, with_ffi, binding) for p in params)
 
     def _rust_param(self, param, with_ffi, binding):
-        if binding and param.is_self():
-            return '&self'
+        typename = param.type.in_rust(with_ffi, binding)
+        if binding:
+            if param.is_self():
+                return '&self'
+            elif param.type.generic_name:
+                typename = 'Option<&%s>' % (param.type.generic_name,)
         return '%s: %s' % (
             camel_to_snake(param.name),
-            param.type.in_rust(with_ffi)
+            typename,
         )
 
-    def _wrap_if_unsafe(self, t):
+    def _wrap_if_unsafe(self, lines):
+        to_be_generated = lines
         if self._uses_ptr_type():
-            return 'unsafe { %s }' % (t,)
-        return t
+            to_be_generated = self._unsafe_lines(lines)
+        for line in to_be_generated:
+            yield line
+    
+    def _unsafe_lines(self, lines):
+        if len(lines) < 2:
+            yield 'unsafe { %s }' % (lines[0],)
+        else:
+            yield 'unsafe {'
+            for line in lines:
+                yield '    %s' % (line,)
+            yield '}'
 
     def _wrap_return_type(self, type, body):
         if self.__model.is_ctor:
@@ -269,7 +317,7 @@ class CxxMethodBinding:
     def decl(self):
         body = '%s *%s(%s);' % (
             self.__model.name,
-            self.__model.overload_name(),
+            self.__model.overload_name(without_index=True),
             self._cxx_params(),
         )
         return body
@@ -281,7 +329,7 @@ class CxxMethodBinding:
 }'''
         return cc_template % (
             self.__model.cls.name,
-            self.__model.overload_name(),
+            self.__model.overload_name(without_index=True),
             self._cxx_params(),
             self.__model.cls.name,
             self._call_params(),

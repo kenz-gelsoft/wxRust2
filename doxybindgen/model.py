@@ -62,10 +62,12 @@ class Method:
     def _overload_index(self):
         return sum(m.name == self.name for m in self.cls.methods)
 
-    def overload_name(self):
+    def overload_name(self, without_index=False):
         name = self.name
         if self.is_ctor:
             name = 'New%s' % (self.cls.unprefixed(),)
+        if without_index:
+            return name
         index = self.overload_index
         if self.overload_index == 0:
             index = ''
@@ -85,7 +87,10 @@ class SelfType:
         self.const = const
         self.__ctor_retval = ctor_retval
 
-    def in_rust(self, with_ffi=False):
+    def marshal(self, name):
+        return None
+
+    def in_rust(self, with_ffi=False, binding=False):
         t = self.type
         if self.__ctor_retval:
             return t[2:]
@@ -93,7 +98,10 @@ class SelfType:
         if self.const:
             return '&%s' % (t)
         return 'Pin<&mut %s>' % (t,)
-    
+
+    def is_ptr_to_binding(self):
+        return False
+
     def not_supported(self):
         return False
     
@@ -107,12 +115,20 @@ CXX_SUPPORTED_VALUE_TYPES = [
     'bool',
     'void',
 ]
+# This will be all types finally
+ALREADY_GENERATED_TYPES = [
+    'wxPoint',
+    'wxSize',
+    'wxValidator',
+    'wxWindow',
+]
 class CxxType:
     def __init__(self, e):
         self.__srctype = ''.join(e.itertext())
         # print('parsing: |%s|' % (s,))
         matched = re.match(r'(const )?([^*&]*)([*&]+)?', self.__srctype)
         self.__typename = None
+        self.generic_name = None
         if matched:
             self.__is_mut = matched.group(1) is None
             self.__typename = matched.group(2).strip()
@@ -125,8 +141,39 @@ class CxxType:
             return CXX2CXX[self.__srctype]
         return self.__srctype
 
-    def in_rust(self, with_ffi=False):
+    def marshal(self, name):
+        if self._is_const_ref_to_string():
+            yield 'let %s = &crate::ffi::NewString(%s);' % (
+                name,
+                name,
+            )
+        if self._is_const_ref_to_binding():
+            yield 'let %s = &%s.pinned::<ffi::%s>();' % (
+                name,
+                name,
+                self.__typename,
+            )
+        if self.is_ptr_to_binding():
+            yield 'let %s = match %s {' % (
+                name,
+                name,
+            )
+            yield '    Some(r) => Pin::<&mut ffi::%s>::into_inner_unchecked(r.pinned::<ffi::%s>()),' % (
+                self.__typename,
+                self.__typename,
+            )
+            yield '    None => ptr::null_mut(),'
+            yield '};'
+
+    def in_rust(self, with_ffi=False, binding=False):
         t = self.__typename
+        if binding:
+            if self._is_const_ref_to_string():
+                return '&str'
+            if self._is_const_ref_to_binding():
+                return '&%s' % (t[2:])
+            if self.is_ptr_to_binding():
+                return 'Option<&%s>' % (t[2:])
         if t in CXX2RUST:
             t = CXX2RUST[t]
         t = prefixed(t, with_ffi)
@@ -139,7 +186,22 @@ class CxxType:
         if ref.startswith('&') and self.__is_mut:
             return 'Pin<&mut %s>' % (t,)
         return '%s%s%s' % (ref, mut, t)
-    
+
+    def is_ptr_to_binding(self):
+        # TODO: consider mutability
+        return self.is_ptr() and self.__typename in ALREADY_GENERATED_TYPES
+
+    def _is_const_ref_to_string(self):
+        return self._is_const_ref() and self.__typename == 'wxString'
+
+    def _is_const_ref_to_binding(self):
+        return self._is_const_ref() and self.__typename in ALREADY_GENERATED_TYPES
+
+    def _is_const_ref(self):
+        if self.__is_mut:
+            return False
+        return self.__indirection.startswith('&')
+
     def not_supported(self):
         if self.__typename in OS_UNSUPPORTED_TYPES:
             return True
@@ -161,6 +223,10 @@ class CxxType:
         if self.is_ptr():
             return False
         return self.__typename == 'void'
+    
+    def make_generic(self, generic_name):
+        self.generic_name = generic_name
+        return (generic_name, self.__typename[2:] + 'Methods')
 
 RUST_PRIMITIVES = [
     'bool',
