@@ -29,6 +29,10 @@ class RustClassBinding:
     def generated_methods(self):
         # only ctors for now
         indent = ' ' * 4 * 2
+        yield '%s// CLASS: %s' % (
+            indent,
+            self.__model.name,
+        )
         for ctor in self._ctors():
             for line in ctor.ffi_lines():
                 yield '%s%s' % (indent, line)
@@ -135,7 +139,7 @@ class RustMethodBinding:
         rs_template = '%sfn %s(%s) -> *mut %s;'
         lines = [rs_template % (
             self._unsafe_or_not(),
-            self.__model.overload_name(),
+            self.__model.overload_name(without_index=True),
             self._rust_params(),
             self.__model.cls.name,
         )]
@@ -150,7 +154,9 @@ class RustMethodBinding:
     def _rename(self):
         if self.__model.overload_index == 0:
             return ''
-        return '#[rust_name = "%s"]' % (self.__model.overload_name(),)
+        return '#[rust_name = "%s"]' % (
+            self.__model.overload_name(),
+        )
     
     def _make_params_generic(self):
         generic_params = []
@@ -311,7 +317,7 @@ class CxxMethodBinding:
     def decl(self):
         body = '%s *%s(%s);' % (
             self.__model.name,
-            self.__model.overload_name(),
+            self.__model.overload_name(without_index=True),
             self._cxx_params(),
         )
         return body
@@ -323,7 +329,7 @@ class CxxMethodBinding:
 }'''
         return cc_template % (
             self.__model.cls.name,
-            self.__model.overload_name(),
+            self.__model.overload_name(without_index=True),
             self._cxx_params(),
             self.__model.cls.name,
             self._call_params(),

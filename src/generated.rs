@@ -633,34 +633,46 @@ mod ffi {
         // STATIC: fn IsSilent() -> bool;
     }
     unsafe extern "C++" {
+        // CLASS: wxObject
         fn NewObject() -> *mut wxObject;
         #[rust_name = "NewObject1"]
-        fn NewObject1(other: &wxObject) -> *mut wxObject;
+        fn NewObject(other: &wxObject) -> *mut wxObject;
+        // CLASS: wxEvtHandler
         fn NewEvtHandler() -> *mut wxEvtHandler;
+        // CLASS: wxWindow
         fn NewWindow() -> *mut wxWindow;
         #[rust_name = "NewWindow1"]
-        unsafe fn NewWindow1(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxWindow;
+        unsafe fn NewWindow(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxWindow;
+        // CLASS: wxControl
         unsafe fn NewControl(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> *mut wxControl;
         #[rust_name = "NewControl1"]
-        fn NewControl1() -> *mut wxControl;
+        fn NewControl() -> *mut wxControl;
+        // CLASS: wxAnyButton
         fn NewAnyButton() -> *mut wxAnyButton;
+        // CLASS: wxButton
         fn NewButton() -> *mut wxButton;
         #[rust_name = "NewButton1"]
-        unsafe fn NewButton1(parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> *mut wxButton;
+        unsafe fn NewButton(parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> *mut wxButton;
+        // CLASS: wxNonOwnedWindow
+        // CLASS: wxTopLevelWindow
         fn NewTopLevelWindow() -> *mut wxTopLevelWindow;
         #[rust_name = "NewTopLevelWindow1"]
-        unsafe fn NewTopLevelWindow1(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxTopLevelWindow;
+        unsafe fn NewTopLevelWindow(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxTopLevelWindow;
+        // CLASS: wxFrame
         fn NewFrame() -> *mut wxFrame;
         #[rust_name = "NewFrame1"]
-        unsafe fn NewFrame1(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxFrame;
+        unsafe fn NewFrame(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxFrame;
+        // CLASS: wxPoint
         fn NewPoint() -> *mut wxPoint;
         #[rust_name = "NewPoint1"]
-        fn NewPoint1(x: i32, y: i32) -> *mut wxPoint;
+        fn NewPoint(x: i32, y: i32) -> *mut wxPoint;
         #[rust_name = "NewPoint2"]
-        fn NewPoint2(pt: &wxRealPoint) -> *mut wxPoint;
+        fn NewPoint(pt: &wxRealPoint) -> *mut wxPoint;
+        // CLASS: wxSize
         fn NewSize() -> *mut wxSize;
         #[rust_name = "NewSize1"]
-        fn NewSize1(width: i32, height: i32) -> *mut wxSize;
+        fn NewSize(width: i32, height: i32) -> *mut wxSize;
+        // CLASS: wxValidator
         fn NewValidator() -> *mut wxValidator;
     }
 }

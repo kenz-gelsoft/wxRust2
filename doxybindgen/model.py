@@ -62,10 +62,12 @@ class Method:
     def _overload_index(self):
         return sum(m.name == self.name for m in self.cls.methods)
 
-    def overload_name(self):
+    def overload_name(self, without_index=False):
         name = self.name
         if self.is_ctor:
             name = 'New%s' % (self.cls.unprefixed(),)
+        if without_index:
+            return name
         index = self.overload_index
         if self.overload_index == 0:
             index = ''
