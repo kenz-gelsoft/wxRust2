@@ -265,7 +265,10 @@ class RustMethodBinding:
             # TODO: handle static methods specially
             return 'STATIC'
         if self._uses_unsupported_type():
-            if suppress_returns_new or not self._returns_new():
+            if self._returns_new():
+                if suppress_returns_new:
+                    return 'GENERATED'
+            else:
                 return 'CXX_UNSUPPORTED'
         if self.__model.cls.blocks(self.__model.overload_name()):
             return 'BLOCKED'
