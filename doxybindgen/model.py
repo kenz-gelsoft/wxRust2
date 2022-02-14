@@ -62,16 +62,20 @@ class Method:
     def _overload_index(self):
         return sum(m.name == self.name for m in self.cls.methods)
 
-    def overload_name(self, without_index=False):
+    def overload_name(self, without_index=False, returns_new=False):
         name = self.name
         if self.is_ctor:
             name = 'New%s' % (self.cls.unprefixed(),)
-        if without_index:
-            return name
         index = self.overload_index
-        if self.overload_index == 0:
+        if without_index or index == 0:
             index = ''
+        if returns_new:
+            return '%s_%s%s' % (self.cls.name, name, index)
         return '%s%s' % (name, index)
+
+    def returns_new(self):
+        return self.returns.not_supported_value_type(check_generated=True)
+
     
 class Param:
     def __init__(self, type, name):
@@ -86,6 +90,7 @@ class SelfType:
         self.type = s
         self.const = const
         self.__ctor_retval = ctor_retval
+        self.generic_name = None
 
     def marshal(self, name):
         return None
@@ -98,13 +103,22 @@ class SelfType:
         if self.const:
             return '&%s' % (t)
         return 'Pin<&mut %s>' % (t,)
+    
+    def in_cxx(self):
+        t = '%s &' % (self.type,)
+        if self.const:
+            t = 'const %s' % (t,)
+        return t
 
     def is_ptr_to_binding(self):
         return False
 
     def not_supported(self):
         return False
-    
+
+    def not_supported_value_type(self, check_generated=False):
+        return False
+
     def is_void(self):
         return False
 
@@ -140,6 +154,9 @@ class CxxType:
         if self.__srctype in CXX2CXX:
             return CXX2CXX[self.__srctype]
         return self.__srctype
+    
+    def cxx_typename(self):
+        return self.__typename
 
     def marshal(self, name):
         if self._is_const_ref_to_string():
@@ -205,6 +222,11 @@ class CxxType:
     def not_supported(self):
         if self.__typename in OS_UNSUPPORTED_TYPES:
             return True
+        return self.not_supported_value_type()
+    
+    def not_supported_value_type(self, check_generated=False):
+        if check_generated and self.__typename not in ALREADY_GENERATED_TYPES:
+            return False
         if not self._is_cxx_supported_value_type():
             return not self.__indirection
         return False
