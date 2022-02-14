@@ -1,4 +1,3 @@
-from sre_constants import NOT_LITERAL
 from .model import Param, SelfType, prefixed
 import re
 
@@ -28,7 +27,6 @@ class RustClassBinding:
                 yield '%s%s' % (indent, line)
 
     def generated_methods(self):
-        # only ctors for now
         indent = ' ' * 4 * 2
         yield '%s// CLASS: %s' % (
             indent,
@@ -113,8 +111,6 @@ class RustMethodBinding:
         self.__generic_params = self._make_params_generic()
     
     def cxx_auto_binding(self):
-        if self._returns_new():
-            return
         body = '%sfn %s(%s)%s;' % (
             self._unsafe_or_not(),
             self.__model.name,
@@ -178,7 +174,10 @@ class RustMethodBinding:
         return generic_params
 
     def binding(self):
-        suppress = self._suppressed_reason(suppress_ctor=False)
+        suppress = self._suppressed_reason(
+            suppress_ctor=False,
+            suppress_returns_new=False,
+        )
         if suppress:
             yield '// %s: fn %s()' % (suppress, self.__model.name)
             return
@@ -257,7 +256,7 @@ class RustMethodBinding:
     def _call_params(self):
         return ', '.join(camel_to_snake(p.name) for p in self.__model.params)
 
-    def _suppressed_reason(self, suppress_ctor=True):
+    def _suppressed_reason(self, suppress_ctor=True, suppress_returns_new=True):
         if suppress_ctor and self.__model.is_ctor:
             return 'CTOR'
         if self.__is_dtor:
@@ -265,8 +264,9 @@ class RustMethodBinding:
         if self.__model.is_static:
             # TODO: handle static methods specially
             return 'STATIC'
-        if self._uses_unsupported_type() and not self._returns_new():
-            return 'CXX_UNSUPPORTED'
+        if self._uses_unsupported_type():
+            if suppress_returns_new or not self._returns_new():
+                return 'CXX_UNSUPPORTED'
         if self.__model.cls.blocks(self.__model.overload_name()):
             return 'BLOCKED'
         return None
