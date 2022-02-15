@@ -78,6 +78,14 @@ class Method:
             return '%s_%s%s' % (self.cls.name, name, index)
         return '%s%s' % (name, index)
 
+    def return_type(self):
+        if self.is_ctor:
+            return self.cls.name
+        elif self.returns_new():
+            return self.returns.typename
+        else:
+            return None
+
     def returns_new(self):
         if self.cls.blocks(self.overload_name()):
             return False
@@ -94,7 +102,7 @@ class Param:
 
 class SelfType:
     def __init__(self, s, const, ctor_retval=False):
-        self.type = s
+        self.typename = s
         self.const = const
         self.__ctor_retval = ctor_retval
         self.generic_name = None
@@ -103,7 +111,7 @@ class SelfType:
         return None
 
     def in_rust(self, with_ffi=False, binding=False):
-        t = self.type
+        t = self.typename
         if self.__ctor_retval:
             return t[2:]
         t = prefixed(t, with_ffi)
@@ -112,7 +120,7 @@ class SelfType:
         return 'Pin<&mut %s>' % (t,)
     
     def in_cxx(self):
-        t = '%s &' % (self.type,)
+        t = '%s &' % (self.typename,)
         if self.const:
             t = 'const %s' % (t,)
         return t
@@ -148,11 +156,11 @@ class CxxType:
         self.__srctype = ''.join(e.itertext())
         # print('parsing: |%s|' % (s,))
         matched = re.match(r'(const )?([^*&]*)([*&]+)?', self.__srctype)
-        self.__typename = None
+        self.typename = None
         self.generic_name = None
         if matched:
             self.__is_mut = matched.group(1) is None
-            self.__typename = matched.group(2).strip()
+            self.typename = matched.group(2).strip()
             self.__indirection = matched.group(3)
         if self.__indirection is None:
             self.__indirection = ''
@@ -162,9 +170,6 @@ class CxxType:
             return CXX2CXX[self.__srctype]
         return self.__srctype
     
-    def cxx_typename(self):
-        return self.__typename
-
     def marshal(self, name):
         if self._is_const_ref_to_string():
             yield 'let %s = &crate::ffi::NewString(%s);' % (
@@ -175,7 +180,7 @@ class CxxType:
             yield 'let %s = &%s.pinned::<ffi::%s>();' % (
                 name,
                 name,
-                self.__typename,
+                self.typename,
             )
         if self.is_ptr_to_binding():
             yield 'let %s = match %s {' % (
@@ -183,14 +188,14 @@ class CxxType:
                 name,
             )
             yield '    Some(r) => Pin::<&mut ffi::%s>::into_inner_unchecked(r.pinned::<ffi::%s>()),' % (
-                self.__typename,
-                self.__typename,
+                self.typename,
+                self.typename,
             )
             yield '    None => ptr::null_mut(),'
             yield '};'
 
     def in_rust(self, with_ffi=False, binding=False):
-        t = self.__typename
+        t = self.typename
         if binding:
             if self._is_const_ref_to_string():
                 return '&str'
@@ -213,13 +218,13 @@ class CxxType:
 
     def is_ptr_to_binding(self):
         # TODO: consider mutability
-        return self.is_ptr() and self.__typename in ALREADY_GENERATED_TYPES
+        return self.is_ptr() and self.typename in ALREADY_GENERATED_TYPES
 
     def _is_const_ref_to_string(self):
-        return self._is_const_ref() and self.__typename == 'wxString'
+        return self._is_const_ref() and self.typename == 'wxString'
 
     def _is_const_ref_to_binding(self):
-        return self._is_const_ref() and self.__typename in ALREADY_GENERATED_TYPES
+        return self._is_const_ref() and self.typename in ALREADY_GENERATED_TYPES
 
     def _is_const_ref(self):
         if self.__is_mut:
@@ -227,21 +232,21 @@ class CxxType:
         return self.__indirection.startswith('&')
 
     def not_supported(self):
-        if self.__typename in OS_UNSUPPORTED_TYPES:
+        if self.typename in OS_UNSUPPORTED_TYPES:
             return True
         return self.not_supported_value_type()
     
     def not_supported_value_type(self, check_generated=False):
-        if check_generated and self.__typename not in ALREADY_GENERATED_TYPES:
+        if check_generated and self.typename not in ALREADY_GENERATED_TYPES:
             return False
         if not self._is_cxx_supported_value_type():
             return not self.__indirection
         return False
     
     def _is_cxx_supported_value_type(self):
-        if self.__typename in CXX_SUPPORTED_VALUE_TYPES:
+        if self.typename in CXX_SUPPORTED_VALUE_TYPES:
             return True
-        if self.__typename in CXX2RUST:
+        if self.typename in CXX2RUST:
             return True
         return False
     
@@ -251,11 +256,11 @@ class CxxType:
     def is_void(self):
         if self.is_ptr():
             return False
-        return self.__typename == 'void'
+        return self.typename == 'void'
     
     def make_generic(self, generic_name):
         self.generic_name = generic_name
-        return (generic_name, self.__typename[2:] + 'Methods')
+        return (generic_name, self.typename[2:] + 'Methods')
 
 RUST_PRIMITIVES = [
     'bool',

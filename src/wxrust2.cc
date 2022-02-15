@@ -67,18 +67,6 @@ wxSize *wxWindow_GetBestVirtualSize(const wxWindow & self) {
 wxSize *wxWindow_GetWindowBorderSize(const wxWindow & self) {
     return new wxSize(self.GetWindowBorderSize());
 }
-wxSize *wxWindow_FromDIP(wxWindow & self, const wxSize & sz, const wxWindow * w) {
-    return new wxSize(self.FromDIP(sz, w));
-}
-wxPoint *wxWindow_FromDIP(wxWindow & self, const wxPoint & pt, const wxWindow * w) {
-    return new wxPoint(self.FromDIP(pt, w));
-}
-wxSize *wxWindow_ToDIP(wxWindow & self, const wxSize & sz, const wxWindow * w) {
-    return new wxSize(self.ToDIP(sz, w));
-}
-wxPoint *wxWindow_ToDIP(wxWindow & self, const wxPoint & pt, const wxWindow * w) {
-    return new wxPoint(self.ToDIP(pt, w));
-}
 wxPoint *wxWindow_GetPosition(const wxWindow & self) {
     return new wxPoint(self.GetPosition());
 }
@@ -151,9 +139,6 @@ wxButton *NewButton() {
 wxButton *NewButton(wxWindow * parent, wxWindowID id, const wxString & label, const wxPoint & pos, const wxSize & size, int32_t style, const wxValidator & validator, const wxString & name) {
     return new wxButton(parent, id, label, pos, size, style, validator, name);
 }
-wxSize *wxButton_GetDefaultSize(wxButton & self, wxWindow * win) {
-    return new wxSize(self.GetDefaultSize(win));
-}
 
 // CLASS: wxNonOwnedWindow
 
@@ -163,9 +148,6 @@ wxTopLevelWindow *NewTopLevelWindow() {
 }
 wxTopLevelWindow *NewTopLevelWindow(wxWindow * parent, wxWindowID id, const wxString & title, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
     return new wxTopLevelWindow(parent, id, title, pos, size, style, name);
-}
-wxSize *wxTopLevelWindow_GetDefaultSize(wxTopLevelWindow & self) {
-    return new wxSize(self.GetDefaultSize());
 }
 
 // CLASS: wxFrame

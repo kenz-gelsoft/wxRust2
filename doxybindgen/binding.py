@@ -143,9 +143,12 @@ class RustMethodBinding:
         returns_new = self.__model.returns_new()
         yield '%sfn %s(%s) -> *mut %s;' % (
             self._unsafe_or_not(),
-            self.__model.overload_name(without_index=True, returns_new=returns_new),
+            self.__model.overload_name(
+                without_index=True,
+                returns_new=returns_new,
+            ),
             self._rust_params(with_this=returns_new),
-            self._returns(),
+            self.__model.return_type(),
         )
 
     def _unsafe_or_not(self):
@@ -155,7 +158,9 @@ class RustMethodBinding:
         if self.__model.overload_index == 0:
             return ''
         return '#[rust_name = "%s"]' % (
-            self.__model.overload_name(returns_new=self.__model.returns_new()),
+            self.__model.overload_name(
+                returns_new=self.__model.returns_new(),
+            ),
         )
     
     def _make_params_generic(self):
@@ -233,18 +238,10 @@ class RustMethodBinding:
                     self._call_params(),
                 )
         yield self._wrap_return_type(
-            self._returns(),
+            self.__model.return_type(),
             call,
         )
     
-    def _returns(self):
-        if self.__model.is_ctor:
-            return self.__model.cls.name
-        elif self.__model.returns_new():
-            return self.__model.returns.in_rust()
-        else:
-            return None
-
     def _call_params(self):
         return ', '.join(camel_to_snake(p.name) for p in self.__model.params)
 
@@ -358,7 +355,7 @@ class CxxMethodBinding:
         if not self.__model.generates():
             return
         body = '%s *%s(%s);' % (
-            self._returns(),
+            self.__model.return_type(),
             self._name(),
             self._cxx_params(),
         )
@@ -370,17 +367,11 @@ class CxxMethodBinding:
             returns_new=self.__model.returns_new(),
         )
     
-    def _returns(self):
-        returns = self.__model.cls.name
-        if self.__model.returns_new():
-            returns = self.__model.returns.cxx_typename()
-        return returns
-    
     def definition(self):
-        if not (self.is_ctor or self.__model.returns_new()):
+        if not self.__model.generates():
             return
         yield '%s *%s(%s) {' % (
-            self._returns(),
+            self.__model.return_type(),
             self._name(),
             self._cxx_params(),
         )
@@ -391,7 +382,7 @@ class CxxMethodBinding:
             )
         else:
             yield '    return new %s(self.%s(%s));' % (
-                self.__model.returns.cxx_typename(),
+                self.__model.return_type(),
                 self.__model.overload_name(without_index=True),
                 self._call_params(),
             )
