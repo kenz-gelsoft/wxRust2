@@ -59,6 +59,11 @@ class Method:
             pname = param.findtext('declname')
             self.params.append(Param(ptype, pname))
 
+    def generates(self):
+        if self.is_static:
+            return False
+        return self.is_ctor or self.returns_new()
+
     def _overload_index(self):
         return sum(m.name == self.name for m in self.cls.methods)
 

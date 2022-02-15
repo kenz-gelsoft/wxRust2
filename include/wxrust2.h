@@ -31,10 +31,6 @@ wxSize *wxWindow_GetSize(const wxWindow & self);
 wxSize *wxWindow_GetVirtualSize(const wxWindow & self);
 wxSize *wxWindow_GetBestVirtualSize(const wxWindow & self);
 wxSize *wxWindow_GetWindowBorderSize(const wxWindow & self);
-wxSize *wxWindow_FromDIP(wxWindow & self, const wxSize & sz, const wxWindow * w);
-wxPoint *wxWindow_FromDIP(wxWindow & self, const wxPoint & pt, const wxWindow * w);
-wxSize *wxWindow_ToDIP(wxWindow & self, const wxSize & sz, const wxWindow * w);
-wxPoint *wxWindow_ToDIP(wxWindow & self, const wxPoint & pt, const wxWindow * w);
 wxPoint *wxWindow_GetPosition(const wxWindow & self);
 wxPoint *wxWindow_GetScreenPosition(const wxWindow & self);
 wxPoint *wxWindow_GetClientAreaOrigin(const wxWindow & self);
@@ -63,14 +59,12 @@ wxSize *wxAnyButton_GetBitmapMargins(wxAnyButton & self);
 // CLASS: wxButton
 wxButton *NewButton();
 wxButton *NewButton(wxWindow * parent, wxWindowID id, const wxString & label, const wxPoint & pos, const wxSize & size, int32_t style, const wxValidator & validator, const wxString & name);
-wxSize *wxButton_GetDefaultSize(wxButton & self, wxWindow * win);
 
 // CLASS: wxNonOwnedWindow
 
 // CLASS: wxTopLevelWindow
 wxTopLevelWindow *NewTopLevelWindow();
 wxTopLevelWindow *NewTopLevelWindow(wxWindow * parent, wxWindowID id, const wxString & title, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name);
-wxSize *wxTopLevelWindow_GetDefaultSize(wxTopLevelWindow & self);
 
 // CLASS: wxFrame
 wxFrame *NewFrame();

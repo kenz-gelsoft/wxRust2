@@ -135,9 +135,7 @@ class RustMethodBinding:
         return returns
     
     def ffi_lines(self):
-        if self.__model.is_static:
-            return
-        if not (self.is_ctor or self.__model.returns_new()):
+        if not self.__model.generates():
             return
         overload = self._rename()
         if overload:
@@ -358,7 +356,7 @@ class CxxMethodBinding:
         self.__self_param = Param(SelfType(model.cls.name, model.const), 'self')
 
     def decl(self):
-        if not (self.is_ctor or self.__model.returns_new()):
+        if not self.__model.generates():
             return
         body = '%s *%s(%s);' % (
             self._returns(),
