@@ -74,6 +74,8 @@ class Method:
         return '%s%s' % (name, index)
 
     def returns_new(self):
+        if self.cls.blocks(self.overload_name()):
+            return False
         return self.returns.not_supported_value_type(check_generated=True)
 
     

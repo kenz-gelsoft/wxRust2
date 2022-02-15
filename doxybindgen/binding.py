@@ -137,12 +137,12 @@ class RustMethodBinding:
     def ffi_lines(self):
         if self.__model.is_static:
             return
-        if not (self.is_ctor or self._returns_new()):
+        if not (self.is_ctor or self.__model.returns_new()):
             return
         overload = self._rename()
         if overload:
             yield overload
-        returns_new = self._returns_new()
+        returns_new = self.__model.returns_new()
         if returns_new:
             rettype = self.__model.returns.in_rust()
         else:
@@ -161,7 +161,7 @@ class RustMethodBinding:
         if self.__model.overload_index == 0:
             return ''
         return '#[rust_name = "%s"]' % (
-            self.__model.overload_name(returns_new=self._returns_new()),
+            self.__model.overload_name(returns_new=self.__model.returns_new()),
         )
     
     def _make_params_generic(self):
@@ -184,7 +184,7 @@ class RustMethodBinding:
         returns_or_not = ''
         returns = self.__model.returns
         if not returns.is_void():
-            if self._returns_new():
+            if self.__model.returns_new():
                 rettype = returns.in_rust()[2:]
             else:
                 rettype = returns.in_rust(with_ffi=True)
@@ -208,11 +208,6 @@ class RustMethodBinding:
             yield '    %s' % (line,)
         yield '}'
     
-    def _returns_new(self):
-        if self.__model.cls.blocks(self.__model.overload_name()):
-            return False
-        return self.__model.returns_new()
-
     def _binding_body(self):
         for param in self.__model.params:
             marshalling = param.type.marshal(camel_to_snake(param.name))
@@ -225,7 +220,7 @@ class RustMethodBinding:
             self._call_params(),
         )
         if self.__is_instance_method:
-            if self._returns_new():
+            if self.__model.returns_new():
                 ref = ''
                 if self.__model.const:
                     ref = '&'
@@ -247,7 +242,7 @@ class RustMethodBinding:
         rettype = None
         if self.__model.is_ctor:
             rettype = unprefixed
-        elif self._returns_new():
+        elif self.__model.returns_new():
             rettype = self.__model.returns.in_rust()[2:]
         yield self._wrap_return_type(
             rettype, call
@@ -265,7 +260,7 @@ class RustMethodBinding:
             # TODO: handle static methods specially
             return 'STATIC'
         if self._uses_unsupported_type():
-            if self._returns_new():
+            if self.__model.returns_new():
                 if suppress_returns_new:
                     return 'GENERATED'
             else:
@@ -363,7 +358,7 @@ class CxxMethodBinding:
         self.__self_param = Param(SelfType(model.cls.name, model.const), 'self')
 
     def decl(self):
-        if not (self.is_ctor or self._returns_new()):
+        if not (self.is_ctor or self.__model.returns_new()):
             return
         body = '%s *%s(%s);' % (
             self._returns(),
@@ -373,21 +368,19 @@ class CxxMethodBinding:
         yield body
     
     def _name(self):
-        return self.__model.overload_name(without_index=True, returns_new=self._returns_new())
+        return self.__model.overload_name(
+            without_index=True,
+            returns_new=self.__model.returns_new(),
+        )
     
     def _returns(self):
         returns = self.__model.cls.name
-        if self._returns_new():
+        if self.__model.returns_new():
             returns = self.__model.returns.cxx_typename()
         return returns
     
-    def _returns_new(self):
-        if self.__model.cls.blocks(self.__model.overload_name()):
-            return False
-        return self.__model.returns_new()
-    
     def definition(self):
-        if not (self.is_ctor or self._returns_new()):
+        if not (self.is_ctor or self.__model.returns_new()):
             return
         yield '%s *%s(%s) {' % (
             self._returns(),
@@ -409,7 +402,7 @@ class CxxMethodBinding:
 
     def _cxx_params(self):
         params = self.__model.params.copy()
-        if self._returns_new():
+        if self.__model.returns_new():
             params.insert(0, self.__self_param)
         return ', '.join(self._cxx_param(p) for p in params)
 
