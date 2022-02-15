@@ -141,15 +141,11 @@ class RustMethodBinding:
         if overload:
             yield overload
         returns_new = self.__model.returns_new()
-        if returns_new:
-            rettype = self.__model.returns.in_rust()
-        else:
-            rettype = self.__model.cls.name
         yield '%sfn %s(%s) -> *mut %s;' % (
             self._unsafe_or_not(),
             self.__model.overload_name(without_index=True, returns_new=returns_new),
             self._rust_params(with_this=returns_new),
-            rettype,
+            self._returns(),
         )
 
     def _unsafe_or_not(self):
@@ -212,7 +208,6 @@ class RustMethodBinding:
             if marshalling:
                 for line in marshalling:
                     yield '%s' % (line,)
-        unprefixed = self.__model.cls.unprefixed()
         call = '%s(%s)' % (
             prefixed(self.__model.overload_name(), with_ffi=True),
             self._call_params(),
@@ -237,14 +232,18 @@ class RustMethodBinding:
                     self.__model.overload_name(),
                     self._call_params(),
                 )
-        rettype = None
-        if self.__model.is_ctor:
-            rettype = unprefixed
-        elif self.__model.returns_new():
-            rettype = self.__model.returns.in_rust()[2:]
         yield self._wrap_return_type(
-            rettype, call
+            self._returns(),
+            call,
         )
+    
+    def _returns(self):
+        if self.__model.is_ctor:
+            return self.__model.cls.name
+        elif self.__model.returns_new():
+            return self.__model.returns.in_rust()
+        else:
+            return None
 
     def _call_params(self):
         return ', '.join(camel_to_snake(p.name) for p in self.__model.params)
@@ -321,7 +320,7 @@ class RustMethodBinding:
 
     def _wrap_return_type(self, type, body):
         if type:
-            return '%s(%s)' % (type, body)
+            return '%s(%s)' % (type[2:], body)
         return body
 
     def _uses_ptr_type(self):
