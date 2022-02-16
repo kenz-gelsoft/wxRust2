@@ -1,10 +1,8 @@
 use std::convert::TryInto;
 use std::os::raw::c_char;
-use std::pin::Pin;
 use std::ptr;
 
 mod macros;
-use macros::wx_class;
 
 mod defs;
 pub use defs::*;
