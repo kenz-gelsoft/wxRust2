@@ -79,9 +79,7 @@ class Method:
         return '%s%s' % (name, index)
 
     def return_type(self):
-        if self.is_ctor:
-            return self.cls.name
-        elif self.returns_new():
+        if self.generates():
             return self.returns.typename
         else:
             return None

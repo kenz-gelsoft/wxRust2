@@ -218,22 +218,20 @@ class RustMethodBinding:
             self._call_params(),
         )
         if self.__is_instance_method:
+            self_param = 'self.pinned::<ffi::%s>().as_mut()' % (
+                self.__model.cls.name,
+            )
             if self.__model.returns_new():
-                ref = ''
                 if self.__model.const:
-                    ref = '&'
-                self_param = '%sself.pinned::<ffi::%s>().as_mut()' % (
-                    ref,
-                    self.__model.cls.name,
-                )
+                    self_param = '&' + self_param
                 params = ', '.join([self_param, self._call_params()])
                 call = 'ffi::%s(%s)' % (
                     self.__model.overload_name(returns_new=True),
                     params,
                 )
             else:
-                call = 'self.pinned::<ffi::%s>().as_mut().%s(%s)' % (
-                    self.__model.cls.name,
+                call = '%s.%s(%s)' % (
+                    self_param,
                     self.__model.overload_name(),
                     self._call_params(),
                 )
@@ -375,17 +373,16 @@ class CxxMethodBinding:
             self._name(),
             self._cxx_params(),
         )
-        if self.is_ctor:
-            yield '    return new %s(%s);' % (
-                self.__model.cls.name,
-                self._call_params(),
-            )
-        else:
-            yield '    return new %s(self.%s(%s));' % (
-                self.__model.return_type(),
+        new_params_or_expr = self._call_params()
+        if self.__model.returns_new():
+            new_params_or_expr = 'self.%s(%s)' % (
                 self.__model.overload_name(without_index=True),
-                self._call_params(),
+                new_params_or_expr,
             )
+        yield '    return new %s(%s);' % (
+            self.__model.return_type(),
+            new_params_or_expr,
+        )
         yield '}'
 
     def _cxx_params(self):
