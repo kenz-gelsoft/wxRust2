@@ -143,10 +143,7 @@ class RustMethodBinding:
         returns_new = self.__model.returns_new()
         yield '%sfn %s(%s) -> *mut %s;' % (
             self._unsafe_or_not(),
-            self.__model.overload_name(
-                without_index=True,
-                returns_new=returns_new,
-            ),
+            self.__model.overload_name(without_index=True),
             self._rust_params(with_this=returns_new),
             self.__model.return_type(),
         )
@@ -158,9 +155,7 @@ class RustMethodBinding:
         if self.__model.overload_index == 0:
             return ''
         return '#[rust_name = "%s"]' % (
-            self.__model.overload_name(
-                returns_new=self.__model.returns_new(),
-            ),
+            self.__model.overload_name(),
         )
     
     def _make_params_generic(self):
@@ -226,7 +221,7 @@ class RustMethodBinding:
                     self_param = '&' + self_param
                 params = ', '.join([self_param, self._call_params()])
                 call = 'ffi::%s(%s)' % (
-                    self.__model.overload_name(returns_new=True),
+                    self.__model.overload_name(),
                     params,
                 )
             else:
@@ -257,7 +252,7 @@ class RustMethodBinding:
                     return 'GENERATED'
             else:
                 return 'CXX_UNSUPPORTED'
-        if self.__model.cls.blocks(self.__model.overload_name()):
+        if self.__model.is_blocked():
             return 'BLOCKED'
         return None
     
@@ -360,10 +355,7 @@ class CxxMethodBinding:
         yield body
     
     def _name(self):
-        return self.__model.overload_name(
-            without_index=True,
-            returns_new=self.__model.returns_new(),
-        )
+        return self.__model.overload_name(without_index=True)
     
     def definition(self):
         if not self.__model.generates():
@@ -376,7 +368,10 @@ class CxxMethodBinding:
         new_params_or_expr = self._call_params()
         if self.__model.returns_new():
             new_params_or_expr = 'self.%s(%s)' % (
-                self.__model.overload_name(without_index=True),
+                self.__model.overload_name(
+                    without_index=True,
+                    cxx_name=True,
+                ),
                 new_params_or_expr,
             )
         yield '    return new %s(%s);' % (

@@ -63,19 +63,25 @@ class Method:
         if self.is_static:
             return False
         return self.is_ctor or self.returns_new()
+    
+    def is_blocked(self):
+        return self.cls.blocks(self.overload_name(cxx_name=True))
 
     def _overload_index(self):
         return sum(m.name == self.name for m in self.cls.methods)
 
-    def overload_name(self, without_index=False, returns_new=False):
+    def overload_name(self, without_index=False, cxx_name=False):
         name = self.name
         if self.is_ctor:
             name = 'New%s' % (self.cls.unprefixed(),)
         index = self.overload_index
         if without_index or index == 0:
             index = ''
-        if returns_new:
-            return '%s_%s%s' % (self.cls.name, name, index)
+        if not cxx_name and self.returns_new():
+            name = '_'.join((
+                self.cls.name,
+                name,
+            ))
         return '%s%s' % (name, index)
 
     def return_type(self):
@@ -85,7 +91,7 @@ class Method:
             return None
 
     def returns_new(self):
-        if self.cls.blocks(self.overload_name()):
+        if self.is_blocked():
             return False
         return self.returns.not_supported_value_type(check_generated=True)
 
