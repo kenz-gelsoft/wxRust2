@@ -340,7 +340,7 @@ class CxxMethodBinding:
     def definition(self):
         if not self.__model.generates():
             return
-        yield '%s *%s(%s) {' % (
+        yield 'inline %s *%s(%s) {' % (
             self.__model.return_type(),
             self.__model.overload_name(without_index=True),
             self._cxx_params(),
