@@ -320,13 +320,6 @@ class CxxClassBinding:
     def __init__(self, model):
         self.__model = model
         self.__methods = [CxxMethodBinding(m) for m in model.methods]
-
-    def decls_for_h(self):
-        yield '// CLASS: %s' % (self.__model.name,)
-        for method in self.__methods:
-            for line in method.decl():
-                yield line
-        yield ''
     
     def defs_for_cc(self):
         yield '// CLASS: %s' % (self.__model.name,)
