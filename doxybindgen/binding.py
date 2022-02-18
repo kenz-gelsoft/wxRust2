@@ -320,15 +320,8 @@ class CxxClassBinding:
     def __init__(self, model):
         self.__model = model
         self.__methods = [CxxMethodBinding(m) for m in model.methods]
-
-    def decls_for_h(self):
-        yield '// CLASS: %s' % (self.__model.name,)
-        for method in self.__methods:
-            for line in method.decl():
-                yield line
-        yield ''
     
-    def defs_for_cc(self):
+    def defs(self):
         yield '// CLASS: %s' % (self.__model.name,)
         for method in self.__methods:
             for line in method.definition():
@@ -344,25 +337,12 @@ class CxxMethodBinding:
         self.is_ctor = model.is_ctor
         self.__self_param = Param(SelfType(model.cls.name, model.const), 'self')
 
-    def decl(self):
-        if not self.__model.generates():
-            return
-        body = '%s *%s(%s);' % (
-            self.__model.return_type(),
-            self._name(),
-            self._cxx_params(),
-        )
-        yield body
-    
-    def _name(self):
-        return self.__model.overload_name(without_index=True)
-    
     def definition(self):
         if not self.__model.generates():
             return
-        yield '%s *%s(%s) {' % (
+        yield 'inline %s *%s(%s) {' % (
             self.__model.return_type(),
-            self._name(),
+            self.__model.overload_name(without_index=True),
             self._cxx_params(),
         )
         new_params_or_expr = self._call_params()

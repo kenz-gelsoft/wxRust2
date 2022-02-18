@@ -183,7 +183,6 @@ def main():
     to_be_generated = {
         'src/generated.rs': generated_rs,
         'include/wxrust2.h': wxrust2_h,
-        'src/wxrust2.cc': wxrust2_cc,
     }
     for path, generator in to_be_generated.items():
         with open(path, 'w') as f:
@@ -254,24 +253,7 @@ namespace wxrust {
 '''
     for cls in classes:
         binding = CxxClassBinding(cls)
-        for chunk in binding.decls_for_h():
-            yield chunk
-    yield '''\
-} // namespace wxrust
-'''
-
-def wxrust2_cc(classes):
-    yield '''\
-#include "wx/include/wxrust.h"
-#include "wx/include/wxrust2.h"
-
-namespace wxrust {
-
-// Constructors
-'''
-    for cls in classes:
-        binding = CxxClassBinding(cls)
-        for chunk in binding.defs_for_cc():
+        for chunk in binding.defs():
             yield chunk
     yield '''\
 } // namespace wxrust
