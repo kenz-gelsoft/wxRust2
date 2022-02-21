@@ -1,4 +1,4 @@
-from .model import Param, SelfType, prefixed
+from .model import Param, RustType, prefixed
 import re
 
 # Known, and problematic
@@ -106,8 +106,8 @@ class RustMethodBinding:
         self.is_ctor = model.is_ctor
         self.__is_dtor = model.name.startswith('~')
         self.__is_instance_method = not (model.is_static or model.is_ctor)
-        self.__self_param = Param(SelfType(model.cls.name, model.const), 'self')
-        self.__this_param = Param(SelfType(model.cls.name, model.const), 'arg0')
+        self.__self_param = Param(RustType(model.cls.name, model.const), 'self')
+        self.__this_param = Param(RustType(model.cls.name, model.const), 'arg0')
         self.__generic_params = self._make_params_generic()
     
     def cxx_auto_binding(self):
@@ -335,7 +335,7 @@ class CxxMethodBinding:
     def __init__(self, model):
         self.__model = model
         self.is_ctor = model.is_ctor
-        self.__self_param = Param(SelfType(model.cls.name, model.const), 'self')
+        self.__self_param = Param(RustType(model.cls.name, model.const), 'self')
 
     def definition(self):
         if not self.__model.generates():

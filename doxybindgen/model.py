@@ -52,7 +52,7 @@ class Method:
         self.is_ctor = self.name == cls.name
         self.const = e.get('const') == 'yes'
         if self.is_ctor:
-            self.returns = SelfType(cls.name, self.const, ctor_retval=True)
+            self.returns = RustType(cls.name, self.const, ctor_retval=True)
         self.params = []
         for param in e.findall('param'):
             ptype = CxxType(param.find('type'))
@@ -104,7 +104,7 @@ class Param:
     def is_self(self):
         return self.name == 'self'
 
-class SelfType:
+class RustType:
     def __init__(self, s, const, ctor_retval=False):
         self.typename = s
         self.const = const
