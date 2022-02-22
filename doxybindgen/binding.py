@@ -101,34 +101,34 @@ class RustMethodBinding:
         self.__generic_params = self._make_params_generic()
     
     def cxx_auto_binding(self, is_cxx):
-        if is_cxx:
-            body = '%sfn %s(%s)%s;' % (
-                self._unsafe_or_not(),
-                self.__model.name,
-                self._rust_params(),
-                self._returns_or_not(),
-            )
-            suppressed = self._suppressed_reason()
-            if suppressed:
-                yield '// %s: %s' % (suppressed, body)
-                return
-        else:
-            if not self.__model.generates():
-                return
-            returns_new = self.__model.returns_new()
-            body = '%sfn %s(%s) -> *mut %s;' % (
-                self._unsafe_or_not(),
-                self.__model.overload_name(without_index=True),
-                self._rust_params(with_this=returns_new),
-                self.__model.return_type(),
-            )
+        if not (is_cxx or self.__model.generates()):
+            return
+        with_this = not is_cxx and self.__model.returns_new()
+        body = '%sfn %s(%s)%s;' % (
+            self._unsafe_or_not(),
+            self.__model.overload_name(
+                without_index=True,
+                cxx_name=is_cxx,
+            ),
+            self._rust_params(with_this=with_this),
+            self._returns_or_not(is_cxx=is_cxx),
+        )
+        suppressed = self._suppressed_reason()
+        if is_cxx and suppressed:
+            yield '// %s: %s' % (suppressed, body)
+            return
         overload = self._rename()
         if overload:
             yield overload
         yield body
 
-    def _returns_or_not(self):
-        returns = self.__model.returns.in_rust()
+    def _returns_or_not(self, is_cxx):
+        if is_cxx:
+            returns = self.__model.returns.in_rust()
+        else:
+            returns = self.__model.return_type()
+            if returns:
+                returns = '*mut %s' % (returns,)
         if returns in ['void', '']:
             returns = ''
         else:

@@ -72,16 +72,17 @@ class Method:
 
     def overload_name(self, without_index=False, cxx_name=False):
         name = self.name
-        if self.is_ctor:
-            name = 'New%s' % (self.cls.unprefixed(),)
+        if not cxx_name:
+            if self.is_ctor:
+                name = 'New%s' % (self.cls.unprefixed(),)
+            if self.returns_new():
+                name = '_'.join((
+                    self.cls.name,
+                    name,
+                ))
         index = self.overload_index
         if without_index or index == 0:
             index = ''
-        if not cxx_name and self.returns_new():
-            name = '_'.join((
-                self.cls.name,
-                name,
-            ))
         return '%s%s' % (name, index)
 
     def return_type(self):
