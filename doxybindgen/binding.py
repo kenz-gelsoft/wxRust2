@@ -12,29 +12,21 @@ class RustClassBinding:
         self.__model = model
         self.__methods = [RustMethodBinding(m) for m in model.methods]
 
-    def cxx_auto_bound_methods(self):
+    def cxx_auto_bound_methods(self, is_cxx):
         indent = ' ' * 4 * 2
-        yield ''
+        if is_cxx:
+            yield ''
         yield '%s// CLASS: %s' % (
             indent,
             self.__model.name,
         )
-        yield '%stype %s;' % (
-            indent,
-            self.__model.name,
-        )
+        if is_cxx:
+            yield '%stype %s;' % (
+                indent,
+                self.__model.name,
+            )
         for method in self.__methods:
-            for line in method.cxx_auto_binding(is_cxx=True):
-                yield '%s%s' % (indent, line)
-
-    def generated_methods(self):
-        indent = ' ' * 4 * 2
-        yield '%s// CLASS: %s' % (
-            indent,
-            self.__model.name,
-        )
-        for method in self.__methods:
-            for line in method.cxx_auto_binding(is_cxx=False):
+            for line in method.cxx_auto_binding(is_cxx=is_cxx):
                 yield '%s%s' % (indent, line)
 
     def safer_binding(self, classes):
