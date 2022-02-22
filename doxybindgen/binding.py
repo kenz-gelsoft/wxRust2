@@ -13,15 +13,16 @@ class RustClassBinding:
         self.__methods = [RustMethodBinding(m) for m in model.methods]
 
     def cxx_auto_bound_methods(self):
-        template = '''\
-
-        // CLASS: %s
-        type %s;'''
-        yield template % (
-            self.__model.name,
-            self.__model.name
-        )
         indent = ' ' * 4 * 2
+        yield ''
+        yield '%s// CLASS: %s' % (
+            indent,
+            self.__model.name,
+        )
+        yield '%stype %s;' % (
+            indent,
+            self.__model.name,
+        )
         for method in self.__methods:
             for line in method.cxx_auto_binding(is_cxx=True):
                 yield '%s%s' % (indent, line)
