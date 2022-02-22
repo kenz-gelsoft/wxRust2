@@ -51,7 +51,7 @@ mod ffi {
         type wxIcon;
         type wxGraphicsPath;
         type wxRealPoint;
-
+        
         // CLASS: wxObject
         type wxObject;
         // CTOR: fn wxObject() -> Object;
@@ -67,7 +67,7 @@ mod ffi {
         fn UnShare(self: Pin<&mut wxObject>);
         // BLOCKED: unsafe fn operator delete(self: Pin<&mut wxObject>, buf: *mut void);
         // CXX_UNSUPPORTED: fn operator new(self: Pin<&mut wxObject>, size: size_t, filename: &wxString, line_num: i32) -> *mut void;
-
+        
         // CLASS: wxEvtHandler
         type wxEvtHandler;
         unsafe fn QueueEvent(self: Pin<&mut wxEvtHandler>, event: *mut wxEvent);
@@ -105,7 +105,7 @@ mod ffi {
         // STATIC: unsafe fn RemoveFilter(filter: *mut wxEventFilter);
         // CTOR: fn wxEvtHandler() -> EvtHandler;
         // DTOR: fn ~wxEvtHandler(self: Pin<&mut wxEvtHandler>);
-
+        
         // CLASS: wxWindow
         type wxWindow;
         fn AcceptsFocus(self: &wxWindow) -> bool;
@@ -415,7 +415,7 @@ mod ffi {
         // CTOR: unsafe fn wxWindow(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> Window;
         // DTOR: fn ~wxWindow(self: Pin<&mut wxWindow>);
         // BLOCKED: unsafe fn Create(self: Pin<&mut wxWindow>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
-
+        
         // CLASS: wxControl
         type wxControl;
         // CTOR: unsafe fn wxControl(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> Control;
@@ -434,7 +434,7 @@ mod ffi {
         // STATIC: fn RemoveMnemonics(str: &wxString) -> wxString;
         // STATIC: fn EscapeMnemonics(text: &wxString) -> wxString;
         // STATIC: fn Ellipsize(label: &wxString, dc: &wxDC, mode: wxEllipsizeMode, max_width: i32, flags: i32) -> wxString;
-
+        
         // CLASS: wxAnyButton
         type wxAnyButton;
         // CTOR: fn wxAnyButton() -> AnyButton;
@@ -456,7 +456,7 @@ mod ffi {
         #[rust_name = "SetBitmapMargins1"]
         fn SetBitmapMargins(self: Pin<&mut wxAnyButton>, sz: &wxSize);
         // CXX_UNSUPPORTED: fn SetBitmapPosition(self: Pin<&mut wxAnyButton>, dir: wxDirection);
-
+        
         // CLASS: wxButton
         type wxButton;
         // CTOR: fn wxButton() -> Button;
@@ -468,13 +468,13 @@ mod ffi {
         fn SetDefault(self: Pin<&mut wxButton>) -> *mut wxWindow;
         fn SetLabel(self: Pin<&mut wxButton>, label: &wxString);
         // STATIC: unsafe fn GetDefaultSize(win: *mut wxWindow) -> wxSize;
-
+        
         // CLASS: wxNonOwnedWindow
         type wxNonOwnedWindow;
         fn SetShape(self: Pin<&mut wxNonOwnedWindow>, region: &wxRegion) -> bool;
         #[rust_name = "SetShape1"]
         fn SetShape(self: Pin<&mut wxNonOwnedWindow>, path: &wxGraphicsPath) -> bool;
-
+        
         // CLASS: wxTopLevelWindow
         type wxTopLevelWindow;
         // CTOR: fn wxTopLevelWindow() -> TopLevelWindow;
@@ -527,7 +527,7 @@ mod ffi {
         // BLOCKED: fn UseNativeDecorations(self: Pin<&mut wxTopLevelWindow>, native: bool);
         // BLOCKED: fn UseNativeDecorationsByDefault(self: Pin<&mut wxTopLevelWindow>, native: bool);
         // STATIC: fn GetDefaultSize() -> wxSize;
-
+        
         // CLASS: wxFrame
         type wxFrame;
         // CTOR: fn wxFrame() -> Frame;
@@ -555,7 +555,7 @@ mod ffi {
         // BLOCKED: fn MSWGetTaskBarButton(self: Pin<&mut wxFrame>) -> *mut wxTaskBarButton;
         fn PushStatusText(self: Pin<&mut wxFrame>, text: &wxString, number: i32);
         fn PopStatusText(self: Pin<&mut wxFrame>, number: i32);
-
+        
         // CLASS: wxPoint
         type wxPoint;
         fn IsFullySpecified(self: &wxPoint) -> bool;
@@ -581,7 +581,7 @@ mod ffi {
         // CTOR: fn wxPoint() -> Point;
         // CTOR: fn wxPoint(x: i32, y: i32) -> Point;
         // CTOR: fn wxPoint(pt: &wxRealPoint) -> Point;
-
+        
         // CLASS: wxSize
         type wxSize;
         // BLOCKED: fn operator=(self: Pin<&mut wxSize>, sz: &wxSize) -> Pin<&mut wxSize>;
@@ -623,7 +623,7 @@ mod ffi {
         fn SetDefaults(self: Pin<&mut wxSize>, size_default: &wxSize);
         fn SetHeight(self: Pin<&mut wxSize>, height: i32);
         fn SetWidth(self: Pin<&mut wxSize>, width: i32);
-
+        
         // CLASS: wxValidator
         type wxValidator;
         // CTOR: fn wxValidator() -> Validator;
