@@ -23,7 +23,7 @@ class RustClassBinding:
         )
         indent = ' ' * 4 * 2
         for method in self.__methods:
-            for line in method.cxx_auto_binding():
+            for line in method.cxx_auto_binding(is_cxx=True):
                 yield '%s%s' % (indent, line)
 
     def generated_methods(self):
@@ -33,7 +33,7 @@ class RustClassBinding:
             self.__model.name,
         )
         for method in self.__methods:
-            for line in method.ffi_lines():
+            for line in method.cxx_auto_binding(is_cxx=False):
                 yield '%s%s' % (indent, line)
 
     def safer_binding(self, classes):
@@ -110,17 +110,28 @@ class RustMethodBinding:
         self.__this_param = Param(RustType(model.cls.name, model.const), 'arg0')
         self.__generic_params = self._make_params_generic()
     
-    def cxx_auto_binding(self):
-        body = '%sfn %s(%s)%s;' % (
-            self._unsafe_or_not(),
-            self.__model.name,
-            self._rust_params(),
-            self._returns_or_not(),
-        )
-        suppressed = self._suppressed_reason()
-        if suppressed:
-            yield '// %s: %s' % (suppressed, body)
-            return
+    def cxx_auto_binding(self, is_cxx):
+        if is_cxx:
+            body = '%sfn %s(%s)%s;' % (
+                self._unsafe_or_not(),
+                self.__model.name,
+                self._rust_params(),
+                self._returns_or_not(),
+            )
+            suppressed = self._suppressed_reason()
+            if suppressed:
+                yield '// %s: %s' % (suppressed, body)
+                return
+        else:
+            if not self.__model.generates():
+                return
+            returns_new = self.__model.returns_new()
+            body = '%sfn %s(%s) -> *mut %s;' % (
+                self._unsafe_or_not(),
+                self.__model.overload_name(without_index=True),
+                self._rust_params(with_this=returns_new),
+                self.__model.return_type(),
+            )
         overload = self._rename()
         if overload:
             yield overload
@@ -134,20 +145,6 @@ class RustMethodBinding:
             returns = ' -> %s' % (returns,)
         return returns
     
-    def ffi_lines(self):
-        if not self.__model.generates():
-            return
-        overload = self._rename()
-        if overload:
-            yield overload
-        returns_new = self.__model.returns_new()
-        yield '%sfn %s(%s) -> *mut %s;' % (
-            self._unsafe_or_not(),
-            self.__model.overload_name(without_index=True),
-            self._rust_params(with_this=returns_new),
-            self.__model.return_type(),
-        )
-
     def _unsafe_or_not(self):
         return 'unsafe ' if self._uses_ptr_type() else ''
     
