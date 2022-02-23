@@ -86,8 +86,13 @@ class Method:
                     self.cls.name,
                     name,
                 ))
+        if without_index:
+            return name
+        return self.overload_indexed(name)
+    
+    def overload_indexed(self, name):
         index = self.overload_index
-        if without_index or index == 0:
+        if index == 0:
             index = ''
         return '%s%s' % (name, index)
 

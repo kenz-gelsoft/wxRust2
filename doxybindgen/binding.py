@@ -156,7 +156,7 @@ class RustMethodBinding:
     def binding(self):
         suppress = self._suppressed_reason(
             suppress_ctor=False,
-            suppress_returns_new=False,
+            suppress_generated=False,
         )
         if suppress:
             yield '// %s: fn %s()' % (suppress, self.__model.name)
@@ -167,7 +167,7 @@ class RustMethodBinding:
                 ', '.join('%s: %s' % p for p in self.__generic_params),
             )
         yield '%sfn %s%s(%s)%s {' % (
-            '' if self.__is_instance_method else 'pub ',
+            'pub ' if self.is_ctor else '',
             self._rust_method_name(),
             gen_params,
             self._rust_params(with_ffi=True, binding=True),
@@ -211,17 +211,20 @@ class RustMethodBinding:
     def _call_params(self):
         return ', '.join(camel_to_snake(p.name) for p in self.__model.params)
 
-    def _suppressed_reason(self, suppress_ctor=True, suppress_returns_new=True):
+    def _suppressed_reason(self, suppress_ctor=True, suppress_generated=True):
         if suppress_ctor and self.__model.is_ctor:
             return 'CTOR'
         if self.__is_dtor:
             return 'DTOR'
         if self.__model.is_static:
             # TODO: handle static methods specially
-            return 'STATIC'
+            if suppress_generated:
+                return 'GENERATED'
         if self.__model.uses_unsupported_type():
+            if self.__model.is_static:
+                return 'STATIC'
             if self.__model.returns_new():
-                if suppress_returns_new:
+                if suppress_generated:
                     return 'GENERATED'
             else:
                 return 'CXX_UNSUPPORTED'
@@ -233,8 +236,7 @@ class RustMethodBinding:
         method_name = pascal_to_snake(self.__model.name)
         if self.__model.is_ctor:
             method_name = 'new'
-        if self.__model.overload_index > 0:
-            method_name += str(self.__model.overload_index)
+        method_name = self.__model.overload_indexed(method_name)
         if method_name in RUST_KEYWORDS:
             method_name += '_'
         return method_name

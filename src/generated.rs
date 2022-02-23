@@ -101,8 +101,8 @@ mod ffi {
         unsafe fn SetPreviousHandler(self: Pin<&mut wxEvtHandler>, handler: *mut wxEvtHandler);
         fn Unlink(self: Pin<&mut wxEvtHandler>);
         fn IsUnlinked(self: &wxEvtHandler) -> bool;
-        // STATIC: unsafe fn AddFilter(filter: *mut wxEventFilter);
-        // STATIC: unsafe fn RemoveFilter(filter: *mut wxEventFilter);
+        // GENERATED: unsafe fn AddFilter(filter: *mut wxEventFilter);
+        // GENERATED: unsafe fn RemoveFilter(filter: *mut wxEventFilter);
         // CTOR: fn wxEvtHandler() -> EvtHandler;
         // DTOR: fn ~wxEvtHandler(self: Pin<&mut wxEvtHandler>);
         
@@ -216,12 +216,12 @@ mod ffi {
         fn SetVirtualSize(self: Pin<&mut wxWindow>, width: i32, height: i32);
         #[rust_name = "SetVirtualSize1"]
         fn SetVirtualSize(self: Pin<&mut wxWindow>, size: &wxSize);
-        // STATIC: unsafe fn FromDIP(sz: &wxSize, w: *const wxWindow) -> wxSize;
-        // STATIC: unsafe fn FromDIP(pt: &wxPoint, w: *const wxWindow) -> wxPoint;
-        // STATIC: unsafe fn FromDIP(d: i32, w: *const wxWindow) -> i32;
-        // STATIC: unsafe fn ToDIP(sz: &wxSize, w: *const wxWindow) -> wxSize;
-        // STATIC: unsafe fn ToDIP(pt: &wxPoint, w: *const wxWindow) -> wxPoint;
-        // STATIC: unsafe fn ToDIP(d: i32, w: *const wxWindow) -> i32;
+        // GENERATED: unsafe fn FromDIP(sz: &wxSize, w: *const wxWindow) -> wxSize;
+        // GENERATED: unsafe fn FromDIP(pt: &wxPoint, w: *const wxWindow) -> wxPoint;
+        // GENERATED: unsafe fn FromDIP(d: i32, w: *const wxWindow) -> i32;
+        // GENERATED: unsafe fn ToDIP(sz: &wxSize, w: *const wxWindow) -> wxSize;
+        // GENERATED: unsafe fn ToDIP(pt: &wxPoint, w: *const wxWindow) -> wxPoint;
+        // GENERATED: unsafe fn ToDIP(d: i32, w: *const wxWindow) -> i32;
         fn Center(self: Pin<&mut wxWindow>, dir: i32);
         fn CenterOnParent(self: Pin<&mut wxWindow>, dir: i32);
         fn Centre(self: Pin<&mut wxWindow>, direction: i32);
@@ -403,14 +403,14 @@ mod ffi {
         fn RegisterHotKey(self: Pin<&mut wxWindow>, hotkey_id: i32, modifiers: i32, virtual_key_code: i32) -> bool;
         fn UnregisterHotKey(self: Pin<&mut wxWindow>, hotkey_id: i32) -> bool;
         // BLOCKED: fn UpdateWindowUI(self: Pin<&mut wxWindow>, flags: i32);
-        // STATIC: fn GetClassDefaultAttributes(variant: wxWindowVariant) -> wxVisualAttributes;
-        // STATIC: fn FindFocus() -> *mut wxWindow;
-        // STATIC: unsafe fn FindWindowById(id: i32, parent: *const wxWindow) -> *mut wxWindow;
-        // STATIC: unsafe fn FindWindowByLabel(label: &wxString, parent: *const wxWindow) -> *mut wxWindow;
-        // STATIC: unsafe fn FindWindowByName(name: &wxString, parent: *const wxWindow) -> *mut wxWindow;
-        // STATIC: fn GetCapture() -> *mut wxWindow;
-        // STATIC: fn NewControlId(count: i32) -> i32;
-        // STATIC: fn UnreserveControlId(id: i32, count: i32);
+        // GENERATED: fn GetClassDefaultAttributes(variant: wxWindowVariant) -> wxVisualAttributes;
+        // GENERATED: fn FindFocus() -> *mut wxWindow;
+        // GENERATED: unsafe fn FindWindowById(id: i32, parent: *const wxWindow) -> *mut wxWindow;
+        // GENERATED: unsafe fn FindWindowByLabel(label: &wxString, parent: *const wxWindow) -> *mut wxWindow;
+        // GENERATED: unsafe fn FindWindowByName(name: &wxString, parent: *const wxWindow) -> *mut wxWindow;
+        // GENERATED: fn GetCapture() -> *mut wxWindow;
+        // GENERATED: fn NewControlId(count: i32) -> i32;
+        // GENERATED: fn UnreserveControlId(id: i32, count: i32);
         // CTOR: fn wxWindow() -> Window;
         // CTOR: unsafe fn wxWindow(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> Window;
         // DTOR: fn ~wxWindow(self: Pin<&mut wxWindow>);
@@ -430,10 +430,10 @@ mod ffi {
         fn SetLabel(self: Pin<&mut wxControl>, label: &wxString);
         fn SetLabelText(self: Pin<&mut wxControl>, text: &wxString);
         fn SetLabelMarkup(self: Pin<&mut wxControl>, markup: &wxString) -> bool;
-        // STATIC: fn GetLabelText(label: &wxString) -> wxString;
-        // STATIC: fn RemoveMnemonics(str: &wxString) -> wxString;
-        // STATIC: fn EscapeMnemonics(text: &wxString) -> wxString;
-        // STATIC: fn Ellipsize(label: &wxString, dc: &wxDC, mode: i32, max_width: i32, flags: i32) -> wxString;
+        // GENERATED: fn GetLabelText(label: &wxString) -> wxString;
+        // GENERATED: fn RemoveMnemonics(str: &wxString) -> wxString;
+        // GENERATED: fn EscapeMnemonics(text: &wxString) -> wxString;
+        // GENERATED: fn Ellipsize(label: &wxString, dc: &wxDC, mode: i32, max_width: i32, flags: i32) -> wxString;
         
         // CLASS: wxAnyButton
         type wxAnyButton;
@@ -467,7 +467,7 @@ mod ffi {
         fn SetAuthNeeded(self: Pin<&mut wxButton>, needed: bool);
         fn SetDefault(self: Pin<&mut wxButton>) -> *mut wxWindow;
         fn SetLabel(self: Pin<&mut wxButton>, label: &wxString);
-        // STATIC: unsafe fn GetDefaultSize(win: *mut wxWindow) -> wxSize;
+        // GENERATED: unsafe fn GetDefaultSize(win: *mut wxWindow) -> wxSize;
         
         // CLASS: wxNonOwnedWindow
         type wxNonOwnedWindow;
@@ -526,7 +526,7 @@ mod ffi {
         // BLOCKED: fn ShowFullScreen(self: Pin<&mut wxTopLevelWindow>, show: bool, style: i32) -> bool;
         // BLOCKED: fn UseNativeDecorations(self: Pin<&mut wxTopLevelWindow>, native: bool);
         // BLOCKED: fn UseNativeDecorationsByDefault(self: Pin<&mut wxTopLevelWindow>, native: bool);
-        // STATIC: fn GetDefaultSize() -> wxSize;
+        // GENERATED: fn GetDefaultSize() -> wxSize;
         
         // CLASS: wxFrame
         type wxFrame;
@@ -634,8 +634,8 @@ mod ffi {
         fn TransferFromWindow(self: Pin<&mut wxValidator>) -> bool;
         fn TransferToWindow(self: Pin<&mut wxValidator>) -> bool;
         unsafe fn Validate(self: Pin<&mut wxValidator>, parent: *mut wxWindow) -> bool;
-        // STATIC: fn SuppressBellOnError(suppress: bool);
-        // STATIC: fn IsSilent() -> bool;
+        // GENERATED: fn SuppressBellOnError(suppress: bool);
+        // GENERATED: fn IsSilent() -> bool;
     }
     unsafe extern "C++" {
         // CLASS: wxObject
@@ -872,8 +872,8 @@ pub trait EvtHandlerMethods: ObjectMethods {
     fn is_unlinked(&self) -> bool {
         self.pinned::<ffi::wxEvtHandler>().as_mut().IsUnlinked()
     }
-    // STATIC: fn AddFilter()
-    // STATIC: fn RemoveFilter()
+    // BLOCKED: fn AddFilter()
+    // BLOCKED: fn RemoveFilter()
     // DTOR: fn ~wxEvtHandler()
 }
 
@@ -1201,10 +1201,26 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     // STATIC: fn FromDIP()
     // STATIC: fn FromDIP()
-    // STATIC: fn FromDIP()
+    fn from_dip5<T: WindowMethods>(d: i32, w: Option<&T>) -> i32 {
+        unsafe {
+            let w = match w {
+                Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWindow_FromDIP5(d, w)
+        }
+    }
     // STATIC: fn ToDIP()
     // STATIC: fn ToDIP()
-    // STATIC: fn ToDIP()
+    fn to_dip5<T: WindowMethods>(d: i32, w: Option<&T>) -> i32 {
+        unsafe {
+            let w = match w {
+                Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWindow_ToDIP5(d, w)
+        }
+    }
     fn center(&self, dir: i32) {
         self.pinned::<ffi::wxWindow>().as_mut().Center(dir)
     }
@@ -1689,13 +1705,13 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     // BLOCKED: fn UpdateWindowUI()
     // STATIC: fn GetClassDefaultAttributes()
-    // STATIC: fn FindFocus()
-    // STATIC: fn FindWindowById()
-    // STATIC: fn FindWindowByLabel()
-    // STATIC: fn FindWindowByName()
-    // STATIC: fn GetCapture()
-    // STATIC: fn NewControlId()
-    // STATIC: fn UnreserveControlId()
+    // BLOCKED: fn FindFocus()
+    // BLOCKED: fn FindWindowById()
+    // BLOCKED: fn FindWindowByLabel()
+    // BLOCKED: fn FindWindowByName()
+    // BLOCKED: fn GetCapture()
+    // BLOCKED: fn NewControlId()
+    // BLOCKED: fn UnreserveControlId()
     // DTOR: fn ~wxWindow()
     // BLOCKED: fn Create()
 }
@@ -2330,7 +2346,11 @@ pub trait ValidatorMethods: EvtHandlerMethods {
             self.pinned::<ffi::wxValidator>().as_mut().Validate(parent)
         }
     }
-    // STATIC: fn SuppressBellOnError()
-    // STATIC: fn IsSilent()
+    fn suppress_bell_on_error(suppress: bool) {
+        ffi::wxValidator_SuppressBellOnError(suppress)
+    }
+    fn is_silent() -> bool {
+        ffi::wxValidator_IsSilent()
+    }
 }
 
