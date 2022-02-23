@@ -12,29 +12,19 @@ class RustClassBinding:
         self.__model = model
         self.__methods = [RustMethodBinding(m) for m in model.methods]
 
-    def cxx_auto_bound_methods(self):
-        template = '''\
-
-        // CLASS: %s
-        type %s;'''
-        yield template % (
-            self.__model.name,
-            self.__model.name
-        )
-        indent = ' ' * 4 * 2
-        for method in self.__methods:
-            for line in method.cxx_auto_binding():
-                yield '%s%s' % (indent, line)
-
-    def generated_methods(self):
-        indent = ' ' * 4 * 2
-        yield '%s// CLASS: %s' % (
-            indent,
+    def cxx_auto_bound_methods(self, is_cxx):
+        if is_cxx:
+            yield ''
+        yield '// CLASS: %s' % (
             self.__model.name,
         )
+        if is_cxx:
+            yield 'type %s;' % (
+                self.__model.name,
+            )
         for method in self.__methods:
-            for line in method.ffi_lines():
-                yield '%s%s' % (indent, line)
+            for line in method.cxx_auto_binding(is_cxx=is_cxx):
+                yield line
 
     def safer_binding(self, classes):
         yield '// %s' % (
@@ -110,15 +100,21 @@ class RustMethodBinding:
         self.__this_param = Param(RustType(model.cls.name, model.const), 'arg0')
         self.__generic_params = self._make_params_generic()
     
-    def cxx_auto_binding(self):
+    def cxx_auto_binding(self, is_cxx):
+        if not (is_cxx or self.__model.generates()):
+            return
+        with_this = not is_cxx and self.__model.returns_new()
         body = '%sfn %s(%s)%s;' % (
             self._unsafe_or_not(),
-            self.__model.name,
-            self._rust_params(),
-            self._returns_or_not(),
+            self.__model.overload_name(
+                without_index=True,
+                cxx_name=is_cxx,
+            ),
+            self._rust_params(with_this=with_this),
+            self._returns_or_not(is_cxx=is_cxx),
         )
         suppressed = self._suppressed_reason()
-        if suppressed:
+        if is_cxx and suppressed:
             yield '// %s: %s' % (suppressed, body)
             return
         overload = self._rename()
@@ -126,28 +122,18 @@ class RustMethodBinding:
             yield overload
         yield body
 
-    def _returns_or_not(self):
-        returns = self.__model.returns.in_rust()
-        if returns in ['void', '']:
-            returns = ''
-        else:
-            returns = ' -> %s' % (returns,)
-        return returns
+    def _returns_or_not(self, is_cxx=False, binding=False):
+        if self.__model.returns.is_void():
+            return ''
+        returns = self.__model.returns.in_rust(with_ffi=binding)
+        wrapped = self.__model.wrapped_return_type()
+        if wrapped:
+            if binding:
+                returns = wrapped[2:]
+            elif not is_cxx:
+                returns = '*mut %s' % (wrapped,)
+        return ' -> %s' % (returns,)
     
-    def ffi_lines(self):
-        if not self.__model.generates():
-            return
-        overload = self._rename()
-        if overload:
-            yield overload
-        returns_new = self.__model.returns_new()
-        yield '%sfn %s(%s) -> *mut %s;' % (
-            self._unsafe_or_not(),
-            self.__model.overload_name(without_index=True),
-            self._rust_params(with_this=returns_new),
-            self.__model.return_type(),
-        )
-
     def _unsafe_or_not(self):
         return 'unsafe ' if self._uses_ptr_type() else ''
     
@@ -175,16 +161,6 @@ class RustMethodBinding:
         if suppress:
             yield '// %s: fn %s()' % (suppress, self.__model.name)
             return
-        returns_or_not = ''
-        returns = self.__model.returns
-        if not returns.is_void():
-            if self.__model.returns_new():
-                rettype = returns.in_rust()[2:]
-            else:
-                rettype = returns.in_rust(with_ffi=True)
-            returns_or_not = ' -> %s' % (
-                rettype,
-            )
         gen_params = ''
         if self.__generic_params:
             gen_params = '<%s>' % (
@@ -195,7 +171,7 @@ class RustMethodBinding:
             self._rust_method_name(),
             gen_params,
             self._rust_params(with_ffi=True, binding=True),
-            returns_or_not,
+            self._returns_or_not(binding=True),
         )
         body_lines = list(self._binding_body())
         for line in self._wrap_if_unsafe(body_lines):
@@ -230,10 +206,7 @@ class RustMethodBinding:
                     self.__model.overload_name(),
                     self._call_params(),
                 )
-        yield self._wrap_return_type(
-            self.__model.return_type(),
-            call,
-        )
+        yield self._wrap_return_type(call)
     
     def _call_params(self):
         return ', '.join(camel_to_snake(p.name) for p in self.__model.params)
@@ -308,10 +281,11 @@ class RustMethodBinding:
                 yield '    %s' % (line,)
             yield '}'
 
-    def _wrap_return_type(self, type, body):
-        if type:
-            return '%s(%s)' % (type[2:], body)
-        return body
+    def _wrap_return_type(self, call):
+        wrapped = self.__model.wrapped_return_type()
+        if wrapped:
+            return '%s(%s)' % (wrapped[2:], call)
+        return call
 
     def _uses_ptr_type(self):
         return any(p.type.is_ptr() for p in self.__model.params)
@@ -341,7 +315,7 @@ class CxxMethodBinding:
         if not self.__model.generates():
             return
         yield 'inline %s *%s(%s) {' % (
-            self.__model.return_type(),
+            self.__model.wrapped_return_type(),
             self.__model.overload_name(without_index=True),
             self._cxx_params(),
         )
@@ -355,7 +329,7 @@ class CxxMethodBinding:
                 new_params_or_expr,
             )
         yield '    return new %s(%s);' % (
-            self.__model.return_type(),
+            self.__model.wrapped_return_type(),
             new_params_or_expr,
         )
         yield '}'
