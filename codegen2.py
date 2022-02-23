@@ -217,13 +217,13 @@ mod ffi {
     for t in types:
         yield '%stype %s;' % (indent,t)
     for cls in bindings:
-        for line in cls.cxx_auto_bound_methods(is_cxx=True):
+        for line in cls.ffi_lines():
             yield '%s%s' % (indent, line)
     yield '''\
     }
     unsafe extern "C++" {'''
     for cls in bindings:
-        for line in cls.cxx_auto_bound_methods(is_cxx=False):
+        for line in cls.ffi_lines(for_shim=True):
             yield '%s%s' % (indent, line)
     yield '''\
     }

@@ -12,18 +12,18 @@ class RustClassBinding:
         self.__model = model
         self.__methods = [RustMethodBinding(m) for m in model.methods]
 
-    def cxx_auto_bound_methods(self, is_cxx):
-        if is_cxx:
+    def ffi_lines(self, for_shim=False):
+        if not for_shim:
             yield ''
         yield '// CLASS: %s' % (
             self.__model.name,
         )
-        if is_cxx:
+        if not for_shim:
             yield 'type %s;' % (
                 self.__model.name,
             )
         for method in self.__methods:
-            for line in method.cxx_auto_binding(is_cxx=is_cxx):
+            for line in method.ffi_lines(for_shim=for_shim):
                 yield line
 
     def safer_binding(self, classes):
@@ -100,21 +100,21 @@ class RustMethodBinding:
         self.__this_param = Param(RustType(model.cls.name, model.const), 'arg0')
         self.__generic_params = self._make_params_generic()
     
-    def cxx_auto_binding(self, is_cxx):
-        if not (is_cxx or self.__model.needs_shim()):
+    def ffi_lines(self, for_shim):
+        if for_shim and not self.__model.needs_shim():
             return
-        with_this = not is_cxx and self.__model.returns_new()
+        with_this = for_shim and self.__model.returns_new()
         body = '%sfn %s(%s)%s;' % (
             self._unsafe_or_not(),
             self.__model.overload_name(
                 without_index=True,
-                cxx_name=is_cxx,
+                cxx_name=not for_shim,
             ),
             self._rust_params(with_this=with_this),
-            self._returns_or_not(is_cxx=is_cxx),
+            self._returns_or_not(for_shim=for_shim),
         )
         suppressed = self._suppressed_reason()
-        if is_cxx and suppressed:
+        if not for_shim and suppressed:
             yield '// %s: %s' % (suppressed, body)
             return
         overload = self._rename()
@@ -122,7 +122,7 @@ class RustMethodBinding:
             yield overload
         yield body
 
-    def _returns_or_not(self, is_cxx=False, binding=False):
+    def _returns_or_not(self, for_shim=True, binding=False):
         if self.__model.returns.is_void():
             return ''
         returns = self.__model.returns.in_rust(with_ffi=binding)
@@ -130,7 +130,7 @@ class RustMethodBinding:
         if wrapped:
             if binding:
                 returns = wrapped[2:]
-            elif not is_cxx:
+            elif for_shim:
                 returns = '*mut %s' % (wrapped,)
         return ' -> %s' % (returns,)
     
