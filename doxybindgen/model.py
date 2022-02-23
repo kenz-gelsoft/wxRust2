@@ -62,7 +62,8 @@ class Method:
 
     def generates(self):
         if self.is_static:
-            return not self.uses_unsupported_type()
+            if not self.uses_unsupported_type() or self.returns_new():
+                return True
         return self.is_ctor or self.returns_new()
     
     def uses_unsupported_type(self):

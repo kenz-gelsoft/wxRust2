@@ -667,8 +667,16 @@ mod ffi {
         fn wxWindow_GetVirtualSize(arg0: &wxWindow) -> *mut wxSize;
         fn wxWindow_GetBestVirtualSize(arg0: &wxWindow) -> *mut wxSize;
         fn wxWindow_GetWindowBorderSize(arg0: &wxWindow) -> *mut wxSize;
+        #[rust_name = "wxWindow_FromDIP3"]
+        unsafe fn wxWindow_FromDIP(sz: &wxSize, w: *const wxWindow) -> *mut wxSize;
+        #[rust_name = "wxWindow_FromDIP4"]
+        unsafe fn wxWindow_FromDIP(pt: &wxPoint, w: *const wxWindow) -> *mut wxPoint;
         #[rust_name = "wxWindow_FromDIP5"]
         unsafe fn wxWindow_FromDIP(d: i32, w: *const wxWindow) -> i32;
+        #[rust_name = "wxWindow_ToDIP3"]
+        unsafe fn wxWindow_ToDIP(sz: &wxSize, w: *const wxWindow) -> *mut wxSize;
+        #[rust_name = "wxWindow_ToDIP4"]
+        unsafe fn wxWindow_ToDIP(pt: &wxPoint, w: *const wxWindow) -> *mut wxPoint;
         #[rust_name = "wxWindow_ToDIP5"]
         unsafe fn wxWindow_ToDIP(d: i32, w: *const wxWindow) -> i32;
         #[rust_name = "wxWindow_GetPosition1"]
@@ -714,11 +722,13 @@ mod ffi {
         fn NewButton() -> *mut wxButton;
         #[rust_name = "NewButton1"]
         unsafe fn NewButton(parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> *mut wxButton;
+        unsafe fn wxButton_GetDefaultSize(win: *mut wxWindow) -> *mut wxSize;
         // CLASS: wxNonOwnedWindow
         // CLASS: wxTopLevelWindow
         fn NewTopLevelWindow() -> *mut wxTopLevelWindow;
         #[rust_name = "NewTopLevelWindow1"]
         unsafe fn NewTopLevelWindow(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxTopLevelWindow;
+        fn wxTopLevelWindow_GetDefaultSize() -> *mut wxSize;
         // CLASS: wxFrame
         fn NewFrame() -> *mut wxFrame;
         #[rust_name = "NewFrame1"]
@@ -1199,8 +1209,26 @@ pub trait WindowMethods: EvtHandlerMethods {
         let size = &size.pinned::<ffi::wxSize>();
         self.pinned::<ffi::wxWindow>().as_mut().SetVirtualSize1(size)
     }
-    // STATIC: fn FromDIP()
-    // STATIC: fn FromDIP()
+    fn from_dip3<T: WindowMethods>(sz: &Size, w: Option<&T>) -> Size {
+        unsafe {
+            let sz = &sz.pinned::<ffi::wxSize>();
+            let w = match w {
+                Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
+                None => ptr::null_mut(),
+            };
+            Size(ffi::wxWindow_FromDIP3(sz, w))
+        }
+    }
+    fn from_dip4<T: WindowMethods>(pt: &Point, w: Option<&T>) -> Point {
+        unsafe {
+            let pt = &pt.pinned::<ffi::wxPoint>();
+            let w = match w {
+                Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
+                None => ptr::null_mut(),
+            };
+            Point(ffi::wxWindow_FromDIP4(pt, w))
+        }
+    }
     fn from_dip5<T: WindowMethods>(d: i32, w: Option<&T>) -> i32 {
         unsafe {
             let w = match w {
@@ -1210,8 +1238,26 @@ pub trait WindowMethods: EvtHandlerMethods {
             ffi::wxWindow_FromDIP5(d, w)
         }
     }
-    // STATIC: fn ToDIP()
-    // STATIC: fn ToDIP()
+    fn to_dip3<T: WindowMethods>(sz: &Size, w: Option<&T>) -> Size {
+        unsafe {
+            let sz = &sz.pinned::<ffi::wxSize>();
+            let w = match w {
+                Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
+                None => ptr::null_mut(),
+            };
+            Size(ffi::wxWindow_ToDIP3(sz, w))
+        }
+    }
+    fn to_dip4<T: WindowMethods>(pt: &Point, w: Option<&T>) -> Point {
+        unsafe {
+            let pt = &pt.pinned::<ffi::wxPoint>();
+            let w = match w {
+                Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
+                None => ptr::null_mut(),
+            };
+            Point(ffi::wxWindow_ToDIP4(pt, w))
+        }
+    }
     fn to_dip5<T: WindowMethods>(d: i32, w: Option<&T>) -> i32 {
         unsafe {
             let w = match w {
@@ -1880,7 +1926,15 @@ pub trait ButtonMethods: AnyButtonMethods {
         let label = &crate::ffi::NewString(label);
         self.pinned::<ffi::wxButton>().as_mut().SetLabel(label)
     }
-    // STATIC: fn GetDefaultSize()
+    fn get_default_size<T: WindowMethods>(win: Option<&T>) -> Size {
+        unsafe {
+            let win = match win {
+                Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
+                None => ptr::null_mut(),
+            };
+            Size(ffi::wxButton_GetDefaultSize(win))
+        }
+    }
 }
 
 // wxNonOwnedWindow
@@ -2067,7 +2121,9 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     // BLOCKED: fn ShowFullScreen()
     // BLOCKED: fn UseNativeDecorations()
     // BLOCKED: fn UseNativeDecorationsByDefault()
-    // STATIC: fn GetDefaultSize()
+    fn get_default_size() -> Size {
+        Size(ffi::wxTopLevelWindow_GetDefaultSize())
+    }
 }
 
 // wxFrame

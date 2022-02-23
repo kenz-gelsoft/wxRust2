@@ -221,11 +221,11 @@ class RustMethodBinding:
             if suppress_generated:
                 return 'GENERATED'
         if self.__model.uses_unsupported_type():
-            if self.__model.is_static:
-                return 'STATIC'
             if self.__model.returns_new():
                 if suppress_generated:
                     return 'GENERATED'
+            elif self.__model.is_static:
+                return 'STATIC'
             else:
                 return 'CXX_UNSUPPORTED'
         if self.__model.is_blocked():
@@ -341,7 +341,7 @@ class CxxMethodBinding:
 
     def _cxx_params(self):
         params = self.__model.params.copy()
-        if self.__model.returns_new():
+        if not self.__model.is_static and self.__model.returns_new():
             params.insert(0, self.__self_param)
         return ', '.join(self._cxx_param(p) for p in params)
 
