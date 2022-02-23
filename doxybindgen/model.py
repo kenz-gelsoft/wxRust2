@@ -60,7 +60,7 @@ class Method:
             pname = param.findtext('declname')
             self.params.append(Param(ptype, pname))
 
-    def generates(self):
+    def needs_shim(self):
         if self.is_static:
             if not self.uses_unsupported_type() or self.returns_new():
                 return True

@@ -101,7 +101,7 @@ class RustMethodBinding:
         self.__generic_params = self._make_params_generic()
     
     def cxx_auto_binding(self, is_cxx):
-        if not (is_cxx or self.__model.generates()):
+        if not (is_cxx or self.__model.needs_shim()):
             return
         with_this = not is_cxx and self.__model.returns_new()
         body = '%sfn %s(%s)%s;' % (
@@ -309,7 +309,7 @@ class CxxMethodBinding:
         self.__self_param = Param(RustType(model.cls.name, model.const), 'self')
 
     def definition(self):
-        if not self.__model.generates():
+        if not self.__model.needs_shim():
             return
         wrapped = self.__model.wrapped_return_type()
         returns = self.__model.returns.in_cxx() + ' '
