@@ -130,23 +130,19 @@ class RustMethodBinding:
             if wrapped:
                 returns = '*mut %s' % (wrapped,)
         if returns in ['void', '']:
-            returns = ''
+            return ''
         else:
-            returns = ' -> %s' % (returns,)
-        return returns
+            return ' -> %s' % (returns,)
     
     def _returns_or_not_binding(self):
-        returns_or_not = ''
-        returns = self.__model.returns
-        if not returns.is_void():
-            if self.__model.returns_new():
-                rettype = returns.in_rust()[2:]
-            else:
-                rettype = returns.in_rust(with_ffi=True)
-            returns_or_not = ' -> %s' % (
-                rettype,
-            )
-        return returns_or_not
+        if self.__model.returns_new():
+            returns = self.__model.returns.in_rust()[2:]
+        else:
+            returns = self.__model.returns.in_rust(with_ffi=True)
+        if self.__model.returns.is_void():
+            return ''
+        else:
+            return ' -> %s' % (returns,)
     
     def _unsafe_or_not(self):
         return 'unsafe ' if self._uses_ptr_type() else ''
