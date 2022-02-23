@@ -126,7 +126,7 @@ class RustMethodBinding:
         if is_cxx:
             returns = self.__model.returns.in_rust()
         else:
-            returns = self.__model.return_type()
+            returns = self.__model.wrapped_return_type()
             if returns:
                 returns = '*mut %s' % (returns,)
         if returns in ['void', '']:
@@ -217,10 +217,7 @@ class RustMethodBinding:
                     self.__model.overload_name(),
                     self._call_params(),
                 )
-        yield self._wrap_return_type(
-            self.__model.return_type(),
-            call,
-        )
+        yield self._wrap_return_type(call)
     
     def _call_params(self):
         return ', '.join(camel_to_snake(p.name) for p in self.__model.params)
@@ -295,10 +292,11 @@ class RustMethodBinding:
                 yield '    %s' % (line,)
             yield '}'
 
-    def _wrap_return_type(self, type, body):
-        if type:
-            return '%s(%s)' % (type[2:], body)
-        return body
+    def _wrap_return_type(self, call):
+        wrapped = self.__model.wrapped_return_type()
+        if wrapped:
+            return '%s(%s)' % (wrapped[2:], call)
+        return call
 
     def _uses_ptr_type(self):
         return any(p.type.is_ptr() for p in self.__model.params)
@@ -328,7 +326,7 @@ class CxxMethodBinding:
         if not self.__model.generates():
             return
         yield 'inline %s *%s(%s) {' % (
-            self.__model.return_type(),
+            self.__model.wrapped_return_type(),
             self.__model.overload_name(without_index=True),
             self._cxx_params(),
         )
@@ -342,7 +340,7 @@ class CxxMethodBinding:
                 new_params_or_expr,
             )
         yield '    return new %s(%s);' % (
-            self.__model.return_type(),
+            self.__model.wrapped_return_type(),
             new_params_or_expr,
         )
         yield '}'

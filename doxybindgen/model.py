@@ -85,7 +85,7 @@ class Method:
             index = ''
         return '%s%s' % (name, index)
 
-    def return_type(self):
+    def wrapped_return_type(self):
         if self.generates():
             return self.returns.typename
         else:
