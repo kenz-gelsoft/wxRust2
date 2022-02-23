@@ -125,18 +125,13 @@ class RustMethodBinding:
     def _returns_or_not(self, is_cxx=False, binding=False):
         if self.__model.returns.is_void():
             return ''
-        if not binding:
-            if is_cxx:
-                returns = self.__model.returns.in_rust()
-            else:
-                wrapped = self.__model.wrapped_return_type()
-                if wrapped:
-                    returns = '*mut %s' % (wrapped,)
-        else:
-            if self.__model.returns_new():
-                returns = self.__model.returns.in_rust()[2:]
-            else:
-                returns = self.__model.returns.in_rust(with_ffi=True)
+        returns = self.__model.returns.in_rust(with_ffi=binding)
+        wrapped = self.__model.wrapped_return_type()
+        if wrapped:
+            if binding:
+                returns = wrapped[2:]
+            elif not is_cxx:
+                returns = '*mut %s' % (wrapped,)
         return ' -> %s' % (returns,)
     
     def _unsafe_or_not(self):
