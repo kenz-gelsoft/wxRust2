@@ -263,13 +263,10 @@ class RustMethodBinding:
         )
 
     def _wrap_if_unsafe(self, lines):
-        to_be_generated = lines
-        if self._uses_ptr_type():
-            to_be_generated = self._unsafe_lines(lines)
-        for line in to_be_generated:
-            yield line
-    
-    def _unsafe_lines(self, lines):
+        if not self._uses_ptr_type():
+            for line in lines:
+                yield line
+            return
         if len(lines) < 2:
             yield 'unsafe { %s }' % (lines[0],)
         else:
