@@ -26,7 +26,7 @@ class RustClassBinding:
             for line in method.ffi_lines(for_shim=for_shim):
                 yield line
 
-    def safer_binding(self, classes):
+    def binding_lines(self, classes):
         yield '// %s' % (
             self.__model.name,            
         )
@@ -36,9 +36,9 @@ class RustClassBinding:
         )
         yield ',\n'.join(self._ancestor_methods(classes))
         yield '}'
-        for line in self._generate_impl_with_ctors():
+        for line in self._impl_with_ctors():
             yield line
-        for line in self._generate_trait_with_methods():
+        for line in self._trait_with_methods():
             yield line
     
     def _ancestor_methods(self, classes):
@@ -61,10 +61,10 @@ class RustClassBinding:
                 return cls
         return None
 
-    def _generate_impl_with_ctors(self):
+    def _impl_with_ctors(self):
         yield 'impl %s {' % (self.__model.unprefixed(),)
         for ctor in self._ctors():
-            for line in ctor.binding():
+            for line in ctor.binding_lines():
                 yield '    %s' % (line,)
         yield "    pub fn none() -> Option<&'static Self> {"
         yield '        None'
@@ -74,7 +74,7 @@ class RustClassBinding:
     def _ctors(self):
         return (m for m in self.__methods if m.is_ctor)
     
-    def _generate_trait_with_methods(self):
+    def _trait_with_methods(self):
         indent = ' ' * 4 * 1
         base = self.__model.base
         if not base:
@@ -86,7 +86,7 @@ class RustClassBinding:
         for method in self.__methods:
             if method.is_ctor:
                 continue
-            for line in method.binding():
+            for line in method.binding_lines():
                 yield '%s%s' % (indent, line)
         yield '}\n'
 
@@ -153,7 +153,7 @@ class RustMethodBinding:
                 generic_params.append(param.type.make_generic(name))
         return generic_params
 
-    def binding(self):
+    def binding_lines(self):
         suppress = self._suppressed_reason(
             suppress_ctor=False,
             suppress_generated=False,

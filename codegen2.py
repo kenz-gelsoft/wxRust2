@@ -237,8 +237,8 @@ pub trait WxRustMethods {
 }
 '''
     for cls in bindings:
-        for chunk in cls.safer_binding(classes):
-            yield chunk
+        for line in cls.binding_lines(classes):
+            yield line
 
 def wxrust2_h(classes):
     yield '''\
