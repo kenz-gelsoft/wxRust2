@@ -156,7 +156,7 @@ class RustMethodBinding:
     def binding(self):
         suppress = self._suppressed_reason(
             suppress_ctor=False,
-            suppress_returns_new=False,
+            suppress_generated=False,
         )
         if suppress:
             yield '// %s: fn %s()' % (suppress, self.__model.name)
@@ -167,7 +167,7 @@ class RustMethodBinding:
                 ', '.join('%s: %s' % p for p in self.__generic_params),
             )
         yield '%sfn %s%s(%s)%s {' % (
-            '' if self.__is_instance_method else 'pub ',
+            'pub ' if self.is_ctor else '',
             self._rust_method_name(),
             gen_params,
             self._rust_params(with_ffi=True, binding=True),
@@ -211,35 +211,32 @@ class RustMethodBinding:
     def _call_params(self):
         return ', '.join(camel_to_snake(p.name) for p in self.__model.params)
 
-    def _suppressed_reason(self, suppress_ctor=True, suppress_returns_new=True):
+    def _suppressed_reason(self, suppress_ctor=True, suppress_generated=True):
         if suppress_ctor and self.__model.is_ctor:
             return 'CTOR'
         if self.__is_dtor:
             return 'DTOR'
         if self.__model.is_static:
             # TODO: handle static methods specially
-            return 'STATIC'
-        if self._uses_unsupported_type():
+            if suppress_generated:
+                return 'GENERATED'
+        if self.__model.uses_unsupported_type():
             if self.__model.returns_new():
-                if suppress_returns_new:
+                if suppress_generated:
                     return 'GENERATED'
+            elif self.__model.is_static:
+                return 'STATIC'
             else:
                 return 'CXX_UNSUPPORTED'
         if self.__model.is_blocked():
             return 'BLOCKED'
         return None
     
-    def _uses_unsupported_type(self):
-        if self.__model.returns.not_supported():
-            return True
-        return any(p.type.not_supported() for p in self.__model.params)
-
     def _rust_method_name(self):
         method_name = pascal_to_snake(self.__model.name)
         if self.__model.is_ctor:
             method_name = 'new'
-        if self.__model.overload_index > 0:
-            method_name += str(self.__model.overload_index)
+        method_name = self.__model.overload_indexed(method_name)
         if method_name in RUST_KEYWORDS:
             method_name += '_'
         return method_name
@@ -314,29 +311,37 @@ class CxxMethodBinding:
     def definition(self):
         if not self.__model.generates():
             return
-        yield 'inline %s *%s(%s) {' % (
-            self.__model.wrapped_return_type(),
+        wrapped = self.__model.wrapped_return_type()
+        returns = self.__model.returns.in_cxx() + ' '
+        if wrapped:
+            returns = '%s *' % (wrapped,)
+        yield 'inline %s%s(%s) {' % (
+            returns,
             self.__model.overload_name(without_index=True),
             self._cxx_params(),
         )
         new_params_or_expr = self._call_params()
-        if self.__model.returns_new():
-            new_params_or_expr = 'self.%s(%s)' % (
+        if not self.is_ctor:
+            self_or_class = 'self.'
+            if self.__model.is_static:
+                self_or_class = '%s::' % (self.__model.cls.name,)
+            new_params_or_expr = '%s%s(%s)' % (
+                self_or_class,
                 self.__model.overload_name(
                     without_index=True,
                     cxx_name=True,
                 ),
                 new_params_or_expr,
             )
-        yield '    return new %s(%s);' % (
-            self.__model.wrapped_return_type(),
-            new_params_or_expr,
-        )
+        if wrapped:
+            yield '    return new %s(%s);' % (wrapped, new_params_or_expr)
+        else:
+            yield '    return %s;' % (new_params_or_expr,)
         yield '}'
 
     def _cxx_params(self):
         params = self.__model.params.copy()
-        if self.__model.returns_new():
+        if not self.__model.is_static and self.__model.returns_new():
             params.insert(0, self.__self_param)
         return ', '.join(self._cxx_param(p) for p in params)
 
