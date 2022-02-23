@@ -322,11 +322,11 @@ class CxxMethodBinding:
         )
         new_params_or_expr = self._call_params()
         if not self.is_ctor:
-            callee = 'self.'
+            self_or_class = 'self.'
             if self.__model.is_static:
-                callee = '%s::' % (self.__model.cls.name,)
+                self_or_class = '%s::' % (self.__model.cls.name,)
             new_params_or_expr = '%s%s(%s)' % (
-                callee,
+                self_or_class,
                 self.__model.overload_name(
                     without_index=True,
                     cxx_name=True,
