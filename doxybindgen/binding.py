@@ -219,7 +219,7 @@ class RustMethodBinding:
         if self.__model.is_static:
             # TODO: handle static methods specially
             return 'STATIC'
-        if self._uses_unsupported_type():
+        if self.__model.uses_unsupported_type():
             if self.__model.returns_new():
                 if suppress_returns_new:
                     return 'GENERATED'
@@ -229,11 +229,6 @@ class RustMethodBinding:
             return 'BLOCKED'
         return None
     
-    def _uses_unsupported_type(self):
-        if self.__model.returns.not_supported():
-            return True
-        return any(p.type.not_supported() for p in self.__model.params)
-
     def _rust_method_name(self):
         method_name = pascal_to_snake(self.__model.name)
         if self.__model.is_ctor:
@@ -314,24 +309,32 @@ class CxxMethodBinding:
     def definition(self):
         if not self.__model.generates():
             return
-        yield 'inline %s *%s(%s) {' % (
-            self.__model.wrapped_return_type(),
+        wrapped = self.__model.wrapped_return_type()
+        returns = self.__model.returns.in_cxx() + ' '
+        if wrapped:
+            returns = '%s *' % (wrapped,)
+        yield 'inline %s%s(%s) {' % (
+            returns,
             self.__model.overload_name(without_index=True),
             self._cxx_params(),
         )
         new_params_or_expr = self._call_params()
-        if self.__model.returns_new():
-            new_params_or_expr = 'self.%s(%s)' % (
+        if not self.is_ctor:
+            callee = 'self.'
+            if self.__model.is_static:
+                callee = '%s::' % (self.__model.cls.name,)
+            new_params_or_expr = '%s%s(%s)' % (
+                callee,
                 self.__model.overload_name(
                     without_index=True,
                     cxx_name=True,
                 ),
                 new_params_or_expr,
             )
-        yield '    return new %s(%s);' % (
-            self.__model.wrapped_return_type(),
-            new_params_or_expr,
-        )
+        if wrapped:
+            yield '    return new %s(%s);' % (wrapped, new_params_or_expr)
+        else:
+            yield '    return %s;' % (new_params_or_expr,)
         yield '}'
 
     def _cxx_params(self):

@@ -12,6 +12,7 @@ CXX2RUST = {
     'unsigned int': 'u32',
     'wxByte': 'u8',
     'wxCoord': 'i32',
+    'wxEllipsizeMode': 'i32',
     'wxWindowID': 'i32',
 }
 
@@ -61,9 +62,14 @@ class Method:
 
     def generates(self):
         if self.is_static:
-            return False
+            return not self.uses_unsupported_type()
         return self.is_ctor or self.returns_new()
     
+    def uses_unsupported_type(self):
+        if self.returns.not_supported():
+            return True
+        return any(p.type.not_supported() for p in self.params)
+
     def is_blocked(self):
         return self.cls.blocks(self.overload_name(cxx_name=True))
 
@@ -75,7 +81,7 @@ class Method:
         if not cxx_name:
             if self.is_ctor:
                 name = 'New%s' % (self.cls.unprefixed(),)
-            if self.returns_new():
+            if self.returns_new() or self.is_static:
                 name = '_'.join((
                     self.cls.name,
                     name,
@@ -86,7 +92,7 @@ class Method:
         return '%s%s' % (name, index)
 
     def wrapped_return_type(self):
-        if self.generates():
+        if self.is_ctor or self.returns_new():
             return self.returns.typename
         else:
             return None

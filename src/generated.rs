@@ -433,7 +433,7 @@ mod ffi {
         // STATIC: fn GetLabelText(label: &wxString) -> wxString;
         // STATIC: fn RemoveMnemonics(str: &wxString) -> wxString;
         // STATIC: fn EscapeMnemonics(text: &wxString) -> wxString;
-        // STATIC: fn Ellipsize(label: &wxString, dc: &wxDC, mode: wxEllipsizeMode, max_width: i32, flags: i32) -> wxString;
+        // STATIC: fn Ellipsize(label: &wxString, dc: &wxDC, mode: i32, max_width: i32, flags: i32) -> wxString;
         
         // CLASS: wxAnyButton
         type wxAnyButton;
@@ -643,6 +643,8 @@ mod ffi {
         #[rust_name = "NewObject1"]
         fn NewObject(other: &wxObject) -> *mut wxObject;
         // CLASS: wxEvtHandler
+        unsafe fn wxEvtHandler_AddFilter(filter: *mut wxEventFilter);
+        unsafe fn wxEvtHandler_RemoveFilter(filter: *mut wxEventFilter);
         fn NewEvtHandler() -> *mut wxEvtHandler;
         // CLASS: wxWindow
         fn wxWindow_ClientToWindowSize(arg0: &wxWindow, size: &wxSize) -> *mut wxSize;
@@ -665,6 +667,10 @@ mod ffi {
         fn wxWindow_GetVirtualSize(arg0: &wxWindow) -> *mut wxSize;
         fn wxWindow_GetBestVirtualSize(arg0: &wxWindow) -> *mut wxSize;
         fn wxWindow_GetWindowBorderSize(arg0: &wxWindow) -> *mut wxSize;
+        #[rust_name = "wxWindow_FromDIP5"]
+        unsafe fn wxWindow_FromDIP(d: i32, w: *const wxWindow) -> i32;
+        #[rust_name = "wxWindow_ToDIP5"]
+        unsafe fn wxWindow_ToDIP(d: i32, w: *const wxWindow) -> i32;
         #[rust_name = "wxWindow_GetPosition1"]
         fn wxWindow_GetPosition(arg0: &wxWindow) -> *mut wxPoint;
         #[rust_name = "wxWindow_GetScreenPosition1"]
@@ -683,6 +689,13 @@ mod ffi {
         fn wxWindow_GetDPI(arg0: &wxWindow) -> *mut wxSize;
         #[rust_name = "wxWindow_GetTextExtent1"]
         fn wxWindow_GetTextExtent(arg0: &wxWindow, string: &wxString) -> *mut wxSize;
+        fn wxWindow_FindFocus() -> *mut wxWindow;
+        unsafe fn wxWindow_FindWindowById(id: i32, parent: *const wxWindow) -> *mut wxWindow;
+        unsafe fn wxWindow_FindWindowByLabel(label: &wxString, parent: *const wxWindow) -> *mut wxWindow;
+        unsafe fn wxWindow_FindWindowByName(name: &wxString, parent: *const wxWindow) -> *mut wxWindow;
+        fn wxWindow_GetCapture() -> *mut wxWindow;
+        fn wxWindow_NewControlId(count: i32) -> i32;
+        fn wxWindow_UnreserveControlId(id: i32, count: i32);
         fn NewWindow() -> *mut wxWindow;
         #[rust_name = "NewWindow1"]
         unsafe fn NewWindow(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxWindow;
@@ -723,6 +736,8 @@ mod ffi {
         fn NewSize(width: i32, height: i32) -> *mut wxSize;
         // CLASS: wxValidator
         fn NewValidator() -> *mut wxValidator;
+        fn wxValidator_SuppressBellOnError(suppress: bool);
+        fn wxValidator_IsSilent() -> bool;
     }
 }
 

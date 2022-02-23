@@ -16,6 +16,12 @@ inline wxObject *NewObject(const wxObject & other) {
 }
 
 // CLASS: wxEvtHandler
+inline void wxEvtHandler_AddFilter(wxEventFilter * filter) {
+    return wxEvtHandler::AddFilter(filter);
+}
+inline void wxEvtHandler_RemoveFilter(wxEventFilter * filter) {
+    return wxEvtHandler::RemoveFilter(filter);
+}
 inline wxEvtHandler *NewEvtHandler() {
     return new wxEvtHandler();
 }
@@ -69,6 +75,12 @@ inline wxSize *wxWindow_GetBestVirtualSize(const wxWindow & self) {
 inline wxSize *wxWindow_GetWindowBorderSize(const wxWindow & self) {
     return new wxSize(self.GetWindowBorderSize());
 }
+inline int wxWindow_FromDIP(int d, const wxWindow * w) {
+    return wxWindow::FromDIP(d, w);
+}
+inline int wxWindow_ToDIP(int d, const wxWindow * w) {
+    return wxWindow::ToDIP(d, w);
+}
 inline wxPoint *wxWindow_GetPosition(const wxWindow & self) {
     return new wxPoint(self.GetPosition());
 }
@@ -101,6 +113,27 @@ inline wxSize *wxWindow_GetDPI(const wxWindow & self) {
 }
 inline wxSize *wxWindow_GetTextExtent(const wxWindow & self, const wxString & string) {
     return new wxSize(self.GetTextExtent(string));
+}
+inline wxWindow * wxWindow_FindFocus() {
+    return wxWindow::FindFocus();
+}
+inline wxWindow * wxWindow_FindWindowById(int32_t id, const wxWindow * parent) {
+    return wxWindow::FindWindowById(id, parent);
+}
+inline wxWindow * wxWindow_FindWindowByLabel(const wxString & label, const wxWindow * parent) {
+    return wxWindow::FindWindowByLabel(label, parent);
+}
+inline wxWindow * wxWindow_FindWindowByName(const wxString & name, const wxWindow * parent) {
+    return wxWindow::FindWindowByName(name, parent);
+}
+inline wxWindow * wxWindow_GetCapture() {
+    return wxWindow::GetCapture();
+}
+inline wxWindowID wxWindow_NewControlId(int count) {
+    return wxWindow::NewControlId(count);
+}
+inline void wxWindow_UnreserveControlId(wxWindowID id, int count) {
+    return wxWindow::UnreserveControlId(id, count);
 }
 inline wxWindow *NewWindow() {
     return new wxWindow();
@@ -185,6 +218,12 @@ inline wxSize *NewSize(int width, int height) {
 // CLASS: wxValidator
 inline wxValidator *NewValidator() {
     return new wxValidator();
+}
+inline void wxValidator_SuppressBellOnError(bool suppress) {
+    return wxValidator::SuppressBellOnError(suppress);
+}
+inline bool wxValidator_IsSilent() {
+    return wxValidator::IsSilent();
 }
 
 } // namespace wxrust
