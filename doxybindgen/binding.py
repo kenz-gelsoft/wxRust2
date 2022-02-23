@@ -126,14 +126,27 @@ class RustMethodBinding:
         if is_cxx:
             returns = self.__model.returns.in_rust()
         else:
-            returns = self.__model.wrapped_return_type()
-            if returns:
-                returns = '*mut %s' % (returns,)
+            wrapped = self.__model.wrapped_return_type()
+            if wrapped:
+                returns = '*mut %s' % (wrapped,)
         if returns in ['void', '']:
             returns = ''
         else:
             returns = ' -> %s' % (returns,)
         return returns
+    
+    def _returns_or_not_binding(self):
+        returns_or_not = ''
+        returns = self.__model.returns
+        if not returns.is_void():
+            if self.__model.returns_new():
+                rettype = returns.in_rust()[2:]
+            else:
+                rettype = returns.in_rust(with_ffi=True)
+            returns_or_not = ' -> %s' % (
+                rettype,
+            )
+        return returns_or_not
     
     def _unsafe_or_not(self):
         return 'unsafe ' if self._uses_ptr_type() else ''
@@ -162,16 +175,6 @@ class RustMethodBinding:
         if suppress:
             yield '// %s: fn %s()' % (suppress, self.__model.name)
             return
-        returns_or_not = ''
-        returns = self.__model.returns
-        if not returns.is_void():
-            if self.__model.returns_new():
-                rettype = returns.in_rust()[2:]
-            else:
-                rettype = returns.in_rust(with_ffi=True)
-            returns_or_not = ' -> %s' % (
-                rettype,
-            )
         gen_params = ''
         if self.__generic_params:
             gen_params = '<%s>' % (
@@ -182,7 +185,7 @@ class RustMethodBinding:
             self._rust_method_name(),
             gen_params,
             self._rust_params(with_ffi=True, binding=True),
-            returns_or_not,
+            self._returns_or_not_binding(),
         )
         body_lines = list(self._binding_body())
         for line in self._wrap_if_unsafe(body_lines):
