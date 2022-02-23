@@ -155,8 +155,7 @@ class RustMethodBinding:
 
     def binding_lines(self):
         suppress = self._suppressed_reason(
-            suppress_ctor=False,
-            suppress_generated=False,
+            suppress_shim=False,
         )
         if suppress:
             yield '// %s: fn %s()' % (suppress, self.__model.name)
@@ -211,18 +210,19 @@ class RustMethodBinding:
     def _call_params(self):
         return ', '.join(camel_to_snake(p.name) for p in self.__model.params)
 
-    def _suppressed_reason(self, suppress_ctor=True, suppress_generated=True):
-        if suppress_ctor and self.__model.is_ctor:
-            return 'CTOR'
+    def _suppressed_reason(self, suppress_shim=True):
+        if self.__model.is_ctor:
+            if suppress_shim:
+                return 'CTOR'
         if self.__is_dtor:
             return 'DTOR'
         if self.__model.is_static:
             # TODO: handle static methods specially
-            if suppress_generated:
+            if suppress_shim:
                 return 'GENERATED'
         if self.__model.uses_unsupported_type():
             if self.__model.returns_new():
-                if suppress_generated:
+                if suppress_shim:
                     return 'GENERATED'
             elif self.__model.is_static:
                 return 'STATIC'
