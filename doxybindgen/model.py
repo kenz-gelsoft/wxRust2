@@ -261,7 +261,7 @@ class CxxType:
     def is_void(self):
         if self.is_ptr():
             return False
-        return self.typename == 'void'
+        return self.typename in ['void', '']
     
     def make_generic(self, generic_name):
         self.generic_name = generic_name

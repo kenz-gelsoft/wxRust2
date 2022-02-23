@@ -122,27 +122,22 @@ class RustMethodBinding:
             yield overload
         yield body
 
-    def _returns_or_not(self, is_cxx):
-        if is_cxx:
-            returns = self.__model.returns.in_rust()
-        else:
-            wrapped = self.__model.wrapped_return_type()
-            if wrapped:
-                returns = '*mut %s' % (wrapped,)
-        if returns in ['void', '']:
-            return ''
-        else:
-            return ' -> %s' % (returns,)
-    
-    def _returns_or_not_binding(self):
-        if self.__model.returns_new():
-            returns = self.__model.returns.in_rust()[2:]
-        else:
-            returns = self.__model.returns.in_rust(with_ffi=True)
+    def _returns_or_not(self, is_cxx=False, binding=False):
         if self.__model.returns.is_void():
             return ''
+        if not binding:
+            if is_cxx:
+                returns = self.__model.returns.in_rust()
+            else:
+                wrapped = self.__model.wrapped_return_type()
+                if wrapped:
+                    returns = '*mut %s' % (wrapped,)
         else:
-            return ' -> %s' % (returns,)
+            if self.__model.returns_new():
+                returns = self.__model.returns.in_rust()[2:]
+            else:
+                returns = self.__model.returns.in_rust(with_ffi=True)
+        return ' -> %s' % (returns,)
     
     def _unsafe_or_not(self):
         return 'unsafe ' if self._uses_ptr_type() else ''
@@ -181,7 +176,7 @@ class RustMethodBinding:
             self._rust_method_name(),
             gen_params,
             self._rust_params(with_ffi=True, binding=True),
-            self._returns_or_not_binding(),
+            self._returns_or_not(binding=True),
         )
         body_lines = list(self._binding_body())
         for line in self._wrap_if_unsafe(body_lines):
