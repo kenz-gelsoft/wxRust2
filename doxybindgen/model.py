@@ -48,9 +48,9 @@ class Method:
         self.is_static = e.get('static') == 'yes'
         self.returns = CxxType(e.find('type'))
         self.cls = cls
-        self.name = e.findtext('name')
+        self.__name = e.findtext('name')
         self.overload_index = self._overload_index()
-        self.is_ctor = self.name == cls.name
+        self.is_ctor = self.__name == cls.name
         self.const = e.get('const') == 'yes'
         if self.is_ctor:
             self.returns = RustType(cls.name, self.const, ctor_retval=True)
@@ -72,14 +72,14 @@ class Method:
         return any(p.type.not_supported() for p in self.params)
 
     def is_blocked(self):
-        return self.cls.blocks(self.overload_name(cxx_name=True))
+        return self.cls.blocks(self.name(for_shim=False))
 
     def _overload_index(self):
-        return sum(m.name == self.name for m in self.cls.methods)
+        return sum(m.__name == self.__name for m in self.cls.methods)
 
-    def overload_name(self, without_index=False, cxx_name=False):
-        name = self.name
-        if not cxx_name:
+    def name(self, for_shim, without_index=False):
+        name = self.__name
+        if for_shim:
             if self.is_ctor:
                 name = 'New%s' % (self.cls.unprefixed(),)
             if self.returns_new() or self.is_static:

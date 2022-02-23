@@ -824,7 +824,7 @@ pub trait EvtHandlerMethods: ObjectMethods {
         self.pinned::<ffi::wxEvtHandler>().as_mut().AddPendingEvent(event)
     }
     // CXX_UNSUPPORTED: fn CallAfter()
-    // BLOCKED: fn CallAfter()
+    // BLOCKED: fn CallAfter1()
     fn process_event(&self, event: Pin<&mut ffi::wxEvent>) -> bool {
         self.pinned::<ffi::wxEvtHandler>().as_mut().ProcessEvent(event)
     }
@@ -841,15 +841,15 @@ pub trait EvtHandlerMethods: ObjectMethods {
         self.pinned::<ffi::wxEvtHandler>().as_mut().DeletePendingEvents()
     }
     // CXX_UNSUPPORTED: fn Connect()
-    // CXX_UNSUPPORTED: fn Connect()
-    // CXX_UNSUPPORTED: fn Connect()
+    // CXX_UNSUPPORTED: fn Connect1()
+    // CXX_UNSUPPORTED: fn Connect2()
     // CXX_UNSUPPORTED: fn Disconnect()
-    // CXX_UNSUPPORTED: fn Disconnect()
-    // CXX_UNSUPPORTED: fn Disconnect()
+    // CXX_UNSUPPORTED: fn Disconnect1()
+    // CXX_UNSUPPORTED: fn Disconnect2()
     // CXX_UNSUPPORTED: fn Bind()
-    // BLOCKED: fn Bind()
+    // BLOCKED: fn Bind1()
     // CXX_UNSUPPORTED: fn Unbind()
-    // BLOCKED: fn Unbind()
+    // BLOCKED: fn Unbind1()
     // BLOCKED: fn GetClientData()
     fn get_client_object(&self) -> *mut ffi::wxClientData {
         self.pinned::<ffi::wxEvtHandler>().as_mut().GetClientObject()
@@ -960,7 +960,7 @@ pub trait WindowMethods: EvtHandlerMethods {
         self.pinned::<ffi::wxWindow>().as_mut().FindWindow1(name)
     }
     // BLOCKED: fn GetChildren()
-    // BLOCKED: fn GetChildren()
+    // BLOCKED: fn GetChildren1()
     // BLOCKED: fn RemoveChild()
     fn get_grand_parent(&self) -> *mut ffi::wxWindow {
         self.pinned::<ffi::wxWindow>().as_mut().GetGrandParent()
@@ -1064,7 +1064,7 @@ pub trait WindowMethods: EvtHandlerMethods {
         let pt = &pt.pinned::<ffi::wxPoint>();
         Point(ffi::wxWindow_ToDIP1(&self.pinned::<ffi::wxWindow>().as_mut(), pt))
     }
-    // BLOCKED: fn ToDIP()
+    // BLOCKED: fn ToDIP2()
     fn get_best_size(&self) -> Size {
         Size(ffi::wxWindow_GetBestSize(&self.pinned::<ffi::wxWindow>().as_mut(), ))
     }
@@ -1185,7 +1185,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn set_size(&self, x: i32, y: i32, width: i32, height: i32, size_flags: i32) {
         self.pinned::<ffi::wxWindow>().as_mut().SetSize(x, y, width, height, size_flags)
     }
-    // BLOCKED: fn SetSize()
+    // BLOCKED: fn SetSize1()
     fn set_size2(&self, size: &Size) {
         let size = &size.pinned::<ffi::wxSize>();
         self.pinned::<ffi::wxWindow>().as_mut().SetSize2(size)
@@ -1531,11 +1531,11 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn is_exposed(&self, x: i32, y: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().IsExposed(x, y)
     }
-    // BLOCKED: fn IsExposed()
+    // BLOCKED: fn IsExposed1()
     fn is_exposed2(&self, x: i32, y: i32, w: i32, h: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().IsExposed2(x, y, w, h)
     }
-    // BLOCKED: fn IsExposed()
+    // BLOCKED: fn IsExposed3()
     fn is_shown(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().IsShown()
     }
@@ -1706,9 +1706,9 @@ pub trait WindowMethods: EvtHandlerMethods {
         self.pinned::<ffi::wxWindow>().as_mut().EnableTouchEvents(events_mask)
     }
     // CXX_UNSUPPORTED: fn HitTest()
-    // CXX_UNSUPPORTED: fn HitTest()
+    // CXX_UNSUPPORTED: fn HitTest1()
     // CXX_UNSUPPORTED: fn GetBorder()
-    // CXX_UNSUPPORTED: fn GetBorder()
+    // CXX_UNSUPPORTED: fn GetBorder1()
     fn do_update_window_ui(&self, event: Pin<&mut ffi::wxUpdateUIEvent>) {
         self.pinned::<ffi::wxWindow>().as_mut().DoUpdateWindowUI(event)
     }
@@ -1820,7 +1820,7 @@ pub trait ControlMethods: WindowMethods {
         let markup = &crate::ffi::NewString(markup);
         self.pinned::<ffi::wxControl>().as_mut().SetLabelMarkup(markup)
     }
-    // STATIC: fn GetLabelText()
+    // STATIC: fn GetLabelText1()
     // STATIC: fn RemoveMnemonics()
     // STATIC: fn EscapeMnemonics()
     // STATIC: fn Ellipsize()
@@ -2250,15 +2250,15 @@ pub trait PointMethods: WxRustMethods {
     // CXX_UNSUPPORTED: fn operator-()
     // BLOCKED: fn operator+=()
     // BLOCKED: fn operator-=()
-    // CXX_UNSUPPORTED: fn operator+()
-    // CXX_UNSUPPORTED: fn operator-()
-    // CXX_UNSUPPORTED: fn operator+()
-    // CXX_UNSUPPORTED: fn operator-()
-    // BLOCKED: fn operator+=()
-    // BLOCKED: fn operator-=()
+    // CXX_UNSUPPORTED: fn operator+1()
+    // CXX_UNSUPPORTED: fn operator-1()
+    // CXX_UNSUPPORTED: fn operator+2()
+    // CXX_UNSUPPORTED: fn operator-2()
+    // BLOCKED: fn operator+=1()
+    // BLOCKED: fn operator-=1()
     // CXX_UNSUPPORTED: fn operator/()
     // CXX_UNSUPPORTED: fn operator*()
-    // CXX_UNSUPPORTED: fn operator*()
+    // CXX_UNSUPPORTED: fn operator*1()
     // BLOCKED: fn operator/=()
     // BLOCKED: fn operator*=()
 }
@@ -2288,7 +2288,7 @@ pub trait SizeMethods: WxRustMethods {
     // BLOCKED: fn operator-=()
     // CXX_UNSUPPORTED: fn operator/()
     // CXX_UNSUPPORTED: fn operator*()
-    // CXX_UNSUPPORTED: fn operator*()
+    // CXX_UNSUPPORTED: fn operator*1()
     // BLOCKED: fn operator/=()
     // BLOCKED: fn operator*=()
     fn dec_by(&self, pt: &Point) {
