@@ -253,8 +253,8 @@ namespace wxrust {
 '''
     for cls in classes:
         binding = CxxClassBinding(cls)
-        for chunk in binding.defs():
-            yield chunk
+        for line in binding.shims():
+            yield line
     yield '''\
 } // namespace wxrust
 '''
