@@ -97,20 +97,21 @@ class RustMethodBinding:
         self.__is_dtor = model.name.startswith('~')
         self.__is_instance_method = not (model.is_static or model.is_ctor)
         self.__self_param = Param(RustType(model.cls.name, model.const), 'self')
-        self.__this_param = Param(RustType(model.cls.name, model.const), 'arg0')
+        # must be name neither self or this
+        self.__shim_self = Param(RustType(model.cls.name, model.const), 'self_')
         self.__generic_params = self._make_params_generic()
     
     def ffi_lines(self, for_shim):
         if for_shim and not self.__model.needs_shim():
             return
-        with_this = for_shim and self.__model.returns_new()
+        shim_self = for_shim and self.__model.returns_new()
         body = '%sfn %s(%s)%s;' % (
             self._unsafe_or_not(),
             self.__model.overload_name(
                 without_index=True,
                 cxx_name=not for_shim,
             ),
-            self._rust_params(with_this=with_this),
+            self._rust_params(shim_self=shim_self),
             self._returns_or_not(for_shim=for_shim),
         )
         suppressed = self._suppressed_reason()
@@ -241,11 +242,11 @@ class RustMethodBinding:
             method_name += '_'
         return method_name
     
-    def _rust_params(self, with_ffi=False, binding=False, with_this=False):
+    def _rust_params(self, with_ffi=False, binding=False, shim_self=False):
         params = self.__model.params.copy()
         if self.__is_instance_method:
-            if with_this:
-                params.insert(0, self.__this_param)
+            if shim_self:
+                params.insert(0, self.__shim_self)
             else:
                 params.insert(0, self.__self_param)
         return ', '.join(self._rust_param(p, with_ffi, binding) for p in params)
