@@ -104,11 +104,10 @@ class RustMethodBinding:
     def ffi_lines(self, for_shim):
         if for_shim and not self.__model.needs_shim():
             return
-        shim_self = for_shim and self.__model.returns_new()
         body = '%sfn %s(%s)%s;' % (
             self._unsafe_or_not(),
             self.__model.name(for_shim=for_shim, without_index=True),
-            self._rust_params(shim_self=shim_self),
+            self._rust_params(for_shim=for_shim),
             self._returns_or_not(for_shim=for_shim),
         )
         suppressed = self._suppressed_reason()
@@ -245,10 +244,10 @@ class RustMethodBinding:
             method_name += '_'
         return method_name
     
-    def _rust_params(self, with_ffi=False, binding=False, shim_self=False):
+    def _rust_params(self, with_ffi=False, binding=False, for_shim=False):
         params = self.__model.params.copy()
         if self.__is_instance_method:
-            if shim_self:
+            if for_shim and self.__model.returns_new():
                 params.insert(0, self.__shim_self)
             else:
                 params.insert(0, self.__self_param)
