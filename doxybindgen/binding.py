@@ -12,21 +12,21 @@ class RustClassBinding:
         self.__model = model
         self.__methods = [RustMethodBinding(m) for m in model.methods]
 
-    def cxx_auto_bound_methods(self, is_cxx):
-        if is_cxx:
+    def ffi_lines(self, for_shim=False):
+        if not for_shim:
             yield ''
         yield '// CLASS: %s' % (
             self.__model.name,
         )
-        if is_cxx:
+        if not for_shim:
             yield 'type %s;' % (
                 self.__model.name,
             )
         for method in self.__methods:
-            for line in method.cxx_auto_binding(is_cxx=is_cxx):
+            for line in method.ffi_lines(for_shim=for_shim):
                 yield line
 
-    def safer_binding(self, classes):
+    def binding_lines(self, classes):
         yield '// %s' % (
             self.__model.name,            
         )
@@ -36,9 +36,9 @@ class RustClassBinding:
         )
         yield ',\n'.join(self._ancestor_methods(classes))
         yield '}'
-        for line in self._generate_impl_with_ctors():
+        for line in self._impl_with_ctors():
             yield line
-        for line in self._generate_trait_with_methods():
+        for line in self._trait_with_methods():
             yield line
     
     def _ancestor_methods(self, classes):
@@ -61,10 +61,10 @@ class RustClassBinding:
                 return cls
         return None
 
-    def _generate_impl_with_ctors(self):
+    def _impl_with_ctors(self):
         yield 'impl %s {' % (self.__model.unprefixed(),)
         for ctor in self._ctors():
-            for line in ctor.binding():
+            for line in ctor.binding_lines():
                 yield '    %s' % (line,)
         yield "    pub fn none() -> Option<&'static Self> {"
         yield '        None'
@@ -74,7 +74,7 @@ class RustClassBinding:
     def _ctors(self):
         return (m for m in self.__methods if m.is_ctor)
     
-    def _generate_trait_with_methods(self):
+    def _trait_with_methods(self):
         indent = ' ' * 4 * 1
         base = self.__model.base
         if not base:
@@ -86,7 +86,7 @@ class RustClassBinding:
         for method in self.__methods:
             if method.is_ctor:
                 continue
-            for line in method.binding():
+            for line in method.binding_lines():
                 yield '%s%s' % (indent, line)
         yield '}\n'
 
@@ -94,27 +94,24 @@ class RustMethodBinding:
     def __init__(self, model):
         self.__model = model
         self.is_ctor = model.is_ctor
-        self.__is_dtor = model.name.startswith('~')
+        self.__is_dtor = model.name(for_shim=False).startswith('~')
         self.__is_instance_method = not (model.is_static or model.is_ctor)
         self.__self_param = Param(RustType(model.cls.name, model.const), 'self')
-        self.__this_param = Param(RustType(model.cls.name, model.const), 'arg0')
+        # must be name neither self or this
+        self.__shim_self = Param(RustType(model.cls.name, model.const), 'self_')
         self.__generic_params = self._make_params_generic()
     
-    def cxx_auto_binding(self, is_cxx):
-        if not (is_cxx or self.__model.generates()):
+    def ffi_lines(self, for_shim):
+        if for_shim and not self.__model.needs_shim():
             return
-        with_this = not is_cxx and self.__model.returns_new()
         body = '%sfn %s(%s)%s;' % (
             self._unsafe_or_not(),
-            self.__model.overload_name(
-                without_index=True,
-                cxx_name=is_cxx,
-            ),
-            self._rust_params(with_this=with_this),
-            self._returns_or_not(is_cxx=is_cxx),
+            self.__model.name(for_shim=for_shim, without_index=True),
+            self._rust_params(for_shim=for_shim),
+            self._returns_or_not(for_shim=for_shim),
         )
         suppressed = self._suppressed_reason()
-        if is_cxx and suppressed:
+        if not for_shim and suppressed:
             yield '// %s: %s' % (suppressed, body)
             return
         overload = self._rename()
@@ -122,7 +119,7 @@ class RustMethodBinding:
             yield overload
         yield body
 
-    def _returns_or_not(self, is_cxx=False, binding=False):
+    def _returns_or_not(self, for_shim=True, binding=False):
         if self.__model.returns.is_void():
             return ''
         returns = self.__model.returns.in_rust(with_ffi=binding)
@@ -130,7 +127,7 @@ class RustMethodBinding:
         if wrapped:
             if binding:
                 returns = wrapped[2:]
-            elif not is_cxx:
+            elif for_shim:
                 returns = '*mut %s' % (wrapped,)
         return ' -> %s' % (returns,)
     
@@ -141,7 +138,7 @@ class RustMethodBinding:
         if self.__model.overload_index == 0:
             return ''
         return '#[rust_name = "%s"]' % (
-            self.__model.overload_name(),
+            self.__model.name(for_shim=True),
         )
     
     def _make_params_generic(self):
@@ -153,13 +150,15 @@ class RustMethodBinding:
                 generic_params.append(param.type.make_generic(name))
         return generic_params
 
-    def binding(self):
+    def binding_lines(self):
         suppress = self._suppressed_reason(
-            suppress_ctor=False,
-            suppress_generated=False,
+            suppress_shim=False,
         )
         if suppress:
-            yield '// %s: fn %s()' % (suppress, self.__model.name)
+            yield '// %s: fn %s()' % (
+                suppress,
+                self.__model.name(for_shim=False),
+            )
             return
         gen_params = ''
         if self.__generic_params:
@@ -185,7 +184,7 @@ class RustMethodBinding:
                 for line in marshalling:
                     yield '%s' % (line,)
         call = '%s(%s)' % (
-            prefixed(self.__model.overload_name(), with_ffi=True),
+            prefixed(self.__model.name(for_shim=True), with_ffi=True),
             self._call_params(),
         )
         if self.__is_instance_method:
@@ -197,13 +196,13 @@ class RustMethodBinding:
                     self_param = '&' + self_param
                 params = ', '.join([self_param, self._call_params()])
                 call = 'ffi::%s(%s)' % (
-                    self.__model.overload_name(),
+                    self.__model.name(for_shim=True),
                     params,
                 )
             else:
                 call = '%s.%s(%s)' % (
                     self_param,
-                    self.__model.overload_name(),
+                    self.__model.name(for_shim=True),
                     self._call_params(),
                 )
         yield self._wrap_return_type(call)
@@ -211,18 +210,19 @@ class RustMethodBinding:
     def _call_params(self):
         return ', '.join(camel_to_snake(p.name) for p in self.__model.params)
 
-    def _suppressed_reason(self, suppress_ctor=True, suppress_generated=True):
-        if suppress_ctor and self.__model.is_ctor:
-            return 'CTOR'
+    def _suppressed_reason(self, suppress_shim=True):
+        if self.__model.is_ctor:
+            if suppress_shim:
+                return 'CTOR'
         if self.__is_dtor:
             return 'DTOR'
         if self.__model.is_static:
             # TODO: handle static methods specially
-            if suppress_generated:
+            if suppress_shim:
                 return 'GENERATED'
         if self.__model.uses_unsupported_type():
             if self.__model.returns_new():
-                if suppress_generated:
+                if suppress_shim:
                     return 'GENERATED'
             elif self.__model.is_static:
                 return 'STATIC'
@@ -233,7 +233,10 @@ class RustMethodBinding:
         return None
     
     def _rust_method_name(self):
-        method_name = pascal_to_snake(self.__model.name)
+        method_name = pascal_to_snake(self.__model.name(
+            for_shim=False,
+            without_index=True,
+        ))
         if self.__model.is_ctor:
             method_name = 'new'
         method_name = self.__model.overload_indexed(method_name)
@@ -241,11 +244,11 @@ class RustMethodBinding:
             method_name += '_'
         return method_name
     
-    def _rust_params(self, with_ffi=False, binding=False, with_this=False):
+    def _rust_params(self, with_ffi=False, binding=False, for_shim=False):
         params = self.__model.params.copy()
         if self.__is_instance_method:
-            if with_this:
-                params.insert(0, self.__this_param)
+            if for_shim and self.__model.returns_new():
+                params.insert(0, self.__shim_self)
             else:
                 params.insert(0, self.__self_param)
         return ', '.join(self._rust_param(p, with_ffi, binding) for p in params)
@@ -263,13 +266,10 @@ class RustMethodBinding:
         )
 
     def _wrap_if_unsafe(self, lines):
-        to_be_generated = lines
-        if self._uses_ptr_type():
-            to_be_generated = self._unsafe_lines(lines)
-        for line in to_be_generated:
-            yield line
-    
-    def _unsafe_lines(self, lines):
+        if not self._uses_ptr_type():
+            for line in lines:
+                yield line
+            return
         if len(lines) < 2:
             yield 'unsafe { %s }' % (lines[0],)
         else:
@@ -292,10 +292,10 @@ class CxxClassBinding:
         self.__model = model
         self.__methods = [CxxMethodBinding(m) for m in model.methods]
     
-    def defs(self):
+    def shims(self):
         yield '// CLASS: %s' % (self.__model.name,)
         for method in self.__methods:
-            for line in method.definition():
+            for line in method.shim():
                 yield line
         yield ''
 
@@ -308,8 +308,8 @@ class CxxMethodBinding:
         self.is_ctor = model.is_ctor
         self.__self_param = Param(RustType(model.cls.name, model.const), 'self')
 
-    def definition(self):
-        if not self.__model.generates():
+    def shim(self):
+        if not self.__model.needs_shim():
             return
         wrapped = self.__model.wrapped_return_type()
         returns = self.__model.returns.in_cxx() + ' '
@@ -317,7 +317,7 @@ class CxxMethodBinding:
             returns = '%s *' % (wrapped,)
         yield 'inline %s%s(%s) {' % (
             returns,
-            self.__model.overload_name(without_index=True),
+            self.__model.name(for_shim=True, without_index=True),
             self._cxx_params(),
         )
         new_params_or_expr = self._call_params()
@@ -327,10 +327,7 @@ class CxxMethodBinding:
                 self_or_class = '%s::' % (self.__model.cls.name,)
             new_params_or_expr = '%s%s(%s)' % (
                 self_or_class,
-                self.__model.overload_name(
-                    without_index=True,
-                    cxx_name=True,
-                ),
+                self.__model.name(for_shim=False, without_index=True),
                 new_params_or_expr,
             )
         if wrapped:
