@@ -882,8 +882,12 @@ pub trait EvtHandlerMethods: ObjectMethods {
     fn is_unlinked(&self) -> bool {
         self.pinned::<ffi::wxEvtHandler>().as_mut().IsUnlinked()
     }
-    // BLOCKED: fn AddFilter()
-    // BLOCKED: fn RemoveFilter()
+    fn add_filter(filter: *mut ffi::wxEventFilter) {
+        unsafe { ffi::wxEvtHandler_AddFilter(filter) }
+    }
+    fn remove_filter(filter: *mut ffi::wxEventFilter) {
+        unsafe { ffi::wxEvtHandler_RemoveFilter(filter) }
+    }
     // DTOR: fn ~wxEvtHandler()
 }
 
@@ -1751,13 +1755,47 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     // BLOCKED: fn UpdateWindowUI()
     // STATIC: fn GetClassDefaultAttributes()
-    // BLOCKED: fn FindFocus()
-    // BLOCKED: fn FindWindowById()
-    // BLOCKED: fn FindWindowByLabel()
-    // BLOCKED: fn FindWindowByName()
-    // BLOCKED: fn GetCapture()
-    // BLOCKED: fn NewControlId()
-    // BLOCKED: fn UnreserveControlId()
+    fn find_focus() -> *mut ffi::wxWindow {
+        ffi::wxWindow_FindFocus()
+    }
+    fn find_window_by_id<T: WindowMethods>(id: i32, parent: Option<&T>) -> *mut ffi::wxWindow {
+        unsafe {
+            let parent = match parent {
+                Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWindow_FindWindowById(id, parent)
+        }
+    }
+    fn find_window_by_label<T: WindowMethods>(label: &str, parent: Option<&T>) -> *mut ffi::wxWindow {
+        unsafe {
+            let label = &crate::ffi::NewString(label);
+            let parent = match parent {
+                Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWindow_FindWindowByLabel(label, parent)
+        }
+    }
+    fn find_window_by_name<T: WindowMethods>(name: &str, parent: Option<&T>) -> *mut ffi::wxWindow {
+        unsafe {
+            let name = &crate::ffi::NewString(name);
+            let parent = match parent {
+                Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWindow_FindWindowByName(name, parent)
+        }
+    }
+    fn get_capture() -> *mut ffi::wxWindow {
+        ffi::wxWindow_GetCapture()
+    }
+    fn new_control_id(count: i32) -> i32 {
+        ffi::wxWindow_NewControlId(count)
+    }
+    fn unreserve_control_id(id: i32, count: i32) {
+        ffi::wxWindow_UnreserveControlId(id, count)
+    }
     // DTOR: fn ~wxWindow()
     // BLOCKED: fn Create()
 }

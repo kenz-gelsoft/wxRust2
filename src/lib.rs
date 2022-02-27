@@ -8,7 +8,7 @@ mod defs;
 pub use defs::*;
 mod manual;
 
-pub mod generated;
+mod generated;
 pub use generated::*;
 
 // any pointer type used on ffi boundary.

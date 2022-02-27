@@ -5,6 +5,7 @@ import re
 RUST_KEYWORDS = [
     'move',
     'ref',
+    'type',
 ]
 
 class RustClassBinding:
@@ -72,7 +73,7 @@ class RustClassBinding:
         yield '}'
 
     def _ctors(self):
-        return (m for m in self.__methods if m.is_ctor)
+        return (m for m in self.__methods if m.is_ctor and not m.is_blocked())
     
     def _trait_with_methods(self):
         indent = ' ' * 4 * 1
@@ -101,6 +102,9 @@ class RustMethodBinding:
         self.__shim_self = Param(RustType(model.cls.name, model.const), 'self_')
         self.__generic_params = self._make_params_generic()
     
+    def is_blocked(self):
+        return self.__model.is_blocked()
+
     def ffi_lines(self, for_shim):
         if for_shim and not self.__model.needs_shim():
             return
@@ -208,7 +212,7 @@ class RustMethodBinding:
         yield self._wrap_return_type(call)
     
     def _call_params(self):
-        return ', '.join(camel_to_snake(p.name) for p in self.__model.params)
+        return ', '.join(camel_to_snake(self.non_keyword_name(p.name)) for p in self.__model.params)
 
     def _suppressed_reason(self, suppress_shim=True):
         if self.__model.is_ctor:
@@ -232,6 +236,11 @@ class RustMethodBinding:
             return 'BLOCKED'
         return None
     
+    def non_keyword_name(self, name):
+        while name in RUST_KEYWORDS:
+            name += '_'
+        return name
+
     def _rust_method_name(self):
         method_name = pascal_to_snake(self.__model.name(
             for_shim=False,
@@ -240,8 +249,7 @@ class RustMethodBinding:
         if self.__model.is_ctor:
             method_name = 'new'
         method_name = self.__model.overload_indexed(method_name)
-        if method_name in RUST_KEYWORDS:
-            method_name += '_'
+        method_name = self.non_keyword_name(method_name)
         return method_name
     
     def _rust_params(self, with_ffi=False, binding=False, for_shim=False):
@@ -261,7 +269,7 @@ class RustMethodBinding:
             elif param.type.generic_name:
                 typename = 'Option<&%s>' % (param.type.generic_name,)
         return '%s: %s' % (
-            camel_to_snake(param.name),
+            camel_to_snake(self.non_keyword_name(param.name)),
             typename,
         )
 
