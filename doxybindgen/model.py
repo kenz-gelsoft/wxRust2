@@ -17,13 +17,14 @@ CXX2RUST = {
 }
 
 class Class:
-    def in_xml(xmlfile, blocklist):
+    def in_xml(type_manager, xmlfile, blocklist):
         tree = ET.parse(xmlfile)
         root = tree.getroot()
         for cls in root.findall(".//compounddef[@kind='class']"):
-            yield Class(cls, blocklist)
+            yield Class(type_manager, cls, blocklist)
 
-    def __init__(self, e, blocklist):
+    def __init__(self, type_manager, e, blocklist):
+        self.type_manager = type_manager
         self.name = e.findtext('compoundname')
         self.base = e.findtext('basecompoundref')
         self.methods = []
@@ -46,7 +47,7 @@ class Method:
     def __init__(self, cls, e):
         self.is_public = e.get('prot') == 'public'
         self.is_static = e.get('static') == 'yes'
-        self.returns = CxxType(e.find('type'))
+        self.returns = CxxType(cls.type_manager, e.find('type'))
         self.cls = cls
         self.__name = e.findtext('name')
         self.overload_index = self._overload_index()
@@ -56,7 +57,7 @@ class Method:
             self.returns = RustType(cls.name, self.const, ctor_retval=True)
         self.params = []
         for param in e.findall('param'):
-            ptype = CxxType(param.find('type'))
+            ptype = CxxType(cls.type_manager, param.find('type'))
             pname = param.findtext('declname')
             self.params.append(Param(ptype, pname))
 
@@ -170,8 +171,13 @@ ALREADY_GENERATED_TYPES = [
     'wxValidator',
     'wxWindow',
 ]
+class TypeManager:
+    def __init__(self):
+        pass
+
 class CxxType:
-    def __init__(self, e):
+    def __init__(self, manager, e):
+        self.__manager = manager
         self.__srctype = ''.join(e.itertext())
         # print('parsing: |%s|' % (s,))
         matched = re.match(r'(const )?([^*&]*)([*&]+)?', self.__srctype)
