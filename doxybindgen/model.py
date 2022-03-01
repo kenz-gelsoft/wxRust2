@@ -17,13 +17,14 @@ CXX2RUST = {
 }
 
 class Class:
-    def in_xml(xmlfile, blocklist):
+    def in_xml(type_manager, xmlfile, blocklist):
         tree = ET.parse(xmlfile)
         root = tree.getroot()
         for cls in root.findall(".//compounddef[@kind='class']"):
-            yield Class(cls, blocklist)
+            yield Class(type_manager, cls, blocklist)
 
-    def __init__(self, e, blocklist):
+    def __init__(self, type_manager, e, blocklist):
+        self.type_manager = type_manager
         self.name = e.findtext('compoundname')
         self.base = e.findtext('basecompoundref')
         self.methods = []
@@ -46,7 +47,7 @@ class Method:
     def __init__(self, cls, e):
         self.is_public = e.get('prot') == 'public'
         self.is_static = e.get('static') == 'yes'
-        self.returns = CxxType(e.find('type'))
+        self.returns = CxxType(cls.type_manager, e.find('type'))
         self.cls = cls
         self.__name = e.findtext('name')
         self.overload_index = self._overload_index()
@@ -56,7 +57,7 @@ class Method:
             self.returns = RustType(cls.name, self.const, ctor_retval=True)
         self.params = []
         for param in e.findall('param'):
-            ptype = CxxType(param.find('type'))
+            ptype = CxxType(cls.type_manager, param.find('type'))
             pname = param.findtext('declname')
             self.params.append(Param(ptype, pname))
 
@@ -163,15 +164,18 @@ CXX_SUPPORTED_VALUE_TYPES = [
     'bool',
     'void',
 ]
-# This will be all types finally
-ALREADY_GENERATED_TYPES = [
-    'wxPoint',
-    'wxSize',
-    'wxValidator',
-    'wxWindow',
-]
+class TypeManager:
+    def __init__(self):
+        self.known_bindings = None
+        pass
+
+    def is_binding_type(self, name):
+        assert self.known_bindings is not None
+        return name in self.known_bindings
+
 class CxxType:
-    def __init__(self, e):
+    def __init__(self, manager, e):
+        self.__manager = manager
         self.__srctype = ''.join(e.itertext())
         # print('parsing: |%s|' % (s,))
         matched = re.match(r'(const )?([^*&]*)([*&]+)?', self.__srctype)
@@ -237,13 +241,13 @@ class CxxType:
 
     def is_ptr_to_binding(self):
         # TODO: consider mutability
-        return self.is_ptr() and self.typename in ALREADY_GENERATED_TYPES
+        return self.is_ptr() and self._is_binding_type()
 
     def _is_const_ref_to_string(self):
         return self._is_const_ref() and self.typename == 'wxString'
 
     def _is_const_ref_to_binding(self):
-        return self._is_const_ref() and self.typename in ALREADY_GENERATED_TYPES
+        return self._is_const_ref() and self._is_binding_type()
 
     def _is_const_ref(self):
         if self.__is_mut:
@@ -256,12 +260,15 @@ class CxxType:
         return self.not_supported_value_type()
     
     def not_supported_value_type(self, check_generated=False):
-        if check_generated and self.typename not in ALREADY_GENERATED_TYPES:
+        if check_generated and not self._is_binding_type():
             return False
         if not self._is_cxx_supported_value_type():
             return not self.__indirection
         return False
     
+    def _is_binding_type(self):
+        return self.__manager.is_binding_type(self.typename)
+
     def _is_cxx_supported_value_type(self):
         if self.typename in CXX_SUPPORTED_VALUE_TYPES:
             return True

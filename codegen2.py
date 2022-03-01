@@ -1,4 +1,4 @@
-from doxybindgen.model import Class
+from doxybindgen.model import Class, TypeManager
 from doxybindgen.binding import CxxClassBinding, RustClassBinding
 
 types = [
@@ -166,10 +166,13 @@ def main():
         'wxml/classwx_size.xml',
         'wxml/classwx_validator.xml',
     ]
+    type_manager = TypeManager()
     classes = []
     for file in xmlfiles:
-        for cls in Class.in_xml(file, BLOCKLIST):
+        for cls in Class.in_xml(type_manager, file, BLOCKLIST):
             classes.append(cls)
+    # Set known binding(name)s once all classes parsed.
+    type_manager.known_bindings = [cls.name for cls in classes]
     
     to_be_generated = {
         'src/generated.rs': generated_rs,
