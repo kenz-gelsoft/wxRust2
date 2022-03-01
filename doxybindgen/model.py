@@ -175,6 +175,9 @@ class TypeManager:
     def __init__(self):
         pass
 
+    def is_binding_type(self, name):
+        return name in ALREADY_GENERATED_TYPES
+
 class CxxType:
     def __init__(self, manager, e):
         self.__manager = manager
@@ -243,13 +246,13 @@ class CxxType:
 
     def is_ptr_to_binding(self):
         # TODO: consider mutability
-        return self.is_ptr() and self.typename in ALREADY_GENERATED_TYPES
+        return self.is_ptr() and self._is_binding_type()
 
     def _is_const_ref_to_string(self):
         return self._is_const_ref() and self.typename == 'wxString'
 
     def _is_const_ref_to_binding(self):
-        return self._is_const_ref() and self.typename in ALREADY_GENERATED_TYPES
+        return self._is_const_ref() and self._is_binding_type()
 
     def _is_const_ref(self):
         if self.__is_mut:
@@ -262,12 +265,15 @@ class CxxType:
         return self.not_supported_value_type()
     
     def not_supported_value_type(self, check_generated=False):
-        if check_generated and self.typename not in ALREADY_GENERATED_TYPES:
+        if check_generated and not self._is_binding_type():
             return False
         if not self._is_cxx_supported_value_type():
             return not self.__indirection
         return False
     
+    def _is_binding_type(self):
+        return self.__manager.is_binding_type(self.typename)
+
     def _is_cxx_supported_value_type(self):
         if self.typename in CXX_SUPPORTED_VALUE_TYPES:
             return True
