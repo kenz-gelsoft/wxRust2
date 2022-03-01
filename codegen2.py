@@ -171,6 +171,8 @@ def main():
     for file in xmlfiles:
         for cls in Class.in_xml(type_manager, file, BLOCKLIST):
             classes.append(cls)
+    # Set known binding(name)s once all classes parsed.
+    type_manager.known_bindings = [cls.name for cls in classes]
     
     to_be_generated = {
         'src/generated.rs': generated_rs,

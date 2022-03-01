@@ -164,19 +164,14 @@ CXX_SUPPORTED_VALUE_TYPES = [
     'bool',
     'void',
 ]
-# This will be all types finally
-ALREADY_GENERATED_TYPES = [
-    'wxPoint',
-    'wxSize',
-    'wxValidator',
-    'wxWindow',
-]
 class TypeManager:
     def __init__(self):
+        self.known_bindings = None
         pass
 
     def is_binding_type(self, name):
-        return name in ALREADY_GENERATED_TYPES
+        assert self.known_bindings is not None
+        return name in self.known_bindings
 
 class CxxType:
     def __init__(self, manager, e):

@@ -766,7 +766,8 @@ impl Object {
     pub fn new() -> Object {
         Object(ffi::NewObject())
     }
-    pub fn new1(other: &ffi::wxObject) -> Object {
+    pub fn new1(other: &Object) -> Object {
+        let other = &other.pinned::<ffi::wxObject>();
         Object(ffi::NewObject1(other))
     }
     pub fn none() -> Option<&'static Self> {
@@ -784,10 +785,12 @@ pub trait ObjectMethods: WxRustMethods {
     fn is_kind_of(&self, info: *const ffi::wxClassInfo) -> bool {
         unsafe { self.pinned::<ffi::wxObject>().as_mut().IsKindOf(info) }
     }
-    fn is_same_as(&self, obj: &ffi::wxObject) -> bool {
+    fn is_same_as(&self, obj: &Object) -> bool {
+        let obj = &obj.pinned::<ffi::wxObject>();
         self.pinned::<ffi::wxObject>().as_mut().IsSameAs(obj)
     }
-    fn ref_(&self, clone: &ffi::wxObject) {
+    fn ref_(&self, clone: &Object) {
+        let clone = &clone.pinned::<ffi::wxObject>();
         self.pinned::<ffi::wxObject>().as_mut().Ref(clone)
     }
     fn set_ref_data(&self, data: *mut ffi::wxObjectRefData) {
@@ -870,11 +873,23 @@ pub trait EvtHandlerMethods: ObjectMethods {
     fn set_evt_handler_enabled(&self, enabled: bool) {
         self.pinned::<ffi::wxEvtHandler>().as_mut().SetEvtHandlerEnabled(enabled)
     }
-    fn set_next_handler(&self, handler: *mut ffi::wxEvtHandler) {
-        unsafe { self.pinned::<ffi::wxEvtHandler>().as_mut().SetNextHandler(handler) }
+    fn set_next_handler<T: EvtHandlerMethods>(&self, handler: Option<&T>) {
+        unsafe {
+            let handler = match handler {
+                Some(r) => Pin::<&mut ffi::wxEvtHandler>::into_inner_unchecked(r.pinned::<ffi::wxEvtHandler>()),
+                None => ptr::null_mut(),
+            };
+            self.pinned::<ffi::wxEvtHandler>().as_mut().SetNextHandler(handler)
+        }
     }
-    fn set_previous_handler(&self, handler: *mut ffi::wxEvtHandler) {
-        unsafe { self.pinned::<ffi::wxEvtHandler>().as_mut().SetPreviousHandler(handler) }
+    fn set_previous_handler<T: EvtHandlerMethods>(&self, handler: Option<&T>) {
+        unsafe {
+            let handler = match handler {
+                Some(r) => Pin::<&mut ffi::wxEvtHandler>::into_inner_unchecked(r.pinned::<ffi::wxEvtHandler>()),
+                None => ptr::null_mut(),
+            };
+            self.pinned::<ffi::wxEvtHandler>().as_mut().SetPreviousHandler(handler)
+        }
     }
     fn unlink(&self) {
         self.pinned::<ffi::wxEvtHandler>().as_mut().Unlink()
@@ -1465,20 +1480,50 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn pop_event_handler(&self, delete_handler: bool) -> *mut ffi::wxEvtHandler {
         self.pinned::<ffi::wxWindow>().as_mut().PopEventHandler(delete_handler)
     }
-    fn push_event_handler(&self, handler: *mut ffi::wxEvtHandler) {
-        unsafe { self.pinned::<ffi::wxWindow>().as_mut().PushEventHandler(handler) }
+    fn push_event_handler<T: EvtHandlerMethods>(&self, handler: Option<&T>) {
+        unsafe {
+            let handler = match handler {
+                Some(r) => Pin::<&mut ffi::wxEvtHandler>::into_inner_unchecked(r.pinned::<ffi::wxEvtHandler>()),
+                None => ptr::null_mut(),
+            };
+            self.pinned::<ffi::wxWindow>().as_mut().PushEventHandler(handler)
+        }
     }
-    fn remove_event_handler(&self, handler: *mut ffi::wxEvtHandler) -> bool {
-        unsafe { self.pinned::<ffi::wxWindow>().as_mut().RemoveEventHandler(handler) }
+    fn remove_event_handler<T: EvtHandlerMethods>(&self, handler: Option<&T>) -> bool {
+        unsafe {
+            let handler = match handler {
+                Some(r) => Pin::<&mut ffi::wxEvtHandler>::into_inner_unchecked(r.pinned::<ffi::wxEvtHandler>()),
+                None => ptr::null_mut(),
+            };
+            self.pinned::<ffi::wxWindow>().as_mut().RemoveEventHandler(handler)
+        }
     }
-    fn set_event_handler(&self, handler: *mut ffi::wxEvtHandler) {
-        unsafe { self.pinned::<ffi::wxWindow>().as_mut().SetEventHandler(handler) }
+    fn set_event_handler<T: EvtHandlerMethods>(&self, handler: Option<&T>) {
+        unsafe {
+            let handler = match handler {
+                Some(r) => Pin::<&mut ffi::wxEvtHandler>::into_inner_unchecked(r.pinned::<ffi::wxEvtHandler>()),
+                None => ptr::null_mut(),
+            };
+            self.pinned::<ffi::wxWindow>().as_mut().SetEventHandler(handler)
+        }
     }
-    fn set_next_handler(&self, handler: *mut ffi::wxEvtHandler) {
-        unsafe { self.pinned::<ffi::wxWindow>().as_mut().SetNextHandler(handler) }
+    fn set_next_handler<T: EvtHandlerMethods>(&self, handler: Option<&T>) {
+        unsafe {
+            let handler = match handler {
+                Some(r) => Pin::<&mut ffi::wxEvtHandler>::into_inner_unchecked(r.pinned::<ffi::wxEvtHandler>()),
+                None => ptr::null_mut(),
+            };
+            self.pinned::<ffi::wxWindow>().as_mut().SetNextHandler(handler)
+        }
     }
-    fn set_previous_handler(&self, handler: *mut ffi::wxEvtHandler) {
-        unsafe { self.pinned::<ffi::wxWindow>().as_mut().SetPreviousHandler(handler) }
+    fn set_previous_handler<T: EvtHandlerMethods>(&self, handler: Option<&T>) {
+        unsafe {
+            let handler = match handler {
+                Some(r) => Pin::<&mut ffi::wxEvtHandler>::into_inner_unchecked(r.pinned::<ffi::wxEvtHandler>()),
+                None => ptr::null_mut(),
+            };
+            self.pinned::<ffi::wxWindow>().as_mut().SetPreviousHandler(handler)
+        }
     }
     // BLOCKED: fn GetExtraStyle()
     // BLOCKED: fn GetWindowStyleFlag()
