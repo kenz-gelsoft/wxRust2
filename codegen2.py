@@ -75,7 +75,7 @@ BLOCKLIST = {
         # TODO: dont return reference/temp value from self
         'GetChildren',
         'GetChildren1',
-        'GetCursor', 
+        'GetCursor',
         'GetUpdateRegion',
     ],
     'wxControl': [
@@ -150,6 +150,7 @@ BLOCKLIST = {
     ],
 }
 
+
 # place wxWidgets doxygen xml files in wxml/ dir and run this.
 def main():
     xmlfiles = [
@@ -183,6 +184,7 @@ def main():
             for chunk in generator(classes):
                 print(chunk, file=f)
 
+
 def generated_rs(classes):
     yield '''\
 #![allow(dead_code)]
@@ -209,7 +211,7 @@ mod ffi {
     bindings = [RustClassBinding(cls) for cls in classes]
     indent = ' ' * 4 * 2
     for t in types:
-        yield '%stype %s;' % (indent,t)
+        yield '%stype %s;' % (indent, t)
     for cls in bindings:
         for line in cls.ffi_lines():
             yield '%s%s' % (indent, line)
@@ -233,6 +235,7 @@ pub trait WxRustMethods {
     for cls in bindings:
         for line in cls.binding_lines(classes):
             yield line
+
 
 def wxrust2_h(classes):
     yield '''\

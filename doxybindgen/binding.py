@@ -8,6 +8,7 @@ RUST_KEYWORDS = [
     'type',
 ]
 
+
 class RustClassBinding:
     def __init__(self, model):
         self.__model = model
@@ -29,7 +30,7 @@ class RustClassBinding:
 
     def binding_lines(self, classes):
         yield '// %s' % (
-            self.__model.name,            
+            self.__model.name,
         )
         yield 'wx_class! { %s(%s) impl' % (
             self.__model.unprefixed(),
@@ -90,6 +91,7 @@ class RustClassBinding:
             for line in method.binding_lines():
                 yield '%s%s' % (indent, line)
         yield '}\n'
+
 
 class RustMethodBinding:
     def __init__(self, model):
@@ -295,6 +297,7 @@ class RustMethodBinding:
     def _uses_ptr_type(self):
         return any(p.type.is_ptr() for p in self.__model.params)
 
+
 class CxxClassBinding:
     def __init__(self, model):
         self.__model = model
@@ -309,7 +312,8 @@ class CxxClassBinding:
 
     def _ctors(self):
         return (m for m in self.__methods if m.is_ctor)
-    
+
+
 class CxxMethodBinding:
     def __init__(self, model):
         self.__model = model
@@ -359,6 +363,7 @@ class CxxMethodBinding:
     def _call_params(self):
         return ', '.join(p.name for p in self.__model.params)
 
+
 def pascal_to_snake(pascal_case):
     def concat_caps(words):
         buf = ''
@@ -377,6 +382,7 @@ def pascal_to_snake(pascal_case):
         snake_cased = '_'.join(w.lower() for w in concat_caps(words))
         return snake_cased
     return pascal_case
+
 
 def camel_to_snake(camel_case):
     if camel_case is None:

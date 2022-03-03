@@ -16,6 +16,7 @@ CXX2RUST = {
     'wxWindowID': 'i32',
 }
 
+
 class Class:
     def in_xml(type_manager, xmlfile, blocklist):
         tree = ET.parse(xmlfile)
@@ -42,6 +43,7 @@ class Class:
         if self.__blocklist is None:
             return False
         return name in self.__blocklist
+
 
 class Method:
     def __init__(self, cls, e):
@@ -120,6 +122,7 @@ class Param:
     def is_self(self):
         return self.name == 'self'
 
+
 class RustType:
     def __init__(self, s, const, ctor_retval=False):
         self.typename = s
@@ -164,6 +167,8 @@ CXX_SUPPORTED_VALUE_TYPES = [
     'bool',
     'void',
 ]
+
+
 class TypeManager:
     def __init__(self):
         self.known_bindings = None
@@ -172,6 +177,7 @@ class TypeManager:
     def is_binding_type(self, name):
         assert self.known_bindings is not None
         return name in self.known_bindings
+
 
 class CxxType:
     def __init__(self, manager, e):
@@ -295,6 +301,8 @@ RUST_PRIMITIVES = [
     'i64',
     'u8',
 ]
+
+
 def prefixed(t, with_ffi=False):
     if t in RUST_PRIMITIVES:
         return t
