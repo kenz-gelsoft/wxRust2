@@ -1,0 +1,3 @@
+[submodule "wxml"]
+	path = wxml
+	url = ../wxml.git
