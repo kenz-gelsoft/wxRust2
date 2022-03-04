@@ -226,11 +226,11 @@ inline wxPoint *NewPoint(const wxRealPoint & pt) {
 }
 
 // CLASS: wxSize
-inline wxSize *NewSize() {
-    return new wxSize();
+inline wxSize NewSize() {
+    return wxSize();
 }
-inline wxSize *NewSize(int width, int height) {
-    return new wxSize(width, height);
+inline wxSize NewSize(int width, int height) {
+    return wxSize(width, height);
 }
 
 // CLASS: wxValidator
