@@ -1,4 +1,4 @@
-from .model import Param, RustType, prefixed
+from .model import Param, RustType, prefixed, camel_to_snake, pascal_to_snake
 import re
 
 # Known, and problematic
@@ -185,7 +185,7 @@ class RustMethodBinding:
     
     def _binding_body(self):
         for param in self.__model.params:
-            marshalling = param.type.marshal(camel_to_snake(param.name))
+            marshalling = param.marshal()
             if marshalling:
                 for line in marshalling:
                     yield '%s' % (line,)
@@ -194,8 +194,8 @@ class RustMethodBinding:
             self._call_params(),
         )
         if self.__is_instance_method:
-            self_param = 'self.pinned::<ffi::%s>().as_mut()' % (
-                self.__model.cls.name,
+            self_param = '%s.as_mut()' % (
+                self.__self_param.rust_ffi_ref(),
             )
             if self.__model.returns_new():
                 if self.__model.const:
@@ -363,29 +363,3 @@ class CxxMethodBinding:
     def _call_params(self):
         return ', '.join(p.name for p in self.__model.params)
 
-
-def pascal_to_snake(pascal_case):
-    def concat_caps(words):
-        buf = ''
-        for word in words:
-            if len(word) == 1:
-                buf += word
-                continue
-            if buf:
-                yield buf
-                buf = ''
-            yield word
-        if buf:
-            yield buf
-    words = re.findall(r'[A-Z][^A-Z]*', pascal_case)
-    if words:
-        snake_cased = '_'.join(w.lower() for w in concat_caps(words))
-        return snake_cased
-    return pascal_case
-
-
-def camel_to_snake(camel_case):
-    if camel_case is None:
-        return None
-    pascal_case = camel_case[0].upper() + camel_case[1:]
-    return pascal_to_snake(pascal_case)

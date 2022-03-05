@@ -121,6 +121,18 @@ class Param:
     
     def is_self(self):
         return self.name == 'self'
+    
+    def marshal(self):
+        return self.type.marshal(self)
+
+    def rust_ffi_ref(self, rename=None):
+        name = camel_to_snake(self.name)
+        if rename:
+            name = rename
+        return '%s.pinned::<ffi::%s>()' % (
+            name,
+            self.type.typename,
+        )
 
 
 class RustType:
@@ -130,7 +142,7 @@ class RustType:
         self.__ctor_retval = ctor_retval
         self.generic_name = None
 
-    def marshal(self, name):
+    def marshal(self, param):
         return None
 
     def in_rust(self, with_ffi=False, binding=False):
@@ -199,26 +211,26 @@ class CxxType:
             return CXX2CXX[self.__srctype]
         return self.__srctype
     
-    def marshal(self, name):
+    def marshal(self, param):
+        name = camel_to_snake(param.name)
         if self._is_const_ref_to_string():
             yield 'let %s = &crate::ffi::NewString(%s);' % (
                 name,
                 name,
             )
         if self._is_const_ref_to_binding():
-            yield 'let %s = &%s.pinned::<ffi::%s>();' % (
+            yield 'let %s = &%s;' % (
                 name,
-                name,
-                self.typename,
+                param.rust_ffi_ref(),
             )
         if self.is_ptr_to_binding():
             yield 'let %s = match %s {' % (
                 name,
                 name,
             )
-            yield '    Some(r) => Pin::<&mut ffi::%s>::into_inner_unchecked(r.pinned::<ffi::%s>()),' % (
+            yield '    Some(r) => Pin::<&mut ffi::%s>::into_inner_unchecked(%s),' % (
                 self.typename,
-                self.typename,
+                param.rust_ffi_ref(rename='r'),
             )
             yield '    None => ptr::null_mut(),'
             yield '};'
@@ -309,4 +321,31 @@ def prefixed(t, with_ffi=False):
     elif with_ffi:
         t = 'ffi::%s' % (t,)
     return t
+
+
+def pascal_to_snake(pascal_case):
+    def concat_caps(words):
+        buf = ''
+        for word in words:
+            if len(word) == 1:
+                buf += word
+                continue
+            if buf:
+                yield buf
+                buf = ''
+            yield word
+        if buf:
+            yield buf
+    words = re.findall(r'[A-Z][^A-Z]*', pascal_case)
+    if words:
+        snake_cased = '_'.join(w.lower() for w in concat_caps(words))
+        return snake_cased
+    return pascal_case
+
+
+def camel_to_snake(camel_case):
+    if camel_case is None:
+        return None
+    pascal_case = camel_case[0].upper() + camel_case[1:]
+    return pascal_to_snake(pascal_case)
 
