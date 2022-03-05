@@ -103,7 +103,9 @@ class Method:
         return '%s%s' % (name, index)
 
     def wrapped_return_type(self):
-        if self.is_ctor or self.returns_new():
+        if (self.is_ctor or
+            self.returns_new() or
+            self.returns.is_trivial()):
             return self.returns.typename
         else:
             return None
@@ -163,6 +165,9 @@ class RustType:
     def is_ptr_to_binding(self):
         return False
 
+    def is_trivial(self):
+        return self.typename in CXX_TRIVIAL_EXTERN_TYPES
+
     def not_supported(self):
         return False
 
@@ -178,6 +183,9 @@ OS_UNSUPPORTED_TYPES = [
 CXX_SUPPORTED_VALUE_TYPES = [
     'bool',
     'void',
+]
+CXX_TRIVIAL_EXTERN_TYPES = [
+    'wxSize',
 ]
 
 
@@ -292,8 +300,13 @@ class CxxType:
             return True
         if self.typename in CXX2RUST:
             return True
+        if self.is_trivial():
+            return True 
         return False
     
+    def is_trivial(self):
+        return self.typename in CXX_TRIVIAL_EXTERN_TYPES
+        
     def is_ptr(self):
         return self.__indirection.startswith('*')
     

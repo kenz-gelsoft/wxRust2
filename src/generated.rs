@@ -153,40 +153,42 @@ mod ffi {
         fn BeginRepositioningChildren(self: Pin<&mut wxWindow>) -> bool;
         fn EndRepositioningChildren(self: Pin<&mut wxWindow>);
         fn CacheBestSize(self: &wxWindow, size: &wxSize);
-        // GENERATED: fn ClientToWindowSize(self: &wxWindow, size: &wxSize) -> wxSize;
-        // GENERATED: fn WindowToClientSize(self: &wxWindow, size: &wxSize) -> wxSize;
+        fn ClientToWindowSize(self: &wxWindow, size: &wxSize) -> wxSize;
+        fn WindowToClientSize(self: &wxWindow, size: &wxSize) -> wxSize;
         fn Fit(self: Pin<&mut wxWindow>);
         fn FitInside(self: Pin<&mut wxWindow>);
-        // CXX_UNSUPPORTED: fn FromDIP(self: &wxWindow, sz: &wxSize) -> wxSize;
+        // BLOCKED: fn FromDIP(self: &wxWindow, sz: &wxSize) -> wxSize;
         // GENERATED: fn FromDIP(self: &wxWindow, pt: &wxPoint) -> wxPoint;
         #[rust_name = "FromDIP2"]
         fn FromDIP(self: &wxWindow, d: i32) -> i32;
-        // GENERATED: fn ToDIP(self: &wxWindow, sz: &wxSize) -> wxSize;
+        fn ToDIP(self: &wxWindow, sz: &wxSize) -> wxSize;
         // GENERATED: fn ToDIP(self: &wxWindow, pt: &wxPoint) -> wxPoint;
         // BLOCKED: fn ToDIP(self: &wxWindow, d: i32) -> i32;
-        // GENERATED: fn GetBestSize(self: &wxWindow) -> wxSize;
+        fn GetBestSize(self: &wxWindow) -> wxSize;
         fn GetBestHeight(self: &wxWindow, width: i32) -> i32;
         fn GetBestWidth(self: &wxWindow, height: i32) -> i32;
         unsafe fn GetClientSize(self: &wxWindow, width: *mut i32, height: *mut i32);
-        // GENERATED: fn GetClientSize(self: &wxWindow) -> wxSize;
-        // GENERATED: fn GetEffectiveMinSize(self: &wxWindow) -> wxSize;
-        // GENERATED: fn GetMaxClientSize(self: &wxWindow) -> wxSize;
-        // GENERATED: fn GetMaxSize(self: &wxWindow) -> wxSize;
-        // GENERATED: fn GetMinClientSize(self: &wxWindow) -> wxSize;
-        // GENERATED: fn GetMinSize(self: &wxWindow) -> wxSize;
+        #[rust_name = "GetClientSize1"]
+        fn GetClientSize(self: &wxWindow) -> wxSize;
+        fn GetEffectiveMinSize(self: &wxWindow) -> wxSize;
+        fn GetMaxClientSize(self: &wxWindow) -> wxSize;
+        fn GetMaxSize(self: &wxWindow) -> wxSize;
+        fn GetMinClientSize(self: &wxWindow) -> wxSize;
+        fn GetMinSize(self: &wxWindow) -> wxSize;
         fn GetMinWidth(self: &wxWindow) -> i32;
         fn GetMinHeight(self: &wxWindow) -> i32;
         fn GetMaxWidth(self: &wxWindow) -> i32;
         fn GetMaxHeight(self: &wxWindow) -> i32;
         unsafe fn GetSize(self: &wxWindow, width: *mut i32, height: *mut i32);
-        // GENERATED: fn GetSize(self: &wxWindow) -> wxSize;
-        // GENERATED: fn GetVirtualSize(self: &wxWindow) -> wxSize;
+        #[rust_name = "GetSize1"]
+        fn GetSize(self: &wxWindow) -> wxSize;
+        fn GetVirtualSize(self: &wxWindow) -> wxSize;
         #[rust_name = "GetVirtualSize1"]
         unsafe fn GetVirtualSize(self: &wxWindow, width: *mut i32, height: *mut i32);
-        // GENERATED: fn GetBestVirtualSize(self: &wxWindow) -> wxSize;
+        fn GetBestVirtualSize(self: &wxWindow) -> wxSize;
         fn GetContentScaleFactor(self: &wxWindow) -> f64;
         fn GetDPIScaleFactor(self: &wxWindow) -> f64;
-        // GENERATED: fn GetWindowBorderSize(self: &wxWindow) -> wxSize;
+        fn GetWindowBorderSize(self: &wxWindow) -> wxSize;
         fn InformFirstDirection(self: Pin<&mut wxWindow>, direction: i32, size: i32, available_other_dir: i32) -> bool;
         fn InvalidateBestSize(self: Pin<&mut wxWindow>);
         fn PostSizeEvent(self: Pin<&mut wxWindow>);
@@ -241,9 +243,11 @@ mod ffi {
         unsafe fn ClientToScreen(self: &wxWindow, x: *mut i32, y: *mut i32);
         // GENERATED: fn ClientToScreen(self: &wxWindow, pt: &wxPoint) -> wxPoint;
         // GENERATED: fn ConvertDialogToPixels(self: &wxWindow, pt: &wxPoint) -> wxPoint;
-        // GENERATED: fn ConvertDialogToPixels(self: &wxWindow, sz: &wxSize) -> wxSize;
+        #[rust_name = "ConvertDialogToPixels1"]
+        fn ConvertDialogToPixels(self: &wxWindow, sz: &wxSize) -> wxSize;
         // GENERATED: fn ConvertPixelsToDialog(self: &wxWindow, pt: &wxPoint) -> wxPoint;
-        // GENERATED: fn ConvertPixelsToDialog(self: &wxWindow, sz: &wxSize) -> wxSize;
+        #[rust_name = "ConvertPixelsToDialog1"]
+        fn ConvertPixelsToDialog(self: &wxWindow, sz: &wxSize) -> wxSize;
         unsafe fn ScreenToClient(self: &wxWindow, x: *mut i32, y: *mut i32);
         // GENERATED: fn ScreenToClient(self: &wxWindow, pt: &wxPoint) -> wxPoint;
         fn ClearBackground(self: Pin<&mut wxWindow>);
@@ -255,11 +259,12 @@ mod ffi {
         fn GetCharHeight(self: &wxWindow) -> i32;
         fn GetCharWidth(self: &wxWindow) -> i32;
         // CXX_UNSUPPORTED: fn GetDefaultAttributes(self: &wxWindow) -> wxVisualAttributes;
-        // GENERATED: fn GetDPI(self: &wxWindow) -> wxSize;
+        fn GetDPI(self: &wxWindow) -> wxSize;
         // CXX_UNSUPPORTED: fn GetFont(self: &wxWindow) -> wxFont;
         // CXX_UNSUPPORTED: fn GetForegroundColour(self: &wxWindow) -> wxColour;
         unsafe fn GetTextExtent(self: &wxWindow, string: &wxString, w: *mut i32, h: *mut i32, descent: *mut i32, external_leading: *mut i32, font: *const wxFont);
-        // GENERATED: fn GetTextExtent(self: &wxWindow, string: &wxString) -> wxSize;
+        #[rust_name = "GetTextExtent1"]
+        fn GetTextExtent(self: &wxWindow, string: &wxString) -> wxSize;
         // BLOCKED: fn GetUpdateRegion(self: &wxWindow) -> &wxRegion;
         // CXX_UNSUPPORTED: fn GetUpdateClientRect(self: &wxWindow) -> wxRect;
         fn HasTransparentBackground(self: Pin<&mut wxWindow>) -> bool;
@@ -424,9 +429,10 @@ mod ffi {
         fn Command(self: Pin<&mut wxControl>, event: Pin<&mut wxCommandEvent>);
         // CXX_UNSUPPORTED: fn GetLabel(self: &wxControl) -> wxString;
         // CXX_UNSUPPORTED: fn GetLabelText(self: &wxControl) -> wxString;
-        // GENERATED: fn GetSizeFromTextSize(self: &wxControl, xlen: i32, ylen: i32) -> wxSize;
-        // GENERATED: fn GetSizeFromTextSize(self: &wxControl, tsize: &wxSize) -> wxSize;
-        // GENERATED: fn GetSizeFromText(self: &wxControl, text: &wxString) -> wxSize;
+        fn GetSizeFromTextSize(self: &wxControl, xlen: i32, ylen: i32) -> wxSize;
+        #[rust_name = "GetSizeFromTextSize1"]
+        fn GetSizeFromTextSize(self: &wxControl, tsize: &wxSize) -> wxSize;
+        fn GetSizeFromText(self: &wxControl, text: &wxString) -> wxSize;
         fn SetLabel(self: Pin<&mut wxControl>, label: &wxString);
         fn SetLabelText(self: Pin<&mut wxControl>, text: &wxString);
         fn SetLabelMarkup(self: Pin<&mut wxControl>, markup: &wxString) -> bool;
@@ -451,7 +457,7 @@ mod ffi {
         fn SetBitmapFocus(self: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
         fn SetBitmapLabel(self: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
         fn SetBitmapPressed(self: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
-        // GENERATED: fn GetBitmapMargins(self: Pin<&mut wxAnyButton>) -> wxSize;
+        fn GetBitmapMargins(self: Pin<&mut wxAnyButton>) -> wxSize;
         fn SetBitmapMargins(self: Pin<&mut wxAnyButton>, x: i32, y: i32);
         #[rust_name = "SetBitmapMargins1"]
         fn SetBitmapMargins(self: Pin<&mut wxAnyButton>, sz: &wxSize);
@@ -573,9 +579,9 @@ mod ffi {
         // CXX_UNSUPPORTED: fn operator-(self: Pin<&mut wxPoint>, sz: &wxSize, pt: &wxPoint) -> wxPoint;
         // BLOCKED: fn operator+=(self: Pin<&mut wxPoint>, sz: &wxSize) -> Pin<&mut wxPoint>;
         // BLOCKED: fn operator-=(self: Pin<&mut wxPoint>, sz: &wxSize) -> Pin<&mut wxPoint>;
-        // CXX_UNSUPPORTED: fn operator/(self: Pin<&mut wxPoint>, sz: &wxPoint, factor: i32) -> wxSize;
-        // CXX_UNSUPPORTED: fn operator*(self: Pin<&mut wxPoint>, sz: &wxPoint, factor: i32) -> wxSize;
-        // CXX_UNSUPPORTED: fn operator*(self: Pin<&mut wxPoint>, factor: i32, sz: &wxSize) -> wxSize;
+        // BLOCKED: fn operator/(self: Pin<&mut wxPoint>, sz: &wxPoint, factor: i32) -> wxSize;
+        // BLOCKED: fn operator*(self: Pin<&mut wxPoint>, sz: &wxPoint, factor: i32) -> wxSize;
+        // BLOCKED: fn operator*(self: Pin<&mut wxPoint>, factor: i32, sz: &wxSize) -> wxSize;
         // BLOCKED: fn operator/=(self: Pin<&mut wxPoint>, factor: i32) -> Pin<&mut wxSize>;
         // BLOCKED: fn operator*=(self: Pin<&mut wxPoint>, factor: i32) -> Pin<&mut wxSize>;
         // CTOR: fn wxPoint() -> Point;
@@ -587,13 +593,13 @@ mod ffi {
         // BLOCKED: fn operator=(self: Pin<&mut wxSize>, sz: &wxSize) -> Pin<&mut wxSize>;
         // BLOCKED: fn operator==(self: Pin<&mut wxSize>, s1: &wxSize, s2: &wxSize) -> bool;
         // BLOCKED: fn operator!=(self: Pin<&mut wxSize>, s1: &wxSize, s2: &wxSize) -> bool;
-        // CXX_UNSUPPORTED: fn operator+(self: Pin<&mut wxSize>, s1: &wxSize, s2: &wxSize) -> wxSize;
-        // CXX_UNSUPPORTED: fn operator-(self: Pin<&mut wxSize>, s1: &wxSize, s2: &wxSize) -> wxSize;
+        // BLOCKED: fn operator+(self: Pin<&mut wxSize>, s1: &wxSize, s2: &wxSize) -> wxSize;
+        // BLOCKED: fn operator-(self: Pin<&mut wxSize>, s1: &wxSize, s2: &wxSize) -> wxSize;
         // BLOCKED: fn operator+=(self: Pin<&mut wxSize>, sz: &wxSize) -> Pin<&mut wxSize>;
         // BLOCKED: fn operator-=(self: Pin<&mut wxSize>, sz: &wxSize) -> Pin<&mut wxSize>;
-        // CXX_UNSUPPORTED: fn operator/(self: Pin<&mut wxSize>, sz: &wxSize, factor: i32) -> wxSize;
-        // CXX_UNSUPPORTED: fn operator*(self: Pin<&mut wxSize>, sz: &wxSize, factor: i32) -> wxSize;
-        // CXX_UNSUPPORTED: fn operator*(self: Pin<&mut wxSize>, factor: i32, sz: &wxSize) -> wxSize;
+        // BLOCKED: fn operator/(self: Pin<&mut wxSize>, sz: &wxSize, factor: i32) -> wxSize;
+        // BLOCKED: fn operator*(self: Pin<&mut wxSize>, sz: &wxSize, factor: i32) -> wxSize;
+        // BLOCKED: fn operator*(self: Pin<&mut wxSize>, factor: i32, sz: &wxSize) -> wxSize;
         // BLOCKED: fn operator/=(self: Pin<&mut wxSize>, factor: i32) -> Pin<&mut wxSize>;
         // BLOCKED: fn operator*=(self: Pin<&mut wxSize>, factor: i32) -> Pin<&mut wxSize>;
         // CTOR: fn wxSize() -> Size;
@@ -647,26 +653,10 @@ mod ffi {
         unsafe fn wxEvtHandler_RemoveFilter(filter: *mut wxEventFilter);
         fn NewEvtHandler() -> *mut wxEvtHandler;
         // CLASS: wxWindow
-        fn wxWindow_ClientToWindowSize(self_: &wxWindow, size: &wxSize) -> *mut wxSize;
-        fn wxWindow_WindowToClientSize(self_: &wxWindow, size: &wxSize) -> *mut wxSize;
         #[rust_name = "wxWindow_FromDIP1"]
         fn wxWindow_FromDIP(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
-        fn wxWindow_ToDIP(self_: &wxWindow, sz: &wxSize) -> *mut wxSize;
         #[rust_name = "wxWindow_ToDIP1"]
         fn wxWindow_ToDIP(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
-        fn wxWindow_GetBestSize(self_: &wxWindow) -> *mut wxSize;
-        #[rust_name = "wxWindow_GetClientSize1"]
-        fn wxWindow_GetClientSize(self_: &wxWindow) -> *mut wxSize;
-        fn wxWindow_GetEffectiveMinSize(self_: &wxWindow) -> *mut wxSize;
-        fn wxWindow_GetMaxClientSize(self_: &wxWindow) -> *mut wxSize;
-        fn wxWindow_GetMaxSize(self_: &wxWindow) -> *mut wxSize;
-        fn wxWindow_GetMinClientSize(self_: &wxWindow) -> *mut wxSize;
-        fn wxWindow_GetMinSize(self_: &wxWindow) -> *mut wxSize;
-        #[rust_name = "wxWindow_GetSize1"]
-        fn wxWindow_GetSize(self_: &wxWindow) -> *mut wxSize;
-        fn wxWindow_GetVirtualSize(self_: &wxWindow) -> *mut wxSize;
-        fn wxWindow_GetBestVirtualSize(self_: &wxWindow) -> *mut wxSize;
-        fn wxWindow_GetWindowBorderSize(self_: &wxWindow) -> *mut wxSize;
         #[rust_name = "wxWindow_FromDIP3"]
         unsafe fn wxWindow_FromDIP(sz: &wxSize, w: *const wxWindow) -> *mut wxSize;
         #[rust_name = "wxWindow_FromDIP4"]
@@ -687,16 +677,9 @@ mod ffi {
         #[rust_name = "wxWindow_ClientToScreen1"]
         fn wxWindow_ClientToScreen(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
         fn wxWindow_ConvertDialogToPixels(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
-        #[rust_name = "wxWindow_ConvertDialogToPixels1"]
-        fn wxWindow_ConvertDialogToPixels(self_: &wxWindow, sz: &wxSize) -> *mut wxSize;
         fn wxWindow_ConvertPixelsToDialog(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
-        #[rust_name = "wxWindow_ConvertPixelsToDialog1"]
-        fn wxWindow_ConvertPixelsToDialog(self_: &wxWindow, sz: &wxSize) -> *mut wxSize;
         #[rust_name = "wxWindow_ScreenToClient1"]
         fn wxWindow_ScreenToClient(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
-        fn wxWindow_GetDPI(self_: &wxWindow) -> *mut wxSize;
-        #[rust_name = "wxWindow_GetTextExtent1"]
-        fn wxWindow_GetTextExtent(self_: &wxWindow, string: &wxString) -> *mut wxSize;
         fn wxWindow_FindFocus() -> *mut wxWindow;
         unsafe fn wxWindow_FindWindowById(id: i32, parent: *const wxWindow) -> *mut wxWindow;
         unsafe fn wxWindow_FindWindowByLabel(label: &wxString, parent: *const wxWindow) -> *mut wxWindow;
@@ -711,13 +694,8 @@ mod ffi {
         unsafe fn NewControl(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> *mut wxControl;
         #[rust_name = "NewControl1"]
         fn NewControl() -> *mut wxControl;
-        fn wxControl_GetSizeFromTextSize(self_: &wxControl, xlen: i32, ylen: i32) -> *mut wxSize;
-        #[rust_name = "wxControl_GetSizeFromTextSize1"]
-        fn wxControl_GetSizeFromTextSize(self_: &wxControl, tsize: &wxSize) -> *mut wxSize;
-        fn wxControl_GetSizeFromText(self_: &wxControl, text: &wxString) -> *mut wxSize;
         // CLASS: wxAnyButton
         fn NewAnyButton() -> *mut wxAnyButton;
-        fn wxAnyButton_GetBitmapMargins(self_: Pin<&mut wxAnyButton>) -> *mut wxSize;
         // CLASS: wxButton
         fn NewButton() -> *mut wxButton;
         #[rust_name = "NewButton1"]
@@ -1055,11 +1033,11 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     fn client_to_window_size(&self, size: &Size) -> Size {
         let size = &size.pinned::<ffi::wxSize>();
-        Size(ffi::wxWindow_ClientToWindowSize(&self.pinned::<ffi::wxWindow>().as_mut(), size))
+        Size(self.pinned::<ffi::wxWindow>().as_mut().ClientToWindowSize(size))
     }
     fn window_to_client_size(&self, size: &Size) -> Size {
         let size = &size.pinned::<ffi::wxSize>();
-        Size(ffi::wxWindow_WindowToClientSize(&self.pinned::<ffi::wxWindow>().as_mut(), size))
+        Size(self.pinned::<ffi::wxWindow>().as_mut().WindowToClientSize(size))
     }
     fn fit(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().Fit()
@@ -1067,7 +1045,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn fit_inside(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().FitInside()
     }
-    // CXX_UNSUPPORTED: fn FromDIP()
+    // BLOCKED: fn FromDIP()
     fn from_dip1(&self, pt: &Point) -> Point {
         let pt = &pt.pinned::<ffi::wxPoint>();
         Point(ffi::wxWindow_FromDIP1(&self.pinned::<ffi::wxWindow>().as_mut(), pt))
@@ -1077,7 +1055,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     fn to_dip(&self, sz: &Size) -> Size {
         let sz = &sz.pinned::<ffi::wxSize>();
-        Size(ffi::wxWindow_ToDIP(&self.pinned::<ffi::wxWindow>().as_mut(), sz))
+        Size(self.pinned::<ffi::wxWindow>().as_mut().ToDIP(sz))
     }
     fn to_dip1(&self, pt: &Point) -> Point {
         let pt = &pt.pinned::<ffi::wxPoint>();
@@ -1085,7 +1063,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     // BLOCKED: fn ToDIP2()
     fn get_best_size(&self) -> Size {
-        Size(ffi::wxWindow_GetBestSize(&self.pinned::<ffi::wxWindow>().as_mut(), ))
+        Size(self.pinned::<ffi::wxWindow>().as_mut().GetBestSize())
     }
     fn get_best_height(&self, width: i32) -> i32 {
         self.pinned::<ffi::wxWindow>().as_mut().GetBestHeight(width)
@@ -1097,22 +1075,22 @@ pub trait WindowMethods: EvtHandlerMethods {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().GetClientSize(width, height) }
     }
     fn get_client_size1(&self) -> Size {
-        Size(ffi::wxWindow_GetClientSize1(&self.pinned::<ffi::wxWindow>().as_mut(), ))
+        Size(self.pinned::<ffi::wxWindow>().as_mut().GetClientSize1())
     }
     fn get_effective_min_size(&self) -> Size {
-        Size(ffi::wxWindow_GetEffectiveMinSize(&self.pinned::<ffi::wxWindow>().as_mut(), ))
+        Size(self.pinned::<ffi::wxWindow>().as_mut().GetEffectiveMinSize())
     }
     fn get_max_client_size(&self) -> Size {
-        Size(ffi::wxWindow_GetMaxClientSize(&self.pinned::<ffi::wxWindow>().as_mut(), ))
+        Size(self.pinned::<ffi::wxWindow>().as_mut().GetMaxClientSize())
     }
     fn get_max_size(&self) -> Size {
-        Size(ffi::wxWindow_GetMaxSize(&self.pinned::<ffi::wxWindow>().as_mut(), ))
+        Size(self.pinned::<ffi::wxWindow>().as_mut().GetMaxSize())
     }
     fn get_min_client_size(&self) -> Size {
-        Size(ffi::wxWindow_GetMinClientSize(&self.pinned::<ffi::wxWindow>().as_mut(), ))
+        Size(self.pinned::<ffi::wxWindow>().as_mut().GetMinClientSize())
     }
     fn get_min_size(&self) -> Size {
-        Size(ffi::wxWindow_GetMinSize(&self.pinned::<ffi::wxWindow>().as_mut(), ))
+        Size(self.pinned::<ffi::wxWindow>().as_mut().GetMinSize())
     }
     fn get_min_width(&self) -> i32 {
         self.pinned::<ffi::wxWindow>().as_mut().GetMinWidth()
@@ -1130,16 +1108,16 @@ pub trait WindowMethods: EvtHandlerMethods {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().GetSize(width, height) }
     }
     fn get_size1(&self) -> Size {
-        Size(ffi::wxWindow_GetSize1(&self.pinned::<ffi::wxWindow>().as_mut(), ))
+        Size(self.pinned::<ffi::wxWindow>().as_mut().GetSize1())
     }
     fn get_virtual_size(&self) -> Size {
-        Size(ffi::wxWindow_GetVirtualSize(&self.pinned::<ffi::wxWindow>().as_mut(), ))
+        Size(self.pinned::<ffi::wxWindow>().as_mut().GetVirtualSize())
     }
     fn get_virtual_size1(&self, width: *mut i32, height: *mut i32) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().GetVirtualSize1(width, height) }
     }
     fn get_best_virtual_size(&self) -> Size {
-        Size(ffi::wxWindow_GetBestVirtualSize(&self.pinned::<ffi::wxWindow>().as_mut(), ))
+        Size(self.pinned::<ffi::wxWindow>().as_mut().GetBestVirtualSize())
     }
     fn get_content_scale_factor(&self) -> f64 {
         self.pinned::<ffi::wxWindow>().as_mut().GetContentScaleFactor()
@@ -1148,7 +1126,7 @@ pub trait WindowMethods: EvtHandlerMethods {
         self.pinned::<ffi::wxWindow>().as_mut().GetDPIScaleFactor()
     }
     fn get_window_border_size(&self) -> Size {
-        Size(ffi::wxWindow_GetWindowBorderSize(&self.pinned::<ffi::wxWindow>().as_mut(), ))
+        Size(self.pinned::<ffi::wxWindow>().as_mut().GetWindowBorderSize())
     }
     fn inform_first_direction(&self, direction: i32, size: i32, available_other_dir: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().InformFirstDirection(direction, size, available_other_dir)
@@ -1340,7 +1318,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     fn convert_dialog_to_pixels1(&self, sz: &Size) -> Size {
         let sz = &sz.pinned::<ffi::wxSize>();
-        Size(ffi::wxWindow_ConvertDialogToPixels1(&self.pinned::<ffi::wxWindow>().as_mut(), sz))
+        Size(self.pinned::<ffi::wxWindow>().as_mut().ConvertDialogToPixels1(sz))
     }
     fn convert_pixels_to_dialog(&self, pt: &Point) -> Point {
         let pt = &pt.pinned::<ffi::wxPoint>();
@@ -1348,7 +1326,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     fn convert_pixels_to_dialog1(&self, sz: &Size) -> Size {
         let sz = &sz.pinned::<ffi::wxSize>();
-        Size(ffi::wxWindow_ConvertPixelsToDialog1(&self.pinned::<ffi::wxWindow>().as_mut(), sz))
+        Size(self.pinned::<ffi::wxWindow>().as_mut().ConvertPixelsToDialog1(sz))
     }
     fn screen_to_client(&self, x: *mut i32, y: *mut i32) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().ScreenToClient(x, y) }
@@ -1379,7 +1357,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     // CXX_UNSUPPORTED: fn GetDefaultAttributes()
     fn get_dpi(&self) -> Size {
-        Size(ffi::wxWindow_GetDPI(&self.pinned::<ffi::wxWindow>().as_mut(), ))
+        Size(self.pinned::<ffi::wxWindow>().as_mut().GetDPI())
     }
     // CXX_UNSUPPORTED: fn GetFont()
     // CXX_UNSUPPORTED: fn GetForegroundColour()
@@ -1391,7 +1369,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     fn get_text_extent1(&self, string: &str) -> Size {
         let string = &crate::ffi::NewString(string);
-        Size(ffi::wxWindow_GetTextExtent1(&self.pinned::<ffi::wxWindow>().as_mut(), string))
+        Size(self.pinned::<ffi::wxWindow>().as_mut().GetTextExtent1(string))
     }
     // BLOCKED: fn GetUpdateRegion()
     // CXX_UNSUPPORTED: fn GetUpdateClientRect()
@@ -1881,15 +1859,15 @@ pub trait ControlMethods: WindowMethods {
     // CXX_UNSUPPORTED: fn GetLabel()
     // CXX_UNSUPPORTED: fn GetLabelText()
     fn get_size_from_text_size(&self, xlen: i32, ylen: i32) -> Size {
-        Size(ffi::wxControl_GetSizeFromTextSize(&self.pinned::<ffi::wxControl>().as_mut(), xlen, ylen))
+        Size(self.pinned::<ffi::wxControl>().as_mut().GetSizeFromTextSize(xlen, ylen))
     }
     fn get_size_from_text_size1(&self, tsize: &Size) -> Size {
         let tsize = &tsize.pinned::<ffi::wxSize>();
-        Size(ffi::wxControl_GetSizeFromTextSize1(&self.pinned::<ffi::wxControl>().as_mut(), tsize))
+        Size(self.pinned::<ffi::wxControl>().as_mut().GetSizeFromTextSize1(tsize))
     }
     fn get_size_from_text(&self, text: &str) -> Size {
         let text = &crate::ffi::NewString(text);
-        Size(ffi::wxControl_GetSizeFromText(&self.pinned::<ffi::wxControl>().as_mut(), text))
+        Size(self.pinned::<ffi::wxControl>().as_mut().GetSizeFromText(text))
     }
     fn set_label(&self, label: &str) {
         let label = &crate::ffi::NewString(label);
@@ -1950,7 +1928,7 @@ pub trait AnyButtonMethods: ControlMethods {
         self.pinned::<ffi::wxAnyButton>().as_mut().SetBitmapPressed(bitmap)
     }
     fn get_bitmap_margins(&self) -> Size {
-        Size(ffi::wxAnyButton_GetBitmapMargins(self.pinned::<ffi::wxAnyButton>().as_mut(), ))
+        Size(self.pinned::<ffi::wxAnyButton>().as_mut().GetBitmapMargins())
     }
     fn set_bitmap_margins(&self, x: i32, y: i32) {
         self.pinned::<ffi::wxAnyButton>().as_mut().SetBitmapMargins(x, y)
@@ -2339,9 +2317,9 @@ pub trait PointMethods: WxRustMethods {
     // CXX_UNSUPPORTED: fn operator-2()
     // BLOCKED: fn operator+=1()
     // BLOCKED: fn operator-=1()
-    // CXX_UNSUPPORTED: fn operator/()
-    // CXX_UNSUPPORTED: fn operator*()
-    // CXX_UNSUPPORTED: fn operator*1()
+    // BLOCKED: fn operator/()
+    // BLOCKED: fn operator*()
+    // BLOCKED: fn operator*1()
     // BLOCKED: fn operator/=()
     // BLOCKED: fn operator*=()
 }
@@ -2365,13 +2343,13 @@ pub trait SizeMethods: WxRustMethods {
     // BLOCKED: fn operator=()
     // BLOCKED: fn operator==()
     // BLOCKED: fn operator!=()
-    // CXX_UNSUPPORTED: fn operator+()
-    // CXX_UNSUPPORTED: fn operator-()
+    // BLOCKED: fn operator+()
+    // BLOCKED: fn operator-()
     // BLOCKED: fn operator+=()
     // BLOCKED: fn operator-=()
-    // CXX_UNSUPPORTED: fn operator/()
-    // CXX_UNSUPPORTED: fn operator*()
-    // CXX_UNSUPPORTED: fn operator*1()
+    // BLOCKED: fn operator/()
+    // BLOCKED: fn operator*()
+    // BLOCKED: fn operator*1()
     // BLOCKED: fn operator/=()
     // BLOCKED: fn operator*=()
     fn dec_by(&self, pt: &Point) {
