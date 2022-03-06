@@ -12,6 +12,12 @@ use crate::macros::wx_class;
 // we chose this type as it's handy in cxx.
 type UnsafeAnyPtr = *const c_char;
 
+// CLASS: wxSize
+unsafe impl ExternType for ffi::wxSize {
+    type Id = type_id!("wxSize");
+    type Kind = cxx::kind::Trivial;
+}
+
 #[cxx::bridge(namespace = "wxrust")]
 mod ffi {
     #[namespace = ""]

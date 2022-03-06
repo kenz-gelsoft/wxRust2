@@ -200,6 +200,12 @@ use crate::macros::wx_class;
 // any pointer type used on ffi boundary.
 // we chose this type as it's handy in cxx.
 type UnsafeAnyPtr = *const c_char;
+'''
+    bindings = [RustClassBinding(cls) for cls in classes]
+    for cls in bindings:
+        for line in cls.extern_type_lines():
+            yield line
+    yield '''\
 
 #[cxx::bridge(namespace = "wxrust")]
 mod ffi {
@@ -208,7 +214,6 @@ mod ffi {
         include!("wx/include/wxrust.h");
         include!("wx/include/wxrust2.h");
 '''
-    bindings = [RustClassBinding(cls) for cls in classes]
     indent = ' ' * 4 * 2
     for t in types:
         yield '%stype %s;' % (indent, t)

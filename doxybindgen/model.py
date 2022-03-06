@@ -43,6 +43,9 @@ class Class:
         if self.__blocklist is None:
             return False
         return name in self.__blocklist
+    
+    def is_trivial(self):
+        return self.name in CXX_TRIVIAL_EXTERN_TYPES
 
 
 class Method:
