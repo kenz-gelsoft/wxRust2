@@ -588,53 +588,53 @@ mod ffi {
         // BLOCKED: fn operator/(self: Pin<&mut wxPoint>, sz: &wxPoint, factor: i32) -> wxSize;
         // BLOCKED: fn operator*(self: Pin<&mut wxPoint>, sz: &wxPoint, factor: i32) -> wxSize;
         // BLOCKED: fn operator*(self: Pin<&mut wxPoint>, factor: i32, sz: &wxSize) -> wxSize;
-        // BLOCKED: fn operator/=(self: Pin<&mut wxPoint>, factor: i32) -> Pin<&mut wxSize>;
-        // BLOCKED: fn operator*=(self: Pin<&mut wxPoint>, factor: i32) -> Pin<&mut wxSize>;
+        // BLOCKED: fn operator/=(self: Pin<&mut wxPoint>, factor: i32) -> &mut wxSize;
+        // BLOCKED: fn operator*=(self: Pin<&mut wxPoint>, factor: i32) -> &mut wxSize;
         // CTOR: fn wxPoint() -> Point;
         // CTOR: fn wxPoint(x: i32, y: i32) -> Point;
         // CTOR: fn wxPoint(pt: &wxRealPoint) -> Point;
         
         // CLASS: wxSize
         type wxSize;
-        // BLOCKED: fn operator=(self: Pin<&mut wxSize>, sz: &wxSize) -> Pin<&mut wxSize>;
-        // BLOCKED: fn operator==(self: Pin<&mut wxSize>, s1: &wxSize, s2: &wxSize) -> bool;
-        // BLOCKED: fn operator!=(self: Pin<&mut wxSize>, s1: &wxSize, s2: &wxSize) -> bool;
-        // BLOCKED: fn operator+(self: Pin<&mut wxSize>, s1: &wxSize, s2: &wxSize) -> wxSize;
-        // BLOCKED: fn operator-(self: Pin<&mut wxSize>, s1: &wxSize, s2: &wxSize) -> wxSize;
-        // BLOCKED: fn operator+=(self: Pin<&mut wxSize>, sz: &wxSize) -> Pin<&mut wxSize>;
-        // BLOCKED: fn operator-=(self: Pin<&mut wxSize>, sz: &wxSize) -> Pin<&mut wxSize>;
-        // BLOCKED: fn operator/(self: Pin<&mut wxSize>, sz: &wxSize, factor: i32) -> wxSize;
-        // BLOCKED: fn operator*(self: Pin<&mut wxSize>, sz: &wxSize, factor: i32) -> wxSize;
-        // BLOCKED: fn operator*(self: Pin<&mut wxSize>, factor: i32, sz: &wxSize) -> wxSize;
-        // BLOCKED: fn operator/=(self: Pin<&mut wxSize>, factor: i32) -> Pin<&mut wxSize>;
-        // BLOCKED: fn operator*=(self: Pin<&mut wxSize>, factor: i32) -> Pin<&mut wxSize>;
+        // BLOCKED: fn operator=(self: &mut wxSize, sz: &wxSize) -> &mut wxSize;
+        // BLOCKED: fn operator==(self: &mut wxSize, s1: &wxSize, s2: &wxSize) -> bool;
+        // BLOCKED: fn operator!=(self: &mut wxSize, s1: &wxSize, s2: &wxSize) -> bool;
+        // BLOCKED: fn operator+(self: &mut wxSize, s1: &wxSize, s2: &wxSize) -> wxSize;
+        // BLOCKED: fn operator-(self: &mut wxSize, s1: &wxSize, s2: &wxSize) -> wxSize;
+        // BLOCKED: fn operator+=(self: &mut wxSize, sz: &wxSize) -> &mut wxSize;
+        // BLOCKED: fn operator-=(self: &mut wxSize, sz: &wxSize) -> &mut wxSize;
+        // BLOCKED: fn operator/(self: &mut wxSize, sz: &wxSize, factor: i32) -> wxSize;
+        // BLOCKED: fn operator*(self: &mut wxSize, sz: &wxSize, factor: i32) -> wxSize;
+        // BLOCKED: fn operator*(self: &mut wxSize, factor: i32, sz: &wxSize) -> wxSize;
+        // BLOCKED: fn operator/=(self: &mut wxSize, factor: i32) -> &mut wxSize;
+        // BLOCKED: fn operator*=(self: &mut wxSize, factor: i32) -> &mut wxSize;
         // CTOR: fn wxSize() -> Size;
         // CTOR: fn wxSize(width: i32, height: i32) -> Size;
-        fn DecBy(self: Pin<&mut wxSize>, pt: &wxPoint);
+        fn DecBy(self: &mut wxSize, pt: &wxPoint);
         #[rust_name = "DecBy1"]
-        fn DecBy(self: Pin<&mut wxSize>, size: &wxSize);
+        fn DecBy(self: &mut wxSize, size: &wxSize);
         #[rust_name = "DecBy2"]
-        fn DecBy(self: Pin<&mut wxSize>, dx: i32, dy: i32);
+        fn DecBy(self: &mut wxSize, dx: i32, dy: i32);
         #[rust_name = "DecBy3"]
-        fn DecBy(self: Pin<&mut wxSize>, d: i32);
-        fn DecTo(self: Pin<&mut wxSize>, size: &wxSize);
-        fn DecToIfSpecified(self: Pin<&mut wxSize>, size: &wxSize);
+        fn DecBy(self: &mut wxSize, d: i32);
+        fn DecTo(self: &mut wxSize, size: &wxSize);
+        fn DecToIfSpecified(self: &mut wxSize, size: &wxSize);
         fn GetHeight(self: &wxSize) -> i32;
         fn GetWidth(self: &wxSize) -> i32;
-        fn IncBy(self: Pin<&mut wxSize>, pt: &wxPoint);
+        fn IncBy(self: &mut wxSize, pt: &wxPoint);
         #[rust_name = "IncBy1"]
-        fn IncBy(self: Pin<&mut wxSize>, size: &wxSize);
+        fn IncBy(self: &mut wxSize, size: &wxSize);
         #[rust_name = "IncBy2"]
-        fn IncBy(self: Pin<&mut wxSize>, dx: i32, dy: i32);
+        fn IncBy(self: &mut wxSize, dx: i32, dy: i32);
         #[rust_name = "IncBy3"]
-        fn IncBy(self: Pin<&mut wxSize>, d: i32);
-        fn IncTo(self: Pin<&mut wxSize>, size: &wxSize);
+        fn IncBy(self: &mut wxSize, d: i32);
+        fn IncTo(self: &mut wxSize, size: &wxSize);
         fn IsFullySpecified(self: &wxSize) -> bool;
-        // BLOCKED: fn Scale(self: Pin<&mut wxSize>, xscale: f64, yscale: f64) -> Pin<&mut wxSize>;
-        fn Set(self: Pin<&mut wxSize>, width: i32, height: i32);
-        fn SetDefaults(self: Pin<&mut wxSize>, size_default: &wxSize);
-        fn SetHeight(self: Pin<&mut wxSize>, height: i32);
-        fn SetWidth(self: Pin<&mut wxSize>, width: i32);
+        // BLOCKED: fn Scale(self: &mut wxSize, xscale: f64, yscale: f64) -> &mut wxSize;
+        fn Set(self: &mut wxSize, width: i32, height: i32);
+        fn SetDefaults(self: &mut wxSize, size_default: &wxSize);
+        fn SetHeight(self: &mut wxSize, height: i32);
+        fn SetWidth(self: &mut wxSize, width: i32);
         
         // CLASS: wxValidator
         type wxValidator;

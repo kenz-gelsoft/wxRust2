@@ -155,10 +155,15 @@ class RustType:
         if self.__ctor_retval:
             return t[2:]
         t = prefixed(t, with_ffi)
-        if self.const:
-            return '&%s' % (t)
-        return 'Pin<&mut %s>' % (t,)
+        ref = '&'
+        mut = '' if self.const else 'mut '
+        return self._pin_if_needed('%s%s%s' % (ref, mut, t))
     
+    def _pin_if_needed(self, t):
+        if t.startswith('&mut ') and not self.is_trivial():
+            return 'Pin<%s>' % (t,)
+        return t
+
     def in_cxx(self):
         t = '%s &' % (self.typename,)
         if self.const:
@@ -264,9 +269,12 @@ class CxxType:
             mut = 'mut ' if self.__is_mut else ''
             if ref.startswith('*') and not self.__is_mut:
                 mut = 'const '
-        if ref.startswith('&') and self.__is_mut:
-            return 'Pin<&mut %s>' % (t,)
-        return '%s%s%s' % (ref, mut, t)
+        return self._pin_if_needed('%s%s%s' % (ref, mut, t))
+    
+    def _pin_if_needed(self, t):
+        if t.startswith('&mut ') and not self.is_trivial():
+            return 'Pin<%s>' % (t,)
+        return t
 
     def is_ptr_to_binding(self):
         # TODO: consider mutability
