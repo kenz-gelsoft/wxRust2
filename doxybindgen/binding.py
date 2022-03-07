@@ -146,7 +146,10 @@ class RustMethodBinding:
             if binding:
                 returns = wrapped[2:]
             elif for_shim:
-                returns = '*mut %s' % (wrapped,)
+                if self.__model.returns.is_trivial():
+                    returns = wrapped
+                else:
+                    returns = '*mut %s' % (wrapped,)
         return ' -> %s' % (returns,)
     
     def _unsafe_or_not(self):
@@ -277,7 +280,10 @@ class RustMethodBinding:
         typename = param.type.in_rust(with_ffi, binding)
         if binding:
             if param.is_self():
-                return '&self'
+                if param.type.is_trivial() and not param.type.const:
+                    return '&mut self'
+                else:
+                    return '&self'
             elif param.type.generic_name:
                 typename = 'Option<&%s>' % (param.type.generic_name,)
         return '%s: %s' % (
@@ -336,7 +342,10 @@ class CxxMethodBinding:
         wrapped = self.__model.wrapped_return_type()
         returns = self.__model.returns.in_cxx() + ' '
         if wrapped:
-            returns = '%s *' % (wrapped,)
+            ptr = '*'
+            if self.__model.returns.is_trivial():
+                ptr = ''
+            returns = '%s %s' % (wrapped, ptr)
         yield 'inline %s%s(%s) {' % (
             returns,
             self.__model.name(for_shim=True, without_index=True),
@@ -352,8 +361,11 @@ class CxxMethodBinding:
                 self.__model.name(for_shim=False, without_index=True),
                 new_params_or_expr,
             )
-        if wrapped:
-            yield '    return new %s(%s);' % (wrapped, new_params_or_expr)
+        if wrapped and (self.is_ctor or not self.__model.returns.is_trivial()):
+            new = 'new '
+            if self.__model.returns.is_trivial():
+                new = ''
+            yield '    return %s%s(%s);' % (new, wrapped, new_params_or_expr)
         else:
             yield '    return %s;' % (new_params_or_expr,)
         yield '}'

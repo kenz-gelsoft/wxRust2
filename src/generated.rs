@@ -658,13 +658,13 @@ mod ffi {
         #[rust_name = "wxWindow_ToDIP1"]
         fn wxWindow_ToDIP(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
         #[rust_name = "wxWindow_FromDIP3"]
-        unsafe fn wxWindow_FromDIP(sz: &wxSize, w: *const wxWindow) -> *mut wxSize;
+        unsafe fn wxWindow_FromDIP(sz: &wxSize, w: *const wxWindow) -> wxSize;
         #[rust_name = "wxWindow_FromDIP4"]
         unsafe fn wxWindow_FromDIP(pt: &wxPoint, w: *const wxWindow) -> *mut wxPoint;
         #[rust_name = "wxWindow_FromDIP5"]
         unsafe fn wxWindow_FromDIP(d: i32, w: *const wxWindow) -> i32;
         #[rust_name = "wxWindow_ToDIP3"]
-        unsafe fn wxWindow_ToDIP(sz: &wxSize, w: *const wxWindow) -> *mut wxSize;
+        unsafe fn wxWindow_ToDIP(sz: &wxSize, w: *const wxWindow) -> wxSize;
         #[rust_name = "wxWindow_ToDIP4"]
         unsafe fn wxWindow_ToDIP(pt: &wxPoint, w: *const wxWindow) -> *mut wxPoint;
         #[rust_name = "wxWindow_ToDIP5"]
@@ -700,13 +700,13 @@ mod ffi {
         fn NewButton() -> *mut wxButton;
         #[rust_name = "NewButton1"]
         unsafe fn NewButton(parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> *mut wxButton;
-        unsafe fn wxButton_GetDefaultSize(win: *mut wxWindow) -> *mut wxSize;
+        unsafe fn wxButton_GetDefaultSize(win: *mut wxWindow) -> wxSize;
         // CLASS: wxNonOwnedWindow
         // CLASS: wxTopLevelWindow
         fn NewTopLevelWindow() -> *mut wxTopLevelWindow;
         #[rust_name = "NewTopLevelWindow1"]
         unsafe fn NewTopLevelWindow(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxTopLevelWindow;
-        fn wxTopLevelWindow_GetDefaultSize() -> *mut wxSize;
+        fn wxTopLevelWindow_GetDefaultSize() -> wxSize;
         // CLASS: wxFrame
         fn NewFrame() -> *mut wxFrame;
         #[rust_name = "NewFrame1"]
@@ -719,9 +719,9 @@ mod ffi {
         #[rust_name = "NewPoint2"]
         fn NewPoint(pt: &wxRealPoint) -> *mut wxPoint;
         // CLASS: wxSize
-        fn NewSize() -> *mut wxSize;
+        fn NewSize() -> wxSize;
         #[rust_name = "NewSize1"]
-        fn NewSize(width: i32, height: i32) -> *mut wxSize;
+        fn NewSize(width: i32, height: i32) -> wxSize;
         // CLASS: wxValidator
         fn NewValidator() -> *mut wxValidator;
         fn wxValidator_SuppressBellOnError(suppress: bool);
@@ -2348,25 +2348,25 @@ impl Size {
     // BLOCKED: fn operator*1()
     // BLOCKED: fn operator/=()
     // BLOCKED: fn operator*=()
-    fn dec_by(&self, pt: &Point) {
+    fn dec_by(&mut self, pt: &Point) {
         let pt = &pt.pinned::<ffi::wxPoint>();
         self.0.DecBy(pt)
     }
-    fn dec_by1(&self, size: &Size) {
+    fn dec_by1(&mut self, size: &Size) {
         let size = &size.0;
         self.0.DecBy1(size)
     }
-    fn dec_by2(&self, dx: i32, dy: i32) {
+    fn dec_by2(&mut self, dx: i32, dy: i32) {
         self.0.DecBy2(dx, dy)
     }
-    fn dec_by3(&self, d: i32) {
+    fn dec_by3(&mut self, d: i32) {
         self.0.DecBy3(d)
     }
-    fn dec_to(&self, size: &Size) {
+    fn dec_to(&mut self, size: &Size) {
         let size = &size.0;
         self.0.DecTo(size)
     }
-    fn dec_to_if_specified(&self, size: &Size) {
+    fn dec_to_if_specified(&mut self, size: &Size) {
         let size = &size.0;
         self.0.DecToIfSpecified(size)
     }
@@ -2376,21 +2376,21 @@ impl Size {
     fn get_width(&self) -> i32 {
         self.0.GetWidth()
     }
-    fn inc_by(&self, pt: &Point) {
+    fn inc_by(&mut self, pt: &Point) {
         let pt = &pt.pinned::<ffi::wxPoint>();
         self.0.IncBy(pt)
     }
-    fn inc_by1(&self, size: &Size) {
+    fn inc_by1(&mut self, size: &Size) {
         let size = &size.0;
         self.0.IncBy1(size)
     }
-    fn inc_by2(&self, dx: i32, dy: i32) {
+    fn inc_by2(&mut self, dx: i32, dy: i32) {
         self.0.IncBy2(dx, dy)
     }
-    fn inc_by3(&self, d: i32) {
+    fn inc_by3(&mut self, d: i32) {
         self.0.IncBy3(d)
     }
-    fn inc_to(&self, size: &Size) {
+    fn inc_to(&mut self, size: &Size) {
         let size = &size.0;
         self.0.IncTo(size)
     }
@@ -2398,17 +2398,17 @@ impl Size {
         self.0.IsFullySpecified()
     }
     // BLOCKED: fn Scale()
-    fn set(&self, width: i32, height: i32) {
+    fn set(&mut self, width: i32, height: i32) {
         self.0.Set(width, height)
     }
-    fn set_defaults(&self, size_default: &Size) {
+    fn set_defaults(&mut self, size_default: &Size) {
         let size_default = &size_default.0;
         self.0.SetDefaults(size_default)
     }
-    fn set_height(&self, height: i32) {
+    fn set_height(&mut self, height: i32) {
         self.0.SetHeight(height)
     }
-    fn set_width(&self, width: i32) {
+    fn set_width(&mut self, width: i32) {
         self.0.SetWidth(width)
     }
 }
