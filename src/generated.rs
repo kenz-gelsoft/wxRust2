@@ -12,12 +12,6 @@ use crate::macros::wx_class;
 // we chose this type as it's handy in cxx.
 type UnsafeAnyPtr = *const c_char;
 
-// CLASS: wxSize
-unsafe impl ExternType for ffi::wxSize {
-    type Id = type_id!("wxSize");
-    type Kind = cxx::kind::Trivial;
-}
-
 #[cxx::bridge(namespace = "wxrust")]
 mod ffi {
     #[namespace = ""]
@@ -595,7 +589,7 @@ mod ffi {
         // CTOR: fn wxPoint(pt: &wxRealPoint) -> Point;
         
         // CLASS: wxSize
-        type wxSize;
+        type wxSize = crate::wxSize;
         // BLOCKED: fn operator=(self: &mut wxSize, sz: &wxSize) -> &mut wxSize;
         // BLOCKED: fn operator==(self: &mut wxSize, s1: &wxSize, s2: &wxSize) -> bool;
         // BLOCKED: fn operator!=(self: &mut wxSize, s1: &wxSize, s2: &wxSize) -> bool;

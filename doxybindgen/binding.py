@@ -14,15 +14,6 @@ class RustClassBinding:
         self.__model = model
         self.__methods = [RustMethodBinding(m) for m in model.methods]
 
-    def extern_type_lines(self):
-        if not self.__model.is_trivial():
-            return
-        yield '// CLASS: %s' % (self.__model.name,)
-        yield 'unsafe impl ExternType for ffi::%s {' % (self.__model.name,)
-        yield '    type Id = type_id!("%s");' % (self.__model.name,)
-        yield '    type Kind = cxx::kind::Trivial;'
-        yield '}'
-        
     def ffi_lines(self, for_shim=False):
         if not for_shim:
             yield ''
@@ -30,8 +21,12 @@ class RustClassBinding:
             self.__model.name,
         )
         if not for_shim:
-            yield 'type %s;' % (
+            handwritten = ''
+            if self.__model.is_trivial():
+                handwritten = ' = crate::%s' % (self.__model.name,)
+            yield 'type %s%s;' % (
                 self.__model.name,
+                handwritten,
             )
         for method in self.__methods:
             for line in method.ffi_lines(for_shim=for_shim):
