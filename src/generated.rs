@@ -2325,9 +2325,7 @@ pub trait PointMethods: WxRustMethods {
 }
 
 // wxSize
-wx_class! { Size(wxSize) impl
-    SizeMethods
-}
+pub struct Size(wxSize);
 impl Size {
     pub fn new() -> Size {
         Size(ffi::NewSize())
@@ -2338,8 +2336,6 @@ impl Size {
     pub fn none() -> Option<&'static Self> {
         None
     }
-}
-pub trait SizeMethods: WxRustMethods {
     // BLOCKED: fn operator=()
     // BLOCKED: fn operator==()
     // BLOCKED: fn operator!=()

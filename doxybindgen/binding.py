@@ -36,12 +36,18 @@ class RustClassBinding:
         yield '// %s' % (
             self.__model.name,
         )
-        yield 'wx_class! { %s(%s) impl' % (
-            self.__model.unprefixed(),
-            self.__model.name,
-        )
-        yield ',\n'.join(self._ancestor_methods(classes))
-        yield '}'
+        if self.__model.is_trivial():
+            yield 'pub struct %s(%s);' % (
+                self.__model.unprefixed(),
+                self.__model.name,
+            )
+        else:
+            yield 'wx_class! { %s(%s) impl' % (
+                self.__model.unprefixed(),
+                self.__model.name,
+            )
+            yield ',\n'.join(self._ancestor_methods(classes))
+            yield '}'
         for line in self._impl_with_ctors():
             yield line
         for line in self._trait_with_methods():
@@ -75,20 +81,22 @@ class RustClassBinding:
         yield "    pub fn none() -> Option<&'static Self> {"
         yield '        None'
         yield '    }'
-        yield '}'
+        if not self.__model.is_trivial():
+            yield '}'
 
     def _ctors(self):
         return (m for m in self.__methods if m.is_ctor and not m.is_blocked())
     
     def _trait_with_methods(self):
         indent = ' ' * 4 * 1
-        base = self.__model.base
-        if not base:
-            base = '__WxRust'
-        yield 'pub trait %sMethods: %sMethods {' % (
-            self.__model.unprefixed(),
-            base[2:],
-        )
+        if not self.__model.is_trivial():
+            base = self.__model.base
+            if not base:
+                base = '__WxRust'
+            yield 'pub trait %sMethods: %sMethods {' % (
+                self.__model.unprefixed(),
+                base[2:],
+            )
         for method in self.__methods:
             if method.is_ctor:
                 continue
