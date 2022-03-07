@@ -901,7 +901,7 @@ impl Window {
                 None => ptr::null_mut(),
             };
             let pos = &pos.pinned::<ffi::wxPoint>();
-            let size = &size.pinned::<ffi::wxSize>();
+            let size = &size.0;
             let name = &crate::ffi::NewString(name);
             Window(ffi::NewWindow1(parent, id, pos, size, style, name))
         }
@@ -1028,15 +1028,15 @@ pub trait WindowMethods: EvtHandlerMethods {
         self.pinned::<ffi::wxWindow>().as_mut().EndRepositioningChildren()
     }
     fn cache_best_size(&self, size: &Size) {
-        let size = &size.pinned::<ffi::wxSize>();
+        let size = &size.0;
         self.pinned::<ffi::wxWindow>().as_mut().CacheBestSize(size)
     }
     fn client_to_window_size(&self, size: &Size) -> Size {
-        let size = &size.pinned::<ffi::wxSize>();
+        let size = &size.0;
         Size(self.pinned::<ffi::wxWindow>().as_mut().ClientToWindowSize(size))
     }
     fn window_to_client_size(&self, size: &Size) -> Size {
-        let size = &size.pinned::<ffi::wxSize>();
+        let size = &size.0;
         Size(self.pinned::<ffi::wxWindow>().as_mut().WindowToClientSize(size))
     }
     fn fit(&self) {
@@ -1054,7 +1054,7 @@ pub trait WindowMethods: EvtHandlerMethods {
         self.pinned::<ffi::wxWindow>().as_mut().FromDIP2(d)
     }
     fn to_dip(&self, sz: &Size) -> Size {
-        let sz = &sz.pinned::<ffi::wxSize>();
+        let sz = &sz.0;
         Size(self.pinned::<ffi::wxWindow>().as_mut().ToDIP(sz))
     }
     fn to_dip1(&self, pt: &Point) -> Point {
@@ -1150,7 +1150,7 @@ pub trait WindowMethods: EvtHandlerMethods {
         self.pinned::<ffi::wxWindow>().as_mut().SetClientSize(width, height)
     }
     fn set_client_size1(&self, size: &Size) {
-        let size = &size.pinned::<ffi::wxSize>();
+        let size = &size.0;
         self.pinned::<ffi::wxWindow>().as_mut().SetClientSize1(size)
     }
     fn set_client_size2(&self, rect: &ffi::wxRect) {
@@ -1160,23 +1160,23 @@ pub trait WindowMethods: EvtHandlerMethods {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().SetContainingSizer(sizer) }
     }
     fn set_initial_size(&self, size: &Size) {
-        let size = &size.pinned::<ffi::wxSize>();
+        let size = &size.0;
         self.pinned::<ffi::wxWindow>().as_mut().SetInitialSize(size)
     }
     fn set_max_client_size(&self, size: &Size) {
-        let size = &size.pinned::<ffi::wxSize>();
+        let size = &size.0;
         self.pinned::<ffi::wxWindow>().as_mut().SetMaxClientSize(size)
     }
     fn set_max_size(&self, size: &Size) {
-        let size = &size.pinned::<ffi::wxSize>();
+        let size = &size.0;
         self.pinned::<ffi::wxWindow>().as_mut().SetMaxSize(size)
     }
     fn set_min_client_size(&self, size: &Size) {
-        let size = &size.pinned::<ffi::wxSize>();
+        let size = &size.0;
         self.pinned::<ffi::wxWindow>().as_mut().SetMinClientSize(size)
     }
     fn set_min_size(&self, size: &Size) {
-        let size = &size.pinned::<ffi::wxSize>();
+        let size = &size.0;
         self.pinned::<ffi::wxWindow>().as_mut().SetMinSize(size)
     }
     fn set_size(&self, x: i32, y: i32, width: i32, height: i32, size_flags: i32) {
@@ -1184,16 +1184,16 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     // BLOCKED: fn SetSize1()
     fn set_size2(&self, size: &Size) {
-        let size = &size.pinned::<ffi::wxSize>();
+        let size = &size.0;
         self.pinned::<ffi::wxWindow>().as_mut().SetSize2(size)
     }
     fn set_size3(&self, width: i32, height: i32) {
         self.pinned::<ffi::wxWindow>().as_mut().SetSize3(width, height)
     }
     fn set_size_hints(&self, min_size: &Size, max_size: &Size, inc_size: &Size) {
-        let min_size = &min_size.pinned::<ffi::wxSize>();
-        let max_size = &max_size.pinned::<ffi::wxSize>();
-        let inc_size = &inc_size.pinned::<ffi::wxSize>();
+        let min_size = &min_size.0;
+        let max_size = &max_size.0;
+        let inc_size = &inc_size.0;
         self.pinned::<ffi::wxWindow>().as_mut().SetSizeHints(min_size, max_size, inc_size)
     }
     fn set_size_hints1(&self, min_w: i32, min_h: i32, max_w: i32, max_h: i32, inc_w: i32, inc_h: i32) {
@@ -1203,12 +1203,12 @@ pub trait WindowMethods: EvtHandlerMethods {
         self.pinned::<ffi::wxWindow>().as_mut().SetVirtualSize(width, height)
     }
     fn set_virtual_size1(&self, size: &Size) {
-        let size = &size.pinned::<ffi::wxSize>();
+        let size = &size.0;
         self.pinned::<ffi::wxWindow>().as_mut().SetVirtualSize1(size)
     }
     fn from_dip3<T: WindowMethods>(sz: &Size, w: Option<&T>) -> Size {
         unsafe {
-            let sz = &sz.pinned::<ffi::wxSize>();
+            let sz = &sz.0;
             let w = match w {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
                 None => ptr::null_mut(),
@@ -1237,7 +1237,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     fn to_dip3<T: WindowMethods>(sz: &Size, w: Option<&T>) -> Size {
         unsafe {
-            let sz = &sz.pinned::<ffi::wxSize>();
+            let sz = &sz.0;
             let w = match w {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
                 None => ptr::null_mut(),
@@ -1317,7 +1317,7 @@ pub trait WindowMethods: EvtHandlerMethods {
         Point(ffi::wxWindow_ConvertDialogToPixels(&self.pinned::<ffi::wxWindow>().as_mut(), pt))
     }
     fn convert_dialog_to_pixels1(&self, sz: &Size) -> Size {
-        let sz = &sz.pinned::<ffi::wxSize>();
+        let sz = &sz.0;
         Size(self.pinned::<ffi::wxWindow>().as_mut().ConvertDialogToPixels1(sz))
     }
     fn convert_pixels_to_dialog(&self, pt: &Point) -> Point {
@@ -1325,7 +1325,7 @@ pub trait WindowMethods: EvtHandlerMethods {
         Point(ffi::wxWindow_ConvertPixelsToDialog(&self.pinned::<ffi::wxWindow>().as_mut(), pt))
     }
     fn convert_pixels_to_dialog1(&self, sz: &Size) -> Size {
-        let sz = &sz.pinned::<ffi::wxSize>();
+        let sz = &sz.0;
         Size(self.pinned::<ffi::wxWindow>().as_mut().ConvertPixelsToDialog1(sz))
     }
     fn screen_to_client(&self, x: *mut i32, y: *mut i32) {
@@ -1838,7 +1838,7 @@ impl Control {
                 None => ptr::null_mut(),
             };
             let pos = &pos.pinned::<ffi::wxPoint>();
-            let size = &size.pinned::<ffi::wxSize>();
+            let size = &size.0;
             let validator = &validator.pinned::<ffi::wxValidator>();
             let name = &crate::ffi::NewString(name);
             Control(ffi::NewControl(parent, id, pos, size, style, validator, name))
@@ -1862,7 +1862,7 @@ pub trait ControlMethods: WindowMethods {
         Size(self.pinned::<ffi::wxControl>().as_mut().GetSizeFromTextSize(xlen, ylen))
     }
     fn get_size_from_text_size1(&self, tsize: &Size) -> Size {
-        let tsize = &tsize.pinned::<ffi::wxSize>();
+        let tsize = &tsize.0;
         Size(self.pinned::<ffi::wxControl>().as_mut().GetSizeFromTextSize1(tsize))
     }
     fn get_size_from_text(&self, text: &str) -> Size {
@@ -1934,7 +1934,7 @@ pub trait AnyButtonMethods: ControlMethods {
         self.pinned::<ffi::wxAnyButton>().as_mut().SetBitmapMargins(x, y)
     }
     fn set_bitmap_margins1(&self, sz: &Size) {
-        let sz = &sz.pinned::<ffi::wxSize>();
+        let sz = &sz.0;
         self.pinned::<ffi::wxAnyButton>().as_mut().SetBitmapMargins1(sz)
     }
     // CXX_UNSUPPORTED: fn SetBitmapPosition()
@@ -1961,7 +1961,7 @@ impl Button {
             };
             let label = &crate::ffi::NewString(label);
             let pos = &pos.pinned::<ffi::wxPoint>();
-            let size = &size.pinned::<ffi::wxSize>();
+            let size = &size.0;
             let validator = &validator.pinned::<ffi::wxValidator>();
             let name = &crate::ffi::NewString(name);
             Button(ffi::NewButton1(parent, id, label, pos, size, style, validator, name))
@@ -2039,7 +2039,7 @@ impl TopLevelWindow {
             };
             let title = &crate::ffi::NewString(title);
             let pos = &pos.pinned::<ffi::wxPoint>();
-            let size = &size.pinned::<ffi::wxSize>();
+            let size = &size.0;
             let name = &crate::ffi::NewString(name);
             TopLevelWindow(ffi::NewTopLevelWindow1(parent, id, title, pos, size, style, name))
         }
@@ -2137,20 +2137,20 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
         self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetIcons(icons)
     }
     fn set_max_size(&self, size: &Size) {
-        let size = &size.pinned::<ffi::wxSize>();
+        let size = &size.0;
         self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetMaxSize(size)
     }
     fn set_min_size(&self, size: &Size) {
-        let size = &size.pinned::<ffi::wxSize>();
+        let size = &size.0;
         self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetMinSize(size)
     }
     fn set_size_hints(&self, min_w: i32, min_h: i32, max_w: i32, max_h: i32, inc_w: i32, inc_h: i32) {
         self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetSizeHints(min_w, min_h, max_w, max_h, inc_w, inc_h)
     }
     fn set_size_hints1(&self, min_size: &Size, max_size: &Size, inc_size: &Size) {
-        let min_size = &min_size.pinned::<ffi::wxSize>();
-        let max_size = &max_size.pinned::<ffi::wxSize>();
-        let inc_size = &inc_size.pinned::<ffi::wxSize>();
+        let min_size = &min_size.0;
+        let max_size = &max_size.0;
+        let inc_size = &inc_size.0;
         self.pinned::<ffi::wxTopLevelWindow>().as_mut().SetSizeHints1(min_size, max_size, inc_size)
     }
     fn set_title(&self, title: &str) {
@@ -2208,7 +2208,7 @@ impl Frame {
             };
             let title = &crate::ffi::NewString(title);
             let pos = &pos.pinned::<ffi::wxPoint>();
-            let size = &size.pinned::<ffi::wxSize>();
+            let size = &size.0;
             let name = &crate::ffi::NewString(name);
             Frame(ffi::NewFrame1(parent, id, title, pos, size, style, name))
         }
@@ -2325,7 +2325,7 @@ pub trait PointMethods: WxRustMethods {
 }
 
 // wxSize
-pub struct Size(wxSize);
+pub struct Size(ffi::wxSize);
 impl Size {
     pub fn new() -> Size {
         Size(ffi::NewSize())
@@ -2350,66 +2350,66 @@ impl Size {
     // BLOCKED: fn operator*=()
     fn dec_by(&self, pt: &Point) {
         let pt = &pt.pinned::<ffi::wxPoint>();
-        self.pinned::<ffi::wxSize>().as_mut().DecBy(pt)
+        self.0.DecBy(pt)
     }
     fn dec_by1(&self, size: &Size) {
-        let size = &size.pinned::<ffi::wxSize>();
-        self.pinned::<ffi::wxSize>().as_mut().DecBy1(size)
+        let size = &size.0;
+        self.0.DecBy1(size)
     }
     fn dec_by2(&self, dx: i32, dy: i32) {
-        self.pinned::<ffi::wxSize>().as_mut().DecBy2(dx, dy)
+        self.0.DecBy2(dx, dy)
     }
     fn dec_by3(&self, d: i32) {
-        self.pinned::<ffi::wxSize>().as_mut().DecBy3(d)
+        self.0.DecBy3(d)
     }
     fn dec_to(&self, size: &Size) {
-        let size = &size.pinned::<ffi::wxSize>();
-        self.pinned::<ffi::wxSize>().as_mut().DecTo(size)
+        let size = &size.0;
+        self.0.DecTo(size)
     }
     fn dec_to_if_specified(&self, size: &Size) {
-        let size = &size.pinned::<ffi::wxSize>();
-        self.pinned::<ffi::wxSize>().as_mut().DecToIfSpecified(size)
+        let size = &size.0;
+        self.0.DecToIfSpecified(size)
     }
     fn get_height(&self) -> i32 {
-        self.pinned::<ffi::wxSize>().as_mut().GetHeight()
+        self.0.GetHeight()
     }
     fn get_width(&self) -> i32 {
-        self.pinned::<ffi::wxSize>().as_mut().GetWidth()
+        self.0.GetWidth()
     }
     fn inc_by(&self, pt: &Point) {
         let pt = &pt.pinned::<ffi::wxPoint>();
-        self.pinned::<ffi::wxSize>().as_mut().IncBy(pt)
+        self.0.IncBy(pt)
     }
     fn inc_by1(&self, size: &Size) {
-        let size = &size.pinned::<ffi::wxSize>();
-        self.pinned::<ffi::wxSize>().as_mut().IncBy1(size)
+        let size = &size.0;
+        self.0.IncBy1(size)
     }
     fn inc_by2(&self, dx: i32, dy: i32) {
-        self.pinned::<ffi::wxSize>().as_mut().IncBy2(dx, dy)
+        self.0.IncBy2(dx, dy)
     }
     fn inc_by3(&self, d: i32) {
-        self.pinned::<ffi::wxSize>().as_mut().IncBy3(d)
+        self.0.IncBy3(d)
     }
     fn inc_to(&self, size: &Size) {
-        let size = &size.pinned::<ffi::wxSize>();
-        self.pinned::<ffi::wxSize>().as_mut().IncTo(size)
+        let size = &size.0;
+        self.0.IncTo(size)
     }
     fn is_fully_specified(&self) -> bool {
-        self.pinned::<ffi::wxSize>().as_mut().IsFullySpecified()
+        self.0.IsFullySpecified()
     }
     // BLOCKED: fn Scale()
     fn set(&self, width: i32, height: i32) {
-        self.pinned::<ffi::wxSize>().as_mut().Set(width, height)
+        self.0.Set(width, height)
     }
     fn set_defaults(&self, size_default: &Size) {
-        let size_default = &size_default.pinned::<ffi::wxSize>();
-        self.pinned::<ffi::wxSize>().as_mut().SetDefaults(size_default)
+        let size_default = &size_default.0;
+        self.0.SetDefaults(size_default)
     }
     fn set_height(&self, height: i32) {
-        self.pinned::<ffi::wxSize>().as_mut().SetHeight(height)
+        self.0.SetHeight(height)
     }
     fn set_width(&self, width: i32) {
-        self.pinned::<ffi::wxSize>().as_mut().SetWidth(width)
+        self.0.SetWidth(width)
     }
 }
 

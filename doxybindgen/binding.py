@@ -37,7 +37,7 @@ class RustClassBinding:
             self.__model.name,
         )
         if self.__model.is_trivial():
-            yield 'pub struct %s(%s);' % (
+            yield 'pub struct %s(ffi::%s);' % (
                 self.__model.unprefixed(),
                 self.__model.name,
             )
