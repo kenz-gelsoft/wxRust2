@@ -134,9 +134,13 @@ class Param:
         name = camel_to_snake(self.name)
         if rename:
             name = rename
-        return '%s.pinned::<ffi::%s>()' % (
+        as_mut = ''
+        if self.is_self():
+            as_mut = '.as_mut()'
+        return '%s.pinned::<ffi::%s>()%s' % (
             name,
             self.type.typename,
+            as_mut,
         )
 
 

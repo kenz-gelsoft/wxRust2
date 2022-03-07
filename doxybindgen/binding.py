@@ -206,9 +206,7 @@ class RustMethodBinding:
             self._call_params(),
         )
         if self.__is_instance_method:
-            self_param = '%s.as_mut()' % (
-                self.__self_param.rust_ffi_ref(),
-            )
+            self_param = self.__self_param.rust_ffi_ref()
             if self.__model.returns_new():
                 if self.__model.const:
                     self_param = '&' + self_param
