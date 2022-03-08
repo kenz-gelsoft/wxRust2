@@ -27,17 +27,11 @@ inline wxEvtHandler *NewEvtHandler() {
 }
 
 // CLASS: wxWindow
-inline wxPoint *wxWindow_FromDIP(const wxWindow & self, const wxPoint & pt) {
-    return new wxPoint(self.FromDIP(pt));
-}
-inline wxPoint *wxWindow_ToDIP(const wxWindow & self, const wxPoint & pt) {
-    return new wxPoint(self.ToDIP(pt));
-}
 inline wxSize wxWindow_FromDIP(const wxSize & sz, const wxWindow * w) {
     return wxWindow::FromDIP(sz, w);
 }
-inline wxPoint *wxWindow_FromDIP(const wxPoint & pt, const wxWindow * w) {
-    return new wxPoint(wxWindow::FromDIP(pt, w));
+inline wxPoint wxWindow_FromDIP(const wxPoint & pt, const wxWindow * w) {
+    return wxWindow::FromDIP(pt, w);
 }
 inline int wxWindow_FromDIP(int d, const wxWindow * w) {
     return wxWindow::FromDIP(d, w);
@@ -45,32 +39,11 @@ inline int wxWindow_FromDIP(int d, const wxWindow * w) {
 inline wxSize wxWindow_ToDIP(const wxSize & sz, const wxWindow * w) {
     return wxWindow::ToDIP(sz, w);
 }
-inline wxPoint *wxWindow_ToDIP(const wxPoint & pt, const wxWindow * w) {
-    return new wxPoint(wxWindow::ToDIP(pt, w));
+inline wxPoint wxWindow_ToDIP(const wxPoint & pt, const wxWindow * w) {
+    return wxWindow::ToDIP(pt, w);
 }
 inline int wxWindow_ToDIP(int d, const wxWindow * w) {
     return wxWindow::ToDIP(d, w);
-}
-inline wxPoint *wxWindow_GetPosition(const wxWindow & self) {
-    return new wxPoint(self.GetPosition());
-}
-inline wxPoint *wxWindow_GetScreenPosition(const wxWindow & self) {
-    return new wxPoint(self.GetScreenPosition());
-}
-inline wxPoint *wxWindow_GetClientAreaOrigin(const wxWindow & self) {
-    return new wxPoint(self.GetClientAreaOrigin());
-}
-inline wxPoint *wxWindow_ClientToScreen(const wxWindow & self, const wxPoint & pt) {
-    return new wxPoint(self.ClientToScreen(pt));
-}
-inline wxPoint *wxWindow_ConvertDialogToPixels(const wxWindow & self, const wxPoint & pt) {
-    return new wxPoint(self.ConvertDialogToPixels(pt));
-}
-inline wxPoint *wxWindow_ConvertPixelsToDialog(const wxWindow & self, const wxPoint & pt) {
-    return new wxPoint(self.ConvertPixelsToDialog(pt));
-}
-inline wxPoint *wxWindow_ScreenToClient(const wxWindow & self, const wxPoint & pt) {
-    return new wxPoint(self.ScreenToClient(pt));
 }
 inline wxWindow * wxWindow_FindFocus() {
     return wxWindow::FindFocus();
@@ -144,19 +117,16 @@ inline wxFrame *NewFrame() {
 inline wxFrame *NewFrame(wxWindow * parent, wxWindowID id, const wxString & title, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
     return new wxFrame(parent, id, title, pos, size, style, name);
 }
-inline wxPoint *wxFrame_GetClientAreaOrigin(const wxFrame & self) {
-    return new wxPoint(self.GetClientAreaOrigin());
-}
 
 // CLASS: wxPoint
-inline wxPoint *NewPoint() {
-    return new wxPoint();
+inline wxPoint NewPoint() {
+    return wxPoint();
 }
-inline wxPoint *NewPoint(int x, int y) {
-    return new wxPoint(x, y);
+inline wxPoint NewPoint(int x, int y) {
+    return wxPoint(x, y);
 }
-inline wxPoint *NewPoint(const wxRealPoint & pt) {
-    return new wxPoint(pt);
+inline wxPoint NewPoint(const wxRealPoint & pt) {
+    return wxPoint(pt);
 }
 
 // CLASS: wxSize

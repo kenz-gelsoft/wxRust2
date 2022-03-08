@@ -17,6 +17,17 @@ pub use generated::*;
 // we chose this type as it's handy in cxx.
 type UnsafeAnyPtr = *const c_char;
 
+// wxPoint
+#[repr(C)]
+pub struct wxPoint {
+    pub x: c_int,
+    pub y: c_int,
+}
+unsafe impl ExternType for wxPoint {
+    type Id = type_id!("wxPoint");
+    type Kind = cxx::kind::Trivial;
+}
+
 // wxSize
 #[repr(C)]
 pub struct wxSize {

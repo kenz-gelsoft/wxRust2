@@ -158,11 +158,13 @@ mod ffi {
         fn Fit(self: Pin<&mut wxWindow>);
         fn FitInside(self: Pin<&mut wxWindow>);
         // BLOCKED: fn FromDIP(self: &wxWindow, sz: &wxSize) -> wxSize;
-        // GENERATED: fn FromDIP(self: &wxWindow, pt: &wxPoint) -> wxPoint;
+        #[rust_name = "FromDIP1"]
+        fn FromDIP(self: &wxWindow, pt: &wxPoint) -> wxPoint;
         #[rust_name = "FromDIP2"]
         fn FromDIP(self: &wxWindow, d: i32) -> i32;
         fn ToDIP(self: &wxWindow, sz: &wxSize) -> wxSize;
-        // GENERATED: fn ToDIP(self: &wxWindow, pt: &wxPoint) -> wxPoint;
+        #[rust_name = "ToDIP1"]
+        fn ToDIP(self: &wxWindow, pt: &wxPoint) -> wxPoint;
         // BLOCKED: fn ToDIP(self: &wxWindow, d: i32) -> i32;
         fn GetBestSize(self: &wxWindow) -> wxSize;
         fn GetBestHeight(self: &wxWindow, width: i32) -> i32;
@@ -229,27 +231,31 @@ mod ffi {
         fn Centre(self: Pin<&mut wxWindow>, direction: i32);
         fn CentreOnParent(self: Pin<&mut wxWindow>, direction: i32);
         unsafe fn GetPosition(self: &wxWindow, x: *mut i32, y: *mut i32);
-        // GENERATED: fn GetPosition(self: &wxWindow) -> wxPoint;
+        #[rust_name = "GetPosition1"]
+        fn GetPosition(self: &wxWindow) -> wxPoint;
         // CXX_UNSUPPORTED: fn GetRect(self: &wxWindow) -> wxRect;
         unsafe fn GetScreenPosition(self: &wxWindow, x: *mut i32, y: *mut i32);
-        // GENERATED: fn GetScreenPosition(self: &wxWindow) -> wxPoint;
+        #[rust_name = "GetScreenPosition1"]
+        fn GetScreenPosition(self: &wxWindow) -> wxPoint;
         // CXX_UNSUPPORTED: fn GetScreenRect(self: &wxWindow) -> wxRect;
-        // GENERATED: fn GetClientAreaOrigin(self: &wxWindow) -> wxPoint;
+        fn GetClientAreaOrigin(self: &wxWindow) -> wxPoint;
         // CXX_UNSUPPORTED: fn GetClientRect(self: &wxWindow) -> wxRect;
         fn Move(self: Pin<&mut wxWindow>, x: i32, y: i32, flags: i32);
         #[rust_name = "Move1"]
         fn Move(self: Pin<&mut wxWindow>, pt: &wxPoint, flags: i32);
         fn SetPosition(self: Pin<&mut wxWindow>, pt: &wxPoint);
         unsafe fn ClientToScreen(self: &wxWindow, x: *mut i32, y: *mut i32);
-        // GENERATED: fn ClientToScreen(self: &wxWindow, pt: &wxPoint) -> wxPoint;
-        // GENERATED: fn ConvertDialogToPixels(self: &wxWindow, pt: &wxPoint) -> wxPoint;
+        #[rust_name = "ClientToScreen1"]
+        fn ClientToScreen(self: &wxWindow, pt: &wxPoint) -> wxPoint;
+        fn ConvertDialogToPixels(self: &wxWindow, pt: &wxPoint) -> wxPoint;
         #[rust_name = "ConvertDialogToPixels1"]
         fn ConvertDialogToPixels(self: &wxWindow, sz: &wxSize) -> wxSize;
-        // GENERATED: fn ConvertPixelsToDialog(self: &wxWindow, pt: &wxPoint) -> wxPoint;
+        fn ConvertPixelsToDialog(self: &wxWindow, pt: &wxPoint) -> wxPoint;
         #[rust_name = "ConvertPixelsToDialog1"]
         fn ConvertPixelsToDialog(self: &wxWindow, sz: &wxSize) -> wxSize;
         unsafe fn ScreenToClient(self: &wxWindow, x: *mut i32, y: *mut i32);
-        // GENERATED: fn ScreenToClient(self: &wxWindow, pt: &wxPoint) -> wxPoint;
+        #[rust_name = "ScreenToClient1"]
+        fn ScreenToClient(self: &wxWindow, pt: &wxPoint) -> wxPoint;
         fn ClearBackground(self: Pin<&mut wxWindow>);
         fn Freeze(self: Pin<&mut wxWindow>);
         fn Thaw(self: Pin<&mut wxWindow>);
@@ -320,7 +326,7 @@ mod ffi {
         // CXX_UNSUPPORTED: fn HideWithEffect(self: Pin<&mut wxWindow>, effect: wxShowEffect, timeout: u32) -> bool;
         fn IsEnabled(self: &wxWindow) -> bool;
         fn IsExposed(self: &wxWindow, x: i32, y: i32) -> bool;
-        // BLOCKED: fn IsExposed(self: &wxWindow, pt: Pin<&mut wxPoint>) -> bool;
+        // BLOCKED: fn IsExposed(self: &wxWindow, pt: &mut wxPoint) -> bool;
         #[rust_name = "IsExposed2"]
         fn IsExposed(self: &wxWindow, x: i32, y: i32, w: i32, h: i32) -> bool;
         // BLOCKED: fn IsExposed(self: &wxWindow, rect: Pin<&mut wxRect>) -> bool;
@@ -544,7 +550,7 @@ mod ffi {
         // BLOCKED: fn CreateStatusBar(self: Pin<&mut wxFrame>, number: i32, style: i32, id: i32, name: &wxString) -> *mut wxStatusBar;
         // BLOCKED: fn CreateToolBar(self: Pin<&mut wxFrame>, style: i32, id: i32, name: &wxString) -> *mut wxToolBar;
         fn DoGiveHelp(self: Pin<&mut wxFrame>, text: &wxString, show: bool);
-        // GENERATED: fn GetClientAreaOrigin(self: &wxFrame) -> wxPoint;
+        fn GetClientAreaOrigin(self: &wxFrame) -> wxPoint;
         fn GetMenuBar(self: &wxFrame) -> *mut wxMenuBar;
         fn GetStatusBar(self: &wxFrame) -> *mut wxStatusBar;
         fn GetStatusBarPane(self: &wxFrame) -> i32;
@@ -563,27 +569,27 @@ mod ffi {
         fn PopStatusText(self: Pin<&mut wxFrame>, number: i32);
         
         // CLASS: wxPoint
-        type wxPoint;
+        type wxPoint = crate::wxPoint;
         fn IsFullySpecified(self: &wxPoint) -> bool;
-        fn SetDefaults(self: Pin<&mut wxPoint>, pt: &wxPoint);
-        // BLOCKED: fn operator=(self: Pin<&mut wxPoint>, pt: &wxPoint) -> Pin<&mut wxPoint>;
-        // BLOCKED: fn operator==(self: Pin<&mut wxPoint>, p1: &wxPoint, p2: &wxPoint) -> bool;
-        // BLOCKED: fn operator!=(self: Pin<&mut wxPoint>, p1: &wxPoint, p2: &wxPoint) -> bool;
-        // CXX_UNSUPPORTED: fn operator+(self: Pin<&mut wxPoint>, p1: &wxPoint, p2: &wxPoint) -> wxPoint;
-        // CXX_UNSUPPORTED: fn operator-(self: Pin<&mut wxPoint>, p1: &wxPoint, p2: &wxPoint) -> wxPoint;
-        // BLOCKED: fn operator+=(self: Pin<&mut wxPoint>, pt: &wxPoint) -> Pin<&mut wxPoint>;
-        // BLOCKED: fn operator-=(self: Pin<&mut wxPoint>, pt: &wxPoint) -> Pin<&mut wxPoint>;
-        // CXX_UNSUPPORTED: fn operator+(self: Pin<&mut wxPoint>, pt: &wxPoint, sz: &wxSize) -> wxPoint;
-        // CXX_UNSUPPORTED: fn operator-(self: Pin<&mut wxPoint>, pt: &wxPoint, sz: &wxSize) -> wxPoint;
-        // CXX_UNSUPPORTED: fn operator+(self: Pin<&mut wxPoint>, sz: &wxSize, pt: &wxPoint) -> wxPoint;
-        // CXX_UNSUPPORTED: fn operator-(self: Pin<&mut wxPoint>, sz: &wxSize, pt: &wxPoint) -> wxPoint;
-        // BLOCKED: fn operator+=(self: Pin<&mut wxPoint>, sz: &wxSize) -> Pin<&mut wxPoint>;
-        // BLOCKED: fn operator-=(self: Pin<&mut wxPoint>, sz: &wxSize) -> Pin<&mut wxPoint>;
-        // BLOCKED: fn operator/(self: Pin<&mut wxPoint>, sz: &wxPoint, factor: i32) -> wxSize;
-        // BLOCKED: fn operator*(self: Pin<&mut wxPoint>, sz: &wxPoint, factor: i32) -> wxSize;
-        // BLOCKED: fn operator*(self: Pin<&mut wxPoint>, factor: i32, sz: &wxSize) -> wxSize;
-        // BLOCKED: fn operator/=(self: Pin<&mut wxPoint>, factor: i32) -> &mut wxSize;
-        // BLOCKED: fn operator*=(self: Pin<&mut wxPoint>, factor: i32) -> &mut wxSize;
+        fn SetDefaults(self: &mut wxPoint, pt: &wxPoint);
+        // BLOCKED: fn operator=(self: &mut wxPoint, pt: &wxPoint) -> &mut wxPoint;
+        // BLOCKED: fn operator==(self: &mut wxPoint, p1: &wxPoint, p2: &wxPoint) -> bool;
+        // BLOCKED: fn operator!=(self: &mut wxPoint, p1: &wxPoint, p2: &wxPoint) -> bool;
+        // BLOCKED: fn operator+(self: &mut wxPoint, p1: &wxPoint, p2: &wxPoint) -> wxPoint;
+        // BLOCKED: fn operator-(self: &mut wxPoint, p1: &wxPoint, p2: &wxPoint) -> wxPoint;
+        // BLOCKED: fn operator+=(self: &mut wxPoint, pt: &wxPoint) -> &mut wxPoint;
+        // BLOCKED: fn operator-=(self: &mut wxPoint, pt: &wxPoint) -> &mut wxPoint;
+        // BLOCKED: fn operator+(self: &mut wxPoint, pt: &wxPoint, sz: &wxSize) -> wxPoint;
+        // BLOCKED: fn operator-(self: &mut wxPoint, pt: &wxPoint, sz: &wxSize) -> wxPoint;
+        // BLOCKED: fn operator+(self: &mut wxPoint, sz: &wxSize, pt: &wxPoint) -> wxPoint;
+        // BLOCKED: fn operator-(self: &mut wxPoint, sz: &wxSize, pt: &wxPoint) -> wxPoint;
+        // BLOCKED: fn operator+=(self: &mut wxPoint, sz: &wxSize) -> &mut wxPoint;
+        // BLOCKED: fn operator-=(self: &mut wxPoint, sz: &wxSize) -> &mut wxPoint;
+        // BLOCKED: fn operator/(self: &mut wxPoint, sz: &wxPoint, factor: i32) -> wxSize;
+        // BLOCKED: fn operator*(self: &mut wxPoint, sz: &wxPoint, factor: i32) -> wxSize;
+        // BLOCKED: fn operator*(self: &mut wxPoint, factor: i32, sz: &wxSize) -> wxSize;
+        // BLOCKED: fn operator/=(self: &mut wxPoint, factor: i32) -> &mut wxSize;
+        // BLOCKED: fn operator*=(self: &mut wxPoint, factor: i32) -> &mut wxSize;
         // CTOR: fn wxPoint() -> Point;
         // CTOR: fn wxPoint(x: i32, y: i32) -> Point;
         // CTOR: fn wxPoint(pt: &wxRealPoint) -> Point;
@@ -653,33 +659,18 @@ mod ffi {
         unsafe fn wxEvtHandler_RemoveFilter(filter: *mut wxEventFilter);
         fn NewEvtHandler() -> *mut wxEvtHandler;
         // CLASS: wxWindow
-        #[rust_name = "wxWindow_FromDIP1"]
-        fn wxWindow_FromDIP(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
-        #[rust_name = "wxWindow_ToDIP1"]
-        fn wxWindow_ToDIP(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
         #[rust_name = "wxWindow_FromDIP3"]
         unsafe fn wxWindow_FromDIP(sz: &wxSize, w: *const wxWindow) -> wxSize;
         #[rust_name = "wxWindow_FromDIP4"]
-        unsafe fn wxWindow_FromDIP(pt: &wxPoint, w: *const wxWindow) -> *mut wxPoint;
+        unsafe fn wxWindow_FromDIP(pt: &wxPoint, w: *const wxWindow) -> wxPoint;
         #[rust_name = "wxWindow_FromDIP5"]
         unsafe fn wxWindow_FromDIP(d: i32, w: *const wxWindow) -> i32;
         #[rust_name = "wxWindow_ToDIP3"]
         unsafe fn wxWindow_ToDIP(sz: &wxSize, w: *const wxWindow) -> wxSize;
         #[rust_name = "wxWindow_ToDIP4"]
-        unsafe fn wxWindow_ToDIP(pt: &wxPoint, w: *const wxWindow) -> *mut wxPoint;
+        unsafe fn wxWindow_ToDIP(pt: &wxPoint, w: *const wxWindow) -> wxPoint;
         #[rust_name = "wxWindow_ToDIP5"]
         unsafe fn wxWindow_ToDIP(d: i32, w: *const wxWindow) -> i32;
-        #[rust_name = "wxWindow_GetPosition1"]
-        fn wxWindow_GetPosition(self_: &wxWindow) -> *mut wxPoint;
-        #[rust_name = "wxWindow_GetScreenPosition1"]
-        fn wxWindow_GetScreenPosition(self_: &wxWindow) -> *mut wxPoint;
-        fn wxWindow_GetClientAreaOrigin(self_: &wxWindow) -> *mut wxPoint;
-        #[rust_name = "wxWindow_ClientToScreen1"]
-        fn wxWindow_ClientToScreen(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
-        fn wxWindow_ConvertDialogToPixels(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
-        fn wxWindow_ConvertPixelsToDialog(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
-        #[rust_name = "wxWindow_ScreenToClient1"]
-        fn wxWindow_ScreenToClient(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
         fn wxWindow_FindFocus() -> *mut wxWindow;
         unsafe fn wxWindow_FindWindowById(id: i32, parent: *const wxWindow) -> *mut wxWindow;
         unsafe fn wxWindow_FindWindowByLabel(label: &wxString, parent: *const wxWindow) -> *mut wxWindow;
@@ -711,13 +702,12 @@ mod ffi {
         fn NewFrame() -> *mut wxFrame;
         #[rust_name = "NewFrame1"]
         unsafe fn NewFrame(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxFrame;
-        fn wxFrame_GetClientAreaOrigin(self_: &wxFrame) -> *mut wxPoint;
         // CLASS: wxPoint
-        fn NewPoint() -> *mut wxPoint;
+        fn NewPoint() -> wxPoint;
         #[rust_name = "NewPoint1"]
-        fn NewPoint(x: i32, y: i32) -> *mut wxPoint;
+        fn NewPoint(x: i32, y: i32) -> wxPoint;
         #[rust_name = "NewPoint2"]
-        fn NewPoint(pt: &wxRealPoint) -> *mut wxPoint;
+        fn NewPoint(pt: &wxRealPoint) -> wxPoint;
         // CLASS: wxSize
         fn NewSize() -> wxSize;
         #[rust_name = "NewSize1"]
@@ -900,7 +890,7 @@ impl Window {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
                 None => ptr::null_mut(),
             };
-            let pos = &pos.pinned::<ffi::wxPoint>();
+            let pos = &pos.0;
             let size = &size.0;
             let name = &crate::ffi::NewString(name);
             Window(ffi::NewWindow1(parent, id, pos, size, style, name))
@@ -1047,8 +1037,8 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     // BLOCKED: fn FromDIP()
     fn from_dip1(&self, pt: &Point) -> Point {
-        let pt = &pt.pinned::<ffi::wxPoint>();
-        Point(ffi::wxWindow_FromDIP1(&self.pinned::<ffi::wxWindow>().as_mut(), pt))
+        let pt = &pt.0;
+        Point(self.pinned::<ffi::wxWindow>().as_mut().FromDIP1(pt))
     }
     fn from_dip2(&self, d: i32) -> i32 {
         self.pinned::<ffi::wxWindow>().as_mut().FromDIP2(d)
@@ -1058,8 +1048,8 @@ pub trait WindowMethods: EvtHandlerMethods {
         Size(self.pinned::<ffi::wxWindow>().as_mut().ToDIP(sz))
     }
     fn to_dip1(&self, pt: &Point) -> Point {
-        let pt = &pt.pinned::<ffi::wxPoint>();
-        Point(ffi::wxWindow_ToDIP1(&self.pinned::<ffi::wxWindow>().as_mut(), pt))
+        let pt = &pt.0;
+        Point(self.pinned::<ffi::wxWindow>().as_mut().ToDIP1(pt))
     }
     // BLOCKED: fn ToDIP2()
     fn get_best_size(&self) -> Size {
@@ -1218,7 +1208,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     fn from_dip4<T: WindowMethods>(pt: &Point, w: Option<&T>) -> Point {
         unsafe {
-            let pt = &pt.pinned::<ffi::wxPoint>();
+            let pt = &pt.0;
             let w = match w {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
                 None => ptr::null_mut(),
@@ -1247,7 +1237,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     fn to_dip4<T: WindowMethods>(pt: &Point, w: Option<&T>) -> Point {
         unsafe {
-            let pt = &pt.pinned::<ffi::wxPoint>();
+            let pt = &pt.0;
             let w = match w {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
                 None => ptr::null_mut(),
@@ -1280,49 +1270,49 @@ pub trait WindowMethods: EvtHandlerMethods {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().GetPosition(x, y) }
     }
     fn get_position1(&self) -> Point {
-        Point(ffi::wxWindow_GetPosition1(&self.pinned::<ffi::wxWindow>().as_mut(), ))
+        Point(self.pinned::<ffi::wxWindow>().as_mut().GetPosition1())
     }
     // CXX_UNSUPPORTED: fn GetRect()
     fn get_screen_position(&self, x: *mut i32, y: *mut i32) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().GetScreenPosition(x, y) }
     }
     fn get_screen_position1(&self) -> Point {
-        Point(ffi::wxWindow_GetScreenPosition1(&self.pinned::<ffi::wxWindow>().as_mut(), ))
+        Point(self.pinned::<ffi::wxWindow>().as_mut().GetScreenPosition1())
     }
     // CXX_UNSUPPORTED: fn GetScreenRect()
     fn get_client_area_origin(&self) -> Point {
-        Point(ffi::wxWindow_GetClientAreaOrigin(&self.pinned::<ffi::wxWindow>().as_mut(), ))
+        Point(self.pinned::<ffi::wxWindow>().as_mut().GetClientAreaOrigin())
     }
     // CXX_UNSUPPORTED: fn GetClientRect()
     fn move_(&self, x: i32, y: i32, flags: i32) {
         self.pinned::<ffi::wxWindow>().as_mut().Move(x, y, flags)
     }
     fn move1(&self, pt: &Point, flags: i32) {
-        let pt = &pt.pinned::<ffi::wxPoint>();
+        let pt = &pt.0;
         self.pinned::<ffi::wxWindow>().as_mut().Move1(pt, flags)
     }
     fn set_position(&self, pt: &Point) {
-        let pt = &pt.pinned::<ffi::wxPoint>();
+        let pt = &pt.0;
         self.pinned::<ffi::wxWindow>().as_mut().SetPosition(pt)
     }
     fn client_to_screen(&self, x: *mut i32, y: *mut i32) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().ClientToScreen(x, y) }
     }
     fn client_to_screen1(&self, pt: &Point) -> Point {
-        let pt = &pt.pinned::<ffi::wxPoint>();
-        Point(ffi::wxWindow_ClientToScreen1(&self.pinned::<ffi::wxWindow>().as_mut(), pt))
+        let pt = &pt.0;
+        Point(self.pinned::<ffi::wxWindow>().as_mut().ClientToScreen1(pt))
     }
     fn convert_dialog_to_pixels(&self, pt: &Point) -> Point {
-        let pt = &pt.pinned::<ffi::wxPoint>();
-        Point(ffi::wxWindow_ConvertDialogToPixels(&self.pinned::<ffi::wxWindow>().as_mut(), pt))
+        let pt = &pt.0;
+        Point(self.pinned::<ffi::wxWindow>().as_mut().ConvertDialogToPixels(pt))
     }
     fn convert_dialog_to_pixels1(&self, sz: &Size) -> Size {
         let sz = &sz.0;
         Size(self.pinned::<ffi::wxWindow>().as_mut().ConvertDialogToPixels1(sz))
     }
     fn convert_pixels_to_dialog(&self, pt: &Point) -> Point {
-        let pt = &pt.pinned::<ffi::wxPoint>();
-        Point(ffi::wxWindow_ConvertPixelsToDialog(&self.pinned::<ffi::wxWindow>().as_mut(), pt))
+        let pt = &pt.0;
+        Point(self.pinned::<ffi::wxWindow>().as_mut().ConvertPixelsToDialog(pt))
     }
     fn convert_pixels_to_dialog1(&self, sz: &Size) -> Size {
         let sz = &sz.0;
@@ -1332,8 +1322,8 @@ pub trait WindowMethods: EvtHandlerMethods {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().ScreenToClient(x, y) }
     }
     fn screen_to_client1(&self, pt: &Point) -> Point {
-        let pt = &pt.pinned::<ffi::wxPoint>();
-        Point(ffi::wxWindow_ScreenToClient1(&self.pinned::<ffi::wxWindow>().as_mut(), pt))
+        let pt = &pt.0;
+        Point(self.pinned::<ffi::wxWindow>().as_mut().ScreenToClient1(pt))
     }
     fn clear_background(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().ClearBackground()
@@ -1600,7 +1590,7 @@ pub trait WindowMethods: EvtHandlerMethods {
         self.pinned::<ffi::wxWindow>().as_mut().UnsetToolTip()
     }
     fn get_popup_menu_selection_from_user(&self, menu: Pin<&mut ffi::wxMenu>, pos: &Point) -> i32 {
-        let pos = &pos.pinned::<ffi::wxPoint>();
+        let pos = &pos.0;
         self.pinned::<ffi::wxWindow>().as_mut().GetPopupMenuSelectionFromUser(menu, pos)
     }
     fn get_popup_menu_selection_from_user1(&self, menu: Pin<&mut ffi::wxMenu>, x: i32, y: i32) -> i32 {
@@ -1608,7 +1598,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     fn popup_menu(&self, menu: *mut ffi::wxMenu, pos: &Point) -> bool {
         unsafe {
-            let pos = &pos.pinned::<ffi::wxPoint>();
+            let pos = &pos.0;
             self.pinned::<ffi::wxWindow>().as_mut().PopupMenu(menu, pos)
         }
     }
@@ -1837,7 +1827,7 @@ impl Control {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
                 None => ptr::null_mut(),
             };
-            let pos = &pos.pinned::<ffi::wxPoint>();
+            let pos = &pos.0;
             let size = &size.0;
             let validator = &validator.pinned::<ffi::wxValidator>();
             let name = &crate::ffi::NewString(name);
@@ -1960,7 +1950,7 @@ impl Button {
                 None => ptr::null_mut(),
             };
             let label = &crate::ffi::NewString(label);
-            let pos = &pos.pinned::<ffi::wxPoint>();
+            let pos = &pos.0;
             let size = &size.0;
             let validator = &validator.pinned::<ffi::wxValidator>();
             let name = &crate::ffi::NewString(name);
@@ -2038,7 +2028,7 @@ impl TopLevelWindow {
                 None => ptr::null_mut(),
             };
             let title = &crate::ffi::NewString(title);
-            let pos = &pos.pinned::<ffi::wxPoint>();
+            let pos = &pos.0;
             let size = &size.0;
             let name = &crate::ffi::NewString(name);
             TopLevelWindow(ffi::NewTopLevelWindow1(parent, id, title, pos, size, style, name))
@@ -2207,7 +2197,7 @@ impl Frame {
                 None => ptr::null_mut(),
             };
             let title = &crate::ffi::NewString(title);
-            let pos = &pos.pinned::<ffi::wxPoint>();
+            let pos = &pos.0;
             let size = &size.0;
             let name = &crate::ffi::NewString(name);
             Frame(ffi::NewFrame1(parent, id, title, pos, size, style, name))
@@ -2230,7 +2220,7 @@ pub trait FrameMethods: TopLevelWindowMethods {
         self.pinned::<ffi::wxFrame>().as_mut().DoGiveHelp(text, show)
     }
     fn get_client_area_origin(&self) -> Point {
-        Point(ffi::wxFrame_GetClientAreaOrigin(&self.pinned::<ffi::wxFrame>().as_mut(), ))
+        Point(self.pinned::<ffi::wxFrame>().as_mut().GetClientAreaOrigin())
     }
     fn get_menu_bar(&self) -> *mut ffi::wxMenuBar {
         self.pinned::<ffi::wxFrame>().as_mut().GetMenuBar()
@@ -2279,9 +2269,7 @@ pub trait FrameMethods: TopLevelWindowMethods {
 }
 
 // wxPoint
-wx_class! { Point(wxPoint) impl
-    PointMethods
-}
+pub struct Point(ffi::wxPoint);
 impl Point {
     pub fn new() -> Point {
         Point(ffi::NewPoint())
@@ -2295,26 +2283,24 @@ impl Point {
     pub fn none() -> Option<&'static Self> {
         None
     }
-}
-pub trait PointMethods: WxRustMethods {
     fn is_fully_specified(&self) -> bool {
-        self.pinned::<ffi::wxPoint>().as_mut().IsFullySpecified()
+        self.0.IsFullySpecified()
     }
-    fn set_defaults(&self, pt: &Point) {
-        let pt = &pt.pinned::<ffi::wxPoint>();
-        self.pinned::<ffi::wxPoint>().as_mut().SetDefaults(pt)
+    fn set_defaults(&mut self, pt: &Point) {
+        let pt = &pt.0;
+        self.0.SetDefaults(pt)
     }
     // BLOCKED: fn operator=()
     // BLOCKED: fn operator==()
     // BLOCKED: fn operator!=()
-    // CXX_UNSUPPORTED: fn operator+()
-    // CXX_UNSUPPORTED: fn operator-()
+    // BLOCKED: fn operator+()
+    // BLOCKED: fn operator-()
     // BLOCKED: fn operator+=()
     // BLOCKED: fn operator-=()
-    // CXX_UNSUPPORTED: fn operator+1()
-    // CXX_UNSUPPORTED: fn operator-1()
-    // CXX_UNSUPPORTED: fn operator+2()
-    // CXX_UNSUPPORTED: fn operator-2()
+    // BLOCKED: fn operator+1()
+    // BLOCKED: fn operator-1()
+    // BLOCKED: fn operator+2()
+    // BLOCKED: fn operator-2()
     // BLOCKED: fn operator+=1()
     // BLOCKED: fn operator-=1()
     // BLOCKED: fn operator/()
@@ -2349,7 +2335,7 @@ impl Size {
     // BLOCKED: fn operator/=()
     // BLOCKED: fn operator*=()
     fn dec_by(&mut self, pt: &Point) {
-        let pt = &pt.pinned::<ffi::wxPoint>();
+        let pt = &pt.0;
         self.0.DecBy(pt)
     }
     fn dec_by1(&mut self, size: &Size) {
@@ -2377,7 +2363,7 @@ impl Size {
         self.0.GetWidth()
     }
     fn inc_by(&mut self, pt: &Point) {
-        let pt = &pt.pinned::<ffi::wxPoint>();
+        let pt = &pt.0;
         self.0.IncBy(pt)
     }
     fn inc_by1(&mut self, size: &Size) {

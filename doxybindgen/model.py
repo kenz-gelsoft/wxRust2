@@ -196,6 +196,7 @@ CXX_SUPPORTED_VALUE_TYPES = [
     'void',
 ]
 CXX_TRIVIAL_EXTERN_TYPES = [
+    'wxPoint',
     'wxSize',
 ]
 
