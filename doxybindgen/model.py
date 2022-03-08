@@ -137,13 +137,11 @@ class Param:
         if self.type.is_trivial():
             return '%s.0' % (name,)
         else:
-            as_mut = ''
-            if self.is_self():
-                as_mut = '.as_mut()'
+            as_mut_or_not = '.as_mut()' if self.is_self() else ''
             return '%s.pinned::<ffi::%s>()%s' % (
                 name,
                 self.type.typename,
-                as_mut,
+                as_mut_or_not,
             )
 
 

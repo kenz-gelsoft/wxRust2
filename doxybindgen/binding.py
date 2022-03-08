@@ -342,10 +342,11 @@ class CxxMethodBinding:
         wrapped = self.__model.wrapped_return_type()
         returns = self.__model.returns.in_cxx() + ' '
         if wrapped:
-            ptr = '*'
-            if self.__model.returns.is_trivial():
-                ptr = ''
-            returns = '%s %s' % (wrapped, ptr)
+            ptr_or_not = '' if self.__model.returns.is_trivial() else '*'
+            returns = '%s %s' % (
+                wrapped,
+                ptr_or_not,
+            )
         yield 'inline %s%s(%s) {' % (
             returns,
             self.__model.name(for_shim=True, without_index=True),
@@ -362,10 +363,8 @@ class CxxMethodBinding:
                 new_params_or_expr,
             )
         if wrapped and (self.is_ctor or not self.__model.returns.is_trivial()):
-            new = 'new '
-            if self.__model.returns.is_trivial():
-                new = ''
-            yield '    return %s%s(%s);' % (new, wrapped, new_params_or_expr)
+            new_or_not = '' if self.__model.returns.is_trivial() else 'new '
+            yield '    return %s%s(%s);' % (new_or_not, wrapped, new_params_or_expr)
         else:
             yield '    return %s;' % (new_params_or_expr,)
         yield '}'
