@@ -122,7 +122,7 @@ class Method:
 class Param:
     def __init__(self, type, name):
         self.type = type
-        self.name = name
+        self.name = camel_to_snake(name)
     
     def is_self(self):
         return self.name == 'self'
@@ -131,9 +131,7 @@ class Param:
         return self.type.marshal(self)
 
     def rust_ffi_ref(self, rename=None):
-        name = camel_to_snake(self.name)
-        if rename:
-            name = rename
+        name = rename if rename else self.name
         if self.type.is_trivial():
             return '%s.0' % (name,)
         else:

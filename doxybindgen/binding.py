@@ -1,4 +1,4 @@
-from .model import Param, RustType, prefixed, camel_to_snake, pascal_to_snake
+from .model import Param, RustType, prefixed, pascal_to_snake
 import re
 
 # Known, and problematic
@@ -227,7 +227,7 @@ class RustMethodBinding:
         yield self._wrap_return_type(call)
     
     def _call_params(self):
-        return ', '.join(camel_to_snake(self.non_keyword_name(p.name)) for p in self.__model.params)
+        return ', '.join(self.non_keyword_name(p.name) for p in self.__model.params)
 
     def _suppressed_reason(self, suppress_shim=True):
         if self.__model.is_ctor:
@@ -287,7 +287,7 @@ class RustMethodBinding:
             elif param.type.generic_name:
                 typename = 'Option<&%s>' % (param.type.generic_name,)
         return '%s: %s' % (
-            camel_to_snake(self.non_keyword_name(param.name)),
+            self.non_keyword_name(param.name),
             typename,
         )
 
