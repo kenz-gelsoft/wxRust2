@@ -4,7 +4,7 @@ from doxybindgen.binding import CxxClassBinding, RustClassBinding
 types = [
     'wxString = crate::ffi::wxString',
     'wxWindowList',
-    'wxRect',
+    # 'wxRect',
     'wxSizer',
     'wxFont',
     'wxRegion',
@@ -132,6 +132,24 @@ BLOCKLIST = {
         'operator/=',
         'operator*=',
     ],
+    'wxRect': [
+        'operator==',
+        'operator=',
+        'operator*=',
+        'operator*',
+        'operator+=',
+        'operator+',
+        'operator!=',
+        # returns refs
+        'Deflate',
+        'Deflate1',
+        'Deflate2',
+        'Inflate',
+        'Inflate1',
+        'Inflate2',
+        'Intersect',
+        'Union1',
+    ],
     'wxSize': [
         'operator+',
         'operator-',
@@ -164,6 +182,7 @@ def main():
         'wxml/classwx_top_level_window.xml',
         'wxml/classwx_frame.xml',
         'wxml/classwx_point.xml',
+        'wxml/classwx_rect.xml',
         'wxml/classwx_size.xml',
         'wxml/classwx_validator.xml',
     ]

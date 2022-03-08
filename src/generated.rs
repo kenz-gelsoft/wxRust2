@@ -21,7 +21,6 @@ mod ffi {
 
         type wxString = crate::ffi::wxString;
         type wxWindowList;
-        type wxRect;
         type wxSizer;
         type wxFont;
         type wxRegion;
@@ -233,13 +232,13 @@ mod ffi {
         unsafe fn GetPosition(self: &wxWindow, x: *mut i32, y: *mut i32);
         #[rust_name = "GetPosition1"]
         fn GetPosition(self: &wxWindow) -> wxPoint;
-        // CXX_UNSUPPORTED: fn GetRect(self: &wxWindow) -> wxRect;
+        fn GetRect(self: &wxWindow) -> wxRect;
         unsafe fn GetScreenPosition(self: &wxWindow, x: *mut i32, y: *mut i32);
         #[rust_name = "GetScreenPosition1"]
         fn GetScreenPosition(self: &wxWindow) -> wxPoint;
-        // CXX_UNSUPPORTED: fn GetScreenRect(self: &wxWindow) -> wxRect;
+        fn GetScreenRect(self: &wxWindow) -> wxRect;
         fn GetClientAreaOrigin(self: &wxWindow) -> wxPoint;
-        // CXX_UNSUPPORTED: fn GetClientRect(self: &wxWindow) -> wxRect;
+        fn GetClientRect(self: &wxWindow) -> wxRect;
         fn Move(self: Pin<&mut wxWindow>, x: i32, y: i32, flags: i32);
         #[rust_name = "Move1"]
         fn Move(self: Pin<&mut wxWindow>, pt: &wxPoint, flags: i32);
@@ -272,7 +271,7 @@ mod ffi {
         #[rust_name = "GetTextExtent1"]
         fn GetTextExtent(self: &wxWindow, string: &wxString) -> wxSize;
         // BLOCKED: fn GetUpdateRegion(self: &wxWindow) -> &wxRegion;
-        // CXX_UNSUPPORTED: fn GetUpdateClientRect(self: &wxWindow) -> wxRect;
+        fn GetUpdateClientRect(self: &wxWindow) -> wxRect;
         fn HasTransparentBackground(self: Pin<&mut wxWindow>) -> bool;
         unsafe fn Refresh(self: Pin<&mut wxWindow>, erase_background: bool, rect: *const wxRect);
         fn RefreshRect(self: Pin<&mut wxWindow>, rect: &wxRect, erase_background: bool);
@@ -329,7 +328,7 @@ mod ffi {
         // BLOCKED: fn IsExposed(self: &wxWindow, pt: &mut wxPoint) -> bool;
         #[rust_name = "IsExposed2"]
         fn IsExposed(self: &wxWindow, x: i32, y: i32, w: i32, h: i32) -> bool;
-        // BLOCKED: fn IsExposed(self: &wxWindow, rect: Pin<&mut wxRect>) -> bool;
+        // BLOCKED: fn IsExposed(self: &wxWindow, rect: &mut wxRect) -> bool;
         fn IsShown(self: &wxWindow) -> bool;
         fn IsShownOnScreen(self: &wxWindow) -> bool;
         fn Disable(self: Pin<&mut wxWindow>) -> bool;
@@ -594,6 +593,76 @@ mod ffi {
         // CTOR: fn wxPoint(x: i32, y: i32) -> Point;
         // CTOR: fn wxPoint(pt: &wxRealPoint) -> Point;
         
+        // CLASS: wxRect
+        type wxRect = crate::wxRect;
+        // CTOR: fn wxRect() -> Rect;
+        // CTOR: fn wxRect(x: i32, y: i32, width: i32, height: i32) -> Rect;
+        // CTOR: fn wxRect(top_left: &wxPoint, bottom_right: &wxPoint) -> Rect;
+        // CTOR: fn wxRect(pos: &wxPoint, size: &wxSize) -> Rect;
+        // CTOR: fn wxRect(size: &wxSize) -> Rect;
+        fn CentreIn(self: &wxRect, r: &wxRect, dir: i32) -> wxRect;
+        fn CenterIn(self: &wxRect, r: &wxRect, dir: i32) -> wxRect;
+        fn Contains(self: &wxRect, x: i32, y: i32) -> bool;
+        #[rust_name = "Contains1"]
+        fn Contains(self: &wxRect, pt: &wxPoint) -> bool;
+        #[rust_name = "Contains2"]
+        fn Contains(self: &wxRect, rect: &wxRect) -> bool;
+        // BLOCKED: fn Deflate(self: &mut wxRect, dx: i32, dy: i32) -> &mut wxRect;
+        // BLOCKED: fn Deflate(self: &mut wxRect, diff: &wxSize) -> &mut wxRect;
+        // BLOCKED: fn Deflate(self: &mut wxRect, diff: i32) -> &mut wxRect;
+        #[rust_name = "Deflate3"]
+        fn Deflate(self: &wxRect, dx: i32, dy: i32) -> wxRect;
+        fn GetBottom(self: &wxRect) -> i32;
+        fn GetBottomLeft(self: &wxRect) -> wxPoint;
+        fn GetBottomRight(self: &wxRect) -> wxPoint;
+        fn GetHeight(self: &wxRect) -> i32;
+        fn GetLeft(self: &wxRect) -> i32;
+        fn GetPosition(self: &wxRect) -> wxPoint;
+        fn GetRight(self: &wxRect) -> i32;
+        fn GetSize(self: &wxRect) -> wxSize;
+        fn GetTop(self: &wxRect) -> i32;
+        fn GetTopLeft(self: &wxRect) -> wxPoint;
+        fn GetTopRight(self: &wxRect) -> wxPoint;
+        fn GetWidth(self: &wxRect) -> i32;
+        fn GetX(self: &wxRect) -> i32;
+        fn GetY(self: &wxRect) -> i32;
+        // BLOCKED: fn Inflate(self: &mut wxRect, dx: i32, dy: i32) -> &mut wxRect;
+        // BLOCKED: fn Inflate(self: &mut wxRect, diff: &wxSize) -> &mut wxRect;
+        // BLOCKED: fn Inflate(self: &mut wxRect, diff: i32) -> &mut wxRect;
+        #[rust_name = "Inflate3"]
+        fn Inflate(self: &wxRect, dx: i32, dy: i32) -> wxRect;
+        // BLOCKED: fn Intersect(self: &mut wxRect, rect: &wxRect) -> &mut wxRect;
+        #[rust_name = "Intersect1"]
+        fn Intersect(self: &wxRect, rect: &wxRect) -> wxRect;
+        fn Intersects(self: &wxRect, rect: &wxRect) -> bool;
+        fn IsEmpty(self: &wxRect) -> bool;
+        fn Offset(self: &mut wxRect, dx: i32, dy: i32);
+        #[rust_name = "Offset1"]
+        fn Offset(self: &mut wxRect, pt: &wxPoint);
+        fn SetHeight(self: &mut wxRect, height: i32);
+        fn SetPosition(self: &mut wxRect, pos: &wxPoint);
+        fn SetSize(self: &mut wxRect, s: &wxSize);
+        fn SetWidth(self: &mut wxRect, width: i32);
+        fn SetX(self: &mut wxRect, x: i32);
+        fn SetY(self: &mut wxRect, y: i32);
+        fn SetLeft(self: &mut wxRect, left: i32);
+        fn SetRight(self: &mut wxRect, right: i32);
+        fn SetTop(self: &mut wxRect, top: i32);
+        fn SetBottom(self: &mut wxRect, bottom: i32);
+        fn SetTopLeft(self: &mut wxRect, p: &wxPoint);
+        fn SetBottomRight(self: &mut wxRect, p: &wxPoint);
+        fn SetTopRight(self: &mut wxRect, p: &wxPoint);
+        fn SetBottomLeft(self: &mut wxRect, p: &wxPoint);
+        fn Union(self: &wxRect, rect: &wxRect) -> wxRect;
+        // BLOCKED: fn Union(self: &mut wxRect, rect: &wxRect) -> &mut wxRect;
+        // BLOCKED: fn operator!=(self: &mut wxRect, r1: &wxRect, r2: &wxRect) -> bool;
+        // BLOCKED: fn operator+(self: &mut wxRect, r1: &wxRect, r2: &wxRect) -> wxRect;
+        // BLOCKED: fn operator+=(self: &mut wxRect, r: &wxRect) -> &mut wxRect;
+        // BLOCKED: fn operator*(self: &mut wxRect, r1: &wxRect, r2: &wxRect) -> wxRect;
+        // BLOCKED: fn operator*=(self: &mut wxRect, r: &wxRect) -> &mut wxRect;
+        // BLOCKED: fn operator=(self: &mut wxRect, rect: &wxRect) -> &mut wxRect;
+        // BLOCKED: fn operator==(self: &mut wxRect, r1: &wxRect, r2: &wxRect) -> bool;
+        
         // CLASS: wxSize
         type wxSize = crate::wxSize;
         // BLOCKED: fn operator=(self: &mut wxSize, sz: &wxSize) -> &mut wxSize;
@@ -708,6 +777,16 @@ mod ffi {
         fn NewPoint(x: i32, y: i32) -> wxPoint;
         #[rust_name = "NewPoint2"]
         fn NewPoint(pt: &wxRealPoint) -> wxPoint;
+        // CLASS: wxRect
+        fn NewRect() -> wxRect;
+        #[rust_name = "NewRect1"]
+        fn NewRect(x: i32, y: i32, width: i32, height: i32) -> wxRect;
+        #[rust_name = "NewRect2"]
+        fn NewRect(top_left: &wxPoint, bottom_right: &wxPoint) -> wxRect;
+        #[rust_name = "NewRect3"]
+        fn NewRect(pos: &wxPoint, size: &wxSize) -> wxRect;
+        #[rust_name = "NewRect4"]
+        fn NewRect(size: &wxSize) -> wxRect;
         // CLASS: wxSize
         fn NewSize() -> wxSize;
         #[rust_name = "NewSize1"]
@@ -1143,7 +1222,8 @@ pub trait WindowMethods: EvtHandlerMethods {
         let size = &size.0;
         self.pinned::<ffi::wxWindow>().as_mut().SetClientSize1(size)
     }
-    fn set_client_size2(&self, rect: &ffi::wxRect) {
+    fn set_client_size2(&self, rect: &Rect) {
+        let rect = &rect.0;
         self.pinned::<ffi::wxWindow>().as_mut().SetClientSize2(rect)
     }
     fn set_containing_sizer(&self, sizer: *mut ffi::wxSizer) {
@@ -1272,18 +1352,24 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn get_position1(&self) -> Point {
         Point(self.pinned::<ffi::wxWindow>().as_mut().GetPosition1())
     }
-    // CXX_UNSUPPORTED: fn GetRect()
+    fn get_rect(&self) -> Rect {
+        Rect(self.pinned::<ffi::wxWindow>().as_mut().GetRect())
+    }
     fn get_screen_position(&self, x: *mut i32, y: *mut i32) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().GetScreenPosition(x, y) }
     }
     fn get_screen_position1(&self) -> Point {
         Point(self.pinned::<ffi::wxWindow>().as_mut().GetScreenPosition1())
     }
-    // CXX_UNSUPPORTED: fn GetScreenRect()
+    fn get_screen_rect(&self) -> Rect {
+        Rect(self.pinned::<ffi::wxWindow>().as_mut().GetScreenRect())
+    }
     fn get_client_area_origin(&self) -> Point {
         Point(self.pinned::<ffi::wxWindow>().as_mut().GetClientAreaOrigin())
     }
-    // CXX_UNSUPPORTED: fn GetClientRect()
+    fn get_client_rect(&self) -> Rect {
+        Rect(self.pinned::<ffi::wxWindow>().as_mut().GetClientRect())
+    }
     fn move_(&self, x: i32, y: i32, flags: i32) {
         self.pinned::<ffi::wxWindow>().as_mut().Move(x, y, flags)
     }
@@ -1362,14 +1448,17 @@ pub trait WindowMethods: EvtHandlerMethods {
         Size(self.pinned::<ffi::wxWindow>().as_mut().GetTextExtent1(string))
     }
     // BLOCKED: fn GetUpdateRegion()
-    // CXX_UNSUPPORTED: fn GetUpdateClientRect()
+    fn get_update_client_rect(&self) -> Rect {
+        Rect(self.pinned::<ffi::wxWindow>().as_mut().GetUpdateClientRect())
+    }
     fn has_transparent_background(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().HasTransparentBackground()
     }
     fn refresh(&self, erase_background: bool, rect: *const ffi::wxRect) {
         unsafe { self.pinned::<ffi::wxWindow>().as_mut().Refresh(erase_background, rect) }
     }
-    fn refresh_rect(&self, rect: &ffi::wxRect, erase_background: bool) {
+    fn refresh_rect(&self, rect: &Rect, erase_background: bool) {
+        let rect = &rect.0;
         self.pinned::<ffi::wxWindow>().as_mut().RefreshRect(rect, erase_background)
     }
     fn update(&self) {
@@ -2308,6 +2397,186 @@ impl Point {
     // BLOCKED: fn operator*1()
     // BLOCKED: fn operator/=()
     // BLOCKED: fn operator*=()
+}
+
+// wxRect
+pub struct Rect(ffi::wxRect);
+impl Rect {
+    pub fn new() -> Rect {
+        Rect(ffi::NewRect())
+    }
+    pub fn new1(x: i32, y: i32, width: i32, height: i32) -> Rect {
+        Rect(ffi::NewRect1(x, y, width, height))
+    }
+    pub fn new2(top_left: &Point, bottom_right: &Point) -> Rect {
+        let top_left = &top_left.0;
+        let bottom_right = &bottom_right.0;
+        Rect(ffi::NewRect2(top_left, bottom_right))
+    }
+    pub fn new3(pos: &Point, size: &Size) -> Rect {
+        let pos = &pos.0;
+        let size = &size.0;
+        Rect(ffi::NewRect3(pos, size))
+    }
+    pub fn new4(size: &Size) -> Rect {
+        let size = &size.0;
+        Rect(ffi::NewRect4(size))
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+    fn centre_in(&self, r: &Rect, dir: i32) -> Rect {
+        let r = &r.0;
+        Rect(self.0.CentreIn(r, dir))
+    }
+    fn center_in(&self, r: &Rect, dir: i32) -> Rect {
+        let r = &r.0;
+        Rect(self.0.CenterIn(r, dir))
+    }
+    fn contains(&self, x: i32, y: i32) -> bool {
+        self.0.Contains(x, y)
+    }
+    fn contains1(&self, pt: &Point) -> bool {
+        let pt = &pt.0;
+        self.0.Contains1(pt)
+    }
+    fn contains2(&self, rect: &Rect) -> bool {
+        let rect = &rect.0;
+        self.0.Contains2(rect)
+    }
+    // BLOCKED: fn Deflate()
+    // BLOCKED: fn Deflate1()
+    // BLOCKED: fn Deflate2()
+    fn deflate3(&self, dx: i32, dy: i32) -> Rect {
+        Rect(self.0.Deflate3(dx, dy))
+    }
+    fn get_bottom(&self) -> i32 {
+        self.0.GetBottom()
+    }
+    fn get_bottom_left(&self) -> Point {
+        Point(self.0.GetBottomLeft())
+    }
+    fn get_bottom_right(&self) -> Point {
+        Point(self.0.GetBottomRight())
+    }
+    fn get_height(&self) -> i32 {
+        self.0.GetHeight()
+    }
+    fn get_left(&self) -> i32 {
+        self.0.GetLeft()
+    }
+    fn get_position(&self) -> Point {
+        Point(self.0.GetPosition())
+    }
+    fn get_right(&self) -> i32 {
+        self.0.GetRight()
+    }
+    fn get_size(&self) -> Size {
+        Size(self.0.GetSize())
+    }
+    fn get_top(&self) -> i32 {
+        self.0.GetTop()
+    }
+    fn get_top_left(&self) -> Point {
+        Point(self.0.GetTopLeft())
+    }
+    fn get_top_right(&self) -> Point {
+        Point(self.0.GetTopRight())
+    }
+    fn get_width(&self) -> i32 {
+        self.0.GetWidth()
+    }
+    fn get_x(&self) -> i32 {
+        self.0.GetX()
+    }
+    fn get_y(&self) -> i32 {
+        self.0.GetY()
+    }
+    // BLOCKED: fn Inflate()
+    // BLOCKED: fn Inflate1()
+    // BLOCKED: fn Inflate2()
+    fn inflate3(&self, dx: i32, dy: i32) -> Rect {
+        Rect(self.0.Inflate3(dx, dy))
+    }
+    // BLOCKED: fn Intersect()
+    fn intersect1(&self, rect: &Rect) -> Rect {
+        let rect = &rect.0;
+        Rect(self.0.Intersect1(rect))
+    }
+    fn intersects(&self, rect: &Rect) -> bool {
+        let rect = &rect.0;
+        self.0.Intersects(rect)
+    }
+    fn is_empty(&self) -> bool {
+        self.0.IsEmpty()
+    }
+    fn offset(&mut self, dx: i32, dy: i32) {
+        self.0.Offset(dx, dy)
+    }
+    fn offset1(&mut self, pt: &Point) {
+        let pt = &pt.0;
+        self.0.Offset1(pt)
+    }
+    fn set_height(&mut self, height: i32) {
+        self.0.SetHeight(height)
+    }
+    fn set_position(&mut self, pos: &Point) {
+        let pos = &pos.0;
+        self.0.SetPosition(pos)
+    }
+    fn set_size(&mut self, s: &Size) {
+        let s = &s.0;
+        self.0.SetSize(s)
+    }
+    fn set_width(&mut self, width: i32) {
+        self.0.SetWidth(width)
+    }
+    fn set_x(&mut self, x: i32) {
+        self.0.SetX(x)
+    }
+    fn set_y(&mut self, y: i32) {
+        self.0.SetY(y)
+    }
+    fn set_left(&mut self, left: i32) {
+        self.0.SetLeft(left)
+    }
+    fn set_right(&mut self, right: i32) {
+        self.0.SetRight(right)
+    }
+    fn set_top(&mut self, top: i32) {
+        self.0.SetTop(top)
+    }
+    fn set_bottom(&mut self, bottom: i32) {
+        self.0.SetBottom(bottom)
+    }
+    fn set_top_left(&mut self, p: &Point) {
+        let p = &p.0;
+        self.0.SetTopLeft(p)
+    }
+    fn set_bottom_right(&mut self, p: &Point) {
+        let p = &p.0;
+        self.0.SetBottomRight(p)
+    }
+    fn set_top_right(&mut self, p: &Point) {
+        let p = &p.0;
+        self.0.SetTopRight(p)
+    }
+    fn set_bottom_left(&mut self, p: &Point) {
+        let p = &p.0;
+        self.0.SetBottomLeft(p)
+    }
+    fn union(&self, rect: &Rect) -> Rect {
+        let rect = &rect.0;
+        Rect(self.0.Union(rect))
+    }
+    // BLOCKED: fn Union1()
+    // BLOCKED: fn operator!=()
+    // BLOCKED: fn operator+()
+    // BLOCKED: fn operator+=()
+    // BLOCKED: fn operator*()
+    // BLOCKED: fn operator*=()
+    // BLOCKED: fn operator=()
+    // BLOCKED: fn operator==()
 }
 
 // wxSize

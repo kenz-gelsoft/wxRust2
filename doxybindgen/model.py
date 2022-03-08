@@ -197,6 +197,7 @@ CXX_SUPPORTED_VALUE_TYPES = [
 ]
 CXX_TRIVIAL_EXTERN_TYPES = [
     'wxPoint',
+    'wxRect',
     'wxSize',
 ]
 
@@ -282,7 +283,9 @@ class CxxType:
 
     def is_ptr_to_binding(self):
         # TODO: consider mutability
-        return self.is_ptr() and self._is_binding_type()
+        return (self.is_ptr() and
+                self._is_binding_type() and
+                not self.is_trivial())
 
     def _is_const_ref_to_string(self):
         return self._is_const_ref() and self.typename == 'wxString'

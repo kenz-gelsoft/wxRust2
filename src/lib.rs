@@ -28,6 +28,19 @@ unsafe impl ExternType for wxPoint {
     type Kind = cxx::kind::Trivial;
 }
 
+// wxRect
+#[repr(C)]
+pub struct wxRect {
+    pub x: c_int,
+    pub y: c_int,
+    pub width: c_int,
+    pub height: c_int,
+}
+unsafe impl ExternType for wxRect {
+    type Id = type_id!("wxRect");
+    type Kind = cxx::kind::Trivial;
+}
+
 // wxSize
 #[repr(C)]
 pub struct wxSize {

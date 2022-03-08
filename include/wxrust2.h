@@ -129,6 +129,23 @@ inline wxPoint NewPoint(const wxRealPoint & pt) {
     return wxPoint(pt);
 }
 
+// CLASS: wxRect
+inline wxRect NewRect() {
+    return wxRect();
+}
+inline wxRect NewRect(int x, int y, int width, int height) {
+    return wxRect(x, y, width, height);
+}
+inline wxRect NewRect(const wxPoint & top_left, const wxPoint & bottom_right) {
+    return wxRect(top_left, bottom_right);
+}
+inline wxRect NewRect(const wxPoint & pos, const wxSize & size) {
+    return wxRect(pos, size);
+}
+inline wxRect NewRect(const wxSize & size) {
+    return wxRect(size);
+}
+
 // CLASS: wxSize
 inline wxSize NewSize() {
     return wxSize();
