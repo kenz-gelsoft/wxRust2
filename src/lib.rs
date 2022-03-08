@@ -1,5 +1,5 @@
 use std::convert::TryInto;
-use std::os::raw::c_char;
+use std::os::raw::{c_char, c_int};
 use std::ptr;
 
 use cxx::{type_id, ExternType};
@@ -20,8 +20,8 @@ type UnsafeAnyPtr = *const c_char;
 // wxSize
 #[repr(C)]
 pub struct wxSize {
-    pub x: i32,
-    pub y: i32,
+    pub x: c_int,
+    pub y: c_int,
 }
 unsafe impl ExternType for wxSize {
     type Id = type_id!("wxSize");
