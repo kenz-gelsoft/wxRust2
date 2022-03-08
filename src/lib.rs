@@ -23,11 +23,6 @@ pub struct wxSize {
     pub x: i32,
     pub y: i32,
 }
-impl wxSize {
-    pub fn new(x: i32, y: i32) -> wxSize {
-        wxSize { x: x, y: y }
-    }
-}
 unsafe impl ExternType for wxSize {
     type Id = type_id!("wxSize");
     type Kind = cxx::kind::Trivial;
