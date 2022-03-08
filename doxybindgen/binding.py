@@ -1,4 +1,4 @@
-from .model import Param, RustType, prefixed
+from .model import Param, RustType, prefixed, pascal_to_snake
 import re
 
 # Known, and problematic
@@ -21,8 +21,12 @@ class RustClassBinding:
             self.__model.name,
         )
         if not for_shim:
-            yield 'type %s;' % (
+            handwritten = ''
+            if self.__model.is_trivial():
+                handwritten = ' = crate::%s' % (self.__model.name,)
+            yield 'type %s%s;' % (
                 self.__model.name,
+                handwritten,
             )
         for method in self.__methods:
             for line in method.ffi_lines(for_shim=for_shim):
@@ -32,12 +36,18 @@ class RustClassBinding:
         yield '// %s' % (
             self.__model.name,
         )
-        yield 'wx_class! { %s(%s) impl' % (
-            self.__model.unprefixed(),
-            self.__model.name,
-        )
-        yield ',\n'.join(self._ancestor_methods(classes))
-        yield '}'
+        if self.__model.is_trivial():
+            yield 'pub struct %s(ffi::%s);' % (
+                self.__model.unprefixed(),
+                self.__model.name,
+            )
+        else:
+            yield 'wx_class! { %s(%s) impl' % (
+                self.__model.unprefixed(),
+                self.__model.name,
+            )
+            yield ',\n'.join(self._ancestor_methods(classes))
+            yield '}'
         for line in self._impl_with_ctors():
             yield line
         for line in self._trait_with_methods():
@@ -71,20 +81,22 @@ class RustClassBinding:
         yield "    pub fn none() -> Option<&'static Self> {"
         yield '        None'
         yield '    }'
-        yield '}'
+        if not self.__model.is_trivial():
+            yield '}'
 
     def _ctors(self):
         return (m for m in self.__methods if m.is_ctor and not m.is_blocked())
     
     def _trait_with_methods(self):
         indent = ' ' * 4 * 1
-        base = self.__model.base
-        if not base:
-            base = '__WxRust'
-        yield 'pub trait %sMethods: %sMethods {' % (
-            self.__model.unprefixed(),
-            base[2:],
-        )
+        if not self.__model.is_trivial():
+            base = self.__model.base
+            if not base:
+                base = '__WxRust'
+            yield 'pub trait %sMethods: %sMethods {' % (
+                self.__model.unprefixed(),
+                base[2:],
+            )
         for method in self.__methods:
             if method.is_ctor:
                 continue
@@ -134,7 +146,10 @@ class RustMethodBinding:
             if binding:
                 returns = wrapped[2:]
             elif for_shim:
-                returns = '*mut %s' % (wrapped,)
+                if self.__model.returns.is_trivial():
+                    returns = wrapped
+                else:
+                    returns = '*mut %s' % (wrapped,)
         return ' -> %s' % (returns,)
     
     def _unsafe_or_not(self):
@@ -185,7 +200,7 @@ class RustMethodBinding:
     
     def _binding_body(self):
         for param in self.__model.params:
-            marshalling = param.type.marshal(camel_to_snake(param.name))
+            marshalling = param.marshal()
             if marshalling:
                 for line in marshalling:
                     yield '%s' % (line,)
@@ -194,9 +209,7 @@ class RustMethodBinding:
             self._call_params(),
         )
         if self.__is_instance_method:
-            self_param = 'self.pinned::<ffi::%s>().as_mut()' % (
-                self.__model.cls.name,
-            )
+            self_param = self.__self_param.rust_ffi_ref()
             if self.__model.returns_new():
                 if self.__model.const:
                     self_param = '&' + self_param
@@ -214,7 +227,7 @@ class RustMethodBinding:
         yield self._wrap_return_type(call)
     
     def _call_params(self):
-        return ', '.join(camel_to_snake(self.non_keyword_name(p.name)) for p in self.__model.params)
+        return ', '.join(self.non_keyword_name(p.name) for p in self.__model.params)
 
     def _suppressed_reason(self, suppress_shim=True):
         if self.__model.is_ctor:
@@ -267,11 +280,14 @@ class RustMethodBinding:
         typename = param.type.in_rust(with_ffi, binding)
         if binding:
             if param.is_self():
-                return '&self'
+                if param.type.is_trivial() and not param.type.const:
+                    return '&mut self'
+                else:
+                    return '&self'
             elif param.type.generic_name:
                 typename = 'Option<&%s>' % (param.type.generic_name,)
         return '%s: %s' % (
-            camel_to_snake(self.non_keyword_name(param.name)),
+            self.non_keyword_name(param.name),
             typename,
         )
 
@@ -326,7 +342,11 @@ class CxxMethodBinding:
         wrapped = self.__model.wrapped_return_type()
         returns = self.__model.returns.in_cxx() + ' '
         if wrapped:
-            returns = '%s *' % (wrapped,)
+            ptr_or_not = '' if self.__model.returns.is_trivial() else '*'
+            returns = '%s %s' % (
+                wrapped,
+                ptr_or_not,
+            )
         yield 'inline %s%s(%s) {' % (
             returns,
             self.__model.name(for_shim=True, without_index=True),
@@ -342,8 +362,9 @@ class CxxMethodBinding:
                 self.__model.name(for_shim=False, without_index=True),
                 new_params_or_expr,
             )
-        if wrapped:
-            yield '    return new %s(%s);' % (wrapped, new_params_or_expr)
+        if wrapped and (self.is_ctor or not self.__model.returns.is_trivial()):
+            new_or_not = '' if self.__model.returns.is_trivial() else 'new '
+            yield '    return %s%s(%s);' % (new_or_not, wrapped, new_params_or_expr)
         else:
             yield '    return %s;' % (new_params_or_expr,)
         yield '}'
@@ -363,29 +384,3 @@ class CxxMethodBinding:
     def _call_params(self):
         return ', '.join(p.name for p in self.__model.params)
 
-
-def pascal_to_snake(pascal_case):
-    def concat_caps(words):
-        buf = ''
-        for word in words:
-            if len(word) == 1:
-                buf += word
-                continue
-            if buf:
-                yield buf
-                buf = ''
-            yield word
-        if buf:
-            yield buf
-    words = re.findall(r'[A-Z][^A-Z]*', pascal_case)
-    if words:
-        snake_cased = '_'.join(w.lower() for w in concat_caps(words))
-        return snake_cased
-    return pascal_case
-
-
-def camel_to_snake(camel_case):
-    if camel_case is None:
-        return None
-    pascal_case = camel_case[0].upper() + camel_case[1:]
-    return pascal_to_snake(pascal_case)

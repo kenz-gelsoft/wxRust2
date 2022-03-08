@@ -43,6 +43,9 @@ class Class:
         if self.__blocklist is None:
             return False
         return name in self.__blocklist
+    
+    def is_trivial(self):
+        return self.name in CXX_TRIVIAL_EXTERN_TYPES
 
 
 class Method:
@@ -103,7 +106,9 @@ class Method:
         return '%s%s' % (name, index)
 
     def wrapped_return_type(self):
-        if self.is_ctor or self.returns_new():
+        if (self.is_ctor or
+            self.returns_new() or
+            self.returns.is_trivial()):
             return self.returns.typename
         else:
             return None
@@ -117,10 +122,25 @@ class Method:
 class Param:
     def __init__(self, type, name):
         self.type = type
-        self.name = name
+        self.name = camel_to_snake(name)
     
     def is_self(self):
         return self.name == 'self'
+    
+    def marshal(self):
+        return self.type.marshal(self)
+
+    def rust_ffi_ref(self, rename=None):
+        name = rename if rename else self.name
+        if self.type.is_trivial():
+            return '%s.0' % (name,)
+        else:
+            as_mut_or_not = '.as_mut()' if self.is_self() else ''
+            return '%s.pinned::<ffi::%s>()%s' % (
+                name,
+                self.type.typename,
+                as_mut_or_not,
+            )
 
 
 class RustType:
@@ -130,7 +150,7 @@ class RustType:
         self.__ctor_retval = ctor_retval
         self.generic_name = None
 
-    def marshal(self, name):
+    def marshal(self, param):
         return None
 
     def in_rust(self, with_ffi=False, binding=False):
@@ -138,10 +158,15 @@ class RustType:
         if self.__ctor_retval:
             return t[2:]
         t = prefixed(t, with_ffi)
-        if self.const:
-            return '&%s' % (t)
-        return 'Pin<&mut %s>' % (t,)
+        ref = '&'
+        mut = '' if self.const else 'mut '
+        return self._pin_if_needed('%s%s%s' % (ref, mut, t))
     
+    def _pin_if_needed(self, t):
+        if t.startswith('&mut ') and not self.is_trivial():
+            return 'Pin<%s>' % (t,)
+        return t
+
     def in_cxx(self):
         t = '%s &' % (self.typename,)
         if self.const:
@@ -150,6 +175,9 @@ class RustType:
 
     def is_ptr_to_binding(self):
         return False
+
+    def is_trivial(self):
+        return self.typename in CXX_TRIVIAL_EXTERN_TYPES
 
     def not_supported(self):
         return False
@@ -166,6 +194,9 @@ OS_UNSUPPORTED_TYPES = [
 CXX_SUPPORTED_VALUE_TYPES = [
     'bool',
     'void',
+]
+CXX_TRIVIAL_EXTERN_TYPES = [
+    'wxSize',
 ]
 
 
@@ -199,26 +230,26 @@ class CxxType:
             return CXX2CXX[self.__srctype]
         return self.__srctype
     
-    def marshal(self, name):
+    def marshal(self, param):
+        name = camel_to_snake(param.name)
         if self._is_const_ref_to_string():
             yield 'let %s = &crate::ffi::NewString(%s);' % (
                 name,
                 name,
             )
         if self._is_const_ref_to_binding():
-            yield 'let %s = &%s.pinned::<ffi::%s>();' % (
+            yield 'let %s = &%s;' % (
                 name,
-                name,
-                self.typename,
+                param.rust_ffi_ref(),
             )
         if self.is_ptr_to_binding():
             yield 'let %s = match %s {' % (
                 name,
                 name,
             )
-            yield '    Some(r) => Pin::<&mut ffi::%s>::into_inner_unchecked(r.pinned::<ffi::%s>()),' % (
+            yield '    Some(r) => Pin::<&mut ffi::%s>::into_inner_unchecked(%s),' % (
                 self.typename,
-                self.typename,
+                param.rust_ffi_ref(rename='r'),
             )
             yield '    None => ptr::null_mut(),'
             yield '};'
@@ -241,9 +272,12 @@ class CxxType:
             mut = 'mut ' if self.__is_mut else ''
             if ref.startswith('*') and not self.__is_mut:
                 mut = 'const '
-        if ref.startswith('&') and self.__is_mut:
-            return 'Pin<&mut %s>' % (t,)
-        return '%s%s%s' % (ref, mut, t)
+        return self._pin_if_needed('%s%s%s' % (ref, mut, t))
+    
+    def _pin_if_needed(self, t):
+        if t.startswith('&mut ') and not self.is_trivial():
+            return 'Pin<%s>' % (t,)
+        return t
 
     def is_ptr_to_binding(self):
         # TODO: consider mutability
@@ -280,8 +314,13 @@ class CxxType:
             return True
         if self.typename in CXX2RUST:
             return True
+        if self.is_trivial():
+            return True 
         return False
     
+    def is_trivial(self):
+        return self.typename in CXX_TRIVIAL_EXTERN_TYPES
+        
     def is_ptr(self):
         return self.__indirection.startswith('*')
     
@@ -309,4 +348,31 @@ def prefixed(t, with_ffi=False):
     elif with_ffi:
         t = 'ffi::%s' % (t,)
     return t
+
+
+def pascal_to_snake(pascal_case):
+    def concat_caps(words):
+        buf = ''
+        for word in words:
+            if len(word) == 1:
+                buf += word
+                continue
+            if buf:
+                yield buf
+                buf = ''
+            yield word
+        if buf:
+            yield buf
+    words = re.findall(r'[A-Z][^A-Z]*', pascal_case)
+    if words:
+        snake_cased = '_'.join(w.lower() for w in concat_caps(words))
+        return snake_cased
+    return pascal_case
+
+
+def camel_to_snake(camel_case):
+    if camel_case is None:
+        return None
+    pascal_case = camel_case[0].upper() + camel_case[1:]
+    return pascal_to_snake(pascal_case)
 

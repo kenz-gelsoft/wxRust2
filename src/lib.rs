@@ -1,6 +1,8 @@
 use std::convert::TryInto;
-use std::os::raw::c_char;
+use std::os::raw::{c_char, c_int};
 use std::ptr;
+
+use cxx::{type_id, ExternType};
 
 mod macros;
 
@@ -14,6 +16,17 @@ pub use generated::*;
 // any pointer type used on ffi boundary.
 // we chose this type as it's handy in cxx.
 type UnsafeAnyPtr = *const c_char;
+
+// wxSize
+#[repr(C)]
+pub struct wxSize {
+    pub x: c_int,
+    pub y: c_int,
+}
+unsafe impl ExternType for wxSize {
+    type Id = type_id!("wxSize");
+    type Kind = cxx::kind::Trivial;
+}
 
 #[cxx::bridge(namespace = "wxrust")]
 mod ffi {
