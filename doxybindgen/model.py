@@ -3,6 +3,7 @@ import re
 
 CXX2CXX = {
     'long': 'int32_t',
+    # 'wxEllipsizeMode': 'int32_t',
 }
 
 CXX2RUST = {
@@ -72,7 +73,7 @@ class Method:
         if self.is_static:
             if not self.uses_unsupported_type() or self.returns_new():
                 return True
-        return self.is_ctor or self.returns_new()
+        return self.is_ctor or self.returns_new() or self.returns.is_str()
     
     def uses_unsupported_type(self):
         if self.returns.not_supported():
@@ -90,7 +91,7 @@ class Method:
         if for_shim:
             if self.is_ctor:
                 name = 'New%s' % (self.cls.unprefixed(),)
-            if self.returns_new() or self.is_static:
+            if self.returns_new() or self.is_static or self.returns.is_str():
                 name = '_'.join((
                     self.cls.name,
                     name,
@@ -187,6 +188,9 @@ class RustType:
 
     def is_void(self):
         return False
+
+    def is_str(self):
+        return self.typename == 'wxString'
 
 OS_UNSUPPORTED_TYPES = [
     'wxAccessible',
@@ -332,6 +336,9 @@ class CxxType:
         if self.is_ptr():
             return False
         return self.typename in ['void', '']
+    
+    def is_str(self):
+        return self.typename == 'wxString'
     
     def make_generic(self, generic_name):
         self.generic_name = generic_name

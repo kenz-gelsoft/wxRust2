@@ -140,6 +140,8 @@ class RustMethodBinding:
     def _returns_or_not(self, for_shim=True, binding=False):
         if self.__model.returns.is_void():
             return ''
+        if self.__model.returns.is_str():
+            return ' -> String'
         returns = self.__model.returns.in_rust(with_ffi=binding)
         wrapped = self.__model.wrapped_return_type()
         if wrapped:
@@ -210,7 +212,7 @@ class RustMethodBinding:
         )
         if self.__is_instance_method:
             self_param = self.__self_param.rust_ffi_ref()
-            if self.__model.returns_new():
+            if self.__model.returns_new() or self.__model.returns.is_str():
                 if self.__model.const:
                     self_param = '&' + self_param
                 params = ', '.join([self_param, self._call_params()])
@@ -240,7 +242,7 @@ class RustMethodBinding:
             if suppress_shim:
                 return 'GENERATED'
         if self.__model.uses_unsupported_type():
-            if self.__model.returns_new():
+            if self.__model.returns_new() or self.__model.returns.is_str():
                 if suppress_shim:
                     return 'GENERATED'
             elif self.__model.is_static:
@@ -270,7 +272,7 @@ class RustMethodBinding:
     def _rust_params(self, with_ffi=False, binding=False, for_shim=False):
         params = self.__model.params.copy()
         if self.__is_instance_method:
-            if for_shim and self.__model.returns_new():
+            if for_shim and (self.__model.returns_new() or self.__model.returns.is_str()):
                 params.insert(0, self.__shim_self)
             else:
                 params.insert(0, self.__self_param)
@@ -347,6 +349,8 @@ class CxxMethodBinding:
                 wrapped,
                 ptr_or_not,
             )
+        if self.__model.returns.is_str():
+            returns = 'rust::String '
         yield 'inline %s%s(%s) {' % (
             returns,
             self.__model.name(for_shim=True, without_index=True),
@@ -365,13 +369,15 @@ class CxxMethodBinding:
         if wrapped and (self.is_ctor or not self.__model.returns.is_trivial()):
             new_or_not = '' if self.__model.returns.is_trivial() else 'new '
             yield '    return %s%s(%s);' % (new_or_not, wrapped, new_params_or_expr)
+        elif self.__model.returns.is_str():
+            yield '    return rust::String(%s.utf8_str());' % (new_params_or_expr,)
         else:
             yield '    return %s;' % (new_params_or_expr,)
         yield '}'
 
     def _cxx_params(self):
         params = self.__model.params.copy()
-        if not self.__model.is_static and self.__model.returns_new():
+        if not self.__model.is_static and (self.__model.returns_new() or self.__model.returns.is_str()):
             params.insert(0, self.__self_param)
         return ', '.join(self._cxx_param(p) for p in params)
 
