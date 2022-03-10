@@ -3,7 +3,6 @@ import re
 
 CXX2CXX = {
     'long': 'int32_t',
-    # 'wxEllipsizeMode': 'int32_t',
 }
 
 CXX2RUST = {
