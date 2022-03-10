@@ -70,10 +70,13 @@ class Method:
     def needs_shim(self):
         if self.is_blocked():
             return False
-        if self.is_static:
-            if not self.uses_unsupported_type() or self.returns_new():
-                return True
-        return self.is_ctor or self.returns_new()
+        if self.is_ctor:
+            return True
+        if self.is_static and not self.uses_unsupported_type():
+            return True
+        if self.returns_new():
+            return True
+        return False
     
     def uses_unsupported_type(self):
         if self.returns.not_supported():
