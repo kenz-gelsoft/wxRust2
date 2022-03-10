@@ -57,6 +57,7 @@ class Method:
         self.__name = e.findtext('name')
         self.overload_index = self._overload_index()
         self.is_ctor = self.__name == cls.name
+        self.is_instance_method = not (self.is_ctor or self.is_static)
         self.const = e.get('const') == 'yes'
         if self.is_ctor:
             self.returns = RustType(cls.name, self.const, ctor_retval=True)
@@ -67,12 +68,11 @@ class Method:
             self.params.append(Param(ptype, pname))
 
     def needs_shim(self):
-        if self.is_blocked():
+        if self.is_blocked() or self.uses_unsupported_type():
             return False
-        if self.is_static:
-            if not self.uses_unsupported_type() or self.returns_new():
-                return True
-        return self.is_ctor or self.returns_new()
+        return (not self.is_instance_method or 
+                self.returns_new() or
+                self.returns.is_str())
     
     def uses_unsupported_type(self):
         if self.returns.not_supported():
@@ -87,10 +87,10 @@ class Method:
 
     def name(self, for_shim, without_index=False):
         name = self.__name
-        if for_shim:
+        if for_shim and self.needs_shim():
             if self.is_ctor:
                 name = 'New%s' % (self.cls.unprefixed(),)
-            if self.returns_new() or self.is_static:
+            else:
                 name = '_'.join((
                     self.cls.name,
                     name,
@@ -106,6 +106,8 @@ class Method:
         return '%s%s' % (name, index)
 
     def wrapped_return_type(self):
+        if self.returns.is_str():
+            return None
         if (self.is_ctor or
             self.returns_new() or
             self.returns.is_trivial()):
@@ -187,6 +189,9 @@ class RustType:
 
     def is_void(self):
         return False
+
+    def is_str(self):
+        return self.typename == 'wxString'
 
 OS_UNSUPPORTED_TYPES = [
     'wxAccessible',
@@ -306,6 +311,8 @@ class CxxType:
     def not_supported_value_type(self, check_generated=False):
         if check_generated and not self._is_binding_type():
             return False
+        if self.is_str():
+            return False
         if not self._is_cxx_supported_value_type():
             return not self.__indirection
         return False
@@ -332,6 +339,9 @@ class CxxType:
         if self.is_ptr():
             return False
         return self.typename in ['void', '']
+    
+    def is_str(self):
+        return self.typename == 'wxString'
     
     def make_generic(self, generic_name):
         self.generic_name = generic_name

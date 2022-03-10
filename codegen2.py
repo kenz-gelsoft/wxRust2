@@ -37,6 +37,7 @@ types = [
     # 'GeometrySerializer',
     'wxGraphicsPath',
     'wxRealPoint',
+    'wxDC',
 ]
 
 BLOCKLIST = {
@@ -53,6 +54,8 @@ BLOCKLIST = {
     'wxWindow': [
         # TODO: treat long correctly
         'Create',
+        # enum vs i32
+        'GetHelpTextAtPoint',
         # wxWindowBase's methods
         'AddChild',
         'FindWindow',
@@ -81,6 +84,8 @@ BLOCKLIST = {
     'wxControl': [
         # TODO: treat long correctly
         'Create',
+        # enum vs i32
+        'Ellipsize',
     ],
     'wxButton': [
         # TODO: treat long correctly

@@ -110,7 +110,6 @@ class RustMethodBinding:
         self.__model = model
         self.is_ctor = model.is_ctor
         self.__is_dtor = model.name(for_shim=False).startswith('~')
-        self.__is_instance_method = not (model.is_static or model.is_ctor)
         self.__self_param = Param(RustType(model.cls.name, model.const), 'self')
         # must be name neither self or this
         self.__shim_self = Param(RustType(model.cls.name, model.const), 'self_')
@@ -141,6 +140,8 @@ class RustMethodBinding:
         if self.__model.returns.is_void():
             return ''
         returns = self.__model.returns.in_rust(with_ffi=binding)
+        if self.__model.returns.is_str():
+            returns = 'String'
         wrapped = self.__model.wrapped_return_type()
         if wrapped:
             if binding:
@@ -204,51 +205,44 @@ class RustMethodBinding:
             if marshalling:
                 for line in marshalling:
                     yield '%s' % (line,)
-        call = '%s(%s)' % (
-            prefixed(self.__model.name(for_shim=True), with_ffi=True),
-            self._call_params(),
-        )
-        if self.__is_instance_method:
+        name = prefixed(self.__model.name(for_shim=True), with_ffi=True)
+        self_to_insert = None
+        if self.__model.is_instance_method:
             self_param = self.__self_param.rust_ffi_ref()
-            if self.__model.returns_new():
+            if self.__model.needs_shim():
                 if self.__model.const:
                     self_param = '&' + self_param
-                params = ', '.join([self_param, self._call_params()])
-                call = 'ffi::%s(%s)' % (
-                    self.__model.name(for_shim=True),
-                    params,
-                )
+                self_to_insert = self_param
             else:
-                call = '%s.%s(%s)' % (
+                name = '%s.%s' % (
                     self_param,
                     self.__model.name(for_shim=True),
-                    self._call_params(),
                 )
+        call = '%s(%s)' % (
+            name,
+            self._call_params(self_to_insert),
+        )
         yield self._wrap_return_type(call)
     
-    def _call_params(self):
-        return ', '.join(self.non_keyword_name(p.name) for p in self.__model.params)
+    def _call_params(self, self_to_insert):
+        params = [self.non_keyword_name(p.name) for p in self.__model.params]
+        if self_to_insert:
+            params.insert(0, self_to_insert)
+        return ', '.join(params)
 
     def _suppressed_reason(self, suppress_shim=True):
+        if self.__model.is_blocked():
+            return 'BLOCKED'
         if self.__model.is_ctor:
             if suppress_shim:
                 return 'CTOR'
         if self.__is_dtor:
             return 'DTOR'
-        if self.__model.is_static:
-            # TODO: handle static methods specially
+        if self.__model.needs_shim():
             if suppress_shim:
                 return 'GENERATED'
         if self.__model.uses_unsupported_type():
-            if self.__model.returns_new():
-                if suppress_shim:
-                    return 'GENERATED'
-            elif self.__model.is_static:
-                return 'STATIC'
-            else:
-                return 'CXX_UNSUPPORTED'
-        if self.__model.is_blocked():
-            return 'BLOCKED'
+            return 'CXX_UNSUPPORTED'
         return None
     
     def non_keyword_name(self, name):
@@ -269,8 +263,8 @@ class RustMethodBinding:
     
     def _rust_params(self, with_ffi=False, binding=False, for_shim=False):
         params = self.__model.params.copy()
-        if self.__is_instance_method:
-            if for_shim and self.__model.returns_new():
+        if self.__model.is_instance_method:
+            if for_shim and self.__model.needs_shim():
                 params.insert(0, self.__shim_self)
             else:
                 params.insert(0, self.__self_param)
@@ -341,6 +335,8 @@ class CxxMethodBinding:
             return
         wrapped = self.__model.wrapped_return_type()
         returns = self.__model.returns.in_cxx() + ' '
+        if self.__model.returns.is_str():
+            returns = 'rust::String '
         if wrapped:
             ptr_or_not = '' if self.__model.returns.is_trivial() else '*'
             returns = '%s %s' % (
@@ -362,6 +358,10 @@ class CxxMethodBinding:
                 self.__model.name(for_shim=False, without_index=True),
                 new_params_or_expr,
             )
+        if self.__model.returns.is_str():
+            new_params_or_expr = 'rust::String(%s.utf8_str())' % (
+                new_params_or_expr,
+            )
         if wrapped and (self.is_ctor or not self.__model.returns.is_trivial()):
             new_or_not = '' if self.__model.returns.is_trivial() else 'new '
             yield '    return %s%s(%s);' % (new_or_not, wrapped, new_params_or_expr)
@@ -371,7 +371,7 @@ class CxxMethodBinding:
 
     def _cxx_params(self):
         params = self.__model.params.copy()
-        if not self.__model.is_static and self.__model.returns_new():
+        if self.__model.needs_shim() and self.__model.is_instance_method:
             params.insert(0, self.__self_param)
         return ', '.join(self._cxx_param(p) for p in params)
 
