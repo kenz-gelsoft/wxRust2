@@ -58,6 +58,7 @@ class Method:
         self.__name = e.findtext('name')
         self.overload_index = self._overload_index()
         self.is_ctor = self.__name == cls.name
+        self.is_instance_method = not (self.is_ctor or self.is_static)
         self.const = e.get('const') == 'yes'
         if self.is_ctor:
             self.returns = RustType(cls.name, self.const, ctor_retval=True)
