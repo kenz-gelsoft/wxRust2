@@ -206,13 +206,13 @@ class RustMethodBinding:
                 for line in marshalling:
                     yield '%s' % (line,)
         name = prefixed(self.__model.name(for_shim=True), with_ffi=True)
-        params = self._call_params()
+        insert_self = None
         if self.__model.is_instance_method:
             self_param = self.__self_param.rust_ffi_ref()
             if self.__model.needs_shim():
                 if self.__model.const:
                     self_param = '&' + self_param
-                params = ', '.join([self_param, params])
+                insert_self = self_param
             else:
                 name = '%s.%s' % (
                     self_param,
@@ -220,12 +220,15 @@ class RustMethodBinding:
                 )
         call = '%s(%s)' % (
             name,
-            params,
+            self._call_params(insert_self),
         )
         yield self._wrap_return_type(call)
     
-    def _call_params(self):
-        return ', '.join(self.non_keyword_name(p.name) for p in self.__model.params)
+    def _call_params(self, insert_self):
+        params = [self.non_keyword_name(p.name) for p in self.__model.params]
+        if insert_self:
+            params.insert(0, insert_self)
+        return ', '.join(params)
 
     def _suppressed_reason(self, suppress_shim=True):
         if self.__model.is_blocked():

@@ -1672,7 +1672,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     // CXX_UNSUPPORTED: fn ShowWithEffect()
     fn get_help_text(&self) -> String {
-        ffi::wxWindow_GetHelpText(&self.pinned::<ffi::wxWindow>().as_mut(), )
+        ffi::wxWindow_GetHelpText(&self.pinned::<ffi::wxWindow>().as_mut())
     }
     fn set_help_text(&self, help_text: &str) {
         let help_text = &crate::ffi::NewString(help_text);
@@ -1683,7 +1683,7 @@ pub trait WindowMethods: EvtHandlerMethods {
         self.pinned::<ffi::wxWindow>().as_mut().GetToolTip()
     }
     fn get_tool_tip_text(&self) -> String {
-        ffi::wxWindow_GetToolTipText(&self.pinned::<ffi::wxWindow>().as_mut(), )
+        ffi::wxWindow_GetToolTipText(&self.pinned::<ffi::wxWindow>().as_mut())
     }
     fn set_tool_tip(&self, tip_string: &str) {
         let tip_string = &crate::ffi::NewString(tip_string);
@@ -1731,14 +1731,14 @@ pub trait WindowMethods: EvtHandlerMethods {
         self.pinned::<ffi::wxWindow>().as_mut().GetId()
     }
     fn get_label(&self) -> String {
-        ffi::wxWindow_GetLabel(&self.pinned::<ffi::wxWindow>().as_mut(), )
+        ffi::wxWindow_GetLabel(&self.pinned::<ffi::wxWindow>().as_mut())
     }
     // CXX_UNSUPPORTED: fn GetLayoutDirection()
     fn adjust_for_layout_direction(&self, x: i32, width: i32, width_total: i32) -> i32 {
         self.pinned::<ffi::wxWindow>().as_mut().AdjustForLayoutDirection(x, width, width_total)
     }
     fn get_name(&self) -> String {
-        ffi::wxWindow_GetName(&self.pinned::<ffi::wxWindow>().as_mut(), )
+        ffi::wxWindow_GetName(&self.pinned::<ffi::wxWindow>().as_mut())
     }
     // CXX_UNSUPPORTED: fn GetWindowVariant()
     fn set_id(&self, winid: i32) {
@@ -1957,10 +1957,10 @@ pub trait ControlMethods: WindowMethods {
         self.pinned::<ffi::wxControl>().as_mut().Command(event)
     }
     fn get_label(&self) -> String {
-        ffi::wxControl_GetLabel(&self.pinned::<ffi::wxControl>().as_mut(), )
+        ffi::wxControl_GetLabel(&self.pinned::<ffi::wxControl>().as_mut())
     }
     fn get_label_text(&self) -> String {
-        ffi::wxControl_GetLabelText(&self.pinned::<ffi::wxControl>().as_mut(), )
+        ffi::wxControl_GetLabelText(&self.pinned::<ffi::wxControl>().as_mut())
     }
     fn get_size_from_text_size(&self, xlen: i32, ylen: i32) -> Size {
         Size(self.pinned::<ffi::wxControl>().as_mut().GetSizeFromTextSize(xlen, ylen))
@@ -2090,7 +2090,7 @@ pub trait ButtonMethods: AnyButtonMethods {
         self.pinned::<ffi::wxButton>().as_mut().GetAuthNeeded()
     }
     fn get_label(&self) -> String {
-        ffi::wxButton_GetLabel(&self.pinned::<ffi::wxButton>().as_mut(), )
+        ffi::wxButton_GetLabel(&self.pinned::<ffi::wxButton>().as_mut())
     }
     fn set_auth_needed(&self, needed: bool) {
         self.pinned::<ffi::wxButton>().as_mut().SetAuthNeeded(needed)
@@ -2190,7 +2190,7 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     // CXX_UNSUPPORTED: fn GetIcon()
     // BLOCKED: fn GetIcons()
     fn get_title(&self) -> String {
-        ffi::wxTopLevelWindow_GetTitle(&self.pinned::<ffi::wxTopLevelWindow>().as_mut(), )
+        ffi::wxTopLevelWindow_GetTitle(&self.pinned::<ffi::wxTopLevelWindow>().as_mut())
     }
     fn iconize(&self, iconize: bool) {
         self.pinned::<ffi::wxTopLevelWindow>().as_mut().Iconize(iconize)
