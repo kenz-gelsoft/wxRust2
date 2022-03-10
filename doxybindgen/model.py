@@ -69,11 +69,9 @@ class Method:
             self.params.append(Param(ptype, pname))
 
     def needs_shim(self):
-        if self.is_blocked():
+        if self.is_blocked() or self.uses_unsupported_type():
             return False
-        if self.is_ctor:
-            return True
-        if self.is_static and not self.uses_unsupported_type():
+        if not self.is_instance_method:
             return True
         if self.returns_new():
             return True
@@ -92,10 +90,10 @@ class Method:
 
     def name(self, for_shim, without_index=False):
         name = self.__name
-        if for_shim:
+        if for_shim and self.needs_shim():
             if self.is_ctor:
                 name = 'New%s' % (self.cls.unprefixed(),)
-            if self.returns_new() or self.is_static:
+            else:
                 name = '_'.join((
                     self.cls.name,
                     name,

@@ -205,26 +205,23 @@ class RustMethodBinding:
             if marshalling:
                 for line in marshalling:
                     yield '%s' % (line,)
-        call = '%s(%s)' % (
-            prefixed(self.__model.name(for_shim=True), with_ffi=True),
-            self._call_params(),
-        )
+        name = prefixed(self.__model.name(for_shim=True), with_ffi=True)
+        params = self._call_params()
         if self.__model.is_instance_method:
             self_param = self.__self_param.rust_ffi_ref()
-            if self.__model.returns_new():
+            if self.__model.needs_shim():
                 if self.__model.const:
                     self_param = '&' + self_param
-                params = ', '.join([self_param, self._call_params()])
-                call = 'ffi::%s(%s)' % (
-                    self.__model.name(for_shim=True),
-                    params,
-                )
+                params = ', '.join([self_param, params])
             else:
-                call = '%s.%s(%s)' % (
+                name = '%s.%s' % (
                     self_param,
                     self.__model.name(for_shim=True),
-                    self._call_params(),
                 )
+        call = '%s(%s)' % (
+            name,
+            params,
+        )
         yield self._wrap_return_type(call)
     
     def _call_params(self):
@@ -264,7 +261,7 @@ class RustMethodBinding:
     def _rust_params(self, with_ffi=False, binding=False, for_shim=False):
         params = self.__model.params.copy()
         if self.__model.is_instance_method:
-            if for_shim and self.__model.returns_new():
+            if for_shim and self.__model.needs_shim():
                 params.insert(0, self.__shim_self)
             else:
                 params.insert(0, self.__self_param)
@@ -371,7 +368,7 @@ class CxxMethodBinding:
 
     def _cxx_params(self):
         params = self.__model.params.copy()
-        if not self.__model.is_static and self.__model.returns_new():
+        if self.__model.needs_shim() and self.__model.is_instance_method:
             params.insert(0, self.__self_param)
         return ', '.join(self._cxx_param(p) for p in params)
 
