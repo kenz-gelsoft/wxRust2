@@ -74,6 +74,8 @@ class Method:
             return True
         if self.returns_new():
             return True
+        if self.returns.is_str():
+            return True 
         return False
     
     def uses_unsupported_type(self):
@@ -120,8 +122,6 @@ class Method:
     def returns_new(self):
         if self.is_blocked():
             return False
-        if self.returns.is_str():
-            return True
         return self.returns.not_supported_value_type(check_generated=True)
 
     
