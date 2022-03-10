@@ -73,7 +73,7 @@ class Method:
         if self.is_static:
             if not self.uses_unsupported_type() or self.returns_new():
                 return True
-        return self.is_ctor or self.returns_new() or self.returns.is_str()
+        return self.is_ctor or self.returns_new()
     
     def uses_unsupported_type(self):
         if self.returns.not_supported():
@@ -91,7 +91,7 @@ class Method:
         if for_shim:
             if self.is_ctor:
                 name = 'New%s' % (self.cls.unprefixed(),)
-            if self.returns_new() or self.is_static or self.returns.is_str():
+            if self.returns_new() or self.is_static:
                 name = '_'.join((
                     self.cls.name,
                     name,
@@ -107,6 +107,8 @@ class Method:
         return '%s%s' % (name, index)
 
     def wrapped_return_type(self):
+        if self.returns.is_str():
+            return None
         if (self.is_ctor or
             self.returns_new() or
             self.returns.is_trivial()):
@@ -117,6 +119,8 @@ class Method:
     def returns_new(self):
         if self.is_blocked():
             return False
+        if self.returns.is_str():
+            return True
         return self.returns.not_supported_value_type(check_generated=True)
 
     
@@ -309,6 +313,8 @@ class CxxType:
     
     def not_supported_value_type(self, check_generated=False):
         if check_generated and not self._is_binding_type():
+            return False
+        if self.is_str():
             return False
         if not self._is_cxx_supported_value_type():
             return not self.__indirection

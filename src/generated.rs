@@ -338,7 +338,7 @@ mod ffi {
         // CXX_UNSUPPORTED: fn ShowWithEffect(self: Pin<&mut wxWindow>, effect: wxShowEffect, timeout: u32) -> bool;
         // GENERATED: fn GetHelpText(self: &wxWindow) -> String;
         fn SetHelpText(self: Pin<&mut wxWindow>, help_text: &wxString);
-        // GENERATED: fn GetHelpTextAtPoint(self: &wxWindow, point: &wxPoint, origin: wxHelpEvent::Origin) -> String;
+        // BLOCKED: fn GetHelpTextAtPoint(self: &wxWindow, point: &wxPoint, origin: wxHelpEvent::Origin) -> String;
         fn GetToolTip(self: &wxWindow) -> *mut wxToolTip;
         // GENERATED: fn GetToolTipText(self: &wxWindow) -> String;
         fn SetToolTip(self: Pin<&mut wxWindow>, tip_string: &wxString);
@@ -414,7 +414,7 @@ mod ffi {
         fn RegisterHotKey(self: Pin<&mut wxWindow>, hotkey_id: i32, modifiers: i32, virtual_key_code: i32) -> bool;
         fn UnregisterHotKey(self: Pin<&mut wxWindow>, hotkey_id: i32) -> bool;
         // BLOCKED: fn UpdateWindowUI(self: Pin<&mut wxWindow>, flags: i32);
-        // GENERATED: fn GetClassDefaultAttributes(variant: wxWindowVariant) -> wxVisualAttributes;
+        // CXX_UNSUPPORTED: fn GetClassDefaultAttributes(variant: wxWindowVariant) -> wxVisualAttributes;
         // GENERATED: fn FindFocus() -> *mut wxWindow;
         // GENERATED: unsafe fn FindWindowById(id: i32, parent: *const wxWindow) -> *mut wxWindow;
         // GENERATED: unsafe fn FindWindowByLabel(label: &wxString, parent: *const wxWindow) -> *mut wxWindow;
@@ -445,7 +445,7 @@ mod ffi {
         // GENERATED: fn GetLabelText(label: &wxString) -> String;
         // GENERATED: fn RemoveMnemonics(str: &wxString) -> String;
         // GENERATED: fn EscapeMnemonics(text: &wxString) -> String;
-        // GENERATED: fn Ellipsize(label: &wxString, dc: &wxDC, mode: i32, max_width: i32, flags: i32) -> String;
+        // BLOCKED: fn Ellipsize(label: &wxString, dc: &wxDC, mode: i32, max_width: i32, flags: i32) -> String;
         
         // CLASS: wxAnyButton
         type wxAnyButton;
@@ -1877,7 +1877,7 @@ pub trait WindowMethods: EvtHandlerMethods {
         self.pinned::<ffi::wxWindow>().as_mut().UnregisterHotKey(hotkey_id)
     }
     // BLOCKED: fn UpdateWindowUI()
-    // STATIC: fn GetClassDefaultAttributes()
+    // CXX_UNSUPPORTED: fn GetClassDefaultAttributes()
     fn find_focus() -> *mut ffi::wxWindow {
         ffi::wxWindow_FindFocus()
     }

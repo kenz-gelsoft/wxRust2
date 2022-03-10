@@ -140,9 +140,9 @@ class RustMethodBinding:
     def _returns_or_not(self, for_shim=True, binding=False):
         if self.__model.returns.is_void():
             return ''
-        if self.__model.returns.is_str():
-            return ' -> String'
         returns = self.__model.returns.in_rust(with_ffi=binding)
+        if self.__model.returns.is_str():
+            returns = 'String'
         wrapped = self.__model.wrapped_return_type()
         if wrapped:
             if binding:
@@ -212,7 +212,7 @@ class RustMethodBinding:
         )
         if self.__is_instance_method:
             self_param = self.__self_param.rust_ffi_ref()
-            if self.__model.returns_new() or self.__model.returns.is_str():
+            if self.__model.returns_new():
                 if self.__model.const:
                     self_param = '&' + self_param
                 params = ', '.join([self_param, self._call_params()])
@@ -232,25 +232,18 @@ class RustMethodBinding:
         return ', '.join(self.non_keyword_name(p.name) for p in self.__model.params)
 
     def _suppressed_reason(self, suppress_shim=True):
+        if self.__model.is_blocked():
+            return 'BLOCKED'
         if self.__model.is_ctor:
             if suppress_shim:
                 return 'CTOR'
         if self.__is_dtor:
             return 'DTOR'
-        if self.__model.is_static:
-            # TODO: handle static methods specially
+        if self.__model.needs_shim():
             if suppress_shim:
                 return 'GENERATED'
         if self.__model.uses_unsupported_type():
-            if self.__model.returns_new() or self.__model.returns.is_str():
-                if suppress_shim:
-                    return 'GENERATED'
-            elif self.__model.is_static:
-                return 'STATIC'
-            else:
-                return 'CXX_UNSUPPORTED'
-        if self.__model.is_blocked():
-            return 'BLOCKED'
+            return 'CXX_UNSUPPORTED'
         return None
     
     def non_keyword_name(self, name):
@@ -272,7 +265,7 @@ class RustMethodBinding:
     def _rust_params(self, with_ffi=False, binding=False, for_shim=False):
         params = self.__model.params.copy()
         if self.__is_instance_method:
-            if for_shim and (self.__model.returns_new() or self.__model.returns.is_str()):
+            if for_shim and self.__model.returns_new():
                 params.insert(0, self.__shim_self)
             else:
                 params.insert(0, self.__self_param)
@@ -343,14 +336,14 @@ class CxxMethodBinding:
             return
         wrapped = self.__model.wrapped_return_type()
         returns = self.__model.returns.in_cxx() + ' '
+        if self.__model.returns.is_str():
+            returns = 'rust::String '
         if wrapped:
             ptr_or_not = '' if self.__model.returns.is_trivial() else '*'
             returns = '%s %s' % (
                 wrapped,
                 ptr_or_not,
             )
-        if self.__model.returns.is_str():
-            returns = 'rust::String '
         yield 'inline %s%s(%s) {' % (
             returns,
             self.__model.name(for_shim=True, without_index=True),
@@ -366,18 +359,20 @@ class CxxMethodBinding:
                 self.__model.name(for_shim=False, without_index=True),
                 new_params_or_expr,
             )
+        if self.__model.returns.is_str():
+            new_params_or_expr = 'rust::String(%s.utf8_str())' % (
+                new_params_or_expr,
+            )
         if wrapped and (self.is_ctor or not self.__model.returns.is_trivial()):
             new_or_not = '' if self.__model.returns.is_trivial() else 'new '
             yield '    return %s%s(%s);' % (new_or_not, wrapped, new_params_or_expr)
-        elif self.__model.returns.is_str():
-            yield '    return rust::String(%s.utf8_str());' % (new_params_or_expr,)
         else:
             yield '    return %s;' % (new_params_or_expr,)
         yield '}'
 
     def _cxx_params(self):
         params = self.__model.params.copy()
-        if not self.__model.is_static and (self.__model.returns_new() or self.__model.returns.is_str()):
+        if not self.__model.is_static and self.__model.returns_new():
             params.insert(0, self.__self_param)
         return ', '.join(self._cxx_param(p) for p in params)
 
