@@ -70,13 +70,9 @@ class Method:
     def needs_shim(self):
         if self.is_blocked() or self.uses_unsupported_type():
             return False
-        if not self.is_instance_method:
-            return True
-        if self.returns_new():
-            return True
-        if self.returns.is_str():
-            return True 
-        return False
+        return (not self.is_instance_method or 
+                self.returns_new() or
+                self.returns.is_str()):
     
     def uses_unsupported_type(self):
         if self.returns.not_supported():
