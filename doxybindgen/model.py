@@ -72,7 +72,7 @@ class Method:
             return False
         return (not self.is_instance_method or 
                 self.returns_new() or
-                self.returns.is_str()):
+                self.returns.is_str())
     
     def uses_unsupported_type(self):
         if self.returns.not_supported():
