@@ -13,7 +13,7 @@ def main():
     classes = []
     xmlfiles = config['wxml_files']
     for file in xmlfiles:
-        for cls in Class.in_xml(type_manager, file, config['blocklist']):
+        for cls in Class.in_xml(type_manager, file, config['types']):
             classes.append(cls)
     # Set known binding(name)s once all classes parsed.
     type_manager.known_bindings = [cls.name for cls in classes]
@@ -53,7 +53,7 @@ mod ffi {
 '''
     bindings = [RustClassBinding(cls) for cls in classes]
     indent = ' ' * 4 * 2
-    types = config['types']
+    types = config['types']['decls']
     for t in types:
         yield '%stype %s;' % (indent, t)
     for cls in bindings:

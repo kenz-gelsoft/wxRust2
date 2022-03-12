@@ -14,7 +14,8 @@ wxml_files = [
     'wxml/classwx_validator.xml',
 ]
 
-types = [
+[types]
+decls = [
     'wxString = crate::ffi::wxString',
     'wxWindowList',
     # 'wxRect',
@@ -53,18 +54,20 @@ types = [
     'wxDC',
 ]
 
-[blocklist]
-wxObject = [
+[types.wxObject]
+blocklist = [
     'operator delete',
 ]
-wxEvtHandler = [
+[types.wxEvtHandler]
+blocklist = [
     'Bind1',
     'CallAfter1',
     'GetClientData',
     'SetClientData',
     'Unbind1',
 ]
-wxWindow = [
+[types.wxWindow]
+blocklist = [
     # TODO: treat long correctly
     'Create',
     # enum vs i32
@@ -94,17 +97,20 @@ wxWindow = [
     'GetCursor',
     'GetUpdateRegion',
 ]
-wxControl = [
+[types.wxControl]
+blocklist = [
     # TODO: treat long correctly
     'Create',
     # enum vs i32
     'Ellipsize',
 ]
-wxButton = [
+[types.wxButton]
+blocklist = [
     # TODO: treat long correctly
     'Create',
 ]
-wxTopLevelWindow = [
+[types.wxTopLevelWindow]
+blocklist = [
     # TODO: treat long correctly
     'Create',
     # wxTopLevelWindowMac's methods (on Mac)
@@ -119,7 +125,8 @@ wxTopLevelWindow = [
     'SaveGeometry',
     'RestoreToGeometry',
 ]
-wxFrame = [
+[types.wxFrame]
+blocklist = [
     # TODO: treat long correctly
     'Create',
     'CreateToolBar',
@@ -130,7 +137,8 @@ wxFrame = [
     'CreateStatusBar',
     'OnCreateToolBar',
 ]
-wxPoint = [
+[types.wxPoint]
+blocklist = [
     'operator+',
     'operator+1',
     'operator+2',
@@ -150,7 +158,8 @@ wxPoint = [
     'operator/=',
     'operator*=',
 ]
-wxRect = [
+[types.wxRect]
+blocklist = [
     'operator==',
     'operator=',
     'operator*=',
@@ -168,7 +177,8 @@ wxRect = [
     'Intersect',
     'Union1',
 ]
-wxSize = [
+[types.wxSize]
+blocklist = [
     'operator+',
     'operator-',
     'operator/',

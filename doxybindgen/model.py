@@ -18,18 +18,19 @@ CXX2RUST = {
 
 
 class Class:
-    def in_xml(type_manager, xmlfile, blocklist):
+    def in_xml(type_manager, xmlfile, config):
         tree = ET.parse(xmlfile)
         root = tree.getroot()
         for cls in root.findall(".//compounddef[@kind='class']"):
-            yield Class(type_manager, cls, blocklist)
+            yield Class(type_manager, cls, config)
 
-    def __init__(self, type_manager, e, blocklist):
+    def __init__(self, type_manager, e, config):
         self.type_manager = type_manager
         self.name = e.findtext('compoundname')
         self.base = e.findtext('basecompoundref')
         self.methods = []
-        self.__blocklist = blocklist.get(self.name)
+        config = config.get(self.name)
+        self.__blocklist = config['blocklist'] if config else None
         for method in e.findall(".//memberdef[@kind='function']"):
             m = Method(self, method)
             if not m.is_public:
@@ -39,7 +40,7 @@ class Class:
     def unprefixed(self):
         return self.name[2:]
 
-    def blocks(self, name):
+    def is_blocked_method(self, name):
         if self.__blocklist is None:
             return False
         return name in self.__blocklist
@@ -80,7 +81,7 @@ class Method:
         return any(p.type.not_supported() for p in self.params)
 
     def is_blocked(self):
-        return self.cls.blocks(self.name(for_shim=False))
+        return self.cls.is_blocked_method(self.name(for_shim=False))
 
     def _overload_index(self):
         return sum(m.__name == self.__name for m in self.cls.methods)
