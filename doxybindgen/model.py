@@ -48,11 +48,11 @@ class Class:
     def is_trivial(self):
         return self.name in CXX_TRIVIAL_EXTERN_TYPES
 
-    def undoc_base(self):
-        return self.config.get('undoc_base') if self.config else None
+    def internal_base(self):
+        return self.config.get('internal_base') if self.config else None
 
-    def is_undoc_base_method(self, name):
-        methods = self.config.get('undoc_base_methods') if self.config else None
+    def is_internal_base_method(self, name):
+        methods = self.config.get('internal_base_methods') if self.config else None
         if methods:
             return name in methods
         return False
@@ -92,8 +92,8 @@ class Method:
     def is_blocked(self):
         return self.cls.is_blocked_method(self.name(for_shim=False))
     
-    def is_undoc_base(self):
-        return self.cls.is_undoc_base_method(self.name(for_shim=False))
+    def is_internal_base(self):
+        return self.cls.is_internal_base_method(self.name(for_shim=False))
 
     def _overload_index(self):
         return sum(m.__name == self.__name for m in self.cls.methods)
@@ -142,18 +142,18 @@ class Param:
     def is_self(self):
         return self.name == 'self'
     
-    def marshal(self, undoc_base=None):
-        return self.type.marshal(self, undoc_base)
+    def marshal(self, internal_base=None):
+        return self.type.marshal(self, internal_base)
 
-    def rust_ffi_ref(self, rename=None, undoc_base=None):
+    def rust_ffi_ref(self, rename=None, internal_base=None):
         name = rename if rename else self.name
         if self.type.is_trivial():
             return '%s.0' % (name,)
         else:
             as_mut_or_not = '.as_mut()' if self.is_self() else ''
             self_typename = self.type.typename
-            if undoc_base:
-                self_typename = undoc_base
+            if internal_base:
+                self_typename = internal_base
             return '%s.pinned::<ffi::%s>()%s' % (
                 name,
                 self_typename,
@@ -168,7 +168,7 @@ class RustType:
         self.__ctor_retval = ctor_retval
         self.generic_name = None
 
-    def marshal(self, param, undoc_base=None):
+    def marshal(self, param, internal_base=None):
         return None
 
     def in_rust(self, with_ffi=False, binding=False):
@@ -253,9 +253,9 @@ class CxxType:
             return CXX2CXX[self.__srctype]
         return self.__srctype
     
-    def marshal(self, param, undoc_base=None):
+    def marshal(self, param, internal_base=None):
         name = camel_to_snake(param.name)
-        ptype = undoc_base if undoc_base else self.typename
+        ptype = internal_base if internal_base else self.typename
         if self._is_const_ref_to_string():
             yield 'let %s = &crate::ffi::NewString(%s);' % (
                 name,
@@ -264,7 +264,7 @@ class CxxType:
         if self._is_const_ref_to_binding():
             yield 'let %s = &%s;' % (
                 name,
-                param.rust_ffi_ref(undoc_base=undoc_base),
+                param.rust_ffi_ref(internal_base=internal_base),
             )
         if self.is_ptr_to_binding():
             yield 'let %s = match %s {' % (
@@ -273,7 +273,7 @@ class CxxType:
             )
             yield '    Some(r) => Pin::<&mut ffi::%s>::into_inner_unchecked(%s),' % (
                 ptype,
-                param.rust_ffi_ref(rename='r', undoc_base=undoc_base),
+                param.rust_ffi_ref(rename='r', internal_base=internal_base),
             )
             yield '    None => ptr::null_mut(),'
             yield '};'

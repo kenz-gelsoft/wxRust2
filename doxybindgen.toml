@@ -67,8 +67,8 @@ blocklist = [
     'Unbind1',
 ]
 [types.wxWindow]
-undoc_base = 'wxWindowBase'
-undoc_base_methods = [
+internal_base = 'wxWindowBase'
+internal_base_methods = [
     'AddChild',
     'FromDIP',
     'GetHelpTextAtPoint',
