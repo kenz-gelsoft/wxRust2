@@ -116,9 +116,6 @@ class RustMethodBinding:
         self.is_ctor = model.is_ctor
         self.__is_dtor = model.name(for_shim=False).startswith('~')
         self.__self_param = Param(RustType(model.cls.name, model.const), 'self')
-        internal_base = model.cls.internal_base()
-        if internal_base:
-            self.__internal_base_self_param = Param(RustType(internal_base, model.const), 'self')
         # must be name neither self or this
         self.__shim_self = Param(RustType(model.cls.name, model.const), 'self_')
         self.__generic_params = self._make_params_generic()
@@ -278,8 +275,6 @@ class RustMethodBinding:
         if self.__model.is_instance_method:
             if for_shim and self.__model.needs_shim():
                 params.insert(0, self.__shim_self)
-            elif self.__model.is_internal_base():
-                params.insert(0, self.__internal_base_self_param)
             else:
                 params.insert(0, self.__self_param)
         return ', '.join(self._rust_param(p, with_ffi, binding) for p in params)
