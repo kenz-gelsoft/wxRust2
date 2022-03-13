@@ -92,8 +92,10 @@ class Method:
     def is_blocked(self):
         return self.cls.is_blocked_method(self.name(for_shim=False))
     
-    def is_internal_base(self):
-        return self.cls.is_internal_base_method(self.name(for_shim=False))
+    def internal_base(self):
+        if self.cls.is_internal_base_method(self.name(for_shim=False)):
+            return self.cls.internal_base()
+        return None
 
     def _overload_index(self):
         return sum(m.__name == self.__name for m in self.cls.methods)

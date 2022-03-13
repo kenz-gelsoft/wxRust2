@@ -205,9 +205,7 @@ class RustMethodBinding:
         yield '}'
     
     def _binding_body(self):
-        internal_base = None
-        if self.__model.is_internal_base():
-            internal_base = self.__model.cls.internal_base()
+        internal_base = self.__model.internal_base()
 
         for param in self.__model.params:
             marshalling = param.marshal(internal_base=internal_base)
@@ -281,10 +279,11 @@ class RustMethodBinding:
 
     def _rust_param(self, param, with_ffi, binding):
         ptype = param.type
-        if self.__model.is_internal_base() and ptype.typename == self.__model.cls.name:
+        internal_base = self.__model.internal_base()
+        if internal_base and ptype.typename == self.__model.cls.name:
             # Copy and rewrite typename of orig type
             ptype = copy.copy(ptype)
-            ptype.typename = self.__model.cls.internal_base()
+            ptype.typename = internal_base
         typename = ptype.in_rust(with_ffi, binding)
         if binding:
             if param.is_self():
