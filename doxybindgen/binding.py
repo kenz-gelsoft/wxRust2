@@ -1,5 +1,4 @@
 from .model import Param, RustType, prefixed, pascal_to_snake
-import copy
 
 # Known, and problematic
 RUST_KEYWORDS = [
@@ -282,21 +281,20 @@ class RustMethodBinding:
         return ', '.join(self._rust_param(p, with_ffi, binding) for p in params)
 
     def _rust_param(self, param, with_ffi, binding):
-        ptype = param.type
+        rule = None
         internal_base = self.__model.internal_base()
-        if internal_base and ptype.typename == self.__model.cls.name:
-            # Copy and rewrite typename of orig type
-            ptype = copy.copy(ptype)
-            ptype.typename = internal_base
-        typename = ptype.in_rust(with_ffi, binding)
+        if internal_base:
+            rule = { self.__model.cls.name: internal_base }
+        param = param.rewrite(rule)
+        typename = param.type.in_rust(with_ffi, binding)
         if binding:
             if param.is_self():
-                if ptype.is_trivial() and not ptype.const:
+                if param.type.is_trivial() and not param.type.const:
                     return '&mut self'
                 else:
                     return '&self'
-            elif ptype.generic_name:
-                typename = 'Option<&%s>' % (ptype.generic_name,)
+            elif param.type.generic_name:
+                typename = 'Option<&%s>' % (param.type.generic_name,)
         return '%s: %s' % (
             self.non_keyword_name(param.name),
             typename,
