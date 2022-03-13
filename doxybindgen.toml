@@ -67,13 +67,16 @@ blocklist = [
     'Unbind1',
 ]
 [types.wxWindow]
+undoc_base = 'wxWindowBase'
+undoc_base_methods = [
+    'AddChild',
+]
 blocklist = [
     # TODO: treat long correctly
     'Create',
     # enum vs i32
     'GetHelpTextAtPoint',
     # wxWindowBase's methods
-    'AddChild',
     'FindWindow',
     'FromDIP',
     'GetExtraStyle',

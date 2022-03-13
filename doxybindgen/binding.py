@@ -1,5 +1,5 @@
 from .model import Param, RustType, prefixed, pascal_to_snake
-import re
+import copy
 
 # Known, and problematic
 RUST_KEYWORDS = [
@@ -28,6 +28,11 @@ class RustClassBinding:
                 self.__model.name,
                 handwritten,
             )
+            undoc_base = self.__model.undoc_base()
+            if undoc_base:
+                yield 'type %s;' % (
+                    undoc_base,
+                )
         for method in self.__methods:
             for line in method.ffi_lines(for_shim=for_shim):
                 yield line
@@ -111,6 +116,9 @@ class RustMethodBinding:
         self.is_ctor = model.is_ctor
         self.__is_dtor = model.name(for_shim=False).startswith('~')
         self.__self_param = Param(RustType(model.cls.name, model.const), 'self')
+        undoc_base = model.cls.undoc_base()
+        if undoc_base:
+            self.__undoc_base_self_param = Param(RustType(undoc_base, model.const), 'self')
         # must be name neither self or this
         self.__shim_self = Param(RustType(model.cls.name, model.const), 'self_')
         self.__generic_params = self._make_params_generic()
@@ -200,15 +208,19 @@ class RustMethodBinding:
         yield '}'
     
     def _binding_body(self):
+        undoc_base = None
+        if self.__model.is_undoc_base():
+            undoc_base = self.__model.cls.undoc_base()
+
         for param in self.__model.params:
-            marshalling = param.marshal()
+            marshalling = param.marshal(undoc_base=undoc_base)
             if marshalling:
                 for line in marshalling:
                     yield '%s' % (line,)
         name = prefixed(self.__model.name(for_shim=True), with_ffi=True)
         self_to_insert = None
         if self.__model.is_instance_method:
-            self_param = self.__self_param.rust_ffi_ref()
+            self_param = self.__self_param.rust_ffi_ref(undoc_base=undoc_base)
             if self.__model.needs_shim():
                 if self.__model.const:
                     self_param = '&' + self_param
@@ -266,20 +278,27 @@ class RustMethodBinding:
         if self.__model.is_instance_method:
             if for_shim and self.__model.needs_shim():
                 params.insert(0, self.__shim_self)
+            elif self.__model.is_undoc_base():
+                params.insert(0, self.__undoc_base_self_param)
             else:
                 params.insert(0, self.__self_param)
         return ', '.join(self._rust_param(p, with_ffi, binding) for p in params)
 
     def _rust_param(self, param, with_ffi, binding):
-        typename = param.type.in_rust(with_ffi, binding)
+        ptype = param.type
+        if self.__model.is_undoc_base() and ptype.typename == self.__model.cls.name:
+            # Copy and rewrite typename of orig type
+            ptype = copy.copy(ptype)
+            ptype.typename = self.__model.cls.undoc_base()
+        typename = ptype.in_rust(with_ffi, binding)
         if binding:
             if param.is_self():
-                if param.type.is_trivial() and not param.type.const:
+                if ptype.is_trivial() and not ptype.const:
                     return '&mut self'
                 else:
                     return '&self'
-            elif param.type.generic_name:
-                typename = 'Option<&%s>' % (param.type.generic_name,)
+            elif ptype.generic_name:
+                typename = 'Option<&%s>' % (ptype.generic_name,)
         return '%s: %s' % (
             self.non_keyword_name(param.name),
             typename,

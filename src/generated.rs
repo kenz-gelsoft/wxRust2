@@ -108,6 +108,7 @@ mod ffi {
         
         // CLASS: wxWindow
         type wxWindow;
+        type wxWindowBase;
         fn AcceptsFocus(self: &wxWindow) -> bool;
         fn AcceptsFocusFromKeyboard(self: &wxWindow) -> bool;
         fn AcceptsFocusRecursively(self: &wxWindow) -> bool;
@@ -120,7 +121,7 @@ mod ffi {
         fn EnableVisibleFocus(self: Pin<&mut wxWindow>, enable: bool);
         fn SetFocus(self: Pin<&mut wxWindow>);
         fn SetFocusFromKbd(self: Pin<&mut wxWindow>);
-        // BLOCKED: unsafe fn AddChild(self: Pin<&mut wxWindow>, child: *mut wxWindow);
+        unsafe fn AddChild(self: Pin<&mut wxWindowBase>, child: *mut wxWindowBase);
         fn DestroyChildren(self: Pin<&mut wxWindow>) -> bool;
         // BLOCKED: fn FindWindow(self: &wxWindow, id: i32) -> *mut wxWindow;
         #[rust_name = "FindWindow1"]
@@ -1029,7 +1030,15 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn set_focus_from_kbd(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().SetFocusFromKbd()
     }
-    // BLOCKED: fn AddChild()
+    fn add_child<T: WindowMethods>(&self, child: Option<&T>) {
+        unsafe {
+            let child = match child {
+                Some(r) => Pin::<&mut ffi::wxWindowBase>::into_inner_unchecked(r.pinned::<ffi::wxWindowBase>()),
+                None => ptr::null_mut(),
+            };
+            self.pinned::<ffi::wxWindowBase>().as_mut().AddChild(child)
+        }
+    }
     fn destroy_children(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().DestroyChildren()
     }
