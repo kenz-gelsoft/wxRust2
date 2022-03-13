@@ -118,7 +118,12 @@ class RustMethodBinding:
         # must be name neither self or this
         self.__shim_self = Param(RustType(model.cls.name, model.const), 'self_')
         self.__generic_params = self._make_params_generic()
-    
+
+        self.__rewrite_rule = None
+        internal_base = self.__model.internal_base()
+        if internal_base:
+            self.__rewrite_rule = { self.__model.cls.name: internal_base }
+
     def is_blocked(self):
         return self.__model.is_blocked()
 
@@ -204,12 +209,7 @@ class RustMethodBinding:
         yield '}'
     
     def _binding_body(self):
-        rule = None
-        internal_base = self.__model.internal_base()
-        if internal_base:
-            rule = { self.__model.cls.name: internal_base }
-        
-        params = [p.rewrite(rule) for p in self.__model.params]
+        params = [p.rewrite(self.__rewrite_rule) for p in self.__model.params]
         for param in params:
             marshalling = param.marshal()
             if marshalling:
@@ -218,7 +218,8 @@ class RustMethodBinding:
         name = prefixed(self.__model.name(for_shim=True), with_ffi=True)
         self_to_insert = None
         if self.__model.is_instance_method:
-            self_param = self.__self_param.rewrite(rule).rust_ffi_ref()
+            self_param = self.__self_param.rewrite(self.__rewrite_rule)
+            self_param = self_param.rust_ffi_ref()
             if self.__model.needs_shim():
                 if self.__model.const:
                     self_param = '&' + self_param
@@ -278,14 +279,10 @@ class RustMethodBinding:
                 params.insert(0, self.__shim_self)
             else:
                 params.insert(0, self.__self_param)
+        params = (p.rewrite(self.__rewrite_rule) for p in params)
         return ', '.join(self._rust_param(p, with_ffi, binding) for p in params)
 
     def _rust_param(self, param, with_ffi, binding):
-        rule = None
-        internal_base = self.__model.internal_base()
-        if internal_base:
-            rule = { self.__model.cls.name: internal_base }
-        param = param.rewrite(rule)
         typename = param.type.in_rust(with_ffi, binding)
         if binding:
             if param.is_self():
