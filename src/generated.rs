@@ -128,13 +128,13 @@ mod ffi {
         fn FindWindow(self: &wxWindow, name: &wxString) -> *mut wxWindow;
         // BLOCKED: fn GetChildren(self: Pin<&mut wxWindow>) -> Pin<&mut wxWindowList>;
         // BLOCKED: fn GetChildren(self: &wxWindow) -> &wxWindowList;
-        // BLOCKED: unsafe fn RemoveChild(self: Pin<&mut wxWindow>, child: *mut wxWindow);
+        unsafe fn RemoveChild(self: Pin<&mut wxWindowBase>, child: *mut wxWindowBase);
         fn GetGrandParent(self: &wxWindow) -> *mut wxWindow;
         fn GetNextSibling(self: &wxWindow) -> *mut wxWindow;
         fn GetParent(self: &wxWindow) -> *mut wxWindow;
         fn GetPrevSibling(self: &wxWindow) -> *mut wxWindow;
-        // BLOCKED: unsafe fn IsDescendant(self: &wxWindow, win: *mut wxWindow) -> bool;
-        // BLOCKED: unsafe fn Reparent(self: Pin<&mut wxWindow>, new_parent: *mut wxWindow) -> bool;
+        unsafe fn IsDescendant(self: &wxWindowBase, win: *mut wxWindowBase) -> bool;
+        unsafe fn Reparent(self: Pin<&mut wxWindowBase>, new_parent: *mut wxWindowBase) -> bool;
         fn AlwaysShowScrollbars(self: Pin<&mut wxWindow>, hflag: bool, vflag: bool);
         fn GetScrollPos(self: &wxWindow, orientation: i32) -> i32;
         fn GetScrollRange(self: &wxWindow, orientation: i32) -> i32;
@@ -158,7 +158,7 @@ mod ffi {
         fn WindowToClientSize(self: &wxWindow, size: &wxSize) -> wxSize;
         fn Fit(self: Pin<&mut wxWindow>);
         fn FitInside(self: Pin<&mut wxWindow>);
-        // BLOCKED: fn FromDIP(self: &wxWindow, sz: &wxSize) -> wxSize;
+        fn FromDIP(self: &wxWindowBase, sz: &wxSize) -> wxSize;
         #[rust_name = "FromDIP1"]
         fn FromDIP(self: &wxWindow, pt: &wxPoint) -> wxPoint;
         #[rust_name = "FromDIP2"]
@@ -166,7 +166,8 @@ mod ffi {
         fn ToDIP(self: &wxWindow, sz: &wxSize) -> wxSize;
         #[rust_name = "ToDIP1"]
         fn ToDIP(self: &wxWindow, pt: &wxPoint) -> wxPoint;
-        // BLOCKED: fn ToDIP(self: &wxWindow, d: i32) -> i32;
+        #[rust_name = "ToDIP2"]
+        fn ToDIP(self: &wxWindowBase, d: i32) -> i32;
         fn GetBestSize(self: &wxWindow) -> wxSize;
         fn GetBestHeight(self: &wxWindow, width: i32) -> i32;
         fn GetBestWidth(self: &wxWindow, height: i32) -> i32;
@@ -339,7 +340,7 @@ mod ffi {
         // CXX_UNSUPPORTED: fn ShowWithEffect(self: Pin<&mut wxWindow>, effect: wxShowEffect, timeout: u32) -> bool;
         // GENERATED: fn GetHelpText(self: &wxWindow) -> String;
         fn SetHelpText(self: Pin<&mut wxWindow>, help_text: &wxString);
-        // BLOCKED: fn GetHelpTextAtPoint(self: &wxWindow, point: &wxPoint, origin: wxHelpEvent::Origin) -> String;
+        // CXX_UNSUPPORTED: fn GetHelpTextAtPoint(self: &wxWindowBase, point: &wxPoint, origin: wxHelpEvent::Origin) -> String;
         fn GetToolTip(self: &wxWindow) -> *mut wxToolTip;
         // GENERATED: fn GetToolTipText(self: &wxWindow) -> String;
         fn SetToolTip(self: Pin<&mut wxWindow>, tip_string: &wxString);
@@ -1049,7 +1050,15 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     // BLOCKED: fn GetChildren()
     // BLOCKED: fn GetChildren1()
-    // BLOCKED: fn RemoveChild()
+    fn remove_child<T: WindowMethods>(&self, child: Option<&T>) {
+        unsafe {
+            let child = match child {
+                Some(r) => Pin::<&mut ffi::wxWindowBase>::into_inner_unchecked(r.pinned::<ffi::wxWindowBase>()),
+                None => ptr::null_mut(),
+            };
+            self.pinned::<ffi::wxWindowBase>().as_mut().RemoveChild(child)
+        }
+    }
     fn get_grand_parent(&self) -> *mut ffi::wxWindow {
         self.pinned::<ffi::wxWindow>().as_mut().GetGrandParent()
     }
@@ -1062,8 +1071,24 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn get_prev_sibling(&self) -> *mut ffi::wxWindow {
         self.pinned::<ffi::wxWindow>().as_mut().GetPrevSibling()
     }
-    // BLOCKED: fn IsDescendant()
-    // BLOCKED: fn Reparent()
+    fn is_descendant<T: WindowMethods>(&self, win: Option<&T>) -> bool {
+        unsafe {
+            let win = match win {
+                Some(r) => Pin::<&mut ffi::wxWindowBase>::into_inner_unchecked(r.pinned::<ffi::wxWindowBase>()),
+                None => ptr::null_mut(),
+            };
+            self.pinned::<ffi::wxWindowBase>().as_mut().IsDescendant(win)
+        }
+    }
+    fn reparent<T: WindowMethods>(&self, new_parent: Option<&T>) -> bool {
+        unsafe {
+            let new_parent = match new_parent {
+                Some(r) => Pin::<&mut ffi::wxWindowBase>::into_inner_unchecked(r.pinned::<ffi::wxWindowBase>()),
+                None => ptr::null_mut(),
+            };
+            self.pinned::<ffi::wxWindowBase>().as_mut().Reparent(new_parent)
+        }
+    }
     fn always_show_scrollbars(&self, hflag: bool, vflag: bool) {
         self.pinned::<ffi::wxWindow>().as_mut().AlwaysShowScrollbars(hflag, vflag)
     }
@@ -1136,7 +1161,10 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn fit_inside(&self) {
         self.pinned::<ffi::wxWindow>().as_mut().FitInside()
     }
-    // BLOCKED: fn FromDIP()
+    fn from_dip(&self, sz: &Size) -> Size {
+        let sz = &sz.0;
+        Size(self.pinned::<ffi::wxWindowBase>().as_mut().FromDIP(sz))
+    }
     fn from_dip1(&self, pt: &Point) -> Point {
         let pt = &pt.0;
         Point(self.pinned::<ffi::wxWindow>().as_mut().FromDIP1(pt))
@@ -1152,7 +1180,9 @@ pub trait WindowMethods: EvtHandlerMethods {
         let pt = &pt.0;
         Point(self.pinned::<ffi::wxWindow>().as_mut().ToDIP1(pt))
     }
-    // BLOCKED: fn ToDIP2()
+    fn to_dip2(&self, d: i32) -> i32 {
+        self.pinned::<ffi::wxWindowBase>().as_mut().ToDIP2(d)
+    }
     fn get_best_size(&self) -> Size {
         Size(self.pinned::<ffi::wxWindow>().as_mut().GetBestSize())
     }
@@ -1687,7 +1717,7 @@ pub trait WindowMethods: EvtHandlerMethods {
         let help_text = &crate::ffi::NewString(help_text);
         self.pinned::<ffi::wxWindow>().as_mut().SetHelpText(help_text)
     }
-    // BLOCKED: fn GetHelpTextAtPoint()
+    // CXX_UNSUPPORTED: fn GetHelpTextAtPoint()
     fn get_tool_tip(&self) -> *mut ffi::wxToolTip {
         self.pinned::<ffi::wxWindow>().as_mut().GetToolTip()
     }
