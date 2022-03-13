@@ -67,29 +67,34 @@ blocklist = [
     'Unbind1',
 ]
 [types.wxWindow]
+internal_base = 'wxWindowBase'
+internal_base_methods = [
+    'AddChild',
+    'FromDIP',
+    'GetHelpTextAtPoint',
+    'IsDescendant',
+    'RemoveChild',
+    'Reparent',
+    'ToDIP2',
+]
 blocklist = [
     # TODO: treat long correctly
     'Create',
-    # enum vs i32
-    'GetHelpTextAtPoint',
-    # wxWindowBase's methods
-    'AddChild',
     'FindWindow',
-    'FromDIP',
     'GetExtraStyle',
     'GetWindowStyle',
     'GetWindowStyleFlag',
-    'IsDescendant',
-    'IsExposed1',
-    'IsExposed3',
-    'RemoveChild',
-    'Reparent',
     'SetExtraStyle',
-    'SetSize1',
     'SetWindowStyle',
     'SetWindowStyleFlag',
-    'ToDIP2',
     'UpdateWindowUI',
+
+    # Additional arg with default value (maybe needs shim)
+    'SetSize1',
+
+    # Incorrect const-ness
+    'IsExposed1',
+    'IsExposed3',
 
     # TODO: dont return reference/temp value from self
     'GetChildren',

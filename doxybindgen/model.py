@@ -1,5 +1,5 @@
 import xml.etree.ElementTree as ET
-import re
+import copy, re
 
 CXX2CXX = {
     'long': 'int32_t',
@@ -16,7 +16,6 @@ CXX2RUST = {
     'wxWindowID': 'i32',
 }
 
-
 class Class:
     def in_xml(type_manager, xmlfile, config):
         tree = ET.parse(xmlfile)
@@ -31,6 +30,7 @@ class Class:
         self.methods = []
         config = config.get(self.name)
         self.__blocklist = config['blocklist'] if config else None
+        self.config = config
         for method in e.findall(".//memberdef[@kind='function']"):
             m = Method(self, method)
             if not m.is_public:
@@ -47,6 +47,15 @@ class Class:
     
     def is_trivial(self):
         return self.name in CXX_TRIVIAL_EXTERN_TYPES
+
+    def internal_base(self):
+        return self.config.get('internal_base') if self.config else None
+
+    def is_internal_base_method(self, name):
+        methods = self.config.get('internal_base_methods') if self.config else None
+        if methods:
+            return name in methods
+        return False
 
 
 class Method:
@@ -82,6 +91,11 @@ class Method:
 
     def is_blocked(self):
         return self.cls.is_blocked_method(self.name(for_shim=False))
+    
+    def internal_base(self):
+        if self.cls.is_internal_base_method(self.name(for_shim=False)):
+            return self.cls.internal_base()
+        return None
 
     def _overload_index(self):
         return sum(m.__name == self.__name for m in self.cls.methods)
@@ -144,6 +158,13 @@ class Param:
                 self.type.typename,
                 as_mut_or_not,
             )
+    
+    def rewrite(self, rule=None):
+        if rule and self.type.typename in rule:
+            type = copy.copy(self.type)
+            type.typename = rule[self.type.typename]
+            return Param(type, self.name)
+        return self
 
 
 class RustType:
