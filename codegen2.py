@@ -16,7 +16,9 @@ def main():
         for cls in Class.in_xml(type_manager, file, config['types']):
             classes.append(cls)
     # Set known binding(name)s once all classes parsed.
-    type_manager.known_bindings = [cls.name for cls in classes]
+    known_bindings = [cls.name for cls in classes]
+    known_bindings.extend(cls.internal_base() for cls in classes)
+    type_manager.known_bindings = known_bindings
     
     to_be_generated = {
         'src/generated.rs': generated_rs,

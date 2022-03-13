@@ -1,5 +1,5 @@
 import xml.etree.ElementTree as ET
-import re
+import copy, re
 
 CXX2CXX = {
     'long': 'int32_t',
@@ -144,23 +144,27 @@ class Param:
     def is_self(self):
         return self.name == 'self'
     
-    def marshal(self, internal_base=None):
-        return self.type.marshal(self, internal_base)
+    def marshal(self):
+        return self.type.marshal(self)
 
-    def rust_ffi_ref(self, rename=None, internal_base=None):
+    def rust_ffi_ref(self, rename=None):
         name = rename if rename else self.name
         if self.type.is_trivial():
             return '%s.0' % (name,)
         else:
             as_mut_or_not = '.as_mut()' if self.is_self() else ''
-            self_typename = self.type.typename
-            if internal_base:
-                self_typename = internal_base
             return '%s.pinned::<ffi::%s>()%s' % (
                 name,
-                self_typename,
+                self.type.typename,
                 as_mut_or_not,
             )
+    
+    def rewrite(self, rule=None):
+        if rule and self.type.typename in rule:
+            type = copy.copy(self.type)
+            type.typename = rule[self.type.typename]
+            return Param(type, self.name)
+        return self
 
 
 class RustType:
@@ -170,7 +174,7 @@ class RustType:
         self.__ctor_retval = ctor_retval
         self.generic_name = None
 
-    def marshal(self, param, internal_base=None):
+    def marshal(self, param):
         return None
 
     def in_rust(self, with_ffi=False, binding=False):
@@ -255,9 +259,8 @@ class CxxType:
             return CXX2CXX[self.__srctype]
         return self.__srctype
     
-    def marshal(self, param, internal_base=None):
+    def marshal(self, param):
         name = camel_to_snake(param.name)
-        ptype = internal_base if internal_base else self.typename
         if self._is_const_ref_to_string():
             yield 'let %s = &crate::ffi::NewString(%s);' % (
                 name,
@@ -266,7 +269,7 @@ class CxxType:
         if self._is_const_ref_to_binding():
             yield 'let %s = &%s;' % (
                 name,
-                param.rust_ffi_ref(internal_base=internal_base),
+                param.rust_ffi_ref(),
             )
         if self.is_ptr_to_binding():
             yield 'let %s = match %s {' % (
@@ -274,8 +277,8 @@ class CxxType:
                 name,
             )
             yield '    Some(r) => Pin::<&mut ffi::%s>::into_inner_unchecked(%s),' % (
-                ptype,
-                param.rust_ffi_ref(rename='r', internal_base=internal_base),
+                self.typename,
+                param.rust_ffi_ref(rename='r'),
             )
             yield '    None => ptr::null_mut(),'
             yield '};'

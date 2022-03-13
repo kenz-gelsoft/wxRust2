@@ -205,17 +205,21 @@ class RustMethodBinding:
         yield '}'
     
     def _binding_body(self):
+        rule = None
         internal_base = self.__model.internal_base()
-
-        for param in self.__model.params:
-            marshalling = param.marshal(internal_base=internal_base)
+        if internal_base:
+            rule = { self.__model.cls.name: internal_base }
+        
+        params = [p.rewrite(rule) for p in self.__model.params]
+        for param in params:
+            marshalling = param.marshal()
             if marshalling:
                 for line in marshalling:
                     yield '%s' % (line,)
         name = prefixed(self.__model.name(for_shim=True), with_ffi=True)
         self_to_insert = None
         if self.__model.is_instance_method:
-            self_param = self.__self_param.rust_ffi_ref(internal_base=internal_base)
+            self_param = self.__self_param.rewrite(rule).rust_ffi_ref()
             if self.__model.needs_shim():
                 if self.__model.const:
                     self_param = '&' + self_param
@@ -227,12 +231,12 @@ class RustMethodBinding:
                 )
         call = '%s(%s)' % (
             name,
-            self._call_params(self_to_insert),
+            self._call_params(params, self_to_insert),
         )
         yield self._wrap_return_type(call)
     
-    def _call_params(self, self_to_insert):
-        params = [self.non_keyword_name(p.name) for p in self.__model.params]
+    def _call_params(self, params, self_to_insert):
+        params = [self.non_keyword_name(p.name) for p in params]
         if self_to_insert:
             params.insert(0, self_to_insert)
         return ', '.join(params)
