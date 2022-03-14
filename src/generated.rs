@@ -123,7 +123,7 @@ mod ffi {
         fn SetFocusFromKbd(self: Pin<&mut wxWindow>);
         unsafe fn AddChild(self: Pin<&mut wxWindowBase>, child: *mut wxWindowBase);
         fn DestroyChildren(self: Pin<&mut wxWindow>) -> bool;
-        // BLOCKED: fn FindWindow(self: &wxWindow, id: i32) -> *mut wxWindow;
+        // GENERATED: fn FindWindow(self: &wxWindow, id: i32) -> *mut wxWindow;
         #[rust_name = "FindWindow1"]
         fn FindWindow(self: &wxWindow, name: &wxString) -> *mut wxWindow;
         // BLOCKED: fn GetChildren(self: Pin<&mut wxWindow>) -> Pin<&mut wxWindowList>;
@@ -211,7 +211,7 @@ mod ffi {
         fn SetMinClientSize(self: Pin<&mut wxWindow>, size: &wxSize);
         fn SetMinSize(self: Pin<&mut wxWindow>, size: &wxSize);
         fn SetSize(self: Pin<&mut wxWindow>, x: i32, y: i32, width: i32, height: i32, size_flags: i32);
-        // BLOCKED: fn SetSize(self: Pin<&mut wxWindow>, rect: &wxRect);
+        // GENERATED: fn SetSize(self: Pin<&mut wxWindow>, rect: &wxRect);
         #[rust_name = "SetSize2"]
         fn SetSize(self: Pin<&mut wxWindow>, size: &wxSize);
         #[rust_name = "SetSize3"]
@@ -309,14 +309,14 @@ mod ffi {
         unsafe fn SetEventHandler(self: Pin<&mut wxWindow>, handler: *mut wxEvtHandler);
         unsafe fn SetNextHandler(self: Pin<&mut wxWindow>, handler: *mut wxEvtHandler);
         unsafe fn SetPreviousHandler(self: Pin<&mut wxWindow>, handler: *mut wxEvtHandler);
-        // BLOCKED: fn GetExtraStyle(self: &wxWindow) -> i32;
-        // BLOCKED: fn GetWindowStyleFlag(self: &wxWindow) -> i32;
-        // BLOCKED: fn GetWindowStyle(self: &wxWindow) -> i32;
+        // GENERATED: fn GetExtraStyle(self: &wxWindow) -> i32;
+        // GENERATED: fn GetWindowStyleFlag(self: &wxWindow) -> i32;
+        // GENERATED: fn GetWindowStyle(self: &wxWindow) -> i32;
         fn HasExtraStyle(self: &wxWindow, ex_flag: i32) -> bool;
         fn HasFlag(self: &wxWindow, flag: i32) -> bool;
-        // BLOCKED: fn SetExtraStyle(self: Pin<&mut wxWindow>, ex_style: i32);
-        // BLOCKED: fn SetWindowStyleFlag(self: Pin<&mut wxWindow>, style: i32);
-        // BLOCKED: fn SetWindowStyle(self: Pin<&mut wxWindow>, style: i32);
+        // GENERATED: fn SetExtraStyle(self: Pin<&mut wxWindow>, ex_style: i32);
+        // GENERATED: fn SetWindowStyleFlag(self: Pin<&mut wxWindow>, style: i32);
+        // GENERATED: fn SetWindowStyle(self: Pin<&mut wxWindow>, style: i32);
         fn ToggleWindowStyle(self: Pin<&mut wxWindow>, flag: i32) -> bool;
         unsafe fn MoveAfterInTabOrder(self: Pin<&mut wxWindow>, win: *mut wxWindow);
         unsafe fn MoveBeforeInTabOrder(self: Pin<&mut wxWindow>, win: *mut wxWindow);
@@ -328,10 +328,10 @@ mod ffi {
         // CXX_UNSUPPORTED: fn HideWithEffect(self: Pin<&mut wxWindow>, effect: wxShowEffect, timeout: u32) -> bool;
         fn IsEnabled(self: &wxWindow) -> bool;
         fn IsExposed(self: &wxWindow, x: i32, y: i32) -> bool;
-        // BLOCKED: fn IsExposed(self: &wxWindow, pt: &mut wxPoint) -> bool;
+        // GENERATED: fn IsExposed(self: &wxWindow, pt: &mut wxPoint) -> bool;
         #[rust_name = "IsExposed2"]
         fn IsExposed(self: &wxWindow, x: i32, y: i32, w: i32, h: i32) -> bool;
-        // BLOCKED: fn IsExposed(self: &wxWindow, rect: &mut wxRect) -> bool;
+        // GENERATED: fn IsExposed(self: &wxWindow, rect: &mut wxRect) -> bool;
         fn IsShown(self: &wxWindow) -> bool;
         fn IsShownOnScreen(self: &wxWindow) -> bool;
         fn Disable(self: Pin<&mut wxWindow>) -> bool;
@@ -415,7 +415,7 @@ mod ffi {
         fn SendIdleEvents(self: Pin<&mut wxWindow>, event: Pin<&mut wxIdleEvent>) -> bool;
         fn RegisterHotKey(self: Pin<&mut wxWindow>, hotkey_id: i32, modifiers: i32, virtual_key_code: i32) -> bool;
         fn UnregisterHotKey(self: Pin<&mut wxWindow>, hotkey_id: i32) -> bool;
-        // BLOCKED: fn UpdateWindowUI(self: Pin<&mut wxWindow>, flags: i32);
+        // GENERATED: fn UpdateWindowUI(self: Pin<&mut wxWindow>, flags: i32);
         // CXX_UNSUPPORTED: fn GetClassDefaultAttributes(variant: wxWindowVariant) -> wxVisualAttributes;
         // GENERATED: fn FindFocus() -> *mut wxWindow;
         // GENERATED: unsafe fn FindWindowById(id: i32, parent: *const wxWindow) -> *mut wxWindow;
@@ -427,13 +427,13 @@ mod ffi {
         // CTOR: fn wxWindow() -> Window;
         // CTOR: unsafe fn wxWindow(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> Window;
         // DTOR: fn ~wxWindow(self: Pin<&mut wxWindow>);
-        // BLOCKED: unsafe fn Create(self: Pin<&mut wxWindow>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
+        // GENERATED: unsafe fn Create(self: Pin<&mut wxWindow>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
         
         // CLASS: wxControl
         type wxControl;
         // CTOR: unsafe fn wxControl(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> Control;
         // CTOR: fn wxControl() -> Control;
-        // BLOCKED: unsafe fn Create(self: Pin<&mut wxControl>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
+        // GENERATED: unsafe fn Create(self: Pin<&mut wxControl>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
         fn Command(self: Pin<&mut wxControl>, event: Pin<&mut wxCommandEvent>);
         // GENERATED: fn GetLabel(self: &wxControl) -> String;
         // GENERATED: fn GetLabelText(self: &wxControl) -> String;
@@ -475,7 +475,7 @@ mod ffi {
         type wxButton;
         // CTOR: fn wxButton() -> Button;
         // CTOR: unsafe fn wxButton(parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> Button;
-        // BLOCKED: unsafe fn Create(self: Pin<&mut wxButton>, parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
+        // GENERATED: unsafe fn Create(self: Pin<&mut wxButton>, parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
         fn GetAuthNeeded(self: &wxButton) -> bool;
         // GENERATED: fn GetLabel(self: &wxButton) -> String;
         fn SetAuthNeeded(self: Pin<&mut wxButton>, needed: bool);
@@ -494,7 +494,7 @@ mod ffi {
         // CTOR: fn wxTopLevelWindow() -> TopLevelWindow;
         // CTOR: unsafe fn wxTopLevelWindow(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> TopLevelWindow;
         // DTOR: fn ~wxTopLevelWindow(self: Pin<&mut wxTopLevelWindow>);
-        // BLOCKED: unsafe fn Create(self: Pin<&mut wxTopLevelWindow>, parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
+        // GENERATED: unsafe fn Create(self: Pin<&mut wxTopLevelWindow>, parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
         fn CanSetTransparent(self: Pin<&mut wxTopLevelWindow>) -> bool;
         fn CenterOnScreen(self: Pin<&mut wxTopLevelWindow>, direction: i32);
         fn CentreOnScreen(self: Pin<&mut wxTopLevelWindow>, direction: i32);
@@ -537,7 +537,7 @@ mod ffi {
         fn SetRepresentedFilename(self: Pin<&mut wxTopLevelWindow>, filename: &wxString);
         fn ShowWithoutActivating(self: Pin<&mut wxTopLevelWindow>);
         fn EnableFullScreenView(self: Pin<&mut wxTopLevelWindow>, enable: bool) -> bool;
-        // BLOCKED: fn ShowFullScreen(self: Pin<&mut wxTopLevelWindow>, show: bool, style: i32) -> bool;
+        // GENERATED: fn ShowFullScreen(self: Pin<&mut wxTopLevelWindow>, show: bool, style: i32) -> bool;
         // BLOCKED: fn UseNativeDecorations(self: Pin<&mut wxTopLevelWindow>, native: bool);
         // BLOCKED: fn UseNativeDecorationsByDefault(self: Pin<&mut wxTopLevelWindow>, native: bool);
         // GENERATED: fn GetDefaultSize() -> wxSize;
@@ -548,17 +548,17 @@ mod ffi {
         // CTOR: unsafe fn wxFrame(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> Frame;
         // DTOR: fn ~wxFrame(self: Pin<&mut wxFrame>);
         fn Centre(self: Pin<&mut wxFrame>, direction: i32);
-        // BLOCKED: unsafe fn Create(self: Pin<&mut wxFrame>, parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
-        // BLOCKED: fn CreateStatusBar(self: Pin<&mut wxFrame>, number: i32, style: i32, id: i32, name: &wxString) -> *mut wxStatusBar;
-        // BLOCKED: fn CreateToolBar(self: Pin<&mut wxFrame>, style: i32, id: i32, name: &wxString) -> *mut wxToolBar;
+        // GENERATED: unsafe fn Create(self: Pin<&mut wxFrame>, parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
+        // GENERATED: fn CreateStatusBar(self: Pin<&mut wxFrame>, number: i32, style: i32, id: i32, name: &wxString) -> *mut wxStatusBar;
+        // GENERATED: fn CreateToolBar(self: Pin<&mut wxFrame>, style: i32, id: i32, name: &wxString) -> *mut wxToolBar;
         fn DoGiveHelp(self: Pin<&mut wxFrame>, text: &wxString, show: bool);
         fn GetClientAreaOrigin(self: &wxFrame) -> wxPoint;
         fn GetMenuBar(self: &wxFrame) -> *mut wxMenuBar;
         fn GetStatusBar(self: &wxFrame) -> *mut wxStatusBar;
         fn GetStatusBarPane(self: &wxFrame) -> i32;
         fn GetToolBar(self: &wxFrame) -> *mut wxToolBar;
-        // BLOCKED: fn OnCreateStatusBar(self: Pin<&mut wxFrame>, number: i32, style: i32, id: i32, name: &wxString) -> *mut wxStatusBar;
-        // BLOCKED: fn OnCreateToolBar(self: Pin<&mut wxFrame>, style: i32, id: i32, name: &wxString) -> *mut wxToolBar;
+        // GENERATED: fn OnCreateStatusBar(self: Pin<&mut wxFrame>, number: i32, style: i32, id: i32, name: &wxString) -> *mut wxStatusBar;
+        // GENERATED: fn OnCreateToolBar(self: Pin<&mut wxFrame>, style: i32, id: i32, name: &wxString) -> *mut wxToolBar;
         fn ProcessCommand(self: Pin<&mut wxFrame>, id: i32) -> bool;
         unsafe fn SetMenuBar(self: Pin<&mut wxFrame>, menu_bar: *mut wxMenuBar);
         unsafe fn SetStatusBar(self: Pin<&mut wxFrame>, status_bar: *mut wxStatusBar);
@@ -731,6 +731,9 @@ mod ffi {
         unsafe fn wxEvtHandler_RemoveFilter(filter: *mut wxEventFilter);
         fn NewEvtHandler() -> *mut wxEvtHandler;
         // CLASS: wxWindow
+        fn wxWindow_FindWindow(self_: &wxWindow, id: i32) -> *mut wxWindow;
+        #[rust_name = "wxWindow_SetSize1"]
+        fn wxWindow_SetSize(self_: Pin<&mut wxWindow>, rect: &wxRect);
         #[rust_name = "wxWindow_FromDIP3"]
         unsafe fn wxWindow_FromDIP(sz: &wxSize, w: *const wxWindow) -> wxSize;
         #[rust_name = "wxWindow_FromDIP4"]
@@ -743,10 +746,21 @@ mod ffi {
         unsafe fn wxWindow_ToDIP(pt: &wxPoint, w: *const wxWindow) -> wxPoint;
         #[rust_name = "wxWindow_ToDIP5"]
         unsafe fn wxWindow_ToDIP(d: i32, w: *const wxWindow) -> i32;
+        fn wxWindow_GetExtraStyle(self_: &wxWindow) -> i32;
+        fn wxWindow_GetWindowStyleFlag(self_: &wxWindow) -> i32;
+        fn wxWindow_GetWindowStyle(self_: &wxWindow) -> i32;
+        fn wxWindow_SetExtraStyle(self_: Pin<&mut wxWindow>, ex_style: i32);
+        fn wxWindow_SetWindowStyleFlag(self_: Pin<&mut wxWindow>, style: i32);
+        fn wxWindow_SetWindowStyle(self_: Pin<&mut wxWindow>, style: i32);
+        #[rust_name = "wxWindow_IsExposed1"]
+        fn wxWindow_IsExposed(self_: &wxWindow, pt: &mut wxPoint) -> bool;
+        #[rust_name = "wxWindow_IsExposed3"]
+        fn wxWindow_IsExposed(self_: &wxWindow, rect: &mut wxRect) -> bool;
         fn wxWindow_GetHelpText(self_: &wxWindow) -> String;
         fn wxWindow_GetToolTipText(self_: &wxWindow) -> String;
         fn wxWindow_GetLabel(self_: &wxWindow) -> String;
         fn wxWindow_GetName(self_: &wxWindow) -> String;
+        fn wxWindow_UpdateWindowUI(self_: Pin<&mut wxWindow>, flags: i32);
         fn wxWindow_FindFocus() -> *mut wxWindow;
         unsafe fn wxWindow_FindWindowById(id: i32, parent: *const wxWindow) -> *mut wxWindow;
         unsafe fn wxWindow_FindWindowByLabel(label: &wxString, parent: *const wxWindow) -> *mut wxWindow;
@@ -757,10 +771,12 @@ mod ffi {
         fn NewWindow() -> *mut wxWindow;
         #[rust_name = "NewWindow1"]
         unsafe fn NewWindow(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxWindow;
+        unsafe fn wxWindow_Create(self_: Pin<&mut wxWindow>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
         // CLASS: wxControl
         unsafe fn NewControl(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> *mut wxControl;
         #[rust_name = "NewControl1"]
         fn NewControl() -> *mut wxControl;
+        unsafe fn wxControl_Create(self_: Pin<&mut wxControl>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
         fn wxControl_GetLabel(self_: &wxControl) -> String;
         fn wxControl_GetLabelText(self_: &wxControl) -> String;
         #[rust_name = "wxControl_GetLabelText1"]
@@ -773,6 +789,7 @@ mod ffi {
         fn NewButton() -> *mut wxButton;
         #[rust_name = "NewButton1"]
         unsafe fn NewButton(parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> *mut wxButton;
+        unsafe fn wxButton_Create(self_: Pin<&mut wxButton>, parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
         fn wxButton_GetLabel(self_: &wxButton) -> String;
         unsafe fn wxButton_GetDefaultSize(win: *mut wxWindow) -> wxSize;
         // CLASS: wxNonOwnedWindow
@@ -780,12 +797,19 @@ mod ffi {
         fn NewTopLevelWindow() -> *mut wxTopLevelWindow;
         #[rust_name = "NewTopLevelWindow1"]
         unsafe fn NewTopLevelWindow(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxTopLevelWindow;
+        unsafe fn wxTopLevelWindow_Create(self_: Pin<&mut wxTopLevelWindow>, parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
         fn wxTopLevelWindow_GetTitle(self_: &wxTopLevelWindow) -> String;
+        fn wxTopLevelWindow_ShowFullScreen(self_: Pin<&mut wxTopLevelWindow>, show: bool, style: i32) -> bool;
         fn wxTopLevelWindow_GetDefaultSize() -> wxSize;
         // CLASS: wxFrame
         fn NewFrame() -> *mut wxFrame;
         #[rust_name = "NewFrame1"]
         unsafe fn NewFrame(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxFrame;
+        unsafe fn wxFrame_Create(self_: Pin<&mut wxFrame>, parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
+        fn wxFrame_CreateStatusBar(self_: Pin<&mut wxFrame>, number: i32, style: i32, id: i32, name: &wxString) -> *mut wxStatusBar;
+        fn wxFrame_CreateToolBar(self_: Pin<&mut wxFrame>, style: i32, id: i32, name: &wxString) -> *mut wxToolBar;
+        fn wxFrame_OnCreateStatusBar(self_: Pin<&mut wxFrame>, number: i32, style: i32, id: i32, name: &wxString) -> *mut wxStatusBar;
+        fn wxFrame_OnCreateToolBar(self_: Pin<&mut wxFrame>, style: i32, id: i32, name: &wxString) -> *mut wxToolBar;
         // CLASS: wxPoint
         fn NewPoint() -> wxPoint;
         #[rust_name = "NewPoint1"]
@@ -1043,7 +1067,9 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn destroy_children(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().DestroyChildren()
     }
-    // BLOCKED: fn FindWindow()
+    fn find_window(&self, id: i32) -> *mut ffi::wxWindow {
+        ffi::wxWindow_FindWindow(&self.pinned::<ffi::wxWindow>().as_mut(), id)
+    }
     fn find_window1(&self, name: &str) -> *mut ffi::wxWindow {
         let name = &crate::ffi::NewString(name);
         self.pinned::<ffi::wxWindow>().as_mut().FindWindow1(name)
@@ -1304,7 +1330,10 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn set_size(&self, x: i32, y: i32, width: i32, height: i32, size_flags: i32) {
         self.pinned::<ffi::wxWindow>().as_mut().SetSize(x, y, width, height, size_flags)
     }
-    // BLOCKED: fn SetSize1()
+    fn set_size1(&self, rect: &Rect) {
+        let rect = &rect.0;
+        ffi::wxWindow_SetSize1(self.pinned::<ffi::wxWindow>().as_mut(), rect)
+    }
     fn set_size2(&self, size: &Size) {
         let size = &size.0;
         self.pinned::<ffi::wxWindow>().as_mut().SetSize2(size)
@@ -1634,18 +1663,30 @@ pub trait WindowMethods: EvtHandlerMethods {
             self.pinned::<ffi::wxWindow>().as_mut().SetPreviousHandler(handler)
         }
     }
-    // BLOCKED: fn GetExtraStyle()
-    // BLOCKED: fn GetWindowStyleFlag()
-    // BLOCKED: fn GetWindowStyle()
+    fn get_extra_style(&self) -> i32 {
+        ffi::wxWindow_GetExtraStyle(&self.pinned::<ffi::wxWindow>().as_mut())
+    }
+    fn get_window_style_flag(&self) -> i32 {
+        ffi::wxWindow_GetWindowStyleFlag(&self.pinned::<ffi::wxWindow>().as_mut())
+    }
+    fn get_window_style(&self) -> i32 {
+        ffi::wxWindow_GetWindowStyle(&self.pinned::<ffi::wxWindow>().as_mut())
+    }
     fn has_extra_style(&self, ex_flag: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().HasExtraStyle(ex_flag)
     }
     fn has_flag(&self, flag: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().HasFlag(flag)
     }
-    // BLOCKED: fn SetExtraStyle()
-    // BLOCKED: fn SetWindowStyleFlag()
-    // BLOCKED: fn SetWindowStyle()
+    fn set_extra_style(&self, ex_style: i32) {
+        ffi::wxWindow_SetExtraStyle(self.pinned::<ffi::wxWindow>().as_mut(), ex_style)
+    }
+    fn set_window_style_flag(&self, style: i32) {
+        ffi::wxWindow_SetWindowStyleFlag(self.pinned::<ffi::wxWindow>().as_mut(), style)
+    }
+    fn set_window_style(&self, style: i32) {
+        ffi::wxWindow_SetWindowStyle(self.pinned::<ffi::wxWindow>().as_mut(), style)
+    }
     fn toggle_window_style(&self, flag: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().ToggleWindowStyle(flag)
     }
@@ -1689,11 +1730,15 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn is_exposed(&self, x: i32, y: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().IsExposed(x, y)
     }
-    // BLOCKED: fn IsExposed1()
+    fn is_exposed1(&self, pt: &mut ffi::wxPoint) -> bool {
+        ffi::wxWindow_IsExposed1(&self.pinned::<ffi::wxWindow>().as_mut(), pt)
+    }
     fn is_exposed2(&self, x: i32, y: i32, w: i32, h: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().IsExposed2(x, y, w, h)
     }
-    // BLOCKED: fn IsExposed3()
+    fn is_exposed3(&self, rect: &mut ffi::wxRect) -> bool {
+        ffi::wxWindow_IsExposed3(&self.pinned::<ffi::wxWindow>().as_mut(), rect)
+    }
     fn is_shown(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().IsShown()
     }
@@ -1915,7 +1960,9 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn unregister_hot_key(&self, hotkey_id: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().UnregisterHotKey(hotkey_id)
     }
-    // BLOCKED: fn UpdateWindowUI()
+    fn update_window_ui(&self, flags: i32) {
+        ffi::wxWindow_UpdateWindowUI(self.pinned::<ffi::wxWindow>().as_mut(), flags)
+    }
     // CXX_UNSUPPORTED: fn GetClassDefaultAttributes()
     fn find_focus() -> *mut ffi::wxWindow {
         ffi::wxWindow_FindFocus()
@@ -1959,7 +2006,18 @@ pub trait WindowMethods: EvtHandlerMethods {
         ffi::wxWindow_UnreserveControlId(id, count)
     }
     // DTOR: fn ~wxWindow()
-    // BLOCKED: fn Create()
+    fn create<T: WindowMethods>(&self, parent: Option<&T>, id: i32, pos: &Point, size: &Size, style: i32, name: &str) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
+                None => ptr::null_mut(),
+            };
+            let pos = &pos.0;
+            let size = &size.0;
+            let name = &crate::ffi::NewString(name);
+            ffi::wxWindow_Create(self.pinned::<ffi::wxWindow>().as_mut(), parent, id, pos, size, style, name)
+        }
+    }
 }
 
 // wxControl
@@ -1991,7 +2049,19 @@ impl Control {
     }
 }
 pub trait ControlMethods: WindowMethods {
-    // BLOCKED: fn Create()
+    fn create<T: WindowMethods>(&self, parent: Option<&T>, id: i32, pos: &Point, size: &Size, style: i32, validator: &Validator, name: &str) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
+                None => ptr::null_mut(),
+            };
+            let pos = &pos.0;
+            let size = &size.0;
+            let validator = &validator.pinned::<ffi::wxValidator>();
+            let name = &crate::ffi::NewString(name);
+            ffi::wxControl_Create(self.pinned::<ffi::wxControl>().as_mut(), parent, id, pos, size, style, validator, name)
+        }
+    }
     fn command(&self, event: Pin<&mut ffi::wxCommandEvent>) {
         self.pinned::<ffi::wxControl>().as_mut().Command(event)
     }
@@ -2124,7 +2194,20 @@ impl Button {
     }
 }
 pub trait ButtonMethods: AnyButtonMethods {
-    // BLOCKED: fn Create()
+    fn create<T: WindowMethods>(&self, parent: Option<&T>, id: i32, label: &str, pos: &Point, size: &Size, style: i32, validator: &Validator, name: &str) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
+                None => ptr::null_mut(),
+            };
+            let label = &crate::ffi::NewString(label);
+            let pos = &pos.0;
+            let size = &size.0;
+            let validator = &validator.pinned::<ffi::wxValidator>();
+            let name = &crate::ffi::NewString(name);
+            ffi::wxButton_Create(self.pinned::<ffi::wxButton>().as_mut(), parent, id, label, pos, size, style, validator, name)
+        }
+    }
     fn get_auth_needed(&self) -> bool {
         self.pinned::<ffi::wxButton>().as_mut().GetAuthNeeded()
     }
@@ -2204,7 +2287,19 @@ impl TopLevelWindow {
 }
 pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     // DTOR: fn ~wxTopLevelWindow()
-    // BLOCKED: fn Create()
+    fn create<T: WindowMethods>(&self, parent: Option<&T>, id: i32, title: &str, pos: &Point, size: &Size, style: i32, name: &str) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
+                None => ptr::null_mut(),
+            };
+            let title = &crate::ffi::NewString(title);
+            let pos = &pos.0;
+            let size = &size.0;
+            let name = &crate::ffi::NewString(name);
+            ffi::wxTopLevelWindow_Create(self.pinned::<ffi::wxTopLevelWindow>().as_mut(), parent, id, title, pos, size, style, name)
+        }
+    }
     fn can_set_transparent(&self) -> bool {
         self.pinned::<ffi::wxTopLevelWindow>().as_mut().CanSetTransparent()
     }
@@ -2335,7 +2430,9 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     fn enable_full_screen_view(&self, enable: bool) -> bool {
         self.pinned::<ffi::wxTopLevelWindow>().as_mut().EnableFullScreenView(enable)
     }
-    // BLOCKED: fn ShowFullScreen()
+    fn show_full_screen(&self, show: bool, style: i32) -> bool {
+        ffi::wxTopLevelWindow_ShowFullScreen(self.pinned::<ffi::wxTopLevelWindow>().as_mut(), show, style)
+    }
     // BLOCKED: fn UseNativeDecorations()
     // BLOCKED: fn UseNativeDecorationsByDefault()
     fn get_default_size() -> Size {
@@ -2378,9 +2475,27 @@ pub trait FrameMethods: TopLevelWindowMethods {
     fn centre(&self, direction: i32) {
         self.pinned::<ffi::wxFrame>().as_mut().Centre(direction)
     }
-    // BLOCKED: fn Create()
-    // BLOCKED: fn CreateStatusBar()
-    // BLOCKED: fn CreateToolBar()
+    fn create<T: WindowMethods>(&self, parent: Option<&T>, id: i32, title: &str, pos: &Point, size: &Size, style: i32, name: &str) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
+                None => ptr::null_mut(),
+            };
+            let title = &crate::ffi::NewString(title);
+            let pos = &pos.0;
+            let size = &size.0;
+            let name = &crate::ffi::NewString(name);
+            ffi::wxFrame_Create(self.pinned::<ffi::wxFrame>().as_mut(), parent, id, title, pos, size, style, name)
+        }
+    }
+    fn create_status_bar(&self, number: i32, style: i32, id: i32, name: &str) -> *mut ffi::wxStatusBar {
+        let name = &crate::ffi::NewString(name);
+        ffi::wxFrame_CreateStatusBar(self.pinned::<ffi::wxFrame>().as_mut(), number, style, id, name)
+    }
+    fn create_tool_bar(&self, style: i32, id: i32, name: &str) -> *mut ffi::wxToolBar {
+        let name = &crate::ffi::NewString(name);
+        ffi::wxFrame_CreateToolBar(self.pinned::<ffi::wxFrame>().as_mut(), style, id, name)
+    }
     fn do_give_help(&self, text: &str, show: bool) {
         let text = &crate::ffi::NewString(text);
         self.pinned::<ffi::wxFrame>().as_mut().DoGiveHelp(text, show)
@@ -2400,8 +2515,14 @@ pub trait FrameMethods: TopLevelWindowMethods {
     fn get_tool_bar(&self) -> *mut ffi::wxToolBar {
         self.pinned::<ffi::wxFrame>().as_mut().GetToolBar()
     }
-    // BLOCKED: fn OnCreateStatusBar()
-    // BLOCKED: fn OnCreateToolBar()
+    fn on_create_status_bar(&self, number: i32, style: i32, id: i32, name: &str) -> *mut ffi::wxStatusBar {
+        let name = &crate::ffi::NewString(name);
+        ffi::wxFrame_OnCreateStatusBar(self.pinned::<ffi::wxFrame>().as_mut(), number, style, id, name)
+    }
+    fn on_create_tool_bar(&self, style: i32, id: i32, name: &str) -> *mut ffi::wxToolBar {
+        let name = &crate::ffi::NewString(name);
+        ffi::wxFrame_OnCreateToolBar(self.pinned::<ffi::wxFrame>().as_mut(), style, id, name)
+    }
     fn process_command(&self, id: i32) -> bool {
         self.pinned::<ffi::wxFrame>().as_mut().ProcessCommand(id)
     }

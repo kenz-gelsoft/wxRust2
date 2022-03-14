@@ -77,7 +77,7 @@ internal_base_methods = [
     'Reparent',
     'ToDIP2',
 ]
-blocklist = [
+use_shim = [
     # TODO: treat long correctly
     'Create',
     'FindWindow',
@@ -95,7 +95,8 @@ blocklist = [
     # Incorrect const-ness
     'IsExposed1',
     'IsExposed3',
-
+]
+blocklist = [
     # TODO: dont return reference/temp value from self
     'GetChildren',
     'GetChildren1',
@@ -103,44 +104,53 @@ blocklist = [
     'GetUpdateRegion',
 ]
 [types.wxControl]
-blocklist = [
+use_shim = [
     # TODO: treat long correctly
     'Create',
+]
+blocklist = [
     # enum vs i32
     'Ellipsize',
 ]
 [types.wxButton]
-blocklist = [
+use_shim = [
     # TODO: treat long correctly
     'Create',
 ]
 [types.wxTopLevelWindow]
-blocklist = [
+use_shim = [
     # TODO: treat long correctly
     'Create',
+
     # wxTopLevelWindowMac's methods (on Mac)
     'ShowFullScreen',
+]
+blocklist = [
     # Other platform specific
     'IsUsingNativeDecorations',
     'MSWGetSystemMenu',
     'UseNativeDecorations',
     'UseNativeDecorationsByDefault',
-    # Didn't support
+
+    # Didn't support (Uses inner class)
     'GetIcons',
     'SaveGeometry',
     'RestoreToGeometry',
 ]
 [types.wxFrame]
-blocklist = [
+use_shim = [
     # TODO: treat long correctly
     'Create',
     'CreateToolBar',
     'OnCreateStatusBar',
-    # Other platform specific
-    'MSWGetTaskBarButton',
+
     # wxFrameBase's methods
     'CreateStatusBar',
     'OnCreateToolBar',
+]
+blocklist = [
+    # Other platform specific
+    'MSWGetTaskBarButton',
 ]
 [types.wxPoint]
 blocklist = [

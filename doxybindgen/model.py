@@ -28,8 +28,8 @@ class Class:
         self.name = e.findtext('compoundname')
         self.base = e.findtext('basecompoundref')
         self.methods = []
-        config = config.get(self.name)
-        self.__blocklist = config['blocklist'] if config else None
+        config = config.get(self.name) or {}
+        self.__blocklist = config.get('blocklist') or []
         self.config = config
         for method in e.findall(".//memberdef[@kind='function']"):
             m = Method(self, method)
@@ -41,21 +41,21 @@ class Class:
         return self.name[2:]
 
     def is_blocked_method(self, name):
-        if self.__blocklist is None:
-            return False
         return name in self.__blocklist
     
     def is_trivial(self):
         return self.name in CXX_TRIVIAL_EXTERN_TYPES
 
     def internal_base(self):
-        return self.config.get('internal_base') if self.config else None
+        return self.config.get('internal_base') or None
 
     def is_internal_base_method(self, name):
-        methods = self.config.get('internal_base_methods') if self.config else None
-        if methods:
-            return name in methods
-        return False
+        methods = self.config.get('internal_base_methods') or []
+        return name in methods
+
+    def uses_shim_for(self, name):
+        methods = self.config.get('use_shim') or []
+        return name in methods
 
 
 class Method:
@@ -80,6 +80,8 @@ class Method:
     def needs_shim(self):
         if self.is_blocked() or self.uses_unsupported_type():
             return False
+        if self.cls.uses_shim_for(self.name(for_shim=False)):
+            return True
         return (not self.is_instance_method or 
                 self.returns_new() or
                 self.returns.is_str())
