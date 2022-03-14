@@ -77,7 +77,7 @@ internal_base_methods = [
     'Reparent',
     'ToDIP2',
 ]
-blocklist = [
+use_shim = [
     # TODO: treat long correctly
     'Create',
     'FindWindow',
@@ -88,7 +88,8 @@ blocklist = [
     'SetWindowStyle',
     'SetWindowStyleFlag',
     'UpdateWindowUI',
-
+]
+blocklist = [
     # Additional arg with default value (maybe needs shim)
     'SetSize1',
 
@@ -103,21 +104,25 @@ blocklist = [
     'GetUpdateRegion',
 ]
 [types.wxControl]
-blocklist = [
+use_shim = [
     # TODO: treat long correctly
     'Create',
+]
+blocklist = [
     # enum vs i32
     'Ellipsize',
 ]
 [types.wxButton]
-blocklist = [
+use_shim = [
     # TODO: treat long correctly
     'Create',
 ]
 [types.wxTopLevelWindow]
-blocklist = [
+use_shim = [
     # TODO: treat long correctly
     'Create',
+]
+blocklist = [
     # wxTopLevelWindowMac's methods (on Mac)
     'ShowFullScreen',
     # Other platform specific
@@ -131,11 +136,13 @@ blocklist = [
     'RestoreToGeometry',
 ]
 [types.wxFrame]
-blocklist = [
+use_shim = [
     # TODO: treat long correctly
     'Create',
     'CreateToolBar',
     'OnCreateStatusBar',
+]
+blocklist = [
     # Other platform specific
     'MSWGetTaskBarButton',
     # wxFrameBase's methods

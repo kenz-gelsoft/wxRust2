@@ -53,6 +53,10 @@ class Class:
         methods = self.config.get('internal_base_methods') or []
         return name in methods
 
+    def uses_shim_for(self, name):
+        methods = self.config.get('use_shim') or []
+        return name in methods
+
 
 class Method:
     def __init__(self, cls, e):
@@ -76,6 +80,8 @@ class Method:
     def needs_shim(self):
         if self.is_blocked() or self.uses_unsupported_type():
             return False
+        if self.cls.uses_shim_for(self.name(for_shim=False)):
+            return True
         return (not self.is_instance_method or 
                 self.returns_new() or
                 self.returns.is_str())
