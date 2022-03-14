@@ -27,8 +27,26 @@ inline wxEvtHandler *NewEvtHandler() {
 }
 
 // CLASS: wxWindow
+inline void wxWindow_AddChild(wxWindow & self, wxWindow * child) {
+    return self.AddChild(child);
+}
 inline wxWindow * wxWindow_FindWindow(const wxWindow & self, int32_t id) {
     return self.FindWindow(id);
+}
+inline void wxWindow_RemoveChild(wxWindow & self, wxWindow * child) {
+    return self.RemoveChild(child);
+}
+inline bool wxWindow_IsDescendant(const wxWindow & self, wxWindow * win) {
+    return self.IsDescendant(win);
+}
+inline bool wxWindow_Reparent(wxWindow & self, wxWindow * new_parent) {
+    return self.Reparent(new_parent);
+}
+inline wxSize wxWindow_FromDIP(const wxWindow & self, const wxSize & sz) {
+    return self.FromDIP(sz);
+}
+inline int wxWindow_ToDIP(const wxWindow & self, int d) {
+    return self.ToDIP(d);
 }
 inline void wxWindow_SetSize(wxWindow & self, const wxRect & rect) {
     return self.SetSize(rect);

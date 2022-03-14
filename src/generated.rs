@@ -108,7 +108,6 @@ mod ffi {
         
         // CLASS: wxWindow
         type wxWindow;
-        type wxWindowBase;
         fn AcceptsFocus(self: &wxWindow) -> bool;
         fn AcceptsFocusFromKeyboard(self: &wxWindow) -> bool;
         fn AcceptsFocusRecursively(self: &wxWindow) -> bool;
@@ -121,20 +120,20 @@ mod ffi {
         fn EnableVisibleFocus(self: Pin<&mut wxWindow>, enable: bool);
         fn SetFocus(self: Pin<&mut wxWindow>);
         fn SetFocusFromKbd(self: Pin<&mut wxWindow>);
-        unsafe fn AddChild(self: Pin<&mut wxWindowBase>, child: *mut wxWindowBase);
+        // GENERATED: unsafe fn AddChild(self: Pin<&mut wxWindow>, child: *mut wxWindow);
         fn DestroyChildren(self: Pin<&mut wxWindow>) -> bool;
         // GENERATED: fn FindWindow(self: &wxWindow, id: i32) -> *mut wxWindow;
         #[rust_name = "FindWindow1"]
         fn FindWindow(self: &wxWindow, name: &wxString) -> *mut wxWindow;
         // BLOCKED: fn GetChildren(self: Pin<&mut wxWindow>) -> Pin<&mut wxWindowList>;
         // BLOCKED: fn GetChildren(self: &wxWindow) -> &wxWindowList;
-        unsafe fn RemoveChild(self: Pin<&mut wxWindowBase>, child: *mut wxWindowBase);
+        // GENERATED: unsafe fn RemoveChild(self: Pin<&mut wxWindow>, child: *mut wxWindow);
         fn GetGrandParent(self: &wxWindow) -> *mut wxWindow;
         fn GetNextSibling(self: &wxWindow) -> *mut wxWindow;
         fn GetParent(self: &wxWindow) -> *mut wxWindow;
         fn GetPrevSibling(self: &wxWindow) -> *mut wxWindow;
-        unsafe fn IsDescendant(self: &wxWindowBase, win: *mut wxWindowBase) -> bool;
-        unsafe fn Reparent(self: Pin<&mut wxWindowBase>, new_parent: *mut wxWindowBase) -> bool;
+        // GENERATED: unsafe fn IsDescendant(self: &wxWindow, win: *mut wxWindow) -> bool;
+        // GENERATED: unsafe fn Reparent(self: Pin<&mut wxWindow>, new_parent: *mut wxWindow) -> bool;
         fn AlwaysShowScrollbars(self: Pin<&mut wxWindow>, hflag: bool, vflag: bool);
         fn GetScrollPos(self: &wxWindow, orientation: i32) -> i32;
         fn GetScrollRange(self: &wxWindow, orientation: i32) -> i32;
@@ -158,7 +157,7 @@ mod ffi {
         fn WindowToClientSize(self: &wxWindow, size: &wxSize) -> wxSize;
         fn Fit(self: Pin<&mut wxWindow>);
         fn FitInside(self: Pin<&mut wxWindow>);
-        fn FromDIP(self: &wxWindowBase, sz: &wxSize) -> wxSize;
+        // GENERATED: fn FromDIP(self: &wxWindow, sz: &wxSize) -> wxSize;
         #[rust_name = "FromDIP1"]
         fn FromDIP(self: &wxWindow, pt: &wxPoint) -> wxPoint;
         #[rust_name = "FromDIP2"]
@@ -166,8 +165,7 @@ mod ffi {
         fn ToDIP(self: &wxWindow, sz: &wxSize) -> wxSize;
         #[rust_name = "ToDIP1"]
         fn ToDIP(self: &wxWindow, pt: &wxPoint) -> wxPoint;
-        #[rust_name = "ToDIP2"]
-        fn ToDIP(self: &wxWindowBase, d: i32) -> i32;
+        // GENERATED: fn ToDIP(self: &wxWindow, d: i32) -> i32;
         fn GetBestSize(self: &wxWindow) -> wxSize;
         fn GetBestHeight(self: &wxWindow, width: i32) -> i32;
         fn GetBestWidth(self: &wxWindow, height: i32) -> i32;
@@ -340,7 +338,7 @@ mod ffi {
         // CXX_UNSUPPORTED: fn ShowWithEffect(self: Pin<&mut wxWindow>, effect: wxShowEffect, timeout: u32) -> bool;
         // GENERATED: fn GetHelpText(self: &wxWindow) -> String;
         fn SetHelpText(self: Pin<&mut wxWindow>, help_text: &wxString);
-        // CXX_UNSUPPORTED: fn GetHelpTextAtPoint(self: &wxWindowBase, point: &wxPoint, origin: wxHelpEvent::Origin) -> String;
+        // CXX_UNSUPPORTED: fn GetHelpTextAtPoint(self: &wxWindow, point: &wxPoint, origin: wxHelpEvent::Origin) -> String;
         fn GetToolTip(self: &wxWindow) -> *mut wxToolTip;
         // GENERATED: fn GetToolTipText(self: &wxWindow) -> String;
         fn SetToolTip(self: Pin<&mut wxWindow>, tip_string: &wxString);
@@ -731,7 +729,14 @@ mod ffi {
         unsafe fn wxEvtHandler_RemoveFilter(filter: *mut wxEventFilter);
         fn NewEvtHandler() -> *mut wxEvtHandler;
         // CLASS: wxWindow
+        unsafe fn wxWindow_AddChild(self_: Pin<&mut wxWindow>, child: *mut wxWindow);
         fn wxWindow_FindWindow(self_: &wxWindow, id: i32) -> *mut wxWindow;
+        unsafe fn wxWindow_RemoveChild(self_: Pin<&mut wxWindow>, child: *mut wxWindow);
+        unsafe fn wxWindow_IsDescendant(self_: &wxWindow, win: *mut wxWindow) -> bool;
+        unsafe fn wxWindow_Reparent(self_: Pin<&mut wxWindow>, new_parent: *mut wxWindow) -> bool;
+        fn wxWindow_FromDIP(self_: &wxWindow, sz: &wxSize) -> wxSize;
+        #[rust_name = "wxWindow_ToDIP2"]
+        fn wxWindow_ToDIP(self_: &wxWindow, d: i32) -> i32;
         #[rust_name = "wxWindow_SetSize1"]
         fn wxWindow_SetSize(self_: Pin<&mut wxWindow>, rect: &wxRect);
         #[rust_name = "wxWindow_FromDIP3"]
@@ -1058,10 +1063,10 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn add_child<T: WindowMethods>(&self, child: Option<&T>) {
         unsafe {
             let child = match child {
-                Some(r) => Pin::<&mut ffi::wxWindowBase>::into_inner_unchecked(r.pinned::<ffi::wxWindowBase>()),
+                Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
                 None => ptr::null_mut(),
             };
-            self.pinned::<ffi::wxWindowBase>().as_mut().AddChild(child)
+            ffi::wxWindow_AddChild(self.pinned::<ffi::wxWindow>().as_mut(), child)
         }
     }
     fn destroy_children(&self) -> bool {
@@ -1079,10 +1084,10 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn remove_child<T: WindowMethods>(&self, child: Option<&T>) {
         unsafe {
             let child = match child {
-                Some(r) => Pin::<&mut ffi::wxWindowBase>::into_inner_unchecked(r.pinned::<ffi::wxWindowBase>()),
+                Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
                 None => ptr::null_mut(),
             };
-            self.pinned::<ffi::wxWindowBase>().as_mut().RemoveChild(child)
+            ffi::wxWindow_RemoveChild(self.pinned::<ffi::wxWindow>().as_mut(), child)
         }
     }
     fn get_grand_parent(&self) -> *mut ffi::wxWindow {
@@ -1100,19 +1105,19 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn is_descendant<T: WindowMethods>(&self, win: Option<&T>) -> bool {
         unsafe {
             let win = match win {
-                Some(r) => Pin::<&mut ffi::wxWindowBase>::into_inner_unchecked(r.pinned::<ffi::wxWindowBase>()),
+                Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
                 None => ptr::null_mut(),
             };
-            self.pinned::<ffi::wxWindowBase>().as_mut().IsDescendant(win)
+            ffi::wxWindow_IsDescendant(&self.pinned::<ffi::wxWindow>().as_mut(), win)
         }
     }
     fn reparent<T: WindowMethods>(&self, new_parent: Option<&T>) -> bool {
         unsafe {
             let new_parent = match new_parent {
-                Some(r) => Pin::<&mut ffi::wxWindowBase>::into_inner_unchecked(r.pinned::<ffi::wxWindowBase>()),
+                Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
                 None => ptr::null_mut(),
             };
-            self.pinned::<ffi::wxWindowBase>().as_mut().Reparent(new_parent)
+            ffi::wxWindow_Reparent(self.pinned::<ffi::wxWindow>().as_mut(), new_parent)
         }
     }
     fn always_show_scrollbars(&self, hflag: bool, vflag: bool) {
@@ -1189,7 +1194,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     fn from_dip(&self, sz: &Size) -> Size {
         let sz = &sz.0;
-        Size(self.pinned::<ffi::wxWindowBase>().as_mut().FromDIP(sz))
+        Size(ffi::wxWindow_FromDIP(&self.pinned::<ffi::wxWindow>().as_mut(), sz))
     }
     fn from_dip1(&self, pt: &Point) -> Point {
         let pt = &pt.0;
@@ -1207,7 +1212,7 @@ pub trait WindowMethods: EvtHandlerMethods {
         Point(self.pinned::<ffi::wxWindow>().as_mut().ToDIP1(pt))
     }
     fn to_dip2(&self, d: i32) -> i32 {
-        self.pinned::<ffi::wxWindowBase>().as_mut().ToDIP2(d)
+        ffi::wxWindow_ToDIP2(&self.pinned::<ffi::wxWindow>().as_mut(), d)
     }
     fn get_best_size(&self) -> Size {
         Size(self.pinned::<ffi::wxWindow>().as_mut().GetBestSize())
