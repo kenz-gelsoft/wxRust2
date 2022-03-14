@@ -211,7 +211,7 @@ mod ffi {
         fn SetMinClientSize(self: Pin<&mut wxWindow>, size: &wxSize);
         fn SetMinSize(self: Pin<&mut wxWindow>, size: &wxSize);
         fn SetSize(self: Pin<&mut wxWindow>, x: i32, y: i32, width: i32, height: i32, size_flags: i32);
-        // BLOCKED: fn SetSize(self: Pin<&mut wxWindow>, rect: &wxRect);
+        // GENERATED: fn SetSize(self: Pin<&mut wxWindow>, rect: &wxRect);
         #[rust_name = "SetSize2"]
         fn SetSize(self: Pin<&mut wxWindow>, size: &wxSize);
         #[rust_name = "SetSize3"]
@@ -328,10 +328,10 @@ mod ffi {
         // CXX_UNSUPPORTED: fn HideWithEffect(self: Pin<&mut wxWindow>, effect: wxShowEffect, timeout: u32) -> bool;
         fn IsEnabled(self: &wxWindow) -> bool;
         fn IsExposed(self: &wxWindow, x: i32, y: i32) -> bool;
-        // BLOCKED: fn IsExposed(self: &wxWindow, pt: &mut wxPoint) -> bool;
+        // GENERATED: fn IsExposed(self: &wxWindow, pt: &mut wxPoint) -> bool;
         #[rust_name = "IsExposed2"]
         fn IsExposed(self: &wxWindow, x: i32, y: i32, w: i32, h: i32) -> bool;
-        // BLOCKED: fn IsExposed(self: &wxWindow, rect: &mut wxRect) -> bool;
+        // GENERATED: fn IsExposed(self: &wxWindow, rect: &mut wxRect) -> bool;
         fn IsShown(self: &wxWindow) -> bool;
         fn IsShownOnScreen(self: &wxWindow) -> bool;
         fn Disable(self: Pin<&mut wxWindow>) -> bool;
@@ -537,7 +537,7 @@ mod ffi {
         fn SetRepresentedFilename(self: Pin<&mut wxTopLevelWindow>, filename: &wxString);
         fn ShowWithoutActivating(self: Pin<&mut wxTopLevelWindow>);
         fn EnableFullScreenView(self: Pin<&mut wxTopLevelWindow>, enable: bool) -> bool;
-        // BLOCKED: fn ShowFullScreen(self: Pin<&mut wxTopLevelWindow>, show: bool, style: i32) -> bool;
+        // GENERATED: fn ShowFullScreen(self: Pin<&mut wxTopLevelWindow>, show: bool, style: i32) -> bool;
         // BLOCKED: fn UseNativeDecorations(self: Pin<&mut wxTopLevelWindow>, native: bool);
         // BLOCKED: fn UseNativeDecorationsByDefault(self: Pin<&mut wxTopLevelWindow>, native: bool);
         // GENERATED: fn GetDefaultSize() -> wxSize;
@@ -549,7 +549,7 @@ mod ffi {
         // DTOR: fn ~wxFrame(self: Pin<&mut wxFrame>);
         fn Centre(self: Pin<&mut wxFrame>, direction: i32);
         // GENERATED: unsafe fn Create(self: Pin<&mut wxFrame>, parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
-        // BLOCKED: fn CreateStatusBar(self: Pin<&mut wxFrame>, number: i32, style: i32, id: i32, name: &wxString) -> *mut wxStatusBar;
+        // GENERATED: fn CreateStatusBar(self: Pin<&mut wxFrame>, number: i32, style: i32, id: i32, name: &wxString) -> *mut wxStatusBar;
         // GENERATED: fn CreateToolBar(self: Pin<&mut wxFrame>, style: i32, id: i32, name: &wxString) -> *mut wxToolBar;
         fn DoGiveHelp(self: Pin<&mut wxFrame>, text: &wxString, show: bool);
         fn GetClientAreaOrigin(self: &wxFrame) -> wxPoint;
@@ -558,7 +558,7 @@ mod ffi {
         fn GetStatusBarPane(self: &wxFrame) -> i32;
         fn GetToolBar(self: &wxFrame) -> *mut wxToolBar;
         // GENERATED: fn OnCreateStatusBar(self: Pin<&mut wxFrame>, number: i32, style: i32, id: i32, name: &wxString) -> *mut wxStatusBar;
-        // BLOCKED: fn OnCreateToolBar(self: Pin<&mut wxFrame>, style: i32, id: i32, name: &wxString) -> *mut wxToolBar;
+        // GENERATED: fn OnCreateToolBar(self: Pin<&mut wxFrame>, style: i32, id: i32, name: &wxString) -> *mut wxToolBar;
         fn ProcessCommand(self: Pin<&mut wxFrame>, id: i32) -> bool;
         unsafe fn SetMenuBar(self: Pin<&mut wxFrame>, menu_bar: *mut wxMenuBar);
         unsafe fn SetStatusBar(self: Pin<&mut wxFrame>, status_bar: *mut wxStatusBar);
@@ -732,6 +732,8 @@ mod ffi {
         fn NewEvtHandler() -> *mut wxEvtHandler;
         // CLASS: wxWindow
         fn wxWindow_FindWindow(self_: &wxWindow, id: i32) -> *mut wxWindow;
+        #[rust_name = "wxWindow_SetSize1"]
+        fn wxWindow_SetSize(self_: Pin<&mut wxWindow>, rect: &wxRect);
         #[rust_name = "wxWindow_FromDIP3"]
         unsafe fn wxWindow_FromDIP(sz: &wxSize, w: *const wxWindow) -> wxSize;
         #[rust_name = "wxWindow_FromDIP4"]
@@ -750,6 +752,10 @@ mod ffi {
         fn wxWindow_SetExtraStyle(self_: Pin<&mut wxWindow>, ex_style: i32);
         fn wxWindow_SetWindowStyleFlag(self_: Pin<&mut wxWindow>, style: i32);
         fn wxWindow_SetWindowStyle(self_: Pin<&mut wxWindow>, style: i32);
+        #[rust_name = "wxWindow_IsExposed1"]
+        fn wxWindow_IsExposed(self_: &wxWindow, pt: &mut wxPoint) -> bool;
+        #[rust_name = "wxWindow_IsExposed3"]
+        fn wxWindow_IsExposed(self_: &wxWindow, rect: &mut wxRect) -> bool;
         fn wxWindow_GetHelpText(self_: &wxWindow) -> String;
         fn wxWindow_GetToolTipText(self_: &wxWindow) -> String;
         fn wxWindow_GetLabel(self_: &wxWindow) -> String;
@@ -793,14 +799,17 @@ mod ffi {
         unsafe fn NewTopLevelWindow(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxTopLevelWindow;
         unsafe fn wxTopLevelWindow_Create(self_: Pin<&mut wxTopLevelWindow>, parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
         fn wxTopLevelWindow_GetTitle(self_: &wxTopLevelWindow) -> String;
+        fn wxTopLevelWindow_ShowFullScreen(self_: Pin<&mut wxTopLevelWindow>, show: bool, style: i32) -> bool;
         fn wxTopLevelWindow_GetDefaultSize() -> wxSize;
         // CLASS: wxFrame
         fn NewFrame() -> *mut wxFrame;
         #[rust_name = "NewFrame1"]
         unsafe fn NewFrame(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxFrame;
         unsafe fn wxFrame_Create(self_: Pin<&mut wxFrame>, parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
+        fn wxFrame_CreateStatusBar(self_: Pin<&mut wxFrame>, number: i32, style: i32, id: i32, name: &wxString) -> *mut wxStatusBar;
         fn wxFrame_CreateToolBar(self_: Pin<&mut wxFrame>, style: i32, id: i32, name: &wxString) -> *mut wxToolBar;
         fn wxFrame_OnCreateStatusBar(self_: Pin<&mut wxFrame>, number: i32, style: i32, id: i32, name: &wxString) -> *mut wxStatusBar;
+        fn wxFrame_OnCreateToolBar(self_: Pin<&mut wxFrame>, style: i32, id: i32, name: &wxString) -> *mut wxToolBar;
         // CLASS: wxPoint
         fn NewPoint() -> wxPoint;
         #[rust_name = "NewPoint1"]
@@ -1321,7 +1330,10 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn set_size(&self, x: i32, y: i32, width: i32, height: i32, size_flags: i32) {
         self.pinned::<ffi::wxWindow>().as_mut().SetSize(x, y, width, height, size_flags)
     }
-    // BLOCKED: fn SetSize1()
+    fn set_size1(&self, rect: &Rect) {
+        let rect = &rect.0;
+        ffi::wxWindow_SetSize1(self.pinned::<ffi::wxWindow>().as_mut(), rect)
+    }
     fn set_size2(&self, size: &Size) {
         let size = &size.0;
         self.pinned::<ffi::wxWindow>().as_mut().SetSize2(size)
@@ -1718,11 +1730,15 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn is_exposed(&self, x: i32, y: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().IsExposed(x, y)
     }
-    // BLOCKED: fn IsExposed1()
+    fn is_exposed1(&self, pt: &mut ffi::wxPoint) -> bool {
+        ffi::wxWindow_IsExposed1(&self.pinned::<ffi::wxWindow>().as_mut(), pt)
+    }
     fn is_exposed2(&self, x: i32, y: i32, w: i32, h: i32) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().IsExposed2(x, y, w, h)
     }
-    // BLOCKED: fn IsExposed3()
+    fn is_exposed3(&self, rect: &mut ffi::wxRect) -> bool {
+        ffi::wxWindow_IsExposed3(&self.pinned::<ffi::wxWindow>().as_mut(), rect)
+    }
     fn is_shown(&self) -> bool {
         self.pinned::<ffi::wxWindow>().as_mut().IsShown()
     }
@@ -2414,7 +2430,9 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     fn enable_full_screen_view(&self, enable: bool) -> bool {
         self.pinned::<ffi::wxTopLevelWindow>().as_mut().EnableFullScreenView(enable)
     }
-    // BLOCKED: fn ShowFullScreen()
+    fn show_full_screen(&self, show: bool, style: i32) -> bool {
+        ffi::wxTopLevelWindow_ShowFullScreen(self.pinned::<ffi::wxTopLevelWindow>().as_mut(), show, style)
+    }
     // BLOCKED: fn UseNativeDecorations()
     // BLOCKED: fn UseNativeDecorationsByDefault()
     fn get_default_size() -> Size {
@@ -2470,7 +2488,10 @@ pub trait FrameMethods: TopLevelWindowMethods {
             ffi::wxFrame_Create(self.pinned::<ffi::wxFrame>().as_mut(), parent, id, title, pos, size, style, name)
         }
     }
-    // BLOCKED: fn CreateStatusBar()
+    fn create_status_bar(&self, number: i32, style: i32, id: i32, name: &str) -> *mut ffi::wxStatusBar {
+        let name = &crate::ffi::NewString(name);
+        ffi::wxFrame_CreateStatusBar(self.pinned::<ffi::wxFrame>().as_mut(), number, style, id, name)
+    }
     fn create_tool_bar(&self, style: i32, id: i32, name: &str) -> *mut ffi::wxToolBar {
         let name = &crate::ffi::NewString(name);
         ffi::wxFrame_CreateToolBar(self.pinned::<ffi::wxFrame>().as_mut(), style, id, name)
@@ -2498,7 +2519,10 @@ pub trait FrameMethods: TopLevelWindowMethods {
         let name = &crate::ffi::NewString(name);
         ffi::wxFrame_OnCreateStatusBar(self.pinned::<ffi::wxFrame>().as_mut(), number, style, id, name)
     }
-    // BLOCKED: fn OnCreateToolBar()
+    fn on_create_tool_bar(&self, style: i32, id: i32, name: &str) -> *mut ffi::wxToolBar {
+        let name = &crate::ffi::NewString(name);
+        ffi::wxFrame_OnCreateToolBar(self.pinned::<ffi::wxFrame>().as_mut(), style, id, name)
+    }
     fn process_command(&self, id: i32) -> bool {
         self.pinned::<ffi::wxFrame>().as_mut().ProcessCommand(id)
     }

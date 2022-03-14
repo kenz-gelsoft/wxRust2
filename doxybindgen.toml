@@ -88,15 +88,15 @@ use_shim = [
     'SetWindowStyle',
     'SetWindowStyleFlag',
     'UpdateWindowUI',
-]
-blocklist = [
+
     # Additional arg with default value (maybe needs shim)
     'SetSize1',
 
     # Incorrect const-ness
     'IsExposed1',
     'IsExposed3',
-
+]
+blocklist = [
     # TODO: dont return reference/temp value from self
     'GetChildren',
     'GetChildren1',
@@ -121,16 +121,18 @@ use_shim = [
 use_shim = [
     # TODO: treat long correctly
     'Create',
-]
-blocklist = [
+
     # wxTopLevelWindowMac's methods (on Mac)
     'ShowFullScreen',
+]
+blocklist = [
     # Other platform specific
     'IsUsingNativeDecorations',
     'MSWGetSystemMenu',
     'UseNativeDecorations',
     'UseNativeDecorationsByDefault',
-    # Didn't support
+
+    # Didn't support (Uses inner class)
     'GetIcons',
     'SaveGeometry',
     'RestoreToGeometry',
@@ -141,13 +143,14 @@ use_shim = [
     'Create',
     'CreateToolBar',
     'OnCreateStatusBar',
+
+    # wxFrameBase's methods
+    'CreateStatusBar',
+    'OnCreateToolBar',
 ]
 blocklist = [
     # Other platform specific
     'MSWGetTaskBarButton',
-    # wxFrameBase's methods
-    'CreateStatusBar',
-    'OnCreateToolBar',
 ]
 [types.wxPoint]
 blocklist = [

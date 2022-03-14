@@ -30,6 +30,9 @@ inline wxEvtHandler *NewEvtHandler() {
 inline wxWindow * wxWindow_FindWindow(const wxWindow & self, int32_t id) {
     return self.FindWindow(id);
 }
+inline void wxWindow_SetSize(wxWindow & self, const wxRect & rect) {
+    return self.SetSize(rect);
+}
 inline wxSize wxWindow_FromDIP(const wxSize & sz, const wxWindow * w) {
     return wxWindow::FromDIP(sz, w);
 }
@@ -65,6 +68,12 @@ inline void wxWindow_SetWindowStyleFlag(wxWindow & self, int32_t style) {
 }
 inline void wxWindow_SetWindowStyle(wxWindow & self, int32_t style) {
     return self.SetWindowStyle(style);
+}
+inline bool wxWindow_IsExposed(const wxWindow & self, wxPoint & pt) {
+    return self.IsExposed(pt);
+}
+inline bool wxWindow_IsExposed(const wxWindow & self, wxRect & rect) {
+    return self.IsExposed(rect);
 }
 inline rust::String wxWindow_GetHelpText(const wxWindow & self) {
     return rust::String(self.GetHelpText().utf8_str());
@@ -175,6 +184,9 @@ inline bool wxTopLevelWindow_Create(wxTopLevelWindow & self, wxWindow * parent, 
 inline rust::String wxTopLevelWindow_GetTitle(const wxTopLevelWindow & self) {
     return rust::String(self.GetTitle().utf8_str());
 }
+inline bool wxTopLevelWindow_ShowFullScreen(wxTopLevelWindow & self, bool show, int32_t style) {
+    return self.ShowFullScreen(show, style);
+}
 inline wxSize wxTopLevelWindow_GetDefaultSize() {
     return wxTopLevelWindow::GetDefaultSize();
 }
@@ -189,11 +201,17 @@ inline wxFrame *NewFrame(wxWindow * parent, wxWindowID id, const wxString & titl
 inline bool wxFrame_Create(wxFrame & self, wxWindow * parent, wxWindowID id, const wxString & title, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
     return self.Create(parent, id, title, pos, size, style, name);
 }
+inline wxStatusBar * wxFrame_CreateStatusBar(wxFrame & self, int number, int32_t style, wxWindowID id, const wxString & name) {
+    return self.CreateStatusBar(number, style, id, name);
+}
 inline wxToolBar * wxFrame_CreateToolBar(wxFrame & self, int32_t style, wxWindowID id, const wxString & name) {
     return self.CreateToolBar(style, id, name);
 }
 inline wxStatusBar * wxFrame_OnCreateStatusBar(wxFrame & self, int number, int32_t style, wxWindowID id, const wxString & name) {
     return self.OnCreateStatusBar(number, style, id, name);
+}
+inline wxToolBar * wxFrame_OnCreateToolBar(wxFrame & self, int32_t style, wxWindowID id, const wxString & name) {
+    return self.OnCreateToolBar(style, id, name);
 }
 
 // CLASS: wxPoint
