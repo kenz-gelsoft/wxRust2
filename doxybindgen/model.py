@@ -100,7 +100,7 @@ class Method:
 
     def name(self, for_shim, without_index=False):
         name = self.__name
-        if for_shim and self.needs_shim():
+        if for_shim:
             if self.is_ctor:
                 name = 'New%s' % (self.cls.unprefixed(),)
             else:

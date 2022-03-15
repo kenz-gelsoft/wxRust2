@@ -223,15 +223,9 @@ class RustMethodBinding:
             self_param = self_param.rust_ffi_ref(
                 is_mut_self=is_mut_self,
             )
-            if self.__model.needs_shim():
-                if self.__model.const or self.__model.cls.is_trivial():
-                    self_param = '&' + self_param
-                self_to_insert = self_param
-            else:
-                name = '%s.%s' % (
-                    self_param,
-                    self.__model.name(for_shim=True),
-                )
+            if self.__model.const or self.__model.cls.is_trivial():
+                self_param = '&' + self_param
+            self_to_insert = self_param
         call = '%s(%s)' % (
             name,
             self._call_params(params, self_to_insert),
@@ -278,7 +272,7 @@ class RustMethodBinding:
     def _rust_params(self, with_ffi=False, binding=False, for_shim=False):
         params = self.__model.params.copy()
         if self.__model.is_instance_method:
-            if for_shim and self.__model.needs_shim():
+            if for_shim:
                 params.insert(0, self.__shim_self)
             else:
                 params.insert(0, self.__self_param)
@@ -386,7 +380,7 @@ class CxxMethodBinding:
 
     def _cxx_params(self):
         params = self.__model.params.copy()
-        if self.__model.needs_shim() and self.__model.is_instance_method:
+        if self.__model.is_instance_method:
             params.insert(0, self.__self_param)
         return ', '.join(self._cxx_param(p) for p in params)
 
