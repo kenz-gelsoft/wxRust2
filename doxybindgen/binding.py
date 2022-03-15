@@ -219,9 +219,12 @@ class RustMethodBinding:
         self_to_insert = None
         if self.__model.is_instance_method:
             self_param = self.__self_param.rewrite(self.__rewrite_rule)
-            self_param = self_param.rust_ffi_ref()
+            is_mut_self = not self.__model.const
+            self_param = self_param.rust_ffi_ref(
+                is_mut_self=is_mut_self,
+            )
             if self.__model.needs_shim():
-                if self.__model.const:
+                if self.__model.const or self.__model.cls.is_trivial():
                     self_param = '&' + self_param
                 self_to_insert = self_param
             else:

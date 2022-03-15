@@ -80,11 +80,7 @@ class Method:
     def needs_shim(self):
         if self.is_blocked() or self.uses_unsupported_type():
             return False
-        if self.cls.uses_shim_for(self.name(for_shim=False)):
-            return True
-        return (not self.is_instance_method or 
-                self.returns_new() or
-                self.returns.is_str())
+        return True
     
     def uses_unsupported_type(self):
         if self.returns.not_supported():
@@ -149,10 +145,11 @@ class Param:
     def marshal(self):
         return self.type.marshal(self)
 
-    def rust_ffi_ref(self, rename=None):
+    def rust_ffi_ref(self, rename=None, is_mut_self=False):
         name = rename if rename else self.name
         if self.type.is_trivial():
-            return '%s.0' % (name,)
+            mut = 'mut ' if is_mut_self else ''
+            return '%s%s.0' % (mut, name)
         else:
             as_mut_or_not = '.as_mut()' if self.is_self() else ''
             return '%s.pinned::<ffi::%s>()%s' % (
