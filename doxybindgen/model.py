@@ -46,13 +46,6 @@ class Class:
     def is_trivial(self):
         return self.name in CXX_TRIVIAL_EXTERN_TYPES
 
-    def internal_base(self):
-        return self.config.get('internal_base') or None
-
-    def is_internal_base_method(self, name):
-        methods = self.config.get('internal_base_methods') or []
-        return name in methods
-
     def uses_shim_for(self, name):
         methods = self.config.get('use_shim') or []
         return name in methods
@@ -89,11 +82,6 @@ class Method:
 
     def is_blocked(self):
         return self.cls.is_blocked_method(self.name(for_shim=False))
-    
-    def internal_base(self):
-        if self.cls.is_internal_base_method(self.name(for_shim=False)):
-            return self.cls.internal_base()
-        return None
 
     def _overload_index(self):
         return sum(m.__name == self.__name for m in self.cls.methods)
@@ -157,13 +145,6 @@ class Param:
                 self.type.typename,
                 as_mut_or_not,
             )
-    
-    def rewrite(self, rule=None):
-        if rule and self.type.typename in rule:
-            type = copy.copy(self.type)
-            type.typename = rule[self.type.typename]
-            return Param(type, self.name)
-        return self
 
 
 class RustType:

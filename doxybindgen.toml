@@ -67,7 +67,6 @@ blocklist = [
     'Unbind1',
 ]
 [types.wxWindow]
-# internal_base = 'wxWindowBase'
 use_shim = [
     'AddChild',
     'FromDIP',

@@ -27,11 +27,6 @@ class RustClassBinding:
                 self.__model.name,
                 handwritten,
             )
-            internal_base = self.__model.internal_base()
-            if internal_base:
-                yield 'type %s;' % (
-                    internal_base,
-                )
         for method in self.__methods:
             for line in method.ffi_lines(for_shim=for_shim):
                 yield line
@@ -119,11 +114,6 @@ class RustMethodBinding:
         self.__shim_self = Param(RustType(model.cls.name, model.const), 'self_')
         self.__generic_params = self._make_params_generic()
 
-        self.__rewrite_rule = None
-        internal_base = self.__model.internal_base()
-        if internal_base:
-            self.__rewrite_rule = { self.__model.cls.name: internal_base }
-
     def is_blocked(self):
         return self.__model.is_blocked()
 
@@ -209,7 +199,7 @@ class RustMethodBinding:
         yield '}'
     
     def _binding_body(self):
-        params = [p.rewrite(self.__rewrite_rule) for p in self.__model.params]
+        params = self.__model.params
         for param in params:
             marshalling = param.marshal()
             if marshalling:
@@ -218,9 +208,8 @@ class RustMethodBinding:
         name = prefixed(self.__model.name(for_shim=True), with_ffi=True)
         self_to_insert = None
         if self.__model.is_instance_method:
-            self_param = self.__self_param.rewrite(self.__rewrite_rule)
             is_mut_self = not self.__model.const
-            self_param = self_param.rust_ffi_ref(
+            self_param = self.__self_param.rust_ffi_ref(
                 is_mut_self=is_mut_self,
             )
             if self.__model.const or self.__model.cls.is_trivial():
@@ -276,7 +265,6 @@ class RustMethodBinding:
                 params.insert(0, self.__shim_self)
             else:
                 params.insert(0, self.__self_param)
-        params = (p.rewrite(self.__rewrite_rule) for p in params)
         return ', '.join(self._rust_param(p, with_ffi, binding) for p in params)
 
     def _rust_param(self, param, with_ffi, binding):
