@@ -107,8 +107,6 @@ class Method:
         return '%s%s' % (name, index)
 
     def wrapped_return_type(self):
-        if self.returns.is_str():
-            return None
         if (self.is_ctor or
             self.returns_new() or
             self.returns.is_trivial()):
@@ -119,6 +117,8 @@ class Method:
     def returns_new(self):
         if self.is_blocked():
             return False
+        if self.returns.is_str():
+            return True
         return self.returns.not_supported_value_type(check_generated=True)
 
     

@@ -83,6 +83,8 @@ mod ffi {
     }
 }
 
+pub struct WxString(*mut ffi::wxString);
+
 pub use ffi::EventType;
 
 // Rust closure to wx calablle function+param pair.

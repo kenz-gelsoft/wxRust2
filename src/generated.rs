@@ -6,6 +6,7 @@ use std::os::raw::c_char;
 use std::pin::Pin;
 use std::ptr;
 
+use crate::WxString;
 use crate::macros::wx_class;
 
 // any pointer type used on ffi boundary.
@@ -314,11 +315,11 @@ mod ffi {
         // GENERATED: fn Enable(self: Pin<&mut wxWindow>, enable: bool) -> bool;
         // GENERATED: fn Show(self: Pin<&mut wxWindow>, show: bool) -> bool;
         // CXX_UNSUPPORTED: fn ShowWithEffect(self: Pin<&mut wxWindow>, effect: wxShowEffect, timeout: u32) -> bool;
-        // GENERATED: fn GetHelpText(self: &wxWindow) -> String;
+        // GENERATED: fn GetHelpText(self: &wxWindow) -> wxString;
         // GENERATED: fn SetHelpText(self: Pin<&mut wxWindow>, help_text: &wxString);
-        // CXX_UNSUPPORTED: fn GetHelpTextAtPoint(self: &wxWindow, point: &wxPoint, origin: wxHelpEvent::Origin) -> String;
+        // CXX_UNSUPPORTED: fn GetHelpTextAtPoint(self: &wxWindow, point: &wxPoint, origin: wxHelpEvent::Origin) -> wxString;
         // GENERATED: fn GetToolTip(self: &wxWindow) -> *mut wxToolTip;
-        // GENERATED: fn GetToolTipText(self: &wxWindow) -> String;
+        // GENERATED: fn GetToolTipText(self: &wxWindow) -> wxString;
         // GENERATED: fn SetToolTip(self: Pin<&mut wxWindow>, tip_string: &wxString);
         // GENERATED: unsafe fn SetToolTip(self: Pin<&mut wxWindow>, tip: *mut wxToolTip);
         // GENERATED: fn UnsetToolTip(self: Pin<&mut wxWindow>);
@@ -332,10 +333,10 @@ mod ffi {
         // GENERATED: fn TransferDataToWindow(self: Pin<&mut wxWindow>) -> bool;
         // GENERATED: fn Validate(self: Pin<&mut wxWindow>) -> bool;
         // GENERATED: fn GetId(self: &wxWindow) -> i32;
-        // GENERATED: fn GetLabel(self: &wxWindow) -> String;
+        // GENERATED: fn GetLabel(self: &wxWindow) -> wxString;
         // CXX_UNSUPPORTED: fn GetLayoutDirection(self: &wxWindow) -> wxLayoutDirection;
         // GENERATED: fn AdjustForLayoutDirection(self: &wxWindow, x: i32, width: i32, width_total: i32) -> i32;
-        // GENERATED: fn GetName(self: &wxWindow) -> String;
+        // GENERATED: fn GetName(self: &wxWindow) -> wxString;
         // CXX_UNSUPPORTED: fn GetWindowVariant(self: &wxWindow) -> wxWindowVariant;
         // GENERATED: fn SetId(self: Pin<&mut wxWindow>, winid: i32);
         // GENERATED: fn SetLabel(self: Pin<&mut wxWindow>, label: &wxString);
@@ -408,18 +409,18 @@ mod ffi {
         // CTOR: fn wxControl() -> Control;
         // GENERATED: unsafe fn Create(self: Pin<&mut wxControl>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
         // GENERATED: fn Command(self: Pin<&mut wxControl>, event: Pin<&mut wxCommandEvent>);
-        // GENERATED: fn GetLabel(self: &wxControl) -> String;
-        // GENERATED: fn GetLabelText(self: &wxControl) -> String;
+        // GENERATED: fn GetLabel(self: &wxControl) -> wxString;
+        // GENERATED: fn GetLabelText(self: &wxControl) -> wxString;
         // GENERATED: fn GetSizeFromTextSize(self: &wxControl, xlen: i32, ylen: i32) -> wxSize;
         // GENERATED: fn GetSizeFromTextSize(self: &wxControl, tsize: &wxSize) -> wxSize;
         // GENERATED: fn GetSizeFromText(self: &wxControl, text: &wxString) -> wxSize;
         // GENERATED: fn SetLabel(self: Pin<&mut wxControl>, label: &wxString);
         // GENERATED: fn SetLabelText(self: Pin<&mut wxControl>, text: &wxString);
         // GENERATED: fn SetLabelMarkup(self: Pin<&mut wxControl>, markup: &wxString) -> bool;
-        // GENERATED: fn GetLabelText(label: &wxString) -> String;
-        // GENERATED: fn RemoveMnemonics(str: &wxString) -> String;
-        // GENERATED: fn EscapeMnemonics(text: &wxString) -> String;
-        // BLOCKED: fn Ellipsize(label: &wxString, dc: &wxDC, mode: i32, max_width: i32, flags: i32) -> String;
+        // GENERATED: fn GetLabelText(label: &wxString) -> wxString;
+        // GENERATED: fn RemoveMnemonics(str: &wxString) -> wxString;
+        // GENERATED: fn EscapeMnemonics(text: &wxString) -> wxString;
+        // BLOCKED: fn Ellipsize(label: &wxString, dc: &wxDC, mode: i32, max_width: i32, flags: i32) -> wxString;
         
         // CLASS: wxAnyButton
         type wxAnyButton;
@@ -448,7 +449,7 @@ mod ffi {
         // CTOR: unsafe fn wxButton(parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> Button;
         // GENERATED: unsafe fn Create(self: Pin<&mut wxButton>, parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
         // GENERATED: fn GetAuthNeeded(self: &wxButton) -> bool;
-        // GENERATED: fn GetLabel(self: &wxButton) -> String;
+        // GENERATED: fn GetLabel(self: &wxButton) -> wxString;
         // GENERATED: fn SetAuthNeeded(self: Pin<&mut wxButton>, needed: bool);
         // GENERATED: fn SetDefault(self: Pin<&mut wxButton>) -> *mut wxWindow;
         // GENERATED: fn SetLabel(self: Pin<&mut wxButton>, label: &wxString);
@@ -474,7 +475,7 @@ mod ffi {
         // GENERATED: fn GetDefaultItem(self: &wxTopLevelWindow) -> *mut wxWindow;
         // CXX_UNSUPPORTED: fn GetIcon(self: &wxTopLevelWindow) -> wxIcon;
         // BLOCKED: fn GetIcons(self: &wxTopLevelWindow) -> &wxIconBundle;
-        // GENERATED: fn GetTitle(self: &wxTopLevelWindow) -> String;
+        // GENERATED: fn GetTitle(self: &wxTopLevelWindow) -> wxString;
         // GENERATED: fn Iconize(self: Pin<&mut wxTopLevelWindow>, iconize: bool);
         // GENERATED: fn IsActive(self: Pin<&mut wxTopLevelWindow>) -> bool;
         // GENERATED: fn IsAlwaysMaximized(self: &wxTopLevelWindow) -> bool;
@@ -940,10 +941,10 @@ mod ffi {
         fn wxWindow_Disable(self_: Pin<&mut wxWindow>) -> bool;
         fn wxWindow_Enable(self_: Pin<&mut wxWindow>, enable: bool) -> bool;
         fn wxWindow_Show(self_: Pin<&mut wxWindow>, show: bool) -> bool;
-        fn wxWindow_GetHelpText(self_: &wxWindow) -> String;
+        fn wxWindow_GetHelpText(self_: &wxWindow) -> *mut wxString;
         fn wxWindow_SetHelpText(self_: Pin<&mut wxWindow>, help_text: &wxString);
         fn wxWindow_GetToolTip(self_: &wxWindow) -> *mut wxToolTip;
-        fn wxWindow_GetToolTipText(self_: &wxWindow) -> String;
+        fn wxWindow_GetToolTipText(self_: &wxWindow) -> *mut wxString;
         fn wxWindow_SetToolTip(self_: Pin<&mut wxWindow>, tip_string: &wxString);
         #[rust_name = "wxWindow_SetToolTip1"]
         unsafe fn wxWindow_SetToolTip(self_: Pin<&mut wxWindow>, tip: *mut wxToolTip);
@@ -960,9 +961,9 @@ mod ffi {
         fn wxWindow_TransferDataToWindow(self_: Pin<&mut wxWindow>) -> bool;
         fn wxWindow_Validate(self_: Pin<&mut wxWindow>) -> bool;
         fn wxWindow_GetId(self_: &wxWindow) -> i32;
-        fn wxWindow_GetLabel(self_: &wxWindow) -> String;
+        fn wxWindow_GetLabel(self_: &wxWindow) -> *mut wxString;
         fn wxWindow_AdjustForLayoutDirection(self_: &wxWindow, x: i32, width: i32, width_total: i32) -> i32;
-        fn wxWindow_GetName(self_: &wxWindow) -> String;
+        fn wxWindow_GetName(self_: &wxWindow) -> *mut wxString;
         fn wxWindow_SetId(self_: Pin<&mut wxWindow>, winid: i32);
         fn wxWindow_SetLabel(self_: Pin<&mut wxWindow>, label: &wxString);
         fn wxWindow_SetName(self_: Pin<&mut wxWindow>, name: &wxString);
@@ -1022,8 +1023,8 @@ mod ffi {
         fn NewControl() -> *mut wxControl;
         unsafe fn wxControl_Create(self_: Pin<&mut wxControl>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
         fn wxControl_Command(self_: Pin<&mut wxControl>, event: Pin<&mut wxCommandEvent>);
-        fn wxControl_GetLabel(self_: &wxControl) -> String;
-        fn wxControl_GetLabelText(self_: &wxControl) -> String;
+        fn wxControl_GetLabel(self_: &wxControl) -> *mut wxString;
+        fn wxControl_GetLabelText(self_: &wxControl) -> *mut wxString;
         fn wxControl_GetSizeFromTextSize(self_: &wxControl, xlen: i32, ylen: i32) -> wxSize;
         #[rust_name = "wxControl_GetSizeFromTextSize1"]
         fn wxControl_GetSizeFromTextSize(self_: &wxControl, tsize: &wxSize) -> wxSize;
@@ -1032,9 +1033,9 @@ mod ffi {
         fn wxControl_SetLabelText(self_: Pin<&mut wxControl>, text: &wxString);
         fn wxControl_SetLabelMarkup(self_: Pin<&mut wxControl>, markup: &wxString) -> bool;
         #[rust_name = "wxControl_GetLabelText1"]
-        fn wxControl_GetLabelText(label: &wxString) -> String;
-        fn wxControl_RemoveMnemonics(str: &wxString) -> String;
-        fn wxControl_EscapeMnemonics(text: &wxString) -> String;
+        fn wxControl_GetLabelText(label: &wxString) -> *mut wxString;
+        fn wxControl_RemoveMnemonics(str: &wxString) -> *mut wxString;
+        fn wxControl_EscapeMnemonics(text: &wxString) -> *mut wxString;
         // CLASS: wxAnyButton
         fn NewAnyButton() -> *mut wxAnyButton;
         fn wxAnyButton_SetBitmapCurrent(self_: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
@@ -1052,7 +1053,7 @@ mod ffi {
         unsafe fn NewButton(parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> *mut wxButton;
         unsafe fn wxButton_Create(self_: Pin<&mut wxButton>, parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
         fn wxButton_GetAuthNeeded(self_: &wxButton) -> bool;
-        fn wxButton_GetLabel(self_: &wxButton) -> String;
+        fn wxButton_GetLabel(self_: &wxButton) -> *mut wxString;
         fn wxButton_SetAuthNeeded(self_: Pin<&mut wxButton>, needed: bool);
         fn wxButton_SetDefault(self_: Pin<&mut wxButton>) -> *mut wxWindow;
         fn wxButton_SetLabel(self_: Pin<&mut wxButton>, label: &wxString);
@@ -1073,7 +1074,7 @@ mod ffi {
         fn wxTopLevelWindow_EnableMaximizeButton(self_: Pin<&mut wxTopLevelWindow>, enable: bool) -> bool;
         fn wxTopLevelWindow_EnableMinimizeButton(self_: Pin<&mut wxTopLevelWindow>, enable: bool) -> bool;
         fn wxTopLevelWindow_GetDefaultItem(self_: &wxTopLevelWindow) -> *mut wxWindow;
-        fn wxTopLevelWindow_GetTitle(self_: &wxTopLevelWindow) -> String;
+        fn wxTopLevelWindow_GetTitle(self_: &wxTopLevelWindow) -> *mut wxString;
         fn wxTopLevelWindow_Iconize(self_: Pin<&mut wxTopLevelWindow>, iconize: bool);
         fn wxTopLevelWindow_IsActive(self_: Pin<&mut wxTopLevelWindow>) -> bool;
         fn wxTopLevelWindow_IsAlwaysMaximized(self_: &wxTopLevelWindow) -> bool;
@@ -2153,8 +2154,8 @@ pub trait WindowMethods: EvtHandlerMethods {
         ffi::wxWindow_Show(self.pinned::<ffi::wxWindow>().as_mut(), show)
     }
     // CXX_UNSUPPORTED: fn ShowWithEffect()
-    fn get_help_text(&self) -> String {
-        ffi::wxWindow_GetHelpText(&self.pinned::<ffi::wxWindow>().as_mut())
+    fn get_help_text(&self) -> WxString {
+        WxString(ffi::wxWindow_GetHelpText(&self.pinned::<ffi::wxWindow>().as_mut()))
     }
     fn set_help_text(&self, help_text: &str) {
         let help_text = &crate::ffi::NewString(help_text);
@@ -2164,8 +2165,8 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn get_tool_tip(&self) -> *mut ffi::wxToolTip {
         ffi::wxWindow_GetToolTip(&self.pinned::<ffi::wxWindow>().as_mut())
     }
-    fn get_tool_tip_text(&self) -> String {
-        ffi::wxWindow_GetToolTipText(&self.pinned::<ffi::wxWindow>().as_mut())
+    fn get_tool_tip_text(&self) -> WxString {
+        WxString(ffi::wxWindow_GetToolTipText(&self.pinned::<ffi::wxWindow>().as_mut()))
     }
     fn set_tool_tip(&self, tip_string: &str) {
         let tip_string = &crate::ffi::NewString(tip_string);
@@ -2212,15 +2213,15 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn get_id(&self) -> i32 {
         ffi::wxWindow_GetId(&self.pinned::<ffi::wxWindow>().as_mut())
     }
-    fn get_label(&self) -> String {
-        ffi::wxWindow_GetLabel(&self.pinned::<ffi::wxWindow>().as_mut())
+    fn get_label(&self) -> WxString {
+        WxString(ffi::wxWindow_GetLabel(&self.pinned::<ffi::wxWindow>().as_mut()))
     }
     // CXX_UNSUPPORTED: fn GetLayoutDirection()
     fn adjust_for_layout_direction(&self, x: i32, width: i32, width_total: i32) -> i32 {
         ffi::wxWindow_AdjustForLayoutDirection(&self.pinned::<ffi::wxWindow>().as_mut(), x, width, width_total)
     }
-    fn get_name(&self) -> String {
-        ffi::wxWindow_GetName(&self.pinned::<ffi::wxWindow>().as_mut())
+    fn get_name(&self) -> WxString {
+        WxString(ffi::wxWindow_GetName(&self.pinned::<ffi::wxWindow>().as_mut()))
     }
     // CXX_UNSUPPORTED: fn GetWindowVariant()
     fn set_id(&self, winid: i32) {
@@ -2463,11 +2464,11 @@ pub trait ControlMethods: WindowMethods {
     fn command(&self, event: Pin<&mut ffi::wxCommandEvent>) {
         ffi::wxControl_Command(self.pinned::<ffi::wxControl>().as_mut(), event)
     }
-    fn get_label(&self) -> String {
-        ffi::wxControl_GetLabel(&self.pinned::<ffi::wxControl>().as_mut())
+    fn get_label(&self) -> WxString {
+        WxString(ffi::wxControl_GetLabel(&self.pinned::<ffi::wxControl>().as_mut()))
     }
-    fn get_label_text(&self) -> String {
-        ffi::wxControl_GetLabelText(&self.pinned::<ffi::wxControl>().as_mut())
+    fn get_label_text(&self) -> WxString {
+        WxString(ffi::wxControl_GetLabelText(&self.pinned::<ffi::wxControl>().as_mut()))
     }
     fn get_size_from_text_size(&self, xlen: i32, ylen: i32) -> Size {
         Size(ffi::wxControl_GetSizeFromTextSize(&self.pinned::<ffi::wxControl>().as_mut(), xlen, ylen))
@@ -2492,17 +2493,17 @@ pub trait ControlMethods: WindowMethods {
         let markup = &crate::ffi::NewString(markup);
         ffi::wxControl_SetLabelMarkup(self.pinned::<ffi::wxControl>().as_mut(), markup)
     }
-    fn get_label_text1(label: &str) -> String {
+    fn get_label_text1(label: &str) -> WxString {
         let label = &crate::ffi::NewString(label);
-        ffi::wxControl_GetLabelText1(label)
+        WxString(ffi::wxControl_GetLabelText1(label))
     }
-    fn remove_mnemonics(str: &str) -> String {
+    fn remove_mnemonics(str: &str) -> WxString {
         let str = &crate::ffi::NewString(str);
-        ffi::wxControl_RemoveMnemonics(str)
+        WxString(ffi::wxControl_RemoveMnemonics(str))
     }
-    fn escape_mnemonics(text: &str) -> String {
+    fn escape_mnemonics(text: &str) -> WxString {
         let text = &crate::ffi::NewString(text);
-        ffi::wxControl_EscapeMnemonics(text)
+        WxString(ffi::wxControl_EscapeMnemonics(text))
     }
     // BLOCKED: fn Ellipsize()
 }
@@ -2609,8 +2610,8 @@ pub trait ButtonMethods: AnyButtonMethods {
     fn get_auth_needed(&self) -> bool {
         ffi::wxButton_GetAuthNeeded(&self.pinned::<ffi::wxButton>().as_mut())
     }
-    fn get_label(&self) -> String {
-        ffi::wxButton_GetLabel(&self.pinned::<ffi::wxButton>().as_mut())
+    fn get_label(&self) -> WxString {
+        WxString(ffi::wxButton_GetLabel(&self.pinned::<ffi::wxButton>().as_mut()))
     }
     fn set_auth_needed(&self, needed: bool) {
         ffi::wxButton_SetAuthNeeded(self.pinned::<ffi::wxButton>().as_mut(), needed)
@@ -2721,8 +2722,8 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     }
     // CXX_UNSUPPORTED: fn GetIcon()
     // BLOCKED: fn GetIcons()
-    fn get_title(&self) -> String {
-        ffi::wxTopLevelWindow_GetTitle(&self.pinned::<ffi::wxTopLevelWindow>().as_mut())
+    fn get_title(&self) -> WxString {
+        WxString(ffi::wxTopLevelWindow_GetTitle(&self.pinned::<ffi::wxTopLevelWindow>().as_mut()))
     }
     fn iconize(&self, iconize: bool) {
         ffi::wxTopLevelWindow_Iconize(self.pinned::<ffi::wxTopLevelWindow>().as_mut(), iconize)

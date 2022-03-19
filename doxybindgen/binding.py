@@ -139,12 +139,12 @@ class RustMethodBinding:
         if self.__model.returns.is_void():
             return ''
         returns = self.__model.returns.in_rust(with_ffi=binding)
-        if self.__model.returns.is_str():
-            returns = 'String'
         wrapped = self.__model.wrapped_return_type()
         if wrapped:
             if binding:
                 returns = wrapped[2:]
+                if self.__model.returns.is_str():
+                    returns = 'WxString'
             elif for_shim:
                 if self.__model.returns.is_trivial():
                     returns = wrapped
@@ -298,7 +298,10 @@ class RustMethodBinding:
     def _wrap_return_type(self, call):
         wrapped = self.__model.wrapped_return_type()
         if wrapped:
-            return '%s(%s)' % (wrapped[2:], call)
+            wrapped = wrapped[2:]
+            if self.__model.returns.is_str():
+                wrapped = 'WxString'
+            return '%s(%s)' % (wrapped, call)
         return call
 
     def _uses_ptr_type(self):
@@ -332,8 +335,6 @@ class CxxMethodBinding:
             return
         wrapped = self.__model.wrapped_return_type()
         returns = self.__model.returns.in_cxx() + ' '
-        if self.__model.returns.is_str():
-            returns = 'rust::String '
         if wrapped:
             ptr_or_not = '' if self.__model.returns.is_trivial() else '*'
             returns = '%s %s' % (
@@ -353,10 +354,6 @@ class CxxMethodBinding:
             new_params_or_expr = '%s%s(%s)' % (
                 self_or_class,
                 self.__model.name(for_shim=False, without_index=True),
-                new_params_or_expr,
-            )
-        if self.__model.returns.is_str():
-            new_params_or_expr = 'rust::String(%s.utf8_str())' % (
                 new_params_or_expr,
             )
         if wrapped and (self.is_ctor or not self.__model.returns.is_trivial()):

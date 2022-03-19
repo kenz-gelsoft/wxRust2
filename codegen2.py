@@ -39,6 +39,7 @@ use std::os::raw::c_char;
 use std::pin::Pin;
 use std::ptr;
 
+use crate::WxString;
 use crate::macros::wx_class;
 
 // any pointer type used on ffi boundary.

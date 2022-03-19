@@ -687,8 +687,8 @@ inline bool wxWindow_Enable(wxWindow & self, bool enable) {
 inline bool wxWindow_Show(wxWindow & self, bool show) {
     return self.Show(show);
 }
-inline rust::String wxWindow_GetHelpText(const wxWindow & self) {
-    return rust::String(self.GetHelpText().utf8_str());
+inline wxString *wxWindow_GetHelpText(const wxWindow & self) {
+    return new wxString(self.GetHelpText());
 }
 inline void wxWindow_SetHelpText(wxWindow & self, const wxString & help_text) {
     return self.SetHelpText(help_text);
@@ -696,8 +696,8 @@ inline void wxWindow_SetHelpText(wxWindow & self, const wxString & help_text) {
 inline wxToolTip * wxWindow_GetToolTip(const wxWindow & self) {
     return self.GetToolTip();
 }
-inline rust::String wxWindow_GetToolTipText(const wxWindow & self) {
-    return rust::String(self.GetToolTipText().utf8_str());
+inline wxString *wxWindow_GetToolTipText(const wxWindow & self) {
+    return new wxString(self.GetToolTipText());
 }
 inline void wxWindow_SetToolTip(wxWindow & self, const wxString & tip_string) {
     return self.SetToolTip(tip_string);
@@ -738,14 +738,14 @@ inline bool wxWindow_Validate(wxWindow & self) {
 inline wxWindowID wxWindow_GetId(const wxWindow & self) {
     return self.GetId();
 }
-inline rust::String wxWindow_GetLabel(const wxWindow & self) {
-    return rust::String(self.GetLabel().utf8_str());
+inline wxString *wxWindow_GetLabel(const wxWindow & self) {
+    return new wxString(self.GetLabel());
 }
 inline wxCoord wxWindow_AdjustForLayoutDirection(const wxWindow & self, wxCoord x, wxCoord width, wxCoord width_total) {
     return self.AdjustForLayoutDirection(x, width, width_total);
 }
-inline rust::String wxWindow_GetName(const wxWindow & self) {
-    return rust::String(self.GetName().utf8_str());
+inline wxString *wxWindow_GetName(const wxWindow & self) {
+    return new wxString(self.GetName());
 }
 inline void wxWindow_SetId(wxWindow & self, wxWindowID winid) {
     return self.SetId(winid);
@@ -917,11 +917,11 @@ inline bool wxControl_Create(wxControl & self, wxWindow * parent, wxWindowID id,
 inline void wxControl_Command(wxControl & self, wxCommandEvent & event) {
     return self.Command(event);
 }
-inline rust::String wxControl_GetLabel(const wxControl & self) {
-    return rust::String(self.GetLabel().utf8_str());
+inline wxString *wxControl_GetLabel(const wxControl & self) {
+    return new wxString(self.GetLabel());
 }
-inline rust::String wxControl_GetLabelText(const wxControl & self) {
-    return rust::String(self.GetLabelText().utf8_str());
+inline wxString *wxControl_GetLabelText(const wxControl & self) {
+    return new wxString(self.GetLabelText());
 }
 inline wxSize wxControl_GetSizeFromTextSize(const wxControl & self, int xlen, int ylen) {
     return self.GetSizeFromTextSize(xlen, ylen);
@@ -941,14 +941,14 @@ inline void wxControl_SetLabelText(wxControl & self, const wxString & text) {
 inline bool wxControl_SetLabelMarkup(wxControl & self, const wxString & markup) {
     return self.SetLabelMarkup(markup);
 }
-inline rust::String wxControl_GetLabelText(const wxString & label) {
-    return rust::String(wxControl::GetLabelText(label).utf8_str());
+inline wxString *wxControl_GetLabelText(const wxString & label) {
+    return new wxString(wxControl::GetLabelText(label));
 }
-inline rust::String wxControl_RemoveMnemonics(const wxString & str) {
-    return rust::String(wxControl::RemoveMnemonics(str).utf8_str());
+inline wxString *wxControl_RemoveMnemonics(const wxString & str) {
+    return new wxString(wxControl::RemoveMnemonics(str));
 }
-inline rust::String wxControl_EscapeMnemonics(const wxString & text) {
-    return rust::String(wxControl::EscapeMnemonics(text).utf8_str());
+inline wxString *wxControl_EscapeMnemonics(const wxString & text) {
+    return new wxString(wxControl::EscapeMnemonics(text));
 }
 
 // CLASS: wxAnyButton
@@ -993,8 +993,8 @@ inline bool wxButton_Create(wxButton & self, wxWindow * parent, wxWindowID id, c
 inline bool wxButton_GetAuthNeeded(const wxButton & self) {
     return self.GetAuthNeeded();
 }
-inline rust::String wxButton_GetLabel(const wxButton & self) {
-    return rust::String(self.GetLabel().utf8_str());
+inline wxString *wxButton_GetLabel(const wxButton & self) {
+    return new wxString(self.GetLabel());
 }
 inline void wxButton_SetAuthNeeded(wxButton & self, bool needed) {
     return self.SetAuthNeeded(needed);
@@ -1048,8 +1048,8 @@ inline bool wxTopLevelWindow_EnableMinimizeButton(wxTopLevelWindow & self, bool 
 inline wxWindow * wxTopLevelWindow_GetDefaultItem(const wxTopLevelWindow & self) {
     return self.GetDefaultItem();
 }
-inline rust::String wxTopLevelWindow_GetTitle(const wxTopLevelWindow & self) {
-    return rust::String(self.GetTitle().utf8_str());
+inline wxString *wxTopLevelWindow_GetTitle(const wxTopLevelWindow & self) {
+    return new wxString(self.GetTitle());
 }
 inline void wxTopLevelWindow_Iconize(wxTopLevelWindow & self, bool iconize) {
     return self.Iconize(iconize);
