@@ -108,8 +108,7 @@ class RustMethodBinding:
     def ffi_lines(self, for_shim):
         if for_shim and not self.__model.needs_shim():
             return
-        body = '%sfn %s(%s)%s;' % (
-            self._unsafe_or_not(),
+        body = 'unsafe fn %s(%s)%s;' % (
             self.__model.name(for_shim=for_shim, without_index=True),
             self._rust_params(for_shim=for_shim),
             self._returns_or_not(for_shim=for_shim),
@@ -136,9 +135,6 @@ class RustMethodBinding:
             elif for_shim:
                 returns = '*mut %s' % (wrapped,)
         return ' -> %s' % (returns,)
-    
-    def _unsafe_or_not(self):
-        return 'unsafe ' if self._uses_ptr_type() else ''
     
     def _rename(self):
         if self.__model.overload_index == 0:
@@ -179,7 +175,7 @@ class RustMethodBinding:
             self._returns_or_not(binding=True),
         )
         body_lines = list(self._binding_body())
-        for line in self._wrap_if_unsafe(body_lines):
+        for line in self._wrap_unsafe(body_lines):
             yield '    %s' % (line,)
         yield '}'
     
@@ -264,11 +260,7 @@ class RustMethodBinding:
             typename,
         )
 
-    def _wrap_if_unsafe(self, lines):
-        if not self._uses_ptr_type():
-            for line in lines:
-                yield line
-            return
+    def _wrap_unsafe(self, lines):
         if len(lines) < 2:
             yield 'unsafe { %s }' % (lines[0],)
         else:
