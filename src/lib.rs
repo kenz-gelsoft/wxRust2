@@ -26,8 +26,6 @@ mod ffi {
         type wxEvtHandler;
 
         type wxString;
-
-        unsafe fn wxEntry(argc: &mut i32, argv: *mut *mut c_char) -> i32;
     }
 
     unsafe extern "C++" {
@@ -35,14 +33,15 @@ mod ffi {
             aFn: *const c_char,
             aParam: *const c_char
         );
-        unsafe fn Bind(
-            handler: Pin<&mut wxEvtHandler>,
+        unsafe fn wxEvtHandler_Bind(
+            self_: *mut wxEvtHandler,
             eventType: i32,
             aFn: *const c_char,
             aParam: *const c_char
         );
 
         unsafe fn wxString_new(psz: *const u8, nLength: usize) -> *mut wxString;
+        unsafe fn wxRustEntry(argc: *mut i32, argv: *mut *mut c_char) -> i32;
     }
 }
 
@@ -72,7 +71,7 @@ impl<T: EvtHandlerMethods> Bindable for T {
     fn bind<F: Fn() + 'static>(&self, event_type: i32, closure: F) {
         unsafe {
             let (f, param) = to_wx_callable(closure);
-            ffi::Bind(self.pinned::<ffi::wxEvtHandler>().as_mut(), event_type, f, param);
+            ffi::wxEvtHandler_Bind(self.as_ptr() as *mut ffi::wxEvtHandler, event_type, f, param);
         }
     }
 }
@@ -115,6 +114,6 @@ pub fn entry() {
     argv.push(ptr::null_mut()); // Nul terminator.
     let mut argc: i32 = args.len().try_into().unwrap();
     unsafe {
-        ffi::wxEntry(&mut argc, argv.as_mut_ptr());
+        ffi::wxRustEntry(&mut argc, argv.as_mut_ptr());
     }
 }

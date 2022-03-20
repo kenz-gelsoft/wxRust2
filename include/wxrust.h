@@ -45,9 +45,11 @@ public:
 // TODO: auto generate
 #define wxRUST_EVT_BUTTON 0
 
-void Bind(wxEvtHandler &evtHandler, int eventType, UnsafeAnyPtr aFn, UnsafeAnyPtr aParam);
+void wxEvtHandler_Bind(wxEvtHandler *evtHandler, int eventType, UnsafeAnyPtr aFn, UnsafeAnyPtr aParam);
 
 // Constructors
 wxString *wxString_new(const unsigned char *aString, size_t aLen);
+
+int wxRustEntry(int *argc, char **argv);
 
 } // namespace wxrust
