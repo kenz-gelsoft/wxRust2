@@ -16,14 +16,14 @@ bool App::OnInit() {
 }
 
 // wxEvtHandler
-wxEventTypeTag<wxCommandEvent> TypeTagOf(EventType eventType) {
+wxEventTypeTag<wxCommandEvent> TypeTagOf(int eventType) {
     switch (eventType) {
-    case EventType::Button:
+    case wxRUST_EVT_BUTTON:
         return wxEVT_BUTTON;
     }
-    return wxEVT_BUTTON;
+    return wxEVT_NULL;
 }
-void Bind(wxEvtHandler &evtHandler, EventType eventType, UnsafeAnyPtr aFn, UnsafeAnyPtr aParam) {
+void Bind(wxEvtHandler &evtHandler, int eventType, UnsafeAnyPtr aFn, UnsafeAnyPtr aParam) {
     CxxClosure<wxCommandEvent &> functor(aFn, aParam);
     evtHandler.Bind(TypeTagOf(eventType), functor);
 }

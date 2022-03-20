@@ -42,7 +42,10 @@ public:
     }
 };
 
-void Bind(wxEvtHandler &evtHandler, EventType eventType, UnsafeAnyPtr aFn, UnsafeAnyPtr aParam);
+// TODO: auto generate
+#define wxRUST_EVT_BUTTON 0
+
+void Bind(wxEvtHandler &evtHandler, int eventType, UnsafeAnyPtr aFn, UnsafeAnyPtr aParam);
 
 // Constructors
 wxString *wxString_new(const unsigned char *aString, size_t aLen);

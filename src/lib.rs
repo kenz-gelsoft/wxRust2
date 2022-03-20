@@ -8,6 +8,7 @@ mod macros;
 mod defs;
 pub use defs::*;
 mod manual;
+pub use manual::*;
 
 mod generated;
 pub use generated::*;
@@ -18,10 +19,6 @@ type UnsafeAnyPtr = *const c_char;
 
 #[cxx::bridge(namespace = "wxrust")]
 mod ffi {
-    enum EventType {
-        Button,
-    }
-
     #[namespace = ""]
     unsafe extern "C++" {
         include!("wx/include/wxrust.h");
@@ -40,7 +37,7 @@ mod ffi {
         );
         unsafe fn Bind(
             handler: Pin<&mut wxEvtHandler>,
-            eventType: EventType,
+            eventType: i32,
             aFn: *const c_char,
             aParam: *const c_char
         );
@@ -53,8 +50,6 @@ pub struct WxString(*mut ffi::wxString);
 pub unsafe fn wx_string_from(s: &str) -> *mut ffi::wxString {
     return ffi::wxString_new(s.as_ptr(), s.len())
 }
-
-pub use ffi::EventType;
 
 // Rust closure to wx calablle function+param pair.
 unsafe fn to_wx_callable<F: Fn() + 'static>(closure: F) -> (UnsafeAnyPtr, UnsafeAnyPtr) {
@@ -71,10 +66,10 @@ unsafe fn to_wx_callable<F: Fn() + 'static>(closure: F) -> (UnsafeAnyPtr, Unsafe
 }
 
 pub trait Bindable {
-    fn bind<F: Fn() + 'static>(&self, event_type: ffi::EventType, closure: F);
+    fn bind<F: Fn() + 'static>(&self, event_type: i32, closure: F);
 }
 impl<T: EvtHandlerMethods> Bindable for T {
-    fn bind<F: Fn() + 'static>(&self, event_type: ffi::EventType, closure: F) {
+    fn bind<F: Fn() + 'static>(&self, event_type: i32, closure: F) {
         unsafe {
             let (f, param) = to_wx_callable(closure);
             ffi::Bind(self.pinned::<ffi::wxEvtHandler>().as_mut(), event_type, f, param);

@@ -3,6 +3,9 @@
 #![allow(non_snake_case)]
 #![allow(non_upper_case_globals)]
 
+// TODO auto generate
+pub const wxRUST_EVT_BUTTON: i32 = 0;
+
 pub const fn wxPG_IT_CHILDREN(A: u32) -> u32 {
     (A) << 16
 }
