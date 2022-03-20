@@ -90,12 +90,11 @@ class Method:
         name = self.__name
         if for_shim:
             if self.is_ctor:
-                name = 'New%s' % (self.cls.unprefixed(),)
-            else:
-                name = '_'.join((
-                    self.cls.name,
-                    name,
-                ))
+                name = 'new'
+            name = '_'.join((
+                self.cls.name,
+                name,
+            ))
         if without_index:
             return name
         return self.overload_indexed(name)

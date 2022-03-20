@@ -8,10 +8,10 @@
 namespace wxrust {
 
 // CLASS: wxObject
-inline wxObject *NewObject() {
+inline wxObject *wxObject_new() {
     return new wxObject();
 }
-inline wxObject *NewObject(const wxObject & other) {
+inline wxObject *wxObject_new(const wxObject & other) {
     return new wxObject(other);
 }
 inline wxClassInfo * wxObject_GetClassInfo(const wxObject & self) {
@@ -97,7 +97,7 @@ inline void wxEvtHandler_AddFilter(wxEventFilter * filter) {
 inline void wxEvtHandler_RemoveFilter(wxEventFilter * filter) {
     return wxEvtHandler::RemoveFilter(filter);
 }
-inline wxEvtHandler *NewEvtHandler() {
+inline wxEvtHandler *wxEvtHandler_new() {
     return new wxEvtHandler();
 }
 
@@ -894,10 +894,10 @@ inline wxWindowID wxWindow_NewControlId(int count) {
 inline void wxWindow_UnreserveControlId(wxWindowID id, int count) {
     return wxWindow::UnreserveControlId(id, count);
 }
-inline wxWindow *NewWindow() {
+inline wxWindow *wxWindow_new() {
     return new wxWindow();
 }
-inline wxWindow *NewWindow(wxWindow * parent, wxWindowID id, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
+inline wxWindow *wxWindow_new(wxWindow * parent, wxWindowID id, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
     return new wxWindow(parent, id, pos, size, style, name);
 }
 inline bool wxWindow_Create(wxWindow & self, wxWindow * parent, wxWindowID id, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
@@ -905,10 +905,10 @@ inline bool wxWindow_Create(wxWindow & self, wxWindow * parent, wxWindowID id, c
 }
 
 // CLASS: wxControl
-inline wxControl *NewControl(wxWindow * parent, wxWindowID id, const wxPoint & pos, const wxSize & size, int32_t style, const wxValidator & validator, const wxString & name) {
+inline wxControl *wxControl_new(wxWindow * parent, wxWindowID id, const wxPoint & pos, const wxSize & size, int32_t style, const wxValidator & validator, const wxString & name) {
     return new wxControl(parent, id, pos, size, style, validator, name);
 }
-inline wxControl *NewControl() {
+inline wxControl *wxControl_new() {
     return new wxControl();
 }
 inline bool wxControl_Create(wxControl & self, wxWindow * parent, wxWindowID id, const wxPoint & pos, const wxSize & size, int32_t style, const wxValidator & validator, const wxString & name) {
@@ -952,7 +952,7 @@ inline wxString *wxControl_EscapeMnemonics(const wxString & text) {
 }
 
 // CLASS: wxAnyButton
-inline wxAnyButton *NewAnyButton() {
+inline wxAnyButton *wxAnyButton_new() {
     return new wxAnyButton();
 }
 inline void wxAnyButton_SetBitmapCurrent(wxAnyButton & self, const wxBitmap & bitmap) {
@@ -981,10 +981,10 @@ inline void wxAnyButton_SetBitmapMargins(wxAnyButton & self, const wxSize & sz) 
 }
 
 // CLASS: wxButton
-inline wxButton *NewButton() {
+inline wxButton *wxButton_new() {
     return new wxButton();
 }
-inline wxButton *NewButton(wxWindow * parent, wxWindowID id, const wxString & label, const wxPoint & pos, const wxSize & size, int32_t style, const wxValidator & validator, const wxString & name) {
+inline wxButton *wxButton_new(wxWindow * parent, wxWindowID id, const wxString & label, const wxPoint & pos, const wxSize & size, int32_t style, const wxValidator & validator, const wxString & name) {
     return new wxButton(parent, id, label, pos, size, style, validator, name);
 }
 inline bool wxButton_Create(wxButton & self, wxWindow * parent, wxWindowID id, const wxString & label, const wxPoint & pos, const wxSize & size, int32_t style, const wxValidator & validator, const wxString & name) {
@@ -1018,10 +1018,10 @@ inline bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow & self, const wxGraphicsP
 }
 
 // CLASS: wxTopLevelWindow
-inline wxTopLevelWindow *NewTopLevelWindow() {
+inline wxTopLevelWindow *wxTopLevelWindow_new() {
     return new wxTopLevelWindow();
 }
-inline wxTopLevelWindow *NewTopLevelWindow(wxWindow * parent, wxWindowID id, const wxString & title, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
+inline wxTopLevelWindow *wxTopLevelWindow_new(wxWindow * parent, wxWindowID id, const wxString & title, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
     return new wxTopLevelWindow(parent, id, title, pos, size, style, name);
 }
 inline bool wxTopLevelWindow_Create(wxTopLevelWindow & self, wxWindow * parent, wxWindowID id, const wxString & title, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
@@ -1140,10 +1140,10 @@ inline wxSize *wxTopLevelWindow_GetDefaultSize() {
 }
 
 // CLASS: wxFrame
-inline wxFrame *NewFrame() {
+inline wxFrame *wxFrame_new() {
     return new wxFrame();
 }
-inline wxFrame *NewFrame(wxWindow * parent, wxWindowID id, const wxString & title, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
+inline wxFrame *wxFrame_new(wxWindow * parent, wxWindowID id, const wxString & title, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
     return new wxFrame(parent, id, title, pos, size, style, name);
 }
 inline void wxFrame_Centre(wxFrame & self, int direction) {
@@ -1217,30 +1217,30 @@ inline bool wxPoint_IsFullySpecified(const wxPoint & self) {
 inline void wxPoint_SetDefaults(wxPoint & self, const wxPoint & pt) {
     return self.SetDefaults(pt);
 }
-inline wxPoint *NewPoint() {
+inline wxPoint *wxPoint_new() {
     return new wxPoint();
 }
-inline wxPoint *NewPoint(int x, int y) {
+inline wxPoint *wxPoint_new(int x, int y) {
     return new wxPoint(x, y);
 }
-inline wxPoint *NewPoint(const wxRealPoint & pt) {
+inline wxPoint *wxPoint_new(const wxRealPoint & pt) {
     return new wxPoint(pt);
 }
 
 // CLASS: wxRect
-inline wxRect *NewRect() {
+inline wxRect *wxRect_new() {
     return new wxRect();
 }
-inline wxRect *NewRect(int x, int y, int width, int height) {
+inline wxRect *wxRect_new(int x, int y, int width, int height) {
     return new wxRect(x, y, width, height);
 }
-inline wxRect *NewRect(const wxPoint & top_left, const wxPoint & bottom_right) {
+inline wxRect *wxRect_new(const wxPoint & top_left, const wxPoint & bottom_right) {
     return new wxRect(top_left, bottom_right);
 }
-inline wxRect *NewRect(const wxPoint & pos, const wxSize & size) {
+inline wxRect *wxRect_new(const wxPoint & pos, const wxSize & size) {
     return new wxRect(pos, size);
 }
-inline wxRect *NewRect(const wxSize & size) {
+inline wxRect *wxRect_new(const wxSize & size) {
     return new wxRect(size);
 }
 inline wxRect *wxRect_CentreIn(const wxRect & self, const wxRect & r, int dir) {
@@ -1368,10 +1368,10 @@ inline wxRect *wxRect_Union(const wxRect & self, const wxRect & rect) {
 }
 
 // CLASS: wxSize
-inline wxSize *NewSize() {
+inline wxSize *wxSize_new() {
     return new wxSize();
 }
-inline wxSize *NewSize(int width, int height) {
+inline wxSize *wxSize_new(int width, int height) {
     return new wxSize(width, height);
 }
 inline void wxSize_DecBy(wxSize & self, const wxPoint & pt) {
@@ -1430,7 +1430,7 @@ inline void wxSize_SetWidth(wxSize & self, int width) {
 }
 
 // CLASS: wxValidator
-inline wxValidator *NewValidator() {
+inline wxValidator *wxValidator_new() {
     return new wxValidator();
 }
 inline wxObject * wxValidator_Clone(const wxValidator & self) {

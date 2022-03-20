@@ -681,9 +681,9 @@ mod ffi {
     }
     unsafe extern "C++" {
         // CLASS: wxObject
-        fn NewObject() -> *mut wxObject;
-        #[rust_name = "NewObject1"]
-        fn NewObject(other: &wxObject) -> *mut wxObject;
+        fn wxObject_new() -> *mut wxObject;
+        #[rust_name = "wxObject_new1"]
+        fn wxObject_new(other: &wxObject) -> *mut wxObject;
         fn wxObject_GetClassInfo(self_: &wxObject) -> *mut wxClassInfo;
         fn wxObject_GetRefData(self_: &wxObject) -> *mut wxObjectRefData;
         unsafe fn wxObject_IsKindOf(self_: &wxObject, info: *const wxClassInfo) -> bool;
@@ -712,7 +712,7 @@ mod ffi {
         fn wxEvtHandler_IsUnlinked(self_: &wxEvtHandler) -> bool;
         unsafe fn wxEvtHandler_AddFilter(filter: *mut wxEventFilter);
         unsafe fn wxEvtHandler_RemoveFilter(filter: *mut wxEventFilter);
-        fn NewEvtHandler() -> *mut wxEvtHandler;
+        fn wxEvtHandler_new() -> *mut wxEvtHandler;
         // CLASS: wxWindow
         fn wxWindow_AcceptsFocus(self_: &wxWindow) -> bool;
         fn wxWindow_AcceptsFocusFromKeyboard(self_: &wxWindow) -> bool;
@@ -1013,14 +1013,14 @@ mod ffi {
         fn wxWindow_GetCapture() -> *mut wxWindow;
         fn wxWindow_NewControlId(count: i32) -> i32;
         fn wxWindow_UnreserveControlId(id: i32, count: i32);
-        fn NewWindow() -> *mut wxWindow;
-        #[rust_name = "NewWindow1"]
-        unsafe fn NewWindow(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxWindow;
+        fn wxWindow_new() -> *mut wxWindow;
+        #[rust_name = "wxWindow_new1"]
+        unsafe fn wxWindow_new(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxWindow;
         unsafe fn wxWindow_Create(self_: Pin<&mut wxWindow>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
         // CLASS: wxControl
-        unsafe fn NewControl(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> *mut wxControl;
-        #[rust_name = "NewControl1"]
-        fn NewControl() -> *mut wxControl;
+        unsafe fn wxControl_new(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> *mut wxControl;
+        #[rust_name = "wxControl_new1"]
+        fn wxControl_new() -> *mut wxControl;
         unsafe fn wxControl_Create(self_: Pin<&mut wxControl>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
         fn wxControl_Command(self_: Pin<&mut wxControl>, event: Pin<&mut wxCommandEvent>);
         fn wxControl_GetLabel(self_: &wxControl) -> *mut wxString;
@@ -1037,7 +1037,7 @@ mod ffi {
         fn wxControl_RemoveMnemonics(str: &wxString) -> *mut wxString;
         fn wxControl_EscapeMnemonics(text: &wxString) -> *mut wxString;
         // CLASS: wxAnyButton
-        fn NewAnyButton() -> *mut wxAnyButton;
+        fn wxAnyButton_new() -> *mut wxAnyButton;
         fn wxAnyButton_SetBitmapCurrent(self_: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
         fn wxAnyButton_SetBitmapDisabled(self_: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
         fn wxAnyButton_SetBitmapFocus(self_: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
@@ -1048,9 +1048,9 @@ mod ffi {
         #[rust_name = "wxAnyButton_SetBitmapMargins1"]
         fn wxAnyButton_SetBitmapMargins(self_: Pin<&mut wxAnyButton>, sz: &wxSize);
         // CLASS: wxButton
-        fn NewButton() -> *mut wxButton;
-        #[rust_name = "NewButton1"]
-        unsafe fn NewButton(parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> *mut wxButton;
+        fn wxButton_new() -> *mut wxButton;
+        #[rust_name = "wxButton_new1"]
+        unsafe fn wxButton_new(parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> *mut wxButton;
         unsafe fn wxButton_Create(self_: Pin<&mut wxButton>, parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
         fn wxButton_GetAuthNeeded(self_: &wxButton) -> bool;
         fn wxButton_GetLabel(self_: &wxButton) -> *mut wxString;
@@ -1063,9 +1063,9 @@ mod ffi {
         #[rust_name = "wxNonOwnedWindow_SetShape1"]
         fn wxNonOwnedWindow_SetShape(self_: Pin<&mut wxNonOwnedWindow>, path: &wxGraphicsPath) -> bool;
         // CLASS: wxTopLevelWindow
-        fn NewTopLevelWindow() -> *mut wxTopLevelWindow;
-        #[rust_name = "NewTopLevelWindow1"]
-        unsafe fn NewTopLevelWindow(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxTopLevelWindow;
+        fn wxTopLevelWindow_new() -> *mut wxTopLevelWindow;
+        #[rust_name = "wxTopLevelWindow_new1"]
+        unsafe fn wxTopLevelWindow_new(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxTopLevelWindow;
         unsafe fn wxTopLevelWindow_Create(self_: Pin<&mut wxTopLevelWindow>, parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
         fn wxTopLevelWindow_CanSetTransparent(self_: Pin<&mut wxTopLevelWindow>) -> bool;
         fn wxTopLevelWindow_CenterOnScreen(self_: Pin<&mut wxTopLevelWindow>, direction: i32);
@@ -1106,9 +1106,9 @@ mod ffi {
         fn wxTopLevelWindow_ShowFullScreen(self_: Pin<&mut wxTopLevelWindow>, show: bool, style: i32) -> bool;
         fn wxTopLevelWindow_GetDefaultSize() -> *mut wxSize;
         // CLASS: wxFrame
-        fn NewFrame() -> *mut wxFrame;
-        #[rust_name = "NewFrame1"]
-        unsafe fn NewFrame(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxFrame;
+        fn wxFrame_new() -> *mut wxFrame;
+        #[rust_name = "wxFrame_new1"]
+        unsafe fn wxFrame_new(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxFrame;
         fn wxFrame_Centre(self_: Pin<&mut wxFrame>, direction: i32);
         unsafe fn wxFrame_Create(self_: Pin<&mut wxFrame>, parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
         fn wxFrame_CreateStatusBar(self_: Pin<&mut wxFrame>, number: i32, style: i32, id: i32, name: &wxString) -> *mut wxStatusBar;
@@ -1133,21 +1133,21 @@ mod ffi {
         // CLASS: wxPoint
         fn wxPoint_IsFullySpecified(self_: &wxPoint) -> bool;
         fn wxPoint_SetDefaults(self_: Pin<&mut wxPoint>, pt: &wxPoint);
-        fn NewPoint() -> *mut wxPoint;
-        #[rust_name = "NewPoint1"]
-        fn NewPoint(x: i32, y: i32) -> *mut wxPoint;
-        #[rust_name = "NewPoint2"]
-        fn NewPoint(pt: &wxRealPoint) -> *mut wxPoint;
+        fn wxPoint_new() -> *mut wxPoint;
+        #[rust_name = "wxPoint_new1"]
+        fn wxPoint_new(x: i32, y: i32) -> *mut wxPoint;
+        #[rust_name = "wxPoint_new2"]
+        fn wxPoint_new(pt: &wxRealPoint) -> *mut wxPoint;
         // CLASS: wxRect
-        fn NewRect() -> *mut wxRect;
-        #[rust_name = "NewRect1"]
-        fn NewRect(x: i32, y: i32, width: i32, height: i32) -> *mut wxRect;
-        #[rust_name = "NewRect2"]
-        fn NewRect(top_left: &wxPoint, bottom_right: &wxPoint) -> *mut wxRect;
-        #[rust_name = "NewRect3"]
-        fn NewRect(pos: &wxPoint, size: &wxSize) -> *mut wxRect;
-        #[rust_name = "NewRect4"]
-        fn NewRect(size: &wxSize) -> *mut wxRect;
+        fn wxRect_new() -> *mut wxRect;
+        #[rust_name = "wxRect_new1"]
+        fn wxRect_new(x: i32, y: i32, width: i32, height: i32) -> *mut wxRect;
+        #[rust_name = "wxRect_new2"]
+        fn wxRect_new(top_left: &wxPoint, bottom_right: &wxPoint) -> *mut wxRect;
+        #[rust_name = "wxRect_new3"]
+        fn wxRect_new(pos: &wxPoint, size: &wxSize) -> *mut wxRect;
+        #[rust_name = "wxRect_new4"]
+        fn wxRect_new(size: &wxSize) -> *mut wxRect;
         fn wxRect_CentreIn(self_: &wxRect, r: &wxRect, dir: i32) -> *mut wxRect;
         fn wxRect_CenterIn(self_: &wxRect, r: &wxRect, dir: i32) -> *mut wxRect;
         fn wxRect_Contains(self_: &wxRect, x: i32, y: i32) -> bool;
@@ -1196,9 +1196,9 @@ mod ffi {
         fn wxRect_SetBottomLeft(self_: Pin<&mut wxRect>, p: &wxPoint);
         fn wxRect_Union(self_: &wxRect, rect: &wxRect) -> *mut wxRect;
         // CLASS: wxSize
-        fn NewSize() -> *mut wxSize;
-        #[rust_name = "NewSize1"]
-        fn NewSize(width: i32, height: i32) -> *mut wxSize;
+        fn wxSize_new() -> *mut wxSize;
+        #[rust_name = "wxSize_new1"]
+        fn wxSize_new(width: i32, height: i32) -> *mut wxSize;
         fn wxSize_DecBy(self_: Pin<&mut wxSize>, pt: &wxPoint);
         #[rust_name = "wxSize_DecBy1"]
         fn wxSize_DecBy(self_: Pin<&mut wxSize>, size: &wxSize);
@@ -1224,7 +1224,7 @@ mod ffi {
         fn wxSize_SetHeight(self_: Pin<&mut wxSize>, height: i32);
         fn wxSize_SetWidth(self_: Pin<&mut wxSize>, width: i32);
         // CLASS: wxValidator
-        fn NewValidator() -> *mut wxValidator;
+        fn wxValidator_new() -> *mut wxValidator;
         fn wxValidator_Clone(self_: &wxValidator) -> *mut wxObject;
         fn wxValidator_GetWindow(self_: &wxValidator) -> *mut wxWindow;
         unsafe fn wxValidator_SetWindow(self_: Pin<&mut wxValidator>, window: *mut wxWindow);
@@ -1249,11 +1249,11 @@ wx_class! { Object(wxObject) impl
 }
 impl Object {
     pub fn new() -> Object {
-        Object(ffi::NewObject())
+        Object(ffi::wxObject_new())
     }
     pub fn new1(other: &Object) -> Object {
         let other = &other.pinned::<ffi::wxObject>();
-        Object(ffi::NewObject1(other))
+        Object(ffi::wxObject_new1(other))
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -1298,7 +1298,7 @@ wx_class! { EvtHandler(wxEvtHandler) impl
 }
 impl EvtHandler {
     pub fn new() -> EvtHandler {
-        EvtHandler(ffi::NewEvtHandler())
+        EvtHandler(ffi::wxEvtHandler_new())
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -1399,7 +1399,7 @@ wx_class! { Window(wxWindow) impl
 }
 impl Window {
     pub fn new() -> Window {
-        Window(ffi::NewWindow())
+        Window(ffi::wxWindow_new())
     }
     pub fn new1<T: WindowMethods>(parent: Option<&T>, id: i32, pos: &Point, size: &Size, style: i32, name: &str) -> Window {
         unsafe {
@@ -1410,7 +1410,7 @@ impl Window {
             let pos = &pos.pinned::<ffi::wxPoint>();
             let size = &size.pinned::<ffi::wxSize>();
             let name = &crate::ffi::NewString(name);
-            Window(ffi::NewWindow1(parent, id, pos, size, style, name))
+            Window(ffi::wxWindow_new1(parent, id, pos, size, style, name))
         }
     }
     pub fn none() -> Option<&'static Self> {
@@ -2437,11 +2437,11 @@ impl Control {
             let size = &size.pinned::<ffi::wxSize>();
             let validator = &validator.pinned::<ffi::wxValidator>();
             let name = &crate::ffi::NewString(name);
-            Control(ffi::NewControl(parent, id, pos, size, style, validator, name))
+            Control(ffi::wxControl_new(parent, id, pos, size, style, validator, name))
         }
     }
     pub fn new1() -> Control {
-        Control(ffi::NewControl1())
+        Control(ffi::wxControl_new1())
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -2518,7 +2518,7 @@ wx_class! { AnyButton(wxAnyButton) impl
 }
 impl AnyButton {
     pub fn new() -> AnyButton {
-        AnyButton(ffi::NewAnyButton())
+        AnyButton(ffi::wxAnyButton_new())
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -2572,7 +2572,7 @@ wx_class! { Button(wxButton) impl
 }
 impl Button {
     pub fn new() -> Button {
-        Button(ffi::NewButton())
+        Button(ffi::wxButton_new())
     }
     pub fn new1<T: WindowMethods>(parent: Option<&T>, id: i32, label: &str, pos: &Point, size: &Size, style: i32, validator: &Validator, name: &str) -> Button {
         unsafe {
@@ -2585,7 +2585,7 @@ impl Button {
             let size = &size.pinned::<ffi::wxSize>();
             let validator = &validator.pinned::<ffi::wxValidator>();
             let name = &crate::ffi::NewString(name);
-            Button(ffi::NewButton1(parent, id, label, pos, size, style, validator, name))
+            Button(ffi::wxButton_new1(parent, id, label, pos, size, style, validator, name))
         }
     }
     pub fn none() -> Option<&'static Self> {
@@ -2665,7 +2665,7 @@ wx_class! { TopLevelWindow(wxTopLevelWindow) impl
 }
 impl TopLevelWindow {
     pub fn new() -> TopLevelWindow {
-        TopLevelWindow(ffi::NewTopLevelWindow())
+        TopLevelWindow(ffi::wxTopLevelWindow_new())
     }
     pub fn new1<T: WindowMethods>(parent: Option<&T>, id: i32, title: &str, pos: &Point, size: &Size, style: i32, name: &str) -> TopLevelWindow {
         unsafe {
@@ -2677,7 +2677,7 @@ impl TopLevelWindow {
             let pos = &pos.pinned::<ffi::wxPoint>();
             let size = &size.pinned::<ffi::wxSize>();
             let name = &crate::ffi::NewString(name);
-            TopLevelWindow(ffi::NewTopLevelWindow1(parent, id, title, pos, size, style, name))
+            TopLevelWindow(ffi::wxTopLevelWindow_new1(parent, id, title, pos, size, style, name))
         }
     }
     pub fn none() -> Option<&'static Self> {
@@ -2850,7 +2850,7 @@ wx_class! { Frame(wxFrame) impl
 }
 impl Frame {
     pub fn new() -> Frame {
-        Frame(ffi::NewFrame())
+        Frame(ffi::wxFrame_new())
     }
     pub fn new1<T: WindowMethods>(parent: Option<&T>, id: i32, title: &str, pos: &Point, size: &Size, style: i32, name: &str) -> Frame {
         unsafe {
@@ -2862,7 +2862,7 @@ impl Frame {
             let pos = &pos.pinned::<ffi::wxPoint>();
             let size = &size.pinned::<ffi::wxSize>();
             let name = &crate::ffi::NewString(name);
-            Frame(ffi::NewFrame1(parent, id, title, pos, size, style, name))
+            Frame(ffi::wxFrame_new1(parent, id, title, pos, size, style, name))
         }
     }
     pub fn none() -> Option<&'static Self> {
@@ -2960,13 +2960,13 @@ wx_class! { Point(wxPoint) impl
 }
 impl Point {
     pub fn new() -> Point {
-        Point(ffi::NewPoint())
+        Point(ffi::wxPoint_new())
     }
     pub fn new1(x: i32, y: i32) -> Point {
-        Point(ffi::NewPoint1(x, y))
+        Point(ffi::wxPoint_new1(x, y))
     }
     pub fn new2(pt: &ffi::wxRealPoint) -> Point {
-        Point(ffi::NewPoint2(pt))
+        Point(ffi::wxPoint_new2(pt))
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -3006,24 +3006,24 @@ wx_class! { Rect(wxRect) impl
 }
 impl Rect {
     pub fn new() -> Rect {
-        Rect(ffi::NewRect())
+        Rect(ffi::wxRect_new())
     }
     pub fn new1(x: i32, y: i32, width: i32, height: i32) -> Rect {
-        Rect(ffi::NewRect1(x, y, width, height))
+        Rect(ffi::wxRect_new1(x, y, width, height))
     }
     pub fn new2(top_left: &Point, bottom_right: &Point) -> Rect {
         let top_left = &top_left.pinned::<ffi::wxPoint>();
         let bottom_right = &bottom_right.pinned::<ffi::wxPoint>();
-        Rect(ffi::NewRect2(top_left, bottom_right))
+        Rect(ffi::wxRect_new2(top_left, bottom_right))
     }
     pub fn new3(pos: &Point, size: &Size) -> Rect {
         let pos = &pos.pinned::<ffi::wxPoint>();
         let size = &size.pinned::<ffi::wxSize>();
-        Rect(ffi::NewRect3(pos, size))
+        Rect(ffi::wxRect_new3(pos, size))
     }
     pub fn new4(size: &Size) -> Rect {
         let size = &size.pinned::<ffi::wxSize>();
-        Rect(ffi::NewRect4(size))
+        Rect(ffi::wxRect_new4(size))
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -3190,10 +3190,10 @@ wx_class! { Size(wxSize) impl
 }
 impl Size {
     pub fn new() -> Size {
-        Size(ffi::NewSize())
+        Size(ffi::wxSize_new())
     }
     pub fn new1(width: i32, height: i32) -> Size {
-        Size(ffi::NewSize1(width, height))
+        Size(ffi::wxSize_new1(width, height))
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -3285,7 +3285,7 @@ wx_class! { Validator(wxValidator) impl
 }
 impl Validator {
     pub fn new() -> Validator {
-        Validator(ffi::NewValidator())
+        Validator(ffi::wxValidator_new())
     }
     pub fn none() -> Option<&'static Self> {
         None
