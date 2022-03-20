@@ -23,8 +23,8 @@ inline wxObjectRefData * wxObject_GetRefData(const wxObject & self) {
 inline bool wxObject_IsKindOf(const wxObject & self, const wxClassInfo * info) {
     return self.IsKindOf(info);
 }
-inline bool wxObject_IsSameAs(const wxObject & self, const wxObject & obj) {
-    return self.IsSameAs(obj);
+inline bool wxObject_IsSameAs(const wxObject & self, const wxObject * obj) {
+    return self.IsSameAs(*obj);
 }
 inline void wxObject_Ref(wxObject & self, const wxObject & clone) {
     return self.Ref(clone);

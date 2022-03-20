@@ -686,7 +686,7 @@ mod ffi {
         unsafe fn wxObject_GetClassInfo(self_: &wxObject) -> *mut wxClassInfo;
         unsafe fn wxObject_GetRefData(self_: &wxObject) -> *mut wxObjectRefData;
         unsafe fn wxObject_IsKindOf(self_: &wxObject, info: *const wxClassInfo) -> bool;
-        unsafe fn wxObject_IsSameAs(self_: &wxObject, obj: &wxObject) -> bool;
+        unsafe fn wxObject_IsSameAs(self_: &wxObject, obj: *const wxObject) -> bool;
         unsafe fn wxObject_Ref(self_: Pin<&mut wxObject>, clone: &wxObject);
         unsafe fn wxObject_SetRefData(self_: Pin<&mut wxObject>, data: *mut wxObjectRefData);
         unsafe fn wxObject_UnRef(self_: Pin<&mut wxObject>);
@@ -1209,7 +1209,7 @@ pub trait ObjectMethods: WxRustMethods {
     }
     fn is_same_as(&self, obj: &Object) -> bool {
         unsafe {
-            let obj = &obj.pinned::<ffi::wxObject>();
+            let obj = obj.as_ptr() as *mut ffi::wxObject;
             ffi::wxObject_IsSameAs(&self.pinned::<ffi::wxObject>().as_mut(), obj)
         }
     }
