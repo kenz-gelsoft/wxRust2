@@ -10,7 +10,10 @@ namespace wxrust {
 using UnsafeAnyPtr = const char *;
 
 // wxApp
-void AppSetOnInit(const Closure &closure);
+void AppSetOnInit(
+    UnsafeAnyPtr aFn,
+    UnsafeAnyPtr aParam
+);
 class App : public wxApp {
     virtual bool OnInit();
 };
@@ -19,22 +22,27 @@ class App : public wxApp {
 template <typename T>
 class CxxClosure {
     typedef void (*TrampolineFunc)(UnsafeAnyPtr);
-    Closure mClosure;
+    UnsafeAnyPtr mFn;
+    UnsafeAnyPtr mParam;
 
 public:
-    CxxClosure() : mClosure() {}
-    CxxClosure(const Closure &closure) : mClosure(closure) {}
+    CxxClosure() : mFn(), mParam()
+    {}
+    CxxClosure(UnsafeAnyPtr f, UnsafeAnyPtr param) :
+        mFn(f),
+        mParam(param)
+    {}
 
     void operator ()(T arg) const {
-        if (mClosure.param) { // if set
-            ((TrampolineFunc)mClosure.f)(mClosure.param);
+        if (mParam) { // if set
+            ((TrampolineFunc)mFn)(mParam);
         } else {
             // TODO: provide debug info
         }
     }
 };
 
-void Bind(wxEvtHandler &evtHandler, EventType eventType, const Closure &closure);
+void Bind(wxEvtHandler &evtHandler, EventType eventType, UnsafeAnyPtr aFn, UnsafeAnyPtr aParam);
 
 // Constructors
 wxString *wxString_new(const unsigned char *aString, size_t aLen);

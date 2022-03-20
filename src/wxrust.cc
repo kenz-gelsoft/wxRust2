@@ -6,8 +6,8 @@ namespace wxrust {
 wxIMPLEMENT_APP_NO_MAIN(App);
 
 static CxxClosure<int> globalOnInit;
-void AppSetOnInit(const Closure &closure) {
-    globalOnInit = closure;
+void AppSetOnInit(UnsafeAnyPtr f, UnsafeAnyPtr params) {
+    globalOnInit = CxxClosure<int>(f, params);
 }
 
 bool App::OnInit() {
@@ -23,8 +23,8 @@ wxEventTypeTag<wxCommandEvent> TypeTagOf(EventType eventType) {
     }
     return wxEVT_BUTTON;
 }
-void Bind(wxEvtHandler &evtHandler, EventType eventType, const Closure &closure) {
-    CxxClosure<wxCommandEvent &> functor(closure);
+void Bind(wxEvtHandler &evtHandler, EventType eventType, UnsafeAnyPtr aFn, UnsafeAnyPtr aParam) {
+    CxxClosure<wxCommandEvent &> functor(aFn, aParam);
     evtHandler.Bind(TypeTagOf(eventType), functor);
 }
 
