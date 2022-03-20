@@ -190,8 +190,6 @@ class RustMethodBinding:
             self_param = self.__self_param.rust_ffi_ref(
                 is_mut_self=is_mut_self,
             )
-            if self.__model.const:
-                self_param = '&' + self_param
             self_to_insert = self_param
         call = '%s(%s)' % (
             name,
@@ -317,7 +315,7 @@ class CxxMethodBinding:
         )
         new_params_or_expr = self._call_params()
         if not self.is_ctor:
-            self_or_class = 'self.'
+            self_or_class = 'self->'
             if self.__model.is_static:
                 self_or_class = '%s::' % (self.__model.cls.name,)
             new_params_or_expr = '%s%s(%s)' % (
@@ -344,5 +342,10 @@ class CxxMethodBinding:
         )
 
     def _call_params(self):
-        return ', '.join(p.name for p in self.__model.params)
+        return ', '.join(self._deref_if_needed(p) for p in self.__model.params)
+    
+    def _deref_if_needed(self, param):
+        if param.type.is_ref():
+            return '*%s' % (param.name,)
+        return param.name
 

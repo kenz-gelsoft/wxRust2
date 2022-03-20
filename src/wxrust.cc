@@ -29,8 +29,8 @@ void Bind(wxEvtHandler &evtHandler, EventType eventType, const Closure &closure)
 }
 
 // Constructors
-std::unique_ptr<wxString> NewString(rust::Str aString) {
-    return std::make_unique<wxString>(std::string(aString).c_str(), wxConvUTF8);
+wxString *wxString_new(rust::Str aString) {
+    return new wxString(std::string(aString).c_str(), wxConvUTF8);
 }
 wxFrame *NewFrame(rust::Str title) {
     return new wxFrame(NULL, -1, std::string(title));

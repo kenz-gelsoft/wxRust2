@@ -79,7 +79,7 @@ mod ffi {
         fn AppSetOnInit(closure: &Closure);
         fn Bind(handler: Pin<&mut wxEvtHandler>, eventType: EventType, closure: &Closure);
 
-        fn NewString(s: &str) -> UniquePtr<wxString>;
+        fn wxString_new(s: &str) -> *mut wxString;
     }
 }
 

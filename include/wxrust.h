@@ -37,7 +37,7 @@ public:
 void Bind(wxEvtHandler &evtHandler, EventType eventType, const Closure &closure);
 
 // Constructors
-std::unique_ptr<wxString> NewString(rust::Str aString);
+wxString *wxString_new(rust::Str aString);
 wxFrame *NewFrame(rust::Str aTitle);
 wxButton *NewButton(wxWindow &parent, rust::Str label);
 

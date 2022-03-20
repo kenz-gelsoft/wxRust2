@@ -134,11 +134,9 @@ class Param:
 
     def rust_ffi_ref(self, rename=None, is_mut_self=False):
         name = rename if rename else self.name
-        as_mut_or_not = '.as_mut()' if self.is_self() else ''
-        return '%s.pinned::<ffi::%s>()%s' % (
+        return '%s.as_ptr() as *mut ffi::%s' % (
             name,
             self.type.typename,
-            as_mut_or_not,
         )
 
 
@@ -157,17 +155,12 @@ class RustType:
         if self.__ctor_retval:
             return t[2:]
         t = prefixed(t, with_ffi)
-        ref = '&'
-        mut = '' if self.const else 'mut '
-        return self._pin_if_needed('%s%s%s' % (ref, mut, t))
+        ref = '*'
+        mut = 'const ' if self.const else 'mut '
+        return '%s%s%s' % (ref, mut, t)
     
-    def _pin_if_needed(self, t):
-        if t.startswith('&mut '):
-            return 'Pin<%s>' % (t,)
-        return t
-
     def in_cxx(self):
-        t = '%s &' % (self.typename,)
+        t = '%s *' % (self.typename,)
         if self.const:
             t = 'const %s' % (t,)
         return t
@@ -232,17 +225,24 @@ class CxxType:
     def in_cxx(self):
         if self.__srctype in CXX2CXX:
             return CXX2CXX[self.__srctype]
+        if self.__indirection == '&':
+            const_or_not = '' if self.__is_mut else 'const '
+            new_type = '%s%s *' % (
+                const_or_not,
+                self.typename,
+            )
+            return new_type
         return self.__srctype
     
     def marshal(self, param):
         name = camel_to_snake(param.name)
         if self._is_const_ref_to_string():
-            yield 'let %s = &crate::ffi::NewString(%s);' % (
+            yield 'let %s = crate::ffi::wxString_new(%s);' % (
                 name,
                 name,
             )
         if self._is_const_ref_to_binding():
-            yield 'let %s = &%s;' % (
+            yield 'let %s = %s;' % (
                 name,
                 param.rust_ffi_ref(),
             )
@@ -251,9 +251,9 @@ class CxxType:
                 name,
                 name,
             )
-            yield '    Some(r) => Pin::<&mut ffi::%s>::into_inner_unchecked(%s),' % (
-                self.typename,
+            yield '    Some(r) => %s as *mut ffi::%s,' % (
                 param.rust_ffi_ref(rename='r'),
+                self.typename,
             )
             yield '    None => ptr::null_mut(),'
             yield '};'
@@ -271,18 +271,15 @@ class CxxType:
             t = CXX2RUST[t]
         t = prefixed(t, with_ffi)
         ref = self.__indirection
+        if ref == '&':
+            ref = '*'
         mut = ''
         if ref:
             mut = 'mut ' if self.__is_mut else ''
             if ref.startswith('*') and not self.__is_mut:
                 mut = 'const '
-        return self._pin_if_needed('%s%s%s' % (ref, mut, t))
+        return '%s%s%s' % (ref, mut, t)
     
-    def _pin_if_needed(self, t):
-        if t.startswith('&mut '):
-            return 'Pin<%s>' % (t,)
-        return t
-
     def is_ptr_to_binding(self):
         # TODO: consider mutability
         return (self.is_ptr() and
@@ -299,6 +296,9 @@ class CxxType:
         if self.__is_mut:
             return False
         return self.__indirection.startswith('&')
+    
+    def is_ref(self):
+        return self.__indirection == '&'
 
     def not_supported(self):
         if self.typename in OS_UNSUPPORTED_TYPES:
