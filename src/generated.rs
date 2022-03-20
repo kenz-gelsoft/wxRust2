@@ -306,9 +306,9 @@ mod ffi {
         // CXX_UNSUPPORTED: fn HideWithEffect(self: Pin<&mut wxWindow>, effect: wxShowEffect, timeout: u32) -> bool;
         // GENERATED: fn IsEnabled(self: &wxWindow) -> bool;
         // GENERATED: fn IsExposed(self: &wxWindow, x: i32, y: i32) -> bool;
-        // GENERATED: fn IsExposed(self: &wxWindow, pt: &mut wxPoint) -> bool;
+        // GENERATED: fn IsExposed(self: &wxWindow, pt: Pin<&mut wxPoint>) -> bool;
         // GENERATED: fn IsExposed(self: &wxWindow, x: i32, y: i32, w: i32, h: i32) -> bool;
-        // GENERATED: fn IsExposed(self: &wxWindow, rect: &mut wxRect) -> bool;
+        // GENERATED: fn IsExposed(self: &wxWindow, rect: Pin<&mut wxRect>) -> bool;
         // GENERATED: fn IsShown(self: &wxWindow) -> bool;
         // GENERATED: fn IsShownOnScreen(self: &wxWindow) -> bool;
         // GENERATED: fn Disable(self: Pin<&mut wxWindow>) -> bool;
@@ -541,33 +541,33 @@ mod ffi {
         // GENERATED: fn PopStatusText(self: Pin<&mut wxFrame>, number: i32);
         
         // CLASS: wxPoint
-        type wxPoint = crate::wxPoint;
+        type wxPoint;
         // GENERATED: fn IsFullySpecified(self: &wxPoint) -> bool;
-        // GENERATED: fn SetDefaults(self: &mut wxPoint, pt: &wxPoint);
-        // BLOCKED: fn operator=(self: &mut wxPoint, pt: &wxPoint) -> &mut wxPoint;
-        // BLOCKED: fn operator==(self: &mut wxPoint, p1: &wxPoint, p2: &wxPoint) -> bool;
-        // BLOCKED: fn operator!=(self: &mut wxPoint, p1: &wxPoint, p2: &wxPoint) -> bool;
-        // BLOCKED: fn operator+(self: &mut wxPoint, p1: &wxPoint, p2: &wxPoint) -> wxPoint;
-        // BLOCKED: fn operator-(self: &mut wxPoint, p1: &wxPoint, p2: &wxPoint) -> wxPoint;
-        // BLOCKED: fn operator+=(self: &mut wxPoint, pt: &wxPoint) -> &mut wxPoint;
-        // BLOCKED: fn operator-=(self: &mut wxPoint, pt: &wxPoint) -> &mut wxPoint;
-        // BLOCKED: fn operator+(self: &mut wxPoint, pt: &wxPoint, sz: &wxSize) -> wxPoint;
-        // BLOCKED: fn operator-(self: &mut wxPoint, pt: &wxPoint, sz: &wxSize) -> wxPoint;
-        // BLOCKED: fn operator+(self: &mut wxPoint, sz: &wxSize, pt: &wxPoint) -> wxPoint;
-        // BLOCKED: fn operator-(self: &mut wxPoint, sz: &wxSize, pt: &wxPoint) -> wxPoint;
-        // BLOCKED: fn operator+=(self: &mut wxPoint, sz: &wxSize) -> &mut wxPoint;
-        // BLOCKED: fn operator-=(self: &mut wxPoint, sz: &wxSize) -> &mut wxPoint;
-        // BLOCKED: fn operator/(self: &mut wxPoint, sz: &wxPoint, factor: i32) -> wxSize;
-        // BLOCKED: fn operator*(self: &mut wxPoint, sz: &wxPoint, factor: i32) -> wxSize;
-        // BLOCKED: fn operator*(self: &mut wxPoint, factor: i32, sz: &wxSize) -> wxSize;
-        // BLOCKED: fn operator/=(self: &mut wxPoint, factor: i32) -> &mut wxSize;
-        // BLOCKED: fn operator*=(self: &mut wxPoint, factor: i32) -> &mut wxSize;
+        // GENERATED: fn SetDefaults(self: Pin<&mut wxPoint>, pt: &wxPoint);
+        // BLOCKED: fn operator=(self: Pin<&mut wxPoint>, pt: &wxPoint) -> Pin<&mut wxPoint>;
+        // BLOCKED: fn operator==(self: Pin<&mut wxPoint>, p1: &wxPoint, p2: &wxPoint) -> bool;
+        // BLOCKED: fn operator!=(self: Pin<&mut wxPoint>, p1: &wxPoint, p2: &wxPoint) -> bool;
+        // BLOCKED: fn operator+(self: Pin<&mut wxPoint>, p1: &wxPoint, p2: &wxPoint) -> wxPoint;
+        // BLOCKED: fn operator-(self: Pin<&mut wxPoint>, p1: &wxPoint, p2: &wxPoint) -> wxPoint;
+        // BLOCKED: fn operator+=(self: Pin<&mut wxPoint>, pt: &wxPoint) -> Pin<&mut wxPoint>;
+        // BLOCKED: fn operator-=(self: Pin<&mut wxPoint>, pt: &wxPoint) -> Pin<&mut wxPoint>;
+        // BLOCKED: fn operator+(self: Pin<&mut wxPoint>, pt: &wxPoint, sz: &wxSize) -> wxPoint;
+        // BLOCKED: fn operator-(self: Pin<&mut wxPoint>, pt: &wxPoint, sz: &wxSize) -> wxPoint;
+        // BLOCKED: fn operator+(self: Pin<&mut wxPoint>, sz: &wxSize, pt: &wxPoint) -> wxPoint;
+        // BLOCKED: fn operator-(self: Pin<&mut wxPoint>, sz: &wxSize, pt: &wxPoint) -> wxPoint;
+        // BLOCKED: fn operator+=(self: Pin<&mut wxPoint>, sz: &wxSize) -> Pin<&mut wxPoint>;
+        // BLOCKED: fn operator-=(self: Pin<&mut wxPoint>, sz: &wxSize) -> Pin<&mut wxPoint>;
+        // BLOCKED: fn operator/(self: Pin<&mut wxPoint>, sz: &wxPoint, factor: i32) -> wxSize;
+        // BLOCKED: fn operator*(self: Pin<&mut wxPoint>, sz: &wxPoint, factor: i32) -> wxSize;
+        // BLOCKED: fn operator*(self: Pin<&mut wxPoint>, factor: i32, sz: &wxSize) -> wxSize;
+        // BLOCKED: fn operator/=(self: Pin<&mut wxPoint>, factor: i32) -> Pin<&mut wxSize>;
+        // BLOCKED: fn operator*=(self: Pin<&mut wxPoint>, factor: i32) -> Pin<&mut wxSize>;
         // CTOR: fn wxPoint() -> Point;
         // CTOR: fn wxPoint(x: i32, y: i32) -> Point;
         // CTOR: fn wxPoint(pt: &wxRealPoint) -> Point;
         
         // CLASS: wxRect
-        type wxRect = crate::wxRect;
+        type wxRect;
         // CTOR: fn wxRect() -> Rect;
         // CTOR: fn wxRect(x: i32, y: i32, width: i32, height: i32) -> Rect;
         // CTOR: fn wxRect(top_left: &wxPoint, bottom_right: &wxPoint) -> Rect;
@@ -578,9 +578,9 @@ mod ffi {
         // GENERATED: fn Contains(self: &wxRect, x: i32, y: i32) -> bool;
         // GENERATED: fn Contains(self: &wxRect, pt: &wxPoint) -> bool;
         // GENERATED: fn Contains(self: &wxRect, rect: &wxRect) -> bool;
-        // BLOCKED: fn Deflate(self: &mut wxRect, dx: i32, dy: i32) -> &mut wxRect;
-        // BLOCKED: fn Deflate(self: &mut wxRect, diff: &wxSize) -> &mut wxRect;
-        // BLOCKED: fn Deflate(self: &mut wxRect, diff: i32) -> &mut wxRect;
+        // BLOCKED: fn Deflate(self: Pin<&mut wxRect>, dx: i32, dy: i32) -> Pin<&mut wxRect>;
+        // BLOCKED: fn Deflate(self: Pin<&mut wxRect>, diff: &wxSize) -> Pin<&mut wxRect>;
+        // BLOCKED: fn Deflate(self: Pin<&mut wxRect>, diff: i32) -> Pin<&mut wxRect>;
         // GENERATED: fn Deflate(self: &wxRect, dx: i32, dy: i32) -> wxRect;
         // GENERATED: fn GetBottom(self: &wxRect) -> i32;
         // GENERATED: fn GetBottomLeft(self: &wxRect) -> wxPoint;
@@ -596,75 +596,75 @@ mod ffi {
         // GENERATED: fn GetWidth(self: &wxRect) -> i32;
         // GENERATED: fn GetX(self: &wxRect) -> i32;
         // GENERATED: fn GetY(self: &wxRect) -> i32;
-        // BLOCKED: fn Inflate(self: &mut wxRect, dx: i32, dy: i32) -> &mut wxRect;
-        // BLOCKED: fn Inflate(self: &mut wxRect, diff: &wxSize) -> &mut wxRect;
-        // BLOCKED: fn Inflate(self: &mut wxRect, diff: i32) -> &mut wxRect;
+        // BLOCKED: fn Inflate(self: Pin<&mut wxRect>, dx: i32, dy: i32) -> Pin<&mut wxRect>;
+        // BLOCKED: fn Inflate(self: Pin<&mut wxRect>, diff: &wxSize) -> Pin<&mut wxRect>;
+        // BLOCKED: fn Inflate(self: Pin<&mut wxRect>, diff: i32) -> Pin<&mut wxRect>;
         // GENERATED: fn Inflate(self: &wxRect, dx: i32, dy: i32) -> wxRect;
-        // BLOCKED: fn Intersect(self: &mut wxRect, rect: &wxRect) -> &mut wxRect;
+        // BLOCKED: fn Intersect(self: Pin<&mut wxRect>, rect: &wxRect) -> Pin<&mut wxRect>;
         // GENERATED: fn Intersect(self: &wxRect, rect: &wxRect) -> wxRect;
         // GENERATED: fn Intersects(self: &wxRect, rect: &wxRect) -> bool;
         // GENERATED: fn IsEmpty(self: &wxRect) -> bool;
-        // GENERATED: fn Offset(self: &mut wxRect, dx: i32, dy: i32);
-        // GENERATED: fn Offset(self: &mut wxRect, pt: &wxPoint);
-        // GENERATED: fn SetHeight(self: &mut wxRect, height: i32);
-        // GENERATED: fn SetPosition(self: &mut wxRect, pos: &wxPoint);
-        // GENERATED: fn SetSize(self: &mut wxRect, s: &wxSize);
-        // GENERATED: fn SetWidth(self: &mut wxRect, width: i32);
-        // GENERATED: fn SetX(self: &mut wxRect, x: i32);
-        // GENERATED: fn SetY(self: &mut wxRect, y: i32);
-        // GENERATED: fn SetLeft(self: &mut wxRect, left: i32);
-        // GENERATED: fn SetRight(self: &mut wxRect, right: i32);
-        // GENERATED: fn SetTop(self: &mut wxRect, top: i32);
-        // GENERATED: fn SetBottom(self: &mut wxRect, bottom: i32);
-        // GENERATED: fn SetTopLeft(self: &mut wxRect, p: &wxPoint);
-        // GENERATED: fn SetBottomRight(self: &mut wxRect, p: &wxPoint);
-        // GENERATED: fn SetTopRight(self: &mut wxRect, p: &wxPoint);
-        // GENERATED: fn SetBottomLeft(self: &mut wxRect, p: &wxPoint);
+        // GENERATED: fn Offset(self: Pin<&mut wxRect>, dx: i32, dy: i32);
+        // GENERATED: fn Offset(self: Pin<&mut wxRect>, pt: &wxPoint);
+        // GENERATED: fn SetHeight(self: Pin<&mut wxRect>, height: i32);
+        // GENERATED: fn SetPosition(self: Pin<&mut wxRect>, pos: &wxPoint);
+        // GENERATED: fn SetSize(self: Pin<&mut wxRect>, s: &wxSize);
+        // GENERATED: fn SetWidth(self: Pin<&mut wxRect>, width: i32);
+        // GENERATED: fn SetX(self: Pin<&mut wxRect>, x: i32);
+        // GENERATED: fn SetY(self: Pin<&mut wxRect>, y: i32);
+        // GENERATED: fn SetLeft(self: Pin<&mut wxRect>, left: i32);
+        // GENERATED: fn SetRight(self: Pin<&mut wxRect>, right: i32);
+        // GENERATED: fn SetTop(self: Pin<&mut wxRect>, top: i32);
+        // GENERATED: fn SetBottom(self: Pin<&mut wxRect>, bottom: i32);
+        // GENERATED: fn SetTopLeft(self: Pin<&mut wxRect>, p: &wxPoint);
+        // GENERATED: fn SetBottomRight(self: Pin<&mut wxRect>, p: &wxPoint);
+        // GENERATED: fn SetTopRight(self: Pin<&mut wxRect>, p: &wxPoint);
+        // GENERATED: fn SetBottomLeft(self: Pin<&mut wxRect>, p: &wxPoint);
         // GENERATED: fn Union(self: &wxRect, rect: &wxRect) -> wxRect;
-        // BLOCKED: fn Union(self: &mut wxRect, rect: &wxRect) -> &mut wxRect;
-        // BLOCKED: fn operator!=(self: &mut wxRect, r1: &wxRect, r2: &wxRect) -> bool;
-        // BLOCKED: fn operator+(self: &mut wxRect, r1: &wxRect, r2: &wxRect) -> wxRect;
-        // BLOCKED: fn operator+=(self: &mut wxRect, r: &wxRect) -> &mut wxRect;
-        // BLOCKED: fn operator*(self: &mut wxRect, r1: &wxRect, r2: &wxRect) -> wxRect;
-        // BLOCKED: fn operator*=(self: &mut wxRect, r: &wxRect) -> &mut wxRect;
-        // BLOCKED: fn operator=(self: &mut wxRect, rect: &wxRect) -> &mut wxRect;
-        // BLOCKED: fn operator==(self: &mut wxRect, r1: &wxRect, r2: &wxRect) -> bool;
+        // BLOCKED: fn Union(self: Pin<&mut wxRect>, rect: &wxRect) -> Pin<&mut wxRect>;
+        // BLOCKED: fn operator!=(self: Pin<&mut wxRect>, r1: &wxRect, r2: &wxRect) -> bool;
+        // BLOCKED: fn operator+(self: Pin<&mut wxRect>, r1: &wxRect, r2: &wxRect) -> wxRect;
+        // BLOCKED: fn operator+=(self: Pin<&mut wxRect>, r: &wxRect) -> Pin<&mut wxRect>;
+        // BLOCKED: fn operator*(self: Pin<&mut wxRect>, r1: &wxRect, r2: &wxRect) -> wxRect;
+        // BLOCKED: fn operator*=(self: Pin<&mut wxRect>, r: &wxRect) -> Pin<&mut wxRect>;
+        // BLOCKED: fn operator=(self: Pin<&mut wxRect>, rect: &wxRect) -> Pin<&mut wxRect>;
+        // BLOCKED: fn operator==(self: Pin<&mut wxRect>, r1: &wxRect, r2: &wxRect) -> bool;
         
         // CLASS: wxSize
-        type wxSize = crate::wxSize;
-        // BLOCKED: fn operator=(self: &mut wxSize, sz: &wxSize) -> &mut wxSize;
-        // BLOCKED: fn operator==(self: &mut wxSize, s1: &wxSize, s2: &wxSize) -> bool;
-        // BLOCKED: fn operator!=(self: &mut wxSize, s1: &wxSize, s2: &wxSize) -> bool;
-        // BLOCKED: fn operator+(self: &mut wxSize, s1: &wxSize, s2: &wxSize) -> wxSize;
-        // BLOCKED: fn operator-(self: &mut wxSize, s1: &wxSize, s2: &wxSize) -> wxSize;
-        // BLOCKED: fn operator+=(self: &mut wxSize, sz: &wxSize) -> &mut wxSize;
-        // BLOCKED: fn operator-=(self: &mut wxSize, sz: &wxSize) -> &mut wxSize;
-        // BLOCKED: fn operator/(self: &mut wxSize, sz: &wxSize, factor: i32) -> wxSize;
-        // BLOCKED: fn operator*(self: &mut wxSize, sz: &wxSize, factor: i32) -> wxSize;
-        // BLOCKED: fn operator*(self: &mut wxSize, factor: i32, sz: &wxSize) -> wxSize;
-        // BLOCKED: fn operator/=(self: &mut wxSize, factor: i32) -> &mut wxSize;
-        // BLOCKED: fn operator*=(self: &mut wxSize, factor: i32) -> &mut wxSize;
+        type wxSize;
+        // BLOCKED: fn operator=(self: Pin<&mut wxSize>, sz: &wxSize) -> Pin<&mut wxSize>;
+        // BLOCKED: fn operator==(self: Pin<&mut wxSize>, s1: &wxSize, s2: &wxSize) -> bool;
+        // BLOCKED: fn operator!=(self: Pin<&mut wxSize>, s1: &wxSize, s2: &wxSize) -> bool;
+        // BLOCKED: fn operator+(self: Pin<&mut wxSize>, s1: &wxSize, s2: &wxSize) -> wxSize;
+        // BLOCKED: fn operator-(self: Pin<&mut wxSize>, s1: &wxSize, s2: &wxSize) -> wxSize;
+        // BLOCKED: fn operator+=(self: Pin<&mut wxSize>, sz: &wxSize) -> Pin<&mut wxSize>;
+        // BLOCKED: fn operator-=(self: Pin<&mut wxSize>, sz: &wxSize) -> Pin<&mut wxSize>;
+        // BLOCKED: fn operator/(self: Pin<&mut wxSize>, sz: &wxSize, factor: i32) -> wxSize;
+        // BLOCKED: fn operator*(self: Pin<&mut wxSize>, sz: &wxSize, factor: i32) -> wxSize;
+        // BLOCKED: fn operator*(self: Pin<&mut wxSize>, factor: i32, sz: &wxSize) -> wxSize;
+        // BLOCKED: fn operator/=(self: Pin<&mut wxSize>, factor: i32) -> Pin<&mut wxSize>;
+        // BLOCKED: fn operator*=(self: Pin<&mut wxSize>, factor: i32) -> Pin<&mut wxSize>;
         // CTOR: fn wxSize() -> Size;
         // CTOR: fn wxSize(width: i32, height: i32) -> Size;
-        // GENERATED: fn DecBy(self: &mut wxSize, pt: &wxPoint);
-        // GENERATED: fn DecBy(self: &mut wxSize, size: &wxSize);
-        // GENERATED: fn DecBy(self: &mut wxSize, dx: i32, dy: i32);
-        // GENERATED: fn DecBy(self: &mut wxSize, d: i32);
-        // GENERATED: fn DecTo(self: &mut wxSize, size: &wxSize);
-        // GENERATED: fn DecToIfSpecified(self: &mut wxSize, size: &wxSize);
+        // GENERATED: fn DecBy(self: Pin<&mut wxSize>, pt: &wxPoint);
+        // GENERATED: fn DecBy(self: Pin<&mut wxSize>, size: &wxSize);
+        // GENERATED: fn DecBy(self: Pin<&mut wxSize>, dx: i32, dy: i32);
+        // GENERATED: fn DecBy(self: Pin<&mut wxSize>, d: i32);
+        // GENERATED: fn DecTo(self: Pin<&mut wxSize>, size: &wxSize);
+        // GENERATED: fn DecToIfSpecified(self: Pin<&mut wxSize>, size: &wxSize);
         // GENERATED: fn GetHeight(self: &wxSize) -> i32;
         // GENERATED: fn GetWidth(self: &wxSize) -> i32;
-        // GENERATED: fn IncBy(self: &mut wxSize, pt: &wxPoint);
-        // GENERATED: fn IncBy(self: &mut wxSize, size: &wxSize);
-        // GENERATED: fn IncBy(self: &mut wxSize, dx: i32, dy: i32);
-        // GENERATED: fn IncBy(self: &mut wxSize, d: i32);
-        // GENERATED: fn IncTo(self: &mut wxSize, size: &wxSize);
+        // GENERATED: fn IncBy(self: Pin<&mut wxSize>, pt: &wxPoint);
+        // GENERATED: fn IncBy(self: Pin<&mut wxSize>, size: &wxSize);
+        // GENERATED: fn IncBy(self: Pin<&mut wxSize>, dx: i32, dy: i32);
+        // GENERATED: fn IncBy(self: Pin<&mut wxSize>, d: i32);
+        // GENERATED: fn IncTo(self: Pin<&mut wxSize>, size: &wxSize);
         // GENERATED: fn IsFullySpecified(self: &wxSize) -> bool;
-        // BLOCKED: fn Scale(self: &mut wxSize, xscale: f64, yscale: f64) -> &mut wxSize;
-        // GENERATED: fn Set(self: &mut wxSize, width: i32, height: i32);
-        // GENERATED: fn SetDefaults(self: &mut wxSize, size_default: &wxSize);
-        // GENERATED: fn SetHeight(self: &mut wxSize, height: i32);
-        // GENERATED: fn SetWidth(self: &mut wxSize, width: i32);
+        // BLOCKED: fn Scale(self: Pin<&mut wxSize>, xscale: f64, yscale: f64) -> Pin<&mut wxSize>;
+        // GENERATED: fn Set(self: Pin<&mut wxSize>, width: i32, height: i32);
+        // GENERATED: fn SetDefaults(self: Pin<&mut wxSize>, size_default: &wxSize);
+        // GENERATED: fn SetHeight(self: Pin<&mut wxSize>, height: i32);
+        // GENERATED: fn SetWidth(self: Pin<&mut wxSize>, width: i32);
         
         // CLASS: wxValidator
         type wxValidator;
@@ -757,45 +757,45 @@ mod ffi {
         fn wxWindow_BeginRepositioningChildren(self_: Pin<&mut wxWindow>) -> bool;
         fn wxWindow_EndRepositioningChildren(self_: Pin<&mut wxWindow>);
         fn wxWindow_CacheBestSize(self_: &wxWindow, size: &wxSize);
-        fn wxWindow_ClientToWindowSize(self_: &wxWindow, size: &wxSize) -> wxSize;
-        fn wxWindow_WindowToClientSize(self_: &wxWindow, size: &wxSize) -> wxSize;
+        fn wxWindow_ClientToWindowSize(self_: &wxWindow, size: &wxSize) -> *mut wxSize;
+        fn wxWindow_WindowToClientSize(self_: &wxWindow, size: &wxSize) -> *mut wxSize;
         fn wxWindow_Fit(self_: Pin<&mut wxWindow>);
         fn wxWindow_FitInside(self_: Pin<&mut wxWindow>);
-        fn wxWindow_FromDIP(self_: &wxWindow, sz: &wxSize) -> wxSize;
+        fn wxWindow_FromDIP(self_: &wxWindow, sz: &wxSize) -> *mut wxSize;
         #[rust_name = "wxWindow_FromDIP1"]
-        fn wxWindow_FromDIP(self_: &wxWindow, pt: &wxPoint) -> wxPoint;
+        fn wxWindow_FromDIP(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
         #[rust_name = "wxWindow_FromDIP2"]
         fn wxWindow_FromDIP(self_: &wxWindow, d: i32) -> i32;
-        fn wxWindow_ToDIP(self_: &wxWindow, sz: &wxSize) -> wxSize;
+        fn wxWindow_ToDIP(self_: &wxWindow, sz: &wxSize) -> *mut wxSize;
         #[rust_name = "wxWindow_ToDIP1"]
-        fn wxWindow_ToDIP(self_: &wxWindow, pt: &wxPoint) -> wxPoint;
+        fn wxWindow_ToDIP(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
         #[rust_name = "wxWindow_ToDIP2"]
         fn wxWindow_ToDIP(self_: &wxWindow, d: i32) -> i32;
-        fn wxWindow_GetBestSize(self_: &wxWindow) -> wxSize;
+        fn wxWindow_GetBestSize(self_: &wxWindow) -> *mut wxSize;
         fn wxWindow_GetBestHeight(self_: &wxWindow, width: i32) -> i32;
         fn wxWindow_GetBestWidth(self_: &wxWindow, height: i32) -> i32;
         unsafe fn wxWindow_GetClientSize(self_: &wxWindow, width: *mut i32, height: *mut i32);
         #[rust_name = "wxWindow_GetClientSize1"]
-        fn wxWindow_GetClientSize(self_: &wxWindow) -> wxSize;
-        fn wxWindow_GetEffectiveMinSize(self_: &wxWindow) -> wxSize;
-        fn wxWindow_GetMaxClientSize(self_: &wxWindow) -> wxSize;
-        fn wxWindow_GetMaxSize(self_: &wxWindow) -> wxSize;
-        fn wxWindow_GetMinClientSize(self_: &wxWindow) -> wxSize;
-        fn wxWindow_GetMinSize(self_: &wxWindow) -> wxSize;
+        fn wxWindow_GetClientSize(self_: &wxWindow) -> *mut wxSize;
+        fn wxWindow_GetEffectiveMinSize(self_: &wxWindow) -> *mut wxSize;
+        fn wxWindow_GetMaxClientSize(self_: &wxWindow) -> *mut wxSize;
+        fn wxWindow_GetMaxSize(self_: &wxWindow) -> *mut wxSize;
+        fn wxWindow_GetMinClientSize(self_: &wxWindow) -> *mut wxSize;
+        fn wxWindow_GetMinSize(self_: &wxWindow) -> *mut wxSize;
         fn wxWindow_GetMinWidth(self_: &wxWindow) -> i32;
         fn wxWindow_GetMinHeight(self_: &wxWindow) -> i32;
         fn wxWindow_GetMaxWidth(self_: &wxWindow) -> i32;
         fn wxWindow_GetMaxHeight(self_: &wxWindow) -> i32;
         unsafe fn wxWindow_GetSize(self_: &wxWindow, width: *mut i32, height: *mut i32);
         #[rust_name = "wxWindow_GetSize1"]
-        fn wxWindow_GetSize(self_: &wxWindow) -> wxSize;
-        fn wxWindow_GetVirtualSize(self_: &wxWindow) -> wxSize;
+        fn wxWindow_GetSize(self_: &wxWindow) -> *mut wxSize;
+        fn wxWindow_GetVirtualSize(self_: &wxWindow) -> *mut wxSize;
         #[rust_name = "wxWindow_GetVirtualSize1"]
         unsafe fn wxWindow_GetVirtualSize(self_: &wxWindow, width: *mut i32, height: *mut i32);
-        fn wxWindow_GetBestVirtualSize(self_: &wxWindow) -> wxSize;
+        fn wxWindow_GetBestVirtualSize(self_: &wxWindow) -> *mut wxSize;
         fn wxWindow_GetContentScaleFactor(self_: &wxWindow) -> f64;
         fn wxWindow_GetDPIScaleFactor(self_: &wxWindow) -> f64;
-        fn wxWindow_GetWindowBorderSize(self_: &wxWindow) -> wxSize;
+        fn wxWindow_GetWindowBorderSize(self_: &wxWindow) -> *mut wxSize;
         fn wxWindow_InformFirstDirection(self_: Pin<&mut wxWindow>, direction: i32, size: i32, available_other_dir: i32) -> bool;
         fn wxWindow_InvalidateBestSize(self_: Pin<&mut wxWindow>);
         fn wxWindow_PostSizeEvent(self_: Pin<&mut wxWindow>);
@@ -827,15 +827,15 @@ mod ffi {
         #[rust_name = "wxWindow_SetVirtualSize1"]
         fn wxWindow_SetVirtualSize(self_: Pin<&mut wxWindow>, size: &wxSize);
         #[rust_name = "wxWindow_FromDIP3"]
-        unsafe fn wxWindow_FromDIP(sz: &wxSize, w: *const wxWindow) -> wxSize;
+        unsafe fn wxWindow_FromDIP(sz: &wxSize, w: *const wxWindow) -> *mut wxSize;
         #[rust_name = "wxWindow_FromDIP4"]
-        unsafe fn wxWindow_FromDIP(pt: &wxPoint, w: *const wxWindow) -> wxPoint;
+        unsafe fn wxWindow_FromDIP(pt: &wxPoint, w: *const wxWindow) -> *mut wxPoint;
         #[rust_name = "wxWindow_FromDIP5"]
         unsafe fn wxWindow_FromDIP(d: i32, w: *const wxWindow) -> i32;
         #[rust_name = "wxWindow_ToDIP3"]
-        unsafe fn wxWindow_ToDIP(sz: &wxSize, w: *const wxWindow) -> wxSize;
+        unsafe fn wxWindow_ToDIP(sz: &wxSize, w: *const wxWindow) -> *mut wxSize;
         #[rust_name = "wxWindow_ToDIP4"]
-        unsafe fn wxWindow_ToDIP(pt: &wxPoint, w: *const wxWindow) -> wxPoint;
+        unsafe fn wxWindow_ToDIP(pt: &wxPoint, w: *const wxWindow) -> *mut wxPoint;
         #[rust_name = "wxWindow_ToDIP5"]
         unsafe fn wxWindow_ToDIP(d: i32, w: *const wxWindow) -> i32;
         fn wxWindow_Center(self_: Pin<&mut wxWindow>, dir: i32);
@@ -844,41 +844,41 @@ mod ffi {
         fn wxWindow_CentreOnParent(self_: Pin<&mut wxWindow>, direction: i32);
         unsafe fn wxWindow_GetPosition(self_: &wxWindow, x: *mut i32, y: *mut i32);
         #[rust_name = "wxWindow_GetPosition1"]
-        fn wxWindow_GetPosition(self_: &wxWindow) -> wxPoint;
-        fn wxWindow_GetRect(self_: &wxWindow) -> wxRect;
+        fn wxWindow_GetPosition(self_: &wxWindow) -> *mut wxPoint;
+        fn wxWindow_GetRect(self_: &wxWindow) -> *mut wxRect;
         unsafe fn wxWindow_GetScreenPosition(self_: &wxWindow, x: *mut i32, y: *mut i32);
         #[rust_name = "wxWindow_GetScreenPosition1"]
-        fn wxWindow_GetScreenPosition(self_: &wxWindow) -> wxPoint;
-        fn wxWindow_GetScreenRect(self_: &wxWindow) -> wxRect;
-        fn wxWindow_GetClientAreaOrigin(self_: &wxWindow) -> wxPoint;
-        fn wxWindow_GetClientRect(self_: &wxWindow) -> wxRect;
+        fn wxWindow_GetScreenPosition(self_: &wxWindow) -> *mut wxPoint;
+        fn wxWindow_GetScreenRect(self_: &wxWindow) -> *mut wxRect;
+        fn wxWindow_GetClientAreaOrigin(self_: &wxWindow) -> *mut wxPoint;
+        fn wxWindow_GetClientRect(self_: &wxWindow) -> *mut wxRect;
         fn wxWindow_Move(self_: Pin<&mut wxWindow>, x: i32, y: i32, flags: i32);
         #[rust_name = "wxWindow_Move1"]
         fn wxWindow_Move(self_: Pin<&mut wxWindow>, pt: &wxPoint, flags: i32);
         fn wxWindow_SetPosition(self_: Pin<&mut wxWindow>, pt: &wxPoint);
         unsafe fn wxWindow_ClientToScreen(self_: &wxWindow, x: *mut i32, y: *mut i32);
         #[rust_name = "wxWindow_ClientToScreen1"]
-        fn wxWindow_ClientToScreen(self_: &wxWindow, pt: &wxPoint) -> wxPoint;
-        fn wxWindow_ConvertDialogToPixels(self_: &wxWindow, pt: &wxPoint) -> wxPoint;
+        fn wxWindow_ClientToScreen(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
+        fn wxWindow_ConvertDialogToPixels(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
         #[rust_name = "wxWindow_ConvertDialogToPixels1"]
-        fn wxWindow_ConvertDialogToPixels(self_: &wxWindow, sz: &wxSize) -> wxSize;
-        fn wxWindow_ConvertPixelsToDialog(self_: &wxWindow, pt: &wxPoint) -> wxPoint;
+        fn wxWindow_ConvertDialogToPixels(self_: &wxWindow, sz: &wxSize) -> *mut wxSize;
+        fn wxWindow_ConvertPixelsToDialog(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
         #[rust_name = "wxWindow_ConvertPixelsToDialog1"]
-        fn wxWindow_ConvertPixelsToDialog(self_: &wxWindow, sz: &wxSize) -> wxSize;
+        fn wxWindow_ConvertPixelsToDialog(self_: &wxWindow, sz: &wxSize) -> *mut wxSize;
         unsafe fn wxWindow_ScreenToClient(self_: &wxWindow, x: *mut i32, y: *mut i32);
         #[rust_name = "wxWindow_ScreenToClient1"]
-        fn wxWindow_ScreenToClient(self_: &wxWindow, pt: &wxPoint) -> wxPoint;
+        fn wxWindow_ScreenToClient(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
         fn wxWindow_ClearBackground(self_: Pin<&mut wxWindow>);
         fn wxWindow_Freeze(self_: Pin<&mut wxWindow>);
         fn wxWindow_Thaw(self_: Pin<&mut wxWindow>);
         fn wxWindow_IsFrozen(self_: &wxWindow) -> bool;
         fn wxWindow_GetCharHeight(self_: &wxWindow) -> i32;
         fn wxWindow_GetCharWidth(self_: &wxWindow) -> i32;
-        fn wxWindow_GetDPI(self_: &wxWindow) -> wxSize;
+        fn wxWindow_GetDPI(self_: &wxWindow) -> *mut wxSize;
         unsafe fn wxWindow_GetTextExtent(self_: &wxWindow, string: &wxString, w: *mut i32, h: *mut i32, descent: *mut i32, external_leading: *mut i32, font: *const wxFont);
         #[rust_name = "wxWindow_GetTextExtent1"]
-        fn wxWindow_GetTextExtent(self_: &wxWindow, string: &wxString) -> wxSize;
-        fn wxWindow_GetUpdateClientRect(self_: &wxWindow) -> wxRect;
+        fn wxWindow_GetTextExtent(self_: &wxWindow, string: &wxString) -> *mut wxSize;
+        fn wxWindow_GetUpdateClientRect(self_: &wxWindow) -> *mut wxRect;
         fn wxWindow_HasTransparentBackground(self_: Pin<&mut wxWindow>) -> bool;
         unsafe fn wxWindow_Refresh(self_: Pin<&mut wxWindow>, erase_background: bool, rect: *const wxRect);
         fn wxWindow_RefreshRect(self_: Pin<&mut wxWindow>, rect: &wxRect, erase_background: bool);
@@ -931,11 +931,11 @@ mod ffi {
         fn wxWindow_IsEnabled(self_: &wxWindow) -> bool;
         fn wxWindow_IsExposed(self_: &wxWindow, x: i32, y: i32) -> bool;
         #[rust_name = "wxWindow_IsExposed1"]
-        fn wxWindow_IsExposed(self_: &wxWindow, pt: &mut wxPoint) -> bool;
+        fn wxWindow_IsExposed(self_: &wxWindow, pt: Pin<&mut wxPoint>) -> bool;
         #[rust_name = "wxWindow_IsExposed2"]
         fn wxWindow_IsExposed(self_: &wxWindow, x: i32, y: i32, w: i32, h: i32) -> bool;
         #[rust_name = "wxWindow_IsExposed3"]
-        fn wxWindow_IsExposed(self_: &wxWindow, rect: &mut wxRect) -> bool;
+        fn wxWindow_IsExposed(self_: &wxWindow, rect: Pin<&mut wxRect>) -> bool;
         fn wxWindow_IsShown(self_: &wxWindow) -> bool;
         fn wxWindow_IsShownOnScreen(self_: &wxWindow) -> bool;
         fn wxWindow_Disable(self_: Pin<&mut wxWindow>) -> bool;
@@ -1025,10 +1025,10 @@ mod ffi {
         fn wxControl_Command(self_: Pin<&mut wxControl>, event: Pin<&mut wxCommandEvent>);
         fn wxControl_GetLabel(self_: &wxControl) -> *mut wxString;
         fn wxControl_GetLabelText(self_: &wxControl) -> *mut wxString;
-        fn wxControl_GetSizeFromTextSize(self_: &wxControl, xlen: i32, ylen: i32) -> wxSize;
+        fn wxControl_GetSizeFromTextSize(self_: &wxControl, xlen: i32, ylen: i32) -> *mut wxSize;
         #[rust_name = "wxControl_GetSizeFromTextSize1"]
-        fn wxControl_GetSizeFromTextSize(self_: &wxControl, tsize: &wxSize) -> wxSize;
-        fn wxControl_GetSizeFromText(self_: &wxControl, text: &wxString) -> wxSize;
+        fn wxControl_GetSizeFromTextSize(self_: &wxControl, tsize: &wxSize) -> *mut wxSize;
+        fn wxControl_GetSizeFromText(self_: &wxControl, text: &wxString) -> *mut wxSize;
         fn wxControl_SetLabel(self_: Pin<&mut wxControl>, label: &wxString);
         fn wxControl_SetLabelText(self_: Pin<&mut wxControl>, text: &wxString);
         fn wxControl_SetLabelMarkup(self_: Pin<&mut wxControl>, markup: &wxString) -> bool;
@@ -1043,7 +1043,7 @@ mod ffi {
         fn wxAnyButton_SetBitmapFocus(self_: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
         fn wxAnyButton_SetBitmapLabel(self_: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
         fn wxAnyButton_SetBitmapPressed(self_: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
-        fn wxAnyButton_GetBitmapMargins(self_: Pin<&mut wxAnyButton>) -> wxSize;
+        fn wxAnyButton_GetBitmapMargins(self_: Pin<&mut wxAnyButton>) -> *mut wxSize;
         fn wxAnyButton_SetBitmapMargins(self_: Pin<&mut wxAnyButton>, x: i32, y: i32);
         #[rust_name = "wxAnyButton_SetBitmapMargins1"]
         fn wxAnyButton_SetBitmapMargins(self_: Pin<&mut wxAnyButton>, sz: &wxSize);
@@ -1057,7 +1057,7 @@ mod ffi {
         fn wxButton_SetAuthNeeded(self_: Pin<&mut wxButton>, needed: bool);
         fn wxButton_SetDefault(self_: Pin<&mut wxButton>) -> *mut wxWindow;
         fn wxButton_SetLabel(self_: Pin<&mut wxButton>, label: &wxString);
-        unsafe fn wxButton_GetDefaultSize(win: *mut wxWindow) -> wxSize;
+        unsafe fn wxButton_GetDefaultSize(win: *mut wxWindow) -> *mut wxSize;
         // CLASS: wxNonOwnedWindow
         fn wxNonOwnedWindow_SetShape(self_: Pin<&mut wxNonOwnedWindow>, region: &wxRegion) -> bool;
         #[rust_name = "wxNonOwnedWindow_SetShape1"]
@@ -1104,7 +1104,7 @@ mod ffi {
         fn wxTopLevelWindow_ShowWithoutActivating(self_: Pin<&mut wxTopLevelWindow>);
         fn wxTopLevelWindow_EnableFullScreenView(self_: Pin<&mut wxTopLevelWindow>, enable: bool) -> bool;
         fn wxTopLevelWindow_ShowFullScreen(self_: Pin<&mut wxTopLevelWindow>, show: bool, style: i32) -> bool;
-        fn wxTopLevelWindow_GetDefaultSize() -> wxSize;
+        fn wxTopLevelWindow_GetDefaultSize() -> *mut wxSize;
         // CLASS: wxFrame
         fn NewFrame() -> *mut wxFrame;
         #[rust_name = "NewFrame1"]
@@ -1114,7 +1114,7 @@ mod ffi {
         fn wxFrame_CreateStatusBar(self_: Pin<&mut wxFrame>, number: i32, style: i32, id: i32, name: &wxString) -> *mut wxStatusBar;
         fn wxFrame_CreateToolBar(self_: Pin<&mut wxFrame>, style: i32, id: i32, name: &wxString) -> *mut wxToolBar;
         fn wxFrame_DoGiveHelp(self_: Pin<&mut wxFrame>, text: &wxString, show: bool);
-        fn wxFrame_GetClientAreaOrigin(self_: &wxFrame) -> wxPoint;
+        fn wxFrame_GetClientAreaOrigin(self_: &wxFrame) -> *mut wxPoint;
         fn wxFrame_GetMenuBar(self_: &wxFrame) -> *mut wxMenuBar;
         fn wxFrame_GetStatusBar(self_: &wxFrame) -> *mut wxStatusBar;
         fn wxFrame_GetStatusBarPane(self_: &wxFrame) -> i32;
@@ -1132,97 +1132,97 @@ mod ffi {
         fn wxFrame_PopStatusText(self_: Pin<&mut wxFrame>, number: i32);
         // CLASS: wxPoint
         fn wxPoint_IsFullySpecified(self_: &wxPoint) -> bool;
-        fn wxPoint_SetDefaults(self_: &mut wxPoint, pt: &wxPoint);
-        fn NewPoint() -> wxPoint;
+        fn wxPoint_SetDefaults(self_: Pin<&mut wxPoint>, pt: &wxPoint);
+        fn NewPoint() -> *mut wxPoint;
         #[rust_name = "NewPoint1"]
-        fn NewPoint(x: i32, y: i32) -> wxPoint;
+        fn NewPoint(x: i32, y: i32) -> *mut wxPoint;
         #[rust_name = "NewPoint2"]
-        fn NewPoint(pt: &wxRealPoint) -> wxPoint;
+        fn NewPoint(pt: &wxRealPoint) -> *mut wxPoint;
         // CLASS: wxRect
-        fn NewRect() -> wxRect;
+        fn NewRect() -> *mut wxRect;
         #[rust_name = "NewRect1"]
-        fn NewRect(x: i32, y: i32, width: i32, height: i32) -> wxRect;
+        fn NewRect(x: i32, y: i32, width: i32, height: i32) -> *mut wxRect;
         #[rust_name = "NewRect2"]
-        fn NewRect(top_left: &wxPoint, bottom_right: &wxPoint) -> wxRect;
+        fn NewRect(top_left: &wxPoint, bottom_right: &wxPoint) -> *mut wxRect;
         #[rust_name = "NewRect3"]
-        fn NewRect(pos: &wxPoint, size: &wxSize) -> wxRect;
+        fn NewRect(pos: &wxPoint, size: &wxSize) -> *mut wxRect;
         #[rust_name = "NewRect4"]
-        fn NewRect(size: &wxSize) -> wxRect;
-        fn wxRect_CentreIn(self_: &wxRect, r: &wxRect, dir: i32) -> wxRect;
-        fn wxRect_CenterIn(self_: &wxRect, r: &wxRect, dir: i32) -> wxRect;
+        fn NewRect(size: &wxSize) -> *mut wxRect;
+        fn wxRect_CentreIn(self_: &wxRect, r: &wxRect, dir: i32) -> *mut wxRect;
+        fn wxRect_CenterIn(self_: &wxRect, r: &wxRect, dir: i32) -> *mut wxRect;
         fn wxRect_Contains(self_: &wxRect, x: i32, y: i32) -> bool;
         #[rust_name = "wxRect_Contains1"]
         fn wxRect_Contains(self_: &wxRect, pt: &wxPoint) -> bool;
         #[rust_name = "wxRect_Contains2"]
         fn wxRect_Contains(self_: &wxRect, rect: &wxRect) -> bool;
         #[rust_name = "wxRect_Deflate3"]
-        fn wxRect_Deflate(self_: &wxRect, dx: i32, dy: i32) -> wxRect;
+        fn wxRect_Deflate(self_: &wxRect, dx: i32, dy: i32) -> *mut wxRect;
         fn wxRect_GetBottom(self_: &wxRect) -> i32;
-        fn wxRect_GetBottomLeft(self_: &wxRect) -> wxPoint;
-        fn wxRect_GetBottomRight(self_: &wxRect) -> wxPoint;
+        fn wxRect_GetBottomLeft(self_: &wxRect) -> *mut wxPoint;
+        fn wxRect_GetBottomRight(self_: &wxRect) -> *mut wxPoint;
         fn wxRect_GetHeight(self_: &wxRect) -> i32;
         fn wxRect_GetLeft(self_: &wxRect) -> i32;
-        fn wxRect_GetPosition(self_: &wxRect) -> wxPoint;
+        fn wxRect_GetPosition(self_: &wxRect) -> *mut wxPoint;
         fn wxRect_GetRight(self_: &wxRect) -> i32;
-        fn wxRect_GetSize(self_: &wxRect) -> wxSize;
+        fn wxRect_GetSize(self_: &wxRect) -> *mut wxSize;
         fn wxRect_GetTop(self_: &wxRect) -> i32;
-        fn wxRect_GetTopLeft(self_: &wxRect) -> wxPoint;
-        fn wxRect_GetTopRight(self_: &wxRect) -> wxPoint;
+        fn wxRect_GetTopLeft(self_: &wxRect) -> *mut wxPoint;
+        fn wxRect_GetTopRight(self_: &wxRect) -> *mut wxPoint;
         fn wxRect_GetWidth(self_: &wxRect) -> i32;
         fn wxRect_GetX(self_: &wxRect) -> i32;
         fn wxRect_GetY(self_: &wxRect) -> i32;
         #[rust_name = "wxRect_Inflate3"]
-        fn wxRect_Inflate(self_: &wxRect, dx: i32, dy: i32) -> wxRect;
+        fn wxRect_Inflate(self_: &wxRect, dx: i32, dy: i32) -> *mut wxRect;
         #[rust_name = "wxRect_Intersect1"]
-        fn wxRect_Intersect(self_: &wxRect, rect: &wxRect) -> wxRect;
+        fn wxRect_Intersect(self_: &wxRect, rect: &wxRect) -> *mut wxRect;
         fn wxRect_Intersects(self_: &wxRect, rect: &wxRect) -> bool;
         fn wxRect_IsEmpty(self_: &wxRect) -> bool;
-        fn wxRect_Offset(self_: &mut wxRect, dx: i32, dy: i32);
+        fn wxRect_Offset(self_: Pin<&mut wxRect>, dx: i32, dy: i32);
         #[rust_name = "wxRect_Offset1"]
-        fn wxRect_Offset(self_: &mut wxRect, pt: &wxPoint);
-        fn wxRect_SetHeight(self_: &mut wxRect, height: i32);
-        fn wxRect_SetPosition(self_: &mut wxRect, pos: &wxPoint);
-        fn wxRect_SetSize(self_: &mut wxRect, s: &wxSize);
-        fn wxRect_SetWidth(self_: &mut wxRect, width: i32);
-        fn wxRect_SetX(self_: &mut wxRect, x: i32);
-        fn wxRect_SetY(self_: &mut wxRect, y: i32);
-        fn wxRect_SetLeft(self_: &mut wxRect, left: i32);
-        fn wxRect_SetRight(self_: &mut wxRect, right: i32);
-        fn wxRect_SetTop(self_: &mut wxRect, top: i32);
-        fn wxRect_SetBottom(self_: &mut wxRect, bottom: i32);
-        fn wxRect_SetTopLeft(self_: &mut wxRect, p: &wxPoint);
-        fn wxRect_SetBottomRight(self_: &mut wxRect, p: &wxPoint);
-        fn wxRect_SetTopRight(self_: &mut wxRect, p: &wxPoint);
-        fn wxRect_SetBottomLeft(self_: &mut wxRect, p: &wxPoint);
-        fn wxRect_Union(self_: &wxRect, rect: &wxRect) -> wxRect;
+        fn wxRect_Offset(self_: Pin<&mut wxRect>, pt: &wxPoint);
+        fn wxRect_SetHeight(self_: Pin<&mut wxRect>, height: i32);
+        fn wxRect_SetPosition(self_: Pin<&mut wxRect>, pos: &wxPoint);
+        fn wxRect_SetSize(self_: Pin<&mut wxRect>, s: &wxSize);
+        fn wxRect_SetWidth(self_: Pin<&mut wxRect>, width: i32);
+        fn wxRect_SetX(self_: Pin<&mut wxRect>, x: i32);
+        fn wxRect_SetY(self_: Pin<&mut wxRect>, y: i32);
+        fn wxRect_SetLeft(self_: Pin<&mut wxRect>, left: i32);
+        fn wxRect_SetRight(self_: Pin<&mut wxRect>, right: i32);
+        fn wxRect_SetTop(self_: Pin<&mut wxRect>, top: i32);
+        fn wxRect_SetBottom(self_: Pin<&mut wxRect>, bottom: i32);
+        fn wxRect_SetTopLeft(self_: Pin<&mut wxRect>, p: &wxPoint);
+        fn wxRect_SetBottomRight(self_: Pin<&mut wxRect>, p: &wxPoint);
+        fn wxRect_SetTopRight(self_: Pin<&mut wxRect>, p: &wxPoint);
+        fn wxRect_SetBottomLeft(self_: Pin<&mut wxRect>, p: &wxPoint);
+        fn wxRect_Union(self_: &wxRect, rect: &wxRect) -> *mut wxRect;
         // CLASS: wxSize
-        fn NewSize() -> wxSize;
+        fn NewSize() -> *mut wxSize;
         #[rust_name = "NewSize1"]
-        fn NewSize(width: i32, height: i32) -> wxSize;
-        fn wxSize_DecBy(self_: &mut wxSize, pt: &wxPoint);
+        fn NewSize(width: i32, height: i32) -> *mut wxSize;
+        fn wxSize_DecBy(self_: Pin<&mut wxSize>, pt: &wxPoint);
         #[rust_name = "wxSize_DecBy1"]
-        fn wxSize_DecBy(self_: &mut wxSize, size: &wxSize);
+        fn wxSize_DecBy(self_: Pin<&mut wxSize>, size: &wxSize);
         #[rust_name = "wxSize_DecBy2"]
-        fn wxSize_DecBy(self_: &mut wxSize, dx: i32, dy: i32);
+        fn wxSize_DecBy(self_: Pin<&mut wxSize>, dx: i32, dy: i32);
         #[rust_name = "wxSize_DecBy3"]
-        fn wxSize_DecBy(self_: &mut wxSize, d: i32);
-        fn wxSize_DecTo(self_: &mut wxSize, size: &wxSize);
-        fn wxSize_DecToIfSpecified(self_: &mut wxSize, size: &wxSize);
+        fn wxSize_DecBy(self_: Pin<&mut wxSize>, d: i32);
+        fn wxSize_DecTo(self_: Pin<&mut wxSize>, size: &wxSize);
+        fn wxSize_DecToIfSpecified(self_: Pin<&mut wxSize>, size: &wxSize);
         fn wxSize_GetHeight(self_: &wxSize) -> i32;
         fn wxSize_GetWidth(self_: &wxSize) -> i32;
-        fn wxSize_IncBy(self_: &mut wxSize, pt: &wxPoint);
+        fn wxSize_IncBy(self_: Pin<&mut wxSize>, pt: &wxPoint);
         #[rust_name = "wxSize_IncBy1"]
-        fn wxSize_IncBy(self_: &mut wxSize, size: &wxSize);
+        fn wxSize_IncBy(self_: Pin<&mut wxSize>, size: &wxSize);
         #[rust_name = "wxSize_IncBy2"]
-        fn wxSize_IncBy(self_: &mut wxSize, dx: i32, dy: i32);
+        fn wxSize_IncBy(self_: Pin<&mut wxSize>, dx: i32, dy: i32);
         #[rust_name = "wxSize_IncBy3"]
-        fn wxSize_IncBy(self_: &mut wxSize, d: i32);
-        fn wxSize_IncTo(self_: &mut wxSize, size: &wxSize);
+        fn wxSize_IncBy(self_: Pin<&mut wxSize>, d: i32);
+        fn wxSize_IncTo(self_: Pin<&mut wxSize>, size: &wxSize);
         fn wxSize_IsFullySpecified(self_: &wxSize) -> bool;
-        fn wxSize_Set(self_: &mut wxSize, width: i32, height: i32);
-        fn wxSize_SetDefaults(self_: &mut wxSize, size_default: &wxSize);
-        fn wxSize_SetHeight(self_: &mut wxSize, height: i32);
-        fn wxSize_SetWidth(self_: &mut wxSize, width: i32);
+        fn wxSize_Set(self_: Pin<&mut wxSize>, width: i32, height: i32);
+        fn wxSize_SetDefaults(self_: Pin<&mut wxSize>, size_default: &wxSize);
+        fn wxSize_SetHeight(self_: Pin<&mut wxSize>, height: i32);
+        fn wxSize_SetWidth(self_: Pin<&mut wxSize>, width: i32);
         // CLASS: wxValidator
         fn NewValidator() -> *mut wxValidator;
         fn wxValidator_Clone(self_: &wxValidator) -> *mut wxObject;
@@ -1407,8 +1407,8 @@ impl Window {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
                 None => ptr::null_mut(),
             };
-            let pos = &pos.0;
-            let size = &size.0;
+            let pos = &pos.pinned::<ffi::wxPoint>();
+            let size = &size.pinned::<ffi::wxSize>();
             let name = &crate::ffi::NewString(name);
             Window(ffi::NewWindow1(parent, id, pos, size, style, name))
         }
@@ -1569,15 +1569,15 @@ pub trait WindowMethods: EvtHandlerMethods {
         ffi::wxWindow_EndRepositioningChildren(self.pinned::<ffi::wxWindow>().as_mut())
     }
     fn cache_best_size(&self, size: &Size) {
-        let size = &size.0;
+        let size = &size.pinned::<ffi::wxSize>();
         ffi::wxWindow_CacheBestSize(&self.pinned::<ffi::wxWindow>().as_mut(), size)
     }
     fn client_to_window_size(&self, size: &Size) -> Size {
-        let size = &size.0;
+        let size = &size.pinned::<ffi::wxSize>();
         Size(ffi::wxWindow_ClientToWindowSize(&self.pinned::<ffi::wxWindow>().as_mut(), size))
     }
     fn window_to_client_size(&self, size: &Size) -> Size {
-        let size = &size.0;
+        let size = &size.pinned::<ffi::wxSize>();
         Size(ffi::wxWindow_WindowToClientSize(&self.pinned::<ffi::wxWindow>().as_mut(), size))
     }
     fn fit(&self) {
@@ -1587,22 +1587,22 @@ pub trait WindowMethods: EvtHandlerMethods {
         ffi::wxWindow_FitInside(self.pinned::<ffi::wxWindow>().as_mut())
     }
     fn from_dip(&self, sz: &Size) -> Size {
-        let sz = &sz.0;
+        let sz = &sz.pinned::<ffi::wxSize>();
         Size(ffi::wxWindow_FromDIP(&self.pinned::<ffi::wxWindow>().as_mut(), sz))
     }
     fn from_dip1(&self, pt: &Point) -> Point {
-        let pt = &pt.0;
+        let pt = &pt.pinned::<ffi::wxPoint>();
         Point(ffi::wxWindow_FromDIP1(&self.pinned::<ffi::wxWindow>().as_mut(), pt))
     }
     fn from_dip2(&self, d: i32) -> i32 {
         ffi::wxWindow_FromDIP2(&self.pinned::<ffi::wxWindow>().as_mut(), d)
     }
     fn to_dip(&self, sz: &Size) -> Size {
-        let sz = &sz.0;
+        let sz = &sz.pinned::<ffi::wxSize>();
         Size(ffi::wxWindow_ToDIP(&self.pinned::<ffi::wxWindow>().as_mut(), sz))
     }
     fn to_dip1(&self, pt: &Point) -> Point {
-        let pt = &pt.0;
+        let pt = &pt.pinned::<ffi::wxPoint>();
         Point(ffi::wxWindow_ToDIP1(&self.pinned::<ffi::wxWindow>().as_mut(), pt))
     }
     fn to_dip2(&self, d: i32) -> i32 {
@@ -1696,54 +1696,54 @@ pub trait WindowMethods: EvtHandlerMethods {
         ffi::wxWindow_SetClientSize(self.pinned::<ffi::wxWindow>().as_mut(), width, height)
     }
     fn set_client_size1(&self, size: &Size) {
-        let size = &size.0;
+        let size = &size.pinned::<ffi::wxSize>();
         ffi::wxWindow_SetClientSize1(self.pinned::<ffi::wxWindow>().as_mut(), size)
     }
     fn set_client_size2(&self, rect: &Rect) {
-        let rect = &rect.0;
+        let rect = &rect.pinned::<ffi::wxRect>();
         ffi::wxWindow_SetClientSize2(self.pinned::<ffi::wxWindow>().as_mut(), rect)
     }
     fn set_containing_sizer(&self, sizer: *mut ffi::wxSizer) {
         unsafe { ffi::wxWindow_SetContainingSizer(self.pinned::<ffi::wxWindow>().as_mut(), sizer) }
     }
     fn set_initial_size(&self, size: &Size) {
-        let size = &size.0;
+        let size = &size.pinned::<ffi::wxSize>();
         ffi::wxWindow_SetInitialSize(self.pinned::<ffi::wxWindow>().as_mut(), size)
     }
     fn set_max_client_size(&self, size: &Size) {
-        let size = &size.0;
+        let size = &size.pinned::<ffi::wxSize>();
         ffi::wxWindow_SetMaxClientSize(self.pinned::<ffi::wxWindow>().as_mut(), size)
     }
     fn set_max_size(&self, size: &Size) {
-        let size = &size.0;
+        let size = &size.pinned::<ffi::wxSize>();
         ffi::wxWindow_SetMaxSize(self.pinned::<ffi::wxWindow>().as_mut(), size)
     }
     fn set_min_client_size(&self, size: &Size) {
-        let size = &size.0;
+        let size = &size.pinned::<ffi::wxSize>();
         ffi::wxWindow_SetMinClientSize(self.pinned::<ffi::wxWindow>().as_mut(), size)
     }
     fn set_min_size(&self, size: &Size) {
-        let size = &size.0;
+        let size = &size.pinned::<ffi::wxSize>();
         ffi::wxWindow_SetMinSize(self.pinned::<ffi::wxWindow>().as_mut(), size)
     }
     fn set_size(&self, x: i32, y: i32, width: i32, height: i32, size_flags: i32) {
         ffi::wxWindow_SetSize(self.pinned::<ffi::wxWindow>().as_mut(), x, y, width, height, size_flags)
     }
     fn set_size1(&self, rect: &Rect) {
-        let rect = &rect.0;
+        let rect = &rect.pinned::<ffi::wxRect>();
         ffi::wxWindow_SetSize1(self.pinned::<ffi::wxWindow>().as_mut(), rect)
     }
     fn set_size2(&self, size: &Size) {
-        let size = &size.0;
+        let size = &size.pinned::<ffi::wxSize>();
         ffi::wxWindow_SetSize2(self.pinned::<ffi::wxWindow>().as_mut(), size)
     }
     fn set_size3(&self, width: i32, height: i32) {
         ffi::wxWindow_SetSize3(self.pinned::<ffi::wxWindow>().as_mut(), width, height)
     }
     fn set_size_hints(&self, min_size: &Size, max_size: &Size, inc_size: &Size) {
-        let min_size = &min_size.0;
-        let max_size = &max_size.0;
-        let inc_size = &inc_size.0;
+        let min_size = &min_size.pinned::<ffi::wxSize>();
+        let max_size = &max_size.pinned::<ffi::wxSize>();
+        let inc_size = &inc_size.pinned::<ffi::wxSize>();
         ffi::wxWindow_SetSizeHints(self.pinned::<ffi::wxWindow>().as_mut(), min_size, max_size, inc_size)
     }
     fn set_size_hints1(&self, min_w: i32, min_h: i32, max_w: i32, max_h: i32, inc_w: i32, inc_h: i32) {
@@ -1753,12 +1753,12 @@ pub trait WindowMethods: EvtHandlerMethods {
         ffi::wxWindow_SetVirtualSize(self.pinned::<ffi::wxWindow>().as_mut(), width, height)
     }
     fn set_virtual_size1(&self, size: &Size) {
-        let size = &size.0;
+        let size = &size.pinned::<ffi::wxSize>();
         ffi::wxWindow_SetVirtualSize1(self.pinned::<ffi::wxWindow>().as_mut(), size)
     }
     fn from_dip3<T: WindowMethods>(sz: &Size, w: Option<&T>) -> Size {
         unsafe {
-            let sz = &sz.0;
+            let sz = &sz.pinned::<ffi::wxSize>();
             let w = match w {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
                 None => ptr::null_mut(),
@@ -1768,7 +1768,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     fn from_dip4<T: WindowMethods>(pt: &Point, w: Option<&T>) -> Point {
         unsafe {
-            let pt = &pt.0;
+            let pt = &pt.pinned::<ffi::wxPoint>();
             let w = match w {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
                 None => ptr::null_mut(),
@@ -1787,7 +1787,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     fn to_dip3<T: WindowMethods>(sz: &Size, w: Option<&T>) -> Size {
         unsafe {
-            let sz = &sz.0;
+            let sz = &sz.pinned::<ffi::wxSize>();
             let w = match w {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
                 None => ptr::null_mut(),
@@ -1797,7 +1797,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     fn to_dip4<T: WindowMethods>(pt: &Point, w: Option<&T>) -> Point {
         unsafe {
-            let pt = &pt.0;
+            let pt = &pt.pinned::<ffi::wxPoint>();
             let w = match w {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
                 None => ptr::null_mut(),
@@ -1854,41 +1854,41 @@ pub trait WindowMethods: EvtHandlerMethods {
         ffi::wxWindow_Move(self.pinned::<ffi::wxWindow>().as_mut(), x, y, flags)
     }
     fn move1(&self, pt: &Point, flags: i32) {
-        let pt = &pt.0;
+        let pt = &pt.pinned::<ffi::wxPoint>();
         ffi::wxWindow_Move1(self.pinned::<ffi::wxWindow>().as_mut(), pt, flags)
     }
     fn set_position(&self, pt: &Point) {
-        let pt = &pt.0;
+        let pt = &pt.pinned::<ffi::wxPoint>();
         ffi::wxWindow_SetPosition(self.pinned::<ffi::wxWindow>().as_mut(), pt)
     }
     fn client_to_screen(&self, x: *mut i32, y: *mut i32) {
         unsafe { ffi::wxWindow_ClientToScreen(&self.pinned::<ffi::wxWindow>().as_mut(), x, y) }
     }
     fn client_to_screen1(&self, pt: &Point) -> Point {
-        let pt = &pt.0;
+        let pt = &pt.pinned::<ffi::wxPoint>();
         Point(ffi::wxWindow_ClientToScreen1(&self.pinned::<ffi::wxWindow>().as_mut(), pt))
     }
     fn convert_dialog_to_pixels(&self, pt: &Point) -> Point {
-        let pt = &pt.0;
+        let pt = &pt.pinned::<ffi::wxPoint>();
         Point(ffi::wxWindow_ConvertDialogToPixels(&self.pinned::<ffi::wxWindow>().as_mut(), pt))
     }
     fn convert_dialog_to_pixels1(&self, sz: &Size) -> Size {
-        let sz = &sz.0;
+        let sz = &sz.pinned::<ffi::wxSize>();
         Size(ffi::wxWindow_ConvertDialogToPixels1(&self.pinned::<ffi::wxWindow>().as_mut(), sz))
     }
     fn convert_pixels_to_dialog(&self, pt: &Point) -> Point {
-        let pt = &pt.0;
+        let pt = &pt.pinned::<ffi::wxPoint>();
         Point(ffi::wxWindow_ConvertPixelsToDialog(&self.pinned::<ffi::wxWindow>().as_mut(), pt))
     }
     fn convert_pixels_to_dialog1(&self, sz: &Size) -> Size {
-        let sz = &sz.0;
+        let sz = &sz.pinned::<ffi::wxSize>();
         Size(ffi::wxWindow_ConvertPixelsToDialog1(&self.pinned::<ffi::wxWindow>().as_mut(), sz))
     }
     fn screen_to_client(&self, x: *mut i32, y: *mut i32) {
         unsafe { ffi::wxWindow_ScreenToClient(&self.pinned::<ffi::wxWindow>().as_mut(), x, y) }
     }
     fn screen_to_client1(&self, pt: &Point) -> Point {
-        let pt = &pt.0;
+        let pt = &pt.pinned::<ffi::wxPoint>();
         Point(ffi::wxWindow_ScreenToClient1(&self.pinned::<ffi::wxWindow>().as_mut(), pt))
     }
     fn clear_background(&self) {
@@ -1938,7 +1938,7 @@ pub trait WindowMethods: EvtHandlerMethods {
         unsafe { ffi::wxWindow_Refresh(self.pinned::<ffi::wxWindow>().as_mut(), erase_background, rect) }
     }
     fn refresh_rect(&self, rect: &Rect, erase_background: bool) {
-        let rect = &rect.0;
+        let rect = &rect.pinned::<ffi::wxRect>();
         ffi::wxWindow_RefreshRect(self.pinned::<ffi::wxWindow>().as_mut(), rect, erase_background)
     }
     fn update(&self) {
@@ -2129,13 +2129,13 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn is_exposed(&self, x: i32, y: i32) -> bool {
         ffi::wxWindow_IsExposed(&self.pinned::<ffi::wxWindow>().as_mut(), x, y)
     }
-    fn is_exposed1(&self, pt: &mut ffi::wxPoint) -> bool {
+    fn is_exposed1(&self, pt: Pin<&mut ffi::wxPoint>) -> bool {
         ffi::wxWindow_IsExposed1(&self.pinned::<ffi::wxWindow>().as_mut(), pt)
     }
     fn is_exposed2(&self, x: i32, y: i32, w: i32, h: i32) -> bool {
         ffi::wxWindow_IsExposed2(&self.pinned::<ffi::wxWindow>().as_mut(), x, y, w, h)
     }
-    fn is_exposed3(&self, rect: &mut ffi::wxRect) -> bool {
+    fn is_exposed3(&self, rect: Pin<&mut ffi::wxRect>) -> bool {
         ffi::wxWindow_IsExposed3(&self.pinned::<ffi::wxWindow>().as_mut(), rect)
     }
     fn is_shown(&self) -> bool {
@@ -2179,7 +2179,7 @@ pub trait WindowMethods: EvtHandlerMethods {
         ffi::wxWindow_UnsetToolTip(self.pinned::<ffi::wxWindow>().as_mut())
     }
     fn get_popup_menu_selection_from_user(&self, menu: Pin<&mut ffi::wxMenu>, pos: &Point) -> i32 {
-        let pos = &pos.0;
+        let pos = &pos.pinned::<ffi::wxPoint>();
         ffi::wxWindow_GetPopupMenuSelectionFromUser(self.pinned::<ffi::wxWindow>().as_mut(), menu, pos)
     }
     fn get_popup_menu_selection_from_user1(&self, menu: Pin<&mut ffi::wxMenu>, x: i32, y: i32) -> i32 {
@@ -2187,7 +2187,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     fn popup_menu(&self, menu: *mut ffi::wxMenu, pos: &Point) -> bool {
         unsafe {
-            let pos = &pos.0;
+            let pos = &pos.pinned::<ffi::wxPoint>();
             ffi::wxWindow_PopupMenu(self.pinned::<ffi::wxWindow>().as_mut(), menu, pos)
         }
     }
@@ -2411,8 +2411,8 @@ pub trait WindowMethods: EvtHandlerMethods {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
                 None => ptr::null_mut(),
             };
-            let pos = &pos.0;
-            let size = &size.0;
+            let pos = &pos.pinned::<ffi::wxPoint>();
+            let size = &size.pinned::<ffi::wxSize>();
             let name = &crate::ffi::NewString(name);
             ffi::wxWindow_Create(self.pinned::<ffi::wxWindow>().as_mut(), parent, id, pos, size, style, name)
         }
@@ -2433,8 +2433,8 @@ impl Control {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
                 None => ptr::null_mut(),
             };
-            let pos = &pos.0;
-            let size = &size.0;
+            let pos = &pos.pinned::<ffi::wxPoint>();
+            let size = &size.pinned::<ffi::wxSize>();
             let validator = &validator.pinned::<ffi::wxValidator>();
             let name = &crate::ffi::NewString(name);
             Control(ffi::NewControl(parent, id, pos, size, style, validator, name))
@@ -2454,8 +2454,8 @@ pub trait ControlMethods: WindowMethods {
                 Some(r) => Pin::<&mut ffi::wxWindow>::into_inner_unchecked(r.pinned::<ffi::wxWindow>()),
                 None => ptr::null_mut(),
             };
-            let pos = &pos.0;
-            let size = &size.0;
+            let pos = &pos.pinned::<ffi::wxPoint>();
+            let size = &size.pinned::<ffi::wxSize>();
             let validator = &validator.pinned::<ffi::wxValidator>();
             let name = &crate::ffi::NewString(name);
             ffi::wxControl_Create(self.pinned::<ffi::wxControl>().as_mut(), parent, id, pos, size, style, validator, name)
@@ -2474,7 +2474,7 @@ pub trait ControlMethods: WindowMethods {
         Size(ffi::wxControl_GetSizeFromTextSize(&self.pinned::<ffi::wxControl>().as_mut(), xlen, ylen))
     }
     fn get_size_from_text_size1(&self, tsize: &Size) -> Size {
-        let tsize = &tsize.0;
+        let tsize = &tsize.pinned::<ffi::wxSize>();
         Size(ffi::wxControl_GetSizeFromTextSize1(&self.pinned::<ffi::wxControl>().as_mut(), tsize))
     }
     fn get_size_from_text(&self, text: &str) -> Size {
@@ -2555,7 +2555,7 @@ pub trait AnyButtonMethods: ControlMethods {
         ffi::wxAnyButton_SetBitmapMargins(self.pinned::<ffi::wxAnyButton>().as_mut(), x, y)
     }
     fn set_bitmap_margins1(&self, sz: &Size) {
-        let sz = &sz.0;
+        let sz = &sz.pinned::<ffi::wxSize>();
         ffi::wxAnyButton_SetBitmapMargins1(self.pinned::<ffi::wxAnyButton>().as_mut(), sz)
     }
     // CXX_UNSUPPORTED: fn SetBitmapPosition()
@@ -2581,8 +2581,8 @@ impl Button {
                 None => ptr::null_mut(),
             };
             let label = &crate::ffi::NewString(label);
-            let pos = &pos.0;
-            let size = &size.0;
+            let pos = &pos.pinned::<ffi::wxPoint>();
+            let size = &size.pinned::<ffi::wxSize>();
             let validator = &validator.pinned::<ffi::wxValidator>();
             let name = &crate::ffi::NewString(name);
             Button(ffi::NewButton1(parent, id, label, pos, size, style, validator, name))
@@ -2600,8 +2600,8 @@ pub trait ButtonMethods: AnyButtonMethods {
                 None => ptr::null_mut(),
             };
             let label = &crate::ffi::NewString(label);
-            let pos = &pos.0;
-            let size = &size.0;
+            let pos = &pos.pinned::<ffi::wxPoint>();
+            let size = &size.pinned::<ffi::wxSize>();
             let validator = &validator.pinned::<ffi::wxValidator>();
             let name = &crate::ffi::NewString(name);
             ffi::wxButton_Create(self.pinned::<ffi::wxButton>().as_mut(), parent, id, label, pos, size, style, validator, name)
@@ -2674,8 +2674,8 @@ impl TopLevelWindow {
                 None => ptr::null_mut(),
             };
             let title = &crate::ffi::NewString(title);
-            let pos = &pos.0;
-            let size = &size.0;
+            let pos = &pos.pinned::<ffi::wxPoint>();
+            let size = &size.pinned::<ffi::wxSize>();
             let name = &crate::ffi::NewString(name);
             TopLevelWindow(ffi::NewTopLevelWindow1(parent, id, title, pos, size, style, name))
         }
@@ -2693,8 +2693,8 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
                 None => ptr::null_mut(),
             };
             let title = &crate::ffi::NewString(title);
-            let pos = &pos.0;
-            let size = &size.0;
+            let pos = &pos.pinned::<ffi::wxPoint>();
+            let size = &size.pinned::<ffi::wxSize>();
             let name = &crate::ffi::NewString(name);
             ffi::wxTopLevelWindow_Create(self.pinned::<ffi::wxTopLevelWindow>().as_mut(), parent, id, title, pos, size, style, name)
         }
@@ -2787,20 +2787,20 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
         ffi::wxTopLevelWindow_SetIcons(self.pinned::<ffi::wxTopLevelWindow>().as_mut(), icons)
     }
     fn set_max_size(&self, size: &Size) {
-        let size = &size.0;
+        let size = &size.pinned::<ffi::wxSize>();
         ffi::wxTopLevelWindow_SetMaxSize(self.pinned::<ffi::wxTopLevelWindow>().as_mut(), size)
     }
     fn set_min_size(&self, size: &Size) {
-        let size = &size.0;
+        let size = &size.pinned::<ffi::wxSize>();
         ffi::wxTopLevelWindow_SetMinSize(self.pinned::<ffi::wxTopLevelWindow>().as_mut(), size)
     }
     fn set_size_hints(&self, min_w: i32, min_h: i32, max_w: i32, max_h: i32, inc_w: i32, inc_h: i32) {
         ffi::wxTopLevelWindow_SetSizeHints(self.pinned::<ffi::wxTopLevelWindow>().as_mut(), min_w, min_h, max_w, max_h, inc_w, inc_h)
     }
     fn set_size_hints1(&self, min_size: &Size, max_size: &Size, inc_size: &Size) {
-        let min_size = &min_size.0;
-        let max_size = &max_size.0;
-        let inc_size = &inc_size.0;
+        let min_size = &min_size.pinned::<ffi::wxSize>();
+        let max_size = &max_size.pinned::<ffi::wxSize>();
+        let inc_size = &inc_size.pinned::<ffi::wxSize>();
         ffi::wxTopLevelWindow_SetSizeHints1(self.pinned::<ffi::wxTopLevelWindow>().as_mut(), min_size, max_size, inc_size)
     }
     fn set_title(&self, title: &str) {
@@ -2859,8 +2859,8 @@ impl Frame {
                 None => ptr::null_mut(),
             };
             let title = &crate::ffi::NewString(title);
-            let pos = &pos.0;
-            let size = &size.0;
+            let pos = &pos.pinned::<ffi::wxPoint>();
+            let size = &size.pinned::<ffi::wxSize>();
             let name = &crate::ffi::NewString(name);
             Frame(ffi::NewFrame1(parent, id, title, pos, size, style, name))
         }
@@ -2881,8 +2881,8 @@ pub trait FrameMethods: TopLevelWindowMethods {
                 None => ptr::null_mut(),
             };
             let title = &crate::ffi::NewString(title);
-            let pos = &pos.0;
-            let size = &size.0;
+            let pos = &pos.pinned::<ffi::wxPoint>();
+            let size = &size.pinned::<ffi::wxSize>();
             let name = &crate::ffi::NewString(name);
             ffi::wxFrame_Create(self.pinned::<ffi::wxFrame>().as_mut(), parent, id, title, pos, size, style, name)
         }
@@ -2955,7 +2955,9 @@ pub trait FrameMethods: TopLevelWindowMethods {
 }
 
 // wxPoint
-pub struct Point(ffi::wxPoint);
+wx_class! { Point(wxPoint) impl
+    PointMethods
+}
 impl Point {
     pub fn new() -> Point {
         Point(ffi::NewPoint())
@@ -2969,12 +2971,14 @@ impl Point {
     pub fn none() -> Option<&'static Self> {
         None
     }
+}
+pub trait PointMethods: WxRustMethods {
     fn is_fully_specified(&self) -> bool {
-        ffi::wxPoint_IsFullySpecified(&self.0)
+        ffi::wxPoint_IsFullySpecified(&self.pinned::<ffi::wxPoint>().as_mut())
     }
-    fn set_defaults(&mut self, pt: &Point) {
-        let pt = &pt.0;
-        ffi::wxPoint_SetDefaults(&mut self.0, pt)
+    fn set_defaults(&self, pt: &Point) {
+        let pt = &pt.pinned::<ffi::wxPoint>();
+        ffi::wxPoint_SetDefaults(self.pinned::<ffi::wxPoint>().as_mut(), pt)
     }
     // BLOCKED: fn operator=()
     // BLOCKED: fn operator==()
@@ -2997,7 +3001,9 @@ impl Point {
 }
 
 // wxRect
-pub struct Rect(ffi::wxRect);
+wx_class! { Rect(wxRect) impl
+    RectMethods
+}
 impl Rect {
     pub fn new() -> Rect {
         Rect(ffi::NewRect())
@@ -3006,165 +3012,167 @@ impl Rect {
         Rect(ffi::NewRect1(x, y, width, height))
     }
     pub fn new2(top_left: &Point, bottom_right: &Point) -> Rect {
-        let top_left = &top_left.0;
-        let bottom_right = &bottom_right.0;
+        let top_left = &top_left.pinned::<ffi::wxPoint>();
+        let bottom_right = &bottom_right.pinned::<ffi::wxPoint>();
         Rect(ffi::NewRect2(top_left, bottom_right))
     }
     pub fn new3(pos: &Point, size: &Size) -> Rect {
-        let pos = &pos.0;
-        let size = &size.0;
+        let pos = &pos.pinned::<ffi::wxPoint>();
+        let size = &size.pinned::<ffi::wxSize>();
         Rect(ffi::NewRect3(pos, size))
     }
     pub fn new4(size: &Size) -> Rect {
-        let size = &size.0;
+        let size = &size.pinned::<ffi::wxSize>();
         Rect(ffi::NewRect4(size))
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
+}
+pub trait RectMethods: WxRustMethods {
     fn centre_in(&self, r: &Rect, dir: i32) -> Rect {
-        let r = &r.0;
-        Rect(ffi::wxRect_CentreIn(&self.0, r, dir))
+        let r = &r.pinned::<ffi::wxRect>();
+        Rect(ffi::wxRect_CentreIn(&self.pinned::<ffi::wxRect>().as_mut(), r, dir))
     }
     fn center_in(&self, r: &Rect, dir: i32) -> Rect {
-        let r = &r.0;
-        Rect(ffi::wxRect_CenterIn(&self.0, r, dir))
+        let r = &r.pinned::<ffi::wxRect>();
+        Rect(ffi::wxRect_CenterIn(&self.pinned::<ffi::wxRect>().as_mut(), r, dir))
     }
     fn contains(&self, x: i32, y: i32) -> bool {
-        ffi::wxRect_Contains(&self.0, x, y)
+        ffi::wxRect_Contains(&self.pinned::<ffi::wxRect>().as_mut(), x, y)
     }
     fn contains1(&self, pt: &Point) -> bool {
-        let pt = &pt.0;
-        ffi::wxRect_Contains1(&self.0, pt)
+        let pt = &pt.pinned::<ffi::wxPoint>();
+        ffi::wxRect_Contains1(&self.pinned::<ffi::wxRect>().as_mut(), pt)
     }
     fn contains2(&self, rect: &Rect) -> bool {
-        let rect = &rect.0;
-        ffi::wxRect_Contains2(&self.0, rect)
+        let rect = &rect.pinned::<ffi::wxRect>();
+        ffi::wxRect_Contains2(&self.pinned::<ffi::wxRect>().as_mut(), rect)
     }
     // BLOCKED: fn Deflate()
     // BLOCKED: fn Deflate1()
     // BLOCKED: fn Deflate2()
     fn deflate3(&self, dx: i32, dy: i32) -> Rect {
-        Rect(ffi::wxRect_Deflate3(&self.0, dx, dy))
+        Rect(ffi::wxRect_Deflate3(&self.pinned::<ffi::wxRect>().as_mut(), dx, dy))
     }
     fn get_bottom(&self) -> i32 {
-        ffi::wxRect_GetBottom(&self.0)
+        ffi::wxRect_GetBottom(&self.pinned::<ffi::wxRect>().as_mut())
     }
     fn get_bottom_left(&self) -> Point {
-        Point(ffi::wxRect_GetBottomLeft(&self.0))
+        Point(ffi::wxRect_GetBottomLeft(&self.pinned::<ffi::wxRect>().as_mut()))
     }
     fn get_bottom_right(&self) -> Point {
-        Point(ffi::wxRect_GetBottomRight(&self.0))
+        Point(ffi::wxRect_GetBottomRight(&self.pinned::<ffi::wxRect>().as_mut()))
     }
     fn get_height(&self) -> i32 {
-        ffi::wxRect_GetHeight(&self.0)
+        ffi::wxRect_GetHeight(&self.pinned::<ffi::wxRect>().as_mut())
     }
     fn get_left(&self) -> i32 {
-        ffi::wxRect_GetLeft(&self.0)
+        ffi::wxRect_GetLeft(&self.pinned::<ffi::wxRect>().as_mut())
     }
     fn get_position(&self) -> Point {
-        Point(ffi::wxRect_GetPosition(&self.0))
+        Point(ffi::wxRect_GetPosition(&self.pinned::<ffi::wxRect>().as_mut()))
     }
     fn get_right(&self) -> i32 {
-        ffi::wxRect_GetRight(&self.0)
+        ffi::wxRect_GetRight(&self.pinned::<ffi::wxRect>().as_mut())
     }
     fn get_size(&self) -> Size {
-        Size(ffi::wxRect_GetSize(&self.0))
+        Size(ffi::wxRect_GetSize(&self.pinned::<ffi::wxRect>().as_mut()))
     }
     fn get_top(&self) -> i32 {
-        ffi::wxRect_GetTop(&self.0)
+        ffi::wxRect_GetTop(&self.pinned::<ffi::wxRect>().as_mut())
     }
     fn get_top_left(&self) -> Point {
-        Point(ffi::wxRect_GetTopLeft(&self.0))
+        Point(ffi::wxRect_GetTopLeft(&self.pinned::<ffi::wxRect>().as_mut()))
     }
     fn get_top_right(&self) -> Point {
-        Point(ffi::wxRect_GetTopRight(&self.0))
+        Point(ffi::wxRect_GetTopRight(&self.pinned::<ffi::wxRect>().as_mut()))
     }
     fn get_width(&self) -> i32 {
-        ffi::wxRect_GetWidth(&self.0)
+        ffi::wxRect_GetWidth(&self.pinned::<ffi::wxRect>().as_mut())
     }
     fn get_x(&self) -> i32 {
-        ffi::wxRect_GetX(&self.0)
+        ffi::wxRect_GetX(&self.pinned::<ffi::wxRect>().as_mut())
     }
     fn get_y(&self) -> i32 {
-        ffi::wxRect_GetY(&self.0)
+        ffi::wxRect_GetY(&self.pinned::<ffi::wxRect>().as_mut())
     }
     // BLOCKED: fn Inflate()
     // BLOCKED: fn Inflate1()
     // BLOCKED: fn Inflate2()
     fn inflate3(&self, dx: i32, dy: i32) -> Rect {
-        Rect(ffi::wxRect_Inflate3(&self.0, dx, dy))
+        Rect(ffi::wxRect_Inflate3(&self.pinned::<ffi::wxRect>().as_mut(), dx, dy))
     }
     // BLOCKED: fn Intersect()
     fn intersect1(&self, rect: &Rect) -> Rect {
-        let rect = &rect.0;
-        Rect(ffi::wxRect_Intersect1(&self.0, rect))
+        let rect = &rect.pinned::<ffi::wxRect>();
+        Rect(ffi::wxRect_Intersect1(&self.pinned::<ffi::wxRect>().as_mut(), rect))
     }
     fn intersects(&self, rect: &Rect) -> bool {
-        let rect = &rect.0;
-        ffi::wxRect_Intersects(&self.0, rect)
+        let rect = &rect.pinned::<ffi::wxRect>();
+        ffi::wxRect_Intersects(&self.pinned::<ffi::wxRect>().as_mut(), rect)
     }
     fn is_empty(&self) -> bool {
-        ffi::wxRect_IsEmpty(&self.0)
+        ffi::wxRect_IsEmpty(&self.pinned::<ffi::wxRect>().as_mut())
     }
-    fn offset(&mut self, dx: i32, dy: i32) {
-        ffi::wxRect_Offset(&mut self.0, dx, dy)
+    fn offset(&self, dx: i32, dy: i32) {
+        ffi::wxRect_Offset(self.pinned::<ffi::wxRect>().as_mut(), dx, dy)
     }
-    fn offset1(&mut self, pt: &Point) {
-        let pt = &pt.0;
-        ffi::wxRect_Offset1(&mut self.0, pt)
+    fn offset1(&self, pt: &Point) {
+        let pt = &pt.pinned::<ffi::wxPoint>();
+        ffi::wxRect_Offset1(self.pinned::<ffi::wxRect>().as_mut(), pt)
     }
-    fn set_height(&mut self, height: i32) {
-        ffi::wxRect_SetHeight(&mut self.0, height)
+    fn set_height(&self, height: i32) {
+        ffi::wxRect_SetHeight(self.pinned::<ffi::wxRect>().as_mut(), height)
     }
-    fn set_position(&mut self, pos: &Point) {
-        let pos = &pos.0;
-        ffi::wxRect_SetPosition(&mut self.0, pos)
+    fn set_position(&self, pos: &Point) {
+        let pos = &pos.pinned::<ffi::wxPoint>();
+        ffi::wxRect_SetPosition(self.pinned::<ffi::wxRect>().as_mut(), pos)
     }
-    fn set_size(&mut self, s: &Size) {
-        let s = &s.0;
-        ffi::wxRect_SetSize(&mut self.0, s)
+    fn set_size(&self, s: &Size) {
+        let s = &s.pinned::<ffi::wxSize>();
+        ffi::wxRect_SetSize(self.pinned::<ffi::wxRect>().as_mut(), s)
     }
-    fn set_width(&mut self, width: i32) {
-        ffi::wxRect_SetWidth(&mut self.0, width)
+    fn set_width(&self, width: i32) {
+        ffi::wxRect_SetWidth(self.pinned::<ffi::wxRect>().as_mut(), width)
     }
-    fn set_x(&mut self, x: i32) {
-        ffi::wxRect_SetX(&mut self.0, x)
+    fn set_x(&self, x: i32) {
+        ffi::wxRect_SetX(self.pinned::<ffi::wxRect>().as_mut(), x)
     }
-    fn set_y(&mut self, y: i32) {
-        ffi::wxRect_SetY(&mut self.0, y)
+    fn set_y(&self, y: i32) {
+        ffi::wxRect_SetY(self.pinned::<ffi::wxRect>().as_mut(), y)
     }
-    fn set_left(&mut self, left: i32) {
-        ffi::wxRect_SetLeft(&mut self.0, left)
+    fn set_left(&self, left: i32) {
+        ffi::wxRect_SetLeft(self.pinned::<ffi::wxRect>().as_mut(), left)
     }
-    fn set_right(&mut self, right: i32) {
-        ffi::wxRect_SetRight(&mut self.0, right)
+    fn set_right(&self, right: i32) {
+        ffi::wxRect_SetRight(self.pinned::<ffi::wxRect>().as_mut(), right)
     }
-    fn set_top(&mut self, top: i32) {
-        ffi::wxRect_SetTop(&mut self.0, top)
+    fn set_top(&self, top: i32) {
+        ffi::wxRect_SetTop(self.pinned::<ffi::wxRect>().as_mut(), top)
     }
-    fn set_bottom(&mut self, bottom: i32) {
-        ffi::wxRect_SetBottom(&mut self.0, bottom)
+    fn set_bottom(&self, bottom: i32) {
+        ffi::wxRect_SetBottom(self.pinned::<ffi::wxRect>().as_mut(), bottom)
     }
-    fn set_top_left(&mut self, p: &Point) {
-        let p = &p.0;
-        ffi::wxRect_SetTopLeft(&mut self.0, p)
+    fn set_top_left(&self, p: &Point) {
+        let p = &p.pinned::<ffi::wxPoint>();
+        ffi::wxRect_SetTopLeft(self.pinned::<ffi::wxRect>().as_mut(), p)
     }
-    fn set_bottom_right(&mut self, p: &Point) {
-        let p = &p.0;
-        ffi::wxRect_SetBottomRight(&mut self.0, p)
+    fn set_bottom_right(&self, p: &Point) {
+        let p = &p.pinned::<ffi::wxPoint>();
+        ffi::wxRect_SetBottomRight(self.pinned::<ffi::wxRect>().as_mut(), p)
     }
-    fn set_top_right(&mut self, p: &Point) {
-        let p = &p.0;
-        ffi::wxRect_SetTopRight(&mut self.0, p)
+    fn set_top_right(&self, p: &Point) {
+        let p = &p.pinned::<ffi::wxPoint>();
+        ffi::wxRect_SetTopRight(self.pinned::<ffi::wxRect>().as_mut(), p)
     }
-    fn set_bottom_left(&mut self, p: &Point) {
-        let p = &p.0;
-        ffi::wxRect_SetBottomLeft(&mut self.0, p)
+    fn set_bottom_left(&self, p: &Point) {
+        let p = &p.pinned::<ffi::wxPoint>();
+        ffi::wxRect_SetBottomLeft(self.pinned::<ffi::wxRect>().as_mut(), p)
     }
     fn union(&self, rect: &Rect) -> Rect {
-        let rect = &rect.0;
-        Rect(ffi::wxRect_Union(&self.0, rect))
+        let rect = &rect.pinned::<ffi::wxRect>();
+        Rect(ffi::wxRect_Union(&self.pinned::<ffi::wxRect>().as_mut(), rect))
     }
     // BLOCKED: fn Union1()
     // BLOCKED: fn operator!=()
@@ -3177,7 +3185,9 @@ impl Rect {
 }
 
 // wxSize
-pub struct Size(ffi::wxSize);
+wx_class! { Size(wxSize) impl
+    SizeMethods
+}
 impl Size {
     pub fn new() -> Size {
         Size(ffi::NewSize())
@@ -3188,6 +3198,8 @@ impl Size {
     pub fn none() -> Option<&'static Self> {
         None
     }
+}
+pub trait SizeMethods: WxRustMethods {
     // BLOCKED: fn operator=()
     // BLOCKED: fn operator==()
     // BLOCKED: fn operator!=()
@@ -3200,68 +3212,68 @@ impl Size {
     // BLOCKED: fn operator*1()
     // BLOCKED: fn operator/=()
     // BLOCKED: fn operator*=()
-    fn dec_by(&mut self, pt: &Point) {
-        let pt = &pt.0;
-        ffi::wxSize_DecBy(&mut self.0, pt)
+    fn dec_by(&self, pt: &Point) {
+        let pt = &pt.pinned::<ffi::wxPoint>();
+        ffi::wxSize_DecBy(self.pinned::<ffi::wxSize>().as_mut(), pt)
     }
-    fn dec_by1(&mut self, size: &Size) {
-        let size = &size.0;
-        ffi::wxSize_DecBy1(&mut self.0, size)
+    fn dec_by1(&self, size: &Size) {
+        let size = &size.pinned::<ffi::wxSize>();
+        ffi::wxSize_DecBy1(self.pinned::<ffi::wxSize>().as_mut(), size)
     }
-    fn dec_by2(&mut self, dx: i32, dy: i32) {
-        ffi::wxSize_DecBy2(&mut self.0, dx, dy)
+    fn dec_by2(&self, dx: i32, dy: i32) {
+        ffi::wxSize_DecBy2(self.pinned::<ffi::wxSize>().as_mut(), dx, dy)
     }
-    fn dec_by3(&mut self, d: i32) {
-        ffi::wxSize_DecBy3(&mut self.0, d)
+    fn dec_by3(&self, d: i32) {
+        ffi::wxSize_DecBy3(self.pinned::<ffi::wxSize>().as_mut(), d)
     }
-    fn dec_to(&mut self, size: &Size) {
-        let size = &size.0;
-        ffi::wxSize_DecTo(&mut self.0, size)
+    fn dec_to(&self, size: &Size) {
+        let size = &size.pinned::<ffi::wxSize>();
+        ffi::wxSize_DecTo(self.pinned::<ffi::wxSize>().as_mut(), size)
     }
-    fn dec_to_if_specified(&mut self, size: &Size) {
-        let size = &size.0;
-        ffi::wxSize_DecToIfSpecified(&mut self.0, size)
+    fn dec_to_if_specified(&self, size: &Size) {
+        let size = &size.pinned::<ffi::wxSize>();
+        ffi::wxSize_DecToIfSpecified(self.pinned::<ffi::wxSize>().as_mut(), size)
     }
     fn get_height(&self) -> i32 {
-        ffi::wxSize_GetHeight(&self.0)
+        ffi::wxSize_GetHeight(&self.pinned::<ffi::wxSize>().as_mut())
     }
     fn get_width(&self) -> i32 {
-        ffi::wxSize_GetWidth(&self.0)
+        ffi::wxSize_GetWidth(&self.pinned::<ffi::wxSize>().as_mut())
     }
-    fn inc_by(&mut self, pt: &Point) {
-        let pt = &pt.0;
-        ffi::wxSize_IncBy(&mut self.0, pt)
+    fn inc_by(&self, pt: &Point) {
+        let pt = &pt.pinned::<ffi::wxPoint>();
+        ffi::wxSize_IncBy(self.pinned::<ffi::wxSize>().as_mut(), pt)
     }
-    fn inc_by1(&mut self, size: &Size) {
-        let size = &size.0;
-        ffi::wxSize_IncBy1(&mut self.0, size)
+    fn inc_by1(&self, size: &Size) {
+        let size = &size.pinned::<ffi::wxSize>();
+        ffi::wxSize_IncBy1(self.pinned::<ffi::wxSize>().as_mut(), size)
     }
-    fn inc_by2(&mut self, dx: i32, dy: i32) {
-        ffi::wxSize_IncBy2(&mut self.0, dx, dy)
+    fn inc_by2(&self, dx: i32, dy: i32) {
+        ffi::wxSize_IncBy2(self.pinned::<ffi::wxSize>().as_mut(), dx, dy)
     }
-    fn inc_by3(&mut self, d: i32) {
-        ffi::wxSize_IncBy3(&mut self.0, d)
+    fn inc_by3(&self, d: i32) {
+        ffi::wxSize_IncBy3(self.pinned::<ffi::wxSize>().as_mut(), d)
     }
-    fn inc_to(&mut self, size: &Size) {
-        let size = &size.0;
-        ffi::wxSize_IncTo(&mut self.0, size)
+    fn inc_to(&self, size: &Size) {
+        let size = &size.pinned::<ffi::wxSize>();
+        ffi::wxSize_IncTo(self.pinned::<ffi::wxSize>().as_mut(), size)
     }
     fn is_fully_specified(&self) -> bool {
-        ffi::wxSize_IsFullySpecified(&self.0)
+        ffi::wxSize_IsFullySpecified(&self.pinned::<ffi::wxSize>().as_mut())
     }
     // BLOCKED: fn Scale()
-    fn set(&mut self, width: i32, height: i32) {
-        ffi::wxSize_Set(&mut self.0, width, height)
+    fn set(&self, width: i32, height: i32) {
+        ffi::wxSize_Set(self.pinned::<ffi::wxSize>().as_mut(), width, height)
     }
-    fn set_defaults(&mut self, size_default: &Size) {
-        let size_default = &size_default.0;
-        ffi::wxSize_SetDefaults(&mut self.0, size_default)
+    fn set_defaults(&self, size_default: &Size) {
+        let size_default = &size_default.pinned::<ffi::wxSize>();
+        ffi::wxSize_SetDefaults(self.pinned::<ffi::wxSize>().as_mut(), size_default)
     }
-    fn set_height(&mut self, height: i32) {
-        ffi::wxSize_SetHeight(&mut self.0, height)
+    fn set_height(&self, height: i32) {
+        ffi::wxSize_SetHeight(self.pinned::<ffi::wxSize>().as_mut(), height)
     }
-    fn set_width(&mut self, width: i32) {
-        ffi::wxSize_SetWidth(&mut self.0, width)
+    fn set_width(&self, width: i32) {
+        ffi::wxSize_SetWidth(self.pinned::<ffi::wxSize>().as_mut(), width)
     }
 }
 

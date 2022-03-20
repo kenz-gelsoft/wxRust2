@@ -135,16 +135,12 @@ class Param:
 
     def rust_ffi_ref(self, rename=None, is_mut_self=False):
         name = rename if rename else self.name
-        if self.type.is_trivial():
-            mut = 'mut ' if is_mut_self else ''
-            return '%s%s.0' % (mut, name)
-        else:
-            as_mut_or_not = '.as_mut()' if self.is_self() else ''
-            return '%s.pinned::<ffi::%s>()%s' % (
-                name,
-                self.type.typename,
-                as_mut_or_not,
-            )
+        as_mut_or_not = '.as_mut()' if self.is_self() else ''
+        return '%s.pinned::<ffi::%s>()%s' % (
+            name,
+            self.type.typename,
+            as_mut_or_not,
+        )
 
 
 class RustType:
@@ -167,7 +163,7 @@ class RustType:
         return self._pin_if_needed('%s%s%s' % (ref, mut, t))
     
     def _pin_if_needed(self, t):
-        if t.startswith('&mut ') and not self.is_trivial():
+        if t.startswith('&mut '):
             return 'Pin<%s>' % (t,)
         return t
 
@@ -284,7 +280,7 @@ class CxxType:
         return self._pin_if_needed('%s%s%s' % (ref, mut, t))
     
     def _pin_if_needed(self, t):
-        if t.startswith('&mut ') and not self.is_trivial():
+        if t.startswith('&mut '):
             return 'Pin<%s>' % (t,)
         return t
 
