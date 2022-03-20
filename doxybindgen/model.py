@@ -237,7 +237,7 @@ class CxxType:
     def marshal(self, param):
         name = camel_to_snake(param.name)
         if self._is_const_ref_to_string():
-            yield 'let %s = crate::ffi::wxString_new(%s);' % (
+            yield 'let %s = crate::wx_string_from(%s);' % (
                 name,
                 name,
             )

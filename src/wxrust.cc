@@ -29,14 +29,8 @@ void Bind(wxEvtHandler &evtHandler, EventType eventType, const Closure &closure)
 }
 
 // Constructors
-wxString *wxString_new(rust::Str aString) {
-    return new wxString(std::string(aString).c_str(), wxConvUTF8);
-}
-wxFrame *NewFrame(rust::Str title) {
-    return new wxFrame(NULL, -1, std::string(title));
-}
-wxButton *NewButton(wxWindow &parent, rust::Str label) {
-    return new wxButton(&parent, wxID_ANY, std::string(label));
+wxString *wxString_new(const unsigned char *psz, const size_t nLength) {
+    return new wxString(psz, wxConvUTF8, nLength);
 }
 
 } // namespace wxrust

@@ -79,11 +79,14 @@ mod ffi {
         fn AppSetOnInit(closure: &Closure);
         fn Bind(handler: Pin<&mut wxEvtHandler>, eventType: EventType, closure: &Closure);
 
-        fn wxString_new(s: &str) -> *mut wxString;
+        unsafe fn wxString_new(psz: *const u8, nLength: usize) -> *mut wxString;
     }
 }
 
 pub struct WxString(*mut ffi::wxString);
+pub unsafe fn wx_string_from(s: &str) -> *mut ffi::wxString {
+    return ffi::wxString_new(s.as_ptr(), s.len())
+}
 
 pub use ffi::EventType;
 
