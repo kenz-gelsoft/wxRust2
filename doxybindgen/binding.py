@@ -282,10 +282,10 @@ class CxxClassBinding:
         self.__model = model
         self.__methods = [CxxMethodBinding(m) for m in model.methods]
     
-    def shims(self):
+    def shims(self, is_cc=False):
         yield '// CLASS: %s' % (self.__model.name,)
         for method in self.__methods:
-            for line in method.shim():
+            for line in method.shim(is_cc):
                 yield line
         yield ''
 
@@ -299,7 +299,7 @@ class CxxMethodBinding:
         self.is_ctor = model.is_ctor
         self.__self_param = Param(RustType(model.cls.name, model.const), 'self')
 
-    def shim(self):
+    def shim(self, is_cc):
         if not self.__model.needs_shim():
             return
         wrapped = self.__model.wrapped_return_type()
@@ -308,11 +308,19 @@ class CxxMethodBinding:
             returns = '%s *' % (
                 wrapped,
             )
-        yield 'inline %s%s(%s) {' % (
-            returns,
-            self.__model.name(for_shim=True),
-            self._cxx_params(),
-        )
+        if is_cc:
+            yield '%s%s(%s) {' % (
+                returns,
+                self.__model.name(for_shim=True),
+                self._cxx_params(),
+            )
+        else:
+            yield '%s%s(%s);' % (
+                returns,
+                self.__model.name(for_shim=True),
+                self._cxx_params(),
+            )
+            return
         new_params_or_expr = self._call_params()
         if not self.is_ctor:
             self_or_class = 'self->'

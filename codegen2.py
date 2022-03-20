@@ -22,6 +22,7 @@ def main():
     to_be_generated = {
         'src/generated.rs': generated_rs,
         'include/wxrust2.h': wxrust2_h,
+        'src/wxrust2.cc': wxrust2_cc,
     }
     for path, generator in to_be_generated.items():
         with open(path, 'w') as f:
@@ -88,15 +89,25 @@ def wxrust2_h(classes, config):
 #pragma once
 #include <wx/wx.h>
 
-#include "rust/cxx.h"
-#include "wx/src/generated.rs.h"
-
-
 namespace wxrust {
 '''
     for cls in classes:
         binding = CxxClassBinding(cls)
         for line in binding.shims():
+            yield line
+    yield '''\
+} // namespace wxrust
+'''
+
+def wxrust2_cc(classes, config):
+    yield '''\
+#include <wx/wx.h>
+
+namespace wxrust {
+'''
+    for cls in classes:
+        binding = CxxClassBinding(cls)
+        for line in binding.shims(is_cc=True):
             yield line
     yield '''\
 } // namespace wxrust
