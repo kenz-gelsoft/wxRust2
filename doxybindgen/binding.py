@@ -109,7 +109,7 @@ class RustMethodBinding:
         if for_shim and not self.__model.needs_shim():
             return
         body = 'unsafe fn %s(%s)%s;' % (
-            self.__model.name(for_shim=for_shim, without_index=True),
+            self.__model.name(for_shim=for_shim),
             self._rust_params(for_shim=for_shim),
             self._returns_or_not(for_shim=for_shim),
         )
@@ -117,9 +117,6 @@ class RustMethodBinding:
         if not for_shim and suppressed:
             yield '// %s: %s' % (suppressed, body)
             return
-        overload = self._rename()
-        if overload:
-            yield overload
         yield body
 
     def _returns_or_not(self, for_shim=True, binding=False):
@@ -315,7 +312,7 @@ class CxxMethodBinding:
             )
         yield 'inline %s%s(%s) {' % (
             returns,
-            self.__model.name(for_shim=True, without_index=True),
+            self.__model.name(for_shim=True),
             self._cxx_params(),
         )
         new_params_or_expr = self._call_params()

@@ -56,7 +56,7 @@ mod ffi {
         // CLASS: wxObject
         type wxObject;
         // CTOR: unsafe fn wxObject() -> Object;
-        // CTOR: unsafe fn wxObject(other: &wxObject) -> Object;
+        // CTOR: unsafe fn wxObject1(other: &wxObject) -> Object;
         // DTOR: unsafe fn ~wxObject(self: Pin<&mut wxObject>);
         // GENERATED: unsafe fn GetClassInfo(self: &wxObject) -> *mut wxClassInfo;
         // GENERATED: unsafe fn GetRefData(self: &wxObject) -> *mut wxObjectRefData;
@@ -74,22 +74,22 @@ mod ffi {
         // GENERATED: unsafe fn QueueEvent(self: Pin<&mut wxEvtHandler>, event: *mut wxEvent);
         // GENERATED: unsafe fn AddPendingEvent(self: Pin<&mut wxEvtHandler>, event: &wxEvent);
         // CXX_UNSUPPORTED: unsafe fn CallAfter(self: Pin<&mut wxEvtHandler>, method: *mut void(T::, x1: T1, None: ...);
-        // BLOCKED: unsafe fn CallAfter(self: Pin<&mut wxEvtHandler>, functor: &T);
+        // BLOCKED: unsafe fn CallAfter1(self: Pin<&mut wxEvtHandler>, functor: &T);
         // GENERATED: unsafe fn ProcessEvent(self: Pin<&mut wxEvtHandler>, event: Pin<&mut wxEvent>) -> bool;
         // GENERATED: unsafe fn ProcessEventLocally(self: Pin<&mut wxEvtHandler>, event: Pin<&mut wxEvent>) -> bool;
         // GENERATED: unsafe fn SafelyProcessEvent(self: Pin<&mut wxEvtHandler>, event: Pin<&mut wxEvent>) -> bool;
         // GENERATED: unsafe fn ProcessPendingEvents(self: Pin<&mut wxEvtHandler>);
         // GENERATED: unsafe fn DeletePendingEvents(self: Pin<&mut wxEvtHandler>);
         // CXX_UNSUPPORTED: unsafe fn Connect(self: Pin<&mut wxEvtHandler>, id: i32, last_id: i32, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut wxObject, event_sink: *mut wxEvtHandler);
-        // CXX_UNSUPPORTED: unsafe fn Connect(self: Pin<&mut wxEvtHandler>, id: i32, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut wxObject, event_sink: *mut wxEvtHandler);
-        // CXX_UNSUPPORTED: unsafe fn Connect(self: Pin<&mut wxEvtHandler>, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut wxObject, event_sink: *mut wxEvtHandler);
+        // CXX_UNSUPPORTED: unsafe fn Connect1(self: Pin<&mut wxEvtHandler>, id: i32, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut wxObject, event_sink: *mut wxEvtHandler);
+        // CXX_UNSUPPORTED: unsafe fn Connect2(self: Pin<&mut wxEvtHandler>, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut wxObject, event_sink: *mut wxEvtHandler);
         // CXX_UNSUPPORTED: unsafe fn Disconnect(self: Pin<&mut wxEvtHandler>, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut wxObject, event_sink: *mut wxEvtHandler) -> bool;
-        // CXX_UNSUPPORTED: unsafe fn Disconnect(self: Pin<&mut wxEvtHandler>, id: i32, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut wxObject, event_sink: *mut wxEvtHandler) -> bool;
-        // CXX_UNSUPPORTED: unsafe fn Disconnect(self: Pin<&mut wxEvtHandler>, id: i32, last_id: i32, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut wxObject, event_sink: *mut wxEvtHandler) -> bool;
+        // CXX_UNSUPPORTED: unsafe fn Disconnect1(self: Pin<&mut wxEvtHandler>, id: i32, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut wxObject, event_sink: *mut wxEvtHandler) -> bool;
+        // CXX_UNSUPPORTED: unsafe fn Disconnect2(self: Pin<&mut wxEvtHandler>, id: i32, last_id: i32, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut wxObject, event_sink: *mut wxEvtHandler) -> bool;
         // CXX_UNSUPPORTED: unsafe fn Bind(self: Pin<&mut wxEvtHandler>, event_type: &EventTag, functor: Functor, id: i32, last_id: i32, user_data: *mut wxObject);
-        // BLOCKED: unsafe fn Bind(self: Pin<&mut wxEvtHandler>, event_type: &EventTag, method: *mut void(Class::, handler: *mut EventHandler, id: i32, last_id: i32, user_data: *mut wxObject);
+        // BLOCKED: unsafe fn Bind1(self: Pin<&mut wxEvtHandler>, event_type: &EventTag, method: *mut void(Class::, handler: *mut EventHandler, id: i32, last_id: i32, user_data: *mut wxObject);
         // CXX_UNSUPPORTED: unsafe fn Unbind(self: Pin<&mut wxEvtHandler>, event_type: &EventTag, functor: Functor, id: i32, last_id: i32, user_data: *mut wxObject) -> bool;
-        // BLOCKED: unsafe fn Unbind(self: Pin<&mut wxEvtHandler>, event_type: &EventTag, method: *mut void(Class::, handler: *mut EventHandler, id: i32, last_id: i32, user_data: *mut wxObject) -> bool;
+        // BLOCKED: unsafe fn Unbind1(self: Pin<&mut wxEvtHandler>, event_type: &EventTag, method: *mut void(Class::, handler: *mut EventHandler, id: i32, last_id: i32, user_data: *mut wxObject) -> bool;
         // BLOCKED: unsafe fn GetClientData(self: &wxEvtHandler) -> *mut void;
         // GENERATED: unsafe fn GetClientObject(self: &wxEvtHandler) -> *mut wxClientData;
         // BLOCKED: unsafe fn SetClientData(self: Pin<&mut wxEvtHandler>, data: *mut void);
@@ -124,9 +124,9 @@ mod ffi {
         // GENERATED: unsafe fn AddChild(self: Pin<&mut wxWindow>, child: *mut wxWindow);
         // GENERATED: unsafe fn DestroyChildren(self: Pin<&mut wxWindow>) -> bool;
         // GENERATED: unsafe fn FindWindow(self: &wxWindow, id: i32) -> *mut wxWindow;
-        // GENERATED: unsafe fn FindWindow(self: &wxWindow, name: &wxString) -> *mut wxWindow;
+        // GENERATED: unsafe fn FindWindow1(self: &wxWindow, name: &wxString) -> *mut wxWindow;
         // BLOCKED: unsafe fn GetChildren(self: Pin<&mut wxWindow>) -> Pin<&mut wxWindowList>;
-        // BLOCKED: unsafe fn GetChildren(self: &wxWindow) -> &wxWindowList;
+        // BLOCKED: unsafe fn GetChildren1(self: &wxWindow) -> &wxWindowList;
         // GENERATED: unsafe fn RemoveChild(self: Pin<&mut wxWindow>, child: *mut wxWindow);
         // GENERATED: unsafe fn GetGrandParent(self: &wxWindow) -> *mut wxWindow;
         // GENERATED: unsafe fn GetNextSibling(self: &wxWindow) -> *mut wxWindow;
@@ -158,16 +158,16 @@ mod ffi {
         // GENERATED: unsafe fn Fit(self: Pin<&mut wxWindow>);
         // GENERATED: unsafe fn FitInside(self: Pin<&mut wxWindow>);
         // GENERATED: unsafe fn FromDIP(self: &wxWindow, sz: &wxSize) -> wxSize;
-        // GENERATED: unsafe fn FromDIP(self: &wxWindow, pt: &wxPoint) -> wxPoint;
-        // GENERATED: unsafe fn FromDIP(self: &wxWindow, d: i32) -> i32;
+        // GENERATED: unsafe fn FromDIP1(self: &wxWindow, pt: &wxPoint) -> wxPoint;
+        // GENERATED: unsafe fn FromDIP2(self: &wxWindow, d: i32) -> i32;
         // GENERATED: unsafe fn ToDIP(self: &wxWindow, sz: &wxSize) -> wxSize;
-        // GENERATED: unsafe fn ToDIP(self: &wxWindow, pt: &wxPoint) -> wxPoint;
-        // GENERATED: unsafe fn ToDIP(self: &wxWindow, d: i32) -> i32;
+        // GENERATED: unsafe fn ToDIP1(self: &wxWindow, pt: &wxPoint) -> wxPoint;
+        // GENERATED: unsafe fn ToDIP2(self: &wxWindow, d: i32) -> i32;
         // GENERATED: unsafe fn GetBestSize(self: &wxWindow) -> wxSize;
         // GENERATED: unsafe fn GetBestHeight(self: &wxWindow, width: i32) -> i32;
         // GENERATED: unsafe fn GetBestWidth(self: &wxWindow, height: i32) -> i32;
         // GENERATED: unsafe fn GetClientSize(self: &wxWindow, width: *mut i32, height: *mut i32);
-        // GENERATED: unsafe fn GetClientSize(self: &wxWindow) -> wxSize;
+        // GENERATED: unsafe fn GetClientSize1(self: &wxWindow) -> wxSize;
         // GENERATED: unsafe fn GetEffectiveMinSize(self: &wxWindow) -> wxSize;
         // GENERATED: unsafe fn GetMaxClientSize(self: &wxWindow) -> wxSize;
         // GENERATED: unsafe fn GetMaxSize(self: &wxWindow) -> wxSize;
@@ -178,9 +178,9 @@ mod ffi {
         // GENERATED: unsafe fn GetMaxWidth(self: &wxWindow) -> i32;
         // GENERATED: unsafe fn GetMaxHeight(self: &wxWindow) -> i32;
         // GENERATED: unsafe fn GetSize(self: &wxWindow, width: *mut i32, height: *mut i32);
-        // GENERATED: unsafe fn GetSize(self: &wxWindow) -> wxSize;
+        // GENERATED: unsafe fn GetSize1(self: &wxWindow) -> wxSize;
         // GENERATED: unsafe fn GetVirtualSize(self: &wxWindow) -> wxSize;
-        // GENERATED: unsafe fn GetVirtualSize(self: &wxWindow, width: *mut i32, height: *mut i32);
+        // GENERATED: unsafe fn GetVirtualSize1(self: &wxWindow, width: *mut i32, height: *mut i32);
         // GENERATED: unsafe fn GetBestVirtualSize(self: &wxWindow) -> wxSize;
         // GENERATED: unsafe fn GetContentScaleFactor(self: &wxWindow) -> f64;
         // GENERATED: unsafe fn GetDPIScaleFactor(self: &wxWindow) -> f64;
@@ -192,8 +192,8 @@ mod ffi {
         // GENERATED: unsafe fn SendSizeEvent(self: Pin<&mut wxWindow>, flags: i32);
         // GENERATED: unsafe fn SendSizeEventToParent(self: Pin<&mut wxWindow>, flags: i32);
         // GENERATED: unsafe fn SetClientSize(self: Pin<&mut wxWindow>, width: i32, height: i32);
-        // GENERATED: unsafe fn SetClientSize(self: Pin<&mut wxWindow>, size: &wxSize);
-        // GENERATED: unsafe fn SetClientSize(self: Pin<&mut wxWindow>, rect: &wxRect);
+        // GENERATED: unsafe fn SetClientSize1(self: Pin<&mut wxWindow>, size: &wxSize);
+        // GENERATED: unsafe fn SetClientSize2(self: Pin<&mut wxWindow>, rect: &wxRect);
         // GENERATED: unsafe fn SetContainingSizer(self: Pin<&mut wxWindow>, sizer: *mut wxSizer);
         // GENERATED: unsafe fn SetInitialSize(self: Pin<&mut wxWindow>, size: &wxSize);
         // GENERATED: unsafe fn SetMaxClientSize(self: Pin<&mut wxWindow>, size: &wxSize);
@@ -201,42 +201,42 @@ mod ffi {
         // GENERATED: unsafe fn SetMinClientSize(self: Pin<&mut wxWindow>, size: &wxSize);
         // GENERATED: unsafe fn SetMinSize(self: Pin<&mut wxWindow>, size: &wxSize);
         // GENERATED: unsafe fn SetSize(self: Pin<&mut wxWindow>, x: i32, y: i32, width: i32, height: i32, size_flags: i32);
-        // GENERATED: unsafe fn SetSize(self: Pin<&mut wxWindow>, rect: &wxRect);
-        // GENERATED: unsafe fn SetSize(self: Pin<&mut wxWindow>, size: &wxSize);
-        // GENERATED: unsafe fn SetSize(self: Pin<&mut wxWindow>, width: i32, height: i32);
+        // GENERATED: unsafe fn SetSize1(self: Pin<&mut wxWindow>, rect: &wxRect);
+        // GENERATED: unsafe fn SetSize2(self: Pin<&mut wxWindow>, size: &wxSize);
+        // GENERATED: unsafe fn SetSize3(self: Pin<&mut wxWindow>, width: i32, height: i32);
         // GENERATED: unsafe fn SetSizeHints(self: Pin<&mut wxWindow>, min_size: &wxSize, max_size: &wxSize, inc_size: &wxSize);
-        // GENERATED: unsafe fn SetSizeHints(self: Pin<&mut wxWindow>, min_w: i32, min_h: i32, max_w: i32, max_h: i32, inc_w: i32, inc_h: i32);
+        // GENERATED: unsafe fn SetSizeHints1(self: Pin<&mut wxWindow>, min_w: i32, min_h: i32, max_w: i32, max_h: i32, inc_w: i32, inc_h: i32);
         // GENERATED: unsafe fn SetVirtualSize(self: Pin<&mut wxWindow>, width: i32, height: i32);
-        // GENERATED: unsafe fn SetVirtualSize(self: Pin<&mut wxWindow>, size: &wxSize);
-        // GENERATED: unsafe fn FromDIP(sz: &wxSize, w: *const wxWindow) -> wxSize;
-        // GENERATED: unsafe fn FromDIP(pt: &wxPoint, w: *const wxWindow) -> wxPoint;
-        // GENERATED: unsafe fn FromDIP(d: i32, w: *const wxWindow) -> i32;
-        // GENERATED: unsafe fn ToDIP(sz: &wxSize, w: *const wxWindow) -> wxSize;
-        // GENERATED: unsafe fn ToDIP(pt: &wxPoint, w: *const wxWindow) -> wxPoint;
-        // GENERATED: unsafe fn ToDIP(d: i32, w: *const wxWindow) -> i32;
+        // GENERATED: unsafe fn SetVirtualSize1(self: Pin<&mut wxWindow>, size: &wxSize);
+        // GENERATED: unsafe fn FromDIP3(sz: &wxSize, w: *const wxWindow) -> wxSize;
+        // GENERATED: unsafe fn FromDIP4(pt: &wxPoint, w: *const wxWindow) -> wxPoint;
+        // GENERATED: unsafe fn FromDIP5(d: i32, w: *const wxWindow) -> i32;
+        // GENERATED: unsafe fn ToDIP3(sz: &wxSize, w: *const wxWindow) -> wxSize;
+        // GENERATED: unsafe fn ToDIP4(pt: &wxPoint, w: *const wxWindow) -> wxPoint;
+        // GENERATED: unsafe fn ToDIP5(d: i32, w: *const wxWindow) -> i32;
         // GENERATED: unsafe fn Center(self: Pin<&mut wxWindow>, dir: i32);
         // GENERATED: unsafe fn CenterOnParent(self: Pin<&mut wxWindow>, dir: i32);
         // GENERATED: unsafe fn Centre(self: Pin<&mut wxWindow>, direction: i32);
         // GENERATED: unsafe fn CentreOnParent(self: Pin<&mut wxWindow>, direction: i32);
         // GENERATED: unsafe fn GetPosition(self: &wxWindow, x: *mut i32, y: *mut i32);
-        // GENERATED: unsafe fn GetPosition(self: &wxWindow) -> wxPoint;
+        // GENERATED: unsafe fn GetPosition1(self: &wxWindow) -> wxPoint;
         // GENERATED: unsafe fn GetRect(self: &wxWindow) -> wxRect;
         // GENERATED: unsafe fn GetScreenPosition(self: &wxWindow, x: *mut i32, y: *mut i32);
-        // GENERATED: unsafe fn GetScreenPosition(self: &wxWindow) -> wxPoint;
+        // GENERATED: unsafe fn GetScreenPosition1(self: &wxWindow) -> wxPoint;
         // GENERATED: unsafe fn GetScreenRect(self: &wxWindow) -> wxRect;
         // GENERATED: unsafe fn GetClientAreaOrigin(self: &wxWindow) -> wxPoint;
         // GENERATED: unsafe fn GetClientRect(self: &wxWindow) -> wxRect;
         // GENERATED: unsafe fn Move(self: Pin<&mut wxWindow>, x: i32, y: i32, flags: i32);
-        // GENERATED: unsafe fn Move(self: Pin<&mut wxWindow>, pt: &wxPoint, flags: i32);
+        // GENERATED: unsafe fn Move1(self: Pin<&mut wxWindow>, pt: &wxPoint, flags: i32);
         // GENERATED: unsafe fn SetPosition(self: Pin<&mut wxWindow>, pt: &wxPoint);
         // GENERATED: unsafe fn ClientToScreen(self: &wxWindow, x: *mut i32, y: *mut i32);
-        // GENERATED: unsafe fn ClientToScreen(self: &wxWindow, pt: &wxPoint) -> wxPoint;
+        // GENERATED: unsafe fn ClientToScreen1(self: &wxWindow, pt: &wxPoint) -> wxPoint;
         // GENERATED: unsafe fn ConvertDialogToPixels(self: &wxWindow, pt: &wxPoint) -> wxPoint;
-        // GENERATED: unsafe fn ConvertDialogToPixels(self: &wxWindow, sz: &wxSize) -> wxSize;
+        // GENERATED: unsafe fn ConvertDialogToPixels1(self: &wxWindow, sz: &wxSize) -> wxSize;
         // GENERATED: unsafe fn ConvertPixelsToDialog(self: &wxWindow, pt: &wxPoint) -> wxPoint;
-        // GENERATED: unsafe fn ConvertPixelsToDialog(self: &wxWindow, sz: &wxSize) -> wxSize;
+        // GENERATED: unsafe fn ConvertPixelsToDialog1(self: &wxWindow, sz: &wxSize) -> wxSize;
         // GENERATED: unsafe fn ScreenToClient(self: &wxWindow, x: *mut i32, y: *mut i32);
-        // GENERATED: unsafe fn ScreenToClient(self: &wxWindow, pt: &wxPoint) -> wxPoint;
+        // GENERATED: unsafe fn ScreenToClient1(self: &wxWindow, pt: &wxPoint) -> wxPoint;
         // GENERATED: unsafe fn ClearBackground(self: Pin<&mut wxWindow>);
         // GENERATED: unsafe fn Freeze(self: Pin<&mut wxWindow>);
         // GENERATED: unsafe fn Thaw(self: Pin<&mut wxWindow>);
@@ -250,7 +250,7 @@ mod ffi {
         // CXX_UNSUPPORTED: unsafe fn GetFont(self: &wxWindow) -> wxFont;
         // CXX_UNSUPPORTED: unsafe fn GetForegroundColour(self: &wxWindow) -> wxColour;
         // GENERATED: unsafe fn GetTextExtent(self: &wxWindow, string: &wxString, w: *mut i32, h: *mut i32, descent: *mut i32, external_leading: *mut i32, font: *const wxFont);
-        // GENERATED: unsafe fn GetTextExtent(self: &wxWindow, string: &wxString) -> wxSize;
+        // GENERATED: unsafe fn GetTextExtent1(self: &wxWindow, string: &wxString) -> wxSize;
         // BLOCKED: unsafe fn GetUpdateRegion(self: &wxWindow) -> &wxRegion;
         // GENERATED: unsafe fn GetUpdateClientRect(self: &wxWindow) -> wxRect;
         // GENERATED: unsafe fn HasTransparentBackground(self: Pin<&mut wxWindow>) -> bool;
@@ -306,9 +306,9 @@ mod ffi {
         // CXX_UNSUPPORTED: unsafe fn HideWithEffect(self: Pin<&mut wxWindow>, effect: wxShowEffect, timeout: u32) -> bool;
         // GENERATED: unsafe fn IsEnabled(self: &wxWindow) -> bool;
         // GENERATED: unsafe fn IsExposed(self: &wxWindow, x: i32, y: i32) -> bool;
-        // GENERATED: unsafe fn IsExposed(self: &wxWindow, pt: Pin<&mut wxPoint>) -> bool;
-        // GENERATED: unsafe fn IsExposed(self: &wxWindow, x: i32, y: i32, w: i32, h: i32) -> bool;
-        // GENERATED: unsafe fn IsExposed(self: &wxWindow, rect: Pin<&mut wxRect>) -> bool;
+        // GENERATED: unsafe fn IsExposed1(self: &wxWindow, pt: Pin<&mut wxPoint>) -> bool;
+        // GENERATED: unsafe fn IsExposed2(self: &wxWindow, x: i32, y: i32, w: i32, h: i32) -> bool;
+        // GENERATED: unsafe fn IsExposed3(self: &wxWindow, rect: Pin<&mut wxRect>) -> bool;
         // GENERATED: unsafe fn IsShown(self: &wxWindow) -> bool;
         // GENERATED: unsafe fn IsShownOnScreen(self: &wxWindow) -> bool;
         // GENERATED: unsafe fn Disable(self: Pin<&mut wxWindow>) -> bool;
@@ -321,12 +321,12 @@ mod ffi {
         // GENERATED: unsafe fn GetToolTip(self: &wxWindow) -> *mut wxToolTip;
         // GENERATED: unsafe fn GetToolTipText(self: &wxWindow) -> wxString;
         // GENERATED: unsafe fn SetToolTip(self: Pin<&mut wxWindow>, tip_string: &wxString);
-        // GENERATED: unsafe fn SetToolTip(self: Pin<&mut wxWindow>, tip: *mut wxToolTip);
+        // GENERATED: unsafe fn SetToolTip1(self: Pin<&mut wxWindow>, tip: *mut wxToolTip);
         // GENERATED: unsafe fn UnsetToolTip(self: Pin<&mut wxWindow>);
         // GENERATED: unsafe fn GetPopupMenuSelectionFromUser(self: Pin<&mut wxWindow>, menu: Pin<&mut wxMenu>, pos: &wxPoint) -> i32;
-        // GENERATED: unsafe fn GetPopupMenuSelectionFromUser(self: Pin<&mut wxWindow>, menu: Pin<&mut wxMenu>, x: i32, y: i32) -> i32;
+        // GENERATED: unsafe fn GetPopupMenuSelectionFromUser1(self: Pin<&mut wxWindow>, menu: Pin<&mut wxMenu>, x: i32, y: i32) -> i32;
         // GENERATED: unsafe fn PopupMenu(self: Pin<&mut wxWindow>, menu: *mut wxMenu, pos: &wxPoint) -> bool;
-        // GENERATED: unsafe fn PopupMenu(self: Pin<&mut wxWindow>, menu: *mut wxMenu, x: i32, y: i32) -> bool;
+        // GENERATED: unsafe fn PopupMenu1(self: Pin<&mut wxWindow>, menu: *mut wxMenu, x: i32, y: i32) -> bool;
         // GENERATED: unsafe fn GetValidator(self: Pin<&mut wxWindow>) -> *mut wxValidator;
         // GENERATED: unsafe fn SetValidator(self: Pin<&mut wxWindow>, validator: &wxValidator);
         // GENERATED: unsafe fn TransferDataFromWindow(self: Pin<&mut wxWindow>) -> bool;
@@ -372,9 +372,9 @@ mod ffi {
         // GENERATED: unsafe fn WarpPointer(self: Pin<&mut wxWindow>, x: i32, y: i32);
         // GENERATED: unsafe fn EnableTouchEvents(self: Pin<&mut wxWindow>, events_mask: i32) -> bool;
         // CXX_UNSUPPORTED: unsafe fn HitTest(self: &wxWindow, x: i32, y: i32) -> wxHitTest;
-        // CXX_UNSUPPORTED: unsafe fn HitTest(self: &wxWindow, pt: &wxPoint) -> wxHitTest;
+        // CXX_UNSUPPORTED: unsafe fn HitTest1(self: &wxWindow, pt: &wxPoint) -> wxHitTest;
         // CXX_UNSUPPORTED: unsafe fn GetBorder(self: &wxWindow, flags: i32) -> wxBorder;
-        // CXX_UNSUPPORTED: unsafe fn GetBorder(self: &wxWindow) -> wxBorder;
+        // CXX_UNSUPPORTED: unsafe fn GetBorder1(self: &wxWindow) -> wxBorder;
         // GENERATED: unsafe fn DoUpdateWindowUI(self: Pin<&mut wxWindow>, event: Pin<&mut wxUpdateUIEvent>);
         // CXX_UNSUPPORTED: unsafe fn GetHandle(self: &wxWindow) -> WXWidget;
         // GENERATED: unsafe fn HasMultiplePages(self: &wxWindow) -> bool;
@@ -399,25 +399,25 @@ mod ffi {
         // GENERATED: unsafe fn NewControlId(count: i32) -> i32;
         // GENERATED: unsafe fn UnreserveControlId(id: i32, count: i32);
         // CTOR: unsafe fn wxWindow() -> Window;
-        // CTOR: unsafe fn wxWindow(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> Window;
+        // CTOR: unsafe fn wxWindow1(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> Window;
         // DTOR: unsafe fn ~wxWindow(self: Pin<&mut wxWindow>);
         // GENERATED: unsafe fn Create(self: Pin<&mut wxWindow>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
         
         // CLASS: wxControl
         type wxControl;
         // CTOR: unsafe fn wxControl(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> Control;
-        // CTOR: unsafe fn wxControl() -> Control;
+        // CTOR: unsafe fn wxControl1() -> Control;
         // GENERATED: unsafe fn Create(self: Pin<&mut wxControl>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
         // GENERATED: unsafe fn Command(self: Pin<&mut wxControl>, event: Pin<&mut wxCommandEvent>);
         // GENERATED: unsafe fn GetLabel(self: &wxControl) -> wxString;
         // GENERATED: unsafe fn GetLabelText(self: &wxControl) -> wxString;
         // GENERATED: unsafe fn GetSizeFromTextSize(self: &wxControl, xlen: i32, ylen: i32) -> wxSize;
-        // GENERATED: unsafe fn GetSizeFromTextSize(self: &wxControl, tsize: &wxSize) -> wxSize;
+        // GENERATED: unsafe fn GetSizeFromTextSize1(self: &wxControl, tsize: &wxSize) -> wxSize;
         // GENERATED: unsafe fn GetSizeFromText(self: &wxControl, text: &wxString) -> wxSize;
         // GENERATED: unsafe fn SetLabel(self: Pin<&mut wxControl>, label: &wxString);
         // GENERATED: unsafe fn SetLabelText(self: Pin<&mut wxControl>, text: &wxString);
         // GENERATED: unsafe fn SetLabelMarkup(self: Pin<&mut wxControl>, markup: &wxString) -> bool;
-        // GENERATED: unsafe fn GetLabelText(label: &wxString) -> wxString;
+        // GENERATED: unsafe fn GetLabelText1(label: &wxString) -> wxString;
         // GENERATED: unsafe fn RemoveMnemonics(str: &wxString) -> wxString;
         // GENERATED: unsafe fn EscapeMnemonics(text: &wxString) -> wxString;
         // BLOCKED: unsafe fn Ellipsize(label: &wxString, dc: &wxDC, mode: i32, max_width: i32, flags: i32) -> wxString;
@@ -440,13 +440,13 @@ mod ffi {
         // GENERATED: unsafe fn SetBitmapPressed(self: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
         // GENERATED: unsafe fn GetBitmapMargins(self: Pin<&mut wxAnyButton>) -> wxSize;
         // GENERATED: unsafe fn SetBitmapMargins(self: Pin<&mut wxAnyButton>, x: i32, y: i32);
-        // GENERATED: unsafe fn SetBitmapMargins(self: Pin<&mut wxAnyButton>, sz: &wxSize);
+        // GENERATED: unsafe fn SetBitmapMargins1(self: Pin<&mut wxAnyButton>, sz: &wxSize);
         // CXX_UNSUPPORTED: unsafe fn SetBitmapPosition(self: Pin<&mut wxAnyButton>, dir: wxDirection);
         
         // CLASS: wxButton
         type wxButton;
         // CTOR: unsafe fn wxButton() -> Button;
-        // CTOR: unsafe fn wxButton(parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> Button;
+        // CTOR: unsafe fn wxButton1(parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> Button;
         // GENERATED: unsafe fn Create(self: Pin<&mut wxButton>, parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
         // GENERATED: unsafe fn GetAuthNeeded(self: &wxButton) -> bool;
         // GENERATED: unsafe fn GetLabel(self: &wxButton) -> wxString;
@@ -458,12 +458,12 @@ mod ffi {
         // CLASS: wxNonOwnedWindow
         type wxNonOwnedWindow;
         // GENERATED: unsafe fn SetShape(self: Pin<&mut wxNonOwnedWindow>, region: &wxRegion) -> bool;
-        // GENERATED: unsafe fn SetShape(self: Pin<&mut wxNonOwnedWindow>, path: &wxGraphicsPath) -> bool;
+        // GENERATED: unsafe fn SetShape1(self: Pin<&mut wxNonOwnedWindow>, path: &wxGraphicsPath) -> bool;
         
         // CLASS: wxTopLevelWindow
         type wxTopLevelWindow;
         // CTOR: unsafe fn wxTopLevelWindow() -> TopLevelWindow;
-        // CTOR: unsafe fn wxTopLevelWindow(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> TopLevelWindow;
+        // CTOR: unsafe fn wxTopLevelWindow1(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> TopLevelWindow;
         // DTOR: unsafe fn ~wxTopLevelWindow(self: Pin<&mut wxTopLevelWindow>);
         // GENERATED: unsafe fn Create(self: Pin<&mut wxTopLevelWindow>, parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
         // GENERATED: unsafe fn CanSetTransparent(self: Pin<&mut wxTopLevelWindow>) -> bool;
@@ -498,7 +498,7 @@ mod ffi {
         // GENERATED: unsafe fn SetMaxSize(self: Pin<&mut wxTopLevelWindow>, size: &wxSize);
         // GENERATED: unsafe fn SetMinSize(self: Pin<&mut wxTopLevelWindow>, size: &wxSize);
         // GENERATED: unsafe fn SetSizeHints(self: Pin<&mut wxTopLevelWindow>, min_w: i32, min_h: i32, max_w: i32, max_h: i32, inc_w: i32, inc_h: i32);
-        // GENERATED: unsafe fn SetSizeHints(self: Pin<&mut wxTopLevelWindow>, min_size: &wxSize, max_size: &wxSize, inc_size: &wxSize);
+        // GENERATED: unsafe fn SetSizeHints1(self: Pin<&mut wxTopLevelWindow>, min_size: &wxSize, max_size: &wxSize, inc_size: &wxSize);
         // GENERATED: unsafe fn SetTitle(self: Pin<&mut wxTopLevelWindow>, title: &wxString);
         // GENERATED: unsafe fn SetTransparent(self: Pin<&mut wxTopLevelWindow>, alpha: u8) -> bool;
         // GENERATED: unsafe fn ShouldPreventAppExit(self: &wxTopLevelWindow) -> bool;
@@ -515,7 +515,7 @@ mod ffi {
         // CLASS: wxFrame
         type wxFrame;
         // CTOR: unsafe fn wxFrame() -> Frame;
-        // CTOR: unsafe fn wxFrame(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> Frame;
+        // CTOR: unsafe fn wxFrame1(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> Frame;
         // DTOR: unsafe fn ~wxFrame(self: Pin<&mut wxFrame>);
         // GENERATED: unsafe fn Centre(self: Pin<&mut wxFrame>, direction: i32);
         // GENERATED: unsafe fn Create(self: Pin<&mut wxFrame>, parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
@@ -551,37 +551,37 @@ mod ffi {
         // BLOCKED: unsafe fn operator-(self: Pin<&mut wxPoint>, p1: &wxPoint, p2: &wxPoint) -> wxPoint;
         // BLOCKED: unsafe fn operator+=(self: Pin<&mut wxPoint>, pt: &wxPoint) -> Pin<&mut wxPoint>;
         // BLOCKED: unsafe fn operator-=(self: Pin<&mut wxPoint>, pt: &wxPoint) -> Pin<&mut wxPoint>;
-        // BLOCKED: unsafe fn operator+(self: Pin<&mut wxPoint>, pt: &wxPoint, sz: &wxSize) -> wxPoint;
-        // BLOCKED: unsafe fn operator-(self: Pin<&mut wxPoint>, pt: &wxPoint, sz: &wxSize) -> wxPoint;
-        // BLOCKED: unsafe fn operator+(self: Pin<&mut wxPoint>, sz: &wxSize, pt: &wxPoint) -> wxPoint;
-        // BLOCKED: unsafe fn operator-(self: Pin<&mut wxPoint>, sz: &wxSize, pt: &wxPoint) -> wxPoint;
-        // BLOCKED: unsafe fn operator+=(self: Pin<&mut wxPoint>, sz: &wxSize) -> Pin<&mut wxPoint>;
-        // BLOCKED: unsafe fn operator-=(self: Pin<&mut wxPoint>, sz: &wxSize) -> Pin<&mut wxPoint>;
+        // BLOCKED: unsafe fn operator+1(self: Pin<&mut wxPoint>, pt: &wxPoint, sz: &wxSize) -> wxPoint;
+        // BLOCKED: unsafe fn operator-1(self: Pin<&mut wxPoint>, pt: &wxPoint, sz: &wxSize) -> wxPoint;
+        // BLOCKED: unsafe fn operator+2(self: Pin<&mut wxPoint>, sz: &wxSize, pt: &wxPoint) -> wxPoint;
+        // BLOCKED: unsafe fn operator-2(self: Pin<&mut wxPoint>, sz: &wxSize, pt: &wxPoint) -> wxPoint;
+        // BLOCKED: unsafe fn operator+=1(self: Pin<&mut wxPoint>, sz: &wxSize) -> Pin<&mut wxPoint>;
+        // BLOCKED: unsafe fn operator-=1(self: Pin<&mut wxPoint>, sz: &wxSize) -> Pin<&mut wxPoint>;
         // BLOCKED: unsafe fn operator/(self: Pin<&mut wxPoint>, sz: &wxPoint, factor: i32) -> wxSize;
         // BLOCKED: unsafe fn operator*(self: Pin<&mut wxPoint>, sz: &wxPoint, factor: i32) -> wxSize;
-        // BLOCKED: unsafe fn operator*(self: Pin<&mut wxPoint>, factor: i32, sz: &wxSize) -> wxSize;
+        // BLOCKED: unsafe fn operator*1(self: Pin<&mut wxPoint>, factor: i32, sz: &wxSize) -> wxSize;
         // BLOCKED: unsafe fn operator/=(self: Pin<&mut wxPoint>, factor: i32) -> Pin<&mut wxSize>;
         // BLOCKED: unsafe fn operator*=(self: Pin<&mut wxPoint>, factor: i32) -> Pin<&mut wxSize>;
         // CTOR: unsafe fn wxPoint() -> Point;
-        // CTOR: unsafe fn wxPoint(x: i32, y: i32) -> Point;
-        // CTOR: unsafe fn wxPoint(pt: &wxRealPoint) -> Point;
+        // CTOR: unsafe fn wxPoint1(x: i32, y: i32) -> Point;
+        // CTOR: unsafe fn wxPoint2(pt: &wxRealPoint) -> Point;
         
         // CLASS: wxRect
         type wxRect;
         // CTOR: unsafe fn wxRect() -> Rect;
-        // CTOR: unsafe fn wxRect(x: i32, y: i32, width: i32, height: i32) -> Rect;
-        // CTOR: unsafe fn wxRect(top_left: &wxPoint, bottom_right: &wxPoint) -> Rect;
-        // CTOR: unsafe fn wxRect(pos: &wxPoint, size: &wxSize) -> Rect;
-        // CTOR: unsafe fn wxRect(size: &wxSize) -> Rect;
+        // CTOR: unsafe fn wxRect1(x: i32, y: i32, width: i32, height: i32) -> Rect;
+        // CTOR: unsafe fn wxRect2(top_left: &wxPoint, bottom_right: &wxPoint) -> Rect;
+        // CTOR: unsafe fn wxRect3(pos: &wxPoint, size: &wxSize) -> Rect;
+        // CTOR: unsafe fn wxRect4(size: &wxSize) -> Rect;
         // GENERATED: unsafe fn CentreIn(self: &wxRect, r: &wxRect, dir: i32) -> wxRect;
         // GENERATED: unsafe fn CenterIn(self: &wxRect, r: &wxRect, dir: i32) -> wxRect;
         // GENERATED: unsafe fn Contains(self: &wxRect, x: i32, y: i32) -> bool;
-        // GENERATED: unsafe fn Contains(self: &wxRect, pt: &wxPoint) -> bool;
-        // GENERATED: unsafe fn Contains(self: &wxRect, rect: &wxRect) -> bool;
+        // GENERATED: unsafe fn Contains1(self: &wxRect, pt: &wxPoint) -> bool;
+        // GENERATED: unsafe fn Contains2(self: &wxRect, rect: &wxRect) -> bool;
         // BLOCKED: unsafe fn Deflate(self: Pin<&mut wxRect>, dx: i32, dy: i32) -> Pin<&mut wxRect>;
-        // BLOCKED: unsafe fn Deflate(self: Pin<&mut wxRect>, diff: &wxSize) -> Pin<&mut wxRect>;
-        // BLOCKED: unsafe fn Deflate(self: Pin<&mut wxRect>, diff: i32) -> Pin<&mut wxRect>;
-        // GENERATED: unsafe fn Deflate(self: &wxRect, dx: i32, dy: i32) -> wxRect;
+        // BLOCKED: unsafe fn Deflate1(self: Pin<&mut wxRect>, diff: &wxSize) -> Pin<&mut wxRect>;
+        // BLOCKED: unsafe fn Deflate2(self: Pin<&mut wxRect>, diff: i32) -> Pin<&mut wxRect>;
+        // GENERATED: unsafe fn Deflate3(self: &wxRect, dx: i32, dy: i32) -> wxRect;
         // GENERATED: unsafe fn GetBottom(self: &wxRect) -> i32;
         // GENERATED: unsafe fn GetBottomLeft(self: &wxRect) -> wxPoint;
         // GENERATED: unsafe fn GetBottomRight(self: &wxRect) -> wxPoint;
@@ -597,15 +597,15 @@ mod ffi {
         // GENERATED: unsafe fn GetX(self: &wxRect) -> i32;
         // GENERATED: unsafe fn GetY(self: &wxRect) -> i32;
         // BLOCKED: unsafe fn Inflate(self: Pin<&mut wxRect>, dx: i32, dy: i32) -> Pin<&mut wxRect>;
-        // BLOCKED: unsafe fn Inflate(self: Pin<&mut wxRect>, diff: &wxSize) -> Pin<&mut wxRect>;
-        // BLOCKED: unsafe fn Inflate(self: Pin<&mut wxRect>, diff: i32) -> Pin<&mut wxRect>;
-        // GENERATED: unsafe fn Inflate(self: &wxRect, dx: i32, dy: i32) -> wxRect;
+        // BLOCKED: unsafe fn Inflate1(self: Pin<&mut wxRect>, diff: &wxSize) -> Pin<&mut wxRect>;
+        // BLOCKED: unsafe fn Inflate2(self: Pin<&mut wxRect>, diff: i32) -> Pin<&mut wxRect>;
+        // GENERATED: unsafe fn Inflate3(self: &wxRect, dx: i32, dy: i32) -> wxRect;
         // BLOCKED: unsafe fn Intersect(self: Pin<&mut wxRect>, rect: &wxRect) -> Pin<&mut wxRect>;
-        // GENERATED: unsafe fn Intersect(self: &wxRect, rect: &wxRect) -> wxRect;
+        // GENERATED: unsafe fn Intersect1(self: &wxRect, rect: &wxRect) -> wxRect;
         // GENERATED: unsafe fn Intersects(self: &wxRect, rect: &wxRect) -> bool;
         // GENERATED: unsafe fn IsEmpty(self: &wxRect) -> bool;
         // GENERATED: unsafe fn Offset(self: Pin<&mut wxRect>, dx: i32, dy: i32);
-        // GENERATED: unsafe fn Offset(self: Pin<&mut wxRect>, pt: &wxPoint);
+        // GENERATED: unsafe fn Offset1(self: Pin<&mut wxRect>, pt: &wxPoint);
         // GENERATED: unsafe fn SetHeight(self: Pin<&mut wxRect>, height: i32);
         // GENERATED: unsafe fn SetPosition(self: Pin<&mut wxRect>, pos: &wxPoint);
         // GENERATED: unsafe fn SetSize(self: Pin<&mut wxRect>, s: &wxSize);
@@ -621,7 +621,7 @@ mod ffi {
         // GENERATED: unsafe fn SetTopRight(self: Pin<&mut wxRect>, p: &wxPoint);
         // GENERATED: unsafe fn SetBottomLeft(self: Pin<&mut wxRect>, p: &wxPoint);
         // GENERATED: unsafe fn Union(self: &wxRect, rect: &wxRect) -> wxRect;
-        // BLOCKED: unsafe fn Union(self: Pin<&mut wxRect>, rect: &wxRect) -> Pin<&mut wxRect>;
+        // BLOCKED: unsafe fn Union1(self: Pin<&mut wxRect>, rect: &wxRect) -> Pin<&mut wxRect>;
         // BLOCKED: unsafe fn operator!=(self: Pin<&mut wxRect>, r1: &wxRect, r2: &wxRect) -> bool;
         // BLOCKED: unsafe fn operator+(self: Pin<&mut wxRect>, r1: &wxRect, r2: &wxRect) -> wxRect;
         // BLOCKED: unsafe fn operator+=(self: Pin<&mut wxRect>, r: &wxRect) -> Pin<&mut wxRect>;
@@ -641,23 +641,23 @@ mod ffi {
         // BLOCKED: unsafe fn operator-=(self: Pin<&mut wxSize>, sz: &wxSize) -> Pin<&mut wxSize>;
         // BLOCKED: unsafe fn operator/(self: Pin<&mut wxSize>, sz: &wxSize, factor: i32) -> wxSize;
         // BLOCKED: unsafe fn operator*(self: Pin<&mut wxSize>, sz: &wxSize, factor: i32) -> wxSize;
-        // BLOCKED: unsafe fn operator*(self: Pin<&mut wxSize>, factor: i32, sz: &wxSize) -> wxSize;
+        // BLOCKED: unsafe fn operator*1(self: Pin<&mut wxSize>, factor: i32, sz: &wxSize) -> wxSize;
         // BLOCKED: unsafe fn operator/=(self: Pin<&mut wxSize>, factor: i32) -> Pin<&mut wxSize>;
         // BLOCKED: unsafe fn operator*=(self: Pin<&mut wxSize>, factor: i32) -> Pin<&mut wxSize>;
         // CTOR: unsafe fn wxSize() -> Size;
-        // CTOR: unsafe fn wxSize(width: i32, height: i32) -> Size;
+        // CTOR: unsafe fn wxSize1(width: i32, height: i32) -> Size;
         // GENERATED: unsafe fn DecBy(self: Pin<&mut wxSize>, pt: &wxPoint);
-        // GENERATED: unsafe fn DecBy(self: Pin<&mut wxSize>, size: &wxSize);
-        // GENERATED: unsafe fn DecBy(self: Pin<&mut wxSize>, dx: i32, dy: i32);
-        // GENERATED: unsafe fn DecBy(self: Pin<&mut wxSize>, d: i32);
+        // GENERATED: unsafe fn DecBy1(self: Pin<&mut wxSize>, size: &wxSize);
+        // GENERATED: unsafe fn DecBy2(self: Pin<&mut wxSize>, dx: i32, dy: i32);
+        // GENERATED: unsafe fn DecBy3(self: Pin<&mut wxSize>, d: i32);
         // GENERATED: unsafe fn DecTo(self: Pin<&mut wxSize>, size: &wxSize);
         // GENERATED: unsafe fn DecToIfSpecified(self: Pin<&mut wxSize>, size: &wxSize);
         // GENERATED: unsafe fn GetHeight(self: &wxSize) -> i32;
         // GENERATED: unsafe fn GetWidth(self: &wxSize) -> i32;
         // GENERATED: unsafe fn IncBy(self: Pin<&mut wxSize>, pt: &wxPoint);
-        // GENERATED: unsafe fn IncBy(self: Pin<&mut wxSize>, size: &wxSize);
-        // GENERATED: unsafe fn IncBy(self: Pin<&mut wxSize>, dx: i32, dy: i32);
-        // GENERATED: unsafe fn IncBy(self: Pin<&mut wxSize>, d: i32);
+        // GENERATED: unsafe fn IncBy1(self: Pin<&mut wxSize>, size: &wxSize);
+        // GENERATED: unsafe fn IncBy2(self: Pin<&mut wxSize>, dx: i32, dy: i32);
+        // GENERATED: unsafe fn IncBy3(self: Pin<&mut wxSize>, d: i32);
         // GENERATED: unsafe fn IncTo(self: Pin<&mut wxSize>, size: &wxSize);
         // GENERATED: unsafe fn IsFullySpecified(self: &wxSize) -> bool;
         // BLOCKED: unsafe fn Scale(self: Pin<&mut wxSize>, xscale: f64, yscale: f64) -> Pin<&mut wxSize>;
@@ -682,8 +682,7 @@ mod ffi {
     unsafe extern "C++" {
         // CLASS: wxObject
         unsafe fn wxObject_new() -> *mut wxObject;
-        #[rust_name = "wxObject_new1"]
-        unsafe fn wxObject_new(other: &wxObject) -> *mut wxObject;
+        unsafe fn wxObject_new1(other: &wxObject) -> *mut wxObject;
         unsafe fn wxObject_GetClassInfo(self_: &wxObject) -> *mut wxClassInfo;
         unsafe fn wxObject_GetRefData(self_: &wxObject) -> *mut wxObjectRefData;
         unsafe fn wxObject_IsKindOf(self_: &wxObject, info: *const wxClassInfo) -> bool;
@@ -729,8 +728,7 @@ mod ffi {
         unsafe fn wxWindow_AddChild(self_: Pin<&mut wxWindow>, child: *mut wxWindow);
         unsafe fn wxWindow_DestroyChildren(self_: Pin<&mut wxWindow>) -> bool;
         unsafe fn wxWindow_FindWindow(self_: &wxWindow, id: i32) -> *mut wxWindow;
-        #[rust_name = "wxWindow_FindWindow1"]
-        unsafe fn wxWindow_FindWindow(self_: &wxWindow, name: &wxString) -> *mut wxWindow;
+        unsafe fn wxWindow_FindWindow1(self_: &wxWindow, name: &wxString) -> *mut wxWindow;
         unsafe fn wxWindow_RemoveChild(self_: Pin<&mut wxWindow>, child: *mut wxWindow);
         unsafe fn wxWindow_GetGrandParent(self_: &wxWindow) -> *mut wxWindow;
         unsafe fn wxWindow_GetNextSibling(self_: &wxWindow) -> *mut wxWindow;
@@ -762,21 +760,16 @@ mod ffi {
         unsafe fn wxWindow_Fit(self_: Pin<&mut wxWindow>);
         unsafe fn wxWindow_FitInside(self_: Pin<&mut wxWindow>);
         unsafe fn wxWindow_FromDIP(self_: &wxWindow, sz: &wxSize) -> *mut wxSize;
-        #[rust_name = "wxWindow_FromDIP1"]
-        unsafe fn wxWindow_FromDIP(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
-        #[rust_name = "wxWindow_FromDIP2"]
-        unsafe fn wxWindow_FromDIP(self_: &wxWindow, d: i32) -> i32;
+        unsafe fn wxWindow_FromDIP1(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
+        unsafe fn wxWindow_FromDIP2(self_: &wxWindow, d: i32) -> i32;
         unsafe fn wxWindow_ToDIP(self_: &wxWindow, sz: &wxSize) -> *mut wxSize;
-        #[rust_name = "wxWindow_ToDIP1"]
-        unsafe fn wxWindow_ToDIP(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
-        #[rust_name = "wxWindow_ToDIP2"]
-        unsafe fn wxWindow_ToDIP(self_: &wxWindow, d: i32) -> i32;
+        unsafe fn wxWindow_ToDIP1(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
+        unsafe fn wxWindow_ToDIP2(self_: &wxWindow, d: i32) -> i32;
         unsafe fn wxWindow_GetBestSize(self_: &wxWindow) -> *mut wxSize;
         unsafe fn wxWindow_GetBestHeight(self_: &wxWindow, width: i32) -> i32;
         unsafe fn wxWindow_GetBestWidth(self_: &wxWindow, height: i32) -> i32;
         unsafe fn wxWindow_GetClientSize(self_: &wxWindow, width: *mut i32, height: *mut i32);
-        #[rust_name = "wxWindow_GetClientSize1"]
-        unsafe fn wxWindow_GetClientSize(self_: &wxWindow) -> *mut wxSize;
+        unsafe fn wxWindow_GetClientSize1(self_: &wxWindow) -> *mut wxSize;
         unsafe fn wxWindow_GetEffectiveMinSize(self_: &wxWindow) -> *mut wxSize;
         unsafe fn wxWindow_GetMaxClientSize(self_: &wxWindow) -> *mut wxSize;
         unsafe fn wxWindow_GetMaxSize(self_: &wxWindow) -> *mut wxSize;
@@ -787,11 +780,9 @@ mod ffi {
         unsafe fn wxWindow_GetMaxWidth(self_: &wxWindow) -> i32;
         unsafe fn wxWindow_GetMaxHeight(self_: &wxWindow) -> i32;
         unsafe fn wxWindow_GetSize(self_: &wxWindow, width: *mut i32, height: *mut i32);
-        #[rust_name = "wxWindow_GetSize1"]
-        unsafe fn wxWindow_GetSize(self_: &wxWindow) -> *mut wxSize;
+        unsafe fn wxWindow_GetSize1(self_: &wxWindow) -> *mut wxSize;
         unsafe fn wxWindow_GetVirtualSize(self_: &wxWindow) -> *mut wxSize;
-        #[rust_name = "wxWindow_GetVirtualSize1"]
-        unsafe fn wxWindow_GetVirtualSize(self_: &wxWindow, width: *mut i32, height: *mut i32);
+        unsafe fn wxWindow_GetVirtualSize1(self_: &wxWindow, width: *mut i32, height: *mut i32);
         unsafe fn wxWindow_GetBestVirtualSize(self_: &wxWindow) -> *mut wxSize;
         unsafe fn wxWindow_GetContentScaleFactor(self_: &wxWindow) -> f64;
         unsafe fn wxWindow_GetDPIScaleFactor(self_: &wxWindow) -> f64;
@@ -803,10 +794,8 @@ mod ffi {
         unsafe fn wxWindow_SendSizeEvent(self_: Pin<&mut wxWindow>, flags: i32);
         unsafe fn wxWindow_SendSizeEventToParent(self_: Pin<&mut wxWindow>, flags: i32);
         unsafe fn wxWindow_SetClientSize(self_: Pin<&mut wxWindow>, width: i32, height: i32);
-        #[rust_name = "wxWindow_SetClientSize1"]
-        unsafe fn wxWindow_SetClientSize(self_: Pin<&mut wxWindow>, size: &wxSize);
-        #[rust_name = "wxWindow_SetClientSize2"]
-        unsafe fn wxWindow_SetClientSize(self_: Pin<&mut wxWindow>, rect: &wxRect);
+        unsafe fn wxWindow_SetClientSize1(self_: Pin<&mut wxWindow>, size: &wxSize);
+        unsafe fn wxWindow_SetClientSize2(self_: Pin<&mut wxWindow>, rect: &wxRect);
         unsafe fn wxWindow_SetContainingSizer(self_: Pin<&mut wxWindow>, sizer: *mut wxSizer);
         unsafe fn wxWindow_SetInitialSize(self_: Pin<&mut wxWindow>, size: &wxSize);
         unsafe fn wxWindow_SetMaxClientSize(self_: Pin<&mut wxWindow>, size: &wxSize);
@@ -814,60 +803,42 @@ mod ffi {
         unsafe fn wxWindow_SetMinClientSize(self_: Pin<&mut wxWindow>, size: &wxSize);
         unsafe fn wxWindow_SetMinSize(self_: Pin<&mut wxWindow>, size: &wxSize);
         unsafe fn wxWindow_SetSize(self_: Pin<&mut wxWindow>, x: i32, y: i32, width: i32, height: i32, size_flags: i32);
-        #[rust_name = "wxWindow_SetSize1"]
-        unsafe fn wxWindow_SetSize(self_: Pin<&mut wxWindow>, rect: &wxRect);
-        #[rust_name = "wxWindow_SetSize2"]
-        unsafe fn wxWindow_SetSize(self_: Pin<&mut wxWindow>, size: &wxSize);
-        #[rust_name = "wxWindow_SetSize3"]
-        unsafe fn wxWindow_SetSize(self_: Pin<&mut wxWindow>, width: i32, height: i32);
+        unsafe fn wxWindow_SetSize1(self_: Pin<&mut wxWindow>, rect: &wxRect);
+        unsafe fn wxWindow_SetSize2(self_: Pin<&mut wxWindow>, size: &wxSize);
+        unsafe fn wxWindow_SetSize3(self_: Pin<&mut wxWindow>, width: i32, height: i32);
         unsafe fn wxWindow_SetSizeHints(self_: Pin<&mut wxWindow>, min_size: &wxSize, max_size: &wxSize, inc_size: &wxSize);
-        #[rust_name = "wxWindow_SetSizeHints1"]
-        unsafe fn wxWindow_SetSizeHints(self_: Pin<&mut wxWindow>, min_w: i32, min_h: i32, max_w: i32, max_h: i32, inc_w: i32, inc_h: i32);
+        unsafe fn wxWindow_SetSizeHints1(self_: Pin<&mut wxWindow>, min_w: i32, min_h: i32, max_w: i32, max_h: i32, inc_w: i32, inc_h: i32);
         unsafe fn wxWindow_SetVirtualSize(self_: Pin<&mut wxWindow>, width: i32, height: i32);
-        #[rust_name = "wxWindow_SetVirtualSize1"]
-        unsafe fn wxWindow_SetVirtualSize(self_: Pin<&mut wxWindow>, size: &wxSize);
-        #[rust_name = "wxWindow_FromDIP3"]
-        unsafe fn wxWindow_FromDIP(sz: &wxSize, w: *const wxWindow) -> *mut wxSize;
-        #[rust_name = "wxWindow_FromDIP4"]
-        unsafe fn wxWindow_FromDIP(pt: &wxPoint, w: *const wxWindow) -> *mut wxPoint;
-        #[rust_name = "wxWindow_FromDIP5"]
-        unsafe fn wxWindow_FromDIP(d: i32, w: *const wxWindow) -> i32;
-        #[rust_name = "wxWindow_ToDIP3"]
-        unsafe fn wxWindow_ToDIP(sz: &wxSize, w: *const wxWindow) -> *mut wxSize;
-        #[rust_name = "wxWindow_ToDIP4"]
-        unsafe fn wxWindow_ToDIP(pt: &wxPoint, w: *const wxWindow) -> *mut wxPoint;
-        #[rust_name = "wxWindow_ToDIP5"]
-        unsafe fn wxWindow_ToDIP(d: i32, w: *const wxWindow) -> i32;
+        unsafe fn wxWindow_SetVirtualSize1(self_: Pin<&mut wxWindow>, size: &wxSize);
+        unsafe fn wxWindow_FromDIP3(sz: &wxSize, w: *const wxWindow) -> *mut wxSize;
+        unsafe fn wxWindow_FromDIP4(pt: &wxPoint, w: *const wxWindow) -> *mut wxPoint;
+        unsafe fn wxWindow_FromDIP5(d: i32, w: *const wxWindow) -> i32;
+        unsafe fn wxWindow_ToDIP3(sz: &wxSize, w: *const wxWindow) -> *mut wxSize;
+        unsafe fn wxWindow_ToDIP4(pt: &wxPoint, w: *const wxWindow) -> *mut wxPoint;
+        unsafe fn wxWindow_ToDIP5(d: i32, w: *const wxWindow) -> i32;
         unsafe fn wxWindow_Center(self_: Pin<&mut wxWindow>, dir: i32);
         unsafe fn wxWindow_CenterOnParent(self_: Pin<&mut wxWindow>, dir: i32);
         unsafe fn wxWindow_Centre(self_: Pin<&mut wxWindow>, direction: i32);
         unsafe fn wxWindow_CentreOnParent(self_: Pin<&mut wxWindow>, direction: i32);
         unsafe fn wxWindow_GetPosition(self_: &wxWindow, x: *mut i32, y: *mut i32);
-        #[rust_name = "wxWindow_GetPosition1"]
-        unsafe fn wxWindow_GetPosition(self_: &wxWindow) -> *mut wxPoint;
+        unsafe fn wxWindow_GetPosition1(self_: &wxWindow) -> *mut wxPoint;
         unsafe fn wxWindow_GetRect(self_: &wxWindow) -> *mut wxRect;
         unsafe fn wxWindow_GetScreenPosition(self_: &wxWindow, x: *mut i32, y: *mut i32);
-        #[rust_name = "wxWindow_GetScreenPosition1"]
-        unsafe fn wxWindow_GetScreenPosition(self_: &wxWindow) -> *mut wxPoint;
+        unsafe fn wxWindow_GetScreenPosition1(self_: &wxWindow) -> *mut wxPoint;
         unsafe fn wxWindow_GetScreenRect(self_: &wxWindow) -> *mut wxRect;
         unsafe fn wxWindow_GetClientAreaOrigin(self_: &wxWindow) -> *mut wxPoint;
         unsafe fn wxWindow_GetClientRect(self_: &wxWindow) -> *mut wxRect;
         unsafe fn wxWindow_Move(self_: Pin<&mut wxWindow>, x: i32, y: i32, flags: i32);
-        #[rust_name = "wxWindow_Move1"]
-        unsafe fn wxWindow_Move(self_: Pin<&mut wxWindow>, pt: &wxPoint, flags: i32);
+        unsafe fn wxWindow_Move1(self_: Pin<&mut wxWindow>, pt: &wxPoint, flags: i32);
         unsafe fn wxWindow_SetPosition(self_: Pin<&mut wxWindow>, pt: &wxPoint);
         unsafe fn wxWindow_ClientToScreen(self_: &wxWindow, x: *mut i32, y: *mut i32);
-        #[rust_name = "wxWindow_ClientToScreen1"]
-        unsafe fn wxWindow_ClientToScreen(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
+        unsafe fn wxWindow_ClientToScreen1(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
         unsafe fn wxWindow_ConvertDialogToPixels(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
-        #[rust_name = "wxWindow_ConvertDialogToPixels1"]
-        unsafe fn wxWindow_ConvertDialogToPixels(self_: &wxWindow, sz: &wxSize) -> *mut wxSize;
+        unsafe fn wxWindow_ConvertDialogToPixels1(self_: &wxWindow, sz: &wxSize) -> *mut wxSize;
         unsafe fn wxWindow_ConvertPixelsToDialog(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
-        #[rust_name = "wxWindow_ConvertPixelsToDialog1"]
-        unsafe fn wxWindow_ConvertPixelsToDialog(self_: &wxWindow, sz: &wxSize) -> *mut wxSize;
+        unsafe fn wxWindow_ConvertPixelsToDialog1(self_: &wxWindow, sz: &wxSize) -> *mut wxSize;
         unsafe fn wxWindow_ScreenToClient(self_: &wxWindow, x: *mut i32, y: *mut i32);
-        #[rust_name = "wxWindow_ScreenToClient1"]
-        unsafe fn wxWindow_ScreenToClient(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
+        unsafe fn wxWindow_ScreenToClient1(self_: &wxWindow, pt: &wxPoint) -> *mut wxPoint;
         unsafe fn wxWindow_ClearBackground(self_: Pin<&mut wxWindow>);
         unsafe fn wxWindow_Freeze(self_: Pin<&mut wxWindow>);
         unsafe fn wxWindow_Thaw(self_: Pin<&mut wxWindow>);
@@ -876,8 +847,7 @@ mod ffi {
         unsafe fn wxWindow_GetCharWidth(self_: &wxWindow) -> i32;
         unsafe fn wxWindow_GetDPI(self_: &wxWindow) -> *mut wxSize;
         unsafe fn wxWindow_GetTextExtent(self_: &wxWindow, string: &wxString, w: *mut i32, h: *mut i32, descent: *mut i32, external_leading: *mut i32, font: *const wxFont);
-        #[rust_name = "wxWindow_GetTextExtent1"]
-        unsafe fn wxWindow_GetTextExtent(self_: &wxWindow, string: &wxString) -> *mut wxSize;
+        unsafe fn wxWindow_GetTextExtent1(self_: &wxWindow, string: &wxString) -> *mut wxSize;
         unsafe fn wxWindow_GetUpdateClientRect(self_: &wxWindow) -> *mut wxRect;
         unsafe fn wxWindow_HasTransparentBackground(self_: Pin<&mut wxWindow>) -> bool;
         unsafe fn wxWindow_Refresh(self_: Pin<&mut wxWindow>, erase_background: bool, rect: *const wxRect);
@@ -930,12 +900,9 @@ mod ffi {
         unsafe fn wxWindow_Hide(self_: Pin<&mut wxWindow>) -> bool;
         unsafe fn wxWindow_IsEnabled(self_: &wxWindow) -> bool;
         unsafe fn wxWindow_IsExposed(self_: &wxWindow, x: i32, y: i32) -> bool;
-        #[rust_name = "wxWindow_IsExposed1"]
-        unsafe fn wxWindow_IsExposed(self_: &wxWindow, pt: Pin<&mut wxPoint>) -> bool;
-        #[rust_name = "wxWindow_IsExposed2"]
-        unsafe fn wxWindow_IsExposed(self_: &wxWindow, x: i32, y: i32, w: i32, h: i32) -> bool;
-        #[rust_name = "wxWindow_IsExposed3"]
-        unsafe fn wxWindow_IsExposed(self_: &wxWindow, rect: Pin<&mut wxRect>) -> bool;
+        unsafe fn wxWindow_IsExposed1(self_: &wxWindow, pt: Pin<&mut wxPoint>) -> bool;
+        unsafe fn wxWindow_IsExposed2(self_: &wxWindow, x: i32, y: i32, w: i32, h: i32) -> bool;
+        unsafe fn wxWindow_IsExposed3(self_: &wxWindow, rect: Pin<&mut wxRect>) -> bool;
         unsafe fn wxWindow_IsShown(self_: &wxWindow) -> bool;
         unsafe fn wxWindow_IsShownOnScreen(self_: &wxWindow) -> bool;
         unsafe fn wxWindow_Disable(self_: Pin<&mut wxWindow>) -> bool;
@@ -946,15 +913,12 @@ mod ffi {
         unsafe fn wxWindow_GetToolTip(self_: &wxWindow) -> *mut wxToolTip;
         unsafe fn wxWindow_GetToolTipText(self_: &wxWindow) -> *mut wxString;
         unsafe fn wxWindow_SetToolTip(self_: Pin<&mut wxWindow>, tip_string: &wxString);
-        #[rust_name = "wxWindow_SetToolTip1"]
-        unsafe fn wxWindow_SetToolTip(self_: Pin<&mut wxWindow>, tip: *mut wxToolTip);
+        unsafe fn wxWindow_SetToolTip1(self_: Pin<&mut wxWindow>, tip: *mut wxToolTip);
         unsafe fn wxWindow_UnsetToolTip(self_: Pin<&mut wxWindow>);
         unsafe fn wxWindow_GetPopupMenuSelectionFromUser(self_: Pin<&mut wxWindow>, menu: Pin<&mut wxMenu>, pos: &wxPoint) -> i32;
-        #[rust_name = "wxWindow_GetPopupMenuSelectionFromUser1"]
-        unsafe fn wxWindow_GetPopupMenuSelectionFromUser(self_: Pin<&mut wxWindow>, menu: Pin<&mut wxMenu>, x: i32, y: i32) -> i32;
+        unsafe fn wxWindow_GetPopupMenuSelectionFromUser1(self_: Pin<&mut wxWindow>, menu: Pin<&mut wxMenu>, x: i32, y: i32) -> i32;
         unsafe fn wxWindow_PopupMenu(self_: Pin<&mut wxWindow>, menu: *mut wxMenu, pos: &wxPoint) -> bool;
-        #[rust_name = "wxWindow_PopupMenu1"]
-        unsafe fn wxWindow_PopupMenu(self_: Pin<&mut wxWindow>, menu: *mut wxMenu, x: i32, y: i32) -> bool;
+        unsafe fn wxWindow_PopupMenu1(self_: Pin<&mut wxWindow>, menu: *mut wxMenu, x: i32, y: i32) -> bool;
         unsafe fn wxWindow_GetValidator(self_: Pin<&mut wxWindow>) -> *mut wxValidator;
         unsafe fn wxWindow_SetValidator(self_: Pin<&mut wxWindow>, validator: &wxValidator);
         unsafe fn wxWindow_TransferDataFromWindow(self_: Pin<&mut wxWindow>) -> bool;
@@ -1014,26 +978,22 @@ mod ffi {
         unsafe fn wxWindow_NewControlId(count: i32) -> i32;
         unsafe fn wxWindow_UnreserveControlId(id: i32, count: i32);
         unsafe fn wxWindow_new() -> *mut wxWindow;
-        #[rust_name = "wxWindow_new1"]
-        unsafe fn wxWindow_new(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxWindow;
+        unsafe fn wxWindow_new1(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxWindow;
         unsafe fn wxWindow_Create(self_: Pin<&mut wxWindow>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
         // CLASS: wxControl
         unsafe fn wxControl_new(parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> *mut wxControl;
-        #[rust_name = "wxControl_new1"]
-        unsafe fn wxControl_new() -> *mut wxControl;
+        unsafe fn wxControl_new1() -> *mut wxControl;
         unsafe fn wxControl_Create(self_: Pin<&mut wxControl>, parent: *mut wxWindow, id: i32, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
         unsafe fn wxControl_Command(self_: Pin<&mut wxControl>, event: Pin<&mut wxCommandEvent>);
         unsafe fn wxControl_GetLabel(self_: &wxControl) -> *mut wxString;
         unsafe fn wxControl_GetLabelText(self_: &wxControl) -> *mut wxString;
         unsafe fn wxControl_GetSizeFromTextSize(self_: &wxControl, xlen: i32, ylen: i32) -> *mut wxSize;
-        #[rust_name = "wxControl_GetSizeFromTextSize1"]
-        unsafe fn wxControl_GetSizeFromTextSize(self_: &wxControl, tsize: &wxSize) -> *mut wxSize;
+        unsafe fn wxControl_GetSizeFromTextSize1(self_: &wxControl, tsize: &wxSize) -> *mut wxSize;
         unsafe fn wxControl_GetSizeFromText(self_: &wxControl, text: &wxString) -> *mut wxSize;
         unsafe fn wxControl_SetLabel(self_: Pin<&mut wxControl>, label: &wxString);
         unsafe fn wxControl_SetLabelText(self_: Pin<&mut wxControl>, text: &wxString);
         unsafe fn wxControl_SetLabelMarkup(self_: Pin<&mut wxControl>, markup: &wxString) -> bool;
-        #[rust_name = "wxControl_GetLabelText1"]
-        unsafe fn wxControl_GetLabelText(label: &wxString) -> *mut wxString;
+        unsafe fn wxControl_GetLabelText1(label: &wxString) -> *mut wxString;
         unsafe fn wxControl_RemoveMnemonics(str: &wxString) -> *mut wxString;
         unsafe fn wxControl_EscapeMnemonics(text: &wxString) -> *mut wxString;
         // CLASS: wxAnyButton
@@ -1045,12 +1005,10 @@ mod ffi {
         unsafe fn wxAnyButton_SetBitmapPressed(self_: Pin<&mut wxAnyButton>, bitmap: &wxBitmap);
         unsafe fn wxAnyButton_GetBitmapMargins(self_: Pin<&mut wxAnyButton>) -> *mut wxSize;
         unsafe fn wxAnyButton_SetBitmapMargins(self_: Pin<&mut wxAnyButton>, x: i32, y: i32);
-        #[rust_name = "wxAnyButton_SetBitmapMargins1"]
-        unsafe fn wxAnyButton_SetBitmapMargins(self_: Pin<&mut wxAnyButton>, sz: &wxSize);
+        unsafe fn wxAnyButton_SetBitmapMargins1(self_: Pin<&mut wxAnyButton>, sz: &wxSize);
         // CLASS: wxButton
         unsafe fn wxButton_new() -> *mut wxButton;
-        #[rust_name = "wxButton_new1"]
-        unsafe fn wxButton_new(parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> *mut wxButton;
+        unsafe fn wxButton_new1(parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> *mut wxButton;
         unsafe fn wxButton_Create(self_: Pin<&mut wxButton>, parent: *mut wxWindow, id: i32, label: &wxString, pos: &wxPoint, size: &wxSize, style: i32, validator: &wxValidator, name: &wxString) -> bool;
         unsafe fn wxButton_GetAuthNeeded(self_: &wxButton) -> bool;
         unsafe fn wxButton_GetLabel(self_: &wxButton) -> *mut wxString;
@@ -1060,12 +1018,10 @@ mod ffi {
         unsafe fn wxButton_GetDefaultSize(win: *mut wxWindow) -> *mut wxSize;
         // CLASS: wxNonOwnedWindow
         unsafe fn wxNonOwnedWindow_SetShape(self_: Pin<&mut wxNonOwnedWindow>, region: &wxRegion) -> bool;
-        #[rust_name = "wxNonOwnedWindow_SetShape1"]
-        unsafe fn wxNonOwnedWindow_SetShape(self_: Pin<&mut wxNonOwnedWindow>, path: &wxGraphicsPath) -> bool;
+        unsafe fn wxNonOwnedWindow_SetShape1(self_: Pin<&mut wxNonOwnedWindow>, path: &wxGraphicsPath) -> bool;
         // CLASS: wxTopLevelWindow
         unsafe fn wxTopLevelWindow_new() -> *mut wxTopLevelWindow;
-        #[rust_name = "wxTopLevelWindow_new1"]
-        unsafe fn wxTopLevelWindow_new(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxTopLevelWindow;
+        unsafe fn wxTopLevelWindow_new1(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxTopLevelWindow;
         unsafe fn wxTopLevelWindow_Create(self_: Pin<&mut wxTopLevelWindow>, parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
         unsafe fn wxTopLevelWindow_CanSetTransparent(self_: Pin<&mut wxTopLevelWindow>) -> bool;
         unsafe fn wxTopLevelWindow_CenterOnScreen(self_: Pin<&mut wxTopLevelWindow>, direction: i32);
@@ -1093,8 +1049,7 @@ mod ffi {
         unsafe fn wxTopLevelWindow_SetMaxSize(self_: Pin<&mut wxTopLevelWindow>, size: &wxSize);
         unsafe fn wxTopLevelWindow_SetMinSize(self_: Pin<&mut wxTopLevelWindow>, size: &wxSize);
         unsafe fn wxTopLevelWindow_SetSizeHints(self_: Pin<&mut wxTopLevelWindow>, min_w: i32, min_h: i32, max_w: i32, max_h: i32, inc_w: i32, inc_h: i32);
-        #[rust_name = "wxTopLevelWindow_SetSizeHints1"]
-        unsafe fn wxTopLevelWindow_SetSizeHints(self_: Pin<&mut wxTopLevelWindow>, min_size: &wxSize, max_size: &wxSize, inc_size: &wxSize);
+        unsafe fn wxTopLevelWindow_SetSizeHints1(self_: Pin<&mut wxTopLevelWindow>, min_size: &wxSize, max_size: &wxSize, inc_size: &wxSize);
         unsafe fn wxTopLevelWindow_SetTitle(self_: Pin<&mut wxTopLevelWindow>, title: &wxString);
         unsafe fn wxTopLevelWindow_SetTransparent(self_: Pin<&mut wxTopLevelWindow>, alpha: u8) -> bool;
         unsafe fn wxTopLevelWindow_ShouldPreventAppExit(self_: &wxTopLevelWindow) -> bool;
@@ -1107,8 +1062,7 @@ mod ffi {
         unsafe fn wxTopLevelWindow_GetDefaultSize() -> *mut wxSize;
         // CLASS: wxFrame
         unsafe fn wxFrame_new() -> *mut wxFrame;
-        #[rust_name = "wxFrame_new1"]
-        unsafe fn wxFrame_new(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxFrame;
+        unsafe fn wxFrame_new1(parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> *mut wxFrame;
         unsafe fn wxFrame_Centre(self_: Pin<&mut wxFrame>, direction: i32);
         unsafe fn wxFrame_Create(self_: Pin<&mut wxFrame>, parent: *mut wxWindow, id: i32, title: &wxString, pos: &wxPoint, size: &wxSize, style: i32, name: &wxString) -> bool;
         unsafe fn wxFrame_CreateStatusBar(self_: Pin<&mut wxFrame>, number: i32, style: i32, id: i32, name: &wxString) -> *mut wxStatusBar;
@@ -1134,29 +1088,20 @@ mod ffi {
         unsafe fn wxPoint_IsFullySpecified(self_: &wxPoint) -> bool;
         unsafe fn wxPoint_SetDefaults(self_: Pin<&mut wxPoint>, pt: &wxPoint);
         unsafe fn wxPoint_new() -> *mut wxPoint;
-        #[rust_name = "wxPoint_new1"]
-        unsafe fn wxPoint_new(x: i32, y: i32) -> *mut wxPoint;
-        #[rust_name = "wxPoint_new2"]
-        unsafe fn wxPoint_new(pt: &wxRealPoint) -> *mut wxPoint;
+        unsafe fn wxPoint_new1(x: i32, y: i32) -> *mut wxPoint;
+        unsafe fn wxPoint_new2(pt: &wxRealPoint) -> *mut wxPoint;
         // CLASS: wxRect
         unsafe fn wxRect_new() -> *mut wxRect;
-        #[rust_name = "wxRect_new1"]
-        unsafe fn wxRect_new(x: i32, y: i32, width: i32, height: i32) -> *mut wxRect;
-        #[rust_name = "wxRect_new2"]
-        unsafe fn wxRect_new(top_left: &wxPoint, bottom_right: &wxPoint) -> *mut wxRect;
-        #[rust_name = "wxRect_new3"]
-        unsafe fn wxRect_new(pos: &wxPoint, size: &wxSize) -> *mut wxRect;
-        #[rust_name = "wxRect_new4"]
-        unsafe fn wxRect_new(size: &wxSize) -> *mut wxRect;
+        unsafe fn wxRect_new1(x: i32, y: i32, width: i32, height: i32) -> *mut wxRect;
+        unsafe fn wxRect_new2(top_left: &wxPoint, bottom_right: &wxPoint) -> *mut wxRect;
+        unsafe fn wxRect_new3(pos: &wxPoint, size: &wxSize) -> *mut wxRect;
+        unsafe fn wxRect_new4(size: &wxSize) -> *mut wxRect;
         unsafe fn wxRect_CentreIn(self_: &wxRect, r: &wxRect, dir: i32) -> *mut wxRect;
         unsafe fn wxRect_CenterIn(self_: &wxRect, r: &wxRect, dir: i32) -> *mut wxRect;
         unsafe fn wxRect_Contains(self_: &wxRect, x: i32, y: i32) -> bool;
-        #[rust_name = "wxRect_Contains1"]
-        unsafe fn wxRect_Contains(self_: &wxRect, pt: &wxPoint) -> bool;
-        #[rust_name = "wxRect_Contains2"]
-        unsafe fn wxRect_Contains(self_: &wxRect, rect: &wxRect) -> bool;
-        #[rust_name = "wxRect_Deflate3"]
-        unsafe fn wxRect_Deflate(self_: &wxRect, dx: i32, dy: i32) -> *mut wxRect;
+        unsafe fn wxRect_Contains1(self_: &wxRect, pt: &wxPoint) -> bool;
+        unsafe fn wxRect_Contains2(self_: &wxRect, rect: &wxRect) -> bool;
+        unsafe fn wxRect_Deflate3(self_: &wxRect, dx: i32, dy: i32) -> *mut wxRect;
         unsafe fn wxRect_GetBottom(self_: &wxRect) -> i32;
         unsafe fn wxRect_GetBottomLeft(self_: &wxRect) -> *mut wxPoint;
         unsafe fn wxRect_GetBottomRight(self_: &wxRect) -> *mut wxPoint;
@@ -1171,15 +1116,12 @@ mod ffi {
         unsafe fn wxRect_GetWidth(self_: &wxRect) -> i32;
         unsafe fn wxRect_GetX(self_: &wxRect) -> i32;
         unsafe fn wxRect_GetY(self_: &wxRect) -> i32;
-        #[rust_name = "wxRect_Inflate3"]
-        unsafe fn wxRect_Inflate(self_: &wxRect, dx: i32, dy: i32) -> *mut wxRect;
-        #[rust_name = "wxRect_Intersect1"]
-        unsafe fn wxRect_Intersect(self_: &wxRect, rect: &wxRect) -> *mut wxRect;
+        unsafe fn wxRect_Inflate3(self_: &wxRect, dx: i32, dy: i32) -> *mut wxRect;
+        unsafe fn wxRect_Intersect1(self_: &wxRect, rect: &wxRect) -> *mut wxRect;
         unsafe fn wxRect_Intersects(self_: &wxRect, rect: &wxRect) -> bool;
         unsafe fn wxRect_IsEmpty(self_: &wxRect) -> bool;
         unsafe fn wxRect_Offset(self_: Pin<&mut wxRect>, dx: i32, dy: i32);
-        #[rust_name = "wxRect_Offset1"]
-        unsafe fn wxRect_Offset(self_: Pin<&mut wxRect>, pt: &wxPoint);
+        unsafe fn wxRect_Offset1(self_: Pin<&mut wxRect>, pt: &wxPoint);
         unsafe fn wxRect_SetHeight(self_: Pin<&mut wxRect>, height: i32);
         unsafe fn wxRect_SetPosition(self_: Pin<&mut wxRect>, pos: &wxPoint);
         unsafe fn wxRect_SetSize(self_: Pin<&mut wxRect>, s: &wxSize);
@@ -1197,26 +1139,19 @@ mod ffi {
         unsafe fn wxRect_Union(self_: &wxRect, rect: &wxRect) -> *mut wxRect;
         // CLASS: wxSize
         unsafe fn wxSize_new() -> *mut wxSize;
-        #[rust_name = "wxSize_new1"]
-        unsafe fn wxSize_new(width: i32, height: i32) -> *mut wxSize;
+        unsafe fn wxSize_new1(width: i32, height: i32) -> *mut wxSize;
         unsafe fn wxSize_DecBy(self_: Pin<&mut wxSize>, pt: &wxPoint);
-        #[rust_name = "wxSize_DecBy1"]
-        unsafe fn wxSize_DecBy(self_: Pin<&mut wxSize>, size: &wxSize);
-        #[rust_name = "wxSize_DecBy2"]
-        unsafe fn wxSize_DecBy(self_: Pin<&mut wxSize>, dx: i32, dy: i32);
-        #[rust_name = "wxSize_DecBy3"]
-        unsafe fn wxSize_DecBy(self_: Pin<&mut wxSize>, d: i32);
+        unsafe fn wxSize_DecBy1(self_: Pin<&mut wxSize>, size: &wxSize);
+        unsafe fn wxSize_DecBy2(self_: Pin<&mut wxSize>, dx: i32, dy: i32);
+        unsafe fn wxSize_DecBy3(self_: Pin<&mut wxSize>, d: i32);
         unsafe fn wxSize_DecTo(self_: Pin<&mut wxSize>, size: &wxSize);
         unsafe fn wxSize_DecToIfSpecified(self_: Pin<&mut wxSize>, size: &wxSize);
         unsafe fn wxSize_GetHeight(self_: &wxSize) -> i32;
         unsafe fn wxSize_GetWidth(self_: &wxSize) -> i32;
         unsafe fn wxSize_IncBy(self_: Pin<&mut wxSize>, pt: &wxPoint);
-        #[rust_name = "wxSize_IncBy1"]
-        unsafe fn wxSize_IncBy(self_: Pin<&mut wxSize>, size: &wxSize);
-        #[rust_name = "wxSize_IncBy2"]
-        unsafe fn wxSize_IncBy(self_: Pin<&mut wxSize>, dx: i32, dy: i32);
-        #[rust_name = "wxSize_IncBy3"]
-        unsafe fn wxSize_IncBy(self_: Pin<&mut wxSize>, d: i32);
+        unsafe fn wxSize_IncBy1(self_: Pin<&mut wxSize>, size: &wxSize);
+        unsafe fn wxSize_IncBy2(self_: Pin<&mut wxSize>, dx: i32, dy: i32);
+        unsafe fn wxSize_IncBy3(self_: Pin<&mut wxSize>, d: i32);
         unsafe fn wxSize_IncTo(self_: Pin<&mut wxSize>, size: &wxSize);
         unsafe fn wxSize_IsFullySpecified(self_: &wxSize) -> bool;
         unsafe fn wxSize_Set(self_: Pin<&mut wxSize>, width: i32, height: i32);

@@ -11,7 +11,7 @@ namespace wxrust {
 inline wxObject *wxObject_new() {
     return new wxObject();
 }
-inline wxObject *wxObject_new(const wxObject & other) {
+inline wxObject *wxObject_new1(const wxObject & other) {
     return new wxObject(other);
 }
 inline wxClassInfo * wxObject_GetClassInfo(const wxObject & self) {
@@ -147,7 +147,7 @@ inline bool wxWindow_DestroyChildren(wxWindow & self) {
 inline wxWindow * wxWindow_FindWindow(const wxWindow & self, int32_t id) {
     return self.FindWindow(id);
 }
-inline wxWindow * wxWindow_FindWindow(const wxWindow & self, const wxString & name) {
+inline wxWindow * wxWindow_FindWindow1(const wxWindow & self, const wxString & name) {
     return self.FindWindow(name);
 }
 inline void wxWindow_RemoveChild(wxWindow & self, wxWindow * child) {
@@ -243,19 +243,19 @@ inline void wxWindow_FitInside(wxWindow & self) {
 inline wxSize *wxWindow_FromDIP(const wxWindow & self, const wxSize & sz) {
     return new wxSize(self.FromDIP(sz));
 }
-inline wxPoint *wxWindow_FromDIP(const wxWindow & self, const wxPoint & pt) {
+inline wxPoint *wxWindow_FromDIP1(const wxWindow & self, const wxPoint & pt) {
     return new wxPoint(self.FromDIP(pt));
 }
-inline int wxWindow_FromDIP(const wxWindow & self, int d) {
+inline int wxWindow_FromDIP2(const wxWindow & self, int d) {
     return self.FromDIP(d);
 }
 inline wxSize *wxWindow_ToDIP(const wxWindow & self, const wxSize & sz) {
     return new wxSize(self.ToDIP(sz));
 }
-inline wxPoint *wxWindow_ToDIP(const wxWindow & self, const wxPoint & pt) {
+inline wxPoint *wxWindow_ToDIP1(const wxWindow & self, const wxPoint & pt) {
     return new wxPoint(self.ToDIP(pt));
 }
-inline int wxWindow_ToDIP(const wxWindow & self, int d) {
+inline int wxWindow_ToDIP2(const wxWindow & self, int d) {
     return self.ToDIP(d);
 }
 inline wxSize *wxWindow_GetBestSize(const wxWindow & self) {
@@ -270,7 +270,7 @@ inline int wxWindow_GetBestWidth(const wxWindow & self, int height) {
 inline void wxWindow_GetClientSize(const wxWindow & self, int * width, int * height) {
     return self.GetClientSize(width, height);
 }
-inline wxSize *wxWindow_GetClientSize(const wxWindow & self) {
+inline wxSize *wxWindow_GetClientSize1(const wxWindow & self) {
     return new wxSize(self.GetClientSize());
 }
 inline wxSize *wxWindow_GetEffectiveMinSize(const wxWindow & self) {
@@ -303,13 +303,13 @@ inline int wxWindow_GetMaxHeight(const wxWindow & self) {
 inline void wxWindow_GetSize(const wxWindow & self, int * width, int * height) {
     return self.GetSize(width, height);
 }
-inline wxSize *wxWindow_GetSize(const wxWindow & self) {
+inline wxSize *wxWindow_GetSize1(const wxWindow & self) {
     return new wxSize(self.GetSize());
 }
 inline wxSize *wxWindow_GetVirtualSize(const wxWindow & self) {
     return new wxSize(self.GetVirtualSize());
 }
-inline void wxWindow_GetVirtualSize(const wxWindow & self, int * width, int * height) {
+inline void wxWindow_GetVirtualSize1(const wxWindow & self, int * width, int * height) {
     return self.GetVirtualSize(width, height);
 }
 inline wxSize *wxWindow_GetBestVirtualSize(const wxWindow & self) {
@@ -345,10 +345,10 @@ inline void wxWindow_SendSizeEventToParent(wxWindow & self, int flags) {
 inline void wxWindow_SetClientSize(wxWindow & self, int width, int height) {
     return self.SetClientSize(width, height);
 }
-inline void wxWindow_SetClientSize(wxWindow & self, const wxSize & size) {
+inline void wxWindow_SetClientSize1(wxWindow & self, const wxSize & size) {
     return self.SetClientSize(size);
 }
-inline void wxWindow_SetClientSize(wxWindow & self, const wxRect & rect) {
+inline void wxWindow_SetClientSize2(wxWindow & self, const wxRect & rect) {
     return self.SetClientSize(rect);
 }
 inline void wxWindow_SetContainingSizer(wxWindow & self, wxSizer * sizer) {
@@ -372,43 +372,43 @@ inline void wxWindow_SetMinSize(wxWindow & self, const wxSize & size) {
 inline void wxWindow_SetSize(wxWindow & self, int x, int y, int width, int height, int size_flags) {
     return self.SetSize(x, y, width, height, size_flags);
 }
-inline void wxWindow_SetSize(wxWindow & self, const wxRect & rect) {
+inline void wxWindow_SetSize1(wxWindow & self, const wxRect & rect) {
     return self.SetSize(rect);
 }
-inline void wxWindow_SetSize(wxWindow & self, const wxSize & size) {
+inline void wxWindow_SetSize2(wxWindow & self, const wxSize & size) {
     return self.SetSize(size);
 }
-inline void wxWindow_SetSize(wxWindow & self, int width, int height) {
+inline void wxWindow_SetSize3(wxWindow & self, int width, int height) {
     return self.SetSize(width, height);
 }
 inline void wxWindow_SetSizeHints(wxWindow & self, const wxSize & min_size, const wxSize & max_size, const wxSize & inc_size) {
     return self.SetSizeHints(min_size, max_size, inc_size);
 }
-inline void wxWindow_SetSizeHints(wxWindow & self, int min_w, int min_h, int max_w, int max_h, int inc_w, int inc_h) {
+inline void wxWindow_SetSizeHints1(wxWindow & self, int min_w, int min_h, int max_w, int max_h, int inc_w, int inc_h) {
     return self.SetSizeHints(min_w, min_h, max_w, max_h, inc_w, inc_h);
 }
 inline void wxWindow_SetVirtualSize(wxWindow & self, int width, int height) {
     return self.SetVirtualSize(width, height);
 }
-inline void wxWindow_SetVirtualSize(wxWindow & self, const wxSize & size) {
+inline void wxWindow_SetVirtualSize1(wxWindow & self, const wxSize & size) {
     return self.SetVirtualSize(size);
 }
-inline wxSize *wxWindow_FromDIP(const wxSize & sz, const wxWindow * w) {
+inline wxSize *wxWindow_FromDIP3(const wxSize & sz, const wxWindow * w) {
     return new wxSize(wxWindow::FromDIP(sz, w));
 }
-inline wxPoint *wxWindow_FromDIP(const wxPoint & pt, const wxWindow * w) {
+inline wxPoint *wxWindow_FromDIP4(const wxPoint & pt, const wxWindow * w) {
     return new wxPoint(wxWindow::FromDIP(pt, w));
 }
-inline int wxWindow_FromDIP(int d, const wxWindow * w) {
+inline int wxWindow_FromDIP5(int d, const wxWindow * w) {
     return wxWindow::FromDIP(d, w);
 }
-inline wxSize *wxWindow_ToDIP(const wxSize & sz, const wxWindow * w) {
+inline wxSize *wxWindow_ToDIP3(const wxSize & sz, const wxWindow * w) {
     return new wxSize(wxWindow::ToDIP(sz, w));
 }
-inline wxPoint *wxWindow_ToDIP(const wxPoint & pt, const wxWindow * w) {
+inline wxPoint *wxWindow_ToDIP4(const wxPoint & pt, const wxWindow * w) {
     return new wxPoint(wxWindow::ToDIP(pt, w));
 }
-inline int wxWindow_ToDIP(int d, const wxWindow * w) {
+inline int wxWindow_ToDIP5(int d, const wxWindow * w) {
     return wxWindow::ToDIP(d, w);
 }
 inline void wxWindow_Center(wxWindow & self, int dir) {
@@ -426,7 +426,7 @@ inline void wxWindow_CentreOnParent(wxWindow & self, int direction) {
 inline void wxWindow_GetPosition(const wxWindow & self, int * x, int * y) {
     return self.GetPosition(x, y);
 }
-inline wxPoint *wxWindow_GetPosition(const wxWindow & self) {
+inline wxPoint *wxWindow_GetPosition1(const wxWindow & self) {
     return new wxPoint(self.GetPosition());
 }
 inline wxRect *wxWindow_GetRect(const wxWindow & self) {
@@ -435,7 +435,7 @@ inline wxRect *wxWindow_GetRect(const wxWindow & self) {
 inline void wxWindow_GetScreenPosition(const wxWindow & self, int * x, int * y) {
     return self.GetScreenPosition(x, y);
 }
-inline wxPoint *wxWindow_GetScreenPosition(const wxWindow & self) {
+inline wxPoint *wxWindow_GetScreenPosition1(const wxWindow & self) {
     return new wxPoint(self.GetScreenPosition());
 }
 inline wxRect *wxWindow_GetScreenRect(const wxWindow & self) {
@@ -450,7 +450,7 @@ inline wxRect *wxWindow_GetClientRect(const wxWindow & self) {
 inline void wxWindow_Move(wxWindow & self, int x, int y, int flags) {
     return self.Move(x, y, flags);
 }
-inline void wxWindow_Move(wxWindow & self, const wxPoint & pt, int flags) {
+inline void wxWindow_Move1(wxWindow & self, const wxPoint & pt, int flags) {
     return self.Move(pt, flags);
 }
 inline void wxWindow_SetPosition(wxWindow & self, const wxPoint & pt) {
@@ -459,25 +459,25 @@ inline void wxWindow_SetPosition(wxWindow & self, const wxPoint & pt) {
 inline void wxWindow_ClientToScreen(const wxWindow & self, int * x, int * y) {
     return self.ClientToScreen(x, y);
 }
-inline wxPoint *wxWindow_ClientToScreen(const wxWindow & self, const wxPoint & pt) {
+inline wxPoint *wxWindow_ClientToScreen1(const wxWindow & self, const wxPoint & pt) {
     return new wxPoint(self.ClientToScreen(pt));
 }
 inline wxPoint *wxWindow_ConvertDialogToPixels(const wxWindow & self, const wxPoint & pt) {
     return new wxPoint(self.ConvertDialogToPixels(pt));
 }
-inline wxSize *wxWindow_ConvertDialogToPixels(const wxWindow & self, const wxSize & sz) {
+inline wxSize *wxWindow_ConvertDialogToPixels1(const wxWindow & self, const wxSize & sz) {
     return new wxSize(self.ConvertDialogToPixels(sz));
 }
 inline wxPoint *wxWindow_ConvertPixelsToDialog(const wxWindow & self, const wxPoint & pt) {
     return new wxPoint(self.ConvertPixelsToDialog(pt));
 }
-inline wxSize *wxWindow_ConvertPixelsToDialog(const wxWindow & self, const wxSize & sz) {
+inline wxSize *wxWindow_ConvertPixelsToDialog1(const wxWindow & self, const wxSize & sz) {
     return new wxSize(self.ConvertPixelsToDialog(sz));
 }
 inline void wxWindow_ScreenToClient(const wxWindow & self, int * x, int * y) {
     return self.ScreenToClient(x, y);
 }
-inline wxPoint *wxWindow_ScreenToClient(const wxWindow & self, const wxPoint & pt) {
+inline wxPoint *wxWindow_ScreenToClient1(const wxWindow & self, const wxPoint & pt) {
     return new wxPoint(self.ScreenToClient(pt));
 }
 inline void wxWindow_ClearBackground(wxWindow & self) {
@@ -504,7 +504,7 @@ inline wxSize *wxWindow_GetDPI(const wxWindow & self) {
 inline void wxWindow_GetTextExtent(const wxWindow & self, const wxString & string, int * w, int * h, int * descent, int * external_leading, const wxFont * font) {
     return self.GetTextExtent(string, w, h, descent, external_leading, font);
 }
-inline wxSize *wxWindow_GetTextExtent(const wxWindow & self, const wxString & string) {
+inline wxSize *wxWindow_GetTextExtent1(const wxWindow & self, const wxString & string) {
     return new wxSize(self.GetTextExtent(string));
 }
 inline wxRect *wxWindow_GetUpdateClientRect(const wxWindow & self) {
@@ -663,13 +663,13 @@ inline bool wxWindow_IsEnabled(const wxWindow & self) {
 inline bool wxWindow_IsExposed(const wxWindow & self, int x, int y) {
     return self.IsExposed(x, y);
 }
-inline bool wxWindow_IsExposed(const wxWindow & self, wxPoint & pt) {
+inline bool wxWindow_IsExposed1(const wxWindow & self, wxPoint & pt) {
     return self.IsExposed(pt);
 }
-inline bool wxWindow_IsExposed(const wxWindow & self, int x, int y, int w, int h) {
+inline bool wxWindow_IsExposed2(const wxWindow & self, int x, int y, int w, int h) {
     return self.IsExposed(x, y, w, h);
 }
-inline bool wxWindow_IsExposed(const wxWindow & self, wxRect & rect) {
+inline bool wxWindow_IsExposed3(const wxWindow & self, wxRect & rect) {
     return self.IsExposed(rect);
 }
 inline bool wxWindow_IsShown(const wxWindow & self) {
@@ -702,7 +702,7 @@ inline wxString *wxWindow_GetToolTipText(const wxWindow & self) {
 inline void wxWindow_SetToolTip(wxWindow & self, const wxString & tip_string) {
     return self.SetToolTip(tip_string);
 }
-inline void wxWindow_SetToolTip(wxWindow & self, wxToolTip * tip) {
+inline void wxWindow_SetToolTip1(wxWindow & self, wxToolTip * tip) {
     return self.SetToolTip(tip);
 }
 inline void wxWindow_UnsetToolTip(wxWindow & self) {
@@ -711,13 +711,13 @@ inline void wxWindow_UnsetToolTip(wxWindow & self) {
 inline int wxWindow_GetPopupMenuSelectionFromUser(wxWindow & self, wxMenu & menu, const wxPoint & pos) {
     return self.GetPopupMenuSelectionFromUser(menu, pos);
 }
-inline int wxWindow_GetPopupMenuSelectionFromUser(wxWindow & self, wxMenu & menu, int x, int y) {
+inline int wxWindow_GetPopupMenuSelectionFromUser1(wxWindow & self, wxMenu & menu, int x, int y) {
     return self.GetPopupMenuSelectionFromUser(menu, x, y);
 }
 inline bool wxWindow_PopupMenu(wxWindow & self, wxMenu * menu, const wxPoint & pos) {
     return self.PopupMenu(menu, pos);
 }
-inline bool wxWindow_PopupMenu(wxWindow & self, wxMenu * menu, int x, int y) {
+inline bool wxWindow_PopupMenu1(wxWindow & self, wxMenu * menu, int x, int y) {
     return self.PopupMenu(menu, x, y);
 }
 inline wxValidator * wxWindow_GetValidator(wxWindow & self) {
@@ -897,7 +897,7 @@ inline void wxWindow_UnreserveControlId(wxWindowID id, int count) {
 inline wxWindow *wxWindow_new() {
     return new wxWindow();
 }
-inline wxWindow *wxWindow_new(wxWindow * parent, wxWindowID id, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
+inline wxWindow *wxWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
     return new wxWindow(parent, id, pos, size, style, name);
 }
 inline bool wxWindow_Create(wxWindow & self, wxWindow * parent, wxWindowID id, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
@@ -908,7 +908,7 @@ inline bool wxWindow_Create(wxWindow & self, wxWindow * parent, wxWindowID id, c
 inline wxControl *wxControl_new(wxWindow * parent, wxWindowID id, const wxPoint & pos, const wxSize & size, int32_t style, const wxValidator & validator, const wxString & name) {
     return new wxControl(parent, id, pos, size, style, validator, name);
 }
-inline wxControl *wxControl_new() {
+inline wxControl *wxControl_new1() {
     return new wxControl();
 }
 inline bool wxControl_Create(wxControl & self, wxWindow * parent, wxWindowID id, const wxPoint & pos, const wxSize & size, int32_t style, const wxValidator & validator, const wxString & name) {
@@ -926,7 +926,7 @@ inline wxString *wxControl_GetLabelText(const wxControl & self) {
 inline wxSize *wxControl_GetSizeFromTextSize(const wxControl & self, int xlen, int ylen) {
     return new wxSize(self.GetSizeFromTextSize(xlen, ylen));
 }
-inline wxSize *wxControl_GetSizeFromTextSize(const wxControl & self, const wxSize & tsize) {
+inline wxSize *wxControl_GetSizeFromTextSize1(const wxControl & self, const wxSize & tsize) {
     return new wxSize(self.GetSizeFromTextSize(tsize));
 }
 inline wxSize *wxControl_GetSizeFromText(const wxControl & self, const wxString & text) {
@@ -941,7 +941,7 @@ inline void wxControl_SetLabelText(wxControl & self, const wxString & text) {
 inline bool wxControl_SetLabelMarkup(wxControl & self, const wxString & markup) {
     return self.SetLabelMarkup(markup);
 }
-inline wxString *wxControl_GetLabelText(const wxString & label) {
+inline wxString *wxControl_GetLabelText1(const wxString & label) {
     return new wxString(wxControl::GetLabelText(label));
 }
 inline wxString *wxControl_RemoveMnemonics(const wxString & str) {
@@ -976,7 +976,7 @@ inline wxSize *wxAnyButton_GetBitmapMargins(wxAnyButton & self) {
 inline void wxAnyButton_SetBitmapMargins(wxAnyButton & self, wxCoord x, wxCoord y) {
     return self.SetBitmapMargins(x, y);
 }
-inline void wxAnyButton_SetBitmapMargins(wxAnyButton & self, const wxSize & sz) {
+inline void wxAnyButton_SetBitmapMargins1(wxAnyButton & self, const wxSize & sz) {
     return self.SetBitmapMargins(sz);
 }
 
@@ -984,7 +984,7 @@ inline void wxAnyButton_SetBitmapMargins(wxAnyButton & self, const wxSize & sz) 
 inline wxButton *wxButton_new() {
     return new wxButton();
 }
-inline wxButton *wxButton_new(wxWindow * parent, wxWindowID id, const wxString & label, const wxPoint & pos, const wxSize & size, int32_t style, const wxValidator & validator, const wxString & name) {
+inline wxButton *wxButton_new1(wxWindow * parent, wxWindowID id, const wxString & label, const wxPoint & pos, const wxSize & size, int32_t style, const wxValidator & validator, const wxString & name) {
     return new wxButton(parent, id, label, pos, size, style, validator, name);
 }
 inline bool wxButton_Create(wxButton & self, wxWindow * parent, wxWindowID id, const wxString & label, const wxPoint & pos, const wxSize & size, int32_t style, const wxValidator & validator, const wxString & name) {
@@ -1013,7 +1013,7 @@ inline wxSize *wxButton_GetDefaultSize(wxWindow * win) {
 inline bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow & self, const wxRegion & region) {
     return self.SetShape(region);
 }
-inline bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow & self, const wxGraphicsPath & path) {
+inline bool wxNonOwnedWindow_SetShape1(wxNonOwnedWindow & self, const wxGraphicsPath & path) {
     return self.SetShape(path);
 }
 
@@ -1021,7 +1021,7 @@ inline bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow & self, const wxGraphicsP
 inline wxTopLevelWindow *wxTopLevelWindow_new() {
     return new wxTopLevelWindow();
 }
-inline wxTopLevelWindow *wxTopLevelWindow_new(wxWindow * parent, wxWindowID id, const wxString & title, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
+inline wxTopLevelWindow *wxTopLevelWindow_new1(wxWindow * parent, wxWindowID id, const wxString & title, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
     return new wxTopLevelWindow(parent, id, title, pos, size, style, name);
 }
 inline bool wxTopLevelWindow_Create(wxTopLevelWindow & self, wxWindow * parent, wxWindowID id, const wxString & title, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
@@ -1105,7 +1105,7 @@ inline void wxTopLevelWindow_SetMinSize(wxTopLevelWindow & self, const wxSize & 
 inline void wxTopLevelWindow_SetSizeHints(wxTopLevelWindow & self, int min_w, int min_h, int max_w, int max_h, int inc_w, int inc_h) {
     return self.SetSizeHints(min_w, min_h, max_w, max_h, inc_w, inc_h);
 }
-inline void wxTopLevelWindow_SetSizeHints(wxTopLevelWindow & self, const wxSize & min_size, const wxSize & max_size, const wxSize & inc_size) {
+inline void wxTopLevelWindow_SetSizeHints1(wxTopLevelWindow & self, const wxSize & min_size, const wxSize & max_size, const wxSize & inc_size) {
     return self.SetSizeHints(min_size, max_size, inc_size);
 }
 inline void wxTopLevelWindow_SetTitle(wxTopLevelWindow & self, const wxString & title) {
@@ -1143,7 +1143,7 @@ inline wxSize *wxTopLevelWindow_GetDefaultSize() {
 inline wxFrame *wxFrame_new() {
     return new wxFrame();
 }
-inline wxFrame *wxFrame_new(wxWindow * parent, wxWindowID id, const wxString & title, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
+inline wxFrame *wxFrame_new1(wxWindow * parent, wxWindowID id, const wxString & title, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
     return new wxFrame(parent, id, title, pos, size, style, name);
 }
 inline void wxFrame_Centre(wxFrame & self, int direction) {
@@ -1220,10 +1220,10 @@ inline void wxPoint_SetDefaults(wxPoint & self, const wxPoint & pt) {
 inline wxPoint *wxPoint_new() {
     return new wxPoint();
 }
-inline wxPoint *wxPoint_new(int x, int y) {
+inline wxPoint *wxPoint_new1(int x, int y) {
     return new wxPoint(x, y);
 }
-inline wxPoint *wxPoint_new(const wxRealPoint & pt) {
+inline wxPoint *wxPoint_new2(const wxRealPoint & pt) {
     return new wxPoint(pt);
 }
 
@@ -1231,16 +1231,16 @@ inline wxPoint *wxPoint_new(const wxRealPoint & pt) {
 inline wxRect *wxRect_new() {
     return new wxRect();
 }
-inline wxRect *wxRect_new(int x, int y, int width, int height) {
+inline wxRect *wxRect_new1(int x, int y, int width, int height) {
     return new wxRect(x, y, width, height);
 }
-inline wxRect *wxRect_new(const wxPoint & top_left, const wxPoint & bottom_right) {
+inline wxRect *wxRect_new2(const wxPoint & top_left, const wxPoint & bottom_right) {
     return new wxRect(top_left, bottom_right);
 }
-inline wxRect *wxRect_new(const wxPoint & pos, const wxSize & size) {
+inline wxRect *wxRect_new3(const wxPoint & pos, const wxSize & size) {
     return new wxRect(pos, size);
 }
-inline wxRect *wxRect_new(const wxSize & size) {
+inline wxRect *wxRect_new4(const wxSize & size) {
     return new wxRect(size);
 }
 inline wxRect *wxRect_CentreIn(const wxRect & self, const wxRect & r, int dir) {
@@ -1252,13 +1252,13 @@ inline wxRect *wxRect_CenterIn(const wxRect & self, const wxRect & r, int dir) {
 inline bool wxRect_Contains(const wxRect & self, int x, int y) {
     return self.Contains(x, y);
 }
-inline bool wxRect_Contains(const wxRect & self, const wxPoint & pt) {
+inline bool wxRect_Contains1(const wxRect & self, const wxPoint & pt) {
     return self.Contains(pt);
 }
-inline bool wxRect_Contains(const wxRect & self, const wxRect & rect) {
+inline bool wxRect_Contains2(const wxRect & self, const wxRect & rect) {
     return self.Contains(rect);
 }
-inline wxRect *wxRect_Deflate(const wxRect & self, wxCoord dx, wxCoord dy) {
+inline wxRect *wxRect_Deflate3(const wxRect & self, wxCoord dx, wxCoord dy) {
     return new wxRect(self.Deflate(dx, dy));
 }
 inline int wxRect_GetBottom(const wxRect & self) {
@@ -1303,10 +1303,10 @@ inline int wxRect_GetX(const wxRect & self) {
 inline int wxRect_GetY(const wxRect & self) {
     return self.GetY();
 }
-inline wxRect *wxRect_Inflate(const wxRect & self, wxCoord dx, wxCoord dy) {
+inline wxRect *wxRect_Inflate3(const wxRect & self, wxCoord dx, wxCoord dy) {
     return new wxRect(self.Inflate(dx, dy));
 }
-inline wxRect *wxRect_Intersect(const wxRect & self, const wxRect & rect) {
+inline wxRect *wxRect_Intersect1(const wxRect & self, const wxRect & rect) {
     return new wxRect(self.Intersect(rect));
 }
 inline bool wxRect_Intersects(const wxRect & self, const wxRect & rect) {
@@ -1318,7 +1318,7 @@ inline bool wxRect_IsEmpty(const wxRect & self) {
 inline void wxRect_Offset(wxRect & self, wxCoord dx, wxCoord dy) {
     return self.Offset(dx, dy);
 }
-inline void wxRect_Offset(wxRect & self, const wxPoint & pt) {
+inline void wxRect_Offset1(wxRect & self, const wxPoint & pt) {
     return self.Offset(pt);
 }
 inline void wxRect_SetHeight(wxRect & self, int height) {
@@ -1371,19 +1371,19 @@ inline wxRect *wxRect_Union(const wxRect & self, const wxRect & rect) {
 inline wxSize *wxSize_new() {
     return new wxSize();
 }
-inline wxSize *wxSize_new(int width, int height) {
+inline wxSize *wxSize_new1(int width, int height) {
     return new wxSize(width, height);
 }
 inline void wxSize_DecBy(wxSize & self, const wxPoint & pt) {
     return self.DecBy(pt);
 }
-inline void wxSize_DecBy(wxSize & self, const wxSize & size) {
+inline void wxSize_DecBy1(wxSize & self, const wxSize & size) {
     return self.DecBy(size);
 }
-inline void wxSize_DecBy(wxSize & self, int dx, int dy) {
+inline void wxSize_DecBy2(wxSize & self, int dx, int dy) {
     return self.DecBy(dx, dy);
 }
-inline void wxSize_DecBy(wxSize & self, int d) {
+inline void wxSize_DecBy3(wxSize & self, int d) {
     return self.DecBy(d);
 }
 inline void wxSize_DecTo(wxSize & self, const wxSize & size) {
@@ -1401,13 +1401,13 @@ inline int wxSize_GetWidth(const wxSize & self) {
 inline void wxSize_IncBy(wxSize & self, const wxPoint & pt) {
     return self.IncBy(pt);
 }
-inline void wxSize_IncBy(wxSize & self, const wxSize & size) {
+inline void wxSize_IncBy1(wxSize & self, const wxSize & size) {
     return self.IncBy(size);
 }
-inline void wxSize_IncBy(wxSize & self, int dx, int dy) {
+inline void wxSize_IncBy2(wxSize & self, int dx, int dy) {
     return self.IncBy(dx, dy);
 }
-inline void wxSize_IncBy(wxSize & self, int d) {
+inline void wxSize_IncBy3(wxSize & self, int d) {
     return self.IncBy(d);
 }
 inline void wxSize_IncTo(wxSize & self, const wxSize & size) {
