@@ -120,7 +120,7 @@ def generate_define(e, f):
     if initializer is not None:
         v = ''.join(initializer.itertext())
         v = ''.join(map(lambda s: s.lstrip(), v.split('\\\n')))
-        t = 'i32'
+        t = 'c_int'
         if name in u32types:
             t = 'u32'
         if v == 'true' or v == 'false':
@@ -232,7 +232,7 @@ def generate_enum(e, f):
             current_initializer = initializer
             count = 1
         initializer = initializer.replace('~', '!') # special replacement for wxPATH_NORM_ALL
-        t = 'i32'
+        t = 'c_int'
         if name in u32types:
             t = 'u32'
         if "'" in initializer:
