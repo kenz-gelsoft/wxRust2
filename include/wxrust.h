@@ -5,18 +5,7 @@
 #include "wx/src/lib.rs.h"
 
 
-namespace wxrust {
-
 using UnsafeAnyPtr = const char *;
-
-// wxApp
-void AppSetOnInit(
-    UnsafeAnyPtr aFn,
-    UnsafeAnyPtr aParam
-);
-class App : public wxApp {
-    virtual bool OnInit();
-};
 
 // wxEvtHandler
 template <typename T>
@@ -42,6 +31,17 @@ public:
     }
 };
 
+extern "C" {
+
+// wxApp
+void AppSetOnInit(
+    UnsafeAnyPtr aFn,
+    UnsafeAnyPtr aParam
+);
+class App : public wxApp {
+    virtual bool OnInit();
+};
+
 // TODO: auto generate
 #define wxRUST_EVT_BUTTON 0
 
@@ -52,4 +52,4 @@ wxString *wxString_new(const unsigned char *aString, size_t aLen);
 
 int wxRustEntry(int *argc, char **argv);
 
-} // namespace wxrust
+} // extern "C"

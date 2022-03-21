@@ -1,6 +1,6 @@
 use std::convert::TryInto;
 use std::mem;
-use std::os::raw::c_char;
+use std::os::raw::{c_char, c_void};
 use std::ptr;
 
 mod macros;
@@ -28,26 +28,29 @@ mod ffi {
         type wxString;
     }
 
-    unsafe extern "C++" {
-        unsafe fn AppSetOnInit(
+}
+mod ffi2 {
+    use std::os::raw::{c_char, c_void};
+    extern "C" {
+        pub fn AppSetOnInit(
             aFn: *const c_char,
             aParam: *const c_char
         );
-        unsafe fn wxEvtHandler_Bind(
-            self_: *mut wxEvtHandler,
+        pub fn wxEvtHandler_Bind(
+            self_: *mut c_void,
             eventType: i32,
             aFn: *const c_char,
             aParam: *const c_char
         );
 
-        unsafe fn wxString_new(psz: *const u8, nLength: usize) -> *mut wxString;
-        unsafe fn wxRustEntry(argc: *mut i32, argv: *mut *mut c_char) -> i32;
+        pub fn wxString_new(psz: *const u8, nLength: usize) -> *mut c_void;
+        pub fn wxRustEntry(argc: *mut i32, argv: *mut *mut c_char) -> i32;
     }
 }
 
 pub struct WxString(*mut ffi::wxString);
-pub unsafe fn wx_string_from(s: &str) -> *mut ffi::wxString {
-    return ffi::wxString_new(s.as_ptr(), s.len())
+pub unsafe fn wx_string_from(s: &str) -> *const ffi::wxString {
+    return ffi2::wxString_new(s.as_ptr(), s.len()) as _
 }
 
 // Rust closure to wx calablle function+param pair.
@@ -71,7 +74,7 @@ impl<T: EvtHandlerMethods> Bindable for T {
     fn bind<F: Fn() + 'static>(&self, event_type: i32, closure: F) {
         unsafe {
             let (f, param) = to_wx_callable(closure);
-            ffi::wxEvtHandler_Bind(self.as_ptr() as *mut ffi::wxEvtHandler, event_type, f, param);
+            ffi2::wxEvtHandler_Bind(self.as_ptr() as *mut c_void, event_type, f, param);
         }
     }
 }
@@ -82,7 +85,7 @@ impl App {
     pub fn on_init<F: Fn() + 'static>(closure: F) {
         unsafe {
             let (f, param) = to_wx_callable(closure);
-            ffi::AppSetOnInit(f, param);
+            ffi2::AppSetOnInit(f, param);
         }
     }
     pub fn run<F: Fn() + 'static>(closure: F) {
@@ -114,6 +117,6 @@ pub fn entry() {
     argv.push(ptr::null_mut()); // Nul terminator.
     let mut argc: i32 = args.len().try_into().unwrap();
     unsafe {
-        ffi::wxRustEntry(&mut argc, argv.as_mut_ptr());
+        ffi2::wxRustEntry(&mut argc, argv.as_mut_ptr());
     }
 }

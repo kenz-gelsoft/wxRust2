@@ -1,7 +1,5 @@
 #include "wx/include/wxrust.h"
 
-namespace wxrust {
-
 // wxApp
 wxIMPLEMENT_APP_NO_MAIN(App);
 
@@ -36,5 +34,3 @@ wxString *wxString_new(const unsigned char *psz, const size_t nLength) {
 int wxRustEntry(int *argc, char **argv) {
     return wxEntry(*argc, argv);
 }
-
-} // namespace wxrust
