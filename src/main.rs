@@ -1,5 +1,3 @@
-use std::os::raw::c_long;
-
 use wx;
 use wx::*;
 

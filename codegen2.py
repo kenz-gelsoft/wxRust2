@@ -47,7 +47,7 @@ mod ffi {
     bindings = [RustClassBinding(cls) for cls in classes]
     indent = ' ' * 4 * 2
     for cls in bindings:
-        for line in cls.ffi_lines(for_shim=True):
+        for line in cls.ffi_lines():
             yield '%s%s' % (indent, line)
     yield '''\
     }
@@ -71,7 +71,7 @@ extern "C" {
 '''
     for cls in classes:
         binding = CxxClassBinding(cls)
-        for line in binding.shims():
+        for line in binding.lines():
             yield line
     yield '''\
 } // extern "C"
@@ -85,7 +85,7 @@ extern "C" {
 '''
     for cls in classes:
         binding = CxxClassBinding(cls)
-        for line in binding.shims(is_cc=True):
+        for line in binding.lines(is_cc=True):
             yield line
     yield '''\
 } // extern "C"

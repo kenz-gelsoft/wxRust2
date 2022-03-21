@@ -72,25 +72,29 @@ class Method:
             pname = param.findtext('declname')
             self.params.append(Param(ptype, pname))
 
-    def needs_shim(self):
-        if self.is_blocked() or self.uses_unsupported_type():
-            return False
-        return True
-    
+    def suppressed_reason(self):
+        if self.is_blocked():
+            return 'BLOCKED'
+        if self.name().startswith('~'):
+            return 'DTOR'
+        if self.uses_unsupported_type():
+            return 'CXX_UNSUPPORTED'
+        return None
+
     def uses_unsupported_type(self):
         if self.returns.not_supported():
             return True
         return any(p.type.not_supported() for p in self.params)
 
     def is_blocked(self):
-        return self.cls.is_blocked_method(self.name(for_shim=False))
+        return self.cls.is_blocked_method(self.name())
 
     def _overload_index(self):
         return sum(m.__name == self.__name for m in self.cls.methods)
 
-    def name(self, for_shim, without_index=False):
+    def name(self, for_ffi=False, without_index=False):
         name = self.__name
-        if for_shim:
+        if for_ffi:
             if self.is_ctor:
                 name = 'new'
             name = '_'.join((
