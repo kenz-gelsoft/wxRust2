@@ -3,10 +3,12 @@
 #![allow(non_snake_case)]
 #![allow(non_upper_case_globals)]
 
+use std::os::raw::c_long;
+
 // TODO auto generate
 pub const wxRUST_EVT_BUTTON: i32 = 0;
 
-pub const fn wxPG_IT_CHILDREN(A: u32) -> u32 {
+pub const fn wxPG_IT_CHILDREN(A: c_long) -> c_long {
     (A) << 16
 }
 
