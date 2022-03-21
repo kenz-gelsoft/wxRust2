@@ -2,6 +2,8 @@
 #![allow(non_upper_case_globals)]
 #![allow(unused_parens)]
 
+use std::os::raw::c_int;
+
 use crate::manual::*;
 
 pub const wxNB_DEFAULT: c_int = wxBK_DEFAULT;
