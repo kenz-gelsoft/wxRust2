@@ -108,7 +108,7 @@ class RustMethodBinding:
             self._rust_params(for_shim=True),
             self._returns_or_not(),
         )
-        suppressed = self._suppressed_reason(suppress_shim=False)
+        suppressed = self._suppressed_reason()
         if suppressed:
             yield '// %s: %s' % (suppressed, body)
         yield body
@@ -144,9 +144,7 @@ class RustMethodBinding:
         return generic_params
 
     def binding_lines(self):
-        suppress = self._suppressed_reason(
-            suppress_shim=False,
-        )
+        suppress = self._suppressed_reason()
         if suppress:
             yield '// %s: fn %s()' % (
                 suppress,
@@ -197,16 +195,16 @@ class RustMethodBinding:
             params.insert(0, self_to_insert)
         return ', '.join(params)
 
-    def _suppressed_reason(self, suppress_shim=True):
+    def _suppressed_reason(self):
         if self.__model.is_blocked():
             return 'BLOCKED'
         if self.__model.is_ctor:
-            if suppress_shim:
+            if False:
                 return 'CTOR'
         if self.__is_dtor:
             return 'DTOR'
         if self.__model.needs_shim():
-            if suppress_shim:
+            if False:
                 return 'GENERATED'
         if self.__model.uses_unsupported_type():
             return 'CXX_UNSUPPORTED'
