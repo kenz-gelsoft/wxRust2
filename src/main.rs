@@ -1,3 +1,5 @@
+use std::os::raw::c_long;
+
 use wx;
 use wx::*;
 
@@ -5,7 +7,7 @@ fn main() {
     wx::App::run(|| {
         let frame = Frame::new1(Window::none(), wxID_ANY, "Hello, 世界", 
                 &Point::default(), &Size::default(),
-                wxDEFAULT_FRAME_STYLE as i32, "");
+                wxDEFAULT_FRAME_STYLE as c_long, "");
         let button = Button::new1(Some(&frame), wxID_ANY, "Greet",
                 &Point::default(), &Size::default(), 0,
                 &Validator::default(), "");

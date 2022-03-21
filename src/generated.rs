@@ -2,13 +2,13 @@
 #![allow(non_upper_case_globals)]
 #![allow(unused_parens)]
 
-use std::os::raw::c_void;
+use std::os::raw::{c_long, c_void};
 use std::ptr;
 
 use crate::macros::wx_class;
 
 mod ffi {
-    use std::os::raw::c_void;
+    use std::os::raw::{c_long, c_void};
     extern "C" {
         // CLASS: wxObject
         pub fn wxObject_new() -> *mut c_void;
@@ -57,7 +57,7 @@ mod ffi {
         pub fn wxWindow_SetFocusFromKbd(self_: *mut c_void);
         pub fn wxWindow_AddChild(self_: *mut c_void, child: *mut c_void);
         pub fn wxWindow_DestroyChildren(self_: *mut c_void) -> bool;
-        pub fn wxWindow_FindWindow(self_: *const c_void, id: i32) -> *mut c_void;
+        pub fn wxWindow_FindWindow(self_: *const c_void, id: c_long) -> *mut c_void;
         pub fn wxWindow_FindWindow1(self_: *const c_void, name: *const c_void) -> *mut c_void;
         pub fn wxWindow_RemoveChild(self_: *mut c_void, child: *mut c_void);
         pub fn wxWindow_GetGrandParent(self_: *const c_void) -> *mut c_void;
@@ -212,14 +212,14 @@ mod ffi {
         pub fn wxWindow_SetEventHandler(self_: *mut c_void, handler: *mut c_void);
         pub fn wxWindow_SetNextHandler(self_: *mut c_void, handler: *mut c_void);
         pub fn wxWindow_SetPreviousHandler(self_: *mut c_void, handler: *mut c_void);
-        pub fn wxWindow_GetExtraStyle(self_: *const c_void) -> i32;
-        pub fn wxWindow_GetWindowStyleFlag(self_: *const c_void) -> i32;
-        pub fn wxWindow_GetWindowStyle(self_: *const c_void) -> i32;
+        pub fn wxWindow_GetExtraStyle(self_: *const c_void) -> c_long;
+        pub fn wxWindow_GetWindowStyleFlag(self_: *const c_void) -> c_long;
+        pub fn wxWindow_GetWindowStyle(self_: *const c_void) -> c_long;
         pub fn wxWindow_HasExtraStyle(self_: *const c_void, ex_flag: i32) -> bool;
         pub fn wxWindow_HasFlag(self_: *const c_void, flag: i32) -> bool;
-        pub fn wxWindow_SetExtraStyle(self_: *mut c_void, ex_style: i32);
-        pub fn wxWindow_SetWindowStyleFlag(self_: *mut c_void, style: i32);
-        pub fn wxWindow_SetWindowStyle(self_: *mut c_void, style: i32);
+        pub fn wxWindow_SetExtraStyle(self_: *mut c_void, ex_style: c_long);
+        pub fn wxWindow_SetWindowStyleFlag(self_: *mut c_void, style: c_long);
+        pub fn wxWindow_SetWindowStyle(self_: *mut c_void, style: c_long);
         pub fn wxWindow_ToggleWindowStyle(self_: *mut c_void, flag: i32) -> bool;
         pub fn wxWindow_MoveAfterInTabOrder(self_: *mut c_void, win: *mut c_void);
         pub fn wxWindow_MoveBeforeInTabOrder(self_: *mut c_void, win: *mut c_void);
@@ -299,21 +299,21 @@ mod ffi {
         pub fn wxWindow_SendIdleEvents(self_: *mut c_void, event: *mut c_void) -> bool;
         pub fn wxWindow_RegisterHotKey(self_: *mut c_void, hotkey_id: i32, modifiers: i32, virtual_key_code: i32) -> bool;
         pub fn wxWindow_UnregisterHotKey(self_: *mut c_void, hotkey_id: i32) -> bool;
-        pub fn wxWindow_UpdateWindowUI(self_: *mut c_void, flags: i32);
+        pub fn wxWindow_UpdateWindowUI(self_: *mut c_void, flags: c_long);
         pub fn wxWindow_FindFocus() -> *mut c_void;
-        pub fn wxWindow_FindWindowById(id: i32, parent: *const c_void) -> *mut c_void;
+        pub fn wxWindow_FindWindowById(id: c_long, parent: *const c_void) -> *mut c_void;
         pub fn wxWindow_FindWindowByLabel(label: *const c_void, parent: *const c_void) -> *mut c_void;
         pub fn wxWindow_FindWindowByName(name: *const c_void, parent: *const c_void) -> *mut c_void;
         pub fn wxWindow_GetCapture() -> *mut c_void;
         pub fn wxWindow_NewControlId(count: i32) -> i32;
         pub fn wxWindow_UnreserveControlId(id: i32, count: i32);
         pub fn wxWindow_new() -> *mut c_void;
-        pub fn wxWindow_new1(parent: *mut c_void, id: i32, pos: *const c_void, size: *const c_void, style: i32, name: *const c_void) -> *mut c_void;
-        pub fn wxWindow_Create(self_: *mut c_void, parent: *mut c_void, id: i32, pos: *const c_void, size: *const c_void, style: i32, name: *const c_void) -> bool;
+        pub fn wxWindow_new1(parent: *mut c_void, id: i32, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> *mut c_void;
+        pub fn wxWindow_Create(self_: *mut c_void, parent: *mut c_void, id: i32, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> bool;
         // CLASS: wxControl
-        pub fn wxControl_new(parent: *mut c_void, id: i32, pos: *const c_void, size: *const c_void, style: i32, validator: *const c_void, name: *const c_void) -> *mut c_void;
+        pub fn wxControl_new(parent: *mut c_void, id: i32, pos: *const c_void, size: *const c_void, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
         pub fn wxControl_new1() -> *mut c_void;
-        pub fn wxControl_Create(self_: *mut c_void, parent: *mut c_void, id: i32, pos: *const c_void, size: *const c_void, style: i32, validator: *const c_void, name: *const c_void) -> bool;
+        pub fn wxControl_Create(self_: *mut c_void, parent: *mut c_void, id: i32, pos: *const c_void, size: *const c_void, style: c_long, validator: *const c_void, name: *const c_void) -> bool;
         pub fn wxControl_Command(self_: *mut c_void, event: *mut c_void);
         pub fn wxControl_GetLabel(self_: *const c_void) -> *mut c_void;
         pub fn wxControl_GetLabelText(self_: *const c_void) -> *mut c_void;
@@ -338,8 +338,8 @@ mod ffi {
         pub fn wxAnyButton_SetBitmapMargins1(self_: *mut c_void, sz: *const c_void);
         // CLASS: wxButton
         pub fn wxButton_new() -> *mut c_void;
-        pub fn wxButton_new1(parent: *mut c_void, id: i32, label: *const c_void, pos: *const c_void, size: *const c_void, style: i32, validator: *const c_void, name: *const c_void) -> *mut c_void;
-        pub fn wxButton_Create(self_: *mut c_void, parent: *mut c_void, id: i32, label: *const c_void, pos: *const c_void, size: *const c_void, style: i32, validator: *const c_void, name: *const c_void) -> bool;
+        pub fn wxButton_new1(parent: *mut c_void, id: i32, label: *const c_void, pos: *const c_void, size: *const c_void, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
+        pub fn wxButton_Create(self_: *mut c_void, parent: *mut c_void, id: i32, label: *const c_void, pos: *const c_void, size: *const c_void, style: c_long, validator: *const c_void, name: *const c_void) -> bool;
         pub fn wxButton_GetAuthNeeded(self_: *const c_void) -> bool;
         pub fn wxButton_GetLabel(self_: *const c_void) -> *mut c_void;
         pub fn wxButton_SetAuthNeeded(self_: *mut c_void, needed: bool);
@@ -351,8 +351,8 @@ mod ffi {
         pub fn wxNonOwnedWindow_SetShape1(self_: *mut c_void, path: *const c_void) -> bool;
         // CLASS: wxTopLevelWindow
         pub fn wxTopLevelWindow_new() -> *mut c_void;
-        pub fn wxTopLevelWindow_new1(parent: *mut c_void, id: i32, title: *const c_void, pos: *const c_void, size: *const c_void, style: i32, name: *const c_void) -> *mut c_void;
-        pub fn wxTopLevelWindow_Create(self_: *mut c_void, parent: *mut c_void, id: i32, title: *const c_void, pos: *const c_void, size: *const c_void, style: i32, name: *const c_void) -> bool;
+        pub fn wxTopLevelWindow_new1(parent: *mut c_void, id: i32, title: *const c_void, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> *mut c_void;
+        pub fn wxTopLevelWindow_Create(self_: *mut c_void, parent: *mut c_void, id: i32, title: *const c_void, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> bool;
         pub fn wxTopLevelWindow_CanSetTransparent(self_: *mut c_void) -> bool;
         pub fn wxTopLevelWindow_CenterOnScreen(self_: *mut c_void, direction: i32);
         pub fn wxTopLevelWindow_CentreOnScreen(self_: *mut c_void, direction: i32);
@@ -388,23 +388,23 @@ mod ffi {
         pub fn wxTopLevelWindow_SetRepresentedFilename(self_: *mut c_void, filename: *const c_void);
         pub fn wxTopLevelWindow_ShowWithoutActivating(self_: *mut c_void);
         pub fn wxTopLevelWindow_EnableFullScreenView(self_: *mut c_void, enable: bool) -> bool;
-        pub fn wxTopLevelWindow_ShowFullScreen(self_: *mut c_void, show: bool, style: i32) -> bool;
+        pub fn wxTopLevelWindow_ShowFullScreen(self_: *mut c_void, show: bool, style: c_long) -> bool;
         pub fn wxTopLevelWindow_GetDefaultSize() -> *mut c_void;
         // CLASS: wxFrame
         pub fn wxFrame_new() -> *mut c_void;
-        pub fn wxFrame_new1(parent: *mut c_void, id: i32, title: *const c_void, pos: *const c_void, size: *const c_void, style: i32, name: *const c_void) -> *mut c_void;
+        pub fn wxFrame_new1(parent: *mut c_void, id: i32, title: *const c_void, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> *mut c_void;
         pub fn wxFrame_Centre(self_: *mut c_void, direction: i32);
-        pub fn wxFrame_Create(self_: *mut c_void, parent: *mut c_void, id: i32, title: *const c_void, pos: *const c_void, size: *const c_void, style: i32, name: *const c_void) -> bool;
-        pub fn wxFrame_CreateStatusBar(self_: *mut c_void, number: i32, style: i32, id: i32, name: *const c_void) -> *mut c_void;
-        pub fn wxFrame_CreateToolBar(self_: *mut c_void, style: i32, id: i32, name: *const c_void) -> *mut c_void;
+        pub fn wxFrame_Create(self_: *mut c_void, parent: *mut c_void, id: i32, title: *const c_void, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> bool;
+        pub fn wxFrame_CreateStatusBar(self_: *mut c_void, number: i32, style: c_long, id: i32, name: *const c_void) -> *mut c_void;
+        pub fn wxFrame_CreateToolBar(self_: *mut c_void, style: c_long, id: i32, name: *const c_void) -> *mut c_void;
         pub fn wxFrame_DoGiveHelp(self_: *mut c_void, text: *const c_void, show: bool);
         pub fn wxFrame_GetClientAreaOrigin(self_: *const c_void) -> *mut c_void;
         pub fn wxFrame_GetMenuBar(self_: *const c_void) -> *mut c_void;
         pub fn wxFrame_GetStatusBar(self_: *const c_void) -> *mut c_void;
         pub fn wxFrame_GetStatusBarPane(self_: *const c_void) -> i32;
         pub fn wxFrame_GetToolBar(self_: *const c_void) -> *mut c_void;
-        pub fn wxFrame_OnCreateStatusBar(self_: *mut c_void, number: i32, style: i32, id: i32, name: *const c_void) -> *mut c_void;
-        pub fn wxFrame_OnCreateToolBar(self_: *mut c_void, style: i32, id: i32, name: *const c_void) -> *mut c_void;
+        pub fn wxFrame_OnCreateStatusBar(self_: *mut c_void, number: i32, style: c_long, id: i32, name: *const c_void) -> *mut c_void;
+        pub fn wxFrame_OnCreateToolBar(self_: *mut c_void, style: c_long, id: i32, name: *const c_void) -> *mut c_void;
         pub fn wxFrame_ProcessCommand(self_: *mut c_void, id: i32) -> bool;
         pub fn wxFrame_SetMenuBar(self_: *mut c_void, menu_bar: *mut c_void);
         pub fn wxFrame_SetStatusBar(self_: *mut c_void, status_bar: *mut c_void);
@@ -669,7 +669,7 @@ impl Window {
     pub fn new() -> Window {
         unsafe { Window(ffi::wxWindow_new()) }
     }
-    pub fn new1<T: WindowMethods>(parent: Option<&T>, id: i32, pos: &Point, size: &Size, style: i32, name: &str) -> Window {
+    pub fn new1<T: WindowMethods>(parent: Option<&T>, id: i32, pos: &Point, size: &Size, style: c_long, name: &str) -> Window {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -734,7 +734,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn destroy_children(&self) -> bool {
         unsafe { ffi::wxWindow_DestroyChildren(self.as_ptr()) }
     }
-    fn find_window(&self, id: i32) -> *mut c_void {
+    fn find_window(&self, id: c_long) -> *mut c_void {
         unsafe { ffi::wxWindow_FindWindow(self.as_ptr(), id) }
     }
     fn find_window1(&self, name: &str) -> *mut c_void {
@@ -1388,13 +1388,13 @@ pub trait WindowMethods: EvtHandlerMethods {
             ffi::wxWindow_SetPreviousHandler(self.as_ptr(), handler)
         }
     }
-    fn get_extra_style(&self) -> i32 {
+    fn get_extra_style(&self) -> c_long {
         unsafe { ffi::wxWindow_GetExtraStyle(self.as_ptr()) }
     }
-    fn get_window_style_flag(&self) -> i32 {
+    fn get_window_style_flag(&self) -> c_long {
         unsafe { ffi::wxWindow_GetWindowStyleFlag(self.as_ptr()) }
     }
-    fn get_window_style(&self) -> i32 {
+    fn get_window_style(&self) -> c_long {
         unsafe { ffi::wxWindow_GetWindowStyle(self.as_ptr()) }
     }
     fn has_extra_style(&self, ex_flag: i32) -> bool {
@@ -1403,13 +1403,13 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn has_flag(&self, flag: i32) -> bool {
         unsafe { ffi::wxWindow_HasFlag(self.as_ptr(), flag) }
     }
-    fn set_extra_style(&self, ex_style: i32) {
+    fn set_extra_style(&self, ex_style: c_long) {
         unsafe { ffi::wxWindow_SetExtraStyle(self.as_ptr(), ex_style) }
     }
-    fn set_window_style_flag(&self, style: i32) {
+    fn set_window_style_flag(&self, style: c_long) {
         unsafe { ffi::wxWindow_SetWindowStyleFlag(self.as_ptr(), style) }
     }
-    fn set_window_style(&self, style: i32) {
+    fn set_window_style(&self, style: c_long) {
         unsafe { ffi::wxWindow_SetWindowStyle(self.as_ptr(), style) }
     }
     fn toggle_window_style(&self, flag: i32) -> bool {
@@ -1697,14 +1697,14 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn unregister_hot_key(&self, hotkey_id: i32) -> bool {
         unsafe { ffi::wxWindow_UnregisterHotKey(self.as_ptr(), hotkey_id) }
     }
-    fn update_window_ui(&self, flags: i32) {
+    fn update_window_ui(&self, flags: c_long) {
         unsafe { ffi::wxWindow_UpdateWindowUI(self.as_ptr(), flags) }
     }
     // CXX_UNSUPPORTED: fn GetClassDefaultAttributes()
     fn find_focus() -> *mut c_void {
         unsafe { ffi::wxWindow_FindFocus() }
     }
-    fn find_window_by_id<T: WindowMethods>(id: i32, parent: Option<&T>) -> *mut c_void {
+    fn find_window_by_id<T: WindowMethods>(id: c_long, parent: Option<&T>) -> *mut c_void {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1743,7 +1743,7 @@ pub trait WindowMethods: EvtHandlerMethods {
         unsafe { ffi::wxWindow_UnreserveControlId(id, count) }
     }
     // DTOR: fn ~wxWindow()
-    fn create<T: WindowMethods>(&self, parent: Option<&T>, id: i32, pos: &Point, size: &Size, style: i32, name: &str) -> bool {
+    fn create<T: WindowMethods>(&self, parent: Option<&T>, id: i32, pos: &Point, size: &Size, style: c_long, name: &str) -> bool {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1765,7 +1765,7 @@ wx_class! { Control(wxControl) impl
     ObjectMethods
 }
 impl Control {
-    pub fn new<T: WindowMethods>(parent: Option<&T>, id: i32, pos: &Point, size: &Size, style: i32, validator: &Validator, name: &str) -> Control {
+    pub fn new<T: WindowMethods>(parent: Option<&T>, id: i32, pos: &Point, size: &Size, style: c_long, validator: &Validator, name: &str) -> Control {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1786,7 +1786,7 @@ impl Control {
     }
 }
 pub trait ControlMethods: WindowMethods {
-    fn create<T: WindowMethods>(&self, parent: Option<&T>, id: i32, pos: &Point, size: &Size, style: i32, validator: &Validator, name: &str) -> bool {
+    fn create<T: WindowMethods>(&self, parent: Option<&T>, id: i32, pos: &Point, size: &Size, style: c_long, validator: &Validator, name: &str) -> bool {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1930,7 +1930,7 @@ impl Button {
     pub fn new() -> Button {
         unsafe { Button(ffi::wxButton_new()) }
     }
-    pub fn new1<T: WindowMethods>(parent: Option<&T>, id: i32, label: &str, pos: &Point, size: &Size, style: i32, validator: &Validator, name: &str) -> Button {
+    pub fn new1<T: WindowMethods>(parent: Option<&T>, id: i32, label: &str, pos: &Point, size: &Size, style: c_long, validator: &Validator, name: &str) -> Button {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1949,7 +1949,7 @@ impl Button {
     }
 }
 pub trait ButtonMethods: AnyButtonMethods {
-    fn create<T: WindowMethods>(&self, parent: Option<&T>, id: i32, label: &str, pos: &Point, size: &Size, style: i32, validator: &Validator, name: &str) -> bool {
+    fn create<T: WindowMethods>(&self, parent: Option<&T>, id: i32, label: &str, pos: &Point, size: &Size, style: c_long, validator: &Validator, name: &str) -> bool {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2025,7 +2025,7 @@ impl TopLevelWindow {
     pub fn new() -> TopLevelWindow {
         unsafe { TopLevelWindow(ffi::wxTopLevelWindow_new()) }
     }
-    pub fn new1<T: WindowMethods>(parent: Option<&T>, id: i32, title: &str, pos: &Point, size: &Size, style: i32, name: &str) -> TopLevelWindow {
+    pub fn new1<T: WindowMethods>(parent: Option<&T>, id: i32, title: &str, pos: &Point, size: &Size, style: c_long, name: &str) -> TopLevelWindow {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2044,7 +2044,7 @@ impl TopLevelWindow {
 }
 pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     // DTOR: fn ~wxTopLevelWindow()
-    fn create<T: WindowMethods>(&self, parent: Option<&T>, id: i32, title: &str, pos: &Point, size: &Size, style: i32, name: &str) -> bool {
+    fn create<T: WindowMethods>(&self, parent: Option<&T>, id: i32, title: &str, pos: &Point, size: &Size, style: c_long, name: &str) -> bool {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2197,7 +2197,7 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     fn enable_full_screen_view(&self, enable: bool) -> bool {
         unsafe { ffi::wxTopLevelWindow_EnableFullScreenView(self.as_ptr(), enable) }
     }
-    fn show_full_screen(&self, show: bool, style: i32) -> bool {
+    fn show_full_screen(&self, show: bool, style: c_long) -> bool {
         unsafe { ffi::wxTopLevelWindow_ShowFullScreen(self.as_ptr(), show, style) }
     }
     // BLOCKED: fn UseNativeDecorations()
@@ -2220,7 +2220,7 @@ impl Frame {
     pub fn new() -> Frame {
         unsafe { Frame(ffi::wxFrame_new()) }
     }
-    pub fn new1<T: WindowMethods>(parent: Option<&T>, id: i32, title: &str, pos: &Point, size: &Size, style: i32, name: &str) -> Frame {
+    pub fn new1<T: WindowMethods>(parent: Option<&T>, id: i32, title: &str, pos: &Point, size: &Size, style: c_long, name: &str) -> Frame {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2242,7 +2242,7 @@ pub trait FrameMethods: TopLevelWindowMethods {
     fn centre(&self, direction: i32) {
         unsafe { ffi::wxFrame_Centre(self.as_ptr(), direction) }
     }
-    fn create<T: WindowMethods>(&self, parent: Option<&T>, id: i32, title: &str, pos: &Point, size: &Size, style: i32, name: &str) -> bool {
+    fn create<T: WindowMethods>(&self, parent: Option<&T>, id: i32, title: &str, pos: &Point, size: &Size, style: c_long, name: &str) -> bool {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2255,13 +2255,13 @@ pub trait FrameMethods: TopLevelWindowMethods {
             ffi::wxFrame_Create(self.as_ptr(), parent, id, title, pos, size, style, name)
         }
     }
-    fn create_status_bar(&self, number: i32, style: i32, id: i32, name: &str) -> *mut c_void {
+    fn create_status_bar(&self, number: i32, style: c_long, id: i32, name: &str) -> *mut c_void {
         unsafe {
             let name = crate::wx_string_from(name);
             ffi::wxFrame_CreateStatusBar(self.as_ptr(), number, style, id, name)
         }
     }
-    fn create_tool_bar(&self, style: i32, id: i32, name: &str) -> *mut c_void {
+    fn create_tool_bar(&self, style: c_long, id: i32, name: &str) -> *mut c_void {
         unsafe {
             let name = crate::wx_string_from(name);
             ffi::wxFrame_CreateToolBar(self.as_ptr(), style, id, name)
@@ -2288,13 +2288,13 @@ pub trait FrameMethods: TopLevelWindowMethods {
     fn get_tool_bar(&self) -> *mut c_void {
         unsafe { ffi::wxFrame_GetToolBar(self.as_ptr()) }
     }
-    fn on_create_status_bar(&self, number: i32, style: i32, id: i32, name: &str) -> *mut c_void {
+    fn on_create_status_bar(&self, number: i32, style: c_long, id: i32, name: &str) -> *mut c_void {
         unsafe {
             let name = crate::wx_string_from(name);
             ffi::wxFrame_OnCreateStatusBar(self.as_ptr(), number, style, id, name)
         }
     }
-    fn on_create_tool_bar(&self, style: i32, id: i32, name: &str) -> *mut c_void {
+    fn on_create_tool_bar(&self, style: c_long, id: i32, name: &str) -> *mut c_void {
         unsafe {
             let name = crate::wx_string_from(name);
             ffi::wxFrame_OnCreateToolBar(self.as_ptr(), style, id, name)

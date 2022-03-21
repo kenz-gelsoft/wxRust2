@@ -139,7 +139,7 @@ void wxWindow_AddChild(wxWindow * self, wxWindow * child) {
 bool wxWindow_DestroyChildren(wxWindow * self) {
     return self->DestroyChildren();
 }
-wxWindow * wxWindow_FindWindow(const wxWindow * self, int32_t id) {
+wxWindow * wxWindow_FindWindow(const wxWindow * self, long id) {
     return self->FindWindow(id);
 }
 wxWindow * wxWindow_FindWindow1(const wxWindow * self, const wxString * name) {
@@ -604,13 +604,13 @@ void wxWindow_SetNextHandler(wxWindow * self, wxEvtHandler * handler) {
 void wxWindow_SetPreviousHandler(wxWindow * self, wxEvtHandler * handler) {
     return self->SetPreviousHandler(handler);
 }
-int32_t wxWindow_GetExtraStyle(const wxWindow * self) {
+long wxWindow_GetExtraStyle(const wxWindow * self) {
     return self->GetExtraStyle();
 }
-int32_t wxWindow_GetWindowStyleFlag(const wxWindow * self) {
+long wxWindow_GetWindowStyleFlag(const wxWindow * self) {
     return self->GetWindowStyleFlag();
 }
-int32_t wxWindow_GetWindowStyle(const wxWindow * self) {
+long wxWindow_GetWindowStyle(const wxWindow * self) {
     return self->GetWindowStyle();
 }
 bool wxWindow_HasExtraStyle(const wxWindow * self, int ex_flag) {
@@ -619,13 +619,13 @@ bool wxWindow_HasExtraStyle(const wxWindow * self, int ex_flag) {
 bool wxWindow_HasFlag(const wxWindow * self, int flag) {
     return self->HasFlag(flag);
 }
-void wxWindow_SetExtraStyle(wxWindow * self, int32_t ex_style) {
+void wxWindow_SetExtraStyle(wxWindow * self, long ex_style) {
     return self->SetExtraStyle(ex_style);
 }
-void wxWindow_SetWindowStyleFlag(wxWindow * self, int32_t style) {
+void wxWindow_SetWindowStyleFlag(wxWindow * self, long style) {
     return self->SetWindowStyleFlag(style);
 }
-void wxWindow_SetWindowStyle(wxWindow * self, int32_t style) {
+void wxWindow_SetWindowStyle(wxWindow * self, long style) {
     return self->SetWindowStyle(style);
 }
 bool wxWindow_ToggleWindowStyle(wxWindow * self, int flag) {
@@ -865,13 +865,13 @@ bool wxWindow_RegisterHotKey(wxWindow * self, int hotkey_id, int modifiers, int 
 bool wxWindow_UnregisterHotKey(wxWindow * self, int hotkey_id) {
     return self->UnregisterHotKey(hotkey_id);
 }
-void wxWindow_UpdateWindowUI(wxWindow * self, int32_t flags) {
+void wxWindow_UpdateWindowUI(wxWindow * self, long flags) {
     return self->UpdateWindowUI(flags);
 }
 wxWindow * wxWindow_FindFocus() {
     return wxWindow::FindFocus();
 }
-wxWindow * wxWindow_FindWindowById(int32_t id, const wxWindow * parent) {
+wxWindow * wxWindow_FindWindowById(long id, const wxWindow * parent) {
     return wxWindow::FindWindowById(id, parent);
 }
 wxWindow * wxWindow_FindWindowByLabel(const wxString * label, const wxWindow * parent) {
@@ -892,21 +892,21 @@ void wxWindow_UnreserveControlId(wxWindowID id, int count) {
 wxWindow *wxWindow_new() {
     return new wxWindow();
 }
-wxWindow *wxWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, int32_t style, const wxString * name) {
+wxWindow *wxWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return new wxWindow(parent, id, *pos, *size, style, *name);
 }
-bool wxWindow_Create(wxWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, int32_t style, const wxString * name) {
+bool wxWindow_Create(wxWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return self->Create(parent, id, *pos, *size, style, *name);
 }
 
 // CLASS: wxControl
-wxControl *wxControl_new(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, int32_t style, const wxValidator * validator, const wxString * name) {
+wxControl *wxControl_new(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
     return new wxControl(parent, id, *pos, *size, style, *validator, *name);
 }
 wxControl *wxControl_new1() {
     return new wxControl();
 }
-bool wxControl_Create(wxControl * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, int32_t style, const wxValidator * validator, const wxString * name) {
+bool wxControl_Create(wxControl * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
     return self->Create(parent, id, *pos, *size, style, *validator, *name);
 }
 void wxControl_Command(wxControl * self, wxCommandEvent * event) {
@@ -979,10 +979,10 @@ void wxAnyButton_SetBitmapMargins1(wxAnyButton * self, const wxSize * sz) {
 wxButton *wxButton_new() {
     return new wxButton();
 }
-wxButton *wxButton_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, int32_t style, const wxValidator * validator, const wxString * name) {
+wxButton *wxButton_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
     return new wxButton(parent, id, *label, *pos, *size, style, *validator, *name);
 }
-bool wxButton_Create(wxButton * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, int32_t style, const wxValidator * validator, const wxString * name) {
+bool wxButton_Create(wxButton * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
     return self->Create(parent, id, *label, *pos, *size, style, *validator, *name);
 }
 bool wxButton_GetAuthNeeded(const wxButton * self) {
@@ -1016,10 +1016,10 @@ bool wxNonOwnedWindow_SetShape1(wxNonOwnedWindow * self, const wxGraphicsPath * 
 wxTopLevelWindow *wxTopLevelWindow_new() {
     return new wxTopLevelWindow();
 }
-wxTopLevelWindow *wxTopLevelWindow_new1(wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, int32_t style, const wxString * name) {
+wxTopLevelWindow *wxTopLevelWindow_new1(wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return new wxTopLevelWindow(parent, id, *title, *pos, *size, style, *name);
 }
-bool wxTopLevelWindow_Create(wxTopLevelWindow * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, int32_t style, const wxString * name) {
+bool wxTopLevelWindow_Create(wxTopLevelWindow * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return self->Create(parent, id, *title, *pos, *size, style, *name);
 }
 bool wxTopLevelWindow_CanSetTransparent(wxTopLevelWindow * self) {
@@ -1127,7 +1127,7 @@ void wxTopLevelWindow_ShowWithoutActivating(wxTopLevelWindow * self) {
 bool wxTopLevelWindow_EnableFullScreenView(wxTopLevelWindow * self, bool enable) {
     return self->EnableFullScreenView(enable);
 }
-bool wxTopLevelWindow_ShowFullScreen(wxTopLevelWindow * self, bool show, int32_t style) {
+bool wxTopLevelWindow_ShowFullScreen(wxTopLevelWindow * self, bool show, long style) {
     return self->ShowFullScreen(show, style);
 }
 wxSize *wxTopLevelWindow_GetDefaultSize() {
@@ -1138,19 +1138,19 @@ wxSize *wxTopLevelWindow_GetDefaultSize() {
 wxFrame *wxFrame_new() {
     return new wxFrame();
 }
-wxFrame *wxFrame_new1(wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, int32_t style, const wxString * name) {
+wxFrame *wxFrame_new1(wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return new wxFrame(parent, id, *title, *pos, *size, style, *name);
 }
 void wxFrame_Centre(wxFrame * self, int direction) {
     return self->Centre(direction);
 }
-bool wxFrame_Create(wxFrame * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, int32_t style, const wxString * name) {
+bool wxFrame_Create(wxFrame * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return self->Create(parent, id, *title, *pos, *size, style, *name);
 }
-wxStatusBar * wxFrame_CreateStatusBar(wxFrame * self, int number, int32_t style, wxWindowID id, const wxString * name) {
+wxStatusBar * wxFrame_CreateStatusBar(wxFrame * self, int number, long style, wxWindowID id, const wxString * name) {
     return self->CreateStatusBar(number, style, id, *name);
 }
-wxToolBar * wxFrame_CreateToolBar(wxFrame * self, int32_t style, wxWindowID id, const wxString * name) {
+wxToolBar * wxFrame_CreateToolBar(wxFrame * self, long style, wxWindowID id, const wxString * name) {
     return self->CreateToolBar(style, id, *name);
 }
 void wxFrame_DoGiveHelp(wxFrame * self, const wxString * text, bool show) {
@@ -1171,10 +1171,10 @@ int wxFrame_GetStatusBarPane(const wxFrame * self) {
 wxToolBar * wxFrame_GetToolBar(const wxFrame * self) {
     return self->GetToolBar();
 }
-wxStatusBar * wxFrame_OnCreateStatusBar(wxFrame * self, int number, int32_t style, wxWindowID id, const wxString * name) {
+wxStatusBar * wxFrame_OnCreateStatusBar(wxFrame * self, int number, long style, wxWindowID id, const wxString * name) {
     return self->OnCreateStatusBar(number, style, id, *name);
 }
-wxToolBar * wxFrame_OnCreateToolBar(wxFrame * self, int32_t style, wxWindowID id, const wxString * name) {
+wxToolBar * wxFrame_OnCreateToolBar(wxFrame * self, long style, wxWindowID id, const wxString * name) {
     return self->OnCreateToolBar(style, id, *name);
 }
 bool wxFrame_ProcessCommand(wxFrame * self, int id) {

@@ -36,13 +36,13 @@ def generated_rs(classes, config):
 #![allow(non_upper_case_globals)]
 #![allow(unused_parens)]
 
-use std::os::raw::c_void;
+use std::os::raw::{c_long, c_void};
 use std::ptr;
 
 use crate::macros::wx_class;
 
 mod ffi {
-    use std::os::raw::c_void;
+    use std::os::raw::{c_long, c_void};
     extern "C" {'''
     bindings = [RustClassBinding(cls) for cls in classes]
     indent = ' ' * 4 * 2

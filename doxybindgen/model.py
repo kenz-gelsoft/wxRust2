@@ -2,13 +2,12 @@ import xml.etree.ElementTree as ET
 import copy, re
 
 CXX2CXX = {
-    'long': 'int32_t',
 }
 
 CXX2RUST = {
     'double': 'f64',
     'int': 'i32',
-    'long': 'i32',
+    'long': 'c_long',
     'unsigned int': 'u32',
     'wxByte': 'u8',
     'wxCoord': 'i32',
@@ -330,6 +329,7 @@ class CxxType:
 
 RUST_PRIMITIVES = [
     'bool',
+    'c_long',
     'f64',
     'i32',
     'i64',
