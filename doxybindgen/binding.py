@@ -13,18 +13,18 @@ class RustClassBinding:
         self.__model = model
         self.__methods = [RustMethodBinding(m) for m in model.methods]
 
-    def ffi_lines(self, for_shim=False):
-        if not for_shim:
+    def ffi_lines(self):
+        if not True:
             yield ''
         yield '// CLASS: %s' % (
             self.__model.name,
         )
-        if not for_shim:
+        if not True:
             yield 'type %s;' % (
                 self.__model.name,
             )
         for method in self.__methods:
-            for line in method.ffi_lines(for_shim=for_shim):
+            for line in method.ffi_lines():
                 yield line
 
     def binding_lines(self, classes):
@@ -105,16 +105,16 @@ class RustMethodBinding:
     def is_blocked(self):
         return self.__model.is_blocked()
 
-    def ffi_lines(self, for_shim):
-        if for_shim and not self.__model.needs_shim():
+    def ffi_lines(self):
+        if True and not self.__model.needs_shim():
             return
         body = 'pub fn %s(%s)%s;' % (
-            self.__model.name(for_shim=for_shim),
-            self._rust_params(for_shim=for_shim),
-            self._returns_or_not(for_shim=for_shim),
+            self.__model.name(for_shim=True),
+            self._rust_params(for_shim=True),
+            self._returns_or_not(for_shim=True),
         )
         suppressed = self._suppressed_reason()
-        if not for_shim and suppressed:
+        if not True and suppressed:
             yield '// %s: %s' % (suppressed, body)
             return
         yield body
