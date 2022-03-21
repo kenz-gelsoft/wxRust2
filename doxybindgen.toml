@@ -15,45 +15,6 @@ wxml_files = [
 ]
 
 [types]
-decls = [
-    'wxString',
-    'wxWindowList',
-    # 'wxRect',
-    'wxSizer',
-    'wxFont',
-    'wxRegion',
-    'wxColour',
-    'wxPalette',
-    'wxKeyEvent',
-    'wxEvent',
-    'wxToolTip',
-    'wxMenu',
-    'wxAcceleratorTable',
-    # 'wxAccessible',
-    'wxDropTarget',
-    'wxLayoutConstraints',
-    'wxCaret',
-    'wxCursor',
-    'wxUpdateUIEvent',
-    'wxIdleEvent',
-    'wxBitmap',
-    'wxCommandEvent',
-    'wxClientData',
-    'wxEventFilter',
-    'wxClassInfo',
-    'wxObjectRefData',
-    # 'wxTaskBarButton',
-    'wxMenuBar',
-    'wxToolBar',
-    'wxStatusBar',
-    'wxIconBundle',
-    'wxIcon',
-    # 'GeometrySerializer',
-    'wxGraphicsPath',
-    'wxRealPoint',
-    'wxDC',
-]
-
 [types.wxObject]
 blocklist = [
     'operator delete',
