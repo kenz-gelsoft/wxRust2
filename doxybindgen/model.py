@@ -63,7 +63,7 @@ class Method:
         self.is_instance_method = not (self.is_ctor or self.is_static)
         self.const = e.get('const') == 'yes'
         if self.is_ctor:
-            self.returns = RustType(cls.name, self.const, ctor_retval=True)
+            self.returns = RustType(cls.name, self.const)
         self.params = []
         for param in e.findall('param'):
             ptype = CxxType(cls.type_manager, param.find('type'))
@@ -138,24 +138,17 @@ class Param:
 
 
 class RustType:
-    def __init__(self, s, const, ctor_retval=False):
+    def __init__(self, s, const):
         self.typename = s
         self.const = const
-        self.__ctor_retval = ctor_retval
         self.generic_name = None
 
     def marshal(self, param):
         return None
 
     def in_rust(self, with_ffi=False, binding=False):
-        t = self.typename
-        # if self.__ctor_retval:
-        #     return t[2:]
-        # t = prefixed(t, with_ffi)
-        t = 'c_void'
-        ref = '*'
-        mut = 'const ' if self.const else 'mut '
-        return '%s%s%s' % (ref, mut, t)
+        mut = 'const' if self.const else 'mut'
+        return '*%s c_void' % (mut,)
     
     def in_cxx(self):
         t = '%s *' % (self.typename,)
@@ -223,7 +216,7 @@ class CxxType:
     def in_cxx(self):
         if self.__srctype in CXX2CXX:
             return CXX2CXX[self.__srctype]
-        if self.__indirection == '&':
+        if self.is_ref():
             const_or_not = '' if self.__is_mut else 'const '
             new_type = '%s%s *' % (
                 const_or_not,
@@ -266,18 +259,10 @@ class CxxType:
                 return 'Option<&%s>' % (t[2:])
         if t in CXX2RUST:
             t = CXX2RUST[t]
-        t = prefixed(t, with_ffi)
         if self.__indirection:
-            t = 'c_void'
-        ref = self.__indirection
-        if ref == '&':
-            ref = '*'
-        mut = ''
-        if ref:
-            mut = 'mut ' if self.__is_mut else ''
-            if ref.startswith('*') and not self.__is_mut:
-                mut = 'const '
-        return '%s%s%s' % (ref, mut, t)
+            mut = 'mut' if self.__is_mut else 'const'
+            return '*%s c_void' % (mut,)
+        return prefixed(t, with_ffi)
     
     def is_ptr_to_binding(self):
         # TODO: consider mutability
@@ -294,7 +279,7 @@ class CxxType:
     def _is_const_ref(self):
         if self.__is_mut:
             return False
-        return self.__indirection.startswith('&')
+        return self.is_ref()
     
     def is_ref(self):
         return self.__indirection == '&'

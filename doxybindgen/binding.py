@@ -269,8 +269,7 @@ class RustMethodBinding:
         if self.__model.returns.is_str():
             return 'crate::from_wx_string(%s)' % (call,)
         if wrapped:
-            wrapped = wrapped[2:]
-            return '%s(%s)' % (wrapped, call)
+            return '%s(%s)' % (wrapped[2:], call)
         return call
 
     def _uses_ptr_type(self):
