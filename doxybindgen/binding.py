@@ -111,7 +111,7 @@ class RustMethodBinding:
         body = 'pub fn %s(%s)%s;' % (
             self.__model.name(for_shim=True),
             self._rust_params(for_shim=True),
-            self._returns_or_not(for_shim=True),
+            self._returns_or_not(),
         )
         suppressed = self._suppressed_reason()
         if not True and suppressed:
@@ -119,7 +119,7 @@ class RustMethodBinding:
             return
         yield body
 
-    def _returns_or_not(self, for_shim=True, binding=False):
+    def _returns_or_not(self, binding=False):
         if self.__model.returns.is_void():
             return ''
         returns = self.__model.returns.in_rust(with_ffi=binding)
@@ -129,7 +129,7 @@ class RustMethodBinding:
                 returns = wrapped[2:]
                 if self.__model.returns.is_str():
                     returns = 'String'
-            elif for_shim:
+            elif True:
                 returns = '*mut c_void'
         return ' -> %s' % (returns,)
     
