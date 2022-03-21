@@ -323,7 +323,7 @@ class CxxMethodBinding:
             return
         new_params_or_expr = self._call_params()
         if not self.is_ctor:
-            self_or_class = '((%s *)self)->' % (self.__model.cls.name,)
+            self_or_class = 'self->'
             if self.__model.is_static:
                 self_or_class = '%s::' % (self.__model.cls.name,)
             new_params_or_expr = '%s%s(%s)' % (
@@ -350,18 +350,10 @@ class CxxMethodBinding:
         )
 
     def _call_params(self):
-        return ', '.join(self._cast_if_needed(p) for p in self.__model.params)
+        return ', '.join(self._deref_if_needed(p) for p in self.__model.params)
     
-    def _cast_if_needed(self, param):
+    def _deref_if_needed(self, param):
         if param.type.is_ref():
-            return '*(%s *)%s' % (
-                param.type.typename,
-                param.name,
-            )
-        if param.type.is_ptr():
-            return '(%s *)%s' % (
-                param.type.typename,
-                param.name,
-            )
+            return '*%s' % (param.name,)
         return param.name
 
