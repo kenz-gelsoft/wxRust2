@@ -5,15 +5,22 @@ CXX2CXX = {
 }
 
 CXX2RUST = {
-    'double': 'f64',
-    'int': 'i32',
+    'double': 'c_double',
+    'int': 'c_int',
     'long': 'c_long',
-    'unsigned int': 'u32',
-    'wxByte': 'u8',
-    'wxCoord': 'i32',
-    'wxEllipsizeMode': 'i32',
-    'wxWindowID': 'i32',
+    'wxByte': 'c_uchar',
+    'wxCoord': 'c_int',
+    'wxEllipsizeMode': 'c_int',
+    'wxWindowID': 'c_int',
 }
+RUST_PRIMITIVES = [
+    'bool',
+    'c_double',
+    'c_int',
+    'c_long',
+    'c_uchar',
+]
+
 
 class Class:
     def in_xml(type_manager, xmlfile, config):
@@ -322,15 +329,6 @@ class CxxType:
     def make_generic(self, generic_name):
         self.generic_name = generic_name
         return (generic_name, self.typename[2:] + 'Methods')
-
-RUST_PRIMITIVES = [
-    'bool',
-    'c_long',
-    'f64',
-    'i32',
-    'i64',
-    'u8',
-]
 
 
 def prefixed(t, with_ffi=False):
