@@ -1,5 +1,5 @@
 use std::convert::TryInto;
-use std::os::raw::{c_char, c_void};
+use std::os::raw::{c_char, c_int, c_void};
 use std::ptr;
 
 mod macros;
@@ -13,7 +13,7 @@ mod generated;
 pub use generated::*;
 
 mod ffi {
-    use std::os::raw::{c_char, c_void};
+    use std::os::raw::{c_char, c_int, c_uchar, c_void};
     extern "C" {
         pub fn AppSetOnInit(
             aFn: *mut c_void,
@@ -21,17 +21,17 @@ mod ffi {
         );
         pub fn wxEvtHandler_Bind(
             self_: *mut c_void,
-            eventType: i32,
+            eventType: c_int,
             aFn: *mut c_void,
             aParam: *mut c_void
         );
 
         // String
-        pub fn wxString_new(psz: *const u8, nLength: usize) -> *mut c_void;
-        pub fn wxString_UTF8Data(self_: *mut c_void) -> *mut u8;
+        pub fn wxString_new(psz: *const c_uchar, nLength: usize) -> *mut c_void;
+        pub fn wxString_UTF8Data(self_: *mut c_void) -> *mut c_uchar;
         pub fn wxString_Len(self_: *mut c_void) -> usize;
         
-        pub fn wxRustEntry(argc: *mut i32, argv: *mut *mut c_char) -> i32;
+        pub fn wxRustEntry(argc: *mut c_int, argv: *mut *mut c_char) -> c_int;
     }
 }
 
@@ -61,10 +61,10 @@ unsafe fn to_wx_callable<F: Fn() + 'static>(closure: F) -> (*mut c_void, *mut c_
 }
 
 pub trait Bindable {
-    fn bind<F: Fn() + 'static>(&self, event_type: i32, closure: F);
+    fn bind<F: Fn() + 'static>(&self, event_type: c_int, closure: F);
 }
 impl<T: EvtHandlerMethods> Bindable for T {
-    fn bind<F: Fn() + 'static>(&self, event_type: i32, closure: F) {
+    fn bind<F: Fn() + 'static>(&self, event_type: c_int, closure: F) {
         unsafe {
             let (f, param) = to_wx_callable(closure);
             ffi::wxEvtHandler_Bind(self.as_ptr(), event_type, f, param);
@@ -108,7 +108,7 @@ pub fn entry() {
         argv.push(arg.as_ptr() as *mut c_char);
     }
     argv.push(ptr::null_mut()); // Nul terminator.
-    let mut argc: i32 = args.len().try_into().unwrap();
+    let mut argc: c_int = args.len().try_into().unwrap();
     unsafe {
         ffi::wxRustEntry(&mut argc, argv.as_mut_ptr());
     }

@@ -2,19 +2,25 @@ import xml.etree.ElementTree as ET
 import copy, re
 
 CXX2CXX = {
-    'long': 'int32_t',
 }
 
 CXX2RUST = {
-    'double': 'f64',
-    'int': 'i32',
-    'long': 'i32',
-    'unsigned int': 'u32',
-    'wxByte': 'u8',
-    'wxCoord': 'i32',
-    'wxEllipsizeMode': 'i32',
-    'wxWindowID': 'i32',
+    'double': 'c_double',
+    'int': 'c_int',
+    'long': 'c_long',
+    'wxByte': 'c_uchar',
+    'wxCoord': 'c_int',
+    'wxEllipsizeMode': 'c_int',
+    'wxWindowID': 'c_int',
 }
+RUST_PRIMITIVES = [
+    'bool',
+    'c_double',
+    'c_int',
+    'c_long',
+    'c_uchar',
+]
+
 
 class Class:
     def in_xml(type_manager, xmlfile, config):
@@ -45,10 +51,6 @@ class Class:
     
     def is_trivial(self):
         return self.name in CXX_TRIVIAL_EXTERN_TYPES
-
-    def uses_shim_for(self, name):
-        methods = self.config.get('use_shim') or []
-        return name in methods
 
 
 class Method:
@@ -327,14 +329,6 @@ class CxxType:
     def make_generic(self, generic_name):
         self.generic_name = generic_name
         return (generic_name, self.typename[2:] + 'Methods')
-
-RUST_PRIMITIVES = [
-    'bool',
-    'f64',
-    'i32',
-    'i64',
-    'u8',
-]
 
 
 def prefixed(t, with_ffi=False):

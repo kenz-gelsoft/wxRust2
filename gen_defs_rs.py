@@ -7,6 +7,8 @@ PROLOGUE = '''\
 #![allow(non_upper_case_globals)]
 #![allow(unused_parens)]
 
+use std::os::raw::{c_int, c_long};
+
 use crate::manual::*;
 '''
 
@@ -120,9 +122,9 @@ def generate_define(e, f):
     if initializer is not None:
         v = ''.join(initializer.itertext())
         v = ''.join(map(lambda s: s.lstrip(), v.split('\\\n')))
-        t = 'i32'
-        if name in u32types:
-            t = 'u32'
+        t = 'c_int'
+        if name in long_types:
+            t = 'c_long'
         if v == 'true' or v == 'false':
             t = 'bool'
         elif '.' in v:
@@ -141,7 +143,7 @@ def generate_define(e, f):
         print('// NODEF: %s' % (name,),
                 file=f)
 
-u32types = [
+long_types = [
     'wxAC_DEFAULT_STYLE',
     'wxAEDIALOG_STYLE',
     'wxALWAYS_SHOW_SB',
@@ -232,9 +234,9 @@ def generate_enum(e, f):
             current_initializer = initializer
             count = 1
         initializer = initializer.replace('~', '!') # special replacement for wxPATH_NORM_ALL
-        t = 'i32'
-        if name in u32types:
-            t = 'u32'
+        t = 'c_int'
+        if name in long_types:
+            t = 'c_long'
         if "'" in initializer:
             t = 'char'
         print('pub const %s: %s %s;' % (vname, t, initializer),
