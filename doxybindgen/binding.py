@@ -101,7 +101,7 @@ class RustMethodBinding:
     def ffi_lines(self):
         body = 'pub fn %s(%s)%s;' % (
             self.__model.name(for_shim=True),
-            self._rust_params(for_shim=True),
+            self._rust_params(binding=False),
             self._returns_or_not(),
         )
         suppressed = self.__model.suppressed_reason()
@@ -157,7 +157,7 @@ class RustMethodBinding:
             'pub ' if self.is_ctor else '',
             self._rust_method_name(),
             gen_params,
-            self._rust_params(with_ffi=True, binding=True),
+            self._rust_params(binding=True),
             self._returns_or_not(binding=True),
         )
         body_lines = list(self._binding_body())
@@ -208,17 +208,20 @@ class RustMethodBinding:
         method_name = self.non_keyword_name(method_name)
         return method_name
     
-    def _rust_params(self, with_ffi=False, binding=False, for_shim=False):
+    def _rust_params(self, binding):
         params = self.__model.params.copy()
         if self.__model.is_instance_method:
-            if for_shim:
-                params.insert(0, self.__shim_self)
-            else:
+            if binding:
                 params.insert(0, self.__self_param)
-        return ', '.join(self._rust_param(p, with_ffi, binding) for p in params)
+            else:
+                params.insert(0, self.__shim_self)
+        return ', '.join(self._rust_param(p, binding) for p in params)
 
-    def _rust_param(self, param, with_ffi, binding):
-        typename = param.type.in_rust(with_ffi, binding)
+    def _rust_param(self, param, binding):
+        typename = param.type.in_rust(
+            with_ffi=binding,
+            binding=binding
+        )
         if binding:
             if param.is_self():
                 return '&self'
