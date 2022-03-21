@@ -1,44 +1,47 @@
 #pragma once
 #include <wx/wx.h>
 
-#include "rust/cxx.h"
-#include "wx/src/lib.rs.h"
-
-
-namespace wxrust {
-
-using UnsafeAnyPtr = const char *;
-
-// wxApp
-void AppSetOnInit(const Closure &closure);
-class App : public wxApp {
-    virtual bool OnInit();
-};
 
 // wxEvtHandler
 template <typename T>
 class CxxClosure {
-    typedef void (*TrampolineFunc)(UnsafeAnyPtr);
-    Closure mClosure;
+    typedef void (*TrampolineFunc)(void *);
+    void *mFn;
+    void *mParam;
 
 public:
-    CxxClosure() : mClosure() {}
-    CxxClosure(const Closure &closure) : mClosure(closure) {}
+    CxxClosure() : mFn(), mParam()
+    {}
+    CxxClosure(void *f, void *param) : mFn(f), mParam(param)
+    {}
 
     void operator ()(T arg) const {
-        if (mClosure.param) { // if set
-            ((TrampolineFunc)mClosure.f)(mClosure.param);
+        if (mParam) { // if set
+            ((TrampolineFunc)mFn)(mParam);
         } else {
             // TODO: provide debug info
         }
     }
 };
 
-void Bind(wxEvtHandler &evtHandler, EventType eventType, const Closure &closure);
+extern "C" {
 
-// Constructors
-std::unique_ptr<wxString> NewString(rust::Str aString);
-wxFrame *NewFrame(rust::Str aTitle);
-wxButton *NewButton(wxWindow &parent, rust::Str label);
+// wxApp
+void AppSetOnInit(void *aFn, void *aParam);
+class App : public wxApp {
+    virtual bool OnInit();
+};
 
-} // namespace wxrust
+// TODO: auto generate
+#define wxRUST_EVT_BUTTON 0
+
+void wxEvtHandler_Bind(wxEvtHandler *evtHandler, int eventType, void *aFn, void *aParam);
+
+// String
+wxString *wxString_new(const unsigned char *psz, const size_t nLength);
+const char *wxString_UTF8Data(wxString *self);
+size_t wxString_Len(wxString *self);
+
+int wxRustEntry(int *argc, char **argv);
+
+} // extern "C"

@@ -1,13 +1,11 @@
-#include "wx/include/wxrust.h"
-
-namespace wxrust {
+#include "wxrust.h"
 
 // wxApp
 wxIMPLEMENT_APP_NO_MAIN(App);
 
 static CxxClosure<int> globalOnInit;
-void AppSetOnInit(const Closure &closure) {
-    globalOnInit = closure;
+void AppSetOnInit(void *f, void *params) {
+    globalOnInit = CxxClosure<int>(f, params);
 }
 
 bool App::OnInit() {
@@ -16,27 +14,29 @@ bool App::OnInit() {
 }
 
 // wxEvtHandler
-wxEventTypeTag<wxCommandEvent> TypeTagOf(EventType eventType) {
+wxEventTypeTag<wxCommandEvent> TypeTagOf(int eventType) {
     switch (eventType) {
-    case EventType::Button:
+    case wxRUST_EVT_BUTTON:
         return wxEVT_BUTTON;
     }
-    return wxEVT_BUTTON;
+    return wxEVT_NULL;
 }
-void Bind(wxEvtHandler &evtHandler, EventType eventType, const Closure &closure) {
-    CxxClosure<wxCommandEvent &> functor(closure);
-    evtHandler.Bind(TypeTagOf(eventType), functor);
-}
-
-// Constructors
-std::unique_ptr<wxString> NewString(rust::Str aString) {
-    return std::make_unique<wxString>(std::string(aString).c_str(), wxConvUTF8);
-}
-wxFrame *NewFrame(rust::Str title) {
-    return new wxFrame(NULL, -1, std::string(title));
-}
-wxButton *NewButton(wxWindow &parent, rust::Str label) {
-    return new wxButton(&parent, wxID_ANY, std::string(label));
+void wxEvtHandler_Bind(wxEvtHandler *self, int eventType, void *aFn, void *aParam) {
+    CxxClosure<wxCommandEvent &> functor(aFn, aParam);
+    self->Bind(TypeTagOf(eventType), functor);
 }
 
-} // namespace wxrust
+// String
+wxString *wxString_new(const unsigned char *psz, const size_t nLength) {
+    return new wxString(psz, wxConvUTF8, nLength);
+}
+const char *wxString_UTF8Data(wxString *self) {
+    return self->ToUTF8().data();
+}
+size_t wxString_Len(wxString *self) {
+    return self->Len();
+}
+
+int wxRustEntry(int *argc, char **argv) {
+    return wxEntry(*argc, argv);
+}

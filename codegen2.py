@@ -17,12 +17,12 @@ def main():
             classes.append(cls)
     # Set known binding(name)s once all classes parsed.
     known_bindings = [cls.name for cls in classes]
-    known_bindings.extend(cls.internal_base() for cls in classes)
     type_manager.known_bindings = known_bindings
     
     to_be_generated = {
         'src/generated.rs': generated_rs,
         'include/wxrust2.h': wxrust2_h,
+        'src/wxrust2.cc': wxrust2_cc,
     }
     for path, generator in to_be_generated.items():
         with open(path, 'w') as f:
@@ -36,34 +36,16 @@ def generated_rs(classes, config):
 #![allow(non_upper_case_globals)]
 #![allow(unused_parens)]
 
-use std::os::raw::c_char;
-use std::pin::Pin;
+use std::os::raw::c_void;
 use std::ptr;
 
 use crate::macros::wx_class;
 
-// any pointer type used on ffi boundary.
-// we chose this type as it's handy in cxx.
-type UnsafeAnyPtr = *const c_char;
-
-#[cxx::bridge(namespace = "wxrust")]
 mod ffi {
-    #[namespace = ""]
-    unsafe extern "C++" {
-        include!("wx/include/wxrust.h");
-        include!("wx/include/wxrust2.h");
-'''
+    use std::os::raw::c_void;
+    extern "C" {'''
     bindings = [RustClassBinding(cls) for cls in classes]
     indent = ' ' * 4 * 2
-    types = config['types']['decls']
-    for t in types:
-        yield '%stype %s;' % (indent, t)
-    for cls in bindings:
-        for line in cls.ffi_lines():
-            yield '%s%s' % (indent, line)
-    yield '''\
-    }
-    unsafe extern "C++" {'''
     for cls in bindings:
         for line in cls.ffi_lines(for_shim=True):
             yield '%s%s' % (indent, line)
@@ -72,10 +54,7 @@ mod ffi {
 }
 
 pub trait WxRustMethods {
-    unsafe fn as_ptr(&self) -> UnsafeAnyPtr;
-    fn pinned<T>(&self) -> Pin<&mut T> {
-        unsafe { Pin::new_unchecked(&mut *(self.as_ptr() as *mut _)) }
-    }
+    unsafe fn as_ptr(&self) -> *mut c_void;
 }
 '''
     for cls in bindings:
@@ -88,18 +67,28 @@ def wxrust2_h(classes, config):
 #pragma once
 #include <wx/wx.h>
 
-#include "rust/cxx.h"
-#include "wx/src/generated.rs.h"
-
-
-namespace wxrust {
+extern "C" {
 '''
     for cls in classes:
         binding = CxxClassBinding(cls)
         for line in binding.shims():
             yield line
     yield '''\
-} // namespace wxrust
+} // extern "C"
+'''
+
+def wxrust2_cc(classes, config):
+    yield '''\
+#include <wx/wx.h>
+
+extern "C" {
+'''
+    for cls in classes:
+        binding = CxxClassBinding(cls)
+        for line in binding.shims(is_cc=True):
+            yield line
+    yield '''\
+} // extern "C"
 '''
 
 if __name__ == '__main__':

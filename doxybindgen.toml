@@ -16,7 +16,7 @@ wxml_files = [
 
 [types]
 decls = [
-    'wxString = crate::ffi::wxString',
+    'wxString',
     'wxWindowList',
     # 'wxRect',
     'wxSizer',
@@ -67,8 +67,7 @@ blocklist = [
     'Unbind1',
 ]
 [types.wxWindow]
-internal_base = 'wxWindowBase'
-internal_base_methods = [
+use_shim = [
     'AddChild',
     'FromDIP',
     'GetHelpTextAtPoint',
@@ -76,8 +75,7 @@ internal_base_methods = [
     'RemoveChild',
     'Reparent',
     'ToDIP2',
-]
-use_shim = [
+
     # TODO: treat long correctly
     'Create',
     'FindWindow',

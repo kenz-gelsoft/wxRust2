@@ -1,116 +1,74 @@
 use std::convert::TryInto;
-use std::os::raw::{c_char, c_int};
+use std::os::raw::{c_char, c_void};
 use std::ptr;
-
-use cxx::{type_id, ExternType};
 
 mod macros;
 
 mod defs;
 pub use defs::*;
 mod manual;
+pub use manual::*;
 
 mod generated;
 pub use generated::*;
 
-// any pointer type used on ffi boundary.
-// we chose this type as it's handy in cxx.
-type UnsafeAnyPtr = *const c_char;
-
-// wxPoint
-#[repr(C)]
-pub struct wxPoint {
-    pub x: c_int,
-    pub y: c_int,
-}
-unsafe impl ExternType for wxPoint {
-    type Id = type_id!("wxPoint");
-    type Kind = cxx::kind::Trivial;
-}
-
-// wxRect
-#[repr(C)]
-pub struct wxRect {
-    pub x: c_int,
-    pub y: c_int,
-    pub width: c_int,
-    pub height: c_int,
-}
-unsafe impl ExternType for wxRect {
-    type Id = type_id!("wxRect");
-    type Kind = cxx::kind::Trivial;
-}
-
-// wxSize
-#[repr(C)]
-pub struct wxSize {
-    pub x: c_int,
-    pub y: c_int,
-}
-unsafe impl ExternType for wxSize {
-    type Id = type_id!("wxSize");
-    type Kind = cxx::kind::Trivial;
-}
-
-#[cxx::bridge(namespace = "wxrust")]
 mod ffi {
-    enum EventType {
-        Button,
-    }
+    use std::os::raw::{c_char, c_void};
+    extern "C" {
+        pub fn AppSetOnInit(
+            aFn: *mut c_void,
+            aParam: *mut c_void
+        );
+        pub fn wxEvtHandler_Bind(
+            self_: *mut c_void,
+            eventType: i32,
+            aFn: *mut c_void,
+            aParam: *mut c_void
+        );
 
-    struct Closure {
-        // type alias can't be used in cxx:bridge.
-        f: *const c_char,
-        param: *const c_char,
-    }
-
-    #[namespace = ""]
-    unsafe extern "C++" {
-        include!("wx/include/wxrust.h");
-
-        type wxEvtHandler;
-
-        type wxString;
-
-        unsafe fn wxEntry(argc: &mut i32, argv: *mut *mut c_char) -> i32;
-    }
-
-    unsafe extern "C++" {
-        fn AppSetOnInit(closure: &Closure);
-        fn Bind(handler: Pin<&mut wxEvtHandler>, eventType: EventType, closure: &Closure);
-
-        fn NewString(s: &str) -> UniquePtr<wxString>;
+        // String
+        pub fn wxString_new(psz: *const u8, nLength: usize) -> *mut c_void;
+        pub fn wxString_UTF8Data(self_: *mut c_void) -> *mut u8;
+        pub fn wxString_Len(self_: *mut c_void) -> usize;
+        
+        pub fn wxRustEntry(argc: *mut i32, argv: *mut *mut c_char) -> i32;
     }
 }
 
-pub use ffi::EventType;
+fn from_wx_string(s: *mut c_void) -> String {
+    unsafe {
+        let utf8data = ffi::wxString_UTF8Data(s);
+        let len = ffi::wxString_Len(s);
+        return String::from_raw_parts(utf8data, len, len);
+    }
+}
+pub unsafe fn wx_string_from(s: &str) -> *const c_void {
+    return ffi::wxString_new(s.as_ptr(), s.len())
+}
 
 // Rust closure to wx calablle function+param pair.
-impl ffi::Closure {
-    fn new<F: Fn() + 'static>(closure: F) -> Self {
-        unsafe fn trampoline<F: Fn() + 'static>(closure: UnsafeAnyPtr) {
-            let closure = &*(closure as *const F);
-            closure();
-        }
-        // pass the pointer in the heap to avoid move.
-        let closure = Box::new(closure);
-        Self {
-            f: trampoline::<F> as UnsafeAnyPtr,
-            param: Box::into_raw(closure) as UnsafeAnyPtr,
-        }
+unsafe fn to_wx_callable<F: Fn() + 'static>(closure: F) -> (*mut c_void, *mut c_void) {
+    unsafe fn trampoline<F: Fn() + 'static>(closure: *mut c_void) {
+        let closure = &*(closure as *const F);
+        closure();
     }
+    // pass the pointer in the heap to avoid move.
+    let closure = Box::new(closure);
+    (
+        trampoline::<F> as _,
+        Box::into_raw(closure) as _
+    )
 }
 
 pub trait Bindable {
-    fn bind<F: Fn() + 'static>(&self, event_type: ffi::EventType, closure: F);
+    fn bind<F: Fn() + 'static>(&self, event_type: i32, closure: F);
 }
 impl<T: EvtHandlerMethods> Bindable for T {
-    fn bind<F: Fn() + 'static>(&self, event_type: ffi::EventType, closure: F) {
-        ffi::Bind(
-            self.pinned::<ffi::wxEvtHandler>().as_mut(),
-            event_type,
-            &ffi::Closure::new(closure),
-        );
+    fn bind<F: Fn() + 'static>(&self, event_type: i32, closure: F) {
+        unsafe {
+            let (f, param) = to_wx_callable(closure);
+            ffi::wxEvtHandler_Bind(self.as_ptr(), event_type, f, param);
+        }
     }
 }
 
@@ -118,7 +76,10 @@ impl<T: EvtHandlerMethods> Bindable for T {
 pub enum App {}
 impl App {
     pub fn on_init<F: Fn() + 'static>(closure: F) {
-        ffi::AppSetOnInit(&ffi::Closure::new(closure));
+        unsafe {
+            let (f, param) = to_wx_callable(closure);
+            ffi::AppSetOnInit(f, param);
+        }
     }
     pub fn run<F: Fn() + 'static>(closure: F) {
         Self::on_init(closure);
@@ -149,6 +110,6 @@ pub fn entry() {
     argv.push(ptr::null_mut()); // Nul terminator.
     let mut argc: i32 = args.len().try_into().unwrap();
     unsafe {
-        ffi::wxEntry(&mut argc, argv.as_mut_ptr());
+        ffi::wxRustEntry(&mut argc, argv.as_mut_ptr());
     }
 }

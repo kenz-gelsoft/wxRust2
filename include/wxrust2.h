@@ -1,265 +1,508 @@
 #pragma once
 #include <wx/wx.h>
 
-#include "rust/cxx.h"
-#include "wx/src/generated.rs.h"
-
-
-namespace wxrust {
+extern "C" {
 
 // CLASS: wxObject
-inline wxObject *NewObject() {
-    return new wxObject();
-}
-inline wxObject *NewObject(const wxObject & other) {
-    return new wxObject(other);
-}
+wxObject *wxObject_new();
+wxObject *wxObject_new1(const wxObject * other);
+wxClassInfo * wxObject_GetClassInfo(const wxObject * self);
+wxObjectRefData * wxObject_GetRefData(const wxObject * self);
+bool wxObject_IsKindOf(const wxObject * self, const wxClassInfo * info);
+bool wxObject_IsSameAs(const wxObject * self, const wxObject * obj);
+void wxObject_Ref(wxObject * self, const wxObject * clone);
+void wxObject_SetRefData(wxObject * self, wxObjectRefData * data);
+void wxObject_UnRef(wxObject * self);
+void wxObject_UnShare(wxObject * self);
 
 // CLASS: wxEvtHandler
-inline void wxEvtHandler_AddFilter(wxEventFilter * filter) {
-    return wxEvtHandler::AddFilter(filter);
-}
-inline void wxEvtHandler_RemoveFilter(wxEventFilter * filter) {
-    return wxEvtHandler::RemoveFilter(filter);
-}
-inline wxEvtHandler *NewEvtHandler() {
-    return new wxEvtHandler();
-}
+void wxEvtHandler_QueueEvent(wxEvtHandler * self, wxEvent * event);
+void wxEvtHandler_AddPendingEvent(wxEvtHandler * self, const wxEvent * event);
+bool wxEvtHandler_ProcessEvent(wxEvtHandler * self, wxEvent * event);
+bool wxEvtHandler_ProcessEventLocally(wxEvtHandler * self, wxEvent * event);
+bool wxEvtHandler_SafelyProcessEvent(wxEvtHandler * self, wxEvent * event);
+void wxEvtHandler_ProcessPendingEvents(wxEvtHandler * self);
+void wxEvtHandler_DeletePendingEvents(wxEvtHandler * self);
+wxClientData * wxEvtHandler_GetClientObject(const wxEvtHandler * self);
+void wxEvtHandler_SetClientObject(wxEvtHandler * self, wxClientData * data);
+bool wxEvtHandler_GetEvtHandlerEnabled(const wxEvtHandler * self);
+wxEvtHandler * wxEvtHandler_GetNextHandler(const wxEvtHandler * self);
+wxEvtHandler * wxEvtHandler_GetPreviousHandler(const wxEvtHandler * self);
+void wxEvtHandler_SetEvtHandlerEnabled(wxEvtHandler * self, bool enabled);
+void wxEvtHandler_SetNextHandler(wxEvtHandler * self, wxEvtHandler * handler);
+void wxEvtHandler_SetPreviousHandler(wxEvtHandler * self, wxEvtHandler * handler);
+void wxEvtHandler_Unlink(wxEvtHandler * self);
+bool wxEvtHandler_IsUnlinked(const wxEvtHandler * self);
+void wxEvtHandler_AddFilter(wxEventFilter * filter);
+void wxEvtHandler_RemoveFilter(wxEventFilter * filter);
+wxEvtHandler *wxEvtHandler_new();
 
 // CLASS: wxWindow
-inline wxWindow * wxWindow_FindWindow(const wxWindow & self, int32_t id) {
-    return self.FindWindow(id);
-}
-inline void wxWindow_SetSize(wxWindow & self, const wxRect & rect) {
-    return self.SetSize(rect);
-}
-inline wxSize wxWindow_FromDIP(const wxSize & sz, const wxWindow * w) {
-    return wxWindow::FromDIP(sz, w);
-}
-inline wxPoint wxWindow_FromDIP(const wxPoint & pt, const wxWindow * w) {
-    return wxWindow::FromDIP(pt, w);
-}
-inline int wxWindow_FromDIP(int d, const wxWindow * w) {
-    return wxWindow::FromDIP(d, w);
-}
-inline wxSize wxWindow_ToDIP(const wxSize & sz, const wxWindow * w) {
-    return wxWindow::ToDIP(sz, w);
-}
-inline wxPoint wxWindow_ToDIP(const wxPoint & pt, const wxWindow * w) {
-    return wxWindow::ToDIP(pt, w);
-}
-inline int wxWindow_ToDIP(int d, const wxWindow * w) {
-    return wxWindow::ToDIP(d, w);
-}
-inline int32_t wxWindow_GetExtraStyle(const wxWindow & self) {
-    return self.GetExtraStyle();
-}
-inline int32_t wxWindow_GetWindowStyleFlag(const wxWindow & self) {
-    return self.GetWindowStyleFlag();
-}
-inline int32_t wxWindow_GetWindowStyle(const wxWindow & self) {
-    return self.GetWindowStyle();
-}
-inline void wxWindow_SetExtraStyle(wxWindow & self, int32_t ex_style) {
-    return self.SetExtraStyle(ex_style);
-}
-inline void wxWindow_SetWindowStyleFlag(wxWindow & self, int32_t style) {
-    return self.SetWindowStyleFlag(style);
-}
-inline void wxWindow_SetWindowStyle(wxWindow & self, int32_t style) {
-    return self.SetWindowStyle(style);
-}
-inline bool wxWindow_IsExposed(const wxWindow & self, wxPoint & pt) {
-    return self.IsExposed(pt);
-}
-inline bool wxWindow_IsExposed(const wxWindow & self, wxRect & rect) {
-    return self.IsExposed(rect);
-}
-inline rust::String wxWindow_GetHelpText(const wxWindow & self) {
-    return rust::String(self.GetHelpText().utf8_str());
-}
-inline rust::String wxWindow_GetToolTipText(const wxWindow & self) {
-    return rust::String(self.GetToolTipText().utf8_str());
-}
-inline rust::String wxWindow_GetLabel(const wxWindow & self) {
-    return rust::String(self.GetLabel().utf8_str());
-}
-inline rust::String wxWindow_GetName(const wxWindow & self) {
-    return rust::String(self.GetName().utf8_str());
-}
-inline void wxWindow_UpdateWindowUI(wxWindow & self, int32_t flags) {
-    return self.UpdateWindowUI(flags);
-}
-inline wxWindow * wxWindow_FindFocus() {
-    return wxWindow::FindFocus();
-}
-inline wxWindow * wxWindow_FindWindowById(int32_t id, const wxWindow * parent) {
-    return wxWindow::FindWindowById(id, parent);
-}
-inline wxWindow * wxWindow_FindWindowByLabel(const wxString & label, const wxWindow * parent) {
-    return wxWindow::FindWindowByLabel(label, parent);
-}
-inline wxWindow * wxWindow_FindWindowByName(const wxString & name, const wxWindow * parent) {
-    return wxWindow::FindWindowByName(name, parent);
-}
-inline wxWindow * wxWindow_GetCapture() {
-    return wxWindow::GetCapture();
-}
-inline wxWindowID wxWindow_NewControlId(int count) {
-    return wxWindow::NewControlId(count);
-}
-inline void wxWindow_UnreserveControlId(wxWindowID id, int count) {
-    return wxWindow::UnreserveControlId(id, count);
-}
-inline wxWindow *NewWindow() {
-    return new wxWindow();
-}
-inline wxWindow *NewWindow(wxWindow * parent, wxWindowID id, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
-    return new wxWindow(parent, id, pos, size, style, name);
-}
-inline bool wxWindow_Create(wxWindow & self, wxWindow * parent, wxWindowID id, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
-    return self.Create(parent, id, pos, size, style, name);
-}
+bool wxWindow_AcceptsFocus(const wxWindow * self);
+bool wxWindow_AcceptsFocusFromKeyboard(const wxWindow * self);
+bool wxWindow_AcceptsFocusRecursively(const wxWindow * self);
+void wxWindow_DisableFocusFromKeyboard(wxWindow * self);
+bool wxWindow_IsFocusable(const wxWindow * self);
+bool wxWindow_CanAcceptFocus(const wxWindow * self);
+bool wxWindow_CanAcceptFocusFromKeyboard(const wxWindow * self);
+bool wxWindow_HasFocus(const wxWindow * self);
+void wxWindow_SetCanFocus(wxWindow * self, bool can_focus);
+void wxWindow_EnableVisibleFocus(wxWindow * self, bool enable);
+void wxWindow_SetFocus(wxWindow * self);
+void wxWindow_SetFocusFromKbd(wxWindow * self);
+void wxWindow_AddChild(wxWindow * self, wxWindow * child);
+bool wxWindow_DestroyChildren(wxWindow * self);
+wxWindow * wxWindow_FindWindow(const wxWindow * self, int32_t id);
+wxWindow * wxWindow_FindWindow1(const wxWindow * self, const wxString * name);
+void wxWindow_RemoveChild(wxWindow * self, wxWindow * child);
+wxWindow * wxWindow_GetGrandParent(const wxWindow * self);
+wxWindow * wxWindow_GetNextSibling(const wxWindow * self);
+wxWindow * wxWindow_GetParent(const wxWindow * self);
+wxWindow * wxWindow_GetPrevSibling(const wxWindow * self);
+bool wxWindow_IsDescendant(const wxWindow * self, wxWindow * win);
+bool wxWindow_Reparent(wxWindow * self, wxWindow * new_parent);
+void wxWindow_AlwaysShowScrollbars(wxWindow * self, bool hflag, bool vflag);
+int wxWindow_GetScrollPos(const wxWindow * self, int orientation);
+int wxWindow_GetScrollRange(const wxWindow * self, int orientation);
+int wxWindow_GetScrollThumb(const wxWindow * self, int orientation);
+bool wxWindow_CanScroll(const wxWindow * self, int orient);
+bool wxWindow_HasScrollbar(const wxWindow * self, int orient);
+bool wxWindow_IsScrollbarAlwaysShown(const wxWindow * self, int orient);
+bool wxWindow_ScrollLines(wxWindow * self, int lines);
+bool wxWindow_ScrollPages(wxWindow * self, int pages);
+void wxWindow_ScrollWindow(wxWindow * self, int dx, int dy, const wxRect * rect);
+bool wxWindow_LineUp(wxWindow * self);
+bool wxWindow_LineDown(wxWindow * self);
+bool wxWindow_PageUp(wxWindow * self);
+bool wxWindow_PageDown(wxWindow * self);
+void wxWindow_SetScrollPos(wxWindow * self, int orientation, int pos, bool refresh);
+void wxWindow_SetScrollbar(wxWindow * self, int orientation, int position, int thumb_size, int range, bool refresh);
+bool wxWindow_BeginRepositioningChildren(wxWindow * self);
+void wxWindow_EndRepositioningChildren(wxWindow * self);
+void wxWindow_CacheBestSize(const wxWindow * self, const wxSize * size);
+wxSize *wxWindow_ClientToWindowSize(const wxWindow * self, const wxSize * size);
+wxSize *wxWindow_WindowToClientSize(const wxWindow * self, const wxSize * size);
+void wxWindow_Fit(wxWindow * self);
+void wxWindow_FitInside(wxWindow * self);
+wxSize *wxWindow_FromDIP(const wxWindow * self, const wxSize * sz);
+wxPoint *wxWindow_FromDIP1(const wxWindow * self, const wxPoint * pt);
+int wxWindow_FromDIP2(const wxWindow * self, int d);
+wxSize *wxWindow_ToDIP(const wxWindow * self, const wxSize * sz);
+wxPoint *wxWindow_ToDIP1(const wxWindow * self, const wxPoint * pt);
+int wxWindow_ToDIP2(const wxWindow * self, int d);
+wxSize *wxWindow_GetBestSize(const wxWindow * self);
+int wxWindow_GetBestHeight(const wxWindow * self, int width);
+int wxWindow_GetBestWidth(const wxWindow * self, int height);
+void wxWindow_GetClientSize(const wxWindow * self, int * width, int * height);
+wxSize *wxWindow_GetClientSize1(const wxWindow * self);
+wxSize *wxWindow_GetEffectiveMinSize(const wxWindow * self);
+wxSize *wxWindow_GetMaxClientSize(const wxWindow * self);
+wxSize *wxWindow_GetMaxSize(const wxWindow * self);
+wxSize *wxWindow_GetMinClientSize(const wxWindow * self);
+wxSize *wxWindow_GetMinSize(const wxWindow * self);
+int wxWindow_GetMinWidth(const wxWindow * self);
+int wxWindow_GetMinHeight(const wxWindow * self);
+int wxWindow_GetMaxWidth(const wxWindow * self);
+int wxWindow_GetMaxHeight(const wxWindow * self);
+void wxWindow_GetSize(const wxWindow * self, int * width, int * height);
+wxSize *wxWindow_GetSize1(const wxWindow * self);
+wxSize *wxWindow_GetVirtualSize(const wxWindow * self);
+void wxWindow_GetVirtualSize1(const wxWindow * self, int * width, int * height);
+wxSize *wxWindow_GetBestVirtualSize(const wxWindow * self);
+double wxWindow_GetContentScaleFactor(const wxWindow * self);
+double wxWindow_GetDPIScaleFactor(const wxWindow * self);
+wxSize *wxWindow_GetWindowBorderSize(const wxWindow * self);
+bool wxWindow_InformFirstDirection(wxWindow * self, int direction, int size, int available_other_dir);
+void wxWindow_InvalidateBestSize(wxWindow * self);
+void wxWindow_PostSizeEvent(wxWindow * self);
+void wxWindow_PostSizeEventToParent(wxWindow * self);
+void wxWindow_SendSizeEvent(wxWindow * self, int flags);
+void wxWindow_SendSizeEventToParent(wxWindow * self, int flags);
+void wxWindow_SetClientSize(wxWindow * self, int width, int height);
+void wxWindow_SetClientSize1(wxWindow * self, const wxSize * size);
+void wxWindow_SetClientSize2(wxWindow * self, const wxRect * rect);
+void wxWindow_SetContainingSizer(wxWindow * self, wxSizer * sizer);
+void wxWindow_SetInitialSize(wxWindow * self, const wxSize * size);
+void wxWindow_SetMaxClientSize(wxWindow * self, const wxSize * size);
+void wxWindow_SetMaxSize(wxWindow * self, const wxSize * size);
+void wxWindow_SetMinClientSize(wxWindow * self, const wxSize * size);
+void wxWindow_SetMinSize(wxWindow * self, const wxSize * size);
+void wxWindow_SetSize(wxWindow * self, int x, int y, int width, int height, int size_flags);
+void wxWindow_SetSize1(wxWindow * self, const wxRect * rect);
+void wxWindow_SetSize2(wxWindow * self, const wxSize * size);
+void wxWindow_SetSize3(wxWindow * self, int width, int height);
+void wxWindow_SetSizeHints(wxWindow * self, const wxSize * min_size, const wxSize * max_size, const wxSize * inc_size);
+void wxWindow_SetSizeHints1(wxWindow * self, int min_w, int min_h, int max_w, int max_h, int inc_w, int inc_h);
+void wxWindow_SetVirtualSize(wxWindow * self, int width, int height);
+void wxWindow_SetVirtualSize1(wxWindow * self, const wxSize * size);
+wxSize *wxWindow_FromDIP3(const wxSize * sz, const wxWindow * w);
+wxPoint *wxWindow_FromDIP4(const wxPoint * pt, const wxWindow * w);
+int wxWindow_FromDIP5(int d, const wxWindow * w);
+wxSize *wxWindow_ToDIP3(const wxSize * sz, const wxWindow * w);
+wxPoint *wxWindow_ToDIP4(const wxPoint * pt, const wxWindow * w);
+int wxWindow_ToDIP5(int d, const wxWindow * w);
+void wxWindow_Center(wxWindow * self, int dir);
+void wxWindow_CenterOnParent(wxWindow * self, int dir);
+void wxWindow_Centre(wxWindow * self, int direction);
+void wxWindow_CentreOnParent(wxWindow * self, int direction);
+void wxWindow_GetPosition(const wxWindow * self, int * x, int * y);
+wxPoint *wxWindow_GetPosition1(const wxWindow * self);
+wxRect *wxWindow_GetRect(const wxWindow * self);
+void wxWindow_GetScreenPosition(const wxWindow * self, int * x, int * y);
+wxPoint *wxWindow_GetScreenPosition1(const wxWindow * self);
+wxRect *wxWindow_GetScreenRect(const wxWindow * self);
+wxPoint *wxWindow_GetClientAreaOrigin(const wxWindow * self);
+wxRect *wxWindow_GetClientRect(const wxWindow * self);
+void wxWindow_Move(wxWindow * self, int x, int y, int flags);
+void wxWindow_Move1(wxWindow * self, const wxPoint * pt, int flags);
+void wxWindow_SetPosition(wxWindow * self, const wxPoint * pt);
+void wxWindow_ClientToScreen(const wxWindow * self, int * x, int * y);
+wxPoint *wxWindow_ClientToScreen1(const wxWindow * self, const wxPoint * pt);
+wxPoint *wxWindow_ConvertDialogToPixels(const wxWindow * self, const wxPoint * pt);
+wxSize *wxWindow_ConvertDialogToPixels1(const wxWindow * self, const wxSize * sz);
+wxPoint *wxWindow_ConvertPixelsToDialog(const wxWindow * self, const wxPoint * pt);
+wxSize *wxWindow_ConvertPixelsToDialog1(const wxWindow * self, const wxSize * sz);
+void wxWindow_ScreenToClient(const wxWindow * self, int * x, int * y);
+wxPoint *wxWindow_ScreenToClient1(const wxWindow * self, const wxPoint * pt);
+void wxWindow_ClearBackground(wxWindow * self);
+void wxWindow_Freeze(wxWindow * self);
+void wxWindow_Thaw(wxWindow * self);
+bool wxWindow_IsFrozen(const wxWindow * self);
+int wxWindow_GetCharHeight(const wxWindow * self);
+int wxWindow_GetCharWidth(const wxWindow * self);
+wxSize *wxWindow_GetDPI(const wxWindow * self);
+void wxWindow_GetTextExtent(const wxWindow * self, const wxString * string, int * w, int * h, int * descent, int * external_leading, const wxFont * font);
+wxSize *wxWindow_GetTextExtent1(const wxWindow * self, const wxString * string);
+wxRect *wxWindow_GetUpdateClientRect(const wxWindow * self);
+bool wxWindow_HasTransparentBackground(wxWindow * self);
+void wxWindow_Refresh(wxWindow * self, bool erase_background, const wxRect * rect);
+void wxWindow_RefreshRect(wxWindow * self, const wxRect * rect, bool erase_background);
+void wxWindow_Update(wxWindow * self);
+bool wxWindow_SetBackgroundColour(wxWindow * self, const wxColour * colour);
+bool wxWindow_IsTransparentBackgroundSupported(const wxWindow * self, wxString * reason);
+bool wxWindow_SetFont(wxWindow * self, const wxFont * font);
+bool wxWindow_SetForegroundColour(wxWindow * self, const wxColour * colour);
+void wxWindow_SetOwnBackgroundColour(wxWindow * self, const wxColour * colour);
+bool wxWindow_InheritsBackgroundColour(const wxWindow * self);
+bool wxWindow_UseBgCol(const wxWindow * self);
+bool wxWindow_UseBackgroundColour(const wxWindow * self);
+void wxWindow_SetOwnFont(wxWindow * self, const wxFont * font);
+void wxWindow_SetOwnForegroundColour(wxWindow * self, const wxColour * colour);
+bool wxWindow_UseForegroundColour(const wxWindow * self);
+bool wxWindow_InheritsForegroundColour(const wxWindow * self);
+void wxWindow_SetPalette(wxWindow * self, const wxPalette * pal);
+bool wxWindow_ShouldInheritColours(const wxWindow * self);
+void wxWindow_SetThemeEnabled(wxWindow * self, bool enable);
+bool wxWindow_GetThemeEnabled(const wxWindow * self);
+bool wxWindow_CanSetTransparent(wxWindow * self);
+bool wxWindow_SetTransparent(wxWindow * self, wxByte alpha);
+wxEvtHandler * wxWindow_GetEventHandler(const wxWindow * self);
+bool wxWindow_HandleAsNavigationKey(wxWindow * self, const wxKeyEvent * event);
+bool wxWindow_HandleWindowEvent(const wxWindow * self, wxEvent * event);
+bool wxWindow_ProcessWindowEvent(wxWindow * self, wxEvent * event);
+bool wxWindow_ProcessWindowEventLocally(wxWindow * self, wxEvent * event);
+wxEvtHandler * wxWindow_PopEventHandler(wxWindow * self, bool delete_handler);
+void wxWindow_PushEventHandler(wxWindow * self, wxEvtHandler * handler);
+bool wxWindow_RemoveEventHandler(wxWindow * self, wxEvtHandler * handler);
+void wxWindow_SetEventHandler(wxWindow * self, wxEvtHandler * handler);
+void wxWindow_SetNextHandler(wxWindow * self, wxEvtHandler * handler);
+void wxWindow_SetPreviousHandler(wxWindow * self, wxEvtHandler * handler);
+int32_t wxWindow_GetExtraStyle(const wxWindow * self);
+int32_t wxWindow_GetWindowStyleFlag(const wxWindow * self);
+int32_t wxWindow_GetWindowStyle(const wxWindow * self);
+bool wxWindow_HasExtraStyle(const wxWindow * self, int ex_flag);
+bool wxWindow_HasFlag(const wxWindow * self, int flag);
+void wxWindow_SetExtraStyle(wxWindow * self, int32_t ex_style);
+void wxWindow_SetWindowStyleFlag(wxWindow * self, int32_t style);
+void wxWindow_SetWindowStyle(wxWindow * self, int32_t style);
+bool wxWindow_ToggleWindowStyle(wxWindow * self, int flag);
+void wxWindow_MoveAfterInTabOrder(wxWindow * self, wxWindow * win);
+void wxWindow_MoveBeforeInTabOrder(wxWindow * self, wxWindow * win);
+bool wxWindow_Navigate(wxWindow * self, int flags);
+bool wxWindow_NavigateIn(wxWindow * self, int flags);
+void wxWindow_Lower(wxWindow * self);
+void wxWindow_Raise(wxWindow * self);
+bool wxWindow_Hide(wxWindow * self);
+bool wxWindow_IsEnabled(const wxWindow * self);
+bool wxWindow_IsExposed(const wxWindow * self, int x, int y);
+bool wxWindow_IsExposed1(const wxWindow * self, wxPoint * pt);
+bool wxWindow_IsExposed2(const wxWindow * self, int x, int y, int w, int h);
+bool wxWindow_IsExposed3(const wxWindow * self, wxRect * rect);
+bool wxWindow_IsShown(const wxWindow * self);
+bool wxWindow_IsShownOnScreen(const wxWindow * self);
+bool wxWindow_Disable(wxWindow * self);
+bool wxWindow_Enable(wxWindow * self, bool enable);
+bool wxWindow_Show(wxWindow * self, bool show);
+wxString *wxWindow_GetHelpText(const wxWindow * self);
+void wxWindow_SetHelpText(wxWindow * self, const wxString * help_text);
+wxToolTip * wxWindow_GetToolTip(const wxWindow * self);
+wxString *wxWindow_GetToolTipText(const wxWindow * self);
+void wxWindow_SetToolTip(wxWindow * self, const wxString * tip_string);
+void wxWindow_SetToolTip1(wxWindow * self, wxToolTip * tip);
+void wxWindow_UnsetToolTip(wxWindow * self);
+int wxWindow_GetPopupMenuSelectionFromUser(wxWindow * self, wxMenu * menu, const wxPoint * pos);
+int wxWindow_GetPopupMenuSelectionFromUser1(wxWindow * self, wxMenu * menu, int x, int y);
+bool wxWindow_PopupMenu(wxWindow * self, wxMenu * menu, const wxPoint * pos);
+bool wxWindow_PopupMenu1(wxWindow * self, wxMenu * menu, int x, int y);
+wxValidator * wxWindow_GetValidator(wxWindow * self);
+void wxWindow_SetValidator(wxWindow * self, const wxValidator * validator);
+bool wxWindow_TransferDataFromWindow(wxWindow * self);
+bool wxWindow_TransferDataToWindow(wxWindow * self);
+bool wxWindow_Validate(wxWindow * self);
+wxWindowID wxWindow_GetId(const wxWindow * self);
+wxString *wxWindow_GetLabel(const wxWindow * self);
+wxCoord wxWindow_AdjustForLayoutDirection(const wxWindow * self, wxCoord x, wxCoord width, wxCoord width_total);
+wxString *wxWindow_GetName(const wxWindow * self);
+void wxWindow_SetId(wxWindow * self, wxWindowID winid);
+void wxWindow_SetLabel(wxWindow * self, const wxString * label);
+void wxWindow_SetName(wxWindow * self, const wxString * name);
+wxAcceleratorTable * wxWindow_GetAcceleratorTable(wxWindow * self);
+void wxWindow_SetAcceleratorTable(wxWindow * self, const wxAcceleratorTable * accel);
+bool wxWindow_Close(wxWindow * self, bool force);
+bool wxWindow_Destroy(wxWindow * self);
+bool wxWindow_IsBeingDeleted(const wxWindow * self);
+wxDropTarget * wxWindow_GetDropTarget(const wxWindow * self);
+void wxWindow_SetDropTarget(wxWindow * self, wxDropTarget * target);
+void wxWindow_DragAcceptFiles(wxWindow * self, bool accept);
+wxSizer * wxWindow_GetContainingSizer(const wxWindow * self);
+wxSizer * wxWindow_GetSizer(const wxWindow * self);
+void wxWindow_SetSizer(wxWindow * self, wxSizer * sizer, bool delete_old);
+void wxWindow_SetSizerAndFit(wxWindow * self, wxSizer * sizer, bool delete_old);
+wxLayoutConstraints * wxWindow_GetConstraints(const wxWindow * self);
+void wxWindow_SetConstraints(wxWindow * self, wxLayoutConstraints * constraints);
+bool wxWindow_Layout(wxWindow * self);
+void wxWindow_SetAutoLayout(wxWindow * self, bool auto_layout);
+bool wxWindow_GetAutoLayout(const wxWindow * self);
+void wxWindow_CaptureMouse(wxWindow * self);
+wxCaret * wxWindow_GetCaret(const wxWindow * self);
+bool wxWindow_HasCapture(const wxWindow * self);
+void wxWindow_ReleaseMouse(wxWindow * self);
+void wxWindow_SetCaret(wxWindow * self, wxCaret * caret);
+bool wxWindow_SetCursor(wxWindow * self, const wxCursor * cursor);
+void wxWindow_WarpPointer(wxWindow * self, int x, int y);
+bool wxWindow_EnableTouchEvents(wxWindow * self, int events_mask);
+void wxWindow_DoUpdateWindowUI(wxWindow * self, wxUpdateUIEvent * event);
+bool wxWindow_HasMultiplePages(const wxWindow * self);
+void wxWindow_InheritAttributes(wxWindow * self);
+void wxWindow_InitDialog(wxWindow * self);
+bool wxWindow_IsDoubleBuffered(const wxWindow * self);
+void wxWindow_SetDoubleBuffered(wxWindow * self, bool on);
+bool wxWindow_IsRetained(const wxWindow * self);
+bool wxWindow_IsThisEnabled(const wxWindow * self);
+bool wxWindow_IsTopLevel(const wxWindow * self);
+void wxWindow_OnInternalIdle(wxWindow * self);
+bool wxWindow_SendIdleEvents(wxWindow * self, wxIdleEvent * event);
+bool wxWindow_RegisterHotKey(wxWindow * self, int hotkey_id, int modifiers, int virtual_key_code);
+bool wxWindow_UnregisterHotKey(wxWindow * self, int hotkey_id);
+void wxWindow_UpdateWindowUI(wxWindow * self, int32_t flags);
+wxWindow * wxWindow_FindFocus();
+wxWindow * wxWindow_FindWindowById(int32_t id, const wxWindow * parent);
+wxWindow * wxWindow_FindWindowByLabel(const wxString * label, const wxWindow * parent);
+wxWindow * wxWindow_FindWindowByName(const wxString * name, const wxWindow * parent);
+wxWindow * wxWindow_GetCapture();
+wxWindowID wxWindow_NewControlId(int count);
+void wxWindow_UnreserveControlId(wxWindowID id, int count);
+wxWindow *wxWindow_new();
+wxWindow *wxWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, int32_t style, const wxString * name);
+bool wxWindow_Create(wxWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, int32_t style, const wxString * name);
 
 // CLASS: wxControl
-inline wxControl *NewControl(wxWindow * parent, wxWindowID id, const wxPoint & pos, const wxSize & size, int32_t style, const wxValidator & validator, const wxString & name) {
-    return new wxControl(parent, id, pos, size, style, validator, name);
-}
-inline wxControl *NewControl() {
-    return new wxControl();
-}
-inline bool wxControl_Create(wxControl & self, wxWindow * parent, wxWindowID id, const wxPoint & pos, const wxSize & size, int32_t style, const wxValidator & validator, const wxString & name) {
-    return self.Create(parent, id, pos, size, style, validator, name);
-}
-inline rust::String wxControl_GetLabel(const wxControl & self) {
-    return rust::String(self.GetLabel().utf8_str());
-}
-inline rust::String wxControl_GetLabelText(const wxControl & self) {
-    return rust::String(self.GetLabelText().utf8_str());
-}
-inline rust::String wxControl_GetLabelText(const wxString & label) {
-    return rust::String(wxControl::GetLabelText(label).utf8_str());
-}
-inline rust::String wxControl_RemoveMnemonics(const wxString & str) {
-    return rust::String(wxControl::RemoveMnemonics(str).utf8_str());
-}
-inline rust::String wxControl_EscapeMnemonics(const wxString & text) {
-    return rust::String(wxControl::EscapeMnemonics(text).utf8_str());
-}
+wxControl *wxControl_new(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, int32_t style, const wxValidator * validator, const wxString * name);
+wxControl *wxControl_new1();
+bool wxControl_Create(wxControl * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, int32_t style, const wxValidator * validator, const wxString * name);
+void wxControl_Command(wxControl * self, wxCommandEvent * event);
+wxString *wxControl_GetLabel(const wxControl * self);
+wxString *wxControl_GetLabelText(const wxControl * self);
+wxSize *wxControl_GetSizeFromTextSize(const wxControl * self, int xlen, int ylen);
+wxSize *wxControl_GetSizeFromTextSize1(const wxControl * self, const wxSize * tsize);
+wxSize *wxControl_GetSizeFromText(const wxControl * self, const wxString * text);
+void wxControl_SetLabel(wxControl * self, const wxString * label);
+void wxControl_SetLabelText(wxControl * self, const wxString * text);
+bool wxControl_SetLabelMarkup(wxControl * self, const wxString * markup);
+wxString *wxControl_GetLabelText1(const wxString * label);
+wxString *wxControl_RemoveMnemonics(const wxString * str);
+wxString *wxControl_EscapeMnemonics(const wxString * text);
 
 // CLASS: wxAnyButton
-inline wxAnyButton *NewAnyButton() {
-    return new wxAnyButton();
-}
+wxAnyButton *wxAnyButton_new();
+void wxAnyButton_SetBitmapCurrent(wxAnyButton * self, const wxBitmap * bitmap);
+void wxAnyButton_SetBitmapDisabled(wxAnyButton * self, const wxBitmap * bitmap);
+void wxAnyButton_SetBitmapFocus(wxAnyButton * self, const wxBitmap * bitmap);
+void wxAnyButton_SetBitmapLabel(wxAnyButton * self, const wxBitmap * bitmap);
+void wxAnyButton_SetBitmapPressed(wxAnyButton * self, const wxBitmap * bitmap);
+wxSize *wxAnyButton_GetBitmapMargins(wxAnyButton * self);
+void wxAnyButton_SetBitmapMargins(wxAnyButton * self, wxCoord x, wxCoord y);
+void wxAnyButton_SetBitmapMargins1(wxAnyButton * self, const wxSize * sz);
 
 // CLASS: wxButton
-inline wxButton *NewButton() {
-    return new wxButton();
-}
-inline wxButton *NewButton(wxWindow * parent, wxWindowID id, const wxString & label, const wxPoint & pos, const wxSize & size, int32_t style, const wxValidator & validator, const wxString & name) {
-    return new wxButton(parent, id, label, pos, size, style, validator, name);
-}
-inline bool wxButton_Create(wxButton & self, wxWindow * parent, wxWindowID id, const wxString & label, const wxPoint & pos, const wxSize & size, int32_t style, const wxValidator & validator, const wxString & name) {
-    return self.Create(parent, id, label, pos, size, style, validator, name);
-}
-inline rust::String wxButton_GetLabel(const wxButton & self) {
-    return rust::String(self.GetLabel().utf8_str());
-}
-inline wxSize wxButton_GetDefaultSize(wxWindow * win) {
-    return wxButton::GetDefaultSize(win);
-}
+wxButton *wxButton_new();
+wxButton *wxButton_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, int32_t style, const wxValidator * validator, const wxString * name);
+bool wxButton_Create(wxButton * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, int32_t style, const wxValidator * validator, const wxString * name);
+bool wxButton_GetAuthNeeded(const wxButton * self);
+wxString *wxButton_GetLabel(const wxButton * self);
+void wxButton_SetAuthNeeded(wxButton * self, bool needed);
+wxWindow * wxButton_SetDefault(wxButton * self);
+void wxButton_SetLabel(wxButton * self, const wxString * label);
+wxSize *wxButton_GetDefaultSize(wxWindow * win);
 
 // CLASS: wxNonOwnedWindow
+bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow * self, const wxRegion * region);
+bool wxNonOwnedWindow_SetShape1(wxNonOwnedWindow * self, const wxGraphicsPath * path);
 
 // CLASS: wxTopLevelWindow
-inline wxTopLevelWindow *NewTopLevelWindow() {
-    return new wxTopLevelWindow();
-}
-inline wxTopLevelWindow *NewTopLevelWindow(wxWindow * parent, wxWindowID id, const wxString & title, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
-    return new wxTopLevelWindow(parent, id, title, pos, size, style, name);
-}
-inline bool wxTopLevelWindow_Create(wxTopLevelWindow & self, wxWindow * parent, wxWindowID id, const wxString & title, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
-    return self.Create(parent, id, title, pos, size, style, name);
-}
-inline rust::String wxTopLevelWindow_GetTitle(const wxTopLevelWindow & self) {
-    return rust::String(self.GetTitle().utf8_str());
-}
-inline bool wxTopLevelWindow_ShowFullScreen(wxTopLevelWindow & self, bool show, int32_t style) {
-    return self.ShowFullScreen(show, style);
-}
-inline wxSize wxTopLevelWindow_GetDefaultSize() {
-    return wxTopLevelWindow::GetDefaultSize();
-}
+wxTopLevelWindow *wxTopLevelWindow_new();
+wxTopLevelWindow *wxTopLevelWindow_new1(wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, int32_t style, const wxString * name);
+bool wxTopLevelWindow_Create(wxTopLevelWindow * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, int32_t style, const wxString * name);
+bool wxTopLevelWindow_CanSetTransparent(wxTopLevelWindow * self);
+void wxTopLevelWindow_CenterOnScreen(wxTopLevelWindow * self, int direction);
+void wxTopLevelWindow_CentreOnScreen(wxTopLevelWindow * self, int direction);
+bool wxTopLevelWindow_EnableCloseButton(wxTopLevelWindow * self, bool enable);
+bool wxTopLevelWindow_EnableMaximizeButton(wxTopLevelWindow * self, bool enable);
+bool wxTopLevelWindow_EnableMinimizeButton(wxTopLevelWindow * self, bool enable);
+wxWindow * wxTopLevelWindow_GetDefaultItem(const wxTopLevelWindow * self);
+wxString *wxTopLevelWindow_GetTitle(const wxTopLevelWindow * self);
+void wxTopLevelWindow_Iconize(wxTopLevelWindow * self, bool iconize);
+bool wxTopLevelWindow_IsActive(wxTopLevelWindow * self);
+bool wxTopLevelWindow_IsAlwaysMaximized(const wxTopLevelWindow * self);
+bool wxTopLevelWindow_IsFullScreen(const wxTopLevelWindow * self);
+bool wxTopLevelWindow_IsIconized(const wxTopLevelWindow * self);
+bool wxTopLevelWindow_IsMaximized(const wxTopLevelWindow * self);
+bool wxTopLevelWindow_Layout(wxTopLevelWindow * self);
+void wxTopLevelWindow_Maximize(wxTopLevelWindow * self, bool maximize);
+void wxTopLevelWindow_RequestUserAttention(wxTopLevelWindow * self, int flags);
+void wxTopLevelWindow_Restore(wxTopLevelWindow * self);
+wxWindow * wxTopLevelWindow_SetDefaultItem(wxTopLevelWindow * self, wxWindow * win);
+wxWindow * wxTopLevelWindow_SetTmpDefaultItem(wxTopLevelWindow * self, wxWindow * win);
+wxWindow * wxTopLevelWindow_GetTmpDefaultItem(const wxTopLevelWindow * self);
+void wxTopLevelWindow_SetIcon(wxTopLevelWindow * self, const wxIcon * icon);
+void wxTopLevelWindow_SetIcons(wxTopLevelWindow * self, const wxIconBundle * icons);
+void wxTopLevelWindow_SetMaxSize(wxTopLevelWindow * self, const wxSize * size);
+void wxTopLevelWindow_SetMinSize(wxTopLevelWindow * self, const wxSize * size);
+void wxTopLevelWindow_SetSizeHints(wxTopLevelWindow * self, int min_w, int min_h, int max_w, int max_h, int inc_w, int inc_h);
+void wxTopLevelWindow_SetSizeHints1(wxTopLevelWindow * self, const wxSize * min_size, const wxSize * max_size, const wxSize * inc_size);
+void wxTopLevelWindow_SetTitle(wxTopLevelWindow * self, const wxString * title);
+bool wxTopLevelWindow_SetTransparent(wxTopLevelWindow * self, wxByte alpha);
+bool wxTopLevelWindow_ShouldPreventAppExit(const wxTopLevelWindow * self);
+void wxTopLevelWindow_OSXSetModified(wxTopLevelWindow * self, bool modified);
+bool wxTopLevelWindow_OSXIsModified(const wxTopLevelWindow * self);
+void wxTopLevelWindow_SetRepresentedFilename(wxTopLevelWindow * self, const wxString * filename);
+void wxTopLevelWindow_ShowWithoutActivating(wxTopLevelWindow * self);
+bool wxTopLevelWindow_EnableFullScreenView(wxTopLevelWindow * self, bool enable);
+bool wxTopLevelWindow_ShowFullScreen(wxTopLevelWindow * self, bool show, int32_t style);
+wxSize *wxTopLevelWindow_GetDefaultSize();
 
 // CLASS: wxFrame
-inline wxFrame *NewFrame() {
-    return new wxFrame();
-}
-inline wxFrame *NewFrame(wxWindow * parent, wxWindowID id, const wxString & title, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
-    return new wxFrame(parent, id, title, pos, size, style, name);
-}
-inline bool wxFrame_Create(wxFrame & self, wxWindow * parent, wxWindowID id, const wxString & title, const wxPoint & pos, const wxSize & size, int32_t style, const wxString & name) {
-    return self.Create(parent, id, title, pos, size, style, name);
-}
-inline wxStatusBar * wxFrame_CreateStatusBar(wxFrame & self, int number, int32_t style, wxWindowID id, const wxString & name) {
-    return self.CreateStatusBar(number, style, id, name);
-}
-inline wxToolBar * wxFrame_CreateToolBar(wxFrame & self, int32_t style, wxWindowID id, const wxString & name) {
-    return self.CreateToolBar(style, id, name);
-}
-inline wxStatusBar * wxFrame_OnCreateStatusBar(wxFrame & self, int number, int32_t style, wxWindowID id, const wxString & name) {
-    return self.OnCreateStatusBar(number, style, id, name);
-}
-inline wxToolBar * wxFrame_OnCreateToolBar(wxFrame & self, int32_t style, wxWindowID id, const wxString & name) {
-    return self.OnCreateToolBar(style, id, name);
-}
+wxFrame *wxFrame_new();
+wxFrame *wxFrame_new1(wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, int32_t style, const wxString * name);
+void wxFrame_Centre(wxFrame * self, int direction);
+bool wxFrame_Create(wxFrame * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, int32_t style, const wxString * name);
+wxStatusBar * wxFrame_CreateStatusBar(wxFrame * self, int number, int32_t style, wxWindowID id, const wxString * name);
+wxToolBar * wxFrame_CreateToolBar(wxFrame * self, int32_t style, wxWindowID id, const wxString * name);
+void wxFrame_DoGiveHelp(wxFrame * self, const wxString * text, bool show);
+wxPoint *wxFrame_GetClientAreaOrigin(const wxFrame * self);
+wxMenuBar * wxFrame_GetMenuBar(const wxFrame * self);
+wxStatusBar * wxFrame_GetStatusBar(const wxFrame * self);
+int wxFrame_GetStatusBarPane(const wxFrame * self);
+wxToolBar * wxFrame_GetToolBar(const wxFrame * self);
+wxStatusBar * wxFrame_OnCreateStatusBar(wxFrame * self, int number, int32_t style, wxWindowID id, const wxString * name);
+wxToolBar * wxFrame_OnCreateToolBar(wxFrame * self, int32_t style, wxWindowID id, const wxString * name);
+bool wxFrame_ProcessCommand(wxFrame * self, int id);
+void wxFrame_SetMenuBar(wxFrame * self, wxMenuBar * menu_bar);
+void wxFrame_SetStatusBar(wxFrame * self, wxStatusBar * status_bar);
+void wxFrame_SetStatusBarPane(wxFrame * self, int n);
+void wxFrame_SetStatusText(wxFrame * self, const wxString * text, int number);
+void wxFrame_SetStatusWidths(wxFrame * self, int n, const int * widths_field);
+void wxFrame_SetToolBar(wxFrame * self, wxToolBar * tool_bar);
+void wxFrame_PushStatusText(wxFrame * self, const wxString * text, int number);
+void wxFrame_PopStatusText(wxFrame * self, int number);
 
 // CLASS: wxPoint
-inline wxPoint NewPoint() {
-    return wxPoint();
-}
-inline wxPoint NewPoint(int x, int y) {
-    return wxPoint(x, y);
-}
-inline wxPoint NewPoint(const wxRealPoint & pt) {
-    return wxPoint(pt);
-}
+bool wxPoint_IsFullySpecified(const wxPoint * self);
+void wxPoint_SetDefaults(wxPoint * self, const wxPoint * pt);
+wxPoint *wxPoint_new();
+wxPoint *wxPoint_new1(int x, int y);
+wxPoint *wxPoint_new2(const wxRealPoint * pt);
 
 // CLASS: wxRect
-inline wxRect NewRect() {
-    return wxRect();
-}
-inline wxRect NewRect(int x, int y, int width, int height) {
-    return wxRect(x, y, width, height);
-}
-inline wxRect NewRect(const wxPoint & top_left, const wxPoint & bottom_right) {
-    return wxRect(top_left, bottom_right);
-}
-inline wxRect NewRect(const wxPoint & pos, const wxSize & size) {
-    return wxRect(pos, size);
-}
-inline wxRect NewRect(const wxSize & size) {
-    return wxRect(size);
-}
+wxRect *wxRect_new();
+wxRect *wxRect_new1(int x, int y, int width, int height);
+wxRect *wxRect_new2(const wxPoint * top_left, const wxPoint * bottom_right);
+wxRect *wxRect_new3(const wxPoint * pos, const wxSize * size);
+wxRect *wxRect_new4(const wxSize * size);
+wxRect *wxRect_CentreIn(const wxRect * self, const wxRect * r, int dir);
+wxRect *wxRect_CenterIn(const wxRect * self, const wxRect * r, int dir);
+bool wxRect_Contains(const wxRect * self, int x, int y);
+bool wxRect_Contains1(const wxRect * self, const wxPoint * pt);
+bool wxRect_Contains2(const wxRect * self, const wxRect * rect);
+wxRect *wxRect_Deflate3(const wxRect * self, wxCoord dx, wxCoord dy);
+int wxRect_GetBottom(const wxRect * self);
+wxPoint *wxRect_GetBottomLeft(const wxRect * self);
+wxPoint *wxRect_GetBottomRight(const wxRect * self);
+int wxRect_GetHeight(const wxRect * self);
+int wxRect_GetLeft(const wxRect * self);
+wxPoint *wxRect_GetPosition(const wxRect * self);
+int wxRect_GetRight(const wxRect * self);
+wxSize *wxRect_GetSize(const wxRect * self);
+int wxRect_GetTop(const wxRect * self);
+wxPoint *wxRect_GetTopLeft(const wxRect * self);
+wxPoint *wxRect_GetTopRight(const wxRect * self);
+int wxRect_GetWidth(const wxRect * self);
+int wxRect_GetX(const wxRect * self);
+int wxRect_GetY(const wxRect * self);
+wxRect *wxRect_Inflate3(const wxRect * self, wxCoord dx, wxCoord dy);
+wxRect *wxRect_Intersect1(const wxRect * self, const wxRect * rect);
+bool wxRect_Intersects(const wxRect * self, const wxRect * rect);
+bool wxRect_IsEmpty(const wxRect * self);
+void wxRect_Offset(wxRect * self, wxCoord dx, wxCoord dy);
+void wxRect_Offset1(wxRect * self, const wxPoint * pt);
+void wxRect_SetHeight(wxRect * self, int height);
+void wxRect_SetPosition(wxRect * self, const wxPoint * pos);
+void wxRect_SetSize(wxRect * self, const wxSize * s);
+void wxRect_SetWidth(wxRect * self, int width);
+void wxRect_SetX(wxRect * self, int x);
+void wxRect_SetY(wxRect * self, int y);
+void wxRect_SetLeft(wxRect * self, int left);
+void wxRect_SetRight(wxRect * self, int right);
+void wxRect_SetTop(wxRect * self, int top);
+void wxRect_SetBottom(wxRect * self, int bottom);
+void wxRect_SetTopLeft(wxRect * self, const wxPoint * p);
+void wxRect_SetBottomRight(wxRect * self, const wxPoint * p);
+void wxRect_SetTopRight(wxRect * self, const wxPoint * p);
+void wxRect_SetBottomLeft(wxRect * self, const wxPoint * p);
+wxRect *wxRect_Union(const wxRect * self, const wxRect * rect);
 
 // CLASS: wxSize
-inline wxSize NewSize() {
-    return wxSize();
-}
-inline wxSize NewSize(int width, int height) {
-    return wxSize(width, height);
-}
+wxSize *wxSize_new();
+wxSize *wxSize_new1(int width, int height);
+void wxSize_DecBy(wxSize * self, const wxPoint * pt);
+void wxSize_DecBy1(wxSize * self, const wxSize * size);
+void wxSize_DecBy2(wxSize * self, int dx, int dy);
+void wxSize_DecBy3(wxSize * self, int d);
+void wxSize_DecTo(wxSize * self, const wxSize * size);
+void wxSize_DecToIfSpecified(wxSize * self, const wxSize * size);
+int wxSize_GetHeight(const wxSize * self);
+int wxSize_GetWidth(const wxSize * self);
+void wxSize_IncBy(wxSize * self, const wxPoint * pt);
+void wxSize_IncBy1(wxSize * self, const wxSize * size);
+void wxSize_IncBy2(wxSize * self, int dx, int dy);
+void wxSize_IncBy3(wxSize * self, int d);
+void wxSize_IncTo(wxSize * self, const wxSize * size);
+bool wxSize_IsFullySpecified(const wxSize * self);
+void wxSize_Set(wxSize * self, int width, int height);
+void wxSize_SetDefaults(wxSize * self, const wxSize * size_default);
+void wxSize_SetHeight(wxSize * self, int height);
+void wxSize_SetWidth(wxSize * self, int width);
 
 // CLASS: wxValidator
-inline wxValidator *NewValidator() {
-    return new wxValidator();
-}
-inline void wxValidator_SuppressBellOnError(bool suppress) {
-    return wxValidator::SuppressBellOnError(suppress);
-}
-inline bool wxValidator_IsSilent() {
-    return wxValidator::IsSilent();
-}
+wxValidator *wxValidator_new();
+wxObject * wxValidator_Clone(const wxValidator * self);
+wxWindow * wxValidator_GetWindow(const wxValidator * self);
+void wxValidator_SetWindow(wxValidator * self, wxWindow * window);
+bool wxValidator_TransferFromWindow(wxValidator * self);
+bool wxValidator_TransferToWindow(wxValidator * self);
+bool wxValidator_Validate(wxValidator * self, wxWindow * parent);
+void wxValidator_SuppressBellOnError(bool suppress);
+bool wxValidator_IsSilent();
 
-} // namespace wxrust
+} // extern "C"
 

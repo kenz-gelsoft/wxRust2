@@ -20,18 +20,9 @@ class RustClassBinding:
             self.__model.name,
         )
         if not for_shim:
-            handwritten = ''
-            if self.__model.is_trivial():
-                handwritten = ' = crate::%s' % (self.__model.name,)
-            yield 'type %s%s;' % (
+            yield 'type %s;' % (
                 self.__model.name,
-                handwritten,
             )
-            internal_base = self.__model.internal_base()
-            if internal_base:
-                yield 'type %s;' % (
-                    internal_base,
-                )
         for method in self.__methods:
             for line in method.ffi_lines(for_shim=for_shim):
                 yield line
@@ -40,18 +31,12 @@ class RustClassBinding:
         yield '// %s' % (
             self.__model.name,
         )
-        if self.__model.is_trivial():
-            yield 'pub struct %s(ffi::%s);' % (
-                self.__model.unprefixed(),
-                self.__model.name,
-            )
-        else:
-            yield 'wx_class! { %s(%s) impl' % (
-                self.__model.unprefixed(),
-                self.__model.name,
-            )
-            yield ',\n'.join(self._ancestor_methods(classes))
-            yield '}'
+        yield 'wx_class! { %s(%s) impl' % (
+            self.__model.unprefixed(),
+            self.__model.name,
+        )
+        yield ',\n'.join(self._ancestor_methods(classes))
+        yield '}'
         for line in self._impl_with_ctors():
             yield line
         for line in self._trait_with_methods():
@@ -85,22 +70,20 @@ class RustClassBinding:
         yield "    pub fn none() -> Option<&'static Self> {"
         yield '        None'
         yield '    }'
-        if not self.__model.is_trivial():
-            yield '}'
+        yield '}'
 
     def _ctors(self):
         return (m for m in self.__methods if m.is_ctor and not m.is_blocked())
     
     def _trait_with_methods(self):
         indent = ' ' * 4 * 1
-        if not self.__model.is_trivial():
-            base = self.__model.base
-            if not base:
-                base = '__WxRust'
-            yield 'pub trait %sMethods: %sMethods {' % (
-                self.__model.unprefixed(),
-                base[2:],
-            )
+        base = self.__model.base
+        if not base:
+            base = '__WxRust'
+        yield 'pub trait %sMethods: %sMethods {' % (
+            self.__model.unprefixed(),
+            base[2:],
+        )
         for method in self.__methods:
             if method.is_ctor:
                 continue
@@ -119,20 +102,14 @@ class RustMethodBinding:
         self.__shim_self = Param(RustType(model.cls.name, model.const), 'self_')
         self.__generic_params = self._make_params_generic()
 
-        self.__rewrite_rule = None
-        internal_base = self.__model.internal_base()
-        if internal_base:
-            self.__rewrite_rule = { self.__model.cls.name: internal_base }
-
     def is_blocked(self):
         return self.__model.is_blocked()
 
     def ffi_lines(self, for_shim):
         if for_shim and not self.__model.needs_shim():
             return
-        body = '%sfn %s(%s)%s;' % (
-            self._unsafe_or_not(),
-            self.__model.name(for_shim=for_shim, without_index=True),
+        body = 'pub fn %s(%s)%s;' % (
+            self.__model.name(for_shim=for_shim),
             self._rust_params(for_shim=for_shim),
             self._returns_or_not(for_shim=for_shim),
         )
@@ -140,30 +117,21 @@ class RustMethodBinding:
         if not for_shim and suppressed:
             yield '// %s: %s' % (suppressed, body)
             return
-        overload = self._rename()
-        if overload:
-            yield overload
         yield body
 
     def _returns_or_not(self, for_shim=True, binding=False):
         if self.__model.returns.is_void():
             return ''
         returns = self.__model.returns.in_rust(with_ffi=binding)
-        if self.__model.returns.is_str():
-            returns = 'String'
         wrapped = self.__model.wrapped_return_type()
         if wrapped:
             if binding:
                 returns = wrapped[2:]
+                if self.__model.returns.is_str():
+                    returns = 'String'
             elif for_shim:
-                if self.__model.returns.is_trivial():
-                    returns = wrapped
-                else:
-                    returns = '*mut %s' % (wrapped,)
+                returns = '*mut c_void'
         return ' -> %s' % (returns,)
-    
-    def _unsafe_or_not(self):
-        return 'unsafe ' if self._uses_ptr_type() else ''
     
     def _rename(self):
         if self.__model.overload_index == 0:
@@ -204,12 +172,12 @@ class RustMethodBinding:
             self._returns_or_not(binding=True),
         )
         body_lines = list(self._binding_body())
-        for line in self._wrap_if_unsafe(body_lines):
+        for line in self._wrap_unsafe(body_lines):
             yield '    %s' % (line,)
         yield '}'
     
     def _binding_body(self):
-        params = [p.rewrite(self.__rewrite_rule) for p in self.__model.params]
+        params = self.__model.params
         for param in params:
             marshalling = param.marshal()
             if marshalling:
@@ -218,17 +186,11 @@ class RustMethodBinding:
         name = prefixed(self.__model.name(for_shim=True), with_ffi=True)
         self_to_insert = None
         if self.__model.is_instance_method:
-            self_param = self.__self_param.rewrite(self.__rewrite_rule)
-            self_param = self_param.rust_ffi_ref()
-            if self.__model.needs_shim():
-                if self.__model.const:
-                    self_param = '&' + self_param
-                self_to_insert = self_param
-            else:
-                name = '%s.%s' % (
-                    self_param,
-                    self.__model.name(for_shim=True),
-                )
+            is_mut_self = not self.__model.const
+            self_param = self.__self_param.rust_ffi_ref(
+                is_mut_self=is_mut_self,
+            )
+            self_to_insert = self_param
         call = '%s(%s)' % (
             name,
             self._call_params(params, self_to_insert),
@@ -275,21 +237,17 @@ class RustMethodBinding:
     def _rust_params(self, with_ffi=False, binding=False, for_shim=False):
         params = self.__model.params.copy()
         if self.__model.is_instance_method:
-            if for_shim and self.__model.needs_shim():
+            if for_shim:
                 params.insert(0, self.__shim_self)
             else:
                 params.insert(0, self.__self_param)
-        params = (p.rewrite(self.__rewrite_rule) for p in params)
         return ', '.join(self._rust_param(p, with_ffi, binding) for p in params)
 
     def _rust_param(self, param, with_ffi, binding):
         typename = param.type.in_rust(with_ffi, binding)
         if binding:
             if param.is_self():
-                if param.type.is_trivial() and not param.type.const:
-                    return '&mut self'
-                else:
-                    return '&self'
+                return '&self'
             elif param.type.generic_name:
                 typename = 'Option<&%s>' % (param.type.generic_name,)
         return '%s: %s' % (
@@ -297,11 +255,7 @@ class RustMethodBinding:
             typename,
         )
 
-    def _wrap_if_unsafe(self, lines):
-        if not self._uses_ptr_type():
-            for line in lines:
-                yield line
-            return
+    def _wrap_unsafe(self, lines):
         if len(lines) < 2:
             yield 'unsafe { %s }' % (lines[0],)
         else:
@@ -312,8 +266,11 @@ class RustMethodBinding:
 
     def _wrap_return_type(self, call):
         wrapped = self.__model.wrapped_return_type()
+        if self.__model.returns.is_str():
+            return 'crate::from_wx_string(%s)' % (call,)
         if wrapped:
-            return '%s(%s)' % (wrapped[2:], call)
+            wrapped = wrapped[2:]
+            return '%s(%s)' % (wrapped, call)
         return call
 
     def _uses_ptr_type(self):
@@ -325,10 +282,10 @@ class CxxClassBinding:
         self.__model = model
         self.__methods = [CxxMethodBinding(m) for m in model.methods]
     
-    def shims(self):
+    def shims(self, is_cc=False):
         yield '// CLASS: %s' % (self.__model.name,)
         for method in self.__methods:
-            for line in method.shim():
+            for line in method.shim(is_cc):
                 yield line
         yield ''
 
@@ -342,27 +299,31 @@ class CxxMethodBinding:
         self.is_ctor = model.is_ctor
         self.__self_param = Param(RustType(model.cls.name, model.const), 'self')
 
-    def shim(self):
+    def shim(self, is_cc):
         if not self.__model.needs_shim():
             return
         wrapped = self.__model.wrapped_return_type()
         returns = self.__model.returns.in_cxx() + ' '
-        if self.__model.returns.is_str():
-            returns = 'rust::String '
         if wrapped:
-            ptr_or_not = '' if self.__model.returns.is_trivial() else '*'
-            returns = '%s %s' % (
+            returns = '%s *' % (
                 wrapped,
-                ptr_or_not,
             )
-        yield 'inline %s%s(%s) {' % (
-            returns,
-            self.__model.name(for_shim=True, without_index=True),
-            self._cxx_params(),
-        )
+        if is_cc:
+            yield '%s%s(%s) {' % (
+                returns,
+                self.__model.name(for_shim=True),
+                self._cxx_params(),
+            )
+        else:
+            yield '%s%s(%s);' % (
+                returns,
+                self.__model.name(for_shim=True),
+                self._cxx_params(),
+            )
+            return
         new_params_or_expr = self._call_params()
         if not self.is_ctor:
-            self_or_class = 'self.'
+            self_or_class = 'self->'
             if self.__model.is_static:
                 self_or_class = '%s::' % (self.__model.cls.name,)
             new_params_or_expr = '%s%s(%s)' % (
@@ -370,20 +331,15 @@ class CxxMethodBinding:
                 self.__model.name(for_shim=False, without_index=True),
                 new_params_or_expr,
             )
-        if self.__model.returns.is_str():
-            new_params_or_expr = 'rust::String(%s.utf8_str())' % (
-                new_params_or_expr,
-            )
-        if wrapped and (self.is_ctor or not self.__model.returns.is_trivial()):
-            new_or_not = '' if self.__model.returns.is_trivial() else 'new '
-            yield '    return %s%s(%s);' % (new_or_not, wrapped, new_params_or_expr)
+        if wrapped:
+            yield '    return new %s(%s);' % (wrapped, new_params_or_expr)
         else:
             yield '    return %s;' % (new_params_or_expr,)
         yield '}'
 
     def _cxx_params(self):
         params = self.__model.params.copy()
-        if self.__model.needs_shim() and self.__model.is_instance_method:
+        if self.__model.is_instance_method:
             params.insert(0, self.__self_param)
         return ', '.join(self._cxx_param(p) for p in params)
 
@@ -394,5 +350,10 @@ class CxxMethodBinding:
         )
 
     def _call_params(self):
-        return ', '.join(p.name for p in self.__model.params)
+        return ', '.join(self._deref_if_needed(p) for p in self.__model.params)
+    
+    def _deref_if_needed(self, param):
+        if param.type.is_ref():
+            return '*%s' % (param.name,)
+        return param.name
 

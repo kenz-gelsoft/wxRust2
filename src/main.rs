@@ -12,9 +12,10 @@ fn main() {
         let i = 3;
         println!("i={}", i);
         let button_copy = button.clone();
-        button.bind(wx::EventType::Button, move || {
+        button.bind(wxRUST_EVT_BUTTON, move || {
             println!("i={}", i);
             wx::ButtonMethods::set_label(&button_copy, "clicked");
+            println!("s={}", wx::ButtonMethods::get_label(&button_copy))
         });
         // MEMO: we must choose a non-virtual overriden method
         wx::FrameMethods::centre(&frame, wxBOTH);
