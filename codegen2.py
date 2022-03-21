@@ -36,7 +36,7 @@ def generated_rs(classes, config):
 #![allow(non_upper_case_globals)]
 #![allow(unused_parens)]
 
-use std::os::raw::c_char;
+use std::os::raw::{c_char, c_void};
 use std::pin::Pin;
 use std::ptr;
 
@@ -64,7 +64,10 @@ mod ffi {
             yield '%s%s' % (indent, line)
     yield '''\
     }
-    unsafe extern "C++" {'''
+}
+mod ffi2 {
+    use std::os::raw::c_void;
+    extern "C" {'''
     for cls in bindings:
         for line in cls.ffi_lines(for_shim=True):
             yield '%s%s' % (indent, line)
@@ -89,28 +92,28 @@ def wxrust2_h(classes, config):
 #pragma once
 #include <wx/wx.h>
 
-namespace wxrust {
+extern "C" {
 '''
     for cls in classes:
         binding = CxxClassBinding(cls)
         for line in binding.shims():
             yield line
     yield '''\
-} // namespace wxrust
+} // extern "C"
 '''
 
 def wxrust2_cc(classes, config):
     yield '''\
 #include <wx/wx.h>
 
-namespace wxrust {
+extern "C" {
 '''
     for cls in classes:
         binding = CxxClassBinding(cls)
         for line in binding.shims(is_cc=True):
             yield line
     yield '''\
-} // namespace wxrust
+} // extern "C"
 '''
 
 if __name__ == '__main__':

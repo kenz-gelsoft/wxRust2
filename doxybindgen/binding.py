@@ -108,7 +108,7 @@ class RustMethodBinding:
     def ffi_lines(self, for_shim):
         if for_shim and not self.__model.needs_shim():
             return
-        body = 'unsafe fn %s(%s)%s;' % (
+        body = 'pub fn %s(%s)%s;' % (
             self.__model.name(for_shim=for_shim),
             self._rust_params(for_shim=for_shim),
             self._returns_or_not(for_shim=for_shim),
@@ -130,7 +130,7 @@ class RustMethodBinding:
                 if self.__model.returns.is_str():
                     returns = 'WxString'
             elif for_shim:
-                returns = '*mut %s' % (wrapped,)
+                returns = '*mut c_void'
         return ' -> %s' % (returns,)
     
     def _rename(self):
@@ -183,7 +183,7 @@ class RustMethodBinding:
             if marshalling:
                 for line in marshalling:
                     yield '%s' % (line,)
-        name = prefixed(self.__model.name(for_shim=True), with_ffi=True)
+        name = prefixed(self.__model.name(for_shim=True), with_ffi2=True)
         self_to_insert = None
         if self.__model.is_instance_method:
             is_mut_self = not self.__model.const
@@ -305,9 +305,7 @@ class CxxMethodBinding:
         wrapped = self.__model.wrapped_return_type()
         returns = self.__model.returns.in_cxx() + ' '
         if wrapped:
-            returns = '%s *' % (
-                wrapped,
-            )
+            returns = 'void *'
         if is_cc:
             yield '%s%s(%s) {' % (
                 returns,

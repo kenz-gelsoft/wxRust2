@@ -3,7 +3,7 @@ macro_rules! wx_class {
         $type:ident($wxType:ident) impl $($methods:ident),*
     ) => {
         #[derive(Clone)]
-        pub struct $type(*mut ffi::$wxType);
+        pub struct $type(*mut c_void);
         $(
             impl $methods for $type {}
         )*

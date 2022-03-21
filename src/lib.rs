@@ -48,9 +48,9 @@ mod ffi2 {
     }
 }
 
-pub struct WxString(*mut ffi::wxString);
-pub unsafe fn wx_string_from(s: &str) -> *const ffi::wxString {
-    return ffi2::wxString_new(s.as_ptr(), s.len()) as _
+pub struct WxString(*mut c_void);
+pub unsafe fn wx_string_from(s: &str) -> *const c_void {
+    return ffi2::wxString_new(s.as_ptr(), s.len())
 }
 
 // Rust closure to wx calablle function+param pair.

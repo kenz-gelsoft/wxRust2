@@ -134,9 +134,8 @@ class Param:
 
     def rust_ffi_ref(self, rename=None, is_mut_self=False):
         name = rename if rename else self.name
-        return '%s.as_ptr() as *mut ffi::%s' % (
+        return '%s.as_ptr() as *mut c_void' % (
             name,
-            self.type.typename,
         )
 
 
@@ -152,15 +151,16 @@ class RustType:
 
     def in_rust(self, with_ffi=False, binding=False):
         t = self.typename
-        if self.__ctor_retval:
-            return t[2:]
-        t = prefixed(t, with_ffi)
+        # if self.__ctor_retval:
+        #     return t[2:]
+        # t = prefixed(t, with_ffi)
+        t = 'c_void'
         ref = '*'
         mut = 'const ' if self.const else 'mut '
         return '%s%s%s' % (ref, mut, t)
     
     def in_cxx(self):
-        t = '%s *' % (self.typename,)
+        t = 'void *'
         if self.const:
             t = 'const %s' % (t,)
         return t
@@ -225,13 +225,15 @@ class CxxType:
     def in_cxx(self):
         if self.__srctype in CXX2CXX:
             return CXX2CXX[self.__srctype]
-        if self.__indirection == '&':
-            const_or_not = '' if self.__is_mut else 'const '
-            new_type = '%s%s *' % (
-                const_or_not,
-                self.typename,
-            )
-            return new_type
+        if self.__indirection:
+            return 'void *'
+        # if self.__indirection == '&':
+        #     const_or_not = '' if self.__is_mut else 'const '
+        #     new_type = '%s%s *' % (
+        #         const_or_not,
+        #         self.typename,
+        #     )
+        #     return new_type
         return self.__srctype
     
     def marshal(self, param):
@@ -251,9 +253,8 @@ class CxxType:
                 name,
                 name,
             )
-            yield '    Some(r) => %s as *mut ffi::%s,' % (
+            yield '    Some(r) => %s as *mut c_void,' % (
                 param.rust_ffi_ref(rename='r'),
-                self.typename,
             )
             yield '    None => ptr::null_mut(),'
             yield '};'
@@ -270,6 +271,8 @@ class CxxType:
         if t in CXX2RUST:
             t = CXX2RUST[t]
         t = prefixed(t, with_ffi)
+        if self.__indirection:
+            t = 'c_void'
         ref = self.__indirection
         if ref == '&':
             ref = '*'
@@ -353,11 +356,13 @@ RUST_PRIMITIVES = [
 ]
 
 
-def prefixed(t, with_ffi=False):
+def prefixed(t, with_ffi=False, with_ffi2=False):
     if t in RUST_PRIMITIVES:
         return t
     elif with_ffi:
         t = 'ffi::%s' % (t,)
+    elif with_ffi2:
+        t = 'ffi2::%s' % (t,)
     return t
 
 
