@@ -134,9 +134,7 @@ class Param:
 
     def rust_ffi_ref(self, rename=None, is_mut_self=False):
         name = rename if rename else self.name
-        return '%s.as_ptr() as *mut c_void' % (
-            name,
-        )
+        return '%s.as_ptr()' % (name,)
 
 
 class RustType:
@@ -251,7 +249,7 @@ class CxxType:
                 name,
                 name,
             )
-            yield '    Some(r) => %s as *mut c_void,' % (
+            yield '    Some(r) => %s,' % (
                 param.rust_ffi_ref(rename='r'),
             )
             yield '    None => ptr::null_mut(),'

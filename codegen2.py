@@ -36,16 +36,11 @@ def generated_rs(classes, config):
 #![allow(non_upper_case_globals)]
 #![allow(unused_parens)]
 
-use std::os::raw::{c_char, c_void};
-use std::pin::Pin;
+use std::os::raw::c_void;
 use std::ptr;
 
 use crate::WxString;
 use crate::macros::wx_class;
-
-// any pointer type used on ffi boundary.
-// we chose this type as it's handy in cxx.
-type UnsafeAnyPtr = *const c_char;
 
 mod ffi {
     use std::os::raw::c_void;
@@ -60,10 +55,7 @@ mod ffi {
 }
 
 pub trait WxRustMethods {
-    unsafe fn as_ptr(&self) -> UnsafeAnyPtr;
-    fn pinned<T>(&self) -> Pin<&mut T> {
-        unsafe { Pin::new_unchecked(&mut *(self.as_ptr() as *mut _)) }
-    }
+    unsafe fn as_ptr(&self) -> *mut c_void;
 }
 '''
     for cls in bindings:

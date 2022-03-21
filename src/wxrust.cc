@@ -4,7 +4,7 @@
 wxIMPLEMENT_APP_NO_MAIN(App);
 
 static CxxClosure<int> globalOnInit;
-void AppSetOnInit(UnsafeAnyPtr f, UnsafeAnyPtr params) {
+void AppSetOnInit(void *f, void *params) {
     globalOnInit = CxxClosure<int>(f, params);
 }
 
@@ -21,7 +21,7 @@ wxEventTypeTag<wxCommandEvent> TypeTagOf(int eventType) {
     }
     return wxEVT_NULL;
 }
-void wxEvtHandler_Bind(wxEvtHandler *self, int eventType, UnsafeAnyPtr aFn, UnsafeAnyPtr aParam) {
+void wxEvtHandler_Bind(wxEvtHandler *self, int eventType, void *aFn, void *aParam) {
     CxxClosure<wxCommandEvent &> functor(aFn, aParam);
     self->Bind(TypeTagOf(eventType), functor);
 }

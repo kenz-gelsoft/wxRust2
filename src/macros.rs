@@ -8,7 +8,7 @@ macro_rules! wx_class {
             impl $methods for $type {}
         )*
         impl WxRustMethods for $type {
-            unsafe fn as_ptr(&self) -> UnsafeAnyPtr { self.0 as _ }
+            unsafe fn as_ptr(&self) -> *mut c_void { self.0 }
         }
     };
 }

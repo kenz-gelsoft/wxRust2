@@ -1,5 +1,4 @@
 use std::convert::TryInto;
-use std::mem;
 use std::os::raw::{c_char, c_void};
 use std::ptr;
 
@@ -13,22 +12,18 @@ pub use manual::*;
 mod generated;
 pub use generated::*;
 
-// any pointer type used on ffi boundary.
-// we chose this type as it's handy in cxx.
-type UnsafeAnyPtr = *const c_char;
-
 mod ffi {
     use std::os::raw::{c_char, c_void};
     extern "C" {
         pub fn AppSetOnInit(
-            aFn: *const c_char,
-            aParam: *const c_char
+            aFn: *mut c_void,
+            aParam: *mut c_void
         );
         pub fn wxEvtHandler_Bind(
             self_: *mut c_void,
             eventType: i32,
-            aFn: *const c_char,
-            aParam: *const c_char
+            aFn: *mut c_void,
+            aParam: *mut c_void
         );
 
         pub fn wxString_new(psz: *const u8, nLength: usize) -> *mut c_void;
@@ -42,16 +37,16 @@ pub unsafe fn wx_string_from(s: &str) -> *const c_void {
 }
 
 // Rust closure to wx calablle function+param pair.
-unsafe fn to_wx_callable<F: Fn() + 'static>(closure: F) -> (UnsafeAnyPtr, UnsafeAnyPtr) {
-    unsafe fn trampoline<F: Fn() + 'static>(closure: UnsafeAnyPtr) {
+unsafe fn to_wx_callable<F: Fn() + 'static>(closure: F) -> (*mut c_void, *mut c_void) {
+    unsafe fn trampoline<F: Fn() + 'static>(closure: *mut c_void) {
         let closure = &*(closure as *const F);
         closure();
     }
     // pass the pointer in the heap to avoid move.
     let closure = Box::new(closure);
     (
-        mem::transmute(trampoline::<F> as UnsafeAnyPtr),
-        Box::into_raw(closure) as UnsafeAnyPtr
+        trampoline::<F> as _,
+        Box::into_raw(closure) as _
     )
 }
 
@@ -62,7 +57,7 @@ impl<T: EvtHandlerMethods> Bindable for T {
     fn bind<F: Fn() + 'static>(&self, event_type: i32, closure: F) {
         unsafe {
             let (f, param) = to_wx_callable(closure);
-            ffi::wxEvtHandler_Bind(self.as_ptr() as *mut c_void, event_type, f, param);
+            ffi::wxEvtHandler_Bind(self.as_ptr(), event_type, f, param);
         }
     }
 }
