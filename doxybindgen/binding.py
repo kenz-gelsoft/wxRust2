@@ -14,15 +14,9 @@ class RustClassBinding:
         self.__methods = [RustMethodBinding(m) for m in model.methods]
 
     def ffi_lines(self):
-        if not True:
-            yield ''
         yield '// CLASS: %s' % (
             self.__model.name,
         )
-        if not True:
-            yield 'type %s;' % (
-                self.__model.name,
-            )
         for method in self.__methods:
             for line in method.ffi_lines():
                 yield line
@@ -106,17 +100,17 @@ class RustMethodBinding:
         return self.__model.is_blocked()
 
     def ffi_lines(self):
-        if True and not self.__model.needs_shim():
+        # TODO: generate blocked or unsupported method for comment
+        if not self.__model.needs_shim():
             return
         body = 'pub fn %s(%s)%s;' % (
             self.__model.name(for_shim=True),
             self._rust_params(for_shim=True),
             self._returns_or_not(),
         )
-        suppressed = self._suppressed_reason()
-        if not True and suppressed:
+        suppressed = self._suppressed_reason(suppress_shim=False)
+        if suppressed:
             yield '// %s: %s' % (suppressed, body)
-            return
         yield body
 
     def _returns_or_not(self, binding=False):
@@ -129,7 +123,7 @@ class RustMethodBinding:
                 returns = wrapped[2:]
                 if self.__model.returns.is_str():
                     returns = 'String'
-            elif True:
+            else:
                 returns = '*mut c_void'
         return ' -> %s' % (returns,)
     
