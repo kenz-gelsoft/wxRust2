@@ -198,14 +198,8 @@ class RustMethodBinding:
     def _suppressed_reason(self):
         if self.__model.is_blocked():
             return 'BLOCKED'
-        if self.__model.is_ctor:
-            if False:
-                return 'CTOR'
         if self.__is_dtor:
             return 'DTOR'
-        if self.__model.needs_shim():
-            if False:
-                return 'GENERATED'
         if self.__model.uses_unsupported_type():
             return 'CXX_UNSUPPORTED'
         return None
