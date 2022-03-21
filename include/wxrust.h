@@ -37,8 +37,10 @@ class App : public wxApp {
 
 void wxEvtHandler_Bind(wxEvtHandler *evtHandler, int eventType, void *aFn, void *aParam);
 
-// Constructors
-wxString *wxString_new(const unsigned char *aString, size_t aLen);
+// String
+wxString *wxString_new(const unsigned char *psz, const size_t nLength);
+const char *wxString_UTF8Data(wxString *self);
+size_t wxString_Len(wxString *self);
 
 int wxRustEntry(int *argc, char **argv);
 

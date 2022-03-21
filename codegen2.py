@@ -39,7 +39,6 @@ def generated_rs(classes, config):
 use std::os::raw::c_void;
 use std::ptr;
 
-use crate::WxString;
 use crate::macros::wx_class;
 
 mod ffi {

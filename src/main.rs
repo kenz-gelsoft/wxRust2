@@ -15,6 +15,7 @@ fn main() {
         button.bind(wxRUST_EVT_BUTTON, move || {
             println!("i={}", i);
             wx::ButtonMethods::set_label(&button_copy, "clicked");
+            println!("s={}", wx::ButtonMethods::get_label(&button_copy))
         });
         // MEMO: we must choose a non-virtual overriden method
         wx::FrameMethods::centre(&frame, wxBOTH);

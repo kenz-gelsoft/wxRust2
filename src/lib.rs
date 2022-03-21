@@ -26,12 +26,22 @@ mod ffi {
             aParam: *mut c_void
         );
 
+        // String
         pub fn wxString_new(psz: *const u8, nLength: usize) -> *mut c_void;
+        pub fn wxString_UTF8Data(self_: *mut c_void) -> *mut u8;
+        pub fn wxString_Len(self_: *mut c_void) -> usize;
+        
         pub fn wxRustEntry(argc: *mut i32, argv: *mut *mut c_char) -> i32;
     }
 }
 
-pub struct WxString(*mut c_void);
+fn from_wx_string(s: *mut c_void) -> String {
+    unsafe {
+        let utf8data = ffi::wxString_UTF8Data(s);
+        let len = ffi::wxString_Len(s);
+        return String::from_raw_parts(utf8data, len, len);
+    }
+}
 pub unsafe fn wx_string_from(s: &str) -> *const c_void {
     return ffi::wxString_new(s.as_ptr(), s.len())
 }

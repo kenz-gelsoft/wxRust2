@@ -128,7 +128,7 @@ class RustMethodBinding:
             if binding:
                 returns = wrapped[2:]
                 if self.__model.returns.is_str():
-                    returns = 'WxString'
+                    returns = 'String'
             elif for_shim:
                 returns = '*mut c_void'
         return ' -> %s' % (returns,)
@@ -266,10 +266,10 @@ class RustMethodBinding:
 
     def _wrap_return_type(self, call):
         wrapped = self.__model.wrapped_return_type()
+        if self.__model.returns.is_str():
+            return 'crate::from_wx_string(%s)' % (call,)
         if wrapped:
             wrapped = wrapped[2:]
-            if self.__model.returns.is_str():
-                wrapped = 'WxString'
             return '%s(%s)' % (wrapped, call)
         return call
 
