@@ -17,18 +17,6 @@ pub use generated::*;
 // we chose this type as it's handy in cxx.
 type UnsafeAnyPtr = *const c_char;
 
-#[cxx::bridge(namespace = "wxrust")]
-mod ffi {
-    #[namespace = ""]
-    unsafe extern "C++" {
-        include!("wx/include/wxrust.h");
-
-        type wxEvtHandler;
-
-        type wxString;
-    }
-
-}
 mod ffi2 {
     use std::os::raw::{c_char, c_void};
     extern "C" {

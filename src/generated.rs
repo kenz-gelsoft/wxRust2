@@ -20,7 +20,7 @@ mod ffi {
         include!("wx/include/wxrust.h");
         include!("wx/include/wxrust2.h");
 
-        type wxString = crate::ffi::wxString;
+        type wxString;
         type wxWindowList;
         type wxSizer;
         type wxFont;

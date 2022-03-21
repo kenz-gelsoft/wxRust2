@@ -16,7 +16,7 @@ wxml_files = [
 
 [types]
 decls = [
-    'wxString = crate::ffi::wxString',
+    'wxString',
     'wxWindowList',
     # 'wxRect',
     'wxSizer',

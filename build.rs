@@ -2,7 +2,7 @@ use std::process::Command;
 
 fn main() {
     let source_files = vec![
-        "src/lib.rs",
+        // "src/lib.rs",
         "src/generated.rs",
     ];
     wx_config_cflags(&mut cxx_build::bridges(source_files))
