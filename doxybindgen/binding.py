@@ -92,7 +92,7 @@ class RustMethodBinding:
         self.is_ctor = model.is_ctor
         self.__self_param = Param(RustType(model.cls.name, model.const), 'self')
         # must be name neither self or this
-        self.__shim_self = Param(RustType(model.cls.name, model.const), 'self_')
+        self.__ffi_self = Param(RustType(model.cls.name, model.const), 'self_')
         self.__generic_params = self._make_params_generic()
 
     def is_blocked(self):
@@ -206,7 +206,7 @@ class RustMethodBinding:
             if binding:
                 params.insert(0, self.__self_param)
             else:
-                params.insert(0, self.__shim_self)
+                params.insert(0, self.__ffi_self)
         return ', '.join(self._rust_param(p, binding) for p in params)
 
     def _rust_param(self, param, binding):
@@ -250,10 +250,10 @@ class CxxClassBinding:
         self.__model = model
         self.__methods = [CxxMethodBinding(m) for m in model.methods]
     
-    def shims(self, is_cc=False):
+    def lines(self, is_cc=False):
         yield '// CLASS: %s' % (self.__model.name,)
         for method in self.__methods:
-            for line in method.shim(is_cc):
+            for line in method.lines(is_cc):
                 yield line
         yield ''
 
@@ -267,7 +267,7 @@ class CxxMethodBinding:
         self.is_ctor = model.is_ctor
         self.__self_param = Param(RustType(model.cls.name, model.const), 'self')
 
-    def shim(self, is_cc):
+    def lines(self, is_cc):
         if self.__model.suppressed_reason():
             return
         wrapped = self.__model.wrapped_return_type()

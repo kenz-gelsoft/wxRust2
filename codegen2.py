@@ -71,7 +71,7 @@ extern "C" {
 '''
     for cls in classes:
         binding = CxxClassBinding(cls)
-        for line in binding.shims():
+        for line in binding.lines():
             yield line
     yield '''\
 } // extern "C"
@@ -85,7 +85,7 @@ extern "C" {
 '''
     for cls in classes:
         binding = CxxClassBinding(cls)
-        for line in binding.shims(is_cc=True):
+        for line in binding.lines(is_cc=True):
             yield line
     yield '''\
 } // extern "C"
