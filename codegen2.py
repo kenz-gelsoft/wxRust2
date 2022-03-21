@@ -47,27 +47,11 @@ use crate::macros::wx_class;
 // we chose this type as it's handy in cxx.
 type UnsafeAnyPtr = *const c_char;
 
-#[cxx::bridge(namespace = "wxrust")]
-mod ffi {
-    #[namespace = ""]
-    unsafe extern "C++" {
-        include!("wx/include/wxrust.h");
-        include!("wx/include/wxrust2.h");
-'''
-    bindings = [RustClassBinding(cls) for cls in classes]
-    indent = ' ' * 4 * 2
-    types = config['types']['decls']
-    for t in types:
-        yield '%stype %s;' % (indent, t)
-    for cls in bindings:
-        for line in cls.ffi_lines():
-            yield '%s%s' % (indent, line)
-    yield '''\
-    }
-}
 mod ffi2 {
     use std::os::raw::c_void;
     extern "C" {'''
+    bindings = [RustClassBinding(cls) for cls in classes]
+    indent = ' ' * 4 * 2
     for cls in bindings:
         for line in cls.ffi_lines(for_shim=True):
             yield '%s%s' % (indent, line)

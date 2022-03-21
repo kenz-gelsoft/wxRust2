@@ -1,9 +1,6 @@
 #pragma once
 #include <wx/wx.h>
 
-#include "rust/cxx.h"
-#include "wx/src/lib.rs.h"
-
 
 using UnsafeAnyPtr = const char *;
 
