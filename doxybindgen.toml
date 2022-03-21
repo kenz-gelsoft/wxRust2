@@ -67,33 +67,6 @@ blocklist = [
     'Unbind1',
 ]
 [types.wxWindow]
-use_shim = [
-    'AddChild',
-    'FromDIP',
-    'GetHelpTextAtPoint',
-    'IsDescendant',
-    'RemoveChild',
-    'Reparent',
-    'ToDIP2',
-
-    # TODO: treat long correctly
-    'Create',
-    'FindWindow',
-    'GetExtraStyle',
-    'GetWindowStyle',
-    'GetWindowStyleFlag',
-    'SetExtraStyle',
-    'SetWindowStyle',
-    'SetWindowStyleFlag',
-    'UpdateWindowUI',
-
-    # Additional arg with default value (maybe needs shim)
-    'SetSize1',
-
-    # Incorrect const-ness
-    'IsExposed1',
-    'IsExposed3',
-]
 blocklist = [
     # TODO: dont return reference/temp value from self
     'GetChildren',
@@ -102,23 +75,8 @@ blocklist = [
     'GetUpdateRegion',
 ]
 [types.wxControl]
-use_shim = [
-    # TODO: treat long correctly
-    'Create',
-]
 [types.wxButton]
-use_shim = [
-    # TODO: treat long correctly
-    'Create',
-]
 [types.wxTopLevelWindow]
-use_shim = [
-    # TODO: treat long correctly
-    'Create',
-
-    # wxTopLevelWindowMac's methods (on Mac)
-    'ShowFullScreen',
-]
 blocklist = [
     # Other platform specific
     'IsUsingNativeDecorations',
@@ -132,16 +90,6 @@ blocklist = [
     'RestoreToGeometry',
 ]
 [types.wxFrame]
-use_shim = [
-    # TODO: treat long correctly
-    'Create',
-    'CreateToolBar',
-    'OnCreateStatusBar',
-
-    # wxFrameBase's methods
-    'CreateStatusBar',
-    'OnCreateToolBar',
-]
 blocklist = [
     # Other platform specific
     'MSWGetTaskBarButton',

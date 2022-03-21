@@ -45,10 +45,6 @@ class Class:
     def is_trivial(self):
         return self.name in CXX_TRIVIAL_EXTERN_TYPES
 
-    def uses_shim_for(self, name):
-        methods = self.config.get('use_shim') or []
-        return name in methods
-
 
 class Method:
     def __init__(self, cls, e):
