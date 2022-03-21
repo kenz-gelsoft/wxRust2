@@ -72,11 +72,15 @@ class Method:
             pname = param.findtext('declname')
             self.params.append(Param(ptype, pname))
 
-    def needs_shim(self):
-        if self.is_blocked() or self.uses_unsupported_type():
-            return False
-        return True
-    
+    def suppressed_reason(self):
+        if self.is_blocked():
+            return 'BLOCKED'
+        if self.name(for_shim=False).startswith('~'):
+            return 'DTOR'
+        if self.uses_unsupported_type():
+            return 'CXX_UNSUPPORTED'
+        return None
+
     def uses_unsupported_type(self):
         if self.returns.not_supported():
             return True
