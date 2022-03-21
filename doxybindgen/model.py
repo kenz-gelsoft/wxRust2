@@ -160,7 +160,7 @@ class RustType:
         return '%s%s%s' % (ref, mut, t)
     
     def in_cxx(self):
-        t = 'void *'
+        t = '%s *' % (self.typename,)
         if self.const:
             t = 'const %s' % (t,)
         return t
@@ -225,15 +225,13 @@ class CxxType:
     def in_cxx(self):
         if self.__srctype in CXX2CXX:
             return CXX2CXX[self.__srctype]
-        if self.__indirection:
-            return 'void *'
-        # if self.__indirection == '&':
-        #     const_or_not = '' if self.__is_mut else 'const '
-        #     new_type = '%s%s *' % (
-        #         const_or_not,
-        #         self.typename,
-        #     )
-        #     return new_type
+        if self.__indirection == '&':
+            const_or_not = '' if self.__is_mut else 'const '
+            new_type = '%s%s *' % (
+                const_or_not,
+                self.typename,
+            )
+            return new_type
         return self.__srctype
     
     def marshal(self, param):

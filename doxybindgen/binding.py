@@ -305,7 +305,9 @@ class CxxMethodBinding:
         wrapped = self.__model.wrapped_return_type()
         returns = self.__model.returns.in_cxx() + ' '
         if wrapped:
-            returns = 'void *'
+            returns = '%s *' % (
+                wrapped,
+            )
         if is_cc:
             yield '%s%s(%s) {' % (
                 returns,
