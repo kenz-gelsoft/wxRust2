@@ -183,7 +183,7 @@ class RustMethodBinding:
             if marshalling:
                 for line in marshalling:
                     yield '%s' % (line,)
-        name = prefixed(self.__model.name(for_shim=True), with_ffi2=True)
+        name = prefixed(self.__model.name(for_shim=True), with_ffi=True)
         self_to_insert = None
         if self.__model.is_instance_method:
             is_mut_self = not self.__model.const

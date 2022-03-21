@@ -47,7 +47,7 @@ use crate::macros::wx_class;
 // we chose this type as it's handy in cxx.
 type UnsafeAnyPtr = *const c_char;
 
-mod ffi2 {
+mod ffi {
     use std::os::raw::c_void;
     extern "C" {'''
     bindings = [RustClassBinding(cls) for cls in classes]

@@ -354,13 +354,11 @@ RUST_PRIMITIVES = [
 ]
 
 
-def prefixed(t, with_ffi=False, with_ffi2=False):
+def prefixed(t, with_ffi=False):
     if t in RUST_PRIMITIVES:
         return t
     elif with_ffi:
         t = 'ffi::%s' % (t,)
-    elif with_ffi2:
-        t = 'ffi2::%s' % (t,)
     return t
 
 
