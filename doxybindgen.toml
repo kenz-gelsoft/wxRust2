@@ -106,10 +106,6 @@ use_shim = [
     # TODO: treat long correctly
     'Create',
 ]
-blocklist = [
-    # enum vs i32
-    'Ellipsize',
-]
 [types.wxButton]
 use_shim = [
     # TODO: treat long correctly

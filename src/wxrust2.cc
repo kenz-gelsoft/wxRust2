@@ -945,6 +945,9 @@ wxString *wxControl_RemoveMnemonics(const wxString * str) {
 wxString *wxControl_EscapeMnemonics(const wxString * text) {
     return new wxString(wxControl::EscapeMnemonics(*text));
 }
+wxString *wxControl_Ellipsize(const wxString * label, const wxDC * dc, wxEllipsizeMode mode, int max_width, int flags) {
+    return new wxString(wxControl::Ellipsize(*label, *dc, mode, max_width, flags));
+}
 
 // CLASS: wxAnyButton
 wxAnyButton *wxAnyButton_new() {

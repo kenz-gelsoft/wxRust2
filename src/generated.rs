@@ -326,6 +326,7 @@ mod ffi {
         pub fn wxControl_GetLabelText1(label: *const c_void) -> *mut c_void;
         pub fn wxControl_RemoveMnemonics(str: *const c_void) -> *mut c_void;
         pub fn wxControl_EscapeMnemonics(text: *const c_void) -> *mut c_void;
+        pub fn wxControl_Ellipsize(label: *const c_void, dc: *const c_void, mode: i32, max_width: i32, flags: i32) -> *mut c_void;
         // CLASS: wxAnyButton
         pub fn wxAnyButton_new() -> *mut c_void;
         pub fn wxAnyButton_SetBitmapCurrent(self_: *mut c_void, bitmap: *const c_void);
@@ -1859,7 +1860,12 @@ pub trait ControlMethods: WindowMethods {
             crate::from_wx_string(ffi::wxControl_EscapeMnemonics(text))
         }
     }
-    // BLOCKED: fn Ellipsize()
+    fn ellipsize(label: &str, dc: *const c_void, mode: i32, max_width: i32, flags: i32) -> String {
+        unsafe {
+            let label = crate::wx_string_from(label);
+            crate::from_wx_string(ffi::wxControl_Ellipsize(label, dc, mode, max_width, flags))
+        }
+    }
 }
 
 // wxAnyButton

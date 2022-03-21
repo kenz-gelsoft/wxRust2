@@ -322,6 +322,7 @@ bool wxControl_SetLabelMarkup(wxControl * self, const wxString * markup);
 wxString *wxControl_GetLabelText1(const wxString * label);
 wxString *wxControl_RemoveMnemonics(const wxString * str);
 wxString *wxControl_EscapeMnemonics(const wxString * text);
+wxString *wxControl_Ellipsize(const wxString * label, const wxDC * dc, wxEllipsizeMode mode, int max_width, int flags);
 
 // CLASS: wxAnyButton
 wxAnyButton *wxAnyButton_new();
