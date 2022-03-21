@@ -75,7 +75,7 @@ class Method:
     def suppressed_reason(self):
         if self.is_blocked():
             return 'BLOCKED'
-        if self.name(for_shim=False).startswith('~'):
+        if self.name().startswith('~'):
             return 'DTOR'
         if self.uses_unsupported_type():
             return 'CXX_UNSUPPORTED'
@@ -87,14 +87,14 @@ class Method:
         return any(p.type.not_supported() for p in self.params)
 
     def is_blocked(self):
-        return self.cls.is_blocked_method(self.name(for_shim=False))
+        return self.cls.is_blocked_method(self.name())
 
     def _overload_index(self):
         return sum(m.__name == self.__name for m in self.cls.methods)
 
-    def name(self, for_shim, without_index=False):
+    def name(self, for_ffi=False, without_index=False):
         name = self.__name
-        if for_shim:
+        if for_ffi:
             if self.is_ctor:
                 name = 'new'
             name = '_'.join((

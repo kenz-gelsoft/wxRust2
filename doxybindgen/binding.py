@@ -100,7 +100,7 @@ class RustMethodBinding:
 
     def ffi_lines(self):
         body = 'pub fn %s(%s)%s;' % (
-            self.__model.name(for_shim=True),
+            self.__model.name(for_ffi=True),
             self._rust_params(binding=False),
             self._returns_or_not(),
         )
@@ -124,13 +124,6 @@ class RustMethodBinding:
                 returns = '*mut c_void'
         return ' -> %s' % (returns,)
     
-    def _rename(self):
-        if self.__model.overload_index == 0:
-            return ''
-        return '#[rust_name = "%s"]' % (
-            self.__model.name(for_shim=True),
-        )
-    
     def _make_params_generic(self):
         generic_params = []
         for param in self.__model.params:
@@ -145,7 +138,7 @@ class RustMethodBinding:
         if suppress:
             yield '// %s: fn %s()' % (
                 suppress,
-                self.__model.name(for_shim=False),
+                self.__model.name(),
             )
             return
         gen_params = ''
@@ -172,7 +165,7 @@ class RustMethodBinding:
             if marshalling:
                 for line in marshalling:
                     yield '%s' % (line,)
-        name = prefixed(self.__model.name(for_shim=True), with_ffi=True)
+        name = prefixed(self.__model.name(for_ffi=True), with_ffi=True)
         self_to_insert = None
         if self.__model.is_instance_method:
             is_mut_self = not self.__model.const
@@ -199,7 +192,6 @@ class RustMethodBinding:
 
     def _rust_method_name(self):
         method_name = pascal_to_snake(self.__model.name(
-            for_shim=False,
             without_index=True,
         ))
         if self.__model.is_ctor:
@@ -286,7 +278,7 @@ class CxxMethodBinding:
             )
         signature = '%s%s(%s)' % (
             returns,
-            self.__model.name(for_shim=True),
+            self.__model.name(for_ffi=True),
             self._cxx_params(),
         )
         if is_cc:
@@ -301,7 +293,7 @@ class CxxMethodBinding:
                 self_or_class = '%s::' % (self.__model.cls.name,)
             new_params_or_expr = '%s%s(%s)' % (
                 self_or_class,
-                self.__model.name(for_shim=False, without_index=True),
+                self.__model.name(without_index=True),
                 new_params_or_expr,
             )
         if wrapped:
