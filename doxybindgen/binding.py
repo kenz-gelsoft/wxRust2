@@ -101,7 +101,7 @@ class RustMethodBinding:
     def ffi_lines(self):
         body = 'pub fn %s(%s)%s;' % (
             self.__model.name(for_ffi=True),
-            self._rust_params(binding=False),
+            self._rust_params(),
             self._returns_or_not(),
         )
         suppressed = self.__model.suppressed_reason()
@@ -200,7 +200,7 @@ class RustMethodBinding:
         method_name = self.non_keyword_name(method_name)
         return method_name
     
-    def _rust_params(self, binding):
+    def _rust_params(self, binding=False):
         params = self.__model.params.copy()
         if self.__model.is_instance_method:
             if binding:
