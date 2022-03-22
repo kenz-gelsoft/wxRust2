@@ -23,26 +23,26 @@ mod ffi {
         pub fn wxObject_UnRef(self_: *mut c_void);
         pub fn wxObject_UnShare(self_: *mut c_void);
         // BLOCKED: pub fn wxObject_operator delete(self_: *mut c_void, buf: *mut c_void);
-        // CXX_UNSUPPORTED: pub fn wxObject_operator new(self_: *mut c_void, size: size_t, filename: *const c_void, line_num: c_int) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxObject_operator new(self_: *mut c_void, size: size_t, filename: *const c_void, line_num: c_int) -> *mut c_void;
         // CLASS: wxEvtHandler
         pub fn wxEvtHandler_QueueEvent(self_: *mut c_void, event: *mut c_void);
         pub fn wxEvtHandler_AddPendingEvent(self_: *mut c_void, event: *const c_void);
-        // CXX_UNSUPPORTED: pub fn wxEvtHandler_CallAfter(self_: *mut c_void, method: *mut c_void, x1: T1, None: ...);
+        // NOT_SUPPORTED: pub fn wxEvtHandler_CallAfter(self_: *mut c_void, method: *mut c_void, x1: T1, None: ...);
         // BLOCKED: pub fn wxEvtHandler_CallAfter1(self_: *mut c_void, functor: *const c_void);
         pub fn wxEvtHandler_ProcessEvent(self_: *mut c_void, event: *mut c_void) -> bool;
         pub fn wxEvtHandler_ProcessEventLocally(self_: *mut c_void, event: *mut c_void) -> bool;
         pub fn wxEvtHandler_SafelyProcessEvent(self_: *mut c_void, event: *mut c_void) -> bool;
         pub fn wxEvtHandler_ProcessPendingEvents(self_: *mut c_void);
         pub fn wxEvtHandler_DeletePendingEvents(self_: *mut c_void);
-        // CXX_UNSUPPORTED: pub fn wxEvtHandler_Connect(self_: *mut c_void, id: c_int, last_id: c_int, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut c_void, event_sink: *mut c_void);
-        // CXX_UNSUPPORTED: pub fn wxEvtHandler_Connect1(self_: *mut c_void, id: c_int, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut c_void, event_sink: *mut c_void);
-        // CXX_UNSUPPORTED: pub fn wxEvtHandler_Connect2(self_: *mut c_void, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut c_void, event_sink: *mut c_void);
-        // CXX_UNSUPPORTED: pub fn wxEvtHandler_Disconnect(self_: *mut c_void, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut c_void, event_sink: *mut c_void) -> bool;
-        // CXX_UNSUPPORTED: pub fn wxEvtHandler_Disconnect1(self_: *mut c_void, id: c_int, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut c_void, event_sink: *mut c_void) -> bool;
-        // CXX_UNSUPPORTED: pub fn wxEvtHandler_Disconnect2(self_: *mut c_void, id: c_int, last_id: c_int, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut c_void, event_sink: *mut c_void) -> bool;
-        // CXX_UNSUPPORTED: pub fn wxEvtHandler_Bind(self_: *mut c_void, event_type: *const c_void, functor: Functor, id: c_int, last_id: c_int, user_data: *mut c_void);
+        // NOT_SUPPORTED: pub fn wxEvtHandler_Connect(self_: *mut c_void, id: c_int, last_id: c_int, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut c_void, event_sink: *mut c_void);
+        // NOT_SUPPORTED: pub fn wxEvtHandler_Connect1(self_: *mut c_void, id: c_int, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut c_void, event_sink: *mut c_void);
+        // NOT_SUPPORTED: pub fn wxEvtHandler_Connect2(self_: *mut c_void, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut c_void, event_sink: *mut c_void);
+        // NOT_SUPPORTED: pub fn wxEvtHandler_Disconnect(self_: *mut c_void, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut c_void, event_sink: *mut c_void) -> bool;
+        // NOT_SUPPORTED: pub fn wxEvtHandler_Disconnect1(self_: *mut c_void, id: c_int, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut c_void, event_sink: *mut c_void) -> bool;
+        // NOT_SUPPORTED: pub fn wxEvtHandler_Disconnect2(self_: *mut c_void, id: c_int, last_id: c_int, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut c_void, event_sink: *mut c_void) -> bool;
+        // NOT_SUPPORTED: pub fn wxEvtHandler_Bind(self_: *mut c_void, event_type: *const c_void, functor: Functor, id: c_int, last_id: c_int, user_data: *mut c_void);
         // BLOCKED: pub fn wxEvtHandler_Bind1(self_: *mut c_void, event_type: *const c_void, method: *mut c_void, handler: *mut c_void, id: c_int, last_id: c_int, user_data: *mut c_void);
-        // CXX_UNSUPPORTED: pub fn wxEvtHandler_Unbind(self_: *mut c_void, event_type: *const c_void, functor: Functor, id: c_int, last_id: c_int, user_data: *mut c_void) -> bool;
+        // NOT_SUPPORTED: pub fn wxEvtHandler_Unbind(self_: *mut c_void, event_type: *const c_void, functor: Functor, id: c_int, last_id: c_int, user_data: *mut c_void) -> bool;
         // BLOCKED: pub fn wxEvtHandler_Unbind1(self_: *mut c_void, event_type: *const c_void, method: *mut c_void, handler: *mut c_void, id: c_int, last_id: c_int, user_data: *mut c_void) -> bool;
         // BLOCKED: pub fn wxEvtHandler_GetClientData(self_: *const c_void) -> *mut c_void;
         pub fn wxEvtHandler_GetClientObject(self_: *const c_void) -> *mut c_void;
@@ -105,38 +105,38 @@ mod ffi {
         pub fn wxWindow_BeginRepositioningChildren(self_: *mut c_void) -> bool;
         pub fn wxWindow_EndRepositioningChildren(self_: *mut c_void);
         pub fn wxWindow_CacheBestSize(self_: *const c_void, size: *const c_void);
-        // CXX_UNSUPPORTED: pub fn wxWindow_ClientToWindowSize(self_: *const c_void, size: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_WindowToClientSize(self_: *const c_void, size: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxWindow_ClientToWindowSize(self_: *const c_void, size: *const c_void) -> wxSize;
+        // NOT_SUPPORTED: pub fn wxWindow_WindowToClientSize(self_: *const c_void, size: *const c_void) -> wxSize;
         pub fn wxWindow_Fit(self_: *mut c_void);
         pub fn wxWindow_FitInside(self_: *mut c_void);
-        // CXX_UNSUPPORTED: pub fn wxWindow_FromDIP(self_: *const c_void, sz: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_FromDIP1(self_: *const c_void, pt: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxWindow_FromDIP(self_: *const c_void, sz: *const c_void) -> wxSize;
+        // NOT_SUPPORTED: pub fn wxWindow_FromDIP1(self_: *const c_void, pt: *const c_void) -> wxPoint;
         pub fn wxWindow_FromDIP2(self_: *const c_void, d: c_int) -> c_int;
-        // CXX_UNSUPPORTED: pub fn wxWindow_ToDIP(self_: *const c_void, sz: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_ToDIP1(self_: *const c_void, pt: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxWindow_ToDIP(self_: *const c_void, sz: *const c_void) -> wxSize;
+        // NOT_SUPPORTED: pub fn wxWindow_ToDIP1(self_: *const c_void, pt: *const c_void) -> wxPoint;
         pub fn wxWindow_ToDIP2(self_: *const c_void, d: c_int) -> c_int;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetBestSize(self_: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxWindow_GetBestSize(self_: *const c_void) -> wxSize;
         pub fn wxWindow_GetBestHeight(self_: *const c_void, width: c_int) -> c_int;
         pub fn wxWindow_GetBestWidth(self_: *const c_void, height: c_int) -> c_int;
         pub fn wxWindow_GetClientSize(self_: *const c_void, width: *mut c_void, height: *mut c_void);
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetClientSize1(self_: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetEffectiveMinSize(self_: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetMaxClientSize(self_: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetMaxSize(self_: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetMinClientSize(self_: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetMinSize(self_: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxWindow_GetClientSize1(self_: *const c_void) -> wxSize;
+        // NOT_SUPPORTED: pub fn wxWindow_GetEffectiveMinSize(self_: *const c_void) -> wxSize;
+        // NOT_SUPPORTED: pub fn wxWindow_GetMaxClientSize(self_: *const c_void) -> wxSize;
+        // NOT_SUPPORTED: pub fn wxWindow_GetMaxSize(self_: *const c_void) -> wxSize;
+        // NOT_SUPPORTED: pub fn wxWindow_GetMinClientSize(self_: *const c_void) -> wxSize;
+        // NOT_SUPPORTED: pub fn wxWindow_GetMinSize(self_: *const c_void) -> wxSize;
         pub fn wxWindow_GetMinWidth(self_: *const c_void) -> c_int;
         pub fn wxWindow_GetMinHeight(self_: *const c_void) -> c_int;
         pub fn wxWindow_GetMaxWidth(self_: *const c_void) -> c_int;
         pub fn wxWindow_GetMaxHeight(self_: *const c_void) -> c_int;
         pub fn wxWindow_GetSize(self_: *const c_void, width: *mut c_void, height: *mut c_void);
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetSize1(self_: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetVirtualSize(self_: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxWindow_GetSize1(self_: *const c_void) -> wxSize;
+        // NOT_SUPPORTED: pub fn wxWindow_GetVirtualSize(self_: *const c_void) -> wxSize;
         pub fn wxWindow_GetVirtualSize1(self_: *const c_void, width: *mut c_void, height: *mut c_void);
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetBestVirtualSize(self_: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxWindow_GetBestVirtualSize(self_: *const c_void) -> wxSize;
         pub fn wxWindow_GetContentScaleFactor(self_: *const c_void) -> c_double;
         pub fn wxWindow_GetDPIScaleFactor(self_: *const c_void) -> c_double;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetWindowBorderSize(self_: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxWindow_GetWindowBorderSize(self_: *const c_void) -> wxSize;
         pub fn wxWindow_InformFirstDirection(self_: *mut c_void, direction: c_int, size: c_int, available_other_dir: c_int) -> bool;
         pub fn wxWindow_InvalidateBestSize(self_: *mut c_void);
         pub fn wxWindow_PostSizeEvent(self_: *mut c_void);
@@ -160,57 +160,57 @@ mod ffi {
         pub fn wxWindow_SetSizeHints1(self_: *mut c_void, min_w: c_int, min_h: c_int, max_w: c_int, max_h: c_int, inc_w: c_int, inc_h: c_int);
         pub fn wxWindow_SetVirtualSize(self_: *mut c_void, width: c_int, height: c_int);
         pub fn wxWindow_SetVirtualSize1(self_: *mut c_void, size: *const c_void);
-        // CXX_UNSUPPORTED: pub fn wxWindow_FromDIP3(sz: *const c_void, w: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_FromDIP4(pt: *const c_void, w: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxWindow_FromDIP3(sz: *const c_void, w: *const c_void) -> wxSize;
+        // NOT_SUPPORTED: pub fn wxWindow_FromDIP4(pt: *const c_void, w: *const c_void) -> wxPoint;
         pub fn wxWindow_FromDIP5(d: c_int, w: *const c_void) -> c_int;
-        // CXX_UNSUPPORTED: pub fn wxWindow_ToDIP3(sz: *const c_void, w: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_ToDIP4(pt: *const c_void, w: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxWindow_ToDIP3(sz: *const c_void, w: *const c_void) -> wxSize;
+        // NOT_SUPPORTED: pub fn wxWindow_ToDIP4(pt: *const c_void, w: *const c_void) -> wxPoint;
         pub fn wxWindow_ToDIP5(d: c_int, w: *const c_void) -> c_int;
         pub fn wxWindow_Center(self_: *mut c_void, dir: c_int);
         pub fn wxWindow_CenterOnParent(self_: *mut c_void, dir: c_int);
         pub fn wxWindow_Centre(self_: *mut c_void, direction: c_int);
         pub fn wxWindow_CentreOnParent(self_: *mut c_void, direction: c_int);
         pub fn wxWindow_GetPosition(self_: *const c_void, x: *mut c_void, y: *mut c_void);
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetPosition1(self_: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetRect(self_: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxWindow_GetPosition1(self_: *const c_void) -> wxPoint;
+        // NOT_SUPPORTED: pub fn wxWindow_GetRect(self_: *const c_void) -> wxRect;
         pub fn wxWindow_GetScreenPosition(self_: *const c_void, x: *mut c_void, y: *mut c_void);
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetScreenPosition1(self_: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetScreenRect(self_: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetClientAreaOrigin(self_: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetClientRect(self_: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxWindow_GetScreenPosition1(self_: *const c_void) -> wxPoint;
+        // NOT_SUPPORTED: pub fn wxWindow_GetScreenRect(self_: *const c_void) -> wxRect;
+        // NOT_SUPPORTED: pub fn wxWindow_GetClientAreaOrigin(self_: *const c_void) -> wxPoint;
+        // NOT_SUPPORTED: pub fn wxWindow_GetClientRect(self_: *const c_void) -> wxRect;
         pub fn wxWindow_Move(self_: *mut c_void, x: c_int, y: c_int, flags: c_int);
         pub fn wxWindow_Move1(self_: *mut c_void, pt: *const c_void, flags: c_int);
         pub fn wxWindow_SetPosition(self_: *mut c_void, pt: *const c_void);
         pub fn wxWindow_ClientToScreen(self_: *const c_void, x: *mut c_void, y: *mut c_void);
-        // CXX_UNSUPPORTED: pub fn wxWindow_ClientToScreen1(self_: *const c_void, pt: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_ConvertDialogToPixels(self_: *const c_void, pt: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_ConvertDialogToPixels1(self_: *const c_void, sz: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_ConvertPixelsToDialog(self_: *const c_void, pt: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_ConvertPixelsToDialog1(self_: *const c_void, sz: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxWindow_ClientToScreen1(self_: *const c_void, pt: *const c_void) -> wxPoint;
+        // NOT_SUPPORTED: pub fn wxWindow_ConvertDialogToPixels(self_: *const c_void, pt: *const c_void) -> wxPoint;
+        // NOT_SUPPORTED: pub fn wxWindow_ConvertDialogToPixels1(self_: *const c_void, sz: *const c_void) -> wxSize;
+        // NOT_SUPPORTED: pub fn wxWindow_ConvertPixelsToDialog(self_: *const c_void, pt: *const c_void) -> wxPoint;
+        // NOT_SUPPORTED: pub fn wxWindow_ConvertPixelsToDialog1(self_: *const c_void, sz: *const c_void) -> wxSize;
         pub fn wxWindow_ScreenToClient(self_: *const c_void, x: *mut c_void, y: *mut c_void);
-        // CXX_UNSUPPORTED: pub fn wxWindow_ScreenToClient1(self_: *const c_void, pt: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxWindow_ScreenToClient1(self_: *const c_void, pt: *const c_void) -> wxPoint;
         pub fn wxWindow_ClearBackground(self_: *mut c_void);
         pub fn wxWindow_Freeze(self_: *mut c_void);
         pub fn wxWindow_Thaw(self_: *mut c_void);
         pub fn wxWindow_IsFrozen(self_: *const c_void) -> bool;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetBackgroundColour(self_: *const c_void) -> wxColour;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetBackgroundStyle(self_: *const c_void) -> wxBackgroundStyle;
+        // NOT_SUPPORTED: pub fn wxWindow_GetBackgroundColour(self_: *const c_void) -> wxColour;
+        // NOT_SUPPORTED: pub fn wxWindow_GetBackgroundStyle(self_: *const c_void) -> wxBackgroundStyle;
         pub fn wxWindow_GetCharHeight(self_: *const c_void) -> c_int;
         pub fn wxWindow_GetCharWidth(self_: *const c_void) -> c_int;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetDefaultAttributes(self_: *const c_void) -> wxVisualAttributes;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetDPI(self_: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetFont(self_: *const c_void) -> wxFont;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetForegroundColour(self_: *const c_void) -> wxColour;
+        // NOT_SUPPORTED: pub fn wxWindow_GetDefaultAttributes(self_: *const c_void) -> wxVisualAttributes;
+        // NOT_SUPPORTED: pub fn wxWindow_GetDPI(self_: *const c_void) -> wxSize;
+        // NOT_SUPPORTED: pub fn wxWindow_GetFont(self_: *const c_void) -> wxFont;
+        // NOT_SUPPORTED: pub fn wxWindow_GetForegroundColour(self_: *const c_void) -> wxColour;
         pub fn wxWindow_GetTextExtent(self_: *const c_void, string: *const c_void, w: *mut c_void, h: *mut c_void, descent: *mut c_void, external_leading: *mut c_void, font: *const c_void);
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetTextExtent1(self_: *const c_void, string: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxWindow_GetTextExtent1(self_: *const c_void, string: *const c_void) -> wxSize;
         // BLOCKED: pub fn wxWindow_GetUpdateRegion(self_: *const c_void) -> *const c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetUpdateClientRect(self_: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxWindow_GetUpdateClientRect(self_: *const c_void) -> wxRect;
         pub fn wxWindow_HasTransparentBackground(self_: *mut c_void) -> bool;
         pub fn wxWindow_Refresh(self_: *mut c_void, erase_background: bool, rect: *const c_void);
         pub fn wxWindow_RefreshRect(self_: *mut c_void, rect: *const c_void, erase_background: bool);
         pub fn wxWindow_Update(self_: *mut c_void);
         pub fn wxWindow_SetBackgroundColour(self_: *mut c_void, colour: *const c_void) -> bool;
-        // CXX_UNSUPPORTED: pub fn wxWindow_SetBackgroundStyle(self_: *mut c_void, style: wxBackgroundStyle) -> bool;
+        // NOT_SUPPORTED: pub fn wxWindow_SetBackgroundStyle(self_: *mut c_void, style: wxBackgroundStyle) -> bool;
         pub fn wxWindow_IsTransparentBackgroundSupported(self_: *const c_void, reason: *mut c_void) -> bool;
         pub fn wxWindow_SetFont(self_: *mut c_void, font: *const c_void) -> bool;
         pub fn wxWindow_SetForegroundColour(self_: *mut c_void, colour: *const c_void) -> bool;
@@ -255,7 +255,7 @@ mod ffi {
         pub fn wxWindow_Lower(self_: *mut c_void);
         pub fn wxWindow_Raise(self_: *mut c_void);
         pub fn wxWindow_Hide(self_: *mut c_void) -> bool;
-        // CXX_UNSUPPORTED: pub fn wxWindow_HideWithEffect(self_: *mut c_void, effect: wxShowEffect, timeout: unsigned int) -> bool;
+        // NOT_SUPPORTED: pub fn wxWindow_HideWithEffect(self_: *mut c_void, effect: wxShowEffect, timeout: unsigned int) -> bool;
         pub fn wxWindow_IsEnabled(self_: *const c_void) -> bool;
         pub fn wxWindow_IsExposed(self_: *const c_void, x: c_int, y: c_int) -> bool;
         pub fn wxWindow_IsExposed1(self_: *const c_void, pt: *mut c_void) -> bool;
@@ -266,10 +266,10 @@ mod ffi {
         pub fn wxWindow_Disable(self_: *mut c_void) -> bool;
         pub fn wxWindow_Enable(self_: *mut c_void, enable: bool) -> bool;
         pub fn wxWindow_Show(self_: *mut c_void, show: bool) -> bool;
-        // CXX_UNSUPPORTED: pub fn wxWindow_ShowWithEffect(self_: *mut c_void, effect: wxShowEffect, timeout: unsigned int) -> bool;
+        // NOT_SUPPORTED: pub fn wxWindow_ShowWithEffect(self_: *mut c_void, effect: wxShowEffect, timeout: unsigned int) -> bool;
         pub fn wxWindow_GetHelpText(self_: *const c_void) -> *mut c_void;
         pub fn wxWindow_SetHelpText(self_: *mut c_void, help_text: *const c_void);
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetHelpTextAtPoint(self_: *const c_void, point: *const c_void, origin: wxHelpEvent::Origin) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxWindow_GetHelpTextAtPoint(self_: *const c_void, point: *const c_void, origin: wxHelpEvent::Origin) -> *mut c_void;
         pub fn wxWindow_GetToolTip(self_: *const c_void) -> *mut c_void;
         pub fn wxWindow_GetToolTipText(self_: *const c_void) -> *mut c_void;
         pub fn wxWindow_SetToolTip(self_: *mut c_void, tip_string: *const c_void);
@@ -286,19 +286,19 @@ mod ffi {
         pub fn wxWindow_Validate(self_: *mut c_void) -> bool;
         pub fn wxWindow_GetId(self_: *const c_void) -> c_int;
         pub fn wxWindow_GetLabel(self_: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetLayoutDirection(self_: *const c_void) -> wxLayoutDirection;
+        // NOT_SUPPORTED: pub fn wxWindow_GetLayoutDirection(self_: *const c_void) -> wxLayoutDirection;
         pub fn wxWindow_AdjustForLayoutDirection(self_: *const c_void, x: c_int, width: c_int, width_total: c_int) -> c_int;
         pub fn wxWindow_GetName(self_: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetWindowVariant(self_: *const c_void) -> wxWindowVariant;
+        // NOT_SUPPORTED: pub fn wxWindow_GetWindowVariant(self_: *const c_void) -> wxWindowVariant;
         pub fn wxWindow_SetId(self_: *mut c_void, winid: c_int);
         pub fn wxWindow_SetLabel(self_: *mut c_void, label: *const c_void);
-        // CXX_UNSUPPORTED: pub fn wxWindow_SetLayoutDirection(self_: *mut c_void, dir: wxLayoutDirection);
+        // NOT_SUPPORTED: pub fn wxWindow_SetLayoutDirection(self_: *mut c_void, dir: wxLayoutDirection);
         pub fn wxWindow_SetName(self_: *mut c_void, name: *const c_void);
-        // CXX_UNSUPPORTED: pub fn wxWindow_SetWindowVariant(self_: *mut c_void, variant: wxWindowVariant);
+        // NOT_SUPPORTED: pub fn wxWindow_SetWindowVariant(self_: *mut c_void, variant: wxWindowVariant);
         pub fn wxWindow_GetAcceleratorTable(self_: *mut c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetAccessible(self_: *mut c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxWindow_GetAccessible(self_: *mut c_void) -> *mut c_void;
         pub fn wxWindow_SetAcceleratorTable(self_: *mut c_void, accel: *const c_void);
-        // CXX_UNSUPPORTED: pub fn wxWindow_SetAccessible(self_: *mut c_void, accessible: *mut c_void);
+        // NOT_SUPPORTED: pub fn wxWindow_SetAccessible(self_: *mut c_void, accessible: *mut c_void);
         pub fn wxWindow_Close(self_: *mut c_void, force: bool) -> bool;
         pub fn wxWindow_Destroy(self_: *mut c_void) -> bool;
         pub fn wxWindow_IsBeingDeleted(self_: *const c_void) -> bool;
@@ -323,12 +323,12 @@ mod ffi {
         pub fn wxWindow_SetCursor(self_: *mut c_void, cursor: *const c_void) -> bool;
         pub fn wxWindow_WarpPointer(self_: *mut c_void, x: c_int, y: c_int);
         pub fn wxWindow_EnableTouchEvents(self_: *mut c_void, events_mask: c_int) -> bool;
-        // CXX_UNSUPPORTED: pub fn wxWindow_HitTest(self_: *const c_void, x: c_int, y: c_int) -> wxHitTest;
-        // CXX_UNSUPPORTED: pub fn wxWindow_HitTest1(self_: *const c_void, pt: *const c_void) -> wxHitTest;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetBorder(self_: *const c_void, flags: c_long) -> wxBorder;
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetBorder1(self_: *const c_void) -> wxBorder;
+        // NOT_SUPPORTED: pub fn wxWindow_HitTest(self_: *const c_void, x: c_int, y: c_int) -> wxHitTest;
+        // NOT_SUPPORTED: pub fn wxWindow_HitTest1(self_: *const c_void, pt: *const c_void) -> wxHitTest;
+        // NOT_SUPPORTED: pub fn wxWindow_GetBorder(self_: *const c_void, flags: c_long) -> wxBorder;
+        // NOT_SUPPORTED: pub fn wxWindow_GetBorder1(self_: *const c_void) -> wxBorder;
         pub fn wxWindow_DoUpdateWindowUI(self_: *mut c_void, event: *mut c_void);
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetHandle(self_: *const c_void) -> WXWidget;
+        // NOT_SUPPORTED: pub fn wxWindow_GetHandle(self_: *const c_void) -> WXWidget;
         pub fn wxWindow_HasMultiplePages(self_: *const c_void) -> bool;
         pub fn wxWindow_InheritAttributes(self_: *mut c_void);
         pub fn wxWindow_InitDialog(self_: *mut c_void);
@@ -342,7 +342,7 @@ mod ffi {
         pub fn wxWindow_RegisterHotKey(self_: *mut c_void, hotkey_id: c_int, modifiers: c_int, virtual_key_code: c_int) -> bool;
         pub fn wxWindow_UnregisterHotKey(self_: *mut c_void, hotkey_id: c_int) -> bool;
         pub fn wxWindow_UpdateWindowUI(self_: *mut c_void, flags: c_long);
-        // CXX_UNSUPPORTED: pub fn wxWindow_GetClassDefaultAttributes(variant: wxWindowVariant) -> wxVisualAttributes;
+        // NOT_SUPPORTED: pub fn wxWindow_GetClassDefaultAttributes(variant: wxWindowVariant) -> wxVisualAttributes;
         pub fn wxWindow_FindFocus() -> *mut c_void;
         pub fn wxWindow_FindWindowById(id: c_long, parent: *const c_void) -> *mut c_void;
         pub fn wxWindow_FindWindowByLabel(label: *const c_void, parent: *const c_void) -> *mut c_void;
@@ -361,9 +361,9 @@ mod ffi {
         pub fn wxControl_Command(self_: *mut c_void, event: *mut c_void);
         pub fn wxControl_GetLabel(self_: *const c_void) -> *mut c_void;
         pub fn wxControl_GetLabelText(self_: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxControl_GetSizeFromTextSize(self_: *const c_void, xlen: c_int, ylen: c_int) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxControl_GetSizeFromTextSize1(self_: *const c_void, tsize: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxControl_GetSizeFromText(self_: *const c_void, text: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxControl_GetSizeFromTextSize(self_: *const c_void, xlen: c_int, ylen: c_int) -> wxSize;
+        // NOT_SUPPORTED: pub fn wxControl_GetSizeFromTextSize1(self_: *const c_void, tsize: *const c_void) -> wxSize;
+        // NOT_SUPPORTED: pub fn wxControl_GetSizeFromText(self_: *const c_void, text: *const c_void) -> wxSize;
         pub fn wxControl_SetLabel(self_: *mut c_void, label: *const c_void);
         pub fn wxControl_SetLabelText(self_: *mut c_void, text: *const c_void);
         pub fn wxControl_SetLabelMarkup(self_: *mut c_void, markup: *const c_void) -> bool;
@@ -374,22 +374,22 @@ mod ffi {
         // CLASS: wxAnyButton
         pub fn wxAnyButton_new() -> *mut c_void;
         // DTOR: pub fn wxAnyButton_~wxAnyButton(self_: *mut c_void);
-        // CXX_UNSUPPORTED: pub fn wxAnyButton_GetBitmap(self_: *const c_void) -> wxBitmap;
-        // CXX_UNSUPPORTED: pub fn wxAnyButton_GetBitmapCurrent(self_: *const c_void) -> wxBitmap;
-        // CXX_UNSUPPORTED: pub fn wxAnyButton_GetBitmapDisabled(self_: *const c_void) -> wxBitmap;
-        // CXX_UNSUPPORTED: pub fn wxAnyButton_GetBitmapFocus(self_: *const c_void) -> wxBitmap;
-        // CXX_UNSUPPORTED: pub fn wxAnyButton_GetBitmapLabel(self_: *const c_void) -> wxBitmap;
-        // CXX_UNSUPPORTED: pub fn wxAnyButton_GetBitmapPressed(self_: *const c_void) -> wxBitmap;
-        // CXX_UNSUPPORTED: pub fn wxAnyButton_SetBitmap(self_: *mut c_void, bitmap: *const c_void, dir: wxDirection);
+        // NOT_SUPPORTED: pub fn wxAnyButton_GetBitmap(self_: *const c_void) -> wxBitmap;
+        // NOT_SUPPORTED: pub fn wxAnyButton_GetBitmapCurrent(self_: *const c_void) -> wxBitmap;
+        // NOT_SUPPORTED: pub fn wxAnyButton_GetBitmapDisabled(self_: *const c_void) -> wxBitmap;
+        // NOT_SUPPORTED: pub fn wxAnyButton_GetBitmapFocus(self_: *const c_void) -> wxBitmap;
+        // NOT_SUPPORTED: pub fn wxAnyButton_GetBitmapLabel(self_: *const c_void) -> wxBitmap;
+        // NOT_SUPPORTED: pub fn wxAnyButton_GetBitmapPressed(self_: *const c_void) -> wxBitmap;
+        // NOT_SUPPORTED: pub fn wxAnyButton_SetBitmap(self_: *mut c_void, bitmap: *const c_void, dir: wxDirection);
         pub fn wxAnyButton_SetBitmapCurrent(self_: *mut c_void, bitmap: *const c_void);
         pub fn wxAnyButton_SetBitmapDisabled(self_: *mut c_void, bitmap: *const c_void);
         pub fn wxAnyButton_SetBitmapFocus(self_: *mut c_void, bitmap: *const c_void);
         pub fn wxAnyButton_SetBitmapLabel(self_: *mut c_void, bitmap: *const c_void);
         pub fn wxAnyButton_SetBitmapPressed(self_: *mut c_void, bitmap: *const c_void);
-        // CXX_UNSUPPORTED: pub fn wxAnyButton_GetBitmapMargins(self_: *mut c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxAnyButton_GetBitmapMargins(self_: *mut c_void) -> wxSize;
         pub fn wxAnyButton_SetBitmapMargins(self_: *mut c_void, x: c_int, y: c_int);
         pub fn wxAnyButton_SetBitmapMargins1(self_: *mut c_void, sz: *const c_void);
-        // CXX_UNSUPPORTED: pub fn wxAnyButton_SetBitmapPosition(self_: *mut c_void, dir: wxDirection);
+        // NOT_SUPPORTED: pub fn wxAnyButton_SetBitmapPosition(self_: *mut c_void, dir: wxDirection);
         // CLASS: wxButton
         pub fn wxButton_new() -> *mut c_void;
         pub fn wxButton_new1(parent: *mut c_void, id: c_int, label: *const c_void, pos: *const c_void, size: *const c_void, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
@@ -399,7 +399,7 @@ mod ffi {
         pub fn wxButton_SetAuthNeeded(self_: *mut c_void, needed: bool);
         pub fn wxButton_SetDefault(self_: *mut c_void) -> *mut c_void;
         pub fn wxButton_SetLabel(self_: *mut c_void, label: *const c_void);
-        // CXX_UNSUPPORTED: pub fn wxButton_GetDefaultSize(win: *mut c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxButton_GetDefaultSize(win: *mut c_void) -> wxSize;
         // CLASS: wxNonOwnedWindow
         pub fn wxNonOwnedWindow_SetShape(self_: *mut c_void, region: *const c_void) -> bool;
         pub fn wxNonOwnedWindow_SetShape1(self_: *mut c_void, path: *const c_void) -> bool;
@@ -415,7 +415,7 @@ mod ffi {
         pub fn wxTopLevelWindow_EnableMaximizeButton(self_: *mut c_void, enable: bool) -> bool;
         pub fn wxTopLevelWindow_EnableMinimizeButton(self_: *mut c_void, enable: bool) -> bool;
         pub fn wxTopLevelWindow_GetDefaultItem(self_: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxTopLevelWindow_GetIcon(self_: *const c_void) -> wxIcon;
+        // NOT_SUPPORTED: pub fn wxTopLevelWindow_GetIcon(self_: *const c_void) -> wxIcon;
         // BLOCKED: pub fn wxTopLevelWindow_GetIcons(self_: *const c_void) -> *const c_void;
         pub fn wxTopLevelWindow_GetTitle(self_: *const c_void) -> *mut c_void;
         pub fn wxTopLevelWindow_Iconize(self_: *mut c_void, iconize: bool);
@@ -452,7 +452,7 @@ mod ffi {
         pub fn wxTopLevelWindow_ShowFullScreen(self_: *mut c_void, show: bool, style: c_long) -> bool;
         // BLOCKED: pub fn wxTopLevelWindow_UseNativeDecorations(self_: *mut c_void, native: bool);
         // BLOCKED: pub fn wxTopLevelWindow_UseNativeDecorationsByDefault(self_: *mut c_void, native: bool);
-        // CXX_UNSUPPORTED: pub fn wxTopLevelWindow_GetDefaultSize() -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxTopLevelWindow_GetDefaultSize() -> wxSize;
         // CLASS: wxFrame
         pub fn wxFrame_new() -> *mut c_void;
         pub fn wxFrame_new1(parent: *mut c_void, id: c_int, title: *const c_void, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> *mut c_void;
@@ -462,7 +462,7 @@ mod ffi {
         pub fn wxFrame_CreateStatusBar(self_: *mut c_void, number: c_int, style: c_long, id: c_int, name: *const c_void) -> *mut c_void;
         pub fn wxFrame_CreateToolBar(self_: *mut c_void, style: c_long, id: c_int, name: *const c_void) -> *mut c_void;
         pub fn wxFrame_DoGiveHelp(self_: *mut c_void, text: *const c_void, show: bool);
-        // CXX_UNSUPPORTED: pub fn wxFrame_GetClientAreaOrigin(self_: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxFrame_GetClientAreaOrigin(self_: *const c_void) -> wxPoint;
         pub fn wxFrame_GetMenuBar(self_: *const c_void) -> *mut c_void;
         pub fn wxFrame_GetStatusBar(self_: *const c_void) -> *mut c_void;
         pub fn wxFrame_GetStatusBarPane(self_: *const c_void) -> c_int;
@@ -509,35 +509,35 @@ mod ffi {
         pub fn wxRect_new2(top_left: *const c_void, bottom_right: *const c_void) -> *mut c_void;
         pub fn wxRect_new3(pos: *const c_void, size: *const c_void) -> *mut c_void;
         pub fn wxRect_new4(size: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxRect_CentreIn(self_: *const c_void, r: *const c_void, dir: c_int) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxRect_CenterIn(self_: *const c_void, r: *const c_void, dir: c_int) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxRect_CentreIn(self_: *const c_void, r: *const c_void, dir: c_int) -> wxRect;
+        // NOT_SUPPORTED: pub fn wxRect_CenterIn(self_: *const c_void, r: *const c_void, dir: c_int) -> wxRect;
         pub fn wxRect_Contains(self_: *const c_void, x: c_int, y: c_int) -> bool;
         pub fn wxRect_Contains1(self_: *const c_void, pt: *const c_void) -> bool;
         pub fn wxRect_Contains2(self_: *const c_void, rect: *const c_void) -> bool;
         // BLOCKED: pub fn wxRect_Deflate(self_: *mut c_void, dx: c_int, dy: c_int) -> *mut c_void;
         // BLOCKED: pub fn wxRect_Deflate1(self_: *mut c_void, diff: *const c_void) -> *mut c_void;
         // BLOCKED: pub fn wxRect_Deflate2(self_: *mut c_void, diff: c_int) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxRect_Deflate3(self_: *const c_void, dx: c_int, dy: c_int) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxRect_Deflate3(self_: *const c_void, dx: c_int, dy: c_int) -> wxRect;
         pub fn wxRect_GetBottom(self_: *const c_void) -> c_int;
-        // CXX_UNSUPPORTED: pub fn wxRect_GetBottomLeft(self_: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxRect_GetBottomRight(self_: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxRect_GetBottomLeft(self_: *const c_void) -> wxPoint;
+        // NOT_SUPPORTED: pub fn wxRect_GetBottomRight(self_: *const c_void) -> wxPoint;
         pub fn wxRect_GetHeight(self_: *const c_void) -> c_int;
         pub fn wxRect_GetLeft(self_: *const c_void) -> c_int;
-        // CXX_UNSUPPORTED: pub fn wxRect_GetPosition(self_: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxRect_GetPosition(self_: *const c_void) -> wxPoint;
         pub fn wxRect_GetRight(self_: *const c_void) -> c_int;
-        // CXX_UNSUPPORTED: pub fn wxRect_GetSize(self_: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxRect_GetSize(self_: *const c_void) -> wxSize;
         pub fn wxRect_GetTop(self_: *const c_void) -> c_int;
-        // CXX_UNSUPPORTED: pub fn wxRect_GetTopLeft(self_: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxRect_GetTopRight(self_: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxRect_GetTopLeft(self_: *const c_void) -> wxPoint;
+        // NOT_SUPPORTED: pub fn wxRect_GetTopRight(self_: *const c_void) -> wxPoint;
         pub fn wxRect_GetWidth(self_: *const c_void) -> c_int;
         pub fn wxRect_GetX(self_: *const c_void) -> c_int;
         pub fn wxRect_GetY(self_: *const c_void) -> c_int;
         // BLOCKED: pub fn wxRect_Inflate(self_: *mut c_void, dx: c_int, dy: c_int) -> *mut c_void;
         // BLOCKED: pub fn wxRect_Inflate1(self_: *mut c_void, diff: *const c_void) -> *mut c_void;
         // BLOCKED: pub fn wxRect_Inflate2(self_: *mut c_void, diff: c_int) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxRect_Inflate3(self_: *const c_void, dx: c_int, dy: c_int) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxRect_Inflate3(self_: *const c_void, dx: c_int, dy: c_int) -> wxRect;
         // BLOCKED: pub fn wxRect_Intersect(self_: *mut c_void, rect: *const c_void) -> *mut c_void;
-        // CXX_UNSUPPORTED: pub fn wxRect_Intersect1(self_: *const c_void, rect: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxRect_Intersect1(self_: *const c_void, rect: *const c_void) -> wxRect;
         pub fn wxRect_Intersects(self_: *const c_void, rect: *const c_void) -> bool;
         pub fn wxRect_IsEmpty(self_: *const c_void) -> bool;
         pub fn wxRect_Offset(self_: *mut c_void, dx: c_int, dy: c_int);
@@ -556,7 +556,7 @@ mod ffi {
         pub fn wxRect_SetBottomRight(self_: *mut c_void, p: *const c_void);
         pub fn wxRect_SetTopRight(self_: *mut c_void, p: *const c_void);
         pub fn wxRect_SetBottomLeft(self_: *mut c_void, p: *const c_void);
-        // CXX_UNSUPPORTED: pub fn wxRect_Union(self_: *const c_void, rect: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxRect_Union(self_: *const c_void, rect: *const c_void) -> wxRect;
         // BLOCKED: pub fn wxRect_Union1(self_: *mut c_void, rect: *const c_void) -> *mut c_void;
         // BLOCKED: pub fn wxRect_operator!=(self_: *mut c_void, r1: *const c_void, r2: *const c_void) -> bool;
         // BLOCKED: pub fn wxRect_operator+(self_: *mut c_void, r1: *const c_void, r2: *const c_void) -> wxRect;
@@ -668,7 +668,7 @@ pub trait ObjectMethods: WxRustMethods {
         unsafe { ffi::wxObject_UnShare(self.as_ptr()) }
     }
     // BLOCKED: fn operator delete()
-    // CXX_UNSUPPORTED: fn operator new()
+    // NOT_SUPPORTED: fn operator new()
 }
 
 // wxEvtHandler
@@ -691,7 +691,7 @@ pub trait EvtHandlerMethods: ObjectMethods {
     fn add_pending_event(&self, event: *const c_void) {
         unsafe { ffi::wxEvtHandler_AddPendingEvent(self.as_ptr(), event) }
     }
-    // CXX_UNSUPPORTED: fn CallAfter()
+    // NOT_SUPPORTED: fn CallAfter()
     // BLOCKED: fn CallAfter1()
     fn process_event(&self, event: *mut c_void) -> bool {
         unsafe { ffi::wxEvtHandler_ProcessEvent(self.as_ptr(), event) }
@@ -708,15 +708,15 @@ pub trait EvtHandlerMethods: ObjectMethods {
     fn delete_pending_events(&self) {
         unsafe { ffi::wxEvtHandler_DeletePendingEvents(self.as_ptr()) }
     }
-    // CXX_UNSUPPORTED: fn Connect()
-    // CXX_UNSUPPORTED: fn Connect1()
-    // CXX_UNSUPPORTED: fn Connect2()
-    // CXX_UNSUPPORTED: fn Disconnect()
-    // CXX_UNSUPPORTED: fn Disconnect1()
-    // CXX_UNSUPPORTED: fn Disconnect2()
-    // CXX_UNSUPPORTED: fn Bind()
+    // NOT_SUPPORTED: fn Connect()
+    // NOT_SUPPORTED: fn Connect1()
+    // NOT_SUPPORTED: fn Connect2()
+    // NOT_SUPPORTED: fn Disconnect()
+    // NOT_SUPPORTED: fn Disconnect1()
+    // NOT_SUPPORTED: fn Disconnect2()
+    // NOT_SUPPORTED: fn Bind()
     // BLOCKED: fn Bind1()
-    // CXX_UNSUPPORTED: fn Unbind()
+    // NOT_SUPPORTED: fn Unbind()
     // BLOCKED: fn Unbind1()
     // BLOCKED: fn GetClientData()
     fn get_client_object(&self) -> *mut c_void {
@@ -962,25 +962,25 @@ pub trait WindowMethods: EvtHandlerMethods {
             ffi::wxWindow_CacheBestSize(self.as_ptr(), size)
         }
     }
-    // CXX_UNSUPPORTED: fn ClientToWindowSize()
-    // CXX_UNSUPPORTED: fn WindowToClientSize()
+    // NOT_SUPPORTED: fn ClientToWindowSize()
+    // NOT_SUPPORTED: fn WindowToClientSize()
     fn fit(&self) {
         unsafe { ffi::wxWindow_Fit(self.as_ptr()) }
     }
     fn fit_inside(&self) {
         unsafe { ffi::wxWindow_FitInside(self.as_ptr()) }
     }
-    // CXX_UNSUPPORTED: fn FromDIP()
-    // CXX_UNSUPPORTED: fn FromDIP1()
+    // NOT_SUPPORTED: fn FromDIP()
+    // NOT_SUPPORTED: fn FromDIP1()
     fn from_dip2(&self, d: c_int) -> c_int {
         unsafe { ffi::wxWindow_FromDIP2(self.as_ptr(), d) }
     }
-    // CXX_UNSUPPORTED: fn ToDIP()
-    // CXX_UNSUPPORTED: fn ToDIP1()
+    // NOT_SUPPORTED: fn ToDIP()
+    // NOT_SUPPORTED: fn ToDIP1()
     fn to_dip2(&self, d: c_int) -> c_int {
         unsafe { ffi::wxWindow_ToDIP2(self.as_ptr(), d) }
     }
-    // CXX_UNSUPPORTED: fn GetBestSize()
+    // NOT_SUPPORTED: fn GetBestSize()
     fn get_best_height(&self, width: c_int) -> c_int {
         unsafe { ffi::wxWindow_GetBestHeight(self.as_ptr(), width) }
     }
@@ -990,12 +990,12 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn get_client_size(&self, width: *mut c_void, height: *mut c_void) {
         unsafe { ffi::wxWindow_GetClientSize(self.as_ptr(), width, height) }
     }
-    // CXX_UNSUPPORTED: fn GetClientSize1()
-    // CXX_UNSUPPORTED: fn GetEffectiveMinSize()
-    // CXX_UNSUPPORTED: fn GetMaxClientSize()
-    // CXX_UNSUPPORTED: fn GetMaxSize()
-    // CXX_UNSUPPORTED: fn GetMinClientSize()
-    // CXX_UNSUPPORTED: fn GetMinSize()
+    // NOT_SUPPORTED: fn GetClientSize1()
+    // NOT_SUPPORTED: fn GetEffectiveMinSize()
+    // NOT_SUPPORTED: fn GetMaxClientSize()
+    // NOT_SUPPORTED: fn GetMaxSize()
+    // NOT_SUPPORTED: fn GetMinClientSize()
+    // NOT_SUPPORTED: fn GetMinSize()
     fn get_min_width(&self) -> c_int {
         unsafe { ffi::wxWindow_GetMinWidth(self.as_ptr()) }
     }
@@ -1011,19 +1011,19 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn get_size(&self, width: *mut c_void, height: *mut c_void) {
         unsafe { ffi::wxWindow_GetSize(self.as_ptr(), width, height) }
     }
-    // CXX_UNSUPPORTED: fn GetSize1()
-    // CXX_UNSUPPORTED: fn GetVirtualSize()
+    // NOT_SUPPORTED: fn GetSize1()
+    // NOT_SUPPORTED: fn GetVirtualSize()
     fn get_virtual_size1(&self, width: *mut c_void, height: *mut c_void) {
         unsafe { ffi::wxWindow_GetVirtualSize1(self.as_ptr(), width, height) }
     }
-    // CXX_UNSUPPORTED: fn GetBestVirtualSize()
+    // NOT_SUPPORTED: fn GetBestVirtualSize()
     fn get_content_scale_factor(&self) -> c_double {
         unsafe { ffi::wxWindow_GetContentScaleFactor(self.as_ptr()) }
     }
     fn get_dpi_scale_factor(&self) -> c_double {
         unsafe { ffi::wxWindow_GetDPIScaleFactor(self.as_ptr()) }
     }
-    // CXX_UNSUPPORTED: fn GetWindowBorderSize()
+    // NOT_SUPPORTED: fn GetWindowBorderSize()
     fn inform_first_direction(&self, direction: c_int, size: c_int, available_other_dir: c_int) -> bool {
         unsafe { ffi::wxWindow_InformFirstDirection(self.as_ptr(), direction, size, available_other_dir) }
     }
@@ -1128,8 +1128,8 @@ pub trait WindowMethods: EvtHandlerMethods {
             ffi::wxWindow_SetVirtualSize1(self.as_ptr(), size)
         }
     }
-    // CXX_UNSUPPORTED: fn FromDIP3()
-    // CXX_UNSUPPORTED: fn FromDIP4()
+    // NOT_SUPPORTED: fn FromDIP3()
+    // NOT_SUPPORTED: fn FromDIP4()
     fn from_dip5<T: WindowMethods>(d: c_int, w: Option<&T>) -> c_int {
         unsafe {
             let w = match w {
@@ -1139,8 +1139,8 @@ pub trait WindowMethods: EvtHandlerMethods {
             ffi::wxWindow_FromDIP5(d, w)
         }
     }
-    // CXX_UNSUPPORTED: fn ToDIP3()
-    // CXX_UNSUPPORTED: fn ToDIP4()
+    // NOT_SUPPORTED: fn ToDIP3()
+    // NOT_SUPPORTED: fn ToDIP4()
     fn to_dip5<T: WindowMethods>(d: c_int, w: Option<&T>) -> c_int {
         unsafe {
             let w = match w {
@@ -1165,15 +1165,15 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn get_position(&self, x: *mut c_void, y: *mut c_void) {
         unsafe { ffi::wxWindow_GetPosition(self.as_ptr(), x, y) }
     }
-    // CXX_UNSUPPORTED: fn GetPosition1()
-    // CXX_UNSUPPORTED: fn GetRect()
+    // NOT_SUPPORTED: fn GetPosition1()
+    // NOT_SUPPORTED: fn GetRect()
     fn get_screen_position(&self, x: *mut c_void, y: *mut c_void) {
         unsafe { ffi::wxWindow_GetScreenPosition(self.as_ptr(), x, y) }
     }
-    // CXX_UNSUPPORTED: fn GetScreenPosition1()
-    // CXX_UNSUPPORTED: fn GetScreenRect()
-    // CXX_UNSUPPORTED: fn GetClientAreaOrigin()
-    // CXX_UNSUPPORTED: fn GetClientRect()
+    // NOT_SUPPORTED: fn GetScreenPosition1()
+    // NOT_SUPPORTED: fn GetScreenRect()
+    // NOT_SUPPORTED: fn GetClientAreaOrigin()
+    // NOT_SUPPORTED: fn GetClientRect()
     fn move_(&self, x: c_int, y: c_int, flags: c_int) {
         unsafe { ffi::wxWindow_Move(self.as_ptr(), x, y, flags) }
     }
@@ -1192,15 +1192,15 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn client_to_screen(&self, x: *mut c_void, y: *mut c_void) {
         unsafe { ffi::wxWindow_ClientToScreen(self.as_ptr(), x, y) }
     }
-    // CXX_UNSUPPORTED: fn ClientToScreen1()
-    // CXX_UNSUPPORTED: fn ConvertDialogToPixels()
-    // CXX_UNSUPPORTED: fn ConvertDialogToPixels1()
-    // CXX_UNSUPPORTED: fn ConvertPixelsToDialog()
-    // CXX_UNSUPPORTED: fn ConvertPixelsToDialog1()
+    // NOT_SUPPORTED: fn ClientToScreen1()
+    // NOT_SUPPORTED: fn ConvertDialogToPixels()
+    // NOT_SUPPORTED: fn ConvertDialogToPixels1()
+    // NOT_SUPPORTED: fn ConvertPixelsToDialog()
+    // NOT_SUPPORTED: fn ConvertPixelsToDialog1()
     fn screen_to_client(&self, x: *mut c_void, y: *mut c_void) {
         unsafe { ffi::wxWindow_ScreenToClient(self.as_ptr(), x, y) }
     }
-    // CXX_UNSUPPORTED: fn ScreenToClient1()
+    // NOT_SUPPORTED: fn ScreenToClient1()
     fn clear_background(&self) {
         unsafe { ffi::wxWindow_ClearBackground(self.as_ptr()) }
     }
@@ -1213,27 +1213,27 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn is_frozen(&self) -> bool {
         unsafe { ffi::wxWindow_IsFrozen(self.as_ptr()) }
     }
-    // CXX_UNSUPPORTED: fn GetBackgroundColour()
-    // CXX_UNSUPPORTED: fn GetBackgroundStyle()
+    // NOT_SUPPORTED: fn GetBackgroundColour()
+    // NOT_SUPPORTED: fn GetBackgroundStyle()
     fn get_char_height(&self) -> c_int {
         unsafe { ffi::wxWindow_GetCharHeight(self.as_ptr()) }
     }
     fn get_char_width(&self) -> c_int {
         unsafe { ffi::wxWindow_GetCharWidth(self.as_ptr()) }
     }
-    // CXX_UNSUPPORTED: fn GetDefaultAttributes()
-    // CXX_UNSUPPORTED: fn GetDPI()
-    // CXX_UNSUPPORTED: fn GetFont()
-    // CXX_UNSUPPORTED: fn GetForegroundColour()
+    // NOT_SUPPORTED: fn GetDefaultAttributes()
+    // NOT_SUPPORTED: fn GetDPI()
+    // NOT_SUPPORTED: fn GetFont()
+    // NOT_SUPPORTED: fn GetForegroundColour()
     fn get_text_extent(&self, string: &str, w: *mut c_void, h: *mut c_void, descent: *mut c_void, external_leading: *mut c_void, font: *const c_void) {
         unsafe {
             let string = crate::wx_string_from(string);
             ffi::wxWindow_GetTextExtent(self.as_ptr(), string, w, h, descent, external_leading, font)
         }
     }
-    // CXX_UNSUPPORTED: fn GetTextExtent1()
+    // NOT_SUPPORTED: fn GetTextExtent1()
     // BLOCKED: fn GetUpdateRegion()
-    // CXX_UNSUPPORTED: fn GetUpdateClientRect()
+    // NOT_SUPPORTED: fn GetUpdateClientRect()
     fn has_transparent_background(&self) -> bool {
         unsafe { ffi::wxWindow_HasTransparentBackground(self.as_ptr()) }
     }
@@ -1258,7 +1258,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn set_background_colour(&self, colour: *const c_void) -> bool {
         unsafe { ffi::wxWindow_SetBackgroundColour(self.as_ptr(), colour) }
     }
-    // CXX_UNSUPPORTED: fn SetBackgroundStyle()
+    // NOT_SUPPORTED: fn SetBackgroundStyle()
     fn is_transparent_background_supported(&self, reason: *mut c_void) -> bool {
         unsafe { ffi::wxWindow_IsTransparentBackgroundSupported(self.as_ptr(), reason) }
     }
@@ -1433,7 +1433,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn hide(&self) -> bool {
         unsafe { ffi::wxWindow_Hide(self.as_ptr()) }
     }
-    // CXX_UNSUPPORTED: fn HideWithEffect()
+    // NOT_SUPPORTED: fn HideWithEffect()
     fn is_enabled(&self) -> bool {
         unsafe { ffi::wxWindow_IsEnabled(self.as_ptr()) }
     }
@@ -1464,7 +1464,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn show(&self, show: bool) -> bool {
         unsafe { ffi::wxWindow_Show(self.as_ptr(), show) }
     }
-    // CXX_UNSUPPORTED: fn ShowWithEffect()
+    // NOT_SUPPORTED: fn ShowWithEffect()
     fn get_help_text(&self) -> String {
         unsafe { crate::from_wx_string(ffi::wxWindow_GetHelpText(self.as_ptr())) }
     }
@@ -1474,7 +1474,7 @@ pub trait WindowMethods: EvtHandlerMethods {
             ffi::wxWindow_SetHelpText(self.as_ptr(), help_text)
         }
     }
-    // CXX_UNSUPPORTED: fn GetHelpTextAtPoint()
+    // NOT_SUPPORTED: fn GetHelpTextAtPoint()
     fn get_tool_tip(&self) -> *mut c_void {
         unsafe { ffi::wxWindow_GetToolTip(self.as_ptr()) }
     }
@@ -1535,14 +1535,14 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn get_label(&self) -> String {
         unsafe { crate::from_wx_string(ffi::wxWindow_GetLabel(self.as_ptr())) }
     }
-    // CXX_UNSUPPORTED: fn GetLayoutDirection()
+    // NOT_SUPPORTED: fn GetLayoutDirection()
     fn adjust_for_layout_direction(&self, x: c_int, width: c_int, width_total: c_int) -> c_int {
         unsafe { ffi::wxWindow_AdjustForLayoutDirection(self.as_ptr(), x, width, width_total) }
     }
     fn get_name(&self) -> String {
         unsafe { crate::from_wx_string(ffi::wxWindow_GetName(self.as_ptr())) }
     }
-    // CXX_UNSUPPORTED: fn GetWindowVariant()
+    // NOT_SUPPORTED: fn GetWindowVariant()
     fn set_id(&self, winid: c_int) {
         unsafe { ffi::wxWindow_SetId(self.as_ptr(), winid) }
     }
@@ -1552,22 +1552,22 @@ pub trait WindowMethods: EvtHandlerMethods {
             ffi::wxWindow_SetLabel(self.as_ptr(), label)
         }
     }
-    // CXX_UNSUPPORTED: fn SetLayoutDirection()
+    // NOT_SUPPORTED: fn SetLayoutDirection()
     fn set_name(&self, name: &str) {
         unsafe {
             let name = crate::wx_string_from(name);
             ffi::wxWindow_SetName(self.as_ptr(), name)
         }
     }
-    // CXX_UNSUPPORTED: fn SetWindowVariant()
+    // NOT_SUPPORTED: fn SetWindowVariant()
     fn get_accelerator_table(&self) -> *mut c_void {
         unsafe { ffi::wxWindow_GetAcceleratorTable(self.as_ptr()) }
     }
-    // CXX_UNSUPPORTED: fn GetAccessible()
+    // NOT_SUPPORTED: fn GetAccessible()
     fn set_accelerator_table(&self, accel: *const c_void) {
         unsafe { ffi::wxWindow_SetAcceleratorTable(self.as_ptr(), accel) }
     }
-    // CXX_UNSUPPORTED: fn SetAccessible()
+    // NOT_SUPPORTED: fn SetAccessible()
     fn close(&self, force: bool) -> bool {
         unsafe { ffi::wxWindow_Close(self.as_ptr(), force) }
     }
@@ -1638,14 +1638,14 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn enable_touch_events(&self, events_mask: c_int) -> bool {
         unsafe { ffi::wxWindow_EnableTouchEvents(self.as_ptr(), events_mask) }
     }
-    // CXX_UNSUPPORTED: fn HitTest()
-    // CXX_UNSUPPORTED: fn HitTest1()
-    // CXX_UNSUPPORTED: fn GetBorder()
-    // CXX_UNSUPPORTED: fn GetBorder1()
+    // NOT_SUPPORTED: fn HitTest()
+    // NOT_SUPPORTED: fn HitTest1()
+    // NOT_SUPPORTED: fn GetBorder()
+    // NOT_SUPPORTED: fn GetBorder1()
     fn do_update_window_ui(&self, event: *mut c_void) {
         unsafe { ffi::wxWindow_DoUpdateWindowUI(self.as_ptr(), event) }
     }
-    // CXX_UNSUPPORTED: fn GetHandle()
+    // NOT_SUPPORTED: fn GetHandle()
     fn has_multiple_pages(&self) -> bool {
         unsafe { ffi::wxWindow_HasMultiplePages(self.as_ptr()) }
     }
@@ -1685,7 +1685,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn update_window_ui(&self, flags: c_long) {
         unsafe { ffi::wxWindow_UpdateWindowUI(self.as_ptr(), flags) }
     }
-    // CXX_UNSUPPORTED: fn GetClassDefaultAttributes()
+    // NOT_SUPPORTED: fn GetClassDefaultAttributes()
     fn find_focus() -> *mut c_void {
         unsafe { ffi::wxWindow_FindFocus() }
     }
@@ -1793,9 +1793,9 @@ pub trait ControlMethods: WindowMethods {
     fn get_label_text(&self) -> String {
         unsafe { crate::from_wx_string(ffi::wxControl_GetLabelText(self.as_ptr())) }
     }
-    // CXX_UNSUPPORTED: fn GetSizeFromTextSize()
-    // CXX_UNSUPPORTED: fn GetSizeFromTextSize1()
-    // CXX_UNSUPPORTED: fn GetSizeFromText()
+    // NOT_SUPPORTED: fn GetSizeFromTextSize()
+    // NOT_SUPPORTED: fn GetSizeFromTextSize1()
+    // NOT_SUPPORTED: fn GetSizeFromText()
     fn set_label(&self, label: &str) {
         unsafe {
             let label = crate::wx_string_from(label);
@@ -1858,13 +1858,13 @@ impl AnyButton {
 }
 pub trait AnyButtonMethods: ControlMethods {
     // DTOR: fn ~wxAnyButton()
-    // CXX_UNSUPPORTED: fn GetBitmap()
-    // CXX_UNSUPPORTED: fn GetBitmapCurrent()
-    // CXX_UNSUPPORTED: fn GetBitmapDisabled()
-    // CXX_UNSUPPORTED: fn GetBitmapFocus()
-    // CXX_UNSUPPORTED: fn GetBitmapLabel()
-    // CXX_UNSUPPORTED: fn GetBitmapPressed()
-    // CXX_UNSUPPORTED: fn SetBitmap()
+    // NOT_SUPPORTED: fn GetBitmap()
+    // NOT_SUPPORTED: fn GetBitmapCurrent()
+    // NOT_SUPPORTED: fn GetBitmapDisabled()
+    // NOT_SUPPORTED: fn GetBitmapFocus()
+    // NOT_SUPPORTED: fn GetBitmapLabel()
+    // NOT_SUPPORTED: fn GetBitmapPressed()
+    // NOT_SUPPORTED: fn SetBitmap()
     fn set_bitmap_current(&self, bitmap: *const c_void) {
         unsafe { ffi::wxAnyButton_SetBitmapCurrent(self.as_ptr(), bitmap) }
     }
@@ -1880,7 +1880,7 @@ pub trait AnyButtonMethods: ControlMethods {
     fn set_bitmap_pressed(&self, bitmap: *const c_void) {
         unsafe { ffi::wxAnyButton_SetBitmapPressed(self.as_ptr(), bitmap) }
     }
-    // CXX_UNSUPPORTED: fn GetBitmapMargins()
+    // NOT_SUPPORTED: fn GetBitmapMargins()
     fn set_bitmap_margins(&self, x: c_int, y: c_int) {
         unsafe { ffi::wxAnyButton_SetBitmapMargins(self.as_ptr(), x, y) }
     }
@@ -1890,7 +1890,7 @@ pub trait AnyButtonMethods: ControlMethods {
             ffi::wxAnyButton_SetBitmapMargins1(self.as_ptr(), sz)
         }
     }
-    // CXX_UNSUPPORTED: fn SetBitmapPosition()
+    // NOT_SUPPORTED: fn SetBitmapPosition()
 }
 
 // wxButton
@@ -1957,7 +1957,7 @@ pub trait ButtonMethods: AnyButtonMethods {
             ffi::wxButton_SetLabel(self.as_ptr(), label)
         }
     }
-    // CXX_UNSUPPORTED: fn GetDefaultSize()
+    // NOT_SUPPORTED: fn GetDefaultSize()
 }
 
 // wxNonOwnedWindow
@@ -2046,7 +2046,7 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     fn get_default_item(&self) -> *mut c_void {
         unsafe { ffi::wxTopLevelWindow_GetDefaultItem(self.as_ptr()) }
     }
-    // CXX_UNSUPPORTED: fn GetIcon()
+    // NOT_SUPPORTED: fn GetIcon()
     // BLOCKED: fn GetIcons()
     fn get_title(&self) -> String {
         unsafe { crate::from_wx_string(ffi::wxTopLevelWindow_GetTitle(self.as_ptr())) }
@@ -2170,7 +2170,7 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     }
     // BLOCKED: fn UseNativeDecorations()
     // BLOCKED: fn UseNativeDecorationsByDefault()
-    // CXX_UNSUPPORTED: fn GetDefaultSize()
+    // NOT_SUPPORTED: fn GetDefaultSize()
 }
 
 // wxFrame
@@ -2239,7 +2239,7 @@ pub trait FrameMethods: TopLevelWindowMethods {
             ffi::wxFrame_DoGiveHelp(self.as_ptr(), text, show)
         }
     }
-    // CXX_UNSUPPORTED: fn GetClientAreaOrigin()
+    // NOT_SUPPORTED: fn GetClientAreaOrigin()
     fn get_menu_bar(&self) -> *mut c_void {
         unsafe { ffi::wxFrame_GetMenuBar(self.as_ptr()) }
     }
@@ -2384,8 +2384,8 @@ impl Rect {
     }
 }
 pub trait RectMethods: WxRustMethods {
-    // CXX_UNSUPPORTED: fn CentreIn()
-    // CXX_UNSUPPORTED: fn CenterIn()
+    // NOT_SUPPORTED: fn CentreIn()
+    // NOT_SUPPORTED: fn CenterIn()
     fn contains(&self, x: c_int, y: c_int) -> bool {
         unsafe { ffi::wxRect_Contains(self.as_ptr(), x, y) }
     }
@@ -2404,28 +2404,28 @@ pub trait RectMethods: WxRustMethods {
     // BLOCKED: fn Deflate()
     // BLOCKED: fn Deflate1()
     // BLOCKED: fn Deflate2()
-    // CXX_UNSUPPORTED: fn Deflate3()
+    // NOT_SUPPORTED: fn Deflate3()
     fn get_bottom(&self) -> c_int {
         unsafe { ffi::wxRect_GetBottom(self.as_ptr()) }
     }
-    // CXX_UNSUPPORTED: fn GetBottomLeft()
-    // CXX_UNSUPPORTED: fn GetBottomRight()
+    // NOT_SUPPORTED: fn GetBottomLeft()
+    // NOT_SUPPORTED: fn GetBottomRight()
     fn get_height(&self) -> c_int {
         unsafe { ffi::wxRect_GetHeight(self.as_ptr()) }
     }
     fn get_left(&self) -> c_int {
         unsafe { ffi::wxRect_GetLeft(self.as_ptr()) }
     }
-    // CXX_UNSUPPORTED: fn GetPosition()
+    // NOT_SUPPORTED: fn GetPosition()
     fn get_right(&self) -> c_int {
         unsafe { ffi::wxRect_GetRight(self.as_ptr()) }
     }
-    // CXX_UNSUPPORTED: fn GetSize()
+    // NOT_SUPPORTED: fn GetSize()
     fn get_top(&self) -> c_int {
         unsafe { ffi::wxRect_GetTop(self.as_ptr()) }
     }
-    // CXX_UNSUPPORTED: fn GetTopLeft()
-    // CXX_UNSUPPORTED: fn GetTopRight()
+    // NOT_SUPPORTED: fn GetTopLeft()
+    // NOT_SUPPORTED: fn GetTopRight()
     fn get_width(&self) -> c_int {
         unsafe { ffi::wxRect_GetWidth(self.as_ptr()) }
     }
@@ -2438,9 +2438,9 @@ pub trait RectMethods: WxRustMethods {
     // BLOCKED: fn Inflate()
     // BLOCKED: fn Inflate1()
     // BLOCKED: fn Inflate2()
-    // CXX_UNSUPPORTED: fn Inflate3()
+    // NOT_SUPPORTED: fn Inflate3()
     // BLOCKED: fn Intersect()
-    // CXX_UNSUPPORTED: fn Intersect1()
+    // NOT_SUPPORTED: fn Intersect1()
     fn intersects(&self, rect: &Rect) -> bool {
         unsafe {
             let rect = rect.as_ptr();
@@ -2519,7 +2519,7 @@ pub trait RectMethods: WxRustMethods {
             ffi::wxRect_SetBottomLeft(self.as_ptr(), p)
         }
     }
-    // CXX_UNSUPPORTED: fn Union()
+    // NOT_SUPPORTED: fn Union()
     // BLOCKED: fn Union1()
     // BLOCKED: fn operator!=()
     // BLOCKED: fn operator+()

@@ -76,11 +76,11 @@ class Method:
             return 'BLOCKED'
         if self.name().startswith('~'):
             return 'DTOR'
-        if self.uses_unsupported_type():
-            return 'CXX_UNSUPPORTED'
+        if self.uses_not_supported_type():
+            return 'NOT_SUPPORTED'
         return None
 
-    def uses_unsupported_type(self):
+    def uses_not_supported_type(self):
         if self.returns.not_supported():
             return True
         return any(p.type.not_supported() for p in self.params)
@@ -122,7 +122,7 @@ class Method:
             return False
         if self.returns.is_str():
             return True
-        return self.returns.not_supported_value_type(check_generated=True)
+        return False
 
     
 class Param:
@@ -164,9 +164,6 @@ class RustType:
         return False
 
     def not_supported(self):
-        return False
-
-    def not_supported_value_type(self, check_generated=False):
         return False
 
     def is_void(self):
@@ -276,16 +273,13 @@ class CxxType:
     def not_supported(self):
         if self.typename in OS_UNSUPPORTED_TYPES:
             return True
-        return self.not_supported_value_type()
-    
-    def not_supported_value_type(self, check_generated=False):
-        if check_generated and not self._is_binding_type():
-            return False
         if self.is_str():
             return False
-        if not self._is_value_type():
-            return not self.__indirection
-        return False
+        if self._is_value_type():
+            return False
+        if self.__indirection:
+            return False
+        return True
     
     def _is_binding_type(self):
         return self.__manager.is_binding_type(self.typename)
