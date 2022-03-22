@@ -43,11 +43,12 @@ use crate::macros::wx_class;
 
 mod ffi {
     use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
-    extern "C" {'''
+    extern "C" {
+'''
     bindings = [RustClassBinding(cls) for cls in classes]
     indent = ' ' * 4 * 2
     for cls in bindings:
-        for line in cls.ffi_lines():
+        for line in cls.lines():
             yield '%s%s' % (indent, line)
     yield '''\
     }
@@ -58,7 +59,7 @@ pub trait WxRustMethods {
 }
 '''
     for cls in bindings:
-        for line in cls.binding_lines(classes):
+        for line in cls.lines(binding_with_classes=classes):
             yield line
 
 

@@ -1,3 +1,4 @@
+from signal import signal
 from .model import Param, RustType, prefixed, pascal_to_snake
 
 # Known, and problematic
@@ -13,28 +14,27 @@ class RustClassBinding:
         self.__model = model
         self.__methods = [RustMethodBinding(m) for m in model.methods]
 
-    def ffi_lines(self):
-        yield '// CLASS: %s' % (
-            self.__model.name,
-        )
-        for method in self.__methods:
-            for line in method.ffi_lines():
-                yield line
-
-    def binding_lines(self, classes):
+    def lines(self, binding_with_classes=None):
         yield '// %s' % (
             self.__model.name,
         )
-        yield 'wx_class! { %s(%s) impl' % (
-            self.__model.unprefixed(),
-            self.__model.name,
-        )
-        yield ',\n'.join(self._ancestor_methods(classes))
-        yield '}'
-        for line in self._impl_with_ctors():
-            yield line
-        for line in self._trait_with_methods():
-            yield line
+        if binding_with_classes:
+            yield 'wx_class! { %s(%s) impl' % (
+                self.__model.unprefixed(),
+                self.__model.name,
+            )
+            classes = binding_with_classes
+            yield ',\n'.join(self._ancestor_methods(classes))
+            yield '}'
+            for line in self._impl_with_ctors():
+                yield line
+            for line in self._trait_with_methods():
+                yield line
+        else:
+            for method in self.__methods:
+                for line in method.lines():
+                    yield line
+            yield ''
     
     def _ancestor_methods(self, classes):
         for ancestor in self._find_ancestors(classes):
@@ -59,7 +59,7 @@ class RustClassBinding:
     def _impl_with_ctors(self):
         yield 'impl %s {' % (self.__model.unprefixed(),)
         for ctor in self._ctors():
-            for line in ctor.binding_lines():
+            for line in ctor.lines(binding=True):
                 yield '    %s' % (line,)
         yield "    pub fn none() -> Option<&'static Self> {"
         yield '        None'
@@ -81,7 +81,7 @@ class RustClassBinding:
         for method in self.__methods:
             if method.is_ctor:
                 continue
-            for line in method.binding_lines():
+            for line in method.lines(binding=True):
                 yield '%s%s' % (indent, line)
         yield '}\n'
 
@@ -97,18 +97,6 @@ class RustMethodBinding:
 
     def is_blocked(self):
         return self.__model.is_blocked()
-
-    def ffi_lines(self):
-        body = 'pub fn %s(%s)%s;' % (
-            self.__model.name(for_ffi=True),
-            self._rust_params(),
-            self._returns_or_not(),
-        )
-        suppressed = self.__model.suppressed_reason()
-        if suppressed:
-            yield '// %s: %s' % (suppressed, body)
-            return
-        yield body
 
     def _returns_or_not(self, binding=False):
         if self.__model.returns.is_void():
@@ -133,30 +121,47 @@ class RustMethodBinding:
                 generic_params.append(param.type.make_generic(name))
         return generic_params
 
-    def binding_lines(self):
-        suppress = self.__model.suppressed_reason()
-        if suppress:
-            yield '// %s: fn %s()' % (
-                suppress,
-                self.__model.name(),
-            )
-            return
+    def lines(self, binding=False):
+        pub_or_not = 'pub '
         gen_params = ''
-        if self.__generic_params:
-            gen_params = '<%s>' % (
-                ', '.join('%s: %s' % p for p in self.__generic_params),
-            )
-        yield '%sfn %s%s(%s)%s {' % (
-            'pub ' if self.is_ctor else '',
-            self._rust_method_name(),
+        name = self.__model.name(for_ffi=True)
+        if binding:
+            if not self.is_ctor:
+                pub_or_not = '' if not self.is_ctor else 'pub '
+            name = self._rust_method_name()
+            if self.__generic_params:
+                gen_params = '<%s>' % (
+                    ', '.join('%s: %s' % p for p in self.__generic_params),
+                )
+        signature = '%sfn %s%s(%s)%s' % (
+            pub_or_not,
+            name,
             gen_params,
-            self._rust_params(binding=True),
-            self._returns_or_not(binding=True),
+            self._rust_params(binding=binding),
+            self._returns_or_not(binding=binding),
         )
-        body_lines = list(self._binding_body())
-        for line in self._wrap_unsafe(body_lines):
-            yield '    %s' % (line,)
-        yield '}'
+        suppressed = self.__model.suppressed_reason()
+        if binding:
+            if suppressed:
+                yield '// %s: fn %s()' % (
+                    suppressed,
+                    self.__model.name(),
+                )
+                return
+            yield '%s {' % (signature,)
+            body_lines = list(self._binding_body())
+            for line in self._wrap_unsafe(body_lines):
+                yield '    %s' % (line,)
+            yield '}'
+        else:
+            if suppressed:
+                yield '// %s: %s;' % (
+                    suppressed,
+                    signature,
+                )
+                return
+            yield '%s;' % (signature,)
+
     
     def _binding_body(self):
         params = self.__model.params
