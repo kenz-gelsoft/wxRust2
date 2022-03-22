@@ -6,8 +6,7 @@ fn main() {
         .file("src/wxrust.cc")
         .file("src/wxrust2.cc")
         .include("include")
-        .flag_if_supported("-std=c++14")
-        .compile("cxx-demo");
+        .compile("wx");
 
     print_wx_config_libs_for_cargo();
 }
