@@ -1,8 +1,6 @@
 import xml.etree.ElementTree as ET
-import copy, re
+import re
 
-CXX2CXX = {
-}
 
 CXX2RUST = {
     'double': 'c_double',
@@ -13,6 +11,10 @@ CXX2RUST = {
     'wxEllipsizeMode': 'c_int',
     'wxWindowID': 'c_int',
 }
+CXX_PRIMITIVES = [
+    'bool',
+    'void',
+]
 RUST_PRIMITIVES = [
     'bool',
     'c_double',
@@ -176,10 +178,6 @@ class RustType:
 OS_UNSUPPORTED_TYPES = [
     'wxAccessible',
 ]
-CXX_SUPPORTED_VALUE_TYPES = [
-    'bool',
-    'void',
-]
 
 
 class TypeManager:
@@ -208,8 +206,6 @@ class CxxType:
             self.__indirection = ''
     
     def in_cxx(self):
-        if self.__srctype in CXX2CXX:
-            return CXX2CXX[self.__srctype]
         if self.is_ref():
             const_or_not = '' if self.__is_mut else 'const '
             new_type = '%s%s *' % (
@@ -287,15 +283,15 @@ class CxxType:
             return False
         if self.is_str():
             return False
-        if not self._is_cxx_supported_value_type():
+        if not self._is_value_type():
             return not self.__indirection
         return False
     
     def _is_binding_type(self):
         return self.__manager.is_binding_type(self.typename)
 
-    def _is_cxx_supported_value_type(self):
-        if self.typename in CXX_SUPPORTED_VALUE_TYPES:
+    def _is_value_type(self):
+        if self.typename in CXX_PRIMITIVES:
             return True
         if self.typename in CXX2RUST:
             return True
