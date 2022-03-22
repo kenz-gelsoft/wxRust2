@@ -152,7 +152,7 @@ class RustType:
     def marshal(self, param):
         return None
 
-    def in_rust(self, with_ffi=False, binding=False):
+    def in_rust(self, binding=False):
         mut = 'const' if self.const else 'mut'
         return '*%s c_void' % (mut,)
     
@@ -240,7 +240,7 @@ class CxxType:
             yield '    None => ptr::null_mut(),'
             yield '};'
 
-    def in_rust(self, with_ffi=False, binding=False):
+    def in_rust(self, binding=False):
         t = self.typename
         if binding:
             if self._is_const_ref_to_string():
@@ -254,7 +254,7 @@ class CxxType:
         if self.__indirection:
             mut = 'mut' if self.__is_mut else 'const'
             return '*%s c_void' % (mut,)
-        return prefixed(t, with_ffi)
+        return prefixed(t, with_ffi=binding)
     
     def is_ptr_to_binding(self):
         # TODO: consider mutability

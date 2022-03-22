@@ -113,7 +113,7 @@ class RustMethodBinding:
     def _returns_or_not(self, binding=False):
         if self.__model.returns.is_void():
             return ''
-        returns = self.__model.returns.in_rust(with_ffi=binding)
+        returns = self.__model.returns.in_rust()
         wrapped = self.__model.wrapped_return_type()
         if wrapped:
             if binding:
@@ -210,10 +210,7 @@ class RustMethodBinding:
         return ', '.join(self._rust_param(p, binding) for p in params)
 
     def _rust_param(self, param, binding):
-        typename = param.type.in_rust(
-            with_ffi=binding,
-            binding=binding
-        )
+        typename = param.type.in_rust(binding=binding)
         if binding:
             if param.is_self():
                 return '&self'
