@@ -48,9 +48,6 @@ class Class:
 
     def is_blocked_method(self, name):
         return name in self.__blocklist
-    
-    def is_trivial(self):
-        return self.name in CXX_TRIVIAL_EXTERN_TYPES
 
 
 class Method:
@@ -113,8 +110,7 @@ class Method:
 
     def wrapped_return_type(self):
         if (self.is_ctor or
-            self.returns_new() or
-            self.returns.is_trivial()):
+            self.returns_new()):
             return self.returns.typename
         else:
             return None
@@ -165,9 +161,6 @@ class RustType:
     def is_ptr_to_binding(self):
         return False
 
-    def is_trivial(self):
-        return self.typename in CXX_TRIVIAL_EXTERN_TYPES
-
     def not_supported(self):
         return False
 
@@ -186,11 +179,6 @@ OS_UNSUPPORTED_TYPES = [
 CXX_SUPPORTED_VALUE_TYPES = [
     'bool',
     'void',
-]
-CXX_TRIVIAL_EXTERN_TYPES = [
-    'wxPoint',
-    'wxRect',
-    'wxSize',
 ]
 
 
@@ -273,8 +261,7 @@ class CxxType:
     def is_ptr_to_binding(self):
         # TODO: consider mutability
         return (self.is_ptr() and
-                self._is_binding_type() and
-                not self.is_trivial())
+                self._is_binding_type())
 
     def _is_const_ref_to_string(self):
         return self._is_const_ref() and self.typename == 'wxString'
@@ -312,12 +299,7 @@ class CxxType:
             return True
         if self.typename in CXX2RUST:
             return True
-        if self.is_trivial():
-            return True 
         return False
-    
-    def is_trivial(self):
-        return self.typename in CXX_TRIVIAL_EXTERN_TYPES
         
     def is_ptr(self):
         return self.__indirection.startswith('*')
