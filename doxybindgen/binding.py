@@ -211,11 +211,11 @@ class RustMethodBinding:
                 params.insert(0, self.__self_param)
             else:
                 params.insert(0, self.__ffi_self)
-        return ', '.join(self._rust_param(p, not for_ffi) for p in params)
+        return ', '.join(self._rust_param(p, for_ffi) for p in params)
 
-    def _rust_param(self, param, binding):
-        typename = param.type.in_rust(binding=binding)
-        if binding:
+    def _rust_param(self, param, for_ffi):
+        typename = param.type.in_rust(binding=not for_ffi)
+        if not for_ffi:
             if param.is_self():
                 return '&self'
             elif param.type.generic_name:
