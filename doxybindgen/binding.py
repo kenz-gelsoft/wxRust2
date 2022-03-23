@@ -18,7 +18,12 @@ class RustClassBinding:
         yield '// %s' % (
             self.__model.name,
         )
-        if not for_ffi:
+        if for_ffi:
+            for method in self.__methods:
+                for line in method.lines(for_ffi=True):
+                    yield line
+            yield ''
+        else:
             yield 'wx_class! { %s(%s) impl' % (
                 self.__model.unprefixed(),
                 self.__model.name,
@@ -29,11 +34,6 @@ class RustClassBinding:
                 yield line
             for line in self._trait_with_methods():
                 yield line
-        else:
-            for method in self.__methods:
-                for line in method.lines(for_ffi=True):
-                    yield line
-            yield ''
     
     def _ancestor_methods(self, classes):
         for ancestor in self._find_ancestors(classes):
@@ -103,12 +103,12 @@ class RustMethodBinding:
         returns = self.__model.returns.in_rust(for_ffi=True)
         wrapped = self.__model.wrapped_return_type()
         if wrapped:
-            if not for_ffi:
+            if for_ffi:
+                returns = '*mut c_void'
+            else:
                 returns = wrapped[2:]
                 if self.__model.returns.is_str():
                     returns = 'String'
-            else:
-                returns = '*mut c_void'
         return ' -> %s' % (returns,)
     
     def _make_params_generic(self):
@@ -140,7 +140,15 @@ class RustMethodBinding:
             self._returns_or_not(for_ffi=for_ffi),
         )
         suppressed = self.__model.suppressed_reason()
-        if not for_ffi:
+        if for_ffi:
+            if suppressed:
+                yield '// %s: %s;' % (
+                    suppressed,
+                    signature,
+                )
+                return
+            yield '%s;' % (signature,)
+        else:
             if suppressed:
                 yield '// %s: fn %s()' % (
                     suppressed,
@@ -152,14 +160,6 @@ class RustMethodBinding:
             for line in self._wrap_unsafe(body_lines):
                 yield '    %s' % (line,)
             yield '}'
-        else:
-            if suppressed:
-                yield '// %s: %s;' % (
-                    suppressed,
-                    signature,
-                )
-                return
-            yield '%s;' % (signature,)
 
     
     def _binding_body(self):
@@ -207,10 +207,10 @@ class RustMethodBinding:
     def _rust_params(self, for_ffi=False):
         params = self.__model.params.copy()
         if self.__model.is_instance_method:
-            if not for_ffi:
-                params.insert(0, self.__self_param)
-            else:
+            if for_ffi:
                 params.insert(0, self.__ffi_self)
+            else:
+                params.insert(0, self.__self_param)
         return ', '.join(self._rust_param(p, for_ffi) for p in params)
 
     def _rust_param(self, param, for_ffi):
