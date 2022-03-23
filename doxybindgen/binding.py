@@ -14,16 +14,15 @@ class RustClassBinding:
         self.__model = model
         self.__methods = [RustMethodBinding(m) for m in model.methods]
 
-    def lines(self, binding_with_classes=None):
+    def lines(self, for_ffi=False, classes=None):
         yield '// %s' % (
             self.__model.name,
         )
-        if binding_with_classes:
+        if not for_ffi:
             yield 'wx_class! { %s(%s) impl' % (
                 self.__model.unprefixed(),
                 self.__model.name,
             )
-            classes = binding_with_classes
             yield ',\n'.join(self._ancestor_methods(classes))
             yield '}'
             for line in self._impl_with_ctors():
