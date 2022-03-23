@@ -97,13 +97,13 @@ class RustMethodBinding:
     def is_blocked(self):
         return self.__model.is_blocked()
 
-    def _returns_or_not(self, binding=False):
+    def _returns_or_not(self, for_ffi=False):
         if self.__model.returns.is_void():
             return ''
         returns = self.__model.returns.in_rust()
         wrapped = self.__model.wrapped_return_type()
         if wrapped:
-            if binding:
+            if not for_ffi:
                 returns = wrapped[2:]
                 if self.__model.returns.is_str():
                     returns = 'String'
@@ -137,7 +137,7 @@ class RustMethodBinding:
             name,
             gen_params,
             self._rust_params(binding=not for_ffi),
-            self._returns_or_not(binding=not for_ffi),
+            self._returns_or_not(for_ffi=for_ffi),
         )
         suppressed = self.__model.suppressed_reason()
         if not for_ffi:
