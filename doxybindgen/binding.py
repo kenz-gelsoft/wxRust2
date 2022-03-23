@@ -31,7 +31,7 @@ class RustClassBinding:
                 yield line
         else:
             for method in self.__methods:
-                for line in method.lines():
+                for line in method.lines(for_ffi=True):
                     yield line
             yield ''
     
@@ -58,7 +58,7 @@ class RustClassBinding:
     def _impl_with_ctors(self):
         yield 'impl %s {' % (self.__model.unprefixed(),)
         for ctor in self._ctors():
-            for line in ctor.lines(binding=True):
+            for line in ctor.lines():
                 yield '    %s' % (line,)
         yield "    pub fn none() -> Option<&'static Self> {"
         yield '        None'
@@ -80,7 +80,7 @@ class RustClassBinding:
         for method in self.__methods:
             if method.is_ctor:
                 continue
-            for line in method.lines(binding=True):
+            for line in method.lines():
                 yield '%s%s' % (indent, line)
         yield '}\n'
 
@@ -120,11 +120,11 @@ class RustMethodBinding:
                 generic_params.append(param.type.make_generic(name))
         return generic_params
 
-    def lines(self, binding=False):
+    def lines(self, for_ffi=False):
         pub_or_not = 'pub '
         gen_params = ''
         name = self.__model.name(for_ffi=True)
-        if binding:
+        if not for_ffi:
             if not self.is_ctor:
                 pub_or_not = '' if not self.is_ctor else 'pub '
             name = self._rust_method_name()
@@ -136,11 +136,11 @@ class RustMethodBinding:
             pub_or_not,
             name,
             gen_params,
-            self._rust_params(binding=binding),
-            self._returns_or_not(binding=binding),
+            self._rust_params(binding=not for_ffi),
+            self._returns_or_not(binding=not for_ffi),
         )
         suppressed = self.__model.suppressed_reason()
-        if binding:
+        if not for_ffi:
             if suppressed:
                 yield '// %s: fn %s()' % (
                     suppressed,
