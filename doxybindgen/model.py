@@ -1,8 +1,6 @@
 import xml.etree.ElementTree as ET
-import copy, re
+import re
 
-CXX2CXX = {
-}
 
 CXX2RUST = {
     'double': 'c_double',
@@ -13,6 +11,10 @@ CXX2RUST = {
     'wxEllipsizeMode': 'c_int',
     'wxWindowID': 'c_int',
 }
+CXX_PRIMITIVES = [
+    'bool',
+    'void',
+]
 RUST_PRIMITIVES = [
     'bool',
     'c_double',
@@ -48,9 +50,6 @@ class Class:
 
     def is_blocked_method(self, name):
         return name in self.__blocklist
-    
-    def is_trivial(self):
-        return self.name in CXX_TRIVIAL_EXTERN_TYPES
 
 
 class Method:
@@ -77,11 +76,11 @@ class Method:
             return 'BLOCKED'
         if self.name().startswith('~'):
             return 'DTOR'
-        if self.uses_unsupported_type():
-            return 'CXX_UNSUPPORTED'
+        if self.uses_not_supported_type():
+            return 'NOT_SUPPORTED'
         return None
 
-    def uses_unsupported_type(self):
+    def uses_not_supported_type(self):
         if self.returns.not_supported():
             return True
         return any(p.type.not_supported() for p in self.params)
@@ -113,8 +112,7 @@ class Method:
 
     def wrapped_return_type(self):
         if (self.is_ctor or
-            self.returns_new() or
-            self.returns.is_trivial()):
+            self.returns_new()):
             return self.returns.typename
         else:
             return None
@@ -124,7 +122,9 @@ class Method:
             return False
         if self.returns.is_str():
             return True
-        return self.returns.not_supported_value_type(check_generated=True)
+        if self.returns.needs_new():
+            return True
+        return False
 
     
 class Param:
@@ -152,7 +152,7 @@ class RustType:
     def marshal(self, param):
         return None
 
-    def in_rust(self, with_ffi=False, binding=False):
+    def in_rust(self, for_ffi=False):
         mut = 'const' if self.const else 'mut'
         return '*%s c_void' % (mut,)
     
@@ -165,15 +165,12 @@ class RustType:
     def is_ptr_to_binding(self):
         return False
 
-    def is_trivial(self):
-        return self.typename in CXX_TRIVIAL_EXTERN_TYPES
-
     def not_supported(self):
         return False
 
-    def not_supported_value_type(self, check_generated=False):
+    def needs_new(self):
         return False
-
+    
     def is_void(self):
         return False
 
@@ -182,15 +179,6 @@ class RustType:
 
 OS_UNSUPPORTED_TYPES = [
     'wxAccessible',
-]
-CXX_SUPPORTED_VALUE_TYPES = [
-    'bool',
-    'void',
-]
-CXX_TRIVIAL_EXTERN_TYPES = [
-    'wxPoint',
-    'wxRect',
-    'wxSize',
 ]
 
 
@@ -220,8 +208,6 @@ class CxxType:
             self.__indirection = ''
     
     def in_cxx(self):
-        if self.__srctype in CXX2CXX:
-            return CXX2CXX[self.__srctype]
         if self.is_ref():
             const_or_not = '' if self.__is_mut else 'const '
             new_type = '%s%s *' % (
@@ -254,9 +240,9 @@ class CxxType:
             yield '    None => ptr::null_mut(),'
             yield '};'
 
-    def in_rust(self, with_ffi=False, binding=False):
+    def in_rust(self, for_ffi=False):
         t = self.typename
-        if binding:
+        if not for_ffi:
             if self._is_const_ref_to_string():
                 return '&str'
             if self._is_const_ref_to_binding():
@@ -268,13 +254,12 @@ class CxxType:
         if self.__indirection:
             mut = 'mut' if self.__is_mut else 'const'
             return '*%s c_void' % (mut,)
-        return prefixed(t, with_ffi)
+        return prefixed(t, with_ffi=not for_ffi)
     
     def is_ptr_to_binding(self):
         # TODO: consider mutability
         return (self.is_ptr() and
-                self._is_binding_type() and
-                not self.is_trivial())
+                self._is_binding_type())
 
     def _is_const_ref_to_string(self):
         return self._is_const_ref() and self.typename == 'wxString'
@@ -293,31 +278,28 @@ class CxxType:
     def not_supported(self):
         if self.typename in OS_UNSUPPORTED_TYPES:
             return True
-        return self.not_supported_value_type()
-    
-    def not_supported_value_type(self, check_generated=False):
-        if check_generated and not self._is_binding_type():
-            return False
         if self.is_str():
             return False
-        if not self._is_cxx_supported_value_type():
-            return not self.__indirection
-        return False
+        if self._is_value_type():
+            return False
+        if self.__indirection:
+            return False
+        if self.needs_new():
+            return False
+        return True
+    
+    def needs_new(self):
+        return self._is_binding_type() and not self.__indirection
     
     def _is_binding_type(self):
         return self.__manager.is_binding_type(self.typename)
 
-    def _is_cxx_supported_value_type(self):
-        if self.typename in CXX_SUPPORTED_VALUE_TYPES:
+    def _is_value_type(self):
+        if self.typename in CXX_PRIMITIVES:
             return True
         if self.typename in CXX2RUST:
             return True
-        if self.is_trivial():
-            return True 
         return False
-    
-    def is_trivial(self):
-        return self.typename in CXX_TRIVIAL_EXTERN_TYPES
         
     def is_ptr(self):
         return self.__indirection.startswith('*')
