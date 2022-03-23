@@ -139,21 +139,19 @@ class RustMethodBinding:
             self._returns_or_not(for_ffi=for_ffi),
         )
         suppressed = self.__model.suppressed_reason()
+        if suppressed:
+            if for_ffi:
+                body = '%s;' % (signature,)
+            else:
+                body = 'fn %s()' % (self.__model.name(),)
+            yield '// %s: %s' % (
+                suppressed,
+                body,
+            )
+            return
         if for_ffi:
-            if suppressed:
-                yield '// %s: %s;' % (
-                    suppressed,
-                    signature,
-                )
-                return
             yield '%s;' % (signature,)
         else:
-            if suppressed:
-                yield '// %s: fn %s()' % (
-                    suppressed,
-                    self.__model.name(),
-                )
-                return
             yield '%s {' % (signature,)
             body_lines = list(self._binding_body())
             for line in self._wrap_unsafe(body_lines):
