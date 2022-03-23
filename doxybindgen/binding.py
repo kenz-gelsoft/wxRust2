@@ -136,7 +136,7 @@ class RustMethodBinding:
             pub_or_not,
             name,
             gen_params,
-            self._rust_params(binding=not for_ffi),
+            self._rust_params(for_ffi=for_ffi),
             self._returns_or_not(for_ffi=for_ffi),
         )
         suppressed = self.__model.suppressed_reason()
@@ -204,14 +204,14 @@ class RustMethodBinding:
         method_name = self.non_keyword_name(method_name)
         return method_name
     
-    def _rust_params(self, binding=False):
+    def _rust_params(self, for_ffi=False):
         params = self.__model.params.copy()
         if self.__model.is_instance_method:
-            if binding:
+            if not for_ffi:
                 params.insert(0, self.__self_param)
             else:
                 params.insert(0, self.__ffi_self)
-        return ', '.join(self._rust_param(p, binding) for p in params)
+        return ', '.join(self._rust_param(p, not for_ffi) for p in params)
 
     def _rust_param(self, param, binding):
         typename = param.type.in_rust(binding=binding)
