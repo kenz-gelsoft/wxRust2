@@ -1898,7 +1898,7 @@ pub trait WindowMethods: EvtHandlerMethods {
 // wxControl
 wx_class! { Control(wxControl) impl
     ControlMethods,
-    WindowMethods,
+    // WindowMethods,
     EvtHandlerMethods,
     ObjectMethods
 }
@@ -1923,6 +1923,17 @@ impl Control {
         None
     }
 }
+impl WindowMethods for Control {
+    fn get_label(&self) -> String {
+        unsafe { crate::from_wx_string(ffi::wxControl_GetLabel(self.as_ptr())) }
+    }
+    fn set_label(&self, label: &str) {
+        unsafe {
+            let label = crate::wx_string_from(label);
+            ffi::wxControl_SetLabel(self.as_ptr(), label)
+        }
+    }
+}
 pub trait ControlMethods: WindowMethods {
     fn create<T: WindowMethods>(&self, parent: Option<&T>, id: c_int, pos: &Point, size: &Size, style: c_long, validator: &Validator, name: &str) -> bool {
         unsafe {
@@ -1940,9 +1951,6 @@ pub trait ControlMethods: WindowMethods {
     fn command(&self, event: *mut c_void) {
         unsafe { ffi::wxControl_Command(self.as_ptr(), event) }
     }
-    fn get_label(&self) -> String {
-        unsafe { crate::from_wx_string(ffi::wxControl_GetLabel(self.as_ptr())) }
-    }
     fn get_label_text(&self) -> String {
         unsafe { crate::from_wx_string(ffi::wxControl_GetLabelText(self.as_ptr())) }
     }
@@ -1959,12 +1967,6 @@ pub trait ControlMethods: WindowMethods {
         unsafe {
             let text = crate::wx_string_from(text);
             Size(ffi::wxControl_GetSizeFromText(self.as_ptr(), text))
-        }
-    }
-    fn set_label(&self, label: &str) {
-        unsafe {
-            let label = crate::wx_string_from(label);
-            ffi::wxControl_SetLabel(self.as_ptr(), label)
         }
     }
     fn set_label_text(&self, text: &str) {
@@ -2065,7 +2067,7 @@ wx_class! { Button(wxButton) impl
     ButtonMethods,
     AnyButtonMethods,
     ControlMethods,
-    WindowMethods,
+    // WindowMethods,
     EvtHandlerMethods,
     ObjectMethods
 }
@@ -2091,6 +2093,17 @@ impl Button {
         None
     }
 }
+impl WindowMethods for Button {
+    fn get_label(&self) -> String {
+        unsafe { crate::from_wx_string(ffi::wxButton_GetLabel(self.as_ptr())) }
+    }
+    fn set_label(&self, label: &str) {
+        unsafe {
+            let label = crate::wx_string_from(label);
+            ffi::wxButton_SetLabel(self.as_ptr(), label)
+        }
+    }
+}
 pub trait ButtonMethods: AnyButtonMethods {
     fn create<T: WindowMethods>(&self, parent: Option<&T>, id: c_int, label: &str, pos: &Point, size: &Size, style: c_long, validator: &Validator, name: &str) -> bool {
         unsafe {
@@ -2109,20 +2122,11 @@ pub trait ButtonMethods: AnyButtonMethods {
     fn get_auth_needed(&self) -> bool {
         unsafe { ffi::wxButton_GetAuthNeeded(self.as_ptr()) }
     }
-    fn get_label(&self) -> String {
-        unsafe { crate::from_wx_string(ffi::wxButton_GetLabel(self.as_ptr())) }
-    }
     fn set_auth_needed(&self, needed: bool) {
         unsafe { ffi::wxButton_SetAuthNeeded(self.as_ptr(), needed) }
     }
     fn set_default(&self) -> *mut c_void {
         unsafe { ffi::wxButton_SetDefault(self.as_ptr()) }
-    }
-    fn set_label(&self, label: &str) {
-        unsafe {
-            let label = crate::wx_string_from(label);
-            ffi::wxButton_SetLabel(self.as_ptr(), label)
-        }
     }
     fn get_default_size<T: WindowMethods>(win: Option<&T>) -> Size {
         unsafe {
@@ -2355,7 +2359,7 @@ wx_class! { Frame(wxFrame) impl
     FrameMethods,
     TopLevelWindowMethods,
     NonOwnedWindowMethods,
-    WindowMethods,
+    // WindowMethods,
     EvtHandlerMethods,
     ObjectMethods
 }
@@ -2380,11 +2384,13 @@ impl Frame {
         None
     }
 }
-pub trait FrameMethods: TopLevelWindowMethods {
-    // DTOR: fn ~wxFrame()
+impl WindowMethods for Frame {
     fn centre(&self, direction: c_int) {
         unsafe { ffi::wxFrame_Centre(self.as_ptr(), direction) }
     }
+}
+pub trait FrameMethods: TopLevelWindowMethods {
+    // DTOR: fn ~wxFrame()
     fn create<T: WindowMethods>(&self, parent: Option<&T>, id: c_int, title: &str, pos: &Point, size: &Size, style: c_long, name: &str) -> bool {
         unsafe {
             let parent = match parent {
