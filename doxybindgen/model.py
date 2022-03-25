@@ -43,6 +43,8 @@ class Class:
             m = Method(self, method)
             if not m.is_public:
                 continue
+            if m.is_virtual_override:
+                continue
             self.methods.append(m)
 
     def unprefixed(self):
@@ -70,6 +72,9 @@ class Method:
             ptype = CxxType(cls.type_manager, param.find('type'))
             pname = param.findtext('declname')
             self.params.append(Param(ptype, pname))
+        is_virtual = e.get('virt') == 'virtual'
+        is_override = e.find('reimplements') is not None
+        self.is_virtual_override = is_virtual and is_override
 
     def suppressed_reason(self):
         if self.is_blocked():

@@ -598,12 +598,6 @@ bool wxWindow_RemoveEventHandler(wxWindow * self, wxEvtHandler * handler) {
 void wxWindow_SetEventHandler(wxWindow * self, wxEvtHandler * handler) {
     return self->SetEventHandler(handler);
 }
-void wxWindow_SetNextHandler(wxWindow * self, wxEvtHandler * handler) {
-    return self->SetNextHandler(handler);
-}
-void wxWindow_SetPreviousHandler(wxWindow * self, wxEvtHandler * handler) {
-    return self->SetPreviousHandler(handler);
-}
 long wxWindow_GetExtraStyle(const wxWindow * self) {
     return self->GetExtraStyle();
 }
@@ -912,9 +906,6 @@ bool wxControl_Create(wxControl * self, wxWindow * parent, wxWindowID id, const 
 void wxControl_Command(wxControl * self, wxCommandEvent * event) {
     return self->Command(*event);
 }
-wxString *wxControl_GetLabel(const wxControl * self) {
-    return new wxString(self->GetLabel());
-}
 wxString *wxControl_GetLabelText(const wxControl * self) {
     return new wxString(self->GetLabelText());
 }
@@ -926,9 +917,6 @@ wxSize *wxControl_GetSizeFromTextSize1(const wxControl * self, const wxSize * ts
 }
 wxSize *wxControl_GetSizeFromText(const wxControl * self, const wxString * text) {
     return new wxSize(self->GetSizeFromText(*text));
-}
-void wxControl_SetLabel(wxControl * self, const wxString * label) {
-    return self->SetLabel(*label);
 }
 void wxControl_SetLabelText(wxControl * self, const wxString * text) {
     return self->SetLabelText(*text);
@@ -991,17 +979,11 @@ bool wxButton_Create(wxButton * self, wxWindow * parent, wxWindowID id, const wx
 bool wxButton_GetAuthNeeded(const wxButton * self) {
     return self->GetAuthNeeded();
 }
-wxString *wxButton_GetLabel(const wxButton * self) {
-    return new wxString(self->GetLabel());
-}
 void wxButton_SetAuthNeeded(wxButton * self, bool needed) {
     return self->SetAuthNeeded(needed);
 }
 wxWindow * wxButton_SetDefault(wxButton * self) {
     return self->SetDefault();
-}
-void wxButton_SetLabel(wxButton * self, const wxString * label) {
-    return self->SetLabel(*label);
 }
 wxSize *wxButton_GetDefaultSize(wxWindow * win) {
     return new wxSize(wxButton::GetDefaultSize(win));
@@ -1024,9 +1006,6 @@ wxTopLevelWindow *wxTopLevelWindow_new1(wxWindow * parent, wxWindowID id, const 
 }
 bool wxTopLevelWindow_Create(wxTopLevelWindow * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return self->Create(parent, id, *title, *pos, *size, style, *name);
-}
-bool wxTopLevelWindow_CanSetTransparent(wxTopLevelWindow * self) {
-    return self->CanSetTransparent();
 }
 void wxTopLevelWindow_CenterOnScreen(wxTopLevelWindow * self, int direction) {
     return self->CenterOnScreen(direction);
@@ -1067,9 +1046,6 @@ bool wxTopLevelWindow_IsIconized(const wxTopLevelWindow * self) {
 bool wxTopLevelWindow_IsMaximized(const wxTopLevelWindow * self) {
     return self->IsMaximized();
 }
-bool wxTopLevelWindow_Layout(wxTopLevelWindow * self) {
-    return self->Layout();
-}
 void wxTopLevelWindow_Maximize(wxTopLevelWindow * self, bool maximize) {
     return self->Maximize(maximize);
 }
@@ -1094,23 +1070,8 @@ void wxTopLevelWindow_SetIcon(wxTopLevelWindow * self, const wxIcon * icon) {
 void wxTopLevelWindow_SetIcons(wxTopLevelWindow * self, const wxIconBundle * icons) {
     return self->SetIcons(*icons);
 }
-void wxTopLevelWindow_SetMaxSize(wxTopLevelWindow * self, const wxSize * size) {
-    return self->SetMaxSize(*size);
-}
-void wxTopLevelWindow_SetMinSize(wxTopLevelWindow * self, const wxSize * size) {
-    return self->SetMinSize(*size);
-}
-void wxTopLevelWindow_SetSizeHints(wxTopLevelWindow * self, int min_w, int min_h, int max_w, int max_h, int inc_w, int inc_h) {
-    return self->SetSizeHints(min_w, min_h, max_w, max_h, inc_w, inc_h);
-}
-void wxTopLevelWindow_SetSizeHints1(wxTopLevelWindow * self, const wxSize * min_size, const wxSize * max_size, const wxSize * inc_size) {
-    return self->SetSizeHints(*min_size, *max_size, *inc_size);
-}
 void wxTopLevelWindow_SetTitle(wxTopLevelWindow * self, const wxString * title) {
     return self->SetTitle(*title);
-}
-bool wxTopLevelWindow_SetTransparent(wxTopLevelWindow * self, wxByte alpha) {
-    return self->SetTransparent(alpha);
 }
 bool wxTopLevelWindow_ShouldPreventAppExit(const wxTopLevelWindow * self) {
     return self->ShouldPreventAppExit();
@@ -1158,9 +1119,6 @@ wxToolBar * wxFrame_CreateToolBar(wxFrame * self, long style, wxWindowID id, con
 }
 void wxFrame_DoGiveHelp(wxFrame * self, const wxString * text, bool show) {
     return self->DoGiveHelp(*text, show);
-}
-wxPoint *wxFrame_GetClientAreaOrigin(const wxFrame * self) {
-    return new wxPoint(self->GetClientAreaOrigin());
 }
 wxMenuBar * wxFrame_GetMenuBar(const wxFrame * self) {
     return self->GetMenuBar();
