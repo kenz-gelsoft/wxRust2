@@ -27,24 +27,31 @@ class RustClassBinding:
                 self.__model.unprefixed(),
                 self.__model.name,
             )
-            yield ',\n'.join(self._ancestor_methods(classes))
+            ancestors = self._find_ancestors(classes)
+            yield ',\n'.join(self._ancestor_methods(ancestors))
             yield '}'
             for line in self._impl_with_ctors():
                 yield line
-            for line in self._trait_with_methods():
+            for line in self._impl_non_virtual_overrides(ancestors):
+                yield line
+            for line in self._trait_with_methods(ancestors):
                 yield line
     
-    def _ancestor_methods(self, classes):
-        for ancestor in self._find_ancestors(classes):
-            yield '    %sMethods' % (
-                ancestor[2:],
+    def _ancestor_methods(self, ancestors):
+        for ancestor in ancestors:
+            comment_or_not = ''
+            if any(m.is_non_virtual_override(ancestor) for m in self.__methods):
+                comment_or_not = '// '
+            yield '    %s%sMethods' % (
+                comment_or_not,
+                ancestor.name[2:],
             )
 
     def _find_ancestors(self, classes):
         base_classes = []
         current = self.__model
         while current:
-            base_classes.append(current.name)
+            base_classes.append(current)
             current = self._class_by_name(current.base, classes)
         return base_classes
 
@@ -64,10 +71,24 @@ class RustClassBinding:
         yield '    }'
         yield '}'
 
+    def _impl_non_virtual_overrides(self, ancestors):
+        for ancestor in ancestors:
+            methods = [m for m in self.__methods if m.is_non_virtual_override(ancestor)]
+            if len(methods) == 0:
+                continue
+            yield 'impl %sMethods for %s {' % (
+                ancestor.unprefixed(),
+                self.__model.unprefixed(),
+            )
+            for method in methods:
+                for line in method.lines():
+                    yield '    %s' % (line)
+            yield '}'
+
     def _ctors(self):
         return (m for m in self.__methods if m.is_ctor)
     
-    def _trait_with_methods(self):
+    def _trait_with_methods(self, ancestors):
         indent = ' ' * 4 * 1
         base = self.__model.base
         if not base:
@@ -78,6 +99,8 @@ class RustClassBinding:
         )
         for method in self.__methods:
             if method.is_ctor:
+                continue
+            if any(method.is_non_virtual_override(c) for c in ancestors):
                 continue
             for line in method.lines():
                 yield '%s%s' % (indent, line)
@@ -241,6 +264,9 @@ class RustMethodBinding:
 
     def _uses_ptr_type(self):
         return any(p.type.is_ptr() for p in self.__model.params)
+    
+    def is_non_virtual_override(self, cls):
+        return self.__model.is_non_virtual_override(cls)
 
 
 class CxxClassBinding:

@@ -2271,9 +2271,9 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
 // wxFrame
 wx_class! { Frame(wxFrame) impl
     FrameMethods,
-    TopLevelWindowMethods,
+    // TopLevelWindowMethods,
     NonOwnedWindowMethods,
-    WindowMethods,
+    // WindowMethods,
     EvtHandlerMethods,
     ObjectMethods
 }
@@ -2298,11 +2298,7 @@ impl Frame {
         None
     }
 }
-pub trait FrameMethods: TopLevelWindowMethods {
-    // DTOR: fn ~wxFrame()
-    fn centre(&self, direction: c_int) {
-        unsafe { ffi::wxFrame_Centre(self.as_ptr(), direction) }
-    }
+impl TopLevelWindowMethods for Frame {
     fn create<T: WindowMethods>(&self, parent: Option<&T>, id: c_int, title: &str, pos: &Point, size: &Size, style: c_long, name: &str) -> bool {
         unsafe {
             let parent = match parent {
@@ -2316,6 +2312,14 @@ pub trait FrameMethods: TopLevelWindowMethods {
             ffi::wxFrame_Create(self.as_ptr(), parent, id, title, pos, size, style, name)
         }
     }
+}
+impl WindowMethods for Frame {
+    fn centre(&self, direction: c_int) {
+        unsafe { ffi::wxFrame_Centre(self.as_ptr(), direction) }
+    }
+}
+pub trait FrameMethods: TopLevelWindowMethods {
+    // DTOR: fn ~wxFrame()
     fn create_status_bar(&self, number: c_int, style: c_long, id: c_int, name: &str) -> *mut c_void {
         unsafe {
             let name = crate::wx_string_from(name);
