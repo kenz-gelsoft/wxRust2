@@ -74,7 +74,7 @@ class RustClassBinding:
     def _impl_non_virtual_overrides(self, ancestors):
         for ancestor in ancestors:
             methods = [m for m in self.__methods if m.is_non_virtual_override(ancestor)]
-            if len(methods) == 0:
+            if not methods:
                 continue
             yield 'impl %sMethods for %s {' % (
                 ancestor.unprefixed(),

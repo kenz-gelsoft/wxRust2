@@ -134,7 +134,7 @@ class Method:
     def cxx_signature(self):
         items = []
         returns = self.returns.normalized()
-        if len(returns):
+        if returns:
             items.append(returns)
         items.append('%s(%s)' % (
             self.__name,
