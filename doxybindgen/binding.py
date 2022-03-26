@@ -13,7 +13,7 @@ class RustClassBinding:
         self.__model = model
         self.__methods = [RustMethodBinding(m) for m in model.methods]
 
-    def lines(self, classes=None, for_ffi=False):
+    def lines(self, classes, for_ffi=False):
         yield '// %s' % (
             self.__model.name,
         )
