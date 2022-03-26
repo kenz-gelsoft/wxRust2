@@ -13,11 +13,16 @@ class RustClassBinding:
         self.__model = model
         self.__methods = [RustMethodBinding(m) for m in model.methods]
 
-    def lines(self, for_ffi=False, classes=None):
+    def lines(self, classes=None, for_ffi=False):
         yield '// %s' % (
             self.__model.name,
         )
+        ancestors = self._find_ancestors(classes)
         if for_ffi:
+            if not self._is_wx_object(ancestors):
+                yield 'pub fn %s_delete(self_: *mut c_void);' % (
+                    self.__model.name,
+                )
             for method in self.__methods:
                 for line in method.lines(for_ffi=True):
                     yield line
@@ -27,7 +32,6 @@ class RustClassBinding:
                 self.__model.unprefixed(),
                 self.__model.name,
             )
-            ancestors = self._find_ancestors(classes)
             yield ',\n'.join(self._ancestor_methods(ancestors))
             yield '}'
             for line in self._impl_with_ctors():
@@ -78,7 +82,7 @@ class RustClassBinding:
             return
         yield 'impl Drop for %s {' % (self.__model.unprefixed(),)
         yield '    fn drop(&mut self) {'
-        yield '        %s_delete(self.0);' % (self.__model.name,)
+        yield '        unsafe { ffi::%s_delete(self.0) }' % (self.__model.name,)
         yield '    }'
         yield '}'
     

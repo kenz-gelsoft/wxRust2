@@ -476,6 +476,7 @@ mod ffi {
         pub fn wxFrame_PopStatusText(self_: *mut c_void, number: c_int);
         
         // wxPoint
+        pub fn wxPoint_delete(self_: *mut c_void);
         pub fn wxPoint_IsFullySpecified(self_: *const c_void) -> bool;
         pub fn wxPoint_SetDefaults(self_: *mut c_void, pt: *const c_void);
         // BLOCKED: pub fn wxPoint_operator=(self_: *mut c_void, pt: *const c_void) -> *mut c_void;
@@ -501,6 +502,7 @@ mod ffi {
         pub fn wxPoint_new2(pt: *const c_void) -> *mut c_void;
         
         // wxRect
+        pub fn wxRect_delete(self_: *mut c_void);
         pub fn wxRect_new() -> *mut c_void;
         pub fn wxRect_new1(x: c_int, y: c_int, width: c_int, height: c_int) -> *mut c_void;
         pub fn wxRect_new2(top_left: *const c_void, bottom_right: *const c_void) -> *mut c_void;
@@ -564,6 +566,7 @@ mod ffi {
         // BLOCKED: pub fn wxRect_operator==(self_: *mut c_void, r1: *const c_void, r2: *const c_void) -> bool;
         
         // wxSize
+        pub fn wxSize_delete(self_: *mut c_void);
         // BLOCKED: pub fn wxSize_operator=(self_: *mut c_void, sz: *const c_void) -> *mut c_void;
         // BLOCKED: pub fn wxSize_operator==(self_: *mut c_void, s1: *const c_void, s2: *const c_void) -> bool;
         // BLOCKED: pub fn wxSize_operator!=(self_: *mut c_void, s1: *const c_void, s2: *const c_void) -> bool;
@@ -2418,7 +2421,7 @@ impl Point {
 }
 impl Drop for Point {
     fn drop(&mut self) {
-        wxPoint_delete(self.0);
+        unsafe { ffi::wxPoint_delete(self.0) }
     }
 }
 pub trait PointMethods: WxRustMethods {
@@ -2488,7 +2491,7 @@ impl Rect {
 }
 impl Drop for Rect {
     fn drop(&mut self) {
-        wxRect_delete(self.0);
+        unsafe { ffi::wxRect_delete(self.0) }
     }
 }
 pub trait RectMethods: WxRustMethods {
@@ -2691,7 +2694,7 @@ impl Size {
 }
 impl Drop for Size {
     fn drop(&mut self) {
-        wxSize_delete(self.0);
+        unsafe { ffi::wxSize_delete(self.0) }
     }
 }
 pub trait SizeMethods: WxRustMethods {
