@@ -13,13 +13,12 @@ class RustClassBinding:
         self.__model = model
         self.__methods = [RustMethodBinding(m) for m in model.methods]
 
-    def lines(self, classes, for_ffi=False):
+    def lines(self, for_ffi=False):
         yield '// %s' % (
             self.__model.name,
         )
-        ancestors = self._find_ancestors(classes)
         if for_ffi:
-            if not self._is_wx_object(ancestors):
+            if not self.__model.manager.is_wx_object(self.__model):
                 yield 'pub fn %s_delete(self_: *mut c_void);' % (
                     self.__model.name,
                 )
@@ -32,19 +31,19 @@ class RustClassBinding:
                 self.__model.unprefixed(),
                 self.__model.name,
             )
-            yield ',\n'.join(self._ancestor_methods(ancestors))
+            yield ',\n'.join(self._ancestor_methods())
             yield '}'
             for line in self._impl_with_ctors():
                 yield line
-            for line in self._impl_drop_if_needed(ancestors):
+            for line in self._impl_drop_if_needed():
                 yield line
-            for line in self._impl_non_virtual_overrides(ancestors):
+            for line in self._impl_non_virtual_overrides():
                 yield line
-            for line in self._trait_with_methods(ancestors):
+            for line in self._trait_with_methods():
                 yield line
     
-    def _ancestor_methods(self, ancestors):
-        for ancestor in ancestors:
+    def _ancestor_methods(self):
+        for ancestor in self.__model.manager.ancestors_of(self.__model):
             comment_or_not = ''
             if any(m.is_non_virtual_override(ancestor) for m in self.__methods):
                 comment_or_not = '// '
@@ -52,20 +51,6 @@ class RustClassBinding:
                 comment_or_not,
                 ancestor.name[2:],
             )
-
-    def _find_ancestors(self, classes):
-        base_classes = []
-        current = self.__model
-        while current:
-            base_classes.append(current)
-            current = self._class_by_name(current.base, classes)
-        return base_classes
-
-    def _class_by_name(self, name, classes):
-        for cls in classes:
-            if cls.name == name:
-                return cls
-        return None
 
     def _impl_with_ctors(self):
         yield 'impl %s {' % (self.__model.unprefixed(),)
@@ -77,8 +62,8 @@ class RustClassBinding:
         yield '    }'
         yield '}'
     
-    def _impl_drop_if_needed(self, ancestors):
-        if self._is_wx_object(ancestors):
+    def _impl_drop_if_needed(self):
+        if self.__model.manager.is_wx_object(self.__model):
             return
         yield 'impl Drop for %s {' % (self.__model.unprefixed(),)
         yield '    fn drop(&mut self) {'
@@ -86,11 +71,8 @@ class RustClassBinding:
         yield '    }'
         yield '}'
     
-    def _is_wx_object(self, ancestors):
-        return any(c.name == 'wxObject' for c in ancestors)
-
-    def _impl_non_virtual_overrides(self, ancestors):
-        for ancestor in ancestors:
+    def _impl_non_virtual_overrides(self):
+        for ancestor in self.__model.manager.ancestors_of(self.__model):
             methods = [m for m in self.__methods if m.is_non_virtual_override(ancestor)]
             if not methods:
                 continue
@@ -106,7 +88,7 @@ class RustClassBinding:
     def _ctors(self):
         return (m for m in self.__methods if m.is_ctor)
     
-    def _trait_with_methods(self, ancestors):
+    def _trait_with_methods(self):
         indent = ' ' * 4 * 1
         base = self.__model.base
         if not base:
@@ -115,6 +97,7 @@ class RustClassBinding:
             self.__model.unprefixed(),
             base[2:],
         )
+        ancestors = self.__model.manager.ancestors_of(self.__model)
         for method in self.__methods:
             if method.is_ctor:
                 continue
@@ -292,9 +275,9 @@ class CxxClassBinding:
         self.__model = model
         self.__methods = [CxxMethodBinding(m) for m in model.methods]
     
-    def lines(self, classes, is_cc=False):
+    def lines(self, is_cc=False):
         yield '// CLASS: %s' % (self.__model.name,)
-        for line in self._dtor_lines(classes, is_cc):
+        for line in self._dtor_lines(is_cc):
             yield line
         for method in self.__methods:
             for line in method.lines(is_cc):
@@ -304,9 +287,8 @@ class CxxClassBinding:
     def _ctors(self):
         return (m for m in self.__methods if m.is_ctor)
     
-    def _dtor_lines(self, classes, is_cc):
-        ancestors = self._find_ancestors(classes)
-        if self._is_wx_object(ancestors):
+    def _dtor_lines(self, is_cc):
+        if self.__model.manager.is_wx_object(self.__model):
             return
         signature = 'void %s_delete(%s *self)' % (
             self.__model.name,
@@ -318,27 +300,6 @@ class CxxClassBinding:
             yield '}'
         else:
             yield '%s;' % (signature,)
-
-    # TODO remove duplication
-    def _find_ancestors(self, classes):
-        base_classes = []
-        current = self.__model
-        while current:
-            base_classes.append(current)
-            current = self._class_by_name(current.base, classes)
-        return base_classes
-
-    # TODO remove duplication
-    def _is_wx_object(self, ancestors):
-        return any(c.name == 'wxObject' for c in ancestors)
-
-    # TODO remove duplication
-    def _class_by_name(self, name, classes):
-        for cls in classes:
-            if cls.name == name:
-                return cls
-        return None
-
 
 
 class CxxMethodBinding:

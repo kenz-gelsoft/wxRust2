@@ -1,4 +1,4 @@
-from doxybindgen.model import Class, TypeManager
+from doxybindgen.model import Class, ClassManager
 from doxybindgen.binding import CxxClassBinding, RustClassBinding
 
 import toml
@@ -9,15 +9,14 @@ def main():
     with open('doxybindgen.toml', 'r') as f:
         config = toml.load(f)
     
-    type_manager = TypeManager()
-    classes = []
+    classes = ClassManager()
+    parsed = []
     xmlfiles = config['wxml_files']
     for file in xmlfiles:
-        for cls in Class.in_xml(type_manager, file, config['types']):
-            classes.append(cls)
-    # Set known binding(name)s once all classes parsed.
-    known_bindings = [cls.name for cls in classes]
-    type_manager.known_bindings = known_bindings
+        for cls in Class.in_xml(classes, file, config['types']):
+            parsed.append(cls)
+    # Register all classes once parsing finished.
+    classes.register(parsed)
     
     to_be_generated = {
         'src/generated.rs': generated_rs,
@@ -45,10 +44,10 @@ mod ffi {
     use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
     extern "C" {
 '''
-    bindings = [RustClassBinding(cls) for cls in classes]
+    bindings = [RustClassBinding(cls) for cls in classes.all()]
     indent = ' ' * 4 * 2
     for cls in bindings:
-        for line in cls.lines(classes=classes, for_ffi=True):
+        for line in cls.lines(for_ffi=True):
             yield '%s%s' % (indent, line)
     yield '''\
     }
@@ -59,7 +58,7 @@ pub trait WxRustMethods {
 }
 '''
     for cls in bindings:
-        for line in cls.lines(classes=classes):
+        for line in cls.lines():
             yield line
 
 
@@ -70,9 +69,9 @@ def wxrust2_h(classes, config):
 
 extern "C" {
 '''
-    for cls in classes:
+    for cls in classes.all():
         binding = CxxClassBinding(cls)
-        for line in binding.lines(classes=classes):
+        for line in binding.lines():
             yield line
     yield '''\
 } // extern "C"
@@ -84,9 +83,9 @@ def wxrust2_cc(classes, config):
 
 extern "C" {
 '''
-    for cls in classes:
+    for cls in classes.all():
         binding = CxxClassBinding(cls)
-        for line in binding.lines(classes=classes, is_cc=True):
+        for line in binding.lines(is_cc=True):
             yield line
     yield '''\
 } // extern "C"

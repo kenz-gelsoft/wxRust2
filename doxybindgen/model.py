@@ -25,14 +25,14 @@ RUST_PRIMITIVES = [
 
 
 class Class:
-    def in_xml(type_manager, xmlfile, config):
+    def in_xml(manager, xmlfile, config):
         tree = ET.parse(xmlfile)
         root = tree.getroot()
         for cls in root.findall(".//compounddef[@kind='class']"):
-            yield Class(type_manager, cls, config)
+            yield Class(manager, cls, config)
 
-    def __init__(self, type_manager, e, config):
-        self.type_manager = type_manager
+    def __init__(self, manager, e, config):
+        self.manager = manager
         self.name = e.findtext('compoundname')
         self.base = e.findtext('basecompoundref')
         self.methods = []
@@ -58,7 +58,7 @@ class Method:
     def __init__(self, cls, e):
         self.is_public = e.get('prot') == 'public'
         self.is_static = e.get('static') == 'yes'
-        self.returns = CxxType(cls.type_manager, e.find('type'))
+        self.returns = CxxType(cls.manager, e.find('type'))
         self.cls = cls
         self.__name = e.findtext('name')
         self.overload_index = self._overload_index()
@@ -69,7 +69,7 @@ class Method:
             self.returns = RustType(cls.name, self.const)
         self.params = []
         for param in e.findall('param'):
-            ptype = CxxType(cls.type_manager, param.find('type'))
+            ptype = CxxType(cls.manager, param.find('type'))
             pname = param.findtext('declname')
             self.params.append(Param(ptype, pname))
         is_virtual = e.get('virt') == 'virtual'
@@ -209,14 +209,51 @@ OS_UNSUPPORTED_TYPES = [
 ]
 
 
-class TypeManager:
+class ClassInfo:
+    def __init__(self, cls):
+        self.cls = cls
+        self.ancestors = None
+
+
+class ClassManager:
     def __init__(self):
-        self.known_bindings = None
-        pass
+        self.__all = None
+        self.__by_name = None
+
+    def all(self):
+        return (i.cls for i in self.__all)
+    
+    def by_name(self, name):
+        info = self.__by_name.get(name)
+        return info.cls if info else None
+
+    def register(self, classes):
+        self.__all = [ClassInfo(cls) for cls in classes]
+        dict = {}
+        for info in self.__all:
+            dict[info.cls.name] = info
+        self.__by_name = dict
 
     def is_binding_type(self, name):
-        assert self.known_bindings is not None
-        return name in self.known_bindings
+        assert self.__by_name is not None
+        return name in self.__by_name.keys()
+    
+    def ancestors_of(self, cls):
+        info = self.__by_name.get(cls.name)
+        if info.ancestors is None:
+            info.ancestors = self._find_ancestors(cls)
+        return info.ancestors
+
+    def _find_ancestors(self, cls):
+        base_classes = []
+        current = cls
+        while current:
+            base_classes.append(current)
+            current = self.by_name(current.base)
+        return base_classes
+
+    def is_wx_object(self, cls):
+        return any(c.name == 'wxObject' for c in self.ancestors_of(cls))
 
 
 class CxxType:
