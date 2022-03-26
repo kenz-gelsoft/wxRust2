@@ -211,12 +211,19 @@ OS_UNSUPPORTED_TYPES = [
 
 class ClassManager:
     def __init__(self):
-        self.known_bindings = None
-        pass
+        self.all = None
+        self.by_name = None
+
+    def register(self, classes):
+        self.all = classes
+        dict = {}
+        for cls in classes:
+            dict[cls.name] = cls
+        self.by_name = dict
 
     def is_binding_type(self, name):
-        assert self.known_bindings is not None
-        return name in self.known_bindings
+        assert self.by_name is not None
+        return name in self.by_name.keys()
 
 
 class CxxType:

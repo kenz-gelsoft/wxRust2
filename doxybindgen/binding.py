@@ -58,14 +58,8 @@ class RustClassBinding:
         current = self.__model
         while current:
             base_classes.append(current)
-            current = self._class_by_name(current.base, classes)
+            current = classes.by_name.get(current.base)
         return base_classes
-
-    def _class_by_name(self, name, classes):
-        for cls in classes:
-            if cls.name == name:
-                return cls
-        return None
 
     def _impl_with_ctors(self):
         yield 'impl %s {' % (self.__model.unprefixed(),)
@@ -325,19 +319,12 @@ class CxxClassBinding:
         current = self.__model
         while current:
             base_classes.append(current)
-            current = self._class_by_name(current.base, classes)
+            current = classes.by_name.get(current.base)
         return base_classes
 
     # TODO remove duplication
     def _is_wx_object(self, ancestors):
         return any(c.name == 'wxObject' for c in ancestors)
-
-    # TODO remove duplication
-    def _class_by_name(self, name, classes):
-        for cls in classes:
-            if cls.name == name:
-                return cls
-        return None
 
 
 
