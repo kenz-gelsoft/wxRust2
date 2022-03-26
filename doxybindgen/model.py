@@ -79,7 +79,7 @@ class Method:
     def suppressed_reason(self):
         if self.is_blocked():
             return 'BLOCKED'
-        if self.name().startswith('~'):
+        if self.__name.startswith('~'):
             return 'DTOR'
         if self.uses_not_supported_type():
             return 'NOT_SUPPORTED'

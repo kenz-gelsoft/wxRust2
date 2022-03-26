@@ -1167,6 +1167,9 @@ void wxFrame_PopStatusText(wxFrame * self, int number) {
 }
 
 // CLASS: wxPoint
+void wxPoint_delete(wxPoint *self) {
+    delete self;
+}
 bool wxPoint_IsFullySpecified(const wxPoint * self) {
     return self->IsFullySpecified();
 }
@@ -1184,6 +1187,9 @@ wxPoint *wxPoint_new2(const wxRealPoint * pt) {
 }
 
 // CLASS: wxRect
+void wxRect_delete(wxRect *self) {
+    delete self;
+}
 wxRect *wxRect_new() {
     return new wxRect();
 }
@@ -1324,6 +1330,9 @@ wxRect *wxRect_Union(const wxRect * self, const wxRect * rect) {
 }
 
 // CLASS: wxSize
+void wxSize_delete(wxSize *self) {
+    delete self;
+}
 wxSize *wxSize_new() {
     return new wxSize();
 }
