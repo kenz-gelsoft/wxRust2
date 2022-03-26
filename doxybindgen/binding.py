@@ -17,7 +17,7 @@ class RustClassBinding:
         yield '// %s' % (
             self.__model.name,
         )
-        ancestors = self._find_ancestors(classes)
+        ancestors = classes.find_ancestors(self.__model)
         if for_ffi:
             if not self._is_wx_object(ancestors):
                 yield 'pub fn %s_delete(self_: *mut c_void);' % (
@@ -52,14 +52,6 @@ class RustClassBinding:
                 comment_or_not,
                 ancestor.name[2:],
             )
-
-    def _find_ancestors(self, classes):
-        base_classes = []
-        current = self.__model
-        while current:
-            base_classes.append(current)
-            current = classes.by_name.get(current.base)
-        return base_classes
 
     def _impl_with_ctors(self):
         yield 'impl %s {' % (self.__model.unprefixed(),)
@@ -299,7 +291,7 @@ class CxxClassBinding:
         return (m for m in self.__methods if m.is_ctor)
     
     def _dtor_lines(self, classes, is_cc):
-        ancestors = self._find_ancestors(classes)
+        ancestors = classes.find_ancestors(self.__model)
         if self._is_wx_object(ancestors):
             return
         signature = 'void %s_delete(%s *self)' % (
@@ -312,15 +304,6 @@ class CxxClassBinding:
             yield '}'
         else:
             yield '%s;' % (signature,)
-
-    # TODO remove duplication
-    def _find_ancestors(self, classes):
-        base_classes = []
-        current = self.__model
-        while current:
-            base_classes.append(current)
-            current = classes.by_name.get(current.base)
-        return base_classes
 
     # TODO remove duplication
     def _is_wx_object(self, ancestors):

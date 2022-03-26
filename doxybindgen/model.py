@@ -225,6 +225,14 @@ class ClassManager:
         assert self.by_name is not None
         return name in self.by_name.keys()
 
+    def find_ancestors(self, cls):
+        base_classes = []
+        current = cls
+        while current:
+            base_classes.append(current)
+            current = self.by_name.get(current.base)
+        return base_classes
+
 
 class CxxType:
     def __init__(self, manager, e):
