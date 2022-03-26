@@ -240,8 +240,6 @@ mod ffi {
         pub fn wxWindow_PushEventHandler(self_: *mut c_void, handler: *mut c_void);
         pub fn wxWindow_RemoveEventHandler(self_: *mut c_void, handler: *mut c_void) -> bool;
         pub fn wxWindow_SetEventHandler(self_: *mut c_void, handler: *mut c_void);
-        pub fn wxWindow_SetNextHandler(self_: *mut c_void, handler: *mut c_void);
-        pub fn wxWindow_SetPreviousHandler(self_: *mut c_void, handler: *mut c_void);
         pub fn wxWindow_GetExtraStyle(self_: *const c_void) -> c_long;
         pub fn wxWindow_GetWindowStyleFlag(self_: *const c_void) -> c_long;
         pub fn wxWindow_GetWindowStyle(self_: *const c_void) -> c_long;
@@ -363,12 +361,10 @@ mod ffi {
         pub fn wxControl_new1() -> *mut c_void;
         pub fn wxControl_Create(self_: *mut c_void, parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, style: c_long, validator: *const c_void, name: *const c_void) -> bool;
         pub fn wxControl_Command(self_: *mut c_void, event: *mut c_void);
-        pub fn wxControl_GetLabel(self_: *const c_void) -> *mut c_void;
         pub fn wxControl_GetLabelText(self_: *const c_void) -> *mut c_void;
         pub fn wxControl_GetSizeFromTextSize(self_: *const c_void, xlen: c_int, ylen: c_int) -> *mut c_void;
         pub fn wxControl_GetSizeFromTextSize1(self_: *const c_void, tsize: *const c_void) -> *mut c_void;
         pub fn wxControl_GetSizeFromText(self_: *const c_void, text: *const c_void) -> *mut c_void;
-        pub fn wxControl_SetLabel(self_: *mut c_void, label: *const c_void);
         pub fn wxControl_SetLabelText(self_: *mut c_void, text: *const c_void);
         pub fn wxControl_SetLabelMarkup(self_: *mut c_void, markup: *const c_void) -> bool;
         pub fn wxControl_GetLabelText1(label: *const c_void) -> *mut c_void;
@@ -401,10 +397,8 @@ mod ffi {
         pub fn wxButton_new1(parent: *mut c_void, id: c_int, label: *const c_void, pos: *const c_void, size: *const c_void, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
         pub fn wxButton_Create(self_: *mut c_void, parent: *mut c_void, id: c_int, label: *const c_void, pos: *const c_void, size: *const c_void, style: c_long, validator: *const c_void, name: *const c_void) -> bool;
         pub fn wxButton_GetAuthNeeded(self_: *const c_void) -> bool;
-        pub fn wxButton_GetLabel(self_: *const c_void) -> *mut c_void;
         pub fn wxButton_SetAuthNeeded(self_: *mut c_void, needed: bool);
         pub fn wxButton_SetDefault(self_: *mut c_void) -> *mut c_void;
-        pub fn wxButton_SetLabel(self_: *mut c_void, label: *const c_void);
         pub fn wxButton_GetDefaultSize(win: *mut c_void) -> *mut c_void;
         
         // wxNonOwnedWindow
@@ -416,7 +410,6 @@ mod ffi {
         pub fn wxTopLevelWindow_new1(parent: *mut c_void, id: c_int, title: *const c_void, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> *mut c_void;
         // DTOR: pub fn wxTopLevelWindow_~wxTopLevelWindow(self_: *mut c_void);
         pub fn wxTopLevelWindow_Create(self_: *mut c_void, parent: *mut c_void, id: c_int, title: *const c_void, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> bool;
-        pub fn wxTopLevelWindow_CanSetTransparent(self_: *mut c_void) -> bool;
         pub fn wxTopLevelWindow_CenterOnScreen(self_: *mut c_void, direction: c_int);
         pub fn wxTopLevelWindow_CentreOnScreen(self_: *mut c_void, direction: c_int);
         pub fn wxTopLevelWindow_EnableCloseButton(self_: *mut c_void, enable: bool) -> bool;
@@ -433,7 +426,6 @@ mod ffi {
         pub fn wxTopLevelWindow_IsIconized(self_: *const c_void) -> bool;
         pub fn wxTopLevelWindow_IsMaximized(self_: *const c_void) -> bool;
         // BLOCKED: pub fn wxTopLevelWindow_IsUsingNativeDecorations(self_: *const c_void) -> bool;
-        pub fn wxTopLevelWindow_Layout(self_: *mut c_void) -> bool;
         pub fn wxTopLevelWindow_Maximize(self_: *mut c_void, maximize: bool);
         // BLOCKED: pub fn wxTopLevelWindow_MSWGetSystemMenu(self_: *const c_void) -> *mut c_void;
         pub fn wxTopLevelWindow_RequestUserAttention(self_: *mut c_void, flags: c_int);
@@ -445,12 +437,7 @@ mod ffi {
         pub fn wxTopLevelWindow_GetTmpDefaultItem(self_: *const c_void) -> *mut c_void;
         pub fn wxTopLevelWindow_SetIcon(self_: *mut c_void, icon: *const c_void);
         pub fn wxTopLevelWindow_SetIcons(self_: *mut c_void, icons: *const c_void);
-        pub fn wxTopLevelWindow_SetMaxSize(self_: *mut c_void, size: *const c_void);
-        pub fn wxTopLevelWindow_SetMinSize(self_: *mut c_void, size: *const c_void);
-        pub fn wxTopLevelWindow_SetSizeHints(self_: *mut c_void, min_w: c_int, min_h: c_int, max_w: c_int, max_h: c_int, inc_w: c_int, inc_h: c_int);
-        pub fn wxTopLevelWindow_SetSizeHints1(self_: *mut c_void, min_size: *const c_void, max_size: *const c_void, inc_size: *const c_void);
         pub fn wxTopLevelWindow_SetTitle(self_: *mut c_void, title: *const c_void);
-        pub fn wxTopLevelWindow_SetTransparent(self_: *mut c_void, alpha: c_uchar) -> bool;
         pub fn wxTopLevelWindow_ShouldPreventAppExit(self_: *const c_void) -> bool;
         pub fn wxTopLevelWindow_OSXSetModified(self_: *mut c_void, modified: bool);
         pub fn wxTopLevelWindow_OSXIsModified(self_: *const c_void) -> bool;
@@ -471,7 +458,6 @@ mod ffi {
         pub fn wxFrame_CreateStatusBar(self_: *mut c_void, number: c_int, style: c_long, id: c_int, name: *const c_void) -> *mut c_void;
         pub fn wxFrame_CreateToolBar(self_: *mut c_void, style: c_long, id: c_int, name: *const c_void) -> *mut c_void;
         pub fn wxFrame_DoGiveHelp(self_: *mut c_void, text: *const c_void, show: bool);
-        pub fn wxFrame_GetClientAreaOrigin(self_: *const c_void) -> *mut c_void;
         pub fn wxFrame_GetMenuBar(self_: *const c_void) -> *mut c_void;
         pub fn wxFrame_GetStatusBar(self_: *const c_void) -> *mut c_void;
         pub fn wxFrame_GetStatusBarPane(self_: *const c_void) -> c_int;
@@ -1508,24 +1494,6 @@ pub trait WindowMethods: EvtHandlerMethods {
             ffi::wxWindow_SetEventHandler(self.as_ptr(), handler)
         }
     }
-    fn set_next_handler<T: EvtHandlerMethods>(&self, handler: Option<&T>) {
-        unsafe {
-            let handler = match handler {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxWindow_SetNextHandler(self.as_ptr(), handler)
-        }
-    }
-    fn set_previous_handler<T: EvtHandlerMethods>(&self, handler: Option<&T>) {
-        unsafe {
-            let handler = match handler {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxWindow_SetPreviousHandler(self.as_ptr(), handler)
-        }
-    }
     fn get_extra_style(&self) -> c_long {
         unsafe { ffi::wxWindow_GetExtraStyle(self.as_ptr()) }
     }
@@ -1940,9 +1908,6 @@ pub trait ControlMethods: WindowMethods {
     fn command(&self, event: *mut c_void) {
         unsafe { ffi::wxControl_Command(self.as_ptr(), event) }
     }
-    fn get_label(&self) -> String {
-        unsafe { crate::from_wx_string(ffi::wxControl_GetLabel(self.as_ptr())) }
-    }
     fn get_label_text(&self) -> String {
         unsafe { crate::from_wx_string(ffi::wxControl_GetLabelText(self.as_ptr())) }
     }
@@ -1959,12 +1924,6 @@ pub trait ControlMethods: WindowMethods {
         unsafe {
             let text = crate::wx_string_from(text);
             Size(ffi::wxControl_GetSizeFromText(self.as_ptr(), text))
-        }
-    }
-    fn set_label(&self, label: &str) {
-        unsafe {
-            let label = crate::wx_string_from(label);
-            ffi::wxControl_SetLabel(self.as_ptr(), label)
         }
     }
     fn set_label_text(&self, text: &str) {
@@ -2109,20 +2068,11 @@ pub trait ButtonMethods: AnyButtonMethods {
     fn get_auth_needed(&self) -> bool {
         unsafe { ffi::wxButton_GetAuthNeeded(self.as_ptr()) }
     }
-    fn get_label(&self) -> String {
-        unsafe { crate::from_wx_string(ffi::wxButton_GetLabel(self.as_ptr())) }
-    }
     fn set_auth_needed(&self, needed: bool) {
         unsafe { ffi::wxButton_SetAuthNeeded(self.as_ptr(), needed) }
     }
     fn set_default(&self) -> *mut c_void {
         unsafe { ffi::wxButton_SetDefault(self.as_ptr()) }
-    }
-    fn set_label(&self, label: &str) {
-        unsafe {
-            let label = crate::wx_string_from(label);
-            ffi::wxButton_SetLabel(self.as_ptr(), label)
-        }
     }
     fn get_default_size<T: WindowMethods>(win: Option<&T>) -> Size {
         unsafe {
@@ -2200,9 +2150,6 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
             ffi::wxTopLevelWindow_Create(self.as_ptr(), parent, id, title, pos, size, style, name)
         }
     }
-    fn can_set_transparent(&self) -> bool {
-        unsafe { ffi::wxTopLevelWindow_CanSetTransparent(self.as_ptr()) }
-    }
     fn center_on_screen(&self, direction: c_int) {
         unsafe { ffi::wxTopLevelWindow_CenterOnScreen(self.as_ptr(), direction) }
     }
@@ -2245,9 +2192,6 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
         unsafe { ffi::wxTopLevelWindow_IsMaximized(self.as_ptr()) }
     }
     // BLOCKED: fn IsUsingNativeDecorations()
-    fn layout(&self) -> bool {
-        unsafe { ffi::wxTopLevelWindow_Layout(self.as_ptr()) }
-    }
     fn maximize(&self, maximize: bool) {
         unsafe { ffi::wxTopLevelWindow_Maximize(self.as_ptr(), maximize) }
     }
@@ -2287,37 +2231,11 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     fn set_icons(&self, icons: *const c_void) {
         unsafe { ffi::wxTopLevelWindow_SetIcons(self.as_ptr(), icons) }
     }
-    fn set_max_size(&self, size: &Size) {
-        unsafe {
-            let size = size.as_ptr();
-            ffi::wxTopLevelWindow_SetMaxSize(self.as_ptr(), size)
-        }
-    }
-    fn set_min_size(&self, size: &Size) {
-        unsafe {
-            let size = size.as_ptr();
-            ffi::wxTopLevelWindow_SetMinSize(self.as_ptr(), size)
-        }
-    }
-    fn set_size_hints(&self, min_w: c_int, min_h: c_int, max_w: c_int, max_h: c_int, inc_w: c_int, inc_h: c_int) {
-        unsafe { ffi::wxTopLevelWindow_SetSizeHints(self.as_ptr(), min_w, min_h, max_w, max_h, inc_w, inc_h) }
-    }
-    fn set_size_hints1(&self, min_size: &Size, max_size: &Size, inc_size: &Size) {
-        unsafe {
-            let min_size = min_size.as_ptr();
-            let max_size = max_size.as_ptr();
-            let inc_size = inc_size.as_ptr();
-            ffi::wxTopLevelWindow_SetSizeHints1(self.as_ptr(), min_size, max_size, inc_size)
-        }
-    }
     fn set_title(&self, title: &str) {
         unsafe {
             let title = crate::wx_string_from(title);
             ffi::wxTopLevelWindow_SetTitle(self.as_ptr(), title)
         }
-    }
-    fn set_transparent(&self, alpha: c_uchar) -> bool {
-        unsafe { ffi::wxTopLevelWindow_SetTransparent(self.as_ptr(), alpha) }
     }
     fn should_prevent_app_exit(&self) -> bool {
         unsafe { ffi::wxTopLevelWindow_ShouldPreventAppExit(self.as_ptr()) }
@@ -2353,9 +2271,9 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
 // wxFrame
 wx_class! { Frame(wxFrame) impl
     FrameMethods,
-    TopLevelWindowMethods,
+    // TopLevelWindowMethods,
     NonOwnedWindowMethods,
-    WindowMethods,
+    // WindowMethods,
     EvtHandlerMethods,
     ObjectMethods
 }
@@ -2380,11 +2298,7 @@ impl Frame {
         None
     }
 }
-pub trait FrameMethods: TopLevelWindowMethods {
-    // DTOR: fn ~wxFrame()
-    fn centre(&self, direction: c_int) {
-        unsafe { ffi::wxFrame_Centre(self.as_ptr(), direction) }
-    }
+impl TopLevelWindowMethods for Frame {
     fn create<T: WindowMethods>(&self, parent: Option<&T>, id: c_int, title: &str, pos: &Point, size: &Size, style: c_long, name: &str) -> bool {
         unsafe {
             let parent = match parent {
@@ -2398,6 +2312,14 @@ pub trait FrameMethods: TopLevelWindowMethods {
             ffi::wxFrame_Create(self.as_ptr(), parent, id, title, pos, size, style, name)
         }
     }
+}
+impl WindowMethods for Frame {
+    fn centre(&self, direction: c_int) {
+        unsafe { ffi::wxFrame_Centre(self.as_ptr(), direction) }
+    }
+}
+pub trait FrameMethods: TopLevelWindowMethods {
+    // DTOR: fn ~wxFrame()
     fn create_status_bar(&self, number: c_int, style: c_long, id: c_int, name: &str) -> *mut c_void {
         unsafe {
             let name = crate::wx_string_from(name);
@@ -2415,9 +2337,6 @@ pub trait FrameMethods: TopLevelWindowMethods {
             let text = crate::wx_string_from(text);
             ffi::wxFrame_DoGiveHelp(self.as_ptr(), text, show)
         }
-    }
-    fn get_client_area_origin(&self) -> Point {
-        unsafe { Point(ffi::wxFrame_GetClientAreaOrigin(self.as_ptr())) }
     }
     fn get_menu_bar(&self) -> *mut c_void {
         unsafe { ffi::wxFrame_GetMenuBar(self.as_ptr()) }

@@ -43,6 +43,8 @@ class Class:
             m = Method(self, method)
             if not m.is_public:
                 continue
+            if m.is_virtual_override:
+                continue
             self.methods.append(m)
 
     def unprefixed(self):
@@ -70,6 +72,9 @@ class Method:
             ptype = CxxType(cls.type_manager, param.find('type'))
             pname = param.findtext('declname')
             self.params.append(Param(ptype, pname))
+        is_virtual = e.get('virt') == 'virtual'
+        is_override = e.find('reimplements') is not None
+        self.is_virtual_override = is_virtual and is_override
 
     def suppressed_reason(self):
         if self.is_blocked():
@@ -126,6 +131,22 @@ class Method:
             return True
         return False
 
+    def cxx_signature(self):
+        items = []
+        returns = self.returns.normalized()
+        if returns:
+            items.append(returns)
+        items.append('%s(%s)' % (
+            self.__name,
+            ', '.join(p.type.normalized() for p in self.params)
+        ))
+        return ' '.join(items)
+
+    def is_non_virtual_override(self, cls):
+        if cls == self.cls:
+            return False
+        signature = self.cxx_signature()
+        return any(m.cxx_signature() == signature for m in cls.methods)
     
 class Param:
     def __init__(self, type, name):
@@ -176,6 +197,12 @@ class RustType:
 
     def is_str(self):
         return self.typename == 'wxString'
+
+    def normalized(self):
+        return '%s%s*' % (
+            'const ' if self.const else '',
+            self.typename,
+        )
 
 OS_UNSUPPORTED_TYPES = [
     'wxAccessible',
@@ -315,6 +342,13 @@ class CxxType:
     def make_generic(self, generic_name):
         self.generic_name = generic_name
         return (generic_name, self.typename[2:] + 'Methods')
+
+    def normalized(self):
+        return '%s%s%s' % (
+            '' if self.__is_mut else 'const ',
+            self.typename,
+            self.__indirection,
+        )
 
 
 def prefixed(t, with_ffi=False):
