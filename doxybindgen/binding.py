@@ -17,9 +17,8 @@ class RustClassBinding:
         yield '// %s' % (
             self.__model.name,
         )
-        ancestors = classes.find_ancestors(self.__model)
         if for_ffi:
-            if not self._is_wx_object(ancestors):
+            if not classes.is_wx_object(self.__model):
                 yield 'pub fn %s_delete(self_: *mut c_void);' % (
                     self.__model.name,
                 )
@@ -32,11 +31,12 @@ class RustClassBinding:
                 self.__model.unprefixed(),
                 self.__model.name,
             )
+            ancestors = classes.find_ancestors(self.__model)
             yield ',\n'.join(self._ancestor_methods(ancestors))
             yield '}'
             for line in self._impl_with_ctors():
                 yield line
-            for line in self._impl_drop_if_needed(ancestors):
+            for line in self._impl_drop_if_needed(classes):
                 yield line
             for line in self._impl_non_virtual_overrides(ancestors):
                 yield line
@@ -63,8 +63,8 @@ class RustClassBinding:
         yield '    }'
         yield '}'
     
-    def _impl_drop_if_needed(self, ancestors):
-        if self._is_wx_object(ancestors):
+    def _impl_drop_if_needed(self, classes):
+        if classes.is_wx_object(self.__model):
             return
         yield 'impl Drop for %s {' % (self.__model.unprefixed(),)
         yield '    fn drop(&mut self) {'
@@ -72,9 +72,6 @@ class RustClassBinding:
         yield '    }'
         yield '}'
     
-    def _is_wx_object(self, ancestors):
-        return any(c.name == 'wxObject' for c in ancestors)
-
     def _impl_non_virtual_overrides(self, ancestors):
         for ancestor in ancestors:
             methods = [m for m in self.__methods if m.is_non_virtual_override(ancestor)]
@@ -291,8 +288,7 @@ class CxxClassBinding:
         return (m for m in self.__methods if m.is_ctor)
     
     def _dtor_lines(self, classes, is_cc):
-        ancestors = classes.find_ancestors(self.__model)
-        if self._is_wx_object(ancestors):
+        if classes.is_wx_object(self.__model):
             return
         signature = 'void %s_delete(%s *self)' % (
             self.__model.name,
@@ -304,11 +300,6 @@ class CxxClassBinding:
             yield '}'
         else:
             yield '%s;' % (signature,)
-
-    # TODO remove duplication
-    def _is_wx_object(self, ancestors):
-        return any(c.name == 'wxObject' for c in ancestors)
-
 
 
 class CxxMethodBinding:

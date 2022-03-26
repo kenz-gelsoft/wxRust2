@@ -226,12 +226,16 @@ class ClassManager:
         return name in self.by_name.keys()
 
     def find_ancestors(self, cls):
+        # TODO memoization
         base_classes = []
         current = cls
         while current:
             base_classes.append(current)
             current = self.by_name.get(current.base)
         return base_classes
+
+    def is_wx_object(self, cls):
+        return any(c.name == 'wxObject' for c in self.find_ancestors(cls))
 
 
 class CxxType:
