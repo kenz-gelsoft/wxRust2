@@ -212,6 +212,7 @@ OS_UNSUPPORTED_TYPES = [
 class ClassInfo:
     def __init__(self, cls):
         self.cls = cls
+        self.ancestors = None
 
 
 class ClassManager:
@@ -236,9 +237,14 @@ class ClassManager:
     def is_binding_type(self, name):
         assert self.__by_name is not None
         return name in self.__by_name.keys()
+    
+    def ancestors_of(self, cls):
+        info = self.__by_name.get(cls.name)
+        if info.ancestors is None:
+            info.ancestors = self._find_ancestors(cls)
+        return info.ancestors
 
-    def find_ancestors(self, cls):
-        # TODO memoization
+    def _find_ancestors(self, cls):
         base_classes = []
         current = cls
         while current:
@@ -247,7 +253,7 @@ class ClassManager:
         return base_classes
 
     def is_wx_object(self, cls):
-        return any(c.name == 'wxObject' for c in self.find_ancestors(cls))
+        return any(c.name == 'wxObject' for c in self.ancestors_of(cls))
 
 
 class CxxType:

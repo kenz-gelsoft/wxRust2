@@ -31,20 +31,19 @@ class RustClassBinding:
                 self.__model.unprefixed(),
                 self.__model.name,
             )
-            ancestors = classes.find_ancestors(self.__model)
-            yield ',\n'.join(self._ancestor_methods(ancestors))
+            yield ',\n'.join(self._ancestor_methods(classes))
             yield '}'
             for line in self._impl_with_ctors():
                 yield line
             for line in self._impl_drop_if_needed(classes):
                 yield line
-            for line in self._impl_non_virtual_overrides(ancestors):
+            for line in self._impl_non_virtual_overrides(classes):
                 yield line
-            for line in self._trait_with_methods(ancestors):
+            for line in self._trait_with_methods(classes):
                 yield line
     
-    def _ancestor_methods(self, ancestors):
-        for ancestor in ancestors:
+    def _ancestor_methods(self, classes):
+        for ancestor in classes.ancestors_of(self.__model):
             comment_or_not = ''
             if any(m.is_non_virtual_override(ancestor) for m in self.__methods):
                 comment_or_not = '// '
@@ -72,8 +71,8 @@ class RustClassBinding:
         yield '    }'
         yield '}'
     
-    def _impl_non_virtual_overrides(self, ancestors):
-        for ancestor in ancestors:
+    def _impl_non_virtual_overrides(self, classes):
+        for ancestor in classes.ancestors_of(self.__model):
             methods = [m for m in self.__methods if m.is_non_virtual_override(ancestor)]
             if not methods:
                 continue
@@ -89,7 +88,7 @@ class RustClassBinding:
     def _ctors(self):
         return (m for m in self.__methods if m.is_ctor)
     
-    def _trait_with_methods(self, ancestors):
+    def _trait_with_methods(self, classes):
         indent = ' ' * 4 * 1
         base = self.__model.base
         if not base:
@@ -98,6 +97,7 @@ class RustClassBinding:
             self.__model.unprefixed(),
             base[2:],
         )
+        ancestors = classes.ancestors_of(self.__model)
         for method in self.__methods:
             if method.is_ctor:
                 continue
