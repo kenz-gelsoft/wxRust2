@@ -32,6 +32,8 @@ class RustClassBinding:
             yield '}'
             for line in self._impl_with_ctors():
                 yield line
+            for line in self._impl_drop_if_needed(ancestors):
+                yield line
             for line in self._impl_non_virtual_overrides(ancestors):
                 yield line
             for line in self._trait_with_methods(ancestors):
@@ -70,6 +72,18 @@ class RustClassBinding:
         yield '        None'
         yield '    }'
         yield '}'
+    
+    def _impl_drop_if_needed(self, ancestors):
+        if self._is_wx_object(ancestors):
+            return
+        yield 'impl Drop for %s {' % (self.__model.unprefixed(),)
+        yield '    fn drop(&mut self) {'
+        yield '        %s_delete(self.0);' % (self.__model.name,)
+        yield '    }'
+        yield '}'
+    
+    def _is_wx_object(self, ancestors):
+        return any(c.name == 'wxObject' for c in ancestors)
 
     def _impl_non_virtual_overrides(self, ancestors):
         for ancestor in ancestors:

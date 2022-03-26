@@ -2416,6 +2416,11 @@ impl Point {
         None
     }
 }
+impl Drop for Point {
+    fn drop(&mut self) {
+        wxPoint_delete(self.0);
+    }
+}
 pub trait PointMethods: WxRustMethods {
     fn is_fully_specified(&self) -> bool {
         unsafe { ffi::wxPoint_IsFullySpecified(self.as_ptr()) }
@@ -2479,6 +2484,11 @@ impl Rect {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Drop for Rect {
+    fn drop(&mut self) {
+        wxRect_delete(self.0);
     }
 }
 pub trait RectMethods: WxRustMethods {
@@ -2677,6 +2687,11 @@ impl Size {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Drop for Size {
+    fn drop(&mut self) {
+        wxSize_delete(self.0);
     }
 }
 pub trait SizeMethods: WxRustMethods {
