@@ -9,16 +9,17 @@ RUST_KEYWORDS = [
 
 
 class RustClassBinding:
-    def __init__(self, model):
+    def __init__(self, model, classes):
         self.__model = model
+        self.__classes = classes
         self.__methods = [RustMethodBinding(m) for m in model.methods]
 
-    def lines(self, classes, for_ffi=False):
+    def lines(self, for_ffi=False):
         yield '// %s' % (
             self.__model.name,
         )
         if for_ffi:
-            if not classes.is_wx_object(self.__model):
+            if not self.__classes.is_wx_object(self.__model):
                 yield 'pub fn %s_delete(self_: *mut c_void);' % (
                     self.__model.name,
                 )
@@ -31,19 +32,19 @@ class RustClassBinding:
                 self.__model.unprefixed(),
                 self.__model.name,
             )
-            yield ',\n'.join(self._ancestor_methods(classes))
+            yield ',\n'.join(self._ancestor_methods())
             yield '}'
             for line in self._impl_with_ctors():
                 yield line
-            for line in self._impl_drop_if_needed(classes):
+            for line in self._impl_drop_if_needed():
                 yield line
-            for line in self._impl_non_virtual_overrides(classes):
+            for line in self._impl_non_virtual_overrides():
                 yield line
-            for line in self._trait_with_methods(classes):
+            for line in self._trait_with_methods():
                 yield line
     
-    def _ancestor_methods(self, classes):
-        for ancestor in classes.ancestors_of(self.__model):
+    def _ancestor_methods(self):
+        for ancestor in self.__classes.ancestors_of(self.__model):
             comment_or_not = ''
             if any(m.is_non_virtual_override(ancestor) for m in self.__methods):
                 comment_or_not = '// '
@@ -62,8 +63,8 @@ class RustClassBinding:
         yield '    }'
         yield '}'
     
-    def _impl_drop_if_needed(self, classes):
-        if classes.is_wx_object(self.__model):
+    def _impl_drop_if_needed(self):
+        if self.__classes.is_wx_object(self.__model):
             return
         yield 'impl Drop for %s {' % (self.__model.unprefixed(),)
         yield '    fn drop(&mut self) {'
@@ -71,8 +72,8 @@ class RustClassBinding:
         yield '    }'
         yield '}'
     
-    def _impl_non_virtual_overrides(self, classes):
-        for ancestor in classes.ancestors_of(self.__model):
+    def _impl_non_virtual_overrides(self):
+        for ancestor in self.__classes.ancestors_of(self.__model):
             methods = [m for m in self.__methods if m.is_non_virtual_override(ancestor)]
             if not methods:
                 continue
@@ -88,7 +89,7 @@ class RustClassBinding:
     def _ctors(self):
         return (m for m in self.__methods if m.is_ctor)
     
-    def _trait_with_methods(self, classes):
+    def _trait_with_methods(self):
         indent = ' ' * 4 * 1
         base = self.__model.base
         if not base:
@@ -97,7 +98,7 @@ class RustClassBinding:
             self.__model.unprefixed(),
             base[2:],
         )
-        ancestors = classes.ancestors_of(self.__model)
+        ancestors = self.__classes.ancestors_of(self.__model)
         for method in self.__methods:
             if method.is_ctor:
                 continue
@@ -271,13 +272,14 @@ class RustMethodBinding:
 
 
 class CxxClassBinding:
-    def __init__(self, model):
+    def __init__(self, model, classes):
         self.__model = model
+        self.__classes = classes
         self.__methods = [CxxMethodBinding(m) for m in model.methods]
     
-    def lines(self, classes, is_cc=False):
+    def lines(self, is_cc=False):
         yield '// CLASS: %s' % (self.__model.name,)
-        for line in self._dtor_lines(classes, is_cc):
+        for line in self._dtor_lines(is_cc):
             yield line
         for method in self.__methods:
             for line in method.lines(is_cc):
@@ -287,8 +289,8 @@ class CxxClassBinding:
     def _ctors(self):
         return (m for m in self.__methods if m.is_ctor)
     
-    def _dtor_lines(self, classes, is_cc):
-        if classes.is_wx_object(self.__model):
+    def _dtor_lines(self, is_cc):
+        if self.__classes.is_wx_object(self.__model):
             return
         signature = 'void %s_delete(%s *self)' % (
             self.__model.name,

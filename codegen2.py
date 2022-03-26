@@ -44,10 +44,10 @@ mod ffi {
     use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
     extern "C" {
 '''
-    bindings = [RustClassBinding(cls) for cls in classes.all()]
+    bindings = [RustClassBinding(cls, classes) for cls in classes.all()]
     indent = ' ' * 4 * 2
     for cls in bindings:
-        for line in cls.lines(classes, for_ffi=True):
+        for line in cls.lines(for_ffi=True):
             yield '%s%s' % (indent, line)
     yield '''\
     }
@@ -58,7 +58,7 @@ pub trait WxRustMethods {
 }
 '''
     for cls in bindings:
-        for line in cls.lines(classes):
+        for line in cls.lines():
             yield line
 
 
@@ -70,8 +70,8 @@ def wxrust2_h(classes, config):
 extern "C" {
 '''
     for cls in classes.all():
-        binding = CxxClassBinding(cls)
-        for line in binding.lines(classes):
+        binding = CxxClassBinding(cls, classes)
+        for line in binding.lines():
             yield line
     yield '''\
 } // extern "C"
@@ -84,8 +84,8 @@ def wxrust2_cc(classes, config):
 extern "C" {
 '''
     for cls in classes.all():
-        binding = CxxClassBinding(cls)
-        for line in binding.lines(classes, is_cc=True):
+        binding = CxxClassBinding(cls, classes)
+        for line in binding.lines(is_cc=True):
             yield line
     yield '''\
 } // extern "C"
