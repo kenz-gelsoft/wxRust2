@@ -25,14 +25,14 @@ RUST_PRIMITIVES = [
 
 
 class Class:
-    def in_xml(type_manager, xmlfile, config):
+    def in_xml(manager, xmlfile, config):
         tree = ET.parse(xmlfile)
         root = tree.getroot()
         for cls in root.findall(".//compounddef[@kind='class']"):
-            yield Class(type_manager, cls, config)
+            yield Class(manager, cls, config)
 
-    def __init__(self, type_manager, e, config):
-        self.type_manager = type_manager
+    def __init__(self, manager, e, config):
+        self.manager = manager
         self.name = e.findtext('compoundname')
         self.base = e.findtext('basecompoundref')
         self.methods = []
@@ -58,7 +58,7 @@ class Method:
     def __init__(self, cls, e):
         self.is_public = e.get('prot') == 'public'
         self.is_static = e.get('static') == 'yes'
-        self.returns = CxxType(cls.type_manager, e.find('type'))
+        self.returns = CxxType(cls.manager, e.find('type'))
         self.cls = cls
         self.__name = e.findtext('name')
         self.overload_index = self._overload_index()
@@ -69,7 +69,7 @@ class Method:
             self.returns = RustType(cls.name, self.const)
         self.params = []
         for param in e.findall('param'):
-            ptype = CxxType(cls.type_manager, param.find('type'))
+            ptype = CxxType(cls.manager, param.find('type'))
             pname = param.findtext('declname')
             self.params.append(Param(ptype, pname))
         is_virtual = e.get('virt') == 'virtual'
@@ -209,7 +209,7 @@ OS_UNSUPPORTED_TYPES = [
 ]
 
 
-class TypeManager:
+class ClassManager:
     def __init__(self):
         self.known_bindings = None
         pass

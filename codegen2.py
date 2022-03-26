@@ -1,4 +1,4 @@
-from doxybindgen.model import Class, TypeManager
+from doxybindgen.model import Class, ClassManager
 from doxybindgen.binding import CxxClassBinding, RustClassBinding
 
 import toml
@@ -9,15 +9,15 @@ def main():
     with open('doxybindgen.toml', 'r') as f:
         config = toml.load(f)
     
-    type_manager = TypeManager()
+    class_manager = ClassManager()
     classes = []
     xmlfiles = config['wxml_files']
     for file in xmlfiles:
-        for cls in Class.in_xml(type_manager, file, config['types']):
+        for cls in Class.in_xml(class_manager, file, config['types']):
             classes.append(cls)
     # Set known binding(name)s once all classes parsed.
     known_bindings = [cls.name for cls in classes]
-    type_manager.known_bindings = known_bindings
+    class_manager.known_bindings = known_bindings
     
     to_be_generated = {
         'src/generated.rs': generated_rs,
