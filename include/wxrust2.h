@@ -404,6 +404,7 @@ void wxFrame_PushStatusText(wxFrame * self, const wxString * text, int number);
 void wxFrame_PopStatusText(wxFrame * self, int number);
 
 // CLASS: wxPoint
+void wxPoint_delete(wxPoint *self);
 bool wxPoint_IsFullySpecified(const wxPoint * self);
 void wxPoint_SetDefaults(wxPoint * self, const wxPoint * pt);
 wxPoint *wxPoint_new();
@@ -411,6 +412,7 @@ wxPoint *wxPoint_new1(int x, int y);
 wxPoint *wxPoint_new2(const wxRealPoint * pt);
 
 // CLASS: wxRect
+void wxRect_delete(wxRect *self);
 wxRect *wxRect_new();
 wxRect *wxRect_new1(int x, int y, int width, int height);
 wxRect *wxRect_new2(const wxPoint * top_left, const wxPoint * bottom_right);
@@ -459,6 +461,7 @@ void wxRect_SetBottomLeft(wxRect * self, const wxPoint * p);
 wxRect *wxRect_Union(const wxRect * self, const wxRect * rect);
 
 // CLASS: wxSize
+void wxSize_delete(wxSize *self);
 wxSize *wxSize_new();
 wxSize *wxSize_new1(int width, int height);
 void wxSize_DecBy(wxSize * self, const wxPoint * pt);

@@ -288,8 +288,10 @@ class CxxClassBinding:
         self.__model = model
         self.__methods = [CxxMethodBinding(m) for m in model.methods]
     
-    def lines(self, is_cc=False):
+    def lines(self, classes, is_cc=False):
         yield '// CLASS: %s' % (self.__model.name,)
+        for line in self._dtor_lines(classes, is_cc):
+            yield line
         for method in self.__methods:
             for line in method.lines(is_cc):
                 yield line
@@ -297,6 +299,42 @@ class CxxClassBinding:
 
     def _ctors(self):
         return (m for m in self.__methods if m.is_ctor)
+    
+    def _dtor_lines(self, classes, is_cc):
+        ancestors = self._find_ancestors(classes)
+        if self._is_wx_object(ancestors):
+            return
+        signature = 'void %s_delete(%s *self)' % (
+            self.__model.name,
+            self.__model.name,
+        )
+        if is_cc:
+            yield '%s {' % (signature,)
+            yield '    delete self;'
+            yield '}'
+        else:
+            yield '%s;' % (signature,)
+
+    # TODO remove duplication
+    def _find_ancestors(self, classes):
+        base_classes = []
+        current = self.__model
+        while current:
+            base_classes.append(current)
+            current = self._class_by_name(current.base, classes)
+        return base_classes
+
+    # TODO remove duplication
+    def _is_wx_object(self, ancestors):
+        return any(c.name == 'wxObject' for c in ancestors)
+
+    # TODO remove duplication
+    def _class_by_name(self, name, classes):
+        for cls in classes:
+            if cls.name == name:
+                return cls
+        return None
+
 
 
 class CxxMethodBinding:
