@@ -47,7 +47,10 @@ def generated_rs(classes, config, libname):
 use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
 use std::ptr;
 
-use crate::macros::wx_class;
+use crate::macros::wx_class;'''
+    if libname != 'base':
+        yield 'use base::*;'
+    yield '''\
 
 mod ffi {
     use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
@@ -62,7 +65,9 @@ mod ffi {
     yield '''\
     }
 }
-
+'''
+    if libname == 'base':
+        yield '''\
 pub trait WxRustMethods {
     unsafe fn as_ptr(&self) -> *mut c_void;
 }
