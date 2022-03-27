@@ -230,6 +230,12 @@ class ClassManager:
     def all(self):
         return (i.cls for i in self.__all)
     
+    def in_lib(self, libname):
+        all_classes = self.all()
+        if libname is None:
+            return all_classes
+        return (cls for cls in all_classes if cls.library == libname)
+    
     def by_name(self, name):
         info = self.__by_name.get(name)
         return info.cls if info else None
