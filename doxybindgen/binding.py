@@ -63,11 +63,12 @@ class RustClassBinding:
         yield '}'
     
     def _impl_drop_if_needed(self):
+        deleter_class = self.__model.name
         if self.__model.manager.is_wx_object(self.__model):
-            return
+            deleter_class = 'wxObject'
         yield 'impl Drop for %s {' % (self.__model.unprefixed(),)
         yield '    fn drop(&mut self) {'
-        yield '        unsafe { ffi::%s_delete(self.0) }' % (self.__model.name,)
+        yield '        unsafe { ffi::%s_delete(self.0) }' % (deleter_class,)
         yield '    }'
         yield '}'
     

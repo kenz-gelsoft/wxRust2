@@ -638,6 +638,11 @@ impl Object {
         None
     }
 }
+impl Drop for Object {
+    fn drop(&mut self) {
+        unsafe { ffi::wxObject_delete(self.0) }
+    }
+}
 pub trait ObjectMethods: WxRustMethods {
     // DTOR: fn ~wxObject()
     fn get_class_info(&self) -> *mut c_void {
@@ -685,6 +690,11 @@ impl EvtHandler {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Drop for EvtHandler {
+    fn drop(&mut self) {
+        unsafe { ffi::wxObject_delete(self.0) }
     }
 }
 pub trait EvtHandlerMethods: ObjectMethods {
@@ -798,6 +808,11 @@ impl Window {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Drop for Window {
+    fn drop(&mut self) {
+        unsafe { ffi::wxObject_delete(self.0) }
     }
 }
 pub trait WindowMethods: EvtHandlerMethods {
@@ -1894,6 +1909,11 @@ impl Control {
         None
     }
 }
+impl Drop for Control {
+    fn drop(&mut self) {
+        unsafe { ffi::wxObject_delete(self.0) }
+    }
+}
 pub trait ControlMethods: WindowMethods {
     fn create<T: WindowMethods>(&self, parent: Option<&T>, id: c_int, pos: &Point, size: &Size, style: c_long, validator: &Validator, name: &str) -> bool {
         unsafe {
@@ -1983,6 +2003,11 @@ impl AnyButton {
         None
     }
 }
+impl Drop for AnyButton {
+    fn drop(&mut self) {
+        unsafe { ffi::wxObject_delete(self.0) }
+    }
+}
 pub trait AnyButtonMethods: ControlMethods {
     // DTOR: fn ~wxAnyButton()
     // NOT_SUPPORTED: fn GetBitmap()
@@ -2053,6 +2078,11 @@ impl Button {
         None
     }
 }
+impl Drop for Button {
+    fn drop(&mut self) {
+        unsafe { ffi::wxObject_delete(self.0) }
+    }
+}
 pub trait ButtonMethods: AnyButtonMethods {
     fn create<T: WindowMethods>(&self, parent: Option<&T>, id: c_int, label: &str, pos: &Point, size: &Size, style: c_long, validator: &Validator, name: &str) -> bool {
         unsafe {
@@ -2100,6 +2130,11 @@ impl NonOwnedWindow {
         None
     }
 }
+impl Drop for NonOwnedWindow {
+    fn drop(&mut self) {
+        unsafe { ffi::wxObject_delete(self.0) }
+    }
+}
 pub trait NonOwnedWindowMethods: WindowMethods {
     fn set_shape(&self, region: *const c_void) -> bool {
         unsafe { ffi::wxNonOwnedWindow_SetShape(self.as_ptr(), region) }
@@ -2136,6 +2171,11 @@ impl TopLevelWindow {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Drop for TopLevelWindow {
+    fn drop(&mut self) {
+        unsafe { ffi::wxObject_delete(self.0) }
     }
 }
 pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
@@ -2299,6 +2339,11 @@ impl Frame {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Drop for Frame {
+    fn drop(&mut self) {
+        unsafe { ffi::wxObject_delete(self.0) }
     }
 }
 impl TopLevelWindowMethods for Frame {
@@ -2803,6 +2848,11 @@ impl Validator {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Drop for Validator {
+    fn drop(&mut self) {
+        unsafe { ffi::wxObject_delete(self.0) }
     }
 }
 pub trait ValidatorMethods: EvtHandlerMethods {
