@@ -32,8 +32,6 @@ class Class:
             yield Class(manager, cls, config)
 
     def __init__(self, manager, e, config):
-        self.library = self._find_libname(e)
-        print(self.library)
         self.manager = manager
         self.name = e.findtext('compoundname')
         self.base = e.findtext('basecompoundref')
@@ -41,6 +39,7 @@ class Class:
         config = config.get(self.name) or {}
         self.__blocklist = config.get('blocklist') or []
         self.config = config
+        self.library = self._find_libname(e)
         for method in e.findall(".//memberdef[@kind='function']"):
             m = Method(self, method)
             if not m.is_public:
@@ -50,6 +49,9 @@ class Class:
             self.methods.append(m)
 
     def _find_libname(self, e):
+        library = self.config.get('library')
+        if library:
+            return library
         for ref in e.findall('./detaileddescription//ref'):
             if ref.get('refid').startswith('page_libs_'):
                 return ref.text.lower()[2:]
@@ -230,10 +232,10 @@ class ClassManager:
     def all(self):
         return (i.cls for i in self.__all)
     
-    def in_lib(self, libname):
+    def in_lib(self, libname, generated):
         all_classes = self.all()
         if libname is None:
-            return all_classes
+            return (cls for cls in all_classes if cls.library not in generated)
         return (cls for cls in all_classes if cls.library == libname)
     
     def by_name(self, name):

@@ -22,7 +22,9 @@ def main():
     generate_library(classes, config, None)
 
 
+generated = []
 def generate_library(classes, config, libname):
+    generated.append(libname)
     to_be_generated = {
         'src/generated.rs': generated_rs,
         'include/wxrust2.h': wxrust2_h,
@@ -52,7 +54,7 @@ mod ffi {
     pub use crate::ffi::*;
     extern "C" {
 '''
-    bindings = [RustClassBinding(cls) for cls in classes.in_lib(libname)]
+    bindings = [RustClassBinding(cls) for cls in classes.in_lib(libname, generated)]
     indent = ' ' * 4 * 2
     for cls in bindings:
         for line in cls.lines(for_ffi=True):
@@ -77,7 +79,7 @@ def wxrust2_h(classes, config, libname):
 
 extern "C" {
 '''
-    for cls in classes.in_lib(libname):
+    for cls in classes.in_lib(libname, generated):
         binding = CxxClassBinding(cls)
         for line in binding.lines():
             yield line
@@ -91,7 +93,7 @@ def wxrust2_cc(classes, config, libname):
 
 extern "C" {
 '''
-    for cls in classes.in_lib(libname):
+    for cls in classes.in_lib(libname, generated):
         binding = CxxClassBinding(cls)
         for line in binding.lines(is_cc=True):
             yield line
