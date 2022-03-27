@@ -18,8 +18,8 @@ def main():
     # Register all classes once parsing finished.
     classes.register(parsed)
     
-    # generate_library(classes, config, 'base')
-    generate_library(classes, config, None)
+    generate_library(classes, config, 'base')
+    generate_library(classes, config, 'core')
 
 
 generated = []
@@ -33,8 +33,6 @@ def generate_library(classes, config, libname):
     for path, generator in to_be_generated.items():
         if libname:
             path = '%s/%s' % (libname, path)
-        else:
-            path = 'core/%s' % (path,)
         with open(path, 'w') as f:
             for chunk in generator(classes, config, libname):
                 print(chunk, file=f)
