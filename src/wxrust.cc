@@ -13,6 +13,10 @@ bool App::OnInit() {
     return true;
 }
 
+void wxObject_delete(wxObject *self) {
+    delete self;
+}
+
 // wxEvtHandler
 wxEventTypeTag<wxCommandEvent> TypeTagOf(int eventType) {
     switch (eventType) {

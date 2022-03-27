@@ -18,7 +18,7 @@ class RustClassBinding:
             self.__model.name,
         )
         if for_ffi:
-            if not self.__model.manager.is_wx_object(self.__model):
+            if not self.__model.manager.is_a(self.__model, 'wxObject'):
                 yield 'pub fn %s_delete(self_: *mut c_void);' % (
                     self.__model.name,
                 )
@@ -63,11 +63,14 @@ class RustClassBinding:
         yield '}'
     
     def _impl_drop_if_needed(self):
-        if self.__model.manager.is_wx_object(self.__model):
+        if self.__model.manager.is_a(self.__model, 'wxWindow'):
             return
+        deleter_class = self.__model.name
+        if self.__model.manager.is_a(self.__model, 'wxObject'):
+            deleter_class = 'wxObject'
         yield 'impl Drop for %s {' % (self.__model.unprefixed(),)
         yield '    fn drop(&mut self) {'
-        yield '        unsafe { ffi::%s_delete(self.0) }' % (self.__model.name,)
+        yield '        unsafe { ffi::%s_delete(self.0) }' % (deleter_class,)
         yield '    }'
         yield '}'
     
@@ -288,7 +291,7 @@ class CxxClassBinding:
         return (m for m in self.__methods if m.is_ctor)
     
     def _dtor_lines(self, is_cc):
-        if self.__model.manager.is_wx_object(self.__model):
+        if self.__model.manager.is_a(self.__model, 'wxObject'):
             return
         signature = 'void %s_delete(%s *self)' % (
             self.__model.name,

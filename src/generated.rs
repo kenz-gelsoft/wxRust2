@@ -9,6 +9,7 @@ use crate::macros::wx_class;
 
 mod ffi {
     use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
+    pub use crate::ffi::*;
     extern "C" {
 
         // wxObject
@@ -638,6 +639,11 @@ impl Object {
         None
     }
 }
+impl Drop for Object {
+    fn drop(&mut self) {
+        unsafe { ffi::wxObject_delete(self.0) }
+    }
+}
 pub trait ObjectMethods: WxRustMethods {
     // DTOR: fn ~wxObject()
     fn get_class_info(&self) -> *mut c_void {
@@ -685,6 +691,11 @@ impl EvtHandler {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Drop for EvtHandler {
+    fn drop(&mut self) {
+        unsafe { ffi::wxObject_delete(self.0) }
     }
 }
 pub trait EvtHandlerMethods: ObjectMethods {
@@ -2803,6 +2814,11 @@ impl Validator {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Drop for Validator {
+    fn drop(&mut self) {
+        unsafe { ffi::wxObject_delete(self.0) }
     }
 }
 pub trait ValidatorMethods: EvtHandlerMethods {

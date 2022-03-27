@@ -32,6 +32,8 @@ class App : public wxApp {
     virtual bool OnInit();
 };
 
+void wxObject_delete(wxObject *self);
+
 // TODO: auto generate
 #define wxRUST_EVT_BUTTON 0
 

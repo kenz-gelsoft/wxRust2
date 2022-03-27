@@ -15,6 +15,8 @@ pub use generated::*;
 mod ffi {
     use std::os::raw::{c_char, c_int, c_uchar, c_void};
     extern "C" {
+        pub fn wxObject_delete(self_: *mut c_void);
+
         pub fn AppSetOnInit(
             aFn: *mut c_void,
             aParam: *mut c_void
