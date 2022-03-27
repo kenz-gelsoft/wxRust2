@@ -252,8 +252,8 @@ class ClassManager:
             current = self.by_name(current.base)
         return base_classes
 
-    def is_wx_object(self, cls):
-        return any(c.name == 'wxObject' for c in self.ancestors_of(cls))
+    def is_a(self, cls, ancestor):
+        return any(c.name == ancestor for c in self.ancestors_of(cls))
 
 
 class CxxType:
