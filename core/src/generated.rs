@@ -6,6 +6,7 @@ use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
 use std::ptr;
 
 use crate::macros::wx_class;
+use base::*;
 
 mod ffi {
     use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
@@ -563,10 +564,6 @@ mod ffi {
         pub fn wxValidator_IsSilent() -> bool;
         
     }
-}
-
-pub trait WxRustMethods {
-    unsafe fn as_ptr(&self) -> *mut c_void;
 }
 
 // wxWindow

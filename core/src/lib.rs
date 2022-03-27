@@ -62,18 +62,6 @@ unsafe fn to_wx_callable<F: Fn() + 'static>(closure: F) -> (*mut c_void, *mut c_
     )
 }
 
-pub trait Bindable {
-    fn bind<F: Fn() + 'static>(&self, event_type: c_int, closure: F);
-}
-impl<T: EvtHandlerMethods> Bindable for T {
-    fn bind<F: Fn() + 'static>(&self, event_type: c_int, closure: F) {
-        unsafe {
-            let (f, param) = to_wx_callable(closure);
-            ffi::wxEvtHandler_Bind(self.as_ptr(), event_type, f, param);
-        }
-    }
-}
-
 // wxApp
 pub enum App {}
 impl App {
