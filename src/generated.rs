@@ -9,6 +9,7 @@ use crate::macros::wx_class;
 
 mod ffi {
     use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
+    pub use crate::ffi::*;
     extern "C" {
 
         // wxObject
