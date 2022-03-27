@@ -18,12 +18,19 @@ def main():
     # Register all classes once parsing finished.
     classes.register(parsed)
     
+    generate_library(classes, config, 'base')
+    generate_library(classes, config, None)
+
+
+def generate_library(classes, config, name):
     to_be_generated = {
         'src/generated.rs': generated_rs,
         'include/wxrust2.h': wxrust2_h,
         'src/wxrust2.cc': wxrust2_cc,
     }
     for path, generator in to_be_generated.items():
+        if name:
+            path = '%s/%s' % (name, path)
         with open(path, 'w') as f:
             for chunk in generator(classes, config):
                 print(chunk, file=f)

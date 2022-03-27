@@ -32,6 +32,8 @@ class Class:
             yield Class(manager, cls, config)
 
     def __init__(self, manager, e, config):
+        self.library = self._find_libname(e)
+        print(self.library)
         self.manager = manager
         self.name = e.findtext('compoundname')
         self.base = e.findtext('basecompoundref')
@@ -46,6 +48,11 @@ class Class:
             if m.is_virtual_override:
                 continue
             self.methods.append(m)
+
+    def _find_libname(self, e):
+        for ref in e.findall('./detaileddescription//ref'):
+            if ref.get('refid').startswith('page_libs_'):
+                return ref.text.lower()[2:]
 
     def unprefixed(self):
         return self.name[2:]
