@@ -1,9 +1,5 @@
 #include "wxrust.h"
 
-void wxObject_delete(wxObject *self) {
-    delete self;
-}
-
 // wxApp
 wxIMPLEMENT_APP_NO_MAIN(App);
 
@@ -15,6 +11,10 @@ void AppSetOnInit(void *f, void *params) {
 bool App::OnInit() {
     globalOnInit(/*unused*/0);
     return true;
+}
+
+void wxObject_delete(wxObject *self) {
+    delete self;
 }
 
 // wxEvtHandler

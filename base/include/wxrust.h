@@ -1,6 +1,7 @@
 #pragma once
 #include <wx/wx.h>
 
+
 // wxEvtHandler
 template <typename T>
 class CxxClosure {
@@ -25,13 +26,13 @@ public:
 
 extern "C" {
 
-void wxObject_delete(wxObject *self);
-
 // wxApp
 void AppSetOnInit(void *aFn, void *aParam);
 class App : public wxApp {
     virtual bool OnInit();
 };
+
+void wxObject_delete(wxObject *self);
 
 // TODO: auto generate
 #define wxRUST_EVT_BUTTON 0

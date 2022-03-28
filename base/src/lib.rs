@@ -37,16 +37,15 @@ mod ffi {
     }
 }
 
-pub unsafe fn wx_string_from(s: &str) -> *const c_void {
-    return ffi::wxString_new(s.as_ptr(), s.len())
-}
-
 pub fn from_wx_string(s: *mut c_void) -> String {
     unsafe {
         let utf8data = ffi::wxString_UTF8Data(s);
         let len = ffi::wxString_Len(s);
         return String::from_raw_parts(utf8data, len, len);
     }
+}
+pub unsafe fn wx_string_from(s: &str) -> *const c_void {
+    return ffi::wxString_new(s.as_ptr(), s.len())
 }
 
 // Rust closure to wx calablle function+param pair.
