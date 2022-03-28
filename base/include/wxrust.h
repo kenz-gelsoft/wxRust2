@@ -25,6 +25,8 @@ public:
 
 extern "C" {
 
+void wxObject_delete(wxObject *self);
+
 // wxApp
 void AppSetOnInit(void *aFn, void *aParam);
 class App : public wxApp {

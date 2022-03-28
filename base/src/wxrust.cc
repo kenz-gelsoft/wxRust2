@@ -1,5 +1,9 @@
 #include "wxrust.h"
 
+void wxObject_delete(wxObject *self) {
+    delete self;
+}
+
 // wxApp
 wxIMPLEMENT_APP_NO_MAIN(App);
 
