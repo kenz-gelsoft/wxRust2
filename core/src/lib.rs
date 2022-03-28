@@ -4,11 +4,6 @@ use std::ptr;
 
 mod macros;
 
-mod defs;
-pub use defs::*;
-mod manual;
-pub use manual::*;
-
 mod generated;
 pub use generated::*;
 

@@ -1,5 +1,5 @@
+use base::*;
 use wx;
-use base::Bindable;
 use wx::*;
 
 fn main() {
