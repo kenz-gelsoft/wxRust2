@@ -9,6 +9,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "22a9137b95ea06864e018375b72adfb7db6e6f68cfc8df5a04d00288050485ee"
 
 [[package]]
+name = "example"
+version = "0.1.0"
+dependencies = [
+ "wx",
+ "wx-base",
+]
+
+[[package]]
 name = "wx"
 version = "0.1.0"
 dependencies = [

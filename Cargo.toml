@@ -1,6 +1,7 @@
 [workspace]
 
 members = [
+    "example",
     "wx-base",
     "wx-core",
 ]
