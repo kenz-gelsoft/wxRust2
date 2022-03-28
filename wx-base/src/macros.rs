@@ -1,3 +1,4 @@
+#[macro_export]
 macro_rules! wx_class {
     (
         $type:ident($wxType:ident) impl $($methods:ident),*
@@ -12,4 +13,3 @@ macro_rules! wx_class {
         }
     };
 }
-pub(crate) use wx_class;

@@ -37,7 +37,7 @@ mod ffi {
     }
 }
 
-fn from_wx_string(s: *mut c_void) -> String {
+pub fn from_wx_string(s: *mut c_void) -> String {
     unsafe {
         let utf8data = ffi::wxString_UTF8Data(s);
         let len = ffi::wxString_Len(s);
@@ -87,19 +87,6 @@ impl App {
         Self::on_init(closure);
         entry();
     }
-}
-
-// wxDefaultPosition
-impl Default for Point {
-    fn default() -> Self { Point::new1(-1, -1) }
-}
-// wxDefaultSize
-impl Default for Size {
-    fn default() -> Self { Size::new1(-1, -1) }
-}
-// wxDefaultValidator
-impl Default for Validator {
-    fn default() -> Self { Validator::new() }
 }
 
 // wxEntry

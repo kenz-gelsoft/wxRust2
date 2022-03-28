@@ -18,18 +18,27 @@ def main():
     # Register all classes once parsing finished.
     classes.register(parsed)
     
+    generate_library(classes, config, 'base')
+    generate_library(classes, config, 'core')
+
+
+generated = []
+def generate_library(classes, config, libname):
+    generated.append(libname)
     to_be_generated = {
         'src/generated.rs': generated_rs,
         'include/wxrust2.h': wxrust2_h,
         'src/wxrust2.cc': wxrust2_cc,
     }
     for path, generator in to_be_generated.items():
+        if libname:
+            path = 'wx-%s/%s' % (libname, path)
         with open(path, 'w') as f:
-            for chunk in generator(classes, config):
+            for chunk in generator(classes, config, libname):
                 print(chunk, file=f)
 
 
-def generated_rs(classes, config):
+def generated_rs(classes, config, libname):
     yield '''\
 #![allow(dead_code)]
 #![allow(non_upper_case_globals)]
@@ -37,15 +46,19 @@ def generated_rs(classes, config):
 
 use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
 use std::ptr;
-
-use crate::macros::wx_class;
+'''
+    if libname == 'base':
+        yield 'use crate::wx_class;'
+    else:
+        yield 'use wx_base::*;'
+    yield '''\
 
 mod ffi {
     use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
     pub use crate::ffi::*;
     extern "C" {
 '''
-    bindings = [RustClassBinding(cls) for cls in classes.all()]
+    bindings = [RustClassBinding(cls) for cls in classes.in_lib(libname, generated)]
     indent = ' ' * 4 * 2
     for cls in bindings:
         for line in cls.lines(for_ffi=True):
@@ -53,7 +66,9 @@ mod ffi {
     yield '''\
     }
 }
-
+'''
+    if libname == 'base':
+        yield '''\
 pub trait WxRustMethods {
     unsafe fn as_ptr(&self) -> *mut c_void;
 }
@@ -63,14 +78,14 @@ pub trait WxRustMethods {
             yield line
 
 
-def wxrust2_h(classes, config):
+def wxrust2_h(classes, config, libname):
     yield '''\
 #pragma once
 #include <wx/wx.h>
 
 extern "C" {
 '''
-    for cls in classes.all():
+    for cls in classes.in_lib(libname, generated):
         binding = CxxClassBinding(cls)
         for line in binding.lines():
             yield line
@@ -78,13 +93,13 @@ extern "C" {
 } // extern "C"
 '''
 
-def wxrust2_cc(classes, config):
+def wxrust2_cc(classes, config, libname):
     yield '''\
 #include <wx/wx.h>
 
 extern "C" {
 '''
-    for cls in classes.all():
+    for cls in classes.in_lib(libname, generated):
         binding = CxxClassBinding(cls)
         for line in binding.lines(is_cc=True):
             yield line

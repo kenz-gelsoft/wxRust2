@@ -39,6 +39,7 @@ class Class:
         config = config.get(self.name) or {}
         self.__blocklist = config.get('blocklist') or []
         self.config = config
+        self.library = self._find_libname(e)
         for method in e.findall(".//memberdef[@kind='function']"):
             m = Method(self, method)
             if not m.is_public:
@@ -46,6 +47,14 @@ class Class:
             if m.is_virtual_override:
                 continue
             self.methods.append(m)
+
+    def _find_libname(self, e):
+        library = self.config.get('library')
+        if library:
+            return library
+        for ref in e.findall('./detaileddescription//ref'):
+            if ref.get('refid').startswith('page_libs_'):
+                return ref.text.lower()[2:]
 
     def unprefixed(self):
         return self.name[2:]
@@ -223,6 +232,12 @@ class ClassManager:
     def all(self):
         return (i.cls for i in self.__all)
     
+    def in_lib(self, libname, generated):
+        all_classes = self.all()
+        if libname is None:
+            return (cls for cls in all_classes if cls.library not in generated)
+        return (cls for cls in all_classes if cls.library == libname)
+    
     def by_name(self, name):
         info = self.__by_name.get(name)
         return info.cls if info else None
@@ -284,7 +299,7 @@ class CxxType:
     def marshal(self, param):
         name = camel_to_snake(param.name)
         if self._is_const_ref_to_string():
-            yield 'let %s = crate::wx_string_from(%s);' % (
+            yield 'let %s = wx_base::wx_string_from(%s);' % (
                 name,
                 name,
             )

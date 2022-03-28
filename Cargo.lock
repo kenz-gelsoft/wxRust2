@@ -13,4 +13,12 @@ name = "wx"
 version = "0.1.0"
 dependencies = [
  "cc",
+ "wx-base",
+]
+
+[[package]]
+name = "wx-base"
+version = "0.1.0"
+dependencies = [
+ "cc",
 ]

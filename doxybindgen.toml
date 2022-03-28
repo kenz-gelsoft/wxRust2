@@ -36,7 +36,11 @@ blocklist = [
     'GetUpdateRegion',
 ]
 [types.wxControl]
+[types.wxAnyButton]
+library = 'core'
 [types.wxButton]
+[types.wxNonOwnedWindow]
+library = 'core'
 [types.wxTopLevelWindow]
 blocklist = [
     # Other platform specific
