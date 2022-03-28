@@ -29,11 +29,3 @@ void wxEvtHandler_Bind(wxEvtHandler *self, int eventType, void *aFn, void *aPara
     CxxClosure<wxCommandEvent &> functor(aFn, aParam);
     self->Bind(TypeTagOf(eventType), functor);
 }
-
-// String
-const char *wxString_UTF8Data(wxString *self) {
-    return self->ToUTF8().data();
-}
-size_t wxString_Len(wxString *self) {
-    return self->Len();
-}

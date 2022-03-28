@@ -1,24 +1,10 @@
-use std::os::raw::c_void;
-
 mod generated;
 pub use generated::*;
 
 mod ffi {
-    use std::os::raw::{c_uchar, c_void};
+    use std::os::raw::{c_void};
     extern "C" {
         pub fn wxObject_delete(self_: *mut c_void);
-
-        // String
-        pub fn wxString_UTF8Data(self_: *mut c_void) -> *mut c_uchar;
-        pub fn wxString_Len(self_: *mut c_void) -> usize;
-    }
-}
-
-fn from_wx_string(s: *mut c_void) -> String {
-    unsafe {
-        let utf8data = ffi::wxString_UTF8Data(s);
-        let len = ffi::wxString_Len(s);
-        return String::from_raw_parts(utf8data, len, len);
     }
 }
 

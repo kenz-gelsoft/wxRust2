@@ -1381,7 +1381,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     // NOT_SUPPORTED: fn ShowWithEffect()
     fn get_help_text(&self) -> String {
-        unsafe { crate::from_wx_string(ffi::wxWindow_GetHelpText(self.as_ptr())) }
+        unsafe { base::from_wx_string(ffi::wxWindow_GetHelpText(self.as_ptr())) }
     }
     fn set_help_text(&self, help_text: &str) {
         unsafe {
@@ -1394,7 +1394,7 @@ pub trait WindowMethods: EvtHandlerMethods {
         unsafe { ffi::wxWindow_GetToolTip(self.as_ptr()) }
     }
     fn get_tool_tip_text(&self) -> String {
-        unsafe { crate::from_wx_string(ffi::wxWindow_GetToolTipText(self.as_ptr())) }
+        unsafe { base::from_wx_string(ffi::wxWindow_GetToolTipText(self.as_ptr())) }
     }
     fn set_tool_tip(&self, tip_string: &str) {
         unsafe {
@@ -1448,14 +1448,14 @@ pub trait WindowMethods: EvtHandlerMethods {
         unsafe { ffi::wxWindow_GetId(self.as_ptr()) }
     }
     fn get_label(&self) -> String {
-        unsafe { crate::from_wx_string(ffi::wxWindow_GetLabel(self.as_ptr())) }
+        unsafe { base::from_wx_string(ffi::wxWindow_GetLabel(self.as_ptr())) }
     }
     // NOT_SUPPORTED: fn GetLayoutDirection()
     fn adjust_for_layout_direction(&self, x: c_int, width: c_int, width_total: c_int) -> c_int {
         unsafe { ffi::wxWindow_AdjustForLayoutDirection(self.as_ptr(), x, width, width_total) }
     }
     fn get_name(&self) -> String {
-        unsafe { crate::from_wx_string(ffi::wxWindow_GetName(self.as_ptr())) }
+        unsafe { base::from_wx_string(ffi::wxWindow_GetName(self.as_ptr())) }
     }
     // NOT_SUPPORTED: fn GetWindowVariant()
     fn set_id(&self, winid: c_int) {
@@ -1703,7 +1703,7 @@ pub trait ControlMethods: WindowMethods {
         unsafe { ffi::wxControl_Command(self.as_ptr(), event) }
     }
     fn get_label_text(&self) -> String {
-        unsafe { crate::from_wx_string(ffi::wxControl_GetLabelText(self.as_ptr())) }
+        unsafe { base::from_wx_string(ffi::wxControl_GetLabelText(self.as_ptr())) }
     }
     fn get_size_from_text_size(&self, xlen: c_int, ylen: c_int) -> Size {
         unsafe { Size(ffi::wxControl_GetSizeFromTextSize(self.as_ptr(), xlen, ylen)) }
@@ -1735,25 +1735,25 @@ pub trait ControlMethods: WindowMethods {
     fn get_label_text1(label: &str) -> String {
         unsafe {
             let label = base::wx_string_from(label);
-            crate::from_wx_string(ffi::wxControl_GetLabelText1(label))
+            base::from_wx_string(ffi::wxControl_GetLabelText1(label))
         }
     }
     fn remove_mnemonics(str: &str) -> String {
         unsafe {
             let str = base::wx_string_from(str);
-            crate::from_wx_string(ffi::wxControl_RemoveMnemonics(str))
+            base::from_wx_string(ffi::wxControl_RemoveMnemonics(str))
         }
     }
     fn escape_mnemonics(text: &str) -> String {
         unsafe {
             let text = base::wx_string_from(text);
-            crate::from_wx_string(ffi::wxControl_EscapeMnemonics(text))
+            base::from_wx_string(ffi::wxControl_EscapeMnemonics(text))
         }
     }
     fn ellipsize(label: &str, dc: *const c_void, mode: c_int, max_width: c_int, flags: c_int) -> String {
         unsafe {
             let label = base::wx_string_from(label);
-            crate::from_wx_string(ffi::wxControl_Ellipsize(label, dc, mode, max_width, flags))
+            base::from_wx_string(ffi::wxControl_Ellipsize(label, dc, mode, max_width, flags))
         }
     }
 }
@@ -1965,7 +1965,7 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     // NOT_SUPPORTED: fn GetIcon()
     // BLOCKED: fn GetIcons()
     fn get_title(&self) -> String {
-        unsafe { crate::from_wx_string(ffi::wxTopLevelWindow_GetTitle(self.as_ptr())) }
+        unsafe { base::from_wx_string(ffi::wxTopLevelWindow_GetTitle(self.as_ptr())) }
     }
     fn iconize(&self, iconize: bool) {
         unsafe { ffi::wxTopLevelWindow_Iconize(self.as_ptr(), iconize) }

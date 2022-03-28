@@ -261,7 +261,7 @@ class RustMethodBinding:
     def _wrap_return_type(self, call):
         wrapped = self.__model.wrapped_return_type()
         if self.__model.returns.is_str():
-            return 'crate::from_wx_string(%s)' % (call,)
+            return 'base::from_wx_string(%s)' % (call,)
         if wrapped:
             return '%s(%s)' % (wrapped[2:], call)
         return call
