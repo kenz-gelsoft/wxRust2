@@ -9,7 +9,6 @@ mod ffi {
         pub fn wxObject_delete(self_: *mut c_void);
 
         // String
-        pub fn wxString_new(psz: *const c_uchar, nLength: usize) -> *mut c_void;
         pub fn wxString_UTF8Data(self_: *mut c_void) -> *mut c_uchar;
         pub fn wxString_Len(self_: *mut c_void) -> usize;
     }
@@ -21,9 +20,6 @@ fn from_wx_string(s: *mut c_void) -> String {
         let len = ffi::wxString_Len(s);
         return String::from_raw_parts(utf8data, len, len);
     }
-}
-pub unsafe fn wx_string_from(s: &str) -> *const c_void {
-    return ffi::wxString_new(s.as_ptr(), s.len())
 }
 
 // wxDefaultPosition

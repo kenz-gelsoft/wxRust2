@@ -31,9 +31,6 @@ void wxEvtHandler_Bind(wxEvtHandler *self, int eventType, void *aFn, void *aPara
 }
 
 // String
-wxString *wxString_new(const unsigned char *psz, const size_t nLength) {
-    return new wxString(psz, wxConvUTF8, nLength);
-}
 const char *wxString_UTF8Data(wxString *self) {
     return self->ToUTF8().data();
 }
