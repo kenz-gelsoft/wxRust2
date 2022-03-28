@@ -2,8 +2,6 @@ use std::convert::TryInto;
 use std::os::raw::{c_char, c_int, c_void};
 use std::ptr;
 
-mod macros;
-
 mod generated;
 pub use generated::*;
 

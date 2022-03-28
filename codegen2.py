@@ -46,9 +46,10 @@ def generated_rs(classes, config, libname):
 
 use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
 use std::ptr;
-
-use crate::macros::wx_class;'''
-    if libname != 'base':
+'''
+    if libname == 'base':
+        yield 'use crate::wx_class;'
+    else:
         yield 'use base::*;'
     yield '''\
 

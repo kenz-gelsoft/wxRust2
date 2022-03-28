@@ -5,7 +5,6 @@
 use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
 use std::ptr;
 
-use crate::macros::wx_class;
 use base::*;
 
 mod ffi {
