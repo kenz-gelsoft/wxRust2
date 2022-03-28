@@ -27,8 +27,8 @@ def generate_library(classes, config, libname):
     generated.append(libname)
     to_be_generated = {
         'src/generated.rs': generated_rs,
-        'include/wxrust2.h': wxrust2_h,
-        'src/wxrust2.cc': wxrust2_cc,
+        'include/generated.h': generated_h,
+        'src/generated.cpp': generated_cpp,
     }
     for path, generator in to_be_generated.items():
         if libname:
@@ -78,7 +78,7 @@ pub trait WxRustMethods {
             yield line
 
 
-def wxrust2_h(classes, config, libname):
+def generated_h(classes, config, libname):
     yield '''\
 #pragma once
 #include <wx/wx.h>
@@ -93,7 +93,7 @@ extern "C" {
 } // extern "C"
 '''
 
-def wxrust2_cc(classes, config, libname):
+def generated_cpp(classes, config, libname):
     yield '''\
 #include <wx/wx.h>
 
