@@ -1,4 +1,4 @@
-#include "wxrust.h"
+#include "manual.h"
 
 // wxApp
 wxIMPLEMENT_APP_NO_MAIN(App);
