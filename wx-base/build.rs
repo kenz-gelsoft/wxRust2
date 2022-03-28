@@ -4,7 +4,7 @@ fn main() {
     wx_config_cflags(&mut cc::Build::new())
         .cpp(true)
         .file("src/wxrust.cc")
-        .file("src/wxrust2.cc")
+        .file("src/generated.cpp")
         .include("include")
         .flag_if_supported("-std=c++14")
         .compile("wx");

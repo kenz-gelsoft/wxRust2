@@ -95,7 +95,7 @@ extern "C" {
 
 def generated_cpp(classes, config, libname):
     yield '''\
-#include <wx/wx.h>
+#include "generated.h"
 
 extern "C" {
 '''

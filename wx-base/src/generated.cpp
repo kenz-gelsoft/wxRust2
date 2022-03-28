@@ -1,4 +1,4 @@
-#include <wx/wx.h>
+#include "generated.h"
 
 extern "C" {
 
