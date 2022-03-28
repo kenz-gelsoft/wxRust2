@@ -80,19 +80,6 @@ impl App {
     }
 }
 
-// // wxDefaultPosition
-// impl Default for Point {
-//     fn default() -> Self { Point::new1(-1, -1) }
-// }
-// // wxDefaultSize
-// impl Default for Size {
-//     fn default() -> Self { Size::new1(-1, -1) }
-// }
-// // wxDefaultValidator
-// impl Default for Validator {
-//     fn default() -> Self { Validator::new() }
-// }
-
 // wxEntry
 pub fn entry() {
     let args: Vec<String> = std::env::args().collect();

@@ -3,7 +3,7 @@ use wx;
 use wx::*;
 
 fn main() {
-    wx::App::run(|| {
+    base::App::run(|| {
         let frame = Frame::new1(Window::none(), wxID_ANY, "Hello, 世界", 
                 &Point::default(), &Size::default(),
                 wxDEFAULT_FRAME_STYLE, "");
