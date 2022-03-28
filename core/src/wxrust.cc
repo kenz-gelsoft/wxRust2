@@ -40,7 +40,3 @@ const char *wxString_UTF8Data(wxString *self) {
 size_t wxString_Len(wxString *self) {
     return self->Len();
 }
-
-int wxRustEntry(int *argc, char **argv) {
-    return wxEntry(*argc, argv);
-}

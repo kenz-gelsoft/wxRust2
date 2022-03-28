@@ -1,12 +1,12 @@
-use std::convert::TryInto;
-use std::os::raw::{c_char, c_int, c_void};
-use std::ptr;
+use std::os::raw::c_void;
+
+use base::entry;
 
 mod generated;
 pub use generated::*;
 
 mod ffi {
-    use std::os::raw::{c_char, c_int, c_uchar, c_void};
+    use std::os::raw::{c_uchar, c_void};
     extern "C" {
         pub fn wxObject_delete(self_: *mut c_void);
 
@@ -19,8 +19,6 @@ mod ffi {
         pub fn wxString_new(psz: *const c_uchar, nLength: usize) -> *mut c_void;
         pub fn wxString_UTF8Data(self_: *mut c_void) -> *mut c_uchar;
         pub fn wxString_Len(self_: *mut c_void) -> usize;
-        
-        pub fn wxRustEntry(argc: *mut c_int, argv: *mut *mut c_char) -> c_int;
     }
 }
 
@@ -75,18 +73,4 @@ impl Default for Size {
 // wxDefaultValidator
 impl Default for Validator {
     fn default() -> Self { Validator::new() }
-}
-
-// wxEntry
-pub fn entry() {
-    let args: Vec<String> = std::env::args().collect();
-    let mut argv: Vec<*mut c_char> = Vec::with_capacity(args.len() + 1);
-    for arg in &args {
-        argv.push(arg.as_ptr() as *mut c_char);
-    }
-    argv.push(ptr::null_mut()); // Nul terminator.
-    let mut argc: c_int = args.len().try_into().unwrap();
-    unsafe {
-        ffi::wxRustEntry(&mut argc, argv.as_mut_ptr());
-    }
 }
