@@ -1,9 +1,9 @@
-use base::*;
+use wx_base::*;
 use wx;
 use wx::*;
 
 fn main() {
-    base::App::run(|| {
+    wx_base::App::run(|| {
         let frame = Frame::new1(Window::none(), wxID_ANY, "Hello, 世界", 
                 &Point::default(), &Size::default(),
                 wxDEFAULT_FRAME_STYLE, "");

@@ -32,7 +32,7 @@ def generate_library(classes, config, libname):
     }
     for path, generator in to_be_generated.items():
         if libname:
-            path = '%s/%s' % (libname, path)
+            path = 'wx-%s/%s' % (libname, path)
         with open(path, 'w') as f:
             for chunk in generator(classes, config, libname):
                 print(chunk, file=f)
@@ -50,7 +50,7 @@ use std::ptr;
     if libname == 'base':
         yield 'use crate::wx_class;'
     else:
-        yield 'use base::*;'
+        yield 'use wx_base::*;'
     yield '''\
 
 mod ffi {

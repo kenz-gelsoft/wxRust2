@@ -1,6 +1,6 @@
 [workspace]
 
 members = [
-    "base",
-    "core",
+    "wx-base",
+    "wx-core",
 ]
