@@ -3,7 +3,6 @@ use std::process::Command;
 fn main() {
     wx_config_cflags(&mut cc::Build::new())
         .cpp(true)
-        .file("src/wxrust.cc")
         .file("src/wxrust2.cc")
         .include("include")
         .flag_if_supported("-std=c++14")
