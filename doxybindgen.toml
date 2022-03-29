@@ -34,6 +34,10 @@ blocklist = [
     'GetChildren1',
     'GetCursor',
     'GetUpdateRegion',
+
+    # wx3.0.x specific blocklist
+    'RegisterHotKey',
+    'UnregisterHotKey',
 ]
 [types.wxControl]
 [types.wxAnyButton]
@@ -53,6 +57,10 @@ blocklist = [
     'GetIcons',
     'SaveGeometry',
     'RestoreToGeometry',
+
+    # wx3.0.x specific blocklist
+    'SetLeftMenu',
+    'SetRightMenu',
 ]
 [types.wxFrame]
 blocklist = [

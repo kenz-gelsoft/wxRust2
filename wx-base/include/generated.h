@@ -23,6 +23,7 @@ bool wxEvtHandler_ProcessEventLocally(wxEvtHandler * self, wxEvent * event);
 bool wxEvtHandler_SafelyProcessEvent(wxEvtHandler * self, wxEvent * event);
 void wxEvtHandler_ProcessPendingEvents(wxEvtHandler * self);
 void wxEvtHandler_DeletePendingEvents(wxEvtHandler * self);
+bool wxEvtHandler_SearchEventTable(wxEvtHandler * self, wxEventTable * table, wxEvent * event);
 wxClientData * wxEvtHandler_GetClientObject(const wxEvtHandler * self);
 void wxEvtHandler_SetClientObject(wxEvtHandler * self, wxClientData * data);
 bool wxEvtHandler_GetEvtHandlerEnabled(const wxEvtHandler * self);

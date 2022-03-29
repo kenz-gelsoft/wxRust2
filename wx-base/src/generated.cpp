@@ -56,6 +56,9 @@ void wxEvtHandler_ProcessPendingEvents(wxEvtHandler * self) {
 void wxEvtHandler_DeletePendingEvents(wxEvtHandler * self) {
     return self->DeletePendingEvents();
 }
+bool wxEvtHandler_SearchEventTable(wxEvtHandler * self, wxEventTable * table, wxEvent * event) {
+    return self->SearchEventTable(*table, *event);
+}
 wxClientData * wxEvtHandler_GetClientObject(const wxEvtHandler * self) {
     return self->GetClientObject();
 }

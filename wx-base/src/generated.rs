@@ -37,6 +37,7 @@ mod ffi {
         pub fn wxEvtHandler_SafelyProcessEvent(self_: *mut c_void, event: *mut c_void) -> bool;
         pub fn wxEvtHandler_ProcessPendingEvents(self_: *mut c_void);
         pub fn wxEvtHandler_DeletePendingEvents(self_: *mut c_void);
+        pub fn wxEvtHandler_SearchEventTable(self_: *mut c_void, table: *mut c_void, event: *mut c_void) -> bool;
         // NOT_SUPPORTED: pub fn wxEvtHandler_Connect(self_: *mut c_void, id: c_int, last_id: c_int, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut c_void, event_sink: *mut c_void);
         // NOT_SUPPORTED: pub fn wxEvtHandler_Connect1(self_: *mut c_void, id: c_int, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut c_void, event_sink: *mut c_void);
         // NOT_SUPPORTED: pub fn wxEvtHandler_Connect2(self_: *mut c_void, event_type: wxEventType, function: wxObjectEventFunction, user_data: *mut c_void, event_sink: *mut c_void);
@@ -171,6 +172,9 @@ pub trait EvtHandlerMethods: ObjectMethods {
     }
     fn delete_pending_events(&self) {
         unsafe { ffi::wxEvtHandler_DeletePendingEvents(self.as_ptr()) }
+    }
+    fn search_event_table(&self, table: *mut c_void, event: *mut c_void) -> bool {
+        unsafe { ffi::wxEvtHandler_SearchEventTable(self.as_ptr(), table, event) }
     }
     // NOT_SUPPORTED: fn Connect()
     // NOT_SUPPORTED: fn Connect1()
