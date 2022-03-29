@@ -15,7 +15,7 @@ use crate::manual::*;
 # place wxWidgets doxygen xml files in wxml/ dir and run this.
 generated = set()
 def main():
-    with open('src/defs.rs', 'w') as f:
+    with open('wx-base/src/defs.rs', 'w') as f:
         print(PROLOGUE, file=f)
         for file in xml_files_in('wxml/'):
             tree = ET.parse(file)
@@ -108,6 +108,24 @@ blocklist = [
     'wxAUI_TBART_OVERFLOW_SIZE',
     'wxFILE_EXISTS_NO_FOLLOW',
     'wxPG_PROP_BEING_DELETED',
+
+    # wx3.0.x specific blocklist
+    'wxPG_BASE_DEC',
+    'wxPG_BASE_HEX',
+    'wxPG_BASE_HEXL',
+    'wxPG_BASE_OCT',
+    'wxPG_PREFIX_NONE',
+    'wxPG_PREFIX_0x',
+    'wxPG_PREFIX_DOLLAR_SIGN',
+    'wxDEFINE_EVENT',
+    'wxDECLARE_EXPORTED_EVENT',
+    'wx__DECLARE_EVT1',
+    'wx__DECLARE_EVT2',
+    'wx__DECLARE_EVT0',
+    'wxDECLARE_EVENT',
+    'wxEVENT_HANDLER_CAST',
+    'wxTextEntryDialogStyle',
+    'wxPG_PROP_NO_ESCAPE',
 ]
 def generate_define(e, f):
     name = e.findtext('name')
