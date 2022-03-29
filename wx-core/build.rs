@@ -6,8 +6,8 @@ fn main() {
         .file("src/generated.cpp")
         .include("include")
         // disabling warnings on ubuntu + wx3.0.4
-        .flag("-Wno-deprecated-copy")
         .flag("-Wno-ignored-qualifiers")
+        .flag_if_supported("-Wno-deprecated-copy")
         .flag_if_supported("-std=c++14")
         .compile("wx");
 
