@@ -5,6 +5,9 @@ fn main() {
         .cpp(true)
         .file("src/generated.cpp")
         .include("include")
+        // disabling warnings on ubuntu + wx3.0.4
+        .flag("-Wno-deprecated-copy")
+        .flag("-Wno-ignored-qualifiers")
         .flag_if_supported("-std=c++14")
         .compile("wx");
 
@@ -20,6 +23,8 @@ fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
         } else if arg.starts_with("-D") {
             let split = &mut arg[2..].split('=');
             cc_build.define(split.next().unwrap(), split.next().unwrap_or(""));
+        } else if arg.starts_with("-pthread") {
+            cc_build.flag(arg);
         } else {
             panic!("unsupported argument '{}'. please file a bug.", arg)
         }
@@ -41,6 +46,8 @@ fn print_wx_config_libs_for_cargo() {
             println!("cargo:rustc-link-search=native={}", &arg[2..]);
         } else if arg.starts_with("-l") {
             println!("cargo:rustc-link-lib={}", &arg[2..]);
+        } else if arg.starts_with("-pthread") {
+            // ignore
         } else {
             panic!("unsupported argument '{}'. please file a bug.", arg)
         }
