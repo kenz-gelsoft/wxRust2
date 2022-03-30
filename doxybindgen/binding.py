@@ -325,10 +325,15 @@ class CxxMethodBinding:
             self.__model.name(for_ffi=True),
             self._cxx_params(),
         )
+        blocked30 = self.__model.is_blocked30()
+        if blocked30:
+            yield '#if wxCHECK_VERSION(3, 1, 0)'
         if is_cc:
             yield '%s {' % (signature,)
         else:
             yield '%s;' % (signature,)
+            if blocked30:
+                yield '#endif'
             return
         new_params_or_expr = self._call_params()
         if not self.is_ctor:
@@ -345,6 +350,8 @@ class CxxMethodBinding:
         else:
             yield '    return %s;' % (new_params_or_expr,)
         yield '}'
+        if blocked30:
+            yield '#endif'
 
     def _cxx_params(self):
         params = self.__model.params.copy()

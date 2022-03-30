@@ -12,6 +12,11 @@ bool wxWindow_AcceptsFocusFromKeyboard(const wxWindow * self) {
 bool wxWindow_AcceptsFocusRecursively(const wxWindow * self) {
     return self->AcceptsFocusRecursively();
 }
+#if wxCHECK_VERSION(3, 1, 0)
+void wxWindow_DisableFocusFromKeyboard(wxWindow * self) {
+    return self->DisableFocusFromKeyboard();
+}
+#endif
 bool wxWindow_IsFocusable(const wxWindow * self) {
     return self->IsFocusable();
 }
@@ -27,6 +32,11 @@ bool wxWindow_HasFocus(const wxWindow * self) {
 void wxWindow_SetCanFocus(wxWindow * self, bool can_focus) {
     return self->SetCanFocus(can_focus);
 }
+#if wxCHECK_VERSION(3, 1, 0)
+void wxWindow_EnableVisibleFocus(wxWindow * self, bool enable) {
+    return self->EnableVisibleFocus(enable);
+}
+#endif
 void wxWindow_SetFocus(wxWindow * self) {
     return self->SetFocus();
 }
@@ -135,6 +145,36 @@ void wxWindow_Fit(wxWindow * self) {
 void wxWindow_FitInside(wxWindow * self) {
     return self->FitInside();
 }
+#if wxCHECK_VERSION(3, 1, 0)
+wxSize *wxWindow_FromDIP(const wxWindow * self, const wxSize * sz) {
+    return new wxSize(self->FromDIP(*sz));
+}
+#endif
+#if wxCHECK_VERSION(3, 1, 0)
+wxPoint *wxWindow_FromDIP1(const wxWindow * self, const wxPoint * pt) {
+    return new wxPoint(self->FromDIP(*pt));
+}
+#endif
+#if wxCHECK_VERSION(3, 1, 0)
+int wxWindow_FromDIP2(const wxWindow * self, int d) {
+    return self->FromDIP(d);
+}
+#endif
+#if wxCHECK_VERSION(3, 1, 0)
+wxSize *wxWindow_ToDIP(const wxWindow * self, const wxSize * sz) {
+    return new wxSize(self->ToDIP(*sz));
+}
+#endif
+#if wxCHECK_VERSION(3, 1, 0)
+wxPoint *wxWindow_ToDIP1(const wxWindow * self, const wxPoint * pt) {
+    return new wxPoint(self->ToDIP(*pt));
+}
+#endif
+#if wxCHECK_VERSION(3, 1, 0)
+int wxWindow_ToDIP2(const wxWindow * self, int d) {
+    return self->ToDIP(d);
+}
+#endif
 wxSize *wxWindow_GetBestSize(const wxWindow * self) {
     return new wxSize(self->GetBestSize());
 }
@@ -195,6 +235,11 @@ wxSize *wxWindow_GetBestVirtualSize(const wxWindow * self) {
 double wxWindow_GetContentScaleFactor(const wxWindow * self) {
     return self->GetContentScaleFactor();
 }
+#if wxCHECK_VERSION(3, 1, 0)
+double wxWindow_GetDPIScaleFactor(const wxWindow * self) {
+    return self->GetDPIScaleFactor();
+}
+#endif
 wxSize *wxWindow_GetWindowBorderSize(const wxWindow * self) {
     return new wxSize(self->GetWindowBorderSize());
 }
@@ -267,6 +312,36 @@ void wxWindow_SetVirtualSize(wxWindow * self, int width, int height) {
 void wxWindow_SetVirtualSize1(wxWindow * self, const wxSize * size) {
     return self->SetVirtualSize(*size);
 }
+#if wxCHECK_VERSION(3, 1, 0)
+wxSize *wxWindow_FromDIP3(const wxSize * sz, const wxWindow * w) {
+    return new wxSize(wxWindow::FromDIP(*sz, w));
+}
+#endif
+#if wxCHECK_VERSION(3, 1, 0)
+wxPoint *wxWindow_FromDIP4(const wxPoint * pt, const wxWindow * w) {
+    return new wxPoint(wxWindow::FromDIP(*pt, w));
+}
+#endif
+#if wxCHECK_VERSION(3, 1, 0)
+int wxWindow_FromDIP5(int d, const wxWindow * w) {
+    return wxWindow::FromDIP(d, w);
+}
+#endif
+#if wxCHECK_VERSION(3, 1, 0)
+wxSize *wxWindow_ToDIP3(const wxSize * sz, const wxWindow * w) {
+    return new wxSize(wxWindow::ToDIP(*sz, w));
+}
+#endif
+#if wxCHECK_VERSION(3, 1, 0)
+wxPoint *wxWindow_ToDIP4(const wxPoint * pt, const wxWindow * w) {
+    return new wxPoint(wxWindow::ToDIP(*pt, w));
+}
+#endif
+#if wxCHECK_VERSION(3, 1, 0)
+int wxWindow_ToDIP5(int d, const wxWindow * w) {
+    return wxWindow::ToDIP(d, w);
+}
+#endif
 void wxWindow_Center(wxWindow * self, int dir) {
     return self->Center(dir);
 }
@@ -354,6 +429,11 @@ int wxWindow_GetCharHeight(const wxWindow * self) {
 int wxWindow_GetCharWidth(const wxWindow * self) {
     return self->GetCharWidth();
 }
+#if wxCHECK_VERSION(3, 1, 0)
+wxSize *wxWindow_GetDPI(const wxWindow * self) {
+    return new wxSize(self->GetDPI());
+}
+#endif
 void wxWindow_GetTextExtent(const wxWindow * self, const wxString * string, int * w, int * h, int * descent, int * external_leading, const wxFont * font) {
     return self->GetTextExtent(*string, w, h, descent, external_leading, font);
 }
@@ -396,12 +476,27 @@ bool wxWindow_InheritsBackgroundColour(const wxWindow * self) {
 bool wxWindow_UseBgCol(const wxWindow * self) {
     return self->UseBgCol();
 }
+#if wxCHECK_VERSION(3, 1, 0)
+bool wxWindow_UseBackgroundColour(const wxWindow * self) {
+    return self->UseBackgroundColour();
+}
+#endif
 void wxWindow_SetOwnFont(wxWindow * self, const wxFont * font) {
     return self->SetOwnFont(*font);
 }
 void wxWindow_SetOwnForegroundColour(wxWindow * self, const wxColour * colour) {
     return self->SetOwnForegroundColour(*colour);
 }
+#if wxCHECK_VERSION(3, 1, 0)
+bool wxWindow_UseForegroundColour(const wxWindow * self) {
+    return self->UseForegroundColour();
+}
+#endif
+#if wxCHECK_VERSION(3, 1, 0)
+bool wxWindow_InheritsForegroundColour(const wxWindow * self) {
+    return self->InheritsForegroundColour();
+}
+#endif
 void wxWindow_SetPalette(wxWindow * self, const wxPalette * pal) {
     return self->SetPalette(*pal);
 }
@@ -666,6 +761,11 @@ bool wxWindow_SetCursor(wxWindow * self, const wxCursor * cursor) {
 void wxWindow_WarpPointer(wxWindow * self, int x, int y) {
     return self->WarpPointer(x, y);
 }
+#if wxCHECK_VERSION(3, 1, 0)
+bool wxWindow_EnableTouchEvents(wxWindow * self, int events_mask) {
+    return self->EnableTouchEvents(events_mask);
+}
+#endif
 void wxWindow_DoUpdateWindowUI(wxWindow * self, wxUpdateUIEvent * event) {
     return self->DoUpdateWindowUI(*event);
 }
@@ -699,6 +799,16 @@ void wxWindow_OnInternalIdle(wxWindow * self) {
 bool wxWindow_SendIdleEvents(wxWindow * self, wxIdleEvent * event) {
     return self->SendIdleEvents(*event);
 }
+#if wxCHECK_VERSION(3, 1, 0)
+bool wxWindow_RegisterHotKey(wxWindow * self, int hotkey_id, int modifiers, int virtual_key_code) {
+    return self->RegisterHotKey(hotkey_id, modifiers, virtual_key_code);
+}
+#endif
+#if wxCHECK_VERSION(3, 1, 0)
+bool wxWindow_UnregisterHotKey(wxWindow * self, int hotkey_id) {
+    return self->UnregisterHotKey(hotkey_id);
+}
+#endif
 void wxWindow_UpdateWindowUI(wxWindow * self, long flags) {
     return self->UpdateWindowUI(flags);
 }
@@ -755,6 +865,11 @@ wxSize *wxControl_GetSizeFromTextSize(const wxControl * self, int xlen, int ylen
 wxSize *wxControl_GetSizeFromTextSize1(const wxControl * self, const wxSize * tsize) {
     return new wxSize(self->GetSizeFromTextSize(*tsize));
 }
+#if wxCHECK_VERSION(3, 1, 0)
+wxSize *wxControl_GetSizeFromText(const wxControl * self, const wxString * text) {
+    return new wxSize(self->GetSizeFromText(*text));
+}
+#endif
 void wxControl_SetLabelText(wxControl * self, const wxString * text) {
     return self->SetLabelText(*text);
 }
@@ -822,6 +937,11 @@ void wxButton_SetAuthNeeded(wxButton * self, bool needed) {
 wxWindow * wxButton_SetDefault(wxButton * self) {
     return self->SetDefault();
 }
+#if wxCHECK_VERSION(3, 1, 0)
+wxSize *wxButton_GetDefaultSize(wxWindow * win) {
+    return new wxSize(wxButton::GetDefaultSize(win));
+}
+#endif
 
 // CLASS: wxNonOwnedWindow
 bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow * self, const wxRegion * region) {
@@ -850,6 +970,16 @@ void wxTopLevelWindow_CentreOnScreen(wxTopLevelWindow * self, int direction) {
 bool wxTopLevelWindow_EnableCloseButton(wxTopLevelWindow * self, bool enable) {
     return self->EnableCloseButton(enable);
 }
+#if wxCHECK_VERSION(3, 1, 0)
+bool wxTopLevelWindow_EnableMaximizeButton(wxTopLevelWindow * self, bool enable) {
+    return self->EnableMaximizeButton(enable);
+}
+#endif
+#if wxCHECK_VERSION(3, 1, 0)
+bool wxTopLevelWindow_EnableMinimizeButton(wxTopLevelWindow * self, bool enable) {
+    return self->EnableMinimizeButton(enable);
+}
+#endif
 wxWindow * wxTopLevelWindow_GetDefaultItem(const wxTopLevelWindow * self) {
     return self->GetDefaultItem();
 }
@@ -916,6 +1046,11 @@ void wxTopLevelWindow_SetRepresentedFilename(wxTopLevelWindow * self, const wxSt
 void wxTopLevelWindow_ShowWithoutActivating(wxTopLevelWindow * self) {
     return self->ShowWithoutActivating();
 }
+#if wxCHECK_VERSION(3, 1, 0)
+bool wxTopLevelWindow_EnableFullScreenView(wxTopLevelWindow * self, bool enable) {
+    return self->EnableFullScreenView(enable);
+}
+#endif
 bool wxTopLevelWindow_ShowFullScreen(wxTopLevelWindow * self, bool show, long style) {
     return self->ShowFullScreen(show, style);
 }
