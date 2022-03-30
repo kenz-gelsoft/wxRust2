@@ -29,4 +29,12 @@ name = "wx-base"
 version = "0.1.0"
 dependencies = [
  "cc",
+ "wxrust-config",
+]
+
+[[package]]
+name = "wxrust-config"
+version = "0.1.0"
+dependencies = [
+ "cc",
 ]
