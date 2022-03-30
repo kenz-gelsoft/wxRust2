@@ -4,4 +4,5 @@ members = [
     "example",
     "wx-base",
     "wx-core",
+    "wxrust-config",
 ]
