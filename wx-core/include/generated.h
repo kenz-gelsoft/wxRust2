@@ -56,20 +56,10 @@ void wxWindow_Fit(wxWindow * self);
 void wxWindow_FitInside(wxWindow * self);
 #if wxCHECK_VERSION(3, 1, 0)
 wxSize *wxWindow_FromDIP(const wxWindow * self, const wxSize * sz);
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 wxPoint *wxWindow_FromDIP1(const wxWindow * self, const wxPoint * pt);
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 int wxWindow_FromDIP2(const wxWindow * self, int d);
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 wxSize *wxWindow_ToDIP(const wxWindow * self, const wxSize * sz);
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 wxPoint *wxWindow_ToDIP1(const wxWindow * self, const wxPoint * pt);
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 int wxWindow_ToDIP2(const wxWindow * self, int d);
 #endif
 wxSize *wxWindow_GetBestSize(const wxWindow * self);
@@ -121,20 +111,10 @@ void wxWindow_SetVirtualSize(wxWindow * self, int width, int height);
 void wxWindow_SetVirtualSize1(wxWindow * self, const wxSize * size);
 #if wxCHECK_VERSION(3, 1, 0)
 wxSize *wxWindow_FromDIP3(const wxSize * sz, const wxWindow * w);
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 wxPoint *wxWindow_FromDIP4(const wxPoint * pt, const wxWindow * w);
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 int wxWindow_FromDIP5(int d, const wxWindow * w);
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 wxSize *wxWindow_ToDIP3(const wxSize * sz, const wxWindow * w);
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 wxPoint *wxWindow_ToDIP4(const wxPoint * pt, const wxWindow * w);
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 int wxWindow_ToDIP5(int d, const wxWindow * w);
 #endif
 void wxWindow_Center(wxWindow * self, int dir);
@@ -190,8 +170,6 @@ void wxWindow_SetOwnFont(wxWindow * self, const wxFont * font);
 void wxWindow_SetOwnForegroundColour(wxWindow * self, const wxColour * colour);
 #if wxCHECK_VERSION(3, 1, 0)
 bool wxWindow_UseForegroundColour(const wxWindow * self);
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 bool wxWindow_InheritsForegroundColour(const wxWindow * self);
 #endif
 void wxWindow_SetPalette(wxWindow * self, const wxPalette * pal);
@@ -298,8 +276,6 @@ void wxWindow_OnInternalIdle(wxWindow * self);
 bool wxWindow_SendIdleEvents(wxWindow * self, wxIdleEvent * event);
 #if wxCHECK_VERSION(3, 1, 0)
 bool wxWindow_RegisterHotKey(wxWindow * self, int hotkey_id, int modifiers, int virtual_key_code);
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 bool wxWindow_UnregisterHotKey(wxWindow * self, int hotkey_id);
 #endif
 void wxWindow_UpdateWindowUI(wxWindow * self, long flags);
@@ -367,8 +343,6 @@ void wxTopLevelWindow_CentreOnScreen(wxTopLevelWindow * self, int direction);
 bool wxTopLevelWindow_EnableCloseButton(wxTopLevelWindow * self, bool enable);
 #if wxCHECK_VERSION(3, 1, 0)
 bool wxTopLevelWindow_EnableMaximizeButton(wxTopLevelWindow * self, bool enable);
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 bool wxTopLevelWindow_EnableMinimizeButton(wxTopLevelWindow * self, bool enable);
 #endif
 wxWindow * wxTopLevelWindow_GetDefaultItem(const wxTopLevelWindow * self);

@@ -149,28 +149,18 @@ void wxWindow_FitInside(wxWindow * self) {
 wxSize *wxWindow_FromDIP(const wxWindow * self, const wxSize * sz) {
     return new wxSize(self->FromDIP(*sz));
 }
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 wxPoint *wxWindow_FromDIP1(const wxWindow * self, const wxPoint * pt) {
     return new wxPoint(self->FromDIP(*pt));
 }
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 int wxWindow_FromDIP2(const wxWindow * self, int d) {
     return self->FromDIP(d);
 }
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 wxSize *wxWindow_ToDIP(const wxWindow * self, const wxSize * sz) {
     return new wxSize(self->ToDIP(*sz));
 }
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 wxPoint *wxWindow_ToDIP1(const wxWindow * self, const wxPoint * pt) {
     return new wxPoint(self->ToDIP(*pt));
 }
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 int wxWindow_ToDIP2(const wxWindow * self, int d) {
     return self->ToDIP(d);
 }
@@ -316,28 +306,18 @@ void wxWindow_SetVirtualSize1(wxWindow * self, const wxSize * size) {
 wxSize *wxWindow_FromDIP3(const wxSize * sz, const wxWindow * w) {
     return new wxSize(wxWindow::FromDIP(*sz, w));
 }
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 wxPoint *wxWindow_FromDIP4(const wxPoint * pt, const wxWindow * w) {
     return new wxPoint(wxWindow::FromDIP(*pt, w));
 }
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 int wxWindow_FromDIP5(int d, const wxWindow * w) {
     return wxWindow::FromDIP(d, w);
 }
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 wxSize *wxWindow_ToDIP3(const wxSize * sz, const wxWindow * w) {
     return new wxSize(wxWindow::ToDIP(*sz, w));
 }
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 wxPoint *wxWindow_ToDIP4(const wxPoint * pt, const wxWindow * w) {
     return new wxPoint(wxWindow::ToDIP(*pt, w));
 }
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 int wxWindow_ToDIP5(int d, const wxWindow * w) {
     return wxWindow::ToDIP(d, w);
 }
@@ -491,8 +471,6 @@ void wxWindow_SetOwnForegroundColour(wxWindow * self, const wxColour * colour) {
 bool wxWindow_UseForegroundColour(const wxWindow * self) {
     return self->UseForegroundColour();
 }
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 bool wxWindow_InheritsForegroundColour(const wxWindow * self) {
     return self->InheritsForegroundColour();
 }
@@ -803,8 +781,6 @@ bool wxWindow_SendIdleEvents(wxWindow * self, wxIdleEvent * event) {
 bool wxWindow_RegisterHotKey(wxWindow * self, int hotkey_id, int modifiers, int virtual_key_code) {
     return self->RegisterHotKey(hotkey_id, modifiers, virtual_key_code);
 }
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 bool wxWindow_UnregisterHotKey(wxWindow * self, int hotkey_id) {
     return self->UnregisterHotKey(hotkey_id);
 }
@@ -974,8 +950,6 @@ bool wxTopLevelWindow_EnableCloseButton(wxTopLevelWindow * self, bool enable) {
 bool wxTopLevelWindow_EnableMaximizeButton(wxTopLevelWindow * self, bool enable) {
     return self->EnableMaximizeButton(enable);
 }
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 bool wxTopLevelWindow_EnableMinimizeButton(wxTopLevelWindow * self, bool enable) {
     return self->EnableMinimizeButton(enable);
 }

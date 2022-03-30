@@ -276,15 +276,18 @@ class RustMethodBinding:
 class CxxClassBinding:
     def __init__(self, model):
         self.__model = model
-        self.__methods = [CxxMethodBinding(m) for m in model.methods]
+        self.__methods = [CxxMethodBinding(self, m) for m in model.methods]
     
     def lines(self, is_cc=False):
         yield '// CLASS: %s' % (self.__model.name,)
         for line in self._dtor_lines(is_cc):
             yield line
+        self.was_blocked30 = False
         for method in self.__methods:
             for line in method.lines(is_cc):
                 yield line
+        if self.was_blocked30:
+            yield '#endif'
         yield ''
 
     def _ctors(self):
@@ -306,7 +309,8 @@ class CxxClassBinding:
 
 
 class CxxMethodBinding:
-    def __init__(self, model):
+    def __init__(self, cls, model):
+        self.__cls = cls
         self.__model = model
         self.is_ctor = model.is_ctor
         self.__self_param = Param(RustType(model.cls.name, model.const), 'self')
@@ -326,14 +330,16 @@ class CxxMethodBinding:
             self._cxx_params(),
         )
         blocked30 = self.__model.is_blocked30()
-        if blocked30:
-            yield '#if wxCHECK_VERSION(3, 1, 0)'
+        if self.__cls.was_blocked30 != blocked30:
+            self.__cls.was_blocked30 = blocked30
+            if blocked30:
+                yield '#if wxCHECK_VERSION(3, 1, 0)'
+            else:
+                yield '#endif'
         if is_cc:
             yield '%s {' % (signature,)
         else:
             yield '%s;' % (signature,)
-            if blocked30:
-                yield '#endif'
             return
         new_params_or_expr = self._call_params()
         if not self.is_ctor:
@@ -350,8 +356,6 @@ class CxxMethodBinding:
         else:
             yield '    return %s;' % (new_params_or_expr,)
         yield '}'
-        if blocked30:
-            yield '#endif'
 
     def _cxx_params(self):
         params = self.__model.params.copy()
