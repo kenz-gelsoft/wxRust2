@@ -12,9 +12,6 @@ bool wxWindow_AcceptsFocusFromKeyboard(const wxWindow * self) {
 bool wxWindow_AcceptsFocusRecursively(const wxWindow * self) {
     return self->AcceptsFocusRecursively();
 }
-void wxWindow_DisableFocusFromKeyboard(wxWindow * self) {
-    return self->DisableFocusFromKeyboard();
-}
 bool wxWindow_IsFocusable(const wxWindow * self) {
     return self->IsFocusable();
 }
@@ -29,9 +26,6 @@ bool wxWindow_HasFocus(const wxWindow * self) {
 }
 void wxWindow_SetCanFocus(wxWindow * self, bool can_focus) {
     return self->SetCanFocus(can_focus);
-}
-void wxWindow_EnableVisibleFocus(wxWindow * self, bool enable) {
-    return self->EnableVisibleFocus(enable);
 }
 void wxWindow_SetFocus(wxWindow * self) {
     return self->SetFocus();
@@ -141,24 +135,6 @@ void wxWindow_Fit(wxWindow * self) {
 void wxWindow_FitInside(wxWindow * self) {
     return self->FitInside();
 }
-wxSize *wxWindow_FromDIP(const wxWindow * self, const wxSize * sz) {
-    return new wxSize(self->FromDIP(*sz));
-}
-wxPoint *wxWindow_FromDIP1(const wxWindow * self, const wxPoint * pt) {
-    return new wxPoint(self->FromDIP(*pt));
-}
-int wxWindow_FromDIP2(const wxWindow * self, int d) {
-    return self->FromDIP(d);
-}
-wxSize *wxWindow_ToDIP(const wxWindow * self, const wxSize * sz) {
-    return new wxSize(self->ToDIP(*sz));
-}
-wxPoint *wxWindow_ToDIP1(const wxWindow * self, const wxPoint * pt) {
-    return new wxPoint(self->ToDIP(*pt));
-}
-int wxWindow_ToDIP2(const wxWindow * self, int d) {
-    return self->ToDIP(d);
-}
 wxSize *wxWindow_GetBestSize(const wxWindow * self) {
     return new wxSize(self->GetBestSize());
 }
@@ -218,9 +194,6 @@ wxSize *wxWindow_GetBestVirtualSize(const wxWindow * self) {
 }
 double wxWindow_GetContentScaleFactor(const wxWindow * self) {
     return self->GetContentScaleFactor();
-}
-double wxWindow_GetDPIScaleFactor(const wxWindow * self) {
-    return self->GetDPIScaleFactor();
 }
 wxSize *wxWindow_GetWindowBorderSize(const wxWindow * self) {
     return new wxSize(self->GetWindowBorderSize());
@@ -293,24 +266,6 @@ void wxWindow_SetVirtualSize(wxWindow * self, int width, int height) {
 }
 void wxWindow_SetVirtualSize1(wxWindow * self, const wxSize * size) {
     return self->SetVirtualSize(*size);
-}
-wxSize *wxWindow_FromDIP3(const wxSize * sz, const wxWindow * w) {
-    return new wxSize(wxWindow::FromDIP(*sz, w));
-}
-wxPoint *wxWindow_FromDIP4(const wxPoint * pt, const wxWindow * w) {
-    return new wxPoint(wxWindow::FromDIP(*pt, w));
-}
-int wxWindow_FromDIP5(int d, const wxWindow * w) {
-    return wxWindow::FromDIP(d, w);
-}
-wxSize *wxWindow_ToDIP3(const wxSize * sz, const wxWindow * w) {
-    return new wxSize(wxWindow::ToDIP(*sz, w));
-}
-wxPoint *wxWindow_ToDIP4(const wxPoint * pt, const wxWindow * w) {
-    return new wxPoint(wxWindow::ToDIP(*pt, w));
-}
-int wxWindow_ToDIP5(int d, const wxWindow * w) {
-    return wxWindow::ToDIP(d, w);
 }
 void wxWindow_Center(wxWindow * self, int dir) {
     return self->Center(dir);
@@ -399,9 +354,6 @@ int wxWindow_GetCharHeight(const wxWindow * self) {
 int wxWindow_GetCharWidth(const wxWindow * self) {
     return self->GetCharWidth();
 }
-wxSize *wxWindow_GetDPI(const wxWindow * self) {
-    return new wxSize(self->GetDPI());
-}
 void wxWindow_GetTextExtent(const wxWindow * self, const wxString * string, int * w, int * h, int * descent, int * external_leading, const wxFont * font) {
     return self->GetTextExtent(*string, w, h, descent, external_leading, font);
 }
@@ -444,20 +396,11 @@ bool wxWindow_InheritsBackgroundColour(const wxWindow * self) {
 bool wxWindow_UseBgCol(const wxWindow * self) {
     return self->UseBgCol();
 }
-bool wxWindow_UseBackgroundColour(const wxWindow * self) {
-    return self->UseBackgroundColour();
-}
 void wxWindow_SetOwnFont(wxWindow * self, const wxFont * font) {
     return self->SetOwnFont(*font);
 }
 void wxWindow_SetOwnForegroundColour(wxWindow * self, const wxColour * colour) {
     return self->SetOwnForegroundColour(*colour);
-}
-bool wxWindow_UseForegroundColour(const wxWindow * self) {
-    return self->UseForegroundColour();
-}
-bool wxWindow_InheritsForegroundColour(const wxWindow * self) {
-    return self->InheritsForegroundColour();
 }
 void wxWindow_SetPalette(wxWindow * self, const wxPalette * pal) {
     return self->SetPalette(*pal);
@@ -723,9 +666,6 @@ bool wxWindow_SetCursor(wxWindow * self, const wxCursor * cursor) {
 void wxWindow_WarpPointer(wxWindow * self, int x, int y) {
     return self->WarpPointer(x, y);
 }
-bool wxWindow_EnableTouchEvents(wxWindow * self, int events_mask) {
-    return self->EnableTouchEvents(events_mask);
-}
 void wxWindow_DoUpdateWindowUI(wxWindow * self, wxUpdateUIEvent * event) {
     return self->DoUpdateWindowUI(*event);
 }
@@ -758,12 +698,6 @@ void wxWindow_OnInternalIdle(wxWindow * self) {
 }
 bool wxWindow_SendIdleEvents(wxWindow * self, wxIdleEvent * event) {
     return self->SendIdleEvents(*event);
-}
-bool wxWindow_RegisterHotKey(wxWindow * self, int hotkey_id, int modifiers, int virtual_key_code) {
-    return self->RegisterHotKey(hotkey_id, modifiers, virtual_key_code);
-}
-bool wxWindow_UnregisterHotKey(wxWindow * self, int hotkey_id) {
-    return self->UnregisterHotKey(hotkey_id);
 }
 void wxWindow_UpdateWindowUI(wxWindow * self, long flags) {
     return self->UpdateWindowUI(flags);
@@ -820,9 +754,6 @@ wxSize *wxControl_GetSizeFromTextSize(const wxControl * self, int xlen, int ylen
 }
 wxSize *wxControl_GetSizeFromTextSize1(const wxControl * self, const wxSize * tsize) {
     return new wxSize(self->GetSizeFromTextSize(*tsize));
-}
-wxSize *wxControl_GetSizeFromText(const wxControl * self, const wxString * text) {
-    return new wxSize(self->GetSizeFromText(*text));
 }
 void wxControl_SetLabelText(wxControl * self, const wxString * text) {
     return self->SetLabelText(*text);
@@ -891,9 +822,6 @@ void wxButton_SetAuthNeeded(wxButton * self, bool needed) {
 wxWindow * wxButton_SetDefault(wxButton * self) {
     return self->SetDefault();
 }
-wxSize *wxButton_GetDefaultSize(wxWindow * win) {
-    return new wxSize(wxButton::GetDefaultSize(win));
-}
 
 // CLASS: wxNonOwnedWindow
 bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow * self, const wxRegion * region) {
@@ -921,12 +849,6 @@ void wxTopLevelWindow_CentreOnScreen(wxTopLevelWindow * self, int direction) {
 }
 bool wxTopLevelWindow_EnableCloseButton(wxTopLevelWindow * self, bool enable) {
     return self->EnableCloseButton(enable);
-}
-bool wxTopLevelWindow_EnableMaximizeButton(wxTopLevelWindow * self, bool enable) {
-    return self->EnableMaximizeButton(enable);
-}
-bool wxTopLevelWindow_EnableMinimizeButton(wxTopLevelWindow * self, bool enable) {
-    return self->EnableMinimizeButton(enable);
 }
 wxWindow * wxTopLevelWindow_GetDefaultItem(const wxTopLevelWindow * self) {
     return self->GetDefaultItem();
@@ -993,9 +915,6 @@ void wxTopLevelWindow_SetRepresentedFilename(wxTopLevelWindow * self, const wxSt
 }
 void wxTopLevelWindow_ShowWithoutActivating(wxTopLevelWindow * self) {
     return self->ShowWithoutActivating();
-}
-bool wxTopLevelWindow_EnableFullScreenView(wxTopLevelWindow * self, bool enable) {
-    return self->EnableFullScreenView(enable);
 }
 bool wxTopLevelWindow_ShowFullScreen(wxTopLevelWindow * self, bool show, long style) {
     return self->ShowFullScreen(show, style);

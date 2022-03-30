@@ -16,13 +16,13 @@ mod ffi {
         pub fn wxWindow_AcceptsFocus(self_: *const c_void) -> bool;
         pub fn wxWindow_AcceptsFocusFromKeyboard(self_: *const c_void) -> bool;
         pub fn wxWindow_AcceptsFocusRecursively(self_: *const c_void) -> bool;
-        pub fn wxWindow_DisableFocusFromKeyboard(self_: *mut c_void);
+        // BLOCKED: pub fn wxWindow_DisableFocusFromKeyboard(self_: *mut c_void);
         pub fn wxWindow_IsFocusable(self_: *const c_void) -> bool;
         pub fn wxWindow_CanAcceptFocus(self_: *const c_void) -> bool;
         pub fn wxWindow_CanAcceptFocusFromKeyboard(self_: *const c_void) -> bool;
         pub fn wxWindow_HasFocus(self_: *const c_void) -> bool;
         pub fn wxWindow_SetCanFocus(self_: *mut c_void, can_focus: bool);
-        pub fn wxWindow_EnableVisibleFocus(self_: *mut c_void, enable: bool);
+        // BLOCKED: pub fn wxWindow_EnableVisibleFocus(self_: *mut c_void, enable: bool);
         pub fn wxWindow_SetFocus(self_: *mut c_void);
         pub fn wxWindow_SetFocusFromKbd(self_: *mut c_void);
         pub fn wxWindow_AddChild(self_: *mut c_void, child: *mut c_void);
@@ -61,12 +61,12 @@ mod ffi {
         pub fn wxWindow_WindowToClientSize(self_: *const c_void, size: *const c_void) -> *mut c_void;
         pub fn wxWindow_Fit(self_: *mut c_void);
         pub fn wxWindow_FitInside(self_: *mut c_void);
-        pub fn wxWindow_FromDIP(self_: *const c_void, sz: *const c_void) -> *mut c_void;
-        pub fn wxWindow_FromDIP1(self_: *const c_void, pt: *const c_void) -> *mut c_void;
-        pub fn wxWindow_FromDIP2(self_: *const c_void, d: c_int) -> c_int;
-        pub fn wxWindow_ToDIP(self_: *const c_void, sz: *const c_void) -> *mut c_void;
-        pub fn wxWindow_ToDIP1(self_: *const c_void, pt: *const c_void) -> *mut c_void;
-        pub fn wxWindow_ToDIP2(self_: *const c_void, d: c_int) -> c_int;
+        // BLOCKED: pub fn wxWindow_FromDIP(self_: *const c_void, sz: *const c_void) -> wxSize;
+        // BLOCKED: pub fn wxWindow_FromDIP1(self_: *const c_void, pt: *const c_void) -> wxPoint;
+        // BLOCKED: pub fn wxWindow_FromDIP2(self_: *const c_void, d: c_int) -> c_int;
+        // BLOCKED: pub fn wxWindow_ToDIP(self_: *const c_void, sz: *const c_void) -> wxSize;
+        // BLOCKED: pub fn wxWindow_ToDIP1(self_: *const c_void, pt: *const c_void) -> wxPoint;
+        // BLOCKED: pub fn wxWindow_ToDIP2(self_: *const c_void, d: c_int) -> c_int;
         pub fn wxWindow_GetBestSize(self_: *const c_void) -> *mut c_void;
         pub fn wxWindow_GetBestHeight(self_: *const c_void, width: c_int) -> c_int;
         pub fn wxWindow_GetBestWidth(self_: *const c_void, height: c_int) -> c_int;
@@ -87,7 +87,7 @@ mod ffi {
         pub fn wxWindow_GetVirtualSize1(self_: *const c_void, width: *mut c_void, height: *mut c_void);
         pub fn wxWindow_GetBestVirtualSize(self_: *const c_void) -> *mut c_void;
         pub fn wxWindow_GetContentScaleFactor(self_: *const c_void) -> c_double;
-        pub fn wxWindow_GetDPIScaleFactor(self_: *const c_void) -> c_double;
+        // BLOCKED: pub fn wxWindow_GetDPIScaleFactor(self_: *const c_void) -> c_double;
         pub fn wxWindow_GetWindowBorderSize(self_: *const c_void) -> *mut c_void;
         pub fn wxWindow_InformFirstDirection(self_: *mut c_void, direction: c_int, size: c_int, available_other_dir: c_int) -> bool;
         pub fn wxWindow_InvalidateBestSize(self_: *mut c_void);
@@ -112,12 +112,12 @@ mod ffi {
         pub fn wxWindow_SetSizeHints1(self_: *mut c_void, min_w: c_int, min_h: c_int, max_w: c_int, max_h: c_int, inc_w: c_int, inc_h: c_int);
         pub fn wxWindow_SetVirtualSize(self_: *mut c_void, width: c_int, height: c_int);
         pub fn wxWindow_SetVirtualSize1(self_: *mut c_void, size: *const c_void);
-        pub fn wxWindow_FromDIP3(sz: *const c_void, w: *const c_void) -> *mut c_void;
-        pub fn wxWindow_FromDIP4(pt: *const c_void, w: *const c_void) -> *mut c_void;
-        pub fn wxWindow_FromDIP5(d: c_int, w: *const c_void) -> c_int;
-        pub fn wxWindow_ToDIP3(sz: *const c_void, w: *const c_void) -> *mut c_void;
-        pub fn wxWindow_ToDIP4(pt: *const c_void, w: *const c_void) -> *mut c_void;
-        pub fn wxWindow_ToDIP5(d: c_int, w: *const c_void) -> c_int;
+        // BLOCKED: pub fn wxWindow_FromDIP3(sz: *const c_void, w: *const c_void) -> wxSize;
+        // BLOCKED: pub fn wxWindow_FromDIP4(pt: *const c_void, w: *const c_void) -> wxPoint;
+        // BLOCKED: pub fn wxWindow_FromDIP5(d: c_int, w: *const c_void) -> c_int;
+        // BLOCKED: pub fn wxWindow_ToDIP3(sz: *const c_void, w: *const c_void) -> wxSize;
+        // BLOCKED: pub fn wxWindow_ToDIP4(pt: *const c_void, w: *const c_void) -> wxPoint;
+        // BLOCKED: pub fn wxWindow_ToDIP5(d: c_int, w: *const c_void) -> c_int;
         pub fn wxWindow_Center(self_: *mut c_void, dir: c_int);
         pub fn wxWindow_CenterOnParent(self_: *mut c_void, dir: c_int);
         pub fn wxWindow_Centre(self_: *mut c_void, direction: c_int);
@@ -150,7 +150,7 @@ mod ffi {
         pub fn wxWindow_GetCharHeight(self_: *const c_void) -> c_int;
         pub fn wxWindow_GetCharWidth(self_: *const c_void) -> c_int;
         // NOT_SUPPORTED: pub fn wxWindow_GetDefaultAttributes(self_: *const c_void) -> wxVisualAttributes;
-        pub fn wxWindow_GetDPI(self_: *const c_void) -> *mut c_void;
+        // BLOCKED: pub fn wxWindow_GetDPI(self_: *const c_void) -> wxSize;
         // NOT_SUPPORTED: pub fn wxWindow_GetFont(self_: *const c_void) -> wxFont;
         // NOT_SUPPORTED: pub fn wxWindow_GetForegroundColour(self_: *const c_void) -> wxColour;
         pub fn wxWindow_GetTextExtent(self_: *const c_void, string: *const c_void, w: *mut c_void, h: *mut c_void, descent: *mut c_void, external_leading: *mut c_void, font: *const c_void);
@@ -169,11 +169,11 @@ mod ffi {
         pub fn wxWindow_SetOwnBackgroundColour(self_: *mut c_void, colour: *const c_void);
         pub fn wxWindow_InheritsBackgroundColour(self_: *const c_void) -> bool;
         pub fn wxWindow_UseBgCol(self_: *const c_void) -> bool;
-        pub fn wxWindow_UseBackgroundColour(self_: *const c_void) -> bool;
+        // BLOCKED: pub fn wxWindow_UseBackgroundColour(self_: *const c_void) -> bool;
         pub fn wxWindow_SetOwnFont(self_: *mut c_void, font: *const c_void);
         pub fn wxWindow_SetOwnForegroundColour(self_: *mut c_void, colour: *const c_void);
-        pub fn wxWindow_UseForegroundColour(self_: *const c_void) -> bool;
-        pub fn wxWindow_InheritsForegroundColour(self_: *const c_void) -> bool;
+        // BLOCKED: pub fn wxWindow_UseForegroundColour(self_: *const c_void) -> bool;
+        // BLOCKED: pub fn wxWindow_InheritsForegroundColour(self_: *const c_void) -> bool;
         pub fn wxWindow_SetPalette(self_: *mut c_void, pal: *const c_void);
         pub fn wxWindow_ShouldInheritColours(self_: *const c_void) -> bool;
         pub fn wxWindow_SetThemeEnabled(self_: *mut c_void, enable: bool);
@@ -272,7 +272,7 @@ mod ffi {
         pub fn wxWindow_SetCaret(self_: *mut c_void, caret: *mut c_void);
         pub fn wxWindow_SetCursor(self_: *mut c_void, cursor: *const c_void) -> bool;
         pub fn wxWindow_WarpPointer(self_: *mut c_void, x: c_int, y: c_int);
-        pub fn wxWindow_EnableTouchEvents(self_: *mut c_void, events_mask: c_int) -> bool;
+        // BLOCKED: pub fn wxWindow_EnableTouchEvents(self_: *mut c_void, events_mask: c_int) -> bool;
         // NOT_SUPPORTED: pub fn wxWindow_HitTest(self_: *const c_void, x: c_int, y: c_int) -> wxHitTest;
         // NOT_SUPPORTED: pub fn wxWindow_HitTest1(self_: *const c_void, pt: *const c_void) -> wxHitTest;
         // NOT_SUPPORTED: pub fn wxWindow_GetBorder(self_: *const c_void, flags: c_long) -> wxBorder;
@@ -289,8 +289,8 @@ mod ffi {
         pub fn wxWindow_IsTopLevel(self_: *const c_void) -> bool;
         pub fn wxWindow_OnInternalIdle(self_: *mut c_void);
         pub fn wxWindow_SendIdleEvents(self_: *mut c_void, event: *mut c_void) -> bool;
-        pub fn wxWindow_RegisterHotKey(self_: *mut c_void, hotkey_id: c_int, modifiers: c_int, virtual_key_code: c_int) -> bool;
-        pub fn wxWindow_UnregisterHotKey(self_: *mut c_void, hotkey_id: c_int) -> bool;
+        // BLOCKED: pub fn wxWindow_RegisterHotKey(self_: *mut c_void, hotkey_id: c_int, modifiers: c_int, virtual_key_code: c_int) -> bool;
+        // BLOCKED: pub fn wxWindow_UnregisterHotKey(self_: *mut c_void, hotkey_id: c_int) -> bool;
         pub fn wxWindow_UpdateWindowUI(self_: *mut c_void, flags: c_long);
         // NOT_SUPPORTED: pub fn wxWindow_GetClassDefaultAttributes(variant: wxWindowVariant) -> wxVisualAttributes;
         pub fn wxWindow_FindFocus() -> *mut c_void;
@@ -313,7 +313,7 @@ mod ffi {
         pub fn wxControl_GetLabelText(self_: *const c_void) -> *mut c_void;
         pub fn wxControl_GetSizeFromTextSize(self_: *const c_void, xlen: c_int, ylen: c_int) -> *mut c_void;
         pub fn wxControl_GetSizeFromTextSize1(self_: *const c_void, tsize: *const c_void) -> *mut c_void;
-        pub fn wxControl_GetSizeFromText(self_: *const c_void, text: *const c_void) -> *mut c_void;
+        // BLOCKED: pub fn wxControl_GetSizeFromText(self_: *const c_void, text: *const c_void) -> wxSize;
         pub fn wxControl_SetLabelText(self_: *mut c_void, text: *const c_void);
         pub fn wxControl_SetLabelMarkup(self_: *mut c_void, markup: *const c_void) -> bool;
         pub fn wxControl_GetLabelText1(label: *const c_void) -> *mut c_void;
@@ -348,7 +348,7 @@ mod ffi {
         pub fn wxButton_GetAuthNeeded(self_: *const c_void) -> bool;
         pub fn wxButton_SetAuthNeeded(self_: *mut c_void, needed: bool);
         pub fn wxButton_SetDefault(self_: *mut c_void) -> *mut c_void;
-        pub fn wxButton_GetDefaultSize(win: *mut c_void) -> *mut c_void;
+        // BLOCKED: pub fn wxButton_GetDefaultSize(win: *mut c_void) -> wxSize;
         
         // wxNonOwnedWindow
         pub fn wxNonOwnedWindow_SetShape(self_: *mut c_void, region: *const c_void) -> bool;
@@ -362,8 +362,8 @@ mod ffi {
         pub fn wxTopLevelWindow_CenterOnScreen(self_: *mut c_void, direction: c_int);
         pub fn wxTopLevelWindow_CentreOnScreen(self_: *mut c_void, direction: c_int);
         pub fn wxTopLevelWindow_EnableCloseButton(self_: *mut c_void, enable: bool) -> bool;
-        pub fn wxTopLevelWindow_EnableMaximizeButton(self_: *mut c_void, enable: bool) -> bool;
-        pub fn wxTopLevelWindow_EnableMinimizeButton(self_: *mut c_void, enable: bool) -> bool;
+        // BLOCKED: pub fn wxTopLevelWindow_EnableMaximizeButton(self_: *mut c_void, enable: bool) -> bool;
+        // BLOCKED: pub fn wxTopLevelWindow_EnableMinimizeButton(self_: *mut c_void, enable: bool) -> bool;
         pub fn wxTopLevelWindow_GetDefaultItem(self_: *const c_void) -> *mut c_void;
         // NOT_SUPPORTED: pub fn wxTopLevelWindow_GetIcon(self_: *const c_void) -> wxIcon;
         // BLOCKED: pub fn wxTopLevelWindow_GetIcons(self_: *const c_void) -> *const c_void;
@@ -392,7 +392,7 @@ mod ffi {
         pub fn wxTopLevelWindow_OSXIsModified(self_: *const c_void) -> bool;
         pub fn wxTopLevelWindow_SetRepresentedFilename(self_: *mut c_void, filename: *const c_void);
         pub fn wxTopLevelWindow_ShowWithoutActivating(self_: *mut c_void);
-        pub fn wxTopLevelWindow_EnableFullScreenView(self_: *mut c_void, enable: bool) -> bool;
+        // BLOCKED: pub fn wxTopLevelWindow_EnableFullScreenView(self_: *mut c_void, enable: bool) -> bool;
         pub fn wxTopLevelWindow_ShowFullScreen(self_: *mut c_void, show: bool, style: c_long) -> bool;
         // BLOCKED: pub fn wxTopLevelWindow_UseNativeDecorations(self_: *mut c_void, native: bool);
         // BLOCKED: pub fn wxTopLevelWindow_UseNativeDecorationsByDefault(self_: *mut c_void, native: bool);
@@ -601,9 +601,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn accepts_focus_recursively(&self) -> bool {
         unsafe { ffi::wxWindow_AcceptsFocusRecursively(self.as_ptr()) }
     }
-    fn disable_focus_from_keyboard(&self) {
-        unsafe { ffi::wxWindow_DisableFocusFromKeyboard(self.as_ptr()) }
-    }
+    // BLOCKED: fn DisableFocusFromKeyboard()
     fn is_focusable(&self) -> bool {
         unsafe { ffi::wxWindow_IsFocusable(self.as_ptr()) }
     }
@@ -619,9 +617,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn set_can_focus(&self, can_focus: bool) {
         unsafe { ffi::wxWindow_SetCanFocus(self.as_ptr(), can_focus) }
     }
-    fn enable_visible_focus(&self, enable: bool) {
-        unsafe { ffi::wxWindow_EnableVisibleFocus(self.as_ptr(), enable) }
-    }
+    // BLOCKED: fn EnableVisibleFocus()
     fn set_focus(&self) {
         unsafe { ffi::wxWindow_SetFocus(self.as_ptr()) }
     }
@@ -774,36 +770,12 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn fit_inside(&self) {
         unsafe { ffi::wxWindow_FitInside(self.as_ptr()) }
     }
-    fn from_dip(&self, sz: &Size) -> Size {
-        unsafe {
-            let sz = sz.as_ptr();
-            Size(ffi::wxWindow_FromDIP(self.as_ptr(), sz))
-        }
-    }
-    fn from_dip1(&self, pt: &Point) -> Point {
-        unsafe {
-            let pt = pt.as_ptr();
-            Point(ffi::wxWindow_FromDIP1(self.as_ptr(), pt))
-        }
-    }
-    fn from_dip2(&self, d: c_int) -> c_int {
-        unsafe { ffi::wxWindow_FromDIP2(self.as_ptr(), d) }
-    }
-    fn to_dip(&self, sz: &Size) -> Size {
-        unsafe {
-            let sz = sz.as_ptr();
-            Size(ffi::wxWindow_ToDIP(self.as_ptr(), sz))
-        }
-    }
-    fn to_dip1(&self, pt: &Point) -> Point {
-        unsafe {
-            let pt = pt.as_ptr();
-            Point(ffi::wxWindow_ToDIP1(self.as_ptr(), pt))
-        }
-    }
-    fn to_dip2(&self, d: c_int) -> c_int {
-        unsafe { ffi::wxWindow_ToDIP2(self.as_ptr(), d) }
-    }
+    // BLOCKED: fn FromDIP()
+    // BLOCKED: fn FromDIP1()
+    // BLOCKED: fn FromDIP2()
+    // BLOCKED: fn ToDIP()
+    // BLOCKED: fn ToDIP1()
+    // BLOCKED: fn ToDIP2()
     fn get_best_size(&self) -> Size {
         unsafe { Size(ffi::wxWindow_GetBestSize(self.as_ptr())) }
     }
@@ -864,9 +836,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn get_content_scale_factor(&self) -> c_double {
         unsafe { ffi::wxWindow_GetContentScaleFactor(self.as_ptr()) }
     }
-    fn get_dpi_scale_factor(&self) -> c_double {
-        unsafe { ffi::wxWindow_GetDPIScaleFactor(self.as_ptr()) }
-    }
+    // BLOCKED: fn GetDPIScaleFactor()
     fn get_window_border_size(&self) -> Size {
         unsafe { Size(ffi::wxWindow_GetWindowBorderSize(self.as_ptr())) }
     }
@@ -974,64 +944,12 @@ pub trait WindowMethods: EvtHandlerMethods {
             ffi::wxWindow_SetVirtualSize1(self.as_ptr(), size)
         }
     }
-    fn from_dip3<T: WindowMethods>(sz: &Size, w: Option<&T>) -> Size {
-        unsafe {
-            let sz = sz.as_ptr();
-            let w = match w {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            Size(ffi::wxWindow_FromDIP3(sz, w))
-        }
-    }
-    fn from_dip4<T: WindowMethods>(pt: &Point, w: Option<&T>) -> Point {
-        unsafe {
-            let pt = pt.as_ptr();
-            let w = match w {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            Point(ffi::wxWindow_FromDIP4(pt, w))
-        }
-    }
-    fn from_dip5<T: WindowMethods>(d: c_int, w: Option<&T>) -> c_int {
-        unsafe {
-            let w = match w {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxWindow_FromDIP5(d, w)
-        }
-    }
-    fn to_dip3<T: WindowMethods>(sz: &Size, w: Option<&T>) -> Size {
-        unsafe {
-            let sz = sz.as_ptr();
-            let w = match w {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            Size(ffi::wxWindow_ToDIP3(sz, w))
-        }
-    }
-    fn to_dip4<T: WindowMethods>(pt: &Point, w: Option<&T>) -> Point {
-        unsafe {
-            let pt = pt.as_ptr();
-            let w = match w {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            Point(ffi::wxWindow_ToDIP4(pt, w))
-        }
-    }
-    fn to_dip5<T: WindowMethods>(d: c_int, w: Option<&T>) -> c_int {
-        unsafe {
-            let w = match w {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxWindow_ToDIP5(d, w)
-        }
-    }
+    // BLOCKED: fn FromDIP3()
+    // BLOCKED: fn FromDIP4()
+    // BLOCKED: fn FromDIP5()
+    // BLOCKED: fn ToDIP3()
+    // BLOCKED: fn ToDIP4()
+    // BLOCKED: fn ToDIP5()
     fn center(&self, dir: c_int) {
         unsafe { ffi::wxWindow_Center(self.as_ptr(), dir) }
     }
@@ -1146,9 +1064,7 @@ pub trait WindowMethods: EvtHandlerMethods {
         unsafe { ffi::wxWindow_GetCharWidth(self.as_ptr()) }
     }
     // NOT_SUPPORTED: fn GetDefaultAttributes()
-    fn get_dpi(&self) -> Size {
-        unsafe { Size(ffi::wxWindow_GetDPI(self.as_ptr())) }
-    }
+    // BLOCKED: fn GetDPI()
     // NOT_SUPPORTED: fn GetFont()
     // NOT_SUPPORTED: fn GetForegroundColour()
     fn get_text_extent(&self, string: &str, w: *mut c_void, h: *mut c_void, descent: *mut c_void, external_leading: *mut c_void, font: *const c_void) {
@@ -1210,21 +1126,15 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn use_bg_col(&self) -> bool {
         unsafe { ffi::wxWindow_UseBgCol(self.as_ptr()) }
     }
-    fn use_background_colour(&self) -> bool {
-        unsafe { ffi::wxWindow_UseBackgroundColour(self.as_ptr()) }
-    }
+    // BLOCKED: fn UseBackgroundColour()
     fn set_own_font(&self, font: *const c_void) {
         unsafe { ffi::wxWindow_SetOwnFont(self.as_ptr(), font) }
     }
     fn set_own_foreground_colour(&self, colour: *const c_void) {
         unsafe { ffi::wxWindow_SetOwnForegroundColour(self.as_ptr(), colour) }
     }
-    fn use_foreground_colour(&self) -> bool {
-        unsafe { ffi::wxWindow_UseForegroundColour(self.as_ptr()) }
-    }
-    fn inherits_foreground_colour(&self) -> bool {
-        unsafe { ffi::wxWindow_InheritsForegroundColour(self.as_ptr()) }
-    }
+    // BLOCKED: fn UseForegroundColour()
+    // BLOCKED: fn InheritsForegroundColour()
     fn set_palette(&self, pal: *const c_void) {
         unsafe { ffi::wxWindow_SetPalette(self.as_ptr(), pal) }
     }
@@ -1550,9 +1460,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn warp_pointer(&self, x: c_int, y: c_int) {
         unsafe { ffi::wxWindow_WarpPointer(self.as_ptr(), x, y) }
     }
-    fn enable_touch_events(&self, events_mask: c_int) -> bool {
-        unsafe { ffi::wxWindow_EnableTouchEvents(self.as_ptr(), events_mask) }
-    }
+    // BLOCKED: fn EnableTouchEvents()
     // NOT_SUPPORTED: fn HitTest()
     // NOT_SUPPORTED: fn HitTest1()
     // NOT_SUPPORTED: fn GetBorder()
@@ -1591,12 +1499,8 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn send_idle_events(&self, event: *mut c_void) -> bool {
         unsafe { ffi::wxWindow_SendIdleEvents(self.as_ptr(), event) }
     }
-    fn register_hot_key(&self, hotkey_id: c_int, modifiers: c_int, virtual_key_code: c_int) -> bool {
-        unsafe { ffi::wxWindow_RegisterHotKey(self.as_ptr(), hotkey_id, modifiers, virtual_key_code) }
-    }
-    fn unregister_hot_key(&self, hotkey_id: c_int) -> bool {
-        unsafe { ffi::wxWindow_UnregisterHotKey(self.as_ptr(), hotkey_id) }
-    }
+    // BLOCKED: fn RegisterHotKey()
+    // BLOCKED: fn UnregisterHotKey()
     fn update_window_ui(&self, flags: c_long) {
         unsafe { ffi::wxWindow_UpdateWindowUI(self.as_ptr(), flags) }
     }
@@ -1714,12 +1618,7 @@ pub trait ControlMethods: WindowMethods {
             Size(ffi::wxControl_GetSizeFromTextSize1(self.as_ptr(), tsize))
         }
     }
-    fn get_size_from_text(&self, text: &str) -> Size {
-        unsafe {
-            let text = wx_base::wx_string_from(text);
-            Size(ffi::wxControl_GetSizeFromText(self.as_ptr(), text))
-        }
-    }
+    // BLOCKED: fn GetSizeFromText()
     fn set_label_text(&self, text: &str) {
         unsafe {
             let text = wx_base::wx_string_from(text);
@@ -1868,15 +1767,7 @@ pub trait ButtonMethods: AnyButtonMethods {
     fn set_default(&self) -> *mut c_void {
         unsafe { ffi::wxButton_SetDefault(self.as_ptr()) }
     }
-    fn get_default_size<T: WindowMethods>(win: Option<&T>) -> Size {
-        unsafe {
-            let win = match win {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            Size(ffi::wxButton_GetDefaultSize(win))
-        }
-    }
+    // BLOCKED: fn GetDefaultSize()
 }
 
 // wxNonOwnedWindow
@@ -1953,12 +1844,8 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     fn enable_close_button(&self, enable: bool) -> bool {
         unsafe { ffi::wxTopLevelWindow_EnableCloseButton(self.as_ptr(), enable) }
     }
-    fn enable_maximize_button(&self, enable: bool) -> bool {
-        unsafe { ffi::wxTopLevelWindow_EnableMaximizeButton(self.as_ptr(), enable) }
-    }
-    fn enable_minimize_button(&self, enable: bool) -> bool {
-        unsafe { ffi::wxTopLevelWindow_EnableMinimizeButton(self.as_ptr(), enable) }
-    }
+    // BLOCKED: fn EnableMaximizeButton()
+    // BLOCKED: fn EnableMinimizeButton()
     fn get_default_item(&self) -> *mut c_void {
         unsafe { ffi::wxTopLevelWindow_GetDefaultItem(self.as_ptr()) }
     }
@@ -2049,9 +1936,7 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     fn show_without_activating(&self) {
         unsafe { ffi::wxTopLevelWindow_ShowWithoutActivating(self.as_ptr()) }
     }
-    fn enable_full_screen_view(&self, enable: bool) -> bool {
-        unsafe { ffi::wxTopLevelWindow_EnableFullScreenView(self.as_ptr(), enable) }
-    }
+    // BLOCKED: fn EnableFullScreenView()
     fn show_full_screen(&self, show: bool, style: c_long) -> bool {
         unsafe { ffi::wxTopLevelWindow_ShowFullScreen(self.as_ptr(), show, style) }
     }

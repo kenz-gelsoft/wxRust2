@@ -34,11 +34,43 @@ blocklist = [
     'GetChildren1',
     'GetCursor',
     'GetUpdateRegion',
+
+    # wx3.0 specific blocklist
+    'DisableFocusFromKeyboard',
+    'EnableTouchEvents',
+    'EnableVisibleFocus',
+    'FromDIP',
+    'FromDIP1',
+    'FromDIP2',
+    'FromDIP3',
+    'FromDIP4',
+    'FromDIP5',
+    'GetDPI',
+    'GetDPIScaleFactor',
+    'InheritsForegroundColour',
+    'RegisterHotKey',
+    'ToDIP',
+    'ToDIP1',
+    'ToDIP2',
+    'ToDIP3',
+    'ToDIP4',
+    'ToDIP5',
+    'UnregisterHotKey',
+    'UseBackgroundColour',
+    'UseForegroundColour',
 ]
 [types.wxControl]
+blocklist = [
+    # wx3.0 specific blocklist
+    'GetSizeFromText',
+]
 [types.wxAnyButton]
 library = 'core'
 [types.wxButton]
+blocklist = [
+    # wx3.0 specific blocklist
+    'GetDefaultSize',
+]
 [types.wxNonOwnedWindow]
 library = 'core'
 [types.wxTopLevelWindow]
@@ -53,6 +85,11 @@ blocklist = [
     'GetIcons',
     'SaveGeometry',
     'RestoreToGeometry',
+
+    # wx3.0 specific blocklist
+    'EnableFullScreenView',
+    'EnableMaximizeButton',
+    'EnableMinimizeButton',
 ]
 [types.wxFrame]
 blocklist = [
