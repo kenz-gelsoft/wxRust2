@@ -34,8 +34,8 @@ blocklist = [
     'GetChildren1',
     'GetCursor',
     'GetUpdateRegion',
-
-    # wx3.0 specific blocklist
+]
+blocklist30 = [
     'DisableFocusFromKeyboard',
     'EnableTouchEvents',
     'EnableVisibleFocus',
@@ -60,15 +60,13 @@ blocklist = [
     'UseForegroundColour',
 ]
 [types.wxControl]
-blocklist = [
-    # wx3.0 specific blocklist
+blocklist30 = [
     'GetSizeFromText',
 ]
 [types.wxAnyButton]
 library = 'core'
 [types.wxButton]
-blocklist = [
-    # wx3.0 specific blocklist
+blocklist30 = [
     'GetDefaultSize',
 ]
 [types.wxNonOwnedWindow]
@@ -85,8 +83,8 @@ blocklist = [
     'GetIcons',
     'SaveGeometry',
     'RestoreToGeometry',
-
-    # wx3.0 specific blocklist
+]
+blocklist30 = [
     'EnableFullScreenView',
     'EnableMaximizeButton',
     'EnableMinimizeButton',
