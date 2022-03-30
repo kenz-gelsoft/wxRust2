@@ -38,6 +38,7 @@ class Class:
         self.methods = []
         config = config.get(self.name) or {}
         self.__blocklist = config.get('blocklist') or []
+        self.__blocklist30 = config.get('blocklist30') or []
         self.config = config
         self.library = self._find_libname(e)
         for method in e.findall(".//memberdef[@kind='function']"):
@@ -61,6 +62,9 @@ class Class:
 
     def is_blocked_method(self, name):
         return name in self.__blocklist
+
+    def is_30blocked_method(self, name):
+        return name in self.__blocklist30
 
 
 class Method:
@@ -101,6 +105,9 @@ class Method:
 
     def is_blocked(self):
         return self.cls.is_blocked_method(self.name())
+
+    def is_blocked30(self):
+        return self.cls.is_30blocked_method(self.name())
 
     def _overload_index(self):
         return sum(m.__name == self.__name for m in self.cls.methods)
