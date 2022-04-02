@@ -21,7 +21,6 @@ pub fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
         }
     }
     if cfg!(windows) {
-        // TODO determin with build script input 
         cc_build.flag("/EHsc");
     }
     cc_build
@@ -64,22 +63,27 @@ fn wx_config(args: &[&str]) -> String {
 fn wx_config_win(args: &[&str]) -> String {
     let wxwin = env::var("wxwin")
         .expect("Set 'wxwin' environment variable to point the wxMSW binaries dir.");
+    let is_debug = env::var("PROFILE").unwrap() == "debug";
+    let d_or_not = if is_debug { "d" } else { "" };
     if args.contains(&"--cflags") {
-        let cflags = vec![
-            "-D_DEBUG".to_string(),
+        let mut cflags = vec![
             format!("-I{}\\include", wxwin),
-            // TODO: determine this name automatically
-            format!("-I{}\\lib\\vc14x_x64_dll\\mswud", wxwin),
+            format!("-I{}\\lib\\vc14x_x64_dll\\mswu{}", wxwin, d_or_not),
             "-DWXUSINGDLL".to_string(),
         ];
+        if is_debug {
+            cflags.push("-D_DEBUG".to_string());
+        } else {
+            cflags.push("-D__NO_VC_CRTDBG__".to_string());
+            cflags.push("-DwxDEBUG_LEVEL=0".to_string());
+            cflags.push("-DNDEBUG".to_string());
+        }
         cflags.join(" ")
     } else {
         let libs = vec![
-            // TODO: determine this name automatically
             format!("-L{}\\lib\\vc14x_x64_dll", wxwin),
-            // TODO: determine libraries list automatically
-            "-lwxbase31ud".to_string(),
-            "-lwxmsw31ud_core".to_string(),
+            format!("-lwxbase31u{}", d_or_not),
+            format!("-lwxmsw31u{}_core", d_or_not),
         ];
         libs.join(" ")
     }
