@@ -20,30 +20,9 @@ pub fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
             panic!("unsupported argument '{}'. please file a bug.", arg)
         }
     }
-    // required to use DLLs
     if cfg!(windows) {
-        // TODO remove redundant flags
         // TODO determin with build script input 
-        cc_build.define("WXUSINGDLL", "")
-                .flag("/c")
-                .flag("/TP")
-                .flag("/Fo")
-                .flag("/MTd")
-                .define("WIN32", "")
-                .flag("/Zi")
-                .define("_DEBUG", "")
-                .flag("/Od")
-                .define("_CRT_SECURE_NO_DEPRECATE", "1")
-                .define("_CRT_NON_CONFORMING_SWPRINTFS", "1")
-                .define("_SCL_SECURE_NO_WARNINGS", "1")
-                .define("__WXMSW__", "")
-                .define("_UNICODE", "")
-                .flag("/W4")
-                .define("WXUSINGDLL", "")
-                .define("_WINDOWS", "")
-                .define("NOPCH", "")
-                .flag("/GR")
-                .flag("/EHsc");
+        cc_build.flag("/EHsc");
     }
     cc_build
 }
@@ -75,12 +54,14 @@ fn wx_config(args: &[&str]) -> String {
         let wxwin = env::var("wxwin")
             .expect("Set 'wxwin' environment variable to point the wxMSW binaries dir.");
         if args.contains(&"--cflags") {
-            let includes = vec![
+            let cflags = vec![
+                "-D_DEBUG".to_string(),
                 format!("-I{}\\include", wxwin),
                 // TODO: determine this name automatically
                 format!("-I{}\\lib\\vc14x_x64_dll\\mswud", wxwin),
+                "-DWXUSINGDLL".to_string(),
             ];
-            includes.join(" ")
+            cflags.join(" ")
         } else {
             let libs = vec![
                 // TODO: determine this name automatically
