@@ -5,6 +5,7 @@ wxml_files = [
     'wxml/classwx_control.xml',
     'wxml/classwx_any_button.xml',
     'wxml/classwx_button.xml',
+    'wxml/classwx_menu.xml',
     'wxml/classwx_non_owned_window.xml',
     'wxml/classwx_top_level_window.xml',
     'wxml/classwx_frame.xml',
@@ -68,6 +69,12 @@ library = 'core'
 [types.wxButton]
 blocklist30 = [
     'GetDefaultSize',
+]
+[types.wxMenu]
+blocklist = [
+    # returns refs
+    'GetMenuItems',
+    'GetMenuItems1',
 ]
 [types.wxNonOwnedWindow]
 library = 'core'

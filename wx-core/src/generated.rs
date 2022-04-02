@@ -350,6 +350,67 @@ mod ffi {
         pub fn wxButton_SetDefault(self_: *mut c_void) -> *mut c_void;
         pub fn wxButton_GetDefaultSize(win: *mut c_void) -> *mut c_void;
         
+        // wxMenu
+        pub fn wxMenu_new() -> *mut c_void;
+        pub fn wxMenu_new1(style: c_long) -> *mut c_void;
+        pub fn wxMenu_new2(title: *const c_void, style: c_long) -> *mut c_void;
+        // DTOR: pub fn wxMenu_~wxMenu(self_: *mut c_void);
+        // NOT_SUPPORTED: pub fn wxMenu_Append(self_: *mut c_void, id: c_int, item: *const c_void, help_string: *const c_void, kind: wxItemKind) -> *mut c_void;
+        pub fn wxMenu_Append1(self_: *mut c_void, id: c_int, item: *const c_void, sub_menu: *mut c_void, help_string: *const c_void) -> *mut c_void;
+        pub fn wxMenu_Append2(self_: *mut c_void, menu_item: *mut c_void) -> *mut c_void;
+        pub fn wxMenu_AppendCheckItem(self_: *mut c_void, id: c_int, item: *const c_void, help: *const c_void) -> *mut c_void;
+        pub fn wxMenu_AppendRadioItem(self_: *mut c_void, id: c_int, item: *const c_void, help: *const c_void) -> *mut c_void;
+        pub fn wxMenu_AppendSeparator(self_: *mut c_void) -> *mut c_void;
+        pub fn wxMenu_AppendSubMenu(self_: *mut c_void, submenu: *mut c_void, text: *const c_void, help: *const c_void) -> *mut c_void;
+        pub fn wxMenu_Break(self_: *mut c_void);
+        pub fn wxMenu_Check(self_: *mut c_void, id: c_int, check: bool);
+        pub fn wxMenu_Delete(self_: *mut c_void, id: c_int) -> bool;
+        pub fn wxMenu_Delete1(self_: *mut c_void, item: *mut c_void) -> bool;
+        pub fn wxMenu_Destroy(self_: *mut c_void, id: c_int) -> bool;
+        pub fn wxMenu_Destroy1(self_: *mut c_void, item: *mut c_void) -> bool;
+        pub fn wxMenu_Enable(self_: *mut c_void, id: c_int, enable: bool);
+        pub fn wxMenu_FindChildItem(self_: *const c_void, id: c_int, pos: *mut c_void) -> *mut c_void;
+        pub fn wxMenu_FindItem(self_: *const c_void, item_string: *const c_void) -> c_int;
+        pub fn wxMenu_FindItem1(self_: *const c_void, id: c_int, menu: *mut c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxMenu_FindItemByPosition(self_: *const c_void, position: size_t) -> *mut c_void;
+        pub fn wxMenu_GetHelpString(self_: *const c_void, id: c_int) -> *mut c_void;
+        pub fn wxMenu_GetLabel(self_: *const c_void, id: c_int) -> *mut c_void;
+        pub fn wxMenu_GetLabelText(self_: *const c_void, id: c_int) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxMenu_GetMenuItemCount(self_: *const c_void) -> size_t;
+        // BLOCKED: pub fn wxMenu_GetMenuItems(self_: *mut c_void) -> *mut c_void;
+        // BLOCKED: pub fn wxMenu_GetMenuItems1(self_: *const c_void) -> *const c_void;
+        pub fn wxMenu_GetTitle(self_: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxMenu_Insert(self_: *mut c_void, pos: size_t, menu_item: *mut c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxMenu_Insert1(self_: *mut c_void, pos: size_t, id: c_int, item: *const c_void, help_string: *const c_void, kind: wxItemKind) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxMenu_Insert2(self_: *mut c_void, pos: size_t, id: c_int, text: *const c_void, submenu: *mut c_void, help: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxMenu_InsertCheckItem(self_: *mut c_void, pos: size_t, id: c_int, item: *const c_void, help_string: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxMenu_InsertRadioItem(self_: *mut c_void, pos: size_t, id: c_int, item: *const c_void, help_string: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxMenu_InsertSeparator(self_: *mut c_void, pos: size_t) -> *mut c_void;
+        pub fn wxMenu_IsChecked(self_: *const c_void, id: c_int) -> bool;
+        pub fn wxMenu_IsEnabled(self_: *const c_void, id: c_int) -> bool;
+        // NOT_SUPPORTED: pub fn wxMenu_MSWCommand(self_: *mut c_void, param: WXUINT, id: WXWORD) -> bool;
+        pub fn wxMenu_Prepend(self_: *mut c_void, item: *mut c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxMenu_Prepend1(self_: *mut c_void, id: c_int, item: *const c_void, help_string: *const c_void, kind: wxItemKind) -> *mut c_void;
+        pub fn wxMenu_Prepend2(self_: *mut c_void, id: c_int, text: *const c_void, submenu: *mut c_void, help: *const c_void) -> *mut c_void;
+        pub fn wxMenu_PrependCheckItem(self_: *mut c_void, id: c_int, item: *const c_void, help_string: *const c_void) -> *mut c_void;
+        pub fn wxMenu_PrependRadioItem(self_: *mut c_void, id: c_int, item: *const c_void, help_string: *const c_void) -> *mut c_void;
+        pub fn wxMenu_PrependSeparator(self_: *mut c_void) -> *mut c_void;
+        pub fn wxMenu_Remove(self_: *mut c_void, id: c_int) -> *mut c_void;
+        pub fn wxMenu_Remove1(self_: *mut c_void, item: *mut c_void) -> *mut c_void;
+        pub fn wxMenu_SetHelpString(self_: *mut c_void, id: c_int, help_string: *const c_void);
+        pub fn wxMenu_SetLabel(self_: *mut c_void, id: c_int, label: *const c_void);
+        pub fn wxMenu_SetTitle(self_: *mut c_void, title: *const c_void);
+        pub fn wxMenu_UpdateUI(self_: *mut c_void, source: *mut c_void);
+        pub fn wxMenu_SetInvokingWindow(self_: *mut c_void, win: *mut c_void);
+        pub fn wxMenu_GetInvokingWindow(self_: *const c_void) -> *mut c_void;
+        pub fn wxMenu_GetWindow(self_: *const c_void) -> *mut c_void;
+        pub fn wxMenu_GetStyle(self_: *const c_void) -> c_long;
+        pub fn wxMenu_SetParent(self_: *mut c_void, parent: *mut c_void);
+        pub fn wxMenu_GetParent(self_: *const c_void) -> *mut c_void;
+        pub fn wxMenu_Attach(self_: *mut c_void, menubar: *mut c_void);
+        pub fn wxMenu_Detach(self_: *mut c_void);
+        pub fn wxMenu_IsAttached(self_: *const c_void) -> bool;
+        
         // wxNonOwnedWindow
         pub fn wxNonOwnedWindow_SetShape(self_: *mut c_void, region: *const c_void) -> bool;
         pub fn wxNonOwnedWindow_SetShape1(self_: *mut c_void, path: *const c_void) -> bool;
@@ -1417,14 +1478,24 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn get_popup_menu_selection_from_user1(&self, menu: *mut c_void, x: c_int, y: c_int) -> c_int {
         unsafe { ffi::wxWindow_GetPopupMenuSelectionFromUser1(self.as_ptr(), menu, x, y) }
     }
-    fn popup_menu(&self, menu: *mut c_void, pos: &Point) -> bool {
+    fn popup_menu<T: MenuMethods>(&self, menu: Option<&T>, pos: &Point) -> bool {
         unsafe {
+            let menu = match menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             let pos = pos.as_ptr();
             ffi::wxWindow_PopupMenu(self.as_ptr(), menu, pos)
         }
     }
-    fn popup_menu1(&self, menu: *mut c_void, x: c_int, y: c_int) -> bool {
-        unsafe { ffi::wxWindow_PopupMenu1(self.as_ptr(), menu, x, y) }
+    fn popup_menu1<T: MenuMethods>(&self, menu: Option<&T>, x: c_int, y: c_int) -> bool {
+        unsafe {
+            let menu = match menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWindow_PopupMenu1(self.as_ptr(), menu, x, y)
+        }
     }
     fn get_validator(&self) -> *mut c_void {
         unsafe { ffi::wxWindow_GetValidator(self.as_ptr()) }
@@ -1876,6 +1947,253 @@ pub trait ButtonMethods: AnyButtonMethods {
             };
             Size(ffi::wxButton_GetDefaultSize(win))
         }
+    }
+}
+
+// wxMenu
+wx_class! { Menu(wxMenu) impl
+    MenuMethods,
+    EvtHandlerMethods,
+    ObjectMethods
+}
+impl Menu {
+    pub fn new() -> Menu {
+        unsafe { Menu(ffi::wxMenu_new()) }
+    }
+    pub fn new1(style: c_long) -> Menu {
+        unsafe { Menu(ffi::wxMenu_new1(style)) }
+    }
+    pub fn new2(title: &str, style: c_long) -> Menu {
+        unsafe {
+            let title = wx_base::wx_string_from(title);
+            Menu(ffi::wxMenu_new2(title, style))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl Drop for Menu {
+    fn drop(&mut self) {
+        unsafe { ffi::wxObject_delete(self.0) }
+    }
+}
+pub trait MenuMethods: EvtHandlerMethods {
+    // DTOR: fn ~wxMenu()
+    // NOT_SUPPORTED: fn Append()
+    fn append1<T: MenuMethods>(&self, id: c_int, item: &str, sub_menu: Option<&T>, help_string: &str) -> *mut c_void {
+        unsafe {
+            let item = wx_base::wx_string_from(item);
+            let sub_menu = match sub_menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let help_string = wx_base::wx_string_from(help_string);
+            ffi::wxMenu_Append1(self.as_ptr(), id, item, sub_menu, help_string)
+        }
+    }
+    fn append2(&self, menu_item: *mut c_void) -> *mut c_void {
+        unsafe { ffi::wxMenu_Append2(self.as_ptr(), menu_item) }
+    }
+    fn append_check_item(&self, id: c_int, item: &str, help: &str) -> *mut c_void {
+        unsafe {
+            let item = wx_base::wx_string_from(item);
+            let help = wx_base::wx_string_from(help);
+            ffi::wxMenu_AppendCheckItem(self.as_ptr(), id, item, help)
+        }
+    }
+    fn append_radio_item(&self, id: c_int, item: &str, help: &str) -> *mut c_void {
+        unsafe {
+            let item = wx_base::wx_string_from(item);
+            let help = wx_base::wx_string_from(help);
+            ffi::wxMenu_AppendRadioItem(self.as_ptr(), id, item, help)
+        }
+    }
+    fn append_separator(&self) -> *mut c_void {
+        unsafe { ffi::wxMenu_AppendSeparator(self.as_ptr()) }
+    }
+    fn append_sub_menu<T: MenuMethods>(&self, submenu: Option<&T>, text: &str, help: &str) -> *mut c_void {
+        unsafe {
+            let submenu = match submenu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let text = wx_base::wx_string_from(text);
+            let help = wx_base::wx_string_from(help);
+            ffi::wxMenu_AppendSubMenu(self.as_ptr(), submenu, text, help)
+        }
+    }
+    fn break_(&self) {
+        unsafe { ffi::wxMenu_Break(self.as_ptr()) }
+    }
+    fn check(&self, id: c_int, check: bool) {
+        unsafe { ffi::wxMenu_Check(self.as_ptr(), id, check) }
+    }
+    fn delete(&self, id: c_int) -> bool {
+        unsafe { ffi::wxMenu_Delete(self.as_ptr(), id) }
+    }
+    fn delete1(&self, item: *mut c_void) -> bool {
+        unsafe { ffi::wxMenu_Delete1(self.as_ptr(), item) }
+    }
+    fn destroy(&self, id: c_int) -> bool {
+        unsafe { ffi::wxMenu_Destroy(self.as_ptr(), id) }
+    }
+    fn destroy1(&self, item: *mut c_void) -> bool {
+        unsafe { ffi::wxMenu_Destroy1(self.as_ptr(), item) }
+    }
+    fn enable(&self, id: c_int, enable: bool) {
+        unsafe { ffi::wxMenu_Enable(self.as_ptr(), id, enable) }
+    }
+    fn find_child_item(&self, id: c_int, pos: *mut c_void) -> *mut c_void {
+        unsafe { ffi::wxMenu_FindChildItem(self.as_ptr(), id, pos) }
+    }
+    fn find_item(&self, item_string: &str) -> c_int {
+        unsafe {
+            let item_string = wx_base::wx_string_from(item_string);
+            ffi::wxMenu_FindItem(self.as_ptr(), item_string)
+        }
+    }
+    fn find_item1<T: MenuMethods>(&self, id: c_int, menu: Option<&T>) -> *mut c_void {
+        unsafe {
+            let menu = match menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxMenu_FindItem1(self.as_ptr(), id, menu)
+        }
+    }
+    // NOT_SUPPORTED: fn FindItemByPosition()
+    fn get_help_string(&self, id: c_int) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxMenu_GetHelpString(self.as_ptr(), id)) }
+    }
+    fn get_label(&self, id: c_int) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxMenu_GetLabel(self.as_ptr(), id)) }
+    }
+    fn get_label_text(&self, id: c_int) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxMenu_GetLabelText(self.as_ptr(), id)) }
+    }
+    // NOT_SUPPORTED: fn GetMenuItemCount()
+    // BLOCKED: fn GetMenuItems()
+    // BLOCKED: fn GetMenuItems1()
+    fn get_title(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxMenu_GetTitle(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn Insert()
+    // NOT_SUPPORTED: fn Insert1()
+    // NOT_SUPPORTED: fn Insert2()
+    // NOT_SUPPORTED: fn InsertCheckItem()
+    // NOT_SUPPORTED: fn InsertRadioItem()
+    // NOT_SUPPORTED: fn InsertSeparator()
+    fn is_checked(&self, id: c_int) -> bool {
+        unsafe { ffi::wxMenu_IsChecked(self.as_ptr(), id) }
+    }
+    fn is_enabled(&self, id: c_int) -> bool {
+        unsafe { ffi::wxMenu_IsEnabled(self.as_ptr(), id) }
+    }
+    // NOT_SUPPORTED: fn MSWCommand()
+    fn prepend(&self, item: *mut c_void) -> *mut c_void {
+        unsafe { ffi::wxMenu_Prepend(self.as_ptr(), item) }
+    }
+    // NOT_SUPPORTED: fn Prepend1()
+    fn prepend2<T: MenuMethods>(&self, id: c_int, text: &str, submenu: Option<&T>, help: &str) -> *mut c_void {
+        unsafe {
+            let text = wx_base::wx_string_from(text);
+            let submenu = match submenu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let help = wx_base::wx_string_from(help);
+            ffi::wxMenu_Prepend2(self.as_ptr(), id, text, submenu, help)
+        }
+    }
+    fn prepend_check_item(&self, id: c_int, item: &str, help_string: &str) -> *mut c_void {
+        unsafe {
+            let item = wx_base::wx_string_from(item);
+            let help_string = wx_base::wx_string_from(help_string);
+            ffi::wxMenu_PrependCheckItem(self.as_ptr(), id, item, help_string)
+        }
+    }
+    fn prepend_radio_item(&self, id: c_int, item: &str, help_string: &str) -> *mut c_void {
+        unsafe {
+            let item = wx_base::wx_string_from(item);
+            let help_string = wx_base::wx_string_from(help_string);
+            ffi::wxMenu_PrependRadioItem(self.as_ptr(), id, item, help_string)
+        }
+    }
+    fn prepend_separator(&self) -> *mut c_void {
+        unsafe { ffi::wxMenu_PrependSeparator(self.as_ptr()) }
+    }
+    fn remove(&self, id: c_int) -> *mut c_void {
+        unsafe { ffi::wxMenu_Remove(self.as_ptr(), id) }
+    }
+    fn remove1(&self, item: *mut c_void) -> *mut c_void {
+        unsafe { ffi::wxMenu_Remove1(self.as_ptr(), item) }
+    }
+    fn set_help_string(&self, id: c_int, help_string: &str) {
+        unsafe {
+            let help_string = wx_base::wx_string_from(help_string);
+            ffi::wxMenu_SetHelpString(self.as_ptr(), id, help_string)
+        }
+    }
+    fn set_label(&self, id: c_int, label: &str) {
+        unsafe {
+            let label = wx_base::wx_string_from(label);
+            ffi::wxMenu_SetLabel(self.as_ptr(), id, label)
+        }
+    }
+    fn set_title(&self, title: &str) {
+        unsafe {
+            let title = wx_base::wx_string_from(title);
+            ffi::wxMenu_SetTitle(self.as_ptr(), title)
+        }
+    }
+    fn update_ui<T: EvtHandlerMethods>(&self, source: Option<&T>) {
+        unsafe {
+            let source = match source {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxMenu_UpdateUI(self.as_ptr(), source)
+        }
+    }
+    fn set_invoking_window<T: WindowMethods>(&self, win: Option<&T>) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxMenu_SetInvokingWindow(self.as_ptr(), win)
+        }
+    }
+    fn get_invoking_window(&self) -> *mut c_void {
+        unsafe { ffi::wxMenu_GetInvokingWindow(self.as_ptr()) }
+    }
+    fn get_window(&self) -> *mut c_void {
+        unsafe { ffi::wxMenu_GetWindow(self.as_ptr()) }
+    }
+    fn get_style(&self) -> c_long {
+        unsafe { ffi::wxMenu_GetStyle(self.as_ptr()) }
+    }
+    fn set_parent<T: MenuMethods>(&self, parent: Option<&T>) {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxMenu_SetParent(self.as_ptr(), parent)
+        }
+    }
+    fn get_parent(&self) -> *mut c_void {
+        unsafe { ffi::wxMenu_GetParent(self.as_ptr()) }
+    }
+    fn attach(&self, menubar: *mut c_void) {
+        unsafe { ffi::wxMenu_Attach(self.as_ptr(), menubar) }
+    }
+    fn detach(&self) {
+        unsafe { ffi::wxMenu_Detach(self.as_ptr()) }
+    }
+    fn is_attached(&self) -> bool {
+        unsafe { ffi::wxMenu_IsAttached(self.as_ptr()) }
     }
 }
 

@@ -330,6 +330,53 @@ wxWindow * wxButton_SetDefault(wxButton * self);
 wxSize *wxButton_GetDefaultSize(wxWindow * win);
 #endif
 
+// CLASS: wxMenu
+wxMenu *wxMenu_new();
+wxMenu *wxMenu_new1(long style);
+wxMenu *wxMenu_new2(const wxString * title, long style);
+wxMenuItem * wxMenu_Append1(wxMenu * self, int id, const wxString * item, wxMenu * sub_menu, const wxString * help_string);
+wxMenuItem * wxMenu_Append2(wxMenu * self, wxMenuItem * menu_item);
+wxMenuItem * wxMenu_AppendCheckItem(wxMenu * self, int id, const wxString * item, const wxString * help);
+wxMenuItem * wxMenu_AppendRadioItem(wxMenu * self, int id, const wxString * item, const wxString * help);
+wxMenuItem * wxMenu_AppendSeparator(wxMenu * self);
+wxMenuItem * wxMenu_AppendSubMenu(wxMenu * self, wxMenu * submenu, const wxString * text, const wxString * help);
+void wxMenu_Break(wxMenu * self);
+void wxMenu_Check(wxMenu * self, int id, bool check);
+bool wxMenu_Delete(wxMenu * self, int id);
+bool wxMenu_Delete1(wxMenu * self, wxMenuItem * item);
+bool wxMenu_Destroy(wxMenu * self, int id);
+bool wxMenu_Destroy1(wxMenu * self, wxMenuItem * item);
+void wxMenu_Enable(wxMenu * self, int id, bool enable);
+wxMenuItem * wxMenu_FindChildItem(const wxMenu * self, int id, size_t * pos);
+int wxMenu_FindItem(const wxMenu * self, const wxString * item_string);
+wxMenuItem * wxMenu_FindItem1(const wxMenu * self, int id, wxMenu ** menu);
+wxString *wxMenu_GetHelpString(const wxMenu * self, int id);
+wxString *wxMenu_GetLabel(const wxMenu * self, int id);
+wxString *wxMenu_GetLabelText(const wxMenu * self, int id);
+wxString *wxMenu_GetTitle(const wxMenu * self);
+bool wxMenu_IsChecked(const wxMenu * self, int id);
+bool wxMenu_IsEnabled(const wxMenu * self, int id);
+wxMenuItem * wxMenu_Prepend(wxMenu * self, wxMenuItem * item);
+wxMenuItem * wxMenu_Prepend2(wxMenu * self, int id, const wxString * text, wxMenu * submenu, const wxString * help);
+wxMenuItem * wxMenu_PrependCheckItem(wxMenu * self, int id, const wxString * item, const wxString * help_string);
+wxMenuItem * wxMenu_PrependRadioItem(wxMenu * self, int id, const wxString * item, const wxString * help_string);
+wxMenuItem * wxMenu_PrependSeparator(wxMenu * self);
+wxMenuItem * wxMenu_Remove(wxMenu * self, int id);
+wxMenuItem * wxMenu_Remove1(wxMenu * self, wxMenuItem * item);
+void wxMenu_SetHelpString(wxMenu * self, int id, const wxString * help_string);
+void wxMenu_SetLabel(wxMenu * self, int id, const wxString * label);
+void wxMenu_SetTitle(wxMenu * self, const wxString * title);
+void wxMenu_UpdateUI(wxMenu * self, wxEvtHandler * source);
+void wxMenu_SetInvokingWindow(wxMenu * self, wxWindow * win);
+wxWindow * wxMenu_GetInvokingWindow(const wxMenu * self);
+wxWindow * wxMenu_GetWindow(const wxMenu * self);
+long wxMenu_GetStyle(const wxMenu * self);
+void wxMenu_SetParent(wxMenu * self, wxMenu * parent);
+wxMenu * wxMenu_GetParent(const wxMenu * self);
+void wxMenu_Attach(wxMenu * self, wxMenuBar * menubar);
+void wxMenu_Detach(wxMenu * self);
+bool wxMenu_IsAttached(const wxMenu * self);
+
 // CLASS: wxNonOwnedWindow
 bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow * self, const wxRegion * region);
 bool wxNonOwnedWindow_SetShape1(wxNonOwnedWindow * self, const wxGraphicsPath * path);

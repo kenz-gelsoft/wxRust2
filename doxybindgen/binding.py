@@ -2,6 +2,7 @@ from .model import Param, RustType, prefixed, pascal_to_snake
 
 # Known, and problematic
 RUST_KEYWORDS = [
+    'break',
     'move',
     'ref',
     'type',
