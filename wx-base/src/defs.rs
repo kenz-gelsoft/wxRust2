@@ -2,6 +2,9 @@
 #![allow(non_upper_case_globals)]
 #![allow(unused_parens)]
 
+// FIXME: workaround for windows (LLP64)
+#![allow(overflowing_literals)]
+
 use std::os::raw::{c_int, c_long};
 
 use crate::manual::*;
