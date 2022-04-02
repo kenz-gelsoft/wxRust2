@@ -1056,6 +1056,59 @@ bool wxMenu_IsAttached(const wxMenu * self) {
     return self->IsAttached();
 }
 
+// CLASS: wxMenuBar
+wxMenuBar *wxMenuBar_new(long style) {
+    return new wxMenuBar(style);
+}
+bool wxMenuBar_Append(wxMenuBar * self, wxMenu * menu, const wxString * title) {
+    return self->Append(menu, *title);
+}
+void wxMenuBar_Check(wxMenuBar * self, int id, bool check) {
+    return self->Check(id, check);
+}
+void wxMenuBar_Enable(wxMenuBar * self, int id, bool enable) {
+    return self->Enable(id, enable);
+}
+wxMenuItem * wxMenuBar_FindItem(const wxMenuBar * self, int id, wxMenu ** menu) {
+    return self->FindItem(id, menu);
+}
+int wxMenuBar_FindMenu(const wxMenuBar * self, const wxString * title) {
+    return self->FindMenu(*title);
+}
+int wxMenuBar_FindMenuItem(const wxMenuBar * self, const wxString * menu_string, const wxString * item_string) {
+    return self->FindMenuItem(*menu_string, *item_string);
+}
+wxString *wxMenuBar_GetHelpString(const wxMenuBar * self, int id) {
+    return new wxString(self->GetHelpString(id));
+}
+wxString *wxMenuBar_GetLabel(const wxMenuBar * self, int id) {
+    return new wxString(self->GetLabel(id));
+}
+bool wxMenuBar_IsChecked(const wxMenuBar * self, int id) {
+    return self->IsChecked(id);
+}
+bool wxMenuBar_IsEnabled(const wxMenuBar * self, int id) {
+    return self->IsEnabled(id);
+}
+void wxMenuBar_SetHelpString(wxMenuBar * self, int id, const wxString * help_string) {
+    return self->SetHelpString(id, *help_string);
+}
+void wxMenuBar_SetLabel(wxMenuBar * self, int id, const wxString * label) {
+    return self->SetLabel(id, *label);
+}
+wxFrame * wxMenuBar_GetFrame(const wxMenuBar * self) {
+    return self->GetFrame();
+}
+bool wxMenuBar_IsAttached(const wxMenuBar * self) {
+    return self->IsAttached();
+}
+void wxMenuBar_Attach(wxMenuBar * self, wxFrame * frame) {
+    return self->Attach(frame);
+}
+void wxMenuBar_Detach(wxMenuBar * self) {
+    return self->Detach();
+}
+
 // CLASS: wxNonOwnedWindow
 bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow * self, const wxRegion * region) {
     return self->SetShape(*region);

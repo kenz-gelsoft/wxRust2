@@ -6,6 +6,7 @@ wxml_files = [
     'wxml/classwx_any_button.xml',
     'wxml/classwx_button.xml',
     'wxml/classwx_menu.xml',
+    'wxml/classwx_menu_bar.xml',
     'wxml/classwx_non_owned_window.xml',
     'wxml/classwx_top_level_window.xml',
     'wxml/classwx_frame.xml',
@@ -75,6 +76,13 @@ blocklist = [
     # returns refs
     'GetMenuItems',
     'GetMenuItems1',
+]
+[types.wxMenuBar]
+blocklist = [
+    # mac speicific
+    'MacGetCommonMenuBar',
+    'MacSetCommonMenuBar',
+    'OSXGetAppleMenu',
 ]
 [types.wxNonOwnedWindow]
 library = 'core'

@@ -411,6 +411,42 @@ mod ffi {
         pub fn wxMenu_Detach(self_: *mut c_void);
         pub fn wxMenu_IsAttached(self_: *const c_void) -> bool;
         
+        // wxMenuBar
+        pub fn wxMenuBar_new(style: c_long) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxMenuBar_new1(n: size_t, menus: *mut c_void, titles: wxString, style: c_long) -> *mut c_void;
+        // DTOR: pub fn wxMenuBar_~wxMenuBar(self_: *mut c_void);
+        pub fn wxMenuBar_Append(self_: *mut c_void, menu: *mut c_void, title: *const c_void) -> bool;
+        pub fn wxMenuBar_Check(self_: *mut c_void, id: c_int, check: bool);
+        pub fn wxMenuBar_Enable(self_: *mut c_void, id: c_int, enable: bool);
+        // NOT_SUPPORTED: pub fn wxMenuBar_IsEnabledTop(self_: *const c_void, pos: size_t) -> bool;
+        // NOT_SUPPORTED: pub fn wxMenuBar_EnableTop(self_: *mut c_void, pos: size_t, enable: bool);
+        pub fn wxMenuBar_FindItem(self_: *const c_void, id: c_int, menu: *mut c_void) -> *mut c_void;
+        pub fn wxMenuBar_FindMenu(self_: *const c_void, title: *const c_void) -> c_int;
+        pub fn wxMenuBar_FindMenuItem(self_: *const c_void, menu_string: *const c_void, item_string: *const c_void) -> c_int;
+        pub fn wxMenuBar_GetHelpString(self_: *const c_void, id: c_int) -> *mut c_void;
+        pub fn wxMenuBar_GetLabel(self_: *const c_void, id: c_int) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxMenuBar_GetLabelTop(self_: *const c_void, pos: size_t) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxMenuBar_GetMenu(self_: *const c_void, menu_index: size_t) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxMenuBar_GetMenuCount(self_: *const c_void) -> size_t;
+        // NOT_SUPPORTED: pub fn wxMenuBar_GetMenuLabel(self_: *const c_void, pos: size_t) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxMenuBar_GetMenuLabelText(self_: *const c_void, pos: size_t) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxMenuBar_Insert(self_: *mut c_void, pos: size_t, menu: *mut c_void, title: *const c_void) -> bool;
+        pub fn wxMenuBar_IsChecked(self_: *const c_void, id: c_int) -> bool;
+        pub fn wxMenuBar_IsEnabled(self_: *const c_void, id: c_int) -> bool;
+        // NOT_SUPPORTED: pub fn wxMenuBar_Remove(self_: *mut c_void, pos: size_t) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxMenuBar_Replace(self_: *mut c_void, pos: size_t, menu: *mut c_void, title: *const c_void) -> *mut c_void;
+        pub fn wxMenuBar_SetHelpString(self_: *mut c_void, id: c_int, help_string: *const c_void);
+        pub fn wxMenuBar_SetLabel(self_: *mut c_void, id: c_int, label: *const c_void);
+        // NOT_SUPPORTED: pub fn wxMenuBar_SetLabelTop(self_: *mut c_void, pos: size_t, label: *const c_void);
+        // NOT_SUPPORTED: pub fn wxMenuBar_SetMenuLabel(self_: *mut c_void, pos: size_t, label: *const c_void);
+        // BLOCKED: pub fn wxMenuBar_OSXGetAppleMenu(self_: *const c_void) -> *mut c_void;
+        pub fn wxMenuBar_GetFrame(self_: *const c_void) -> *mut c_void;
+        pub fn wxMenuBar_IsAttached(self_: *const c_void) -> bool;
+        pub fn wxMenuBar_Attach(self_: *mut c_void, frame: *mut c_void);
+        pub fn wxMenuBar_Detach(self_: *mut c_void);
+        // BLOCKED: pub fn wxMenuBar_MacSetCommonMenuBar(menubar: *mut c_void);
+        // BLOCKED: pub fn wxMenuBar_MacGetCommonMenuBar() -> *mut c_void;
+        
         // wxNonOwnedWindow
         pub fn wxNonOwnedWindow_SetShape(self_: *mut c_void, region: *const c_void) -> bool;
         pub fn wxNonOwnedWindow_SetShape1(self_: *mut c_void, path: *const c_void) -> bool;
@@ -2186,8 +2222,14 @@ pub trait MenuMethods: EvtHandlerMethods {
     fn get_parent(&self) -> *mut c_void {
         unsafe { ffi::wxMenu_GetParent(self.as_ptr()) }
     }
-    fn attach(&self, menubar: *mut c_void) {
-        unsafe { ffi::wxMenu_Attach(self.as_ptr(), menubar) }
+    fn attach<T: MenuBarMethods>(&self, menubar: Option<&T>) {
+        unsafe {
+            let menubar = match menubar {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxMenu_Attach(self.as_ptr(), menubar)
+        }
     }
     fn detach(&self) {
         unsafe { ffi::wxMenu_Detach(self.as_ptr()) }
@@ -2195,6 +2237,121 @@ pub trait MenuMethods: EvtHandlerMethods {
     fn is_attached(&self) -> bool {
         unsafe { ffi::wxMenu_IsAttached(self.as_ptr()) }
     }
+}
+
+// wxMenuBar
+wx_class! { MenuBar(wxMenuBar) impl
+    MenuBarMethods,
+    WindowMethods,
+    EvtHandlerMethods,
+    ObjectMethods
+}
+impl MenuBar {
+    pub fn new(style: c_long) -> MenuBar {
+        unsafe { MenuBar(ffi::wxMenuBar_new(style)) }
+    }
+    // NOT_SUPPORTED: fn wxMenuBar1()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+pub trait MenuBarMethods: WindowMethods {
+    // DTOR: fn ~wxMenuBar()
+    fn append<T: MenuMethods>(&self, menu: Option<&T>, title: &str) -> bool {
+        unsafe {
+            let menu = match menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let title = wx_base::wx_string_from(title);
+            ffi::wxMenuBar_Append(self.as_ptr(), menu, title)
+        }
+    }
+    fn check(&self, id: c_int, check: bool) {
+        unsafe { ffi::wxMenuBar_Check(self.as_ptr(), id, check) }
+    }
+    fn enable(&self, id: c_int, enable: bool) {
+        unsafe { ffi::wxMenuBar_Enable(self.as_ptr(), id, enable) }
+    }
+    // NOT_SUPPORTED: fn IsEnabledTop()
+    // NOT_SUPPORTED: fn EnableTop()
+    fn find_item<T: MenuMethods>(&self, id: c_int, menu: Option<&T>) -> *mut c_void {
+        unsafe {
+            let menu = match menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxMenuBar_FindItem(self.as_ptr(), id, menu)
+        }
+    }
+    fn find_menu(&self, title: &str) -> c_int {
+        unsafe {
+            let title = wx_base::wx_string_from(title);
+            ffi::wxMenuBar_FindMenu(self.as_ptr(), title)
+        }
+    }
+    fn find_menu_item(&self, menu_string: &str, item_string: &str) -> c_int {
+        unsafe {
+            let menu_string = wx_base::wx_string_from(menu_string);
+            let item_string = wx_base::wx_string_from(item_string);
+            ffi::wxMenuBar_FindMenuItem(self.as_ptr(), menu_string, item_string)
+        }
+    }
+    fn get_help_string(&self, id: c_int) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxMenuBar_GetHelpString(self.as_ptr(), id)) }
+    }
+    fn get_label(&self, id: c_int) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxMenuBar_GetLabel(self.as_ptr(), id)) }
+    }
+    // NOT_SUPPORTED: fn GetLabelTop()
+    // NOT_SUPPORTED: fn GetMenu()
+    // NOT_SUPPORTED: fn GetMenuCount()
+    // NOT_SUPPORTED: fn GetMenuLabel()
+    // NOT_SUPPORTED: fn GetMenuLabelText()
+    // NOT_SUPPORTED: fn Insert()
+    fn is_checked(&self, id: c_int) -> bool {
+        unsafe { ffi::wxMenuBar_IsChecked(self.as_ptr(), id) }
+    }
+    fn is_enabled(&self, id: c_int) -> bool {
+        unsafe { ffi::wxMenuBar_IsEnabled(self.as_ptr(), id) }
+    }
+    // NOT_SUPPORTED: fn Remove()
+    // NOT_SUPPORTED: fn Replace()
+    fn set_help_string(&self, id: c_int, help_string: &str) {
+        unsafe {
+            let help_string = wx_base::wx_string_from(help_string);
+            ffi::wxMenuBar_SetHelpString(self.as_ptr(), id, help_string)
+        }
+    }
+    fn set_label(&self, id: c_int, label: &str) {
+        unsafe {
+            let label = wx_base::wx_string_from(label);
+            ffi::wxMenuBar_SetLabel(self.as_ptr(), id, label)
+        }
+    }
+    // NOT_SUPPORTED: fn SetLabelTop()
+    // NOT_SUPPORTED: fn SetMenuLabel()
+    // BLOCKED: fn OSXGetAppleMenu()
+    fn get_frame(&self) -> *mut c_void {
+        unsafe { ffi::wxMenuBar_GetFrame(self.as_ptr()) }
+    }
+    fn is_attached(&self) -> bool {
+        unsafe { ffi::wxMenuBar_IsAttached(self.as_ptr()) }
+    }
+    fn attach<T: FrameMethods>(&self, frame: Option<&T>) {
+        unsafe {
+            let frame = match frame {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxMenuBar_Attach(self.as_ptr(), frame)
+        }
+    }
+    fn detach(&self) {
+        unsafe { ffi::wxMenuBar_Detach(self.as_ptr()) }
+    }
+    // BLOCKED: fn MacSetCommonMenuBar()
+    // BLOCKED: fn MacGetCommonMenuBar()
 }
 
 // wxNonOwnedWindow
@@ -2477,8 +2634,14 @@ pub trait FrameMethods: TopLevelWindowMethods {
     fn process_command(&self, id: c_int) -> bool {
         unsafe { ffi::wxFrame_ProcessCommand(self.as_ptr(), id) }
     }
-    fn set_menu_bar(&self, menu_bar: *mut c_void) {
-        unsafe { ffi::wxFrame_SetMenuBar(self.as_ptr(), menu_bar) }
+    fn set_menu_bar<T: MenuBarMethods>(&self, menu_bar: Option<&T>) {
+        unsafe {
+            let menu_bar = match menu_bar {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxFrame_SetMenuBar(self.as_ptr(), menu_bar)
+        }
     }
     fn set_status_bar(&self, status_bar: *mut c_void) {
         unsafe { ffi::wxFrame_SetStatusBar(self.as_ptr(), status_bar) }

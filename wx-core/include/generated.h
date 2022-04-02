@@ -377,6 +377,25 @@ void wxMenu_Attach(wxMenu * self, wxMenuBar * menubar);
 void wxMenu_Detach(wxMenu * self);
 bool wxMenu_IsAttached(const wxMenu * self);
 
+// CLASS: wxMenuBar
+wxMenuBar *wxMenuBar_new(long style);
+bool wxMenuBar_Append(wxMenuBar * self, wxMenu * menu, const wxString * title);
+void wxMenuBar_Check(wxMenuBar * self, int id, bool check);
+void wxMenuBar_Enable(wxMenuBar * self, int id, bool enable);
+wxMenuItem * wxMenuBar_FindItem(const wxMenuBar * self, int id, wxMenu ** menu);
+int wxMenuBar_FindMenu(const wxMenuBar * self, const wxString * title);
+int wxMenuBar_FindMenuItem(const wxMenuBar * self, const wxString * menu_string, const wxString * item_string);
+wxString *wxMenuBar_GetHelpString(const wxMenuBar * self, int id);
+wxString *wxMenuBar_GetLabel(const wxMenuBar * self, int id);
+bool wxMenuBar_IsChecked(const wxMenuBar * self, int id);
+bool wxMenuBar_IsEnabled(const wxMenuBar * self, int id);
+void wxMenuBar_SetHelpString(wxMenuBar * self, int id, const wxString * help_string);
+void wxMenuBar_SetLabel(wxMenuBar * self, int id, const wxString * label);
+wxFrame * wxMenuBar_GetFrame(const wxMenuBar * self);
+bool wxMenuBar_IsAttached(const wxMenuBar * self);
+void wxMenuBar_Attach(wxMenuBar * self, wxFrame * frame);
+void wxMenuBar_Detach(wxMenuBar * self);
+
 // CLASS: wxNonOwnedWindow
 bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow * self, const wxRegion * region);
 bool wxNonOwnedWindow_SetShape1(wxNonOwnedWindow * self, const wxGraphicsPath * path);
