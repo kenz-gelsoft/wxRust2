@@ -929,6 +929,9 @@ wxMenu *wxMenu_new1(long style) {
 wxMenu *wxMenu_new2(const wxString * title, long style) {
     return new wxMenu(*title, style);
 }
+wxMenuItem * wxMenu_Append(wxMenu * self, int id, const wxString * item, const wxString * help_string, wxItemKind kind) {
+    return self->Append(id, *item, *help_string, kind);
+}
 wxMenuItem * wxMenu_Append1(wxMenu * self, int id, const wxString * item, wxMenu * sub_menu, const wxString * help_string) {
     return self->Append(id, *item, sub_menu, *help_string);
 }
@@ -997,6 +1000,9 @@ bool wxMenu_IsEnabled(const wxMenu * self, int id) {
 }
 wxMenuItem * wxMenu_Prepend(wxMenu * self, wxMenuItem * item) {
     return self->Prepend(item);
+}
+wxMenuItem * wxMenu_Prepend1(wxMenu * self, int id, const wxString * item, const wxString * help_string, wxItemKind kind) {
+    return self->Prepend(id, *item, *help_string, kind);
 }
 wxMenuItem * wxMenu_Prepend2(wxMenu * self, int id, const wxString * text, wxMenu * submenu, const wxString * help) {
     return self->Prepend(id, *text, submenu, *help);

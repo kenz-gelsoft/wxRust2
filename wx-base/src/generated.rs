@@ -143,11 +143,6 @@ impl EvtHandler {
         None
     }
 }
-impl Drop for EvtHandler {
-    fn drop(&mut self) {
-        unsafe { ffi::wxObject_delete(self.0) }
-    }
-}
 pub trait EvtHandlerMethods: ObjectMethods {
     fn queue_event(&self, event: *mut c_void) {
         unsafe { ffi::wxEvtHandler_QueueEvent(self.as_ptr(), event) }

@@ -355,7 +355,7 @@ mod ffi {
         pub fn wxMenu_new1(style: c_long) -> *mut c_void;
         pub fn wxMenu_new2(title: *const c_void, style: c_long) -> *mut c_void;
         // DTOR: pub fn wxMenu_~wxMenu(self_: *mut c_void);
-        // NOT_SUPPORTED: pub fn wxMenu_Append(self_: *mut c_void, id: c_int, item: *const c_void, help_string: *const c_void, kind: wxItemKind) -> *mut c_void;
+        pub fn wxMenu_Append(self_: *mut c_void, id: c_int, item: *const c_void, help_string: *const c_void, kind: c_int) -> *mut c_void;
         pub fn wxMenu_Append1(self_: *mut c_void, id: c_int, item: *const c_void, sub_menu: *mut c_void, help_string: *const c_void) -> *mut c_void;
         pub fn wxMenu_Append2(self_: *mut c_void, menu_item: *mut c_void) -> *mut c_void;
         pub fn wxMenu_AppendCheckItem(self_: *mut c_void, id: c_int, item: *const c_void, help: *const c_void) -> *mut c_void;
@@ -381,7 +381,7 @@ mod ffi {
         // BLOCKED: pub fn wxMenu_GetMenuItems1(self_: *const c_void) -> *const c_void;
         pub fn wxMenu_GetTitle(self_: *const c_void) -> *mut c_void;
         // NOT_SUPPORTED: pub fn wxMenu_Insert(self_: *mut c_void, pos: size_t, menu_item: *mut c_void) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxMenu_Insert1(self_: *mut c_void, pos: size_t, id: c_int, item: *const c_void, help_string: *const c_void, kind: wxItemKind) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxMenu_Insert1(self_: *mut c_void, pos: size_t, id: c_int, item: *const c_void, help_string: *const c_void, kind: c_int) -> *mut c_void;
         // NOT_SUPPORTED: pub fn wxMenu_Insert2(self_: *mut c_void, pos: size_t, id: c_int, text: *const c_void, submenu: *mut c_void, help: *const c_void) -> *mut c_void;
         // NOT_SUPPORTED: pub fn wxMenu_InsertCheckItem(self_: *mut c_void, pos: size_t, id: c_int, item: *const c_void, help_string: *const c_void) -> *mut c_void;
         // NOT_SUPPORTED: pub fn wxMenu_InsertRadioItem(self_: *mut c_void, pos: size_t, id: c_int, item: *const c_void, help_string: *const c_void) -> *mut c_void;
@@ -390,7 +390,7 @@ mod ffi {
         pub fn wxMenu_IsEnabled(self_: *const c_void, id: c_int) -> bool;
         // NOT_SUPPORTED: pub fn wxMenu_MSWCommand(self_: *mut c_void, param: WXUINT, id: WXWORD) -> bool;
         pub fn wxMenu_Prepend(self_: *mut c_void, item: *mut c_void) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxMenu_Prepend1(self_: *mut c_void, id: c_int, item: *const c_void, help_string: *const c_void, kind: wxItemKind) -> *mut c_void;
+        pub fn wxMenu_Prepend1(self_: *mut c_void, id: c_int, item: *const c_void, help_string: *const c_void, kind: c_int) -> *mut c_void;
         pub fn wxMenu_Prepend2(self_: *mut c_void, id: c_int, text: *const c_void, submenu: *mut c_void, help: *const c_void) -> *mut c_void;
         pub fn wxMenu_PrependCheckItem(self_: *mut c_void, id: c_int, item: *const c_void, help_string: *const c_void) -> *mut c_void;
         pub fn wxMenu_PrependRadioItem(self_: *mut c_void, id: c_int, item: *const c_void, help_string: *const c_void) -> *mut c_void;
@@ -2009,14 +2009,15 @@ impl Menu {
         None
     }
 }
-impl Drop for Menu {
-    fn drop(&mut self) {
-        unsafe { ffi::wxObject_delete(self.0) }
-    }
-}
 pub trait MenuMethods: EvtHandlerMethods {
     // DTOR: fn ~wxMenu()
-    // NOT_SUPPORTED: fn Append()
+    fn append(&self, id: c_int, item: &str, help_string: &str, kind: c_int) -> *mut c_void {
+        unsafe {
+            let item = wx_base::wx_string_from(item);
+            let help_string = wx_base::wx_string_from(help_string);
+            ffi::wxMenu_Append(self.as_ptr(), id, item, help_string, kind)
+        }
+    }
     fn append1<T: MenuMethods>(&self, id: c_int, item: &str, sub_menu: Option<&T>, help_string: &str) -> *mut c_void {
         unsafe {
             let item = wx_base::wx_string_from(item);
@@ -2130,7 +2131,13 @@ pub trait MenuMethods: EvtHandlerMethods {
     fn prepend(&self, item: *mut c_void) -> *mut c_void {
         unsafe { ffi::wxMenu_Prepend(self.as_ptr(), item) }
     }
-    // NOT_SUPPORTED: fn Prepend1()
+    fn prepend1(&self, id: c_int, item: &str, help_string: &str, kind: c_int) -> *mut c_void {
+        unsafe {
+            let item = wx_base::wx_string_from(item);
+            let help_string = wx_base::wx_string_from(help_string);
+            ffi::wxMenu_Prepend1(self.as_ptr(), id, item, help_string, kind)
+        }
+    }
     fn prepend2<T: MenuMethods>(&self, id: c_int, text: &str, submenu: Option<&T>, help: &str) -> *mut c_void {
         unsafe {
             let text = wx_base::wx_string_from(text);
@@ -3075,11 +3082,6 @@ impl Validator {
     }
     pub fn none() -> Option<&'static Self> {
         None
-    }
-}
-impl Drop for Validator {
-    fn drop(&mut self) {
-        unsafe { ffi::wxObject_delete(self.0) }
     }
 }
 pub trait ValidatorMethods: EvtHandlerMethods {
