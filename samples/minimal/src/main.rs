@@ -1,6 +1,6 @@
 #![windows_subsystem = "windows"]
 
-use std::os::raw::c_int;
+use std::os::raw::{c_int, c_void};
 use wx_base::*;
 use wx;
 use wx::*;
@@ -9,7 +9,7 @@ const MINIMAL_QUIT: c_int  = wxID_EXIT;
 const MINIMAL_ABOUT: c_int = wxID_ABOUT;
 
 fn main() {
-    wx_base::App::run(|| {
+    wx_base::App::run(|_| {
         let frame = Frame::new1(Window::none(), wxID_ANY, "Minimal wxWidgets App", 
                 &Point::default(), &Size::default(),
                 wxDEFAULT_FRAME_STYLE, "");
@@ -29,11 +29,11 @@ fn main() {
         // let i = 3;
         // println!("i={}", i);
         // let button_copy = button.clone();
-        // button.bind(wxRUST_EVT_BUTTON, move || {
-        //     println!("i={}", i);
-        //     button_copy.set_label("clicked");
-        //     println!("s={}", button_copy.get_label())
-        // });
+        frame.bind(wxRUST_EVT_MENU, move |arg: *mut c_void| {
+            // println!("i={}", i);
+            // button_copy.set_label("clicked");
+            // println!("s={}", button_copy.get_label())
+        });
         // frame.centre(wxBOTH);
         frame.show(true);
     });

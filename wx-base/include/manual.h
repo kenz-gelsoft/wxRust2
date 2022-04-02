@@ -5,7 +5,7 @@
 // wxEvtHandler
 template <typename T>
 class CxxClosure {
-    typedef void (*TrampolineFunc)(void *);
+    typedef void (*TrampolineFunc)(void *, T);
     void *mFn;
     void *mParam;
 
@@ -17,7 +17,7 @@ public:
 
     void operator ()(T arg) const {
         if (mParam) { // if set
-            ((TrampolineFunc)mFn)(mParam);
+            ((TrampolineFunc)mFn)(mParam, arg);
         } else {
             // TODO: provide debug info
         }
@@ -36,6 +36,7 @@ void wxObject_delete(wxObject *self);
 
 // TODO: auto generate
 #define wxRUST_EVT_BUTTON 0
+#define wxRUST_EVT_MENU 1
 
 void wxEvtHandler_Bind(wxEvtHandler *evtHandler, int eventType, void *aFn, void *aParam);
 

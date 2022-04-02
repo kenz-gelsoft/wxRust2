@@ -49,10 +49,10 @@ pub unsafe fn wx_string_from(s: &str) -> *const c_void {
 }
 
 // Rust closure to wx calablle function+param pair.
-unsafe fn to_wx_callable<F: Fn() + 'static>(closure: F) -> (*mut c_void, *mut c_void) {
-    unsafe fn trampoline<F: Fn() + 'static>(closure: *mut c_void) {
+unsafe fn to_wx_callable<F: Fn(*mut c_void) + 'static>(closure: F) -> (*mut c_void, *mut c_void) {
+    unsafe fn trampoline<F: Fn(*mut c_void) + 'static>(closure: *mut c_void, arg: *mut c_void) {
         let closure = &*(closure as *const F);
-        closure();
+        closure(arg);
     }
     // pass the pointer in the heap to avoid move.
     let closure = Box::new(closure);
@@ -63,10 +63,10 @@ unsafe fn to_wx_callable<F: Fn() + 'static>(closure: F) -> (*mut c_void, *mut c_
 }
 
 pub trait Bindable {
-    fn bind<F: Fn() + 'static>(&self, event_type: c_int, closure: F);
+    fn bind<F: Fn(*mut c_void) + 'static>(&self, event_type: c_int, closure: F);
 }
 impl<T: EvtHandlerMethods> Bindable for T {
-    fn bind<F: Fn() + 'static>(&self, event_type: c_int, closure: F) {
+    fn bind<F: Fn(*mut c_void) + 'static>(&self, event_type: c_int, closure: F) {
         unsafe {
             let (f, param) = to_wx_callable(closure);
             ffi::wxEvtHandler_Bind(self.as_ptr(), event_type, f, param);
@@ -77,13 +77,13 @@ impl<T: EvtHandlerMethods> Bindable for T {
 // wxApp
 pub enum App {}
 impl App {
-    pub fn on_init<F: Fn() + 'static>(closure: F) {
+    pub fn on_init<F: Fn(*mut c_void) + 'static>(closure: F) {
         unsafe {
             let (f, param) = to_wx_callable(closure);
             ffi::AppSetOnInit(f, param);
         }
     }
-    pub fn run<F: Fn() + 'static>(closure: F) {
+    pub fn run<F: Fn(*mut c_void) + 'static>(closure: F) {
         Self::on_init(closure);
         entry();
     }

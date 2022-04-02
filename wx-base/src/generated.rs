@@ -27,6 +27,26 @@ mod ffi {
         // BLOCKED: pub fn wxObject_operator delete(self_: *mut c_void, buf: *mut c_void);
         // NOT_SUPPORTED: pub fn wxObject_operator new(self_: *mut c_void, size: size_t, filename: *const c_void, line_num: c_int) -> *mut c_void;
         
+        // wxEvent
+        // NOT_SUPPORTED: pub fn wxEvent_new(id: c_int, event_type: wxEventType) -> *mut c_void;
+        pub fn wxEvent_Clone(self_: *const c_void) -> *mut c_void;
+        pub fn wxEvent_GetEventObject(self_: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxEvent_GetEventType(self_: *const c_void) -> wxEventType;
+        // NOT_SUPPORTED: pub fn wxEvent_GetEventCategory(self_: *const c_void) -> wxEventCategory;
+        pub fn wxEvent_GetId(self_: *const c_void) -> c_int;
+        pub fn wxEvent_GetEventUserData(self_: *const c_void) -> *mut c_void;
+        pub fn wxEvent_GetSkipped(self_: *const c_void) -> bool;
+        pub fn wxEvent_GetTimestamp(self_: *const c_void) -> c_long;
+        pub fn wxEvent_IsCommandEvent(self_: *const c_void) -> bool;
+        pub fn wxEvent_ResumePropagation(self_: *mut c_void, propagation_level: c_int);
+        pub fn wxEvent_SetEventObject(self_: *mut c_void, object: *mut c_void);
+        // NOT_SUPPORTED: pub fn wxEvent_SetEventType(self_: *mut c_void, type_: wxEventType);
+        pub fn wxEvent_SetId(self_: *mut c_void, id: c_int);
+        pub fn wxEvent_SetTimestamp(self_: *mut c_void, time_stamp: c_long);
+        pub fn wxEvent_ShouldPropagate(self_: *const c_void) -> bool;
+        pub fn wxEvent_Skip(self_: *mut c_void, skip: bool);
+        pub fn wxEvent_StopPropagation(self_: *mut c_void) -> c_int;
+        
         // wxEvtHandler
         pub fn wxEvtHandler_QueueEvent(self_: *mut c_void, event: *mut c_void);
         pub fn wxEvtHandler_AddPendingEvent(self_: *mut c_void, event: *const c_void);
@@ -130,6 +150,76 @@ pub trait ObjectMethods: WxRustMethods {
     // NOT_SUPPORTED: fn operator new()
 }
 
+// wxEvent
+wx_class! { Event(wxEvent) impl
+    EventMethods,
+    ObjectMethods
+}
+impl Event {
+    // NOT_SUPPORTED: fn wxEvent()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl Drop for Event {
+    fn drop(&mut self) {
+        unsafe { ffi::wxObject_delete(self.0) }
+    }
+}
+pub trait EventMethods: ObjectMethods {
+    fn clone(&self) -> *mut c_void {
+        unsafe { ffi::wxEvent_Clone(self.as_ptr()) }
+    }
+    fn get_event_object(&self) -> *mut c_void {
+        unsafe { ffi::wxEvent_GetEventObject(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetEventType()
+    // NOT_SUPPORTED: fn GetEventCategory()
+    fn get_id(&self) -> c_int {
+        unsafe { ffi::wxEvent_GetId(self.as_ptr()) }
+    }
+    fn get_event_user_data(&self) -> *mut c_void {
+        unsafe { ffi::wxEvent_GetEventUserData(self.as_ptr()) }
+    }
+    fn get_skipped(&self) -> bool {
+        unsafe { ffi::wxEvent_GetSkipped(self.as_ptr()) }
+    }
+    fn get_timestamp(&self) -> c_long {
+        unsafe { ffi::wxEvent_GetTimestamp(self.as_ptr()) }
+    }
+    fn is_command_event(&self) -> bool {
+        unsafe { ffi::wxEvent_IsCommandEvent(self.as_ptr()) }
+    }
+    fn resume_propagation(&self, propagation_level: c_int) {
+        unsafe { ffi::wxEvent_ResumePropagation(self.as_ptr(), propagation_level) }
+    }
+    fn set_event_object<T: ObjectMethods>(&self, object: Option<&T>) {
+        unsafe {
+            let object = match object {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxEvent_SetEventObject(self.as_ptr(), object)
+        }
+    }
+    // NOT_SUPPORTED: fn SetEventType()
+    fn set_id(&self, id: c_int) {
+        unsafe { ffi::wxEvent_SetId(self.as_ptr(), id) }
+    }
+    fn set_timestamp(&self, time_stamp: c_long) {
+        unsafe { ffi::wxEvent_SetTimestamp(self.as_ptr(), time_stamp) }
+    }
+    fn should_propagate(&self) -> bool {
+        unsafe { ffi::wxEvent_ShouldPropagate(self.as_ptr()) }
+    }
+    fn skip(&self, skip: bool) {
+        unsafe { ffi::wxEvent_Skip(self.as_ptr(), skip) }
+    }
+    fn stop_propagation(&self) -> c_int {
+        unsafe { ffi::wxEvent_StopPropagation(self.as_ptr()) }
+    }
+}
+
 // wxEvtHandler
 wx_class! { EvtHandler(wxEvtHandler) impl
     EvtHandlerMethods,
@@ -144,11 +234,20 @@ impl EvtHandler {
     }
 }
 pub trait EvtHandlerMethods: ObjectMethods {
-    fn queue_event(&self, event: *mut c_void) {
-        unsafe { ffi::wxEvtHandler_QueueEvent(self.as_ptr(), event) }
+    fn queue_event<T: EventMethods>(&self, event: Option<&T>) {
+        unsafe {
+            let event = match event {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxEvtHandler_QueueEvent(self.as_ptr(), event)
+        }
     }
-    fn add_pending_event(&self, event: *const c_void) {
-        unsafe { ffi::wxEvtHandler_AddPendingEvent(self.as_ptr(), event) }
+    fn add_pending_event(&self, event: &Event) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxEvtHandler_AddPendingEvent(self.as_ptr(), event)
+        }
     }
     // NOT_SUPPORTED: fn CallAfter()
     // BLOCKED: fn CallAfter1()

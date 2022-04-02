@@ -1,5 +1,6 @@
 wxml_files = [
     'wxml/classwx_object.xml',
+    'wxml/classwx_event.xml',
     'wxml/classwx_evt_handler.xml',
     'wxml/classwx_window.xml',
     'wxml/classwx_control.xml',
