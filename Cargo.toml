@@ -2,6 +2,7 @@
 
 members = [
     "example",
+    "samples/minimal",
     "wx-base",
     "wx-core",
     "wxrust-config",
