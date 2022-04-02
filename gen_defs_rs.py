@@ -7,6 +7,9 @@ PROLOGUE = '''\
 #![allow(non_upper_case_globals)]
 #![allow(unused_parens)]
 
+// FIXME: workaround for windows (LLP64)
+#![allow(overflowing_literals)]
+
 use std::os::raw::{c_int, c_long};
 
 use crate::manual::*;
@@ -15,7 +18,7 @@ use crate::manual::*;
 # place wxWidgets doxygen xml files in wxml/ dir and run this.
 generated = set()
 def main():
-    with open('src/defs.rs', 'w') as f:
+    with open('wx-base/src/defs.rs', 'w') as f:
         print(PROLOGUE, file=f)
         for file in xml_files_in('wxml/'):
             tree = ET.parse(file)
