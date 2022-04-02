@@ -51,32 +51,36 @@ pub fn print_wx_config_libs_for_cargo() {
 
 fn wx_config(args: &[&str]) -> String {
     if cfg!(windows) {
-        let wxwin = env::var("wxwin")
-            .expect("Set 'wxwin' environment variable to point the wxMSW binaries dir.");
-        if args.contains(&"--cflags") {
-            let cflags = vec![
-                "-D_DEBUG".to_string(),
-                format!("-I{}\\include", wxwin),
-                // TODO: determine this name automatically
-                format!("-I{}\\lib\\vc14x_x64_dll\\mswud", wxwin),
-                "-DWXUSINGDLL".to_string(),
-            ];
-            cflags.join(" ")
-        } else {
-            let libs = vec![
-                // TODO: determine this name automatically
-                format!("-L{}\\lib\\vc14x_x64_dll", wxwin),
-                // TODO: determine libraries list automatically
-                "-lwxbase31ud".to_string(),
-                "-lwxmsw31ud_core".to_string(),
-            ];
-            libs.join(" ")
-        }
+        wx_config_win(args)
     } else {
         let output = Command::new("wx-config")
             .args(args)
             .output()
             .expect("failed execute wx-config command.");
         String::from_utf8_lossy(&output.stdout).to_string()
+    }
+}
+
+fn wx_config_win(args: &[&str]) -> String {
+    let wxwin = env::var("wxwin")
+        .expect("Set 'wxwin' environment variable to point the wxMSW binaries dir.");
+    if args.contains(&"--cflags") {
+        let cflags = vec![
+            "-D_DEBUG".to_string(),
+            format!("-I{}\\include", wxwin),
+            // TODO: determine this name automatically
+            format!("-I{}\\lib\\vc14x_x64_dll\\mswud", wxwin),
+            "-DWXUSINGDLL".to_string(),
+        ];
+        cflags.join(" ")
+    } else {
+        let libs = vec![
+            // TODO: determine this name automatically
+            format!("-L{}\\lib\\vc14x_x64_dll", wxwin),
+            // TODO: determine libraries list automatically
+            "-lwxbase31ud".to_string(),
+            "-lwxmsw31ud_core".to_string(),
+        ];
+        libs.join(" ")
     }
 }
