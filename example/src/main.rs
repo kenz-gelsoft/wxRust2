@@ -1,3 +1,5 @@
+#![windows_subsystem = "windows"]
+
 use wx_base::*;
 use wx;
 use wx::*;

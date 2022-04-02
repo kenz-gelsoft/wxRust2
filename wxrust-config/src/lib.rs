@@ -22,7 +22,28 @@ pub fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
     }
     // required to use DLLs
     if cfg!(windows) {
-        cc_build.define("WXUSINGDLL", "");
+        // TODO remove redundant flags
+        // TODO determin with build script input 
+        cc_build.define("WXUSINGDLL", "")
+                .flag("/c")
+                .flag("/TP")
+                .flag("/Fo")
+                .flag("/MTd")
+                .define("WIN32", "")
+                .flag("/Zi")
+                .define("_DEBUG", "")
+                .flag("/Od")
+                .define("_CRT_SECURE_NO_DEPRECATE", "1")
+                .define("_CRT_NON_CONFORMING_SWPRINTFS", "1")
+                .define("_SCL_SECURE_NO_WARNINGS", "1")
+                .define("__WXMSW__", "")
+                .define("_UNICODE", "")
+                .flag("/W4")
+                .define("WXUSINGDLL", "")
+                .define("_WINDOWS", "")
+                .define("NOPCH", "")
+                .flag("/GR")
+                .flag("/EHsc");
     }
     cc_build
 }
