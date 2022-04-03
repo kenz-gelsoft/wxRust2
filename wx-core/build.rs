@@ -6,6 +6,7 @@ use wxrust_config::{
 fn main() {
     wx_config_cflags(&mut cc::Build::new())
         .cpp(true)
+        .file("src/manual.cpp")
         .file("src/generated.cpp")
         .include("include")
         .flag_if_supported("-std=c++14")

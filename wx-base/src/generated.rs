@@ -105,6 +105,9 @@ impl Object {
             Object(ffi::wxObject_new1(other))
         }
     }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        Object(ptr)
+    }
     pub fn none() -> Option<&'static Self> {
         None
     }
@@ -157,13 +160,11 @@ wx_class! { Event(wxEvent) impl
 }
 impl Event {
     // NOT_SUPPORTED: fn wxEvent()
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        Event(ptr)
+    }
     pub fn none() -> Option<&'static Self> {
         None
-    }
-}
-impl Drop for Event {
-    fn drop(&mut self) {
-        unsafe { ffi::wxObject_delete(self.0) }
     }
 }
 pub trait EventMethods: ObjectMethods {
@@ -228,6 +229,9 @@ wx_class! { EvtHandler(wxEvtHandler) impl
 impl EvtHandler {
     pub fn new() -> EvtHandler {
         unsafe { EvtHandler(ffi::wxEvtHandler_new()) }
+    }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        EvtHandler(ptr)
     }
     pub fn none() -> Option<&'static Self> {
         None

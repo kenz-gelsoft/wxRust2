@@ -1,6 +1,6 @@
 #![windows_subsystem = "windows"]
 
-use std::os::raw::{c_int, c_void};
+use std::os::raw::c_int;
 use wx_base::*;
 use wx;
 use wx::*;
@@ -23,18 +23,24 @@ fn main() {
         menu_bar.append(Some(&help_menu), "&Help");
 
         frame.set_menu_bar(Some(&menu_bar));
-        // let button = Button::new1(Some(&frame), wxID_ANY, "Greet",
-        //         &Point::default(), &Size::default(), 0,
-        //         &Validator::default(), "");
-        // let i = 3;
-        // println!("i={}", i);
-        // let button_copy = button.clone();
-        frame.bind(wxRUST_EVT_MENU, move |arg: *mut c_void| {
-            // println!("i={}", i);
-            // button_copy.set_label("clicked");
-            // println!("s={}", button_copy.get_label())
+        let frame_copy = frame.clone();
+        frame.bind(wxRUST_EVT_MENU, move |event: &Event| {
+            println!("event={}", event.get_id());
+            match event.get_id() {
+                MINIMAL_QUIT => {
+                    frame_copy.close(true);
+                },
+                MINIMAL_ABOUT => {
+                    message_box(
+                        "Message",
+                        "About wxRust minmimal sample",
+                        (wxOK | wxICON_INFORMATION as i64).try_into().unwrap(),
+                        Some(&frame_copy),
+                    )
+                },
+                _ => (),
+            };
         });
-        // frame.centre(wxBOTH);
         frame.show(true);
     });
 }

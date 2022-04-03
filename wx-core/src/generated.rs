@@ -684,6 +684,9 @@ impl Window {
             Window(ffi::wxWindow_new1(parent, id, pos, size, style, name))
         }
     }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        Window(ptr)
+    }
     pub fn none() -> Option<&'static Self> {
         None
     }
@@ -1788,6 +1791,9 @@ impl Control {
     pub fn new1() -> Control {
         unsafe { Control(ffi::wxControl_new1()) }
     }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        Control(ptr)
+    }
     pub fn none() -> Option<&'static Self> {
         None
     }
@@ -1877,6 +1883,9 @@ impl AnyButton {
     pub fn new() -> AnyButton {
         unsafe { AnyButton(ffi::wxAnyButton_new()) }
     }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        AnyButton(ptr)
+    }
     pub fn none() -> Option<&'static Self> {
         None
     }
@@ -1947,6 +1956,9 @@ impl Button {
             Button(ffi::wxButton_new1(parent, id, label, pos, size, style, validator, name))
         }
     }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        Button(ptr)
+    }
     pub fn none() -> Option<&'static Self> {
         None
     }
@@ -2004,6 +2016,9 @@ impl Menu {
             let title = wx_base::wx_string_from(title);
             Menu(ffi::wxMenu_new2(title, style))
         }
+    }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        Menu(ptr)
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -2258,6 +2273,9 @@ impl MenuBar {
         unsafe { MenuBar(ffi::wxMenuBar_new(style)) }
     }
     // NOT_SUPPORTED: fn wxMenuBar1()
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        MenuBar(ptr)
+    }
     pub fn none() -> Option<&'static Self> {
         None
     }
@@ -2369,6 +2387,9 @@ wx_class! { NonOwnedWindow(wxNonOwnedWindow) impl
     ObjectMethods
 }
 impl NonOwnedWindow {
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        NonOwnedWindow(ptr)
+    }
     pub fn none() -> Option<&'static Self> {
         None
     }
@@ -2406,6 +2427,9 @@ impl TopLevelWindow {
             let name = wx_base::wx_string_from(name);
             TopLevelWindow(ffi::wxTopLevelWindow_new1(parent, id, title, pos, size, style, name))
         }
+    }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        TopLevelWindow(ptr)
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -2570,6 +2594,9 @@ impl Frame {
             Frame(ffi::wxFrame_new1(parent, id, title, pos, size, style, name))
         }
     }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        Frame(ptr)
+    }
     pub fn none() -> Option<&'static Self> {
         None
     }
@@ -2694,6 +2721,9 @@ impl Point {
     pub fn new2(pt: *const c_void) -> Point {
         unsafe { Point(ffi::wxPoint_new2(pt)) }
     }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        Point(ptr)
+    }
     pub fn none() -> Option<&'static Self> {
         None
     }
@@ -2763,6 +2793,9 @@ impl Rect {
             let size = size.as_ptr();
             Rect(ffi::wxRect_new4(size))
         }
+    }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        Rect(ptr)
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -2967,6 +3000,9 @@ impl Size {
     pub fn new1(width: c_int, height: c_int) -> Size {
         unsafe { Size(ffi::wxSize_new1(width, height)) }
     }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        Size(ptr)
+    }
     pub fn none() -> Option<&'static Self> {
         None
     }
@@ -3079,6 +3115,9 @@ wx_class! { Validator(wxValidator) impl
 impl Validator {
     pub fn new() -> Validator {
         unsafe { Validator(ffi::wxValidator_new()) }
+    }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        Validator(ptr)
     }
     pub fn none() -> Option<&'static Self> {
         None

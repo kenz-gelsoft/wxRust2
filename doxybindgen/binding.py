@@ -54,18 +54,23 @@ class RustClassBinding:
             )
 
     def _impl_with_ctors(self):
-        yield 'impl %s {' % (self.__model.unprefixed(),)
+        unprefixed = self.__model.unprefixed()
+        yield 'impl %s {' % (unprefixed,)
         for ctor in self._ctors():
             for line in ctor.lines():
                 yield '    %s' % (line,)
+        yield "    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {"
+        yield '        %s(ptr)' % (unprefixed,)
+        yield '    }'
         yield "    pub fn none() -> Option<&'static Self> {"
         yield '        None'
         yield '    }'
         yield '}'
     
     def _impl_drop_if_needed(self):
-        if self.__model.manager.is_a(self.__model, 'wxEvtHandler'):
-            return
+        for cls in ['wxEvtHandler', 'wxEvent']:
+            if self.__model.manager.is_a(self.__model, cls):
+                return
         deleter_class = self.__model.name
         if self.__model.manager.is_a(self.__model, 'wxObject'):
             deleter_class = 'wxObject'
