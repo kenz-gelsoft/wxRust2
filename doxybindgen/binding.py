@@ -68,9 +68,8 @@ class RustClassBinding:
         yield '}'
     
     def _impl_drop_if_needed(self):
-        for cls in ['wxEvtHandler', 'wxEvent']:
-            if self.__model.manager.is_a(self.__model, cls):
-                return
+        if self.__model.manager.is_a(self.__model, 'wxEvtHandler'):
+            return
         deleter_class = self.__model.name
         if self.__model.manager.is_a(self.__model, 'wxObject'):
             deleter_class = 'wxObject'

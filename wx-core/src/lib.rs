@@ -1,4 +1,4 @@
-use std::os::raw::{c_int, c_long};
+use std::os::raw::c_int;
 use std::ptr;
 
 mod generated;

@@ -167,6 +167,11 @@ impl Event {
         None
     }
 }
+impl Drop for Event {
+    fn drop(&mut self) {
+        unsafe { ffi::wxObject_delete(self.0) }
+    }
+}
 pub trait EventMethods: ObjectMethods {
     fn clone(&self) -> *mut c_void {
         unsafe { ffi::wxEvent_Clone(self.as_ptr()) }
