@@ -10,7 +10,7 @@ const MINIMAL_ABOUT: c_int = wxID_ABOUT;
 
 fn main() {
     wx_base::App::run(|_| {
-        let frame = Frame::new1(Window::none(), wxID_ANY, "Minimal wxWidgets App", 
+        let frame = Frame::new1(Window::none(), wxID_ANY, "Minimal wxRust App", 
                 &Point::default(), &Size::default(),
                 wxDEFAULT_FRAME_STYLE, "");
         let file_menu = Menu::new();
@@ -41,6 +41,9 @@ fn main() {
                 _ => (),
             };
         });
+
+        frame.create_status_bar(2, wxSTB_DEFAULT_STYLE, 0, "statusBar");
+        frame.set_status_text("Welcome to wxRust!", 0);
         frame.show(true);
     });
 }
