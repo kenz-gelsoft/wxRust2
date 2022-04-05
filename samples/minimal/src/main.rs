@@ -1,6 +1,6 @@
 #![windows_subsystem = "windows"]
 
-use std::os::raw::c_int;
+use std::os::raw::{c_int, c_long};
 use wx_base::*;
 use wx;
 use wx::*;
@@ -34,7 +34,7 @@ fn main() {
                     message_box(
                         "Message",
                         "About wxRust minmimal sample",
-                        (wxOK | wxICON_INFORMATION as c_int).try_into().unwrap(),
+                        (wxOK | wxICON_INFORMATION as c_long).try_into().unwrap(),
                         Some(&frame_copy),
                     )
                 },
