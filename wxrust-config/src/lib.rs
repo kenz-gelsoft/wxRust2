@@ -63,7 +63,8 @@ fn wx_config(args: &[&str]) -> String {
 fn wx_config_win(args: &[&str]) -> String {
     let wxwin = env::var("wxwin")
         .expect("Set 'wxwin' environment variable to point the wxMSW binaries dir.");
-    let is_debug = env::var("PROFILE").unwrap() == "debug";
+    // TODO: support linking with the wx debug DLL
+    let is_debug = false;//env::var("PROFILE").unwrap() == "debug";
     let d_or_not = if is_debug { "d" } else { "" };
     if args.contains(&"--cflags") {
         let mut cflags = vec![

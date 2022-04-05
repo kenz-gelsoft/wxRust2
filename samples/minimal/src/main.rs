@@ -34,7 +34,7 @@ fn main() {
                     message_box(
                         "Message",
                         "About wxRust minmimal sample",
-                        (wxOK | wxICON_INFORMATION as i64).try_into().unwrap(),
+                        (wxOK | wxICON_INFORMATION as c_int).try_into().unwrap(),
                         Some(&frame_copy),
                     )
                 },
