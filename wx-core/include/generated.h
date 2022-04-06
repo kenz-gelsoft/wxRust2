@@ -3,6 +3,21 @@
 
 extern "C" {
 
+// CLASS: wxCommandEvent
+void * wxCommandEvent_GetClientData(const wxCommandEvent * self);
+wxClientData * wxCommandEvent_GetClientObject(const wxCommandEvent * self);
+long wxCommandEvent_GetExtraLong(const wxCommandEvent * self);
+int wxCommandEvent_GetInt(const wxCommandEvent * self);
+int wxCommandEvent_GetSelection(const wxCommandEvent * self);
+wxString *wxCommandEvent_GetString(const wxCommandEvent * self);
+bool wxCommandEvent_IsChecked(const wxCommandEvent * self);
+bool wxCommandEvent_IsSelection(const wxCommandEvent * self);
+void wxCommandEvent_SetClientData(wxCommandEvent * self, void * client_data);
+void wxCommandEvent_SetClientObject(wxCommandEvent * self, wxClientData * client_object);
+void wxCommandEvent_SetExtraLong(wxCommandEvent * self, long extra_long);
+void wxCommandEvent_SetInt(wxCommandEvent * self, int int_command);
+void wxCommandEvent_SetString(wxCommandEvent * self, const wxString * string);
+
 // CLASS: wxWindow
 bool wxWindow_AcceptsFocus(const wxWindow * self);
 bool wxWindow_AcceptsFocusFromKeyboard(const wxWindow * self);

@@ -2,6 +2,47 @@
 
 extern "C" {
 
+// CLASS: wxCommandEvent
+void * wxCommandEvent_GetClientData(const wxCommandEvent * self) {
+    return self->GetClientData();
+}
+wxClientData * wxCommandEvent_GetClientObject(const wxCommandEvent * self) {
+    return self->GetClientObject();
+}
+long wxCommandEvent_GetExtraLong(const wxCommandEvent * self) {
+    return self->GetExtraLong();
+}
+int wxCommandEvent_GetInt(const wxCommandEvent * self) {
+    return self->GetInt();
+}
+int wxCommandEvent_GetSelection(const wxCommandEvent * self) {
+    return self->GetSelection();
+}
+wxString *wxCommandEvent_GetString(const wxCommandEvent * self) {
+    return new wxString(self->GetString());
+}
+bool wxCommandEvent_IsChecked(const wxCommandEvent * self) {
+    return self->IsChecked();
+}
+bool wxCommandEvent_IsSelection(const wxCommandEvent * self) {
+    return self->IsSelection();
+}
+void wxCommandEvent_SetClientData(wxCommandEvent * self, void * client_data) {
+    return self->SetClientData(client_data);
+}
+void wxCommandEvent_SetClientObject(wxCommandEvent * self, wxClientData * client_object) {
+    return self->SetClientObject(client_object);
+}
+void wxCommandEvent_SetExtraLong(wxCommandEvent * self, long extra_long) {
+    return self->SetExtraLong(extra_long);
+}
+void wxCommandEvent_SetInt(wxCommandEvent * self, int int_command) {
+    return self->SetInt(int_command);
+}
+void wxCommandEvent_SetString(wxCommandEvent * self, const wxString * string) {
+    return self->SetString(*string);
+}
+
 // CLASS: wxWindow
 bool wxWindow_AcceptsFocus(const wxWindow * self) {
     return self->AcceptsFocus();

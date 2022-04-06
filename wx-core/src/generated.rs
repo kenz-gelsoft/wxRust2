@@ -13,6 +13,22 @@ mod ffi {
     pub use crate::ffi::*;
     extern "C" {
 
+        // wxCommandEvent
+        // NOT_SUPPORTED: pub fn wxCommandEvent_new(command_event_type: wxEventType, id: c_int) -> *mut c_void;
+        pub fn wxCommandEvent_GetClientData(self_: *const c_void) -> *mut c_void;
+        pub fn wxCommandEvent_GetClientObject(self_: *const c_void) -> *mut c_void;
+        pub fn wxCommandEvent_GetExtraLong(self_: *const c_void) -> c_long;
+        pub fn wxCommandEvent_GetInt(self_: *const c_void) -> c_int;
+        pub fn wxCommandEvent_GetSelection(self_: *const c_void) -> c_int;
+        pub fn wxCommandEvent_GetString(self_: *const c_void) -> *mut c_void;
+        pub fn wxCommandEvent_IsChecked(self_: *const c_void) -> bool;
+        pub fn wxCommandEvent_IsSelection(self_: *const c_void) -> bool;
+        pub fn wxCommandEvent_SetClientData(self_: *mut c_void, client_data: *mut c_void);
+        pub fn wxCommandEvent_SetClientObject(self_: *mut c_void, client_object: *mut c_void);
+        pub fn wxCommandEvent_SetExtraLong(self_: *mut c_void, extra_long: c_long);
+        pub fn wxCommandEvent_SetInt(self_: *mut c_void, int_command: c_int);
+        pub fn wxCommandEvent_SetString(self_: *mut c_void, string: *const c_void);
+        
         // wxWindow
         pub fn wxWindow_AcceptsFocus(self_: *const c_void) -> bool;
         pub fn wxWindow_AcceptsFocusFromKeyboard(self_: *const c_void) -> bool;
@@ -660,6 +676,73 @@ mod ffi {
         pub fn wxValidator_SuppressBellOnError(suppress: bool);
         pub fn wxValidator_IsSilent() -> bool;
         
+    }
+}
+
+// wxCommandEvent
+wx_class! { CommandEvent(wxCommandEvent) impl
+    CommandEventMethods,
+    EventMethods,
+    ObjectMethods
+}
+impl CommandEvent {
+    // NOT_SUPPORTED: fn wxCommandEvent()
+    pub unsafe fn with_ptr<F: Fn(&CommandEvent)>(ptr: *mut c_void, closure: F) {
+        let tmp = CommandEvent(ptr);
+        closure(&tmp);
+        mem::forget(tmp);
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl Drop for CommandEvent {
+    fn drop(&mut self) {
+        unsafe { ffi::wxObject_delete(self.0) }
+    }
+}
+pub trait CommandEventMethods: EventMethods {
+    fn get_client_data(&self) -> *mut c_void {
+        unsafe { ffi::wxCommandEvent_GetClientData(self.as_ptr()) }
+    }
+    fn get_client_object(&self) -> *mut c_void {
+        unsafe { ffi::wxCommandEvent_GetClientObject(self.as_ptr()) }
+    }
+    fn get_extra_long(&self) -> c_long {
+        unsafe { ffi::wxCommandEvent_GetExtraLong(self.as_ptr()) }
+    }
+    fn get_int(&self) -> c_int {
+        unsafe { ffi::wxCommandEvent_GetInt(self.as_ptr()) }
+    }
+    fn get_selection(&self) -> c_int {
+        unsafe { ffi::wxCommandEvent_GetSelection(self.as_ptr()) }
+    }
+    fn get_string(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxCommandEvent_GetString(self.as_ptr())) }
+    }
+    fn is_checked(&self) -> bool {
+        unsafe { ffi::wxCommandEvent_IsChecked(self.as_ptr()) }
+    }
+    fn is_selection(&self) -> bool {
+        unsafe { ffi::wxCommandEvent_IsSelection(self.as_ptr()) }
+    }
+    fn set_client_data(&self, client_data: *mut c_void) {
+        unsafe { ffi::wxCommandEvent_SetClientData(self.as_ptr(), client_data) }
+    }
+    fn set_client_object(&self, client_object: *mut c_void) {
+        unsafe { ffi::wxCommandEvent_SetClientObject(self.as_ptr(), client_object) }
+    }
+    fn set_extra_long(&self, extra_long: c_long) {
+        unsafe { ffi::wxCommandEvent_SetExtraLong(self.as_ptr(), extra_long) }
+    }
+    fn set_int(&self, int_command: c_int) {
+        unsafe { ffi::wxCommandEvent_SetInt(self.as_ptr(), int_command) }
+    }
+    fn set_string(&self, string: &str) {
+        unsafe {
+            let string = wx_base::wx_string_from(string);
+            ffi::wxCommandEvent_SetString(self.as_ptr(), string)
+        }
     }
 }
 
