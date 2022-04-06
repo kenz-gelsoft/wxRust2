@@ -9,6 +9,7 @@ CXX2RUST = {
     'wxByte': 'c_uchar',
     'wxCoord': 'c_int',
     'wxEllipsizeMode': 'c_int',
+    'wxItemKind': 'c_int',
     'wxWindowID': 'c_int',
 }
 CXX_PRIMITIVES = [

@@ -2,6 +2,47 @@
 
 extern "C" {
 
+// CLASS: wxCommandEvent
+void * wxCommandEvent_GetClientData(const wxCommandEvent * self) {
+    return self->GetClientData();
+}
+wxClientData * wxCommandEvent_GetClientObject(const wxCommandEvent * self) {
+    return self->GetClientObject();
+}
+long wxCommandEvent_GetExtraLong(const wxCommandEvent * self) {
+    return self->GetExtraLong();
+}
+int wxCommandEvent_GetInt(const wxCommandEvent * self) {
+    return self->GetInt();
+}
+int wxCommandEvent_GetSelection(const wxCommandEvent * self) {
+    return self->GetSelection();
+}
+wxString *wxCommandEvent_GetString(const wxCommandEvent * self) {
+    return new wxString(self->GetString());
+}
+bool wxCommandEvent_IsChecked(const wxCommandEvent * self) {
+    return self->IsChecked();
+}
+bool wxCommandEvent_IsSelection(const wxCommandEvent * self) {
+    return self->IsSelection();
+}
+void wxCommandEvent_SetClientData(wxCommandEvent * self, void * client_data) {
+    return self->SetClientData(client_data);
+}
+void wxCommandEvent_SetClientObject(wxCommandEvent * self, wxClientData * client_object) {
+    return self->SetClientObject(client_object);
+}
+void wxCommandEvent_SetExtraLong(wxCommandEvent * self, long extra_long) {
+    return self->SetExtraLong(extra_long);
+}
+void wxCommandEvent_SetInt(wxCommandEvent * self, int int_command) {
+    return self->SetInt(int_command);
+}
+void wxCommandEvent_SetString(wxCommandEvent * self, const wxString * string) {
+    return self->SetString(*string);
+}
+
 // CLASS: wxWindow
 bool wxWindow_AcceptsFocus(const wxWindow * self) {
     return self->AcceptsFocus();
@@ -918,6 +959,202 @@ wxSize *wxButton_GetDefaultSize(wxWindow * win) {
     return new wxSize(wxButton::GetDefaultSize(win));
 }
 #endif
+
+// CLASS: wxMenu
+wxMenu *wxMenu_new() {
+    return new wxMenu();
+}
+wxMenu *wxMenu_new1(long style) {
+    return new wxMenu(style);
+}
+wxMenu *wxMenu_new2(const wxString * title, long style) {
+    return new wxMenu(*title, style);
+}
+wxMenuItem * wxMenu_Append(wxMenu * self, int id, const wxString * item, const wxString * help_string, wxItemKind kind) {
+    return self->Append(id, *item, *help_string, kind);
+}
+wxMenuItem * wxMenu_Append1(wxMenu * self, int id, const wxString * item, wxMenu * sub_menu, const wxString * help_string) {
+    return self->Append(id, *item, sub_menu, *help_string);
+}
+wxMenuItem * wxMenu_Append2(wxMenu * self, wxMenuItem * menu_item) {
+    return self->Append(menu_item);
+}
+wxMenuItem * wxMenu_AppendCheckItem(wxMenu * self, int id, const wxString * item, const wxString * help) {
+    return self->AppendCheckItem(id, *item, *help);
+}
+wxMenuItem * wxMenu_AppendRadioItem(wxMenu * self, int id, const wxString * item, const wxString * help) {
+    return self->AppendRadioItem(id, *item, *help);
+}
+wxMenuItem * wxMenu_AppendSeparator(wxMenu * self) {
+    return self->AppendSeparator();
+}
+wxMenuItem * wxMenu_AppendSubMenu(wxMenu * self, wxMenu * submenu, const wxString * text, const wxString * help) {
+    return self->AppendSubMenu(submenu, *text, *help);
+}
+void wxMenu_Break(wxMenu * self) {
+    return self->Break();
+}
+void wxMenu_Check(wxMenu * self, int id, bool check) {
+    return self->Check(id, check);
+}
+bool wxMenu_Delete(wxMenu * self, int id) {
+    return self->Delete(id);
+}
+bool wxMenu_Delete1(wxMenu * self, wxMenuItem * item) {
+    return self->Delete(item);
+}
+bool wxMenu_Destroy(wxMenu * self, int id) {
+    return self->Destroy(id);
+}
+bool wxMenu_Destroy1(wxMenu * self, wxMenuItem * item) {
+    return self->Destroy(item);
+}
+void wxMenu_Enable(wxMenu * self, int id, bool enable) {
+    return self->Enable(id, enable);
+}
+wxMenuItem * wxMenu_FindChildItem(const wxMenu * self, int id, size_t * pos) {
+    return self->FindChildItem(id, pos);
+}
+int wxMenu_FindItem(const wxMenu * self, const wxString * item_string) {
+    return self->FindItem(*item_string);
+}
+wxMenuItem * wxMenu_FindItem1(const wxMenu * self, int id, wxMenu ** menu) {
+    return self->FindItem(id, menu);
+}
+wxString *wxMenu_GetHelpString(const wxMenu * self, int id) {
+    return new wxString(self->GetHelpString(id));
+}
+wxString *wxMenu_GetLabel(const wxMenu * self, int id) {
+    return new wxString(self->GetLabel(id));
+}
+wxString *wxMenu_GetLabelText(const wxMenu * self, int id) {
+    return new wxString(self->GetLabelText(id));
+}
+wxString *wxMenu_GetTitle(const wxMenu * self) {
+    return new wxString(self->GetTitle());
+}
+bool wxMenu_IsChecked(const wxMenu * self, int id) {
+    return self->IsChecked(id);
+}
+bool wxMenu_IsEnabled(const wxMenu * self, int id) {
+    return self->IsEnabled(id);
+}
+wxMenuItem * wxMenu_Prepend(wxMenu * self, wxMenuItem * item) {
+    return self->Prepend(item);
+}
+wxMenuItem * wxMenu_Prepend1(wxMenu * self, int id, const wxString * item, const wxString * help_string, wxItemKind kind) {
+    return self->Prepend(id, *item, *help_string, kind);
+}
+wxMenuItem * wxMenu_Prepend2(wxMenu * self, int id, const wxString * text, wxMenu * submenu, const wxString * help) {
+    return self->Prepend(id, *text, submenu, *help);
+}
+wxMenuItem * wxMenu_PrependCheckItem(wxMenu * self, int id, const wxString * item, const wxString * help_string) {
+    return self->PrependCheckItem(id, *item, *help_string);
+}
+wxMenuItem * wxMenu_PrependRadioItem(wxMenu * self, int id, const wxString * item, const wxString * help_string) {
+    return self->PrependRadioItem(id, *item, *help_string);
+}
+wxMenuItem * wxMenu_PrependSeparator(wxMenu * self) {
+    return self->PrependSeparator();
+}
+wxMenuItem * wxMenu_Remove(wxMenu * self, int id) {
+    return self->Remove(id);
+}
+wxMenuItem * wxMenu_Remove1(wxMenu * self, wxMenuItem * item) {
+    return self->Remove(item);
+}
+void wxMenu_SetHelpString(wxMenu * self, int id, const wxString * help_string) {
+    return self->SetHelpString(id, *help_string);
+}
+void wxMenu_SetLabel(wxMenu * self, int id, const wxString * label) {
+    return self->SetLabel(id, *label);
+}
+void wxMenu_SetTitle(wxMenu * self, const wxString * title) {
+    return self->SetTitle(*title);
+}
+void wxMenu_UpdateUI(wxMenu * self, wxEvtHandler * source) {
+    return self->UpdateUI(source);
+}
+void wxMenu_SetInvokingWindow(wxMenu * self, wxWindow * win) {
+    return self->SetInvokingWindow(win);
+}
+wxWindow * wxMenu_GetInvokingWindow(const wxMenu * self) {
+    return self->GetInvokingWindow();
+}
+wxWindow * wxMenu_GetWindow(const wxMenu * self) {
+    return self->GetWindow();
+}
+long wxMenu_GetStyle(const wxMenu * self) {
+    return self->GetStyle();
+}
+void wxMenu_SetParent(wxMenu * self, wxMenu * parent) {
+    return self->SetParent(parent);
+}
+wxMenu * wxMenu_GetParent(const wxMenu * self) {
+    return self->GetParent();
+}
+void wxMenu_Attach(wxMenu * self, wxMenuBar * menubar) {
+    return self->Attach(menubar);
+}
+void wxMenu_Detach(wxMenu * self) {
+    return self->Detach();
+}
+bool wxMenu_IsAttached(const wxMenu * self) {
+    return self->IsAttached();
+}
+
+// CLASS: wxMenuBar
+wxMenuBar *wxMenuBar_new(long style) {
+    return new wxMenuBar(style);
+}
+bool wxMenuBar_Append(wxMenuBar * self, wxMenu * menu, const wxString * title) {
+    return self->Append(menu, *title);
+}
+void wxMenuBar_Check(wxMenuBar * self, int id, bool check) {
+    return self->Check(id, check);
+}
+void wxMenuBar_Enable(wxMenuBar * self, int id, bool enable) {
+    return self->Enable(id, enable);
+}
+wxMenuItem * wxMenuBar_FindItem(const wxMenuBar * self, int id, wxMenu ** menu) {
+    return self->FindItem(id, menu);
+}
+int wxMenuBar_FindMenu(const wxMenuBar * self, const wxString * title) {
+    return self->FindMenu(*title);
+}
+int wxMenuBar_FindMenuItem(const wxMenuBar * self, const wxString * menu_string, const wxString * item_string) {
+    return self->FindMenuItem(*menu_string, *item_string);
+}
+wxString *wxMenuBar_GetHelpString(const wxMenuBar * self, int id) {
+    return new wxString(self->GetHelpString(id));
+}
+wxString *wxMenuBar_GetLabel(const wxMenuBar * self, int id) {
+    return new wxString(self->GetLabel(id));
+}
+bool wxMenuBar_IsChecked(const wxMenuBar * self, int id) {
+    return self->IsChecked(id);
+}
+bool wxMenuBar_IsEnabled(const wxMenuBar * self, int id) {
+    return self->IsEnabled(id);
+}
+void wxMenuBar_SetHelpString(wxMenuBar * self, int id, const wxString * help_string) {
+    return self->SetHelpString(id, *help_string);
+}
+void wxMenuBar_SetLabel(wxMenuBar * self, int id, const wxString * label) {
+    return self->SetLabel(id, *label);
+}
+wxFrame * wxMenuBar_GetFrame(const wxMenuBar * self) {
+    return self->GetFrame();
+}
+bool wxMenuBar_IsAttached(const wxMenuBar * self) {
+    return self->IsAttached();
+}
+void wxMenuBar_Attach(wxMenuBar * self, wxFrame * frame) {
+    return self->Attach(frame);
+}
+void wxMenuBar_Detach(wxMenuBar * self) {
+    return self->Detach();
+}
 
 // CLASS: wxNonOwnedWindow
 bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow * self, const wxRegion * region) {

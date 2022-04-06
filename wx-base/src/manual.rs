@@ -7,6 +7,7 @@ use std::os::raw::c_long;
 
 // TODO auto generate
 pub const wxRUST_EVT_BUTTON: i32 = 0;
+pub const wxRUST_EVT_MENU: i32 = 1;
 
 pub const fn wxPG_IT_CHILDREN(A: c_long) -> c_long {
     (A) << 16

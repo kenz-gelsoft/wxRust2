@@ -34,6 +34,50 @@ void wxObject_UnShare(wxObject * self) {
     return self->UnShare();
 }
 
+// CLASS: wxEvent
+wxEvent * wxEvent_Clone(const wxEvent * self) {
+    return self->Clone();
+}
+wxObject * wxEvent_GetEventObject(const wxEvent * self) {
+    return self->GetEventObject();
+}
+int wxEvent_GetId(const wxEvent * self) {
+    return self->GetId();
+}
+wxObject * wxEvent_GetEventUserData(const wxEvent * self) {
+    return self->GetEventUserData();
+}
+bool wxEvent_GetSkipped(const wxEvent * self) {
+    return self->GetSkipped();
+}
+long wxEvent_GetTimestamp(const wxEvent * self) {
+    return self->GetTimestamp();
+}
+bool wxEvent_IsCommandEvent(const wxEvent * self) {
+    return self->IsCommandEvent();
+}
+void wxEvent_ResumePropagation(wxEvent * self, int propagation_level) {
+    return self->ResumePropagation(propagation_level);
+}
+void wxEvent_SetEventObject(wxEvent * self, wxObject * object) {
+    return self->SetEventObject(object);
+}
+void wxEvent_SetId(wxEvent * self, int id) {
+    return self->SetId(id);
+}
+void wxEvent_SetTimestamp(wxEvent * self, long time_stamp) {
+    return self->SetTimestamp(time_stamp);
+}
+bool wxEvent_ShouldPropagate(const wxEvent * self) {
+    return self->ShouldPropagate();
+}
+void wxEvent_Skip(wxEvent * self, bool skip) {
+    return self->Skip(skip);
+}
+int wxEvent_StopPropagation(wxEvent * self) {
+    return self->StopPropagation();
+}
+
 // CLASS: wxEvtHandler
 void wxEvtHandler_QueueEvent(wxEvtHandler * self, wxEvent * event) {
     return self->QueueEvent(event);

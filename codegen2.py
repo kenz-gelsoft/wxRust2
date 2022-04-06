@@ -44,11 +44,12 @@ def generated_rs(classes, config, libname):
 #![allow(non_upper_case_globals)]
 #![allow(unused_parens)]
 
+use std::mem;
 use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
 use std::ptr;
 '''
     if libname == 'base':
-        yield 'use crate::wx_class;'
+        yield 'use crate::{WithPtr, wx_class};'
     else:
         yield 'use wx_base::*;'
     yield '''\

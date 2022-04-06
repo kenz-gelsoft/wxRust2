@@ -2,6 +2,7 @@ from .model import Param, RustType, prefixed, pascal_to_snake
 
 # Known, and problematic
 RUST_KEYWORDS = [
+    'break',
     'move',
     'ref',
     'type',
@@ -53,7 +54,8 @@ class RustClassBinding:
             )
 
     def _impl_with_ctors(self):
-        yield 'impl %s {' % (self.__model.unprefixed(),)
+        unprefixed = self.__model.unprefixed()
+        yield 'impl %s {' % (unprefixed,)
         for ctor in self._ctors():
             for line in ctor.lines():
                 yield '    %s' % (line,)
@@ -61,9 +63,16 @@ class RustClassBinding:
         yield '        None'
         yield '    }'
         yield '}'
+        yield 'impl WithPtr<%s> for %s {' % (unprefixed, unprefixed)
+        yield "    unsafe fn with_ptr<F: Fn(&%s)>(ptr: *mut c_void, closure: F) {" % (unprefixed,)
+        yield '        let tmp = %s(ptr);' % (unprefixed,)
+        yield '        closure(&tmp);'
+        yield '        mem::forget(tmp);'
+        yield '    }'
+        yield '}'
     
     def _impl_drop_if_needed(self):
-        if self.__model.manager.is_a(self.__model, 'wxWindow'):
+        if self.__model.manager.is_a(self.__model, 'wxEvtHandler'):
             return
         deleter_class = self.__model.name
         if self.__model.manager.is_a(self.__model, 'wxObject'):

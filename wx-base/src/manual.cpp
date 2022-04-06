@@ -22,6 +22,8 @@ wxEventTypeTag<wxCommandEvent> TypeTagOf(int eventType) {
     switch (eventType) {
     case wxRUST_EVT_BUTTON:
         return wxEVT_BUTTON;
+    case wxRUST_EVT_MENU:
+        return wxEVT_MENU;
     }
     return wxEVT_NULL;
 }
