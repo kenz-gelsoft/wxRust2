@@ -12,15 +12,17 @@ fn main() {
     wx_base::App::run(|_| {
         let frame = MyFrame::new("Minimal wxRust App");
         let frame_copy = frame.clone();
-        frame.0.bind(wxRUST_EVT_MENU, move |event: &Event| {
+        frame.base.bind(wxRUST_EVT_MENU, move |event: &Event| {
             frame_copy.handle_menu(event)
         });
-        frame.0.show(true);
+        frame.base.show(true);
     });
 }
 
 #[derive(Clone)]
-struct MyFrame(Frame);
+struct MyFrame {
+    base: Frame,
+}
 impl MyFrame {
     fn new(title: &str) -> Self {
         let frame = Frame::new1(Window::none(), wxID_ANY, title, 
@@ -39,7 +41,9 @@ impl MyFrame {
 
         frame.create_status_bar(2, wxSTB_DEFAULT_STYLE, 0, "statusBar");
         frame.set_status_text("Welcome to wxRust!", 0);
-        MyFrame(frame)
+        MyFrame {
+            base: frame,
+        }
     }
 
     fn handle_menu(&self, event: &Event) {
@@ -52,15 +56,15 @@ impl MyFrame {
     }
 
     fn on_quit(&self) {
-        self.0.close(true);
+        self.base.close(true);
     }
     
     fn on_about(&self) {
         message_box(
             "Message",
-            "About wxRust minmimal sample",
+            "About wxRust minimal sample",
             (wxOK | wxICON_INFORMATION as c_long).try_into().unwrap(),
-            Some(&self.0),
+            Some(&self.base),
         )
     }
 }
