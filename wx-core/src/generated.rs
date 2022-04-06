@@ -2,6 +2,7 @@
 #![allow(non_upper_case_globals)]
 #![allow(unused_parens)]
 
+use std::mem;
 use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
 use std::ptr;
 
@@ -684,8 +685,10 @@ impl Window {
             Window(ffi::wxWindow_new1(parent, id, pos, size, style, name))
         }
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        Window(ptr)
+    pub unsafe fn with_ptr<F: Fn(&Window)>(ptr: *mut c_void, closure: F) {
+        let tmp = Window(ptr);
+        closure(&tmp);
+        mem::forget(tmp);
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -1791,8 +1794,10 @@ impl Control {
     pub fn new1() -> Control {
         unsafe { Control(ffi::wxControl_new1()) }
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        Control(ptr)
+    pub unsafe fn with_ptr<F: Fn(&Control)>(ptr: *mut c_void, closure: F) {
+        let tmp = Control(ptr);
+        closure(&tmp);
+        mem::forget(tmp);
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -1883,8 +1888,10 @@ impl AnyButton {
     pub fn new() -> AnyButton {
         unsafe { AnyButton(ffi::wxAnyButton_new()) }
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        AnyButton(ptr)
+    pub unsafe fn with_ptr<F: Fn(&AnyButton)>(ptr: *mut c_void, closure: F) {
+        let tmp = AnyButton(ptr);
+        closure(&tmp);
+        mem::forget(tmp);
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -1956,8 +1963,10 @@ impl Button {
             Button(ffi::wxButton_new1(parent, id, label, pos, size, style, validator, name))
         }
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        Button(ptr)
+    pub unsafe fn with_ptr<F: Fn(&Button)>(ptr: *mut c_void, closure: F) {
+        let tmp = Button(ptr);
+        closure(&tmp);
+        mem::forget(tmp);
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -2017,8 +2026,10 @@ impl Menu {
             Menu(ffi::wxMenu_new2(title, style))
         }
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        Menu(ptr)
+    pub unsafe fn with_ptr<F: Fn(&Menu)>(ptr: *mut c_void, closure: F) {
+        let tmp = Menu(ptr);
+        closure(&tmp);
+        mem::forget(tmp);
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -2273,8 +2284,10 @@ impl MenuBar {
         unsafe { MenuBar(ffi::wxMenuBar_new(style)) }
     }
     // NOT_SUPPORTED: fn wxMenuBar1()
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        MenuBar(ptr)
+    pub unsafe fn with_ptr<F: Fn(&MenuBar)>(ptr: *mut c_void, closure: F) {
+        let tmp = MenuBar(ptr);
+        closure(&tmp);
+        mem::forget(tmp);
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -2387,8 +2400,10 @@ wx_class! { NonOwnedWindow(wxNonOwnedWindow) impl
     ObjectMethods
 }
 impl NonOwnedWindow {
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        NonOwnedWindow(ptr)
+    pub unsafe fn with_ptr<F: Fn(&NonOwnedWindow)>(ptr: *mut c_void, closure: F) {
+        let tmp = NonOwnedWindow(ptr);
+        closure(&tmp);
+        mem::forget(tmp);
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -2428,8 +2443,10 @@ impl TopLevelWindow {
             TopLevelWindow(ffi::wxTopLevelWindow_new1(parent, id, title, pos, size, style, name))
         }
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        TopLevelWindow(ptr)
+    pub unsafe fn with_ptr<F: Fn(&TopLevelWindow)>(ptr: *mut c_void, closure: F) {
+        let tmp = TopLevelWindow(ptr);
+        closure(&tmp);
+        mem::forget(tmp);
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -2594,8 +2611,10 @@ impl Frame {
             Frame(ffi::wxFrame_new1(parent, id, title, pos, size, style, name))
         }
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        Frame(ptr)
+    pub unsafe fn with_ptr<F: Fn(&Frame)>(ptr: *mut c_void, closure: F) {
+        let tmp = Frame(ptr);
+        closure(&tmp);
+        mem::forget(tmp);
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -2721,8 +2740,10 @@ impl Point {
     pub fn new2(pt: *const c_void) -> Point {
         unsafe { Point(ffi::wxPoint_new2(pt)) }
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        Point(ptr)
+    pub unsafe fn with_ptr<F: Fn(&Point)>(ptr: *mut c_void, closure: F) {
+        let tmp = Point(ptr);
+        closure(&tmp);
+        mem::forget(tmp);
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -2794,8 +2815,10 @@ impl Rect {
             Rect(ffi::wxRect_new4(size))
         }
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        Rect(ptr)
+    pub unsafe fn with_ptr<F: Fn(&Rect)>(ptr: *mut c_void, closure: F) {
+        let tmp = Rect(ptr);
+        closure(&tmp);
+        mem::forget(tmp);
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -3000,8 +3023,10 @@ impl Size {
     pub fn new1(width: c_int, height: c_int) -> Size {
         unsafe { Size(ffi::wxSize_new1(width, height)) }
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        Size(ptr)
+    pub unsafe fn with_ptr<F: Fn(&Size)>(ptr: *mut c_void, closure: F) {
+        let tmp = Size(ptr);
+        closure(&tmp);
+        mem::forget(tmp);
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -3116,8 +3141,10 @@ impl Validator {
     pub fn new() -> Validator {
         unsafe { Validator(ffi::wxValidator_new()) }
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        Validator(ptr)
+    pub unsafe fn with_ptr<F: Fn(&Validator)>(ptr: *mut c_void, closure: F) {
+        let tmp = Validator(ptr);
+        closure(&tmp);
+        mem::forget(tmp);
     }
     pub fn none() -> Option<&'static Self> {
         None

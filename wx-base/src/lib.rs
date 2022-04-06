@@ -1,5 +1,4 @@
 use std::convert::TryInto;
-use std::mem;
 use std::os::raw::{c_char, c_int, c_void};
 use std::ptr;
 
@@ -70,9 +69,9 @@ impl<T: EvtHandlerMethods> Bindable for T {
     fn bind<F: Fn(&Event) + 'static>(&self, event_type: c_int, closure: F) {
         unsafe {
             let (f, param) = to_wx_callable(move |arg: *mut c_void| {
-                let event = Event::from_ptr(arg);
-                closure(&event);
-                mem::forget(event);
+                Event::with_ptr(arg, |event| {
+                    closure(event);
+                });
             });
             ffi::wxEvtHandler_Bind(self.as_ptr(), event_type, f, param);
         }

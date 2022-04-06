@@ -2,6 +2,7 @@
 #![allow(non_upper_case_globals)]
 #![allow(unused_parens)]
 
+use std::mem;
 use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
 use std::ptr;
 
@@ -105,8 +106,10 @@ impl Object {
             Object(ffi::wxObject_new1(other))
         }
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        Object(ptr)
+    pub unsafe fn with_ptr<F: Fn(&Object)>(ptr: *mut c_void, closure: F) {
+        let tmp = Object(ptr);
+        closure(&tmp);
+        mem::forget(tmp);
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -160,8 +163,10 @@ wx_class! { Event(wxEvent) impl
 }
 impl Event {
     // NOT_SUPPORTED: fn wxEvent()
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        Event(ptr)
+    pub unsafe fn with_ptr<F: Fn(&Event)>(ptr: *mut c_void, closure: F) {
+        let tmp = Event(ptr);
+        closure(&tmp);
+        mem::forget(tmp);
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -235,8 +240,10 @@ impl EvtHandler {
     pub fn new() -> EvtHandler {
         unsafe { EvtHandler(ffi::wxEvtHandler_new()) }
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        EvtHandler(ptr)
+    pub unsafe fn with_ptr<F: Fn(&EvtHandler)>(ptr: *mut c_void, closure: F) {
+        let tmp = EvtHandler(ptr);
+        closure(&tmp);
+        mem::forget(tmp);
     }
     pub fn none() -> Option<&'static Self> {
         None

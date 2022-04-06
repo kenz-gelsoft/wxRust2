@@ -59,8 +59,10 @@ class RustClassBinding:
         for ctor in self._ctors():
             for line in ctor.lines():
                 yield '    %s' % (line,)
-        yield '    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {'
-        yield '        %s(ptr)' % (unprefixed,)
+        yield "    pub unsafe fn with_ptr<F: Fn(&%s)>(ptr: *mut c_void, closure: F) {" % (unprefixed,)
+        yield '        let tmp = %s(ptr);' % (unprefixed,)
+        yield '        closure(&tmp);'
+        yield '        mem::forget(tmp);'
         yield '    }'
         yield "    pub fn none() -> Option<&'static Self> {"
         yield '        None'
