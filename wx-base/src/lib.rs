@@ -62,14 +62,17 @@ unsafe fn to_wx_callable<F: Fn(*mut c_void) + 'static>(closure: F) -> (*mut c_vo
     )
 }
 
+pub trait WithPtr<E> {
+    unsafe fn with_ptr<F: Fn(&E)>(ptr: *mut c_void, closure: F);
+}
 pub trait Bindable {
-    fn bind<F: Fn(&Event) + 'static>(&self, event_type: c_int, closure: F);
+    fn bind<E: EventMethods + WithPtr<E>, F: Fn(&E) + 'static>(&self, event_type: c_int, closure: F);
 }
 impl<T: EvtHandlerMethods> Bindable for T {
-    fn bind<F: Fn(&Event) + 'static>(&self, event_type: c_int, closure: F) {
+    fn bind<E: EventMethods + WithPtr<E>, F: Fn(&E) + 'static>(&self, event_type: c_int, closure: F) {
         unsafe {
             let (f, param) = to_wx_callable(move |arg: *mut c_void| {
-                Event::with_ptr(arg, |event| {
+                E::with_ptr(arg, |event| {
                     closure(event);
                 });
             });

@@ -12,7 +12,7 @@ fn main() {
     wx_base::App::run(|_| {
         let frame = MyFrame::new("Minimal wxRust App");
         let frame_copy = frame.clone();
-        frame.base.bind(wxRUST_EVT_MENU, move |event: &Event| {
+        frame.base.bind(wxRUST_EVT_MENU, move |event: &CommandEvent| {
             frame_copy.handle_menu(event)
         });
         frame.base.show(true);
@@ -46,7 +46,7 @@ impl MyFrame {
         }
     }
 
-    fn handle_menu(&self, event: &Event) {
+    fn handle_menu(&self, event: &CommandEvent) {
         println!("event={}", event.get_id());
         match event.get_id() {
             MINIMAL_QUIT => self.on_quit(),

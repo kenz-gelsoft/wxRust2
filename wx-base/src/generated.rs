@@ -6,7 +6,7 @@ use std::mem;
 use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
 use std::ptr;
 
-use crate::wx_class;
+use crate::{WithPtr, wx_class};
 
 mod ffi {
     use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
@@ -106,13 +106,15 @@ impl Object {
             Object(ffi::wxObject_new1(other))
         }
     }
-    pub unsafe fn with_ptr<F: Fn(&Object)>(ptr: *mut c_void, closure: F) {
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl WithPtr<Object> for Object {
+    unsafe fn with_ptr<F: Fn(&Object)>(ptr: *mut c_void, closure: F) {
         let tmp = Object(ptr);
         closure(&tmp);
         mem::forget(tmp);
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
     }
 }
 impl Drop for Object {
@@ -163,13 +165,15 @@ wx_class! { Event(wxEvent) impl
 }
 impl Event {
     // NOT_SUPPORTED: fn wxEvent()
-    pub unsafe fn with_ptr<F: Fn(&Event)>(ptr: *mut c_void, closure: F) {
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl WithPtr<Event> for Event {
+    unsafe fn with_ptr<F: Fn(&Event)>(ptr: *mut c_void, closure: F) {
         let tmp = Event(ptr);
         closure(&tmp);
         mem::forget(tmp);
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
     }
 }
 impl Drop for Event {
@@ -240,13 +244,15 @@ impl EvtHandler {
     pub fn new() -> EvtHandler {
         unsafe { EvtHandler(ffi::wxEvtHandler_new()) }
     }
-    pub unsafe fn with_ptr<F: Fn(&EvtHandler)>(ptr: *mut c_void, closure: F) {
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl WithPtr<EvtHandler> for EvtHandler {
+    unsafe fn with_ptr<F: Fn(&EvtHandler)>(ptr: *mut c_void, closure: F) {
         let tmp = EvtHandler(ptr);
         closure(&tmp);
         mem::forget(tmp);
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
     }
 }
 pub trait EvtHandlerMethods: ObjectMethods {
