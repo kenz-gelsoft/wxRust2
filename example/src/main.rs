@@ -15,7 +15,7 @@ fn main() {
         let i = 3;
         println!("i={}", i);
         let button_copy = button.clone();
-        button.bind(wxRUST_EVT_BUTTON, move |_| {
+        button.bind(wxRUST_EVT_BUTTON, move |_: &CommandEvent| {
             println!("i={}", i);
             button_copy.set_label("clicked");
             println!("s={}", button_copy.get_label())
