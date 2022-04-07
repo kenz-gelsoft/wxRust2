@@ -1,0 +1,1308 @@
+- `wxObject.wxObject: wxObject`
+    - `const wxObject&: wxObject1`
+- `wxObject.~wxObject: ~wxObject`
+- `wxObject.GetClassInfo: GetClassInfo`
+- `wxObject.GetRefData: GetRefData`
+- `wxObject.IsKindOf: None`
+    - `const wxClassInfo*: IsKindOf`
+- `wxObject.IsSameAs: None`
+    - `const wxObject&: IsSameAs`
+- `wxObject.Ref: None`
+    - `const wxObject&: Ref`
+- `wxObject.SetRefData: None`
+    - `wxObjectRefData*: SetRefData`
+- `wxObject.UnRef: UnRef`
+- `wxObject.UnShare: UnShare`
+- `wxObject.operator delete: None`
+    - `void*: operator delete`
+- `wxObject.operator new: None`
+    - `size_t: None`
+        - `const wxString&: None`
+            - `int: operator new`
+- `wxEvent.wxEvent: None`
+    - `int: None`
+        - `wxEventType: wxEvent`
+- `wxEvent.Clone: Clone`
+- `wxEvent.GetEventObject: GetEventObject`
+- `wxEvent.GetEventType: GetEventType`
+- `wxEvent.GetEventCategory: GetEventCategory`
+- `wxEvent.GetId: GetId`
+- `wxEvent.GetEventUserData: GetEventUserData`
+- `wxEvent.GetSkipped: GetSkipped`
+- `wxEvent.GetTimestamp: GetTimestamp`
+- `wxEvent.IsCommandEvent: IsCommandEvent`
+- `wxEvent.ResumePropagation: None`
+    - `int: ResumePropagation`
+- `wxEvent.SetEventObject: None`
+    - `wxObject*: SetEventObject`
+- `wxEvent.SetEventType: None`
+    - `wxEventType: SetEventType`
+- `wxEvent.SetId: None`
+    - `int: SetId`
+- `wxEvent.SetTimestamp: None`
+    - `long: SetTimestamp`
+- `wxEvent.ShouldPropagate: ShouldPropagate`
+- `wxEvent.Skip: None`
+    - `bool: Skip`
+- `wxEvent.StopPropagation: StopPropagation`
+- `wxEvtHandler.QueueEvent: None`
+    - `wxEvent*: QueueEvent`
+- `wxEvtHandler.AddPendingEvent: None`
+    - `const wxEvent&: AddPendingEvent`
+- `wxEvtHandler.CallAfter: None`
+    - `void(T::*: None`
+        - `T1: None`
+            - `...: CallAfter`
+    - `const T&: CallAfter1`
+- `wxEvtHandler.ProcessEvent: None`
+    - `wxEvent&: ProcessEvent`
+- `wxEvtHandler.ProcessEventLocally: None`
+    - `wxEvent&: ProcessEventLocally`
+- `wxEvtHandler.SafelyProcessEvent: None`
+    - `wxEvent&: SafelyProcessEvent`
+- `wxEvtHandler.ProcessPendingEvents: ProcessPendingEvents`
+- `wxEvtHandler.DeletePendingEvents: DeletePendingEvents`
+- `wxEvtHandler.Connect: None`
+    - `int: None`
+        - `int: None`
+            - `wxEventType: None`
+                - `wxObjectEventFunction: None`
+                    - `wxObject*: None`
+                        - `wxEvtHandler*: Connect`
+        - `wxEventType: None`
+            - `wxObjectEventFunction: None`
+                - `wxObject*: None`
+                    - `wxEvtHandler*: Connect1`
+    - `wxEventType: None`
+        - `wxObjectEventFunction: None`
+            - `wxObject*: None`
+                - `wxEvtHandler*: Connect2`
+- `wxEvtHandler.Disconnect: None`
+    - `wxEventType: None`
+        - `wxObjectEventFunction: None`
+            - `wxObject*: None`
+                - `wxEvtHandler*: Disconnect`
+    - `int: None`
+        - `wxEventType: None`
+            - `wxObjectEventFunction: None`
+                - `wxObject*: None`
+                    - `wxEvtHandler*: Disconnect1`
+        - `int: None`
+            - `wxEventType: None`
+                - `wxObjectEventFunction: None`
+                    - `wxObject*: None`
+                        - `wxEvtHandler*: Disconnect2`
+- `wxEvtHandler.Bind: None`
+    - `const EventTag&: None`
+        - `Functor: None`
+            - `int: None`
+                - `int: None`
+                    - `wxObject*: Bind`
+        - `void(Class::*: None`
+            - `EventHandler*: None`
+                - `int: None`
+                    - `int: None`
+                        - `wxObject*: Bind1`
+- `wxEvtHandler.Unbind: None`
+    - `const EventTag&: None`
+        - `Functor: None`
+            - `int: None`
+                - `int: None`
+                    - `wxObject*: Unbind`
+        - `void(Class::*: None`
+            - `EventHandler*: None`
+                - `int: None`
+                    - `int: None`
+                        - `wxObject*: Unbind1`
+- `wxEvtHandler.GetClientData: GetClientData`
+- `wxEvtHandler.GetClientObject: GetClientObject`
+- `wxEvtHandler.SetClientData: None`
+    - `void*: SetClientData`
+- `wxEvtHandler.SetClientObject: None`
+    - `wxClientData*: SetClientObject`
+- `wxEvtHandler.GetEvtHandlerEnabled: GetEvtHandlerEnabled`
+- `wxEvtHandler.GetNextHandler: GetNextHandler`
+- `wxEvtHandler.GetPreviousHandler: GetPreviousHandler`
+- `wxEvtHandler.SetEvtHandlerEnabled: None`
+    - `bool: SetEvtHandlerEnabled`
+- `wxEvtHandler.SetNextHandler: None`
+    - `wxEvtHandler*: SetNextHandler`
+- `wxEvtHandler.SetPreviousHandler: None`
+    - `wxEvtHandler*: SetPreviousHandler`
+- `wxEvtHandler.Unlink: Unlink`
+- `wxEvtHandler.IsUnlinked: IsUnlinked`
+- `wxEvtHandler.AddFilter: None`
+    - `wxEventFilter*: AddFilter`
+- `wxEvtHandler.RemoveFilter: None`
+    - `wxEventFilter*: RemoveFilter`
+- `wxEvtHandler.wxEvtHandler: wxEvtHandler`
+- `wxEvtHandler.~wxEvtHandler: ~wxEvtHandler`
+- `wxCommandEvent.wxCommandEvent: None`
+    - `wxEventType: None`
+        - `int: wxCommandEvent`
+- `wxCommandEvent.GetClientData: GetClientData`
+- `wxCommandEvent.GetClientObject: GetClientObject`
+- `wxCommandEvent.GetExtraLong: GetExtraLong`
+- `wxCommandEvent.GetInt: GetInt`
+- `wxCommandEvent.GetSelection: GetSelection`
+- `wxCommandEvent.GetString: GetString`
+- `wxCommandEvent.IsChecked: IsChecked`
+- `wxCommandEvent.IsSelection: IsSelection`
+- `wxCommandEvent.SetClientData: None`
+    - `void*: SetClientData`
+- `wxCommandEvent.SetClientObject: None`
+    - `wxClientData*: SetClientObject`
+- `wxCommandEvent.SetExtraLong: None`
+    - `long: SetExtraLong`
+- `wxCommandEvent.SetInt: None`
+    - `int: SetInt`
+- `wxCommandEvent.SetString: None`
+    - `const wxString&: SetString`
+- `wxWindow.AcceptsFocus: AcceptsFocus`
+- `wxWindow.AcceptsFocusFromKeyboard: AcceptsFocusFromKeyboard`
+- `wxWindow.AcceptsFocusRecursively: AcceptsFocusRecursively`
+- `wxWindow.DisableFocusFromKeyboard: DisableFocusFromKeyboard`
+- `wxWindow.IsFocusable: IsFocusable`
+- `wxWindow.CanAcceptFocus: CanAcceptFocus`
+- `wxWindow.CanAcceptFocusFromKeyboard: CanAcceptFocusFromKeyboard`
+- `wxWindow.HasFocus: HasFocus`
+- `wxWindow.SetCanFocus: None`
+    - `bool: SetCanFocus`
+- `wxWindow.EnableVisibleFocus: None`
+    - `bool: EnableVisibleFocus`
+- `wxWindow.SetFocus: SetFocus`
+- `wxWindow.SetFocusFromKbd: SetFocusFromKbd`
+- `wxWindow.AddChild: None`
+    - `wxWindow*: AddChild`
+- `wxWindow.DestroyChildren: DestroyChildren`
+- `wxWindow.FindWindow: None`
+    - `long: FindWindow`
+    - `const wxString&: FindWindow1`
+- `wxWindow.GetChildren: GetChildren1`
+- `wxWindow.RemoveChild: None`
+    - `wxWindow*: RemoveChild`
+- `wxWindow.GetGrandParent: GetGrandParent`
+- `wxWindow.GetNextSibling: GetNextSibling`
+- `wxWindow.GetParent: GetParent`
+- `wxWindow.GetPrevSibling: GetPrevSibling`
+- `wxWindow.IsDescendant: None`
+    - `wxWindow*: IsDescendant`
+- `wxWindow.Reparent: None`
+    - `wxWindow*: Reparent`
+- `wxWindow.AlwaysShowScrollbars: None`
+    - `bool: None`
+        - `bool: AlwaysShowScrollbars`
+- `wxWindow.GetScrollPos: None`
+    - `int: GetScrollPos`
+- `wxWindow.GetScrollRange: None`
+    - `int: GetScrollRange`
+- `wxWindow.GetScrollThumb: None`
+    - `int: GetScrollThumb`
+- `wxWindow.CanScroll: None`
+    - `int: CanScroll`
+- `wxWindow.HasScrollbar: None`
+    - `int: HasScrollbar`
+- `wxWindow.IsScrollbarAlwaysShown: None`
+    - `int: IsScrollbarAlwaysShown`
+- `wxWindow.ScrollLines: None`
+    - `int: ScrollLines`
+- `wxWindow.ScrollPages: None`
+    - `int: ScrollPages`
+- `wxWindow.ScrollWindow: None`
+    - `int: None`
+        - `int: None`
+            - `const wxRect*: ScrollWindow`
+- `wxWindow.LineUp: LineUp`
+- `wxWindow.LineDown: LineDown`
+- `wxWindow.PageUp: PageUp`
+- `wxWindow.PageDown: PageDown`
+- `wxWindow.SetScrollPos: None`
+    - `int: None`
+        - `int: None`
+            - `bool: SetScrollPos`
+- `wxWindow.SetScrollbar: None`
+    - `int: None`
+        - `int: None`
+            - `int: None`
+                - `int: None`
+                    - `bool: SetScrollbar`
+- `wxWindow.BeginRepositioningChildren: BeginRepositioningChildren`
+- `wxWindow.EndRepositioningChildren: EndRepositioningChildren`
+- `wxWindow.CacheBestSize: None`
+    - `const wxSize&: CacheBestSize`
+- `wxWindow.ClientToWindowSize: None`
+    - `const wxSize&: ClientToWindowSize`
+- `wxWindow.WindowToClientSize: None`
+    - `const wxSize&: WindowToClientSize`
+- `wxWindow.Fit: Fit`
+- `wxWindow.FitInside: FitInside`
+- `wxWindow.FromDIP: None`
+    - `const wxSize&: FromDIP`
+        - `const wxWindow*: FromDIP3`
+    - `const wxPoint&: FromDIP1`
+        - `const wxWindow*: FromDIP4`
+    - `int: FromDIP2`
+        - `const wxWindow*: FromDIP5`
+- `wxWindow.ToDIP: None`
+    - `const wxSize&: ToDIP`
+        - `const wxWindow*: ToDIP3`
+    - `const wxPoint&: ToDIP1`
+        - `const wxWindow*: ToDIP4`
+    - `int: ToDIP2`
+        - `const wxWindow*: ToDIP5`
+- `wxWindow.GetBestSize: GetBestSize`
+- `wxWindow.GetBestHeight: None`
+    - `int: GetBestHeight`
+- `wxWindow.GetBestWidth: None`
+    - `int: GetBestWidth`
+- `wxWindow.GetClientSize: GetClientSize1`
+    - `int*: None`
+        - `int*: GetClientSize`
+- `wxWindow.GetEffectiveMinSize: GetEffectiveMinSize`
+- `wxWindow.GetMaxClientSize: GetMaxClientSize`
+- `wxWindow.GetMaxSize: GetMaxSize`
+- `wxWindow.GetMinClientSize: GetMinClientSize`
+- `wxWindow.GetMinSize: GetMinSize`
+- `wxWindow.GetMinWidth: GetMinWidth`
+- `wxWindow.GetMinHeight: GetMinHeight`
+- `wxWindow.GetMaxWidth: GetMaxWidth`
+- `wxWindow.GetMaxHeight: GetMaxHeight`
+- `wxWindow.GetSize: GetSize1`
+    - `int*: None`
+        - `int*: GetSize`
+- `wxWindow.GetVirtualSize: GetVirtualSize`
+    - `int*: None`
+        - `int*: GetVirtualSize1`
+- `wxWindow.GetBestVirtualSize: GetBestVirtualSize`
+- `wxWindow.GetContentScaleFactor: GetContentScaleFactor`
+- `wxWindow.GetDPIScaleFactor: GetDPIScaleFactor`
+- `wxWindow.GetWindowBorderSize: GetWindowBorderSize`
+- `wxWindow.InformFirstDirection: None`
+    - `int: None`
+        - `int: None`
+            - `int: InformFirstDirection`
+- `wxWindow.InvalidateBestSize: InvalidateBestSize`
+- `wxWindow.PostSizeEvent: PostSizeEvent`
+- `wxWindow.PostSizeEventToParent: PostSizeEventToParent`
+- `wxWindow.SendSizeEvent: None`
+    - `int: SendSizeEvent`
+- `wxWindow.SendSizeEventToParent: None`
+    - `int: SendSizeEventToParent`
+- `wxWindow.SetClientSize: None`
+    - `int: None`
+        - `int: SetClientSize`
+    - `const wxSize&: SetClientSize1`
+    - `const wxRect&: SetClientSize2`
+- `wxWindow.SetContainingSizer: None`
+    - `wxSizer*: SetContainingSizer`
+- `wxWindow.SetInitialSize: None`
+    - `const wxSize&: SetInitialSize`
+- `wxWindow.SetMaxClientSize: None`
+    - `const wxSize&: SetMaxClientSize`
+- `wxWindow.SetMaxSize: None`
+    - `const wxSize&: SetMaxSize`
+- `wxWindow.SetMinClientSize: None`
+    - `const wxSize&: SetMinClientSize`
+- `wxWindow.SetMinSize: None`
+    - `const wxSize&: SetMinSize`
+- `wxWindow.SetSize: None`
+    - `int: None`
+        - `int: SetSize3`
+            - `int: None`
+                - `int: None`
+                    - `int: SetSize`
+    - `const wxRect&: SetSize1`
+    - `const wxSize&: SetSize2`
+- `wxWindow.SetSizeHints: None`
+    - `const wxSize&: None`
+        - `const wxSize&: None`
+            - `const wxSize&: SetSizeHints`
+    - `int: None`
+        - `int: None`
+            - `int: None`
+                - `int: None`
+                    - `int: None`
+                        - `int: SetSizeHints1`
+- `wxWindow.SetVirtualSize: None`
+    - `int: None`
+        - `int: SetVirtualSize`
+    - `const wxSize&: SetVirtualSize1`
+- `wxWindow.Center: None`
+    - `int: Center`
+- `wxWindow.CenterOnParent: None`
+    - `int: CenterOnParent`
+- `wxWindow.Centre: None`
+    - `int: Centre`
+- `wxWindow.CentreOnParent: None`
+    - `int: CentreOnParent`
+- `wxWindow.GetPosition: GetPosition1`
+    - `int*: None`
+        - `int*: GetPosition`
+- `wxWindow.GetRect: GetRect`
+- `wxWindow.GetScreenPosition: GetScreenPosition1`
+    - `int*: None`
+        - `int*: GetScreenPosition`
+- `wxWindow.GetScreenRect: GetScreenRect`
+- `wxWindow.GetClientAreaOrigin: GetClientAreaOrigin`
+- `wxWindow.GetClientRect: GetClientRect`
+- `wxWindow.Move: None`
+    - `int: None`
+        - `int: None`
+            - `int: Move`
+    - `const wxPoint&: None`
+        - `int: Move1`
+- `wxWindow.SetPosition: None`
+    - `const wxPoint&: SetPosition`
+- `wxWindow.ClientToScreen: None`
+    - `int*: None`
+        - `int*: ClientToScreen`
+    - `const wxPoint&: ClientToScreen1`
+- `wxWindow.ConvertDialogToPixels: None`
+    - `const wxPoint&: ConvertDialogToPixels`
+    - `const wxSize&: ConvertDialogToPixels1`
+- `wxWindow.ConvertPixelsToDialog: None`
+    - `const wxPoint&: ConvertPixelsToDialog`
+    - `const wxSize&: ConvertPixelsToDialog1`
+- `wxWindow.ScreenToClient: None`
+    - `int*: None`
+        - `int*: ScreenToClient`
+    - `const wxPoint&: ScreenToClient1`
+- `wxWindow.ClearBackground: ClearBackground`
+- `wxWindow.Freeze: Freeze`
+- `wxWindow.Thaw: Thaw`
+- `wxWindow.IsFrozen: IsFrozen`
+- `wxWindow.GetBackgroundColour: GetBackgroundColour`
+- `wxWindow.GetBackgroundStyle: GetBackgroundStyle`
+- `wxWindow.GetCharHeight: GetCharHeight`
+- `wxWindow.GetCharWidth: GetCharWidth`
+- `wxWindow.GetDefaultAttributes: GetDefaultAttributes`
+- `wxWindow.GetDPI: GetDPI`
+- `wxWindow.GetFont: GetFont`
+- `wxWindow.GetForegroundColour: GetForegroundColour`
+- `wxWindow.GetTextExtent: None`
+    - `const wxString&: GetTextExtent1`
+        - `int*: None`
+            - `int*: None`
+                - `int*: None`
+                    - `int*: None`
+                        - `const wxFont*: GetTextExtent`
+- `wxWindow.GetUpdateRegion: GetUpdateRegion`
+- `wxWindow.GetUpdateClientRect: GetUpdateClientRect`
+- `wxWindow.HasTransparentBackground: HasTransparentBackground`
+- `wxWindow.Refresh: None`
+    - `bool: None`
+        - `const wxRect*: Refresh`
+- `wxWindow.RefreshRect: None`
+    - `const wxRect&: None`
+        - `bool: RefreshRect`
+- `wxWindow.Update: Update`
+- `wxWindow.SetBackgroundColour: None`
+    - `const wxColour&: SetBackgroundColour`
+- `wxWindow.SetBackgroundStyle: None`
+    - `wxBackgroundStyle: SetBackgroundStyle`
+- `wxWindow.IsTransparentBackgroundSupported: None`
+    - `wxString*: IsTransparentBackgroundSupported`
+- `wxWindow.SetFont: None`
+    - `const wxFont&: SetFont`
+- `wxWindow.SetForegroundColour: None`
+    - `const wxColour&: SetForegroundColour`
+- `wxWindow.SetOwnBackgroundColour: None`
+    - `const wxColour&: SetOwnBackgroundColour`
+- `wxWindow.InheritsBackgroundColour: InheritsBackgroundColour`
+- `wxWindow.UseBgCol: UseBgCol`
+- `wxWindow.UseBackgroundColour: UseBackgroundColour`
+- `wxWindow.SetOwnFont: None`
+    - `const wxFont&: SetOwnFont`
+- `wxWindow.SetOwnForegroundColour: None`
+    - `const wxColour&: SetOwnForegroundColour`
+- `wxWindow.UseForegroundColour: UseForegroundColour`
+- `wxWindow.InheritsForegroundColour: InheritsForegroundColour`
+- `wxWindow.SetPalette: None`
+    - `const wxPalette&: SetPalette`
+- `wxWindow.ShouldInheritColours: ShouldInheritColours`
+- `wxWindow.SetThemeEnabled: None`
+    - `bool: SetThemeEnabled`
+- `wxWindow.GetThemeEnabled: GetThemeEnabled`
+- `wxWindow.CanSetTransparent: CanSetTransparent`
+- `wxWindow.SetTransparent: None`
+    - `wxByte: SetTransparent`
+- `wxWindow.GetEventHandler: GetEventHandler`
+- `wxWindow.HandleAsNavigationKey: None`
+    - `const wxKeyEvent&: HandleAsNavigationKey`
+- `wxWindow.HandleWindowEvent: None`
+    - `wxEvent&: HandleWindowEvent`
+- `wxWindow.ProcessWindowEvent: None`
+    - `wxEvent&: ProcessWindowEvent`
+- `wxWindow.ProcessWindowEventLocally: None`
+    - `wxEvent&: ProcessWindowEventLocally`
+- `wxWindow.PopEventHandler: None`
+    - `bool: PopEventHandler`
+- `wxWindow.PushEventHandler: None`
+    - `wxEvtHandler*: PushEventHandler`
+- `wxWindow.RemoveEventHandler: None`
+    - `wxEvtHandler*: RemoveEventHandler`
+- `wxWindow.SetEventHandler: None`
+    - `wxEvtHandler*: SetEventHandler`
+- `wxWindow.GetExtraStyle: GetExtraStyle`
+- `wxWindow.GetWindowStyleFlag: GetWindowStyleFlag`
+- `wxWindow.GetWindowStyle: GetWindowStyle`
+- `wxWindow.HasExtraStyle: None`
+    - `int: HasExtraStyle`
+- `wxWindow.HasFlag: None`
+    - `int: HasFlag`
+- `wxWindow.SetExtraStyle: None`
+    - `long: SetExtraStyle`
+- `wxWindow.SetWindowStyleFlag: None`
+    - `long: SetWindowStyleFlag`
+- `wxWindow.SetWindowStyle: None`
+    - `long: SetWindowStyle`
+- `wxWindow.ToggleWindowStyle: None`
+    - `int: ToggleWindowStyle`
+- `wxWindow.MoveAfterInTabOrder: None`
+    - `wxWindow*: MoveAfterInTabOrder`
+- `wxWindow.MoveBeforeInTabOrder: None`
+    - `wxWindow*: MoveBeforeInTabOrder`
+- `wxWindow.Navigate: None`
+    - `int: Navigate`
+- `wxWindow.NavigateIn: None`
+    - `int: NavigateIn`
+- `wxWindow.Lower: Lower`
+- `wxWindow.Raise: Raise`
+- `wxWindow.Hide: Hide`
+- `wxWindow.HideWithEffect: None`
+    - `wxShowEffect: None`
+        - `unsigned int: HideWithEffect`
+- `wxWindow.IsEnabled: IsEnabled`
+- `wxWindow.IsExposed: None`
+    - `int: None`
+        - `int: IsExposed`
+            - `int: None`
+                - `int: IsExposed2`
+    - `wxPoint&: IsExposed1`
+    - `wxRect&: IsExposed3`
+- `wxWindow.IsShown: IsShown`
+- `wxWindow.IsShownOnScreen: IsShownOnScreen`
+- `wxWindow.Disable: Disable`
+- `wxWindow.Enable: None`
+    - `bool: Enable`
+- `wxWindow.Show: None`
+    - `bool: Show`
+- `wxWindow.ShowWithEffect: None`
+    - `wxShowEffect: None`
+        - `unsigned int: ShowWithEffect`
+- `wxWindow.GetHelpText: GetHelpText`
+- `wxWindow.SetHelpText: None`
+    - `const wxString&: SetHelpText`
+- `wxWindow.GetHelpTextAtPoint: None`
+    - `const wxPoint&: None`
+        - `wxHelpEvent::Origin: GetHelpTextAtPoint`
+- `wxWindow.GetToolTip: GetToolTip`
+- `wxWindow.GetToolTipText: GetToolTipText`
+- `wxWindow.SetToolTip: None`
+    - `const wxString&: SetToolTip`
+    - `wxToolTip*: SetToolTip1`
+- `wxWindow.UnsetToolTip: UnsetToolTip`
+- `wxWindow.GetPopupMenuSelectionFromUser: None`
+    - `wxMenu&: None`
+        - `const wxPoint&: GetPopupMenuSelectionFromUser`
+        - `int: None`
+            - `int: GetPopupMenuSelectionFromUser1`
+- `wxWindow.PopupMenu: None`
+    - `wxMenu*: None`
+        - `const wxPoint&: PopupMenu`
+        - `int: None`
+            - `int: PopupMenu1`
+- `wxWindow.GetValidator: GetValidator`
+- `wxWindow.SetValidator: None`
+    - `const wxValidator&: SetValidator`
+- `wxWindow.TransferDataFromWindow: TransferDataFromWindow`
+- `wxWindow.TransferDataToWindow: TransferDataToWindow`
+- `wxWindow.Validate: Validate`
+- `wxWindow.GetId: GetId`
+- `wxWindow.GetLabel: GetLabel`
+- `wxWindow.GetLayoutDirection: GetLayoutDirection`
+- `wxWindow.AdjustForLayoutDirection: None`
+    - `wxCoord: None`
+        - `wxCoord: None`
+            - `wxCoord: AdjustForLayoutDirection`
+- `wxWindow.GetName: GetName`
+- `wxWindow.GetWindowVariant: GetWindowVariant`
+- `wxWindow.SetId: None`
+    - `wxWindowID: SetId`
+- `wxWindow.SetLabel: None`
+    - `const wxString&: SetLabel`
+- `wxWindow.SetLayoutDirection: None`
+    - `wxLayoutDirection: SetLayoutDirection`
+- `wxWindow.SetName: None`
+    - `const wxString&: SetName`
+- `wxWindow.SetWindowVariant: None`
+    - `wxWindowVariant: SetWindowVariant`
+- `wxWindow.GetAcceleratorTable: GetAcceleratorTable`
+- `wxWindow.GetAccessible: GetAccessible`
+- `wxWindow.SetAcceleratorTable: None`
+    - `const wxAcceleratorTable&: SetAcceleratorTable`
+- `wxWindow.SetAccessible: None`
+    - `wxAccessible*: SetAccessible`
+- `wxWindow.Close: None`
+    - `bool: Close`
+- `wxWindow.Destroy: Destroy`
+- `wxWindow.IsBeingDeleted: IsBeingDeleted`
+- `wxWindow.GetDropTarget: GetDropTarget`
+- `wxWindow.SetDropTarget: None`
+    - `wxDropTarget*: SetDropTarget`
+- `wxWindow.DragAcceptFiles: None`
+    - `bool: DragAcceptFiles`
+- `wxWindow.GetContainingSizer: GetContainingSizer`
+- `wxWindow.GetSizer: GetSizer`
+- `wxWindow.SetSizer: None`
+    - `wxSizer*: None`
+        - `bool: SetSizer`
+- `wxWindow.SetSizerAndFit: None`
+    - `wxSizer*: None`
+        - `bool: SetSizerAndFit`
+- `wxWindow.GetConstraints: GetConstraints`
+- `wxWindow.SetConstraints: None`
+    - `wxLayoutConstraints*: SetConstraints`
+- `wxWindow.Layout: Layout`
+- `wxWindow.SetAutoLayout: None`
+    - `bool: SetAutoLayout`
+- `wxWindow.GetAutoLayout: GetAutoLayout`
+- `wxWindow.CaptureMouse: CaptureMouse`
+- `wxWindow.GetCaret: GetCaret`
+- `wxWindow.GetCursor: GetCursor`
+- `wxWindow.HasCapture: HasCapture`
+- `wxWindow.ReleaseMouse: ReleaseMouse`
+- `wxWindow.SetCaret: None`
+    - `wxCaret*: SetCaret`
+- `wxWindow.SetCursor: None`
+    - `const wxCursor&: SetCursor`
+- `wxWindow.WarpPointer: None`
+    - `int: None`
+        - `int: WarpPointer`
+- `wxWindow.EnableTouchEvents: None`
+    - `int: EnableTouchEvents`
+- `wxWindow.HitTest: None`
+    - `wxCoord: None`
+        - `wxCoord: HitTest`
+    - `const wxPoint&: HitTest1`
+- `wxWindow.GetBorder: GetBorder1`
+    - `long: GetBorder`
+- `wxWindow.DoUpdateWindowUI: None`
+    - `wxUpdateUIEvent&: DoUpdateWindowUI`
+- `wxWindow.GetHandle: GetHandle`
+- `wxWindow.HasMultiplePages: HasMultiplePages`
+- `wxWindow.InheritAttributes: InheritAttributes`
+- `wxWindow.InitDialog: InitDialog`
+- `wxWindow.IsDoubleBuffered: IsDoubleBuffered`
+- `wxWindow.SetDoubleBuffered: None`
+    - `bool: SetDoubleBuffered`
+- `wxWindow.IsRetained: IsRetained`
+- `wxWindow.IsThisEnabled: IsThisEnabled`
+- `wxWindow.IsTopLevel: IsTopLevel`
+- `wxWindow.OnInternalIdle: OnInternalIdle`
+- `wxWindow.SendIdleEvents: None`
+    - `wxIdleEvent&: SendIdleEvents`
+- `wxWindow.RegisterHotKey: None`
+    - `int: None`
+        - `int: None`
+            - `int: RegisterHotKey`
+- `wxWindow.UnregisterHotKey: None`
+    - `int: UnregisterHotKey`
+- `wxWindow.UpdateWindowUI: None`
+    - `long: UpdateWindowUI`
+- `wxWindow.GetClassDefaultAttributes: None`
+    - `wxWindowVariant: GetClassDefaultAttributes`
+- `wxWindow.FindFocus: FindFocus`
+- `wxWindow.FindWindowById: None`
+    - `long: None`
+        - `const wxWindow*: FindWindowById`
+- `wxWindow.FindWindowByLabel: None`
+    - `const wxString&: None`
+        - `const wxWindow*: FindWindowByLabel`
+- `wxWindow.FindWindowByName: None`
+    - `const wxString&: None`
+        - `const wxWindow*: FindWindowByName`
+- `wxWindow.GetCapture: GetCapture`
+- `wxWindow.NewControlId: None`
+    - `int: NewControlId`
+- `wxWindow.UnreserveControlId: None`
+    - `wxWindowID: None`
+        - `int: UnreserveControlId`
+- `wxWindow.wxWindow: wxWindow`
+    - `wxWindow*: None`
+        - `wxWindowID: None`
+            - `const wxPoint&: None`
+                - `const wxSize&: None`
+                    - `long: None`
+                        - `const wxString&: wxWindow1`
+- `wxWindow.~wxWindow: ~wxWindow`
+- `wxWindow.Create: None`
+    - `wxWindow*: None`
+        - `wxWindowID: None`
+            - `const wxPoint&: None`
+                - `const wxSize&: None`
+                    - `long: None`
+                        - `const wxString&: Create`
+- `wxControl.wxControl: wxControl1`
+    - `wxWindow*: None`
+        - `wxWindowID: None`
+            - `const wxPoint&: None`
+                - `const wxSize&: None`
+                    - `long: None`
+                        - `const wxValidator&: None`
+                            - `const wxString&: wxControl`
+- `wxControl.Create: None`
+    - `wxWindow*: None`
+        - `wxWindowID: None`
+            - `const wxPoint&: None`
+                - `const wxSize&: None`
+                    - `long: None`
+                        - `const wxValidator&: None`
+                            - `const wxString&: Create`
+- `wxControl.Command: None`
+    - `wxCommandEvent&: Command`
+- `wxControl.GetLabelText: GetLabelText`
+    - `const wxString&: GetLabelText1`
+- `wxControl.GetSizeFromTextSize: None`
+    - `int: None`
+        - `int: GetSizeFromTextSize`
+    - `const wxSize&: GetSizeFromTextSize1`
+- `wxControl.GetSizeFromText: None`
+    - `const wxString&: GetSizeFromText`
+- `wxControl.SetLabelText: None`
+    - `const wxString&: SetLabelText`
+- `wxControl.SetLabelMarkup: None`
+    - `const wxString&: SetLabelMarkup`
+- `wxControl.RemoveMnemonics: None`
+    - `const wxString&: RemoveMnemonics`
+- `wxControl.EscapeMnemonics: None`
+    - `const wxString&: EscapeMnemonics`
+- `wxControl.Ellipsize: None`
+    - `const wxString&: None`
+        - `const wxDC&: None`
+            - `wxEllipsizeMode: None`
+                - `int: None`
+                    - `int: Ellipsize`
+- `wxAnyButton.wxAnyButton: wxAnyButton`
+- `wxAnyButton.~wxAnyButton: ~wxAnyButton`
+- `wxAnyButton.GetBitmap: GetBitmap`
+- `wxAnyButton.GetBitmapCurrent: GetBitmapCurrent`
+- `wxAnyButton.GetBitmapDisabled: GetBitmapDisabled`
+- `wxAnyButton.GetBitmapFocus: GetBitmapFocus`
+- `wxAnyButton.GetBitmapLabel: GetBitmapLabel`
+- `wxAnyButton.GetBitmapPressed: GetBitmapPressed`
+- `wxAnyButton.SetBitmap: None`
+    - `const wxBitmap&: None`
+        - `wxDirection: SetBitmap`
+- `wxAnyButton.SetBitmapCurrent: None`
+    - `const wxBitmap&: SetBitmapCurrent`
+- `wxAnyButton.SetBitmapDisabled: None`
+    - `const wxBitmap&: SetBitmapDisabled`
+- `wxAnyButton.SetBitmapFocus: None`
+    - `const wxBitmap&: SetBitmapFocus`
+- `wxAnyButton.SetBitmapLabel: None`
+    - `const wxBitmap&: SetBitmapLabel`
+- `wxAnyButton.SetBitmapPressed: None`
+    - `const wxBitmap&: SetBitmapPressed`
+- `wxAnyButton.GetBitmapMargins: GetBitmapMargins`
+- `wxAnyButton.SetBitmapMargins: None`
+    - `wxCoord: None`
+        - `wxCoord: SetBitmapMargins`
+    - `const wxSize&: SetBitmapMargins1`
+- `wxAnyButton.SetBitmapPosition: None`
+    - `wxDirection: SetBitmapPosition`
+- `wxButton.wxButton: wxButton`
+    - `wxWindow*: None`
+        - `wxWindowID: None`
+            - `const wxString&: None`
+                - `const wxPoint&: None`
+                    - `const wxSize&: None`
+                        - `long: None`
+                            - `const wxValidator&: None`
+                                - `const wxString&: wxButton1`
+- `wxButton.Create: None`
+    - `wxWindow*: None`
+        - `wxWindowID: None`
+            - `const wxString&: None`
+                - `const wxPoint&: None`
+                    - `const wxSize&: None`
+                        - `long: None`
+                            - `const wxValidator&: None`
+                                - `const wxString&: Create`
+- `wxButton.GetAuthNeeded: GetAuthNeeded`
+- `wxButton.SetAuthNeeded: None`
+    - `bool: SetAuthNeeded`
+- `wxButton.SetDefault: SetDefault`
+- `wxButton.GetDefaultSize: None`
+    - `wxWindow*: GetDefaultSize`
+- `wxMenu.wxMenu: wxMenu`
+    - `long: wxMenu1`
+    - `const wxString&: None`
+        - `long: wxMenu2`
+- `wxMenu.~wxMenu: ~wxMenu`
+- `wxMenu.Append: None`
+    - `int: None`
+        - `const wxString&: None`
+            - `const wxString&: None`
+                - `wxItemKind: Append`
+            - `wxMenu*: None`
+                - `const wxString&: Append1`
+    - `wxMenuItem*: Append2`
+- `wxMenu.AppendCheckItem: None`
+    - `int: None`
+        - `const wxString&: None`
+            - `const wxString&: AppendCheckItem`
+- `wxMenu.AppendRadioItem: None`
+    - `int: None`
+        - `const wxString&: None`
+            - `const wxString&: AppendRadioItem`
+- `wxMenu.AppendSeparator: AppendSeparator`
+- `wxMenu.AppendSubMenu: None`
+    - `wxMenu*: None`
+        - `const wxString&: None`
+            - `const wxString&: AppendSubMenu`
+- `wxMenu.Break: Break`
+- `wxMenu.Check: None`
+    - `int: None`
+        - `bool: Check`
+- `wxMenu.Delete: None`
+    - `int: Delete`
+    - `wxMenuItem*: Delete1`
+- `wxMenu.Destroy: None`
+    - `int: Destroy`
+    - `wxMenuItem*: Destroy1`
+- `wxMenu.Enable: None`
+    - `int: None`
+        - `bool: Enable`
+- `wxMenu.FindChildItem: None`
+    - `int: None`
+        - `size_t*: FindChildItem`
+- `wxMenu.FindItem: None`
+    - `const wxString&: FindItem`
+    - `int: None`
+        - `wxMenu**: FindItem1`
+- `wxMenu.FindItemByPosition: None`
+    - `size_t: FindItemByPosition`
+- `wxMenu.GetHelpString: None`
+    - `int: GetHelpString`
+- `wxMenu.GetLabel: None`
+    - `int: GetLabel`
+- `wxMenu.GetLabelText: None`
+    - `int: GetLabelText`
+- `wxMenu.GetMenuItemCount: GetMenuItemCount`
+- `wxMenu.GetMenuItems: GetMenuItems1`
+- `wxMenu.GetTitle: GetTitle`
+- `wxMenu.Insert: None`
+    - `size_t: None`
+        - `wxMenuItem*: Insert`
+        - `int: None`
+            - `const wxString&: None`
+                - `const wxString&: None`
+                    - `wxItemKind: Insert1`
+                - `wxMenu*: None`
+                    - `const wxString&: Insert2`
+- `wxMenu.InsertCheckItem: None`
+    - `size_t: None`
+        - `int: None`
+            - `const wxString&: None`
+                - `const wxString&: InsertCheckItem`
+- `wxMenu.InsertRadioItem: None`
+    - `size_t: None`
+        - `int: None`
+            - `const wxString&: None`
+                - `const wxString&: InsertRadioItem`
+- `wxMenu.InsertSeparator: None`
+    - `size_t: InsertSeparator`
+- `wxMenu.IsChecked: None`
+    - `int: IsChecked`
+- `wxMenu.IsEnabled: None`
+    - `int: IsEnabled`
+- `wxMenu.MSWCommand: None`
+    - `WXUINT: None`
+        - `WXWORD: MSWCommand`
+- `wxMenu.Prepend: None`
+    - `wxMenuItem*: Prepend`
+    - `int: None`
+        - `const wxString&: None`
+            - `const wxString&: None`
+                - `wxItemKind: Prepend1`
+            - `wxMenu*: None`
+                - `const wxString&: Prepend2`
+- `wxMenu.PrependCheckItem: None`
+    - `int: None`
+        - `const wxString&: None`
+            - `const wxString&: PrependCheckItem`
+- `wxMenu.PrependRadioItem: None`
+    - `int: None`
+        - `const wxString&: None`
+            - `const wxString&: PrependRadioItem`
+- `wxMenu.PrependSeparator: PrependSeparator`
+- `wxMenu.Remove: None`
+    - `int: Remove`
+    - `wxMenuItem*: Remove1`
+- `wxMenu.SetHelpString: None`
+    - `int: None`
+        - `const wxString&: SetHelpString`
+- `wxMenu.SetLabel: None`
+    - `int: None`
+        - `const wxString&: SetLabel`
+- `wxMenu.SetTitle: None`
+    - `const wxString&: SetTitle`
+- `wxMenu.UpdateUI: None`
+    - `wxEvtHandler*: UpdateUI`
+- `wxMenu.SetInvokingWindow: None`
+    - `wxWindow*: SetInvokingWindow`
+- `wxMenu.GetInvokingWindow: GetInvokingWindow`
+- `wxMenu.GetWindow: GetWindow`
+- `wxMenu.GetStyle: GetStyle`
+- `wxMenu.SetParent: None`
+    - `wxMenu*: SetParent`
+- `wxMenu.GetParent: GetParent`
+- `wxMenu.Attach: None`
+    - `wxMenuBar*: Attach`
+- `wxMenu.Detach: Detach`
+- `wxMenu.IsAttached: IsAttached`
+- `wxMenuBar.wxMenuBar: None`
+    - `long: wxMenuBar`
+    - `size_t: None`
+        - `wxMenu*: None`
+            - `const wxString: None`
+                - `long: wxMenuBar1`
+- `wxMenuBar.~wxMenuBar: ~wxMenuBar`
+- `wxMenuBar.Append: None`
+    - `wxMenu*: None`
+        - `const wxString&: Append`
+- `wxMenuBar.Check: None`
+    - `int: None`
+        - `bool: Check`
+- `wxMenuBar.Enable: None`
+    - `int: None`
+        - `bool: Enable`
+- `wxMenuBar.IsEnabledTop: None`
+    - `size_t: IsEnabledTop`
+- `wxMenuBar.EnableTop: None`
+    - `size_t: None`
+        - `bool: EnableTop`
+- `wxMenuBar.FindItem: None`
+    - `int: None`
+        - `wxMenu**: FindItem`
+- `wxMenuBar.FindMenu: None`
+    - `const wxString&: FindMenu`
+- `wxMenuBar.FindMenuItem: None`
+    - `const wxString&: None`
+        - `const wxString&: FindMenuItem`
+- `wxMenuBar.GetHelpString: None`
+    - `int: GetHelpString`
+- `wxMenuBar.GetLabel: None`
+    - `int: GetLabel`
+- `wxMenuBar.GetLabelTop: None`
+    - `size_t: GetLabelTop`
+- `wxMenuBar.GetMenu: None`
+    - `size_t: GetMenu`
+- `wxMenuBar.GetMenuCount: GetMenuCount`
+- `wxMenuBar.GetMenuLabel: None`
+    - `size_t: GetMenuLabel`
+- `wxMenuBar.GetMenuLabelText: None`
+    - `size_t: GetMenuLabelText`
+- `wxMenuBar.Insert: None`
+    - `size_t: None`
+        - `wxMenu*: None`
+            - `const wxString&: Insert`
+- `wxMenuBar.IsChecked: None`
+    - `int: IsChecked`
+- `wxMenuBar.IsEnabled: None`
+    - `int: IsEnabled`
+- `wxMenuBar.Remove: None`
+    - `size_t: Remove`
+- `wxMenuBar.Replace: None`
+    - `size_t: None`
+        - `wxMenu*: None`
+            - `const wxString&: Replace`
+- `wxMenuBar.SetHelpString: None`
+    - `int: None`
+        - `const wxString&: SetHelpString`
+- `wxMenuBar.SetLabel: None`
+    - `int: None`
+        - `const wxString&: SetLabel`
+- `wxMenuBar.SetLabelTop: None`
+    - `size_t: None`
+        - `const wxString&: SetLabelTop`
+- `wxMenuBar.SetMenuLabel: None`
+    - `size_t: None`
+        - `const wxString&: SetMenuLabel`
+- `wxMenuBar.OSXGetAppleMenu: OSXGetAppleMenu`
+- `wxMenuBar.GetFrame: GetFrame`
+- `wxMenuBar.IsAttached: IsAttached`
+- `wxMenuBar.Attach: None`
+    - `wxFrame*: Attach`
+- `wxMenuBar.Detach: Detach`
+- `wxMenuBar.MacSetCommonMenuBar: None`
+    - `wxMenuBar*: MacSetCommonMenuBar`
+- `wxMenuBar.MacGetCommonMenuBar: MacGetCommonMenuBar`
+- `wxNonOwnedWindow.SetShape: None`
+    - `const wxRegion&: SetShape`
+    - `const wxGraphicsPath&: SetShape1`
+- `wxTopLevelWindow.wxTopLevelWindow: wxTopLevelWindow`
+    - `wxWindow*: None`
+        - `wxWindowID: None`
+            - `const wxString&: None`
+                - `const wxPoint&: None`
+                    - `const wxSize&: None`
+                        - `long: None`
+                            - `const wxString&: wxTopLevelWindow1`
+- `wxTopLevelWindow.~wxTopLevelWindow: ~wxTopLevelWindow`
+- `wxTopLevelWindow.Create: None`
+    - `wxWindow*: None`
+        - `wxWindowID: None`
+            - `const wxString&: None`
+                - `const wxPoint&: None`
+                    - `const wxSize&: None`
+                        - `long: None`
+                            - `const wxString&: Create`
+- `wxTopLevelWindow.CenterOnScreen: None`
+    - `int: CenterOnScreen`
+- `wxTopLevelWindow.CentreOnScreen: None`
+    - `int: CentreOnScreen`
+- `wxTopLevelWindow.EnableCloseButton: None`
+    - `bool: EnableCloseButton`
+- `wxTopLevelWindow.EnableMaximizeButton: None`
+    - `bool: EnableMaximizeButton`
+- `wxTopLevelWindow.EnableMinimizeButton: None`
+    - `bool: EnableMinimizeButton`
+- `wxTopLevelWindow.GetDefaultItem: GetDefaultItem`
+- `wxTopLevelWindow.GetIcon: GetIcon`
+- `wxTopLevelWindow.GetIcons: GetIcons`
+- `wxTopLevelWindow.GetTitle: GetTitle`
+- `wxTopLevelWindow.Iconize: None`
+    - `bool: Iconize`
+- `wxTopLevelWindow.IsActive: IsActive`
+- `wxTopLevelWindow.IsAlwaysMaximized: IsAlwaysMaximized`
+- `wxTopLevelWindow.IsFullScreen: IsFullScreen`
+- `wxTopLevelWindow.IsIconized: IsIconized`
+- `wxTopLevelWindow.IsMaximized: IsMaximized`
+- `wxTopLevelWindow.IsUsingNativeDecorations: IsUsingNativeDecorations`
+- `wxTopLevelWindow.Maximize: None`
+    - `bool: Maximize`
+- `wxTopLevelWindow.MSWGetSystemMenu: MSWGetSystemMenu`
+- `wxTopLevelWindow.RequestUserAttention: None`
+    - `int: RequestUserAttention`
+- `wxTopLevelWindow.Restore: Restore`
+- `wxTopLevelWindow.RestoreToGeometry: None`
+    - `GeometrySerializer&: RestoreToGeometry`
+- `wxTopLevelWindow.SaveGeometry: None`
+    - `const GeometrySerializer&: SaveGeometry`
+- `wxTopLevelWindow.SetDefaultItem: None`
+    - `wxWindow*: SetDefaultItem`
+- `wxTopLevelWindow.SetTmpDefaultItem: None`
+    - `wxWindow*: SetTmpDefaultItem`
+- `wxTopLevelWindow.GetTmpDefaultItem: GetTmpDefaultItem`
+- `wxTopLevelWindow.SetIcon: None`
+    - `const wxIcon&: SetIcon`
+- `wxTopLevelWindow.SetIcons: None`
+    - `const wxIconBundle&: SetIcons`
+- `wxTopLevelWindow.SetTitle: None`
+    - `const wxString&: SetTitle`
+- `wxTopLevelWindow.ShouldPreventAppExit: ShouldPreventAppExit`
+- `wxTopLevelWindow.OSXSetModified: None`
+    - `bool: OSXSetModified`
+- `wxTopLevelWindow.OSXIsModified: OSXIsModified`
+- `wxTopLevelWindow.SetRepresentedFilename: None`
+    - `const wxString&: SetRepresentedFilename`
+- `wxTopLevelWindow.ShowWithoutActivating: ShowWithoutActivating`
+- `wxTopLevelWindow.EnableFullScreenView: None`
+    - `bool: EnableFullScreenView`
+- `wxTopLevelWindow.ShowFullScreen: None`
+    - `bool: None`
+        - `long: ShowFullScreen`
+- `wxTopLevelWindow.UseNativeDecorations: None`
+    - `bool: UseNativeDecorations`
+- `wxTopLevelWindow.UseNativeDecorationsByDefault: None`
+    - `bool: UseNativeDecorationsByDefault`
+- `wxTopLevelWindow.GetDefaultSize: GetDefaultSize`
+- `wxFrame.wxFrame: wxFrame`
+    - `wxWindow*: None`
+        - `wxWindowID: None`
+            - `const wxString&: None`
+                - `const wxPoint&: None`
+                    - `const wxSize&: None`
+                        - `long: None`
+                            - `const wxString&: wxFrame1`
+- `wxFrame.~wxFrame: ~wxFrame`
+- `wxFrame.Centre: None`
+    - `int: Centre`
+- `wxFrame.Create: None`
+    - `wxWindow*: None`
+        - `wxWindowID: None`
+            - `const wxString&: None`
+                - `const wxPoint&: None`
+                    - `const wxSize&: None`
+                        - `long: None`
+                            - `const wxString&: Create`
+- `wxFrame.CreateStatusBar: None`
+    - `int: None`
+        - `long: None`
+            - `wxWindowID: None`
+                - `const wxString&: CreateStatusBar`
+- `wxFrame.CreateToolBar: None`
+    - `long: None`
+        - `wxWindowID: None`
+            - `const wxString&: CreateToolBar`
+- `wxFrame.DoGiveHelp: None`
+    - `const wxString&: None`
+        - `bool: DoGiveHelp`
+- `wxFrame.GetMenuBar: GetMenuBar`
+- `wxFrame.GetStatusBar: GetStatusBar`
+- `wxFrame.GetStatusBarPane: GetStatusBarPane`
+- `wxFrame.GetToolBar: GetToolBar`
+- `wxFrame.OnCreateStatusBar: None`
+    - `int: None`
+        - `long: None`
+            - `wxWindowID: None`
+                - `const wxString&: OnCreateStatusBar`
+- `wxFrame.OnCreateToolBar: None`
+    - `long: None`
+        - `wxWindowID: None`
+            - `const wxString&: OnCreateToolBar`
+- `wxFrame.ProcessCommand: None`
+    - `int: ProcessCommand`
+- `wxFrame.SetMenuBar: None`
+    - `wxMenuBar*: SetMenuBar`
+- `wxFrame.SetStatusBar: None`
+    - `wxStatusBar*: SetStatusBar`
+- `wxFrame.SetStatusBarPane: None`
+    - `int: SetStatusBarPane`
+- `wxFrame.SetStatusText: None`
+    - `const wxString&: None`
+        - `int: SetStatusText`
+- `wxFrame.SetStatusWidths: None`
+    - `int: None`
+        - `const int*: SetStatusWidths`
+- `wxFrame.SetToolBar: None`
+    - `wxToolBar*: SetToolBar`
+- `wxFrame.MSWGetTaskBarButton: MSWGetTaskBarButton`
+- `wxFrame.PushStatusText: None`
+    - `const wxString&: None`
+        - `int: PushStatusText`
+- `wxFrame.PopStatusText: None`
+    - `int: PopStatusText`
+- `wxPoint.IsFullySpecified: IsFullySpecified`
+- `wxPoint.SetDefaults: None`
+    - `const wxPoint&: SetDefaults`
+- `wxPoint.operator=: None`
+    - `const wxPoint&: operator=`
+- `wxPoint.operator==: None`
+    - `const wxPoint&: None`
+        - `const wxPoint&: operator==`
+- `wxPoint.operator!=: None`
+    - `const wxPoint&: None`
+        - `const wxPoint&: operator!=`
+- `wxPoint.operator+: None`
+    - `const wxPoint&: None`
+        - `const wxPoint&: operator+`
+        - `const wxSize&: operator+1`
+    - `const wxSize&: None`
+        - `const wxPoint&: operator+2`
+- `wxPoint.operator-: None`
+    - `const wxPoint&: None`
+        - `const wxPoint&: operator-`
+        - `const wxSize&: operator-1`
+    - `const wxSize&: None`
+        - `const wxPoint&: operator-2`
+- `wxPoint.operator+=: None`
+    - `const wxPoint&: operator+=`
+    - `const wxSize&: operator+=1`
+- `wxPoint.operator-=: None`
+    - `const wxPoint&: operator-=`
+    - `const wxSize&: operator-=1`
+- `wxPoint.operator/: None`
+    - `const wxPoint&: None`
+        - `int: operator/`
+- `wxPoint.operator*: None`
+    - `const wxPoint&: None`
+        - `int: operator*`
+    - `int: None`
+        - `const wxSize&: operator*1`
+- `wxPoint.operator/=: None`
+    - `int: operator/=`
+- `wxPoint.operator*=: None`
+    - `int: operator*=`
+- `wxPoint.wxPoint: wxPoint`
+    - `int: None`
+        - `int: wxPoint1`
+    - `const wxRealPoint&: wxPoint2`
+- `wxRect.wxRect: wxRect`
+    - `int: None`
+        - `int: None`
+            - `int: None`
+                - `int: wxRect1`
+    - `const wxPoint&: None`
+        - `const wxPoint&: wxRect2`
+        - `const wxSize&: wxRect3`
+    - `const wxSize&: wxRect4`
+- `wxRect.CentreIn: None`
+    - `const wxRect&: None`
+        - `int: CentreIn`
+- `wxRect.CenterIn: None`
+    - `const wxRect&: None`
+        - `int: CenterIn`
+- `wxRect.Contains: None`
+    - `int: None`
+        - `int: Contains`
+    - `const wxPoint&: Contains1`
+    - `const wxRect&: Contains2`
+- `wxRect.Deflate: None`
+    - `wxCoord: Deflate2`
+        - `wxCoord: Deflate3`
+    - `const wxSize&: Deflate1`
+- `wxRect.GetBottom: GetBottom`
+- `wxRect.GetBottomLeft: GetBottomLeft`
+- `wxRect.GetBottomRight: GetBottomRight`
+- `wxRect.GetHeight: GetHeight`
+- `wxRect.GetLeft: GetLeft`
+- `wxRect.GetPosition: GetPosition`
+- `wxRect.GetRight: GetRight`
+- `wxRect.GetSize: GetSize`
+- `wxRect.GetTop: GetTop`
+- `wxRect.GetTopLeft: GetTopLeft`
+- `wxRect.GetTopRight: GetTopRight`
+- `wxRect.GetWidth: GetWidth`
+- `wxRect.GetX: GetX`
+- `wxRect.GetY: GetY`
+- `wxRect.Inflate: None`
+    - `wxCoord: Inflate2`
+        - `wxCoord: Inflate3`
+    - `const wxSize&: Inflate1`
+- `wxRect.Intersect: None`
+    - `const wxRect&: Intersect1`
+- `wxRect.Intersects: None`
+    - `const wxRect&: Intersects`
+- `wxRect.IsEmpty: IsEmpty`
+- `wxRect.Offset: None`
+    - `wxCoord: None`
+        - `wxCoord: Offset`
+    - `const wxPoint&: Offset1`
+- `wxRect.SetHeight: None`
+    - `int: SetHeight`
+- `wxRect.SetPosition: None`
+    - `const wxPoint&: SetPosition`
+- `wxRect.SetSize: None`
+    - `const wxSize&: SetSize`
+- `wxRect.SetWidth: None`
+    - `int: SetWidth`
+- `wxRect.SetX: None`
+    - `int: SetX`
+- `wxRect.SetY: None`
+    - `int: SetY`
+- `wxRect.SetLeft: None`
+    - `int: SetLeft`
+- `wxRect.SetRight: None`
+    - `int: SetRight`
+- `wxRect.SetTop: None`
+    - `int: SetTop`
+- `wxRect.SetBottom: None`
+    - `int: SetBottom`
+- `wxRect.SetTopLeft: None`
+    - `const wxPoint&: SetTopLeft`
+- `wxRect.SetBottomRight: None`
+    - `const wxPoint&: SetBottomRight`
+- `wxRect.SetTopRight: None`
+    - `const wxPoint&: SetTopRight`
+- `wxRect.SetBottomLeft: None`
+    - `const wxPoint&: SetBottomLeft`
+- `wxRect.Union: None`
+    - `const wxRect&: Union1`
+- `wxRect.operator!=: None`
+    - `const wxRect&: None`
+        - `const wxRect&: operator!=`
+- `wxRect.operator+: None`
+    - `const wxRect&: None`
+        - `const wxRect&: operator+`
+- `wxRect.operator+=: None`
+    - `const wxRect&: operator+=`
+- `wxRect.operator*: None`
+    - `const wxRect&: None`
+        - `const wxRect&: operator*`
+- `wxRect.operator*=: None`
+    - `const wxRect&: operator*=`
+- `wxRect.operator=: None`
+    - `const wxRect&: operator=`
+- `wxRect.operator==: None`
+    - `const wxRect&: None`
+        - `const wxRect&: operator==`
+- `wxSize.operator=: None`
+    - `const wxSize&: operator=`
+- `wxSize.operator==: None`
+    - `const wxSize&: None`
+        - `const wxSize&: operator==`
+- `wxSize.operator!=: None`
+    - `const wxSize&: None`
+        - `const wxSize&: operator!=`
+- `wxSize.operator+: None`
+    - `const wxSize&: None`
+        - `const wxSize&: operator+`
+- `wxSize.operator-: None`
+    - `const wxSize&: None`
+        - `const wxSize&: operator-`
+- `wxSize.operator+=: None`
+    - `const wxSize&: operator+=`
+- `wxSize.operator-=: None`
+    - `const wxSize&: operator-=`
+- `wxSize.operator/: None`
+    - `const wxSize&: None`
+        - `int: operator/`
+- `wxSize.operator*: None`
+    - `const wxSize&: None`
+        - `int: operator*`
+    - `int: None`
+        - `const wxSize&: operator*1`
+- `wxSize.operator/=: None`
+    - `int: operator/=`
+- `wxSize.operator*=: None`
+    - `int: operator*=`
+- `wxSize.wxSize: wxSize`
+    - `int: None`
+        - `int: wxSize1`
+- `wxSize.DecBy: None`
+    - `const wxPoint&: DecBy`
+    - `const wxSize&: DecBy1`
+    - `int: DecBy3`
+        - `int: DecBy2`
+- `wxSize.DecTo: None`
+    - `const wxSize&: DecTo`
+- `wxSize.DecToIfSpecified: None`
+    - `const wxSize&: DecToIfSpecified`
+- `wxSize.GetHeight: GetHeight`
+- `wxSize.GetWidth: GetWidth`
+- `wxSize.IncBy: None`
+    - `const wxPoint&: IncBy`
+    - `const wxSize&: IncBy1`
+    - `int: IncBy3`
+        - `int: IncBy2`
+- `wxSize.IncTo: None`
+    - `const wxSize&: IncTo`
+- `wxSize.IsFullySpecified: IsFullySpecified`
+- `wxSize.Scale: None`
+    - `double: None`
+        - `double: Scale`
+- `wxSize.Set: None`
+    - `int: None`
+        - `int: Set`
+- `wxSize.SetDefaults: None`
+    - `const wxSize&: SetDefaults`
+- `wxSize.SetHeight: None`
+    - `int: SetHeight`
+- `wxSize.SetWidth: None`
+    - `int: SetWidth`
+- `wxValidator.wxValidator: wxValidator`
+- `wxValidator.~wxValidator: ~wxValidator`
+- `wxValidator.Clone: Clone`
+- `wxValidator.GetWindow: GetWindow`
+- `wxValidator.SetWindow: None`
+    - `wxWindow*: SetWindow`
+- `wxValidator.TransferFromWindow: TransferFromWindow`
+- `wxValidator.TransferToWindow: TransferToWindow`
+- `wxValidator.Validate: None`
+    - `wxWindow*: Validate`
+- `wxValidator.SuppressBellOnError: None`
+    - `bool: SuppressBellOnError`
+- `wxValidator.IsSilent: IsSilent`

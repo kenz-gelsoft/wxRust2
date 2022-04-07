@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from .model import Param, RustType, prefixed, pascal_to_snake
 
 # Known, and problematic
@@ -12,6 +13,8 @@ RUST_KEYWORDS = [
 class RustClassBinding:
     def __init__(self, model):
         self.__model = model
+        self.__overloads = OverloadTree(model)
+        self.__overloads.print_tree()
         self.__methods = [RustMethodBinding(m) for m in model.methods]
 
     def lines(self, for_ffi=False):
@@ -113,6 +116,54 @@ class RustClassBinding:
         yield '}\n'
 
 
+class Overload:
+    def __init__(self, name):
+        self.name = name
+        self.method = None
+        self.items = OrderedDict()
+
+
+class OverloadTree:
+    def __init__(self, cls):
+        self.__cls = cls
+        self.__root = Overload("")
+
+        for m in cls.methods:
+            self._add(m)
+    
+    def _path(self, method):
+        path = []
+        path.append('%s.%s' % (
+            self.__cls.name,
+            method.name(without_index=True),
+        ))
+        for p in method.params:
+            path.append(p.type.normalized())
+        return path
+    
+    def _add(self, method):
+        path = self._path(method)
+        node = self.__root
+        for item in path:
+            items = node.items
+            if item not in items:
+                items[item] = Overload(item)
+            node = items[item]
+        node.method = method
+    
+    def print_tree(self):
+        self.print_node(self.__root, 0)
+
+    def print_node(self, node, level):
+        indent = '    ' * level
+        for (k, v) in node.items.items():
+            method = v.method
+            if method is not None:
+                method = method.name()
+            print("%s- `%s: %s`" % (indent, k, method))
+            self.print_node(v, level + 1)
+
+
 class RustMethodBinding:
     def __init__(self, model):
         self.__model = model
@@ -187,7 +238,6 @@ class RustMethodBinding:
                 yield '    %s' % (line,)
             yield '}'
 
-    
     def _binding_body(self):
         params = self.__model.params
         for param in params:
