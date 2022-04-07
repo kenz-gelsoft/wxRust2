@@ -10,6 +10,11 @@ macro_rules! wx_class {
         )*
         impl WxRustMethods for $type {
             unsafe fn as_ptr(&self) -> *mut c_void { self.0 }
+            unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F) {
+                let tmp = Self(ptr);
+                closure(&tmp);
+                mem::forget(tmp);
+            }
         }
     };
 }

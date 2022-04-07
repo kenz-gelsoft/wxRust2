@@ -49,7 +49,7 @@ use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
 use std::ptr;
 '''
     if libname == 'base':
-        yield 'use crate::{WithPtr, wx_class};'
+        yield 'use crate::wx_class;'
     else:
         yield 'use wx_base::*;'
     yield '''\
@@ -72,6 +72,7 @@ mod ffi {
         yield '''\
 pub trait WxRustMethods {
     unsafe fn as_ptr(&self) -> *mut c_void;
+    unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F);
 }
 '''
     for cls in bindings:

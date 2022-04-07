@@ -63,13 +63,6 @@ class RustClassBinding:
         yield '        None'
         yield '    }'
         yield '}'
-        yield 'impl WithPtr<%s> for %s {' % (unprefixed, unprefixed)
-        yield "    unsafe fn with_ptr<F: Fn(&%s)>(ptr: *mut c_void, closure: F) {" % (unprefixed,)
-        yield '        let tmp = %s(ptr);' % (unprefixed,)
-        yield '        closure(&tmp);'
-        yield '        mem::forget(tmp);'
-        yield '    }'
-        yield '}'
     
     def _impl_drop_if_needed(self):
         if self.__model.manager.is_a(self.__model, 'wxEvtHandler'):

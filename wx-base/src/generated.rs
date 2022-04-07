@@ -6,7 +6,7 @@ use std::mem;
 use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
 use std::ptr;
 
-use crate::{WithPtr, wx_class};
+use crate::wx_class;
 
 mod ffi {
     use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
@@ -90,6 +90,7 @@ mod ffi {
 
 pub trait WxRustMethods {
     unsafe fn as_ptr(&self) -> *mut c_void;
+    unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F);
 }
 
 // wxObject
@@ -108,13 +109,6 @@ impl Object {
     }
     pub fn none() -> Option<&'static Self> {
         None
-    }
-}
-impl WithPtr<Object> for Object {
-    unsafe fn with_ptr<F: Fn(&Object)>(ptr: *mut c_void, closure: F) {
-        let tmp = Object(ptr);
-        closure(&tmp);
-        mem::forget(tmp);
     }
 }
 impl Drop for Object {
@@ -167,13 +161,6 @@ impl Event {
     // NOT_SUPPORTED: fn wxEvent()
     pub fn none() -> Option<&'static Self> {
         None
-    }
-}
-impl WithPtr<Event> for Event {
-    unsafe fn with_ptr<F: Fn(&Event)>(ptr: *mut c_void, closure: F) {
-        let tmp = Event(ptr);
-        closure(&tmp);
-        mem::forget(tmp);
     }
 }
 impl Drop for Event {
@@ -246,13 +233,6 @@ impl EvtHandler {
     }
     pub fn none() -> Option<&'static Self> {
         None
-    }
-}
-impl WithPtr<EvtHandler> for EvtHandler {
-    unsafe fn with_ptr<F: Fn(&EvtHandler)>(ptr: *mut c_void, closure: F) {
-        let tmp = EvtHandler(ptr);
-        closure(&tmp);
-        mem::forget(tmp);
     }
 }
 pub trait EvtHandlerMethods: ObjectMethods {

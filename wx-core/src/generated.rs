@@ -691,13 +691,6 @@ impl CommandEvent {
         None
     }
 }
-impl WithPtr<CommandEvent> for CommandEvent {
-    unsafe fn with_ptr<F: Fn(&CommandEvent)>(ptr: *mut c_void, closure: F) {
-        let tmp = CommandEvent(ptr);
-        closure(&tmp);
-        mem::forget(tmp);
-    }
-}
 impl Drop for CommandEvent {
     fn drop(&mut self) {
         unsafe { ffi::wxObject_delete(self.0) }
@@ -772,13 +765,6 @@ impl Window {
     }
     pub fn none() -> Option<&'static Self> {
         None
-    }
-}
-impl WithPtr<Window> for Window {
-    unsafe fn with_ptr<F: Fn(&Window)>(ptr: *mut c_void, closure: F) {
-        let tmp = Window(ptr);
-        closure(&tmp);
-        mem::forget(tmp);
     }
 }
 pub trait WindowMethods: EvtHandlerMethods {
@@ -1885,13 +1871,6 @@ impl Control {
         None
     }
 }
-impl WithPtr<Control> for Control {
-    unsafe fn with_ptr<F: Fn(&Control)>(ptr: *mut c_void, closure: F) {
-        let tmp = Control(ptr);
-        closure(&tmp);
-        mem::forget(tmp);
-    }
-}
 pub trait ControlMethods: WindowMethods {
     fn create<T: WindowMethods>(&self, parent: Option<&T>, id: c_int, pos: &Point, size: &Size, style: c_long, validator: &Validator, name: &str) -> bool {
         unsafe {
@@ -1981,13 +1960,6 @@ impl AnyButton {
         None
     }
 }
-impl WithPtr<AnyButton> for AnyButton {
-    unsafe fn with_ptr<F: Fn(&AnyButton)>(ptr: *mut c_void, closure: F) {
-        let tmp = AnyButton(ptr);
-        closure(&tmp);
-        mem::forget(tmp);
-    }
-}
 pub trait AnyButtonMethods: ControlMethods {
     // DTOR: fn ~wxAnyButton()
     // NOT_SUPPORTED: fn GetBitmap()
@@ -2058,13 +2030,6 @@ impl Button {
         None
     }
 }
-impl WithPtr<Button> for Button {
-    unsafe fn with_ptr<F: Fn(&Button)>(ptr: *mut c_void, closure: F) {
-        let tmp = Button(ptr);
-        closure(&tmp);
-        mem::forget(tmp);
-    }
-}
 pub trait ButtonMethods: AnyButtonMethods {
     fn create<T: WindowMethods>(&self, parent: Option<&T>, id: c_int, label: &str, pos: &Point, size: &Size, style: c_long, validator: &Validator, name: &str) -> bool {
         unsafe {
@@ -2121,13 +2086,6 @@ impl Menu {
     }
     pub fn none() -> Option<&'static Self> {
         None
-    }
-}
-impl WithPtr<Menu> for Menu {
-    unsafe fn with_ptr<F: Fn(&Menu)>(ptr: *mut c_void, closure: F) {
-        let tmp = Menu(ptr);
-        closure(&tmp);
-        mem::forget(tmp);
     }
 }
 pub trait MenuMethods: EvtHandlerMethods {
@@ -2383,13 +2341,6 @@ impl MenuBar {
         None
     }
 }
-impl WithPtr<MenuBar> for MenuBar {
-    unsafe fn with_ptr<F: Fn(&MenuBar)>(ptr: *mut c_void, closure: F) {
-        let tmp = MenuBar(ptr);
-        closure(&tmp);
-        mem::forget(tmp);
-    }
-}
 pub trait MenuBarMethods: WindowMethods {
     // DTOR: fn ~wxMenuBar()
     fn append<T: MenuMethods>(&self, menu: Option<&T>, title: &str) -> bool {
@@ -2501,13 +2452,6 @@ impl NonOwnedWindow {
         None
     }
 }
-impl WithPtr<NonOwnedWindow> for NonOwnedWindow {
-    unsafe fn with_ptr<F: Fn(&NonOwnedWindow)>(ptr: *mut c_void, closure: F) {
-        let tmp = NonOwnedWindow(ptr);
-        closure(&tmp);
-        mem::forget(tmp);
-    }
-}
 pub trait NonOwnedWindowMethods: WindowMethods {
     fn set_shape(&self, region: *const c_void) -> bool {
         unsafe { ffi::wxNonOwnedWindow_SetShape(self.as_ptr(), region) }
@@ -2544,13 +2488,6 @@ impl TopLevelWindow {
     }
     pub fn none() -> Option<&'static Self> {
         None
-    }
-}
-impl WithPtr<TopLevelWindow> for TopLevelWindow {
-    unsafe fn with_ptr<F: Fn(&TopLevelWindow)>(ptr: *mut c_void, closure: F) {
-        let tmp = TopLevelWindow(ptr);
-        closure(&tmp);
-        mem::forget(tmp);
     }
 }
 pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
@@ -2716,13 +2653,6 @@ impl Frame {
         None
     }
 }
-impl WithPtr<Frame> for Frame {
-    unsafe fn with_ptr<F: Fn(&Frame)>(ptr: *mut c_void, closure: F) {
-        let tmp = Frame(ptr);
-        closure(&tmp);
-        mem::forget(tmp);
-    }
-}
 impl TopLevelWindowMethods for Frame {
     fn create<T: WindowMethods>(&self, parent: Option<&T>, id: c_int, title: &str, pos: &Point, size: &Size, style: c_long, name: &str) -> bool {
         unsafe {
@@ -2847,13 +2777,6 @@ impl Point {
         None
     }
 }
-impl WithPtr<Point> for Point {
-    unsafe fn with_ptr<F: Fn(&Point)>(ptr: *mut c_void, closure: F) {
-        let tmp = Point(ptr);
-        closure(&tmp);
-        mem::forget(tmp);
-    }
-}
 impl Drop for Point {
     fn drop(&mut self) {
         unsafe { ffi::wxPoint_delete(self.0) }
@@ -2922,13 +2845,6 @@ impl Rect {
     }
     pub fn none() -> Option<&'static Self> {
         None
-    }
-}
-impl WithPtr<Rect> for Rect {
-    unsafe fn with_ptr<F: Fn(&Rect)>(ptr: *mut c_void, closure: F) {
-        let tmp = Rect(ptr);
-        closure(&tmp);
-        mem::forget(tmp);
     }
 }
 impl Drop for Rect {
@@ -3134,13 +3050,6 @@ impl Size {
         None
     }
 }
-impl WithPtr<Size> for Size {
-    unsafe fn with_ptr<F: Fn(&Size)>(ptr: *mut c_void, closure: F) {
-        let tmp = Size(ptr);
-        closure(&tmp);
-        mem::forget(tmp);
-    }
-}
 impl Drop for Size {
     fn drop(&mut self) {
         unsafe { ffi::wxSize_delete(self.0) }
@@ -3252,13 +3161,6 @@ impl Validator {
     }
     pub fn none() -> Option<&'static Self> {
         None
-    }
-}
-impl WithPtr<Validator> for Validator {
-    unsafe fn with_ptr<F: Fn(&Validator)>(ptr: *mut c_void, closure: F) {
-        let tmp = Validator(ptr);
-        closure(&tmp);
-        mem::forget(tmp);
     }
 }
 pub trait ValidatorMethods: EvtHandlerMethods {
