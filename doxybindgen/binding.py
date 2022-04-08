@@ -138,7 +138,7 @@ class OverloadTree:
             method.name(without_index=True),
         ))
         for p in method.params:
-            path.append(p.type.normalized())
+            path.append(p.type)
         return path
     
     def _add(self, method):

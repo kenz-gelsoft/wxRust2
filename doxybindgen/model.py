@@ -294,6 +294,15 @@ class CxxType:
         if self.__indirection is None:
             self.__indirection = ''
     
+    def __hash__(self) -> int:
+        return hash(self.normalized())
+
+    def __eq__(self, other: object) -> bool:
+        return self.normalized() == other.normalized()
+    
+    def __repr__(self) -> str:
+        return self.normalized()
+    
     def in_cxx(self):
         if self.is_ref():
             const_or_not = '' if self.__is_mut else 'const '
