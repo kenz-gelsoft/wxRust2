@@ -155,7 +155,7 @@ class OverloadTree:
         count = 0
         if node.method is not None:
             count += 1
-        for (k, v) in node.items.items():
+        for k, v in node.items.items():
             count += self.count_in_subtree(v)
         return count
     
@@ -164,11 +164,14 @@ class OverloadTree:
 
     def print_node(self, node, level):
         indent = '    ' * level
-        for (k, v) in node.items.items():
+        for k, v in node.items.items():
+            count = self.count_in_subtree(v)
+            if level == 0 and count == 1:
+                continue
+            
             method = v.method
             if method is not None:
                 method = method.name()
-            count = self.count_in_subtree(v)
             print("%s- %s: `%s: %s`" % (indent, count, k, method))
             self.print_node(v, level + 1)
 
