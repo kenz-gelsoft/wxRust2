@@ -164,7 +164,7 @@ class OverloadTree:
             if count < 2:
                 break
             prev_count = count
-        return result[1:]
+        return (arg.in_overload_name() for arg in result[1:])
     
     def count_in_subtree(self, node):
         count = 0
@@ -188,6 +188,7 @@ class OverloadTree:
             method = v.method
             if method is not None:
                 args = self.args_to_disambiguate(method)
+                args = '(%s)' % (', '.join(args),)
                 method = method.name()
             print("%s- %s: %s: %s %s" % (indent, count, k, method, args))
             self.print_node(v, level + 1)
