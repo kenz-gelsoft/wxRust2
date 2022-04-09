@@ -151,7 +151,7 @@ class OverloadTree:
             node = items[item]
         node.method = method
     
-    def path_items_to_disambiguate(self, method):
+    def args_to_disambiguate(self, method):
         result = []
         path = self._path(method)
         prev_count = None
@@ -164,7 +164,7 @@ class OverloadTree:
             if count < 2:
                 break
             prev_count = count
-        return result
+        return result[1:]
     
     def count_in_subtree(self, node):
         count = 0
@@ -184,12 +184,12 @@ class OverloadTree:
             if level == 0 and count == 1:
                 continue
             
-            spec = ''
+            args = ''
             method = v.method
             if method is not None:
-                spec = self.path_items_to_disambiguate(method)
+                args = self.args_to_disambiguate(method)
                 method = method.name()
-            print("%s- %s: `%s: %s` %s" % (indent, count, k, method, spec))
+            print("%s- %s: %s: %s %s" % (indent, count, k, method, args))
             self.print_node(v, level + 1)
 
 

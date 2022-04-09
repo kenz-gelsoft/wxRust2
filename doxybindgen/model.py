@@ -301,7 +301,7 @@ class CxxType:
         return self.normalized() == other.normalized()
     
     def __repr__(self) -> str:
-        return self.normalized()
+        return '`%s`' % (self.normalized(),)
     
     def in_cxx(self):
         if self.is_ref():
