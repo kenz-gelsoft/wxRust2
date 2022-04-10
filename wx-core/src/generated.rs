@@ -748,10 +748,10 @@ wx_class! { Window(wxWindow) impl
     ObjectMethods
 }
 impl Window {
-    pub fn new() -> Window {
+    pub fn new_2step() -> Window {
         unsafe { Window(ffi::wxWindow_new()) }
     }
-    pub fn new_with_window<T: WindowMethods>(parent: Option<&T>, id: c_int, pos: &Point, size: &Size, style: c_long, name: &str) -> Window {
+    pub fn new<T: WindowMethods>(parent: Option<&T>, id: c_int, pos: &Point, size: &Size, style: c_long, name: &str) -> Window {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1851,7 +1851,7 @@ wx_class! { Control(wxControl) impl
     ObjectMethods
 }
 impl Control {
-    pub fn new_with_window<T: WindowMethods>(parent: Option<&T>, id: c_int, pos: &Point, size: &Size, style: c_long, validator: &Validator, name: &str) -> Control {
+    pub fn new<T: WindowMethods>(parent: Option<&T>, id: c_int, pos: &Point, size: &Size, style: c_long, validator: &Validator, name: &str) -> Control {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1864,7 +1864,7 @@ impl Control {
             Control(ffi::wxControl_new(parent, id, pos, size, style, validator, name))
         }
     }
-    pub fn new() -> Control {
+    pub fn new_2step() -> Control {
         unsafe { Control(ffi::wxControl_new1()) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -1953,7 +1953,7 @@ wx_class! { AnyButton(wxAnyButton) impl
     ObjectMethods
 }
 impl AnyButton {
-    pub fn new() -> AnyButton {
+    pub fn new_2step() -> AnyButton {
         unsafe { AnyButton(ffi::wxAnyButton_new()) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -2009,10 +2009,10 @@ wx_class! { Button(wxButton) impl
     ObjectMethods
 }
 impl Button {
-    pub fn new() -> Button {
+    pub fn new_2step() -> Button {
         unsafe { Button(ffi::wxButton_new()) }
     }
-    pub fn new_with_window<T: WindowMethods>(parent: Option<&T>, id: c_int, label: &str, pos: &Point, size: &Size, style: c_long, validator: &Validator, name: &str) -> Button {
+    pub fn new<T: WindowMethods>(parent: Option<&T>, id: c_int, label: &str, pos: &Point, size: &Size, style: c_long, validator: &Validator, name: &str) -> Button {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2333,7 +2333,7 @@ wx_class! { MenuBar(wxMenuBar) impl
     ObjectMethods
 }
 impl MenuBar {
-    pub fn new_with_long(style: c_long) -> MenuBar {
+    pub fn new(style: c_long) -> MenuBar {
         unsafe { MenuBar(ffi::wxMenuBar_new(style)) }
     }
     // NOT_SUPPORTED: fn wxMenuBar1()
@@ -2470,10 +2470,10 @@ wx_class! { TopLevelWindow(wxTopLevelWindow) impl
     ObjectMethods
 }
 impl TopLevelWindow {
-    pub fn new() -> TopLevelWindow {
+    pub fn new_2step() -> TopLevelWindow {
         unsafe { TopLevelWindow(ffi::wxTopLevelWindow_new()) }
     }
-    pub fn new_with_window<T: WindowMethods>(parent: Option<&T>, id: c_int, title: &str, pos: &Point, size: &Size, style: c_long, name: &str) -> TopLevelWindow {
+    pub fn new<T: WindowMethods>(parent: Option<&T>, id: c_int, title: &str, pos: &Point, size: &Size, style: c_long, name: &str) -> TopLevelWindow {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2633,10 +2633,10 @@ wx_class! { Frame(wxFrame) impl
     ObjectMethods
 }
 impl Frame {
-    pub fn new() -> Frame {
+    pub fn new_2step() -> Frame {
         unsafe { Frame(ffi::wxFrame_new()) }
     }
-    pub fn new_with_window<T: WindowMethods>(parent: Option<&T>, id: c_int, title: &str, pos: &Point, size: &Size, style: c_long, name: &str) -> Frame {
+    pub fn new<T: WindowMethods>(parent: Option<&T>, id: c_int, title: &str, pos: &Point, size: &Size, style: c_long, name: &str) -> Frame {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),

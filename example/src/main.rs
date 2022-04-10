@@ -6,10 +6,10 @@ use wx::*;
 
 fn main() {
     wx_base::App::run(|_| {
-        let frame = Frame::new_with_window(Window::none(), wxID_ANY, "Hello, 世界", 
+        let frame = Frame::new(Window::none(), wxID_ANY, "Hello, 世界", 
                 &Point::default(), &Size::default(),
                 wxDEFAULT_FRAME_STYLE, "");
-        let button = Button::new_with_window(Some(&frame), wxID_ANY, "Greet",
+        let button = Button::new(Some(&frame), wxID_ANY, "Greet",
                 &Point::default(), &Size::default(), 0,
                 &Validator::default(), "");
         let i = 3;

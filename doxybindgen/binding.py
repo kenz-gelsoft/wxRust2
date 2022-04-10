@@ -16,13 +16,16 @@ class RustClassBinding:
         self.overloads = OverloadTree(model)
         # self.overloads.print_tree()
         self.__methods = [RustMethodBinding(self, m) for m in model.methods]
+    
+    def is_a(self, base):
+        return self.__model.manager.is_a(self.__model, base)
 
     def lines(self, for_ffi=False):
         yield '// %s' % (
             self.__model.name,
         )
         if for_ffi:
-            if not self.__model.manager.is_a(self.__model, 'wxObject'):
+            if not self.is_a('wxObject'):
                 yield 'pub fn %s_delete(self_: *mut c_void);' % (
                     self.__model.name,
                 )
@@ -68,10 +71,10 @@ class RustClassBinding:
         yield '}'
     
     def _impl_drop_if_needed(self):
-        if self.__model.manager.is_a(self.__model, 'wxEvtHandler'):
+        if self.is_a('wxEvtHandler'):
             return
         deleter_class = self.__model.name
-        if self.__model.manager.is_a(self.__model, 'wxObject'):
+        if self.is_a('wxObject'):
             deleter_class = 'wxObject'
         yield 'impl Drop for %s {' % (self.__model.unprefixed(),)
         yield '    fn drop(&mut self) {'
@@ -305,12 +308,14 @@ class RustMethodBinding:
         method_name = pascal_to_snake(self.__model.name(
             without_index=True,
         ))
-        if self.__model.is_ctor:
-            method_name = 'new'
-        # method_name = self.__model.overload_indexed(method_name)
+        splitter = '_'
         arg_types = self.__cls.overloads.args_to_disambiguate(self.__model)
+        if self.__model.is_ctor:
+            if self.__cls.is_a('wxWindow'):
+                return 'new_2step' if len(arg_types) == 0 else 'new'
+            method_name = 'new'
+            splitter = '_with_'
         if len(arg_types) > 0:
-            splitter = '_with_' if self.is_ctor else '_'
             method_name += splitter + '_'.join(arg_types)
         method_name = self.non_keyword_name(method_name)
         return method_name
