@@ -13,9 +13,9 @@ RUST_KEYWORDS = [
 class RustClassBinding:
     def __init__(self, model):
         self.__model = model
-        self.__overloads = OverloadTree(model)
-        self.__overloads.print_tree()
-        self.__methods = [RustMethodBinding(m) for m in model.methods]
+        self.overloads = OverloadTree(model)
+        # self.overloads.print_tree()
+        self.__methods = [RustMethodBinding(self, m) for m in model.methods]
 
     def lines(self, for_ffi=False):
         yield '// %s' % (
@@ -164,7 +164,7 @@ class OverloadTree:
             if count < 2:
                 break
             prev_count = count
-        return (arg.in_overload_name() for arg in result[1:])
+        return [arg.in_overload_name() for arg in result[1:]]
     
     def count_in_subtree(self, node):
         count = 0
@@ -195,7 +195,8 @@ class OverloadTree:
 
 
 class RustMethodBinding:
-    def __init__(self, model):
+    def __init__(self, cls, model):
+        self.__cls = cls
         self.__model = model
         self.is_ctor = model.is_ctor
         self.__self_param = Param(RustType(model.cls.name, model.const), 'self')
@@ -306,7 +307,10 @@ class RustMethodBinding:
         ))
         if self.__model.is_ctor:
             method_name = 'new'
-        method_name = self.__model.overload_indexed(method_name)
+        # method_name = self.__model.overload_indexed(method_name)
+        arg_types = self.__cls.overloads.args_to_disambiguate(self.__model)
+        if len(arg_types) > 0:
+            method_name += '_' + '_'.join(arg_types)
         method_name = self.non_keyword_name(method_name)
         return method_name
     

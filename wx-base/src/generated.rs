@@ -101,7 +101,7 @@ impl Object {
     pub fn new() -> Object {
         unsafe { Object(ffi::wxObject_new()) }
     }
-    pub fn new1(other: &Object) -> Object {
+    pub fn new_object(other: &Object) -> Object {
         unsafe {
             let other = other.as_ptr();
             Object(ffi::wxObject_new1(other))

@@ -751,7 +751,7 @@ impl Window {
     pub fn new() -> Window {
         unsafe { Window(ffi::wxWindow_new()) }
     }
-    pub fn new1<T: WindowMethods>(parent: Option<&T>, id: c_int, pos: &Point, size: &Size, style: c_long, name: &str) -> Window {
+    pub fn new_window<T: WindowMethods>(parent: Option<&T>, id: c_int, pos: &Point, size: &Size, style: c_long, name: &str) -> Window {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -816,10 +816,10 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn destroy_children(&self) -> bool {
         unsafe { ffi::wxWindow_DestroyChildren(self.as_ptr()) }
     }
-    fn find_window(&self, id: c_long) -> *mut c_void {
+    fn find_window_long(&self, id: c_long) -> *mut c_void {
         unsafe { ffi::wxWindow_FindWindow(self.as_ptr(), id) }
     }
-    fn find_window1(&self, name: &str) -> *mut c_void {
+    fn find_window_str(&self, name: &str) -> *mut c_void {
         unsafe {
             let name = wx_base::wx_string_from(name);
             ffi::wxWindow_FindWindow1(self.as_ptr(), name)
@@ -950,34 +950,34 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn fit_inside(&self) {
         unsafe { ffi::wxWindow_FitInside(self.as_ptr()) }
     }
-    fn from_dip(&self, sz: &Size) -> Size {
+    fn from_dip_size(&self, sz: &Size) -> Size {
         unsafe {
             let sz = sz.as_ptr();
             Size(ffi::wxWindow_FromDIP(self.as_ptr(), sz))
         }
     }
-    fn from_dip1(&self, pt: &Point) -> Point {
+    fn from_dip_point(&self, pt: &Point) -> Point {
         unsafe {
             let pt = pt.as_ptr();
             Point(ffi::wxWindow_FromDIP1(self.as_ptr(), pt))
         }
     }
-    fn from_dip2(&self, d: c_int) -> c_int {
+    fn from_dip_int(&self, d: c_int) -> c_int {
         unsafe { ffi::wxWindow_FromDIP2(self.as_ptr(), d) }
     }
-    fn to_dip(&self, sz: &Size) -> Size {
+    fn to_dip_size(&self, sz: &Size) -> Size {
         unsafe {
             let sz = sz.as_ptr();
             Size(ffi::wxWindow_ToDIP(self.as_ptr(), sz))
         }
     }
-    fn to_dip1(&self, pt: &Point) -> Point {
+    fn to_dip_point(&self, pt: &Point) -> Point {
         unsafe {
             let pt = pt.as_ptr();
             Point(ffi::wxWindow_ToDIP1(self.as_ptr(), pt))
         }
     }
-    fn to_dip2(&self, d: c_int) -> c_int {
+    fn to_dip_int(&self, d: c_int) -> c_int {
         unsafe { ffi::wxWindow_ToDIP2(self.as_ptr(), d) }
     }
     fn get_best_size(&self) -> Size {
@@ -989,10 +989,10 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn get_best_width(&self, height: c_int) -> c_int {
         unsafe { ffi::wxWindow_GetBestWidth(self.as_ptr(), height) }
     }
-    fn get_client_size(&self, width: *mut c_void, height: *mut c_void) {
+    fn get_client_size_int(&self, width: *mut c_void, height: *mut c_void) {
         unsafe { ffi::wxWindow_GetClientSize(self.as_ptr(), width, height) }
     }
-    fn get_client_size1(&self) -> Size {
+    fn get_client_size(&self) -> Size {
         unsafe { Size(ffi::wxWindow_GetClientSize1(self.as_ptr())) }
     }
     fn get_effective_min_size(&self) -> Size {
@@ -1022,16 +1022,16 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn get_max_height(&self) -> c_int {
         unsafe { ffi::wxWindow_GetMaxHeight(self.as_ptr()) }
     }
-    fn get_size(&self, width: *mut c_void, height: *mut c_void) {
+    fn get_size_int(&self, width: *mut c_void, height: *mut c_void) {
         unsafe { ffi::wxWindow_GetSize(self.as_ptr(), width, height) }
     }
-    fn get_size1(&self) -> Size {
+    fn get_size(&self) -> Size {
         unsafe { Size(ffi::wxWindow_GetSize1(self.as_ptr())) }
     }
     fn get_virtual_size(&self) -> Size {
         unsafe { Size(ffi::wxWindow_GetVirtualSize(self.as_ptr())) }
     }
-    fn get_virtual_size1(&self, width: *mut c_void, height: *mut c_void) {
+    fn get_virtual_size_int(&self, width: *mut c_void, height: *mut c_void) {
         unsafe { ffi::wxWindow_GetVirtualSize1(self.as_ptr(), width, height) }
     }
     fn get_best_virtual_size(&self) -> Size {
@@ -1064,16 +1064,16 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn send_size_event_to_parent(&self, flags: c_int) {
         unsafe { ffi::wxWindow_SendSizeEventToParent(self.as_ptr(), flags) }
     }
-    fn set_client_size(&self, width: c_int, height: c_int) {
+    fn set_client_size_int(&self, width: c_int, height: c_int) {
         unsafe { ffi::wxWindow_SetClientSize(self.as_ptr(), width, height) }
     }
-    fn set_client_size1(&self, size: &Size) {
+    fn set_client_size_size(&self, size: &Size) {
         unsafe {
             let size = size.as_ptr();
             ffi::wxWindow_SetClientSize1(self.as_ptr(), size)
         }
     }
-    fn set_client_size2(&self, rect: &Rect) {
+    fn set_client_size_rect(&self, rect: &Rect) {
         unsafe {
             let rect = rect.as_ptr();
             ffi::wxWindow_SetClientSize2(self.as_ptr(), rect)
@@ -1112,25 +1112,25 @@ pub trait WindowMethods: EvtHandlerMethods {
             ffi::wxWindow_SetMinSize(self.as_ptr(), size)
         }
     }
-    fn set_size(&self, x: c_int, y: c_int, width: c_int, height: c_int, size_flags: c_int) {
+    fn set_size_int_int(&self, x: c_int, y: c_int, width: c_int, height: c_int, size_flags: c_int) {
         unsafe { ffi::wxWindow_SetSize(self.as_ptr(), x, y, width, height, size_flags) }
     }
-    fn set_size1(&self, rect: &Rect) {
+    fn set_size_rect(&self, rect: &Rect) {
         unsafe {
             let rect = rect.as_ptr();
             ffi::wxWindow_SetSize1(self.as_ptr(), rect)
         }
     }
-    fn set_size2(&self, size: &Size) {
+    fn set_size_size(&self, size: &Size) {
         unsafe {
             let size = size.as_ptr();
             ffi::wxWindow_SetSize2(self.as_ptr(), size)
         }
     }
-    fn set_size3(&self, width: c_int, height: c_int) {
+    fn set_size_int(&self, width: c_int, height: c_int) {
         unsafe { ffi::wxWindow_SetSize3(self.as_ptr(), width, height) }
     }
-    fn set_size_hints(&self, min_size: &Size, max_size: &Size, inc_size: &Size) {
+    fn set_size_hints_size(&self, min_size: &Size, max_size: &Size, inc_size: &Size) {
         unsafe {
             let min_size = min_size.as_ptr();
             let max_size = max_size.as_ptr();
@@ -1138,19 +1138,19 @@ pub trait WindowMethods: EvtHandlerMethods {
             ffi::wxWindow_SetSizeHints(self.as_ptr(), min_size, max_size, inc_size)
         }
     }
-    fn set_size_hints1(&self, min_w: c_int, min_h: c_int, max_w: c_int, max_h: c_int, inc_w: c_int, inc_h: c_int) {
+    fn set_size_hints_int(&self, min_w: c_int, min_h: c_int, max_w: c_int, max_h: c_int, inc_w: c_int, inc_h: c_int) {
         unsafe { ffi::wxWindow_SetSizeHints1(self.as_ptr(), min_w, min_h, max_w, max_h, inc_w, inc_h) }
     }
-    fn set_virtual_size(&self, width: c_int, height: c_int) {
+    fn set_virtual_size_int(&self, width: c_int, height: c_int) {
         unsafe { ffi::wxWindow_SetVirtualSize(self.as_ptr(), width, height) }
     }
-    fn set_virtual_size1(&self, size: &Size) {
+    fn set_virtual_size_size(&self, size: &Size) {
         unsafe {
             let size = size.as_ptr();
             ffi::wxWindow_SetVirtualSize1(self.as_ptr(), size)
         }
     }
-    fn from_dip3<T: WindowMethods>(sz: &Size, w: Option<&T>) -> Size {
+    fn from_dip_size_window<T: WindowMethods>(sz: &Size, w: Option<&T>) -> Size {
         unsafe {
             let sz = sz.as_ptr();
             let w = match w {
@@ -1160,7 +1160,7 @@ pub trait WindowMethods: EvtHandlerMethods {
             Size(ffi::wxWindow_FromDIP3(sz, w))
         }
     }
-    fn from_dip4<T: WindowMethods>(pt: &Point, w: Option<&T>) -> Point {
+    fn from_dip_point_window<T: WindowMethods>(pt: &Point, w: Option<&T>) -> Point {
         unsafe {
             let pt = pt.as_ptr();
             let w = match w {
@@ -1170,7 +1170,7 @@ pub trait WindowMethods: EvtHandlerMethods {
             Point(ffi::wxWindow_FromDIP4(pt, w))
         }
     }
-    fn from_dip5<T: WindowMethods>(d: c_int, w: Option<&T>) -> c_int {
+    fn from_dip_int_window<T: WindowMethods>(d: c_int, w: Option<&T>) -> c_int {
         unsafe {
             let w = match w {
                 Some(r) => r.as_ptr(),
@@ -1179,7 +1179,7 @@ pub trait WindowMethods: EvtHandlerMethods {
             ffi::wxWindow_FromDIP5(d, w)
         }
     }
-    fn to_dip3<T: WindowMethods>(sz: &Size, w: Option<&T>) -> Size {
+    fn to_dip_size_window<T: WindowMethods>(sz: &Size, w: Option<&T>) -> Size {
         unsafe {
             let sz = sz.as_ptr();
             let w = match w {
@@ -1189,7 +1189,7 @@ pub trait WindowMethods: EvtHandlerMethods {
             Size(ffi::wxWindow_ToDIP3(sz, w))
         }
     }
-    fn to_dip4<T: WindowMethods>(pt: &Point, w: Option<&T>) -> Point {
+    fn to_dip_point_window<T: WindowMethods>(pt: &Point, w: Option<&T>) -> Point {
         unsafe {
             let pt = pt.as_ptr();
             let w = match w {
@@ -1199,7 +1199,7 @@ pub trait WindowMethods: EvtHandlerMethods {
             Point(ffi::wxWindow_ToDIP4(pt, w))
         }
     }
-    fn to_dip5<T: WindowMethods>(d: c_int, w: Option<&T>) -> c_int {
+    fn to_dip_int_window<T: WindowMethods>(d: c_int, w: Option<&T>) -> c_int {
         unsafe {
             let w = match w {
                 Some(r) => r.as_ptr(),
@@ -1220,19 +1220,19 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn centre_on_parent(&self, direction: c_int) {
         unsafe { ffi::wxWindow_CentreOnParent(self.as_ptr(), direction) }
     }
-    fn get_position(&self, x: *mut c_void, y: *mut c_void) {
+    fn get_position_int(&self, x: *mut c_void, y: *mut c_void) {
         unsafe { ffi::wxWindow_GetPosition(self.as_ptr(), x, y) }
     }
-    fn get_position1(&self) -> Point {
+    fn get_position(&self) -> Point {
         unsafe { Point(ffi::wxWindow_GetPosition1(self.as_ptr())) }
     }
     fn get_rect(&self) -> Rect {
         unsafe { Rect(ffi::wxWindow_GetRect(self.as_ptr())) }
     }
-    fn get_screen_position(&self, x: *mut c_void, y: *mut c_void) {
+    fn get_screen_position_int(&self, x: *mut c_void, y: *mut c_void) {
         unsafe { ffi::wxWindow_GetScreenPosition(self.as_ptr(), x, y) }
     }
-    fn get_screen_position1(&self) -> Point {
+    fn get_screen_position(&self) -> Point {
         unsafe { Point(ffi::wxWindow_GetScreenPosition1(self.as_ptr())) }
     }
     fn get_screen_rect(&self) -> Rect {
@@ -1244,10 +1244,10 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn get_client_rect(&self) -> Rect {
         unsafe { Rect(ffi::wxWindow_GetClientRect(self.as_ptr())) }
     }
-    fn move_(&self, x: c_int, y: c_int, flags: c_int) {
+    fn move_int(&self, x: c_int, y: c_int, flags: c_int) {
         unsafe { ffi::wxWindow_Move(self.as_ptr(), x, y, flags) }
     }
-    fn move1(&self, pt: &Point, flags: c_int) {
+    fn move_point(&self, pt: &Point, flags: c_int) {
         unsafe {
             let pt = pt.as_ptr();
             ffi::wxWindow_Move1(self.as_ptr(), pt, flags)
@@ -1259,43 +1259,43 @@ pub trait WindowMethods: EvtHandlerMethods {
             ffi::wxWindow_SetPosition(self.as_ptr(), pt)
         }
     }
-    fn client_to_screen(&self, x: *mut c_void, y: *mut c_void) {
+    fn client_to_screen_int(&self, x: *mut c_void, y: *mut c_void) {
         unsafe { ffi::wxWindow_ClientToScreen(self.as_ptr(), x, y) }
     }
-    fn client_to_screen1(&self, pt: &Point) -> Point {
+    fn client_to_screen_point(&self, pt: &Point) -> Point {
         unsafe {
             let pt = pt.as_ptr();
             Point(ffi::wxWindow_ClientToScreen1(self.as_ptr(), pt))
         }
     }
-    fn convert_dialog_to_pixels(&self, pt: &Point) -> Point {
+    fn convert_dialog_to_pixels_point(&self, pt: &Point) -> Point {
         unsafe {
             let pt = pt.as_ptr();
             Point(ffi::wxWindow_ConvertDialogToPixels(self.as_ptr(), pt))
         }
     }
-    fn convert_dialog_to_pixels1(&self, sz: &Size) -> Size {
+    fn convert_dialog_to_pixels_size(&self, sz: &Size) -> Size {
         unsafe {
             let sz = sz.as_ptr();
             Size(ffi::wxWindow_ConvertDialogToPixels1(self.as_ptr(), sz))
         }
     }
-    fn convert_pixels_to_dialog(&self, pt: &Point) -> Point {
+    fn convert_pixels_to_dialog_point(&self, pt: &Point) -> Point {
         unsafe {
             let pt = pt.as_ptr();
             Point(ffi::wxWindow_ConvertPixelsToDialog(self.as_ptr(), pt))
         }
     }
-    fn convert_pixels_to_dialog1(&self, sz: &Size) -> Size {
+    fn convert_pixels_to_dialog_size(&self, sz: &Size) -> Size {
         unsafe {
             let sz = sz.as_ptr();
             Size(ffi::wxWindow_ConvertPixelsToDialog1(self.as_ptr(), sz))
         }
     }
-    fn screen_to_client(&self, x: *mut c_void, y: *mut c_void) {
+    fn screen_to_client_int(&self, x: *mut c_void, y: *mut c_void) {
         unsafe { ffi::wxWindow_ScreenToClient(self.as_ptr(), x, y) }
     }
-    fn screen_to_client1(&self, pt: &Point) -> Point {
+    fn screen_to_client_point(&self, pt: &Point) -> Point {
         unsafe {
             let pt = pt.as_ptr();
             Point(ffi::wxWindow_ScreenToClient1(self.as_ptr(), pt))
@@ -1327,13 +1327,13 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     // NOT_SUPPORTED: fn GetFont()
     // NOT_SUPPORTED: fn GetForegroundColour()
-    fn get_text_extent(&self, string: &str, w: *mut c_void, h: *mut c_void, descent: *mut c_void, external_leading: *mut c_void, font: *const c_void) {
+    fn get_text_extent_int(&self, string: &str, w: *mut c_void, h: *mut c_void, descent: *mut c_void, external_leading: *mut c_void, font: *const c_void) {
         unsafe {
             let string = wx_base::wx_string_from(string);
             ffi::wxWindow_GetTextExtent(self.as_ptr(), string, w, h, descent, external_leading, font)
         }
     }
-    fn get_text_extent1(&self, string: &str) -> Size {
+    fn get_text_extent(&self, string: &str) -> Size {
         unsafe {
             let string = wx_base::wx_string_from(string);
             Size(ffi::wxWindow_GetTextExtent1(self.as_ptr(), string))
@@ -1528,16 +1528,16 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn is_enabled(&self) -> bool {
         unsafe { ffi::wxWindow_IsEnabled(self.as_ptr()) }
     }
-    fn is_exposed(&self, x: c_int, y: c_int) -> bool {
+    fn is_exposed_int(&self, x: c_int, y: c_int) -> bool {
         unsafe { ffi::wxWindow_IsExposed(self.as_ptr(), x, y) }
     }
-    fn is_exposed1(&self, pt: *mut c_void) -> bool {
+    fn is_exposed_point(&self, pt: *mut c_void) -> bool {
         unsafe { ffi::wxWindow_IsExposed1(self.as_ptr(), pt) }
     }
-    fn is_exposed2(&self, x: c_int, y: c_int, w: c_int, h: c_int) -> bool {
+    fn is_exposed_int_int(&self, x: c_int, y: c_int, w: c_int, h: c_int) -> bool {
         unsafe { ffi::wxWindow_IsExposed2(self.as_ptr(), x, y, w, h) }
     }
-    fn is_exposed3(&self, rect: *mut c_void) -> bool {
+    fn is_exposed_rect(&self, rect: *mut c_void) -> bool {
         unsafe { ffi::wxWindow_IsExposed3(self.as_ptr(), rect) }
     }
     fn is_shown(&self) -> bool {
@@ -1572,28 +1572,28 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn get_tool_tip_text(&self) -> String {
         unsafe { wx_base::from_wx_string(ffi::wxWindow_GetToolTipText(self.as_ptr())) }
     }
-    fn set_tool_tip(&self, tip_string: &str) {
+    fn set_tool_tip_str(&self, tip_string: &str) {
         unsafe {
             let tip_string = wx_base::wx_string_from(tip_string);
             ffi::wxWindow_SetToolTip(self.as_ptr(), tip_string)
         }
     }
-    fn set_tool_tip1(&self, tip: *mut c_void) {
+    fn set_tool_tip_tooltip(&self, tip: *mut c_void) {
         unsafe { ffi::wxWindow_SetToolTip1(self.as_ptr(), tip) }
     }
     fn unset_tool_tip(&self) {
         unsafe { ffi::wxWindow_UnsetToolTip(self.as_ptr()) }
     }
-    fn get_popup_menu_selection_from_user(&self, menu: *mut c_void, pos: &Point) -> c_int {
+    fn get_popup_menu_selection_from_user_point(&self, menu: *mut c_void, pos: &Point) -> c_int {
         unsafe {
             let pos = pos.as_ptr();
             ffi::wxWindow_GetPopupMenuSelectionFromUser(self.as_ptr(), menu, pos)
         }
     }
-    fn get_popup_menu_selection_from_user1(&self, menu: *mut c_void, x: c_int, y: c_int) -> c_int {
+    fn get_popup_menu_selection_from_user_int(&self, menu: *mut c_void, x: c_int, y: c_int) -> c_int {
         unsafe { ffi::wxWindow_GetPopupMenuSelectionFromUser1(self.as_ptr(), menu, x, y) }
     }
-    fn popup_menu<T: MenuMethods>(&self, menu: Option<&T>, pos: &Point) -> bool {
+    fn popup_menu_point<T: MenuMethods>(&self, menu: Option<&T>, pos: &Point) -> bool {
         unsafe {
             let menu = match menu {
                 Some(r) => r.as_ptr(),
@@ -1603,7 +1603,7 @@ pub trait WindowMethods: EvtHandlerMethods {
             ffi::wxWindow_PopupMenu(self.as_ptr(), menu, pos)
         }
     }
-    fn popup_menu1<T: MenuMethods>(&self, menu: Option<&T>, x: c_int, y: c_int) -> bool {
+    fn popup_menu_int<T: MenuMethods>(&self, menu: Option<&T>, x: c_int, y: c_int) -> bool {
         unsafe {
             let menu = match menu {
                 Some(r) => r.as_ptr(),
@@ -1851,7 +1851,7 @@ wx_class! { Control(wxControl) impl
     ObjectMethods
 }
 impl Control {
-    pub fn new<T: WindowMethods>(parent: Option<&T>, id: c_int, pos: &Point, size: &Size, style: c_long, validator: &Validator, name: &str) -> Control {
+    pub fn new_window<T: WindowMethods>(parent: Option<&T>, id: c_int, pos: &Point, size: &Size, style: c_long, validator: &Validator, name: &str) -> Control {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1864,7 +1864,7 @@ impl Control {
             Control(ffi::wxControl_new(parent, id, pos, size, style, validator, name))
         }
     }
-    pub fn new1() -> Control {
+    pub fn new() -> Control {
         unsafe { Control(ffi::wxControl_new1()) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -1891,10 +1891,10 @@ pub trait ControlMethods: WindowMethods {
     fn get_label_text(&self) -> String {
         unsafe { wx_base::from_wx_string(ffi::wxControl_GetLabelText(self.as_ptr())) }
     }
-    fn get_size_from_text_size(&self, xlen: c_int, ylen: c_int) -> Size {
+    fn get_size_from_text_size_int(&self, xlen: c_int, ylen: c_int) -> Size {
         unsafe { Size(ffi::wxControl_GetSizeFromTextSize(self.as_ptr(), xlen, ylen)) }
     }
-    fn get_size_from_text_size1(&self, tsize: &Size) -> Size {
+    fn get_size_from_text_size_size(&self, tsize: &Size) -> Size {
         unsafe {
             let tsize = tsize.as_ptr();
             Size(ffi::wxControl_GetSizeFromTextSize1(self.as_ptr(), tsize))
@@ -1918,7 +1918,7 @@ pub trait ControlMethods: WindowMethods {
             ffi::wxControl_SetLabelMarkup(self.as_ptr(), markup)
         }
     }
-    fn get_label_text1(label: &str) -> String {
+    fn get_label_text_str(label: &str) -> String {
         unsafe {
             let label = wx_base::wx_string_from(label);
             wx_base::from_wx_string(ffi::wxControl_GetLabelText1(label))
@@ -1987,10 +1987,10 @@ pub trait AnyButtonMethods: ControlMethods {
     fn get_bitmap_margins(&self) -> Size {
         unsafe { Size(ffi::wxAnyButton_GetBitmapMargins(self.as_ptr())) }
     }
-    fn set_bitmap_margins(&self, x: c_int, y: c_int) {
+    fn set_bitmap_margins_coord(&self, x: c_int, y: c_int) {
         unsafe { ffi::wxAnyButton_SetBitmapMargins(self.as_ptr(), x, y) }
     }
-    fn set_bitmap_margins1(&self, sz: &Size) {
+    fn set_bitmap_margins_size(&self, sz: &Size) {
         unsafe {
             let sz = sz.as_ptr();
             ffi::wxAnyButton_SetBitmapMargins1(self.as_ptr(), sz)
@@ -2012,7 +2012,7 @@ impl Button {
     pub fn new() -> Button {
         unsafe { Button(ffi::wxButton_new()) }
     }
-    pub fn new1<T: WindowMethods>(parent: Option<&T>, id: c_int, label: &str, pos: &Point, size: &Size, style: c_long, validator: &Validator, name: &str) -> Button {
+    pub fn new_window<T: WindowMethods>(parent: Option<&T>, id: c_int, label: &str, pos: &Point, size: &Size, style: c_long, validator: &Validator, name: &str) -> Button {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2075,10 +2075,10 @@ impl Menu {
     pub fn new() -> Menu {
         unsafe { Menu(ffi::wxMenu_new()) }
     }
-    pub fn new1(style: c_long) -> Menu {
+    pub fn new_long(style: c_long) -> Menu {
         unsafe { Menu(ffi::wxMenu_new1(style)) }
     }
-    pub fn new2(title: &str, style: c_long) -> Menu {
+    pub fn new_str(title: &str, style: c_long) -> Menu {
         unsafe {
             let title = wx_base::wx_string_from(title);
             Menu(ffi::wxMenu_new2(title, style))
@@ -2090,14 +2090,14 @@ impl Menu {
 }
 pub trait MenuMethods: EvtHandlerMethods {
     // DTOR: fn ~wxMenu()
-    fn append(&self, id: c_int, item: &str, help_string: &str, kind: c_int) -> *mut c_void {
+    fn append_int_str(&self, id: c_int, item: &str, help_string: &str, kind: c_int) -> *mut c_void {
         unsafe {
             let item = wx_base::wx_string_from(item);
             let help_string = wx_base::wx_string_from(help_string);
             ffi::wxMenu_Append(self.as_ptr(), id, item, help_string, kind)
         }
     }
-    fn append1<T: MenuMethods>(&self, id: c_int, item: &str, sub_menu: Option<&T>, help_string: &str) -> *mut c_void {
+    fn append_int_menu<T: MenuMethods>(&self, id: c_int, item: &str, sub_menu: Option<&T>, help_string: &str) -> *mut c_void {
         unsafe {
             let item = wx_base::wx_string_from(item);
             let sub_menu = match sub_menu {
@@ -2108,7 +2108,7 @@ pub trait MenuMethods: EvtHandlerMethods {
             ffi::wxMenu_Append1(self.as_ptr(), id, item, sub_menu, help_string)
         }
     }
-    fn append2(&self, menu_item: *mut c_void) -> *mut c_void {
+    fn append_menuitem(&self, menu_item: *mut c_void) -> *mut c_void {
         unsafe { ffi::wxMenu_Append2(self.as_ptr(), menu_item) }
     }
     fn append_check_item(&self, id: c_int, item: &str, help: &str) -> *mut c_void {
@@ -2145,16 +2145,16 @@ pub trait MenuMethods: EvtHandlerMethods {
     fn check(&self, id: c_int, check: bool) {
         unsafe { ffi::wxMenu_Check(self.as_ptr(), id, check) }
     }
-    fn delete(&self, id: c_int) -> bool {
+    fn delete_int(&self, id: c_int) -> bool {
         unsafe { ffi::wxMenu_Delete(self.as_ptr(), id) }
     }
-    fn delete1(&self, item: *mut c_void) -> bool {
+    fn delete_menuitem(&self, item: *mut c_void) -> bool {
         unsafe { ffi::wxMenu_Delete1(self.as_ptr(), item) }
     }
-    fn destroy(&self, id: c_int) -> bool {
+    fn destroy_int(&self, id: c_int) -> bool {
         unsafe { ffi::wxMenu_Destroy(self.as_ptr(), id) }
     }
-    fn destroy1(&self, item: *mut c_void) -> bool {
+    fn destroy_menuitem(&self, item: *mut c_void) -> bool {
         unsafe { ffi::wxMenu_Destroy1(self.as_ptr(), item) }
     }
     fn enable(&self, id: c_int, enable: bool) {
@@ -2163,13 +2163,13 @@ pub trait MenuMethods: EvtHandlerMethods {
     fn find_child_item(&self, id: c_int, pos: *mut c_void) -> *mut c_void {
         unsafe { ffi::wxMenu_FindChildItem(self.as_ptr(), id, pos) }
     }
-    fn find_item(&self, item_string: &str) -> c_int {
+    fn find_item_str(&self, item_string: &str) -> c_int {
         unsafe {
             let item_string = wx_base::wx_string_from(item_string);
             ffi::wxMenu_FindItem(self.as_ptr(), item_string)
         }
     }
-    fn find_item1<T: MenuMethods>(&self, id: c_int, menu: Option<&T>) -> *mut c_void {
+    fn find_item_int<T: MenuMethods>(&self, id: c_int, menu: Option<&T>) -> *mut c_void {
         unsafe {
             let menu = match menu {
                 Some(r) => r.as_ptr(),
@@ -2207,17 +2207,17 @@ pub trait MenuMethods: EvtHandlerMethods {
         unsafe { ffi::wxMenu_IsEnabled(self.as_ptr(), id) }
     }
     // NOT_SUPPORTED: fn MSWCommand()
-    fn prepend(&self, item: *mut c_void) -> *mut c_void {
+    fn prepend_menuitem(&self, item: *mut c_void) -> *mut c_void {
         unsafe { ffi::wxMenu_Prepend(self.as_ptr(), item) }
     }
-    fn prepend1(&self, id: c_int, item: &str, help_string: &str, kind: c_int) -> *mut c_void {
+    fn prepend_int_str(&self, id: c_int, item: &str, help_string: &str, kind: c_int) -> *mut c_void {
         unsafe {
             let item = wx_base::wx_string_from(item);
             let help_string = wx_base::wx_string_from(help_string);
             ffi::wxMenu_Prepend1(self.as_ptr(), id, item, help_string, kind)
         }
     }
-    fn prepend2<T: MenuMethods>(&self, id: c_int, text: &str, submenu: Option<&T>, help: &str) -> *mut c_void {
+    fn prepend_int_menu<T: MenuMethods>(&self, id: c_int, text: &str, submenu: Option<&T>, help: &str) -> *mut c_void {
         unsafe {
             let text = wx_base::wx_string_from(text);
             let submenu = match submenu {
@@ -2245,10 +2245,10 @@ pub trait MenuMethods: EvtHandlerMethods {
     fn prepend_separator(&self) -> *mut c_void {
         unsafe { ffi::wxMenu_PrependSeparator(self.as_ptr()) }
     }
-    fn remove(&self, id: c_int) -> *mut c_void {
+    fn remove_int(&self, id: c_int) -> *mut c_void {
         unsafe { ffi::wxMenu_Remove(self.as_ptr(), id) }
     }
-    fn remove1(&self, item: *mut c_void) -> *mut c_void {
+    fn remove_menuitem(&self, item: *mut c_void) -> *mut c_void {
         unsafe { ffi::wxMenu_Remove1(self.as_ptr(), item) }
     }
     fn set_help_string(&self, id: c_int, help_string: &str) {
@@ -2333,7 +2333,7 @@ wx_class! { MenuBar(wxMenuBar) impl
     ObjectMethods
 }
 impl MenuBar {
-    pub fn new(style: c_long) -> MenuBar {
+    pub fn new_long(style: c_long) -> MenuBar {
         unsafe { MenuBar(ffi::wxMenuBar_new(style)) }
     }
     // NOT_SUPPORTED: fn wxMenuBar1()
@@ -2453,10 +2453,10 @@ impl NonOwnedWindow {
     }
 }
 pub trait NonOwnedWindowMethods: WindowMethods {
-    fn set_shape(&self, region: *const c_void) -> bool {
+    fn set_shape_region(&self, region: *const c_void) -> bool {
         unsafe { ffi::wxNonOwnedWindow_SetShape(self.as_ptr(), region) }
     }
-    fn set_shape1(&self, path: *const c_void) -> bool {
+    fn set_shape_graphicspath(&self, path: *const c_void) -> bool {
         unsafe { ffi::wxNonOwnedWindow_SetShape1(self.as_ptr(), path) }
     }
 }
@@ -2473,7 +2473,7 @@ impl TopLevelWindow {
     pub fn new() -> TopLevelWindow {
         unsafe { TopLevelWindow(ffi::wxTopLevelWindow_new()) }
     }
-    pub fn new1<T: WindowMethods>(parent: Option<&T>, id: c_int, title: &str, pos: &Point, size: &Size, style: c_long, name: &str) -> TopLevelWindow {
+    pub fn new_window<T: WindowMethods>(parent: Option<&T>, id: c_int, title: &str, pos: &Point, size: &Size, style: c_long, name: &str) -> TopLevelWindow {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2636,7 +2636,7 @@ impl Frame {
     pub fn new() -> Frame {
         unsafe { Frame(ffi::wxFrame_new()) }
     }
-    pub fn new1<T: WindowMethods>(parent: Option<&T>, id: c_int, title: &str, pos: &Point, size: &Size, style: c_long, name: &str) -> Frame {
+    pub fn new_window<T: WindowMethods>(parent: Option<&T>, id: c_int, title: &str, pos: &Point, size: &Size, style: c_long, name: &str) -> Frame {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2767,10 +2767,10 @@ impl Point {
     pub fn new() -> Point {
         unsafe { Point(ffi::wxPoint_new()) }
     }
-    pub fn new1(x: c_int, y: c_int) -> Point {
+    pub fn new_int(x: c_int, y: c_int) -> Point {
         unsafe { Point(ffi::wxPoint_new1(x, y)) }
     }
-    pub fn new2(pt: *const c_void) -> Point {
+    pub fn new_realpoint(pt: *const c_void) -> Point {
         unsafe { Point(ffi::wxPoint_new2(pt)) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -2820,24 +2820,24 @@ impl Rect {
     pub fn new() -> Rect {
         unsafe { Rect(ffi::wxRect_new()) }
     }
-    pub fn new1(x: c_int, y: c_int, width: c_int, height: c_int) -> Rect {
+    pub fn new_int(x: c_int, y: c_int, width: c_int, height: c_int) -> Rect {
         unsafe { Rect(ffi::wxRect_new1(x, y, width, height)) }
     }
-    pub fn new2(top_left: &Point, bottom_right: &Point) -> Rect {
+    pub fn new_point_point(top_left: &Point, bottom_right: &Point) -> Rect {
         unsafe {
             let top_left = top_left.as_ptr();
             let bottom_right = bottom_right.as_ptr();
             Rect(ffi::wxRect_new2(top_left, bottom_right))
         }
     }
-    pub fn new3(pos: &Point, size: &Size) -> Rect {
+    pub fn new_point_size(pos: &Point, size: &Size) -> Rect {
         unsafe {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             Rect(ffi::wxRect_new3(pos, size))
         }
     }
-    pub fn new4(size: &Size) -> Rect {
+    pub fn new_size(size: &Size) -> Rect {
         unsafe {
             let size = size.as_ptr();
             Rect(ffi::wxRect_new4(size))
@@ -2865,16 +2865,16 @@ pub trait RectMethods: WxRustMethods {
             Rect(ffi::wxRect_CenterIn(self.as_ptr(), r, dir))
         }
     }
-    fn contains(&self, x: c_int, y: c_int) -> bool {
+    fn contains_int(&self, x: c_int, y: c_int) -> bool {
         unsafe { ffi::wxRect_Contains(self.as_ptr(), x, y) }
     }
-    fn contains1(&self, pt: &Point) -> bool {
+    fn contains_point(&self, pt: &Point) -> bool {
         unsafe {
             let pt = pt.as_ptr();
             ffi::wxRect_Contains1(self.as_ptr(), pt)
         }
     }
-    fn contains2(&self, rect: &Rect) -> bool {
+    fn contains_rect(&self, rect: &Rect) -> bool {
         unsafe {
             let rect = rect.as_ptr();
             ffi::wxRect_Contains2(self.as_ptr(), rect)
@@ -2883,7 +2883,7 @@ pub trait RectMethods: WxRustMethods {
     // BLOCKED: fn Deflate()
     // BLOCKED: fn Deflate1()
     // BLOCKED: fn Deflate2()
-    fn deflate3(&self, dx: c_int, dy: c_int) -> Rect {
+    fn deflate_coord_coord(&self, dx: c_int, dy: c_int) -> Rect {
         unsafe { Rect(ffi::wxRect_Deflate3(self.as_ptr(), dx, dy)) }
     }
     fn get_bottom(&self) -> c_int {
@@ -2931,11 +2931,11 @@ pub trait RectMethods: WxRustMethods {
     // BLOCKED: fn Inflate()
     // BLOCKED: fn Inflate1()
     // BLOCKED: fn Inflate2()
-    fn inflate3(&self, dx: c_int, dy: c_int) -> Rect {
+    fn inflate_coord_coord(&self, dx: c_int, dy: c_int) -> Rect {
         unsafe { Rect(ffi::wxRect_Inflate3(self.as_ptr(), dx, dy)) }
     }
     // BLOCKED: fn Intersect()
-    fn intersect1(&self, rect: &Rect) -> Rect {
+    fn intersect(&self, rect: &Rect) -> Rect {
         unsafe {
             let rect = rect.as_ptr();
             Rect(ffi::wxRect_Intersect1(self.as_ptr(), rect))
@@ -2950,10 +2950,10 @@ pub trait RectMethods: WxRustMethods {
     fn is_empty(&self) -> bool {
         unsafe { ffi::wxRect_IsEmpty(self.as_ptr()) }
     }
-    fn offset(&self, dx: c_int, dy: c_int) {
+    fn offset_coord(&self, dx: c_int, dy: c_int) {
         unsafe { ffi::wxRect_Offset(self.as_ptr(), dx, dy) }
     }
-    fn offset1(&self, pt: &Point) {
+    fn offset_point(&self, pt: &Point) {
         unsafe {
             let pt = pt.as_ptr();
             ffi::wxRect_Offset1(self.as_ptr(), pt)
@@ -3043,7 +3043,7 @@ impl Size {
     pub fn new() -> Size {
         unsafe { Size(ffi::wxSize_new()) }
     }
-    pub fn new1(width: c_int, height: c_int) -> Size {
+    pub fn new_int(width: c_int, height: c_int) -> Size {
         unsafe { Size(ffi::wxSize_new1(width, height)) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -3068,22 +3068,22 @@ pub trait SizeMethods: WxRustMethods {
     // BLOCKED: fn operator*1()
     // BLOCKED: fn operator/=()
     // BLOCKED: fn operator*=()
-    fn dec_by(&self, pt: &Point) {
+    fn dec_by_point(&self, pt: &Point) {
         unsafe {
             let pt = pt.as_ptr();
             ffi::wxSize_DecBy(self.as_ptr(), pt)
         }
     }
-    fn dec_by1(&self, size: &Size) {
+    fn dec_by_size(&self, size: &Size) {
         unsafe {
             let size = size.as_ptr();
             ffi::wxSize_DecBy1(self.as_ptr(), size)
         }
     }
-    fn dec_by2(&self, dx: c_int, dy: c_int) {
+    fn dec_by_int_int(&self, dx: c_int, dy: c_int) {
         unsafe { ffi::wxSize_DecBy2(self.as_ptr(), dx, dy) }
     }
-    fn dec_by3(&self, d: c_int) {
+    fn dec_by_int(&self, d: c_int) {
         unsafe { ffi::wxSize_DecBy3(self.as_ptr(), d) }
     }
     fn dec_to(&self, size: &Size) {
@@ -3104,22 +3104,22 @@ pub trait SizeMethods: WxRustMethods {
     fn get_width(&self) -> c_int {
         unsafe { ffi::wxSize_GetWidth(self.as_ptr()) }
     }
-    fn inc_by(&self, pt: &Point) {
+    fn inc_by_point(&self, pt: &Point) {
         unsafe {
             let pt = pt.as_ptr();
             ffi::wxSize_IncBy(self.as_ptr(), pt)
         }
     }
-    fn inc_by1(&self, size: &Size) {
+    fn inc_by_size(&self, size: &Size) {
         unsafe {
             let size = size.as_ptr();
             ffi::wxSize_IncBy1(self.as_ptr(), size)
         }
     }
-    fn inc_by2(&self, dx: c_int, dy: c_int) {
+    fn inc_by_int_int(&self, dx: c_int, dy: c_int) {
         unsafe { ffi::wxSize_IncBy2(self.as_ptr(), dx, dy) }
     }
-    fn inc_by3(&self, d: c_int) {
+    fn inc_by_int(&self, d: c_int) {
         unsafe { ffi::wxSize_IncBy3(self.as_ptr(), d) }
     }
     fn inc_to(&self, size: &Size) {
