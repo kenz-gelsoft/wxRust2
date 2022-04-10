@@ -751,7 +751,7 @@ impl Window {
     pub fn new() -> Window {
         unsafe { Window(ffi::wxWindow_new()) }
     }
-    pub fn new_window<T: WindowMethods>(parent: Option<&T>, id: c_int, pos: &Point, size: &Size, style: c_long, name: &str) -> Window {
+    pub fn new_with_window<T: WindowMethods>(parent: Option<&T>, id: c_int, pos: &Point, size: &Size, style: c_long, name: &str) -> Window {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1851,7 +1851,7 @@ wx_class! { Control(wxControl) impl
     ObjectMethods
 }
 impl Control {
-    pub fn new_window<T: WindowMethods>(parent: Option<&T>, id: c_int, pos: &Point, size: &Size, style: c_long, validator: &Validator, name: &str) -> Control {
+    pub fn new_with_window<T: WindowMethods>(parent: Option<&T>, id: c_int, pos: &Point, size: &Size, style: c_long, validator: &Validator, name: &str) -> Control {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2012,7 +2012,7 @@ impl Button {
     pub fn new() -> Button {
         unsafe { Button(ffi::wxButton_new()) }
     }
-    pub fn new_window<T: WindowMethods>(parent: Option<&T>, id: c_int, label: &str, pos: &Point, size: &Size, style: c_long, validator: &Validator, name: &str) -> Button {
+    pub fn new_with_window<T: WindowMethods>(parent: Option<&T>, id: c_int, label: &str, pos: &Point, size: &Size, style: c_long, validator: &Validator, name: &str) -> Button {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2075,10 +2075,10 @@ impl Menu {
     pub fn new() -> Menu {
         unsafe { Menu(ffi::wxMenu_new()) }
     }
-    pub fn new_long(style: c_long) -> Menu {
+    pub fn new_with_long(style: c_long) -> Menu {
         unsafe { Menu(ffi::wxMenu_new1(style)) }
     }
-    pub fn new_str(title: &str, style: c_long) -> Menu {
+    pub fn new_with_str(title: &str, style: c_long) -> Menu {
         unsafe {
             let title = wx_base::wx_string_from(title);
             Menu(ffi::wxMenu_new2(title, style))
@@ -2333,7 +2333,7 @@ wx_class! { MenuBar(wxMenuBar) impl
     ObjectMethods
 }
 impl MenuBar {
-    pub fn new_long(style: c_long) -> MenuBar {
+    pub fn new_with_long(style: c_long) -> MenuBar {
         unsafe { MenuBar(ffi::wxMenuBar_new(style)) }
     }
     // NOT_SUPPORTED: fn wxMenuBar1()
@@ -2473,7 +2473,7 @@ impl TopLevelWindow {
     pub fn new() -> TopLevelWindow {
         unsafe { TopLevelWindow(ffi::wxTopLevelWindow_new()) }
     }
-    pub fn new_window<T: WindowMethods>(parent: Option<&T>, id: c_int, title: &str, pos: &Point, size: &Size, style: c_long, name: &str) -> TopLevelWindow {
+    pub fn new_with_window<T: WindowMethods>(parent: Option<&T>, id: c_int, title: &str, pos: &Point, size: &Size, style: c_long, name: &str) -> TopLevelWindow {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2636,7 +2636,7 @@ impl Frame {
     pub fn new() -> Frame {
         unsafe { Frame(ffi::wxFrame_new()) }
     }
-    pub fn new_window<T: WindowMethods>(parent: Option<&T>, id: c_int, title: &str, pos: &Point, size: &Size, style: c_long, name: &str) -> Frame {
+    pub fn new_with_window<T: WindowMethods>(parent: Option<&T>, id: c_int, title: &str, pos: &Point, size: &Size, style: c_long, name: &str) -> Frame {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2767,10 +2767,10 @@ impl Point {
     pub fn new() -> Point {
         unsafe { Point(ffi::wxPoint_new()) }
     }
-    pub fn new_int(x: c_int, y: c_int) -> Point {
+    pub fn new_with_int(x: c_int, y: c_int) -> Point {
         unsafe { Point(ffi::wxPoint_new1(x, y)) }
     }
-    pub fn new_realpoint(pt: *const c_void) -> Point {
+    pub fn new_with_realpoint(pt: *const c_void) -> Point {
         unsafe { Point(ffi::wxPoint_new2(pt)) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -2820,24 +2820,24 @@ impl Rect {
     pub fn new() -> Rect {
         unsafe { Rect(ffi::wxRect_new()) }
     }
-    pub fn new_int(x: c_int, y: c_int, width: c_int, height: c_int) -> Rect {
+    pub fn new_with_int(x: c_int, y: c_int, width: c_int, height: c_int) -> Rect {
         unsafe { Rect(ffi::wxRect_new1(x, y, width, height)) }
     }
-    pub fn new_point_point(top_left: &Point, bottom_right: &Point) -> Rect {
+    pub fn new_with_point_point(top_left: &Point, bottom_right: &Point) -> Rect {
         unsafe {
             let top_left = top_left.as_ptr();
             let bottom_right = bottom_right.as_ptr();
             Rect(ffi::wxRect_new2(top_left, bottom_right))
         }
     }
-    pub fn new_point_size(pos: &Point, size: &Size) -> Rect {
+    pub fn new_with_point_size(pos: &Point, size: &Size) -> Rect {
         unsafe {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             Rect(ffi::wxRect_new3(pos, size))
         }
     }
-    pub fn new_size(size: &Size) -> Rect {
+    pub fn new_with_size(size: &Size) -> Rect {
         unsafe {
             let size = size.as_ptr();
             Rect(ffi::wxRect_new4(size))
@@ -3043,7 +3043,7 @@ impl Size {
     pub fn new() -> Size {
         unsafe { Size(ffi::wxSize_new()) }
     }
-    pub fn new_int(width: c_int, height: c_int) -> Size {
+    pub fn new_with_int(width: c_int, height: c_int) -> Size {
         unsafe { Size(ffi::wxSize_new1(width, height)) }
     }
     pub fn none() -> Option<&'static Self> {

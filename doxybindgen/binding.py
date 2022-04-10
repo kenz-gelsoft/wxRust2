@@ -310,7 +310,8 @@ class RustMethodBinding:
         # method_name = self.__model.overload_indexed(method_name)
         arg_types = self.__cls.overloads.args_to_disambiguate(self.__model)
         if len(arg_types) > 0:
-            method_name += '_' + '_'.join(arg_types)
+            splitter = '_with_' if self.is_ctor else '_'
+            method_name += splitter + '_'.join(arg_types)
         method_name = self.non_keyword_name(method_name)
         return method_name
     

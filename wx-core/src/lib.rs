@@ -21,11 +21,11 @@ mod ffi {
 
 // wxDefaultPosition
 impl Default for Point {
-    fn default() -> Self { Point::new_int(-1, -1) }
+    fn default() -> Self { Point::new_with_int(-1, -1) }
 }
 // wxDefaultSize
 impl Default for Size {
-    fn default() -> Self { Size::new_int(-1, -1) }
+    fn default() -> Self { Size::new_with_int(-1, -1) }
 }
 // wxDefaultValidator
 impl Default for Validator {
