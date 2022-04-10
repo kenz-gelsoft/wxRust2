@@ -14,7 +14,7 @@ class RustClassBinding:
     def __init__(self, model):
         self.__model = model
         self.overloads = OverloadTree(model)
-        # self.overloads.print_tree()
+        self.overloads.print_tree()
         self.__methods = [RustMethodBinding(self, m) for m in model.methods]
     
     def is_a(self, base):
@@ -145,6 +145,8 @@ class OverloadTree:
         return path
     
     def _add(self, method):
+        if method.suppressed_reason():
+            return
         path = self._path(method)
         node = self.__root
         for item in path:
@@ -154,14 +156,23 @@ class OverloadTree:
             node = items[item]
         node.method = method
     
+    def has_overload(self, method):
+        if method.suppressed_reason():
+            return False
+        by_name = self._path(method)[0]
+        node = self.__root.items[by_name]
+        return self._count_in_subtree(node) > 1
+    
     def args_to_disambiguate(self, method):
+        if method.suppressed_reason():
+            return []
         result = []
         path = self._path(method)
         prev_count = None
         current = self.__root
         for item in path:
             current = current.items[item]
-            count = self.count_in_subtree(current)
+            count = self._count_in_subtree(current)
             if prev_count is None or count < prev_count:
                 result.append(item)
             if count < 2:
@@ -169,12 +180,12 @@ class OverloadTree:
             prev_count = count
         return [arg.in_overload_name() for arg in result[1:]]
     
-    def count_in_subtree(self, node):
+    def _count_in_subtree(self, node):
         count = 0
         if node.method is not None:
             count += 1
         for k, v in node.items.items():
-            count += self.count_in_subtree(v)
+            count += self._count_in_subtree(v)
         return count
     
     def print_tree(self):
@@ -183,7 +194,7 @@ class OverloadTree:
     def print_node(self, node, level):
         indent = '    ' * level
         for k, v in node.items.items():
-            count = self.count_in_subtree(v)
+            count = self._count_in_subtree(v)
             if level == 0 and count == 1:
                 continue
             
@@ -308,15 +319,18 @@ class RustMethodBinding:
         method_name = pascal_to_snake(self.__model.name(
             without_index=True,
         ))
-        splitter = '_'
-        arg_types = self.__cls.overloads.args_to_disambiguate(self.__model)
+        overloads = self.__cls.overloads
         if self.__model.is_ctor:
-            if self.__cls.is_a('wxWindow'):
-                return 'new_2step' if len(arg_types) == 0 else 'new'
             method_name = 'new'
-            splitter = '_with_'
-        if len(arg_types) > 0:
-            method_name += splitter + '_'.join(arg_types)
+        if overloads.has_overload(self.__model):
+            splitter = '_'
+            arg_types = overloads.args_to_disambiguate(self.__model)
+            if self.__model.is_ctor:
+                if self.__cls.is_a('wxWindow'):
+                    return 'new_2step' if len(arg_types) == 0 else 'new'
+                splitter = '_with_'
+            if len(arg_types) > 0:
+                method_name += splitter + '_'.join(arg_types)
         method_name = self.non_keyword_name(method_name)
         return method_name
     

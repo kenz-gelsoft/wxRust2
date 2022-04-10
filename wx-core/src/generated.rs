@@ -1953,7 +1953,7 @@ wx_class! { AnyButton(wxAnyButton) impl
     ObjectMethods
 }
 impl AnyButton {
-    pub fn new_2step() -> AnyButton {
+    pub fn new() -> AnyButton {
         unsafe { AnyButton(ffi::wxAnyButton_new()) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -2883,7 +2883,7 @@ pub trait RectMethods: WxRustMethods {
     // BLOCKED: fn Deflate()
     // BLOCKED: fn Deflate1()
     // BLOCKED: fn Deflate2()
-    fn deflate_coord_coord(&self, dx: c_int, dy: c_int) -> Rect {
+    fn deflate(&self, dx: c_int, dy: c_int) -> Rect {
         unsafe { Rect(ffi::wxRect_Deflate3(self.as_ptr(), dx, dy)) }
     }
     fn get_bottom(&self) -> c_int {
@@ -2931,7 +2931,7 @@ pub trait RectMethods: WxRustMethods {
     // BLOCKED: fn Inflate()
     // BLOCKED: fn Inflate1()
     // BLOCKED: fn Inflate2()
-    fn inflate_coord_coord(&self, dx: c_int, dy: c_int) -> Rect {
+    fn inflate(&self, dx: c_int, dy: c_int) -> Rect {
         unsafe { Rect(ffi::wxRect_Inflate3(self.as_ptr(), dx, dy)) }
     }
     // BLOCKED: fn Intersect()
