@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from .model import Param, RustType, prefixed, pascal_to_snake
 
 # Known, and problematic
@@ -12,14 +13,19 @@ RUST_KEYWORDS = [
 class RustClassBinding:
     def __init__(self, model):
         self.__model = model
-        self.__methods = [RustMethodBinding(m) for m in model.methods]
+        self.overloads = OverloadTree(model)
+        # self.overloads.print_tree()
+        self.__methods = [RustMethodBinding(self, m) for m in model.methods]
+    
+    def is_a(self, base):
+        return self.__model.manager.is_a(self.__model, base)
 
     def lines(self, for_ffi=False):
         yield '// %s' % (
             self.__model.name,
         )
         if for_ffi:
-            if not self.__model.manager.is_a(self.__model, 'wxObject'):
+            if not self.is_a('wxObject'):
                 yield 'pub fn %s_delete(self_: *mut c_void);' % (
                     self.__model.name,
                 )
@@ -65,10 +71,10 @@ class RustClassBinding:
         yield '}'
     
     def _impl_drop_if_needed(self):
-        if self.__model.manager.is_a(self.__model, 'wxEvtHandler'):
+        if self.is_a('wxEvtHandler'):
             return
         deleter_class = self.__model.name
-        if self.__model.manager.is_a(self.__model, 'wxObject'):
+        if self.is_a('wxObject'):
             deleter_class = 'wxObject'
         yield 'impl Drop for %s {' % (self.__model.unprefixed(),)
         yield '    fn drop(&mut self) {'
@@ -113,8 +119,87 @@ class RustClassBinding:
         yield '}\n'
 
 
+class Overload:
+    def __init__(self, name):
+        self.name = name
+        self.method = None
+        self.items = OrderedDict()
+
+
+class OverloadTree:
+    def __init__(self, cls):
+        self.__cls = cls
+        self.__root = Overload("")
+
+        for m in cls.methods:
+            self._add(m)
+    
+    def _path(self, method):
+        path = []
+        path.append('%s.%s' % (
+            self.__cls.name,
+            method.name(without_index=True),
+        ))
+        for p in method.params:
+            path.append(p.type)
+        return path
+    
+    def _add(self, method):
+        path = self._path(method)
+        node = self.__root
+        for item in path:
+            items = node.items
+            if item not in items:
+                items[item] = Overload(item)
+            node = items[item]
+        node.method = method
+    
+    def args_to_disambiguate(self, method):
+        result = []
+        path = self._path(method)
+        prev_count = None
+        current = self.__root
+        for item in path:
+            current = current.items[item]
+            count = self.count_in_subtree(current)
+            if prev_count is None or count < prev_count:
+                result.append(item)
+            if count < 2:
+                break
+            prev_count = count
+        return [arg.in_overload_name() for arg in result[1:]]
+    
+    def count_in_subtree(self, node):
+        count = 0
+        if node.method is not None:
+            count += 1
+        for k, v in node.items.items():
+            count += self.count_in_subtree(v)
+        return count
+    
+    def print_tree(self):
+        self.print_node(self.__root, 0)
+
+    def print_node(self, node, level):
+        indent = '    ' * level
+        for k, v in node.items.items():
+            count = self.count_in_subtree(v)
+            if level == 0 and count == 1:
+                continue
+            
+            args = ''
+            method = v.method
+            if method is not None:
+                args = self.args_to_disambiguate(method)
+                args = '(%s)' % (', '.join(args),)
+                method = method.name()
+            print("%s- %s: %s: %s %s" % (indent, count, k, method, args))
+            self.print_node(v, level + 1)
+
+
 class RustMethodBinding:
-    def __init__(self, model):
+    def __init__(self, cls, model):
+        self.__cls = cls
         self.__model = model
         self.is_ctor = model.is_ctor
         self.__self_param = Param(RustType(model.cls.name, model.const), 'self')
@@ -187,7 +272,6 @@ class RustMethodBinding:
                 yield '    %s' % (line,)
             yield '}'
 
-    
     def _binding_body(self):
         params = self.__model.params
         for param in params:
@@ -224,9 +308,15 @@ class RustMethodBinding:
         method_name = pascal_to_snake(self.__model.name(
             without_index=True,
         ))
+        splitter = '_'
+        arg_types = self.__cls.overloads.args_to_disambiguate(self.__model)
         if self.__model.is_ctor:
+            if self.__cls.is_a('wxWindow'):
+                return 'new_2step' if len(arg_types) == 0 else 'new'
             method_name = 'new'
-        method_name = self.__model.overload_indexed(method_name)
+            splitter = '_with_'
+        if len(arg_types) > 0:
+            method_name += splitter + '_'.join(arg_types)
         method_name = self.non_keyword_name(method_name)
         return method_name
     

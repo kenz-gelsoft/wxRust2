@@ -25,13 +25,13 @@ struct MyFrame {
 }
 impl MyFrame {
     fn new(title: &str) -> Self {
-        let frame = Frame::new1(Window::none(), wxID_ANY, title, 
+        let frame = Frame::new(Window::none(), wxID_ANY, title, 
                 &Point::default(), &Size::default(),
                 wxDEFAULT_FRAME_STYLE, "");
         let file_menu = Menu::new();
         let help_menu = Menu::new();
-        help_menu.append(MINIMAL_ABOUT, "&About\tF1", "Show about dialog", wxITEM_NORMAL);
-        file_menu.append(MINIMAL_QUIT, "E&xit\tAlt-X", "Quit this program", wxITEM_NORMAL);
+        help_menu.append_int_str(MINIMAL_ABOUT, "&About\tF1", "Show about dialog", wxITEM_NORMAL);
+        file_menu.append_int_str(MINIMAL_QUIT, "E&xit\tAlt-X", "Quit this program", wxITEM_NORMAL);
 
         let menu_bar = MenuBar::new(0);
         menu_bar.append(Some(&file_menu), "&File");
