@@ -687,7 +687,7 @@ pub mod methods {
     use super::*;
     use super::ffi;
 
-    use wx_base::methods::*;
+    pub use wx_base::methods::*;
     // wxCommandEvent
     pub trait CommandEventMethods: EventMethods {
         fn get_client_data(&self) -> *mut c_void {

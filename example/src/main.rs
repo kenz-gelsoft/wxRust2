@@ -1,7 +1,6 @@
 #![windows_subsystem = "windows"]
 
 use wx_base::{wxBOTH, wxDEFAULT_FRAME_STYLE, wxID_ANY, wxRUST_EVT_BUTTON};
-use wx_base::methods::*;
 use wx;
 use wx::methods::*;
 

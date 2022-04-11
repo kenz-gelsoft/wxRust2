@@ -84,7 +84,7 @@ pub mod methods {
     }
 '''
     else:
-        yield '    use wx_base::methods::*;'
+        yield '    pub use wx_base::methods::*;'
     indent = ' ' * 4 * 1
     for cls in bindings:
         for line in cls.lines(for_methods=True):

@@ -1,7 +1,6 @@
 #![windows_subsystem = "windows"]
 
 use std::os::raw::{c_int, c_long};
-use wx_base::methods::*;
 use wx_base::{
     wxDEFAULT_FRAME_STYLE, wxICON_INFORMATION, wxID_ABOUT, wxID_ANY, wxID_EXIT,
     wxITEM_NORMAL, wxOK, wxRUST_EVT_MENU, wxSTB_DEFAULT_STYLE

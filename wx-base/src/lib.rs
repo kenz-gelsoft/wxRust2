@@ -41,7 +41,6 @@ mod ffi {
 
 pub mod methods {
     use std::os::raw::{c_int};
-    use super::*;
     pub use super::generated::methods::*;
     pub trait Bindable {
         fn bind<E: EventMethods, F: Fn(&E) + 'static>(&self, event_type: c_int, closure: F);
