@@ -67,12 +67,20 @@ mod ffi {
     yield '''\
     }
 }
+mod methods {
 '''
     if libname == 'base':
         yield '''\
-pub trait WxRustMethods {
-    unsafe fn as_ptr(&self) -> *mut c_void;
-    unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F);
+    pub trait WxRustMethods {
+        unsafe fn as_ptr(&self) -> *mut c_void;
+        unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F);
+    }
+'''
+    indent = ' ' * 4 * 1
+    for cls in bindings:
+        for line in cls.lines(for_methods=True):
+            yield '%s%s' % (indent, line)
+    yield '''\
 }
 '''
     for cls in bindings:
