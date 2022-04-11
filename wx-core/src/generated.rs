@@ -6,7 +6,10 @@ use std::mem;
 use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
 use std::ptr;
 
+use methods::*;
+
 use wx_base::*;
+use wx_base::methods::*;
 
 mod ffi {
     use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
@@ -678,8 +681,13 @@ mod ffi {
         
     }
 }
-mod methods {
+pub mod methods {
+    use std::os::raw::{c_int, c_long, c_void};
 
+    use super::*;
+    use super::ffi;
+
+    use wx_base::methods::*;
     // wxCommandEvent
     pub trait CommandEventMethods: EventMethods {
         fn get_client_data(&self) -> *mut c_void {

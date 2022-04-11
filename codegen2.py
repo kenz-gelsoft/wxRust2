@@ -47,11 +47,14 @@ def generated_rs(classes, config, libname):
 use std::mem;
 use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
 use std::ptr;
+
+use methods::*;
 '''
     if libname == 'base':
         yield 'use crate::wx_class;'
     else:
         yield 'use wx_base::*;'
+        yield 'use wx_base::methods::*;'
     yield '''\
 
 mod ffi {
@@ -67,7 +70,11 @@ mod ffi {
     yield '''\
     }
 }
-mod methods {
+pub mod methods {
+    use std::os::raw::{c_int, c_long, c_void};
+
+    use super::*;
+    use super::ffi;
 '''
     if libname == 'base':
         yield '''\
@@ -76,6 +83,8 @@ mod methods {
         unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F);
     }
 '''
+    else:
+        yield '    use wx_base::methods::*;'
     indent = ' ' * 4 * 1
     for cls in bindings:
         for line in cls.lines(for_methods=True):
