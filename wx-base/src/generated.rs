@@ -89,6 +89,7 @@ mod ffi {
         
     }
 }
+
 pub mod methods {
     use std::os::raw::{c_int, c_long, c_void};
 

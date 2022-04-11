@@ -681,6 +681,7 @@ mod ffi {
         
     }
 }
+
 pub mod methods {
     use std::os::raw::{c_int, c_long, c_void};
 
@@ -688,6 +689,7 @@ pub mod methods {
     use super::ffi;
 
     pub use wx_base::methods::*;
+
     // wxCommandEvent
     pub trait CommandEventMethods: EventMethods {
         fn get_client_data(&self) -> *mut c_void {

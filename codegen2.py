@@ -70,6 +70,7 @@ mod ffi {
     yield '''\
     }
 }
+
 pub mod methods {
     use std::os::raw::{c_int, c_long, c_void};
 
@@ -85,6 +86,7 @@ pub mod methods {
 '''
     else:
         yield '    pub use wx_base::methods::*;'
+        yield ''
     indent = ' ' * 4 * 1
     for cls in bindings:
         for line in cls.lines(for_methods=True):
