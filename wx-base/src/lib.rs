@@ -12,6 +12,8 @@ pub use manual::*;
 mod generated;
 pub use generated::*;
 
+use methods::*;
+
 mod ffi {
     use std::os::raw::{c_char, c_int, c_uchar, c_void};
     extern "C" {
@@ -34,6 +36,14 @@ mod ffi {
         pub fn wxString_Len(self_: *mut c_void) -> usize;
         
         pub fn wxRustEntry(argc: *mut c_int, argv: *mut *mut c_char) -> c_int;
+    }
+}
+
+pub mod methods {
+    use std::os::raw::{c_int};
+    pub use super::generated::methods::*;
+    pub trait Bindable {
+        fn bind<E: EventMethods, F: Fn(&E) + 'static>(&self, event_type: c_int, closure: F);
     }
 }
 
@@ -62,9 +72,6 @@ unsafe fn to_wx_callable<F: Fn(*mut c_void) + 'static>(closure: F) -> (*mut c_vo
     )
 }
 
-pub trait Bindable {
-    fn bind<E: EventMethods, F: Fn(&E) + 'static>(&self, event_type: c_int, closure: F);
-}
 impl<T: EvtHandlerMethods> Bindable for T {
     fn bind<E: EventMethods, F: Fn(&E) + 'static>(&self, event_type: c_int, closure: F) {
         unsafe {

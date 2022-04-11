@@ -20,7 +20,7 @@ class RustClassBinding:
     def is_a(self, base):
         return self.__model.manager.is_a(self.__model, base)
 
-    def lines(self, for_ffi=False):
+    def lines(self, for_ffi=False, for_methods=False):
         yield '// %s' % (
             self.__model.name,
         )
@@ -33,6 +33,9 @@ class RustClassBinding:
                 for line in method.lines(for_ffi=True):
                     yield line
             yield ''
+        elif for_methods:
+            for line in self._trait_with_methods():
+                yield line
         else:
             yield 'wx_class! { %s(%s) impl' % (
                 self.__model.unprefixed(),
@@ -45,8 +48,6 @@ class RustClassBinding:
             for line in self._impl_drop_if_needed():
                 yield line
             for line in self._impl_non_virtual_overrides():
-                yield line
-            for line in self._trait_with_methods():
                 yield line
     
     def _ancestor_methods(self):

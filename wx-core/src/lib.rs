@@ -3,6 +3,7 @@ use std::ptr;
 
 mod generated;
 pub use generated::*;
+use generated::methods::*;
 
 mod ffi {
     use std::os::raw::{c_int, c_void};
