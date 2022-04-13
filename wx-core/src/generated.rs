@@ -309,8 +309,8 @@ mod ffi {
         pub fn wxWindow_IsTopLevel(self_: *const c_void) -> bool;
         pub fn wxWindow_OnInternalIdle(self_: *mut c_void);
         pub fn wxWindow_SendIdleEvents(self_: *mut c_void, event: *mut c_void) -> bool;
-        pub fn wxWindow_RegisterHotKey(self_: *mut c_void, hotkey_id: c_int, modifiers: c_int, virtual_key_code: c_int) -> bool;
-        pub fn wxWindow_UnregisterHotKey(self_: *mut c_void, hotkey_id: c_int) -> bool;
+        // BLOCKED: pub fn wxWindow_RegisterHotKey(self_: *mut c_void, hotkey_id: c_int, modifiers: c_int, virtual_key_code: c_int) -> bool;
+        // BLOCKED: pub fn wxWindow_UnregisterHotKey(self_: *mut c_void, hotkey_id: c_int) -> bool;
         pub fn wxWindow_UpdateWindowUI(self_: *mut c_void, flags: c_long);
         // NOT_SUPPORTED: pub fn wxWindow_GetClassDefaultAttributes(variant: wxWindowVariant) -> wxVisualAttributes;
         pub fn wxWindow_FindFocus() -> *mut c_void;
@@ -1747,12 +1747,8 @@ pub mod methods {
         fn send_idle_events(&self, event: *mut c_void) -> bool {
             unsafe { ffi::wxWindow_SendIdleEvents(self.as_ptr(), event) }
         }
-        fn register_hot_key(&self, hotkey_id: c_int, modifiers: c_int, virtual_key_code: c_int) -> bool {
-            unsafe { ffi::wxWindow_RegisterHotKey(self.as_ptr(), hotkey_id, modifiers, virtual_key_code) }
-        }
-        fn unregister_hot_key(&self, hotkey_id: c_int) -> bool {
-            unsafe { ffi::wxWindow_UnregisterHotKey(self.as_ptr(), hotkey_id) }
-        }
+        // BLOCKED: fn RegisterHotKey()
+        // BLOCKED: fn UnregisterHotKey()
         fn update_window_ui(&self, flags: c_long) {
             unsafe { ffi::wxWindow_UpdateWindowUI(self.as_ptr(), flags) }
         }
