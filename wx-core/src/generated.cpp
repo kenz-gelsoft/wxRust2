@@ -818,14 +818,6 @@ void wxWindow_OnInternalIdle(wxWindow * self) {
 bool wxWindow_SendIdleEvents(wxWindow * self, wxIdleEvent * event) {
     return self->SendIdleEvents(*event);
 }
-#if wxCHECK_VERSION(3, 1, 0)
-bool wxWindow_RegisterHotKey(wxWindow * self, int hotkey_id, int modifiers, int virtual_key_code) {
-    return self->RegisterHotKey(hotkey_id, modifiers, virtual_key_code);
-}
-bool wxWindow_UnregisterHotKey(wxWindow * self, int hotkey_id) {
-    return self->UnregisterHotKey(hotkey_id);
-}
-#endif
 void wxWindow_UpdateWindowUI(wxWindow * self, long flags) {
     return self->UpdateWindowUI(flags);
 }
