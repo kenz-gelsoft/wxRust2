@@ -437,7 +437,7 @@ class CxxMethodBinding:
             self.__model.name(for_ffi=True),
             self._cxx_params(),
         )
-        blocked30 = self.__model.is_blocked30()
+        blocked30 = self.__model.is_conditional('wx31')
         if self.__cls.was_blocked30 != blocked30:
             self.__cls.was_blocked30 = blocked30
             condition = self.__cls.config.get('conditions').get('wx31')
