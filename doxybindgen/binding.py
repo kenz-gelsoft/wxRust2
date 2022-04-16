@@ -383,7 +383,7 @@ class RustMethodBinding:
 class CxxClassBinding:
     def __init__(self, model, config):
         self.__model = model
-        self.config = config
+        self.conditions = config.get('conditions')
         self.__methods = [CxxMethodBinding(self, m) for m in model.methods]
     
     def lines(self, is_cc=False):
@@ -437,8 +437,7 @@ class CxxMethodBinding:
             self.__model.name(for_ffi=True),
             self._cxx_params(),
         )
-        conditions = self.__cls.config.get('conditions')
-        condition = self.__model.find_condition(conditions)
+        condition = self.__model.find_condition(self.__cls.conditions)
         if self.__cls.in_condition != condition:
             self.__cls.in_condition = condition
             if condition:
