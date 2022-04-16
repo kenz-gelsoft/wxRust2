@@ -381,19 +381,20 @@ class RustMethodBinding:
 
 
 class CxxClassBinding:
-    def __init__(self, model):
+    def __init__(self, model, config):
         self.__model = model
+        self.conditions = config.get('conditions')
         self.__methods = [CxxMethodBinding(self, m) for m in model.methods]
     
     def lines(self, is_cc=False):
         yield '// CLASS: %s' % (self.__model.name,)
         for line in self._dtor_lines(is_cc):
             yield line
-        self.was_blocked30 = False
+        self.in_condition = None
         for method in self.__methods:
             for line in method.lines(is_cc):
                 yield line
-        if self.was_blocked30:
+        if self.in_condition:
             yield '#endif'
         yield ''
 
@@ -436,11 +437,11 @@ class CxxMethodBinding:
             self.__model.name(for_ffi=True),
             self._cxx_params(),
         )
-        blocked30 = self.__model.is_blocked30()
-        if self.__cls.was_blocked30 != blocked30:
-            self.__cls.was_blocked30 = blocked30
-            if blocked30:
-                yield '#if wxCHECK_VERSION(3, 1, 0)'
+        condition = self.__model.find_condition(self.__cls.conditions)
+        if self.__cls.in_condition != condition:
+            self.__cls.in_condition = condition
+            if condition:
+                yield condition.get('cxx')
             else:
                 yield '#endif'
         if is_cc:

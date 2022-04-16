@@ -10,13 +10,29 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build-linux:
+  build-wx30gtk:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
     - name: Install Prerequisites
       run: sudo apt install libwxgtk3.0-gtk3-dev
+    - name: Build
+      run: cargo build --verbose
+    - name: Run tests
+      run: cargo test --verbose
+
+  build-wx31gtk:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install Prerequisites
+      run: |
+        sudo apt-key adv --fetch-keys https://repos.codelite.org/CodeLite.asc
+        sudo apt-add-repository 'deb https://repos.codelite.org/wx3.1.6/ubuntu/ focal universe'
+        sudo apt update
+        sudo apt install libwxgtk3.1unofficial-dev
     - name: Build
       run: cargo build --verbose
     - name: Run tests

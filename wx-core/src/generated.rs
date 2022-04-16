@@ -309,8 +309,8 @@ mod ffi {
         pub fn wxWindow_IsTopLevel(self_: *const c_void) -> bool;
         pub fn wxWindow_OnInternalIdle(self_: *mut c_void);
         pub fn wxWindow_SendIdleEvents(self_: *mut c_void, event: *mut c_void) -> bool;
-        // BLOCKED: pub fn wxWindow_RegisterHotKey(self_: *mut c_void, hotkey_id: c_int, modifiers: c_int, virtual_key_code: c_int) -> bool;
-        // BLOCKED: pub fn wxWindow_UnregisterHotKey(self_: *mut c_void, hotkey_id: c_int) -> bool;
+        pub fn wxWindow_RegisterHotKey(self_: *mut c_void, hotkey_id: c_int, modifiers: c_int, virtual_key_code: c_int) -> bool;
+        pub fn wxWindow_UnregisterHotKey(self_: *mut c_void, hotkey_id: c_int) -> bool;
         pub fn wxWindow_UpdateWindowUI(self_: *mut c_void, flags: c_long);
         // NOT_SUPPORTED: pub fn wxWindow_GetClassDefaultAttributes(variant: wxWindowVariant) -> wxVisualAttributes;
         pub fn wxWindow_FindFocus() -> *mut c_void;
@@ -459,13 +459,13 @@ mod ffi {
         pub fn wxMenuBar_SetLabel(self_: *mut c_void, id: c_int, label: *const c_void);
         // NOT_SUPPORTED: pub fn wxMenuBar_SetLabelTop(self_: *mut c_void, pos: size_t, label: *const c_void);
         // NOT_SUPPORTED: pub fn wxMenuBar_SetMenuLabel(self_: *mut c_void, pos: size_t, label: *const c_void);
-        // BLOCKED: pub fn wxMenuBar_OSXGetAppleMenu(self_: *const c_void) -> *mut c_void;
+        pub fn wxMenuBar_OSXGetAppleMenu(self_: *const c_void) -> *mut c_void;
         pub fn wxMenuBar_GetFrame(self_: *const c_void) -> *mut c_void;
         pub fn wxMenuBar_IsAttached(self_: *const c_void) -> bool;
         pub fn wxMenuBar_Attach(self_: *mut c_void, frame: *mut c_void);
         pub fn wxMenuBar_Detach(self_: *mut c_void);
-        // BLOCKED: pub fn wxMenuBar_MacSetCommonMenuBar(menubar: *mut c_void);
-        // BLOCKED: pub fn wxMenuBar_MacGetCommonMenuBar() -> *mut c_void;
+        pub fn wxMenuBar_MacSetCommonMenuBar(menubar: *mut c_void);
+        pub fn wxMenuBar_MacGetCommonMenuBar() -> *mut c_void;
         
         // wxNonOwnedWindow
         pub fn wxNonOwnedWindow_SetShape(self_: *mut c_void, region: *const c_void) -> bool;
@@ -493,7 +493,7 @@ mod ffi {
         pub fn wxTopLevelWindow_IsMaximized(self_: *const c_void) -> bool;
         // BLOCKED: pub fn wxTopLevelWindow_IsUsingNativeDecorations(self_: *const c_void) -> bool;
         pub fn wxTopLevelWindow_Maximize(self_: *mut c_void, maximize: bool);
-        // BLOCKED: pub fn wxTopLevelWindow_MSWGetSystemMenu(self_: *const c_void) -> *mut c_void;
+        pub fn wxTopLevelWindow_MSWGetSystemMenu(self_: *const c_void) -> *mut c_void;
         pub fn wxTopLevelWindow_RequestUserAttention(self_: *mut c_void, flags: c_int);
         pub fn wxTopLevelWindow_Restore(self_: *mut c_void);
         // BLOCKED: pub fn wxTopLevelWindow_RestoreToGeometry(self_: *mut c_void, ser: *mut c_void) -> bool;
@@ -537,7 +537,7 @@ mod ffi {
         pub fn wxFrame_SetStatusText(self_: *mut c_void, text: *const c_void, number: c_int);
         pub fn wxFrame_SetStatusWidths(self_: *mut c_void, n: c_int, widths_field: *const c_void);
         pub fn wxFrame_SetToolBar(self_: *mut c_void, tool_bar: *mut c_void);
-        // BLOCKED: pub fn wxFrame_MSWGetTaskBarButton(self_: *mut c_void) -> *mut c_void;
+        pub fn wxFrame_MSWGetTaskBarButton(self_: *mut c_void) -> *mut c_void;
         pub fn wxFrame_PushStatusText(self_: *mut c_void, text: *const c_void, number: c_int);
         pub fn wxFrame_PopStatusText(self_: *mut c_void, number: c_int);
         
@@ -1747,8 +1747,12 @@ pub mod methods {
         fn send_idle_events(&self, event: *mut c_void) -> bool {
             unsafe { ffi::wxWindow_SendIdleEvents(self.as_ptr(), event) }
         }
-        // BLOCKED: fn RegisterHotKey()
-        // BLOCKED: fn UnregisterHotKey()
+        fn register_hot_key(&self, hotkey_id: c_int, modifiers: c_int, virtual_key_code: c_int) -> bool {
+            unsafe { ffi::wxWindow_RegisterHotKey(self.as_ptr(), hotkey_id, modifiers, virtual_key_code) }
+        }
+        fn unregister_hot_key(&self, hotkey_id: c_int) -> bool {
+            unsafe { ffi::wxWindow_UnregisterHotKey(self.as_ptr(), hotkey_id) }
+        }
         fn update_window_ui(&self, flags: c_long) {
             unsafe { ffi::wxWindow_UpdateWindowUI(self.as_ptr(), flags) }
         }
@@ -2274,7 +2278,9 @@ pub mod methods {
         }
         // NOT_SUPPORTED: fn SetLabelTop()
         // NOT_SUPPORTED: fn SetMenuLabel()
-        // BLOCKED: fn OSXGetAppleMenu()
+        fn osx_get_apple_menu(&self) -> *mut c_void {
+            unsafe { ffi::wxMenuBar_OSXGetAppleMenu(self.as_ptr()) }
+        }
         fn get_frame(&self) -> *mut c_void {
             unsafe { ffi::wxMenuBar_GetFrame(self.as_ptr()) }
         }
@@ -2293,8 +2299,18 @@ pub mod methods {
         fn detach(&self) {
             unsafe { ffi::wxMenuBar_Detach(self.as_ptr()) }
         }
-        // BLOCKED: fn MacSetCommonMenuBar()
-        // BLOCKED: fn MacGetCommonMenuBar()
+        fn mac_set_common_menu_bar<T: MenuBarMethods>(menubar: Option<&T>) {
+            unsafe {
+                let menubar = match menubar {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxMenuBar_MacSetCommonMenuBar(menubar)
+            }
+        }
+        fn mac_get_common_menu_bar() -> *mut c_void {
+            unsafe { ffi::wxMenuBar_MacGetCommonMenuBar() }
+        }
     }
 
     // wxNonOwnedWindow
@@ -2368,7 +2384,9 @@ pub mod methods {
         fn maximize(&self, maximize: bool) {
             unsafe { ffi::wxTopLevelWindow_Maximize(self.as_ptr(), maximize) }
         }
-        // BLOCKED: fn MSWGetSystemMenu()
+        fn msw_get_system_menu(&self) -> *mut c_void {
+            unsafe { ffi::wxTopLevelWindow_MSWGetSystemMenu(self.as_ptr()) }
+        }
         fn request_user_attention(&self, flags: c_int) {
             unsafe { ffi::wxTopLevelWindow_RequestUserAttention(self.as_ptr(), flags) }
         }
@@ -2516,7 +2534,9 @@ pub mod methods {
         fn set_tool_bar(&self, tool_bar: *mut c_void) {
             unsafe { ffi::wxFrame_SetToolBar(self.as_ptr(), tool_bar) }
         }
-        // BLOCKED: fn MSWGetTaskBarButton()
+        fn msw_get_task_bar_button(&self) -> *mut c_void {
+            unsafe { ffi::wxFrame_MSWGetTaskBarButton(self.as_ptr()) }
+        }
         fn push_status_text(&self, text: &str, number: c_int) {
             unsafe {
                 let text = wx_base::wx_string_from(text);

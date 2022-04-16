@@ -107,7 +107,7 @@ def generated_h(classes, config, libname):
 extern "C" {
 '''
     for cls in classes.in_lib(libname, generated):
-        binding = CxxClassBinding(cls)
+        binding = CxxClassBinding(cls, config)
         for line in binding.lines():
             yield line
     yield '''\
@@ -121,7 +121,7 @@ def generated_cpp(classes, config, libname):
 extern "C" {
 '''
     for cls in classes.in_lib(libname, generated):
-        binding = CxxClassBinding(cls)
+        binding = CxxClassBinding(cls, config)
         for line in binding.lines(is_cc=True):
             yield line
     yield '''\

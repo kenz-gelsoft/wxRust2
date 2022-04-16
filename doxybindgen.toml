@@ -18,6 +18,20 @@ wxml_files = [
     'wxml/classwx_validator.xml',
 ]
 
+[conditions]
+
+[conditions.windows]
+cxx = "#ifdef __WXMSW__"
+
+[conditions.mac]
+cxx = "#ifdef __WXOSX__"
+
+[conditions.not_gtk]
+cxx = "#ifndef __WXGTK__"
+
+[conditions.wx31]
+cxx = "#if wxCHECK_VERSION(3, 1, 0)"
+
 [types]
 [types.wxObject]
 blocklist = [
@@ -38,12 +52,12 @@ blocklist = [
     'GetChildren1',
     'GetCursor',
     'GetUpdateRegion',
-
-    # wx3.1 on wxGTK
+]
+not_gtk = [
     'RegisterHotKey',
     'UnregisterHotKey',
 ]
-blocklist30 = [
+wx31 = [
     'DisableFocusFromKeyboard',
     'EnableTouchEvents',
     'EnableVisibleFocus',
@@ -66,13 +80,13 @@ blocklist30 = [
     'UseForegroundColour',
 ]
 [types.wxControl]
-blocklist30 = [
+wx31 = [
     'GetSizeFromText',
 ]
 [types.wxAnyButton]
 library = 'core'
 [types.wxButton]
-blocklist30 = [
+wx31 = [
     'GetDefaultSize',
 ]
 [types.wxMenu]
@@ -82,8 +96,7 @@ blocklist = [
     'GetMenuItems1',
 ]
 [types.wxMenuBar]
-blocklist = [
-    # mac speicific
+mac = [
     'MacGetCommonMenuBar',
     'MacSetCommonMenuBar',
     'OSXGetAppleMenu',
@@ -91,10 +104,12 @@ blocklist = [
 [types.wxNonOwnedWindow]
 library = 'core'
 [types.wxTopLevelWindow]
-blocklist = [
-    # Other platform specific
-    'IsUsingNativeDecorations',
+windows = [
     'MSWGetSystemMenu',
+]
+blocklist = [
+    # wxUniversal specific
+    'IsUsingNativeDecorations',
     'UseNativeDecorations',
     'UseNativeDecorationsByDefault',
 
@@ -103,14 +118,13 @@ blocklist = [
     'SaveGeometry',
     'RestoreToGeometry',
 ]
-blocklist30 = [
+wx31 = [
     'EnableFullScreenView',
     'EnableMaximizeButton',
     'EnableMinimizeButton',
 ]
 [types.wxFrame]
-blocklist = [
-    # Other platform specific
+windows = [
     'MSWGetTaskBarButton',
 ]
 [types.wxPoint]

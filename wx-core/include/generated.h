@@ -289,6 +289,10 @@ bool wxWindow_IsThisEnabled(const wxWindow * self);
 bool wxWindow_IsTopLevel(const wxWindow * self);
 void wxWindow_OnInternalIdle(wxWindow * self);
 bool wxWindow_SendIdleEvents(wxWindow * self, wxIdleEvent * event);
+#ifndef __WXGTK__
+bool wxWindow_RegisterHotKey(wxWindow * self, int hotkey_id, int modifiers, int virtual_key_code);
+bool wxWindow_UnregisterHotKey(wxWindow * self, int hotkey_id);
+#endif
 void wxWindow_UpdateWindowUI(wxWindow * self, long flags);
 wxWindow * wxWindow_FindFocus();
 wxWindow * wxWindow_FindWindowById(long id, const wxWindow * parent);
@@ -404,10 +408,17 @@ bool wxMenuBar_IsChecked(const wxMenuBar * self, int id);
 bool wxMenuBar_IsEnabled(const wxMenuBar * self, int id);
 void wxMenuBar_SetHelpString(wxMenuBar * self, int id, const wxString * help_string);
 void wxMenuBar_SetLabel(wxMenuBar * self, int id, const wxString * label);
+#ifdef __WXOSX__
+wxMenu * wxMenuBar_OSXGetAppleMenu(const wxMenuBar * self);
+#endif
 wxFrame * wxMenuBar_GetFrame(const wxMenuBar * self);
 bool wxMenuBar_IsAttached(const wxMenuBar * self);
 void wxMenuBar_Attach(wxMenuBar * self, wxFrame * frame);
 void wxMenuBar_Detach(wxMenuBar * self);
+#ifdef __WXOSX__
+void wxMenuBar_MacSetCommonMenuBar(wxMenuBar * menubar);
+wxMenuBar * wxMenuBar_MacGetCommonMenuBar();
+#endif
 
 // CLASS: wxNonOwnedWindow
 bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow * self, const wxRegion * region);
@@ -433,6 +444,9 @@ bool wxTopLevelWindow_IsFullScreen(const wxTopLevelWindow * self);
 bool wxTopLevelWindow_IsIconized(const wxTopLevelWindow * self);
 bool wxTopLevelWindow_IsMaximized(const wxTopLevelWindow * self);
 void wxTopLevelWindow_Maximize(wxTopLevelWindow * self, bool maximize);
+#ifdef __WXMSW__
+wxMenu * wxTopLevelWindow_MSWGetSystemMenu(const wxTopLevelWindow * self);
+#endif
 void wxTopLevelWindow_RequestUserAttention(wxTopLevelWindow * self, int flags);
 void wxTopLevelWindow_Restore(wxTopLevelWindow * self);
 wxWindow * wxTopLevelWindow_SetDefaultItem(wxTopLevelWindow * self, wxWindow * win);
@@ -473,6 +487,9 @@ void wxFrame_SetStatusBarPane(wxFrame * self, int n);
 void wxFrame_SetStatusText(wxFrame * self, const wxString * text, int number);
 void wxFrame_SetStatusWidths(wxFrame * self, int n, const int * widths_field);
 void wxFrame_SetToolBar(wxFrame * self, wxToolBar * tool_bar);
+#ifdef __WXMSW__
+wxTaskBarButton * wxFrame_MSWGetTaskBarButton(wxFrame * self);
+#endif
 void wxFrame_PushStatusText(wxFrame * self, const wxString * text, int number);
 void wxFrame_PopStatusText(wxFrame * self, int number);
 
