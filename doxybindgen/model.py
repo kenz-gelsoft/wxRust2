@@ -39,7 +39,7 @@ class Class:
         self.methods = []
         config = config.get(self.name) or {}
         self.__blocklist = config.get('blocklist') or []
-        self.__blocklist30 = config.get('blocklist30') or []
+        self.__wx31 = config.get('wx31') or []
         self.config = config
         self.library = self._find_libname(e)
         for method in e.findall(".//memberdef[@kind='function']"):
@@ -65,7 +65,7 @@ class Class:
         return name in self.__blocklist
 
     def is_30blocked_method(self, name):
-        return name in self.__blocklist30
+        return name in self.__wx31
 
 
 class Method:

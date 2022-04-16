@@ -47,7 +47,7 @@ blocklist = [
     'RegisterHotKey',
     'UnregisterHotKey',
 ]
-blocklist30 = [
+wx31 = [
     'DisableFocusFromKeyboard',
     'EnableTouchEvents',
     'EnableVisibleFocus',
@@ -70,13 +70,13 @@ blocklist30 = [
     'UseForegroundColour',
 ]
 [types.wxControl]
-blocklist30 = [
+wx31 = [
     'GetSizeFromText',
 ]
 [types.wxAnyButton]
 library = 'core'
 [types.wxButton]
-blocklist30 = [
+wx31 = [
     'GetDefaultSize',
 ]
 [types.wxMenu]
@@ -107,7 +107,7 @@ blocklist = [
     'SaveGeometry',
     'RestoreToGeometry',
 ]
-blocklist30 = [
+wx31 = [
     'EnableFullScreenView',
     'EnableMaximizeButton',
     'EnableMinimizeButton',

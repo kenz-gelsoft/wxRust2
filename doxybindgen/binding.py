@@ -440,8 +440,9 @@ class CxxMethodBinding:
         blocked30 = self.__model.is_blocked30()
         if self.__cls.was_blocked30 != blocked30:
             self.__cls.was_blocked30 = blocked30
+            condition = self.__cls.config.get('conditions').get('wx31')
             if blocked30:
-                yield self.__cls.config.get('conditions').get('wx31').get('cxx')
+                yield condition.get('cxx')
             else:
                 yield '#endif'
         if is_cc:
