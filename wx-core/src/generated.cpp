@@ -1135,6 +1135,11 @@ void wxMenuBar_SetHelpString(wxMenuBar * self, int id, const wxString * help_str
 void wxMenuBar_SetLabel(wxMenuBar * self, int id, const wxString * label) {
     return self->SetLabel(id, *label);
 }
+#ifdef __WXOSX__
+wxMenu * wxMenuBar_OSXGetAppleMenu(const wxMenuBar * self) {
+    return self->OSXGetAppleMenu();
+}
+#endif
 wxFrame * wxMenuBar_GetFrame(const wxMenuBar * self) {
     return self->GetFrame();
 }
@@ -1147,6 +1152,14 @@ void wxMenuBar_Attach(wxMenuBar * self, wxFrame * frame) {
 void wxMenuBar_Detach(wxMenuBar * self) {
     return self->Detach();
 }
+#ifdef __WXOSX__
+void wxMenuBar_MacSetCommonMenuBar(wxMenuBar * menubar) {
+    return wxMenuBar::MacSetCommonMenuBar(menubar);
+}
+wxMenuBar * wxMenuBar_MacGetCommonMenuBar() {
+    return wxMenuBar::MacGetCommonMenuBar();
+}
+#endif
 
 // CLASS: wxNonOwnedWindow
 bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow * self, const wxRegion * region) {
@@ -1210,6 +1223,11 @@ bool wxTopLevelWindow_IsMaximized(const wxTopLevelWindow * self) {
 void wxTopLevelWindow_Maximize(wxTopLevelWindow * self, bool maximize) {
     return self->Maximize(maximize);
 }
+#ifdef __WXMSW__
+wxMenu * wxTopLevelWindow_MSWGetSystemMenu(const wxTopLevelWindow * self) {
+    return self->MSWGetSystemMenu();
+}
+#endif
 void wxTopLevelWindow_RequestUserAttention(wxTopLevelWindow * self, int flags) {
     return self->RequestUserAttention(flags);
 }
@@ -1322,6 +1340,11 @@ void wxFrame_SetStatusWidths(wxFrame * self, int n, const int * widths_field) {
 void wxFrame_SetToolBar(wxFrame * self, wxToolBar * tool_bar) {
     return self->SetToolBar(tool_bar);
 }
+#ifdef __WXMSW__
+wxTaskBarButton * wxFrame_MSWGetTaskBarButton(wxFrame * self) {
+    return self->MSWGetTaskBarButton();
+}
+#endif
 void wxFrame_PushStatusText(wxFrame * self, const wxString * text, int number) {
     return self->PushStatusText(*text, number);
 }

@@ -19,6 +19,13 @@ wxml_files = [
 ]
 
 [conditions]
+
+[conditions.windows]
+cxx = "#ifdef __WXMSW__"
+
+[conditions.mac]
+cxx = "#ifdef __WXOSX__"
+
 [conditions.wx31]
 cxx = "#if wxCHECK_VERSION(3, 1, 0)"
 
@@ -86,8 +93,7 @@ blocklist = [
     'GetMenuItems1',
 ]
 [types.wxMenuBar]
-blocklist = [
-    # mac speicific
+mac = [
     'MacGetCommonMenuBar',
     'MacSetCommonMenuBar',
     'OSXGetAppleMenu',
@@ -95,10 +101,12 @@ blocklist = [
 [types.wxNonOwnedWindow]
 library = 'core'
 [types.wxTopLevelWindow]
-blocklist = [
-    # Other platform specific
-    'IsUsingNativeDecorations',
+windows = [
     'MSWGetSystemMenu',
+]
+blocklist = [
+    # wxUniversal specific
+    'IsUsingNativeDecorations',
     'UseNativeDecorations',
     'UseNativeDecorationsByDefault',
 
@@ -113,8 +121,7 @@ wx31 = [
     'EnableMinimizeButton',
 ]
 [types.wxFrame]
-blocklist = [
-    # Other platform specific
+windows = [
     'MSWGetTaskBarButton',
 ]
 [types.wxPoint]
