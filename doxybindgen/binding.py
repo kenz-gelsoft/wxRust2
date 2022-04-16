@@ -390,11 +390,11 @@ class CxxClassBinding:
         yield '// CLASS: %s' % (self.__model.name,)
         for line in self._dtor_lines(is_cc):
             yield line
-        self.was_blocked30 = False
+        self.in_condition = None
         for method in self.__methods:
             for line in method.lines(is_cc):
                 yield line
-        if self.was_blocked30:
+        if self.in_condition:
             yield '#endif'
         yield ''
 
@@ -437,14 +437,15 @@ class CxxMethodBinding:
             self.__model.name(for_ffi=True),
             self._cxx_params(),
         )
-        blocked30 = self.__model.is_conditional('wx31')
-        if self.__cls.was_blocked30 != blocked30:
-            self.__cls.was_blocked30 = blocked30
-            condition = self.__cls.config.get('conditions').get('wx31')
-            if blocked30:
-                yield condition.get('cxx')
-            else:
-                yield '#endif'
+        conditions = self.__cls.config.get('conditions')
+        for name, condition in conditions.items():
+            cond_met = name if self.__model.is_conditional(name) else None
+            if self.__cls.in_condition != cond_met:
+                self.__cls.in_condition = cond_met
+                if cond_met:
+                    yield condition.get('cxx')
+                else:
+                    yield '#endif'
         if is_cc:
             yield '%s {' % (signature,)
         else:
