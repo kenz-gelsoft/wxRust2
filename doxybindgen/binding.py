@@ -438,14 +438,13 @@ class CxxMethodBinding:
             self._cxx_params(),
         )
         conditions = self.__cls.config.get('conditions')
-        for name, condition in conditions.items():
-            cond_met = name if self.__model.is_conditional(name) else None
-            if self.__cls.in_condition != cond_met:
-                self.__cls.in_condition = cond_met
-                if cond_met:
-                    yield condition.get('cxx')
-                else:
-                    yield '#endif'
+        condition = self.__model.find_condition(conditions)
+        if self.__cls.in_condition != condition:
+            self.__cls.in_condition = condition
+            if condition:
+                yield condition.get('cxx')
+            else:
+                yield '#endif'
         if is_cc:
             yield '%s {' % (signature,)
         else:

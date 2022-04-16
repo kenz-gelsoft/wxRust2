@@ -103,9 +103,12 @@ class Method:
     def is_blocked(self):
         return self.cls.is_blocked_method(self.name())
 
-    def is_conditional(self, cond_name):
-        cond_list = self.cls.config.get(cond_name) or []
-        return self.name() in cond_list
+    def find_condition(self, conditions):
+        for cond_name, condition in conditions.items():
+            cond_list = self.cls.config.get(cond_name) or []
+            if self.name() in cond_list:
+                return condition
+        return None
 
     def _overload_index(self):
         return sum(m.__name == self.__name for m in self.cls.methods)
