@@ -18,6 +18,10 @@ wxml_files = [
     'wxml/classwx_validator.xml',
 ]
 
+[conditions]
+[conditions.wx31]
+cxx = "#if wxCHECK_VERSION(3, 1, 0)"
+
 [types]
 [types.wxObject]
 blocklist = [

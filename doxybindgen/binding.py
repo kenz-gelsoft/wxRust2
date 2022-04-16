@@ -381,8 +381,9 @@ class RustMethodBinding:
 
 
 class CxxClassBinding:
-    def __init__(self, model):
+    def __init__(self, model, config):
         self.__model = model
+        self.config = config
         self.__methods = [CxxMethodBinding(self, m) for m in model.methods]
     
     def lines(self, is_cc=False):
@@ -440,7 +441,7 @@ class CxxMethodBinding:
         if self.__cls.was_blocked30 != blocked30:
             self.__cls.was_blocked30 = blocked30
             if blocked30:
-                yield '#if wxCHECK_VERSION(3, 1, 0)'
+                yield self.__cls.config.get('conditions').get('wx31').get('cxx')
             else:
                 yield '#endif'
         if is_cc:
