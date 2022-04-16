@@ -10,7 +10,7 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build-linux:
+  build-wx30gtk:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,7 +22,7 @@ jobs:
     - name: Run tests
       run: cargo test --verbose
 
-  build-linux31:
+  build-wx31gtk:
     runs-on: ubuntu-20.04
 
     steps:
