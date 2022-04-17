@@ -18,9 +18,10 @@ use crate::manual::*;
 # place wxWidgets doxygen xml files in wxml/ dir and run this.
 generated = set()
 def main():
-    with open('wx-base/src/defs.rs', 'w') as f:
+    with open('wx-base/src/constants.rs', 'w') as f:
         print(PROLOGUE, file=f)
         for file in xml_files_in('wxml/'):
+            # print(file)
             tree = ET.parse(file)
             root = tree.getroot()
             
@@ -37,11 +38,21 @@ def main():
                 print(file=f)
 
 def xml_files_in(dir):
-    for path, _, files in os.walk(dir):
-        for file in files:
-            if not file.endswith('.xml'):
-                continue
-            yield os.path.join(path, file)
+    index = os.path.join(dir, 'index.xml')
+    with open(index, 'r') as f:
+        tree = ET.parse(f)
+        root = tree.getroot()
+        for compound in root.findall('./compound'):
+            if has_constants(compound):
+                xml = compound.get('refid') + '.xml'
+                yield os.path.join(dir, xml)
+
+def has_constants(compound):
+    for member in compound.findall("./member"):
+        kind = member.get('kind')
+        if kind in ['define', 'enum']:
+            return True
+    return False
 
 def defines_in(root):
     memberdefs = root.findall(".//memberdef[@kind='define']")
