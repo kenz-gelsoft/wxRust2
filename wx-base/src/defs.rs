@@ -9,491 +9,6 @@ use std::os::raw::{c_int, c_long};
 
 use crate::manual::*;
 
-//  ENUM: wxAcceleratorEntryFlags
-pub const wxACCEL_NORMAL: c_int = 0;
-pub const wxACCEL_ALT: c_int = 0 + 1;
-pub const wxACCEL_CTRL: c_int = 0 + 2;
-pub const wxACCEL_SHIFT: c_int = 0 + 3;
-pub const wxACCEL_RAW_CTRL: c_int = 0 + 4;
-pub const wxACCEL_CMD: c_int = 0 + 5;
-
-pub const wxACC_SELF: c_int = 0;
-pub const wxACC_STATE_SYSTEM_ALERT_HIGH: c_int = 0x00000001;
-pub const wxACC_STATE_SYSTEM_ALERT_MEDIUM: c_int = 0x00000002;
-pub const wxACC_STATE_SYSTEM_ALERT_LOW: c_int = 0x00000004;
-pub const wxACC_STATE_SYSTEM_ANIMATED: c_int = 0x00000008;
-pub const wxACC_STATE_SYSTEM_BUSY: c_int = 0x00000010;
-pub const wxACC_STATE_SYSTEM_CHECKED: c_int = 0x00000020;
-pub const wxACC_STATE_SYSTEM_COLLAPSED: c_int = 0x00000040;
-pub const wxACC_STATE_SYSTEM_DEFAULT: c_int = 0x00000080;
-pub const wxACC_STATE_SYSTEM_EXPANDED: c_int = 0x00000100;
-pub const wxACC_STATE_SYSTEM_EXTSELECTABLE: c_int = 0x00000200;
-pub const wxACC_STATE_SYSTEM_FLOATING: c_int = 0x00000400;
-pub const wxACC_STATE_SYSTEM_FOCUSABLE: c_int = 0x00000800;
-pub const wxACC_STATE_SYSTEM_FOCUSED: c_int = 0x00001000;
-pub const wxACC_STATE_SYSTEM_HOTTRACKED: c_int = 0x00002000;
-pub const wxACC_STATE_SYSTEM_INVISIBLE: c_int = 0x00004000;
-pub const wxACC_STATE_SYSTEM_MARQUEED: c_int = 0x00008000;
-pub const wxACC_STATE_SYSTEM_MIXED: c_int = 0x00010000;
-pub const wxACC_STATE_SYSTEM_MULTISELECTABLE: c_int = 0x00020000;
-pub const wxACC_STATE_SYSTEM_OFFSCREEN: c_int = 0x00040000;
-pub const wxACC_STATE_SYSTEM_PRESSED: c_int = 0x00080000;
-pub const wxACC_STATE_SYSTEM_PROTECTED: c_int = 0x00100000;
-pub const wxACC_STATE_SYSTEM_READONLY: c_int = 0x00200000;
-pub const wxACC_STATE_SYSTEM_SELECTABLE: c_int = 0x00400000;
-pub const wxACC_STATE_SYSTEM_SELECTED: c_int = 0x00800000;
-pub const wxACC_STATE_SYSTEM_SELFVOICING: c_int = 0x01000000;
-pub const wxACC_STATE_SYSTEM_UNAVAILABLE: c_int = 0x02000000;
-pub const wxACC_EVENT_SYSTEM_SOUND: c_int = 0x0001;
-pub const wxACC_EVENT_SYSTEM_ALERT: c_int = 0x0002;
-pub const wxACC_EVENT_SYSTEM_FOREGROUND: c_int = 0x0003;
-pub const wxACC_EVENT_SYSTEM_MENUSTART: c_int = 0x0004;
-pub const wxACC_EVENT_SYSTEM_MENUEND: c_int = 0x0005;
-pub const wxACC_EVENT_SYSTEM_MENUPOPUPSTART: c_int = 0x0006;
-pub const wxACC_EVENT_SYSTEM_MENUPOPUPEND: c_int = 0x0007;
-pub const wxACC_EVENT_SYSTEM_CAPTURESTART: c_int = 0x0008;
-pub const wxACC_EVENT_SYSTEM_CAPTUREEND: c_int = 0x0009;
-pub const wxACC_EVENT_SYSTEM_MOVESIZESTART: c_int = 0x000A;
-pub const wxACC_EVENT_SYSTEM_MOVESIZEEND: c_int = 0x000B;
-pub const wxACC_EVENT_SYSTEM_CONTEXTHELPSTART: c_int = 0x000C;
-pub const wxACC_EVENT_SYSTEM_CONTEXTHELPEND: c_int = 0x000D;
-pub const wxACC_EVENT_SYSTEM_DRAGDROPSTART: c_int = 0x000E;
-pub const wxACC_EVENT_SYSTEM_DRAGDROPEND: c_int = 0x000F;
-pub const wxACC_EVENT_SYSTEM_DIALOGSTART: c_int = 0x0010;
-pub const wxACC_EVENT_SYSTEM_DIALOGEND: c_int = 0x0011;
-pub const wxACC_EVENT_SYSTEM_SCROLLINGSTART: c_int = 0x0012;
-pub const wxACC_EVENT_SYSTEM_SCROLLINGEND: c_int = 0x0013;
-pub const wxACC_EVENT_SYSTEM_SWITCHSTART: c_int = 0x0014;
-pub const wxACC_EVENT_SYSTEM_SWITCHEND: c_int = 0x0015;
-pub const wxACC_EVENT_SYSTEM_MINIMIZESTART: c_int = 0x0016;
-pub const wxACC_EVENT_SYSTEM_MINIMIZEEND: c_int = 0x0017;
-pub const wxACC_EVENT_OBJECT_CREATE: c_int = 0x8000;
-pub const wxACC_EVENT_OBJECT_DESTROY: c_int = 0x8001;
-pub const wxACC_EVENT_OBJECT_SHOW: c_int = 0x8002;
-pub const wxACC_EVENT_OBJECT_HIDE: c_int = 0x8003;
-pub const wxACC_EVENT_OBJECT_REORDER: c_int = 0x8004;
-pub const wxACC_EVENT_OBJECT_FOCUS: c_int = 0x8005;
-pub const wxACC_EVENT_OBJECT_SELECTION: c_int = 0x8006;
-pub const wxACC_EVENT_OBJECT_SELECTIONADD: c_int = 0x8007;
-pub const wxACC_EVENT_OBJECT_SELECTIONREMOVE: c_int = 0x8008;
-pub const wxACC_EVENT_OBJECT_SELECTIONWITHIN: c_int = 0x8009;
-pub const wxACC_EVENT_OBJECT_STATECHANGE: c_int = 0x800A;
-pub const wxACC_EVENT_OBJECT_LOCATIONCHANGE: c_int = 0x800B;
-pub const wxACC_EVENT_OBJECT_NAMECHANGE: c_int = 0x800C;
-pub const wxACC_EVENT_OBJECT_DESCRIPTIONCHANGE: c_int = 0x800D;
-pub const wxACC_EVENT_OBJECT_VALUECHANGE: c_int = 0x800E;
-pub const wxACC_EVENT_OBJECT_PARENTCHANGE: c_int = 0x800F;
-pub const wxACC_EVENT_OBJECT_HELPCHANGE: c_int = 0x8010;
-pub const wxACC_EVENT_OBJECT_DEFACTIONCHANGE: c_int = 0x8011;
-pub const wxACC_EVENT_OBJECT_ACCELERATORCHANGE: c_int = 0x8012;
-//  ENUM: wxAccStatus
-pub const wxACC_FAIL: c_int = 0;
-pub const wxACC_FALSE: c_int = 0 + 1;
-pub const wxACC_OK: c_int = 0 + 2;
-pub const wxACC_NOT_IMPLEMENTED: c_int = 0 + 3;
-pub const wxACC_NOT_SUPPORTED: c_int = 0 + 4;
-pub const wxACC_INVALID_ARG: c_int = 0 + 5;
-//  ENUM: wxNavDir
-pub const wxNAVDIR_FIRSTCHILD: c_int = 0;
-pub const wxNAVDIR_LASTCHILD: c_int = 0 + 1;
-pub const wxNAVDIR_DOWN: c_int = 0 + 2;
-pub const wxNAVDIR_LEFT: c_int = 0 + 3;
-pub const wxNAVDIR_NEXT: c_int = 0 + 4;
-pub const wxNAVDIR_PREVIOUS: c_int = 0 + 5;
-pub const wxNAVDIR_RIGHT: c_int = 0 + 6;
-pub const wxNAVDIR_UP: c_int = 0 + 7;
-//  ENUM: wxAccRole
-pub const wxROLE_NONE: c_int = 0;
-pub const wxROLE_SYSTEM_ALERT: c_int = 0 + 1;
-pub const wxROLE_SYSTEM_ANIMATION: c_int = 0 + 2;
-pub const wxROLE_SYSTEM_APPLICATION: c_int = 0 + 3;
-pub const wxROLE_SYSTEM_BORDER: c_int = 0 + 4;
-pub const wxROLE_SYSTEM_BUTTONDROPDOWN: c_int = 0 + 5;
-pub const wxROLE_SYSTEM_BUTTONDROPDOWNGRID: c_int = 0 + 6;
-pub const wxROLE_SYSTEM_BUTTONMENU: c_int = 0 + 7;
-pub const wxROLE_SYSTEM_CARET: c_int = 0 + 8;
-pub const wxROLE_SYSTEM_CELL: c_int = 0 + 9;
-pub const wxROLE_SYSTEM_CHARACTER: c_int = 0 + 10;
-pub const wxROLE_SYSTEM_CHART: c_int = 0 + 11;
-pub const wxROLE_SYSTEM_CHECKBUTTON: c_int = 0 + 12;
-pub const wxROLE_SYSTEM_CLIENT: c_int = 0 + 13;
-pub const wxROLE_SYSTEM_CLOCK: c_int = 0 + 14;
-pub const wxROLE_SYSTEM_COLUMN: c_int = 0 + 15;
-pub const wxROLE_SYSTEM_COLUMNHEADER: c_int = 0 + 16;
-pub const wxROLE_SYSTEM_COMBOBOX: c_int = 0 + 17;
-pub const wxROLE_SYSTEM_CURSOR: c_int = 0 + 18;
-pub const wxROLE_SYSTEM_DIAGRAM: c_int = 0 + 19;
-pub const wxROLE_SYSTEM_DIAL: c_int = 0 + 20;
-pub const wxROLE_SYSTEM_DIALOG: c_int = 0 + 21;
-pub const wxROLE_SYSTEM_DOCUMENT: c_int = 0 + 22;
-pub const wxROLE_SYSTEM_DROPLIST: c_int = 0 + 23;
-pub const wxROLE_SYSTEM_EQUATION: c_int = 0 + 24;
-pub const wxROLE_SYSTEM_GRAPHIC: c_int = 0 + 25;
-pub const wxROLE_SYSTEM_GRIP: c_int = 0 + 26;
-pub const wxROLE_SYSTEM_GROUPING: c_int = 0 + 27;
-pub const wxROLE_SYSTEM_HELPBALLOON: c_int = 0 + 28;
-pub const wxROLE_SYSTEM_HOTKEYFIELD: c_int = 0 + 29;
-pub const wxROLE_SYSTEM_INDICATOR: c_int = 0 + 30;
-pub const wxROLE_SYSTEM_LINK: c_int = 0 + 31;
-pub const wxROLE_SYSTEM_LIST: c_int = 0 + 32;
-pub const wxROLE_SYSTEM_LISTITEM: c_int = 0 + 33;
-pub const wxROLE_SYSTEM_MENUBAR: c_int = 0 + 34;
-pub const wxROLE_SYSTEM_MENUITEM: c_int = 0 + 35;
-pub const wxROLE_SYSTEM_MENUPOPUP: c_int = 0 + 36;
-pub const wxROLE_SYSTEM_OUTLINE: c_int = 0 + 37;
-pub const wxROLE_SYSTEM_OUTLINEITEM: c_int = 0 + 38;
-pub const wxROLE_SYSTEM_PAGETAB: c_int = 0 + 39;
-pub const wxROLE_SYSTEM_PAGETABLIST: c_int = 0 + 40;
-pub const wxROLE_SYSTEM_PANE: c_int = 0 + 41;
-pub const wxROLE_SYSTEM_PROGRESSBAR: c_int = 0 + 42;
-pub const wxROLE_SYSTEM_PROPERTYPAGE: c_int = 0 + 43;
-pub const wxROLE_SYSTEM_PUSHBUTTON: c_int = 0 + 44;
-pub const wxROLE_SYSTEM_RADIOBUTTON: c_int = 0 + 45;
-pub const wxROLE_SYSTEM_ROW: c_int = 0 + 46;
-pub const wxROLE_SYSTEM_ROWHEADER: c_int = 0 + 47;
-pub const wxROLE_SYSTEM_SCROLLBAR: c_int = 0 + 48;
-pub const wxROLE_SYSTEM_SEPARATOR: c_int = 0 + 49;
-pub const wxROLE_SYSTEM_SLIDER: c_int = 0 + 50;
-pub const wxROLE_SYSTEM_SOUND: c_int = 0 + 51;
-pub const wxROLE_SYSTEM_SPINBUTTON: c_int = 0 + 52;
-pub const wxROLE_SYSTEM_STATICTEXT: c_int = 0 + 53;
-pub const wxROLE_SYSTEM_STATUSBAR: c_int = 0 + 54;
-pub const wxROLE_SYSTEM_TABLE: c_int = 0 + 55;
-pub const wxROLE_SYSTEM_TEXT: c_int = 0 + 56;
-pub const wxROLE_SYSTEM_TITLEBAR: c_int = 0 + 57;
-pub const wxROLE_SYSTEM_TOOLBAR: c_int = 0 + 58;
-pub const wxROLE_SYSTEM_TOOLTIP: c_int = 0 + 59;
-pub const wxROLE_SYSTEM_WHITESPACE: c_int = 0 + 60;
-pub const wxROLE_SYSTEM_WINDOW: c_int = 0 + 61;
-//  ENUM: wxAccObject
-pub const wxOBJID_WINDOW: c_long =    0x00000000;
-pub const wxOBJID_SYSMENU: c_long =   0xFFFFFFFF;
-pub const wxOBJID_TITLEBAR: c_long =  0xFFFFFFFE;
-pub const wxOBJID_MENU: c_long =      0xFFFFFFFD;
-pub const wxOBJID_CLIENT: c_long =    0xFFFFFFFC;
-pub const wxOBJID_VSCROLL: c_long =   0xFFFFFFFB;
-pub const wxOBJID_HSCROLL: c_long =   0xFFFFFFFA;
-pub const wxOBJID_SIZEGRIP: c_long =  0xFFFFFFF9;
-pub const wxOBJID_CARET: c_long =     0xFFFFFFF8;
-pub const wxOBJID_CURSOR: c_long =    0xFFFFFFF7;
-pub const wxOBJID_ALERT: c_long =     0xFFFFFFF6;
-pub const wxOBJID_SOUND: c_long =     0xFFFFFFF5;
-//  ENUM: wxAccSelectionFlags
-pub const wxACC_SEL_NONE: c_int = 0;
-pub const wxACC_SEL_TAKEFOCUS: c_int = 1;
-pub const wxACC_SEL_TAKESELECTION: c_int = 2;
-pub const wxACC_SEL_EXTENDSELECTION: c_int = 4;
-pub const wxACC_SEL_ADDSELECTION: c_int = 8;
-pub const wxACC_SEL_REMOVESELECTION: c_int = 16;
-
-pub const wxPG_COLOUR_WEB_BASE: c_int = 0x10000;
-pub const wxPG_COLOUR_CUSTOM: c_int = 0xFFFFFF;
-pub const wxPG_COLOUR_UNSPECIFIED: c_int = (wxPG_COLOUR_CUSTOM+1);
-pub const wxPG_PROP_TRANSLATE_CUSTOM: c_long = wxPG_PROP_CLASS_SPECIFIC_1;
-
-pub const wxAC_NO_AUTORESIZE: c_int = (0x0010);
-pub const wxAC_DEFAULT_STYLE: c_long = (wxBORDER_NONE);
-//  ENUM: wxAnimationType
-pub const wxANIMATION_TYPE_INVALID: c_int = 0;
-pub const wxANIMATION_TYPE_GIF: c_int = 0 + 1;
-pub const wxANIMATION_TYPE_ANI: c_int = 0 + 2;
-pub const wxANIMATION_TYPE_ANY: c_int = 0 + 3;
-
-//  ENUM: wxAnimationDisposal
-pub const wxANIM_UNSPECIFIED: c_int = -1;
-pub const wxANIM_DONOTREMOVE: c_int = 0;
-pub const wxANIM_TOBACKGROUND: c_int = 1;
-pub const wxANIM_TOPREVIOUS: c_int = 2;
-
-//  ENUM: @0
-pub const WX_ANY_VALUE_BUFFER_SIZE: c_int = 16;
-
-pub const wxBU_LEFT: c_int = 0x0040;
-pub const wxBU_TOP: c_int = 0x0080;
-pub const wxBU_RIGHT: c_int = 0x0100;
-pub const wxBU_BOTTOM: c_int = 0x0200;
-pub const wxBU_ALIGN_MASK: c_int = ( wxBU_LEFT | wxBU_TOP | wxBU_RIGHT | wxBU_BOTTOM );
-pub const wxBU_EXACTFIT: c_int = 0x0001;
-pub const wxBU_NOTEXT: c_int = 0x0002;
-pub const wxBU_AUTODRAW: c_int = 0x0004;
-
-//  ENUM: wxRibbonArtSetting
-pub const wxRIBBON_ART_TAB_SEPARATION_SIZE: c_int = 0;
-pub const wxRIBBON_ART_PAGE_BORDER_LEFT_SIZE: c_int = 0 + 1;
-pub const wxRIBBON_ART_PAGE_BORDER_TOP_SIZE: c_int = 0 + 2;
-pub const wxRIBBON_ART_PAGE_BORDER_RIGHT_SIZE: c_int = 0 + 3;
-pub const wxRIBBON_ART_PAGE_BORDER_BOTTOM_SIZE: c_int = 0 + 4;
-pub const wxRIBBON_ART_PANEL_X_SEPARATION_SIZE: c_int = 0 + 5;
-pub const wxRIBBON_ART_PANEL_Y_SEPARATION_SIZE: c_int = 0 + 6;
-pub const wxRIBBON_ART_TOOL_GROUP_SEPARATION_SIZE: c_int = 0 + 7;
-pub const wxRIBBON_ART_GALLERY_BITMAP_PADDING_LEFT_SIZE: c_int = 0 + 8;
-pub const wxRIBBON_ART_GALLERY_BITMAP_PADDING_RIGHT_SIZE: c_int = 0 + 9;
-pub const wxRIBBON_ART_GALLERY_BITMAP_PADDING_TOP_SIZE: c_int = 0 + 10;
-pub const wxRIBBON_ART_GALLERY_BITMAP_PADDING_BOTTOM_SIZE: c_int = 0 + 11;
-pub const wxRIBBON_ART_PANEL_LABEL_FONT: c_int = 0 + 12;
-pub const wxRIBBON_ART_BUTTON_BAR_LABEL_FONT: c_int = 0 + 13;
-pub const wxRIBBON_ART_TAB_LABEL_FONT: c_int = 0 + 14;
-pub const wxRIBBON_ART_BUTTON_BAR_LABEL_COLOUR: c_int = 0 + 15;
-pub const wxRIBBON_ART_BUTTON_BAR_LABEL_DISABLED_COLOUR: c_int = 0 + 16;
-pub const wxRIBBON_ART_BUTTON_BAR_HOVER_BORDER_COLOUR: c_int = 0 + 17;
-pub const wxRIBBON_ART_BUTTON_BAR_HOVER_BACKGROUND_TOP_COLOUR: c_int = 0 + 18;
-pub const wxRIBBON_ART_BUTTON_BAR_HOVER_BACKGROUND_TOP_GRADIENT_COLOUR: c_int = 0 + 19;
-pub const wxRIBBON_ART_BUTTON_BAR_HOVER_BACKGROUND_COLOUR: c_int = 0 + 20;
-pub const wxRIBBON_ART_BUTTON_BAR_HOVER_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 21;
-pub const wxRIBBON_ART_BUTTON_BAR_ACTIVE_BORDER_COLOUR: c_int = 0 + 22;
-pub const wxRIBBON_ART_BUTTON_BAR_ACTIVE_BACKGROUND_TOP_COLOUR: c_int = 0 + 23;
-pub const wxRIBBON_ART_BUTTON_BAR_ACTIVE_BACKGROUND_TOP_GRADIENT_COLOUR: c_int = 0 + 24;
-pub const wxRIBBON_ART_BUTTON_BAR_ACTIVE_BACKGROUND_COLOUR: c_int = 0 + 25;
-pub const wxRIBBON_ART_BUTTON_BAR_ACTIVE_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 26;
-pub const wxRIBBON_ART_GALLERY_BORDER_COLOUR: c_int = 0 + 27;
-pub const wxRIBBON_ART_GALLERY_HOVER_BACKGROUND_COLOUR: c_int = 0 + 28;
-pub const wxRIBBON_ART_GALLERY_BUTTON_BACKGROUND_COLOUR: c_int = 0 + 29;
-pub const wxRIBBON_ART_GALLERY_BUTTON_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 30;
-pub const wxRIBBON_ART_GALLERY_BUTTON_BACKGROUND_TOP_COLOUR: c_int = 0 + 31;
-pub const wxRIBBON_ART_GALLERY_BUTTON_FACE_COLOUR: c_int = 0 + 32;
-pub const wxRIBBON_ART_GALLERY_BUTTON_HOVER_BACKGROUND_COLOUR: c_int = 0 + 33;
-pub const wxRIBBON_ART_GALLERY_BUTTON_HOVER_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 34;
-pub const wxRIBBON_ART_GALLERY_BUTTON_HOVER_BACKGROUND_TOP_COLOUR: c_int = 0 + 35;
-pub const wxRIBBON_ART_GALLERY_BUTTON_HOVER_FACE_COLOUR: c_int = 0 + 36;
-pub const wxRIBBON_ART_GALLERY_BUTTON_ACTIVE_BACKGROUND_COLOUR: c_int = 0 + 37;
-pub const wxRIBBON_ART_GALLERY_BUTTON_ACTIVE_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 38;
-pub const wxRIBBON_ART_GALLERY_BUTTON_ACTIVE_BACKGROUND_TOP_COLOUR: c_int = 0 + 39;
-pub const wxRIBBON_ART_GALLERY_BUTTON_ACTIVE_FACE_COLOUR: c_int = 0 + 40;
-pub const wxRIBBON_ART_GALLERY_BUTTON_DISABLED_BACKGROUND_COLOUR: c_int = 0 + 41;
-pub const wxRIBBON_ART_GALLERY_BUTTON_DISABLED_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 42;
-pub const wxRIBBON_ART_GALLERY_BUTTON_DISABLED_BACKGROUND_TOP_COLOUR: c_int = 0 + 43;
-pub const wxRIBBON_ART_GALLERY_BUTTON_DISABLED_FACE_COLOUR: c_int = 0 + 44;
-pub const wxRIBBON_ART_GALLERY_ITEM_BORDER_COLOUR: c_int = 0 + 45;
-pub const wxRIBBON_ART_TAB_LABEL_COLOUR: c_int = 0 + 46;
-pub const wxRIBBON_ART_TAB_ACTIVE_LABEL_COLOUR: c_int = 0 + 47;
-pub const wxRIBBON_ART_TAB_HOVER_LABEL_COLOUR: c_int = 0 + 48;
-pub const wxRIBBON_ART_TAB_SEPARATOR_COLOUR: c_int = 0 + 49;
-pub const wxRIBBON_ART_TAB_SEPARATOR_GRADIENT_COLOUR: c_int = 0 + 50;
-pub const wxRIBBON_ART_TAB_CTRL_BACKGROUND_COLOUR: c_int = 0 + 51;
-pub const wxRIBBON_ART_TAB_CTRL_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 52;
-pub const wxRIBBON_ART_TAB_HOVER_BACKGROUND_TOP_COLOUR: c_int = 0 + 53;
-pub const wxRIBBON_ART_TAB_HOVER_BACKGROUND_TOP_GRADIENT_COLOUR: c_int = 0 + 54;
-pub const wxRIBBON_ART_TAB_HOVER_BACKGROUND_COLOUR: c_int = 0 + 55;
-pub const wxRIBBON_ART_TAB_HOVER_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 56;
-pub const wxRIBBON_ART_TAB_ACTIVE_BACKGROUND_TOP_COLOUR: c_int = 0 + 57;
-pub const wxRIBBON_ART_TAB_ACTIVE_BACKGROUND_TOP_GRADIENT_COLOUR: c_int = 0 + 58;
-pub const wxRIBBON_ART_TAB_ACTIVE_BACKGROUND_COLOUR: c_int = 0 + 59;
-pub const wxRIBBON_ART_TAB_ACTIVE_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 60;
-pub const wxRIBBON_ART_TAB_BORDER_COLOUR: c_int = 0 + 61;
-pub const wxRIBBON_ART_PANEL_BORDER_COLOUR: c_int = 0 + 62;
-pub const wxRIBBON_ART_PANEL_BORDER_GRADIENT_COLOUR: c_int = 0 + 63;
-pub const wxRIBBON_ART_PANEL_HOVER_BORDER_COLOUR: c_int = 0 + 64;
-pub const wxRIBBON_ART_PANEL_HOVER_BORDER_GRADIENT_COLOUR: c_int = 0 + 65;
-pub const wxRIBBON_ART_PANEL_MINIMISED_BORDER_COLOUR: c_int = 0 + 66;
-pub const wxRIBBON_ART_PANEL_MINIMISED_BORDER_GRADIENT_COLOUR: c_int = 0 + 67;
-pub const wxRIBBON_ART_PANEL_LABEL_BACKGROUND_COLOUR: c_int = 0 + 68;
-pub const wxRIBBON_ART_PANEL_LABEL_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 69;
-pub const wxRIBBON_ART_PANEL_LABEL_COLOUR: c_int = 0 + 70;
-pub const wxRIBBON_ART_PANEL_HOVER_LABEL_BACKGROUND_COLOUR: c_int = 0 + 71;
-pub const wxRIBBON_ART_PANEL_HOVER_LABEL_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 72;
-pub const wxRIBBON_ART_PANEL_HOVER_LABEL_COLOUR: c_int = 0 + 73;
-pub const wxRIBBON_ART_PANEL_MINIMISED_LABEL_COLOUR: c_int = 0 + 74;
-pub const wxRIBBON_ART_PANEL_ACTIVE_BACKGROUND_TOP_COLOUR: c_int = 0 + 75;
-pub const wxRIBBON_ART_PANEL_ACTIVE_BACKGROUND_TOP_GRADIENT_COLOUR: c_int = 0 + 76;
-pub const wxRIBBON_ART_PANEL_ACTIVE_BACKGROUND_COLOUR: c_int = 0 + 77;
-pub const wxRIBBON_ART_PANEL_ACTIVE_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 78;
-pub const wxRIBBON_ART_PAGE_BORDER_COLOUR: c_int = 0 + 79;
-pub const wxRIBBON_ART_PAGE_BACKGROUND_TOP_COLOUR: c_int = 0 + 80;
-pub const wxRIBBON_ART_PAGE_BACKGROUND_TOP_GRADIENT_COLOUR: c_int = 0 + 81;
-pub const wxRIBBON_ART_PAGE_BACKGROUND_COLOUR: c_int = 0 + 82;
-pub const wxRIBBON_ART_PAGE_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 83;
-pub const wxRIBBON_ART_PAGE_HOVER_BACKGROUND_TOP_COLOUR: c_int = 0 + 84;
-pub const wxRIBBON_ART_PAGE_HOVER_BACKGROUND_TOP_GRADIENT_COLOUR: c_int = 0 + 85;
-pub const wxRIBBON_ART_PAGE_HOVER_BACKGROUND_COLOUR: c_int = 0 + 86;
-pub const wxRIBBON_ART_PAGE_HOVER_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 87;
-pub const wxRIBBON_ART_TOOLBAR_BORDER_COLOUR: c_int = 0 + 88;
-pub const wxRIBBON_ART_TOOLBAR_HOVER_BORDER_COLOUR: c_int = 0 + 89;
-pub const wxRIBBON_ART_TOOLBAR_FACE_COLOUR: c_int = 0 + 90;
-pub const wxRIBBON_ART_TOOL_BACKGROUND_TOP_COLOUR: c_int = 0 + 91;
-pub const wxRIBBON_ART_TOOL_BACKGROUND_TOP_GRADIENT_COLOUR: c_int = 0 + 92;
-pub const wxRIBBON_ART_TOOL_BACKGROUND_COLOUR: c_int = 0 + 93;
-pub const wxRIBBON_ART_TOOL_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 94;
-pub const wxRIBBON_ART_TOOL_HOVER_BACKGROUND_TOP_COLOUR: c_int = 0 + 95;
-pub const wxRIBBON_ART_TOOL_HOVER_BACKGROUND_TOP_GRADIENT_COLOUR: c_int = 0 + 96;
-pub const wxRIBBON_ART_TOOL_HOVER_BACKGROUND_COLOUR: c_int = 0 + 97;
-pub const wxRIBBON_ART_TOOL_HOVER_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 98;
-pub const wxRIBBON_ART_TOOL_ACTIVE_BACKGROUND_TOP_COLOUR: c_int = 0 + 99;
-pub const wxRIBBON_ART_TOOL_ACTIVE_BACKGROUND_TOP_GRADIENT_COLOUR: c_int = 0 + 100;
-pub const wxRIBBON_ART_TOOL_ACTIVE_BACKGROUND_COLOUR: c_int = 0 + 101;
-pub const wxRIBBON_ART_TOOL_ACTIVE_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 102;
-pub const wxRIBBON_ART_BUTTON_BAR_LABEL_HIGHLIGHT_COLOUR: c_int = 0 + 103;
-pub const wxRIBBON_ART_BUTTON_BAR_LABEL_HIGHLIGHT_GRADIENT_COLOUR: c_int = 0 + 104;
-pub const wxRIBBON_ART_BUTTON_BAR_LABEL_HIGHLIGHT_TOP_COLOUR: c_int = 0 + 105;
-pub const wxRIBBON_ART_BUTTON_BAR_LABEL_HIGHLIGHT_GRADIENT_TOP_COLOUR: c_int = 0 + 106;
-//  ENUM: wxRibbonScrollButtonStyle
-pub const wxRIBBON_SCROLL_BTN_LEFT: c_int = 0;
-pub const wxRIBBON_SCROLL_BTN_RIGHT: c_int = 1;
-pub const wxRIBBON_SCROLL_BTN_UP: c_int = 2;
-pub const wxRIBBON_SCROLL_BTN_DOWN: c_int = 3;
-pub const wxRIBBON_SCROLL_BTN_DIRECTION_MASK: c_int = 3;
-pub const wxRIBBON_SCROLL_BTN_NORMAL: c_int = 0;
-pub const wxRIBBON_SCROLL_BTN_HOVERED: c_int = 4;
-pub const wxRIBBON_SCROLL_BTN_ACTIVE: c_int = 8;
-pub const wxRIBBON_SCROLL_BTN_STATE_MASK: c_int = 12;
-pub const wxRIBBON_SCROLL_BTN_FOR_OTHER: c_int = 0;
-pub const wxRIBBON_SCROLL_BTN_FOR_TABS: c_int = 16;
-pub const wxRIBBON_SCROLL_BTN_FOR_PAGE: c_int = 32;
-pub const wxRIBBON_SCROLL_BTN_FOR_MASK: c_int = 48;
-//  ENUM: wxRibbonButtonKind
-pub const wxRIBBON_BUTTON_NORMAL: c_int = 1 << 0;
-pub const wxRIBBON_BUTTON_DROPDOWN: c_int = 1 << 1;
-pub const wxRIBBON_BUTTON_HYBRID: c_int = wxRIBBON_BUTTON_NORMAL | wxRIBBON_BUTTON_DROPDOWN;
-pub const wxRIBBON_BUTTON_TOGGLE: c_int = 1 << 2;
-
-//  ENUM: wxAuiToolBarStyle
-pub const wxAUI_TB_TEXT: c_int = 1 << 0;
-pub const wxAUI_TB_NO_TOOLTIPS: c_int = 1 << 1;
-pub const wxAUI_TB_NO_AUTORESIZE: c_int = 1 << 2;
-pub const wxAUI_TB_GRIPPER: c_int = 1 << 3;
-pub const wxAUI_TB_OVERFLOW: c_int = 1 << 4;
-pub const wxAUI_TB_VERTICAL: c_int = 1 << 5;
-pub const wxAUI_TB_HORZ_LAYOUT: c_int = 1 << 6;
-pub const wxAUI_TB_HORIZONTAL: c_int = 1 << 7;
-pub const wxAUI_TB_PLAIN_BACKGROUND: c_int = 1 << 8;
-pub const wxAUI_TB_HORZ_TEXT: c_int = (wxAUI_TB_HORZ_LAYOUT | wxAUI_TB_TEXT);
-pub const wxAUI_ORIENTATION_MASK: c_int = (wxAUI_TB_VERTICAL | wxAUI_TB_HORIZONTAL);
-pub const wxAUI_TB_DEFAULT_STYLE: c_int = 0;
-//  ENUM: wxAuiToolBarArtSetting
-pub const wxAUI_TBART_SEPARATOR_SIZE: c_int = 0;
-pub const wxAUI_TBART_GRIPPER_SIZE: c_int = 1;
-//  SKIP: wxAUI_TBART_OVERFLOW_SIZE
-//  ENUM: wxAuiToolBarToolTextOrientation
-pub const wxAUI_TBTOOL_TEXT_LEFT: c_int = 0;
-pub const wxAUI_TBTOOL_TEXT_RIGHT: c_int = 1;
-pub const wxAUI_TBTOOL_TEXT_TOP: c_int = 2;
-pub const wxAUI_TBTOOL_TEXT_BOTTOM: c_int = 3;
-
-//  ENUM: wxAuiNotebookOption
-pub const wxAUI_NB_TOP: c_int = 1 << 0;
-pub const wxAUI_NB_LEFT: c_int = 1 << 1;
-pub const wxAUI_NB_RIGHT: c_int = 1 << 2;
-pub const wxAUI_NB_BOTTOM: c_int = 1 << 3;
-pub const wxAUI_NB_TAB_SPLIT: c_int = 1 << 4;
-pub const wxAUI_NB_TAB_MOVE: c_int = 1 << 5;
-pub const wxAUI_NB_TAB_EXTERNAL_MOVE: c_int = 1 << 6;
-pub const wxAUI_NB_TAB_FIXED_WIDTH: c_int = 1 << 7;
-pub const wxAUI_NB_SCROLL_BUTTONS: c_int = 1 << 8;
-pub const wxAUI_NB_WINDOWLIST_BUTTON: c_int = 1 << 9;
-pub const wxAUI_NB_CLOSE_BUTTON: c_int = 1 << 10;
-pub const wxAUI_NB_CLOSE_ON_ACTIVE_TAB: c_int = 1 << 11;
-pub const wxAUI_NB_CLOSE_ON_ALL_TABS: c_int = 1 << 12;
-pub const wxAUI_NB_MIDDLE_CLICK_CLOSE: c_int = 1 << 13;
-pub const wxAUI_NB_DEFAULT_STYLE: c_int = wxAUI_NB_TOP |
-                             wxAUI_NB_TAB_SPLIT |
-                             wxAUI_NB_TAB_MOVE |
-                             wxAUI_NB_SCROLL_BUTTONS |
-                             wxAUI_NB_CLOSE_ON_ACTIVE_TAB |
-                             wxAUI_NB_MIDDLE_CLICK_CLOSE;
-
-//  ENUM: wxAutomationInstanceFlags
-pub const wxAutomationInstance_UseExistingOnly: c_int = 0;
-pub const wxAutomationInstance_CreateIfNeeded: c_int = 1;
-pub const wxAutomationInstance_SilentIfNone: c_int = 2;
-
-//  ENUM: wxRibbonBarOption
-pub const wxRIBBON_BAR_SHOW_PAGE_LABELS: c_int = 0;
-pub const wxRIBBON_BAR_SHOW_PAGE_ICONS: c_int = 0 + 1;
-pub const wxRIBBON_BAR_FLOW_HORIZONTAL: c_int = 0 + 2;
-pub const wxRIBBON_BAR_FLOW_VERTICAL: c_int = 0 + 3;
-pub const wxRIBBON_BAR_SHOW_PANEL_EXT_BUTTONS: c_int = 0 + 4;
-pub const wxRIBBON_BAR_SHOW_PANEL_MINIMISE_BUTTONS: c_int = 0 + 5;
-pub const wxRIBBON_BAR_ALWAYS_SHOW_TABS: c_int = 0 + 6;
-pub const wxRIBBON_BAR_SHOW_TOGGLE_BUTTON: c_int = 0 + 7;
-pub const wxRIBBON_BAR_SHOW_HELP_BUTTON: c_int = 0 + 8;
-pub const wxRIBBON_BAR_DEFAULT_STYLE: c_int = 0 + 9;
-pub const wxRIBBON_BAR_FOLDBAR_STYLE: c_int = 0 + 10;
-//  ENUM: wxRibbonDisplayMode
-pub const wxRIBBON_BAR_PINNED: c_int = 0;
-pub const wxRIBBON_BAR_MINIMIZED: c_int = 0 + 1;
-pub const wxRIBBON_BAR_EXPANDED: c_int = 0 + 2;
-
-//  ENUM: wxBase64DecodeMode
-pub const wxBase64DecodeMode_Strict: c_int = 0;
-pub const wxBase64DecodeMode_SkipWS: c_int = 0 + 1;
-pub const wxBase64DecodeMode_Relaxed: c_int = 0 + 2;
-
-//  ENUM: wxBrushStyle
-pub const wxBRUSHSTYLE_INVALID: c_int = -1;
-pub const wxBRUSHSTYLE_SOLID: c_int = wxSOLID;
-pub const wxBRUSHSTYLE_TRANSPARENT: c_int = wxTRANSPARENT;
-pub const wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE: c_int = wxSTIPPLE_MASK_OPAQUE;
-pub const wxBRUSHSTYLE_STIPPLE_MASK: c_int = wxSTIPPLE_MASK;
-pub const wxBRUSHSTYLE_STIPPLE: c_int = wxSTIPPLE;
-pub const wxBRUSHSTYLE_BDIAGONAL_HATCH: c_int = wxSTIPPLE + 1;
-pub const wxBRUSHSTYLE_CROSSDIAG_HATCH: c_int = wxSTIPPLE + 2;
-pub const wxBRUSHSTYLE_FDIAGONAL_HATCH: c_int = wxSTIPPLE + 3;
-pub const wxBRUSHSTYLE_CROSS_HATCH: c_int = wxSTIPPLE + 4;
-pub const wxBRUSHSTYLE_HORIZONTAL_HATCH: c_int = wxSTIPPLE + 5;
-pub const wxBRUSHSTYLE_VERTICAL_HATCH: c_int = wxSTIPPLE + 6;
-pub const wxBRUSHSTYLE_FIRST_HATCH: c_int = wxSTIPPLE + 7;
-pub const wxBRUSHSTYLE_LAST_HATCH: c_int = wxSTIPPLE + 8;
-
-//  ENUM: wxRibbonButtonBarButtonState
-pub const wxRIBBON_BUTTONBAR_BUTTON_SMALL: c_int = 0 << 0;
-pub const wxRIBBON_BUTTONBAR_BUTTON_MEDIUM: c_int = 1 << 0;
-pub const wxRIBBON_BUTTONBAR_BUTTON_LARGE: c_int = 2 << 0;
-pub const wxRIBBON_BUTTONBAR_BUTTON_SIZE_MASK: c_int = 3 << 0;
-pub const wxRIBBON_BUTTONBAR_BUTTON_NORMAL_HOVERED: c_int = 1 << 3;
-pub const wxRIBBON_BUTTONBAR_BUTTON_DROPDOWN_HOVERED: c_int = 1 << 4;
-pub const wxRIBBON_BUTTONBAR_BUTTON_HOVER_MASK: c_int = wxRIBBON_BUTTONBAR_BUTTON_NORMAL_HOVERED | wxRIBBON_BUTTONBAR_BUTTON_DROPDOWN_HOVERED;
-pub const wxRIBBON_BUTTONBAR_BUTTON_NORMAL_ACTIVE: c_int = 1 << 5;
-pub const wxRIBBON_BUTTONBAR_BUTTON_DROPDOWN_ACTIVE: c_int = 1 << 6;
-pub const wxRIBBON_BUTTONBAR_BUTTON_ACTIVE_MASK: c_int = wxRIBBON_BUTTONBAR_BUTTON_NORMAL_ACTIVE | wxRIBBON_BUTTONBAR_BUTTON_DROPDOWN_ACTIVE;
-pub const wxRIBBON_BUTTONBAR_BUTTON_DISABLED: c_int = 1 << 7;
-pub const wxRIBBON_BUTTONBAR_BUTTON_TOGGLED: c_int = 1 << 8;
-pub const wxRIBBON_BUTTONBAR_BUTTON_STATE_MASK: c_int = 0x1F8;
-
-//  ENUM: @4
-pub const wxCAL_SUNDAY_FIRST: c_int = 0x0080;
-pub const wxCAL_MONDAY_FIRST: c_int = 0x0001;
-pub const wxCAL_SHOW_HOLIDAYS: c_int = 0x0002;
-pub const wxCAL_NO_YEAR_CHANGE: c_int = 0x0004;
-pub const wxCAL_NO_MONTH_CHANGE: c_int = 0x000c;
-pub const wxCAL_SEQUENTIAL_MONTH_SELECTION: c_int = 0x0010;
-pub const wxCAL_SHOW_SURROUNDING_WEEKS: c_int = 0x0020;
-pub const wxCAL_SHOW_WEEK_NUMBERS: c_int = 0x0040;
-//  ENUM: wxCalendarDateBorder
-pub const wxCAL_BORDER_NONE: c_int = 0;
-pub const wxCAL_BORDER_SQUARE: c_int = 0 + 1;
-pub const wxCAL_BORDER_ROUND: c_int = 0 + 2;
-//  ENUM: wxCalendarHitTestResult
-pub const wxCAL_HITTEST_NOWHERE: c_int = 0;
-pub const wxCAL_HITTEST_HEADER: c_int = 0 + 1;
-pub const wxCAL_HITTEST_DAY: c_int = 0 + 2;
-pub const wxCAL_HITTEST_INCMONTH: c_int = 0 + 3;
-pub const wxCAL_HITTEST_DECMONTH: c_int = 0 + 4;
-pub const wxCAL_HITTEST_SURROUNDING_WEEK: c_int = 0 + 5;
-pub const wxCAL_HITTEST_WEEK: c_int = 0 + 6;
-
-// NODEF: wxT
-// NODEF: wxT_2
-// NODEF: wxS
-// NODEF: _T
-
-pub const wxCHK_2STATE: c_int = 0x4000;
-pub const wxCHK_3STATE: c_int = 0x1000;
-pub const wxCHK_ALLOW_3RD_STATE_FOR_USER: c_int = 0x2000;
-//  ENUM: wxCheckBoxState
-pub const wxCHK_UNCHECKED: c_int = 0;
-pub const wxCHK_CHECKED: c_int = 0 + 1;
-pub const wxCHK_UNDETERMINED: c_int = 0 + 2;
-
-pub const wxCHOICE_WIDTH: c_int = 150;
-pub const wxCHOICE_HEIGHT: c_int = 200;
-pub const wxCHOICEDLG_STYLE: c_long = (wxDEFAULT_DIALOG_STYLE | wxOK | wxCANCEL | wxCENTRE | wxRESIZE_BORDER);
-
-pub const wxCHB_DEFAULT: c_int = wxBK_DEFAULT;
-pub const wxCHB_TOP: c_int = wxBK_TOP;
-pub const wxCHB_BOTTOM: c_int = wxBK_BOTTOM;
-pub const wxCHB_LEFT: c_int = wxBK_LEFT;
-pub const wxCHB_RIGHT: c_int = wxBK_RIGHT;
-pub const wxCHB_ALIGN_MASK: c_int = wxBK_ALIGN_MASK;
-
 //  ENUM: Reason
 pub const Reason_Mouse: c_int = 0;
 pub const Reason_Unknown: c_int = 0 + 1;
@@ -523,6 +38,18 @@ pub const NUM_CUSTOM: c_int = 16;
 pub const ShowBelow: c_int = 0x0000;
 pub const ShowAbove: c_int = 0x0001;
 pub const CanDeferShow: c_int = 0x0002;
+
+//  ENUM: @8
+pub const MovableButton: c_int = 0x0001;
+pub const BitmapButton: c_int = 0x0002;
+pub const ButtonSpacing: c_int = 0x0004;
+pub const TextIndent: c_int = 0x0008;
+pub const PaintControl: c_int = 0x0010;
+pub const PaintWritable: c_int = 0x0020;
+pub const Borderless: c_int = 0x0040;
+pub const All: c_int = MovableButton | BitmapButton | ButtonSpacing |
+                          TextIndent | PaintControl | PaintWritable |
+                          Borderless;
 
 //  ENUM: EntryType
 pub const Type_Unknown: c_int = 0;
@@ -648,11 +175,6 @@ pub const Event_Skip: c_int = -1;
 pub const Event_Ignore: c_int = 0;
 pub const Event_Processed: c_int = 1;
 
-//  ENUM: TransferMode
-pub const NONE: c_int = 0;
-pub const ASCII: c_int = 0 + 1;
-pub const BINARY: c_int = 0 + 2;
-
 //  ENUM: OpenMode
 pub const read: c_int = 0;
 pub const write: c_int = 0 + 1;
@@ -664,6 +186,11 @@ pub const fd_invalid: c_int = -1;
 pub const fd_stdin: c_int = -1 + 1;
 pub const fd_stdout: c_int = -1 + 2;
 pub const fd_stderr: c_int = -1 + 3;
+
+//  ENUM: TransferMode
+pub const NONE: c_int = 0;
+pub const ASCII: c_int = 0 + 1;
+pub const BINARY: c_int = 0 + 2;
 
 //  ENUM: wxGridSelectionModes
 pub const wxGridSelectCells: c_int = 0;
@@ -850,6 +377,910 @@ pub const Storage_File: c_int = 0 + 1;
 pub const Storage_None: c_int = 0 + 2;
 
 //  ENUM: @57
+
+// NODEF: wxDECLARE_APP
+// NODEF: wxIMPLEMENT_APP
+//  SKIP: wxDISABLE_DEBUG_SUPPORT
+
+pub const wxBITMAP_SCREEN_DEPTH: c_int = (-1);
+
+pub const wxBK_DEFAULT: c_int = 0x0000;
+pub const wxBK_TOP: c_int = 0x0010;
+pub const wxBK_BOTTOM: c_int = 0x0020;
+pub const wxBK_LEFT: c_int = 0x0040;
+pub const wxBK_RIGHT: c_int = 0x0080;
+pub const wxBK_ALIGN_MASK: c_int = (wxBK_TOP | wxBK_BOTTOM | wxBK_LEFT | wxBK_RIGHT);
+//  SKIP: wxBookCtrl
+//  ENUM: @2
+pub const wxBK_HITTEST_NOWHERE: c_int = 1;
+pub const wxBK_HITTEST_ONICON: c_int = 2;
+pub const wxBK_HITTEST_ONLABEL: c_int = 4;
+pub const wxBK_HITTEST_ONITEM: c_int = 16;
+pub const wxBK_HITTEST_ONPAGE: c_int = 8;
+
+//  ENUM: @10
+pub const wxCONFIG_USE_LOCAL_FILE: c_int = 1;
+pub const wxCONFIG_USE_GLOBAL_FILE: c_int = 2;
+pub const wxCONFIG_USE_RELATIVE_PATH: c_int = 4;
+pub const wxCONFIG_USE_NO_ESCAPE_CHARACTERS: c_int = 8;
+pub const wxCONFIG_USE_SUBDIR: c_int = 16;
+
+//  SKIP: wxInvalidDateTime
+
+//  ENUM: wxRasterOperationMode
+pub const wxCLEAR: c_int = 0;
+pub const wxXOR: c_int = 0 + 1;
+pub const wxINVERT: c_int = 0 + 2;
+pub const wxOR_REVERSE: c_int = 0 + 3;
+pub const wxAND_REVERSE: c_int = 0 + 4;
+pub const wxCOPY: c_int = 0 + 5;
+pub const wxAND: c_int = 0 + 6;
+pub const wxAND_INVERT: c_int = 0 + 7;
+pub const wxNO_OP: c_int = 0 + 8;
+pub const wxNOR: c_int = 0 + 9;
+pub const wxEQUIV: c_int = 0 + 10;
+pub const wxSRC_INVERT: c_int = 0 + 11;
+pub const wxOR_INVERT: c_int = 0 + 12;
+pub const wxNAND: c_int = 0 + 13;
+pub const wxOR: c_int = 0 + 14;
+pub const wxSET: c_int = 0 + 15;
+//  ENUM: wxFloodFillStyle
+pub const wxFLOOD_SURFACE: c_int = 1;
+pub const wxFLOOD_BORDER: c_int = 1 + 1;
+//  ENUM: wxMappingMode
+pub const wxMM_TEXT: c_int = 1;
+pub const wxMM_METRIC: c_int = 1 + 1;
+pub const wxMM_LOMETRIC: c_int = 1 + 2;
+pub const wxMM_TWIPS: c_int = 1 + 3;
+pub const wxMM_POINTS: c_int = 1 + 4;
+
+pub const wxDIALOG_NO_PARENT: c_int = 0x00000020;
+pub const wxDEFAULT_DIALOG_STYLE: c_long = (wxCAPTION | wxSYSTEM_MENU | wxCLOSE_BOX);
+pub const wxDIALOG_ADAPTATION_NONE: c_int = 0;
+pub const wxDIALOG_ADAPTATION_STANDARD_SIZER: c_int = 1;
+pub const wxDIALOG_ADAPTATION_ANY_SIZER: c_int = 2;
+pub const wxDIALOG_ADAPTATION_LOOSE_BUTTONS: c_int = 3;
+//  ENUM: wxDialogLayoutAdaptationMode
+pub const wxDIALOG_ADAPTATION_MODE_DEFAULT: c_int = 0;
+pub const wxDIALOG_ADAPTATION_MODE_ENABLED: c_int = 1;
+pub const wxDIALOG_ADAPTATION_MODE_DISABLED: c_int = 2;
+
+// NODEF: wxDROP_ICON
+//  ENUM: @13
+pub const wxDrag_CopyOnly: c_int = 0;
+pub const wxDrag_AllowMove: c_int = 1;
+pub const wxDrag_DefaultMove: c_int = 3;
+//  ENUM: wxDragResult
+pub const wxDragError: c_int = 0;
+pub const wxDragNone: c_int = 0 + 1;
+pub const wxDragCopy: c_int = 0 + 2;
+pub const wxDragMove: c_int = 0 + 3;
+pub const wxDragLink: c_int = 0 + 4;
+pub const wxDragCancel: c_int = 0 + 5;
+
+//  ENUM: wxFontFamily
+pub const wxFONTFAMILY_DEFAULT: c_int = wxDEFAULT;
+pub const wxFONTFAMILY_DECORATIVE: c_int = wxDECORATIVE;
+pub const wxFONTFAMILY_ROMAN: c_int = wxROMAN;
+pub const wxFONTFAMILY_SCRIPT: c_int = wxSCRIPT;
+pub const wxFONTFAMILY_SWISS: c_int = wxSWISS;
+pub const wxFONTFAMILY_MODERN: c_int = wxMODERN;
+pub const wxFONTFAMILY_TELETYPE: c_int = wxTELETYPE;
+pub const wxFONTFAMILY_MAX: c_int = wxTELETYPE + 1;
+pub const wxFONTFAMILY_UNKNOWN: c_int = wxFONTFAMILY_MAX;
+//  ENUM: wxFontStyle
+pub const wxFONTSTYLE_NORMAL: c_int = wxNORMAL;
+pub const wxFONTSTYLE_ITALIC: c_int = wxITALIC;
+pub const wxFONTSTYLE_SLANT: c_int = wxSLANT;
+pub const wxFONTSTYLE_MAX: c_int = wxSLANT + 1;
+//  ENUM: wxFontWeight
+pub const wxFONTWEIGHT_INVALID: c_int = 0;
+pub const wxFONTWEIGHT_THIN: c_int = 100;
+pub const wxFONTWEIGHT_EXTRALIGHT: c_int = 200;
+pub const wxFONTWEIGHT_LIGHT: c_int = 300;
+pub const wxFONTWEIGHT_NORMAL: c_int = 400;
+pub const wxFONTWEIGHT_MEDIUM: c_int = 500;
+pub const wxFONTWEIGHT_SEMIBOLD: c_int = 600;
+pub const wxFONTWEIGHT_BOLD: c_int = 700;
+pub const wxFONTWEIGHT_EXTRABOLD: c_int = 800;
+pub const wxFONTWEIGHT_HEAVY: c_int = 900;
+pub const wxFONTWEIGHT_EXTRAHEAVY: c_int = 1000;
+pub const wxFONTWEIGHT_MAX: c_int = wxFONTWEIGHT_EXTRAHEAVY;
+//  ENUM: wxFontSymbolicSize
+pub const wxFONTSIZE_XX_SMALL: c_int = -3;
+pub const wxFONTSIZE_X_SMALL: c_int = -3 + 1;
+pub const wxFONTSIZE_SMALL: c_int = -3 + 2;
+pub const wxFONTSIZE_MEDIUM: c_int = -3 + 3;
+pub const wxFONTSIZE_LARGE: c_int = -3 + 4;
+pub const wxFONTSIZE_X_LARGE: c_int = -3 + 5;
+pub const wxFONTSIZE_XX_LARGE: c_int = -3 + 6;
+//  ENUM: wxFontFlag
+pub const wxFONTFLAG_DEFAULT: c_int = 0;
+pub const wxFONTFLAG_ITALIC: c_int = 1 << 0;
+pub const wxFONTFLAG_SLANT: c_int = 1 << 1;
+pub const wxFONTFLAG_LIGHT: c_int = 1 << 2;
+pub const wxFONTFLAG_BOLD: c_int = 1 << 3;
+pub const wxFONTFLAG_ANTIALIASED: c_int = 1 << 4;
+pub const wxFONTFLAG_NOT_ANTIALIASED: c_int = 1 << 5;
+pub const wxFONTFLAG_UNDERLINED: c_int = 1 << 6;
+pub const wxFONTFLAG_STRIKETHROUGH: c_int = 1 << 7;
+pub const wxFONTFLAG_MASK: c_int = wxFONTFLAG_ITALIC             |
+                      wxFONTFLAG_SLANT              |
+                      wxFONTFLAG_LIGHT              |
+                      wxFONTFLAG_BOLD               |
+                      wxFONTFLAG_ANTIALIASED        |
+                      wxFONTFLAG_NOT_ANTIALIASED    |
+                      wxFONTFLAG_UNDERLINED         |
+                      wxFONTFLAG_STRIKETHROUGH;
+//  ENUM: wxFontEncoding
+pub const wxFONTENCODING_SYSTEM: c_int = -1;
+pub const wxFONTENCODING_DEFAULT: c_int = -1 + 1;
+pub const wxFONTENCODING_ISO8859_1: c_int = -1 + 2;
+pub const wxFONTENCODING_ISO8859_2: c_int = -1 + 3;
+pub const wxFONTENCODING_ISO8859_3: c_int = -1 + 4;
+pub const wxFONTENCODING_ISO8859_4: c_int = -1 + 5;
+pub const wxFONTENCODING_ISO8859_5: c_int = -1 + 6;
+pub const wxFONTENCODING_ISO8859_6: c_int = -1 + 7;
+pub const wxFONTENCODING_ISO8859_7: c_int = -1 + 8;
+pub const wxFONTENCODING_ISO8859_8: c_int = -1 + 9;
+pub const wxFONTENCODING_ISO8859_9: c_int = -1 + 10;
+pub const wxFONTENCODING_ISO8859_10: c_int = -1 + 11;
+pub const wxFONTENCODING_ISO8859_11: c_int = -1 + 12;
+pub const wxFONTENCODING_ISO8859_12: c_int = -1 + 13;
+pub const wxFONTENCODING_ISO8859_13: c_int = -1 + 14;
+pub const wxFONTENCODING_ISO8859_14: c_int = -1 + 15;
+pub const wxFONTENCODING_ISO8859_15: c_int = -1 + 16;
+pub const wxFONTENCODING_ISO8859_MAX: c_int = -1 + 17;
+pub const wxFONTENCODING_KOI8: c_int = -1 + 18;
+pub const wxFONTENCODING_KOI8_U: c_int = -1 + 19;
+pub const wxFONTENCODING_ALTERNATIVE: c_int = -1 + 20;
+pub const wxFONTENCODING_BULGARIAN: c_int = -1 + 21;
+pub const wxFONTENCODING_CP437: c_int = -1 + 22;
+pub const wxFONTENCODING_CP850: c_int = -1 + 23;
+pub const wxFONTENCODING_CP852: c_int = -1 + 24;
+pub const wxFONTENCODING_CP855: c_int = -1 + 25;
+pub const wxFONTENCODING_CP866: c_int = -1 + 26;
+pub const wxFONTENCODING_CP874: c_int = -1 + 27;
+pub const wxFONTENCODING_CP932: c_int = -1 + 28;
+pub const wxFONTENCODING_CP936: c_int = -1 + 29;
+pub const wxFONTENCODING_CP949: c_int = -1 + 30;
+pub const wxFONTENCODING_CP950: c_int = -1 + 31;
+pub const wxFONTENCODING_CP1250: c_int = -1 + 32;
+pub const wxFONTENCODING_CP1251: c_int = -1 + 33;
+pub const wxFONTENCODING_CP1252: c_int = -1 + 34;
+pub const wxFONTENCODING_CP1253: c_int = -1 + 35;
+pub const wxFONTENCODING_CP1254: c_int = -1 + 36;
+pub const wxFONTENCODING_CP1255: c_int = -1 + 37;
+pub const wxFONTENCODING_CP1256: c_int = -1 + 38;
+pub const wxFONTENCODING_CP1257: c_int = -1 + 39;
+pub const wxFONTENCODING_CP1258: c_int = -1 + 40;
+pub const wxFONTENCODING_CP1361: c_int = -1 + 41;
+pub const wxFONTENCODING_CP12_MAX: c_int = -1 + 42;
+pub const wxFONTENCODING_UTF7: c_int = -1 + 43;
+pub const wxFONTENCODING_UTF8: c_int = -1 + 44;
+pub const wxFONTENCODING_EUC_JP: c_int = -1 + 45;
+pub const wxFONTENCODING_UTF16BE: c_int = -1 + 46;
+pub const wxFONTENCODING_UTF16LE: c_int = -1 + 47;
+pub const wxFONTENCODING_UTF32BE: c_int = -1 + 48;
+pub const wxFONTENCODING_UTF32LE: c_int = -1 + 49;
+pub const wxFONTENCODING_MACROMAN: c_int = -1 + 50;
+pub const wxFONTENCODING_MACJAPANESE: c_int = -1 + 51;
+pub const wxFONTENCODING_MACCHINESETRAD: c_int = -1 + 52;
+pub const wxFONTENCODING_MACKOREAN: c_int = -1 + 53;
+pub const wxFONTENCODING_MACARABIC: c_int = -1 + 54;
+pub const wxFONTENCODING_MACHEBREW: c_int = -1 + 55;
+pub const wxFONTENCODING_MACGREEK: c_int = -1 + 56;
+pub const wxFONTENCODING_MACCYRILLIC: c_int = -1 + 57;
+pub const wxFONTENCODING_MACDEVANAGARI: c_int = -1 + 58;
+pub const wxFONTENCODING_MACGURMUKHI: c_int = -1 + 59;
+pub const wxFONTENCODING_MACGUJARATI: c_int = -1 + 60;
+pub const wxFONTENCODING_MACORIYA: c_int = -1 + 61;
+pub const wxFONTENCODING_MACBENGALI: c_int = -1 + 62;
+pub const wxFONTENCODING_MACTAMIL: c_int = -1 + 63;
+pub const wxFONTENCODING_MACTELUGU: c_int = -1 + 64;
+pub const wxFONTENCODING_MACKANNADA: c_int = -1 + 65;
+pub const wxFONTENCODING_MACMALAJALAM: c_int = -1 + 66;
+pub const wxFONTENCODING_MACSINHALESE: c_int = -1 + 67;
+pub const wxFONTENCODING_MACBURMESE: c_int = -1 + 68;
+pub const wxFONTENCODING_MACKHMER: c_int = -1 + 69;
+pub const wxFONTENCODING_MACTHAI: c_int = -1 + 70;
+pub const wxFONTENCODING_MACLAOTIAN: c_int = -1 + 71;
+pub const wxFONTENCODING_MACGEORGIAN: c_int = -1 + 72;
+pub const wxFONTENCODING_MACARMENIAN: c_int = -1 + 73;
+pub const wxFONTENCODING_MACCHINESESIMP: c_int = -1 + 74;
+pub const wxFONTENCODING_MACTIBETAN: c_int = -1 + 75;
+pub const wxFONTENCODING_MACMONGOLIAN: c_int = -1 + 76;
+pub const wxFONTENCODING_MACETHIOPIC: c_int = -1 + 77;
+pub const wxFONTENCODING_MACCENTRALEUR: c_int = -1 + 78;
+pub const wxFONTENCODING_MACVIATNAMESE: c_int = -1 + 79;
+pub const wxFONTENCODING_MACARABICEXT: c_int = -1 + 80;
+pub const wxFONTENCODING_MACSYMBOL: c_int = -1 + 81;
+pub const wxFONTENCODING_MACDINGBATS: c_int = -1 + 82;
+pub const wxFONTENCODING_MACTURKISH: c_int = -1 + 83;
+pub const wxFONTENCODING_MACCROATIAN: c_int = -1 + 84;
+pub const wxFONTENCODING_MACICELANDIC: c_int = -1 + 85;
+pub const wxFONTENCODING_MACROMANIAN: c_int = -1 + 86;
+pub const wxFONTENCODING_MACCELTIC: c_int = -1 + 87;
+pub const wxFONTENCODING_MACGAELIC: c_int = -1 + 88;
+pub const wxFONTENCODING_MACKEYBOARD: c_int = -1 + 89;
+pub const wxFONTENCODING_ISO2022_JP: c_int = -1 + 90;
+pub const wxFONTENCODING_MAX: c_int = -1 + 91;
+pub const wxFONTENCODING_MACMIN: c_int = wxFONTENCODING_MACROMAN;
+pub const wxFONTENCODING_MACMAX: c_int = wxFONTENCODING_MACKEYBOARD;
+pub const wxFONTENCODING_UTF16: c_int = wxFONTENCODING_MACKEYBOARD + 1;
+pub const wxFONTENCODING_UTF32: c_int = wxFONTENCODING_MACKEYBOARD + 2;
+pub const wxFONTENCODING_UNICODE: c_int = wxFONTENCODING_MACKEYBOARD + 3;
+pub const wxFONTENCODING_GB2312: c_int = wxFONTENCODING_CP936;
+pub const wxFONTENCODING_BIG5: c_int = wxFONTENCODING_CP950;
+pub const wxFONTENCODING_SHIFT_JIS: c_int = wxFONTENCODING_CP932;
+pub const wxFONTENCODING_EUC_KR: c_int = wxFONTENCODING_CP949;
+pub const wxFONTENCODING_JOHAB: c_int = wxFONTENCODING_CP1361;
+pub const wxFONTENCODING_VIETNAMESE: c_int = wxFONTENCODING_CP1258;
+
+pub const wxGRID_AUTOSIZE: c_int = (-1);
+//  ENUM: wxGridCellFloatFormat
+pub const wxGRID_FLOAT_FORMAT_FIXED: c_int = 0x0010;
+pub const wxGRID_FLOAT_FORMAT_SCIENTIFIC: c_int = 0x0020;
+pub const wxGRID_FLOAT_FORMAT_COMPACT: c_int = 0x0040;
+pub const wxGRID_FLOAT_FORMAT_UPPER: c_int = 0x0080;
+pub const wxGRID_FLOAT_FORMAT_DEFAULT: c_int = wxGRID_FLOAT_FORMAT_FIXED;
+//  ENUM: wxGridTableRequest
+pub const wxGRIDTABLE_NOTIFY_ROWS_INSERTED: c_int = 0;
+pub const wxGRIDTABLE_NOTIFY_ROWS_APPENDED: c_int = 0 + 1;
+pub const wxGRIDTABLE_NOTIFY_ROWS_DELETED: c_int = 0 + 2;
+pub const wxGRIDTABLE_NOTIFY_COLS_INSERTED: c_int = 0 + 3;
+pub const wxGRIDTABLE_NOTIFY_COLS_APPENDED: c_int = 0 + 4;
+pub const wxGRIDTABLE_NOTIFY_COLS_DELETED: c_int = 0 + 5;
+//  ENUM: wxGridRenderStyle
+pub const wxGRID_DRAW_ROWS_HEADER: c_int = 0x001;
+pub const wxGRID_DRAW_COLS_HEADER: c_int = 0x002;
+pub const wxGRID_DRAW_CELL_LINES: c_int = 0x004;
+pub const wxGRID_DRAW_BOX_RECT: c_int = 0x008;
+pub const wxGRID_DRAW_SELECTION: c_int = 0x010;
+pub const wxGRID_DRAW_DEFAULT: c_int = wxGRID_DRAW_ROWS_HEADER |
+                          wxGRID_DRAW_COLS_HEADER |
+                          wxGRID_DRAW_CELL_LINES |
+                          wxGRID_DRAW_BOX_RECT;
+
+pub const wxLC_VRULES: c_int = 0x0001;
+pub const wxLC_HRULES: c_int = 0x0002;
+pub const wxLC_ICON: c_int = 0x0004;
+pub const wxLC_SMALL_ICON: c_int = 0x0008;
+pub const wxLC_LIST: c_int = 0x0010;
+pub const wxLC_REPORT: c_int = 0x0020;
+pub const wxLC_ALIGN_TOP: c_int = 0x0040;
+pub const wxLC_ALIGN_LEFT: c_int = 0x0080;
+pub const wxLC_AUTOARRANGE: c_int = 0x0100;
+pub const wxLC_VIRTUAL: c_int = 0x0200;
+pub const wxLC_EDIT_LABELS: c_int = 0x0400;
+pub const wxLC_NO_HEADER: c_int = 0x0800;
+pub const wxLC_NO_SORT_HEADER: c_int = 0x1000;
+pub const wxLC_SINGLE_SEL: c_int = 0x2000;
+pub const wxLC_SORT_ASCENDING: c_int = 0x4000;
+pub const wxLC_SORT_DESCENDING: c_int = 0x8000;
+pub const wxLC_MASK_TYPE: c_int = (wxLC_ICON | wxLC_SMALL_ICON | wxLC_LIST | wxLC_REPORT);
+pub const wxLC_MASK_ALIGN: c_int = (wxLC_ALIGN_TOP | wxLC_ALIGN_LEFT);
+pub const wxLC_MASK_SORT: c_int = (wxLC_SORT_ASCENDING | wxLC_SORT_DESCENDING);
+pub const wxLIST_MASK_STATE: c_int = 0x0001;
+pub const wxLIST_MASK_TEXT: c_int = 0x0002;
+pub const wxLIST_MASK_IMAGE: c_int = 0x0004;
+pub const wxLIST_MASK_DATA: c_int = 0x0008;
+pub const wxLIST_SET_ITEM: c_int = 0x0010;
+pub const wxLIST_MASK_WIDTH: c_int = 0x0020;
+pub const wxLIST_MASK_FORMAT: c_int = 0x0040;
+pub const wxLIST_STATE_DONTCARE: c_int = 0x0000;
+pub const wxLIST_STATE_DROPHILITED: c_int = 0x0001;
+pub const wxLIST_STATE_FOCUSED: c_int = 0x0002;
+pub const wxLIST_STATE_SELECTED: c_int = 0x0004;
+pub const wxLIST_STATE_CUT: c_int = 0x0008;
+pub const wxLIST_HITTEST_ABOVE: c_int = 0x0001;
+pub const wxLIST_HITTEST_BELOW: c_int = 0x0002;
+pub const wxLIST_HITTEST_NOWHERE: c_int = 0x0004;
+pub const wxLIST_HITTEST_ONITEMICON: c_int = 0x0020;
+pub const wxLIST_HITTEST_ONITEMLABEL: c_int = 0x0080;
+pub const wxLIST_HITTEST_ONITEMSTATEICON: c_int = 0x0200;
+pub const wxLIST_HITTEST_TOLEFT: c_int = 0x0400;
+pub const wxLIST_HITTEST_TORIGHT: c_int = 0x0800;
+pub const wxLIST_HITTEST_ONITEM: c_int = (wxLIST_HITTEST_ONITEMICON | wxLIST_HITTEST_ONITEMLABEL | wxLIST_HITTEST_ONITEMSTATEICON);
+pub const wxLIST_GETSUBITEMRECT_WHOLEITEM: c_int = -1;
+//  ENUM: @32
+pub const wxLIST_NEXT_ABOVE: c_int = 0;
+pub const wxLIST_NEXT_ALL: c_int = 0 + 1;
+pub const wxLIST_NEXT_BELOW: c_int = 0 + 2;
+pub const wxLIST_NEXT_LEFT: c_int = 0 + 3;
+pub const wxLIST_NEXT_RIGHT: c_int = 0 + 4;
+//  ENUM: @33
+pub const wxLIST_ALIGN_DEFAULT: c_int = 0;
+pub const wxLIST_ALIGN_LEFT: c_int = 0 + 1;
+pub const wxLIST_ALIGN_TOP: c_int = 0 + 2;
+pub const wxLIST_ALIGN_SNAP_TO_GRID: c_int = 0 + 3;
+//  ENUM: wxListColumnFormat
+pub const wxLIST_FORMAT_LEFT: c_int = 0;
+pub const wxLIST_FORMAT_RIGHT: c_int = 0 + 1;
+pub const wxLIST_FORMAT_CENTRE: c_int = 0 + 2;
+pub const wxLIST_FORMAT_CENTER: c_int = wxLIST_FORMAT_CENTRE;
+//  ENUM: @34
+pub const wxLIST_AUTOSIZE: c_int = -1;
+pub const wxLIST_AUTOSIZE_USEHEADER: c_int = -2;
+//  ENUM: @35
+pub const wxLIST_RECT_BOUNDS: c_int = 0;
+pub const wxLIST_RECT_ICON: c_int = 0 + 1;
+pub const wxLIST_RECT_LABEL: c_int = 0 + 2;
+//  ENUM: @36
+pub const wxLIST_FIND_UP: c_int = 0;
+pub const wxLIST_FIND_DOWN: c_int = 0 + 1;
+pub const wxLIST_FIND_LEFT: c_int = 0 + 2;
+pub const wxLIST_FIND_RIGHT: c_int = 0 + 3;
+
+// NODEF: wxDISABLE_DEBUG_LOGGING_IN_RELEASE_BUILD
+//  ENUM: wxLogLevelValues
+pub const wxLOG_FatalError: c_int = 0;
+pub const wxLOG_Error: c_int = 0 + 1;
+pub const wxLOG_Warning: c_int = 0 + 2;
+pub const wxLOG_Message: c_int = 0 + 3;
+pub const wxLOG_Status: c_int = 0 + 4;
+pub const wxLOG_Info: c_int = 0 + 5;
+pub const wxLOG_Debug: c_int = 0 + 6;
+pub const wxLOG_Trace: c_int = 0 + 7;
+pub const wxLOG_Progress: c_int = 0 + 8;
+pub const wxLOG_User: c_int = 100;
+pub const wxLOG_Max: c_int = 10000;
+
+pub const wxPG_DEFAULT_STYLE: c_int = (0);
+pub const wxPGMAN_DEFAULT_STYLE: c_int = (0);
+//  SKIP: wxPGVFBFlags
+//  ENUM: wxPG_WINDOW_STYLES
+pub const wxPG_AUTO_SORT: c_int = 0x00000010;
+pub const wxPG_HIDE_CATEGORIES: c_int = 0x00000020;
+pub const wxPG_ALPHABETIC_MODE: c_int = (wxPG_HIDE_CATEGORIES|wxPG_AUTO_SORT);
+pub const wxPG_BOLD_MODIFIED: c_int = 0x00000040;
+pub const wxPG_SPLITTER_AUTO_CENTER: c_int = 0x00000080;
+pub const wxPG_TOOLTIPS: c_int = 0x00000100;
+pub const wxPG_HIDE_MARGIN: c_int = 0x00000200;
+pub const wxPG_STATIC_SPLITTER: c_int = 0x00000400;
+pub const wxPG_STATIC_LAYOUT: c_int = (wxPG_HIDE_MARGIN|wxPG_STATIC_SPLITTER);
+pub const wxPG_LIMITED_EDITING: c_int = 0x00000800;
+pub const wxPG_TOOLBAR: c_int = 0x00001000;
+pub const wxPG_DESCRIPTION: c_int = 0x00002000;
+pub const wxPG_NO_INTERNAL_BORDER: c_int = 0x00004000;
+pub const wxPG_WINDOW_STYLE_MASK: c_int = wxPG_AUTO_SORT|wxPG_HIDE_CATEGORIES|wxPG_BOLD_MODIFIED|
+                         wxPG_SPLITTER_AUTO_CENTER|wxPG_TOOLTIPS|wxPG_HIDE_MARGIN|
+                         wxPG_STATIC_SPLITTER|wxPG_LIMITED_EDITING|wxPG_TOOLBAR|
+                         wxPG_DESCRIPTION|wxPG_NO_INTERNAL_BORDER;
+//  ENUM: wxPG_EX_WINDOW_STYLES
+pub const wxPG_EX_INIT_NOCAT: c_int = 0x00001000;
+pub const wxPG_EX_NO_FLAT_TOOLBAR: c_int = 0x00002000;
+pub const wxPG_EX_MODE_BUTTONS: c_int = 0x00008000;
+pub const wxPG_EX_HELP_AS_TOOLTIPS: c_int = 0x00010000;
+pub const wxPG_EX_NATIVE_DOUBLE_BUFFERING: c_int = 0x00080000;
+pub const wxPG_EX_AUTO_UNSPECIFIED_VALUES: c_int = 0x00200000;
+pub const wxPG_EX_WRITEONLY_BUILTIN_ATTRIBUTES: c_int = 0x00400000;
+pub const wxPG_EX_HIDE_PAGE_BUTTONS: c_int = 0x01000000;
+pub const wxPG_EX_MULTIPLE_SELECTION: c_int = 0x02000000;
+pub const wxPG_EX_ENABLE_TLP_TRACKING: c_int = 0x04000000;
+pub const wxPG_EX_NO_TOOLBAR_DIVIDER: c_int = 0x04000000;
+pub const wxPG_EX_TOOLBAR_SEPARATOR: c_int = 0x08000000;
+pub const wxPG_EX_ALWAYS_ALLOW_FOCUS: c_int = 0x00100000;
+pub const wxPG_EX_WINDOW_PG_STYLE_MASK: c_int = wxPG_EX_INIT_NOCAT|wxPG_EX_HELP_AS_TOOLTIPS|wxPG_EX_NATIVE_DOUBLE_BUFFERING|
+                               wxPG_EX_AUTO_UNSPECIFIED_VALUES|wxPG_EX_WRITEONLY_BUILTIN_ATTRIBUTES|
+                               wxPG_EX_MULTIPLE_SELECTION|wxPG_EX_ENABLE_TLP_TRACKING|wxPG_EX_ALWAYS_ALLOW_FOCUS;
+pub const wxPG_EX_WINDOW_PGMAN_STYLE_MASK: c_int = wxPG_EX_NO_FLAT_TOOLBAR|wxPG_EX_MODE_BUTTONS|wxPG_EX_HIDE_PAGE_BUTTONS|
+                                  wxPG_EX_NO_TOOLBAR_DIVIDER|wxPG_EX_TOOLBAR_SEPARATOR;
+pub const wxPG_EX_WINDOW_STYLE_MASK: c_int = wxPG_EX_WINDOW_PG_STYLE_MASK|wxPG_EX_WINDOW_PGMAN_STYLE_MASK;
+//  ENUM: wxPG_VALIDATION_FAILURE_BEHAVIOR_FLAGS
+pub const wxPG_VFB_STAY_IN_PROPERTY: c_int = 0x01;
+pub const wxPG_VFB_BEEP: c_int = 0x02;
+pub const wxPG_VFB_MARK_CELL: c_int = 0x04;
+pub const wxPG_VFB_SHOW_MESSAGE: c_int = 0x08;
+pub const wxPG_VFB_SHOW_MESSAGEBOX: c_int = 0x10;
+pub const wxPG_VFB_SHOW_MESSAGE_ON_STATUSBAR: c_int = 0x20;
+pub const wxPG_VFB_DEFAULT: c_int = wxPG_VFB_MARK_CELL |
+                                      wxPG_VFB_SHOW_MESSAGEBOX;
+//  ENUM: wxPG_KEYBOARD_ACTIONS
+pub const wxPG_ACTION_INVALID: c_int = 0;
+pub const wxPG_ACTION_NEXT_PROPERTY: c_int = 0 + 1;
+pub const wxPG_ACTION_PREV_PROPERTY: c_int = 0 + 2;
+pub const wxPG_ACTION_EXPAND_PROPERTY: c_int = 0 + 3;
+pub const wxPG_ACTION_COLLAPSE_PROPERTY: c_int = 0 + 4;
+pub const wxPG_ACTION_CANCEL_EDIT: c_int = 0 + 5;
+pub const wxPG_ACTION_EDIT: c_int = 0 + 6;
+pub const wxPG_ACTION_PRESS_BUTTON: c_int = 0 + 7;
+pub const wxPG_ACTION_MAX: c_int = 0 + 8;
+
+pub const wxRE_READONLY: c_int = 0x0010;
+pub const wxRE_MULTILINE: c_int = 0x0020;
+pub const wxRE_CENTRE_CARET: c_int = 0x8000;
+pub const wxRE_CENTER_CARET: c_int = wxRE_CENTRE_CARET;
+pub const wxRICHTEXT_SHIFT_DOWN: c_int = 0x01;
+pub const wxRICHTEXT_CTRL_DOWN: c_int = 0x02;
+pub const wxRICHTEXT_ALT_DOWN: c_int = 0x04;
+pub const wxRICHTEXT_EX_NO_GUIDELINES: c_int = 0x00000100;
+//  SKIP: wxRICHTEXT_DEFAULT_OVERALL_SIZE
+//  SKIP: wxRICHTEXT_DEFAULT_IMAGE_SIZE
+pub const wxRICHTEXT_DEFAULT_SPACING: c_int = 3;
+pub const wxRICHTEXT_DEFAULT_MARGIN: c_int = 3;
+//  SKIP: wxRICHTEXT_DEFAULT_UNFOCUSSED_BACKGROUND
+//  SKIP: wxRICHTEXT_DEFAULT_FOCUSSED_BACKGROUND
+//  SKIP: wxRICHTEXT_DEFAULT_UNSELECTED_BACKGROUND
+//  SKIP: wxRICHTEXT_DEFAULT_TYPE_COLOUR
+//  SKIP: wxRICHTEXT_DEFAULT_FOCUS_RECT_COLOUR
+pub const wxRICHTEXT_DEFAULT_CARET_WIDTH: c_int = 2;
+pub const wxRICHTEXT_DEFAULT_DELAYED_LAYOUT_THRESHOLD: c_int = 20000;
+pub const wxRICHTEXT_DEFAULT_LAYOUT_INTERVAL: c_int = 50;
+pub const wxRICHTEXT_DEFAULT_DELAYED_IMAGE_PROCESSING_INTERVAL: c_int = 200;
+pub const wxID_RICHTEXT_PROPERTIES1: c_int = (wxID_HIGHEST + 1);
+pub const wxID_RICHTEXT_PROPERTIES2: c_int = (wxID_HIGHEST + 2);
+pub const wxID_RICHTEXT_PROPERTIES3: c_int = (wxID_HIGHEST + 3);
+//  ENUM: wxRichTextCtrlSelectionState
+pub const wxRichTextCtrlSelectionState_Normal: c_int = 0;
+pub const wxRichTextCtrlSelectionState_CommonAncestor: c_int = 0 + 1;
+
+//  ENUM: wxFlexSizerGrowMode
+pub const wxFLEX_GROWMODE_NONE: c_int = 0;
+pub const wxFLEX_GROWMODE_SPECIFIED: c_int = 0 + 1;
+pub const wxFLEX_GROWMODE_ALL: c_int = 0 + 2;
+
+//  ENUM: wxStreamError
+pub const wxSTREAM_NO_ERROR: c_int = 0;
+pub const wxSTREAM_EOF: c_int = 0 + 1;
+pub const wxSTREAM_WRITE_ERROR: c_int = 0 + 2;
+pub const wxSTREAM_READ_ERROR: c_int = 0 + 3;
+//  ENUM: wxStreamProtocolType
+pub const wxSTREAM_PROTOCOL: c_int = 0;
+pub const wxSTREAM_MIMETYPE: c_int = 0 + 1;
+pub const wxSTREAM_ENCODING: c_int = 0 + 2;
+pub const wxSTREAM_FILEEXT: c_int = 0 + 3;
+
+// NODEF: wxCRIT_SECT_DECLARE
+// NODEF: wxCRIT_SECT_DECLARE_MEMBER
+// NODEF: wxCRIT_SECT_LOCKER
+// NODEF: wxCRITICAL_SECTION
+// NODEF: wxLEAVE_CRIT_SECT
+// NODEF: wxENTER_CRIT_SECT
+//  ENUM: wxCondError
+pub const wxCOND_NO_ERROR: c_int = 0;
+pub const wxCOND_INVALID: c_int = 0 + 1;
+pub const wxCOND_TIMEOUT: c_int = 0 + 2;
+pub const wxCOND_MISC_ERROR: c_int = 0 + 3;
+//  ENUM: wxCriticalSectionType
+pub const wxCRITSEC_DEFAULT: c_int = 0;
+pub const wxCRITSEC_NON_RECURSIVE: c_int = 0 + 1;
+//  ENUM: wxThreadWait
+pub const wxTHREAD_WAIT_BLOCK: c_int = 0;
+pub const wxTHREAD_WAIT_YIELD: c_int = 0 + 1;
+pub const wxTHREAD_WAIT_DEFAULT: c_int = wxTHREAD_WAIT_YIELD;
+//  ENUM: wxThreadKind
+pub const wxTHREAD_DETACHED: c_int = 0;
+pub const wxTHREAD_JOINABLE: c_int = 0 + 1;
+//  ENUM: wxThreadError
+pub const wxTHREAD_NO_ERROR: c_int = 0;
+pub const wxTHREAD_NO_RESOURCE: c_int = 0 + 1;
+pub const wxTHREAD_RUNNING: c_int = 0 + 2;
+pub const wxTHREAD_NOT_RUNNING: c_int = 0 + 3;
+pub const wxTHREAD_KILLED: c_int = 0 + 4;
+pub const wxTHREAD_MISC_ERROR: c_int = 0 + 5;
+//  ENUM: wxSemaError
+pub const wxSEMA_NO_ERROR: c_int = 0;
+pub const wxSEMA_INVALID: c_int = 0 + 1;
+pub const wxSEMA_BUSY: c_int = 0 + 2;
+pub const wxSEMA_TIMEOUT: c_int = 0 + 3;
+pub const wxSEMA_OVERFLOW: c_int = 0 + 4;
+pub const wxSEMA_MISC_ERROR: c_int = 0 + 5;
+//  ENUM: wxMutexType
+pub const wxMUTEX_DEFAULT: c_int = 0;
+pub const wxMUTEX_RECURSIVE: c_int = 0 + 1;
+//  ENUM: wxMutexError
+pub const wxMUTEX_NO_ERROR: c_int = 0;
+pub const wxMUTEX_INVALID: c_int = 0 + 1;
+pub const wxMUTEX_DEAD_LOCK: c_int = 0 + 2;
+pub const wxMUTEX_BUSY: c_int = 0 + 3;
+pub const wxMUTEX_UNLOCKED: c_int = 0 + 4;
+pub const wxMUTEX_TIMEOUT: c_int = 0 + 5;
+pub const wxMUTEX_MISC_ERROR: c_int = 0 + 6;
+
+//  ENUM: wxToolBarToolStyle
+pub const wxTOOL_STYLE_BUTTON: c_int = 1;
+pub const wxTOOL_STYLE_SEPARATOR: c_int = 2;
+pub const wxTOOL_STYLE_CONTROL: c_int = 2 + 1;
+//  ENUM: @49
+pub const wxTB_HORIZONTAL: c_int = wxHORIZONTAL;
+pub const wxTB_TOP: c_int = wxTB_HORIZONTAL;
+pub const wxTB_VERTICAL: c_int = wxVERTICAL;
+pub const wxTB_LEFT: c_int = wxTB_VERTICAL;
+pub const wxTB_FLAT: c_int = wxTB_VERTICAL + 1;
+pub const wxTB_DOCKABLE: c_int = wxTB_VERTICAL + 2;
+pub const wxTB_NOICONS: c_int = wxTB_VERTICAL + 3;
+pub const wxTB_TEXT: c_int = wxTB_VERTICAL + 4;
+pub const wxTB_NODIVIDER: c_int = wxTB_VERTICAL + 5;
+pub const wxTB_NOALIGN: c_int = wxTB_VERTICAL + 6;
+pub const wxTB_HORZ_LAYOUT: c_int = wxTB_VERTICAL + 7;
+pub const wxTB_HORZ_TEXT: c_int = wxTB_HORZ_LAYOUT | wxTB_TEXT;
+pub const wxTB_NO_TOOLTIPS: c_int = wxTB_HORZ_LAYOUT | wxTB_TEXT + 1;
+pub const wxTB_BOTTOM: c_int = wxTB_HORZ_LAYOUT | wxTB_TEXT + 2;
+pub const wxTB_RIGHT: c_int = wxTB_HORZ_LAYOUT | wxTB_TEXT + 3;
+pub const wxTB_DEFAULT_STYLE: c_int = wxTB_HORIZONTAL;
+
+//  ENUM: wxAcceleratorEntryFlags
+pub const wxACCEL_NORMAL: c_int = 0;
+pub const wxACCEL_ALT: c_int = 0 + 1;
+pub const wxACCEL_CTRL: c_int = 0 + 2;
+pub const wxACCEL_SHIFT: c_int = 0 + 3;
+pub const wxACCEL_RAW_CTRL: c_int = 0 + 4;
+pub const wxACCEL_CMD: c_int = 0 + 5;
+
+pub const wxACC_SELF: c_int = 0;
+pub const wxACC_STATE_SYSTEM_ALERT_HIGH: c_int = 0x00000001;
+pub const wxACC_STATE_SYSTEM_ALERT_MEDIUM: c_int = 0x00000002;
+pub const wxACC_STATE_SYSTEM_ALERT_LOW: c_int = 0x00000004;
+pub const wxACC_STATE_SYSTEM_ANIMATED: c_int = 0x00000008;
+pub const wxACC_STATE_SYSTEM_BUSY: c_int = 0x00000010;
+pub const wxACC_STATE_SYSTEM_CHECKED: c_int = 0x00000020;
+pub const wxACC_STATE_SYSTEM_COLLAPSED: c_int = 0x00000040;
+pub const wxACC_STATE_SYSTEM_DEFAULT: c_int = 0x00000080;
+pub const wxACC_STATE_SYSTEM_EXPANDED: c_int = 0x00000100;
+pub const wxACC_STATE_SYSTEM_EXTSELECTABLE: c_int = 0x00000200;
+pub const wxACC_STATE_SYSTEM_FLOATING: c_int = 0x00000400;
+pub const wxACC_STATE_SYSTEM_FOCUSABLE: c_int = 0x00000800;
+pub const wxACC_STATE_SYSTEM_FOCUSED: c_int = 0x00001000;
+pub const wxACC_STATE_SYSTEM_HOTTRACKED: c_int = 0x00002000;
+pub const wxACC_STATE_SYSTEM_INVISIBLE: c_int = 0x00004000;
+pub const wxACC_STATE_SYSTEM_MARQUEED: c_int = 0x00008000;
+pub const wxACC_STATE_SYSTEM_MIXED: c_int = 0x00010000;
+pub const wxACC_STATE_SYSTEM_MULTISELECTABLE: c_int = 0x00020000;
+pub const wxACC_STATE_SYSTEM_OFFSCREEN: c_int = 0x00040000;
+pub const wxACC_STATE_SYSTEM_PRESSED: c_int = 0x00080000;
+pub const wxACC_STATE_SYSTEM_PROTECTED: c_int = 0x00100000;
+pub const wxACC_STATE_SYSTEM_READONLY: c_int = 0x00200000;
+pub const wxACC_STATE_SYSTEM_SELECTABLE: c_int = 0x00400000;
+pub const wxACC_STATE_SYSTEM_SELECTED: c_int = 0x00800000;
+pub const wxACC_STATE_SYSTEM_SELFVOICING: c_int = 0x01000000;
+pub const wxACC_STATE_SYSTEM_UNAVAILABLE: c_int = 0x02000000;
+pub const wxACC_EVENT_SYSTEM_SOUND: c_int = 0x0001;
+pub const wxACC_EVENT_SYSTEM_ALERT: c_int = 0x0002;
+pub const wxACC_EVENT_SYSTEM_FOREGROUND: c_int = 0x0003;
+pub const wxACC_EVENT_SYSTEM_MENUSTART: c_int = 0x0004;
+pub const wxACC_EVENT_SYSTEM_MENUEND: c_int = 0x0005;
+pub const wxACC_EVENT_SYSTEM_MENUPOPUPSTART: c_int = 0x0006;
+pub const wxACC_EVENT_SYSTEM_MENUPOPUPEND: c_int = 0x0007;
+pub const wxACC_EVENT_SYSTEM_CAPTURESTART: c_int = 0x0008;
+pub const wxACC_EVENT_SYSTEM_CAPTUREEND: c_int = 0x0009;
+pub const wxACC_EVENT_SYSTEM_MOVESIZESTART: c_int = 0x000A;
+pub const wxACC_EVENT_SYSTEM_MOVESIZEEND: c_int = 0x000B;
+pub const wxACC_EVENT_SYSTEM_CONTEXTHELPSTART: c_int = 0x000C;
+pub const wxACC_EVENT_SYSTEM_CONTEXTHELPEND: c_int = 0x000D;
+pub const wxACC_EVENT_SYSTEM_DRAGDROPSTART: c_int = 0x000E;
+pub const wxACC_EVENT_SYSTEM_DRAGDROPEND: c_int = 0x000F;
+pub const wxACC_EVENT_SYSTEM_DIALOGSTART: c_int = 0x0010;
+pub const wxACC_EVENT_SYSTEM_DIALOGEND: c_int = 0x0011;
+pub const wxACC_EVENT_SYSTEM_SCROLLINGSTART: c_int = 0x0012;
+pub const wxACC_EVENT_SYSTEM_SCROLLINGEND: c_int = 0x0013;
+pub const wxACC_EVENT_SYSTEM_SWITCHSTART: c_int = 0x0014;
+pub const wxACC_EVENT_SYSTEM_SWITCHEND: c_int = 0x0015;
+pub const wxACC_EVENT_SYSTEM_MINIMIZESTART: c_int = 0x0016;
+pub const wxACC_EVENT_SYSTEM_MINIMIZEEND: c_int = 0x0017;
+pub const wxACC_EVENT_OBJECT_CREATE: c_int = 0x8000;
+pub const wxACC_EVENT_OBJECT_DESTROY: c_int = 0x8001;
+pub const wxACC_EVENT_OBJECT_SHOW: c_int = 0x8002;
+pub const wxACC_EVENT_OBJECT_HIDE: c_int = 0x8003;
+pub const wxACC_EVENT_OBJECT_REORDER: c_int = 0x8004;
+pub const wxACC_EVENT_OBJECT_FOCUS: c_int = 0x8005;
+pub const wxACC_EVENT_OBJECT_SELECTION: c_int = 0x8006;
+pub const wxACC_EVENT_OBJECT_SELECTIONADD: c_int = 0x8007;
+pub const wxACC_EVENT_OBJECT_SELECTIONREMOVE: c_int = 0x8008;
+pub const wxACC_EVENT_OBJECT_SELECTIONWITHIN: c_int = 0x8009;
+pub const wxACC_EVENT_OBJECT_STATECHANGE: c_int = 0x800A;
+pub const wxACC_EVENT_OBJECT_LOCATIONCHANGE: c_int = 0x800B;
+pub const wxACC_EVENT_OBJECT_NAMECHANGE: c_int = 0x800C;
+pub const wxACC_EVENT_OBJECT_DESCRIPTIONCHANGE: c_int = 0x800D;
+pub const wxACC_EVENT_OBJECT_VALUECHANGE: c_int = 0x800E;
+pub const wxACC_EVENT_OBJECT_PARENTCHANGE: c_int = 0x800F;
+pub const wxACC_EVENT_OBJECT_HELPCHANGE: c_int = 0x8010;
+pub const wxACC_EVENT_OBJECT_DEFACTIONCHANGE: c_int = 0x8011;
+pub const wxACC_EVENT_OBJECT_ACCELERATORCHANGE: c_int = 0x8012;
+//  ENUM: wxAccStatus
+pub const wxACC_FAIL: c_int = 0;
+pub const wxACC_FALSE: c_int = 0 + 1;
+pub const wxACC_OK: c_int = 0 + 2;
+pub const wxACC_NOT_IMPLEMENTED: c_int = 0 + 3;
+pub const wxACC_NOT_SUPPORTED: c_int = 0 + 4;
+pub const wxACC_INVALID_ARG: c_int = 0 + 5;
+//  ENUM: wxNavDir
+pub const wxNAVDIR_FIRSTCHILD: c_int = 0;
+pub const wxNAVDIR_LASTCHILD: c_int = 0 + 1;
+pub const wxNAVDIR_DOWN: c_int = 0 + 2;
+pub const wxNAVDIR_LEFT: c_int = 0 + 3;
+pub const wxNAVDIR_NEXT: c_int = 0 + 4;
+pub const wxNAVDIR_PREVIOUS: c_int = 0 + 5;
+pub const wxNAVDIR_RIGHT: c_int = 0 + 6;
+pub const wxNAVDIR_UP: c_int = 0 + 7;
+//  ENUM: wxAccRole
+pub const wxROLE_NONE: c_int = 0;
+pub const wxROLE_SYSTEM_ALERT: c_int = 0 + 1;
+pub const wxROLE_SYSTEM_ANIMATION: c_int = 0 + 2;
+pub const wxROLE_SYSTEM_APPLICATION: c_int = 0 + 3;
+pub const wxROLE_SYSTEM_BORDER: c_int = 0 + 4;
+pub const wxROLE_SYSTEM_BUTTONDROPDOWN: c_int = 0 + 5;
+pub const wxROLE_SYSTEM_BUTTONDROPDOWNGRID: c_int = 0 + 6;
+pub const wxROLE_SYSTEM_BUTTONMENU: c_int = 0 + 7;
+pub const wxROLE_SYSTEM_CARET: c_int = 0 + 8;
+pub const wxROLE_SYSTEM_CELL: c_int = 0 + 9;
+pub const wxROLE_SYSTEM_CHARACTER: c_int = 0 + 10;
+pub const wxROLE_SYSTEM_CHART: c_int = 0 + 11;
+pub const wxROLE_SYSTEM_CHECKBUTTON: c_int = 0 + 12;
+pub const wxROLE_SYSTEM_CLIENT: c_int = 0 + 13;
+pub const wxROLE_SYSTEM_CLOCK: c_int = 0 + 14;
+pub const wxROLE_SYSTEM_COLUMN: c_int = 0 + 15;
+pub const wxROLE_SYSTEM_COLUMNHEADER: c_int = 0 + 16;
+pub const wxROLE_SYSTEM_COMBOBOX: c_int = 0 + 17;
+pub const wxROLE_SYSTEM_CURSOR: c_int = 0 + 18;
+pub const wxROLE_SYSTEM_DIAGRAM: c_int = 0 + 19;
+pub const wxROLE_SYSTEM_DIAL: c_int = 0 + 20;
+pub const wxROLE_SYSTEM_DIALOG: c_int = 0 + 21;
+pub const wxROLE_SYSTEM_DOCUMENT: c_int = 0 + 22;
+pub const wxROLE_SYSTEM_DROPLIST: c_int = 0 + 23;
+pub const wxROLE_SYSTEM_EQUATION: c_int = 0 + 24;
+pub const wxROLE_SYSTEM_GRAPHIC: c_int = 0 + 25;
+pub const wxROLE_SYSTEM_GRIP: c_int = 0 + 26;
+pub const wxROLE_SYSTEM_GROUPING: c_int = 0 + 27;
+pub const wxROLE_SYSTEM_HELPBALLOON: c_int = 0 + 28;
+pub const wxROLE_SYSTEM_HOTKEYFIELD: c_int = 0 + 29;
+pub const wxROLE_SYSTEM_INDICATOR: c_int = 0 + 30;
+pub const wxROLE_SYSTEM_LINK: c_int = 0 + 31;
+pub const wxROLE_SYSTEM_LIST: c_int = 0 + 32;
+pub const wxROLE_SYSTEM_LISTITEM: c_int = 0 + 33;
+pub const wxROLE_SYSTEM_MENUBAR: c_int = 0 + 34;
+pub const wxROLE_SYSTEM_MENUITEM: c_int = 0 + 35;
+pub const wxROLE_SYSTEM_MENUPOPUP: c_int = 0 + 36;
+pub const wxROLE_SYSTEM_OUTLINE: c_int = 0 + 37;
+pub const wxROLE_SYSTEM_OUTLINEITEM: c_int = 0 + 38;
+pub const wxROLE_SYSTEM_PAGETAB: c_int = 0 + 39;
+pub const wxROLE_SYSTEM_PAGETABLIST: c_int = 0 + 40;
+pub const wxROLE_SYSTEM_PANE: c_int = 0 + 41;
+pub const wxROLE_SYSTEM_PROGRESSBAR: c_int = 0 + 42;
+pub const wxROLE_SYSTEM_PROPERTYPAGE: c_int = 0 + 43;
+pub const wxROLE_SYSTEM_PUSHBUTTON: c_int = 0 + 44;
+pub const wxROLE_SYSTEM_RADIOBUTTON: c_int = 0 + 45;
+pub const wxROLE_SYSTEM_ROW: c_int = 0 + 46;
+pub const wxROLE_SYSTEM_ROWHEADER: c_int = 0 + 47;
+pub const wxROLE_SYSTEM_SCROLLBAR: c_int = 0 + 48;
+pub const wxROLE_SYSTEM_SEPARATOR: c_int = 0 + 49;
+pub const wxROLE_SYSTEM_SLIDER: c_int = 0 + 50;
+pub const wxROLE_SYSTEM_SOUND: c_int = 0 + 51;
+pub const wxROLE_SYSTEM_SPINBUTTON: c_int = 0 + 52;
+pub const wxROLE_SYSTEM_STATICTEXT: c_int = 0 + 53;
+pub const wxROLE_SYSTEM_STATUSBAR: c_int = 0 + 54;
+pub const wxROLE_SYSTEM_TABLE: c_int = 0 + 55;
+pub const wxROLE_SYSTEM_TEXT: c_int = 0 + 56;
+pub const wxROLE_SYSTEM_TITLEBAR: c_int = 0 + 57;
+pub const wxROLE_SYSTEM_TOOLBAR: c_int = 0 + 58;
+pub const wxROLE_SYSTEM_TOOLTIP: c_int = 0 + 59;
+pub const wxROLE_SYSTEM_WHITESPACE: c_int = 0 + 60;
+pub const wxROLE_SYSTEM_WINDOW: c_int = 0 + 61;
+//  ENUM: wxAccObject
+pub const wxOBJID_WINDOW: c_long =    0x00000000;
+pub const wxOBJID_SYSMENU: c_long =   0xFFFFFFFF;
+pub const wxOBJID_TITLEBAR: c_long =  0xFFFFFFFE;
+pub const wxOBJID_MENU: c_long =      0xFFFFFFFD;
+pub const wxOBJID_CLIENT: c_long =    0xFFFFFFFC;
+pub const wxOBJID_VSCROLL: c_long =   0xFFFFFFFB;
+pub const wxOBJID_HSCROLL: c_long =   0xFFFFFFFA;
+pub const wxOBJID_SIZEGRIP: c_long =  0xFFFFFFF9;
+pub const wxOBJID_CARET: c_long =     0xFFFFFFF8;
+pub const wxOBJID_CURSOR: c_long =    0xFFFFFFF7;
+pub const wxOBJID_ALERT: c_long =     0xFFFFFFF6;
+pub const wxOBJID_SOUND: c_long =     0xFFFFFFF5;
+//  ENUM: wxAccSelectionFlags
+pub const wxACC_SEL_NONE: c_int = 0;
+pub const wxACC_SEL_TAKEFOCUS: c_int = 1;
+pub const wxACC_SEL_TAKESELECTION: c_int = 2;
+pub const wxACC_SEL_EXTENDSELECTION: c_int = 4;
+pub const wxACC_SEL_ADDSELECTION: c_int = 8;
+pub const wxACC_SEL_REMOVESELECTION: c_int = 16;
+
+pub const wxAC_NO_AUTORESIZE: c_int = (0x0010);
+pub const wxAC_DEFAULT_STYLE: c_long = (wxBORDER_NONE);
+//  ENUM: wxAnimationType
+pub const wxANIMATION_TYPE_INVALID: c_int = 0;
+pub const wxANIMATION_TYPE_GIF: c_int = 0 + 1;
+pub const wxANIMATION_TYPE_ANI: c_int = 0 + 2;
+pub const wxANIMATION_TYPE_ANY: c_int = 0 + 3;
+
+//  ENUM: wxAnimationDisposal
+pub const wxANIM_UNSPECIFIED: c_int = -1;
+pub const wxANIM_DONOTREMOVE: c_int = 0;
+pub const wxANIM_TOBACKGROUND: c_int = 1;
+pub const wxANIM_TOPREVIOUS: c_int = 2;
+
+//  ENUM: @0
+pub const WX_ANY_VALUE_BUFFER_SIZE: c_int = 16;
+
+pub const wxBU_LEFT: c_int = 0x0040;
+pub const wxBU_TOP: c_int = 0x0080;
+pub const wxBU_RIGHT: c_int = 0x0100;
+pub const wxBU_BOTTOM: c_int = 0x0200;
+pub const wxBU_ALIGN_MASK: c_int = ( wxBU_LEFT | wxBU_TOP | wxBU_RIGHT | wxBU_BOTTOM );
+pub const wxBU_EXACTFIT: c_int = 0x0001;
+pub const wxBU_NOTEXT: c_int = 0x0002;
+pub const wxBU_AUTODRAW: c_int = 0x0004;
+
+//  ENUM: wxAuiToolBarStyle
+pub const wxAUI_TB_TEXT: c_int = 1 << 0;
+pub const wxAUI_TB_NO_TOOLTIPS: c_int = 1 << 1;
+pub const wxAUI_TB_NO_AUTORESIZE: c_int = 1 << 2;
+pub const wxAUI_TB_GRIPPER: c_int = 1 << 3;
+pub const wxAUI_TB_OVERFLOW: c_int = 1 << 4;
+pub const wxAUI_TB_VERTICAL: c_int = 1 << 5;
+pub const wxAUI_TB_HORZ_LAYOUT: c_int = 1 << 6;
+pub const wxAUI_TB_HORIZONTAL: c_int = 1 << 7;
+pub const wxAUI_TB_PLAIN_BACKGROUND: c_int = 1 << 8;
+pub const wxAUI_TB_HORZ_TEXT: c_int = (wxAUI_TB_HORZ_LAYOUT | wxAUI_TB_TEXT);
+pub const wxAUI_ORIENTATION_MASK: c_int = (wxAUI_TB_VERTICAL | wxAUI_TB_HORIZONTAL);
+pub const wxAUI_TB_DEFAULT_STYLE: c_int = 0;
+//  ENUM: wxAuiToolBarArtSetting
+pub const wxAUI_TBART_SEPARATOR_SIZE: c_int = 0;
+pub const wxAUI_TBART_GRIPPER_SIZE: c_int = 1;
+//  SKIP: wxAUI_TBART_OVERFLOW_SIZE
+//  ENUM: wxAuiToolBarToolTextOrientation
+pub const wxAUI_TBTOOL_TEXT_LEFT: c_int = 0;
+pub const wxAUI_TBTOOL_TEXT_RIGHT: c_int = 1;
+pub const wxAUI_TBTOOL_TEXT_TOP: c_int = 2;
+pub const wxAUI_TBTOOL_TEXT_BOTTOM: c_int = 3;
+
+//  ENUM: wxAuiNotebookOption
+pub const wxAUI_NB_TOP: c_int = 1 << 0;
+pub const wxAUI_NB_LEFT: c_int = 1 << 1;
+pub const wxAUI_NB_RIGHT: c_int = 1 << 2;
+pub const wxAUI_NB_BOTTOM: c_int = 1 << 3;
+pub const wxAUI_NB_TAB_SPLIT: c_int = 1 << 4;
+pub const wxAUI_NB_TAB_MOVE: c_int = 1 << 5;
+pub const wxAUI_NB_TAB_EXTERNAL_MOVE: c_int = 1 << 6;
+pub const wxAUI_NB_TAB_FIXED_WIDTH: c_int = 1 << 7;
+pub const wxAUI_NB_SCROLL_BUTTONS: c_int = 1 << 8;
+pub const wxAUI_NB_WINDOWLIST_BUTTON: c_int = 1 << 9;
+pub const wxAUI_NB_CLOSE_BUTTON: c_int = 1 << 10;
+pub const wxAUI_NB_CLOSE_ON_ACTIVE_TAB: c_int = 1 << 11;
+pub const wxAUI_NB_CLOSE_ON_ALL_TABS: c_int = 1 << 12;
+pub const wxAUI_NB_MIDDLE_CLICK_CLOSE: c_int = 1 << 13;
+pub const wxAUI_NB_DEFAULT_STYLE: c_int = wxAUI_NB_TOP |
+                             wxAUI_NB_TAB_SPLIT |
+                             wxAUI_NB_TAB_MOVE |
+                             wxAUI_NB_SCROLL_BUTTONS |
+                             wxAUI_NB_CLOSE_ON_ACTIVE_TAB |
+                             wxAUI_NB_MIDDLE_CLICK_CLOSE;
+
+//  ENUM: wxAuiPaneDockArtSetting
+pub const wxAUI_DOCKART_SASH_SIZE: c_int = 0;
+pub const wxAUI_DOCKART_CAPTION_SIZE: c_int = 1;
+pub const wxAUI_DOCKART_GRIPPER_SIZE: c_int = 2;
+pub const wxAUI_DOCKART_PANE_BORDER_SIZE: c_int = 3;
+pub const wxAUI_DOCKART_PANE_BUTTON_SIZE: c_int = 4;
+pub const wxAUI_DOCKART_BACKGROUND_COLOUR: c_int = 5;
+pub const wxAUI_DOCKART_SASH_COLOUR: c_int = 6;
+pub const wxAUI_DOCKART_ACTIVE_CAPTION_COLOUR: c_int = 7;
+pub const wxAUI_DOCKART_ACTIVE_CAPTION_GRADIENT_COLOUR: c_int = 8;
+pub const wxAUI_DOCKART_INACTIVE_CAPTION_COLOUR: c_int = 9;
+pub const wxAUI_DOCKART_INACTIVE_CAPTION_GRADIENT_COLOUR: c_int = 10;
+pub const wxAUI_DOCKART_ACTIVE_CAPTION_TEXT_COLOUR: c_int = 11;
+pub const wxAUI_DOCKART_INACTIVE_CAPTION_TEXT_COLOUR: c_int = 12;
+pub const wxAUI_DOCKART_BORDER_COLOUR: c_int = 13;
+pub const wxAUI_DOCKART_GRIPPER_COLOUR: c_int = 14;
+pub const wxAUI_DOCKART_CAPTION_FONT: c_int = 15;
+pub const wxAUI_DOCKART_GRADIENT_TYPE: c_int = 16;
+//  ENUM: wxAuiPaneDockArtGradients
+pub const wxAUI_GRADIENT_NONE: c_int = 0;
+pub const wxAUI_GRADIENT_VERTICAL: c_int = 1;
+pub const wxAUI_GRADIENT_HORIZONTAL: c_int = 2;
+//  ENUM: wxAuiPaneButtonState
+pub const wxAUI_BUTTON_STATE_NORMAL: c_int = 0;
+pub const wxAUI_BUTTON_STATE_HOVER: c_int = 1 << 1;
+pub const wxAUI_BUTTON_STATE_PRESSED: c_int = 1 << 2;
+pub const wxAUI_BUTTON_STATE_DISABLED: c_int = 1 << 3;
+pub const wxAUI_BUTTON_STATE_HIDDEN: c_int = 1 << 4;
+pub const wxAUI_BUTTON_STATE_CHECKED: c_int = 1 << 5;
+//  ENUM: wxAuiButtonId
+pub const wxAUI_BUTTON_CLOSE: c_int = 101;
+pub const wxAUI_BUTTON_MAXIMIZE_RESTORE: c_int = 102;
+pub const wxAUI_BUTTON_MINIMIZE: c_int = 103;
+pub const wxAUI_BUTTON_PIN: c_int = 104;
+pub const wxAUI_BUTTON_OPTIONS: c_int = 105;
+pub const wxAUI_BUTTON_WINDOWLIST: c_int = 106;
+pub const wxAUI_BUTTON_LEFT: c_int = 107;
+pub const wxAUI_BUTTON_RIGHT: c_int = 108;
+pub const wxAUI_BUTTON_UP: c_int = 109;
+pub const wxAUI_BUTTON_DOWN: c_int = 110;
+pub const wxAUI_BUTTON_CUSTOM1: c_int = 201;
+pub const wxAUI_BUTTON_CUSTOM2: c_int = 202;
+pub const wxAUI_BUTTON_CUSTOM3: c_int = 203;
+
+//  ENUM: wxAuiManagerDock
+pub const wxAUI_DOCK_NONE: c_int = 0;
+pub const wxAUI_DOCK_TOP: c_int = 1;
+pub const wxAUI_DOCK_RIGHT: c_int = 2;
+pub const wxAUI_DOCK_BOTTOM: c_int = 3;
+pub const wxAUI_DOCK_LEFT: c_int = 4;
+pub const wxAUI_DOCK_CENTER: c_int = 5;
+pub const wxAUI_DOCK_CENTRE: c_int = wxAUI_DOCK_CENTER;
+//  ENUM: wxAuiManagerOption
+pub const wxAUI_MGR_ALLOW_FLOATING: c_int = 1 << 0;
+pub const wxAUI_MGR_ALLOW_ACTIVE_PANE: c_int = 1 << 1;
+pub const wxAUI_MGR_TRANSPARENT_DRAG: c_int = 1 << 2;
+pub const wxAUI_MGR_TRANSPARENT_HINT: c_int = 1 << 3;
+pub const wxAUI_MGR_VENETIAN_BLINDS_HINT: c_int = 1 << 4;
+pub const wxAUI_MGR_RECTANGLE_HINT: c_int = 1 << 5;
+pub const wxAUI_MGR_HINT_FADE: c_int = 1 << 6;
+pub const wxAUI_MGR_NO_VENETIAN_BLINDS_FADE: c_int = 1 << 7;
+pub const wxAUI_MGR_LIVE_RESIZE: c_int = 1 << 8;
+pub const wxAUI_MGR_DEFAULT: c_int = wxAUI_MGR_ALLOW_FLOATING |
+                        wxAUI_MGR_TRANSPARENT_HINT |
+                        wxAUI_MGR_HINT_FADE |
+                        wxAUI_MGR_NO_VENETIAN_BLINDS_FADE;
+
+//  ENUM: wxBase64DecodeMode
+pub const wxBase64DecodeMode_Strict: c_int = 0;
+pub const wxBase64DecodeMode_SkipWS: c_int = 0 + 1;
+pub const wxBase64DecodeMode_Relaxed: c_int = 0 + 2;
+
+//  ENUM: wxBrushStyle
+pub const wxBRUSHSTYLE_INVALID: c_int = -1;
+pub const wxBRUSHSTYLE_SOLID: c_int = wxSOLID;
+pub const wxBRUSHSTYLE_TRANSPARENT: c_int = wxTRANSPARENT;
+pub const wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE: c_int = wxSTIPPLE_MASK_OPAQUE;
+pub const wxBRUSHSTYLE_STIPPLE_MASK: c_int = wxSTIPPLE_MASK;
+pub const wxBRUSHSTYLE_STIPPLE: c_int = wxSTIPPLE;
+pub const wxBRUSHSTYLE_BDIAGONAL_HATCH: c_int = wxSTIPPLE + 1;
+pub const wxBRUSHSTYLE_CROSSDIAG_HATCH: c_int = wxSTIPPLE + 2;
+pub const wxBRUSHSTYLE_FDIAGONAL_HATCH: c_int = wxSTIPPLE + 3;
+pub const wxBRUSHSTYLE_CROSS_HATCH: c_int = wxSTIPPLE + 4;
+pub const wxBRUSHSTYLE_HORIZONTAL_HATCH: c_int = wxSTIPPLE + 5;
+pub const wxBRUSHSTYLE_VERTICAL_HATCH: c_int = wxSTIPPLE + 6;
+pub const wxBRUSHSTYLE_FIRST_HATCH: c_int = wxSTIPPLE + 7;
+pub const wxBRUSHSTYLE_LAST_HATCH: c_int = wxSTIPPLE + 8;
+
+//  ENUM: @4
+pub const wxCAL_SUNDAY_FIRST: c_int = 0x0080;
+pub const wxCAL_MONDAY_FIRST: c_int = 0x0001;
+pub const wxCAL_SHOW_HOLIDAYS: c_int = 0x0002;
+pub const wxCAL_NO_YEAR_CHANGE: c_int = 0x0004;
+pub const wxCAL_NO_MONTH_CHANGE: c_int = 0x000c;
+pub const wxCAL_SEQUENTIAL_MONTH_SELECTION: c_int = 0x0010;
+pub const wxCAL_SHOW_SURROUNDING_WEEKS: c_int = 0x0020;
+pub const wxCAL_SHOW_WEEK_NUMBERS: c_int = 0x0040;
+//  ENUM: wxCalendarDateBorder
+pub const wxCAL_BORDER_NONE: c_int = 0;
+pub const wxCAL_BORDER_SQUARE: c_int = 0 + 1;
+pub const wxCAL_BORDER_ROUND: c_int = 0 + 2;
+//  ENUM: wxCalendarHitTestResult
+pub const wxCAL_HITTEST_NOWHERE: c_int = 0;
+pub const wxCAL_HITTEST_HEADER: c_int = 0 + 1;
+pub const wxCAL_HITTEST_DAY: c_int = 0 + 2;
+pub const wxCAL_HITTEST_INCMONTH: c_int = 0 + 3;
+pub const wxCAL_HITTEST_DECMONTH: c_int = 0 + 4;
+pub const wxCAL_HITTEST_SURROUNDING_WEEK: c_int = 0 + 5;
+pub const wxCAL_HITTEST_WEEK: c_int = 0 + 6;
+
+// NODEF: wxT
+// NODEF: wxT_2
+// NODEF: wxS
+// NODEF: _T
+
+pub const wxCHK_2STATE: c_int = 0x4000;
+pub const wxCHK_3STATE: c_int = 0x1000;
+pub const wxCHK_ALLOW_3RD_STATE_FOR_USER: c_int = 0x2000;
+//  ENUM: wxCheckBoxState
+pub const wxCHK_UNCHECKED: c_int = 0;
+pub const wxCHK_CHECKED: c_int = 0 + 1;
+pub const wxCHK_UNDETERMINED: c_int = 0 + 2;
+
+pub const wxCHOICE_WIDTH: c_int = 150;
+pub const wxCHOICE_HEIGHT: c_int = 200;
+pub const wxCHOICEDLG_STYLE: c_long = (wxDEFAULT_DIALOG_STYLE | wxOK | wxCANCEL | wxCENTRE | wxRESIZE_BORDER);
+
+pub const wxCHB_DEFAULT: c_int = wxBK_DEFAULT;
+pub const wxCHB_TOP: c_int = wxBK_TOP;
+pub const wxCHB_BOTTOM: c_int = wxBK_BOTTOM;
+pub const wxCHB_LEFT: c_int = wxBK_LEFT;
+pub const wxCHB_RIGHT: c_int = wxBK_RIGHT;
+pub const wxCHB_ALIGN_MASK: c_int = wxBK_ALIGN_MASK;
 
 // NODEF: wxTheClipboard
 
@@ -1750,50 +2181,6 @@ pub const wxDD_SHOW_HIDDEN: c_int = 0x0001;
 pub const wxDD_NEW_DIR_BUTTON: c_int = 0;
 pub const wxDD_DEFAULT_STYLE: c_long = (wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER);
 
-//  ENUM: wxAuiPaneDockArtSetting
-pub const wxAUI_DOCKART_SASH_SIZE: c_int = 0;
-pub const wxAUI_DOCKART_CAPTION_SIZE: c_int = 1;
-pub const wxAUI_DOCKART_GRIPPER_SIZE: c_int = 2;
-pub const wxAUI_DOCKART_PANE_BORDER_SIZE: c_int = 3;
-pub const wxAUI_DOCKART_PANE_BUTTON_SIZE: c_int = 4;
-pub const wxAUI_DOCKART_BACKGROUND_COLOUR: c_int = 5;
-pub const wxAUI_DOCKART_SASH_COLOUR: c_int = 6;
-pub const wxAUI_DOCKART_ACTIVE_CAPTION_COLOUR: c_int = 7;
-pub const wxAUI_DOCKART_ACTIVE_CAPTION_GRADIENT_COLOUR: c_int = 8;
-pub const wxAUI_DOCKART_INACTIVE_CAPTION_COLOUR: c_int = 9;
-pub const wxAUI_DOCKART_INACTIVE_CAPTION_GRADIENT_COLOUR: c_int = 10;
-pub const wxAUI_DOCKART_ACTIVE_CAPTION_TEXT_COLOUR: c_int = 11;
-pub const wxAUI_DOCKART_INACTIVE_CAPTION_TEXT_COLOUR: c_int = 12;
-pub const wxAUI_DOCKART_BORDER_COLOUR: c_int = 13;
-pub const wxAUI_DOCKART_GRIPPER_COLOUR: c_int = 14;
-pub const wxAUI_DOCKART_CAPTION_FONT: c_int = 15;
-pub const wxAUI_DOCKART_GRADIENT_TYPE: c_int = 16;
-//  ENUM: wxAuiPaneDockArtGradients
-pub const wxAUI_GRADIENT_NONE: c_int = 0;
-pub const wxAUI_GRADIENT_VERTICAL: c_int = 1;
-pub const wxAUI_GRADIENT_HORIZONTAL: c_int = 2;
-//  ENUM: wxAuiPaneButtonState
-pub const wxAUI_BUTTON_STATE_NORMAL: c_int = 0;
-pub const wxAUI_BUTTON_STATE_HOVER: c_int = 1 << 1;
-pub const wxAUI_BUTTON_STATE_PRESSED: c_int = 1 << 2;
-pub const wxAUI_BUTTON_STATE_DISABLED: c_int = 1 << 3;
-pub const wxAUI_BUTTON_STATE_HIDDEN: c_int = 1 << 4;
-pub const wxAUI_BUTTON_STATE_CHECKED: c_int = 1 << 5;
-//  ENUM: wxAuiButtonId
-pub const wxAUI_BUTTON_CLOSE: c_int = 101;
-pub const wxAUI_BUTTON_MAXIMIZE_RESTORE: c_int = 102;
-pub const wxAUI_BUTTON_MINIMIZE: c_int = 103;
-pub const wxAUI_BUTTON_PIN: c_int = 104;
-pub const wxAUI_BUTTON_OPTIONS: c_int = 105;
-pub const wxAUI_BUTTON_WINDOWLIST: c_int = 106;
-pub const wxAUI_BUTTON_LEFT: c_int = 107;
-pub const wxAUI_BUTTON_RIGHT: c_int = 108;
-pub const wxAUI_BUTTON_UP: c_int = 109;
-pub const wxAUI_BUTTON_DOWN: c_int = 110;
-pub const wxAUI_BUTTON_CUSTOM1: c_int = 201;
-pub const wxAUI_BUTTON_CUSTOM2: c_int = 202;
-pub const wxAUI_BUTTON_CUSTOM3: c_int = 203;
-
 // NODEF: WX_APPEND_ARRAY
 // NODEF: WX_CLEAR_ARRAY
 // NODEF: WX_DECLARE_OBJARRAY
@@ -2005,29 +2392,6 @@ pub const wxFRAME_NO_TASKBAR: c_int = 0x0002;
 pub const wxFRAME_TOOL_WINDOW: c_int = 0x0004;
 pub const wxFRAME_FLOAT_ON_PARENT: c_int = 0x0008;
 
-//  ENUM: wxAuiManagerDock
-pub const wxAUI_DOCK_NONE: c_int = 0;
-pub const wxAUI_DOCK_TOP: c_int = 1;
-pub const wxAUI_DOCK_RIGHT: c_int = 2;
-pub const wxAUI_DOCK_BOTTOM: c_int = 3;
-pub const wxAUI_DOCK_LEFT: c_int = 4;
-pub const wxAUI_DOCK_CENTER: c_int = 5;
-pub const wxAUI_DOCK_CENTRE: c_int = wxAUI_DOCK_CENTER;
-//  ENUM: wxAuiManagerOption
-pub const wxAUI_MGR_ALLOW_FLOATING: c_int = 1 << 0;
-pub const wxAUI_MGR_ALLOW_ACTIVE_PANE: c_int = 1 << 1;
-pub const wxAUI_MGR_TRANSPARENT_DRAG: c_int = 1 << 2;
-pub const wxAUI_MGR_TRANSPARENT_HINT: c_int = 1 << 3;
-pub const wxAUI_MGR_VENETIAN_BLINDS_HINT: c_int = 1 << 4;
-pub const wxAUI_MGR_RECTANGLE_HINT: c_int = 1 << 5;
-pub const wxAUI_MGR_HINT_FADE: c_int = 1 << 6;
-pub const wxAUI_MGR_NO_VENETIAN_BLINDS_FADE: c_int = 1 << 7;
-pub const wxAUI_MGR_LIVE_RESIZE: c_int = 1 << 8;
-pub const wxAUI_MGR_DEFAULT: c_int = wxAUI_MGR_ALLOW_FLOATING |
-                        wxAUI_MGR_TRANSPARENT_HINT |
-                        wxAUI_MGR_HINT_FADE |
-                        wxAUI_MGR_NO_VENETIAN_BLINDS_FADE;
-
 //  ENUM: wxFSWFlags
 pub const wxFSW_EVENT_CREATE: c_int = 0x01;
 pub const wxFSW_EVENT_DELETE: c_int = 0x02;
@@ -2046,12 +2410,6 @@ pub const wxFSW_EVENT_ALL: c_int = wxFSW_EVENT_CREATE | wxFSW_EVENT_DELETE |
 pub const wxFSW_WARNING_NONE: c_int = 0;
 pub const wxFSW_WARNING_GENERAL: c_int = 0 + 1;
 pub const wxFSW_WARNING_OVERFLOW: c_int = 0 + 2;
-
-//  ENUM: wxRibbonGalleryButtonState
-pub const wxRIBBON_GALLERY_BUTTON_NORMAL: c_int = 0;
-pub const wxRIBBON_GALLERY_BUTTON_HOVERED: c_int = 0 + 1;
-pub const wxRIBBON_GALLERY_BUTTON_ACTIVE: c_int = 0 + 2;
-pub const wxRIBBON_GALLERY_BUTTON_DISABLED: c_int = 0 + 3;
 
 pub const wxGA_HORIZONTAL: c_int = wxHORIZONTAL;
 pub const wxGA_VERTICAL: c_int = wxVERTICAL;
@@ -2221,25 +2579,6 @@ pub const wxGRADIENT_NONE: c_int = 0;
 pub const wxGRADIENT_LINEAR: c_int = 0 + 1;
 pub const wxGRADIENT_RADIAL: c_int = 0 + 2;
 
-//  ENUM: wxAuiToolBarStyle
-//  ENUM: wxAuiToolBarArtSetting
-//  ENUM: wxAuiToolBarToolTextOrientation
-//  ENUM: wxAuiPaneDockArtSetting
-
-//  ENUM: @48
-pub const wxTP_DEFAULT: c_int = 0;
-
-//  ENUM: wxMessageQueueError
-pub const wxMSGQUEUE_NO_ERROR: c_int = 0;
-pub const wxMSGQUEUE_TIMEOUT: c_int = 0 + 1;
-pub const wxMSGQUEUE_MISC_ERROR: c_int = 0 + 2;
-
-//  ENUM: wxNumValidatorStyle
-pub const wxNUM_VAL_DEFAULT: c_int = 0;
-pub const wxNUM_VAL_THOUSANDS_SEPARATOR: c_int = 1;
-pub const wxNUM_VAL_ZERO_AS_BLANK: c_int = 2;
-pub const wxNUM_VAL_NO_TRAILING_ZEROES: c_int = 2 + 1;
-
 //  ENUM: @23
 pub const wxCOL_WIDTH_DEFAULT: c_int = -1;
 pub const wxCOL_WIDTH_AUTOSIZE: c_int = -2;
@@ -2343,9 +2682,6 @@ pub const wxHTML_COND_ISANCHOR: c_int = 1;
 pub const wxHTML_COND_ISIMAGEMAP: c_int = 2;
 pub const wxHTML_COND_USER: c_int = 10000;
 
-pub const wxHLB_DEFAULT_STYLE: c_long = wxBORDER_SUNKEN;
-pub const wxHLB_MULTIPLE: c_int = wxLB_MULTIPLE;
-
 //  ENUM: wxHtmlURLType
 pub const wxHTML_URL_PAGE: c_int = 0;
 pub const wxHTML_URL_IMAGE: c_int = 0 + 1;
@@ -2364,6 +2700,9 @@ pub const wxHTML_REDIRECT: c_int = 0 + 2;
 pub const wxPAGE_ODD: c_int = 0;
 pub const wxPAGE_EVEN: c_int = 0 + 1;
 pub const wxPAGE_ALL: c_int = 0 + 2;
+
+pub const wxHLB_DEFAULT_STYLE: c_long = wxBORDER_SUNKEN;
+pub const wxHLB_MULTIPLE: c_int = wxLB_MULTIPLE;
 
 pub const wxHL_CONTEXTMENU: c_long = 0x0001;
 pub const wxHL_ALIGN_LEFT: c_int = 0x0002;
@@ -2443,528 +2782,6 @@ pub const wxIMAGE_LIST_SMALL: c_int = 0 + 1;
 pub const wxIMAGE_LIST_STATE: c_int = 0 + 2;
 
 
-
-// NODEF: wxDECLARE_APP
-// NODEF: wxIMPLEMENT_APP
-//  SKIP: wxDISABLE_DEBUG_SUPPORT
-
-pub const wxBITMAP_SCREEN_DEPTH: c_int = (-1);
-
-pub const wxBK_DEFAULT: c_int = 0x0000;
-pub const wxBK_TOP: c_int = 0x0010;
-pub const wxBK_BOTTOM: c_int = 0x0020;
-pub const wxBK_LEFT: c_int = 0x0040;
-pub const wxBK_RIGHT: c_int = 0x0080;
-pub const wxBK_ALIGN_MASK: c_int = (wxBK_TOP | wxBK_BOTTOM | wxBK_LEFT | wxBK_RIGHT);
-//  SKIP: wxBookCtrl
-//  ENUM: @2
-pub const wxBK_HITTEST_NOWHERE: c_int = 1;
-pub const wxBK_HITTEST_ONICON: c_int = 2;
-pub const wxBK_HITTEST_ONLABEL: c_int = 4;
-pub const wxBK_HITTEST_ONITEM: c_int = 16;
-pub const wxBK_HITTEST_ONPAGE: c_int = 8;
-
-//  ENUM: @10
-pub const wxCONFIG_USE_LOCAL_FILE: c_int = 1;
-pub const wxCONFIG_USE_GLOBAL_FILE: c_int = 2;
-pub const wxCONFIG_USE_RELATIVE_PATH: c_int = 4;
-pub const wxCONFIG_USE_NO_ESCAPE_CHARACTERS: c_int = 8;
-pub const wxCONFIG_USE_SUBDIR: c_int = 16;
-
-//  SKIP: wxInvalidDateTime
-
-//  ENUM: wxRasterOperationMode
-pub const wxCLEAR: c_int = 0;
-pub const wxXOR: c_int = 0 + 1;
-pub const wxINVERT: c_int = 0 + 2;
-pub const wxOR_REVERSE: c_int = 0 + 3;
-pub const wxAND_REVERSE: c_int = 0 + 4;
-pub const wxCOPY: c_int = 0 + 5;
-pub const wxAND: c_int = 0 + 6;
-pub const wxAND_INVERT: c_int = 0 + 7;
-pub const wxNO_OP: c_int = 0 + 8;
-pub const wxNOR: c_int = 0 + 9;
-pub const wxEQUIV: c_int = 0 + 10;
-pub const wxSRC_INVERT: c_int = 0 + 11;
-pub const wxOR_INVERT: c_int = 0 + 12;
-pub const wxNAND: c_int = 0 + 13;
-pub const wxOR: c_int = 0 + 14;
-pub const wxSET: c_int = 0 + 15;
-//  ENUM: wxFloodFillStyle
-pub const wxFLOOD_SURFACE: c_int = 1;
-pub const wxFLOOD_BORDER: c_int = 1 + 1;
-//  ENUM: wxMappingMode
-pub const wxMM_TEXT: c_int = 1;
-pub const wxMM_METRIC: c_int = 1 + 1;
-pub const wxMM_LOMETRIC: c_int = 1 + 2;
-pub const wxMM_TWIPS: c_int = 1 + 3;
-pub const wxMM_POINTS: c_int = 1 + 4;
-
-pub const wxDIALOG_NO_PARENT: c_int = 0x00000020;
-pub const wxDEFAULT_DIALOG_STYLE: c_long = (wxCAPTION | wxSYSTEM_MENU | wxCLOSE_BOX);
-pub const wxDIALOG_ADAPTATION_NONE: c_int = 0;
-pub const wxDIALOG_ADAPTATION_STANDARD_SIZER: c_int = 1;
-pub const wxDIALOG_ADAPTATION_ANY_SIZER: c_int = 2;
-pub const wxDIALOG_ADAPTATION_LOOSE_BUTTONS: c_int = 3;
-//  ENUM: wxDialogLayoutAdaptationMode
-pub const wxDIALOG_ADAPTATION_MODE_DEFAULT: c_int = 0;
-pub const wxDIALOG_ADAPTATION_MODE_ENABLED: c_int = 1;
-pub const wxDIALOG_ADAPTATION_MODE_DISABLED: c_int = 2;
-
-// NODEF: wxDROP_ICON
-//  ENUM: @13
-pub const wxDrag_CopyOnly: c_int = 0;
-pub const wxDrag_AllowMove: c_int = 1;
-pub const wxDrag_DefaultMove: c_int = 3;
-//  ENUM: wxDragResult
-pub const wxDragError: c_int = 0;
-pub const wxDragNone: c_int = 0 + 1;
-pub const wxDragCopy: c_int = 0 + 2;
-pub const wxDragMove: c_int = 0 + 3;
-pub const wxDragLink: c_int = 0 + 4;
-pub const wxDragCancel: c_int = 0 + 5;
-
-//  ENUM: wxFontFamily
-pub const wxFONTFAMILY_DEFAULT: c_int = wxDEFAULT;
-pub const wxFONTFAMILY_DECORATIVE: c_int = wxDECORATIVE;
-pub const wxFONTFAMILY_ROMAN: c_int = wxROMAN;
-pub const wxFONTFAMILY_SCRIPT: c_int = wxSCRIPT;
-pub const wxFONTFAMILY_SWISS: c_int = wxSWISS;
-pub const wxFONTFAMILY_MODERN: c_int = wxMODERN;
-pub const wxFONTFAMILY_TELETYPE: c_int = wxTELETYPE;
-pub const wxFONTFAMILY_MAX: c_int = wxTELETYPE + 1;
-pub const wxFONTFAMILY_UNKNOWN: c_int = wxFONTFAMILY_MAX;
-//  ENUM: wxFontStyle
-pub const wxFONTSTYLE_NORMAL: c_int = wxNORMAL;
-pub const wxFONTSTYLE_ITALIC: c_int = wxITALIC;
-pub const wxFONTSTYLE_SLANT: c_int = wxSLANT;
-pub const wxFONTSTYLE_MAX: c_int = wxSLANT + 1;
-//  ENUM: wxFontWeight
-pub const wxFONTWEIGHT_INVALID: c_int = 0;
-pub const wxFONTWEIGHT_THIN: c_int = 100;
-pub const wxFONTWEIGHT_EXTRALIGHT: c_int = 200;
-pub const wxFONTWEIGHT_LIGHT: c_int = 300;
-pub const wxFONTWEIGHT_NORMAL: c_int = 400;
-pub const wxFONTWEIGHT_MEDIUM: c_int = 500;
-pub const wxFONTWEIGHT_SEMIBOLD: c_int = 600;
-pub const wxFONTWEIGHT_BOLD: c_int = 700;
-pub const wxFONTWEIGHT_EXTRABOLD: c_int = 800;
-pub const wxFONTWEIGHT_HEAVY: c_int = 900;
-pub const wxFONTWEIGHT_EXTRAHEAVY: c_int = 1000;
-pub const wxFONTWEIGHT_MAX: c_int = wxFONTWEIGHT_EXTRAHEAVY;
-//  ENUM: wxFontSymbolicSize
-pub const wxFONTSIZE_XX_SMALL: c_int = -3;
-pub const wxFONTSIZE_X_SMALL: c_int = -3 + 1;
-pub const wxFONTSIZE_SMALL: c_int = -3 + 2;
-pub const wxFONTSIZE_MEDIUM: c_int = -3 + 3;
-pub const wxFONTSIZE_LARGE: c_int = -3 + 4;
-pub const wxFONTSIZE_X_LARGE: c_int = -3 + 5;
-pub const wxFONTSIZE_XX_LARGE: c_int = -3 + 6;
-//  ENUM: wxFontFlag
-pub const wxFONTFLAG_DEFAULT: c_int = 0;
-pub const wxFONTFLAG_ITALIC: c_int = 1 << 0;
-pub const wxFONTFLAG_SLANT: c_int = 1 << 1;
-pub const wxFONTFLAG_LIGHT: c_int = 1 << 2;
-pub const wxFONTFLAG_BOLD: c_int = 1 << 3;
-pub const wxFONTFLAG_ANTIALIASED: c_int = 1 << 4;
-pub const wxFONTFLAG_NOT_ANTIALIASED: c_int = 1 << 5;
-pub const wxFONTFLAG_UNDERLINED: c_int = 1 << 6;
-pub const wxFONTFLAG_STRIKETHROUGH: c_int = 1 << 7;
-pub const wxFONTFLAG_MASK: c_int = wxFONTFLAG_ITALIC             |
-                      wxFONTFLAG_SLANT              |
-                      wxFONTFLAG_LIGHT              |
-                      wxFONTFLAG_BOLD               |
-                      wxFONTFLAG_ANTIALIASED        |
-                      wxFONTFLAG_NOT_ANTIALIASED    |
-                      wxFONTFLAG_UNDERLINED         |
-                      wxFONTFLAG_STRIKETHROUGH;
-//  ENUM: wxFontEncoding
-pub const wxFONTENCODING_SYSTEM: c_int = -1;
-pub const wxFONTENCODING_DEFAULT: c_int = -1 + 1;
-pub const wxFONTENCODING_ISO8859_1: c_int = -1 + 2;
-pub const wxFONTENCODING_ISO8859_2: c_int = -1 + 3;
-pub const wxFONTENCODING_ISO8859_3: c_int = -1 + 4;
-pub const wxFONTENCODING_ISO8859_4: c_int = -1 + 5;
-pub const wxFONTENCODING_ISO8859_5: c_int = -1 + 6;
-pub const wxFONTENCODING_ISO8859_6: c_int = -1 + 7;
-pub const wxFONTENCODING_ISO8859_7: c_int = -1 + 8;
-pub const wxFONTENCODING_ISO8859_8: c_int = -1 + 9;
-pub const wxFONTENCODING_ISO8859_9: c_int = -1 + 10;
-pub const wxFONTENCODING_ISO8859_10: c_int = -1 + 11;
-pub const wxFONTENCODING_ISO8859_11: c_int = -1 + 12;
-pub const wxFONTENCODING_ISO8859_12: c_int = -1 + 13;
-pub const wxFONTENCODING_ISO8859_13: c_int = -1 + 14;
-pub const wxFONTENCODING_ISO8859_14: c_int = -1 + 15;
-pub const wxFONTENCODING_ISO8859_15: c_int = -1 + 16;
-pub const wxFONTENCODING_ISO8859_MAX: c_int = -1 + 17;
-pub const wxFONTENCODING_KOI8: c_int = -1 + 18;
-pub const wxFONTENCODING_KOI8_U: c_int = -1 + 19;
-pub const wxFONTENCODING_ALTERNATIVE: c_int = -1 + 20;
-pub const wxFONTENCODING_BULGARIAN: c_int = -1 + 21;
-pub const wxFONTENCODING_CP437: c_int = -1 + 22;
-pub const wxFONTENCODING_CP850: c_int = -1 + 23;
-pub const wxFONTENCODING_CP852: c_int = -1 + 24;
-pub const wxFONTENCODING_CP855: c_int = -1 + 25;
-pub const wxFONTENCODING_CP866: c_int = -1 + 26;
-pub const wxFONTENCODING_CP874: c_int = -1 + 27;
-pub const wxFONTENCODING_CP932: c_int = -1 + 28;
-pub const wxFONTENCODING_CP936: c_int = -1 + 29;
-pub const wxFONTENCODING_CP949: c_int = -1 + 30;
-pub const wxFONTENCODING_CP950: c_int = -1 + 31;
-pub const wxFONTENCODING_CP1250: c_int = -1 + 32;
-pub const wxFONTENCODING_CP1251: c_int = -1 + 33;
-pub const wxFONTENCODING_CP1252: c_int = -1 + 34;
-pub const wxFONTENCODING_CP1253: c_int = -1 + 35;
-pub const wxFONTENCODING_CP1254: c_int = -1 + 36;
-pub const wxFONTENCODING_CP1255: c_int = -1 + 37;
-pub const wxFONTENCODING_CP1256: c_int = -1 + 38;
-pub const wxFONTENCODING_CP1257: c_int = -1 + 39;
-pub const wxFONTENCODING_CP1258: c_int = -1 + 40;
-pub const wxFONTENCODING_CP1361: c_int = -1 + 41;
-pub const wxFONTENCODING_CP12_MAX: c_int = -1 + 42;
-pub const wxFONTENCODING_UTF7: c_int = -1 + 43;
-pub const wxFONTENCODING_UTF8: c_int = -1 + 44;
-pub const wxFONTENCODING_EUC_JP: c_int = -1 + 45;
-pub const wxFONTENCODING_UTF16BE: c_int = -1 + 46;
-pub const wxFONTENCODING_UTF16LE: c_int = -1 + 47;
-pub const wxFONTENCODING_UTF32BE: c_int = -1 + 48;
-pub const wxFONTENCODING_UTF32LE: c_int = -1 + 49;
-pub const wxFONTENCODING_MACROMAN: c_int = -1 + 50;
-pub const wxFONTENCODING_MACJAPANESE: c_int = -1 + 51;
-pub const wxFONTENCODING_MACCHINESETRAD: c_int = -1 + 52;
-pub const wxFONTENCODING_MACKOREAN: c_int = -1 + 53;
-pub const wxFONTENCODING_MACARABIC: c_int = -1 + 54;
-pub const wxFONTENCODING_MACHEBREW: c_int = -1 + 55;
-pub const wxFONTENCODING_MACGREEK: c_int = -1 + 56;
-pub const wxFONTENCODING_MACCYRILLIC: c_int = -1 + 57;
-pub const wxFONTENCODING_MACDEVANAGARI: c_int = -1 + 58;
-pub const wxFONTENCODING_MACGURMUKHI: c_int = -1 + 59;
-pub const wxFONTENCODING_MACGUJARATI: c_int = -1 + 60;
-pub const wxFONTENCODING_MACORIYA: c_int = -1 + 61;
-pub const wxFONTENCODING_MACBENGALI: c_int = -1 + 62;
-pub const wxFONTENCODING_MACTAMIL: c_int = -1 + 63;
-pub const wxFONTENCODING_MACTELUGU: c_int = -1 + 64;
-pub const wxFONTENCODING_MACKANNADA: c_int = -1 + 65;
-pub const wxFONTENCODING_MACMALAJALAM: c_int = -1 + 66;
-pub const wxFONTENCODING_MACSINHALESE: c_int = -1 + 67;
-pub const wxFONTENCODING_MACBURMESE: c_int = -1 + 68;
-pub const wxFONTENCODING_MACKHMER: c_int = -1 + 69;
-pub const wxFONTENCODING_MACTHAI: c_int = -1 + 70;
-pub const wxFONTENCODING_MACLAOTIAN: c_int = -1 + 71;
-pub const wxFONTENCODING_MACGEORGIAN: c_int = -1 + 72;
-pub const wxFONTENCODING_MACARMENIAN: c_int = -1 + 73;
-pub const wxFONTENCODING_MACCHINESESIMP: c_int = -1 + 74;
-pub const wxFONTENCODING_MACTIBETAN: c_int = -1 + 75;
-pub const wxFONTENCODING_MACMONGOLIAN: c_int = -1 + 76;
-pub const wxFONTENCODING_MACETHIOPIC: c_int = -1 + 77;
-pub const wxFONTENCODING_MACCENTRALEUR: c_int = -1 + 78;
-pub const wxFONTENCODING_MACVIATNAMESE: c_int = -1 + 79;
-pub const wxFONTENCODING_MACARABICEXT: c_int = -1 + 80;
-pub const wxFONTENCODING_MACSYMBOL: c_int = -1 + 81;
-pub const wxFONTENCODING_MACDINGBATS: c_int = -1 + 82;
-pub const wxFONTENCODING_MACTURKISH: c_int = -1 + 83;
-pub const wxFONTENCODING_MACCROATIAN: c_int = -1 + 84;
-pub const wxFONTENCODING_MACICELANDIC: c_int = -1 + 85;
-pub const wxFONTENCODING_MACROMANIAN: c_int = -1 + 86;
-pub const wxFONTENCODING_MACCELTIC: c_int = -1 + 87;
-pub const wxFONTENCODING_MACGAELIC: c_int = -1 + 88;
-pub const wxFONTENCODING_MACKEYBOARD: c_int = -1 + 89;
-pub const wxFONTENCODING_ISO2022_JP: c_int = -1 + 90;
-pub const wxFONTENCODING_MAX: c_int = -1 + 91;
-pub const wxFONTENCODING_MACMIN: c_int = wxFONTENCODING_MACROMAN;
-pub const wxFONTENCODING_MACMAX: c_int = wxFONTENCODING_MACKEYBOARD;
-pub const wxFONTENCODING_UTF16: c_int = wxFONTENCODING_MACKEYBOARD + 1;
-pub const wxFONTENCODING_UTF32: c_int = wxFONTENCODING_MACKEYBOARD + 2;
-pub const wxFONTENCODING_UNICODE: c_int = wxFONTENCODING_MACKEYBOARD + 3;
-pub const wxFONTENCODING_GB2312: c_int = wxFONTENCODING_CP936;
-pub const wxFONTENCODING_BIG5: c_int = wxFONTENCODING_CP950;
-pub const wxFONTENCODING_SHIFT_JIS: c_int = wxFONTENCODING_CP932;
-pub const wxFONTENCODING_EUC_KR: c_int = wxFONTENCODING_CP949;
-pub const wxFONTENCODING_JOHAB: c_int = wxFONTENCODING_CP1361;
-pub const wxFONTENCODING_VIETNAMESE: c_int = wxFONTENCODING_CP1258;
-
-pub const wxGRID_AUTOSIZE: c_int = (-1);
-//  ENUM: wxGridCellFloatFormat
-pub const wxGRID_FLOAT_FORMAT_FIXED: c_int = 0x0010;
-pub const wxGRID_FLOAT_FORMAT_SCIENTIFIC: c_int = 0x0020;
-pub const wxGRID_FLOAT_FORMAT_COMPACT: c_int = 0x0040;
-pub const wxGRID_FLOAT_FORMAT_UPPER: c_int = 0x0080;
-pub const wxGRID_FLOAT_FORMAT_DEFAULT: c_int = wxGRID_FLOAT_FORMAT_FIXED;
-//  ENUM: wxGridTableRequest
-pub const wxGRIDTABLE_NOTIFY_ROWS_INSERTED: c_int = 0;
-pub const wxGRIDTABLE_NOTIFY_ROWS_APPENDED: c_int = 0 + 1;
-pub const wxGRIDTABLE_NOTIFY_ROWS_DELETED: c_int = 0 + 2;
-pub const wxGRIDTABLE_NOTIFY_COLS_INSERTED: c_int = 0 + 3;
-pub const wxGRIDTABLE_NOTIFY_COLS_APPENDED: c_int = 0 + 4;
-pub const wxGRIDTABLE_NOTIFY_COLS_DELETED: c_int = 0 + 5;
-//  ENUM: wxGridRenderStyle
-pub const wxGRID_DRAW_ROWS_HEADER: c_int = 0x001;
-pub const wxGRID_DRAW_COLS_HEADER: c_int = 0x002;
-pub const wxGRID_DRAW_CELL_LINES: c_int = 0x004;
-pub const wxGRID_DRAW_BOX_RECT: c_int = 0x008;
-pub const wxGRID_DRAW_SELECTION: c_int = 0x010;
-pub const wxGRID_DRAW_DEFAULT: c_int = wxGRID_DRAW_ROWS_HEADER |
-                          wxGRID_DRAW_COLS_HEADER |
-                          wxGRID_DRAW_CELL_LINES |
-                          wxGRID_DRAW_BOX_RECT;
-
-pub const wxLC_VRULES: c_int = 0x0001;
-pub const wxLC_HRULES: c_int = 0x0002;
-pub const wxLC_ICON: c_int = 0x0004;
-pub const wxLC_SMALL_ICON: c_int = 0x0008;
-pub const wxLC_LIST: c_int = 0x0010;
-pub const wxLC_REPORT: c_int = 0x0020;
-pub const wxLC_ALIGN_TOP: c_int = 0x0040;
-pub const wxLC_ALIGN_LEFT: c_int = 0x0080;
-pub const wxLC_AUTOARRANGE: c_int = 0x0100;
-pub const wxLC_VIRTUAL: c_int = 0x0200;
-pub const wxLC_EDIT_LABELS: c_int = 0x0400;
-pub const wxLC_NO_HEADER: c_int = 0x0800;
-pub const wxLC_NO_SORT_HEADER: c_int = 0x1000;
-pub const wxLC_SINGLE_SEL: c_int = 0x2000;
-pub const wxLC_SORT_ASCENDING: c_int = 0x4000;
-pub const wxLC_SORT_DESCENDING: c_int = 0x8000;
-pub const wxLC_MASK_TYPE: c_int = (wxLC_ICON | wxLC_SMALL_ICON | wxLC_LIST | wxLC_REPORT);
-pub const wxLC_MASK_ALIGN: c_int = (wxLC_ALIGN_TOP | wxLC_ALIGN_LEFT);
-pub const wxLC_MASK_SORT: c_int = (wxLC_SORT_ASCENDING | wxLC_SORT_DESCENDING);
-pub const wxLIST_MASK_STATE: c_int = 0x0001;
-pub const wxLIST_MASK_TEXT: c_int = 0x0002;
-pub const wxLIST_MASK_IMAGE: c_int = 0x0004;
-pub const wxLIST_MASK_DATA: c_int = 0x0008;
-pub const wxLIST_SET_ITEM: c_int = 0x0010;
-pub const wxLIST_MASK_WIDTH: c_int = 0x0020;
-pub const wxLIST_MASK_FORMAT: c_int = 0x0040;
-pub const wxLIST_STATE_DONTCARE: c_int = 0x0000;
-pub const wxLIST_STATE_DROPHILITED: c_int = 0x0001;
-pub const wxLIST_STATE_FOCUSED: c_int = 0x0002;
-pub const wxLIST_STATE_SELECTED: c_int = 0x0004;
-pub const wxLIST_STATE_CUT: c_int = 0x0008;
-pub const wxLIST_HITTEST_ABOVE: c_int = 0x0001;
-pub const wxLIST_HITTEST_BELOW: c_int = 0x0002;
-pub const wxLIST_HITTEST_NOWHERE: c_int = 0x0004;
-pub const wxLIST_HITTEST_ONITEMICON: c_int = 0x0020;
-pub const wxLIST_HITTEST_ONITEMLABEL: c_int = 0x0080;
-pub const wxLIST_HITTEST_ONITEMSTATEICON: c_int = 0x0200;
-pub const wxLIST_HITTEST_TOLEFT: c_int = 0x0400;
-pub const wxLIST_HITTEST_TORIGHT: c_int = 0x0800;
-pub const wxLIST_HITTEST_ONITEM: c_int = (wxLIST_HITTEST_ONITEMICON | wxLIST_HITTEST_ONITEMLABEL | wxLIST_HITTEST_ONITEMSTATEICON);
-pub const wxLIST_GETSUBITEMRECT_WHOLEITEM: c_int = -1;
-//  ENUM: @32
-pub const wxLIST_NEXT_ABOVE: c_int = 0;
-pub const wxLIST_NEXT_ALL: c_int = 0 + 1;
-pub const wxLIST_NEXT_BELOW: c_int = 0 + 2;
-pub const wxLIST_NEXT_LEFT: c_int = 0 + 3;
-pub const wxLIST_NEXT_RIGHT: c_int = 0 + 4;
-//  ENUM: @33
-pub const wxLIST_ALIGN_DEFAULT: c_int = 0;
-pub const wxLIST_ALIGN_LEFT: c_int = 0 + 1;
-pub const wxLIST_ALIGN_TOP: c_int = 0 + 2;
-pub const wxLIST_ALIGN_SNAP_TO_GRID: c_int = 0 + 3;
-//  ENUM: wxListColumnFormat
-pub const wxLIST_FORMAT_LEFT: c_int = 0;
-pub const wxLIST_FORMAT_RIGHT: c_int = 0 + 1;
-pub const wxLIST_FORMAT_CENTRE: c_int = 0 + 2;
-pub const wxLIST_FORMAT_CENTER: c_int = wxLIST_FORMAT_CENTRE;
-//  ENUM: @34
-pub const wxLIST_AUTOSIZE: c_int = -1;
-pub const wxLIST_AUTOSIZE_USEHEADER: c_int = -2;
-//  ENUM: @35
-pub const wxLIST_RECT_BOUNDS: c_int = 0;
-pub const wxLIST_RECT_ICON: c_int = 0 + 1;
-pub const wxLIST_RECT_LABEL: c_int = 0 + 2;
-//  ENUM: @36
-pub const wxLIST_FIND_UP: c_int = 0;
-pub const wxLIST_FIND_DOWN: c_int = 0 + 1;
-pub const wxLIST_FIND_LEFT: c_int = 0 + 2;
-pub const wxLIST_FIND_RIGHT: c_int = 0 + 3;
-
-// NODEF: wxDISABLE_DEBUG_LOGGING_IN_RELEASE_BUILD
-//  ENUM: wxLogLevelValues
-pub const wxLOG_FatalError: c_int = 0;
-pub const wxLOG_Error: c_int = 0 + 1;
-pub const wxLOG_Warning: c_int = 0 + 2;
-pub const wxLOG_Message: c_int = 0 + 3;
-pub const wxLOG_Status: c_int = 0 + 4;
-pub const wxLOG_Info: c_int = 0 + 5;
-pub const wxLOG_Debug: c_int = 0 + 6;
-pub const wxLOG_Trace: c_int = 0 + 7;
-pub const wxLOG_Progress: c_int = 0 + 8;
-pub const wxLOG_User: c_int = 100;
-pub const wxLOG_Max: c_int = 10000;
-
-pub const wxPG_DEFAULT_STYLE: c_int = (0);
-pub const wxPGMAN_DEFAULT_STYLE: c_int = (0);
-//  SKIP: wxPGVFBFlags
-//  ENUM: wxPG_WINDOW_STYLES
-pub const wxPG_AUTO_SORT: c_int = 0x00000010;
-pub const wxPG_HIDE_CATEGORIES: c_int = 0x00000020;
-pub const wxPG_ALPHABETIC_MODE: c_int = (wxPG_HIDE_CATEGORIES|wxPG_AUTO_SORT);
-pub const wxPG_BOLD_MODIFIED: c_int = 0x00000040;
-pub const wxPG_SPLITTER_AUTO_CENTER: c_int = 0x00000080;
-pub const wxPG_TOOLTIPS: c_int = 0x00000100;
-pub const wxPG_HIDE_MARGIN: c_int = 0x00000200;
-pub const wxPG_STATIC_SPLITTER: c_int = 0x00000400;
-pub const wxPG_STATIC_LAYOUT: c_int = (wxPG_HIDE_MARGIN|wxPG_STATIC_SPLITTER);
-pub const wxPG_LIMITED_EDITING: c_int = 0x00000800;
-pub const wxPG_TOOLBAR: c_int = 0x00001000;
-pub const wxPG_DESCRIPTION: c_int = 0x00002000;
-pub const wxPG_NO_INTERNAL_BORDER: c_int = 0x00004000;
-pub const wxPG_WINDOW_STYLE_MASK: c_int = wxPG_AUTO_SORT|wxPG_HIDE_CATEGORIES|wxPG_BOLD_MODIFIED|
-                         wxPG_SPLITTER_AUTO_CENTER|wxPG_TOOLTIPS|wxPG_HIDE_MARGIN|
-                         wxPG_STATIC_SPLITTER|wxPG_LIMITED_EDITING|wxPG_TOOLBAR|
-                         wxPG_DESCRIPTION|wxPG_NO_INTERNAL_BORDER;
-//  ENUM: wxPG_EX_WINDOW_STYLES
-pub const wxPG_EX_INIT_NOCAT: c_int = 0x00001000;
-pub const wxPG_EX_NO_FLAT_TOOLBAR: c_int = 0x00002000;
-pub const wxPG_EX_MODE_BUTTONS: c_int = 0x00008000;
-pub const wxPG_EX_HELP_AS_TOOLTIPS: c_int = 0x00010000;
-pub const wxPG_EX_NATIVE_DOUBLE_BUFFERING: c_int = 0x00080000;
-pub const wxPG_EX_AUTO_UNSPECIFIED_VALUES: c_int = 0x00200000;
-pub const wxPG_EX_WRITEONLY_BUILTIN_ATTRIBUTES: c_int = 0x00400000;
-pub const wxPG_EX_HIDE_PAGE_BUTTONS: c_int = 0x01000000;
-pub const wxPG_EX_MULTIPLE_SELECTION: c_int = 0x02000000;
-pub const wxPG_EX_ENABLE_TLP_TRACKING: c_int = 0x04000000;
-pub const wxPG_EX_NO_TOOLBAR_DIVIDER: c_int = 0x04000000;
-pub const wxPG_EX_TOOLBAR_SEPARATOR: c_int = 0x08000000;
-pub const wxPG_EX_ALWAYS_ALLOW_FOCUS: c_int = 0x00100000;
-pub const wxPG_EX_WINDOW_PG_STYLE_MASK: c_int = wxPG_EX_INIT_NOCAT|wxPG_EX_HELP_AS_TOOLTIPS|wxPG_EX_NATIVE_DOUBLE_BUFFERING|
-                               wxPG_EX_AUTO_UNSPECIFIED_VALUES|wxPG_EX_WRITEONLY_BUILTIN_ATTRIBUTES|
-                               wxPG_EX_MULTIPLE_SELECTION|wxPG_EX_ENABLE_TLP_TRACKING|wxPG_EX_ALWAYS_ALLOW_FOCUS;
-pub const wxPG_EX_WINDOW_PGMAN_STYLE_MASK: c_int = wxPG_EX_NO_FLAT_TOOLBAR|wxPG_EX_MODE_BUTTONS|wxPG_EX_HIDE_PAGE_BUTTONS|
-                                  wxPG_EX_NO_TOOLBAR_DIVIDER|wxPG_EX_TOOLBAR_SEPARATOR;
-pub const wxPG_EX_WINDOW_STYLE_MASK: c_int = wxPG_EX_WINDOW_PG_STYLE_MASK|wxPG_EX_WINDOW_PGMAN_STYLE_MASK;
-//  ENUM: wxPG_VALIDATION_FAILURE_BEHAVIOR_FLAGS
-pub const wxPG_VFB_STAY_IN_PROPERTY: c_int = 0x01;
-pub const wxPG_VFB_BEEP: c_int = 0x02;
-pub const wxPG_VFB_MARK_CELL: c_int = 0x04;
-pub const wxPG_VFB_SHOW_MESSAGE: c_int = 0x08;
-pub const wxPG_VFB_SHOW_MESSAGEBOX: c_int = 0x10;
-pub const wxPG_VFB_SHOW_MESSAGE_ON_STATUSBAR: c_int = 0x20;
-pub const wxPG_VFB_DEFAULT: c_int = wxPG_VFB_MARK_CELL |
-                                      wxPG_VFB_SHOW_MESSAGEBOX;
-//  ENUM: wxPG_KEYBOARD_ACTIONS
-pub const wxPG_ACTION_INVALID: c_int = 0;
-pub const wxPG_ACTION_NEXT_PROPERTY: c_int = 0 + 1;
-pub const wxPG_ACTION_PREV_PROPERTY: c_int = 0 + 2;
-pub const wxPG_ACTION_EXPAND_PROPERTY: c_int = 0 + 3;
-pub const wxPG_ACTION_COLLAPSE_PROPERTY: c_int = 0 + 4;
-pub const wxPG_ACTION_CANCEL_EDIT: c_int = 0 + 5;
-pub const wxPG_ACTION_EDIT: c_int = 0 + 6;
-pub const wxPG_ACTION_PRESS_BUTTON: c_int = 0 + 7;
-pub const wxPG_ACTION_MAX: c_int = 0 + 8;
-
-pub const wxRE_READONLY: c_int = 0x0010;
-pub const wxRE_MULTILINE: c_int = 0x0020;
-pub const wxRE_CENTRE_CARET: c_int = 0x8000;
-pub const wxRE_CENTER_CARET: c_int = wxRE_CENTRE_CARET;
-pub const wxRICHTEXT_SHIFT_DOWN: c_int = 0x01;
-pub const wxRICHTEXT_CTRL_DOWN: c_int = 0x02;
-pub const wxRICHTEXT_ALT_DOWN: c_int = 0x04;
-pub const wxRICHTEXT_EX_NO_GUIDELINES: c_int = 0x00000100;
-//  SKIP: wxRICHTEXT_DEFAULT_OVERALL_SIZE
-//  SKIP: wxRICHTEXT_DEFAULT_IMAGE_SIZE
-pub const wxRICHTEXT_DEFAULT_SPACING: c_int = 3;
-pub const wxRICHTEXT_DEFAULT_MARGIN: c_int = 3;
-//  SKIP: wxRICHTEXT_DEFAULT_UNFOCUSSED_BACKGROUND
-//  SKIP: wxRICHTEXT_DEFAULT_FOCUSSED_BACKGROUND
-//  SKIP: wxRICHTEXT_DEFAULT_UNSELECTED_BACKGROUND
-//  SKIP: wxRICHTEXT_DEFAULT_TYPE_COLOUR
-//  SKIP: wxRICHTEXT_DEFAULT_FOCUS_RECT_COLOUR
-pub const wxRICHTEXT_DEFAULT_CARET_WIDTH: c_int = 2;
-pub const wxRICHTEXT_DEFAULT_DELAYED_LAYOUT_THRESHOLD: c_int = 20000;
-pub const wxRICHTEXT_DEFAULT_LAYOUT_INTERVAL: c_int = 50;
-pub const wxRICHTEXT_DEFAULT_DELAYED_IMAGE_PROCESSING_INTERVAL: c_int = 200;
-pub const wxID_RICHTEXT_PROPERTIES1: c_int = (wxID_HIGHEST + 1);
-pub const wxID_RICHTEXT_PROPERTIES2: c_int = (wxID_HIGHEST + 2);
-pub const wxID_RICHTEXT_PROPERTIES3: c_int = (wxID_HIGHEST + 3);
-//  ENUM: wxRichTextCtrlSelectionState
-pub const wxRichTextCtrlSelectionState_Normal: c_int = 0;
-pub const wxRichTextCtrlSelectionState_CommonAncestor: c_int = 0 + 1;
-
-//  ENUM: wxFlexSizerGrowMode
-pub const wxFLEX_GROWMODE_NONE: c_int = 0;
-pub const wxFLEX_GROWMODE_SPECIFIED: c_int = 0 + 1;
-pub const wxFLEX_GROWMODE_ALL: c_int = 0 + 2;
-
-//  ENUM: wxStreamError
-pub const wxSTREAM_NO_ERROR: c_int = 0;
-pub const wxSTREAM_EOF: c_int = 0 + 1;
-pub const wxSTREAM_WRITE_ERROR: c_int = 0 + 2;
-pub const wxSTREAM_READ_ERROR: c_int = 0 + 3;
-//  ENUM: wxStreamProtocolType
-pub const wxSTREAM_PROTOCOL: c_int = 0;
-pub const wxSTREAM_MIMETYPE: c_int = 0 + 1;
-pub const wxSTREAM_ENCODING: c_int = 0 + 2;
-pub const wxSTREAM_FILEEXT: c_int = 0 + 3;
-
-// NODEF: wxCRIT_SECT_DECLARE
-// NODEF: wxCRIT_SECT_DECLARE_MEMBER
-// NODEF: wxCRIT_SECT_LOCKER
-// NODEF: wxCRITICAL_SECTION
-// NODEF: wxLEAVE_CRIT_SECT
-// NODEF: wxENTER_CRIT_SECT
-//  ENUM: wxCondError
-pub const wxCOND_NO_ERROR: c_int = 0;
-pub const wxCOND_INVALID: c_int = 0 + 1;
-pub const wxCOND_TIMEOUT: c_int = 0 + 2;
-pub const wxCOND_MISC_ERROR: c_int = 0 + 3;
-//  ENUM: wxCriticalSectionType
-pub const wxCRITSEC_DEFAULT: c_int = 0;
-pub const wxCRITSEC_NON_RECURSIVE: c_int = 0 + 1;
-//  ENUM: wxThreadWait
-pub const wxTHREAD_WAIT_BLOCK: c_int = 0;
-pub const wxTHREAD_WAIT_YIELD: c_int = 0 + 1;
-pub const wxTHREAD_WAIT_DEFAULT: c_int = wxTHREAD_WAIT_YIELD;
-//  ENUM: wxThreadKind
-pub const wxTHREAD_DETACHED: c_int = 0;
-pub const wxTHREAD_JOINABLE: c_int = 0 + 1;
-//  ENUM: wxThreadError
-pub const wxTHREAD_NO_ERROR: c_int = 0;
-pub const wxTHREAD_NO_RESOURCE: c_int = 0 + 1;
-pub const wxTHREAD_RUNNING: c_int = 0 + 2;
-pub const wxTHREAD_NOT_RUNNING: c_int = 0 + 3;
-pub const wxTHREAD_KILLED: c_int = 0 + 4;
-pub const wxTHREAD_MISC_ERROR: c_int = 0 + 5;
-//  ENUM: wxSemaError
-pub const wxSEMA_NO_ERROR: c_int = 0;
-pub const wxSEMA_INVALID: c_int = 0 + 1;
-pub const wxSEMA_BUSY: c_int = 0 + 2;
-pub const wxSEMA_TIMEOUT: c_int = 0 + 3;
-pub const wxSEMA_OVERFLOW: c_int = 0 + 4;
-pub const wxSEMA_MISC_ERROR: c_int = 0 + 5;
-//  ENUM: wxMutexType
-pub const wxMUTEX_DEFAULT: c_int = 0;
-pub const wxMUTEX_RECURSIVE: c_int = 0 + 1;
-//  ENUM: wxMutexError
-pub const wxMUTEX_NO_ERROR: c_int = 0;
-pub const wxMUTEX_INVALID: c_int = 0 + 1;
-pub const wxMUTEX_DEAD_LOCK: c_int = 0 + 2;
-pub const wxMUTEX_BUSY: c_int = 0 + 3;
-pub const wxMUTEX_UNLOCKED: c_int = 0 + 4;
-pub const wxMUTEX_TIMEOUT: c_int = 0 + 5;
-pub const wxMUTEX_MISC_ERROR: c_int = 0 + 6;
-
-//  ENUM: wxToolBarToolStyle
-pub const wxTOOL_STYLE_BUTTON: c_int = 1;
-pub const wxTOOL_STYLE_SEPARATOR: c_int = 2;
-pub const wxTOOL_STYLE_CONTROL: c_int = 2 + 1;
-//  ENUM: @49
-pub const wxTB_HORIZONTAL: c_int = wxHORIZONTAL;
-pub const wxTB_TOP: c_int = wxTB_HORIZONTAL;
-pub const wxTB_VERTICAL: c_int = wxVERTICAL;
-pub const wxTB_LEFT: c_int = wxTB_VERTICAL;
-pub const wxTB_FLAT: c_int = wxTB_VERTICAL + 1;
-pub const wxTB_DOCKABLE: c_int = wxTB_VERTICAL + 2;
-pub const wxTB_NOICONS: c_int = wxTB_VERTICAL + 3;
-pub const wxTB_TEXT: c_int = wxTB_VERTICAL + 4;
-pub const wxTB_NODIVIDER: c_int = wxTB_VERTICAL + 5;
-pub const wxTB_NOALIGN: c_int = wxTB_VERTICAL + 6;
-pub const wxTB_HORZ_LAYOUT: c_int = wxTB_VERTICAL + 7;
-pub const wxTB_HORZ_TEXT: c_int = wxTB_HORZ_LAYOUT | wxTB_TEXT;
-pub const wxTB_NO_TOOLTIPS: c_int = wxTB_HORZ_LAYOUT | wxTB_TEXT + 1;
-pub const wxTB_BOTTOM: c_int = wxTB_HORZ_LAYOUT | wxTB_TEXT + 2;
-pub const wxTB_RIGHT: c_int = wxTB_HORZ_LAYOUT | wxTB_TEXT + 3;
-pub const wxTB_DEFAULT_STYLE: c_int = wxTB_HORIZONTAL;
 
 //  ENUM: wxLayoutDirection
 pub const wxLayout_Default: c_int = 0;
@@ -3323,6 +3140,18 @@ pub const wxMSGOUT_PREFER_STDERR: c_int = 0;
 pub const wxMSGOUT_PREFER_MSGBOX: c_int = 1;
 
 //  ENUM: wxMessageQueueError
+pub const wxMSGQUEUE_NO_ERROR: c_int = 0;
+pub const wxMSGQUEUE_TIMEOUT: c_int = 0 + 1;
+pub const wxMSGQUEUE_MISC_ERROR: c_int = 0 + 2;
+
+//  ENUM: wxAutomationInstanceFlags
+pub const wxAutomationInstance_UseExistingOnly: c_int = 0;
+pub const wxAutomationInstance_CreateIfNeeded: c_int = 1;
+pub const wxAutomationInstance_SilentIfNone: c_int = 2;
+
+//  ENUM: wxOleConvertVariantFlags
+pub const wxOleConvertVariant_Default: c_int = 0;
+pub const wxOleConvertVariant_ReturnSafeArrays: c_int = 1;
 
 pub const wxFRAME_SHAPED: c_int = 0x0010;
 
@@ -3364,10 +3193,6 @@ pub const wxODCB_PAINTING_SELECTED: c_int = 0x0002;
 //  ENUM: @39
 pub const wxODCB_DCLICK_CYCLES: c_int = wxCC_SPECIAL_DCLICK;
 pub const wxODCB_STD_CONTROL_PAINT: c_int = 0x1000;
-
-//  ENUM: wxOleConvertVariantFlags
-pub const wxOleConvertVariant_Default: c_int = 0;
-pub const wxOleConvertVariant_ReturnSafeArrays: c_int = 1;
 
 //  ENUM: wxPenStyle
 pub const wxPENSTYLE_INVALID: c_int = -1;
@@ -3522,6 +3347,11 @@ pub const wxPROPSHEET_LISTBOOK: c_int = 0x0010;
 pub const wxPROPSHEET_BUTTONTOOLBOOK: c_int = 0x0020;
 pub const wxPROPSHEET_TREEBOOK: c_int = 0x0040;
 pub const wxPROPSHEET_SHRINKTOFIT: c_int = 0x0100;
+
+pub const wxPG_COLOUR_WEB_BASE: c_int = 0x10000;
+pub const wxPG_COLOUR_CUSTOM: c_int = 0xFFFFFF;
+pub const wxPG_COLOUR_UNSPECIFIED: c_int = (wxPG_COLOUR_CUSTOM+1);
+pub const wxPG_PROP_TRANSLATE_CUSTOM: c_long = wxPG_PROP_CLASS_SPECIFIC_1;
 
 pub const wxPG_ATTR_DEFAULT_VALUE: &str = "DefaultValue";
 pub const wxPG_ATTR_MIN: &str = "Min";
@@ -3722,6 +3552,172 @@ pub const wxTITLEBAR_BUTTON_HELP: c_int = 0x10000000;
 pub const wxHDR_SORT_ICON_NONE: c_int = 0;
 pub const wxHDR_SORT_ICON_UP: c_int = 0 + 1;
 pub const wxHDR_SORT_ICON_DOWN: c_int = 0 + 2;
+
+//  ENUM: wxRibbonArtSetting
+pub const wxRIBBON_ART_TAB_SEPARATION_SIZE: c_int = 0;
+pub const wxRIBBON_ART_PAGE_BORDER_LEFT_SIZE: c_int = 0 + 1;
+pub const wxRIBBON_ART_PAGE_BORDER_TOP_SIZE: c_int = 0 + 2;
+pub const wxRIBBON_ART_PAGE_BORDER_RIGHT_SIZE: c_int = 0 + 3;
+pub const wxRIBBON_ART_PAGE_BORDER_BOTTOM_SIZE: c_int = 0 + 4;
+pub const wxRIBBON_ART_PANEL_X_SEPARATION_SIZE: c_int = 0 + 5;
+pub const wxRIBBON_ART_PANEL_Y_SEPARATION_SIZE: c_int = 0 + 6;
+pub const wxRIBBON_ART_TOOL_GROUP_SEPARATION_SIZE: c_int = 0 + 7;
+pub const wxRIBBON_ART_GALLERY_BITMAP_PADDING_LEFT_SIZE: c_int = 0 + 8;
+pub const wxRIBBON_ART_GALLERY_BITMAP_PADDING_RIGHT_SIZE: c_int = 0 + 9;
+pub const wxRIBBON_ART_GALLERY_BITMAP_PADDING_TOP_SIZE: c_int = 0 + 10;
+pub const wxRIBBON_ART_GALLERY_BITMAP_PADDING_BOTTOM_SIZE: c_int = 0 + 11;
+pub const wxRIBBON_ART_PANEL_LABEL_FONT: c_int = 0 + 12;
+pub const wxRIBBON_ART_BUTTON_BAR_LABEL_FONT: c_int = 0 + 13;
+pub const wxRIBBON_ART_TAB_LABEL_FONT: c_int = 0 + 14;
+pub const wxRIBBON_ART_BUTTON_BAR_LABEL_COLOUR: c_int = 0 + 15;
+pub const wxRIBBON_ART_BUTTON_BAR_LABEL_DISABLED_COLOUR: c_int = 0 + 16;
+pub const wxRIBBON_ART_BUTTON_BAR_HOVER_BORDER_COLOUR: c_int = 0 + 17;
+pub const wxRIBBON_ART_BUTTON_BAR_HOVER_BACKGROUND_TOP_COLOUR: c_int = 0 + 18;
+pub const wxRIBBON_ART_BUTTON_BAR_HOVER_BACKGROUND_TOP_GRADIENT_COLOUR: c_int = 0 + 19;
+pub const wxRIBBON_ART_BUTTON_BAR_HOVER_BACKGROUND_COLOUR: c_int = 0 + 20;
+pub const wxRIBBON_ART_BUTTON_BAR_HOVER_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 21;
+pub const wxRIBBON_ART_BUTTON_BAR_ACTIVE_BORDER_COLOUR: c_int = 0 + 22;
+pub const wxRIBBON_ART_BUTTON_BAR_ACTIVE_BACKGROUND_TOP_COLOUR: c_int = 0 + 23;
+pub const wxRIBBON_ART_BUTTON_BAR_ACTIVE_BACKGROUND_TOP_GRADIENT_COLOUR: c_int = 0 + 24;
+pub const wxRIBBON_ART_BUTTON_BAR_ACTIVE_BACKGROUND_COLOUR: c_int = 0 + 25;
+pub const wxRIBBON_ART_BUTTON_BAR_ACTIVE_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 26;
+pub const wxRIBBON_ART_GALLERY_BORDER_COLOUR: c_int = 0 + 27;
+pub const wxRIBBON_ART_GALLERY_HOVER_BACKGROUND_COLOUR: c_int = 0 + 28;
+pub const wxRIBBON_ART_GALLERY_BUTTON_BACKGROUND_COLOUR: c_int = 0 + 29;
+pub const wxRIBBON_ART_GALLERY_BUTTON_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 30;
+pub const wxRIBBON_ART_GALLERY_BUTTON_BACKGROUND_TOP_COLOUR: c_int = 0 + 31;
+pub const wxRIBBON_ART_GALLERY_BUTTON_FACE_COLOUR: c_int = 0 + 32;
+pub const wxRIBBON_ART_GALLERY_BUTTON_HOVER_BACKGROUND_COLOUR: c_int = 0 + 33;
+pub const wxRIBBON_ART_GALLERY_BUTTON_HOVER_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 34;
+pub const wxRIBBON_ART_GALLERY_BUTTON_HOVER_BACKGROUND_TOP_COLOUR: c_int = 0 + 35;
+pub const wxRIBBON_ART_GALLERY_BUTTON_HOVER_FACE_COLOUR: c_int = 0 + 36;
+pub const wxRIBBON_ART_GALLERY_BUTTON_ACTIVE_BACKGROUND_COLOUR: c_int = 0 + 37;
+pub const wxRIBBON_ART_GALLERY_BUTTON_ACTIVE_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 38;
+pub const wxRIBBON_ART_GALLERY_BUTTON_ACTIVE_BACKGROUND_TOP_COLOUR: c_int = 0 + 39;
+pub const wxRIBBON_ART_GALLERY_BUTTON_ACTIVE_FACE_COLOUR: c_int = 0 + 40;
+pub const wxRIBBON_ART_GALLERY_BUTTON_DISABLED_BACKGROUND_COLOUR: c_int = 0 + 41;
+pub const wxRIBBON_ART_GALLERY_BUTTON_DISABLED_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 42;
+pub const wxRIBBON_ART_GALLERY_BUTTON_DISABLED_BACKGROUND_TOP_COLOUR: c_int = 0 + 43;
+pub const wxRIBBON_ART_GALLERY_BUTTON_DISABLED_FACE_COLOUR: c_int = 0 + 44;
+pub const wxRIBBON_ART_GALLERY_ITEM_BORDER_COLOUR: c_int = 0 + 45;
+pub const wxRIBBON_ART_TAB_LABEL_COLOUR: c_int = 0 + 46;
+pub const wxRIBBON_ART_TAB_ACTIVE_LABEL_COLOUR: c_int = 0 + 47;
+pub const wxRIBBON_ART_TAB_HOVER_LABEL_COLOUR: c_int = 0 + 48;
+pub const wxRIBBON_ART_TAB_SEPARATOR_COLOUR: c_int = 0 + 49;
+pub const wxRIBBON_ART_TAB_SEPARATOR_GRADIENT_COLOUR: c_int = 0 + 50;
+pub const wxRIBBON_ART_TAB_CTRL_BACKGROUND_COLOUR: c_int = 0 + 51;
+pub const wxRIBBON_ART_TAB_CTRL_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 52;
+pub const wxRIBBON_ART_TAB_HOVER_BACKGROUND_TOP_COLOUR: c_int = 0 + 53;
+pub const wxRIBBON_ART_TAB_HOVER_BACKGROUND_TOP_GRADIENT_COLOUR: c_int = 0 + 54;
+pub const wxRIBBON_ART_TAB_HOVER_BACKGROUND_COLOUR: c_int = 0 + 55;
+pub const wxRIBBON_ART_TAB_HOVER_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 56;
+pub const wxRIBBON_ART_TAB_ACTIVE_BACKGROUND_TOP_COLOUR: c_int = 0 + 57;
+pub const wxRIBBON_ART_TAB_ACTIVE_BACKGROUND_TOP_GRADIENT_COLOUR: c_int = 0 + 58;
+pub const wxRIBBON_ART_TAB_ACTIVE_BACKGROUND_COLOUR: c_int = 0 + 59;
+pub const wxRIBBON_ART_TAB_ACTIVE_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 60;
+pub const wxRIBBON_ART_TAB_BORDER_COLOUR: c_int = 0 + 61;
+pub const wxRIBBON_ART_PANEL_BORDER_COLOUR: c_int = 0 + 62;
+pub const wxRIBBON_ART_PANEL_BORDER_GRADIENT_COLOUR: c_int = 0 + 63;
+pub const wxRIBBON_ART_PANEL_HOVER_BORDER_COLOUR: c_int = 0 + 64;
+pub const wxRIBBON_ART_PANEL_HOVER_BORDER_GRADIENT_COLOUR: c_int = 0 + 65;
+pub const wxRIBBON_ART_PANEL_MINIMISED_BORDER_COLOUR: c_int = 0 + 66;
+pub const wxRIBBON_ART_PANEL_MINIMISED_BORDER_GRADIENT_COLOUR: c_int = 0 + 67;
+pub const wxRIBBON_ART_PANEL_LABEL_BACKGROUND_COLOUR: c_int = 0 + 68;
+pub const wxRIBBON_ART_PANEL_LABEL_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 69;
+pub const wxRIBBON_ART_PANEL_LABEL_COLOUR: c_int = 0 + 70;
+pub const wxRIBBON_ART_PANEL_HOVER_LABEL_BACKGROUND_COLOUR: c_int = 0 + 71;
+pub const wxRIBBON_ART_PANEL_HOVER_LABEL_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 72;
+pub const wxRIBBON_ART_PANEL_HOVER_LABEL_COLOUR: c_int = 0 + 73;
+pub const wxRIBBON_ART_PANEL_MINIMISED_LABEL_COLOUR: c_int = 0 + 74;
+pub const wxRIBBON_ART_PANEL_ACTIVE_BACKGROUND_TOP_COLOUR: c_int = 0 + 75;
+pub const wxRIBBON_ART_PANEL_ACTIVE_BACKGROUND_TOP_GRADIENT_COLOUR: c_int = 0 + 76;
+pub const wxRIBBON_ART_PANEL_ACTIVE_BACKGROUND_COLOUR: c_int = 0 + 77;
+pub const wxRIBBON_ART_PANEL_ACTIVE_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 78;
+pub const wxRIBBON_ART_PAGE_BORDER_COLOUR: c_int = 0 + 79;
+pub const wxRIBBON_ART_PAGE_BACKGROUND_TOP_COLOUR: c_int = 0 + 80;
+pub const wxRIBBON_ART_PAGE_BACKGROUND_TOP_GRADIENT_COLOUR: c_int = 0 + 81;
+pub const wxRIBBON_ART_PAGE_BACKGROUND_COLOUR: c_int = 0 + 82;
+pub const wxRIBBON_ART_PAGE_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 83;
+pub const wxRIBBON_ART_PAGE_HOVER_BACKGROUND_TOP_COLOUR: c_int = 0 + 84;
+pub const wxRIBBON_ART_PAGE_HOVER_BACKGROUND_TOP_GRADIENT_COLOUR: c_int = 0 + 85;
+pub const wxRIBBON_ART_PAGE_HOVER_BACKGROUND_COLOUR: c_int = 0 + 86;
+pub const wxRIBBON_ART_PAGE_HOVER_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 87;
+pub const wxRIBBON_ART_TOOLBAR_BORDER_COLOUR: c_int = 0 + 88;
+pub const wxRIBBON_ART_TOOLBAR_HOVER_BORDER_COLOUR: c_int = 0 + 89;
+pub const wxRIBBON_ART_TOOLBAR_FACE_COLOUR: c_int = 0 + 90;
+pub const wxRIBBON_ART_TOOL_BACKGROUND_TOP_COLOUR: c_int = 0 + 91;
+pub const wxRIBBON_ART_TOOL_BACKGROUND_TOP_GRADIENT_COLOUR: c_int = 0 + 92;
+pub const wxRIBBON_ART_TOOL_BACKGROUND_COLOUR: c_int = 0 + 93;
+pub const wxRIBBON_ART_TOOL_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 94;
+pub const wxRIBBON_ART_TOOL_HOVER_BACKGROUND_TOP_COLOUR: c_int = 0 + 95;
+pub const wxRIBBON_ART_TOOL_HOVER_BACKGROUND_TOP_GRADIENT_COLOUR: c_int = 0 + 96;
+pub const wxRIBBON_ART_TOOL_HOVER_BACKGROUND_COLOUR: c_int = 0 + 97;
+pub const wxRIBBON_ART_TOOL_HOVER_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 98;
+pub const wxRIBBON_ART_TOOL_ACTIVE_BACKGROUND_TOP_COLOUR: c_int = 0 + 99;
+pub const wxRIBBON_ART_TOOL_ACTIVE_BACKGROUND_TOP_GRADIENT_COLOUR: c_int = 0 + 100;
+pub const wxRIBBON_ART_TOOL_ACTIVE_BACKGROUND_COLOUR: c_int = 0 + 101;
+pub const wxRIBBON_ART_TOOL_ACTIVE_BACKGROUND_GRADIENT_COLOUR: c_int = 0 + 102;
+pub const wxRIBBON_ART_BUTTON_BAR_LABEL_HIGHLIGHT_COLOUR: c_int = 0 + 103;
+pub const wxRIBBON_ART_BUTTON_BAR_LABEL_HIGHLIGHT_GRADIENT_COLOUR: c_int = 0 + 104;
+pub const wxRIBBON_ART_BUTTON_BAR_LABEL_HIGHLIGHT_TOP_COLOUR: c_int = 0 + 105;
+pub const wxRIBBON_ART_BUTTON_BAR_LABEL_HIGHLIGHT_GRADIENT_TOP_COLOUR: c_int = 0 + 106;
+//  ENUM: wxRibbonScrollButtonStyle
+pub const wxRIBBON_SCROLL_BTN_LEFT: c_int = 0;
+pub const wxRIBBON_SCROLL_BTN_RIGHT: c_int = 1;
+pub const wxRIBBON_SCROLL_BTN_UP: c_int = 2;
+pub const wxRIBBON_SCROLL_BTN_DOWN: c_int = 3;
+pub const wxRIBBON_SCROLL_BTN_DIRECTION_MASK: c_int = 3;
+pub const wxRIBBON_SCROLL_BTN_NORMAL: c_int = 0;
+pub const wxRIBBON_SCROLL_BTN_HOVERED: c_int = 4;
+pub const wxRIBBON_SCROLL_BTN_ACTIVE: c_int = 8;
+pub const wxRIBBON_SCROLL_BTN_STATE_MASK: c_int = 12;
+pub const wxRIBBON_SCROLL_BTN_FOR_OTHER: c_int = 0;
+pub const wxRIBBON_SCROLL_BTN_FOR_TABS: c_int = 16;
+pub const wxRIBBON_SCROLL_BTN_FOR_PAGE: c_int = 32;
+pub const wxRIBBON_SCROLL_BTN_FOR_MASK: c_int = 48;
+//  ENUM: wxRibbonButtonKind
+pub const wxRIBBON_BUTTON_NORMAL: c_int = 1 << 0;
+pub const wxRIBBON_BUTTON_DROPDOWN: c_int = 1 << 1;
+pub const wxRIBBON_BUTTON_HYBRID: c_int = wxRIBBON_BUTTON_NORMAL | wxRIBBON_BUTTON_DROPDOWN;
+pub const wxRIBBON_BUTTON_TOGGLE: c_int = 1 << 2;
+
+//  ENUM: wxRibbonBarOption
+pub const wxRIBBON_BAR_SHOW_PAGE_LABELS: c_int = 0;
+pub const wxRIBBON_BAR_SHOW_PAGE_ICONS: c_int = 0 + 1;
+pub const wxRIBBON_BAR_FLOW_HORIZONTAL: c_int = 0 + 2;
+pub const wxRIBBON_BAR_FLOW_VERTICAL: c_int = 0 + 3;
+pub const wxRIBBON_BAR_SHOW_PANEL_EXT_BUTTONS: c_int = 0 + 4;
+pub const wxRIBBON_BAR_SHOW_PANEL_MINIMISE_BUTTONS: c_int = 0 + 5;
+pub const wxRIBBON_BAR_ALWAYS_SHOW_TABS: c_int = 0 + 6;
+pub const wxRIBBON_BAR_SHOW_TOGGLE_BUTTON: c_int = 0 + 7;
+pub const wxRIBBON_BAR_SHOW_HELP_BUTTON: c_int = 0 + 8;
+pub const wxRIBBON_BAR_DEFAULT_STYLE: c_int = 0 + 9;
+pub const wxRIBBON_BAR_FOLDBAR_STYLE: c_int = 0 + 10;
+//  ENUM: wxRibbonDisplayMode
+pub const wxRIBBON_BAR_PINNED: c_int = 0;
+pub const wxRIBBON_BAR_MINIMIZED: c_int = 0 + 1;
+pub const wxRIBBON_BAR_EXPANDED: c_int = 0 + 2;
+
+//  ENUM: wxRibbonButtonBarButtonState
+pub const wxRIBBON_BUTTONBAR_BUTTON_SMALL: c_int = 0 << 0;
+pub const wxRIBBON_BUTTONBAR_BUTTON_MEDIUM: c_int = 1 << 0;
+pub const wxRIBBON_BUTTONBAR_BUTTON_LARGE: c_int = 2 << 0;
+pub const wxRIBBON_BUTTONBAR_BUTTON_SIZE_MASK: c_int = 3 << 0;
+pub const wxRIBBON_BUTTONBAR_BUTTON_NORMAL_HOVERED: c_int = 1 << 3;
+pub const wxRIBBON_BUTTONBAR_BUTTON_DROPDOWN_HOVERED: c_int = 1 << 4;
+pub const wxRIBBON_BUTTONBAR_BUTTON_HOVER_MASK: c_int = wxRIBBON_BUTTONBAR_BUTTON_NORMAL_HOVERED | wxRIBBON_BUTTONBAR_BUTTON_DROPDOWN_HOVERED;
+pub const wxRIBBON_BUTTONBAR_BUTTON_NORMAL_ACTIVE: c_int = 1 << 5;
+pub const wxRIBBON_BUTTONBAR_BUTTON_DROPDOWN_ACTIVE: c_int = 1 << 6;
+pub const wxRIBBON_BUTTONBAR_BUTTON_ACTIVE_MASK: c_int = wxRIBBON_BUTTONBAR_BUTTON_NORMAL_ACTIVE | wxRIBBON_BUTTONBAR_BUTTON_DROPDOWN_ACTIVE;
+pub const wxRIBBON_BUTTONBAR_BUTTON_DISABLED: c_int = 1 << 7;
+pub const wxRIBBON_BUTTONBAR_BUTTON_TOGGLED: c_int = 1 << 8;
+pub const wxRIBBON_BUTTONBAR_BUTTON_STATE_MASK: c_int = 0x1F8;
+
+//  ENUM: wxRibbonGalleryButtonState
+pub const wxRIBBON_GALLERY_BUTTON_NORMAL: c_int = 0;
+pub const wxRIBBON_GALLERY_BUTTON_HOVERED: c_int = 0 + 1;
+pub const wxRIBBON_GALLERY_BUTTON_ACTIVE: c_int = 0 + 2;
+pub const wxRIBBON_GALLERY_BUTTON_DISABLED: c_int = 0 + 3;
 
 //  ENUM: wxRibbonPanelOption
 pub const wxRIBBON_PANEL_NO_AUTO_MINIMISE: c_int = 0;
@@ -6356,18 +6352,6 @@ pub const wxSTOCK_WITH_ACCELERATOR: c_int = 2;
 pub const wxSTOCK_WITHOUT_ELLIPSIS: c_int = 4;
 pub const wxSTOCK_FOR_BUTTON: c_int = wxSTOCK_WITHOUT_ELLIPSIS | wxSTOCK_WITH_MNEMONIC;
 
-//  ENUM: @8
-pub const MovableButton: c_int = 0x0001;
-pub const BitmapButton: c_int = 0x0002;
-pub const ButtonSpacing: c_int = 0x0004;
-pub const TextIndent: c_int = 0x0008;
-pub const PaintControl: c_int = 0x0010;
-pub const PaintWritable: c_int = 0x0020;
-pub const Borderless: c_int = 0x0040;
-pub const All: c_int = MovableButton | BitmapButton | ButtonSpacing |
-                          TextIndent | PaintControl | PaintWritable |
-                          Borderless;
-
 //  ENUM: wxTarType
 pub const wxTAR_REGTYPE: char = '0';
 pub const wxTAR_LNKTYPE: char = '1';
@@ -6530,6 +6514,7 @@ pub const wxTextFileType_Mac: c_int = 0 + 3;
 pub const wxTextFileType_Os2: c_int = 0 + 4;
 
 //  ENUM: @48
+pub const wxTP_DEFAULT: c_int = 0;
 
 pub const wxTIMER_CONTINUOUS: bool = false;
 pub const wxTIMER_ONE_SHOT: bool = true;
@@ -6673,6 +6658,10 @@ pub const wxEXEC_HIDE_CONSOLE: c_int = 32;
 pub const wxEXEC_BLOCK: c_int = wxEXEC_SYNC | wxEXEC_NOEVENTS;
 
 //  ENUM: wxNumValidatorStyle
+pub const wxNUM_VAL_DEFAULT: c_int = 0;
+pub const wxNUM_VAL_THOUSANDS_SEPARATOR: c_int = 1;
+pub const wxNUM_VAL_ZERO_AS_BLANK: c_int = 2;
+pub const wxNUM_VAL_NO_TRAILING_ZEROES: c_int = 2 + 1;
 
 //  ENUM: wxTextValidatorStyle
 pub const wxFILTER_NONE: c_int = 0;
@@ -6898,4 +6887,15 @@ pub const wxZLIB_NO_HEADER: c_int = 0;
 pub const wxZLIB_ZLIB: c_int = 1;
 pub const wxZLIB_GZIP: c_int = 2;
 pub const wxZLIB_AUTO: c_int = 3;
+
+//  ENUM: @48
+
+//  ENUM: wxMessageQueueError
+
+//  ENUM: wxNumValidatorStyle
+
+//  ENUM: wxAuiToolBarStyle
+//  ENUM: wxAuiToolBarArtSetting
+//  ENUM: wxAuiToolBarToolTextOrientation
+//  ENUM: wxAuiPaneDockArtSetting
 
