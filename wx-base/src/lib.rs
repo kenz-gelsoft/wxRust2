@@ -4,8 +4,8 @@ use std::ptr;
 
 mod macros;
 
-mod defs;
-pub use defs::*;
+mod constants;
+pub use constants::*;
 mod manual;
 pub use manual::*;
 
