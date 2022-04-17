@@ -42,9 +42,17 @@ def xml_files_in(dir):
     with open(index, 'r') as f:
         tree = ET.parse(f)
         root = tree.getroot()
-        for compound in root.findall("./compound"):
-            xml = compound.get('refid') + '.xml'
-            yield os.path.join(dir, xml)
+        for compound in root.findall('./compound'):
+            if has_constants(compound):
+                xml = compound.get('refid') + '.xml'
+                yield os.path.join(dir, xml)
+
+def has_constants(compound):
+    for member in compound.findall("./member"):
+        kind = member.get('kind')
+        if kind in ['define', 'enum']:
+            return True
+    return False
 
 def defines_in(root):
     memberdefs = root.findall(".//memberdef[@kind='define']")
