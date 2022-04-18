@@ -261,6 +261,7 @@ def generate_enum(e, f):
         if "'" in initializer:
             t = 'char'
         vname = RE_IDENT.sub(r'\1', vname)
+        initializer = RE_IDENT.sub(r'\1', initializer)
         print('pub const %s: %s %s;' % (vname, t, initializer),
                 file=f)
 
