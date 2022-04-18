@@ -15,7 +15,8 @@ use std::os::raw::{c_int, c_long};
 use crate::manual::*;
 '''
 
-RE_IDENT = re.compile(r'wx(\w)')
+# MEMO: don't replace `wx` prefix of `wx_GL_COMPAT_PROFILE`
+RE_IDENT = re.compile(r'wx([^_]\w)')
 
 # place wxWidgets doxygen xml files in wxml/ dir and run this.
 generated = set()
@@ -259,6 +260,7 @@ def generate_enum(e, f):
             t = 'c_long'
         if "'" in initializer:
             t = 'char'
+        vname = RE_IDENT.sub(r'\1', vname)
         print('pub const %s: %s %s;' % (vname, t, initializer),
                 file=f)
 
