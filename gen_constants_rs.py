@@ -15,6 +15,8 @@ use std::os::raw::{c_int, c_long};
 use crate::manual::*;
 '''
 
+RE_IDENT = re.compile(r'wx(\w)')
+
 # place wxWidgets doxygen xml files in wxml/ dir and run this.
 generated = set()
 def main():
@@ -151,6 +153,7 @@ def generate_define(e, f):
         v = re.sub(r'wxString\((".+")\)', r'\1', v)
         v = re.sub(r'wxS\((".+")\)', r'\1', v)
         v = re.sub(r'wxT\((".+")\)', r'\1', v)
+        name = RE_IDENT.sub(r'\1', name)
         print('pub const %s: %s = %s;' % (name, t, v),
                 file=f)
     else:
