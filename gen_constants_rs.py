@@ -153,6 +153,9 @@ def generate_define(e, f):
         v = re.sub(r'wxString\((".+")\)', r'\1', v)
         v = re.sub(r'wxS\((".+")\)', r'\1', v)
         v = re.sub(r'wxT\((".+")\)', r'\1', v)
+        # Don't strip `wx` prefix of string literal (c.f. IMAGE_OPTION_BMP_FORMAT)
+        if '"' not in v:
+            v = RE_IDENT.sub(r'\1', v)
         name = RE_IDENT.sub(r'\1', name)
         print('pub const %s: %s = %s;' % (name, t, v),
                 file=f)

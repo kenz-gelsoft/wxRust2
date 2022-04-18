@@ -389,7 +389,7 @@ pub const BK_TOP: c_int = 0x0010;
 pub const BK_BOTTOM: c_int = 0x0020;
 pub const BK_LEFT: c_int = 0x0040;
 pub const BK_RIGHT: c_int = 0x0080;
-pub const BK_ALIGN_MASK: c_int = (wxBK_TOP | wxBK_BOTTOM | wxBK_LEFT | wxBK_RIGHT);
+pub const BK_ALIGN_MASK: c_int = (BK_TOP | BK_BOTTOM | BK_LEFT | BK_RIGHT);
 //  SKIP: wxBookCtrl
 //  ENUM: @2
 pub const wxBK_HITTEST_NOWHERE: c_int = 1;
@@ -435,7 +435,7 @@ pub const wxMM_TWIPS: c_int = 1 + 3;
 pub const wxMM_POINTS: c_int = 1 + 4;
 
 pub const DIALOG_NO_PARENT: c_int = 0x00000020;
-pub const DEFAULT_DIALOG_STYLE: c_long = (wxCAPTION | wxSYSTEM_MENU | wxCLOSE_BOX);
+pub const DEFAULT_DIALOG_STYLE: c_long = (CAPTION | SYSTEM_MENU | CLOSE_BOX);
 pub const DIALOG_ADAPTATION_NONE: c_int = 0;
 pub const DIALOG_ADAPTATION_STANDARD_SIZER: c_int = 1;
 pub const DIALOG_ADAPTATION_ANY_SIZER: c_int = 2;
@@ -658,9 +658,9 @@ pub const LC_NO_SORT_HEADER: c_int = 0x1000;
 pub const LC_SINGLE_SEL: c_int = 0x2000;
 pub const LC_SORT_ASCENDING: c_int = 0x4000;
 pub const LC_SORT_DESCENDING: c_int = 0x8000;
-pub const LC_MASK_TYPE: c_int = (wxLC_ICON | wxLC_SMALL_ICON | wxLC_LIST | wxLC_REPORT);
-pub const LC_MASK_ALIGN: c_int = (wxLC_ALIGN_TOP | wxLC_ALIGN_LEFT);
-pub const LC_MASK_SORT: c_int = (wxLC_SORT_ASCENDING | wxLC_SORT_DESCENDING);
+pub const LC_MASK_TYPE: c_int = (LC_ICON | LC_SMALL_ICON | LC_LIST | LC_REPORT);
+pub const LC_MASK_ALIGN: c_int = (LC_ALIGN_TOP | LC_ALIGN_LEFT);
+pub const LC_MASK_SORT: c_int = (LC_SORT_ASCENDING | LC_SORT_DESCENDING);
 pub const LIST_MASK_STATE: c_int = 0x0001;
 pub const LIST_MASK_TEXT: c_int = 0x0002;
 pub const LIST_MASK_IMAGE: c_int = 0x0004;
@@ -681,7 +681,7 @@ pub const LIST_HITTEST_ONITEMLABEL: c_int = 0x0080;
 pub const LIST_HITTEST_ONITEMSTATEICON: c_int = 0x0200;
 pub const LIST_HITTEST_TOLEFT: c_int = 0x0400;
 pub const LIST_HITTEST_TORIGHT: c_int = 0x0800;
-pub const LIST_HITTEST_ONITEM: c_int = (wxLIST_HITTEST_ONITEMICON | wxLIST_HITTEST_ONITEMLABEL | wxLIST_HITTEST_ONITEMSTATEICON);
+pub const LIST_HITTEST_ONITEM: c_int = (LIST_HITTEST_ONITEMICON | LIST_HITTEST_ONITEMLABEL | LIST_HITTEST_ONITEMSTATEICON);
 pub const LIST_GETSUBITEMRECT_WHOLEITEM: c_int = -1;
 //  ENUM: @32
 pub const wxLIST_NEXT_ABOVE: c_int = 0;
@@ -790,7 +790,7 @@ pub const wxPG_ACTION_MAX: c_int = 0 + 8;
 pub const RE_READONLY: c_int = 0x0010;
 pub const RE_MULTILINE: c_int = 0x0020;
 pub const RE_CENTRE_CARET: c_int = 0x8000;
-pub const RE_CENTER_CARET: c_int = wxRE_CENTRE_CARET;
+pub const RE_CENTER_CARET: c_int = RE_CENTRE_CARET;
 pub const RICHTEXT_SHIFT_DOWN: c_int = 0x01;
 pub const RICHTEXT_CTRL_DOWN: c_int = 0x02;
 pub const RICHTEXT_ALT_DOWN: c_int = 0x04;
@@ -808,9 +808,9 @@ pub const RICHTEXT_DEFAULT_CARET_WIDTH: c_int = 2;
 pub const RICHTEXT_DEFAULT_DELAYED_LAYOUT_THRESHOLD: c_int = 20000;
 pub const RICHTEXT_DEFAULT_LAYOUT_INTERVAL: c_int = 50;
 pub const RICHTEXT_DEFAULT_DELAYED_IMAGE_PROCESSING_INTERVAL: c_int = 200;
-pub const ID_RICHTEXT_PROPERTIES1: c_int = (wxID_HIGHEST + 1);
-pub const ID_RICHTEXT_PROPERTIES2: c_int = (wxID_HIGHEST + 2);
-pub const ID_RICHTEXT_PROPERTIES3: c_int = (wxID_HIGHEST + 3);
+pub const ID_RICHTEXT_PROPERTIES1: c_int = (ID_HIGHEST + 1);
+pub const ID_RICHTEXT_PROPERTIES2: c_int = (ID_HIGHEST + 2);
+pub const ID_RICHTEXT_PROPERTIES3: c_int = (ID_HIGHEST + 3);
 //  ENUM: wxRichTextCtrlSelectionState
 pub const wxRichTextCtrlSelectionState_Normal: c_int = 0;
 pub const wxRichTextCtrlSelectionState_CommonAncestor: c_int = 0 + 1;
@@ -1078,7 +1078,7 @@ pub const wxACC_SEL_ADDSELECTION: c_int = 8;
 pub const wxACC_SEL_REMOVESELECTION: c_int = 16;
 
 pub const AC_NO_AUTORESIZE: c_int = (0x0010);
-pub const AC_DEFAULT_STYLE: c_long = (wxBORDER_NONE);
+pub const AC_DEFAULT_STYLE: c_long = (BORDER_NONE);
 //  ENUM: wxAnimationType
 pub const wxANIMATION_TYPE_INVALID: c_int = 0;
 pub const wxANIMATION_TYPE_GIF: c_int = 0 + 1;
@@ -1098,7 +1098,7 @@ pub const BU_LEFT: c_int = 0x0040;
 pub const BU_TOP: c_int = 0x0080;
 pub const BU_RIGHT: c_int = 0x0100;
 pub const BU_BOTTOM: c_int = 0x0200;
-pub const BU_ALIGN_MASK: c_int = ( wxBU_LEFT | wxBU_TOP | wxBU_RIGHT | wxBU_BOTTOM );
+pub const BU_ALIGN_MASK: c_int = ( BU_LEFT | BU_TOP | BU_RIGHT | BU_BOTTOM );
 pub const BU_EXACTFIT: c_int = 0x0001;
 pub const BU_NOTEXT: c_int = 0x0002;
 pub const BU_AUTODRAW: c_int = 0x0004;
@@ -1273,18 +1273,18 @@ pub const wxCHK_UNDETERMINED: c_int = 0 + 2;
 
 pub const CHOICE_WIDTH: c_int = 150;
 pub const CHOICE_HEIGHT: c_int = 200;
-pub const CHOICEDLG_STYLE: c_long = (wxDEFAULT_DIALOG_STYLE | wxOK | wxCANCEL | wxCENTRE | wxRESIZE_BORDER);
+pub const CHOICEDLG_STYLE: c_long = (DEFAULT_DIALOG_STYLE | OK | CANCEL | CENTRE | RESIZE_BORDER);
 
-pub const CHB_DEFAULT: c_int = wxBK_DEFAULT;
-pub const CHB_TOP: c_int = wxBK_TOP;
-pub const CHB_BOTTOM: c_int = wxBK_BOTTOM;
-pub const CHB_LEFT: c_int = wxBK_LEFT;
-pub const CHB_RIGHT: c_int = wxBK_RIGHT;
-pub const CHB_ALIGN_MASK: c_int = wxBK_ALIGN_MASK;
+pub const CHB_DEFAULT: c_int = BK_DEFAULT;
+pub const CHB_TOP: c_int = BK_TOP;
+pub const CHB_BOTTOM: c_int = BK_BOTTOM;
+pub const CHB_LEFT: c_int = BK_LEFT;
+pub const CHB_RIGHT: c_int = BK_RIGHT;
+pub const CHB_ALIGN_MASK: c_int = BK_ALIGN_MASK;
 
 // NODEF: wxTheClipboard
 
-pub const CLRP_USE_TEXTCTRL: c_int = (wxPB_USE_TEXTCTRL);
+pub const CLRP_USE_TEXTCTRL: c_int = (PB_USE_TEXTCTRL);
 pub const CLRP_DEFAULT_STYLE: c_int = 0;
 pub const CLRP_SHOW_LABEL: c_int = 0x0008;
 pub const CLRP_SHOW_ALPHA: c_int = 0x0010;
@@ -1333,7 +1333,7 @@ pub const wxPRINTBIN_CASSETTE: c_int = 0 + 12;
 pub const wxPRINTBIN_FORMSOURCE: c_int = 0 + 13;
 pub const wxPRINTBIN_USER: c_int = 0 + 14;
 
-pub const CP_DEFAULT_STYLE: c_long = (wxTAB_TRAVERSAL | wxNO_BORDER);
+pub const CP_DEFAULT_STYLE: c_long = (TAB_TRAVERSAL | NO_BORDER);
 pub const CP_NO_TLW_RESIZE: c_int = (0x0002);
 
 //  ENUM: @5
@@ -1429,7 +1429,7 @@ pub const wxSVG_SHAPE_RENDERING_OPTIMISE_SPEED: c_int = wxSVG_SHAPE_RENDERING_OP
 
 pub const SIZE_AUTO_WIDTH: c_int = 0x0001;
 pub const SIZE_AUTO_HEIGHT: c_int = 0x0002;
-pub const SIZE_AUTO: c_int = (wxSIZE_AUTO_WIDTH|wxSIZE_AUTO_HEIGHT);
+pub const SIZE_AUTO: c_int = (SIZE_AUTO_WIDTH|SIZE_AUTO_HEIGHT);
 pub const SIZE_USE_EXISTING: c_int = 0x0000;
 pub const SIZE_ALLOW_MINUS_ONE: c_int = 0x0004;
 pub const SIZE_NO_ADJUSTMENTS: c_int = 0x0008;
@@ -1438,13 +1438,13 @@ pub const SIZE_FORCE_EVENT: c_int = 0x0020;
 pub const VSCROLL: c_long = 0x80000000;
 pub const HSCROLL: c_long = 0x40000000;
 pub const CAPTION: c_long = 0x20000000;
-pub const DOUBLE_BORDER: c_long = wxBORDER_DOUBLE;
-pub const SUNKEN_BORDER: c_long = wxBORDER_SUNKEN;
-pub const RAISED_BORDER: c_long = wxBORDER_RAISED;
-pub const BORDER: c_long = wxBORDER_SIMPLE;
-pub const SIMPLE_BORDER: c_long = wxBORDER_SIMPLE;
-pub const STATIC_BORDER: c_long = wxBORDER_STATIC;
-pub const NO_BORDER: c_long = wxBORDER_NONE;
+pub const DOUBLE_BORDER: c_long = BORDER_DOUBLE;
+pub const SUNKEN_BORDER: c_long = BORDER_SUNKEN;
+pub const RAISED_BORDER: c_long = BORDER_RAISED;
+pub const BORDER: c_long = BORDER_SIMPLE;
+pub const SIMPLE_BORDER: c_long = BORDER_SIMPLE;
+pub const STATIC_BORDER: c_long = BORDER_STATIC;
+pub const NO_BORDER: c_long = BORDER_NONE;
 pub const ALWAYS_SHOW_SB: c_long = 0x00800000;
 pub const CLIP_CHILDREN: c_long = 0x00400000;
 pub const CLIP_SIBLINGS: c_long = 0x20000000;
@@ -1452,11 +1452,11 @@ pub const TRANSPARENT_WINDOW: c_long = 0x00100000;
 pub const TAB_TRAVERSAL: c_long = 0x00080000;
 pub const WANTS_CHARS: c_long = 0x00040000;
 pub const RETAINED: c_long = 0x00000000;
-pub const BACKINGSTORE: c_long = wxRETAINED;
+pub const BACKINGSTORE: c_long = RETAINED;
 pub const POPUP_WINDOW: c_long = 0x00020000;
 pub const FULL_REPAINT_ON_RESIZE: c_long = 0x00010000;
 pub const NO_FULL_REPAINT_ON_RESIZE: c_int = 0;
-pub const WINDOW_STYLE_MASK: c_long = (wxVSCROLL|wxHSCROLL|wxBORDER_MASK|wxALWAYS_SHOW_SB|wxCLIP_CHILDREN| wxCLIP_SIBLINGS|wxTRANSPARENT_WINDOW|wxTAB_TRAVERSAL|wxWANTS_CHARS| wxRETAINED|wxPOPUP_WINDOW|wxFULL_REPAINT_ON_RESIZE);
+pub const WINDOW_STYLE_MASK: c_long = (VSCROLL|HSCROLL|BORDER_MASK|ALWAYS_SHOW_SB|CLIP_CHILDREN| CLIP_SIBLINGS|TRANSPARENT_WINDOW|TAB_TRAVERSAL|WANTS_CHARS| RETAINED|POPUP_WINDOW|FULL_REPAINT_ON_RESIZE);
 pub const WS_EX_BLOCK_EVENTS: c_int = 0x00000002;
 pub const WS_EX_TRANSIENT: c_int = 0x00000004;
 pub const WS_EX_THEMED_BACKGROUND: c_int = 0x00000008;
@@ -1465,8 +1465,8 @@ pub const WS_EX_PROCESS_UI_UPDATES: c_int = 0x00000020;
 pub const FRAME_EX_METAL: c_int = 0x00000040;
 pub const DIALOG_EX_METAL: c_int = 0x00000040;
 pub const WS_EX_CONTEXTHELP: c_int = 0x00000080;
-pub const FRAME_EX_CONTEXTHELP: c_int = wxWS_EX_CONTEXTHELP;
-pub const DIALOG_EX_CONTEXTHELP: c_int = wxWS_EX_CONTEXTHELP;
+pub const FRAME_EX_CONTEXTHELP: c_int = WS_EX_CONTEXTHELP;
+pub const DIALOG_EX_CONTEXTHELP: c_int = WS_EX_CONTEXTHELP;
 pub const FRAME_DRAWER: c_int = 0x0020;
 pub const FRAME_NO_WINDOW_MENU: c_int = 0x0100;
 pub const MB_DOCKABLE: c_int = 0x0001;
@@ -1481,7 +1481,7 @@ pub const LB_NEEDED_SB: c_int = 0x0000;
 pub const LB_OWNERDRAW: c_int = 0x0100;
 pub const LB_ALWAYS_SB: c_int = 0x0200;
 pub const LB_NO_SB: c_int = 0x0400;
-pub const LB_HSCROLL: c_long = wxHSCROLL;
+pub const LB_HSCROLL: c_long = HSCROLL;
 pub const LB_INT_HEIGHT: c_int = 0x0800;
 pub const CB_SIMPLE: c_int = 0x0004;
 pub const CB_SORT: c_int = 0x0008;
@@ -1489,16 +1489,16 @@ pub const CB_READONLY: c_int = 0x0010;
 pub const CB_DROPDOWN: c_int = 0x0020;
 pub const RA_LEFTTORIGHT: c_int = 0x0001;
 pub const RA_TOPTOBOTTOM: c_int = 0x0002;
-pub const RA_SPECIFY_COLS: c_int = wxHORIZONTAL;
-pub const RA_SPECIFY_ROWS: c_int = wxVERTICAL;
-pub const RA_HORIZONTAL: c_int = wxHORIZONTAL;
-pub const RA_VERTICAL: c_int = wxVERTICAL;
+pub const RA_SPECIFY_COLS: c_int = HORIZONTAL;
+pub const RA_SPECIFY_ROWS: c_int = VERTICAL;
+pub const RA_HORIZONTAL: c_int = HORIZONTAL;
+pub const RA_VERTICAL: c_int = VERTICAL;
 pub const RB_GROUP: c_int = 0x0004;
 pub const RB_SINGLE: c_int = 0x0008;
-pub const SB_HORIZONTAL: c_int = wxHORIZONTAL;
-pub const SB_VERTICAL: c_int = wxVERTICAL;
-pub const SP_HORIZONTAL: c_int = wxHORIZONTAL /*  4 */;
-pub const SP_VERTICAL: c_int = wxVERTICAL   /*  8 */;
+pub const SB_HORIZONTAL: c_int = HORIZONTAL;
+pub const SB_VERTICAL: c_int = VERTICAL;
+pub const SP_HORIZONTAL: c_int = HORIZONTAL /*  4 */;
+pub const SP_VERTICAL: c_int = VERTICAL   /*  8 */;
 pub const SP_ARROW_KEYS: c_int = 0x4000;
 pub const SP_WRAP: c_int = 0x8000;
 pub const TC_RIGHTJUSTIFY: c_int = 0x0010;
@@ -1507,30 +1507,30 @@ pub const TC_TOP: c_int = 0x0000    /*  default */;
 pub const TC_LEFT: c_int = 0x0020;
 pub const TC_RIGHT: c_int = 0x0040;
 pub const TC_BOTTOM: c_int = 0x0080;
-pub const TC_MULTILINE: c_int = 0x0200    /* == wxNB_MULTILINE */;
+pub const TC_MULTILINE: c_int = 0x0200    /* == NB_MULTILINE */;
 pub const TC_OWNERDRAW: c_int = 0x0400;
-pub const BI_EXPAND: c_int = wxEXPAND;
-pub const LI_HORIZONTAL: c_int = wxHORIZONTAL;
-pub const LI_VERTICAL: c_int = wxVERTICAL;
+pub const BI_EXPAND: c_int = EXPAND;
+pub const LI_HORIZONTAL: c_int = HORIZONTAL;
+pub const LI_VERTICAL: c_int = VERTICAL;
 pub const YES: c_int = 0x00000002;
 pub const OK: c_long = 0x00000004;
 pub const NO: c_int = 0x00000008;
-pub const YES_NO: c_int = (wxYES | wxNO);
+pub const YES_NO: c_int = (YES | NO);
 pub const CANCEL: c_long = 0x00000010;
 pub const APPLY: c_int = 0x00000020;
 pub const CLOSE: c_int = 0x00000040;
 pub const OK_DEFAULT: c_int = 0x00000000  /* has no effect (default) */;
 pub const YES_DEFAULT: c_int = 0x00000000  /* has no effect (default) */;
-pub const NO_DEFAULT: c_int = 0x00000080  /* only valid with wxYES_NO */;
-pub const CANCEL_DEFAULT: c_long = 0x80000000  /* only valid with wxCANCEL */;
+pub const NO_DEFAULT: c_int = 0x00000080  /* only valid with YES_NO */;
+pub const CANCEL_DEFAULT: c_long = 0x80000000  /* only valid with CANCEL */;
 pub const ICON_EXCLAMATION: c_int = 0x00000100;
 pub const ICON_HAND: c_int = 0x00000200;
-pub const ICON_WARNING: c_int = wxICON_EXCLAMATION;
-pub const ICON_ERROR: c_int = wxICON_HAND;
+pub const ICON_WARNING: c_int = ICON_EXCLAMATION;
+pub const ICON_ERROR: c_int = ICON_HAND;
 pub const ICON_QUESTION: c_int = 0x00000400;
 pub const ICON_INFORMATION: c_int = 0x00000800;
-pub const ICON_STOP: c_int = wxICON_HAND;
-pub const ICON_ASTERISK: c_int = wxICON_INFORMATION;
+pub const ICON_STOP: c_int = ICON_HAND;
+pub const ICON_ASTERISK: c_int = ICON_INFORMATION;
 pub const HELP: c_int = 0x00001000;
 pub const FORWARD: c_int = 0x00002000;
 pub const BACKWARD: c_int = 0x00004000;
@@ -1539,7 +1539,7 @@ pub const MORE: c_int = 0x00010000;
 pub const SETUP: c_int = 0x00020000;
 pub const ICON_NONE: c_int = 0x00040000;
 pub const ICON_AUTH_NEEDED: c_int = 0x00080000;
-pub const ICON_MASK: c_int = (wxICON_EXCLAMATION|wxICON_HAND|wxICON_QUESTION|wxICON_INFORMATION|wxICON_NONE);
+pub const ICON_MASK: c_int = (ICON_EXCLAMATION|ICON_HAND|ICON_QUESTION|ICON_INFORMATION|ICON_NONE);
 pub const NOT_FOUND: c_int = (-1);
 pub const PRINT_QUALITY_HIGH: c_int = -1;
 pub const PRINT_QUALITY_MEDIUM: c_int = -2;
@@ -1547,7 +1547,7 @@ pub const PRINT_QUALITY_LOW: c_int = -3;
 pub const PRINT_QUALITY_DRAFT: c_int = -4;
 pub const STAY_ON_TOP: c_int = 0x8000;
 pub const ICONIZE: c_int = 0x4000;
-pub const MINIMIZE: c_int = wxICONIZE;
+pub const MINIMIZE: c_int = ICONIZE;
 pub const MAXIMIZE: c_int = 0x2000;
 pub const CLOSE_BOX: c_long = 0x1000;
 pub const SYSTEM_MENU: c_long = 0x0800;
@@ -2179,7 +2179,7 @@ pub const DD_DIR_MUST_EXIST: c_int = 0x0200;
 pub const DD_MULTIPLE: c_int = 0x0400;
 pub const DD_SHOW_HIDDEN: c_int = 0x0001;
 pub const DD_NEW_DIR_BUTTON: c_int = 0;
-pub const DD_DEFAULT_STYLE: c_long = (wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER);
+pub const DD_DEFAULT_STYLE: c_long = (DEFAULT_DIALOG_STYLE|RESIZE_BORDER);
 
 // NODEF: WX_APPEND_ARRAY
 // NODEF: WX_CLEAR_ARRAY
@@ -2209,7 +2209,7 @@ pub const EL_ALLOW_NEW: c_int = 0x0100;
 pub const EL_ALLOW_EDIT: c_int = 0x0200;
 pub const EL_ALLOW_DELETE: c_int = 0x0400;
 pub const EL_NO_REORDER: c_int = 0x0800;
-pub const EL_DEFAULT_STYLE: c_int = (wxEL_ALLOW_NEW | wxEL_ALLOW_EDIT | wxEL_ALLOW_DELETE);
+pub const EL_DEFAULT_STYLE: c_int = (EL_ALLOW_NEW | EL_ALLOW_EDIT | EL_ALLOW_DELETE);
 
 // NODEF: wxDEFINE_EVENT
 // NODEF: wxDECLARE_EVENT
@@ -2269,14 +2269,14 @@ pub const wxFR_NOUPDOWN: c_int = 2;
 pub const wxFR_NOMATCHCASE: c_int = 4;
 pub const wxFR_NOWHOLEWORD: c_int = 8;
 
-pub const FC_DEFAULT_STYLE: c_int = wxFC_OPEN;
+pub const FC_DEFAULT_STYLE: c_int = FC_OPEN;
 //  ENUM: @18
 pub const wxFC_OPEN: c_int = 0x0001;
 pub const wxFC_SAVE: c_int = 0x0002;
 pub const wxFC_MULTIPLE: c_int = 0x0004;
 pub const wxFC_NOSHOWHIDDEN: c_int = 0x0008;
 
-pub const FD_DEFAULT_STYLE: c_int = wxFD_OPEN;
+pub const FD_DEFAULT_STYLE: c_int = FD_OPEN;
 //  ENUM: @19
 pub const wxFD_OPEN: c_int = 0x0001;
 pub const wxFD_SAVE: c_int = 0x0002;
@@ -2369,14 +2369,14 @@ pub const FLP_SAVE: c_int = 0x0800;
 pub const FLP_OVERWRITE_PROMPT: c_int = 0x1000;
 pub const FLP_FILE_MUST_EXIST: c_int = 0x2000;
 pub const FLP_CHANGE_DIR: c_int = 0x4000;
-pub const FLP_SMALL: c_int = wxPB_SMALL;
-pub const FLP_USE_TEXTCTRL: c_int = (wxPB_USE_TEXTCTRL);
-pub const FLP_DEFAULT_STYLE: c_int = (wxFLP_OPEN|wxFLP_FILE_MUST_EXIST);
+pub const FLP_SMALL: c_int = PB_SMALL;
+pub const FLP_USE_TEXTCTRL: c_int = (PB_USE_TEXTCTRL);
+pub const FLP_DEFAULT_STYLE: c_int = (FLP_OPEN|FLP_FILE_MUST_EXIST);
 pub const DIRP_DIR_MUST_EXIST: c_int = 0x0008;
 pub const DIRP_CHANGE_DIR: c_int = 0x0010;
-pub const DIRP_SMALL: c_int = wxPB_SMALL;
-pub const DIRP_USE_TEXTCTRL: c_int = (wxPB_USE_TEXTCTRL);
-pub const DIRP_DEFAULT_STYLE: c_int = (wxDIRP_DIR_MUST_EXIST);
+pub const DIRP_SMALL: c_int = PB_SMALL;
+pub const DIRP_USE_TEXTCTRL: c_int = (PB_USE_TEXTCTRL);
+pub const DIRP_DEFAULT_STYLE: c_int = (DIRP_DIR_MUST_EXIST);
 
 //  ENUM: wxFileSystemOpenFlags
 pub const wxFS_READ: c_int = 1;
@@ -2384,9 +2384,9 @@ pub const wxFS_SEEKABLE: c_int = 4;
 
 pub const FNTP_FONTDESC_AS_LABEL: c_int = 0x0008;
 pub const FNTP_USEFONT_FOR_LABEL: c_int = 0x0010;
-pub const FONTBTN_DEFAULT_STYLE: c_int = (wxFNTP_FONTDESC_AS_LABEL | wxFNTP_USEFONT_FOR_LABEL);
-pub const FNTP_USE_TEXTCTRL: c_int = (wxPB_USE_TEXTCTRL);
-pub const FNTP_DEFAULT_STYLE: c_int = (wxFNTP_FONTDESC_AS_LABEL|wxFNTP_USEFONT_FOR_LABEL);
+pub const FONTBTN_DEFAULT_STYLE: c_int = (FNTP_FONTDESC_AS_LABEL | FNTP_USEFONT_FOR_LABEL);
+pub const FNTP_USE_TEXTCTRL: c_int = (PB_USE_TEXTCTRL);
+pub const FNTP_DEFAULT_STYLE: c_int = (FNTP_FONTDESC_AS_LABEL|FNTP_USEFONT_FOR_LABEL);
 
 pub const FRAME_NO_TASKBAR: c_int = 0x0002;
 pub const FRAME_TOOL_WINDOW: c_int = 0x0004;
@@ -2411,8 +2411,8 @@ pub const wxFSW_WARNING_NONE: c_int = 0;
 pub const wxFSW_WARNING_GENERAL: c_int = 0 + 1;
 pub const wxFSW_WARNING_OVERFLOW: c_int = 0 + 2;
 
-pub const GA_HORIZONTAL: c_int = wxHORIZONTAL;
-pub const GA_VERTICAL: c_int = wxVERTICAL;
+pub const GA_HORIZONTAL: c_int = HORIZONTAL;
+pub const GA_VERTICAL: c_int = VERTICAL;
 pub const GA_PROGRESS: c_int = 0x0010;
 pub const GA_SMOOTH: c_int = 0x0020;
 pub const GA_TEXT: c_int = 0x0040;
@@ -2600,7 +2600,7 @@ pub const HELP_NETSCAPE: c_int = 1;
 pub const wxHELP_SEARCH_INDEX: c_int = 0;
 pub const wxHELP_SEARCH_ALL: c_int = 0 + 1;
 
-pub const ID_HTML_HELPFRAME: c_int = (wxID_HIGHEST + 1);
+pub const ID_HTML_HELPFRAME: c_int = (ID_HIGHEST + 1);
 pub const HF_EMBEDDED: c_int = 0x00008000;
 pub const HF_DIALOG: c_int = 0x00010000;
 pub const HF_FRAME: c_int = 0x00020000;
@@ -2618,7 +2618,7 @@ pub const HF_MERGE_BOOKS: c_int = 0x0100;
 pub const HF_ICONS_BOOK: c_int = 0x0200;
 pub const HF_ICONS_BOOK_CHAPTER: c_int = 0x0400;
 pub const HF_ICONS_FOLDER: c_int = 0x0000;
-pub const HF_DEFAULT_STYLE: c_int = (wxHF_TOOLBAR | wxHF_CONTENTS | wxHF_INDEX | wxHF_SEARCH | wxHF_BOOKMARKS | wxHF_PRINT);
+pub const HF_DEFAULT_STYLE: c_int = (HF_TOOLBAR | HF_CONTENTS | HF_INDEX | HF_SEARCH | HF_BOOKMARKS | HF_PRINT);
 
 //  ENUM: @26
 pub const wxID_HTML_PANEL: c_int = wxID_HIGHEST + 10;
@@ -2675,9 +2675,9 @@ pub const HTML_INDENT_LEFT: c_int = 0x0010;
 pub const HTML_INDENT_RIGHT: c_int = 0x0020;
 pub const HTML_INDENT_TOP: c_int = 0x0040;
 pub const HTML_INDENT_BOTTOM: c_int = 0x0080;
-pub const HTML_INDENT_HORIZONTAL: c_int = (wxHTML_INDENT_LEFT | wxHTML_INDENT_RIGHT);
-pub const HTML_INDENT_VERTICAL: c_int = (wxHTML_INDENT_TOP | wxHTML_INDENT_BOTTOM);
-pub const HTML_INDENT_ALL: c_int = (wxHTML_INDENT_VERTICAL | wxHTML_INDENT_HORIZONTAL);
+pub const HTML_INDENT_HORIZONTAL: c_int = (HTML_INDENT_LEFT | HTML_INDENT_RIGHT);
+pub const HTML_INDENT_VERTICAL: c_int = (HTML_INDENT_TOP | HTML_INDENT_BOTTOM);
+pub const HTML_INDENT_ALL: c_int = (HTML_INDENT_VERTICAL | HTML_INDENT_HORIZONTAL);
 pub const HTML_COND_ISANCHOR: c_int = 1;
 pub const HTML_COND_ISIMAGEMAP: c_int = 2;
 pub const HTML_COND_USER: c_int = 10000;
@@ -2690,7 +2690,7 @@ pub const wxHTML_URL_OTHER: c_int = 0 + 2;
 pub const HW_SCROLLBAR_NEVER: c_int = 0x0002;
 pub const HW_SCROLLBAR_AUTO: c_int = 0x0004;
 pub const HW_NO_SELECTION: c_int = 0x0008;
-pub const HW_DEFAULT_STYLE: c_int = wxHW_SCROLLBAR_AUTO;
+pub const HW_DEFAULT_STYLE: c_int = HW_SCROLLBAR_AUTO;
 //  ENUM: wxHtmlOpeningStatus
 pub const wxHTML_OPEN: c_int = 0;
 pub const wxHTML_BLOCK: c_int = 0 + 1;
@@ -2701,14 +2701,14 @@ pub const wxPAGE_ODD: c_int = 0;
 pub const wxPAGE_EVEN: c_int = 0 + 1;
 pub const wxPAGE_ALL: c_int = 0 + 2;
 
-pub const HLB_DEFAULT_STYLE: c_long = wxBORDER_SUNKEN;
-pub const HLB_MULTIPLE: c_int = wxLB_MULTIPLE;
+pub const HLB_DEFAULT_STYLE: c_long = BORDER_SUNKEN;
+pub const HLB_MULTIPLE: c_int = LB_MULTIPLE;
 
 pub const HL_CONTEXTMENU: c_long = 0x0001;
 pub const HL_ALIGN_LEFT: c_int = 0x0002;
 pub const HL_ALIGN_RIGHT: c_int = 0x0004;
 pub const HL_ALIGN_CENTRE: c_long = 0x0008;
-pub const HL_DEFAULT_STYLE: c_long = (wxHL_CONTEXTMENU|wxNO_BORDER|wxHL_ALIGN_CENTRE);
+pub const HL_DEFAULT_STYLE: c_long = (HL_CONTEXTMENU|NO_BORDER|HL_ALIGN_CENTRE);
 
 pub const ICON_SCREEN_DEPTH: c_int = (-1);
 
@@ -3101,12 +3101,12 @@ pub const wxLAYOUT_BOTTOM: c_int = 0 + 4;
 // NODEF: wxFORCE_LINK_THIS_MODULE
 // NODEF: wxFORCE_LINK_MODULE
 
-pub const LB_DEFAULT: c_int = wxBK_DEFAULT;
-pub const LB_TOP: c_int = wxBK_TOP;
-pub const LB_BOTTOM: c_int = wxBK_BOTTOM;
-pub const LB_LEFT: c_int = wxBK_LEFT;
-pub const LB_RIGHT: c_int = wxBK_RIGHT;
-pub const LB_ALIGN_MASK: c_int = wxBK_ALIGN_MASK;
+pub const LB_DEFAULT: c_int = BK_DEFAULT;
+pub const LB_TOP: c_int = BK_TOP;
+pub const LB_BOTTOM: c_int = BK_BOTTOM;
+pub const LB_LEFT: c_int = BK_LEFT;
+pub const LB_RIGHT: c_int = BK_RIGHT;
+pub const LB_ALIGN_MASK: c_int = BK_ALIGN_MASK;
 
 // NODEF: wxLongLongFmtSpec
 
@@ -3155,11 +3155,11 @@ pub const wxOleConvertVariant_ReturnSafeArrays: c_int = 1;
 
 pub const FRAME_SHAPED: c_int = 0x0010;
 
-pub const NB_DEFAULT: c_int = wxBK_DEFAULT;
-pub const NB_TOP: c_int = wxBK_TOP;
-pub const NB_BOTTOM: c_int = wxBK_BOTTOM;
-pub const NB_LEFT: c_int = wxBK_LEFT;
-pub const NB_RIGHT: c_int = wxBK_RIGHT;
+pub const NB_DEFAULT: c_int = BK_DEFAULT;
+pub const NB_TOP: c_int = BK_TOP;
+pub const NB_BOTTOM: c_int = BK_BOTTOM;
+pub const NB_LEFT: c_int = BK_LEFT;
+pub const NB_RIGHT: c_int = BK_RIGHT;
 pub const NB_FIXEDWIDTH: c_int = 0x0100;
 pub const NB_MULTILINE: c_int = 0x0200;
 pub const NB_NOPAGETHEME: c_int = 0x0400;
@@ -3309,7 +3309,7 @@ pub const PREVIEW_ZOOM: c_int = 8;
 pub const PREVIEW_FIRST: c_int = 16;
 pub const PREVIEW_LAST: c_int = 32;
 pub const PREVIEW_GOTO: c_int = 64;
-pub const PREVIEW_DEFAULT: c_int = (wxPREVIEW_PREVIOUS|wxPREVIEW_NEXT|wxPREVIEW_ZOOM|wxPREVIEW_FIRST|wxPREVIEW_GOTO|wxPREVIEW_LAST);
+pub const PREVIEW_DEFAULT: c_int = (PREVIEW_PREVIOUS|PREVIEW_NEXT|PREVIEW_ZOOM|PREVIEW_FIRST|PREVIEW_GOTO|PREVIEW_LAST);
 pub const ID_PREVIEW_CLOSE: c_int = 1;
 pub const ID_PREVIEW_NEXT: c_int = 2;
 pub const ID_PREVIEW_PREVIOUS: c_int = 3;
@@ -3350,8 +3350,8 @@ pub const wxPROPSHEET_SHRINKTOFIT: c_int = 0x0100;
 
 pub const PG_COLOUR_WEB_BASE: c_int = 0x10000;
 pub const PG_COLOUR_CUSTOM: c_int = 0xFFFFFF;
-pub const PG_COLOUR_UNSPECIFIED: c_int = (wxPG_COLOUR_CUSTOM+1);
-pub const PG_PROP_TRANSLATE_CUSTOM: c_long = wxPG_PROP_CLASS_SPECIFIC_1;
+pub const PG_COLOUR_UNSPECIFIED: c_int = (PG_COLOUR_CUSTOM+1);
+pub const PG_PROP_TRANSLATE_CUSTOM: c_long = PG_PROP_CLASS_SPECIFIC_1;
 
 pub const PG_ATTR_DEFAULT_VALUE: &str = "DefaultValue";
 pub const PG_ATTR_MIN: &str = "Min";
@@ -3380,9 +3380,9 @@ pub const PG_ATTR_SPINCTRL_MOTION: &str = "MotionSpin";
 pub const PG_ATTR_MULTICHOICE_USERSTRINGMODE: &str = "UserStringMode";
 pub const PG_COLOUR_ALLOW_CUSTOM: &str = "AllowCustom";
 pub const PG_COLOUR_HAS_ALPHA: &str = "HasAlpha";
-pub const PG_PROP_MAX: c_long = wxPG_PROP_AUTO_UNSPECIFIED;
+pub const PG_PROP_MAX: c_long = PG_PROP_AUTO_UNSPECIFIED;
 //  SKIP: wxPG_PROP_PARENTAL_FLAGS
-pub const PG_STRING_STORED_FLAGS: c_long = (wxPG_PROP_DISABLED|wxPG_PROP_HIDDEN|wxPG_PROP_NOEDITOR|wxPG_PROP_COLLAPSED);
+pub const PG_STRING_STORED_FLAGS: c_long = (PG_PROP_DISABLED|PG_PROP_HIDDEN|PG_PROP_NOEDITOR|PG_PROP_COLLAPSED);
 //  SKIP: wxNullProperty
 //  SKIP: wxPGChoicesEmptyData
 //  ENUM: wxPGPropertyFlags
@@ -3484,13 +3484,13 @@ pub const wxPG_ITERATE_NORMAL: c_long = wxPG_ITERATE_PROPERTIES |
                       wxPG_ITERATE_HIDDEN;
 pub const wxPG_ITERATE_DEFAULT: c_long = wxPG_ITERATE_NORMAL;
 
-pub const PG_PROP_PASSWORD: c_long = wxPG_PROP_CLASS_SPECIFIC_2;
-pub const PG_PROP_STATIC_CHOICES: c_long = wxPG_PROP_CLASS_SPECIFIC_1;
-pub const PG_PROP_SHOW_FULL_FILENAME: c_long = wxPG_PROP_CLASS_SPECIFIC_1;
-pub const PG_PROP_ACTIVE_BTN: c_long = wxPG_PROP_CLASS_SPECIFIC_1;
-pub const PG_PROP_USE_CHECKBOX: c_long = wxPG_PROP_CLASS_SPECIFIC_1;
-pub const PG_PROP_USE_DCC: c_long = wxPG_PROP_CLASS_SPECIFIC_2;
-pub const AEDIALOG_STYLE: c_long = (wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxOK | wxCANCEL | wxCENTRE);
+pub const PG_PROP_PASSWORD: c_long = PG_PROP_CLASS_SPECIFIC_2;
+pub const PG_PROP_STATIC_CHOICES: c_long = PG_PROP_CLASS_SPECIFIC_1;
+pub const PG_PROP_SHOW_FULL_FILENAME: c_long = PG_PROP_CLASS_SPECIFIC_1;
+pub const PG_PROP_ACTIVE_BTN: c_long = PG_PROP_CLASS_SPECIFIC_1;
+pub const PG_PROP_USE_CHECKBOX: c_long = PG_PROP_CLASS_SPECIFIC_1;
+pub const PG_PROP_USE_DCC: c_long = PG_PROP_CLASS_SPECIFIC_2;
+pub const AEDIALOG_STYLE: c_long = (DEFAULT_DIALOG_STYLE | RESIZE_BORDER | OK | CANCEL | CENTRE);
 //  ENUM: wxPGNumericValidationConstants
 pub const wxPG_PROPERTY_VALIDATION_ERROR_MESSAGE: c_int = 0;
 pub const wxPG_PROPERTY_VALIDATION_SATURATE: c_int = 1;
@@ -3885,9 +3885,9 @@ pub const RICHTEXT_ORGANISER_SHOW_PARAGRAPH: c_int = 0x0200;
 pub const RICHTEXT_ORGANISER_SHOW_LIST: c_int = 0x0400;
 pub const RICHTEXT_ORGANISER_SHOW_BOX: c_int = 0x0800;
 pub const RICHTEXT_ORGANISER_SHOW_ALL: c_int = 0x1000;
-pub const RICHTEXT_ORGANISER_ORGANISE: c_int = (wxRICHTEXT_ORGANISER_SHOW_ALL|wxRICHTEXT_ORGANISER_DELETE_STYLES|wxRICHTEXT_ORGANISER_CREATE_STYLES|wxRICHTEXT_ORGANISER_APPLY_STYLES|wxRICHTEXT_ORGANISER_EDIT_STYLES|wxRICHTEXT_ORGANISER_RENAME_STYLES);
-pub const RICHTEXT_ORGANISER_BROWSE: c_int = (wxRICHTEXT_ORGANISER_SHOW_ALL|wxRICHTEXT_ORGANISER_OK_CANCEL);
-pub const RICHTEXT_ORGANISER_BROWSE_NUMBERING: c_int = (wxRICHTEXT_ORGANISER_SHOW_LIST|wxRICHTEXT_ORGANISER_OK_CANCEL|wxRICHTEXT_ORGANISER_RENUMBER);
+pub const RICHTEXT_ORGANISER_ORGANISE: c_int = (RICHTEXT_ORGANISER_SHOW_ALL|RICHTEXT_ORGANISER_DELETE_STYLES|RICHTEXT_ORGANISER_CREATE_STYLES|RICHTEXT_ORGANISER_APPLY_STYLES|RICHTEXT_ORGANISER_EDIT_STYLES|RICHTEXT_ORGANISER_RENAME_STYLES);
+pub const RICHTEXT_ORGANISER_BROWSE: c_int = (RICHTEXT_ORGANISER_SHOW_ALL|RICHTEXT_ORGANISER_OK_CANCEL);
+pub const RICHTEXT_ORGANISER_BROWSE_NUMBERING: c_int = (RICHTEXT_ORGANISER_SHOW_LIST|RICHTEXT_ORGANISER_OK_CANCEL|RICHTEXT_ORGANISER_RENUMBER);
 
 //  ENUM: wxTipKind
 pub const wxTipKind_None: c_int = 0;
@@ -3903,7 +3903,7 @@ pub const SW_NOBORDER: c_int = 0x0000;
 pub const SW_BORDER: c_int = 0x0020;
 pub const SW_3DSASH: c_int = 0x0040;
 pub const SW_3DBORDER: c_int = 0x0080;
-pub const SW_3D: c_int = (wxSW_3DSASH | wxSW_3DBORDER);
+pub const SW_3D: c_int = (SW_3DSASH | SW_3DBORDER);
 //  ENUM: wxSashEdgePosition
 pub const wxSASH_TOP: c_int = 0;
 pub const wxSASH_RIGHT: c_int = 0 + 1;
@@ -4040,10 +4040,10 @@ pub const wxSYS_SCREEN_PDA: c_int = 0 + 2;
 pub const wxSYS_SCREEN_SMALL: c_int = 0 + 3;
 pub const wxSYS_SCREEN_DESKTOP: c_int = 0 + 4;
 
-pub const SL_HORIZONTAL: c_int = wxHORIZONTAL /* 0x0004 */;
-pub const SL_VERTICAL: c_int = wxVERTICAL   /* 0x0008 */;
+pub const SL_HORIZONTAL: c_int = HORIZONTAL /* 0x0004 */;
+pub const SL_VERTICAL: c_int = VERTICAL   /* 0x0008 */;
 pub const SL_TICKS: c_int = 0x0010;
-pub const SL_AUTOTICKS: c_int = wxSL_TICKS;
+pub const SL_AUTOTICKS: c_int = SL_TICKS;
 pub const SL_LEFT: c_int = 0x0040;
 pub const SL_TOP: c_int = 0x0080;
 pub const SL_RIGHT: c_int = 0x0100;
@@ -4053,7 +4053,7 @@ pub const SL_SELRANGE: c_int = 0x0800;
 pub const SL_INVERSE: c_int = 0x1000;
 pub const SL_MIN_MAX_LABELS: c_int = 0x2000;
 pub const SL_VALUE_LABEL: c_int = 0x4000;
-pub const SL_LABELS: c_int = (wxSL_MIN_MAX_LABELS|wxSL_VALUE_LABEL);
+pub const SL_LABELS: c_int = (SL_MIN_MAX_LABELS|SL_VALUE_LABEL);
 
 //  ENUM: wxSocketError
 pub const wxSOCKET_NOERROR: c_int = 0;
@@ -4102,8 +4102,8 @@ pub const SP_LIVE_UPDATE: c_int = 0x0080;
 pub const SP_3DSASH: c_int = 0x0100;
 pub const SP_3DBORDER: c_int = 0x0200;
 pub const SP_NO_XP_THEME: c_int = 0x0400;
-pub const SP_BORDER: c_int = wxSP_3DBORDER;
-pub const SP_3D: c_int = (wxSP_3DBORDER | wxSP_3DSASH);
+pub const SP_BORDER: c_int = SP_3DBORDER;
+pub const SP_3D: c_int = (SP_3DBORDER | SP_3DSASH);
 //  ENUM: wxSplitMode
 pub const wxSPLIT_HORIZONTAL: c_int = 1;
 pub const wxSPLIT_VERTICAL: c_int = 1 + 1;
@@ -4124,7 +4124,7 @@ pub const STB_SHOW_TIPS: c_long = 0x0020;
 pub const STB_ELLIPSIZE_START: c_int = 0x0040;
 pub const STB_ELLIPSIZE_MIDDLE: c_int = 0x0080;
 pub const STB_ELLIPSIZE_END: c_long = 0x0100;
-pub const STB_DEFAULT_STYLE: c_long = (wxSTB_SIZEGRIP|wxSTB_ELLIPSIZE_END|wxSTB_SHOW_TIPS|wxFULL_REPAINT_ON_RESIZE);
+pub const STB_DEFAULT_STYLE: c_long = (STB_SIZEGRIP|STB_ELLIPSIZE_END|STB_SHOW_TIPS|FULL_REPAINT_ON_RESIZE);
 pub const SB_NORMAL: c_int = 0x0000;
 pub const SB_FLAT: c_int = 0x0001;
 pub const SB_RAISED: c_int = 0x0002;
@@ -6386,15 +6386,15 @@ pub const TE_READONLY: c_int = 0x0010;
 pub const TE_MULTILINE: c_int = 0x0020;
 pub const TE_PROCESS_TAB: c_int = 0x0040;
 pub const TE_LEFT: c_int = 0x0000;
-pub const TE_CENTER: c_int = wxALIGN_CENTER_HORIZONTAL;
-pub const TE_RIGHT: c_int = wxALIGN_RIGHT;
-pub const TE_CENTRE: c_int = wxTE_CENTER;
+pub const TE_CENTER: c_int = ALIGN_CENTER_HORIZONTAL;
+pub const TE_RIGHT: c_int = ALIGN_RIGHT;
+pub const TE_CENTRE: c_int = TE_CENTER;
 pub const TE_RICH: c_int = 0x0080;
 pub const TE_PROCESS_ENTER: c_int = 0x0400;
 pub const TE_PASSWORD: c_int = 0x0800;
 pub const TE_AUTO_URL: c_int = 0x1000;
 pub const TE_NOHIDESEL: c_int = 0x2000;
-pub const TE_DONTWRAP: c_long = wxHSCROLL;
+pub const TE_DONTWRAP: c_long = HSCROLL;
 pub const TE_CHARWRAP: c_int = 0x4000;
 pub const TE_WORDWRAP: c_int = 0x0001;
 pub const TE_BESTWRAP: c_int = 0x0000;
@@ -6504,7 +6504,7 @@ pub const wxTE_HT_ON_TEXT: c_int = -2 + 2;
 pub const wxTE_HT_BELOW: c_int = -2 + 3;
 pub const wxTE_HT_BEYOND: c_int = -2 + 4;
 
-pub const TextEntryDialogStyle: c_long = (wxOK | wxCANCEL | wxCENTRE);
+pub const TextEntryDialogStyle: c_long = (OK | CANCEL | CENTRE);
 
 //  ENUM: wxTextFileType
 pub const wxTextFileType_None: c_int = 0;
@@ -6535,7 +6535,7 @@ pub const wxTOKEN_STRTOK: c_int = -1 + 5;
 pub const TBK_BUTTONBAR: c_int = 0x0100;
 pub const TBK_HORZ_LAYOUT: c_int = 0x8000;
 
-pub const DEFAULT_FRAME_STYLE: c_long = (wxSYSTEM_MENU |          wxRESIZE_BORDER |        wxMINIMIZE_BOX |         wxMAXIMIZE_BOX |         wxCLOSE_BOX |            wxCAPTION |              wxCLIP_CHILDREN);
+pub const DEFAULT_FRAME_STYLE: c_long = (SYSTEM_MENU |          RESIZE_BORDER |        MINIMIZE_BOX |         MAXIMIZE_BOX |         CLOSE_BOX |            CAPTION |              CLIP_CHILDREN);
 //  ENUM: @50
 pub const wxUSER_ATTENTION_INFO: c_int = 1;
 pub const wxUSER_ATTENTION_ERROR: c_int = 2;
@@ -6566,7 +6566,7 @@ pub const TR_EDIT_LABELS: c_int = 0x0200;
 pub const TR_ROW_LINES: c_int = 0x0400;
 pub const TR_HIDE_ROOT: c_int = 0x0800;
 pub const TR_FULL_ROW_HIGHLIGHT: c_int = 0x2000;
-pub const TR_DEFAULT_STYLE: c_int = (wxTR_HAS_BUTTONS | wxTR_LINES_AT_ROOT);
+pub const TR_DEFAULT_STYLE: c_int = (TR_HAS_BUTTONS | TR_LINES_AT_ROOT);
 //  ENUM: wxTreeItemIcon
 pub const wxTreeItemIcon_Normal: c_int = 0;
 pub const wxTreeItemIcon_Selected: c_int = 0 + 1;
