@@ -39,6 +39,7 @@ mod ffi {
     }
 }
 
+#[doc(hidden)]
 pub mod methods {
     use std::os::raw::{c_int};
     pub use super::generated::methods::*;
