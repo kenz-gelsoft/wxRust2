@@ -1,5 +1,6 @@
 import os
 import re
+import subprocess
 import xml.etree.ElementTree as ET
 
 PROLOGUE = '''\
@@ -21,7 +22,8 @@ RE_IDENT = re.compile(r'wx([^_]\w)')
 # place wxWidgets doxygen xml files in wxml/ dir and run this.
 generated = set()
 def main():
-    with open('wx-base/src/constants.rs', 'w') as f:
+    outpath = 'wx-base/src/constants.rs'
+    with open(outpath, 'w') as f:
         print(PROLOGUE, file=f)
         for file in xml_files_in('wxml/'):
             # print(file)
@@ -39,6 +41,7 @@ def main():
             
             if not empty:
                 print(file=f)
+    print(subprocess.check_output(['rustfmt', outpath]))
 
 def xml_files_in(dir):
     index = os.path.join(dir, 'index.xml')
