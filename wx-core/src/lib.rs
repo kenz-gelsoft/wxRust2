@@ -3,7 +3,18 @@ use std::ptr;
 
 mod generated;
 pub use generated::*;
-use generated::methods::*;
+
+// re-export wx_base
+pub use wx_base::*;
+
+#[doc(hidden)]
+pub mod methods {
+    pub use super::generated::methods::*;
+
+    // re-export wx_base::methods
+    pub use wx_base::methods::*;
+}
+use methods::*;
 
 mod ffi {
     use std::os::raw::{c_int, c_void};

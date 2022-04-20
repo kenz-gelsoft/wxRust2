@@ -15,6 +15,9 @@ use std::os::raw::{c_int, c_long};
 use crate::manual::*;
 '''
 
+# MEMO: don't replace `wx` prefix of `wx_GL_COMPAT_PROFILE`
+RE_IDENT = re.compile(r'wx([^_]\w)')
+
 # place wxWidgets doxygen xml files in wxml/ dir and run this.
 generated = set()
 def main():
@@ -118,6 +121,9 @@ blocklist = [
     'wxINT64_MAX',
     'wxUINT64_MAX',
 
+    # conflicts with stripping wx-prefix
+    'wxWEST', # use 'LEFT'
+
     # broken initializer
     'wxAUI_TBART_OVERFLOW_SIZE',
     'wxFILE_EXISTS_NO_FOLLOW',
@@ -151,6 +157,10 @@ def generate_define(e, f):
         v = re.sub(r'wxString\((".+")\)', r'\1', v)
         v = re.sub(r'wxS\((".+")\)', r'\1', v)
         v = re.sub(r'wxT\((".+")\)', r'\1', v)
+        # Don't strip `wx` prefix of string literal (c.f. IMAGE_OPTION_BMP_FORMAT)
+        if '"' not in v:
+            v = RE_IDENT.sub(r'\1', v)
+        name = RE_IDENT.sub(r'\1', name)
         print('pub const %s: %s = %s;' % (name, t, v),
                 file=f)
     else:
@@ -253,6 +263,8 @@ def generate_enum(e, f):
             t = 'c_long'
         if "'" in initializer:
             t = 'char'
+        vname = RE_IDENT.sub(r'\1', vname)
+        initializer = RE_IDENT.sub(r'\1', initializer)
         print('pub const %s: %s %s;' % (vname, t, initializer),
                 file=f)
 
