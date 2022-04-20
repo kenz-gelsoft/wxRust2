@@ -13,7 +13,7 @@ pub const fn PG_IT_CHILDREN(A: c_long) -> c_long {
     (A) << 16
 }
 
-// DeprecatedGUIConstants
+// wxDeprecatedGUIConstants
 /*  Text font families */
 pub const DEFAULT: i32 = 70;
 pub const DECORATIVE: i32 = 71;
@@ -30,7 +30,7 @@ pub const FIXED: i32 = 81;
 pub const NORMAL: i32 = 90;
 pub const LIGHT: i32 = 91;
 pub const BOLD: i32 = 92;
-/*  Also NORMAL for normal (non-italic text) */
+/*  Also wxNORMAL for normal (non-italic text) */
 pub const ITALIC: i32 = 93;
 pub const SLANT: i32 = 94;
 
