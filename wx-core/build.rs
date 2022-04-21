@@ -1,7 +1,4 @@
-use wxrust_config::{
-    wx_config_cflags,
-    print_wx_config_libs_for_cargo,
-};
+use wxrust_config::{print_wx_config_libs_for_cargo, wx_config_cflags};
 
 fn main() {
     wx_config_cflags(&mut cc::Build::new())

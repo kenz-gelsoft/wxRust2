@@ -19,30 +19,27 @@ mod ffi {
     extern "C" {
         pub fn wxObject_delete(self_: *mut c_void);
 
-        pub fn AppSetOnInit(
-            aFn: *mut c_void,
-            aParam: *mut c_void
-        );
+        pub fn AppSetOnInit(aFn: *mut c_void, aParam: *mut c_void);
         pub fn wxEvtHandler_Bind(
             self_: *mut c_void,
             eventType: c_int,
             aFn: *mut c_void,
-            aParam: *mut c_void
+            aParam: *mut c_void,
         );
 
         // String
         pub fn wxString_new(psz: *const c_uchar, nLength: usize) -> *mut c_void;
         pub fn wxString_UTF8Data(self_: *mut c_void) -> *mut c_uchar;
         pub fn wxString_Len(self_: *mut c_void) -> usize;
-        
+
         pub fn wxRustEntry(argc: *mut c_int, argv: *mut *mut c_char) -> c_int;
     }
 }
 
 #[doc(hidden)]
 pub mod methods {
-    use std::os::raw::{c_int};
     pub use super::generated::methods::*;
+    use std::os::raw::c_int;
     pub trait Bindable {
         fn bind<E: EventMethods, F: Fn(&E) + 'static>(&self, event_type: c_int, closure: F);
     }
@@ -56,7 +53,7 @@ pub fn from_wx_string(s: *mut c_void) -> String {
     }
 }
 pub unsafe fn wx_string_from(s: &str) -> *const c_void {
-    return ffi::wxString_new(s.as_ptr(), s.len())
+    return ffi::wxString_new(s.as_ptr(), s.len());
 }
 
 // Rust closure to wx calablle function+param pair.
@@ -67,10 +64,7 @@ unsafe fn to_wx_callable<F: Fn(*mut c_void) + 'static>(closure: F) -> (*mut c_vo
     }
     // pass the pointer in the heap to avoid move.
     let closure = Box::new(closure);
-    (
-        trampoline::<F> as _,
-        Box::into_raw(closure) as _
-    )
+    (trampoline::<F> as _, Box::into_raw(closure) as _)
 }
 
 impl<T: EvtHandlerMethods> Bindable for T {
