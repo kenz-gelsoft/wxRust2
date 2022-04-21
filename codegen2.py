@@ -1,6 +1,7 @@
 from doxybindgen.model import Class, ClassManager
 from doxybindgen.binding import CxxClassBinding, RustClassBinding
 
+import subprocess
 import toml
 
 
@@ -36,6 +37,8 @@ def generate_library(classes, config, libname):
         with open(path, 'w') as f:
             for chunk in generator(classes, config, libname):
                 print(chunk, file=f)
+        if path.endswith('.rs'):
+            print(subprocess.check_output(['rustfmt', path]))
 
 
 def generated_rs(classes, config, libname):
