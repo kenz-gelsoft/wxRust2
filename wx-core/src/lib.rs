@@ -33,18 +33,29 @@ mod ffi {
 
 // wxDefaultPosition
 impl Default for Point {
-    fn default() -> Self { Point::new_with_int(-1, -1) }
+    fn default() -> Self {
+        Point::new_with_int(-1, -1)
+    }
 }
 // wxDefaultSize
 impl Default for Size {
-    fn default() -> Self { Size::new_with_int(-1, -1) }
+    fn default() -> Self {
+        Size::new_with_int(-1, -1)
+    }
 }
 // wxDefaultValidator
 impl Default for Validator {
-    fn default() -> Self { Validator::new() }
+    fn default() -> Self {
+        Validator::new()
+    }
 }
 
-pub fn message_box<T: WindowMethods>(message: &str, caption: &str, style: c_int, parent: Option<&T>) {
+pub fn message_box<T: WindowMethods>(
+    message: &str,
+    caption: &str,
+    style: c_int,
+    parent: Option<&T>,
+) {
     unsafe {
         let message = wx_base::wx_string_from(message);
         let caption = wx_base::wx_string_from(caption);

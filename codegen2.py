@@ -1,6 +1,7 @@
 from doxybindgen.model import Class, ClassManager
 from doxybindgen.binding import CxxClassBinding, RustClassBinding
 
+import subprocess
 import toml
 
 
@@ -36,6 +37,8 @@ def generate_library(classes, config, libname):
         with open(path, 'w') as f:
             for chunk in generator(classes, config, libname):
                 print(chunk, file=f)
+        if path.endswith('.rs'):
+            print(subprocess.check_output(['rustfmt', path]))
 
 
 def generated_rs(classes, config, libname):
@@ -53,20 +56,26 @@ use methods::*;
     if libname == 'base':
         yield 'use crate::wx_class;'
     else:
-        yield 'use wx_base::*;'
-        yield 'use wx_base::methods::*;'
+        yield '''\
+use wx_base::methods::*;
+use wx_base::*;\
+'''
     yield '''\
 
 mod ffi {
     use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
+
     pub use crate::ffi::*;
-    extern "C" {
-'''
+
+    extern "C" {'''
     bindings = [RustClassBinding(cls) for cls in classes.in_lib(libname, generated)]
     indent = ' ' * 4 * 2
     for cls in bindings:
         for line in cls.lines(for_ffi=True):
-            yield '%s%s' % (indent, line)
+            if not line:
+                yield ''
+            else:
+                yield '%s%s' % (indent, line)
     yield '''\
     }
 }
@@ -75,24 +84,24 @@ pub mod methods {
     use std::os::raw::{c_int, c_long, c_void};
 
     use super::*;
-    use super::ffi;
 '''
     if libname == 'base':
         yield '''\
     pub trait WxRustMethods {
         unsafe fn as_ptr(&self) -> *mut c_void;
         unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F);
-    }
+    }\
 '''
     else:
         yield '    pub use wx_base::methods::*;'
-        yield ''
-    indent = ' ' * 4 * 1
     for cls in bindings:
         for line in cls.lines(for_methods=True):
-            yield '%s%s' % (indent, line)
+            if line:
+                yield '    %s' % (line,)
+            else:
+                yield ''
     yield '''\
-}
+}\
 '''
     for cls in bindings:
         for line in cls.lines():

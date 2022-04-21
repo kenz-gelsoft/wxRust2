@@ -21,6 +21,7 @@ class RustClassBinding:
         return self.__model.manager.is_a(self.__model, base)
 
     def lines(self, for_ffi=False, for_methods=False):
+        yield ''
         yield '// %s' % (
             self.__model.name,
         )
@@ -32,7 +33,6 @@ class RustClassBinding:
             for method in self.__methods:
                 for line in method.lines(for_ffi=True):
                     yield line
-            yield ''
         elif for_methods:
             for line in self._trait_with_methods():
                 yield line
@@ -117,7 +117,7 @@ class RustClassBinding:
                 continue
             for line in method.lines():
                 yield '%s%s' % (indent, line)
-        yield '}\n'
+        yield '}'
 
 
 class Overload:

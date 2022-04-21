@@ -5,9 +5,10 @@ pub fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
     // from `wx-config --cflags`
     let cflags = wx_config(&["--cflags"]);
     // ignore too many warnings with wx3.0
-    cc_build.flag_if_supported("-Wno-deprecated-copy")
-            .flag_if_supported("-Wno-ignored-qualifiers")
-            .flag_if_supported("-Wno-unused-parameter");
+    cc_build
+        .flag_if_supported("-Wno-deprecated-copy")
+        .flag_if_supported("-Wno-ignored-qualifiers")
+        .flag_if_supported("-Wno-unused-parameter");
     for arg in cflags.split_whitespace() {
         if arg.starts_with("-I") {
             cc_build.include(&arg[2..]);
@@ -64,7 +65,7 @@ fn wx_config_win(args: &[&str]) -> String {
     let wxwin = env::var("wxwin")
         .expect("Set 'wxwin' environment variable to point the wxMSW binaries dir.");
     // TODO: support linking with the wx debug DLL
-    let is_debug = false;//env::var("PROFILE").unwrap() == "debug";
+    let is_debug = false; //env::var("PROFILE").unwrap() == "debug";
     let d_or_not = if is_debug { "d" } else { "" };
     if args.contains(&"--cflags") {
         let mut cflags = vec![
