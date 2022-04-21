@@ -8,12 +8,14 @@ use std::ptr;
 
 use methods::*;
 
-use wx_base::*;
 use wx_base::methods::*;
+use wx_base::*;
 
 mod ffi {
     use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
+
     pub use crate::ffi::*;
+
     extern "C" {
 
         // wxCommandEvent
@@ -31,7 +33,7 @@ mod ffi {
         pub fn wxCommandEvent_SetExtraLong(self_: *mut c_void, extra_long: c_long);
         pub fn wxCommandEvent_SetInt(self_: *mut c_void, int_command: c_int);
         pub fn wxCommandEvent_SetString(self_: *mut c_void, string: *const c_void);
-        
+
         // wxWindow
         pub fn wxWindow_AcceptsFocus(self_: *const c_void) -> bool;
         pub fn wxWindow_AcceptsFocusFromKeyboard(self_: *const c_void) -> bool;
@@ -324,7 +326,7 @@ mod ffi {
         pub fn wxWindow_new1(parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> *mut c_void;
         // DTOR: pub fn wxWindow_~wxWindow(self_: *mut c_void);
         pub fn wxWindow_Create(self_: *mut c_void, parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> bool;
-        
+
         // wxControl
         pub fn wxControl_new(parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
         pub fn wxControl_new1() -> *mut c_void;
@@ -340,7 +342,7 @@ mod ffi {
         pub fn wxControl_RemoveMnemonics(str: *const c_void) -> *mut c_void;
         pub fn wxControl_EscapeMnemonics(text: *const c_void) -> *mut c_void;
         pub fn wxControl_Ellipsize(label: *const c_void, dc: *const c_void, mode: c_int, max_width: c_int, flags: c_int) -> *mut c_void;
-        
+
         // wxAnyButton
         pub fn wxAnyButton_new() -> *mut c_void;
         // DTOR: pub fn wxAnyButton_~wxAnyButton(self_: *mut c_void);
@@ -360,7 +362,7 @@ mod ffi {
         pub fn wxAnyButton_SetBitmapMargins(self_: *mut c_void, x: c_int, y: c_int);
         pub fn wxAnyButton_SetBitmapMargins1(self_: *mut c_void, sz: *const c_void);
         // NOT_SUPPORTED: pub fn wxAnyButton_SetBitmapPosition(self_: *mut c_void, dir: wxDirection);
-        
+
         // wxButton
         pub fn wxButton_new() -> *mut c_void;
         pub fn wxButton_new1(parent: *mut c_void, id: c_int, label: *const c_void, pos: *const c_void, size: *const c_void, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
@@ -369,7 +371,7 @@ mod ffi {
         pub fn wxButton_SetAuthNeeded(self_: *mut c_void, needed: bool);
         pub fn wxButton_SetDefault(self_: *mut c_void) -> *mut c_void;
         pub fn wxButton_GetDefaultSize(win: *mut c_void) -> *mut c_void;
-        
+
         // wxMenu
         pub fn wxMenu_new() -> *mut c_void;
         pub fn wxMenu_new1(style: c_long) -> *mut c_void;
@@ -430,7 +432,7 @@ mod ffi {
         pub fn wxMenu_Attach(self_: *mut c_void, menubar: *mut c_void);
         pub fn wxMenu_Detach(self_: *mut c_void);
         pub fn wxMenu_IsAttached(self_: *const c_void) -> bool;
-        
+
         // wxMenuBar
         pub fn wxMenuBar_new(style: c_long) -> *mut c_void;
         // NOT_SUPPORTED: pub fn wxMenuBar_new1(n: size_t, menus: *mut c_void, titles: wxString, style: c_long) -> *mut c_void;
@@ -466,11 +468,11 @@ mod ffi {
         pub fn wxMenuBar_Detach(self_: *mut c_void);
         pub fn wxMenuBar_MacSetCommonMenuBar(menubar: *mut c_void);
         pub fn wxMenuBar_MacGetCommonMenuBar() -> *mut c_void;
-        
+
         // wxNonOwnedWindow
         pub fn wxNonOwnedWindow_SetShape(self_: *mut c_void, region: *const c_void) -> bool;
         pub fn wxNonOwnedWindow_SetShape1(self_: *mut c_void, path: *const c_void) -> bool;
-        
+
         // wxTopLevelWindow
         pub fn wxTopLevelWindow_new() -> *mut c_void;
         pub fn wxTopLevelWindow_new1(parent: *mut c_void, id: c_int, title: *const c_void, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> *mut c_void;
@@ -514,7 +516,7 @@ mod ffi {
         // BLOCKED: pub fn wxTopLevelWindow_UseNativeDecorations(self_: *mut c_void, native: bool);
         // BLOCKED: pub fn wxTopLevelWindow_UseNativeDecorationsByDefault(self_: *mut c_void, native: bool);
         pub fn wxTopLevelWindow_GetDefaultSize() -> *mut c_void;
-        
+
         // wxFrame
         pub fn wxFrame_new() -> *mut c_void;
         pub fn wxFrame_new1(parent: *mut c_void, id: c_int, title: *const c_void, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> *mut c_void;
@@ -540,7 +542,7 @@ mod ffi {
         pub fn wxFrame_MSWGetTaskBarButton(self_: *mut c_void) -> *mut c_void;
         pub fn wxFrame_PushStatusText(self_: *mut c_void, text: *const c_void, number: c_int);
         pub fn wxFrame_PopStatusText(self_: *mut c_void, number: c_int);
-        
+
         // wxPoint
         pub fn wxPoint_delete(self_: *mut c_void);
         pub fn wxPoint_IsFullySpecified(self_: *const c_void) -> bool;
@@ -566,7 +568,7 @@ mod ffi {
         pub fn wxPoint_new() -> *mut c_void;
         pub fn wxPoint_new1(x: c_int, y: c_int) -> *mut c_void;
         pub fn wxPoint_new2(pt: *const c_void) -> *mut c_void;
-        
+
         // wxRect
         pub fn wxRect_delete(self_: *mut c_void);
         pub fn wxRect_new() -> *mut c_void;
@@ -630,7 +632,7 @@ mod ffi {
         // BLOCKED: pub fn wxRect_operator*=(self_: *mut c_void, r: *const c_void) -> *mut c_void;
         // BLOCKED: pub fn wxRect_operator=(self_: *mut c_void, rect: *const c_void) -> *mut c_void;
         // BLOCKED: pub fn wxRect_operator==(self_: *mut c_void, r1: *const c_void, r2: *const c_void) -> bool;
-        
+
         // wxSize
         pub fn wxSize_delete(self_: *mut c_void);
         // BLOCKED: pub fn wxSize_operator=(self_: *mut c_void, sz: *const c_void) -> *mut c_void;
@@ -666,7 +668,7 @@ mod ffi {
         pub fn wxSize_SetDefaults(self_: *mut c_void, size_default: *const c_void);
         pub fn wxSize_SetHeight(self_: *mut c_void, height: c_int);
         pub fn wxSize_SetWidth(self_: *mut c_void, width: c_int);
-        
+
         // wxValidator
         pub fn wxValidator_new() -> *mut c_void;
         // DTOR: pub fn wxValidator_~wxValidator(self_: *mut c_void);
@@ -678,7 +680,6 @@ mod ffi {
         pub fn wxValidator_Validate(self_: *mut c_void, parent: *mut c_void) -> bool;
         pub fn wxValidator_SuppressBellOnError(suppress: bool);
         pub fn wxValidator_IsSilent() -> bool;
-        
     }
 }
 
@@ -686,7 +687,6 @@ pub mod methods {
     use std::os::raw::{c_int, c_long, c_void};
 
     use super::*;
-    use super::ffi;
 
     pub use wx_base::methods::*;
 
@@ -2898,7 +2898,6 @@ pub mod methods {
             unsafe { ffi::wxValidator_IsSilent() }
         }
     }
-
 }
 
 // wxCommandEvent
@@ -2918,6 +2917,7 @@ impl Drop for CommandEvent {
         unsafe { ffi::wxObject_delete(self.0) }
     }
 }
+
 // wxWindow
 wx_class! { Window(wxWindow) impl
     WindowMethods,
@@ -2944,6 +2944,7 @@ impl Window {
         None
     }
 }
+
 // wxControl
 wx_class! { Control(wxControl) impl
     ControlMethods,
@@ -2972,6 +2973,7 @@ impl Control {
         None
     }
 }
+
 // wxAnyButton
 wx_class! { AnyButton(wxAnyButton) impl
     AnyButtonMethods,
@@ -2988,6 +2990,7 @@ impl AnyButton {
         None
     }
 }
+
 // wxButton
 wx_class! { Button(wxButton) impl
     ButtonMethods,
@@ -3019,6 +3022,7 @@ impl Button {
         None
     }
 }
+
 // wxMenu
 wx_class! { Menu(wxMenu) impl
     MenuMethods,
@@ -3042,6 +3046,7 @@ impl Menu {
         None
     }
 }
+
 // wxMenuBar
 wx_class! { MenuBar(wxMenuBar) impl
     MenuBarMethods,
@@ -3058,6 +3063,7 @@ impl MenuBar {
         None
     }
 }
+
 // wxNonOwnedWindow
 wx_class! { NonOwnedWindow(wxNonOwnedWindow) impl
     NonOwnedWindowMethods,
@@ -3070,6 +3076,7 @@ impl NonOwnedWindow {
         None
     }
 }
+
 // wxTopLevelWindow
 wx_class! { TopLevelWindow(wxTopLevelWindow) impl
     TopLevelWindowMethods,
@@ -3099,6 +3106,7 @@ impl TopLevelWindow {
         None
     }
 }
+
 // wxFrame
 wx_class! { Frame(wxFrame) impl
     FrameMethods,
@@ -3149,6 +3157,7 @@ impl WindowMethods for Frame {
         unsafe { ffi::wxFrame_Centre(self.as_ptr(), direction) }
     }
 }
+
 // wxPoint
 wx_class! { Point(wxPoint) impl
     PointMethods
@@ -3172,6 +3181,7 @@ impl Drop for Point {
         unsafe { ffi::wxPoint_delete(self.0) }
     }
 }
+
 // wxRect
 wx_class! { Rect(wxRect) impl
     RectMethods
@@ -3212,6 +3222,7 @@ impl Drop for Rect {
         unsafe { ffi::wxRect_delete(self.0) }
     }
 }
+
 // wxSize
 wx_class! { Size(wxSize) impl
     SizeMethods
@@ -3232,6 +3243,7 @@ impl Drop for Size {
         unsafe { ffi::wxSize_delete(self.0) }
     }
 }
+
 // wxValidator
 wx_class! { Validator(wxValidator) impl
     ValidatorMethods,

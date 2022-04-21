@@ -12,7 +12,9 @@ use crate::wx_class;
 
 mod ffi {
     use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
+
     pub use crate::ffi::*;
+
     extern "C" {
 
         // wxObject
@@ -29,7 +31,7 @@ mod ffi {
         pub fn wxObject_UnShare(self_: *mut c_void);
         // BLOCKED: pub fn wxObject_operator delete(self_: *mut c_void, buf: *mut c_void);
         // NOT_SUPPORTED: pub fn wxObject_operator new(self_: *mut c_void, size: size_t, filename: *const c_void, line_num: c_int) -> *mut c_void;
-        
+
         // wxEvent
         // NOT_SUPPORTED: pub fn wxEvent_new(id: c_int, event_type: wxEventType) -> *mut c_void;
         pub fn wxEvent_Clone(self_: *const c_void) -> *mut c_void;
@@ -49,7 +51,7 @@ mod ffi {
         pub fn wxEvent_ShouldPropagate(self_: *const c_void) -> bool;
         pub fn wxEvent_Skip(self_: *mut c_void, skip: bool);
         pub fn wxEvent_StopPropagation(self_: *mut c_void) -> c_int;
-        
+
         // wxEvtHandler
         pub fn wxEvtHandler_QueueEvent(self_: *mut c_void, event: *mut c_void);
         pub fn wxEvtHandler_AddPendingEvent(self_: *mut c_void, event: *const c_void);
@@ -86,7 +88,6 @@ mod ffi {
         pub fn wxEvtHandler_RemoveFilter(filter: *mut c_void);
         pub fn wxEvtHandler_new() -> *mut c_void;
         // DTOR: pub fn wxEvtHandler_~wxEvtHandler(self_: *mut c_void);
-        
     }
 }
 
@@ -94,7 +95,6 @@ pub mod methods {
     use std::os::raw::{c_int, c_long, c_void};
 
     use super::*;
-    use super::ffi;
 
     pub trait WxRustMethods {
         unsafe fn as_ptr(&self) -> *mut c_void;
@@ -289,7 +289,6 @@ pub mod methods {
         }
         // DTOR: fn ~wxEvtHandler()
     }
-
 }
 
 // wxObject
@@ -315,6 +314,7 @@ impl Drop for Object {
         unsafe { ffi::wxObject_delete(self.0) }
     }
 }
+
 // wxEvent
 wx_class! { Event(wxEvent) impl
     EventMethods,
@@ -331,6 +331,7 @@ impl Drop for Event {
         unsafe { ffi::wxObject_delete(self.0) }
     }
 }
+
 // wxEvtHandler
 wx_class! { EvtHandler(wxEvtHandler) impl
     EvtHandlerMethods,
