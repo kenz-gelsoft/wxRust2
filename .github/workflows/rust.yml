@@ -26,6 +26,8 @@ jobs:
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
     - name: Install Prerequisites
       run: sudo apt install libwxgtk3.0-gtk3-dev
+    - name: Check fmt
+      run: cargo fmt --check --all
     - name: Build
       run: cargo build --verbose
     - name: Run tests
