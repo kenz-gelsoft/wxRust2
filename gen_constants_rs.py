@@ -41,7 +41,7 @@ def main():
             
             if not empty:
                 print(file=f)
-    print(subprocess.check_output(['rustfmt', outpath]))
+    # print(subprocess.check_output(['rustfmt', outpath]))
 
 def xml_files_in(dir):
     index = os.path.join(dir, 'index.xml')
