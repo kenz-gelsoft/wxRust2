@@ -33,11 +33,13 @@ def main():
             empty = True
             for define in defines_in(root):
                 empty = False
-                generate_define(define, f)
+                for line in generate_define(define):
+                    print(line, file=f)
 
             for enum in enums_in(root):
                 empty = False
-                generate_enum(enum, f)
+                for line in generate_enum(enum):
+                    print(line, file=f)
             
             if not empty:
                 print(file=f)
@@ -132,14 +134,13 @@ blocklist = [
     'wxFILE_EXISTS_NO_FOLLOW',
     'wxPG_PROP_BEING_DELETED',
 ]
-def generate_define(e, f):
+def generate_define(e):
     name = e.findtext('name')
     if name in generated:
         return
     generated.add(name)
     if name in blocklist or name in typedefs:
-        print('//  SKIP: %s' % (name,),
-                file=f)
+        yield '//  SKIP: %s' % (name,)
         return
     initializer = e.find('initializer')
     if initializer is not None:
@@ -164,11 +165,9 @@ def generate_define(e, f):
         if '"' not in v:
             v = RE_IDENT.sub(r'\1', v)
         name = RE_IDENT.sub(r'\1', name)
-        print('pub const %s: %s = %s;' % (name, t, v),
-                file=f)
+        yield 'pub const %s: %s = %s;' % (name, t, v)
     else:
-        print('// NODEF: %s' % (name,),
-                file=f)
+        yield '// NODEF: %s' % (name,)
 
 long_types = [
     'wxAC_DEFAULT_STYLE',
@@ -235,10 +234,9 @@ long_types = [
     'wxWINDOW_STYLE_MASK',
 ]
 
-def generate_enum(e, f):
+def generate_enum(e):
     name = e.findtext('name')
-    print('//  ENUM: %s' % (name,),
-            file=f)
+    yield '//  ENUM: %s' % (name,)
     current_initializer = '= 0'
     count = 0
     for v in e.findall('enumvalue'):
@@ -247,8 +245,7 @@ def generate_enum(e, f):
             continue
         generated.add(vname)
         if vname in blocklist:
-            print('//  SKIP: %s' % (vname,),
-                    file=f)
+            yield '//  SKIP: %s' % (vname,)
             continue
         initializer = v.findtext('initializer')
         if initializer is None:
@@ -268,8 +265,8 @@ def generate_enum(e, f):
             t = 'char'
         vname = RE_IDENT.sub(r'\1', vname)
         initializer = RE_IDENT.sub(r'\1', initializer)
-        print('pub const %s: %s %s;' % (vname, t, initializer),
-                file=f)
+        yield 'pub const %s: %s %s;' % (vname, t, initializer)
 
 if __name__ == '__main__':
     main()
+
