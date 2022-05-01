@@ -29,21 +29,26 @@ def main():
             # print(file)
             tree = ET.parse(file)
             root = tree.getroot()
-            
-            empty = True
-            for define in defines_in(root):
-                empty = False
-                for line in generate_define(define):
-                    print(line, file=f)
 
-            for enum in enums_in(root):
-                empty = False
-                for line in generate_enum(enum):
-                    print(line, file=f)
+            for line in generate_constants_in(root):
+                print(line, file=f)
             
-            if not empty:
-                print(file=f)
     # print(subprocess.check_output(['rustfmt', outpath]))
+
+def generate_constants_in(element):
+    empty = True
+    for define in defines_in(element):
+        empty = False
+        for line in generate_define(define):
+            yield line
+
+    for enum in enums_in(element):
+        empty = False
+        for line in generate_enum(enum):
+            yield line
+    
+    if not empty:
+        yield ''
 
 def xml_files_in(dir):
     index = os.path.join(dir, 'index.xml')
