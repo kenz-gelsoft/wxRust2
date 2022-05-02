@@ -1,4 +1,3 @@
-import os
 import re
 import xml.etree.ElementTree as ET
 
@@ -20,16 +19,6 @@ def generate_constants_in(element):
     
     if not empty:
         yield ''
-
-def xml_files_in(dir):
-    index = os.path.join(dir, 'index.xml')
-    with open(index, 'r') as f:
-        tree = ET.parse(f)
-        root = tree.getroot()
-        for compound in root.findall('./compound'):
-            if has_constants(compound):
-                xml = compound.get('refid') + '.xml'
-                yield os.path.join(dir, xml)
 
 def has_constants(compound):
     for member in compound.findall("./member"):

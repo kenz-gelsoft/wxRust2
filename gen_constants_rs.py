@@ -1,5 +1,6 @@
-from doxybindgen.constants import generate_constants_in, xml_files_in
+from doxybindgen.constants import generate_constants_in, has_constants
 
+import os
 import subprocess
 import xml.etree.ElementTree as ET
 
@@ -30,6 +31,16 @@ def main():
                 print(line, file=f)
             
     # print(subprocess.check_output(['rustfmt', outpath]))
+
+def xml_files_in(dir):
+    index = os.path.join(dir, 'index.xml')
+    with open(index, 'r') as f:
+        tree = ET.parse(f)
+        root = tree.getroot()
+        for compound in root.findall('./compound'):
+            if has_constants(compound):
+                xml = compound.get('refid') + '.xml'
+                yield os.path.join(dir, xml)
 
 if __name__ == '__main__':
     main()
