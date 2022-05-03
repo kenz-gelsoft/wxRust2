@@ -3880,6 +3880,11 @@ wx_class! { StaticBitmap(wxStaticBitmap) impl
     ObjectMethods
 }
 impl StaticBitmap {
+    //  ENUM: ScaleMode
+    pub const Scale_None: c_int = 0;
+    pub const Scale_Fill: c_int = 0 + 1;
+    pub const Scale_AspectFit: c_int = 0 + 2;
+    pub const Scale_AspectFill: c_int = 0 + 3;
     pub fn new_2step() -> StaticBitmap {
         unsafe { StaticBitmap(ffi::wxStaticBitmap_new()) }
     }

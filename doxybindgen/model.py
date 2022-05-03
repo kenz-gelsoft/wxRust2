@@ -1,3 +1,4 @@
+from .constants import Enum
 import xml.etree.ElementTree as ET
 import re
 
@@ -36,11 +37,15 @@ class Class:
         self.manager = manager
         self.name = e.findtext('compoundname')
         self.base = e.findtext('basecompoundref')
+        self.enums = []
         self.methods = []
         config = config.get(self.name) or {}
         self.__blocklist = config.get('blocklist') or []
         self.config = config
         self.library = self._find_libname(e)
+        for enum in e.findall(".//memberdef[@kind='enum']"):
+            enum = Enum(enum)
+            self.enums.append(enum)
         for method in e.findall(".//memberdef[@kind='function']"):
             m = Method(self, method)
             if not m.is_public:
