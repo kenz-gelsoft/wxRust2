@@ -94,9 +94,6 @@ blocklist = [
     'wxINT64_MAX',
     'wxUINT64_MAX',
 
-    # conflicts with stripping wx-prefix
-    'wxWEST', # use 'LEFT'
-
     # broken initializer
     'wxAUI_TBART_OVERFLOW_SIZE',
     'wxFILE_EXISTS_NO_FOLLOW',

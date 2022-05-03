@@ -1239,7 +1239,7 @@ pub const TOP: c_int = UP;
 pub const BOTTOM: c_int = DOWN;
 pub const NORTH: c_int = UP;
 pub const SOUTH: c_int = DOWN;
-//  SKIP: wxWEST
+pub const WEST: c_int = LEFT;
 pub const EAST: c_int = RIGHT;
 pub const ALL: c_int = (UP | DOWN | RIGHT | LEFT);
 pub const DIRECTION_MASK: c_int = ALL;
