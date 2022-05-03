@@ -45,7 +45,6 @@ typedefs = [
 ]
 blocklist = [
     # complex defs
-    'Inv_Year',
     'wxBookCtrl',
     'wxDISABLE_DEBUG_SUPPORT',
     'wxDISABLE_ASSERTS_IN_RELEASE_BUILD',
