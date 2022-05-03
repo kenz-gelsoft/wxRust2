@@ -21,6 +21,9 @@ def generate_constants_in(element):
         yield ''
 
 def has_constants(compound):
+    kind = compound.get('kind')
+    if kind in ['class', 'struct']:
+        return False
     for member in compound.findall("./member"):
         kind = member.get('kind')
         if kind in ['define', 'enum']:
