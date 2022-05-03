@@ -66,6 +66,7 @@ class RustClassBinding:
         for enum in self.__model.enums:
             for line in enum.generate():
                 yield '    %s' % (line,)
+            yield ''
         for ctor in self._ctors():
             for line in ctor.lines():
                 yield '    %s' % (line,)
