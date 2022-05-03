@@ -26,11 +26,9 @@ def main():
             # print(file)
             tree = ET.parse(file)
             root = tree.getroot()
-
             for line in generate_constants_in(root):
                 print(line, file=f)
-            
-    # print(subprocess.check_output(['rustfmt', outpath]))
+    print(subprocess.check_output(['rustfmt', outpath]))
 
 def xml_files_in(dir):
     index = os.path.join(dir, 'index.xml')
