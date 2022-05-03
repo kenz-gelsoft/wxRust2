@@ -21,7 +21,7 @@ Implementing the binding generator to be usable state with a small set of wx cla
         * working to compile on Window (fighting with linking error)
     * [ ] Lifetime management
         * owned non-wxWindow wxObjects has value semantics (impl Drop to call native dtor)
-        * planning to use wxTrackable for WeakRef-like wx managed (non-owned) object
+        * https://github.com/kenz-gelsoft/wxRust2/issues/51 planning to use wxTrackable for WeakRef-like wx managed (non-owned) object
         * doesn't manage wxWindow object for now (almost all of them will be managed by wx's windowing system)
 * Next
     * [ ] Core library coverage
