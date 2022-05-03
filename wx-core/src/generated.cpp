@@ -1617,5 +1617,22 @@ bool wxValidator_IsSilent() {
     return wxValidator::IsSilent();
 }
 
+// CLASS: wxStaticBitmap
+wxStaticBitmap *wxStaticBitmap_new() {
+    return new wxStaticBitmap();
+}
+wxStaticBitmap *wxStaticBitmap_new1(wxWindow * parent, wxWindowID id, const wxBitmap * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxStaticBitmap(parent, id, *label, *pos, *size, style, *name);
+}
+bool wxStaticBitmap_Create(wxStaticBitmap * self, wxWindow * parent, wxWindowID id, const wxBitmap * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, id, *label, *pos, *size, style, *name);
+}
+void wxStaticBitmap_SetBitmap(wxStaticBitmap * self, const wxBitmap * label) {
+    return self->SetBitmap(*label);
+}
+void wxStaticBitmap_SetIcon(wxStaticBitmap * self, const wxIcon * label) {
+    return self->SetIcon(*label);
+}
+
 } // extern "C"
 
