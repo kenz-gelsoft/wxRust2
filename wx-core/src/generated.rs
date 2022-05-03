@@ -989,6 +989,34 @@ mod ffi {
         pub fn wxValidator_Validate(self_: *mut c_void, parent: *mut c_void) -> bool;
         pub fn wxValidator_SuppressBellOnError(suppress: bool);
         pub fn wxValidator_IsSilent() -> bool;
+
+        // wxStaticBitmap
+        pub fn wxStaticBitmap_new() -> *mut c_void;
+        pub fn wxStaticBitmap_new1(
+            parent: *mut c_void,
+            id: c_int,
+            label: *const c_void,
+            pos: *const c_void,
+            size: *const c_void,
+            style: c_long,
+            name: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxStaticBitmap_Create(
+            self_: *mut c_void,
+            parent: *mut c_void,
+            id: c_int,
+            label: *const c_void,
+            pos: *const c_void,
+            size: *const c_void,
+            style: c_long,
+            name: *const c_void,
+        ) -> bool;
+        // NOT_SUPPORTED: pub fn wxStaticBitmap_GetBitmap(self_: *const c_void) -> wxBitmap;
+        // NOT_SUPPORTED: pub fn wxStaticBitmap_GetIcon(self_: *const c_void) -> wxIcon;
+        pub fn wxStaticBitmap_SetBitmap(self_: *mut c_void, label: *const c_void);
+        pub fn wxStaticBitmap_SetIcon(self_: *mut c_void, label: *const c_void);
+        // NOT_SUPPORTED: pub fn wxStaticBitmap_SetScaleMode(self_: *mut c_void, scale_mode: ScaleMode);
+        // NOT_SUPPORTED: pub fn wxStaticBitmap_GetScaleMode(self_: *const c_void) -> ScaleMode;
     }
 }
 
@@ -3392,6 +3420,41 @@ pub mod methods {
             unsafe { ffi::wxValidator_IsSilent() }
         }
     }
+
+    // wxStaticBitmap
+    pub trait StaticBitmapMethods: ControlMethods {
+        fn create<T: WindowMethods>(
+            &self,
+            parent: Option<&T>,
+            id: c_int,
+            label: *const c_void,
+            pos: &Point,
+            size: &Size,
+            style: c_long,
+            name: &str,
+        ) -> bool {
+            unsafe {
+                let parent = match parent {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let pos = pos.as_ptr();
+                let size = size.as_ptr();
+                let name = wx_base::wx_string_from(name);
+                ffi::wxStaticBitmap_Create(self.as_ptr(), parent, id, label, pos, size, style, name)
+            }
+        }
+        // NOT_SUPPORTED: fn GetBitmap()
+        // NOT_SUPPORTED: fn GetIcon()
+        fn set_bitmap(&self, label: *const c_void) {
+            unsafe { ffi::wxStaticBitmap_SetBitmap(self.as_ptr(), label) }
+        }
+        fn set_icon(&self, label: *const c_void) {
+            unsafe { ffi::wxStaticBitmap_SetIcon(self.as_ptr(), label) }
+        }
+        // NOT_SUPPORTED: fn SetScaleMode()
+        // NOT_SUPPORTED: fn GetScaleMode()
+    }
 }
 
 // wxCommandEvent
@@ -3802,6 +3865,51 @@ wx_class! { Validator(wxValidator) impl
 impl Validator {
     pub fn new() -> Validator {
         unsafe { Validator(ffi::wxValidator_new()) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
+// wxStaticBitmap
+wx_class! { StaticBitmap(wxStaticBitmap) impl
+    StaticBitmapMethods,
+    ControlMethods,
+    WindowMethods,
+    EvtHandlerMethods,
+    ObjectMethods
+}
+impl StaticBitmap {
+    //  ENUM: ScaleMode
+    pub const Scale_None: c_int = 0;
+    pub const Scale_Fill: c_int = 0 + 1;
+    pub const Scale_AspectFit: c_int = 0 + 2;
+    pub const Scale_AspectFill: c_int = 0 + 3;
+
+    pub fn new_2step() -> StaticBitmap {
+        unsafe { StaticBitmap(ffi::wxStaticBitmap_new()) }
+    }
+    pub fn new<T: WindowMethods>(
+        parent: Option<&T>,
+        id: c_int,
+        label: *const c_void,
+        pos: &Point,
+        size: &Size,
+        style: c_long,
+        name: &str,
+    ) -> StaticBitmap {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            StaticBitmap(ffi::wxStaticBitmap_new1(
+                parent, id, label, pos, size, style, name,
+            ))
+        }
     }
     pub fn none() -> Option<&'static Self> {
         None

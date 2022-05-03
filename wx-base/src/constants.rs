@@ -8,374 +8,6 @@ use std::os::raw::{c_int, c_long};
 
 use crate::manual::*;
 
-//  ENUM: Reason
-pub const Reason_Mouse: c_int = 0;
-pub const Reason_Unknown: c_int = 0 + 1;
-
-//  ENUM: ConversionFlags
-pub const Escape: c_int = 0x01;
-pub const QuoteStrings: c_int = 0x02;
-
-//  ENUM: @1
-pub const typeCaption: c_int = 0;
-pub const typeGripper: c_int = 0 + 1;
-pub const typeDock: c_int = 0 + 2;
-pub const typeDockSizer: c_int = 0 + 3;
-pub const typePane: c_int = 0 + 4;
-pub const typePaneSizer: c_int = 0 + 5;
-pub const typeBackground: c_int = 0 + 6;
-pub const typePaneBorder: c_int = 0 + 7;
-pub const typePaneButton: c_int = 0 + 8;
-
-//  ENUM: @3
-pub const NO_IMAGE: c_int = -1;
-
-//  ENUM: @6
-pub const NUM_CUSTOM: c_int = 16;
-
-//  ENUM: @9
-pub const ShowBelow: c_int = 0x0000;
-pub const ShowAbove: c_int = 0x0001;
-pub const CanDeferShow: c_int = 0x0002;
-
-//  ENUM: @8
-pub const MovableButton: c_int = 0x0001;
-pub const BitmapButton: c_int = 0x0002;
-pub const ButtonSpacing: c_int = 0x0004;
-pub const TextIndent: c_int = 0x0008;
-pub const PaintControl: c_int = 0x0010;
-pub const PaintWritable: c_int = 0x0020;
-pub const Borderless: c_int = 0x0040;
-pub const All: c_int = MovableButton
-    | BitmapButton
-    | ButtonSpacing
-    | TextIndent
-    | PaintControl
-    | PaintWritable
-    | Borderless;
-
-//  ENUM: EntryType
-pub const Type_Unknown: c_int = 0;
-pub const Type_String: c_int = 0 + 1;
-pub const Type_Boolean: c_int = 0 + 2;
-pub const Type_Integer: c_int = 0 + 3;
-pub const Type_Float: c_int = 0 + 4;
-
-//  ENUM: Direction
-pub const Get: c_int = 0x01;
-pub const Set: c_int = 0x02;
-pub const Both: c_int = 0x03;
-
-//  ENUM: TZ
-pub const Local: c_int = 0;
-pub const GMT_12: c_int = 0 + 1;
-pub const GMT_11: c_int = 0 + 2;
-pub const GMT_10: c_int = 0 + 3;
-pub const GMT_9: c_int = 0 + 4;
-pub const GMT_8: c_int = 0 + 5;
-pub const GMT_7: c_int = 0 + 6;
-pub const GMT_6: c_int = 0 + 7;
-pub const GMT_5: c_int = 0 + 8;
-pub const GMT_4: c_int = 0 + 9;
-pub const GMT_3: c_int = 0 + 10;
-pub const GMT_2: c_int = 0 + 11;
-pub const GMT_1: c_int = 0 + 12;
-pub const GMT0: c_int = 0 + 13;
-pub const GMT1: c_int = 0 + 14;
-pub const GMT2: c_int = 0 + 15;
-pub const GMT3: c_int = 0 + 16;
-pub const GMT4: c_int = 0 + 17;
-pub const GMT5: c_int = 0 + 18;
-pub const GMT6: c_int = 0 + 19;
-pub const GMT7: c_int = 0 + 20;
-pub const GMT8: c_int = 0 + 21;
-pub const GMT9: c_int = 0 + 22;
-pub const GMT10: c_int = 0 + 23;
-pub const GMT11: c_int = 0 + 24;
-pub const GMT12: c_int = 0 + 25;
-pub const GMT13: c_int = 0 + 26;
-pub const WET: c_int = GMT0;
-pub const WEST: c_int = GMT1;
-pub const CET: c_int = GMT1;
-pub const CEST: c_int = GMT2;
-pub const EET: c_int = GMT2;
-pub const EEST: c_int = GMT3;
-pub const MSK: c_int = GMT3;
-pub const MSD: c_int = GMT4;
-pub const AST: c_int = GMT_4;
-pub const ADT: c_int = GMT_3;
-pub const EST: c_int = GMT_5;
-pub const EDT: c_int = GMT_4;
-pub const CST: c_int = GMT_6;
-pub const CDT: c_int = GMT_5;
-pub const MST: c_int = GMT_7;
-pub const MDT: c_int = GMT_6;
-pub const PST: c_int = GMT_8;
-pub const PDT: c_int = GMT_7;
-pub const HST: c_int = GMT_10;
-pub const AKST: c_int = GMT_9;
-pub const AKDT: c_int = GMT_8;
-pub const A_WST: c_int = GMT8;
-pub const A_CST: c_int = GMT13 + 1;
-pub const A_EST: c_int = GMT10;
-pub const A_ESST: c_int = GMT11;
-pub const NZST: c_int = GMT12;
-pub const NZDT: c_int = GMT13;
-pub const UTC: c_int = GMT0;
-//  ENUM: Calendar
-pub const Gregorian: c_int = 0;
-pub const Julian: c_int = 0 + 1;
-//  ENUM: Country
-pub const Country_Unknown: c_int = 0;
-pub const Country_Default: c_int = 0 + 1;
-pub const Country_WesternEurope_Start: c_int = 0 + 2;
-pub const Country_EEC: c_int = Country_WesternEurope_Start;
-pub const France: c_int = Country_WesternEurope_Start + 1;
-pub const Germany: c_int = Country_WesternEurope_Start + 2;
-pub const UK: c_int = Country_WesternEurope_Start + 3;
-pub const Country_WesternEurope_End: c_int = UK;
-pub const Russia: c_int = UK + 1;
-pub const USA: c_int = UK + 2;
-//  ENUM: Month
-pub const Jan: c_int = 0;
-pub const Feb: c_int = 0 + 1;
-pub const Mar: c_int = 0 + 2;
-pub const Apr: c_int = 0 + 3;
-pub const May: c_int = 0 + 4;
-pub const Jun: c_int = 0 + 5;
-pub const Jul: c_int = 0 + 6;
-pub const Aug: c_int = 0 + 7;
-pub const Sep: c_int = 0 + 8;
-pub const Oct: c_int = 0 + 9;
-pub const Nov: c_int = 0 + 10;
-pub const Dec: c_int = 0 + 11;
-pub const Inv_Month: c_int = 0 + 12;
-//  ENUM: WeekDay
-pub const Sun: c_int = 0;
-pub const Mon: c_int = 0 + 1;
-pub const Tue: c_int = 0 + 2;
-pub const Wed: c_int = 0 + 3;
-pub const Thu: c_int = 0 + 4;
-pub const Fri: c_int = 0 + 5;
-pub const Sat: c_int = 0 + 6;
-pub const Inv_WeekDay: c_int = 0 + 7;
-//  ENUM: Year
-//  SKIP: Inv_Year
-//  ENUM: NameFlags
-pub const Name_Full: c_int = 0x01;
-pub const Name_Abbr: c_int = 0x02;
-//  ENUM: WeekFlags
-pub const Default_First: c_int = 0;
-pub const Monday_First: c_int = 0 + 1;
-pub const Sunday_First: c_int = 0 + 2;
-
-//  ENUM: Context
-pub const Context_Current: c_int = 0;
-pub const Context_Exception: c_int = 0 + 1;
-
-//  ENUM: @16
-pub const Event_Skip: c_int = -1;
-pub const Event_Ignore: c_int = 0;
-pub const Event_Processed: c_int = 1;
-
-//  ENUM: OpenMode
-pub const read: c_int = 0;
-pub const write: c_int = 0 + 1;
-pub const read_write: c_int = 0 + 2;
-pub const write_append: c_int = 0 + 3;
-pub const write_excl: c_int = 0 + 4;
-//  ENUM: @17
-pub const fd_invalid: c_int = -1;
-pub const fd_stdin: c_int = -1 + 1;
-pub const fd_stdout: c_int = -1 + 2;
-pub const fd_stderr: c_int = -1 + 3;
-
-//  ENUM: TransferMode
-pub const NONE: c_int = 0;
-pub const ASCII: c_int = 0 + 1;
-pub const BINARY: c_int = 0 + 2;
-
-//  ENUM: wxGridSelectionModes
-pub const GridSelectCells: c_int = 0;
-pub const GridSelectRows: c_int = 0 + 1;
-pub const GridSelectColumns: c_int = 0 + 2;
-pub const GridSelectRowsOrColumns: c_int = 0 + 3;
-pub const GridSelectNone: c_int = 0 + 4;
-//  ENUM: CellSpan
-pub const CellSpan_Inside: c_int = -1;
-pub const CellSpan_None: c_int = 0;
-pub const CellSpan_Main: c_int = 0 + 1;
-//  ENUM: TabBehaviour
-pub const Tab_Stop: c_int = 0;
-pub const Tab_Wrap: c_int = 0 + 1;
-pub const Tab_Leave: c_int = 0 + 2;
-
-//  ENUM: Origin
-pub const Program: c_int = 0;
-pub const Key: c_int = 0 + 1;
-pub const Mouse: c_int = 0 + 2;
-
-//  ENUM: wxAttrKind
-pub const Any: c_int = 0;
-pub const Cell: c_int = 0 + 1;
-pub const Row: c_int = 0 + 2;
-pub const Col: c_int = 0 + 3;
-pub const Default: c_int = 0 + 4;
-pub const Merged: c_int = 0 + 5;
-
-//  ENUM: Origin
-pub const Origin_Unknown: c_int = 0;
-pub const Origin_Keyboard: c_int = 0 + 1;
-pub const Origin_HelpButton: c_int = 0 + 2;
-
-//  ENUM: PromptMode
-pub const Prompt_Never: c_int = 0;
-pub const Prompt_Once: c_int = 0 + 1;
-pub const Prompt_Always: c_int = 0 + 2;
-
-//  ENUM: HTMLCursor
-pub const HTMLCursor_Default: c_int = 0;
-pub const HTMLCursor_Link: c_int = 0 + 1;
-pub const HTMLCursor_Text: c_int = 0 + 2;
-
-//  ENUM: @29
-pub const FALLBACK_NONE: c_int = 0;
-pub const FALLBACK_SYSTEM: c_int = 1;
-pub const FALLBACK_NEAREST_LARGER: c_int = 2;
-
-//  ENUM: wxNavigationKeyEventFlags
-pub const IsBackward: c_int = 0x0000;
-pub const IsForward: c_int = 0x0001;
-pub const WinChange: c_int = 0x0002;
-pub const FromTab: c_int = 0x0004;
-
-//  ENUM: @38
-pub const Timeout_Auto: c_int = -1;
-pub const Timeout_Never: c_int = 0;
-
-//  ENUM: Style
-pub const Style_None: c_int = 0x00;
-pub const Style_WithThousandsSep: c_int = 0x01;
-pub const Style_NoTrailingZeroes: c_int = 0x02;
-
-//  ENUM: NumericType
-pub const Signed: c_int = 0;
-pub const Unsigned: c_int = 0 + 1;
-pub const Float: c_int = 0 + 2;
-
-//  ENUM: @40
-pub const Selected: c_int = 0x00010000;
-pub const ChoicePopup: c_int = 0x00020000;
-pub const Control: c_int = 0x00040000;
-pub const Disabled: c_int = 0x00080000;
-pub const DontUseCellFgCol: c_int = 0x00100000;
-pub const DontUseCellBgCol: c_int = 0x00200000;
-pub const DontUseCellColours: c_int = DontUseCellFgCol | DontUseCellBgCol;
-
-//  ENUM: EditableStateFlags
-pub const SelectionState: c_int = 0x01;
-pub const ExpandedState: c_int = 0x02;
-pub const ScrollPosState: c_int = 0x04;
-pub const PageState: c_int = 0x08;
-pub const SplitterPosState: c_int = 0x10;
-pub const DescBoxState: c_int = 0x20;
-pub const AllStates: c_int =
-    SelectionState | ExpandedState | ScrollPosState | PageState | SplitterPosState | DescBoxState;
-
-//  ENUM: AccessMode
-pub const Read: c_int = 0;
-pub const Write: c_int = 0 + 1;
-//  ENUM: StdKey
-pub const HKCR: c_int = 0;
-pub const HKCU: c_int = 0 + 1;
-pub const HKLM: c_int = 0 + 2;
-pub const HKUSR: c_int = 0 + 3;
-pub const HKPD: c_int = 0 + 4;
-pub const HKCC: c_int = 0 + 5;
-pub const HKDD: c_int = 0 + 6;
-pub const HKMAX: c_int = 0 + 7;
-//  ENUM: ValueType
-pub const Type_None: c_int = 0;
-pub const Type_Expand_String: c_int = 0 + 1;
-pub const Type_Binary: c_int = 0 + 2;
-pub const Type_Dword: c_int = 0 + 3;
-pub const Type_Dword_little_endian: c_int = 0 + 4;
-pub const Type_Dword_big_endian: c_int = 0 + 5;
-pub const Type_Link: c_int = 0 + 6;
-pub const Type_Multi_String: c_int = 0 + 7;
-pub const Type_Resource_list: c_int = 0 + 8;
-pub const Type_Full_resource_descriptor: c_int = 0 + 9;
-pub const Type_Resource_requirements_list: c_int = 0 + 10;
-//  ENUM: WOW64ViewMode
-pub const WOW64ViewMode_Default: c_int = 0;
-pub const WOW64ViewMode_32: c_int = 0 + 1;
-pub const WOW64ViewMode_64: c_int = 0 + 2;
-
-//  ENUM: @44
-pub const RICHTEXT_FIELD_STYLE_COMPOSITE: c_int = 0x01;
-pub const RICHTEXT_FIELD_STYLE_RECTANGLE: c_int = 0x02;
-pub const RICHTEXT_FIELD_STYLE_NO_BORDER: c_int = 0x04;
-pub const RICHTEXT_FIELD_STYLE_START_TAG: c_int = 0x08;
-pub const RICHTEXT_FIELD_STYLE_END_TAG: c_int = 0x10;
-
-//  ENUM: @45
-pub const Option_AllowPixelFontSize: c_int = 0x0001;
-
-//  ENUM: wxRichTextStyleType
-pub const RICHTEXT_STYLE_ALL: c_int = 0;
-pub const RICHTEXT_STYLE_PARAGRAPH: c_int = 0 + 1;
-pub const RICHTEXT_STYLE_CHARACTER: c_int = 0 + 2;
-pub const RICHTEXT_STYLE_LIST: c_int = 0 + 3;
-pub const RICHTEXT_STYLE_BOX: c_int = 0 + 4;
-
-//  ENUM: ResourceCat
-pub const ResourceCat_None: c_int = 0;
-pub const ResourceCat_Messages: c_int = 0 + 1;
-//  ENUM: Dir
-pub const Dir_Cache: c_int = 0;
-pub const Dir_Documents: c_int = 0 + 1;
-pub const Dir_Desktop: c_int = 0 + 2;
-pub const Dir_Downloads: c_int = 0 + 3;
-pub const Dir_Music: c_int = 0 + 4;
-pub const Dir_Pictures: c_int = 0 + 5;
-pub const Dir_Videos: c_int = 0 + 6;
-//  ENUM: FileLayout
-pub const FileLayout_Classic: c_int = 0;
-pub const FileLayout_XDG: c_int = 0 + 1;
-//  ENUM: ConfigFileConv
-pub const ConfigFileConv_Dot: c_int = 0;
-pub const ConfigFileConv_Ext: c_int = 0 + 1;
-
-//  ENUM: ScaleMode
-pub const Scale_None: c_int = 0;
-pub const Scale_Fill: c_int = 0 + 1;
-pub const Scale_AspectFit: c_int = 0 + 2;
-pub const Scale_AspectFill: c_int = 0 + 3;
-
-//  ENUM: Kind
-pub const Kind_General: c_int = 0;
-pub const Kind_Advanced: c_int = 0 + 1;
-
-//  ENUM: BufMode
-
-//  ENUM: Source
-pub const Source_Server: c_int = 0;
-pub const Source_Proxy: c_int = 0 + 1;
-
-//  ENUM: State
-pub const State_Idle: c_int = 0;
-pub const State_Unauthorized: c_int = 0 + 1;
-pub const State_Active: c_int = 0 + 2;
-pub const State_Completed: c_int = 0 + 3;
-pub const State_Failed: c_int = 0 + 4;
-pub const State_Cancelled: c_int = 0 + 5;
-//  ENUM: Storage
-pub const Storage_Memory: c_int = 0;
-pub const Storage_File: c_int = 0 + 1;
-pub const Storage_None: c_int = 0 + 2;
-
-//  ENUM: @57
-
 // NODEF: wxDECLARE_APP
 // NODEF: wxIMPLEMENT_APP
 //  SKIP: wxDISABLE_DEBUG_SUPPORT
@@ -1632,7 +1264,7 @@ pub const TOP: c_int = UP;
 pub const BOTTOM: c_int = DOWN;
 pub const NORTH: c_int = UP;
 pub const SOUTH: c_int = DOWN;
-//  SKIP: wxWEST
+pub const WEST: c_int = LEFT;
 pub const EAST: c_int = RIGHT;
 pub const ALL: c_int = (UP | DOWN | RIGHT | LEFT);
 pub const DIRECTION_MASK: c_int = ALL;
@@ -2811,6 +2443,8 @@ pub const BMP_4BPP: c_int = 4;
 pub const BMP_1BPP: c_int = 1;
 pub const BMP_1BPP_BW: c_int = 2;
 
+//   DUP: wxIMAGE_OPTION_GIF_COMMENT
+
 pub const IMAGELIST_DRAW_NORMAL: c_int = 0x0001;
 pub const IMAGELIST_DRAW_TRANSPARENT: c_int = 0x0002;
 pub const IMAGELIST_DRAW_SELECTED: c_int = 0x0004;
@@ -2819,6 +2453,20 @@ pub const IMAGELIST_DRAW_FOCUSED: c_int = 0x0008;
 pub const IMAGE_LIST_NORMAL: c_int = 0;
 pub const IMAGE_LIST_SMALL: c_int = 0 + 1;
 pub const IMAGE_LIST_STATE: c_int = 0 + 2;
+
+//   DUP: wxIMAGE_OPTION_PNG_FORMAT
+//   DUP: wxIMAGE_OPTION_PNG_BITDEPTH
+//   DUP: wxIMAGE_OPTION_PNG_FILTER
+//   DUP: wxIMAGE_OPTION_PNG_COMPRESSION_LEVEL
+//   DUP: wxIMAGE_OPTION_PNG_COMPRESSION_MEM_LEVEL
+//   DUP: wxIMAGE_OPTION_PNG_COMPRESSION_STRATEGY
+//   DUP: wxIMAGE_OPTION_PNG_COMPRESSION_BUFFER_SIZE
+
+//   DUP: wxIMAGE_OPTION_TIFF_BITSPERSAMPLE
+//   DUP: wxIMAGE_OPTION_TIFF_SAMPLESPERPIXEL
+//   DUP: wxIMAGE_OPTION_TIFF_COMPRESSION
+//   DUP: wxIMAGE_OPTION_TIFF_PHOTOMETRIC
+//   DUP: wxIMAGE_OPTION_TIFF_IMAGEDESCRIPTOR
 
 //  ENUM: wxLayoutDirection
 pub const Layout_Default: c_int = 0;
@@ -2862,6 +2510,27 @@ pub const IPC_UTF8TEXT: c_int = 17;
 pub const IPC_UTF32TEXT: c_int = 18;
 pub const IPC_UNICODETEXT: c_int = IPC_UTF16TEXT;
 pub const IPC_PRIVATE: c_int = 20;
+//   DUP: wxIPC_INVALID
+//   DUP: wxIPC_TEXT
+//   DUP: wxIPC_BITMAP
+//   DUP: wxIPC_METAFILE
+//   DUP: wxIPC_SYLK
+//   DUP: wxIPC_DIF
+//   DUP: wxIPC_TIFF
+//   DUP: wxIPC_OEMTEXT
+//   DUP: wxIPC_DIB
+//   DUP: wxIPC_PALETTE
+//   DUP: wxIPC_PENDATA
+//   DUP: wxIPC_RIFF
+//   DUP: wxIPC_WAVE
+//   DUP: wxIPC_UTF16TEXT
+//   DUP: wxIPC_ENHMETAFILE
+//   DUP: wxIPC_FILENAME
+//   DUP: wxIPC_LOCALE
+//   DUP: wxIPC_UTF8TEXT
+//   DUP: wxIPC_UTF32TEXT
+//   DUP: wxIPC_UNICODETEXT
+//   DUP: wxIPC_PRIVATE
 
 //  ENUM: wxLanguage
 pub const LANGUAGE_DEFAULT: c_int = 0;
@@ -3482,7 +3151,19 @@ pub const PG_SETVAL_AGGREGATED: c_int = 0x0002;
 pub const PG_SETVAL_FROM_PARENT: c_int = 0x0004;
 pub const PG_SETVAL_BY_USER: c_int = 0x0008;
 
+//  SKIP: wxPG_LABEL
+//   DUP: wxPG_LABEL_STRING
+//  SKIP: wxPG_COLOUR_BLACK
+//  SKIP: wxPG_COLOUR
+//  SKIP: wxPG_DEFAULT_IMAGE_SIZE
 //  ENUM: wxPG_PROPERTYVALUES_FLAGS
+//   DUP: wxPG_DONT_RECURSE
+//   DUP: wxPG_KEEP_STRUCTURE
+//   DUP: wxPG_RECURSE
+//   DUP: wxPG_INC_ATTRIBUTES
+//   DUP: wxPG_RECURSE_STARTS
+//   DUP: wxPG_FORCE
+//   DUP: wxPG_SORT_TOP_LEVEL_ONLY
 
 //  SKIP: wxPG_IT_CHILDREN
 //  ENUM: wxPG_ITERATOR_FLAGS
@@ -3955,6 +3636,48 @@ pub const SASH_STATUS_OK: c_int = 0;
 pub const SASH_STATUS_OUT_OF_RANGE: c_int = 0 + 1;
 
 //  ENUM: wxIPCFormat
+//   DUP: wxIPC_INVALID
+//   DUP: wxIPC_TEXT
+//   DUP: wxIPC_BITMAP
+//   DUP: wxIPC_METAFILE
+//   DUP: wxIPC_SYLK
+//   DUP: wxIPC_DIF
+//   DUP: wxIPC_TIFF
+//   DUP: wxIPC_OEMTEXT
+//   DUP: wxIPC_DIB
+//   DUP: wxIPC_PALETTE
+//   DUP: wxIPC_PENDATA
+//   DUP: wxIPC_RIFF
+//   DUP: wxIPC_WAVE
+//   DUP: wxIPC_UTF16TEXT
+//   DUP: wxIPC_ENHMETAFILE
+//   DUP: wxIPC_FILENAME
+//   DUP: wxIPC_LOCALE
+//   DUP: wxIPC_UTF8TEXT
+//   DUP: wxIPC_UTF32TEXT
+//   DUP: wxIPC_UNICODETEXT
+//   DUP: wxIPC_PRIVATE
+//   DUP: wxIPC_INVALID
+//   DUP: wxIPC_TEXT
+//   DUP: wxIPC_BITMAP
+//   DUP: wxIPC_METAFILE
+//   DUP: wxIPC_SYLK
+//   DUP: wxIPC_DIF
+//   DUP: wxIPC_TIFF
+//   DUP: wxIPC_OEMTEXT
+//   DUP: wxIPC_DIB
+//   DUP: wxIPC_PALETTE
+//   DUP: wxIPC_PENDATA
+//   DUP: wxIPC_RIFF
+//   DUP: wxIPC_WAVE
+//   DUP: wxIPC_UTF16TEXT
+//   DUP: wxIPC_ENHMETAFILE
+//   DUP: wxIPC_FILENAME
+//   DUP: wxIPC_LOCALE
+//   DUP: wxIPC_UTF8TEXT
+//   DUP: wxIPC_UTF32TEXT
+//   DUP: wxIPC_UNICODETEXT
+//   DUP: wxIPC_PRIVATE
 
 // NODEF: wxON_BLOCK_EXIT
 // NODEF: wxON_BLOCK_EXIT0
@@ -6951,12 +6674,56 @@ pub const ZLIB_GZIP: c_int = 2;
 pub const ZLIB_AUTO: c_int = 3;
 
 //  ENUM: @48
+//   DUP: wxTP_DEFAULT
 
 //  ENUM: wxMessageQueueError
+//   DUP: wxMSGQUEUE_NO_ERROR
+//   DUP: wxMSGQUEUE_TIMEOUT
+//   DUP: wxMSGQUEUE_MISC_ERROR
 
 //  ENUM: wxNumValidatorStyle
+//   DUP: wxNUM_VAL_DEFAULT
+//   DUP: wxNUM_VAL_THOUSANDS_SEPARATOR
+//   DUP: wxNUM_VAL_ZERO_AS_BLANK
+//   DUP: wxNUM_VAL_NO_TRAILING_ZEROES
 
 //  ENUM: wxAuiToolBarStyle
+//   DUP: wxAUI_TB_TEXT
+//   DUP: wxAUI_TB_NO_TOOLTIPS
+//   DUP: wxAUI_TB_NO_AUTORESIZE
+//   DUP: wxAUI_TB_GRIPPER
+//   DUP: wxAUI_TB_OVERFLOW
+//   DUP: wxAUI_TB_VERTICAL
+//   DUP: wxAUI_TB_HORZ_LAYOUT
+//   DUP: wxAUI_TB_HORIZONTAL
+//   DUP: wxAUI_TB_PLAIN_BACKGROUND
+//   DUP: wxAUI_TB_HORZ_TEXT
+//   DUP: wxAUI_ORIENTATION_MASK
+//   DUP: wxAUI_TB_DEFAULT_STYLE
 //  ENUM: wxAuiToolBarArtSetting
+//   DUP: wxAUI_TBART_SEPARATOR_SIZE
+//   DUP: wxAUI_TBART_GRIPPER_SIZE
+//  SKIP: wxAUI_TBART_OVERFLOW_SIZE
 //  ENUM: wxAuiToolBarToolTextOrientation
+//   DUP: wxAUI_TBTOOL_TEXT_LEFT
+//   DUP: wxAUI_TBTOOL_TEXT_RIGHT
+//   DUP: wxAUI_TBTOOL_TEXT_TOP
+//   DUP: wxAUI_TBTOOL_TEXT_BOTTOM
 //  ENUM: wxAuiPaneDockArtSetting
+//   DUP: wxAUI_DOCKART_SASH_SIZE
+//   DUP: wxAUI_DOCKART_CAPTION_SIZE
+//   DUP: wxAUI_DOCKART_GRIPPER_SIZE
+//   DUP: wxAUI_DOCKART_PANE_BORDER_SIZE
+//   DUP: wxAUI_DOCKART_PANE_BUTTON_SIZE
+//   DUP: wxAUI_DOCKART_BACKGROUND_COLOUR
+//   DUP: wxAUI_DOCKART_SASH_COLOUR
+//   DUP: wxAUI_DOCKART_ACTIVE_CAPTION_COLOUR
+//   DUP: wxAUI_DOCKART_ACTIVE_CAPTION_GRADIENT_COLOUR
+//   DUP: wxAUI_DOCKART_INACTIVE_CAPTION_COLOUR
+//   DUP: wxAUI_DOCKART_INACTIVE_CAPTION_GRADIENT_COLOUR
+//   DUP: wxAUI_DOCKART_ACTIVE_CAPTION_TEXT_COLOUR
+//   DUP: wxAUI_DOCKART_INACTIVE_CAPTION_TEXT_COLOUR
+//   DUP: wxAUI_DOCKART_BORDER_COLOUR
+//   DUP: wxAUI_DOCKART_GRIPPER_COLOUR
+//   DUP: wxAUI_DOCKART_CAPTION_FONT
+//   DUP: wxAUI_DOCKART_GRADIENT_TYPE

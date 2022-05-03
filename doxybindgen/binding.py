@@ -63,6 +63,10 @@ class RustClassBinding:
     def _impl_with_ctors(self):
         unprefixed = self.__model.unprefixed()
         yield 'impl %s {' % (unprefixed,)
+        for enum in self.__model.enums:
+            for line in enum.generate():
+                yield '    %s' % (line,)
+            yield ''
         for ctor in self._ctors():
             for line in ctor.lines():
                 yield '    %s' % (line,)

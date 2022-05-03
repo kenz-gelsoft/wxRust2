@@ -584,5 +584,12 @@ bool wxValidator_Validate(wxValidator * self, wxWindow * parent);
 void wxValidator_SuppressBellOnError(bool suppress);
 bool wxValidator_IsSilent();
 
+// CLASS: wxStaticBitmap
+wxStaticBitmap *wxStaticBitmap_new();
+wxStaticBitmap *wxStaticBitmap_new1(wxWindow * parent, wxWindowID id, const wxBitmap * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+bool wxStaticBitmap_Create(wxStaticBitmap * self, wxWindow * parent, wxWindowID id, const wxBitmap * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+void wxStaticBitmap_SetBitmap(wxStaticBitmap * self, const wxBitmap * label);
+void wxStaticBitmap_SetIcon(wxStaticBitmap * self, const wxIcon * label);
+
 } // extern "C"
 
