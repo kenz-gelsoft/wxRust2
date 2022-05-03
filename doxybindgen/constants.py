@@ -100,17 +100,28 @@ blocklist = [
     'wxPG_PROP_BEING_DELETED',
 ]
 generated = set()
-def generate_define(e):
-    name = e.findtext('name')
-    if name in generated:
-        return
-    generated.add(name)
-    if name in blocklist or name in typedefs:
-        yield '//  SKIP: %s' % (name,)
-        return
-    initializer = e.find('initializer')
-    if initializer is not None:
-        v = ''.join(initializer.itertext())
+class Define:
+    def __init__(self, e):
+        self.name = e.findtext('name')
+        initializer = e.find('initializer')
+        self.__initializer = initializer.itertext() if initializer is not None else None
+
+    def blocked_reason(self):
+        if self.__initializer is None:
+            return 'NODEF'
+
+        if self.name in generated:
+            return '  DUP'
+        
+        if (self.name in blocklist or
+            self.name in typedefs):
+            return ' SKIP'
+        
+        return None
+
+    def __str__(self):
+        name = self.name
+        v = ''.join(self.__initializer)
         v = ''.join(map(lambda s: s.lstrip(), v.split('\\\n')))
         t = 'c_int'
         if name in long_types:
@@ -131,9 +142,17 @@ def generate_define(e):
         if '"' not in v:
             v = RE_IDENT.sub(r'\1', v)
         name = RE_IDENT.sub(r'\1', name)
-        yield 'pub const %s: %s = %s;' % (name, t, v)
-    else:
-        yield '// NODEF: %s' % (name,)
+        return 'pub const %s: %s = %s;' % (name, t, v)
+
+def generate_define(e):
+    d = Define(e)
+    name = d.name
+    blocked = d.blocked_reason()
+    if blocked is not None:
+        yield '// %s: %s' % (blocked, name)
+        return
+    generated.add(name)
+    yield d
 
 long_types = [
     'wxAC_DEFAULT_STYLE',
@@ -200,36 +219,77 @@ long_types = [
     'wxWINDOW_STYLE_MASK',
 ]
 
-def generate_enum(e):
-    name = e.findtext('name')
-    yield '//  ENUM: %s' % (name,)
-    current_initializer = '= 0'
-    count = 0
-    for v in e.findall('enumvalue'):
-        vname = v.findtext('name')
-        if vname in generated:
-            continue
-        generated.add(vname)
-        if vname in blocklist:
-            yield '//  SKIP: %s' % (vname,)
-            continue
-        initializer = v.findtext('initializer')
-        if initializer is None:
-            if count:
-                initializer = '%s + %s' % (current_initializer, count)
+class Enum:
+    def __init__(self, e):
+        self.name = e.findtext('name')
+        self.__current_initializer = '= 0'
+        self.__count = 0
+        self.__values = []
+        for v in e.findall('enumvalue'):
+            v = EnumValue(self, v)
+            self._add_value(v)
+    
+    def _add_value(self, v):
+        if v.initializer is None:
+            if self.__count:
+                v.initializer = '%s + %s' % (
+                    self.__current_initializer,
+                    self.__count,
+                )
             else:
-                initializer = current_initializer
-            count += 1
+                v.initializer = self.__current_initializer
+            self.__count += 1
         else:
-            current_initializer = initializer
-            count = 1
-        initializer = initializer.replace('~', '!') # special replacement for wxPATH_NORM_ALL
+            self.__current_initializer = v.initializer
+            self.__count = 1
+        self.__values.append(v)
+    
+    def generate(self):
+        yield '//  ENUM: %s' % (self.name,)
+        for v in self.__values:
+            blocked = v.blocked_reason()
+            if blocked is not None:
+                yield '// %s: %s' % (
+                    blocked,
+                    v.name,
+                )
+                continue
+            generated.add(v.name)
+            yield v
+
+class EnumValue:
+    def __init__(self, enum, e):
+        self.__enum = enum
+        self.name = e.findtext('name')
+        self.initializer = e.findtext('initializer')
+    
+    def blocked_reason(self):
+        if self.name in generated:
+            return '  DUP'
+        
+        if (self.name in blocklist or
+            self.name in typedefs):
+            return ' SKIP'
+        
+        return None
+    
+    def __str__(self):
+        initializer = self.initializer.replace('~', '!') # special replacement for wxPATH_NORM_ALL
         t = 'c_int'
-        if name in long_types:
+        if self.__enum.name in long_types:
             t = 'c_long'
         if "'" in initializer:
             t = 'char'
-        vname = RE_IDENT.sub(r'\1', vname)
+        self.name = RE_IDENT.sub(r'\1', self.name)
         initializer = RE_IDENT.sub(r'\1', initializer)
-        yield 'pub const %s: %s %s;' % (vname, t, initializer)
+        return 'pub const %s: %s %s;' % (
+            self.name,
+            t,
+            initializer,
+        )
+
+def generate_enum(e):
+    enum = Enum(e)
+    for line in enum.generate():
+        yield line
 

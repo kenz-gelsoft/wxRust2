@@ -298,16 +298,17 @@ pub const HKDD: c_int = 0 + 6;
 pub const HKMAX: c_int = 0 + 7;
 //  ENUM: ValueType
 pub const Type_None: c_int = 0;
-pub const Type_Expand_String: c_int = 0 + 1;
-pub const Type_Binary: c_int = 0 + 2;
-pub const Type_Dword: c_int = 0 + 3;
-pub const Type_Dword_little_endian: c_int = 0 + 4;
-pub const Type_Dword_big_endian: c_int = 0 + 5;
-pub const Type_Link: c_int = 0 + 6;
-pub const Type_Multi_String: c_int = 0 + 7;
-pub const Type_Resource_list: c_int = 0 + 8;
-pub const Type_Full_resource_descriptor: c_int = 0 + 9;
-pub const Type_Resource_requirements_list: c_int = 0 + 10;
+//   DUP: Type_String
+pub const Type_Expand_String: c_int = 0 + 2;
+pub const Type_Binary: c_int = 0 + 3;
+pub const Type_Dword: c_int = 0 + 4;
+pub const Type_Dword_little_endian: c_int = 0 + 5;
+pub const Type_Dword_big_endian: c_int = 0 + 6;
+pub const Type_Link: c_int = 0 + 7;
+pub const Type_Multi_String: c_int = 0 + 8;
+pub const Type_Resource_list: c_int = 0 + 9;
+pub const Type_Full_resource_descriptor: c_int = 0 + 10;
+pub const Type_Resource_requirements_list: c_int = 0 + 11;
 //  ENUM: WOW64ViewMode
 pub const WOW64ViewMode_Default: c_int = 0;
 pub const WOW64ViewMode_32: c_int = 0 + 1;
@@ -359,6 +360,9 @@ pub const Kind_General: c_int = 0;
 pub const Kind_Advanced: c_int = 0 + 1;
 
 //  ENUM: BufMode
+//   DUP: read
+//   DUP: write
+//   DUP: read_write
 
 //  ENUM: Source
 pub const Source_Server: c_int = 0;
@@ -377,6 +381,7 @@ pub const Storage_File: c_int = 0 + 1;
 pub const Storage_None: c_int = 0 + 2;
 
 //  ENUM: @57
+//   DUP: NO_IMAGE
 
 // NODEF: wxDECLARE_APP
 // NODEF: wxIMPLEMENT_APP
@@ -2771,6 +2776,7 @@ pub const BMP_4BPP: c_int =  4;
 pub const BMP_1BPP: c_int =  1;
 pub const BMP_1BPP_BW: c_int =  2;
 
+//   DUP: wxIMAGE_OPTION_GIF_COMMENT
 
 pub const IMAGELIST_DRAW_NORMAL: c_int = 0x0001;
 pub const IMAGELIST_DRAW_TRANSPARENT: c_int = 0x0002;
@@ -2781,7 +2787,19 @@ pub const IMAGE_LIST_NORMAL: c_int = 0;
 pub const IMAGE_LIST_SMALL: c_int = 0 + 1;
 pub const IMAGE_LIST_STATE: c_int = 0 + 2;
 
+//   DUP: wxIMAGE_OPTION_PNG_FORMAT
+//   DUP: wxIMAGE_OPTION_PNG_BITDEPTH
+//   DUP: wxIMAGE_OPTION_PNG_FILTER
+//   DUP: wxIMAGE_OPTION_PNG_COMPRESSION_LEVEL
+//   DUP: wxIMAGE_OPTION_PNG_COMPRESSION_MEM_LEVEL
+//   DUP: wxIMAGE_OPTION_PNG_COMPRESSION_STRATEGY
+//   DUP: wxIMAGE_OPTION_PNG_COMPRESSION_BUFFER_SIZE
 
+//   DUP: wxIMAGE_OPTION_TIFF_BITSPERSAMPLE
+//   DUP: wxIMAGE_OPTION_TIFF_SAMPLESPERPIXEL
+//   DUP: wxIMAGE_OPTION_TIFF_COMPRESSION
+//   DUP: wxIMAGE_OPTION_TIFF_PHOTOMETRIC
+//   DUP: wxIMAGE_OPTION_TIFF_IMAGEDESCRIPTOR
 
 //  ENUM: wxLayoutDirection
 pub const Layout_Default: c_int = 0;
@@ -2825,6 +2843,27 @@ pub const IPC_UTF8TEXT: c_int =    17;
 pub const IPC_UTF32TEXT: c_int =   18;
 pub const IPC_UNICODETEXT: c_int = IPC_UTF16TEXT;
 pub const IPC_PRIVATE: c_int =     20;
+//   DUP: wxIPC_INVALID
+//   DUP: wxIPC_TEXT
+//   DUP: wxIPC_BITMAP
+//   DUP: wxIPC_METAFILE
+//   DUP: wxIPC_SYLK
+//   DUP: wxIPC_DIF
+//   DUP: wxIPC_TIFF
+//   DUP: wxIPC_OEMTEXT
+//   DUP: wxIPC_DIB
+//   DUP: wxIPC_PALETTE
+//   DUP: wxIPC_PENDATA
+//   DUP: wxIPC_RIFF
+//   DUP: wxIPC_WAVE
+//   DUP: wxIPC_UTF16TEXT
+//   DUP: wxIPC_ENHMETAFILE
+//   DUP: wxIPC_FILENAME
+//   DUP: wxIPC_LOCALE
+//   DUP: wxIPC_UTF8TEXT
+//   DUP: wxIPC_UTF32TEXT
+//   DUP: wxIPC_UNICODETEXT
+//   DUP: wxIPC_PRIVATE
 
 //  ENUM: wxLanguage
 pub const LANGUAGE_DEFAULT: c_int = 0;
@@ -3444,7 +3483,19 @@ pub const PG_SETVAL_AGGREGATED: c_int = 0x0002;
 pub const PG_SETVAL_FROM_PARENT: c_int = 0x0004;
 pub const PG_SETVAL_BY_USER: c_int = 0x0008;
 
+//  SKIP: wxPG_LABEL
+//   DUP: wxPG_LABEL_STRING
+//  SKIP: wxPG_COLOUR_BLACK
+//  SKIP: wxPG_COLOUR
+//  SKIP: wxPG_DEFAULT_IMAGE_SIZE
 //  ENUM: wxPG_PROPERTYVALUES_FLAGS
+//   DUP: wxPG_DONT_RECURSE
+//   DUP: wxPG_KEEP_STRUCTURE
+//   DUP: wxPG_RECURSE
+//   DUP: wxPG_INC_ATTRIBUTES
+//   DUP: wxPG_RECURSE_STARTS
+//   DUP: wxPG_FORCE
+//   DUP: wxPG_SORT_TOP_LEVEL_ONLY
 
 //  SKIP: wxPG_IT_CHILDREN
 //  ENUM: wxPG_ITERATOR_FLAGS
@@ -3915,6 +3966,48 @@ pub const SASH_STATUS_OK: c_int = 0;
 pub const SASH_STATUS_OUT_OF_RANGE: c_int = 0 + 1;
 
 //  ENUM: wxIPCFormat
+//   DUP: wxIPC_INVALID
+//   DUP: wxIPC_TEXT
+//   DUP: wxIPC_BITMAP
+//   DUP: wxIPC_METAFILE
+//   DUP: wxIPC_SYLK
+//   DUP: wxIPC_DIF
+//   DUP: wxIPC_TIFF
+//   DUP: wxIPC_OEMTEXT
+//   DUP: wxIPC_DIB
+//   DUP: wxIPC_PALETTE
+//   DUP: wxIPC_PENDATA
+//   DUP: wxIPC_RIFF
+//   DUP: wxIPC_WAVE
+//   DUP: wxIPC_UTF16TEXT
+//   DUP: wxIPC_ENHMETAFILE
+//   DUP: wxIPC_FILENAME
+//   DUP: wxIPC_LOCALE
+//   DUP: wxIPC_UTF8TEXT
+//   DUP: wxIPC_UTF32TEXT
+//   DUP: wxIPC_UNICODETEXT
+//   DUP: wxIPC_PRIVATE
+//   DUP: wxIPC_INVALID
+//   DUP: wxIPC_TEXT
+//   DUP: wxIPC_BITMAP
+//   DUP: wxIPC_METAFILE
+//   DUP: wxIPC_SYLK
+//   DUP: wxIPC_DIF
+//   DUP: wxIPC_TIFF
+//   DUP: wxIPC_OEMTEXT
+//   DUP: wxIPC_DIB
+//   DUP: wxIPC_PALETTE
+//   DUP: wxIPC_PENDATA
+//   DUP: wxIPC_RIFF
+//   DUP: wxIPC_WAVE
+//   DUP: wxIPC_UTF16TEXT
+//   DUP: wxIPC_ENHMETAFILE
+//   DUP: wxIPC_FILENAME
+//   DUP: wxIPC_LOCALE
+//   DUP: wxIPC_UTF8TEXT
+//   DUP: wxIPC_UTF32TEXT
+//   DUP: wxIPC_UNICODETEXT
+//   DUP: wxIPC_PRIVATE
 
 // NODEF: wxON_BLOCK_EXIT
 // NODEF: wxON_BLOCK_EXIT0
@@ -6889,13 +6982,57 @@ pub const ZLIB_GZIP: c_int = 2;
 pub const ZLIB_AUTO: c_int = 3;
 
 //  ENUM: @48
+//   DUP: wxTP_DEFAULT
 
 //  ENUM: wxMessageQueueError
+//   DUP: wxMSGQUEUE_NO_ERROR
+//   DUP: wxMSGQUEUE_TIMEOUT
+//   DUP: wxMSGQUEUE_MISC_ERROR
 
 //  ENUM: wxNumValidatorStyle
+//   DUP: wxNUM_VAL_DEFAULT
+//   DUP: wxNUM_VAL_THOUSANDS_SEPARATOR
+//   DUP: wxNUM_VAL_ZERO_AS_BLANK
+//   DUP: wxNUM_VAL_NO_TRAILING_ZEROES
 
 //  ENUM: wxAuiToolBarStyle
+//   DUP: wxAUI_TB_TEXT
+//   DUP: wxAUI_TB_NO_TOOLTIPS
+//   DUP: wxAUI_TB_NO_AUTORESIZE
+//   DUP: wxAUI_TB_GRIPPER
+//   DUP: wxAUI_TB_OVERFLOW
+//   DUP: wxAUI_TB_VERTICAL
+//   DUP: wxAUI_TB_HORZ_LAYOUT
+//   DUP: wxAUI_TB_HORIZONTAL
+//   DUP: wxAUI_TB_PLAIN_BACKGROUND
+//   DUP: wxAUI_TB_HORZ_TEXT
+//   DUP: wxAUI_ORIENTATION_MASK
+//   DUP: wxAUI_TB_DEFAULT_STYLE
 //  ENUM: wxAuiToolBarArtSetting
+//   DUP: wxAUI_TBART_SEPARATOR_SIZE
+//   DUP: wxAUI_TBART_GRIPPER_SIZE
+//  SKIP: wxAUI_TBART_OVERFLOW_SIZE
 //  ENUM: wxAuiToolBarToolTextOrientation
+//   DUP: wxAUI_TBTOOL_TEXT_LEFT
+//   DUP: wxAUI_TBTOOL_TEXT_RIGHT
+//   DUP: wxAUI_TBTOOL_TEXT_TOP
+//   DUP: wxAUI_TBTOOL_TEXT_BOTTOM
 //  ENUM: wxAuiPaneDockArtSetting
+//   DUP: wxAUI_DOCKART_SASH_SIZE
+//   DUP: wxAUI_DOCKART_CAPTION_SIZE
+//   DUP: wxAUI_DOCKART_GRIPPER_SIZE
+//   DUP: wxAUI_DOCKART_PANE_BORDER_SIZE
+//   DUP: wxAUI_DOCKART_PANE_BUTTON_SIZE
+//   DUP: wxAUI_DOCKART_BACKGROUND_COLOUR
+//   DUP: wxAUI_DOCKART_SASH_COLOUR
+//   DUP: wxAUI_DOCKART_ACTIVE_CAPTION_COLOUR
+//   DUP: wxAUI_DOCKART_ACTIVE_CAPTION_GRADIENT_COLOUR
+//   DUP: wxAUI_DOCKART_INACTIVE_CAPTION_COLOUR
+//   DUP: wxAUI_DOCKART_INACTIVE_CAPTION_GRADIENT_COLOUR
+//   DUP: wxAUI_DOCKART_ACTIVE_CAPTION_TEXT_COLOUR
+//   DUP: wxAUI_DOCKART_INACTIVE_CAPTION_TEXT_COLOUR
+//   DUP: wxAUI_DOCKART_BORDER_COLOUR
+//   DUP: wxAUI_DOCKART_GRIPPER_COLOUR
+//   DUP: wxAUI_DOCKART_CAPTION_FONT
+//   DUP: wxAUI_DOCKART_GRADIENT_TYPE
 
