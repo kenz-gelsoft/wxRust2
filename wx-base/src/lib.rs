@@ -1,4 +1,5 @@
 use std::convert::TryInto;
+use std::marker::PhantomData;
 use std::os::raw::{c_char, c_int, c_void};
 use std::ptr;
 
@@ -33,6 +34,11 @@ mod ffi {
         pub fn wxString_Len(self_: *mut c_void) -> usize;
 
         pub fn wxRustEntry(argc: *mut c_int, argv: *mut *mut c_char) -> c_int;
+
+        // WeakRef
+        pub fn wxRustWeakRef_new(obj: *mut c_void) -> *mut c_void;
+        pub fn wxRustWeakRef_delete(self_: *mut c_void);
+        pub fn wxRustWeakRef_get(self_: *mut c_void) -> *mut c_void;
     }
 }
 
@@ -106,5 +112,27 @@ pub fn entry() {
     let mut argc: c_int = args.len().try_into().unwrap();
     unsafe {
         ffi::wxRustEntry(&mut argc, argv.as_mut_ptr());
+    }
+}
+
+// wxWeakRef
+pub struct WeakRef<T>(*mut c_void, T);
+impl<'a, T: WxRustMethods> WeakRef<T> {
+    pub fn new(obj: T) -> Self {
+        unsafe { WeakRef(ffi::wxRustWeakRef_new(obj.as_ptr()), obj) }
+    }
+    pub fn get(&'a self) -> Option<&'a T> {
+        unsafe {
+            if ffi::wxRustWeakRef_get(self.0).is_null() {
+                None
+            } else {
+                Some(&self.1)
+            }
+        }
+    }
+}
+impl<T> Drop for WeakRef<T> {
+    fn drop(&mut self) {
+        unsafe { ffi::wxRustWeakRef_delete(self.0) }
     }
 }
