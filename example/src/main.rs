@@ -32,7 +32,12 @@ fn main() {
             button_copy.set_label("clicked");
             println!("s={}", button_copy.get_label())
         });
-        frame.centre(wx::BOTH);
-        frame.show(true);
+        // frame.centre(wx::BOTH);
+        // frame.show(true);
+        let weak_frame = wx::WeakRef::new(frame);
+        if let Some(f) = weak_frame.get() {
+            f.centre(wx::BOTH);
+            f.show(true);
+        }
     });
 }

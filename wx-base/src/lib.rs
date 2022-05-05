@@ -36,9 +36,9 @@ mod ffi {
         pub fn wxRustEntry(argc: *mut c_int, argv: *mut *mut c_char) -> c_int;
 
         // WeakRef
-        pub fn wxRustWeakRef_new(obj: *mut c_void) -> *mut c_void;
-        pub fn wxRustWeakRef_delete(self_: *mut c_void);
-        pub fn wxRustWeakRef_get(self_: *mut c_void) -> *mut c_void;
+        pub fn OpaqueWeakRef_new(obj: *mut c_void) -> *mut c_void;
+        pub fn OpaqueWeakRef_delete(self_: *mut c_void);
+        pub fn OpaqueWeakRef_Get(self_: *mut c_void) -> *mut c_void;
     }
 }
 
@@ -119,11 +119,11 @@ pub fn entry() {
 pub struct WeakRef<T>(*mut c_void, T);
 impl<'a, T: WxRustMethods> WeakRef<T> {
     pub fn new(obj: T) -> Self {
-        unsafe { WeakRef(ffi::wxRustWeakRef_new(obj.as_ptr()), obj) }
+        unsafe { WeakRef(ffi::OpaqueWeakRef_new(obj.as_ptr()), obj) }
     }
     pub fn get(&'a self) -> Option<&'a T> {
         unsafe {
-            if ffi::wxRustWeakRef_get(self.0).is_null() {
+            if ffi::OpaqueWeakRef_Get(self.0).is_null() {
                 None
             } else {
                 Some(&self.1)
@@ -133,6 +133,6 @@ impl<'a, T: WxRustMethods> WeakRef<T> {
 }
 impl<T> Drop for WeakRef<T> {
     fn drop(&mut self) {
-        unsafe { ffi::wxRustWeakRef_delete(self.0) }
+        unsafe { ffi::OpaqueWeakRef_delete(self.0) }
     }
 }
