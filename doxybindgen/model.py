@@ -144,12 +144,28 @@ class Method:
         else:
             return None
 
+    def wrapped_return_type2(self):
+        if (self.is_ctor or
+            self.returns_new2()):
+            return self.returns.typename
+        else:
+            return None
+
     def returns_new(self):
         if self.is_blocked():
             return False
         if self.returns.is_str():
             return True
         if self.returns.needs_new():
+            return True
+        return False
+
+    def returns_new2(self):
+        if self.is_blocked():
+            return False
+        if self.returns.is_str():
+            return True
+        if self.returns.needs_new2():
             return True
         return False
 
@@ -212,6 +228,9 @@ class RustType:
         return False
 
     def needs_new(self):
+        return False
+    
+    def needs_new2(self):
         return False
     
     def is_void(self):
@@ -401,6 +420,9 @@ class CxxType:
     
     def needs_new(self):
         return self._is_binding_type() and not self.__indirection
+    
+    def needs_new2(self):
+        return self._is_binding_type() and self.__indirection != '&'
     
     def _is_binding_type(self):
         return self.__manager.is_binding_type(self.typename)
