@@ -139,7 +139,8 @@ class Method:
 
     def wrapped_return_type(self, allows_ptr):
         if (self.is_ctor or
-            self.returns_new(allows_ptr)):
+            self.returns_new(allows_ptr) or 
+            allows_ptr and self.returns.is_ptr_to_binding()):
             return self.returns.typename
         else:
             return None
@@ -149,7 +150,7 @@ class Method:
             return False
         if self.returns.is_str():
             return True
-        if self.returns.needs_new(allows_ptr):
+        if self.returns.needs_new():
             return True
         return False
 
@@ -211,7 +212,7 @@ class RustType:
     def not_supported(self):
         return False
 
-    def needs_new(self, allows_ptr):
+    def needs_new(self):
         return False
     
     def is_void(self):
@@ -395,17 +396,12 @@ class CxxType:
             return False
         if self.__indirection:
             return False
-        if self.needs_new(allows_ptr=False):
+        if self.needs_new():
             return False
         return True
     
-    def needs_new(self, allows_ptr):
-        if not self._is_binding_type():
-            return False
-        if allows_ptr:
-            return self.__indirection != '&'
-        else:
-            return not self.__indirection
+    def needs_new(self):
+        return self._is_binding_type() and not self.__indirection
     
     def _is_binding_type(self):
         return self.__manager.is_binding_type(self.typename)
