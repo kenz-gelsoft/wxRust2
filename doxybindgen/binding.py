@@ -73,6 +73,9 @@ class RustClassBinding:
         yield "    pub fn none() -> Option<&'static Self> {"
         yield '        None'
         yield '    }'
+        yield '    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {'
+        yield '        %s(ptr)' % (unprefixed,)
+        yield '    }'
         yield '}'
     
     def _impl_drop_if_needed(self):
@@ -230,7 +233,7 @@ class RustMethodBinding:
         if self.__model.returns.is_void():
             return ''
         returns = self.__model.returns.in_rust(for_ffi=True)
-        wrapped = self.__model.wrapped_return_type()
+        wrapped = self.__model.wrapped_return_type2()
         if wrapped:
             if for_ffi:
                 returns = '*mut c_void'
@@ -371,10 +374,13 @@ class RustMethodBinding:
 
     def _wrap_return_type(self, call):
         wrapped = self.__model.wrapped_return_type()
+        wrapped2 = self.__model.wrapped_return_type2()
         if self.__model.returns.is_str():
             return 'wx_base::from_wx_string(%s)' % (call,)
         if wrapped:
             return '%s(%s)' % (wrapped[2:], call)
+        if wrapped2:
+            return '%s::from_ptr(%s)' % (wrapped2[2:], call)
         return call
 
     def _uses_ptr_type(self):

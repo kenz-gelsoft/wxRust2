@@ -1123,13 +1123,13 @@ pub mod methods {
         fn destroy_children(&self) -> bool {
             unsafe { ffi::wxWindow_DestroyChildren(self.as_ptr()) }
         }
-        fn find_window_long(&self, id: c_long) -> *mut c_void {
-            unsafe { ffi::wxWindow_FindWindow(self.as_ptr(), id) }
+        fn find_window_long(&self, id: c_long) -> Window {
+            unsafe { Window::from_ptr(ffi::wxWindow_FindWindow(self.as_ptr(), id)) }
         }
-        fn find_window_str(&self, name: &str) -> *mut c_void {
+        fn find_window_str(&self, name: &str) -> Window {
             unsafe {
                 let name = wx_base::wx_string_from(name);
-                ffi::wxWindow_FindWindow1(self.as_ptr(), name)
+                Window::from_ptr(ffi::wxWindow_FindWindow1(self.as_ptr(), name))
             }
         }
         // BLOCKED: fn GetChildren()
@@ -1143,17 +1143,17 @@ pub mod methods {
                 ffi::wxWindow_RemoveChild(self.as_ptr(), child)
             }
         }
-        fn get_grand_parent(&self) -> *mut c_void {
-            unsafe { ffi::wxWindow_GetGrandParent(self.as_ptr()) }
+        fn get_grand_parent(&self) -> Window {
+            unsafe { Window::from_ptr(ffi::wxWindow_GetGrandParent(self.as_ptr())) }
         }
-        fn get_next_sibling(&self) -> *mut c_void {
-            unsafe { ffi::wxWindow_GetNextSibling(self.as_ptr()) }
+        fn get_next_sibling(&self) -> Window {
+            unsafe { Window::from_ptr(ffi::wxWindow_GetNextSibling(self.as_ptr())) }
         }
-        fn get_parent(&self) -> *mut c_void {
-            unsafe { ffi::wxWindow_GetParent(self.as_ptr()) }
+        fn get_parent(&self) -> Window {
+            unsafe { Window::from_ptr(ffi::wxWindow_GetParent(self.as_ptr())) }
         }
-        fn get_prev_sibling(&self) -> *mut c_void {
-            unsafe { ffi::wxWindow_GetPrevSibling(self.as_ptr()) }
+        fn get_prev_sibling(&self) -> Window {
+            unsafe { Window::from_ptr(ffi::wxWindow_GetPrevSibling(self.as_ptr())) }
         }
         fn is_descendant<T: WindowMethods>(&self, win: Option<&T>) -> bool {
             unsafe {
@@ -1787,8 +1787,8 @@ pub mod methods {
         fn set_transparent(&self, alpha: c_uchar) -> bool {
             unsafe { ffi::wxWindow_SetTransparent(self.as_ptr(), alpha) }
         }
-        fn get_event_handler(&self) -> *mut c_void {
-            unsafe { ffi::wxWindow_GetEventHandler(self.as_ptr()) }
+        fn get_event_handler(&self) -> EvtHandler {
+            unsafe { EvtHandler::from_ptr(ffi::wxWindow_GetEventHandler(self.as_ptr())) }
         }
         fn handle_as_navigation_key(&self, event: *const c_void) -> bool {
             unsafe { ffi::wxWindow_HandleAsNavigationKey(self.as_ptr(), event) }
@@ -1802,8 +1802,10 @@ pub mod methods {
         fn process_window_event_locally(&self, event: *mut c_void) -> bool {
             unsafe { ffi::wxWindow_ProcessWindowEventLocally(self.as_ptr(), event) }
         }
-        fn pop_event_handler(&self, delete_handler: bool) -> *mut c_void {
-            unsafe { ffi::wxWindow_PopEventHandler(self.as_ptr(), delete_handler) }
+        fn pop_event_handler(&self, delete_handler: bool) -> EvtHandler {
+            unsafe {
+                EvtHandler::from_ptr(ffi::wxWindow_PopEventHandler(self.as_ptr(), delete_handler))
+            }
         }
         fn push_event_handler<T: EvtHandlerMethods>(&self, handler: Option<&T>) {
             unsafe {
@@ -1989,8 +1991,8 @@ pub mod methods {
                 ffi::wxWindow_PopupMenu1(self.as_ptr(), menu, x, y)
             }
         }
-        fn get_validator(&self) -> *mut c_void {
-            unsafe { ffi::wxWindow_GetValidator(self.as_ptr()) }
+        fn get_validator(&self) -> Validator {
+            unsafe { Validator::from_ptr(ffi::wxWindow_GetValidator(self.as_ptr())) }
         }
         fn set_validator(&self, validator: &Validator) {
             unsafe {
@@ -2171,40 +2173,40 @@ pub mod methods {
             unsafe { ffi::wxWindow_UpdateWindowUI(self.as_ptr(), flags) }
         }
         // NOT_SUPPORTED: fn GetClassDefaultAttributes()
-        fn find_focus() -> *mut c_void {
-            unsafe { ffi::wxWindow_FindFocus() }
+        fn find_focus() -> Window {
+            unsafe { Window::from_ptr(ffi::wxWindow_FindFocus()) }
         }
-        fn find_window_by_id<T: WindowMethods>(id: c_long, parent: Option<&T>) -> *mut c_void {
+        fn find_window_by_id<T: WindowMethods>(id: c_long, parent: Option<&T>) -> Window {
             unsafe {
                 let parent = match parent {
                     Some(r) => r.as_ptr(),
                     None => ptr::null_mut(),
                 };
-                ffi::wxWindow_FindWindowById(id, parent)
+                Window::from_ptr(ffi::wxWindow_FindWindowById(id, parent))
             }
         }
-        fn find_window_by_label<T: WindowMethods>(label: &str, parent: Option<&T>) -> *mut c_void {
+        fn find_window_by_label<T: WindowMethods>(label: &str, parent: Option<&T>) -> Window {
             unsafe {
                 let label = wx_base::wx_string_from(label);
                 let parent = match parent {
                     Some(r) => r.as_ptr(),
                     None => ptr::null_mut(),
                 };
-                ffi::wxWindow_FindWindowByLabel(label, parent)
+                Window::from_ptr(ffi::wxWindow_FindWindowByLabel(label, parent))
             }
         }
-        fn find_window_by_name<T: WindowMethods>(name: &str, parent: Option<&T>) -> *mut c_void {
+        fn find_window_by_name<T: WindowMethods>(name: &str, parent: Option<&T>) -> Window {
             unsafe {
                 let name = wx_base::wx_string_from(name);
                 let parent = match parent {
                     Some(r) => r.as_ptr(),
                     None => ptr::null_mut(),
                 };
-                ffi::wxWindow_FindWindowByName(name, parent)
+                Window::from_ptr(ffi::wxWindow_FindWindowByName(name, parent))
             }
         }
-        fn get_capture() -> *mut c_void {
-            unsafe { ffi::wxWindow_GetCapture() }
+        fn get_capture() -> Window {
+            unsafe { Window::from_ptr(ffi::wxWindow_GetCapture()) }
         }
         fn new_control_id(count: c_int) -> c_int {
             unsafe { ffi::wxWindow_NewControlId(count) }
@@ -2412,8 +2414,8 @@ pub mod methods {
         fn set_auth_needed(&self, needed: bool) {
             unsafe { ffi::wxButton_SetAuthNeeded(self.as_ptr(), needed) }
         }
-        fn set_default(&self) -> *mut c_void {
-            unsafe { ffi::wxButton_SetDefault(self.as_ptr()) }
+        fn set_default(&self) -> Window {
+            unsafe { Window::from_ptr(ffi::wxButton_SetDefault(self.as_ptr())) }
         }
         fn get_default_size<T: WindowMethods>(win: Option<&T>) -> Size {
             unsafe {
@@ -2655,11 +2657,11 @@ pub mod methods {
                 ffi::wxMenu_SetInvokingWindow(self.as_ptr(), win)
             }
         }
-        fn get_invoking_window(&self) -> *mut c_void {
-            unsafe { ffi::wxMenu_GetInvokingWindow(self.as_ptr()) }
+        fn get_invoking_window(&self) -> Window {
+            unsafe { Window::from_ptr(ffi::wxMenu_GetInvokingWindow(self.as_ptr())) }
         }
-        fn get_window(&self) -> *mut c_void {
-            unsafe { ffi::wxMenu_GetWindow(self.as_ptr()) }
+        fn get_window(&self) -> Window {
+            unsafe { Window::from_ptr(ffi::wxMenu_GetWindow(self.as_ptr())) }
         }
         fn get_style(&self) -> c_long {
             unsafe { ffi::wxMenu_GetStyle(self.as_ptr()) }
@@ -2673,8 +2675,8 @@ pub mod methods {
                 ffi::wxMenu_SetParent(self.as_ptr(), parent)
             }
         }
-        fn get_parent(&self) -> *mut c_void {
-            unsafe { ffi::wxMenu_GetParent(self.as_ptr()) }
+        fn get_parent(&self) -> Menu {
+            unsafe { Menu::from_ptr(ffi::wxMenu_GetParent(self.as_ptr())) }
         }
         fn attach<T: MenuBarMethods>(&self, menubar: Option<&T>) {
             unsafe {
@@ -2770,11 +2772,11 @@ pub mod methods {
         }
         // NOT_SUPPORTED: fn SetLabelTop()
         // NOT_SUPPORTED: fn SetMenuLabel()
-        fn osx_get_apple_menu(&self) -> *mut c_void {
-            unsafe { ffi::wxMenuBar_OSXGetAppleMenu(self.as_ptr()) }
+        fn osx_get_apple_menu(&self) -> Menu {
+            unsafe { Menu::from_ptr(ffi::wxMenuBar_OSXGetAppleMenu(self.as_ptr())) }
         }
-        fn get_frame(&self) -> *mut c_void {
-            unsafe { ffi::wxMenuBar_GetFrame(self.as_ptr()) }
+        fn get_frame(&self) -> Frame {
+            unsafe { Frame::from_ptr(ffi::wxMenuBar_GetFrame(self.as_ptr())) }
         }
         fn is_attached(&self) -> bool {
             unsafe { ffi::wxMenuBar_IsAttached(self.as_ptr()) }
@@ -2800,8 +2802,8 @@ pub mod methods {
                 ffi::wxMenuBar_MacSetCommonMenuBar(menubar)
             }
         }
-        fn mac_get_common_menu_bar() -> *mut c_void {
-            unsafe { ffi::wxMenuBar_MacGetCommonMenuBar() }
+        fn mac_get_common_menu_bar() -> MenuBar {
+            unsafe { MenuBar::from_ptr(ffi::wxMenuBar_MacGetCommonMenuBar()) }
         }
     }
 
@@ -2864,8 +2866,8 @@ pub mod methods {
         fn enable_minimize_button(&self, enable: bool) -> bool {
             unsafe { ffi::wxTopLevelWindow_EnableMinimizeButton(self.as_ptr(), enable) }
         }
-        fn get_default_item(&self) -> *mut c_void {
-            unsafe { ffi::wxTopLevelWindow_GetDefaultItem(self.as_ptr()) }
+        fn get_default_item(&self) -> Window {
+            unsafe { Window::from_ptr(ffi::wxTopLevelWindow_GetDefaultItem(self.as_ptr())) }
         }
         // NOT_SUPPORTED: fn GetIcon()
         // BLOCKED: fn GetIcons()
@@ -2894,8 +2896,8 @@ pub mod methods {
         fn maximize(&self, maximize: bool) {
             unsafe { ffi::wxTopLevelWindow_Maximize(self.as_ptr(), maximize) }
         }
-        fn msw_get_system_menu(&self) -> *mut c_void {
-            unsafe { ffi::wxTopLevelWindow_MSWGetSystemMenu(self.as_ptr()) }
+        fn msw_get_system_menu(&self) -> Menu {
+            unsafe { Menu::from_ptr(ffi::wxTopLevelWindow_MSWGetSystemMenu(self.as_ptr())) }
         }
         fn request_user_attention(&self, flags: c_int) {
             unsafe { ffi::wxTopLevelWindow_RequestUserAttention(self.as_ptr(), flags) }
@@ -2905,26 +2907,26 @@ pub mod methods {
         }
         // BLOCKED: fn RestoreToGeometry()
         // BLOCKED: fn SaveGeometry()
-        fn set_default_item<T: WindowMethods>(&self, win: Option<&T>) -> *mut c_void {
+        fn set_default_item<T: WindowMethods>(&self, win: Option<&T>) -> Window {
             unsafe {
                 let win = match win {
                     Some(r) => r.as_ptr(),
                     None => ptr::null_mut(),
                 };
-                ffi::wxTopLevelWindow_SetDefaultItem(self.as_ptr(), win)
+                Window::from_ptr(ffi::wxTopLevelWindow_SetDefaultItem(self.as_ptr(), win))
             }
         }
-        fn set_tmp_default_item<T: WindowMethods>(&self, win: Option<&T>) -> *mut c_void {
+        fn set_tmp_default_item<T: WindowMethods>(&self, win: Option<&T>) -> Window {
             unsafe {
                 let win = match win {
                     Some(r) => r.as_ptr(),
                     None => ptr::null_mut(),
                 };
-                ffi::wxTopLevelWindow_SetTmpDefaultItem(self.as_ptr(), win)
+                Window::from_ptr(ffi::wxTopLevelWindow_SetTmpDefaultItem(self.as_ptr(), win))
             }
         }
-        fn get_tmp_default_item(&self) -> *mut c_void {
-            unsafe { ffi::wxTopLevelWindow_GetTmpDefaultItem(self.as_ptr()) }
+        fn get_tmp_default_item(&self) -> Window {
+            unsafe { Window::from_ptr(ffi::wxTopLevelWindow_GetTmpDefaultItem(self.as_ptr())) }
         }
         fn set_icon(&self, icon: *const c_void) {
             unsafe { ffi::wxTopLevelWindow_SetIcon(self.as_ptr(), icon) }
@@ -2996,8 +2998,8 @@ pub mod methods {
                 ffi::wxFrame_DoGiveHelp(self.as_ptr(), text, show)
             }
         }
-        fn get_menu_bar(&self) -> *mut c_void {
-            unsafe { ffi::wxFrame_GetMenuBar(self.as_ptr()) }
+        fn get_menu_bar(&self) -> MenuBar {
+            unsafe { MenuBar::from_ptr(ffi::wxFrame_GetMenuBar(self.as_ptr())) }
         }
         fn get_status_bar(&self) -> *mut c_void {
             unsafe { ffi::wxFrame_GetStatusBar(self.as_ptr()) }
@@ -3383,11 +3385,11 @@ pub mod methods {
     // wxValidator
     pub trait ValidatorMethods: EvtHandlerMethods {
         // DTOR: fn ~wxValidator()
-        fn clone(&self) -> *mut c_void {
-            unsafe { ffi::wxValidator_Clone(self.as_ptr()) }
+        fn clone(&self) -> Object {
+            unsafe { Object::from_ptr(ffi::wxValidator_Clone(self.as_ptr())) }
         }
-        fn get_window(&self) -> *mut c_void {
-            unsafe { ffi::wxValidator_GetWindow(self.as_ptr()) }
+        fn get_window(&self) -> Window {
+            unsafe { Window::from_ptr(ffi::wxValidator_GetWindow(self.as_ptr())) }
         }
         fn set_window<T: WindowMethods>(&self, window: Option<&T>) {
             unsafe {
@@ -3468,6 +3470,9 @@ impl CommandEvent {
     pub fn none() -> Option<&'static Self> {
         None
     }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        CommandEvent(ptr)
+    }
 }
 impl Drop for CommandEvent {
     fn drop(&mut self) {
@@ -3506,6 +3511,9 @@ impl Window {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        Window(ptr)
     }
 }
 
@@ -3546,6 +3554,9 @@ impl Control {
     pub fn none() -> Option<&'static Self> {
         None
     }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        Control(ptr)
+    }
 }
 
 // wxAnyButton
@@ -3562,6 +3573,9 @@ impl AnyButton {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        AnyButton(ptr)
     }
 }
 
@@ -3606,6 +3620,9 @@ impl Button {
     pub fn none() -> Option<&'static Self> {
         None
     }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        Button(ptr)
+    }
 }
 
 // wxMenu
@@ -3630,6 +3647,9 @@ impl Menu {
     pub fn none() -> Option<&'static Self> {
         None
     }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        Menu(ptr)
+    }
 }
 
 // wxMenuBar
@@ -3647,6 +3667,9 @@ impl MenuBar {
     pub fn none() -> Option<&'static Self> {
         None
     }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        MenuBar(ptr)
+    }
 }
 
 // wxNonOwnedWindow
@@ -3659,6 +3682,9 @@ wx_class! { NonOwnedWindow(wxNonOwnedWindow) impl
 impl NonOwnedWindow {
     pub fn none() -> Option<&'static Self> {
         None
+    }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        NonOwnedWindow(ptr)
     }
 }
 
@@ -3700,6 +3726,9 @@ impl TopLevelWindow {
     pub fn none() -> Option<&'static Self> {
         None
     }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        TopLevelWindow(ptr)
+    }
 }
 
 // wxFrame
@@ -3738,6 +3767,9 @@ impl Frame {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        Frame(ptr)
     }
 }
 impl TopLevelWindowMethods for Frame {
@@ -3787,6 +3819,9 @@ impl Point {
     pub fn none() -> Option<&'static Self> {
         None
     }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        Point(ptr)
+    }
 }
 impl Drop for Point {
     fn drop(&mut self) {
@@ -3828,6 +3863,9 @@ impl Rect {
     pub fn none() -> Option<&'static Self> {
         None
     }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        Rect(ptr)
+    }
 }
 impl Drop for Rect {
     fn drop(&mut self) {
@@ -3849,6 +3887,9 @@ impl Size {
     pub fn none() -> Option<&'static Self> {
         None
     }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        Size(ptr)
+    }
 }
 impl Drop for Size {
     fn drop(&mut self) {
@@ -3868,6 +3909,9 @@ impl Validator {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        Validator(ptr)
     }
 }
 
@@ -3913,5 +3957,8 @@ impl StaticBitmap {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        StaticBitmap(ptr)
     }
 }
