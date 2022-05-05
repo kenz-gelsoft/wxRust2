@@ -137,35 +137,19 @@ class Method:
             index = ''
         return '%s%s' % (name, index)
 
-    def wrapped_return_type(self):
+    def wrapped_return_type(self, allows_ptr):
         if (self.is_ctor or
-            self.returns_new()):
+            self.returns_new(allows_ptr)):
             return self.returns.typename
         else:
             return None
 
-    def wrapped_return_type2(self):
-        if (self.is_ctor or
-            self.returns_new2()):
-            return self.returns.typename
-        else:
-            return None
-
-    def returns_new(self):
+    def returns_new(self, allows_ptr):
         if self.is_blocked():
             return False
         if self.returns.is_str():
             return True
-        if self.returns.needs_new():
-            return True
-        return False
-
-    def returns_new2(self):
-        if self.is_blocked():
-            return False
-        if self.returns.is_str():
-            return True
-        if self.returns.needs_new2():
+        if self.returns.needs_new(allows_ptr):
             return True
         return False
 
@@ -227,10 +211,7 @@ class RustType:
     def not_supported(self):
         return False
 
-    def needs_new(self):
-        return False
-    
-    def needs_new2(self):
+    def needs_new(self, allows_ptr):
         return False
     
     def is_void(self):
@@ -414,15 +395,17 @@ class CxxType:
             return False
         if self.__indirection:
             return False
-        if self.needs_new():
+        if self.needs_new(allows_ptr=False):
             return False
         return True
     
-    def needs_new(self):
-        return self._is_binding_type() and not self.__indirection
-    
-    def needs_new2(self):
-        return self._is_binding_type() and self.__indirection != '&'
+    def needs_new(self, allows_ptr):
+        if not self._is_binding_type():
+            return False
+        if allows_ptr:
+            return self.__indirection != '&'
+        else:
+            return not self.__indirection
     
     def _is_binding_type(self):
         return self.__manager.is_binding_type(self.typename)
