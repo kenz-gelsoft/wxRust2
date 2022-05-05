@@ -139,13 +139,13 @@ class Method:
 
     def wrapped_return_type(self, allows_ptr):
         if (self.is_ctor or
-            self.returns_new(allows_ptr) or 
+            self.returns_new() or 
             allows_ptr and self.returns.is_ptr_to_binding()):
             return self.returns.typename
         else:
             return None
 
-    def returns_new(self, allows_ptr):
+    def returns_new(self):
         if self.is_blocked():
             return False
         if self.returns.is_str():
