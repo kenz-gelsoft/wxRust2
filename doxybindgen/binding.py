@@ -233,7 +233,7 @@ class RustMethodBinding:
         if self.__model.returns.is_void():
             return ''
         returns = self.__model.returns.in_rust(for_ffi=True)
-        wrapped = self.__model.wrapped_return_type2()
+        wrapped = self.__model.wrapped_return_type(allows_ptr=True)
         if wrapped:
             if for_ffi:
                 returns = '*mut c_void'
@@ -373,14 +373,14 @@ class RustMethodBinding:
             yield '}'
 
     def _wrap_return_type(self, call):
-        wrapped = self.__model.wrapped_return_type()
-        wrapped2 = self.__model.wrapped_return_type2()
         if self.__model.returns.is_str():
             return 'wx_base::from_wx_string(%s)' % (call,)
+        wrapped = self.__model.wrapped_return_type(allows_ptr=False)
         if wrapped:
             return '%s(%s)' % (wrapped[2:], call)
-        if wrapped2:
-            return '%s::from_ptr(%s)' % (wrapped2[2:], call)
+        wrapped = self.__model.wrapped_return_type(allows_ptr=True)
+        if wrapped:
+            return '%s::from_ptr(%s)' % (wrapped[2:], call)
         return call
 
     def _uses_ptr_type(self):
@@ -436,7 +436,7 @@ class CxxMethodBinding:
     def lines(self, is_cc):
         if self.__model.suppressed_reason():
             return
-        wrapped = self.__model.wrapped_return_type()
+        wrapped = self.__model.wrapped_return_type(allows_ptr=False)
         returns = self.__model.returns.in_cxx() + ' '
         if wrapped:
             returns = '%s *' % (
