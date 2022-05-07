@@ -192,6 +192,7 @@ class RustType:
         self.typename = s
         self.const = const
         self.generic_name = None
+        self.generic_option = False
 
     def marshal(self, param):
         return None
@@ -293,6 +294,7 @@ class CxxType:
         matched = re.match(r'(const )?([^*&]*)([*&]+)?', self.__srctype)
         self.typename = None
         self.generic_name = None
+        self.generic_option = False
         if matched:
             self.__is_mut = matched.group(1) is None
             self.typename = matched.group(2).strip()
@@ -336,7 +338,7 @@ class CxxType:
                 name,
                 name,
             )
-        if self._is_const_ref_to_binding():
+        if self.is_const_ref_to_binding():
             yield 'let %s = %s;' % (
                 name,
                 param.rust_ffi_ref(),
@@ -357,7 +359,7 @@ class CxxType:
         if not for_ffi:
             if self._is_const_ref_to_string():
                 return '&str'
-            if self._is_const_ref_to_binding():
+            if self.is_const_ref_to_binding():
                 return '&%s' % (t[2:])
             if self.is_ptr_to_binding():
                 return 'Option<&%s>' % (t[2:])
@@ -376,7 +378,7 @@ class CxxType:
     def _is_const_ref_to_string(self):
         return self._is_const_ref() and self.typename == 'wxString'
 
-    def _is_const_ref_to_binding(self):
+    def is_const_ref_to_binding(self):
         return self._is_const_ref() and self._is_binding_type()
 
     def _is_const_ref(self):
@@ -424,8 +426,9 @@ class CxxType:
     def is_str(self):
         return self.typename == 'wxString'
     
-    def make_generic(self, generic_name):
+    def make_generic(self, generic_name, is_option):
         self.generic_name = generic_name
+        self.generic_option = is_option
         return (generic_name, self.typename[2:] + 'Methods')
 
     def normalized(self):
