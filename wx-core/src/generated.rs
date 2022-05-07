@@ -3512,7 +3512,9 @@ impl<const OWNED: bool> CommandEventIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Drop for CommandEventIsOwned<OWNED> {
     fn drop(&mut self) {
-        unsafe { ffi::wxObject_delete(self.0) }
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
     }
 }
 
@@ -3871,7 +3873,9 @@ impl<const OWNED: bool> PointIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Drop for PointIsOwned<OWNED> {
     fn drop(&mut self) {
-        unsafe { ffi::wxPoint_delete(self.0) }
+        if OWNED {
+            unsafe { ffi::wxPoint_delete(self.0) }
+        }
     }
 }
 
@@ -3922,7 +3926,9 @@ impl<const OWNED: bool> RectIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Drop for RectIsOwned<OWNED> {
     fn drop(&mut self) {
-        unsafe { ffi::wxRect_delete(self.0) }
+        if OWNED {
+            unsafe { ffi::wxRect_delete(self.0) }
+        }
     }
 }
 
@@ -3947,7 +3953,9 @@ impl<const OWNED: bool> SizeIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Drop for SizeIsOwned<OWNED> {
     fn drop(&mut self) {
-        unsafe { ffi::wxSize_delete(self.0) }
+        if OWNED {
+            unsafe { ffi::wxSize_delete(self.0) }
+        }
     }
 }
 
