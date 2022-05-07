@@ -38,16 +38,13 @@ class RustClassBinding:
                 yield line
         else:
             unprefixed = self.__model.unprefixed()
-            yield 'wx_class! { %sIsOwned(%s) impl' % (
+            yield 'wx_class! { %s = ' % (unprefixed,)
+            yield '    %sIsOwned<true>(%s) impl' % (
                 unprefixed,
                 self.__model.name,
             )
             yield ',\n'.join(self._ancestor_methods())
             yield '}'
-            yield 'pub type %s = %sIsOwned<true>;' % (
-                unprefixed,
-                unprefixed,
-            )
             for line in self._impl_with_ctors():
                 yield line
             for line in self._impl_drop_if_needed():
@@ -60,7 +57,7 @@ class RustClassBinding:
             comment_or_not = ''
             if any(m.is_non_virtual_override(ancestor) for m in self.__methods):
                 comment_or_not = '// '
-            yield '    %s%sMethods' % (
+            yield '        %s%sMethods' % (
                 comment_or_not,
                 ancestor.name[2:],
             )

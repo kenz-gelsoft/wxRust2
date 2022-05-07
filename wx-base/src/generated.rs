@@ -294,10 +294,10 @@ pub mod methods {
 }
 
 // wxObject
-wx_class! { ObjectIsOwned(wxObject) impl
-    ObjectMethods
+wx_class! { Object =
+    ObjectIsOwned<true>(wxObject) impl
+        ObjectMethods
 }
-pub type Object = ObjectIsOwned<true>;
 impl<const OWNED: bool> ObjectIsOwned<OWNED> {
     pub fn new() -> ObjectIsOwned<OWNED> {
         unsafe { ObjectIsOwned(ffi::wxObject_new()) }
@@ -324,11 +324,11 @@ impl<const OWNED: bool> Drop for ObjectIsOwned<OWNED> {
 }
 
 // wxEvent
-wx_class! { EventIsOwned(wxEvent) impl
-    EventMethods,
-    ObjectMethods
+wx_class! { Event =
+    EventIsOwned<true>(wxEvent) impl
+        EventMethods,
+        ObjectMethods
 }
-pub type Event = EventIsOwned<true>;
 impl<const OWNED: bool> EventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxEvent()
     pub fn none() -> Option<&'static Self> {
@@ -347,11 +347,11 @@ impl<const OWNED: bool> Drop for EventIsOwned<OWNED> {
 }
 
 // wxEvtHandler
-wx_class! { EvtHandlerIsOwned(wxEvtHandler) impl
-    EvtHandlerMethods,
-    ObjectMethods
+wx_class! { EvtHandler =
+    EvtHandlerIsOwned<true>(wxEvtHandler) impl
+        EvtHandlerMethods,
+        ObjectMethods
 }
-pub type EvtHandler = EvtHandlerIsOwned<true>;
 impl<const OWNED: bool> EvtHandlerIsOwned<OWNED> {
     pub fn new() -> EvtHandlerIsOwned<OWNED> {
         unsafe { EvtHandlerIsOwned(ffi::wxEvtHandler_new()) }

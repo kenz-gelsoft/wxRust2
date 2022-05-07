@@ -3495,12 +3495,12 @@ pub mod methods {
 }
 
 // wxCommandEvent
-wx_class! { CommandEventIsOwned(wxCommandEvent) impl
-    CommandEventMethods,
-    EventMethods,
-    ObjectMethods
+wx_class! { CommandEvent =
+    CommandEventIsOwned<true>(wxCommandEvent) impl
+        CommandEventMethods,
+        EventMethods,
+        ObjectMethods
 }
-pub type CommandEvent = CommandEventIsOwned<true>;
 impl<const OWNED: bool> CommandEventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxCommandEvent()
     pub fn none() -> Option<&'static Self> {
@@ -3519,12 +3519,12 @@ impl<const OWNED: bool> Drop for CommandEventIsOwned<OWNED> {
 }
 
 // wxWindow
-wx_class! { WindowIsOwned(wxWindow) impl
-    WindowMethods,
-    EvtHandlerMethods,
-    ObjectMethods
+wx_class! { Window =
+    WindowIsOwned<true>(wxWindow) impl
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
 }
-pub type Window = WindowIsOwned<true>;
 impl<const OWNED: bool> WindowIsOwned<OWNED> {
     pub fn new_2step() -> WindowIsOwned<OWNED> {
         unsafe { WindowIsOwned(ffi::wxWindow_new()) }
@@ -3557,13 +3557,13 @@ impl<const OWNED: bool> WindowIsOwned<OWNED> {
 }
 
 // wxControl
-wx_class! { ControlIsOwned(wxControl) impl
-    ControlMethods,
-    WindowMethods,
-    EvtHandlerMethods,
-    ObjectMethods
+wx_class! { Control =
+    ControlIsOwned<true>(wxControl) impl
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
 }
-pub type Control = ControlIsOwned<true>;
 impl<const OWNED: bool> ControlIsOwned<OWNED> {
     pub fn new<T: WindowMethods, U: PointMethods, V: SizeMethods, W: ValidatorMethods>(
         parent: Option<&T>,
@@ -3600,14 +3600,14 @@ impl<const OWNED: bool> ControlIsOwned<OWNED> {
 }
 
 // wxAnyButton
-wx_class! { AnyButtonIsOwned(wxAnyButton) impl
-    AnyButtonMethods,
-    ControlMethods,
-    WindowMethods,
-    EvtHandlerMethods,
-    ObjectMethods
+wx_class! { AnyButton =
+    AnyButtonIsOwned<true>(wxAnyButton) impl
+        AnyButtonMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
 }
-pub type AnyButton = AnyButtonIsOwned<true>;
 impl<const OWNED: bool> AnyButtonIsOwned<OWNED> {
     pub fn new() -> AnyButtonIsOwned<OWNED> {
         unsafe { AnyButtonIsOwned(ffi::wxAnyButton_new()) }
@@ -3621,15 +3621,15 @@ impl<const OWNED: bool> AnyButtonIsOwned<OWNED> {
 }
 
 // wxButton
-wx_class! { ButtonIsOwned(wxButton) impl
-    ButtonMethods,
-    AnyButtonMethods,
-    ControlMethods,
-    WindowMethods,
-    EvtHandlerMethods,
-    ObjectMethods
+wx_class! { Button =
+    ButtonIsOwned<true>(wxButton) impl
+        ButtonMethods,
+        AnyButtonMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
 }
-pub type Button = ButtonIsOwned<true>;
 impl<const OWNED: bool> ButtonIsOwned<OWNED> {
     pub fn new_2step() -> ButtonIsOwned<OWNED> {
         unsafe { ButtonIsOwned(ffi::wxButton_new()) }
@@ -3668,12 +3668,12 @@ impl<const OWNED: bool> ButtonIsOwned<OWNED> {
 }
 
 // wxMenu
-wx_class! { MenuIsOwned(wxMenu) impl
-    MenuMethods,
-    EvtHandlerMethods,
-    ObjectMethods
+wx_class! { Menu =
+    MenuIsOwned<true>(wxMenu) impl
+        MenuMethods,
+        EvtHandlerMethods,
+        ObjectMethods
 }
-pub type Menu = MenuIsOwned<true>;
 impl<const OWNED: bool> MenuIsOwned<OWNED> {
     pub fn new() -> MenuIsOwned<OWNED> {
         unsafe { MenuIsOwned(ffi::wxMenu_new()) }
@@ -3696,13 +3696,13 @@ impl<const OWNED: bool> MenuIsOwned<OWNED> {
 }
 
 // wxMenuBar
-wx_class! { MenuBarIsOwned(wxMenuBar) impl
-    MenuBarMethods,
-    WindowMethods,
-    EvtHandlerMethods,
-    ObjectMethods
+wx_class! { MenuBar =
+    MenuBarIsOwned<true>(wxMenuBar) impl
+        MenuBarMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
 }
-pub type MenuBar = MenuBarIsOwned<true>;
 impl<const OWNED: bool> MenuBarIsOwned<OWNED> {
     pub fn new(style: c_long) -> MenuBarIsOwned<OWNED> {
         unsafe { MenuBarIsOwned(ffi::wxMenuBar_new(style)) }
@@ -3717,13 +3717,13 @@ impl<const OWNED: bool> MenuBarIsOwned<OWNED> {
 }
 
 // wxNonOwnedWindow
-wx_class! { NonOwnedWindowIsOwned(wxNonOwnedWindow) impl
-    NonOwnedWindowMethods,
-    WindowMethods,
-    EvtHandlerMethods,
-    ObjectMethods
+wx_class! { NonOwnedWindow =
+    NonOwnedWindowIsOwned<true>(wxNonOwnedWindow) impl
+        NonOwnedWindowMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
 }
-pub type NonOwnedWindow = NonOwnedWindowIsOwned<true>;
 impl<const OWNED: bool> NonOwnedWindowIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
@@ -3734,14 +3734,14 @@ impl<const OWNED: bool> NonOwnedWindowIsOwned<OWNED> {
 }
 
 // wxTopLevelWindow
-wx_class! { TopLevelWindowIsOwned(wxTopLevelWindow) impl
-    TopLevelWindowMethods,
-    NonOwnedWindowMethods,
-    WindowMethods,
-    EvtHandlerMethods,
-    ObjectMethods
+wx_class! { TopLevelWindow =
+    TopLevelWindowIsOwned<true>(wxTopLevelWindow) impl
+        TopLevelWindowMethods,
+        NonOwnedWindowMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
 }
-pub type TopLevelWindow = TopLevelWindowIsOwned<true>;
 impl<const OWNED: bool> TopLevelWindowIsOwned<OWNED> {
     pub fn new_2step() -> TopLevelWindowIsOwned<OWNED> {
         unsafe { TopLevelWindowIsOwned(ffi::wxTopLevelWindow_new()) }
@@ -3778,15 +3778,15 @@ impl<const OWNED: bool> TopLevelWindowIsOwned<OWNED> {
 }
 
 // wxFrame
-wx_class! { FrameIsOwned(wxFrame) impl
-    FrameMethods,
-    // TopLevelWindowMethods,
-    NonOwnedWindowMethods,
-    // WindowMethods,
-    EvtHandlerMethods,
-    ObjectMethods
+wx_class! { Frame =
+    FrameIsOwned<true>(wxFrame) impl
+        FrameMethods,
+        // TopLevelWindowMethods,
+        NonOwnedWindowMethods,
+        // WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
 }
-pub type Frame = FrameIsOwned<true>;
 impl<const OWNED: bool> FrameIsOwned<OWNED> {
     pub fn new_2step() -> FrameIsOwned<OWNED> {
         unsafe { FrameIsOwned(ffi::wxFrame_new()) }
@@ -3850,10 +3850,10 @@ impl<const OWNED: bool> WindowMethods for FrameIsOwned<OWNED> {
 }
 
 // wxPoint
-wx_class! { PointIsOwned(wxPoint) impl
-    PointMethods
+wx_class! { Point =
+    PointIsOwned<true>(wxPoint) impl
+        PointMethods
 }
-pub type Point = PointIsOwned<true>;
 impl<const OWNED: bool> PointIsOwned<OWNED> {
     pub fn new() -> PointIsOwned<OWNED> {
         unsafe { PointIsOwned(ffi::wxPoint_new()) }
@@ -3880,10 +3880,10 @@ impl<const OWNED: bool> Drop for PointIsOwned<OWNED> {
 }
 
 // wxRect
-wx_class! { RectIsOwned(wxRect) impl
-    RectMethods
+wx_class! { Rect =
+    RectIsOwned<true>(wxRect) impl
+        RectMethods
 }
-pub type Rect = RectIsOwned<true>;
 impl<const OWNED: bool> RectIsOwned<OWNED> {
     pub fn new() -> RectIsOwned<OWNED> {
         unsafe { RectIsOwned(ffi::wxRect_new()) }
@@ -3933,10 +3933,10 @@ impl<const OWNED: bool> Drop for RectIsOwned<OWNED> {
 }
 
 // wxSize
-wx_class! { SizeIsOwned(wxSize) impl
-    SizeMethods
+wx_class! { Size =
+    SizeIsOwned<true>(wxSize) impl
+        SizeMethods
 }
-pub type Size = SizeIsOwned<true>;
 impl<const OWNED: bool> SizeIsOwned<OWNED> {
     pub fn new() -> SizeIsOwned<OWNED> {
         unsafe { SizeIsOwned(ffi::wxSize_new()) }
@@ -3960,12 +3960,12 @@ impl<const OWNED: bool> Drop for SizeIsOwned<OWNED> {
 }
 
 // wxValidator
-wx_class! { ValidatorIsOwned(wxValidator) impl
-    ValidatorMethods,
-    EvtHandlerMethods,
-    ObjectMethods
+wx_class! { Validator =
+    ValidatorIsOwned<true>(wxValidator) impl
+        ValidatorMethods,
+        EvtHandlerMethods,
+        ObjectMethods
 }
-pub type Validator = ValidatorIsOwned<true>;
 impl<const OWNED: bool> ValidatorIsOwned<OWNED> {
     pub fn new() -> ValidatorIsOwned<OWNED> {
         unsafe { ValidatorIsOwned(ffi::wxValidator_new()) }
@@ -3979,14 +3979,14 @@ impl<const OWNED: bool> ValidatorIsOwned<OWNED> {
 }
 
 // wxStaticBitmap
-wx_class! { StaticBitmapIsOwned(wxStaticBitmap) impl
-    StaticBitmapMethods,
-    ControlMethods,
-    WindowMethods,
-    EvtHandlerMethods,
-    ObjectMethods
+wx_class! { StaticBitmap =
+    StaticBitmapIsOwned<true>(wxStaticBitmap) impl
+        StaticBitmapMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
 }
-pub type StaticBitmap = StaticBitmapIsOwned<true>;
 impl<const OWNED: bool> StaticBitmapIsOwned<OWNED> {
     //  ENUM: ScaleMode
     pub const Scale_None: c_int = 0;
