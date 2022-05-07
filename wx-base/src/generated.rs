@@ -113,13 +113,13 @@ pub mod methods {
         fn is_kind_of(&self, info: *const c_void) -> bool {
             unsafe { ffi::wxObject_IsKindOf(self.as_ptr(), info) }
         }
-        fn is_same_as(&self, obj: &Object) -> bool {
+        fn is_same_as<T: ObjectMethods>(&self, obj: &T) -> bool {
             unsafe {
                 let obj = obj.as_ptr();
                 ffi::wxObject_IsSameAs(self.as_ptr(), obj)
             }
         }
-        fn ref_(&self, clone: &Object) {
+        fn ref_<T: ObjectMethods>(&self, clone: &T) {
             unsafe {
                 let clone = clone.as_ptr();
                 ffi::wxObject_Ref(self.as_ptr(), clone)
@@ -204,7 +204,7 @@ pub mod methods {
                 ffi::wxEvtHandler_QueueEvent(self.as_ptr(), event)
             }
         }
-        fn add_pending_event(&self, event: &Event) {
+        fn add_pending_event<T: EventMethods>(&self, event: &T) {
             unsafe {
                 let event = event.as_ptr();
                 ffi::wxEvtHandler_AddPendingEvent(self.as_ptr(), event)
@@ -299,7 +299,7 @@ impl Object {
     pub fn new() -> Object {
         unsafe { Object(ffi::wxObject_new()) }
     }
-    pub fn new_with_object(other: &Object) -> Object {
+    pub fn new_with_object<T: ObjectMethods>(other: &T) -> Object {
         unsafe {
             let other = other.as_ptr();
             Object(ffi::wxObject_new1(other))

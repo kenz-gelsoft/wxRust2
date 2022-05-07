@@ -246,10 +246,15 @@ class RustMethodBinding:
     def _make_params_generic(self):
         generic_params = []
         for param in self.__model.params:
-            if param.type.is_ptr_to_binding():
+            is_ptr_to_binding = param.type.is_ptr_to_binding()
+            if (is_ptr_to_binding or
+                param.type.is_const_ref_to_binding()):
                 count = len(generic_params)
                 name = chr(ord('T') + count)
-                generic_params.append(param.type.make_generic(name))
+                generic_params.append(param.type.make_generic(
+                    name,
+                    is_option=is_ptr_to_binding,
+                ))
         return generic_params
 
     def lines(self, for_ffi=False):
@@ -357,7 +362,9 @@ class RustMethodBinding:
             if param.is_self():
                 return '&self'
             elif param.type.generic_name:
-                typename = 'Option<&%s>' % (param.type.generic_name,)
+                typename = '&%s' % (param.type.generic_name,)
+                if param.type.generic_option:
+                    typename = 'Option<%s>' % (typename,)
         return '%s: %s' % (
             self.non_keyword_name(param.name),
             typename,
