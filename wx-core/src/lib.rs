@@ -32,19 +32,19 @@ mod ffi {
 }
 
 // wxDefaultPosition
-impl<const Owned: bool> Default for Point<Owned> {
+impl<const OWNED: bool> Default for Point<OWNED> {
     fn default() -> Self {
         Point::new_with_int(-1, -1)
     }
 }
 // wxDefaultSize
-impl<const Owned: bool> Default for Size<Owned> {
+impl<const OWNED: bool> Default for Size<OWNED> {
     fn default() -> Self {
         Size::new_with_int(-1, -1)
     }
 }
 // wxDefaultValidator
-impl<const Owned: bool> Default for Validator<Owned> {
+impl<const OWNED: bool> Default for Validator<OWNED> {
     fn default() -> Self {
         Validator::new()
     }
