@@ -295,11 +295,11 @@ pub mod methods {
 wx_class! { Object(wxObject) impl
     ObjectMethods
 }
-impl<const Owned: bool> Object<Owned> {
-    pub fn new() -> Object<Owned> {
+impl<const OWNED: bool> Object<OWNED> {
+    pub fn new() -> Object<OWNED> {
         unsafe { Object(ffi::wxObject_new()) }
     }
-    pub fn new_with_object<T: ObjectMethods>(other: &T) -> Object<Owned> {
+    pub fn new_with_object<T: ObjectMethods>(other: &T) -> Object<OWNED> {
         unsafe {
             let other = other.as_ptr();
             Object(ffi::wxObject_new1(other))
@@ -312,7 +312,7 @@ impl<const Owned: bool> Object<Owned> {
         Object(ptr)
     }
 }
-impl<const Owned: bool> Drop for Object<Owned> {
+impl<const OWNED: bool> Drop for Object<OWNED> {
     fn drop(&mut self) {
         unsafe { ffi::wxObject_delete(self.0) }
     }
@@ -323,7 +323,7 @@ wx_class! { Event(wxEvent) impl
     EventMethods,
     ObjectMethods
 }
-impl<const Owned: bool> Event<Owned> {
+impl<const OWNED: bool> Event<OWNED> {
     // NOT_SUPPORTED: fn wxEvent()
     pub fn none() -> Option<&'static Self> {
         None
@@ -332,7 +332,7 @@ impl<const Owned: bool> Event<Owned> {
         Event(ptr)
     }
 }
-impl<const Owned: bool> Drop for Event<Owned> {
+impl<const OWNED: bool> Drop for Event<OWNED> {
     fn drop(&mut self) {
         unsafe { ffi::wxObject_delete(self.0) }
     }
@@ -343,8 +343,8 @@ wx_class! { EvtHandler(wxEvtHandler) impl
     EvtHandlerMethods,
     ObjectMethods
 }
-impl<const Owned: bool> EvtHandler<Owned> {
-    pub fn new() -> EvtHandler<Owned> {
+impl<const OWNED: bool> EvtHandler<OWNED> {
+    pub fn new() -> EvtHandler<OWNED> {
         unsafe { EvtHandler(ffi::wxEvtHandler_new()) }
     }
     pub fn none() -> Option<&'static Self> {
