@@ -140,10 +140,10 @@ pub mod methods {
 
     // wxEvent
     pub trait EventMethods: ObjectMethods {
-        fn clone(&self) -> Event {
+        fn clone(&self) -> Event<false> {
             unsafe { Event::from_ptr(ffi::wxEvent_Clone(self.as_ptr())) }
         }
-        fn get_event_object(&self) -> Object {
+        fn get_event_object(&self) -> Object<false> {
             unsafe { Object::from_ptr(ffi::wxEvent_GetEventObject(self.as_ptr())) }
         }
         // NOT_SUPPORTED: fn GetEventType()
@@ -151,7 +151,7 @@ pub mod methods {
         fn get_id(&self) -> c_int {
             unsafe { ffi::wxEvent_GetId(self.as_ptr()) }
         }
-        fn get_event_user_data(&self) -> Object {
+        fn get_event_user_data(&self) -> Object<false> {
             unsafe { Object::from_ptr(ffi::wxEvent_GetEventUserData(self.as_ptr())) }
         }
         fn get_skipped(&self) -> bool {
@@ -248,10 +248,10 @@ pub mod methods {
         fn get_evt_handler_enabled(&self) -> bool {
             unsafe { ffi::wxEvtHandler_GetEvtHandlerEnabled(self.as_ptr()) }
         }
-        fn get_next_handler(&self) -> EvtHandler {
+        fn get_next_handler(&self) -> EvtHandler<false> {
             unsafe { EvtHandler::from_ptr(ffi::wxEvtHandler_GetNextHandler(self.as_ptr())) }
         }
-        fn get_previous_handler(&self) -> EvtHandler {
+        fn get_previous_handler(&self) -> EvtHandler<false> {
             unsafe { EvtHandler::from_ptr(ffi::wxEvtHandler_GetPreviousHandler(self.as_ptr())) }
         }
         fn set_evt_handler_enabled(&self, enabled: bool) {
@@ -295,11 +295,11 @@ pub mod methods {
 wx_class! { Object(wxObject) impl
     ObjectMethods
 }
-impl Object {
-    pub fn new() -> Object {
+impl<const Owned: bool> Object<Owned> {
+    pub fn new() -> Object<Owned> {
         unsafe { Object(ffi::wxObject_new()) }
     }
-    pub fn new_with_object<T: ObjectMethods>(other: &T) -> Object {
+    pub fn new_with_object<T: ObjectMethods>(other: &T) -> Object<Owned> {
         unsafe {
             let other = other.as_ptr();
             Object(ffi::wxObject_new1(other))
@@ -312,7 +312,7 @@ impl Object {
         Object(ptr)
     }
 }
-impl Drop for Object {
+impl<const Owned: bool> Drop for Object<Owned> {
     fn drop(&mut self) {
         unsafe { ffi::wxObject_delete(self.0) }
     }
@@ -323,7 +323,7 @@ wx_class! { Event(wxEvent) impl
     EventMethods,
     ObjectMethods
 }
-impl Event {
+impl<const Owned: bool> Event<Owned> {
     // NOT_SUPPORTED: fn wxEvent()
     pub fn none() -> Option<&'static Self> {
         None
@@ -332,7 +332,7 @@ impl Event {
         Event(ptr)
     }
 }
-impl Drop for Event {
+impl<const Owned: bool> Drop for Event<Owned> {
     fn drop(&mut self) {
         unsafe { ffi::wxObject_delete(self.0) }
     }
@@ -343,8 +343,8 @@ wx_class! { EvtHandler(wxEvtHandler) impl
     EvtHandlerMethods,
     ObjectMethods
 }
-impl EvtHandler {
-    pub fn new() -> EvtHandler {
+impl<const Owned: bool> EvtHandler<Owned> {
+    pub fn new() -> EvtHandler<Owned> {
         unsafe { EvtHandler(ffi::wxEvtHandler_new()) }
     }
     pub fn none() -> Option<&'static Self> {
