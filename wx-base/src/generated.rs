@@ -140,19 +140,19 @@ pub mod methods {
 
     // wxEvent
     pub trait EventMethods: ObjectMethods {
-        fn clone(&self) -> *mut c_void {
-            unsafe { ffi::wxEvent_Clone(self.as_ptr()) }
+        fn clone(&self) -> Event {
+            unsafe { Event::from_ptr(ffi::wxEvent_Clone(self.as_ptr())) }
         }
-        fn get_event_object(&self) -> *mut c_void {
-            unsafe { ffi::wxEvent_GetEventObject(self.as_ptr()) }
+        fn get_event_object(&self) -> Object {
+            unsafe { Object::from_ptr(ffi::wxEvent_GetEventObject(self.as_ptr())) }
         }
         // NOT_SUPPORTED: fn GetEventType()
         // NOT_SUPPORTED: fn GetEventCategory()
         fn get_id(&self) -> c_int {
             unsafe { ffi::wxEvent_GetId(self.as_ptr()) }
         }
-        fn get_event_user_data(&self) -> *mut c_void {
-            unsafe { ffi::wxEvent_GetEventUserData(self.as_ptr()) }
+        fn get_event_user_data(&self) -> Object {
+            unsafe { Object::from_ptr(ffi::wxEvent_GetEventUserData(self.as_ptr())) }
         }
         fn get_skipped(&self) -> bool {
             unsafe { ffi::wxEvent_GetSkipped(self.as_ptr()) }
@@ -248,11 +248,11 @@ pub mod methods {
         fn get_evt_handler_enabled(&self) -> bool {
             unsafe { ffi::wxEvtHandler_GetEvtHandlerEnabled(self.as_ptr()) }
         }
-        fn get_next_handler(&self) -> *mut c_void {
-            unsafe { ffi::wxEvtHandler_GetNextHandler(self.as_ptr()) }
+        fn get_next_handler(&self) -> EvtHandler {
+            unsafe { EvtHandler::from_ptr(ffi::wxEvtHandler_GetNextHandler(self.as_ptr())) }
         }
-        fn get_previous_handler(&self) -> *mut c_void {
-            unsafe { ffi::wxEvtHandler_GetPreviousHandler(self.as_ptr()) }
+        fn get_previous_handler(&self) -> EvtHandler {
+            unsafe { EvtHandler::from_ptr(ffi::wxEvtHandler_GetPreviousHandler(self.as_ptr())) }
         }
         fn set_evt_handler_enabled(&self, enabled: bool) {
             unsafe { ffi::wxEvtHandler_SetEvtHandlerEnabled(self.as_ptr(), enabled) }
@@ -308,6 +308,9 @@ impl Object {
     pub fn none() -> Option<&'static Self> {
         None
     }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        Object(ptr)
+    }
 }
 impl Drop for Object {
     fn drop(&mut self) {
@@ -324,6 +327,9 @@ impl Event {
     // NOT_SUPPORTED: fn wxEvent()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        Event(ptr)
     }
 }
 impl Drop for Event {
@@ -343,5 +349,8 @@ impl EvtHandler {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        EvtHandler(ptr)
     }
 }

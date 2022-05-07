@@ -137,9 +137,10 @@ class Method:
             index = ''
         return '%s%s' % (name, index)
 
-    def wrapped_return_type(self):
+    def wrapped_return_type(self, allows_ptr):
         if (self.is_ctor or
-            self.returns_new()):
+            self.returns_new() or 
+            allows_ptr and self.returns.is_ptr_to_binding()):
             return self.returns.typename
         else:
             return None
