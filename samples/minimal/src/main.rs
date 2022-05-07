@@ -13,7 +13,7 @@ fn main() {
         let frame_copy = frame.clone();
         frame
             .base
-            .bind(wx::RUST_EVT_MENU, move |event: &wx::CommandEvent<true>| {
+            .bind(wx::RUST_EVT_MENU, move |event: &wx::CommandEvent| {
                 frame_copy.handle_menu(event)
             });
         frame.base.show(true);
@@ -22,21 +22,21 @@ fn main() {
 
 #[derive(Clone)]
 struct MyFrame {
-    base: wx::Frame<true>,
+    base: wx::Frame,
 }
 impl MyFrame {
     fn new(title: &str) -> Self {
         let frame = wx::Frame::new(
-            wx::Window::<true>::none(),
+            wx::Window::none(),
             wx::ID_ANY,
             title,
-            &wx::Point::<true>::default(),
-            &wx::Size::<true>::default(),
+            &wx::Point::default(),
+            &wx::Size::default(),
             wx::DEFAULT_FRAME_STYLE,
             "",
         );
-        let file_menu = wx::Menu::<true>::new();
-        let help_menu = wx::Menu::<true>::new();
+        let file_menu = wx::Menu::new();
+        let help_menu = wx::Menu::new();
         help_menu.append_int_str(
             MINIMAL_ABOUT,
             "&About\tF1",
@@ -50,7 +50,7 @@ impl MyFrame {
             wx::ITEM_NORMAL,
         );
 
-        let menu_bar = wx::MenuBar::<true>::new(0);
+        let menu_bar = wx::MenuBar::new(0);
         menu_bar.append(Some(&file_menu), "&File");
         menu_bar.append(Some(&help_menu), "&Help");
 
@@ -61,7 +61,7 @@ impl MyFrame {
         MyFrame { base: frame }
     }
 
-    fn handle_menu(&self, event: &wx::CommandEvent<true>) {
+    fn handle_menu(&self, event: &wx::CommandEvent) {
         println!("event={}", event.get_id());
         match event.get_id() {
             MINIMAL_QUIT => self.on_quit(),
