@@ -91,7 +91,9 @@ class RustClassBinding:
             deleter_class = 'wxObject'
         yield 'impl<const OWNED: bool> Drop for %sIsOwned<OWNED> {' % (self.__model.unprefixed(),)
         yield '    fn drop(&mut self) {'
-        yield '        unsafe { ffi::%s_delete(self.0) }' % (deleter_class,)
+        yield '        if OWNED {'
+        yield '            unsafe { ffi::%s_delete(self.0) }' % (deleter_class,)
+        yield '        }'
         yield '    }'
         yield '}'
     

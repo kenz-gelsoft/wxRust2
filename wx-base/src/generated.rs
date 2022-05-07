@@ -317,7 +317,9 @@ impl<const OWNED: bool> ObjectIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Drop for ObjectIsOwned<OWNED> {
     fn drop(&mut self) {
-        unsafe { ffi::wxObject_delete(self.0) }
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
     }
 }
 
@@ -338,7 +340,9 @@ impl<const OWNED: bool> EventIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Drop for EventIsOwned<OWNED> {
     fn drop(&mut self) {
-        unsafe { ffi::wxObject_delete(self.0) }
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
     }
 }
 
