@@ -3489,7 +3489,7 @@ wx_class! { CommandEvent(wxCommandEvent) impl
     EventMethods,
     ObjectMethods
 }
-impl<const Owned: bool> CommandEvent<Owned> {
+impl<const OWNED: bool> CommandEvent<OWNED> {
     // NOT_SUPPORTED: fn wxCommandEvent()
     pub fn none() -> Option<&'static Self> {
         None
@@ -3498,7 +3498,7 @@ impl<const Owned: bool> CommandEvent<Owned> {
         CommandEvent(ptr)
     }
 }
-impl<const Owned: bool> Drop for CommandEvent<Owned> {
+impl<const OWNED: bool> Drop for CommandEvent<OWNED> {
     fn drop(&mut self) {
         unsafe { ffi::wxObject_delete(self.0) }
     }
@@ -3510,8 +3510,8 @@ wx_class! { Window(wxWindow) impl
     EvtHandlerMethods,
     ObjectMethods
 }
-impl<const Owned: bool> Window<Owned> {
-    pub fn new_2step() -> Window<Owned> {
+impl<const OWNED: bool> Window<OWNED> {
+    pub fn new_2step() -> Window<OWNED> {
         unsafe { Window(ffi::wxWindow_new()) }
     }
     pub fn new<T: WindowMethods, U: PointMethods, V: SizeMethods>(
@@ -3521,7 +3521,7 @@ impl<const Owned: bool> Window<Owned> {
         size: &V,
         style: c_long,
         name: &str,
-    ) -> Window<Owned> {
+    ) -> Window<OWNED> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -3548,7 +3548,7 @@ wx_class! { Control(wxControl) impl
     EvtHandlerMethods,
     ObjectMethods
 }
-impl<const Owned: bool> Control<Owned> {
+impl<const OWNED: bool> Control<OWNED> {
     pub fn new<T: WindowMethods, U: PointMethods, V: SizeMethods, W: ValidatorMethods>(
         parent: Option<&T>,
         id: c_int,
@@ -3557,7 +3557,7 @@ impl<const Owned: bool> Control<Owned> {
         style: c_long,
         validator: &W,
         name: &str,
-    ) -> Control<Owned> {
+    ) -> Control<OWNED> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -3572,7 +3572,7 @@ impl<const Owned: bool> Control<Owned> {
             ))
         }
     }
-    pub fn new_2step() -> Control<Owned> {
+    pub fn new_2step() -> Control<OWNED> {
         unsafe { Control(ffi::wxControl_new1()) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -3591,8 +3591,8 @@ wx_class! { AnyButton(wxAnyButton) impl
     EvtHandlerMethods,
     ObjectMethods
 }
-impl<const Owned: bool> AnyButton<Owned> {
-    pub fn new() -> AnyButton<Owned> {
+impl<const OWNED: bool> AnyButton<OWNED> {
+    pub fn new() -> AnyButton<OWNED> {
         unsafe { AnyButton(ffi::wxAnyButton_new()) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -3612,8 +3612,8 @@ wx_class! { Button(wxButton) impl
     EvtHandlerMethods,
     ObjectMethods
 }
-impl<const Owned: bool> Button<Owned> {
-    pub fn new_2step() -> Button<Owned> {
+impl<const OWNED: bool> Button<OWNED> {
+    pub fn new_2step() -> Button<OWNED> {
         unsafe { Button(ffi::wxButton_new()) }
     }
     pub fn new<T: WindowMethods, U: PointMethods, V: SizeMethods, W: ValidatorMethods>(
@@ -3625,7 +3625,7 @@ impl<const Owned: bool> Button<Owned> {
         style: c_long,
         validator: &W,
         name: &str,
-    ) -> Button<Owned> {
+    ) -> Button<OWNED> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -3655,14 +3655,14 @@ wx_class! { Menu(wxMenu) impl
     EvtHandlerMethods,
     ObjectMethods
 }
-impl<const Owned: bool> Menu<Owned> {
-    pub fn new() -> Menu<Owned> {
+impl<const OWNED: bool> Menu<OWNED> {
+    pub fn new() -> Menu<OWNED> {
         unsafe { Menu(ffi::wxMenu_new()) }
     }
-    pub fn new_with_long(style: c_long) -> Menu<Owned> {
+    pub fn new_with_long(style: c_long) -> Menu<OWNED> {
         unsafe { Menu(ffi::wxMenu_new1(style)) }
     }
-    pub fn new_with_str(title: &str, style: c_long) -> Menu<Owned> {
+    pub fn new_with_str(title: &str, style: c_long) -> Menu<OWNED> {
         unsafe {
             let title = wx_base::wx_string_from(title);
             Menu(ffi::wxMenu_new2(title, style))
@@ -3683,8 +3683,8 @@ wx_class! { MenuBar(wxMenuBar) impl
     EvtHandlerMethods,
     ObjectMethods
 }
-impl<const Owned: bool> MenuBar<Owned> {
-    pub fn new(style: c_long) -> MenuBar<Owned> {
+impl<const OWNED: bool> MenuBar<OWNED> {
+    pub fn new(style: c_long) -> MenuBar<OWNED> {
         unsafe { MenuBar(ffi::wxMenuBar_new(style)) }
     }
     // NOT_SUPPORTED: fn wxMenuBar1()
@@ -3703,7 +3703,7 @@ wx_class! { NonOwnedWindow(wxNonOwnedWindow) impl
     EvtHandlerMethods,
     ObjectMethods
 }
-impl<const Owned: bool> NonOwnedWindow<Owned> {
+impl<const OWNED: bool> NonOwnedWindow<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
     }
@@ -3720,8 +3720,8 @@ wx_class! { TopLevelWindow(wxTopLevelWindow) impl
     EvtHandlerMethods,
     ObjectMethods
 }
-impl<const Owned: bool> TopLevelWindow<Owned> {
-    pub fn new_2step() -> TopLevelWindow<Owned> {
+impl<const OWNED: bool> TopLevelWindow<OWNED> {
+    pub fn new_2step() -> TopLevelWindow<OWNED> {
         unsafe { TopLevelWindow(ffi::wxTopLevelWindow_new()) }
     }
     pub fn new<T: WindowMethods, U: PointMethods, V: SizeMethods>(
@@ -3732,7 +3732,7 @@ impl<const Owned: bool> TopLevelWindow<Owned> {
         size: &V,
         style: c_long,
         name: &str,
-    ) -> TopLevelWindow<Owned> {
+    ) -> TopLevelWindow<OWNED> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -3764,8 +3764,8 @@ wx_class! { Frame(wxFrame) impl
     EvtHandlerMethods,
     ObjectMethods
 }
-impl<const Owned: bool> Frame<Owned> {
-    pub fn new_2step() -> Frame<Owned> {
+impl<const OWNED: bool> Frame<OWNED> {
+    pub fn new_2step() -> Frame<OWNED> {
         unsafe { Frame(ffi::wxFrame_new()) }
     }
     pub fn new<T: WindowMethods, U: PointMethods, V: SizeMethods>(
@@ -3776,7 +3776,7 @@ impl<const Owned: bool> Frame<Owned> {
         size: &V,
         style: c_long,
         name: &str,
-    ) -> Frame<Owned> {
+    ) -> Frame<OWNED> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -3796,7 +3796,7 @@ impl<const Owned: bool> Frame<Owned> {
         Frame(ptr)
     }
 }
-impl<const Owned: bool> TopLevelWindowMethods for Frame<Owned> {
+impl<const OWNED: bool> TopLevelWindowMethods for Frame<OWNED> {
     fn create<T: WindowMethods, U: PointMethods, V: SizeMethods>(
         &self,
         parent: Option<&T>,
@@ -3820,7 +3820,7 @@ impl<const Owned: bool> TopLevelWindowMethods for Frame<Owned> {
         }
     }
 }
-impl<const Owned: bool> WindowMethods for Frame<Owned> {
+impl<const OWNED: bool> WindowMethods for Frame<OWNED> {
     fn centre(&self, direction: c_int) {
         unsafe { ffi::wxFrame_Centre(self.as_ptr(), direction) }
     }
@@ -3830,14 +3830,14 @@ impl<const Owned: bool> WindowMethods for Frame<Owned> {
 wx_class! { Point(wxPoint) impl
     PointMethods
 }
-impl<const Owned: bool> Point<Owned> {
-    pub fn new() -> Point<Owned> {
+impl<const OWNED: bool> Point<OWNED> {
+    pub fn new() -> Point<OWNED> {
         unsafe { Point(ffi::wxPoint_new()) }
     }
-    pub fn new_with_int(x: c_int, y: c_int) -> Point<Owned> {
+    pub fn new_with_int(x: c_int, y: c_int) -> Point<OWNED> {
         unsafe { Point(ffi::wxPoint_new1(x, y)) }
     }
-    pub fn new_with_realpoint(pt: *const c_void) -> Point<Owned> {
+    pub fn new_with_realpoint(pt: *const c_void) -> Point<OWNED> {
         unsafe { Point(ffi::wxPoint_new2(pt)) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -3847,7 +3847,7 @@ impl<const Owned: bool> Point<Owned> {
         Point(ptr)
     }
 }
-impl<const Owned: bool> Drop for Point<Owned> {
+impl<const OWNED: bool> Drop for Point<OWNED> {
     fn drop(&mut self) {
         unsafe { ffi::wxPoint_delete(self.0) }
     }
@@ -3857,31 +3857,31 @@ impl<const Owned: bool> Drop for Point<Owned> {
 wx_class! { Rect(wxRect) impl
     RectMethods
 }
-impl<const Owned: bool> Rect<Owned> {
-    pub fn new() -> Rect<Owned> {
+impl<const OWNED: bool> Rect<OWNED> {
+    pub fn new() -> Rect<OWNED> {
         unsafe { Rect(ffi::wxRect_new()) }
     }
-    pub fn new_with_int(x: c_int, y: c_int, width: c_int, height: c_int) -> Rect<Owned> {
+    pub fn new_with_int(x: c_int, y: c_int, width: c_int, height: c_int) -> Rect<OWNED> {
         unsafe { Rect(ffi::wxRect_new1(x, y, width, height)) }
     }
     pub fn new_with_point_point<T: PointMethods, U: PointMethods>(
         top_left: &T,
         bottom_right: &U,
-    ) -> Rect<Owned> {
+    ) -> Rect<OWNED> {
         unsafe {
             let top_left = top_left.as_ptr();
             let bottom_right = bottom_right.as_ptr();
             Rect(ffi::wxRect_new2(top_left, bottom_right))
         }
     }
-    pub fn new_with_point_size<T: PointMethods, U: SizeMethods>(pos: &T, size: &U) -> Rect<Owned> {
+    pub fn new_with_point_size<T: PointMethods, U: SizeMethods>(pos: &T, size: &U) -> Rect<OWNED> {
         unsafe {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             Rect(ffi::wxRect_new3(pos, size))
         }
     }
-    pub fn new_with_size<T: SizeMethods>(size: &T) -> Rect<Owned> {
+    pub fn new_with_size<T: SizeMethods>(size: &T) -> Rect<OWNED> {
         unsafe {
             let size = size.as_ptr();
             Rect(ffi::wxRect_new4(size))
@@ -3894,7 +3894,7 @@ impl<const Owned: bool> Rect<Owned> {
         Rect(ptr)
     }
 }
-impl<const Owned: bool> Drop for Rect<Owned> {
+impl<const OWNED: bool> Drop for Rect<OWNED> {
     fn drop(&mut self) {
         unsafe { ffi::wxRect_delete(self.0) }
     }
@@ -3904,11 +3904,11 @@ impl<const Owned: bool> Drop for Rect<Owned> {
 wx_class! { Size(wxSize) impl
     SizeMethods
 }
-impl<const Owned: bool> Size<Owned> {
-    pub fn new() -> Size<Owned> {
+impl<const OWNED: bool> Size<OWNED> {
+    pub fn new() -> Size<OWNED> {
         unsafe { Size(ffi::wxSize_new()) }
     }
-    pub fn new_with_int(width: c_int, height: c_int) -> Size<Owned> {
+    pub fn new_with_int(width: c_int, height: c_int) -> Size<OWNED> {
         unsafe { Size(ffi::wxSize_new1(width, height)) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -3918,7 +3918,7 @@ impl<const Owned: bool> Size<Owned> {
         Size(ptr)
     }
 }
-impl<const Owned: bool> Drop for Size<Owned> {
+impl<const OWNED: bool> Drop for Size<OWNED> {
     fn drop(&mut self) {
         unsafe { ffi::wxSize_delete(self.0) }
     }
@@ -3930,8 +3930,8 @@ wx_class! { Validator(wxValidator) impl
     EvtHandlerMethods,
     ObjectMethods
 }
-impl<const Owned: bool> Validator<Owned> {
-    pub fn new() -> Validator<Owned> {
+impl<const OWNED: bool> Validator<OWNED> {
+    pub fn new() -> Validator<OWNED> {
         unsafe { Validator(ffi::wxValidator_new()) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -3950,14 +3950,14 @@ wx_class! { StaticBitmap(wxStaticBitmap) impl
     EvtHandlerMethods,
     ObjectMethods
 }
-impl<const Owned: bool> StaticBitmap<Owned> {
+impl<const OWNED: bool> StaticBitmap<OWNED> {
     //  ENUM: ScaleMode
     pub const Scale_None: c_int = 0;
     pub const Scale_Fill: c_int = 0 + 1;
     pub const Scale_AspectFit: c_int = 0 + 2;
     pub const Scale_AspectFill: c_int = 0 + 3;
 
-    pub fn new_2step() -> StaticBitmap<Owned> {
+    pub fn new_2step() -> StaticBitmap<OWNED> {
         unsafe { StaticBitmap(ffi::wxStaticBitmap_new()) }
     }
     pub fn new<T: WindowMethods, U: PointMethods, V: SizeMethods>(
@@ -3968,7 +3968,7 @@ impl<const Owned: bool> StaticBitmap<Owned> {
         size: &V,
         style: c_long,
         name: &str,
-    ) -> StaticBitmap<Owned> {
+    ) -> StaticBitmap<OWNED> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
