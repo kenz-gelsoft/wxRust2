@@ -140,19 +140,19 @@ pub mod methods {
 
     // wxEvent
     pub trait EventMethods: ObjectMethods {
-        fn clone(&self) -> Event<false> {
-            unsafe { Event::from_ptr(ffi::wxEvent_Clone(self.as_ptr())) }
+        fn clone(&self) -> EventIsOwned<false> {
+            unsafe { EventIsOwned::from_ptr(ffi::wxEvent_Clone(self.as_ptr())) }
         }
-        fn get_event_object(&self) -> Object<false> {
-            unsafe { Object::from_ptr(ffi::wxEvent_GetEventObject(self.as_ptr())) }
+        fn get_event_object(&self) -> ObjectIsOwned<false> {
+            unsafe { ObjectIsOwned::from_ptr(ffi::wxEvent_GetEventObject(self.as_ptr())) }
         }
         // NOT_SUPPORTED: fn GetEventType()
         // NOT_SUPPORTED: fn GetEventCategory()
         fn get_id(&self) -> c_int {
             unsafe { ffi::wxEvent_GetId(self.as_ptr()) }
         }
-        fn get_event_user_data(&self) -> Object<false> {
-            unsafe { Object::from_ptr(ffi::wxEvent_GetEventUserData(self.as_ptr())) }
+        fn get_event_user_data(&self) -> ObjectIsOwned<false> {
+            unsafe { ObjectIsOwned::from_ptr(ffi::wxEvent_GetEventUserData(self.as_ptr())) }
         }
         fn get_skipped(&self) -> bool {
             unsafe { ffi::wxEvent_GetSkipped(self.as_ptr()) }
@@ -248,11 +248,13 @@ pub mod methods {
         fn get_evt_handler_enabled(&self) -> bool {
             unsafe { ffi::wxEvtHandler_GetEvtHandlerEnabled(self.as_ptr()) }
         }
-        fn get_next_handler(&self) -> EvtHandler<false> {
-            unsafe { EvtHandler::from_ptr(ffi::wxEvtHandler_GetNextHandler(self.as_ptr())) }
+        fn get_next_handler(&self) -> EvtHandlerIsOwned<false> {
+            unsafe { EvtHandlerIsOwned::from_ptr(ffi::wxEvtHandler_GetNextHandler(self.as_ptr())) }
         }
-        fn get_previous_handler(&self) -> EvtHandler<false> {
-            unsafe { EvtHandler::from_ptr(ffi::wxEvtHandler_GetPreviousHandler(self.as_ptr())) }
+        fn get_previous_handler(&self) -> EvtHandlerIsOwned<false> {
+            unsafe {
+                EvtHandlerIsOwned::from_ptr(ffi::wxEvtHandler_GetPreviousHandler(self.as_ptr()))
+            }
         }
         fn set_evt_handler_enabled(&self, enabled: bool) {
             unsafe { ffi::wxEvtHandler_SetEvtHandlerEnabled(self.as_ptr(), enabled) }
@@ -292,65 +294,68 @@ pub mod methods {
 }
 
 // wxObject
-wx_class! { Object(wxObject) impl
+wx_class! { ObjectIsOwned(wxObject) impl
     ObjectMethods
 }
-impl<const OWNED: bool> Object<OWNED> {
-    pub fn new() -> Object<OWNED> {
-        unsafe { Object(ffi::wxObject_new()) }
+pub type Object = ObjectIsOwned<true>;
+impl<const OWNED: bool> ObjectIsOwned<OWNED> {
+    pub fn new() -> ObjectIsOwned<OWNED> {
+        unsafe { ObjectIsOwned(ffi::wxObject_new()) }
     }
-    pub fn new_with_object<T: ObjectMethods>(other: &T) -> Object<OWNED> {
+    pub fn new_with_object<T: ObjectMethods>(other: &T) -> ObjectIsOwned<OWNED> {
         unsafe {
             let other = other.as_ptr();
-            Object(ffi::wxObject_new1(other))
+            ObjectIsOwned(ffi::wxObject_new1(other))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
     pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        Object(ptr)
+        ObjectIsOwned(ptr)
     }
 }
-impl<const OWNED: bool> Drop for Object<OWNED> {
+impl<const OWNED: bool> Drop for ObjectIsOwned<OWNED> {
     fn drop(&mut self) {
         unsafe { ffi::wxObject_delete(self.0) }
     }
 }
 
 // wxEvent
-wx_class! { Event(wxEvent) impl
+wx_class! { EventIsOwned(wxEvent) impl
     EventMethods,
     ObjectMethods
 }
-impl<const OWNED: bool> Event<OWNED> {
+pub type Event = EventIsOwned<true>;
+impl<const OWNED: bool> EventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxEvent()
     pub fn none() -> Option<&'static Self> {
         None
     }
     pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        Event(ptr)
+        EventIsOwned(ptr)
     }
 }
-impl<const OWNED: bool> Drop for Event<OWNED> {
+impl<const OWNED: bool> Drop for EventIsOwned<OWNED> {
     fn drop(&mut self) {
         unsafe { ffi::wxObject_delete(self.0) }
     }
 }
 
 // wxEvtHandler
-wx_class! { EvtHandler(wxEvtHandler) impl
+wx_class! { EvtHandlerIsOwned(wxEvtHandler) impl
     EvtHandlerMethods,
     ObjectMethods
 }
-impl<const OWNED: bool> EvtHandler<OWNED> {
-    pub fn new() -> EvtHandler<OWNED> {
-        unsafe { EvtHandler(ffi::wxEvtHandler_new()) }
+pub type EvtHandler = EvtHandlerIsOwned<true>;
+impl<const OWNED: bool> EvtHandlerIsOwned<OWNED> {
+    pub fn new() -> EvtHandlerIsOwned<OWNED> {
+        unsafe { EvtHandlerIsOwned(ffi::wxEvtHandler_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
     pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        EvtHandler(ptr)
+        EvtHandlerIsOwned(ptr)
     }
 }

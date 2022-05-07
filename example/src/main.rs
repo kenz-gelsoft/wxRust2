@@ -5,29 +5,29 @@ use wx::methods::*;
 
 fn main() {
     wx::App::run(|_| {
-        let frame = wx::Frame::<true>::new(
-            wx::Window::<true>::none(),
+        let frame = wx::Frame::new(
+            wx::Window::none(),
             wx::ID_ANY,
             "Hello, 世界",
-            &wx::Point::<true>::default(),
-            &wx::Size::<true>::default(),
+            &wx::Point::default(),
+            &wx::Size::default(),
             wx::DEFAULT_FRAME_STYLE,
             "",
         );
-        let button = wx::Button::<true>::new(
+        let button = wx::Button::new(
             Some(&frame),
             wx::ID_ANY,
             "Greet",
-            &wx::Point::<true>::default(),
-            &wx::Size::<true>::default(),
+            &wx::Point::default(),
+            &wx::Size::default(),
             0,
-            &wx::Validator::<true>::default(),
+            &wx::Validator::default(),
             "",
         );
         let i = 3;
         println!("i={}", i);
         let button_copy = button.clone();
-        button.bind(wx::RUST_EVT_BUTTON, move |_: &wx::CommandEvent<true>| {
+        button.bind(wx::RUST_EVT_BUTTON, move |_: &wx::CommandEvent| {
             println!("i={}", i);
             button_copy.set_label("clicked");
             println!("s={}", button_copy.get_label())

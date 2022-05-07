@@ -37,12 +37,17 @@ class RustClassBinding:
             for line in self._trait_with_methods():
                 yield line
         else:
-            yield 'wx_class! { %s(%s) impl' % (
-                self.__model.unprefixed(),
+            unprefixed = self.__model.unprefixed()
+            yield 'wx_class! { %sIsOwned(%s) impl' % (
+                unprefixed,
                 self.__model.name,
             )
             yield ',\n'.join(self._ancestor_methods())
             yield '}'
+            yield 'pub type %s = %sIsOwned<true>;' % (
+                unprefixed,
+                unprefixed,
+            )
             for line in self._impl_with_ctors():
                 yield line
             for line in self._impl_drop_if_needed():
@@ -62,7 +67,7 @@ class RustClassBinding:
 
     def _impl_with_ctors(self):
         unprefixed = self.__model.unprefixed()
-        yield 'impl<const OWNED: bool> %s<OWNED> {' % (unprefixed,)
+        yield 'impl<const OWNED: bool> %sIsOwned<OWNED> {' % (unprefixed,)
         for enum in self.__model.enums:
             for line in enum.generate():
                 yield '    %s' % (line,)
@@ -74,7 +79,7 @@ class RustClassBinding:
         yield '        None'
         yield '    }'
         yield '    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {'
-        yield '        %s(ptr)' % (unprefixed,)
+        yield '        %sIsOwned(ptr)' % (unprefixed,)
         yield '    }'
         yield '}'
     
@@ -84,7 +89,7 @@ class RustClassBinding:
         deleter_class = self.__model.name
         if self.is_a('wxObject'):
             deleter_class = 'wxObject'
-        yield 'impl<const OWNED: bool> Drop for %s<OWNED> {' % (self.__model.unprefixed(),)
+        yield 'impl<const OWNED: bool> Drop for %sIsOwned<OWNED> {' % (self.__model.unprefixed(),)
         yield '    fn drop(&mut self) {'
         yield '        unsafe { ffi::%s_delete(self.0) }' % (deleter_class,)
         yield '    }'
@@ -95,7 +100,7 @@ class RustClassBinding:
             methods = [m for m in self.__methods if m.is_non_virtual_override(ancestor)]
             if not methods:
                 continue
-            yield 'impl<const OWNED: bool> %sMethods for %s<OWNED> {' % (
+            yield 'impl<const OWNED: bool> %sMethods for %sIsOwned<OWNED> {' % (
                 ancestor.unprefixed(),
                 self.__model.unprefixed(),
             )
@@ -239,7 +244,7 @@ class RustMethodBinding:
                 returns = '*mut c_void'
             else:
                 owned = 'OWNED' if self.is_ctor else 'false'
-                returns = '%s<%s>' % (wrapped[2:], owned)
+                returns = '%sIsOwned<%s>' % (wrapped[2:], owned)
                 if self.__model.returns.is_str():
                     returns = 'String'
         return ' -> %s' % (returns,)
@@ -385,10 +390,10 @@ class RustMethodBinding:
             return 'wx_base::from_wx_string(%s)' % (call,)
         wrapped = self.__model.wrapped_return_type(allows_ptr=False)
         if wrapped:
-            return '%s(%s)' % (wrapped[2:], call)
+            return '%sIsOwned(%s)' % (wrapped[2:], call)
         wrapped = self.__model.wrapped_return_type(allows_ptr=True)
         if wrapped:
-            return '%s::from_ptr(%s)' % (wrapped[2:], call)
+            return '%sIsOwned::from_ptr(%s)' % (wrapped[2:], call)
         return call
 
     def _uses_ptr_type(self):
