@@ -242,8 +242,11 @@ class RustMethodBinding:
             if for_ffi:
                 returns = '*mut c_void'
             else:
-                owned = 'OWNED' if self.is_ctor else 'false'
-                returns = '%sIsOwned<%s>' % (wrapped[2:], owned)
+                returns = wrapped[2:]
+                if (self.is_ctor or
+                    self.__model.returns.is_ptr_to_binding()):
+                    owned = 'OWNED' if self.is_ctor else 'false'
+                    returns = '%sIsOwned<%s>' % (returns, owned)
                 if self.__model.returns.is_str():
                     returns = 'String'
         return ' -> %s' % (returns,)
