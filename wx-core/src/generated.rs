@@ -1255,13 +1255,13 @@ pub mod methods {
                 ffi::wxWindow_CacheBestSize(self.as_ptr(), size)
             }
         }
-        fn client_to_window_size<T: SizeMethods>(&self, size: &T) -> SizeIsOwned<false> {
+        fn client_to_window_size<T: SizeMethods>(&self, size: &T) -> Size {
             unsafe {
                 let size = size.as_ptr();
                 SizeIsOwned(ffi::wxWindow_ClientToWindowSize(self.as_ptr(), size))
             }
         }
-        fn window_to_client_size<T: SizeMethods>(&self, size: &T) -> SizeIsOwned<false> {
+        fn window_to_client_size<T: SizeMethods>(&self, size: &T) -> Size {
             unsafe {
                 let size = size.as_ptr();
                 SizeIsOwned(ffi::wxWindow_WindowToClientSize(self.as_ptr(), size))
@@ -1273,13 +1273,13 @@ pub mod methods {
         fn fit_inside(&self) {
             unsafe { ffi::wxWindow_FitInside(self.as_ptr()) }
         }
-        fn from_dip_size<T: SizeMethods>(&self, sz: &T) -> SizeIsOwned<false> {
+        fn from_dip_size<T: SizeMethods>(&self, sz: &T) -> Size {
             unsafe {
                 let sz = sz.as_ptr();
                 SizeIsOwned(ffi::wxWindow_FromDIP(self.as_ptr(), sz))
             }
         }
-        fn from_dip_point<T: PointMethods>(&self, pt: &T) -> PointIsOwned<false> {
+        fn from_dip_point<T: PointMethods>(&self, pt: &T) -> Point {
             unsafe {
                 let pt = pt.as_ptr();
                 PointIsOwned(ffi::wxWindow_FromDIP1(self.as_ptr(), pt))
@@ -1288,13 +1288,13 @@ pub mod methods {
         fn from_dip_int(&self, d: c_int) -> c_int {
             unsafe { ffi::wxWindow_FromDIP2(self.as_ptr(), d) }
         }
-        fn to_dip_size<T: SizeMethods>(&self, sz: &T) -> SizeIsOwned<false> {
+        fn to_dip_size<T: SizeMethods>(&self, sz: &T) -> Size {
             unsafe {
                 let sz = sz.as_ptr();
                 SizeIsOwned(ffi::wxWindow_ToDIP(self.as_ptr(), sz))
             }
         }
-        fn to_dip_point<T: PointMethods>(&self, pt: &T) -> PointIsOwned<false> {
+        fn to_dip_point<T: PointMethods>(&self, pt: &T) -> Point {
             unsafe {
                 let pt = pt.as_ptr();
                 PointIsOwned(ffi::wxWindow_ToDIP1(self.as_ptr(), pt))
@@ -1303,7 +1303,7 @@ pub mod methods {
         fn to_dip_int(&self, d: c_int) -> c_int {
             unsafe { ffi::wxWindow_ToDIP2(self.as_ptr(), d) }
         }
-        fn get_best_size(&self) -> SizeIsOwned<false> {
+        fn get_best_size(&self) -> Size {
             unsafe { SizeIsOwned(ffi::wxWindow_GetBestSize(self.as_ptr())) }
         }
         fn get_best_height(&self, width: c_int) -> c_int {
@@ -1315,22 +1315,22 @@ pub mod methods {
         fn get_client_size_int(&self, width: *mut c_void, height: *mut c_void) {
             unsafe { ffi::wxWindow_GetClientSize(self.as_ptr(), width, height) }
         }
-        fn get_client_size(&self) -> SizeIsOwned<false> {
+        fn get_client_size(&self) -> Size {
             unsafe { SizeIsOwned(ffi::wxWindow_GetClientSize1(self.as_ptr())) }
         }
-        fn get_effective_min_size(&self) -> SizeIsOwned<false> {
+        fn get_effective_min_size(&self) -> Size {
             unsafe { SizeIsOwned(ffi::wxWindow_GetEffectiveMinSize(self.as_ptr())) }
         }
-        fn get_max_client_size(&self) -> SizeIsOwned<false> {
+        fn get_max_client_size(&self) -> Size {
             unsafe { SizeIsOwned(ffi::wxWindow_GetMaxClientSize(self.as_ptr())) }
         }
-        fn get_max_size(&self) -> SizeIsOwned<false> {
+        fn get_max_size(&self) -> Size {
             unsafe { SizeIsOwned(ffi::wxWindow_GetMaxSize(self.as_ptr())) }
         }
-        fn get_min_client_size(&self) -> SizeIsOwned<false> {
+        fn get_min_client_size(&self) -> Size {
             unsafe { SizeIsOwned(ffi::wxWindow_GetMinClientSize(self.as_ptr())) }
         }
-        fn get_min_size(&self) -> SizeIsOwned<false> {
+        fn get_min_size(&self) -> Size {
             unsafe { SizeIsOwned(ffi::wxWindow_GetMinSize(self.as_ptr())) }
         }
         fn get_min_width(&self) -> c_int {
@@ -1348,16 +1348,16 @@ pub mod methods {
         fn get_size_int(&self, width: *mut c_void, height: *mut c_void) {
             unsafe { ffi::wxWindow_GetSize(self.as_ptr(), width, height) }
         }
-        fn get_size(&self) -> SizeIsOwned<false> {
+        fn get_size(&self) -> Size {
             unsafe { SizeIsOwned(ffi::wxWindow_GetSize1(self.as_ptr())) }
         }
-        fn get_virtual_size(&self) -> SizeIsOwned<false> {
+        fn get_virtual_size(&self) -> Size {
             unsafe { SizeIsOwned(ffi::wxWindow_GetVirtualSize(self.as_ptr())) }
         }
         fn get_virtual_size_int(&self, width: *mut c_void, height: *mut c_void) {
             unsafe { ffi::wxWindow_GetVirtualSize1(self.as_ptr(), width, height) }
         }
-        fn get_best_virtual_size(&self) -> SizeIsOwned<false> {
+        fn get_best_virtual_size(&self) -> Size {
             unsafe { SizeIsOwned(ffi::wxWindow_GetBestVirtualSize(self.as_ptr())) }
         }
         fn get_content_scale_factor(&self) -> c_double {
@@ -1366,7 +1366,7 @@ pub mod methods {
         fn get_dpi_scale_factor(&self) -> c_double {
             unsafe { ffi::wxWindow_GetDPIScaleFactor(self.as_ptr()) }
         }
-        fn get_window_border_size(&self) -> SizeIsOwned<false> {
+        fn get_window_border_size(&self) -> Size {
             unsafe { SizeIsOwned(ffi::wxWindow_GetWindowBorderSize(self.as_ptr())) }
         }
         fn inform_first_direction(
@@ -1507,10 +1507,7 @@ pub mod methods {
                 ffi::wxWindow_SetVirtualSize1(self.as_ptr(), size)
             }
         }
-        fn from_dip_size_window<T: SizeMethods, U: WindowMethods>(
-            sz: &T,
-            w: Option<&U>,
-        ) -> SizeIsOwned<false> {
+        fn from_dip_size_window<T: SizeMethods, U: WindowMethods>(sz: &T, w: Option<&U>) -> Size {
             unsafe {
                 let sz = sz.as_ptr();
                 let w = match w {
@@ -1523,7 +1520,7 @@ pub mod methods {
         fn from_dip_point_window<T: PointMethods, U: WindowMethods>(
             pt: &T,
             w: Option<&U>,
-        ) -> PointIsOwned<false> {
+        ) -> Point {
             unsafe {
                 let pt = pt.as_ptr();
                 let w = match w {
@@ -1542,10 +1539,7 @@ pub mod methods {
                 ffi::wxWindow_FromDIP5(d, w)
             }
         }
-        fn to_dip_size_window<T: SizeMethods, U: WindowMethods>(
-            sz: &T,
-            w: Option<&U>,
-        ) -> SizeIsOwned<false> {
+        fn to_dip_size_window<T: SizeMethods, U: WindowMethods>(sz: &T, w: Option<&U>) -> Size {
             unsafe {
                 let sz = sz.as_ptr();
                 let w = match w {
@@ -1555,10 +1549,7 @@ pub mod methods {
                 SizeIsOwned(ffi::wxWindow_ToDIP3(sz, w))
             }
         }
-        fn to_dip_point_window<T: PointMethods, U: WindowMethods>(
-            pt: &T,
-            w: Option<&U>,
-        ) -> PointIsOwned<false> {
+        fn to_dip_point_window<T: PointMethods, U: WindowMethods>(pt: &T, w: Option<&U>) -> Point {
             unsafe {
                 let pt = pt.as_ptr();
                 let w = match w {
@@ -1592,25 +1583,25 @@ pub mod methods {
         fn get_position_int(&self, x: *mut c_void, y: *mut c_void) {
             unsafe { ffi::wxWindow_GetPosition(self.as_ptr(), x, y) }
         }
-        fn get_position(&self) -> PointIsOwned<false> {
+        fn get_position(&self) -> Point {
             unsafe { PointIsOwned(ffi::wxWindow_GetPosition1(self.as_ptr())) }
         }
-        fn get_rect(&self) -> RectIsOwned<false> {
+        fn get_rect(&self) -> Rect {
             unsafe { RectIsOwned(ffi::wxWindow_GetRect(self.as_ptr())) }
         }
         fn get_screen_position_int(&self, x: *mut c_void, y: *mut c_void) {
             unsafe { ffi::wxWindow_GetScreenPosition(self.as_ptr(), x, y) }
         }
-        fn get_screen_position(&self) -> PointIsOwned<false> {
+        fn get_screen_position(&self) -> Point {
             unsafe { PointIsOwned(ffi::wxWindow_GetScreenPosition1(self.as_ptr())) }
         }
-        fn get_screen_rect(&self) -> RectIsOwned<false> {
+        fn get_screen_rect(&self) -> Rect {
             unsafe { RectIsOwned(ffi::wxWindow_GetScreenRect(self.as_ptr())) }
         }
-        fn get_client_area_origin(&self) -> PointIsOwned<false> {
+        fn get_client_area_origin(&self) -> Point {
             unsafe { PointIsOwned(ffi::wxWindow_GetClientAreaOrigin(self.as_ptr())) }
         }
-        fn get_client_rect(&self) -> RectIsOwned<false> {
+        fn get_client_rect(&self) -> Rect {
             unsafe { RectIsOwned(ffi::wxWindow_GetClientRect(self.as_ptr())) }
         }
         fn move_int(&self, x: c_int, y: c_int, flags: c_int) {
@@ -1631,31 +1622,31 @@ pub mod methods {
         fn client_to_screen_int(&self, x: *mut c_void, y: *mut c_void) {
             unsafe { ffi::wxWindow_ClientToScreen(self.as_ptr(), x, y) }
         }
-        fn client_to_screen_point<T: PointMethods>(&self, pt: &T) -> PointIsOwned<false> {
+        fn client_to_screen_point<T: PointMethods>(&self, pt: &T) -> Point {
             unsafe {
                 let pt = pt.as_ptr();
                 PointIsOwned(ffi::wxWindow_ClientToScreen1(self.as_ptr(), pt))
             }
         }
-        fn convert_dialog_to_pixels_point<T: PointMethods>(&self, pt: &T) -> PointIsOwned<false> {
+        fn convert_dialog_to_pixels_point<T: PointMethods>(&self, pt: &T) -> Point {
             unsafe {
                 let pt = pt.as_ptr();
                 PointIsOwned(ffi::wxWindow_ConvertDialogToPixels(self.as_ptr(), pt))
             }
         }
-        fn convert_dialog_to_pixels_size<T: SizeMethods>(&self, sz: &T) -> SizeIsOwned<false> {
+        fn convert_dialog_to_pixels_size<T: SizeMethods>(&self, sz: &T) -> Size {
             unsafe {
                 let sz = sz.as_ptr();
                 SizeIsOwned(ffi::wxWindow_ConvertDialogToPixels1(self.as_ptr(), sz))
             }
         }
-        fn convert_pixels_to_dialog_point<T: PointMethods>(&self, pt: &T) -> PointIsOwned<false> {
+        fn convert_pixels_to_dialog_point<T: PointMethods>(&self, pt: &T) -> Point {
             unsafe {
                 let pt = pt.as_ptr();
                 PointIsOwned(ffi::wxWindow_ConvertPixelsToDialog(self.as_ptr(), pt))
             }
         }
-        fn convert_pixels_to_dialog_size<T: SizeMethods>(&self, sz: &T) -> SizeIsOwned<false> {
+        fn convert_pixels_to_dialog_size<T: SizeMethods>(&self, sz: &T) -> Size {
             unsafe {
                 let sz = sz.as_ptr();
                 SizeIsOwned(ffi::wxWindow_ConvertPixelsToDialog1(self.as_ptr(), sz))
@@ -1664,7 +1655,7 @@ pub mod methods {
         fn screen_to_client_int(&self, x: *mut c_void, y: *mut c_void) {
             unsafe { ffi::wxWindow_ScreenToClient(self.as_ptr(), x, y) }
         }
-        fn screen_to_client_point<T: PointMethods>(&self, pt: &T) -> PointIsOwned<false> {
+        fn screen_to_client_point<T: PointMethods>(&self, pt: &T) -> Point {
             unsafe {
                 let pt = pt.as_ptr();
                 PointIsOwned(ffi::wxWindow_ScreenToClient1(self.as_ptr(), pt))
@@ -1691,7 +1682,7 @@ pub mod methods {
             unsafe { ffi::wxWindow_GetCharWidth(self.as_ptr()) }
         }
         // NOT_SUPPORTED: fn GetDefaultAttributes()
-        fn get_dpi(&self) -> SizeIsOwned<false> {
+        fn get_dpi(&self) -> Size {
             unsafe { SizeIsOwned(ffi::wxWindow_GetDPI(self.as_ptr())) }
         }
         // NOT_SUPPORTED: fn GetFont()
@@ -1718,14 +1709,14 @@ pub mod methods {
                 )
             }
         }
-        fn get_text_extent(&self, string: &str) -> SizeIsOwned<false> {
+        fn get_text_extent(&self, string: &str) -> Size {
             unsafe {
                 let string = wx_base::wx_string_from(string);
                 SizeIsOwned(ffi::wxWindow_GetTextExtent1(self.as_ptr(), string))
             }
         }
         // BLOCKED: fn GetUpdateRegion()
-        fn get_update_client_rect(&self) -> RectIsOwned<false> {
+        fn get_update_client_rect(&self) -> Rect {
             unsafe { RectIsOwned(ffi::wxWindow_GetUpdateClientRect(self.as_ptr())) }
         }
         fn has_transparent_background(&self) -> bool {
@@ -2300,7 +2291,7 @@ pub mod methods {
         fn get_label_text(&self) -> String {
             unsafe { wx_base::from_wx_string(ffi::wxControl_GetLabelText(self.as_ptr())) }
         }
-        fn get_size_from_text_size_int(&self, xlen: c_int, ylen: c_int) -> SizeIsOwned<false> {
+        fn get_size_from_text_size_int(&self, xlen: c_int, ylen: c_int) -> Size {
             unsafe {
                 SizeIsOwned(ffi::wxControl_GetSizeFromTextSize(
                     self.as_ptr(),
@@ -2309,13 +2300,13 @@ pub mod methods {
                 ))
             }
         }
-        fn get_size_from_text_size_size<T: SizeMethods>(&self, tsize: &T) -> SizeIsOwned<false> {
+        fn get_size_from_text_size_size<T: SizeMethods>(&self, tsize: &T) -> Size {
             unsafe {
                 let tsize = tsize.as_ptr();
                 SizeIsOwned(ffi::wxControl_GetSizeFromTextSize1(self.as_ptr(), tsize))
             }
         }
-        fn get_size_from_text(&self, text: &str) -> SizeIsOwned<false> {
+        fn get_size_from_text(&self, text: &str) -> Size {
             unsafe {
                 let text = wx_base::wx_string_from(text);
                 SizeIsOwned(ffi::wxControl_GetSizeFromText(self.as_ptr(), text))
@@ -2390,7 +2381,7 @@ pub mod methods {
         fn set_bitmap_pressed(&self, bitmap: *const c_void) {
             unsafe { ffi::wxAnyButton_SetBitmapPressed(self.as_ptr(), bitmap) }
         }
-        fn get_bitmap_margins(&self) -> SizeIsOwned<false> {
+        fn get_bitmap_margins(&self) -> Size {
             unsafe { SizeIsOwned(ffi::wxAnyButton_GetBitmapMargins(self.as_ptr())) }
         }
         fn set_bitmap_margins_coord(&self, x: c_int, y: c_int) {
@@ -2450,7 +2441,7 @@ pub mod methods {
         fn set_default(&self) -> WindowIsOwned<false> {
             unsafe { WindowIsOwned::from_ptr(ffi::wxButton_SetDefault(self.as_ptr())) }
         }
-        fn get_default_size<T: WindowMethods>(win: Option<&T>) -> SizeIsOwned<false> {
+        fn get_default_size<T: WindowMethods>(win: Option<&T>) -> Size {
             unsafe {
                 let win = match win {
                     Some(r) => r.as_ptr(),
@@ -3001,7 +2992,7 @@ pub mod methods {
         }
         // BLOCKED: fn UseNativeDecorations()
         // BLOCKED: fn UseNativeDecorationsByDefault()
-        fn get_default_size() -> SizeIsOwned<false> {
+        fn get_default_size() -> Size {
             unsafe { SizeIsOwned(ffi::wxTopLevelWindow_GetDefaultSize()) }
         }
     }
@@ -3140,13 +3131,13 @@ pub mod methods {
 
     // wxRect
     pub trait RectMethods: WxRustMethods {
-        fn centre_in<T: RectMethods>(&self, r: &T, dir: c_int) -> RectIsOwned<false> {
+        fn centre_in<T: RectMethods>(&self, r: &T, dir: c_int) -> Rect {
             unsafe {
                 let r = r.as_ptr();
                 RectIsOwned(ffi::wxRect_CentreIn(self.as_ptr(), r, dir))
             }
         }
-        fn center_in<T: RectMethods>(&self, r: &T, dir: c_int) -> RectIsOwned<false> {
+        fn center_in<T: RectMethods>(&self, r: &T, dir: c_int) -> Rect {
             unsafe {
                 let r = r.as_ptr();
                 RectIsOwned(ffi::wxRect_CenterIn(self.as_ptr(), r, dir))
@@ -3170,16 +3161,16 @@ pub mod methods {
         // BLOCKED: fn Deflate()
         // BLOCKED: fn Deflate1()
         // BLOCKED: fn Deflate2()
-        fn deflate(&self, dx: c_int, dy: c_int) -> RectIsOwned<false> {
+        fn deflate(&self, dx: c_int, dy: c_int) -> Rect {
             unsafe { RectIsOwned(ffi::wxRect_Deflate3(self.as_ptr(), dx, dy)) }
         }
         fn get_bottom(&self) -> c_int {
             unsafe { ffi::wxRect_GetBottom(self.as_ptr()) }
         }
-        fn get_bottom_left(&self) -> PointIsOwned<false> {
+        fn get_bottom_left(&self) -> Point {
             unsafe { PointIsOwned(ffi::wxRect_GetBottomLeft(self.as_ptr())) }
         }
-        fn get_bottom_right(&self) -> PointIsOwned<false> {
+        fn get_bottom_right(&self) -> Point {
             unsafe { PointIsOwned(ffi::wxRect_GetBottomRight(self.as_ptr())) }
         }
         fn get_height(&self) -> c_int {
@@ -3188,22 +3179,22 @@ pub mod methods {
         fn get_left(&self) -> c_int {
             unsafe { ffi::wxRect_GetLeft(self.as_ptr()) }
         }
-        fn get_position(&self) -> PointIsOwned<false> {
+        fn get_position(&self) -> Point {
             unsafe { PointIsOwned(ffi::wxRect_GetPosition(self.as_ptr())) }
         }
         fn get_right(&self) -> c_int {
             unsafe { ffi::wxRect_GetRight(self.as_ptr()) }
         }
-        fn get_size(&self) -> SizeIsOwned<false> {
+        fn get_size(&self) -> Size {
             unsafe { SizeIsOwned(ffi::wxRect_GetSize(self.as_ptr())) }
         }
         fn get_top(&self) -> c_int {
             unsafe { ffi::wxRect_GetTop(self.as_ptr()) }
         }
-        fn get_top_left(&self) -> PointIsOwned<false> {
+        fn get_top_left(&self) -> Point {
             unsafe { PointIsOwned(ffi::wxRect_GetTopLeft(self.as_ptr())) }
         }
-        fn get_top_right(&self) -> PointIsOwned<false> {
+        fn get_top_right(&self) -> Point {
             unsafe { PointIsOwned(ffi::wxRect_GetTopRight(self.as_ptr())) }
         }
         fn get_width(&self) -> c_int {
@@ -3218,11 +3209,11 @@ pub mod methods {
         // BLOCKED: fn Inflate()
         // BLOCKED: fn Inflate1()
         // BLOCKED: fn Inflate2()
-        fn inflate(&self, dx: c_int, dy: c_int) -> RectIsOwned<false> {
+        fn inflate(&self, dx: c_int, dy: c_int) -> Rect {
             unsafe { RectIsOwned(ffi::wxRect_Inflate3(self.as_ptr(), dx, dy)) }
         }
         // BLOCKED: fn Intersect()
-        fn intersect<T: RectMethods>(&self, rect: &T) -> RectIsOwned<false> {
+        fn intersect<T: RectMethods>(&self, rect: &T) -> Rect {
             unsafe {
                 let rect = rect.as_ptr();
                 RectIsOwned(ffi::wxRect_Intersect1(self.as_ptr(), rect))
@@ -3306,7 +3297,7 @@ pub mod methods {
                 ffi::wxRect_SetBottomLeft(self.as_ptr(), p)
             }
         }
-        fn union<T: RectMethods>(&self, rect: &T) -> RectIsOwned<false> {
+        fn union<T: RectMethods>(&self, rect: &T) -> Rect {
             unsafe {
                 let rect = rect.as_ptr();
                 RectIsOwned(ffi::wxRect_Union(self.as_ptr(), rect))
