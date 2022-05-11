@@ -75,9 +75,6 @@ class RustClassBinding:
         yield "    pub fn none() -> Option<&'static Self> {"
         yield '        None'
         yield '    }'
-        yield '    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {'
-        yield '        %sIsOwned(ptr)' % (unprefixed,)
-        yield '    }'
         yield '}'
     
     def _impl_drop_if_needed(self):

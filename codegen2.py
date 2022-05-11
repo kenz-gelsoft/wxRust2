@@ -89,6 +89,7 @@ pub mod methods {
         yield '''\
     pub trait WxRustMethods {
         unsafe fn as_ptr(&self) -> *mut c_void;
+        unsafe fn from_ptr(ptr: *mut c_void) -> Self;
         unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F);
     }\
 '''

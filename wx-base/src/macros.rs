@@ -11,6 +11,9 @@ macro_rules! wx_class {
         )*
         impl<const OWNED: bool> WxRustMethods for $typeIsOwned<OWNED> {
             unsafe fn as_ptr(&self) -> *mut c_void { self.0 }
+            unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+                $typeIsOwned(ptr)
+            }
             unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F) {
                 let tmp = Self(ptr);
                 closure(&tmp);

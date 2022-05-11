@@ -3497,9 +3497,6 @@ impl<const OWNED: bool> CommandEventIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        CommandEventIsOwned(ptr)
-    }
 }
 impl<const OWNED: bool> Drop for CommandEventIsOwned<OWNED> {
     fn drop(&mut self) {
@@ -3542,9 +3539,6 @@ impl<const OWNED: bool> WindowIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        WindowIsOwned(ptr)
-    }
 }
 
 // wxControl
@@ -3585,9 +3579,6 @@ impl<const OWNED: bool> ControlIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        ControlIsOwned(ptr)
-    }
 }
 
 // wxAnyButton
@@ -3605,9 +3596,6 @@ impl<const OWNED: bool> AnyButtonIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
-    }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        AnyButtonIsOwned(ptr)
     }
 }
 
@@ -3653,9 +3641,6 @@ impl<const OWNED: bool> ButtonIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        ButtonIsOwned(ptr)
-    }
 }
 
 // wxMenu
@@ -3681,9 +3666,6 @@ impl<const OWNED: bool> MenuIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        MenuIsOwned(ptr)
-    }
 }
 
 // wxMenuBar
@@ -3702,9 +3684,6 @@ impl<const OWNED: bool> MenuBarIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        MenuBarIsOwned(ptr)
-    }
 }
 
 // wxNonOwnedWindow
@@ -3718,9 +3697,6 @@ wx_class! { NonOwnedWindow =
 impl<const OWNED: bool> NonOwnedWindowIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
-    }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        NonOwnedWindowIsOwned(ptr)
     }
 }
 
@@ -3763,9 +3739,6 @@ impl<const OWNED: bool> TopLevelWindowIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        TopLevelWindowIsOwned(ptr)
-    }
 }
 
 // wxFrame
@@ -3805,9 +3778,6 @@ impl<const OWNED: bool> FrameIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
-    }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        FrameIsOwned(ptr)
     }
 }
 impl<const OWNED: bool> TopLevelWindowMethods for FrameIsOwned<OWNED> {
@@ -3857,9 +3827,6 @@ impl<const OWNED: bool> PointIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
-    }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        PointIsOwned(ptr)
     }
 }
 impl<const OWNED: bool> Drop for PointIsOwned<OWNED> {
@@ -3911,9 +3878,6 @@ impl<const OWNED: bool> RectIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        RectIsOwned(ptr)
-    }
 }
 impl<const OWNED: bool> Drop for RectIsOwned<OWNED> {
     fn drop(&mut self) {
@@ -3938,9 +3902,6 @@ impl<const OWNED: bool> SizeIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        SizeIsOwned(ptr)
-    }
 }
 impl<const OWNED: bool> Drop for SizeIsOwned<OWNED> {
     fn drop(&mut self) {
@@ -3963,9 +3924,6 @@ impl<const OWNED: bool> ValidatorIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
-    }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        ValidatorIsOwned(ptr)
     }
 }
 
@@ -4012,8 +3970,5 @@ impl<const OWNED: bool> StaticBitmapIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
-    }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        StaticBitmapIsOwned(ptr)
     }
 }

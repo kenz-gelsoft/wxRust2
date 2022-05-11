@@ -98,6 +98,7 @@ pub mod methods {
 
     pub trait WxRustMethods {
         unsafe fn as_ptr(&self) -> *mut c_void;
+        unsafe fn from_ptr(ptr: *mut c_void) -> Self;
         unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F);
     }
 
@@ -311,9 +312,6 @@ impl<const OWNED: bool> ObjectIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        ObjectIsOwned(ptr)
-    }
 }
 impl<const OWNED: bool> Drop for ObjectIsOwned<OWNED> {
     fn drop(&mut self) {
@@ -333,9 +331,6 @@ impl<const OWNED: bool> EventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxEvent()
     pub fn none() -> Option<&'static Self> {
         None
-    }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        EventIsOwned(ptr)
     }
 }
 impl<const OWNED: bool> Drop for EventIsOwned<OWNED> {
@@ -358,8 +353,5 @@ impl<const OWNED: bool> EvtHandlerIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
-    }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        EvtHandlerIsOwned(ptr)
     }
 }
