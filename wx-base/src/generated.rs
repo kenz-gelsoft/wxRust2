@@ -97,8 +97,10 @@ pub mod methods {
     use super::*;
 
     pub trait WxRustMethods {
+        type Unowned;
         unsafe fn as_ptr(&self) -> *mut c_void;
         unsafe fn from_ptr(ptr: *mut c_void) -> Self;
+        unsafe fn from_unowned_ptr(ptr: *mut c_void) -> Self::Unowned;
         unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F);
     }
 

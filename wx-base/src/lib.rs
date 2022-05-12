@@ -116,17 +116,18 @@ pub fn entry() {
 }
 
 // wxWeakRef
-pub struct WeakRef<T>(*mut c_void, T);
-impl<'a, T: WxRustMethods> WeakRef<T> {
-    pub fn new(obj: T) -> Self {
-        unsafe { WeakRef(ffi::OpaqueWeakRef_new(obj.as_ptr()), obj) }
+pub struct WeakRef<T>(*mut c_void, PhantomData<T>);
+impl<T: WxRustMethods> WeakRef<T> {
+    pub fn from(obj: T) -> Self {
+        unsafe { WeakRef(ffi::OpaqueWeakRef_new(obj.as_ptr()), PhantomData) }
     }
-    pub fn get(&'a self) -> Option<&'a T> {
+    pub fn get(&self) -> Option<T::Unowned> {
         unsafe {
-            if ffi::OpaqueWeakRef_Get(self.0).is_null() {
+            let ptr = ffi::OpaqueWeakRef_Get(self.0);
+            if ptr.is_null() {
                 None
             } else {
-                Some(&self.1)
+                Some(T::from_unowned_ptr(ptr))
             }
         }
     }

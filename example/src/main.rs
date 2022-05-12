@@ -34,7 +34,7 @@ fn main() {
         });
         // frame.centre(wx::BOTH);
         // frame.show(true);
-        let weak_frame = wx::WeakRef::new(frame);
+        let weak_frame = wx::WeakRef::from(frame);
         if let Some(f) = weak_frame.get() {
             f.centre(wx::BOTH);
             f.show(true);
