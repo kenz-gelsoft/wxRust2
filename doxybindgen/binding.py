@@ -75,9 +75,6 @@ class RustClassBinding:
         yield "    pub fn none() -> Option<&'static Self> {"
         yield '        None'
         yield '    }'
-        yield '    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {'
-        yield '        %sIsOwned(ptr)' % (unprefixed,)
-        yield '    }'
         yield '}'
     
     def _impl_drop_if_needed(self):
@@ -245,8 +242,10 @@ class RustMethodBinding:
                 returns = wrapped[2:]
                 if (self.is_ctor or
                     self.__model.returns.is_ptr_to_binding()):
-                    owned = 'OWNED' if self.is_ctor else 'false'
-                    returns = '%sIsOwned<%s>' % (returns, owned)
+                    if self.is_ctor:
+                        returns = '%sIsOwned<OWNED>' % (returns,)
+                    else:
+                        returns = 'WeakRef<%s>' % (returns,)
                 if self.__model.returns.is_str():
                     returns = 'String'
         return ' -> %s' % (returns,)
@@ -395,7 +394,7 @@ class RustMethodBinding:
             return '%sIsOwned(%s)' % (wrapped[2:], call)
         wrapped = self.__model.wrapped_return_type(allows_ptr=True)
         if wrapped:
-            return '%sIsOwned::from_ptr(%s)' % (wrapped[2:], call)
+            return 'WeakRef::<%s>::from(%s)' % (wrapped[2:], call)
         return call
 
     def _uses_ptr_type(self):

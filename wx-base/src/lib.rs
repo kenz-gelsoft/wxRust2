@@ -1,4 +1,5 @@
 use std::convert::TryInto;
+use std::marker::PhantomData;
 use std::os::raw::{c_char, c_int, c_void};
 use std::ptr;
 
@@ -33,6 +34,11 @@ mod ffi {
         pub fn wxString_Len(self_: *mut c_void) -> usize;
 
         pub fn wxRustEntry(argc: *mut c_int, argv: *mut *mut c_char) -> c_int;
+
+        // WeakRef
+        pub fn OpaqueWeakRef_new(obj: *mut c_void) -> *mut c_void;
+        pub fn OpaqueWeakRef_delete(self_: *mut c_void);
+        pub fn OpaqueWeakRef_Get(self_: *mut c_void) -> *mut c_void;
     }
 }
 
@@ -106,5 +112,38 @@ pub fn entry() {
     let mut argc: c_int = args.len().try_into().unwrap();
     unsafe {
         ffi::wxRustEntry(&mut argc, argv.as_mut_ptr());
+    }
+}
+
+// wxWeakRef
+pub struct WeakRef<T>(*mut c_void, PhantomData<T>);
+impl<T: WxRustMethods> WeakRef<T> {
+    pub unsafe fn from(ptr: *mut c_void) -> Self {
+        let ptr = if ptr.is_null() {
+            ptr
+        } else {
+            ffi::OpaqueWeakRef_new(ptr)
+        };
+        WeakRef(ptr, PhantomData)
+    }
+    pub fn get(&self) -> Option<T::Unowned> {
+        unsafe {
+            let ptr = self.0;
+            let ptr = if ptr.is_null() {
+                ptr
+            } else {
+                ffi::OpaqueWeakRef_Get(ptr)
+            };
+            if ptr.is_null() {
+                None
+            } else {
+                Some(T::from_unowned_ptr(ptr))
+            }
+        }
+    }
+}
+impl<T> Drop for WeakRef<T> {
+    fn drop(&mut self) {
+        unsafe { ffi::OpaqueWeakRef_delete(self.0) }
     }
 }

@@ -95,9 +95,13 @@ pub mod methods {
     use std::os::raw::{c_int, c_long, c_void};
 
     use super::*;
+    use crate::WeakRef;
 
     pub trait WxRustMethods {
+        type Unowned;
         unsafe fn as_ptr(&self) -> *mut c_void;
+        unsafe fn from_ptr(ptr: *mut c_void) -> Self;
+        unsafe fn from_unowned_ptr(ptr: *mut c_void) -> Self::Unowned;
         unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F);
     }
 
@@ -140,19 +144,19 @@ pub mod methods {
 
     // wxEvent
     pub trait EventMethods: ObjectMethods {
-        fn clone(&self) -> EventIsOwned<false> {
-            unsafe { EventIsOwned::from_ptr(ffi::wxEvent_Clone(self.as_ptr())) }
+        fn clone(&self) -> WeakRef<Event> {
+            unsafe { WeakRef::<Event>::from(ffi::wxEvent_Clone(self.as_ptr())) }
         }
-        fn get_event_object(&self) -> ObjectIsOwned<false> {
-            unsafe { ObjectIsOwned::from_ptr(ffi::wxEvent_GetEventObject(self.as_ptr())) }
+        fn get_event_object(&self) -> WeakRef<Object> {
+            unsafe { WeakRef::<Object>::from(ffi::wxEvent_GetEventObject(self.as_ptr())) }
         }
         // NOT_SUPPORTED: fn GetEventType()
         // NOT_SUPPORTED: fn GetEventCategory()
         fn get_id(&self) -> c_int {
             unsafe { ffi::wxEvent_GetId(self.as_ptr()) }
         }
-        fn get_event_user_data(&self) -> ObjectIsOwned<false> {
-            unsafe { ObjectIsOwned::from_ptr(ffi::wxEvent_GetEventUserData(self.as_ptr())) }
+        fn get_event_user_data(&self) -> WeakRef<Object> {
+            unsafe { WeakRef::<Object>::from(ffi::wxEvent_GetEventUserData(self.as_ptr())) }
         }
         fn get_skipped(&self) -> bool {
             unsafe { ffi::wxEvent_GetSkipped(self.as_ptr()) }
@@ -248,12 +252,12 @@ pub mod methods {
         fn get_evt_handler_enabled(&self) -> bool {
             unsafe { ffi::wxEvtHandler_GetEvtHandlerEnabled(self.as_ptr()) }
         }
-        fn get_next_handler(&self) -> EvtHandlerIsOwned<false> {
-            unsafe { EvtHandlerIsOwned::from_ptr(ffi::wxEvtHandler_GetNextHandler(self.as_ptr())) }
+        fn get_next_handler(&self) -> WeakRef<EvtHandler> {
+            unsafe { WeakRef::<EvtHandler>::from(ffi::wxEvtHandler_GetNextHandler(self.as_ptr())) }
         }
-        fn get_previous_handler(&self) -> EvtHandlerIsOwned<false> {
+        fn get_previous_handler(&self) -> WeakRef<EvtHandler> {
             unsafe {
-                EvtHandlerIsOwned::from_ptr(ffi::wxEvtHandler_GetPreviousHandler(self.as_ptr()))
+                WeakRef::<EvtHandler>::from(ffi::wxEvtHandler_GetPreviousHandler(self.as_ptr()))
             }
         }
         fn set_evt_handler_enabled(&self, enabled: bool) {
@@ -311,9 +315,6 @@ impl<const OWNED: bool> ObjectIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
     }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        ObjectIsOwned(ptr)
-    }
 }
 impl<const OWNED: bool> Drop for ObjectIsOwned<OWNED> {
     fn drop(&mut self) {
@@ -333,9 +334,6 @@ impl<const OWNED: bool> EventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxEvent()
     pub fn none() -> Option<&'static Self> {
         None
-    }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        EventIsOwned(ptr)
     }
 }
 impl<const OWNED: bool> Drop for EventIsOwned<OWNED> {
@@ -358,8 +356,5 @@ impl<const OWNED: bool> EvtHandlerIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
-    }
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-        EvtHandlerIsOwned(ptr)
     }
 }
