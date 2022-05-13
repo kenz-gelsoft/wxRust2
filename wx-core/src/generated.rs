@@ -3409,8 +3409,8 @@ pub mod methods {
     // wxValidator
     pub trait ValidatorMethods: EvtHandlerMethods {
         // DTOR: fn ~wxValidator()
-        fn clone(&self) -> WeakRef<Object> {
-            unsafe { WeakRef::<Object>::from(ffi::wxValidator_Clone(self.as_ptr())) }
+        fn clone(&self) -> Object {
+            unsafe { Object::from_ptr(ffi::wxValidator_Clone(self.as_ptr())) }
         }
         fn get_window(&self) -> WeakRef<Window> {
             unsafe { WeakRef::<Window>::from(ffi::wxValidator_GetWindow(self.as_ptr())) }

@@ -38,6 +38,10 @@ cxx = "#if wxCHECK_VERSION(3, 1, 0)"
 blocklist = [
     'operator delete',
 ]
+[types.wxEvent]
+returns_owned = [
+    'Clone',
+]
 [types.wxEvtHandler]
 blocklist = [
     'Bind1',
@@ -184,4 +188,8 @@ blocklist = [
     'operator*=',
     # Didn't support
     'Scale',
+]
+[types.wxValidator]
+returns_owned = [
+    'Clone',
 ]
