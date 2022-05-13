@@ -84,6 +84,7 @@ pub mod methods {
     use std::os::raw::{c_int, c_long, c_void};
 
     use super::*;
+    use crate::WeakRef;
 '''
     if libname == 'base':
         yield '''\
