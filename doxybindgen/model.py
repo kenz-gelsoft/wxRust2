@@ -153,6 +153,10 @@ class Method:
         if self.returns.needs_new():
             return True
         return False
+    
+    def returns_owned(self):
+        returns_owned_list = self.cls.config.get('returns_owned') or []
+        return self.name() in returns_owned_list
 
     def cxx_signature(self):
         items = []

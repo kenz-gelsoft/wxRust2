@@ -244,7 +244,7 @@ class RustMethodBinding:
                     self.__model.returns.is_ptr_to_binding()):
                     if self.is_ctor:
                         returns = '%sIsOwned<OWNED>' % (returns,)
-                    else:
+                    elif not self.__model.returns_owned():
                         returns = 'WeakRef<%s>' % (returns,)
                 if self.__model.returns.is_str():
                     returns = 'String'
@@ -394,6 +394,8 @@ class RustMethodBinding:
             return '%sIsOwned(%s)' % (wrapped[2:], call)
         wrapped = self.__model.wrapped_return_type(allows_ptr=True)
         if wrapped:
+            if self.__model.returns_owned():
+                return '%s::from_ptr(%s)' % (wrapped[2:], call)
             return 'WeakRef::<%s>::from(%s)' % (wrapped[2:], call)
         return call
 

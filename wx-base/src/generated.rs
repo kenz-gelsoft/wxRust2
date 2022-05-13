@@ -144,8 +144,8 @@ pub mod methods {
 
     // wxEvent
     pub trait EventMethods: ObjectMethods {
-        fn clone(&self) -> WeakRef<Event> {
-            unsafe { WeakRef::<Event>::from(ffi::wxEvent_Clone(self.as_ptr())) }
+        fn clone(&self) -> Event {
+            unsafe { Event::from_ptr(ffi::wxEvent_Clone(self.as_ptr())) }
         }
         fn get_event_object(&self) -> WeakRef<Object> {
             unsafe { WeakRef::<Object>::from(ffi::wxEvent_GetEventObject(self.as_ptr())) }
