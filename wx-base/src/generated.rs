@@ -145,14 +145,10 @@ pub mod methods {
     // wxEvent
     pub trait EventMethods: ObjectMethods {
         fn clone(&self) -> WeakRef<Event> {
-            unsafe { WeakRef::from(EventIsOwned::from_ptr(ffi::wxEvent_Clone(self.as_ptr()))) }
+            unsafe { WeakRef::<Event>::from(ffi::wxEvent_Clone(self.as_ptr())) }
         }
         fn get_event_object(&self) -> WeakRef<Object> {
-            unsafe {
-                WeakRef::from(ObjectIsOwned::from_ptr(ffi::wxEvent_GetEventObject(
-                    self.as_ptr(),
-                )))
-            }
+            unsafe { WeakRef::<Object>::from(ffi::wxEvent_GetEventObject(self.as_ptr())) }
         }
         // NOT_SUPPORTED: fn GetEventType()
         // NOT_SUPPORTED: fn GetEventCategory()
@@ -160,11 +156,7 @@ pub mod methods {
             unsafe { ffi::wxEvent_GetId(self.as_ptr()) }
         }
         fn get_event_user_data(&self) -> WeakRef<Object> {
-            unsafe {
-                WeakRef::from(ObjectIsOwned::from_ptr(ffi::wxEvent_GetEventUserData(
-                    self.as_ptr(),
-                )))
-            }
+            unsafe { WeakRef::<Object>::from(ffi::wxEvent_GetEventUserData(self.as_ptr())) }
         }
         fn get_skipped(&self) -> bool {
             unsafe { ffi::wxEvent_GetSkipped(self.as_ptr()) }
@@ -261,17 +253,11 @@ pub mod methods {
             unsafe { ffi::wxEvtHandler_GetEvtHandlerEnabled(self.as_ptr()) }
         }
         fn get_next_handler(&self) -> WeakRef<EvtHandler> {
-            unsafe {
-                WeakRef::from(EvtHandlerIsOwned::from_ptr(
-                    ffi::wxEvtHandler_GetNextHandler(self.as_ptr()),
-                ))
-            }
+            unsafe { WeakRef::<EvtHandler>::from(ffi::wxEvtHandler_GetNextHandler(self.as_ptr())) }
         }
         fn get_previous_handler(&self) -> WeakRef<EvtHandler> {
             unsafe {
-                WeakRef::from(EvtHandlerIsOwned::from_ptr(
-                    ffi::wxEvtHandler_GetPreviousHandler(self.as_ptr()),
-                ))
+                WeakRef::<EvtHandler>::from(ffi::wxEvtHandler_GetPreviousHandler(self.as_ptr()))
             }
         }
         fn set_evt_handler_enabled(&self, enabled: bool) {

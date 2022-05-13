@@ -394,7 +394,7 @@ class RustMethodBinding:
             return '%sIsOwned(%s)' % (wrapped[2:], call)
         wrapped = self.__model.wrapped_return_type(allows_ptr=True)
         if wrapped:
-            return 'WeakRef::from(%sIsOwned::from_ptr(%s))' % (wrapped[2:], call)
+            return 'WeakRef::<%s>::from(%s)' % (wrapped[2:], call)
         return call
 
     def _uses_ptr_type(self):
