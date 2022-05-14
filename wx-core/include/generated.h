@@ -3,6 +3,11 @@
 
 extern "C" {
 
+// CLASS: wxBoxSizer
+wxBoxSizer *wxBoxSizer_new(int orient);
+int wxBoxSizer_GetOrientation(const wxBoxSizer * self);
+void wxBoxSizer_SetOrientation(wxBoxSizer * self, int orient);
+
 // CLASS: wxCommandEvent
 void * wxCommandEvent_GetClientData(const wxCommandEvent * self);
 wxClientData * wxCommandEvent_GetClientObject(const wxCommandEvent * self);

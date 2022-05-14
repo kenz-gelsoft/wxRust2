@@ -18,6 +18,11 @@ mod ffi {
 
     extern "C" {
 
+        // wxBoxSizer
+        pub fn wxBoxSizer_new(orient: c_int) -> *mut c_void;
+        pub fn wxBoxSizer_GetOrientation(self_: *const c_void) -> c_int;
+        pub fn wxBoxSizer_SetOrientation(self_: *mut c_void, orient: c_int);
+
         // wxCommandEvent
         // NOT_SUPPORTED: pub fn wxCommandEvent_new(command_event_type: wxEventType, id: c_int) -> *mut c_void;
         pub fn wxCommandEvent_GetClientData(self_: *const c_void) -> *mut c_void;
@@ -1267,6 +1272,16 @@ pub mod methods {
     use crate::WeakRef;
 
     pub use wx_base::methods::*;
+
+    // wxBoxSizer
+    pub trait BoxSizerMethods: SizerMethods {
+        fn get_orientation(&self) -> c_int {
+            unsafe { ffi::wxBoxSizer_GetOrientation(self.as_ptr()) }
+        }
+        fn set_orientation(&self, orient: c_int) {
+            unsafe { ffi::wxBoxSizer_SetOrientation(self.as_ptr(), orient) }
+        }
+    }
 
     // wxCommandEvent
     pub trait CommandEventMethods: EventMethods {
@@ -4330,6 +4345,29 @@ pub mod methods {
         }
         // NOT_SUPPORTED: fn SetScaleMode()
         // NOT_SUPPORTED: fn GetScaleMode()
+    }
+}
+
+// wxBoxSizer
+wx_class! { BoxSizer =
+    BoxSizerIsOwned<true>(wxBoxSizer) impl
+        BoxSizerMethods,
+        SizerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> BoxSizerIsOwned<OWNED> {
+    pub fn new(orient: c_int) -> BoxSizerIsOwned<OWNED> {
+        unsafe { BoxSizerIsOwned(ffi::wxBoxSizer_new(orient)) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for BoxSizerIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
     }
 }
 
