@@ -1,6 +1,7 @@
 #pragma once
 #include <wx/wx.h>
 #include <wx/artprov.h>
+#include <wx/wrapsizer.h>
 
 extern "C" {
 
@@ -803,6 +804,9 @@ bool wxStaticBitmap_Create(wxStaticBitmap * self, wxWindow * parent, wxWindowID 
 wxBitmap *wxStaticBitmap_GetBitmap(const wxStaticBitmap * self);
 void wxStaticBitmap_SetBitmap(wxStaticBitmap * self, const wxBitmap * label);
 void wxStaticBitmap_SetIcon(wxStaticBitmap * self, const wxIcon * label);
+
+// CLASS: wxWrapSizer
+wxWrapSizer *wxWrapSizer_new(int orient, int flags);
 
 } // extern "C"
 

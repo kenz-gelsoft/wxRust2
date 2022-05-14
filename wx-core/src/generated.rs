@@ -1525,6 +1525,9 @@ mod ffi {
         pub fn wxStaticBitmap_SetIcon(self_: *mut c_void, label: *const c_void);
         // NOT_SUPPORTED: pub fn wxStaticBitmap_SetScaleMode(self_: *mut c_void, scale_mode: ScaleMode);
         // NOT_SUPPORTED: pub fn wxStaticBitmap_GetScaleMode(self_: *const c_void) -> ScaleMode;
+
+        // wxWrapSizer
+        pub fn wxWrapSizer_new(orient: c_int, flags: c_int) -> *mut c_void;
     }
 }
 
@@ -5331,6 +5334,9 @@ pub mod methods {
         // NOT_SUPPORTED: fn SetScaleMode()
         // NOT_SUPPORTED: fn GetScaleMode()
     }
+
+    // wxWrapSizer
+    pub trait WrapSizerMethods: BoxSizerMethods {}
 }
 
 // wxArtProvider
@@ -6078,6 +6084,23 @@ impl<const OWNED: bool> StaticBitmapIsOwned<OWNED> {
                 parent, id, label, pos, size, style, name,
             ))
         }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
+// wxWrapSizer
+wx_class! { WrapSizer =
+    WrapSizerIsOwned<true>(wxWrapSizer) impl
+        WrapSizerMethods,
+        BoxSizerMethods,
+        SizerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> WrapSizerIsOwned<OWNED> {
+    pub fn new(orient: c_int, flags: c_int) -> WrapSizerIsOwned<OWNED> {
+        unsafe { WrapSizerIsOwned(ffi::wxWrapSizer_new(orient, flags)) }
     }
     pub fn none() -> Option<&'static Self> {
         None

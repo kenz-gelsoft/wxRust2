@@ -2226,5 +2226,10 @@ void wxStaticBitmap_SetIcon(wxStaticBitmap * self, const wxIcon * label) {
     return self->SetIcon(*label);
 }
 
+// CLASS: wxWrapSizer
+wxWrapSizer *wxWrapSizer_new(int orient, int flags) {
+    return new wxWrapSizer(orient, flags);
+}
+
 } // extern "C"
 
