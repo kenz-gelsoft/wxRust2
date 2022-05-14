@@ -1,7 +1,20 @@
 #pragma once
 #include <wx/wx.h>
+#include <wx/artprov.h>
 
 extern "C" {
+
+// CLASS: wxArtProvider
+bool wxArtProvider_Delete(wxArtProvider * provider);
+wxBitmap *wxArtProvider_GetBitmap(const wxArtID * id, const wxArtClient * client, const wxSize * size);
+wxSize *wxArtProvider_GetNativeSizeHint(const wxArtClient * client);
+wxSize *wxArtProvider_GetSizeHint(const wxArtClient * client, bool platform_default);
+bool wxArtProvider_HasNativeProvider();
+void wxArtProvider_Insert(wxArtProvider * provider);
+bool wxArtProvider_Pop();
+void wxArtProvider_Push(wxArtProvider * provider);
+void wxArtProvider_PushBack(wxArtProvider * provider);
+bool wxArtProvider_Remove(wxArtProvider * provider);
 
 // CLASS: wxBitmap
 wxBitmap *wxBitmap_new();

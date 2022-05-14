@@ -2,6 +2,38 @@
 
 extern "C" {
 
+// CLASS: wxArtProvider
+bool wxArtProvider_Delete(wxArtProvider * provider) {
+    return wxArtProvider::Delete(provider);
+}
+wxBitmap *wxArtProvider_GetBitmap(const wxArtID * id, const wxArtClient * client, const wxSize * size) {
+    return new wxBitmap(wxArtProvider::GetBitmap(*id, *client, *size));
+}
+wxSize *wxArtProvider_GetNativeSizeHint(const wxArtClient * client) {
+    return new wxSize(wxArtProvider::GetNativeSizeHint(*client));
+}
+wxSize *wxArtProvider_GetSizeHint(const wxArtClient * client, bool platform_default) {
+    return new wxSize(wxArtProvider::GetSizeHint(*client, platform_default));
+}
+bool wxArtProvider_HasNativeProvider() {
+    return wxArtProvider::HasNativeProvider();
+}
+void wxArtProvider_Insert(wxArtProvider * provider) {
+    return wxArtProvider::Insert(provider);
+}
+bool wxArtProvider_Pop() {
+    return wxArtProvider::Pop();
+}
+void wxArtProvider_Push(wxArtProvider * provider) {
+    return wxArtProvider::Push(provider);
+}
+void wxArtProvider_PushBack(wxArtProvider * provider) {
+    return wxArtProvider::PushBack(provider);
+}
+bool wxArtProvider_Remove(wxArtProvider * provider) {
+    return wxArtProvider::Remove(provider);
+}
+
 // CLASS: wxBitmap
 wxBitmap *wxBitmap_new() {
     return new wxBitmap();

@@ -18,6 +18,30 @@ mod ffi {
 
     extern "C" {
 
+        // wxArtProvider
+        // DTOR: pub fn wxArtProvider_~wxArtProvider(self_: *mut c_void);
+        pub fn wxArtProvider_Delete(provider: *mut c_void) -> bool;
+        pub fn wxArtProvider_GetBitmap(
+            id: *const c_void,
+            client: *const c_void,
+            size: *const c_void,
+        ) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxArtProvider_GetIcon(id: *const c_void, client: *const c_void, size: *const c_void) -> wxIcon;
+        pub fn wxArtProvider_GetNativeSizeHint(client: *const c_void) -> *mut c_void;
+        pub fn wxArtProvider_GetSizeHint(
+            client: *const c_void,
+            platform_default: bool,
+        ) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxArtProvider_GetIconBundle(id: *const c_void, client: *const c_void) -> wxIconBundle;
+        pub fn wxArtProvider_HasNativeProvider() -> bool;
+        pub fn wxArtProvider_Insert(provider: *mut c_void);
+        pub fn wxArtProvider_Pop() -> bool;
+        pub fn wxArtProvider_Push(provider: *mut c_void);
+        pub fn wxArtProvider_PushBack(provider: *mut c_void);
+        pub fn wxArtProvider_Remove(provider: *mut c_void) -> bool;
+        // NOT_SUPPORTED: pub fn wxArtProvider_GetMessageBoxIconId(flags: c_int) -> wxArtID;
+        // NOT_SUPPORTED: pub fn wxArtProvider_GetMessageBoxIcon(flags: c_int) -> wxIcon;
+
         // wxBitmap
         pub fn wxBitmap_new() -> *mut c_void;
         pub fn wxBitmap_new1(bitmap: *const c_void) -> *mut c_void;
@@ -1471,6 +1495,82 @@ pub mod methods {
     use crate::WeakRef;
 
     pub use wx_base::methods::*;
+
+    // wxArtProvider
+    pub trait ArtProviderMethods: ObjectMethods {
+        // DTOR: fn ~wxArtProvider()
+        fn delete<A: ArtProviderMethods>(provider: Option<&A>) -> bool {
+            unsafe {
+                let provider = match provider {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxArtProvider_Delete(provider)
+            }
+        }
+        fn get_bitmap<S: SizeMethods>(
+            id: *const c_void,
+            client: *const c_void,
+            size: &S,
+        ) -> Bitmap {
+            unsafe {
+                let size = size.as_ptr();
+                BitmapIsOwned(ffi::wxArtProvider_GetBitmap(id, client, size))
+            }
+        }
+        // NOT_SUPPORTED: fn GetIcon()
+        fn get_native_size_hint(client: *const c_void) -> Size {
+            unsafe { SizeIsOwned(ffi::wxArtProvider_GetNativeSizeHint(client)) }
+        }
+        fn get_size_hint(client: *const c_void, platform_default: bool) -> Size {
+            unsafe { SizeIsOwned(ffi::wxArtProvider_GetSizeHint(client, platform_default)) }
+        }
+        // NOT_SUPPORTED: fn GetIconBundle()
+        fn has_native_provider() -> bool {
+            unsafe { ffi::wxArtProvider_HasNativeProvider() }
+        }
+        fn insert<A: ArtProviderMethods>(provider: Option<&A>) {
+            unsafe {
+                let provider = match provider {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxArtProvider_Insert(provider)
+            }
+        }
+        fn pop() -> bool {
+            unsafe { ffi::wxArtProvider_Pop() }
+        }
+        fn push<A: ArtProviderMethods>(provider: Option<&A>) {
+            unsafe {
+                let provider = match provider {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxArtProvider_Push(provider)
+            }
+        }
+        fn push_back<A: ArtProviderMethods>(provider: Option<&A>) {
+            unsafe {
+                let provider = match provider {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxArtProvider_PushBack(provider)
+            }
+        }
+        fn remove<A: ArtProviderMethods>(provider: Option<&A>) -> bool {
+            unsafe {
+                let provider = match provider {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxArtProvider_Remove(provider)
+            }
+        }
+        // NOT_SUPPORTED: fn GetMessageBoxIconId()
+        // NOT_SUPPORTED: fn GetMessageBoxIcon()
+    }
 
     // wxBitmap
     pub trait BitmapMethods: GDIObjectMethods {
@@ -5033,6 +5133,25 @@ pub mod methods {
         }
         // NOT_SUPPORTED: fn SetScaleMode()
         // NOT_SUPPORTED: fn GetScaleMode()
+    }
+}
+
+// wxArtProvider
+wx_class! { ArtProvider =
+    ArtProviderIsOwned<true>(wxArtProvider) impl
+        ArtProviderMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> ArtProviderIsOwned<OWNED> {
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for ArtProviderIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
     }
 }
 
