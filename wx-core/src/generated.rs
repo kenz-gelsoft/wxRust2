@@ -1477,6 +1477,15 @@ mod ffi {
         pub fn wxSizerFlags_GetDefaultBorder() -> c_int;
         // NOT_SUPPORTED: pub fn wxSizerFlags_GetDefaultBorderFractional() -> float;
 
+        // wxStaticBoxSizer
+        pub fn wxStaticBoxSizer_new(box_: *mut c_void, orient: c_int) -> *mut c_void;
+        pub fn wxStaticBoxSizer_new1(
+            orient: c_int,
+            parent: *mut c_void,
+            label: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxStaticBoxSizer_GetStaticBox(self_: *const c_void) -> *mut c_void;
+
         // wxValidator
         pub fn wxValidator_new() -> *mut c_void;
         // DTOR: pub fn wxValidator_~wxValidator(self_: *mut c_void);
@@ -5234,6 +5243,13 @@ pub mod methods {
         // NOT_SUPPORTED: fn GetDefaultBorderFractional()
     }
 
+    // wxStaticBoxSizer
+    pub trait StaticBoxSizerMethods: BoxSizerMethods {
+        fn get_static_box(&self) -> *mut c_void {
+            unsafe { ffi::wxStaticBoxSizer_GetStaticBox(self.as_ptr()) }
+        }
+    }
+
     // wxValidator
     pub trait ValidatorMethods: EvtHandlerMethods {
         // DTOR: fn ~wxValidator()
@@ -5971,6 +5987,37 @@ impl<const OWNED: bool> Drop for SizerFlagsIsOwned<OWNED> {
         if OWNED {
             unsafe { ffi::wxSizerFlags_delete(self.0) }
         }
+    }
+}
+
+// wxStaticBoxSizer
+wx_class! { StaticBoxSizer =
+    StaticBoxSizerIsOwned<true>(wxStaticBoxSizer) impl
+        StaticBoxSizerMethods,
+        BoxSizerMethods,
+        SizerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> StaticBoxSizerIsOwned<OWNED> {
+    pub fn new_with_staticbox(box_: *mut c_void, orient: c_int) -> StaticBoxSizerIsOwned<OWNED> {
+        unsafe { StaticBoxSizerIsOwned(ffi::wxStaticBoxSizer_new(box_, orient)) }
+    }
+    pub fn new_with_int<W: WindowMethods>(
+        orient: c_int,
+        parent: Option<&W>,
+        label: &str,
+    ) -> StaticBoxSizerIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let label = wx_base::wx_string_from(label);
+            StaticBoxSizerIsOwned(ffi::wxStaticBoxSizer_new1(orient, parent, label))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
     }
 }
 

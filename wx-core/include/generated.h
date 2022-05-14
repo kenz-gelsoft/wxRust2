@@ -780,6 +780,11 @@ wxSizerFlags * wxSizerFlags_Top(wxSizerFlags * self);
 wxSizerFlags * wxSizerFlags_TripleBorder(wxSizerFlags * self, int direction);
 int wxSizerFlags_GetDefaultBorder();
 
+// CLASS: wxStaticBoxSizer
+wxStaticBoxSizer *wxStaticBoxSizer_new(wxStaticBox * box, int orient);
+wxStaticBoxSizer *wxStaticBoxSizer_new1(int orient, wxWindow * parent, const wxString * label);
+wxStaticBox * wxStaticBoxSizer_GetStaticBox(const wxStaticBoxSizer * self);
+
 // CLASS: wxValidator
 wxValidator *wxValidator_new();
 wxObject * wxValidator_Clone(const wxValidator * self);

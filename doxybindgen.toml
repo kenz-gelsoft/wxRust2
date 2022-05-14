@@ -23,6 +23,7 @@ wxml_files = [
     'wxml/classwx_size.xml',
     'wxml/classwx_sizer.xml',
     'wxml/classwx_sizer_flags.xml',
+    'wxml/classwx_static_box_sizer.xml',
     'wxml/classwx_validator.xml',
     'wxml/classwx_static_bitmap.xml',
 ]

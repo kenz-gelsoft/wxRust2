@@ -2166,6 +2166,17 @@ int wxSizerFlags_GetDefaultBorder() {
     return wxSizerFlags::GetDefaultBorder();
 }
 
+// CLASS: wxStaticBoxSizer
+wxStaticBoxSizer *wxStaticBoxSizer_new(wxStaticBox * box, int orient) {
+    return new wxStaticBoxSizer(box, orient);
+}
+wxStaticBoxSizer *wxStaticBoxSizer_new1(int orient, wxWindow * parent, const wxString * label) {
+    return new wxStaticBoxSizer(orient, parent, *label);
+}
+wxStaticBox * wxStaticBoxSizer_GetStaticBox(const wxStaticBoxSizer * self) {
+    return self->GetStaticBox();
+}
+
 // CLASS: wxValidator
 wxValidator *wxValidator_new() {
     return new wxValidator();
