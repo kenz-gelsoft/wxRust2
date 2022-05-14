@@ -225,8 +225,7 @@ class RustMethodBinding:
         self.__self_param = Param(RustType(model.cls.name, model.const), 'self')
         # must be name neither self or this
         self.__ffi_self = Param(RustType(model.cls.name, model.const), 'self_')
-        self.__generic_names_used = dict()
-        self.__generic_params = self._make_params_generic()
+        self.__generic_params = GenericParams(self.__model.params)
 
     def is_blocked(self):
         return self.__model.is_blocked()
@@ -251,27 +250,6 @@ class RustMethodBinding:
                     returns = 'String'
         return ' -> %s' % (returns,)
     
-    def _make_params_generic(self):
-        generic_params = []
-        for param in self.__model.params:
-            is_ptr_to_binding = param.type.is_ptr_to_binding()
-            if (is_ptr_to_binding or
-                param.type.is_const_ref_to_binding()):
-                name = param.type.in_overload_name()[0].upper()
-                used = self.__generic_names_used
-                if name not in used:
-                    used[name] = 0
-                n = used[name]
-                n += 1
-                used[name] = n
-                if n > 1:
-                    name = '%s%s' % (name, n)
-                generic_params.append(param.type.make_generic(
-                    name,
-                    is_option=is_ptr_to_binding,
-                ))
-        return generic_params
-
     def lines(self, for_ffi=False):
         pub_or_not = 'pub '
         gen_params = ''
@@ -280,9 +258,9 @@ class RustMethodBinding:
             if not self.is_ctor:
                 pub_or_not = '' if not self.is_ctor else 'pub '
             name = self._rust_method_name()
-            if self.__generic_params:
+            if self.__generic_params.names:
                 gen_params = '<%s>' % (
-                    ', '.join('%s: %s' % p for p in self.__generic_params),
+                    ', '.join('%s: %s' % p for p in self.__generic_params.names),
                 )
         signature = '%sfn %s%s(%s)%s' % (
             pub_or_not,
@@ -412,6 +390,37 @@ class RustMethodBinding:
     
     def is_non_virtual_override(self, cls):
         return self.__model.is_non_virtual_override(cls)
+
+
+class GenericParams:
+    def __init__(self, params):
+        self.__used_names = dict()
+        self.names = self._make_params_generic(params)
+    
+    def _make_params_generic(self, params):
+        self.names = []
+        for param in params:
+            is_ptr_to_binding = param.type.is_ptr_to_binding()
+            if (is_ptr_to_binding or
+                param.type.is_const_ref_to_binding()):
+                name = self._new_name_for(param.type)
+                self.names.append(param.type.make_generic(
+                    name,
+                    is_option=is_ptr_to_binding,
+                ))
+        return self.names
+
+    def _new_name_for(self, param_type):
+        name = param_type.in_overload_name()[0].upper()
+        used = self.__used_names
+        if name not in used:
+            used[name] = 0
+        n = used[name]
+        n += 1
+        used[name] = n
+        if n > 1:
+            name = '%s%s' % (name, n)
+        return name
 
 
 class CxxClassBinding:
