@@ -13,6 +13,7 @@ fn main() {
 #[derive(Clone)]
 struct WrapSizerFrame {
     base: wx::Frame,
+    m_panel: wx::Panel,
 }
 impl WrapSizerFrame {
     fn new() -> Self {
@@ -25,6 +26,19 @@ impl WrapSizerFrame {
             wx::DEFAULT_FRAME_STYLE,
             "",
         );
-        WrapSizerFrame { base: frame }
+
+        let panel = wx::Panel::new(
+            Some(&frame),
+            wx::ID_ANY,
+            &wx::Point::default(),
+            &wx::Size::default(),
+            0,
+            "",
+        );
+
+        WrapSizerFrame {
+            base: frame,
+            m_panel: panel,
+        }
     }
 }
