@@ -15,17 +15,10 @@ This is my 2nd exploration of binding [the wxWidgets cross-platform toolkit](htt
 
 Implementing the binding generator to be usable state with a small set of wx classes.
 
-* Working
-    * [ ] Small set of API working
-        * compiles and bare simple example runs on macOS, Linux
-        * working to compile on Window (fighting with linking error)
-    * [ ] Lifetime management
-        * owned non-wxWindow wxObjects has value semantics (impl Drop to call native dtor)
-        * https://github.com/kenz-gelsoft/wxRust2/issues/51 planning to use wxTrackable for WeakRef-like wx managed (non-owned) object
-        * doesn't manage wxWindow object for now (almost all of them will be managed by wx's windowing system)
-* Next
-    * [ ] Core library coverage
+* Working on
+    * [ ] https://github.com/kenz-gelsoft/wxRust2/issues/61 Core library coverage
         * generate for all classes in core library
+* Next
     * [ ] Other libraries
         * after that, more libraries would be generated
 * Done
@@ -38,6 +31,13 @@ Implementing the binding generator to be usable state with a small set of wx cla
         * but found I need some hacks and codegen in C++ header/source code to work around cxx.rs limitations to support wider range of API.
     * [x] Codegen without cxx.rs (or rust-bindgen)
         * already generated almost the Rust code/C++ header/C++ source triple then. [so no need to rust-bindgen/cxx.rs like solution anymore.](https://github.com/kenz-gelsoft/wxRust2/pull/17)
+    * [x] Lifetime management
+        * owned non-wxWindow wxObjects has value semantics (impl Drop to call native dtor)
+        * https://github.com/kenz-gelsoft/wxRust2/issues/51 planning to use wxTrackable for WeakRef-like wx managed (non-owned) object
+        * doesn't manage wxWindow object for now (almost all of them will be managed by wx's windowing system)
+    * [x] Small set of API working
+        * compiles and bare simple example runs on macOS, Linux
+        * working to compile on Window (fighting with linking error)
 
 ## License
 
