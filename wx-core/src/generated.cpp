@@ -140,6 +140,32 @@ void wxBoxSizer_SetOrientation(wxBoxSizer * self, int orient) {
     return self->SetOrientation(orient);
 }
 
+// CLASS: wxCheckBox
+wxCheckBox *wxCheckBox_new() {
+    return new wxCheckBox();
+}
+wxCheckBox *wxCheckBox_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return new wxCheckBox(parent, id, *label, *pos, *size, style, *validator, *name);
+}
+bool wxCheckBox_Create(wxCheckBox * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, *label, *pos, *size, style, *validator, *name);
+}
+bool wxCheckBox_GetValue(const wxCheckBox * self) {
+    return self->GetValue();
+}
+bool wxCheckBox_Is3State(const wxCheckBox * self) {
+    return self->Is3State();
+}
+bool wxCheckBox_Is3rdStateAllowedForUser(const wxCheckBox * self) {
+    return self->Is3rdStateAllowedForUser();
+}
+bool wxCheckBox_IsChecked(const wxCheckBox * self) {
+    return self->IsChecked();
+}
+void wxCheckBox_SetValue(wxCheckBox * self, bool state) {
+    return self->SetValue(state);
+}
+
 // CLASS: wxCommandEvent
 void * wxCommandEvent_GetClientData(const wxCommandEvent * self) {
     return self->GetClientData();

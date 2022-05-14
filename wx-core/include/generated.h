@@ -55,6 +55,16 @@ wxBoxSizer *wxBoxSizer_new(int orient);
 int wxBoxSizer_GetOrientation(const wxBoxSizer * self);
 void wxBoxSizer_SetOrientation(wxBoxSizer * self, int orient);
 
+// CLASS: wxCheckBox
+wxCheckBox *wxCheckBox_new();
+wxCheckBox *wxCheckBox_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+bool wxCheckBox_Create(wxCheckBox * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+bool wxCheckBox_GetValue(const wxCheckBox * self);
+bool wxCheckBox_Is3State(const wxCheckBox * self);
+bool wxCheckBox_Is3rdStateAllowedForUser(const wxCheckBox * self);
+bool wxCheckBox_IsChecked(const wxCheckBox * self);
+void wxCheckBox_SetValue(wxCheckBox * self, bool state);
+
 // CLASS: wxCommandEvent
 void * wxCommandEvent_GetClientData(const wxCommandEvent * self);
 wxClientData * wxCommandEvent_GetClientObject(const wxCommandEvent * self);

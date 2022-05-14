@@ -107,6 +107,38 @@ mod ffi {
         pub fn wxBoxSizer_GetOrientation(self_: *const c_void) -> c_int;
         pub fn wxBoxSizer_SetOrientation(self_: *mut c_void, orient: c_int);
 
+        // wxCheckBox
+        pub fn wxCheckBox_new() -> *mut c_void;
+        pub fn wxCheckBox_new1(
+            parent: *mut c_void,
+            id: c_int,
+            label: *const c_void,
+            pos: *const c_void,
+            size: *const c_void,
+            style: c_long,
+            validator: *const c_void,
+            name: *const c_void,
+        ) -> *mut c_void;
+        // DTOR: pub fn wxCheckBox_~wxCheckBox(self_: *mut c_void);
+        pub fn wxCheckBox_Create(
+            self_: *mut c_void,
+            parent: *mut c_void,
+            id: c_int,
+            label: *const c_void,
+            pos: *const c_void,
+            size: *const c_void,
+            style: c_long,
+            validator: *const c_void,
+            name: *const c_void,
+        ) -> bool;
+        pub fn wxCheckBox_GetValue(self_: *const c_void) -> bool;
+        // NOT_SUPPORTED: pub fn wxCheckBox_Get3StateValue(self_: *const c_void) -> wxCheckBoxState;
+        pub fn wxCheckBox_Is3State(self_: *const c_void) -> bool;
+        pub fn wxCheckBox_Is3rdStateAllowedForUser(self_: *const c_void) -> bool;
+        pub fn wxCheckBox_IsChecked(self_: *const c_void) -> bool;
+        pub fn wxCheckBox_SetValue(self_: *mut c_void, state: bool);
+        // NOT_SUPPORTED: pub fn wxCheckBox_Set3StateValue(self_: *mut c_void, state: wxCheckBoxState);
+
         // wxCommandEvent
         // NOT_SUPPORTED: pub fn wxCommandEvent_new(command_event_type: wxEventType, id: c_int) -> *mut c_void;
         pub fn wxCommandEvent_GetClientData(self_: *const c_void) -> *mut c_void;
@@ -1734,6 +1766,62 @@ pub mod methods {
         fn set_orientation(&self, orient: c_int) {
             unsafe { ffi::wxBoxSizer_SetOrientation(self.as_ptr(), orient) }
         }
+    }
+
+    // wxCheckBox
+    pub trait CheckBoxMethods: ControlMethods {
+        // DTOR: fn ~wxCheckBox()
+        fn create<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+            &self,
+            parent: Option<&W>,
+            id: c_int,
+            label: &str,
+            pos: &P,
+            size: &S,
+            style: c_long,
+            validator: &V,
+            name: &str,
+        ) -> bool {
+            unsafe {
+                let parent = match parent {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let label = wx_base::wx_string_from(label);
+                let pos = pos.as_ptr();
+                let size = size.as_ptr();
+                let validator = validator.as_ptr();
+                let name = wx_base::wx_string_from(name);
+                ffi::wxCheckBox_Create(
+                    self.as_ptr(),
+                    parent,
+                    id,
+                    label,
+                    pos,
+                    size,
+                    style,
+                    validator,
+                    name,
+                )
+            }
+        }
+        fn get_value(&self) -> bool {
+            unsafe { ffi::wxCheckBox_GetValue(self.as_ptr()) }
+        }
+        // NOT_SUPPORTED: fn Get3StateValue()
+        fn is3_state(&self) -> bool {
+            unsafe { ffi::wxCheckBox_Is3State(self.as_ptr()) }
+        }
+        fn is3rd_state_allowed_for_user(&self) -> bool {
+            unsafe { ffi::wxCheckBox_Is3rdStateAllowedForUser(self.as_ptr()) }
+        }
+        fn is_checked(&self) -> bool {
+            unsafe { ffi::wxCheckBox_IsChecked(self.as_ptr()) }
+        }
+        fn set_value(&self, state: bool) {
+            unsafe { ffi::wxCheckBox_SetValue(self.as_ptr(), state) }
+        }
+        // NOT_SUPPORTED: fn Set3StateValue()
     }
 
     // wxCommandEvent
@@ -5415,6 +5503,49 @@ wx_class! { BoxSizer =
 impl<const OWNED: bool> BoxSizerIsOwned<OWNED> {
     pub fn new(orient: c_int) -> BoxSizerIsOwned<OWNED> {
         unsafe { BoxSizerIsOwned(ffi::wxBoxSizer_new(orient)) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
+// wxCheckBox
+wx_class! { CheckBox =
+    CheckBoxIsOwned<true>(wxCheckBox) impl
+        CheckBoxMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> CheckBoxIsOwned<OWNED> {
+    pub fn new_2step() -> CheckBoxIsOwned<OWNED> {
+        unsafe { CheckBoxIsOwned(ffi::wxCheckBox_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        label: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> CheckBoxIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let label = wx_base::wx_string_from(label);
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            CheckBoxIsOwned(ffi::wxCheckBox_new1(
+                parent, id, label, pos, size, style, validator, name,
+            ))
+        }
     }
     pub fn none() -> Option<&'static Self> {
         None
