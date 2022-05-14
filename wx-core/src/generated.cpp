@@ -1605,6 +1605,185 @@ void wxSize_SetWidth(wxSize * self, int width) {
     return self->SetWidth(width);
 }
 
+// CLASS: wxSizer
+wxSizerItem * wxSizer_Add(wxSizer * self, wxWindow * window, const wxSizerFlags * flags) {
+    return self->Add(window, *flags);
+}
+wxSizerItem * wxSizer_Add1(wxSizer * self, wxWindow * window, int proportion, int flag, int border, wxObject * user_data) {
+    return self->Add(window, proportion, flag, border, user_data);
+}
+wxSizerItem * wxSizer_Add2(wxSizer * self, wxSizer * sizer, const wxSizerFlags * flags) {
+    return self->Add(sizer, *flags);
+}
+wxSizerItem * wxSizer_Add3(wxSizer * self, wxSizer * sizer, int proportion, int flag, int border, wxObject * user_data) {
+    return self->Add(sizer, proportion, flag, border, user_data);
+}
+wxSizerItem * wxSizer_Add4(wxSizer * self, int width, int height, int proportion, int flag, int border, wxObject * user_data) {
+    return self->Add(width, height, proportion, flag, border, user_data);
+}
+wxSizerItem * wxSizer_Add5(wxSizer * self, int width, int height, const wxSizerFlags * flags) {
+    return self->Add(width, height, *flags);
+}
+wxSizerItem * wxSizer_Add6(wxSizer * self, wxSizerItem * item) {
+    return self->Add(item);
+}
+wxSizerItem * wxSizer_AddSpacer(wxSizer * self, int size) {
+    return self->AddSpacer(size);
+}
+wxSizerItem * wxSizer_AddStretchSpacer(wxSizer * self, int prop) {
+    return self->AddStretchSpacer(prop);
+}
+wxSize *wxSizer_CalcMin(wxSizer * self) {
+    return new wxSize(self->CalcMin());
+}
+void wxSizer_Clear(wxSizer * self, bool delete_windows) {
+    return self->Clear(delete_windows);
+}
+wxSize *wxSizer_ComputeFittingClientSize(wxSizer * self, wxWindow * window) {
+    return new wxSize(self->ComputeFittingClientSize(window));
+}
+wxSize *wxSizer_ComputeFittingWindowSize(wxSizer * self, wxWindow * window) {
+    return new wxSize(self->ComputeFittingWindowSize(window));
+}
+bool wxSizer_Detach(wxSizer * self, wxWindow * window) {
+    return self->Detach(window);
+}
+bool wxSizer_Detach1(wxSizer * self, wxSizer * sizer) {
+    return self->Detach(sizer);
+}
+bool wxSizer_Detach2(wxSizer * self, int index) {
+    return self->Detach(index);
+}
+wxSize *wxSizer_Fit(wxSizer * self, wxWindow * window) {
+    return new wxSize(self->Fit(window));
+}
+void wxSizer_FitInside(wxSizer * self, wxWindow * window) {
+    return self->FitInside(window);
+}
+bool wxSizer_InformFirstDirection(wxSizer * self, int direction, int size, int available_other_dir) {
+    return self->InformFirstDirection(direction, size, available_other_dir);
+}
+wxWindow * wxSizer_GetContainingWindow(const wxSizer * self) {
+    return self->GetContainingWindow();
+}
+void wxSizer_SetContainingWindow(wxSizer * self, wxWindow * window) {
+    return self->SetContainingWindow(window);
+}
+wxSizerItem * wxSizer_GetItem(wxSizer * self, wxWindow * window, bool recursive) {
+    return self->GetItem(window, recursive);
+}
+wxSizerItem * wxSizer_GetItem1(wxSizer * self, wxSizer * sizer, bool recursive) {
+    return self->GetItem(sizer, recursive);
+}
+wxSizerItem * wxSizer_GetItemById(wxSizer * self, int id, bool recursive) {
+    return self->GetItemById(id, recursive);
+}
+wxSize *wxSizer_GetMinSize(wxSizer * self) {
+    return new wxSize(self->GetMinSize());
+}
+wxPoint *wxSizer_GetPosition(const wxSizer * self) {
+    return new wxPoint(self->GetPosition());
+}
+wxSize *wxSizer_GetSize(const wxSizer * self) {
+    return new wxSize(self->GetSize());
+}
+bool wxSizer_Hide(wxSizer * self, wxWindow * window, bool recursive) {
+    return self->Hide(window, recursive);
+}
+bool wxSizer_Hide1(wxSizer * self, wxSizer * sizer, bool recursive) {
+    return self->Hide(sizer, recursive);
+}
+bool wxSizer_IsEmpty(const wxSizer * self) {
+    return self->IsEmpty();
+}
+bool wxSizer_IsShown(const wxSizer * self, wxWindow * window) {
+    return self->IsShown(window);
+}
+bool wxSizer_IsShown1(const wxSizer * self, wxSizer * sizer) {
+    return self->IsShown(sizer);
+}
+void wxSizer_Layout(wxSizer * self) {
+    return self->Layout();
+}
+wxSizerItem * wxSizer_Prepend(wxSizer * self, wxWindow * window, const wxSizerFlags * flags) {
+    return self->Prepend(window, *flags);
+}
+wxSizerItem * wxSizer_Prepend1(wxSizer * self, wxWindow * window, int proportion, int flag, int border, wxObject * user_data) {
+    return self->Prepend(window, proportion, flag, border, user_data);
+}
+wxSizerItem * wxSizer_Prepend2(wxSizer * self, wxSizer * sizer, const wxSizerFlags * flags) {
+    return self->Prepend(sizer, *flags);
+}
+wxSizerItem * wxSizer_Prepend3(wxSizer * self, wxSizer * sizer, int proportion, int flag, int border, wxObject * user_data) {
+    return self->Prepend(sizer, proportion, flag, border, user_data);
+}
+wxSizerItem * wxSizer_Prepend4(wxSizer * self, int width, int height, int proportion, int flag, int border, wxObject * user_data) {
+    return self->Prepend(width, height, proportion, flag, border, user_data);
+}
+wxSizerItem * wxSizer_Prepend5(wxSizer * self, int width, int height, const wxSizerFlags * flags) {
+    return self->Prepend(width, height, *flags);
+}
+wxSizerItem * wxSizer_Prepend6(wxSizer * self, wxSizerItem * item) {
+    return self->Prepend(item);
+}
+wxSizerItem * wxSizer_PrependSpacer(wxSizer * self, int size) {
+    return self->PrependSpacer(size);
+}
+wxSizerItem * wxSizer_PrependStretchSpacer(wxSizer * self, int prop) {
+    return self->PrependStretchSpacer(prop);
+}
+void wxSizer_RepositionChildren(wxSizer * self, const wxSize * min_size) {
+    return self->RepositionChildren(*min_size);
+}
+bool wxSizer_Remove1(wxSizer * self, wxSizer * sizer) {
+    return self->Remove(sizer);
+}
+bool wxSizer_Remove2(wxSizer * self, int index) {
+    return self->Remove(index);
+}
+bool wxSizer_Replace(wxSizer * self, wxWindow * oldwin, wxWindow * newwin, bool recursive) {
+    return self->Replace(oldwin, newwin, recursive);
+}
+bool wxSizer_Replace1(wxSizer * self, wxSizer * oldsz, wxSizer * newsz, bool recursive) {
+    return self->Replace(oldsz, newsz, recursive);
+}
+void wxSizer_SetDimension(wxSizer * self, int x, int y, int width, int height) {
+    return self->SetDimension(x, y, width, height);
+}
+void wxSizer_SetDimension1(wxSizer * self, const wxPoint * pos, const wxSize * size) {
+    return self->SetDimension(*pos, *size);
+}
+bool wxSizer_SetItemMinSize(wxSizer * self, wxWindow * window, int width, int height) {
+    return self->SetItemMinSize(window, width, height);
+}
+bool wxSizer_SetItemMinSize1(wxSizer * self, wxWindow * window, const wxSize * size) {
+    return self->SetItemMinSize(window, *size);
+}
+bool wxSizer_SetItemMinSize2(wxSizer * self, wxSizer * sizer, int width, int height) {
+    return self->SetItemMinSize(sizer, width, height);
+}
+bool wxSizer_SetItemMinSize3(wxSizer * self, wxSizer * sizer, const wxSize * size) {
+    return self->SetItemMinSize(sizer, *size);
+}
+void wxSizer_SetMinSize(wxSizer * self, const wxSize * size) {
+    return self->SetMinSize(*size);
+}
+void wxSizer_SetMinSize1(wxSizer * self, int width, int height) {
+    return self->SetMinSize(width, height);
+}
+void wxSizer_SetSizeHints(wxSizer * self, wxWindow * window) {
+    return self->SetSizeHints(window);
+}
+bool wxSizer_Show(wxSizer * self, wxWindow * window, bool show, bool recursive) {
+    return self->Show(window, show, recursive);
+}
+bool wxSizer_Show1(wxSizer * self, wxSizer * sizer, bool show, bool recursive) {
+    return self->Show(sizer, show, recursive);
+}
+void wxSizer_ShowItems(wxSizer * self, bool show) {
+    return self->ShowItems(show);
+}
+
 // CLASS: wxValidator
 wxValidator *wxValidator_new() {
     return new wxValidator();

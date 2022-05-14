@@ -1001,6 +1001,223 @@ mod ffi {
         pub fn wxSize_SetHeight(self_: *mut c_void, height: c_int);
         pub fn wxSize_SetWidth(self_: *mut c_void, width: c_int);
 
+        // wxSizer
+        // BLOCKED: pub fn wxSizer_new() -> *mut c_void;
+        // DTOR: pub fn wxSizer_~wxSizer(self_: *mut c_void);
+        pub fn wxSizer_Add(
+            self_: *mut c_void,
+            window: *mut c_void,
+            flags: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Add1(
+            self_: *mut c_void,
+            window: *mut c_void,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Add2(
+            self_: *mut c_void,
+            sizer: *mut c_void,
+            flags: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Add3(
+            self_: *mut c_void,
+            sizer: *mut c_void,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Add4(
+            self_: *mut c_void,
+            width: c_int,
+            height: c_int,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Add5(
+            self_: *mut c_void,
+            width: c_int,
+            height: c_int,
+            flags: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Add6(self_: *mut c_void, item: *mut c_void) -> *mut c_void;
+        pub fn wxSizer_AddSpacer(self_: *mut c_void, size: c_int) -> *mut c_void;
+        pub fn wxSizer_AddStretchSpacer(self_: *mut c_void, prop: c_int) -> *mut c_void;
+        pub fn wxSizer_CalcMin(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizer_Clear(self_: *mut c_void, delete_windows: bool);
+        pub fn wxSizer_ComputeFittingClientSize(
+            self_: *mut c_void,
+            window: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_ComputeFittingWindowSize(
+            self_: *mut c_void,
+            window: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Detach(self_: *mut c_void, window: *mut c_void) -> bool;
+        pub fn wxSizer_Detach1(self_: *mut c_void, sizer: *mut c_void) -> bool;
+        pub fn wxSizer_Detach2(self_: *mut c_void, index: c_int) -> bool;
+        pub fn wxSizer_Fit(self_: *mut c_void, window: *mut c_void) -> *mut c_void;
+        pub fn wxSizer_FitInside(self_: *mut c_void, window: *mut c_void);
+        pub fn wxSizer_InformFirstDirection(
+            self_: *mut c_void,
+            direction: c_int,
+            size: c_int,
+            available_other_dir: c_int,
+        ) -> bool;
+        // BLOCKED: pub fn wxSizer_GetChildren(self_: *mut c_void) -> *mut c_void;
+        // BLOCKED: pub fn wxSizer_GetChildren1(self_: *const c_void) -> *const c_void;
+        pub fn wxSizer_GetContainingWindow(self_: *const c_void) -> *mut c_void;
+        pub fn wxSizer_SetContainingWindow(self_: *mut c_void, window: *mut c_void);
+        // NOT_SUPPORTED: pub fn wxSizer_GetItemCount(self_: *const c_void) -> size_t;
+        pub fn wxSizer_GetItem(
+            self_: *mut c_void,
+            window: *mut c_void,
+            recursive: bool,
+        ) -> *mut c_void;
+        pub fn wxSizer_GetItem1(
+            self_: *mut c_void,
+            sizer: *mut c_void,
+            recursive: bool,
+        ) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxSizer_GetItem2(self_: *mut c_void, index: size_t) -> *mut c_void;
+        pub fn wxSizer_GetItemById(self_: *mut c_void, id: c_int, recursive: bool) -> *mut c_void;
+        pub fn wxSizer_GetMinSize(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizer_GetPosition(self_: *const c_void) -> *mut c_void;
+        pub fn wxSizer_GetSize(self_: *const c_void) -> *mut c_void;
+        pub fn wxSizer_Hide(self_: *mut c_void, window: *mut c_void, recursive: bool) -> bool;
+        pub fn wxSizer_Hide1(self_: *mut c_void, sizer: *mut c_void, recursive: bool) -> bool;
+        // NOT_SUPPORTED: pub fn wxSizer_Hide2(self_: *mut c_void, index: size_t) -> bool;
+        // NOT_SUPPORTED: pub fn wxSizer_Insert(self_: *mut c_void, index: size_t, window: *mut c_void, flags: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxSizer_Insert1(self_: *mut c_void, index: size_t, window: *mut c_void, proportion: c_int, flag: c_int, border: c_int, user_data: *mut c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxSizer_Insert2(self_: *mut c_void, index: size_t, sizer: *mut c_void, flags: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxSizer_Insert3(self_: *mut c_void, index: size_t, sizer: *mut c_void, proportion: c_int, flag: c_int, border: c_int, user_data: *mut c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxSizer_Insert4(self_: *mut c_void, index: size_t, width: c_int, height: c_int, proportion: c_int, flag: c_int, border: c_int, user_data: *mut c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxSizer_Insert5(self_: *mut c_void, index: size_t, width: c_int, height: c_int, flags: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxSizer_Insert6(self_: *mut c_void, index: size_t, item: *mut c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxSizer_InsertSpacer(self_: *mut c_void, index: size_t, size: c_int) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxSizer_InsertStretchSpacer(self_: *mut c_void, index: size_t, prop: c_int) -> *mut c_void;
+        pub fn wxSizer_IsEmpty(self_: *const c_void) -> bool;
+        pub fn wxSizer_IsShown(self_: *const c_void, window: *mut c_void) -> bool;
+        pub fn wxSizer_IsShown1(self_: *const c_void, sizer: *mut c_void) -> bool;
+        // NOT_SUPPORTED: pub fn wxSizer_IsShown2(self_: *const c_void, index: size_t) -> bool;
+        pub fn wxSizer_Layout(self_: *mut c_void);
+        pub fn wxSizer_Prepend(
+            self_: *mut c_void,
+            window: *mut c_void,
+            flags: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Prepend1(
+            self_: *mut c_void,
+            window: *mut c_void,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Prepend2(
+            self_: *mut c_void,
+            sizer: *mut c_void,
+            flags: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Prepend3(
+            self_: *mut c_void,
+            sizer: *mut c_void,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Prepend4(
+            self_: *mut c_void,
+            width: c_int,
+            height: c_int,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Prepend5(
+            self_: *mut c_void,
+            width: c_int,
+            height: c_int,
+            flags: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Prepend6(self_: *mut c_void, item: *mut c_void) -> *mut c_void;
+        pub fn wxSizer_PrependSpacer(self_: *mut c_void, size: c_int) -> *mut c_void;
+        pub fn wxSizer_PrependStretchSpacer(self_: *mut c_void, prop: c_int) -> *mut c_void;
+        pub fn wxSizer_RepositionChildren(self_: *mut c_void, min_size: *const c_void);
+        // BLOCKED: pub fn wxSizer_Remove(self_: *mut c_void, window: *mut c_void) -> bool;
+        pub fn wxSizer_Remove1(self_: *mut c_void, sizer: *mut c_void) -> bool;
+        pub fn wxSizer_Remove2(self_: *mut c_void, index: c_int) -> bool;
+        pub fn wxSizer_Replace(
+            self_: *mut c_void,
+            oldwin: *mut c_void,
+            newwin: *mut c_void,
+            recursive: bool,
+        ) -> bool;
+        pub fn wxSizer_Replace1(
+            self_: *mut c_void,
+            oldsz: *mut c_void,
+            newsz: *mut c_void,
+            recursive: bool,
+        ) -> bool;
+        // NOT_SUPPORTED: pub fn wxSizer_Replace2(self_: *mut c_void, index: size_t, newitem: *mut c_void) -> bool;
+        pub fn wxSizer_SetDimension(
+            self_: *mut c_void,
+            x: c_int,
+            y: c_int,
+            width: c_int,
+            height: c_int,
+        );
+        pub fn wxSizer_SetDimension1(self_: *mut c_void, pos: *const c_void, size: *const c_void);
+        pub fn wxSizer_SetItemMinSize(
+            self_: *mut c_void,
+            window: *mut c_void,
+            width: c_int,
+            height: c_int,
+        ) -> bool;
+        pub fn wxSizer_SetItemMinSize1(
+            self_: *mut c_void,
+            window: *mut c_void,
+            size: *const c_void,
+        ) -> bool;
+        pub fn wxSizer_SetItemMinSize2(
+            self_: *mut c_void,
+            sizer: *mut c_void,
+            width: c_int,
+            height: c_int,
+        ) -> bool;
+        pub fn wxSizer_SetItemMinSize3(
+            self_: *mut c_void,
+            sizer: *mut c_void,
+            size: *const c_void,
+        ) -> bool;
+        // NOT_SUPPORTED: pub fn wxSizer_SetItemMinSize4(self_: *mut c_void, index: size_t, width: c_int, height: c_int) -> bool;
+        // NOT_SUPPORTED: pub fn wxSizer_SetItemMinSize5(self_: *mut c_void, index: size_t, size: *const c_void) -> bool;
+        pub fn wxSizer_SetMinSize(self_: *mut c_void, size: *const c_void);
+        pub fn wxSizer_SetMinSize1(self_: *mut c_void, width: c_int, height: c_int);
+        pub fn wxSizer_SetSizeHints(self_: *mut c_void, window: *mut c_void);
+        // BLOCKED: pub fn wxSizer_SetVirtualSizeHints(self_: *mut c_void, window: *mut c_void);
+        pub fn wxSizer_Show(
+            self_: *mut c_void,
+            window: *mut c_void,
+            show: bool,
+            recursive: bool,
+        ) -> bool;
+        pub fn wxSizer_Show1(
+            self_: *mut c_void,
+            sizer: *mut c_void,
+            show: bool,
+            recursive: bool,
+        ) -> bool;
+        // NOT_SUPPORTED: pub fn wxSizer_Show2(self_: *mut c_void, index: size_t, show: bool) -> bool;
+        pub fn wxSizer_ShowItems(self_: *mut c_void, show: bool);
+
         // wxValidator
         pub fn wxValidator_new() -> *mut c_void;
         // DTOR: pub fn wxValidator_~wxValidator(self_: *mut c_void);
@@ -1438,8 +1655,14 @@ pub mod methods {
                 ffi::wxWindow_SetClientSize2(self.as_ptr(), rect)
             }
         }
-        fn set_containing_sizer(&self, sizer: *mut c_void) {
-            unsafe { ffi::wxWindow_SetContainingSizer(self.as_ptr(), sizer) }
+        fn set_containing_sizer<S: SizerMethods>(&self, sizer: Option<&S>) {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxWindow_SetContainingSizer(self.as_ptr(), sizer)
+            }
         }
         fn set_initial_size<S: SizeMethods>(&self, size: &S) {
             unsafe {
@@ -2105,17 +2328,29 @@ pub mod methods {
         fn drag_accept_files(&self, accept: bool) {
             unsafe { ffi::wxWindow_DragAcceptFiles(self.as_ptr(), accept) }
         }
-        fn get_containing_sizer(&self) -> *mut c_void {
-            unsafe { ffi::wxWindow_GetContainingSizer(self.as_ptr()) }
+        fn get_containing_sizer(&self) -> WeakRef<Sizer> {
+            unsafe { WeakRef::<Sizer>::from(ffi::wxWindow_GetContainingSizer(self.as_ptr())) }
         }
-        fn get_sizer(&self) -> *mut c_void {
-            unsafe { ffi::wxWindow_GetSizer(self.as_ptr()) }
+        fn get_sizer(&self) -> WeakRef<Sizer> {
+            unsafe { WeakRef::<Sizer>::from(ffi::wxWindow_GetSizer(self.as_ptr())) }
         }
-        fn set_sizer(&self, sizer: *mut c_void, delete_old: bool) {
-            unsafe { ffi::wxWindow_SetSizer(self.as_ptr(), sizer, delete_old) }
+        fn set_sizer<S: SizerMethods>(&self, sizer: Option<&S>, delete_old: bool) {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxWindow_SetSizer(self.as_ptr(), sizer, delete_old)
+            }
         }
-        fn set_sizer_and_fit(&self, sizer: *mut c_void, delete_old: bool) {
-            unsafe { ffi::wxWindow_SetSizerAndFit(self.as_ptr(), sizer, delete_old) }
+        fn set_sizer_and_fit<S: SizerMethods>(&self, sizer: Option<&S>, delete_old: bool) {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxWindow_SetSizerAndFit(self.as_ptr(), sizer, delete_old)
+            }
         }
         fn get_constraints(&self) -> *mut c_void {
             unsafe { ffi::wxWindow_GetConstraints(self.as_ptr()) }
@@ -3440,6 +3675,587 @@ pub mod methods {
         }
     }
 
+    // wxSizer
+    pub trait SizerMethods: ObjectMethods {
+        // DTOR: fn ~wxSizer()
+        fn add_window_sizerflags<W: WindowMethods>(
+            &self,
+            window: Option<&W>,
+            flags: *const c_void,
+        ) -> *mut c_void {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Add(self.as_ptr(), window, flags)
+            }
+        }
+        fn add_window_int<W: WindowMethods, O: ObjectMethods>(
+            &self,
+            window: Option<&W>,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: Option<&O>,
+        ) -> *mut c_void {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let user_data = match user_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Add1(self.as_ptr(), window, proportion, flag, border, user_data)
+            }
+        }
+        fn add_sizer_sizerflags<S: SizerMethods>(
+            &self,
+            sizer: Option<&S>,
+            flags: *const c_void,
+        ) -> *mut c_void {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Add2(self.as_ptr(), sizer, flags)
+            }
+        }
+        fn add_sizer_int<S: SizerMethods, O: ObjectMethods>(
+            &self,
+            sizer: Option<&S>,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: Option<&O>,
+        ) -> *mut c_void {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let user_data = match user_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Add3(self.as_ptr(), sizer, proportion, flag, border, user_data)
+            }
+        }
+        fn add_int_int<O: ObjectMethods>(
+            &self,
+            width: c_int,
+            height: c_int,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: Option<&O>,
+        ) -> *mut c_void {
+            unsafe {
+                let user_data = match user_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Add4(
+                    self.as_ptr(),
+                    width,
+                    height,
+                    proportion,
+                    flag,
+                    border,
+                    user_data,
+                )
+            }
+        }
+        fn add_int_sizerflags(
+            &self,
+            width: c_int,
+            height: c_int,
+            flags: *const c_void,
+        ) -> *mut c_void {
+            unsafe { ffi::wxSizer_Add5(self.as_ptr(), width, height, flags) }
+        }
+        fn add_sizeritem(&self, item: *mut c_void) -> *mut c_void {
+            unsafe { ffi::wxSizer_Add6(self.as_ptr(), item) }
+        }
+        fn add_spacer(&self, size: c_int) -> *mut c_void {
+            unsafe { ffi::wxSizer_AddSpacer(self.as_ptr(), size) }
+        }
+        fn add_stretch_spacer(&self, prop: c_int) -> *mut c_void {
+            unsafe { ffi::wxSizer_AddStretchSpacer(self.as_ptr(), prop) }
+        }
+        fn calc_min(&self) -> Size {
+            unsafe { SizeIsOwned(ffi::wxSizer_CalcMin(self.as_ptr())) }
+        }
+        fn clear(&self, delete_windows: bool) {
+            unsafe { ffi::wxSizer_Clear(self.as_ptr(), delete_windows) }
+        }
+        fn compute_fitting_client_size<W: WindowMethods>(&self, window: Option<&W>) -> Size {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                SizeIsOwned(ffi::wxSizer_ComputeFittingClientSize(self.as_ptr(), window))
+            }
+        }
+        fn compute_fitting_window_size<W: WindowMethods>(&self, window: Option<&W>) -> Size {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                SizeIsOwned(ffi::wxSizer_ComputeFittingWindowSize(self.as_ptr(), window))
+            }
+        }
+        fn detach_window<W: WindowMethods>(&self, window: Option<&W>) -> bool {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Detach(self.as_ptr(), window)
+            }
+        }
+        fn detach_sizer<S: SizerMethods>(&self, sizer: Option<&S>) -> bool {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Detach1(self.as_ptr(), sizer)
+            }
+        }
+        fn detach_int(&self, index: c_int) -> bool {
+            unsafe { ffi::wxSizer_Detach2(self.as_ptr(), index) }
+        }
+        fn fit<W: WindowMethods>(&self, window: Option<&W>) -> Size {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                SizeIsOwned(ffi::wxSizer_Fit(self.as_ptr(), window))
+            }
+        }
+        fn fit_inside<W: WindowMethods>(&self, window: Option<&W>) {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_FitInside(self.as_ptr(), window)
+            }
+        }
+        fn inform_first_direction(
+            &self,
+            direction: c_int,
+            size: c_int,
+            available_other_dir: c_int,
+        ) -> bool {
+            unsafe {
+                ffi::wxSizer_InformFirstDirection(
+                    self.as_ptr(),
+                    direction,
+                    size,
+                    available_other_dir,
+                )
+            }
+        }
+        // BLOCKED: fn GetChildren()
+        // BLOCKED: fn GetChildren1()
+        fn get_containing_window(&self) -> WeakRef<Window> {
+            unsafe { WeakRef::<Window>::from(ffi::wxSizer_GetContainingWindow(self.as_ptr())) }
+        }
+        fn set_containing_window<W: WindowMethods>(&self, window: Option<&W>) {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_SetContainingWindow(self.as_ptr(), window)
+            }
+        }
+        // NOT_SUPPORTED: fn GetItemCount()
+        fn get_item_window<W: WindowMethods>(
+            &self,
+            window: Option<&W>,
+            recursive: bool,
+        ) -> *mut c_void {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_GetItem(self.as_ptr(), window, recursive)
+            }
+        }
+        fn get_item_sizer<S: SizerMethods>(
+            &self,
+            sizer: Option<&S>,
+            recursive: bool,
+        ) -> *mut c_void {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_GetItem1(self.as_ptr(), sizer, recursive)
+            }
+        }
+        // NOT_SUPPORTED: fn GetItem2()
+        fn get_item_by_id(&self, id: c_int, recursive: bool) -> *mut c_void {
+            unsafe { ffi::wxSizer_GetItemById(self.as_ptr(), id, recursive) }
+        }
+        fn get_min_size(&self) -> Size {
+            unsafe { SizeIsOwned(ffi::wxSizer_GetMinSize(self.as_ptr())) }
+        }
+        fn get_position(&self) -> Point {
+            unsafe { PointIsOwned(ffi::wxSizer_GetPosition(self.as_ptr())) }
+        }
+        fn get_size(&self) -> Size {
+            unsafe { SizeIsOwned(ffi::wxSizer_GetSize(self.as_ptr())) }
+        }
+        fn hide_window<W: WindowMethods>(&self, window: Option<&W>, recursive: bool) -> bool {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Hide(self.as_ptr(), window, recursive)
+            }
+        }
+        fn hide_sizer<S: SizerMethods>(&self, sizer: Option<&S>, recursive: bool) -> bool {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Hide1(self.as_ptr(), sizer, recursive)
+            }
+        }
+        // NOT_SUPPORTED: fn Hide2()
+        // NOT_SUPPORTED: fn Insert()
+        // NOT_SUPPORTED: fn Insert1()
+        // NOT_SUPPORTED: fn Insert2()
+        // NOT_SUPPORTED: fn Insert3()
+        // NOT_SUPPORTED: fn Insert4()
+        // NOT_SUPPORTED: fn Insert5()
+        // NOT_SUPPORTED: fn Insert6()
+        // NOT_SUPPORTED: fn InsertSpacer()
+        // NOT_SUPPORTED: fn InsertStretchSpacer()
+        fn is_empty(&self) -> bool {
+            unsafe { ffi::wxSizer_IsEmpty(self.as_ptr()) }
+        }
+        fn is_shown_window<W: WindowMethods>(&self, window: Option<&W>) -> bool {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_IsShown(self.as_ptr(), window)
+            }
+        }
+        fn is_shown_sizer<S: SizerMethods>(&self, sizer: Option<&S>) -> bool {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_IsShown1(self.as_ptr(), sizer)
+            }
+        }
+        // NOT_SUPPORTED: fn IsShown2()
+        fn layout(&self) {
+            unsafe { ffi::wxSizer_Layout(self.as_ptr()) }
+        }
+        fn prepend_window_sizerflags<W: WindowMethods>(
+            &self,
+            window: Option<&W>,
+            flags: *const c_void,
+        ) -> *mut c_void {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Prepend(self.as_ptr(), window, flags)
+            }
+        }
+        fn prepend_window_int<W: WindowMethods, O: ObjectMethods>(
+            &self,
+            window: Option<&W>,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: Option<&O>,
+        ) -> *mut c_void {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let user_data = match user_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Prepend1(self.as_ptr(), window, proportion, flag, border, user_data)
+            }
+        }
+        fn prepend_sizer_sizerflags<S: SizerMethods>(
+            &self,
+            sizer: Option<&S>,
+            flags: *const c_void,
+        ) -> *mut c_void {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Prepend2(self.as_ptr(), sizer, flags)
+            }
+        }
+        fn prepend_sizer_int<S: SizerMethods, O: ObjectMethods>(
+            &self,
+            sizer: Option<&S>,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: Option<&O>,
+        ) -> *mut c_void {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let user_data = match user_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Prepend3(self.as_ptr(), sizer, proportion, flag, border, user_data)
+            }
+        }
+        fn prepend_int_int<O: ObjectMethods>(
+            &self,
+            width: c_int,
+            height: c_int,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: Option<&O>,
+        ) -> *mut c_void {
+            unsafe {
+                let user_data = match user_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Prepend4(
+                    self.as_ptr(),
+                    width,
+                    height,
+                    proportion,
+                    flag,
+                    border,
+                    user_data,
+                )
+            }
+        }
+        fn prepend_int_sizerflags(
+            &self,
+            width: c_int,
+            height: c_int,
+            flags: *const c_void,
+        ) -> *mut c_void {
+            unsafe { ffi::wxSizer_Prepend5(self.as_ptr(), width, height, flags) }
+        }
+        fn prepend_sizeritem(&self, item: *mut c_void) -> *mut c_void {
+            unsafe { ffi::wxSizer_Prepend6(self.as_ptr(), item) }
+        }
+        fn prepend_spacer(&self, size: c_int) -> *mut c_void {
+            unsafe { ffi::wxSizer_PrependSpacer(self.as_ptr(), size) }
+        }
+        fn prepend_stretch_spacer(&self, prop: c_int) -> *mut c_void {
+            unsafe { ffi::wxSizer_PrependStretchSpacer(self.as_ptr(), prop) }
+        }
+        fn reposition_children<S: SizeMethods>(&self, min_size: &S) {
+            unsafe {
+                let min_size = min_size.as_ptr();
+                ffi::wxSizer_RepositionChildren(self.as_ptr(), min_size)
+            }
+        }
+        // BLOCKED: fn Remove()
+        fn remove_sizer<S: SizerMethods>(&self, sizer: Option<&S>) -> bool {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Remove1(self.as_ptr(), sizer)
+            }
+        }
+        fn remove_int(&self, index: c_int) -> bool {
+            unsafe { ffi::wxSizer_Remove2(self.as_ptr(), index) }
+        }
+        fn replace_window<W: WindowMethods, W2: WindowMethods>(
+            &self,
+            oldwin: Option<&W>,
+            newwin: Option<&W2>,
+            recursive: bool,
+        ) -> bool {
+            unsafe {
+                let oldwin = match oldwin {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let newwin = match newwin {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Replace(self.as_ptr(), oldwin, newwin, recursive)
+            }
+        }
+        fn replace_sizer<S: SizerMethods, S2: SizerMethods>(
+            &self,
+            oldsz: Option<&S>,
+            newsz: Option<&S2>,
+            recursive: bool,
+        ) -> bool {
+            unsafe {
+                let oldsz = match oldsz {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let newsz = match newsz {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Replace1(self.as_ptr(), oldsz, newsz, recursive)
+            }
+        }
+        // NOT_SUPPORTED: fn Replace2()
+        fn set_dimension_int(&self, x: c_int, y: c_int, width: c_int, height: c_int) {
+            unsafe { ffi::wxSizer_SetDimension(self.as_ptr(), x, y, width, height) }
+        }
+        fn set_dimension_point<P: PointMethods, S: SizeMethods>(&self, pos: &P, size: &S) {
+            unsafe {
+                let pos = pos.as_ptr();
+                let size = size.as_ptr();
+                ffi::wxSizer_SetDimension1(self.as_ptr(), pos, size)
+            }
+        }
+        fn set_item_min_size_window_int<W: WindowMethods>(
+            &self,
+            window: Option<&W>,
+            width: c_int,
+            height: c_int,
+        ) -> bool {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_SetItemMinSize(self.as_ptr(), window, width, height)
+            }
+        }
+        fn set_item_min_size_window_size<W: WindowMethods, S: SizeMethods>(
+            &self,
+            window: Option<&W>,
+            size: &S,
+        ) -> bool {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let size = size.as_ptr();
+                ffi::wxSizer_SetItemMinSize1(self.as_ptr(), window, size)
+            }
+        }
+        fn set_item_min_size_sizer_int<S: SizerMethods>(
+            &self,
+            sizer: Option<&S>,
+            width: c_int,
+            height: c_int,
+        ) -> bool {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_SetItemMinSize2(self.as_ptr(), sizer, width, height)
+            }
+        }
+        fn set_item_min_size_sizer_size<S: SizerMethods, S2: SizeMethods>(
+            &self,
+            sizer: Option<&S>,
+            size: &S2,
+        ) -> bool {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let size = size.as_ptr();
+                ffi::wxSizer_SetItemMinSize3(self.as_ptr(), sizer, size)
+            }
+        }
+        // NOT_SUPPORTED: fn SetItemMinSize4()
+        // NOT_SUPPORTED: fn SetItemMinSize5()
+        fn set_min_size_size<S: SizeMethods>(&self, size: &S) {
+            unsafe {
+                let size = size.as_ptr();
+                ffi::wxSizer_SetMinSize(self.as_ptr(), size)
+            }
+        }
+        fn set_min_size_int(&self, width: c_int, height: c_int) {
+            unsafe { ffi::wxSizer_SetMinSize1(self.as_ptr(), width, height) }
+        }
+        fn set_size_hints<W: WindowMethods>(&self, window: Option<&W>) {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_SetSizeHints(self.as_ptr(), window)
+            }
+        }
+        // BLOCKED: fn SetVirtualSizeHints()
+        fn show_window<W: WindowMethods>(
+            &self,
+            window: Option<&W>,
+            show: bool,
+            recursive: bool,
+        ) -> bool {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Show(self.as_ptr(), window, show, recursive)
+            }
+        }
+        fn show_sizer<S: SizerMethods>(
+            &self,
+            sizer: Option<&S>,
+            show: bool,
+            recursive: bool,
+        ) -> bool {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Show1(self.as_ptr(), sizer, show, recursive)
+            }
+        }
+        // NOT_SUPPORTED: fn Show2()
+        fn show_items(&self, show: bool) {
+            unsafe { ffi::wxSizer_ShowItems(self.as_ptr(), show) }
+        }
+    }
+
     // wxValidator
     pub trait ValidatorMethods: EvtHandlerMethods {
         // DTOR: fn ~wxValidator()
@@ -3997,6 +4813,26 @@ impl<const OWNED: bool> Drop for SizeIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxSize_delete(self.0) }
+        }
+    }
+}
+
+// wxSizer
+wx_class! { Sizer =
+    SizerIsOwned<true>(wxSizer) impl
+        SizerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> SizerIsOwned<OWNED> {
+    // BLOCKED: fn wxSizer()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for SizerIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
         }
     }
 }

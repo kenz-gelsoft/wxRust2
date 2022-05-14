@@ -1,5 +1,6 @@
 wxml_files = [
     'wxml/classwx_object.xml',
+    # 'wxml/classwx_box_sizer.xml',
     'wxml/classwx_command_event.xml',
     'wxml/classwx_event.xml',
     'wxml/classwx_evt_handler.xml',
@@ -16,6 +17,7 @@ wxml_files = [
     'wxml/classwx_point.xml',
     'wxml/classwx_rect.xml',
     'wxml/classwx_size.xml',
+    'wxml/classwx_sizer.xml',
     'wxml/classwx_validator.xml',
     'wxml/classwx_static_bitmap.xml',
 ]
@@ -189,6 +191,19 @@ blocklist = [
     'operator*=',
     # Didn't support
     'Scale',
+]
+[types.wxSizer]
+blocklist = [
+    # virtual
+    'wxSizer',
+    # maybe binding bug, return type didn't generated
+    'GetChildren',
+    # deprecated
+    'GetChildren1',
+    # deprecated, use Remove() without args
+    'Remove',
+    # deprecated, use FitInside()
+    'SetVirtualSizeHints',
 ]
 [types.wxValidator]
 returns_owned = [
