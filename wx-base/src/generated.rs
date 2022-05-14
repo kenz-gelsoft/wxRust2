@@ -117,13 +117,13 @@ pub mod methods {
         fn is_kind_of(&self, info: *const c_void) -> bool {
             unsafe { ffi::wxObject_IsKindOf(self.as_ptr(), info) }
         }
-        fn is_same_as<T: ObjectMethods>(&self, obj: &T) -> bool {
+        fn is_same_as<O: ObjectMethods>(&self, obj: &O) -> bool {
             unsafe {
                 let obj = obj.as_ptr();
                 ffi::wxObject_IsSameAs(self.as_ptr(), obj)
             }
         }
-        fn ref_<T: ObjectMethods>(&self, clone: &T) {
+        fn ref_<O: ObjectMethods>(&self, clone: &O) {
             unsafe {
                 let clone = clone.as_ptr();
                 ffi::wxObject_Ref(self.as_ptr(), clone)
@@ -170,7 +170,7 @@ pub mod methods {
         fn resume_propagation(&self, propagation_level: c_int) {
             unsafe { ffi::wxEvent_ResumePropagation(self.as_ptr(), propagation_level) }
         }
-        fn set_event_object<T: ObjectMethods>(&self, object: Option<&T>) {
+        fn set_event_object<O: ObjectMethods>(&self, object: Option<&O>) {
             unsafe {
                 let object = match object {
                     Some(r) => r.as_ptr(),
@@ -199,7 +199,7 @@ pub mod methods {
 
     // wxEvtHandler
     pub trait EvtHandlerMethods: ObjectMethods {
-        fn queue_event<T: EventMethods>(&self, event: Option<&T>) {
+        fn queue_event<E: EventMethods>(&self, event: Option<&E>) {
             unsafe {
                 let event = match event {
                     Some(r) => r.as_ptr(),
@@ -208,7 +208,7 @@ pub mod methods {
                 ffi::wxEvtHandler_QueueEvent(self.as_ptr(), event)
             }
         }
-        fn add_pending_event<T: EventMethods>(&self, event: &T) {
+        fn add_pending_event<E: EventMethods>(&self, event: &E) {
             unsafe {
                 let event = event.as_ptr();
                 ffi::wxEvtHandler_AddPendingEvent(self.as_ptr(), event)
@@ -263,7 +263,7 @@ pub mod methods {
         fn set_evt_handler_enabled(&self, enabled: bool) {
             unsafe { ffi::wxEvtHandler_SetEvtHandlerEnabled(self.as_ptr(), enabled) }
         }
-        fn set_next_handler<T: EvtHandlerMethods>(&self, handler: Option<&T>) {
+        fn set_next_handler<E: EvtHandlerMethods>(&self, handler: Option<&E>) {
             unsafe {
                 let handler = match handler {
                     Some(r) => r.as_ptr(),
@@ -272,7 +272,7 @@ pub mod methods {
                 ffi::wxEvtHandler_SetNextHandler(self.as_ptr(), handler)
             }
         }
-        fn set_previous_handler<T: EvtHandlerMethods>(&self, handler: Option<&T>) {
+        fn set_previous_handler<E: EvtHandlerMethods>(&self, handler: Option<&E>) {
             unsafe {
                 let handler = match handler {
                     Some(r) => r.as_ptr(),
@@ -306,7 +306,7 @@ impl<const OWNED: bool> ObjectIsOwned<OWNED> {
     pub fn new() -> ObjectIsOwned<OWNED> {
         unsafe { ObjectIsOwned(ffi::wxObject_new()) }
     }
-    pub fn new_with_object<T: ObjectMethods>(other: &T) -> ObjectIsOwned<OWNED> {
+    pub fn new_with_object<O: ObjectMethods>(other: &O) -> ObjectIsOwned<OWNED> {
         unsafe {
             let other = other.as_ptr();
             ObjectIsOwned(ffi::wxObject_new1(other))

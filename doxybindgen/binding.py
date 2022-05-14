@@ -225,6 +225,7 @@ class RustMethodBinding:
         self.__self_param = Param(RustType(model.cls.name, model.const), 'self')
         # must be name neither self or this
         self.__ffi_self = Param(RustType(model.cls.name, model.const), 'self_')
+        self.__generic_names_used = dict()
         self.__generic_params = self._make_params_generic()
 
     def is_blocked(self):
@@ -256,8 +257,15 @@ class RustMethodBinding:
             is_ptr_to_binding = param.type.is_ptr_to_binding()
             if (is_ptr_to_binding or
                 param.type.is_const_ref_to_binding()):
-                count = len(generic_params)
-                name = chr(ord('T') + count)
+                name = param.type.in_overload_name()[0].upper()
+                used = self.__generic_names_used
+                if name not in used:
+                    used[name] = 0
+                n = used[name]
+                n += 1
+                used[name] = n
+                if n > 1:
+                    name = '%s%s' % (name, n)
                 generic_params.append(param.type.make_generic(
                     name,
                     is_option=is_ptr_to_binding,
