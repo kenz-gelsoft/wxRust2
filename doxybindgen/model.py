@@ -13,6 +13,11 @@ CXX2RUST = {
     'wxItemKind': 'c_int',
     'wxWindowID': 'c_int',
 }
+STR_TYPES = [
+    'wxString',
+    'wxArtClient',
+    'wxArtID',
+]
 CXX_PRIMITIVES = [
     'bool',
     'void',
@@ -224,7 +229,7 @@ class RustType:
         return False
 
     def is_str(self):
-        return self.typename == 'wxString'
+        return self.typename in STR_TYPES
 
     def normalized(self):
         return '%s%s*' % (
@@ -380,7 +385,8 @@ class CxxType:
                 self._is_binding_type())
 
     def _is_const_ref_to_string(self):
-        return self._is_const_ref() and self.typename == 'wxString'
+        return (self._is_const_ref() and
+                self.typename in STR_TYPES)
 
     def is_const_ref_to_binding(self):
         return self._is_const_ref() and self._is_binding_type()
@@ -428,7 +434,7 @@ class CxxType:
         return self.typename in ['void', '']
     
     def is_str(self):
-        return self.typename == 'wxString'
+        return self.typename in STR_TYPES
     
     def make_generic(self, generic_name, is_option):
         self.generic_name = generic_name

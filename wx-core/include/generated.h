@@ -15,6 +15,7 @@ bool wxArtProvider_Pop();
 void wxArtProvider_Push(wxArtProvider * provider);
 void wxArtProvider_PushBack(wxArtProvider * provider);
 bool wxArtProvider_Remove(wxArtProvider * provider);
+wxArtID *wxArtProvider_GetMessageBoxIconId(int flags);
 
 // CLASS: wxBitmap
 wxBitmap *wxBitmap_new();

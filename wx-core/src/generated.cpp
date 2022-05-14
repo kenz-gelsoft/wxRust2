@@ -33,6 +33,9 @@ void wxArtProvider_PushBack(wxArtProvider * provider) {
 bool wxArtProvider_Remove(wxArtProvider * provider) {
     return wxArtProvider::Remove(provider);
 }
+wxArtID *wxArtProvider_GetMessageBoxIconId(int flags) {
+    return new wxArtID(wxArtProvider::GetMessageBoxIconId(flags));
+}
 
 // CLASS: wxBitmap
 wxBitmap *wxBitmap_new() {

@@ -39,7 +39,7 @@ mod ffi {
         pub fn wxArtProvider_Push(provider: *mut c_void);
         pub fn wxArtProvider_PushBack(provider: *mut c_void);
         pub fn wxArtProvider_Remove(provider: *mut c_void) -> bool;
-        // NOT_SUPPORTED: pub fn wxArtProvider_GetMessageBoxIconId(flags: c_int) -> wxArtID;
+        pub fn wxArtProvider_GetMessageBoxIconId(flags: c_int) -> *mut c_void;
         // NOT_SUPPORTED: pub fn wxArtProvider_GetMessageBoxIcon(flags: c_int) -> wxIcon;
 
         // wxBitmap
@@ -1508,22 +1508,26 @@ pub mod methods {
                 ffi::wxArtProvider_Delete(provider)
             }
         }
-        fn get_bitmap<S: SizeMethods>(
-            id: *const c_void,
-            client: *const c_void,
-            size: &S,
-        ) -> Bitmap {
+        fn get_bitmap<S: SizeMethods>(id: &str, client: &str, size: &S) -> Bitmap {
             unsafe {
+                let id = wx_base::wx_string_from(id);
+                let client = wx_base::wx_string_from(client);
                 let size = size.as_ptr();
                 BitmapIsOwned(ffi::wxArtProvider_GetBitmap(id, client, size))
             }
         }
         // NOT_SUPPORTED: fn GetIcon()
-        fn get_native_size_hint(client: *const c_void) -> Size {
-            unsafe { SizeIsOwned(ffi::wxArtProvider_GetNativeSizeHint(client)) }
+        fn get_native_size_hint(client: &str) -> Size {
+            unsafe {
+                let client = wx_base::wx_string_from(client);
+                SizeIsOwned(ffi::wxArtProvider_GetNativeSizeHint(client))
+            }
         }
-        fn get_size_hint(client: *const c_void, platform_default: bool) -> Size {
-            unsafe { SizeIsOwned(ffi::wxArtProvider_GetSizeHint(client, platform_default)) }
+        fn get_size_hint(client: &str, platform_default: bool) -> Size {
+            unsafe {
+                let client = wx_base::wx_string_from(client);
+                SizeIsOwned(ffi::wxArtProvider_GetSizeHint(client, platform_default))
+            }
         }
         // NOT_SUPPORTED: fn GetIconBundle()
         fn has_native_provider() -> bool {
@@ -1568,7 +1572,9 @@ pub mod methods {
                 ffi::wxArtProvider_Remove(provider)
             }
         }
-        // NOT_SUPPORTED: fn GetMessageBoxIconId()
+        fn get_message_box_icon_id(flags: c_int) -> String {
+            unsafe { wx_base::from_wx_string(ffi::wxArtProvider_GetMessageBoxIconId(flags)) }
+        }
         // NOT_SUPPORTED: fn GetMessageBoxIcon()
     }
 
