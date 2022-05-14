@@ -115,7 +115,7 @@ library = 'core'
 [types.wxToolBar]
 blocklist = [
     # const getter
-    'GetToolByPos1',
+    'GetToolByPos',
 ]
 [types.wxTopLevelWindow]
 windows = [
@@ -210,6 +210,9 @@ blocklist = [
     'Remove',
     # deprecated, use FitInside()
     'SetVirtualSizeHints',
+]
+wx31 = [
+    'RepositionChildren',
 ]
 [types.wxValidator]
 returns_owned = [

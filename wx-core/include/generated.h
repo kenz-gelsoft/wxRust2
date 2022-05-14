@@ -448,7 +448,7 @@ wxControl * wxToolBar_FindControl(wxToolBar * self, int id);
 wxToolBarToolBase * wxToolBar_FindToolForPosition(const wxToolBar * self, wxCoord x, wxCoord y);
 wxSize *wxToolBar_GetMargins(const wxToolBar * self);
 wxSize *wxToolBar_GetToolBitmapSize(const wxToolBar * self);
-wxToolBarToolBase * wxToolBar_GetToolByPos(wxToolBar * self, int pos);
+const wxToolBarToolBase * wxToolBar_GetToolByPos1(const wxToolBar * self, int pos);
 wxObject * wxToolBar_GetToolClientData(const wxToolBar * self, int tool_id);
 bool wxToolBar_GetToolEnabled(const wxToolBar * self, int tool_id);
 wxString *wxToolBar_GetToolLongHelp(const wxToolBar * self, int tool_id);
@@ -678,7 +678,9 @@ wxSizerItem * wxSizer_Prepend5(wxSizer * self, int width, int height, const wxSi
 wxSizerItem * wxSizer_Prepend6(wxSizer * self, wxSizerItem * item);
 wxSizerItem * wxSizer_PrependSpacer(wxSizer * self, int size);
 wxSizerItem * wxSizer_PrependStretchSpacer(wxSizer * self, int prop);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxSizer_RepositionChildren(wxSizer * self, const wxSize * min_size);
+#endif
 bool wxSizer_Remove1(wxSizer * self, wxSizer * sizer);
 bool wxSizer_Remove2(wxSizer * self, int index);
 bool wxSizer_Replace(wxSizer * self, wxWindow * oldwin, wxWindow * newwin, bool recursive);

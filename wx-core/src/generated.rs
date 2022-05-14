@@ -794,8 +794,8 @@ mod ffi {
         ) -> *mut c_void;
         pub fn wxToolBar_GetMargins(self_: *const c_void) -> *mut c_void;
         pub fn wxToolBar_GetToolBitmapSize(self_: *const c_void) -> *mut c_void;
-        pub fn wxToolBar_GetToolByPos(self_: *mut c_void, pos: c_int) -> *mut c_void;
-        // BLOCKED: pub fn wxToolBar_GetToolByPos1(self_: *const c_void, pos: c_int) -> *const c_void;
+        // BLOCKED: pub fn wxToolBar_GetToolByPos(self_: *mut c_void, pos: c_int) -> *mut c_void;
+        pub fn wxToolBar_GetToolByPos1(self_: *const c_void, pos: c_int) -> *const c_void;
         pub fn wxToolBar_GetToolClientData(self_: *const c_void, tool_id: c_int) -> *mut c_void;
         pub fn wxToolBar_GetToolEnabled(self_: *const c_void, tool_id: c_int) -> bool;
         pub fn wxToolBar_GetToolLongHelp(self_: *const c_void, tool_id: c_int) -> *mut c_void;
@@ -3401,10 +3401,10 @@ pub mod methods {
         fn get_tool_bitmap_size(&self) -> Size {
             unsafe { SizeIsOwned(ffi::wxToolBar_GetToolBitmapSize(self.as_ptr())) }
         }
-        fn get_tool_by_pos(&self, pos: c_int) -> *mut c_void {
-            unsafe { ffi::wxToolBar_GetToolByPos(self.as_ptr(), pos) }
+        // BLOCKED: fn GetToolByPos()
+        fn get_tool_by_pos(&self, pos: c_int) -> *const c_void {
+            unsafe { ffi::wxToolBar_GetToolByPos1(self.as_ptr(), pos) }
         }
-        // BLOCKED: fn GetToolByPos1()
         fn get_tool_client_data(&self, tool_id: c_int) -> WeakRef<Object> {
             unsafe {
                 WeakRef::<Object>::from(ffi::wxToolBar_GetToolClientData(self.as_ptr(), tool_id))

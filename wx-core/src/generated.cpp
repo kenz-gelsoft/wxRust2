@@ -1243,7 +1243,7 @@ wxSize *wxToolBar_GetMargins(const wxToolBar * self) {
 wxSize *wxToolBar_GetToolBitmapSize(const wxToolBar * self) {
     return new wxSize(self->GetToolBitmapSize());
 }
-wxToolBarToolBase * wxToolBar_GetToolByPos(wxToolBar * self, int pos) {
+const wxToolBarToolBase * wxToolBar_GetToolByPos1(const wxToolBar * self, int pos) {
     return self->GetToolByPos(pos);
 }
 wxObject * wxToolBar_GetToolClientData(const wxToolBar * self, int tool_id) {
@@ -1889,9 +1889,11 @@ wxSizerItem * wxSizer_PrependSpacer(wxSizer * self, int size) {
 wxSizerItem * wxSizer_PrependStretchSpacer(wxSizer * self, int prop) {
     return self->PrependStretchSpacer(prop);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxSizer_RepositionChildren(wxSizer * self, const wxSize * min_size) {
     return self->RepositionChildren(*min_size);
 }
+#endif
 bool wxSizer_Remove1(wxSizer * self, wxSizer * sizer) {
     return self->Remove(sizer);
 }
