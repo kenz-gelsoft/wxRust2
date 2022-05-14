@@ -62,6 +62,10 @@ impl WrapSizerFrame {
             0,
             wx::Object::none(),
         );
+        sizer_root.add_sizer_sizerflags(
+            Some(&sizer_top),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
+        );
 
         panel.set_sizer(Some(&sizer_root), true);
 
@@ -72,7 +76,7 @@ impl WrapSizerFrame {
     }
 
     fn add_tool_bar_button(tb: &wx::ToolBar, label: &str, artid: &str) {
-        let bm = wx::ArtProvider::get_bitmap(artid, "wxART_OTHER", &wx::Size::new_with_int(16, 16));
+        let bm = wx::ArtProvider::get_bitmap(artid, "wxART_OTHER_C", &wx::Size::new_with_int(16, 16));
         tb.add_tool_int_str(wx::ID_ANY, label, &bm, "", wx::ITEM_NORMAL);
     }
 
