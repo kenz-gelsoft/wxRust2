@@ -25,6 +25,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "wrapsizer"
+version = "0.1.0"
+dependencies = [
+ "wx",
+ "wx-base",
+]
+
+[[package]]
 name = "wx"
 version = "0.1.0"
 dependencies = [
