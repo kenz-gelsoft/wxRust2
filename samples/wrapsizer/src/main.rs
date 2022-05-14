@@ -67,6 +67,32 @@ impl WrapSizerFrame {
             wx::SizerFlags::new(0).expand().border(wx::ALL),
         );
 
+        // A number of checkboxes inside a wrap sizer
+        let sizer_mid =
+            wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&panel), "With check-boxes");
+        let sizer_mid_wrap = wx::WrapSizer::new(wx::HORIZONTAL, wx::WRAPSIZER_DEFAULT_FLAGS);
+        for n in 0..6 {
+            let checked = n % 2 == 1;
+            let chk = wx::CheckBox::new(
+                Some(&panel),
+                wx::ID_ANY,
+                &format!("Option {}", checked),
+                &wx::Point::default(),
+                &wx::Size::default(),
+                0,
+                &wx::Validator::default(),
+                "",
+            );
+            sizer_mid_wrap
+                .add_window_sizerflags(Some(&chk), wx::SizerFlags::new(0).centre().border(wx::ALL));
+        }
+
+        sizer_mid.add_sizer_sizerflags(Some(&sizer_mid_wrap), wx::SizerFlags::new(100).expand());
+        sizer_root.add_sizer_sizerflags(
+            Some(&sizer_mid),
+            wx::SizerFlags::new(100).expand().border(wx::ALL),
+        );
+
         panel.set_sizer(Some(&sizer_root), true);
 
         WrapSizerFrame {
@@ -76,7 +102,8 @@ impl WrapSizerFrame {
     }
 
     fn add_tool_bar_button(tb: &wx::ToolBar, label: &str, artid: &str) {
-        let bm = wx::ArtProvider::get_bitmap(artid, "wxART_OTHER_C", &wx::Size::new_with_int(16, 16));
+        let bm =
+            wx::ArtProvider::get_bitmap(artid, "wxART_OTHER_C", &wx::Size::new_with_int(16, 16));
         tb.add_tool_int_str(wx::ID_ANY, label, &bm, "", wx::ITEM_NORMAL);
     }
 
