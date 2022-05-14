@@ -723,6 +723,142 @@ mod ffi {
         pub fn wxNonOwnedWindow_SetShape(self_: *mut c_void, region: *const c_void) -> bool;
         pub fn wxNonOwnedWindow_SetShape1(self_: *mut c_void, path: *const c_void) -> bool;
 
+        // wxToolBar
+        pub fn wxToolBar_new() -> *mut c_void;
+        pub fn wxToolBar_new1(
+            parent: *mut c_void,
+            id: c_int,
+            pos: *const c_void,
+            size: *const c_void,
+            style: c_long,
+            name: *const c_void,
+        ) -> *mut c_void;
+        // DTOR: pub fn wxToolBar_~wxToolBar(self_: *mut c_void);
+        pub fn wxToolBar_AddCheckTool(
+            self_: *mut c_void,
+            tool_id: c_int,
+            label: *const c_void,
+            bitmap1: *const c_void,
+            bmp_disabled: *const c_void,
+            short_help: *const c_void,
+            long_help: *const c_void,
+            client_data: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxToolBar_AddControl(
+            self_: *mut c_void,
+            control: *mut c_void,
+            label: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxToolBar_AddRadioTool(
+            self_: *mut c_void,
+            tool_id: c_int,
+            label: *const c_void,
+            bitmap1: *const c_void,
+            bmp_disabled: *const c_void,
+            short_help: *const c_void,
+            long_help: *const c_void,
+            client_data: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxToolBar_AddSeparator(self_: *mut c_void) -> *mut c_void;
+        pub fn wxToolBar_AddStretchableSpace(self_: *mut c_void) -> *mut c_void;
+        pub fn wxToolBar_AddTool(self_: *mut c_void, tool: *mut c_void) -> *mut c_void;
+        pub fn wxToolBar_AddTool1(
+            self_: *mut c_void,
+            tool_id: c_int,
+            label: *const c_void,
+            bitmap: *const c_void,
+            short_help: *const c_void,
+            kind: c_int,
+        ) -> *mut c_void;
+        pub fn wxToolBar_AddTool2(
+            self_: *mut c_void,
+            tool_id: c_int,
+            label: *const c_void,
+            bitmap: *const c_void,
+            bmp_disabled: *const c_void,
+            kind: c_int,
+            short_help: *const c_void,
+            long_help: *const c_void,
+            client_data: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxToolBar_ClearTools(self_: *mut c_void);
+        pub fn wxToolBar_DeleteTool(self_: *mut c_void, tool_id: c_int) -> bool;
+        // NOT_SUPPORTED: pub fn wxToolBar_DeleteToolByPos(self_: *mut c_void, pos: size_t) -> bool;
+        pub fn wxToolBar_EnableTool(self_: *mut c_void, tool_id: c_int, enable: bool);
+        pub fn wxToolBar_FindById(self_: *const c_void, id: c_int) -> *mut c_void;
+        pub fn wxToolBar_FindControl(self_: *mut c_void, id: c_int) -> *mut c_void;
+        pub fn wxToolBar_FindToolForPosition(
+            self_: *const c_void,
+            x: c_int,
+            y: c_int,
+        ) -> *mut c_void;
+        pub fn wxToolBar_GetMargins(self_: *const c_void) -> *mut c_void;
+        pub fn wxToolBar_GetToolBitmapSize(self_: *const c_void) -> *mut c_void;
+        pub fn wxToolBar_GetToolByPos(self_: *mut c_void, pos: c_int) -> *mut c_void;
+        // BLOCKED: pub fn wxToolBar_GetToolByPos1(self_: *const c_void, pos: c_int) -> *const c_void;
+        pub fn wxToolBar_GetToolClientData(self_: *const c_void, tool_id: c_int) -> *mut c_void;
+        pub fn wxToolBar_GetToolEnabled(self_: *const c_void, tool_id: c_int) -> bool;
+        pub fn wxToolBar_GetToolLongHelp(self_: *const c_void, tool_id: c_int) -> *mut c_void;
+        pub fn wxToolBar_GetToolPacking(self_: *const c_void) -> c_int;
+        pub fn wxToolBar_GetToolPos(self_: *const c_void, tool_id: c_int) -> c_int;
+        pub fn wxToolBar_GetToolSeparation(self_: *const c_void) -> c_int;
+        pub fn wxToolBar_GetToolShortHelp(self_: *const c_void, tool_id: c_int) -> *mut c_void;
+        pub fn wxToolBar_GetToolSize(self_: *const c_void) -> *mut c_void;
+        pub fn wxToolBar_GetToolState(self_: *const c_void, tool_id: c_int) -> bool;
+        // NOT_SUPPORTED: pub fn wxToolBar_GetToolsCount(self_: *const c_void) -> size_t;
+        // NOT_SUPPORTED: pub fn wxToolBar_InsertControl(self_: *mut c_void, pos: size_t, control: *mut c_void, label: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxToolBar_InsertSeparator(self_: *mut c_void, pos: size_t) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxToolBar_InsertStretchableSpace(self_: *mut c_void, pos: size_t) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxToolBar_InsertTool(self_: *mut c_void, pos: size_t, tool_id: c_int, label: *const c_void, bitmap: *const c_void, bmp_disabled: *const c_void, kind: c_int, short_help: *const c_void, long_help: *const c_void, client_data: *mut c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxToolBar_InsertTool1(self_: *mut c_void, pos: size_t, tool: *mut c_void) -> *mut c_void;
+        pub fn wxToolBar_OnLeftClick(self_: *mut c_void, tool_id: c_int, toggle_down: bool)
+            -> bool;
+        pub fn wxToolBar_OnMouseEnter(self_: *mut c_void, tool_id: c_int);
+        pub fn wxToolBar_OnRightClick(self_: *mut c_void, tool_id: c_int, x: c_long, y: c_long);
+        pub fn wxToolBar_Realize(self_: *mut c_void) -> bool;
+        pub fn wxToolBar_RemoveTool(self_: *mut c_void, id: c_int) -> *mut c_void;
+        pub fn wxToolBar_SetDropdownMenu(self_: *mut c_void, id: c_int, menu: *mut c_void) -> bool;
+        pub fn wxToolBar_SetMargins(self_: *mut c_void, x: c_int, y: c_int);
+        pub fn wxToolBar_SetMargins1(self_: *mut c_void, size: *const c_void);
+        pub fn wxToolBar_SetToolBitmapSize(self_: *mut c_void, size: *const c_void);
+        pub fn wxToolBar_SetToolClientData(self_: *mut c_void, id: c_int, client_data: *mut c_void);
+        pub fn wxToolBar_SetToolDisabledBitmap(
+            self_: *mut c_void,
+            id: c_int,
+            bitmap: *const c_void,
+        );
+        pub fn wxToolBar_SetToolLongHelp(
+            self_: *mut c_void,
+            tool_id: c_int,
+            help_string: *const c_void,
+        );
+        pub fn wxToolBar_SetToolNormalBitmap(self_: *mut c_void, id: c_int, bitmap: *const c_void);
+        pub fn wxToolBar_SetToolPacking(self_: *mut c_void, packing: c_int);
+        pub fn wxToolBar_SetToolSeparation(self_: *mut c_void, separation: c_int);
+        pub fn wxToolBar_SetToolShortHelp(
+            self_: *mut c_void,
+            tool_id: c_int,
+            help_string: *const c_void,
+        );
+        pub fn wxToolBar_ToggleTool(self_: *mut c_void, tool_id: c_int, toggle: bool);
+        pub fn wxToolBar_CreateTool(
+            self_: *mut c_void,
+            tool_id: c_int,
+            label: *const c_void,
+            bmp_normal: *const c_void,
+            bmp_disabled: *const c_void,
+            kind: c_int,
+            client_data: *mut c_void,
+            short_help: *const c_void,
+            long_help: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxToolBar_CreateTool1(
+            self_: *mut c_void,
+            control: *mut c_void,
+            label: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxToolBar_CreateSeparator(self_: *mut c_void) -> *mut c_void;
+
         // wxTopLevelWindow
         pub fn wxTopLevelWindow_new() -> *mut c_void;
         pub fn wxTopLevelWindow_new1(
@@ -3112,6 +3248,328 @@ pub mod methods {
         }
     }
 
+    // wxToolBar
+    pub trait ToolBarMethods: ControlMethods {
+        // DTOR: fn ~wxToolBar()
+        fn add_check_tool<O: ObjectMethods>(
+            &self,
+            tool_id: c_int,
+            label: &str,
+            bitmap1: *const c_void,
+            bmp_disabled: *const c_void,
+            short_help: &str,
+            long_help: &str,
+            client_data: Option<&O>,
+        ) -> *mut c_void {
+            unsafe {
+                let label = wx_base::wx_string_from(label);
+                let short_help = wx_base::wx_string_from(short_help);
+                let long_help = wx_base::wx_string_from(long_help);
+                let client_data = match client_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxToolBar_AddCheckTool(
+                    self.as_ptr(),
+                    tool_id,
+                    label,
+                    bitmap1,
+                    bmp_disabled,
+                    short_help,
+                    long_help,
+                    client_data,
+                )
+            }
+        }
+        fn add_control<C: ControlMethods>(&self, control: Option<&C>, label: &str) -> *mut c_void {
+            unsafe {
+                let control = match control {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let label = wx_base::wx_string_from(label);
+                ffi::wxToolBar_AddControl(self.as_ptr(), control, label)
+            }
+        }
+        fn add_radio_tool<O: ObjectMethods>(
+            &self,
+            tool_id: c_int,
+            label: &str,
+            bitmap1: *const c_void,
+            bmp_disabled: *const c_void,
+            short_help: &str,
+            long_help: &str,
+            client_data: Option<&O>,
+        ) -> *mut c_void {
+            unsafe {
+                let label = wx_base::wx_string_from(label);
+                let short_help = wx_base::wx_string_from(short_help);
+                let long_help = wx_base::wx_string_from(long_help);
+                let client_data = match client_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxToolBar_AddRadioTool(
+                    self.as_ptr(),
+                    tool_id,
+                    label,
+                    bitmap1,
+                    bmp_disabled,
+                    short_help,
+                    long_help,
+                    client_data,
+                )
+            }
+        }
+        fn add_separator(&self) -> *mut c_void {
+            unsafe { ffi::wxToolBar_AddSeparator(self.as_ptr()) }
+        }
+        fn add_stretchable_space(&self) -> *mut c_void {
+            unsafe { ffi::wxToolBar_AddStretchableSpace(self.as_ptr()) }
+        }
+        fn add_tool_toolbartoolbase(&self, tool: *mut c_void) -> *mut c_void {
+            unsafe { ffi::wxToolBar_AddTool(self.as_ptr(), tool) }
+        }
+        fn add_tool_int_str(
+            &self,
+            tool_id: c_int,
+            label: &str,
+            bitmap: *const c_void,
+            short_help: &str,
+            kind: c_int,
+        ) -> *mut c_void {
+            unsafe {
+                let label = wx_base::wx_string_from(label);
+                let short_help = wx_base::wx_string_from(short_help);
+                ffi::wxToolBar_AddTool1(self.as_ptr(), tool_id, label, bitmap, short_help, kind)
+            }
+        }
+        fn add_tool_int_bitmap<O: ObjectMethods>(
+            &self,
+            tool_id: c_int,
+            label: &str,
+            bitmap: *const c_void,
+            bmp_disabled: *const c_void,
+            kind: c_int,
+            short_help: &str,
+            long_help: &str,
+            client_data: Option<&O>,
+        ) -> *mut c_void {
+            unsafe {
+                let label = wx_base::wx_string_from(label);
+                let short_help = wx_base::wx_string_from(short_help);
+                let long_help = wx_base::wx_string_from(long_help);
+                let client_data = match client_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxToolBar_AddTool2(
+                    self.as_ptr(),
+                    tool_id,
+                    label,
+                    bitmap,
+                    bmp_disabled,
+                    kind,
+                    short_help,
+                    long_help,
+                    client_data,
+                )
+            }
+        }
+        fn clear_tools(&self) {
+            unsafe { ffi::wxToolBar_ClearTools(self.as_ptr()) }
+        }
+        fn delete_tool(&self, tool_id: c_int) -> bool {
+            unsafe { ffi::wxToolBar_DeleteTool(self.as_ptr(), tool_id) }
+        }
+        // NOT_SUPPORTED: fn DeleteToolByPos()
+        fn enable_tool(&self, tool_id: c_int, enable: bool) {
+            unsafe { ffi::wxToolBar_EnableTool(self.as_ptr(), tool_id, enable) }
+        }
+        fn find_by_id(&self, id: c_int) -> *mut c_void {
+            unsafe { ffi::wxToolBar_FindById(self.as_ptr(), id) }
+        }
+        fn find_control(&self, id: c_int) -> WeakRef<Control> {
+            unsafe { WeakRef::<Control>::from(ffi::wxToolBar_FindControl(self.as_ptr(), id)) }
+        }
+        fn find_tool_for_position(&self, x: c_int, y: c_int) -> *mut c_void {
+            unsafe { ffi::wxToolBar_FindToolForPosition(self.as_ptr(), x, y) }
+        }
+        fn get_margins(&self) -> Size {
+            unsafe { SizeIsOwned(ffi::wxToolBar_GetMargins(self.as_ptr())) }
+        }
+        fn get_tool_bitmap_size(&self) -> Size {
+            unsafe { SizeIsOwned(ffi::wxToolBar_GetToolBitmapSize(self.as_ptr())) }
+        }
+        fn get_tool_by_pos(&self, pos: c_int) -> *mut c_void {
+            unsafe { ffi::wxToolBar_GetToolByPos(self.as_ptr(), pos) }
+        }
+        // BLOCKED: fn GetToolByPos1()
+        fn get_tool_client_data(&self, tool_id: c_int) -> WeakRef<Object> {
+            unsafe {
+                WeakRef::<Object>::from(ffi::wxToolBar_GetToolClientData(self.as_ptr(), tool_id))
+            }
+        }
+        fn get_tool_enabled(&self, tool_id: c_int) -> bool {
+            unsafe { ffi::wxToolBar_GetToolEnabled(self.as_ptr(), tool_id) }
+        }
+        fn get_tool_long_help(&self, tool_id: c_int) -> String {
+            unsafe {
+                wx_base::from_wx_string(ffi::wxToolBar_GetToolLongHelp(self.as_ptr(), tool_id))
+            }
+        }
+        fn get_tool_packing(&self) -> c_int {
+            unsafe { ffi::wxToolBar_GetToolPacking(self.as_ptr()) }
+        }
+        fn get_tool_pos(&self, tool_id: c_int) -> c_int {
+            unsafe { ffi::wxToolBar_GetToolPos(self.as_ptr(), tool_id) }
+        }
+        fn get_tool_separation(&self) -> c_int {
+            unsafe { ffi::wxToolBar_GetToolSeparation(self.as_ptr()) }
+        }
+        fn get_tool_short_help(&self, tool_id: c_int) -> String {
+            unsafe {
+                wx_base::from_wx_string(ffi::wxToolBar_GetToolShortHelp(self.as_ptr(), tool_id))
+            }
+        }
+        fn get_tool_size(&self) -> Size {
+            unsafe { SizeIsOwned(ffi::wxToolBar_GetToolSize(self.as_ptr())) }
+        }
+        fn get_tool_state(&self, tool_id: c_int) -> bool {
+            unsafe { ffi::wxToolBar_GetToolState(self.as_ptr(), tool_id) }
+        }
+        // NOT_SUPPORTED: fn GetToolsCount()
+        // NOT_SUPPORTED: fn InsertControl()
+        // NOT_SUPPORTED: fn InsertSeparator()
+        // NOT_SUPPORTED: fn InsertStretchableSpace()
+        // NOT_SUPPORTED: fn InsertTool()
+        // NOT_SUPPORTED: fn InsertTool1()
+        fn on_left_click(&self, tool_id: c_int, toggle_down: bool) -> bool {
+            unsafe { ffi::wxToolBar_OnLeftClick(self.as_ptr(), tool_id, toggle_down) }
+        }
+        fn on_mouse_enter(&self, tool_id: c_int) {
+            unsafe { ffi::wxToolBar_OnMouseEnter(self.as_ptr(), tool_id) }
+        }
+        fn on_right_click(&self, tool_id: c_int, x: c_long, y: c_long) {
+            unsafe { ffi::wxToolBar_OnRightClick(self.as_ptr(), tool_id, x, y) }
+        }
+        fn realize(&self) -> bool {
+            unsafe { ffi::wxToolBar_Realize(self.as_ptr()) }
+        }
+        fn remove_tool(&self, id: c_int) -> *mut c_void {
+            unsafe { ffi::wxToolBar_RemoveTool(self.as_ptr(), id) }
+        }
+        fn set_dropdown_menu<M: MenuMethods>(&self, id: c_int, menu: Option<&M>) -> bool {
+            unsafe {
+                let menu = match menu {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxToolBar_SetDropdownMenu(self.as_ptr(), id, menu)
+            }
+        }
+        fn set_margins_int(&self, x: c_int, y: c_int) {
+            unsafe { ffi::wxToolBar_SetMargins(self.as_ptr(), x, y) }
+        }
+        fn set_margins_size<S: SizeMethods>(&self, size: &S) {
+            unsafe {
+                let size = size.as_ptr();
+                ffi::wxToolBar_SetMargins1(self.as_ptr(), size)
+            }
+        }
+        fn set_tool_bitmap_size<S: SizeMethods>(&self, size: &S) {
+            unsafe {
+                let size = size.as_ptr();
+                ffi::wxToolBar_SetToolBitmapSize(self.as_ptr(), size)
+            }
+        }
+        fn set_tool_client_data<O: ObjectMethods>(&self, id: c_int, client_data: Option<&O>) {
+            unsafe {
+                let client_data = match client_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxToolBar_SetToolClientData(self.as_ptr(), id, client_data)
+            }
+        }
+        fn set_tool_disabled_bitmap(&self, id: c_int, bitmap: *const c_void) {
+            unsafe { ffi::wxToolBar_SetToolDisabledBitmap(self.as_ptr(), id, bitmap) }
+        }
+        fn set_tool_long_help(&self, tool_id: c_int, help_string: &str) {
+            unsafe {
+                let help_string = wx_base::wx_string_from(help_string);
+                ffi::wxToolBar_SetToolLongHelp(self.as_ptr(), tool_id, help_string)
+            }
+        }
+        fn set_tool_normal_bitmap(&self, id: c_int, bitmap: *const c_void) {
+            unsafe { ffi::wxToolBar_SetToolNormalBitmap(self.as_ptr(), id, bitmap) }
+        }
+        fn set_tool_packing(&self, packing: c_int) {
+            unsafe { ffi::wxToolBar_SetToolPacking(self.as_ptr(), packing) }
+        }
+        fn set_tool_separation(&self, separation: c_int) {
+            unsafe { ffi::wxToolBar_SetToolSeparation(self.as_ptr(), separation) }
+        }
+        fn set_tool_short_help(&self, tool_id: c_int, help_string: &str) {
+            unsafe {
+                let help_string = wx_base::wx_string_from(help_string);
+                ffi::wxToolBar_SetToolShortHelp(self.as_ptr(), tool_id, help_string)
+            }
+        }
+        fn toggle_tool(&self, tool_id: c_int, toggle: bool) {
+            unsafe { ffi::wxToolBar_ToggleTool(self.as_ptr(), tool_id, toggle) }
+        }
+        fn create_tool_int<O: ObjectMethods>(
+            &self,
+            tool_id: c_int,
+            label: &str,
+            bmp_normal: *const c_void,
+            bmp_disabled: *const c_void,
+            kind: c_int,
+            client_data: Option<&O>,
+            short_help: &str,
+            long_help: &str,
+        ) -> *mut c_void {
+            unsafe {
+                let label = wx_base::wx_string_from(label);
+                let client_data = match client_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let short_help = wx_base::wx_string_from(short_help);
+                let long_help = wx_base::wx_string_from(long_help);
+                ffi::wxToolBar_CreateTool(
+                    self.as_ptr(),
+                    tool_id,
+                    label,
+                    bmp_normal,
+                    bmp_disabled,
+                    kind,
+                    client_data,
+                    short_help,
+                    long_help,
+                )
+            }
+        }
+        fn create_tool_control<C: ControlMethods>(
+            &self,
+            control: Option<&C>,
+            label: &str,
+        ) -> *mut c_void {
+            unsafe {
+                let control = match control {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let label = wx_base::wx_string_from(label);
+                ffi::wxToolBar_CreateTool1(self.as_ptr(), control, label)
+            }
+        }
+        fn create_separator(&self) -> *mut c_void {
+            unsafe { ffi::wxToolBar_CreateSeparator(self.as_ptr()) }
+        }
+    }
+
     // wxTopLevelWindow
     pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
         // DTOR: fn ~wxTopLevelWindow()
@@ -3283,10 +3741,10 @@ pub mod methods {
                 ffi::wxFrame_CreateStatusBar(self.as_ptr(), number, style, id, name)
             }
         }
-        fn create_tool_bar(&self, style: c_long, id: c_int, name: &str) -> *mut c_void {
+        fn create_tool_bar(&self, style: c_long, id: c_int, name: &str) -> WeakRef<ToolBar> {
             unsafe {
                 let name = wx_base::wx_string_from(name);
-                ffi::wxFrame_CreateToolBar(self.as_ptr(), style, id, name)
+                WeakRef::<ToolBar>::from(ffi::wxFrame_CreateToolBar(self.as_ptr(), style, id, name))
             }
         }
         fn do_give_help(&self, text: &str, show: bool) {
@@ -3304,8 +3762,8 @@ pub mod methods {
         fn get_status_bar_pane(&self) -> c_int {
             unsafe { ffi::wxFrame_GetStatusBarPane(self.as_ptr()) }
         }
-        fn get_tool_bar(&self) -> *mut c_void {
-            unsafe { ffi::wxFrame_GetToolBar(self.as_ptr()) }
+        fn get_tool_bar(&self) -> WeakRef<ToolBar> {
+            unsafe { WeakRef::<ToolBar>::from(ffi::wxFrame_GetToolBar(self.as_ptr())) }
         }
         fn on_create_status_bar(
             &self,
@@ -3319,10 +3777,15 @@ pub mod methods {
                 ffi::wxFrame_OnCreateStatusBar(self.as_ptr(), number, style, id, name)
             }
         }
-        fn on_create_tool_bar(&self, style: c_long, id: c_int, name: &str) -> *mut c_void {
+        fn on_create_tool_bar(&self, style: c_long, id: c_int, name: &str) -> WeakRef<ToolBar> {
             unsafe {
                 let name = wx_base::wx_string_from(name);
-                ffi::wxFrame_OnCreateToolBar(self.as_ptr(), style, id, name)
+                WeakRef::<ToolBar>::from(ffi::wxFrame_OnCreateToolBar(
+                    self.as_ptr(),
+                    style,
+                    id,
+                    name,
+                ))
             }
         }
         fn process_command(&self, id: c_int) -> bool {
@@ -3352,8 +3815,14 @@ pub mod methods {
         fn set_status_widths(&self, n: c_int, widths_field: *const c_void) {
             unsafe { ffi::wxFrame_SetStatusWidths(self.as_ptr(), n, widths_field) }
         }
-        fn set_tool_bar(&self, tool_bar: *mut c_void) {
-            unsafe { ffi::wxFrame_SetToolBar(self.as_ptr(), tool_bar) }
+        fn set_tool_bar<T: ToolBarMethods>(&self, tool_bar: Option<&T>) {
+            unsafe {
+                let tool_bar = match tool_bar {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxFrame_SetToolBar(self.as_ptr(), tool_bar)
+            }
         }
         fn msw_get_task_bar_button(&self) -> *mut c_void {
             unsafe { ffi::wxFrame_MSWGetTaskBarButton(self.as_ptr()) }
@@ -4574,6 +5043,43 @@ wx_class! { NonOwnedWindow =
         ObjectMethods
 }
 impl<const OWNED: bool> NonOwnedWindowIsOwned<OWNED> {
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
+// wxToolBar
+wx_class! { ToolBar =
+    ToolBarIsOwned<true>(wxToolBar) impl
+        ToolBarMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> ToolBarIsOwned<OWNED> {
+    pub fn new_2step() -> ToolBarIsOwned<OWNED> {
+        unsafe { ToolBarIsOwned(ffi::wxToolBar_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> ToolBarIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            ToolBarIsOwned(ffi::wxToolBar_new1(parent, id, pos, size, style, name))
+        }
+    }
     pub fn none() -> Option<&'static Self> {
         None
     }

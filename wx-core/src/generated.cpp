@@ -1188,6 +1188,152 @@ bool wxNonOwnedWindow_SetShape1(wxNonOwnedWindow * self, const wxGraphicsPath * 
     return self->SetShape(*path);
 }
 
+// CLASS: wxToolBar
+wxToolBar *wxToolBar_new() {
+    return new wxToolBar();
+}
+wxToolBar *wxToolBar_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxToolBar(parent, id, *pos, *size, style, *name);
+}
+wxToolBarToolBase * wxToolBar_AddCheckTool(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap1, const wxBitmap * bmp_disabled, const wxString * short_help, const wxString * long_help, wxObject * client_data) {
+    return self->AddCheckTool(tool_id, *label, *bitmap1, *bmp_disabled, *short_help, *long_help, client_data);
+}
+wxToolBarToolBase * wxToolBar_AddControl(wxToolBar * self, wxControl * control, const wxString * label) {
+    return self->AddControl(control, *label);
+}
+wxToolBarToolBase * wxToolBar_AddRadioTool(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap1, const wxBitmap * bmp_disabled, const wxString * short_help, const wxString * long_help, wxObject * client_data) {
+    return self->AddRadioTool(tool_id, *label, *bitmap1, *bmp_disabled, *short_help, *long_help, client_data);
+}
+wxToolBarToolBase * wxToolBar_AddSeparator(wxToolBar * self) {
+    return self->AddSeparator();
+}
+wxToolBarToolBase * wxToolBar_AddStretchableSpace(wxToolBar * self) {
+    return self->AddStretchableSpace();
+}
+wxToolBarToolBase * wxToolBar_AddTool(wxToolBar * self, wxToolBarToolBase * tool) {
+    return self->AddTool(tool);
+}
+wxToolBarToolBase * wxToolBar_AddTool1(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap, const wxString * short_help, wxItemKind kind) {
+    return self->AddTool(tool_id, *label, *bitmap, *short_help, kind);
+}
+wxToolBarToolBase * wxToolBar_AddTool2(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap, const wxBitmap * bmp_disabled, wxItemKind kind, const wxString * short_help, const wxString * long_help, wxObject * client_data) {
+    return self->AddTool(tool_id, *label, *bitmap, *bmp_disabled, kind, *short_help, *long_help, client_data);
+}
+void wxToolBar_ClearTools(wxToolBar * self) {
+    return self->ClearTools();
+}
+bool wxToolBar_DeleteTool(wxToolBar * self, int tool_id) {
+    return self->DeleteTool(tool_id);
+}
+void wxToolBar_EnableTool(wxToolBar * self, int tool_id, bool enable) {
+    return self->EnableTool(tool_id, enable);
+}
+wxToolBarToolBase * wxToolBar_FindById(const wxToolBar * self, int id) {
+    return self->FindById(id);
+}
+wxControl * wxToolBar_FindControl(wxToolBar * self, int id) {
+    return self->FindControl(id);
+}
+wxToolBarToolBase * wxToolBar_FindToolForPosition(const wxToolBar * self, wxCoord x, wxCoord y) {
+    return self->FindToolForPosition(x, y);
+}
+wxSize *wxToolBar_GetMargins(const wxToolBar * self) {
+    return new wxSize(self->GetMargins());
+}
+wxSize *wxToolBar_GetToolBitmapSize(const wxToolBar * self) {
+    return new wxSize(self->GetToolBitmapSize());
+}
+wxToolBarToolBase * wxToolBar_GetToolByPos(wxToolBar * self, int pos) {
+    return self->GetToolByPos(pos);
+}
+wxObject * wxToolBar_GetToolClientData(const wxToolBar * self, int tool_id) {
+    return self->GetToolClientData(tool_id);
+}
+bool wxToolBar_GetToolEnabled(const wxToolBar * self, int tool_id) {
+    return self->GetToolEnabled(tool_id);
+}
+wxString *wxToolBar_GetToolLongHelp(const wxToolBar * self, int tool_id) {
+    return new wxString(self->GetToolLongHelp(tool_id));
+}
+int wxToolBar_GetToolPacking(const wxToolBar * self) {
+    return self->GetToolPacking();
+}
+int wxToolBar_GetToolPos(const wxToolBar * self, int tool_id) {
+    return self->GetToolPos(tool_id);
+}
+int wxToolBar_GetToolSeparation(const wxToolBar * self) {
+    return self->GetToolSeparation();
+}
+wxString *wxToolBar_GetToolShortHelp(const wxToolBar * self, int tool_id) {
+    return new wxString(self->GetToolShortHelp(tool_id));
+}
+wxSize *wxToolBar_GetToolSize(const wxToolBar * self) {
+    return new wxSize(self->GetToolSize());
+}
+bool wxToolBar_GetToolState(const wxToolBar * self, int tool_id) {
+    return self->GetToolState(tool_id);
+}
+bool wxToolBar_OnLeftClick(wxToolBar * self, int tool_id, bool toggle_down) {
+    return self->OnLeftClick(tool_id, toggle_down);
+}
+void wxToolBar_OnMouseEnter(wxToolBar * self, int tool_id) {
+    return self->OnMouseEnter(tool_id);
+}
+void wxToolBar_OnRightClick(wxToolBar * self, int tool_id, long x, long y) {
+    return self->OnRightClick(tool_id, x, y);
+}
+bool wxToolBar_Realize(wxToolBar * self) {
+    return self->Realize();
+}
+wxToolBarToolBase * wxToolBar_RemoveTool(wxToolBar * self, int id) {
+    return self->RemoveTool(id);
+}
+bool wxToolBar_SetDropdownMenu(wxToolBar * self, int id, wxMenu * menu) {
+    return self->SetDropdownMenu(id, menu);
+}
+void wxToolBar_SetMargins(wxToolBar * self, int x, int y) {
+    return self->SetMargins(x, y);
+}
+void wxToolBar_SetMargins1(wxToolBar * self, const wxSize * size) {
+    return self->SetMargins(*size);
+}
+void wxToolBar_SetToolBitmapSize(wxToolBar * self, const wxSize * size) {
+    return self->SetToolBitmapSize(*size);
+}
+void wxToolBar_SetToolClientData(wxToolBar * self, int id, wxObject * client_data) {
+    return self->SetToolClientData(id, client_data);
+}
+void wxToolBar_SetToolDisabledBitmap(wxToolBar * self, int id, const wxBitmap * bitmap) {
+    return self->SetToolDisabledBitmap(id, *bitmap);
+}
+void wxToolBar_SetToolLongHelp(wxToolBar * self, int tool_id, const wxString * help_string) {
+    return self->SetToolLongHelp(tool_id, *help_string);
+}
+void wxToolBar_SetToolNormalBitmap(wxToolBar * self, int id, const wxBitmap * bitmap) {
+    return self->SetToolNormalBitmap(id, *bitmap);
+}
+void wxToolBar_SetToolPacking(wxToolBar * self, int packing) {
+    return self->SetToolPacking(packing);
+}
+void wxToolBar_SetToolSeparation(wxToolBar * self, int separation) {
+    return self->SetToolSeparation(separation);
+}
+void wxToolBar_SetToolShortHelp(wxToolBar * self, int tool_id, const wxString * help_string) {
+    return self->SetToolShortHelp(tool_id, *help_string);
+}
+void wxToolBar_ToggleTool(wxToolBar * self, int tool_id, bool toggle) {
+    return self->ToggleTool(tool_id, toggle);
+}
+wxToolBarToolBase * wxToolBar_CreateTool(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bmp_normal, const wxBitmap * bmp_disabled, wxItemKind kind, wxObject * client_data, const wxString * short_help, const wxString * long_help) {
+    return self->CreateTool(tool_id, *label, *bmp_normal, *bmp_disabled, kind, client_data, *short_help, *long_help);
+}
+wxToolBarToolBase * wxToolBar_CreateTool1(wxToolBar * self, wxControl * control, const wxString * label) {
+    return self->CreateTool(control, *label);
+}
+wxToolBarToolBase * wxToolBar_CreateSeparator(wxToolBar * self) {
+    return self->CreateSeparator();
+}
+
 // CLASS: wxTopLevelWindow
 wxTopLevelWindow *wxTopLevelWindow_new() {
     return new wxTopLevelWindow();
