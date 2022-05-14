@@ -23,6 +23,8 @@ void wxCommandEvent_SetExtraLong(wxCommandEvent * self, long extra_long);
 void wxCommandEvent_SetInt(wxCommandEvent * self, int int_command);
 void wxCommandEvent_SetString(wxCommandEvent * self, const wxString * string);
 
+// CLASS: wxGDIObject
+
 // CLASS: wxWindow
 bool wxWindow_AcceptsFocus(const wxWindow * self);
 bool wxWindow_AcceptsFocusFromKeyboard(const wxWindow * self);

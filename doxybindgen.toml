@@ -4,6 +4,7 @@ wxml_files = [
     'wxml/classwx_command_event.xml',
     'wxml/classwx_event.xml',
     'wxml/classwx_evt_handler.xml',
+    'wxml/classwx_g_d_i_object.xml',
     'wxml/classwx_window.xml',
     'wxml/classwx_control.xml',
     'wxml/classwx_any_button.xml',
@@ -38,6 +39,12 @@ cxx = "#ifndef __WXGTK__"
 cxx = "#if wxCHECK_VERSION(3, 1, 0)"
 
 [types]
+[types.wxGDIObject]
+blocklist = [
+    'wxGDIObject',
+    'CloneGDIRefData',
+    'CreateGDIRefData',
+]
 [types.wxObject]
 blocklist = [
     'operator delete',

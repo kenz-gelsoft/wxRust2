@@ -39,6 +39,9 @@ mod ffi {
         pub fn wxCommandEvent_SetInt(self_: *mut c_void, int_command: c_int);
         pub fn wxCommandEvent_SetString(self_: *mut c_void, string: *const c_void);
 
+        // wxGDIObject
+        // BLOCKED: pub fn wxGDIObject_new() -> *mut c_void;
+
         // wxWindow
         pub fn wxWindow_AcceptsFocus(self_: *const c_void) -> bool;
         pub fn wxWindow_AcceptsFocusFromKeyboard(self_: *const c_void) -> bool;
@@ -1464,6 +1467,9 @@ pub mod methods {
             }
         }
     }
+
+    // wxGDIObject
+    pub trait GDIObjectMethods: ObjectMethods {}
 
     // wxWindow
     pub trait WindowMethods: EvtHandlerMethods {
@@ -4847,6 +4853,26 @@ impl<const OWNED: bool> CommandEventIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> Drop for CommandEventIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
+// wxGDIObject
+wx_class! { GDIObject =
+    GDIObjectIsOwned<true>(wxGDIObject) impl
+        GDIObjectMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> GDIObjectIsOwned<OWNED> {
+    // BLOCKED: fn wxGDIObject()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for GDIObjectIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }

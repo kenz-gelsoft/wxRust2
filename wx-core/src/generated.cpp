@@ -54,6 +54,8 @@ void wxCommandEvent_SetString(wxCommandEvent * self, const wxString * string) {
     return self->SetString(*string);
 }
 
+// CLASS: wxGDIObject
+
 // CLASS: wxWindow
 bool wxWindow_AcceptsFocus(const wxWindow * self) {
     return self->AcceptsFocus();
