@@ -45,4 +45,19 @@ impl WrapSizerFrame {
             m_panel: panel,
         }
     }
+
+    fn add_tool_bar_button(tb: &wx::ToolBar, label: &str, atrid: &str) {
+    }
+
+    fn make_tool_bar(&self) -> wx::ToolBar {
+        let tb = wx::ToolBar::new(
+            Some(&self.m_panel),
+            wx::ID_ANY,
+            &wx::Point::default(),
+            &wx::Size::default(),
+            wx::TB_HORIZONTAL.into(),
+            "",
+        );
+        tb
+    }
 }
