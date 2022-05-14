@@ -18,6 +18,66 @@ mod ffi {
 
     extern "C" {
 
+        // wxBitmap
+        pub fn wxBitmap_new() -> *mut c_void;
+        pub fn wxBitmap_new1(bitmap: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxBitmap_new2(bits: char, width: c_int, height: c_int, depth: c_int) -> *mut c_void;
+        pub fn wxBitmap_new3(width: c_int, height: c_int, depth: c_int) -> *mut c_void;
+        pub fn wxBitmap_new4(sz: *const c_void, depth: c_int) -> *mut c_void;
+        pub fn wxBitmap_new5(bits: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxBitmap_new6(name: *const c_void, type_: wxBitmapType) -> *mut c_void;
+        pub fn wxBitmap_new7(img: *const c_void, depth: c_int) -> *mut c_void;
+        // BLOCKED: pub fn wxBitmap_new8(cursor: *const c_void) -> *mut c_void;
+        // DTOR: pub fn wxBitmap_~wxBitmap(self_: *mut c_void);
+        // NOT_SUPPORTED: pub fn wxBitmap_ConvertToImage(self_: *const c_void) -> wxImage;
+        pub fn wxBitmap_CopyFromIcon(self_: *mut c_void, icon: *const c_void) -> bool;
+        pub fn wxBitmap_Create(
+            self_: *mut c_void,
+            width: c_int,
+            height: c_int,
+            depth: c_int,
+        ) -> bool;
+        pub fn wxBitmap_Create1(self_: *mut c_void, sz: *const c_void, depth: c_int) -> bool;
+        pub fn wxBitmap_Create2(
+            self_: *mut c_void,
+            width: c_int,
+            height: c_int,
+            dc: *const c_void,
+        ) -> bool;
+        pub fn wxBitmap_CreateScaled(
+            self_: *mut c_void,
+            width: c_int,
+            height: c_int,
+            depth: c_int,
+            logical_scale: c_double,
+        ) -> bool;
+        pub fn wxBitmap_GetDepth(self_: *const c_void) -> c_int;
+        pub fn wxBitmap_GetHeight(self_: *const c_void) -> c_int;
+        pub fn wxBitmap_GetMask(self_: *const c_void) -> *mut c_void;
+        pub fn wxBitmap_GetPalette(self_: *const c_void) -> *mut c_void;
+        pub fn wxBitmap_GetSubBitmap(self_: *const c_void, rect: *const c_void) -> *mut c_void;
+        pub fn wxBitmap_GetSize(self_: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxBitmap_ConvertToDisabled(self_: *const c_void, brightness: unsigned char) -> *mut c_void;
+        pub fn wxBitmap_GetWidth(self_: *const c_void) -> c_int;
+        pub fn wxBitmap_IsOk(self_: *const c_void) -> bool;
+        // NOT_SUPPORTED: pub fn wxBitmap_LoadFile(self_: *mut c_void, name: *const c_void, type_: wxBitmapType) -> bool;
+        // NOT_SUPPORTED: pub fn wxBitmap_SaveFile(self_: *const c_void, name: *const c_void, type_: wxBitmapType, palette: *const c_void) -> bool;
+        pub fn wxBitmap_SetDepth(self_: *mut c_void, depth: c_int);
+        pub fn wxBitmap_SetHeight(self_: *mut c_void, height: c_int);
+        pub fn wxBitmap_SetMask(self_: *mut c_void, mask: *mut c_void);
+        pub fn wxBitmap_SetPalette(self_: *mut c_void, palette: *const c_void);
+        pub fn wxBitmap_SetWidth(self_: *mut c_void, width: c_int);
+        pub fn wxBitmap_AddHandler(handler: *mut c_void);
+        pub fn wxBitmap_CleanUpHandlers();
+        pub fn wxBitmap_FindHandler(name: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxBitmap_FindHandler1(extension: *const c_void, bitmap_type: wxBitmapType) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxBitmap_FindHandler2(bitmap_type: wxBitmapType) -> *mut c_void;
+        // BLOCKED: pub fn wxBitmap_GetHandlers() -> *mut c_void;
+        pub fn wxBitmap_InitStandardHandlers();
+        pub fn wxBitmap_InsertHandler(handler: *mut c_void);
+        // NOT_SUPPORTED: pub fn wxBitmap_NewFromPNGData(data: *const c_void, size: size_t) -> *mut c_void;
+        pub fn wxBitmap_RemoveHandler(name: *const c_void) -> bool;
+
         // wxBoxSizer
         pub fn wxBoxSizer_new(orient: c_int) -> *mut c_void;
         pub fn wxBoxSizer_GetOrientation(self_: *const c_void) -> c_int;
@@ -515,12 +575,12 @@ mod ffi {
         // wxAnyButton
         pub fn wxAnyButton_new() -> *mut c_void;
         // DTOR: pub fn wxAnyButton_~wxAnyButton(self_: *mut c_void);
-        // NOT_SUPPORTED: pub fn wxAnyButton_GetBitmap(self_: *const c_void) -> wxBitmap;
-        // NOT_SUPPORTED: pub fn wxAnyButton_GetBitmapCurrent(self_: *const c_void) -> wxBitmap;
-        // NOT_SUPPORTED: pub fn wxAnyButton_GetBitmapDisabled(self_: *const c_void) -> wxBitmap;
-        // NOT_SUPPORTED: pub fn wxAnyButton_GetBitmapFocus(self_: *const c_void) -> wxBitmap;
-        // NOT_SUPPORTED: pub fn wxAnyButton_GetBitmapLabel(self_: *const c_void) -> wxBitmap;
-        // NOT_SUPPORTED: pub fn wxAnyButton_GetBitmapPressed(self_: *const c_void) -> wxBitmap;
+        pub fn wxAnyButton_GetBitmap(self_: *const c_void) -> *mut c_void;
+        pub fn wxAnyButton_GetBitmapCurrent(self_: *const c_void) -> *mut c_void;
+        pub fn wxAnyButton_GetBitmapDisabled(self_: *const c_void) -> *mut c_void;
+        pub fn wxAnyButton_GetBitmapFocus(self_: *const c_void) -> *mut c_void;
+        pub fn wxAnyButton_GetBitmapLabel(self_: *const c_void) -> *mut c_void;
+        pub fn wxAnyButton_GetBitmapPressed(self_: *const c_void) -> *mut c_void;
         // NOT_SUPPORTED: pub fn wxAnyButton_SetBitmap(self_: *mut c_void, bitmap: *const c_void, dir: wxDirection);
         pub fn wxAnyButton_SetBitmapCurrent(self_: *mut c_void, bitmap: *const c_void);
         pub fn wxAnyButton_SetBitmapDisabled(self_: *mut c_void, bitmap: *const c_void);
@@ -1395,7 +1455,7 @@ mod ffi {
             style: c_long,
             name: *const c_void,
         ) -> bool;
-        // NOT_SUPPORTED: pub fn wxStaticBitmap_GetBitmap(self_: *const c_void) -> wxBitmap;
+        pub fn wxStaticBitmap_GetBitmap(self_: *const c_void) -> *mut c_void;
         // NOT_SUPPORTED: pub fn wxStaticBitmap_GetIcon(self_: *const c_void) -> wxIcon;
         pub fn wxStaticBitmap_SetBitmap(self_: *mut c_void, label: *const c_void);
         pub fn wxStaticBitmap_SetIcon(self_: *mut c_void, label: *const c_void);
@@ -1411,6 +1471,111 @@ pub mod methods {
     use crate::WeakRef;
 
     pub use wx_base::methods::*;
+
+    // wxBitmap
+    pub trait BitmapMethods: GDIObjectMethods {
+        // DTOR: fn ~wxBitmap()
+        // NOT_SUPPORTED: fn ConvertToImage()
+        fn copy_from_icon(&self, icon: *const c_void) -> bool {
+            unsafe { ffi::wxBitmap_CopyFromIcon(self.as_ptr(), icon) }
+        }
+        fn create_int_int(&self, width: c_int, height: c_int, depth: c_int) -> bool {
+            unsafe { ffi::wxBitmap_Create(self.as_ptr(), width, height, depth) }
+        }
+        fn create_size<S: SizeMethods>(&self, sz: &S, depth: c_int) -> bool {
+            unsafe {
+                let sz = sz.as_ptr();
+                ffi::wxBitmap_Create1(self.as_ptr(), sz, depth)
+            }
+        }
+        fn create_int_dc(&self, width: c_int, height: c_int, dc: *const c_void) -> bool {
+            unsafe { ffi::wxBitmap_Create2(self.as_ptr(), width, height, dc) }
+        }
+        fn create_scaled(
+            &self,
+            width: c_int,
+            height: c_int,
+            depth: c_int,
+            logical_scale: c_double,
+        ) -> bool {
+            unsafe {
+                ffi::wxBitmap_CreateScaled(self.as_ptr(), width, height, depth, logical_scale)
+            }
+        }
+        fn get_depth(&self) -> c_int {
+            unsafe { ffi::wxBitmap_GetDepth(self.as_ptr()) }
+        }
+        fn get_height(&self) -> c_int {
+            unsafe { ffi::wxBitmap_GetHeight(self.as_ptr()) }
+        }
+        fn get_mask(&self) -> *mut c_void {
+            unsafe { ffi::wxBitmap_GetMask(self.as_ptr()) }
+        }
+        fn get_palette(&self) -> *mut c_void {
+            unsafe { ffi::wxBitmap_GetPalette(self.as_ptr()) }
+        }
+        fn get_sub_bitmap<R: RectMethods>(&self, rect: &R) -> Bitmap {
+            unsafe {
+                let rect = rect.as_ptr();
+                BitmapIsOwned(ffi::wxBitmap_GetSubBitmap(self.as_ptr(), rect))
+            }
+        }
+        fn get_size(&self) -> Size {
+            unsafe { SizeIsOwned(ffi::wxBitmap_GetSize(self.as_ptr())) }
+        }
+        // NOT_SUPPORTED: fn ConvertToDisabled()
+        fn get_width(&self) -> c_int {
+            unsafe { ffi::wxBitmap_GetWidth(self.as_ptr()) }
+        }
+        fn is_ok(&self) -> bool {
+            unsafe { ffi::wxBitmap_IsOk(self.as_ptr()) }
+        }
+        // NOT_SUPPORTED: fn LoadFile()
+        // NOT_SUPPORTED: fn SaveFile()
+        fn set_depth(&self, depth: c_int) {
+            unsafe { ffi::wxBitmap_SetDepth(self.as_ptr(), depth) }
+        }
+        fn set_height(&self, height: c_int) {
+            unsafe { ffi::wxBitmap_SetHeight(self.as_ptr(), height) }
+        }
+        fn set_mask(&self, mask: *mut c_void) {
+            unsafe { ffi::wxBitmap_SetMask(self.as_ptr(), mask) }
+        }
+        fn set_palette(&self, palette: *const c_void) {
+            unsafe { ffi::wxBitmap_SetPalette(self.as_ptr(), palette) }
+        }
+        fn set_width(&self, width: c_int) {
+            unsafe { ffi::wxBitmap_SetWidth(self.as_ptr(), width) }
+        }
+        fn add_handler(handler: *mut c_void) {
+            unsafe { ffi::wxBitmap_AddHandler(handler) }
+        }
+        fn clean_up_handlers() {
+            unsafe { ffi::wxBitmap_CleanUpHandlers() }
+        }
+        fn find_handler(name: &str) -> *mut c_void {
+            unsafe {
+                let name = wx_base::wx_string_from(name);
+                ffi::wxBitmap_FindHandler(name)
+            }
+        }
+        // NOT_SUPPORTED: fn FindHandler1()
+        // NOT_SUPPORTED: fn FindHandler2()
+        // BLOCKED: fn GetHandlers()
+        fn init_standard_handlers() {
+            unsafe { ffi::wxBitmap_InitStandardHandlers() }
+        }
+        fn insert_handler(handler: *mut c_void) {
+            unsafe { ffi::wxBitmap_InsertHandler(handler) }
+        }
+        // NOT_SUPPORTED: fn NewFromPNGData()
+        fn remove_handler(name: &str) -> bool {
+            unsafe {
+                let name = wx_base::wx_string_from(name);
+                ffi::wxBitmap_RemoveHandler(name)
+            }
+        }
+    }
 
     // wxBoxSizer
     pub trait BoxSizerMethods: SizerMethods {
@@ -2772,27 +2937,54 @@ pub mod methods {
     // wxAnyButton
     pub trait AnyButtonMethods: ControlMethods {
         // DTOR: fn ~wxAnyButton()
-        // NOT_SUPPORTED: fn GetBitmap()
-        // NOT_SUPPORTED: fn GetBitmapCurrent()
-        // NOT_SUPPORTED: fn GetBitmapDisabled()
-        // NOT_SUPPORTED: fn GetBitmapFocus()
-        // NOT_SUPPORTED: fn GetBitmapLabel()
-        // NOT_SUPPORTED: fn GetBitmapPressed()
+        fn get_bitmap(&self) -> Bitmap {
+            unsafe { BitmapIsOwned(ffi::wxAnyButton_GetBitmap(self.as_ptr())) }
+        }
+        fn get_bitmap_current(&self) -> Bitmap {
+            unsafe { BitmapIsOwned(ffi::wxAnyButton_GetBitmapCurrent(self.as_ptr())) }
+        }
+        fn get_bitmap_disabled(&self) -> Bitmap {
+            unsafe { BitmapIsOwned(ffi::wxAnyButton_GetBitmapDisabled(self.as_ptr())) }
+        }
+        fn get_bitmap_focus(&self) -> Bitmap {
+            unsafe { BitmapIsOwned(ffi::wxAnyButton_GetBitmapFocus(self.as_ptr())) }
+        }
+        fn get_bitmap_label(&self) -> Bitmap {
+            unsafe { BitmapIsOwned(ffi::wxAnyButton_GetBitmapLabel(self.as_ptr())) }
+        }
+        fn get_bitmap_pressed(&self) -> Bitmap {
+            unsafe { BitmapIsOwned(ffi::wxAnyButton_GetBitmapPressed(self.as_ptr())) }
+        }
         // NOT_SUPPORTED: fn SetBitmap()
-        fn set_bitmap_current(&self, bitmap: *const c_void) {
-            unsafe { ffi::wxAnyButton_SetBitmapCurrent(self.as_ptr(), bitmap) }
+        fn set_bitmap_current<B: BitmapMethods>(&self, bitmap: &B) {
+            unsafe {
+                let bitmap = bitmap.as_ptr();
+                ffi::wxAnyButton_SetBitmapCurrent(self.as_ptr(), bitmap)
+            }
         }
-        fn set_bitmap_disabled(&self, bitmap: *const c_void) {
-            unsafe { ffi::wxAnyButton_SetBitmapDisabled(self.as_ptr(), bitmap) }
+        fn set_bitmap_disabled<B: BitmapMethods>(&self, bitmap: &B) {
+            unsafe {
+                let bitmap = bitmap.as_ptr();
+                ffi::wxAnyButton_SetBitmapDisabled(self.as_ptr(), bitmap)
+            }
         }
-        fn set_bitmap_focus(&self, bitmap: *const c_void) {
-            unsafe { ffi::wxAnyButton_SetBitmapFocus(self.as_ptr(), bitmap) }
+        fn set_bitmap_focus<B: BitmapMethods>(&self, bitmap: &B) {
+            unsafe {
+                let bitmap = bitmap.as_ptr();
+                ffi::wxAnyButton_SetBitmapFocus(self.as_ptr(), bitmap)
+            }
         }
-        fn set_bitmap_label(&self, bitmap: *const c_void) {
-            unsafe { ffi::wxAnyButton_SetBitmapLabel(self.as_ptr(), bitmap) }
+        fn set_bitmap_label<B: BitmapMethods>(&self, bitmap: &B) {
+            unsafe {
+                let bitmap = bitmap.as_ptr();
+                ffi::wxAnyButton_SetBitmapLabel(self.as_ptr(), bitmap)
+            }
         }
-        fn set_bitmap_pressed(&self, bitmap: *const c_void) {
-            unsafe { ffi::wxAnyButton_SetBitmapPressed(self.as_ptr(), bitmap) }
+        fn set_bitmap_pressed<B: BitmapMethods>(&self, bitmap: &B) {
+            unsafe {
+                let bitmap = bitmap.as_ptr();
+                ffi::wxAnyButton_SetBitmapPressed(self.as_ptr(), bitmap)
+            }
         }
         fn get_bitmap_margins(&self) -> Size {
             unsafe { SizeIsOwned(ffi::wxAnyButton_GetBitmapMargins(self.as_ptr())) }
@@ -3257,18 +3449,20 @@ pub mod methods {
     // wxToolBar
     pub trait ToolBarMethods: ControlMethods {
         // DTOR: fn ~wxToolBar()
-        fn add_check_tool<O: ObjectMethods>(
+        fn add_check_tool<B: BitmapMethods, B2: BitmapMethods, O: ObjectMethods>(
             &self,
             tool_id: c_int,
             label: &str,
-            bitmap1: *const c_void,
-            bmp_disabled: *const c_void,
+            bitmap1: &B,
+            bmp_disabled: &B2,
             short_help: &str,
             long_help: &str,
             client_data: Option<&O>,
         ) -> *mut c_void {
             unsafe {
                 let label = wx_base::wx_string_from(label);
+                let bitmap1 = bitmap1.as_ptr();
+                let bmp_disabled = bmp_disabled.as_ptr();
                 let short_help = wx_base::wx_string_from(short_help);
                 let long_help = wx_base::wx_string_from(long_help);
                 let client_data = match client_data {
@@ -3297,18 +3491,20 @@ pub mod methods {
                 ffi::wxToolBar_AddControl(self.as_ptr(), control, label)
             }
         }
-        fn add_radio_tool<O: ObjectMethods>(
+        fn add_radio_tool<B: BitmapMethods, B2: BitmapMethods, O: ObjectMethods>(
             &self,
             tool_id: c_int,
             label: &str,
-            bitmap1: *const c_void,
-            bmp_disabled: *const c_void,
+            bitmap1: &B,
+            bmp_disabled: &B2,
             short_help: &str,
             long_help: &str,
             client_data: Option<&O>,
         ) -> *mut c_void {
             unsafe {
                 let label = wx_base::wx_string_from(label);
+                let bitmap1 = bitmap1.as_ptr();
+                let bmp_disabled = bmp_disabled.as_ptr();
                 let short_help = wx_base::wx_string_from(short_help);
                 let long_help = wx_base::wx_string_from(long_help);
                 let client_data = match client_data {
@@ -3336,26 +3532,27 @@ pub mod methods {
         fn add_tool_toolbartoolbase(&self, tool: *mut c_void) -> *mut c_void {
             unsafe { ffi::wxToolBar_AddTool(self.as_ptr(), tool) }
         }
-        fn add_tool_int_str(
+        fn add_tool_int_str<B: BitmapMethods>(
             &self,
             tool_id: c_int,
             label: &str,
-            bitmap: *const c_void,
+            bitmap: &B,
             short_help: &str,
             kind: c_int,
         ) -> *mut c_void {
             unsafe {
                 let label = wx_base::wx_string_from(label);
+                let bitmap = bitmap.as_ptr();
                 let short_help = wx_base::wx_string_from(short_help);
                 ffi::wxToolBar_AddTool1(self.as_ptr(), tool_id, label, bitmap, short_help, kind)
             }
         }
-        fn add_tool_int_bitmap<O: ObjectMethods>(
+        fn add_tool_int_bitmap<B: BitmapMethods, B2: BitmapMethods, O: ObjectMethods>(
             &self,
             tool_id: c_int,
             label: &str,
-            bitmap: *const c_void,
-            bmp_disabled: *const c_void,
+            bitmap: &B,
+            bmp_disabled: &B2,
             kind: c_int,
             short_help: &str,
             long_help: &str,
@@ -3363,6 +3560,8 @@ pub mod methods {
         ) -> *mut c_void {
             unsafe {
                 let label = wx_base::wx_string_from(label);
+                let bitmap = bitmap.as_ptr();
+                let bmp_disabled = bmp_disabled.as_ptr();
                 let short_help = wx_base::wx_string_from(short_help);
                 let long_help = wx_base::wx_string_from(long_help);
                 let client_data = match client_data {
@@ -3498,8 +3697,11 @@ pub mod methods {
                 ffi::wxToolBar_SetToolClientData(self.as_ptr(), id, client_data)
             }
         }
-        fn set_tool_disabled_bitmap(&self, id: c_int, bitmap: *const c_void) {
-            unsafe { ffi::wxToolBar_SetToolDisabledBitmap(self.as_ptr(), id, bitmap) }
+        fn set_tool_disabled_bitmap<B: BitmapMethods>(&self, id: c_int, bitmap: &B) {
+            unsafe {
+                let bitmap = bitmap.as_ptr();
+                ffi::wxToolBar_SetToolDisabledBitmap(self.as_ptr(), id, bitmap)
+            }
         }
         fn set_tool_long_help(&self, tool_id: c_int, help_string: &str) {
             unsafe {
@@ -3507,8 +3709,11 @@ pub mod methods {
                 ffi::wxToolBar_SetToolLongHelp(self.as_ptr(), tool_id, help_string)
             }
         }
-        fn set_tool_normal_bitmap(&self, id: c_int, bitmap: *const c_void) {
-            unsafe { ffi::wxToolBar_SetToolNormalBitmap(self.as_ptr(), id, bitmap) }
+        fn set_tool_normal_bitmap<B: BitmapMethods>(&self, id: c_int, bitmap: &B) {
+            unsafe {
+                let bitmap = bitmap.as_ptr();
+                ffi::wxToolBar_SetToolNormalBitmap(self.as_ptr(), id, bitmap)
+            }
         }
         fn set_tool_packing(&self, packing: c_int) {
             unsafe { ffi::wxToolBar_SetToolPacking(self.as_ptr(), packing) }
@@ -3525,12 +3730,12 @@ pub mod methods {
         fn toggle_tool(&self, tool_id: c_int, toggle: bool) {
             unsafe { ffi::wxToolBar_ToggleTool(self.as_ptr(), tool_id, toggle) }
         }
-        fn create_tool_int<O: ObjectMethods>(
+        fn create_tool_int<B: BitmapMethods, B2: BitmapMethods, O: ObjectMethods>(
             &self,
             tool_id: c_int,
             label: &str,
-            bmp_normal: *const c_void,
-            bmp_disabled: *const c_void,
+            bmp_normal: &B,
+            bmp_disabled: &B2,
             kind: c_int,
             client_data: Option<&O>,
             short_help: &str,
@@ -3538,6 +3743,8 @@ pub mod methods {
         ) -> *mut c_void {
             unsafe {
                 let label = wx_base::wx_string_from(label);
+                let bmp_normal = bmp_normal.as_ptr();
+                let bmp_disabled = bmp_disabled.as_ptr();
                 let client_data = match client_data {
                     Some(r) => r.as_ptr(),
                     None => ptr::null_mut(),
@@ -4789,11 +4996,11 @@ pub mod methods {
 
     // wxStaticBitmap
     pub trait StaticBitmapMethods: ControlMethods {
-        fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        fn create<W: WindowMethods, B: BitmapMethods, P: PointMethods, S: SizeMethods>(
             &self,
             parent: Option<&W>,
             id: c_int,
-            label: *const c_void,
+            label: &B,
             pos: &P,
             size: &S,
             style: c_long,
@@ -4804,22 +5011,75 @@ pub mod methods {
                     Some(r) => r.as_ptr(),
                     None => ptr::null_mut(),
                 };
+                let label = label.as_ptr();
                 let pos = pos.as_ptr();
                 let size = size.as_ptr();
                 let name = wx_base::wx_string_from(name);
                 ffi::wxStaticBitmap_Create(self.as_ptr(), parent, id, label, pos, size, style, name)
             }
         }
-        // NOT_SUPPORTED: fn GetBitmap()
+        fn get_bitmap(&self) -> Bitmap {
+            unsafe { BitmapIsOwned(ffi::wxStaticBitmap_GetBitmap(self.as_ptr())) }
+        }
         // NOT_SUPPORTED: fn GetIcon()
-        fn set_bitmap(&self, label: *const c_void) {
-            unsafe { ffi::wxStaticBitmap_SetBitmap(self.as_ptr(), label) }
+        fn set_bitmap<B: BitmapMethods>(&self, label: &B) {
+            unsafe {
+                let label = label.as_ptr();
+                ffi::wxStaticBitmap_SetBitmap(self.as_ptr(), label)
+            }
         }
         fn set_icon(&self, label: *const c_void) {
             unsafe { ffi::wxStaticBitmap_SetIcon(self.as_ptr(), label) }
         }
         // NOT_SUPPORTED: fn SetScaleMode()
         // NOT_SUPPORTED: fn GetScaleMode()
+    }
+}
+
+// wxBitmap
+wx_class! { Bitmap =
+    BitmapIsOwned<true>(wxBitmap) impl
+        BitmapMethods,
+        GDIObjectMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> BitmapIsOwned<OWNED> {
+    pub fn new() -> BitmapIsOwned<OWNED> {
+        unsafe { BitmapIsOwned(ffi::wxBitmap_new()) }
+    }
+    pub fn new_with_bitmap<B: BitmapMethods>(bitmap: &B) -> BitmapIsOwned<OWNED> {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            BitmapIsOwned(ffi::wxBitmap_new1(bitmap))
+        }
+    }
+    // NOT_SUPPORTED: fn wxBitmap2()
+    pub fn new_with_int(width: c_int, height: c_int, depth: c_int) -> BitmapIsOwned<OWNED> {
+        unsafe { BitmapIsOwned(ffi::wxBitmap_new3(width, height, depth)) }
+    }
+    pub fn new_with_size<S: SizeMethods>(sz: &S, depth: c_int) -> BitmapIsOwned<OWNED> {
+        unsafe {
+            let sz = sz.as_ptr();
+            BitmapIsOwned(ffi::wxBitmap_new4(sz, depth))
+        }
+    }
+    pub fn new_with_char(bits: *const c_void) -> BitmapIsOwned<OWNED> {
+        unsafe { BitmapIsOwned(ffi::wxBitmap_new5(bits)) }
+    }
+    // NOT_SUPPORTED: fn wxBitmap6()
+    pub fn new_with_image(img: *const c_void, depth: c_int) -> BitmapIsOwned<OWNED> {
+        unsafe { BitmapIsOwned(ffi::wxBitmap_new7(img, depth)) }
+    }
+    // BLOCKED: fn wxBitmap8()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for BitmapIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
     }
 }
 
@@ -5428,10 +5688,10 @@ impl<const OWNED: bool> StaticBitmapIsOwned<OWNED> {
     pub fn new_2step() -> StaticBitmapIsOwned<OWNED> {
         unsafe { StaticBitmapIsOwned(ffi::wxStaticBitmap_new()) }
     }
-    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+    pub fn new<W: WindowMethods, B: BitmapMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
-        label: *const c_void,
+        label: &B,
         pos: &P,
         size: &S,
         style: c_long,
@@ -5442,6 +5702,7 @@ impl<const OWNED: bool> StaticBitmapIsOwned<OWNED> {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
+            let label = label.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let name = wx_base::wx_string_from(name);

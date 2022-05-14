@@ -1,5 +1,6 @@
 wxml_files = [
     'wxml/classwx_object.xml',
+    'wxml/classwx_bitmap.xml',
     'wxml/classwx_box_sizer.xml',
     'wxml/classwx_command_event.xml',
     'wxml/classwx_event.xml',
@@ -39,6 +40,12 @@ cxx = "#ifndef __WXGTK__"
 cxx = "#if wxCHECK_VERSION(3, 1, 0)"
 
 [types]
+[types.wxBitmap]
+blocklist = [
+    'wxBitmap8',
+    # doesn't support returning wxList
+    'GetHandlers',
+]
 [types.wxGDIObject]
 blocklist = [
     'wxGDIObject',

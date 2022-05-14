@@ -2,6 +2,98 @@
 
 extern "C" {
 
+// CLASS: wxBitmap
+wxBitmap *wxBitmap_new() {
+    return new wxBitmap();
+}
+wxBitmap *wxBitmap_new1(const wxBitmap * bitmap) {
+    return new wxBitmap(*bitmap);
+}
+wxBitmap *wxBitmap_new3(int width, int height, int depth) {
+    return new wxBitmap(width, height, depth);
+}
+wxBitmap *wxBitmap_new4(const wxSize * sz, int depth) {
+    return new wxBitmap(*sz, depth);
+}
+wxBitmap *wxBitmap_new5(const char *const * bits) {
+    return new wxBitmap(bits);
+}
+wxBitmap *wxBitmap_new7(const wxImage * img, int depth) {
+    return new wxBitmap(*img, depth);
+}
+bool wxBitmap_CopyFromIcon(wxBitmap * self, const wxIcon * icon) {
+    return self->CopyFromIcon(*icon);
+}
+bool wxBitmap_Create(wxBitmap * self, int width, int height, int depth) {
+    return self->Create(width, height, depth);
+}
+bool wxBitmap_Create1(wxBitmap * self, const wxSize * sz, int depth) {
+    return self->Create(*sz, depth);
+}
+bool wxBitmap_Create2(wxBitmap * self, int width, int height, const wxDC * dc) {
+    return self->Create(width, height, *dc);
+}
+bool wxBitmap_CreateScaled(wxBitmap * self, int width, int height, int depth, double logical_scale) {
+    return self->CreateScaled(width, height, depth, logical_scale);
+}
+int wxBitmap_GetDepth(const wxBitmap * self) {
+    return self->GetDepth();
+}
+int wxBitmap_GetHeight(const wxBitmap * self) {
+    return self->GetHeight();
+}
+wxMask * wxBitmap_GetMask(const wxBitmap * self) {
+    return self->GetMask();
+}
+wxPalette * wxBitmap_GetPalette(const wxBitmap * self) {
+    return self->GetPalette();
+}
+wxBitmap *wxBitmap_GetSubBitmap(const wxBitmap * self, const wxRect * rect) {
+    return new wxBitmap(self->GetSubBitmap(*rect));
+}
+wxSize *wxBitmap_GetSize(const wxBitmap * self) {
+    return new wxSize(self->GetSize());
+}
+int wxBitmap_GetWidth(const wxBitmap * self) {
+    return self->GetWidth();
+}
+bool wxBitmap_IsOk(const wxBitmap * self) {
+    return self->IsOk();
+}
+void wxBitmap_SetDepth(wxBitmap * self, int depth) {
+    return self->SetDepth(depth);
+}
+void wxBitmap_SetHeight(wxBitmap * self, int height) {
+    return self->SetHeight(height);
+}
+void wxBitmap_SetMask(wxBitmap * self, wxMask * mask) {
+    return self->SetMask(mask);
+}
+void wxBitmap_SetPalette(wxBitmap * self, const wxPalette * palette) {
+    return self->SetPalette(*palette);
+}
+void wxBitmap_SetWidth(wxBitmap * self, int width) {
+    return self->SetWidth(width);
+}
+void wxBitmap_AddHandler(wxBitmapHandler * handler) {
+    return wxBitmap::AddHandler(handler);
+}
+void wxBitmap_CleanUpHandlers() {
+    return wxBitmap::CleanUpHandlers();
+}
+wxBitmapHandler * wxBitmap_FindHandler(const wxString * name) {
+    return wxBitmap::FindHandler(*name);
+}
+void wxBitmap_InitStandardHandlers() {
+    return wxBitmap::InitStandardHandlers();
+}
+void wxBitmap_InsertHandler(wxBitmapHandler * handler) {
+    return wxBitmap::InsertHandler(handler);
+}
+bool wxBitmap_RemoveHandler(const wxString * name) {
+    return wxBitmap::RemoveHandler(*name);
+}
+
 // CLASS: wxBoxSizer
 wxBoxSizer *wxBoxSizer_new(int orient) {
     return new wxBoxSizer(orient);
@@ -922,6 +1014,24 @@ wxString *wxControl_Ellipsize(const wxString * label, const wxDC * dc, wxEllipsi
 // CLASS: wxAnyButton
 wxAnyButton *wxAnyButton_new() {
     return new wxAnyButton();
+}
+wxBitmap *wxAnyButton_GetBitmap(const wxAnyButton * self) {
+    return new wxBitmap(self->GetBitmap());
+}
+wxBitmap *wxAnyButton_GetBitmapCurrent(const wxAnyButton * self) {
+    return new wxBitmap(self->GetBitmapCurrent());
+}
+wxBitmap *wxAnyButton_GetBitmapDisabled(const wxAnyButton * self) {
+    return new wxBitmap(self->GetBitmapDisabled());
+}
+wxBitmap *wxAnyButton_GetBitmapFocus(const wxAnyButton * self) {
+    return new wxBitmap(self->GetBitmapFocus());
+}
+wxBitmap *wxAnyButton_GetBitmapLabel(const wxAnyButton * self) {
+    return new wxBitmap(self->GetBitmapLabel());
+}
+wxBitmap *wxAnyButton_GetBitmapPressed(const wxAnyButton * self) {
+    return new wxBitmap(self->GetBitmapPressed());
 }
 void wxAnyButton_SetBitmapCurrent(wxAnyButton * self, const wxBitmap * bitmap) {
     return self->SetBitmapCurrent(*bitmap);
@@ -1983,6 +2093,9 @@ wxStaticBitmap *wxStaticBitmap_new1(wxWindow * parent, wxWindowID id, const wxBi
 }
 bool wxStaticBitmap_Create(wxStaticBitmap * self, wxWindow * parent, wxWindowID id, const wxBitmap * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return self->Create(parent, id, *label, *pos, *size, style, *name);
+}
+wxBitmap *wxStaticBitmap_GetBitmap(const wxStaticBitmap * self) {
+    return new wxBitmap(self->GetBitmap());
 }
 void wxStaticBitmap_SetBitmap(wxStaticBitmap * self, const wxBitmap * label) {
     return self->SetBitmap(*label);
