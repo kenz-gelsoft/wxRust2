@@ -36,6 +36,10 @@ impl WrapSizerFrame {
             "",
         );
 
+        let sizer_root = wx::BoxSizer::new(wx::VERTICAL);
+
+        panel.set_sizer(Some(&sizer_root), true);
+
         WrapSizerFrame {
             base: frame,
             m_panel: panel,
