@@ -752,6 +752,34 @@ bool wxSizer_Show(wxSizer * self, wxWindow * window, bool show, bool recursive);
 bool wxSizer_Show1(wxSizer * self, wxSizer * sizer, bool show, bool recursive);
 void wxSizer_ShowItems(wxSizer * self, bool show);
 
+// CLASS: wxSizerFlags
+void wxSizerFlags_delete(wxSizerFlags *self);
+wxSizerFlags *wxSizerFlags_new(int proportion);
+wxSizerFlags * wxSizerFlags_Align(wxSizerFlags * self, int alignment);
+wxSizerFlags * wxSizerFlags_Border(wxSizerFlags * self, int direction, int borderinpixels);
+wxSizerFlags * wxSizerFlags_Border1(wxSizerFlags * self, int direction);
+wxSizerFlags * wxSizerFlags_Bottom(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_Center(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_Centre(wxSizerFlags * self);
+#if wxCHECK_VERSION(3, 1, 0)
+wxSizerFlags * wxSizerFlags_CenterHorizontal(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_CenterVertical(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_CentreHorizontal(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_CentreVertical(wxSizerFlags * self);
+#endif
+wxSizerFlags * wxSizerFlags_DoubleBorder(wxSizerFlags * self, int direction);
+wxSizerFlags * wxSizerFlags_DoubleHorzBorder(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_Expand(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_FixedMinSize(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_ReserveSpaceEvenIfHidden(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_Left(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_Proportion(wxSizerFlags * self, int proportion);
+wxSizerFlags * wxSizerFlags_Right(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_Shaped(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_Top(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_TripleBorder(wxSizerFlags * self, int direction);
+int wxSizerFlags_GetDefaultBorder();
+
 // CLASS: wxValidator
 wxValidator *wxValidator_new();
 wxObject * wxValidator_Clone(const wxValidator * self);

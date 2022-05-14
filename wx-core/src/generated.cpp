@@ -2090,6 +2090,82 @@ void wxSizer_ShowItems(wxSizer * self, bool show) {
     return self->ShowItems(show);
 }
 
+// CLASS: wxSizerFlags
+void wxSizerFlags_delete(wxSizerFlags *self) {
+    delete self;
+}
+wxSizerFlags *wxSizerFlags_new(int proportion) {
+    return new wxSizerFlags(proportion);
+}
+wxSizerFlags * wxSizerFlags_Align(wxSizerFlags * self, int alignment) {
+    return &(self->Align(alignment));
+}
+wxSizerFlags * wxSizerFlags_Border(wxSizerFlags * self, int direction, int borderinpixels) {
+    return &(self->Border(direction, borderinpixels));
+}
+wxSizerFlags * wxSizerFlags_Border1(wxSizerFlags * self, int direction) {
+    return &(self->Border(direction));
+}
+wxSizerFlags * wxSizerFlags_Bottom(wxSizerFlags * self) {
+    return &(self->Bottom());
+}
+wxSizerFlags * wxSizerFlags_Center(wxSizerFlags * self) {
+    return &(self->Center());
+}
+wxSizerFlags * wxSizerFlags_Centre(wxSizerFlags * self) {
+    return &(self->Centre());
+}
+#if wxCHECK_VERSION(3, 1, 0)
+wxSizerFlags * wxSizerFlags_CenterHorizontal(wxSizerFlags * self) {
+    return &(self->CenterHorizontal());
+}
+wxSizerFlags * wxSizerFlags_CenterVertical(wxSizerFlags * self) {
+    return &(self->CenterVertical());
+}
+wxSizerFlags * wxSizerFlags_CentreHorizontal(wxSizerFlags * self) {
+    return &(self->CentreHorizontal());
+}
+wxSizerFlags * wxSizerFlags_CentreVertical(wxSizerFlags * self) {
+    return &(self->CentreVertical());
+}
+#endif
+wxSizerFlags * wxSizerFlags_DoubleBorder(wxSizerFlags * self, int direction) {
+    return &(self->DoubleBorder(direction));
+}
+wxSizerFlags * wxSizerFlags_DoubleHorzBorder(wxSizerFlags * self) {
+    return &(self->DoubleHorzBorder());
+}
+wxSizerFlags * wxSizerFlags_Expand(wxSizerFlags * self) {
+    return &(self->Expand());
+}
+wxSizerFlags * wxSizerFlags_FixedMinSize(wxSizerFlags * self) {
+    return &(self->FixedMinSize());
+}
+wxSizerFlags * wxSizerFlags_ReserveSpaceEvenIfHidden(wxSizerFlags * self) {
+    return &(self->ReserveSpaceEvenIfHidden());
+}
+wxSizerFlags * wxSizerFlags_Left(wxSizerFlags * self) {
+    return &(self->Left());
+}
+wxSizerFlags * wxSizerFlags_Proportion(wxSizerFlags * self, int proportion) {
+    return &(self->Proportion(proportion));
+}
+wxSizerFlags * wxSizerFlags_Right(wxSizerFlags * self) {
+    return &(self->Right());
+}
+wxSizerFlags * wxSizerFlags_Shaped(wxSizerFlags * self) {
+    return &(self->Shaped());
+}
+wxSizerFlags * wxSizerFlags_Top(wxSizerFlags * self) {
+    return &(self->Top());
+}
+wxSizerFlags * wxSizerFlags_TripleBorder(wxSizerFlags * self, int direction) {
+    return &(self->TripleBorder(direction));
+}
+int wxSizerFlags_GetDefaultBorder() {
+    return wxSizerFlags::GetDefaultBorder();
+}
+
 // CLASS: wxValidator
 wxValidator *wxValidator_new() {
     return new wxValidator();

@@ -162,6 +162,9 @@ class Method:
     def returns_owned(self):
         returns_owned_list = self.cls.config.get('returns_owned') or []
         return self.name() in returns_owned_list
+    
+    def maybe_returns_self(self):
+        return self.returns.is_self_ref(self.cls.name)
 
     def cxx_signature(self):
         items = []
@@ -225,6 +228,9 @@ class RustType:
     def needs_new(self):
         return False
     
+    def is_self_ref(self, cls_name):
+        return False
+
     def is_void(self):
         return False
 
@@ -428,6 +434,10 @@ class CxxType:
     def is_ptr(self):
         return self.__indirection.startswith('*')
     
+    def is_self_ref(self, cls_name):
+        return (self.is_ref() and 
+                self.typename == cls_name)
+
     def is_void(self):
         if self.is_ptr():
             return False

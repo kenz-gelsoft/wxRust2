@@ -236,7 +236,12 @@ class RustMethodBinding:
             return ''
         returns = self.__model.returns.in_rust(for_ffi=True)
         wrapped = self.__model.wrapped_return_type(allows_ptr=True)
-        if wrapped:
+        if self.__model.maybe_returns_self():
+            if for_ffi:
+                returns = '*mut c_void'
+            else:
+                returns = '&Self'
+        elif wrapped:
             if for_ffi:
                 returns = '*mut c_void'
             else:
@@ -376,6 +381,8 @@ class RustMethodBinding:
     def _wrap_return_type(self, call):
         if self.__model.returns.is_str():
             return 'wx_base::from_wx_string(%s)' % (call,)
+        if self.__model.maybe_returns_self():
+            return '%s; &self' % (call,)
         wrapped = self.__model.wrapped_return_type(allows_ptr=False)
         if wrapped:
             return '%sIsOwned(%s)' % (wrapped[2:], call)
@@ -503,7 +510,9 @@ class CxxMethodBinding:
                 self.__model.name(without_index=True),
                 new_params_or_expr,
             )
-        if wrapped:
+        if self.__model.maybe_returns_self():
+            yield '    return &(%s);' % (new_params_or_expr,)
+        elif wrapped:
             yield '    return new %s(%s);' % (wrapped, new_params_or_expr)
         else:
             yield '    return %s;' % (new_params_or_expr,)

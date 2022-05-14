@@ -1446,6 +1446,37 @@ mod ffi {
         // NOT_SUPPORTED: pub fn wxSizer_Show2(self_: *mut c_void, index: size_t, show: bool) -> bool;
         pub fn wxSizer_ShowItems(self_: *mut c_void, show: bool);
 
+        // wxSizerFlags
+        pub fn wxSizerFlags_delete(self_: *mut c_void);
+        pub fn wxSizerFlags_new(proportion: c_int) -> *mut c_void;
+        pub fn wxSizerFlags_Align(self_: *mut c_void, alignment: c_int) -> *mut c_void;
+        pub fn wxSizerFlags_Border(
+            self_: *mut c_void,
+            direction: c_int,
+            borderinpixels: c_int,
+        ) -> *mut c_void;
+        pub fn wxSizerFlags_Border1(self_: *mut c_void, direction: c_int) -> *mut c_void;
+        pub fn wxSizerFlags_Bottom(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_Center(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_Centre(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_CenterHorizontal(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_CenterVertical(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_CentreHorizontal(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_CentreVertical(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_DoubleBorder(self_: *mut c_void, direction: c_int) -> *mut c_void;
+        pub fn wxSizerFlags_DoubleHorzBorder(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_Expand(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_FixedMinSize(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_ReserveSpaceEvenIfHidden(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_Left(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_Proportion(self_: *mut c_void, proportion: c_int) -> *mut c_void;
+        pub fn wxSizerFlags_Right(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_Shaped(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_Top(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_TripleBorder(self_: *mut c_void, direction: c_int) -> *mut c_void;
+        pub fn wxSizerFlags_GetDefaultBorder() -> c_int;
+        // NOT_SUPPORTED: pub fn wxSizerFlags_GetDefaultBorderFractional() -> float;
+
         // wxValidator
         pub fn wxValidator_new() -> *mut c_void;
         // DTOR: pub fn wxValidator_~wxValidator(self_: *mut c_void);
@@ -4481,16 +4512,17 @@ pub mod methods {
     // wxSizer
     pub trait SizerMethods: ObjectMethods {
         // DTOR: fn ~wxSizer()
-        fn add_window_sizerflags<W: WindowMethods>(
+        fn add_window_sizerflags<W: WindowMethods, S: SizerFlagsMethods>(
             &self,
             window: Option<&W>,
-            flags: *const c_void,
+            flags: &S,
         ) -> *mut c_void {
             unsafe {
                 let window = match window {
                     Some(r) => r.as_ptr(),
                     None => ptr::null_mut(),
                 };
+                let flags = flags.as_ptr();
                 ffi::wxSizer_Add(self.as_ptr(), window, flags)
             }
         }
@@ -4514,16 +4546,17 @@ pub mod methods {
                 ffi::wxSizer_Add1(self.as_ptr(), window, proportion, flag, border, user_data)
             }
         }
-        fn add_sizer_sizerflags<S: SizerMethods>(
+        fn add_sizer_sizerflags<S: SizerMethods, S2: SizerFlagsMethods>(
             &self,
             sizer: Option<&S>,
-            flags: *const c_void,
+            flags: &S2,
         ) -> *mut c_void {
             unsafe {
                 let sizer = match sizer {
                     Some(r) => r.as_ptr(),
                     None => ptr::null_mut(),
                 };
+                let flags = flags.as_ptr();
                 ffi::wxSizer_Add2(self.as_ptr(), sizer, flags)
             }
         }
@@ -4572,13 +4605,16 @@ pub mod methods {
                 )
             }
         }
-        fn add_int_sizerflags(
+        fn add_int_sizerflags<S: SizerFlagsMethods>(
             &self,
             width: c_int,
             height: c_int,
-            flags: *const c_void,
+            flags: &S,
         ) -> *mut c_void {
-            unsafe { ffi::wxSizer_Add5(self.as_ptr(), width, height, flags) }
+            unsafe {
+                let flags = flags.as_ptr();
+                ffi::wxSizer_Add5(self.as_ptr(), width, height, flags)
+            }
         }
         fn add_sizeritem(&self, item: *mut c_void) -> *mut c_void {
             unsafe { ffi::wxSizer_Add6(self.as_ptr(), item) }
@@ -4774,16 +4810,17 @@ pub mod methods {
         fn layout(&self) {
             unsafe { ffi::wxSizer_Layout(self.as_ptr()) }
         }
-        fn prepend_window_sizerflags<W: WindowMethods>(
+        fn prepend_window_sizerflags<W: WindowMethods, S: SizerFlagsMethods>(
             &self,
             window: Option<&W>,
-            flags: *const c_void,
+            flags: &S,
         ) -> *mut c_void {
             unsafe {
                 let window = match window {
                     Some(r) => r.as_ptr(),
                     None => ptr::null_mut(),
                 };
+                let flags = flags.as_ptr();
                 ffi::wxSizer_Prepend(self.as_ptr(), window, flags)
             }
         }
@@ -4807,16 +4844,17 @@ pub mod methods {
                 ffi::wxSizer_Prepend1(self.as_ptr(), window, proportion, flag, border, user_data)
             }
         }
-        fn prepend_sizer_sizerflags<S: SizerMethods>(
+        fn prepend_sizer_sizerflags<S: SizerMethods, S2: SizerFlagsMethods>(
             &self,
             sizer: Option<&S>,
-            flags: *const c_void,
+            flags: &S2,
         ) -> *mut c_void {
             unsafe {
                 let sizer = match sizer {
                     Some(r) => r.as_ptr(),
                     None => ptr::null_mut(),
                 };
+                let flags = flags.as_ptr();
                 ffi::wxSizer_Prepend2(self.as_ptr(), sizer, flags)
             }
         }
@@ -4865,13 +4903,16 @@ pub mod methods {
                 )
             }
         }
-        fn prepend_int_sizerflags(
+        fn prepend_int_sizerflags<S: SizerFlagsMethods>(
             &self,
             width: c_int,
             height: c_int,
-            flags: *const c_void,
+            flags: &S,
         ) -> *mut c_void {
-            unsafe { ffi::wxSizer_Prepend5(self.as_ptr(), width, height, flags) }
+            unsafe {
+                let flags = flags.as_ptr();
+                ffi::wxSizer_Prepend5(self.as_ptr(), width, height, flags)
+            }
         }
         fn prepend_sizeritem(&self, item: *mut c_void) -> *mut c_void {
             unsafe { ffi::wxSizer_Prepend6(self.as_ptr(), item) }
@@ -5057,6 +5098,140 @@ pub mod methods {
         fn show_items(&self, show: bool) {
             unsafe { ffi::wxSizer_ShowItems(self.as_ptr(), show) }
         }
+    }
+
+    // wxSizerFlags
+    pub trait SizerFlagsMethods: WxRustMethods {
+        fn align(&self, alignment: c_int) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Align(self.as_ptr(), alignment);
+                &self
+            }
+        }
+        fn border_int(&self, direction: c_int, borderinpixels: c_int) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Border(self.as_ptr(), direction, borderinpixels);
+                &self
+            }
+        }
+        fn border(&self, direction: c_int) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Border1(self.as_ptr(), direction);
+                &self
+            }
+        }
+        fn bottom(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Bottom(self.as_ptr());
+                &self
+            }
+        }
+        fn center(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Center(self.as_ptr());
+                &self
+            }
+        }
+        fn centre(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Centre(self.as_ptr());
+                &self
+            }
+        }
+        fn center_horizontal(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_CenterHorizontal(self.as_ptr());
+                &self
+            }
+        }
+        fn center_vertical(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_CenterVertical(self.as_ptr());
+                &self
+            }
+        }
+        fn centre_horizontal(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_CentreHorizontal(self.as_ptr());
+                &self
+            }
+        }
+        fn centre_vertical(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_CentreVertical(self.as_ptr());
+                &self
+            }
+        }
+        fn double_border(&self, direction: c_int) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_DoubleBorder(self.as_ptr(), direction);
+                &self
+            }
+        }
+        fn double_horz_border(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_DoubleHorzBorder(self.as_ptr());
+                &self
+            }
+        }
+        fn expand(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Expand(self.as_ptr());
+                &self
+            }
+        }
+        fn fixed_min_size(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_FixedMinSize(self.as_ptr());
+                &self
+            }
+        }
+        fn reserve_space_even_if_hidden(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_ReserveSpaceEvenIfHidden(self.as_ptr());
+                &self
+            }
+        }
+        fn left(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Left(self.as_ptr());
+                &self
+            }
+        }
+        fn proportion(&self, proportion: c_int) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Proportion(self.as_ptr(), proportion);
+                &self
+            }
+        }
+        fn right(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Right(self.as_ptr());
+                &self
+            }
+        }
+        fn shaped(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Shaped(self.as_ptr());
+                &self
+            }
+        }
+        fn top(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Top(self.as_ptr());
+                &self
+            }
+        }
+        fn triple_border(&self, direction: c_int) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_TripleBorder(self.as_ptr(), direction);
+                &self
+            }
+        }
+        fn get_default_border() -> c_int {
+            unsafe { ffi::wxSizerFlags_GetDefaultBorder() }
+        }
+        // NOT_SUPPORTED: fn GetDefaultBorderFractional()
     }
 
     // wxValidator
@@ -5775,6 +5950,27 @@ impl<const OWNED: bool> SizerIsOwned<OWNED> {
     // BLOCKED: fn wxSizer()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+
+// wxSizerFlags
+wx_class! { SizerFlags =
+    SizerFlagsIsOwned<true>(wxSizerFlags) impl
+        SizerFlagsMethods
+}
+impl<const OWNED: bool> SizerFlagsIsOwned<OWNED> {
+    pub fn new(proportion: c_int) -> SizerFlagsIsOwned<OWNED> {
+        unsafe { SizerFlagsIsOwned(ffi::wxSizerFlags_new(proportion)) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for SizerFlagsIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxSizerFlags_delete(self.0) }
+        }
     }
 }
 

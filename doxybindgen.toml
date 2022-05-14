@@ -22,6 +22,7 @@ wxml_files = [
     'wxml/classwx_rect.xml',
     'wxml/classwx_size.xml',
     'wxml/classwx_sizer.xml',
+    'wxml/classwx_sizer_flags.xml',
     'wxml/classwx_validator.xml',
     'wxml/classwx_static_bitmap.xml',
 ]
@@ -228,6 +229,13 @@ blocklist = [
 ]
 wx31 = [
     'RepositionChildren',
+]
+[types.wxSizerFlags]
+wx31 = [
+    'CenterHorizontal',
+    'CenterVertical',
+    'CentreHorizontal',
+    'CentreVertical',
 ]
 [types.wxValidator]
 returns_owned = [
