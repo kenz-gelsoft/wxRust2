@@ -852,6 +852,29 @@ mod ffi {
         pub fn wxFrame_PushStatusText(self_: *mut c_void, text: *const c_void, number: c_int);
         pub fn wxFrame_PopStatusText(self_: *mut c_void, number: c_int);
 
+        // wxPanel
+        pub fn wxPanel_new() -> *mut c_void;
+        pub fn wxPanel_new1(
+            parent: *mut c_void,
+            id: c_int,
+            pos: *const c_void,
+            size: *const c_void,
+            style: c_long,
+            name: *const c_void,
+        ) -> *mut c_void;
+        // DTOR: pub fn wxPanel_~wxPanel(self_: *mut c_void);
+        pub fn wxPanel_Create(
+            self_: *mut c_void,
+            parent: *mut c_void,
+            id: c_int,
+            pos: *const c_void,
+            size: *const c_void,
+            style: c_long,
+            name: *const c_void,
+        ) -> bool;
+        pub fn wxPanel_OnSysColourChanged(self_: *mut c_void, event: *mut c_void);
+        pub fn wxPanel_SetFocusIgnoringChildren(self_: *mut c_void);
+
         // wxPoint
         pub fn wxPoint_delete(self_: *mut c_void);
         pub fn wxPoint_IsFullySpecified(self_: *const c_void) -> bool;
@@ -3096,6 +3119,17 @@ pub mod methods {
         }
     }
 
+    // wxPanel
+    pub trait PanelMethods: WindowMethods {
+        // DTOR: fn ~wxPanel()
+        fn on_sys_colour_changed(&self, event: *mut c_void) {
+            unsafe { ffi::wxPanel_OnSysColourChanged(self.as_ptr(), event) }
+        }
+        fn set_focus_ignoring_children(&self) {
+            unsafe { ffi::wxPanel_SetFocusIgnoringChildren(self.as_ptr()) }
+        }
+    }
+
     // wxPoint
     pub trait PointMethods: WxRustMethods {
         fn is_fully_specified(&self) -> bool {
@@ -3805,6 +3839,64 @@ impl<const OWNED: bool> TopLevelWindowMethods for FrameIsOwned<OWNED> {
 impl<const OWNED: bool> WindowMethods for FrameIsOwned<OWNED> {
     fn centre(&self, direction: c_int) {
         unsafe { ffi::wxFrame_Centre(self.as_ptr(), direction) }
+    }
+}
+
+// wxPanel
+wx_class! { Panel =
+    PanelIsOwned<true>(wxPanel) impl
+        PanelMethods,
+        // WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> PanelIsOwned<OWNED> {
+    pub fn new_2step() -> PanelIsOwned<OWNED> {
+        unsafe { PanelIsOwned(ffi::wxPanel_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> PanelIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            PanelIsOwned(ffi::wxPanel_new1(parent, id, pos, size, style, name))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> WindowMethods for PanelIsOwned<OWNED> {
+    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            ffi::wxPanel_Create(self.as_ptr(), parent, id, pos, size, style, name)
+        }
     }
 }
 

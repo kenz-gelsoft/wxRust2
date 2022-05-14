@@ -493,6 +493,13 @@ wxTaskBarButton * wxFrame_MSWGetTaskBarButton(wxFrame * self);
 void wxFrame_PushStatusText(wxFrame * self, const wxString * text, int number);
 void wxFrame_PopStatusText(wxFrame * self, int number);
 
+// CLASS: wxPanel
+wxPanel *wxPanel_new();
+wxPanel *wxPanel_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+bool wxPanel_Create(wxPanel * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+void wxPanel_OnSysColourChanged(wxPanel * self, wxSysColourChangedEvent * event);
+void wxPanel_SetFocusIgnoringChildren(wxPanel * self);
+
 // CLASS: wxPoint
 void wxPoint_delete(wxPoint *self);
 bool wxPoint_IsFullySpecified(const wxPoint * self);
