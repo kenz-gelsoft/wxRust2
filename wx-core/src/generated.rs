@@ -4363,13 +4363,6 @@ impl<const OWNED: bool> BoxSizerIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Drop for BoxSizerIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObject_delete(self.0) }
-        }
-    }
-}
 
 // wxCommandEvent
 wx_class! { CommandEvent =
@@ -4865,13 +4858,6 @@ impl<const OWNED: bool> SizerIsOwned<OWNED> {
     // BLOCKED: fn wxSizer()
     pub fn none() -> Option<&'static Self> {
         None
-    }
-}
-impl<const OWNED: bool> Drop for SizerIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObject_delete(self.0) }
-        }
     }
 }
 
