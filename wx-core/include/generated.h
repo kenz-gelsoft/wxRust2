@@ -24,6 +24,9 @@ wxBitmap *wxBitmap_new3(int width, int height, int depth);
 wxBitmap *wxBitmap_new4(const wxSize * sz, int depth);
 wxBitmap *wxBitmap_new5(const char *const * bits);
 wxBitmap *wxBitmap_new7(const wxImage * img, int depth);
+#if wxCHECK_VERSION(3, 1, 0)
+wxBitmap *wxBitmap_new8(const wxCursor * cursor);
+#endif
 bool wxBitmap_CopyFromIcon(wxBitmap * self, const wxIcon * icon);
 bool wxBitmap_Create(wxBitmap * self, int width, int height, int depth);
 bool wxBitmap_Create1(wxBitmap * self, const wxSize * sz, int depth);
@@ -98,6 +101,13 @@ void wxListBox_SetFirstItem(wxListBox * self, int n);
 void wxListBox_SetFirstItem1(wxListBox * self, const wxString * string);
 void wxListBox_EnsureVisible(wxListBox * self, int n);
 bool wxListBox_IsSorted(const wxListBox * self);
+#if wxCHECK_VERSION(3, 1, 0)
+int wxListBox_GetCountPerPage(const wxListBox * self);
+int wxListBox_GetTopItem(const wxListBox * self);
+#endif
+#ifdef __WXMSW__
+void wxListBox_MSWSetTabStops(wxListBox * self, const wxVector< int > * tab_stops);
+#endif
 
 // CLASS: wxWindow
 bool wxWindow_AcceptsFocus(const wxWindow * self);

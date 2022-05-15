@@ -491,11 +491,11 @@ class CxxMethodBinding:
         )
         condition = self.__model.find_condition(self.__cls.conditions)
         if self.__cls.in_condition != condition:
+            if self.__cls.in_condition:
+                yield '#endif'
             self.__cls.in_condition = condition
             if condition:
                 yield condition.get('cxx')
-            else:
-                yield '#endif'
         if is_cc:
             yield '%s {' % (signature,)
         else:

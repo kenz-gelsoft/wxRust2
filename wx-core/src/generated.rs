@@ -51,7 +51,7 @@ mod ffi {
         pub fn wxBitmap_new5(bits: *const c_void) -> *mut c_void;
         // NOT_SUPPORTED: pub fn wxBitmap_new6(name: *const c_void, type_: wxBitmapType) -> *mut c_void;
         pub fn wxBitmap_new7(img: *const c_void, depth: c_int) -> *mut c_void;
-        // BLOCKED: pub fn wxBitmap_new8(cursor: *const c_void) -> *mut c_void;
+        pub fn wxBitmap_new8(cursor: *const c_void) -> *mut c_void;
         // DTOR: pub fn wxBitmap_~wxBitmap(self_: *mut c_void);
         // NOT_SUPPORTED: pub fn wxBitmap_ConvertToImage(self_: *const c_void) -> wxImage;
         pub fn wxBitmap_CopyFromIcon(self_: *mut c_void, icon: *const c_void) -> bool;
@@ -201,9 +201,9 @@ mod ffi {
         pub fn wxListBox_SetFirstItem1(self_: *mut c_void, string: *const c_void);
         pub fn wxListBox_EnsureVisible(self_: *mut c_void, n: c_int);
         pub fn wxListBox_IsSorted(self_: *const c_void) -> bool;
-        // BLOCKED: pub fn wxListBox_GetCountPerPage(self_: *const c_void) -> c_int;
-        // BLOCKED: pub fn wxListBox_GetTopItem(self_: *const c_void) -> c_int;
-        // BLOCKED: pub fn wxListBox_MSWSetTabStops(self_: *mut c_void, tab_stops: *const c_void);
+        pub fn wxListBox_GetCountPerPage(self_: *const c_void) -> c_int;
+        pub fn wxListBox_GetTopItem(self_: *const c_void) -> c_int;
+        pub fn wxListBox_MSWSetTabStops(self_: *mut c_void, tab_stops: *const c_void);
 
         // wxWindow
         pub fn wxWindow_AcceptsFocus(self_: *const c_void) -> bool;
@@ -2003,9 +2003,15 @@ pub mod methods {
         fn is_sorted(&self) -> bool {
             unsafe { ffi::wxListBox_IsSorted(self.as_ptr()) }
         }
-        // BLOCKED: fn GetCountPerPage()
-        // BLOCKED: fn GetTopItem()
-        // BLOCKED: fn MSWSetTabStops()
+        fn get_count_per_page(&self) -> c_int {
+            unsafe { ffi::wxListBox_GetCountPerPage(self.as_ptr()) }
+        }
+        fn get_top_item(&self) -> c_int {
+            unsafe { ffi::wxListBox_GetTopItem(self.as_ptr()) }
+        }
+        fn msw_set_tab_stops(&self, tab_stops: *const c_void) {
+            unsafe { ffi::wxListBox_MSWSetTabStops(self.as_ptr(), tab_stops) }
+        }
     }
 
     // wxWindow
@@ -5615,7 +5621,9 @@ impl<const OWNED: bool> BitmapIsOwned<OWNED> {
     pub fn new_with_image(img: *const c_void, depth: c_int) -> BitmapIsOwned<OWNED> {
         unsafe { BitmapIsOwned(ffi::wxBitmap_new7(img, depth)) }
     }
-    // BLOCKED: fn wxBitmap8()
+    pub fn new_with_cursor(cursor: *const c_void) -> BitmapIsOwned<OWNED> {
+        unsafe { BitmapIsOwned(ffi::wxBitmap_new8(cursor)) }
+    }
     pub fn none() -> Option<&'static Self> {
         None
     }

@@ -55,9 +55,11 @@ blocklist = [
 ]
 [types.wxBitmap]
 blocklist = [
-    'wxBitmap8',
     # doesn't support returning wxList
     'GetHandlers',
+]
+wx31 = [
+    'wxBitmap8',
 ]
 not_windows = [
     # FIXME: FindHandler on MSW requires dynamic_cast in C++ generated code.
@@ -65,9 +67,8 @@ not_windows = [
 ]
 [types.wxGDIObject]
 blocklist = [
+    # abstract class
     'wxGDIObject',
-    'CloneGDIRefData',
-    'CreateGDIRefData',
 ]
 [types.wxObject]
 blocklist = [
@@ -86,10 +87,12 @@ blocklist = [
     'Unbind1',
 ]
 [types.wxListBox]
-blocklist = [
+windows = [
+    'MSWSetTabStops',
+]
+wx31 = [
     'GetCountPerPage',
     'GetTopItem',
-    'MSWSetTabStops',
 ]
 [types.wxWindow]
 blocklist = [
@@ -239,9 +242,8 @@ blocklist = [
 blocklist = [
     # virtual
     'wxSizer',
-    # maybe binding bug, return type didn't generated
+    # returns refs
     'GetChildren',
-    # deprecated
     'GetChildren1',
     # deprecated, use Remove() without args
     'Remove',
