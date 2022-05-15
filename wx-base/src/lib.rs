@@ -1,5 +1,6 @@
 use std::convert::TryInto;
 use std::marker::PhantomData;
+use std::mem;
 use std::os::raw::{c_char, c_int, c_void};
 use std::ptr;
 
@@ -51,8 +52,16 @@ mod ffi {
 pub mod methods {
     pub use super::generated::methods::*;
     use std::os::raw::c_int;
+    use super::*;
+
     pub trait Bindable {
         fn bind<E: EventMethods, F: Fn(&E) + 'static>(&self, event_type: c_int, closure: F);
+    }
+
+    pub trait ArrayStringMethods: WxRustMethods {
+        fn add(&self, s: &str) {
+            unsafe { ffi::wxArrayString_Add(self.as_ptr(), wx_string_from(s)) }
+        }
     }
 }
 
@@ -106,18 +115,20 @@ impl App {
     }
 }
 
-pub struct ArrayString(*mut c_void);
-impl ArrayString {
+wx_class! { ArrayString =
+    ArrayStringIsOwned<true>(wxArrayString) impl
+        ArrayStringMethods
+}
+impl<const OWNED: bool> ArrayStringIsOwned<OWNED> {
     pub fn new() -> Self {
-        unsafe { ArrayString(ffi::wxArrayString_new()) }
-    }
-    pub fn add(&self, s: &str) {
-        unsafe { ffi::wxArrayString_Add(self.0, wx_string_from(s)) }
+        unsafe { ArrayStringIsOwned(ffi::wxArrayString_new()) }
     }
 }
-impl Drop for ArrayString {
+impl<const OWNED: bool> Drop for ArrayStringIsOwned<OWNED> {
     fn drop(&mut self) {
-        unsafe { ffi::wxArrayString_delete(self.0) }
+        if OWNED {
+            unsafe { ffi::wxArrayString_delete(self.0) }
+        }
     }
 }
 

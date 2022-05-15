@@ -1924,13 +1924,19 @@ pub mod methods {
     pub trait ListBoxMethods: ControlMethods {
         // DTOR: fn ~wxListBox()
         // NOT_SUPPORTED: fn Create()
-        fn create<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        fn create<
+            W: WindowMethods,
+            P: PointMethods,
+            S: SizeMethods,
+            A: ArrayStringMethods,
+            V: ValidatorMethods,
+        >(
             &self,
             parent: Option<&W>,
             id: c_int,
             pos: &P,
             size: &S,
-            choices: *const c_void,
+            choices: &A,
             style: c_long,
             validator: &V,
             name: &str,
@@ -1942,6 +1948,7 @@ pub mod methods {
                 };
                 let pos = pos.as_ptr();
                 let size = size.as_ptr();
+                let choices = choices.as_ptr();
                 let validator = validator.as_ptr();
                 let name = wx_base::wx_string_from(name);
                 ffi::wxListBox_Create1(
@@ -5743,12 +5750,18 @@ impl<const OWNED: bool> ListBoxIsOwned<OWNED> {
         unsafe { ListBoxIsOwned(ffi::wxListBox_new()) }
     }
     // NOT_SUPPORTED: fn wxListBox1()
-    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+    pub fn new<
+        W: WindowMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        A: ArrayStringMethods,
+        V: ValidatorMethods,
+    >(
         parent: Option<&W>,
         id: c_int,
         pos: &P,
         size: &S,
-        choices: *const c_void,
+        choices: &A,
         style: c_long,
         validator: &V,
         name: &str,
@@ -5760,6 +5773,7 @@ impl<const OWNED: bool> ListBoxIsOwned<OWNED> {
             };
             let pos = pos.as_ptr();
             let size = size.as_ptr();
+            let choices = choices.as_ptr();
             let validator = validator.as_ptr();
             let name = wx_base::wx_string_from(name);
             ListBoxIsOwned(ffi::wxListBox_new2(

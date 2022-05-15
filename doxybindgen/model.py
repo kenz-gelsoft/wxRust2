@@ -29,6 +29,12 @@ RUST_PRIMITIVES = [
     'c_long',
     'c_uchar',
 ]
+OS_UNSUPPORTED_TYPES = [
+    'wxAccessible',
+]
+MANUAL_BINDINGS = [
+    'wxArrayString',
+]
 
 
 class Class:
@@ -245,10 +251,6 @@ class RustType:
             self.typename,
         )
 
-OS_UNSUPPORTED_TYPES = [
-    'wxAccessible',
-]
-
 
 class ClassInfo:
     def __init__(self, cls):
@@ -282,6 +284,8 @@ class ClassManager:
         self.__by_name = dict
 
     def is_binding_type(self, name):
+        if name in MANUAL_BINDINGS:
+            return True
         assert self.__by_name is not None
         return name in self.__by_name.keys()
     
