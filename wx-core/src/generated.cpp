@@ -18,9 +18,6 @@ wxSize *wxArtProvider_GetSizeHint(const wxArtClient * client, bool platform_defa
 bool wxArtProvider_HasNativeProvider() {
     return wxArtProvider::HasNativeProvider();
 }
-void wxArtProvider_Insert(wxArtProvider * provider) {
-    return wxArtProvider::Insert(provider);
-}
 bool wxArtProvider_Pop() {
     return wxArtProvider::Pop();
 }

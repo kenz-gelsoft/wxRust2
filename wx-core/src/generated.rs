@@ -34,7 +34,7 @@ mod ffi {
         ) -> *mut c_void;
         // NOT_SUPPORTED: pub fn wxArtProvider_GetIconBundle(id: *const c_void, client: *const c_void) -> wxIconBundle;
         pub fn wxArtProvider_HasNativeProvider() -> bool;
-        pub fn wxArtProvider_Insert(provider: *mut c_void);
+        // BLOCKED: pub fn wxArtProvider_Insert(provider: *mut c_void);
         pub fn wxArtProvider_Pop() -> bool;
         pub fn wxArtProvider_Push(provider: *mut c_void);
         pub fn wxArtProvider_PushBack(provider: *mut c_void);
@@ -1655,15 +1655,7 @@ pub mod methods {
         fn has_native_provider() -> bool {
             unsafe { ffi::wxArtProvider_HasNativeProvider() }
         }
-        fn insert<A: ArtProviderMethods>(provider: Option<&A>) {
-            unsafe {
-                let provider = match provider {
-                    Some(r) => r.as_ptr(),
-                    None => ptr::null_mut(),
-                };
-                ffi::wxArtProvider_Insert(provider)
-            }
-        }
+        // BLOCKED: fn Insert()
         fn pop() -> bool {
             unsafe { ffi::wxArtProvider_Pop() }
         }

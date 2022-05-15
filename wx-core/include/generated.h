@@ -11,7 +11,6 @@ wxBitmap *wxArtProvider_GetBitmap(const wxArtID * id, const wxArtClient * client
 wxSize *wxArtProvider_GetNativeSizeHint(const wxArtClient * client);
 wxSize *wxArtProvider_GetSizeHint(const wxArtClient * client, bool platform_default);
 bool wxArtProvider_HasNativeProvider();
-void wxArtProvider_Insert(wxArtProvider * provider);
 bool wxArtProvider_Pop();
 void wxArtProvider_Push(wxArtProvider * provider);
 void wxArtProvider_PushBack(wxArtProvider * provider);

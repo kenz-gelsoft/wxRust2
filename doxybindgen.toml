@@ -46,6 +46,10 @@ cxx = "#ifndef __WXGTK__"
 cxx = "#if wxCHECK_VERSION(3, 1, 0)"
 
 [types]
+[types.wxArtProvider]
+blocklist = [
+    'Insert',
+]
 [types.wxBitmap]
 blocklist = [
     'wxBitmap8',
