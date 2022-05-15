@@ -82,6 +82,20 @@ void wxCommandEvent_SetString(wxCommandEvent * self, const wxString * string);
 
 // CLASS: wxGDIObject
 
+// CLASS: wxListBox
+wxListBox *wxListBox_new();
+void wxListBox_Deselect(wxListBox * self, int n);
+bool wxListBox_SetStringSelection(wxListBox * self, const wxString * s, bool select);
+bool wxListBox_SetStringSelection1(wxListBox * self, const wxString * s);
+int wxListBox_GetSelections(const wxListBox * self, wxArrayInt * selections);
+int wxListBox_HitTest(const wxListBox * self, const wxPoint * point);
+int wxListBox_HitTest1(const wxListBox * self, int x, int y);
+bool wxListBox_IsSelected(const wxListBox * self, int n);
+void wxListBox_SetFirstItem(wxListBox * self, int n);
+void wxListBox_SetFirstItem1(wxListBox * self, const wxString * string);
+void wxListBox_EnsureVisible(wxListBox * self, int n);
+bool wxListBox_IsSorted(const wxListBox * self);
+
 // CLASS: wxWindow
 bool wxWindow_AcceptsFocus(const wxWindow * self);
 bool wxWindow_AcceptsFocusFromKeyboard(const wxWindow * self);

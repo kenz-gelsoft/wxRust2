@@ -8,6 +8,7 @@ wxml_files = [
     'wxml/classwx_event.xml',
     'wxml/classwx_evt_handler.xml',
     'wxml/classwx_g_d_i_object.xml',
+    'wxml/classwx_list_box.xml',
     'wxml/classwx_window.xml',
     'wxml/classwx_control.xml',
     'wxml/classwx_any_button.xml',
@@ -72,6 +73,18 @@ blocklist = [
     'GetClientData',
     'SetClientData',
     'Unbind1',
+]
+[types.wxListBox]
+blocklist = [
+    'GetCountPerPage',
+    'GetTopItem',
+    'MSWSetTabStops',
+    # [wxString]
+    'wxListBox1',
+    'Create',
+    # wxArrayString
+    'wxListBox2',
+    'Create1',
 ]
 [types.wxWindow]
 blocklist = [

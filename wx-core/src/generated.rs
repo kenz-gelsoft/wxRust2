@@ -158,6 +158,34 @@ mod ffi {
         // wxGDIObject
         // BLOCKED: pub fn wxGDIObject_new() -> *mut c_void;
 
+        // wxListBox
+        pub fn wxListBox_new() -> *mut c_void;
+        // BLOCKED: pub fn wxListBox_new1(parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
+        // BLOCKED: pub fn wxListBox_new2(parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, choices: *const c_void, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
+        // DTOR: pub fn wxListBox_~wxListBox(self_: *mut c_void);
+        // BLOCKED: pub fn wxListBox_Create(self_: *mut c_void, parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> bool;
+        // BLOCKED: pub fn wxListBox_Create1(self_: *mut c_void, parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, choices: *const c_void, style: c_long, validator: *const c_void, name: *const c_void) -> bool;
+        pub fn wxListBox_Deselect(self_: *mut c_void, n: c_int);
+        pub fn wxListBox_SetStringSelection(
+            self_: *mut c_void,
+            s: *const c_void,
+            select: bool,
+        ) -> bool;
+        pub fn wxListBox_SetStringSelection1(self_: *mut c_void, s: *const c_void) -> bool;
+        pub fn wxListBox_GetSelections(self_: *const c_void, selections: *mut c_void) -> c_int;
+        pub fn wxListBox_HitTest(self_: *const c_void, point: *const c_void) -> c_int;
+        pub fn wxListBox_HitTest1(self_: *const c_void, x: c_int, y: c_int) -> c_int;
+        // NOT_SUPPORTED: pub fn wxListBox_InsertItems(self_: *mut c_void, n_items: unsigned int, items: *const c_void, pos: unsigned int);
+        // NOT_SUPPORTED: pub fn wxListBox_InsertItems1(self_: *mut c_void, items: *const c_void, pos: unsigned int);
+        pub fn wxListBox_IsSelected(self_: *const c_void, n: c_int) -> bool;
+        pub fn wxListBox_SetFirstItem(self_: *mut c_void, n: c_int);
+        pub fn wxListBox_SetFirstItem1(self_: *mut c_void, string: *const c_void);
+        pub fn wxListBox_EnsureVisible(self_: *mut c_void, n: c_int);
+        pub fn wxListBox_IsSorted(self_: *const c_void) -> bool;
+        // BLOCKED: pub fn wxListBox_GetCountPerPage(self_: *const c_void) -> c_int;
+        // BLOCKED: pub fn wxListBox_GetTopItem(self_: *const c_void) -> c_int;
+        // BLOCKED: pub fn wxListBox_MSWSetTabStops(self_: *mut c_void, tab_stops: *const c_void);
+
         // wxWindow
         pub fn wxWindow_AcceptsFocus(self_: *const c_void) -> bool;
         pub fn wxWindow_AcceptsFocusFromKeyboard(self_: *const c_void) -> bool;
@@ -1872,6 +1900,63 @@ pub mod methods {
 
     // wxGDIObject
     pub trait GDIObjectMethods: ObjectMethods {}
+
+    // wxListBox
+    pub trait ListBoxMethods: ControlMethods {
+        // DTOR: fn ~wxListBox()
+        // BLOCKED: fn Create()
+        // BLOCKED: fn Create1()
+        fn deselect(&self, n: c_int) {
+            unsafe { ffi::wxListBox_Deselect(self.as_ptr(), n) }
+        }
+        fn set_string_selection_bool(&self, s: &str, select: bool) -> bool {
+            unsafe {
+                let s = wx_base::wx_string_from(s);
+                ffi::wxListBox_SetStringSelection(self.as_ptr(), s, select)
+            }
+        }
+        fn set_string_selection(&self, s: &str) -> bool {
+            unsafe {
+                let s = wx_base::wx_string_from(s);
+                ffi::wxListBox_SetStringSelection1(self.as_ptr(), s)
+            }
+        }
+        fn get_selections(&self, selections: *mut c_void) -> c_int {
+            unsafe { ffi::wxListBox_GetSelections(self.as_ptr(), selections) }
+        }
+        fn hit_test_point<P: PointMethods>(&self, point: &P) -> c_int {
+            unsafe {
+                let point = point.as_ptr();
+                ffi::wxListBox_HitTest(self.as_ptr(), point)
+            }
+        }
+        fn hit_test_int(&self, x: c_int, y: c_int) -> c_int {
+            unsafe { ffi::wxListBox_HitTest1(self.as_ptr(), x, y) }
+        }
+        // NOT_SUPPORTED: fn InsertItems()
+        // NOT_SUPPORTED: fn InsertItems1()
+        fn is_selected(&self, n: c_int) -> bool {
+            unsafe { ffi::wxListBox_IsSelected(self.as_ptr(), n) }
+        }
+        fn set_first_item_int(&self, n: c_int) {
+            unsafe { ffi::wxListBox_SetFirstItem(self.as_ptr(), n) }
+        }
+        fn set_first_item_str(&self, string: &str) {
+            unsafe {
+                let string = wx_base::wx_string_from(string);
+                ffi::wxListBox_SetFirstItem1(self.as_ptr(), string)
+            }
+        }
+        fn ensure_visible(&self, n: c_int) {
+            unsafe { ffi::wxListBox_EnsureVisible(self.as_ptr(), n) }
+        }
+        fn is_sorted(&self) -> bool {
+            unsafe { ffi::wxListBox_IsSorted(self.as_ptr()) }
+        }
+        // BLOCKED: fn GetCountPerPage()
+        // BLOCKED: fn GetTopItem()
+        // BLOCKED: fn MSWSetTabStops()
+    }
 
     // wxWindow
     pub trait WindowMethods: EvtHandlerMethods {
@@ -5590,6 +5675,26 @@ impl<const OWNED: bool> Drop for GDIObjectIsOwned<OWNED> {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
         }
+    }
+}
+
+// wxListBox
+wx_class! { ListBox =
+    ListBoxIsOwned<true>(wxListBox) impl
+        ListBoxMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> ListBoxIsOwned<OWNED> {
+    pub fn new() -> ListBoxIsOwned<OWNED> {
+        unsafe { ListBoxIsOwned(ffi::wxListBox_new()) }
+    }
+    // BLOCKED: fn wxListBox1()
+    // BLOCKED: fn wxListBox2()
+    pub fn none() -> Option<&'static Self> {
+        None
     }
 }
 

@@ -209,6 +209,44 @@ void wxCommandEvent_SetString(wxCommandEvent * self, const wxString * string) {
 
 // CLASS: wxGDIObject
 
+// CLASS: wxListBox
+wxListBox *wxListBox_new() {
+    return new wxListBox();
+}
+void wxListBox_Deselect(wxListBox * self, int n) {
+    return self->Deselect(n);
+}
+bool wxListBox_SetStringSelection(wxListBox * self, const wxString * s, bool select) {
+    return self->SetStringSelection(*s, select);
+}
+bool wxListBox_SetStringSelection1(wxListBox * self, const wxString * s) {
+    return self->SetStringSelection(*s);
+}
+int wxListBox_GetSelections(const wxListBox * self, wxArrayInt * selections) {
+    return self->GetSelections(*selections);
+}
+int wxListBox_HitTest(const wxListBox * self, const wxPoint * point) {
+    return self->HitTest(*point);
+}
+int wxListBox_HitTest1(const wxListBox * self, int x, int y) {
+    return self->HitTest(x, y);
+}
+bool wxListBox_IsSelected(const wxListBox * self, int n) {
+    return self->IsSelected(n);
+}
+void wxListBox_SetFirstItem(wxListBox * self, int n) {
+    return self->SetFirstItem(n);
+}
+void wxListBox_SetFirstItem1(wxListBox * self, const wxString * string) {
+    return self->SetFirstItem(*string);
+}
+void wxListBox_EnsureVisible(wxListBox * self, int n) {
+    return self->EnsureVisible(n);
+}
+bool wxListBox_IsSorted(const wxListBox * self) {
+    return self->IsSorted();
+}
+
 // CLASS: wxWindow
 bool wxWindow_AcceptsFocus(const wxWindow * self) {
     return self->AcceptsFocus();
