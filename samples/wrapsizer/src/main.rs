@@ -6,6 +6,12 @@ use wx::methods::*;
 fn main() {
     wx::App::run(|_| {
         let frame = WrapSizerFrame::new();
+        let frame_copy = frame.clone();
+        frame
+            .m_ok_button
+            .bind(wx::RUST_EVT_BUTTON, move |_: &wx::CommandEvent| {
+                frame_copy.on_button()
+            });
         frame.base.show(true);
     });
 }
@@ -14,6 +20,7 @@ fn main() {
 struct WrapSizerFrame {
     base: wx::Frame,
     m_panel: wx::Panel,
+    m_ok_button: wx::Button,
 }
 impl WrapSizerFrame {
     fn new() -> Self {
@@ -36,8 +43,10 @@ impl WrapSizerFrame {
             "",
         );
 
+        // Root sizer, vertical
         let sizer_root = wx::BoxSizer::new(wx::VERTICAL);
 
+        // Some toolbars in a wrap sizer
         let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
         sizer_top.add_window_int(
             Some(&Self::make_tool_bar(&panel)),
@@ -130,12 +139,34 @@ impl WrapSizerFrame {
             wx::SizerFlags::new(100).expand().border(wx::ALL),
         );
 
+        // OK Button
+        let ok_button = wx::Button::new(
+            Some(&panel),
+            wx::ID_OK,
+            "",
+            &wx::Point::default(),
+            &wx::Size::default(),
+            0,
+            &wx::Validator::default(),
+            "",
+        );
+        sizer_root.add_window_sizerflags(
+            Some(&ok_button),
+            wx::SizerFlags::new(0).centre().double_border(wx::ALL),
+        );
+
+        // Set sizer for the panel
         panel.set_sizer(Some(&sizer_root), true);
 
         WrapSizerFrame {
             base: frame,
             m_panel: panel,
+            m_ok_button: ok_button,
         }
+    }
+
+    fn on_button(&self) {
+        self.base.close(false);
     }
 
     fn add_tool_bar_button(tb: &wx::ToolBar, label: &str, artid: &str) {
