@@ -113,9 +113,11 @@ void wxBitmap_AddHandler(wxBitmapHandler * handler) {
 void wxBitmap_CleanUpHandlers() {
     return wxBitmap::CleanUpHandlers();
 }
+#ifndef __WXMSW__
 wxBitmapHandler * wxBitmap_FindHandler(const wxString * name) {
     return wxBitmap::FindHandler(*name);
 }
+#endif
 void wxBitmap_InitStandardHandlers() {
     return wxBitmap::InitStandardHandlers();
 }

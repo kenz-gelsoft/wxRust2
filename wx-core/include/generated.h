@@ -44,7 +44,9 @@ void wxBitmap_SetPalette(wxBitmap * self, const wxPalette * palette);
 void wxBitmap_SetWidth(wxBitmap * self, int width);
 void wxBitmap_AddHandler(wxBitmapHandler * handler);
 void wxBitmap_CleanUpHandlers();
+#ifndef __WXMSW__
 wxBitmapHandler * wxBitmap_FindHandler(const wxString * name);
+#endif
 void wxBitmap_InitStandardHandlers();
 void wxBitmap_InsertHandler(wxBitmapHandler * handler);
 bool wxBitmap_RemoveHandler(const wxString * name);

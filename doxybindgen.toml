@@ -36,6 +36,9 @@ wxml_files = [
 [conditions.windows]
 cxx = "#ifdef __WXMSW__"
 
+[conditions.not_windows]
+cxx = "#ifndef __WXMSW__"
+
 [conditions.mac]
 cxx = "#ifdef __WXOSX__"
 
@@ -55,6 +58,10 @@ blocklist = [
     'wxBitmap8',
     # doesn't support returning wxList
     'GetHandlers',
+]
+not_windows = [
+    # FIXME: FindHandler on MSW requires dynamic_cast in C++ generated code.
+    'FindHandler',
 ]
 [types.wxGDIObject]
 blocklist = [
