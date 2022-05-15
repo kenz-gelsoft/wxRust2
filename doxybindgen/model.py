@@ -78,7 +78,8 @@ class Method:
     def __init__(self, cls, e):
         self.is_public = e.get('prot') == 'public'
         self.is_static = e.get('static') == 'yes'
-        self.returns = CxxType(cls.manager, e.find('type'))
+        is_array = False # TODO: handle returning array in future
+        self.returns = CxxType(cls.manager, e.find('type'), is_array)
         self.cls = cls
         self.__name = e.findtext('name')
         self.overload_index = self._overload_index()
@@ -89,7 +90,8 @@ class Method:
             self.returns = RustType(cls.name, self.const)
         self.params = []
         for param in e.findall('param'):
-            ptype = CxxType(cls.manager, param.find('type'))
+            is_array = param.find('array') is not None
+            ptype = CxxType(cls.manager, param.find('type'), is_array)
             pname = param.findtext('declname')
             self.params.append(Param(ptype, pname))
         is_virtual = e.get('virt') == 'virtual'
@@ -302,9 +304,13 @@ class ClassManager:
 
 
 class CxxType:
-    def __init__(self, manager, e):
+    def __init__(self, manager, e, is_array):
         self.__manager = manager
         self.__srctype = ''.join(e.itertext())
+        self.is_array = is_array
+        # s = self.__srctype
+        # if is_array:
+        #     s = '[%s]' % (s,)
         # print('parsing: |%s|' % (s,))
         matched = re.match(r'(const )?([^*&]*)([*&]+)?', self.__srctype)
         self.typename = None
@@ -407,6 +413,8 @@ class CxxType:
 
     def not_supported(self):
         if self.typename in OS_UNSUPPORTED_TYPES:
+            return True
+        if self.is_array:
             return True
         if self.is_str():
             return False

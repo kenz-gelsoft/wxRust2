@@ -213,6 +213,12 @@ void wxCommandEvent_SetString(wxCommandEvent * self, const wxString * string) {
 wxListBox *wxListBox_new() {
     return new wxListBox();
 }
+wxListBox *wxListBox_new2(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name) {
+    return new wxListBox(parent, id, *pos, *size, *choices, style, *validator, *name);
+}
+bool wxListBox_Create1(wxListBox * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, *pos, *size, *choices, style, *validator, *name);
+}
 void wxListBox_Deselect(wxListBox * self, int n) {
     return self->Deselect(n);
 }

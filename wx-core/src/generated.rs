@@ -160,11 +160,30 @@ mod ffi {
 
         // wxListBox
         pub fn wxListBox_new() -> *mut c_void;
-        // BLOCKED: pub fn wxListBox_new1(parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
-        // BLOCKED: pub fn wxListBox_new2(parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, choices: *const c_void, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxListBox_new1(parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
+        pub fn wxListBox_new2(
+            parent: *mut c_void,
+            id: c_int,
+            pos: *const c_void,
+            size: *const c_void,
+            choices: *const c_void,
+            style: c_long,
+            validator: *const c_void,
+            name: *const c_void,
+        ) -> *mut c_void;
         // DTOR: pub fn wxListBox_~wxListBox(self_: *mut c_void);
-        // BLOCKED: pub fn wxListBox_Create(self_: *mut c_void, parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> bool;
-        // BLOCKED: pub fn wxListBox_Create1(self_: *mut c_void, parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, choices: *const c_void, style: c_long, validator: *const c_void, name: *const c_void) -> bool;
+        // NOT_SUPPORTED: pub fn wxListBox_Create(self_: *mut c_void, parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> bool;
+        pub fn wxListBox_Create1(
+            self_: *mut c_void,
+            parent: *mut c_void,
+            id: c_int,
+            pos: *const c_void,
+            size: *const c_void,
+            choices: *const c_void,
+            style: c_long,
+            validator: *const c_void,
+            name: *const c_void,
+        ) -> bool;
         pub fn wxListBox_Deselect(self_: *mut c_void, n: c_int);
         pub fn wxListBox_SetStringSelection(
             self_: *mut c_void,
@@ -1904,8 +1923,40 @@ pub mod methods {
     // wxListBox
     pub trait ListBoxMethods: ControlMethods {
         // DTOR: fn ~wxListBox()
-        // BLOCKED: fn Create()
-        // BLOCKED: fn Create1()
+        // NOT_SUPPORTED: fn Create()
+        fn create<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+            &self,
+            parent: Option<&W>,
+            id: c_int,
+            pos: &P,
+            size: &S,
+            choices: *const c_void,
+            style: c_long,
+            validator: &V,
+            name: &str,
+        ) -> bool {
+            unsafe {
+                let parent = match parent {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let pos = pos.as_ptr();
+                let size = size.as_ptr();
+                let validator = validator.as_ptr();
+                let name = wx_base::wx_string_from(name);
+                ffi::wxListBox_Create1(
+                    self.as_ptr(),
+                    parent,
+                    id,
+                    pos,
+                    size,
+                    choices,
+                    style,
+                    validator,
+                    name,
+                )
+            }
+        }
         fn deselect(&self, n: c_int) {
             unsafe { ffi::wxListBox_Deselect(self.as_ptr(), n) }
         }
@@ -5688,11 +5739,34 @@ wx_class! { ListBox =
         ObjectMethods
 }
 impl<const OWNED: bool> ListBoxIsOwned<OWNED> {
-    pub fn new() -> ListBoxIsOwned<OWNED> {
+    pub fn new_2step() -> ListBoxIsOwned<OWNED> {
         unsafe { ListBoxIsOwned(ffi::wxListBox_new()) }
     }
-    // BLOCKED: fn wxListBox1()
-    // BLOCKED: fn wxListBox2()
+    // NOT_SUPPORTED: fn wxListBox1()
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        choices: *const c_void,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> ListBoxIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            ListBoxIsOwned(ffi::wxListBox_new2(
+                parent, id, pos, size, choices, style, validator, name,
+            ))
+        }
+    }
     pub fn none() -> Option<&'static Self> {
         None
     }

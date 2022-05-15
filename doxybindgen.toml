@@ -79,12 +79,6 @@ blocklist = [
     'GetCountPerPage',
     'GetTopItem',
     'MSWSetTabStops',
-    # [wxString]
-    'wxListBox1',
-    'Create',
-    # wxArrayString
-    'wxListBox2',
-    'Create1',
 ]
 [types.wxWindow]
 blocklist = [

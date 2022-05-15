@@ -84,6 +84,8 @@ void wxCommandEvent_SetString(wxCommandEvent * self, const wxString * string);
 
 // CLASS: wxListBox
 wxListBox *wxListBox_new();
+wxListBox *wxListBox_new2(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
+bool wxListBox_Create1(wxListBox * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
 void wxListBox_Deselect(wxListBox * self, int n);
 bool wxListBox_SetStringSelection(wxListBox * self, const wxString * s, bool select);
 bool wxListBox_SetStringSelection1(wxListBox * self, const wxString * s);
