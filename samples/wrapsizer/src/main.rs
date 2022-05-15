@@ -33,7 +33,6 @@ impl WrapSizerFrame {
             wx::DEFAULT_FRAME_STYLE,
             "",
         );
-
         let panel = wx::Panel::new(
             Some(&frame),
             wx::ID_ANY,
@@ -42,14 +41,33 @@ impl WrapSizerFrame {
             0,
             "",
         );
+        let ok_button = wx::Button::new(
+            Some(&panel),
+            wx::ID_OK,
+            "",
+            &wx::Point::default(),
+            &wx::Size::default(),
+            0,
+            &wx::Validator::default(),
+            "",
+        );
+        let new_frame = WrapSizerFrame {
+            base: frame,
+            m_panel: panel,
+            m_ok_button: ok_button,
+        };
+        new_frame.on_create();
+        new_frame
+    }
 
+    fn on_create(&self) {
         // Root sizer, vertical
         let sizer_root = wx::BoxSizer::new(wx::VERTICAL);
 
         // Some toolbars in a wrap sizer
         let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
         sizer_top.add_window_int(
-            Some(&Self::make_tool_bar(&panel)),
+            Some(&Self::make_tool_bar(&self.m_panel)),
             0,
             0,
             0,
@@ -57,7 +75,7 @@ impl WrapSizerFrame {
         );
         sizer_top.add_int_int(20, 1, 0, 0, 0, wx::Object::none());
         sizer_top.add_window_int(
-            Some(&Self::make_tool_bar(&panel)),
+            Some(&Self::make_tool_bar(&self.m_panel)),
             0,
             0,
             0,
@@ -65,7 +83,7 @@ impl WrapSizerFrame {
         );
         sizer_top.add_int_int(20, 1, 0, 0, 0, wx::Object::none());
         sizer_top.add_window_int(
-            Some(&Self::make_tool_bar(&panel)),
+            Some(&Self::make_tool_bar(&self.m_panel)),
             0,
             0,
             0,
@@ -78,11 +96,11 @@ impl WrapSizerFrame {
 
         // A number of checkboxes inside a wrap sizer
         let sizer_mid =
-            wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&panel), "With check-boxes");
+            wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&self.m_panel), "With check-boxes");
         let sizer_mid_wrap = wx::WrapSizer::new(wx::HORIZONTAL, wx::WRAPSIZER_DEFAULT_FLAGS);
         for n_check in 0..6 {
             let chk = wx::CheckBox::new(
-                Some(&panel),
+                Some(&self.m_panel),
                 wx::ID_ANY,
                 &format!("Option {}", n_check),
                 &wx::Point::default(),
@@ -102,14 +120,17 @@ impl WrapSizerFrame {
         );
 
         // A shaped item inside a box sizer
-        let sizer_bottom =
-            wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&panel), "With wxSHAPED item");
+        let sizer_bottom = wx::StaticBoxSizer::new_with_int(
+            wx::VERTICAL,
+            Some(&self.m_panel),
+            "With wxSHAPED item",
+        );
         let sizer_bottom_box = wx::BoxSizer::new(wx::HORIZONTAL);
         sizer_bottom
             .add_sizer_sizerflags(Some(&sizer_bottom_box), wx::SizerFlags::new(100).expand());
         sizer_bottom_box.add_window_sizerflags(
             Some(&wx::ListBox::new(
-                Some(&panel),
+                Some(&self.m_panel),
                 wx::ID_ANY,
                 &wx::Point::new_with_int(0, 0),
                 &wx::Size::new_with_int(70, 70),
@@ -123,7 +144,7 @@ impl WrapSizerFrame {
         sizer_bottom_box.add_spacer(10);
         sizer_bottom_box.add_window_sizerflags(
             Some(&wx::CheckBox::new(
-                Some(&panel),
+                Some(&self.m_panel),
                 wx::ID_ANY,
                 "A much longer option...",
                 &wx::Point::default(),
@@ -140,29 +161,13 @@ impl WrapSizerFrame {
         );
 
         // OK Button
-        let ok_button = wx::Button::new(
-            Some(&panel),
-            wx::ID_OK,
-            "",
-            &wx::Point::default(),
-            &wx::Size::default(),
-            0,
-            &wx::Validator::default(),
-            "",
-        );
         sizer_root.add_window_sizerflags(
-            Some(&ok_button),
+            Some(&self.m_ok_button),
             wx::SizerFlags::new(0).centre().double_border(wx::ALL),
         );
 
         // Set sizer for the panel
-        panel.set_sizer(Some(&sizer_root), true);
-
-        WrapSizerFrame {
-            base: frame,
-            m_panel: panel,
-            m_ok_button: ok_button,
-        }
+        self.m_panel.set_sizer(Some(&sizer_root), true);
     }
 
     fn on_button(&self) {
