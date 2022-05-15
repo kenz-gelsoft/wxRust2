@@ -71,12 +71,11 @@ impl WrapSizerFrame {
         let sizer_mid =
             wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&panel), "With check-boxes");
         let sizer_mid_wrap = wx::WrapSizer::new(wx::HORIZONTAL, wx::WRAPSIZER_DEFAULT_FLAGS);
-        for n in 0..6 {
-            let checked = n % 2 == 1;
+        for n_check in 0..6 {
             let chk = wx::CheckBox::new(
                 Some(&panel),
                 wx::ID_ANY,
-                &format!("Option {}", checked),
+                &format!("Option {}", n_check),
                 &wx::Point::default(),
                 &wx::Size::default(),
                 0,
@@ -90,6 +89,44 @@ impl WrapSizerFrame {
         sizer_mid.add_sizer_sizerflags(Some(&sizer_mid_wrap), wx::SizerFlags::new(100).expand());
         sizer_root.add_sizer_sizerflags(
             Some(&sizer_mid),
+            wx::SizerFlags::new(100).expand().border(wx::ALL),
+        );
+
+        // A shaped item inside a box sizer
+        let sizer_bottom =
+            wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&panel), "With wxSHAPED item");
+        let sizer_bottom_box = wx::BoxSizer::new(wx::HORIZONTAL);
+        sizer_bottom
+            .add_sizer_sizerflags(Some(&sizer_bottom_box), wx::SizerFlags::new(100).expand());
+        sizer_bottom_box.add_window_sizerflags(
+            Some(&wx::ListBox::new(
+                Some(&panel),
+                wx::ID_ANY,
+                &wx::Point::new_with_int(0, 0),
+                &wx::Size::new_with_int(70, 70),
+                &wx::ArrayString::new(),
+                0,
+                &wx::Validator::default(),
+                "",
+            )),
+            wx::SizerFlags::new(0).expand().shaped(),
+        );
+        sizer_bottom_box.add_spacer(10);
+        sizer_bottom_box.add_window_sizerflags(
+            Some(&wx::CheckBox::new(
+                Some(&panel),
+                wx::ID_ANY,
+                "A much longer option...",
+                &wx::Point::default(),
+                &wx::Size::default(),
+                0,
+                &wx::Validator::default(),
+                "",
+            )),
+            wx::SizerFlags::new(0).border(wx::ALL),
+        );
+        sizer_root.add_sizer_sizerflags(
+            Some(&sizer_bottom),
             wx::SizerFlags::new(100).expand().border(wx::ALL),
         );
 

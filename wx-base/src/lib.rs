@@ -51,8 +51,8 @@ mod ffi {
 #[doc(hidden)]
 pub mod methods {
     pub use super::generated::methods::*;
-    use std::os::raw::c_int;
     use super::*;
+    use std::os::raw::c_int;
 
     pub trait Bindable {
         fn bind<E: EventMethods, F: Fn(&E) + 'static>(&self, event_type: c_int, closure: F);
