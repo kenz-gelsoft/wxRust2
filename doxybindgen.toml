@@ -1,8 +1,14 @@
 wxml_files = [
     'wxml/classwx_object.xml',
+    'wxml/classwx_art_provider.xml',
+    'wxml/classwx_bitmap.xml',
+    'wxml/classwx_box_sizer.xml',
+    'wxml/classwx_check_box.xml',
     'wxml/classwx_command_event.xml',
     'wxml/classwx_event.xml',
     'wxml/classwx_evt_handler.xml',
+    'wxml/classwx_g_d_i_object.xml',
+    'wxml/classwx_list_box.xml',
     'wxml/classwx_window.xml',
     'wxml/classwx_control.xml',
     'wxml/classwx_any_button.xml',
@@ -10,19 +16,28 @@ wxml_files = [
     'wxml/classwx_menu.xml',
     'wxml/classwx_menu_bar.xml',
     'wxml/classwx_non_owned_window.xml',
+    'wxml/classwx_tool_bar.xml',
     'wxml/classwx_top_level_window.xml',
     'wxml/classwx_frame.xml',
+    'wxml/classwx_panel.xml',
     'wxml/classwx_point.xml',
     'wxml/classwx_rect.xml',
     'wxml/classwx_size.xml',
+    'wxml/classwx_sizer.xml',
+    'wxml/classwx_sizer_flags.xml',
+    'wxml/classwx_static_box_sizer.xml',
     'wxml/classwx_validator.xml',
     'wxml/classwx_static_bitmap.xml',
+    'wxml/classwx_wrap_sizer.xml',
 ]
 
 [conditions]
 
 [conditions.windows]
 cxx = "#ifdef __WXMSW__"
+
+[conditions.not_windows]
+cxx = "#ifndef __WXMSW__"
 
 [conditions.mac]
 cxx = "#ifdef __WXOSX__"
@@ -34,6 +49,27 @@ cxx = "#ifndef __WXGTK__"
 cxx = "#if wxCHECK_VERSION(3, 1, 0)"
 
 [types]
+[types.wxArtProvider]
+blocklist = [
+    'Insert',
+]
+[types.wxBitmap]
+blocklist = [
+    # doesn't support returning wxList
+    'GetHandlers',
+]
+wx31 = [
+    'wxBitmap8',
+]
+not_windows = [
+    # FIXME: FindHandler on MSW requires dynamic_cast in C++ generated code.
+    'FindHandler',
+]
+[types.wxGDIObject]
+blocklist = [
+    # abstract class
+    'wxGDIObject',
+]
 [types.wxObject]
 blocklist = [
     'operator delete',
@@ -49,6 +85,14 @@ blocklist = [
     'GetClientData',
     'SetClientData',
     'Unbind1',
+]
+[types.wxListBox]
+windows = [
+    'MSWSetTabStops',
+]
+wx31 = [
+    'GetCountPerPage',
+    'GetTopItem',
 ]
 [types.wxWindow]
 blocklist = [
@@ -108,6 +152,11 @@ mac = [
 ]
 [types.wxNonOwnedWindow]
 library = 'core'
+[types.wxToolBar]
+blocklist = [
+    # const getter
+    'GetToolByPos',
+]
 [types.wxTopLevelWindow]
 windows = [
     'MSWGetSystemMenu',
@@ -188,6 +237,28 @@ blocklist = [
     'operator*=',
     # Didn't support
     'Scale',
+]
+[types.wxSizer]
+blocklist = [
+    # virtual
+    'wxSizer',
+    # returns refs
+    'GetChildren',
+    'GetChildren1',
+    # deprecated, use Remove() without args
+    'Remove',
+    # deprecated, use FitInside()
+    'SetVirtualSizeHints',
+]
+wx31 = [
+    'RepositionChildren',
+]
+[types.wxSizerFlags]
+wx31 = [
+    'CenterHorizontal',
+    'CenterVertical',
+    'CentreHorizontal',
+    'CentreVertical',
 ]
 [types.wxValidator]
 returns_owned = [

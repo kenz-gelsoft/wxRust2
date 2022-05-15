@@ -1,5 +1,6 @@
 use std::convert::TryInto;
 use std::marker::PhantomData;
+use std::mem;
 use std::os::raw::{c_char, c_int, c_void};
 use std::ptr;
 
@@ -33,6 +34,11 @@ mod ffi {
         pub fn wxString_UTF8Data(self_: *mut c_void) -> *mut c_uchar;
         pub fn wxString_Len(self_: *mut c_void) -> usize;
 
+        // ArrayString
+        pub fn wxArrayString_new() -> *mut c_void;
+        pub fn wxArrayString_delete(self_: *mut c_void);
+        pub fn wxArrayString_Add(self_: *mut c_void, s: *const c_void);
+
         pub fn wxRustEntry(argc: *mut c_int, argv: *mut *mut c_char) -> c_int;
 
         // WeakRef
@@ -45,9 +51,17 @@ mod ffi {
 #[doc(hidden)]
 pub mod methods {
     pub use super::generated::methods::*;
+    use super::*;
     use std::os::raw::c_int;
+
     pub trait Bindable {
         fn bind<E: EventMethods, F: Fn(&E) + 'static>(&self, event_type: c_int, closure: F);
+    }
+
+    pub trait ArrayStringMethods: WxRustMethods {
+        fn add(&self, s: &str) {
+            unsafe { ffi::wxArrayString_Add(self.as_ptr(), wx_string_from(s)) }
+        }
     }
 }
 
@@ -98,6 +112,23 @@ impl App {
     pub fn run<F: Fn(*mut c_void) + 'static>(closure: F) {
         Self::on_init(closure);
         entry();
+    }
+}
+
+wx_class! { ArrayString =
+    ArrayStringIsOwned<true>(wxArrayString) impl
+        ArrayStringMethods
+}
+impl<const OWNED: bool> ArrayStringIsOwned<OWNED> {
+    pub fn new() -> Self {
+        unsafe { ArrayStringIsOwned(ffi::wxArrayString_new()) }
+    }
+}
+impl<const OWNED: bool> Drop for ArrayStringIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxArrayString_delete(self.0) }
+        }
     }
 }
 

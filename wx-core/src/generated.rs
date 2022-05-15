@@ -18,6 +18,127 @@ mod ffi {
 
     extern "C" {
 
+        // wxArtProvider
+        // DTOR: pub fn wxArtProvider_~wxArtProvider(self_: *mut c_void);
+        pub fn wxArtProvider_Delete(provider: *mut c_void) -> bool;
+        pub fn wxArtProvider_GetBitmap(
+            id: *const c_void,
+            client: *const c_void,
+            size: *const c_void,
+        ) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxArtProvider_GetIcon(id: *const c_void, client: *const c_void, size: *const c_void) -> wxIcon;
+        pub fn wxArtProvider_GetNativeSizeHint(client: *const c_void) -> *mut c_void;
+        pub fn wxArtProvider_GetSizeHint(
+            client: *const c_void,
+            platform_default: bool,
+        ) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxArtProvider_GetIconBundle(id: *const c_void, client: *const c_void) -> wxIconBundle;
+        pub fn wxArtProvider_HasNativeProvider() -> bool;
+        // BLOCKED: pub fn wxArtProvider_Insert(provider: *mut c_void);
+        pub fn wxArtProvider_Pop() -> bool;
+        pub fn wxArtProvider_Push(provider: *mut c_void);
+        pub fn wxArtProvider_PushBack(provider: *mut c_void);
+        pub fn wxArtProvider_Remove(provider: *mut c_void) -> bool;
+        pub fn wxArtProvider_GetMessageBoxIconId(flags: c_int) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxArtProvider_GetMessageBoxIcon(flags: c_int) -> wxIcon;
+
+        // wxBitmap
+        pub fn wxBitmap_new() -> *mut c_void;
+        pub fn wxBitmap_new1(bitmap: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxBitmap_new2(bits: char, width: c_int, height: c_int, depth: c_int) -> *mut c_void;
+        pub fn wxBitmap_new3(width: c_int, height: c_int, depth: c_int) -> *mut c_void;
+        pub fn wxBitmap_new4(sz: *const c_void, depth: c_int) -> *mut c_void;
+        pub fn wxBitmap_new5(bits: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxBitmap_new6(name: *const c_void, type_: wxBitmapType) -> *mut c_void;
+        pub fn wxBitmap_new7(img: *const c_void, depth: c_int) -> *mut c_void;
+        pub fn wxBitmap_new8(cursor: *const c_void) -> *mut c_void;
+        // DTOR: pub fn wxBitmap_~wxBitmap(self_: *mut c_void);
+        // NOT_SUPPORTED: pub fn wxBitmap_ConvertToImage(self_: *const c_void) -> wxImage;
+        pub fn wxBitmap_CopyFromIcon(self_: *mut c_void, icon: *const c_void) -> bool;
+        pub fn wxBitmap_Create(
+            self_: *mut c_void,
+            width: c_int,
+            height: c_int,
+            depth: c_int,
+        ) -> bool;
+        pub fn wxBitmap_Create1(self_: *mut c_void, sz: *const c_void, depth: c_int) -> bool;
+        pub fn wxBitmap_Create2(
+            self_: *mut c_void,
+            width: c_int,
+            height: c_int,
+            dc: *const c_void,
+        ) -> bool;
+        pub fn wxBitmap_CreateScaled(
+            self_: *mut c_void,
+            width: c_int,
+            height: c_int,
+            depth: c_int,
+            logical_scale: c_double,
+        ) -> bool;
+        pub fn wxBitmap_GetDepth(self_: *const c_void) -> c_int;
+        pub fn wxBitmap_GetHeight(self_: *const c_void) -> c_int;
+        pub fn wxBitmap_GetMask(self_: *const c_void) -> *mut c_void;
+        pub fn wxBitmap_GetPalette(self_: *const c_void) -> *mut c_void;
+        pub fn wxBitmap_GetSubBitmap(self_: *const c_void, rect: *const c_void) -> *mut c_void;
+        pub fn wxBitmap_GetSize(self_: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxBitmap_ConvertToDisabled(self_: *const c_void, brightness: unsigned char) -> *mut c_void;
+        pub fn wxBitmap_GetWidth(self_: *const c_void) -> c_int;
+        pub fn wxBitmap_IsOk(self_: *const c_void) -> bool;
+        // NOT_SUPPORTED: pub fn wxBitmap_LoadFile(self_: *mut c_void, name: *const c_void, type_: wxBitmapType) -> bool;
+        // NOT_SUPPORTED: pub fn wxBitmap_SaveFile(self_: *const c_void, name: *const c_void, type_: wxBitmapType, palette: *const c_void) -> bool;
+        pub fn wxBitmap_SetDepth(self_: *mut c_void, depth: c_int);
+        pub fn wxBitmap_SetHeight(self_: *mut c_void, height: c_int);
+        pub fn wxBitmap_SetMask(self_: *mut c_void, mask: *mut c_void);
+        pub fn wxBitmap_SetPalette(self_: *mut c_void, palette: *const c_void);
+        pub fn wxBitmap_SetWidth(self_: *mut c_void, width: c_int);
+        pub fn wxBitmap_AddHandler(handler: *mut c_void);
+        pub fn wxBitmap_CleanUpHandlers();
+        pub fn wxBitmap_FindHandler(name: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxBitmap_FindHandler1(extension: *const c_void, bitmap_type: wxBitmapType) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxBitmap_FindHandler2(bitmap_type: wxBitmapType) -> *mut c_void;
+        // BLOCKED: pub fn wxBitmap_GetHandlers() -> *mut c_void;
+        pub fn wxBitmap_InitStandardHandlers();
+        pub fn wxBitmap_InsertHandler(handler: *mut c_void);
+        // NOT_SUPPORTED: pub fn wxBitmap_NewFromPNGData(data: *const c_void, size: size_t) -> *mut c_void;
+        pub fn wxBitmap_RemoveHandler(name: *const c_void) -> bool;
+
+        // wxBoxSizer
+        pub fn wxBoxSizer_new(orient: c_int) -> *mut c_void;
+        pub fn wxBoxSizer_GetOrientation(self_: *const c_void) -> c_int;
+        pub fn wxBoxSizer_SetOrientation(self_: *mut c_void, orient: c_int);
+
+        // wxCheckBox
+        pub fn wxCheckBox_new() -> *mut c_void;
+        pub fn wxCheckBox_new1(
+            parent: *mut c_void,
+            id: c_int,
+            label: *const c_void,
+            pos: *const c_void,
+            size: *const c_void,
+            style: c_long,
+            validator: *const c_void,
+            name: *const c_void,
+        ) -> *mut c_void;
+        // DTOR: pub fn wxCheckBox_~wxCheckBox(self_: *mut c_void);
+        pub fn wxCheckBox_Create(
+            self_: *mut c_void,
+            parent: *mut c_void,
+            id: c_int,
+            label: *const c_void,
+            pos: *const c_void,
+            size: *const c_void,
+            style: c_long,
+            validator: *const c_void,
+            name: *const c_void,
+        ) -> bool;
+        pub fn wxCheckBox_GetValue(self_: *const c_void) -> bool;
+        // NOT_SUPPORTED: pub fn wxCheckBox_Get3StateValue(self_: *const c_void) -> wxCheckBoxState;
+        pub fn wxCheckBox_Is3State(self_: *const c_void) -> bool;
+        pub fn wxCheckBox_Is3rdStateAllowedForUser(self_: *const c_void) -> bool;
+        pub fn wxCheckBox_IsChecked(self_: *const c_void) -> bool;
+        pub fn wxCheckBox_SetValue(self_: *mut c_void, state: bool);
+        // NOT_SUPPORTED: pub fn wxCheckBox_Set3StateValue(self_: *mut c_void, state: wxCheckBoxState);
+
         // wxCommandEvent
         // NOT_SUPPORTED: pub fn wxCommandEvent_new(command_event_type: wxEventType, id: c_int) -> *mut c_void;
         pub fn wxCommandEvent_GetClientData(self_: *const c_void) -> *mut c_void;
@@ -33,6 +154,56 @@ mod ffi {
         pub fn wxCommandEvent_SetExtraLong(self_: *mut c_void, extra_long: c_long);
         pub fn wxCommandEvent_SetInt(self_: *mut c_void, int_command: c_int);
         pub fn wxCommandEvent_SetString(self_: *mut c_void, string: *const c_void);
+
+        // wxGDIObject
+        // BLOCKED: pub fn wxGDIObject_new() -> *mut c_void;
+
+        // wxListBox
+        pub fn wxListBox_new() -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxListBox_new1(parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
+        pub fn wxListBox_new2(
+            parent: *mut c_void,
+            id: c_int,
+            pos: *const c_void,
+            size: *const c_void,
+            choices: *const c_void,
+            style: c_long,
+            validator: *const c_void,
+            name: *const c_void,
+        ) -> *mut c_void;
+        // DTOR: pub fn wxListBox_~wxListBox(self_: *mut c_void);
+        // NOT_SUPPORTED: pub fn wxListBox_Create(self_: *mut c_void, parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> bool;
+        pub fn wxListBox_Create1(
+            self_: *mut c_void,
+            parent: *mut c_void,
+            id: c_int,
+            pos: *const c_void,
+            size: *const c_void,
+            choices: *const c_void,
+            style: c_long,
+            validator: *const c_void,
+            name: *const c_void,
+        ) -> bool;
+        pub fn wxListBox_Deselect(self_: *mut c_void, n: c_int);
+        pub fn wxListBox_SetStringSelection(
+            self_: *mut c_void,
+            s: *const c_void,
+            select: bool,
+        ) -> bool;
+        pub fn wxListBox_SetStringSelection1(self_: *mut c_void, s: *const c_void) -> bool;
+        pub fn wxListBox_GetSelections(self_: *const c_void, selections: *mut c_void) -> c_int;
+        pub fn wxListBox_HitTest(self_: *const c_void, point: *const c_void) -> c_int;
+        pub fn wxListBox_HitTest1(self_: *const c_void, x: c_int, y: c_int) -> c_int;
+        // NOT_SUPPORTED: pub fn wxListBox_InsertItems(self_: *mut c_void, n_items: unsigned int, items: *const c_void, pos: unsigned int);
+        // NOT_SUPPORTED: pub fn wxListBox_InsertItems1(self_: *mut c_void, items: *const c_void, pos: unsigned int);
+        pub fn wxListBox_IsSelected(self_: *const c_void, n: c_int) -> bool;
+        pub fn wxListBox_SetFirstItem(self_: *mut c_void, n: c_int);
+        pub fn wxListBox_SetFirstItem1(self_: *mut c_void, string: *const c_void);
+        pub fn wxListBox_EnsureVisible(self_: *mut c_void, n: c_int);
+        pub fn wxListBox_IsSorted(self_: *const c_void) -> bool;
+        pub fn wxListBox_GetCountPerPage(self_: *const c_void) -> c_int;
+        pub fn wxListBox_GetTopItem(self_: *const c_void) -> c_int;
+        pub fn wxListBox_MSWSetTabStops(self_: *mut c_void, tab_stops: *const c_void);
 
         // wxWindow
         pub fn wxWindow_AcceptsFocus(self_: *const c_void) -> bool;
@@ -507,12 +678,12 @@ mod ffi {
         // wxAnyButton
         pub fn wxAnyButton_new() -> *mut c_void;
         // DTOR: pub fn wxAnyButton_~wxAnyButton(self_: *mut c_void);
-        // NOT_SUPPORTED: pub fn wxAnyButton_GetBitmap(self_: *const c_void) -> wxBitmap;
-        // NOT_SUPPORTED: pub fn wxAnyButton_GetBitmapCurrent(self_: *const c_void) -> wxBitmap;
-        // NOT_SUPPORTED: pub fn wxAnyButton_GetBitmapDisabled(self_: *const c_void) -> wxBitmap;
-        // NOT_SUPPORTED: pub fn wxAnyButton_GetBitmapFocus(self_: *const c_void) -> wxBitmap;
-        // NOT_SUPPORTED: pub fn wxAnyButton_GetBitmapLabel(self_: *const c_void) -> wxBitmap;
-        // NOT_SUPPORTED: pub fn wxAnyButton_GetBitmapPressed(self_: *const c_void) -> wxBitmap;
+        pub fn wxAnyButton_GetBitmap(self_: *const c_void) -> *mut c_void;
+        pub fn wxAnyButton_GetBitmapCurrent(self_: *const c_void) -> *mut c_void;
+        pub fn wxAnyButton_GetBitmapDisabled(self_: *const c_void) -> *mut c_void;
+        pub fn wxAnyButton_GetBitmapFocus(self_: *const c_void) -> *mut c_void;
+        pub fn wxAnyButton_GetBitmapLabel(self_: *const c_void) -> *mut c_void;
+        pub fn wxAnyButton_GetBitmapPressed(self_: *const c_void) -> *mut c_void;
         // NOT_SUPPORTED: pub fn wxAnyButton_SetBitmap(self_: *mut c_void, bitmap: *const c_void, dir: wxDirection);
         pub fn wxAnyButton_SetBitmapCurrent(self_: *mut c_void, bitmap: *const c_void);
         pub fn wxAnyButton_SetBitmapDisabled(self_: *mut c_void, bitmap: *const c_void);
@@ -718,6 +889,142 @@ mod ffi {
         pub fn wxNonOwnedWindow_SetShape(self_: *mut c_void, region: *const c_void) -> bool;
         pub fn wxNonOwnedWindow_SetShape1(self_: *mut c_void, path: *const c_void) -> bool;
 
+        // wxToolBar
+        pub fn wxToolBar_new() -> *mut c_void;
+        pub fn wxToolBar_new1(
+            parent: *mut c_void,
+            id: c_int,
+            pos: *const c_void,
+            size: *const c_void,
+            style: c_long,
+            name: *const c_void,
+        ) -> *mut c_void;
+        // DTOR: pub fn wxToolBar_~wxToolBar(self_: *mut c_void);
+        pub fn wxToolBar_AddCheckTool(
+            self_: *mut c_void,
+            tool_id: c_int,
+            label: *const c_void,
+            bitmap1: *const c_void,
+            bmp_disabled: *const c_void,
+            short_help: *const c_void,
+            long_help: *const c_void,
+            client_data: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxToolBar_AddControl(
+            self_: *mut c_void,
+            control: *mut c_void,
+            label: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxToolBar_AddRadioTool(
+            self_: *mut c_void,
+            tool_id: c_int,
+            label: *const c_void,
+            bitmap1: *const c_void,
+            bmp_disabled: *const c_void,
+            short_help: *const c_void,
+            long_help: *const c_void,
+            client_data: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxToolBar_AddSeparator(self_: *mut c_void) -> *mut c_void;
+        pub fn wxToolBar_AddStretchableSpace(self_: *mut c_void) -> *mut c_void;
+        pub fn wxToolBar_AddTool(self_: *mut c_void, tool: *mut c_void) -> *mut c_void;
+        pub fn wxToolBar_AddTool1(
+            self_: *mut c_void,
+            tool_id: c_int,
+            label: *const c_void,
+            bitmap: *const c_void,
+            short_help: *const c_void,
+            kind: c_int,
+        ) -> *mut c_void;
+        pub fn wxToolBar_AddTool2(
+            self_: *mut c_void,
+            tool_id: c_int,
+            label: *const c_void,
+            bitmap: *const c_void,
+            bmp_disabled: *const c_void,
+            kind: c_int,
+            short_help: *const c_void,
+            long_help: *const c_void,
+            client_data: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxToolBar_ClearTools(self_: *mut c_void);
+        pub fn wxToolBar_DeleteTool(self_: *mut c_void, tool_id: c_int) -> bool;
+        // NOT_SUPPORTED: pub fn wxToolBar_DeleteToolByPos(self_: *mut c_void, pos: size_t) -> bool;
+        pub fn wxToolBar_EnableTool(self_: *mut c_void, tool_id: c_int, enable: bool);
+        pub fn wxToolBar_FindById(self_: *const c_void, id: c_int) -> *mut c_void;
+        pub fn wxToolBar_FindControl(self_: *mut c_void, id: c_int) -> *mut c_void;
+        pub fn wxToolBar_FindToolForPosition(
+            self_: *const c_void,
+            x: c_int,
+            y: c_int,
+        ) -> *mut c_void;
+        pub fn wxToolBar_GetMargins(self_: *const c_void) -> *mut c_void;
+        pub fn wxToolBar_GetToolBitmapSize(self_: *const c_void) -> *mut c_void;
+        // BLOCKED: pub fn wxToolBar_GetToolByPos(self_: *mut c_void, pos: c_int) -> *mut c_void;
+        pub fn wxToolBar_GetToolByPos1(self_: *const c_void, pos: c_int) -> *const c_void;
+        pub fn wxToolBar_GetToolClientData(self_: *const c_void, tool_id: c_int) -> *mut c_void;
+        pub fn wxToolBar_GetToolEnabled(self_: *const c_void, tool_id: c_int) -> bool;
+        pub fn wxToolBar_GetToolLongHelp(self_: *const c_void, tool_id: c_int) -> *mut c_void;
+        pub fn wxToolBar_GetToolPacking(self_: *const c_void) -> c_int;
+        pub fn wxToolBar_GetToolPos(self_: *const c_void, tool_id: c_int) -> c_int;
+        pub fn wxToolBar_GetToolSeparation(self_: *const c_void) -> c_int;
+        pub fn wxToolBar_GetToolShortHelp(self_: *const c_void, tool_id: c_int) -> *mut c_void;
+        pub fn wxToolBar_GetToolSize(self_: *const c_void) -> *mut c_void;
+        pub fn wxToolBar_GetToolState(self_: *const c_void, tool_id: c_int) -> bool;
+        // NOT_SUPPORTED: pub fn wxToolBar_GetToolsCount(self_: *const c_void) -> size_t;
+        // NOT_SUPPORTED: pub fn wxToolBar_InsertControl(self_: *mut c_void, pos: size_t, control: *mut c_void, label: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxToolBar_InsertSeparator(self_: *mut c_void, pos: size_t) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxToolBar_InsertStretchableSpace(self_: *mut c_void, pos: size_t) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxToolBar_InsertTool(self_: *mut c_void, pos: size_t, tool_id: c_int, label: *const c_void, bitmap: *const c_void, bmp_disabled: *const c_void, kind: c_int, short_help: *const c_void, long_help: *const c_void, client_data: *mut c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxToolBar_InsertTool1(self_: *mut c_void, pos: size_t, tool: *mut c_void) -> *mut c_void;
+        pub fn wxToolBar_OnLeftClick(self_: *mut c_void, tool_id: c_int, toggle_down: bool)
+            -> bool;
+        pub fn wxToolBar_OnMouseEnter(self_: *mut c_void, tool_id: c_int);
+        pub fn wxToolBar_OnRightClick(self_: *mut c_void, tool_id: c_int, x: c_long, y: c_long);
+        pub fn wxToolBar_Realize(self_: *mut c_void) -> bool;
+        pub fn wxToolBar_RemoveTool(self_: *mut c_void, id: c_int) -> *mut c_void;
+        pub fn wxToolBar_SetDropdownMenu(self_: *mut c_void, id: c_int, menu: *mut c_void) -> bool;
+        pub fn wxToolBar_SetMargins(self_: *mut c_void, x: c_int, y: c_int);
+        pub fn wxToolBar_SetMargins1(self_: *mut c_void, size: *const c_void);
+        pub fn wxToolBar_SetToolBitmapSize(self_: *mut c_void, size: *const c_void);
+        pub fn wxToolBar_SetToolClientData(self_: *mut c_void, id: c_int, client_data: *mut c_void);
+        pub fn wxToolBar_SetToolDisabledBitmap(
+            self_: *mut c_void,
+            id: c_int,
+            bitmap: *const c_void,
+        );
+        pub fn wxToolBar_SetToolLongHelp(
+            self_: *mut c_void,
+            tool_id: c_int,
+            help_string: *const c_void,
+        );
+        pub fn wxToolBar_SetToolNormalBitmap(self_: *mut c_void, id: c_int, bitmap: *const c_void);
+        pub fn wxToolBar_SetToolPacking(self_: *mut c_void, packing: c_int);
+        pub fn wxToolBar_SetToolSeparation(self_: *mut c_void, separation: c_int);
+        pub fn wxToolBar_SetToolShortHelp(
+            self_: *mut c_void,
+            tool_id: c_int,
+            help_string: *const c_void,
+        );
+        pub fn wxToolBar_ToggleTool(self_: *mut c_void, tool_id: c_int, toggle: bool);
+        pub fn wxToolBar_CreateTool(
+            self_: *mut c_void,
+            tool_id: c_int,
+            label: *const c_void,
+            bmp_normal: *const c_void,
+            bmp_disabled: *const c_void,
+            kind: c_int,
+            client_data: *mut c_void,
+            short_help: *const c_void,
+            long_help: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxToolBar_CreateTool1(
+            self_: *mut c_void,
+            control: *mut c_void,
+            label: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxToolBar_CreateSeparator(self_: *mut c_void) -> *mut c_void;
+
         // wxTopLevelWindow
         pub fn wxTopLevelWindow_new() -> *mut c_void;
         pub fn wxTopLevelWindow_new1(
@@ -852,6 +1159,29 @@ mod ffi {
         pub fn wxFrame_PushStatusText(self_: *mut c_void, text: *const c_void, number: c_int);
         pub fn wxFrame_PopStatusText(self_: *mut c_void, number: c_int);
 
+        // wxPanel
+        pub fn wxPanel_new() -> *mut c_void;
+        pub fn wxPanel_new1(
+            parent: *mut c_void,
+            id: c_int,
+            pos: *const c_void,
+            size: *const c_void,
+            style: c_long,
+            name: *const c_void,
+        ) -> *mut c_void;
+        // DTOR: pub fn wxPanel_~wxPanel(self_: *mut c_void);
+        pub fn wxPanel_Create(
+            self_: *mut c_void,
+            parent: *mut c_void,
+            id: c_int,
+            pos: *const c_void,
+            size: *const c_void,
+            style: c_long,
+            name: *const c_void,
+        ) -> bool;
+        pub fn wxPanel_OnSysColourChanged(self_: *mut c_void, event: *mut c_void);
+        pub fn wxPanel_SetFocusIgnoringChildren(self_: *mut c_void);
+
         // wxPoint
         pub fn wxPoint_delete(self_: *mut c_void);
         pub fn wxPoint_IsFullySpecified(self_: *const c_void) -> bool;
@@ -978,6 +1308,263 @@ mod ffi {
         pub fn wxSize_SetHeight(self_: *mut c_void, height: c_int);
         pub fn wxSize_SetWidth(self_: *mut c_void, width: c_int);
 
+        // wxSizer
+        // BLOCKED: pub fn wxSizer_new() -> *mut c_void;
+        // DTOR: pub fn wxSizer_~wxSizer(self_: *mut c_void);
+        pub fn wxSizer_Add(
+            self_: *mut c_void,
+            window: *mut c_void,
+            flags: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Add1(
+            self_: *mut c_void,
+            window: *mut c_void,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Add2(
+            self_: *mut c_void,
+            sizer: *mut c_void,
+            flags: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Add3(
+            self_: *mut c_void,
+            sizer: *mut c_void,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Add4(
+            self_: *mut c_void,
+            width: c_int,
+            height: c_int,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Add5(
+            self_: *mut c_void,
+            width: c_int,
+            height: c_int,
+            flags: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Add6(self_: *mut c_void, item: *mut c_void) -> *mut c_void;
+        pub fn wxSizer_AddSpacer(self_: *mut c_void, size: c_int) -> *mut c_void;
+        pub fn wxSizer_AddStretchSpacer(self_: *mut c_void, prop: c_int) -> *mut c_void;
+        pub fn wxSizer_CalcMin(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizer_Clear(self_: *mut c_void, delete_windows: bool);
+        pub fn wxSizer_ComputeFittingClientSize(
+            self_: *mut c_void,
+            window: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_ComputeFittingWindowSize(
+            self_: *mut c_void,
+            window: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Detach(self_: *mut c_void, window: *mut c_void) -> bool;
+        pub fn wxSizer_Detach1(self_: *mut c_void, sizer: *mut c_void) -> bool;
+        pub fn wxSizer_Detach2(self_: *mut c_void, index: c_int) -> bool;
+        pub fn wxSizer_Fit(self_: *mut c_void, window: *mut c_void) -> *mut c_void;
+        pub fn wxSizer_FitInside(self_: *mut c_void, window: *mut c_void);
+        pub fn wxSizer_InformFirstDirection(
+            self_: *mut c_void,
+            direction: c_int,
+            size: c_int,
+            available_other_dir: c_int,
+        ) -> bool;
+        // BLOCKED: pub fn wxSizer_GetChildren(self_: *mut c_void) -> *mut c_void;
+        // BLOCKED: pub fn wxSizer_GetChildren1(self_: *const c_void) -> *const c_void;
+        pub fn wxSizer_GetContainingWindow(self_: *const c_void) -> *mut c_void;
+        pub fn wxSizer_SetContainingWindow(self_: *mut c_void, window: *mut c_void);
+        // NOT_SUPPORTED: pub fn wxSizer_GetItemCount(self_: *const c_void) -> size_t;
+        pub fn wxSizer_GetItem(
+            self_: *mut c_void,
+            window: *mut c_void,
+            recursive: bool,
+        ) -> *mut c_void;
+        pub fn wxSizer_GetItem1(
+            self_: *mut c_void,
+            sizer: *mut c_void,
+            recursive: bool,
+        ) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxSizer_GetItem2(self_: *mut c_void, index: size_t) -> *mut c_void;
+        pub fn wxSizer_GetItemById(self_: *mut c_void, id: c_int, recursive: bool) -> *mut c_void;
+        pub fn wxSizer_GetMinSize(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizer_GetPosition(self_: *const c_void) -> *mut c_void;
+        pub fn wxSizer_GetSize(self_: *const c_void) -> *mut c_void;
+        pub fn wxSizer_Hide(self_: *mut c_void, window: *mut c_void, recursive: bool) -> bool;
+        pub fn wxSizer_Hide1(self_: *mut c_void, sizer: *mut c_void, recursive: bool) -> bool;
+        // NOT_SUPPORTED: pub fn wxSizer_Hide2(self_: *mut c_void, index: size_t) -> bool;
+        // NOT_SUPPORTED: pub fn wxSizer_Insert(self_: *mut c_void, index: size_t, window: *mut c_void, flags: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxSizer_Insert1(self_: *mut c_void, index: size_t, window: *mut c_void, proportion: c_int, flag: c_int, border: c_int, user_data: *mut c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxSizer_Insert2(self_: *mut c_void, index: size_t, sizer: *mut c_void, flags: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxSizer_Insert3(self_: *mut c_void, index: size_t, sizer: *mut c_void, proportion: c_int, flag: c_int, border: c_int, user_data: *mut c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxSizer_Insert4(self_: *mut c_void, index: size_t, width: c_int, height: c_int, proportion: c_int, flag: c_int, border: c_int, user_data: *mut c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxSizer_Insert5(self_: *mut c_void, index: size_t, width: c_int, height: c_int, flags: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxSizer_Insert6(self_: *mut c_void, index: size_t, item: *mut c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxSizer_InsertSpacer(self_: *mut c_void, index: size_t, size: c_int) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxSizer_InsertStretchSpacer(self_: *mut c_void, index: size_t, prop: c_int) -> *mut c_void;
+        pub fn wxSizer_IsEmpty(self_: *const c_void) -> bool;
+        pub fn wxSizer_IsShown(self_: *const c_void, window: *mut c_void) -> bool;
+        pub fn wxSizer_IsShown1(self_: *const c_void, sizer: *mut c_void) -> bool;
+        // NOT_SUPPORTED: pub fn wxSizer_IsShown2(self_: *const c_void, index: size_t) -> bool;
+        pub fn wxSizer_Layout(self_: *mut c_void);
+        pub fn wxSizer_Prepend(
+            self_: *mut c_void,
+            window: *mut c_void,
+            flags: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Prepend1(
+            self_: *mut c_void,
+            window: *mut c_void,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Prepend2(
+            self_: *mut c_void,
+            sizer: *mut c_void,
+            flags: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Prepend3(
+            self_: *mut c_void,
+            sizer: *mut c_void,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Prepend4(
+            self_: *mut c_void,
+            width: c_int,
+            height: c_int,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Prepend5(
+            self_: *mut c_void,
+            width: c_int,
+            height: c_int,
+            flags: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Prepend6(self_: *mut c_void, item: *mut c_void) -> *mut c_void;
+        pub fn wxSizer_PrependSpacer(self_: *mut c_void, size: c_int) -> *mut c_void;
+        pub fn wxSizer_PrependStretchSpacer(self_: *mut c_void, prop: c_int) -> *mut c_void;
+        pub fn wxSizer_RepositionChildren(self_: *mut c_void, min_size: *const c_void);
+        // BLOCKED: pub fn wxSizer_Remove(self_: *mut c_void, window: *mut c_void) -> bool;
+        pub fn wxSizer_Remove1(self_: *mut c_void, sizer: *mut c_void) -> bool;
+        pub fn wxSizer_Remove2(self_: *mut c_void, index: c_int) -> bool;
+        pub fn wxSizer_Replace(
+            self_: *mut c_void,
+            oldwin: *mut c_void,
+            newwin: *mut c_void,
+            recursive: bool,
+        ) -> bool;
+        pub fn wxSizer_Replace1(
+            self_: *mut c_void,
+            oldsz: *mut c_void,
+            newsz: *mut c_void,
+            recursive: bool,
+        ) -> bool;
+        // NOT_SUPPORTED: pub fn wxSizer_Replace2(self_: *mut c_void, index: size_t, newitem: *mut c_void) -> bool;
+        pub fn wxSizer_SetDimension(
+            self_: *mut c_void,
+            x: c_int,
+            y: c_int,
+            width: c_int,
+            height: c_int,
+        );
+        pub fn wxSizer_SetDimension1(self_: *mut c_void, pos: *const c_void, size: *const c_void);
+        pub fn wxSizer_SetItemMinSize(
+            self_: *mut c_void,
+            window: *mut c_void,
+            width: c_int,
+            height: c_int,
+        ) -> bool;
+        pub fn wxSizer_SetItemMinSize1(
+            self_: *mut c_void,
+            window: *mut c_void,
+            size: *const c_void,
+        ) -> bool;
+        pub fn wxSizer_SetItemMinSize2(
+            self_: *mut c_void,
+            sizer: *mut c_void,
+            width: c_int,
+            height: c_int,
+        ) -> bool;
+        pub fn wxSizer_SetItemMinSize3(
+            self_: *mut c_void,
+            sizer: *mut c_void,
+            size: *const c_void,
+        ) -> bool;
+        // NOT_SUPPORTED: pub fn wxSizer_SetItemMinSize4(self_: *mut c_void, index: size_t, width: c_int, height: c_int) -> bool;
+        // NOT_SUPPORTED: pub fn wxSizer_SetItemMinSize5(self_: *mut c_void, index: size_t, size: *const c_void) -> bool;
+        pub fn wxSizer_SetMinSize(self_: *mut c_void, size: *const c_void);
+        pub fn wxSizer_SetMinSize1(self_: *mut c_void, width: c_int, height: c_int);
+        pub fn wxSizer_SetSizeHints(self_: *mut c_void, window: *mut c_void);
+        // BLOCKED: pub fn wxSizer_SetVirtualSizeHints(self_: *mut c_void, window: *mut c_void);
+        pub fn wxSizer_Show(
+            self_: *mut c_void,
+            window: *mut c_void,
+            show: bool,
+            recursive: bool,
+        ) -> bool;
+        pub fn wxSizer_Show1(
+            self_: *mut c_void,
+            sizer: *mut c_void,
+            show: bool,
+            recursive: bool,
+        ) -> bool;
+        // NOT_SUPPORTED: pub fn wxSizer_Show2(self_: *mut c_void, index: size_t, show: bool) -> bool;
+        pub fn wxSizer_ShowItems(self_: *mut c_void, show: bool);
+
+        // wxSizerFlags
+        pub fn wxSizerFlags_delete(self_: *mut c_void);
+        pub fn wxSizerFlags_new(proportion: c_int) -> *mut c_void;
+        pub fn wxSizerFlags_Align(self_: *mut c_void, alignment: c_int) -> *mut c_void;
+        pub fn wxSizerFlags_Border(
+            self_: *mut c_void,
+            direction: c_int,
+            borderinpixels: c_int,
+        ) -> *mut c_void;
+        pub fn wxSizerFlags_Border1(self_: *mut c_void, direction: c_int) -> *mut c_void;
+        pub fn wxSizerFlags_Bottom(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_Center(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_Centre(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_CenterHorizontal(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_CenterVertical(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_CentreHorizontal(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_CentreVertical(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_DoubleBorder(self_: *mut c_void, direction: c_int) -> *mut c_void;
+        pub fn wxSizerFlags_DoubleHorzBorder(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_Expand(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_FixedMinSize(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_ReserveSpaceEvenIfHidden(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_Left(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_Proportion(self_: *mut c_void, proportion: c_int) -> *mut c_void;
+        pub fn wxSizerFlags_Right(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_Shaped(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_Top(self_: *mut c_void) -> *mut c_void;
+        pub fn wxSizerFlags_TripleBorder(self_: *mut c_void, direction: c_int) -> *mut c_void;
+        pub fn wxSizerFlags_GetDefaultBorder() -> c_int;
+        // NOT_SUPPORTED: pub fn wxSizerFlags_GetDefaultBorderFractional() -> float;
+
+        // wxStaticBoxSizer
+        pub fn wxStaticBoxSizer_new(box_: *mut c_void, orient: c_int) -> *mut c_void;
+        pub fn wxStaticBoxSizer_new1(
+            orient: c_int,
+            parent: *mut c_void,
+            label: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxStaticBoxSizer_GetStaticBox(self_: *const c_void) -> *mut c_void;
+
         // wxValidator
         pub fn wxValidator_new() -> *mut c_void;
         // DTOR: pub fn wxValidator_~wxValidator(self_: *mut c_void);
@@ -1011,12 +1598,15 @@ mod ffi {
             style: c_long,
             name: *const c_void,
         ) -> bool;
-        // NOT_SUPPORTED: pub fn wxStaticBitmap_GetBitmap(self_: *const c_void) -> wxBitmap;
+        pub fn wxStaticBitmap_GetBitmap(self_: *const c_void) -> *mut c_void;
         // NOT_SUPPORTED: pub fn wxStaticBitmap_GetIcon(self_: *const c_void) -> wxIcon;
         pub fn wxStaticBitmap_SetBitmap(self_: *mut c_void, label: *const c_void);
         pub fn wxStaticBitmap_SetIcon(self_: *mut c_void, label: *const c_void);
         // NOT_SUPPORTED: pub fn wxStaticBitmap_SetScaleMode(self_: *mut c_void, scale_mode: ScaleMode);
         // NOT_SUPPORTED: pub fn wxStaticBitmap_GetScaleMode(self_: *const c_void) -> ScaleMode;
+
+        // wxWrapSizer
+        pub fn wxWrapSizer_new(orient: c_int, flags: c_int) -> *mut c_void;
     }
 }
 
@@ -1027,6 +1617,251 @@ pub mod methods {
     use crate::WeakRef;
 
     pub use wx_base::methods::*;
+
+    // wxArtProvider
+    pub trait ArtProviderMethods: ObjectMethods {
+        // DTOR: fn ~wxArtProvider()
+        fn delete<A: ArtProviderMethods>(provider: Option<&A>) -> bool {
+            unsafe {
+                let provider = match provider {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxArtProvider_Delete(provider)
+            }
+        }
+        fn get_bitmap<S: SizeMethods>(id: &str, client: &str, size: &S) -> Bitmap {
+            unsafe {
+                let id = wx_base::wx_string_from(id);
+                let client = wx_base::wx_string_from(client);
+                let size = size.as_ptr();
+                BitmapIsOwned(ffi::wxArtProvider_GetBitmap(id, client, size))
+            }
+        }
+        // NOT_SUPPORTED: fn GetIcon()
+        fn get_native_size_hint(client: &str) -> Size {
+            unsafe {
+                let client = wx_base::wx_string_from(client);
+                SizeIsOwned(ffi::wxArtProvider_GetNativeSizeHint(client))
+            }
+        }
+        fn get_size_hint(client: &str, platform_default: bool) -> Size {
+            unsafe {
+                let client = wx_base::wx_string_from(client);
+                SizeIsOwned(ffi::wxArtProvider_GetSizeHint(client, platform_default))
+            }
+        }
+        // NOT_SUPPORTED: fn GetIconBundle()
+        fn has_native_provider() -> bool {
+            unsafe { ffi::wxArtProvider_HasNativeProvider() }
+        }
+        // BLOCKED: fn Insert()
+        fn pop() -> bool {
+            unsafe { ffi::wxArtProvider_Pop() }
+        }
+        fn push<A: ArtProviderMethods>(provider: Option<&A>) {
+            unsafe {
+                let provider = match provider {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxArtProvider_Push(provider)
+            }
+        }
+        fn push_back<A: ArtProviderMethods>(provider: Option<&A>) {
+            unsafe {
+                let provider = match provider {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxArtProvider_PushBack(provider)
+            }
+        }
+        fn remove<A: ArtProviderMethods>(provider: Option<&A>) -> bool {
+            unsafe {
+                let provider = match provider {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxArtProvider_Remove(provider)
+            }
+        }
+        fn get_message_box_icon_id(flags: c_int) -> String {
+            unsafe { wx_base::from_wx_string(ffi::wxArtProvider_GetMessageBoxIconId(flags)) }
+        }
+        // NOT_SUPPORTED: fn GetMessageBoxIcon()
+    }
+
+    // wxBitmap
+    pub trait BitmapMethods: GDIObjectMethods {
+        // DTOR: fn ~wxBitmap()
+        // NOT_SUPPORTED: fn ConvertToImage()
+        fn copy_from_icon(&self, icon: *const c_void) -> bool {
+            unsafe { ffi::wxBitmap_CopyFromIcon(self.as_ptr(), icon) }
+        }
+        fn create_int_int(&self, width: c_int, height: c_int, depth: c_int) -> bool {
+            unsafe { ffi::wxBitmap_Create(self.as_ptr(), width, height, depth) }
+        }
+        fn create_size<S: SizeMethods>(&self, sz: &S, depth: c_int) -> bool {
+            unsafe {
+                let sz = sz.as_ptr();
+                ffi::wxBitmap_Create1(self.as_ptr(), sz, depth)
+            }
+        }
+        fn create_int_dc(&self, width: c_int, height: c_int, dc: *const c_void) -> bool {
+            unsafe { ffi::wxBitmap_Create2(self.as_ptr(), width, height, dc) }
+        }
+        fn create_scaled(
+            &self,
+            width: c_int,
+            height: c_int,
+            depth: c_int,
+            logical_scale: c_double,
+        ) -> bool {
+            unsafe {
+                ffi::wxBitmap_CreateScaled(self.as_ptr(), width, height, depth, logical_scale)
+            }
+        }
+        fn get_depth(&self) -> c_int {
+            unsafe { ffi::wxBitmap_GetDepth(self.as_ptr()) }
+        }
+        fn get_height(&self) -> c_int {
+            unsafe { ffi::wxBitmap_GetHeight(self.as_ptr()) }
+        }
+        fn get_mask(&self) -> *mut c_void {
+            unsafe { ffi::wxBitmap_GetMask(self.as_ptr()) }
+        }
+        fn get_palette(&self) -> *mut c_void {
+            unsafe { ffi::wxBitmap_GetPalette(self.as_ptr()) }
+        }
+        fn get_sub_bitmap<R: RectMethods>(&self, rect: &R) -> Bitmap {
+            unsafe {
+                let rect = rect.as_ptr();
+                BitmapIsOwned(ffi::wxBitmap_GetSubBitmap(self.as_ptr(), rect))
+            }
+        }
+        fn get_size(&self) -> Size {
+            unsafe { SizeIsOwned(ffi::wxBitmap_GetSize(self.as_ptr())) }
+        }
+        // NOT_SUPPORTED: fn ConvertToDisabled()
+        fn get_width(&self) -> c_int {
+            unsafe { ffi::wxBitmap_GetWidth(self.as_ptr()) }
+        }
+        fn is_ok(&self) -> bool {
+            unsafe { ffi::wxBitmap_IsOk(self.as_ptr()) }
+        }
+        // NOT_SUPPORTED: fn LoadFile()
+        // NOT_SUPPORTED: fn SaveFile()
+        fn set_depth(&self, depth: c_int) {
+            unsafe { ffi::wxBitmap_SetDepth(self.as_ptr(), depth) }
+        }
+        fn set_height(&self, height: c_int) {
+            unsafe { ffi::wxBitmap_SetHeight(self.as_ptr(), height) }
+        }
+        fn set_mask(&self, mask: *mut c_void) {
+            unsafe { ffi::wxBitmap_SetMask(self.as_ptr(), mask) }
+        }
+        fn set_palette(&self, palette: *const c_void) {
+            unsafe { ffi::wxBitmap_SetPalette(self.as_ptr(), palette) }
+        }
+        fn set_width(&self, width: c_int) {
+            unsafe { ffi::wxBitmap_SetWidth(self.as_ptr(), width) }
+        }
+        fn add_handler(handler: *mut c_void) {
+            unsafe { ffi::wxBitmap_AddHandler(handler) }
+        }
+        fn clean_up_handlers() {
+            unsafe { ffi::wxBitmap_CleanUpHandlers() }
+        }
+        fn find_handler(name: &str) -> *mut c_void {
+            unsafe {
+                let name = wx_base::wx_string_from(name);
+                ffi::wxBitmap_FindHandler(name)
+            }
+        }
+        // NOT_SUPPORTED: fn FindHandler1()
+        // NOT_SUPPORTED: fn FindHandler2()
+        // BLOCKED: fn GetHandlers()
+        fn init_standard_handlers() {
+            unsafe { ffi::wxBitmap_InitStandardHandlers() }
+        }
+        fn insert_handler(handler: *mut c_void) {
+            unsafe { ffi::wxBitmap_InsertHandler(handler) }
+        }
+        // NOT_SUPPORTED: fn NewFromPNGData()
+        fn remove_handler(name: &str) -> bool {
+            unsafe {
+                let name = wx_base::wx_string_from(name);
+                ffi::wxBitmap_RemoveHandler(name)
+            }
+        }
+    }
+
+    // wxBoxSizer
+    pub trait BoxSizerMethods: SizerMethods {
+        fn get_orientation(&self) -> c_int {
+            unsafe { ffi::wxBoxSizer_GetOrientation(self.as_ptr()) }
+        }
+        fn set_orientation(&self, orient: c_int) {
+            unsafe { ffi::wxBoxSizer_SetOrientation(self.as_ptr(), orient) }
+        }
+    }
+
+    // wxCheckBox
+    pub trait CheckBoxMethods: ControlMethods {
+        // DTOR: fn ~wxCheckBox()
+        fn create<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+            &self,
+            parent: Option<&W>,
+            id: c_int,
+            label: &str,
+            pos: &P,
+            size: &S,
+            style: c_long,
+            validator: &V,
+            name: &str,
+        ) -> bool {
+            unsafe {
+                let parent = match parent {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let label = wx_base::wx_string_from(label);
+                let pos = pos.as_ptr();
+                let size = size.as_ptr();
+                let validator = validator.as_ptr();
+                let name = wx_base::wx_string_from(name);
+                ffi::wxCheckBox_Create(
+                    self.as_ptr(),
+                    parent,
+                    id,
+                    label,
+                    pos,
+                    size,
+                    style,
+                    validator,
+                    name,
+                )
+            }
+        }
+        fn get_value(&self) -> bool {
+            unsafe { ffi::wxCheckBox_GetValue(self.as_ptr()) }
+        }
+        // NOT_SUPPORTED: fn Get3StateValue()
+        fn is3_state(&self) -> bool {
+            unsafe { ffi::wxCheckBox_Is3State(self.as_ptr()) }
+        }
+        fn is3rd_state_allowed_for_user(&self) -> bool {
+            unsafe { ffi::wxCheckBox_Is3rdStateAllowedForUser(self.as_ptr()) }
+        }
+        fn is_checked(&self) -> bool {
+            unsafe { ffi::wxCheckBox_IsChecked(self.as_ptr()) }
+        }
+        fn set_value(&self, state: bool) {
+            unsafe { ffi::wxCheckBox_SetValue(self.as_ptr(), state) }
+        }
+        // NOT_SUPPORTED: fn Set3StateValue()
+    }
 
     // wxCommandEvent
     pub trait CommandEventMethods: EventMethods {
@@ -1071,6 +1906,111 @@ pub mod methods {
                 let string = wx_base::wx_string_from(string);
                 ffi::wxCommandEvent_SetString(self.as_ptr(), string)
             }
+        }
+    }
+
+    // wxGDIObject
+    pub trait GDIObjectMethods: ObjectMethods {}
+
+    // wxListBox
+    pub trait ListBoxMethods: ControlMethods {
+        // DTOR: fn ~wxListBox()
+        // NOT_SUPPORTED: fn Create()
+        fn create<
+            W: WindowMethods,
+            P: PointMethods,
+            S: SizeMethods,
+            A: ArrayStringMethods,
+            V: ValidatorMethods,
+        >(
+            &self,
+            parent: Option<&W>,
+            id: c_int,
+            pos: &P,
+            size: &S,
+            choices: &A,
+            style: c_long,
+            validator: &V,
+            name: &str,
+        ) -> bool {
+            unsafe {
+                let parent = match parent {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let pos = pos.as_ptr();
+                let size = size.as_ptr();
+                let choices = choices.as_ptr();
+                let validator = validator.as_ptr();
+                let name = wx_base::wx_string_from(name);
+                ffi::wxListBox_Create1(
+                    self.as_ptr(),
+                    parent,
+                    id,
+                    pos,
+                    size,
+                    choices,
+                    style,
+                    validator,
+                    name,
+                )
+            }
+        }
+        fn deselect(&self, n: c_int) {
+            unsafe { ffi::wxListBox_Deselect(self.as_ptr(), n) }
+        }
+        fn set_string_selection_bool(&self, s: &str, select: bool) -> bool {
+            unsafe {
+                let s = wx_base::wx_string_from(s);
+                ffi::wxListBox_SetStringSelection(self.as_ptr(), s, select)
+            }
+        }
+        fn set_string_selection(&self, s: &str) -> bool {
+            unsafe {
+                let s = wx_base::wx_string_from(s);
+                ffi::wxListBox_SetStringSelection1(self.as_ptr(), s)
+            }
+        }
+        fn get_selections(&self, selections: *mut c_void) -> c_int {
+            unsafe { ffi::wxListBox_GetSelections(self.as_ptr(), selections) }
+        }
+        fn hit_test_point<P: PointMethods>(&self, point: &P) -> c_int {
+            unsafe {
+                let point = point.as_ptr();
+                ffi::wxListBox_HitTest(self.as_ptr(), point)
+            }
+        }
+        fn hit_test_int(&self, x: c_int, y: c_int) -> c_int {
+            unsafe { ffi::wxListBox_HitTest1(self.as_ptr(), x, y) }
+        }
+        // NOT_SUPPORTED: fn InsertItems()
+        // NOT_SUPPORTED: fn InsertItems1()
+        fn is_selected(&self, n: c_int) -> bool {
+            unsafe { ffi::wxListBox_IsSelected(self.as_ptr(), n) }
+        }
+        fn set_first_item_int(&self, n: c_int) {
+            unsafe { ffi::wxListBox_SetFirstItem(self.as_ptr(), n) }
+        }
+        fn set_first_item_str(&self, string: &str) {
+            unsafe {
+                let string = wx_base::wx_string_from(string);
+                ffi::wxListBox_SetFirstItem1(self.as_ptr(), string)
+            }
+        }
+        fn ensure_visible(&self, n: c_int) {
+            unsafe { ffi::wxListBox_EnsureVisible(self.as_ptr(), n) }
+        }
+        fn is_sorted(&self) -> bool {
+            unsafe { ffi::wxListBox_IsSorted(self.as_ptr()) }
+        }
+        fn get_count_per_page(&self) -> c_int {
+            unsafe { ffi::wxListBox_GetCountPerPage(self.as_ptr()) }
+        }
+        fn get_top_item(&self) -> c_int {
+            unsafe { ffi::wxListBox_GetTopItem(self.as_ptr()) }
+        }
+        fn msw_set_tab_stops(&self, tab_stops: *const c_void) {
+            unsafe { ffi::wxListBox_MSWSetTabStops(self.as_ptr(), tab_stops) }
         }
     }
 
@@ -1415,8 +2355,14 @@ pub mod methods {
                 ffi::wxWindow_SetClientSize2(self.as_ptr(), rect)
             }
         }
-        fn set_containing_sizer(&self, sizer: *mut c_void) {
-            unsafe { ffi::wxWindow_SetContainingSizer(self.as_ptr(), sizer) }
+        fn set_containing_sizer<S: SizerMethods>(&self, sizer: Option<&S>) {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxWindow_SetContainingSizer(self.as_ptr(), sizer)
+            }
         }
         fn set_initial_size<S: SizeMethods>(&self, size: &S) {
             unsafe {
@@ -2082,17 +3028,29 @@ pub mod methods {
         fn drag_accept_files(&self, accept: bool) {
             unsafe { ffi::wxWindow_DragAcceptFiles(self.as_ptr(), accept) }
         }
-        fn get_containing_sizer(&self) -> *mut c_void {
-            unsafe { ffi::wxWindow_GetContainingSizer(self.as_ptr()) }
+        fn get_containing_sizer(&self) -> WeakRef<Sizer> {
+            unsafe { WeakRef::<Sizer>::from(ffi::wxWindow_GetContainingSizer(self.as_ptr())) }
         }
-        fn get_sizer(&self) -> *mut c_void {
-            unsafe { ffi::wxWindow_GetSizer(self.as_ptr()) }
+        fn get_sizer(&self) -> WeakRef<Sizer> {
+            unsafe { WeakRef::<Sizer>::from(ffi::wxWindow_GetSizer(self.as_ptr())) }
         }
-        fn set_sizer(&self, sizer: *mut c_void, delete_old: bool) {
-            unsafe { ffi::wxWindow_SetSizer(self.as_ptr(), sizer, delete_old) }
+        fn set_sizer<S: SizerMethods>(&self, sizer: Option<&S>, delete_old: bool) {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxWindow_SetSizer(self.as_ptr(), sizer, delete_old)
+            }
         }
-        fn set_sizer_and_fit(&self, sizer: *mut c_void, delete_old: bool) {
-            unsafe { ffi::wxWindow_SetSizerAndFit(self.as_ptr(), sizer, delete_old) }
+        fn set_sizer_and_fit<S: SizerMethods>(&self, sizer: Option<&S>, delete_old: bool) {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxWindow_SetSizerAndFit(self.as_ptr(), sizer, delete_old)
+            }
         }
         fn get_constraints(&self) -> *mut c_void {
             unsafe { ffi::wxWindow_GetConstraints(self.as_ptr()) }
@@ -2357,27 +3315,54 @@ pub mod methods {
     // wxAnyButton
     pub trait AnyButtonMethods: ControlMethods {
         // DTOR: fn ~wxAnyButton()
-        // NOT_SUPPORTED: fn GetBitmap()
-        // NOT_SUPPORTED: fn GetBitmapCurrent()
-        // NOT_SUPPORTED: fn GetBitmapDisabled()
-        // NOT_SUPPORTED: fn GetBitmapFocus()
-        // NOT_SUPPORTED: fn GetBitmapLabel()
-        // NOT_SUPPORTED: fn GetBitmapPressed()
+        fn get_bitmap(&self) -> Bitmap {
+            unsafe { BitmapIsOwned(ffi::wxAnyButton_GetBitmap(self.as_ptr())) }
+        }
+        fn get_bitmap_current(&self) -> Bitmap {
+            unsafe { BitmapIsOwned(ffi::wxAnyButton_GetBitmapCurrent(self.as_ptr())) }
+        }
+        fn get_bitmap_disabled(&self) -> Bitmap {
+            unsafe { BitmapIsOwned(ffi::wxAnyButton_GetBitmapDisabled(self.as_ptr())) }
+        }
+        fn get_bitmap_focus(&self) -> Bitmap {
+            unsafe { BitmapIsOwned(ffi::wxAnyButton_GetBitmapFocus(self.as_ptr())) }
+        }
+        fn get_bitmap_label(&self) -> Bitmap {
+            unsafe { BitmapIsOwned(ffi::wxAnyButton_GetBitmapLabel(self.as_ptr())) }
+        }
+        fn get_bitmap_pressed(&self) -> Bitmap {
+            unsafe { BitmapIsOwned(ffi::wxAnyButton_GetBitmapPressed(self.as_ptr())) }
+        }
         // NOT_SUPPORTED: fn SetBitmap()
-        fn set_bitmap_current(&self, bitmap: *const c_void) {
-            unsafe { ffi::wxAnyButton_SetBitmapCurrent(self.as_ptr(), bitmap) }
+        fn set_bitmap_current<B: BitmapMethods>(&self, bitmap: &B) {
+            unsafe {
+                let bitmap = bitmap.as_ptr();
+                ffi::wxAnyButton_SetBitmapCurrent(self.as_ptr(), bitmap)
+            }
         }
-        fn set_bitmap_disabled(&self, bitmap: *const c_void) {
-            unsafe { ffi::wxAnyButton_SetBitmapDisabled(self.as_ptr(), bitmap) }
+        fn set_bitmap_disabled<B: BitmapMethods>(&self, bitmap: &B) {
+            unsafe {
+                let bitmap = bitmap.as_ptr();
+                ffi::wxAnyButton_SetBitmapDisabled(self.as_ptr(), bitmap)
+            }
         }
-        fn set_bitmap_focus(&self, bitmap: *const c_void) {
-            unsafe { ffi::wxAnyButton_SetBitmapFocus(self.as_ptr(), bitmap) }
+        fn set_bitmap_focus<B: BitmapMethods>(&self, bitmap: &B) {
+            unsafe {
+                let bitmap = bitmap.as_ptr();
+                ffi::wxAnyButton_SetBitmapFocus(self.as_ptr(), bitmap)
+            }
         }
-        fn set_bitmap_label(&self, bitmap: *const c_void) {
-            unsafe { ffi::wxAnyButton_SetBitmapLabel(self.as_ptr(), bitmap) }
+        fn set_bitmap_label<B: BitmapMethods>(&self, bitmap: &B) {
+            unsafe {
+                let bitmap = bitmap.as_ptr();
+                ffi::wxAnyButton_SetBitmapLabel(self.as_ptr(), bitmap)
+            }
         }
-        fn set_bitmap_pressed(&self, bitmap: *const c_void) {
-            unsafe { ffi::wxAnyButton_SetBitmapPressed(self.as_ptr(), bitmap) }
+        fn set_bitmap_pressed<B: BitmapMethods>(&self, bitmap: &B) {
+            unsafe {
+                let bitmap = bitmap.as_ptr();
+                ffi::wxAnyButton_SetBitmapPressed(self.as_ptr(), bitmap)
+            }
         }
         fn get_bitmap_margins(&self) -> Size {
             unsafe { SizeIsOwned(ffi::wxAnyButton_GetBitmapMargins(self.as_ptr())) }
@@ -2839,6 +3824,343 @@ pub mod methods {
         }
     }
 
+    // wxToolBar
+    pub trait ToolBarMethods: ControlMethods {
+        // DTOR: fn ~wxToolBar()
+        fn add_check_tool<B: BitmapMethods, B2: BitmapMethods, O: ObjectMethods>(
+            &self,
+            tool_id: c_int,
+            label: &str,
+            bitmap1: &B,
+            bmp_disabled: &B2,
+            short_help: &str,
+            long_help: &str,
+            client_data: Option<&O>,
+        ) -> *mut c_void {
+            unsafe {
+                let label = wx_base::wx_string_from(label);
+                let bitmap1 = bitmap1.as_ptr();
+                let bmp_disabled = bmp_disabled.as_ptr();
+                let short_help = wx_base::wx_string_from(short_help);
+                let long_help = wx_base::wx_string_from(long_help);
+                let client_data = match client_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxToolBar_AddCheckTool(
+                    self.as_ptr(),
+                    tool_id,
+                    label,
+                    bitmap1,
+                    bmp_disabled,
+                    short_help,
+                    long_help,
+                    client_data,
+                )
+            }
+        }
+        fn add_control<C: ControlMethods>(&self, control: Option<&C>, label: &str) -> *mut c_void {
+            unsafe {
+                let control = match control {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let label = wx_base::wx_string_from(label);
+                ffi::wxToolBar_AddControl(self.as_ptr(), control, label)
+            }
+        }
+        fn add_radio_tool<B: BitmapMethods, B2: BitmapMethods, O: ObjectMethods>(
+            &self,
+            tool_id: c_int,
+            label: &str,
+            bitmap1: &B,
+            bmp_disabled: &B2,
+            short_help: &str,
+            long_help: &str,
+            client_data: Option<&O>,
+        ) -> *mut c_void {
+            unsafe {
+                let label = wx_base::wx_string_from(label);
+                let bitmap1 = bitmap1.as_ptr();
+                let bmp_disabled = bmp_disabled.as_ptr();
+                let short_help = wx_base::wx_string_from(short_help);
+                let long_help = wx_base::wx_string_from(long_help);
+                let client_data = match client_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxToolBar_AddRadioTool(
+                    self.as_ptr(),
+                    tool_id,
+                    label,
+                    bitmap1,
+                    bmp_disabled,
+                    short_help,
+                    long_help,
+                    client_data,
+                )
+            }
+        }
+        fn add_separator(&self) -> *mut c_void {
+            unsafe { ffi::wxToolBar_AddSeparator(self.as_ptr()) }
+        }
+        fn add_stretchable_space(&self) -> *mut c_void {
+            unsafe { ffi::wxToolBar_AddStretchableSpace(self.as_ptr()) }
+        }
+        fn add_tool_toolbartoolbase(&self, tool: *mut c_void) -> *mut c_void {
+            unsafe { ffi::wxToolBar_AddTool(self.as_ptr(), tool) }
+        }
+        fn add_tool_int_str<B: BitmapMethods>(
+            &self,
+            tool_id: c_int,
+            label: &str,
+            bitmap: &B,
+            short_help: &str,
+            kind: c_int,
+        ) -> *mut c_void {
+            unsafe {
+                let label = wx_base::wx_string_from(label);
+                let bitmap = bitmap.as_ptr();
+                let short_help = wx_base::wx_string_from(short_help);
+                ffi::wxToolBar_AddTool1(self.as_ptr(), tool_id, label, bitmap, short_help, kind)
+            }
+        }
+        fn add_tool_int_bitmap<B: BitmapMethods, B2: BitmapMethods, O: ObjectMethods>(
+            &self,
+            tool_id: c_int,
+            label: &str,
+            bitmap: &B,
+            bmp_disabled: &B2,
+            kind: c_int,
+            short_help: &str,
+            long_help: &str,
+            client_data: Option<&O>,
+        ) -> *mut c_void {
+            unsafe {
+                let label = wx_base::wx_string_from(label);
+                let bitmap = bitmap.as_ptr();
+                let bmp_disabled = bmp_disabled.as_ptr();
+                let short_help = wx_base::wx_string_from(short_help);
+                let long_help = wx_base::wx_string_from(long_help);
+                let client_data = match client_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxToolBar_AddTool2(
+                    self.as_ptr(),
+                    tool_id,
+                    label,
+                    bitmap,
+                    bmp_disabled,
+                    kind,
+                    short_help,
+                    long_help,
+                    client_data,
+                )
+            }
+        }
+        fn clear_tools(&self) {
+            unsafe { ffi::wxToolBar_ClearTools(self.as_ptr()) }
+        }
+        fn delete_tool(&self, tool_id: c_int) -> bool {
+            unsafe { ffi::wxToolBar_DeleteTool(self.as_ptr(), tool_id) }
+        }
+        // NOT_SUPPORTED: fn DeleteToolByPos()
+        fn enable_tool(&self, tool_id: c_int, enable: bool) {
+            unsafe { ffi::wxToolBar_EnableTool(self.as_ptr(), tool_id, enable) }
+        }
+        fn find_by_id(&self, id: c_int) -> *mut c_void {
+            unsafe { ffi::wxToolBar_FindById(self.as_ptr(), id) }
+        }
+        fn find_control(&self, id: c_int) -> WeakRef<Control> {
+            unsafe { WeakRef::<Control>::from(ffi::wxToolBar_FindControl(self.as_ptr(), id)) }
+        }
+        fn find_tool_for_position(&self, x: c_int, y: c_int) -> *mut c_void {
+            unsafe { ffi::wxToolBar_FindToolForPosition(self.as_ptr(), x, y) }
+        }
+        fn get_margins(&self) -> Size {
+            unsafe { SizeIsOwned(ffi::wxToolBar_GetMargins(self.as_ptr())) }
+        }
+        fn get_tool_bitmap_size(&self) -> Size {
+            unsafe { SizeIsOwned(ffi::wxToolBar_GetToolBitmapSize(self.as_ptr())) }
+        }
+        // BLOCKED: fn GetToolByPos()
+        fn get_tool_by_pos(&self, pos: c_int) -> *const c_void {
+            unsafe { ffi::wxToolBar_GetToolByPos1(self.as_ptr(), pos) }
+        }
+        fn get_tool_client_data(&self, tool_id: c_int) -> WeakRef<Object> {
+            unsafe {
+                WeakRef::<Object>::from(ffi::wxToolBar_GetToolClientData(self.as_ptr(), tool_id))
+            }
+        }
+        fn get_tool_enabled(&self, tool_id: c_int) -> bool {
+            unsafe { ffi::wxToolBar_GetToolEnabled(self.as_ptr(), tool_id) }
+        }
+        fn get_tool_long_help(&self, tool_id: c_int) -> String {
+            unsafe {
+                wx_base::from_wx_string(ffi::wxToolBar_GetToolLongHelp(self.as_ptr(), tool_id))
+            }
+        }
+        fn get_tool_packing(&self) -> c_int {
+            unsafe { ffi::wxToolBar_GetToolPacking(self.as_ptr()) }
+        }
+        fn get_tool_pos(&self, tool_id: c_int) -> c_int {
+            unsafe { ffi::wxToolBar_GetToolPos(self.as_ptr(), tool_id) }
+        }
+        fn get_tool_separation(&self) -> c_int {
+            unsafe { ffi::wxToolBar_GetToolSeparation(self.as_ptr()) }
+        }
+        fn get_tool_short_help(&self, tool_id: c_int) -> String {
+            unsafe {
+                wx_base::from_wx_string(ffi::wxToolBar_GetToolShortHelp(self.as_ptr(), tool_id))
+            }
+        }
+        fn get_tool_size(&self) -> Size {
+            unsafe { SizeIsOwned(ffi::wxToolBar_GetToolSize(self.as_ptr())) }
+        }
+        fn get_tool_state(&self, tool_id: c_int) -> bool {
+            unsafe { ffi::wxToolBar_GetToolState(self.as_ptr(), tool_id) }
+        }
+        // NOT_SUPPORTED: fn GetToolsCount()
+        // NOT_SUPPORTED: fn InsertControl()
+        // NOT_SUPPORTED: fn InsertSeparator()
+        // NOT_SUPPORTED: fn InsertStretchableSpace()
+        // NOT_SUPPORTED: fn InsertTool()
+        // NOT_SUPPORTED: fn InsertTool1()
+        fn on_left_click(&self, tool_id: c_int, toggle_down: bool) -> bool {
+            unsafe { ffi::wxToolBar_OnLeftClick(self.as_ptr(), tool_id, toggle_down) }
+        }
+        fn on_mouse_enter(&self, tool_id: c_int) {
+            unsafe { ffi::wxToolBar_OnMouseEnter(self.as_ptr(), tool_id) }
+        }
+        fn on_right_click(&self, tool_id: c_int, x: c_long, y: c_long) {
+            unsafe { ffi::wxToolBar_OnRightClick(self.as_ptr(), tool_id, x, y) }
+        }
+        fn realize(&self) -> bool {
+            unsafe { ffi::wxToolBar_Realize(self.as_ptr()) }
+        }
+        fn remove_tool(&self, id: c_int) -> *mut c_void {
+            unsafe { ffi::wxToolBar_RemoveTool(self.as_ptr(), id) }
+        }
+        fn set_dropdown_menu<M: MenuMethods>(&self, id: c_int, menu: Option<&M>) -> bool {
+            unsafe {
+                let menu = match menu {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxToolBar_SetDropdownMenu(self.as_ptr(), id, menu)
+            }
+        }
+        fn set_margins_int(&self, x: c_int, y: c_int) {
+            unsafe { ffi::wxToolBar_SetMargins(self.as_ptr(), x, y) }
+        }
+        fn set_margins_size<S: SizeMethods>(&self, size: &S) {
+            unsafe {
+                let size = size.as_ptr();
+                ffi::wxToolBar_SetMargins1(self.as_ptr(), size)
+            }
+        }
+        fn set_tool_bitmap_size<S: SizeMethods>(&self, size: &S) {
+            unsafe {
+                let size = size.as_ptr();
+                ffi::wxToolBar_SetToolBitmapSize(self.as_ptr(), size)
+            }
+        }
+        fn set_tool_client_data<O: ObjectMethods>(&self, id: c_int, client_data: Option<&O>) {
+            unsafe {
+                let client_data = match client_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxToolBar_SetToolClientData(self.as_ptr(), id, client_data)
+            }
+        }
+        fn set_tool_disabled_bitmap<B: BitmapMethods>(&self, id: c_int, bitmap: &B) {
+            unsafe {
+                let bitmap = bitmap.as_ptr();
+                ffi::wxToolBar_SetToolDisabledBitmap(self.as_ptr(), id, bitmap)
+            }
+        }
+        fn set_tool_long_help(&self, tool_id: c_int, help_string: &str) {
+            unsafe {
+                let help_string = wx_base::wx_string_from(help_string);
+                ffi::wxToolBar_SetToolLongHelp(self.as_ptr(), tool_id, help_string)
+            }
+        }
+        fn set_tool_normal_bitmap<B: BitmapMethods>(&self, id: c_int, bitmap: &B) {
+            unsafe {
+                let bitmap = bitmap.as_ptr();
+                ffi::wxToolBar_SetToolNormalBitmap(self.as_ptr(), id, bitmap)
+            }
+        }
+        fn set_tool_packing(&self, packing: c_int) {
+            unsafe { ffi::wxToolBar_SetToolPacking(self.as_ptr(), packing) }
+        }
+        fn set_tool_separation(&self, separation: c_int) {
+            unsafe { ffi::wxToolBar_SetToolSeparation(self.as_ptr(), separation) }
+        }
+        fn set_tool_short_help(&self, tool_id: c_int, help_string: &str) {
+            unsafe {
+                let help_string = wx_base::wx_string_from(help_string);
+                ffi::wxToolBar_SetToolShortHelp(self.as_ptr(), tool_id, help_string)
+            }
+        }
+        fn toggle_tool(&self, tool_id: c_int, toggle: bool) {
+            unsafe { ffi::wxToolBar_ToggleTool(self.as_ptr(), tool_id, toggle) }
+        }
+        fn create_tool_int<B: BitmapMethods, B2: BitmapMethods, O: ObjectMethods>(
+            &self,
+            tool_id: c_int,
+            label: &str,
+            bmp_normal: &B,
+            bmp_disabled: &B2,
+            kind: c_int,
+            client_data: Option<&O>,
+            short_help: &str,
+            long_help: &str,
+        ) -> *mut c_void {
+            unsafe {
+                let label = wx_base::wx_string_from(label);
+                let bmp_normal = bmp_normal.as_ptr();
+                let bmp_disabled = bmp_disabled.as_ptr();
+                let client_data = match client_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let short_help = wx_base::wx_string_from(short_help);
+                let long_help = wx_base::wx_string_from(long_help);
+                ffi::wxToolBar_CreateTool(
+                    self.as_ptr(),
+                    tool_id,
+                    label,
+                    bmp_normal,
+                    bmp_disabled,
+                    kind,
+                    client_data,
+                    short_help,
+                    long_help,
+                )
+            }
+        }
+        fn create_tool_control<C: ControlMethods>(
+            &self,
+            control: Option<&C>,
+            label: &str,
+        ) -> *mut c_void {
+            unsafe {
+                let control = match control {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let label = wx_base::wx_string_from(label);
+                ffi::wxToolBar_CreateTool1(self.as_ptr(), control, label)
+            }
+        }
+        fn create_separator(&self) -> *mut c_void {
+            unsafe { ffi::wxToolBar_CreateSeparator(self.as_ptr()) }
+        }
+    }
+
     // wxTopLevelWindow
     pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
         // DTOR: fn ~wxTopLevelWindow()
@@ -3010,10 +4332,10 @@ pub mod methods {
                 ffi::wxFrame_CreateStatusBar(self.as_ptr(), number, style, id, name)
             }
         }
-        fn create_tool_bar(&self, style: c_long, id: c_int, name: &str) -> *mut c_void {
+        fn create_tool_bar(&self, style: c_long, id: c_int, name: &str) -> WeakRef<ToolBar> {
             unsafe {
                 let name = wx_base::wx_string_from(name);
-                ffi::wxFrame_CreateToolBar(self.as_ptr(), style, id, name)
+                WeakRef::<ToolBar>::from(ffi::wxFrame_CreateToolBar(self.as_ptr(), style, id, name))
             }
         }
         fn do_give_help(&self, text: &str, show: bool) {
@@ -3031,8 +4353,8 @@ pub mod methods {
         fn get_status_bar_pane(&self) -> c_int {
             unsafe { ffi::wxFrame_GetStatusBarPane(self.as_ptr()) }
         }
-        fn get_tool_bar(&self) -> *mut c_void {
-            unsafe { ffi::wxFrame_GetToolBar(self.as_ptr()) }
+        fn get_tool_bar(&self) -> WeakRef<ToolBar> {
+            unsafe { WeakRef::<ToolBar>::from(ffi::wxFrame_GetToolBar(self.as_ptr())) }
         }
         fn on_create_status_bar(
             &self,
@@ -3046,10 +4368,15 @@ pub mod methods {
                 ffi::wxFrame_OnCreateStatusBar(self.as_ptr(), number, style, id, name)
             }
         }
-        fn on_create_tool_bar(&self, style: c_long, id: c_int, name: &str) -> *mut c_void {
+        fn on_create_tool_bar(&self, style: c_long, id: c_int, name: &str) -> WeakRef<ToolBar> {
             unsafe {
                 let name = wx_base::wx_string_from(name);
-                ffi::wxFrame_OnCreateToolBar(self.as_ptr(), style, id, name)
+                WeakRef::<ToolBar>::from(ffi::wxFrame_OnCreateToolBar(
+                    self.as_ptr(),
+                    style,
+                    id,
+                    name,
+                ))
             }
         }
         fn process_command(&self, id: c_int) -> bool {
@@ -3079,8 +4406,14 @@ pub mod methods {
         fn set_status_widths(&self, n: c_int, widths_field: *const c_void) {
             unsafe { ffi::wxFrame_SetStatusWidths(self.as_ptr(), n, widths_field) }
         }
-        fn set_tool_bar(&self, tool_bar: *mut c_void) {
-            unsafe { ffi::wxFrame_SetToolBar(self.as_ptr(), tool_bar) }
+        fn set_tool_bar<T: ToolBarMethods>(&self, tool_bar: Option<&T>) {
+            unsafe {
+                let tool_bar = match tool_bar {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxFrame_SetToolBar(self.as_ptr(), tool_bar)
+            }
         }
         fn msw_get_task_bar_button(&self) -> *mut c_void {
             unsafe { ffi::wxFrame_MSWGetTaskBarButton(self.as_ptr()) }
@@ -3093,6 +4426,17 @@ pub mod methods {
         }
         fn pop_status_text(&self, number: c_int) {
             unsafe { ffi::wxFrame_PopStatusText(self.as_ptr(), number) }
+        }
+    }
+
+    // wxPanel
+    pub trait PanelMethods: WindowMethods {
+        // DTOR: fn ~wxPanel()
+        fn on_sys_colour_changed(&self, event: *mut c_void) {
+            unsafe { ffi::wxPanel_OnSysColourChanged(self.as_ptr(), event) }
+        }
+        fn set_focus_ignoring_children(&self) {
+            unsafe { ffi::wxPanel_SetFocusIgnoringChildren(self.as_ptr()) }
         }
     }
 
@@ -3406,6 +4750,738 @@ pub mod methods {
         }
     }
 
+    // wxSizer
+    pub trait SizerMethods: ObjectMethods {
+        // DTOR: fn ~wxSizer()
+        fn add_window_sizerflags<W: WindowMethods, S: SizerFlagsMethods>(
+            &self,
+            window: Option<&W>,
+            flags: &S,
+        ) -> *mut c_void {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let flags = flags.as_ptr();
+                ffi::wxSizer_Add(self.as_ptr(), window, flags)
+            }
+        }
+        fn add_window_int<W: WindowMethods, O: ObjectMethods>(
+            &self,
+            window: Option<&W>,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: Option<&O>,
+        ) -> *mut c_void {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let user_data = match user_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Add1(self.as_ptr(), window, proportion, flag, border, user_data)
+            }
+        }
+        fn add_sizer_sizerflags<S: SizerMethods, S2: SizerFlagsMethods>(
+            &self,
+            sizer: Option<&S>,
+            flags: &S2,
+        ) -> *mut c_void {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let flags = flags.as_ptr();
+                ffi::wxSizer_Add2(self.as_ptr(), sizer, flags)
+            }
+        }
+        fn add_sizer_int<S: SizerMethods, O: ObjectMethods>(
+            &self,
+            sizer: Option<&S>,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: Option<&O>,
+        ) -> *mut c_void {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let user_data = match user_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Add3(self.as_ptr(), sizer, proportion, flag, border, user_data)
+            }
+        }
+        fn add_int_int<O: ObjectMethods>(
+            &self,
+            width: c_int,
+            height: c_int,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: Option<&O>,
+        ) -> *mut c_void {
+            unsafe {
+                let user_data = match user_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Add4(
+                    self.as_ptr(),
+                    width,
+                    height,
+                    proportion,
+                    flag,
+                    border,
+                    user_data,
+                )
+            }
+        }
+        fn add_int_sizerflags<S: SizerFlagsMethods>(
+            &self,
+            width: c_int,
+            height: c_int,
+            flags: &S,
+        ) -> *mut c_void {
+            unsafe {
+                let flags = flags.as_ptr();
+                ffi::wxSizer_Add5(self.as_ptr(), width, height, flags)
+            }
+        }
+        fn add_sizeritem(&self, item: *mut c_void) -> *mut c_void {
+            unsafe { ffi::wxSizer_Add6(self.as_ptr(), item) }
+        }
+        fn add_spacer(&self, size: c_int) -> *mut c_void {
+            unsafe { ffi::wxSizer_AddSpacer(self.as_ptr(), size) }
+        }
+        fn add_stretch_spacer(&self, prop: c_int) -> *mut c_void {
+            unsafe { ffi::wxSizer_AddStretchSpacer(self.as_ptr(), prop) }
+        }
+        fn calc_min(&self) -> Size {
+            unsafe { SizeIsOwned(ffi::wxSizer_CalcMin(self.as_ptr())) }
+        }
+        fn clear(&self, delete_windows: bool) {
+            unsafe { ffi::wxSizer_Clear(self.as_ptr(), delete_windows) }
+        }
+        fn compute_fitting_client_size<W: WindowMethods>(&self, window: Option<&W>) -> Size {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                SizeIsOwned(ffi::wxSizer_ComputeFittingClientSize(self.as_ptr(), window))
+            }
+        }
+        fn compute_fitting_window_size<W: WindowMethods>(&self, window: Option<&W>) -> Size {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                SizeIsOwned(ffi::wxSizer_ComputeFittingWindowSize(self.as_ptr(), window))
+            }
+        }
+        fn detach_window<W: WindowMethods>(&self, window: Option<&W>) -> bool {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Detach(self.as_ptr(), window)
+            }
+        }
+        fn detach_sizer<S: SizerMethods>(&self, sizer: Option<&S>) -> bool {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Detach1(self.as_ptr(), sizer)
+            }
+        }
+        fn detach_int(&self, index: c_int) -> bool {
+            unsafe { ffi::wxSizer_Detach2(self.as_ptr(), index) }
+        }
+        fn fit<W: WindowMethods>(&self, window: Option<&W>) -> Size {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                SizeIsOwned(ffi::wxSizer_Fit(self.as_ptr(), window))
+            }
+        }
+        fn fit_inside<W: WindowMethods>(&self, window: Option<&W>) {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_FitInside(self.as_ptr(), window)
+            }
+        }
+        fn inform_first_direction(
+            &self,
+            direction: c_int,
+            size: c_int,
+            available_other_dir: c_int,
+        ) -> bool {
+            unsafe {
+                ffi::wxSizer_InformFirstDirection(
+                    self.as_ptr(),
+                    direction,
+                    size,
+                    available_other_dir,
+                )
+            }
+        }
+        // BLOCKED: fn GetChildren()
+        // BLOCKED: fn GetChildren1()
+        fn get_containing_window(&self) -> WeakRef<Window> {
+            unsafe { WeakRef::<Window>::from(ffi::wxSizer_GetContainingWindow(self.as_ptr())) }
+        }
+        fn set_containing_window<W: WindowMethods>(&self, window: Option<&W>) {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_SetContainingWindow(self.as_ptr(), window)
+            }
+        }
+        // NOT_SUPPORTED: fn GetItemCount()
+        fn get_item_window<W: WindowMethods>(
+            &self,
+            window: Option<&W>,
+            recursive: bool,
+        ) -> *mut c_void {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_GetItem(self.as_ptr(), window, recursive)
+            }
+        }
+        fn get_item_sizer<S: SizerMethods>(
+            &self,
+            sizer: Option<&S>,
+            recursive: bool,
+        ) -> *mut c_void {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_GetItem1(self.as_ptr(), sizer, recursive)
+            }
+        }
+        // NOT_SUPPORTED: fn GetItem2()
+        fn get_item_by_id(&self, id: c_int, recursive: bool) -> *mut c_void {
+            unsafe { ffi::wxSizer_GetItemById(self.as_ptr(), id, recursive) }
+        }
+        fn get_min_size(&self) -> Size {
+            unsafe { SizeIsOwned(ffi::wxSizer_GetMinSize(self.as_ptr())) }
+        }
+        fn get_position(&self) -> Point {
+            unsafe { PointIsOwned(ffi::wxSizer_GetPosition(self.as_ptr())) }
+        }
+        fn get_size(&self) -> Size {
+            unsafe { SizeIsOwned(ffi::wxSizer_GetSize(self.as_ptr())) }
+        }
+        fn hide_window<W: WindowMethods>(&self, window: Option<&W>, recursive: bool) -> bool {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Hide(self.as_ptr(), window, recursive)
+            }
+        }
+        fn hide_sizer<S: SizerMethods>(&self, sizer: Option<&S>, recursive: bool) -> bool {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Hide1(self.as_ptr(), sizer, recursive)
+            }
+        }
+        // NOT_SUPPORTED: fn Hide2()
+        // NOT_SUPPORTED: fn Insert()
+        // NOT_SUPPORTED: fn Insert1()
+        // NOT_SUPPORTED: fn Insert2()
+        // NOT_SUPPORTED: fn Insert3()
+        // NOT_SUPPORTED: fn Insert4()
+        // NOT_SUPPORTED: fn Insert5()
+        // NOT_SUPPORTED: fn Insert6()
+        // NOT_SUPPORTED: fn InsertSpacer()
+        // NOT_SUPPORTED: fn InsertStretchSpacer()
+        fn is_empty(&self) -> bool {
+            unsafe { ffi::wxSizer_IsEmpty(self.as_ptr()) }
+        }
+        fn is_shown_window<W: WindowMethods>(&self, window: Option<&W>) -> bool {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_IsShown(self.as_ptr(), window)
+            }
+        }
+        fn is_shown_sizer<S: SizerMethods>(&self, sizer: Option<&S>) -> bool {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_IsShown1(self.as_ptr(), sizer)
+            }
+        }
+        // NOT_SUPPORTED: fn IsShown2()
+        fn layout(&self) {
+            unsafe { ffi::wxSizer_Layout(self.as_ptr()) }
+        }
+        fn prepend_window_sizerflags<W: WindowMethods, S: SizerFlagsMethods>(
+            &self,
+            window: Option<&W>,
+            flags: &S,
+        ) -> *mut c_void {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let flags = flags.as_ptr();
+                ffi::wxSizer_Prepend(self.as_ptr(), window, flags)
+            }
+        }
+        fn prepend_window_int<W: WindowMethods, O: ObjectMethods>(
+            &self,
+            window: Option<&W>,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: Option<&O>,
+        ) -> *mut c_void {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let user_data = match user_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Prepend1(self.as_ptr(), window, proportion, flag, border, user_data)
+            }
+        }
+        fn prepend_sizer_sizerflags<S: SizerMethods, S2: SizerFlagsMethods>(
+            &self,
+            sizer: Option<&S>,
+            flags: &S2,
+        ) -> *mut c_void {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let flags = flags.as_ptr();
+                ffi::wxSizer_Prepend2(self.as_ptr(), sizer, flags)
+            }
+        }
+        fn prepend_sizer_int<S: SizerMethods, O: ObjectMethods>(
+            &self,
+            sizer: Option<&S>,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: Option<&O>,
+        ) -> *mut c_void {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let user_data = match user_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Prepend3(self.as_ptr(), sizer, proportion, flag, border, user_data)
+            }
+        }
+        fn prepend_int_int<O: ObjectMethods>(
+            &self,
+            width: c_int,
+            height: c_int,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: Option<&O>,
+        ) -> *mut c_void {
+            unsafe {
+                let user_data = match user_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Prepend4(
+                    self.as_ptr(),
+                    width,
+                    height,
+                    proportion,
+                    flag,
+                    border,
+                    user_data,
+                )
+            }
+        }
+        fn prepend_int_sizerflags<S: SizerFlagsMethods>(
+            &self,
+            width: c_int,
+            height: c_int,
+            flags: &S,
+        ) -> *mut c_void {
+            unsafe {
+                let flags = flags.as_ptr();
+                ffi::wxSizer_Prepend5(self.as_ptr(), width, height, flags)
+            }
+        }
+        fn prepend_sizeritem(&self, item: *mut c_void) -> *mut c_void {
+            unsafe { ffi::wxSizer_Prepend6(self.as_ptr(), item) }
+        }
+        fn prepend_spacer(&self, size: c_int) -> *mut c_void {
+            unsafe { ffi::wxSizer_PrependSpacer(self.as_ptr(), size) }
+        }
+        fn prepend_stretch_spacer(&self, prop: c_int) -> *mut c_void {
+            unsafe { ffi::wxSizer_PrependStretchSpacer(self.as_ptr(), prop) }
+        }
+        fn reposition_children<S: SizeMethods>(&self, min_size: &S) {
+            unsafe {
+                let min_size = min_size.as_ptr();
+                ffi::wxSizer_RepositionChildren(self.as_ptr(), min_size)
+            }
+        }
+        // BLOCKED: fn Remove()
+        fn remove_sizer<S: SizerMethods>(&self, sizer: Option<&S>) -> bool {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Remove1(self.as_ptr(), sizer)
+            }
+        }
+        fn remove_int(&self, index: c_int) -> bool {
+            unsafe { ffi::wxSizer_Remove2(self.as_ptr(), index) }
+        }
+        fn replace_window<W: WindowMethods, W2: WindowMethods>(
+            &self,
+            oldwin: Option<&W>,
+            newwin: Option<&W2>,
+            recursive: bool,
+        ) -> bool {
+            unsafe {
+                let oldwin = match oldwin {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let newwin = match newwin {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Replace(self.as_ptr(), oldwin, newwin, recursive)
+            }
+        }
+        fn replace_sizer<S: SizerMethods, S2: SizerMethods>(
+            &self,
+            oldsz: Option<&S>,
+            newsz: Option<&S2>,
+            recursive: bool,
+        ) -> bool {
+            unsafe {
+                let oldsz = match oldsz {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let newsz = match newsz {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Replace1(self.as_ptr(), oldsz, newsz, recursive)
+            }
+        }
+        // NOT_SUPPORTED: fn Replace2()
+        fn set_dimension_int(&self, x: c_int, y: c_int, width: c_int, height: c_int) {
+            unsafe { ffi::wxSizer_SetDimension(self.as_ptr(), x, y, width, height) }
+        }
+        fn set_dimension_point<P: PointMethods, S: SizeMethods>(&self, pos: &P, size: &S) {
+            unsafe {
+                let pos = pos.as_ptr();
+                let size = size.as_ptr();
+                ffi::wxSizer_SetDimension1(self.as_ptr(), pos, size)
+            }
+        }
+        fn set_item_min_size_window_int<W: WindowMethods>(
+            &self,
+            window: Option<&W>,
+            width: c_int,
+            height: c_int,
+        ) -> bool {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_SetItemMinSize(self.as_ptr(), window, width, height)
+            }
+        }
+        fn set_item_min_size_window_size<W: WindowMethods, S: SizeMethods>(
+            &self,
+            window: Option<&W>,
+            size: &S,
+        ) -> bool {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let size = size.as_ptr();
+                ffi::wxSizer_SetItemMinSize1(self.as_ptr(), window, size)
+            }
+        }
+        fn set_item_min_size_sizer_int<S: SizerMethods>(
+            &self,
+            sizer: Option<&S>,
+            width: c_int,
+            height: c_int,
+        ) -> bool {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_SetItemMinSize2(self.as_ptr(), sizer, width, height)
+            }
+        }
+        fn set_item_min_size_sizer_size<S: SizerMethods, S2: SizeMethods>(
+            &self,
+            sizer: Option<&S>,
+            size: &S2,
+        ) -> bool {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let size = size.as_ptr();
+                ffi::wxSizer_SetItemMinSize3(self.as_ptr(), sizer, size)
+            }
+        }
+        // NOT_SUPPORTED: fn SetItemMinSize4()
+        // NOT_SUPPORTED: fn SetItemMinSize5()
+        fn set_min_size_size<S: SizeMethods>(&self, size: &S) {
+            unsafe {
+                let size = size.as_ptr();
+                ffi::wxSizer_SetMinSize(self.as_ptr(), size)
+            }
+        }
+        fn set_min_size_int(&self, width: c_int, height: c_int) {
+            unsafe { ffi::wxSizer_SetMinSize1(self.as_ptr(), width, height) }
+        }
+        fn set_size_hints<W: WindowMethods>(&self, window: Option<&W>) {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_SetSizeHints(self.as_ptr(), window)
+            }
+        }
+        // BLOCKED: fn SetVirtualSizeHints()
+        fn show_window<W: WindowMethods>(
+            &self,
+            window: Option<&W>,
+            show: bool,
+            recursive: bool,
+        ) -> bool {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Show(self.as_ptr(), window, show, recursive)
+            }
+        }
+        fn show_sizer<S: SizerMethods>(
+            &self,
+            sizer: Option<&S>,
+            show: bool,
+            recursive: bool,
+        ) -> bool {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Show1(self.as_ptr(), sizer, show, recursive)
+            }
+        }
+        // NOT_SUPPORTED: fn Show2()
+        fn show_items(&self, show: bool) {
+            unsafe { ffi::wxSizer_ShowItems(self.as_ptr(), show) }
+        }
+    }
+
+    // wxSizerFlags
+    pub trait SizerFlagsMethods: WxRustMethods {
+        fn align(&self, alignment: c_int) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Align(self.as_ptr(), alignment);
+                &self
+            }
+        }
+        fn border_int(&self, direction: c_int, borderinpixels: c_int) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Border(self.as_ptr(), direction, borderinpixels);
+                &self
+            }
+        }
+        fn border(&self, direction: c_int) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Border1(self.as_ptr(), direction);
+                &self
+            }
+        }
+        fn bottom(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Bottom(self.as_ptr());
+                &self
+            }
+        }
+        fn center(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Center(self.as_ptr());
+                &self
+            }
+        }
+        fn centre(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Centre(self.as_ptr());
+                &self
+            }
+        }
+        fn center_horizontal(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_CenterHorizontal(self.as_ptr());
+                &self
+            }
+        }
+        fn center_vertical(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_CenterVertical(self.as_ptr());
+                &self
+            }
+        }
+        fn centre_horizontal(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_CentreHorizontal(self.as_ptr());
+                &self
+            }
+        }
+        fn centre_vertical(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_CentreVertical(self.as_ptr());
+                &self
+            }
+        }
+        fn double_border(&self, direction: c_int) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_DoubleBorder(self.as_ptr(), direction);
+                &self
+            }
+        }
+        fn double_horz_border(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_DoubleHorzBorder(self.as_ptr());
+                &self
+            }
+        }
+        fn expand(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Expand(self.as_ptr());
+                &self
+            }
+        }
+        fn fixed_min_size(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_FixedMinSize(self.as_ptr());
+                &self
+            }
+        }
+        fn reserve_space_even_if_hidden(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_ReserveSpaceEvenIfHidden(self.as_ptr());
+                &self
+            }
+        }
+        fn left(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Left(self.as_ptr());
+                &self
+            }
+        }
+        fn proportion(&self, proportion: c_int) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Proportion(self.as_ptr(), proportion);
+                &self
+            }
+        }
+        fn right(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Right(self.as_ptr());
+                &self
+            }
+        }
+        fn shaped(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Shaped(self.as_ptr());
+                &self
+            }
+        }
+        fn top(&self) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_Top(self.as_ptr());
+                &self
+            }
+        }
+        fn triple_border(&self, direction: c_int) -> &Self {
+            unsafe {
+                ffi::wxSizerFlags_TripleBorder(self.as_ptr(), direction);
+                &self
+            }
+        }
+        fn get_default_border() -> c_int {
+            unsafe { ffi::wxSizerFlags_GetDefaultBorder() }
+        }
+        // NOT_SUPPORTED: fn GetDefaultBorderFractional()
+    }
+
+    // wxStaticBoxSizer
+    pub trait StaticBoxSizerMethods: BoxSizerMethods {
+        fn get_static_box(&self) -> *mut c_void {
+            unsafe { ffi::wxStaticBoxSizer_GetStaticBox(self.as_ptr()) }
+        }
+    }
+
     // wxValidator
     pub trait ValidatorMethods: EvtHandlerMethods {
         // DTOR: fn ~wxValidator()
@@ -3449,11 +5525,11 @@ pub mod methods {
 
     // wxStaticBitmap
     pub trait StaticBitmapMethods: ControlMethods {
-        fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        fn create<W: WindowMethods, B: BitmapMethods, P: PointMethods, S: SizeMethods>(
             &self,
             parent: Option<&W>,
             id: c_int,
-            label: *const c_void,
+            label: &B,
             pos: &P,
             size: &S,
             style: c_long,
@@ -3464,22 +5540,158 @@ pub mod methods {
                     Some(r) => r.as_ptr(),
                     None => ptr::null_mut(),
                 };
+                let label = label.as_ptr();
                 let pos = pos.as_ptr();
                 let size = size.as_ptr();
                 let name = wx_base::wx_string_from(name);
                 ffi::wxStaticBitmap_Create(self.as_ptr(), parent, id, label, pos, size, style, name)
             }
         }
-        // NOT_SUPPORTED: fn GetBitmap()
+        fn get_bitmap(&self) -> Bitmap {
+            unsafe { BitmapIsOwned(ffi::wxStaticBitmap_GetBitmap(self.as_ptr())) }
+        }
         // NOT_SUPPORTED: fn GetIcon()
-        fn set_bitmap(&self, label: *const c_void) {
-            unsafe { ffi::wxStaticBitmap_SetBitmap(self.as_ptr(), label) }
+        fn set_bitmap<B: BitmapMethods>(&self, label: &B) {
+            unsafe {
+                let label = label.as_ptr();
+                ffi::wxStaticBitmap_SetBitmap(self.as_ptr(), label)
+            }
         }
         fn set_icon(&self, label: *const c_void) {
             unsafe { ffi::wxStaticBitmap_SetIcon(self.as_ptr(), label) }
         }
         // NOT_SUPPORTED: fn SetScaleMode()
         // NOT_SUPPORTED: fn GetScaleMode()
+    }
+
+    // wxWrapSizer
+    pub trait WrapSizerMethods: BoxSizerMethods {}
+}
+
+// wxArtProvider
+wx_class! { ArtProvider =
+    ArtProviderIsOwned<true>(wxArtProvider) impl
+        ArtProviderMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> ArtProviderIsOwned<OWNED> {
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for ArtProviderIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
+// wxBitmap
+wx_class! { Bitmap =
+    BitmapIsOwned<true>(wxBitmap) impl
+        BitmapMethods,
+        GDIObjectMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> BitmapIsOwned<OWNED> {
+    pub fn new() -> BitmapIsOwned<OWNED> {
+        unsafe { BitmapIsOwned(ffi::wxBitmap_new()) }
+    }
+    pub fn new_with_bitmap<B: BitmapMethods>(bitmap: &B) -> BitmapIsOwned<OWNED> {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            BitmapIsOwned(ffi::wxBitmap_new1(bitmap))
+        }
+    }
+    // NOT_SUPPORTED: fn wxBitmap2()
+    pub fn new_with_int(width: c_int, height: c_int, depth: c_int) -> BitmapIsOwned<OWNED> {
+        unsafe { BitmapIsOwned(ffi::wxBitmap_new3(width, height, depth)) }
+    }
+    pub fn new_with_size<S: SizeMethods>(sz: &S, depth: c_int) -> BitmapIsOwned<OWNED> {
+        unsafe {
+            let sz = sz.as_ptr();
+            BitmapIsOwned(ffi::wxBitmap_new4(sz, depth))
+        }
+    }
+    pub fn new_with_char(bits: *const c_void) -> BitmapIsOwned<OWNED> {
+        unsafe { BitmapIsOwned(ffi::wxBitmap_new5(bits)) }
+    }
+    // NOT_SUPPORTED: fn wxBitmap6()
+    pub fn new_with_image(img: *const c_void, depth: c_int) -> BitmapIsOwned<OWNED> {
+        unsafe { BitmapIsOwned(ffi::wxBitmap_new7(img, depth)) }
+    }
+    pub fn new_with_cursor(cursor: *const c_void) -> BitmapIsOwned<OWNED> {
+        unsafe { BitmapIsOwned(ffi::wxBitmap_new8(cursor)) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for BitmapIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
+// wxBoxSizer
+wx_class! { BoxSizer =
+    BoxSizerIsOwned<true>(wxBoxSizer) impl
+        BoxSizerMethods,
+        SizerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> BoxSizerIsOwned<OWNED> {
+    pub fn new(orient: c_int) -> BoxSizerIsOwned<OWNED> {
+        unsafe { BoxSizerIsOwned(ffi::wxBoxSizer_new(orient)) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
+// wxCheckBox
+wx_class! { CheckBox =
+    CheckBoxIsOwned<true>(wxCheckBox) impl
+        CheckBoxMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> CheckBoxIsOwned<OWNED> {
+    pub fn new_2step() -> CheckBoxIsOwned<OWNED> {
+        unsafe { CheckBoxIsOwned(ffi::wxCheckBox_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        label: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> CheckBoxIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let label = wx_base::wx_string_from(label);
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            CheckBoxIsOwned(ffi::wxCheckBox_new1(
+                parent, id, label, pos, size, style, validator, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
     }
 }
 
@@ -3501,6 +5713,76 @@ impl<const OWNED: bool> Drop for CommandEventIsOwned<OWNED> {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
         }
+    }
+}
+
+// wxGDIObject
+wx_class! { GDIObject =
+    GDIObjectIsOwned<true>(wxGDIObject) impl
+        GDIObjectMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> GDIObjectIsOwned<OWNED> {
+    // BLOCKED: fn wxGDIObject()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for GDIObjectIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
+// wxListBox
+wx_class! { ListBox =
+    ListBoxIsOwned<true>(wxListBox) impl
+        ListBoxMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> ListBoxIsOwned<OWNED> {
+    pub fn new_2step() -> ListBoxIsOwned<OWNED> {
+        unsafe { ListBoxIsOwned(ffi::wxListBox_new()) }
+    }
+    // NOT_SUPPORTED: fn wxListBox1()
+    pub fn new<
+        W: WindowMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        A: ArrayStringMethods,
+        V: ValidatorMethods,
+    >(
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        choices: &A,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> ListBoxIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let choices = choices.as_ptr();
+            let validator = validator.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            ListBoxIsOwned(ffi::wxListBox_new2(
+                parent, id, pos, size, choices, style, validator, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
     }
 }
 
@@ -3698,6 +5980,43 @@ impl<const OWNED: bool> NonOwnedWindowIsOwned<OWNED> {
     }
 }
 
+// wxToolBar
+wx_class! { ToolBar =
+    ToolBarIsOwned<true>(wxToolBar) impl
+        ToolBarMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> ToolBarIsOwned<OWNED> {
+    pub fn new_2step() -> ToolBarIsOwned<OWNED> {
+        unsafe { ToolBarIsOwned(ffi::wxToolBar_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> ToolBarIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            ToolBarIsOwned(ffi::wxToolBar_new1(parent, id, pos, size, style, name))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
 // wxTopLevelWindow
 wx_class! { TopLevelWindow =
     TopLevelWindowIsOwned<true>(wxTopLevelWindow) impl
@@ -3808,6 +6127,64 @@ impl<const OWNED: bool> WindowMethods for FrameIsOwned<OWNED> {
     }
 }
 
+// wxPanel
+wx_class! { Panel =
+    PanelIsOwned<true>(wxPanel) impl
+        PanelMethods,
+        // WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> PanelIsOwned<OWNED> {
+    pub fn new_2step() -> PanelIsOwned<OWNED> {
+        unsafe { PanelIsOwned(ffi::wxPanel_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> PanelIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            PanelIsOwned(ffi::wxPanel_new1(parent, id, pos, size, style, name))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> WindowMethods for PanelIsOwned<OWNED> {
+    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            ffi::wxPanel_Create(self.as_ptr(), parent, id, pos, size, style, name)
+        }
+    }
+}
+
 // wxPoint
 wx_class! { Point =
     PointIsOwned<true>(wxPoint) impl
@@ -3909,6 +6286,71 @@ impl<const OWNED: bool> Drop for SizeIsOwned<OWNED> {
     }
 }
 
+// wxSizer
+wx_class! { Sizer =
+    SizerIsOwned<true>(wxSizer) impl
+        SizerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> SizerIsOwned<OWNED> {
+    // BLOCKED: fn wxSizer()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
+// wxSizerFlags
+wx_class! { SizerFlags =
+    SizerFlagsIsOwned<true>(wxSizerFlags) impl
+        SizerFlagsMethods
+}
+impl<const OWNED: bool> SizerFlagsIsOwned<OWNED> {
+    pub fn new(proportion: c_int) -> SizerFlagsIsOwned<OWNED> {
+        unsafe { SizerFlagsIsOwned(ffi::wxSizerFlags_new(proportion)) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for SizerFlagsIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxSizerFlags_delete(self.0) }
+        }
+    }
+}
+
+// wxStaticBoxSizer
+wx_class! { StaticBoxSizer =
+    StaticBoxSizerIsOwned<true>(wxStaticBoxSizer) impl
+        StaticBoxSizerMethods,
+        BoxSizerMethods,
+        SizerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> StaticBoxSizerIsOwned<OWNED> {
+    pub fn new_with_staticbox(box_: *mut c_void, orient: c_int) -> StaticBoxSizerIsOwned<OWNED> {
+        unsafe { StaticBoxSizerIsOwned(ffi::wxStaticBoxSizer_new(box_, orient)) }
+    }
+    pub fn new_with_int<W: WindowMethods>(
+        orient: c_int,
+        parent: Option<&W>,
+        label: &str,
+    ) -> StaticBoxSizerIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let label = wx_base::wx_string_from(label);
+            StaticBoxSizerIsOwned(ffi::wxStaticBoxSizer_new1(orient, parent, label))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
 // wxValidator
 wx_class! { Validator =
     ValidatorIsOwned<true>(wxValidator) impl
@@ -3944,10 +6386,10 @@ impl<const OWNED: bool> StaticBitmapIsOwned<OWNED> {
     pub fn new_2step() -> StaticBitmapIsOwned<OWNED> {
         unsafe { StaticBitmapIsOwned(ffi::wxStaticBitmap_new()) }
     }
-    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+    pub fn new<W: WindowMethods, B: BitmapMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
-        label: *const c_void,
+        label: &B,
         pos: &P,
         size: &S,
         style: c_long,
@@ -3958,6 +6400,7 @@ impl<const OWNED: bool> StaticBitmapIsOwned<OWNED> {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
+            let label = label.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let name = wx_base::wx_string_from(name);
@@ -3965,6 +6408,23 @@ impl<const OWNED: bool> StaticBitmapIsOwned<OWNED> {
                 parent, id, label, pos, size, style, name,
             ))
         }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
+// wxWrapSizer
+wx_class! { WrapSizer =
+    WrapSizerIsOwned<true>(wxWrapSizer) impl
+        WrapSizerMethods,
+        BoxSizerMethods,
+        SizerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> WrapSizerIsOwned<OWNED> {
+    pub fn new(orient: c_int, flags: c_int) -> WrapSizerIsOwned<OWNED> {
+        unsafe { WrapSizerIsOwned(ffi::wxWrapSizer_new(orient, flags)) }
     }
     pub fn none() -> Option<&'static Self> {
         None

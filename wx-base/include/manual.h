@@ -45,6 +45,11 @@ wxString *wxString_new(const unsigned char *psz, const size_t nLength);
 const char *wxString_UTF8Data(wxString *self);
 size_t wxString_Len(wxString *self);
 
+// ArrayString
+wxArrayString *wxArrayString_new();
+void wxArrayString_delete(wxArrayString *self);
+void wxArrayString_Add(wxArrayString *self, const wxString *s);
+
 // WeakRef
 void *OpaqueWeakRef_new(void *obj);
 void OpaqueWeakRef_delete(void *self);

@@ -43,6 +43,18 @@ size_t wxString_Len(wxString *self) {
     return self->Len();
 }
 
+// ArrayString
+wxArrayString *wxArrayString_new() {
+    return new wxArrayString();
+}
+void wxArrayString_delete(wxArrayString *self) {
+    delete self;
+}
+void wxArrayString_Add(wxArrayString *self, const wxString *s) {
+    self->Add(*s);
+}
+
+
 class OpaqueWeakRef : public wxTrackerNode
 {
 public:

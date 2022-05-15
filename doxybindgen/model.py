@@ -13,6 +13,11 @@ CXX2RUST = {
     'wxItemKind': 'c_int',
     'wxWindowID': 'c_int',
 }
+STR_TYPES = [
+    'wxString',
+    'wxArtClient',
+    'wxArtID',
+]
 CXX_PRIMITIVES = [
     'bool',
     'void',
@@ -23,6 +28,12 @@ RUST_PRIMITIVES = [
     'c_int',
     'c_long',
     'c_uchar',
+]
+OS_UNSUPPORTED_TYPES = [
+    'wxAccessible',
+]
+MANUAL_BINDINGS = [
+    'wxArrayString',
 ]
 
 
@@ -73,7 +84,8 @@ class Method:
     def __init__(self, cls, e):
         self.is_public = e.get('prot') == 'public'
         self.is_static = e.get('static') == 'yes'
-        self.returns = CxxType(cls.manager, e.find('type'))
+        is_array = False # TODO: handle returning array in future
+        self.returns = CxxType(cls.manager, e.find('type'), is_array)
         self.cls = cls
         self.__name = e.findtext('name')
         self.overload_index = self._overload_index()
@@ -84,7 +96,8 @@ class Method:
             self.returns = RustType(cls.name, self.const)
         self.params = []
         for param in e.findall('param'):
-            ptype = CxxType(cls.manager, param.find('type'))
+            is_array = param.find('array') is not None
+            ptype = CxxType(cls.manager, param.find('type'), is_array)
             pname = param.findtext('declname')
             self.params.append(Param(ptype, pname))
         is_virtual = e.get('virt') == 'virtual'
@@ -157,6 +170,9 @@ class Method:
     def returns_owned(self):
         returns_owned_list = self.cls.config.get('returns_owned') or []
         return self.name() in returns_owned_list
+    
+    def maybe_returns_self(self):
+        return self.returns.is_self_ref(self.cls.name)
 
     def cxx_signature(self):
         items = []
@@ -220,21 +236,20 @@ class RustType:
     def needs_new(self):
         return False
     
+    def is_self_ref(self, cls_name):
+        return False
+
     def is_void(self):
         return False
 
     def is_str(self):
-        return self.typename == 'wxString'
+        return self.typename in STR_TYPES
 
     def normalized(self):
         return '%s%s*' % (
             'const ' if self.const else '',
             self.typename,
         )
-
-OS_UNSUPPORTED_TYPES = [
-    'wxAccessible',
-]
 
 
 class ClassInfo:
@@ -269,6 +284,8 @@ class ClassManager:
         self.__by_name = dict
 
     def is_binding_type(self, name):
+        if name in MANUAL_BINDINGS:
+            return True
         assert self.__by_name is not None
         return name in self.__by_name.keys()
     
@@ -291,9 +308,13 @@ class ClassManager:
 
 
 class CxxType:
-    def __init__(self, manager, e):
+    def __init__(self, manager, e, is_array):
         self.__manager = manager
         self.__srctype = ''.join(e.itertext())
+        self.is_array = is_array
+        # s = self.__srctype
+        # if is_array:
+        #     s = '[%s]' % (s,)
         # print('parsing: |%s|' % (s,))
         matched = re.match(r'(const )?([^*&]*)([*&]+)?', self.__srctype)
         self.typename = None
@@ -380,7 +401,8 @@ class CxxType:
                 self._is_binding_type())
 
     def _is_const_ref_to_string(self):
-        return self._is_const_ref() and self.typename == 'wxString'
+        return (self._is_const_ref() and
+                self.typename in STR_TYPES)
 
     def is_const_ref_to_binding(self):
         return self._is_const_ref() and self._is_binding_type()
@@ -395,6 +417,8 @@ class CxxType:
 
     def not_supported(self):
         if self.typename in OS_UNSUPPORTED_TYPES:
+            return True
+        if self.is_array:
             return True
         if self.is_str():
             return False
@@ -422,13 +446,17 @@ class CxxType:
     def is_ptr(self):
         return self.__indirection.startswith('*')
     
+    def is_self_ref(self, cls_name):
+        return (self.is_ref() and 
+                self.typename == cls_name)
+
     def is_void(self):
         if self.is_ptr():
             return False
         return self.typename in ['void', '']
     
     def is_str(self):
-        return self.typename == 'wxString'
+        return self.typename in STR_TYPES
     
     def make_generic(self, generic_name, is_option):
         self.generic_name = generic_name

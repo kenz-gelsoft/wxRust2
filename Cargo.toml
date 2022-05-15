@@ -1,8 +1,9 @@
 [workspace]
 
 members = [
-    "example",
+    "samples/hello",
     "samples/minimal",
+    "samples/wrapsizer",
     "wx-base",
     "wx-core",
     "wxrust-config",
