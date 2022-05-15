@@ -33,6 +33,11 @@ mod ffi {
         pub fn wxString_UTF8Data(self_: *mut c_void) -> *mut c_uchar;
         pub fn wxString_Len(self_: *mut c_void) -> usize;
 
+        // ArrayString
+        pub fn wxArrayString_new() -> *mut c_void;
+        pub fn wxArrayString_delete(self_: *mut c_void);
+        pub fn wxArrayString_Add(self_: *mut c_void, s: *const c_void);
+
         pub fn wxRustEntry(argc: *mut c_int, argv: *mut *mut c_char) -> c_int;
 
         // WeakRef
@@ -98,6 +103,21 @@ impl App {
     pub fn run<F: Fn(*mut c_void) + 'static>(closure: F) {
         Self::on_init(closure);
         entry();
+    }
+}
+
+pub struct ArrayString(*mut c_void);
+impl ArrayString {
+    pub fn new() -> Self {
+        unsafe { ArrayString(ffi::wxArrayString_new()) }
+    }
+    pub fn add(&self, s: &str) {
+        unsafe { ffi::wxArrayString_Add(self.0, wx_string_from(s)) }
+    }
+}
+impl Drop for ArrayString {
+    fn drop(&mut self) {
+        unsafe { ffi::wxArrayString_delete(self.0) }
     }
 }
 
