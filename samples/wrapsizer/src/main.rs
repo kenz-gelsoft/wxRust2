@@ -6,13 +6,6 @@ use wx::methods::*;
 fn main() {
     wx::App::run(|_| {
         let frame = WrapSizerFrame::new();
-        let frame_copy = frame.clone();
-        frame
-            .m_ok_button
-            .bind(wx::RUST_EVT_BUTTON, move |_: &wx::CommandEvent| {
-                frame_copy.on_button()
-            });
-        frame.base.show(true);
     });
 }
 
@@ -66,29 +59,11 @@ impl WrapSizerFrame {
 
         // Some toolbars in a wrap sizer
         let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
-        sizer_top.add_window_int(
-            Some(&self.make_tool_bar()),
-            0,
-            0,
-            0,
-            wx::Object::none(),
-        );
+        sizer_top.add_window_int(Some(&self.make_tool_bar()), 0, 0, 0, wx::Object::none());
         sizer_top.add_int_int(20, 1, 0, 0, 0, wx::Object::none());
-        sizer_top.add_window_int(
-            Some(&self.make_tool_bar()),
-            0,
-            0,
-            0,
-            wx::Object::none(),
-        );
+        sizer_top.add_window_int(Some(&self.make_tool_bar()), 0, 0, 0, wx::Object::none());
         sizer_top.add_int_int(20, 1, 0, 0, 0, wx::Object::none());
-        sizer_top.add_window_int(
-            Some(&self.make_tool_bar()),
-            0,
-            0,
-            0,
-            wx::Object::none(),
-        );
+        sizer_top.add_window_int(Some(&self.make_tool_bar()), 0, 0, 0, wx::Object::none());
         sizer_root.add_sizer_sizerflags(
             Some(&sizer_top),
             wx::SizerFlags::new(0).expand().border(wx::ALL),
@@ -165,9 +140,19 @@ impl WrapSizerFrame {
             Some(&self.m_ok_button),
             wx::SizerFlags::new(0).centre().double_border(wx::ALL),
         );
+        let copy_self = self.clone();
+        self.m_ok_button
+            .bind(wx::RUST_EVT_BUTTON, move |_: &wx::CommandEvent| {
+                copy_self.on_button()
+            });
 
         // Set sizer for the panel
         self.m_panel.set_sizer(Some(&sizer_root), true);
+
+        self.base
+            .set_client_size_size(&self.m_panel.get_best_size());
+
+        self.base.show(true);
     }
 
     fn on_button(&self) {
