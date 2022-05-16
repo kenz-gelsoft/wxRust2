@@ -1,4 +1,4 @@
-use std::os::raw::c_int;
+use std::os::raw::{c_int, c_long};
 use std::ptr;
 
 mod generated;
@@ -13,6 +13,15 @@ pub mod methods {
 
     // re-export wx_base::methods
     pub use wx_base::methods::*;
+
+    pub trait Builder<T: ?Sized> {
+        fn build(&self) -> T;
+    }
+    pub trait Buildable<B: Builder<Self>> {
+        fn builder() -> B
+        where
+            Self: Sized;
+    }
 }
 use methods::*;
 
@@ -28,6 +37,39 @@ mod ffi {
             x: c_int,
             y: c_int,
         );
+    }
+}
+
+pub struct FrameBuilder {
+    title: String,
+}
+impl FrameBuilder {
+    fn new() -> Self {
+        Self {
+            title: "".to_string(),
+        }
+    }
+    pub fn title(&mut self, s: &str) -> &mut Self {
+        self.title = s.to_string();
+        self
+    }
+}
+impl Builder<Frame> for FrameBuilder {
+    fn build(&self) -> Frame {
+        Frame::new(
+            Window::none(),
+            ID_ANY,
+            &self.title,
+            &Point::default(),
+            &Size::default(),
+            DEFAULT_FRAME_STYLE,
+            "",
+        )
+    }
+}
+impl Buildable<FrameBuilder> for Frame {
+    fn builder() -> FrameBuilder {
+        FrameBuilder::new()
     }
 }
 

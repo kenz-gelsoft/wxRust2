@@ -5,15 +5,7 @@ use wx::methods::*;
 
 fn main() {
     wx::App::run(|_| {
-        let frame = wx::Frame::new(
-            wx::Window::none(),
-            wx::ID_ANY,
-            "Hello, 世界",
-            &wx::Point::default(),
-            &wx::Size::default(),
-            wx::DEFAULT_FRAME_STYLE,
-            "",
-        );
+        let frame = wx::Frame::builder().title("Hello, 世界").build();
         let button = wx::Button::new(
             Some(&frame),
             wx::ID_ANY,

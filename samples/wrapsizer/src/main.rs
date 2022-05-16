@@ -17,15 +17,7 @@ struct WrapSizerFrame {
 }
 impl WrapSizerFrame {
     fn new() -> Self {
-        let frame = wx::Frame::new(
-            wx::Window::none(),
-            wx::ID_ANY,
-            "wxWrapSizer Sample",
-            &wx::Point::default(),
-            &wx::Size::default(),
-            wx::DEFAULT_FRAME_STYLE,
-            "",
-        );
+        let frame = wx::Frame::builder().title("wxWrapSizer Sample").build();
         let panel = wx::Panel::new(
             Some(&frame),
             wx::ID_ANY,
