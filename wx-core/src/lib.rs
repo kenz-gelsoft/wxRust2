@@ -14,13 +14,8 @@ pub mod methods {
     // re-export wx_base::methods
     pub use wx_base::methods::*;
 
-    pub trait Builder<T: ?Sized> {
-        fn build<W: WindowMethods>(&self, parent: Option<&W>) -> T;
-    }
-    pub trait Buildable<B: Builder<Self>> {
-        fn builder() -> B
-        where
-            Self: Sized;
+    pub trait Buildable<B> {
+        fn builder() -> B;
     }
 }
 use methods::*;
@@ -43,14 +38,19 @@ mod ffi {
 pub struct FrameBuilder {
     title: String,
 }
+impl Buildable<FrameBuilder> for Frame {
+    fn builder() -> FrameBuilder {
+        FrameBuilder {
+            title: "".to_string(),
+        }
+    }
+}
 impl FrameBuilder {
     pub fn title(&mut self, s: &str) -> &mut Self {
         self.title = s.to_string();
         self
     }
-}
-impl Builder<Frame> for FrameBuilder {
-    fn build<W: WindowMethods>(&self, parent: Option<&W>) -> Frame {
+    pub fn build<W: WindowMethods>(&self, parent: Option<&W>) -> Frame {
         Frame::new(
             parent,
             ID_ANY,
@@ -62,29 +62,30 @@ impl Builder<Frame> for FrameBuilder {
         )
     }
 }
-impl Buildable<FrameBuilder> for Frame {
-    fn builder() -> FrameBuilder {
-        FrameBuilder {
-            title: "".to_string(),
-        }
-    }
-}
 
 pub struct PanelBuilder;
-impl Builder<Panel> for PanelBuilder {
-    fn build<W: WindowMethods>(&self, parent: Option<&W>) -> Panel {
-        Panel::new(parent, ID_ANY, &Point::default(), &Size::default(), 0, "")
-    }
-}
 impl Buildable<PanelBuilder> for Panel {
     fn builder() -> PanelBuilder {
         PanelBuilder
+    }
+}
+impl PanelBuilder {
+    pub fn build<W: WindowMethods>(&self, parent: Option<&W>) -> Panel {
+        Panel::new(parent, ID_ANY, &Point::default(), &Size::default(), 0, "")
     }
 }
 
 pub struct ButtonBuilder {
     id: c_int,
     title: String,
+}
+impl Buildable<ButtonBuilder> for Button {
+    fn builder() -> ButtonBuilder {
+        ButtonBuilder {
+            id: ID_ANY,
+            title: "".to_string(),
+        }
+    }
 }
 impl ButtonBuilder {
     pub fn id(&mut self, id: c_int) -> &mut Self {
@@ -95,9 +96,7 @@ impl ButtonBuilder {
         self.title = s.to_string();
         self
     }
-}
-impl Builder<Button> for ButtonBuilder {
-    fn build<W: WindowMethods>(&self, parent: Option<&W>) -> Button {
+    pub fn build<W: WindowMethods>(&self, parent: Option<&W>) -> Button {
         Button::new(
             parent,
             self.id,
@@ -110,26 +109,23 @@ impl Builder<Button> for ButtonBuilder {
         )
     }
 }
-impl Buildable<ButtonBuilder> for Button {
-    fn builder() -> ButtonBuilder {
-        ButtonBuilder {
-            id: ID_ANY,
-            title: "".to_string(),
-        }
-    }
-}
 
 pub struct CheckBoxBuilder {
     title: String,
+}
+impl Buildable<CheckBoxBuilder> for CheckBox {
+    fn builder() -> CheckBoxBuilder {
+        CheckBoxBuilder {
+            title: "".to_string(),
+        }
+    }
 }
 impl CheckBoxBuilder {
     pub fn title(&mut self, s: &str) -> &mut Self {
         self.title = s.to_string();
         self
     }
-}
-impl Builder<CheckBox> for CheckBoxBuilder {
-    fn build<W: WindowMethods>(&self, parent: Option<&W>) -> CheckBox {
+    pub fn build<W: WindowMethods>(&self, parent: Option<&W>) -> CheckBox {
         CheckBox::new(
             parent,
             ID_ANY,
@@ -142,17 +138,15 @@ impl Builder<CheckBox> for CheckBoxBuilder {
         )
     }
 }
-impl Buildable<CheckBoxBuilder> for CheckBox {
-    fn builder() -> CheckBoxBuilder {
-        CheckBoxBuilder {
-            title: "".to_string(),
-        }
-    }
-}
 
 pub struct ListBoxBuilder;
-impl Builder<ListBox> for ListBoxBuilder {
-    fn build<W: WindowMethods>(&self, parent: Option<&W>) -> ListBox {
+impl Buildable<ListBoxBuilder> for ListBox {
+    fn builder() -> ListBoxBuilder {
+        ListBoxBuilder
+    }
+}
+impl ListBoxBuilder {
+    pub fn build<W: WindowMethods>(&self, parent: Option<&W>) -> ListBox {
         ListBox::new(
             parent,
             ID_ANY,
@@ -165,23 +159,23 @@ impl Builder<ListBox> for ListBoxBuilder {
         )
     }
 }
-impl Buildable<ListBoxBuilder> for ListBox {
-    fn builder() -> ListBoxBuilder {
-        ListBoxBuilder
-    }
-}
 
 pub struct ToolBarBuilder {
     style: c_long,
+}
+impl Buildable<ToolBarBuilder> for ToolBar {
+    fn builder() -> ToolBarBuilder {
+        ToolBarBuilder {
+            style: 0,
+        }
+    }
 }
 impl ToolBarBuilder {
     pub fn style(&mut self, style: c_long) -> &mut Self {
         self.style = style;
         self
     }
-}
-impl Builder<ToolBar> for ToolBarBuilder {
-    fn build<W: WindowMethods>(&self, parent: Option<&W>) -> ToolBar {
+    pub fn build<W: WindowMethods>(&self, parent: Option<&W>) -> ToolBar {
         ToolBar::new(
             parent,
             ID_ANY,
@@ -190,13 +184,6 @@ impl Builder<ToolBar> for ToolBarBuilder {
             self.style,
             "",
         )
-    }
-}
-impl Buildable<ToolBarBuilder> for ToolBar {
-    fn builder() -> ToolBarBuilder {
-        ToolBarBuilder {
-            style: 0,
-        }
     }
 }
 
