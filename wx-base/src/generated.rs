@@ -30,7 +30,7 @@ mod ffi {
         pub fn wxObject_UnRef(self_: *mut c_void);
         pub fn wxObject_UnShare(self_: *mut c_void);
         // BLOCKED: pub fn wxObject_operator delete(self_: *mut c_void, buf: *mut c_void);
-        // NOT_SUPPORTED: pub fn wxObject_operator new(self_: *mut c_void, size: size_t, filename: *const c_void, line_num: c_int) -> *mut c_void;
+        // BLOCKED: pub fn wxObject_operator new(self_: *mut c_void, size: usize, filename: *const c_void, line_num: c_int) -> *mut c_void;
 
         // wxEvent
         // NOT_SUPPORTED: pub fn wxEvent_new(id: c_int, event_type: wxEventType) -> *mut c_void;
@@ -139,7 +139,7 @@ pub mod methods {
             unsafe { ffi::wxObject_UnShare(self.as_ptr()) }
         }
         // BLOCKED: fn operator delete()
-        // NOT_SUPPORTED: fn operator new()
+        // BLOCKED: fn operator new()
     }
 
     // wxEvent

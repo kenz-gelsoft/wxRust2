@@ -72,6 +72,7 @@ blocklist = [
 ]
 [types.wxObject]
 blocklist = [
+    'operator new',
     'operator delete',
 ]
 [types.wxEvent]
@@ -145,6 +146,10 @@ blocklist = [
     'GetMenuItems1',
 ]
 [types.wxMenuBar]
+blocklist = [
+    'GetLabelTop',
+    'SetLabelTop',
+]
 mac = [
     'MacGetCommonMenuBar',
     'MacSetCommonMenuBar',

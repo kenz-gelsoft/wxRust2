@@ -7,6 +7,7 @@ CXX2RUST = {
     'double': 'c_double',
     'int': 'c_int',
     'long': 'c_long',
+    'size_t': 'usize',
     'wxByte': 'c_uchar',
     'wxCoord': 'c_int',
     'wxEllipsizeMode': 'c_int',
@@ -28,6 +29,7 @@ RUST_PRIMITIVES = [
     'c_int',
     'c_long',
     'c_uchar',
+    'usize',
 ]
 OS_UNSUPPORTED_TYPES = [
     'wxAccessible',
