@@ -99,7 +99,7 @@ mod ffi {
         // BLOCKED: pub fn wxBitmap_GetHandlers() -> *mut c_void;
         pub fn wxBitmap_InitStandardHandlers();
         pub fn wxBitmap_InsertHandler(handler: *mut c_void);
-        // NOT_SUPPORTED: pub fn wxBitmap_NewFromPNGData(data: *const c_void, size: size_t) -> *mut c_void;
+        pub fn wxBitmap_NewFromPNGData(data: *const c_void, size: usize) -> *mut c_void;
         pub fn wxBitmap_RemoveHandler(name: *const c_void) -> bool;
 
         // wxBoxSizer
@@ -776,20 +776,47 @@ mod ffi {
         ) -> *mut c_void;
         pub fn wxMenu_FindItem(self_: *const c_void, item_string: *const c_void) -> c_int;
         pub fn wxMenu_FindItem1(self_: *const c_void, id: c_int, menu: *mut c_void) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxMenu_FindItemByPosition(self_: *const c_void, position: size_t) -> *mut c_void;
+        pub fn wxMenu_FindItemByPosition(self_: *const c_void, position: usize) -> *mut c_void;
         pub fn wxMenu_GetHelpString(self_: *const c_void, id: c_int) -> *mut c_void;
         pub fn wxMenu_GetLabel(self_: *const c_void, id: c_int) -> *mut c_void;
         pub fn wxMenu_GetLabelText(self_: *const c_void, id: c_int) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxMenu_GetMenuItemCount(self_: *const c_void) -> size_t;
+        pub fn wxMenu_GetMenuItemCount(self_: *const c_void) -> usize;
         // BLOCKED: pub fn wxMenu_GetMenuItems(self_: *mut c_void) -> *mut c_void;
         // BLOCKED: pub fn wxMenu_GetMenuItems1(self_: *const c_void) -> *const c_void;
         pub fn wxMenu_GetTitle(self_: *const c_void) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxMenu_Insert(self_: *mut c_void, pos: size_t, menu_item: *mut c_void) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxMenu_Insert1(self_: *mut c_void, pos: size_t, id: c_int, item: *const c_void, help_string: *const c_void, kind: c_int) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxMenu_Insert2(self_: *mut c_void, pos: size_t, id: c_int, text: *const c_void, submenu: *mut c_void, help: *const c_void) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxMenu_InsertCheckItem(self_: *mut c_void, pos: size_t, id: c_int, item: *const c_void, help_string: *const c_void) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxMenu_InsertRadioItem(self_: *mut c_void, pos: size_t, id: c_int, item: *const c_void, help_string: *const c_void) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxMenu_InsertSeparator(self_: *mut c_void, pos: size_t) -> *mut c_void;
+        pub fn wxMenu_Insert(self_: *mut c_void, pos: usize, menu_item: *mut c_void)
+            -> *mut c_void;
+        pub fn wxMenu_Insert1(
+            self_: *mut c_void,
+            pos: usize,
+            id: c_int,
+            item: *const c_void,
+            help_string: *const c_void,
+            kind: c_int,
+        ) -> *mut c_void;
+        pub fn wxMenu_Insert2(
+            self_: *mut c_void,
+            pos: usize,
+            id: c_int,
+            text: *const c_void,
+            submenu: *mut c_void,
+            help: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxMenu_InsertCheckItem(
+            self_: *mut c_void,
+            pos: usize,
+            id: c_int,
+            item: *const c_void,
+            help_string: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxMenu_InsertRadioItem(
+            self_: *mut c_void,
+            pos: usize,
+            id: c_int,
+            item: *const c_void,
+            help_string: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxMenu_InsertSeparator(self_: *mut c_void, pos: usize) -> *mut c_void;
         pub fn wxMenu_IsChecked(self_: *const c_void, id: c_int) -> bool;
         pub fn wxMenu_IsEnabled(self_: *const c_void, id: c_int) -> bool;
         // NOT_SUPPORTED: pub fn wxMenu_MSWCommand(self_: *mut c_void, param: WXUINT, id: WXWORD) -> bool;
@@ -839,7 +866,7 @@ mod ffi {
 
         // wxMenuBar
         pub fn wxMenuBar_new(style: c_long) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxMenuBar_new1(n: size_t, menus: *mut c_void, titles: wxString, style: c_long) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxMenuBar_new1(n: usize, menus: *mut c_void, titles: wxString, style: c_long) -> *mut c_void;
         // DTOR: pub fn wxMenuBar_~wxMenuBar(self_: *mut c_void);
         pub fn wxMenuBar_Append(
             self_: *mut c_void,
@@ -848,8 +875,8 @@ mod ffi {
         ) -> bool;
         pub fn wxMenuBar_Check(self_: *mut c_void, id: c_int, check: bool);
         pub fn wxMenuBar_Enable(self_: *mut c_void, id: c_int, enable: bool);
-        // NOT_SUPPORTED: pub fn wxMenuBar_IsEnabledTop(self_: *const c_void, pos: size_t) -> bool;
-        // NOT_SUPPORTED: pub fn wxMenuBar_EnableTop(self_: *mut c_void, pos: size_t, enable: bool);
+        pub fn wxMenuBar_IsEnabledTop(self_: *const c_void, pos: usize) -> bool;
+        pub fn wxMenuBar_EnableTop(self_: *mut c_void, pos: usize, enable: bool);
         pub fn wxMenuBar_FindItem(
             self_: *const c_void,
             id: c_int,
@@ -863,20 +890,30 @@ mod ffi {
         ) -> c_int;
         pub fn wxMenuBar_GetHelpString(self_: *const c_void, id: c_int) -> *mut c_void;
         pub fn wxMenuBar_GetLabel(self_: *const c_void, id: c_int) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxMenuBar_GetLabelTop(self_: *const c_void, pos: size_t) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxMenuBar_GetMenu(self_: *const c_void, menu_index: size_t) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxMenuBar_GetMenuCount(self_: *const c_void) -> size_t;
-        // NOT_SUPPORTED: pub fn wxMenuBar_GetMenuLabel(self_: *const c_void, pos: size_t) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxMenuBar_GetMenuLabelText(self_: *const c_void, pos: size_t) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxMenuBar_Insert(self_: *mut c_void, pos: size_t, menu: *mut c_void, title: *const c_void) -> bool;
+        // BLOCKED: pub fn wxMenuBar_GetLabelTop(self_: *const c_void, pos: usize) -> wxString;
+        pub fn wxMenuBar_GetMenu(self_: *const c_void, menu_index: usize) -> *mut c_void;
+        pub fn wxMenuBar_GetMenuCount(self_: *const c_void) -> usize;
+        pub fn wxMenuBar_GetMenuLabel(self_: *const c_void, pos: usize) -> *mut c_void;
+        pub fn wxMenuBar_GetMenuLabelText(self_: *const c_void, pos: usize) -> *mut c_void;
+        pub fn wxMenuBar_Insert(
+            self_: *mut c_void,
+            pos: usize,
+            menu: *mut c_void,
+            title: *const c_void,
+        ) -> bool;
         pub fn wxMenuBar_IsChecked(self_: *const c_void, id: c_int) -> bool;
         pub fn wxMenuBar_IsEnabled(self_: *const c_void, id: c_int) -> bool;
-        // NOT_SUPPORTED: pub fn wxMenuBar_Remove(self_: *mut c_void, pos: size_t) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxMenuBar_Replace(self_: *mut c_void, pos: size_t, menu: *mut c_void, title: *const c_void) -> *mut c_void;
+        pub fn wxMenuBar_Remove(self_: *mut c_void, pos: usize) -> *mut c_void;
+        pub fn wxMenuBar_Replace(
+            self_: *mut c_void,
+            pos: usize,
+            menu: *mut c_void,
+            title: *const c_void,
+        ) -> *mut c_void;
         pub fn wxMenuBar_SetHelpString(self_: *mut c_void, id: c_int, help_string: *const c_void);
         pub fn wxMenuBar_SetLabel(self_: *mut c_void, id: c_int, label: *const c_void);
-        // NOT_SUPPORTED: pub fn wxMenuBar_SetLabelTop(self_: *mut c_void, pos: size_t, label: *const c_void);
-        // NOT_SUPPORTED: pub fn wxMenuBar_SetMenuLabel(self_: *mut c_void, pos: size_t, label: *const c_void);
+        // BLOCKED: pub fn wxMenuBar_SetLabelTop(self_: *mut c_void, pos: usize, label: *const c_void);
+        pub fn wxMenuBar_SetMenuLabel(self_: *mut c_void, pos: usize, label: *const c_void);
         pub fn wxMenuBar_OSXGetAppleMenu(self_: *const c_void) -> *mut c_void;
         pub fn wxMenuBar_GetFrame(self_: *const c_void) -> *mut c_void;
         pub fn wxMenuBar_IsAttached(self_: *const c_void) -> bool;
@@ -949,7 +986,7 @@ mod ffi {
         ) -> *mut c_void;
         pub fn wxToolBar_ClearTools(self_: *mut c_void);
         pub fn wxToolBar_DeleteTool(self_: *mut c_void, tool_id: c_int) -> bool;
-        // NOT_SUPPORTED: pub fn wxToolBar_DeleteToolByPos(self_: *mut c_void, pos: size_t) -> bool;
+        pub fn wxToolBar_DeleteToolByPos(self_: *mut c_void, pos: usize) -> bool;
         pub fn wxToolBar_EnableTool(self_: *mut c_void, tool_id: c_int, enable: bool);
         pub fn wxToolBar_FindById(self_: *const c_void, id: c_int) -> *mut c_void;
         pub fn wxToolBar_FindControl(self_: *mut c_void, id: c_int) -> *mut c_void;
@@ -971,12 +1008,32 @@ mod ffi {
         pub fn wxToolBar_GetToolShortHelp(self_: *const c_void, tool_id: c_int) -> *mut c_void;
         pub fn wxToolBar_GetToolSize(self_: *const c_void) -> *mut c_void;
         pub fn wxToolBar_GetToolState(self_: *const c_void, tool_id: c_int) -> bool;
-        // NOT_SUPPORTED: pub fn wxToolBar_GetToolsCount(self_: *const c_void) -> size_t;
-        // NOT_SUPPORTED: pub fn wxToolBar_InsertControl(self_: *mut c_void, pos: size_t, control: *mut c_void, label: *const c_void) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxToolBar_InsertSeparator(self_: *mut c_void, pos: size_t) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxToolBar_InsertStretchableSpace(self_: *mut c_void, pos: size_t) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxToolBar_InsertTool(self_: *mut c_void, pos: size_t, tool_id: c_int, label: *const c_void, bitmap: *const c_void, bmp_disabled: *const c_void, kind: c_int, short_help: *const c_void, long_help: *const c_void, client_data: *mut c_void) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxToolBar_InsertTool1(self_: *mut c_void, pos: size_t, tool: *mut c_void) -> *mut c_void;
+        pub fn wxToolBar_GetToolsCount(self_: *const c_void) -> usize;
+        pub fn wxToolBar_InsertControl(
+            self_: *mut c_void,
+            pos: usize,
+            control: *mut c_void,
+            label: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxToolBar_InsertSeparator(self_: *mut c_void, pos: usize) -> *mut c_void;
+        pub fn wxToolBar_InsertStretchableSpace(self_: *mut c_void, pos: usize) -> *mut c_void;
+        pub fn wxToolBar_InsertTool(
+            self_: *mut c_void,
+            pos: usize,
+            tool_id: c_int,
+            label: *const c_void,
+            bitmap: *const c_void,
+            bmp_disabled: *const c_void,
+            kind: c_int,
+            short_help: *const c_void,
+            long_help: *const c_void,
+            client_data: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxToolBar_InsertTool1(
+            self_: *mut c_void,
+            pos: usize,
+            tool: *mut c_void,
+        ) -> *mut c_void;
         pub fn wxToolBar_OnLeftClick(self_: *mut c_void, tool_id: c_int, toggle_down: bool)
             -> bool;
         pub fn wxToolBar_OnMouseEnter(self_: *mut c_void, tool_id: c_int);
@@ -1380,7 +1437,7 @@ mod ffi {
         // BLOCKED: pub fn wxSizer_GetChildren1(self_: *const c_void) -> *const c_void;
         pub fn wxSizer_GetContainingWindow(self_: *const c_void) -> *mut c_void;
         pub fn wxSizer_SetContainingWindow(self_: *mut c_void, window: *mut c_void);
-        // NOT_SUPPORTED: pub fn wxSizer_GetItemCount(self_: *const c_void) -> size_t;
+        pub fn wxSizer_GetItemCount(self_: *const c_void) -> usize;
         pub fn wxSizer_GetItem(
             self_: *mut c_void,
             window: *mut c_void,
@@ -1391,27 +1448,72 @@ mod ffi {
             sizer: *mut c_void,
             recursive: bool,
         ) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxSizer_GetItem2(self_: *mut c_void, index: size_t) -> *mut c_void;
+        pub fn wxSizer_GetItem2(self_: *mut c_void, index: usize) -> *mut c_void;
         pub fn wxSizer_GetItemById(self_: *mut c_void, id: c_int, recursive: bool) -> *mut c_void;
         pub fn wxSizer_GetMinSize(self_: *mut c_void) -> *mut c_void;
         pub fn wxSizer_GetPosition(self_: *const c_void) -> *mut c_void;
         pub fn wxSizer_GetSize(self_: *const c_void) -> *mut c_void;
         pub fn wxSizer_Hide(self_: *mut c_void, window: *mut c_void, recursive: bool) -> bool;
         pub fn wxSizer_Hide1(self_: *mut c_void, sizer: *mut c_void, recursive: bool) -> bool;
-        // NOT_SUPPORTED: pub fn wxSizer_Hide2(self_: *mut c_void, index: size_t) -> bool;
-        // NOT_SUPPORTED: pub fn wxSizer_Insert(self_: *mut c_void, index: size_t, window: *mut c_void, flags: *const c_void) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxSizer_Insert1(self_: *mut c_void, index: size_t, window: *mut c_void, proportion: c_int, flag: c_int, border: c_int, user_data: *mut c_void) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxSizer_Insert2(self_: *mut c_void, index: size_t, sizer: *mut c_void, flags: *const c_void) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxSizer_Insert3(self_: *mut c_void, index: size_t, sizer: *mut c_void, proportion: c_int, flag: c_int, border: c_int, user_data: *mut c_void) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxSizer_Insert4(self_: *mut c_void, index: size_t, width: c_int, height: c_int, proportion: c_int, flag: c_int, border: c_int, user_data: *mut c_void) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxSizer_Insert5(self_: *mut c_void, index: size_t, width: c_int, height: c_int, flags: *const c_void) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxSizer_Insert6(self_: *mut c_void, index: size_t, item: *mut c_void) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxSizer_InsertSpacer(self_: *mut c_void, index: size_t, size: c_int) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxSizer_InsertStretchSpacer(self_: *mut c_void, index: size_t, prop: c_int) -> *mut c_void;
+        pub fn wxSizer_Hide2(self_: *mut c_void, index: usize) -> bool;
+        pub fn wxSizer_Insert(
+            self_: *mut c_void,
+            index: usize,
+            window: *mut c_void,
+            flags: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Insert1(
+            self_: *mut c_void,
+            index: usize,
+            window: *mut c_void,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Insert2(
+            self_: *mut c_void,
+            index: usize,
+            sizer: *mut c_void,
+            flags: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Insert3(
+            self_: *mut c_void,
+            index: usize,
+            sizer: *mut c_void,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Insert4(
+            self_: *mut c_void,
+            index: usize,
+            width: c_int,
+            height: c_int,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: *mut c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Insert5(
+            self_: *mut c_void,
+            index: usize,
+            width: c_int,
+            height: c_int,
+            flags: *const c_void,
+        ) -> *mut c_void;
+        pub fn wxSizer_Insert6(self_: *mut c_void, index: usize, item: *mut c_void) -> *mut c_void;
+        pub fn wxSizer_InsertSpacer(self_: *mut c_void, index: usize, size: c_int) -> *mut c_void;
+        pub fn wxSizer_InsertStretchSpacer(
+            self_: *mut c_void,
+            index: usize,
+            prop: c_int,
+        ) -> *mut c_void;
         pub fn wxSizer_IsEmpty(self_: *const c_void) -> bool;
         pub fn wxSizer_IsShown(self_: *const c_void, window: *mut c_void) -> bool;
         pub fn wxSizer_IsShown1(self_: *const c_void, sizer: *mut c_void) -> bool;
-        // NOT_SUPPORTED: pub fn wxSizer_IsShown2(self_: *const c_void, index: size_t) -> bool;
+        pub fn wxSizer_IsShown2(self_: *const c_void, index: usize) -> bool;
         pub fn wxSizer_Layout(self_: *mut c_void);
         pub fn wxSizer_Prepend(
             self_: *mut c_void,
@@ -1473,7 +1575,7 @@ mod ffi {
             newsz: *mut c_void,
             recursive: bool,
         ) -> bool;
-        // NOT_SUPPORTED: pub fn wxSizer_Replace2(self_: *mut c_void, index: size_t, newitem: *mut c_void) -> bool;
+        pub fn wxSizer_Replace2(self_: *mut c_void, index: usize, newitem: *mut c_void) -> bool;
         pub fn wxSizer_SetDimension(
             self_: *mut c_void,
             x: c_int,
@@ -1504,8 +1606,17 @@ mod ffi {
             sizer: *mut c_void,
             size: *const c_void,
         ) -> bool;
-        // NOT_SUPPORTED: pub fn wxSizer_SetItemMinSize4(self_: *mut c_void, index: size_t, width: c_int, height: c_int) -> bool;
-        // NOT_SUPPORTED: pub fn wxSizer_SetItemMinSize5(self_: *mut c_void, index: size_t, size: *const c_void) -> bool;
+        pub fn wxSizer_SetItemMinSize4(
+            self_: *mut c_void,
+            index: usize,
+            width: c_int,
+            height: c_int,
+        ) -> bool;
+        pub fn wxSizer_SetItemMinSize5(
+            self_: *mut c_void,
+            index: usize,
+            size: *const c_void,
+        ) -> bool;
         pub fn wxSizer_SetMinSize(self_: *mut c_void, size: *const c_void);
         pub fn wxSizer_SetMinSize1(self_: *mut c_void, width: c_int, height: c_int);
         pub fn wxSizer_SetSizeHints(self_: *mut c_void, window: *mut c_void);
@@ -1522,7 +1633,7 @@ mod ffi {
             show: bool,
             recursive: bool,
         ) -> bool;
-        // NOT_SUPPORTED: pub fn wxSizer_Show2(self_: *mut c_void, index: size_t, show: bool) -> bool;
+        pub fn wxSizer_Show2(self_: *mut c_void, index: usize, show: bool) -> bool;
         pub fn wxSizer_ShowItems(self_: *mut c_void, show: bool);
 
         // wxSizerFlags
@@ -1788,7 +1899,9 @@ pub mod methods {
         fn insert_handler(handler: *mut c_void) {
             unsafe { ffi::wxBitmap_InsertHandler(handler) }
         }
-        // NOT_SUPPORTED: fn NewFromPNGData()
+        fn new_from_png_data(data: *const c_void, size: usize) -> Bitmap {
+            unsafe { BitmapIsOwned(ffi::wxBitmap_NewFromPNGData(data, size)) }
+        }
         fn remove_handler(name: &str) -> bool {
             unsafe {
                 let name = wx_base::wx_string_from(name);
@@ -3543,7 +3656,9 @@ pub mod methods {
                 ffi::wxMenu_FindItem1(self.as_ptr(), id, menu)
             }
         }
-        // NOT_SUPPORTED: fn FindItemByPosition()
+        fn find_item_by_position(&self, position: usize) -> *mut c_void {
+            unsafe { ffi::wxMenu_FindItemByPosition(self.as_ptr(), position) }
+        }
         fn get_help_string(&self, id: c_int) -> String {
             unsafe { wx_base::from_wx_string(ffi::wxMenu_GetHelpString(self.as_ptr(), id)) }
         }
@@ -3553,18 +3668,78 @@ pub mod methods {
         fn get_label_text(&self, id: c_int) -> String {
             unsafe { wx_base::from_wx_string(ffi::wxMenu_GetLabelText(self.as_ptr(), id)) }
         }
-        // NOT_SUPPORTED: fn GetMenuItemCount()
+        fn get_menu_item_count(&self) -> usize {
+            unsafe { ffi::wxMenu_GetMenuItemCount(self.as_ptr()) }
+        }
         // BLOCKED: fn GetMenuItems()
         // BLOCKED: fn GetMenuItems1()
         fn get_title(&self) -> String {
             unsafe { wx_base::from_wx_string(ffi::wxMenu_GetTitle(self.as_ptr())) }
         }
-        // NOT_SUPPORTED: fn Insert()
-        // NOT_SUPPORTED: fn Insert1()
-        // NOT_SUPPORTED: fn Insert2()
-        // NOT_SUPPORTED: fn InsertCheckItem()
-        // NOT_SUPPORTED: fn InsertRadioItem()
-        // NOT_SUPPORTED: fn InsertSeparator()
+        fn insert_menuitem(&self, pos: usize, menu_item: *mut c_void) -> *mut c_void {
+            unsafe { ffi::wxMenu_Insert(self.as_ptr(), pos, menu_item) }
+        }
+        fn insert_int_str(
+            &self,
+            pos: usize,
+            id: c_int,
+            item: &str,
+            help_string: &str,
+            kind: c_int,
+        ) -> *mut c_void {
+            unsafe {
+                let item = wx_base::wx_string_from(item);
+                let help_string = wx_base::wx_string_from(help_string);
+                ffi::wxMenu_Insert1(self.as_ptr(), pos, id, item, help_string, kind)
+            }
+        }
+        fn insert_int_menu<M: MenuMethods>(
+            &self,
+            pos: usize,
+            id: c_int,
+            text: &str,
+            submenu: Option<&M>,
+            help: &str,
+        ) -> *mut c_void {
+            unsafe {
+                let text = wx_base::wx_string_from(text);
+                let submenu = match submenu {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let help = wx_base::wx_string_from(help);
+                ffi::wxMenu_Insert2(self.as_ptr(), pos, id, text, submenu, help)
+            }
+        }
+        fn insert_check_item(
+            &self,
+            pos: usize,
+            id: c_int,
+            item: &str,
+            help_string: &str,
+        ) -> *mut c_void {
+            unsafe {
+                let item = wx_base::wx_string_from(item);
+                let help_string = wx_base::wx_string_from(help_string);
+                ffi::wxMenu_InsertCheckItem(self.as_ptr(), pos, id, item, help_string)
+            }
+        }
+        fn insert_radio_item(
+            &self,
+            pos: usize,
+            id: c_int,
+            item: &str,
+            help_string: &str,
+        ) -> *mut c_void {
+            unsafe {
+                let item = wx_base::wx_string_from(item);
+                let help_string = wx_base::wx_string_from(help_string);
+                ffi::wxMenu_InsertRadioItem(self.as_ptr(), pos, id, item, help_string)
+            }
+        }
+        fn insert_separator(&self, pos: usize) -> *mut c_void {
+            unsafe { ffi::wxMenu_InsertSeparator(self.as_ptr(), pos) }
+        }
         fn is_checked(&self, id: c_int) -> bool {
             unsafe { ffi::wxMenu_IsChecked(self.as_ptr(), id) }
         }
@@ -3721,8 +3896,12 @@ pub mod methods {
         fn enable(&self, id: c_int, enable: bool) {
             unsafe { ffi::wxMenuBar_Enable(self.as_ptr(), id, enable) }
         }
-        // NOT_SUPPORTED: fn IsEnabledTop()
-        // NOT_SUPPORTED: fn EnableTop()
+        fn is_enabled_top(&self, pos: usize) -> bool {
+            unsafe { ffi::wxMenuBar_IsEnabledTop(self.as_ptr(), pos) }
+        }
+        fn enable_top(&self, pos: usize, enable: bool) {
+            unsafe { ffi::wxMenuBar_EnableTop(self.as_ptr(), pos, enable) }
+        }
         fn find_item<M: MenuMethods>(&self, id: c_int, menu: Option<&M>) -> *mut c_void {
             unsafe {
                 let menu = match menu {
@@ -3751,20 +3930,53 @@ pub mod methods {
         fn get_label(&self, id: c_int) -> String {
             unsafe { wx_base::from_wx_string(ffi::wxMenuBar_GetLabel(self.as_ptr(), id)) }
         }
-        // NOT_SUPPORTED: fn GetLabelTop()
-        // NOT_SUPPORTED: fn GetMenu()
-        // NOT_SUPPORTED: fn GetMenuCount()
-        // NOT_SUPPORTED: fn GetMenuLabel()
-        // NOT_SUPPORTED: fn GetMenuLabelText()
-        // NOT_SUPPORTED: fn Insert()
+        // BLOCKED: fn GetLabelTop()
+        fn get_menu(&self, menu_index: usize) -> WeakRef<Menu> {
+            unsafe { WeakRef::<Menu>::from(ffi::wxMenuBar_GetMenu(self.as_ptr(), menu_index)) }
+        }
+        fn get_menu_count(&self) -> usize {
+            unsafe { ffi::wxMenuBar_GetMenuCount(self.as_ptr()) }
+        }
+        fn get_menu_label(&self, pos: usize) -> String {
+            unsafe { wx_base::from_wx_string(ffi::wxMenuBar_GetMenuLabel(self.as_ptr(), pos)) }
+        }
+        fn get_menu_label_text(&self, pos: usize) -> String {
+            unsafe { wx_base::from_wx_string(ffi::wxMenuBar_GetMenuLabelText(self.as_ptr(), pos)) }
+        }
+        fn insert<M: MenuMethods>(&self, pos: usize, menu: Option<&M>, title: &str) -> bool {
+            unsafe {
+                let menu = match menu {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let title = wx_base::wx_string_from(title);
+                ffi::wxMenuBar_Insert(self.as_ptr(), pos, menu, title)
+            }
+        }
         fn is_checked(&self, id: c_int) -> bool {
             unsafe { ffi::wxMenuBar_IsChecked(self.as_ptr(), id) }
         }
         fn is_enabled(&self, id: c_int) -> bool {
             unsafe { ffi::wxMenuBar_IsEnabled(self.as_ptr(), id) }
         }
-        // NOT_SUPPORTED: fn Remove()
-        // NOT_SUPPORTED: fn Replace()
+        fn remove(&self, pos: usize) -> WeakRef<Menu> {
+            unsafe { WeakRef::<Menu>::from(ffi::wxMenuBar_Remove(self.as_ptr(), pos)) }
+        }
+        fn replace<M: MenuMethods>(
+            &self,
+            pos: usize,
+            menu: Option<&M>,
+            title: &str,
+        ) -> WeakRef<Menu> {
+            unsafe {
+                let menu = match menu {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let title = wx_base::wx_string_from(title);
+                WeakRef::<Menu>::from(ffi::wxMenuBar_Replace(self.as_ptr(), pos, menu, title))
+            }
+        }
         fn set_help_string(&self, id: c_int, help_string: &str) {
             unsafe {
                 let help_string = wx_base::wx_string_from(help_string);
@@ -3777,8 +3989,13 @@ pub mod methods {
                 ffi::wxMenuBar_SetLabel(self.as_ptr(), id, label)
             }
         }
-        // NOT_SUPPORTED: fn SetLabelTop()
-        // NOT_SUPPORTED: fn SetMenuLabel()
+        // BLOCKED: fn SetLabelTop()
+        fn set_menu_label(&self, pos: usize, label: &str) {
+            unsafe {
+                let label = wx_base::wx_string_from(label);
+                ffi::wxMenuBar_SetMenuLabel(self.as_ptr(), pos, label)
+            }
+        }
         fn osx_get_apple_menu(&self) -> WeakRef<Menu> {
             unsafe { WeakRef::<Menu>::from(ffi::wxMenuBar_OSXGetAppleMenu(self.as_ptr())) }
         }
@@ -3965,7 +4182,9 @@ pub mod methods {
         fn delete_tool(&self, tool_id: c_int) -> bool {
             unsafe { ffi::wxToolBar_DeleteTool(self.as_ptr(), tool_id) }
         }
-        // NOT_SUPPORTED: fn DeleteToolByPos()
+        fn delete_tool_by_pos(&self, pos: usize) -> bool {
+            unsafe { ffi::wxToolBar_DeleteToolByPos(self.as_ptr(), pos) }
+        }
         fn enable_tool(&self, tool_id: c_int, enable: bool) {
             unsafe { ffi::wxToolBar_EnableTool(self.as_ptr(), tool_id, enable) }
         }
@@ -4021,12 +4240,69 @@ pub mod methods {
         fn get_tool_state(&self, tool_id: c_int) -> bool {
             unsafe { ffi::wxToolBar_GetToolState(self.as_ptr(), tool_id) }
         }
-        // NOT_SUPPORTED: fn GetToolsCount()
-        // NOT_SUPPORTED: fn InsertControl()
-        // NOT_SUPPORTED: fn InsertSeparator()
-        // NOT_SUPPORTED: fn InsertStretchableSpace()
-        // NOT_SUPPORTED: fn InsertTool()
-        // NOT_SUPPORTED: fn InsertTool1()
+        fn get_tools_count(&self) -> usize {
+            unsafe { ffi::wxToolBar_GetToolsCount(self.as_ptr()) }
+        }
+        fn insert_control<C: ControlMethods>(
+            &self,
+            pos: usize,
+            control: Option<&C>,
+            label: &str,
+        ) -> *mut c_void {
+            unsafe {
+                let control = match control {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let label = wx_base::wx_string_from(label);
+                ffi::wxToolBar_InsertControl(self.as_ptr(), pos, control, label)
+            }
+        }
+        fn insert_separator(&self, pos: usize) -> *mut c_void {
+            unsafe { ffi::wxToolBar_InsertSeparator(self.as_ptr(), pos) }
+        }
+        fn insert_stretchable_space(&self, pos: usize) -> *mut c_void {
+            unsafe { ffi::wxToolBar_InsertStretchableSpace(self.as_ptr(), pos) }
+        }
+        fn insert_tool_int<B: BitmapMethods, B2: BitmapMethods, O: ObjectMethods>(
+            &self,
+            pos: usize,
+            tool_id: c_int,
+            label: &str,
+            bitmap: &B,
+            bmp_disabled: &B2,
+            kind: c_int,
+            short_help: &str,
+            long_help: &str,
+            client_data: Option<&O>,
+        ) -> *mut c_void {
+            unsafe {
+                let label = wx_base::wx_string_from(label);
+                let bitmap = bitmap.as_ptr();
+                let bmp_disabled = bmp_disabled.as_ptr();
+                let short_help = wx_base::wx_string_from(short_help);
+                let long_help = wx_base::wx_string_from(long_help);
+                let client_data = match client_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxToolBar_InsertTool(
+                    self.as_ptr(),
+                    pos,
+                    tool_id,
+                    label,
+                    bitmap,
+                    bmp_disabled,
+                    kind,
+                    short_help,
+                    long_help,
+                    client_data,
+                )
+            }
+        }
+        fn insert_tool_toolbartoolbase(&self, pos: usize, tool: *mut c_void) -> *mut c_void {
+            unsafe { ffi::wxToolBar_InsertTool1(self.as_ptr(), pos, tool) }
+        }
         fn on_left_click(&self, tool_id: c_int, toggle_down: bool) -> bool {
             unsafe { ffi::wxToolBar_OnLeftClick(self.as_ptr(), tool_id, toggle_down) }
         }
@@ -4958,7 +5234,9 @@ pub mod methods {
                 ffi::wxSizer_SetContainingWindow(self.as_ptr(), window)
             }
         }
-        // NOT_SUPPORTED: fn GetItemCount()
+        fn get_item_count(&self) -> usize {
+            unsafe { ffi::wxSizer_GetItemCount(self.as_ptr()) }
+        }
         fn get_item_window<W: WindowMethods>(
             &self,
             window: Option<&W>,
@@ -4985,7 +5263,9 @@ pub mod methods {
                 ffi::wxSizer_GetItem1(self.as_ptr(), sizer, recursive)
             }
         }
-        // NOT_SUPPORTED: fn GetItem2()
+        fn get_item_sz(&self, index: usize) -> *mut c_void {
+            unsafe { ffi::wxSizer_GetItem2(self.as_ptr(), index) }
+        }
         fn get_item_by_id(&self, id: c_int, recursive: bool) -> *mut c_void {
             unsafe { ffi::wxSizer_GetItemById(self.as_ptr(), id, recursive) }
         }
@@ -5016,16 +5296,145 @@ pub mod methods {
                 ffi::wxSizer_Hide1(self.as_ptr(), sizer, recursive)
             }
         }
-        // NOT_SUPPORTED: fn Hide2()
-        // NOT_SUPPORTED: fn Insert()
-        // NOT_SUPPORTED: fn Insert1()
-        // NOT_SUPPORTED: fn Insert2()
-        // NOT_SUPPORTED: fn Insert3()
-        // NOT_SUPPORTED: fn Insert4()
-        // NOT_SUPPORTED: fn Insert5()
-        // NOT_SUPPORTED: fn Insert6()
-        // NOT_SUPPORTED: fn InsertSpacer()
-        // NOT_SUPPORTED: fn InsertStretchSpacer()
+        fn hide_sz(&self, index: usize) -> bool {
+            unsafe { ffi::wxSizer_Hide2(self.as_ptr(), index) }
+        }
+        fn insert_window_sizerflags<W: WindowMethods, S: SizerFlagsMethods>(
+            &self,
+            index: usize,
+            window: Option<&W>,
+            flags: &S,
+        ) -> *mut c_void {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let flags = flags.as_ptr();
+                ffi::wxSizer_Insert(self.as_ptr(), index, window, flags)
+            }
+        }
+        fn insert_window_int<W: WindowMethods, O: ObjectMethods>(
+            &self,
+            index: usize,
+            window: Option<&W>,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: Option<&O>,
+        ) -> *mut c_void {
+            unsafe {
+                let window = match window {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let user_data = match user_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Insert1(
+                    self.as_ptr(),
+                    index,
+                    window,
+                    proportion,
+                    flag,
+                    border,
+                    user_data,
+                )
+            }
+        }
+        fn insert_sizer_sizerflags<S: SizerMethods, S2: SizerFlagsMethods>(
+            &self,
+            index: usize,
+            sizer: Option<&S>,
+            flags: &S2,
+        ) -> *mut c_void {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let flags = flags.as_ptr();
+                ffi::wxSizer_Insert2(self.as_ptr(), index, sizer, flags)
+            }
+        }
+        fn insert_sizer_int<S: SizerMethods, O: ObjectMethods>(
+            &self,
+            index: usize,
+            sizer: Option<&S>,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: Option<&O>,
+        ) -> *mut c_void {
+            unsafe {
+                let sizer = match sizer {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let user_data = match user_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Insert3(
+                    self.as_ptr(),
+                    index,
+                    sizer,
+                    proportion,
+                    flag,
+                    border,
+                    user_data,
+                )
+            }
+        }
+        fn insert_int_int<O: ObjectMethods>(
+            &self,
+            index: usize,
+            width: c_int,
+            height: c_int,
+            proportion: c_int,
+            flag: c_int,
+            border: c_int,
+            user_data: Option<&O>,
+        ) -> *mut c_void {
+            unsafe {
+                let user_data = match user_data {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxSizer_Insert4(
+                    self.as_ptr(),
+                    index,
+                    width,
+                    height,
+                    proportion,
+                    flag,
+                    border,
+                    user_data,
+                )
+            }
+        }
+        fn insert_int_sizerflags<S: SizerFlagsMethods>(
+            &self,
+            index: usize,
+            width: c_int,
+            height: c_int,
+            flags: &S,
+        ) -> *mut c_void {
+            unsafe {
+                let flags = flags.as_ptr();
+                ffi::wxSizer_Insert5(self.as_ptr(), index, width, height, flags)
+            }
+        }
+        fn insert_sizeritem(&self, index: usize, item: *mut c_void) -> *mut c_void {
+            unsafe { ffi::wxSizer_Insert6(self.as_ptr(), index, item) }
+        }
+        fn insert_spacer(&self, index: usize, size: c_int) -> *mut c_void {
+            unsafe { ffi::wxSizer_InsertSpacer(self.as_ptr(), index, size) }
+        }
+        fn insert_stretch_spacer(&self, index: usize, prop: c_int) -> *mut c_void {
+            unsafe { ffi::wxSizer_InsertStretchSpacer(self.as_ptr(), index, prop) }
+        }
         fn is_empty(&self) -> bool {
             unsafe { ffi::wxSizer_IsEmpty(self.as_ptr()) }
         }
@@ -5047,7 +5456,9 @@ pub mod methods {
                 ffi::wxSizer_IsShown1(self.as_ptr(), sizer)
             }
         }
-        // NOT_SUPPORTED: fn IsShown2()
+        fn is_shown_sz(&self, index: usize) -> bool {
+            unsafe { ffi::wxSizer_IsShown2(self.as_ptr(), index) }
+        }
         fn layout(&self) {
             unsafe { ffi::wxSizer_Layout(self.as_ptr()) }
         }
@@ -5219,7 +5630,9 @@ pub mod methods {
                 ffi::wxSizer_Replace1(self.as_ptr(), oldsz, newsz, recursive)
             }
         }
-        // NOT_SUPPORTED: fn Replace2()
+        fn replace_sz(&self, index: usize, newitem: *mut c_void) -> bool {
+            unsafe { ffi::wxSizer_Replace2(self.as_ptr(), index, newitem) }
+        }
         fn set_dimension_int(&self, x: c_int, y: c_int, width: c_int, height: c_int) {
             unsafe { ffi::wxSizer_SetDimension(self.as_ptr(), x, y, width, height) }
         }
@@ -5286,8 +5699,15 @@ pub mod methods {
                 ffi::wxSizer_SetItemMinSize3(self.as_ptr(), sizer, size)
             }
         }
-        // NOT_SUPPORTED: fn SetItemMinSize4()
-        // NOT_SUPPORTED: fn SetItemMinSize5()
+        fn set_item_min_size_sz_int(&self, index: usize, width: c_int, height: c_int) -> bool {
+            unsafe { ffi::wxSizer_SetItemMinSize4(self.as_ptr(), index, width, height) }
+        }
+        fn set_item_min_size_sz_size<S: SizeMethods>(&self, index: usize, size: &S) -> bool {
+            unsafe {
+                let size = size.as_ptr();
+                ffi::wxSizer_SetItemMinSize5(self.as_ptr(), index, size)
+            }
+        }
         fn set_min_size_size<S: SizeMethods>(&self, size: &S) {
             unsafe {
                 let size = size.as_ptr();
@@ -5335,7 +5755,9 @@ pub mod methods {
                 ffi::wxSizer_Show1(self.as_ptr(), sizer, show, recursive)
             }
         }
-        // NOT_SUPPORTED: fn Show2()
+        fn show_sz(&self, index: usize, show: bool) -> bool {
+            unsafe { ffi::wxSizer_Show2(self.as_ptr(), index, show) }
+        }
         fn show_items(&self, show: bool) {
             unsafe { ffi::wxSizer_ShowItems(self.as_ptr(), show) }
         }
