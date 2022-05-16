@@ -14,8 +14,8 @@ pub mod methods {
     // re-export wx_base::methods
     pub use wx_base::methods::*;
 
-    pub trait Buildable<B> {
-        fn builder() -> B;
+    pub trait Buildable<'a, P, B> {
+        fn builder(parent: Option<&'a P>) -> B;
     }
 }
 use methods::*;
@@ -35,24 +35,26 @@ mod ffi {
     }
 }
 
-pub struct FrameBuilder {
+pub struct FrameBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
     title: String,
 }
-impl Buildable<FrameBuilder> for Frame {
-    fn builder() -> FrameBuilder {
+impl<'a, P: WindowMethods> Buildable<'a, P, FrameBuilder<'a, P>> for Frame {
+    fn builder(parent: Option<&'a P>) -> FrameBuilder<'a, P> {
         FrameBuilder {
+            parent: parent,
             title: "".to_string(),
         }
     }
 }
-impl FrameBuilder {
+impl<'a, P: WindowMethods> FrameBuilder<'a, P> {
     pub fn title(&mut self, s: &str) -> &mut Self {
         self.title = s.to_string();
         self
     }
-    pub fn build<W: WindowMethods>(&self, parent: Option<&W>) -> Frame {
+    pub fn build(&self) -> Frame {
         Frame::new(
-            parent,
+            self.parent,
             ID_ANY,
             &self.title,
             &Point::default(),
@@ -63,31 +65,42 @@ impl FrameBuilder {
     }
 }
 
-pub struct PanelBuilder;
-impl Buildable<PanelBuilder> for Panel {
-    fn builder() -> PanelBuilder {
-        PanelBuilder
+pub struct PanelBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, PanelBuilder<'a, P>> for Panel {
+    fn builder(parent: Option<&'a P>) -> PanelBuilder<'a, P> {
+        PanelBuilder { parent: parent }
     }
 }
-impl PanelBuilder {
-    pub fn build<W: WindowMethods>(&self, parent: Option<&W>) -> Panel {
-        Panel::new(parent, ID_ANY, &Point::default(), &Size::default(), 0, "")
+impl<'a, P: WindowMethods> PanelBuilder<'a, P> {
+    pub fn build(&self) -> Panel {
+        Panel::new(
+            self.parent,
+            ID_ANY,
+            &Point::default(),
+            &Size::default(),
+            0,
+            "",
+        )
     }
 }
 
-pub struct ButtonBuilder {
+pub struct ButtonBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
     id: c_int,
     title: String,
 }
-impl Buildable<ButtonBuilder> for Button {
-    fn builder() -> ButtonBuilder {
+impl<'a, P: WindowMethods> Buildable<'a, P, ButtonBuilder<'a, P>> for Button {
+    fn builder(parent: Option<&'a P>) -> ButtonBuilder<'a, P> {
         ButtonBuilder {
+            parent: parent,
             id: ID_ANY,
             title: "".to_string(),
         }
     }
 }
-impl ButtonBuilder {
+impl<'a, P: WindowMethods> ButtonBuilder<'a, P> {
     pub fn id(&mut self, id: c_int) -> &mut Self {
         self.id = id;
         self
@@ -96,9 +109,9 @@ impl ButtonBuilder {
         self.title = s.to_string();
         self
     }
-    pub fn build<W: WindowMethods>(&self, parent: Option<&W>) -> Button {
+    pub fn build(&self) -> Button {
         Button::new(
-            parent,
+            self.parent,
             self.id,
             &self.title,
             &Point::default(),
@@ -110,24 +123,26 @@ impl ButtonBuilder {
     }
 }
 
-pub struct CheckBoxBuilder {
+pub struct CheckBoxBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
     title: String,
 }
-impl Buildable<CheckBoxBuilder> for CheckBox {
-    fn builder() -> CheckBoxBuilder {
+impl<'a, P: WindowMethods> Buildable<'a, P, CheckBoxBuilder<'a, P>> for CheckBox {
+    fn builder(parent: Option<&'a P>) -> CheckBoxBuilder<'a, P> {
         CheckBoxBuilder {
+            parent: parent,
             title: "".to_string(),
         }
     }
 }
-impl CheckBoxBuilder {
+impl<'a, P: WindowMethods> CheckBoxBuilder<'a, P> {
     pub fn title(&mut self, s: &str) -> &mut Self {
         self.title = s.to_string();
         self
     }
-    pub fn build<W: WindowMethods>(&self, parent: Option<&W>) -> CheckBox {
+    pub fn build(&self) -> CheckBox {
         CheckBox::new(
-            parent,
+            self.parent,
             ID_ANY,
             &self.title,
             &Point::default(),
@@ -139,16 +154,18 @@ impl CheckBoxBuilder {
     }
 }
 
-pub struct ListBoxBuilder;
-impl Buildable<ListBoxBuilder> for ListBox {
-    fn builder() -> ListBoxBuilder {
-        ListBoxBuilder
+pub struct ListBoxBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, ListBoxBuilder<'a, P>> for ListBox {
+    fn builder(parent: Option<&'a P>) -> ListBoxBuilder<'a, P> {
+        ListBoxBuilder { parent: parent }
     }
 }
-impl ListBoxBuilder {
-    pub fn build<W: WindowMethods>(&self, parent: Option<&W>) -> ListBox {
+impl<'a, P: WindowMethods> ListBoxBuilder<'a, P> {
+    pub fn build(&self) -> ListBox {
         ListBox::new(
-            parent,
+            self.parent,
             ID_ANY,
             &Point::new_with_int(0, 0),
             &Size::new_with_int(70, 70),
@@ -160,24 +177,26 @@ impl ListBoxBuilder {
     }
 }
 
-pub struct ToolBarBuilder {
+pub struct ToolBarBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
     style: c_long,
 }
-impl Buildable<ToolBarBuilder> for ToolBar {
-    fn builder() -> ToolBarBuilder {
+impl<'a, P: WindowMethods> Buildable<'a, P, ToolBarBuilder<'a, P>> for ToolBar {
+    fn builder(parent: Option<&'a P>) -> ToolBarBuilder<'a, P> {
         ToolBarBuilder {
+            parent: parent,
             style: 0,
         }
     }
 }
-impl ToolBarBuilder {
+impl<'a, P: WindowMethods> ToolBarBuilder<'a, P> {
     pub fn style(&mut self, style: c_long) -> &mut Self {
         self.style = style;
         self
     }
-    pub fn build<W: WindowMethods>(&self, parent: Option<&W>) -> ToolBar {
+    pub fn build(&self) -> ToolBar {
         ToolBar::new(
-            parent,
+            self.parent,
             ID_ANY,
             &Point::default(),
             &Size::default(),
