@@ -70,6 +70,18 @@ impl Buildable<FrameBuilder> for Frame {
     }
 }
 
+pub struct PanelBuilder;
+impl Builder<Panel> for PanelBuilder {
+    fn build<W: WindowMethods>(&self, parent: Option<&W>) -> Panel {
+        Panel::new(parent, ID_ANY, &Point::default(), &Size::default(), 0, "")
+    }
+}
+impl Buildable<PanelBuilder> for Panel {
+    fn builder() -> PanelBuilder {
+        PanelBuilder
+    }
+}
+
 pub struct ButtonBuilder {
     id: c_int,
     title: String,
@@ -103,6 +115,87 @@ impl Buildable<ButtonBuilder> for Button {
         ButtonBuilder {
             id: ID_ANY,
             title: "".to_string(),
+        }
+    }
+}
+
+pub struct CheckBoxBuilder {
+    title: String,
+}
+impl CheckBoxBuilder {
+    pub fn title(&mut self, s: &str) -> &mut Self {
+        self.title = s.to_string();
+        self
+    }
+}
+impl Builder<CheckBox> for CheckBoxBuilder {
+    fn build<W: WindowMethods>(&self, parent: Option<&W>) -> CheckBox {
+        CheckBox::new(
+            parent,
+            ID_ANY,
+            &self.title,
+            &Point::default(),
+            &Size::default(),
+            0,
+            &Validator::default(),
+            "",
+        )
+    }
+}
+impl Buildable<CheckBoxBuilder> for CheckBox {
+    fn builder() -> CheckBoxBuilder {
+        CheckBoxBuilder {
+            title: "".to_string(),
+        }
+    }
+}
+
+pub struct ListBoxBuilder;
+impl Builder<ListBox> for ListBoxBuilder {
+    fn build<W: WindowMethods>(&self, parent: Option<&W>) -> ListBox {
+        ListBox::new(
+            parent,
+            ID_ANY,
+            &Point::new_with_int(0, 0),
+            &Size::new_with_int(70, 70),
+            &ArrayString::new(),
+            0,
+            &Validator::default(),
+            "",
+        )
+    }
+}
+impl Buildable<ListBoxBuilder> for ListBox {
+    fn builder() -> ListBoxBuilder {
+        ListBoxBuilder
+    }
+}
+
+pub struct ToolBarBuilder {
+    style: c_long,
+}
+impl ToolBarBuilder {
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+}
+impl Builder<ToolBar> for ToolBarBuilder {
+    fn build<W: WindowMethods>(&self, parent: Option<&W>) -> ToolBar {
+        ToolBar::new(
+            parent,
+            ID_ANY,
+            &Point::default(),
+            &Size::default(),
+            self.style,
+            "",
+        )
+    }
+}
+impl Buildable<ToolBarBuilder> for ToolBar {
+    fn builder() -> ToolBarBuilder {
+        ToolBarBuilder {
+            style: 0,
         }
     }
 }
