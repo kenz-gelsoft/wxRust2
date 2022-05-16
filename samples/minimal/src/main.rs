@@ -26,7 +26,7 @@ struct MyFrame {
 }
 impl MyFrame {
     fn new(title: &str) -> Self {
-        let frame = wx::Frame::builder().title(title).build();
+        let frame = wx::Frame::builder().title(title).build(wx::Window::none());
         let file_menu = wx::Menu::new();
         let help_menu = wx::Menu::new();
         help_menu.append_int_str(

@@ -5,17 +5,10 @@ use wx::methods::*;
 
 fn main() {
     wx::App::run(|_| {
-        let frame = wx::Frame::builder().title("Hello, 世界").build();
-        let button = wx::Button::new(
-            Some(&frame),
-            wx::ID_ANY,
-            "Greet",
-            &wx::Point::default(),
-            &wx::Size::default(),
-            0,
-            &wx::Validator::default(),
-            "",
-        );
+        let frame = wx::Frame::builder()
+            .title("Hello, 世界")
+            .build(wx::Window::none());
+        let button = wx::Button::builder().title("Greet").build(Some(&frame));
         let i = 3;
         println!("i={}", i);
         let button_copy = button.clone();

@@ -15,7 +15,7 @@ pub mod methods {
     pub use wx_base::methods::*;
 
     pub trait Builder<T: ?Sized> {
-        fn build(&self) -> T;
+        fn build<W: WindowMethods>(&self, parent: Option<&W>) -> T;
     }
     pub trait Buildable<B: Builder<Self>> {
         fn builder() -> B
@@ -44,20 +44,15 @@ pub struct FrameBuilder {
     title: String,
 }
 impl FrameBuilder {
-    fn new() -> Self {
-        Self {
-            title: "".to_string(),
-        }
-    }
     pub fn title(&mut self, s: &str) -> &mut Self {
         self.title = s.to_string();
         self
     }
 }
 impl Builder<Frame> for FrameBuilder {
-    fn build(&self) -> Frame {
+    fn build<W: WindowMethods>(&self, parent: Option<&W>) -> Frame {
         Frame::new(
-            Window::none(),
+            parent,
             ID_ANY,
             &self.title,
             &Point::default(),
@@ -69,7 +64,46 @@ impl Builder<Frame> for FrameBuilder {
 }
 impl Buildable<FrameBuilder> for Frame {
     fn builder() -> FrameBuilder {
-        FrameBuilder::new()
+        FrameBuilder {
+            title: "".to_string(),
+        }
+    }
+}
+
+pub struct ButtonBuilder {
+    id: c_int,
+    title: String,
+}
+impl ButtonBuilder {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn title(&mut self, s: &str) -> &mut Self {
+        self.title = s.to_string();
+        self
+    }
+}
+impl Builder<Button> for ButtonBuilder {
+    fn build<W: WindowMethods>(&self, parent: Option<&W>) -> Button {
+        Button::new(
+            parent,
+            self.id,
+            &self.title,
+            &Point::default(),
+            &Size::default(),
+            0,
+            &Validator::default(),
+            "",
+        )
+    }
+}
+impl Buildable<ButtonBuilder> for Button {
+    fn builder() -> ButtonBuilder {
+        ButtonBuilder {
+            id: ID_ANY,
+            title: "".to_string(),
+        }
     }
 }
 
