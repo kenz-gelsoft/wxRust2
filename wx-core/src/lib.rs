@@ -266,6 +266,7 @@ pub struct ListBoxBuilder<'a, P: WindowMethods> {
     id: c_int,
     pos: Option<Point>,
     size: Option<Size>,
+    choices: Option<ArrayString>,
     style: c_long,
     validator: Option<Validator>,
 }
@@ -276,6 +277,7 @@ impl<'a, P: WindowMethods> Buildable<'a, P, ListBoxBuilder<'a, P>> for ListBox {
             id: ID_ANY,
             pos: None,
             size: None,
+            choices: None,
             style: 0,
             validator: None,
         }
@@ -294,6 +296,10 @@ impl<'a, P: WindowMethods> ListBoxBuilder<'a, P> {
         self.size = Some(size);
         self
     }
+    pub fn choices(&mut self, choices: ArrayString) -> &mut Self {
+        self.choices = Some(choices);
+        self
+    }
     pub fn style(&mut self, style: c_long) -> &mut Self {
         self.style = style;
         self
@@ -305,6 +311,7 @@ impl<'a, P: WindowMethods> ListBoxBuilder<'a, P> {
     pub fn build(&mut self) -> ListBox {
         let pos = self.pos.take().unwrap_or_else(|| Point::default());
         let size = self.size.take().unwrap_or_else(|| Size::default());
+        let choices = self.choices.take().unwrap_or_else(|| ArrayString::new());
         let validator = self
             .validator
             .take()
@@ -314,7 +321,7 @@ impl<'a, P: WindowMethods> ListBoxBuilder<'a, P> {
             self.id,
             &pos,
             &size,
-            &ArrayString::new(),
+            &choices,
             self.style,
             &validator,
             "",
