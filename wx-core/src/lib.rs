@@ -38,18 +38,20 @@ mod ffi {
 pub struct FrameBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
+    title: String,
     pos: Option<Point>,
     size: Option<Size>,
-    title: String,
+    style: c_long,
 }
 impl<'a, P: WindowMethods> Buildable<'a, P, FrameBuilder<'a, P>> for Frame {
     fn builder(parent: Option<&'a P>) -> FrameBuilder<'a, P> {
         FrameBuilder {
             parent: parent,
             id: ID_ANY,
+            title: "".to_string(),
             pos: None,
             size: None,
-            title: "".to_string(),
+            style: DEFAULT_FRAME_STYLE,
         }
     }
 }
@@ -70,16 +72,20 @@ impl<'a, P: WindowMethods> FrameBuilder<'a, P> {
         self.size = Some(size);
         self
     }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
     pub fn build(&mut self) -> Frame {
-        let p = self.pos.take().unwrap_or_else(|| Point::default());
-        let s = self.size.take().unwrap_or_else(|| Size::default());
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
         Frame::new(
             self.parent,
             self.id,
             &self.title,
-            &p,
-            &s,
-            DEFAULT_FRAME_STYLE,
+            &pos,
+            &size,
+            self.style,
             "",
         )
     }
@@ -89,6 +95,7 @@ pub struct PanelBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     pos: Option<Point>,
     size: Option<Size>,
+    style: c_long,
 }
 impl<'a, P: WindowMethods> Buildable<'a, P, PanelBuilder<'a, P>> for Panel {
     fn builder(parent: Option<&'a P>) -> PanelBuilder<'a, P> {
@@ -96,6 +103,7 @@ impl<'a, P: WindowMethods> Buildable<'a, P, PanelBuilder<'a, P>> for Panel {
             parent: parent,
             pos: None,
             size: None,
+            style: 0,
         }
     }
 }
@@ -108,10 +116,14 @@ impl<'a, P: WindowMethods> PanelBuilder<'a, P> {
         self.size = Some(size);
         self
     }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
     pub fn build(&mut self) -> Panel {
-        let p = self.pos.take().unwrap_or_else(|| Point::default());
-        let s = self.size.take().unwrap_or_else(|| Size::default());
-        Panel::new(self.parent, ID_ANY, &p, &s, 0, "")
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        Panel::new(self.parent, ID_ANY, &pos, &size, self.style, "")
     }
 }
 
@@ -121,6 +133,7 @@ pub struct ButtonBuilder<'a, P: WindowMethods> {
     title: String,
     pos: Option<Point>,
     size: Option<Size>,
+    style: c_long,
     validator: Option<Validator>,
 }
 impl<'a, P: WindowMethods> Buildable<'a, P, ButtonBuilder<'a, P>> for Button {
@@ -131,6 +144,7 @@ impl<'a, P: WindowMethods> Buildable<'a, P, ButtonBuilder<'a, P>> for Button {
             title: "".to_string(),
             pos: None,
             size: None,
+            style: 0,
             validator: None,
         }
     }
@@ -152,18 +166,31 @@ impl<'a, P: WindowMethods> ButtonBuilder<'a, P> {
         self.size = Some(size);
         self
     }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
     pub fn validator(&mut self, validator: Validator) -> &mut Self {
         self.validator = Some(validator);
         self
     }
     pub fn build(&mut self) -> Button {
-        let p = self.pos.take().unwrap_or_else(|| Point::default());
-        let s = self.size.take().unwrap_or_else(|| Size::default());
-        let v = self
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        let validator = self
             .validator
             .take()
             .unwrap_or_else(|| Validator::default());
-        Button::new(self.parent, self.id, &self.title, &p, &s, 0, &v, "")
+        Button::new(
+            self.parent,
+            self.id,
+            &self.title,
+            &pos,
+            &size,
+            self.style,
+            &validator,
+            "",
+        )
     }
 }
 
@@ -173,6 +200,7 @@ pub struct CheckBoxBuilder<'a, P: WindowMethods> {
     title: String,
     pos: Option<Point>,
     size: Option<Size>,
+    style: c_long,
     validator: Option<Validator>,
 }
 impl<'a, P: WindowMethods> Buildable<'a, P, CheckBoxBuilder<'a, P>> for CheckBox {
@@ -183,6 +211,7 @@ impl<'a, P: WindowMethods> Buildable<'a, P, CheckBoxBuilder<'a, P>> for CheckBox
             title: "".to_string(),
             pos: None,
             size: None,
+            style: 0,
             validator: None,
         }
     }
@@ -204,18 +233,31 @@ impl<'a, P: WindowMethods> CheckBoxBuilder<'a, P> {
         self.size = Some(size);
         self
     }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
     pub fn validator(&mut self, validator: Validator) -> &mut Self {
         self.validator = Some(validator);
         self
     }
     pub fn build(&mut self) -> CheckBox {
-        let p = self.pos.take().unwrap_or_else(|| Point::default());
-        let s = self.size.take().unwrap_or_else(|| Size::default());
-        let v = self
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        let validator = self
             .validator
             .take()
             .unwrap_or_else(|| Validator::default());
-        CheckBox::new(self.parent, self.id, &self.title, &p, &s, 0, &v, "")
+        CheckBox::new(
+            self.parent,
+            self.id,
+            &self.title,
+            &pos,
+            &size,
+            self.style,
+            &validator,
+            "",
+        )
     }
 }
 
@@ -224,6 +266,7 @@ pub struct ListBoxBuilder<'a, P: WindowMethods> {
     id: c_int,
     pos: Option<Point>,
     size: Option<Size>,
+    style: c_long,
     validator: Option<Validator>,
 }
 impl<'a, P: WindowMethods> Buildable<'a, P, ListBoxBuilder<'a, P>> for ListBox {
@@ -233,6 +276,7 @@ impl<'a, P: WindowMethods> Buildable<'a, P, ListBoxBuilder<'a, P>> for ListBox {
             id: ID_ANY,
             pos: None,
             size: None,
+            style: 0,
             validator: None,
         }
     }
@@ -250,46 +294,55 @@ impl<'a, P: WindowMethods> ListBoxBuilder<'a, P> {
         self.size = Some(size);
         self
     }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
     pub fn validator(&mut self, validator: Validator) -> &mut Self {
         self.validator = Some(validator);
         self
     }
     pub fn build(&mut self) -> ListBox {
-        let p = self.pos.take().unwrap_or_else(|| Point::default());
-        let s = self.size.take().unwrap_or_else(|| Size::default());
-        let v = self
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        let validator = self
             .validator
             .take()
             .unwrap_or_else(|| Validator::default());
-        ListBox::new(self.parent, self.id, &p, &s, &ArrayString::new(), 0, &v, "")
+        ListBox::new(
+            self.parent,
+            self.id,
+            &pos,
+            &size,
+            &ArrayString::new(),
+            self.style,
+            &validator,
+            "",
+        )
     }
 }
 
 pub struct ToolBarBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
-    style: c_long,
     pos: Option<Point>,
     size: Option<Size>,
+    style: c_long,
 }
 impl<'a, P: WindowMethods> Buildable<'a, P, ToolBarBuilder<'a, P>> for ToolBar {
     fn builder(parent: Option<&'a P>) -> ToolBarBuilder<'a, P> {
         ToolBarBuilder {
             parent: parent,
             id: ID_ANY,
-            style: 0,
             pos: None,
             size: None,
+            style: 0,
         }
     }
 }
 impl<'a, P: WindowMethods> ToolBarBuilder<'a, P> {
     pub fn id(&mut self, id: c_int) -> &mut Self {
         self.id = id;
-        self
-    }
-    pub fn style(&mut self, style: c_long) -> &mut Self {
-        self.style = style;
         self
     }
     pub fn pos(&mut self, pos: Point) -> &mut Self {
@@ -300,10 +353,14 @@ impl<'a, P: WindowMethods> ToolBarBuilder<'a, P> {
         self.size = Some(size);
         self
     }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
     pub fn build(&mut self) -> ToolBar {
-        let p = self.pos.take().unwrap_or_else(|| Point::default());
-        let s = self.size.take().unwrap_or_else(|| Size::default());
-        ToolBar::new(self.parent, self.id, &p, &s, self.style, "")
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        ToolBar::new(self.parent, self.id, &pos, &size, self.style, "")
     }
 }
 
