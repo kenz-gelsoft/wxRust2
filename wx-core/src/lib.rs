@@ -71,14 +71,14 @@ impl<'a, P: WindowMethods> FrameBuilder<'a, P> {
         self
     }
     pub fn build(&mut self) -> Frame {
-        let pos = self.pos.take().unwrap_or_else(|| Point::default());
-        let size = self.size.take().unwrap_or_else(|| Size::default());
+        let p = self.pos.take().unwrap_or_else(|| Point::default());
+        let s = self.size.take().unwrap_or_else(|| Size::default());
         Frame::new(
             self.parent,
             self.id,
             &self.title,
-            &pos,
-            &size,
+            &p,
+            &s,
             DEFAULT_FRAME_STYLE,
             "",
         )
@@ -109,9 +109,9 @@ impl<'a, P: WindowMethods> PanelBuilder<'a, P> {
         self
     }
     pub fn build(&mut self) -> Panel {
-        let pos = self.pos.take().unwrap_or_else(|| Point::default());
-        let size = self.size.take().unwrap_or_else(|| Size::default());
-        Panel::new(self.parent, ID_ANY, &pos, &size, 0, "")
+        let p = self.pos.take().unwrap_or_else(|| Point::default());
+        let s = self.size.take().unwrap_or_else(|| Size::default());
+        Panel::new(self.parent, ID_ANY, &p, &s, 0, "")
     }
 }
 
@@ -121,6 +121,7 @@ pub struct ButtonBuilder<'a, P: WindowMethods> {
     title: String,
     pos: Option<Point>,
     size: Option<Size>,
+    validator: Option<Validator>,
 }
 impl<'a, P: WindowMethods> Buildable<'a, P, ButtonBuilder<'a, P>> for Button {
     fn builder(parent: Option<&'a P>) -> ButtonBuilder<'a, P> {
@@ -130,6 +131,7 @@ impl<'a, P: WindowMethods> Buildable<'a, P, ButtonBuilder<'a, P>> for Button {
             title: "".to_string(),
             pos: None,
             size: None,
+            validator: None,
         }
     }
 }
@@ -150,19 +152,18 @@ impl<'a, P: WindowMethods> ButtonBuilder<'a, P> {
         self.size = Some(size);
         self
     }
+    pub fn validator(&mut self, validator: Validator) -> &mut Self {
+        self.validator = Some(validator);
+        self
+    }
     pub fn build(&mut self) -> Button {
-        let pos = self.pos.take().unwrap_or_else(|| Point::default());
-        let size = self.size.take().unwrap_or_else(|| Size::default());
-        Button::new(
-            self.parent,
-            self.id,
-            &self.title,
-            &pos,
-            &size,
-            0,
-            &Validator::default(),
-            "",
-        )
+        let p = self.pos.take().unwrap_or_else(|| Point::default());
+        let s = self.size.take().unwrap_or_else(|| Size::default());
+        let v = self
+            .validator
+            .take()
+            .unwrap_or_else(|| Validator::default());
+        Button::new(self.parent, self.id, &self.title, &p, &s, 0, &v, "")
     }
 }
 
@@ -172,6 +173,7 @@ pub struct CheckBoxBuilder<'a, P: WindowMethods> {
     title: String,
     pos: Option<Point>,
     size: Option<Size>,
+    validator: Option<Validator>,
 }
 impl<'a, P: WindowMethods> Buildable<'a, P, CheckBoxBuilder<'a, P>> for CheckBox {
     fn builder(parent: Option<&'a P>) -> CheckBoxBuilder<'a, P> {
@@ -181,6 +183,7 @@ impl<'a, P: WindowMethods> Buildable<'a, P, CheckBoxBuilder<'a, P>> for CheckBox
             title: "".to_string(),
             pos: None,
             size: None,
+            validator: None,
         }
     }
 }
@@ -201,19 +204,18 @@ impl<'a, P: WindowMethods> CheckBoxBuilder<'a, P> {
         self.size = Some(size);
         self
     }
+    pub fn validator(&mut self, validator: Validator) -> &mut Self {
+        self.validator = Some(validator);
+        self
+    }
     pub fn build(&mut self) -> CheckBox {
-        let pos = self.pos.take().unwrap_or_else(|| Point::default());
-        let size = self.size.take().unwrap_or_else(|| Size::default());
-        CheckBox::new(
-            self.parent,
-            self.id,
-            &self.title,
-            &pos,
-            &size,
-            0,
-            &Validator::default(),
-            "",
-        )
+        let p = self.pos.take().unwrap_or_else(|| Point::default());
+        let s = self.size.take().unwrap_or_else(|| Size::default());
+        let v = self
+            .validator
+            .take()
+            .unwrap_or_else(|| Validator::default());
+        CheckBox::new(self.parent, self.id, &self.title, &p, &s, 0, &v, "")
     }
 }
 
@@ -222,6 +224,7 @@ pub struct ListBoxBuilder<'a, P: WindowMethods> {
     id: c_int,
     pos: Option<Point>,
     size: Option<Size>,
+    validator: Option<Validator>,
 }
 impl<'a, P: WindowMethods> Buildable<'a, P, ListBoxBuilder<'a, P>> for ListBox {
     fn builder(parent: Option<&'a P>) -> ListBoxBuilder<'a, P> {
@@ -230,6 +233,7 @@ impl<'a, P: WindowMethods> Buildable<'a, P, ListBoxBuilder<'a, P>> for ListBox {
             id: ID_ANY,
             pos: None,
             size: None,
+            validator: None,
         }
     }
 }
@@ -246,19 +250,18 @@ impl<'a, P: WindowMethods> ListBoxBuilder<'a, P> {
         self.size = Some(size);
         self
     }
+    pub fn validator(&mut self, validator: Validator) -> &mut Self {
+        self.validator = Some(validator);
+        self
+    }
     pub fn build(&mut self) -> ListBox {
-        let pos = self.pos.take().unwrap_or_else(|| Point::default());
-        let size = self.size.take().unwrap_or_else(|| Size::default());
-        ListBox::new(
-            self.parent,
-            self.id,
-            &pos,
-            &size,
-            &ArrayString::new(),
-            0,
-            &Validator::default(),
-            "",
-        )
+        let p = self.pos.take().unwrap_or_else(|| Point::default());
+        let s = self.size.take().unwrap_or_else(|| Size::default());
+        let v = self
+            .validator
+            .take()
+            .unwrap_or_else(|| Validator::default());
+        ListBox::new(self.parent, self.id, &p, &s, &ArrayString::new(), 0, &v, "")
     }
 }
 
@@ -298,9 +301,9 @@ impl<'a, P: WindowMethods> ToolBarBuilder<'a, P> {
         self
     }
     pub fn build(&mut self) -> ToolBar {
-        let pos = self.pos.take().unwrap_or_else(|| Point::default());
-        let size = self.size.take().unwrap_or_else(|| Size::default());
-        ToolBar::new(self.parent, self.id, &pos, &size, self.style, "")
+        let p = self.pos.take().unwrap_or_else(|| Point::default());
+        let s = self.size.take().unwrap_or_else(|| Size::default());
+        ToolBar::new(self.parent, self.id, &p, &s, self.style, "")
     }
 }
 
