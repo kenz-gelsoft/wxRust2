@@ -17,33 +17,14 @@ struct WrapSizerFrame {
 }
 impl WrapSizerFrame {
     fn new() -> Self {
-        let frame = wx::Frame::new(
-            wx::Window::none(),
-            wx::ID_ANY,
-            "wxWrapSizer Sample",
-            &wx::Point::default(),
-            &wx::Size::default(),
-            wx::DEFAULT_FRAME_STYLE,
-            "",
-        );
-        let panel = wx::Panel::new(
-            Some(&frame),
-            wx::ID_ANY,
-            &wx::Point::default(),
-            &wx::Size::default(),
-            0,
-            "",
-        );
-        let ok_button = wx::Button::new(
-            Some(&panel),
-            wx::ID_OK,
-            "",
-            &wx::Point::default(),
-            &wx::Size::default(),
-            0,
-            &wx::Validator::default(),
-            "",
-        );
+        let frame = wx::Frame::builder(wx::Window::none())
+            .title("wxWrapSizer Sample")
+            .build();
+        let panel = wx::Panel::builder(Some(&frame)).build();
+        let ok_button = wx::Button::builder(Some(&panel))
+            .id(wx::ID_OK)
+            .title("")
+            .build();
         let new_frame = WrapSizerFrame {
             base: frame,
             m_panel: panel,
@@ -74,16 +55,9 @@ impl WrapSizerFrame {
             wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&self.m_panel), "With check-boxes");
         let sizer_mid_wrap = wx::WrapSizer::new(wx::HORIZONTAL, wx::WRAPSIZER_DEFAULT_FLAGS);
         for n_check in 0..6 {
-            let chk = wx::CheckBox::new(
-                Some(&self.m_panel),
-                wx::ID_ANY,
-                &format!("Option {}", n_check),
-                &wx::Point::default(),
-                &wx::Size::default(),
-                0,
-                &wx::Validator::default(),
-                "",
-            );
+            let chk = wx::CheckBox::builder(Some(&self.m_panel))
+                .title(&format!("Option {}", n_check))
+                .build();
             sizer_mid_wrap
                 .add_window_sizerflags(Some(&chk), wx::SizerFlags::new(0).centre().border(wx::ALL));
         }
@@ -104,30 +78,21 @@ impl WrapSizerFrame {
         sizer_bottom
             .add_sizer_sizerflags(Some(&sizer_bottom_box), wx::SizerFlags::new(100).expand());
         sizer_bottom_box.add_window_sizerflags(
-            Some(&wx::ListBox::new(
-                Some(&self.m_panel),
-                wx::ID_ANY,
-                &wx::Point::new_with_int(0, 0),
-                &wx::Size::new_with_int(70, 70),
-                &wx::ArrayString::new(),
-                0,
-                &wx::Validator::default(),
-                "",
-            )),
+            Some(
+                &wx::ListBox::builder(Some(&self.m_panel))
+                    .pos(wx::Point::new_with_int(0, 0))
+                    .size(wx::Size::new_with_int(70, 70))
+                    .build(),
+            ),
             wx::SizerFlags::new(0).expand().shaped(),
         );
         sizer_bottom_box.add_spacer(10);
         sizer_bottom_box.add_window_sizerflags(
-            Some(&wx::CheckBox::new(
-                Some(&self.m_panel),
-                wx::ID_ANY,
-                "A much longer option...",
-                &wx::Point::default(),
-                &wx::Size::default(),
-                0,
-                &wx::Validator::default(),
-                "",
-            )),
+            Some(
+                &wx::CheckBox::builder(Some(&self.m_panel))
+                    .title("A much longer option...")
+                    .build(),
+            ),
             wx::SizerFlags::new(0).border(wx::ALL),
         );
         sizer_root.add_sizer_sizerflags(
@@ -166,14 +131,9 @@ impl WrapSizerFrame {
     }
 
     fn make_tool_bar(&self) -> wx::ToolBar {
-        let tb = wx::ToolBar::new(
-            Some(&self.m_panel),
-            wx::ID_ANY,
-            &wx::Point::default(),
-            &wx::Size::default(),
-            wx::TB_NODIVIDER.into(),
-            "",
-        );
+        let tb = wx::ToolBar::builder(Some(&self.m_panel))
+            .style(wx::TB_NODIVIDER.into())
+            .build();
         self.add_tool_bar_button(&tb, "Help", "wxART_HELP_BOOK");
         tb.add_separator();
         self.add_tool_bar_button(&tb, "Open", "wxART_FILE_OPEN");
