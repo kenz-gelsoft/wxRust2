@@ -78,7 +78,12 @@ impl WrapSizerFrame {
         sizer_bottom
             .add_sizer_sizerflags(Some(&sizer_bottom_box), wx::SizerFlags::new(100).expand());
         sizer_bottom_box.add_window_sizerflags(
-            Some(&wx::ListBox::builder(Some(&self.m_panel)).build()),
+            Some(
+                &wx::ListBox::builder(Some(&self.m_panel))
+                    .pos(wx::Point::new_with_int(0, 0))
+                    .size(wx::Size::new_with_int(70, 70))
+                    .build(),
+            ),
             wx::SizerFlags::new(0).expand().shaped(),
         );
         sizer_bottom_box.add_spacer(10);

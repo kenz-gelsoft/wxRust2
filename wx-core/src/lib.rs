@@ -38,6 +38,8 @@ mod ffi {
 pub struct FrameBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
+    pos: Option<Point>,
+    size: Option<Size>,
     title: String,
 }
 impl<'a, P: WindowMethods> Buildable<'a, P, FrameBuilder<'a, P>> for Frame {
@@ -45,6 +47,8 @@ impl<'a, P: WindowMethods> Buildable<'a, P, FrameBuilder<'a, P>> for Frame {
         FrameBuilder {
             parent: parent,
             id: ID_ANY,
+            pos: None,
+            size: None,
             title: "".to_string(),
         }
     }
@@ -58,13 +62,23 @@ impl<'a, P: WindowMethods> FrameBuilder<'a, P> {
         self.title = s.to_string();
         self
     }
-    pub fn build(&self) -> Frame {
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn build(&mut self) -> Frame {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
         Frame::new(
             self.parent,
             self.id,
             &self.title,
-            &Point::default(),
-            &Size::default(),
+            &pos,
+            &size,
             DEFAULT_FRAME_STYLE,
             "",
         )
@@ -73,22 +87,31 @@ impl<'a, P: WindowMethods> FrameBuilder<'a, P> {
 
 pub struct PanelBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
+    pos: Option<Point>,
+    size: Option<Size>,
 }
 impl<'a, P: WindowMethods> Buildable<'a, P, PanelBuilder<'a, P>> for Panel {
     fn builder(parent: Option<&'a P>) -> PanelBuilder<'a, P> {
-        PanelBuilder { parent: parent }
+        PanelBuilder {
+            parent: parent,
+            pos: None,
+            size: None,
+        }
     }
 }
 impl<'a, P: WindowMethods> PanelBuilder<'a, P> {
-    pub fn build(&self) -> Panel {
-        Panel::new(
-            self.parent,
-            ID_ANY,
-            &Point::default(),
-            &Size::default(),
-            0,
-            "",
-        )
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn build(&mut self) -> Panel {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        Panel::new(self.parent, ID_ANY, &pos, &size, 0, "")
     }
 }
 
@@ -96,6 +119,8 @@ pub struct ButtonBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
     title: String,
+    pos: Option<Point>,
+    size: Option<Size>,
 }
 impl<'a, P: WindowMethods> Buildable<'a, P, ButtonBuilder<'a, P>> for Button {
     fn builder(parent: Option<&'a P>) -> ButtonBuilder<'a, P> {
@@ -103,6 +128,8 @@ impl<'a, P: WindowMethods> Buildable<'a, P, ButtonBuilder<'a, P>> for Button {
             parent: parent,
             id: ID_ANY,
             title: "".to_string(),
+            pos: None,
+            size: None,
         }
     }
 }
@@ -115,13 +142,23 @@ impl<'a, P: WindowMethods> ButtonBuilder<'a, P> {
         self.title = s.to_string();
         self
     }
-    pub fn build(&self) -> Button {
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn build(&mut self) -> Button {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
         Button::new(
             self.parent,
             self.id,
             &self.title,
-            &Point::default(),
-            &Size::default(),
+            &pos,
+            &size,
             0,
             &Validator::default(),
             "",
@@ -133,6 +170,8 @@ pub struct CheckBoxBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
     title: String,
+    pos: Option<Point>,
+    size: Option<Size>,
 }
 impl<'a, P: WindowMethods> Buildable<'a, P, CheckBoxBuilder<'a, P>> for CheckBox {
     fn builder(parent: Option<&'a P>) -> CheckBoxBuilder<'a, P> {
@@ -140,6 +179,8 @@ impl<'a, P: WindowMethods> Buildable<'a, P, CheckBoxBuilder<'a, P>> for CheckBox
             parent: parent,
             id: ID_ANY,
             title: "".to_string(),
+            pos: None,
+            size: None,
         }
     }
 }
@@ -152,13 +193,23 @@ impl<'a, P: WindowMethods> CheckBoxBuilder<'a, P> {
         self.title = s.to_string();
         self
     }
-    pub fn build(&self) -> CheckBox {
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn build(&mut self) -> CheckBox {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
         CheckBox::new(
             self.parent,
             self.id,
             &self.title,
-            &Point::default(),
-            &Size::default(),
+            &pos,
+            &size,
             0,
             &Validator::default(),
             "",
@@ -169,12 +220,16 @@ impl<'a, P: WindowMethods> CheckBoxBuilder<'a, P> {
 pub struct ListBoxBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
+    pos: Option<Point>,
+    size: Option<Size>,
 }
 impl<'a, P: WindowMethods> Buildable<'a, P, ListBoxBuilder<'a, P>> for ListBox {
     fn builder(parent: Option<&'a P>) -> ListBoxBuilder<'a, P> {
         ListBoxBuilder {
             parent: parent,
             id: ID_ANY,
+            pos: None,
+            size: None,
         }
     }
 }
@@ -183,12 +238,22 @@ impl<'a, P: WindowMethods> ListBoxBuilder<'a, P> {
         self.id = id;
         self
     }
-    pub fn build(&self) -> ListBox {
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn build(&mut self) -> ListBox {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
         ListBox::new(
             self.parent,
             self.id,
-            &Point::new_with_int(0, 0),
-            &Size::new_with_int(70, 70),
+            &pos,
+            &size,
             &ArrayString::new(),
             0,
             &Validator::default(),
@@ -201,6 +266,8 @@ pub struct ToolBarBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
     style: c_long,
+    pos: Option<Point>,
+    size: Option<Size>,
 }
 impl<'a, P: WindowMethods> Buildable<'a, P, ToolBarBuilder<'a, P>> for ToolBar {
     fn builder(parent: Option<&'a P>) -> ToolBarBuilder<'a, P> {
@@ -208,6 +275,8 @@ impl<'a, P: WindowMethods> Buildable<'a, P, ToolBarBuilder<'a, P>> for ToolBar {
             parent: parent,
             id: ID_ANY,
             style: 0,
+            pos: None,
+            size: None,
         }
     }
 }
@@ -220,15 +289,18 @@ impl<'a, P: WindowMethods> ToolBarBuilder<'a, P> {
         self.style = style;
         self
     }
-    pub fn build(&self) -> ToolBar {
-        ToolBar::new(
-            self.parent,
-            self.id,
-            &Point::default(),
-            &Size::default(),
-            self.style,
-            "",
-        )
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn build(&mut self) -> ToolBar {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        ToolBar::new(self.parent, self.id, &pos, &size, self.style, "")
     }
 }
 
