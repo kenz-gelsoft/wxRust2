@@ -5,6 +5,23 @@
 
 extern "C" {
 
+// CLASS: wxAnyButton
+wxAnyButton *wxAnyButton_new();
+wxBitmap *wxAnyButton_GetBitmap(const wxAnyButton * self);
+wxBitmap *wxAnyButton_GetBitmapCurrent(const wxAnyButton * self);
+wxBitmap *wxAnyButton_GetBitmapDisabled(const wxAnyButton * self);
+wxBitmap *wxAnyButton_GetBitmapFocus(const wxAnyButton * self);
+wxBitmap *wxAnyButton_GetBitmapLabel(const wxAnyButton * self);
+wxBitmap *wxAnyButton_GetBitmapPressed(const wxAnyButton * self);
+void wxAnyButton_SetBitmapCurrent(wxAnyButton * self, const wxBitmap * bitmap);
+void wxAnyButton_SetBitmapDisabled(wxAnyButton * self, const wxBitmap * bitmap);
+void wxAnyButton_SetBitmapFocus(wxAnyButton * self, const wxBitmap * bitmap);
+void wxAnyButton_SetBitmapLabel(wxAnyButton * self, const wxBitmap * bitmap);
+void wxAnyButton_SetBitmapPressed(wxAnyButton * self, const wxBitmap * bitmap);
+wxSize *wxAnyButton_GetBitmapMargins(wxAnyButton * self);
+void wxAnyButton_SetBitmapMargins(wxAnyButton * self, wxCoord x, wxCoord y);
+void wxAnyButton_SetBitmapMargins1(wxAnyButton * self, const wxSize * sz);
+
 // CLASS: wxArtProvider
 bool wxArtProvider_Delete(wxArtProvider * provider);
 wxBitmap *wxArtProvider_GetBitmap(const wxArtID * id, const wxArtClient * client, const wxSize * size);
@@ -60,6 +77,17 @@ wxBoxSizer *wxBoxSizer_new(int orient);
 int wxBoxSizer_GetOrientation(const wxBoxSizer * self);
 void wxBoxSizer_SetOrientation(wxBoxSizer * self, int orient);
 
+// CLASS: wxButton
+wxButton *wxButton_new();
+wxButton *wxButton_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+bool wxButton_Create(wxButton * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+bool wxButton_GetAuthNeeded(const wxButton * self);
+void wxButton_SetAuthNeeded(wxButton * self, bool needed);
+wxWindow * wxButton_SetDefault(wxButton * self);
+#if wxCHECK_VERSION(3, 1, 0)
+wxSize *wxButton_GetDefaultSize(wxWindow * win);
+#endif
+
 // CLASS: wxCheckBox
 wxCheckBox *wxCheckBox_new();
 wxCheckBox *wxCheckBox_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
@@ -85,6 +113,51 @@ void wxCommandEvent_SetExtraLong(wxCommandEvent * self, long extra_long);
 void wxCommandEvent_SetInt(wxCommandEvent * self, int int_command);
 void wxCommandEvent_SetString(wxCommandEvent * self, const wxString * string);
 
+// CLASS: wxControl
+wxControl *wxControl_new(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+wxControl *wxControl_new1();
+bool wxControl_Create(wxControl * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+void wxControl_Command(wxControl * self, wxCommandEvent * event);
+wxString *wxControl_GetLabelText(const wxControl * self);
+wxSize *wxControl_GetSizeFromTextSize(const wxControl * self, int xlen, int ylen);
+wxSize *wxControl_GetSizeFromTextSize1(const wxControl * self, const wxSize * tsize);
+#if wxCHECK_VERSION(3, 1, 0)
+wxSize *wxControl_GetSizeFromText(const wxControl * self, const wxString * text);
+#endif
+void wxControl_SetLabelText(wxControl * self, const wxString * text);
+bool wxControl_SetLabelMarkup(wxControl * self, const wxString * markup);
+wxString *wxControl_GetLabelText1(const wxString * label);
+wxString *wxControl_RemoveMnemonics(const wxString * str);
+wxString *wxControl_EscapeMnemonics(const wxString * text);
+wxString *wxControl_Ellipsize(const wxString * label, const wxDC * dc, wxEllipsizeMode mode, int max_width, int flags);
+
+// CLASS: wxFrame
+wxFrame *wxFrame_new();
+wxFrame *wxFrame_new1(wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+void wxFrame_Centre(wxFrame * self, int direction);
+bool wxFrame_Create(wxFrame * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+wxStatusBar * wxFrame_CreateStatusBar(wxFrame * self, int number, long style, wxWindowID id, const wxString * name);
+wxToolBar * wxFrame_CreateToolBar(wxFrame * self, long style, wxWindowID id, const wxString * name);
+void wxFrame_DoGiveHelp(wxFrame * self, const wxString * text, bool show);
+wxMenuBar * wxFrame_GetMenuBar(const wxFrame * self);
+wxStatusBar * wxFrame_GetStatusBar(const wxFrame * self);
+int wxFrame_GetStatusBarPane(const wxFrame * self);
+wxToolBar * wxFrame_GetToolBar(const wxFrame * self);
+wxStatusBar * wxFrame_OnCreateStatusBar(wxFrame * self, int number, long style, wxWindowID id, const wxString * name);
+wxToolBar * wxFrame_OnCreateToolBar(wxFrame * self, long style, wxWindowID id, const wxString * name);
+bool wxFrame_ProcessCommand(wxFrame * self, int id);
+void wxFrame_SetMenuBar(wxFrame * self, wxMenuBar * menu_bar);
+void wxFrame_SetStatusBar(wxFrame * self, wxStatusBar * status_bar);
+void wxFrame_SetStatusBarPane(wxFrame * self, int n);
+void wxFrame_SetStatusText(wxFrame * self, const wxString * text, int number);
+void wxFrame_SetStatusWidths(wxFrame * self, int n, const int * widths_field);
+void wxFrame_SetToolBar(wxFrame * self, wxToolBar * tool_bar);
+#ifdef __WXMSW__
+wxTaskBarButton * wxFrame_MSWGetTaskBarButton(wxFrame * self);
+#endif
+void wxFrame_PushStatusText(wxFrame * self, const wxString * text, int number);
+void wxFrame_PopStatusText(wxFrame * self, int number);
+
 // CLASS: wxGDIObject
 
 // CLASS: wxListBox
@@ -109,6 +182,421 @@ int wxListBox_GetTopItem(const wxListBox * self);
 #ifdef __WXMSW__
 void wxListBox_MSWSetTabStops(wxListBox * self, const wxVector< int > * tab_stops);
 #endif
+
+// CLASS: wxMenu
+wxMenu *wxMenu_new();
+wxMenu *wxMenu_new1(long style);
+wxMenu *wxMenu_new2(const wxString * title, long style);
+wxMenuItem * wxMenu_Append(wxMenu * self, int id, const wxString * item, const wxString * help_string, wxItemKind kind);
+wxMenuItem * wxMenu_Append1(wxMenu * self, int id, const wxString * item, wxMenu * sub_menu, const wxString * help_string);
+wxMenuItem * wxMenu_Append2(wxMenu * self, wxMenuItem * menu_item);
+wxMenuItem * wxMenu_AppendCheckItem(wxMenu * self, int id, const wxString * item, const wxString * help);
+wxMenuItem * wxMenu_AppendRadioItem(wxMenu * self, int id, const wxString * item, const wxString * help);
+wxMenuItem * wxMenu_AppendSeparator(wxMenu * self);
+wxMenuItem * wxMenu_AppendSubMenu(wxMenu * self, wxMenu * submenu, const wxString * text, const wxString * help);
+void wxMenu_Break(wxMenu * self);
+void wxMenu_Check(wxMenu * self, int id, bool check);
+bool wxMenu_Delete(wxMenu * self, int id);
+bool wxMenu_Delete1(wxMenu * self, wxMenuItem * item);
+bool wxMenu_Destroy(wxMenu * self, int id);
+bool wxMenu_Destroy1(wxMenu * self, wxMenuItem * item);
+void wxMenu_Enable(wxMenu * self, int id, bool enable);
+wxMenuItem * wxMenu_FindChildItem(const wxMenu * self, int id, size_t * pos);
+int wxMenu_FindItem(const wxMenu * self, const wxString * item_string);
+wxMenuItem * wxMenu_FindItem1(const wxMenu * self, int id, wxMenu ** menu);
+wxMenuItem * wxMenu_FindItemByPosition(const wxMenu * self, size_t position);
+wxString *wxMenu_GetHelpString(const wxMenu * self, int id);
+wxString *wxMenu_GetLabel(const wxMenu * self, int id);
+wxString *wxMenu_GetLabelText(const wxMenu * self, int id);
+size_t wxMenu_GetMenuItemCount(const wxMenu * self);
+wxString *wxMenu_GetTitle(const wxMenu * self);
+wxMenuItem * wxMenu_Insert(wxMenu * self, size_t pos, wxMenuItem * menu_item);
+wxMenuItem * wxMenu_Insert1(wxMenu * self, size_t pos, int id, const wxString * item, const wxString * help_string, wxItemKind kind);
+wxMenuItem * wxMenu_Insert2(wxMenu * self, size_t pos, int id, const wxString * text, wxMenu * submenu, const wxString * help);
+wxMenuItem * wxMenu_InsertCheckItem(wxMenu * self, size_t pos, int id, const wxString * item, const wxString * help_string);
+wxMenuItem * wxMenu_InsertRadioItem(wxMenu * self, size_t pos, int id, const wxString * item, const wxString * help_string);
+wxMenuItem * wxMenu_InsertSeparator(wxMenu * self, size_t pos);
+bool wxMenu_IsChecked(const wxMenu * self, int id);
+bool wxMenu_IsEnabled(const wxMenu * self, int id);
+wxMenuItem * wxMenu_Prepend(wxMenu * self, wxMenuItem * item);
+wxMenuItem * wxMenu_Prepend1(wxMenu * self, int id, const wxString * item, const wxString * help_string, wxItemKind kind);
+wxMenuItem * wxMenu_Prepend2(wxMenu * self, int id, const wxString * text, wxMenu * submenu, const wxString * help);
+wxMenuItem * wxMenu_PrependCheckItem(wxMenu * self, int id, const wxString * item, const wxString * help_string);
+wxMenuItem * wxMenu_PrependRadioItem(wxMenu * self, int id, const wxString * item, const wxString * help_string);
+wxMenuItem * wxMenu_PrependSeparator(wxMenu * self);
+wxMenuItem * wxMenu_Remove(wxMenu * self, int id);
+wxMenuItem * wxMenu_Remove1(wxMenu * self, wxMenuItem * item);
+void wxMenu_SetHelpString(wxMenu * self, int id, const wxString * help_string);
+void wxMenu_SetLabel(wxMenu * self, int id, const wxString * label);
+void wxMenu_SetTitle(wxMenu * self, const wxString * title);
+void wxMenu_UpdateUI(wxMenu * self, wxEvtHandler * source);
+void wxMenu_SetInvokingWindow(wxMenu * self, wxWindow * win);
+wxWindow * wxMenu_GetInvokingWindow(const wxMenu * self);
+wxWindow * wxMenu_GetWindow(const wxMenu * self);
+long wxMenu_GetStyle(const wxMenu * self);
+void wxMenu_SetParent(wxMenu * self, wxMenu * parent);
+wxMenu * wxMenu_GetParent(const wxMenu * self);
+void wxMenu_Attach(wxMenu * self, wxMenuBar * menubar);
+void wxMenu_Detach(wxMenu * self);
+bool wxMenu_IsAttached(const wxMenu * self);
+
+// CLASS: wxMenuBar
+wxMenuBar *wxMenuBar_new(long style);
+bool wxMenuBar_Append(wxMenuBar * self, wxMenu * menu, const wxString * title);
+void wxMenuBar_Check(wxMenuBar * self, int id, bool check);
+void wxMenuBar_Enable(wxMenuBar * self, int id, bool enable);
+bool wxMenuBar_IsEnabledTop(const wxMenuBar * self, size_t pos);
+void wxMenuBar_EnableTop(wxMenuBar * self, size_t pos, bool enable);
+wxMenuItem * wxMenuBar_FindItem(const wxMenuBar * self, int id, wxMenu ** menu);
+int wxMenuBar_FindMenu(const wxMenuBar * self, const wxString * title);
+int wxMenuBar_FindMenuItem(const wxMenuBar * self, const wxString * menu_string, const wxString * item_string);
+wxString *wxMenuBar_GetHelpString(const wxMenuBar * self, int id);
+wxString *wxMenuBar_GetLabel(const wxMenuBar * self, int id);
+wxMenu * wxMenuBar_GetMenu(const wxMenuBar * self, size_t menu_index);
+size_t wxMenuBar_GetMenuCount(const wxMenuBar * self);
+wxString *wxMenuBar_GetMenuLabel(const wxMenuBar * self, size_t pos);
+wxString *wxMenuBar_GetMenuLabelText(const wxMenuBar * self, size_t pos);
+bool wxMenuBar_Insert(wxMenuBar * self, size_t pos, wxMenu * menu, const wxString * title);
+bool wxMenuBar_IsChecked(const wxMenuBar * self, int id);
+bool wxMenuBar_IsEnabled(const wxMenuBar * self, int id);
+wxMenu * wxMenuBar_Remove(wxMenuBar * self, size_t pos);
+wxMenu * wxMenuBar_Replace(wxMenuBar * self, size_t pos, wxMenu * menu, const wxString * title);
+void wxMenuBar_SetHelpString(wxMenuBar * self, int id, const wxString * help_string);
+void wxMenuBar_SetLabel(wxMenuBar * self, int id, const wxString * label);
+void wxMenuBar_SetMenuLabel(wxMenuBar * self, size_t pos, const wxString * label);
+#ifdef __WXOSX__
+wxMenu * wxMenuBar_OSXGetAppleMenu(const wxMenuBar * self);
+#endif
+wxFrame * wxMenuBar_GetFrame(const wxMenuBar * self);
+bool wxMenuBar_IsAttached(const wxMenuBar * self);
+void wxMenuBar_Attach(wxMenuBar * self, wxFrame * frame);
+void wxMenuBar_Detach(wxMenuBar * self);
+#ifdef __WXOSX__
+void wxMenuBar_MacSetCommonMenuBar(wxMenuBar * menubar);
+wxMenuBar * wxMenuBar_MacGetCommonMenuBar();
+#endif
+
+// CLASS: wxNonOwnedWindow
+bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow * self, const wxRegion * region);
+bool wxNonOwnedWindow_SetShape1(wxNonOwnedWindow * self, const wxGraphicsPath * path);
+
+// CLASS: wxPanel
+wxPanel *wxPanel_new();
+wxPanel *wxPanel_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+bool wxPanel_Create(wxPanel * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+void wxPanel_OnSysColourChanged(wxPanel * self, wxSysColourChangedEvent * event);
+void wxPanel_SetFocusIgnoringChildren(wxPanel * self);
+
+// CLASS: wxPoint
+void wxPoint_delete(wxPoint *self);
+bool wxPoint_IsFullySpecified(const wxPoint * self);
+void wxPoint_SetDefaults(wxPoint * self, const wxPoint * pt);
+wxPoint *wxPoint_new();
+wxPoint *wxPoint_new1(int x, int y);
+wxPoint *wxPoint_new2(const wxRealPoint * pt);
+
+// CLASS: wxRect
+void wxRect_delete(wxRect *self);
+wxRect *wxRect_new();
+wxRect *wxRect_new1(int x, int y, int width, int height);
+wxRect *wxRect_new2(const wxPoint * top_left, const wxPoint * bottom_right);
+wxRect *wxRect_new3(const wxPoint * pos, const wxSize * size);
+wxRect *wxRect_new4(const wxSize * size);
+wxRect *wxRect_CentreIn(const wxRect * self, const wxRect * r, int dir);
+wxRect *wxRect_CenterIn(const wxRect * self, const wxRect * r, int dir);
+bool wxRect_Contains(const wxRect * self, int x, int y);
+bool wxRect_Contains1(const wxRect * self, const wxPoint * pt);
+bool wxRect_Contains2(const wxRect * self, const wxRect * rect);
+wxRect *wxRect_Deflate3(const wxRect * self, wxCoord dx, wxCoord dy);
+int wxRect_GetBottom(const wxRect * self);
+wxPoint *wxRect_GetBottomLeft(const wxRect * self);
+wxPoint *wxRect_GetBottomRight(const wxRect * self);
+int wxRect_GetHeight(const wxRect * self);
+int wxRect_GetLeft(const wxRect * self);
+wxPoint *wxRect_GetPosition(const wxRect * self);
+int wxRect_GetRight(const wxRect * self);
+wxSize *wxRect_GetSize(const wxRect * self);
+int wxRect_GetTop(const wxRect * self);
+wxPoint *wxRect_GetTopLeft(const wxRect * self);
+wxPoint *wxRect_GetTopRight(const wxRect * self);
+int wxRect_GetWidth(const wxRect * self);
+int wxRect_GetX(const wxRect * self);
+int wxRect_GetY(const wxRect * self);
+wxRect *wxRect_Inflate3(const wxRect * self, wxCoord dx, wxCoord dy);
+wxRect *wxRect_Intersect1(const wxRect * self, const wxRect * rect);
+bool wxRect_Intersects(const wxRect * self, const wxRect * rect);
+bool wxRect_IsEmpty(const wxRect * self);
+void wxRect_Offset(wxRect * self, wxCoord dx, wxCoord dy);
+void wxRect_Offset1(wxRect * self, const wxPoint * pt);
+void wxRect_SetHeight(wxRect * self, int height);
+void wxRect_SetPosition(wxRect * self, const wxPoint * pos);
+void wxRect_SetSize(wxRect * self, const wxSize * s);
+void wxRect_SetWidth(wxRect * self, int width);
+void wxRect_SetX(wxRect * self, int x);
+void wxRect_SetY(wxRect * self, int y);
+void wxRect_SetLeft(wxRect * self, int left);
+void wxRect_SetRight(wxRect * self, int right);
+void wxRect_SetTop(wxRect * self, int top);
+void wxRect_SetBottom(wxRect * self, int bottom);
+void wxRect_SetTopLeft(wxRect * self, const wxPoint * p);
+void wxRect_SetBottomRight(wxRect * self, const wxPoint * p);
+void wxRect_SetTopRight(wxRect * self, const wxPoint * p);
+void wxRect_SetBottomLeft(wxRect * self, const wxPoint * p);
+wxRect *wxRect_Union(const wxRect * self, const wxRect * rect);
+
+// CLASS: wxSize
+void wxSize_delete(wxSize *self);
+wxSize *wxSize_new();
+wxSize *wxSize_new1(int width, int height);
+void wxSize_DecBy(wxSize * self, const wxPoint * pt);
+void wxSize_DecBy1(wxSize * self, const wxSize * size);
+void wxSize_DecBy2(wxSize * self, int dx, int dy);
+void wxSize_DecBy3(wxSize * self, int d);
+void wxSize_DecTo(wxSize * self, const wxSize * size);
+void wxSize_DecToIfSpecified(wxSize * self, const wxSize * size);
+int wxSize_GetHeight(const wxSize * self);
+int wxSize_GetWidth(const wxSize * self);
+void wxSize_IncBy(wxSize * self, const wxPoint * pt);
+void wxSize_IncBy1(wxSize * self, const wxSize * size);
+void wxSize_IncBy2(wxSize * self, int dx, int dy);
+void wxSize_IncBy3(wxSize * self, int d);
+void wxSize_IncTo(wxSize * self, const wxSize * size);
+bool wxSize_IsFullySpecified(const wxSize * self);
+void wxSize_Set(wxSize * self, int width, int height);
+void wxSize_SetDefaults(wxSize * self, const wxSize * size_default);
+void wxSize_SetHeight(wxSize * self, int height);
+void wxSize_SetWidth(wxSize * self, int width);
+
+// CLASS: wxSizer
+wxSizerItem * wxSizer_Add(wxSizer * self, wxWindow * window, const wxSizerFlags * flags);
+wxSizerItem * wxSizer_Add1(wxSizer * self, wxWindow * window, int proportion, int flag, int border, wxObject * user_data);
+wxSizerItem * wxSizer_Add2(wxSizer * self, wxSizer * sizer, const wxSizerFlags * flags);
+wxSizerItem * wxSizer_Add3(wxSizer * self, wxSizer * sizer, int proportion, int flag, int border, wxObject * user_data);
+wxSizerItem * wxSizer_Add4(wxSizer * self, int width, int height, int proportion, int flag, int border, wxObject * user_data);
+wxSizerItem * wxSizer_Add5(wxSizer * self, int width, int height, const wxSizerFlags * flags);
+wxSizerItem * wxSizer_Add6(wxSizer * self, wxSizerItem * item);
+wxSizerItem * wxSizer_AddSpacer(wxSizer * self, int size);
+wxSizerItem * wxSizer_AddStretchSpacer(wxSizer * self, int prop);
+wxSize *wxSizer_CalcMin(wxSizer * self);
+void wxSizer_Clear(wxSizer * self, bool delete_windows);
+wxSize *wxSizer_ComputeFittingClientSize(wxSizer * self, wxWindow * window);
+wxSize *wxSizer_ComputeFittingWindowSize(wxSizer * self, wxWindow * window);
+bool wxSizer_Detach(wxSizer * self, wxWindow * window);
+bool wxSizer_Detach1(wxSizer * self, wxSizer * sizer);
+bool wxSizer_Detach2(wxSizer * self, int index);
+wxSize *wxSizer_Fit(wxSizer * self, wxWindow * window);
+void wxSizer_FitInside(wxSizer * self, wxWindow * window);
+bool wxSizer_InformFirstDirection(wxSizer * self, int direction, int size, int available_other_dir);
+wxWindow * wxSizer_GetContainingWindow(const wxSizer * self);
+void wxSizer_SetContainingWindow(wxSizer * self, wxWindow * window);
+size_t wxSizer_GetItemCount(const wxSizer * self);
+wxSizerItem * wxSizer_GetItem(wxSizer * self, wxWindow * window, bool recursive);
+wxSizerItem * wxSizer_GetItem1(wxSizer * self, wxSizer * sizer, bool recursive);
+wxSizerItem * wxSizer_GetItem2(wxSizer * self, size_t index);
+wxSizerItem * wxSizer_GetItemById(wxSizer * self, int id, bool recursive);
+wxSize *wxSizer_GetMinSize(wxSizer * self);
+wxPoint *wxSizer_GetPosition(const wxSizer * self);
+wxSize *wxSizer_GetSize(const wxSizer * self);
+bool wxSizer_Hide(wxSizer * self, wxWindow * window, bool recursive);
+bool wxSizer_Hide1(wxSizer * self, wxSizer * sizer, bool recursive);
+bool wxSizer_Hide2(wxSizer * self, size_t index);
+wxSizerItem * wxSizer_Insert(wxSizer * self, size_t index, wxWindow * window, const wxSizerFlags * flags);
+wxSizerItem * wxSizer_Insert1(wxSizer * self, size_t index, wxWindow * window, int proportion, int flag, int border, wxObject * user_data);
+wxSizerItem * wxSizer_Insert2(wxSizer * self, size_t index, wxSizer * sizer, const wxSizerFlags * flags);
+wxSizerItem * wxSizer_Insert3(wxSizer * self, size_t index, wxSizer * sizer, int proportion, int flag, int border, wxObject * user_data);
+wxSizerItem * wxSizer_Insert4(wxSizer * self, size_t index, int width, int height, int proportion, int flag, int border, wxObject * user_data);
+wxSizerItem * wxSizer_Insert5(wxSizer * self, size_t index, int width, int height, const wxSizerFlags * flags);
+wxSizerItem * wxSizer_Insert6(wxSizer * self, size_t index, wxSizerItem * item);
+wxSizerItem * wxSizer_InsertSpacer(wxSizer * self, size_t index, int size);
+wxSizerItem * wxSizer_InsertStretchSpacer(wxSizer * self, size_t index, int prop);
+bool wxSizer_IsEmpty(const wxSizer * self);
+bool wxSizer_IsShown(const wxSizer * self, wxWindow * window);
+bool wxSizer_IsShown1(const wxSizer * self, wxSizer * sizer);
+bool wxSizer_IsShown2(const wxSizer * self, size_t index);
+void wxSizer_Layout(wxSizer * self);
+wxSizerItem * wxSizer_Prepend(wxSizer * self, wxWindow * window, const wxSizerFlags * flags);
+wxSizerItem * wxSizer_Prepend1(wxSizer * self, wxWindow * window, int proportion, int flag, int border, wxObject * user_data);
+wxSizerItem * wxSizer_Prepend2(wxSizer * self, wxSizer * sizer, const wxSizerFlags * flags);
+wxSizerItem * wxSizer_Prepend3(wxSizer * self, wxSizer * sizer, int proportion, int flag, int border, wxObject * user_data);
+wxSizerItem * wxSizer_Prepend4(wxSizer * self, int width, int height, int proportion, int flag, int border, wxObject * user_data);
+wxSizerItem * wxSizer_Prepend5(wxSizer * self, int width, int height, const wxSizerFlags * flags);
+wxSizerItem * wxSizer_Prepend6(wxSizer * self, wxSizerItem * item);
+wxSizerItem * wxSizer_PrependSpacer(wxSizer * self, int size);
+wxSizerItem * wxSizer_PrependStretchSpacer(wxSizer * self, int prop);
+#if wxCHECK_VERSION(3, 1, 0)
+void wxSizer_RepositionChildren(wxSizer * self, const wxSize * min_size);
+#endif
+bool wxSizer_Remove1(wxSizer * self, wxSizer * sizer);
+bool wxSizer_Remove2(wxSizer * self, int index);
+bool wxSizer_Replace(wxSizer * self, wxWindow * oldwin, wxWindow * newwin, bool recursive);
+bool wxSizer_Replace1(wxSizer * self, wxSizer * oldsz, wxSizer * newsz, bool recursive);
+bool wxSizer_Replace2(wxSizer * self, size_t index, wxSizerItem * newitem);
+void wxSizer_SetDimension(wxSizer * self, int x, int y, int width, int height);
+void wxSizer_SetDimension1(wxSizer * self, const wxPoint * pos, const wxSize * size);
+bool wxSizer_SetItemMinSize(wxSizer * self, wxWindow * window, int width, int height);
+bool wxSizer_SetItemMinSize1(wxSizer * self, wxWindow * window, const wxSize * size);
+bool wxSizer_SetItemMinSize2(wxSizer * self, wxSizer * sizer, int width, int height);
+bool wxSizer_SetItemMinSize3(wxSizer * self, wxSizer * sizer, const wxSize * size);
+bool wxSizer_SetItemMinSize4(wxSizer * self, size_t index, int width, int height);
+bool wxSizer_SetItemMinSize5(wxSizer * self, size_t index, const wxSize * size);
+void wxSizer_SetMinSize(wxSizer * self, const wxSize * size);
+void wxSizer_SetMinSize1(wxSizer * self, int width, int height);
+void wxSizer_SetSizeHints(wxSizer * self, wxWindow * window);
+bool wxSizer_Show(wxSizer * self, wxWindow * window, bool show, bool recursive);
+bool wxSizer_Show1(wxSizer * self, wxSizer * sizer, bool show, bool recursive);
+bool wxSizer_Show2(wxSizer * self, size_t index, bool show);
+void wxSizer_ShowItems(wxSizer * self, bool show);
+
+// CLASS: wxSizerFlags
+void wxSizerFlags_delete(wxSizerFlags *self);
+wxSizerFlags *wxSizerFlags_new(int proportion);
+wxSizerFlags * wxSizerFlags_Align(wxSizerFlags * self, int alignment);
+wxSizerFlags * wxSizerFlags_Border(wxSizerFlags * self, int direction, int borderinpixels);
+wxSizerFlags * wxSizerFlags_Border1(wxSizerFlags * self, int direction);
+wxSizerFlags * wxSizerFlags_Bottom(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_Center(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_Centre(wxSizerFlags * self);
+#if wxCHECK_VERSION(3, 1, 0)
+wxSizerFlags * wxSizerFlags_CenterHorizontal(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_CenterVertical(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_CentreHorizontal(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_CentreVertical(wxSizerFlags * self);
+#endif
+wxSizerFlags * wxSizerFlags_DoubleBorder(wxSizerFlags * self, int direction);
+wxSizerFlags * wxSizerFlags_DoubleHorzBorder(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_Expand(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_FixedMinSize(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_ReserveSpaceEvenIfHidden(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_Left(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_Proportion(wxSizerFlags * self, int proportion);
+wxSizerFlags * wxSizerFlags_Right(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_Shaped(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_Top(wxSizerFlags * self);
+wxSizerFlags * wxSizerFlags_TripleBorder(wxSizerFlags * self, int direction);
+int wxSizerFlags_GetDefaultBorder();
+
+// CLASS: wxStaticBitmap
+wxStaticBitmap *wxStaticBitmap_new();
+wxStaticBitmap *wxStaticBitmap_new1(wxWindow * parent, wxWindowID id, const wxBitmap * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+bool wxStaticBitmap_Create(wxStaticBitmap * self, wxWindow * parent, wxWindowID id, const wxBitmap * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+wxBitmap *wxStaticBitmap_GetBitmap(const wxStaticBitmap * self);
+void wxStaticBitmap_SetBitmap(wxStaticBitmap * self, const wxBitmap * label);
+void wxStaticBitmap_SetIcon(wxStaticBitmap * self, const wxIcon * label);
+
+// CLASS: wxStaticBoxSizer
+wxStaticBoxSizer *wxStaticBoxSizer_new(wxStaticBox * box, int orient);
+wxStaticBoxSizer *wxStaticBoxSizer_new1(int orient, wxWindow * parent, const wxString * label);
+wxStaticBox * wxStaticBoxSizer_GetStaticBox(const wxStaticBoxSizer * self);
+
+// CLASS: wxToolBar
+wxToolBar *wxToolBar_new();
+wxToolBar *wxToolBar_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+wxToolBarToolBase * wxToolBar_AddCheckTool(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap1, const wxBitmap * bmp_disabled, const wxString * short_help, const wxString * long_help, wxObject * client_data);
+wxToolBarToolBase * wxToolBar_AddControl(wxToolBar * self, wxControl * control, const wxString * label);
+wxToolBarToolBase * wxToolBar_AddRadioTool(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap1, const wxBitmap * bmp_disabled, const wxString * short_help, const wxString * long_help, wxObject * client_data);
+wxToolBarToolBase * wxToolBar_AddSeparator(wxToolBar * self);
+wxToolBarToolBase * wxToolBar_AddStretchableSpace(wxToolBar * self);
+wxToolBarToolBase * wxToolBar_AddTool(wxToolBar * self, wxToolBarToolBase * tool);
+wxToolBarToolBase * wxToolBar_AddTool1(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap, const wxString * short_help, wxItemKind kind);
+wxToolBarToolBase * wxToolBar_AddTool2(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap, const wxBitmap * bmp_disabled, wxItemKind kind, const wxString * short_help, const wxString * long_help, wxObject * client_data);
+void wxToolBar_ClearTools(wxToolBar * self);
+bool wxToolBar_DeleteTool(wxToolBar * self, int tool_id);
+bool wxToolBar_DeleteToolByPos(wxToolBar * self, size_t pos);
+void wxToolBar_EnableTool(wxToolBar * self, int tool_id, bool enable);
+wxToolBarToolBase * wxToolBar_FindById(const wxToolBar * self, int id);
+wxControl * wxToolBar_FindControl(wxToolBar * self, int id);
+wxToolBarToolBase * wxToolBar_FindToolForPosition(const wxToolBar * self, wxCoord x, wxCoord y);
+wxSize *wxToolBar_GetMargins(const wxToolBar * self);
+wxSize *wxToolBar_GetToolBitmapSize(const wxToolBar * self);
+const wxToolBarToolBase * wxToolBar_GetToolByPos1(const wxToolBar * self, int pos);
+wxObject * wxToolBar_GetToolClientData(const wxToolBar * self, int tool_id);
+bool wxToolBar_GetToolEnabled(const wxToolBar * self, int tool_id);
+wxString *wxToolBar_GetToolLongHelp(const wxToolBar * self, int tool_id);
+int wxToolBar_GetToolPacking(const wxToolBar * self);
+int wxToolBar_GetToolPos(const wxToolBar * self, int tool_id);
+int wxToolBar_GetToolSeparation(const wxToolBar * self);
+wxString *wxToolBar_GetToolShortHelp(const wxToolBar * self, int tool_id);
+wxSize *wxToolBar_GetToolSize(const wxToolBar * self);
+bool wxToolBar_GetToolState(const wxToolBar * self, int tool_id);
+size_t wxToolBar_GetToolsCount(const wxToolBar * self);
+wxToolBarToolBase * wxToolBar_InsertControl(wxToolBar * self, size_t pos, wxControl * control, const wxString * label);
+wxToolBarToolBase * wxToolBar_InsertSeparator(wxToolBar * self, size_t pos);
+wxToolBarToolBase * wxToolBar_InsertStretchableSpace(wxToolBar * self, size_t pos);
+wxToolBarToolBase * wxToolBar_InsertTool(wxToolBar * self, size_t pos, int tool_id, const wxString * label, const wxBitmap * bitmap, const wxBitmap * bmp_disabled, wxItemKind kind, const wxString * short_help, const wxString * long_help, wxObject * client_data);
+wxToolBarToolBase * wxToolBar_InsertTool1(wxToolBar * self, size_t pos, wxToolBarToolBase * tool);
+bool wxToolBar_OnLeftClick(wxToolBar * self, int tool_id, bool toggle_down);
+void wxToolBar_OnMouseEnter(wxToolBar * self, int tool_id);
+void wxToolBar_OnRightClick(wxToolBar * self, int tool_id, long x, long y);
+bool wxToolBar_Realize(wxToolBar * self);
+wxToolBarToolBase * wxToolBar_RemoveTool(wxToolBar * self, int id);
+bool wxToolBar_SetDropdownMenu(wxToolBar * self, int id, wxMenu * menu);
+void wxToolBar_SetMargins(wxToolBar * self, int x, int y);
+void wxToolBar_SetMargins1(wxToolBar * self, const wxSize * size);
+void wxToolBar_SetToolBitmapSize(wxToolBar * self, const wxSize * size);
+void wxToolBar_SetToolClientData(wxToolBar * self, int id, wxObject * client_data);
+void wxToolBar_SetToolDisabledBitmap(wxToolBar * self, int id, const wxBitmap * bitmap);
+void wxToolBar_SetToolLongHelp(wxToolBar * self, int tool_id, const wxString * help_string);
+void wxToolBar_SetToolNormalBitmap(wxToolBar * self, int id, const wxBitmap * bitmap);
+void wxToolBar_SetToolPacking(wxToolBar * self, int packing);
+void wxToolBar_SetToolSeparation(wxToolBar * self, int separation);
+void wxToolBar_SetToolShortHelp(wxToolBar * self, int tool_id, const wxString * help_string);
+void wxToolBar_ToggleTool(wxToolBar * self, int tool_id, bool toggle);
+wxToolBarToolBase * wxToolBar_CreateTool(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bmp_normal, const wxBitmap * bmp_disabled, wxItemKind kind, wxObject * client_data, const wxString * short_help, const wxString * long_help);
+wxToolBarToolBase * wxToolBar_CreateTool1(wxToolBar * self, wxControl * control, const wxString * label);
+wxToolBarToolBase * wxToolBar_CreateSeparator(wxToolBar * self);
+
+// CLASS: wxTopLevelWindow
+wxTopLevelWindow *wxTopLevelWindow_new();
+wxTopLevelWindow *wxTopLevelWindow_new1(wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+bool wxTopLevelWindow_Create(wxTopLevelWindow * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+void wxTopLevelWindow_CenterOnScreen(wxTopLevelWindow * self, int direction);
+void wxTopLevelWindow_CentreOnScreen(wxTopLevelWindow * self, int direction);
+bool wxTopLevelWindow_EnableCloseButton(wxTopLevelWindow * self, bool enable);
+#if wxCHECK_VERSION(3, 1, 0)
+bool wxTopLevelWindow_EnableMaximizeButton(wxTopLevelWindow * self, bool enable);
+bool wxTopLevelWindow_EnableMinimizeButton(wxTopLevelWindow * self, bool enable);
+#endif
+wxWindow * wxTopLevelWindow_GetDefaultItem(const wxTopLevelWindow * self);
+wxString *wxTopLevelWindow_GetTitle(const wxTopLevelWindow * self);
+void wxTopLevelWindow_Iconize(wxTopLevelWindow * self, bool iconize);
+bool wxTopLevelWindow_IsActive(wxTopLevelWindow * self);
+bool wxTopLevelWindow_IsAlwaysMaximized(const wxTopLevelWindow * self);
+bool wxTopLevelWindow_IsFullScreen(const wxTopLevelWindow * self);
+bool wxTopLevelWindow_IsIconized(const wxTopLevelWindow * self);
+bool wxTopLevelWindow_IsMaximized(const wxTopLevelWindow * self);
+void wxTopLevelWindow_Maximize(wxTopLevelWindow * self, bool maximize);
+#ifdef __WXMSW__
+wxMenu * wxTopLevelWindow_MSWGetSystemMenu(const wxTopLevelWindow * self);
+#endif
+void wxTopLevelWindow_RequestUserAttention(wxTopLevelWindow * self, int flags);
+void wxTopLevelWindow_Restore(wxTopLevelWindow * self);
+wxWindow * wxTopLevelWindow_SetDefaultItem(wxTopLevelWindow * self, wxWindow * win);
+wxWindow * wxTopLevelWindow_SetTmpDefaultItem(wxTopLevelWindow * self, wxWindow * win);
+wxWindow * wxTopLevelWindow_GetTmpDefaultItem(const wxTopLevelWindow * self);
+void wxTopLevelWindow_SetIcon(wxTopLevelWindow * self, const wxIcon * icon);
+void wxTopLevelWindow_SetIcons(wxTopLevelWindow * self, const wxIconBundle * icons);
+void wxTopLevelWindow_SetTitle(wxTopLevelWindow * self, const wxString * title);
+bool wxTopLevelWindow_ShouldPreventAppExit(const wxTopLevelWindow * self);
+void wxTopLevelWindow_OSXSetModified(wxTopLevelWindow * self, bool modified);
+bool wxTopLevelWindow_OSXIsModified(const wxTopLevelWindow * self);
+void wxTopLevelWindow_SetRepresentedFilename(wxTopLevelWindow * self, const wxString * filename);
+void wxTopLevelWindow_ShowWithoutActivating(wxTopLevelWindow * self);
+#if wxCHECK_VERSION(3, 1, 0)
+bool wxTopLevelWindow_EnableFullScreenView(wxTopLevelWindow * self, bool enable);
+#endif
+bool wxTopLevelWindow_ShowFullScreen(wxTopLevelWindow * self, bool show, long style);
+wxSize *wxTopLevelWindow_GetDefaultSize();
+
+// CLASS: wxValidator
+wxValidator *wxValidator_new();
+wxObject * wxValidator_Clone(const wxValidator * self);
+wxWindow * wxValidator_GetWindow(const wxValidator * self);
+void wxValidator_SetWindow(wxValidator * self, wxWindow * window);
+bool wxValidator_TransferFromWindow(wxValidator * self);
+bool wxValidator_TransferToWindow(wxValidator * self);
+bool wxValidator_Validate(wxValidator * self, wxWindow * parent);
+void wxValidator_SuppressBellOnError(bool suppress);
+bool wxValidator_IsSilent();
 
 // CLASS: wxWindow
 bool wxWindow_AcceptsFocus(const wxWindow * self);
@@ -396,494 +884,6 @@ void wxWindow_UnreserveControlId(wxWindowID id, int count);
 wxWindow *wxWindow_new();
 wxWindow *wxWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxWindow_Create(wxWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-
-// CLASS: wxControl
-wxControl *wxControl_new(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
-wxControl *wxControl_new1();
-bool wxControl_Create(wxControl * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
-void wxControl_Command(wxControl * self, wxCommandEvent * event);
-wxString *wxControl_GetLabelText(const wxControl * self);
-wxSize *wxControl_GetSizeFromTextSize(const wxControl * self, int xlen, int ylen);
-wxSize *wxControl_GetSizeFromTextSize1(const wxControl * self, const wxSize * tsize);
-#if wxCHECK_VERSION(3, 1, 0)
-wxSize *wxControl_GetSizeFromText(const wxControl * self, const wxString * text);
-#endif
-void wxControl_SetLabelText(wxControl * self, const wxString * text);
-bool wxControl_SetLabelMarkup(wxControl * self, const wxString * markup);
-wxString *wxControl_GetLabelText1(const wxString * label);
-wxString *wxControl_RemoveMnemonics(const wxString * str);
-wxString *wxControl_EscapeMnemonics(const wxString * text);
-wxString *wxControl_Ellipsize(const wxString * label, const wxDC * dc, wxEllipsizeMode mode, int max_width, int flags);
-
-// CLASS: wxAnyButton
-wxAnyButton *wxAnyButton_new();
-wxBitmap *wxAnyButton_GetBitmap(const wxAnyButton * self);
-wxBitmap *wxAnyButton_GetBitmapCurrent(const wxAnyButton * self);
-wxBitmap *wxAnyButton_GetBitmapDisabled(const wxAnyButton * self);
-wxBitmap *wxAnyButton_GetBitmapFocus(const wxAnyButton * self);
-wxBitmap *wxAnyButton_GetBitmapLabel(const wxAnyButton * self);
-wxBitmap *wxAnyButton_GetBitmapPressed(const wxAnyButton * self);
-void wxAnyButton_SetBitmapCurrent(wxAnyButton * self, const wxBitmap * bitmap);
-void wxAnyButton_SetBitmapDisabled(wxAnyButton * self, const wxBitmap * bitmap);
-void wxAnyButton_SetBitmapFocus(wxAnyButton * self, const wxBitmap * bitmap);
-void wxAnyButton_SetBitmapLabel(wxAnyButton * self, const wxBitmap * bitmap);
-void wxAnyButton_SetBitmapPressed(wxAnyButton * self, const wxBitmap * bitmap);
-wxSize *wxAnyButton_GetBitmapMargins(wxAnyButton * self);
-void wxAnyButton_SetBitmapMargins(wxAnyButton * self, wxCoord x, wxCoord y);
-void wxAnyButton_SetBitmapMargins1(wxAnyButton * self, const wxSize * sz);
-
-// CLASS: wxButton
-wxButton *wxButton_new();
-wxButton *wxButton_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
-bool wxButton_Create(wxButton * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
-bool wxButton_GetAuthNeeded(const wxButton * self);
-void wxButton_SetAuthNeeded(wxButton * self, bool needed);
-wxWindow * wxButton_SetDefault(wxButton * self);
-#if wxCHECK_VERSION(3, 1, 0)
-wxSize *wxButton_GetDefaultSize(wxWindow * win);
-#endif
-
-// CLASS: wxMenu
-wxMenu *wxMenu_new();
-wxMenu *wxMenu_new1(long style);
-wxMenu *wxMenu_new2(const wxString * title, long style);
-wxMenuItem * wxMenu_Append(wxMenu * self, int id, const wxString * item, const wxString * help_string, wxItemKind kind);
-wxMenuItem * wxMenu_Append1(wxMenu * self, int id, const wxString * item, wxMenu * sub_menu, const wxString * help_string);
-wxMenuItem * wxMenu_Append2(wxMenu * self, wxMenuItem * menu_item);
-wxMenuItem * wxMenu_AppendCheckItem(wxMenu * self, int id, const wxString * item, const wxString * help);
-wxMenuItem * wxMenu_AppendRadioItem(wxMenu * self, int id, const wxString * item, const wxString * help);
-wxMenuItem * wxMenu_AppendSeparator(wxMenu * self);
-wxMenuItem * wxMenu_AppendSubMenu(wxMenu * self, wxMenu * submenu, const wxString * text, const wxString * help);
-void wxMenu_Break(wxMenu * self);
-void wxMenu_Check(wxMenu * self, int id, bool check);
-bool wxMenu_Delete(wxMenu * self, int id);
-bool wxMenu_Delete1(wxMenu * self, wxMenuItem * item);
-bool wxMenu_Destroy(wxMenu * self, int id);
-bool wxMenu_Destroy1(wxMenu * self, wxMenuItem * item);
-void wxMenu_Enable(wxMenu * self, int id, bool enable);
-wxMenuItem * wxMenu_FindChildItem(const wxMenu * self, int id, size_t * pos);
-int wxMenu_FindItem(const wxMenu * self, const wxString * item_string);
-wxMenuItem * wxMenu_FindItem1(const wxMenu * self, int id, wxMenu ** menu);
-wxMenuItem * wxMenu_FindItemByPosition(const wxMenu * self, size_t position);
-wxString *wxMenu_GetHelpString(const wxMenu * self, int id);
-wxString *wxMenu_GetLabel(const wxMenu * self, int id);
-wxString *wxMenu_GetLabelText(const wxMenu * self, int id);
-size_t wxMenu_GetMenuItemCount(const wxMenu * self);
-wxString *wxMenu_GetTitle(const wxMenu * self);
-wxMenuItem * wxMenu_Insert(wxMenu * self, size_t pos, wxMenuItem * menu_item);
-wxMenuItem * wxMenu_Insert1(wxMenu * self, size_t pos, int id, const wxString * item, const wxString * help_string, wxItemKind kind);
-wxMenuItem * wxMenu_Insert2(wxMenu * self, size_t pos, int id, const wxString * text, wxMenu * submenu, const wxString * help);
-wxMenuItem * wxMenu_InsertCheckItem(wxMenu * self, size_t pos, int id, const wxString * item, const wxString * help_string);
-wxMenuItem * wxMenu_InsertRadioItem(wxMenu * self, size_t pos, int id, const wxString * item, const wxString * help_string);
-wxMenuItem * wxMenu_InsertSeparator(wxMenu * self, size_t pos);
-bool wxMenu_IsChecked(const wxMenu * self, int id);
-bool wxMenu_IsEnabled(const wxMenu * self, int id);
-wxMenuItem * wxMenu_Prepend(wxMenu * self, wxMenuItem * item);
-wxMenuItem * wxMenu_Prepend1(wxMenu * self, int id, const wxString * item, const wxString * help_string, wxItemKind kind);
-wxMenuItem * wxMenu_Prepend2(wxMenu * self, int id, const wxString * text, wxMenu * submenu, const wxString * help);
-wxMenuItem * wxMenu_PrependCheckItem(wxMenu * self, int id, const wxString * item, const wxString * help_string);
-wxMenuItem * wxMenu_PrependRadioItem(wxMenu * self, int id, const wxString * item, const wxString * help_string);
-wxMenuItem * wxMenu_PrependSeparator(wxMenu * self);
-wxMenuItem * wxMenu_Remove(wxMenu * self, int id);
-wxMenuItem * wxMenu_Remove1(wxMenu * self, wxMenuItem * item);
-void wxMenu_SetHelpString(wxMenu * self, int id, const wxString * help_string);
-void wxMenu_SetLabel(wxMenu * self, int id, const wxString * label);
-void wxMenu_SetTitle(wxMenu * self, const wxString * title);
-void wxMenu_UpdateUI(wxMenu * self, wxEvtHandler * source);
-void wxMenu_SetInvokingWindow(wxMenu * self, wxWindow * win);
-wxWindow * wxMenu_GetInvokingWindow(const wxMenu * self);
-wxWindow * wxMenu_GetWindow(const wxMenu * self);
-long wxMenu_GetStyle(const wxMenu * self);
-void wxMenu_SetParent(wxMenu * self, wxMenu * parent);
-wxMenu * wxMenu_GetParent(const wxMenu * self);
-void wxMenu_Attach(wxMenu * self, wxMenuBar * menubar);
-void wxMenu_Detach(wxMenu * self);
-bool wxMenu_IsAttached(const wxMenu * self);
-
-// CLASS: wxMenuBar
-wxMenuBar *wxMenuBar_new(long style);
-bool wxMenuBar_Append(wxMenuBar * self, wxMenu * menu, const wxString * title);
-void wxMenuBar_Check(wxMenuBar * self, int id, bool check);
-void wxMenuBar_Enable(wxMenuBar * self, int id, bool enable);
-bool wxMenuBar_IsEnabledTop(const wxMenuBar * self, size_t pos);
-void wxMenuBar_EnableTop(wxMenuBar * self, size_t pos, bool enable);
-wxMenuItem * wxMenuBar_FindItem(const wxMenuBar * self, int id, wxMenu ** menu);
-int wxMenuBar_FindMenu(const wxMenuBar * self, const wxString * title);
-int wxMenuBar_FindMenuItem(const wxMenuBar * self, const wxString * menu_string, const wxString * item_string);
-wxString *wxMenuBar_GetHelpString(const wxMenuBar * self, int id);
-wxString *wxMenuBar_GetLabel(const wxMenuBar * self, int id);
-wxMenu * wxMenuBar_GetMenu(const wxMenuBar * self, size_t menu_index);
-size_t wxMenuBar_GetMenuCount(const wxMenuBar * self);
-wxString *wxMenuBar_GetMenuLabel(const wxMenuBar * self, size_t pos);
-wxString *wxMenuBar_GetMenuLabelText(const wxMenuBar * self, size_t pos);
-bool wxMenuBar_Insert(wxMenuBar * self, size_t pos, wxMenu * menu, const wxString * title);
-bool wxMenuBar_IsChecked(const wxMenuBar * self, int id);
-bool wxMenuBar_IsEnabled(const wxMenuBar * self, int id);
-wxMenu * wxMenuBar_Remove(wxMenuBar * self, size_t pos);
-wxMenu * wxMenuBar_Replace(wxMenuBar * self, size_t pos, wxMenu * menu, const wxString * title);
-void wxMenuBar_SetHelpString(wxMenuBar * self, int id, const wxString * help_string);
-void wxMenuBar_SetLabel(wxMenuBar * self, int id, const wxString * label);
-void wxMenuBar_SetMenuLabel(wxMenuBar * self, size_t pos, const wxString * label);
-#ifdef __WXOSX__
-wxMenu * wxMenuBar_OSXGetAppleMenu(const wxMenuBar * self);
-#endif
-wxFrame * wxMenuBar_GetFrame(const wxMenuBar * self);
-bool wxMenuBar_IsAttached(const wxMenuBar * self);
-void wxMenuBar_Attach(wxMenuBar * self, wxFrame * frame);
-void wxMenuBar_Detach(wxMenuBar * self);
-#ifdef __WXOSX__
-void wxMenuBar_MacSetCommonMenuBar(wxMenuBar * menubar);
-wxMenuBar * wxMenuBar_MacGetCommonMenuBar();
-#endif
-
-// CLASS: wxNonOwnedWindow
-bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow * self, const wxRegion * region);
-bool wxNonOwnedWindow_SetShape1(wxNonOwnedWindow * self, const wxGraphicsPath * path);
-
-// CLASS: wxToolBar
-wxToolBar *wxToolBar_new();
-wxToolBar *wxToolBar_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-wxToolBarToolBase * wxToolBar_AddCheckTool(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap1, const wxBitmap * bmp_disabled, const wxString * short_help, const wxString * long_help, wxObject * client_data);
-wxToolBarToolBase * wxToolBar_AddControl(wxToolBar * self, wxControl * control, const wxString * label);
-wxToolBarToolBase * wxToolBar_AddRadioTool(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap1, const wxBitmap * bmp_disabled, const wxString * short_help, const wxString * long_help, wxObject * client_data);
-wxToolBarToolBase * wxToolBar_AddSeparator(wxToolBar * self);
-wxToolBarToolBase * wxToolBar_AddStretchableSpace(wxToolBar * self);
-wxToolBarToolBase * wxToolBar_AddTool(wxToolBar * self, wxToolBarToolBase * tool);
-wxToolBarToolBase * wxToolBar_AddTool1(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap, const wxString * short_help, wxItemKind kind);
-wxToolBarToolBase * wxToolBar_AddTool2(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap, const wxBitmap * bmp_disabled, wxItemKind kind, const wxString * short_help, const wxString * long_help, wxObject * client_data);
-void wxToolBar_ClearTools(wxToolBar * self);
-bool wxToolBar_DeleteTool(wxToolBar * self, int tool_id);
-bool wxToolBar_DeleteToolByPos(wxToolBar * self, size_t pos);
-void wxToolBar_EnableTool(wxToolBar * self, int tool_id, bool enable);
-wxToolBarToolBase * wxToolBar_FindById(const wxToolBar * self, int id);
-wxControl * wxToolBar_FindControl(wxToolBar * self, int id);
-wxToolBarToolBase * wxToolBar_FindToolForPosition(const wxToolBar * self, wxCoord x, wxCoord y);
-wxSize *wxToolBar_GetMargins(const wxToolBar * self);
-wxSize *wxToolBar_GetToolBitmapSize(const wxToolBar * self);
-const wxToolBarToolBase * wxToolBar_GetToolByPos1(const wxToolBar * self, int pos);
-wxObject * wxToolBar_GetToolClientData(const wxToolBar * self, int tool_id);
-bool wxToolBar_GetToolEnabled(const wxToolBar * self, int tool_id);
-wxString *wxToolBar_GetToolLongHelp(const wxToolBar * self, int tool_id);
-int wxToolBar_GetToolPacking(const wxToolBar * self);
-int wxToolBar_GetToolPos(const wxToolBar * self, int tool_id);
-int wxToolBar_GetToolSeparation(const wxToolBar * self);
-wxString *wxToolBar_GetToolShortHelp(const wxToolBar * self, int tool_id);
-wxSize *wxToolBar_GetToolSize(const wxToolBar * self);
-bool wxToolBar_GetToolState(const wxToolBar * self, int tool_id);
-size_t wxToolBar_GetToolsCount(const wxToolBar * self);
-wxToolBarToolBase * wxToolBar_InsertControl(wxToolBar * self, size_t pos, wxControl * control, const wxString * label);
-wxToolBarToolBase * wxToolBar_InsertSeparator(wxToolBar * self, size_t pos);
-wxToolBarToolBase * wxToolBar_InsertStretchableSpace(wxToolBar * self, size_t pos);
-wxToolBarToolBase * wxToolBar_InsertTool(wxToolBar * self, size_t pos, int tool_id, const wxString * label, const wxBitmap * bitmap, const wxBitmap * bmp_disabled, wxItemKind kind, const wxString * short_help, const wxString * long_help, wxObject * client_data);
-wxToolBarToolBase * wxToolBar_InsertTool1(wxToolBar * self, size_t pos, wxToolBarToolBase * tool);
-bool wxToolBar_OnLeftClick(wxToolBar * self, int tool_id, bool toggle_down);
-void wxToolBar_OnMouseEnter(wxToolBar * self, int tool_id);
-void wxToolBar_OnRightClick(wxToolBar * self, int tool_id, long x, long y);
-bool wxToolBar_Realize(wxToolBar * self);
-wxToolBarToolBase * wxToolBar_RemoveTool(wxToolBar * self, int id);
-bool wxToolBar_SetDropdownMenu(wxToolBar * self, int id, wxMenu * menu);
-void wxToolBar_SetMargins(wxToolBar * self, int x, int y);
-void wxToolBar_SetMargins1(wxToolBar * self, const wxSize * size);
-void wxToolBar_SetToolBitmapSize(wxToolBar * self, const wxSize * size);
-void wxToolBar_SetToolClientData(wxToolBar * self, int id, wxObject * client_data);
-void wxToolBar_SetToolDisabledBitmap(wxToolBar * self, int id, const wxBitmap * bitmap);
-void wxToolBar_SetToolLongHelp(wxToolBar * self, int tool_id, const wxString * help_string);
-void wxToolBar_SetToolNormalBitmap(wxToolBar * self, int id, const wxBitmap * bitmap);
-void wxToolBar_SetToolPacking(wxToolBar * self, int packing);
-void wxToolBar_SetToolSeparation(wxToolBar * self, int separation);
-void wxToolBar_SetToolShortHelp(wxToolBar * self, int tool_id, const wxString * help_string);
-void wxToolBar_ToggleTool(wxToolBar * self, int tool_id, bool toggle);
-wxToolBarToolBase * wxToolBar_CreateTool(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bmp_normal, const wxBitmap * bmp_disabled, wxItemKind kind, wxObject * client_data, const wxString * short_help, const wxString * long_help);
-wxToolBarToolBase * wxToolBar_CreateTool1(wxToolBar * self, wxControl * control, const wxString * label);
-wxToolBarToolBase * wxToolBar_CreateSeparator(wxToolBar * self);
-
-// CLASS: wxTopLevelWindow
-wxTopLevelWindow *wxTopLevelWindow_new();
-wxTopLevelWindow *wxTopLevelWindow_new1(wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-bool wxTopLevelWindow_Create(wxTopLevelWindow * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-void wxTopLevelWindow_CenterOnScreen(wxTopLevelWindow * self, int direction);
-void wxTopLevelWindow_CentreOnScreen(wxTopLevelWindow * self, int direction);
-bool wxTopLevelWindow_EnableCloseButton(wxTopLevelWindow * self, bool enable);
-#if wxCHECK_VERSION(3, 1, 0)
-bool wxTopLevelWindow_EnableMaximizeButton(wxTopLevelWindow * self, bool enable);
-bool wxTopLevelWindow_EnableMinimizeButton(wxTopLevelWindow * self, bool enable);
-#endif
-wxWindow * wxTopLevelWindow_GetDefaultItem(const wxTopLevelWindow * self);
-wxString *wxTopLevelWindow_GetTitle(const wxTopLevelWindow * self);
-void wxTopLevelWindow_Iconize(wxTopLevelWindow * self, bool iconize);
-bool wxTopLevelWindow_IsActive(wxTopLevelWindow * self);
-bool wxTopLevelWindow_IsAlwaysMaximized(const wxTopLevelWindow * self);
-bool wxTopLevelWindow_IsFullScreen(const wxTopLevelWindow * self);
-bool wxTopLevelWindow_IsIconized(const wxTopLevelWindow * self);
-bool wxTopLevelWindow_IsMaximized(const wxTopLevelWindow * self);
-void wxTopLevelWindow_Maximize(wxTopLevelWindow * self, bool maximize);
-#ifdef __WXMSW__
-wxMenu * wxTopLevelWindow_MSWGetSystemMenu(const wxTopLevelWindow * self);
-#endif
-void wxTopLevelWindow_RequestUserAttention(wxTopLevelWindow * self, int flags);
-void wxTopLevelWindow_Restore(wxTopLevelWindow * self);
-wxWindow * wxTopLevelWindow_SetDefaultItem(wxTopLevelWindow * self, wxWindow * win);
-wxWindow * wxTopLevelWindow_SetTmpDefaultItem(wxTopLevelWindow * self, wxWindow * win);
-wxWindow * wxTopLevelWindow_GetTmpDefaultItem(const wxTopLevelWindow * self);
-void wxTopLevelWindow_SetIcon(wxTopLevelWindow * self, const wxIcon * icon);
-void wxTopLevelWindow_SetIcons(wxTopLevelWindow * self, const wxIconBundle * icons);
-void wxTopLevelWindow_SetTitle(wxTopLevelWindow * self, const wxString * title);
-bool wxTopLevelWindow_ShouldPreventAppExit(const wxTopLevelWindow * self);
-void wxTopLevelWindow_OSXSetModified(wxTopLevelWindow * self, bool modified);
-bool wxTopLevelWindow_OSXIsModified(const wxTopLevelWindow * self);
-void wxTopLevelWindow_SetRepresentedFilename(wxTopLevelWindow * self, const wxString * filename);
-void wxTopLevelWindow_ShowWithoutActivating(wxTopLevelWindow * self);
-#if wxCHECK_VERSION(3, 1, 0)
-bool wxTopLevelWindow_EnableFullScreenView(wxTopLevelWindow * self, bool enable);
-#endif
-bool wxTopLevelWindow_ShowFullScreen(wxTopLevelWindow * self, bool show, long style);
-wxSize *wxTopLevelWindow_GetDefaultSize();
-
-// CLASS: wxFrame
-wxFrame *wxFrame_new();
-wxFrame *wxFrame_new1(wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-void wxFrame_Centre(wxFrame * self, int direction);
-bool wxFrame_Create(wxFrame * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-wxStatusBar * wxFrame_CreateStatusBar(wxFrame * self, int number, long style, wxWindowID id, const wxString * name);
-wxToolBar * wxFrame_CreateToolBar(wxFrame * self, long style, wxWindowID id, const wxString * name);
-void wxFrame_DoGiveHelp(wxFrame * self, const wxString * text, bool show);
-wxMenuBar * wxFrame_GetMenuBar(const wxFrame * self);
-wxStatusBar * wxFrame_GetStatusBar(const wxFrame * self);
-int wxFrame_GetStatusBarPane(const wxFrame * self);
-wxToolBar * wxFrame_GetToolBar(const wxFrame * self);
-wxStatusBar * wxFrame_OnCreateStatusBar(wxFrame * self, int number, long style, wxWindowID id, const wxString * name);
-wxToolBar * wxFrame_OnCreateToolBar(wxFrame * self, long style, wxWindowID id, const wxString * name);
-bool wxFrame_ProcessCommand(wxFrame * self, int id);
-void wxFrame_SetMenuBar(wxFrame * self, wxMenuBar * menu_bar);
-void wxFrame_SetStatusBar(wxFrame * self, wxStatusBar * status_bar);
-void wxFrame_SetStatusBarPane(wxFrame * self, int n);
-void wxFrame_SetStatusText(wxFrame * self, const wxString * text, int number);
-void wxFrame_SetStatusWidths(wxFrame * self, int n, const int * widths_field);
-void wxFrame_SetToolBar(wxFrame * self, wxToolBar * tool_bar);
-#ifdef __WXMSW__
-wxTaskBarButton * wxFrame_MSWGetTaskBarButton(wxFrame * self);
-#endif
-void wxFrame_PushStatusText(wxFrame * self, const wxString * text, int number);
-void wxFrame_PopStatusText(wxFrame * self, int number);
-
-// CLASS: wxPanel
-wxPanel *wxPanel_new();
-wxPanel *wxPanel_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-bool wxPanel_Create(wxPanel * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-void wxPanel_OnSysColourChanged(wxPanel * self, wxSysColourChangedEvent * event);
-void wxPanel_SetFocusIgnoringChildren(wxPanel * self);
-
-// CLASS: wxPoint
-void wxPoint_delete(wxPoint *self);
-bool wxPoint_IsFullySpecified(const wxPoint * self);
-void wxPoint_SetDefaults(wxPoint * self, const wxPoint * pt);
-wxPoint *wxPoint_new();
-wxPoint *wxPoint_new1(int x, int y);
-wxPoint *wxPoint_new2(const wxRealPoint * pt);
-
-// CLASS: wxRect
-void wxRect_delete(wxRect *self);
-wxRect *wxRect_new();
-wxRect *wxRect_new1(int x, int y, int width, int height);
-wxRect *wxRect_new2(const wxPoint * top_left, const wxPoint * bottom_right);
-wxRect *wxRect_new3(const wxPoint * pos, const wxSize * size);
-wxRect *wxRect_new4(const wxSize * size);
-wxRect *wxRect_CentreIn(const wxRect * self, const wxRect * r, int dir);
-wxRect *wxRect_CenterIn(const wxRect * self, const wxRect * r, int dir);
-bool wxRect_Contains(const wxRect * self, int x, int y);
-bool wxRect_Contains1(const wxRect * self, const wxPoint * pt);
-bool wxRect_Contains2(const wxRect * self, const wxRect * rect);
-wxRect *wxRect_Deflate3(const wxRect * self, wxCoord dx, wxCoord dy);
-int wxRect_GetBottom(const wxRect * self);
-wxPoint *wxRect_GetBottomLeft(const wxRect * self);
-wxPoint *wxRect_GetBottomRight(const wxRect * self);
-int wxRect_GetHeight(const wxRect * self);
-int wxRect_GetLeft(const wxRect * self);
-wxPoint *wxRect_GetPosition(const wxRect * self);
-int wxRect_GetRight(const wxRect * self);
-wxSize *wxRect_GetSize(const wxRect * self);
-int wxRect_GetTop(const wxRect * self);
-wxPoint *wxRect_GetTopLeft(const wxRect * self);
-wxPoint *wxRect_GetTopRight(const wxRect * self);
-int wxRect_GetWidth(const wxRect * self);
-int wxRect_GetX(const wxRect * self);
-int wxRect_GetY(const wxRect * self);
-wxRect *wxRect_Inflate3(const wxRect * self, wxCoord dx, wxCoord dy);
-wxRect *wxRect_Intersect1(const wxRect * self, const wxRect * rect);
-bool wxRect_Intersects(const wxRect * self, const wxRect * rect);
-bool wxRect_IsEmpty(const wxRect * self);
-void wxRect_Offset(wxRect * self, wxCoord dx, wxCoord dy);
-void wxRect_Offset1(wxRect * self, const wxPoint * pt);
-void wxRect_SetHeight(wxRect * self, int height);
-void wxRect_SetPosition(wxRect * self, const wxPoint * pos);
-void wxRect_SetSize(wxRect * self, const wxSize * s);
-void wxRect_SetWidth(wxRect * self, int width);
-void wxRect_SetX(wxRect * self, int x);
-void wxRect_SetY(wxRect * self, int y);
-void wxRect_SetLeft(wxRect * self, int left);
-void wxRect_SetRight(wxRect * self, int right);
-void wxRect_SetTop(wxRect * self, int top);
-void wxRect_SetBottom(wxRect * self, int bottom);
-void wxRect_SetTopLeft(wxRect * self, const wxPoint * p);
-void wxRect_SetBottomRight(wxRect * self, const wxPoint * p);
-void wxRect_SetTopRight(wxRect * self, const wxPoint * p);
-void wxRect_SetBottomLeft(wxRect * self, const wxPoint * p);
-wxRect *wxRect_Union(const wxRect * self, const wxRect * rect);
-
-// CLASS: wxSize
-void wxSize_delete(wxSize *self);
-wxSize *wxSize_new();
-wxSize *wxSize_new1(int width, int height);
-void wxSize_DecBy(wxSize * self, const wxPoint * pt);
-void wxSize_DecBy1(wxSize * self, const wxSize * size);
-void wxSize_DecBy2(wxSize * self, int dx, int dy);
-void wxSize_DecBy3(wxSize * self, int d);
-void wxSize_DecTo(wxSize * self, const wxSize * size);
-void wxSize_DecToIfSpecified(wxSize * self, const wxSize * size);
-int wxSize_GetHeight(const wxSize * self);
-int wxSize_GetWidth(const wxSize * self);
-void wxSize_IncBy(wxSize * self, const wxPoint * pt);
-void wxSize_IncBy1(wxSize * self, const wxSize * size);
-void wxSize_IncBy2(wxSize * self, int dx, int dy);
-void wxSize_IncBy3(wxSize * self, int d);
-void wxSize_IncTo(wxSize * self, const wxSize * size);
-bool wxSize_IsFullySpecified(const wxSize * self);
-void wxSize_Set(wxSize * self, int width, int height);
-void wxSize_SetDefaults(wxSize * self, const wxSize * size_default);
-void wxSize_SetHeight(wxSize * self, int height);
-void wxSize_SetWidth(wxSize * self, int width);
-
-// CLASS: wxSizer
-wxSizerItem * wxSizer_Add(wxSizer * self, wxWindow * window, const wxSizerFlags * flags);
-wxSizerItem * wxSizer_Add1(wxSizer * self, wxWindow * window, int proportion, int flag, int border, wxObject * user_data);
-wxSizerItem * wxSizer_Add2(wxSizer * self, wxSizer * sizer, const wxSizerFlags * flags);
-wxSizerItem * wxSizer_Add3(wxSizer * self, wxSizer * sizer, int proportion, int flag, int border, wxObject * user_data);
-wxSizerItem * wxSizer_Add4(wxSizer * self, int width, int height, int proportion, int flag, int border, wxObject * user_data);
-wxSizerItem * wxSizer_Add5(wxSizer * self, int width, int height, const wxSizerFlags * flags);
-wxSizerItem * wxSizer_Add6(wxSizer * self, wxSizerItem * item);
-wxSizerItem * wxSizer_AddSpacer(wxSizer * self, int size);
-wxSizerItem * wxSizer_AddStretchSpacer(wxSizer * self, int prop);
-wxSize *wxSizer_CalcMin(wxSizer * self);
-void wxSizer_Clear(wxSizer * self, bool delete_windows);
-wxSize *wxSizer_ComputeFittingClientSize(wxSizer * self, wxWindow * window);
-wxSize *wxSizer_ComputeFittingWindowSize(wxSizer * self, wxWindow * window);
-bool wxSizer_Detach(wxSizer * self, wxWindow * window);
-bool wxSizer_Detach1(wxSizer * self, wxSizer * sizer);
-bool wxSizer_Detach2(wxSizer * self, int index);
-wxSize *wxSizer_Fit(wxSizer * self, wxWindow * window);
-void wxSizer_FitInside(wxSizer * self, wxWindow * window);
-bool wxSizer_InformFirstDirection(wxSizer * self, int direction, int size, int available_other_dir);
-wxWindow * wxSizer_GetContainingWindow(const wxSizer * self);
-void wxSizer_SetContainingWindow(wxSizer * self, wxWindow * window);
-size_t wxSizer_GetItemCount(const wxSizer * self);
-wxSizerItem * wxSizer_GetItem(wxSizer * self, wxWindow * window, bool recursive);
-wxSizerItem * wxSizer_GetItem1(wxSizer * self, wxSizer * sizer, bool recursive);
-wxSizerItem * wxSizer_GetItem2(wxSizer * self, size_t index);
-wxSizerItem * wxSizer_GetItemById(wxSizer * self, int id, bool recursive);
-wxSize *wxSizer_GetMinSize(wxSizer * self);
-wxPoint *wxSizer_GetPosition(const wxSizer * self);
-wxSize *wxSizer_GetSize(const wxSizer * self);
-bool wxSizer_Hide(wxSizer * self, wxWindow * window, bool recursive);
-bool wxSizer_Hide1(wxSizer * self, wxSizer * sizer, bool recursive);
-bool wxSizer_Hide2(wxSizer * self, size_t index);
-wxSizerItem * wxSizer_Insert(wxSizer * self, size_t index, wxWindow * window, const wxSizerFlags * flags);
-wxSizerItem * wxSizer_Insert1(wxSizer * self, size_t index, wxWindow * window, int proportion, int flag, int border, wxObject * user_data);
-wxSizerItem * wxSizer_Insert2(wxSizer * self, size_t index, wxSizer * sizer, const wxSizerFlags * flags);
-wxSizerItem * wxSizer_Insert3(wxSizer * self, size_t index, wxSizer * sizer, int proportion, int flag, int border, wxObject * user_data);
-wxSizerItem * wxSizer_Insert4(wxSizer * self, size_t index, int width, int height, int proportion, int flag, int border, wxObject * user_data);
-wxSizerItem * wxSizer_Insert5(wxSizer * self, size_t index, int width, int height, const wxSizerFlags * flags);
-wxSizerItem * wxSizer_Insert6(wxSizer * self, size_t index, wxSizerItem * item);
-wxSizerItem * wxSizer_InsertSpacer(wxSizer * self, size_t index, int size);
-wxSizerItem * wxSizer_InsertStretchSpacer(wxSizer * self, size_t index, int prop);
-bool wxSizer_IsEmpty(const wxSizer * self);
-bool wxSizer_IsShown(const wxSizer * self, wxWindow * window);
-bool wxSizer_IsShown1(const wxSizer * self, wxSizer * sizer);
-bool wxSizer_IsShown2(const wxSizer * self, size_t index);
-void wxSizer_Layout(wxSizer * self);
-wxSizerItem * wxSizer_Prepend(wxSizer * self, wxWindow * window, const wxSizerFlags * flags);
-wxSizerItem * wxSizer_Prepend1(wxSizer * self, wxWindow * window, int proportion, int flag, int border, wxObject * user_data);
-wxSizerItem * wxSizer_Prepend2(wxSizer * self, wxSizer * sizer, const wxSizerFlags * flags);
-wxSizerItem * wxSizer_Prepend3(wxSizer * self, wxSizer * sizer, int proportion, int flag, int border, wxObject * user_data);
-wxSizerItem * wxSizer_Prepend4(wxSizer * self, int width, int height, int proportion, int flag, int border, wxObject * user_data);
-wxSizerItem * wxSizer_Prepend5(wxSizer * self, int width, int height, const wxSizerFlags * flags);
-wxSizerItem * wxSizer_Prepend6(wxSizer * self, wxSizerItem * item);
-wxSizerItem * wxSizer_PrependSpacer(wxSizer * self, int size);
-wxSizerItem * wxSizer_PrependStretchSpacer(wxSizer * self, int prop);
-#if wxCHECK_VERSION(3, 1, 0)
-void wxSizer_RepositionChildren(wxSizer * self, const wxSize * min_size);
-#endif
-bool wxSizer_Remove1(wxSizer * self, wxSizer * sizer);
-bool wxSizer_Remove2(wxSizer * self, int index);
-bool wxSizer_Replace(wxSizer * self, wxWindow * oldwin, wxWindow * newwin, bool recursive);
-bool wxSizer_Replace1(wxSizer * self, wxSizer * oldsz, wxSizer * newsz, bool recursive);
-bool wxSizer_Replace2(wxSizer * self, size_t index, wxSizerItem * newitem);
-void wxSizer_SetDimension(wxSizer * self, int x, int y, int width, int height);
-void wxSizer_SetDimension1(wxSizer * self, const wxPoint * pos, const wxSize * size);
-bool wxSizer_SetItemMinSize(wxSizer * self, wxWindow * window, int width, int height);
-bool wxSizer_SetItemMinSize1(wxSizer * self, wxWindow * window, const wxSize * size);
-bool wxSizer_SetItemMinSize2(wxSizer * self, wxSizer * sizer, int width, int height);
-bool wxSizer_SetItemMinSize3(wxSizer * self, wxSizer * sizer, const wxSize * size);
-bool wxSizer_SetItemMinSize4(wxSizer * self, size_t index, int width, int height);
-bool wxSizer_SetItemMinSize5(wxSizer * self, size_t index, const wxSize * size);
-void wxSizer_SetMinSize(wxSizer * self, const wxSize * size);
-void wxSizer_SetMinSize1(wxSizer * self, int width, int height);
-void wxSizer_SetSizeHints(wxSizer * self, wxWindow * window);
-bool wxSizer_Show(wxSizer * self, wxWindow * window, bool show, bool recursive);
-bool wxSizer_Show1(wxSizer * self, wxSizer * sizer, bool show, bool recursive);
-bool wxSizer_Show2(wxSizer * self, size_t index, bool show);
-void wxSizer_ShowItems(wxSizer * self, bool show);
-
-// CLASS: wxSizerFlags
-void wxSizerFlags_delete(wxSizerFlags *self);
-wxSizerFlags *wxSizerFlags_new(int proportion);
-wxSizerFlags * wxSizerFlags_Align(wxSizerFlags * self, int alignment);
-wxSizerFlags * wxSizerFlags_Border(wxSizerFlags * self, int direction, int borderinpixels);
-wxSizerFlags * wxSizerFlags_Border1(wxSizerFlags * self, int direction);
-wxSizerFlags * wxSizerFlags_Bottom(wxSizerFlags * self);
-wxSizerFlags * wxSizerFlags_Center(wxSizerFlags * self);
-wxSizerFlags * wxSizerFlags_Centre(wxSizerFlags * self);
-#if wxCHECK_VERSION(3, 1, 0)
-wxSizerFlags * wxSizerFlags_CenterHorizontal(wxSizerFlags * self);
-wxSizerFlags * wxSizerFlags_CenterVertical(wxSizerFlags * self);
-wxSizerFlags * wxSizerFlags_CentreHorizontal(wxSizerFlags * self);
-wxSizerFlags * wxSizerFlags_CentreVertical(wxSizerFlags * self);
-#endif
-wxSizerFlags * wxSizerFlags_DoubleBorder(wxSizerFlags * self, int direction);
-wxSizerFlags * wxSizerFlags_DoubleHorzBorder(wxSizerFlags * self);
-wxSizerFlags * wxSizerFlags_Expand(wxSizerFlags * self);
-wxSizerFlags * wxSizerFlags_FixedMinSize(wxSizerFlags * self);
-wxSizerFlags * wxSizerFlags_ReserveSpaceEvenIfHidden(wxSizerFlags * self);
-wxSizerFlags * wxSizerFlags_Left(wxSizerFlags * self);
-wxSizerFlags * wxSizerFlags_Proportion(wxSizerFlags * self, int proportion);
-wxSizerFlags * wxSizerFlags_Right(wxSizerFlags * self);
-wxSizerFlags * wxSizerFlags_Shaped(wxSizerFlags * self);
-wxSizerFlags * wxSizerFlags_Top(wxSizerFlags * self);
-wxSizerFlags * wxSizerFlags_TripleBorder(wxSizerFlags * self, int direction);
-int wxSizerFlags_GetDefaultBorder();
-
-// CLASS: wxStaticBoxSizer
-wxStaticBoxSizer *wxStaticBoxSizer_new(wxStaticBox * box, int orient);
-wxStaticBoxSizer *wxStaticBoxSizer_new1(int orient, wxWindow * parent, const wxString * label);
-wxStaticBox * wxStaticBoxSizer_GetStaticBox(const wxStaticBoxSizer * self);
-
-// CLASS: wxValidator
-wxValidator *wxValidator_new();
-wxObject * wxValidator_Clone(const wxValidator * self);
-wxWindow * wxValidator_GetWindow(const wxValidator * self);
-void wxValidator_SetWindow(wxValidator * self, wxWindow * window);
-bool wxValidator_TransferFromWindow(wxValidator * self);
-bool wxValidator_TransferToWindow(wxValidator * self);
-bool wxValidator_Validate(wxValidator * self, wxWindow * parent);
-void wxValidator_SuppressBellOnError(bool suppress);
-bool wxValidator_IsSilent();
-
-// CLASS: wxStaticBitmap
-wxStaticBitmap *wxStaticBitmap_new();
-wxStaticBitmap *wxStaticBitmap_new1(wxWindow * parent, wxWindowID id, const wxBitmap * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-bool wxStaticBitmap_Create(wxStaticBitmap * self, wxWindow * parent, wxWindowID id, const wxBitmap * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-wxBitmap *wxStaticBitmap_GetBitmap(const wxStaticBitmap * self);
-void wxStaticBitmap_SetBitmap(wxStaticBitmap * self, const wxBitmap * label);
-void wxStaticBitmap_SetIcon(wxStaticBitmap * self, const wxIcon * label);
 
 // CLASS: wxWrapSizer
 wxWrapSizer *wxWrapSizer_new(int orient, int flags);

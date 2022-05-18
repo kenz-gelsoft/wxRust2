@@ -5,18 +5,6 @@
 
 extern "C" {
 
-// CLASS: wxObject
-wxObject *wxObject_new();
-wxObject *wxObject_new1(const wxObject * other);
-wxClassInfo * wxObject_GetClassInfo(const wxObject * self);
-wxObjectRefData * wxObject_GetRefData(const wxObject * self);
-bool wxObject_IsKindOf(const wxObject * self, const wxClassInfo * info);
-bool wxObject_IsSameAs(const wxObject * self, const wxObject * obj);
-void wxObject_Ref(wxObject * self, const wxObject * clone);
-void wxObject_SetRefData(wxObject * self, wxObjectRefData * data);
-void wxObject_UnRef(wxObject * self);
-void wxObject_UnShare(wxObject * self);
-
 // CLASS: wxEvent
 wxEvent * wxEvent_Clone(const wxEvent * self);
 wxObject * wxEvent_GetEventObject(const wxEvent * self);
@@ -54,6 +42,18 @@ bool wxEvtHandler_IsUnlinked(const wxEvtHandler * self);
 void wxEvtHandler_AddFilter(wxEventFilter * filter);
 void wxEvtHandler_RemoveFilter(wxEventFilter * filter);
 wxEvtHandler *wxEvtHandler_new();
+
+// CLASS: wxObject
+wxObject *wxObject_new();
+wxObject *wxObject_new1(const wxObject * other);
+wxClassInfo * wxObject_GetClassInfo(const wxObject * self);
+wxObjectRefData * wxObject_GetRefData(const wxObject * self);
+bool wxObject_IsKindOf(const wxObject * self, const wxClassInfo * info);
+bool wxObject_IsSameAs(const wxObject * self, const wxObject * obj);
+void wxObject_Ref(wxObject * self, const wxObject * clone);
+void wxObject_SetRefData(wxObject * self, wxObjectRefData * data);
+void wxObject_UnRef(wxObject * self);
+void wxObject_UnShare(wxObject * self);
 
 } // extern "C"
 

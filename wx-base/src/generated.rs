@@ -17,21 +17,6 @@ mod ffi {
 
     extern "C" {
 
-        // wxObject
-        pub fn wxObject_new() -> *mut c_void;
-        pub fn wxObject_new1(other: *const c_void) -> *mut c_void;
-        // DTOR: pub fn wxObject_~wxObject(self_: *mut c_void);
-        pub fn wxObject_GetClassInfo(self_: *const c_void) -> *mut c_void;
-        pub fn wxObject_GetRefData(self_: *const c_void) -> *mut c_void;
-        pub fn wxObject_IsKindOf(self_: *const c_void, info: *const c_void) -> bool;
-        pub fn wxObject_IsSameAs(self_: *const c_void, obj: *const c_void) -> bool;
-        pub fn wxObject_Ref(self_: *mut c_void, clone: *const c_void);
-        pub fn wxObject_SetRefData(self_: *mut c_void, data: *mut c_void);
-        pub fn wxObject_UnRef(self_: *mut c_void);
-        pub fn wxObject_UnShare(self_: *mut c_void);
-        // BLOCKED: pub fn wxObject_operator delete(self_: *mut c_void, buf: *mut c_void);
-        // BLOCKED: pub fn wxObject_operator new(self_: *mut c_void, size: usize, filename: *const c_void, line_num: c_int) -> *mut c_void;
-
         // wxEvent
         // NOT_SUPPORTED: pub fn wxEvent_new(id: c_int, event_type: wxEventType) -> *mut c_void;
         pub fn wxEvent_Clone(self_: *const c_void) -> *mut c_void;
@@ -88,6 +73,21 @@ mod ffi {
         pub fn wxEvtHandler_RemoveFilter(filter: *mut c_void);
         pub fn wxEvtHandler_new() -> *mut c_void;
         // DTOR: pub fn wxEvtHandler_~wxEvtHandler(self_: *mut c_void);
+
+        // wxObject
+        pub fn wxObject_new() -> *mut c_void;
+        pub fn wxObject_new1(other: *const c_void) -> *mut c_void;
+        // DTOR: pub fn wxObject_~wxObject(self_: *mut c_void);
+        pub fn wxObject_GetClassInfo(self_: *const c_void) -> *mut c_void;
+        pub fn wxObject_GetRefData(self_: *const c_void) -> *mut c_void;
+        pub fn wxObject_IsKindOf(self_: *const c_void, info: *const c_void) -> bool;
+        pub fn wxObject_IsSameAs(self_: *const c_void, obj: *const c_void) -> bool;
+        pub fn wxObject_Ref(self_: *mut c_void, clone: *const c_void);
+        pub fn wxObject_SetRefData(self_: *mut c_void, data: *mut c_void);
+        pub fn wxObject_UnRef(self_: *mut c_void);
+        pub fn wxObject_UnShare(self_: *mut c_void);
+        // BLOCKED: pub fn wxObject_operator delete(self_: *mut c_void, buf: *mut c_void);
+        // BLOCKED: pub fn wxObject_operator new(self_: *mut c_void, size: usize, filename: *const c_void, line_num: c_int) -> *mut c_void;
     }
 }
 
@@ -103,43 +103,6 @@ pub mod methods {
         unsafe fn from_ptr(ptr: *mut c_void) -> Self;
         unsafe fn from_unowned_ptr(ptr: *mut c_void) -> Self::Unowned;
         unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F);
-    }
-
-    // wxObject
-    pub trait ObjectMethods: WxRustMethods {
-        // DTOR: fn ~wxObject()
-        fn get_class_info(&self) -> *mut c_void {
-            unsafe { ffi::wxObject_GetClassInfo(self.as_ptr()) }
-        }
-        fn get_ref_data(&self) -> *mut c_void {
-            unsafe { ffi::wxObject_GetRefData(self.as_ptr()) }
-        }
-        fn is_kind_of(&self, info: *const c_void) -> bool {
-            unsafe { ffi::wxObject_IsKindOf(self.as_ptr(), info) }
-        }
-        fn is_same_as<O: ObjectMethods>(&self, obj: &O) -> bool {
-            unsafe {
-                let obj = obj.as_ptr();
-                ffi::wxObject_IsSameAs(self.as_ptr(), obj)
-            }
-        }
-        fn ref_<O: ObjectMethods>(&self, clone: &O) {
-            unsafe {
-                let clone = clone.as_ptr();
-                ffi::wxObject_Ref(self.as_ptr(), clone)
-            }
-        }
-        fn set_ref_data(&self, data: *mut c_void) {
-            unsafe { ffi::wxObject_SetRefData(self.as_ptr(), data) }
-        }
-        fn un_ref(&self) {
-            unsafe { ffi::wxObject_UnRef(self.as_ptr()) }
-        }
-        fn un_share(&self) {
-            unsafe { ffi::wxObject_UnShare(self.as_ptr()) }
-        }
-        // BLOCKED: fn operator delete()
-        // BLOCKED: fn operator new()
     }
 
     // wxEvent
@@ -295,32 +258,42 @@ pub mod methods {
         }
         // DTOR: fn ~wxEvtHandler()
     }
-}
 
-// wxObject
-wx_class! { Object =
-    ObjectIsOwned<true>(wxObject) impl
-        ObjectMethods
-}
-impl<const OWNED: bool> ObjectIsOwned<OWNED> {
-    pub fn new() -> ObjectIsOwned<OWNED> {
-        unsafe { ObjectIsOwned(ffi::wxObject_new()) }
-    }
-    pub fn new_with_object<O: ObjectMethods>(other: &O) -> ObjectIsOwned<OWNED> {
-        unsafe {
-            let other = other.as_ptr();
-            ObjectIsOwned(ffi::wxObject_new1(other))
+    // wxObject
+    pub trait ObjectMethods: WxRustMethods {
+        // DTOR: fn ~wxObject()
+        fn get_class_info(&self) -> *mut c_void {
+            unsafe { ffi::wxObject_GetClassInfo(self.as_ptr()) }
         }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for ObjectIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObject_delete(self.0) }
+        fn get_ref_data(&self) -> *mut c_void {
+            unsafe { ffi::wxObject_GetRefData(self.as_ptr()) }
         }
+        fn is_kind_of(&self, info: *const c_void) -> bool {
+            unsafe { ffi::wxObject_IsKindOf(self.as_ptr(), info) }
+        }
+        fn is_same_as<O: ObjectMethods>(&self, obj: &O) -> bool {
+            unsafe {
+                let obj = obj.as_ptr();
+                ffi::wxObject_IsSameAs(self.as_ptr(), obj)
+            }
+        }
+        fn ref_<O: ObjectMethods>(&self, clone: &O) {
+            unsafe {
+                let clone = clone.as_ptr();
+                ffi::wxObject_Ref(self.as_ptr(), clone)
+            }
+        }
+        fn set_ref_data(&self, data: *mut c_void) {
+            unsafe { ffi::wxObject_SetRefData(self.as_ptr(), data) }
+        }
+        fn un_ref(&self) {
+            unsafe { ffi::wxObject_UnRef(self.as_ptr()) }
+        }
+        fn un_share(&self) {
+            unsafe { ffi::wxObject_UnShare(self.as_ptr()) }
+        }
+        // BLOCKED: fn operator delete()
+        // BLOCKED: fn operator new()
     }
 }
 
@@ -356,5 +329,32 @@ impl<const OWNED: bool> EvtHandlerIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+
+// wxObject
+wx_class! { Object =
+    ObjectIsOwned<true>(wxObject) impl
+        ObjectMethods
+}
+impl<const OWNED: bool> ObjectIsOwned<OWNED> {
+    pub fn new() -> ObjectIsOwned<OWNED> {
+        unsafe { ObjectIsOwned(ffi::wxObject_new()) }
+    }
+    pub fn new_with_object<O: ObjectMethods>(other: &O) -> ObjectIsOwned<OWNED> {
+        unsafe {
+            let other = other.as_ptr();
+            ObjectIsOwned(ffi::wxObject_new1(other))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for ObjectIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
     }
 }

@@ -2,6 +2,53 @@
 
 extern "C" {
 
+// CLASS: wxAnyButton
+wxAnyButton *wxAnyButton_new() {
+    return new wxAnyButton();
+}
+wxBitmap *wxAnyButton_GetBitmap(const wxAnyButton * self) {
+    return new wxBitmap(self->GetBitmap());
+}
+wxBitmap *wxAnyButton_GetBitmapCurrent(const wxAnyButton * self) {
+    return new wxBitmap(self->GetBitmapCurrent());
+}
+wxBitmap *wxAnyButton_GetBitmapDisabled(const wxAnyButton * self) {
+    return new wxBitmap(self->GetBitmapDisabled());
+}
+wxBitmap *wxAnyButton_GetBitmapFocus(const wxAnyButton * self) {
+    return new wxBitmap(self->GetBitmapFocus());
+}
+wxBitmap *wxAnyButton_GetBitmapLabel(const wxAnyButton * self) {
+    return new wxBitmap(self->GetBitmapLabel());
+}
+wxBitmap *wxAnyButton_GetBitmapPressed(const wxAnyButton * self) {
+    return new wxBitmap(self->GetBitmapPressed());
+}
+void wxAnyButton_SetBitmapCurrent(wxAnyButton * self, const wxBitmap * bitmap) {
+    return self->SetBitmapCurrent(*bitmap);
+}
+void wxAnyButton_SetBitmapDisabled(wxAnyButton * self, const wxBitmap * bitmap) {
+    return self->SetBitmapDisabled(*bitmap);
+}
+void wxAnyButton_SetBitmapFocus(wxAnyButton * self, const wxBitmap * bitmap) {
+    return self->SetBitmapFocus(*bitmap);
+}
+void wxAnyButton_SetBitmapLabel(wxAnyButton * self, const wxBitmap * bitmap) {
+    return self->SetBitmapLabel(*bitmap);
+}
+void wxAnyButton_SetBitmapPressed(wxAnyButton * self, const wxBitmap * bitmap) {
+    return self->SetBitmapPressed(*bitmap);
+}
+wxSize *wxAnyButton_GetBitmapMargins(wxAnyButton * self) {
+    return new wxSize(self->GetBitmapMargins());
+}
+void wxAnyButton_SetBitmapMargins(wxAnyButton * self, wxCoord x, wxCoord y) {
+    return self->SetBitmapMargins(x, y);
+}
+void wxAnyButton_SetBitmapMargins1(wxAnyButton * self, const wxSize * sz) {
+    return self->SetBitmapMargins(*sz);
+}
+
 // CLASS: wxArtProvider
 bool wxArtProvider_Delete(wxArtProvider * provider) {
     return wxArtProvider::Delete(provider);
@@ -147,6 +194,31 @@ void wxBoxSizer_SetOrientation(wxBoxSizer * self, int orient) {
     return self->SetOrientation(orient);
 }
 
+// CLASS: wxButton
+wxButton *wxButton_new() {
+    return new wxButton();
+}
+wxButton *wxButton_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return new wxButton(parent, id, *label, *pos, *size, style, *validator, *name);
+}
+bool wxButton_Create(wxButton * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, *label, *pos, *size, style, *validator, *name);
+}
+bool wxButton_GetAuthNeeded(const wxButton * self) {
+    return self->GetAuthNeeded();
+}
+void wxButton_SetAuthNeeded(wxButton * self, bool needed) {
+    return self->SetAuthNeeded(needed);
+}
+wxWindow * wxButton_SetDefault(wxButton * self) {
+    return self->SetDefault();
+}
+#if wxCHECK_VERSION(3, 1, 0)
+wxSize *wxButton_GetDefaultSize(wxWindow * win) {
+    return new wxSize(wxButton::GetDefaultSize(win));
+}
+#endif
+
 // CLASS: wxCheckBox
 wxCheckBox *wxCheckBox_new() {
     return new wxCheckBox();
@@ -214,6 +286,125 @@ void wxCommandEvent_SetString(wxCommandEvent * self, const wxString * string) {
     return self->SetString(*string);
 }
 
+// CLASS: wxControl
+wxControl *wxControl_new(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return new wxControl(parent, id, *pos, *size, style, *validator, *name);
+}
+wxControl *wxControl_new1() {
+    return new wxControl();
+}
+bool wxControl_Create(wxControl * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, *pos, *size, style, *validator, *name);
+}
+void wxControl_Command(wxControl * self, wxCommandEvent * event) {
+    return self->Command(*event);
+}
+wxString *wxControl_GetLabelText(const wxControl * self) {
+    return new wxString(self->GetLabelText());
+}
+wxSize *wxControl_GetSizeFromTextSize(const wxControl * self, int xlen, int ylen) {
+    return new wxSize(self->GetSizeFromTextSize(xlen, ylen));
+}
+wxSize *wxControl_GetSizeFromTextSize1(const wxControl * self, const wxSize * tsize) {
+    return new wxSize(self->GetSizeFromTextSize(*tsize));
+}
+#if wxCHECK_VERSION(3, 1, 0)
+wxSize *wxControl_GetSizeFromText(const wxControl * self, const wxString * text) {
+    return new wxSize(self->GetSizeFromText(*text));
+}
+#endif
+void wxControl_SetLabelText(wxControl * self, const wxString * text) {
+    return self->SetLabelText(*text);
+}
+bool wxControl_SetLabelMarkup(wxControl * self, const wxString * markup) {
+    return self->SetLabelMarkup(*markup);
+}
+wxString *wxControl_GetLabelText1(const wxString * label) {
+    return new wxString(wxControl::GetLabelText(*label));
+}
+wxString *wxControl_RemoveMnemonics(const wxString * str) {
+    return new wxString(wxControl::RemoveMnemonics(*str));
+}
+wxString *wxControl_EscapeMnemonics(const wxString * text) {
+    return new wxString(wxControl::EscapeMnemonics(*text));
+}
+wxString *wxControl_Ellipsize(const wxString * label, const wxDC * dc, wxEllipsizeMode mode, int max_width, int flags) {
+    return new wxString(wxControl::Ellipsize(*label, *dc, mode, max_width, flags));
+}
+
+// CLASS: wxFrame
+wxFrame *wxFrame_new() {
+    return new wxFrame();
+}
+wxFrame *wxFrame_new1(wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxFrame(parent, id, *title, *pos, *size, style, *name);
+}
+void wxFrame_Centre(wxFrame * self, int direction) {
+    return self->Centre(direction);
+}
+bool wxFrame_Create(wxFrame * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, id, *title, *pos, *size, style, *name);
+}
+wxStatusBar * wxFrame_CreateStatusBar(wxFrame * self, int number, long style, wxWindowID id, const wxString * name) {
+    return self->CreateStatusBar(number, style, id, *name);
+}
+wxToolBar * wxFrame_CreateToolBar(wxFrame * self, long style, wxWindowID id, const wxString * name) {
+    return self->CreateToolBar(style, id, *name);
+}
+void wxFrame_DoGiveHelp(wxFrame * self, const wxString * text, bool show) {
+    return self->DoGiveHelp(*text, show);
+}
+wxMenuBar * wxFrame_GetMenuBar(const wxFrame * self) {
+    return self->GetMenuBar();
+}
+wxStatusBar * wxFrame_GetStatusBar(const wxFrame * self) {
+    return self->GetStatusBar();
+}
+int wxFrame_GetStatusBarPane(const wxFrame * self) {
+    return self->GetStatusBarPane();
+}
+wxToolBar * wxFrame_GetToolBar(const wxFrame * self) {
+    return self->GetToolBar();
+}
+wxStatusBar * wxFrame_OnCreateStatusBar(wxFrame * self, int number, long style, wxWindowID id, const wxString * name) {
+    return self->OnCreateStatusBar(number, style, id, *name);
+}
+wxToolBar * wxFrame_OnCreateToolBar(wxFrame * self, long style, wxWindowID id, const wxString * name) {
+    return self->OnCreateToolBar(style, id, *name);
+}
+bool wxFrame_ProcessCommand(wxFrame * self, int id) {
+    return self->ProcessCommand(id);
+}
+void wxFrame_SetMenuBar(wxFrame * self, wxMenuBar * menu_bar) {
+    return self->SetMenuBar(menu_bar);
+}
+void wxFrame_SetStatusBar(wxFrame * self, wxStatusBar * status_bar) {
+    return self->SetStatusBar(status_bar);
+}
+void wxFrame_SetStatusBarPane(wxFrame * self, int n) {
+    return self->SetStatusBarPane(n);
+}
+void wxFrame_SetStatusText(wxFrame * self, const wxString * text, int number) {
+    return self->SetStatusText(*text, number);
+}
+void wxFrame_SetStatusWidths(wxFrame * self, int n, const int * widths_field) {
+    return self->SetStatusWidths(n, widths_field);
+}
+void wxFrame_SetToolBar(wxFrame * self, wxToolBar * tool_bar) {
+    return self->SetToolBar(tool_bar);
+}
+#ifdef __WXMSW__
+wxTaskBarButton * wxFrame_MSWGetTaskBarButton(wxFrame * self) {
+    return self->MSWGetTaskBarButton();
+}
+#endif
+void wxFrame_PushStatusText(wxFrame * self, const wxString * text, int number) {
+    return self->PushStatusText(*text, number);
+}
+void wxFrame_PopStatusText(wxFrame * self, int number) {
+    return self->PopStatusText(number);
+}
+
 // CLASS: wxGDIObject
 
 // CLASS: wxListBox
@@ -272,6 +463,1167 @@ void wxListBox_MSWSetTabStops(wxListBox * self, const wxVector< int > * tab_stop
     return self->MSWSetTabStops(*tab_stops);
 }
 #endif
+
+// CLASS: wxMenu
+wxMenu *wxMenu_new() {
+    return new wxMenu();
+}
+wxMenu *wxMenu_new1(long style) {
+    return new wxMenu(style);
+}
+wxMenu *wxMenu_new2(const wxString * title, long style) {
+    return new wxMenu(*title, style);
+}
+wxMenuItem * wxMenu_Append(wxMenu * self, int id, const wxString * item, const wxString * help_string, wxItemKind kind) {
+    return self->Append(id, *item, *help_string, kind);
+}
+wxMenuItem * wxMenu_Append1(wxMenu * self, int id, const wxString * item, wxMenu * sub_menu, const wxString * help_string) {
+    return self->Append(id, *item, sub_menu, *help_string);
+}
+wxMenuItem * wxMenu_Append2(wxMenu * self, wxMenuItem * menu_item) {
+    return self->Append(menu_item);
+}
+wxMenuItem * wxMenu_AppendCheckItem(wxMenu * self, int id, const wxString * item, const wxString * help) {
+    return self->AppendCheckItem(id, *item, *help);
+}
+wxMenuItem * wxMenu_AppendRadioItem(wxMenu * self, int id, const wxString * item, const wxString * help) {
+    return self->AppendRadioItem(id, *item, *help);
+}
+wxMenuItem * wxMenu_AppendSeparator(wxMenu * self) {
+    return self->AppendSeparator();
+}
+wxMenuItem * wxMenu_AppendSubMenu(wxMenu * self, wxMenu * submenu, const wxString * text, const wxString * help) {
+    return self->AppendSubMenu(submenu, *text, *help);
+}
+void wxMenu_Break(wxMenu * self) {
+    return self->Break();
+}
+void wxMenu_Check(wxMenu * self, int id, bool check) {
+    return self->Check(id, check);
+}
+bool wxMenu_Delete(wxMenu * self, int id) {
+    return self->Delete(id);
+}
+bool wxMenu_Delete1(wxMenu * self, wxMenuItem * item) {
+    return self->Delete(item);
+}
+bool wxMenu_Destroy(wxMenu * self, int id) {
+    return self->Destroy(id);
+}
+bool wxMenu_Destroy1(wxMenu * self, wxMenuItem * item) {
+    return self->Destroy(item);
+}
+void wxMenu_Enable(wxMenu * self, int id, bool enable) {
+    return self->Enable(id, enable);
+}
+wxMenuItem * wxMenu_FindChildItem(const wxMenu * self, int id, size_t * pos) {
+    return self->FindChildItem(id, pos);
+}
+int wxMenu_FindItem(const wxMenu * self, const wxString * item_string) {
+    return self->FindItem(*item_string);
+}
+wxMenuItem * wxMenu_FindItem1(const wxMenu * self, int id, wxMenu ** menu) {
+    return self->FindItem(id, menu);
+}
+wxMenuItem * wxMenu_FindItemByPosition(const wxMenu * self, size_t position) {
+    return self->FindItemByPosition(position);
+}
+wxString *wxMenu_GetHelpString(const wxMenu * self, int id) {
+    return new wxString(self->GetHelpString(id));
+}
+wxString *wxMenu_GetLabel(const wxMenu * self, int id) {
+    return new wxString(self->GetLabel(id));
+}
+wxString *wxMenu_GetLabelText(const wxMenu * self, int id) {
+    return new wxString(self->GetLabelText(id));
+}
+size_t wxMenu_GetMenuItemCount(const wxMenu * self) {
+    return self->GetMenuItemCount();
+}
+wxString *wxMenu_GetTitle(const wxMenu * self) {
+    return new wxString(self->GetTitle());
+}
+wxMenuItem * wxMenu_Insert(wxMenu * self, size_t pos, wxMenuItem * menu_item) {
+    return self->Insert(pos, menu_item);
+}
+wxMenuItem * wxMenu_Insert1(wxMenu * self, size_t pos, int id, const wxString * item, const wxString * help_string, wxItemKind kind) {
+    return self->Insert(pos, id, *item, *help_string, kind);
+}
+wxMenuItem * wxMenu_Insert2(wxMenu * self, size_t pos, int id, const wxString * text, wxMenu * submenu, const wxString * help) {
+    return self->Insert(pos, id, *text, submenu, *help);
+}
+wxMenuItem * wxMenu_InsertCheckItem(wxMenu * self, size_t pos, int id, const wxString * item, const wxString * help_string) {
+    return self->InsertCheckItem(pos, id, *item, *help_string);
+}
+wxMenuItem * wxMenu_InsertRadioItem(wxMenu * self, size_t pos, int id, const wxString * item, const wxString * help_string) {
+    return self->InsertRadioItem(pos, id, *item, *help_string);
+}
+wxMenuItem * wxMenu_InsertSeparator(wxMenu * self, size_t pos) {
+    return self->InsertSeparator(pos);
+}
+bool wxMenu_IsChecked(const wxMenu * self, int id) {
+    return self->IsChecked(id);
+}
+bool wxMenu_IsEnabled(const wxMenu * self, int id) {
+    return self->IsEnabled(id);
+}
+wxMenuItem * wxMenu_Prepend(wxMenu * self, wxMenuItem * item) {
+    return self->Prepend(item);
+}
+wxMenuItem * wxMenu_Prepend1(wxMenu * self, int id, const wxString * item, const wxString * help_string, wxItemKind kind) {
+    return self->Prepend(id, *item, *help_string, kind);
+}
+wxMenuItem * wxMenu_Prepend2(wxMenu * self, int id, const wxString * text, wxMenu * submenu, const wxString * help) {
+    return self->Prepend(id, *text, submenu, *help);
+}
+wxMenuItem * wxMenu_PrependCheckItem(wxMenu * self, int id, const wxString * item, const wxString * help_string) {
+    return self->PrependCheckItem(id, *item, *help_string);
+}
+wxMenuItem * wxMenu_PrependRadioItem(wxMenu * self, int id, const wxString * item, const wxString * help_string) {
+    return self->PrependRadioItem(id, *item, *help_string);
+}
+wxMenuItem * wxMenu_PrependSeparator(wxMenu * self) {
+    return self->PrependSeparator();
+}
+wxMenuItem * wxMenu_Remove(wxMenu * self, int id) {
+    return self->Remove(id);
+}
+wxMenuItem * wxMenu_Remove1(wxMenu * self, wxMenuItem * item) {
+    return self->Remove(item);
+}
+void wxMenu_SetHelpString(wxMenu * self, int id, const wxString * help_string) {
+    return self->SetHelpString(id, *help_string);
+}
+void wxMenu_SetLabel(wxMenu * self, int id, const wxString * label) {
+    return self->SetLabel(id, *label);
+}
+void wxMenu_SetTitle(wxMenu * self, const wxString * title) {
+    return self->SetTitle(*title);
+}
+void wxMenu_UpdateUI(wxMenu * self, wxEvtHandler * source) {
+    return self->UpdateUI(source);
+}
+void wxMenu_SetInvokingWindow(wxMenu * self, wxWindow * win) {
+    return self->SetInvokingWindow(win);
+}
+wxWindow * wxMenu_GetInvokingWindow(const wxMenu * self) {
+    return self->GetInvokingWindow();
+}
+wxWindow * wxMenu_GetWindow(const wxMenu * self) {
+    return self->GetWindow();
+}
+long wxMenu_GetStyle(const wxMenu * self) {
+    return self->GetStyle();
+}
+void wxMenu_SetParent(wxMenu * self, wxMenu * parent) {
+    return self->SetParent(parent);
+}
+wxMenu * wxMenu_GetParent(const wxMenu * self) {
+    return self->GetParent();
+}
+void wxMenu_Attach(wxMenu * self, wxMenuBar * menubar) {
+    return self->Attach(menubar);
+}
+void wxMenu_Detach(wxMenu * self) {
+    return self->Detach();
+}
+bool wxMenu_IsAttached(const wxMenu * self) {
+    return self->IsAttached();
+}
+
+// CLASS: wxMenuBar
+wxMenuBar *wxMenuBar_new(long style) {
+    return new wxMenuBar(style);
+}
+bool wxMenuBar_Append(wxMenuBar * self, wxMenu * menu, const wxString * title) {
+    return self->Append(menu, *title);
+}
+void wxMenuBar_Check(wxMenuBar * self, int id, bool check) {
+    return self->Check(id, check);
+}
+void wxMenuBar_Enable(wxMenuBar * self, int id, bool enable) {
+    return self->Enable(id, enable);
+}
+bool wxMenuBar_IsEnabledTop(const wxMenuBar * self, size_t pos) {
+    return self->IsEnabledTop(pos);
+}
+void wxMenuBar_EnableTop(wxMenuBar * self, size_t pos, bool enable) {
+    return self->EnableTop(pos, enable);
+}
+wxMenuItem * wxMenuBar_FindItem(const wxMenuBar * self, int id, wxMenu ** menu) {
+    return self->FindItem(id, menu);
+}
+int wxMenuBar_FindMenu(const wxMenuBar * self, const wxString * title) {
+    return self->FindMenu(*title);
+}
+int wxMenuBar_FindMenuItem(const wxMenuBar * self, const wxString * menu_string, const wxString * item_string) {
+    return self->FindMenuItem(*menu_string, *item_string);
+}
+wxString *wxMenuBar_GetHelpString(const wxMenuBar * self, int id) {
+    return new wxString(self->GetHelpString(id));
+}
+wxString *wxMenuBar_GetLabel(const wxMenuBar * self, int id) {
+    return new wxString(self->GetLabel(id));
+}
+wxMenu * wxMenuBar_GetMenu(const wxMenuBar * self, size_t menu_index) {
+    return self->GetMenu(menu_index);
+}
+size_t wxMenuBar_GetMenuCount(const wxMenuBar * self) {
+    return self->GetMenuCount();
+}
+wxString *wxMenuBar_GetMenuLabel(const wxMenuBar * self, size_t pos) {
+    return new wxString(self->GetMenuLabel(pos));
+}
+wxString *wxMenuBar_GetMenuLabelText(const wxMenuBar * self, size_t pos) {
+    return new wxString(self->GetMenuLabelText(pos));
+}
+bool wxMenuBar_Insert(wxMenuBar * self, size_t pos, wxMenu * menu, const wxString * title) {
+    return self->Insert(pos, menu, *title);
+}
+bool wxMenuBar_IsChecked(const wxMenuBar * self, int id) {
+    return self->IsChecked(id);
+}
+bool wxMenuBar_IsEnabled(const wxMenuBar * self, int id) {
+    return self->IsEnabled(id);
+}
+wxMenu * wxMenuBar_Remove(wxMenuBar * self, size_t pos) {
+    return self->Remove(pos);
+}
+wxMenu * wxMenuBar_Replace(wxMenuBar * self, size_t pos, wxMenu * menu, const wxString * title) {
+    return self->Replace(pos, menu, *title);
+}
+void wxMenuBar_SetHelpString(wxMenuBar * self, int id, const wxString * help_string) {
+    return self->SetHelpString(id, *help_string);
+}
+void wxMenuBar_SetLabel(wxMenuBar * self, int id, const wxString * label) {
+    return self->SetLabel(id, *label);
+}
+void wxMenuBar_SetMenuLabel(wxMenuBar * self, size_t pos, const wxString * label) {
+    return self->SetMenuLabel(pos, *label);
+}
+#ifdef __WXOSX__
+wxMenu * wxMenuBar_OSXGetAppleMenu(const wxMenuBar * self) {
+    return self->OSXGetAppleMenu();
+}
+#endif
+wxFrame * wxMenuBar_GetFrame(const wxMenuBar * self) {
+    return self->GetFrame();
+}
+bool wxMenuBar_IsAttached(const wxMenuBar * self) {
+    return self->IsAttached();
+}
+void wxMenuBar_Attach(wxMenuBar * self, wxFrame * frame) {
+    return self->Attach(frame);
+}
+void wxMenuBar_Detach(wxMenuBar * self) {
+    return self->Detach();
+}
+#ifdef __WXOSX__
+void wxMenuBar_MacSetCommonMenuBar(wxMenuBar * menubar) {
+    return wxMenuBar::MacSetCommonMenuBar(menubar);
+}
+wxMenuBar * wxMenuBar_MacGetCommonMenuBar() {
+    return wxMenuBar::MacGetCommonMenuBar();
+}
+#endif
+
+// CLASS: wxNonOwnedWindow
+bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow * self, const wxRegion * region) {
+    return self->SetShape(*region);
+}
+bool wxNonOwnedWindow_SetShape1(wxNonOwnedWindow * self, const wxGraphicsPath * path) {
+    return self->SetShape(*path);
+}
+
+// CLASS: wxPanel
+wxPanel *wxPanel_new() {
+    return new wxPanel();
+}
+wxPanel *wxPanel_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxPanel(parent, id, *pos, *size, style, *name);
+}
+bool wxPanel_Create(wxPanel * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, id, *pos, *size, style, *name);
+}
+void wxPanel_OnSysColourChanged(wxPanel * self, wxSysColourChangedEvent * event) {
+    return self->OnSysColourChanged(*event);
+}
+void wxPanel_SetFocusIgnoringChildren(wxPanel * self) {
+    return self->SetFocusIgnoringChildren();
+}
+
+// CLASS: wxPoint
+void wxPoint_delete(wxPoint *self) {
+    delete self;
+}
+bool wxPoint_IsFullySpecified(const wxPoint * self) {
+    return self->IsFullySpecified();
+}
+void wxPoint_SetDefaults(wxPoint * self, const wxPoint * pt) {
+    return self->SetDefaults(*pt);
+}
+wxPoint *wxPoint_new() {
+    return new wxPoint();
+}
+wxPoint *wxPoint_new1(int x, int y) {
+    return new wxPoint(x, y);
+}
+wxPoint *wxPoint_new2(const wxRealPoint * pt) {
+    return new wxPoint(*pt);
+}
+
+// CLASS: wxRect
+void wxRect_delete(wxRect *self) {
+    delete self;
+}
+wxRect *wxRect_new() {
+    return new wxRect();
+}
+wxRect *wxRect_new1(int x, int y, int width, int height) {
+    return new wxRect(x, y, width, height);
+}
+wxRect *wxRect_new2(const wxPoint * top_left, const wxPoint * bottom_right) {
+    return new wxRect(*top_left, *bottom_right);
+}
+wxRect *wxRect_new3(const wxPoint * pos, const wxSize * size) {
+    return new wxRect(*pos, *size);
+}
+wxRect *wxRect_new4(const wxSize * size) {
+    return new wxRect(*size);
+}
+wxRect *wxRect_CentreIn(const wxRect * self, const wxRect * r, int dir) {
+    return new wxRect(self->CentreIn(*r, dir));
+}
+wxRect *wxRect_CenterIn(const wxRect * self, const wxRect * r, int dir) {
+    return new wxRect(self->CenterIn(*r, dir));
+}
+bool wxRect_Contains(const wxRect * self, int x, int y) {
+    return self->Contains(x, y);
+}
+bool wxRect_Contains1(const wxRect * self, const wxPoint * pt) {
+    return self->Contains(*pt);
+}
+bool wxRect_Contains2(const wxRect * self, const wxRect * rect) {
+    return self->Contains(*rect);
+}
+wxRect *wxRect_Deflate3(const wxRect * self, wxCoord dx, wxCoord dy) {
+    return new wxRect(self->Deflate(dx, dy));
+}
+int wxRect_GetBottom(const wxRect * self) {
+    return self->GetBottom();
+}
+wxPoint *wxRect_GetBottomLeft(const wxRect * self) {
+    return new wxPoint(self->GetBottomLeft());
+}
+wxPoint *wxRect_GetBottomRight(const wxRect * self) {
+    return new wxPoint(self->GetBottomRight());
+}
+int wxRect_GetHeight(const wxRect * self) {
+    return self->GetHeight();
+}
+int wxRect_GetLeft(const wxRect * self) {
+    return self->GetLeft();
+}
+wxPoint *wxRect_GetPosition(const wxRect * self) {
+    return new wxPoint(self->GetPosition());
+}
+int wxRect_GetRight(const wxRect * self) {
+    return self->GetRight();
+}
+wxSize *wxRect_GetSize(const wxRect * self) {
+    return new wxSize(self->GetSize());
+}
+int wxRect_GetTop(const wxRect * self) {
+    return self->GetTop();
+}
+wxPoint *wxRect_GetTopLeft(const wxRect * self) {
+    return new wxPoint(self->GetTopLeft());
+}
+wxPoint *wxRect_GetTopRight(const wxRect * self) {
+    return new wxPoint(self->GetTopRight());
+}
+int wxRect_GetWidth(const wxRect * self) {
+    return self->GetWidth();
+}
+int wxRect_GetX(const wxRect * self) {
+    return self->GetX();
+}
+int wxRect_GetY(const wxRect * self) {
+    return self->GetY();
+}
+wxRect *wxRect_Inflate3(const wxRect * self, wxCoord dx, wxCoord dy) {
+    return new wxRect(self->Inflate(dx, dy));
+}
+wxRect *wxRect_Intersect1(const wxRect * self, const wxRect * rect) {
+    return new wxRect(self->Intersect(*rect));
+}
+bool wxRect_Intersects(const wxRect * self, const wxRect * rect) {
+    return self->Intersects(*rect);
+}
+bool wxRect_IsEmpty(const wxRect * self) {
+    return self->IsEmpty();
+}
+void wxRect_Offset(wxRect * self, wxCoord dx, wxCoord dy) {
+    return self->Offset(dx, dy);
+}
+void wxRect_Offset1(wxRect * self, const wxPoint * pt) {
+    return self->Offset(*pt);
+}
+void wxRect_SetHeight(wxRect * self, int height) {
+    return self->SetHeight(height);
+}
+void wxRect_SetPosition(wxRect * self, const wxPoint * pos) {
+    return self->SetPosition(*pos);
+}
+void wxRect_SetSize(wxRect * self, const wxSize * s) {
+    return self->SetSize(*s);
+}
+void wxRect_SetWidth(wxRect * self, int width) {
+    return self->SetWidth(width);
+}
+void wxRect_SetX(wxRect * self, int x) {
+    return self->SetX(x);
+}
+void wxRect_SetY(wxRect * self, int y) {
+    return self->SetY(y);
+}
+void wxRect_SetLeft(wxRect * self, int left) {
+    return self->SetLeft(left);
+}
+void wxRect_SetRight(wxRect * self, int right) {
+    return self->SetRight(right);
+}
+void wxRect_SetTop(wxRect * self, int top) {
+    return self->SetTop(top);
+}
+void wxRect_SetBottom(wxRect * self, int bottom) {
+    return self->SetBottom(bottom);
+}
+void wxRect_SetTopLeft(wxRect * self, const wxPoint * p) {
+    return self->SetTopLeft(*p);
+}
+void wxRect_SetBottomRight(wxRect * self, const wxPoint * p) {
+    return self->SetBottomRight(*p);
+}
+void wxRect_SetTopRight(wxRect * self, const wxPoint * p) {
+    return self->SetTopRight(*p);
+}
+void wxRect_SetBottomLeft(wxRect * self, const wxPoint * p) {
+    return self->SetBottomLeft(*p);
+}
+wxRect *wxRect_Union(const wxRect * self, const wxRect * rect) {
+    return new wxRect(self->Union(*rect));
+}
+
+// CLASS: wxSize
+void wxSize_delete(wxSize *self) {
+    delete self;
+}
+wxSize *wxSize_new() {
+    return new wxSize();
+}
+wxSize *wxSize_new1(int width, int height) {
+    return new wxSize(width, height);
+}
+void wxSize_DecBy(wxSize * self, const wxPoint * pt) {
+    return self->DecBy(*pt);
+}
+void wxSize_DecBy1(wxSize * self, const wxSize * size) {
+    return self->DecBy(*size);
+}
+void wxSize_DecBy2(wxSize * self, int dx, int dy) {
+    return self->DecBy(dx, dy);
+}
+void wxSize_DecBy3(wxSize * self, int d) {
+    return self->DecBy(d);
+}
+void wxSize_DecTo(wxSize * self, const wxSize * size) {
+    return self->DecTo(*size);
+}
+void wxSize_DecToIfSpecified(wxSize * self, const wxSize * size) {
+    return self->DecToIfSpecified(*size);
+}
+int wxSize_GetHeight(const wxSize * self) {
+    return self->GetHeight();
+}
+int wxSize_GetWidth(const wxSize * self) {
+    return self->GetWidth();
+}
+void wxSize_IncBy(wxSize * self, const wxPoint * pt) {
+    return self->IncBy(*pt);
+}
+void wxSize_IncBy1(wxSize * self, const wxSize * size) {
+    return self->IncBy(*size);
+}
+void wxSize_IncBy2(wxSize * self, int dx, int dy) {
+    return self->IncBy(dx, dy);
+}
+void wxSize_IncBy3(wxSize * self, int d) {
+    return self->IncBy(d);
+}
+void wxSize_IncTo(wxSize * self, const wxSize * size) {
+    return self->IncTo(*size);
+}
+bool wxSize_IsFullySpecified(const wxSize * self) {
+    return self->IsFullySpecified();
+}
+void wxSize_Set(wxSize * self, int width, int height) {
+    return self->Set(width, height);
+}
+void wxSize_SetDefaults(wxSize * self, const wxSize * size_default) {
+    return self->SetDefaults(*size_default);
+}
+void wxSize_SetHeight(wxSize * self, int height) {
+    return self->SetHeight(height);
+}
+void wxSize_SetWidth(wxSize * self, int width) {
+    return self->SetWidth(width);
+}
+
+// CLASS: wxSizer
+wxSizerItem * wxSizer_Add(wxSizer * self, wxWindow * window, const wxSizerFlags * flags) {
+    return self->Add(window, *flags);
+}
+wxSizerItem * wxSizer_Add1(wxSizer * self, wxWindow * window, int proportion, int flag, int border, wxObject * user_data) {
+    return self->Add(window, proportion, flag, border, user_data);
+}
+wxSizerItem * wxSizer_Add2(wxSizer * self, wxSizer * sizer, const wxSizerFlags * flags) {
+    return self->Add(sizer, *flags);
+}
+wxSizerItem * wxSizer_Add3(wxSizer * self, wxSizer * sizer, int proportion, int flag, int border, wxObject * user_data) {
+    return self->Add(sizer, proportion, flag, border, user_data);
+}
+wxSizerItem * wxSizer_Add4(wxSizer * self, int width, int height, int proportion, int flag, int border, wxObject * user_data) {
+    return self->Add(width, height, proportion, flag, border, user_data);
+}
+wxSizerItem * wxSizer_Add5(wxSizer * self, int width, int height, const wxSizerFlags * flags) {
+    return self->Add(width, height, *flags);
+}
+wxSizerItem * wxSizer_Add6(wxSizer * self, wxSizerItem * item) {
+    return self->Add(item);
+}
+wxSizerItem * wxSizer_AddSpacer(wxSizer * self, int size) {
+    return self->AddSpacer(size);
+}
+wxSizerItem * wxSizer_AddStretchSpacer(wxSizer * self, int prop) {
+    return self->AddStretchSpacer(prop);
+}
+wxSize *wxSizer_CalcMin(wxSizer * self) {
+    return new wxSize(self->CalcMin());
+}
+void wxSizer_Clear(wxSizer * self, bool delete_windows) {
+    return self->Clear(delete_windows);
+}
+wxSize *wxSizer_ComputeFittingClientSize(wxSizer * self, wxWindow * window) {
+    return new wxSize(self->ComputeFittingClientSize(window));
+}
+wxSize *wxSizer_ComputeFittingWindowSize(wxSizer * self, wxWindow * window) {
+    return new wxSize(self->ComputeFittingWindowSize(window));
+}
+bool wxSizer_Detach(wxSizer * self, wxWindow * window) {
+    return self->Detach(window);
+}
+bool wxSizer_Detach1(wxSizer * self, wxSizer * sizer) {
+    return self->Detach(sizer);
+}
+bool wxSizer_Detach2(wxSizer * self, int index) {
+    return self->Detach(index);
+}
+wxSize *wxSizer_Fit(wxSizer * self, wxWindow * window) {
+    return new wxSize(self->Fit(window));
+}
+void wxSizer_FitInside(wxSizer * self, wxWindow * window) {
+    return self->FitInside(window);
+}
+bool wxSizer_InformFirstDirection(wxSizer * self, int direction, int size, int available_other_dir) {
+    return self->InformFirstDirection(direction, size, available_other_dir);
+}
+wxWindow * wxSizer_GetContainingWindow(const wxSizer * self) {
+    return self->GetContainingWindow();
+}
+void wxSizer_SetContainingWindow(wxSizer * self, wxWindow * window) {
+    return self->SetContainingWindow(window);
+}
+size_t wxSizer_GetItemCount(const wxSizer * self) {
+    return self->GetItemCount();
+}
+wxSizerItem * wxSizer_GetItem(wxSizer * self, wxWindow * window, bool recursive) {
+    return self->GetItem(window, recursive);
+}
+wxSizerItem * wxSizer_GetItem1(wxSizer * self, wxSizer * sizer, bool recursive) {
+    return self->GetItem(sizer, recursive);
+}
+wxSizerItem * wxSizer_GetItem2(wxSizer * self, size_t index) {
+    return self->GetItem(index);
+}
+wxSizerItem * wxSizer_GetItemById(wxSizer * self, int id, bool recursive) {
+    return self->GetItemById(id, recursive);
+}
+wxSize *wxSizer_GetMinSize(wxSizer * self) {
+    return new wxSize(self->GetMinSize());
+}
+wxPoint *wxSizer_GetPosition(const wxSizer * self) {
+    return new wxPoint(self->GetPosition());
+}
+wxSize *wxSizer_GetSize(const wxSizer * self) {
+    return new wxSize(self->GetSize());
+}
+bool wxSizer_Hide(wxSizer * self, wxWindow * window, bool recursive) {
+    return self->Hide(window, recursive);
+}
+bool wxSizer_Hide1(wxSizer * self, wxSizer * sizer, bool recursive) {
+    return self->Hide(sizer, recursive);
+}
+bool wxSizer_Hide2(wxSizer * self, size_t index) {
+    return self->Hide(index);
+}
+wxSizerItem * wxSizer_Insert(wxSizer * self, size_t index, wxWindow * window, const wxSizerFlags * flags) {
+    return self->Insert(index, window, *flags);
+}
+wxSizerItem * wxSizer_Insert1(wxSizer * self, size_t index, wxWindow * window, int proportion, int flag, int border, wxObject * user_data) {
+    return self->Insert(index, window, proportion, flag, border, user_data);
+}
+wxSizerItem * wxSizer_Insert2(wxSizer * self, size_t index, wxSizer * sizer, const wxSizerFlags * flags) {
+    return self->Insert(index, sizer, *flags);
+}
+wxSizerItem * wxSizer_Insert3(wxSizer * self, size_t index, wxSizer * sizer, int proportion, int flag, int border, wxObject * user_data) {
+    return self->Insert(index, sizer, proportion, flag, border, user_data);
+}
+wxSizerItem * wxSizer_Insert4(wxSizer * self, size_t index, int width, int height, int proportion, int flag, int border, wxObject * user_data) {
+    return self->Insert(index, width, height, proportion, flag, border, user_data);
+}
+wxSizerItem * wxSizer_Insert5(wxSizer * self, size_t index, int width, int height, const wxSizerFlags * flags) {
+    return self->Insert(index, width, height, *flags);
+}
+wxSizerItem * wxSizer_Insert6(wxSizer * self, size_t index, wxSizerItem * item) {
+    return self->Insert(index, item);
+}
+wxSizerItem * wxSizer_InsertSpacer(wxSizer * self, size_t index, int size) {
+    return self->InsertSpacer(index, size);
+}
+wxSizerItem * wxSizer_InsertStretchSpacer(wxSizer * self, size_t index, int prop) {
+    return self->InsertStretchSpacer(index, prop);
+}
+bool wxSizer_IsEmpty(const wxSizer * self) {
+    return self->IsEmpty();
+}
+bool wxSizer_IsShown(const wxSizer * self, wxWindow * window) {
+    return self->IsShown(window);
+}
+bool wxSizer_IsShown1(const wxSizer * self, wxSizer * sizer) {
+    return self->IsShown(sizer);
+}
+bool wxSizer_IsShown2(const wxSizer * self, size_t index) {
+    return self->IsShown(index);
+}
+void wxSizer_Layout(wxSizer * self) {
+    return self->Layout();
+}
+wxSizerItem * wxSizer_Prepend(wxSizer * self, wxWindow * window, const wxSizerFlags * flags) {
+    return self->Prepend(window, *flags);
+}
+wxSizerItem * wxSizer_Prepend1(wxSizer * self, wxWindow * window, int proportion, int flag, int border, wxObject * user_data) {
+    return self->Prepend(window, proportion, flag, border, user_data);
+}
+wxSizerItem * wxSizer_Prepend2(wxSizer * self, wxSizer * sizer, const wxSizerFlags * flags) {
+    return self->Prepend(sizer, *flags);
+}
+wxSizerItem * wxSizer_Prepend3(wxSizer * self, wxSizer * sizer, int proportion, int flag, int border, wxObject * user_data) {
+    return self->Prepend(sizer, proportion, flag, border, user_data);
+}
+wxSizerItem * wxSizer_Prepend4(wxSizer * self, int width, int height, int proportion, int flag, int border, wxObject * user_data) {
+    return self->Prepend(width, height, proportion, flag, border, user_data);
+}
+wxSizerItem * wxSizer_Prepend5(wxSizer * self, int width, int height, const wxSizerFlags * flags) {
+    return self->Prepend(width, height, *flags);
+}
+wxSizerItem * wxSizer_Prepend6(wxSizer * self, wxSizerItem * item) {
+    return self->Prepend(item);
+}
+wxSizerItem * wxSizer_PrependSpacer(wxSizer * self, int size) {
+    return self->PrependSpacer(size);
+}
+wxSizerItem * wxSizer_PrependStretchSpacer(wxSizer * self, int prop) {
+    return self->PrependStretchSpacer(prop);
+}
+#if wxCHECK_VERSION(3, 1, 0)
+void wxSizer_RepositionChildren(wxSizer * self, const wxSize * min_size) {
+    return self->RepositionChildren(*min_size);
+}
+#endif
+bool wxSizer_Remove1(wxSizer * self, wxSizer * sizer) {
+    return self->Remove(sizer);
+}
+bool wxSizer_Remove2(wxSizer * self, int index) {
+    return self->Remove(index);
+}
+bool wxSizer_Replace(wxSizer * self, wxWindow * oldwin, wxWindow * newwin, bool recursive) {
+    return self->Replace(oldwin, newwin, recursive);
+}
+bool wxSizer_Replace1(wxSizer * self, wxSizer * oldsz, wxSizer * newsz, bool recursive) {
+    return self->Replace(oldsz, newsz, recursive);
+}
+bool wxSizer_Replace2(wxSizer * self, size_t index, wxSizerItem * newitem) {
+    return self->Replace(index, newitem);
+}
+void wxSizer_SetDimension(wxSizer * self, int x, int y, int width, int height) {
+    return self->SetDimension(x, y, width, height);
+}
+void wxSizer_SetDimension1(wxSizer * self, const wxPoint * pos, const wxSize * size) {
+    return self->SetDimension(*pos, *size);
+}
+bool wxSizer_SetItemMinSize(wxSizer * self, wxWindow * window, int width, int height) {
+    return self->SetItemMinSize(window, width, height);
+}
+bool wxSizer_SetItemMinSize1(wxSizer * self, wxWindow * window, const wxSize * size) {
+    return self->SetItemMinSize(window, *size);
+}
+bool wxSizer_SetItemMinSize2(wxSizer * self, wxSizer * sizer, int width, int height) {
+    return self->SetItemMinSize(sizer, width, height);
+}
+bool wxSizer_SetItemMinSize3(wxSizer * self, wxSizer * sizer, const wxSize * size) {
+    return self->SetItemMinSize(sizer, *size);
+}
+bool wxSizer_SetItemMinSize4(wxSizer * self, size_t index, int width, int height) {
+    return self->SetItemMinSize(index, width, height);
+}
+bool wxSizer_SetItemMinSize5(wxSizer * self, size_t index, const wxSize * size) {
+    return self->SetItemMinSize(index, *size);
+}
+void wxSizer_SetMinSize(wxSizer * self, const wxSize * size) {
+    return self->SetMinSize(*size);
+}
+void wxSizer_SetMinSize1(wxSizer * self, int width, int height) {
+    return self->SetMinSize(width, height);
+}
+void wxSizer_SetSizeHints(wxSizer * self, wxWindow * window) {
+    return self->SetSizeHints(window);
+}
+bool wxSizer_Show(wxSizer * self, wxWindow * window, bool show, bool recursive) {
+    return self->Show(window, show, recursive);
+}
+bool wxSizer_Show1(wxSizer * self, wxSizer * sizer, bool show, bool recursive) {
+    return self->Show(sizer, show, recursive);
+}
+bool wxSizer_Show2(wxSizer * self, size_t index, bool show) {
+    return self->Show(index, show);
+}
+void wxSizer_ShowItems(wxSizer * self, bool show) {
+    return self->ShowItems(show);
+}
+
+// CLASS: wxSizerFlags
+void wxSizerFlags_delete(wxSizerFlags *self) {
+    delete self;
+}
+wxSizerFlags *wxSizerFlags_new(int proportion) {
+    return new wxSizerFlags(proportion);
+}
+wxSizerFlags * wxSizerFlags_Align(wxSizerFlags * self, int alignment) {
+    return &(self->Align(alignment));
+}
+wxSizerFlags * wxSizerFlags_Border(wxSizerFlags * self, int direction, int borderinpixels) {
+    return &(self->Border(direction, borderinpixels));
+}
+wxSizerFlags * wxSizerFlags_Border1(wxSizerFlags * self, int direction) {
+    return &(self->Border(direction));
+}
+wxSizerFlags * wxSizerFlags_Bottom(wxSizerFlags * self) {
+    return &(self->Bottom());
+}
+wxSizerFlags * wxSizerFlags_Center(wxSizerFlags * self) {
+    return &(self->Center());
+}
+wxSizerFlags * wxSizerFlags_Centre(wxSizerFlags * self) {
+    return &(self->Centre());
+}
+#if wxCHECK_VERSION(3, 1, 0)
+wxSizerFlags * wxSizerFlags_CenterHorizontal(wxSizerFlags * self) {
+    return &(self->CenterHorizontal());
+}
+wxSizerFlags * wxSizerFlags_CenterVertical(wxSizerFlags * self) {
+    return &(self->CenterVertical());
+}
+wxSizerFlags * wxSizerFlags_CentreHorizontal(wxSizerFlags * self) {
+    return &(self->CentreHorizontal());
+}
+wxSizerFlags * wxSizerFlags_CentreVertical(wxSizerFlags * self) {
+    return &(self->CentreVertical());
+}
+#endif
+wxSizerFlags * wxSizerFlags_DoubleBorder(wxSizerFlags * self, int direction) {
+    return &(self->DoubleBorder(direction));
+}
+wxSizerFlags * wxSizerFlags_DoubleHorzBorder(wxSizerFlags * self) {
+    return &(self->DoubleHorzBorder());
+}
+wxSizerFlags * wxSizerFlags_Expand(wxSizerFlags * self) {
+    return &(self->Expand());
+}
+wxSizerFlags * wxSizerFlags_FixedMinSize(wxSizerFlags * self) {
+    return &(self->FixedMinSize());
+}
+wxSizerFlags * wxSizerFlags_ReserveSpaceEvenIfHidden(wxSizerFlags * self) {
+    return &(self->ReserveSpaceEvenIfHidden());
+}
+wxSizerFlags * wxSizerFlags_Left(wxSizerFlags * self) {
+    return &(self->Left());
+}
+wxSizerFlags * wxSizerFlags_Proportion(wxSizerFlags * self, int proportion) {
+    return &(self->Proportion(proportion));
+}
+wxSizerFlags * wxSizerFlags_Right(wxSizerFlags * self) {
+    return &(self->Right());
+}
+wxSizerFlags * wxSizerFlags_Shaped(wxSizerFlags * self) {
+    return &(self->Shaped());
+}
+wxSizerFlags * wxSizerFlags_Top(wxSizerFlags * self) {
+    return &(self->Top());
+}
+wxSizerFlags * wxSizerFlags_TripleBorder(wxSizerFlags * self, int direction) {
+    return &(self->TripleBorder(direction));
+}
+int wxSizerFlags_GetDefaultBorder() {
+    return wxSizerFlags::GetDefaultBorder();
+}
+
+// CLASS: wxStaticBitmap
+wxStaticBitmap *wxStaticBitmap_new() {
+    return new wxStaticBitmap();
+}
+wxStaticBitmap *wxStaticBitmap_new1(wxWindow * parent, wxWindowID id, const wxBitmap * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxStaticBitmap(parent, id, *label, *pos, *size, style, *name);
+}
+bool wxStaticBitmap_Create(wxStaticBitmap * self, wxWindow * parent, wxWindowID id, const wxBitmap * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, id, *label, *pos, *size, style, *name);
+}
+wxBitmap *wxStaticBitmap_GetBitmap(const wxStaticBitmap * self) {
+    return new wxBitmap(self->GetBitmap());
+}
+void wxStaticBitmap_SetBitmap(wxStaticBitmap * self, const wxBitmap * label) {
+    return self->SetBitmap(*label);
+}
+void wxStaticBitmap_SetIcon(wxStaticBitmap * self, const wxIcon * label) {
+    return self->SetIcon(*label);
+}
+
+// CLASS: wxStaticBoxSizer
+wxStaticBoxSizer *wxStaticBoxSizer_new(wxStaticBox * box, int orient) {
+    return new wxStaticBoxSizer(box, orient);
+}
+wxStaticBoxSizer *wxStaticBoxSizer_new1(int orient, wxWindow * parent, const wxString * label) {
+    return new wxStaticBoxSizer(orient, parent, *label);
+}
+wxStaticBox * wxStaticBoxSizer_GetStaticBox(const wxStaticBoxSizer * self) {
+    return self->GetStaticBox();
+}
+
+// CLASS: wxToolBar
+wxToolBar *wxToolBar_new() {
+    return new wxToolBar();
+}
+wxToolBar *wxToolBar_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxToolBar(parent, id, *pos, *size, style, *name);
+}
+wxToolBarToolBase * wxToolBar_AddCheckTool(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap1, const wxBitmap * bmp_disabled, const wxString * short_help, const wxString * long_help, wxObject * client_data) {
+    return self->AddCheckTool(tool_id, *label, *bitmap1, *bmp_disabled, *short_help, *long_help, client_data);
+}
+wxToolBarToolBase * wxToolBar_AddControl(wxToolBar * self, wxControl * control, const wxString * label) {
+    return self->AddControl(control, *label);
+}
+wxToolBarToolBase * wxToolBar_AddRadioTool(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap1, const wxBitmap * bmp_disabled, const wxString * short_help, const wxString * long_help, wxObject * client_data) {
+    return self->AddRadioTool(tool_id, *label, *bitmap1, *bmp_disabled, *short_help, *long_help, client_data);
+}
+wxToolBarToolBase * wxToolBar_AddSeparator(wxToolBar * self) {
+    return self->AddSeparator();
+}
+wxToolBarToolBase * wxToolBar_AddStretchableSpace(wxToolBar * self) {
+    return self->AddStretchableSpace();
+}
+wxToolBarToolBase * wxToolBar_AddTool(wxToolBar * self, wxToolBarToolBase * tool) {
+    return self->AddTool(tool);
+}
+wxToolBarToolBase * wxToolBar_AddTool1(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap, const wxString * short_help, wxItemKind kind) {
+    return self->AddTool(tool_id, *label, *bitmap, *short_help, kind);
+}
+wxToolBarToolBase * wxToolBar_AddTool2(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap, const wxBitmap * bmp_disabled, wxItemKind kind, const wxString * short_help, const wxString * long_help, wxObject * client_data) {
+    return self->AddTool(tool_id, *label, *bitmap, *bmp_disabled, kind, *short_help, *long_help, client_data);
+}
+void wxToolBar_ClearTools(wxToolBar * self) {
+    return self->ClearTools();
+}
+bool wxToolBar_DeleteTool(wxToolBar * self, int tool_id) {
+    return self->DeleteTool(tool_id);
+}
+bool wxToolBar_DeleteToolByPos(wxToolBar * self, size_t pos) {
+    return self->DeleteToolByPos(pos);
+}
+void wxToolBar_EnableTool(wxToolBar * self, int tool_id, bool enable) {
+    return self->EnableTool(tool_id, enable);
+}
+wxToolBarToolBase * wxToolBar_FindById(const wxToolBar * self, int id) {
+    return self->FindById(id);
+}
+wxControl * wxToolBar_FindControl(wxToolBar * self, int id) {
+    return self->FindControl(id);
+}
+wxToolBarToolBase * wxToolBar_FindToolForPosition(const wxToolBar * self, wxCoord x, wxCoord y) {
+    return self->FindToolForPosition(x, y);
+}
+wxSize *wxToolBar_GetMargins(const wxToolBar * self) {
+    return new wxSize(self->GetMargins());
+}
+wxSize *wxToolBar_GetToolBitmapSize(const wxToolBar * self) {
+    return new wxSize(self->GetToolBitmapSize());
+}
+const wxToolBarToolBase * wxToolBar_GetToolByPos1(const wxToolBar * self, int pos) {
+    return self->GetToolByPos(pos);
+}
+wxObject * wxToolBar_GetToolClientData(const wxToolBar * self, int tool_id) {
+    return self->GetToolClientData(tool_id);
+}
+bool wxToolBar_GetToolEnabled(const wxToolBar * self, int tool_id) {
+    return self->GetToolEnabled(tool_id);
+}
+wxString *wxToolBar_GetToolLongHelp(const wxToolBar * self, int tool_id) {
+    return new wxString(self->GetToolLongHelp(tool_id));
+}
+int wxToolBar_GetToolPacking(const wxToolBar * self) {
+    return self->GetToolPacking();
+}
+int wxToolBar_GetToolPos(const wxToolBar * self, int tool_id) {
+    return self->GetToolPos(tool_id);
+}
+int wxToolBar_GetToolSeparation(const wxToolBar * self) {
+    return self->GetToolSeparation();
+}
+wxString *wxToolBar_GetToolShortHelp(const wxToolBar * self, int tool_id) {
+    return new wxString(self->GetToolShortHelp(tool_id));
+}
+wxSize *wxToolBar_GetToolSize(const wxToolBar * self) {
+    return new wxSize(self->GetToolSize());
+}
+bool wxToolBar_GetToolState(const wxToolBar * self, int tool_id) {
+    return self->GetToolState(tool_id);
+}
+size_t wxToolBar_GetToolsCount(const wxToolBar * self) {
+    return self->GetToolsCount();
+}
+wxToolBarToolBase * wxToolBar_InsertControl(wxToolBar * self, size_t pos, wxControl * control, const wxString * label) {
+    return self->InsertControl(pos, control, *label);
+}
+wxToolBarToolBase * wxToolBar_InsertSeparator(wxToolBar * self, size_t pos) {
+    return self->InsertSeparator(pos);
+}
+wxToolBarToolBase * wxToolBar_InsertStretchableSpace(wxToolBar * self, size_t pos) {
+    return self->InsertStretchableSpace(pos);
+}
+wxToolBarToolBase * wxToolBar_InsertTool(wxToolBar * self, size_t pos, int tool_id, const wxString * label, const wxBitmap * bitmap, const wxBitmap * bmp_disabled, wxItemKind kind, const wxString * short_help, const wxString * long_help, wxObject * client_data) {
+    return self->InsertTool(pos, tool_id, *label, *bitmap, *bmp_disabled, kind, *short_help, *long_help, client_data);
+}
+wxToolBarToolBase * wxToolBar_InsertTool1(wxToolBar * self, size_t pos, wxToolBarToolBase * tool) {
+    return self->InsertTool(pos, tool);
+}
+bool wxToolBar_OnLeftClick(wxToolBar * self, int tool_id, bool toggle_down) {
+    return self->OnLeftClick(tool_id, toggle_down);
+}
+void wxToolBar_OnMouseEnter(wxToolBar * self, int tool_id) {
+    return self->OnMouseEnter(tool_id);
+}
+void wxToolBar_OnRightClick(wxToolBar * self, int tool_id, long x, long y) {
+    return self->OnRightClick(tool_id, x, y);
+}
+bool wxToolBar_Realize(wxToolBar * self) {
+    return self->Realize();
+}
+wxToolBarToolBase * wxToolBar_RemoveTool(wxToolBar * self, int id) {
+    return self->RemoveTool(id);
+}
+bool wxToolBar_SetDropdownMenu(wxToolBar * self, int id, wxMenu * menu) {
+    return self->SetDropdownMenu(id, menu);
+}
+void wxToolBar_SetMargins(wxToolBar * self, int x, int y) {
+    return self->SetMargins(x, y);
+}
+void wxToolBar_SetMargins1(wxToolBar * self, const wxSize * size) {
+    return self->SetMargins(*size);
+}
+void wxToolBar_SetToolBitmapSize(wxToolBar * self, const wxSize * size) {
+    return self->SetToolBitmapSize(*size);
+}
+void wxToolBar_SetToolClientData(wxToolBar * self, int id, wxObject * client_data) {
+    return self->SetToolClientData(id, client_data);
+}
+void wxToolBar_SetToolDisabledBitmap(wxToolBar * self, int id, const wxBitmap * bitmap) {
+    return self->SetToolDisabledBitmap(id, *bitmap);
+}
+void wxToolBar_SetToolLongHelp(wxToolBar * self, int tool_id, const wxString * help_string) {
+    return self->SetToolLongHelp(tool_id, *help_string);
+}
+void wxToolBar_SetToolNormalBitmap(wxToolBar * self, int id, const wxBitmap * bitmap) {
+    return self->SetToolNormalBitmap(id, *bitmap);
+}
+void wxToolBar_SetToolPacking(wxToolBar * self, int packing) {
+    return self->SetToolPacking(packing);
+}
+void wxToolBar_SetToolSeparation(wxToolBar * self, int separation) {
+    return self->SetToolSeparation(separation);
+}
+void wxToolBar_SetToolShortHelp(wxToolBar * self, int tool_id, const wxString * help_string) {
+    return self->SetToolShortHelp(tool_id, *help_string);
+}
+void wxToolBar_ToggleTool(wxToolBar * self, int tool_id, bool toggle) {
+    return self->ToggleTool(tool_id, toggle);
+}
+wxToolBarToolBase * wxToolBar_CreateTool(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bmp_normal, const wxBitmap * bmp_disabled, wxItemKind kind, wxObject * client_data, const wxString * short_help, const wxString * long_help) {
+    return self->CreateTool(tool_id, *label, *bmp_normal, *bmp_disabled, kind, client_data, *short_help, *long_help);
+}
+wxToolBarToolBase * wxToolBar_CreateTool1(wxToolBar * self, wxControl * control, const wxString * label) {
+    return self->CreateTool(control, *label);
+}
+wxToolBarToolBase * wxToolBar_CreateSeparator(wxToolBar * self) {
+    return self->CreateSeparator();
+}
+
+// CLASS: wxTopLevelWindow
+wxTopLevelWindow *wxTopLevelWindow_new() {
+    return new wxTopLevelWindow();
+}
+wxTopLevelWindow *wxTopLevelWindow_new1(wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxTopLevelWindow(parent, id, *title, *pos, *size, style, *name);
+}
+bool wxTopLevelWindow_Create(wxTopLevelWindow * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, id, *title, *pos, *size, style, *name);
+}
+void wxTopLevelWindow_CenterOnScreen(wxTopLevelWindow * self, int direction) {
+    return self->CenterOnScreen(direction);
+}
+void wxTopLevelWindow_CentreOnScreen(wxTopLevelWindow * self, int direction) {
+    return self->CentreOnScreen(direction);
+}
+bool wxTopLevelWindow_EnableCloseButton(wxTopLevelWindow * self, bool enable) {
+    return self->EnableCloseButton(enable);
+}
+#if wxCHECK_VERSION(3, 1, 0)
+bool wxTopLevelWindow_EnableMaximizeButton(wxTopLevelWindow * self, bool enable) {
+    return self->EnableMaximizeButton(enable);
+}
+bool wxTopLevelWindow_EnableMinimizeButton(wxTopLevelWindow * self, bool enable) {
+    return self->EnableMinimizeButton(enable);
+}
+#endif
+wxWindow * wxTopLevelWindow_GetDefaultItem(const wxTopLevelWindow * self) {
+    return self->GetDefaultItem();
+}
+wxString *wxTopLevelWindow_GetTitle(const wxTopLevelWindow * self) {
+    return new wxString(self->GetTitle());
+}
+void wxTopLevelWindow_Iconize(wxTopLevelWindow * self, bool iconize) {
+    return self->Iconize(iconize);
+}
+bool wxTopLevelWindow_IsActive(wxTopLevelWindow * self) {
+    return self->IsActive();
+}
+bool wxTopLevelWindow_IsAlwaysMaximized(const wxTopLevelWindow * self) {
+    return self->IsAlwaysMaximized();
+}
+bool wxTopLevelWindow_IsFullScreen(const wxTopLevelWindow * self) {
+    return self->IsFullScreen();
+}
+bool wxTopLevelWindow_IsIconized(const wxTopLevelWindow * self) {
+    return self->IsIconized();
+}
+bool wxTopLevelWindow_IsMaximized(const wxTopLevelWindow * self) {
+    return self->IsMaximized();
+}
+void wxTopLevelWindow_Maximize(wxTopLevelWindow * self, bool maximize) {
+    return self->Maximize(maximize);
+}
+#ifdef __WXMSW__
+wxMenu * wxTopLevelWindow_MSWGetSystemMenu(const wxTopLevelWindow * self) {
+    return self->MSWGetSystemMenu();
+}
+#endif
+void wxTopLevelWindow_RequestUserAttention(wxTopLevelWindow * self, int flags) {
+    return self->RequestUserAttention(flags);
+}
+void wxTopLevelWindow_Restore(wxTopLevelWindow * self) {
+    return self->Restore();
+}
+wxWindow * wxTopLevelWindow_SetDefaultItem(wxTopLevelWindow * self, wxWindow * win) {
+    return self->SetDefaultItem(win);
+}
+wxWindow * wxTopLevelWindow_SetTmpDefaultItem(wxTopLevelWindow * self, wxWindow * win) {
+    return self->SetTmpDefaultItem(win);
+}
+wxWindow * wxTopLevelWindow_GetTmpDefaultItem(const wxTopLevelWindow * self) {
+    return self->GetTmpDefaultItem();
+}
+void wxTopLevelWindow_SetIcon(wxTopLevelWindow * self, const wxIcon * icon) {
+    return self->SetIcon(*icon);
+}
+void wxTopLevelWindow_SetIcons(wxTopLevelWindow * self, const wxIconBundle * icons) {
+    return self->SetIcons(*icons);
+}
+void wxTopLevelWindow_SetTitle(wxTopLevelWindow * self, const wxString * title) {
+    return self->SetTitle(*title);
+}
+bool wxTopLevelWindow_ShouldPreventAppExit(const wxTopLevelWindow * self) {
+    return self->ShouldPreventAppExit();
+}
+void wxTopLevelWindow_OSXSetModified(wxTopLevelWindow * self, bool modified) {
+    return self->OSXSetModified(modified);
+}
+bool wxTopLevelWindow_OSXIsModified(const wxTopLevelWindow * self) {
+    return self->OSXIsModified();
+}
+void wxTopLevelWindow_SetRepresentedFilename(wxTopLevelWindow * self, const wxString * filename) {
+    return self->SetRepresentedFilename(*filename);
+}
+void wxTopLevelWindow_ShowWithoutActivating(wxTopLevelWindow * self) {
+    return self->ShowWithoutActivating();
+}
+#if wxCHECK_VERSION(3, 1, 0)
+bool wxTopLevelWindow_EnableFullScreenView(wxTopLevelWindow * self, bool enable) {
+    return self->EnableFullScreenView(enable);
+}
+#endif
+bool wxTopLevelWindow_ShowFullScreen(wxTopLevelWindow * self, bool show, long style) {
+    return self->ShowFullScreen(show, style);
+}
+wxSize *wxTopLevelWindow_GetDefaultSize() {
+    return new wxSize(wxTopLevelWindow::GetDefaultSize());
+}
+
+// CLASS: wxValidator
+wxValidator *wxValidator_new() {
+    return new wxValidator();
+}
+wxObject * wxValidator_Clone(const wxValidator * self) {
+    return self->Clone();
+}
+wxWindow * wxValidator_GetWindow(const wxValidator * self) {
+    return self->GetWindow();
+}
+void wxValidator_SetWindow(wxValidator * self, wxWindow * window) {
+    return self->SetWindow(window);
+}
+bool wxValidator_TransferFromWindow(wxValidator * self) {
+    return self->TransferFromWindow();
+}
+bool wxValidator_TransferToWindow(wxValidator * self) {
+    return self->TransferToWindow();
+}
+bool wxValidator_Validate(wxValidator * self, wxWindow * parent) {
+    return self->Validate(parent);
+}
+void wxValidator_SuppressBellOnError(bool suppress) {
+    return wxValidator::SuppressBellOnError(suppress);
+}
+bool wxValidator_IsSilent() {
+    return wxValidator::IsSilent();
+}
 
 // CLASS: wxWindow
 bool wxWindow_AcceptsFocus(const wxWindow * self) {
@@ -1088,1358 +2440,6 @@ wxWindow *wxWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, c
 }
 bool wxWindow_Create(wxWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return self->Create(parent, id, *pos, *size, style, *name);
-}
-
-// CLASS: wxControl
-wxControl *wxControl_new(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
-    return new wxControl(parent, id, *pos, *size, style, *validator, *name);
-}
-wxControl *wxControl_new1() {
-    return new wxControl();
-}
-bool wxControl_Create(wxControl * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
-    return self->Create(parent, id, *pos, *size, style, *validator, *name);
-}
-void wxControl_Command(wxControl * self, wxCommandEvent * event) {
-    return self->Command(*event);
-}
-wxString *wxControl_GetLabelText(const wxControl * self) {
-    return new wxString(self->GetLabelText());
-}
-wxSize *wxControl_GetSizeFromTextSize(const wxControl * self, int xlen, int ylen) {
-    return new wxSize(self->GetSizeFromTextSize(xlen, ylen));
-}
-wxSize *wxControl_GetSizeFromTextSize1(const wxControl * self, const wxSize * tsize) {
-    return new wxSize(self->GetSizeFromTextSize(*tsize));
-}
-#if wxCHECK_VERSION(3, 1, 0)
-wxSize *wxControl_GetSizeFromText(const wxControl * self, const wxString * text) {
-    return new wxSize(self->GetSizeFromText(*text));
-}
-#endif
-void wxControl_SetLabelText(wxControl * self, const wxString * text) {
-    return self->SetLabelText(*text);
-}
-bool wxControl_SetLabelMarkup(wxControl * self, const wxString * markup) {
-    return self->SetLabelMarkup(*markup);
-}
-wxString *wxControl_GetLabelText1(const wxString * label) {
-    return new wxString(wxControl::GetLabelText(*label));
-}
-wxString *wxControl_RemoveMnemonics(const wxString * str) {
-    return new wxString(wxControl::RemoveMnemonics(*str));
-}
-wxString *wxControl_EscapeMnemonics(const wxString * text) {
-    return new wxString(wxControl::EscapeMnemonics(*text));
-}
-wxString *wxControl_Ellipsize(const wxString * label, const wxDC * dc, wxEllipsizeMode mode, int max_width, int flags) {
-    return new wxString(wxControl::Ellipsize(*label, *dc, mode, max_width, flags));
-}
-
-// CLASS: wxAnyButton
-wxAnyButton *wxAnyButton_new() {
-    return new wxAnyButton();
-}
-wxBitmap *wxAnyButton_GetBitmap(const wxAnyButton * self) {
-    return new wxBitmap(self->GetBitmap());
-}
-wxBitmap *wxAnyButton_GetBitmapCurrent(const wxAnyButton * self) {
-    return new wxBitmap(self->GetBitmapCurrent());
-}
-wxBitmap *wxAnyButton_GetBitmapDisabled(const wxAnyButton * self) {
-    return new wxBitmap(self->GetBitmapDisabled());
-}
-wxBitmap *wxAnyButton_GetBitmapFocus(const wxAnyButton * self) {
-    return new wxBitmap(self->GetBitmapFocus());
-}
-wxBitmap *wxAnyButton_GetBitmapLabel(const wxAnyButton * self) {
-    return new wxBitmap(self->GetBitmapLabel());
-}
-wxBitmap *wxAnyButton_GetBitmapPressed(const wxAnyButton * self) {
-    return new wxBitmap(self->GetBitmapPressed());
-}
-void wxAnyButton_SetBitmapCurrent(wxAnyButton * self, const wxBitmap * bitmap) {
-    return self->SetBitmapCurrent(*bitmap);
-}
-void wxAnyButton_SetBitmapDisabled(wxAnyButton * self, const wxBitmap * bitmap) {
-    return self->SetBitmapDisabled(*bitmap);
-}
-void wxAnyButton_SetBitmapFocus(wxAnyButton * self, const wxBitmap * bitmap) {
-    return self->SetBitmapFocus(*bitmap);
-}
-void wxAnyButton_SetBitmapLabel(wxAnyButton * self, const wxBitmap * bitmap) {
-    return self->SetBitmapLabel(*bitmap);
-}
-void wxAnyButton_SetBitmapPressed(wxAnyButton * self, const wxBitmap * bitmap) {
-    return self->SetBitmapPressed(*bitmap);
-}
-wxSize *wxAnyButton_GetBitmapMargins(wxAnyButton * self) {
-    return new wxSize(self->GetBitmapMargins());
-}
-void wxAnyButton_SetBitmapMargins(wxAnyButton * self, wxCoord x, wxCoord y) {
-    return self->SetBitmapMargins(x, y);
-}
-void wxAnyButton_SetBitmapMargins1(wxAnyButton * self, const wxSize * sz) {
-    return self->SetBitmapMargins(*sz);
-}
-
-// CLASS: wxButton
-wxButton *wxButton_new() {
-    return new wxButton();
-}
-wxButton *wxButton_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
-    return new wxButton(parent, id, *label, *pos, *size, style, *validator, *name);
-}
-bool wxButton_Create(wxButton * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
-    return self->Create(parent, id, *label, *pos, *size, style, *validator, *name);
-}
-bool wxButton_GetAuthNeeded(const wxButton * self) {
-    return self->GetAuthNeeded();
-}
-void wxButton_SetAuthNeeded(wxButton * self, bool needed) {
-    return self->SetAuthNeeded(needed);
-}
-wxWindow * wxButton_SetDefault(wxButton * self) {
-    return self->SetDefault();
-}
-#if wxCHECK_VERSION(3, 1, 0)
-wxSize *wxButton_GetDefaultSize(wxWindow * win) {
-    return new wxSize(wxButton::GetDefaultSize(win));
-}
-#endif
-
-// CLASS: wxMenu
-wxMenu *wxMenu_new() {
-    return new wxMenu();
-}
-wxMenu *wxMenu_new1(long style) {
-    return new wxMenu(style);
-}
-wxMenu *wxMenu_new2(const wxString * title, long style) {
-    return new wxMenu(*title, style);
-}
-wxMenuItem * wxMenu_Append(wxMenu * self, int id, const wxString * item, const wxString * help_string, wxItemKind kind) {
-    return self->Append(id, *item, *help_string, kind);
-}
-wxMenuItem * wxMenu_Append1(wxMenu * self, int id, const wxString * item, wxMenu * sub_menu, const wxString * help_string) {
-    return self->Append(id, *item, sub_menu, *help_string);
-}
-wxMenuItem * wxMenu_Append2(wxMenu * self, wxMenuItem * menu_item) {
-    return self->Append(menu_item);
-}
-wxMenuItem * wxMenu_AppendCheckItem(wxMenu * self, int id, const wxString * item, const wxString * help) {
-    return self->AppendCheckItem(id, *item, *help);
-}
-wxMenuItem * wxMenu_AppendRadioItem(wxMenu * self, int id, const wxString * item, const wxString * help) {
-    return self->AppendRadioItem(id, *item, *help);
-}
-wxMenuItem * wxMenu_AppendSeparator(wxMenu * self) {
-    return self->AppendSeparator();
-}
-wxMenuItem * wxMenu_AppendSubMenu(wxMenu * self, wxMenu * submenu, const wxString * text, const wxString * help) {
-    return self->AppendSubMenu(submenu, *text, *help);
-}
-void wxMenu_Break(wxMenu * self) {
-    return self->Break();
-}
-void wxMenu_Check(wxMenu * self, int id, bool check) {
-    return self->Check(id, check);
-}
-bool wxMenu_Delete(wxMenu * self, int id) {
-    return self->Delete(id);
-}
-bool wxMenu_Delete1(wxMenu * self, wxMenuItem * item) {
-    return self->Delete(item);
-}
-bool wxMenu_Destroy(wxMenu * self, int id) {
-    return self->Destroy(id);
-}
-bool wxMenu_Destroy1(wxMenu * self, wxMenuItem * item) {
-    return self->Destroy(item);
-}
-void wxMenu_Enable(wxMenu * self, int id, bool enable) {
-    return self->Enable(id, enable);
-}
-wxMenuItem * wxMenu_FindChildItem(const wxMenu * self, int id, size_t * pos) {
-    return self->FindChildItem(id, pos);
-}
-int wxMenu_FindItem(const wxMenu * self, const wxString * item_string) {
-    return self->FindItem(*item_string);
-}
-wxMenuItem * wxMenu_FindItem1(const wxMenu * self, int id, wxMenu ** menu) {
-    return self->FindItem(id, menu);
-}
-wxMenuItem * wxMenu_FindItemByPosition(const wxMenu * self, size_t position) {
-    return self->FindItemByPosition(position);
-}
-wxString *wxMenu_GetHelpString(const wxMenu * self, int id) {
-    return new wxString(self->GetHelpString(id));
-}
-wxString *wxMenu_GetLabel(const wxMenu * self, int id) {
-    return new wxString(self->GetLabel(id));
-}
-wxString *wxMenu_GetLabelText(const wxMenu * self, int id) {
-    return new wxString(self->GetLabelText(id));
-}
-size_t wxMenu_GetMenuItemCount(const wxMenu * self) {
-    return self->GetMenuItemCount();
-}
-wxString *wxMenu_GetTitle(const wxMenu * self) {
-    return new wxString(self->GetTitle());
-}
-wxMenuItem * wxMenu_Insert(wxMenu * self, size_t pos, wxMenuItem * menu_item) {
-    return self->Insert(pos, menu_item);
-}
-wxMenuItem * wxMenu_Insert1(wxMenu * self, size_t pos, int id, const wxString * item, const wxString * help_string, wxItemKind kind) {
-    return self->Insert(pos, id, *item, *help_string, kind);
-}
-wxMenuItem * wxMenu_Insert2(wxMenu * self, size_t pos, int id, const wxString * text, wxMenu * submenu, const wxString * help) {
-    return self->Insert(pos, id, *text, submenu, *help);
-}
-wxMenuItem * wxMenu_InsertCheckItem(wxMenu * self, size_t pos, int id, const wxString * item, const wxString * help_string) {
-    return self->InsertCheckItem(pos, id, *item, *help_string);
-}
-wxMenuItem * wxMenu_InsertRadioItem(wxMenu * self, size_t pos, int id, const wxString * item, const wxString * help_string) {
-    return self->InsertRadioItem(pos, id, *item, *help_string);
-}
-wxMenuItem * wxMenu_InsertSeparator(wxMenu * self, size_t pos) {
-    return self->InsertSeparator(pos);
-}
-bool wxMenu_IsChecked(const wxMenu * self, int id) {
-    return self->IsChecked(id);
-}
-bool wxMenu_IsEnabled(const wxMenu * self, int id) {
-    return self->IsEnabled(id);
-}
-wxMenuItem * wxMenu_Prepend(wxMenu * self, wxMenuItem * item) {
-    return self->Prepend(item);
-}
-wxMenuItem * wxMenu_Prepend1(wxMenu * self, int id, const wxString * item, const wxString * help_string, wxItemKind kind) {
-    return self->Prepend(id, *item, *help_string, kind);
-}
-wxMenuItem * wxMenu_Prepend2(wxMenu * self, int id, const wxString * text, wxMenu * submenu, const wxString * help) {
-    return self->Prepend(id, *text, submenu, *help);
-}
-wxMenuItem * wxMenu_PrependCheckItem(wxMenu * self, int id, const wxString * item, const wxString * help_string) {
-    return self->PrependCheckItem(id, *item, *help_string);
-}
-wxMenuItem * wxMenu_PrependRadioItem(wxMenu * self, int id, const wxString * item, const wxString * help_string) {
-    return self->PrependRadioItem(id, *item, *help_string);
-}
-wxMenuItem * wxMenu_PrependSeparator(wxMenu * self) {
-    return self->PrependSeparator();
-}
-wxMenuItem * wxMenu_Remove(wxMenu * self, int id) {
-    return self->Remove(id);
-}
-wxMenuItem * wxMenu_Remove1(wxMenu * self, wxMenuItem * item) {
-    return self->Remove(item);
-}
-void wxMenu_SetHelpString(wxMenu * self, int id, const wxString * help_string) {
-    return self->SetHelpString(id, *help_string);
-}
-void wxMenu_SetLabel(wxMenu * self, int id, const wxString * label) {
-    return self->SetLabel(id, *label);
-}
-void wxMenu_SetTitle(wxMenu * self, const wxString * title) {
-    return self->SetTitle(*title);
-}
-void wxMenu_UpdateUI(wxMenu * self, wxEvtHandler * source) {
-    return self->UpdateUI(source);
-}
-void wxMenu_SetInvokingWindow(wxMenu * self, wxWindow * win) {
-    return self->SetInvokingWindow(win);
-}
-wxWindow * wxMenu_GetInvokingWindow(const wxMenu * self) {
-    return self->GetInvokingWindow();
-}
-wxWindow * wxMenu_GetWindow(const wxMenu * self) {
-    return self->GetWindow();
-}
-long wxMenu_GetStyle(const wxMenu * self) {
-    return self->GetStyle();
-}
-void wxMenu_SetParent(wxMenu * self, wxMenu * parent) {
-    return self->SetParent(parent);
-}
-wxMenu * wxMenu_GetParent(const wxMenu * self) {
-    return self->GetParent();
-}
-void wxMenu_Attach(wxMenu * self, wxMenuBar * menubar) {
-    return self->Attach(menubar);
-}
-void wxMenu_Detach(wxMenu * self) {
-    return self->Detach();
-}
-bool wxMenu_IsAttached(const wxMenu * self) {
-    return self->IsAttached();
-}
-
-// CLASS: wxMenuBar
-wxMenuBar *wxMenuBar_new(long style) {
-    return new wxMenuBar(style);
-}
-bool wxMenuBar_Append(wxMenuBar * self, wxMenu * menu, const wxString * title) {
-    return self->Append(menu, *title);
-}
-void wxMenuBar_Check(wxMenuBar * self, int id, bool check) {
-    return self->Check(id, check);
-}
-void wxMenuBar_Enable(wxMenuBar * self, int id, bool enable) {
-    return self->Enable(id, enable);
-}
-bool wxMenuBar_IsEnabledTop(const wxMenuBar * self, size_t pos) {
-    return self->IsEnabledTop(pos);
-}
-void wxMenuBar_EnableTop(wxMenuBar * self, size_t pos, bool enable) {
-    return self->EnableTop(pos, enable);
-}
-wxMenuItem * wxMenuBar_FindItem(const wxMenuBar * self, int id, wxMenu ** menu) {
-    return self->FindItem(id, menu);
-}
-int wxMenuBar_FindMenu(const wxMenuBar * self, const wxString * title) {
-    return self->FindMenu(*title);
-}
-int wxMenuBar_FindMenuItem(const wxMenuBar * self, const wxString * menu_string, const wxString * item_string) {
-    return self->FindMenuItem(*menu_string, *item_string);
-}
-wxString *wxMenuBar_GetHelpString(const wxMenuBar * self, int id) {
-    return new wxString(self->GetHelpString(id));
-}
-wxString *wxMenuBar_GetLabel(const wxMenuBar * self, int id) {
-    return new wxString(self->GetLabel(id));
-}
-wxMenu * wxMenuBar_GetMenu(const wxMenuBar * self, size_t menu_index) {
-    return self->GetMenu(menu_index);
-}
-size_t wxMenuBar_GetMenuCount(const wxMenuBar * self) {
-    return self->GetMenuCount();
-}
-wxString *wxMenuBar_GetMenuLabel(const wxMenuBar * self, size_t pos) {
-    return new wxString(self->GetMenuLabel(pos));
-}
-wxString *wxMenuBar_GetMenuLabelText(const wxMenuBar * self, size_t pos) {
-    return new wxString(self->GetMenuLabelText(pos));
-}
-bool wxMenuBar_Insert(wxMenuBar * self, size_t pos, wxMenu * menu, const wxString * title) {
-    return self->Insert(pos, menu, *title);
-}
-bool wxMenuBar_IsChecked(const wxMenuBar * self, int id) {
-    return self->IsChecked(id);
-}
-bool wxMenuBar_IsEnabled(const wxMenuBar * self, int id) {
-    return self->IsEnabled(id);
-}
-wxMenu * wxMenuBar_Remove(wxMenuBar * self, size_t pos) {
-    return self->Remove(pos);
-}
-wxMenu * wxMenuBar_Replace(wxMenuBar * self, size_t pos, wxMenu * menu, const wxString * title) {
-    return self->Replace(pos, menu, *title);
-}
-void wxMenuBar_SetHelpString(wxMenuBar * self, int id, const wxString * help_string) {
-    return self->SetHelpString(id, *help_string);
-}
-void wxMenuBar_SetLabel(wxMenuBar * self, int id, const wxString * label) {
-    return self->SetLabel(id, *label);
-}
-void wxMenuBar_SetMenuLabel(wxMenuBar * self, size_t pos, const wxString * label) {
-    return self->SetMenuLabel(pos, *label);
-}
-#ifdef __WXOSX__
-wxMenu * wxMenuBar_OSXGetAppleMenu(const wxMenuBar * self) {
-    return self->OSXGetAppleMenu();
-}
-#endif
-wxFrame * wxMenuBar_GetFrame(const wxMenuBar * self) {
-    return self->GetFrame();
-}
-bool wxMenuBar_IsAttached(const wxMenuBar * self) {
-    return self->IsAttached();
-}
-void wxMenuBar_Attach(wxMenuBar * self, wxFrame * frame) {
-    return self->Attach(frame);
-}
-void wxMenuBar_Detach(wxMenuBar * self) {
-    return self->Detach();
-}
-#ifdef __WXOSX__
-void wxMenuBar_MacSetCommonMenuBar(wxMenuBar * menubar) {
-    return wxMenuBar::MacSetCommonMenuBar(menubar);
-}
-wxMenuBar * wxMenuBar_MacGetCommonMenuBar() {
-    return wxMenuBar::MacGetCommonMenuBar();
-}
-#endif
-
-// CLASS: wxNonOwnedWindow
-bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow * self, const wxRegion * region) {
-    return self->SetShape(*region);
-}
-bool wxNonOwnedWindow_SetShape1(wxNonOwnedWindow * self, const wxGraphicsPath * path) {
-    return self->SetShape(*path);
-}
-
-// CLASS: wxToolBar
-wxToolBar *wxToolBar_new() {
-    return new wxToolBar();
-}
-wxToolBar *wxToolBar_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
-    return new wxToolBar(parent, id, *pos, *size, style, *name);
-}
-wxToolBarToolBase * wxToolBar_AddCheckTool(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap1, const wxBitmap * bmp_disabled, const wxString * short_help, const wxString * long_help, wxObject * client_data) {
-    return self->AddCheckTool(tool_id, *label, *bitmap1, *bmp_disabled, *short_help, *long_help, client_data);
-}
-wxToolBarToolBase * wxToolBar_AddControl(wxToolBar * self, wxControl * control, const wxString * label) {
-    return self->AddControl(control, *label);
-}
-wxToolBarToolBase * wxToolBar_AddRadioTool(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap1, const wxBitmap * bmp_disabled, const wxString * short_help, const wxString * long_help, wxObject * client_data) {
-    return self->AddRadioTool(tool_id, *label, *bitmap1, *bmp_disabled, *short_help, *long_help, client_data);
-}
-wxToolBarToolBase * wxToolBar_AddSeparator(wxToolBar * self) {
-    return self->AddSeparator();
-}
-wxToolBarToolBase * wxToolBar_AddStretchableSpace(wxToolBar * self) {
-    return self->AddStretchableSpace();
-}
-wxToolBarToolBase * wxToolBar_AddTool(wxToolBar * self, wxToolBarToolBase * tool) {
-    return self->AddTool(tool);
-}
-wxToolBarToolBase * wxToolBar_AddTool1(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap, const wxString * short_help, wxItemKind kind) {
-    return self->AddTool(tool_id, *label, *bitmap, *short_help, kind);
-}
-wxToolBarToolBase * wxToolBar_AddTool2(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap, const wxBitmap * bmp_disabled, wxItemKind kind, const wxString * short_help, const wxString * long_help, wxObject * client_data) {
-    return self->AddTool(tool_id, *label, *bitmap, *bmp_disabled, kind, *short_help, *long_help, client_data);
-}
-void wxToolBar_ClearTools(wxToolBar * self) {
-    return self->ClearTools();
-}
-bool wxToolBar_DeleteTool(wxToolBar * self, int tool_id) {
-    return self->DeleteTool(tool_id);
-}
-bool wxToolBar_DeleteToolByPos(wxToolBar * self, size_t pos) {
-    return self->DeleteToolByPos(pos);
-}
-void wxToolBar_EnableTool(wxToolBar * self, int tool_id, bool enable) {
-    return self->EnableTool(tool_id, enable);
-}
-wxToolBarToolBase * wxToolBar_FindById(const wxToolBar * self, int id) {
-    return self->FindById(id);
-}
-wxControl * wxToolBar_FindControl(wxToolBar * self, int id) {
-    return self->FindControl(id);
-}
-wxToolBarToolBase * wxToolBar_FindToolForPosition(const wxToolBar * self, wxCoord x, wxCoord y) {
-    return self->FindToolForPosition(x, y);
-}
-wxSize *wxToolBar_GetMargins(const wxToolBar * self) {
-    return new wxSize(self->GetMargins());
-}
-wxSize *wxToolBar_GetToolBitmapSize(const wxToolBar * self) {
-    return new wxSize(self->GetToolBitmapSize());
-}
-const wxToolBarToolBase * wxToolBar_GetToolByPos1(const wxToolBar * self, int pos) {
-    return self->GetToolByPos(pos);
-}
-wxObject * wxToolBar_GetToolClientData(const wxToolBar * self, int tool_id) {
-    return self->GetToolClientData(tool_id);
-}
-bool wxToolBar_GetToolEnabled(const wxToolBar * self, int tool_id) {
-    return self->GetToolEnabled(tool_id);
-}
-wxString *wxToolBar_GetToolLongHelp(const wxToolBar * self, int tool_id) {
-    return new wxString(self->GetToolLongHelp(tool_id));
-}
-int wxToolBar_GetToolPacking(const wxToolBar * self) {
-    return self->GetToolPacking();
-}
-int wxToolBar_GetToolPos(const wxToolBar * self, int tool_id) {
-    return self->GetToolPos(tool_id);
-}
-int wxToolBar_GetToolSeparation(const wxToolBar * self) {
-    return self->GetToolSeparation();
-}
-wxString *wxToolBar_GetToolShortHelp(const wxToolBar * self, int tool_id) {
-    return new wxString(self->GetToolShortHelp(tool_id));
-}
-wxSize *wxToolBar_GetToolSize(const wxToolBar * self) {
-    return new wxSize(self->GetToolSize());
-}
-bool wxToolBar_GetToolState(const wxToolBar * self, int tool_id) {
-    return self->GetToolState(tool_id);
-}
-size_t wxToolBar_GetToolsCount(const wxToolBar * self) {
-    return self->GetToolsCount();
-}
-wxToolBarToolBase * wxToolBar_InsertControl(wxToolBar * self, size_t pos, wxControl * control, const wxString * label) {
-    return self->InsertControl(pos, control, *label);
-}
-wxToolBarToolBase * wxToolBar_InsertSeparator(wxToolBar * self, size_t pos) {
-    return self->InsertSeparator(pos);
-}
-wxToolBarToolBase * wxToolBar_InsertStretchableSpace(wxToolBar * self, size_t pos) {
-    return self->InsertStretchableSpace(pos);
-}
-wxToolBarToolBase * wxToolBar_InsertTool(wxToolBar * self, size_t pos, int tool_id, const wxString * label, const wxBitmap * bitmap, const wxBitmap * bmp_disabled, wxItemKind kind, const wxString * short_help, const wxString * long_help, wxObject * client_data) {
-    return self->InsertTool(pos, tool_id, *label, *bitmap, *bmp_disabled, kind, *short_help, *long_help, client_data);
-}
-wxToolBarToolBase * wxToolBar_InsertTool1(wxToolBar * self, size_t pos, wxToolBarToolBase * tool) {
-    return self->InsertTool(pos, tool);
-}
-bool wxToolBar_OnLeftClick(wxToolBar * self, int tool_id, bool toggle_down) {
-    return self->OnLeftClick(tool_id, toggle_down);
-}
-void wxToolBar_OnMouseEnter(wxToolBar * self, int tool_id) {
-    return self->OnMouseEnter(tool_id);
-}
-void wxToolBar_OnRightClick(wxToolBar * self, int tool_id, long x, long y) {
-    return self->OnRightClick(tool_id, x, y);
-}
-bool wxToolBar_Realize(wxToolBar * self) {
-    return self->Realize();
-}
-wxToolBarToolBase * wxToolBar_RemoveTool(wxToolBar * self, int id) {
-    return self->RemoveTool(id);
-}
-bool wxToolBar_SetDropdownMenu(wxToolBar * self, int id, wxMenu * menu) {
-    return self->SetDropdownMenu(id, menu);
-}
-void wxToolBar_SetMargins(wxToolBar * self, int x, int y) {
-    return self->SetMargins(x, y);
-}
-void wxToolBar_SetMargins1(wxToolBar * self, const wxSize * size) {
-    return self->SetMargins(*size);
-}
-void wxToolBar_SetToolBitmapSize(wxToolBar * self, const wxSize * size) {
-    return self->SetToolBitmapSize(*size);
-}
-void wxToolBar_SetToolClientData(wxToolBar * self, int id, wxObject * client_data) {
-    return self->SetToolClientData(id, client_data);
-}
-void wxToolBar_SetToolDisabledBitmap(wxToolBar * self, int id, const wxBitmap * bitmap) {
-    return self->SetToolDisabledBitmap(id, *bitmap);
-}
-void wxToolBar_SetToolLongHelp(wxToolBar * self, int tool_id, const wxString * help_string) {
-    return self->SetToolLongHelp(tool_id, *help_string);
-}
-void wxToolBar_SetToolNormalBitmap(wxToolBar * self, int id, const wxBitmap * bitmap) {
-    return self->SetToolNormalBitmap(id, *bitmap);
-}
-void wxToolBar_SetToolPacking(wxToolBar * self, int packing) {
-    return self->SetToolPacking(packing);
-}
-void wxToolBar_SetToolSeparation(wxToolBar * self, int separation) {
-    return self->SetToolSeparation(separation);
-}
-void wxToolBar_SetToolShortHelp(wxToolBar * self, int tool_id, const wxString * help_string) {
-    return self->SetToolShortHelp(tool_id, *help_string);
-}
-void wxToolBar_ToggleTool(wxToolBar * self, int tool_id, bool toggle) {
-    return self->ToggleTool(tool_id, toggle);
-}
-wxToolBarToolBase * wxToolBar_CreateTool(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bmp_normal, const wxBitmap * bmp_disabled, wxItemKind kind, wxObject * client_data, const wxString * short_help, const wxString * long_help) {
-    return self->CreateTool(tool_id, *label, *bmp_normal, *bmp_disabled, kind, client_data, *short_help, *long_help);
-}
-wxToolBarToolBase * wxToolBar_CreateTool1(wxToolBar * self, wxControl * control, const wxString * label) {
-    return self->CreateTool(control, *label);
-}
-wxToolBarToolBase * wxToolBar_CreateSeparator(wxToolBar * self) {
-    return self->CreateSeparator();
-}
-
-// CLASS: wxTopLevelWindow
-wxTopLevelWindow *wxTopLevelWindow_new() {
-    return new wxTopLevelWindow();
-}
-wxTopLevelWindow *wxTopLevelWindow_new1(wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
-    return new wxTopLevelWindow(parent, id, *title, *pos, *size, style, *name);
-}
-bool wxTopLevelWindow_Create(wxTopLevelWindow * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
-    return self->Create(parent, id, *title, *pos, *size, style, *name);
-}
-void wxTopLevelWindow_CenterOnScreen(wxTopLevelWindow * self, int direction) {
-    return self->CenterOnScreen(direction);
-}
-void wxTopLevelWindow_CentreOnScreen(wxTopLevelWindow * self, int direction) {
-    return self->CentreOnScreen(direction);
-}
-bool wxTopLevelWindow_EnableCloseButton(wxTopLevelWindow * self, bool enable) {
-    return self->EnableCloseButton(enable);
-}
-#if wxCHECK_VERSION(3, 1, 0)
-bool wxTopLevelWindow_EnableMaximizeButton(wxTopLevelWindow * self, bool enable) {
-    return self->EnableMaximizeButton(enable);
-}
-bool wxTopLevelWindow_EnableMinimizeButton(wxTopLevelWindow * self, bool enable) {
-    return self->EnableMinimizeButton(enable);
-}
-#endif
-wxWindow * wxTopLevelWindow_GetDefaultItem(const wxTopLevelWindow * self) {
-    return self->GetDefaultItem();
-}
-wxString *wxTopLevelWindow_GetTitle(const wxTopLevelWindow * self) {
-    return new wxString(self->GetTitle());
-}
-void wxTopLevelWindow_Iconize(wxTopLevelWindow * self, bool iconize) {
-    return self->Iconize(iconize);
-}
-bool wxTopLevelWindow_IsActive(wxTopLevelWindow * self) {
-    return self->IsActive();
-}
-bool wxTopLevelWindow_IsAlwaysMaximized(const wxTopLevelWindow * self) {
-    return self->IsAlwaysMaximized();
-}
-bool wxTopLevelWindow_IsFullScreen(const wxTopLevelWindow * self) {
-    return self->IsFullScreen();
-}
-bool wxTopLevelWindow_IsIconized(const wxTopLevelWindow * self) {
-    return self->IsIconized();
-}
-bool wxTopLevelWindow_IsMaximized(const wxTopLevelWindow * self) {
-    return self->IsMaximized();
-}
-void wxTopLevelWindow_Maximize(wxTopLevelWindow * self, bool maximize) {
-    return self->Maximize(maximize);
-}
-#ifdef __WXMSW__
-wxMenu * wxTopLevelWindow_MSWGetSystemMenu(const wxTopLevelWindow * self) {
-    return self->MSWGetSystemMenu();
-}
-#endif
-void wxTopLevelWindow_RequestUserAttention(wxTopLevelWindow * self, int flags) {
-    return self->RequestUserAttention(flags);
-}
-void wxTopLevelWindow_Restore(wxTopLevelWindow * self) {
-    return self->Restore();
-}
-wxWindow * wxTopLevelWindow_SetDefaultItem(wxTopLevelWindow * self, wxWindow * win) {
-    return self->SetDefaultItem(win);
-}
-wxWindow * wxTopLevelWindow_SetTmpDefaultItem(wxTopLevelWindow * self, wxWindow * win) {
-    return self->SetTmpDefaultItem(win);
-}
-wxWindow * wxTopLevelWindow_GetTmpDefaultItem(const wxTopLevelWindow * self) {
-    return self->GetTmpDefaultItem();
-}
-void wxTopLevelWindow_SetIcon(wxTopLevelWindow * self, const wxIcon * icon) {
-    return self->SetIcon(*icon);
-}
-void wxTopLevelWindow_SetIcons(wxTopLevelWindow * self, const wxIconBundle * icons) {
-    return self->SetIcons(*icons);
-}
-void wxTopLevelWindow_SetTitle(wxTopLevelWindow * self, const wxString * title) {
-    return self->SetTitle(*title);
-}
-bool wxTopLevelWindow_ShouldPreventAppExit(const wxTopLevelWindow * self) {
-    return self->ShouldPreventAppExit();
-}
-void wxTopLevelWindow_OSXSetModified(wxTopLevelWindow * self, bool modified) {
-    return self->OSXSetModified(modified);
-}
-bool wxTopLevelWindow_OSXIsModified(const wxTopLevelWindow * self) {
-    return self->OSXIsModified();
-}
-void wxTopLevelWindow_SetRepresentedFilename(wxTopLevelWindow * self, const wxString * filename) {
-    return self->SetRepresentedFilename(*filename);
-}
-void wxTopLevelWindow_ShowWithoutActivating(wxTopLevelWindow * self) {
-    return self->ShowWithoutActivating();
-}
-#if wxCHECK_VERSION(3, 1, 0)
-bool wxTopLevelWindow_EnableFullScreenView(wxTopLevelWindow * self, bool enable) {
-    return self->EnableFullScreenView(enable);
-}
-#endif
-bool wxTopLevelWindow_ShowFullScreen(wxTopLevelWindow * self, bool show, long style) {
-    return self->ShowFullScreen(show, style);
-}
-wxSize *wxTopLevelWindow_GetDefaultSize() {
-    return new wxSize(wxTopLevelWindow::GetDefaultSize());
-}
-
-// CLASS: wxFrame
-wxFrame *wxFrame_new() {
-    return new wxFrame();
-}
-wxFrame *wxFrame_new1(wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
-    return new wxFrame(parent, id, *title, *pos, *size, style, *name);
-}
-void wxFrame_Centre(wxFrame * self, int direction) {
-    return self->Centre(direction);
-}
-bool wxFrame_Create(wxFrame * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
-    return self->Create(parent, id, *title, *pos, *size, style, *name);
-}
-wxStatusBar * wxFrame_CreateStatusBar(wxFrame * self, int number, long style, wxWindowID id, const wxString * name) {
-    return self->CreateStatusBar(number, style, id, *name);
-}
-wxToolBar * wxFrame_CreateToolBar(wxFrame * self, long style, wxWindowID id, const wxString * name) {
-    return self->CreateToolBar(style, id, *name);
-}
-void wxFrame_DoGiveHelp(wxFrame * self, const wxString * text, bool show) {
-    return self->DoGiveHelp(*text, show);
-}
-wxMenuBar * wxFrame_GetMenuBar(const wxFrame * self) {
-    return self->GetMenuBar();
-}
-wxStatusBar * wxFrame_GetStatusBar(const wxFrame * self) {
-    return self->GetStatusBar();
-}
-int wxFrame_GetStatusBarPane(const wxFrame * self) {
-    return self->GetStatusBarPane();
-}
-wxToolBar * wxFrame_GetToolBar(const wxFrame * self) {
-    return self->GetToolBar();
-}
-wxStatusBar * wxFrame_OnCreateStatusBar(wxFrame * self, int number, long style, wxWindowID id, const wxString * name) {
-    return self->OnCreateStatusBar(number, style, id, *name);
-}
-wxToolBar * wxFrame_OnCreateToolBar(wxFrame * self, long style, wxWindowID id, const wxString * name) {
-    return self->OnCreateToolBar(style, id, *name);
-}
-bool wxFrame_ProcessCommand(wxFrame * self, int id) {
-    return self->ProcessCommand(id);
-}
-void wxFrame_SetMenuBar(wxFrame * self, wxMenuBar * menu_bar) {
-    return self->SetMenuBar(menu_bar);
-}
-void wxFrame_SetStatusBar(wxFrame * self, wxStatusBar * status_bar) {
-    return self->SetStatusBar(status_bar);
-}
-void wxFrame_SetStatusBarPane(wxFrame * self, int n) {
-    return self->SetStatusBarPane(n);
-}
-void wxFrame_SetStatusText(wxFrame * self, const wxString * text, int number) {
-    return self->SetStatusText(*text, number);
-}
-void wxFrame_SetStatusWidths(wxFrame * self, int n, const int * widths_field) {
-    return self->SetStatusWidths(n, widths_field);
-}
-void wxFrame_SetToolBar(wxFrame * self, wxToolBar * tool_bar) {
-    return self->SetToolBar(tool_bar);
-}
-#ifdef __WXMSW__
-wxTaskBarButton * wxFrame_MSWGetTaskBarButton(wxFrame * self) {
-    return self->MSWGetTaskBarButton();
-}
-#endif
-void wxFrame_PushStatusText(wxFrame * self, const wxString * text, int number) {
-    return self->PushStatusText(*text, number);
-}
-void wxFrame_PopStatusText(wxFrame * self, int number) {
-    return self->PopStatusText(number);
-}
-
-// CLASS: wxPanel
-wxPanel *wxPanel_new() {
-    return new wxPanel();
-}
-wxPanel *wxPanel_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
-    return new wxPanel(parent, id, *pos, *size, style, *name);
-}
-bool wxPanel_Create(wxPanel * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
-    return self->Create(parent, id, *pos, *size, style, *name);
-}
-void wxPanel_OnSysColourChanged(wxPanel * self, wxSysColourChangedEvent * event) {
-    return self->OnSysColourChanged(*event);
-}
-void wxPanel_SetFocusIgnoringChildren(wxPanel * self) {
-    return self->SetFocusIgnoringChildren();
-}
-
-// CLASS: wxPoint
-void wxPoint_delete(wxPoint *self) {
-    delete self;
-}
-bool wxPoint_IsFullySpecified(const wxPoint * self) {
-    return self->IsFullySpecified();
-}
-void wxPoint_SetDefaults(wxPoint * self, const wxPoint * pt) {
-    return self->SetDefaults(*pt);
-}
-wxPoint *wxPoint_new() {
-    return new wxPoint();
-}
-wxPoint *wxPoint_new1(int x, int y) {
-    return new wxPoint(x, y);
-}
-wxPoint *wxPoint_new2(const wxRealPoint * pt) {
-    return new wxPoint(*pt);
-}
-
-// CLASS: wxRect
-void wxRect_delete(wxRect *self) {
-    delete self;
-}
-wxRect *wxRect_new() {
-    return new wxRect();
-}
-wxRect *wxRect_new1(int x, int y, int width, int height) {
-    return new wxRect(x, y, width, height);
-}
-wxRect *wxRect_new2(const wxPoint * top_left, const wxPoint * bottom_right) {
-    return new wxRect(*top_left, *bottom_right);
-}
-wxRect *wxRect_new3(const wxPoint * pos, const wxSize * size) {
-    return new wxRect(*pos, *size);
-}
-wxRect *wxRect_new4(const wxSize * size) {
-    return new wxRect(*size);
-}
-wxRect *wxRect_CentreIn(const wxRect * self, const wxRect * r, int dir) {
-    return new wxRect(self->CentreIn(*r, dir));
-}
-wxRect *wxRect_CenterIn(const wxRect * self, const wxRect * r, int dir) {
-    return new wxRect(self->CenterIn(*r, dir));
-}
-bool wxRect_Contains(const wxRect * self, int x, int y) {
-    return self->Contains(x, y);
-}
-bool wxRect_Contains1(const wxRect * self, const wxPoint * pt) {
-    return self->Contains(*pt);
-}
-bool wxRect_Contains2(const wxRect * self, const wxRect * rect) {
-    return self->Contains(*rect);
-}
-wxRect *wxRect_Deflate3(const wxRect * self, wxCoord dx, wxCoord dy) {
-    return new wxRect(self->Deflate(dx, dy));
-}
-int wxRect_GetBottom(const wxRect * self) {
-    return self->GetBottom();
-}
-wxPoint *wxRect_GetBottomLeft(const wxRect * self) {
-    return new wxPoint(self->GetBottomLeft());
-}
-wxPoint *wxRect_GetBottomRight(const wxRect * self) {
-    return new wxPoint(self->GetBottomRight());
-}
-int wxRect_GetHeight(const wxRect * self) {
-    return self->GetHeight();
-}
-int wxRect_GetLeft(const wxRect * self) {
-    return self->GetLeft();
-}
-wxPoint *wxRect_GetPosition(const wxRect * self) {
-    return new wxPoint(self->GetPosition());
-}
-int wxRect_GetRight(const wxRect * self) {
-    return self->GetRight();
-}
-wxSize *wxRect_GetSize(const wxRect * self) {
-    return new wxSize(self->GetSize());
-}
-int wxRect_GetTop(const wxRect * self) {
-    return self->GetTop();
-}
-wxPoint *wxRect_GetTopLeft(const wxRect * self) {
-    return new wxPoint(self->GetTopLeft());
-}
-wxPoint *wxRect_GetTopRight(const wxRect * self) {
-    return new wxPoint(self->GetTopRight());
-}
-int wxRect_GetWidth(const wxRect * self) {
-    return self->GetWidth();
-}
-int wxRect_GetX(const wxRect * self) {
-    return self->GetX();
-}
-int wxRect_GetY(const wxRect * self) {
-    return self->GetY();
-}
-wxRect *wxRect_Inflate3(const wxRect * self, wxCoord dx, wxCoord dy) {
-    return new wxRect(self->Inflate(dx, dy));
-}
-wxRect *wxRect_Intersect1(const wxRect * self, const wxRect * rect) {
-    return new wxRect(self->Intersect(*rect));
-}
-bool wxRect_Intersects(const wxRect * self, const wxRect * rect) {
-    return self->Intersects(*rect);
-}
-bool wxRect_IsEmpty(const wxRect * self) {
-    return self->IsEmpty();
-}
-void wxRect_Offset(wxRect * self, wxCoord dx, wxCoord dy) {
-    return self->Offset(dx, dy);
-}
-void wxRect_Offset1(wxRect * self, const wxPoint * pt) {
-    return self->Offset(*pt);
-}
-void wxRect_SetHeight(wxRect * self, int height) {
-    return self->SetHeight(height);
-}
-void wxRect_SetPosition(wxRect * self, const wxPoint * pos) {
-    return self->SetPosition(*pos);
-}
-void wxRect_SetSize(wxRect * self, const wxSize * s) {
-    return self->SetSize(*s);
-}
-void wxRect_SetWidth(wxRect * self, int width) {
-    return self->SetWidth(width);
-}
-void wxRect_SetX(wxRect * self, int x) {
-    return self->SetX(x);
-}
-void wxRect_SetY(wxRect * self, int y) {
-    return self->SetY(y);
-}
-void wxRect_SetLeft(wxRect * self, int left) {
-    return self->SetLeft(left);
-}
-void wxRect_SetRight(wxRect * self, int right) {
-    return self->SetRight(right);
-}
-void wxRect_SetTop(wxRect * self, int top) {
-    return self->SetTop(top);
-}
-void wxRect_SetBottom(wxRect * self, int bottom) {
-    return self->SetBottom(bottom);
-}
-void wxRect_SetTopLeft(wxRect * self, const wxPoint * p) {
-    return self->SetTopLeft(*p);
-}
-void wxRect_SetBottomRight(wxRect * self, const wxPoint * p) {
-    return self->SetBottomRight(*p);
-}
-void wxRect_SetTopRight(wxRect * self, const wxPoint * p) {
-    return self->SetTopRight(*p);
-}
-void wxRect_SetBottomLeft(wxRect * self, const wxPoint * p) {
-    return self->SetBottomLeft(*p);
-}
-wxRect *wxRect_Union(const wxRect * self, const wxRect * rect) {
-    return new wxRect(self->Union(*rect));
-}
-
-// CLASS: wxSize
-void wxSize_delete(wxSize *self) {
-    delete self;
-}
-wxSize *wxSize_new() {
-    return new wxSize();
-}
-wxSize *wxSize_new1(int width, int height) {
-    return new wxSize(width, height);
-}
-void wxSize_DecBy(wxSize * self, const wxPoint * pt) {
-    return self->DecBy(*pt);
-}
-void wxSize_DecBy1(wxSize * self, const wxSize * size) {
-    return self->DecBy(*size);
-}
-void wxSize_DecBy2(wxSize * self, int dx, int dy) {
-    return self->DecBy(dx, dy);
-}
-void wxSize_DecBy3(wxSize * self, int d) {
-    return self->DecBy(d);
-}
-void wxSize_DecTo(wxSize * self, const wxSize * size) {
-    return self->DecTo(*size);
-}
-void wxSize_DecToIfSpecified(wxSize * self, const wxSize * size) {
-    return self->DecToIfSpecified(*size);
-}
-int wxSize_GetHeight(const wxSize * self) {
-    return self->GetHeight();
-}
-int wxSize_GetWidth(const wxSize * self) {
-    return self->GetWidth();
-}
-void wxSize_IncBy(wxSize * self, const wxPoint * pt) {
-    return self->IncBy(*pt);
-}
-void wxSize_IncBy1(wxSize * self, const wxSize * size) {
-    return self->IncBy(*size);
-}
-void wxSize_IncBy2(wxSize * self, int dx, int dy) {
-    return self->IncBy(dx, dy);
-}
-void wxSize_IncBy3(wxSize * self, int d) {
-    return self->IncBy(d);
-}
-void wxSize_IncTo(wxSize * self, const wxSize * size) {
-    return self->IncTo(*size);
-}
-bool wxSize_IsFullySpecified(const wxSize * self) {
-    return self->IsFullySpecified();
-}
-void wxSize_Set(wxSize * self, int width, int height) {
-    return self->Set(width, height);
-}
-void wxSize_SetDefaults(wxSize * self, const wxSize * size_default) {
-    return self->SetDefaults(*size_default);
-}
-void wxSize_SetHeight(wxSize * self, int height) {
-    return self->SetHeight(height);
-}
-void wxSize_SetWidth(wxSize * self, int width) {
-    return self->SetWidth(width);
-}
-
-// CLASS: wxSizer
-wxSizerItem * wxSizer_Add(wxSizer * self, wxWindow * window, const wxSizerFlags * flags) {
-    return self->Add(window, *flags);
-}
-wxSizerItem * wxSizer_Add1(wxSizer * self, wxWindow * window, int proportion, int flag, int border, wxObject * user_data) {
-    return self->Add(window, proportion, flag, border, user_data);
-}
-wxSizerItem * wxSizer_Add2(wxSizer * self, wxSizer * sizer, const wxSizerFlags * flags) {
-    return self->Add(sizer, *flags);
-}
-wxSizerItem * wxSizer_Add3(wxSizer * self, wxSizer * sizer, int proportion, int flag, int border, wxObject * user_data) {
-    return self->Add(sizer, proportion, flag, border, user_data);
-}
-wxSizerItem * wxSizer_Add4(wxSizer * self, int width, int height, int proportion, int flag, int border, wxObject * user_data) {
-    return self->Add(width, height, proportion, flag, border, user_data);
-}
-wxSizerItem * wxSizer_Add5(wxSizer * self, int width, int height, const wxSizerFlags * flags) {
-    return self->Add(width, height, *flags);
-}
-wxSizerItem * wxSizer_Add6(wxSizer * self, wxSizerItem * item) {
-    return self->Add(item);
-}
-wxSizerItem * wxSizer_AddSpacer(wxSizer * self, int size) {
-    return self->AddSpacer(size);
-}
-wxSizerItem * wxSizer_AddStretchSpacer(wxSizer * self, int prop) {
-    return self->AddStretchSpacer(prop);
-}
-wxSize *wxSizer_CalcMin(wxSizer * self) {
-    return new wxSize(self->CalcMin());
-}
-void wxSizer_Clear(wxSizer * self, bool delete_windows) {
-    return self->Clear(delete_windows);
-}
-wxSize *wxSizer_ComputeFittingClientSize(wxSizer * self, wxWindow * window) {
-    return new wxSize(self->ComputeFittingClientSize(window));
-}
-wxSize *wxSizer_ComputeFittingWindowSize(wxSizer * self, wxWindow * window) {
-    return new wxSize(self->ComputeFittingWindowSize(window));
-}
-bool wxSizer_Detach(wxSizer * self, wxWindow * window) {
-    return self->Detach(window);
-}
-bool wxSizer_Detach1(wxSizer * self, wxSizer * sizer) {
-    return self->Detach(sizer);
-}
-bool wxSizer_Detach2(wxSizer * self, int index) {
-    return self->Detach(index);
-}
-wxSize *wxSizer_Fit(wxSizer * self, wxWindow * window) {
-    return new wxSize(self->Fit(window));
-}
-void wxSizer_FitInside(wxSizer * self, wxWindow * window) {
-    return self->FitInside(window);
-}
-bool wxSizer_InformFirstDirection(wxSizer * self, int direction, int size, int available_other_dir) {
-    return self->InformFirstDirection(direction, size, available_other_dir);
-}
-wxWindow * wxSizer_GetContainingWindow(const wxSizer * self) {
-    return self->GetContainingWindow();
-}
-void wxSizer_SetContainingWindow(wxSizer * self, wxWindow * window) {
-    return self->SetContainingWindow(window);
-}
-size_t wxSizer_GetItemCount(const wxSizer * self) {
-    return self->GetItemCount();
-}
-wxSizerItem * wxSizer_GetItem(wxSizer * self, wxWindow * window, bool recursive) {
-    return self->GetItem(window, recursive);
-}
-wxSizerItem * wxSizer_GetItem1(wxSizer * self, wxSizer * sizer, bool recursive) {
-    return self->GetItem(sizer, recursive);
-}
-wxSizerItem * wxSizer_GetItem2(wxSizer * self, size_t index) {
-    return self->GetItem(index);
-}
-wxSizerItem * wxSizer_GetItemById(wxSizer * self, int id, bool recursive) {
-    return self->GetItemById(id, recursive);
-}
-wxSize *wxSizer_GetMinSize(wxSizer * self) {
-    return new wxSize(self->GetMinSize());
-}
-wxPoint *wxSizer_GetPosition(const wxSizer * self) {
-    return new wxPoint(self->GetPosition());
-}
-wxSize *wxSizer_GetSize(const wxSizer * self) {
-    return new wxSize(self->GetSize());
-}
-bool wxSizer_Hide(wxSizer * self, wxWindow * window, bool recursive) {
-    return self->Hide(window, recursive);
-}
-bool wxSizer_Hide1(wxSizer * self, wxSizer * sizer, bool recursive) {
-    return self->Hide(sizer, recursive);
-}
-bool wxSizer_Hide2(wxSizer * self, size_t index) {
-    return self->Hide(index);
-}
-wxSizerItem * wxSizer_Insert(wxSizer * self, size_t index, wxWindow * window, const wxSizerFlags * flags) {
-    return self->Insert(index, window, *flags);
-}
-wxSizerItem * wxSizer_Insert1(wxSizer * self, size_t index, wxWindow * window, int proportion, int flag, int border, wxObject * user_data) {
-    return self->Insert(index, window, proportion, flag, border, user_data);
-}
-wxSizerItem * wxSizer_Insert2(wxSizer * self, size_t index, wxSizer * sizer, const wxSizerFlags * flags) {
-    return self->Insert(index, sizer, *flags);
-}
-wxSizerItem * wxSizer_Insert3(wxSizer * self, size_t index, wxSizer * sizer, int proportion, int flag, int border, wxObject * user_data) {
-    return self->Insert(index, sizer, proportion, flag, border, user_data);
-}
-wxSizerItem * wxSizer_Insert4(wxSizer * self, size_t index, int width, int height, int proportion, int flag, int border, wxObject * user_data) {
-    return self->Insert(index, width, height, proportion, flag, border, user_data);
-}
-wxSizerItem * wxSizer_Insert5(wxSizer * self, size_t index, int width, int height, const wxSizerFlags * flags) {
-    return self->Insert(index, width, height, *flags);
-}
-wxSizerItem * wxSizer_Insert6(wxSizer * self, size_t index, wxSizerItem * item) {
-    return self->Insert(index, item);
-}
-wxSizerItem * wxSizer_InsertSpacer(wxSizer * self, size_t index, int size) {
-    return self->InsertSpacer(index, size);
-}
-wxSizerItem * wxSizer_InsertStretchSpacer(wxSizer * self, size_t index, int prop) {
-    return self->InsertStretchSpacer(index, prop);
-}
-bool wxSizer_IsEmpty(const wxSizer * self) {
-    return self->IsEmpty();
-}
-bool wxSizer_IsShown(const wxSizer * self, wxWindow * window) {
-    return self->IsShown(window);
-}
-bool wxSizer_IsShown1(const wxSizer * self, wxSizer * sizer) {
-    return self->IsShown(sizer);
-}
-bool wxSizer_IsShown2(const wxSizer * self, size_t index) {
-    return self->IsShown(index);
-}
-void wxSizer_Layout(wxSizer * self) {
-    return self->Layout();
-}
-wxSizerItem * wxSizer_Prepend(wxSizer * self, wxWindow * window, const wxSizerFlags * flags) {
-    return self->Prepend(window, *flags);
-}
-wxSizerItem * wxSizer_Prepend1(wxSizer * self, wxWindow * window, int proportion, int flag, int border, wxObject * user_data) {
-    return self->Prepend(window, proportion, flag, border, user_data);
-}
-wxSizerItem * wxSizer_Prepend2(wxSizer * self, wxSizer * sizer, const wxSizerFlags * flags) {
-    return self->Prepend(sizer, *flags);
-}
-wxSizerItem * wxSizer_Prepend3(wxSizer * self, wxSizer * sizer, int proportion, int flag, int border, wxObject * user_data) {
-    return self->Prepend(sizer, proportion, flag, border, user_data);
-}
-wxSizerItem * wxSizer_Prepend4(wxSizer * self, int width, int height, int proportion, int flag, int border, wxObject * user_data) {
-    return self->Prepend(width, height, proportion, flag, border, user_data);
-}
-wxSizerItem * wxSizer_Prepend5(wxSizer * self, int width, int height, const wxSizerFlags * flags) {
-    return self->Prepend(width, height, *flags);
-}
-wxSizerItem * wxSizer_Prepend6(wxSizer * self, wxSizerItem * item) {
-    return self->Prepend(item);
-}
-wxSizerItem * wxSizer_PrependSpacer(wxSizer * self, int size) {
-    return self->PrependSpacer(size);
-}
-wxSizerItem * wxSizer_PrependStretchSpacer(wxSizer * self, int prop) {
-    return self->PrependStretchSpacer(prop);
-}
-#if wxCHECK_VERSION(3, 1, 0)
-void wxSizer_RepositionChildren(wxSizer * self, const wxSize * min_size) {
-    return self->RepositionChildren(*min_size);
-}
-#endif
-bool wxSizer_Remove1(wxSizer * self, wxSizer * sizer) {
-    return self->Remove(sizer);
-}
-bool wxSizer_Remove2(wxSizer * self, int index) {
-    return self->Remove(index);
-}
-bool wxSizer_Replace(wxSizer * self, wxWindow * oldwin, wxWindow * newwin, bool recursive) {
-    return self->Replace(oldwin, newwin, recursive);
-}
-bool wxSizer_Replace1(wxSizer * self, wxSizer * oldsz, wxSizer * newsz, bool recursive) {
-    return self->Replace(oldsz, newsz, recursive);
-}
-bool wxSizer_Replace2(wxSizer * self, size_t index, wxSizerItem * newitem) {
-    return self->Replace(index, newitem);
-}
-void wxSizer_SetDimension(wxSizer * self, int x, int y, int width, int height) {
-    return self->SetDimension(x, y, width, height);
-}
-void wxSizer_SetDimension1(wxSizer * self, const wxPoint * pos, const wxSize * size) {
-    return self->SetDimension(*pos, *size);
-}
-bool wxSizer_SetItemMinSize(wxSizer * self, wxWindow * window, int width, int height) {
-    return self->SetItemMinSize(window, width, height);
-}
-bool wxSizer_SetItemMinSize1(wxSizer * self, wxWindow * window, const wxSize * size) {
-    return self->SetItemMinSize(window, *size);
-}
-bool wxSizer_SetItemMinSize2(wxSizer * self, wxSizer * sizer, int width, int height) {
-    return self->SetItemMinSize(sizer, width, height);
-}
-bool wxSizer_SetItemMinSize3(wxSizer * self, wxSizer * sizer, const wxSize * size) {
-    return self->SetItemMinSize(sizer, *size);
-}
-bool wxSizer_SetItemMinSize4(wxSizer * self, size_t index, int width, int height) {
-    return self->SetItemMinSize(index, width, height);
-}
-bool wxSizer_SetItemMinSize5(wxSizer * self, size_t index, const wxSize * size) {
-    return self->SetItemMinSize(index, *size);
-}
-void wxSizer_SetMinSize(wxSizer * self, const wxSize * size) {
-    return self->SetMinSize(*size);
-}
-void wxSizer_SetMinSize1(wxSizer * self, int width, int height) {
-    return self->SetMinSize(width, height);
-}
-void wxSizer_SetSizeHints(wxSizer * self, wxWindow * window) {
-    return self->SetSizeHints(window);
-}
-bool wxSizer_Show(wxSizer * self, wxWindow * window, bool show, bool recursive) {
-    return self->Show(window, show, recursive);
-}
-bool wxSizer_Show1(wxSizer * self, wxSizer * sizer, bool show, bool recursive) {
-    return self->Show(sizer, show, recursive);
-}
-bool wxSizer_Show2(wxSizer * self, size_t index, bool show) {
-    return self->Show(index, show);
-}
-void wxSizer_ShowItems(wxSizer * self, bool show) {
-    return self->ShowItems(show);
-}
-
-// CLASS: wxSizerFlags
-void wxSizerFlags_delete(wxSizerFlags *self) {
-    delete self;
-}
-wxSizerFlags *wxSizerFlags_new(int proportion) {
-    return new wxSizerFlags(proportion);
-}
-wxSizerFlags * wxSizerFlags_Align(wxSizerFlags * self, int alignment) {
-    return &(self->Align(alignment));
-}
-wxSizerFlags * wxSizerFlags_Border(wxSizerFlags * self, int direction, int borderinpixels) {
-    return &(self->Border(direction, borderinpixels));
-}
-wxSizerFlags * wxSizerFlags_Border1(wxSizerFlags * self, int direction) {
-    return &(self->Border(direction));
-}
-wxSizerFlags * wxSizerFlags_Bottom(wxSizerFlags * self) {
-    return &(self->Bottom());
-}
-wxSizerFlags * wxSizerFlags_Center(wxSizerFlags * self) {
-    return &(self->Center());
-}
-wxSizerFlags * wxSizerFlags_Centre(wxSizerFlags * self) {
-    return &(self->Centre());
-}
-#if wxCHECK_VERSION(3, 1, 0)
-wxSizerFlags * wxSizerFlags_CenterHorizontal(wxSizerFlags * self) {
-    return &(self->CenterHorizontal());
-}
-wxSizerFlags * wxSizerFlags_CenterVertical(wxSizerFlags * self) {
-    return &(self->CenterVertical());
-}
-wxSizerFlags * wxSizerFlags_CentreHorizontal(wxSizerFlags * self) {
-    return &(self->CentreHorizontal());
-}
-wxSizerFlags * wxSizerFlags_CentreVertical(wxSizerFlags * self) {
-    return &(self->CentreVertical());
-}
-#endif
-wxSizerFlags * wxSizerFlags_DoubleBorder(wxSizerFlags * self, int direction) {
-    return &(self->DoubleBorder(direction));
-}
-wxSizerFlags * wxSizerFlags_DoubleHorzBorder(wxSizerFlags * self) {
-    return &(self->DoubleHorzBorder());
-}
-wxSizerFlags * wxSizerFlags_Expand(wxSizerFlags * self) {
-    return &(self->Expand());
-}
-wxSizerFlags * wxSizerFlags_FixedMinSize(wxSizerFlags * self) {
-    return &(self->FixedMinSize());
-}
-wxSizerFlags * wxSizerFlags_ReserveSpaceEvenIfHidden(wxSizerFlags * self) {
-    return &(self->ReserveSpaceEvenIfHidden());
-}
-wxSizerFlags * wxSizerFlags_Left(wxSizerFlags * self) {
-    return &(self->Left());
-}
-wxSizerFlags * wxSizerFlags_Proportion(wxSizerFlags * self, int proportion) {
-    return &(self->Proportion(proportion));
-}
-wxSizerFlags * wxSizerFlags_Right(wxSizerFlags * self) {
-    return &(self->Right());
-}
-wxSizerFlags * wxSizerFlags_Shaped(wxSizerFlags * self) {
-    return &(self->Shaped());
-}
-wxSizerFlags * wxSizerFlags_Top(wxSizerFlags * self) {
-    return &(self->Top());
-}
-wxSizerFlags * wxSizerFlags_TripleBorder(wxSizerFlags * self, int direction) {
-    return &(self->TripleBorder(direction));
-}
-int wxSizerFlags_GetDefaultBorder() {
-    return wxSizerFlags::GetDefaultBorder();
-}
-
-// CLASS: wxStaticBoxSizer
-wxStaticBoxSizer *wxStaticBoxSizer_new(wxStaticBox * box, int orient) {
-    return new wxStaticBoxSizer(box, orient);
-}
-wxStaticBoxSizer *wxStaticBoxSizer_new1(int orient, wxWindow * parent, const wxString * label) {
-    return new wxStaticBoxSizer(orient, parent, *label);
-}
-wxStaticBox * wxStaticBoxSizer_GetStaticBox(const wxStaticBoxSizer * self) {
-    return self->GetStaticBox();
-}
-
-// CLASS: wxValidator
-wxValidator *wxValidator_new() {
-    return new wxValidator();
-}
-wxObject * wxValidator_Clone(const wxValidator * self) {
-    return self->Clone();
-}
-wxWindow * wxValidator_GetWindow(const wxValidator * self) {
-    return self->GetWindow();
-}
-void wxValidator_SetWindow(wxValidator * self, wxWindow * window) {
-    return self->SetWindow(window);
-}
-bool wxValidator_TransferFromWindow(wxValidator * self) {
-    return self->TransferFromWindow();
-}
-bool wxValidator_TransferToWindow(wxValidator * self) {
-    return self->TransferToWindow();
-}
-bool wxValidator_Validate(wxValidator * self, wxWindow * parent) {
-    return self->Validate(parent);
-}
-void wxValidator_SuppressBellOnError(bool suppress) {
-    return wxValidator::SuppressBellOnError(suppress);
-}
-bool wxValidator_IsSilent() {
-    return wxValidator::IsSilent();
-}
-
-// CLASS: wxStaticBitmap
-wxStaticBitmap *wxStaticBitmap_new() {
-    return new wxStaticBitmap();
-}
-wxStaticBitmap *wxStaticBitmap_new1(wxWindow * parent, wxWindowID id, const wxBitmap * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
-    return new wxStaticBitmap(parent, id, *label, *pos, *size, style, *name);
-}
-bool wxStaticBitmap_Create(wxStaticBitmap * self, wxWindow * parent, wxWindowID id, const wxBitmap * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
-    return self->Create(parent, id, *label, *pos, *size, style, *name);
-}
-wxBitmap *wxStaticBitmap_GetBitmap(const wxStaticBitmap * self) {
-    return new wxBitmap(self->GetBitmap());
-}
-void wxStaticBitmap_SetBitmap(wxStaticBitmap * self, const wxBitmap * label) {
-    return self->SetBitmap(*label);
-}
-void wxStaticBitmap_SetIcon(wxStaticBitmap * self, const wxIcon * label) {
-    return self->SetIcon(*label);
 }
 
 // CLASS: wxWrapSizer
