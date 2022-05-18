@@ -103,6 +103,7 @@ impl WidgetsFrame {
             .check_item(Widgets::Enable, "&Enable/disable\tCtrl-E")
             .check_item(Widgets::Show, "Show/Hide")
             .sub_menu(
+                "Set &border",
                 &wx::Menu::new()
                     .radio_item(Widgets::BorderDefault, "De&fault\tCtrl-Shift-9")
                     .radio_item(Widgets::BorderNone, "&None\tCtrl-Shift-0")
@@ -111,15 +112,14 @@ impl WidgetsFrame {
                     .radio_item(Widgets::BorderStatic, "Stati&c\tCtrl-Shift-3")
                     .radio_item(Widgets::BorderRaised, "&Raised\tCtrl-Shift-4")
                     .radio_item(Widgets::BorderSunken, "S&unken\tCtrl-Shift-5"),
-                "Set &border",
             )
             .sub_menu(
+                "Set &variant",
                 &wx::Menu::new()
                     .radio_item(Widgets::VariantMini, "&Mini\tCtrl-Shift-6")
                     .radio_item(Widgets::VariantSmall, "&Small\tCtrl-Shift-7")
                     .radio_item(Widgets::VariantNormal, "&Normal\tCtrl-Shift-8")
                     .radio_item(Widgets::VariantLarge, "&Large\tCtrl-Shift-9"),
-                "Set &variant",
             )
             .separator()
             .check_item(Widgets::LayoutDirection, "Toggle &layout direction\tCtrl-L")

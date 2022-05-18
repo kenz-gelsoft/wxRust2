@@ -27,20 +27,8 @@ struct MyFrame {
 impl MyFrame {
     fn new(title: &str) -> Self {
         let frame = wx::Frame::builder(wx::Window::none()).title(title).build();
-        let file_menu = wx::Menu::new();
-        let help_menu = wx::Menu::new();
-        help_menu.append_int_str(
-            MINIMAL_ABOUT,
-            "&About\tF1",
-            "Show about dialog",
-            wx::ITEM_NORMAL,
-        );
-        file_menu.append_int_str(
-            MINIMAL_QUIT,
-            "E&xit\tAlt-X",
-            "Quit this program",
-            wx::ITEM_NORMAL,
-        );
+        let file_menu = wx::Menu::new().item_h(MINIMAL_QUIT, "E&xit\tAlt-X", "Quit this program");
+        let help_menu = wx::Menu::new().item_h(MINIMAL_ABOUT, "&About\tF1", "Show about dialog");
 
         let menu_bar = wx::MenuBar::new(0);
         menu_bar.append(Some(&file_menu), "&File");

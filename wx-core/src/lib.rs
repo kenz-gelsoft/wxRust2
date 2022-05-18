@@ -22,9 +22,10 @@ pub mod methods {
 
     pub trait MenuItemBuilder {
         fn item<ID: Into<c_int>>(self, id: ID, s: &str) -> Self;
+        fn item_h<ID: Into<c_int>>(self, id: ID, s: &str, h: &str) -> Self;
         fn check_item<ID: Into<c_int>>(self, id: ID, s: &str) -> Self;
         fn radio_item<ID: Into<c_int>>(self, id: ID, s: &str) -> Self;
-        fn sub_menu<M: MenuMethods>(self, submenu: &M, s: &str) -> Self;
+        fn sub_menu<M: MenuMethods>(self, s: &str, submenu: &M) -> Self;
         fn separator(self) -> Self;
     }
 }
@@ -383,7 +384,10 @@ impl<'a, P: WindowMethods> ToolBarBuilder<'a, P> {
 
 impl MenuItemBuilder for Menu {
     fn item<ID: Into<c_int>>(self, id: ID, s: &str) -> Self {
-        self.append_int_str(id.into(), s, "", ITEM_NORMAL);
+        self.item_h(id, s, "")
+    }
+    fn item_h<ID: Into<c_int>>(self, id: ID, s: &str, h: &str) -> Self {
+        self.append_int_str(id.into(), s, h, ITEM_NORMAL);
         self
     }
     fn check_item<ID: Into<c_int>>(self, id: ID, s: &str) -> Self {
@@ -394,7 +398,7 @@ impl MenuItemBuilder for Menu {
         self.append_radio_item(id.into(), s, "");
         self
     }
-    fn sub_menu<M: MenuMethods>(self, submenu: &M, s: &str) -> Self {
+    fn sub_menu<M: MenuMethods>(self, s: &str, submenu: &M) -> Self {
         self.append_sub_menu(Some(submenu), s, "");
         self
     }
