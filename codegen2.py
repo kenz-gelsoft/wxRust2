@@ -27,7 +27,8 @@ generated = []
 def generate_library(classes, config, libname):
     generated.append(libname)
     to_be_generated = {
-        'src/generated/mod.rs': generated_rs,
+        'src/generated/ffi.rs': generated_ffi_rs,
+        'src/generated/mod.rs': generated_mod_rs,
         'include/generated.h': generated_h,
         'src/generated.cpp': generated_cpp,
     }
@@ -40,8 +41,27 @@ def generate_library(classes, config, libname):
         if path.endswith('.rs'):
             print(subprocess.check_output(['rustfmt', path]))
 
+def generated_ffi_rs(classes, config, libname):
+    yield '''\
+use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
 
-def generated_rs(classes, config, libname):
+pub use crate::ffi::*;
+
+extern "C" {'''
+    bindings = [RustClassBinding(cls) for cls in classes.in_lib(libname, generated)]
+    indent = ' ' * 4 * 1
+    for cls in bindings:
+        for line in cls.lines(for_ffi=True):
+            if not line:
+                yield ''
+            else:
+                yield '%s%s' % (indent, line)
+    yield '''\
+
+}\
+'''
+
+def generated_mod_rs(classes, config, libname):
     yield '''\
 #![allow(dead_code)]
 #![allow(non_upper_case_globals)]
@@ -62,23 +82,7 @@ use wx_base::*;\
 '''
     yield '''\
 
-mod ffi {
-    use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
-
-    pub use crate::ffi::*;
-
-    extern "C" {'''
-    bindings = [RustClassBinding(cls) for cls in classes.in_lib(libname, generated)]
-    indent = ' ' * 4 * 2
-    for cls in bindings:
-        for line in cls.lines(for_ffi=True):
-            if not line:
-                yield ''
-            else:
-                yield '%s%s' % (indent, line)
-    yield '''\
-    }
-}
+mod ffi;
 
 pub mod methods {
     use std::os::raw::{c_int, c_long, c_void};
@@ -98,6 +102,7 @@ pub mod methods {
 '''
     else:
         yield '    pub use wx_base::methods::*;'
+    bindings = [RustClassBinding(cls) for cls in classes.in_lib(libname, generated)]
     for cls in bindings:
         for line in cls.lines(for_methods=True):
             if line:
