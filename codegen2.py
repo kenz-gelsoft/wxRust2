@@ -27,7 +27,7 @@ generated = []
 def generate_library(classes, config, libname):
     generated.append(libname)
     to_be_generated = {
-        'src/generated.rs': generated_rs,
+        'src/generated/mod.rs': generated_rs,
         'include/generated.h': generated_h,
         'src/generated.cpp': generated_cpp,
     }
