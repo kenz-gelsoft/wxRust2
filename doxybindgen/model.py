@@ -12,6 +12,7 @@ CXX2RUST = {
     'wxCoord': 'c_int',
     'wxEllipsizeMode': 'c_int',
     'wxItemKind': 'c_int',
+    'wxLayoutDirection': 'c_int',
     'wxWindowID': 'c_int',
 }
 STR_TYPES = [

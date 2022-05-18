@@ -2275,6 +2275,9 @@ wxWindowID wxWindow_GetId(const wxWindow * self) {
 wxString *wxWindow_GetLabel(const wxWindow * self) {
     return new wxString(self->GetLabel());
 }
+wxLayoutDirection wxWindow_GetLayoutDirection(const wxWindow * self) {
+    return self->GetLayoutDirection();
+}
 wxCoord wxWindow_AdjustForLayoutDirection(const wxWindow * self, wxCoord x, wxCoord width, wxCoord width_total) {
     return self->AdjustForLayoutDirection(x, width, width_total);
 }
@@ -2286,6 +2289,9 @@ void wxWindow_SetId(wxWindow * self, wxWindowID winid) {
 }
 void wxWindow_SetLabel(wxWindow * self, const wxString * label) {
     return self->SetLabel(*label);
+}
+void wxWindow_SetLayoutDirection(wxWindow * self, wxLayoutDirection dir) {
+    return self->SetLayoutDirection(dir);
 }
 void wxWindow_SetName(wxWindow * self, const wxString * name) {
     return self->SetName(*name);

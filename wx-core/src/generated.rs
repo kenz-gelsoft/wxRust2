@@ -1618,7 +1618,7 @@ mod ffi {
         pub fn wxWindow_Validate(self_: *mut c_void) -> bool;
         pub fn wxWindow_GetId(self_: *const c_void) -> c_int;
         pub fn wxWindow_GetLabel(self_: *const c_void) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxWindow_GetLayoutDirection(self_: *const c_void) -> wxLayoutDirection;
+        pub fn wxWindow_GetLayoutDirection(self_: *const c_void) -> c_int;
         pub fn wxWindow_AdjustForLayoutDirection(
             self_: *const c_void,
             x: c_int,
@@ -1629,7 +1629,7 @@ mod ffi {
         // NOT_SUPPORTED: pub fn wxWindow_GetWindowVariant(self_: *const c_void) -> wxWindowVariant;
         pub fn wxWindow_SetId(self_: *mut c_void, winid: c_int);
         pub fn wxWindow_SetLabel(self_: *mut c_void, label: *const c_void);
-        // NOT_SUPPORTED: pub fn wxWindow_SetLayoutDirection(self_: *mut c_void, dir: wxLayoutDirection);
+        pub fn wxWindow_SetLayoutDirection(self_: *mut c_void, dir: c_int);
         pub fn wxWindow_SetName(self_: *mut c_void, name: *const c_void);
         // NOT_SUPPORTED: pub fn wxWindow_SetWindowVariant(self_: *mut c_void, variant: wxWindowVariant);
         pub fn wxWindow_GetAcceleratorTable(self_: *mut c_void) -> *mut c_void;
@@ -5746,7 +5746,9 @@ pub mod methods {
         fn get_label(&self) -> String {
             unsafe { wx_base::from_wx_string(ffi::wxWindow_GetLabel(self.as_ptr())) }
         }
-        // NOT_SUPPORTED: fn GetLayoutDirection()
+        fn get_layout_direction(&self) -> c_int {
+            unsafe { ffi::wxWindow_GetLayoutDirection(self.as_ptr()) }
+        }
         fn adjust_for_layout_direction(&self, x: c_int, width: c_int, width_total: c_int) -> c_int {
             unsafe { ffi::wxWindow_AdjustForLayoutDirection(self.as_ptr(), x, width, width_total) }
         }
@@ -5763,7 +5765,9 @@ pub mod methods {
                 ffi::wxWindow_SetLabel(self.as_ptr(), label)
             }
         }
-        // NOT_SUPPORTED: fn SetLayoutDirection()
+        fn set_layout_direction(&self, dir: c_int) {
+            unsafe { ffi::wxWindow_SetLayoutDirection(self.as_ptr(), dir) }
+        }
         fn set_name(&self, name: &str) {
             unsafe {
                 let name = wx_base::wx_string_from(name);
