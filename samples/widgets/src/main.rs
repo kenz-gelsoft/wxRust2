@@ -9,7 +9,7 @@ const MINIMAL_ABOUT: c_int = wx::ID_ABOUT;
 
 fn main() {
     wx::App::run(|_| {
-        let frame = MyFrame::new("Minimal wxRust App");
+        let frame = WidgetsFrame::new("Minimal wxRust App");
         let frame_copy = frame.clone();
         frame
             .base
@@ -21,10 +21,10 @@ fn main() {
 }
 
 #[derive(Clone)]
-struct MyFrame {
+struct WidgetsFrame {
     base: wx::Frame,
 }
-impl MyFrame {
+impl WidgetsFrame {
     fn new(title: &str) -> Self {
         let frame = wx::Frame::builder(wx::Window::none()).title(title).build();
         let file_menu = wx::Menu::new();
@@ -50,7 +50,7 @@ impl MyFrame {
 
         frame.create_status_bar(2, wx::STB_DEFAULT_STYLE, 0, "statusBar");
         frame.set_status_text("Welcome to wxRust!", 0);
-        MyFrame { base: frame }
+        WidgetsFrame { base: frame }
     }
 
     fn handle_menu(&self, event: &wx::CommandEvent) {
