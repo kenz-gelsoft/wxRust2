@@ -3,6 +3,7 @@
 members = [
     "samples/hello",
     "samples/minimal",
+    "samples/widgets",
     "samples/wrapsizer",
     "wx-base",
     "wx-core",
