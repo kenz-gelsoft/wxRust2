@@ -49,6 +49,8 @@ cxx = "#ifndef __WXGTK__"
 cxx = "#if wxCHECK_VERSION(3, 1, 0)"
 
 [types]
+[types.wxAnyButton]
+library = 'core'
 [types.wxArtProvider]
 blocklist = [
     'Insert',
@@ -65,15 +67,13 @@ not_windows = [
     # FIXME: FindHandler on MSW requires dynamic_cast in C++ generated code.
     'FindHandler',
 ]
-[types.wxGDIObject]
-blocklist = [
-    # abstract class
-    'wxGDIObject',
+[types.wxButton]
+wx31 = [
+    'GetDefaultSize',
 ]
-[types.wxObject]
-blocklist = [
-    'operator new',
-    'operator delete',
+[types.wxControl]
+wx31 = [
+    'GetSizeFromText',
 ]
 [types.wxEvent]
 returns_owned = [
@@ -87,6 +87,15 @@ blocklist = [
     'SetClientData',
     'Unbind1',
 ]
+[types.wxFrame]
+windows = [
+    'MSWGetTaskBarButton',
+]
+[types.wxGDIObject]
+blocklist = [
+    # abstract class
+    'wxGDIObject',
+]
 [types.wxListBox]
 windows = [
     'MSWSetTabStops',
@@ -94,50 +103,6 @@ windows = [
 wx31 = [
     'GetCountPerPage',
     'GetTopItem',
-]
-[types.wxWindow]
-blocklist = [
-    # TODO: dont return reference/temp value from self
-    'GetChildren',
-    'GetChildren1',
-    'GetCursor',
-    'GetUpdateRegion',
-]
-not_gtk = [
-    'RegisterHotKey',
-    'UnregisterHotKey',
-]
-wx31 = [
-    'DisableFocusFromKeyboard',
-    'EnableTouchEvents',
-    'EnableVisibleFocus',
-    'FromDIP',
-    'FromDIP1',
-    'FromDIP2',
-    'FromDIP3',
-    'FromDIP4',
-    'FromDIP5',
-    'GetDPI',
-    'GetDPIScaleFactor',
-    'InheritsForegroundColour',
-    'ToDIP',
-    'ToDIP1',
-    'ToDIP2',
-    'ToDIP3',
-    'ToDIP4',
-    'ToDIP5',
-    'UseBackgroundColour',
-    'UseForegroundColour',
-]
-[types.wxControl]
-wx31 = [
-    'GetSizeFromText',
-]
-[types.wxAnyButton]
-library = 'core'
-[types.wxButton]
-wx31 = [
-    'GetDefaultSize',
 ]
 [types.wxMenu]
 blocklist = [
@@ -157,34 +122,10 @@ mac = [
 ]
 [types.wxNonOwnedWindow]
 library = 'core'
-[types.wxToolBar]
+[types.wxObject]
 blocklist = [
-    # const getter
-    'GetToolByPos',
-]
-[types.wxTopLevelWindow]
-windows = [
-    'MSWGetSystemMenu',
-]
-blocklist = [
-    # wxUniversal specific
-    'IsUsingNativeDecorations',
-    'UseNativeDecorations',
-    'UseNativeDecorationsByDefault',
-
-    # Didn't support (Uses inner class)
-    'GetIcons',
-    'SaveGeometry',
-    'RestoreToGeometry',
-]
-wx31 = [
-    'EnableFullScreenView',
-    'EnableMaximizeButton',
-    'EnableMinimizeButton',
-]
-[types.wxFrame]
-windows = [
-    'MSWGetTaskBarButton',
+    'operator new',
+    'operator delete',
 ]
 [types.wxPoint]
 blocklist = [
@@ -265,7 +206,66 @@ wx31 = [
     'CentreHorizontal',
     'CentreVertical',
 ]
+[types.wxToolBar]
+blocklist = [
+    # const getter
+    'GetToolByPos',
+]
+[types.wxTopLevelWindow]
+windows = [
+    'MSWGetSystemMenu',
+]
+blocklist = [
+    # wxUniversal specific
+    'IsUsingNativeDecorations',
+    'UseNativeDecorations',
+    'UseNativeDecorationsByDefault',
+
+    # Didn't support (Uses inner class)
+    'GetIcons',
+    'SaveGeometry',
+    'RestoreToGeometry',
+]
+wx31 = [
+    'EnableFullScreenView',
+    'EnableMaximizeButton',
+    'EnableMinimizeButton',
+]
 [types.wxValidator]
 returns_owned = [
     'Clone',
+]
+[types.wxWindow]
+blocklist = [
+    # TODO: dont return reference/temp value from self
+    'GetChildren',
+    'GetChildren1',
+    'GetCursor',
+    'GetUpdateRegion',
+]
+not_gtk = [
+    'RegisterHotKey',
+    'UnregisterHotKey',
+]
+wx31 = [
+    'DisableFocusFromKeyboard',
+    'EnableTouchEvents',
+    'EnableVisibleFocus',
+    'FromDIP',
+    'FromDIP1',
+    'FromDIP2',
+    'FromDIP3',
+    'FromDIP4',
+    'FromDIP5',
+    'GetDPI',
+    'GetDPIScaleFactor',
+    'InheritsForegroundColour',
+    'ToDIP',
+    'ToDIP1',
+    'ToDIP2',
+    'ToDIP3',
+    'ToDIP4',
+    'ToDIP5',
+    'UseBackgroundColour',
+    'UseForegroundColour',
 ]
