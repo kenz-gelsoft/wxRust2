@@ -183,6 +183,68 @@ bool wxBitmap_RemoveHandler(const wxString * name) {
     return wxBitmap::RemoveHandler(*name);
 }
 
+// CLASS: wxBookCtrlBase
+int wxBookCtrlBase_GetPageImage(const wxBookCtrlBase * self, size_t n_page) {
+    return self->GetPageImage(n_page);
+}
+bool wxBookCtrlBase_SetPageImage(wxBookCtrlBase * self, size_t page, int image) {
+    return self->SetPageImage(page, image);
+}
+wxString *wxBookCtrlBase_GetPageText(const wxBookCtrlBase * self, size_t n_page) {
+    return new wxString(self->GetPageText(n_page));
+}
+bool wxBookCtrlBase_SetPageText(wxBookCtrlBase * self, size_t page, const wxString * text) {
+    return self->SetPageText(page, *text);
+}
+int wxBookCtrlBase_GetSelection(const wxBookCtrlBase * self) {
+    return self->GetSelection();
+}
+wxWindow * wxBookCtrlBase_GetCurrentPage(const wxBookCtrlBase * self) {
+    return self->GetCurrentPage();
+}
+int wxBookCtrlBase_SetSelection(wxBookCtrlBase * self, size_t page) {
+    return self->SetSelection(page);
+}
+void wxBookCtrlBase_AdvanceSelection(wxBookCtrlBase * self, bool forward) {
+    return self->AdvanceSelection(forward);
+}
+int wxBookCtrlBase_ChangeSelection(wxBookCtrlBase * self, size_t page) {
+    return self->ChangeSelection(page);
+}
+int wxBookCtrlBase_FindPage(const wxBookCtrlBase * self, const wxWindow * page) {
+    return self->FindPage(page);
+}
+void wxBookCtrlBase_SetPageSize(wxBookCtrlBase * self, const wxSize * size) {
+    return self->SetPageSize(*size);
+}
+int wxBookCtrlBase_HitTest(const wxBookCtrlBase * self, const wxPoint * pt, long * flags) {
+    return self->HitTest(*pt, flags);
+}
+bool wxBookCtrlBase_AddPage(wxBookCtrlBase * self, wxWindow * page, const wxString * text, bool select, int image_id) {
+    return self->AddPage(page, *text, select, image_id);
+}
+bool wxBookCtrlBase_DeleteAllPages(wxBookCtrlBase * self) {
+    return self->DeleteAllPages();
+}
+bool wxBookCtrlBase_DeletePage(wxBookCtrlBase * self, size_t page) {
+    return self->DeletePage(page);
+}
+bool wxBookCtrlBase_InsertPage(wxBookCtrlBase * self, size_t index, wxWindow * page, const wxString * text, bool select, int image_id) {
+    return self->InsertPage(index, page, *text, select, image_id);
+}
+bool wxBookCtrlBase_RemovePage(wxBookCtrlBase * self, size_t page) {
+    return self->RemovePage(page);
+}
+size_t wxBookCtrlBase_GetPageCount(const wxBookCtrlBase * self) {
+    return self->GetPageCount();
+}
+wxWindow * wxBookCtrlBase_GetPage(const wxBookCtrlBase * self, size_t page) {
+    return self->GetPage(page);
+}
+bool wxBookCtrlBase_Create(wxBookCtrlBase * self, wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, winid, *pos, *size, style, *name);
+}
+
 // CLASS: wxBoxSizer
 wxBoxSizer *wxBoxSizer_new(int orient) {
     return new wxBoxSizer(orient);

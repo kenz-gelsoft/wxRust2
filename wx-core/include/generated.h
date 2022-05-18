@@ -1,6 +1,7 @@
 #pragma once
 #include <wx/wx.h>
 #include <wx/artprov.h>
+#include <wx/bookctrl.h>
 #include <wx/wrapsizer.h>
 
 extern "C" {
@@ -71,6 +72,28 @@ void wxBitmap_InitStandardHandlers();
 void wxBitmap_InsertHandler(wxBitmapHandler * handler);
 wxBitmap *wxBitmap_NewFromPNGData(const void * data, size_t size);
 bool wxBitmap_RemoveHandler(const wxString * name);
+
+// CLASS: wxBookCtrlBase
+int wxBookCtrlBase_GetPageImage(const wxBookCtrlBase * self, size_t n_page);
+bool wxBookCtrlBase_SetPageImage(wxBookCtrlBase * self, size_t page, int image);
+wxString *wxBookCtrlBase_GetPageText(const wxBookCtrlBase * self, size_t n_page);
+bool wxBookCtrlBase_SetPageText(wxBookCtrlBase * self, size_t page, const wxString * text);
+int wxBookCtrlBase_GetSelection(const wxBookCtrlBase * self);
+wxWindow * wxBookCtrlBase_GetCurrentPage(const wxBookCtrlBase * self);
+int wxBookCtrlBase_SetSelection(wxBookCtrlBase * self, size_t page);
+void wxBookCtrlBase_AdvanceSelection(wxBookCtrlBase * self, bool forward);
+int wxBookCtrlBase_ChangeSelection(wxBookCtrlBase * self, size_t page);
+int wxBookCtrlBase_FindPage(const wxBookCtrlBase * self, const wxWindow * page);
+void wxBookCtrlBase_SetPageSize(wxBookCtrlBase * self, const wxSize * size);
+int wxBookCtrlBase_HitTest(const wxBookCtrlBase * self, const wxPoint * pt, long * flags);
+bool wxBookCtrlBase_AddPage(wxBookCtrlBase * self, wxWindow * page, const wxString * text, bool select, int image_id);
+bool wxBookCtrlBase_DeleteAllPages(wxBookCtrlBase * self);
+bool wxBookCtrlBase_DeletePage(wxBookCtrlBase * self, size_t page);
+bool wxBookCtrlBase_InsertPage(wxBookCtrlBase * self, size_t index, wxWindow * page, const wxString * text, bool select, int image_id);
+bool wxBookCtrlBase_RemovePage(wxBookCtrlBase * self, size_t page);
+size_t wxBookCtrlBase_GetPageCount(const wxBookCtrlBase * self);
+wxWindow * wxBookCtrlBase_GetPage(const wxBookCtrlBase * self, size_t page);
+bool wxBookCtrlBase_Create(wxBookCtrlBase * self, wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 
 // CLASS: wxBoxSizer
 wxBoxSizer *wxBoxSizer_new(int orient);

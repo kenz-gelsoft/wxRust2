@@ -122,6 +122,59 @@ mod ffi {
         pub fn wxBitmap_NewFromPNGData(data: *const c_void, size: usize) -> *mut c_void;
         pub fn wxBitmap_RemoveHandler(name: *const c_void) -> bool;
 
+        // wxBookCtrlBase
+        pub fn wxBookCtrlBase_GetPageImage(self_: *const c_void, n_page: usize) -> c_int;
+        pub fn wxBookCtrlBase_SetPageImage(self_: *mut c_void, page: usize, image: c_int) -> bool;
+        pub fn wxBookCtrlBase_GetPageText(self_: *const c_void, n_page: usize) -> *mut c_void;
+        pub fn wxBookCtrlBase_SetPageText(
+            self_: *mut c_void,
+            page: usize,
+            text: *const c_void,
+        ) -> bool;
+        pub fn wxBookCtrlBase_GetSelection(self_: *const c_void) -> c_int;
+        pub fn wxBookCtrlBase_GetCurrentPage(self_: *const c_void) -> *mut c_void;
+        pub fn wxBookCtrlBase_SetSelection(self_: *mut c_void, page: usize) -> c_int;
+        pub fn wxBookCtrlBase_AdvanceSelection(self_: *mut c_void, forward: bool);
+        pub fn wxBookCtrlBase_ChangeSelection(self_: *mut c_void, page: usize) -> c_int;
+        pub fn wxBookCtrlBase_FindPage(self_: *const c_void, page: *const c_void) -> c_int;
+        pub fn wxBookCtrlBase_SetPageSize(self_: *mut c_void, size: *const c_void);
+        pub fn wxBookCtrlBase_HitTest(
+            self_: *const c_void,
+            pt: *const c_void,
+            flags: *mut c_void,
+        ) -> c_int;
+        pub fn wxBookCtrlBase_AddPage(
+            self_: *mut c_void,
+            page: *mut c_void,
+            text: *const c_void,
+            select: bool,
+            image_id: c_int,
+        ) -> bool;
+        pub fn wxBookCtrlBase_DeleteAllPages(self_: *mut c_void) -> bool;
+        pub fn wxBookCtrlBase_DeletePage(self_: *mut c_void, page: usize) -> bool;
+        pub fn wxBookCtrlBase_InsertPage(
+            self_: *mut c_void,
+            index: usize,
+            page: *mut c_void,
+            text: *const c_void,
+            select: bool,
+            image_id: c_int,
+        ) -> bool;
+        pub fn wxBookCtrlBase_RemovePage(self_: *mut c_void, page: usize) -> bool;
+        pub fn wxBookCtrlBase_GetPageCount(self_: *const c_void) -> usize;
+        pub fn wxBookCtrlBase_GetPage(self_: *const c_void, page: usize) -> *mut c_void;
+        // BLOCKED: pub fn wxBookCtrlBase_new() -> *mut c_void;
+        // BLOCKED: pub fn wxBookCtrlBase_new1(parent: *mut c_void, winid: c_int, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> *mut c_void;
+        pub fn wxBookCtrlBase_Create(
+            self_: *mut c_void,
+            parent: *mut c_void,
+            winid: c_int,
+            pos: *const c_void,
+            size: *const c_void,
+            style: c_long,
+            name: *const c_void,
+        ) -> bool;
+
         // wxBoxSizer
         pub fn wxBoxSizer_new(orient: c_int) -> *mut c_void;
         pub fn wxBoxSizer_GetOrientation(self_: *const c_void) -> c_int;
@@ -1974,6 +2027,111 @@ pub mod methods {
                 let name = wx_base::wx_string_from(name);
                 ffi::wxBitmap_RemoveHandler(name)
             }
+        }
+    }
+
+    // wxBookCtrlBase
+    pub trait BookCtrlBaseMethods: ControlMethods {
+        fn get_page_image(&self, n_page: usize) -> c_int {
+            unsafe { ffi::wxBookCtrlBase_GetPageImage(self.as_ptr(), n_page) }
+        }
+        fn set_page_image(&self, page: usize, image: c_int) -> bool {
+            unsafe { ffi::wxBookCtrlBase_SetPageImage(self.as_ptr(), page, image) }
+        }
+        fn get_page_text(&self, n_page: usize) -> String {
+            unsafe {
+                wx_base::from_wx_string(ffi::wxBookCtrlBase_GetPageText(self.as_ptr(), n_page))
+            }
+        }
+        fn set_page_text(&self, page: usize, text: &str) -> bool {
+            unsafe {
+                let text = wx_base::wx_string_from(text);
+                ffi::wxBookCtrlBase_SetPageText(self.as_ptr(), page, text)
+            }
+        }
+        fn get_selection(&self) -> c_int {
+            unsafe { ffi::wxBookCtrlBase_GetSelection(self.as_ptr()) }
+        }
+        fn get_current_page(&self) -> WeakRef<Window> {
+            unsafe { WeakRef::<Window>::from(ffi::wxBookCtrlBase_GetCurrentPage(self.as_ptr())) }
+        }
+        fn set_selection(&self, page: usize) -> c_int {
+            unsafe { ffi::wxBookCtrlBase_SetSelection(self.as_ptr(), page) }
+        }
+        fn advance_selection(&self, forward: bool) {
+            unsafe { ffi::wxBookCtrlBase_AdvanceSelection(self.as_ptr(), forward) }
+        }
+        fn change_selection(&self, page: usize) -> c_int {
+            unsafe { ffi::wxBookCtrlBase_ChangeSelection(self.as_ptr(), page) }
+        }
+        fn find_page<W: WindowMethods>(&self, page: Option<&W>) -> c_int {
+            unsafe {
+                let page = match page {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                ffi::wxBookCtrlBase_FindPage(self.as_ptr(), page)
+            }
+        }
+        fn set_page_size<S: SizeMethods>(&self, size: &S) {
+            unsafe {
+                let size = size.as_ptr();
+                ffi::wxBookCtrlBase_SetPageSize(self.as_ptr(), size)
+            }
+        }
+        fn hit_test<P: PointMethods>(&self, pt: &P, flags: *mut c_void) -> c_int {
+            unsafe {
+                let pt = pt.as_ptr();
+                ffi::wxBookCtrlBase_HitTest(self.as_ptr(), pt, flags)
+            }
+        }
+        fn add_page<W: WindowMethods>(
+            &self,
+            page: Option<&W>,
+            text: &str,
+            select: bool,
+            image_id: c_int,
+        ) -> bool {
+            unsafe {
+                let page = match page {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let text = wx_base::wx_string_from(text);
+                ffi::wxBookCtrlBase_AddPage(self.as_ptr(), page, text, select, image_id)
+            }
+        }
+        fn delete_all_pages(&self) -> bool {
+            unsafe { ffi::wxBookCtrlBase_DeleteAllPages(self.as_ptr()) }
+        }
+        fn delete_page(&self, page: usize) -> bool {
+            unsafe { ffi::wxBookCtrlBase_DeletePage(self.as_ptr(), page) }
+        }
+        fn insert_page<W: WindowMethods>(
+            &self,
+            index: usize,
+            page: Option<&W>,
+            text: &str,
+            select: bool,
+            image_id: c_int,
+        ) -> bool {
+            unsafe {
+                let page = match page {
+                    Some(r) => r.as_ptr(),
+                    None => ptr::null_mut(),
+                };
+                let text = wx_base::wx_string_from(text);
+                ffi::wxBookCtrlBase_InsertPage(self.as_ptr(), index, page, text, select, image_id)
+            }
+        }
+        fn remove_page(&self, page: usize) -> bool {
+            unsafe { ffi::wxBookCtrlBase_RemovePage(self.as_ptr(), page) }
+        }
+        fn get_page_count(&self) -> usize {
+            unsafe { ffi::wxBookCtrlBase_GetPageCount(self.as_ptr()) }
+        }
+        fn get_page(&self, page: usize) -> WeakRef<Window> {
+            unsafe { WeakRef::<Window>::from(ffi::wxBookCtrlBase_GetPage(self.as_ptr(), page)) }
         }
     }
 
@@ -6076,6 +6234,48 @@ impl<const OWNED: bool> Drop for BitmapIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
+// wxBookCtrlBase
+wx_class! { BookCtrlBase =
+    BookCtrlBaseIsOwned<true>(wxBookCtrlBase) impl
+        BookCtrlBaseMethods,
+        ControlMethods,
+        // WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> BookCtrlBaseIsOwned<OWNED> {
+    //  ENUM: @3
+    pub const NO_IMAGE: c_int = -1;
+
+    // BLOCKED: fn wxBookCtrlBase()
+    // BLOCKED: fn wxBookCtrlBase1()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> WindowMethods for BookCtrlBaseIsOwned<OWNED> {
+    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        parent: Option<&W>,
+        winid: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            ffi::wxBookCtrlBase_Create(self.as_ptr(), parent, winid, pos, size, style, name)
         }
     }
 }
