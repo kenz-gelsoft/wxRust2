@@ -28,6 +28,7 @@ def generate_library(classes, config, libname):
     generated.append(libname)
     to_be_generated = {
         'src/generated/ffi.rs': generated_ffi_rs,
+        'src/generated/methods.rs': generated_methods_rs,
         'src/generated/mod.rs': generated_mod_rs,
         'include/generated.h': generated_h,
         'src/generated.cpp': generated_cpp,
@@ -61,6 +62,30 @@ extern "C" {'''
 }\
 '''
 
+def generated_methods_rs(classes, config, libname):
+    yield '''\
+use std::os::raw::{c_int, c_long, c_void};
+
+use super::*;
+use crate::WeakRef;
+'''
+    if libname == 'base':
+        yield '''\
+pub trait WxRustMethods {
+    type Unowned;
+    unsafe fn as_ptr(&self) -> *mut c_void;
+    unsafe fn from_ptr(ptr: *mut c_void) -> Self;
+    unsafe fn from_unowned_ptr(ptr: *mut c_void) -> Self::Unowned;
+    unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F);
+}\
+'''
+    else:
+        yield 'pub use wx_base::methods::*;'
+    bindings = [RustClassBinding(cls) for cls in classes.in_lib(libname, generated)]
+    for cls in bindings:
+        for line in cls.lines(for_methods=True):
+            yield line
+
 def generated_mod_rs(classes, config, libname):
     yield '''\
 #![allow(dead_code)]
@@ -83,35 +108,10 @@ use wx_base::*;\
     yield '''\
 
 mod ffi;
+pub mod methods;
 
-pub mod methods {
-    use std::os::raw::{c_int, c_long, c_void};
-
-    use super::*;
-    use crate::WeakRef;
 '''
-    if libname == 'base':
-        yield '''\
-    pub trait WxRustMethods {
-        type Unowned;
-        unsafe fn as_ptr(&self) -> *mut c_void;
-        unsafe fn from_ptr(ptr: *mut c_void) -> Self;
-        unsafe fn from_unowned_ptr(ptr: *mut c_void) -> Self::Unowned;
-        unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F);
-    }\
-'''
-    else:
-        yield '    pub use wx_base::methods::*;'
     bindings = [RustClassBinding(cls) for cls in classes.in_lib(libname, generated)]
-    for cls in bindings:
-        for line in cls.lines(for_methods=True):
-            if line:
-                yield '    %s' % (line,)
-            else:
-                yield ''
-    yield '''\
-}\
-'''
     for cls in bindings:
         for line in cls.lines():
             yield line
