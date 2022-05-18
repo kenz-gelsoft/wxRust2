@@ -16,7 +16,7 @@ wxml_files = [
     'wxml/classwx_menu.xml',
     'wxml/classwx_menu_bar.xml',
     'wxml/classwx_non_owned_window.xml',
-    # 'wxml/classwx_notebook.xml',
+    'wxml/classwx_notebook.xml',
     'wxml/classwx_object.xml',
     'wxml/classwx_panel.xml',
     'wxml/classwx_point.xml',
@@ -129,6 +129,11 @@ mac = [
 ]
 [types.wxNonOwnedWindow]
 library = 'core'
+[types.wxNotebook]
+blocklist = [
+    'Create',
+    'OnSelChange',
+]
 [types.wxObject]
 blocklist = [
     'operator new',

@@ -303,6 +303,12 @@ wxMenuBar * wxMenuBar_MacGetCommonMenuBar();
 bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow * self, const wxRegion * region);
 bool wxNonOwnedWindow_SetShape1(wxNonOwnedWindow * self, const wxGraphicsPath * path);
 
+// CLASS: wxNotebook
+wxNotebook *wxNotebook_new();
+wxNotebook *wxNotebook_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+int wxNotebook_GetRowCount(const wxNotebook * self);
+void wxNotebook_SetPadding(wxNotebook * self, const wxSize * padding);
+
 // CLASS: wxPanel
 wxPanel *wxPanel_new();
 wxPanel *wxPanel_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);

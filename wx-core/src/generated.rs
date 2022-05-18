@@ -620,6 +620,23 @@ mod ffi {
         pub fn wxNonOwnedWindow_SetShape(self_: *mut c_void, region: *const c_void) -> bool;
         pub fn wxNonOwnedWindow_SetShape1(self_: *mut c_void, path: *const c_void) -> bool;
 
+        // wxNotebook
+        pub fn wxNotebook_new() -> *mut c_void;
+        pub fn wxNotebook_new1(
+            parent: *mut c_void,
+            id: c_int,
+            pos: *const c_void,
+            size: *const c_void,
+            style: c_long,
+            name: *const c_void,
+        ) -> *mut c_void;
+        // DTOR: pub fn wxNotebook_~wxNotebook(self_: *mut c_void);
+        // BLOCKED: pub fn wxNotebook_Create(self_: *mut c_void, parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> bool;
+        pub fn wxNotebook_GetRowCount(self_: *const c_void) -> c_int;
+        // NOT_SUPPORTED: pub fn wxNotebook_GetThemeBackgroundColour(self_: *const c_void) -> wxColour;
+        // BLOCKED: pub fn wxNotebook_OnSelChange(self_: *mut c_void, event: *mut c_void);
+        pub fn wxNotebook_SetPadding(self_: *mut c_void, padding: *const c_void);
+
         // wxPanel
         pub fn wxPanel_new() -> *mut c_void;
         pub fn wxPanel_new1(
@@ -3105,6 +3122,22 @@ pub mod methods {
         }
         fn set_shape_graphicspath(&self, path: *const c_void) -> bool {
             unsafe { ffi::wxNonOwnedWindow_SetShape1(self.as_ptr(), path) }
+        }
+    }
+
+    // wxNotebook
+    pub trait NotebookMethods: BookCtrlBaseMethods {
+        // DTOR: fn ~wxNotebook()
+        fn get_row_count(&self) -> c_int {
+            unsafe { ffi::wxNotebook_GetRowCount(self.as_ptr()) }
+        }
+        // NOT_SUPPORTED: fn GetThemeBackgroundColour()
+        // BLOCKED: fn OnSelChange()
+        fn set_padding<S: SizeMethods>(&self, padding: &S) {
+            unsafe {
+                let padding = padding.as_ptr();
+                ffi::wxNotebook_SetPadding(self.as_ptr(), padding)
+            }
         }
     }
 
@@ -6638,6 +6671,50 @@ impl<const OWNED: bool> NonOwnedWindowIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
     }
+}
+
+// wxNotebook
+wx_class! { Notebook =
+    NotebookIsOwned<true>(wxNotebook) impl
+        NotebookMethods,
+        // BookCtrlBaseMethods,
+        ControlMethods,
+        // WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> NotebookIsOwned<OWNED> {
+    pub fn new_2step() -> NotebookIsOwned<OWNED> {
+        unsafe { NotebookIsOwned(ffi::wxNotebook_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> NotebookIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            NotebookIsOwned(ffi::wxNotebook_new1(parent, id, pos, size, style, name))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> BookCtrlBaseMethods for NotebookIsOwned<OWNED> {
+    // BLOCKED: fn Create()
+}
+impl<const OWNED: bool> WindowMethods for NotebookIsOwned<OWNED> {
+    // BLOCKED: fn Create()
 }
 
 // wxPanel
