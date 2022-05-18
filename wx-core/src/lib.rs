@@ -9,6 +9,8 @@ pub use wx_base::*;
 
 #[doc(hidden)]
 pub mod methods {
+    use std::os::raw::c_int;
+
     pub use super::generated::methods::*;
 
     // re-export wx_base::methods
@@ -16,6 +18,14 @@ pub mod methods {
 
     pub trait Buildable<'a, P, B> {
         fn builder(parent: Option<&'a P>) -> B;
+    }
+
+    pub trait MenuItemBuilder {
+        fn item<ID: Into<c_int>>(self, id: ID, s: &str) -> Self;
+        fn check_item<ID: Into<c_int>>(self, id: ID, s: &str) -> Self;
+        fn radio_item<ID: Into<c_int>>(self, id: ID, s: &str) -> Self;
+        fn sub_menu<M: MenuMethods>(self, submenu: &M, s: &str) -> Self;
+        fn separator(self) -> Self;
     }
 }
 use methods::*;
@@ -368,6 +378,29 @@ impl<'a, P: WindowMethods> ToolBarBuilder<'a, P> {
         let pos = self.pos.take().unwrap_or_else(|| Point::default());
         let size = self.size.take().unwrap_or_else(|| Size::default());
         ToolBar::new(self.parent, self.id, &pos, &size, self.style, "")
+    }
+}
+
+impl MenuItemBuilder for Menu {
+    fn item<ID: Into<c_int>>(self, id: ID, s: &str) -> Self {
+        self.append_int_str(id.into(), s, "", ITEM_NORMAL);
+        self
+    }
+    fn check_item<ID: Into<c_int>>(self, id: ID, s: &str) -> Self {
+        self.append_check_item(id.into(), s, "");
+        self
+    }
+    fn radio_item<ID: Into<c_int>>(self, id: ID, s: &str) -> Self {
+        self.append_radio_item(id.into(), s, "");
+        self
+    }
+    fn sub_menu<M: MenuMethods>(self, submenu: &M, s: &str) -> Self {
+        self.append_sub_menu(Some(submenu), s, "");
+        self
+    }
+    fn separator(self) -> Self {
+        self.append_separator();
+        self
     }
 }
 
