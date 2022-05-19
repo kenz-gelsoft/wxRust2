@@ -38,6 +38,14 @@ OS_UNSUPPORTED_TYPES = [
 MANUAL_BINDINGS = [
     'wxArrayString',
 ]
+# Known, and problematic
+RUST_KEYWORDS = [
+    'box',
+    'break',
+    'move',
+    'ref',
+    'type',
+]
 
 
 class Class:
@@ -197,7 +205,7 @@ class Method:
 class Param:
     def __init__(self, type, name):
         self.type = type
-        self.name = camel_to_snake(name)
+        self.name = non_keyword_name(camel_to_snake(name))
     
     def is_self(self):
         return self.name == 'self'
@@ -508,3 +516,7 @@ def camel_to_snake(camel_case):
     pascal_case = camel_case[0].upper() + camel_case[1:]
     return pascal_to_snake(pascal_case)
 
+def non_keyword_name(name):
+    while name in RUST_KEYWORDS:
+        name += '_'
+    return name
