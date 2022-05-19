@@ -824,9 +824,7 @@ pub trait ListBoxMethods: ControlMethods {
     fn get_top_item(&self) -> c_int {
         unsafe { ffi::wxListBox_GetTopItem(self.as_ptr()) }
     }
-    fn msw_set_tab_stops(&self, tab_stops: *const c_void) {
-        unsafe { ffi::wxListBox_MSWSetTabStops(self.as_ptr(), tab_stops) }
-    }
+    // BLOCKED: fn MSWSetTabStops()
 }
 
 // wxMenu

@@ -520,11 +520,6 @@ int wxListBox_GetTopItem(const wxListBox * self) {
     return self->GetTopItem();
 }
 #endif
-#ifdef __WXMSW__
-void wxListBox_MSWSetTabStops(wxListBox * self, const wxVector< int > * tab_stops) {
-    return self->MSWSetTabStops(*tab_stops);
-}
-#endif
 
 // CLASS: wxMenu
 wxMenu *wxMenu_new() {

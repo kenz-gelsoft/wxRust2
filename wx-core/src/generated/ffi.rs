@@ -387,7 +387,7 @@ extern "C" {
     pub fn wxListBox_IsSorted(self_: *const c_void) -> bool;
     pub fn wxListBox_GetCountPerPage(self_: *const c_void) -> c_int;
     pub fn wxListBox_GetTopItem(self_: *const c_void) -> c_int;
-    pub fn wxListBox_MSWSetTabStops(self_: *mut c_void, tab_stops: *const c_void);
+    // BLOCKED: pub fn wxListBox_MSWSetTabStops(self_: *mut c_void, tab_stops: *const c_void);
 
     // wxMenu
     pub fn wxMenu_new() -> *mut c_void;

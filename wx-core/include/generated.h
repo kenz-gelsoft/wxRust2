@@ -202,9 +202,6 @@ bool wxListBox_IsSorted(const wxListBox * self);
 int wxListBox_GetCountPerPage(const wxListBox * self);
 int wxListBox_GetTopItem(const wxListBox * self);
 #endif
-#ifdef __WXMSW__
-void wxListBox_MSWSetTabStops(wxListBox * self, const wxVector< int > * tab_stops);
-#endif
 
 // CLASS: wxMenu
 wxMenu *wxMenu_new();

@@ -104,7 +104,7 @@ blocklist = [
     'wxGDIObject',
 ]
 [types.wxListBox]
-windows = [
+blocklist = [
     'MSWSetTabStops',
 ]
 wx31 = [
