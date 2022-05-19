@@ -29,7 +29,7 @@ def generate_library(classes, config, libname):
     to_be_generated = {
         'src/generated/ffi.rs': generated_ffi_rs,
         'src/generated/methods.rs': generated_methods_rs,
-        'src/generated/mod.rs': generated_mod_rs,
+        'src/generated.rs': generated_rs,
         'include/generated.h': generated_h,
         'src/generated.cpp': generated_cpp,
     }
@@ -90,7 +90,7 @@ pub trait WxRustMethods {
         for line in cls.lines(for_methods=True):
             yield line
 
-def generated_mod_rs(classes, libname):
+def generated_rs(classes, libname):
     yield '''\
 #![allow(dead_code)]
 #![allow(non_upper_case_globals)]
