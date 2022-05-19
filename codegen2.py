@@ -27,21 +27,70 @@ generated = []
 def generate_library(classes, config, libname):
     generated.append(libname)
     to_be_generated = {
+        'src/generated/ffi.rs': generated_ffi_rs,
+        'src/generated/methods.rs': generated_methods_rs,
         'src/generated.rs': generated_rs,
         'include/generated.h': generated_h,
         'src/generated.cpp': generated_cpp,
     }
+    rust_bindings = [RustClassBinding(cls) for cls in classes.in_lib(libname, generated)]
+    cxx_bindings = [CxxClassBinding(cls, config) for cls in classes.in_lib(libname, generated)]
     for path, generator in to_be_generated.items():
+        is_rust = path.endswith('.rs')
         if libname:
             path = 'wx-%s/%s' % (libname, path)
         with open(path, 'w') as f:
-            for chunk in generator(classes, config, libname):
+            for chunk in generator(
+                rust_bindings if is_rust else cxx_bindings,
+                libname
+            ):
                 print(chunk, file=f)
-        if path.endswith('.rs'):
+        if is_rust:
             print(subprocess.check_output(['rustfmt', path]))
 
+def generated_ffi_rs(classes, libname):
+    yield '''\
+use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
 
-def generated_rs(classes, config, libname):
+pub use crate::ffi::*;
+
+extern "C" {'''
+    indent = ' ' * 4 * 1
+    for cls in classes:
+        for line in cls.lines(for_ffi=True):
+            if not line:
+                yield ''
+            else:
+                yield '%s%s' % (indent, line)
+    yield '''\
+
+}\
+'''
+
+def generated_methods_rs(classes, libname):
+    yield '''\
+use std::os::raw::{c_int, c_long, c_void};
+
+use super::*;
+use crate::WeakRef;
+'''
+    if libname == 'base':
+        yield '''\
+pub trait WxRustMethods {
+    type Unowned;
+    unsafe fn as_ptr(&self) -> *mut c_void;
+    unsafe fn from_ptr(ptr: *mut c_void) -> Self;
+    unsafe fn from_unowned_ptr(ptr: *mut c_void) -> Self::Unowned;
+    unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F);
+}\
+'''
+    else:
+        yield 'pub use wx_base::methods::*;'
+    for cls in classes:
+        for line in cls.lines(for_methods=True):
+            yield line
+
+def generated_rs(classes, libname):
     yield '''\
 #![allow(dead_code)]
 #![allow(non_upper_case_globals)]
@@ -62,57 +111,16 @@ use wx_base::*;\
 '''
     yield '''\
 
-mod ffi {
-    use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
+mod ffi;
+pub mod methods;
 
-    pub use crate::ffi::*;
-
-    extern "C" {'''
-    bindings = [RustClassBinding(cls) for cls in classes.in_lib(libname, generated)]
-    indent = ' ' * 4 * 2
-    for cls in bindings:
-        for line in cls.lines(for_ffi=True):
-            if not line:
-                yield ''
-            else:
-                yield '%s%s' % (indent, line)
-    yield '''\
-    }
-}
-
-pub mod methods {
-    use std::os::raw::{c_int, c_long, c_void};
-
-    use super::*;
-    use crate::WeakRef;
 '''
-    if libname == 'base':
-        yield '''\
-    pub trait WxRustMethods {
-        type Unowned;
-        unsafe fn as_ptr(&self) -> *mut c_void;
-        unsafe fn from_ptr(ptr: *mut c_void) -> Self;
-        unsafe fn from_unowned_ptr(ptr: *mut c_void) -> Self::Unowned;
-        unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F);
-    }\
-'''
-    else:
-        yield '    pub use wx_base::methods::*;'
-    for cls in bindings:
-        for line in cls.lines(for_methods=True):
-            if line:
-                yield '    %s' % (line,)
-            else:
-                yield ''
-    yield '''\
-}\
-'''
-    for cls in bindings:
+    for cls in classes:
         for line in cls.lines():
             yield line
 
 
-def generated_h(classes, config, libname):
+def generated_h(classes, libname):
     yield '''\
 #pragma once
 #include <wx/wx.h>
@@ -122,23 +130,21 @@ def generated_h(classes, config, libname):
 
 extern "C" {
 '''
-    for cls in classes.in_lib(libname, generated):
-        binding = CxxClassBinding(cls, config)
-        for line in binding.lines():
+    for cls in classes:
+        for line in cls.lines():
             yield line
     yield '''\
 } // extern "C"
 '''
 
-def generated_cpp(classes, config, libname):
+def generated_cpp(classes, libname):
     yield '''\
 #include "generated.h"
 
 extern "C" {
 '''
-    for cls in classes.in_lib(libname, generated):
-        binding = CxxClassBinding(cls, config)
-        for line in binding.lines(is_cc=True):
+    for cls in classes:
+        for line in cls.lines(is_cc=True):
             yield line
     yield '''\
 } // extern "C"
