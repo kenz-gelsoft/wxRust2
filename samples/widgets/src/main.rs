@@ -89,8 +89,12 @@ struct WidgetsFrame {
 }
 impl WidgetsFrame {
     fn new(title: &str) -> Self {
-        let frame = wx::Frame::builder(wx::Window::none()).title(title).build();
-
+        let base = wx::Frame::builder(wx::Window::none()).title(title).build();
+        let frame = WidgetsFrame { base: base };
+        frame.on_create();
+        frame
+    }
+    fn on_create(&self) {
         let mbar = wx::MenuBar::new(0);
 
         let menu_widget = wx::Menu::new()
@@ -134,7 +138,7 @@ impl WidgetsFrame {
 
         menu_widget.check(
             Widgets::LayoutDirection.into(),
-            frame.get_layout_direction() == wx::Layout_RightToLeft,
+            self.base.get_layout_direction() == wx::Layout_RightToLeft,
         );
         mbar.append(Some(&menu_widget), "&Widget");
 
@@ -155,13 +159,28 @@ impl WidgetsFrame {
             .item(TextEntry::SetHint, "Set help &hint");
         mbar.append(Some(&menu_text_entry), "&Text");
 
-        frame.set_menu_bar(Some(&mbar));
+        self.base.set_menu_bar(Some(&mbar));
 
         mbar.check(Widgets::Enable.into(), true);
         mbar.check(Widgets::Show.into(), true);
 
         mbar.check(Widgets::VariantNormal.into(), true);
 
-        WidgetsFrame { base: frame }
+        // create controls
+        let panel = wx::Panel::builder(Some(&self.base)).build();
+
+        let sizer_top = wx::BoxSizer::new(wx::VERTICAL);
+
+        let style = wx::BK_DEFAULT;
+
+        let book = wx::Notebook::builder(Some(&panel))
+            .id(Widgets::BookCtrl.into())
+            .style(style.into())
+            .build();
+
+        self.init_book();
+    }
+
+    fn init_book(&self) {
     }
 }
