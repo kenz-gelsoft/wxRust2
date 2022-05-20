@@ -219,6 +219,11 @@ wx31 = [
     'CentreHorizontal',
     'CentreVertical',
 ]
+[types.wxStaticBox]
+blocklist = [
+    'wxStaticBox2',
+    'Create1',
+]
 [types.wxToolBar]
 blocklist = [
     # const getter

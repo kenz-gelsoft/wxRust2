@@ -1386,14 +1386,8 @@ wxStaticBox *wxStaticBox_new() {
 wxStaticBox *wxStaticBox_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return new wxStaticBox(parent, id, *label, *pos, *size, style, *name);
 }
-wxStaticBox *wxStaticBox_new2(wxWindow * parent, wxWindowID id, wxWindow * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
-    return new wxStaticBox(parent, id, label, *pos, *size, style, *name);
-}
 bool wxStaticBox_Create(wxStaticBox * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return self->Create(parent, id, *label, *pos, *size, style, *name);
-}
-bool wxStaticBox_Create1(wxStaticBox * self, wxWindow * parent, wxWindowID id, wxWindow * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
-    return self->Create(parent, id, label, *pos, *size, style, *name);
 }
 
 // CLASS: wxStaticBoxSizer

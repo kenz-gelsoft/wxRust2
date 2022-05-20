@@ -512,9 +512,7 @@ void wxStaticBitmap_SetIcon(wxStaticBitmap * self, const wxIcon * label);
 // CLASS: wxStaticBox
 wxStaticBox *wxStaticBox_new();
 wxStaticBox *wxStaticBox_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-wxStaticBox *wxStaticBox_new2(wxWindow * parent, wxWindowID id, wxWindow * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxStaticBox_Create(wxStaticBox * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-bool wxStaticBox_Create1(wxStaticBox * self, wxWindow * parent, wxWindowID id, wxWindow * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 
 // CLASS: wxStaticBoxSizer
 wxStaticBoxSizer *wxStaticBoxSizer_new(wxStaticBox * box_, int orient);

@@ -822,32 +822,7 @@ impl<const OWNED: bool> StaticBoxIsOwned<OWNED> {
             ))
         }
     }
-    pub fn new<W: WindowMethods, W2: WindowMethods, P: PointMethods, S: SizeMethods>(
-        parent: Option<&W>,
-        id: c_int,
-        label: Option<&W2>,
-        pos: &P,
-        size: &S,
-        style: c_long,
-        name: &str,
-    ) -> StaticBoxIsOwned<OWNED> {
-        unsafe {
-            let parent = match parent {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            let label = match label {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            let pos = pos.as_ptr();
-            let size = size.as_ptr();
-            let name = wx_base::wx_string_from(name);
-            StaticBoxIsOwned(ffi::wxStaticBox_new2(
-                parent, id, label, pos, size, style, name,
-            ))
-        }
-    }
+    // BLOCKED: fn wxStaticBox2()
     pub fn none() -> Option<&'static Self> {
         None
     }

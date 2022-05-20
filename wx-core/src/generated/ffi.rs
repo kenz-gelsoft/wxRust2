@@ -1072,15 +1072,7 @@ extern "C" {
         style: c_long,
         name: *const c_void,
     ) -> *mut c_void;
-    pub fn wxStaticBox_new2(
-        parent: *mut c_void,
-        id: c_int,
-        label: *mut c_void,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> *mut c_void;
+    // BLOCKED: pub fn wxStaticBox_new2(parent: *mut c_void, id: c_int, label: *mut c_void, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> *mut c_void;
     // DTOR: pub fn wxStaticBox_~wxStaticBox(self_: *mut c_void);
     pub fn wxStaticBox_Create(
         self_: *mut c_void,
@@ -1092,16 +1084,7 @@ extern "C" {
         style: c_long,
         name: *const c_void,
     ) -> bool;
-    pub fn wxStaticBox_Create1(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        id: c_int,
-        label: *mut c_void,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> bool;
+    // BLOCKED: pub fn wxStaticBox_Create1(self_: *mut c_void, parent: *mut c_void, id: c_int, label: *mut c_void, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> bool;
 
     // wxStaticBoxSizer
     pub fn wxStaticBoxSizer_new(box_: *mut c_void, orient: c_int) -> *mut c_void;

@@ -2547,7 +2547,7 @@ pub trait StaticBitmapMethods: ControlMethods {
 // wxStaticBox
 pub trait StaticBoxMethods: ControlMethods {
     // DTOR: fn ~wxStaticBox()
-    fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
         id: c_int,
@@ -2569,31 +2569,7 @@ pub trait StaticBoxMethods: ControlMethods {
             ffi::wxStaticBox_Create(self.as_ptr(), parent, id, label, pos, size, style, name)
         }
     }
-    fn create_window<W: WindowMethods, W2: WindowMethods, P: PointMethods, S: SizeMethods>(
-        &self,
-        parent: Option<&W>,
-        id: c_int,
-        label: Option<&W2>,
-        pos: &P,
-        size: &S,
-        style: c_long,
-        name: &str,
-    ) -> bool {
-        unsafe {
-            let parent = match parent {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            let label = match label {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            let pos = pos.as_ptr();
-            let size = size.as_ptr();
-            let name = wx_base::wx_string_from(name);
-            ffi::wxStaticBox_Create1(self.as_ptr(), parent, id, label, pos, size, style, name)
-        }
-    }
+    // BLOCKED: fn Create1()
 }
 
 // wxStaticBoxSizer

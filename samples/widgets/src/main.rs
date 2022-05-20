@@ -181,6 +181,5 @@ impl WidgetsFrame {
         self.init_book();
     }
 
-    fn init_book(&self) {
-    }
+    fn init_book(&self) {}
 }
