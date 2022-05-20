@@ -71,8 +71,8 @@ impl<'a, P: WindowMethods> FrameBuilder<'a, P> {
         self.id = id;
         self
     }
-    pub fn title(&mut self, s: &str) -> &mut Self {
-        self.title = s.to_string();
+    pub fn title(&mut self, title: &str) -> &mut Self {
+        self.title = title.to_string();
         self
     }
     pub fn pos(&mut self, pos: Point) -> &mut Self {
@@ -141,7 +141,7 @@ impl<'a, P: WindowMethods> PanelBuilder<'a, P> {
 pub struct ButtonBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
-    title: String,
+    label: String,
     pos: Option<Point>,
     size: Option<Size>,
     style: c_long,
@@ -152,7 +152,7 @@ impl<'a, P: WindowMethods> Buildable<'a, P, ButtonBuilder<'a, P>> for Button {
         ButtonBuilder {
             parent: parent,
             id: ID_ANY,
-            title: "".to_string(),
+            label: "".to_string(),
             pos: None,
             size: None,
             style: 0,
@@ -165,8 +165,8 @@ impl<'a, P: WindowMethods> ButtonBuilder<'a, P> {
         self.id = id;
         self
     }
-    pub fn title(&mut self, s: &str) -> &mut Self {
-        self.title = s.to_string();
+    pub fn label(&mut self, label: &str) -> &mut Self {
+        self.label = label.to_string();
         self
     }
     pub fn pos(&mut self, pos: Point) -> &mut Self {
@@ -195,7 +195,7 @@ impl<'a, P: WindowMethods> ButtonBuilder<'a, P> {
         Button::new(
             self.parent,
             self.id,
-            &self.title,
+            &self.label,
             &pos,
             &size,
             self.style,
@@ -208,7 +208,7 @@ impl<'a, P: WindowMethods> ButtonBuilder<'a, P> {
 pub struct CheckBoxBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
-    title: String,
+    label: String,
     pos: Option<Point>,
     size: Option<Size>,
     style: c_long,
@@ -219,7 +219,7 @@ impl<'a, P: WindowMethods> Buildable<'a, P, CheckBoxBuilder<'a, P>> for CheckBox
         CheckBoxBuilder {
             parent: parent,
             id: ID_ANY,
-            title: "".to_string(),
+            label: "".to_string(),
             pos: None,
             size: None,
             style: 0,
@@ -232,8 +232,8 @@ impl<'a, P: WindowMethods> CheckBoxBuilder<'a, P> {
         self.id = id;
         self
     }
-    pub fn title(&mut self, s: &str) -> &mut Self {
-        self.title = s.to_string();
+    pub fn label(&mut self, label: &str) -> &mut Self {
+        self.label = label.to_string();
         self
     }
     pub fn pos(&mut self, pos: Point) -> &mut Self {
@@ -262,7 +262,7 @@ impl<'a, P: WindowMethods> CheckBoxBuilder<'a, P> {
         CheckBox::new(
             self.parent,
             self.id,
-            &self.title,
+            &self.label,
             &pos,
             &size,
             self.style,
@@ -382,6 +382,62 @@ impl<'a, P: WindowMethods> NotebookBuilder<'a, P> {
     }
 }
 
+pub struct StaticTextBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    id: c_int,
+    label: String,
+    pos: Option<Point>,
+    size: Option<Size>,
+    style: c_long,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, StaticTextBuilder<'a, P>> for StaticText {
+    fn builder(parent: Option<&'a P>) -> StaticTextBuilder<'a, P> {
+        StaticTextBuilder {
+            parent: parent,
+            id: ID_ANY,
+            label: "".to_string(),
+            pos: None,
+            size: None,
+            style: 0,
+        }
+    }
+}
+impl<'a, P: WindowMethods> StaticTextBuilder<'a, P> {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn label(&mut self, label: &str) -> &mut Self {
+        self.label = label.to_string();
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn build(&mut self) -> StaticText {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        StaticText::new(
+            self.parent,
+            self.id,
+            &self.label,
+            &pos,
+            &size,
+            self.style,
+            "",
+        )
+    }
+}
+
 pub struct ToolBarBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
@@ -425,23 +481,23 @@ impl<'a, P: WindowMethods> ToolBarBuilder<'a, P> {
 }
 
 impl MenuItemBuilder for Menu {
-    fn item<ID: Into<c_int>>(self, id: ID, s: &str) -> Self {
-        self.item_h(id, s, "")
+    fn item<ID: Into<c_int>>(self, id: ID, item: &str) -> Self {
+        self.item_h(id, item, "")
     }
-    fn item_h<ID: Into<c_int>>(self, id: ID, s: &str, h: &str) -> Self {
-        self.append_int_str(id.into(), s, h, ITEM_NORMAL);
+    fn item_h<ID: Into<c_int>>(self, id: ID, item: &str, help: &str) -> Self {
+        self.append_int_str(id.into(), item, help, ITEM_NORMAL);
         self
     }
-    fn check_item<ID: Into<c_int>>(self, id: ID, s: &str) -> Self {
-        self.append_check_item(id.into(), s, "");
+    fn check_item<ID: Into<c_int>>(self, id: ID, item: &str) -> Self {
+        self.append_check_item(id.into(), item, "");
         self
     }
-    fn radio_item<ID: Into<c_int>>(self, id: ID, s: &str) -> Self {
-        self.append_radio_item(id.into(), s, "");
+    fn radio_item<ID: Into<c_int>>(self, id: ID, item: &str) -> Self {
+        self.append_radio_item(id.into(), item, "");
         self
     }
-    fn sub_menu<M: MenuMethods>(self, s: &str, submenu: &M) -> Self {
-        self.append_sub_menu(Some(submenu), s, "");
+    fn sub_menu<M: MenuMethods>(self, text: &str, submenu: &M) -> Self {
+        self.append_sub_menu(Some(submenu), text, "");
         self
     }
     fn separator(self) -> Self {

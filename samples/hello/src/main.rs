@@ -8,7 +8,7 @@ fn main() {
         let frame = wx::Frame::builder(wx::Window::none())
             .title("Hello, 世界")
             .build();
-        let button = wx::Button::builder(Some(&frame)).title("Greet").build();
+        let button = wx::Button::builder(Some(&frame)).label("Greet").build();
         let i = 3;
         println!("i={}", i);
         let button_copy = button.clone();

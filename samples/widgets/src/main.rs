@@ -4,6 +4,8 @@ use std::os::raw::c_int;
 use wx;
 use wx::methods::*;
 
+// mod activityindicator;
+
 enum Widgets {
     ClearLog = 100,
     Quit,
@@ -185,7 +187,7 @@ impl WidgetsFrame {
         let sizer_btns = wx::BoxSizer::new(wx::HORIZONTAL);
         let btn = wx::Button::builder(Some(&panel))
             .id(Widgets::Quit.into())
-            .title("E&xit")
+            .label("E&xit")
             .build();
         sizer_btns.add_window_int(Some(&btn), 0, 0, 0, wx::Object::none());
         sizer_down.add_sizer_sizerflags(
