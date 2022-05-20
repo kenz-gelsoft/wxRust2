@@ -1401,6 +1401,23 @@ wxStaticBox * wxStaticBoxSizer_GetStaticBox(const wxStaticBoxSizer * self) {
     return self->GetStaticBox();
 }
 
+// CLASS: wxStaticText
+wxStaticText *wxStaticText_new() {
+    return new wxStaticText();
+}
+wxStaticText *wxStaticText_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxStaticText(parent, id, *label, *pos, *size, style, *name);
+}
+bool wxStaticText_Create(wxStaticText * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, id, *label, *pos, *size, style, *name);
+}
+bool wxStaticText_IsEllipsized(const wxStaticText * self) {
+    return self->IsEllipsized();
+}
+void wxStaticText_Wrap(wxStaticText * self, int width) {
+    return self->Wrap(width);
+}
+
 // CLASS: wxToolBar
 wxToolBar *wxToolBar_new() {
     return new wxToolBar();

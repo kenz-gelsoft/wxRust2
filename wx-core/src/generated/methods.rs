@@ -2579,6 +2579,38 @@ pub trait StaticBoxSizerMethods: BoxSizerMethods {
     }
 }
 
+// wxStaticText
+pub trait StaticTextMethods: ControlMethods {
+    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        label: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let label = wx_base::wx_string_from(label);
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            ffi::wxStaticText_Create(self.as_ptr(), parent, id, label, pos, size, style, name)
+        }
+    }
+    fn is_ellipsized(&self) -> bool {
+        unsafe { ffi::wxStaticText_IsEllipsized(self.as_ptr()) }
+    }
+    fn wrap(&self, width: c_int) {
+        unsafe { ffi::wxStaticText_Wrap(self.as_ptr(), width) }
+    }
+}
+
 // wxToolBar
 pub trait ToolBarMethods: ControlMethods {
     // DTOR: fn ~wxToolBar()

@@ -868,6 +868,47 @@ impl<const OWNED: bool> StaticBoxSizerIsOwned<OWNED> {
     }
 }
 
+// wxStaticText
+wx_class! { StaticText =
+    StaticTextIsOwned<true>(wxStaticText) impl
+        StaticTextMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> StaticTextIsOwned<OWNED> {
+    pub fn new_2step() -> StaticTextIsOwned<OWNED> {
+        unsafe { StaticTextIsOwned(ffi::wxStaticText_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        label: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> StaticTextIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let label = wx_base::wx_string_from(label);
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            StaticTextIsOwned(ffi::wxStaticText_new1(
+                parent, id, label, pos, size, style, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
 // wxToolBar
 wx_class! { ToolBar =
     ToolBarIsOwned<true>(wxToolBar) impl

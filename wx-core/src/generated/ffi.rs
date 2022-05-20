@@ -1095,6 +1095,30 @@ extern "C" {
     ) -> *mut c_void;
     pub fn wxStaticBoxSizer_GetStaticBox(self_: *const c_void) -> *mut c_void;
 
+    // wxStaticText
+    pub fn wxStaticText_new() -> *mut c_void;
+    pub fn wxStaticText_new1(
+        parent: *mut c_void,
+        id: c_int,
+        label: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxStaticText_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        label: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxStaticText_IsEllipsized(self_: *const c_void) -> bool;
+    pub fn wxStaticText_Wrap(self_: *mut c_void, width: c_int);
+
     // wxToolBar
     pub fn wxToolBar_new() -> *mut c_void;
     pub fn wxToolBar_new1(
