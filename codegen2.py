@@ -123,10 +123,16 @@ pub mod methods;
 def generated_h(classes, libname):
     yield '''\
 #pragma once
-#include <wx/wx.h>
+#include <wx/wx.h>\
+'''
+    if libname == 'core':
+        yield '''\
+#include <wx/activityindicator.h>
 #include <wx/artprov.h>
 #include <wx/bookctrl.h>
-#include <wx/wrapsizer.h>
+#include <wx/wrapsizer.h>\
+'''
+    yield '''\
 
 extern "C" {
 '''

@@ -4,6 +4,29 @@ pub use crate::ffi::*;
 
 extern "C" {
 
+    // wxActivityIndicator
+    pub fn wxActivityIndicator_new() -> *mut c_void;
+    pub fn wxActivityIndicator_new1(
+        parent: *mut c_void,
+        winid: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxActivityIndicator_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        winid: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxActivityIndicator_Start(self_: *mut c_void);
+    pub fn wxActivityIndicator_Stop(self_: *mut c_void);
+    pub fn wxActivityIndicator_IsRunning(self_: *const c_void) -> bool;
+
     // wxAnyButton
     pub fn wxAnyButton_new() -> *mut c_void;
     // DTOR: pub fn wxAnyButton_~wxAnyButton(self_: *mut c_void);
