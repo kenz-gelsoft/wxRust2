@@ -179,6 +179,41 @@ impl WidgetsFrame {
             .build();
 
         self.init_book();
+
+        let sizer_down = wx::BoxSizer::new(wx::VERTICAL);
+
+        let sizer_btns = wx::BoxSizer::new(wx::HORIZONTAL);
+        let btn = wx::Button::builder(Some(&panel))
+            .id(Widgets::Quit.into())
+            .title("E&xit")
+            .build();
+        sizer_btns.add_window_int(Some(&btn), 0, 0, 0, wx::Object::none());
+        sizer_down.add_sizer_sizerflags(
+            Some(&sizer_btns),
+            wx::SizerFlags::new(0).border(wx::ALL).right(),
+        );
+
+        sizer_top.add_window_sizerflags(
+            Some(&book),
+            wx::SizerFlags::new(1)
+                .expand()
+                .double_border(wx::ALL & !(wx::TOP | wx::BOTTOM)),
+        );
+        sizer_top.add_spacer(5);
+        sizer_top.add_sizer_sizerflags(
+            Some(&sizer_down),
+            wx::SizerFlags::new(0)
+                .expand()
+                .double_border(wx::ALL & !wx::TOP),
+        );
+
+        panel.set_sizer(Some(&sizer_top), true);
+
+        // wxPersistentRegisterAndRestore
+        let size_min = panel.get_best_size();
+
+        self.base.set_client_size_size(&size_min);
+        self.base.set_min_client_size(&size_min);
     }
 
     fn init_book(&self) {}
