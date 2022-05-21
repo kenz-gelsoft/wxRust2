@@ -15,67 +15,6 @@ use wx_base::*;
 mod ffi;
 pub mod methods;
 
-// wxActivityIndicator
-wx_class! { ActivityIndicator =
-    ActivityIndicatorIsOwned<true>(wxActivityIndicator) impl
-        ActivityIndicatorMethods,
-        ControlMethods,
-        // WindowMethods,
-        EvtHandlerMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> ActivityIndicatorIsOwned<OWNED> {
-    pub fn new_2step() -> ActivityIndicatorIsOwned<OWNED> {
-        unsafe { ActivityIndicatorIsOwned(ffi::wxActivityIndicator_new()) }
-    }
-    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
-        parent: Option<&W>,
-        winid: c_int,
-        pos: &P,
-        size: &S,
-        style: c_long,
-        name: &str,
-    ) -> ActivityIndicatorIsOwned<OWNED> {
-        unsafe {
-            let parent = match parent {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            let pos = pos.as_ptr();
-            let size = size.as_ptr();
-            let name = wx_base::wx_string_from(name);
-            ActivityIndicatorIsOwned(ffi::wxActivityIndicator_new1(
-                parent, winid, pos, size, style, name,
-            ))
-        }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> WindowMethods for ActivityIndicatorIsOwned<OWNED> {
-    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
-        &self,
-        parent: Option<&W>,
-        winid: c_int,
-        pos: &P,
-        size: &S,
-        style: c_long,
-        name: &str,
-    ) -> bool {
-        unsafe {
-            let parent = match parent {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            let pos = pos.as_ptr();
-            let size = size.as_ptr();
-            let name = wx_base::wx_string_from(name);
-            ffi::wxActivityIndicator_Create(self.as_ptr(), parent, winid, pos, size, style, name)
-        }
-    }
-}
-
 // wxAnyButton
 wx_class! { AnyButton =
     AnyButtonIsOwned<true>(wxAnyButton) impl

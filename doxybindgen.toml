@@ -1,5 +1,5 @@
 wxml_files = [
-    'wxml/classwx_activity_indicator.xml',
+    #'wxml/classwx_activity_indicator.xml',
     'wxml/classwx_any_button.xml',
     'wxml/classwx_art_provider.xml',
     'wxml/classwx_bitmap.xml',

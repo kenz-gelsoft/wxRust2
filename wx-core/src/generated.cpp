@@ -2,26 +2,6 @@
 
 extern "C" {
 
-// CLASS: wxActivityIndicator
-wxActivityIndicator *wxActivityIndicator_new() {
-    return new wxActivityIndicator();
-}
-wxActivityIndicator *wxActivityIndicator_new1(wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
-    return new wxActivityIndicator(parent, winid, *pos, *size, style, *name);
-}
-bool wxActivityIndicator_Create(wxActivityIndicator * self, wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
-    return self->Create(parent, winid, *pos, *size, style, *name);
-}
-void wxActivityIndicator_Start(wxActivityIndicator * self) {
-    return self->Start();
-}
-void wxActivityIndicator_Stop(wxActivityIndicator * self) {
-    return self->Stop();
-}
-bool wxActivityIndicator_IsRunning(const wxActivityIndicator * self) {
-    return self->IsRunning();
-}
-
 // CLASS: wxAnyButton
 wxAnyButton *wxAnyButton_new() {
     return new wxAnyButton();

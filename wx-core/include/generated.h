@@ -1,19 +1,11 @@
 #pragma once
 #include <wx/wx.h>
-#include <wx/activityindicator.h>
+//#include <wx/activityindicator.h>
 #include <wx/artprov.h>
 #include <wx/bookctrl.h>
 #include <wx/wrapsizer.h>
 
 extern "C" {
-
-// CLASS: wxActivityIndicator
-wxActivityIndicator *wxActivityIndicator_new();
-wxActivityIndicator *wxActivityIndicator_new1(wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-bool wxActivityIndicator_Create(wxActivityIndicator * self, wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-void wxActivityIndicator_Start(wxActivityIndicator * self);
-void wxActivityIndicator_Stop(wxActivityIndicator * self);
-bool wxActivityIndicator_IsRunning(const wxActivityIndicator * self);
 
 // CLASS: wxAnyButton
 wxAnyButton *wxAnyButton_new();

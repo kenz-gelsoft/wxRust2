@@ -5,19 +5,6 @@ use crate::WeakRef;
 
 pub use wx_base::methods::*;
 
-// wxActivityIndicator
-pub trait ActivityIndicatorMethods: ControlMethods {
-    fn start(&self) {
-        unsafe { ffi::wxActivityIndicator_Start(self.as_ptr()) }
-    }
-    fn stop(&self) {
-        unsafe { ffi::wxActivityIndicator_Stop(self.as_ptr()) }
-    }
-    fn is_running(&self) -> bool {
-        unsafe { ffi::wxActivityIndicator_IsRunning(self.as_ptr()) }
-    }
-}
-
 // wxAnyButton
 pub trait AnyButtonMethods: ControlMethods {
     // DTOR: fn ~wxAnyButton()
