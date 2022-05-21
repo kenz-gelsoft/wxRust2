@@ -1,4 +1,5 @@
-use std::os::raw::{c_int, c_long};
+use std::mem;
+use std::os::raw::{c_int, c_long, c_void};
 use std::ptr;
 
 mod generated;
@@ -20,6 +21,12 @@ pub mod methods {
         fn builder(parent: Option<&'a P>) -> B;
     }
 
+    pub trait WindowListMethods: WxRustMethods {
+        fn is_empty(&self) -> bool {
+            unsafe { super::ffi::wxWindowList_IsEmpty(self.as_ptr()) }
+        }
+    }
+
     pub trait MenuItemBuilder {
         fn item<ID: Into<c_int>>(self, id: ID, s: &str) -> Self;
         fn item_h<ID: Into<c_int>>(self, id: ID, s: &str, h: &str) -> Self;
@@ -35,6 +42,12 @@ mod ffi {
     use std::os::raw::{c_int, c_void};
     extern "C" {
         pub fn wxObject_delete(self_: *mut c_void);
+
+        // WindowList
+        pub fn wxWindowList_new() -> *mut c_void;
+        pub fn wxWindowList_delete(self_: *mut c_void);
+        pub fn wxWindowList_IsEmpty(self_: *mut c_void) -> bool;
+
         pub fn wxRustMessageBox(
             message: *const c_void,
             caption: *const c_void,
@@ -564,6 +577,23 @@ impl<const OWNED: bool> Default for SizeIsOwned<OWNED> {
 impl<const OWNED: bool> Default for ValidatorIsOwned<OWNED> {
     fn default() -> Self {
         ValidatorIsOwned::new()
+    }
+}
+
+wx_class! { WindowList =
+    WindowListIsOwned<true>(wxWindowList) impl
+        WindowListMethods
+}
+impl<const OWNED: bool> WindowListIsOwned<OWNED> {
+    pub fn new() -> Self {
+        unsafe { WindowListIsOwned(ffi::wxWindowList_new()) }
+    }
+}
+impl<const OWNED: bool> Drop for WindowListIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxWindowList_delete(self.0) }
+        }
     }
 }
 
