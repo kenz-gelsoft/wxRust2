@@ -437,6 +437,62 @@ impl<'a, P: WindowMethods> NotebookBuilder<'a, P> {
     }
 }
 
+pub struct StaticBoxBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    id: c_int,
+    label: String,
+    pos: Option<Point>,
+    size: Option<Size>,
+    style: c_long,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, StaticBoxBuilder<'a, P>> for StaticBox {
+    fn builder(parent: Option<&'a P>) -> StaticBoxBuilder<'a, P> {
+        StaticBoxBuilder {
+            parent: parent,
+            id: ID_ANY,
+            label: "".to_string(),
+            pos: None,
+            size: None,
+            style: 0,
+        }
+    }
+}
+impl<'a, P: WindowMethods> StaticBoxBuilder<'a, P> {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn label(&mut self, label: &str) -> &mut Self {
+        self.label = label.to_string();
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn build(&mut self) -> StaticBox {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        StaticBox::new(
+            self.parent,
+            self.id,
+            &self.label,
+            &pos,
+            &size,
+            self.style,
+            "",
+        )
+    }
+}
+
 pub struct StaticTextBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
