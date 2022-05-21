@@ -577,6 +577,54 @@ impl<const OWNED: bool> MenuBarIsOwned<OWNED> {
     }
 }
 
+// wxMenuItem
+wx_class! { MenuItem =
+    MenuItemIsOwned<true>(wxMenuItem) impl
+        MenuItemMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> MenuItemIsOwned<OWNED> {
+    pub fn new<M: MenuMethods, M2: MenuMethods>(
+        parent_menu: Option<&M>,
+        id: c_int,
+        text: &str,
+        help_string: &str,
+        kind: c_int,
+        sub_menu: Option<&M2>,
+    ) -> MenuItemIsOwned<OWNED> {
+        unsafe {
+            let parent_menu = match parent_menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let text = wx_base::wx_string_from(text);
+            let help_string = wx_base::wx_string_from(help_string);
+            let sub_menu = match sub_menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            MenuItemIsOwned(ffi::wxMenuItem_new(
+                parent_menu,
+                id,
+                text,
+                help_string,
+                kind,
+                sub_menu,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for MenuItemIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
 // wxNonOwnedWindow
 wx_class! { NonOwnedWindow =
     NonOwnedWindowIsOwned<true>(wxNonOwnedWindow) impl

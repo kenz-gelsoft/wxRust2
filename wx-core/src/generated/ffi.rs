@@ -605,6 +605,63 @@ extern "C" {
     pub fn wxMenuBar_MacSetCommonMenuBar(menubar: *mut c_void);
     pub fn wxMenuBar_MacGetCommonMenuBar() -> *mut c_void;
 
+    // wxMenuItem
+    pub fn wxMenuItem_GetBackgroundColour(self_: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxMenuItem_GetBitmap(self_: *const c_void, checked: bool) -> *const c_void;
+    pub fn wxMenuItem_GetDisabledBitmap(self_: *const c_void) -> *const c_void;
+    pub fn wxMenuItem_GetFont(self_: *const c_void) -> *mut c_void;
+    pub fn wxMenuItem_GetHelp(self_: *const c_void) -> *mut c_void;
+    pub fn wxMenuItem_GetId(self_: *const c_void) -> c_int;
+    pub fn wxMenuItem_GetItemLabel(self_: *const c_void) -> *mut c_void;
+    pub fn wxMenuItem_GetItemLabelText(self_: *const c_void) -> *mut c_void;
+    pub fn wxMenuItem_GetKind(self_: *const c_void) -> c_int;
+    // BLOCKED: pub fn wxMenuItem_GetLabel(self_: *const c_void) -> wxString;
+    pub fn wxMenuItem_GetMarginWidth(self_: *const c_void) -> c_int;
+    pub fn wxMenuItem_GetMenu(self_: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxMenuItem_GetName(self_: *const c_void) -> wxString;
+    pub fn wxMenuItem_GetSubMenu(self_: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxMenuItem_GetText(self_: *const c_void) -> *const c_void;
+    pub fn wxMenuItem_GetTextColour(self_: *const c_void) -> *mut c_void;
+    pub fn wxMenuItem_GetAccel(self_: *const c_void) -> *mut c_void;
+    pub fn wxMenuItem_GetAccelFromString(label: *const c_void) -> *mut c_void;
+    pub fn wxMenuItem_IsCheck(self_: *const c_void) -> bool;
+    pub fn wxMenuItem_IsCheckable(self_: *const c_void) -> bool;
+    pub fn wxMenuItem_IsChecked(self_: *const c_void) -> bool;
+    pub fn wxMenuItem_IsEnabled(self_: *const c_void) -> bool;
+    pub fn wxMenuItem_IsRadio(self_: *const c_void) -> bool;
+    pub fn wxMenuItem_IsSeparator(self_: *const c_void) -> bool;
+    pub fn wxMenuItem_IsSubMenu(self_: *const c_void) -> bool;
+    pub fn wxMenuItem_SetBackgroundColour(self_: *mut c_void, colour: *const c_void);
+    // BLOCKED: pub fn wxMenuItem_SetBitmap(self_: *mut c_void, bmp: *const c_void, checked: bool);
+    pub fn wxMenuItem_SetBitmaps(
+        self_: *mut c_void,
+        checked: *const c_void,
+        unchecked: *const c_void,
+    );
+    pub fn wxMenuItem_SetDisabledBitmap(self_: *mut c_void, disabled: *const c_void);
+    pub fn wxMenuItem_SetFont(self_: *mut c_void, font: *const c_void);
+    pub fn wxMenuItem_SetHelp(self_: *mut c_void, help_string: *const c_void);
+    pub fn wxMenuItem_SetItemLabel(self_: *mut c_void, label: *const c_void);
+    pub fn wxMenuItem_SetMarginWidth(self_: *mut c_void, width: c_int);
+    pub fn wxMenuItem_SetMenu(self_: *mut c_void, menu: *mut c_void);
+    pub fn wxMenuItem_SetSubMenu(self_: *mut c_void, menu: *mut c_void);
+    // BLOCKED: pub fn wxMenuItem_SetText(self_: *mut c_void, text: *const c_void);
+    pub fn wxMenuItem_SetTextColour(self_: *mut c_void, colour: *const c_void);
+    pub fn wxMenuItem_SetAccel(self_: *mut c_void, accel: *mut c_void);
+    pub fn wxMenuItem_new(
+        parent_menu: *mut c_void,
+        id: c_int,
+        text: *const c_void,
+        help_string: *const c_void,
+        kind: c_int,
+        sub_menu: *mut c_void,
+    ) -> *mut c_void;
+    // DTOR: pub fn wxMenuItem_~wxMenuItem(self_: *mut c_void);
+    pub fn wxMenuItem_Check(self_: *mut c_void, check: bool);
+    pub fn wxMenuItem_Enable(self_: *mut c_void, enable: bool);
+    // BLOCKED: pub fn wxMenuItem_GetLabelFromText(text: *const c_void) -> wxString;
+    pub fn wxMenuItem_GetLabelText(text: *const c_void) -> *mut c_void;
+
     // wxNonOwnedWindow
     pub fn wxNonOwnedWindow_SetShape(self_: *mut c_void, region: *const c_void) -> bool;
     pub fn wxNonOwnedWindow_SetShape1(self_: *mut c_void, path: *const c_void) -> bool;

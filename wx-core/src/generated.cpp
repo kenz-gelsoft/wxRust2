@@ -818,6 +818,128 @@ wxMenuBar * wxMenuBar_MacGetCommonMenuBar() {
 }
 #endif
 
+// CLASS: wxMenuItem
+#ifdef __WXMSW__
+wxColour * wxMenuItem_GetBackgroundColour(const wxMenuItem * self) {
+    return self->GetBackgroundColour();
+}
+const wxBitmap * wxMenuItem_GetDisabledBitmap(const wxMenuItem * self) {
+    return self->GetDisabledBitmap();
+}
+wxFont * wxMenuItem_GetFont(const wxMenuItem * self) {
+    return self->GetFont();
+}
+#endif
+wxString *wxMenuItem_GetHelp(const wxMenuItem * self) {
+    return new wxString(self->GetHelp());
+}
+int wxMenuItem_GetId(const wxMenuItem * self) {
+    return self->GetId();
+}
+wxString *wxMenuItem_GetItemLabel(const wxMenuItem * self) {
+    return new wxString(self->GetItemLabel());
+}
+wxString *wxMenuItem_GetItemLabelText(const wxMenuItem * self) {
+    return new wxString(self->GetItemLabelText());
+}
+wxItemKind wxMenuItem_GetKind(const wxMenuItem * self) {
+    return self->GetKind();
+}
+#ifdef __WXMSW__
+int wxMenuItem_GetMarginWidth(const wxMenuItem * self) {
+    return self->GetMarginWidth();
+}
+#endif
+wxMenu * wxMenuItem_GetMenu(const wxMenuItem * self) {
+    return self->GetMenu();
+}
+wxMenu * wxMenuItem_GetSubMenu(const wxMenuItem * self) {
+    return self->GetSubMenu();
+}
+#ifdef __WXMSW__
+wxColour * wxMenuItem_GetTextColour(const wxMenuItem * self) {
+    return self->GetTextColour();
+}
+#endif
+wxAcceleratorEntry * wxMenuItem_GetAccel(const wxMenuItem * self) {
+    return self->GetAccel();
+}
+wxAcceleratorEntry * wxMenuItem_GetAccelFromString(const wxString * label) {
+    return wxMenuItem::GetAccelFromString(*label);
+}
+bool wxMenuItem_IsCheck(const wxMenuItem * self) {
+    return self->IsCheck();
+}
+bool wxMenuItem_IsCheckable(const wxMenuItem * self) {
+    return self->IsCheckable();
+}
+bool wxMenuItem_IsChecked(const wxMenuItem * self) {
+    return self->IsChecked();
+}
+bool wxMenuItem_IsEnabled(const wxMenuItem * self) {
+    return self->IsEnabled();
+}
+bool wxMenuItem_IsRadio(const wxMenuItem * self) {
+    return self->IsRadio();
+}
+bool wxMenuItem_IsSeparator(const wxMenuItem * self) {
+    return self->IsSeparator();
+}
+bool wxMenuItem_IsSubMenu(const wxMenuItem * self) {
+    return self->IsSubMenu();
+}
+#ifdef __WXMSW__
+void wxMenuItem_SetBackgroundColour(wxMenuItem * self, const wxColour * colour) {
+    return self->SetBackgroundColour(*colour);
+}
+void wxMenuItem_SetBitmaps(wxMenuItem * self, const wxBitmap * checked, const wxBitmap * unchecked) {
+    return self->SetBitmaps(*checked, *unchecked);
+}
+void wxMenuItem_SetDisabledBitmap(wxMenuItem * self, const wxBitmap * disabled) {
+    return self->SetDisabledBitmap(*disabled);
+}
+void wxMenuItem_SetFont(wxMenuItem * self, const wxFont * font) {
+    return self->SetFont(*font);
+}
+#endif
+void wxMenuItem_SetHelp(wxMenuItem * self, const wxString * help_string) {
+    return self->SetHelp(*help_string);
+}
+void wxMenuItem_SetItemLabel(wxMenuItem * self, const wxString * label) {
+    return self->SetItemLabel(*label);
+}
+#ifdef __WXMSW__
+void wxMenuItem_SetMarginWidth(wxMenuItem * self, int width) {
+    return self->SetMarginWidth(width);
+}
+#endif
+void wxMenuItem_SetMenu(wxMenuItem * self, wxMenu * menu) {
+    return self->SetMenu(menu);
+}
+void wxMenuItem_SetSubMenu(wxMenuItem * self, wxMenu * menu) {
+    return self->SetSubMenu(menu);
+}
+#ifdef __WXMSW__
+void wxMenuItem_SetTextColour(wxMenuItem * self, const wxColour * colour) {
+    return self->SetTextColour(*colour);
+}
+#endif
+void wxMenuItem_SetAccel(wxMenuItem * self, wxAcceleratorEntry * accel) {
+    return self->SetAccel(accel);
+}
+wxMenuItem *wxMenuItem_new(wxMenu * parent_menu, int id, const wxString * text, const wxString * help_string, wxItemKind kind, wxMenu * sub_menu) {
+    return new wxMenuItem(parent_menu, id, *text, *help_string, kind, sub_menu);
+}
+void wxMenuItem_Check(wxMenuItem * self, bool check) {
+    return self->Check(check);
+}
+void wxMenuItem_Enable(wxMenuItem * self, bool enable) {
+    return self->Enable(enable);
+}
+wxString *wxMenuItem_GetLabelText(const wxString * text) {
+    return new wxString(wxMenuItem::GetLabelText(*text));
+}
+
 // CLASS: wxNonOwnedWindow
 bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow * self, const wxRegion * region) {
     return self->SetShape(*region);

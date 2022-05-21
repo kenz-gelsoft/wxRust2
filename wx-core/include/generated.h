@@ -311,6 +311,56 @@ void wxMenuBar_MacSetCommonMenuBar(wxMenuBar * menubar);
 wxMenuBar * wxMenuBar_MacGetCommonMenuBar();
 #endif
 
+// CLASS: wxMenuItem
+#ifdef __WXMSW__
+wxColour * wxMenuItem_GetBackgroundColour(const wxMenuItem * self);
+const wxBitmap * wxMenuItem_GetDisabledBitmap(const wxMenuItem * self);
+wxFont * wxMenuItem_GetFont(const wxMenuItem * self);
+#endif
+wxString *wxMenuItem_GetHelp(const wxMenuItem * self);
+int wxMenuItem_GetId(const wxMenuItem * self);
+wxString *wxMenuItem_GetItemLabel(const wxMenuItem * self);
+wxString *wxMenuItem_GetItemLabelText(const wxMenuItem * self);
+wxItemKind wxMenuItem_GetKind(const wxMenuItem * self);
+#ifdef __WXMSW__
+int wxMenuItem_GetMarginWidth(const wxMenuItem * self);
+#endif
+wxMenu * wxMenuItem_GetMenu(const wxMenuItem * self);
+wxMenu * wxMenuItem_GetSubMenu(const wxMenuItem * self);
+#ifdef __WXMSW__
+wxColour * wxMenuItem_GetTextColour(const wxMenuItem * self);
+#endif
+wxAcceleratorEntry * wxMenuItem_GetAccel(const wxMenuItem * self);
+wxAcceleratorEntry * wxMenuItem_GetAccelFromString(const wxString * label);
+bool wxMenuItem_IsCheck(const wxMenuItem * self);
+bool wxMenuItem_IsCheckable(const wxMenuItem * self);
+bool wxMenuItem_IsChecked(const wxMenuItem * self);
+bool wxMenuItem_IsEnabled(const wxMenuItem * self);
+bool wxMenuItem_IsRadio(const wxMenuItem * self);
+bool wxMenuItem_IsSeparator(const wxMenuItem * self);
+bool wxMenuItem_IsSubMenu(const wxMenuItem * self);
+#ifdef __WXMSW__
+void wxMenuItem_SetBackgroundColour(wxMenuItem * self, const wxColour * colour);
+void wxMenuItem_SetBitmaps(wxMenuItem * self, const wxBitmap * checked, const wxBitmap * unchecked);
+void wxMenuItem_SetDisabledBitmap(wxMenuItem * self, const wxBitmap * disabled);
+void wxMenuItem_SetFont(wxMenuItem * self, const wxFont * font);
+#endif
+void wxMenuItem_SetHelp(wxMenuItem * self, const wxString * help_string);
+void wxMenuItem_SetItemLabel(wxMenuItem * self, const wxString * label);
+#ifdef __WXMSW__
+void wxMenuItem_SetMarginWidth(wxMenuItem * self, int width);
+#endif
+void wxMenuItem_SetMenu(wxMenuItem * self, wxMenu * menu);
+void wxMenuItem_SetSubMenu(wxMenuItem * self, wxMenu * menu);
+#ifdef __WXMSW__
+void wxMenuItem_SetTextColour(wxMenuItem * self, const wxColour * colour);
+#endif
+void wxMenuItem_SetAccel(wxMenuItem * self, wxAcceleratorEntry * accel);
+wxMenuItem *wxMenuItem_new(wxMenu * parent_menu, int id, const wxString * text, const wxString * help_string, wxItemKind kind, wxMenu * sub_menu);
+void wxMenuItem_Check(wxMenuItem * self, bool check);
+void wxMenuItem_Enable(wxMenuItem * self, bool enable);
+wxString *wxMenuItem_GetLabelText(const wxString * text);
+
 // CLASS: wxNonOwnedWindow
 bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow * self, const wxRegion * region);
 bool wxNonOwnedWindow_SetShape1(wxNonOwnedWindow * self, const wxGraphicsPath * path);

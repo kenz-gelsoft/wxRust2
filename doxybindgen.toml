@@ -17,6 +17,7 @@ wxml_files = [
     'wxml/classwx_list_box.xml',
     'wxml/classwx_menu.xml',
     'wxml/classwx_menu_bar.xml',
+    'wxml/classwx_menu_item.xml',
     'wxml/classwx_non_owned_window.xml',
     'wxml/classwx_notebook.xml',
     'wxml/classwx_notify_event.xml',
@@ -131,6 +132,31 @@ mac = [
     'MacGetCommonMenuBar',
     'MacSetCommonMenuBar',
     'OSXGetAppleMenu',
+]
+[types.wxMenuItem]
+blocklist = [
+    'GetLabelFromText',
+    # Probably documentation mismatch
+    'GetBitmap',
+    'SetBitmap',
+    # Deprecated, maybe removed
+    'GetLabel',
+    'GetName',
+    'GetText',
+    'SetText',
+]
+windows = [
+    'GetBackgroundColour',
+    'GetDisabledBitmap',
+    'GetFont',
+    'GetMarginWidth',
+    'GetTextColour',
+    'SetBackgroundColour',
+    'SetBitmaps',
+    'SetDisabledBitmap',
+    'SetFont',
+    'SetMarginWidth',
+    'SetTextColour',
 ]
 [types.wxNonOwnedWindow]
 library = 'core'

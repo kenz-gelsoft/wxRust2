@@ -856,11 +856,23 @@ pub trait ListBoxMethods: ControlMethods {
 // wxMenu
 pub trait MenuMethods: EvtHandlerMethods {
     // DTOR: fn ~wxMenu()
-    fn append_int_str(&self, id: c_int, item: &str, help_string: &str, kind: c_int) -> *mut c_void {
+    fn append_int_str(
+        &self,
+        id: c_int,
+        item: &str,
+        help_string: &str,
+        kind: c_int,
+    ) -> WeakRef<MenuItem> {
         unsafe {
             let item = wx_base::wx_string_from(item);
             let help_string = wx_base::wx_string_from(help_string);
-            ffi::wxMenu_Append(self.as_ptr(), id, item, help_string, kind)
+            WeakRef::<MenuItem>::from(ffi::wxMenu_Append(
+                self.as_ptr(),
+                id,
+                item,
+                help_string,
+                kind,
+            ))
         }
     }
     fn append_int_menu<M: MenuMethods>(
@@ -869,7 +881,7 @@ pub trait MenuMethods: EvtHandlerMethods {
         item: &str,
         sub_menu: Option<&M>,
         help_string: &str,
-    ) -> *mut c_void {
+    ) -> WeakRef<MenuItem> {
         unsafe {
             let item = wx_base::wx_string_from(item);
             let sub_menu = match sub_menu {
@@ -877,35 +889,47 @@ pub trait MenuMethods: EvtHandlerMethods {
                 None => ptr::null_mut(),
             };
             let help_string = wx_base::wx_string_from(help_string);
-            ffi::wxMenu_Append1(self.as_ptr(), id, item, sub_menu, help_string)
+            WeakRef::<MenuItem>::from(ffi::wxMenu_Append1(
+                self.as_ptr(),
+                id,
+                item,
+                sub_menu,
+                help_string,
+            ))
         }
     }
-    fn append_menuitem(&self, menu_item: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxMenu_Append2(self.as_ptr(), menu_item) }
+    fn append_menuitem<M: MenuItemMethods>(&self, menu_item: Option<&M>) -> WeakRef<MenuItem> {
+        unsafe {
+            let menu_item = match menu_item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            WeakRef::<MenuItem>::from(ffi::wxMenu_Append2(self.as_ptr(), menu_item))
+        }
     }
-    fn append_check_item(&self, id: c_int, item: &str, help: &str) -> *mut c_void {
+    fn append_check_item(&self, id: c_int, item: &str, help: &str) -> WeakRef<MenuItem> {
         unsafe {
             let item = wx_base::wx_string_from(item);
             let help = wx_base::wx_string_from(help);
-            ffi::wxMenu_AppendCheckItem(self.as_ptr(), id, item, help)
+            WeakRef::<MenuItem>::from(ffi::wxMenu_AppendCheckItem(self.as_ptr(), id, item, help))
         }
     }
-    fn append_radio_item(&self, id: c_int, item: &str, help: &str) -> *mut c_void {
+    fn append_radio_item(&self, id: c_int, item: &str, help: &str) -> WeakRef<MenuItem> {
         unsafe {
             let item = wx_base::wx_string_from(item);
             let help = wx_base::wx_string_from(help);
-            ffi::wxMenu_AppendRadioItem(self.as_ptr(), id, item, help)
+            WeakRef::<MenuItem>::from(ffi::wxMenu_AppendRadioItem(self.as_ptr(), id, item, help))
         }
     }
-    fn append_separator(&self) -> *mut c_void {
-        unsafe { ffi::wxMenu_AppendSeparator(self.as_ptr()) }
+    fn append_separator(&self) -> WeakRef<MenuItem> {
+        unsafe { WeakRef::<MenuItem>::from(ffi::wxMenu_AppendSeparator(self.as_ptr())) }
     }
     fn append_sub_menu<M: MenuMethods>(
         &self,
         submenu: Option<&M>,
         text: &str,
         help: &str,
-    ) -> *mut c_void {
+    ) -> WeakRef<MenuItem> {
         unsafe {
             let submenu = match submenu {
                 Some(r) => r.as_ptr(),
@@ -913,7 +937,12 @@ pub trait MenuMethods: EvtHandlerMethods {
             };
             let text = wx_base::wx_string_from(text);
             let help = wx_base::wx_string_from(help);
-            ffi::wxMenu_AppendSubMenu(self.as_ptr(), submenu, text, help)
+            WeakRef::<MenuItem>::from(ffi::wxMenu_AppendSubMenu(
+                self.as_ptr(),
+                submenu,
+                text,
+                help,
+            ))
         }
     }
     fn break_(&self) {
@@ -925,20 +954,32 @@ pub trait MenuMethods: EvtHandlerMethods {
     fn delete_int(&self, id: c_int) -> bool {
         unsafe { ffi::wxMenu_Delete(self.as_ptr(), id) }
     }
-    fn delete_menuitem(&self, item: *mut c_void) -> bool {
-        unsafe { ffi::wxMenu_Delete1(self.as_ptr(), item) }
+    fn delete_menuitem<M: MenuItemMethods>(&self, item: Option<&M>) -> bool {
+        unsafe {
+            let item = match item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxMenu_Delete1(self.as_ptr(), item)
+        }
     }
     fn destroy_int(&self, id: c_int) -> bool {
         unsafe { ffi::wxMenu_Destroy(self.as_ptr(), id) }
     }
-    fn destroy_menuitem(&self, item: *mut c_void) -> bool {
-        unsafe { ffi::wxMenu_Destroy1(self.as_ptr(), item) }
+    fn destroy_menuitem<M: MenuItemMethods>(&self, item: Option<&M>) -> bool {
+        unsafe {
+            let item = match item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxMenu_Destroy1(self.as_ptr(), item)
+        }
     }
     fn enable(&self, id: c_int, enable: bool) {
         unsafe { ffi::wxMenu_Enable(self.as_ptr(), id, enable) }
     }
-    fn find_child_item(&self, id: c_int, pos: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxMenu_FindChildItem(self.as_ptr(), id, pos) }
+    fn find_child_item(&self, id: c_int, pos: *mut c_void) -> WeakRef<MenuItem> {
+        unsafe { WeakRef::<MenuItem>::from(ffi::wxMenu_FindChildItem(self.as_ptr(), id, pos)) }
     }
     fn find_item_str(&self, item_string: &str) -> c_int {
         unsafe {
@@ -946,17 +987,19 @@ pub trait MenuMethods: EvtHandlerMethods {
             ffi::wxMenu_FindItem(self.as_ptr(), item_string)
         }
     }
-    fn find_item_int<M: MenuMethods>(&self, id: c_int, menu: Option<&M>) -> *mut c_void {
+    fn find_item_int<M: MenuMethods>(&self, id: c_int, menu: Option<&M>) -> WeakRef<MenuItem> {
         unsafe {
             let menu = match menu {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxMenu_FindItem1(self.as_ptr(), id, menu)
+            WeakRef::<MenuItem>::from(ffi::wxMenu_FindItem1(self.as_ptr(), id, menu))
         }
     }
-    fn find_item_by_position(&self, position: usize) -> *mut c_void {
-        unsafe { ffi::wxMenu_FindItemByPosition(self.as_ptr(), position) }
+    fn find_item_by_position(&self, position: usize) -> WeakRef<MenuItem> {
+        unsafe {
+            WeakRef::<MenuItem>::from(ffi::wxMenu_FindItemByPosition(self.as_ptr(), position))
+        }
     }
     fn get_help_string(&self, id: c_int) -> String {
         unsafe { wx_base::from_wx_string(ffi::wxMenu_GetHelpString(self.as_ptr(), id)) }
@@ -975,8 +1018,18 @@ pub trait MenuMethods: EvtHandlerMethods {
     fn get_title(&self) -> String {
         unsafe { wx_base::from_wx_string(ffi::wxMenu_GetTitle(self.as_ptr())) }
     }
-    fn insert_menuitem(&self, pos: usize, menu_item: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxMenu_Insert(self.as_ptr(), pos, menu_item) }
+    fn insert_menuitem<M: MenuItemMethods>(
+        &self,
+        pos: usize,
+        menu_item: Option<&M>,
+    ) -> WeakRef<MenuItem> {
+        unsafe {
+            let menu_item = match menu_item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            WeakRef::<MenuItem>::from(ffi::wxMenu_Insert(self.as_ptr(), pos, menu_item))
+        }
     }
     fn insert_int_str(
         &self,
@@ -985,11 +1038,18 @@ pub trait MenuMethods: EvtHandlerMethods {
         item: &str,
         help_string: &str,
         kind: c_int,
-    ) -> *mut c_void {
+    ) -> WeakRef<MenuItem> {
         unsafe {
             let item = wx_base::wx_string_from(item);
             let help_string = wx_base::wx_string_from(help_string);
-            ffi::wxMenu_Insert1(self.as_ptr(), pos, id, item, help_string, kind)
+            WeakRef::<MenuItem>::from(ffi::wxMenu_Insert1(
+                self.as_ptr(),
+                pos,
+                id,
+                item,
+                help_string,
+                kind,
+            ))
         }
     }
     fn insert_int_menu<M: MenuMethods>(
@@ -999,7 +1059,7 @@ pub trait MenuMethods: EvtHandlerMethods {
         text: &str,
         submenu: Option<&M>,
         help: &str,
-    ) -> *mut c_void {
+    ) -> WeakRef<MenuItem> {
         unsafe {
             let text = wx_base::wx_string_from(text);
             let submenu = match submenu {
@@ -1007,7 +1067,14 @@ pub trait MenuMethods: EvtHandlerMethods {
                 None => ptr::null_mut(),
             };
             let help = wx_base::wx_string_from(help);
-            ffi::wxMenu_Insert2(self.as_ptr(), pos, id, text, submenu, help)
+            WeakRef::<MenuItem>::from(ffi::wxMenu_Insert2(
+                self.as_ptr(),
+                pos,
+                id,
+                text,
+                submenu,
+                help,
+            ))
         }
     }
     fn insert_check_item(
@@ -1016,11 +1083,17 @@ pub trait MenuMethods: EvtHandlerMethods {
         id: c_int,
         item: &str,
         help_string: &str,
-    ) -> *mut c_void {
+    ) -> WeakRef<MenuItem> {
         unsafe {
             let item = wx_base::wx_string_from(item);
             let help_string = wx_base::wx_string_from(help_string);
-            ffi::wxMenu_InsertCheckItem(self.as_ptr(), pos, id, item, help_string)
+            WeakRef::<MenuItem>::from(ffi::wxMenu_InsertCheckItem(
+                self.as_ptr(),
+                pos,
+                id,
+                item,
+                help_string,
+            ))
         }
     }
     fn insert_radio_item(
@@ -1029,15 +1102,21 @@ pub trait MenuMethods: EvtHandlerMethods {
         id: c_int,
         item: &str,
         help_string: &str,
-    ) -> *mut c_void {
+    ) -> WeakRef<MenuItem> {
         unsafe {
             let item = wx_base::wx_string_from(item);
             let help_string = wx_base::wx_string_from(help_string);
-            ffi::wxMenu_InsertRadioItem(self.as_ptr(), pos, id, item, help_string)
+            WeakRef::<MenuItem>::from(ffi::wxMenu_InsertRadioItem(
+                self.as_ptr(),
+                pos,
+                id,
+                item,
+                help_string,
+            ))
         }
     }
-    fn insert_separator(&self, pos: usize) -> *mut c_void {
-        unsafe { ffi::wxMenu_InsertSeparator(self.as_ptr(), pos) }
+    fn insert_separator(&self, pos: usize) -> WeakRef<MenuItem> {
+        unsafe { WeakRef::<MenuItem>::from(ffi::wxMenu_InsertSeparator(self.as_ptr(), pos)) }
     }
     fn is_checked(&self, id: c_int) -> bool {
         unsafe { ffi::wxMenu_IsChecked(self.as_ptr(), id) }
@@ -1046,8 +1125,14 @@ pub trait MenuMethods: EvtHandlerMethods {
         unsafe { ffi::wxMenu_IsEnabled(self.as_ptr(), id) }
     }
     // NOT_SUPPORTED: fn MSWCommand()
-    fn prepend_menuitem(&self, item: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxMenu_Prepend(self.as_ptr(), item) }
+    fn prepend_menuitem<M: MenuItemMethods>(&self, item: Option<&M>) -> WeakRef<MenuItem> {
+        unsafe {
+            let item = match item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            WeakRef::<MenuItem>::from(ffi::wxMenu_Prepend(self.as_ptr(), item))
+        }
     }
     fn prepend_int_str(
         &self,
@@ -1055,11 +1140,17 @@ pub trait MenuMethods: EvtHandlerMethods {
         item: &str,
         help_string: &str,
         kind: c_int,
-    ) -> *mut c_void {
+    ) -> WeakRef<MenuItem> {
         unsafe {
             let item = wx_base::wx_string_from(item);
             let help_string = wx_base::wx_string_from(help_string);
-            ffi::wxMenu_Prepend1(self.as_ptr(), id, item, help_string, kind)
+            WeakRef::<MenuItem>::from(ffi::wxMenu_Prepend1(
+                self.as_ptr(),
+                id,
+                item,
+                help_string,
+                kind,
+            ))
         }
     }
     fn prepend_int_menu<M: MenuMethods>(
@@ -1068,7 +1159,7 @@ pub trait MenuMethods: EvtHandlerMethods {
         text: &str,
         submenu: Option<&M>,
         help: &str,
-    ) -> *mut c_void {
+    ) -> WeakRef<MenuItem> {
         unsafe {
             let text = wx_base::wx_string_from(text);
             let submenu = match submenu {
@@ -1076,31 +1167,47 @@ pub trait MenuMethods: EvtHandlerMethods {
                 None => ptr::null_mut(),
             };
             let help = wx_base::wx_string_from(help);
-            ffi::wxMenu_Prepend2(self.as_ptr(), id, text, submenu, help)
+            WeakRef::<MenuItem>::from(ffi::wxMenu_Prepend2(self.as_ptr(), id, text, submenu, help))
         }
     }
-    fn prepend_check_item(&self, id: c_int, item: &str, help_string: &str) -> *mut c_void {
+    fn prepend_check_item(&self, id: c_int, item: &str, help_string: &str) -> WeakRef<MenuItem> {
         unsafe {
             let item = wx_base::wx_string_from(item);
             let help_string = wx_base::wx_string_from(help_string);
-            ffi::wxMenu_PrependCheckItem(self.as_ptr(), id, item, help_string)
+            WeakRef::<MenuItem>::from(ffi::wxMenu_PrependCheckItem(
+                self.as_ptr(),
+                id,
+                item,
+                help_string,
+            ))
         }
     }
-    fn prepend_radio_item(&self, id: c_int, item: &str, help_string: &str) -> *mut c_void {
+    fn prepend_radio_item(&self, id: c_int, item: &str, help_string: &str) -> WeakRef<MenuItem> {
         unsafe {
             let item = wx_base::wx_string_from(item);
             let help_string = wx_base::wx_string_from(help_string);
-            ffi::wxMenu_PrependRadioItem(self.as_ptr(), id, item, help_string)
+            WeakRef::<MenuItem>::from(ffi::wxMenu_PrependRadioItem(
+                self.as_ptr(),
+                id,
+                item,
+                help_string,
+            ))
         }
     }
-    fn prepend_separator(&self) -> *mut c_void {
-        unsafe { ffi::wxMenu_PrependSeparator(self.as_ptr()) }
+    fn prepend_separator(&self) -> WeakRef<MenuItem> {
+        unsafe { WeakRef::<MenuItem>::from(ffi::wxMenu_PrependSeparator(self.as_ptr())) }
     }
-    fn remove_int(&self, id: c_int) -> *mut c_void {
-        unsafe { ffi::wxMenu_Remove(self.as_ptr(), id) }
+    fn remove_int(&self, id: c_int) -> WeakRef<MenuItem> {
+        unsafe { WeakRef::<MenuItem>::from(ffi::wxMenu_Remove(self.as_ptr(), id)) }
     }
-    fn remove_menuitem(&self, item: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxMenu_Remove1(self.as_ptr(), item) }
+    fn remove_menuitem<M: MenuItemMethods>(&self, item: Option<&M>) -> WeakRef<MenuItem> {
+        unsafe {
+            let item = match item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            WeakRef::<MenuItem>::from(ffi::wxMenu_Remove1(self.as_ptr(), item))
+        }
     }
     fn set_help_string(&self, id: c_int, help_string: &str) {
         unsafe {
@@ -1201,13 +1308,13 @@ pub trait MenuBarMethods: WindowMethods {
     fn enable_top(&self, pos: usize, enable: bool) {
         unsafe { ffi::wxMenuBar_EnableTop(self.as_ptr(), pos, enable) }
     }
-    fn find_item<M: MenuMethods>(&self, id: c_int, menu: Option<&M>) -> *mut c_void {
+    fn find_item<M: MenuMethods>(&self, id: c_int, menu: Option<&M>) -> WeakRef<MenuItem> {
         unsafe {
             let menu = match menu {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxMenuBar_FindItem(self.as_ptr(), id, menu)
+            WeakRef::<MenuItem>::from(ffi::wxMenuBar_FindItem(self.as_ptr(), id, menu))
         }
     }
     fn find_menu(&self, title: &str) -> c_int {
@@ -1322,6 +1429,154 @@ pub trait MenuBarMethods: WindowMethods {
     }
     fn mac_get_common_menu_bar() -> WeakRef<MenuBar> {
         unsafe { WeakRef::<MenuBar>::from(ffi::wxMenuBar_MacGetCommonMenuBar()) }
+    }
+}
+
+// wxMenuItem
+pub trait MenuItemMethods: ObjectMethods {
+    fn get_background_colour(&self) -> *mut c_void {
+        unsafe { ffi::wxMenuItem_GetBackgroundColour(self.as_ptr()) }
+    }
+    // BLOCKED: fn GetBitmap()
+    fn get_disabled_bitmap(&self) -> *const c_void {
+        unsafe { ffi::wxMenuItem_GetDisabledBitmap(self.as_ptr()) }
+    }
+    fn get_font(&self) -> *mut c_void {
+        unsafe { ffi::wxMenuItem_GetFont(self.as_ptr()) }
+    }
+    fn get_help(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxMenuItem_GetHelp(self.as_ptr())) }
+    }
+    fn get_id(&self) -> c_int {
+        unsafe { ffi::wxMenuItem_GetId(self.as_ptr()) }
+    }
+    fn get_item_label(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxMenuItem_GetItemLabel(self.as_ptr())) }
+    }
+    fn get_item_label_text(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxMenuItem_GetItemLabelText(self.as_ptr())) }
+    }
+    fn get_kind(&self) -> c_int {
+        unsafe { ffi::wxMenuItem_GetKind(self.as_ptr()) }
+    }
+    // BLOCKED: fn GetLabel()
+    fn get_margin_width(&self) -> c_int {
+        unsafe { ffi::wxMenuItem_GetMarginWidth(self.as_ptr()) }
+    }
+    fn get_menu(&self) -> WeakRef<Menu> {
+        unsafe { WeakRef::<Menu>::from(ffi::wxMenuItem_GetMenu(self.as_ptr())) }
+    }
+    // BLOCKED: fn GetName()
+    fn get_sub_menu(&self) -> WeakRef<Menu> {
+        unsafe { WeakRef::<Menu>::from(ffi::wxMenuItem_GetSubMenu(self.as_ptr())) }
+    }
+    // BLOCKED: fn GetText()
+    fn get_text_colour(&self) -> *mut c_void {
+        unsafe { ffi::wxMenuItem_GetTextColour(self.as_ptr()) }
+    }
+    fn get_accel(&self) -> *mut c_void {
+        unsafe { ffi::wxMenuItem_GetAccel(self.as_ptr()) }
+    }
+    fn get_accel_from_string(label: &str) -> *mut c_void {
+        unsafe {
+            let label = wx_base::wx_string_from(label);
+            ffi::wxMenuItem_GetAccelFromString(label)
+        }
+    }
+    fn is_check(&self) -> bool {
+        unsafe { ffi::wxMenuItem_IsCheck(self.as_ptr()) }
+    }
+    fn is_checkable(&self) -> bool {
+        unsafe { ffi::wxMenuItem_IsCheckable(self.as_ptr()) }
+    }
+    fn is_checked(&self) -> bool {
+        unsafe { ffi::wxMenuItem_IsChecked(self.as_ptr()) }
+    }
+    fn is_enabled(&self) -> bool {
+        unsafe { ffi::wxMenuItem_IsEnabled(self.as_ptr()) }
+    }
+    fn is_radio(&self) -> bool {
+        unsafe { ffi::wxMenuItem_IsRadio(self.as_ptr()) }
+    }
+    fn is_separator(&self) -> bool {
+        unsafe { ffi::wxMenuItem_IsSeparator(self.as_ptr()) }
+    }
+    fn is_sub_menu(&self) -> bool {
+        unsafe { ffi::wxMenuItem_IsSubMenu(self.as_ptr()) }
+    }
+    fn set_background_colour(&self, colour: *const c_void) {
+        unsafe { ffi::wxMenuItem_SetBackgroundColour(self.as_ptr(), colour) }
+    }
+    // BLOCKED: fn SetBitmap()
+    fn set_bitmaps<B: BitmapMethods, B2: BitmapMethods>(&self, checked: &B, unchecked: &B2) {
+        unsafe {
+            let checked = checked.as_ptr();
+            let unchecked = unchecked.as_ptr();
+            ffi::wxMenuItem_SetBitmaps(self.as_ptr(), checked, unchecked)
+        }
+    }
+    fn set_disabled_bitmap<B: BitmapMethods>(&self, disabled: &B) {
+        unsafe {
+            let disabled = disabled.as_ptr();
+            ffi::wxMenuItem_SetDisabledBitmap(self.as_ptr(), disabled)
+        }
+    }
+    fn set_font(&self, font: *const c_void) {
+        unsafe { ffi::wxMenuItem_SetFont(self.as_ptr(), font) }
+    }
+    fn set_help(&self, help_string: &str) {
+        unsafe {
+            let help_string = wx_base::wx_string_from(help_string);
+            ffi::wxMenuItem_SetHelp(self.as_ptr(), help_string)
+        }
+    }
+    fn set_item_label(&self, label: &str) {
+        unsafe {
+            let label = wx_base::wx_string_from(label);
+            ffi::wxMenuItem_SetItemLabel(self.as_ptr(), label)
+        }
+    }
+    fn set_margin_width(&self, width: c_int) {
+        unsafe { ffi::wxMenuItem_SetMarginWidth(self.as_ptr(), width) }
+    }
+    fn set_menu<M: MenuMethods>(&self, menu: Option<&M>) {
+        unsafe {
+            let menu = match menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxMenuItem_SetMenu(self.as_ptr(), menu)
+        }
+    }
+    fn set_sub_menu<M: MenuMethods>(&self, menu: Option<&M>) {
+        unsafe {
+            let menu = match menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxMenuItem_SetSubMenu(self.as_ptr(), menu)
+        }
+    }
+    // BLOCKED: fn SetText()
+    fn set_text_colour(&self, colour: *const c_void) {
+        unsafe { ffi::wxMenuItem_SetTextColour(self.as_ptr(), colour) }
+    }
+    fn set_accel(&self, accel: *mut c_void) {
+        unsafe { ffi::wxMenuItem_SetAccel(self.as_ptr(), accel) }
+    }
+    // DTOR: fn ~wxMenuItem()
+    fn check(&self, check: bool) {
+        unsafe { ffi::wxMenuItem_Check(self.as_ptr(), check) }
+    }
+    fn enable(&self, enable: bool) {
+        unsafe { ffi::wxMenuItem_Enable(self.as_ptr(), enable) }
+    }
+    // BLOCKED: fn GetLabelFromText()
+    fn get_label_text(text: &str) -> String {
+        unsafe {
+            let text = wx_base::wx_string_from(text);
+            wx_base::from_wx_string(ffi::wxMenuItem_GetLabelText(text))
+        }
     }
 }
 
