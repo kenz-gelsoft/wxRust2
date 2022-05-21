@@ -182,6 +182,12 @@ class Method:
         returns_owned_list = self.cls.config.get('returns_owned') or []
         return self.name() in returns_owned_list
     
+    def returns_trackable(self):
+        cm = self.cls.manager
+        return_class = cm.by_name(self.returns.typename)
+        is_trackable = cm.is_a(return_class, 'wxEvtHandler')
+        return is_trackable
+    
     def maybe_returns_self(self):
         return self.returns.is_self_ref(self.cls.name)
 

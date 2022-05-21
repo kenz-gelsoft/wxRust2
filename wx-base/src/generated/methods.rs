@@ -9,6 +9,16 @@ pub trait WxRustMethods {
     unsafe fn from_ptr(ptr: *mut c_void) -> Self;
     unsafe fn from_unowned_ptr(ptr: *mut c_void) -> Self::Unowned;
     unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F);
+    unsafe fn option_from(ptr: *mut c_void) -> Option<Self::Unowned>
+    where
+        Self: Sized,
+    {
+        if ptr.is_null() {
+            None
+        } else {
+            Some(Self::from_unowned_ptr(ptr))
+        }
+    }
 }
 
 // wxEvent
@@ -16,16 +26,16 @@ pub trait EventMethods: ObjectMethods {
     fn clone(&self) -> Event {
         unsafe { Event::from_ptr(ffi::wxEvent_Clone(self.as_ptr())) }
     }
-    fn get_event_object(&self) -> WeakRef<Object> {
-        unsafe { WeakRef::<Object>::from(ffi::wxEvent_GetEventObject(self.as_ptr())) }
+    fn get_event_object(&self) -> Option<ObjectIsOwned<false>> {
+        unsafe { Object::option_from(ffi::wxEvent_GetEventObject(self.as_ptr())) }
     }
     // NOT_SUPPORTED: fn GetEventType()
     // NOT_SUPPORTED: fn GetEventCategory()
     fn get_id(&self) -> c_int {
         unsafe { ffi::wxEvent_GetId(self.as_ptr()) }
     }
-    fn get_event_user_data(&self) -> WeakRef<Object> {
-        unsafe { WeakRef::<Object>::from(ffi::wxEvent_GetEventUserData(self.as_ptr())) }
+    fn get_event_user_data(&self) -> Option<ObjectIsOwned<false>> {
+        unsafe { Object::option_from(ffi::wxEvent_GetEventUserData(self.as_ptr())) }
     }
     fn get_skipped(&self) -> bool {
         unsafe { ffi::wxEvent_GetSkipped(self.as_ptr()) }
