@@ -107,7 +107,7 @@ impl WrapSizerFrame {
         );
         let copy_self = self.clone();
         self.m_ok_button
-            .bind(wx::RUST_EVT_BUTTON, move |_: &wx::CommandEvent| {
+            .bind(wx::RustEvent::Button, move |_: &wx::CommandEvent| {
                 copy_self.on_button()
             });
 

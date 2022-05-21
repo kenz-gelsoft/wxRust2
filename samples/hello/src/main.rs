@@ -12,7 +12,7 @@ fn main() {
         let i = 3;
         println!("i={}", i);
         let button_copy = button.clone();
-        button.bind(wx::RUST_EVT_BUTTON, move |_: &wx::CommandEvent| {
+        button.bind(wx::RustEvent::Button, move |_: &wx::CommandEvent| {
             println!("i={}", i);
             button_copy.set_label("clicked");
             println!("s={}", button_copy.get_label())

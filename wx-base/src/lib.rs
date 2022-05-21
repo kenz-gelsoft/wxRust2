@@ -52,10 +52,9 @@ mod ffi {
 pub mod methods {
     pub use super::generated::methods::*;
     use super::*;
-    use std::os::raw::c_int;
 
     pub trait Bindable {
-        fn bind<E: EventMethods, F: Fn(&E) + 'static>(&self, event_type: c_int, closure: F);
+        fn bind<E: EventMethods, F: Fn(&E) + 'static>(&self, event_type: RustEvent, closure: F);
     }
 
     pub trait ArrayStringMethods: WxRustMethods {
@@ -87,15 +86,21 @@ unsafe fn to_wx_callable<F: Fn(*mut c_void) + 'static>(closure: F) -> (*mut c_vo
     (trampoline::<F> as _, Box::into_raw(closure) as _)
 }
 
+// TODO auto generate
+pub enum RustEvent {
+    BookctrlPageChanged,
+    Button,
+    Menu,
+}
 impl<T: EvtHandlerMethods> Bindable for T {
-    fn bind<E: EventMethods, F: Fn(&E) + 'static>(&self, event_type: c_int, closure: F) {
+    fn bind<E: EventMethods, F: Fn(&E) + 'static>(&self, event_type: RustEvent, closure: F) {
         unsafe {
             let (f, param) = to_wx_callable(move |arg: *mut c_void| {
                 E::with_ptr(arg, |event| {
                     closure(event);
                 });
             });
-            ffi::wxEvtHandler_Bind(self.as_ptr(), event_type, f, param);
+            ffi::wxEvtHandler_Bind(self.as_ptr(), event_type as c_int, f, param);
         }
     }
 }
