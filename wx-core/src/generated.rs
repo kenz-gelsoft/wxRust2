@@ -607,6 +607,28 @@ impl<const OWNED: bool> WindowMethods for NotebookIsOwned<OWNED> {
     // BLOCKED: fn Create()
 }
 
+// wxNotifyEvent
+wx_class! { NotifyEvent =
+    NotifyEventIsOwned<true>(wxNotifyEvent) impl
+        NotifyEventMethods,
+        CommandEventMethods,
+        EventMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> NotifyEventIsOwned<OWNED> {
+    // NOT_SUPPORTED: fn wxNotifyEvent()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for NotifyEventIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
 // wxPanel
 wx_class! { Panel =
     PanelIsOwned<true>(wxPanel) impl

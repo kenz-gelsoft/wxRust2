@@ -1338,6 +1338,19 @@ pub trait NotebookMethods: BookCtrlBaseMethods {
     }
 }
 
+// wxNotifyEvent
+pub trait NotifyEventMethods: CommandEventMethods {
+    fn allow(&self) {
+        unsafe { ffi::wxNotifyEvent_Allow(self.as_ptr()) }
+    }
+    fn is_allowed(&self) -> bool {
+        unsafe { ffi::wxNotifyEvent_IsAllowed(self.as_ptr()) }
+    }
+    fn veto(&self) {
+        unsafe { ffi::wxNotifyEvent_Veto(self.as_ptr()) }
+    }
+}
+
 // wxPanel
 pub trait PanelMethods: WindowMethods {
     // DTOR: fn ~wxPanel()

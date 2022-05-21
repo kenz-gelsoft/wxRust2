@@ -826,6 +826,17 @@ void wxNotebook_SetPadding(wxNotebook * self, const wxSize * padding) {
     return self->SetPadding(*padding);
 }
 
+// CLASS: wxNotifyEvent
+void wxNotifyEvent_Allow(wxNotifyEvent * self) {
+    return self->Allow();
+}
+bool wxNotifyEvent_IsAllowed(const wxNotifyEvent * self) {
+    return self->IsAllowed();
+}
+void wxNotifyEvent_Veto(wxNotifyEvent * self) {
+    return self->Veto();
+}
+
 // CLASS: wxPanel
 wxPanel *wxPanel_new() {
     return new wxPanel();

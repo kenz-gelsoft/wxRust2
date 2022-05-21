@@ -315,6 +315,11 @@ wxNotebook *wxNotebook_new1(wxWindow * parent, wxWindowID id, const wxPoint * po
 int wxNotebook_GetRowCount(const wxNotebook * self);
 void wxNotebook_SetPadding(wxNotebook * self, const wxSize * padding);
 
+// CLASS: wxNotifyEvent
+void wxNotifyEvent_Allow(wxNotifyEvent * self);
+bool wxNotifyEvent_IsAllowed(const wxNotifyEvent * self);
+void wxNotifyEvent_Veto(wxNotifyEvent * self);
+
 // CLASS: wxPanel
 wxPanel *wxPanel_new();
 wxPanel *wxPanel_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);

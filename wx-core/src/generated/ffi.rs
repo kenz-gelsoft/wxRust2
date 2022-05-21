@@ -619,6 +619,12 @@ extern "C" {
     // BLOCKED: pub fn wxNotebook_OnSelChange(self_: *mut c_void, event: *mut c_void);
     pub fn wxNotebook_SetPadding(self_: *mut c_void, padding: *const c_void);
 
+    // wxNotifyEvent
+    // NOT_SUPPORTED: pub fn wxNotifyEvent_new(event_type: wxEventType, id: c_int) -> *mut c_void;
+    pub fn wxNotifyEvent_Allow(self_: *mut c_void);
+    pub fn wxNotifyEvent_IsAllowed(self_: *const c_void) -> bool;
+    pub fn wxNotifyEvent_Veto(self_: *mut c_void);
+
     // wxPanel
     pub fn wxPanel_new() -> *mut c_void;
     pub fn wxPanel_new1(
