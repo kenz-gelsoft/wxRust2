@@ -287,7 +287,6 @@ returns_owned = [
 blocklist = [
     # TODO: dont return reference/temp value from self
     'GetChildren',
-    'GetChildren1',
     'GetCursor',
     'GetUpdateRegion',
 ]

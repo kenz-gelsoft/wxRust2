@@ -6,6 +6,7 @@ use std::mem;
 use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
 use std::ptr;
 
+use super::*;
 use methods::*;
 
 use wx_base::methods::*;

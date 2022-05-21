@@ -37,6 +37,7 @@ OS_UNSUPPORTED_TYPES = [
 ]
 MANUAL_BINDINGS = [
     'wxArrayString',
+    'wxWindowList',
 ]
 # Known, and problematic
 RUST_KEYWORDS = [
@@ -164,7 +165,8 @@ class Method:
     def wrapped_return_type(self, allows_ptr):
         if (self.is_ctor or
             self.returns_new() or 
-            allows_ptr and self.returns.is_ptr_to_binding()):
+            allows_ptr and (self.returns.is_ptr_to_binding() or
+                            self.returns.is_ref_to_binding())):
             return self.returns.typename
         else:
             return None
@@ -185,6 +187,9 @@ class Method:
     def returns_trackable(self):
         cm = self.cls.manager
         return_class = cm.by_name(self.returns.typename)
+        # Manually bound bindings wont be found from class manager.
+        if not return_class:
+            return False
         is_trackable = cm.is_a(return_class, 'wxEvtHandler')
         return is_trackable
     
@@ -245,6 +250,9 @@ class RustType:
         return t
 
     def is_ptr_to_binding(self):
+        return False
+
+    def is_ref_to_binding(self):
         return False
 
     def not_supported(self):
@@ -416,6 +424,9 @@ class CxxType:
         # TODO: consider mutability
         return (self.is_ptr() and
                 self._is_binding_type())
+
+    def is_ref_to_binding(self):
+        return self.is_ref() and self._is_binding_type()
 
     def _is_const_ref_to_string(self):
         return (self._is_const_ref() and

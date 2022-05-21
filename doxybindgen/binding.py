@@ -238,8 +238,10 @@ class RustMethodBinding:
                 returns = '*mut c_void'
             else:
                 returns = wrapped[2:]
-                if (self.is_ctor or
-                    self.__model.returns.is_ptr_to_binding()):
+                if self.__model.returns.is_ref_to_binding():
+                    returns = '%sIsOwned<false>' % (returns,)
+                elif (self.is_ctor or
+                      self.__model.returns.is_ptr_to_binding()):
                     if self.is_ctor:
                         returns = '%sIsOwned<OWNED>' % (returns,)
                     elif not self.__model.returns_owned():
@@ -380,6 +382,8 @@ class RustMethodBinding:
         if wrapped:
             if self.__model.returns_owned():
                 return '%s::from_ptr(%s)' % (wrapped[2:], call)
+            elif self.__model.returns.is_ref_to_binding():
+                return '%sIsOwned::from_ptr(%s)' % (wrapped[2:], call)
             elif self.__model.returns_trackable():
                 return 'WeakRef::<%s>::from(%s)' % (wrapped[2:], call)
             else:
@@ -503,7 +507,8 @@ class CxxMethodBinding:
                 self.__model.name(without_index=True),
                 new_params_or_expr,
             )
-        if self.__model.maybe_returns_self():
+        if (self.__model.maybe_returns_self() or
+            self.__model.returns.is_ref_to_binding()):
             yield '    return &(%s);' % (new_params_or_expr,)
         elif wrapped:
             yield '    return new %s(%s);' % (wrapped, new_params_or_expr)

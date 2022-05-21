@@ -727,6 +727,7 @@ void wxWindow_AddChild(wxWindow * self, wxWindow * child);
 bool wxWindow_DestroyChildren(wxWindow * self);
 wxWindow * wxWindow_FindWindow(const wxWindow * self, long id);
 wxWindow * wxWindow_FindWindow1(const wxWindow * self, const wxString * name);
+const wxWindowList * wxWindow_GetChildren1(const wxWindow * self);
 void wxWindow_RemoveChild(wxWindow * self, wxWindow * child);
 wxWindow * wxWindow_GetGrandParent(const wxWindow * self);
 wxWindow * wxWindow_GetNextSibling(const wxWindow * self);

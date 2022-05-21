@@ -1473,8 +1473,8 @@ pub trait MenuItemMethods: ObjectMethods {
         unsafe { ffi::wxMenuItem_GetBackgroundColour(self.as_ptr()) }
     }
     // BLOCKED: fn GetBitmap()
-    fn get_disabled_bitmap(&self) -> *const c_void {
-        unsafe { ffi::wxMenuItem_GetDisabledBitmap(self.as_ptr()) }
+    fn get_disabled_bitmap(&self) -> BitmapIsOwned<false> {
+        unsafe { BitmapIsOwned::from_ptr(ffi::wxMenuItem_GetDisabledBitmap(self.as_ptr())) }
     }
     fn get_font(&self) -> *mut c_void {
         unsafe { ffi::wxMenuItem_GetFont(self.as_ptr()) }
@@ -3576,7 +3576,9 @@ pub trait WindowMethods: EvtHandlerMethods {
         }
     }
     // BLOCKED: fn GetChildren()
-    // BLOCKED: fn GetChildren1()
+    fn get_children(&self) -> WindowListIsOwned<false> {
+        unsafe { WindowListIsOwned::from_ptr(ffi::wxWindow_GetChildren1(self.as_ptr())) }
+    }
     fn remove_child<W: WindowMethods>(&self, child: Option<&W>) {
         unsafe {
             let child = match child {

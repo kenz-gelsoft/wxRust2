@@ -824,7 +824,7 @@ wxColour * wxMenuItem_GetBackgroundColour(const wxMenuItem * self) {
     return self->GetBackgroundColour();
 }
 const wxBitmap * wxMenuItem_GetDisabledBitmap(const wxMenuItem * self) {
-    return self->GetDisabledBitmap();
+    return &(self->GetDisabledBitmap());
 }
 wxFont * wxMenuItem_GetFont(const wxMenuItem * self) {
     return self->GetFont();
@@ -1943,6 +1943,9 @@ wxWindow * wxWindow_FindWindow(const wxWindow * self, long id) {
 }
 wxWindow * wxWindow_FindWindow1(const wxWindow * self, const wxString * name) {
     return self->FindWindow(*name);
+}
+const wxWindowList * wxWindow_GetChildren1(const wxWindow * self) {
+    return &(self->GetChildren());
 }
 void wxWindow_RemoveChild(wxWindow * self, wxWindow * child) {
     return self->RemoveChild(child);

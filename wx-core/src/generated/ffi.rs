@@ -607,8 +607,8 @@ extern "C" {
 
     // wxMenuItem
     pub fn wxMenuItem_GetBackgroundColour(self_: *const c_void) -> *mut c_void;
-    // BLOCKED: pub fn wxMenuItem_GetBitmap(self_: *const c_void, checked: bool) -> *const c_void;
-    pub fn wxMenuItem_GetDisabledBitmap(self_: *const c_void) -> *const c_void;
+    // BLOCKED: pub fn wxMenuItem_GetBitmap(self_: *const c_void, checked: bool) -> *mut c_void;
+    pub fn wxMenuItem_GetDisabledBitmap(self_: *const c_void) -> *mut c_void;
     pub fn wxMenuItem_GetFont(self_: *const c_void) -> *mut c_void;
     pub fn wxMenuItem_GetHelp(self_: *const c_void) -> *mut c_void;
     pub fn wxMenuItem_GetId(self_: *const c_void) -> c_int;
@@ -1446,7 +1446,7 @@ extern "C" {
     pub fn wxWindow_FindWindow(self_: *const c_void, id: c_long) -> *mut c_void;
     pub fn wxWindow_FindWindow1(self_: *const c_void, name: *const c_void) -> *mut c_void;
     // BLOCKED: pub fn wxWindow_GetChildren(self_: *mut c_void) -> *mut c_void;
-    // BLOCKED: pub fn wxWindow_GetChildren1(self_: *const c_void) -> *const c_void;
+    pub fn wxWindow_GetChildren1(self_: *const c_void) -> *mut c_void;
     pub fn wxWindow_RemoveChild(self_: *mut c_void, child: *mut c_void);
     pub fn wxWindow_GetGrandParent(self_: *const c_void) -> *mut c_void;
     pub fn wxWindow_GetNextSibling(self_: *const c_void) -> *mut c_void;
