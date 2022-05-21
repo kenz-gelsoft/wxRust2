@@ -367,6 +367,19 @@ pub trait BookCtrlBaseMethods: ControlMethods {
     }
 }
 
+// wxBookCtrlEvent
+pub trait BookCtrlEventMethods: NotifyEventMethods {
+    fn get_old_selection(&self) -> c_int {
+        unsafe { ffi::wxBookCtrlEvent_GetOldSelection(self.as_ptr()) }
+    }
+    fn set_old_selection(&self, page: c_int) {
+        unsafe { ffi::wxBookCtrlEvent_SetOldSelection(self.as_ptr(), page) }
+    }
+    fn set_selection(&self, page: c_int) {
+        unsafe { ffi::wxBookCtrlEvent_SetSelection(self.as_ptr(), page) }
+    }
+}
+
 // wxBoxSizer
 pub trait BoxSizerMethods: SizerMethods {
     fn get_orientation(&self) -> c_int {

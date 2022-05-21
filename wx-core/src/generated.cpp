@@ -265,6 +265,20 @@ bool wxBookCtrlBase_Create(wxBookCtrlBase * self, wxWindow * parent, wxWindowID 
     return self->Create(parent, winid, *pos, *size, style, *name);
 }
 
+// CLASS: wxBookCtrlEvent
+int wxBookCtrlEvent_GetOldSelection(const wxBookCtrlEvent * self) {
+    return self->GetOldSelection();
+}
+int wxBookCtrlEvent_GetSelection(const wxBookCtrlEvent * self) {
+    return self->GetSelection();
+}
+void wxBookCtrlEvent_SetOldSelection(wxBookCtrlEvent * self, int page) {
+    return self->SetOldSelection(page);
+}
+void wxBookCtrlEvent_SetSelection(wxBookCtrlEvent * self, int page) {
+    return self->SetSelection(page);
+}
+
 // CLASS: wxBoxSizer
 wxBoxSizer *wxBoxSizer_new(int orient) {
     return new wxBoxSizer(orient);

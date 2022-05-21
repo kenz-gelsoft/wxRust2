@@ -173,6 +173,13 @@ extern "C" {
         name: *const c_void,
     ) -> bool;
 
+    // wxBookCtrlEvent
+    // NOT_SUPPORTED: pub fn wxBookCtrlEvent_new(event_type: wxEventType, id: c_int, sel: c_int, old_sel: c_int) -> *mut c_void;
+    pub fn wxBookCtrlEvent_GetOldSelection(self_: *const c_void) -> c_int;
+    pub fn wxBookCtrlEvent_GetSelection(self_: *const c_void) -> c_int;
+    pub fn wxBookCtrlEvent_SetOldSelection(self_: *mut c_void, page: c_int);
+    pub fn wxBookCtrlEvent_SetSelection(self_: *mut c_void, page: c_int);
+
     // wxBoxSizer
     pub fn wxBoxSizer_new(orient: c_int) -> *mut c_void;
     pub fn wxBoxSizer_GetOrientation(self_: *const c_void) -> c_int;

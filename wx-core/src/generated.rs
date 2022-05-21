@@ -203,6 +203,34 @@ impl<const OWNED: bool> WindowMethods for BookCtrlBaseIsOwned<OWNED> {
     }
 }
 
+// wxBookCtrlEvent
+wx_class! { BookCtrlEvent =
+    BookCtrlEventIsOwned<true>(wxBookCtrlEvent) impl
+        BookCtrlEventMethods,
+        NotifyEventMethods,
+        // CommandEventMethods,
+        EventMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> BookCtrlEventIsOwned<OWNED> {
+    // NOT_SUPPORTED: fn wxBookCtrlEvent()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for BookCtrlEventIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+impl<const OWNED: bool> CommandEventMethods for BookCtrlEventIsOwned<OWNED> {
+    fn get_selection(&self) -> c_int {
+        unsafe { ffi::wxBookCtrlEvent_GetSelection(self.as_ptr()) }
+    }
+}
+
 // wxBoxSizer
 wx_class! { BoxSizer =
     BoxSizerIsOwned<true>(wxBoxSizer) impl

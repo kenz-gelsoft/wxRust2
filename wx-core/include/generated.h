@@ -104,6 +104,12 @@ size_t wxBookCtrlBase_GetPageCount(const wxBookCtrlBase * self);
 wxWindow * wxBookCtrlBase_GetPage(const wxBookCtrlBase * self, size_t page);
 bool wxBookCtrlBase_Create(wxBookCtrlBase * self, wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 
+// CLASS: wxBookCtrlEvent
+int wxBookCtrlEvent_GetOldSelection(const wxBookCtrlEvent * self);
+int wxBookCtrlEvent_GetSelection(const wxBookCtrlEvent * self);
+void wxBookCtrlEvent_SetOldSelection(wxBookCtrlEvent * self, int page);
+void wxBookCtrlEvent_SetSelection(wxBookCtrlEvent * self, int page);
+
 // CLASS: wxBoxSizer
 wxBoxSizer *wxBoxSizer_new(int orient);
 int wxBoxSizer_GetOrientation(const wxBoxSizer * self);
