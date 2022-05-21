@@ -990,6 +990,20 @@ wxPoint *wxPoint_new2(const wxRealPoint * pt) {
     return new wxPoint(*pt);
 }
 
+// CLASS: wxRadioBox
+wxRadioBox *wxRadioBox_new() {
+    return new wxRadioBox();
+}
+wxRadioBox *wxRadioBox_new2(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, int major_dimension, long style, const wxValidator * validator, const wxString * name) {
+    return new wxRadioBox(parent, id, *label, *pos, *size, *choices, major_dimension, style, *validator, *name);
+}
+bool wxRadioBox_Create1(wxRadioBox * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, int major_dimension, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, *label, *pos, *size, *choices, major_dimension, style, *validator, *name);
+}
+int wxRadioBox_GetItemFromPoint(const wxRadioBox * self, const wxPoint * pt) {
+    return self->GetItemFromPoint(*pt);
+}
+
 // CLASS: wxRect
 void wxRect_delete(wxRect *self) {
     delete self;

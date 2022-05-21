@@ -715,6 +715,48 @@ extern "C" {
     pub fn wxPoint_new1(x: c_int, y: c_int) -> *mut c_void;
     pub fn wxPoint_new2(pt: *const c_void) -> *mut c_void;
 
+    // wxRadioBox
+    pub fn wxRadioBox_new() -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxRadioBox_new1(parent: *mut c_void, id: c_int, label: *const c_void, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, major_dimension: c_int, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
+    pub fn wxRadioBox_new2(
+        parent: *mut c_void,
+        id: c_int,
+        label: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        choices: *const c_void,
+        major_dimension: c_int,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    // DTOR: pub fn wxRadioBox_~wxRadioBox(self_: *mut c_void);
+    // NOT_SUPPORTED: pub fn wxRadioBox_Create(self_: *mut c_void, parent: *mut c_void, id: c_int, label: *const c_void, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, major_dimension: c_int, style: c_long, validator: *const c_void, name: *const c_void) -> bool;
+    pub fn wxRadioBox_Create1(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        label: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        choices: *const c_void,
+        major_dimension: c_int,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    // NOT_SUPPORTED: pub fn wxRadioBox_Enable(self_: *mut c_void, n: unsigned int, enable: bool) -> bool;
+    // NOT_SUPPORTED: pub fn wxRadioBox_GetColumnCount(self_: *const c_void) -> unsigned int;
+    pub fn wxRadioBox_GetItemFromPoint(self_: *const c_void, pt: *const c_void) -> c_int;
+    // NOT_SUPPORTED: pub fn wxRadioBox_GetItemHelpText(self_: *const c_void, item: unsigned int) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxRadioBox_GetItemToolTip(self_: *const c_void, item: unsigned int) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxRadioBox_GetRowCount(self_: *const c_void) -> unsigned int;
+    // NOT_SUPPORTED: pub fn wxRadioBox_IsItemEnabled(self_: *const c_void, n: unsigned int) -> bool;
+    // NOT_SUPPORTED: pub fn wxRadioBox_IsItemShown(self_: *const c_void, n: unsigned int) -> bool;
+    // NOT_SUPPORTED: pub fn wxRadioBox_SetItemHelpText(self_: *mut c_void, item: unsigned int, helptext: *const c_void);
+    // NOT_SUPPORTED: pub fn wxRadioBox_SetItemToolTip(self_: *mut c_void, item: unsigned int, text: *const c_void);
+    // NOT_SUPPORTED: pub fn wxRadioBox_Show(self_: *mut c_void, item: unsigned int, show: bool) -> bool;
+
     // wxRect
     pub fn wxRect_delete(self_: *mut c_void);
     pub fn wxRect_new() -> *mut c_void;

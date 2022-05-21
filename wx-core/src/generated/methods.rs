@@ -1683,6 +1683,73 @@ pub trait PointMethods: WxRustMethods {
     // BLOCKED: fn operator*=()
 }
 
+// wxRadioBox
+pub trait RadioBoxMethods: ControlMethods {
+    // DTOR: fn ~wxRadioBox()
+    // NOT_SUPPORTED: fn Create()
+    fn create<
+        W: WindowMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        A: ArrayStringMethods,
+        V: ValidatorMethods,
+    >(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        label: &str,
+        pos: &P,
+        size: &S,
+        choices: &A,
+        major_dimension: c_int,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let label = wx_base::wx_string_from(label);
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let choices = choices.as_ptr();
+            let validator = validator.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            ffi::wxRadioBox_Create1(
+                self.as_ptr(),
+                parent,
+                id,
+                label,
+                pos,
+                size,
+                choices,
+                major_dimension,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+    // NOT_SUPPORTED: fn Enable()
+    // NOT_SUPPORTED: fn GetColumnCount()
+    fn get_item_from_point<P: PointMethods>(&self, pt: &P) -> c_int {
+        unsafe {
+            let pt = pt.as_ptr();
+            ffi::wxRadioBox_GetItemFromPoint(self.as_ptr(), pt)
+        }
+    }
+    // NOT_SUPPORTED: fn GetItemHelpText()
+    // NOT_SUPPORTED: fn GetItemToolTip()
+    // NOT_SUPPORTED: fn GetRowCount()
+    // NOT_SUPPORTED: fn IsItemEnabled()
+    // NOT_SUPPORTED: fn IsItemShown()
+    // NOT_SUPPORTED: fn SetItemHelpText()
+    // NOT_SUPPORTED: fn SetItemToolTip()
+    // NOT_SUPPORTED: fn Show()
+}
+
 // wxRect
 pub trait RectMethods: WxRustMethods {
     fn centre_in<R: RectMethods>(&self, r: &R, dir: c_int) -> Rect {

@@ -383,6 +383,12 @@ wxPoint *wxPoint_new();
 wxPoint *wxPoint_new1(int x, int y);
 wxPoint *wxPoint_new2(const wxRealPoint * pt);
 
+// CLASS: wxRadioBox
+wxRadioBox *wxRadioBox_new();
+wxRadioBox *wxRadioBox_new2(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, int major_dimension, long style, const wxValidator * validator, const wxString * name);
+bool wxRadioBox_Create1(wxRadioBox * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, int major_dimension, long style, const wxValidator * validator, const wxString * name);
+int wxRadioBox_GetItemFromPoint(const wxRadioBox * self, const wxPoint * pt);
+
 // CLASS: wxRect
 void wxRect_delete(wxRect *self);
 wxRect *wxRect_new();

@@ -730,6 +730,68 @@ impl<const OWNED: bool> Drop for PointIsOwned<OWNED> {
     }
 }
 
+// wxRadioBox
+wx_class! { RadioBox =
+    RadioBoxIsOwned<true>(wxRadioBox) impl
+        RadioBoxMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> RadioBoxIsOwned<OWNED> {
+    pub fn new_2step() -> RadioBoxIsOwned<OWNED> {
+        unsafe { RadioBoxIsOwned(ffi::wxRadioBox_new()) }
+    }
+    // NOT_SUPPORTED: fn wxRadioBox1()
+    pub fn new<
+        W: WindowMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        A: ArrayStringMethods,
+        V: ValidatorMethods,
+    >(
+        parent: Option<&W>,
+        id: c_int,
+        label: &str,
+        pos: &P,
+        size: &S,
+        choices: &A,
+        major_dimension: c_int,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> RadioBoxIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let label = wx_base::wx_string_from(label);
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let choices = choices.as_ptr();
+            let validator = validator.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            RadioBoxIsOwned(ffi::wxRadioBox_new2(
+                parent,
+                id,
+                label,
+                pos,
+                size,
+                choices,
+                major_dimension,
+                style,
+                validator,
+                name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
 // wxRect
 wx_class! { Rect =
     RectIsOwned<true>(wxRect) impl
