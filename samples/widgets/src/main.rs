@@ -6,6 +6,8 @@ use wx::methods::*;
 
 // mod activityindicator;
 // use activityindicator::*;
+mod button;
+use button::*;
 
 enum Widgets {
     ClearLog = 100,
@@ -91,7 +93,7 @@ struct WidgetsFrame {
     base: wx::Frame,
     m_panel: wx::Panel,
     m_book: wx::Notebook,
-    // current_page: Option<ActivityIndicatorWidgetsPage>,
+    current_page: Option<ButtonWidgetsPage>,
 }
 impl WidgetsFrame {
     fn new(title: &str) -> Self {
@@ -108,7 +110,7 @@ impl WidgetsFrame {
             base: base,
             m_panel: panel,
             m_book: book,
-            // current_page: None,
+            current_page: None,
         };
         frame.on_create();
         frame
@@ -226,24 +228,24 @@ impl WidgetsFrame {
         self.base.set_min_client_size(&size_min);
     }
 
-    // fn current_page(&self) -> wx::Panel {
-    //     // FIXME: figure out a way to avoid cloning wx::Window structs
-    //     self.current_page.as_ref().unwrap().base.clone()
-    // }
+    fn current_page(&self) -> wx::Panel {
+        // FIXME: figure out a way to avoid cloning wx::Window structs
+        self.current_page.as_ref().unwrap().base.clone()
+    }
 
     fn connect_to_widget_events(&self) {
         // TODO
     }
 
     fn init_book(&mut self) {
-        // self.current_page = Some(ActivityIndicatorWidgetsPage::new(&self.m_book));
+        self.current_page = Some(ButtonWidgetsPage::new(&self.m_book));
 
-        // self.m_book.add_page(
-        //     Some(&self.current_page()),
-        //     "ActivityIndicator",
-        //     false,
-        //     wx::BookCtrlBase::NO_IMAGE,
-        // );
+        self.m_book.add_page(
+            Some(&self.current_page()),
+            "Button",
+            false,
+            wx::BookCtrlBase::NO_IMAGE,
+        );
 
         let self_copy = self.clone();
         self.base.bind(
@@ -255,24 +257,24 @@ impl WidgetsFrame {
     }
 
     fn on_page_changed(&self, event: &wx::BookCtrlEvent) {
-        // let sel = event.get_selection();
+        let sel = event.get_selection();
 
-        // let menu_bar = self.base.get_menu_bar().get().unwrap();
-        // if let Some(item) = menu_bar.find_item((Widgets::GoToPage as c_int) + sel, wx::Menu::none())
-        // {
-        //     item.check(true);
-        // }
+        let menu_bar = self.base.get_menu_bar().get().unwrap();
+        if let Some(item) = menu_bar.find_item((Widgets::GoToPage as c_int) + sel, wx::Menu::none())
+        {
+            item.check(true);
+        }
 
-        // menu_bar.check(Widgets::BusyCursor.into(), false);
+        menu_bar.check(Widgets::BusyCursor.into(), false);
 
-        // let current_page = self.current_page();
-        // if current_page.get_children().is_empty() {
-        //     // FIXME: figure out a way to avoid cloning wx::Window structs
-        //     let mut mutable_copy = self.current_page.as_ref().unwrap().clone();
-        //     mutable_copy.create_content();
-        //     current_page.layout();
+        let current_page = self.current_page();
+        if current_page.get_children().is_empty() {
+            // FIXME: figure out a way to avoid cloning wx::Window structs
+            let mut mutable_copy = self.current_page.as_ref().unwrap().clone();
+            mutable_copy.create_content();
+            current_page.layout();
 
-        //     self.connect_to_widget_events();
-        // }
+            self.connect_to_widget_events();
+        }
     }
 }
