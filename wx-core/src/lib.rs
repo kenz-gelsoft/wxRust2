@@ -130,7 +130,7 @@ impl<'a, P: WindowMethods> Buildable<'a, P, PanelBuilder<'a, P>> for Panel {
             parent: parent,
             pos: None,
             size: None,
-            style: 0,
+            style: TAB_TRAVERSAL,
         }
     }
 }
@@ -461,7 +461,7 @@ impl<'a, P: WindowMethods> Buildable<'a, P, RadioBoxBuilder<'a, P>> for RadioBox
             size: None,
             choices: None,
             major_dimension: 0,
-            style: 0,
+            style: RA_SPECIFY_COLS.into(),
             validator: None,
         }
     }
@@ -715,7 +715,7 @@ impl<'a, P: WindowMethods> Buildable<'a, P, ToolBarBuilder<'a, P>> for ToolBar {
             id: ID_ANY,
             pos: None,
             size: None,
-            style: 0,
+            style: TB_HORIZONTAL.into(),
         }
     }
 }
