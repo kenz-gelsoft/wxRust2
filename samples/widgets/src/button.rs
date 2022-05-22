@@ -162,13 +162,19 @@ impl ButtonWidgetsPage {
             .style(wx::TE_PROCESS_ENTER.into())
             .build();
 
-        sizer_row.add_window_sizerflags(
+        sizer_row.add_window_int(
             Some(control),
-            wx::SizerFlags::new(0).border(wx::RIGHT).centre_vertical(),
+            0,
+            wx::RIGHT | wx::ALIGN_CENTRE_VERTICAL,
+            5,
+            wx::Object::none(),
         );
-        sizer_row.add_window_sizerflags(
+        sizer_row.add_window_int(
             Some(&text),
-            wx::SizerFlags::new(1).border(wx::LEFT).centre_vertical(),
+            1,
+            wx::LEFT | wx::ALIGN_CENTRE_VERTICAL,
+            5,
+            wx::Object::none(),
         );
 
         (sizer_row, text)
