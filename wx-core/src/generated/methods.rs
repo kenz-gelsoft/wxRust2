@@ -3061,6 +3061,352 @@ pub trait StaticTextMethods: ControlMethods {
     }
 }
 
+// wxTextAttr
+pub trait TextAttrMethods: WxRustMethods {
+    // NOT_SUPPORTED: fn GetAlignment()
+    fn get_background_colour(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxTextAttr_GetBackgroundColour(self.as_ptr())) }
+    }
+    fn get_bullet_font(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxTextAttr_GetBulletFont(self.as_ptr())) }
+    }
+    fn get_bullet_name(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxTextAttr_GetBulletName(self.as_ptr())) }
+    }
+    fn get_bullet_number(&self) -> c_int {
+        unsafe { ffi::wxTextAttr_GetBulletNumber(self.as_ptr()) }
+    }
+    fn get_bullet_style(&self) -> c_int {
+        unsafe { ffi::wxTextAttr_GetBulletStyle(self.as_ptr()) }
+    }
+    fn get_bullet_text(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxTextAttr_GetBulletText(self.as_ptr())) }
+    }
+    fn get_character_style_name(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxTextAttr_GetCharacterStyleName(self.as_ptr())) }
+    }
+    fn get_flags(&self) -> c_long {
+        unsafe { ffi::wxTextAttr_GetFlags(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetFont()
+    fn get_font_attributes(&self, font: *const c_void, flags: c_int) -> bool {
+        unsafe { ffi::wxTextAttr_GetFontAttributes(self.as_ptr(), font, flags) }
+    }
+    // NOT_SUPPORTED: fn GetFontEncoding()
+    fn get_font_face_name(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxTextAttr_GetFontFaceName(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn GetFontFamily()
+    fn get_font_size(&self) -> c_int {
+        unsafe { ffi::wxTextAttr_GetFontSize(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetFontStyle()
+    fn get_font_underlined(&self) -> bool {
+        unsafe { ffi::wxTextAttr_GetFontUnderlined(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetUnderlineType()
+    fn get_underline_colour(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxTextAttr_GetUnderlineColour(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn GetFontWeight()
+    fn get_left_indent(&self) -> c_long {
+        unsafe { ffi::wxTextAttr_GetLeftIndent(self.as_ptr()) }
+    }
+    fn get_left_sub_indent(&self) -> c_long {
+        unsafe { ffi::wxTextAttr_GetLeftSubIndent(self.as_ptr()) }
+    }
+    fn get_line_spacing(&self) -> c_int {
+        unsafe { ffi::wxTextAttr_GetLineSpacing(self.as_ptr()) }
+    }
+    fn get_list_style_name(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxTextAttr_GetListStyleName(self.as_ptr())) }
+    }
+    fn get_outline_level(&self) -> c_int {
+        unsafe { ffi::wxTextAttr_GetOutlineLevel(self.as_ptr()) }
+    }
+    fn get_paragraph_spacing_after(&self) -> c_int {
+        unsafe { ffi::wxTextAttr_GetParagraphSpacingAfter(self.as_ptr()) }
+    }
+    fn get_paragraph_spacing_before(&self) -> c_int {
+        unsafe { ffi::wxTextAttr_GetParagraphSpacingBefore(self.as_ptr()) }
+    }
+    fn get_paragraph_style_name(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxTextAttr_GetParagraphStyleName(self.as_ptr())) }
+    }
+    fn get_right_indent(&self) -> c_long {
+        unsafe { ffi::wxTextAttr_GetRightIndent(self.as_ptr()) }
+    }
+    // BLOCKED: fn GetTabs()
+    fn get_text_colour(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxTextAttr_GetTextColour(self.as_ptr())) }
+    }
+    fn get_text_effect_flags(&self) -> c_int {
+        unsafe { ffi::wxTextAttr_GetTextEffectFlags(self.as_ptr()) }
+    }
+    fn get_text_effects(&self) -> c_int {
+        unsafe { ffi::wxTextAttr_GetTextEffects(self.as_ptr()) }
+    }
+    fn get_url(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxTextAttr_GetURL(self.as_ptr())) }
+    }
+    fn has_alignment(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasAlignment(self.as_ptr()) }
+    }
+    fn has_background_colour(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasBackgroundColour(self.as_ptr()) }
+    }
+    fn has_bullet_name(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasBulletName(self.as_ptr()) }
+    }
+    fn has_bullet_number(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasBulletNumber(self.as_ptr()) }
+    }
+    fn has_bullet_style(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasBulletStyle(self.as_ptr()) }
+    }
+    fn has_bullet_text(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasBulletText(self.as_ptr()) }
+    }
+    fn has_character_style_name(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasCharacterStyleName(self.as_ptr()) }
+    }
+    fn has_flag(&self, flag: c_long) -> bool {
+        unsafe { ffi::wxTextAttr_HasFlag(self.as_ptr(), flag) }
+    }
+    fn has_font(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasFont(self.as_ptr()) }
+    }
+    fn has_font_encoding(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasFontEncoding(self.as_ptr()) }
+    }
+    fn has_font_face_name(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasFontFaceName(self.as_ptr()) }
+    }
+    fn has_font_family(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasFontFamily(self.as_ptr()) }
+    }
+    fn has_font_italic(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasFontItalic(self.as_ptr()) }
+    }
+    fn has_font_size(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasFontSize(self.as_ptr()) }
+    }
+    fn has_font_point_size(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasFontPointSize(self.as_ptr()) }
+    }
+    fn has_font_pixel_size(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasFontPixelSize(self.as_ptr()) }
+    }
+    fn has_font_underlined(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasFontUnderlined(self.as_ptr()) }
+    }
+    fn has_font_weight(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasFontWeight(self.as_ptr()) }
+    }
+    fn has_left_indent(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasLeftIndent(self.as_ptr()) }
+    }
+    fn has_line_spacing(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasLineSpacing(self.as_ptr()) }
+    }
+    fn has_list_style_name(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasListStyleName(self.as_ptr()) }
+    }
+    fn has_outline_level(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasOutlineLevel(self.as_ptr()) }
+    }
+    fn has_page_break(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasPageBreak(self.as_ptr()) }
+    }
+    fn has_paragraph_spacing_after(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasParagraphSpacingAfter(self.as_ptr()) }
+    }
+    fn has_paragraph_spacing_before(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasParagraphSpacingBefore(self.as_ptr()) }
+    }
+    fn has_paragraph_style_name(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasParagraphStyleName(self.as_ptr()) }
+    }
+    fn has_right_indent(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasRightIndent(self.as_ptr()) }
+    }
+    fn has_tabs(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasTabs(self.as_ptr()) }
+    }
+    fn has_text_colour(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasTextColour(self.as_ptr()) }
+    }
+    fn has_text_effects(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasTextEffects(self.as_ptr()) }
+    }
+    fn has_url(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasURL(self.as_ptr()) }
+    }
+    fn is_character_style(&self) -> bool {
+        unsafe { ffi::wxTextAttr_IsCharacterStyle(self.as_ptr()) }
+    }
+    fn is_default(&self) -> bool {
+        unsafe { ffi::wxTextAttr_IsDefault(self.as_ptr()) }
+    }
+    fn is_paragraph_style(&self) -> bool {
+        unsafe { ffi::wxTextAttr_IsParagraphStyle(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn SetAlignment()
+    fn set_background_colour<C: ColourMethods>(&self, col_back: &C) {
+        unsafe {
+            let col_back = col_back.as_ptr();
+            ffi::wxTextAttr_SetBackgroundColour(self.as_ptr(), col_back)
+        }
+    }
+    fn set_bullet_font(&self, font: &str) {
+        unsafe {
+            let font = wx_base::wx_string_from(font);
+            ffi::wxTextAttr_SetBulletFont(self.as_ptr(), font)
+        }
+    }
+    fn set_bullet_name(&self, name: &str) {
+        unsafe {
+            let name = wx_base::wx_string_from(name);
+            ffi::wxTextAttr_SetBulletName(self.as_ptr(), name)
+        }
+    }
+    fn set_bullet_number(&self, n: c_int) {
+        unsafe { ffi::wxTextAttr_SetBulletNumber(self.as_ptr(), n) }
+    }
+    fn set_bullet_style(&self, style: c_int) {
+        unsafe { ffi::wxTextAttr_SetBulletStyle(self.as_ptr(), style) }
+    }
+    fn set_bullet_text(&self, text: &str) {
+        unsafe {
+            let text = wx_base::wx_string_from(text);
+            ffi::wxTextAttr_SetBulletText(self.as_ptr(), text)
+        }
+    }
+    fn set_character_style_name(&self, name: &str) {
+        unsafe {
+            let name = wx_base::wx_string_from(name);
+            ffi::wxTextAttr_SetCharacterStyleName(self.as_ptr(), name)
+        }
+    }
+    fn set_flags(&self, flags: c_long) {
+        unsafe { ffi::wxTextAttr_SetFlags(self.as_ptr(), flags) }
+    }
+    fn set_font(&self, font: *const c_void, flags: c_int) {
+        unsafe { ffi::wxTextAttr_SetFont(self.as_ptr(), font, flags) }
+    }
+    // NOT_SUPPORTED: fn SetFontEncoding()
+    fn set_font_face_name(&self, face_name: &str) {
+        unsafe {
+            let face_name = wx_base::wx_string_from(face_name);
+            ffi::wxTextAttr_SetFontFaceName(self.as_ptr(), face_name)
+        }
+    }
+    // NOT_SUPPORTED: fn SetFontFamily()
+    fn set_font_size(&self, point_size: c_int) {
+        unsafe { ffi::wxTextAttr_SetFontSize(self.as_ptr(), point_size) }
+    }
+    fn set_font_point_size(&self, point_size: c_int) {
+        unsafe { ffi::wxTextAttr_SetFontPointSize(self.as_ptr(), point_size) }
+    }
+    fn set_font_pixel_size(&self, pixel_size: c_int) {
+        unsafe { ffi::wxTextAttr_SetFontPixelSize(self.as_ptr(), pixel_size) }
+    }
+    // NOT_SUPPORTED: fn SetFontStyle()
+    fn set_font_underlined(&self, underlined: bool) {
+        unsafe { ffi::wxTextAttr_SetFontUnderlined(self.as_ptr(), underlined) }
+    }
+    // NOT_SUPPORTED: fn SetFontUnderlined1()
+    // NOT_SUPPORTED: fn SetFontWeight()
+    fn set_left_indent(&self, indent: c_int, sub_indent: c_int) {
+        unsafe { ffi::wxTextAttr_SetLeftIndent(self.as_ptr(), indent, sub_indent) }
+    }
+    fn set_line_spacing(&self, spacing: c_int) {
+        unsafe { ffi::wxTextAttr_SetLineSpacing(self.as_ptr(), spacing) }
+    }
+    fn set_list_style_name(&self, name: &str) {
+        unsafe {
+            let name = wx_base::wx_string_from(name);
+            ffi::wxTextAttr_SetListStyleName(self.as_ptr(), name)
+        }
+    }
+    fn set_outline_level(&self, level: c_int) {
+        unsafe { ffi::wxTextAttr_SetOutlineLevel(self.as_ptr(), level) }
+    }
+    fn set_page_break(&self, page_break: bool) {
+        unsafe { ffi::wxTextAttr_SetPageBreak(self.as_ptr(), page_break) }
+    }
+    fn set_paragraph_spacing_after(&self, spacing: c_int) {
+        unsafe { ffi::wxTextAttr_SetParagraphSpacingAfter(self.as_ptr(), spacing) }
+    }
+    fn set_paragraph_spacing_before(&self, spacing: c_int) {
+        unsafe { ffi::wxTextAttr_SetParagraphSpacingBefore(self.as_ptr(), spacing) }
+    }
+    fn set_paragraph_style_name(&self, name: &str) {
+        unsafe {
+            let name = wx_base::wx_string_from(name);
+            ffi::wxTextAttr_SetParagraphStyleName(self.as_ptr(), name)
+        }
+    }
+    fn set_right_indent(&self, indent: c_int) {
+        unsafe { ffi::wxTextAttr_SetRightIndent(self.as_ptr(), indent) }
+    }
+    fn set_tabs(&self, tabs: *const c_void) {
+        unsafe { ffi::wxTextAttr_SetTabs(self.as_ptr(), tabs) }
+    }
+    fn set_text_colour<C: ColourMethods>(&self, col_text: &C) {
+        unsafe {
+            let col_text = col_text.as_ptr();
+            ffi::wxTextAttr_SetTextColour(self.as_ptr(), col_text)
+        }
+    }
+    fn set_text_effect_flags(&self, flags: c_int) {
+        unsafe { ffi::wxTextAttr_SetTextEffectFlags(self.as_ptr(), flags) }
+    }
+    fn set_text_effects(&self, effects: c_int) {
+        unsafe { ffi::wxTextAttr_SetTextEffects(self.as_ptr(), effects) }
+    }
+    fn set_url(&self, url: &str) {
+        unsafe {
+            let url = wx_base::wx_string_from(url);
+            ffi::wxTextAttr_SetURL(self.as_ptr(), url)
+        }
+    }
+    // BLOCKED: fn operator=()
+    fn apply<T: TextAttrMethods, T2: TextAttrMethods>(
+        &self,
+        style: &T,
+        compare_with: Option<&T2>,
+    ) -> bool {
+        unsafe {
+            let style = style.as_ptr();
+            let compare_with = match compare_with {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTextAttr_Apply(self.as_ptr(), style, compare_with)
+        }
+    }
+    fn merge<T: TextAttrMethods>(&self, overlay: &T) {
+        unsafe {
+            let overlay = overlay.as_ptr();
+            ffi::wxTextAttr_Merge(self.as_ptr(), overlay)
+        }
+    }
+    fn eq_partial<T: TextAttrMethods>(&self, attr: &T, weak_test: bool) -> bool {
+        unsafe {
+            let attr = attr.as_ptr();
+            ffi::wxTextAttr_EqPartial(self.as_ptr(), attr, weak_test)
+        }
+    }
+    fn merge_textattr<T: TextAttrMethods, T2: TextAttrMethods>(base: &T, overlay: &T2) -> TextAttr {
+        unsafe {
+            let base = base.as_ptr();
+            let overlay = overlay.as_ptr();
+            TextAttrIsOwned(ffi::wxTextAttr_Merge1(base, overlay))
+        }
+    }
+}
+
 // wxToolBar
 pub trait ToolBarMethods: ControlMethods {
     // DTOR: fn ~wxToolBar()

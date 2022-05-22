@@ -1106,6 +1106,34 @@ impl<const OWNED: bool> StaticTextIsOwned<OWNED> {
     }
 }
 
+// wxTextAttr
+wx_class! { TextAttr =
+    TextAttrIsOwned<true>(wxTextAttr) impl
+        TextAttrMethods
+}
+impl<const OWNED: bool> TextAttrIsOwned<OWNED> {
+    pub fn new() -> TextAttrIsOwned<OWNED> {
+        unsafe { TextAttrIsOwned(ffi::wxTextAttr_new()) }
+    }
+    // NOT_SUPPORTED: fn wxTextAttr1()
+    pub fn new_with_textattr<T: TextAttrMethods>(attr: &T) -> TextAttrIsOwned<OWNED> {
+        unsafe {
+            let attr = attr.as_ptr();
+            TextAttrIsOwned(ffi::wxTextAttr_new2(attr))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for TextAttrIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxTextAttr_delete(self.0) }
+        }
+    }
+}
+
 // wxToolBar
 wx_class! { ToolBar =
     ToolBarIsOwned<true>(wxToolBar) impl

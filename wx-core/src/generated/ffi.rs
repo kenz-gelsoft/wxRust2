@@ -1272,6 +1272,128 @@ extern "C" {
     pub fn wxStaticText_IsEllipsized(self_: *const c_void) -> bool;
     pub fn wxStaticText_Wrap(self_: *mut c_void, width: c_int);
 
+    // wxTextAttr
+    pub fn wxTextAttr_delete(self_: *mut c_void);
+    // NOT_SUPPORTED: pub fn wxTextAttr_GetAlignment(self_: *const c_void) -> wxTextAttrAlignment;
+    pub fn wxTextAttr_GetBackgroundColour(self_: *const c_void) -> *mut c_void;
+    pub fn wxTextAttr_GetBulletFont(self_: *const c_void) -> *mut c_void;
+    pub fn wxTextAttr_GetBulletName(self_: *const c_void) -> *mut c_void;
+    pub fn wxTextAttr_GetBulletNumber(self_: *const c_void) -> c_int;
+    pub fn wxTextAttr_GetBulletStyle(self_: *const c_void) -> c_int;
+    pub fn wxTextAttr_GetBulletText(self_: *const c_void) -> *mut c_void;
+    pub fn wxTextAttr_GetCharacterStyleName(self_: *const c_void) -> *mut c_void;
+    pub fn wxTextAttr_GetFlags(self_: *const c_void) -> c_long;
+    // NOT_SUPPORTED: pub fn wxTextAttr_GetFont(self_: *const c_void) -> wxFont;
+    pub fn wxTextAttr_GetFontAttributes(
+        self_: *mut c_void,
+        font: *const c_void,
+        flags: c_int,
+    ) -> bool;
+    // NOT_SUPPORTED: pub fn wxTextAttr_GetFontEncoding(self_: *const c_void) -> wxFontEncoding;
+    pub fn wxTextAttr_GetFontFaceName(self_: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxTextAttr_GetFontFamily(self_: *const c_void) -> wxFontFamily;
+    pub fn wxTextAttr_GetFontSize(self_: *const c_void) -> c_int;
+    // NOT_SUPPORTED: pub fn wxTextAttr_GetFontStyle(self_: *const c_void) -> wxFontStyle;
+    pub fn wxTextAttr_GetFontUnderlined(self_: *const c_void) -> bool;
+    // NOT_SUPPORTED: pub fn wxTextAttr_GetUnderlineType(self_: *const c_void) -> wxTextAttrUnderlineType;
+    pub fn wxTextAttr_GetUnderlineColour(self_: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxTextAttr_GetFontWeight(self_: *const c_void) -> wxFontWeight;
+    pub fn wxTextAttr_GetLeftIndent(self_: *const c_void) -> c_long;
+    pub fn wxTextAttr_GetLeftSubIndent(self_: *const c_void) -> c_long;
+    pub fn wxTextAttr_GetLineSpacing(self_: *const c_void) -> c_int;
+    pub fn wxTextAttr_GetListStyleName(self_: *const c_void) -> *mut c_void;
+    pub fn wxTextAttr_GetOutlineLevel(self_: *const c_void) -> c_int;
+    pub fn wxTextAttr_GetParagraphSpacingAfter(self_: *const c_void) -> c_int;
+    pub fn wxTextAttr_GetParagraphSpacingBefore(self_: *const c_void) -> c_int;
+    pub fn wxTextAttr_GetParagraphStyleName(self_: *const c_void) -> *mut c_void;
+    pub fn wxTextAttr_GetRightIndent(self_: *const c_void) -> c_long;
+    // BLOCKED: pub fn wxTextAttr_GetTabs(self_: *const c_void) -> *const c_void;
+    pub fn wxTextAttr_GetTextColour(self_: *const c_void) -> *mut c_void;
+    pub fn wxTextAttr_GetTextEffectFlags(self_: *const c_void) -> c_int;
+    pub fn wxTextAttr_GetTextEffects(self_: *const c_void) -> c_int;
+    pub fn wxTextAttr_GetURL(self_: *const c_void) -> *mut c_void;
+    pub fn wxTextAttr_HasAlignment(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasBackgroundColour(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasBulletName(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasBulletNumber(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasBulletStyle(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasBulletText(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasCharacterStyleName(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasFlag(self_: *const c_void, flag: c_long) -> bool;
+    pub fn wxTextAttr_HasFont(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasFontEncoding(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasFontFaceName(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasFontFamily(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasFontItalic(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasFontSize(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasFontPointSize(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasFontPixelSize(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasFontUnderlined(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasFontWeight(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasLeftIndent(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasLineSpacing(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasListStyleName(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasOutlineLevel(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasPageBreak(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasParagraphSpacingAfter(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasParagraphSpacingBefore(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasParagraphStyleName(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasRightIndent(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasTabs(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasTextColour(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasTextEffects(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_HasURL(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_IsCharacterStyle(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_IsDefault(self_: *const c_void) -> bool;
+    pub fn wxTextAttr_IsParagraphStyle(self_: *const c_void) -> bool;
+    // NOT_SUPPORTED: pub fn wxTextAttr_SetAlignment(self_: *mut c_void, alignment: wxTextAttrAlignment);
+    pub fn wxTextAttr_SetBackgroundColour(self_: *mut c_void, col_back: *const c_void);
+    pub fn wxTextAttr_SetBulletFont(self_: *mut c_void, font: *const c_void);
+    pub fn wxTextAttr_SetBulletName(self_: *mut c_void, name: *const c_void);
+    pub fn wxTextAttr_SetBulletNumber(self_: *mut c_void, n: c_int);
+    pub fn wxTextAttr_SetBulletStyle(self_: *mut c_void, style: c_int);
+    pub fn wxTextAttr_SetBulletText(self_: *mut c_void, text: *const c_void);
+    pub fn wxTextAttr_SetCharacterStyleName(self_: *mut c_void, name: *const c_void);
+    pub fn wxTextAttr_SetFlags(self_: *mut c_void, flags: c_long);
+    pub fn wxTextAttr_SetFont(self_: *mut c_void, font: *const c_void, flags: c_int);
+    // NOT_SUPPORTED: pub fn wxTextAttr_SetFontEncoding(self_: *mut c_void, encoding: wxFontEncoding);
+    pub fn wxTextAttr_SetFontFaceName(self_: *mut c_void, face_name: *const c_void);
+    // NOT_SUPPORTED: pub fn wxTextAttr_SetFontFamily(self_: *mut c_void, family: wxFontFamily);
+    pub fn wxTextAttr_SetFontSize(self_: *mut c_void, point_size: c_int);
+    pub fn wxTextAttr_SetFontPointSize(self_: *mut c_void, point_size: c_int);
+    pub fn wxTextAttr_SetFontPixelSize(self_: *mut c_void, pixel_size: c_int);
+    // NOT_SUPPORTED: pub fn wxTextAttr_SetFontStyle(self_: *mut c_void, font_style: wxFontStyle);
+    pub fn wxTextAttr_SetFontUnderlined(self_: *mut c_void, underlined: bool);
+    // NOT_SUPPORTED: pub fn wxTextAttr_SetFontUnderlined1(self_: *mut c_void, type_: wxTextAttrUnderlineType, colour: *const c_void);
+    // NOT_SUPPORTED: pub fn wxTextAttr_SetFontWeight(self_: *mut c_void, font_weight: wxFontWeight);
+    pub fn wxTextAttr_SetLeftIndent(self_: *mut c_void, indent: c_int, sub_indent: c_int);
+    pub fn wxTextAttr_SetLineSpacing(self_: *mut c_void, spacing: c_int);
+    pub fn wxTextAttr_SetListStyleName(self_: *mut c_void, name: *const c_void);
+    pub fn wxTextAttr_SetOutlineLevel(self_: *mut c_void, level: c_int);
+    pub fn wxTextAttr_SetPageBreak(self_: *mut c_void, page_break: bool);
+    pub fn wxTextAttr_SetParagraphSpacingAfter(self_: *mut c_void, spacing: c_int);
+    pub fn wxTextAttr_SetParagraphSpacingBefore(self_: *mut c_void, spacing: c_int);
+    pub fn wxTextAttr_SetParagraphStyleName(self_: *mut c_void, name: *const c_void);
+    pub fn wxTextAttr_SetRightIndent(self_: *mut c_void, indent: c_int);
+    pub fn wxTextAttr_SetTabs(self_: *mut c_void, tabs: *const c_void);
+    pub fn wxTextAttr_SetTextColour(self_: *mut c_void, col_text: *const c_void);
+    pub fn wxTextAttr_SetTextEffectFlags(self_: *mut c_void, flags: c_int);
+    pub fn wxTextAttr_SetTextEffects(self_: *mut c_void, effects: c_int);
+    pub fn wxTextAttr_SetURL(self_: *mut c_void, url: *const c_void);
+    // BLOCKED: pub fn wxTextAttr_operator=(self_: *mut c_void, attr: *const c_void);
+    pub fn wxTextAttr_new() -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxTextAttr_new1(col_text: *const c_void, col_back: *const c_void, font: *const c_void, alignment: wxTextAttrAlignment) -> *mut c_void;
+    pub fn wxTextAttr_new2(attr: *const c_void) -> *mut c_void;
+    pub fn wxTextAttr_Apply(
+        self_: *mut c_void,
+        style: *const c_void,
+        compare_with: *const c_void,
+    ) -> bool;
+    pub fn wxTextAttr_Merge(self_: *mut c_void, overlay: *const c_void);
+    pub fn wxTextAttr_EqPartial(self_: *const c_void, attr: *const c_void, weak_test: bool)
+        -> bool;
+    pub fn wxTextAttr_Merge1(base: *const c_void, overlay: *const c_void) -> *mut c_void;
+
     // wxToolBar
     pub fn wxToolBar_new() -> *mut c_void;
     pub fn wxToolBar_new1(

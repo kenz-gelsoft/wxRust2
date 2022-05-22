@@ -34,7 +34,7 @@ wxml_files = [
     'wxml/classwx_static_box.xml',
     'wxml/classwx_static_box_sizer.xml',
     'wxml/classwx_static_text.xml',
-    #'wxml/classwx_text_attr.xml',
+    'wxml/classwx_text_attr.xml',
     #'wxml/classwx_text_ctrl.xml',
     'wxml/classwx_tool_bar.xml',
     'wxml/classwx_top_level_window.xml',
@@ -269,10 +269,15 @@ blocklist = [
     'wxStaticBox2',
     'Create1',
 ]
-#[types.wxTextAttr]
-#blocklist = [
-#    'operator=',
-#]
+[types.wxTextAttr]
+blocklist = [
+    'operator=',
+    # TODO: wxArrayInt is not supported
+    'GetTabs',
+]
+wx31 = [
+    'GetUnderlineColour',
+]
 #[types.wxTextCtrl]
 #blocklist = [
 #    'operator<<',
