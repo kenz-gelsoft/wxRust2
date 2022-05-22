@@ -93,7 +93,7 @@ struct WidgetsFrame {
     base: wx::Frame,
     m_panel: wx::Panel,
     m_book: wx::Notebook,
-    current_page: Option<ButtonWidgetsPage>,
+    m_page: ButtonWidgetsPage, // for now
 }
 impl WidgetsFrame {
     fn new(title: &str) -> Self {
@@ -106,11 +106,12 @@ impl WidgetsFrame {
             .style(style.into())
             .build();
 
+        let page = ButtonWidgetsPage::new(&book);
         let mut frame = WidgetsFrame {
             base: base,
             m_panel: panel,
             m_book: book,
-            current_page: None,
+            m_page: page,
         };
         frame.on_create();
         frame
@@ -228,20 +229,20 @@ impl WidgetsFrame {
         self.base.set_min_client_size(&size_min);
     }
 
-    fn current_page(&self) -> wx::Panel {
-        // FIXME: figure out a way to avoid cloning wx::Window structs
-        self.current_page.as_ref().unwrap().base.clone()
-    }
+    // fn current_page(&self) -> wx::Panel {
+    //     // FIXME: figure out a way to avoid cloning wx::Window structs
+    //     self.current_page.as_ref().unwrap().base.clone()
+    // }
 
     fn connect_to_widget_events(&self) {
         // TODO
     }
 
     fn init_book(&mut self) {
-        self.current_page = Some(ButtonWidgetsPage::new(&self.m_book));
+        // TODO: initialize pages here for startup time and memory consumpution
 
         self.m_book.add_page(
-            Some(&self.current_page()),
+            Some(&self.m_page.base),
             "Button",
             false,
             wx::BookCtrlBase::NO_IMAGE,
@@ -251,13 +252,19 @@ impl WidgetsFrame {
         self.base.bind(
             wx::RustEvent::BookctrlPageChanged,
             move |event: &wx::BookCtrlEvent| {
-                self_copy.on_page_changed(event);
+                let mut warped = self_copy.clone();
+                let sel = event.get_selection();
+                warped.on_page_changed(sel);
             },
         );
+
+        // self.m_book.set_selection(1);
+        // self.m_book.set_selection(0);
+        self.on_page_changed(0);
     }
 
-    fn on_page_changed(&self, event: &wx::BookCtrlEvent) {
-        let sel = event.get_selection();
+    fn on_page_changed(&mut self, sel: c_int) {
+        // TODO: support switching
 
         let menu_bar = self.base.get_menu_bar().get().unwrap();
         if let Some(item) = menu_bar.find_item((Widgets::GoToPage as c_int) + sel, wx::Menu::none())
@@ -267,14 +274,7 @@ impl WidgetsFrame {
 
         menu_bar.check(Widgets::BusyCursor.into(), false);
 
-        let current_page = self.current_page();
-        if current_page.get_children().is_empty() {
-            // FIXME: figure out a way to avoid cloning wx::Window structs
-            let mut mutable_copy = self.current_page.as_ref().unwrap().clone();
-            mutable_copy.create_content();
-            current_page.layout();
-
-            self.connect_to_widget_events();
-        }
+        self.m_page.create_content();
+        self.m_page.base.layout();
     }
 }
