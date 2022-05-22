@@ -437,6 +437,88 @@ impl<'a, P: WindowMethods> NotebookBuilder<'a, P> {
     }
 }
 
+pub struct RadioBoxBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    id: c_int,
+    label: String,
+    pos: Option<Point>,
+    size: Option<Size>,
+    choices: Option<ArrayString>,
+    major_dimension: c_int,
+    style: c_long,
+    validator: Option<Validator>,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, RadioBoxBuilder<'a, P>> for RadioBox {
+    fn builder(parent: Option<&'a P>) -> RadioBoxBuilder<'a, P> {
+        RadioBoxBuilder {
+            parent: parent,
+            id: ID_ANY,
+            label: "".to_string(),
+            pos: None,
+            size: None,
+            choices: None,
+            major_dimension: 0,
+            style: 0,
+            validator: None,
+        }
+    }
+}
+impl<'a, P: WindowMethods> RadioBoxBuilder<'a, P> {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn label(&mut self, label: &str) -> &mut Self {
+        self.label = label.to_string();
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn choices(&mut self, choices: ArrayString) -> &mut Self {
+        self.choices = Some(choices);
+        self
+    }
+    pub fn major_dimension(&mut self, major_dimension: c_int) -> &mut Self {
+        self.major_dimension = major_dimension;
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn validator(&mut self, validator: Validator) -> &mut Self {
+        self.validator = Some(validator);
+        self
+    }
+    pub fn build(&mut self) -> RadioBox {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        let choices = self.choices.take().unwrap_or_else(|| ArrayString::new());
+        let validator = self
+            .validator
+            .take()
+            .unwrap_or_else(|| Validator::default());
+        RadioBox::new(
+            self.parent,
+            self.id,
+            &self.label,
+            &pos,
+            &size,
+            &choices,
+            self.major_dimension,
+            self.style,
+            &validator,
+            "",
+        )
+    }
+}
+
 pub struct StaticBoxBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
