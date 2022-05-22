@@ -754,7 +754,9 @@ void wxTextEntry_ChangeValue(wxTextEntry * self, const wxString * value);
 void wxTextEntry_Clear(wxTextEntry * self);
 void wxTextEntry_Copy(wxTextEntry * self);
 void wxTextEntry_Cut(wxTextEntry * self);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxTextEntry_ForceUpper(wxTextEntry * self);
+#endif
 long wxTextEntry_GetInsertionPoint(const wxTextEntry * self);
 wxString *wxTextEntry_GetRange(const wxTextEntry * self, long from, long to);
 void wxTextEntry_GetSelection(const wxTextEntry * self, long * from, long * to);

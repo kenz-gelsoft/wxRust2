@@ -2033,9 +2033,11 @@ void wxTextEntry_Copy(wxTextEntry * self) {
 void wxTextEntry_Cut(wxTextEntry * self) {
     return self->Cut();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxTextEntry_ForceUpper(wxTextEntry * self) {
     return self->ForceUpper();
 }
+#endif
 long wxTextEntry_GetInsertionPoint(const wxTextEntry * self) {
     return self->GetInsertionPoint();
 }

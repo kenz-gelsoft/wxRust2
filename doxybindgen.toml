@@ -286,6 +286,10 @@ blocklist = [
     'operator<<2',
     'operator<<4',
 ]
+[types.wxTextEntry]
+wx31 = [
+    'ForceUpper',
+]
 [types.wxToolBar]
 blocklist = [
     # const getter
