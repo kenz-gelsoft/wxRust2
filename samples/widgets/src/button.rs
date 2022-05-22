@@ -18,13 +18,21 @@ impl From<ButtonPage> for c_int {
 #[derive(Clone)]
 pub struct ButtonWidgetsPage {
     pub base: wx::Panel,
+    m_button: Option<wx::Button>,
+    m_text_label: Option<wx::TextCtrl>,
+    m_sizer_button: Option<wx::BoxSizer>,
 }
 impl ButtonWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {
         let panel = wx::Panel::builder(Some(book))
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
-        ButtonWidgetsPage { base: panel }
+        ButtonWidgetsPage {
+            base: panel,
+            m_button: None,
+            m_text_label: None,
+            m_sizer_button: None,
+        }
     }
     pub fn create_content(&mut self) {
         let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
@@ -101,55 +109,138 @@ impl ButtonWidgetsPage {
             Some(&radio_image_pos),
             wx::SizerFlags::new(0).expand().border(wx::ALL),
         );
-        // TODO Integer Validator
-        let (sizer_image_margins_row, text_image_margin_h) = self
-            .create_sizer_with_text_and_button(
-                ButtonPage::ChangeImageMargins.into(),
-                "Horizontal and vertical",
-                wx::ID_ANY,
-            );
+        sizer_left.add_spacer(15);
 
-        // let start_btn = wx::Button::builder(Some(&self.base))
-        //     .id(Button::Start.into())
-        //     .label("&Start")
-        //     .build();
-        // sizer_oper.add_window_sizerflags(
-        //     Some(&start_btn),
-        //     wx::SizerFlags::new(0).expand().border(wx::ALL),
-        // );
-        // let stop_btn = wx::Button::builder(Some(&self.base))
-        //     .id(Button::Stop.into())
-        //     .label("&Stop")
-        //     .build();
-        // sizer_oper.add_window_sizerflags(
-        //     Some(&stop_btn),
-        //     wx::SizerFlags::new(0).expand().border(wx::ALL),
-        // );
+        let halign = wx::ArrayString::new();
+        halign.add("left");
+        halign.add("centre");
+        halign.add("right");
+        let radio_halign = wx::RadioBox::builder(Some(&self.base))
+            .label("&Horz alignment")
+            .choices(halign)
+            .build();
 
-        // sizer_oper.add_window_sizerflags(
-        //     Some(
-        //         &wx::StaticText::builder(Some(&self.base))
-        //             .id(Button::IsRunning.into())
-        //             .label("Indicator is initializing...")
-        //             .build(),
-        //     ),
-        //     wx::SizerFlags::new(0).expand().border(wx::ALL),
-        // );
+        let valign = wx::ArrayString::new();
+        valign.add("left");
+        valign.add("centre");
+        valign.add("right");
+        let radio_valign = wx::RadioBox::builder(Some(&self.base))
+            .label("&Vert alignment")
+            .choices(valign)
+            .build();
 
-        // self.recreate_widget();
+        sizer_left.add_window_sizerflags(
+            Some(&radio_halign),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
+        );
+        sizer_left.add_window_sizerflags(
+            Some(&radio_valign),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
+        );
 
-        // let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
-        // sizer_top.add_sizer_sizerflags(
-        //     Some(&sizer_oper),
-        //     wx::SizerFlags::new(0).expand().double_border(wx::ALL),
-        // );
-        // sizer_top.add_sizer_sizerflags(
-        //     Some(&self.m_sizer_indicator),
-        //     wx::SizerFlags::new(1).expand().double_border(wx::ALL),
-        // );
+        sizer_left.add_spacer(5);
 
-        // self.base.set_sizer(Some(&sizer_top), true);
+        let btn = wx::Button::builder(Some(&self.base))
+            .id(ButtonPage::Reset.into())
+            .label("&Reset")
+            .build();
+        sizer_left.add_window_int(
+            Some(&btn),
+            0,
+            wx::ALIGN_CENTRE_HORIZONTAL | wx::ALL,
+            15,
+            wx::Object::none(),
+        );
+
+        // middle pane
+        let s_box2 = wx::StaticBox::builder(Some(&self.base))
+            .label("&Operations")
+            .build();
+        let sizer_middle = wx::StaticBoxSizer::new_with_staticbox(Some(&s_box2), wx::VERTICAL);
+
+        let (sizer_row, text_label) = self.create_sizer_with_text_and_button(
+            ButtonPage::ChangeLabel.into(),
+            "Change label",
+            wx::ID_ANY,
+        );
+        text_label.set_value("&Press me!");
+        self.m_text_label = Some(text_label);
+        sizer_middle.add_sizer_sizerflags(
+            Some(&sizer_row),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
+        );
+
+        // right pane
+        let sizer_button = wx::BoxSizer::new(wx::HORIZONTAL);
+        sizer_button.set_min_size_int(150, 0);
+
+        // the 3 panes panes compose the window
+        sizer_top.add_sizer_sizerflags(
+            Some(&sizer_left),
+            wx::SizerFlags::new(0)
+                .expand()
+                .double_border(wx::ALL & !wx::LEFT),
+        );
+        sizer_top.add_sizer_sizerflags(
+            Some(&sizer_middle),
+            wx::SizerFlags::new(1).expand().double_border(wx::ALL),
+        );
+        sizer_top.add_sizer_sizerflags(
+            Some(&sizer_button),
+            wx::SizerFlags::new(1)
+                .expand()
+                .double_border(wx::ALL & !wx::RIGHT),
+        );
+        self.m_sizer_button = Some(sizer_button);
+
+        // do create the main control
+        self.reset();
+        // self.create_button();
+
+        self.base.set_sizer(Some(&sizer_top), true);
     }
+
+    fn recreate_widget(&mut self) {
+        self.create_button();
+    }
+
+    fn reset(&self) {
+        // TODO reset checkboxes to initial values
+    }
+
+    fn create_button(&mut self) {
+        let mut label = "".to_string();
+        if let Some(button) = &self.m_button {
+            label = button.get_label();
+
+            // TODO: remove (and delete) all buttons
+            // let count = self.m_sizer_button.get_children().get_count();
+        }
+
+        if label.is_empty() {
+            label = self.m_text_label.as_ref().unwrap().get_value();
+        }
+
+        self.m_button = Some(
+            wx::Button::builder(Some(&self.base))
+                .id(ButtonPage::Button.into())
+                .label(&label)
+                .build(),
+        );
+
+        if let Some(sizer_button) = &self.m_sizer_button {
+            sizer_button.add_stretch_spacer(1);
+            sizer_button.add_window_sizerflags(
+                self.m_button.as_ref(),
+                wx::SizerFlags::new(0).centre().border(wx::ALL),
+            );
+            sizer_button.add_stretch_spacer(1);
+
+            sizer_button.layout();
+        }
+    }
+
+    // Utility methods from (and to be placed to) the base WidgetPage class
 
     fn create_sizer_with_text<C: ControlMethods>(
         &self,
@@ -207,22 +298,5 @@ impl ButtonWidgetsPage {
         sizer.add_spacer(2);
 
         return checkbox;
-    }
-
-    fn recreate_widget(&mut self) {
-        // self.m_sizer_indicator.clear(true /* delete windows */);
-
-        // self.m_indicator = Some(
-        //     wx::Button::builder(Some(&self.base))
-        //         .id(wx::ID_ANY)
-        //         .style(wx::BORDER_DEFAULT)
-        //         .build(),
-        // );
-
-        // self.m_sizer_indicator.add_stretch_spacer(1);
-        // self.m_sizer_indicator
-        //     .add_window_sizerflags(self.m_indicator.as_ref(), wx::SizerFlags::new(0).centre());
-        // self.m_sizer_indicator.add_stretch_spacer(1);
-        // self.m_sizer_indicator.layout();
     }
 }

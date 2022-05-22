@@ -59,6 +59,9 @@ mod ffi {
     }
 }
 
+// mix-in wxTextEntry
+impl TextEntryMethods for TextCtrl {}
+
 pub struct FrameBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
