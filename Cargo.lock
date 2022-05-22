@@ -25,6 +25,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "textentry"
+version = "0.1.0"
+dependencies = [
+ "wx",
+ "wx-base",
+]
+
+[[package]]
 name = "widgets"
 version = "0.1.0"
 dependencies = [
