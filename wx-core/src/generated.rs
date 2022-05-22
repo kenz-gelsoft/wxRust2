@@ -1134,6 +1134,49 @@ impl<const OWNED: bool> Drop for TextAttrIsOwned<OWNED> {
     }
 }
 
+// wxTextCtrl
+wx_class! { TextCtrl =
+    TextCtrlIsOwned<true>(wxTextCtrl) impl
+        TextCtrlMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> TextCtrlIsOwned<OWNED> {
+    pub fn new_2step() -> TextCtrlIsOwned<OWNED> {
+        unsafe { TextCtrlIsOwned(ffi::wxTextCtrl_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        value: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> TextCtrlIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let value = wx_base::wx_string_from(value);
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            TextCtrlIsOwned(ffi::wxTextCtrl_new1(
+                parent, id, value, pos, size, style, validator, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
 // wxToolBar
 wx_class! { ToolBar =
     ToolBarIsOwned<true>(wxToolBar) impl

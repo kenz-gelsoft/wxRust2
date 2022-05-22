@@ -1394,6 +1394,79 @@ extern "C" {
         -> bool;
     pub fn wxTextAttr_Merge1(base: *const c_void, overlay: *const c_void) -> *mut c_void;
 
+    // wxTextCtrl
+    pub fn wxTextCtrl_new() -> *mut c_void;
+    pub fn wxTextCtrl_new1(
+        parent: *mut c_void,
+        id: c_int,
+        value: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    // DTOR: pub fn wxTextCtrl_~wxTextCtrl(self_: *mut c_void);
+    pub fn wxTextCtrl_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        value: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxTextCtrl_DiscardEdits(self_: *mut c_void);
+    pub fn wxTextCtrl_EmulateKeyPress(self_: *mut c_void, event: *const c_void) -> bool;
+    pub fn wxTextCtrl_GetDefaultStyle(self_: *const c_void) -> *mut c_void;
+    pub fn wxTextCtrl_GetLineLength(self_: *const c_void, line_no: c_long) -> c_int;
+    pub fn wxTextCtrl_GetLineText(self_: *const c_void, line_no: c_long) -> *mut c_void;
+    pub fn wxTextCtrl_GetNumberOfLines(self_: *const c_void) -> c_int;
+    pub fn wxTextCtrl_GetStyle(self_: *mut c_void, position: c_long, style: *mut c_void) -> bool;
+    // NOT_SUPPORTED: pub fn wxTextCtrl_HitTest(self_: *const c_void, pt: *const c_void, pos: *mut c_void) -> wxTextCtrlHitTestResult;
+    // NOT_SUPPORTED: pub fn wxTextCtrl_HitTest1(self_: *const c_void, pt: *const c_void, col: *mut c_void, row: *mut c_void) -> wxTextCtrlHitTestResult;
+    pub fn wxTextCtrl_IsModified(self_: *const c_void) -> bool;
+    pub fn wxTextCtrl_IsMultiLine(self_: *const c_void) -> bool;
+    pub fn wxTextCtrl_IsSingleLine(self_: *const c_void) -> bool;
+    pub fn wxTextCtrl_LoadFile(
+        self_: *mut c_void,
+        filename: *const c_void,
+        file_type: c_int,
+    ) -> bool;
+    pub fn wxTextCtrl_MarkDirty(self_: *mut c_void);
+    pub fn wxTextCtrl_OnDropFiles(self_: *mut c_void, event: *mut c_void);
+    pub fn wxTextCtrl_PositionToXY(
+        self_: *const c_void,
+        pos: c_long,
+        x: *mut c_void,
+        y: *mut c_void,
+    ) -> bool;
+    pub fn wxTextCtrl_PositionToCoords(self_: *const c_void, pos: c_long) -> *mut c_void;
+    pub fn wxTextCtrl_SaveFile(
+        self_: *mut c_void,
+        filename: *const c_void,
+        file_type: c_int,
+    ) -> bool;
+    pub fn wxTextCtrl_SetDefaultStyle(self_: *mut c_void, style: *const c_void) -> bool;
+    pub fn wxTextCtrl_SetModified(self_: *mut c_void, modified: bool);
+    pub fn wxTextCtrl_SetStyle(
+        self_: *mut c_void,
+        start: c_long,
+        end: c_long,
+        style: *const c_void,
+    ) -> bool;
+    pub fn wxTextCtrl_ShowPosition(self_: *mut c_void, pos: c_long);
+    pub fn wxTextCtrl_XYToPosition(self_: *const c_void, x: c_long, y: c_long) -> c_long;
+    // BLOCKED: pub fn wxTextCtrl_operator<<(self_: *mut c_void, s: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxTextCtrl_operator<<1(self_: *mut c_void, i: c_int) -> *mut c_void;
+    // BLOCKED: pub fn wxTextCtrl_operator<<2(self_: *mut c_void, i: c_long) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxTextCtrl_operator<<3(self_: *mut c_void, f: float) -> *mut c_void;
+    // BLOCKED: pub fn wxTextCtrl_operator<<4(self_: *mut c_void, d: c_double) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxTextCtrl_operator<<5(self_: *mut c_void, c: char) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxTextCtrl_operator<<6(self_: *mut c_void, c: wchar_t) -> *mut c_void;
+
     // wxToolBar
     pub fn wxToolBar_new() -> *mut c_void;
     pub fn wxToolBar_new1(

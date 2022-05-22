@@ -35,7 +35,7 @@ wxml_files = [
     'wxml/classwx_static_box_sizer.xml',
     'wxml/classwx_static_text.xml',
     'wxml/classwx_text_attr.xml',
-    #'wxml/classwx_text_ctrl.xml',
+    'wxml/classwx_text_ctrl.xml',
     'wxml/classwx_tool_bar.xml',
     'wxml/classwx_top_level_window.xml',
     'wxml/classwx_validator.xml',
@@ -278,13 +278,13 @@ blocklist = [
 wx31 = [
     'GetUnderlineColour',
 ]
-#[types.wxTextCtrl]
-#blocklist = [
-#    'operator<<',
-#    'operator<<1',
-#    'operator<<2',
-#    'operator<<4',
-#]
+[types.wxTextCtrl]
+blocklist = [
+    'operator<<',
+    'operator<<1',
+    'operator<<2',
+    'operator<<4',
+]
 [types.wxToolBar]
 blocklist = [
     # const getter

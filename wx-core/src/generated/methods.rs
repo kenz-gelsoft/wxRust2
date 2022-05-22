@@ -3407,6 +3407,129 @@ pub trait TextAttrMethods: WxRustMethods {
     }
 }
 
+// wxTextCtrl
+pub trait TextCtrlMethods: ControlMethods {
+    // DTOR: fn ~wxTextCtrl()
+    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        value: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let value = wx_base::wx_string_from(value);
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            ffi::wxTextCtrl_Create(
+                self.as_ptr(),
+                parent,
+                id,
+                value,
+                pos,
+                size,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+    fn discard_edits(&self) {
+        unsafe { ffi::wxTextCtrl_DiscardEdits(self.as_ptr()) }
+    }
+    fn emulate_key_press(&self, event: *const c_void) -> bool {
+        unsafe { ffi::wxTextCtrl_EmulateKeyPress(self.as_ptr(), event) }
+    }
+    fn get_default_style(&self) -> TextAttrIsOwned<false> {
+        unsafe { TextAttrIsOwned::from_ptr(ffi::wxTextCtrl_GetDefaultStyle(self.as_ptr())) }
+    }
+    fn get_line_length(&self, line_no: c_long) -> c_int {
+        unsafe { ffi::wxTextCtrl_GetLineLength(self.as_ptr(), line_no) }
+    }
+    fn get_line_text(&self, line_no: c_long) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxTextCtrl_GetLineText(self.as_ptr(), line_no)) }
+    }
+    fn get_number_of_lines(&self) -> c_int {
+        unsafe { ffi::wxTextCtrl_GetNumberOfLines(self.as_ptr()) }
+    }
+    fn get_style(&self, position: c_long, style: *mut c_void) -> bool {
+        unsafe { ffi::wxTextCtrl_GetStyle(self.as_ptr(), position, style) }
+    }
+    // NOT_SUPPORTED: fn HitTest()
+    // NOT_SUPPORTED: fn HitTest1()
+    fn is_modified(&self) -> bool {
+        unsafe { ffi::wxTextCtrl_IsModified(self.as_ptr()) }
+    }
+    fn is_multi_line(&self) -> bool {
+        unsafe { ffi::wxTextCtrl_IsMultiLine(self.as_ptr()) }
+    }
+    fn is_single_line(&self) -> bool {
+        unsafe { ffi::wxTextCtrl_IsSingleLine(self.as_ptr()) }
+    }
+    fn load_file(&self, filename: &str, file_type: c_int) -> bool {
+        unsafe {
+            let filename = wx_base::wx_string_from(filename);
+            ffi::wxTextCtrl_LoadFile(self.as_ptr(), filename, file_type)
+        }
+    }
+    fn mark_dirty(&self) {
+        unsafe { ffi::wxTextCtrl_MarkDirty(self.as_ptr()) }
+    }
+    fn on_drop_files(&self, event: *mut c_void) {
+        unsafe { ffi::wxTextCtrl_OnDropFiles(self.as_ptr(), event) }
+    }
+    fn position_to_xy(&self, pos: c_long, x: *mut c_void, y: *mut c_void) -> bool {
+        unsafe { ffi::wxTextCtrl_PositionToXY(self.as_ptr(), pos, x, y) }
+    }
+    fn position_to_coords(&self, pos: c_long) -> Point {
+        unsafe { PointIsOwned(ffi::wxTextCtrl_PositionToCoords(self.as_ptr(), pos)) }
+    }
+    fn save_file(&self, filename: &str, file_type: c_int) -> bool {
+        unsafe {
+            let filename = wx_base::wx_string_from(filename);
+            ffi::wxTextCtrl_SaveFile(self.as_ptr(), filename, file_type)
+        }
+    }
+    fn set_default_style<T: TextAttrMethods>(&self, style: &T) -> bool {
+        unsafe {
+            let style = style.as_ptr();
+            ffi::wxTextCtrl_SetDefaultStyle(self.as_ptr(), style)
+        }
+    }
+    fn set_modified(&self, modified: bool) {
+        unsafe { ffi::wxTextCtrl_SetModified(self.as_ptr(), modified) }
+    }
+    fn set_style<T: TextAttrMethods>(&self, start: c_long, end: c_long, style: &T) -> bool {
+        unsafe {
+            let style = style.as_ptr();
+            ffi::wxTextCtrl_SetStyle(self.as_ptr(), start, end, style)
+        }
+    }
+    fn show_position(&self, pos: c_long) {
+        unsafe { ffi::wxTextCtrl_ShowPosition(self.as_ptr(), pos) }
+    }
+    fn xy_to_position(&self, x: c_long, y: c_long) -> c_long {
+        unsafe { ffi::wxTextCtrl_XYToPosition(self.as_ptr(), x, y) }
+    }
+    // BLOCKED: fn operator<<()
+    // BLOCKED: fn operator<<1()
+    // BLOCKED: fn operator<<2()
+    // NOT_SUPPORTED: fn operator<<3()
+    // BLOCKED: fn operator<<4()
+    // NOT_SUPPORTED: fn operator<<5()
+    // NOT_SUPPORTED: fn operator<<6()
+}
+
 // wxToolBar
 pub trait ToolBarMethods: ControlMethods {
     // DTOR: fn ~wxToolBar()

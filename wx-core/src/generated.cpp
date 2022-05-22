@@ -1913,6 +1913,80 @@ wxTextAttr *wxTextAttr_Merge1(const wxTextAttr * base, const wxTextAttr * overla
     return new wxTextAttr(wxTextAttr::Merge(*base, *overlay));
 }
 
+// CLASS: wxTextCtrl
+wxTextCtrl *wxTextCtrl_new() {
+    return new wxTextCtrl();
+}
+wxTextCtrl *wxTextCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return new wxTextCtrl(parent, id, *value, *pos, *size, style, *validator, *name);
+}
+bool wxTextCtrl_Create(wxTextCtrl * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, *value, *pos, *size, style, *validator, *name);
+}
+void wxTextCtrl_DiscardEdits(wxTextCtrl * self) {
+    return self->DiscardEdits();
+}
+bool wxTextCtrl_EmulateKeyPress(wxTextCtrl * self, const wxKeyEvent * event) {
+    return self->EmulateKeyPress(*event);
+}
+const wxTextAttr * wxTextCtrl_GetDefaultStyle(const wxTextCtrl * self) {
+    return &(self->GetDefaultStyle());
+}
+int wxTextCtrl_GetLineLength(const wxTextCtrl * self, long line_no) {
+    return self->GetLineLength(line_no);
+}
+wxString *wxTextCtrl_GetLineText(const wxTextCtrl * self, long line_no) {
+    return new wxString(self->GetLineText(line_no));
+}
+int wxTextCtrl_GetNumberOfLines(const wxTextCtrl * self) {
+    return self->GetNumberOfLines();
+}
+bool wxTextCtrl_GetStyle(wxTextCtrl * self, long position, wxTextAttr * style) {
+    return self->GetStyle(position, *style);
+}
+bool wxTextCtrl_IsModified(const wxTextCtrl * self) {
+    return self->IsModified();
+}
+bool wxTextCtrl_IsMultiLine(const wxTextCtrl * self) {
+    return self->IsMultiLine();
+}
+bool wxTextCtrl_IsSingleLine(const wxTextCtrl * self) {
+    return self->IsSingleLine();
+}
+bool wxTextCtrl_LoadFile(wxTextCtrl * self, const wxString * filename, int file_type) {
+    return self->LoadFile(*filename, file_type);
+}
+void wxTextCtrl_MarkDirty(wxTextCtrl * self) {
+    return self->MarkDirty();
+}
+void wxTextCtrl_OnDropFiles(wxTextCtrl * self, wxDropFilesEvent * event) {
+    return self->OnDropFiles(*event);
+}
+bool wxTextCtrl_PositionToXY(const wxTextCtrl * self, long pos, long * x, long * y) {
+    return self->PositionToXY(pos, x, y);
+}
+wxPoint *wxTextCtrl_PositionToCoords(const wxTextCtrl * self, long pos) {
+    return new wxPoint(self->PositionToCoords(pos));
+}
+bool wxTextCtrl_SaveFile(wxTextCtrl * self, const wxString * filename, int file_type) {
+    return self->SaveFile(*filename, file_type);
+}
+bool wxTextCtrl_SetDefaultStyle(wxTextCtrl * self, const wxTextAttr * style) {
+    return self->SetDefaultStyle(*style);
+}
+void wxTextCtrl_SetModified(wxTextCtrl * self, bool modified) {
+    return self->SetModified(modified);
+}
+bool wxTextCtrl_SetStyle(wxTextCtrl * self, long start, long end, const wxTextAttr * style) {
+    return self->SetStyle(start, end, *style);
+}
+void wxTextCtrl_ShowPosition(wxTextCtrl * self, long pos) {
+    return self->ShowPosition(pos);
+}
+long wxTextCtrl_XYToPosition(const wxTextCtrl * self, long x, long y) {
+    return self->XYToPosition(x, y);
+}
+
 // CLASS: wxToolBar
 wxToolBar *wxToolBar_new() {
     return new wxToolBar();
