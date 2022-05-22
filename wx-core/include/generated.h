@@ -128,6 +128,24 @@ bool wxCheckBox_Is3rdStateAllowedForUser(const wxCheckBox * self);
 bool wxCheckBox_IsChecked(const wxCheckBox * self);
 void wxCheckBox_SetValue(wxCheckBox * self, bool state);
 
+// CLASS: wxColour
+wxColour *wxColour_new();
+wxColour *wxColour_new2(const wxString * colour_name);
+wxColour *wxColour_new4(const wxColour * colour);
+wxString *wxColour_GetAsString(const wxColour * self, long flags);
+#if wxCHECK_VERSION(3, 1, 0)
+double wxColour_GetLuminance(const wxColour * self);
+#endif
+bool wxColour_IsOk(const wxColour * self);
+#if wxCHECK_VERSION(3, 1, 0)
+bool wxColour_IsSolid(const wxColour * self);
+#endif
+bool wxColour_Set2(wxColour * self, const wxString * str);
+void wxColour_MakeMono(unsigned char * r, unsigned char * g, unsigned char * b, bool on);
+void wxColour_MakeGrey(unsigned char * r, unsigned char * g, unsigned char * b);
+void wxColour_MakeGrey1(unsigned char * r, unsigned char * g, unsigned char * b, double weight_r, double weight_g, double weight_b);
+void wxColour_ChangeLightness1(unsigned char * r, unsigned char * g, unsigned char * b, int ialpha);
+
 // CLASS: wxCommandEvent
 void * wxCommandEvent_GetClientData(const wxCommandEvent * self);
 wxClientData * wxCommandEvent_GetClientObject(const wxCommandEvent * self);
@@ -361,6 +379,7 @@ bool wxNonOwnedWindow_SetShape1(wxNonOwnedWindow * self, const wxGraphicsPath * 
 wxNotebook *wxNotebook_new();
 wxNotebook *wxNotebook_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 int wxNotebook_GetRowCount(const wxNotebook * self);
+wxColour *wxNotebook_GetThemeBackgroundColour(const wxNotebook * self);
 void wxNotebook_SetPadding(wxNotebook * self, const wxSize * padding);
 
 // CLASS: wxNotifyEvent
@@ -846,11 +865,13 @@ void wxWindow_ClearBackground(wxWindow * self);
 void wxWindow_Freeze(wxWindow * self);
 void wxWindow_Thaw(wxWindow * self);
 bool wxWindow_IsFrozen(const wxWindow * self);
+wxColour *wxWindow_GetBackgroundColour(const wxWindow * self);
 int wxWindow_GetCharHeight(const wxWindow * self);
 int wxWindow_GetCharWidth(const wxWindow * self);
 #if wxCHECK_VERSION(3, 1, 0)
 wxSize *wxWindow_GetDPI(const wxWindow * self);
 #endif
+wxColour *wxWindow_GetForegroundColour(const wxWindow * self);
 void wxWindow_GetTextExtent(const wxWindow * self, const wxString * string, int * w, int * h, int * descent, int * external_leading, const wxFont * font);
 wxSize *wxWindow_GetTextExtent1(const wxWindow * self, const wxString * string);
 wxRect *wxWindow_GetUpdateClientRect(const wxWindow * self);

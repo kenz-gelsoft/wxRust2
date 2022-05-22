@@ -321,6 +321,48 @@ void wxCheckBox_SetValue(wxCheckBox * self, bool state) {
     return self->SetValue(state);
 }
 
+// CLASS: wxColour
+wxColour *wxColour_new() {
+    return new wxColour();
+}
+wxColour *wxColour_new2(const wxString * colour_name) {
+    return new wxColour(*colour_name);
+}
+wxColour *wxColour_new4(const wxColour * colour) {
+    return new wxColour(*colour);
+}
+wxString *wxColour_GetAsString(const wxColour * self, long flags) {
+    return new wxString(self->GetAsString(flags));
+}
+#if wxCHECK_VERSION(3, 1, 0)
+double wxColour_GetLuminance(const wxColour * self) {
+    return self->GetLuminance();
+}
+#endif
+bool wxColour_IsOk(const wxColour * self) {
+    return self->IsOk();
+}
+#if wxCHECK_VERSION(3, 1, 0)
+bool wxColour_IsSolid(const wxColour * self) {
+    return self->IsSolid();
+}
+#endif
+bool wxColour_Set2(wxColour * self, const wxString * str) {
+    return self->Set(*str);
+}
+void wxColour_MakeMono(unsigned char * r, unsigned char * g, unsigned char * b, bool on) {
+    return wxColour::MakeMono(r, g, b, on);
+}
+void wxColour_MakeGrey(unsigned char * r, unsigned char * g, unsigned char * b) {
+    return wxColour::MakeGrey(r, g, b);
+}
+void wxColour_MakeGrey1(unsigned char * r, unsigned char * g, unsigned char * b, double weight_r, double weight_g, double weight_b) {
+    return wxColour::MakeGrey(r, g, b, weight_r, weight_g, weight_b);
+}
+void wxColour_ChangeLightness1(unsigned char * r, unsigned char * g, unsigned char * b, int ialpha) {
+    return wxColour::ChangeLightness(r, g, b, ialpha);
+}
+
 // CLASS: wxCommandEvent
 void * wxCommandEvent_GetClientData(const wxCommandEvent * self) {
     return self->GetClientData();
@@ -801,7 +843,7 @@ wxMenuBar * wxMenuBar_MacGetCommonMenuBar() {
 // CLASS: wxMenuItem
 #ifdef __WXMSW__
 wxColour * wxMenuItem_GetBackgroundColour(const wxMenuItem * self) {
-    return self->GetBackgroundColour();
+    return &(self->GetBackgroundColour());
 }
 const wxBitmap * wxMenuItem_GetDisabledBitmap(const wxMenuItem * self) {
     return &(self->GetDisabledBitmap());
@@ -838,7 +880,7 @@ wxMenu * wxMenuItem_GetSubMenu(const wxMenuItem * self) {
 }
 #ifdef __WXMSW__
 wxColour * wxMenuItem_GetTextColour(const wxMenuItem * self) {
-    return self->GetTextColour();
+    return &(self->GetTextColour());
 }
 #endif
 wxAcceleratorEntry * wxMenuItem_GetAccel(const wxMenuItem * self) {
@@ -937,6 +979,9 @@ wxNotebook *wxNotebook_new1(wxWindow * parent, wxWindowID id, const wxPoint * po
 }
 int wxNotebook_GetRowCount(const wxNotebook * self) {
     return self->GetRowCount();
+}
+wxColour *wxNotebook_GetThemeBackgroundColour(const wxNotebook * self) {
+    return new wxColour(self->GetThemeBackgroundColour());
 }
 void wxNotebook_SetPadding(wxNotebook * self, const wxSize * padding) {
     return self->SetPadding(*padding);
@@ -2289,6 +2334,9 @@ void wxWindow_Thaw(wxWindow * self) {
 bool wxWindow_IsFrozen(const wxWindow * self) {
     return self->IsFrozen();
 }
+wxColour *wxWindow_GetBackgroundColour(const wxWindow * self) {
+    return new wxColour(self->GetBackgroundColour());
+}
 int wxWindow_GetCharHeight(const wxWindow * self) {
     return self->GetCharHeight();
 }
@@ -2300,6 +2348,9 @@ wxSize *wxWindow_GetDPI(const wxWindow * self) {
     return new wxSize(self->GetDPI());
 }
 #endif
+wxColour *wxWindow_GetForegroundColour(const wxWindow * self) {
+    return new wxColour(self->GetForegroundColour());
+}
 void wxWindow_GetTextExtent(const wxWindow * self, const wxString * string, int * w, int * h, int * descent, int * external_leading, const wxFont * font) {
     return self->GetTextExtent(*string, w, h, descent, external_leading, font);
 }

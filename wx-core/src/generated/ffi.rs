@@ -222,6 +222,47 @@ extern "C" {
     pub fn wxCheckBox_SetValue(self_: *mut c_void, state: bool);
     // NOT_SUPPORTED: pub fn wxCheckBox_Set3StateValue(self_: *mut c_void, state: wxCheckBoxState);
 
+    // wxColour
+    pub fn wxColour_new() -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxColour_new1(red: unsigned char, green: unsigned char, blue: unsigned char, alpha: unsigned char) -> *mut c_void;
+    pub fn wxColour_new2(colour_name: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxColour_new3(col_rgb: unsigned long) -> *mut c_void;
+    pub fn wxColour_new4(colour: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxColour_Alpha(self_: *const c_void) -> unsigned char;
+    // NOT_SUPPORTED: pub fn wxColour_Blue(self_: *const c_void) -> unsigned char;
+    pub fn wxColour_GetAsString(self_: *const c_void, flags: c_long) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxColour_SetRGB(self_: *mut c_void, col_rgb: wxUint32);
+    // NOT_SUPPORTED: pub fn wxColour_SetRGBA(self_: *mut c_void, col_rgba: wxUint32);
+    // NOT_SUPPORTED: pub fn wxColour_GetRGB(self_: *const c_void) -> wxUint32;
+    // NOT_SUPPORTED: pub fn wxColour_GetRGBA(self_: *const c_void) -> wxUint32;
+    pub fn wxColour_GetLuminance(self_: *const c_void) -> c_double;
+    // NOT_SUPPORTED: pub fn wxColour_GetPixel(self_: *const c_void) -> wxIntPtr;
+    // NOT_SUPPORTED: pub fn wxColour_Green(self_: *const c_void) -> unsigned char;
+    pub fn wxColour_IsOk(self_: *const c_void) -> bool;
+    // NOT_SUPPORTED: pub fn wxColour_Red(self_: *const c_void) -> unsigned char;
+    pub fn wxColour_IsSolid(self_: *const c_void) -> bool;
+    // NOT_SUPPORTED: pub fn wxColour_Set(self_: *mut c_void, red: unsigned char, green: unsigned char, blue: unsigned char, alpha: unsigned char);
+    // NOT_SUPPORTED: pub fn wxColour_Set1(self_: *mut c_void, rgb: unsigned long);
+    pub fn wxColour_Set2(self_: *mut c_void, str: *const c_void) -> bool;
+    // BLOCKED: pub fn wxColour_operator!=(self_: *const c_void, colour: *const c_void) -> bool;
+    // BLOCKED: pub fn wxColour_operator=(self_: *mut c_void, colour: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxColour_operator==(self_: *const c_void, colour: *const c_void) -> bool;
+    // NOT_SUPPORTED: pub fn wxColour_MakeDisabled(self_: *mut c_void, brightness: unsigned char) -> *mut c_void;
+    // BLOCKED: pub fn wxColour_ChangeLightness(self_: *const c_void, ialpha: c_int) -> wxColour;
+    pub fn wxColour_MakeMono(r: *mut c_void, g: *mut c_void, b: *mut c_void, on: bool);
+    // NOT_SUPPORTED: pub fn wxColour_MakeDisabled1(r: *mut c_void, g: *mut c_void, b: *mut c_void, brightness: unsigned char);
+    pub fn wxColour_MakeGrey(r: *mut c_void, g: *mut c_void, b: *mut c_void);
+    pub fn wxColour_MakeGrey1(
+        r: *mut c_void,
+        g: *mut c_void,
+        b: *mut c_void,
+        weight_r: c_double,
+        weight_g: c_double,
+        weight_b: c_double,
+    );
+    // NOT_SUPPORTED: pub fn wxColour_AlphaBlend(fg: unsigned char, bg: unsigned char, alpha: c_double) -> unsigned char;
+    pub fn wxColour_ChangeLightness1(r: *mut c_void, g: *mut c_void, b: *mut c_void, ialpha: c_int);
+
     // wxCommandEvent
     // NOT_SUPPORTED: pub fn wxCommandEvent_new(command_event_type: wxEventType, id: c_int) -> *mut c_void;
     pub fn wxCommandEvent_GetClientData(self_: *const c_void) -> *mut c_void;
@@ -656,7 +697,7 @@ extern "C" {
     // DTOR: pub fn wxNotebook_~wxNotebook(self_: *mut c_void);
     // BLOCKED: pub fn wxNotebook_Create(self_: *mut c_void, parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> bool;
     pub fn wxNotebook_GetRowCount(self_: *const c_void) -> c_int;
-    // NOT_SUPPORTED: pub fn wxNotebook_GetThemeBackgroundColour(self_: *const c_void) -> wxColour;
+    pub fn wxNotebook_GetThemeBackgroundColour(self_: *const c_void) -> *mut c_void;
     // BLOCKED: pub fn wxNotebook_OnSelChange(self_: *mut c_void, event: *mut c_void);
     pub fn wxNotebook_SetPadding(self_: *mut c_void, padding: *const c_void);
 
@@ -1612,14 +1653,14 @@ extern "C" {
     pub fn wxWindow_Freeze(self_: *mut c_void);
     pub fn wxWindow_Thaw(self_: *mut c_void);
     pub fn wxWindow_IsFrozen(self_: *const c_void) -> bool;
-    // NOT_SUPPORTED: pub fn wxWindow_GetBackgroundColour(self_: *const c_void) -> wxColour;
+    pub fn wxWindow_GetBackgroundColour(self_: *const c_void) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxWindow_GetBackgroundStyle(self_: *const c_void) -> wxBackgroundStyle;
     pub fn wxWindow_GetCharHeight(self_: *const c_void) -> c_int;
     pub fn wxWindow_GetCharWidth(self_: *const c_void) -> c_int;
     // NOT_SUPPORTED: pub fn wxWindow_GetDefaultAttributes(self_: *const c_void) -> wxVisualAttributes;
     pub fn wxWindow_GetDPI(self_: *const c_void) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxWindow_GetFont(self_: *const c_void) -> wxFont;
-    // NOT_SUPPORTED: pub fn wxWindow_GetForegroundColour(self_: *const c_void) -> wxColour;
+    pub fn wxWindow_GetForegroundColour(self_: *const c_void) -> *mut c_void;
     pub fn wxWindow_GetTextExtent(
         self_: *const c_void,
         string: *const c_void,

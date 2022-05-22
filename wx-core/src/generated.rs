@@ -274,6 +274,42 @@ impl<const OWNED: bool> CheckBoxIsOwned<OWNED> {
     }
 }
 
+// wxColour
+wx_class! { Colour =
+    ColourIsOwned<true>(wxColour) impl
+        ColourMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> ColourIsOwned<OWNED> {
+    pub fn new() -> ColourIsOwned<OWNED> {
+        unsafe { ColourIsOwned(ffi::wxColour_new()) }
+    }
+    // NOT_SUPPORTED: fn wxColour1()
+    pub fn new_with_str(colour_name: &str) -> ColourIsOwned<OWNED> {
+        unsafe {
+            let colour_name = wx_base::wx_string_from(colour_name);
+            ColourIsOwned(ffi::wxColour_new2(colour_name))
+        }
+    }
+    // NOT_SUPPORTED: fn wxColour3()
+    pub fn new_with_colour<C: ColourMethods>(colour: &C) -> ColourIsOwned<OWNED> {
+        unsafe {
+            let colour = colour.as_ptr();
+            ColourIsOwned(ffi::wxColour_new4(colour))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for ColourIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
 // wxCommandEvent
 wx_class! { CommandEvent =
     CommandEventIsOwned<true>(wxCommandEvent) impl

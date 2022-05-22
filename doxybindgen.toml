@@ -8,6 +8,7 @@ wxml_files = [
     'wxml/classwx_box_sizer.xml',
     'wxml/classwx_button.xml',
     'wxml/classwx_check_box.xml',
+    'wxml/classwx_colour.xml',
     'wxml/classwx_command_event.xml',
     'wxml/classwx_control.xml',
     'wxml/classwx_event.xml',
@@ -33,6 +34,8 @@ wxml_files = [
     'wxml/classwx_static_box.xml',
     'wxml/classwx_static_box_sizer.xml',
     'wxml/classwx_static_text.xml',
+    #'wxml/classwx_text_attr.xml',
+    #'wxml/classwx_text_ctrl.xml',
     'wxml/classwx_tool_bar.xml',
     'wxml/classwx_top_level_window.xml',
     'wxml/classwx_validator.xml',
@@ -84,6 +87,17 @@ blocklist = [
 [types.wxButton]
 wx31 = [
     'GetDefaultSize',
+]
+[types.wxColour]
+blocklist = [
+    'operator=',
+    'operator==',
+    'operator!=',
+    'ChangeLightness',
+]
+wx31 = [
+    'GetLuminance',
+    'IsSolid',
 ]
 [types.wxControl]
 wx31 = [
@@ -255,6 +269,17 @@ blocklist = [
     'wxStaticBox2',
     'Create1',
 ]
+#[types.wxTextAttr]
+#blocklist = [
+#    'operator=',
+#]
+#[types.wxTextCtrl]
+#blocklist = [
+#    'operator<<',
+#    'operator<<1',
+#    'operator<<2',
+#    'operator<<4',
+#]
 [types.wxToolBar]
 blocklist = [
     # const getter

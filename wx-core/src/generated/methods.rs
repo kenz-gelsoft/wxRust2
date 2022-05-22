@@ -489,6 +489,65 @@ pub trait CheckBoxMethods: ControlMethods {
     // NOT_SUPPORTED: fn Set3StateValue()
 }
 
+// wxColour
+pub trait ColourMethods: ObjectMethods {
+    // NOT_SUPPORTED: fn Alpha()
+    // NOT_SUPPORTED: fn Blue()
+    fn get_as_string(&self, flags: c_long) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxColour_GetAsString(self.as_ptr(), flags)) }
+    }
+    // NOT_SUPPORTED: fn SetRGB()
+    // NOT_SUPPORTED: fn SetRGBA()
+    // NOT_SUPPORTED: fn GetRGB()
+    // NOT_SUPPORTED: fn GetRGBA()
+    fn get_luminance(&self) -> c_double {
+        unsafe { ffi::wxColour_GetLuminance(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetPixel()
+    // NOT_SUPPORTED: fn Green()
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxColour_IsOk(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn Red()
+    fn is_solid(&self) -> bool {
+        unsafe { ffi::wxColour_IsSolid(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn Set()
+    // NOT_SUPPORTED: fn Set1()
+    fn set(&self, str: &str) -> bool {
+        unsafe {
+            let str = wx_base::wx_string_from(str);
+            ffi::wxColour_Set2(self.as_ptr(), str)
+        }
+    }
+    // BLOCKED: fn operator!=()
+    // BLOCKED: fn operator=()
+    // BLOCKED: fn operator==()
+    // NOT_SUPPORTED: fn MakeDisabled()
+    // BLOCKED: fn ChangeLightness()
+    fn make_mono(r: *mut c_void, g: *mut c_void, b: *mut c_void, on: bool) {
+        unsafe { ffi::wxColour_MakeMono(r, g, b, on) }
+    }
+    // NOT_SUPPORTED: fn MakeDisabled1()
+    fn make_grey(r: *mut c_void, g: *mut c_void, b: *mut c_void) {
+        unsafe { ffi::wxColour_MakeGrey(r, g, b) }
+    }
+    fn make_grey_double(
+        r: *mut c_void,
+        g: *mut c_void,
+        b: *mut c_void,
+        weight_r: c_double,
+        weight_g: c_double,
+        weight_b: c_double,
+    ) {
+        unsafe { ffi::wxColour_MakeGrey1(r, g, b, weight_r, weight_g, weight_b) }
+    }
+    // NOT_SUPPORTED: fn AlphaBlend()
+    fn change_lightness(r: *mut c_void, g: *mut c_void, b: *mut c_void, ialpha: c_int) {
+        unsafe { ffi::wxColour_ChangeLightness1(r, g, b, ialpha) }
+    }
+}
+
 // wxCommandEvent
 pub trait CommandEventMethods: EventMethods {
     fn get_client_data(&self) -> *mut c_void {
@@ -1456,8 +1515,8 @@ pub trait MenuBarMethods: WindowMethods {
 
 // wxMenuItem
 pub trait MenuItemMethods: ObjectMethods {
-    fn get_background_colour(&self) -> *mut c_void {
-        unsafe { ffi::wxMenuItem_GetBackgroundColour(self.as_ptr()) }
+    fn get_background_colour(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxMenuItem_GetBackgroundColour(self.as_ptr())) }
     }
     // BLOCKED: fn GetBitmap()
     fn get_disabled_bitmap(&self) -> BitmapIsOwned<false> {
@@ -1493,8 +1552,8 @@ pub trait MenuItemMethods: ObjectMethods {
         unsafe { WeakRef::<Menu>::from(ffi::wxMenuItem_GetSubMenu(self.as_ptr())) }
     }
     // BLOCKED: fn GetText()
-    fn get_text_colour(&self) -> *mut c_void {
-        unsafe { ffi::wxMenuItem_GetTextColour(self.as_ptr()) }
+    fn get_text_colour(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxMenuItem_GetTextColour(self.as_ptr())) }
     }
     fn get_accel(&self) -> *mut c_void {
         unsafe { ffi::wxMenuItem_GetAccel(self.as_ptr()) }
@@ -1526,8 +1585,11 @@ pub trait MenuItemMethods: ObjectMethods {
     fn is_sub_menu(&self) -> bool {
         unsafe { ffi::wxMenuItem_IsSubMenu(self.as_ptr()) }
     }
-    fn set_background_colour(&self, colour: *const c_void) {
-        unsafe { ffi::wxMenuItem_SetBackgroundColour(self.as_ptr(), colour) }
+    fn set_background_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxMenuItem_SetBackgroundColour(self.as_ptr(), colour)
+        }
     }
     // BLOCKED: fn SetBitmap()
     fn set_bitmaps<B: BitmapMethods, B2: BitmapMethods>(&self, checked: &B, unchecked: &B2) {
@@ -1580,8 +1642,11 @@ pub trait MenuItemMethods: ObjectMethods {
         }
     }
     // BLOCKED: fn SetText()
-    fn set_text_colour(&self, colour: *const c_void) {
-        unsafe { ffi::wxMenuItem_SetTextColour(self.as_ptr(), colour) }
+    fn set_text_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxMenuItem_SetTextColour(self.as_ptr(), colour)
+        }
     }
     fn set_accel(&self, accel: *mut c_void) {
         unsafe { ffi::wxMenuItem_SetAccel(self.as_ptr(), accel) }
@@ -1618,7 +1683,9 @@ pub trait NotebookMethods: BookCtrlBaseMethods {
     fn get_row_count(&self) -> c_int {
         unsafe { ffi::wxNotebook_GetRowCount(self.as_ptr()) }
     }
-    // NOT_SUPPORTED: fn GetThemeBackgroundColour()
+    fn get_theme_background_colour(&self) -> Colour {
+        unsafe { ColourIsOwned(ffi::wxNotebook_GetThemeBackgroundColour(self.as_ptr())) }
+    }
     // BLOCKED: fn OnSelChange()
     fn set_padding<S: SizeMethods>(&self, padding: &S) {
         unsafe {
@@ -4163,7 +4230,9 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn is_frozen(&self) -> bool {
         unsafe { ffi::wxWindow_IsFrozen(self.as_ptr()) }
     }
-    // NOT_SUPPORTED: fn GetBackgroundColour()
+    fn get_background_colour(&self) -> Colour {
+        unsafe { ColourIsOwned(ffi::wxWindow_GetBackgroundColour(self.as_ptr())) }
+    }
     // NOT_SUPPORTED: fn GetBackgroundStyle()
     fn get_char_height(&self) -> c_int {
         unsafe { ffi::wxWindow_GetCharHeight(self.as_ptr()) }
@@ -4176,7 +4245,9 @@ pub trait WindowMethods: EvtHandlerMethods {
         unsafe { SizeIsOwned(ffi::wxWindow_GetDPI(self.as_ptr())) }
     }
     // NOT_SUPPORTED: fn GetFont()
-    // NOT_SUPPORTED: fn GetForegroundColour()
+    fn get_foreground_colour(&self) -> Colour {
+        unsafe { ColourIsOwned(ffi::wxWindow_GetForegroundColour(self.as_ptr())) }
+    }
     fn get_text_extent_int(
         &self,
         string: &str,
@@ -4230,8 +4301,11 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn update(&self) {
         unsafe { ffi::wxWindow_Update(self.as_ptr()) }
     }
-    fn set_background_colour(&self, colour: *const c_void) -> bool {
-        unsafe { ffi::wxWindow_SetBackgroundColour(self.as_ptr(), colour) }
+    fn set_background_colour<C: ColourMethods>(&self, colour: &C) -> bool {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxWindow_SetBackgroundColour(self.as_ptr(), colour)
+        }
     }
     // NOT_SUPPORTED: fn SetBackgroundStyle()
     fn is_transparent_background_supported(&self, reason: *mut c_void) -> bool {
@@ -4240,11 +4314,17 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn set_font(&self, font: *const c_void) -> bool {
         unsafe { ffi::wxWindow_SetFont(self.as_ptr(), font) }
     }
-    fn set_foreground_colour(&self, colour: *const c_void) -> bool {
-        unsafe { ffi::wxWindow_SetForegroundColour(self.as_ptr(), colour) }
+    fn set_foreground_colour<C: ColourMethods>(&self, colour: &C) -> bool {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxWindow_SetForegroundColour(self.as_ptr(), colour)
+        }
     }
-    fn set_own_background_colour(&self, colour: *const c_void) {
-        unsafe { ffi::wxWindow_SetOwnBackgroundColour(self.as_ptr(), colour) }
+    fn set_own_background_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxWindow_SetOwnBackgroundColour(self.as_ptr(), colour)
+        }
     }
     fn inherits_background_colour(&self) -> bool {
         unsafe { ffi::wxWindow_InheritsBackgroundColour(self.as_ptr()) }
@@ -4258,8 +4338,11 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn set_own_font(&self, font: *const c_void) {
         unsafe { ffi::wxWindow_SetOwnFont(self.as_ptr(), font) }
     }
-    fn set_own_foreground_colour(&self, colour: *const c_void) {
-        unsafe { ffi::wxWindow_SetOwnForegroundColour(self.as_ptr(), colour) }
+    fn set_own_foreground_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxWindow_SetOwnForegroundColour(self.as_ptr(), colour)
+        }
     }
     fn use_foreground_colour(&self) -> bool {
         unsafe { ffi::wxWindow_UseForegroundColour(self.as_ptr()) }
