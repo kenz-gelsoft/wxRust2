@@ -631,6 +631,73 @@ impl<'a, P: WindowMethods> StaticTextBuilder<'a, P> {
     }
 }
 
+pub struct TextCtrlBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    id: c_int,
+    value: String,
+    pos: Option<Point>,
+    size: Option<Size>,
+    style: c_long,
+    validator: Option<Validator>,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, TextCtrlBuilder<'a, P>> for TextCtrl {
+    fn builder(parent: Option<&'a P>) -> TextCtrlBuilder<'a, P> {
+        TextCtrlBuilder {
+            parent: parent,
+            id: ID_ANY,
+            value: "".to_string(),
+            pos: None,
+            size: None,
+            style: 0,
+            validator: None,
+        }
+    }
+}
+impl<'a, P: WindowMethods> TextCtrlBuilder<'a, P> {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn value(&mut self, value: &str) -> &mut Self {
+        self.value = value.to_string();
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn validator(&mut self, validator: Validator) -> &mut Self {
+        self.validator = Some(validator);
+        self
+    }
+    pub fn build(&mut self) -> TextCtrl {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        let validator = self
+            .validator
+            .take()
+            .unwrap_or_else(|| Validator::default());
+        TextCtrl::new(
+            self.parent,
+            self.id,
+            &self.value,
+            &pos,
+            &size,
+            self.style,
+            &validator,
+            "",
+        )
+    }
+}
+
 pub struct ToolBarBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
