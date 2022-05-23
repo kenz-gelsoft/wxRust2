@@ -1914,6 +1914,9 @@ wxTextAttr *wxTextAttr_Merge1(const wxTextAttr * base, const wxTextAttr * overla
 }
 
 // CLASS: wxTextCtrl
+wxTextEntry *wxTextCtrl_ToTextEntry(wxTextCtrl * obj) {
+    return static_cast<wxTextEntry *>(obj);
+}
 wxTextCtrl *wxTextCtrl_new() {
     return new wxTextCtrl();
 }

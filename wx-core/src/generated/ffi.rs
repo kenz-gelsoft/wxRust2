@@ -1395,6 +1395,7 @@ extern "C" {
     pub fn wxTextAttr_Merge1(base: *const c_void, overlay: *const c_void) -> *mut c_void;
 
     // wxTextCtrl
+    pub fn wxTextCtrl_ToTextEntry(obj: *mut c_void) -> *mut c_void;
     pub fn wxTextCtrl_new() -> *mut c_void;
     pub fn wxTextCtrl_new1(
         parent: *mut c_void,

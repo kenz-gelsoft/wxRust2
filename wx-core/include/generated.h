@@ -713,6 +713,7 @@ bool wxTextAttr_EqPartial(const wxTextAttr * self, const wxTextAttr * attr, bool
 wxTextAttr *wxTextAttr_Merge1(const wxTextAttr * base, const wxTextAttr * overlay);
 
 // CLASS: wxTextCtrl
+wxTextEntry *wxTextCtrl_ToTextEntry(wxTextCtrl * obj);
 wxTextCtrl *wxTextCtrl_new();
 wxTextCtrl *wxTextCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 bool wxTextCtrl_Create(wxTextCtrl * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
