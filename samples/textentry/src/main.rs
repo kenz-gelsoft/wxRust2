@@ -36,17 +36,6 @@ impl MyFrame {
 
         frame.set_menu_bar(Some(&menu_bar));
 
-        let textctrl = wx::TextCtrl::builder(Some(&frame)).build();
-        textctrl.set_value("test");
-
-        let sizer = wx::BoxSizer::new(wx::HORIZONTAL);
-        sizer.add_window_sizerflags(
-            Some(&textctrl),
-            wx::SizerFlags::new(0).expand().double_border(wx::ALL),
-        );
-
-        frame.set_sizer(Some(&sizer), true);
-
         frame.create_status_bar(2, wx::STB_DEFAULT_STYLE, 0, "statusBar");
         frame.set_status_text("Welcome to wxRust!", 0);
         MyFrame { base: frame }
