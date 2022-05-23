@@ -142,6 +142,6 @@ void wxTextEntry_WriteText(wxTextEntry * self, const wxString * text) {
     return self->WriteText(*text);
 }
 
-wxTextEntry *wxTextCtrl_ToTextEntry(wxTextCtrl * obj) {
+wxTextEntry *wxTextCtrl_AsTextEntry(wxTextCtrl * obj) {
     return static_cast<wxTextEntry *>(obj);
 }

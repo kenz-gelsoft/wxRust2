@@ -39,157 +39,155 @@ pub mod methods {
 
     // wxTextEntry
     pub trait TextEntryMethods: WxRustMethods {
-        fn ptr_from(obj: &Self) -> *mut c_void {
-            unsafe { obj.as_ptr() }
-        }
+        fn as_text_entry(&self) -> *mut c_void;
         fn append_text(&self, text: &str) {
             unsafe {
                 let text = wx_base::wx_string_from(text);
-                ffi::wxTextEntry_AppendText(Self::ptr_from(&self), text)
+                ffi::wxTextEntry_AppendText(self.as_text_entry(), text)
             }
         }
         fn auto_complete_arraystring<A: ArrayStringMethods>(&self, choices: &A) -> bool {
             unsafe {
                 let choices = choices.as_ptr();
-                ffi::wxTextEntry_AutoComplete(Self::ptr_from(&self), choices)
+                ffi::wxTextEntry_AutoComplete(self.as_text_entry(), choices)
             }
         }
         fn auto_complete_textcompleter(&self, completer: *mut c_void) -> bool {
-            unsafe { ffi::wxTextEntry_AutoComplete1(Self::ptr_from(&self), completer) }
+            unsafe { ffi::wxTextEntry_AutoComplete1(self.as_text_entry(), completer) }
         }
         fn auto_complete_file_names(&self) -> bool {
-            unsafe { ffi::wxTextEntry_AutoCompleteFileNames(Self::ptr_from(&self)) }
+            unsafe { ffi::wxTextEntry_AutoCompleteFileNames(self.as_text_entry()) }
         }
         fn auto_complete_directories(&self) -> bool {
-            unsafe { ffi::wxTextEntry_AutoCompleteDirectories(Self::ptr_from(&self)) }
+            unsafe { ffi::wxTextEntry_AutoCompleteDirectories(self.as_text_entry()) }
         }
         fn can_copy(&self) -> bool {
-            unsafe { ffi::wxTextEntry_CanCopy(Self::ptr_from(&self)) }
+            unsafe { ffi::wxTextEntry_CanCopy(self.as_text_entry()) }
         }
         fn can_cut(&self) -> bool {
-            unsafe { ffi::wxTextEntry_CanCut(Self::ptr_from(&self)) }
+            unsafe { ffi::wxTextEntry_CanCut(self.as_text_entry()) }
         }
         fn can_paste(&self) -> bool {
-            unsafe { ffi::wxTextEntry_CanPaste(Self::ptr_from(&self)) }
+            unsafe { ffi::wxTextEntry_CanPaste(self.as_text_entry()) }
         }
         fn can_redo(&self) -> bool {
-            unsafe { ffi::wxTextEntry_CanRedo(Self::ptr_from(&self)) }
+            unsafe { ffi::wxTextEntry_CanRedo(self.as_text_entry()) }
         }
         fn can_undo(&self) -> bool {
-            unsafe { ffi::wxTextEntry_CanUndo(Self::ptr_from(&self)) }
+            unsafe { ffi::wxTextEntry_CanUndo(self.as_text_entry()) }
         }
         fn change_value(&self, value: &str) {
             unsafe {
                 let value = wx_base::wx_string_from(value);
-                ffi::wxTextEntry_ChangeValue(Self::ptr_from(&self), value)
+                ffi::wxTextEntry_ChangeValue(self.as_text_entry(), value)
             }
         }
         fn clear(&self) {
-            unsafe { ffi::wxTextEntry_Clear(Self::ptr_from(&self)) }
+            unsafe { ffi::wxTextEntry_Clear(self.as_text_entry()) }
         }
         fn copy(&self) {
-            unsafe { ffi::wxTextEntry_Copy(Self::ptr_from(&self)) }
+            unsafe { ffi::wxTextEntry_Copy(self.as_text_entry()) }
         }
         fn cut(&self) {
-            unsafe { ffi::wxTextEntry_Cut(Self::ptr_from(&self)) }
+            unsafe { ffi::wxTextEntry_Cut(self.as_text_entry()) }
         }
         fn force_upper(&self) {
-            unsafe { ffi::wxTextEntry_ForceUpper(Self::ptr_from(&self)) }
+            unsafe { ffi::wxTextEntry_ForceUpper(self.as_text_entry()) }
         }
         fn get_insertion_point(&self) -> c_long {
-            unsafe { ffi::wxTextEntry_GetInsertionPoint(Self::ptr_from(&self)) }
+            unsafe { ffi::wxTextEntry_GetInsertionPoint(self.as_text_entry()) }
         }
         // NOT_SUPPORTED: fn GetLastPosition()
         fn get_range(&self, from: c_long, to: c_long) -> String {
             unsafe {
-                wx_base::from_wx_string(ffi::wxTextEntry_GetRange(Self::ptr_from(&self), from, to))
+                wx_base::from_wx_string(ffi::wxTextEntry_GetRange(self.as_text_entry(), from, to))
             }
         }
         fn get_selection(&self, from: *mut c_void, to: *mut c_void) {
-            unsafe { ffi::wxTextEntry_GetSelection(Self::ptr_from(&self), from, to) }
+            unsafe { ffi::wxTextEntry_GetSelection(self.as_text_entry(), from, to) }
         }
         fn get_string_selection(&self) -> String {
             unsafe {
-                wx_base::from_wx_string(ffi::wxTextEntry_GetStringSelection(Self::ptr_from(&self)))
+                wx_base::from_wx_string(ffi::wxTextEntry_GetStringSelection(self.as_text_entry()))
             }
         }
         fn get_value(&self) -> String {
-            unsafe { wx_base::from_wx_string(ffi::wxTextEntry_GetValue(Self::ptr_from(&self))) }
+            unsafe { wx_base::from_wx_string(ffi::wxTextEntry_GetValue(self.as_text_entry())) }
         }
         fn is_editable(&self) -> bool {
-            unsafe { ffi::wxTextEntry_IsEditable(Self::ptr_from(&self)) }
+            unsafe { ffi::wxTextEntry_IsEditable(self.as_text_entry()) }
         }
         fn is_empty(&self) -> bool {
-            unsafe { ffi::wxTextEntry_IsEmpty(Self::ptr_from(&self)) }
+            unsafe { ffi::wxTextEntry_IsEmpty(self.as_text_entry()) }
         }
         fn paste(&self) {
-            unsafe { ffi::wxTextEntry_Paste(Self::ptr_from(&self)) }
+            unsafe { ffi::wxTextEntry_Paste(self.as_text_entry()) }
         }
         fn redo(&self) {
-            unsafe { ffi::wxTextEntry_Redo(Self::ptr_from(&self)) }
+            unsafe { ffi::wxTextEntry_Redo(self.as_text_entry()) }
         }
         fn remove(&self, from: c_long, to: c_long) {
-            unsafe { ffi::wxTextEntry_Remove(Self::ptr_from(&self), from, to) }
+            unsafe { ffi::wxTextEntry_Remove(self.as_text_entry(), from, to) }
         }
         fn replace(&self, from: c_long, to: c_long, value: &str) {
             unsafe {
                 let value = wx_base::wx_string_from(value);
-                ffi::wxTextEntry_Replace(Self::ptr_from(&self), from, to, value)
+                ffi::wxTextEntry_Replace(self.as_text_entry(), from, to, value)
             }
         }
         fn set_editable(&self, editable: bool) {
-            unsafe { ffi::wxTextEntry_SetEditable(Self::ptr_from(&self), editable) }
+            unsafe { ffi::wxTextEntry_SetEditable(self.as_text_entry(), editable) }
         }
         fn set_insertion_point(&self, pos: c_long) {
-            unsafe { ffi::wxTextEntry_SetInsertionPoint(Self::ptr_from(&self), pos) }
+            unsafe { ffi::wxTextEntry_SetInsertionPoint(self.as_text_entry(), pos) }
         }
         fn set_insertion_point_end(&self) {
-            unsafe { ffi::wxTextEntry_SetInsertionPointEnd(Self::ptr_from(&self)) }
+            unsafe { ffi::wxTextEntry_SetInsertionPointEnd(self.as_text_entry()) }
         }
         // NOT_SUPPORTED: fn SetMaxLength()
         fn set_selection(&self, from: c_long, to: c_long) {
-            unsafe { ffi::wxTextEntry_SetSelection(Self::ptr_from(&self), from, to) }
+            unsafe { ffi::wxTextEntry_SetSelection(self.as_text_entry(), from, to) }
         }
         fn select_all(&self) {
-            unsafe { ffi::wxTextEntry_SelectAll(Self::ptr_from(&self)) }
+            unsafe { ffi::wxTextEntry_SelectAll(self.as_text_entry()) }
         }
         fn select_none(&self) {
-            unsafe { ffi::wxTextEntry_SelectNone(Self::ptr_from(&self)) }
+            unsafe { ffi::wxTextEntry_SelectNone(self.as_text_entry()) }
         }
         fn set_hint(&self, hint: &str) -> bool {
             unsafe {
                 let hint = wx_base::wx_string_from(hint);
-                ffi::wxTextEntry_SetHint(Self::ptr_from(&self), hint)
+                ffi::wxTextEntry_SetHint(self.as_text_entry(), hint)
             }
         }
         fn get_hint(&self) -> String {
-            unsafe { wx_base::from_wx_string(ffi::wxTextEntry_GetHint(Self::ptr_from(&self))) }
+            unsafe { wx_base::from_wx_string(ffi::wxTextEntry_GetHint(self.as_text_entry())) }
         }
         fn set_margins_point<P: PointMethods>(&self, pt: &P) -> bool {
             unsafe {
                 let pt = pt.as_ptr();
-                ffi::wxTextEntry_SetMargins(Self::ptr_from(&self), pt)
+                ffi::wxTextEntry_SetMargins(self.as_text_entry(), pt)
             }
         }
         fn set_margins_coord(&self, left: c_int, top: c_int) -> bool {
-            unsafe { ffi::wxTextEntry_SetMargins1(Self::ptr_from(&self), left, top) }
+            unsafe { ffi::wxTextEntry_SetMargins1(self.as_text_entry(), left, top) }
         }
         fn get_margins(&self) -> Point {
-            unsafe { Point::from_ptr(ffi::wxTextEntry_GetMargins(Self::ptr_from(&self))) }
+            unsafe { Point::from_ptr(ffi::wxTextEntry_GetMargins(self.as_text_entry())) }
         }
         fn set_value(&self, value: &str) {
             unsafe {
                 let value = wx_base::wx_string_from(value);
-                ffi::wxTextEntry_SetValue(Self::ptr_from(&self), value)
+                ffi::wxTextEntry_SetValue(self.as_text_entry(), value)
             }
         }
         fn undo(&self) {
-            unsafe { ffi::wxTextEntry_Undo(Self::ptr_from(&self)) }
+            unsafe { ffi::wxTextEntry_Undo(self.as_text_entry()) }
         }
         fn write_text(&self, text: &str) {
             unsafe {
                 let text = wx_base::wx_string_from(text);
-                ffi::wxTextEntry_WriteText(Self::ptr_from(&self), text)
+                ffi::wxTextEntry_WriteText(self.as_text_entry(), text)
             }
         }
     }
@@ -215,7 +213,7 @@ mod ffi {
             y: c_int,
         );
 
-        pub fn wxTextCtrl_ToTextEntry(obj: *mut c_void) -> *mut c_void;
+        pub fn wxTextCtrl_AsTextEntry(obj: *mut c_void) -> *mut c_void;
         // wxTextEntry
         pub fn wxTextEntry_delete(self_: *mut c_void);
         pub fn wxTextEntry_AppendText(self_: *mut c_void, text: *const c_void);
@@ -271,8 +269,8 @@ mod ffi {
 
 // Mix-in wxTextEntry manually
 impl<const OWNED: bool> TextEntryMethods for TextCtrlIsOwned<OWNED> {
-    fn ptr_from(obj: &Self) -> *mut c_void {
-        unsafe { ffi::wxTextCtrl_ToTextEntry(obj.as_ptr()) }
+    fn as_text_entry(&self) -> *mut c_void {
+        unsafe { ffi::wxTextCtrl_AsTextEntry(self.as_ptr()) }
     }
 }
 

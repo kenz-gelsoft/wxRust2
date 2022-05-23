@@ -54,5 +54,5 @@ extern "C" {
     void wxTextEntry_Undo(wxTextEntry * self);
     void wxTextEntry_WriteText(wxTextEntry * self, const wxString * text);
 
-    wxTextEntry *wxTextCtrl_ToTextEntry(wxTextCtrl * obj);
+    wxTextEntry *wxTextCtrl_AsTextEntry(wxTextCtrl * obj);
 }
