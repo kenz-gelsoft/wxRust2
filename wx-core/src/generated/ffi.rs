@@ -1467,51 +1467,6 @@ extern "C" {
     // NOT_SUPPORTED: pub fn wxTextCtrl_operator<<5(self_: *mut c_void, c: char) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxTextCtrl_operator<<6(self_: *mut c_void, c: wchar_t) -> *mut c_void;
 
-    // wxTextEntry
-    pub fn wxTextEntry_delete(self_: *mut c_void);
-    pub fn wxTextEntry_AppendText(self_: *mut c_void, text: *const c_void);
-    pub fn wxTextEntry_AutoComplete(self_: *mut c_void, choices: *const c_void) -> bool;
-    pub fn wxTextEntry_AutoComplete1(self_: *mut c_void, completer: *mut c_void) -> bool;
-    pub fn wxTextEntry_AutoCompleteFileNames(self_: *mut c_void) -> bool;
-    pub fn wxTextEntry_AutoCompleteDirectories(self_: *mut c_void) -> bool;
-    pub fn wxTextEntry_CanCopy(self_: *const c_void) -> bool;
-    pub fn wxTextEntry_CanCut(self_: *const c_void) -> bool;
-    pub fn wxTextEntry_CanPaste(self_: *const c_void) -> bool;
-    pub fn wxTextEntry_CanRedo(self_: *const c_void) -> bool;
-    pub fn wxTextEntry_CanUndo(self_: *const c_void) -> bool;
-    pub fn wxTextEntry_ChangeValue(self_: *mut c_void, value: *const c_void);
-    pub fn wxTextEntry_Clear(self_: *mut c_void);
-    pub fn wxTextEntry_Copy(self_: *mut c_void);
-    pub fn wxTextEntry_Cut(self_: *mut c_void);
-    pub fn wxTextEntry_ForceUpper(self_: *mut c_void);
-    pub fn wxTextEntry_GetInsertionPoint(self_: *const c_void) -> c_long;
-    // NOT_SUPPORTED: pub fn wxTextEntry_GetLastPosition(self_: *const c_void) -> wxTextPos;
-    pub fn wxTextEntry_GetRange(self_: *const c_void, from: c_long, to: c_long) -> *mut c_void;
-    pub fn wxTextEntry_GetSelection(self_: *const c_void, from: *mut c_void, to: *mut c_void);
-    pub fn wxTextEntry_GetStringSelection(self_: *const c_void) -> *mut c_void;
-    pub fn wxTextEntry_GetValue(self_: *const c_void) -> *mut c_void;
-    pub fn wxTextEntry_IsEditable(self_: *const c_void) -> bool;
-    pub fn wxTextEntry_IsEmpty(self_: *const c_void) -> bool;
-    pub fn wxTextEntry_Paste(self_: *mut c_void);
-    pub fn wxTextEntry_Redo(self_: *mut c_void);
-    pub fn wxTextEntry_Remove(self_: *mut c_void, from: c_long, to: c_long);
-    pub fn wxTextEntry_Replace(self_: *mut c_void, from: c_long, to: c_long, value: *const c_void);
-    pub fn wxTextEntry_SetEditable(self_: *mut c_void, editable: bool);
-    pub fn wxTextEntry_SetInsertionPoint(self_: *mut c_void, pos: c_long);
-    pub fn wxTextEntry_SetInsertionPointEnd(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxTextEntry_SetMaxLength(self_: *mut c_void, len: unsigned long);
-    pub fn wxTextEntry_SetSelection(self_: *mut c_void, from: c_long, to: c_long);
-    pub fn wxTextEntry_SelectAll(self_: *mut c_void);
-    pub fn wxTextEntry_SelectNone(self_: *mut c_void);
-    pub fn wxTextEntry_SetHint(self_: *mut c_void, hint: *const c_void) -> bool;
-    pub fn wxTextEntry_GetHint(self_: *const c_void) -> *mut c_void;
-    pub fn wxTextEntry_SetMargins(self_: *mut c_void, pt: *const c_void) -> bool;
-    pub fn wxTextEntry_SetMargins1(self_: *mut c_void, left: c_int, top: c_int) -> bool;
-    pub fn wxTextEntry_GetMargins(self_: *const c_void) -> *mut c_void;
-    pub fn wxTextEntry_SetValue(self_: *mut c_void, value: *const c_void);
-    pub fn wxTextEntry_Undo(self_: *mut c_void);
-    pub fn wxTextEntry_WriteText(self_: *mut c_void, text: *const c_void);
-
     // wxToolBar
     pub fn wxToolBar_new() -> *mut c_void;
     pub fn wxToolBar_new1(
