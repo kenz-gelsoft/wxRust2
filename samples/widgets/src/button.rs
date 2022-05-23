@@ -2,12 +2,24 @@ use std::os::raw::c_int;
 use wx::methods::*;
 
 // control ids
+#[derive(Clone, Copy)]
 enum ButtonPage {
     Reset = wx::ID_HIGHEST as isize,
     ChangeLabel,
     ChangeNote,
     ChangeImageMargins,
     Button,
+}
+impl ButtonPage {
+    fn from(v: c_int) -> Option<Self> {
+        use ButtonPage::*;
+        for e in [Reset, ChangeLabel, ChangeNote, ChangeImageMargins, Button] {
+            if v == e.into() {
+                return Some(e);
+            }
+        }
+        return None;
+    }
 }
 impl From<ButtonPage> for c_int {
     fn from(w: ButtonPage) -> Self {
@@ -34,6 +46,17 @@ impl ButtonWidgetsPage {
             m_sizer_button: None,
         }
     }
+
+    pub fn handle_button(&self, event: &wx::CommandEvent) {
+        println!("event={}", event.get_id());
+        if let Some(m) = ButtonPage::from(event.get_id()) {
+            match m {
+                ButtonPage::ChangeLabel => self.on_button_change_label(),
+                _ => (),
+            };
+        }
+    }
+
     pub fn create_content(&mut self) {
         let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
 
@@ -195,7 +218,7 @@ impl ButtonWidgetsPage {
 
         // do create the main control
         self.reset();
-        // self.create_button();
+        self.create_button();
 
         self.base.set_sizer(Some(&sizer_top), true);
     }
@@ -298,5 +321,14 @@ impl ButtonWidgetsPage {
         sizer.add_spacer(2);
 
         return checkbox;
+    }
+
+    fn on_button_change_label(&self) {
+        let label_text = self.m_text_label.as_ref().unwrap().get_value();
+        println!("{}", label_text);
+
+        self.m_button.as_ref().unwrap().set_label(&label_text);
+
+        self.m_sizer_button.as_ref().unwrap().layout();
     }
 }

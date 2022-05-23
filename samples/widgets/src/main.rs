@@ -114,6 +114,14 @@ impl WidgetsFrame {
             m_page: page,
         };
         frame.on_create();
+
+        let frame_copy = frame.clone();
+        frame
+            .base
+            .bind(wx::RustEvent::Button, move |event: &wx::CommandEvent| {
+                frame_copy.m_page.handle_button(event);
+            });
+
         frame
     }
     fn on_create(&mut self) {
@@ -248,15 +256,15 @@ impl WidgetsFrame {
             wx::BookCtrlBase::NO_IMAGE,
         );
 
-        let self_copy = self.clone();
-        self.base.bind(
-            wx::RustEvent::BookctrlPageChanged,
-            move |event: &wx::BookCtrlEvent| {
-                let mut warped = self_copy.clone();
-                let sel = event.get_selection();
-                warped.on_page_changed(sel);
-            },
-        );
+        // let self_copy = self.clone();
+        // self.base.bind(
+        //     wx::RustEvent::BookctrlPageChanged,
+        //     move |event: &wx::BookCtrlEvent| {
+        //         let mut warped = self_copy.clone();
+        //         let sel = event.get_selection();
+        //         warped.on_page_changed(sel);
+        //     },
+        // );
 
         // self.m_book.set_selection(1);
         // self.m_book.set_selection(0);
