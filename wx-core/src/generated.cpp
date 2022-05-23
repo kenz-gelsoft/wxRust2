@@ -1988,129 +1988,129 @@ long wxTextCtrl_XYToPosition(const wxTextCtrl * self, long x, long y) {
 }
 
 // CLASS: wxTextEntry
-void wxTextEntry_delete(wxTextEntry *self) {
+void wxTextEntry_delete(wxTextCtrl *self) {
     delete self;
 }
-void wxTextEntry_AppendText(wxTextEntry * self, const wxString * text) {
+void wxTextEntry_AppendText(wxTextCtrl * self, const wxString * text) {
     return self->AppendText(*text);
 }
-bool wxTextEntry_AutoComplete(wxTextEntry * self, const wxArrayString * choices) {
+bool wxTextEntry_AutoComplete(wxTextCtrl * self, const wxArrayString * choices) {
     return self->AutoComplete(*choices);
 }
-bool wxTextEntry_AutoComplete1(wxTextEntry * self, wxTextCompleter * completer) {
+bool wxTextEntry_AutoComplete1(wxTextCtrl * self, wxTextCompleter * completer) {
     return self->AutoComplete(completer);
 }
-bool wxTextEntry_AutoCompleteFileNames(wxTextEntry * self) {
+bool wxTextEntry_AutoCompleteFileNames(wxTextCtrl * self) {
     return self->AutoCompleteFileNames();
 }
-bool wxTextEntry_AutoCompleteDirectories(wxTextEntry * self) {
+bool wxTextEntry_AutoCompleteDirectories(wxTextCtrl * self) {
     return self->AutoCompleteDirectories();
 }
-bool wxTextEntry_CanCopy(const wxTextEntry * self) {
+bool wxTextEntry_CanCopy(const wxTextCtrl * self) {
     return self->CanCopy();
 }
-bool wxTextEntry_CanCut(const wxTextEntry * self) {
+bool wxTextEntry_CanCut(const wxTextCtrl * self) {
     return self->CanCut();
 }
-bool wxTextEntry_CanPaste(const wxTextEntry * self) {
+bool wxTextEntry_CanPaste(const wxTextCtrl * self) {
     return self->CanPaste();
 }
-bool wxTextEntry_CanRedo(const wxTextEntry * self) {
+bool wxTextEntry_CanRedo(const wxTextCtrl * self) {
     return self->CanRedo();
 }
-bool wxTextEntry_CanUndo(const wxTextEntry * self) {
+bool wxTextEntry_CanUndo(const wxTextCtrl * self) {
     return self->CanUndo();
 }
-void wxTextEntry_ChangeValue(wxTextEntry * self, const wxString * value) {
+void wxTextEntry_ChangeValue(wxTextCtrl * self, const wxString * value) {
     return self->ChangeValue(*value);
 }
-void wxTextEntry_Clear(wxTextEntry * self) {
+void wxTextEntry_Clear(wxTextCtrl * self) {
     return self->Clear();
 }
-void wxTextEntry_Copy(wxTextEntry * self) {
+void wxTextEntry_Copy(wxTextCtrl * self) {
     return self->Copy();
 }
-void wxTextEntry_Cut(wxTextEntry * self) {
+void wxTextEntry_Cut(wxTextCtrl * self) {
     return self->Cut();
 }
 #if wxCHECK_VERSION(3, 1, 0)
-void wxTextEntry_ForceUpper(wxTextEntry * self) {
+void wxTextEntry_ForceUpper(wxTextCtrl * self) {
     return self->ForceUpper();
 }
 #endif
-long wxTextEntry_GetInsertionPoint(const wxTextEntry * self) {
+long wxTextEntry_GetInsertionPoint(const wxTextCtrl * self) {
     return self->GetInsertionPoint();
 }
-wxString *wxTextEntry_GetRange(const wxTextEntry * self, long from, long to) {
+wxString *wxTextEntry_GetRange(const wxTextCtrl * self, long from, long to) {
     return new wxString(self->GetRange(from, to));
 }
-void wxTextEntry_GetSelection(const wxTextEntry * self, long * from, long * to) {
+void wxTextEntry_GetSelection(const wxTextCtrl * self, long * from, long * to) {
     return self->GetSelection(from, to);
 }
-wxString *wxTextEntry_GetStringSelection(const wxTextEntry * self) {
+wxString *wxTextEntry_GetStringSelection(const wxTextCtrl * self) {
     return new wxString(self->GetStringSelection());
 }
-wxString *wxTextEntry_GetValue(const wxTextEntry * self) {
+wxString *wxTextEntry_GetValue(const wxTextCtrl * self) {
     return new wxString(self->GetValue());
 }
-bool wxTextEntry_IsEditable(const wxTextEntry * self) {
+bool wxTextEntry_IsEditable(const wxTextCtrl * self) {
     return self->IsEditable();
 }
-bool wxTextEntry_IsEmpty(const wxTextEntry * self) {
+bool wxTextEntry_IsEmpty(const wxTextCtrl * self) {
     return self->IsEmpty();
 }
-void wxTextEntry_Paste(wxTextEntry * self) {
+void wxTextEntry_Paste(wxTextCtrl * self) {
     return self->Paste();
 }
-void wxTextEntry_Redo(wxTextEntry * self) {
+void wxTextEntry_Redo(wxTextCtrl * self) {
     return self->Redo();
 }
-void wxTextEntry_Remove(wxTextEntry * self, long from, long to) {
+void wxTextEntry_Remove(wxTextCtrl * self, long from, long to) {
     return self->Remove(from, to);
 }
-void wxTextEntry_Replace(wxTextEntry * self, long from, long to, const wxString * value) {
+void wxTextEntry_Replace(wxTextCtrl * self, long from, long to, const wxString * value) {
     return self->Replace(from, to, *value);
 }
-void wxTextEntry_SetEditable(wxTextEntry * self, bool editable) {
+void wxTextEntry_SetEditable(wxTextCtrl * self, bool editable) {
     return self->SetEditable(editable);
 }
-void wxTextEntry_SetInsertionPoint(wxTextEntry * self, long pos) {
+void wxTextEntry_SetInsertionPoint(wxTextCtrl * self, long pos) {
     return self->SetInsertionPoint(pos);
 }
-void wxTextEntry_SetInsertionPointEnd(wxTextEntry * self) {
+void wxTextEntry_SetInsertionPointEnd(wxTextCtrl * self) {
     return self->SetInsertionPointEnd();
 }
-void wxTextEntry_SetSelection(wxTextEntry * self, long from, long to) {
+void wxTextEntry_SetSelection(wxTextCtrl * self, long from, long to) {
     return self->SetSelection(from, to);
 }
-void wxTextEntry_SelectAll(wxTextEntry * self) {
+void wxTextEntry_SelectAll(wxTextCtrl * self) {
     return self->SelectAll();
 }
-void wxTextEntry_SelectNone(wxTextEntry * self) {
+void wxTextEntry_SelectNone(wxTextCtrl * self) {
     return self->SelectNone();
 }
-bool wxTextEntry_SetHint(wxTextEntry * self, const wxString * hint) {
+bool wxTextEntry_SetHint(wxTextCtrl * self, const wxString * hint) {
     return self->SetHint(*hint);
 }
-wxString *wxTextEntry_GetHint(const wxTextEntry * self) {
+wxString *wxTextEntry_GetHint(const wxTextCtrl * self) {
     return new wxString(self->GetHint());
 }
-bool wxTextEntry_SetMargins(wxTextEntry * self, const wxPoint * pt) {
+bool wxTextEntry_SetMargins(wxTextCtrl * self, const wxPoint * pt) {
     return self->SetMargins(*pt);
 }
-bool wxTextEntry_SetMargins1(wxTextEntry * self, wxCoord left, wxCoord top) {
+bool wxTextEntry_SetMargins1(wxTextCtrl * self, wxCoord left, wxCoord top) {
     return self->SetMargins(left, top);
 }
-wxPoint *wxTextEntry_GetMargins(const wxTextEntry * self) {
+wxPoint *wxTextEntry_GetMargins(const wxTextCtrl * self) {
     return new wxPoint(self->GetMargins());
 }
-void wxTextEntry_SetValue(wxTextEntry * self, const wxString * value) {
+void wxTextEntry_SetValue(wxTextCtrl * self, const wxString * value) {
     return self->SetValue(*value);
 }
-void wxTextEntry_Undo(wxTextEntry * self) {
+void wxTextEntry_Undo(wxTextCtrl * self) {
     return self->Undo();
 }
-void wxTextEntry_WriteText(wxTextEntry * self, const wxString * text) {
+void wxTextEntry_WriteText(wxTextCtrl * self, const wxString * text) {
     return self->WriteText(*text);
 }
 
