@@ -1,4 +1,5 @@
-use std::os::raw::{c_int, c_long};
+use std::mem;
+use std::os::raw::{c_int, c_long, c_void};
 use std::ptr;
 
 mod generated;
@@ -20,6 +21,12 @@ pub mod methods {
         fn builder(parent: Option<&'a P>) -> B;
     }
 
+    pub trait WindowListMethods: WxRustMethods {
+        fn is_empty(&self) -> bool {
+            unsafe { super::ffi::wxWindowList_IsEmpty(self.as_ptr()) }
+        }
+    }
+
     pub trait MenuItemBuilder {
         fn item<ID: Into<c_int>>(self, id: ID, s: &str) -> Self;
         fn item_h<ID: Into<c_int>>(self, id: ID, s: &str, h: &str) -> Self;
@@ -35,6 +42,12 @@ mod ffi {
     use std::os::raw::{c_int, c_void};
     extern "C" {
         pub fn wxObject_delete(self_: *mut c_void);
+
+        // WindowList
+        pub fn wxWindowList_new() -> *mut c_void;
+        pub fn wxWindowList_delete(self_: *mut c_void);
+        pub fn wxWindowList_IsEmpty(self_: *mut c_void) -> bool;
+
         pub fn wxRustMessageBox(
             message: *const c_void,
             caption: *const c_void,
@@ -71,8 +84,8 @@ impl<'a, P: WindowMethods> FrameBuilder<'a, P> {
         self.id = id;
         self
     }
-    pub fn title(&mut self, s: &str) -> &mut Self {
-        self.title = s.to_string();
+    pub fn title(&mut self, title: &str) -> &mut Self {
+        self.title = title.to_string();
         self
     }
     pub fn pos(&mut self, pos: Point) -> &mut Self {
@@ -138,10 +151,52 @@ impl<'a, P: WindowMethods> PanelBuilder<'a, P> {
     }
 }
 
+// pub struct ActivityIndicatorBuilder<'a, P: WindowMethods> {
+//     parent: Option<&'a P>,
+//     id: c_int,
+//     pos: Option<Point>,
+//     size: Option<Size>,
+//     style: c_long,
+// }
+// impl<'a, P: WindowMethods> Buildable<'a, P, ActivityIndicatorBuilder<'a, P>> for ActivityIndicator {
+//     fn builder(parent: Option<&'a P>) -> ActivityIndicatorBuilder<'a, P> {
+//         ActivityIndicatorBuilder {
+//             parent: parent,
+//             id: ID_ANY,
+//             pos: None,
+//             size: None,
+//             style: 0,
+//         }
+//     }
+// }
+// impl<'a, P: WindowMethods> ActivityIndicatorBuilder<'a, P> {
+//     pub fn id(&mut self, id: c_int) -> &mut Self {
+//         self.id = id;
+//         self
+//     }
+//     pub fn pos(&mut self, pos: Point) -> &mut Self {
+//         self.pos = Some(pos);
+//         self
+//     }
+//     pub fn size(&mut self, size: Size) -> &mut Self {
+//         self.size = Some(size);
+//         self
+//     }
+//     pub fn style(&mut self, style: c_long) -> &mut Self {
+//         self.style = style;
+//         self
+//     }
+//     pub fn build(&mut self) -> ActivityIndicator {
+//         let pos = self.pos.take().unwrap_or_else(|| Point::default());
+//         let size = self.size.take().unwrap_or_else(|| Size::default());
+//         ActivityIndicator::new(self.parent, self.id, &pos, &size, self.style, "")
+//     }
+// }
+
 pub struct ButtonBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
-    title: String,
+    label: String,
     pos: Option<Point>,
     size: Option<Size>,
     style: c_long,
@@ -152,7 +207,7 @@ impl<'a, P: WindowMethods> Buildable<'a, P, ButtonBuilder<'a, P>> for Button {
         ButtonBuilder {
             parent: parent,
             id: ID_ANY,
-            title: "".to_string(),
+            label: "".to_string(),
             pos: None,
             size: None,
             style: 0,
@@ -165,8 +220,8 @@ impl<'a, P: WindowMethods> ButtonBuilder<'a, P> {
         self.id = id;
         self
     }
-    pub fn title(&mut self, s: &str) -> &mut Self {
-        self.title = s.to_string();
+    pub fn label(&mut self, label: &str) -> &mut Self {
+        self.label = label.to_string();
         self
     }
     pub fn pos(&mut self, pos: Point) -> &mut Self {
@@ -195,7 +250,7 @@ impl<'a, P: WindowMethods> ButtonBuilder<'a, P> {
         Button::new(
             self.parent,
             self.id,
-            &self.title,
+            &self.label,
             &pos,
             &size,
             self.style,
@@ -208,7 +263,7 @@ impl<'a, P: WindowMethods> ButtonBuilder<'a, P> {
 pub struct CheckBoxBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
-    title: String,
+    label: String,
     pos: Option<Point>,
     size: Option<Size>,
     style: c_long,
@@ -219,7 +274,7 @@ impl<'a, P: WindowMethods> Buildable<'a, P, CheckBoxBuilder<'a, P>> for CheckBox
         CheckBoxBuilder {
             parent: parent,
             id: ID_ANY,
-            title: "".to_string(),
+            label: "".to_string(),
             pos: None,
             size: None,
             style: 0,
@@ -232,8 +287,8 @@ impl<'a, P: WindowMethods> CheckBoxBuilder<'a, P> {
         self.id = id;
         self
     }
-    pub fn title(&mut self, s: &str) -> &mut Self {
-        self.title = s.to_string();
+    pub fn label(&mut self, label: &str) -> &mut Self {
+        self.label = label.to_string();
         self
     }
     pub fn pos(&mut self, pos: Point) -> &mut Self {
@@ -262,7 +317,7 @@ impl<'a, P: WindowMethods> CheckBoxBuilder<'a, P> {
         CheckBox::new(
             self.parent,
             self.id,
-            &self.title,
+            &self.label,
             &pos,
             &size,
             self.style,
@@ -382,6 +437,267 @@ impl<'a, P: WindowMethods> NotebookBuilder<'a, P> {
     }
 }
 
+pub struct RadioBoxBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    id: c_int,
+    label: String,
+    pos: Option<Point>,
+    size: Option<Size>,
+    choices: Option<ArrayString>,
+    major_dimension: c_int,
+    style: c_long,
+    validator: Option<Validator>,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, RadioBoxBuilder<'a, P>> for RadioBox {
+    fn builder(parent: Option<&'a P>) -> RadioBoxBuilder<'a, P> {
+        RadioBoxBuilder {
+            parent: parent,
+            id: ID_ANY,
+            label: "".to_string(),
+            pos: None,
+            size: None,
+            choices: None,
+            major_dimension: 0,
+            style: 0,
+            validator: None,
+        }
+    }
+}
+impl<'a, P: WindowMethods> RadioBoxBuilder<'a, P> {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn label(&mut self, label: &str) -> &mut Self {
+        self.label = label.to_string();
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn choices(&mut self, choices: ArrayString) -> &mut Self {
+        self.choices = Some(choices);
+        self
+    }
+    pub fn major_dimension(&mut self, major_dimension: c_int) -> &mut Self {
+        self.major_dimension = major_dimension;
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn validator(&mut self, validator: Validator) -> &mut Self {
+        self.validator = Some(validator);
+        self
+    }
+    pub fn build(&mut self) -> RadioBox {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        let choices = self.choices.take().unwrap_or_else(|| ArrayString::new());
+        let validator = self
+            .validator
+            .take()
+            .unwrap_or_else(|| Validator::default());
+        RadioBox::new(
+            self.parent,
+            self.id,
+            &self.label,
+            &pos,
+            &size,
+            &choices,
+            self.major_dimension,
+            self.style,
+            &validator,
+            "",
+        )
+    }
+}
+
+pub struct StaticBoxBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    id: c_int,
+    label: String,
+    pos: Option<Point>,
+    size: Option<Size>,
+    style: c_long,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, StaticBoxBuilder<'a, P>> for StaticBox {
+    fn builder(parent: Option<&'a P>) -> StaticBoxBuilder<'a, P> {
+        StaticBoxBuilder {
+            parent: parent,
+            id: ID_ANY,
+            label: "".to_string(),
+            pos: None,
+            size: None,
+            style: 0,
+        }
+    }
+}
+impl<'a, P: WindowMethods> StaticBoxBuilder<'a, P> {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn label(&mut self, label: &str) -> &mut Self {
+        self.label = label.to_string();
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn build(&mut self) -> StaticBox {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        StaticBox::new(
+            self.parent,
+            self.id,
+            &self.label,
+            &pos,
+            &size,
+            self.style,
+            "",
+        )
+    }
+}
+
+pub struct StaticTextBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    id: c_int,
+    label: String,
+    pos: Option<Point>,
+    size: Option<Size>,
+    style: c_long,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, StaticTextBuilder<'a, P>> for StaticText {
+    fn builder(parent: Option<&'a P>) -> StaticTextBuilder<'a, P> {
+        StaticTextBuilder {
+            parent: parent,
+            id: ID_ANY,
+            label: "".to_string(),
+            pos: None,
+            size: None,
+            style: 0,
+        }
+    }
+}
+impl<'a, P: WindowMethods> StaticTextBuilder<'a, P> {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn label(&mut self, label: &str) -> &mut Self {
+        self.label = label.to_string();
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn build(&mut self) -> StaticText {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        StaticText::new(
+            self.parent,
+            self.id,
+            &self.label,
+            &pos,
+            &size,
+            self.style,
+            "",
+        )
+    }
+}
+
+pub struct TextCtrlBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    id: c_int,
+    value: String,
+    pos: Option<Point>,
+    size: Option<Size>,
+    style: c_long,
+    validator: Option<Validator>,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, TextCtrlBuilder<'a, P>> for TextCtrl {
+    fn builder(parent: Option<&'a P>) -> TextCtrlBuilder<'a, P> {
+        TextCtrlBuilder {
+            parent: parent,
+            id: ID_ANY,
+            value: "".to_string(),
+            pos: None,
+            size: None,
+            style: 0,
+            validator: None,
+        }
+    }
+}
+impl<'a, P: WindowMethods> TextCtrlBuilder<'a, P> {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn value(&mut self, value: &str) -> &mut Self {
+        self.value = value.to_string();
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn validator(&mut self, validator: Validator) -> &mut Self {
+        self.validator = Some(validator);
+        self
+    }
+    pub fn build(&mut self) -> TextCtrl {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        let validator = self
+            .validator
+            .take()
+            .unwrap_or_else(|| Validator::default());
+        TextCtrl::new(
+            self.parent,
+            self.id,
+            &self.value,
+            &pos,
+            &size,
+            self.style,
+            &validator,
+            "",
+        )
+    }
+}
+
 pub struct ToolBarBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
@@ -425,23 +741,23 @@ impl<'a, P: WindowMethods> ToolBarBuilder<'a, P> {
 }
 
 impl MenuItemBuilder for Menu {
-    fn item<ID: Into<c_int>>(self, id: ID, s: &str) -> Self {
-        self.item_h(id, s, "")
+    fn item<ID: Into<c_int>>(self, id: ID, item: &str) -> Self {
+        self.item_h(id, item, "")
     }
-    fn item_h<ID: Into<c_int>>(self, id: ID, s: &str, h: &str) -> Self {
-        self.append_int_str(id.into(), s, h, ITEM_NORMAL);
+    fn item_h<ID: Into<c_int>>(self, id: ID, item: &str, help: &str) -> Self {
+        self.append_int_str(id.into(), item, help, ITEM_NORMAL);
         self
     }
-    fn check_item<ID: Into<c_int>>(self, id: ID, s: &str) -> Self {
-        self.append_check_item(id.into(), s, "");
+    fn check_item<ID: Into<c_int>>(self, id: ID, item: &str) -> Self {
+        self.append_check_item(id.into(), item, "");
         self
     }
-    fn radio_item<ID: Into<c_int>>(self, id: ID, s: &str) -> Self {
-        self.append_radio_item(id.into(), s, "");
+    fn radio_item<ID: Into<c_int>>(self, id: ID, item: &str) -> Self {
+        self.append_radio_item(id.into(), item, "");
         self
     }
-    fn sub_menu<M: MenuMethods>(self, s: &str, submenu: &M) -> Self {
-        self.append_sub_menu(Some(submenu), s, "");
+    fn sub_menu<M: MenuMethods>(self, text: &str, submenu: &M) -> Self {
+        self.append_sub_menu(Some(submenu), text, "");
         self
     }
     fn separator(self) -> Self {
@@ -466,6 +782,23 @@ impl<const OWNED: bool> Default for SizeIsOwned<OWNED> {
 impl<const OWNED: bool> Default for ValidatorIsOwned<OWNED> {
     fn default() -> Self {
         ValidatorIsOwned::new()
+    }
+}
+
+wx_class! { WindowList =
+    WindowListIsOwned<true>(wxWindowList) impl
+        WindowListMethods
+}
+impl<const OWNED: bool> WindowListIsOwned<OWNED> {
+    pub fn new() -> Self {
+        unsafe { WindowListIsOwned(ffi::wxWindowList_new()) }
+    }
+}
+impl<const OWNED: bool> Drop for WindowListIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxWindowList_delete(self.0) }
+        }
     }
 }
 

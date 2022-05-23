@@ -1,5 +1,6 @@
 #pragma once
 #include <wx/wx.h>
+//#include <wx/activityindicator.h>
 #include <wx/artprov.h>
 #include <wx/bookctrl.h>
 #include <wx/wrapsizer.h>
@@ -95,6 +96,12 @@ size_t wxBookCtrlBase_GetPageCount(const wxBookCtrlBase * self);
 wxWindow * wxBookCtrlBase_GetPage(const wxBookCtrlBase * self, size_t page);
 bool wxBookCtrlBase_Create(wxBookCtrlBase * self, wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 
+// CLASS: wxBookCtrlEvent
+int wxBookCtrlEvent_GetOldSelection(const wxBookCtrlEvent * self);
+int wxBookCtrlEvent_GetSelection(const wxBookCtrlEvent * self);
+void wxBookCtrlEvent_SetOldSelection(wxBookCtrlEvent * self, int page);
+void wxBookCtrlEvent_SetSelection(wxBookCtrlEvent * self, int page);
+
 // CLASS: wxBoxSizer
 wxBoxSizer *wxBoxSizer_new(int orient);
 int wxBoxSizer_GetOrientation(const wxBoxSizer * self);
@@ -120,6 +127,24 @@ bool wxCheckBox_Is3State(const wxCheckBox * self);
 bool wxCheckBox_Is3rdStateAllowedForUser(const wxCheckBox * self);
 bool wxCheckBox_IsChecked(const wxCheckBox * self);
 void wxCheckBox_SetValue(wxCheckBox * self, bool state);
+
+// CLASS: wxColour
+wxColour *wxColour_new();
+wxColour *wxColour_new2(const wxString * colour_name);
+wxColour *wxColour_new4(const wxColour * colour);
+wxString *wxColour_GetAsString(const wxColour * self, long flags);
+#if wxCHECK_VERSION(3, 1, 0)
+double wxColour_GetLuminance(const wxColour * self);
+#endif
+bool wxColour_IsOk(const wxColour * self);
+#if wxCHECK_VERSION(3, 1, 0)
+bool wxColour_IsSolid(const wxColour * self);
+#endif
+bool wxColour_Set2(wxColour * self, const wxString * str);
+void wxColour_MakeMono(unsigned char * r, unsigned char * g, unsigned char * b, bool on);
+void wxColour_MakeGrey(unsigned char * r, unsigned char * g, unsigned char * b);
+void wxColour_MakeGrey1(unsigned char * r, unsigned char * g, unsigned char * b, double weight_r, double weight_g, double weight_b);
+void wxColour_ChangeLightness1(unsigned char * r, unsigned char * g, unsigned char * b, int ialpha);
 
 // CLASS: wxCommandEvent
 void * wxCommandEvent_GetClientData(const wxCommandEvent * self);
@@ -296,6 +321,56 @@ void wxMenuBar_MacSetCommonMenuBar(wxMenuBar * menubar);
 wxMenuBar * wxMenuBar_MacGetCommonMenuBar();
 #endif
 
+// CLASS: wxMenuItem
+#ifdef __WXMSW__
+wxColour * wxMenuItem_GetBackgroundColour(const wxMenuItem * self);
+const wxBitmap * wxMenuItem_GetDisabledBitmap(const wxMenuItem * self);
+wxFont * wxMenuItem_GetFont(const wxMenuItem * self);
+#endif
+wxString *wxMenuItem_GetHelp(const wxMenuItem * self);
+int wxMenuItem_GetId(const wxMenuItem * self);
+wxString *wxMenuItem_GetItemLabel(const wxMenuItem * self);
+wxString *wxMenuItem_GetItemLabelText(const wxMenuItem * self);
+wxItemKind wxMenuItem_GetKind(const wxMenuItem * self);
+#ifdef __WXMSW__
+int wxMenuItem_GetMarginWidth(const wxMenuItem * self);
+#endif
+wxMenu * wxMenuItem_GetMenu(const wxMenuItem * self);
+wxMenu * wxMenuItem_GetSubMenu(const wxMenuItem * self);
+#ifdef __WXMSW__
+wxColour * wxMenuItem_GetTextColour(const wxMenuItem * self);
+#endif
+wxAcceleratorEntry * wxMenuItem_GetAccel(const wxMenuItem * self);
+wxAcceleratorEntry * wxMenuItem_GetAccelFromString(const wxString * label);
+bool wxMenuItem_IsCheck(const wxMenuItem * self);
+bool wxMenuItem_IsCheckable(const wxMenuItem * self);
+bool wxMenuItem_IsChecked(const wxMenuItem * self);
+bool wxMenuItem_IsEnabled(const wxMenuItem * self);
+bool wxMenuItem_IsRadio(const wxMenuItem * self);
+bool wxMenuItem_IsSeparator(const wxMenuItem * self);
+bool wxMenuItem_IsSubMenu(const wxMenuItem * self);
+#ifdef __WXMSW__
+void wxMenuItem_SetBackgroundColour(wxMenuItem * self, const wxColour * colour);
+void wxMenuItem_SetBitmaps(wxMenuItem * self, const wxBitmap * checked, const wxBitmap * unchecked);
+void wxMenuItem_SetDisabledBitmap(wxMenuItem * self, const wxBitmap * disabled);
+void wxMenuItem_SetFont(wxMenuItem * self, const wxFont * font);
+#endif
+void wxMenuItem_SetHelp(wxMenuItem * self, const wxString * help_string);
+void wxMenuItem_SetItemLabel(wxMenuItem * self, const wxString * label);
+#ifdef __WXMSW__
+void wxMenuItem_SetMarginWidth(wxMenuItem * self, int width);
+#endif
+void wxMenuItem_SetMenu(wxMenuItem * self, wxMenu * menu);
+void wxMenuItem_SetSubMenu(wxMenuItem * self, wxMenu * menu);
+#ifdef __WXMSW__
+void wxMenuItem_SetTextColour(wxMenuItem * self, const wxColour * colour);
+#endif
+void wxMenuItem_SetAccel(wxMenuItem * self, wxAcceleratorEntry * accel);
+wxMenuItem *wxMenuItem_new(wxMenu * parent_menu, int id, const wxString * text, const wxString * help_string, wxItemKind kind, wxMenu * sub_menu);
+void wxMenuItem_Check(wxMenuItem * self, bool check);
+void wxMenuItem_Enable(wxMenuItem * self, bool enable);
+wxString *wxMenuItem_GetLabelText(const wxString * text);
+
 // CLASS: wxNonOwnedWindow
 bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow * self, const wxRegion * region);
 bool wxNonOwnedWindow_SetShape1(wxNonOwnedWindow * self, const wxGraphicsPath * path);
@@ -304,7 +379,13 @@ bool wxNonOwnedWindow_SetShape1(wxNonOwnedWindow * self, const wxGraphicsPath * 
 wxNotebook *wxNotebook_new();
 wxNotebook *wxNotebook_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 int wxNotebook_GetRowCount(const wxNotebook * self);
+wxColour *wxNotebook_GetThemeBackgroundColour(const wxNotebook * self);
 void wxNotebook_SetPadding(wxNotebook * self, const wxSize * padding);
+
+// CLASS: wxNotifyEvent
+void wxNotifyEvent_Allow(wxNotifyEvent * self);
+bool wxNotifyEvent_IsAllowed(const wxNotifyEvent * self);
+void wxNotifyEvent_Veto(wxNotifyEvent * self);
 
 // CLASS: wxPanel
 wxPanel *wxPanel_new();
@@ -320,6 +401,12 @@ void wxPoint_SetDefaults(wxPoint * self, const wxPoint * pt);
 wxPoint *wxPoint_new();
 wxPoint *wxPoint_new1(int x, int y);
 wxPoint *wxPoint_new2(const wxRealPoint * pt);
+
+// CLASS: wxRadioBox
+wxRadioBox *wxRadioBox_new();
+wxRadioBox *wxRadioBox_new2(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, int major_dimension, long style, const wxValidator * validator, const wxString * name);
+bool wxRadioBox_Create1(wxRadioBox * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, int major_dimension, long style, const wxValidator * validator, const wxString * name);
+int wxRadioBox_GetItemFromPoint(const wxRadioBox * self, const wxPoint * pt);
 
 // CLASS: wxRect
 void wxRect_delete(wxRect *self);
@@ -519,6 +606,138 @@ wxStaticBoxSizer *wxStaticBoxSizer_new(wxStaticBox * box_, int orient);
 wxStaticBoxSizer *wxStaticBoxSizer_new1(int orient, wxWindow * parent, const wxString * label);
 wxStaticBox * wxStaticBoxSizer_GetStaticBox(const wxStaticBoxSizer * self);
 
+// CLASS: wxStaticText
+wxStaticText *wxStaticText_new();
+wxStaticText *wxStaticText_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+bool wxStaticText_Create(wxStaticText * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+bool wxStaticText_IsEllipsized(const wxStaticText * self);
+void wxStaticText_Wrap(wxStaticText * self, int width);
+
+// CLASS: wxTextAttr
+void wxTextAttr_delete(wxTextAttr *self);
+const wxColour * wxTextAttr_GetBackgroundColour(const wxTextAttr * self);
+wxString *wxTextAttr_GetBulletFont(const wxTextAttr * self);
+wxString *wxTextAttr_GetBulletName(const wxTextAttr * self);
+int wxTextAttr_GetBulletNumber(const wxTextAttr * self);
+int wxTextAttr_GetBulletStyle(const wxTextAttr * self);
+wxString *wxTextAttr_GetBulletText(const wxTextAttr * self);
+wxString *wxTextAttr_GetCharacterStyleName(const wxTextAttr * self);
+long wxTextAttr_GetFlags(const wxTextAttr * self);
+bool wxTextAttr_GetFontAttributes(wxTextAttr * self, const wxFont * font, int flags);
+wxString *wxTextAttr_GetFontFaceName(const wxTextAttr * self);
+int wxTextAttr_GetFontSize(const wxTextAttr * self);
+bool wxTextAttr_GetFontUnderlined(const wxTextAttr * self);
+#if wxCHECK_VERSION(3, 1, 0)
+const wxColour * wxTextAttr_GetUnderlineColour(const wxTextAttr * self);
+#endif
+long wxTextAttr_GetLeftIndent(const wxTextAttr * self);
+long wxTextAttr_GetLeftSubIndent(const wxTextAttr * self);
+int wxTextAttr_GetLineSpacing(const wxTextAttr * self);
+wxString *wxTextAttr_GetListStyleName(const wxTextAttr * self);
+int wxTextAttr_GetOutlineLevel(const wxTextAttr * self);
+int wxTextAttr_GetParagraphSpacingAfter(const wxTextAttr * self);
+int wxTextAttr_GetParagraphSpacingBefore(const wxTextAttr * self);
+wxString *wxTextAttr_GetParagraphStyleName(const wxTextAttr * self);
+long wxTextAttr_GetRightIndent(const wxTextAttr * self);
+const wxColour * wxTextAttr_GetTextColour(const wxTextAttr * self);
+int wxTextAttr_GetTextEffectFlags(const wxTextAttr * self);
+int wxTextAttr_GetTextEffects(const wxTextAttr * self);
+wxString *wxTextAttr_GetURL(const wxTextAttr * self);
+bool wxTextAttr_HasAlignment(const wxTextAttr * self);
+bool wxTextAttr_HasBackgroundColour(const wxTextAttr * self);
+bool wxTextAttr_HasBulletName(const wxTextAttr * self);
+bool wxTextAttr_HasBulletNumber(const wxTextAttr * self);
+bool wxTextAttr_HasBulletStyle(const wxTextAttr * self);
+bool wxTextAttr_HasBulletText(const wxTextAttr * self);
+bool wxTextAttr_HasCharacterStyleName(const wxTextAttr * self);
+bool wxTextAttr_HasFlag(const wxTextAttr * self, long flag);
+bool wxTextAttr_HasFont(const wxTextAttr * self);
+bool wxTextAttr_HasFontEncoding(const wxTextAttr * self);
+bool wxTextAttr_HasFontFaceName(const wxTextAttr * self);
+bool wxTextAttr_HasFontFamily(const wxTextAttr * self);
+bool wxTextAttr_HasFontItalic(const wxTextAttr * self);
+bool wxTextAttr_HasFontSize(const wxTextAttr * self);
+bool wxTextAttr_HasFontPointSize(const wxTextAttr * self);
+bool wxTextAttr_HasFontPixelSize(const wxTextAttr * self);
+bool wxTextAttr_HasFontUnderlined(const wxTextAttr * self);
+bool wxTextAttr_HasFontWeight(const wxTextAttr * self);
+bool wxTextAttr_HasLeftIndent(const wxTextAttr * self);
+bool wxTextAttr_HasLineSpacing(const wxTextAttr * self);
+bool wxTextAttr_HasListStyleName(const wxTextAttr * self);
+bool wxTextAttr_HasOutlineLevel(const wxTextAttr * self);
+bool wxTextAttr_HasPageBreak(const wxTextAttr * self);
+bool wxTextAttr_HasParagraphSpacingAfter(const wxTextAttr * self);
+bool wxTextAttr_HasParagraphSpacingBefore(const wxTextAttr * self);
+bool wxTextAttr_HasParagraphStyleName(const wxTextAttr * self);
+bool wxTextAttr_HasRightIndent(const wxTextAttr * self);
+bool wxTextAttr_HasTabs(const wxTextAttr * self);
+bool wxTextAttr_HasTextColour(const wxTextAttr * self);
+bool wxTextAttr_HasTextEffects(const wxTextAttr * self);
+bool wxTextAttr_HasURL(const wxTextAttr * self);
+bool wxTextAttr_IsCharacterStyle(const wxTextAttr * self);
+bool wxTextAttr_IsDefault(const wxTextAttr * self);
+bool wxTextAttr_IsParagraphStyle(const wxTextAttr * self);
+void wxTextAttr_SetBackgroundColour(wxTextAttr * self, const wxColour * col_back);
+void wxTextAttr_SetBulletFont(wxTextAttr * self, const wxString * font);
+void wxTextAttr_SetBulletName(wxTextAttr * self, const wxString * name);
+void wxTextAttr_SetBulletNumber(wxTextAttr * self, int n);
+void wxTextAttr_SetBulletStyle(wxTextAttr * self, int style);
+void wxTextAttr_SetBulletText(wxTextAttr * self, const wxString * text);
+void wxTextAttr_SetCharacterStyleName(wxTextAttr * self, const wxString * name);
+void wxTextAttr_SetFlags(wxTextAttr * self, long flags);
+void wxTextAttr_SetFont(wxTextAttr * self, const wxFont * font, int flags);
+void wxTextAttr_SetFontFaceName(wxTextAttr * self, const wxString * face_name);
+void wxTextAttr_SetFontSize(wxTextAttr * self, int point_size);
+void wxTextAttr_SetFontPointSize(wxTextAttr * self, int point_size);
+void wxTextAttr_SetFontPixelSize(wxTextAttr * self, int pixel_size);
+void wxTextAttr_SetFontUnderlined(wxTextAttr * self, bool underlined);
+void wxTextAttr_SetLeftIndent(wxTextAttr * self, int indent, int sub_indent);
+void wxTextAttr_SetLineSpacing(wxTextAttr * self, int spacing);
+void wxTextAttr_SetListStyleName(wxTextAttr * self, const wxString * name);
+void wxTextAttr_SetOutlineLevel(wxTextAttr * self, int level);
+void wxTextAttr_SetPageBreak(wxTextAttr * self, bool page_break);
+void wxTextAttr_SetParagraphSpacingAfter(wxTextAttr * self, int spacing);
+void wxTextAttr_SetParagraphSpacingBefore(wxTextAttr * self, int spacing);
+void wxTextAttr_SetParagraphStyleName(wxTextAttr * self, const wxString * name);
+void wxTextAttr_SetRightIndent(wxTextAttr * self, int indent);
+void wxTextAttr_SetTabs(wxTextAttr * self, const wxArrayInt * tabs);
+void wxTextAttr_SetTextColour(wxTextAttr * self, const wxColour * col_text);
+void wxTextAttr_SetTextEffectFlags(wxTextAttr * self, int flags);
+void wxTextAttr_SetTextEffects(wxTextAttr * self, int effects);
+void wxTextAttr_SetURL(wxTextAttr * self, const wxString * url);
+wxTextAttr *wxTextAttr_new();
+wxTextAttr *wxTextAttr_new2(const wxTextAttr * attr);
+bool wxTextAttr_Apply(wxTextAttr * self, const wxTextAttr * style, const wxTextAttr * compare_with);
+void wxTextAttr_Merge(wxTextAttr * self, const wxTextAttr * overlay);
+bool wxTextAttr_EqPartial(const wxTextAttr * self, const wxTextAttr * attr, bool weak_test);
+wxTextAttr *wxTextAttr_Merge1(const wxTextAttr * base, const wxTextAttr * overlay);
+
+// CLASS: wxTextCtrl
+wxTextCtrl *wxTextCtrl_new();
+wxTextCtrl *wxTextCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+bool wxTextCtrl_Create(wxTextCtrl * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+void wxTextCtrl_DiscardEdits(wxTextCtrl * self);
+bool wxTextCtrl_EmulateKeyPress(wxTextCtrl * self, const wxKeyEvent * event);
+const wxTextAttr * wxTextCtrl_GetDefaultStyle(const wxTextCtrl * self);
+int wxTextCtrl_GetLineLength(const wxTextCtrl * self, long line_no);
+wxString *wxTextCtrl_GetLineText(const wxTextCtrl * self, long line_no);
+int wxTextCtrl_GetNumberOfLines(const wxTextCtrl * self);
+bool wxTextCtrl_GetStyle(wxTextCtrl * self, long position, wxTextAttr * style);
+bool wxTextCtrl_IsModified(const wxTextCtrl * self);
+bool wxTextCtrl_IsMultiLine(const wxTextCtrl * self);
+bool wxTextCtrl_IsSingleLine(const wxTextCtrl * self);
+bool wxTextCtrl_LoadFile(wxTextCtrl * self, const wxString * filename, int file_type);
+void wxTextCtrl_MarkDirty(wxTextCtrl * self);
+void wxTextCtrl_OnDropFiles(wxTextCtrl * self, wxDropFilesEvent * event);
+bool wxTextCtrl_PositionToXY(const wxTextCtrl * self, long pos, long * x, long * y);
+wxPoint *wxTextCtrl_PositionToCoords(const wxTextCtrl * self, long pos);
+bool wxTextCtrl_SaveFile(wxTextCtrl * self, const wxString * filename, int file_type);
+bool wxTextCtrl_SetDefaultStyle(wxTextCtrl * self, const wxTextAttr * style);
+void wxTextCtrl_SetModified(wxTextCtrl * self, bool modified);
+bool wxTextCtrl_SetStyle(wxTextCtrl * self, long start, long end, const wxTextAttr * style);
+void wxTextCtrl_ShowPosition(wxTextCtrl * self, long pos);
+long wxTextCtrl_XYToPosition(const wxTextCtrl * self, long x, long y);
+
 // CLASS: wxToolBar
 wxToolBar *wxToolBar_new();
 wxToolBar *wxToolBar_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
@@ -650,6 +869,7 @@ void wxWindow_AddChild(wxWindow * self, wxWindow * child);
 bool wxWindow_DestroyChildren(wxWindow * self);
 wxWindow * wxWindow_FindWindow(const wxWindow * self, long id);
 wxWindow * wxWindow_FindWindow1(const wxWindow * self, const wxString * name);
+const wxWindowList * wxWindow_GetChildren1(const wxWindow * self);
 void wxWindow_RemoveChild(wxWindow * self, wxWindow * child);
 wxWindow * wxWindow_GetGrandParent(const wxWindow * self);
 wxWindow * wxWindow_GetNextSibling(const wxWindow * self);
@@ -770,11 +990,13 @@ void wxWindow_ClearBackground(wxWindow * self);
 void wxWindow_Freeze(wxWindow * self);
 void wxWindow_Thaw(wxWindow * self);
 bool wxWindow_IsFrozen(const wxWindow * self);
+wxColour *wxWindow_GetBackgroundColour(const wxWindow * self);
 int wxWindow_GetCharHeight(const wxWindow * self);
 int wxWindow_GetCharWidth(const wxWindow * self);
 #if wxCHECK_VERSION(3, 1, 0)
 wxSize *wxWindow_GetDPI(const wxWindow * self);
 #endif
+wxColour *wxWindow_GetForegroundColour(const wxWindow * self);
 void wxWindow_GetTextExtent(const wxWindow * self, const wxString * string, int * w, int * h, int * descent, int * external_leading, const wxFont * font);
 wxSize *wxWindow_GetTextExtent1(const wxWindow * self, const wxString * string);
 wxRect *wxWindow_GetUpdateClientRect(const wxWindow * self);

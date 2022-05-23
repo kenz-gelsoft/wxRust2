@@ -4,6 +4,9 @@ use std::os::raw::c_int;
 use wx;
 use wx::methods::*;
 
+// mod activityindicator;
+// use activityindicator::*;
+
 enum Widgets {
     ClearLog = 100,
     Quit,
@@ -86,15 +89,31 @@ fn main() {
 #[derive(Clone)]
 struct WidgetsFrame {
     base: wx::Frame,
+    m_panel: wx::Panel,
+    m_book: wx::Notebook,
+    // current_page: Option<ActivityIndicatorWidgetsPage>,
 }
 impl WidgetsFrame {
     fn new(title: &str) -> Self {
         let base = wx::Frame::builder(wx::Window::none()).title(title).build();
-        let frame = WidgetsFrame { base: base };
+        let panel = wx::Panel::builder(Some(&base)).build();
+
+        let style = wx::BK_DEFAULT;
+        let book = wx::Notebook::builder(Some(&panel))
+            .id(Widgets::BookCtrl.into())
+            .style(style.into())
+            .build();
+
+        let mut frame = WidgetsFrame {
+            base: base,
+            m_panel: panel,
+            m_book: book,
+            // current_page: None,
+        };
         frame.on_create();
         frame
     }
-    fn on_create(&self) {
+    fn on_create(&mut self) {
         let mbar = wx::MenuBar::new(0);
 
         let menu_widget = wx::Menu::new()
@@ -167,25 +186,16 @@ impl WidgetsFrame {
         mbar.check(Widgets::VariantNormal.into(), true);
 
         // create controls
-        let panel = wx::Panel::builder(Some(&self.base)).build();
-
         let sizer_top = wx::BoxSizer::new(wx::VERTICAL);
-
-        let style = wx::BK_DEFAULT;
-
-        let book = wx::Notebook::builder(Some(&panel))
-            .id(Widgets::BookCtrl.into())
-            .style(style.into())
-            .build();
 
         self.init_book();
 
         let sizer_down = wx::BoxSizer::new(wx::VERTICAL);
 
         let sizer_btns = wx::BoxSizer::new(wx::HORIZONTAL);
-        let btn = wx::Button::builder(Some(&panel))
+        let btn = wx::Button::builder(Some(&self.m_panel))
             .id(Widgets::Quit.into())
-            .title("E&xit")
+            .label("E&xit")
             .build();
         sizer_btns.add_window_int(Some(&btn), 0, 0, 0, wx::Object::none());
         sizer_down.add_sizer_sizerflags(
@@ -194,7 +204,7 @@ impl WidgetsFrame {
         );
 
         sizer_top.add_window_sizerflags(
-            Some(&book),
+            Some(&self.m_book),
             wx::SizerFlags::new(1)
                 .expand()
                 .double_border(wx::ALL & !(wx::TOP | wx::BOTTOM)),
@@ -207,14 +217,62 @@ impl WidgetsFrame {
                 .double_border(wx::ALL & !wx::TOP),
         );
 
-        panel.set_sizer(Some(&sizer_top), true);
+        self.m_panel.set_sizer(Some(&sizer_top), true);
 
         // wxPersistentRegisterAndRestore
-        let size_min = panel.get_best_size();
+        let size_min = self.m_panel.get_best_size();
 
         self.base.set_client_size_size(&size_min);
         self.base.set_min_client_size(&size_min);
     }
 
-    fn init_book(&self) {}
+    // fn current_page(&self) -> wx::Panel {
+    //     // FIXME: figure out a way to avoid cloning wx::Window structs
+    //     self.current_page.as_ref().unwrap().base.clone()
+    // }
+
+    fn connect_to_widget_events(&self) {
+        // TODO
+    }
+
+    fn init_book(&mut self) {
+        // self.current_page = Some(ActivityIndicatorWidgetsPage::new(&self.m_book));
+
+        // self.m_book.add_page(
+        //     Some(&self.current_page()),
+        //     "ActivityIndicator",
+        //     false,
+        //     wx::BookCtrlBase::NO_IMAGE,
+        // );
+
+        let self_copy = self.clone();
+        self.base.bind(
+            wx::RustEvent::BookctrlPageChanged,
+            move |event: &wx::BookCtrlEvent| {
+                self_copy.on_page_changed(event);
+            },
+        );
+    }
+
+    fn on_page_changed(&self, event: &wx::BookCtrlEvent) {
+        // let sel = event.get_selection();
+
+        // let menu_bar = self.base.get_menu_bar().get().unwrap();
+        // if let Some(item) = menu_bar.find_item((Widgets::GoToPage as c_int) + sel, wx::Menu::none())
+        // {
+        //     item.check(true);
+        // }
+
+        // menu_bar.check(Widgets::BusyCursor.into(), false);
+
+        // let current_page = self.current_page();
+        // if current_page.get_children().is_empty() {
+        //     // FIXME: figure out a way to avoid cloning wx::Window structs
+        //     let mut mutable_copy = self.current_page.as_ref().unwrap().clone();
+        //     mutable_copy.create_content();
+        //     current_page.layout();
+
+        //     self.connect_to_widget_events();
+        // }
+    }
 }

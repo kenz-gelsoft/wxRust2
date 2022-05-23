@@ -238,12 +238,17 @@ class RustMethodBinding:
                 returns = '*mut c_void'
             else:
                 returns = wrapped[2:]
-                if (self.is_ctor or
-                    self.__model.returns.is_ptr_to_binding()):
+                if self.__model.returns.is_ref_to_binding():
+                    returns = '%sIsOwned<false>' % (returns,)
+                elif (self.is_ctor or
+                      self.__model.returns.is_ptr_to_binding()):
                     if self.is_ctor:
                         returns = '%sIsOwned<OWNED>' % (returns,)
                     elif not self.__model.returns_owned():
-                        returns = 'WeakRef<%s>' % (returns,)
+                        if self.__model.returns_trackable():
+                            returns = 'WeakRef<%s>' % (returns,)
+                        else:
+                            returns = 'Option<%sIsOwned<false>>' % (returns,)
                 if self.__model.returns.is_str():
                     returns = 'String'
         return ' -> %s' % (returns,)
@@ -377,7 +382,12 @@ class RustMethodBinding:
         if wrapped:
             if self.__model.returns_owned():
                 return '%s::from_ptr(%s)' % (wrapped[2:], call)
-            return 'WeakRef::<%s>::from(%s)' % (wrapped[2:], call)
+            elif self.__model.returns.is_ref_to_binding():
+                return '%sIsOwned::from_ptr(%s)' % (wrapped[2:], call)
+            elif self.__model.returns_trackable():
+                return 'WeakRef::<%s>::from(%s)' % (wrapped[2:], call)
+            else:
+                return '%s::option_from(%s)' % (wrapped[2:], call)
         return call
 
     def _uses_ptr_type(self):
@@ -497,7 +507,8 @@ class CxxMethodBinding:
                 self.__model.name(without_index=True),
                 new_params_or_expr,
             )
-        if self.__model.maybe_returns_self():
+        if (self.__model.maybe_returns_self() or
+            self.__model.returns.is_ref_to_binding()):
             yield '    return &(%s);' % (new_params_or_expr,)
         elif wrapped:
             yield '    return new %s(%s);' % (wrapped, new_params_or_expr)

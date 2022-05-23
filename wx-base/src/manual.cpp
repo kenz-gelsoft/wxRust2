@@ -1,3 +1,5 @@
+#include <wx/bookctrl.h>
+
 #include "manual.h"
 
 // wxApp
@@ -18,18 +20,41 @@ void wxObject_delete(wxObject *self) {
 }
 
 // wxEvtHandler
-wxEventTypeTag<wxCommandEvent> TypeTagOf(int eventType) {
+// TODO: auto generate
+enum WxRustEvent {
+    RUST_EVT_BOOKCTRL_PAGE_CHANGED,
+    RUST_EVT_BUTTON,
+    RUST_EVT_MENU,
+};
+template<typename T> wxEventTypeTag<T> TypeTagOf(int eventType) {
+    return wxEVT_NULL;
+}
+template<> wxEventTypeTag<wxBookCtrlEvent> TypeTagOf(int eventType) {
     switch (eventType) {
-    case wxRUST_EVT_BUTTON:
+    case RUST_EVT_BOOKCTRL_PAGE_CHANGED:
+        return wxEVT_BOOKCTRL_PAGE_CHANGED;
+    }
+    return wxEVT_NULL;
+}
+template<> wxEventTypeTag<wxCommandEvent> TypeTagOf(int eventType) {
+    switch (eventType) {
+    case RUST_EVT_BUTTON:
         return wxEVT_BUTTON;
-    case wxRUST_EVT_MENU:
+    case RUST_EVT_MENU:
         return wxEVT_MENU;
     }
     return wxEVT_NULL;
 }
+template<typename T> void BindIfEventIs(wxEvtHandler *self, int eventType, void *aFn, void *aParam) {
+    wxEventTypeTag<T> typeTag = TypeTagOf<T>(eventType);
+    if (typeTag != wxEVT_NULL) {
+        CxxClosure<T &> functor(aFn, aParam);
+        self->Bind(typeTag, functor);
+    }
+}
 void wxEvtHandler_Bind(wxEvtHandler *self, int eventType, void *aFn, void *aParam) {
-    CxxClosure<wxCommandEvent &> functor(aFn, aParam);
-    self->Bind(TypeTagOf(eventType), functor);
+    BindIfEventIs<wxBookCtrlEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxCommandEvent>(self, eventType, aFn, aParam);
 }
 
 // String

@@ -1,11 +1,14 @@
 wxml_files = [
+    #'wxml/classwx_activity_indicator.xml',
     'wxml/classwx_any_button.xml',
     'wxml/classwx_art_provider.xml',
     'wxml/classwx_bitmap.xml',
     'wxml/classwx_book_ctrl_base.xml',
+    'wxml/classwx_book_ctrl_event.xml',
     'wxml/classwx_box_sizer.xml',
     'wxml/classwx_button.xml',
     'wxml/classwx_check_box.xml',
+    'wxml/classwx_colour.xml',
     'wxml/classwx_command_event.xml',
     'wxml/classwx_control.xml',
     'wxml/classwx_event.xml',
@@ -15,11 +18,14 @@ wxml_files = [
     'wxml/classwx_list_box.xml',
     'wxml/classwx_menu.xml',
     'wxml/classwx_menu_bar.xml',
+    'wxml/classwx_menu_item.xml',
     'wxml/classwx_non_owned_window.xml',
     'wxml/classwx_notebook.xml',
+    'wxml/classwx_notify_event.xml',
     'wxml/classwx_object.xml',
     'wxml/classwx_panel.xml',
     'wxml/classwx_point.xml',
+    'wxml/classwx_radio_box.xml',
     'wxml/classwx_rect.xml',
     'wxml/classwx_size.xml',
     'wxml/classwx_sizer.xml',
@@ -27,6 +33,9 @@ wxml_files = [
     'wxml/classwx_static_bitmap.xml',
     'wxml/classwx_static_box.xml',
     'wxml/classwx_static_box_sizer.xml',
+    'wxml/classwx_static_text.xml',
+    'wxml/classwx_text_attr.xml',
+    'wxml/classwx_text_ctrl.xml',
     'wxml/classwx_tool_bar.xml',
     'wxml/classwx_top_level_window.xml',
     'wxml/classwx_validator.xml',
@@ -79,6 +88,17 @@ blocklist = [
 wx31 = [
     'GetDefaultSize',
 ]
+[types.wxColour]
+blocklist = [
+    'operator=',
+    'operator==',
+    'operator!=',
+    'ChangeLightness',
+]
+wx31 = [
+    'GetLuminance',
+    'IsSolid',
+]
 [types.wxControl]
 wx31 = [
     'GetSizeFromText',
@@ -127,6 +147,31 @@ mac = [
     'MacGetCommonMenuBar',
     'MacSetCommonMenuBar',
     'OSXGetAppleMenu',
+]
+[types.wxMenuItem]
+blocklist = [
+    'GetLabelFromText',
+    # Probably documentation mismatch
+    'GetBitmap',
+    'SetBitmap',
+    # Deprecated, maybe removed
+    'GetLabel',
+    'GetName',
+    'GetText',
+    'SetText',
+]
+windows = [
+    'GetBackgroundColour',
+    'GetDisabledBitmap',
+    'GetFont',
+    'GetMarginWidth',
+    'GetTextColour',
+    'SetBackgroundColour',
+    'SetBitmaps',
+    'SetDisabledBitmap',
+    'SetFont',
+    'SetMarginWidth',
+    'SetTextColour',
 ]
 [types.wxNonOwnedWindow]
 library = 'core'
@@ -224,6 +269,22 @@ blocklist = [
     'wxStaticBox2',
     'Create1',
 ]
+[types.wxTextAttr]
+blocklist = [
+    'operator=',
+    # TODO: wxArrayInt is not supported
+    'GetTabs',
+]
+wx31 = [
+    'GetUnderlineColour',
+]
+[types.wxTextCtrl]
+blocklist = [
+    'operator<<',
+    'operator<<1',
+    'operator<<2',
+    'operator<<4',
+]
 [types.wxToolBar]
 blocklist = [
     # const getter
@@ -257,7 +318,6 @@ returns_owned = [
 blocklist = [
     # TODO: dont return reference/temp value from self
     'GetChildren',
-    'GetChildren1',
     'GetCursor',
     'GetUpdateRegion',
 ]

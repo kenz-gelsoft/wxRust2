@@ -23,7 +23,7 @@ impl WrapSizerFrame {
         let panel = wx::Panel::builder(Some(&frame)).build();
         let ok_button = wx::Button::builder(Some(&panel))
             .id(wx::ID_OK)
-            .title("")
+            .label("")
             .build();
         let new_frame = WrapSizerFrame {
             base: frame,
@@ -56,7 +56,7 @@ impl WrapSizerFrame {
         let sizer_mid_wrap = wx::WrapSizer::new(wx::HORIZONTAL, wx::WRAPSIZER_DEFAULT_FLAGS);
         for n_check in 0..6 {
             let chk = wx::CheckBox::builder(Some(&self.m_panel))
-                .title(&format!("Option {}", n_check))
+                .label(&format!("Option {}", n_check))
                 .build();
             sizer_mid_wrap
                 .add_window_sizerflags(Some(&chk), wx::SizerFlags::new(0).centre().border(wx::ALL));
@@ -90,7 +90,7 @@ impl WrapSizerFrame {
         sizer_bottom_box.add_window_sizerflags(
             Some(
                 &wx::CheckBox::builder(Some(&self.m_panel))
-                    .title("A much longer option...")
+                    .label("A much longer option...")
                     .build(),
             ),
             wx::SizerFlags::new(0).border(wx::ALL),
@@ -107,7 +107,7 @@ impl WrapSizerFrame {
         );
         let copy_self = self.clone();
         self.m_ok_button
-            .bind(wx::RUST_EVT_BUTTON, move |_: &wx::CommandEvent| {
+            .bind(wx::RustEvent::Button, move |_: &wx::CommandEvent| {
                 copy_self.on_button()
             });
 

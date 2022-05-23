@@ -6,6 +6,7 @@ use std::mem;
 use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
 use std::ptr;
 
+use super::*;
 use methods::*;
 
 use wx_base::methods::*;
@@ -142,6 +143,34 @@ impl<const OWNED: bool> WindowMethods for BookCtrlBaseIsOwned<OWNED> {
     }
 }
 
+// wxBookCtrlEvent
+wx_class! { BookCtrlEvent =
+    BookCtrlEventIsOwned<true>(wxBookCtrlEvent) impl
+        BookCtrlEventMethods,
+        NotifyEventMethods,
+        // CommandEventMethods,
+        EventMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> BookCtrlEventIsOwned<OWNED> {
+    // NOT_SUPPORTED: fn wxBookCtrlEvent()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for BookCtrlEventIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+impl<const OWNED: bool> CommandEventMethods for BookCtrlEventIsOwned<OWNED> {
+    fn get_selection(&self) -> c_int {
+        unsafe { ffi::wxBookCtrlEvent_GetSelection(self.as_ptr()) }
+    }
+}
+
 // wxBoxSizer
 wx_class! { BoxSizer =
     BoxSizerIsOwned<true>(wxBoxSizer) impl
@@ -242,6 +271,42 @@ impl<const OWNED: bool> CheckBoxIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+
+// wxColour
+wx_class! { Colour =
+    ColourIsOwned<true>(wxColour) impl
+        ColourMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> ColourIsOwned<OWNED> {
+    pub fn new() -> ColourIsOwned<OWNED> {
+        unsafe { ColourIsOwned(ffi::wxColour_new()) }
+    }
+    // NOT_SUPPORTED: fn wxColour1()
+    pub fn new_with_str(colour_name: &str) -> ColourIsOwned<OWNED> {
+        unsafe {
+            let colour_name = wx_base::wx_string_from(colour_name);
+            ColourIsOwned(ffi::wxColour_new2(colour_name))
+        }
+    }
+    // NOT_SUPPORTED: fn wxColour3()
+    pub fn new_with_colour<C: ColourMethods>(colour: &C) -> ColourIsOwned<OWNED> {
+        unsafe {
+            let colour = colour.as_ptr();
+            ColourIsOwned(ffi::wxColour_new4(colour))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for ColourIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
     }
 }
 
@@ -488,6 +553,54 @@ impl<const OWNED: bool> MenuBarIsOwned<OWNED> {
     }
 }
 
+// wxMenuItem
+wx_class! { MenuItem =
+    MenuItemIsOwned<true>(wxMenuItem) impl
+        MenuItemMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> MenuItemIsOwned<OWNED> {
+    pub fn new<M: MenuMethods, M2: MenuMethods>(
+        parent_menu: Option<&M>,
+        id: c_int,
+        text: &str,
+        help_string: &str,
+        kind: c_int,
+        sub_menu: Option<&M2>,
+    ) -> MenuItemIsOwned<OWNED> {
+        unsafe {
+            let parent_menu = match parent_menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let text = wx_base::wx_string_from(text);
+            let help_string = wx_base::wx_string_from(help_string);
+            let sub_menu = match sub_menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            MenuItemIsOwned(ffi::wxMenuItem_new(
+                parent_menu,
+                id,
+                text,
+                help_string,
+                kind,
+                sub_menu,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for MenuItemIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
 // wxNonOwnedWindow
 wx_class! { NonOwnedWindow =
     NonOwnedWindowIsOwned<true>(wxNonOwnedWindow) impl
@@ -544,6 +657,28 @@ impl<const OWNED: bool> BookCtrlBaseMethods for NotebookIsOwned<OWNED> {
 }
 impl<const OWNED: bool> WindowMethods for NotebookIsOwned<OWNED> {
     // BLOCKED: fn Create()
+}
+
+// wxNotifyEvent
+wx_class! { NotifyEvent =
+    NotifyEventIsOwned<true>(wxNotifyEvent) impl
+        NotifyEventMethods,
+        CommandEventMethods,
+        EventMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> NotifyEventIsOwned<OWNED> {
+    // NOT_SUPPORTED: fn wxNotifyEvent()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for NotifyEventIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
 }
 
 // wxPanel
@@ -628,6 +763,68 @@ impl<const OWNED: bool> Drop for PointIsOwned<OWNED> {
         if OWNED {
             unsafe { ffi::wxPoint_delete(self.0) }
         }
+    }
+}
+
+// wxRadioBox
+wx_class! { RadioBox =
+    RadioBoxIsOwned<true>(wxRadioBox) impl
+        RadioBoxMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> RadioBoxIsOwned<OWNED> {
+    pub fn new_2step() -> RadioBoxIsOwned<OWNED> {
+        unsafe { RadioBoxIsOwned(ffi::wxRadioBox_new()) }
+    }
+    // NOT_SUPPORTED: fn wxRadioBox1()
+    pub fn new<
+        W: WindowMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        A: ArrayStringMethods,
+        V: ValidatorMethods,
+    >(
+        parent: Option<&W>,
+        id: c_int,
+        label: &str,
+        pos: &P,
+        size: &S,
+        choices: &A,
+        major_dimension: c_int,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> RadioBoxIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let label = wx_base::wx_string_from(label);
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let choices = choices.as_ptr();
+            let validator = validator.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            RadioBoxIsOwned(ffi::wxRadioBox_new2(
+                parent,
+                id,
+                label,
+                pos,
+                size,
+                choices,
+                major_dimension,
+                style,
+                validator,
+                name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
     }
 }
 
@@ -861,6 +1058,118 @@ impl<const OWNED: bool> StaticBoxSizerIsOwned<OWNED> {
             };
             let label = wx_base::wx_string_from(label);
             StaticBoxSizerIsOwned(ffi::wxStaticBoxSizer_new1(orient, parent, label))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
+// wxStaticText
+wx_class! { StaticText =
+    StaticTextIsOwned<true>(wxStaticText) impl
+        StaticTextMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> StaticTextIsOwned<OWNED> {
+    pub fn new_2step() -> StaticTextIsOwned<OWNED> {
+        unsafe { StaticTextIsOwned(ffi::wxStaticText_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        label: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> StaticTextIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let label = wx_base::wx_string_from(label);
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            StaticTextIsOwned(ffi::wxStaticText_new1(
+                parent, id, label, pos, size, style, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
+// wxTextAttr
+wx_class! { TextAttr =
+    TextAttrIsOwned<true>(wxTextAttr) impl
+        TextAttrMethods
+}
+impl<const OWNED: bool> TextAttrIsOwned<OWNED> {
+    pub fn new() -> TextAttrIsOwned<OWNED> {
+        unsafe { TextAttrIsOwned(ffi::wxTextAttr_new()) }
+    }
+    // NOT_SUPPORTED: fn wxTextAttr1()
+    pub fn new_with_textattr<T: TextAttrMethods>(attr: &T) -> TextAttrIsOwned<OWNED> {
+        unsafe {
+            let attr = attr.as_ptr();
+            TextAttrIsOwned(ffi::wxTextAttr_new2(attr))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for TextAttrIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxTextAttr_delete(self.0) }
+        }
+    }
+}
+
+// wxTextCtrl
+wx_class! { TextCtrl =
+    TextCtrlIsOwned<true>(wxTextCtrl) impl
+        TextCtrlMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> TextCtrlIsOwned<OWNED> {
+    pub fn new_2step() -> TextCtrlIsOwned<OWNED> {
+        unsafe { TextCtrlIsOwned(ffi::wxTextCtrl_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        value: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> TextCtrlIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let value = wx_base::wx_string_from(value);
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            TextCtrlIsOwned(ffi::wxTextCtrl_new1(
+                parent, id, value, pos, size, style, validator, name,
+            ))
         }
     }
     pub fn none() -> Option<&'static Self> {

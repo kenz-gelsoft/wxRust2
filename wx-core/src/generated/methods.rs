@@ -354,6 +354,19 @@ pub trait BookCtrlBaseMethods: ControlMethods {
     }
 }
 
+// wxBookCtrlEvent
+pub trait BookCtrlEventMethods: NotifyEventMethods {
+    fn get_old_selection(&self) -> c_int {
+        unsafe { ffi::wxBookCtrlEvent_GetOldSelection(self.as_ptr()) }
+    }
+    fn set_old_selection(&self, page: c_int) {
+        unsafe { ffi::wxBookCtrlEvent_SetOldSelection(self.as_ptr(), page) }
+    }
+    fn set_selection(&self, page: c_int) {
+        unsafe { ffi::wxBookCtrlEvent_SetSelection(self.as_ptr(), page) }
+    }
+}
+
 // wxBoxSizer
 pub trait BoxSizerMethods: SizerMethods {
     fn get_orientation(&self) -> c_int {
@@ -474,6 +487,65 @@ pub trait CheckBoxMethods: ControlMethods {
         unsafe { ffi::wxCheckBox_SetValue(self.as_ptr(), state) }
     }
     // NOT_SUPPORTED: fn Set3StateValue()
+}
+
+// wxColour
+pub trait ColourMethods: ObjectMethods {
+    // NOT_SUPPORTED: fn Alpha()
+    // NOT_SUPPORTED: fn Blue()
+    fn get_as_string(&self, flags: c_long) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxColour_GetAsString(self.as_ptr(), flags)) }
+    }
+    // NOT_SUPPORTED: fn SetRGB()
+    // NOT_SUPPORTED: fn SetRGBA()
+    // NOT_SUPPORTED: fn GetRGB()
+    // NOT_SUPPORTED: fn GetRGBA()
+    fn get_luminance(&self) -> c_double {
+        unsafe { ffi::wxColour_GetLuminance(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetPixel()
+    // NOT_SUPPORTED: fn Green()
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxColour_IsOk(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn Red()
+    fn is_solid(&self) -> bool {
+        unsafe { ffi::wxColour_IsSolid(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn Set()
+    // NOT_SUPPORTED: fn Set1()
+    fn set(&self, str: &str) -> bool {
+        unsafe {
+            let str = wx_base::wx_string_from(str);
+            ffi::wxColour_Set2(self.as_ptr(), str)
+        }
+    }
+    // BLOCKED: fn operator!=()
+    // BLOCKED: fn operator=()
+    // BLOCKED: fn operator==()
+    // NOT_SUPPORTED: fn MakeDisabled()
+    // BLOCKED: fn ChangeLightness()
+    fn make_mono(r: *mut c_void, g: *mut c_void, b: *mut c_void, on: bool) {
+        unsafe { ffi::wxColour_MakeMono(r, g, b, on) }
+    }
+    // NOT_SUPPORTED: fn MakeDisabled1()
+    fn make_grey(r: *mut c_void, g: *mut c_void, b: *mut c_void) {
+        unsafe { ffi::wxColour_MakeGrey(r, g, b) }
+    }
+    fn make_grey_double(
+        r: *mut c_void,
+        g: *mut c_void,
+        b: *mut c_void,
+        weight_r: c_double,
+        weight_g: c_double,
+        weight_b: c_double,
+    ) {
+        unsafe { ffi::wxColour_MakeGrey1(r, g, b, weight_r, weight_g, weight_b) }
+    }
+    // NOT_SUPPORTED: fn AlphaBlend()
+    fn change_lightness(r: *mut c_void, g: *mut c_void, b: *mut c_void, ialpha: c_int) {
+        unsafe { ffi::wxColour_ChangeLightness1(r, g, b, ialpha) }
+    }
 }
 
 // wxCommandEvent
@@ -830,11 +902,23 @@ pub trait ListBoxMethods: ControlMethods {
 // wxMenu
 pub trait MenuMethods: EvtHandlerMethods {
     // DTOR: fn ~wxMenu()
-    fn append_int_str(&self, id: c_int, item: &str, help_string: &str, kind: c_int) -> *mut c_void {
+    fn append_int_str(
+        &self,
+        id: c_int,
+        item: &str,
+        help_string: &str,
+        kind: c_int,
+    ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
             let item = wx_base::wx_string_from(item);
             let help_string = wx_base::wx_string_from(help_string);
-            ffi::wxMenu_Append(self.as_ptr(), id, item, help_string, kind)
+            MenuItem::option_from(ffi::wxMenu_Append(
+                self.as_ptr(),
+                id,
+                item,
+                help_string,
+                kind,
+            ))
         }
     }
     fn append_int_menu<M: MenuMethods>(
@@ -843,7 +927,7 @@ pub trait MenuMethods: EvtHandlerMethods {
         item: &str,
         sub_menu: Option<&M>,
         help_string: &str,
-    ) -> *mut c_void {
+    ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
             let item = wx_base::wx_string_from(item);
             let sub_menu = match sub_menu {
@@ -851,35 +935,60 @@ pub trait MenuMethods: EvtHandlerMethods {
                 None => ptr::null_mut(),
             };
             let help_string = wx_base::wx_string_from(help_string);
-            ffi::wxMenu_Append1(self.as_ptr(), id, item, sub_menu, help_string)
+            MenuItem::option_from(ffi::wxMenu_Append1(
+                self.as_ptr(),
+                id,
+                item,
+                sub_menu,
+                help_string,
+            ))
         }
     }
-    fn append_menuitem(&self, menu_item: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxMenu_Append2(self.as_ptr(), menu_item) }
+    fn append_menuitem<M: MenuItemMethods>(
+        &self,
+        menu_item: Option<&M>,
+    ) -> Option<MenuItemIsOwned<false>> {
+        unsafe {
+            let menu_item = match menu_item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            MenuItem::option_from(ffi::wxMenu_Append2(self.as_ptr(), menu_item))
+        }
     }
-    fn append_check_item(&self, id: c_int, item: &str, help: &str) -> *mut c_void {
+    fn append_check_item(
+        &self,
+        id: c_int,
+        item: &str,
+        help: &str,
+    ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
             let item = wx_base::wx_string_from(item);
             let help = wx_base::wx_string_from(help);
-            ffi::wxMenu_AppendCheckItem(self.as_ptr(), id, item, help)
+            MenuItem::option_from(ffi::wxMenu_AppendCheckItem(self.as_ptr(), id, item, help))
         }
     }
-    fn append_radio_item(&self, id: c_int, item: &str, help: &str) -> *mut c_void {
+    fn append_radio_item(
+        &self,
+        id: c_int,
+        item: &str,
+        help: &str,
+    ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
             let item = wx_base::wx_string_from(item);
             let help = wx_base::wx_string_from(help);
-            ffi::wxMenu_AppendRadioItem(self.as_ptr(), id, item, help)
+            MenuItem::option_from(ffi::wxMenu_AppendRadioItem(self.as_ptr(), id, item, help))
         }
     }
-    fn append_separator(&self) -> *mut c_void {
-        unsafe { ffi::wxMenu_AppendSeparator(self.as_ptr()) }
+    fn append_separator(&self) -> Option<MenuItemIsOwned<false>> {
+        unsafe { MenuItem::option_from(ffi::wxMenu_AppendSeparator(self.as_ptr())) }
     }
     fn append_sub_menu<M: MenuMethods>(
         &self,
         submenu: Option<&M>,
         text: &str,
         help: &str,
-    ) -> *mut c_void {
+    ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
             let submenu = match submenu {
                 Some(r) => r.as_ptr(),
@@ -887,7 +996,12 @@ pub trait MenuMethods: EvtHandlerMethods {
             };
             let text = wx_base::wx_string_from(text);
             let help = wx_base::wx_string_from(help);
-            ffi::wxMenu_AppendSubMenu(self.as_ptr(), submenu, text, help)
+            MenuItem::option_from(ffi::wxMenu_AppendSubMenu(
+                self.as_ptr(),
+                submenu,
+                text,
+                help,
+            ))
         }
     }
     fn break_(&self) {
@@ -899,20 +1013,32 @@ pub trait MenuMethods: EvtHandlerMethods {
     fn delete_int(&self, id: c_int) -> bool {
         unsafe { ffi::wxMenu_Delete(self.as_ptr(), id) }
     }
-    fn delete_menuitem(&self, item: *mut c_void) -> bool {
-        unsafe { ffi::wxMenu_Delete1(self.as_ptr(), item) }
+    fn delete_menuitem<M: MenuItemMethods>(&self, item: Option<&M>) -> bool {
+        unsafe {
+            let item = match item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxMenu_Delete1(self.as_ptr(), item)
+        }
     }
     fn destroy_int(&self, id: c_int) -> bool {
         unsafe { ffi::wxMenu_Destroy(self.as_ptr(), id) }
     }
-    fn destroy_menuitem(&self, item: *mut c_void) -> bool {
-        unsafe { ffi::wxMenu_Destroy1(self.as_ptr(), item) }
+    fn destroy_menuitem<M: MenuItemMethods>(&self, item: Option<&M>) -> bool {
+        unsafe {
+            let item = match item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxMenu_Destroy1(self.as_ptr(), item)
+        }
     }
     fn enable(&self, id: c_int, enable: bool) {
         unsafe { ffi::wxMenu_Enable(self.as_ptr(), id, enable) }
     }
-    fn find_child_item(&self, id: c_int, pos: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxMenu_FindChildItem(self.as_ptr(), id, pos) }
+    fn find_child_item(&self, id: c_int, pos: *mut c_void) -> Option<MenuItemIsOwned<false>> {
+        unsafe { MenuItem::option_from(ffi::wxMenu_FindChildItem(self.as_ptr(), id, pos)) }
     }
     fn find_item_str(&self, item_string: &str) -> c_int {
         unsafe {
@@ -920,17 +1046,21 @@ pub trait MenuMethods: EvtHandlerMethods {
             ffi::wxMenu_FindItem(self.as_ptr(), item_string)
         }
     }
-    fn find_item_int<M: MenuMethods>(&self, id: c_int, menu: Option<&M>) -> *mut c_void {
+    fn find_item_int<M: MenuMethods>(
+        &self,
+        id: c_int,
+        menu: Option<&M>,
+    ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
             let menu = match menu {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxMenu_FindItem1(self.as_ptr(), id, menu)
+            MenuItem::option_from(ffi::wxMenu_FindItem1(self.as_ptr(), id, menu))
         }
     }
-    fn find_item_by_position(&self, position: usize) -> *mut c_void {
-        unsafe { ffi::wxMenu_FindItemByPosition(self.as_ptr(), position) }
+    fn find_item_by_position(&self, position: usize) -> Option<MenuItemIsOwned<false>> {
+        unsafe { MenuItem::option_from(ffi::wxMenu_FindItemByPosition(self.as_ptr(), position)) }
     }
     fn get_help_string(&self, id: c_int) -> String {
         unsafe { wx_base::from_wx_string(ffi::wxMenu_GetHelpString(self.as_ptr(), id)) }
@@ -949,8 +1079,18 @@ pub trait MenuMethods: EvtHandlerMethods {
     fn get_title(&self) -> String {
         unsafe { wx_base::from_wx_string(ffi::wxMenu_GetTitle(self.as_ptr())) }
     }
-    fn insert_menuitem(&self, pos: usize, menu_item: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxMenu_Insert(self.as_ptr(), pos, menu_item) }
+    fn insert_menuitem<M: MenuItemMethods>(
+        &self,
+        pos: usize,
+        menu_item: Option<&M>,
+    ) -> Option<MenuItemIsOwned<false>> {
+        unsafe {
+            let menu_item = match menu_item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            MenuItem::option_from(ffi::wxMenu_Insert(self.as_ptr(), pos, menu_item))
+        }
     }
     fn insert_int_str(
         &self,
@@ -959,11 +1099,18 @@ pub trait MenuMethods: EvtHandlerMethods {
         item: &str,
         help_string: &str,
         kind: c_int,
-    ) -> *mut c_void {
+    ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
             let item = wx_base::wx_string_from(item);
             let help_string = wx_base::wx_string_from(help_string);
-            ffi::wxMenu_Insert1(self.as_ptr(), pos, id, item, help_string, kind)
+            MenuItem::option_from(ffi::wxMenu_Insert1(
+                self.as_ptr(),
+                pos,
+                id,
+                item,
+                help_string,
+                kind,
+            ))
         }
     }
     fn insert_int_menu<M: MenuMethods>(
@@ -973,7 +1120,7 @@ pub trait MenuMethods: EvtHandlerMethods {
         text: &str,
         submenu: Option<&M>,
         help: &str,
-    ) -> *mut c_void {
+    ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
             let text = wx_base::wx_string_from(text);
             let submenu = match submenu {
@@ -981,7 +1128,14 @@ pub trait MenuMethods: EvtHandlerMethods {
                 None => ptr::null_mut(),
             };
             let help = wx_base::wx_string_from(help);
-            ffi::wxMenu_Insert2(self.as_ptr(), pos, id, text, submenu, help)
+            MenuItem::option_from(ffi::wxMenu_Insert2(
+                self.as_ptr(),
+                pos,
+                id,
+                text,
+                submenu,
+                help,
+            ))
         }
     }
     fn insert_check_item(
@@ -990,11 +1144,17 @@ pub trait MenuMethods: EvtHandlerMethods {
         id: c_int,
         item: &str,
         help_string: &str,
-    ) -> *mut c_void {
+    ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
             let item = wx_base::wx_string_from(item);
             let help_string = wx_base::wx_string_from(help_string);
-            ffi::wxMenu_InsertCheckItem(self.as_ptr(), pos, id, item, help_string)
+            MenuItem::option_from(ffi::wxMenu_InsertCheckItem(
+                self.as_ptr(),
+                pos,
+                id,
+                item,
+                help_string,
+            ))
         }
     }
     fn insert_radio_item(
@@ -1003,15 +1163,21 @@ pub trait MenuMethods: EvtHandlerMethods {
         id: c_int,
         item: &str,
         help_string: &str,
-    ) -> *mut c_void {
+    ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
             let item = wx_base::wx_string_from(item);
             let help_string = wx_base::wx_string_from(help_string);
-            ffi::wxMenu_InsertRadioItem(self.as_ptr(), pos, id, item, help_string)
+            MenuItem::option_from(ffi::wxMenu_InsertRadioItem(
+                self.as_ptr(),
+                pos,
+                id,
+                item,
+                help_string,
+            ))
         }
     }
-    fn insert_separator(&self, pos: usize) -> *mut c_void {
-        unsafe { ffi::wxMenu_InsertSeparator(self.as_ptr(), pos) }
+    fn insert_separator(&self, pos: usize) -> Option<MenuItemIsOwned<false>> {
+        unsafe { MenuItem::option_from(ffi::wxMenu_InsertSeparator(self.as_ptr(), pos)) }
     }
     fn is_checked(&self, id: c_int) -> bool {
         unsafe { ffi::wxMenu_IsChecked(self.as_ptr(), id) }
@@ -1020,8 +1186,17 @@ pub trait MenuMethods: EvtHandlerMethods {
         unsafe { ffi::wxMenu_IsEnabled(self.as_ptr(), id) }
     }
     // NOT_SUPPORTED: fn MSWCommand()
-    fn prepend_menuitem(&self, item: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxMenu_Prepend(self.as_ptr(), item) }
+    fn prepend_menuitem<M: MenuItemMethods>(
+        &self,
+        item: Option<&M>,
+    ) -> Option<MenuItemIsOwned<false>> {
+        unsafe {
+            let item = match item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            MenuItem::option_from(ffi::wxMenu_Prepend(self.as_ptr(), item))
+        }
     }
     fn prepend_int_str(
         &self,
@@ -1029,11 +1204,17 @@ pub trait MenuMethods: EvtHandlerMethods {
         item: &str,
         help_string: &str,
         kind: c_int,
-    ) -> *mut c_void {
+    ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
             let item = wx_base::wx_string_from(item);
             let help_string = wx_base::wx_string_from(help_string);
-            ffi::wxMenu_Prepend1(self.as_ptr(), id, item, help_string, kind)
+            MenuItem::option_from(ffi::wxMenu_Prepend1(
+                self.as_ptr(),
+                id,
+                item,
+                help_string,
+                kind,
+            ))
         }
     }
     fn prepend_int_menu<M: MenuMethods>(
@@ -1042,7 +1223,7 @@ pub trait MenuMethods: EvtHandlerMethods {
         text: &str,
         submenu: Option<&M>,
         help: &str,
-    ) -> *mut c_void {
+    ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
             let text = wx_base::wx_string_from(text);
             let submenu = match submenu {
@@ -1050,31 +1231,60 @@ pub trait MenuMethods: EvtHandlerMethods {
                 None => ptr::null_mut(),
             };
             let help = wx_base::wx_string_from(help);
-            ffi::wxMenu_Prepend2(self.as_ptr(), id, text, submenu, help)
+            MenuItem::option_from(ffi::wxMenu_Prepend2(self.as_ptr(), id, text, submenu, help))
         }
     }
-    fn prepend_check_item(&self, id: c_int, item: &str, help_string: &str) -> *mut c_void {
+    fn prepend_check_item(
+        &self,
+        id: c_int,
+        item: &str,
+        help_string: &str,
+    ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
             let item = wx_base::wx_string_from(item);
             let help_string = wx_base::wx_string_from(help_string);
-            ffi::wxMenu_PrependCheckItem(self.as_ptr(), id, item, help_string)
+            MenuItem::option_from(ffi::wxMenu_PrependCheckItem(
+                self.as_ptr(),
+                id,
+                item,
+                help_string,
+            ))
         }
     }
-    fn prepend_radio_item(&self, id: c_int, item: &str, help_string: &str) -> *mut c_void {
+    fn prepend_radio_item(
+        &self,
+        id: c_int,
+        item: &str,
+        help_string: &str,
+    ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
             let item = wx_base::wx_string_from(item);
             let help_string = wx_base::wx_string_from(help_string);
-            ffi::wxMenu_PrependRadioItem(self.as_ptr(), id, item, help_string)
+            MenuItem::option_from(ffi::wxMenu_PrependRadioItem(
+                self.as_ptr(),
+                id,
+                item,
+                help_string,
+            ))
         }
     }
-    fn prepend_separator(&self) -> *mut c_void {
-        unsafe { ffi::wxMenu_PrependSeparator(self.as_ptr()) }
+    fn prepend_separator(&self) -> Option<MenuItemIsOwned<false>> {
+        unsafe { MenuItem::option_from(ffi::wxMenu_PrependSeparator(self.as_ptr())) }
     }
-    fn remove_int(&self, id: c_int) -> *mut c_void {
-        unsafe { ffi::wxMenu_Remove(self.as_ptr(), id) }
+    fn remove_int(&self, id: c_int) -> Option<MenuItemIsOwned<false>> {
+        unsafe { MenuItem::option_from(ffi::wxMenu_Remove(self.as_ptr(), id)) }
     }
-    fn remove_menuitem(&self, item: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxMenu_Remove1(self.as_ptr(), item) }
+    fn remove_menuitem<M: MenuItemMethods>(
+        &self,
+        item: Option<&M>,
+    ) -> Option<MenuItemIsOwned<false>> {
+        unsafe {
+            let item = match item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            MenuItem::option_from(ffi::wxMenu_Remove1(self.as_ptr(), item))
+        }
     }
     fn set_help_string(&self, id: c_int, help_string: &str) {
         unsafe {
@@ -1175,13 +1385,17 @@ pub trait MenuBarMethods: WindowMethods {
     fn enable_top(&self, pos: usize, enable: bool) {
         unsafe { ffi::wxMenuBar_EnableTop(self.as_ptr(), pos, enable) }
     }
-    fn find_item<M: MenuMethods>(&self, id: c_int, menu: Option<&M>) -> *mut c_void {
+    fn find_item<M: MenuMethods>(
+        &self,
+        id: c_int,
+        menu: Option<&M>,
+    ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
             let menu = match menu {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxMenuBar_FindItem(self.as_ptr(), id, menu)
+            MenuItem::option_from(ffi::wxMenuBar_FindItem(self.as_ptr(), id, menu))
         }
     }
     fn find_menu(&self, title: &str) -> c_int {
@@ -1299,6 +1513,160 @@ pub trait MenuBarMethods: WindowMethods {
     }
 }
 
+// wxMenuItem
+pub trait MenuItemMethods: ObjectMethods {
+    fn get_background_colour(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxMenuItem_GetBackgroundColour(self.as_ptr())) }
+    }
+    // BLOCKED: fn GetBitmap()
+    fn get_disabled_bitmap(&self) -> BitmapIsOwned<false> {
+        unsafe { BitmapIsOwned::from_ptr(ffi::wxMenuItem_GetDisabledBitmap(self.as_ptr())) }
+    }
+    fn get_font(&self) -> *mut c_void {
+        unsafe { ffi::wxMenuItem_GetFont(self.as_ptr()) }
+    }
+    fn get_help(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxMenuItem_GetHelp(self.as_ptr())) }
+    }
+    fn get_id(&self) -> c_int {
+        unsafe { ffi::wxMenuItem_GetId(self.as_ptr()) }
+    }
+    fn get_item_label(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxMenuItem_GetItemLabel(self.as_ptr())) }
+    }
+    fn get_item_label_text(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxMenuItem_GetItemLabelText(self.as_ptr())) }
+    }
+    fn get_kind(&self) -> c_int {
+        unsafe { ffi::wxMenuItem_GetKind(self.as_ptr()) }
+    }
+    // BLOCKED: fn GetLabel()
+    fn get_margin_width(&self) -> c_int {
+        unsafe { ffi::wxMenuItem_GetMarginWidth(self.as_ptr()) }
+    }
+    fn get_menu(&self) -> WeakRef<Menu> {
+        unsafe { WeakRef::<Menu>::from(ffi::wxMenuItem_GetMenu(self.as_ptr())) }
+    }
+    // BLOCKED: fn GetName()
+    fn get_sub_menu(&self) -> WeakRef<Menu> {
+        unsafe { WeakRef::<Menu>::from(ffi::wxMenuItem_GetSubMenu(self.as_ptr())) }
+    }
+    // BLOCKED: fn GetText()
+    fn get_text_colour(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxMenuItem_GetTextColour(self.as_ptr())) }
+    }
+    fn get_accel(&self) -> *mut c_void {
+        unsafe { ffi::wxMenuItem_GetAccel(self.as_ptr()) }
+    }
+    fn get_accel_from_string(label: &str) -> *mut c_void {
+        unsafe {
+            let label = wx_base::wx_string_from(label);
+            ffi::wxMenuItem_GetAccelFromString(label)
+        }
+    }
+    fn is_check(&self) -> bool {
+        unsafe { ffi::wxMenuItem_IsCheck(self.as_ptr()) }
+    }
+    fn is_checkable(&self) -> bool {
+        unsafe { ffi::wxMenuItem_IsCheckable(self.as_ptr()) }
+    }
+    fn is_checked(&self) -> bool {
+        unsafe { ffi::wxMenuItem_IsChecked(self.as_ptr()) }
+    }
+    fn is_enabled(&self) -> bool {
+        unsafe { ffi::wxMenuItem_IsEnabled(self.as_ptr()) }
+    }
+    fn is_radio(&self) -> bool {
+        unsafe { ffi::wxMenuItem_IsRadio(self.as_ptr()) }
+    }
+    fn is_separator(&self) -> bool {
+        unsafe { ffi::wxMenuItem_IsSeparator(self.as_ptr()) }
+    }
+    fn is_sub_menu(&self) -> bool {
+        unsafe { ffi::wxMenuItem_IsSubMenu(self.as_ptr()) }
+    }
+    fn set_background_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxMenuItem_SetBackgroundColour(self.as_ptr(), colour)
+        }
+    }
+    // BLOCKED: fn SetBitmap()
+    fn set_bitmaps<B: BitmapMethods, B2: BitmapMethods>(&self, checked: &B, unchecked: &B2) {
+        unsafe {
+            let checked = checked.as_ptr();
+            let unchecked = unchecked.as_ptr();
+            ffi::wxMenuItem_SetBitmaps(self.as_ptr(), checked, unchecked)
+        }
+    }
+    fn set_disabled_bitmap<B: BitmapMethods>(&self, disabled: &B) {
+        unsafe {
+            let disabled = disabled.as_ptr();
+            ffi::wxMenuItem_SetDisabledBitmap(self.as_ptr(), disabled)
+        }
+    }
+    fn set_font(&self, font: *const c_void) {
+        unsafe { ffi::wxMenuItem_SetFont(self.as_ptr(), font) }
+    }
+    fn set_help(&self, help_string: &str) {
+        unsafe {
+            let help_string = wx_base::wx_string_from(help_string);
+            ffi::wxMenuItem_SetHelp(self.as_ptr(), help_string)
+        }
+    }
+    fn set_item_label(&self, label: &str) {
+        unsafe {
+            let label = wx_base::wx_string_from(label);
+            ffi::wxMenuItem_SetItemLabel(self.as_ptr(), label)
+        }
+    }
+    fn set_margin_width(&self, width: c_int) {
+        unsafe { ffi::wxMenuItem_SetMarginWidth(self.as_ptr(), width) }
+    }
+    fn set_menu<M: MenuMethods>(&self, menu: Option<&M>) {
+        unsafe {
+            let menu = match menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxMenuItem_SetMenu(self.as_ptr(), menu)
+        }
+    }
+    fn set_sub_menu<M: MenuMethods>(&self, menu: Option<&M>) {
+        unsafe {
+            let menu = match menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxMenuItem_SetSubMenu(self.as_ptr(), menu)
+        }
+    }
+    // BLOCKED: fn SetText()
+    fn set_text_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxMenuItem_SetTextColour(self.as_ptr(), colour)
+        }
+    }
+    fn set_accel(&self, accel: *mut c_void) {
+        unsafe { ffi::wxMenuItem_SetAccel(self.as_ptr(), accel) }
+    }
+    // DTOR: fn ~wxMenuItem()
+    fn check(&self, check: bool) {
+        unsafe { ffi::wxMenuItem_Check(self.as_ptr(), check) }
+    }
+    fn enable(&self, enable: bool) {
+        unsafe { ffi::wxMenuItem_Enable(self.as_ptr(), enable) }
+    }
+    // BLOCKED: fn GetLabelFromText()
+    fn get_label_text(text: &str) -> String {
+        unsafe {
+            let text = wx_base::wx_string_from(text);
+            wx_base::from_wx_string(ffi::wxMenuItem_GetLabelText(text))
+        }
+    }
+}
+
 // wxNonOwnedWindow
 pub trait NonOwnedWindowMethods: WindowMethods {
     fn set_shape_region(&self, region: *const c_void) -> bool {
@@ -1315,13 +1683,28 @@ pub trait NotebookMethods: BookCtrlBaseMethods {
     fn get_row_count(&self) -> c_int {
         unsafe { ffi::wxNotebook_GetRowCount(self.as_ptr()) }
     }
-    // NOT_SUPPORTED: fn GetThemeBackgroundColour()
+    fn get_theme_background_colour(&self) -> Colour {
+        unsafe { ColourIsOwned(ffi::wxNotebook_GetThemeBackgroundColour(self.as_ptr())) }
+    }
     // BLOCKED: fn OnSelChange()
     fn set_padding<S: SizeMethods>(&self, padding: &S) {
         unsafe {
             let padding = padding.as_ptr();
             ffi::wxNotebook_SetPadding(self.as_ptr(), padding)
         }
+    }
+}
+
+// wxNotifyEvent
+pub trait NotifyEventMethods: CommandEventMethods {
+    fn allow(&self) {
+        unsafe { ffi::wxNotifyEvent_Allow(self.as_ptr()) }
+    }
+    fn is_allowed(&self) -> bool {
+        unsafe { ffi::wxNotifyEvent_IsAllowed(self.as_ptr()) }
+    }
+    fn veto(&self) {
+        unsafe { ffi::wxNotifyEvent_Veto(self.as_ptr()) }
     }
 }
 
@@ -1365,6 +1748,73 @@ pub trait PointMethods: WxRustMethods {
     // BLOCKED: fn operator*1()
     // BLOCKED: fn operator/=()
     // BLOCKED: fn operator*=()
+}
+
+// wxRadioBox
+pub trait RadioBoxMethods: ControlMethods {
+    // DTOR: fn ~wxRadioBox()
+    // NOT_SUPPORTED: fn Create()
+    fn create<
+        W: WindowMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        A: ArrayStringMethods,
+        V: ValidatorMethods,
+    >(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        label: &str,
+        pos: &P,
+        size: &S,
+        choices: &A,
+        major_dimension: c_int,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let label = wx_base::wx_string_from(label);
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let choices = choices.as_ptr();
+            let validator = validator.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            ffi::wxRadioBox_Create1(
+                self.as_ptr(),
+                parent,
+                id,
+                label,
+                pos,
+                size,
+                choices,
+                major_dimension,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+    // NOT_SUPPORTED: fn Enable()
+    // NOT_SUPPORTED: fn GetColumnCount()
+    fn get_item_from_point<P: PointMethods>(&self, pt: &P) -> c_int {
+        unsafe {
+            let pt = pt.as_ptr();
+            ffi::wxRadioBox_GetItemFromPoint(self.as_ptr(), pt)
+        }
+    }
+    // NOT_SUPPORTED: fn GetItemHelpText()
+    // NOT_SUPPORTED: fn GetItemToolTip()
+    // NOT_SUPPORTED: fn GetRowCount()
+    // NOT_SUPPORTED: fn IsItemEnabled()
+    // NOT_SUPPORTED: fn IsItemShown()
+    // NOT_SUPPORTED: fn SetItemHelpText()
+    // NOT_SUPPORTED: fn SetItemToolTip()
+    // NOT_SUPPORTED: fn Show()
 }
 
 // wxRect
@@ -2579,6 +3029,507 @@ pub trait StaticBoxSizerMethods: BoxSizerMethods {
     }
 }
 
+// wxStaticText
+pub trait StaticTextMethods: ControlMethods {
+    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        label: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let label = wx_base::wx_string_from(label);
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            ffi::wxStaticText_Create(self.as_ptr(), parent, id, label, pos, size, style, name)
+        }
+    }
+    fn is_ellipsized(&self) -> bool {
+        unsafe { ffi::wxStaticText_IsEllipsized(self.as_ptr()) }
+    }
+    fn wrap(&self, width: c_int) {
+        unsafe { ffi::wxStaticText_Wrap(self.as_ptr(), width) }
+    }
+}
+
+// wxTextAttr
+pub trait TextAttrMethods: WxRustMethods {
+    // NOT_SUPPORTED: fn GetAlignment()
+    fn get_background_colour(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxTextAttr_GetBackgroundColour(self.as_ptr())) }
+    }
+    fn get_bullet_font(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxTextAttr_GetBulletFont(self.as_ptr())) }
+    }
+    fn get_bullet_name(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxTextAttr_GetBulletName(self.as_ptr())) }
+    }
+    fn get_bullet_number(&self) -> c_int {
+        unsafe { ffi::wxTextAttr_GetBulletNumber(self.as_ptr()) }
+    }
+    fn get_bullet_style(&self) -> c_int {
+        unsafe { ffi::wxTextAttr_GetBulletStyle(self.as_ptr()) }
+    }
+    fn get_bullet_text(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxTextAttr_GetBulletText(self.as_ptr())) }
+    }
+    fn get_character_style_name(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxTextAttr_GetCharacterStyleName(self.as_ptr())) }
+    }
+    fn get_flags(&self) -> c_long {
+        unsafe { ffi::wxTextAttr_GetFlags(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetFont()
+    fn get_font_attributes(&self, font: *const c_void, flags: c_int) -> bool {
+        unsafe { ffi::wxTextAttr_GetFontAttributes(self.as_ptr(), font, flags) }
+    }
+    // NOT_SUPPORTED: fn GetFontEncoding()
+    fn get_font_face_name(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxTextAttr_GetFontFaceName(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn GetFontFamily()
+    fn get_font_size(&self) -> c_int {
+        unsafe { ffi::wxTextAttr_GetFontSize(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetFontStyle()
+    fn get_font_underlined(&self) -> bool {
+        unsafe { ffi::wxTextAttr_GetFontUnderlined(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetUnderlineType()
+    fn get_underline_colour(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxTextAttr_GetUnderlineColour(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn GetFontWeight()
+    fn get_left_indent(&self) -> c_long {
+        unsafe { ffi::wxTextAttr_GetLeftIndent(self.as_ptr()) }
+    }
+    fn get_left_sub_indent(&self) -> c_long {
+        unsafe { ffi::wxTextAttr_GetLeftSubIndent(self.as_ptr()) }
+    }
+    fn get_line_spacing(&self) -> c_int {
+        unsafe { ffi::wxTextAttr_GetLineSpacing(self.as_ptr()) }
+    }
+    fn get_list_style_name(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxTextAttr_GetListStyleName(self.as_ptr())) }
+    }
+    fn get_outline_level(&self) -> c_int {
+        unsafe { ffi::wxTextAttr_GetOutlineLevel(self.as_ptr()) }
+    }
+    fn get_paragraph_spacing_after(&self) -> c_int {
+        unsafe { ffi::wxTextAttr_GetParagraphSpacingAfter(self.as_ptr()) }
+    }
+    fn get_paragraph_spacing_before(&self) -> c_int {
+        unsafe { ffi::wxTextAttr_GetParagraphSpacingBefore(self.as_ptr()) }
+    }
+    fn get_paragraph_style_name(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxTextAttr_GetParagraphStyleName(self.as_ptr())) }
+    }
+    fn get_right_indent(&self) -> c_long {
+        unsafe { ffi::wxTextAttr_GetRightIndent(self.as_ptr()) }
+    }
+    // BLOCKED: fn GetTabs()
+    fn get_text_colour(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxTextAttr_GetTextColour(self.as_ptr())) }
+    }
+    fn get_text_effect_flags(&self) -> c_int {
+        unsafe { ffi::wxTextAttr_GetTextEffectFlags(self.as_ptr()) }
+    }
+    fn get_text_effects(&self) -> c_int {
+        unsafe { ffi::wxTextAttr_GetTextEffects(self.as_ptr()) }
+    }
+    fn get_url(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxTextAttr_GetURL(self.as_ptr())) }
+    }
+    fn has_alignment(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasAlignment(self.as_ptr()) }
+    }
+    fn has_background_colour(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasBackgroundColour(self.as_ptr()) }
+    }
+    fn has_bullet_name(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasBulletName(self.as_ptr()) }
+    }
+    fn has_bullet_number(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasBulletNumber(self.as_ptr()) }
+    }
+    fn has_bullet_style(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasBulletStyle(self.as_ptr()) }
+    }
+    fn has_bullet_text(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasBulletText(self.as_ptr()) }
+    }
+    fn has_character_style_name(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasCharacterStyleName(self.as_ptr()) }
+    }
+    fn has_flag(&self, flag: c_long) -> bool {
+        unsafe { ffi::wxTextAttr_HasFlag(self.as_ptr(), flag) }
+    }
+    fn has_font(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasFont(self.as_ptr()) }
+    }
+    fn has_font_encoding(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasFontEncoding(self.as_ptr()) }
+    }
+    fn has_font_face_name(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasFontFaceName(self.as_ptr()) }
+    }
+    fn has_font_family(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasFontFamily(self.as_ptr()) }
+    }
+    fn has_font_italic(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasFontItalic(self.as_ptr()) }
+    }
+    fn has_font_size(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasFontSize(self.as_ptr()) }
+    }
+    fn has_font_point_size(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasFontPointSize(self.as_ptr()) }
+    }
+    fn has_font_pixel_size(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasFontPixelSize(self.as_ptr()) }
+    }
+    fn has_font_underlined(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasFontUnderlined(self.as_ptr()) }
+    }
+    fn has_font_weight(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasFontWeight(self.as_ptr()) }
+    }
+    fn has_left_indent(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasLeftIndent(self.as_ptr()) }
+    }
+    fn has_line_spacing(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasLineSpacing(self.as_ptr()) }
+    }
+    fn has_list_style_name(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasListStyleName(self.as_ptr()) }
+    }
+    fn has_outline_level(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasOutlineLevel(self.as_ptr()) }
+    }
+    fn has_page_break(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasPageBreak(self.as_ptr()) }
+    }
+    fn has_paragraph_spacing_after(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasParagraphSpacingAfter(self.as_ptr()) }
+    }
+    fn has_paragraph_spacing_before(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasParagraphSpacingBefore(self.as_ptr()) }
+    }
+    fn has_paragraph_style_name(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasParagraphStyleName(self.as_ptr()) }
+    }
+    fn has_right_indent(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasRightIndent(self.as_ptr()) }
+    }
+    fn has_tabs(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasTabs(self.as_ptr()) }
+    }
+    fn has_text_colour(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasTextColour(self.as_ptr()) }
+    }
+    fn has_text_effects(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasTextEffects(self.as_ptr()) }
+    }
+    fn has_url(&self) -> bool {
+        unsafe { ffi::wxTextAttr_HasURL(self.as_ptr()) }
+    }
+    fn is_character_style(&self) -> bool {
+        unsafe { ffi::wxTextAttr_IsCharacterStyle(self.as_ptr()) }
+    }
+    fn is_default(&self) -> bool {
+        unsafe { ffi::wxTextAttr_IsDefault(self.as_ptr()) }
+    }
+    fn is_paragraph_style(&self) -> bool {
+        unsafe { ffi::wxTextAttr_IsParagraphStyle(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn SetAlignment()
+    fn set_background_colour<C: ColourMethods>(&self, col_back: &C) {
+        unsafe {
+            let col_back = col_back.as_ptr();
+            ffi::wxTextAttr_SetBackgroundColour(self.as_ptr(), col_back)
+        }
+    }
+    fn set_bullet_font(&self, font: &str) {
+        unsafe {
+            let font = wx_base::wx_string_from(font);
+            ffi::wxTextAttr_SetBulletFont(self.as_ptr(), font)
+        }
+    }
+    fn set_bullet_name(&self, name: &str) {
+        unsafe {
+            let name = wx_base::wx_string_from(name);
+            ffi::wxTextAttr_SetBulletName(self.as_ptr(), name)
+        }
+    }
+    fn set_bullet_number(&self, n: c_int) {
+        unsafe { ffi::wxTextAttr_SetBulletNumber(self.as_ptr(), n) }
+    }
+    fn set_bullet_style(&self, style: c_int) {
+        unsafe { ffi::wxTextAttr_SetBulletStyle(self.as_ptr(), style) }
+    }
+    fn set_bullet_text(&self, text: &str) {
+        unsafe {
+            let text = wx_base::wx_string_from(text);
+            ffi::wxTextAttr_SetBulletText(self.as_ptr(), text)
+        }
+    }
+    fn set_character_style_name(&self, name: &str) {
+        unsafe {
+            let name = wx_base::wx_string_from(name);
+            ffi::wxTextAttr_SetCharacterStyleName(self.as_ptr(), name)
+        }
+    }
+    fn set_flags(&self, flags: c_long) {
+        unsafe { ffi::wxTextAttr_SetFlags(self.as_ptr(), flags) }
+    }
+    fn set_font(&self, font: *const c_void, flags: c_int) {
+        unsafe { ffi::wxTextAttr_SetFont(self.as_ptr(), font, flags) }
+    }
+    // NOT_SUPPORTED: fn SetFontEncoding()
+    fn set_font_face_name(&self, face_name: &str) {
+        unsafe {
+            let face_name = wx_base::wx_string_from(face_name);
+            ffi::wxTextAttr_SetFontFaceName(self.as_ptr(), face_name)
+        }
+    }
+    // NOT_SUPPORTED: fn SetFontFamily()
+    fn set_font_size(&self, point_size: c_int) {
+        unsafe { ffi::wxTextAttr_SetFontSize(self.as_ptr(), point_size) }
+    }
+    fn set_font_point_size(&self, point_size: c_int) {
+        unsafe { ffi::wxTextAttr_SetFontPointSize(self.as_ptr(), point_size) }
+    }
+    fn set_font_pixel_size(&self, pixel_size: c_int) {
+        unsafe { ffi::wxTextAttr_SetFontPixelSize(self.as_ptr(), pixel_size) }
+    }
+    // NOT_SUPPORTED: fn SetFontStyle()
+    fn set_font_underlined(&self, underlined: bool) {
+        unsafe { ffi::wxTextAttr_SetFontUnderlined(self.as_ptr(), underlined) }
+    }
+    // NOT_SUPPORTED: fn SetFontUnderlined1()
+    // NOT_SUPPORTED: fn SetFontWeight()
+    fn set_left_indent(&self, indent: c_int, sub_indent: c_int) {
+        unsafe { ffi::wxTextAttr_SetLeftIndent(self.as_ptr(), indent, sub_indent) }
+    }
+    fn set_line_spacing(&self, spacing: c_int) {
+        unsafe { ffi::wxTextAttr_SetLineSpacing(self.as_ptr(), spacing) }
+    }
+    fn set_list_style_name(&self, name: &str) {
+        unsafe {
+            let name = wx_base::wx_string_from(name);
+            ffi::wxTextAttr_SetListStyleName(self.as_ptr(), name)
+        }
+    }
+    fn set_outline_level(&self, level: c_int) {
+        unsafe { ffi::wxTextAttr_SetOutlineLevel(self.as_ptr(), level) }
+    }
+    fn set_page_break(&self, page_break: bool) {
+        unsafe { ffi::wxTextAttr_SetPageBreak(self.as_ptr(), page_break) }
+    }
+    fn set_paragraph_spacing_after(&self, spacing: c_int) {
+        unsafe { ffi::wxTextAttr_SetParagraphSpacingAfter(self.as_ptr(), spacing) }
+    }
+    fn set_paragraph_spacing_before(&self, spacing: c_int) {
+        unsafe { ffi::wxTextAttr_SetParagraphSpacingBefore(self.as_ptr(), spacing) }
+    }
+    fn set_paragraph_style_name(&self, name: &str) {
+        unsafe {
+            let name = wx_base::wx_string_from(name);
+            ffi::wxTextAttr_SetParagraphStyleName(self.as_ptr(), name)
+        }
+    }
+    fn set_right_indent(&self, indent: c_int) {
+        unsafe { ffi::wxTextAttr_SetRightIndent(self.as_ptr(), indent) }
+    }
+    fn set_tabs(&self, tabs: *const c_void) {
+        unsafe { ffi::wxTextAttr_SetTabs(self.as_ptr(), tabs) }
+    }
+    fn set_text_colour<C: ColourMethods>(&self, col_text: &C) {
+        unsafe {
+            let col_text = col_text.as_ptr();
+            ffi::wxTextAttr_SetTextColour(self.as_ptr(), col_text)
+        }
+    }
+    fn set_text_effect_flags(&self, flags: c_int) {
+        unsafe { ffi::wxTextAttr_SetTextEffectFlags(self.as_ptr(), flags) }
+    }
+    fn set_text_effects(&self, effects: c_int) {
+        unsafe { ffi::wxTextAttr_SetTextEffects(self.as_ptr(), effects) }
+    }
+    fn set_url(&self, url: &str) {
+        unsafe {
+            let url = wx_base::wx_string_from(url);
+            ffi::wxTextAttr_SetURL(self.as_ptr(), url)
+        }
+    }
+    // BLOCKED: fn operator=()
+    fn apply<T: TextAttrMethods, T2: TextAttrMethods>(
+        &self,
+        style: &T,
+        compare_with: Option<&T2>,
+    ) -> bool {
+        unsafe {
+            let style = style.as_ptr();
+            let compare_with = match compare_with {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTextAttr_Apply(self.as_ptr(), style, compare_with)
+        }
+    }
+    fn merge<T: TextAttrMethods>(&self, overlay: &T) {
+        unsafe {
+            let overlay = overlay.as_ptr();
+            ffi::wxTextAttr_Merge(self.as_ptr(), overlay)
+        }
+    }
+    fn eq_partial<T: TextAttrMethods>(&self, attr: &T, weak_test: bool) -> bool {
+        unsafe {
+            let attr = attr.as_ptr();
+            ffi::wxTextAttr_EqPartial(self.as_ptr(), attr, weak_test)
+        }
+    }
+    fn merge_textattr<T: TextAttrMethods, T2: TextAttrMethods>(base: &T, overlay: &T2) -> TextAttr {
+        unsafe {
+            let base = base.as_ptr();
+            let overlay = overlay.as_ptr();
+            TextAttrIsOwned(ffi::wxTextAttr_Merge1(base, overlay))
+        }
+    }
+}
+
+// wxTextCtrl
+pub trait TextCtrlMethods: ControlMethods {
+    // DTOR: fn ~wxTextCtrl()
+    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        value: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let value = wx_base::wx_string_from(value);
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            ffi::wxTextCtrl_Create(
+                self.as_ptr(),
+                parent,
+                id,
+                value,
+                pos,
+                size,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+    fn discard_edits(&self) {
+        unsafe { ffi::wxTextCtrl_DiscardEdits(self.as_ptr()) }
+    }
+    fn emulate_key_press(&self, event: *const c_void) -> bool {
+        unsafe { ffi::wxTextCtrl_EmulateKeyPress(self.as_ptr(), event) }
+    }
+    fn get_default_style(&self) -> TextAttrIsOwned<false> {
+        unsafe { TextAttrIsOwned::from_ptr(ffi::wxTextCtrl_GetDefaultStyle(self.as_ptr())) }
+    }
+    fn get_line_length(&self, line_no: c_long) -> c_int {
+        unsafe { ffi::wxTextCtrl_GetLineLength(self.as_ptr(), line_no) }
+    }
+    fn get_line_text(&self, line_no: c_long) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxTextCtrl_GetLineText(self.as_ptr(), line_no)) }
+    }
+    fn get_number_of_lines(&self) -> c_int {
+        unsafe { ffi::wxTextCtrl_GetNumberOfLines(self.as_ptr()) }
+    }
+    fn get_style(&self, position: c_long, style: *mut c_void) -> bool {
+        unsafe { ffi::wxTextCtrl_GetStyle(self.as_ptr(), position, style) }
+    }
+    // NOT_SUPPORTED: fn HitTest()
+    // NOT_SUPPORTED: fn HitTest1()
+    fn is_modified(&self) -> bool {
+        unsafe { ffi::wxTextCtrl_IsModified(self.as_ptr()) }
+    }
+    fn is_multi_line(&self) -> bool {
+        unsafe { ffi::wxTextCtrl_IsMultiLine(self.as_ptr()) }
+    }
+    fn is_single_line(&self) -> bool {
+        unsafe { ffi::wxTextCtrl_IsSingleLine(self.as_ptr()) }
+    }
+    fn load_file(&self, filename: &str, file_type: c_int) -> bool {
+        unsafe {
+            let filename = wx_base::wx_string_from(filename);
+            ffi::wxTextCtrl_LoadFile(self.as_ptr(), filename, file_type)
+        }
+    }
+    fn mark_dirty(&self) {
+        unsafe { ffi::wxTextCtrl_MarkDirty(self.as_ptr()) }
+    }
+    fn on_drop_files(&self, event: *mut c_void) {
+        unsafe { ffi::wxTextCtrl_OnDropFiles(self.as_ptr(), event) }
+    }
+    fn position_to_xy(&self, pos: c_long, x: *mut c_void, y: *mut c_void) -> bool {
+        unsafe { ffi::wxTextCtrl_PositionToXY(self.as_ptr(), pos, x, y) }
+    }
+    fn position_to_coords(&self, pos: c_long) -> Point {
+        unsafe { PointIsOwned(ffi::wxTextCtrl_PositionToCoords(self.as_ptr(), pos)) }
+    }
+    fn save_file(&self, filename: &str, file_type: c_int) -> bool {
+        unsafe {
+            let filename = wx_base::wx_string_from(filename);
+            ffi::wxTextCtrl_SaveFile(self.as_ptr(), filename, file_type)
+        }
+    }
+    fn set_default_style<T: TextAttrMethods>(&self, style: &T) -> bool {
+        unsafe {
+            let style = style.as_ptr();
+            ffi::wxTextCtrl_SetDefaultStyle(self.as_ptr(), style)
+        }
+    }
+    fn set_modified(&self, modified: bool) {
+        unsafe { ffi::wxTextCtrl_SetModified(self.as_ptr(), modified) }
+    }
+    fn set_style<T: TextAttrMethods>(&self, start: c_long, end: c_long, style: &T) -> bool {
+        unsafe {
+            let style = style.as_ptr();
+            ffi::wxTextCtrl_SetStyle(self.as_ptr(), start, end, style)
+        }
+    }
+    fn show_position(&self, pos: c_long) {
+        unsafe { ffi::wxTextCtrl_ShowPosition(self.as_ptr(), pos) }
+    }
+    fn xy_to_position(&self, x: c_long, y: c_long) -> c_long {
+        unsafe { ffi::wxTextCtrl_XYToPosition(self.as_ptr(), x, y) }
+    }
+    // BLOCKED: fn operator<<()
+    // BLOCKED: fn operator<<1()
+    // BLOCKED: fn operator<<2()
+    // NOT_SUPPORTED: fn operator<<3()
+    // BLOCKED: fn operator<<4()
+    // NOT_SUPPORTED: fn operator<<5()
+    // NOT_SUPPORTED: fn operator<<6()
+}
+
 // wxToolBar
 pub trait ToolBarMethods: ControlMethods {
     // DTOR: fn ~wxToolBar()
@@ -2745,8 +3696,8 @@ pub trait ToolBarMethods: ControlMethods {
     fn get_tool_by_pos(&self, pos: c_int) -> *const c_void {
         unsafe { ffi::wxToolBar_GetToolByPos1(self.as_ptr(), pos) }
     }
-    fn get_tool_client_data(&self, tool_id: c_int) -> WeakRef<Object> {
-        unsafe { WeakRef::<Object>::from(ffi::wxToolBar_GetToolClientData(self.as_ptr(), tool_id)) }
+    fn get_tool_client_data(&self, tool_id: c_int) -> Option<ObjectIsOwned<false>> {
+        unsafe { Object::option_from(ffi::wxToolBar_GetToolClientData(self.as_ptr(), tool_id)) }
     }
     fn get_tool_enabled(&self, tool_id: c_int) -> bool {
         unsafe { ffi::wxToolBar_GetToolEnabled(self.as_ptr(), tool_id) }
@@ -3215,7 +4166,9 @@ pub trait WindowMethods: EvtHandlerMethods {
         }
     }
     // BLOCKED: fn GetChildren()
-    // BLOCKED: fn GetChildren1()
+    fn get_children(&self) -> WindowListIsOwned<false> {
+        unsafe { WindowListIsOwned::from_ptr(ffi::wxWindow_GetChildren1(self.as_ptr())) }
+    }
     fn remove_child<W: WindowMethods>(&self, child: Option<&W>) {
         unsafe {
             let child = match child {
@@ -3746,7 +4699,9 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn is_frozen(&self) -> bool {
         unsafe { ffi::wxWindow_IsFrozen(self.as_ptr()) }
     }
-    // NOT_SUPPORTED: fn GetBackgroundColour()
+    fn get_background_colour(&self) -> Colour {
+        unsafe { ColourIsOwned(ffi::wxWindow_GetBackgroundColour(self.as_ptr())) }
+    }
     // NOT_SUPPORTED: fn GetBackgroundStyle()
     fn get_char_height(&self) -> c_int {
         unsafe { ffi::wxWindow_GetCharHeight(self.as_ptr()) }
@@ -3759,7 +4714,9 @@ pub trait WindowMethods: EvtHandlerMethods {
         unsafe { SizeIsOwned(ffi::wxWindow_GetDPI(self.as_ptr())) }
     }
     // NOT_SUPPORTED: fn GetFont()
-    // NOT_SUPPORTED: fn GetForegroundColour()
+    fn get_foreground_colour(&self) -> Colour {
+        unsafe { ColourIsOwned(ffi::wxWindow_GetForegroundColour(self.as_ptr())) }
+    }
     fn get_text_extent_int(
         &self,
         string: &str,
@@ -3813,8 +4770,11 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn update(&self) {
         unsafe { ffi::wxWindow_Update(self.as_ptr()) }
     }
-    fn set_background_colour(&self, colour: *const c_void) -> bool {
-        unsafe { ffi::wxWindow_SetBackgroundColour(self.as_ptr(), colour) }
+    fn set_background_colour<C: ColourMethods>(&self, colour: &C) -> bool {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxWindow_SetBackgroundColour(self.as_ptr(), colour)
+        }
     }
     // NOT_SUPPORTED: fn SetBackgroundStyle()
     fn is_transparent_background_supported(&self, reason: *mut c_void) -> bool {
@@ -3823,11 +4783,17 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn set_font(&self, font: *const c_void) -> bool {
         unsafe { ffi::wxWindow_SetFont(self.as_ptr(), font) }
     }
-    fn set_foreground_colour(&self, colour: *const c_void) -> bool {
-        unsafe { ffi::wxWindow_SetForegroundColour(self.as_ptr(), colour) }
+    fn set_foreground_colour<C: ColourMethods>(&self, colour: &C) -> bool {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxWindow_SetForegroundColour(self.as_ptr(), colour)
+        }
     }
-    fn set_own_background_colour(&self, colour: *const c_void) {
-        unsafe { ffi::wxWindow_SetOwnBackgroundColour(self.as_ptr(), colour) }
+    fn set_own_background_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxWindow_SetOwnBackgroundColour(self.as_ptr(), colour)
+        }
     }
     fn inherits_background_colour(&self) -> bool {
         unsafe { ffi::wxWindow_InheritsBackgroundColour(self.as_ptr()) }
@@ -3841,8 +4807,11 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn set_own_font(&self, font: *const c_void) {
         unsafe { ffi::wxWindow_SetOwnFont(self.as_ptr(), font) }
     }
-    fn set_own_foreground_colour(&self, colour: *const c_void) {
-        unsafe { ffi::wxWindow_SetOwnForegroundColour(self.as_ptr(), colour) }
+    fn set_own_foreground_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxWindow_SetOwnForegroundColour(self.as_ptr(), colour)
+        }
     }
     fn use_foreground_colour(&self) -> bool {
         unsafe { ffi::wxWindow_UseForegroundColour(self.as_ptr()) }
@@ -4154,11 +5123,11 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn drag_accept_files(&self, accept: bool) {
         unsafe { ffi::wxWindow_DragAcceptFiles(self.as_ptr(), accept) }
     }
-    fn get_containing_sizer(&self) -> WeakRef<Sizer> {
-        unsafe { WeakRef::<Sizer>::from(ffi::wxWindow_GetContainingSizer(self.as_ptr())) }
+    fn get_containing_sizer(&self) -> Option<SizerIsOwned<false>> {
+        unsafe { Sizer::option_from(ffi::wxWindow_GetContainingSizer(self.as_ptr())) }
     }
-    fn get_sizer(&self) -> WeakRef<Sizer> {
-        unsafe { WeakRef::<Sizer>::from(ffi::wxWindow_GetSizer(self.as_ptr())) }
+    fn get_sizer(&self) -> Option<SizerIsOwned<false>> {
+        unsafe { Sizer::option_from(ffi::wxWindow_GetSizer(self.as_ptr())) }
     }
     fn set_sizer<S: SizerMethods>(&self, sizer: Option<&S>, delete_old: bool) {
         unsafe {

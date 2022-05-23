@@ -13,7 +13,7 @@ fn main() {
         let frame_copy = frame.clone();
         frame
             .base
-            .bind(wx::RUST_EVT_MENU, move |event: &wx::CommandEvent| {
+            .bind(wx::RustEvent::Menu, move |event: &wx::CommandEvent| {
                 frame_copy.handle_menu(event)
             });
         frame.base.show(true);

@@ -82,6 +82,16 @@ pub trait WxRustMethods {
     unsafe fn from_ptr(ptr: *mut c_void) -> Self;
     unsafe fn from_unowned_ptr(ptr: *mut c_void) -> Self::Unowned;
     unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F);
+    unsafe fn option_from(ptr: *mut c_void) -> Option<Self::Unowned>
+    where
+        Self: Sized,
+    {
+        if ptr.is_null() {
+            None
+        } else {
+            Some(Self::from_unowned_ptr(ptr))
+        }
+    }
 }\
 '''
     else:
@@ -100,6 +110,7 @@ use std::mem;
 use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
 use std::ptr;
 
+use super::*;
 use methods::*;
 '''
     if libname == 'base':
@@ -123,10 +134,16 @@ pub mod methods;
 def generated_h(classes, libname):
     yield '''\
 #pragma once
-#include <wx/wx.h>
+#include <wx/wx.h>\
+'''
+    if libname == 'core':
+        yield '''\
+//#include <wx/activityindicator.h>
 #include <wx/artprov.h>
 #include <wx/bookctrl.h>
-#include <wx/wrapsizer.h>
+#include <wx/wrapsizer.h>\
+'''
+    yield '''\
 
 extern "C" {
 '''
