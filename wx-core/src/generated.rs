@@ -1143,11 +1143,6 @@ wx_class! { TextCtrl =
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> TextEntryMethods for TextCtrlIsOwned<OWNED> {
-    fn ptr_from(obj: &Self) -> *mut c_void {
-        unsafe { ffi::wxTextCtrl_ToTextEntry(obj.as_ptr()) }
-    }
-}
 impl<const OWNED: bool> TextCtrlIsOwned<OWNED> {
     pub fn new_2step() -> TextCtrlIsOwned<OWNED> {
         unsafe { TextCtrlIsOwned(ffi::wxTextCtrl_new()) }
@@ -1179,29 +1174,6 @@ impl<const OWNED: bool> TextCtrlIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
-    }
-}
-
-// wxTextEntry
-wx_class! { TextEntry =
-    TextEntryIsOwned<true>(wxTextEntry) impl
-        // TextEntryMethods
-}
-impl<const OWNED: bool> TextEntryIsOwned<OWNED> {
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> TextEntryMethods for TextEntryIsOwned<OWNED> {
-    fn ptr_from(obj: &Self) -> *mut c_void {
-        unsafe { obj.as_ptr() }
-    }
-}
-impl<const OWNED: bool> Drop for TextEntryIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxTextEntry_delete(self.0) }
-        }
     }
 }
 
