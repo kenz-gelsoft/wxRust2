@@ -89,8 +89,12 @@ struct WidgetsFrame {
 }
 impl WidgetsFrame {
     fn new(title: &str) -> Self {
-        let frame = wx::Frame::builder(wx::Window::none()).title(title).build();
-
+        let base = wx::Frame::builder(wx::Window::none()).title(title).build();
+        let frame = WidgetsFrame { base: base };
+        frame.on_create();
+        frame
+    }
+    fn on_create(&self) {
         let mbar = wx::MenuBar::new(0);
 
         let menu_widget = wx::Menu::new()
@@ -134,7 +138,7 @@ impl WidgetsFrame {
 
         menu_widget.check(
             Widgets::LayoutDirection.into(),
-            frame.get_layout_direction() == wx::Layout_RightToLeft,
+            self.base.get_layout_direction() == wx::Layout_RightToLeft,
         );
         mbar.append(Some(&menu_widget), "&Widget");
 
@@ -155,13 +159,62 @@ impl WidgetsFrame {
             .item(TextEntry::SetHint, "Set help &hint");
         mbar.append(Some(&menu_text_entry), "&Text");
 
-        frame.set_menu_bar(Some(&mbar));
+        self.base.set_menu_bar(Some(&mbar));
 
         mbar.check(Widgets::Enable.into(), true);
         mbar.check(Widgets::Show.into(), true);
 
         mbar.check(Widgets::VariantNormal.into(), true);
 
-        WidgetsFrame { base: frame }
+        // create controls
+        let panel = wx::Panel::builder(Some(&self.base)).build();
+
+        let sizer_top = wx::BoxSizer::new(wx::VERTICAL);
+
+        let style = wx::BK_DEFAULT;
+
+        let book = wx::Notebook::builder(Some(&panel))
+            .id(Widgets::BookCtrl.into())
+            .style(style.into())
+            .build();
+
+        self.init_book();
+
+        let sizer_down = wx::BoxSizer::new(wx::VERTICAL);
+
+        let sizer_btns = wx::BoxSizer::new(wx::HORIZONTAL);
+        let btn = wx::Button::builder(Some(&panel))
+            .id(Widgets::Quit.into())
+            .title("E&xit")
+            .build();
+        sizer_btns.add_window_int(Some(&btn), 0, 0, 0, wx::Object::none());
+        sizer_down.add_sizer_sizerflags(
+            Some(&sizer_btns),
+            wx::SizerFlags::new(0).border(wx::ALL).right(),
+        );
+
+        sizer_top.add_window_sizerflags(
+            Some(&book),
+            wx::SizerFlags::new(1)
+                .expand()
+                .double_border(wx::ALL & !(wx::TOP | wx::BOTTOM)),
+        );
+        sizer_top.add_spacer(5);
+        sizer_top.add_sizer_sizerflags(
+            Some(&sizer_down),
+            wx::SizerFlags::new(0)
+                .expand()
+                .double_border(wx::ALL & !wx::TOP),
+        );
+
+        panel.set_sizer(Some(&sizer_top), true);
+
+        // wxPersistentRegisterAndRestore
+        let size_min = panel.get_best_size();
+
+        self.base.set_client_size_size(&size_min);
+        self.base.set_min_client_size(&size_min);
     }
+
+    fn init_book(&self) {}
 }

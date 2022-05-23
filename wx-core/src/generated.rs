@@ -786,6 +786,48 @@ impl<const OWNED: bool> StaticBitmapIsOwned<OWNED> {
     }
 }
 
+// wxStaticBox
+wx_class! { StaticBox =
+    StaticBoxIsOwned<true>(wxStaticBox) impl
+        StaticBoxMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> StaticBoxIsOwned<OWNED> {
+    pub fn new_2step() -> StaticBoxIsOwned<OWNED> {
+        unsafe { StaticBoxIsOwned(ffi::wxStaticBox_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        label: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> StaticBoxIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let label = wx_base::wx_string_from(label);
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            StaticBoxIsOwned(ffi::wxStaticBox_new1(
+                parent, id, label, pos, size, style, name,
+            ))
+        }
+    }
+    // BLOCKED: fn wxStaticBox2()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
 // wxStaticBoxSizer
 wx_class! { StaticBoxSizer =
     StaticBoxSizerIsOwned<true>(wxStaticBoxSizer) impl
@@ -795,8 +837,17 @@ wx_class! { StaticBoxSizer =
         ObjectMethods
 }
 impl<const OWNED: bool> StaticBoxSizerIsOwned<OWNED> {
-    pub fn new_with_staticbox(box_: *mut c_void, orient: c_int) -> StaticBoxSizerIsOwned<OWNED> {
-        unsafe { StaticBoxSizerIsOwned(ffi::wxStaticBoxSizer_new(box_, orient)) }
+    pub fn new_with_staticbox<S: StaticBoxMethods>(
+        box_: Option<&S>,
+        orient: c_int,
+    ) -> StaticBoxSizerIsOwned<OWNED> {
+        unsafe {
+            let box_ = match box_ {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            StaticBoxSizerIsOwned(ffi::wxStaticBoxSizer_new(box_, orient))
+        }
     }
     pub fn new_with_int<W: WindowMethods>(
         orient: c_int,

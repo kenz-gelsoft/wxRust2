@@ -25,6 +25,7 @@ wxml_files = [
     'wxml/classwx_sizer.xml',
     'wxml/classwx_sizer_flags.xml',
     'wxml/classwx_static_bitmap.xml',
+    'wxml/classwx_static_box.xml',
     'wxml/classwx_static_box_sizer.xml',
     'wxml/classwx_tool_bar.xml',
     'wxml/classwx_top_level_window.xml',
@@ -217,6 +218,11 @@ wx31 = [
     'CenterVertical',
     'CentreHorizontal',
     'CentreVertical',
+]
+[types.wxStaticBox]
+blocklist = [
+    'wxStaticBox2',
+    'Create1',
 ]
 [types.wxToolBar]
 blocklist = [

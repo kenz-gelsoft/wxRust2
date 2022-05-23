@@ -1,14 +1,5 @@
 from collections import OrderedDict
-from .model import Param, RustType, prefixed, pascal_to_snake
-
-# Known, and problematic
-RUST_KEYWORDS = [
-    'box',
-    'break',
-    'move',
-    'ref',
-    'type',
-]
+from .model import Param, RustType, non_keyword_name, prefixed, pascal_to_snake
 
 
 class RustClassBinding:
@@ -318,15 +309,10 @@ class RustMethodBinding:
         yield self._wrap_return_type(call)
     
     def _call_params(self, params, self_to_insert):
-        params = [self.non_keyword_name(p.name) for p in params]
+        params = [p.name for p in params]
         if self_to_insert:
             params.insert(0, self_to_insert)
         return ', '.join(params)
-
-    def non_keyword_name(self, name):
-        while name in RUST_KEYWORDS:
-            name += '_'
-        return name
 
     def _rust_method_name(self):
         method_name = pascal_to_snake(self.__model.name(
@@ -344,7 +330,7 @@ class RustMethodBinding:
                 splitter = '_with_'
             if len(arg_types) > 0:
                 method_name += splitter + '_'.join(arg_types)
-        method_name = self.non_keyword_name(method_name)
+        method_name = non_keyword_name(method_name)
         return method_name
     
     def _rust_params(self, for_ffi=False):
@@ -366,7 +352,7 @@ class RustMethodBinding:
                 if param.type.generic_option:
                     typename = 'Option<%s>' % (typename,)
         return '%s: %s' % (
-            self.non_keyword_name(param.name),
+            param.name,
             typename,
         )
 
