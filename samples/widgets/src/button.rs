@@ -239,20 +239,20 @@ impl ButtonWidgetsPage {
             label = button.get_label();
 
             // TODO: remove (and delete) all buttons
-            let count = self
-                .m_sizer_button
-                .borrow()
-                .as_ref()
-                .unwrap()
-                .get_children()
-                .get_count();
+            if let Some(sizer_button) = self.m_sizer_button.borrow().as_ref() {
+                let count = sizer_button.get_children().get_count();
+                for _ in 0..count {
+                    sizer_button.remove_int(0);
+                }
+                button.destroy();
+            }
         }
 
         if label.is_empty() {
             label = self.m_text_label.borrow().as_ref().unwrap().get_value();
         }
 
-        *self.m_button.borrow_mut() = Some(
+        let new_button = Some(
             wx::Button::builder(Some(&self.base))
                 .id(ButtonPage::Button.into())
                 .label(&label)
@@ -262,13 +262,14 @@ impl ButtonWidgetsPage {
         if let Some(sizer_button) = self.m_sizer_button.borrow().as_ref() {
             sizer_button.add_stretch_spacer(1);
             sizer_button.add_window_sizerflags(
-                self.m_button.borrow().as_ref(),
+                new_button.as_ref(),
                 wx::SizerFlags::new(0).centre().border(wx::ALL),
             );
             sizer_button.add_stretch_spacer(1);
 
             sizer_button.layout();
         }
+        *self.m_button.borrow_mut() = new_button;
     }
 
     // Utility methods from (and to be placed to) the base WidgetPage class
