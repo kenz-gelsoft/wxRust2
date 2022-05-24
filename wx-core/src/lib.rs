@@ -23,11 +23,17 @@ pub mod methods {
     }
 
     pub trait SizerItemListMethods: WxRustMethods {
+        fn get_count(&self) -> usize {
+            unsafe { super::ffi::wxSizerItemList_GetCount(self.as_ptr()) }
+        }
         fn is_empty(&self) -> bool {
             unsafe { super::ffi::wxSizerItemList_IsEmpty(self.as_ptr()) }
         }
     }
     pub trait WindowListMethods: WxRustMethods {
+        fn get_count(&self) -> usize {
+            unsafe { super::ffi::wxWindowList_GetCount(self.as_ptr()) }
+        }
         fn is_empty(&self) -> bool {
             unsafe { super::ffi::wxWindowList_IsEmpty(self.as_ptr()) }
         }
@@ -207,11 +213,13 @@ mod ffi {
         // SizerItemList
         pub fn wxSizerItemList_new() -> *mut c_void;
         pub fn wxSizerItemList_delete(self_: *mut c_void);
+        pub fn wxSizerItemList_GetCount(self_: *mut c_void) -> usize;
         pub fn wxSizerItemList_IsEmpty(self_: *mut c_void) -> bool;
 
         // WindowList
         pub fn wxWindowList_new() -> *mut c_void;
         pub fn wxWindowList_delete(self_: *mut c_void);
+        pub fn wxWindowList_GetCount(self_: *mut c_void) -> usize;
         pub fn wxWindowList_IsEmpty(self_: *mut c_void) -> bool;
 
         pub fn wxRustMessageBox(

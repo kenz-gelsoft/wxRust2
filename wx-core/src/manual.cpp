@@ -1,11 +1,14 @@
 #include "manual.h"
 
-// WindowList
+// SizerItemList
 wxSizerItemList *wxSizerItemList_new() {
     return new wxSizerItemList();
 }
 void wxSizerItemList_delete(wxSizerItemList *self) {
     delete self;
+}
+size_t wxSizerItemList_GetCount(wxSizerItemList *self) {
+    return self->GetCount();
 }
 bool wxSizerItemList_IsEmpty(wxSizerItemList *self) {
     return self->IsEmpty();
@@ -17,6 +20,9 @@ wxWindowList *wxWindowList_new() {
 }
 void wxWindowList_delete(wxWindowList *self) {
     delete self;
+}
+size_t wxWindowList_GetCount(wxWindowList *self) {
+    return self->GetCount();
 }
 bool wxWindowList_IsEmpty(wxWindowList *self) {
     return self->IsEmpty();

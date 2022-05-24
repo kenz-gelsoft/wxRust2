@@ -5,11 +5,13 @@ extern "C" {
     // SizerItemList
     wxSizerItemList *wxSizerItemList_new();
     void wxSizerItemList_delete(wxSizerItemList *self);
+    size_t wxSizerItemList_GetCount(wxSizerItemList *self);
     bool wxSizerItemList_IsEmpty(wxSizerItemList *self);
 
     // WindowList
     wxWindowList *wxWindowList_new();
     void wxWindowList_delete(wxWindowList *self);
+    size_t wxWindowList_GetCount(wxWindowList *self);
     bool wxWindowList_IsEmpty(wxWindowList *self);
 
     int wxRustMessageBox(const wxString *message, const wxString *caption, int style, wxWindow *parent, int x, int y);
