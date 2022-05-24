@@ -51,6 +51,7 @@ impl ButtonWidgetsPage {
         println!("event={}", event.get_id());
         if let Some(m) = ButtonPage::from(event.get_id()) {
             match m {
+                ButtonPage::Reset => self.on_button_reset(),
                 ButtonPage::ChangeLabel => self.on_button_change_label(),
                 _ => (),
             };
@@ -321,6 +322,14 @@ impl ButtonWidgetsPage {
         sizer.add_spacer(2);
 
         return checkbox;
+    }
+
+    fn on_button_reset(&self) {
+        self.reset();
+        // TODO: make mut self callable here, or
+        // make create_button() not to require mut self.
+        //
+        // self.create_button();
     }
 
     fn on_button_change_label(&self) {
