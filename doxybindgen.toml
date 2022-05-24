@@ -248,7 +248,6 @@ blocklist = [
     # virtual
     'wxSizer',
     # returns refs
-    'GetChildren',
     'GetChildren1',
     # deprecated, use Remove() without args
     'Remove',

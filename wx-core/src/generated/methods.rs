@@ -2285,7 +2285,9 @@ pub trait SizerMethods: ObjectMethods {
             ffi::wxSizer_InformFirstDirection(self.as_ptr(), direction, size, available_other_dir)
         }
     }
-    // BLOCKED: fn GetChildren()
+    fn get_children(&self) -> SizerItemListIsOwned<false> {
+        unsafe { SizerItemListIsOwned::from_ptr(ffi::wxSizer_GetChildren(self.as_ptr())) }
+    }
     // BLOCKED: fn GetChildren1()
     fn get_containing_window(&self) -> WeakRef<Window> {
         unsafe { WeakRef::<Window>::from(ffi::wxSizer_GetContainingWindow(self.as_ptr())) }

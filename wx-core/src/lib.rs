@@ -22,6 +22,11 @@ pub mod methods {
         fn builder(parent: Option<&'a P>) -> B;
     }
 
+    pub trait SizerItemListMethods: WxRustMethods {
+        fn is_empty(&self) -> bool {
+            unsafe { super::ffi::wxSizerItemList_IsEmpty(self.as_ptr()) }
+        }
+    }
     pub trait WindowListMethods: WxRustMethods {
         fn is_empty(&self) -> bool {
             unsafe { super::ffi::wxWindowList_IsEmpty(self.as_ptr()) }
@@ -198,6 +203,11 @@ mod ffi {
     use std::os::raw::{c_int, c_long, c_void};
     extern "C" {
         pub fn wxObject_delete(self_: *mut c_void);
+
+        // SizerItemList
+        pub fn wxSizerItemList_new() -> *mut c_void;
+        pub fn wxSizerItemList_delete(self_: *mut c_void);
+        pub fn wxSizerItemList_IsEmpty(self_: *mut c_void) -> bool;
 
         // WindowList
         pub fn wxWindowList_new() -> *mut c_void;
@@ -997,6 +1007,23 @@ impl<const OWNED: bool> Default for SizeIsOwned<OWNED> {
 impl<const OWNED: bool> Default for ValidatorIsOwned<OWNED> {
     fn default() -> Self {
         ValidatorIsOwned::new()
+    }
+}
+
+wx_class! { SizerItemList =
+    SizerItemListIsOwned<true>(wxSizerItemList) impl
+    SizerItemListMethods
+}
+impl<const OWNED: bool> SizerItemListIsOwned<OWNED> {
+    pub fn new() -> Self {
+        unsafe { SizerItemListIsOwned(ffi::wxSizerItemList_new()) }
+    }
+}
+impl<const OWNED: bool> Drop for SizerItemListIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxSizerItemList_delete(self.0) }
+        }
     }
 }
 

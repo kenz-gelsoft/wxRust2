@@ -2,6 +2,11 @@
 #include <wx/wx.h>
 
 extern "C" {
+    // SizerItemList
+    wxSizerItemList *wxSizerItemList_new();
+    void wxSizerItemList_delete(wxSizerItemList *self);
+    bool wxSizerItemList_IsEmpty(wxSizerItemList *self);
+
     // WindowList
     wxWindowList *wxWindowList_new();
     void wxWindowList_delete(wxWindowList *self);

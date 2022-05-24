@@ -962,8 +962,8 @@ extern "C" {
         size: c_int,
         available_other_dir: c_int,
     ) -> bool;
-    // BLOCKED: pub fn wxSizer_GetChildren(self_: *mut c_void) -> *mut c_void;
-    // BLOCKED: pub fn wxSizer_GetChildren1(self_: *const c_void) -> *const c_void;
+    pub fn wxSizer_GetChildren(self_: *mut c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxSizer_GetChildren1(self_: *const c_void) -> *mut c_void;
     pub fn wxSizer_GetContainingWindow(self_: *const c_void) -> *mut c_void;
     pub fn wxSizer_SetContainingWindow(self_: *mut c_void, window: *mut c_void);
     pub fn wxSizer_GetItemCount(self_: *const c_void) -> usize;

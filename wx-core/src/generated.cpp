@@ -1315,6 +1315,9 @@ void wxSizer_FitInside(wxSizer * self, wxWindow * window) {
 bool wxSizer_InformFirstDirection(wxSizer * self, int direction, int size, int available_other_dir) {
     return self->InformFirstDirection(direction, size, available_other_dir);
 }
+wxSizerItemList * wxSizer_GetChildren(wxSizer * self) {
+    return &(self->GetChildren());
+}
 wxWindow * wxSizer_GetContainingWindow(const wxSizer * self) {
     return self->GetContainingWindow();
 }

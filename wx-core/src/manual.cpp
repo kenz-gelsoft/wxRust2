@@ -1,6 +1,17 @@
 #include "manual.h"
 
 // WindowList
+wxSizerItemList *wxSizerItemList_new() {
+    return new wxSizerItemList();
+}
+void wxSizerItemList_delete(wxSizerItemList *self) {
+    delete self;
+}
+bool wxSizerItemList_IsEmpty(wxSizerItemList *self) {
+    return self->IsEmpty();
+}
+
+// WindowList
 wxWindowList *wxWindowList_new() {
     return new wxWindowList();
 }

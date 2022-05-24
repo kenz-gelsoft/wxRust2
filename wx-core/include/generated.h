@@ -500,6 +500,7 @@ bool wxSizer_Detach2(wxSizer * self, int index);
 wxSize *wxSizer_Fit(wxSizer * self, wxWindow * window);
 void wxSizer_FitInside(wxSizer * self, wxWindow * window);
 bool wxSizer_InformFirstDirection(wxSizer * self, int direction, int size, int available_other_dir);
+wxSizerItemList * wxSizer_GetChildren(wxSizer * self);
 wxWindow * wxSizer_GetContainingWindow(const wxSizer * self);
 void wxSizer_SetContainingWindow(wxSizer * self, wxWindow * window);
 size_t wxSizer_GetItemCount(const wxSizer * self);
