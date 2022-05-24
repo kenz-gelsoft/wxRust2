@@ -1,3 +1,4 @@
+use std::cell::RefCell;
 use std::os::raw::c_int;
 use wx::methods::*;
 
@@ -30,9 +31,9 @@ impl From<ButtonPage> for c_int {
 #[derive(Clone)]
 pub struct ButtonWidgetsPage {
     pub base: wx::Panel,
-    m_button: Option<wx::Button>,
-    m_text_label: Option<wx::TextCtrl>,
-    m_sizer_button: Option<wx::BoxSizer>,
+    m_button: RefCell<Option<wx::Button>>,
+    m_text_label: RefCell<Option<wx::TextCtrl>>,
+    m_sizer_button: RefCell<Option<wx::BoxSizer>>,
 }
 impl ButtonWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {
@@ -41,9 +42,9 @@ impl ButtonWidgetsPage {
             .build();
         ButtonWidgetsPage {
             base: panel,
-            m_button: None,
-            m_text_label: None,
-            m_sizer_button: None,
+            m_button: RefCell::new(None),
+            m_text_label: RefCell::new(None),
+            m_sizer_button: RefCell::new(None),
         }
     }
 
@@ -58,7 +59,7 @@ impl ButtonWidgetsPage {
         }
     }
 
-    pub fn create_content(&mut self) {
+    pub fn create_content(&self) {
         let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
 
         // left pane
@@ -188,7 +189,7 @@ impl ButtonWidgetsPage {
             wx::ID_ANY,
         );
         text_label.set_value("&Press me!");
-        self.m_text_label = Some(text_label);
+        *self.m_text_label.borrow_mut() = Some(text_label);
         sizer_middle.add_sizer_sizerflags(
             Some(&sizer_row),
             wx::SizerFlags::new(0).expand().border(wx::ALL),
@@ -215,7 +216,7 @@ impl ButtonWidgetsPage {
                 .expand()
                 .double_border(wx::ALL & !wx::RIGHT),
         );
-        self.m_sizer_button = Some(sizer_button);
+        *self.m_sizer_button.borrow_mut() = Some(sizer_button);
 
         // do create the main control
         self.reset();
@@ -224,7 +225,7 @@ impl ButtonWidgetsPage {
         self.base.set_sizer(Some(&sizer_top), true);
     }
 
-    fn recreate_widget(&mut self) {
+    fn recreate_widget(&self) {
         self.create_button();
     }
 
@@ -232,30 +233,36 @@ impl ButtonWidgetsPage {
         // TODO reset checkboxes to initial values
     }
 
-    fn create_button(&mut self) {
+    fn create_button(&self) {
         let mut label = "".to_string();
-        if let Some(button) = &self.m_button {
+        if let Some(button) = self.m_button.borrow().as_ref() {
             label = button.get_label();
 
             // TODO: remove (and delete) all buttons
-            // let count = self.m_sizer_button.get_children().get_count();
+            let count = self
+                .m_sizer_button
+                .borrow()
+                .as_ref()
+                .unwrap()
+                .get_children()
+                .get_count();
         }
 
         if label.is_empty() {
-            label = self.m_text_label.as_ref().unwrap().get_value();
+            label = self.m_text_label.borrow().as_ref().unwrap().get_value();
         }
 
-        self.m_button = Some(
+        *self.m_button.borrow_mut() = Some(
             wx::Button::builder(Some(&self.base))
                 .id(ButtonPage::Button.into())
                 .label(&label)
                 .build(),
         );
 
-        if let Some(sizer_button) = &self.m_sizer_button {
+        if let Some(sizer_button) = self.m_sizer_button.borrow().as_ref() {
             sizer_button.add_stretch_spacer(1);
             sizer_button.add_window_sizerflags(
-                self.m_button.as_ref(),
+                self.m_button.borrow().as_ref(),
                 wx::SizerFlags::new(0).centre().border(wx::ALL),
             );
             sizer_button.add_stretch_spacer(1);
@@ -328,16 +335,19 @@ impl ButtonWidgetsPage {
         self.reset();
         // TODO: make mut self callable here, or
         // make create_button() not to require mut self.
-        //
-        // self.create_button();
+        self.create_button();
     }
 
     fn on_button_change_label(&self) {
-        let label_text = self.m_text_label.as_ref().unwrap().get_value();
+        let label_text = self.m_text_label.borrow().as_ref().unwrap().get_value();
         println!("{}", label_text);
 
-        self.m_button.as_ref().unwrap().set_label(&label_text);
+        self.m_button
+            .borrow()
+            .as_ref()
+            .unwrap()
+            .set_label(&label_text);
 
-        self.m_sizer_button.as_ref().unwrap().layout();
+        self.m_sizer_button.borrow().as_ref().unwrap().layout();
     }
 }
