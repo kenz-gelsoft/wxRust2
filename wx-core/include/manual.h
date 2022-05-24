@@ -1,18 +1,16 @@
 #pragma once
 #include <wx/wx.h>
 
-extern "C" {
-    // SizerItemList
-    wxSizerItemList *wxSizerItemList_new();
-    void wxSizerItemList_delete(wxSizerItemList *self);
-    size_t wxSizerItemList_GetCount(wxSizerItemList *self);
-    bool wxSizerItemList_IsEmpty(wxSizerItemList *self);
+#define DECL_WX_LIST_BINDING(wxclass)                   \
+    wxclass##List *wxclass##List_new();                 \
+    void wxclass##List_delete(wxclass##List *self);     \
+    size_t wxclass##List_GetCount(wxclass##List *self); \
+    bool wxclass##List_IsEmpty(wxclass##List *self);
 
-    // WindowList
-    wxWindowList *wxWindowList_new();
-    void wxWindowList_delete(wxWindowList *self);
-    size_t wxWindowList_GetCount(wxWindowList *self);
-    bool wxWindowList_IsEmpty(wxWindowList *self);
+extern "C" {
+    // wxList<T>
+    DECL_WX_LIST_BINDING(wxSizerItem);
+    DECL_WX_LIST_BINDING(wxWindow);
 
     int wxRustMessageBox(const wxString *message, const wxString *caption, int style, wxWindow *parent, int x, int y);
 

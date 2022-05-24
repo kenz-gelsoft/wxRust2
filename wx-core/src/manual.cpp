@@ -1,32 +1,22 @@
 #include "manual.h"
 
-// SizerItemList
-wxSizerItemList *wxSizerItemList_new() {
-    return new wxSizerItemList();
-}
-void wxSizerItemList_delete(wxSizerItemList *self) {
-    delete self;
-}
-size_t wxSizerItemList_GetCount(wxSizerItemList *self) {
-    return self->GetCount();
-}
-bool wxSizerItemList_IsEmpty(wxSizerItemList *self) {
-    return self->IsEmpty();
-}
+// wxList<T>
+#define IMPL_WX_LIST_BINDING(wxclass)                       \
+    wxclass##List *wxclass##List_new() {                    \
+        return new wxclass##List();                         \
+    }                                                       \
+    void wxclass##List_delete(wxclass##List *self) {        \
+        delete self;                                        \
+    }                                                       \
+    size_t wxclass##List_GetCount(wxclass##List *self) {    \
+        return self->GetCount();                            \
+    }                                                       \
+    bool wxclass##List_IsEmpty(wxclass##List *self) {       \
+        return self->IsEmpty();                             \
+    }
 
-// WindowList
-wxWindowList *wxWindowList_new() {
-    return new wxWindowList();
-}
-void wxWindowList_delete(wxWindowList *self) {
-    delete self;
-}
-size_t wxWindowList_GetCount(wxWindowList *self) {
-    return self->GetCount();
-}
-bool wxWindowList_IsEmpty(wxWindowList *self) {
-    return self->IsEmpty();
-}
+IMPL_WX_LIST_BINDING(wxSizerItem);
+IMPL_WX_LIST_BINDING(wxWindow);
 
 int wxRustMessageBox(const wxString *message, const wxString *caption, int style, wxWindow *parent, int x, int y) {
     return wxMessageBox(*message, *caption, style, parent, x, y);
