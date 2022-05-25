@@ -1,5 +1,5 @@
 use std::cell::RefCell;
-use std::os::raw::c_int;
+use std::os::raw::{c_int, c_long};
 use wx::methods::*;
 
 // control ids
@@ -28,12 +28,19 @@ impl From<ButtonPage> for c_int {
     }
 }
 
+const BUTTON_HALIGN_LEFT: c_int = 0;
+const BUTTON_HALIGN_CENTRE: c_int = 1;
+const BUTTON_HALIGN_RIGHT: c_int = 2;
+
 #[derive(Clone)]
 pub struct ButtonWidgetsPage {
     pub base: wx::Panel,
+    m_radio_halign: RefCell<Option<wx::RadioBox>>,
+    // the button itself and the sizer it is in
     m_button: RefCell<Option<wx::Button>>,
-    m_text_label: RefCell<Option<wx::TextCtrl>>,
     m_sizer_button: RefCell<Option<wx::BoxSizer>>,
+    // the text entries for command parameters
+    m_text_label: RefCell<Option<wx::TextCtrl>>,
 }
 impl ButtonWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {
@@ -42,9 +49,10 @@ impl ButtonWidgetsPage {
             .build();
         ButtonWidgetsPage {
             base: panel,
+            m_radio_halign: RefCell::new(None),
             m_button: RefCell::new(None),
-            m_text_label: RefCell::new(None),
             m_sizer_button: RefCell::new(None),
+            m_text_label: RefCell::new(None),
         }
     }
 
@@ -140,10 +148,12 @@ impl ButtonWidgetsPage {
         halign.add("left");
         halign.add("centre");
         halign.add("right");
-        let radio_halign = wx::RadioBox::builder(Some(&self.base))
-            .label("&Horz alignment")
-            .choices(halign)
-            .build();
+        let radio_halign = Some(
+            wx::RadioBox::builder(Some(&self.base))
+                .label("&Horz alignment")
+                .choices(halign)
+                .build(),
+        );
 
         let valign = wx::ArrayString::new();
         valign.add("left");
@@ -155,9 +165,10 @@ impl ButtonWidgetsPage {
             .build();
 
         sizer_left.add_window_sizerflags(
-            Some(&radio_halign),
+            radio_halign.as_ref(),
             wx::SizerFlags::new(0).expand().border(wx::ALL),
         );
+        *self.m_radio_halign.borrow_mut() = radio_halign;
         sizer_left.add_window_sizerflags(
             Some(&radio_valign),
             wx::SizerFlags::new(0).expand().border(wx::ALL),
@@ -252,10 +263,24 @@ impl ButtonWidgetsPage {
             label = self.m_text_label.borrow().as_ref().unwrap().get_value();
         }
 
+        let mut flags = wx::BORDER_DEFAULT;
+        flags |= match self
+            .m_radio_halign
+            .borrow()
+            .as_ref()
+            .unwrap()
+            .get_selection()
+        {
+            BUTTON_HALIGN_LEFT => wx::BU_LEFT,
+            BUTTON_HALIGN_RIGHT => wx::BU_RIGHT,
+            _ => 0,
+        } as c_long;
+
         let new_button = Some(
             wx::Button::builder(Some(&self.base))
                 .id(ButtonPage::Button.into())
                 .label(&label)
+                .style(flags)
                 .build(),
         );
 
