@@ -43,6 +43,7 @@ pub struct ButtonWidgetsPage {
     m_chk_fit: RefCell<Option<wx::CheckBox>>,
     m_chk_auth_needed: RefCell<Option<wx::CheckBox>>,
     m_chk_default: RefCell<Option<wx::CheckBox>>,
+    m_chk_disable: RefCell<Option<wx::CheckBox>>,
     m_radio_halign: RefCell<Option<wx::RadioBox>>,
     m_radio_valign: RefCell<Option<wx::RadioBox>>,
     // the button itself and the sizer it is in
@@ -61,6 +62,7 @@ impl ButtonWidgetsPage {
             m_chk_fit: RefCell::new(None),
             m_chk_auth_needed: RefCell::new(None),
             m_chk_default: RefCell::new(None),
+            m_chk_disable: RefCell::new(None),
             m_radio_halign: RefCell::new(None),
             m_radio_valign: RefCell::new(None),
             m_button: RefCell::new(None),
@@ -105,8 +107,8 @@ impl ButtonWidgetsPage {
             self.create_check_box_and_add_to_sizer(&sizer_left, "Use wxBitmapButton", wx::ID_ANY);
         chk_use_bitmap_class.set_value(true);
 
-        let chk_disable =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "Disable", wx::ID_ANY);
+        *self.m_chk_disable.borrow_mut() =
+            Some(self.create_check_box_and_add_to_sizer(&sizer_left, "Disable", wx::ID_ANY));
 
         sizer_left.add_spacer(5);
 
@@ -339,6 +341,8 @@ impl ButtonWidgetsPage {
         if self.m_chk_default.borrow().as_ref().unwrap().get_value() {
             new_button.set_default();
         }
+
+        new_button.enable(!self.m_chk_disable.borrow().as_ref().unwrap().is_checked());
 
         *self.m_button.borrow_mut() = Some(new_button);
     }
