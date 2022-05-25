@@ -42,6 +42,7 @@ pub struct ButtonWidgetsPage {
     // the check/radio boxes for styles
     m_chk_fit: RefCell<Option<wx::CheckBox>>,
     m_chk_auth_needed: RefCell<Option<wx::CheckBox>>,
+    m_chk_default: RefCell<Option<wx::CheckBox>>,
     m_radio_halign: RefCell<Option<wx::RadioBox>>,
     m_radio_valign: RefCell<Option<wx::RadioBox>>,
     // the button itself and the sizer it is in
@@ -59,6 +60,7 @@ impl ButtonWidgetsPage {
             base: panel,
             m_chk_fit: RefCell::new(None),
             m_chk_auth_needed: RefCell::new(None),
+            m_chk_default: RefCell::new(None),
             m_radio_halign: RefCell::new(None),
             m_radio_valign: RefCell::new(None),
             m_button: RefCell::new(None),
@@ -96,8 +98,8 @@ impl ButtonWidgetsPage {
             Some(self.create_check_box_and_add_to_sizer(&sizer_left, "&Fit exactly", wx::ID_ANY));
         *self.m_chk_auth_needed.borrow_mut() =
             Some(self.create_check_box_and_add_to_sizer(&sizer_left, "Require a&uth", wx::ID_ANY));
-        let chk_default =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "&Default", wx::ID_ANY);
+        *self.m_chk_default.borrow_mut() =
+            Some(self.create_check_box_and_add_to_sizer(&sizer_left, "&Default", wx::ID_ANY));
 
         let chk_use_bitmap_class =
             self.create_check_box_and_add_to_sizer(&sizer_left, "Use wxBitmapButton", wx::ID_ANY);
@@ -332,6 +334,10 @@ impl ButtonWidgetsPage {
             .get_value()
         {
             new_button.set_auth_needed(true);
+        }
+
+        if self.m_chk_default.borrow().as_ref().unwrap().get_value() {
+            new_button.set_default();
         }
 
         *self.m_button.borrow_mut() = Some(new_button);
