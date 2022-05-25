@@ -39,6 +39,8 @@ const BUTTON_VALIGN_BOTTOM: c_int = 2;
 #[derive(Clone)]
 pub struct ButtonWidgetsPage {
     pub base: wx::Panel,
+    // the check/radio boxes for styles
+    m_chk_fit: RefCell<Option<wx::CheckBox>>,
     m_radio_halign: RefCell<Option<wx::RadioBox>>,
     m_radio_valign: RefCell<Option<wx::RadioBox>>,
     // the button itself and the sizer it is in
@@ -54,6 +56,7 @@ impl ButtonWidgetsPage {
             .build();
         ButtonWidgetsPage {
             base: panel,
+            m_chk_fit: RefCell::new(None),
             m_radio_halign: RefCell::new(None),
             m_radio_valign: RefCell::new(None),
             m_button: RefCell::new(None),
@@ -87,8 +90,8 @@ impl ButtonWidgetsPage {
             self.create_check_box_and_add_to_sizer(&sizer_left, "&Bitmap only", wx::ID_ANY);
         let chk_text_and_bitmap =
             self.create_check_box_and_add_to_sizer(&sizer_left, "Text &and bitmap", wx::ID_ANY);
-        let chk_fit =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "&Fit exactly", wx::ID_ANY);
+        *self.m_chk_fit.borrow_mut() =
+            Some(self.create_check_box_and_add_to_sizer(&sizer_left, "&Fit exactly", wx::ID_ANY));
         let chk_auth_needed =
             self.create_check_box_and_add_to_sizer(&sizer_left, "Require a&uth", wx::ID_ANY);
         let chk_default =
@@ -297,6 +300,10 @@ impl ButtonWidgetsPage {
             // centre vertical alignment is the default (no style)
             _ => 0,
         } as c_long;
+
+        if self.m_chk_fit.borrow().as_ref().unwrap().get_value() {
+            flags |= wx::BU_EXACTFIT as c_long;
+        }
 
         let new_button = Some(
             wx::Button::builder(Some(&self.base))
