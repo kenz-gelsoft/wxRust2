@@ -14,6 +14,20 @@ extern "C" {
 
     int wxRustMessageBox(const wxString *message, const wxString *caption, int style, wxWindow *parent, int x, int y);
 
+    // CLASS: wxItemContainerImmutable
+    void wxItemContainerImmutable_delete(wxItemContainerImmutable *self);
+    void wxItemContainerImmutable_SetSelection(wxItemContainerImmutable * self, int n);
+    int wxItemContainerImmutable_GetSelection(const wxItemContainerImmutable * self);
+    bool wxItemContainerImmutable_SetStringSelection(wxItemContainerImmutable * self, const wxString * string);
+    wxString *wxItemContainerImmutable_GetStringSelection(const wxItemContainerImmutable * self);
+    void wxItemContainerImmutable_Select(wxItemContainerImmutable * self, int n);
+    wxItemContainerImmutable *wxItemContainerImmutable_new();
+    bool wxItemContainerImmutable_IsEmpty(const wxItemContainerImmutable * self);
+    wxArrayString *wxItemContainerImmutable_GetStrings(const wxItemContainerImmutable * self);
+    int wxItemContainerImmutable_FindString(const wxItemContainerImmutable * self, const wxString * string, bool case_sensitive);
+
+    wxItemContainerImmutable *wxRadioBox_AsItemContainerImmutable(wxRadioBox * obj);
+
     // CLASS: wxTextEntry
     void wxTextEntry_delete(wxTextEntry *self);
     void wxTextEntry_AppendText(wxTextEntry * self, const wxString * text);

@@ -48,6 +48,63 @@ pub mod methods {
         fn separator(self) -> Self;
     }
 
+    // wxItemContainerImmutable
+    pub trait ItemContainerImmutableMethods: WxRustMethods {
+        fn as_item_container_immutable(&self) -> *mut c_void;
+        fn set_selection(&self, n: c_int) {
+            unsafe {
+                ffi::wxItemContainerImmutable_SetSelection(self.as_item_container_immutable(), n)
+            }
+        }
+        fn get_selection(&self) -> c_int {
+            unsafe {
+                ffi::wxItemContainerImmutable_GetSelection(self.as_item_container_immutable())
+            }
+        }
+        fn set_string_selection(&self, string: &str) -> bool {
+            unsafe {
+                let string = wx_base::wx_string_from(string);
+                ffi::wxItemContainerImmutable_SetStringSelection(
+                    self.as_item_container_immutable(),
+                    string,
+                )
+            }
+        }
+        fn get_string_selection(&self) -> String {
+            unsafe {
+                wx_base::from_wx_string(ffi::wxItemContainerImmutable_GetStringSelection(
+                    self.as_item_container_immutable(),
+                ))
+            }
+        }
+        fn select(&self, n: c_int) {
+            unsafe { ffi::wxItemContainerImmutable_Select(self.as_item_container_immutable(), n) }
+        }
+        // NOT_SUPPORTED: fn GetCount()
+        fn is_empty(&self) -> bool {
+            unsafe { ffi::wxItemContainerImmutable_IsEmpty(self.as_item_container_immutable()) }
+        }
+        // NOT_SUPPORTED: fn GetString()
+        fn get_strings(&self) -> ArrayString {
+            unsafe {
+                ArrayStringIsOwned::from_ptr(ffi::wxItemContainerImmutable_GetStrings(
+                    self.as_item_container_immutable(),
+                ))
+            }
+        }
+        // NOT_SUPPORTED: fn SetString()
+        fn find_string(&self, string: &str, case_sensitive: bool) -> c_int {
+            unsafe {
+                let string = wx_base::wx_string_from(string);
+                ffi::wxItemContainerImmutable_FindString(
+                    self.as_item_container_immutable(),
+                    string,
+                    case_sensitive,
+                )
+            }
+        }
+    }
+
     // wxTextEntry
     pub trait TextEntryMethods: WxRustMethods {
         fn as_text_entry(&self) -> *mut c_void;
@@ -231,6 +288,29 @@ mod ffi {
             y: c_int,
         );
 
+        pub fn wxRadioBox_AsItemContainerImmutable(obj: *mut c_void) -> *mut c_void;
+        // wxItemContainerImmutable
+        pub fn wxItemContainerImmutable_delete(self_: *mut c_void);
+        pub fn wxItemContainerImmutable_SetSelection(self_: *mut c_void, n: c_int);
+        pub fn wxItemContainerImmutable_GetSelection(self_: *const c_void) -> c_int;
+        pub fn wxItemContainerImmutable_SetStringSelection(
+            self_: *mut c_void,
+            string: *const c_void,
+        ) -> bool;
+        pub fn wxItemContainerImmutable_GetStringSelection(self_: *const c_void) -> *mut c_void;
+        pub fn wxItemContainerImmutable_Select(self_: *mut c_void, n: c_int);
+        pub fn wxItemContainerImmutable_new() -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxItemContainerImmutable_GetCount(self_: *const c_void) -> unsigned int;
+        pub fn wxItemContainerImmutable_IsEmpty(self_: *const c_void) -> bool;
+        // NOT_SUPPORTED: pub fn wxItemContainerImmutable_GetString(self_: *const c_void, n: unsigned int) -> *mut c_void;
+        pub fn wxItemContainerImmutable_GetStrings(self_: *const c_void) -> *mut c_void;
+        // NOT_SUPPORTED: pub fn wxItemContainerImmutable_SetString(self_: *mut c_void, n: unsigned int, string: *const c_void);
+        pub fn wxItemContainerImmutable_FindString(
+            self_: *const c_void,
+            string: *const c_void,
+            case_sensitive: bool,
+        ) -> c_int;
+
         pub fn wxTextCtrl_AsTextEntry(obj: *mut c_void) -> *mut c_void;
         // wxTextEntry
         pub fn wxTextEntry_delete(self_: *mut c_void);
@@ -282,6 +362,13 @@ mod ffi {
         pub fn wxTextEntry_Undo(self_: *mut c_void);
         pub fn wxTextEntry_WriteText(self_: *mut c_void, text: *const c_void);
 
+    }
+}
+
+// Mix-in wxItemContainerImmutable manually
+impl<const OWNED: bool> ItemContainerImmutableMethods for RadioBoxIsOwned<OWNED> {
+    fn as_item_container_immutable(&self) -> *mut c_void {
+        unsafe { ffi::wxRadioBox_AsItemContainerImmutable(self.as_ptr()) }
     }
 }
 
