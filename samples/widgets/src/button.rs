@@ -41,6 +41,7 @@ pub struct ButtonWidgetsPage {
     pub base: wx::Panel,
     // the check/radio boxes for styles
     m_chk_fit: RefCell<Option<wx::CheckBox>>,
+    m_chk_auth_needed: RefCell<Option<wx::CheckBox>>,
     m_radio_halign: RefCell<Option<wx::RadioBox>>,
     m_radio_valign: RefCell<Option<wx::RadioBox>>,
     // the button itself and the sizer it is in
@@ -57,6 +58,7 @@ impl ButtonWidgetsPage {
         ButtonWidgetsPage {
             base: panel,
             m_chk_fit: RefCell::new(None),
+            m_chk_auth_needed: RefCell::new(None),
             m_radio_halign: RefCell::new(None),
             m_radio_valign: RefCell::new(None),
             m_button: RefCell::new(None),
@@ -92,8 +94,8 @@ impl ButtonWidgetsPage {
             self.create_check_box_and_add_to_sizer(&sizer_left, "Text &and bitmap", wx::ID_ANY);
         *self.m_chk_fit.borrow_mut() =
             Some(self.create_check_box_and_add_to_sizer(&sizer_left, "&Fit exactly", wx::ID_ANY));
-        let chk_auth_needed =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "Require a&uth", wx::ID_ANY);
+        *self.m_chk_auth_needed.borrow_mut() =
+            Some(self.create_check_box_and_add_to_sizer(&sizer_left, "Require a&uth", wx::ID_ANY));
         let chk_default =
             self.create_check_box_and_add_to_sizer(&sizer_left, "&Default", wx::ID_ANY);
 
@@ -305,25 +307,34 @@ impl ButtonWidgetsPage {
             flags |= wx::BU_EXACTFIT as c_long;
         }
 
-        let new_button = Some(
-            wx::Button::builder(Some(&self.base))
-                .id(ButtonPage::Button.into())
-                .label(&label)
-                .style(flags)
-                .build(),
-        );
+        let new_button = wx::Button::builder(Some(&self.base))
+            .id(ButtonPage::Button.into())
+            .label(&label)
+            .style(flags)
+            .build();
 
         if let Some(sizer_button) = self.m_sizer_button.borrow().as_ref() {
             sizer_button.add_stretch_spacer(1);
             sizer_button.add_window_sizerflags(
-                new_button.as_ref(),
+                Some(&new_button),
                 wx::SizerFlags::new(0).centre().border(wx::ALL),
             );
             sizer_button.add_stretch_spacer(1);
 
             sizer_button.layout();
         }
-        *self.m_button.borrow_mut() = new_button;
+
+        if self
+            .m_chk_auth_needed
+            .borrow()
+            .as_ref()
+            .unwrap()
+            .get_value()
+        {
+            new_button.set_auth_needed(true);
+        }
+
+        *self.m_button.borrow_mut() = Some(new_button);
     }
 
     // Utility methods from (and to be placed to) the base WidgetPage class
