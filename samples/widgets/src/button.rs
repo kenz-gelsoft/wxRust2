@@ -32,10 +32,15 @@ const BUTTON_HALIGN_LEFT: c_int = 0;
 const BUTTON_HALIGN_CENTRE: c_int = 1;
 const BUTTON_HALIGN_RIGHT: c_int = 2;
 
+const BUTTON_VALIGN_TOP: c_int = 0;
+const BUTTON_VALIGN_CENTRE: c_int = 1;
+const BUTTON_VALIGN_BOTTOM: c_int = 2;
+
 #[derive(Clone)]
 pub struct ButtonWidgetsPage {
     pub base: wx::Panel,
     m_radio_halign: RefCell<Option<wx::RadioBox>>,
+    m_radio_valign: RefCell<Option<wx::RadioBox>>,
     // the button itself and the sizer it is in
     m_button: RefCell<Option<wx::Button>>,
     m_sizer_button: RefCell<Option<wx::BoxSizer>>,
@@ -50,6 +55,7 @@ impl ButtonWidgetsPage {
         ButtonWidgetsPage {
             base: panel,
             m_radio_halign: RefCell::new(None),
+            m_radio_valign: RefCell::new(None),
             m_button: RefCell::new(None),
             m_sizer_button: RefCell::new(None),
             m_text_label: RefCell::new(None),
@@ -156,23 +162,26 @@ impl ButtonWidgetsPage {
         );
 
         let valign = wx::ArrayString::new();
-        valign.add("left");
+        valign.add("top");
         valign.add("centre");
-        valign.add("right");
-        let radio_valign = wx::RadioBox::builder(Some(&self.base))
-            .label("&Vert alignment")
-            .choices(valign)
-            .build();
+        valign.add("bottom");
+        let radio_valign = Some(
+            wx::RadioBox::builder(Some(&self.base))
+                .label("&Vert alignment")
+                .choices(valign)
+                .build(),
+        );
 
         sizer_left.add_window_sizerflags(
             radio_halign.as_ref(),
             wx::SizerFlags::new(0).expand().border(wx::ALL),
         );
-        *self.m_radio_halign.borrow_mut() = radio_halign;
         sizer_left.add_window_sizerflags(
-            Some(&radio_valign),
+            radio_valign.as_ref(),
             wx::SizerFlags::new(0).expand().border(wx::ALL),
         );
+        *self.m_radio_halign.borrow_mut() = radio_halign;
+        *self.m_radio_valign.borrow_mut() = radio_valign;
 
         sizer_left.add_spacer(5);
 
@@ -273,6 +282,19 @@ impl ButtonWidgetsPage {
         {
             BUTTON_HALIGN_LEFT => wx::BU_LEFT,
             BUTTON_HALIGN_RIGHT => wx::BU_RIGHT,
+            _ => 0,
+        } as c_long;
+
+        flags |= match self
+            .m_radio_valign
+            .borrow()
+            .as_ref()
+            .unwrap()
+            .get_selection()
+        {
+            BUTTON_VALIGN_TOP => wx::BU_TOP,
+            BUTTON_VALIGN_BOTTOM => wx::BU_BOTTOM,
+            // centre vertical alignment is the default (no style)
             _ => 0,
         } as c_long;
 
