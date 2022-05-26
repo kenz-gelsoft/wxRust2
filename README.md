@@ -41,6 +41,6 @@ Implementing the binding generator to be usable state with a small set of wx cla
 
 ## License
 
-[MIT Licnese](https://opensource.org/licenses/mit-license.php). but you can (and shoudld) treat this library as [wxWindows Library Licence](https://www.wxwidgets.org/about/licence/) (same with required wxWidgets library dependency).
+[MIT License](https://opensource.org/licenses/mit-license.php). but you can (and shoudld) treat this library as [wxWindows Library Licence](https://www.wxwidgets.org/about/licence/) (same with required wxWidgets library dependency).
 
 Large part of this project is the binding generator in Python (doxybindgen). This part may be usable and want to be used for another traditional C++ APIs with Doxygen documented (c.f. like Haiku OS APIs(Kits)) in future. So permissive license is desirable.
