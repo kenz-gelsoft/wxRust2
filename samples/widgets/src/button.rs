@@ -39,23 +39,23 @@ const BUTTON_VALIGN_BOTTOM: c_int = 2;
 #[derive(Clone)]
 pub struct ConfigUI {
     // the check/radio boxes for styles
-    m_chk_fit: wx::CheckBox,
-    m_chk_auth_needed: wx::CheckBox,
-    m_chk_default: wx::CheckBox,
-    m_chk_disable: wx::CheckBox,
-    m_radio_halign: wx::RadioBox,
-    m_radio_valign: wx::RadioBox,
-    m_sizer_button: wx::BoxSizer,
+    chk_fit: wx::CheckBox,
+    chk_auth_needed: wx::CheckBox,
+    chk_default: wx::CheckBox,
+    chk_disable: wx::CheckBox,
+    radio_halign: wx::RadioBox,
+    radio_valign: wx::RadioBox,
+    sizer_button: wx::BoxSizer,
     // the text entries for command parameters
-    m_text_label: wx::TextCtrl,
+    text_label: wx::TextCtrl,
 }
 
 #[derive(Clone)]
 pub struct ButtonWidgetsPage {
     pub base: wx::Panel,
-    m_config_ui: RefCell<Option<ConfigUI>>,
+    config_ui: RefCell<Option<ConfigUI>>,
     // the button itself and the sizer it is in
-    m_button: RefCell<Option<wx::Button>>,
+    button: RefCell<Option<wx::Button>>,
 }
 impl ButtonWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {
@@ -64,8 +64,8 @@ impl ButtonWidgetsPage {
             .build();
         ButtonWidgetsPage {
             base: panel,
-            m_config_ui: RefCell::new(None),
-            m_button: RefCell::new(None),
+            config_ui: RefCell::new(None),
+            button: RefCell::new(None),
         }
     }
 
@@ -236,15 +236,15 @@ impl ButtonWidgetsPage {
                 .expand()
                 .double_border(wx::ALL & !wx::RIGHT),
         );
-        *self.m_config_ui.borrow_mut() = Some(ConfigUI {
-            m_chk_fit: chk_fit,
-            m_chk_auth_needed: chk_auth_needed,
-            m_chk_default: chk_default,
-            m_chk_disable: chk_disable,
-            m_radio_halign: radio_halign,
-            m_radio_valign: radio_valign,
-            m_sizer_button: sizer_button,
-            m_text_label: text_label,
+        *self.config_ui.borrow_mut() = Some(ConfigUI {
+            chk_fit: chk_fit,
+            chk_auth_needed: chk_auth_needed,
+            chk_default: chk_default,
+            chk_disable: chk_disable,
+            radio_halign: radio_halign,
+            radio_valign: radio_valign,
+            sizer_button: sizer_button,
+            text_label: text_label,
         });
 
         // do create the main control
@@ -263,38 +263,38 @@ impl ButtonWidgetsPage {
     }
 
     fn create_button(&self) {
-        if let Some(config_ui) = self.m_config_ui.borrow().as_ref() {
+        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
             let mut label = "".to_string();
-            if let Some(button) = self.m_button.borrow().as_ref() {
+            if let Some(button) = self.button.borrow().as_ref() {
                 label = button.get_label();
 
                 // TODO: remove (and delete) all buttons
-                let count = config_ui.m_sizer_button.get_children().get_count();
+                let count = config_ui.sizer_button.get_children().get_count();
                 for _ in 0..count {
-                    config_ui.m_sizer_button.remove_int(0);
+                    config_ui.sizer_button.remove_int(0);
                 }
                 button.destroy();
             }
 
             if label.is_empty() {
-                label = config_ui.m_text_label.get_value();
+                label = config_ui.text_label.get_value();
             }
 
             let mut flags = wx::BORDER_DEFAULT;
-            flags |= match config_ui.m_radio_halign.get_selection() {
+            flags |= match config_ui.radio_halign.get_selection() {
                 BUTTON_HALIGN_LEFT => wx::BU_LEFT,
                 BUTTON_HALIGN_RIGHT => wx::BU_RIGHT,
                 _ => 0,
             } as c_long;
 
-            flags |= match config_ui.m_radio_valign.get_selection() {
+            flags |= match config_ui.radio_valign.get_selection() {
                 BUTTON_VALIGN_TOP => wx::BU_TOP,
                 BUTTON_VALIGN_BOTTOM => wx::BU_BOTTOM,
                 // centre vertical alignment is the default (no style)
                 _ => 0,
             } as c_long;
 
-            if config_ui.m_chk_fit.get_value() {
+            if config_ui.chk_fit.get_value() {
                 flags |= wx::BU_EXACTFIT as c_long;
             }
 
@@ -304,17 +304,17 @@ impl ButtonWidgetsPage {
                 .style(flags)
                 .build();
 
-            if config_ui.m_chk_auth_needed.get_value() {
+            if config_ui.chk_auth_needed.get_value() {
                 new_button.set_auth_needed(true);
             }
 
-            if config_ui.m_chk_default.get_value() {
+            if config_ui.chk_default.get_value() {
                 new_button.set_default();
             }
 
-            new_button.enable(!config_ui.m_chk_disable.is_checked());
+            new_button.enable(!config_ui.chk_disable.is_checked());
 
-            let sizer_button = &config_ui.m_sizer_button;
+            let sizer_button = &config_ui.sizer_button;
             sizer_button.add_stretch_spacer(1);
             sizer_button.add_window_sizerflags(
                 Some(&new_button),
@@ -324,7 +324,7 @@ impl ButtonWidgetsPage {
 
             sizer_button.layout();
 
-            *self.m_button.borrow_mut() = Some(new_button);
+            *self.button.borrow_mut() = Some(new_button);
         }
     }
 
@@ -396,17 +396,17 @@ impl ButtonWidgetsPage {
     }
 
     fn on_button_change_label(&self) {
-        if let Some(config_ui) = self.m_config_ui.borrow().as_ref() {
-            let label_text = config_ui.m_text_label.get_value();
+        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+            let label_text = config_ui.text_label.get_value();
             println!("{}", label_text);
 
-            self.m_button
+            self.button
                 .borrow()
                 .as_ref()
                 .unwrap()
                 .set_label(&label_text);
 
-            config_ui.m_sizer_button.layout();
+            config_ui.sizer_button.layout();
         }
     }
 }
