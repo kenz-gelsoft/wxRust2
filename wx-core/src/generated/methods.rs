@@ -26,7 +26,12 @@ pub trait AnyButtonMethods: ControlMethods {
     fn get_bitmap_pressed(&self) -> Bitmap {
         unsafe { BitmapIsOwned(ffi::wxAnyButton_GetBitmapPressed(self.as_ptr())) }
     }
-    // NOT_SUPPORTED: fn SetBitmap()
+    fn set_bitmap<B: BitmapMethods>(&self, bitmap: &B, dir: c_int) {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            ffi::wxAnyButton_SetBitmap(self.as_ptr(), bitmap, dir)
+        }
+    }
     fn set_bitmap_current<B: BitmapMethods>(&self, bitmap: &B) {
         unsafe {
             let bitmap = bitmap.as_ptr();
@@ -69,7 +74,9 @@ pub trait AnyButtonMethods: ControlMethods {
             ffi::wxAnyButton_SetBitmapMargins1(self.as_ptr(), sz)
         }
     }
-    // NOT_SUPPORTED: fn SetBitmapPosition()
+    fn set_bitmap_position(&self, dir: c_int) {
+        unsafe { ffi::wxAnyButton_SetBitmapPosition(self.as_ptr(), dir) }
+    }
 }
 
 // wxArtProvider

@@ -13,7 +13,7 @@ extern "C" {
     pub fn wxAnyButton_GetBitmapFocus(self_: *const c_void) -> *mut c_void;
     pub fn wxAnyButton_GetBitmapLabel(self_: *const c_void) -> *mut c_void;
     pub fn wxAnyButton_GetBitmapPressed(self_: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxAnyButton_SetBitmap(self_: *mut c_void, bitmap: *const c_void, dir: wxDirection);
+    pub fn wxAnyButton_SetBitmap(self_: *mut c_void, bitmap: *const c_void, dir: c_int);
     pub fn wxAnyButton_SetBitmapCurrent(self_: *mut c_void, bitmap: *const c_void);
     pub fn wxAnyButton_SetBitmapDisabled(self_: *mut c_void, bitmap: *const c_void);
     pub fn wxAnyButton_SetBitmapFocus(self_: *mut c_void, bitmap: *const c_void);
@@ -22,7 +22,7 @@ extern "C" {
     pub fn wxAnyButton_GetBitmapMargins(self_: *mut c_void) -> *mut c_void;
     pub fn wxAnyButton_SetBitmapMargins(self_: *mut c_void, x: c_int, y: c_int);
     pub fn wxAnyButton_SetBitmapMargins1(self_: *mut c_void, sz: *const c_void);
-    // NOT_SUPPORTED: pub fn wxAnyButton_SetBitmapPosition(self_: *mut c_void, dir: wxDirection);
+    pub fn wxAnyButton_SetBitmapPosition(self_: *mut c_void, dir: c_int);
 
     // wxArtProvider
     // DTOR: pub fn wxArtProvider_~wxArtProvider(self_: *mut c_void);

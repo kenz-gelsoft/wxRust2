@@ -24,6 +24,9 @@ wxBitmap *wxAnyButton_GetBitmapLabel(const wxAnyButton * self) {
 wxBitmap *wxAnyButton_GetBitmapPressed(const wxAnyButton * self) {
     return new wxBitmap(self->GetBitmapPressed());
 }
+void wxAnyButton_SetBitmap(wxAnyButton * self, const wxBitmap * bitmap, wxDirection dir) {
+    return self->SetBitmap(*bitmap, dir);
+}
 void wxAnyButton_SetBitmapCurrent(wxAnyButton * self, const wxBitmap * bitmap) {
     return self->SetBitmapCurrent(*bitmap);
 }
@@ -47,6 +50,9 @@ void wxAnyButton_SetBitmapMargins(wxAnyButton * self, wxCoord x, wxCoord y) {
 }
 void wxAnyButton_SetBitmapMargins1(wxAnyButton * self, const wxSize * sz) {
     return self->SetBitmapMargins(*sz);
+}
+void wxAnyButton_SetBitmapPosition(wxAnyButton * self, wxDirection dir) {
+    return self->SetBitmapPosition(dir);
 }
 
 // CLASS: wxArtProvider

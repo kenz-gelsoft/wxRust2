@@ -15,6 +15,7 @@ wxBitmap *wxAnyButton_GetBitmapDisabled(const wxAnyButton * self);
 wxBitmap *wxAnyButton_GetBitmapFocus(const wxAnyButton * self);
 wxBitmap *wxAnyButton_GetBitmapLabel(const wxAnyButton * self);
 wxBitmap *wxAnyButton_GetBitmapPressed(const wxAnyButton * self);
+void wxAnyButton_SetBitmap(wxAnyButton * self, const wxBitmap * bitmap, wxDirection dir);
 void wxAnyButton_SetBitmapCurrent(wxAnyButton * self, const wxBitmap * bitmap);
 void wxAnyButton_SetBitmapDisabled(wxAnyButton * self, const wxBitmap * bitmap);
 void wxAnyButton_SetBitmapFocus(wxAnyButton * self, const wxBitmap * bitmap);
@@ -23,6 +24,7 @@ void wxAnyButton_SetBitmapPressed(wxAnyButton * self, const wxBitmap * bitmap);
 wxSize *wxAnyButton_GetBitmapMargins(wxAnyButton * self);
 void wxAnyButton_SetBitmapMargins(wxAnyButton * self, wxCoord x, wxCoord y);
 void wxAnyButton_SetBitmapMargins1(wxAnyButton * self, const wxSize * sz);
+void wxAnyButton_SetBitmapPosition(wxAnyButton * self, wxDirection dir);
 
 // CLASS: wxArtProvider
 bool wxArtProvider_Delete(wxArtProvider * provider);
