@@ -32,6 +32,11 @@ impl From<ButtonPage> for c_int {
     }
 }
 
+const BUTTON_IMAGE_POS_LEFT: c_int = 0;
+const BUTTON_IMAGE_POS_RIGHT: c_int = 1;
+const BUTTON_IMAGE_POS_TOP: c_int = 2;
+const BUTTON_IMAGE_POS_BOTTOM: c_int = 3;
+
 const BUTTON_HALIGN_LEFT: c_int = 0;
 const BUTTON_HALIGN_CENTRE: c_int = 1;
 const BUTTON_HALIGN_RIGHT: c_int = 2;
@@ -55,6 +60,26 @@ pub struct ConfigUI {
     sizer_button: wx::BoxSizer,
     // the text entries for command parameters
     text_label: wx::TextCtrl,
+}
+impl ConfigUI {
+    fn reset(&self) {
+        // self.chk_bitmap_only.set_value(false);
+        self.chk_fit.set_value(false);
+        self.chk_auth_needed.set_value(false);
+        self.chk_text_and_bitmap.set_value(false);
+        self.chk_default.set_value(false);
+        self.chk_use_bitmap_class.set_value(true);
+        self.chk_disable.set_value(false);
+
+        // self.chk_use_pressed.set_value(true);
+        // self.chk_use_focused.set_value(true);
+        // self.chk_use_current.set_value(true);
+        // self.chk_use_disabled.set_value(true);
+
+        self.radio_image_pos.set_selection(BUTTON_IMAGE_POS_LEFT);
+        self.radio_halign.set_selection(BUTTON_HALIGN_CENTRE);
+        self.radio_valign.set_selection(BUTTON_VALIGN_CENTRE);
+    }
 }
 
 #[derive(Clone)]
@@ -244,17 +269,17 @@ impl ButtonWidgetsPage {
                 .double_border(wx::ALL & !wx::RIGHT),
         );
         *self.config_ui.borrow_mut() = Some(ConfigUI {
-            chk_text_and_bitmap: chk_text_and_bitmap,
-            chk_fit: chk_fit,
-            chk_auth_needed: chk_auth_needed,
-            chk_default: chk_default,
-            chk_use_bitmap_class: chk_use_bitmap_class,
-            chk_disable: chk_disable,
-            radio_image_pos: radio_image_pos,
-            radio_halign: radio_halign,
-            radio_valign: radio_valign,
-            sizer_button: sizer_button,
-            text_label: text_label,
+            chk_text_and_bitmap,
+            chk_fit,
+            chk_auth_needed,
+            chk_default,
+            chk_use_bitmap_class,
+            chk_disable,
+            radio_image_pos,
+            radio_halign,
+            radio_valign,
+            sizer_button,
+            text_label,
         });
 
         // do create the main control
@@ -269,7 +294,9 @@ impl ButtonWidgetsPage {
     }
 
     fn reset(&self) {
-        // TODO reset checkboxes to initial values
+        // if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+        //     config_ui.reset();
+        // }
     }
 
     fn create_button(&self) {
