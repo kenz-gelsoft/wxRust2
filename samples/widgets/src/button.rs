@@ -7,14 +7,18 @@ use wx::methods::*;
 enum ButtonPage {
     Reset = wx::ID_HIGHEST as isize,
     ChangeLabel,
-    ChangeNote,
-    ChangeImageMargins,
+    // ChangeNote, // for CommandLinkButton
     Button,
 }
 impl ButtonPage {
     fn from(v: c_int) -> Option<Self> {
         use ButtonPage::*;
-        for e in [Reset, ChangeLabel, ChangeNote, ChangeImageMargins, Button] {
+        for e in [
+            Reset,
+            ChangeLabel,
+            // ChangeNote,
+            Button,
+        ] {
             if v == e.into() {
                 return Some(e);
             }
@@ -39,10 +43,13 @@ const BUTTON_VALIGN_BOTTOM: c_int = 2;
 #[derive(Clone)]
 pub struct ConfigUI {
     // the check/radio boxes for styles
+    chk_text_and_bitmap: wx::CheckBox,
     chk_fit: wx::CheckBox,
     chk_auth_needed: wx::CheckBox,
     chk_default: wx::CheckBox,
+    chk_use_bitmap_class: wx::CheckBox,
     chk_disable: wx::CheckBox,
+    radio_image_pos: wx::RadioBox,
     radio_halign: wx::RadioBox,
     radio_valign: wx::RadioBox,
     sizer_button: wx::BoxSizer,
@@ -237,10 +244,13 @@ impl ButtonWidgetsPage {
                 .double_border(wx::ALL & !wx::RIGHT),
         );
         *self.config_ui.borrow_mut() = Some(ConfigUI {
+            chk_text_and_bitmap: chk_text_and_bitmap,
             chk_fit: chk_fit,
             chk_auth_needed: chk_auth_needed,
             chk_default: chk_default,
+            chk_use_bitmap_class: chk_use_bitmap_class,
             chk_disable: chk_disable,
+            radio_image_pos: radio_image_pos,
             radio_halign: radio_halign,
             radio_valign: radio_valign,
             sizer_button: sizer_button,
@@ -303,6 +313,26 @@ impl ButtonWidgetsPage {
                 .label(&label)
                 .style(flags)
                 .build();
+
+            let mut shows_bitmap = false;
+            if !shows_bitmap && config_ui.chk_text_and_bitmap.get_value() {
+                shows_bitmap = true;
+
+                let positions = [wx::LEFT, wx::RIGHT, wx::TOP, wx::BOTTOM];
+                let icon_bitmap = wx::Bitmap::new();
+                icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
+                    // wxRust TODO: generate these constants...
+                    "wxART_INFORMATION",
+                    "wxART_BUTTON_C",
+                    &wx::Size::default(),
+                ));
+                new_button.set_bitmap(
+                    &icon_bitmap,
+                    positions[config_ui.radio_image_pos.get_selection() as usize],
+                );
+            }
+
+            config_ui.chk_use_bitmap_class.enable(shows_bitmap);
 
             if config_ui.chk_auth_needed.get_value() {
                 new_button.set_auth_needed(true);
