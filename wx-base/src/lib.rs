@@ -95,7 +95,9 @@ unsafe fn to_wx_callable<F: Fn(*mut c_void) + 'static>(closure: F) -> (*mut c_vo
 pub enum RustEvent {
     BookctrlPageChanged,
     Button,
+    CheckBox,
     Menu,
+    RadioBox,
 }
 impl<T: EvtHandlerMethods> Bindable for T {
     fn bind<E: EventMethods, F: Fn(&E) + 'static>(&self, event_type: RustEvent, closure: F) {

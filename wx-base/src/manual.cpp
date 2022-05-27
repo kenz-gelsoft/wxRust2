@@ -24,7 +24,9 @@ void wxObject_delete(wxObject *self) {
 enum WxRustEvent {
     RUST_EVT_BOOKCTRL_PAGE_CHANGED,
     RUST_EVT_BUTTON,
+    RUST_EVT_CHECKBOX,
     RUST_EVT_MENU,
+    RUST_EVT_RADIOBOX,
 };
 template<typename T> wxEventTypeTag<T> TypeTagOf(int eventType) {
     return wxEVT_NULL;
@@ -40,8 +42,12 @@ template<> wxEventTypeTag<wxCommandEvent> TypeTagOf(int eventType) {
     switch (eventType) {
     case RUST_EVT_BUTTON:
         return wxEVT_BUTTON;
+    case RUST_EVT_CHECKBOX:
+        return wxEVT_CHECKBOX;
     case RUST_EVT_MENU:
         return wxEVT_MENU;
+    case RUST_EVT_RADIOBOX:
+        return wxEVT_RADIOBOX;
     }
     return wxEVT_NULL;
 }
