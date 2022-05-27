@@ -99,7 +99,14 @@ pub trait ArtProviderMethods: ObjectMethods {
             BitmapIsOwned(ffi::wxArtProvider_GetBitmap(id, client, size))
         }
     }
-    // NOT_SUPPORTED: fn GetIcon()
+    fn get_icon<S: SizeMethods>(id: &str, client: &str, size: &S) -> Icon {
+        unsafe {
+            let id = wx_base::wx_string_from(id);
+            let client = wx_base::wx_string_from(client);
+            let size = size.as_ptr();
+            IconIsOwned(ffi::wxArtProvider_GetIcon(id, client, size))
+        }
+    }
     fn get_native_size_hint(client: &str) -> Size {
         unsafe {
             let client = wx_base::wx_string_from(client);
@@ -150,15 +157,20 @@ pub trait ArtProviderMethods: ObjectMethods {
     fn get_message_box_icon_id(flags: c_int) -> String {
         unsafe { wx_base::from_wx_string(ffi::wxArtProvider_GetMessageBoxIconId(flags)) }
     }
-    // NOT_SUPPORTED: fn GetMessageBoxIcon()
+    fn get_message_box_icon(flags: c_int) -> Icon {
+        unsafe { IconIsOwned(ffi::wxArtProvider_GetMessageBoxIcon(flags)) }
+    }
 }
 
 // wxBitmap
 pub trait BitmapMethods: GDIObjectMethods {
     // DTOR: fn ~wxBitmap()
     // NOT_SUPPORTED: fn ConvertToImage()
-    fn copy_from_icon(&self, icon: *const c_void) -> bool {
-        unsafe { ffi::wxBitmap_CopyFromIcon(self.as_ptr(), icon) }
+    fn copy_from_icon<I: IconMethods>(&self, icon: &I) -> bool {
+        unsafe {
+            let icon = icon.as_ptr();
+            ffi::wxBitmap_CopyFromIcon(self.as_ptr(), icon)
+        }
     }
     fn create_int_int(&self, width: c_int, height: c_int, depth: c_int) -> bool {
         unsafe { ffi::wxBitmap_Create(self.as_ptr(), width, height, depth) }
@@ -805,6 +817,42 @@ pub trait FrameMethods: TopLevelWindowMethods {
 
 // wxGDIObject
 pub trait GDIObjectMethods: ObjectMethods {}
+
+// wxIcon
+pub trait IconMethods: GDIObjectMethods {
+    // DTOR: fn ~wxIcon()
+    // NOT_SUPPORTED: fn CreateFromHICON()
+    // NOT_SUPPORTED: fn ConvertToDisabled()
+    fn copy_from_bitmap<B: BitmapMethods>(&self, bmp: &B) {
+        unsafe {
+            let bmp = bmp.as_ptr();
+            ffi::wxIcon_CopyFromBitmap(self.as_ptr(), bmp)
+        }
+    }
+    fn get_depth(&self) -> c_int {
+        unsafe { ffi::wxIcon_GetDepth(self.as_ptr()) }
+    }
+    fn get_height(&self) -> c_int {
+        unsafe { ffi::wxIcon_GetHeight(self.as_ptr()) }
+    }
+    fn get_width(&self) -> c_int {
+        unsafe { ffi::wxIcon_GetWidth(self.as_ptr()) }
+    }
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxIcon_IsOk(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn LoadFile()
+    fn set_depth(&self, depth: c_int) {
+        unsafe { ffi::wxIcon_SetDepth(self.as_ptr(), depth) }
+    }
+    fn set_height(&self, height: c_int) {
+        unsafe { ffi::wxIcon_SetHeight(self.as_ptr(), height) }
+    }
+    fn set_width(&self, width: c_int) {
+        unsafe { ffi::wxIcon_SetWidth(self.as_ptr(), width) }
+    }
+    // BLOCKED: fn operator=()
+}
 
 // wxListBox
 pub trait ListBoxMethods: ControlMethods {
@@ -2989,15 +3037,20 @@ pub trait StaticBitmapMethods: ControlMethods {
     fn get_bitmap(&self) -> Bitmap {
         unsafe { BitmapIsOwned(ffi::wxStaticBitmap_GetBitmap(self.as_ptr())) }
     }
-    // NOT_SUPPORTED: fn GetIcon()
+    fn get_icon(&self) -> Icon {
+        unsafe { IconIsOwned(ffi::wxStaticBitmap_GetIcon(self.as_ptr())) }
+    }
     fn set_bitmap<B: BitmapMethods>(&self, label: &B) {
         unsafe {
             let label = label.as_ptr();
             ffi::wxStaticBitmap_SetBitmap(self.as_ptr(), label)
         }
     }
-    fn set_icon(&self, label: *const c_void) {
-        unsafe { ffi::wxStaticBitmap_SetIcon(self.as_ptr(), label) }
+    fn set_icon<I: IconMethods>(&self, label: &I) {
+        unsafe {
+            let label = label.as_ptr();
+            ffi::wxStaticBitmap_SetIcon(self.as_ptr(), label)
+        }
     }
     // NOT_SUPPORTED: fn SetScaleMode()
     // NOT_SUPPORTED: fn GetScaleMode()
@@ -3972,7 +4025,9 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     fn get_default_item(&self) -> WeakRef<Window> {
         unsafe { WeakRef::<Window>::from(ffi::wxTopLevelWindow_GetDefaultItem(self.as_ptr())) }
     }
-    // NOT_SUPPORTED: fn GetIcon()
+    fn get_icon(&self) -> Icon {
+        unsafe { IconIsOwned(ffi::wxTopLevelWindow_GetIcon(self.as_ptr())) }
+    }
     // BLOCKED: fn GetIcons()
     fn get_title(&self) -> String {
         unsafe { wx_base::from_wx_string(ffi::wxTopLevelWindow_GetTitle(self.as_ptr())) }
@@ -4031,8 +4086,11 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     fn get_tmp_default_item(&self) -> WeakRef<Window> {
         unsafe { WeakRef::<Window>::from(ffi::wxTopLevelWindow_GetTmpDefaultItem(self.as_ptr())) }
     }
-    fn set_icon(&self, icon: *const c_void) {
-        unsafe { ffi::wxTopLevelWindow_SetIcon(self.as_ptr(), icon) }
+    fn set_icon<I: IconMethods>(&self, icon: &I) {
+        unsafe {
+            let icon = icon.as_ptr();
+            ffi::wxTopLevelWindow_SetIcon(self.as_ptr(), icon)
+        }
     }
     fn set_icons(&self, icons: *const c_void) {
         unsafe { ffi::wxTopLevelWindow_SetIcons(self.as_ptr(), icons) }

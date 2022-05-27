@@ -15,6 +15,7 @@ wxml_files = [
     'wxml/classwx_evt_handler.xml',
     'wxml/classwx_frame.xml',
     'wxml/classwx_g_d_i_object.xml',
+    'wxml/classwx_icon.xml',
     #'wxml/classwx_item_container_immutable.xml',
     'wxml/classwx_list_box.xml',
     'wxml/classwx_menu.xml',
@@ -125,6 +126,10 @@ windows = [
 blocklist = [
     # abstract class
     'wxGDIObject',
+]
+[types.wxIcon]
+blocklist = [
+    'operator=',
 ]
 [types.wxListBox]
 blocklist = [
