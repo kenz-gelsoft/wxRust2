@@ -195,6 +195,23 @@ bool wxBitmap_RemoveHandler(const wxString * name) {
     return wxBitmap::RemoveHandler(*name);
 }
 
+// CLASS: wxBitmapButton
+wxBitmapButton *wxBitmapButton_new() {
+    return new wxBitmapButton();
+}
+wxBitmapButton *wxBitmapButton_new1(wxWindow * parent, wxWindowID id, const wxBitmap * bitmap, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return new wxBitmapButton(parent, id, *bitmap, *pos, *size, style, *validator, *name);
+}
+bool wxBitmapButton_Create(wxBitmapButton * self, wxWindow * parent, wxWindowID id, const wxBitmap * bitmap, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, *bitmap, *pos, *size, style, *validator, *name);
+}
+bool wxBitmapButton_CreateCloseButton(wxBitmapButton * self, wxWindow * parent, wxWindowID winid, const wxString * name) {
+    return self->CreateCloseButton(parent, winid, *name);
+}
+wxBitmapButton * wxBitmapButton_NewCloseButton(wxWindow * parent, wxWindowID winid, const wxString * name) {
+    return wxBitmapButton::NewCloseButton(parent, winid, *name);
+}
+
 // CLASS: wxBookCtrlBase
 int wxBookCtrlBase_GetPageImage(const wxBookCtrlBase * self, size_t n_page) {
     return self->GetPageImage(n_page);

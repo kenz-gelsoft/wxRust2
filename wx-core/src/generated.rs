@@ -101,6 +101,57 @@ impl<const OWNED: bool> Drop for BitmapIsOwned<OWNED> {
     }
 }
 
+// wxBitmapButton
+wx_class! { BitmapButton =
+    BitmapButtonIsOwned<true>(wxBitmapButton) impl
+        BitmapButtonMethods,
+        ButtonMethods,
+        AnyButtonMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> BitmapButtonIsOwned<OWNED> {
+    pub fn new_2step() -> BitmapButtonIsOwned<OWNED> {
+        unsafe { BitmapButtonIsOwned(ffi::wxBitmapButton_new()) }
+    }
+    pub fn new<
+        W: WindowMethods,
+        B: BitmapMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        V: ValidatorMethods,
+    >(
+        parent: Option<&W>,
+        id: c_int,
+        bitmap: &B,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> BitmapButtonIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let bitmap = bitmap.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            BitmapButtonIsOwned(ffi::wxBitmapButton_new1(
+                parent, id, bitmap, pos, size, style, validator, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
 // wxBookCtrlBase
 wx_class! { BookCtrlBase =
     BookCtrlBaseIsOwned<true>(wxBookCtrlBase) impl

@@ -104,6 +104,41 @@ extern "C" {
     pub fn wxBitmap_NewFromPNGData(data: *const c_void, size: usize) -> *mut c_void;
     pub fn wxBitmap_RemoveHandler(name: *const c_void) -> bool;
 
+    // wxBitmapButton
+    pub fn wxBitmapButton_new() -> *mut c_void;
+    pub fn wxBitmapButton_new1(
+        parent: *mut c_void,
+        id: c_int,
+        bitmap: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxBitmapButton_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        bitmap: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxBitmapButton_CreateCloseButton(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        winid: c_int,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxBitmapButton_NewCloseButton(
+        parent: *mut c_void,
+        winid: c_int,
+        name: *const c_void,
+    ) -> *mut c_void;
+
     // wxBookCtrlBase
     pub fn wxBookCtrlBase_GetPageImage(self_: *const c_void, n_page: usize) -> c_int;
     pub fn wxBookCtrlBase_SetPageImage(self_: *mut c_void, page: usize, image: c_int) -> bool;

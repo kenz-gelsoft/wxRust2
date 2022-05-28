@@ -78,6 +78,13 @@ void wxBitmap_InsertHandler(wxBitmapHandler * handler);
 wxBitmap *wxBitmap_NewFromPNGData(const void * data, size_t size);
 bool wxBitmap_RemoveHandler(const wxString * name);
 
+// CLASS: wxBitmapButton
+wxBitmapButton *wxBitmapButton_new();
+wxBitmapButton *wxBitmapButton_new1(wxWindow * parent, wxWindowID id, const wxBitmap * bitmap, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+bool wxBitmapButton_Create(wxBitmapButton * self, wxWindow * parent, wxWindowID id, const wxBitmap * bitmap, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+bool wxBitmapButton_CreateCloseButton(wxBitmapButton * self, wxWindow * parent, wxWindowID winid, const wxString * name);
+wxBitmapButton * wxBitmapButton_NewCloseButton(wxWindow * parent, wxWindowID winid, const wxString * name);
+
 // CLASS: wxBookCtrlBase
 int wxBookCtrlBase_GetPageImage(const wxBookCtrlBase * self, size_t n_page);
 bool wxBookCtrlBase_SetPageImage(wxBookCtrlBase * self, size_t page, int image);

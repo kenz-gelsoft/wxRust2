@@ -3,6 +3,7 @@ wxml_files = [
     'wxml/classwx_any_button.xml',
     'wxml/classwx_art_provider.xml',
     'wxml/classwx_bitmap.xml',
+    'wxml/classwx_bitmap_button.xml',
     'wxml/classwx_book_ctrl_base.xml',
     'wxml/classwx_book_ctrl_event.xml',
     'wxml/classwx_box_sizer.xml',

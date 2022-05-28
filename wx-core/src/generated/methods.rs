@@ -270,6 +270,79 @@ pub trait BitmapMethods: GDIObjectMethods {
     }
 }
 
+// wxBitmapButton
+pub trait BitmapButtonMethods: ButtonMethods {
+    fn create<
+        W: WindowMethods,
+        B: BitmapMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        V: ValidatorMethods,
+    >(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        bitmap: &B,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let bitmap = bitmap.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            ffi::wxBitmapButton_Create(
+                self.as_ptr(),
+                parent,
+                id,
+                bitmap,
+                pos,
+                size,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+    fn create_close_button<W: WindowMethods>(
+        &self,
+        parent: Option<&W>,
+        winid: c_int,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let name = wx_base::wx_string_from(name);
+            ffi::wxBitmapButton_CreateCloseButton(self.as_ptr(), parent, winid, name)
+        }
+    }
+    fn new_close_button<W: WindowMethods>(
+        parent: Option<&W>,
+        winid: c_int,
+        name: &str,
+    ) -> WeakRef<BitmapButton> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let name = wx_base::wx_string_from(name);
+            WeakRef::<BitmapButton>::from(ffi::wxBitmapButton_NewCloseButton(parent, winid, name))
+        }
+    }
+}
+
 // wxBookCtrlBase
 pub trait BookCtrlBaseMethods: ControlMethods {
     fn get_page_image(&self, n_page: usize) -> c_int {
