@@ -56,10 +56,21 @@ pub struct ConfigUI {
     chk_default: wx::CheckBox,
     chk_use_bitmap_class: wx::CheckBox,
     chk_disable: wx::CheckBox,
+
+    // more checkboxes for wxBitmapButton only
+    chk_use_pressed: wx::CheckBox,
+    chk_use_focused: wx::CheckBox,
+    chk_use_current: wx::CheckBox,
+    chk_use_disabled: wx::CheckBox,
+
+    // and an image position choice used if m_chkTextAndBitmap is on
     radio_image_pos: wx::RadioBox,
     radio_halign: wx::RadioBox,
     radio_valign: wx::RadioBox,
+
+    // sizer
     sizer_button: wx::BoxSizer,
+
     // the text entries for command parameters
     text_label: wx::TextCtrl,
 }
@@ -73,10 +84,10 @@ impl ConfigUI {
         self.chk_use_bitmap_class.set_value(true);
         self.chk_disable.set_value(false);
 
-        // self.chk_use_pressed.set_value(true);
-        // self.chk_use_focused.set_value(true);
-        // self.chk_use_current.set_value(true);
-        // self.chk_use_disabled.set_value(true);
+        self.chk_use_pressed.set_value(true);
+        self.chk_use_focused.set_value(true);
+        self.chk_use_current.set_value(true);
+        self.chk_use_disabled.set_value(true);
 
         self.radio_image_pos.set_selection(BUTTON_IMAGE_POS_LEFT);
         self.radio_halign.set_selection(BUTTON_HALIGN_CENTRE);
@@ -267,10 +278,18 @@ impl ButtonWidgetsPage {
             chk_default,
             chk_use_bitmap_class,
             chk_disable,
+
+            chk_use_pressed,
+            chk_use_focused,
+            chk_use_current,
+            chk_use_disabled,
+
             radio_image_pos,
             radio_halign,
             radio_valign,
+
             sizer_button,
+
             text_label,
         });
 
@@ -362,6 +381,23 @@ impl ButtonWidgetsPage {
                 bbtn.set_bitmap_label(&icon_bitmap);
                 // }
 
+                if config_ui.chk_use_pressed.get_value() {
+                    // TODO: CreateBitmap("pushed", wxART_HELP)
+                    bbtn.set_bitmap_pressed(&icon_bitmap);
+                }
+                if config_ui.chk_use_focused.get_value() {
+                    // TODO: CreateBitmap("focused", wxART_ERROR)
+                    bbtn.set_bitmap_focus(&icon_bitmap);
+                }
+                if config_ui.chk_use_current.get_value() {
+                    // TODO: CreateBitmap("hover", wxART_WARNING)
+                    bbtn.set_bitmap_current(&icon_bitmap);
+                }
+                if config_ui.chk_use_disabled.get_value() {
+                    // TODO: CreateBitmap("disabled", wxART_MISSING_IMAGE)
+                    bbtn.set_bitmap_disabled(&icon_bitmap);
+                }
+
                 bbtn
             } else {
                 wx::Button::builder(Some(&self.base))
@@ -376,6 +412,7 @@ impl ButtonWidgetsPage {
                 shows_bitmap = true;
 
                 let positions = [wx::LEFT, wx::RIGHT, wx::TOP, wx::BOTTOM];
+                // TODO: implement From<> trait
                 let icon_bitmap = wx::Bitmap::new();
                 icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
                     // wxRust TODO: generate these constants...
@@ -387,6 +424,43 @@ impl ButtonWidgetsPage {
                     &icon_bitmap,
                     positions[config_ui.radio_image_pos.get_selection() as usize],
                 );
+
+                if config_ui.chk_use_pressed.get_value() {
+                    let icon_bitmap = wx::Bitmap::new();
+                    icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
+                        "wxART_HELP",
+                        "wxART_BUTTON_C",
+                        &wx::Size::default(),
+                    ));
+                    new_button.set_bitmap_pressed(&icon_bitmap);
+                }
+                if config_ui.chk_use_focused.get_value() {
+                    let icon_bitmap = wx::Bitmap::new();
+                    icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
+                        "wxART_ERROR",
+                        "wxART_BUTTON_C",
+                        &wx::Size::default(),
+                    ));
+                    new_button.set_bitmap_focus(&icon_bitmap);
+                }
+                if config_ui.chk_use_current.get_value() {
+                    let icon_bitmap = wx::Bitmap::new();
+                    icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
+                        "wxART_WARNING",
+                        "wxART_BUTTON_C",
+                        &wx::Size::default(),
+                    ));
+                    new_button.set_bitmap_current(&icon_bitmap);
+                }
+                if config_ui.chk_use_disabled.get_value() {
+                    let icon_bitmap = wx::Bitmap::new();
+                    icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
+                        "wxART_MISSING_IMAGE",
+                        "wxART_BUTTON_C",
+                        &wx::Size::default(),
+                    ));
+                    new_button.set_bitmap_disabled(&icon_bitmap);
+                }
             }
 
             config_ui.chk_use_bitmap_class.enable(shows_bitmap);
