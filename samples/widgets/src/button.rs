@@ -102,17 +102,6 @@ impl ButtonWidgetsPage {
         }
     }
 
-    pub fn handle_button(&self, event: &wx::CommandEvent) {
-        println!("event={}", event.get_id());
-        if let Some(m) = ButtonPage::from(event.get_id()) {
-            match m {
-                ButtonPage::Reset => self.on_button_reset(),
-                ButtonPage::ChangeLabel => self.on_button_change_label(),
-                _ => (),
-            };
-        }
-    }
-
     pub fn create_content(&self) {
         let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
 
@@ -295,9 +284,9 @@ impl ButtonWidgetsPage {
     }
 
     fn reset(&self) {
-        // if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-        //     config_ui.reset();
-        // }
+        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+            config_ui.reset();
+        }
     }
 
     fn create_button(&self) {
@@ -446,6 +435,16 @@ impl ButtonWidgetsPage {
         return checkbox;
     }
 
+    pub fn handle_button(&self, event: &wx::CommandEvent) {
+        println!("event={}", event.get_id());
+        if let Some(m) = ButtonPage::from(event.get_id()) {
+            match m {
+                ButtonPage::Reset => self.on_button_reset(),
+                ButtonPage::ChangeLabel => self.on_button_change_label(),
+                _ => (),
+            };
+        }
+    }
     fn on_button_reset(&self) {
         self.reset();
         // TODO: make mut self callable here, or
