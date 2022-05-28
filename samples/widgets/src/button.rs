@@ -407,7 +407,6 @@ impl ButtonWidgetsPage {
                     .build()
             };
 
-            let mut shows_bitmap = false;
             if !shows_bitmap && config_ui.chk_text_and_bitmap.get_value() {
                 shows_bitmap = true;
 
@@ -464,6 +463,14 @@ impl ButtonWidgetsPage {
             }
 
             config_ui.chk_use_bitmap_class.enable(shows_bitmap);
+
+            config_ui.chk_use_pressed.enable(shows_bitmap);
+            config_ui.chk_use_focused.enable(shows_bitmap);
+            config_ui.chk_use_current.enable(shows_bitmap);
+            config_ui.chk_use_disabled.enable(shows_bitmap);
+            config_ui
+                .radio_image_pos
+                .enable(config_ui.chk_text_and_bitmap.is_checked());
 
             if config_ui.chk_auth_needed.get_value() {
                 new_button.set_auth_needed(true);
