@@ -49,6 +49,7 @@ const BUTTON_VALIGN_BOTTOM: c_int = 2;
 #[derive(Clone)]
 pub struct ConfigUI {
     // the check/radio boxes for styles
+    chk_bitmap_only: wx::CheckBox,
     chk_text_and_bitmap: wx::CheckBox,
     chk_fit: wx::CheckBox,
     chk_auth_needed: wx::CheckBox,
@@ -64,7 +65,7 @@ pub struct ConfigUI {
 }
 impl ConfigUI {
     fn reset(&self) {
-        // self.chk_bitmap_only.set_value(false);
+        self.chk_bitmap_only.set_value(false);
         self.chk_fit.set_value(false);
         self.chk_auth_needed.set_value(false);
         self.chk_text_and_bitmap.set_value(false);
@@ -259,6 +260,7 @@ impl ButtonWidgetsPage {
                 .double_border(wx::ALL & !wx::RIGHT),
         );
         *self.config_ui.borrow_mut() = Some(ConfigUI {
+            chk_bitmap_only,
             chk_text_and_bitmap,
             chk_fit,
             chk_auth_needed,
@@ -325,11 +327,49 @@ impl ButtonWidgetsPage {
                 flags |= wx::BU_EXACTFIT as c_long;
             }
 
-            let new_button = wx::Button::builder(Some(&self.base))
-                .id(ButtonPage::Button.into())
-                .label(&label)
-                .style(flags)
-                .build();
+            let mut shows_bitmap = false;
+            let new_button = if config_ui.chk_bitmap_only.get_value() {
+                shows_bitmap = true;
+
+                let bbtn: wx::Button;
+                // TODO: Support downcasting from BitmapButton into Button
+                //
+                // let bbtn: wx::BitmapButton;
+                // if config_ui.chk_use_bitmap_class.get_value() {
+                //     // TODO: create bitmap
+                //     let icon_bitmap = wx::Bitmap::new();
+                //     icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
+                //         // wxRust TODO: generate these constants...
+                //         "wxART_INFORMATION",
+                //         "wxART_BUTTON_C",
+                //         &wx::Size::default(),
+                //     ));
+                //     bbtn = wx::BitmapButton::builder(Some(&self.base))
+                //         .style(flags)
+                //         .build(&icon_bitmap);
+                // } else {
+                // TODO: create bitmap
+                bbtn = wx::Button::builder(Some(&self.base))
+                    .id(ButtonPage::Button.into())
+                    .build();
+                let icon_bitmap = wx::Bitmap::new();
+                icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
+                    // wxRust TODO: generate these constants...
+                    "wxART_INFORMATION",
+                    "wxART_BUTTON_C",
+                    &wx::Size::default(),
+                ));
+                bbtn.set_bitmap_label(&icon_bitmap);
+                // }
+
+                bbtn
+            } else {
+                wx::Button::builder(Some(&self.base))
+                    .id(ButtonPage::Button.into())
+                    .label(&label)
+                    .style(flags)
+                    .build()
+            };
 
             let mut shows_bitmap = false;
             if !shows_bitmap && config_ui.chk_text_and_bitmap.get_value() {
