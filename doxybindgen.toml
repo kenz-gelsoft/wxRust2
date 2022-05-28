@@ -3,6 +3,7 @@ wxml_files = [
     'wxml/classwx_any_button.xml',
     'wxml/classwx_art_provider.xml',
     'wxml/classwx_bitmap.xml',
+    'wxml/classwx_bitmap_button.xml',
     'wxml/classwx_book_ctrl_base.xml',
     'wxml/classwx_book_ctrl_event.xml',
     'wxml/classwx_box_sizer.xml',
@@ -15,6 +16,8 @@ wxml_files = [
     'wxml/classwx_evt_handler.xml',
     'wxml/classwx_frame.xml',
     'wxml/classwx_g_d_i_object.xml',
+    'wxml/classwx_icon.xml',
+    #'wxml/classwx_item_container_immutable.xml',
     'wxml/classwx_list_box.xml',
     'wxml/classwx_menu.xml',
     'wxml/classwx_menu_bar.xml',
@@ -36,6 +39,7 @@ wxml_files = [
     'wxml/classwx_static_text.xml',
     'wxml/classwx_text_attr.xml',
     'wxml/classwx_text_ctrl.xml',
+    # 'wxml/classwx_text_entry.xml',
     'wxml/classwx_tool_bar.xml',
     'wxml/classwx_top_level_window.xml',
     'wxml/classwx_validator.xml',
@@ -66,6 +70,12 @@ library = 'core'
 [types.wxArtProvider]
 blocklist = [
     'Insert',
+]
+[types.wxBitmapButton]
+wx31 = [
+    'CreateCloseButton',
+    # Additional args in wx3.1
+    'NewCloseButton',
 ]
 [types.wxBitmap]
 blocklist = [
@@ -123,6 +133,10 @@ windows = [
 blocklist = [
     # abstract class
     'wxGDIObject',
+]
+[types.wxIcon]
+blocklist = [
+    'operator=',
 ]
 [types.wxListBox]
 blocklist = [
@@ -247,7 +261,6 @@ blocklist = [
     # virtual
     'wxSizer',
     # returns refs
-    'GetChildren',
     'GetChildren1',
     # deprecated, use Remove() without args
     'Remove',
@@ -285,6 +298,10 @@ blocklist = [
     'operator<<2',
     'operator<<4',
 ]
+# [types.wxTextEntry]
+# wx31 = [
+#     'ForceUpper',
+# ]
 [types.wxToolBar]
 blocklist = [
     # const getter

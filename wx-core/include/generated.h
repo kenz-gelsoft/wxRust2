@@ -15,6 +15,7 @@ wxBitmap *wxAnyButton_GetBitmapDisabled(const wxAnyButton * self);
 wxBitmap *wxAnyButton_GetBitmapFocus(const wxAnyButton * self);
 wxBitmap *wxAnyButton_GetBitmapLabel(const wxAnyButton * self);
 wxBitmap *wxAnyButton_GetBitmapPressed(const wxAnyButton * self);
+void wxAnyButton_SetBitmap(wxAnyButton * self, const wxBitmap * bitmap, wxDirection dir);
 void wxAnyButton_SetBitmapCurrent(wxAnyButton * self, const wxBitmap * bitmap);
 void wxAnyButton_SetBitmapDisabled(wxAnyButton * self, const wxBitmap * bitmap);
 void wxAnyButton_SetBitmapFocus(wxAnyButton * self, const wxBitmap * bitmap);
@@ -23,10 +24,12 @@ void wxAnyButton_SetBitmapPressed(wxAnyButton * self, const wxBitmap * bitmap);
 wxSize *wxAnyButton_GetBitmapMargins(wxAnyButton * self);
 void wxAnyButton_SetBitmapMargins(wxAnyButton * self, wxCoord x, wxCoord y);
 void wxAnyButton_SetBitmapMargins1(wxAnyButton * self, const wxSize * sz);
+void wxAnyButton_SetBitmapPosition(wxAnyButton * self, wxDirection dir);
 
 // CLASS: wxArtProvider
 bool wxArtProvider_Delete(wxArtProvider * provider);
 wxBitmap *wxArtProvider_GetBitmap(const wxArtID * id, const wxArtClient * client, const wxSize * size);
+wxIcon *wxArtProvider_GetIcon(const wxArtID * id, const wxArtClient * client, const wxSize * size);
 wxSize *wxArtProvider_GetNativeSizeHint(const wxArtClient * client);
 wxSize *wxArtProvider_GetSizeHint(const wxArtClient * client, bool platform_default);
 bool wxArtProvider_HasNativeProvider();
@@ -35,6 +38,7 @@ void wxArtProvider_Push(wxArtProvider * provider);
 void wxArtProvider_PushBack(wxArtProvider * provider);
 bool wxArtProvider_Remove(wxArtProvider * provider);
 wxArtID *wxArtProvider_GetMessageBoxIconId(int flags);
+wxIcon *wxArtProvider_GetMessageBoxIcon(int flags);
 
 // CLASS: wxBitmap
 wxBitmap *wxBitmap_new();
@@ -73,6 +77,15 @@ void wxBitmap_InitStandardHandlers();
 void wxBitmap_InsertHandler(wxBitmapHandler * handler);
 wxBitmap *wxBitmap_NewFromPNGData(const void * data, size_t size);
 bool wxBitmap_RemoveHandler(const wxString * name);
+
+// CLASS: wxBitmapButton
+wxBitmapButton *wxBitmapButton_new();
+wxBitmapButton *wxBitmapButton_new1(wxWindow * parent, wxWindowID id, const wxBitmap * bitmap, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+bool wxBitmapButton_Create(wxBitmapButton * self, wxWindow * parent, wxWindowID id, const wxBitmap * bitmap, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+#if wxCHECK_VERSION(3, 1, 0)
+bool wxBitmapButton_CreateCloseButton(wxBitmapButton * self, wxWindow * parent, wxWindowID winid, const wxString * name);
+wxBitmapButton * wxBitmapButton_NewCloseButton(wxWindow * parent, wxWindowID winid, const wxString * name);
+#endif
 
 // CLASS: wxBookCtrlBase
 int wxBookCtrlBase_GetPageImage(const wxBookCtrlBase * self, size_t n_page);
@@ -207,6 +220,20 @@ void wxFrame_PushStatusText(wxFrame * self, const wxString * text, int number);
 void wxFrame_PopStatusText(wxFrame * self, int number);
 
 // CLASS: wxGDIObject
+
+// CLASS: wxIcon
+wxIcon *wxIcon_new();
+wxIcon *wxIcon_new1(const wxIcon * icon);
+wxIcon *wxIcon_new3(const char *const * bits);
+wxIcon *wxIcon_new5(const wxIconLocation * loc);
+void wxIcon_CopyFromBitmap(wxIcon * self, const wxBitmap * bmp);
+int wxIcon_GetDepth(const wxIcon * self);
+int wxIcon_GetHeight(const wxIcon * self);
+int wxIcon_GetWidth(const wxIcon * self);
+bool wxIcon_IsOk(const wxIcon * self);
+void wxIcon_SetDepth(wxIcon * self, int depth);
+void wxIcon_SetHeight(wxIcon * self, int height);
+void wxIcon_SetWidth(wxIcon * self, int width);
 
 // CLASS: wxListBox
 wxListBox *wxListBox_new();
@@ -500,6 +527,7 @@ bool wxSizer_Detach2(wxSizer * self, int index);
 wxSize *wxSizer_Fit(wxSizer * self, wxWindow * window);
 void wxSizer_FitInside(wxSizer * self, wxWindow * window);
 bool wxSizer_InformFirstDirection(wxSizer * self, int direction, int size, int available_other_dir);
+wxSizerItemList * wxSizer_GetChildren(wxSizer * self);
 wxWindow * wxSizer_GetContainingWindow(const wxSizer * self);
 void wxSizer_SetContainingWindow(wxSizer * self, wxWindow * window);
 size_t wxSizer_GetItemCount(const wxSizer * self);
@@ -593,6 +621,7 @@ wxStaticBitmap *wxStaticBitmap_new();
 wxStaticBitmap *wxStaticBitmap_new1(wxWindow * parent, wxWindowID id, const wxBitmap * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxStaticBitmap_Create(wxStaticBitmap * self, wxWindow * parent, wxWindowID id, const wxBitmap * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 wxBitmap *wxStaticBitmap_GetBitmap(const wxStaticBitmap * self);
+wxIcon *wxStaticBitmap_GetIcon(const wxStaticBitmap * self);
 void wxStaticBitmap_SetBitmap(wxStaticBitmap * self, const wxBitmap * label);
 void wxStaticBitmap_SetIcon(wxStaticBitmap * self, const wxIcon * label);
 
@@ -807,6 +836,7 @@ bool wxTopLevelWindow_EnableMaximizeButton(wxTopLevelWindow * self, bool enable)
 bool wxTopLevelWindow_EnableMinimizeButton(wxTopLevelWindow * self, bool enable);
 #endif
 wxWindow * wxTopLevelWindow_GetDefaultItem(const wxTopLevelWindow * self);
+wxIcon *wxTopLevelWindow_GetIcon(const wxTopLevelWindow * self);
 wxString *wxTopLevelWindow_GetTitle(const wxTopLevelWindow * self);
 void wxTopLevelWindow_Iconize(wxTopLevelWindow * self, bool iconize);
 bool wxTopLevelWindow_IsActive(wxTopLevelWindow * self);

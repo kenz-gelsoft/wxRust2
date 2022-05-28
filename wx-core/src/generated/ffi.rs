@@ -13,7 +13,7 @@ extern "C" {
     pub fn wxAnyButton_GetBitmapFocus(self_: *const c_void) -> *mut c_void;
     pub fn wxAnyButton_GetBitmapLabel(self_: *const c_void) -> *mut c_void;
     pub fn wxAnyButton_GetBitmapPressed(self_: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxAnyButton_SetBitmap(self_: *mut c_void, bitmap: *const c_void, dir: wxDirection);
+    pub fn wxAnyButton_SetBitmap(self_: *mut c_void, bitmap: *const c_void, dir: c_int);
     pub fn wxAnyButton_SetBitmapCurrent(self_: *mut c_void, bitmap: *const c_void);
     pub fn wxAnyButton_SetBitmapDisabled(self_: *mut c_void, bitmap: *const c_void);
     pub fn wxAnyButton_SetBitmapFocus(self_: *mut c_void, bitmap: *const c_void);
@@ -22,7 +22,7 @@ extern "C" {
     pub fn wxAnyButton_GetBitmapMargins(self_: *mut c_void) -> *mut c_void;
     pub fn wxAnyButton_SetBitmapMargins(self_: *mut c_void, x: c_int, y: c_int);
     pub fn wxAnyButton_SetBitmapMargins1(self_: *mut c_void, sz: *const c_void);
-    // NOT_SUPPORTED: pub fn wxAnyButton_SetBitmapPosition(self_: *mut c_void, dir: wxDirection);
+    pub fn wxAnyButton_SetBitmapPosition(self_: *mut c_void, dir: c_int);
 
     // wxArtProvider
     // DTOR: pub fn wxArtProvider_~wxArtProvider(self_: *mut c_void);
@@ -32,7 +32,11 @@ extern "C" {
         client: *const c_void,
         size: *const c_void,
     ) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxArtProvider_GetIcon(id: *const c_void, client: *const c_void, size: *const c_void) -> wxIcon;
+    pub fn wxArtProvider_GetIcon(
+        id: *const c_void,
+        client: *const c_void,
+        size: *const c_void,
+    ) -> *mut c_void;
     pub fn wxArtProvider_GetNativeSizeHint(client: *const c_void) -> *mut c_void;
     pub fn wxArtProvider_GetSizeHint(client: *const c_void, platform_default: bool) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxArtProvider_GetIconBundle(id: *const c_void, client: *const c_void) -> wxIconBundle;
@@ -43,7 +47,7 @@ extern "C" {
     pub fn wxArtProvider_PushBack(provider: *mut c_void);
     pub fn wxArtProvider_Remove(provider: *mut c_void) -> bool;
     pub fn wxArtProvider_GetMessageBoxIconId(flags: c_int) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxArtProvider_GetMessageBoxIcon(flags: c_int) -> wxIcon;
+    pub fn wxArtProvider_GetMessageBoxIcon(flags: c_int) -> *mut c_void;
 
     // wxBitmap
     pub fn wxBitmap_new() -> *mut c_void;
@@ -99,6 +103,41 @@ extern "C" {
     pub fn wxBitmap_InsertHandler(handler: *mut c_void);
     pub fn wxBitmap_NewFromPNGData(data: *const c_void, size: usize) -> *mut c_void;
     pub fn wxBitmap_RemoveHandler(name: *const c_void) -> bool;
+
+    // wxBitmapButton
+    pub fn wxBitmapButton_new() -> *mut c_void;
+    pub fn wxBitmapButton_new1(
+        parent: *mut c_void,
+        id: c_int,
+        bitmap: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxBitmapButton_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        bitmap: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxBitmapButton_CreateCloseButton(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        winid: c_int,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxBitmapButton_NewCloseButton(
+        parent: *mut c_void,
+        winid: c_int,
+        name: *const c_void,
+    ) -> *mut c_void;
 
     // wxBookCtrlBase
     pub fn wxBookCtrlBase_GetPageImage(self_: *const c_void, n_page: usize) -> c_int;
@@ -392,6 +431,27 @@ extern "C" {
 
     // wxGDIObject
     // BLOCKED: pub fn wxGDIObject_new() -> *mut c_void;
+
+    // wxIcon
+    pub fn wxIcon_new() -> *mut c_void;
+    pub fn wxIcon_new1(icon: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxIcon_new2(bits: char, width: c_int, height: c_int) -> *mut c_void;
+    pub fn wxIcon_new3(bits: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxIcon_new4(name: *const c_void, type_: wxBitmapType, desired_width: c_int, desired_height: c_int) -> *mut c_void;
+    pub fn wxIcon_new5(loc: *const c_void) -> *mut c_void;
+    // DTOR: pub fn wxIcon_~wxIcon(self_: *mut c_void);
+    // NOT_SUPPORTED: pub fn wxIcon_CreateFromHICON(self_: *mut c_void, icon: WXHICON) -> bool;
+    // NOT_SUPPORTED: pub fn wxIcon_ConvertToDisabled(self_: *const c_void, brightness: unsigned char) -> *mut c_void;
+    pub fn wxIcon_CopyFromBitmap(self_: *mut c_void, bmp: *const c_void);
+    pub fn wxIcon_GetDepth(self_: *const c_void) -> c_int;
+    pub fn wxIcon_GetHeight(self_: *const c_void) -> c_int;
+    pub fn wxIcon_GetWidth(self_: *const c_void) -> c_int;
+    pub fn wxIcon_IsOk(self_: *const c_void) -> bool;
+    // NOT_SUPPORTED: pub fn wxIcon_LoadFile(self_: *mut c_void, name: *const c_void, type_: wxBitmapType, desired_width: c_int, desired_height: c_int) -> bool;
+    pub fn wxIcon_SetDepth(self_: *mut c_void, depth: c_int);
+    pub fn wxIcon_SetHeight(self_: *mut c_void, height: c_int);
+    pub fn wxIcon_SetWidth(self_: *mut c_void, width: c_int);
+    // BLOCKED: pub fn wxIcon_operator=(self_: *mut c_void, icon: *const c_void) -> *mut c_void;
 
     // wxListBox
     pub fn wxListBox_new() -> *mut c_void;
@@ -962,8 +1022,8 @@ extern "C" {
         size: c_int,
         available_other_dir: c_int,
     ) -> bool;
-    // BLOCKED: pub fn wxSizer_GetChildren(self_: *mut c_void) -> *mut c_void;
-    // BLOCKED: pub fn wxSizer_GetChildren1(self_: *const c_void) -> *const c_void;
+    pub fn wxSizer_GetChildren(self_: *mut c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxSizer_GetChildren1(self_: *const c_void) -> *mut c_void;
     pub fn wxSizer_GetContainingWindow(self_: *const c_void) -> *mut c_void;
     pub fn wxSizer_SetContainingWindow(self_: *mut c_void, window: *mut c_void);
     pub fn wxSizer_GetItemCount(self_: *const c_void) -> usize;
@@ -1208,7 +1268,7 @@ extern "C" {
         name: *const c_void,
     ) -> bool;
     pub fn wxStaticBitmap_GetBitmap(self_: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxStaticBitmap_GetIcon(self_: *const c_void) -> wxIcon;
+    pub fn wxStaticBitmap_GetIcon(self_: *const c_void) -> *mut c_void;
     pub fn wxStaticBitmap_SetBitmap(self_: *mut c_void, label: *const c_void);
     pub fn wxStaticBitmap_SetIcon(self_: *mut c_void, label: *const c_void);
     // NOT_SUPPORTED: pub fn wxStaticBitmap_SetScaleMode(self_: *mut c_void, scale_mode: ScaleMode);
@@ -1638,7 +1698,7 @@ extern "C" {
     pub fn wxTopLevelWindow_EnableMaximizeButton(self_: *mut c_void, enable: bool) -> bool;
     pub fn wxTopLevelWindow_EnableMinimizeButton(self_: *mut c_void, enable: bool) -> bool;
     pub fn wxTopLevelWindow_GetDefaultItem(self_: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxTopLevelWindow_GetIcon(self_: *const c_void) -> wxIcon;
+    pub fn wxTopLevelWindow_GetIcon(self_: *const c_void) -> *mut c_void;
     // BLOCKED: pub fn wxTopLevelWindow_GetIcons(self_: *const c_void) -> *const c_void;
     pub fn wxTopLevelWindow_GetTitle(self_: *const c_void) -> *mut c_void;
     pub fn wxTopLevelWindow_Iconize(self_: *mut c_void, iconize: bool);

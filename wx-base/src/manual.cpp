@@ -24,7 +24,9 @@ void wxObject_delete(wxObject *self) {
 enum WxRustEvent {
     RUST_EVT_BOOKCTRL_PAGE_CHANGED,
     RUST_EVT_BUTTON,
+    RUST_EVT_CHECKBOX,
     RUST_EVT_MENU,
+    RUST_EVT_RADIOBOX,
 };
 template<typename T> wxEventTypeTag<T> TypeTagOf(int eventType) {
     return wxEVT_NULL;
@@ -40,8 +42,12 @@ template<> wxEventTypeTag<wxCommandEvent> TypeTagOf(int eventType) {
     switch (eventType) {
     case RUST_EVT_BUTTON:
         return wxEVT_BUTTON;
+    case RUST_EVT_CHECKBOX:
+        return wxEVT_CHECKBOX;
     case RUST_EVT_MENU:
         return wxEVT_MENU;
+    case RUST_EVT_RADIOBOX:
+        return wxEVT_RADIOBOX;
     }
     return wxEVT_NULL;
 }
@@ -61,11 +67,12 @@ void wxEvtHandler_Bind(wxEvtHandler *self, int eventType, void *aFn, void *aPara
 wxString *wxString_new(const unsigned char *psz, const size_t nLength) {
     return new wxString(psz, wxConvUTF8, nLength);
 }
-const char *wxString_UTF8Data(wxString *self) {
-    return self->ToUTF8().data();
-}
-size_t wxString_Len(wxString *self) {
-    return self->Len();
+UTF8Data wxString_UTF8Data(wxString *self) {
+    auto utf8 = self->ToUTF8();
+    return {
+        utf8.data(),
+        utf8.length()
+    };
 }
 
 // ArrayString

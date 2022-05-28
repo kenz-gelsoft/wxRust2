@@ -18,6 +18,12 @@ use methods::*;
 
 mod ffi {
     use std::os::raw::{c_char, c_int, c_uchar, c_void};
+
+    #[repr(C)]
+    pub struct UTF8Data {
+        pub data: *mut c_uchar,
+        pub length: usize,
+    }
     extern "C" {
         pub fn wxObject_delete(self_: *mut c_void);
 
@@ -31,8 +37,7 @@ mod ffi {
 
         // String
         pub fn wxString_new(psz: *const c_uchar, nLength: usize) -> *mut c_void;
-        pub fn wxString_UTF8Data(self_: *mut c_void) -> *mut c_uchar;
-        pub fn wxString_Len(self_: *mut c_void) -> usize;
+        pub fn wxString_UTF8Data(self_: *mut c_void) -> UTF8Data;
 
         // ArrayString
         pub fn wxArrayString_new() -> *mut c_void;
@@ -66,9 +71,9 @@ pub mod methods {
 
 pub fn from_wx_string(s: *mut c_void) -> String {
     unsafe {
-        let utf8data = ffi::wxString_UTF8Data(s);
-        let len = ffi::wxString_Len(s);
-        return String::from_raw_parts(utf8data, len, len);
+        let utf8 = ffi::wxString_UTF8Data(s);
+        let len = utf8.length;
+        return String::from_raw_parts(utf8.data, len, len);
     }
 }
 pub unsafe fn wx_string_from(s: &str) -> *const c_void {
@@ -90,7 +95,9 @@ unsafe fn to_wx_callable<F: Fn(*mut c_void) + 'static>(closure: F) -> (*mut c_vo
 pub enum RustEvent {
     BookctrlPageChanged,
     Button,
+    CheckBox,
     Menu,
+    RadioBox,
 }
 impl<T: EvtHandlerMethods> Bindable for T {
     fn bind<E: EventMethods, F: Fn(&E) + 'static>(&self, event_type: RustEvent, closure: F) {

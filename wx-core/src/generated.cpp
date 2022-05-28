@@ -24,6 +24,9 @@ wxBitmap *wxAnyButton_GetBitmapLabel(const wxAnyButton * self) {
 wxBitmap *wxAnyButton_GetBitmapPressed(const wxAnyButton * self) {
     return new wxBitmap(self->GetBitmapPressed());
 }
+void wxAnyButton_SetBitmap(wxAnyButton * self, const wxBitmap * bitmap, wxDirection dir) {
+    return self->SetBitmap(*bitmap, dir);
+}
 void wxAnyButton_SetBitmapCurrent(wxAnyButton * self, const wxBitmap * bitmap) {
     return self->SetBitmapCurrent(*bitmap);
 }
@@ -48,6 +51,9 @@ void wxAnyButton_SetBitmapMargins(wxAnyButton * self, wxCoord x, wxCoord y) {
 void wxAnyButton_SetBitmapMargins1(wxAnyButton * self, const wxSize * sz) {
     return self->SetBitmapMargins(*sz);
 }
+void wxAnyButton_SetBitmapPosition(wxAnyButton * self, wxDirection dir) {
+    return self->SetBitmapPosition(dir);
+}
 
 // CLASS: wxArtProvider
 bool wxArtProvider_Delete(wxArtProvider * provider) {
@@ -55,6 +61,9 @@ bool wxArtProvider_Delete(wxArtProvider * provider) {
 }
 wxBitmap *wxArtProvider_GetBitmap(const wxArtID * id, const wxArtClient * client, const wxSize * size) {
     return new wxBitmap(wxArtProvider::GetBitmap(*id, *client, *size));
+}
+wxIcon *wxArtProvider_GetIcon(const wxArtID * id, const wxArtClient * client, const wxSize * size) {
+    return new wxIcon(wxArtProvider::GetIcon(*id, *client, *size));
 }
 wxSize *wxArtProvider_GetNativeSizeHint(const wxArtClient * client) {
     return new wxSize(wxArtProvider::GetNativeSizeHint(*client));
@@ -79,6 +88,9 @@ bool wxArtProvider_Remove(wxArtProvider * provider) {
 }
 wxArtID *wxArtProvider_GetMessageBoxIconId(int flags) {
     return new wxArtID(wxArtProvider::GetMessageBoxIconId(flags));
+}
+wxIcon *wxArtProvider_GetMessageBoxIcon(int flags) {
+    return new wxIcon(wxArtProvider::GetMessageBoxIcon(flags));
 }
 
 // CLASS: wxBitmap
@@ -182,6 +194,25 @@ wxBitmap *wxBitmap_NewFromPNGData(const void * data, size_t size) {
 bool wxBitmap_RemoveHandler(const wxString * name) {
     return wxBitmap::RemoveHandler(*name);
 }
+
+// CLASS: wxBitmapButton
+wxBitmapButton *wxBitmapButton_new() {
+    return new wxBitmapButton();
+}
+wxBitmapButton *wxBitmapButton_new1(wxWindow * parent, wxWindowID id, const wxBitmap * bitmap, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return new wxBitmapButton(parent, id, *bitmap, *pos, *size, style, *validator, *name);
+}
+bool wxBitmapButton_Create(wxBitmapButton * self, wxWindow * parent, wxWindowID id, const wxBitmap * bitmap, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, *bitmap, *pos, *size, style, *validator, *name);
+}
+#if wxCHECK_VERSION(3, 1, 0)
+bool wxBitmapButton_CreateCloseButton(wxBitmapButton * self, wxWindow * parent, wxWindowID winid, const wxString * name) {
+    return self->CreateCloseButton(parent, winid, *name);
+}
+wxBitmapButton * wxBitmapButton_NewCloseButton(wxWindow * parent, wxWindowID winid, const wxString * name) {
+    return wxBitmapButton::NewCloseButton(parent, winid, *name);
+}
+#endif
 
 // CLASS: wxBookCtrlBase
 int wxBookCtrlBase_GetPageImage(const wxBookCtrlBase * self, size_t n_page) {
@@ -524,6 +555,44 @@ void wxFrame_PopStatusText(wxFrame * self, int number) {
 }
 
 // CLASS: wxGDIObject
+
+// CLASS: wxIcon
+wxIcon *wxIcon_new() {
+    return new wxIcon();
+}
+wxIcon *wxIcon_new1(const wxIcon * icon) {
+    return new wxIcon(*icon);
+}
+wxIcon *wxIcon_new3(const char *const * bits) {
+    return new wxIcon(bits);
+}
+wxIcon *wxIcon_new5(const wxIconLocation * loc) {
+    return new wxIcon(*loc);
+}
+void wxIcon_CopyFromBitmap(wxIcon * self, const wxBitmap * bmp) {
+    return self->CopyFromBitmap(*bmp);
+}
+int wxIcon_GetDepth(const wxIcon * self) {
+    return self->GetDepth();
+}
+int wxIcon_GetHeight(const wxIcon * self) {
+    return self->GetHeight();
+}
+int wxIcon_GetWidth(const wxIcon * self) {
+    return self->GetWidth();
+}
+bool wxIcon_IsOk(const wxIcon * self) {
+    return self->IsOk();
+}
+void wxIcon_SetDepth(wxIcon * self, int depth) {
+    return self->SetDepth(depth);
+}
+void wxIcon_SetHeight(wxIcon * self, int height) {
+    return self->SetHeight(height);
+}
+void wxIcon_SetWidth(wxIcon * self, int width) {
+    return self->SetWidth(width);
+}
 
 // CLASS: wxListBox
 wxListBox *wxListBox_new() {
@@ -1315,6 +1384,9 @@ void wxSizer_FitInside(wxSizer * self, wxWindow * window) {
 bool wxSizer_InformFirstDirection(wxSizer * self, int direction, int size, int available_other_dir) {
     return self->InformFirstDirection(direction, size, available_other_dir);
 }
+wxSizerItemList * wxSizer_GetChildren(wxSizer * self) {
+    return &(self->GetChildren());
+}
 wxWindow * wxSizer_GetContainingWindow(const wxSizer * self) {
     return self->GetContainingWindow();
 }
@@ -1577,6 +1649,9 @@ bool wxStaticBitmap_Create(wxStaticBitmap * self, wxWindow * parent, wxWindowID 
 }
 wxBitmap *wxStaticBitmap_GetBitmap(const wxStaticBitmap * self) {
     return new wxBitmap(self->GetBitmap());
+}
+wxIcon *wxStaticBitmap_GetIcon(const wxStaticBitmap * self) {
+    return new wxIcon(self->GetIcon());
 }
 void wxStaticBitmap_SetBitmap(wxStaticBitmap * self, const wxBitmap * label) {
     return self->SetBitmap(*label);
@@ -2183,6 +2258,9 @@ bool wxTopLevelWindow_EnableMinimizeButton(wxTopLevelWindow * self, bool enable)
 #endif
 wxWindow * wxTopLevelWindow_GetDefaultItem(const wxTopLevelWindow * self) {
     return self->GetDefaultItem();
+}
+wxIcon *wxTopLevelWindow_GetIcon(const wxTopLevelWindow * self) {
+    return new wxIcon(self->GetIcon());
 }
 wxString *wxTopLevelWindow_GetTitle(const wxTopLevelWindow * self) {
     return new wxString(self->GetTitle());

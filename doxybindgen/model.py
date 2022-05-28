@@ -10,6 +10,7 @@ CXX2RUST = {
     'size_t': 'usize',
     'wxByte': 'c_uchar',
     'wxCoord': 'c_int',
+    'wxDirection': 'c_int',
     'wxEllipsizeMode': 'c_int',
     'wxItemKind': 'c_int',
     'wxLayoutDirection': 'c_int',
@@ -37,6 +38,7 @@ OS_UNSUPPORTED_TYPES = [
 ]
 MANUAL_BINDINGS = [
     'wxArrayString',
+    'wxSizerItemList',
     'wxWindowList',
 ]
 # Known, and problematic

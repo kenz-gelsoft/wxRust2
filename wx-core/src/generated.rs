@@ -101,6 +101,57 @@ impl<const OWNED: bool> Drop for BitmapIsOwned<OWNED> {
     }
 }
 
+// wxBitmapButton
+wx_class! { BitmapButton =
+    BitmapButtonIsOwned<true>(wxBitmapButton) impl
+        BitmapButtonMethods,
+        ButtonMethods,
+        AnyButtonMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> BitmapButtonIsOwned<OWNED> {
+    pub fn new_2step() -> BitmapButtonIsOwned<OWNED> {
+        unsafe { BitmapButtonIsOwned(ffi::wxBitmapButton_new()) }
+    }
+    pub fn new<
+        W: WindowMethods,
+        B: BitmapMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        V: ValidatorMethods,
+    >(
+        parent: Option<&W>,
+        id: c_int,
+        bitmap: &B,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> BitmapButtonIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let bitmap = bitmap.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            BitmapButtonIsOwned(ffi::wxBitmapButton_new1(
+                parent, id, bitmap, pos, size, style, validator, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
 // wxBookCtrlBase
 wx_class! { BookCtrlBase =
     BookCtrlBaseIsOwned<true>(wxBookCtrlBase) impl
@@ -453,6 +504,43 @@ impl<const OWNED: bool> GDIObjectIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> Drop for GDIObjectIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
+// wxIcon
+wx_class! { Icon =
+    IconIsOwned<true>(wxIcon) impl
+        IconMethods,
+        GDIObjectMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> IconIsOwned<OWNED> {
+    pub fn new() -> IconIsOwned<OWNED> {
+        unsafe { IconIsOwned(ffi::wxIcon_new()) }
+    }
+    pub fn new_with_icon<I: IconMethods>(icon: &I) -> IconIsOwned<OWNED> {
+        unsafe {
+            let icon = icon.as_ptr();
+            IconIsOwned(ffi::wxIcon_new1(icon))
+        }
+    }
+    // NOT_SUPPORTED: fn wxIcon2()
+    pub fn new_with_char(bits: *const c_void) -> IconIsOwned<OWNED> {
+        unsafe { IconIsOwned(ffi::wxIcon_new3(bits)) }
+    }
+    // NOT_SUPPORTED: fn wxIcon4()
+    pub fn new_with_iconlocation(loc: *const c_void) -> IconIsOwned<OWNED> {
+        unsafe { IconIsOwned(ffi::wxIcon_new5(loc)) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for IconIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
