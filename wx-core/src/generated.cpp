@@ -209,10 +209,10 @@ bool wxBitmapButton_Create(wxBitmapButton * self, wxWindow * parent, wxWindowID 
 bool wxBitmapButton_CreateCloseButton(wxBitmapButton * self, wxWindow * parent, wxWindowID winid, const wxString * name) {
     return self->CreateCloseButton(parent, winid, *name);
 }
-#endif
 wxBitmapButton * wxBitmapButton_NewCloseButton(wxWindow * parent, wxWindowID winid, const wxString * name) {
     return wxBitmapButton::NewCloseButton(parent, winid, *name);
 }
+#endif
 
 // CLASS: wxBookCtrlBase
 int wxBookCtrlBase_GetPageImage(const wxBookCtrlBase * self, size_t n_page) {

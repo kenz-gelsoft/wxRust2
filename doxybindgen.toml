@@ -71,6 +71,12 @@ library = 'core'
 blocklist = [
     'Insert',
 ]
+[types.wxBitmapButton]
+wx31 = [
+    'CreateCloseButton',
+    # Additional args in wx3.1
+    'NewCloseButton',
+]
 [types.wxBitmap]
 blocklist = [
     # doesn't support returning wxList

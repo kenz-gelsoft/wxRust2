@@ -84,8 +84,8 @@ wxBitmapButton *wxBitmapButton_new1(wxWindow * parent, wxWindowID id, const wxBi
 bool wxBitmapButton_Create(wxBitmapButton * self, wxWindow * parent, wxWindowID id, const wxBitmap * bitmap, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 #if wxCHECK_VERSION(3, 1, 0)
 bool wxBitmapButton_CreateCloseButton(wxBitmapButton * self, wxWindow * parent, wxWindowID winid, const wxString * name);
-#endif
 wxBitmapButton * wxBitmapButton_NewCloseButton(wxWindow * parent, wxWindowID winid, const wxString * name);
+#endif
 
 // CLASS: wxBookCtrlBase
 int wxBookCtrlBase_GetPageImage(const wxBookCtrlBase * self, size_t n_page);
