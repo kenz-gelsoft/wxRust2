@@ -205,9 +205,11 @@ wxBitmapButton *wxBitmapButton_new1(wxWindow * parent, wxWindowID id, const wxBi
 bool wxBitmapButton_Create(wxBitmapButton * self, wxWindow * parent, wxWindowID id, const wxBitmap * bitmap, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
     return self->Create(parent, id, *bitmap, *pos, *size, style, *validator, *name);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxBitmapButton_CreateCloseButton(wxBitmapButton * self, wxWindow * parent, wxWindowID winid, const wxString * name) {
     return self->CreateCloseButton(parent, winid, *name);
 }
+#endif
 wxBitmapButton * wxBitmapButton_NewCloseButton(wxWindow * parent, wxWindowID winid, const wxString * name) {
     return wxBitmapButton::NewCloseButton(parent, winid, *name);
 }
