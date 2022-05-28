@@ -121,6 +121,18 @@ impl WidgetsFrame {
             .bind(wx::RustEvent::Button, move |event: &wx::CommandEvent| {
                 frame_copy.m_page.handle_button(event);
             });
+        let frame_copy = frame.clone();
+        frame
+            .base
+            .bind(wx::RustEvent::CheckBox, move |event: &wx::CommandEvent| {
+                frame_copy.m_page.handle_checkbox(event);
+            });
+        let frame_copy = frame.clone();
+        frame
+            .base
+            .bind(wx::RustEvent::RadioBox, move |event: &wx::CommandEvent| {
+                frame_copy.m_page.handle_radiobox(event);
+            });
 
         frame
     }

@@ -1,5 +1,6 @@
 use std::cell::RefCell;
 use std::os::raw::{c_int, c_long};
+use std::rc::Rc;
 use wx::methods::*;
 
 // control ids
@@ -87,7 +88,7 @@ pub struct ButtonWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
     // the button itself and the sizer it is in
-    button: RefCell<Option<wx::Button>>,
+    button: Rc<RefCell<Option<wx::Button>>>,
 }
 impl ButtonWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {
@@ -97,7 +98,7 @@ impl ButtonWidgetsPage {
         ButtonWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
-            button: RefCell::new(None),
+            button: Rc::new(RefCell::new(None)),
         }
     }
 
@@ -450,6 +451,17 @@ impl ButtonWidgetsPage {
         // TODO: make mut self callable here, or
         // make create_button() not to require mut self.
         self.create_button();
+    }
+
+    pub fn handle_checkbox(&self, _: &wx::CommandEvent) {
+        self.on_check_or_radio_box();
+    }
+    pub fn handle_radiobox(&self, _: &wx::CommandEvent) {
+        self.on_check_or_radio_box();
+    }
+    fn on_check_or_radio_box(&self) {
+        self.create_button();
+        self.base.layout(); // make sure the text field for changing note displays correctly.
     }
 
     fn on_button_change_label(&self) {
