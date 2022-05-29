@@ -173,13 +173,16 @@ blocklist = [
     'GetName',
     'GetText',
     'SetText',
+    # doesn't link in windows
+    'GetAccelFromString',
+    # should in windows, but doesn't compile
+    'GetBackgroundColour',
+    'GetFont',
+    'GetTextColour',
 ]
 windows = [
-    'GetBackgroundColour',
     'GetDisabledBitmap',
-    'GetFont',
     'GetMarginWidth',
-    'GetTextColour',
     'SetBackgroundColour',
     'SetBitmaps',
     'SetDisabledBitmap',

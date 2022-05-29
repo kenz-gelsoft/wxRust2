@@ -1643,16 +1643,12 @@ pub trait MenuBarMethods: WindowMethods {
 
 // wxMenuItem
 pub trait MenuItemMethods: ObjectMethods {
-    fn get_background_colour(&self) -> ColourIsOwned<false> {
-        unsafe { ColourIsOwned::from_ptr(ffi::wxMenuItem_GetBackgroundColour(self.as_ptr())) }
-    }
+    // BLOCKED: fn GetBackgroundColour()
     // BLOCKED: fn GetBitmap()
     fn get_disabled_bitmap(&self) -> BitmapIsOwned<false> {
         unsafe { BitmapIsOwned::from_ptr(ffi::wxMenuItem_GetDisabledBitmap(self.as_ptr())) }
     }
-    fn get_font(&self) -> *mut c_void {
-        unsafe { ffi::wxMenuItem_GetFont(self.as_ptr()) }
-    }
+    // BLOCKED: fn GetFont()
     fn get_help(&self) -> String {
         unsafe { wx_base::from_wx_string(ffi::wxMenuItem_GetHelp(self.as_ptr())) }
     }
@@ -1680,18 +1676,11 @@ pub trait MenuItemMethods: ObjectMethods {
         unsafe { WeakRef::<Menu>::from(ffi::wxMenuItem_GetSubMenu(self.as_ptr())) }
     }
     // BLOCKED: fn GetText()
-    fn get_text_colour(&self) -> ColourIsOwned<false> {
-        unsafe { ColourIsOwned::from_ptr(ffi::wxMenuItem_GetTextColour(self.as_ptr())) }
-    }
+    // BLOCKED: fn GetTextColour()
     fn get_accel(&self) -> *mut c_void {
         unsafe { ffi::wxMenuItem_GetAccel(self.as_ptr()) }
     }
-    fn get_accel_from_string(label: &str) -> *mut c_void {
-        unsafe {
-            let label = wx_base::wx_string_from(label);
-            ffi::wxMenuItem_GetAccelFromString(label)
-        }
-    }
+    // BLOCKED: fn GetAccelFromString()
     fn is_check(&self) -> bool {
         unsafe { ffi::wxMenuItem_IsCheck(self.as_ptr()) }
     }

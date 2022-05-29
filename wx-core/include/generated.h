@@ -350,9 +350,7 @@ wxMenuBar * wxMenuBar_MacGetCommonMenuBar();
 
 // CLASS: wxMenuItem
 #ifdef __WXMSW__
-wxColour * wxMenuItem_GetBackgroundColour(const wxMenuItem * self);
 const wxBitmap * wxMenuItem_GetDisabledBitmap(const wxMenuItem * self);
-wxFont * wxMenuItem_GetFont(const wxMenuItem * self);
 #endif
 wxString *wxMenuItem_GetHelp(const wxMenuItem * self);
 int wxMenuItem_GetId(const wxMenuItem * self);
@@ -364,11 +362,7 @@ int wxMenuItem_GetMarginWidth(const wxMenuItem * self);
 #endif
 wxMenu * wxMenuItem_GetMenu(const wxMenuItem * self);
 wxMenu * wxMenuItem_GetSubMenu(const wxMenuItem * self);
-#ifdef __WXMSW__
-wxColour * wxMenuItem_GetTextColour(const wxMenuItem * self);
-#endif
 wxAcceleratorEntry * wxMenuItem_GetAccel(const wxMenuItem * self);
-wxAcceleratorEntry * wxMenuItem_GetAccelFromString(const wxString * label);
 bool wxMenuItem_IsCheck(const wxMenuItem * self);
 bool wxMenuItem_IsCheckable(const wxMenuItem * self);
 bool wxMenuItem_IsChecked(const wxMenuItem * self);

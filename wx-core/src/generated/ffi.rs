@@ -684,10 +684,10 @@ extern "C" {
     pub fn wxMenuBar_MacGetCommonMenuBar() -> *mut c_void;
 
     // wxMenuItem
-    pub fn wxMenuItem_GetBackgroundColour(self_: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxMenuItem_GetBackgroundColour(self_: *const c_void) -> *mut c_void;
     // BLOCKED: pub fn wxMenuItem_GetBitmap(self_: *const c_void, checked: bool) -> *mut c_void;
     pub fn wxMenuItem_GetDisabledBitmap(self_: *const c_void) -> *mut c_void;
-    pub fn wxMenuItem_GetFont(self_: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxMenuItem_GetFont(self_: *const c_void) -> *mut c_void;
     pub fn wxMenuItem_GetHelp(self_: *const c_void) -> *mut c_void;
     pub fn wxMenuItem_GetId(self_: *const c_void) -> c_int;
     pub fn wxMenuItem_GetItemLabel(self_: *const c_void) -> *mut c_void;
@@ -699,9 +699,9 @@ extern "C" {
     // BLOCKED: pub fn wxMenuItem_GetName(self_: *const c_void) -> wxString;
     pub fn wxMenuItem_GetSubMenu(self_: *const c_void) -> *mut c_void;
     // BLOCKED: pub fn wxMenuItem_GetText(self_: *const c_void) -> *const c_void;
-    pub fn wxMenuItem_GetTextColour(self_: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxMenuItem_GetTextColour(self_: *const c_void) -> *mut c_void;
     pub fn wxMenuItem_GetAccel(self_: *const c_void) -> *mut c_void;
-    pub fn wxMenuItem_GetAccelFromString(label: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxMenuItem_GetAccelFromString(label: *const c_void) -> *mut c_void;
     pub fn wxMenuItem_IsCheck(self_: *const c_void) -> bool;
     pub fn wxMenuItem_IsCheckable(self_: *const c_void) -> bool;
     pub fn wxMenuItem_IsChecked(self_: *const c_void) -> bool;
