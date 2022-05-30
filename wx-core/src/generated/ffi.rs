@@ -254,12 +254,12 @@ extern "C" {
         name: *const c_void,
     ) -> bool;
     pub fn wxCheckBox_GetValue(self_: *const c_void) -> bool;
-    // NOT_SUPPORTED: pub fn wxCheckBox_Get3StateValue(self_: *const c_void) -> wxCheckBoxState;
+    pub fn wxCheckBox_Get3StateValue(self_: *const c_void) -> c_int;
     pub fn wxCheckBox_Is3State(self_: *const c_void) -> bool;
     pub fn wxCheckBox_Is3rdStateAllowedForUser(self_: *const c_void) -> bool;
     pub fn wxCheckBox_IsChecked(self_: *const c_void) -> bool;
     pub fn wxCheckBox_SetValue(self_: *mut c_void, state: bool);
-    // NOT_SUPPORTED: pub fn wxCheckBox_Set3StateValue(self_: *mut c_void, state: wxCheckBoxState);
+    pub fn wxCheckBox_Set3StateValue(self_: *mut c_void, state: c_int);
 
     // wxColour
     pub fn wxColour_new() -> *mut c_void;

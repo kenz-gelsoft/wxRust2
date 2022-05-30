@@ -339,6 +339,9 @@ bool wxCheckBox_Create(wxCheckBox * self, wxWindow * parent, wxWindowID id, cons
 bool wxCheckBox_GetValue(const wxCheckBox * self) {
     return self->GetValue();
 }
+wxCheckBoxState wxCheckBox_Get3StateValue(const wxCheckBox * self) {
+    return self->Get3StateValue();
+}
 bool wxCheckBox_Is3State(const wxCheckBox * self) {
     return self->Is3State();
 }
@@ -350,6 +353,9 @@ bool wxCheckBox_IsChecked(const wxCheckBox * self) {
 }
 void wxCheckBox_SetValue(wxCheckBox * self, bool state) {
     return self->SetValue(state);
+}
+void wxCheckBox_Set3StateValue(wxCheckBox * self, wxCheckBoxState state) {
+    return self->Set3StateValue(state);
 }
 
 // CLASS: wxColour

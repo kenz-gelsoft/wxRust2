@@ -136,10 +136,12 @@ wxCheckBox *wxCheckBox_new();
 wxCheckBox *wxCheckBox_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 bool wxCheckBox_Create(wxCheckBox * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 bool wxCheckBox_GetValue(const wxCheckBox * self);
+wxCheckBoxState wxCheckBox_Get3StateValue(const wxCheckBox * self);
 bool wxCheckBox_Is3State(const wxCheckBox * self);
 bool wxCheckBox_Is3rdStateAllowedForUser(const wxCheckBox * self);
 bool wxCheckBox_IsChecked(const wxCheckBox * self);
 void wxCheckBox_SetValue(wxCheckBox * self, bool state);
+void wxCheckBox_Set3StateValue(wxCheckBox * self, wxCheckBoxState state);
 
 // CLASS: wxColour
 wxColour *wxColour_new();
