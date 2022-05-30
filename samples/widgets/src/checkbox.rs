@@ -45,59 +45,23 @@ const CHECKBOX_KIND_3STATE_USER: c_int = 2;
 
 #[derive(Clone)]
 pub struct ConfigUI {
-    // // the check/radio boxes for styles
-// chk_bitmap_only: wx::CheckBox,
-// chk_text_and_bitmap: wx::CheckBox,
-// chk_fit: wx::CheckBox,
-// chk_auth_needed: wx::CheckBox,
-// chk_default: wx::CheckBox,
-// chk_use_bitmap_class: wx::CheckBox,
-// chk_disable: wx::CheckBox,
+    // the controls to choose the checkbox style
+    chk_right: wx::CheckBox,
+    radio_kind: wx::RadioBox,
 
-// // more checkboxes for wxBitmapCheckBox only
-// chk_use_pressed: wx::CheckBox,
-// chk_use_focused: wx::CheckBox,
-// chk_use_current: wx::CheckBox,
-// chk_use_disabled: wx::CheckBox,
+    // the text entries for command parameters
+    text_label: wx::TextCtrl,
 
-// // and an image position choice used if m_chkTextAndBitmap is on
-// radio_image_pos: wx::RadioBox,
-// radio_halign: wx::RadioBox,
-// radio_valign: wx::RadioBox,
-
-// // sizer
-// sizer_button: wx::BoxSizer,
-
-// // the text entries for command parameters
-// text_label: wx::TextCtrl,
-}
-impl ConfigUI {
-    fn reset(&self) {
-        // self.chk_bitmap_only.set_value(false);
-        // self.chk_fit.set_value(false);
-        // self.chk_auth_needed.set_value(false);
-        // self.chk_text_and_bitmap.set_value(false);
-        // self.chk_default.set_value(false);
-        // self.chk_use_bitmap_class.set_value(true);
-        // self.chk_disable.set_value(false);
-
-        // self.chk_use_pressed.set_value(true);
-        // self.chk_use_focused.set_value(true);
-        // self.chk_use_current.set_value(true);
-        // self.chk_use_disabled.set_value(true);
-
-        // self.radio_image_pos.set_selection(BUTTON_IMAGE_POS_LEFT);
-        // self.radio_halign.set_selection(BUTTON_HALIGN_CENTRE);
-        // self.radio_valign.set_selection(BUTTON_VALIGN_CENTRE);
-    }
+    // sizer
+    sizer_checkbox: wx::BoxSizer,
 }
 
 #[derive(Clone)]
 pub struct CheckBoxWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
-    // the button itself and the sizer it is in
-    button: Rc<RefCell<Option<wx::CheckBox>>>,
+    // the checkbox itself and the sizer it is in
+    checkbox: Rc<RefCell<Option<wx::CheckBox>>>,
 }
 impl CheckBoxWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {
@@ -107,7 +71,7 @@ impl CheckBoxWidgetsPage {
         CheckBoxWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
-            button: Rc::new(RefCell::new(None)),
+            checkbox: Rc::new(RefCell::new(None)),
         }
     }
 
@@ -223,9 +187,9 @@ impl CheckBoxWidgetsPage {
             wx::ALL,
             wx::Object::none(),
         );
+        *self.checkbox.borrow_mut() = Some(checkbox);
         sizer_right.add_int_int(0, 0, 1, wx::CENTRE as i32, wx::ALL, wx::Object::none());
         sizer_right.set_min_size_int(150, 0);
-        // m_sizer_checkbox = sizer_right; // save it to modify it later
 
         // the 3 panes panes compose the window
         sizer_top.add_sizer_sizerflags(
@@ -244,230 +208,79 @@ impl CheckBoxWidgetsPage {
                 .expand()
                 .double_border(wx::ALL & !wx::RIGHT),
         );
-        // *self.config_ui.borrow_mut() = Some(ConfigUI {
-        //     chk_bitmap_only,
-        //     chk_text_and_bitmap,
-        //     chk_fit,
-        //     chk_auth_needed,
-        //     chk_default,
-        //     chk_use_bitmap_class,
-        //     chk_disable,
+        *self.config_ui.borrow_mut() = Some(ConfigUI {
+            chk_right,
+            radio_kind,
+            text_label,
+            sizer_checkbox: sizer_right, // save it to modify it later
+        });
 
-        //     chk_use_pressed,
-        //     chk_use_focused,
-        //     chk_use_current,
-        //     chk_use_disabled,
-
-        //     radio_image_pos,
-        //     radio_halign,
-        //     radio_valign,
-
-        //     sizer_button,
-
-        //     text_label,
-        // });
-
-        // // do create the main control
-        // self.reset();
-        // self.create_button();
+        // do create the main control
+        self.reset();
+        self.create_check_box();
 
         self.base.set_sizer(Some(&sizer_top), true);
     }
 
     fn recreate_widget(&self) {
-        self.create_button();
+        self.create_check_box();
     }
 
     fn reset(&self) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            config_ui.reset();
+            config_ui.chk_right.set_value(false);
+            config_ui.radio_kind.set_selection(CHECKBOX_KIND_2STATE);
         }
     }
 
-    fn create_button(&self) {
-        // if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-        //     let mut label = "".to_string();
-        //     if let Some(button) = self.button.borrow().as_ref() {
-        //         label = button.get_label();
+    fn create_check_box(&self) {
+        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+            let mut label = "".to_string();
+            if let Some(checkbox) = self.checkbox.borrow().as_ref() {
+                label = checkbox.get_label();
 
-        //         // TODO: remove (and delete) all buttons
-        //         let count = config_ui.sizer_button.get_children().get_count();
-        //         for _ in 0..count {
-        //             config_ui.sizer_button.remove_int(0);
-        //         }
-        //         button.destroy();
-        //     }
+                // TODO: remove (and delete) all checkboxes
+                let count = config_ui.sizer_checkbox.get_children().get_count();
+                for _ in 0..count {
+                    config_ui.sizer_checkbox.remove_int(0);
+                }
+                checkbox.destroy();
+            }
 
-        //     if label.is_empty() {
-        //         label = config_ui.text_label.get_value();
-        //     }
+            //     if label.is_empty() {
+            //         label = config_ui.text_label.get_value();
+            //     }
 
-        //     let mut flags = wx::BORDER_DEFAULT;
-        //     flags |= match config_ui.radio_halign.get_selection() {
-        //         BUTTON_HALIGN_LEFT => wx::BU_LEFT,
-        //         BUTTON_HALIGN_RIGHT => wx::BU_RIGHT,
-        //         _ => 0,
-        //     } as c_long;
+            let mut flags = wx::BORDER_DEFAULT;
 
-        //     flags |= match config_ui.radio_valign.get_selection() {
-        //         BUTTON_VALIGN_TOP => wx::BU_TOP,
-        //         BUTTON_VALIGN_BOTTOM => wx::BU_BOTTOM,
-        //         // centre vertical alignment is the default (no style)
-        //         _ => 0,
-        //     } as c_long;
+            if config_ui.chk_right.is_checked() {
+                flags |= wx::ALIGN_RIGHT as c_long;
+            }
 
-        //     if config_ui.chk_fit.get_value() {
-        //         flags |= wx::BU_EXACTFIT as c_long;
-        //     }
+            flags |= match config_ui.radio_kind.get_selection() {
+                CHECKBOX_KIND_3STATE_USER => wx::CHK_ALLOW_3RD_STATE_FOR_USER | wx::CHK_3STATE,
+                CHECKBOX_KIND_3STATE => wx::CHK_3STATE,
+                _ => wx::CHK_2STATE,
+            } as c_long;
 
-        //     let mut shows_bitmap = false;
-        //     let new_button = if config_ui.chk_bitmap_only.get_value() {
-        //         shows_bitmap = true;
+            let new_checkbox = wx::CheckBox::builder(Some(&self.base))
+                .id(CheckboxPage::Checkbox.into())
+                .label(&label)
+                .style(flags)
+                .build();
 
-        //         let bbtn: wx::CheckBox;
-        //         // TODO: Support downcasting from BitmapCheckBox into CheckBox
-        //         //
-        //         // let bbtn: wx::BitmapCheckBox;
-        //         // if config_ui.chk_use_bitmap_class.get_value() {
-        //         //     // TODO: create bitmap
-        //         //     let icon_bitmap = wx::Bitmap::new();
-        //         //     icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
-        //         //         // wxRust TODO: generate these constants...
-        //         //         "wxART_INFORMATION",
-        //         //         "wxART_BUTTON_C",
-        //         //         &wx::Size::default(),
-        //         //     ));
-        //         //     bbtn = wx::BitmapCheckBox::builder(Some(&self.base))
-        //         //         .style(flags)
-        //         //         .build(&icon_bitmap);
-        //         // } else {
-        //         // TODO: create bitmap
-        //         bbtn = wx::CheckBox::builder(Some(&self.base))
-        //             .id(CheckboxPage::CheckBox.into())
-        //             .build();
-        //         let icon_bitmap = wx::Bitmap::new();
-        //         icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
-        //             // wxRust TODO: generate these constants...
-        //             "wxART_INFORMATION",
-        //             "wxART_BUTTON_C",
-        //             &wx::Size::default(),
-        //         ));
-        //         bbtn.set_bitmap_label(&icon_bitmap);
-        //         // }
+            let sizer_checkbox = &config_ui.sizer_checkbox;
+            sizer_checkbox.add_stretch_spacer(1);
+            sizer_checkbox.add_window_sizerflags(
+                Some(&new_checkbox),
+                wx::SizerFlags::new(0).centre().border(wx::ALL),
+            );
+            sizer_checkbox.add_stretch_spacer(1);
 
-        //         if config_ui.chk_use_pressed.get_value() {
-        //             // TODO: CreateBitmap("pushed", wxART_HELP)
-        //             bbtn.set_bitmap_pressed(&icon_bitmap);
-        //         }
-        //         if config_ui.chk_use_focused.get_value() {
-        //             // TODO: CreateBitmap("focused", wxART_ERROR)
-        //             bbtn.set_bitmap_focus(&icon_bitmap);
-        //         }
-        //         if config_ui.chk_use_current.get_value() {
-        //             // TODO: CreateBitmap("hover", wxART_WARNING)
-        //             bbtn.set_bitmap_current(&icon_bitmap);
-        //         }
-        //         if config_ui.chk_use_disabled.get_value() {
-        //             // TODO: CreateBitmap("disabled", wxART_MISSING_IMAGE)
-        //             bbtn.set_bitmap_disabled(&icon_bitmap);
-        //         }
+            sizer_checkbox.layout();
 
-        //         bbtn
-        //     } else {
-        //         wx::CheckBox::builder(Some(&self.base))
-        //             .id(CheckboxPage::CheckBox.into())
-        //             .label(&label)
-        //             .style(flags)
-        //             .build()
-        //     };
-
-        //     if !shows_bitmap && config_ui.chk_text_and_bitmap.get_value() {
-        //         shows_bitmap = true;
-
-        //         let positions = [wx::LEFT, wx::RIGHT, wx::TOP, wx::BOTTOM];
-        //         // TODO: implement From<> trait
-        //         let icon_bitmap = wx::Bitmap::new();
-        //         icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
-        //             // wxRust TODO: generate these constants...
-        //             "wxART_INFORMATION",
-        //             "wxART_BUTTON_C",
-        //             &wx::Size::default(),
-        //         ));
-        //         new_button.set_bitmap(
-        //             &icon_bitmap,
-        //             positions[config_ui.radio_image_pos.get_selection() as usize],
-        //         );
-
-        //         if config_ui.chk_use_pressed.get_value() {
-        //             let icon_bitmap = wx::Bitmap::new();
-        //             icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
-        //                 "wxART_HELP",
-        //                 "wxART_BUTTON_C",
-        //                 &wx::Size::default(),
-        //             ));
-        //             new_button.set_bitmap_pressed(&icon_bitmap);
-        //         }
-        //         if config_ui.chk_use_focused.get_value() {
-        //             let icon_bitmap = wx::Bitmap::new();
-        //             icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
-        //                 "wxART_ERROR",
-        //                 "wxART_BUTTON_C",
-        //                 &wx::Size::default(),
-        //             ));
-        //             new_button.set_bitmap_focus(&icon_bitmap);
-        //         }
-        //         if config_ui.chk_use_current.get_value() {
-        //             let icon_bitmap = wx::Bitmap::new();
-        //             icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
-        //                 "wxART_WARNING",
-        //                 "wxART_BUTTON_C",
-        //                 &wx::Size::default(),
-        //             ));
-        //             new_button.set_bitmap_current(&icon_bitmap);
-        //         }
-        //         if config_ui.chk_use_disabled.get_value() {
-        //             let icon_bitmap = wx::Bitmap::new();
-        //             icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
-        //                 "wxART_MISSING_IMAGE",
-        //                 "wxART_BUTTON_C",
-        //                 &wx::Size::default(),
-        //             ));
-        //             new_button.set_bitmap_disabled(&icon_bitmap);
-        //         }
-        //     }
-
-        //     config_ui.chk_use_bitmap_class.enable(shows_bitmap);
-
-        //     config_ui.chk_use_pressed.enable(shows_bitmap);
-        //     config_ui.chk_use_focused.enable(shows_bitmap);
-        //     config_ui.chk_use_current.enable(shows_bitmap);
-        //     config_ui.chk_use_disabled.enable(shows_bitmap);
-        //     config_ui
-        //         .radio_image_pos
-        //         .enable(config_ui.chk_text_and_bitmap.is_checked());
-
-        //     if config_ui.chk_auth_needed.get_value() {
-        //         new_button.set_auth_needed(true);
-        //     }
-
-        //     if config_ui.chk_default.get_value() {
-        //         new_button.set_default();
-        //     }
-
-        //     new_button.enable(!config_ui.chk_disable.is_checked());
-
-        //     let sizer_button = &config_ui.sizer_button;
-        //     sizer_button.add_stretch_spacer(1);
-        //     sizer_button.add_window_sizerflags(
-        //         Some(&new_button),
-        //         wx::SizerFlags::new(0).centre().border(wx::ALL),
-        //     );
-        //     sizer_button.add_stretch_spacer(1);
-
-        //     sizer_button.layout();
-
-        //     *self.button.borrow_mut() = Some(new_button);
-        // }
+            *self.checkbox.borrow_mut() = Some(new_checkbox);
+        }
     }
 
     // Utility methods from (and to be placed to) the base WidgetPage class
@@ -530,46 +343,62 @@ impl CheckBoxWidgetsPage {
         return checkbox;
     }
 
-    // pub fn handle_button(&self, event: &wx::CommandEvent) {
-    //     println!("event={}", event.get_id());
-    //     if let Some(m) = CheckboxPage::from(event.get_id()) {
-    //         match m {
-    //             CheckboxPage::Reset => self.on_button_reset(),
-    //             CheckboxPage::ChangeLabel => self.on_button_change_label(),
-    //             _ => (),
-    //         };
-    //     }
-    // }
-    // fn on_button_reset(&self) {
-    //     self.reset();
-    //     // TODO: make mut self callable here, or
-    //     // make create_button() not to require mut self.
-    //     self.create_button();
-    // }
+    pub fn handle_button(&self, event: &wx::CommandEvent) {
+        println!("event={}", event.get_id());
+        if let Some(m) = CheckboxPage::from(event.get_id()) {
+            match m {
+                CheckboxPage::Reset => self.on_button_reset(),
+                CheckboxPage::ChangeLabel => self.on_button_change_label(),
+                CheckboxPage::Check => self.on_button_check(),
+                CheckboxPage::Uncheck => self.on_button_uncheck(),
+                // TODO: Support update ui event to disable this when not 3state
+                CheckboxPage::PartCheck => self.on_button_part_check(),
+                _ => (),
+            };
+        }
+    }
+    fn on_button_reset(&self) {
+        self.reset();
+        self.create_check_box();
+    }
 
-    // pub fn handle_checkbox(&self, _: &wx::CommandEvent) {
-    //     self.on_check_or_radio_box();
-    // }
-    // pub fn handle_radiobox(&self, _: &wx::CommandEvent) {
-    //     self.on_check_or_radio_box();
-    // }
-    // fn on_check_or_radio_box(&self) {
-    //     self.create_button();
-    //     self.base.layout(); // make sure the text field for changing note displays correctly.
-    // }
+    fn on_button_check(&self) {
+        self.checkbox.borrow().as_ref().unwrap().set_value(true);
+    }
+    fn on_button_uncheck(&self) {
+        self.checkbox.borrow().as_ref().unwrap().set_value(false);
+    }
+    fn on_button_part_check(&self) {
+        self.checkbox
+            .borrow()
+            .as_ref()
+            .unwrap()
+            .set3_state_value(wx::CHK_UNDETERMINED);
+    }
+    pub fn handle_checkbox(&self, event: &wx::CommandEvent) {
+        if let Some(m) = CheckboxPage::from(event.get_id()) {
+            match m {
+                CheckboxPage::Checkbox => self.on_check_box(),
+                _ => self.on_style_change(),
+            };
+        }
+    }
+    pub fn handle_radiobox(&self, _: &wx::CommandEvent) {
+        self.on_style_change();
+    }
+    fn on_style_change(&self) {
+        self.create_check_box();
+    }
 
-    // fn on_button_change_label(&self) {
-    //     if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-    //         let label_text = config_ui.text_label.get_value();
-    //         println!("{}", label_text);
+    fn on_button_change_label(&self) {
+        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+            self.checkbox
+                .borrow()
+                .as_ref()
+                .unwrap()
+                .set_label(&config_ui.text_label.get_value());
+        }
+    }
 
-    //         self.button
-    //             .borrow()
-    //             .as_ref()
-    //             .unwrap()
-    //             .set_label(&label_text);
-
-    //         config_ui.sizer_button.layout();
-    //     }
-    // }
+    fn on_check_box(&self) {}
 }

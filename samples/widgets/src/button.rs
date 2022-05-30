@@ -568,8 +568,6 @@ impl ButtonWidgetsPage {
     }
     fn on_button_reset(&self) {
         self.reset();
-        // TODO: make mut self callable here, or
-        // make create_button() not to require mut self.
         self.create_button();
     }
 
