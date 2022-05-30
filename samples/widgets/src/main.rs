@@ -9,6 +9,9 @@ use wx::methods::*;
 mod button;
 use button::*;
 
+// mod checkbox;
+// use checkbox::*;
+
 enum Widgets {
     ClearLog = 100,
     Quit,
