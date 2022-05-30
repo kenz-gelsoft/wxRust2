@@ -96,7 +96,7 @@ struct WidgetsFrame {
     base: wx::Frame,
     m_panel: wx::Panel,
     m_book: wx::Notebook,
-    m_page: ButtonWidgetsPage, // for now
+    m_page: CheckBoxWidgetsPage, // for now
 }
 impl WidgetsFrame {
     fn new(title: &str) -> Self {
@@ -109,7 +109,7 @@ impl WidgetsFrame {
             .style(style.into())
             .build();
 
-        let page = ButtonWidgetsPage::new(&book);
+        let page = CheckBoxWidgetsPage::new(&book);
         let mut frame = WidgetsFrame {
             base: base,
             m_panel: panel,
@@ -118,24 +118,24 @@ impl WidgetsFrame {
         };
         frame.on_create();
 
-        let frame_copy = frame.clone();
-        frame
-            .base
-            .bind(wx::RustEvent::Button, move |event: &wx::CommandEvent| {
-                frame_copy.m_page.handle_button(event);
-            });
-        let frame_copy = frame.clone();
-        frame
-            .base
-            .bind(wx::RustEvent::CheckBox, move |event: &wx::CommandEvent| {
-                frame_copy.m_page.handle_checkbox(event);
-            });
-        let frame_copy = frame.clone();
-        frame
-            .base
-            .bind(wx::RustEvent::RadioBox, move |event: &wx::CommandEvent| {
-                frame_copy.m_page.handle_radiobox(event);
-            });
+        // let frame_copy = frame.clone();
+        // frame
+        //     .base
+        //     .bind(wx::RustEvent::Button, move |event: &wx::CommandEvent| {
+        //         frame_copy.m_page.handle_button(event);
+        //     });
+        // let frame_copy = frame.clone();
+        // frame
+        //     .base
+        //     .bind(wx::RustEvent::CheckBox, move |event: &wx::CommandEvent| {
+        //         frame_copy.m_page.handle_checkbox(event);
+        //     });
+        // let frame_copy = frame.clone();
+        // frame
+        //     .base
+        //     .bind(wx::RustEvent::RadioBox, move |event: &wx::CommandEvent| {
+        //         frame_copy.m_page.handle_radiobox(event);
+        //     });
 
         frame
     }
@@ -266,7 +266,7 @@ impl WidgetsFrame {
 
         self.m_book.add_page(
             Some(&self.m_page.base),
-            "Button",
+            "CheckBox",
             false,
             wx::BookCtrlBase::NO_IMAGE,
         );
