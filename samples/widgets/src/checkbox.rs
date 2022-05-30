@@ -5,20 +5,20 @@ use wx::methods::*;
 
 // control ids
 #[derive(Clone, Copy)]
-enum ButtonPage {
+enum CheckBoxPage {
     Reset = wx::ID_HIGHEST as isize,
     ChangeLabel,
-    // ChangeNote, // for CommandLinkButton
-    Button,
+    // ChangeNote, // for CommandLinkCheckBox
+    CheckBox,
 }
-impl ButtonPage {
+impl CheckBoxPage {
     fn from(v: c_int) -> Option<Self> {
-        use ButtonPage::*;
+        use CheckBoxPage::*;
         for e in [
             Reset,
             ChangeLabel,
             // ChangeNote,
-            Button,
+            CheckBox,
         ] {
             if v == e.into() {
                 return Some(e);
@@ -27,8 +27,8 @@ impl ButtonPage {
         return None;
     }
 }
-impl From<ButtonPage> for c_int {
-    fn from(w: ButtonPage) -> Self {
+impl From<CheckBoxPage> for c_int {
+    fn from(w: CheckBoxPage) -> Self {
         w as c_int
     }
 }
@@ -57,7 +57,7 @@ pub struct ConfigUI {
     chk_use_bitmap_class: wx::CheckBox,
     chk_disable: wx::CheckBox,
 
-    // more checkboxes for wxBitmapButton only
+    // more checkboxes for wxBitmapCheckBox only
     chk_use_pressed: wx::CheckBox,
     chk_use_focused: wx::CheckBox,
     chk_use_current: wx::CheckBox,
@@ -96,18 +96,18 @@ impl ConfigUI {
 }
 
 #[derive(Clone)]
-pub struct ButtonWidgetsPage {
+pub struct CheckBoxWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
     // the button itself and the sizer it is in
-    button: Rc<RefCell<Option<wx::Button>>>,
+    button: Rc<RefCell<Option<wx::CheckBox>>>,
 }
-impl ButtonWidgetsPage {
+impl CheckBoxWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {
         let panel = wx::Panel::builder(Some(book))
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
-        ButtonWidgetsPage {
+        CheckBoxWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
             button: Rc::new(RefCell::new(None)),
@@ -136,7 +136,7 @@ impl ButtonWidgetsPage {
             self.create_check_box_and_add_to_sizer(&sizer_left, "&Default", wx::ID_ANY);
 
         let chk_use_bitmap_class =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "Use wxBitmapButton", wx::ID_ANY);
+            self.create_check_box_and_add_to_sizer(&sizer_left, "Use wxBitmapCheckBox", wx::ID_ANY);
         chk_use_bitmap_class.set_value(true);
 
         let chk_disable =
@@ -220,8 +220,8 @@ impl ButtonWidgetsPage {
 
         sizer_left.add_spacer(5);
 
-        let btn = wx::Button::builder(Some(&self.base))
-            .id(ButtonPage::Reset.into())
+        let btn = wx::CheckBox::builder(Some(&self.base))
+            .id(CheckBoxPage::Reset.into())
             .label("&Reset")
             .build();
         sizer_left.add_window_int(
@@ -239,7 +239,7 @@ impl ButtonWidgetsPage {
         let sizer_middle = wx::StaticBoxSizer::new_with_staticbox(Some(&s_box2), wx::VERTICAL);
 
         let (sizer_row, text_label) = self.create_sizer_with_text_and_button(
-            ButtonPage::ChangeLabel.into(),
+            CheckBoxPage::ChangeLabel.into(),
             "Change label",
             wx::ID_ANY,
         );
@@ -350,10 +350,10 @@ impl ButtonWidgetsPage {
             let new_button = if config_ui.chk_bitmap_only.get_value() {
                 shows_bitmap = true;
 
-                let bbtn: wx::Button;
-                // TODO: Support downcasting from BitmapButton into Button
+                let bbtn: wx::CheckBox;
+                // TODO: Support downcasting from BitmapCheckBox into CheckBox
                 //
-                // let bbtn: wx::BitmapButton;
+                // let bbtn: wx::BitmapCheckBox;
                 // if config_ui.chk_use_bitmap_class.get_value() {
                 //     // TODO: create bitmap
                 //     let icon_bitmap = wx::Bitmap::new();
@@ -363,13 +363,13 @@ impl ButtonWidgetsPage {
                 //         "wxART_BUTTON_C",
                 //         &wx::Size::default(),
                 //     ));
-                //     bbtn = wx::BitmapButton::builder(Some(&self.base))
+                //     bbtn = wx::BitmapCheckBox::builder(Some(&self.base))
                 //         .style(flags)
                 //         .build(&icon_bitmap);
                 // } else {
                 // TODO: create bitmap
-                bbtn = wx::Button::builder(Some(&self.base))
-                    .id(ButtonPage::Button.into())
+                bbtn = wx::CheckBox::builder(Some(&self.base))
+                    .id(CheckBoxPage::CheckBox.into())
                     .build();
                 let icon_bitmap = wx::Bitmap::new();
                 icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
@@ -400,8 +400,8 @@ impl ButtonWidgetsPage {
 
                 bbtn
             } else {
-                wx::Button::builder(Some(&self.base))
-                    .id(ButtonPage::Button.into())
+                wx::CheckBox::builder(Some(&self.base))
+                    .id(CheckBoxPage::CheckBox.into())
                     .label(&label)
                     .style(flags)
                     .build()
@@ -533,7 +533,7 @@ impl ButtonWidgetsPage {
         label: &str,
         id: c_int,
     ) -> (wx::BoxSizer, wx::TextCtrl) {
-        let btn = wx::Button::builder(Some(&self.base))
+        let btn = wx::CheckBox::builder(Some(&self.base))
             .id(id_btn)
             .label(label)
             .build();
@@ -558,10 +558,10 @@ impl ButtonWidgetsPage {
 
     pub fn handle_button(&self, event: &wx::CommandEvent) {
         println!("event={}", event.get_id());
-        if let Some(m) = ButtonPage::from(event.get_id()) {
+        if let Some(m) = CheckBoxPage::from(event.get_id()) {
             match m {
-                ButtonPage::Reset => self.on_button_reset(),
-                ButtonPage::ChangeLabel => self.on_button_change_label(),
+                CheckBoxPage::Reset => self.on_button_reset(),
+                CheckBoxPage::ChangeLabel => self.on_button_change_label(),
                 _ => (),
             };
         }
