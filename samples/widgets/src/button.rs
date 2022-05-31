@@ -1,3 +1,4 @@
+use crate::WidgetsPage;
 use std::cell::RefCell;
 use std::os::raw::{c_int, c_long};
 use std::rc::Rc;
@@ -102,19 +103,14 @@ pub struct ButtonWidgetsPage {
     // the button itself and the sizer it is in
     button: Rc<RefCell<Option<wx::Button>>>,
 }
-impl ButtonWidgetsPage {
-    pub fn new<P: WindowMethods>(book: &P) -> Self {
-        let panel = wx::Panel::builder(Some(book))
-            .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
-            .build();
-        ButtonWidgetsPage {
-            base: panel,
-            config_ui: RefCell::new(None),
-            button: Rc::new(RefCell::new(None)),
-        }
+impl WidgetsPage for ButtonWidgetsPage {
+    fn base(&self) -> &wx::Panel {
+        return &self.base;
     }
-
-    pub fn create_content(&self) {
+    fn label(&self) -> &str {
+        return "Button";
+    }
+    fn create_content(&self) {
         let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
 
         // left pane
@@ -298,6 +294,35 @@ impl ButtonWidgetsPage {
         self.create_button();
 
         self.base.set_sizer(Some(&sizer_top), true);
+    }
+
+    fn handle_button(&self, event: &wx::CommandEvent) {
+        println!("event={}", event.get_id());
+        if let Some(m) = ButtonPage::from(event.get_id()) {
+            match m {
+                ButtonPage::Reset => self.on_button_reset(),
+                ButtonPage::ChangeLabel => self.on_button_change_label(),
+                _ => (),
+            };
+        }
+    }
+    fn handle_checkbox(&self, _: &wx::CommandEvent) {
+        self.on_check_or_radio_box();
+    }
+    fn handle_radiobox(&self, _: &wx::CommandEvent) {
+        self.on_check_or_radio_box();
+    }
+}
+impl ButtonWidgetsPage {
+    pub fn new<P: WindowMethods>(book: &P) -> Self {
+        let panel = wx::Panel::builder(Some(book))
+            .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
+            .build();
+        ButtonWidgetsPage {
+            base: panel,
+            config_ui: RefCell::new(None),
+            button: Rc::new(RefCell::new(None)),
+        }
     }
 
     fn recreate_widget(&self) {
@@ -496,89 +521,11 @@ impl ButtonWidgetsPage {
         }
     }
 
-    // Utility methods from (and to be placed to) the base WidgetPage class
-
-    fn create_sizer_with_text<C: ControlMethods>(
-        &self,
-        control: &C,
-        id: c_int,
-    ) -> (wx::BoxSizer, wx::TextCtrl) {
-        let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
-        let text = wx::TextCtrl::builder(Some(&self.base))
-            .id(id)
-            .style(wx::TE_PROCESS_ENTER.into())
-            .build();
-
-        sizer_row.add_window_int(
-            Some(control),
-            0,
-            wx::RIGHT | wx::ALIGN_CENTRE_VERTICAL,
-            5,
-            wx::Object::none(),
-        );
-        sizer_row.add_window_int(
-            Some(&text),
-            1,
-            wx::LEFT | wx::ALIGN_CENTRE_VERTICAL,
-            5,
-            wx::Object::none(),
-        );
-
-        (sizer_row, text)
-    }
-
-    fn create_sizer_with_text_and_button(
-        &self,
-        id_btn: c_int,
-        label: &str,
-        id: c_int,
-    ) -> (wx::BoxSizer, wx::TextCtrl) {
-        let btn = wx::Button::builder(Some(&self.base))
-            .id(id_btn)
-            .label(label)
-            .build();
-        self.create_sizer_with_text(&btn, id)
-    }
-
-    fn create_check_box_and_add_to_sizer<S: SizerMethods>(
-        &self,
-        sizer: &S,
-        label: &str,
-        id: c_int,
-    ) -> wx::CheckBox {
-        let checkbox = wx::CheckBox::builder(Some(&self.base))
-            .id(id)
-            .label(label)
-            .build();
-        sizer.add_window_sizerflags(Some(&checkbox), wx::SizerFlags::new(0).double_horz_border());
-        sizer.add_spacer(2);
-
-        return checkbox;
-    }
-
-    pub fn handle_button(&self, event: &wx::CommandEvent) {
-        println!("event={}", event.get_id());
-        if let Some(m) = ButtonPage::from(event.get_id()) {
-            match m {
-                ButtonPage::Reset => self.on_button_reset(),
-                ButtonPage::ChangeLabel => self.on_button_change_label(),
-                _ => (),
-            };
-        }
-    }
     fn on_button_reset(&self) {
         self.reset();
-        // TODO: make mut self callable here, or
-        // make create_button() not to require mut self.
         self.create_button();
     }
 
-    pub fn handle_checkbox(&self, _: &wx::CommandEvent) {
-        self.on_check_or_radio_box();
-    }
-    pub fn handle_radiobox(&self, _: &wx::CommandEvent) {
-        self.on_check_or_radio_box();
-    }
     fn on_check_or_radio_box(&self) {
         self.create_button();
         self.base.layout(); // make sure the text field for changing note displays correctly.

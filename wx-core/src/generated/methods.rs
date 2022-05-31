@@ -565,7 +565,9 @@ pub trait CheckBoxMethods: ControlMethods {
     fn get_value(&self) -> bool {
         unsafe { ffi::wxCheckBox_GetValue(self.as_ptr()) }
     }
-    // NOT_SUPPORTED: fn Get3StateValue()
+    fn get3_state_value(&self) -> c_int {
+        unsafe { ffi::wxCheckBox_Get3StateValue(self.as_ptr()) }
+    }
     fn is3_state(&self) -> bool {
         unsafe { ffi::wxCheckBox_Is3State(self.as_ptr()) }
     }
@@ -578,7 +580,9 @@ pub trait CheckBoxMethods: ControlMethods {
     fn set_value(&self, state: bool) {
         unsafe { ffi::wxCheckBox_SetValue(self.as_ptr(), state) }
     }
-    // NOT_SUPPORTED: fn Set3StateValue()
+    fn set3_state_value(&self, state: c_int) {
+        unsafe { ffi::wxCheckBox_Set3StateValue(self.as_ptr(), state) }
+    }
 }
 
 // wxColour
