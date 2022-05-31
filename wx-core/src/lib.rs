@@ -708,6 +708,74 @@ impl<'a, P: WindowMethods> CheckBoxBuilder<'a, P> {
     }
 }
 
+pub struct ChoiceBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    id: c_int,
+    pos: Option<Point>,
+    size: Option<Size>,
+    choices: Option<ArrayString>,
+    style: c_long,
+    validator: Option<Validator>,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, ChoiceBuilder<'a, P>> for Choice {
+    fn builder(parent: Option<&'a P>) -> ChoiceBuilder<'a, P> {
+        ChoiceBuilder {
+            parent: parent,
+            id: ID_ANY,
+            pos: None,
+            size: None,
+            choices: None,
+            style: 0,
+            validator: None,
+        }
+    }
+}
+impl<'a, P: WindowMethods> ChoiceBuilder<'a, P> {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn choices(&mut self, choices: ArrayString) -> &mut Self {
+        self.choices = Some(choices);
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn validator(&mut self, validator: Validator) -> &mut Self {
+        self.validator = Some(validator);
+        self
+    }
+    pub fn build(&mut self) -> Choice {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        let choices = self.choices.take().unwrap_or_else(|| ArrayString::new());
+        let validator = self
+            .validator
+            .take()
+            .unwrap_or_else(|| Validator::default());
+        Choice::new(
+            self.parent,
+            self.id,
+            &pos,
+            &size,
+            &choices,
+            self.style,
+            &validator,
+            "",
+        )
+    }
+}
+
 pub struct ListBoxBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
