@@ -1,6 +1,7 @@
 #![windows_subsystem = "windows"]
 
 use std::os::raw::c_int;
+use std::rc::Rc;
 use wx;
 use wx::methods::*;
 
@@ -96,7 +97,7 @@ struct WidgetsFrame {
     base: wx::Frame,
     m_panel: wx::Panel,
     m_book: wx::Notebook,
-    m_page: CheckBoxWidgetsPage, // for now
+    m_page: Rc<dyn WidgetsPage>, // for now
 }
 impl WidgetsFrame {
     fn new(title: &str) -> Self {
@@ -114,7 +115,7 @@ impl WidgetsFrame {
             base: base,
             m_panel: panel,
             m_book: book,
-            m_page: page,
+            m_page: Rc::new(page),
         };
         frame.on_create();
 
@@ -265,7 +266,7 @@ impl WidgetsFrame {
         // TODO: initialize pages here for startup time and memory consumpution
 
         self.m_book.add_page(
-            Some(&self.m_page.base),
+            Some(self.m_page.base()),
             "CheckBox",
             false,
             wx::BookCtrlBase::NO_IMAGE,
@@ -298,7 +299,7 @@ impl WidgetsFrame {
         menu_bar.check(Widgets::BusyCursor.into(), false);
 
         self.m_page.create_content();
-        self.m_page.base.layout();
+        self.m_page.base().layout();
     }
 }
 
@@ -311,9 +312,9 @@ trait WidgetsPage {
 
     // Utility methods from (and to be placed to) the base WidgetPage class
 
-    fn create_sizer_with_text<C: ControlMethods>(
+    fn create_sizer_with_text(
         &self,
-        control: &C,
+        control: &wx::Button,
         id: c_int,
     ) -> (wx::BoxSizer, wx::TextCtrl) {
         let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
@@ -353,9 +354,9 @@ trait WidgetsPage {
         self.create_sizer_with_text(&btn, id)
     }
 
-    fn create_check_box_and_add_to_sizer<S: SizerMethods>(
+    fn create_check_box_and_add_to_sizer(
         &self,
-        sizer: &S,
+        sizer: &wx::StaticBoxSizer,
         label: &str,
         id: c_int,
     ) -> wx::CheckBox {
