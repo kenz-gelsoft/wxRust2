@@ -95,9 +95,9 @@ fn main() {
 #[derive(Clone)]
 struct WidgetsFrame {
     base: wx::Frame,
-    m_panel: wx::Panel,
-    m_book: wx::Notebook,
-    m_page: Rc<dyn WidgetsPage>, // for now
+    panel: wx::Panel,
+    book: wx::Notebook,
+    page: Rc<dyn WidgetsPage>, // for now
 }
 impl WidgetsFrame {
     fn new(title: &str) -> Self {
@@ -112,10 +112,10 @@ impl WidgetsFrame {
 
         let page = CheckBoxWidgetsPage::new(&book);
         let mut frame = WidgetsFrame {
-            base: base,
-            m_panel: panel,
-            m_book: book,
-            m_page: Rc::new(page),
+            base,
+            panel,
+            book,
+            page: Rc::new(page),
         };
         frame.on_create();
 
@@ -123,19 +123,19 @@ impl WidgetsFrame {
         frame
             .base
             .bind(wx::RustEvent::Button, move |event: &wx::CommandEvent| {
-                frame_copy.m_page.handle_button(event);
+                frame_copy.page.handle_button(event);
             });
         let frame_copy = frame.clone();
         frame
             .base
             .bind(wx::RustEvent::CheckBox, move |event: &wx::CommandEvent| {
-                frame_copy.m_page.handle_checkbox(event);
+                frame_copy.page.handle_checkbox(event);
             });
         let frame_copy = frame.clone();
         frame
             .base
             .bind(wx::RustEvent::RadioBox, move |event: &wx::CommandEvent| {
-                frame_copy.m_page.handle_radiobox(event);
+                frame_copy.page.handle_radiobox(event);
             });
 
         frame
@@ -220,7 +220,7 @@ impl WidgetsFrame {
         let sizer_down = wx::BoxSizer::new(wx::VERTICAL);
 
         let sizer_btns = wx::BoxSizer::new(wx::HORIZONTAL);
-        let btn = wx::Button::builder(Some(&self.m_panel))
+        let btn = wx::Button::builder(Some(&self.panel))
             .id(Widgets::Quit.into())
             .label("E&xit")
             .build();
@@ -231,7 +231,7 @@ impl WidgetsFrame {
         );
 
         sizer_top.add_window_sizerflags(
-            Some(&self.m_book),
+            Some(&self.book),
             wx::SizerFlags::new(1)
                 .expand()
                 .double_border(wx::ALL & !(wx::TOP | wx::BOTTOM)),
@@ -244,10 +244,10 @@ impl WidgetsFrame {
                 .double_border(wx::ALL & !wx::TOP),
         );
 
-        self.m_panel.set_sizer(Some(&sizer_top), true);
+        self.panel.set_sizer(Some(&sizer_top), true);
 
         // wxPersistentRegisterAndRestore
-        let size_min = self.m_panel.get_best_size();
+        let size_min = self.panel.get_best_size();
 
         self.base.set_client_size_size(&size_min);
         self.base.set_min_client_size(&size_min);
@@ -265,8 +265,8 @@ impl WidgetsFrame {
     fn init_book(&mut self) {
         // TODO: initialize pages here for startup time and memory consumpution
 
-        self.m_book.add_page(
-            Some(self.m_page.base()),
+        self.book.add_page(
+            Some(self.page.base()),
             "CheckBox",
             false,
             wx::BookCtrlBase::NO_IMAGE,
@@ -282,8 +282,8 @@ impl WidgetsFrame {
         //     },
         // );
 
-        // self.m_book.set_selection(1);
-        // self.m_book.set_selection(0);
+        // self.book.set_selection(1);
+        // self.book.set_selection(0);
         self.on_page_changed(0);
     }
 
@@ -298,8 +298,8 @@ impl WidgetsFrame {
 
         menu_bar.check(Widgets::BusyCursor.into(), false);
 
-        self.m_page.create_content();
-        self.m_page.base().layout();
+        self.page.create_content();
+        self.page.base().layout();
     }
 }
 
