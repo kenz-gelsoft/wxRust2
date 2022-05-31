@@ -9,6 +9,7 @@ wxml_files = [
     'wxml/classwx_box_sizer.xml',
     'wxml/classwx_button.xml',
     'wxml/classwx_check_box.xml',
+    'wxml/classwx_choice.xml',
     'wxml/classwx_colour.xml',
     'wxml/classwx_command_event.xml',
     'wxml/classwx_control.xml',

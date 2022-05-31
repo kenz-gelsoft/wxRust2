@@ -261,6 +261,37 @@ extern "C" {
     pub fn wxCheckBox_SetValue(self_: *mut c_void, state: bool);
     pub fn wxCheckBox_Set3StateValue(self_: *mut c_void, state: c_int);
 
+    // wxChoice
+    pub fn wxChoice_new() -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxChoice_new1(parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
+    pub fn wxChoice_new2(
+        parent: *mut c_void,
+        id: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        choices: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    // DTOR: pub fn wxChoice_~wxChoice(self_: *mut c_void);
+    // NOT_SUPPORTED: pub fn wxChoice_Create(self_: *mut c_void, parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> bool;
+    pub fn wxChoice_Create1(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        choices: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxChoice_GetColumns(self_: *const c_void) -> c_int;
+    pub fn wxChoice_GetCurrentSelection(self_: *const c_void) -> c_int;
+    pub fn wxChoice_SetColumns(self_: *mut c_void, n: c_int);
+    pub fn wxChoice_IsSorted(self_: *const c_void) -> bool;
+
     // wxColour
     pub fn wxColour_new() -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxColour_new1(red: unsigned char, green: unsigned char, blue: unsigned char, alpha: unsigned char) -> *mut c_void;

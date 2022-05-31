@@ -358,6 +358,29 @@ void wxCheckBox_Set3StateValue(wxCheckBox * self, wxCheckBoxState state) {
     return self->Set3StateValue(state);
 }
 
+// CLASS: wxChoice
+wxChoice *wxChoice_new() {
+    return new wxChoice();
+}
+wxChoice *wxChoice_new2(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name) {
+    return new wxChoice(parent, id, *pos, *size, *choices, style, *validator, *name);
+}
+bool wxChoice_Create1(wxChoice * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, *pos, *size, *choices, style, *validator, *name);
+}
+int wxChoice_GetColumns(const wxChoice * self) {
+    return self->GetColumns();
+}
+int wxChoice_GetCurrentSelection(const wxChoice * self) {
+    return self->GetCurrentSelection();
+}
+void wxChoice_SetColumns(wxChoice * self, int n) {
+    return self->SetColumns(n);
+}
+bool wxChoice_IsSorted(const wxChoice * self) {
+    return self->IsSorted();
+}
+
 // CLASS: wxColour
 wxColour *wxColour_new() {
     return new wxColour();

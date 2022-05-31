@@ -585,6 +585,64 @@ pub trait CheckBoxMethods: ControlMethods {
     }
 }
 
+// wxChoice
+pub trait ChoiceMethods: ControlMethods {
+    // DTOR: fn ~wxChoice()
+    // NOT_SUPPORTED: fn Create()
+    fn create<
+        W: WindowMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        A: ArrayStringMethods,
+        V: ValidatorMethods,
+    >(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        choices: &A,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let choices = choices.as_ptr();
+            let validator = validator.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            ffi::wxChoice_Create1(
+                self.as_ptr(),
+                parent,
+                id,
+                pos,
+                size,
+                choices,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+    fn get_columns(&self) -> c_int {
+        unsafe { ffi::wxChoice_GetColumns(self.as_ptr()) }
+    }
+    fn get_current_selection(&self) -> c_int {
+        unsafe { ffi::wxChoice_GetCurrentSelection(self.as_ptr()) }
+    }
+    fn set_columns(&self, n: c_int) {
+        unsafe { ffi::wxChoice_SetColumns(self.as_ptr(), n) }
+    }
+    fn is_sorted(&self) -> bool {
+        unsafe { ffi::wxChoice_IsSorted(self.as_ptr()) }
+    }
+}
+
 // wxColour
 pub trait ColourMethods: ObjectMethods {
     // NOT_SUPPORTED: fn Alpha()

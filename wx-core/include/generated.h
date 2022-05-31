@@ -143,6 +143,15 @@ bool wxCheckBox_IsChecked(const wxCheckBox * self);
 void wxCheckBox_SetValue(wxCheckBox * self, bool state);
 void wxCheckBox_Set3StateValue(wxCheckBox * self, wxCheckBoxState state);
 
+// CLASS: wxChoice
+wxChoice *wxChoice_new();
+wxChoice *wxChoice_new2(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
+bool wxChoice_Create1(wxChoice * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
+int wxChoice_GetColumns(const wxChoice * self);
+int wxChoice_GetCurrentSelection(const wxChoice * self);
+void wxChoice_SetColumns(wxChoice * self, int n);
+bool wxChoice_IsSorted(const wxChoice * self);
+
 // CLASS: wxColour
 wxColour *wxColour_new();
 wxColour *wxColour_new2(const wxString * colour_name);

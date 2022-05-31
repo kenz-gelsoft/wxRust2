@@ -325,6 +325,56 @@ impl<const OWNED: bool> CheckBoxIsOwned<OWNED> {
     }
 }
 
+// wxChoice
+wx_class! { Choice =
+    ChoiceIsOwned<true>(wxChoice) impl
+        ChoiceMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> ChoiceIsOwned<OWNED> {
+    pub fn new_2step() -> ChoiceIsOwned<OWNED> {
+        unsafe { ChoiceIsOwned(ffi::wxChoice_new()) }
+    }
+    // NOT_SUPPORTED: fn wxChoice1()
+    pub fn new<
+        W: WindowMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        A: ArrayStringMethods,
+        V: ValidatorMethods,
+    >(
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        choices: &A,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> ChoiceIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let choices = choices.as_ptr();
+            let validator = validator.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            ChoiceIsOwned(ffi::wxChoice_new2(
+                parent, id, pos, size, choices, style, validator, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
 // wxColour
 wx_class! { Colour =
     ColourIsOwned<true>(wxColour) impl
