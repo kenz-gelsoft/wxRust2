@@ -12,6 +12,85 @@ use button::*;
 mod checkbox;
 use checkbox::*;
 
+enum Widgets {
+    ClearLog = 100,
+    Quit,
+
+    BookCtrl,
+
+    SetTooltip,
+    SetFgColour,
+    SetBgColour,
+    SetPageBg,
+    SetFont,
+    Enable,
+    Show,
+
+    BorderNone,
+    BorderStatic,
+    BorderSimple,
+    BorderRaised,
+    BorderSunken,
+    BorderDouble,
+    BorderDefault,
+
+    VariantNormal,
+    VariantSmall,
+    VariantMini,
+    VariantLarge,
+
+    LayoutDirection,
+
+    GlobalBusyCursor,
+    BusyCursor,
+
+    GoToPage,
+    GoToPageLast = Widgets::GoToPage as isize + 100,
+
+    End,
+}
+impl From<Widgets> for c_int {
+    fn from(w: Widgets) -> Self {
+        w as c_int
+    }
+}
+
+enum TextEntry {
+    DisableAutoComplete = Widgets::End as isize,
+    AutoCompleteFixed,
+    AutoCompleteFilenames,
+    AutoCompleteDirectories,
+    AutoCompleteCustom,
+    AutoCompleteKeyLength,
+
+    SetHint,
+    End,
+}
+const TEXT_ENTRY_BEGIN: c_int = TextEntry::DisableAutoComplete as c_int;
+impl From<TextEntry> for c_int {
+    fn from(te: TextEntry) -> Self {
+        te as c_int
+    }
+}
+
+fn main() {
+    wx::App::run(|_| {
+        // TODO
+        // SetVendorName("wxWidgets_Samples");
+
+        let title = if cfg!(windows) {
+            "wxMSW"
+        } else if cfg!(target_os = "macos") {
+            "wxMAC"
+        } else {
+            "wxGTK"
+        };
+
+        let frame = WidgetsFrame::new(&format!("{} widgets demo", title));
+        frame.base.show(true);
+    });
+}
+
 #[derive(Clone)]
 struct WidgetsFrame {
     base: wx::Frame,
@@ -289,83 +368,4 @@ trait WidgetsPage {
 
         return checkbox;
     }
-}
-
-enum Widgets {
-    ClearLog = 100,
-    Quit,
-
-    BookCtrl,
-
-    SetTooltip,
-    SetFgColour,
-    SetBgColour,
-    SetPageBg,
-    SetFont,
-    Enable,
-    Show,
-
-    BorderNone,
-    BorderStatic,
-    BorderSimple,
-    BorderRaised,
-    BorderSunken,
-    BorderDouble,
-    BorderDefault,
-
-    VariantNormal,
-    VariantSmall,
-    VariantMini,
-    VariantLarge,
-
-    LayoutDirection,
-
-    GlobalBusyCursor,
-    BusyCursor,
-
-    GoToPage,
-    GoToPageLast = Widgets::GoToPage as isize + 100,
-
-    End,
-}
-impl From<Widgets> for c_int {
-    fn from(w: Widgets) -> Self {
-        w as c_int
-    }
-}
-
-enum TextEntry {
-    DisableAutoComplete = Widgets::End as isize,
-    AutoCompleteFixed,
-    AutoCompleteFilenames,
-    AutoCompleteDirectories,
-    AutoCompleteCustom,
-    AutoCompleteKeyLength,
-
-    SetHint,
-    End,
-}
-const TEXT_ENTRY_BEGIN: c_int = TextEntry::DisableAutoComplete as c_int;
-impl From<TextEntry> for c_int {
-    fn from(te: TextEntry) -> Self {
-        te as c_int
-    }
-}
-
-fn main() {
-    wx::App::run(|_| {
-        // TODO
-        // SetVendorName("wxWidgets_Samples");
-
-        let title = if cfg!(windows) {
-            "wxMSW"
-        } else if cfg!(target_os = "macos") {
-            "wxMAC"
-        } else {
-            "wxGTK"
-        };
-
-        let frame = WidgetsFrame::new(&format!("{} widgets demo", title));
-        frame.base.show(true);
-    });
 }
