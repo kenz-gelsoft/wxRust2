@@ -62,7 +62,7 @@ pub struct ChoiceWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
     // the choice itself and the sizer it is in
-    choice: Rc<RefCell<Option<wx::CheckBox>>>,
+    choice: Rc<RefCell<Option<wx::Choice>>>,
 }
 impl WidgetsPage for ChoiceWidgetsPage {
     fn base(&self) -> &wx::Panel {
@@ -171,9 +171,8 @@ impl WidgetsPage for ChoiceWidgetsPage {
 
         // right pane
         let sizer_right = wx::BoxSizer::new(wx::HORIZONTAL);
-        let choice = wx::CheckBox::builder(Some(&self.base))
+        let choice = wx::Choice::builder(Some(&self.base))
             .id(CheckboxPage::Checkbox.into())
-            .label("&Check me!")
             .build();
         sizer_right.add_int_int(0, 0, 1, wx::CENTRE as i32, wx::ALL, wx::Object::none());
         sizer_right.add_window_int(
@@ -297,9 +296,8 @@ impl ChoiceWidgetsPage {
                 _ => wx::CHK_2STATE,
             } as c_long;
 
-            let new_choice = wx::CheckBox::builder(Some(&self.base))
+            let new_choice = wx::Choice::builder(Some(&self.base))
                 .id(CheckboxPage::Checkbox.into())
-                .label(&label)
                 .style(flags)
                 .build();
 
@@ -323,17 +321,17 @@ impl ChoiceWidgetsPage {
     }
 
     fn on_button_check(&self) {
-        self.choice.borrow().as_ref().unwrap().set_value(true);
+        // self.choice.borrow().as_ref().unwrap().set_value(true);
     }
     fn on_button_uncheck(&self) {
-        self.choice.borrow().as_ref().unwrap().set_value(false);
+        // self.choice.borrow().as_ref().unwrap().set_value(false);
     }
     fn on_button_part_check(&self) {
-        self.choice
-            .borrow()
-            .as_ref()
-            .unwrap()
-            .set3_state_value(wx::CHK_UNDETERMINED);
+        // self.choice
+        //     .borrow()
+        //     .as_ref()
+        //     .unwrap()
+        //     .set3_state_value(wx::CHK_UNDETERMINED);
     }
     fn on_style_change(&self) {
         self.create_choice();
