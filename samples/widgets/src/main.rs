@@ -13,6 +13,9 @@ use button::*;
 mod checkbox;
 use checkbox::*;
 
+mod choice;
+use choice::*;
+
 enum Widgets {
     ClearLog = 100,
     Quit,
@@ -112,11 +115,12 @@ impl WidgetsFrame {
 
         let button_page = Rc::new(ButtonWidgetsPage::new(&book));
         let check_box_page = Rc::new(CheckBoxWidgetsPage::new(&book));
+        let choice_page = Rc::new(ChoiceWidgetsPage::new(&book));
         let mut frame = WidgetsFrame {
             base,
             panel,
             book,
-            pages: vec![button_page, check_box_page],
+            pages: vec![choice_page, button_page, check_box_page],
         };
         frame.on_create();
 
