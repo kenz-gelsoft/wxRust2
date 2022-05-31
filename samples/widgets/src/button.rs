@@ -1,3 +1,4 @@
+use crate::WidgetsPage;
 use std::cell::RefCell;
 use std::os::raw::{c_int, c_long};
 use std::rc::Rc;
@@ -112,192 +113,6 @@ impl ButtonWidgetsPage {
             config_ui: RefCell::new(None),
             button: Rc::new(RefCell::new(None)),
         }
-    }
-
-    pub fn create_content(&self) {
-        let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
-
-        // left pane
-        let s_box = wx::StaticBox::builder(Some(&self.base))
-            .label("&Set style")
-            .build();
-
-        let sizer_left = wx::StaticBoxSizer::new_with_staticbox(Some(&s_box), wx::VERTICAL);
-
-        let chk_bitmap_only =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "&Bitmap only", wx::ID_ANY);
-        let chk_text_and_bitmap =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "Text &and bitmap", wx::ID_ANY);
-        let chk_fit =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "&Fit exactly", wx::ID_ANY);
-        let chk_auth_needed =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "Require a&uth", wx::ID_ANY);
-        let chk_default =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "&Default", wx::ID_ANY);
-
-        let chk_use_bitmap_class =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "Use wxBitmapButton", wx::ID_ANY);
-        chk_use_bitmap_class.set_value(true);
-
-        let chk_disable =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "Disable", wx::ID_ANY);
-
-        sizer_left.add_spacer(5);
-
-        let sizer_use_labels = wx::StaticBoxSizer::new_with_int(
-            wx::VERTICAL,
-            Some(&self.base),
-            "&Use the following bitmaps in addition to the normal one?",
-        );
-        let chk_use_pressed = self.create_check_box_and_add_to_sizer(
-            &sizer_use_labels,
-            "&Pressed (small help icon)",
-            wx::ID_ANY,
-        );
-        let chk_use_focused = self.create_check_box_and_add_to_sizer(
-            &sizer_use_labels,
-            "&Focused (small error icon)",
-            wx::ID_ANY,
-        );
-        let chk_use_current = self.create_check_box_and_add_to_sizer(
-            &sizer_use_labels,
-            "&Current (small warning icon)",
-            wx::ID_ANY,
-        );
-        let chk_use_disabled = self.create_check_box_and_add_to_sizer(
-            &sizer_use_labels,
-            "&Disabled (broken image icon)",
-            wx::ID_ANY,
-        );
-        sizer_left.add_sizer_sizerflags(
-            Some(&sizer_use_labels),
-            wx::SizerFlags::new(0).expand().border(wx::ALL),
-        );
-
-        sizer_left.add_spacer(10);
-
-        let dirs = wx::ArrayString::new();
-        dirs.add("left");
-        dirs.add("right");
-        dirs.add("top");
-        dirs.add("bottom");
-        let radio_image_pos = wx::RadioBox::builder(Some(&self.base))
-            .label("Image &position")
-            .choices(dirs)
-            .build();
-        sizer_left.add_window_sizerflags(
-            Some(&radio_image_pos),
-            wx::SizerFlags::new(0).expand().border(wx::ALL),
-        );
-        sizer_left.add_spacer(15);
-
-        let halign = wx::ArrayString::new();
-        halign.add("left");
-        halign.add("centre");
-        halign.add("right");
-        let radio_halign = wx::RadioBox::builder(Some(&self.base))
-            .label("&Horz alignment")
-            .choices(halign)
-            .build();
-
-        let valign = wx::ArrayString::new();
-        valign.add("top");
-        valign.add("centre");
-        valign.add("bottom");
-        let radio_valign = wx::RadioBox::builder(Some(&self.base))
-            .label("&Vert alignment")
-            .choices(valign)
-            .build();
-
-        sizer_left.add_window_sizerflags(
-            Some(&radio_halign),
-            wx::SizerFlags::new(0).expand().border(wx::ALL),
-        );
-        sizer_left.add_window_sizerflags(
-            Some(&radio_valign),
-            wx::SizerFlags::new(0).expand().border(wx::ALL),
-        );
-
-        sizer_left.add_spacer(5);
-
-        let btn = wx::Button::builder(Some(&self.base))
-            .id(ButtonPage::Reset.into())
-            .label("&Reset")
-            .build();
-        sizer_left.add_window_int(
-            Some(&btn),
-            0,
-            wx::ALIGN_CENTRE_HORIZONTAL | wx::ALL,
-            15,
-            wx::Object::none(),
-        );
-
-        // middle pane
-        let s_box2 = wx::StaticBox::builder(Some(&self.base))
-            .label("&Operations")
-            .build();
-        let sizer_middle = wx::StaticBoxSizer::new_with_staticbox(Some(&s_box2), wx::VERTICAL);
-
-        let (sizer_row, text_label) = self.create_sizer_with_text_and_button(
-            ButtonPage::ChangeLabel.into(),
-            "Change label",
-            wx::ID_ANY,
-        );
-        text_label.set_value("&Press me!");
-        sizer_middle.add_sizer_sizerflags(
-            Some(&sizer_row),
-            wx::SizerFlags::new(0).expand().border(wx::ALL),
-        );
-
-        // right pane
-        let sizer_button = wx::BoxSizer::new(wx::HORIZONTAL);
-        sizer_button.set_min_size_int(150, 0);
-
-        // the 3 panes panes compose the window
-        sizer_top.add_sizer_sizerflags(
-            Some(&sizer_left),
-            wx::SizerFlags::new(0)
-                .expand()
-                .double_border(wx::ALL & !wx::LEFT),
-        );
-        sizer_top.add_sizer_sizerflags(
-            Some(&sizer_middle),
-            wx::SizerFlags::new(1).expand().double_border(wx::ALL),
-        );
-        sizer_top.add_sizer_sizerflags(
-            Some(&sizer_button),
-            wx::SizerFlags::new(1)
-                .expand()
-                .double_border(wx::ALL & !wx::RIGHT),
-        );
-        *self.config_ui.borrow_mut() = Some(ConfigUI {
-            chk_bitmap_only,
-            chk_text_and_bitmap,
-            chk_fit,
-            chk_auth_needed,
-            chk_default,
-            chk_use_bitmap_class,
-            chk_disable,
-
-            chk_use_pressed,
-            chk_use_focused,
-            chk_use_current,
-            chk_use_disabled,
-
-            radio_image_pos,
-            radio_halign,
-            radio_valign,
-
-            sizer_button,
-
-            text_label,
-        });
-
-        // do create the main control
-        self.reset();
-        self.create_button();
-
-        self.base.set_sizer(Some(&sizer_top), true);
     }
 
     fn recreate_widget(&self) {
@@ -556,27 +371,11 @@ impl ButtonWidgetsPage {
         return checkbox;
     }
 
-    pub fn handle_button(&self, event: &wx::CommandEvent) {
-        println!("event={}", event.get_id());
-        if let Some(m) = ButtonPage::from(event.get_id()) {
-            match m {
-                ButtonPage::Reset => self.on_button_reset(),
-                ButtonPage::ChangeLabel => self.on_button_change_label(),
-                _ => (),
-            };
-        }
-    }
     fn on_button_reset(&self) {
         self.reset();
         self.create_button();
     }
 
-    pub fn handle_checkbox(&self, _: &wx::CommandEvent) {
-        self.on_check_or_radio_box();
-    }
-    pub fn handle_radiobox(&self, _: &wx::CommandEvent) {
-        self.on_check_or_radio_box();
-    }
     fn on_check_or_radio_box(&self) {
         self.create_button();
         self.base.layout(); // make sure the text field for changing note displays correctly.
@@ -595,5 +394,212 @@ impl ButtonWidgetsPage {
 
             config_ui.sizer_button.layout();
         }
+    }
+}
+impl WidgetsPage for ButtonWidgetsPage {
+    fn base(&self) -> &wx::Panel {
+        return &self.base;
+    }
+    fn create_content(&self) {
+        let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
+
+        // left pane
+        let s_box = wx::StaticBox::builder(Some(&self.base))
+            .label("&Set style")
+            .build();
+
+        let sizer_left = wx::StaticBoxSizer::new_with_staticbox(Some(&s_box), wx::VERTICAL);
+
+        let chk_bitmap_only =
+            self.create_check_box_and_add_to_sizer(&sizer_left, "&Bitmap only", wx::ID_ANY);
+        let chk_text_and_bitmap =
+            self.create_check_box_and_add_to_sizer(&sizer_left, "Text &and bitmap", wx::ID_ANY);
+        let chk_fit =
+            self.create_check_box_and_add_to_sizer(&sizer_left, "&Fit exactly", wx::ID_ANY);
+        let chk_auth_needed =
+            self.create_check_box_and_add_to_sizer(&sizer_left, "Require a&uth", wx::ID_ANY);
+        let chk_default =
+            self.create_check_box_and_add_to_sizer(&sizer_left, "&Default", wx::ID_ANY);
+
+        let chk_use_bitmap_class =
+            self.create_check_box_and_add_to_sizer(&sizer_left, "Use wxBitmapButton", wx::ID_ANY);
+        chk_use_bitmap_class.set_value(true);
+
+        let chk_disable =
+            self.create_check_box_and_add_to_sizer(&sizer_left, "Disable", wx::ID_ANY);
+
+        sizer_left.add_spacer(5);
+
+        let sizer_use_labels = wx::StaticBoxSizer::new_with_int(
+            wx::VERTICAL,
+            Some(&self.base),
+            "&Use the following bitmaps in addition to the normal one?",
+        );
+        let chk_use_pressed = self.create_check_box_and_add_to_sizer(
+            &sizer_use_labels,
+            "&Pressed (small help icon)",
+            wx::ID_ANY,
+        );
+        let chk_use_focused = self.create_check_box_and_add_to_sizer(
+            &sizer_use_labels,
+            "&Focused (small error icon)",
+            wx::ID_ANY,
+        );
+        let chk_use_current = self.create_check_box_and_add_to_sizer(
+            &sizer_use_labels,
+            "&Current (small warning icon)",
+            wx::ID_ANY,
+        );
+        let chk_use_disabled = self.create_check_box_and_add_to_sizer(
+            &sizer_use_labels,
+            "&Disabled (broken image icon)",
+            wx::ID_ANY,
+        );
+        sizer_left.add_sizer_sizerflags(
+            Some(&sizer_use_labels),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
+        );
+
+        sizer_left.add_spacer(10);
+
+        let dirs = wx::ArrayString::new();
+        dirs.add("left");
+        dirs.add("right");
+        dirs.add("top");
+        dirs.add("bottom");
+        let radio_image_pos = wx::RadioBox::builder(Some(&self.base))
+            .label("Image &position")
+            .choices(dirs)
+            .build();
+        sizer_left.add_window_sizerflags(
+            Some(&radio_image_pos),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
+        );
+        sizer_left.add_spacer(15);
+
+        let halign = wx::ArrayString::new();
+        halign.add("left");
+        halign.add("centre");
+        halign.add("right");
+        let radio_halign = wx::RadioBox::builder(Some(&self.base))
+            .label("&Horz alignment")
+            .choices(halign)
+            .build();
+
+        let valign = wx::ArrayString::new();
+        valign.add("top");
+        valign.add("centre");
+        valign.add("bottom");
+        let radio_valign = wx::RadioBox::builder(Some(&self.base))
+            .label("&Vert alignment")
+            .choices(valign)
+            .build();
+
+        sizer_left.add_window_sizerflags(
+            Some(&radio_halign),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
+        );
+        sizer_left.add_window_sizerflags(
+            Some(&radio_valign),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
+        );
+
+        sizer_left.add_spacer(5);
+
+        let btn = wx::Button::builder(Some(&self.base))
+            .id(ButtonPage::Reset.into())
+            .label("&Reset")
+            .build();
+        sizer_left.add_window_int(
+            Some(&btn),
+            0,
+            wx::ALIGN_CENTRE_HORIZONTAL | wx::ALL,
+            15,
+            wx::Object::none(),
+        );
+
+        // middle pane
+        let s_box2 = wx::StaticBox::builder(Some(&self.base))
+            .label("&Operations")
+            .build();
+        let sizer_middle = wx::StaticBoxSizer::new_with_staticbox(Some(&s_box2), wx::VERTICAL);
+
+        let (sizer_row, text_label) = self.create_sizer_with_text_and_button(
+            ButtonPage::ChangeLabel.into(),
+            "Change label",
+            wx::ID_ANY,
+        );
+        text_label.set_value("&Press me!");
+        sizer_middle.add_sizer_sizerflags(
+            Some(&sizer_row),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
+        );
+
+        // right pane
+        let sizer_button = wx::BoxSizer::new(wx::HORIZONTAL);
+        sizer_button.set_min_size_int(150, 0);
+
+        // the 3 panes panes compose the window
+        sizer_top.add_sizer_sizerflags(
+            Some(&sizer_left),
+            wx::SizerFlags::new(0)
+                .expand()
+                .double_border(wx::ALL & !wx::LEFT),
+        );
+        sizer_top.add_sizer_sizerflags(
+            Some(&sizer_middle),
+            wx::SizerFlags::new(1).expand().double_border(wx::ALL),
+        );
+        sizer_top.add_sizer_sizerflags(
+            Some(&sizer_button),
+            wx::SizerFlags::new(1)
+                .expand()
+                .double_border(wx::ALL & !wx::RIGHT),
+        );
+        *self.config_ui.borrow_mut() = Some(ConfigUI {
+            chk_bitmap_only,
+            chk_text_and_bitmap,
+            chk_fit,
+            chk_auth_needed,
+            chk_default,
+            chk_use_bitmap_class,
+            chk_disable,
+
+            chk_use_pressed,
+            chk_use_focused,
+            chk_use_current,
+            chk_use_disabled,
+
+            radio_image_pos,
+            radio_halign,
+            radio_valign,
+
+            sizer_button,
+
+            text_label,
+        });
+
+        // do create the main control
+        self.reset();
+        self.create_button();
+
+        self.base.set_sizer(Some(&sizer_top), true);
+    }
+
+    fn handle_button(&self, event: &wx::CommandEvent) {
+        println!("event={}", event.get_id());
+        if let Some(m) = ButtonPage::from(event.get_id()) {
+            match m {
+                ButtonPage::Reset => self.on_button_reset(),
+                ButtonPage::ChangeLabel => self.on_button_change_label(),
+                _ => (),
+            };
+        }
+    }
+    fn handle_checkbox(&self, _: &wx::CommandEvent) {
+        self.on_check_or_radio_box();
+    }
+    fn handle_radiobox(&self, _: &wx::CommandEvent) {
+        self.on_check_or_radio_box();
     }
 }

@@ -1,3 +1,4 @@
+use crate::WidgetsPage;
 use std::cell::RefCell;
 use std::os::raw::{c_int, c_long};
 use std::rc::Rc;
@@ -75,7 +76,166 @@ impl CheckBoxWidgetsPage {
         }
     }
 
-    pub fn create_content(&self) {
+    fn recreate_widget(&self) {
+        self.create_check_box();
+    }
+
+    fn reset(&self) {
+        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+            config_ui.chk_right.set_value(false);
+            config_ui.radio_kind.set_selection(CHECKBOX_KIND_2STATE);
+        }
+    }
+
+    fn create_check_box(&self) {
+        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+            let mut label = "".to_string();
+            if let Some(checkbox) = self.checkbox.borrow().as_ref() {
+                label = checkbox.get_label();
+
+                // TODO: remove (and delete) all checkboxes
+                let count = config_ui.sizer_checkbox.get_children().get_count();
+                for _ in 0..count {
+                    config_ui.sizer_checkbox.remove_int(0);
+                }
+                checkbox.destroy();
+            }
+
+            //     if label.is_empty() {
+            //         label = config_ui.text_label.get_value();
+            //     }
+
+            let mut flags = wx::BORDER_DEFAULT;
+
+            if config_ui.chk_right.is_checked() {
+                flags |= wx::ALIGN_RIGHT as c_long;
+            }
+
+            flags |= match config_ui.radio_kind.get_selection() {
+                CHECKBOX_KIND_3STATE_USER => wx::CHK_ALLOW_3RD_STATE_FOR_USER | wx::CHK_3STATE,
+                CHECKBOX_KIND_3STATE => wx::CHK_3STATE,
+                _ => wx::CHK_2STATE,
+            } as c_long;
+
+            let new_checkbox = wx::CheckBox::builder(Some(&self.base))
+                .id(CheckboxPage::Checkbox.into())
+                .label(&label)
+                .style(flags)
+                .build();
+
+            let sizer_checkbox = &config_ui.sizer_checkbox;
+            sizer_checkbox.add_stretch_spacer(1);
+            sizer_checkbox.add_window_sizerflags(
+                Some(&new_checkbox),
+                wx::SizerFlags::new(0).centre().border(wx::ALL),
+            );
+            sizer_checkbox.add_stretch_spacer(1);
+
+            sizer_checkbox.layout();
+
+            *self.checkbox.borrow_mut() = Some(new_checkbox);
+        }
+    }
+
+    // Utility methods from (and to be placed to) the base WidgetPage class
+
+    fn create_sizer_with_text<C: ControlMethods>(
+        &self,
+        control: &C,
+        id: c_int,
+    ) -> (wx::BoxSizer, wx::TextCtrl) {
+        let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
+        let text = wx::TextCtrl::builder(Some(&self.base))
+            .id(id)
+            .style(wx::TE_PROCESS_ENTER.into())
+            .build();
+
+        sizer_row.add_window_int(
+            Some(control),
+            0,
+            wx::RIGHT | wx::ALIGN_CENTRE_VERTICAL,
+            5,
+            wx::Object::none(),
+        );
+        sizer_row.add_window_int(
+            Some(&text),
+            1,
+            wx::LEFT | wx::ALIGN_CENTRE_VERTICAL,
+            5,
+            wx::Object::none(),
+        );
+
+        (sizer_row, text)
+    }
+
+    fn create_sizer_with_text_and_button(
+        &self,
+        id_btn: c_int,
+        label: &str,
+        id: c_int,
+    ) -> (wx::BoxSizer, wx::TextCtrl) {
+        let btn = wx::Button::builder(Some(&self.base))
+            .id(id_btn)
+            .label(label)
+            .build();
+        self.create_sizer_with_text(&btn, id)
+    }
+
+    fn create_check_box_and_add_to_sizer<S: SizerMethods>(
+        &self,
+        sizer: &S,
+        label: &str,
+        id: c_int,
+    ) -> wx::CheckBox {
+        let checkbox = wx::CheckBox::builder(Some(&self.base))
+            .id(id)
+            .label(label)
+            .build();
+        sizer.add_window_sizerflags(Some(&checkbox), wx::SizerFlags::new(0).double_horz_border());
+        sizer.add_spacer(2);
+
+        return checkbox;
+    }
+
+    fn on_button_reset(&self) {
+        self.reset();
+        self.create_check_box();
+    }
+
+    fn on_button_check(&self) {
+        self.checkbox.borrow().as_ref().unwrap().set_value(true);
+    }
+    fn on_button_uncheck(&self) {
+        self.checkbox.borrow().as_ref().unwrap().set_value(false);
+    }
+    fn on_button_part_check(&self) {
+        self.checkbox
+            .borrow()
+            .as_ref()
+            .unwrap()
+            .set3_state_value(wx::CHK_UNDETERMINED);
+    }
+    fn on_style_change(&self) {
+        self.create_check_box();
+    }
+
+    fn on_button_change_label(&self) {
+        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+            self.checkbox
+                .borrow()
+                .as_ref()
+                .unwrap()
+                .set_label(&config_ui.text_label.get_value());
+        }
+    }
+
+    fn on_check_box(&self) {}
+}
+impl WidgetsPage for CheckBoxWidgetsPage {
+    fn base(&self) -> &wx::Panel {
+        return &self.base;
+    }
+    fn create_content(&self) {
         let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
 
         // left pane
@@ -222,128 +382,7 @@ impl CheckBoxWidgetsPage {
         self.base.set_sizer(Some(&sizer_top), true);
     }
 
-    fn recreate_widget(&self) {
-        self.create_check_box();
-    }
-
-    fn reset(&self) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            config_ui.chk_right.set_value(false);
-            config_ui.radio_kind.set_selection(CHECKBOX_KIND_2STATE);
-        }
-    }
-
-    fn create_check_box(&self) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            let mut label = "".to_string();
-            if let Some(checkbox) = self.checkbox.borrow().as_ref() {
-                label = checkbox.get_label();
-
-                // TODO: remove (and delete) all checkboxes
-                let count = config_ui.sizer_checkbox.get_children().get_count();
-                for _ in 0..count {
-                    config_ui.sizer_checkbox.remove_int(0);
-                }
-                checkbox.destroy();
-            }
-
-            //     if label.is_empty() {
-            //         label = config_ui.text_label.get_value();
-            //     }
-
-            let mut flags = wx::BORDER_DEFAULT;
-
-            if config_ui.chk_right.is_checked() {
-                flags |= wx::ALIGN_RIGHT as c_long;
-            }
-
-            flags |= match config_ui.radio_kind.get_selection() {
-                CHECKBOX_KIND_3STATE_USER => wx::CHK_ALLOW_3RD_STATE_FOR_USER | wx::CHK_3STATE,
-                CHECKBOX_KIND_3STATE => wx::CHK_3STATE,
-                _ => wx::CHK_2STATE,
-            } as c_long;
-
-            let new_checkbox = wx::CheckBox::builder(Some(&self.base))
-                .id(CheckboxPage::Checkbox.into())
-                .label(&label)
-                .style(flags)
-                .build();
-
-            let sizer_checkbox = &config_ui.sizer_checkbox;
-            sizer_checkbox.add_stretch_spacer(1);
-            sizer_checkbox.add_window_sizerflags(
-                Some(&new_checkbox),
-                wx::SizerFlags::new(0).centre().border(wx::ALL),
-            );
-            sizer_checkbox.add_stretch_spacer(1);
-
-            sizer_checkbox.layout();
-
-            *self.checkbox.borrow_mut() = Some(new_checkbox);
-        }
-    }
-
-    // Utility methods from (and to be placed to) the base WidgetPage class
-
-    fn create_sizer_with_text<C: ControlMethods>(
-        &self,
-        control: &C,
-        id: c_int,
-    ) -> (wx::BoxSizer, wx::TextCtrl) {
-        let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
-        let text = wx::TextCtrl::builder(Some(&self.base))
-            .id(id)
-            .style(wx::TE_PROCESS_ENTER.into())
-            .build();
-
-        sizer_row.add_window_int(
-            Some(control),
-            0,
-            wx::RIGHT | wx::ALIGN_CENTRE_VERTICAL,
-            5,
-            wx::Object::none(),
-        );
-        sizer_row.add_window_int(
-            Some(&text),
-            1,
-            wx::LEFT | wx::ALIGN_CENTRE_VERTICAL,
-            5,
-            wx::Object::none(),
-        );
-
-        (sizer_row, text)
-    }
-
-    fn create_sizer_with_text_and_button(
-        &self,
-        id_btn: c_int,
-        label: &str,
-        id: c_int,
-    ) -> (wx::BoxSizer, wx::TextCtrl) {
-        let btn = wx::Button::builder(Some(&self.base))
-            .id(id_btn)
-            .label(label)
-            .build();
-        self.create_sizer_with_text(&btn, id)
-    }
-
-    fn create_check_box_and_add_to_sizer<S: SizerMethods>(
-        &self,
-        sizer: &S,
-        label: &str,
-        id: c_int,
-    ) -> wx::CheckBox {
-        let checkbox = wx::CheckBox::builder(Some(&self.base))
-            .id(id)
-            .label(label)
-            .build();
-        sizer.add_window_sizerflags(Some(&checkbox), wx::SizerFlags::new(0).double_horz_border());
-        sizer.add_spacer(2);
-
-        return checkbox;
-    }
-
-    pub fn handle_button(&self, event: &wx::CommandEvent) {
+    fn handle_button(&self, event: &wx::CommandEvent) {
         println!("event={}", event.get_id());
         if let Some(m) = CheckboxPage::from(event.get_id()) {
             match m {
@@ -357,25 +396,7 @@ impl CheckBoxWidgetsPage {
             };
         }
     }
-    fn on_button_reset(&self) {
-        self.reset();
-        self.create_check_box();
-    }
-
-    fn on_button_check(&self) {
-        self.checkbox.borrow().as_ref().unwrap().set_value(true);
-    }
-    fn on_button_uncheck(&self) {
-        self.checkbox.borrow().as_ref().unwrap().set_value(false);
-    }
-    fn on_button_part_check(&self) {
-        self.checkbox
-            .borrow()
-            .as_ref()
-            .unwrap()
-            .set3_state_value(wx::CHK_UNDETERMINED);
-    }
-    pub fn handle_checkbox(&self, event: &wx::CommandEvent) {
+    fn handle_checkbox(&self, event: &wx::CommandEvent) {
         if let Some(m) = CheckboxPage::from(event.get_id()) {
             match m {
                 CheckboxPage::Checkbox => self.on_check_box(),
@@ -383,22 +404,7 @@ impl CheckBoxWidgetsPage {
             };
         }
     }
-    pub fn handle_radiobox(&self, _: &wx::CommandEvent) {
+    fn handle_radiobox(&self, _: &wx::CommandEvent) {
         self.on_style_change();
     }
-    fn on_style_change(&self) {
-        self.create_check_box();
-    }
-
-    fn on_button_change_label(&self) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            self.checkbox
-                .borrow()
-                .as_ref()
-                .unwrap()
-                .set_label(&config_ui.text_label.get_value());
-        }
-    }
-
-    fn on_check_box(&self) {}
 }

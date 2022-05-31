@@ -12,6 +12,14 @@ use button::*;
 mod checkbox;
 use checkbox::*;
 
+trait WidgetsPage {
+    fn handle_button(&self, event: &wx::CommandEvent);
+    fn handle_checkbox(&self, event: &wx::CommandEvent);
+    fn handle_radiobox(&self, event: &wx::CommandEvent);
+    fn create_content(&self);
+    fn base(&self) -> &wx::Panel;
+}
+
 enum Widgets {
     ClearLog = 100,
     Quit,
