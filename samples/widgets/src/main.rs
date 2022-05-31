@@ -12,153 +12,6 @@ use button::*;
 mod checkbox;
 use checkbox::*;
 
-trait WidgetsPage {
-    fn handle_button(&self, event: &wx::CommandEvent);
-    fn handle_checkbox(&self, event: &wx::CommandEvent);
-    fn handle_radiobox(&self, event: &wx::CommandEvent);
-    fn create_content(&self);
-    fn base(&self) -> &wx::Panel;
-
-    // Utility methods from (and to be placed to) the base WidgetPage class
-
-    fn create_sizer_with_text<C: ControlMethods>(
-        &self,
-        control: &C,
-        id: c_int,
-    ) -> (wx::BoxSizer, wx::TextCtrl) {
-        let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
-        let text = wx::TextCtrl::builder(Some(self.base()))
-            .id(id)
-            .style(wx::TE_PROCESS_ENTER.into())
-            .build();
-
-        sizer_row.add_window_int(
-            Some(control),
-            0,
-            wx::RIGHT | wx::ALIGN_CENTRE_VERTICAL,
-            5,
-            wx::Object::none(),
-        );
-        sizer_row.add_window_int(
-            Some(&text),
-            1,
-            wx::LEFT | wx::ALIGN_CENTRE_VERTICAL,
-            5,
-            wx::Object::none(),
-        );
-
-        (sizer_row, text)
-    }
-
-    fn create_sizer_with_text_and_button(
-        &self,
-        id_btn: c_int,
-        label: &str,
-        id: c_int,
-    ) -> (wx::BoxSizer, wx::TextCtrl) {
-        let btn = wx::Button::builder(Some(self.base()))
-            .id(id_btn)
-            .label(label)
-            .build();
-        self.create_sizer_with_text(&btn, id)
-    }
-
-    fn create_check_box_and_add_to_sizer<S: SizerMethods>(
-        &self,
-        sizer: &S,
-        label: &str,
-        id: c_int,
-    ) -> wx::CheckBox {
-        let checkbox = wx::CheckBox::builder(Some(self.base()))
-            .id(id)
-            .label(label)
-            .build();
-        sizer.add_window_sizerflags(Some(&checkbox), wx::SizerFlags::new(0).double_horz_border());
-        sizer.add_spacer(2);
-
-        return checkbox;
-    }
-}
-
-enum Widgets {
-    ClearLog = 100,
-    Quit,
-
-    BookCtrl,
-
-    SetTooltip,
-    SetFgColour,
-    SetBgColour,
-    SetPageBg,
-    SetFont,
-    Enable,
-    Show,
-
-    BorderNone,
-    BorderStatic,
-    BorderSimple,
-    BorderRaised,
-    BorderSunken,
-    BorderDouble,
-    BorderDefault,
-
-    VariantNormal,
-    VariantSmall,
-    VariantMini,
-    VariantLarge,
-
-    LayoutDirection,
-
-    GlobalBusyCursor,
-    BusyCursor,
-
-    GoToPage,
-    GoToPageLast = Widgets::GoToPage as isize + 100,
-
-    End,
-}
-impl From<Widgets> for c_int {
-    fn from(w: Widgets) -> Self {
-        w as c_int
-    }
-}
-
-enum TextEntry {
-    DisableAutoComplete = Widgets::End as isize,
-    AutoCompleteFixed,
-    AutoCompleteFilenames,
-    AutoCompleteDirectories,
-    AutoCompleteCustom,
-    AutoCompleteKeyLength,
-
-    SetHint,
-    End,
-}
-const TEXT_ENTRY_BEGIN: c_int = TextEntry::DisableAutoComplete as c_int;
-impl From<TextEntry> for c_int {
-    fn from(te: TextEntry) -> Self {
-        te as c_int
-    }
-}
-
-fn main() {
-    wx::App::run(|_| {
-        // TODO
-        // SetVendorName("wxWidgets_Samples");
-
-        let title = if cfg!(windows) {
-            "wxMSW"
-        } else if cfg!(target_os = "macos") {
-            "wxMAC"
-        } else {
-            "wxGTK"
-        };
-
-        let frame = WidgetsFrame::new(&format!("{} widgets demo", title));
-        frame.base.show(true);
-    });
-}
-
 #[derive(Clone)]
 struct WidgetsFrame {
     base: wx::Frame,
@@ -368,4 +221,151 @@ impl WidgetsFrame {
         self.m_page.create_content();
         self.m_page.base.layout();
     }
+}
+
+trait WidgetsPage {
+    fn handle_button(&self, event: &wx::CommandEvent);
+    fn handle_checkbox(&self, event: &wx::CommandEvent);
+    fn handle_radiobox(&self, event: &wx::CommandEvent);
+    fn create_content(&self);
+    fn base(&self) -> &wx::Panel;
+
+    // Utility methods from (and to be placed to) the base WidgetPage class
+
+    fn create_sizer_with_text<C: ControlMethods>(
+        &self,
+        control: &C,
+        id: c_int,
+    ) -> (wx::BoxSizer, wx::TextCtrl) {
+        let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
+        let text = wx::TextCtrl::builder(Some(self.base()))
+            .id(id)
+            .style(wx::TE_PROCESS_ENTER.into())
+            .build();
+
+        sizer_row.add_window_int(
+            Some(control),
+            0,
+            wx::RIGHT | wx::ALIGN_CENTRE_VERTICAL,
+            5,
+            wx::Object::none(),
+        );
+        sizer_row.add_window_int(
+            Some(&text),
+            1,
+            wx::LEFT | wx::ALIGN_CENTRE_VERTICAL,
+            5,
+            wx::Object::none(),
+        );
+
+        (sizer_row, text)
+    }
+
+    fn create_sizer_with_text_and_button(
+        &self,
+        id_btn: c_int,
+        label: &str,
+        id: c_int,
+    ) -> (wx::BoxSizer, wx::TextCtrl) {
+        let btn = wx::Button::builder(Some(self.base()))
+            .id(id_btn)
+            .label(label)
+            .build();
+        self.create_sizer_with_text(&btn, id)
+    }
+
+    fn create_check_box_and_add_to_sizer<S: SizerMethods>(
+        &self,
+        sizer: &S,
+        label: &str,
+        id: c_int,
+    ) -> wx::CheckBox {
+        let checkbox = wx::CheckBox::builder(Some(self.base()))
+            .id(id)
+            .label(label)
+            .build();
+        sizer.add_window_sizerflags(Some(&checkbox), wx::SizerFlags::new(0).double_horz_border());
+        sizer.add_spacer(2);
+
+        return checkbox;
+    }
+}
+
+enum Widgets {
+    ClearLog = 100,
+    Quit,
+
+    BookCtrl,
+
+    SetTooltip,
+    SetFgColour,
+    SetBgColour,
+    SetPageBg,
+    SetFont,
+    Enable,
+    Show,
+
+    BorderNone,
+    BorderStatic,
+    BorderSimple,
+    BorderRaised,
+    BorderSunken,
+    BorderDouble,
+    BorderDefault,
+
+    VariantNormal,
+    VariantSmall,
+    VariantMini,
+    VariantLarge,
+
+    LayoutDirection,
+
+    GlobalBusyCursor,
+    BusyCursor,
+
+    GoToPage,
+    GoToPageLast = Widgets::GoToPage as isize + 100,
+
+    End,
+}
+impl From<Widgets> for c_int {
+    fn from(w: Widgets) -> Self {
+        w as c_int
+    }
+}
+
+enum TextEntry {
+    DisableAutoComplete = Widgets::End as isize,
+    AutoCompleteFixed,
+    AutoCompleteFilenames,
+    AutoCompleteDirectories,
+    AutoCompleteCustom,
+    AutoCompleteKeyLength,
+
+    SetHint,
+    End,
+}
+const TEXT_ENTRY_BEGIN: c_int = TextEntry::DisableAutoComplete as c_int;
+impl From<TextEntry> for c_int {
+    fn from(te: TextEntry) -> Self {
+        te as c_int
+    }
+}
+
+fn main() {
+    wx::App::run(|_| {
+        // TODO
+        // SetVendorName("wxWidgets_Samples");
+
+        let title = if cfg!(windows) {
+            "wxMSW"
+        } else if cfg!(target_os = "macos") {
+            "wxMAC"
+        } else {
+            "wxGTK"
+        };
+
+        let frame = WidgetsFrame::new(&format!("{} widgets demo", title));
+        frame.base.show(true);
+    });
 }
