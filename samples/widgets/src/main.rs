@@ -97,7 +97,7 @@ struct WidgetsFrame {
     base: wx::Frame,
     panel: wx::Panel,
     book: wx::Notebook,
-    page: Rc<dyn WidgetsPage>, // for now
+    pages: Vec<Rc<dyn WidgetsPage>>,
 }
 impl WidgetsFrame {
     fn new(title: &str) -> Self {
@@ -110,12 +110,13 @@ impl WidgetsFrame {
             .style(style.into())
             .build();
 
-        let page = CheckBoxWidgetsPage::new(&book);
+        let button_page = Rc::new(ButtonWidgetsPage::new(&book));
+        let check_box_page = Rc::new(CheckBoxWidgetsPage::new(&book));
         let mut frame = WidgetsFrame {
             base,
             panel,
             book,
-            page: Rc::new(page),
+            pages: vec![button_page, check_box_page],
         };
         frame.on_create();
 
@@ -123,19 +124,19 @@ impl WidgetsFrame {
         frame
             .base
             .bind(wx::RustEvent::Button, move |event: &wx::CommandEvent| {
-                frame_copy.page.handle_button(event);
+                frame_copy.current_page().handle_button(event);
             });
         let frame_copy = frame.clone();
         frame
             .base
             .bind(wx::RustEvent::CheckBox, move |event: &wx::CommandEvent| {
-                frame_copy.page.handle_checkbox(event);
+                frame_copy.current_page().handle_checkbox(event);
             });
         let frame_copy = frame.clone();
         frame
             .base
             .bind(wx::RustEvent::RadioBox, move |event: &wx::CommandEvent| {
-                frame_copy.page.handle_radiobox(event);
+                frame_copy.current_page().handle_radiobox(event);
             });
 
         frame
@@ -253,43 +254,42 @@ impl WidgetsFrame {
         self.base.set_min_client_size(&size_min);
     }
 
-    // fn current_page(&self) -> wx::Panel {
-    //     // FIXME: figure out a way to avoid cloning wx::Window structs
-    //     self.current_page.as_ref().unwrap().base.clone()
-    // }
+    fn init_book(&mut self) {
+        for page in self.pages.iter() {
+            self.book.add_page(
+                Some(page.base()),
+                page.label(),
+                false,
+                wx::BookCtrlBase::NO_IMAGE,
+            );
+        }
+
+        let self_copy = self.clone();
+        self.base.bind(
+            wx::RustEvent::BookctrlPageChanged,
+            move |event: &wx::BookCtrlEvent| {
+                let sel = event.get_selection();
+                self_copy.on_page_changed(sel);
+            },
+        );
+
+        // for other books set selection twice to force connected event handler
+        // to force lazy creation of initial visible content
+        self.book.set_selection(1);
+        self.book.set_selection(0);
+    }
+
+    fn current_page<'a>(&'a self) -> &'a Rc<dyn WidgetsPage> {
+        let selection = self.book.get_selection();
+        let index = if selection < 0 { 0 } else { selection } as usize;
+        &self.pages[index]
+    }
 
     fn connect_to_widget_events(&self) {
         // TODO
     }
 
-    fn init_book(&mut self) {
-        // TODO: initialize pages here for startup time and memory consumpution
-
-        self.book.add_page(
-            Some(self.page.base()),
-            "CheckBox",
-            false,
-            wx::BookCtrlBase::NO_IMAGE,
-        );
-
-        // let self_copy = self.clone();
-        // self.base.bind(
-        //     wx::RustEvent::BookctrlPageChanged,
-        //     move |event: &wx::BookCtrlEvent| {
-        //         let mut warped = self_copy.clone();
-        //         let sel = event.get_selection();
-        //         warped.on_page_changed(sel);
-        //     },
-        // );
-
-        // self.book.set_selection(1);
-        // self.book.set_selection(0);
-        self.on_page_changed(0);
-    }
-
-    fn on_page_changed(&mut self, sel: c_int) {
-        // TODO: support switching
-
+    fn on_page_changed(&self, sel: c_int) {
         let menu_bar = self.base.get_menu_bar().get().unwrap();
         if let Some(item) = menu_bar.find_item((Widgets::GoToPage as c_int) + sel, wx::Menu::none())
         {
@@ -298,19 +298,25 @@ impl WidgetsFrame {
 
         menu_bar.check(Widgets::BusyCursor.into(), false);
 
-        self.page.create_content();
-        self.page.base().layout();
+        // create the pages on demand, otherwise the sample startup is too slow as
+        // it creates hundreds of controls
+        let cur_page = self.current_page();
+        if cur_page.base().get_children().is_empty() {
+            cur_page.create_content();
+            cur_page.base().layout();
+        }
     }
 }
 
 trait WidgetsPage {
+    fn base(&self) -> &wx::Panel;
+    fn label(&self) -> &str;
     fn handle_button(&self, event: &wx::CommandEvent);
     fn handle_checkbox(&self, event: &wx::CommandEvent);
     fn handle_radiobox(&self, event: &wx::CommandEvent);
     fn create_content(&self);
-    fn base(&self) -> &wx::Panel;
 
-    // Utility methods from (and to be placed to) the base WidgetPage class
+    // Utility methods
 
     fn create_sizer_with_text(
         &self,
@@ -341,6 +347,7 @@ trait WidgetsPage {
         (sizer_row, text)
     }
 
+    // create a sizer containing a button and a text ctrl
     fn create_sizer_with_text_and_button(
         &self,
         id_btn: c_int,
