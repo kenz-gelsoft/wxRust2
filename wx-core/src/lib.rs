@@ -50,28 +50,29 @@ pub mod methods {
 
     // wxItemContainer
     pub trait ItemContainerMethods: ItemContainerImmutableMethods {
+        fn as_item_container(&self) -> *mut c_void;
         fn append_str(&self, item: &str) -> c_int {
             unsafe {
                 let item = wx_base::wx_string_from(item);
-                ffi::wxItemContainer_Append(self.as_ptr(), item)
+                ffi::wxItemContainer_Append(self.as_item_container(), item)
             }
         }
         fn append_str_void(&self, item: &str, client_data: *mut c_void) -> c_int {
             unsafe {
                 let item = wx_base::wx_string_from(item);
-                ffi::wxItemContainer_Append1(self.as_ptr(), item, client_data)
+                ffi::wxItemContainer_Append1(self.as_item_container(), item, client_data)
             }
         }
         fn append_str_clientdata(&self, item: &str, client_data: *mut c_void) -> c_int {
             unsafe {
                 let item = wx_base::wx_string_from(item);
-                ffi::wxItemContainer_Append2(self.as_ptr(), item, client_data)
+                ffi::wxItemContainer_Append2(self.as_item_container(), item, client_data)
             }
         }
         fn append_arraystring<A: ArrayStringMethods>(&self, items: &A) -> c_int {
             unsafe {
                 let items = items.as_ptr();
-                ffi::wxItemContainer_Append3(self.as_ptr(), items)
+                ffi::wxItemContainer_Append3(self.as_item_container(), items)
             }
         }
         // BLOCKED: fn Append4()
@@ -82,7 +83,7 @@ pub mod methods {
         ) -> c_int {
             unsafe {
                 let items = items.as_ptr();
-                ffi::wxItemContainer_Append5(self.as_ptr(), items, client_data)
+                ffi::wxItemContainer_Append5(self.as_item_container(), items, client_data)
             }
         }
         fn append_arraystring_clientdata<A: ArrayStringMethods>(
@@ -92,25 +93,25 @@ pub mod methods {
         ) -> c_int {
             unsafe {
                 let items = items.as_ptr();
-                ffi::wxItemContainer_Append6(self.as_ptr(), items, client_data)
+                ffi::wxItemContainer_Append6(self.as_item_container(), items, client_data)
             }
         }
         // NOT_SUPPORTED: fn Append7()
         // NOT_SUPPORTED: fn Append8()
         // NOT_SUPPORTED: fn Append9()
         fn clear(&self) {
-            unsafe { ffi::wxItemContainer_Clear(self.as_ptr()) }
+            unsafe { ffi::wxItemContainer_Clear(self.as_item_container()) }
         }
         // NOT_SUPPORTED: fn Delete()
         // NOT_SUPPORTED: fn DetachClientObject()
         fn has_client_data(&self) -> bool {
-            unsafe { ffi::wxItemContainer_HasClientData(self.as_ptr()) }
+            unsafe { ffi::wxItemContainer_HasClientData(self.as_item_container()) }
         }
         fn has_client_object_data(&self) -> bool {
-            unsafe { ffi::wxItemContainer_HasClientObjectData(self.as_ptr()) }
+            unsafe { ffi::wxItemContainer_HasClientObjectData(self.as_item_container()) }
         }
         fn has_client_untyped_data(&self) -> bool {
-            unsafe { ffi::wxItemContainer_HasClientUntypedData(self.as_ptr()) }
+            unsafe { ffi::wxItemContainer_HasClientUntypedData(self.as_item_container()) }
         }
         // NOT_SUPPORTED: fn GetClientData()
         // NOT_SUPPORTED: fn GetClientObject()
@@ -129,20 +130,20 @@ pub mod methods {
         fn set<A: ArrayStringMethods>(&self, items: &A) {
             unsafe {
                 let items = items.as_ptr();
-                ffi::wxItemContainer_Set(self.as_ptr(), items)
+                ffi::wxItemContainer_Set(self.as_item_container(), items)
             }
         }
         // BLOCKED: fn Set1()
         fn set_void<A: ArrayStringMethods>(&self, items: &A, client_data: *mut c_void) {
             unsafe {
                 let items = items.as_ptr();
-                ffi::wxItemContainer_Set2(self.as_ptr(), items, client_data)
+                ffi::wxItemContainer_Set2(self.as_item_container(), items, client_data)
             }
         }
         fn set_clientdata<A: ArrayStringMethods>(&self, items: &A, client_data: *mut c_void) {
             unsafe {
                 let items = items.as_ptr();
-                ffi::wxItemContainer_Set3(self.as_ptr(), items, client_data)
+                ffi::wxItemContainer_Set3(self.as_item_container(), items, client_data)
             }
         }
         // NOT_SUPPORTED: fn Set4()
@@ -390,6 +391,7 @@ mod ffi {
             y: c_int,
         );
 
+        pub fn wxChoice_AsItemContainer(obj: *mut c_void) -> *mut c_void;
         // wxItemContainer
         pub fn wxItemContainer_delete(self_: *mut c_void);
         pub fn wxItemContainer_Append(self_: *mut c_void, item: *const c_void) -> c_int;
@@ -440,13 +442,20 @@ mod ffi {
         // NOT_SUPPORTED: pub fn wxItemContainer_Insert9(self_: *mut c_void, n: unsigned int, items: *const c_void, pos: unsigned int, client_data: *mut c_void) -> c_int;
         pub fn wxItemContainer_Set(self_: *mut c_void, items: *const c_void);
         // BLOCKED: pub fn wxItemContainer_Set1(self_: *mut c_void, items: *const c_void);
-        pub fn wxItemContainer_Set2(self_: *mut c_void, items: *const c_void, client_data: *mut c_void);
-        pub fn wxItemContainer_Set3(self_: *mut c_void, items: *const c_void, client_data: *mut c_void);
+        pub fn wxItemContainer_Set2(
+            self_: *mut c_void,
+            items: *const c_void,
+            client_data: *mut c_void,
+        );
+        pub fn wxItemContainer_Set3(
+            self_: *mut c_void,
+            items: *const c_void,
+            client_data: *mut c_void,
+        );
         // NOT_SUPPORTED: pub fn wxItemContainer_Set4(self_: *mut c_void, n: unsigned int, items: *const c_void);
         // NOT_SUPPORTED: pub fn wxItemContainer_Set5(self_: *mut c_void, n: unsigned int, items: *const c_void, client_data: *mut c_void);
         // NOT_SUPPORTED: pub fn wxItemContainer_Set6(self_: *mut c_void, n: unsigned int, items: *const c_void, client_data: *mut c_void);
 
-        pub fn wxChoice_AsItemContainerImmutable(obj: *mut c_void) -> *mut c_void;
         pub fn wxRadioBox_AsItemContainerImmutable(obj: *mut c_void) -> *mut c_void;
         // wxItemContainerImmutable
         pub fn wxItemContainerImmutable_delete(self_: *mut c_void);
@@ -524,7 +533,19 @@ mod ffi {
     }
 }
 
+// Mix-in wxItemContainer manually
+impl<const OWNED: bool> ItemContainerMethods for ChoiceIsOwned<OWNED> {
+    fn as_item_container(&self) -> *mut c_void {
+        unsafe { ffi::wxChoice_AsItemContainer(self.as_ptr()) }
+    }
+}
+
 // Mix-in wxItemContainerImmutable manually
+impl<const OWNED: bool> ItemContainerImmutableMethods for ChoiceIsOwned<OWNED> {
+    fn as_item_container_immutable(&self) -> *mut c_void {
+        unsafe { ffi::wxChoice_AsItemContainer(self.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> ItemContainerImmutableMethods for RadioBoxIsOwned<OWNED> {
     fn as_item_container_immutable(&self) -> *mut c_void {
         unsafe { ffi::wxRadioBox_AsItemContainerImmutable(self.as_ptr()) }

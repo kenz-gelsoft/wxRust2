@@ -67,6 +67,10 @@ void wxItemContainer_Set3(wxItemContainer * self, const wxArrayString * items, w
     return self->Set(*items, client_data);
 }
 
+wxItemContainer *wxChoice_AsItemContainer(wxChoice * obj) {
+    return static_cast<wxItemContainer *>(obj);
+}
+
 // CLASS: wxItemContainerImmutable
 void wxItemContainerImmutable_delete(wxItemContainerImmutable *self) {
     delete self;

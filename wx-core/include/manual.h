@@ -30,6 +30,8 @@ extern "C" {
     void wxItemContainer_Set2(wxItemContainer * self, const wxArrayString * items, void ** client_data);
     void wxItemContainer_Set3(wxItemContainer * self, const wxArrayString * items, wxClientData ** client_data);
 
+    wxItemContainer *wxChoice_AsItemContainer(wxChoice * obj);
+
     // CLASS: wxItemContainerImmutable
     void wxItemContainerImmutable_delete(wxItemContainerImmutable *self);
     void wxItemContainerImmutable_SetSelection(wxItemContainerImmutable * self, int n);
