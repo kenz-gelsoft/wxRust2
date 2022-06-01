@@ -14,6 +14,22 @@ extern "C" {
 
     int wxRustMessageBox(const wxString *message, const wxString *caption, int style, wxWindow *parent, int x, int y);
 
+    // CLASS: wxItemContainer
+    void wxItemContainer_delete(wxItemContainer *self);
+    int wxItemContainer_Append(wxItemContainer * self, const wxString * item);
+    int wxItemContainer_Append1(wxItemContainer * self, const wxString * item, void * client_data);
+    int wxItemContainer_Append2(wxItemContainer * self, const wxString * item, wxClientData * client_data);
+    int wxItemContainer_Append3(wxItemContainer * self, const wxArrayString * items);
+    int wxItemContainer_Append5(wxItemContainer * self, const wxArrayString * items, void ** client_data);
+    int wxItemContainer_Append6(wxItemContainer * self, const wxArrayString * items, wxClientData ** client_data);
+    void wxItemContainer_Clear(wxItemContainer * self);
+    bool wxItemContainer_HasClientData(const wxItemContainer * self);
+    bool wxItemContainer_HasClientObjectData(const wxItemContainer * self);
+    bool wxItemContainer_HasClientUntypedData(const wxItemContainer * self);
+    void wxItemContainer_Set(wxItemContainer * self, const wxArrayString * items);
+    void wxItemContainer_Set2(wxItemContainer * self, const wxArrayString * items, void ** client_data);
+    void wxItemContainer_Set3(wxItemContainer * self, const wxArrayString * items, wxClientData ** client_data);
+
     // CLASS: wxItemContainerImmutable
     void wxItemContainerImmutable_delete(wxItemContainerImmutable *self);
     void wxItemContainerImmutable_SetSelection(wxItemContainerImmutable * self, int n);

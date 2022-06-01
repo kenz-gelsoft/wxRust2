@@ -18,6 +18,7 @@ wxml_files = [
     'wxml/classwx_frame.xml',
     'wxml/classwx_g_d_i_object.xml',
     'wxml/classwx_icon.xml',
+    #'wxml/classwx_item_container.xml',
     #'wxml/classwx_item_container_immutable.xml',
     'wxml/classwx_list_box.xml',
     'wxml/classwx_menu.xml',
@@ -139,6 +140,12 @@ blocklist = [
 blocklist = [
     'operator=',
 ]
+#[types.wxItemContainer]
+#blocklist = [
+#    'Append4',
+#    'Insert4',
+#    'Set1',
+#]
 [types.wxListBox]
 blocklist = [
     'MSWSetTabStops',

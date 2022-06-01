@@ -23,6 +23,50 @@ int wxRustMessageBox(const wxString *message, const wxString *caption, int style
     return wxMessageBox(*message, *caption, style, parent, x, y);
 }
 
+// CLASS: wxItemContainer
+void wxItemContainer_delete(wxItemContainer *self) {
+    delete self;
+}
+int wxItemContainer_Append(wxItemContainer * self, const wxString * item) {
+    return self->Append(*item);
+}
+int wxItemContainer_Append1(wxItemContainer * self, const wxString * item, void * client_data) {
+    return self->Append(*item, client_data);
+}
+int wxItemContainer_Append2(wxItemContainer * self, const wxString * item, wxClientData * client_data) {
+    return self->Append(*item, client_data);
+}
+int wxItemContainer_Append3(wxItemContainer * self, const wxArrayString * items) {
+    return self->Append(*items);
+}
+int wxItemContainer_Append5(wxItemContainer * self, const wxArrayString * items, void ** client_data) {
+    return self->Append(*items, client_data);
+}
+int wxItemContainer_Append6(wxItemContainer * self, const wxArrayString * items, wxClientData ** client_data) {
+    return self->Append(*items, client_data);
+}
+void wxItemContainer_Clear(wxItemContainer * self) {
+    return self->Clear();
+}
+bool wxItemContainer_HasClientData(const wxItemContainer * self) {
+    return self->HasClientData();
+}
+bool wxItemContainer_HasClientObjectData(const wxItemContainer * self) {
+    return self->HasClientObjectData();
+}
+bool wxItemContainer_HasClientUntypedData(const wxItemContainer * self) {
+    return self->HasClientUntypedData();
+}
+void wxItemContainer_Set(wxItemContainer * self, const wxArrayString * items) {
+    return self->Set(*items);
+}
+void wxItemContainer_Set2(wxItemContainer * self, const wxArrayString * items, void ** client_data) {
+    return self->Set(*items, client_data);
+}
+void wxItemContainer_Set3(wxItemContainer * self, const wxArrayString * items, wxClientData ** client_data) {
+    return self->Set(*items, client_data);
+}
+
 // CLASS: wxItemContainerImmutable
 void wxItemContainerImmutable_delete(wxItemContainerImmutable *self) {
     delete self;
