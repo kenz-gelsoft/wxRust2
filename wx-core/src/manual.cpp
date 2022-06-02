@@ -93,11 +93,20 @@ void wxItemContainerImmutable_Select(wxItemContainerImmutable * self, int n) {
 // wxItemContainerImmutable *wxItemContainerImmutable_new() {
 //     return new wxItemContainerImmutable();
 // }
+unsigned int wxItemContainerImmutable_GetCount(const wxItemContainerImmutable * self) {
+    return self->GetCount();
+}
 bool wxItemContainerImmutable_IsEmpty(const wxItemContainerImmutable * self) {
     return self->IsEmpty();
 }
+wxString *wxItemContainerImmutable_GetString(const wxItemContainerImmutable * self, unsigned int n) {
+    return new wxString(self->GetString(n));
+}
 wxArrayString *wxItemContainerImmutable_GetStrings(const wxItemContainerImmutable * self) {
     return new wxArrayString(self->GetStrings());
+}
+void wxItemContainerImmutable_SetString(wxItemContainerImmutable * self, unsigned int n, const wxString * string) {
+    return self->SetString(n, *string);
 }
 int wxItemContainerImmutable_FindString(const wxItemContainerImmutable * self, const wxString * string, bool case_sensitive) {
     return self->FindString(*string, case_sensitive);

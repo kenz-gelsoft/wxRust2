@@ -10,7 +10,7 @@ pub use wx_base::*;
 
 #[doc(hidden)]
 pub mod methods {
-    use std::os::raw::c_int;
+    use std::os::raw::{c_int, c_uint};
 
     pub use super::generated::methods::*;
     use super::*;
@@ -183,11 +183,20 @@ pub mod methods {
         fn select(&self, n: c_int) {
             unsafe { ffi::wxItemContainerImmutable_Select(self.as_item_container_immutable(), n) }
         }
-        // NOT_SUPPORTED: fn GetCount()
+        fn get_count(&self) -> c_uint {
+            unsafe { ffi::wxItemContainerImmutable_GetCount(self.as_item_container_immutable()) }
+        }
         fn is_empty(&self) -> bool {
             unsafe { ffi::wxItemContainerImmutable_IsEmpty(self.as_item_container_immutable()) }
         }
-        // NOT_SUPPORTED: fn GetString()
+        fn get_string(&self, n: c_uint) -> String {
+            unsafe {
+                wx_base::from_wx_string(ffi::wxItemContainerImmutable_GetString(
+                    self.as_item_container_immutable(),
+                    n,
+                ))
+            }
+        }
         fn get_strings(&self) -> ArrayString {
             unsafe {
                 ArrayStringIsOwned::from_ptr(ffi::wxItemContainerImmutable_GetStrings(
@@ -195,7 +204,16 @@ pub mod methods {
                 ))
             }
         }
-        // NOT_SUPPORTED: fn SetString()
+        fn set_string(&self, n: c_uint, string: &str) {
+            unsafe {
+                let string = wx_base::wx_string_from(string);
+                ffi::wxItemContainerImmutable_SetString(
+                    self.as_item_container_immutable(),
+                    n,
+                    string,
+                )
+            }
+        }
         fn find_string(&self, string: &str, case_sensitive: bool) -> c_int {
             unsafe {
                 let string = wx_base::wx_string_from(string);
@@ -366,7 +384,7 @@ pub mod methods {
 use methods::*;
 
 mod ffi {
-    use std::os::raw::{c_int, c_long, c_void};
+    use std::os::raw::{c_int, c_long, c_uint, c_void};
     extern "C" {
         pub fn wxObject_delete(self_: *mut c_void);
 
@@ -468,11 +486,15 @@ mod ffi {
         pub fn wxItemContainerImmutable_GetStringSelection(self_: *const c_void) -> *mut c_void;
         pub fn wxItemContainerImmutable_Select(self_: *mut c_void, n: c_int);
         pub fn wxItemContainerImmutable_new() -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxItemContainerImmutable_GetCount(self_: *const c_void) -> unsigned int;
+        pub fn wxItemContainerImmutable_GetCount(self_: *const c_void) -> c_uint;
         pub fn wxItemContainerImmutable_IsEmpty(self_: *const c_void) -> bool;
-        // NOT_SUPPORTED: pub fn wxItemContainerImmutable_GetString(self_: *const c_void, n: unsigned int) -> *mut c_void;
+        pub fn wxItemContainerImmutable_GetString(self_: *const c_void, n: c_uint) -> *mut c_void;
         pub fn wxItemContainerImmutable_GetStrings(self_: *const c_void) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxItemContainerImmutable_SetString(self_: *mut c_void, n: unsigned int, string: *const c_void);
+        pub fn wxItemContainerImmutable_SetString(
+            self_: *mut c_void,
+            n: c_uint,
+            string: *const c_void,
+        );
         pub fn wxItemContainerImmutable_FindString(
             self_: *const c_void,
             string: *const c_void,
