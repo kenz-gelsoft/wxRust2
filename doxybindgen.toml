@@ -145,6 +145,16 @@ blocklist = [
 #    'Append4',
 #    'Insert4',
 #    'Set1',
+#    # TODO: support `unsigned int` in overload renaming
+#    'Append7',
+#    'Append8',
+#    'Append9',
+#    'Insert7',
+#    'Insert8',
+#    'Insert9',
+#    'Set4',
+#    'Set5',
+#    'Set6',
 #]
 [types.wxListBox]
 blocklist = [
