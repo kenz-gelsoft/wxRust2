@@ -6,26 +6,38 @@ use wx::methods::*;
 
 // control ids
 #[derive(Clone, Copy)]
-enum CheckboxPage {
+enum ChoicePage {
     Reset = wx::ID_HIGHEST as isize,
-    ChangeLabel,
-    Check,
-    Uncheck,
-    PartCheck,
-    ChkRight,
-    Checkbox,
+    Add,
+    AddText,
+    AddSeveral,
+    AddMany,
+    Clear,
+    Change,
+    ChangeText,
+    Delete,
+    DeleteText,
+    DeleteSel,
+    Choice,
+    ContainerTests,
 }
-impl CheckboxPage {
+impl ChoicePage {
     fn from(v: c_int) -> Option<Self> {
-        use CheckboxPage::*;
+        use ChoicePage::*;
         for e in [
             Reset,
-            ChangeLabel,
-            Check,
-            Uncheck,
-            PartCheck,
-            ChkRight,
-            Checkbox,
+            Add,
+            AddText,
+            AddSeveral,
+            AddMany,
+            Clear,
+            Change,
+            ChangeText,
+            Delete,
+            DeleteText,
+            DeleteSel,
+            Choice,
+            ContainerTests,
         ] {
             if v == e.into() {
                 return Some(e);
@@ -34,8 +46,8 @@ impl CheckboxPage {
         return None;
     }
 }
-impl From<CheckboxPage> for c_int {
-    fn from(w: CheckboxPage) -> Self {
+impl From<ChoicePage> for c_int {
+    fn from(w: ChoicePage) -> Self {
         w as c_int
     }
 }
@@ -47,11 +59,11 @@ const CHECKBOX_KIND_3STATE_USER: c_int = 2;
 #[derive(Clone)]
 pub struct ConfigUI {
     // the controls to choose the choice style
-    chk_right: wx::CheckBox,
-    radio_kind: wx::RadioBox,
+    chk_sort: wx::CheckBox,
+    // radio_kind: wx::RadioBox,
 
-    // the text entries for command parameters
-    text_label: wx::TextCtrl,
+    // // the text entries for command parameters
+    // text_label: wx::TextCtrl,
 
     // sizer
     sizer_choice: wx::BoxSizer,
@@ -72,41 +84,26 @@ impl WidgetsPage for ChoiceWidgetsPage {
         return "Choice";
     }
     fn create_content(&self) {
+        /*
+           What we create here is a frame having 3 panes: style pane is the
+           leftmost one, in the middle the pane with buttons allowing to perform
+           miscellaneous choice operations and the pane containing the choice
+           itself to the right
+        */
         let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
 
         // left pane
         let s_box = wx::StaticBox::builder(Some(&self.base))
-            .label("&Set style")
+            .label("&Set choice parameters")
             .build();
 
         let sizer_left = wx::StaticBoxSizer::new_with_staticbox(Some(&s_box), wx::VERTICAL);
 
-        let chk_right = self.create_check_box_and_add_to_sizer(
-            &sizer_left,
-            "&Right aligned",
-            CheckboxPage::ChkRight.into(),
-        );
-
-        sizer_left.add_spacer(10);
-
-        let kinds = wx::ArrayString::new();
-        kinds.add("usual &2-state choice");
-        kinds.add("&3rd state settable by program");
-        kinds.add("&user-settable 3rd state");
-        let radio_kind = wx::RadioBox::builder(Some(&self.base))
-            .label("&Kind")
-            .choices(kinds)
-            .major_dimension(1)
-            .build();
-        sizer_left.add_window_sizerflags(
-            Some(&radio_kind),
-            wx::SizerFlags::new(0).expand().border(wx::ALL),
-        );
-
-        sizer_left.add_spacer(5);
+        let chk_sort =
+            self.create_check_box_and_add_to_sizer(&sizer_left, "&Sort items", wx::ID_ANY);
 
         let btn = wx::Button::builder(Some(&self.base))
-            .id(CheckboxPage::Reset.into())
+            .id(ChoicePage::Reset.into())
             .label("&Reset")
             .build();
         sizer_left.add_window_int(
@@ -119,71 +116,101 @@ impl WidgetsPage for ChoiceWidgetsPage {
 
         // middle pane
         let s_box2 = wx::StaticBox::builder(Some(&self.base))
-            .label("&Operations")
+            .label("&Change choice contents")
             .build();
         let sizer_middle = wx::StaticBoxSizer::new_with_staticbox(Some(&s_box2), wx::VERTICAL);
 
-        let (sizer_row, text_label) = self.create_sizer_with_text_and_button(
-            CheckboxPage::ChangeLabel.into(),
-            "Change label",
-            wx::ID_ANY,
-        );
-        sizer_middle.add_sizer_sizerflags(
+        let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
+        let btn = wx::Button::builder(Some(&self.base))
+            .id(ChoicePage::Add.into())
+            .label("&Add this string")
+            .build();
+        let text_add = wx::TextCtrl::builder(Some(&self.base))
+            .id(ChoicePage::AddText.into())
+            // .label("test item 0")
+            .build();
+        sizer_row.add_window_int(Some(&btn), 0, wx::RIGHT, 5, wx::Object::none());
+        sizer_row.add_window_int(Some(&text_add), 1, wx::LEFT, 5, wx::Object::none());
+        sizer_middle.add_sizer_int(
             Some(&sizer_row),
-            wx::SizerFlags::new(0).expand().border(wx::ALL),
-        );
-        sizer_middle.add_window_int(
-            Some(
-                &wx::Button::builder(Some(&self.base))
-                    .id(CheckboxPage::Check.into())
-                    .label("&Check it")
-                    .build(),
-            ),
-            0,
-            wx::ALL | wx::GROW,
-            5,
-            wx::Object::none(),
-        );
-        sizer_middle.add_window_int(
-            Some(
-                &wx::Button::builder(Some(&self.base))
-                    .id(CheckboxPage::Uncheck.into())
-                    .label("&Uncheck it")
-                    .build(),
-            ),
-            0,
-            wx::ALL | wx::GROW,
-            5,
-            wx::Object::none(),
-        );
-        sizer_middle.add_window_int(
-            Some(
-                &wx::Button::builder(Some(&self.base))
-                    .id(CheckboxPage::PartCheck.into())
-                    .label("Put in &3rd state")
-                    .build(),
-            ),
             0,
             wx::ALL | wx::GROW,
             5,
             wx::Object::none(),
         );
 
-        // right pane
-        let sizer_right = wx::BoxSizer::new(wx::HORIZONTAL);
-        let choice = wx::Choice::builder(Some(&self.base))
-            .id(CheckboxPage::Checkbox.into())
+        let btn = wx::Button::builder(Some(&self.base))
+            .id(ChoicePage::AddSeveral.into())
+            .label("&Insert a few strings")
             .build();
-        sizer_right.add_int_int(0, 0, 1, wx::CENTRE as i32, wx::ALL, wx::Object::none());
-        sizer_right.add_window_int(
-            Some(&choice),
-            1,
-            wx::CENTRE as i32,
-            wx::ALL,
+        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+
+        let btn = wx::Button::builder(Some(&self.base))
+            .id(ChoicePage::AddMany.into())
+            .label("Add &many strings")
+            .build();
+        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+
+        let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
+        let btn = wx::Button::builder(Some(&self.base))
+            .id(ChoicePage::Change.into())
+            .label("C&hange current")
+            .build();
+        let text_change = wx::TextCtrl::builder(Some(&self.base))
+            .id(ChoicePage::ChangeText.into())
+            .build();
+        sizer_row.add_window_int(Some(&btn), 0, wx::RIGHT, 5, wx::Object::none());
+        sizer_row.add_window_int(Some(&text_change), 1, wx::LEFT, 5, wx::Object::none());
+        sizer_middle.add_sizer_int(
+            Some(&sizer_row),
+            0,
+            wx::ALL | wx::GROW,
+            5,
             wx::Object::none(),
         );
-        *self.choice.borrow_mut() = Some(choice);
-        sizer_right.add_int_int(0, 0, 1, wx::CENTRE as i32, wx::ALL, wx::Object::none());
+
+        let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
+        let btn = wx::Button::builder(Some(&self.base))
+            .id(ChoicePage::Delete.into())
+            .label("&Delete this item")
+            .build();
+        let text_delete = wx::TextCtrl::builder(Some(&self.base))
+            .id(ChoicePage::DeleteText.into())
+            .build();
+        sizer_row.add_window_int(Some(&btn), 0, wx::RIGHT, 5, wx::Object::none());
+        sizer_row.add_window_int(Some(&text_delete), 1, wx::LEFT, 5, wx::Object::none());
+        sizer_middle.add_sizer_int(
+            Some(&sizer_row),
+            0,
+            wx::ALL | wx::GROW,
+            5,
+            wx::Object::none(),
+        );
+
+        let btn = wx::Button::builder(Some(&self.base))
+            .id(ChoicePage::DeleteSel.into())
+            .label("Delete &selection")
+            .build();
+        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+
+        let btn = wx::Button::builder(Some(&self.base))
+            .id(ChoicePage::Clear.into())
+            .label("&Clear")
+            .build();
+        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+
+        let btn = wx::Button::builder(Some(&self.base))
+            .id(ChoicePage::ContainerTests.into())
+            .label("Run &tests")
+            .build();
+        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+
+        // right pane
+        let sizer_right = wx::BoxSizer::new(wx::VERTICAL);
+        let choice = wx::Choice::builder(Some(&self.base))
+            .id(ChoicePage::Choice.into())
+            .build();
+        sizer_right.add_window_int(Some(&choice), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
         sizer_right.set_min_size_int(150, 0);
 
         // the 3 panes panes compose the window
@@ -204,9 +231,9 @@ impl WidgetsPage for ChoiceWidgetsPage {
                 .double_border(wx::ALL & !wx::RIGHT),
         );
         *self.config_ui.borrow_mut() = Some(ConfigUI {
-            chk_right,
-            radio_kind,
-            text_label,
+            chk_sort,
+            // radio_kind,
+            // text_label,
             sizer_choice: sizer_right, // save it to modify it later
         });
 
@@ -219,25 +246,25 @@ impl WidgetsPage for ChoiceWidgetsPage {
 
     fn handle_button(&self, event: &wx::CommandEvent) {
         println!("event={}", event.get_id());
-        if let Some(m) = CheckboxPage::from(event.get_id()) {
-            match m {
-                CheckboxPage::Reset => self.on_button_reset(),
-                CheckboxPage::ChangeLabel => self.on_button_change_label(),
-                CheckboxPage::Check => self.on_button_check(),
-                CheckboxPage::Uncheck => self.on_button_uncheck(),
-                // TODO: Support update ui event to disable this when not 3state
-                CheckboxPage::PartCheck => self.on_button_part_check(),
-                _ => (),
-            };
-        }
+        // if let Some(m) = CheckboxPage::from(event.get_id()) {
+        //     match m {
+        //         CheckboxPage::Reset => self.on_button_reset(),
+        //         CheckboxPage::ChangeLabel => self.on_button_change_label(),
+        //         CheckboxPage::Check => self.on_button_check(),
+        //         CheckboxPage::Uncheck => self.on_button_uncheck(),
+        //         // TODO: Support update ui event to disable this when not 3state
+        //         CheckboxPage::PartCheck => self.on_button_part_check(),
+        //         _ => (),
+        //     };
+        // }
     }
     fn handle_checkbox(&self, event: &wx::CommandEvent) {
-        if let Some(m) = CheckboxPage::from(event.get_id()) {
-            match m {
-                CheckboxPage::Checkbox => self.on_check_box(),
-                _ => self.on_style_change(),
-            };
-        }
+        // if let Some(m) = CheckboxPage::from(event.get_id()) {
+        //     match m {
+        //         CheckboxPage::Checkbox => self.on_check_box(),
+        //         _ => self.on_style_change(),
+        //     };
+        // }
     }
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
         self.on_style_change();
@@ -261,54 +288,44 @@ impl ChoiceWidgetsPage {
 
     fn reset(&self) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            config_ui.chk_right.set_value(false);
-            config_ui.radio_kind.set_selection(CHECKBOX_KIND_2STATE);
+            config_ui.chk_sort.set_value(false);
         }
     }
 
     fn create_choice(&self) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            let mut label = "".to_string();
-            if let Some(choice) = self.choice.borrow().as_ref() {
-                label = choice.get_label();
+            let mut flags = wx::BORDER_DEFAULT;
 
+            if config_ui.chk_sort.is_checked() {
+                flags |= wx::CB_SORT as c_long;
+            }
+
+            let items = wx::ArrayString::new();
+            if let Some(choice) = self.choice.borrow().as_ref() {
                 // TODO: remove (and delete) all choicees
-                let count = config_ui.sizer_choice.get_children().get_count();
-                for _ in 0..count {
-                    config_ui.sizer_choice.remove_int(0);
+                let count = choice.get_count();
+                for n in 0..count {
+                    items.add(&choice.get_string(n));
                 }
+
+                config_ui.sizer_choice.detach_window(Some(choice));
                 choice.destroy();
             }
 
-            //     if label.is_empty() {
-            //         label = config_ui.text_label.get_value();
-            //     }
-
-            let mut flags = wx::BORDER_DEFAULT;
-
-            if config_ui.chk_right.is_checked() {
-                flags |= wx::ALIGN_RIGHT as c_long;
-            }
-
-            flags |= match config_ui.radio_kind.get_selection() {
-                CHECKBOX_KIND_3STATE_USER => wx::CHK_ALLOW_3RD_STATE_FOR_USER | wx::CHK_3STATE,
-                CHECKBOX_KIND_3STATE => wx::CHK_3STATE,
-                _ => wx::CHK_2STATE,
-            } as c_long;
-
             let new_choice = wx::Choice::builder(Some(&self.base))
-                .id(CheckboxPage::Checkbox.into())
+                .id(ChoicePage::Choice.into())
                 .style(flags)
                 .build();
+            new_choice.set(&items);
 
             let sizer_choice = &config_ui.sizer_choice;
-            sizer_choice.add_stretch_spacer(1);
-            sizer_choice.add_window_sizerflags(
+            sizer_choice.add_window_int(
                 Some(&new_choice),
-                wx::SizerFlags::new(0).centre().border(wx::ALL),
+                0,
+                wx::GROW | wx::ALL,
+                5,
+                wx::Object::none(),
             );
-            sizer_choice.add_stretch_spacer(1);
-
             sizer_choice.layout();
 
             *self.choice.borrow_mut() = Some(new_choice);
@@ -338,13 +355,13 @@ impl ChoiceWidgetsPage {
     }
 
     fn on_button_change_label(&self) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            self.choice
-                .borrow()
-                .as_ref()
-                .unwrap()
-                .set_label(&config_ui.text_label.get_value());
-        }
+        // if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+        //     self.choice
+        //         .borrow()
+        //         .as_ref()
+        //         .unwrap()
+        //         .set_label(&config_ui.text_label.get_value());
+        // }
     }
 
     fn on_check_box(&self) {}
