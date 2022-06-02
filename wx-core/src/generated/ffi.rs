@@ -1,4 +1,4 @@
-use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
+use std::os::raw::{c_double, c_int, c_long, c_uchar, c_uint, c_void};
 
 pub use crate::ffi::*;
 
@@ -517,8 +517,8 @@ extern "C" {
     pub fn wxListBox_GetSelections(self_: *const c_void, selections: *mut c_void) -> c_int;
     pub fn wxListBox_HitTest(self_: *const c_void, point: *const c_void) -> c_int;
     pub fn wxListBox_HitTest1(self_: *const c_void, x: c_int, y: c_int) -> c_int;
-    // NOT_SUPPORTED: pub fn wxListBox_InsertItems(self_: *mut c_void, n_items: unsigned int, items: *const c_void, pos: unsigned int);
-    // NOT_SUPPORTED: pub fn wxListBox_InsertItems1(self_: *mut c_void, items: *const c_void, pos: unsigned int);
+    // BLOCKED: pub fn wxListBox_InsertItems(self_: *mut c_void, n_items: c_uint, items: *const c_void, pos: c_uint);
+    pub fn wxListBox_InsertItems1(self_: *mut c_void, items: *const c_void, pos: c_uint);
     pub fn wxListBox_IsSelected(self_: *const c_void, n: c_int) -> bool;
     pub fn wxListBox_SetFirstItem(self_: *mut c_void, n: c_int);
     pub fn wxListBox_SetFirstItem1(self_: *mut c_void, string: *const c_void);
@@ -877,17 +877,17 @@ extern "C" {
         validator: *const c_void,
         name: *const c_void,
     ) -> bool;
-    // NOT_SUPPORTED: pub fn wxRadioBox_Enable(self_: *mut c_void, n: unsigned int, enable: bool) -> bool;
-    // NOT_SUPPORTED: pub fn wxRadioBox_GetColumnCount(self_: *const c_void) -> unsigned int;
+    // BLOCKED: pub fn wxRadioBox_Enable(self_: *mut c_void, n: c_uint, enable: bool) -> bool;
+    pub fn wxRadioBox_GetColumnCount(self_: *const c_void) -> c_uint;
     pub fn wxRadioBox_GetItemFromPoint(self_: *const c_void, pt: *const c_void) -> c_int;
-    // NOT_SUPPORTED: pub fn wxRadioBox_GetItemHelpText(self_: *const c_void, item: unsigned int) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxRadioBox_GetItemToolTip(self_: *const c_void, item: unsigned int) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxRadioBox_GetRowCount(self_: *const c_void) -> unsigned int;
-    // NOT_SUPPORTED: pub fn wxRadioBox_IsItemEnabled(self_: *const c_void, n: unsigned int) -> bool;
-    // NOT_SUPPORTED: pub fn wxRadioBox_IsItemShown(self_: *const c_void, n: unsigned int) -> bool;
-    // NOT_SUPPORTED: pub fn wxRadioBox_SetItemHelpText(self_: *mut c_void, item: unsigned int, helptext: *const c_void);
-    // NOT_SUPPORTED: pub fn wxRadioBox_SetItemToolTip(self_: *mut c_void, item: unsigned int, text: *const c_void);
-    // NOT_SUPPORTED: pub fn wxRadioBox_Show(self_: *mut c_void, item: unsigned int, show: bool) -> bool;
+    pub fn wxRadioBox_GetItemHelpText(self_: *const c_void, item: c_uint) -> *mut c_void;
+    pub fn wxRadioBox_GetItemToolTip(self_: *const c_void, item: c_uint) -> *mut c_void;
+    pub fn wxRadioBox_GetRowCount(self_: *const c_void) -> c_uint;
+    pub fn wxRadioBox_IsItemEnabled(self_: *const c_void, n: c_uint) -> bool;
+    pub fn wxRadioBox_IsItemShown(self_: *const c_void, n: c_uint) -> bool;
+    pub fn wxRadioBox_SetItemHelpText(self_: *mut c_void, item: c_uint, helptext: *const c_void);
+    pub fn wxRadioBox_SetItemToolTip(self_: *mut c_void, item: c_uint, text: *const c_void);
+    pub fn wxRadioBox_Show(self_: *mut c_void, item: c_uint, show: bool) -> bool;
 
     // wxRect
     pub fn wxRect_delete(self_: *mut c_void);
@@ -2010,7 +2010,7 @@ extern "C" {
     pub fn wxWindow_Lower(self_: *mut c_void);
     pub fn wxWindow_Raise(self_: *mut c_void);
     pub fn wxWindow_Hide(self_: *mut c_void) -> bool;
-    // NOT_SUPPORTED: pub fn wxWindow_HideWithEffect(self_: *mut c_void, effect: wxShowEffect, timeout: unsigned int) -> bool;
+    // NOT_SUPPORTED: pub fn wxWindow_HideWithEffect(self_: *mut c_void, effect: wxShowEffect, timeout: c_uint) -> bool;
     pub fn wxWindow_IsEnabled(self_: *const c_void) -> bool;
     pub fn wxWindow_IsExposed(self_: *const c_void, x: c_int, y: c_int) -> bool;
     pub fn wxWindow_IsExposed1(self_: *const c_void, pt: *mut c_void) -> bool;
@@ -2027,7 +2027,7 @@ extern "C" {
     pub fn wxWindow_Disable(self_: *mut c_void) -> bool;
     pub fn wxWindow_Enable(self_: *mut c_void, enable: bool) -> bool;
     pub fn wxWindow_Show(self_: *mut c_void, show: bool) -> bool;
-    // NOT_SUPPORTED: pub fn wxWindow_ShowWithEffect(self_: *mut c_void, effect: wxShowEffect, timeout: unsigned int) -> bool;
+    // NOT_SUPPORTED: pub fn wxWindow_ShowWithEffect(self_: *mut c_void, effect: wxShowEffect, timeout: c_uint) -> bool;
     pub fn wxWindow_GetHelpText(self_: *const c_void) -> *mut c_void;
     pub fn wxWindow_SetHelpText(self_: *mut c_void, help_text: *const c_void);
     // NOT_SUPPORTED: pub fn wxWindow_GetHelpTextAtPoint(self_: *const c_void, point: *const c_void, origin: wxHelpEvent::Origin) -> *mut c_void;

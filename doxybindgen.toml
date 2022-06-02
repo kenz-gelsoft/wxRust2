@@ -148,6 +148,7 @@ blocklist = [
 #]
 [types.wxListBox]
 blocklist = [
+    'InsertItems',
     'MSWSetTabStops',
 ]
 wx31 = [
@@ -230,6 +231,11 @@ blocklist = [
     'operator-=1',
     'operator/=',
     'operator*=',
+]
+[types.wxRadioBox]
+blocklist = [
+    # FIXME: Conflicts with wxWindow's method, this should be OverloadTree's bug
+    'Enable',
 ]
 [types.wxRect]
 blocklist = [

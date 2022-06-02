@@ -1,4 +1,4 @@
-use std::os::raw::{c_int, c_long, c_void};
+use std::os::raw::{c_int, c_long, c_uint, c_void};
 
 use super::*;
 use crate::WeakRef;
@@ -1060,8 +1060,13 @@ pub trait ListBoxMethods: ControlMethods {
     fn hit_test_int(&self, x: c_int, y: c_int) -> c_int {
         unsafe { ffi::wxListBox_HitTest1(self.as_ptr(), x, y) }
     }
-    // NOT_SUPPORTED: fn InsertItems()
-    // NOT_SUPPORTED: fn InsertItems1()
+    // BLOCKED: fn InsertItems()
+    fn insert_items<A: ArrayStringMethods>(&self, items: &A, pos: c_uint) {
+        unsafe {
+            let items = items.as_ptr();
+            ffi::wxListBox_InsertItems1(self.as_ptr(), items, pos)
+        }
+    }
     fn is_selected(&self, n: c_int) -> bool {
         unsafe { ffi::wxListBox_IsSelected(self.as_ptr(), n) }
     }
@@ -1978,22 +1983,46 @@ pub trait RadioBoxMethods: ControlMethods {
             )
         }
     }
-    // NOT_SUPPORTED: fn Enable()
-    // NOT_SUPPORTED: fn GetColumnCount()
+    // BLOCKED: fn Enable()
+    fn get_column_count(&self) -> c_uint {
+        unsafe { ffi::wxRadioBox_GetColumnCount(self.as_ptr()) }
+    }
     fn get_item_from_point<P: PointMethods>(&self, pt: &P) -> c_int {
         unsafe {
             let pt = pt.as_ptr();
             ffi::wxRadioBox_GetItemFromPoint(self.as_ptr(), pt)
         }
     }
-    // NOT_SUPPORTED: fn GetItemHelpText()
-    // NOT_SUPPORTED: fn GetItemToolTip()
-    // NOT_SUPPORTED: fn GetRowCount()
-    // NOT_SUPPORTED: fn IsItemEnabled()
-    // NOT_SUPPORTED: fn IsItemShown()
-    // NOT_SUPPORTED: fn SetItemHelpText()
-    // NOT_SUPPORTED: fn SetItemToolTip()
-    // NOT_SUPPORTED: fn Show()
+    fn get_item_help_text(&self, item: c_uint) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxRadioBox_GetItemHelpText(self.as_ptr(), item)) }
+    }
+    fn get_item_tool_tip(&self, item: c_uint) -> *mut c_void {
+        unsafe { ffi::wxRadioBox_GetItemToolTip(self.as_ptr(), item) }
+    }
+    fn get_row_count(&self) -> c_uint {
+        unsafe { ffi::wxRadioBox_GetRowCount(self.as_ptr()) }
+    }
+    fn is_item_enabled(&self, n: c_uint) -> bool {
+        unsafe { ffi::wxRadioBox_IsItemEnabled(self.as_ptr(), n) }
+    }
+    fn is_item_shown(&self, n: c_uint) -> bool {
+        unsafe { ffi::wxRadioBox_IsItemShown(self.as_ptr(), n) }
+    }
+    fn set_item_help_text(&self, item: c_uint, helptext: &str) {
+        unsafe {
+            let helptext = wx_base::wx_string_from(helptext);
+            ffi::wxRadioBox_SetItemHelpText(self.as_ptr(), item, helptext)
+        }
+    }
+    fn set_item_tool_tip(&self, item: c_uint, text: &str) {
+        unsafe {
+            let text = wx_base::wx_string_from(text);
+            ffi::wxRadioBox_SetItemToolTip(self.as_ptr(), item, text)
+        }
+    }
+    fn show(&self, item: c_uint, show: bool) -> bool {
+        unsafe { ffi::wxRadioBox_Show(self.as_ptr(), item, show) }
+    }
 }
 
 // wxRect
