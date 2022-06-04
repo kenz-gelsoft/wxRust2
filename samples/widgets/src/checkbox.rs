@@ -61,7 +61,7 @@ pub struct ConfigUI {
 pub struct CheckBoxWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
-    // the checkbox itself and the sizer it is in
+    // the checkbox itself
     checkbox: Rc<RefCell<Option<wx::CheckBox>>>,
 }
 impl WidgetsPage for CheckBoxWidgetsPage {

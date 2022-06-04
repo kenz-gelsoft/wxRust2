@@ -100,7 +100,7 @@ impl ConfigUI {
 pub struct ButtonWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
-    // the button itself and the sizer it is in
+    // the button itself
     button: Rc<RefCell<Option<wx::Button>>>,
 }
 impl WidgetsPage for ButtonWidgetsPage {

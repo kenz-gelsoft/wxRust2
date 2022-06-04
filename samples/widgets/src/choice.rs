@@ -58,23 +58,28 @@ const CHECKBOX_KIND_3STATE_USER: c_int = 2;
 
 #[derive(Clone)]
 pub struct ConfigUI {
-    // the controls to choose the choice style
+    // the controls
+    // ------------
+    // the checkboxes
     chk_sort: wx::CheckBox,
-    // radio_kind: wx::RadioBox,
-
-    // // the text entries for command parameters
-    // text_label: wx::TextCtrl,
 
     // sizer
     sizer_choice: wx::BoxSizer,
+
+    // the text entries for "Add/change string" and "Delete" buttons
+    text_add: wx::TextCtrl,
+    text_change: wx::TextCtrl,
+    text_delete: wx::TextCtrl,
 }
 
 #[derive(Clone)]
 pub struct ChoiceWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
-    // the choice itself and the sizer it is in
+    // the choice itself
     choice: Rc<RefCell<Option<wx::Choice>>>,
+
+    s_item: RefCell<c_int>,
 }
 impl WidgetsPage for ChoiceWidgetsPage {
     fn base(&self) -> &wx::Panel {
@@ -127,7 +132,7 @@ impl WidgetsPage for ChoiceWidgetsPage {
             .build();
         let text_add = wx::TextCtrl::builder(Some(&self.base))
             .id(ChoicePage::AddText.into())
-            // .label("test item 0")
+            .value("test item 0")
             .build();
         sizer_row.add_window_int(Some(&btn), 0, wx::RIGHT, 5, wx::Object::none());
         sizer_row.add_window_int(Some(&text_add), 1, wx::LEFT, 5, wx::Object::none());
@@ -212,6 +217,7 @@ impl WidgetsPage for ChoiceWidgetsPage {
             .build();
         sizer_right.add_window_int(Some(&choice), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
         sizer_right.set_min_size_int(150, 0);
+        *self.choice.borrow_mut() = Some(choice);
 
         // the 3 panes panes compose the window
         sizer_top.add_sizer_sizerflags(
@@ -232,9 +238,12 @@ impl WidgetsPage for ChoiceWidgetsPage {
         );
         *self.config_ui.borrow_mut() = Some(ConfigUI {
             chk_sort,
-            // radio_kind,
-            // text_label,
+
             sizer_choice: sizer_right, // save it to modify it later
+
+            text_add,
+            text_change,
+            text_delete,
         });
 
         // do create the main control
@@ -246,28 +255,28 @@ impl WidgetsPage for ChoiceWidgetsPage {
 
     fn handle_button(&self, event: &wx::CommandEvent) {
         println!("event={}", event.get_id());
-        // if let Some(m) = CheckboxPage::from(event.get_id()) {
-        //     match m {
-        //         CheckboxPage::Reset => self.on_button_reset(),
-        //         CheckboxPage::ChangeLabel => self.on_button_change_label(),
-        //         CheckboxPage::Check => self.on_button_check(),
-        //         CheckboxPage::Uncheck => self.on_button_uncheck(),
-        //         // TODO: Support update ui event to disable this when not 3state
-        //         CheckboxPage::PartCheck => self.on_button_part_check(),
-        //         _ => (),
-        //     };
-        // }
+        if let Some(m) = ChoicePage::from(event.get_id()) {
+            if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+                match m {
+                    ChoicePage::Reset => self.on_button_reset(),
+                    ChoicePage::Change => self.on_button_change(config_ui),
+                    ChoicePage::Delete => self.on_button_delete(config_ui),
+                    ChoicePage::DeleteSel => self.on_button_delete_sel(),
+                    ChoicePage::Clear => self.on_button_clear(),
+                    ChoicePage::Add => self.on_button_add(config_ui),
+                    ChoicePage::AddSeveral => self.on_button_add_several(),
+                    ChoicePage::AddMany => self.on_button_add_many(),
+                    // TODO: Support update ui event to disable this when not 3state
+                    _ => (),
+                };
+            }
+        }
     }
     fn handle_checkbox(&self, event: &wx::CommandEvent) {
-        // if let Some(m) = CheckboxPage::from(event.get_id()) {
-        //     match m {
-        //         CheckboxPage::Checkbox => self.on_check_box(),
-        //         _ => self.on_style_change(),
-        //     };
-        // }
+        self.on_check_or_radio_box();
     }
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
-        self.on_style_change();
+        self.on_check_or_radio_box();
     }
 }
 impl ChoiceWidgetsPage {
@@ -279,6 +288,7 @@ impl ChoiceWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
             choice: Rc::new(RefCell::new(None)),
+            s_item: RefCell::new(1),
         }
     }
 
@@ -337,32 +347,82 @@ impl ChoiceWidgetsPage {
         self.create_choice();
     }
 
-    fn on_button_check(&self) {
-        // self.choice.borrow().as_ref().unwrap().set_value(true);
+    fn on_button_change(&self, config_ui: &ConfigUI) {
+        if let Some(choice) = self.choice.borrow().as_ref() {
+            let selection = choice.get_selection();
+            if selection != wx::NOT_FOUND {
+                choice.set_string(
+                    selection.try_into().unwrap(),
+                    &config_ui.text_change.get_value(),
+                );
+            }
+        }
     }
-    fn on_button_uncheck(&self) {
-        // self.choice.borrow().as_ref().unwrap().set_value(false);
+
+    fn on_button_delete(&self, config_ui: &ConfigUI) {
+        let n = config_ui.text_delete.get_value();
+        if let Ok(n) = n.parse() {
+            if let Some(choice) = self.choice.borrow().as_ref() {
+                if n < choice.get_count() {
+                    choice.delete(n);
+                }
+            }
+        }
     }
-    fn on_button_part_check(&self) {
-        // self.choice
-        //     .borrow()
-        //     .as_ref()
-        //     .unwrap()
-        //     .set3_state_value(wx::CHK_UNDETERMINED);
+
+    fn on_button_delete_sel(&self) {
+        if let Some(choice) = self.choice.borrow().as_ref() {
+            let selection = choice.get_selection();
+            if selection != wx::NOT_FOUND {
+                choice.delete(selection.try_into().unwrap());
+            }
+        }
     }
-    fn on_style_change(&self) {
+
+    fn on_button_clear(&self) {
+        if let Some(choice) = self.choice.borrow().as_ref() {
+            choice.clear();
+        }
+    }
+
+    fn on_button_add(&self, config_ui: &ConfigUI) {
+        let s = config_ui.text_add.get_value();
+        if !config_ui.text_add.is_modified() {
+            // update the default string
+            let s_item = *self.s_item.borrow();
+            config_ui
+                .text_add
+                .set_value(&format!("test item {}", s_item));
+            *self.s_item.borrow_mut() = s_item + 1;
+        }
+
+        if let Some(choice) = self.choice.borrow().as_ref() {
+            choice.append_str(&s);
+        }
+    }
+
+    fn on_button_add_many(&self) {
+        // "many" means 1000 here
+        let strings = wx::ArrayString::new();
+        for n in 0..1000 {
+            strings.add(&format!("item #{}", n));
+        }
+        if let Some(choice) = self.choice.borrow().as_ref() {
+            choice.append_arraystring(&strings);
+        }
+    }
+
+    fn on_button_add_several(&self) {
+        let items = wx::ArrayString::new();
+        items.add("First");
+        items.add("another one");
+        items.add("and the last (very very very very very very very very very very long) one");
+        if let Some(choice) = self.choice.borrow().as_ref() {
+            choice.insert_arraystring(&items, 0);
+        }
+    }
+
+    fn on_check_or_radio_box(&self) {
         self.create_choice();
     }
-
-    fn on_button_change_label(&self) {
-        // if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-        //     self.choice
-        //         .borrow()
-        //         .as_ref()
-        //         .unwrap()
-        //         .set_label(&config_ui.text_label.get_value());
-        // }
-    }
-
-    fn on_check_box(&self) {}
 }
