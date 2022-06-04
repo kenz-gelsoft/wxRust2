@@ -302,7 +302,9 @@ class RustMethodBinding:
         name = prefixed(self.__model.name(for_ffi=True), with_ffi=True)
         self_to_insert = None
         if self.__model.is_instance_method:
-            self_param = self.__self_param.rust_ffi_ref()
+            self_param = self.__self_param.rust_ffi_ref(
+                as_mixin=self.__model.cls.config.get('as_mixin'),
+            )
             self_to_insert = self_param
         call = '%s(%s)' % (
             name,

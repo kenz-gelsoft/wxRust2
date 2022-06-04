@@ -326,6 +326,7 @@ blocklist = [
     'operator<<4',
 ]
 [types.wxTextEntry]
+as_mixin = 'as_text_entry'
 wx31 = [
     'ForceUpper',
 ]
