@@ -623,6 +623,121 @@ void wxIcon_SetWidth(wxIcon * self, int width) {
     return self->SetWidth(width);
 }
 
+// CLASS: wxItemContainer
+void wxItemContainer_delete(wxItemContainer *self) {
+    delete self;
+}
+int wxItemContainer_Append(wxItemContainer * self, const wxString * item) {
+    return self->Append(*item);
+}
+int wxItemContainer_Append1(wxItemContainer * self, const wxString * item, void * client_data) {
+    return self->Append(*item, client_data);
+}
+int wxItemContainer_Append2(wxItemContainer * self, const wxString * item, wxClientData * client_data) {
+    return self->Append(*item, client_data);
+}
+int wxItemContainer_Append3(wxItemContainer * self, const wxArrayString * items) {
+    return self->Append(*items);
+}
+int wxItemContainer_Append5(wxItemContainer * self, const wxArrayString * items, void ** client_data) {
+    return self->Append(*items, client_data);
+}
+int wxItemContainer_Append6(wxItemContainer * self, const wxArrayString * items, wxClientData ** client_data) {
+    return self->Append(*items, client_data);
+}
+void wxItemContainer_Clear(wxItemContainer * self) {
+    return self->Clear();
+}
+void wxItemContainer_Delete(wxItemContainer * self, unsigned int n) {
+    return self->Delete(n);
+}
+wxClientData * wxItemContainer_DetachClientObject(wxItemContainer * self, unsigned int n) {
+    return self->DetachClientObject(n);
+}
+bool wxItemContainer_HasClientData(const wxItemContainer * self) {
+    return self->HasClientData();
+}
+bool wxItemContainer_HasClientObjectData(const wxItemContainer * self) {
+    return self->HasClientObjectData();
+}
+bool wxItemContainer_HasClientUntypedData(const wxItemContainer * self) {
+    return self->HasClientUntypedData();
+}
+void * wxItemContainer_GetClientData(const wxItemContainer * self, unsigned int n) {
+    return self->GetClientData(n);
+}
+wxClientData * wxItemContainer_GetClientObject(const wxItemContainer * self, unsigned int n) {
+    return self->GetClientObject(n);
+}
+void wxItemContainer_SetClientData(wxItemContainer * self, unsigned int n, void * data) {
+    return self->SetClientData(n, data);
+}
+void wxItemContainer_SetClientObject(wxItemContainer * self, unsigned int n, wxClientData * data) {
+    return self->SetClientObject(n, data);
+}
+int wxItemContainer_Insert(wxItemContainer * self, const wxString * item, unsigned int pos) {
+    return self->Insert(*item, pos);
+}
+int wxItemContainer_Insert1(wxItemContainer * self, const wxString * item, unsigned int pos, void * client_data) {
+    return self->Insert(*item, pos, client_data);
+}
+int wxItemContainer_Insert2(wxItemContainer * self, const wxString * item, unsigned int pos, wxClientData * client_data) {
+    return self->Insert(*item, pos, client_data);
+}
+int wxItemContainer_Insert3(wxItemContainer * self, const wxArrayString * items, unsigned int pos) {
+    return self->Insert(*items, pos);
+}
+int wxItemContainer_Insert5(wxItemContainer * self, const wxArrayString * items, unsigned int pos, void ** client_data) {
+    return self->Insert(*items, pos, client_data);
+}
+int wxItemContainer_Insert6(wxItemContainer * self, const wxArrayString * items, unsigned int pos, wxClientData ** client_data) {
+    return self->Insert(*items, pos, client_data);
+}
+void wxItemContainer_Set(wxItemContainer * self, const wxArrayString * items) {
+    return self->Set(*items);
+}
+void wxItemContainer_Set2(wxItemContainer * self, const wxArrayString * items, void ** client_data) {
+    return self->Set(*items, client_data);
+}
+void wxItemContainer_Set3(wxItemContainer * self, const wxArrayString * items, wxClientData ** client_data) {
+    return self->Set(*items, client_data);
+}
+
+// CLASS: wxItemContainerImmutable
+void wxItemContainerImmutable_delete(wxItemContainerImmutable *self) {
+    delete self;
+}
+void wxItemContainerImmutable_SetSelection(wxItemContainerImmutable * self, int n) {
+    return self->SetSelection(n);
+}
+int wxItemContainerImmutable_GetSelection(const wxItemContainerImmutable * self) {
+    return self->GetSelection();
+}
+bool wxItemContainerImmutable_SetStringSelection(wxItemContainerImmutable * self, const wxString * string) {
+    return self->SetStringSelection(*string);
+}
+wxString *wxItemContainerImmutable_GetStringSelection(const wxItemContainerImmutable * self) {
+    return new wxString(self->GetStringSelection());
+}
+void wxItemContainerImmutable_Select(wxItemContainerImmutable * self, int n) {
+    return self->Select(n);
+}
+unsigned int wxItemContainerImmutable_GetCount(const wxItemContainerImmutable * self) {
+    return self->GetCount();
+}
+bool wxItemContainerImmutable_IsEmpty(const wxItemContainerImmutable * self) {
+    return self->IsEmpty();
+}
+wxString *wxItemContainerImmutable_GetString(const wxItemContainerImmutable * self, unsigned int n) {
+    return new wxString(self->GetString(n));
+}
+void wxItemContainerImmutable_SetString(wxItemContainerImmutable * self, unsigned int n, const wxString * string) {
+    return self->SetString(n, *string);
+}
+int wxItemContainerImmutable_FindString(const wxItemContainerImmutable * self, const wxString * string, bool case_sensitive) {
+    return self->FindString(*string, case_sensitive);
+}
+
 // CLASS: wxListBox
 wxListBox *wxListBox_new() {
     return new wxListBox();
@@ -2105,6 +2220,133 @@ void wxTextCtrl_ShowPosition(wxTextCtrl * self, long pos) {
 }
 long wxTextCtrl_XYToPosition(const wxTextCtrl * self, long x, long y) {
     return self->XYToPosition(x, y);
+}
+
+// CLASS: wxTextEntry
+void wxTextEntry_delete(wxTextEntry *self) {
+    delete self;
+}
+void wxTextEntry_AppendText(wxTextEntry * self, const wxString * text) {
+    return self->AppendText(*text);
+}
+bool wxTextEntry_AutoComplete(wxTextEntry * self, const wxArrayString * choices) {
+    return self->AutoComplete(*choices);
+}
+bool wxTextEntry_AutoComplete1(wxTextEntry * self, wxTextCompleter * completer) {
+    return self->AutoComplete(completer);
+}
+bool wxTextEntry_AutoCompleteFileNames(wxTextEntry * self) {
+    return self->AutoCompleteFileNames();
+}
+bool wxTextEntry_AutoCompleteDirectories(wxTextEntry * self) {
+    return self->AutoCompleteDirectories();
+}
+bool wxTextEntry_CanCopy(const wxTextEntry * self) {
+    return self->CanCopy();
+}
+bool wxTextEntry_CanCut(const wxTextEntry * self) {
+    return self->CanCut();
+}
+bool wxTextEntry_CanPaste(const wxTextEntry * self) {
+    return self->CanPaste();
+}
+bool wxTextEntry_CanRedo(const wxTextEntry * self) {
+    return self->CanRedo();
+}
+bool wxTextEntry_CanUndo(const wxTextEntry * self) {
+    return self->CanUndo();
+}
+void wxTextEntry_ChangeValue(wxTextEntry * self, const wxString * value) {
+    return self->ChangeValue(*value);
+}
+void wxTextEntry_Clear(wxTextEntry * self) {
+    return self->Clear();
+}
+void wxTextEntry_Copy(wxTextEntry * self) {
+    return self->Copy();
+}
+void wxTextEntry_Cut(wxTextEntry * self) {
+    return self->Cut();
+}
+#if wxCHECK_VERSION(3, 1, 0)
+void wxTextEntry_ForceUpper(wxTextEntry * self) {
+    return self->ForceUpper();
+}
+#endif
+long wxTextEntry_GetInsertionPoint(const wxTextEntry * self) {
+    return self->GetInsertionPoint();
+}
+wxString *wxTextEntry_GetRange(const wxTextEntry * self, long from, long to) {
+    return new wxString(self->GetRange(from, to));
+}
+void wxTextEntry_GetSelection(const wxTextEntry * self, long * from, long * to) {
+    return self->GetSelection(from, to);
+}
+wxString *wxTextEntry_GetStringSelection(const wxTextEntry * self) {
+    return new wxString(self->GetStringSelection());
+}
+wxString *wxTextEntry_GetValue(const wxTextEntry * self) {
+    return new wxString(self->GetValue());
+}
+bool wxTextEntry_IsEditable(const wxTextEntry * self) {
+    return self->IsEditable();
+}
+bool wxTextEntry_IsEmpty(const wxTextEntry * self) {
+    return self->IsEmpty();
+}
+void wxTextEntry_Paste(wxTextEntry * self) {
+    return self->Paste();
+}
+void wxTextEntry_Redo(wxTextEntry * self) {
+    return self->Redo();
+}
+void wxTextEntry_Remove(wxTextEntry * self, long from, long to) {
+    return self->Remove(from, to);
+}
+void wxTextEntry_Replace(wxTextEntry * self, long from, long to, const wxString * value) {
+    return self->Replace(from, to, *value);
+}
+void wxTextEntry_SetEditable(wxTextEntry * self, bool editable) {
+    return self->SetEditable(editable);
+}
+void wxTextEntry_SetInsertionPoint(wxTextEntry * self, long pos) {
+    return self->SetInsertionPoint(pos);
+}
+void wxTextEntry_SetInsertionPointEnd(wxTextEntry * self) {
+    return self->SetInsertionPointEnd();
+}
+void wxTextEntry_SetSelection(wxTextEntry * self, long from, long to) {
+    return self->SetSelection(from, to);
+}
+void wxTextEntry_SelectAll(wxTextEntry * self) {
+    return self->SelectAll();
+}
+void wxTextEntry_SelectNone(wxTextEntry * self) {
+    return self->SelectNone();
+}
+bool wxTextEntry_SetHint(wxTextEntry * self, const wxString * hint) {
+    return self->SetHint(*hint);
+}
+wxString *wxTextEntry_GetHint(const wxTextEntry * self) {
+    return new wxString(self->GetHint());
+}
+bool wxTextEntry_SetMargins(wxTextEntry * self, const wxPoint * pt) {
+    return self->SetMargins(*pt);
+}
+bool wxTextEntry_SetMargins1(wxTextEntry * self, wxCoord left, wxCoord top) {
+    return self->SetMargins(left, top);
+}
+wxPoint *wxTextEntry_GetMargins(const wxTextEntry * self) {
+    return new wxPoint(self->GetMargins());
+}
+void wxTextEntry_SetValue(wxTextEntry * self, const wxString * value) {
+    return self->SetValue(*value);
+}
+void wxTextEntry_Undo(wxTextEntry * self) {
+    return self->Undo();
+}
+void wxTextEntry_WriteText(wxTextEntry * self, const wxString * text) {
+    return self->WriteText(*text);
 }
 
 // CLASS: wxToolBar

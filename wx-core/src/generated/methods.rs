@@ -989,6 +989,222 @@ pub trait IconMethods: GDIObjectMethods {
     // BLOCKED: fn operator=()
 }
 
+// wxItemContainer
+pub trait ItemContainerMethods: ItemContainerImmutableMethods {
+    fn as_item_container(&self) -> *mut c_void;
+    fn append_str(&self, item: &str) -> c_int {
+        unsafe {
+            let item = wx_base::wx_string_from(item);
+            ffi::wxItemContainer_Append(self.as_item_container(), item)
+        }
+    }
+    fn append_str_void(&self, item: &str, client_data: *mut c_void) -> c_int {
+        unsafe {
+            let item = wx_base::wx_string_from(item);
+            ffi::wxItemContainer_Append1(self.as_item_container(), item, client_data)
+        }
+    }
+    fn append_str_clientdata(&self, item: &str, client_data: *mut c_void) -> c_int {
+        unsafe {
+            let item = wx_base::wx_string_from(item);
+            ffi::wxItemContainer_Append2(self.as_item_container(), item, client_data)
+        }
+    }
+    fn append_arraystring<A: ArrayStringMethods>(&self, items: &A) -> c_int {
+        unsafe {
+            let items = items.as_ptr();
+            ffi::wxItemContainer_Append3(self.as_item_container(), items)
+        }
+    }
+    // BLOCKED: fn Append4()
+    fn append_arraystring_void<A: ArrayStringMethods>(
+        &self,
+        items: &A,
+        client_data: *mut c_void,
+    ) -> c_int {
+        unsafe {
+            let items = items.as_ptr();
+            ffi::wxItemContainer_Append5(self.as_item_container(), items, client_data)
+        }
+    }
+    fn append_arraystring_clientdata<A: ArrayStringMethods>(
+        &self,
+        items: &A,
+        client_data: *mut c_void,
+    ) -> c_int {
+        unsafe {
+            let items = items.as_ptr();
+            ffi::wxItemContainer_Append6(self.as_item_container(), items, client_data)
+        }
+    }
+    // BLOCKED: fn Append7()
+    // BLOCKED: fn Append8()
+    // BLOCKED: fn Append9()
+    fn clear(&self) {
+        unsafe { ffi::wxItemContainer_Clear(self.as_item_container()) }
+    }
+    fn delete(&self, n: c_uint) {
+        unsafe { ffi::wxItemContainer_Delete(self.as_item_container(), n) }
+    }
+    fn detach_client_object(&self, n: c_uint) -> *mut c_void {
+        unsafe { ffi::wxItemContainer_DetachClientObject(self.as_item_container(), n) }
+    }
+    fn has_client_data(&self) -> bool {
+        unsafe { ffi::wxItemContainer_HasClientData(self.as_item_container()) }
+    }
+    fn has_client_object_data(&self) -> bool {
+        unsafe { ffi::wxItemContainer_HasClientObjectData(self.as_item_container()) }
+    }
+    fn has_client_untyped_data(&self) -> bool {
+        unsafe { ffi::wxItemContainer_HasClientUntypedData(self.as_item_container()) }
+    }
+    fn get_client_data(&self, n: c_uint) -> *mut c_void {
+        unsafe { ffi::wxItemContainer_GetClientData(self.as_item_container(), n) }
+    }
+    fn get_client_object(&self, n: c_uint) -> *mut c_void {
+        unsafe { ffi::wxItemContainer_GetClientObject(self.as_item_container(), n) }
+    }
+    fn set_client_data(&self, n: c_uint, data: *mut c_void) {
+        unsafe { ffi::wxItemContainer_SetClientData(self.as_item_container(), n, data) }
+    }
+    fn set_client_object(&self, n: c_uint, data: *mut c_void) {
+        unsafe { ffi::wxItemContainer_SetClientObject(self.as_item_container(), n, data) }
+    }
+    fn insert_str(&self, item: &str, pos: c_uint) -> c_int {
+        unsafe {
+            let item = wx_base::wx_string_from(item);
+            ffi::wxItemContainer_Insert(self.as_item_container(), item, pos)
+        }
+    }
+    fn insert_str_void(&self, item: &str, pos: c_uint, client_data: *mut c_void) -> c_int {
+        unsafe {
+            let item = wx_base::wx_string_from(item);
+            ffi::wxItemContainer_Insert1(self.as_item_container(), item, pos, client_data)
+        }
+    }
+    fn insert_str_clientdata(&self, item: &str, pos: c_uint, client_data: *mut c_void) -> c_int {
+        unsafe {
+            let item = wx_base::wx_string_from(item);
+            ffi::wxItemContainer_Insert2(self.as_item_container(), item, pos, client_data)
+        }
+    }
+    fn insert_arraystring<A: ArrayStringMethods>(&self, items: &A, pos: c_uint) -> c_int {
+        unsafe {
+            let items = items.as_ptr();
+            ffi::wxItemContainer_Insert3(self.as_item_container(), items, pos)
+        }
+    }
+    // BLOCKED: fn Insert4()
+    fn insert_arraystring_void<A: ArrayStringMethods>(
+        &self,
+        items: &A,
+        pos: c_uint,
+        client_data: *mut c_void,
+    ) -> c_int {
+        unsafe {
+            let items = items.as_ptr();
+            ffi::wxItemContainer_Insert5(self.as_item_container(), items, pos, client_data)
+        }
+    }
+    fn insert_arraystring_clientdata<A: ArrayStringMethods>(
+        &self,
+        items: &A,
+        pos: c_uint,
+        client_data: *mut c_void,
+    ) -> c_int {
+        unsafe {
+            let items = items.as_ptr();
+            ffi::wxItemContainer_Insert6(self.as_item_container(), items, pos, client_data)
+        }
+    }
+    // BLOCKED: fn Insert7()
+    // BLOCKED: fn Insert8()
+    // BLOCKED: fn Insert9()
+    fn set<A: ArrayStringMethods>(&self, items: &A) {
+        unsafe {
+            let items = items.as_ptr();
+            ffi::wxItemContainer_Set(self.as_item_container(), items)
+        }
+    }
+    // BLOCKED: fn Set1()
+    fn set_void<A: ArrayStringMethods>(&self, items: &A, client_data: *mut c_void) {
+        unsafe {
+            let items = items.as_ptr();
+            ffi::wxItemContainer_Set2(self.as_item_container(), items, client_data)
+        }
+    }
+    fn set_clientdata<A: ArrayStringMethods>(&self, items: &A, client_data: *mut c_void) {
+        unsafe {
+            let items = items.as_ptr();
+            ffi::wxItemContainer_Set3(self.as_item_container(), items, client_data)
+        }
+    }
+    // BLOCKED: fn Set4()
+    // BLOCKED: fn Set5()
+    // BLOCKED: fn Set6()
+}
+
+// wxItemContainerImmutable
+pub trait ItemContainerImmutableMethods: WxRustMethods {
+    fn as_item_container_immutable(&self) -> *mut c_void;
+    fn set_selection(&self, n: c_int) {
+        unsafe { ffi::wxItemContainerImmutable_SetSelection(self.as_item_container_immutable(), n) }
+    }
+    fn get_selection(&self) -> c_int {
+        unsafe { ffi::wxItemContainerImmutable_GetSelection(self.as_item_container_immutable()) }
+    }
+    fn set_string_selection(&self, string: &str) -> bool {
+        unsafe {
+            let string = wx_base::wx_string_from(string);
+            ffi::wxItemContainerImmutable_SetStringSelection(
+                self.as_item_container_immutable(),
+                string,
+            )
+        }
+    }
+    fn get_string_selection(&self) -> String {
+        unsafe {
+            wx_base::from_wx_string(ffi::wxItemContainerImmutable_GetStringSelection(
+                self.as_item_container_immutable(),
+            ))
+        }
+    }
+    fn select(&self, n: c_int) {
+        unsafe { ffi::wxItemContainerImmutable_Select(self.as_item_container_immutable(), n) }
+    }
+    fn get_count(&self) -> c_uint {
+        unsafe { ffi::wxItemContainerImmutable_GetCount(self.as_item_container_immutable()) }
+    }
+    fn is_empty(&self) -> bool {
+        unsafe { ffi::wxItemContainerImmutable_IsEmpty(self.as_item_container_immutable()) }
+    }
+    fn get_string(&self, n: c_uint) -> String {
+        unsafe {
+            wx_base::from_wx_string(ffi::wxItemContainerImmutable_GetString(
+                self.as_item_container_immutable(),
+                n,
+            ))
+        }
+    }
+    // BLOCKED: fn GetStrings()
+    fn set_string(&self, n: c_uint, string: &str) {
+        unsafe {
+            let string = wx_base::wx_string_from(string);
+            ffi::wxItemContainerImmutable_SetString(self.as_item_container_immutable(), n, string)
+        }
+    }
+    fn find_string(&self, string: &str, case_sensitive: bool) -> c_int {
+        unsafe {
+            let string = wx_base::wx_string_from(string);
+            ffi::wxItemContainerImmutable_FindString(
+                self.as_item_container_immutable(),
+                string,
+                case_sensitive,
+            )
+        }
+    }
+}
+
 // wxListBox
 pub trait ListBoxMethods: ControlMethods {
     // DTOR: fn ~wxListBox()
@@ -3743,6 +3959,161 @@ pub trait TextCtrlMethods: ControlMethods {
     // BLOCKED: fn operator<<4()
     // NOT_SUPPORTED: fn operator<<5()
     // NOT_SUPPORTED: fn operator<<6()
+}
+
+// wxTextEntry
+pub trait TextEntryMethods: WxRustMethods {
+    fn as_text_entry(&self) -> *mut c_void;
+    fn append_text(&self, text: &str) {
+        unsafe {
+            let text = wx_base::wx_string_from(text);
+            ffi::wxTextEntry_AppendText(self.as_text_entry(), text)
+        }
+    }
+    fn auto_complete_arraystring<A: ArrayStringMethods>(&self, choices: &A) -> bool {
+        unsafe {
+            let choices = choices.as_ptr();
+            ffi::wxTextEntry_AutoComplete(self.as_text_entry(), choices)
+        }
+    }
+    fn auto_complete_textcompleter(&self, completer: *mut c_void) -> bool {
+        unsafe { ffi::wxTextEntry_AutoComplete1(self.as_text_entry(), completer) }
+    }
+    fn auto_complete_file_names(&self) -> bool {
+        unsafe { ffi::wxTextEntry_AutoCompleteFileNames(self.as_text_entry()) }
+    }
+    fn auto_complete_directories(&self) -> bool {
+        unsafe { ffi::wxTextEntry_AutoCompleteDirectories(self.as_text_entry()) }
+    }
+    fn can_copy(&self) -> bool {
+        unsafe { ffi::wxTextEntry_CanCopy(self.as_text_entry()) }
+    }
+    fn can_cut(&self) -> bool {
+        unsafe { ffi::wxTextEntry_CanCut(self.as_text_entry()) }
+    }
+    fn can_paste(&self) -> bool {
+        unsafe { ffi::wxTextEntry_CanPaste(self.as_text_entry()) }
+    }
+    fn can_redo(&self) -> bool {
+        unsafe { ffi::wxTextEntry_CanRedo(self.as_text_entry()) }
+    }
+    fn can_undo(&self) -> bool {
+        unsafe { ffi::wxTextEntry_CanUndo(self.as_text_entry()) }
+    }
+    fn change_value(&self, value: &str) {
+        unsafe {
+            let value = wx_base::wx_string_from(value);
+            ffi::wxTextEntry_ChangeValue(self.as_text_entry(), value)
+        }
+    }
+    fn clear(&self) {
+        unsafe { ffi::wxTextEntry_Clear(self.as_text_entry()) }
+    }
+    fn copy(&self) {
+        unsafe { ffi::wxTextEntry_Copy(self.as_text_entry()) }
+    }
+    fn cut(&self) {
+        unsafe { ffi::wxTextEntry_Cut(self.as_text_entry()) }
+    }
+    fn force_upper(&self) {
+        unsafe { ffi::wxTextEntry_ForceUpper(self.as_text_entry()) }
+    }
+    fn get_insertion_point(&self) -> c_long {
+        unsafe { ffi::wxTextEntry_GetInsertionPoint(self.as_text_entry()) }
+    }
+    // NOT_SUPPORTED: fn GetLastPosition()
+    fn get_range(&self, from: c_long, to: c_long) -> String {
+        unsafe {
+            wx_base::from_wx_string(ffi::wxTextEntry_GetRange(self.as_text_entry(), from, to))
+        }
+    }
+    fn get_selection(&self, from: *mut c_void, to: *mut c_void) {
+        unsafe { ffi::wxTextEntry_GetSelection(self.as_text_entry(), from, to) }
+    }
+    fn get_string_selection(&self) -> String {
+        unsafe {
+            wx_base::from_wx_string(ffi::wxTextEntry_GetStringSelection(self.as_text_entry()))
+        }
+    }
+    fn get_value(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxTextEntry_GetValue(self.as_text_entry())) }
+    }
+    fn is_editable(&self) -> bool {
+        unsafe { ffi::wxTextEntry_IsEditable(self.as_text_entry()) }
+    }
+    fn is_empty(&self) -> bool {
+        unsafe { ffi::wxTextEntry_IsEmpty(self.as_text_entry()) }
+    }
+    fn paste(&self) {
+        unsafe { ffi::wxTextEntry_Paste(self.as_text_entry()) }
+    }
+    fn redo(&self) {
+        unsafe { ffi::wxTextEntry_Redo(self.as_text_entry()) }
+    }
+    fn remove(&self, from: c_long, to: c_long) {
+        unsafe { ffi::wxTextEntry_Remove(self.as_text_entry(), from, to) }
+    }
+    fn replace(&self, from: c_long, to: c_long, value: &str) {
+        unsafe {
+            let value = wx_base::wx_string_from(value);
+            ffi::wxTextEntry_Replace(self.as_text_entry(), from, to, value)
+        }
+    }
+    fn set_editable(&self, editable: bool) {
+        unsafe { ffi::wxTextEntry_SetEditable(self.as_text_entry(), editable) }
+    }
+    fn set_insertion_point(&self, pos: c_long) {
+        unsafe { ffi::wxTextEntry_SetInsertionPoint(self.as_text_entry(), pos) }
+    }
+    fn set_insertion_point_end(&self) {
+        unsafe { ffi::wxTextEntry_SetInsertionPointEnd(self.as_text_entry()) }
+    }
+    // NOT_SUPPORTED: fn SetMaxLength()
+    fn set_selection(&self, from: c_long, to: c_long) {
+        unsafe { ffi::wxTextEntry_SetSelection(self.as_text_entry(), from, to) }
+    }
+    fn select_all(&self) {
+        unsafe { ffi::wxTextEntry_SelectAll(self.as_text_entry()) }
+    }
+    fn select_none(&self) {
+        unsafe { ffi::wxTextEntry_SelectNone(self.as_text_entry()) }
+    }
+    fn set_hint(&self, hint: &str) -> bool {
+        unsafe {
+            let hint = wx_base::wx_string_from(hint);
+            ffi::wxTextEntry_SetHint(self.as_text_entry(), hint)
+        }
+    }
+    fn get_hint(&self) -> String {
+        unsafe { wx_base::from_wx_string(ffi::wxTextEntry_GetHint(self.as_text_entry())) }
+    }
+    fn set_margins_point<P: PointMethods>(&self, pt: &P) -> bool {
+        unsafe {
+            let pt = pt.as_ptr();
+            ffi::wxTextEntry_SetMargins(self.as_text_entry(), pt)
+        }
+    }
+    fn set_margins_coord(&self, left: c_int, top: c_int) -> bool {
+        unsafe { ffi::wxTextEntry_SetMargins1(self.as_text_entry(), left, top) }
+    }
+    fn get_margins(&self) -> Point {
+        unsafe { PointIsOwned(ffi::wxTextEntry_GetMargins(self.as_text_entry())) }
+    }
+    fn set_value(&self, value: &str) {
+        unsafe {
+            let value = wx_base::wx_string_from(value);
+            ffi::wxTextEntry_SetValue(self.as_text_entry(), value)
+        }
+    }
+    fn undo(&self) {
+        unsafe { ffi::wxTextEntry_Undo(self.as_text_entry()) }
+    }
+    fn write_text(&self, text: &str) {
+        unsafe {
+            let text = wx_base::wx_string_from(text);
+            ffi::wxTextEntry_WriteText(self.as_text_entry(), text)
+        }
+    }
 }
 
 // wxToolBar

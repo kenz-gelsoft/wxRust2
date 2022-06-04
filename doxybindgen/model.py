@@ -229,9 +229,10 @@ class Param:
     def marshal(self):
         return self.type.marshal(self)
 
-    def rust_ffi_ref(self, rename=None, is_mut_self=False):
+    def rust_ffi_ref(self, rename=None, as_mixin=None):
         name = rename if rename else self.name
-        return '%s.as_ptr()' % (name,)
+        as_ptr = as_mixin if as_mixin else 'as_ptr'
+        return '%s.%s()' % (name, as_ptr)
 
 
 class RustType:

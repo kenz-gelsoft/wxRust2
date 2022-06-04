@@ -598,6 +598,10 @@ impl<const OWNED: bool> Drop for IconIsOwned<OWNED> {
     }
 }
 
+// wxItemContainer
+
+// wxItemContainerImmutable
+
 // wxListBox
 wx_class! { ListBox =
     ListBoxIsOwned<true>(wxListBox) impl
@@ -1314,6 +1318,8 @@ impl<const OWNED: bool> TextCtrlIsOwned<OWNED> {
         None
     }
 }
+
+// wxTextEntry
 
 // wxToolBar
 wx_class! { ToolBar =

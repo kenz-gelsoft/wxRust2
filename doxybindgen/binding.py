@@ -29,6 +29,9 @@ class RustClassBinding:
             for line in self._trait_with_methods():
                 yield line
         else:
+            if self.__model.config.get('as_mixin'):
+                # Don't generate impl if mixin class
+                return
             unprefixed = self.__model.unprefixed()
             yield 'wx_class! { %s = ' % (unprefixed,)
             yield '    %sIsOwned<true>(%s) impl' % (
@@ -110,6 +113,11 @@ class RustClassBinding:
             self.__model.unprefixed(),
             base[2:],
         )
+        as_mixin = self.__model.config.get('as_mixin')
+        if as_mixin:
+            yield '    fn %s(&self) -> *mut c_void;' % (
+                as_mixin,
+            )
         ancestors = self.__model.manager.ancestors_of(self.__model)
         for method in self.__methods:
             if method.is_ctor:
@@ -302,9 +310,8 @@ class RustMethodBinding:
         name = prefixed(self.__model.name(for_ffi=True), with_ffi=True)
         self_to_insert = None
         if self.__model.is_instance_method:
-            is_mut_self = not self.__model.const
             self_param = self.__self_param.rust_ffi_ref(
-                is_mut_self=is_mut_self,
+                as_mixin=self.__model.cls.config.get('as_mixin'),
             )
             self_to_insert = self_param
         call = '%s(%s)' % (

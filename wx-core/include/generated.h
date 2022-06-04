@@ -246,6 +246,47 @@ void wxIcon_SetDepth(wxIcon * self, int depth);
 void wxIcon_SetHeight(wxIcon * self, int height);
 void wxIcon_SetWidth(wxIcon * self, int width);
 
+// CLASS: wxItemContainer
+void wxItemContainer_delete(wxItemContainer *self);
+int wxItemContainer_Append(wxItemContainer * self, const wxString * item);
+int wxItemContainer_Append1(wxItemContainer * self, const wxString * item, void * client_data);
+int wxItemContainer_Append2(wxItemContainer * self, const wxString * item, wxClientData * client_data);
+int wxItemContainer_Append3(wxItemContainer * self, const wxArrayString * items);
+int wxItemContainer_Append5(wxItemContainer * self, const wxArrayString * items, void ** client_data);
+int wxItemContainer_Append6(wxItemContainer * self, const wxArrayString * items, wxClientData ** client_data);
+void wxItemContainer_Clear(wxItemContainer * self);
+void wxItemContainer_Delete(wxItemContainer * self, unsigned int n);
+wxClientData * wxItemContainer_DetachClientObject(wxItemContainer * self, unsigned int n);
+bool wxItemContainer_HasClientData(const wxItemContainer * self);
+bool wxItemContainer_HasClientObjectData(const wxItemContainer * self);
+bool wxItemContainer_HasClientUntypedData(const wxItemContainer * self);
+void * wxItemContainer_GetClientData(const wxItemContainer * self, unsigned int n);
+wxClientData * wxItemContainer_GetClientObject(const wxItemContainer * self, unsigned int n);
+void wxItemContainer_SetClientData(wxItemContainer * self, unsigned int n, void * data);
+void wxItemContainer_SetClientObject(wxItemContainer * self, unsigned int n, wxClientData * data);
+int wxItemContainer_Insert(wxItemContainer * self, const wxString * item, unsigned int pos);
+int wxItemContainer_Insert1(wxItemContainer * self, const wxString * item, unsigned int pos, void * client_data);
+int wxItemContainer_Insert2(wxItemContainer * self, const wxString * item, unsigned int pos, wxClientData * client_data);
+int wxItemContainer_Insert3(wxItemContainer * self, const wxArrayString * items, unsigned int pos);
+int wxItemContainer_Insert5(wxItemContainer * self, const wxArrayString * items, unsigned int pos, void ** client_data);
+int wxItemContainer_Insert6(wxItemContainer * self, const wxArrayString * items, unsigned int pos, wxClientData ** client_data);
+void wxItemContainer_Set(wxItemContainer * self, const wxArrayString * items);
+void wxItemContainer_Set2(wxItemContainer * self, const wxArrayString * items, void ** client_data);
+void wxItemContainer_Set3(wxItemContainer * self, const wxArrayString * items, wxClientData ** client_data);
+
+// CLASS: wxItemContainerImmutable
+void wxItemContainerImmutable_delete(wxItemContainerImmutable *self);
+void wxItemContainerImmutable_SetSelection(wxItemContainerImmutable * self, int n);
+int wxItemContainerImmutable_GetSelection(const wxItemContainerImmutable * self);
+bool wxItemContainerImmutable_SetStringSelection(wxItemContainerImmutable * self, const wxString * string);
+wxString *wxItemContainerImmutable_GetStringSelection(const wxItemContainerImmutable * self);
+void wxItemContainerImmutable_Select(wxItemContainerImmutable * self, int n);
+unsigned int wxItemContainerImmutable_GetCount(const wxItemContainerImmutable * self);
+bool wxItemContainerImmutable_IsEmpty(const wxItemContainerImmutable * self);
+wxString *wxItemContainerImmutable_GetString(const wxItemContainerImmutable * self, unsigned int n);
+void wxItemContainerImmutable_SetString(wxItemContainerImmutable * self, unsigned int n, const wxString * string);
+int wxItemContainerImmutable_FindString(const wxItemContainerImmutable * self, const wxString * string, bool case_sensitive);
+
 // CLASS: wxListBox
 wxListBox *wxListBox_new();
 wxListBox *wxListBox_new2(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
@@ -781,6 +822,51 @@ void wxTextCtrl_SetModified(wxTextCtrl * self, bool modified);
 bool wxTextCtrl_SetStyle(wxTextCtrl * self, long start, long end, const wxTextAttr * style);
 void wxTextCtrl_ShowPosition(wxTextCtrl * self, long pos);
 long wxTextCtrl_XYToPosition(const wxTextCtrl * self, long x, long y);
+
+// CLASS: wxTextEntry
+void wxTextEntry_delete(wxTextEntry *self);
+void wxTextEntry_AppendText(wxTextEntry * self, const wxString * text);
+bool wxTextEntry_AutoComplete(wxTextEntry * self, const wxArrayString * choices);
+bool wxTextEntry_AutoComplete1(wxTextEntry * self, wxTextCompleter * completer);
+bool wxTextEntry_AutoCompleteFileNames(wxTextEntry * self);
+bool wxTextEntry_AutoCompleteDirectories(wxTextEntry * self);
+bool wxTextEntry_CanCopy(const wxTextEntry * self);
+bool wxTextEntry_CanCut(const wxTextEntry * self);
+bool wxTextEntry_CanPaste(const wxTextEntry * self);
+bool wxTextEntry_CanRedo(const wxTextEntry * self);
+bool wxTextEntry_CanUndo(const wxTextEntry * self);
+void wxTextEntry_ChangeValue(wxTextEntry * self, const wxString * value);
+void wxTextEntry_Clear(wxTextEntry * self);
+void wxTextEntry_Copy(wxTextEntry * self);
+void wxTextEntry_Cut(wxTextEntry * self);
+#if wxCHECK_VERSION(3, 1, 0)
+void wxTextEntry_ForceUpper(wxTextEntry * self);
+#endif
+long wxTextEntry_GetInsertionPoint(const wxTextEntry * self);
+wxString *wxTextEntry_GetRange(const wxTextEntry * self, long from, long to);
+void wxTextEntry_GetSelection(const wxTextEntry * self, long * from, long * to);
+wxString *wxTextEntry_GetStringSelection(const wxTextEntry * self);
+wxString *wxTextEntry_GetValue(const wxTextEntry * self);
+bool wxTextEntry_IsEditable(const wxTextEntry * self);
+bool wxTextEntry_IsEmpty(const wxTextEntry * self);
+void wxTextEntry_Paste(wxTextEntry * self);
+void wxTextEntry_Redo(wxTextEntry * self);
+void wxTextEntry_Remove(wxTextEntry * self, long from, long to);
+void wxTextEntry_Replace(wxTextEntry * self, long from, long to, const wxString * value);
+void wxTextEntry_SetEditable(wxTextEntry * self, bool editable);
+void wxTextEntry_SetInsertionPoint(wxTextEntry * self, long pos);
+void wxTextEntry_SetInsertionPointEnd(wxTextEntry * self);
+void wxTextEntry_SetSelection(wxTextEntry * self, long from, long to);
+void wxTextEntry_SelectAll(wxTextEntry * self);
+void wxTextEntry_SelectNone(wxTextEntry * self);
+bool wxTextEntry_SetHint(wxTextEntry * self, const wxString * hint);
+wxString *wxTextEntry_GetHint(const wxTextEntry * self);
+bool wxTextEntry_SetMargins(wxTextEntry * self, const wxPoint * pt);
+bool wxTextEntry_SetMargins1(wxTextEntry * self, wxCoord left, wxCoord top);
+wxPoint *wxTextEntry_GetMargins(const wxTextEntry * self);
+void wxTextEntry_SetValue(wxTextEntry * self, const wxString * value);
+void wxTextEntry_Undo(wxTextEntry * self);
+void wxTextEntry_WriteText(wxTextEntry * self, const wxString * text);
 
 // CLASS: wxToolBar
 wxToolBar *wxToolBar_new();
