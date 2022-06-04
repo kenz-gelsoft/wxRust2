@@ -598,6 +598,8 @@ impl<const OWNED: bool> Drop for IconIsOwned<OWNED> {
     }
 }
 
+// wxItemContainer
+
 // wxItemContainerImmutable
 
 // wxListBox

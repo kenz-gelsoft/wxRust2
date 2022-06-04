@@ -18,7 +18,7 @@ wxml_files = [
     'wxml/classwx_frame.xml',
     'wxml/classwx_g_d_i_object.xml',
     'wxml/classwx_icon.xml',
-    #'wxml/classwx_item_container.xml',
+    'wxml/classwx_item_container.xml',
     'wxml/classwx_item_container_immutable.xml',
     'wxml/classwx_list_box.xml',
     'wxml/classwx_menu.xml',
@@ -140,22 +140,23 @@ blocklist = [
 blocklist = [
     'operator=',
 ]
-#[types.wxItemContainer]
-#blocklist = [
-#    'Append4',
-#    'Insert4',
-#    'Set1',
-#    # TODO: support `unsigned int` in overload renaming
-#    'Append7',
-#    'Append8',
-#    'Append9',
-#    'Insert7',
-#    'Insert8',
-#    'Insert9',
-#    'Set4',
-#    'Set5',
-#    'Set6',
-#]
+[types.wxItemContainer]
+as_mixin = 'as_item_container'
+blocklist = [
+    'Append4',
+    'Insert4',
+    'Set1',
+    # TODO: support `unsigned int` in overload renaming
+    'Append7',
+    'Append8',
+    'Append9',
+    'Insert7',
+    'Insert8',
+    'Insert9',
+    'Set4',
+    'Set5',
+    'Set6',
+]
 [types.wxItemContainerImmutable]
 blocklist = [
     'GetStrings',

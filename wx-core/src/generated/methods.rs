@@ -989,6 +989,161 @@ pub trait IconMethods: GDIObjectMethods {
     // BLOCKED: fn operator=()
 }
 
+// wxItemContainer
+pub trait ItemContainerMethods: ItemContainerImmutableMethods {
+    fn as_item_container(&self) -> *mut c_void;
+    fn append_str(&self, item: &str) -> c_int {
+        unsafe {
+            let item = wx_base::wx_string_from(item);
+            ffi::wxItemContainer_Append(self.as_item_container(), item)
+        }
+    }
+    fn append_str_void(&self, item: &str, client_data: *mut c_void) -> c_int {
+        unsafe {
+            let item = wx_base::wx_string_from(item);
+            ffi::wxItemContainer_Append1(self.as_item_container(), item, client_data)
+        }
+    }
+    fn append_str_clientdata(&self, item: &str, client_data: *mut c_void) -> c_int {
+        unsafe {
+            let item = wx_base::wx_string_from(item);
+            ffi::wxItemContainer_Append2(self.as_item_container(), item, client_data)
+        }
+    }
+    fn append_arraystring<A: ArrayStringMethods>(&self, items: &A) -> c_int {
+        unsafe {
+            let items = items.as_ptr();
+            ffi::wxItemContainer_Append3(self.as_item_container(), items)
+        }
+    }
+    // BLOCKED: fn Append4()
+    fn append_arraystring_void<A: ArrayStringMethods>(
+        &self,
+        items: &A,
+        client_data: *mut c_void,
+    ) -> c_int {
+        unsafe {
+            let items = items.as_ptr();
+            ffi::wxItemContainer_Append5(self.as_item_container(), items, client_data)
+        }
+    }
+    fn append_arraystring_clientdata<A: ArrayStringMethods>(
+        &self,
+        items: &A,
+        client_data: *mut c_void,
+    ) -> c_int {
+        unsafe {
+            let items = items.as_ptr();
+            ffi::wxItemContainer_Append6(self.as_item_container(), items, client_data)
+        }
+    }
+    // BLOCKED: fn Append7()
+    // BLOCKED: fn Append8()
+    // BLOCKED: fn Append9()
+    fn clear(&self) {
+        unsafe { ffi::wxItemContainer_Clear(self.as_item_container()) }
+    }
+    fn delete(&self, n: c_uint) {
+        unsafe { ffi::wxItemContainer_Delete(self.as_item_container(), n) }
+    }
+    fn detach_client_object(&self, n: c_uint) -> *mut c_void {
+        unsafe { ffi::wxItemContainer_DetachClientObject(self.as_item_container(), n) }
+    }
+    fn has_client_data(&self) -> bool {
+        unsafe { ffi::wxItemContainer_HasClientData(self.as_item_container()) }
+    }
+    fn has_client_object_data(&self) -> bool {
+        unsafe { ffi::wxItemContainer_HasClientObjectData(self.as_item_container()) }
+    }
+    fn has_client_untyped_data(&self) -> bool {
+        unsafe { ffi::wxItemContainer_HasClientUntypedData(self.as_item_container()) }
+    }
+    fn get_client_data(&self, n: c_uint) -> *mut c_void {
+        unsafe { ffi::wxItemContainer_GetClientData(self.as_item_container(), n) }
+    }
+    fn get_client_object(&self, n: c_uint) -> *mut c_void {
+        unsafe { ffi::wxItemContainer_GetClientObject(self.as_item_container(), n) }
+    }
+    fn set_client_data(&self, n: c_uint, data: *mut c_void) {
+        unsafe { ffi::wxItemContainer_SetClientData(self.as_item_container(), n, data) }
+    }
+    fn set_client_object(&self, n: c_uint, data: *mut c_void) {
+        unsafe { ffi::wxItemContainer_SetClientObject(self.as_item_container(), n, data) }
+    }
+    fn insert_str(&self, item: &str, pos: c_uint) -> c_int {
+        unsafe {
+            let item = wx_base::wx_string_from(item);
+            ffi::wxItemContainer_Insert(self.as_item_container(), item, pos)
+        }
+    }
+    fn insert_str_void(&self, item: &str, pos: c_uint, client_data: *mut c_void) -> c_int {
+        unsafe {
+            let item = wx_base::wx_string_from(item);
+            ffi::wxItemContainer_Insert1(self.as_item_container(), item, pos, client_data)
+        }
+    }
+    fn insert_str_clientdata(&self, item: &str, pos: c_uint, client_data: *mut c_void) -> c_int {
+        unsafe {
+            let item = wx_base::wx_string_from(item);
+            ffi::wxItemContainer_Insert2(self.as_item_container(), item, pos, client_data)
+        }
+    }
+    fn insert_arraystring<A: ArrayStringMethods>(&self, items: &A, pos: c_uint) -> c_int {
+        unsafe {
+            let items = items.as_ptr();
+            ffi::wxItemContainer_Insert3(self.as_item_container(), items, pos)
+        }
+    }
+    // BLOCKED: fn Insert4()
+    fn insert_arraystring_void<A: ArrayStringMethods>(
+        &self,
+        items: &A,
+        pos: c_uint,
+        client_data: *mut c_void,
+    ) -> c_int {
+        unsafe {
+            let items = items.as_ptr();
+            ffi::wxItemContainer_Insert5(self.as_item_container(), items, pos, client_data)
+        }
+    }
+    fn insert_arraystring_clientdata<A: ArrayStringMethods>(
+        &self,
+        items: &A,
+        pos: c_uint,
+        client_data: *mut c_void,
+    ) -> c_int {
+        unsafe {
+            let items = items.as_ptr();
+            ffi::wxItemContainer_Insert6(self.as_item_container(), items, pos, client_data)
+        }
+    }
+    // BLOCKED: fn Insert7()
+    // BLOCKED: fn Insert8()
+    // BLOCKED: fn Insert9()
+    fn set<A: ArrayStringMethods>(&self, items: &A) {
+        unsafe {
+            let items = items.as_ptr();
+            ffi::wxItemContainer_Set(self.as_item_container(), items)
+        }
+    }
+    // BLOCKED: fn Set1()
+    fn set_void<A: ArrayStringMethods>(&self, items: &A, client_data: *mut c_void) {
+        unsafe {
+            let items = items.as_ptr();
+            ffi::wxItemContainer_Set2(self.as_item_container(), items, client_data)
+        }
+    }
+    fn set_clientdata<A: ArrayStringMethods>(&self, items: &A, client_data: *mut c_void) {
+        unsafe {
+            let items = items.as_ptr();
+            ffi::wxItemContainer_Set3(self.as_item_container(), items, client_data)
+        }
+    }
+    // BLOCKED: fn Set4()
+    // BLOCKED: fn Set5()
+    // BLOCKED: fn Set6()
+}
+
 // wxItemContainerImmutable
 pub trait ItemContainerImmutableMethods: WxRustMethods {
     fn as_item_container_immutable(&self) -> *mut c_void;
