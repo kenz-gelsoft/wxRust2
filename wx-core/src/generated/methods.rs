@@ -3747,6 +3747,7 @@ pub trait TextCtrlMethods: ControlMethods {
 
 // wxTextEntry
 pub trait TextEntryMethods: WxRustMethods {
+    fn as_text_entry(&self) -> *mut c_void;
     fn append_text(&self, text: &str) {
         unsafe {
             let text = wx_base::wx_string_from(text);
