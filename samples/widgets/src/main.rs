@@ -120,7 +120,7 @@ impl WidgetsFrame {
             base,
             panel,
             book,
-            pages: vec![choice_page, button_page, check_box_page],
+            pages: vec![button_page, check_box_page, choice_page],
         };
         frame.on_create();
 

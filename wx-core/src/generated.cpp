@@ -651,6 +651,9 @@ int wxListBox_HitTest(const wxListBox * self, const wxPoint * point) {
 int wxListBox_HitTest1(const wxListBox * self, int x, int y) {
     return self->HitTest(x, y);
 }
+void wxListBox_InsertItems1(wxListBox * self, const wxArrayString * items, unsigned int pos) {
+    return self->InsertItems(*items, pos);
+}
 bool wxListBox_IsSelected(const wxListBox * self, int n) {
     return self->IsSelected(n);
 }
@@ -1129,8 +1132,35 @@ wxRadioBox *wxRadioBox_new2(wxWindow * parent, wxWindowID id, const wxString * l
 bool wxRadioBox_Create1(wxRadioBox * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, int major_dimension, long style, const wxValidator * validator, const wxString * name) {
     return self->Create(parent, id, *label, *pos, *size, *choices, major_dimension, style, *validator, *name);
 }
+unsigned int wxRadioBox_GetColumnCount(const wxRadioBox * self) {
+    return self->GetColumnCount();
+}
 int wxRadioBox_GetItemFromPoint(const wxRadioBox * self, const wxPoint * pt) {
     return self->GetItemFromPoint(*pt);
+}
+wxString *wxRadioBox_GetItemHelpText(const wxRadioBox * self, unsigned int item) {
+    return new wxString(self->GetItemHelpText(item));
+}
+wxToolTip * wxRadioBox_GetItemToolTip(const wxRadioBox * self, unsigned int item) {
+    return self->GetItemToolTip(item);
+}
+unsigned int wxRadioBox_GetRowCount(const wxRadioBox * self) {
+    return self->GetRowCount();
+}
+bool wxRadioBox_IsItemEnabled(const wxRadioBox * self, unsigned int n) {
+    return self->IsItemEnabled(n);
+}
+bool wxRadioBox_IsItemShown(const wxRadioBox * self, unsigned int n) {
+    return self->IsItemShown(n);
+}
+void wxRadioBox_SetItemHelpText(wxRadioBox * self, unsigned int item, const wxString * helptext) {
+    return self->SetItemHelpText(item, *helptext);
+}
+void wxRadioBox_SetItemToolTip(wxRadioBox * self, unsigned int item, const wxString * text) {
+    return self->SetItemToolTip(item, *text);
+}
+bool wxRadioBox_Show(wxRadioBox * self, unsigned int item, bool show) {
+    return self->Show(item, show);
 }
 
 // CLASS: wxRect

@@ -256,6 +256,7 @@ bool wxListBox_SetStringSelection1(wxListBox * self, const wxString * s);
 int wxListBox_GetSelections(const wxListBox * self, wxArrayInt * selections);
 int wxListBox_HitTest(const wxListBox * self, const wxPoint * point);
 int wxListBox_HitTest1(const wxListBox * self, int x, int y);
+void wxListBox_InsertItems1(wxListBox * self, const wxArrayString * items, unsigned int pos);
 bool wxListBox_IsSelected(const wxListBox * self, int n);
 void wxListBox_SetFirstItem(wxListBox * self, int n);
 void wxListBox_SetFirstItem1(wxListBox * self, const wxString * string);
@@ -438,7 +439,16 @@ wxPoint *wxPoint_new2(const wxRealPoint * pt);
 wxRadioBox *wxRadioBox_new();
 wxRadioBox *wxRadioBox_new2(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, int major_dimension, long style, const wxValidator * validator, const wxString * name);
 bool wxRadioBox_Create1(wxRadioBox * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, int major_dimension, long style, const wxValidator * validator, const wxString * name);
+unsigned int wxRadioBox_GetColumnCount(const wxRadioBox * self);
 int wxRadioBox_GetItemFromPoint(const wxRadioBox * self, const wxPoint * pt);
+wxString *wxRadioBox_GetItemHelpText(const wxRadioBox * self, unsigned int item);
+wxToolTip * wxRadioBox_GetItemToolTip(const wxRadioBox * self, unsigned int item);
+unsigned int wxRadioBox_GetRowCount(const wxRadioBox * self);
+bool wxRadioBox_IsItemEnabled(const wxRadioBox * self, unsigned int n);
+bool wxRadioBox_IsItemShown(const wxRadioBox * self, unsigned int n);
+void wxRadioBox_SetItemHelpText(wxRadioBox * self, unsigned int item, const wxString * helptext);
+void wxRadioBox_SetItemToolTip(wxRadioBox * self, unsigned int item, const wxString * text);
+bool wxRadioBox_Show(wxRadioBox * self, unsigned int item, bool show);
 
 // CLASS: wxRect
 void wxRect_delete(wxRect *self);

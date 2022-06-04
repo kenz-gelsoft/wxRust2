@@ -50,7 +50,7 @@ def generate_library(classes, config, libname):
 
 def generated_ffi_rs(classes, libname):
     yield '''\
-use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
+use std::os::raw::{c_double, c_int, c_long, c_uchar, c_uint, c_void};
 
 pub use crate::ffi::*;
 
@@ -69,7 +69,7 @@ extern "C" {'''
 
 def generated_methods_rs(classes, libname):
     yield '''\
-use std::os::raw::{c_int, c_long, c_void};
+use std::os::raw::{c_int, c_long, c_uint, c_void};
 
 use super::*;
 use crate::WeakRef;

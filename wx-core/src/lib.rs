@@ -10,7 +10,7 @@ pub use wx_base::*;
 
 #[doc(hidden)]
 pub mod methods {
-    use std::os::raw::c_int;
+    use std::os::raw::{c_int, c_uint};
 
     pub use super::generated::methods::*;
     use super::*;
@@ -96,14 +96,18 @@ pub mod methods {
                 ffi::wxItemContainer_Append6(self.as_item_container(), items, client_data)
             }
         }
-        // NOT_SUPPORTED: fn Append7()
-        // NOT_SUPPORTED: fn Append8()
-        // NOT_SUPPORTED: fn Append9()
+        // BLOCKED: fn Append7()
+        // BLOCKED: fn Append8()
+        // BLOCKED: fn Append9()
         fn clear(&self) {
             unsafe { ffi::wxItemContainer_Clear(self.as_item_container()) }
         }
-        // NOT_SUPPORTED: fn Delete()
-        // NOT_SUPPORTED: fn DetachClientObject()
+        fn delete(&self, n: c_uint) {
+            unsafe { ffi::wxItemContainer_Delete(self.as_item_container(), n) }
+        }
+        fn detach_client_object(&self, n: c_uint) -> *mut c_void {
+            unsafe { ffi::wxItemContainer_DetachClientObject(self.as_item_container(), n) }
+        }
         fn has_client_data(&self) -> bool {
             unsafe { ffi::wxItemContainer_HasClientData(self.as_item_container()) }
         }
@@ -113,20 +117,73 @@ pub mod methods {
         fn has_client_untyped_data(&self) -> bool {
             unsafe { ffi::wxItemContainer_HasClientUntypedData(self.as_item_container()) }
         }
-        // NOT_SUPPORTED: fn GetClientData()
-        // NOT_SUPPORTED: fn GetClientObject()
-        // NOT_SUPPORTED: fn SetClientData()
-        // NOT_SUPPORTED: fn SetClientObject()
-        // NOT_SUPPORTED: fn Insert()
-        // NOT_SUPPORTED: fn Insert1()
-        // NOT_SUPPORTED: fn Insert2()
-        // NOT_SUPPORTED: fn Insert3()
+        fn get_client_data(&self, n: c_uint) -> *mut c_void {
+            unsafe { ffi::wxItemContainer_GetClientData(self.as_item_container(), n) }
+        }
+        fn get_client_object(&self, n: c_uint) -> *mut c_void {
+            unsafe { ffi::wxItemContainer_GetClientObject(self.as_item_container(), n) }
+        }
+        fn set_client_data(&self, n: c_uint, data: *mut c_void) {
+            unsafe { ffi::wxItemContainer_SetClientData(self.as_item_container(), n, data) }
+        }
+        fn set_client_object(&self, n: c_uint, data: *mut c_void) {
+            unsafe { ffi::wxItemContainer_SetClientObject(self.as_item_container(), n, data) }
+        }
+        fn insert_str(&self, item: &str, pos: c_uint) -> c_int {
+            unsafe {
+                let item = wx_base::wx_string_from(item);
+                ffi::wxItemContainer_Insert(self.as_item_container(), item, pos)
+            }
+        }
+        fn insert_str_void(&self, item: &str, pos: c_uint, client_data: *mut c_void) -> c_int {
+            unsafe {
+                let item = wx_base::wx_string_from(item);
+                ffi::wxItemContainer_Insert1(self.as_item_container(), item, pos, client_data)
+            }
+        }
+        fn insert_str_clientdata(
+            &self,
+            item: &str,
+            pos: c_uint,
+            client_data: *mut c_void,
+        ) -> c_int {
+            unsafe {
+                let item = wx_base::wx_string_from(item);
+                ffi::wxItemContainer_Insert2(self.as_item_container(), item, pos, client_data)
+            }
+        }
+        fn insert_arraystring<A: ArrayStringMethods>(&self, items: &A, pos: c_uint) -> c_int {
+            unsafe {
+                let items = items.as_ptr();
+                ffi::wxItemContainer_Insert3(self.as_item_container(), items, pos)
+            }
+        }
         // BLOCKED: fn Insert4()
-        // NOT_SUPPORTED: fn Insert5()
-        // NOT_SUPPORTED: fn Insert6()
-        // NOT_SUPPORTED: fn Insert7()
-        // NOT_SUPPORTED: fn Insert8()
-        // NOT_SUPPORTED: fn Insert9()
+        fn insert_arraystring_void<A: ArrayStringMethods>(
+            &self,
+            items: &A,
+            pos: c_uint,
+            client_data: *mut c_void,
+        ) -> c_int {
+            unsafe {
+                let items = items.as_ptr();
+                ffi::wxItemContainer_Insert5(self.as_item_container(), items, pos, client_data)
+            }
+        }
+        fn insert_arraystring_clientdata<A: ArrayStringMethods>(
+            &self,
+            items: &A,
+            pos: c_uint,
+            client_data: *mut c_void,
+        ) -> c_int {
+            unsafe {
+                let items = items.as_ptr();
+                ffi::wxItemContainer_Insert6(self.as_item_container(), items, pos, client_data)
+            }
+        }
+        // BLOCKED: fn Insert7()
+        // BLOCKED: fn Insert8()
+        // BLOCKED: fn Insert9()
         fn set<A: ArrayStringMethods>(&self, items: &A) {
             unsafe {
                 let items = items.as_ptr();
@@ -146,9 +203,9 @@ pub mod methods {
                 ffi::wxItemContainer_Set3(self.as_item_container(), items, client_data)
             }
         }
-        // NOT_SUPPORTED: fn Set4()
-        // NOT_SUPPORTED: fn Set5()
-        // NOT_SUPPORTED: fn Set6()
+        // BLOCKED: fn Set4()
+        // BLOCKED: fn Set5()
+        // BLOCKED: fn Set6()
     }
 
     // wxItemContainerImmutable
@@ -183,11 +240,20 @@ pub mod methods {
         fn select(&self, n: c_int) {
             unsafe { ffi::wxItemContainerImmutable_Select(self.as_item_container_immutable(), n) }
         }
-        // NOT_SUPPORTED: fn GetCount()
+        fn get_count(&self) -> c_uint {
+            unsafe { ffi::wxItemContainerImmutable_GetCount(self.as_item_container_immutable()) }
+        }
         fn is_empty(&self) -> bool {
             unsafe { ffi::wxItemContainerImmutable_IsEmpty(self.as_item_container_immutable()) }
         }
-        // NOT_SUPPORTED: fn GetString()
+        fn get_string(&self, n: c_uint) -> String {
+            unsafe {
+                wx_base::from_wx_string(ffi::wxItemContainerImmutable_GetString(
+                    self.as_item_container_immutable(),
+                    n,
+                ))
+            }
+        }
         fn get_strings(&self) -> ArrayString {
             unsafe {
                 ArrayStringIsOwned::from_ptr(ffi::wxItemContainerImmutable_GetStrings(
@@ -195,7 +261,16 @@ pub mod methods {
                 ))
             }
         }
-        // NOT_SUPPORTED: fn SetString()
+        fn set_string(&self, n: c_uint, string: &str) {
+            unsafe {
+                let string = wx_base::wx_string_from(string);
+                ffi::wxItemContainerImmutable_SetString(
+                    self.as_item_container_immutable(),
+                    n,
+                    string,
+                )
+            }
+        }
         fn find_string(&self, string: &str, case_sensitive: bool) -> c_int {
             unsafe {
                 let string = wx_base::wx_string_from(string);
@@ -366,7 +441,7 @@ pub mod methods {
 use methods::*;
 
 mod ffi {
-    use std::os::raw::{c_int, c_long, c_void};
+    use std::os::raw::{c_int, c_long, c_uint, c_void};
     extern "C" {
         pub fn wxObject_delete(self_: *mut c_void);
 
@@ -417,29 +492,57 @@ mod ffi {
             items: *const c_void,
             client_data: *mut c_void,
         ) -> c_int;
-        // NOT_SUPPORTED: pub fn wxItemContainer_Append7(self_: *mut c_void, n: unsigned int, items: *const c_void) -> c_int;
-        // NOT_SUPPORTED: pub fn wxItemContainer_Append8(self_: *mut c_void, n: unsigned int, items: *const c_void, client_data: *mut c_void) -> c_int;
-        // NOT_SUPPORTED: pub fn wxItemContainer_Append9(self_: *mut c_void, n: unsigned int, items: *const c_void, client_data: *mut c_void) -> c_int;
+        // BLOCKED: pub fn wxItemContainer_Append7(self_: *mut c_void, n: c_uint, items: *const c_void) -> c_int;
+        // BLOCKED: pub fn wxItemContainer_Append8(self_: *mut c_void, n: c_uint, items: *const c_void, client_data: *mut c_void) -> c_int;
+        // BLOCKED: pub fn wxItemContainer_Append9(self_: *mut c_void, n: c_uint, items: *const c_void, client_data: *mut c_void) -> c_int;
         pub fn wxItemContainer_Clear(self_: *mut c_void);
-        // NOT_SUPPORTED: pub fn wxItemContainer_Delete(self_: *mut c_void, n: unsigned int);
-        // NOT_SUPPORTED: pub fn wxItemContainer_DetachClientObject(self_: *mut c_void, n: unsigned int) -> *mut c_void;
+        pub fn wxItemContainer_Delete(self_: *mut c_void, n: c_uint);
+        pub fn wxItemContainer_DetachClientObject(self_: *mut c_void, n: c_uint) -> *mut c_void;
         pub fn wxItemContainer_HasClientData(self_: *const c_void) -> bool;
         pub fn wxItemContainer_HasClientObjectData(self_: *const c_void) -> bool;
         pub fn wxItemContainer_HasClientUntypedData(self_: *const c_void) -> bool;
-        // NOT_SUPPORTED: pub fn wxItemContainer_GetClientData(self_: *const c_void, n: unsigned int) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxItemContainer_GetClientObject(self_: *const c_void, n: unsigned int) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxItemContainer_SetClientData(self_: *mut c_void, n: unsigned int, data: *mut c_void);
-        // NOT_SUPPORTED: pub fn wxItemContainer_SetClientObject(self_: *mut c_void, n: unsigned int, data: *mut c_void);
-        // NOT_SUPPORTED: pub fn wxItemContainer_Insert(self_: *mut c_void, item: *const c_void, pos: unsigned int) -> c_int;
-        // NOT_SUPPORTED: pub fn wxItemContainer_Insert1(self_: *mut c_void, item: *const c_void, pos: unsigned int, client_data: *mut c_void) -> c_int;
-        // NOT_SUPPORTED: pub fn wxItemContainer_Insert2(self_: *mut c_void, item: *const c_void, pos: unsigned int, client_data: *mut c_void) -> c_int;
-        // NOT_SUPPORTED: pub fn wxItemContainer_Insert3(self_: *mut c_void, items: *const c_void, pos: unsigned int) -> c_int;
+        pub fn wxItemContainer_GetClientData(self_: *const c_void, n: c_uint) -> *mut c_void;
+        pub fn wxItemContainer_GetClientObject(self_: *const c_void, n: c_uint) -> *mut c_void;
+        pub fn wxItemContainer_SetClientData(self_: *mut c_void, n: c_uint, data: *mut c_void);
+        pub fn wxItemContainer_SetClientObject(self_: *mut c_void, n: c_uint, data: *mut c_void);
+        pub fn wxItemContainer_Insert(
+            self_: *mut c_void,
+            item: *const c_void,
+            pos: c_uint,
+        ) -> c_int;
+        pub fn wxItemContainer_Insert1(
+            self_: *mut c_void,
+            item: *const c_void,
+            pos: c_uint,
+            client_data: *mut c_void,
+        ) -> c_int;
+        pub fn wxItemContainer_Insert2(
+            self_: *mut c_void,
+            item: *const c_void,
+            pos: c_uint,
+            client_data: *mut c_void,
+        ) -> c_int;
+        pub fn wxItemContainer_Insert3(
+            self_: *mut c_void,
+            items: *const c_void,
+            pos: c_uint,
+        ) -> c_int;
         // BLOCKED: pub fn wxItemContainer_Insert4(self_: *mut c_void, items: *const c_void) -> c_int;
-        // NOT_SUPPORTED: pub fn wxItemContainer_Insert5(self_: *mut c_void, items: *const c_void, pos: unsigned int, client_data: *mut c_void) -> c_int;
-        // NOT_SUPPORTED: pub fn wxItemContainer_Insert6(self_: *mut c_void, items: *const c_void, pos: unsigned int, client_data: *mut c_void) -> c_int;
-        // NOT_SUPPORTED: pub fn wxItemContainer_Insert7(self_: *mut c_void, n: unsigned int, items: *const c_void, pos: unsigned int) -> c_int;
-        // NOT_SUPPORTED: pub fn wxItemContainer_Insert8(self_: *mut c_void, n: unsigned int, items: *const c_void, pos: unsigned int, client_data: *mut c_void) -> c_int;
-        // NOT_SUPPORTED: pub fn wxItemContainer_Insert9(self_: *mut c_void, n: unsigned int, items: *const c_void, pos: unsigned int, client_data: *mut c_void) -> c_int;
+        pub fn wxItemContainer_Insert5(
+            self_: *mut c_void,
+            items: *const c_void,
+            pos: c_uint,
+            client_data: *mut c_void,
+        ) -> c_int;
+        pub fn wxItemContainer_Insert6(
+            self_: *mut c_void,
+            items: *const c_void,
+            pos: c_uint,
+            client_data: *mut c_void,
+        ) -> c_int;
+        // BLOCKED: pub fn wxItemContainer_Insert7(self_: *mut c_void, n: c_uint, items: *const c_void, pos: c_uint) -> c_int;
+        // BLOCKED: pub fn wxItemContainer_Insert8(self_: *mut c_void, n: c_uint, items: *const c_void, pos: c_uint, client_data: *mut c_void) -> c_int;
+        // BLOCKED: pub fn wxItemContainer_Insert9(self_: *mut c_void, n: c_uint, items: *const c_void, pos: c_uint, client_data: *mut c_void) -> c_int;
         pub fn wxItemContainer_Set(self_: *mut c_void, items: *const c_void);
         // BLOCKED: pub fn wxItemContainer_Set1(self_: *mut c_void, items: *const c_void);
         pub fn wxItemContainer_Set2(
@@ -452,9 +555,9 @@ mod ffi {
             items: *const c_void,
             client_data: *mut c_void,
         );
-        // NOT_SUPPORTED: pub fn wxItemContainer_Set4(self_: *mut c_void, n: unsigned int, items: *const c_void);
-        // NOT_SUPPORTED: pub fn wxItemContainer_Set5(self_: *mut c_void, n: unsigned int, items: *const c_void, client_data: *mut c_void);
-        // NOT_SUPPORTED: pub fn wxItemContainer_Set6(self_: *mut c_void, n: unsigned int, items: *const c_void, client_data: *mut c_void);
+        // BLOCKED: pub fn wxItemContainer_Set4(self_: *mut c_void, n: c_uint, items: *const c_void);
+        // BLOCKED: pub fn wxItemContainer_Set5(self_: *mut c_void, n: c_uint, items: *const c_void, client_data: *mut c_void);
+        // BLOCKED: pub fn wxItemContainer_Set6(self_: *mut c_void, n: c_uint, items: *const c_void, client_data: *mut c_void);
 
         pub fn wxRadioBox_AsItemContainerImmutable(obj: *mut c_void) -> *mut c_void;
         // wxItemContainerImmutable
@@ -468,11 +571,15 @@ mod ffi {
         pub fn wxItemContainerImmutable_GetStringSelection(self_: *const c_void) -> *mut c_void;
         pub fn wxItemContainerImmutable_Select(self_: *mut c_void, n: c_int);
         pub fn wxItemContainerImmutable_new() -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxItemContainerImmutable_GetCount(self_: *const c_void) -> unsigned int;
+        pub fn wxItemContainerImmutable_GetCount(self_: *const c_void) -> c_uint;
         pub fn wxItemContainerImmutable_IsEmpty(self_: *const c_void) -> bool;
-        // NOT_SUPPORTED: pub fn wxItemContainerImmutable_GetString(self_: *const c_void, n: unsigned int) -> *mut c_void;
+        pub fn wxItemContainerImmutable_GetString(self_: *const c_void, n: c_uint) -> *mut c_void;
         pub fn wxItemContainerImmutable_GetStrings(self_: *const c_void) -> *mut c_void;
-        // NOT_SUPPORTED: pub fn wxItemContainerImmutable_SetString(self_: *mut c_void, n: unsigned int, string: *const c_void);
+        pub fn wxItemContainerImmutable_SetString(
+            self_: *mut c_void,
+            n: c_uint,
+            string: *const c_void,
+        );
         pub fn wxItemContainerImmutable_FindString(
             self_: *const c_void,
             string: *const c_void,

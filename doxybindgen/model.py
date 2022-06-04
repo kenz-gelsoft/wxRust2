@@ -8,6 +8,7 @@ CXX2RUST = {
     'int': 'c_int',
     'long': 'c_long',
     'size_t': 'usize',
+    'unsigned int': 'c_uint',
     'wxByte': 'c_uchar',
     'wxCheckBoxState': 'c_int',
     'wxCoord': 'c_int',
@@ -32,6 +33,7 @@ RUST_PRIMITIVES = [
     'c_int',
     'c_long',
     'c_uchar',
+    'c_uint',
     'usize',
 ]
 OS_UNSUPPORTED_TYPES = [
