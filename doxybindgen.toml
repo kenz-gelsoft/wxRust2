@@ -19,7 +19,7 @@ wxml_files = [
     'wxml/classwx_g_d_i_object.xml',
     'wxml/classwx_icon.xml',
     #'wxml/classwx_item_container.xml',
-    #'wxml/classwx_item_container_immutable.xml',
+    'wxml/classwx_item_container_immutable.xml',
     'wxml/classwx_list_box.xml',
     'wxml/classwx_menu.xml',
     'wxml/classwx_menu_bar.xml',
@@ -156,6 +156,12 @@ blocklist = [
 #    'Set5',
 #    'Set6',
 #]
+[types.wxItemContainerImmutable]
+blocklist = [
+    'GetStrings',
+    'wxItemContainerImmutable',
+]
+as_mixin = 'as_item_container_immutable'
 [types.wxListBox]
 blocklist = [
     'InsertItems',

@@ -44,21 +44,6 @@ extern "C" {
 
     wxItemContainer *wxChoice_AsItemContainer(wxChoice * obj);
 
-    // CLASS: wxItemContainerImmutable
-    void wxItemContainerImmutable_delete(wxItemContainerImmutable *self);
-    void wxItemContainerImmutable_SetSelection(wxItemContainerImmutable * self, int n);
-    int wxItemContainerImmutable_GetSelection(const wxItemContainerImmutable * self);
-    bool wxItemContainerImmutable_SetStringSelection(wxItemContainerImmutable * self, const wxString * string);
-    wxString *wxItemContainerImmutable_GetStringSelection(const wxItemContainerImmutable * self);
-    void wxItemContainerImmutable_Select(wxItemContainerImmutable * self, int n);
-    wxItemContainerImmutable *wxItemContainerImmutable_new();
-    unsigned int wxItemContainerImmutable_GetCount(const wxItemContainerImmutable * self);
-    bool wxItemContainerImmutable_IsEmpty(const wxItemContainerImmutable * self);
-    wxString *wxItemContainerImmutable_GetString(const wxItemContainerImmutable * self, unsigned int n);
-    wxArrayString *wxItemContainerImmutable_GetStrings(const wxItemContainerImmutable * self);
-    void wxItemContainerImmutable_SetString(wxItemContainerImmutable * self, unsigned int n, const wxString * string);
-    int wxItemContainerImmutable_FindString(const wxItemContainerImmutable * self, const wxString * string, bool case_sensitive);
-
     wxItemContainerImmutable *wxRadioBox_AsItemContainerImmutable(wxRadioBox * obj);
 
     wxTextEntry *wxTextCtrl_AsTextEntry(wxTextCtrl * obj);

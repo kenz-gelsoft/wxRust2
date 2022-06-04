@@ -484,6 +484,28 @@ extern "C" {
     pub fn wxIcon_SetWidth(self_: *mut c_void, width: c_int);
     // BLOCKED: pub fn wxIcon_operator=(self_: *mut c_void, icon: *const c_void) -> *mut c_void;
 
+    // wxItemContainerImmutable
+    pub fn wxItemContainerImmutable_delete(self_: *mut c_void);
+    pub fn wxItemContainerImmutable_SetSelection(self_: *mut c_void, n: c_int);
+    pub fn wxItemContainerImmutable_GetSelection(self_: *const c_void) -> c_int;
+    pub fn wxItemContainerImmutable_SetStringSelection(
+        self_: *mut c_void,
+        string: *const c_void,
+    ) -> bool;
+    pub fn wxItemContainerImmutable_GetStringSelection(self_: *const c_void) -> *mut c_void;
+    pub fn wxItemContainerImmutable_Select(self_: *mut c_void, n: c_int);
+    // BLOCKED: pub fn wxItemContainerImmutable_new() -> *mut c_void;
+    pub fn wxItemContainerImmutable_GetCount(self_: *const c_void) -> c_uint;
+    pub fn wxItemContainerImmutable_IsEmpty(self_: *const c_void) -> bool;
+    pub fn wxItemContainerImmutable_GetString(self_: *const c_void, n: c_uint) -> *mut c_void;
+    // BLOCKED: pub fn wxItemContainerImmutable_GetStrings(self_: *const c_void) -> wxArrayString;
+    pub fn wxItemContainerImmutable_SetString(self_: *mut c_void, n: c_uint, string: *const c_void);
+    pub fn wxItemContainerImmutable_FindString(
+        self_: *const c_void,
+        string: *const c_void,
+        case_sensitive: bool,
+    ) -> c_int;
+
     // wxListBox
     pub fn wxListBox_new() -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxListBox_new1(parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;

@@ -246,6 +246,19 @@ void wxIcon_SetDepth(wxIcon * self, int depth);
 void wxIcon_SetHeight(wxIcon * self, int height);
 void wxIcon_SetWidth(wxIcon * self, int width);
 
+// CLASS: wxItemContainerImmutable
+void wxItemContainerImmutable_delete(wxItemContainerImmutable *self);
+void wxItemContainerImmutable_SetSelection(wxItemContainerImmutable * self, int n);
+int wxItemContainerImmutable_GetSelection(const wxItemContainerImmutable * self);
+bool wxItemContainerImmutable_SetStringSelection(wxItemContainerImmutable * self, const wxString * string);
+wxString *wxItemContainerImmutable_GetStringSelection(const wxItemContainerImmutable * self);
+void wxItemContainerImmutable_Select(wxItemContainerImmutable * self, int n);
+unsigned int wxItemContainerImmutable_GetCount(const wxItemContainerImmutable * self);
+bool wxItemContainerImmutable_IsEmpty(const wxItemContainerImmutable * self);
+wxString *wxItemContainerImmutable_GetString(const wxItemContainerImmutable * self, unsigned int n);
+void wxItemContainerImmutable_SetString(wxItemContainerImmutable * self, unsigned int n, const wxString * string);
+int wxItemContainerImmutable_FindString(const wxItemContainerImmutable * self, const wxString * string, bool case_sensitive);
+
 // CLASS: wxListBox
 wxListBox *wxListBox_new();
 wxListBox *wxListBox_new2(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);

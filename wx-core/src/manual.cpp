@@ -107,47 +107,6 @@ wxItemContainer *wxChoice_AsItemContainer(wxChoice * obj) {
     return static_cast<wxItemContainer *>(obj);
 }
 
-// CLASS: wxItemContainerImmutable
-void wxItemContainerImmutable_delete(wxItemContainerImmutable *self) {
-    delete self;
-}
-void wxItemContainerImmutable_SetSelection(wxItemContainerImmutable * self, int n) {
-    return self->SetSelection(n);
-}
-int wxItemContainerImmutable_GetSelection(const wxItemContainerImmutable * self) {
-    return self->GetSelection();
-}
-bool wxItemContainerImmutable_SetStringSelection(wxItemContainerImmutable * self, const wxString * string) {
-    return self->SetStringSelection(*string);
-}
-wxString *wxItemContainerImmutable_GetStringSelection(const wxItemContainerImmutable * self) {
-    return new wxString(self->GetStringSelection());
-}
-void wxItemContainerImmutable_Select(wxItemContainerImmutable * self, int n) {
-    return self->Select(n);
-}
-// wxItemContainerImmutable *wxItemContainerImmutable_new() {
-//     return new wxItemContainerImmutable();
-// }
-unsigned int wxItemContainerImmutable_GetCount(const wxItemContainerImmutable * self) {
-    return self->GetCount();
-}
-bool wxItemContainerImmutable_IsEmpty(const wxItemContainerImmutable * self) {
-    return self->IsEmpty();
-}
-wxString *wxItemContainerImmutable_GetString(const wxItemContainerImmutable * self, unsigned int n) {
-    return new wxString(self->GetString(n));
-}
-wxArrayString *wxItemContainerImmutable_GetStrings(const wxItemContainerImmutable * self) {
-    return new wxArrayString(self->GetStrings());
-}
-void wxItemContainerImmutable_SetString(wxItemContainerImmutable * self, unsigned int n, const wxString * string) {
-    return self->SetString(n, *string);
-}
-int wxItemContainerImmutable_FindString(const wxItemContainerImmutable * self, const wxString * string, bool case_sensitive) {
-    return self->FindString(*string, case_sensitive);
-}
-
 wxItemContainerImmutable *wxRadioBox_AsItemContainerImmutable(wxRadioBox * obj) {
     return static_cast<wxItemContainerImmutable *>(obj);
 }

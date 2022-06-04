@@ -989,6 +989,67 @@ pub trait IconMethods: GDIObjectMethods {
     // BLOCKED: fn operator=()
 }
 
+// wxItemContainerImmutable
+pub trait ItemContainerImmutableMethods: WxRustMethods {
+    fn as_item_container_immutable(&self) -> *mut c_void;
+    fn set_selection(&self, n: c_int) {
+        unsafe { ffi::wxItemContainerImmutable_SetSelection(self.as_item_container_immutable(), n) }
+    }
+    fn get_selection(&self) -> c_int {
+        unsafe { ffi::wxItemContainerImmutable_GetSelection(self.as_item_container_immutable()) }
+    }
+    fn set_string_selection(&self, string: &str) -> bool {
+        unsafe {
+            let string = wx_base::wx_string_from(string);
+            ffi::wxItemContainerImmutable_SetStringSelection(
+                self.as_item_container_immutable(),
+                string,
+            )
+        }
+    }
+    fn get_string_selection(&self) -> String {
+        unsafe {
+            wx_base::from_wx_string(ffi::wxItemContainerImmutable_GetStringSelection(
+                self.as_item_container_immutable(),
+            ))
+        }
+    }
+    fn select(&self, n: c_int) {
+        unsafe { ffi::wxItemContainerImmutable_Select(self.as_item_container_immutable(), n) }
+    }
+    fn get_count(&self) -> c_uint {
+        unsafe { ffi::wxItemContainerImmutable_GetCount(self.as_item_container_immutable()) }
+    }
+    fn is_empty(&self) -> bool {
+        unsafe { ffi::wxItemContainerImmutable_IsEmpty(self.as_item_container_immutable()) }
+    }
+    fn get_string(&self, n: c_uint) -> String {
+        unsafe {
+            wx_base::from_wx_string(ffi::wxItemContainerImmutable_GetString(
+                self.as_item_container_immutable(),
+                n,
+            ))
+        }
+    }
+    // BLOCKED: fn GetStrings()
+    fn set_string(&self, n: c_uint, string: &str) {
+        unsafe {
+            let string = wx_base::wx_string_from(string);
+            ffi::wxItemContainerImmutable_SetString(self.as_item_container_immutable(), n, string)
+        }
+    }
+    fn find_string(&self, string: &str, case_sensitive: bool) -> c_int {
+        unsafe {
+            let string = wx_base::wx_string_from(string);
+            ffi::wxItemContainerImmutable_FindString(
+                self.as_item_container_immutable(),
+                string,
+                case_sensitive,
+            )
+        }
+    }
+}
+
 // wxListBox
 pub trait ListBoxMethods: ControlMethods {
     // DTOR: fn ~wxListBox()
