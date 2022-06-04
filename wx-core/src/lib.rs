@@ -455,11 +455,11 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for RadioBoxIsOwned<OWNED>
 }
 
 // Mix-in wxTextEntry manually
-// impl<const OWNED: bool> TextEntryMethods for TextCtrlIsOwned<OWNED> {
-//     fn as_text_entry(&self) -> *mut c_void {
-//         unsafe { ffi::wxTextCtrl_AsTextEntry(self.as_ptr()) }
-//     }
-// }
+impl<const OWNED: bool> TextEntryMethods for TextCtrlIsOwned<OWNED> {
+    fn as_text_entry(&self) -> *mut c_void {
+        unsafe { ffi::wxTextCtrl_AsTextEntry(self.as_ptr()) }
+    }
+}
 
 pub struct FrameBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,

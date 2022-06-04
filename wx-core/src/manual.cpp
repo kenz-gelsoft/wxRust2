@@ -151,3 +151,7 @@ int wxItemContainerImmutable_FindString(const wxItemContainerImmutable * self, c
 wxItemContainerImmutable *wxRadioBox_AsItemContainerImmutable(wxRadioBox * obj) {
     return static_cast<wxItemContainerImmutable *>(obj);
 }
+
+wxTextEntry *wxTextCtrl_AsTextEntry(wxTextCtrl * obj) {
+    return static_cast<wxTextEntry *>(obj);
+}
