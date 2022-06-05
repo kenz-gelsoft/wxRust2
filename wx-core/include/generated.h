@@ -3,6 +3,7 @@
 //#include <wx/activityindicator.h>
 #include <wx/artprov.h>
 #include <wx/bookctrl.h>
+#include <wx/clrpicker.h>
 #include <wx/wrapsizer.h>
 
 extern "C" {
@@ -169,6 +170,13 @@ void wxColour_MakeMono(unsigned char * r, unsigned char * g, unsigned char * b, 
 void wxColour_MakeGrey(unsigned char * r, unsigned char * g, unsigned char * b);
 void wxColour_MakeGrey1(unsigned char * r, unsigned char * g, unsigned char * b, double weight_r, double weight_g, double weight_b);
 void wxColour_ChangeLightness1(unsigned char * r, unsigned char * g, unsigned char * b, int ialpha);
+
+// CLASS: wxColourPickerCtrl
+wxColourPickerCtrl *wxColourPickerCtrl_new();
+wxColourPickerCtrl *wxColourPickerCtrl_new1(wxWindow * parent, wxWindowID id, const wxColour * colour, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+bool wxColourPickerCtrl_Create(wxColourPickerCtrl * self, wxWindow * parent, wxWindowID id, const wxColour * colour, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+wxColour *wxColourPickerCtrl_GetColour(const wxColourPickerCtrl * self);
+void wxColourPickerCtrl_SetColour(wxColourPickerCtrl * self, const wxColour * col);
 
 // CLASS: wxCommandEvent
 void * wxCommandEvent_GetClientData(const wxCommandEvent * self);
@@ -467,6 +475,26 @@ wxPanel *wxPanel_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, con
 bool wxPanel_Create(wxPanel * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 void wxPanel_OnSysColourChanged(wxPanel * self, wxSysColourChangedEvent * event);
 void wxPanel_SetFocusIgnoringChildren(wxPanel * self);
+
+// CLASS: wxPickerBase
+bool wxPickerBase_CreateBase(wxPickerBase * self, wxWindow * parent, wxWindowID id, const wxString * text, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+int wxPickerBase_GetInternalMargin(const wxPickerBase * self);
+int wxPickerBase_GetPickerCtrlProportion(const wxPickerBase * self);
+wxTextCtrl * wxPickerBase_GetTextCtrl(wxPickerBase * self);
+wxControl * wxPickerBase_GetPickerCtrl(wxPickerBase * self);
+int wxPickerBase_GetTextCtrlProportion(const wxPickerBase * self);
+bool wxPickerBase_HasTextCtrl(const wxPickerBase * self);
+bool wxPickerBase_IsPickerCtrlGrowable(const wxPickerBase * self);
+bool wxPickerBase_IsTextCtrlGrowable(const wxPickerBase * self);
+void wxPickerBase_SetInternalMargin(wxPickerBase * self, int margin);
+void wxPickerBase_SetPickerCtrlGrowable(wxPickerBase * self, bool grow);
+void wxPickerBase_SetPickerCtrlProportion(wxPickerBase * self, int prop);
+void wxPickerBase_SetTextCtrlGrowable(wxPickerBase * self, bool grow);
+void wxPickerBase_SetTextCtrlProportion(wxPickerBase * self, int prop);
+void wxPickerBase_SetTextCtrl(wxPickerBase * self, wxTextCtrl * text);
+void wxPickerBase_SetPickerCtrl(wxPickerBase * self, wxControl * picker);
+void wxPickerBase_UpdatePickerFromTextCtrl(wxPickerBase * self);
+void wxPickerBase_UpdateTextCtrlFromPicker(wxPickerBase * self);
 
 // CLASS: wxPoint
 void wxPoint_delete(wxPoint *self);

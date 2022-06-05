@@ -11,6 +11,7 @@ wxml_files = [
     'wxml/classwx_check_box.xml',
     'wxml/classwx_choice.xml',
     'wxml/classwx_colour.xml',
+    'wxml/classwx_colour_picker_ctrl.xml',
     'wxml/classwx_command_event.xml',
     'wxml/classwx_control.xml',
     'wxml/classwx_event.xml',
@@ -29,6 +30,7 @@ wxml_files = [
     'wxml/classwx_notify_event.xml',
     'wxml/classwx_object.xml',
     'wxml/classwx_panel.xml',
+    'wxml/classwx_picker_base.xml',
     'wxml/classwx_point.xml',
     'wxml/classwx_radio_box.xml',
     'wxml/classwx_rect.xml',
@@ -110,6 +112,10 @@ blocklist = [
 wx31 = [
     'GetLuminance',
     'IsSolid',
+]
+[types.wxColourPickerCtrl]
+blocklist = [
+    'SetColour1',
 ]
 [types.wxControl]
 wx31 = [
@@ -227,6 +233,10 @@ blocklist = [
 blocklist = [
     'operator new',
     'operator delete',
+]
+[types.wxPickerBase]
+blocklist = [
+    'wxPickerBase',
 ]
 [types.wxPoint]
 blocklist = [
