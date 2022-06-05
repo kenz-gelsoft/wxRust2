@@ -16,6 +16,9 @@ use checkbox::*;
 mod choice;
 use choice::*;
 
+mod clrpicker;
+use clrpicker::*;
+
 enum Widgets {
     ClearLog = 100,
     Quit,
@@ -116,11 +119,12 @@ impl WidgetsFrame {
         let button_page = Rc::new(ButtonWidgetsPage::new(&book));
         let check_box_page = Rc::new(CheckBoxWidgetsPage::new(&book));
         let choice_page = Rc::new(ChoiceWidgetsPage::new(&book));
+        let clrpicker_page = Rc::new(ColourPickerWidgetsPage::new(&book));
         let mut frame = WidgetsFrame {
             base,
             panel,
             book,
-            pages: vec![button_page, check_box_page, choice_page],
+            pages: vec![clrpicker_page, button_page, check_box_page, choice_page],
         };
         frame.on_create();
 
