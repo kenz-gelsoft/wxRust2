@@ -360,6 +360,40 @@ extern "C" {
     pub fn wxColourPickerCtrl_SetColour(self_: *mut c_void, col: *const c_void);
     // BLOCKED: pub fn wxColourPickerCtrl_SetColour1(self_: *mut c_void, colname: *const c_void);
 
+    // wxComboBox
+    pub fn wxComboBox_new() -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxComboBox_new1(parent: *mut c_void, id: c_int, value: *const c_void, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
+    pub fn wxComboBox_new2(
+        parent: *mut c_void,
+        id: c_int,
+        value: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        choices: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    // DTOR: pub fn wxComboBox_~wxComboBox(self_: *mut c_void);
+    // NOT_SUPPORTED: pub fn wxComboBox_Create(self_: *mut c_void, parent: *mut c_void, id: c_int, value: *const c_void, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> bool;
+    pub fn wxComboBox_Create1(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        value: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        choices: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxComboBox_GetCurrentSelection(self_: *const c_void) -> c_int;
+    pub fn wxComboBox_IsListEmpty(self_: *const c_void) -> bool;
+    pub fn wxComboBox_IsTextEmpty(self_: *const c_void) -> bool;
+    pub fn wxComboBox_Popup(self_: *mut c_void);
+    pub fn wxComboBox_Dismiss(self_: *mut c_void);
+
     // wxCommandEvent
     // NOT_SUPPORTED: pub fn wxCommandEvent_new(command_event_type: wxEventType, id: c_int) -> *mut c_void;
     pub fn wxCommandEvent_GetClientData(self_: *const c_void) -> *mut c_void;

@@ -461,6 +461,58 @@ impl<const OWNED: bool> ColourPickerCtrlIsOwned<OWNED> {
     }
 }
 
+// wxComboBox
+wx_class! { ComboBox =
+    ComboBoxIsOwned<true>(wxComboBox) impl
+        ComboBoxMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> ComboBoxIsOwned<OWNED> {
+    pub fn new_2step() -> ComboBoxIsOwned<OWNED> {
+        unsafe { ComboBoxIsOwned(ffi::wxComboBox_new()) }
+    }
+    // NOT_SUPPORTED: fn wxComboBox1()
+    pub fn new<
+        W: WindowMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        A: ArrayStringMethods,
+        V: ValidatorMethods,
+    >(
+        parent: Option<&W>,
+        id: c_int,
+        value: &str,
+        pos: &P,
+        size: &S,
+        choices: &A,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> ComboBoxIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let value = wx_base::wx_string_from(value);
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let choices = choices.as_ptr();
+            let validator = validator.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            ComboBoxIsOwned(ffi::wxComboBox_new2(
+                parent, id, value, pos, size, choices, style, validator, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
 // wxCommandEvent
 wx_class! { CommandEvent =
     CommandEventIsOwned<true>(wxCommandEvent) impl

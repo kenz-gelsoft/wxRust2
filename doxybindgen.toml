@@ -12,6 +12,7 @@ wxml_files = [
     'wxml/classwx_choice.xml',
     'wxml/classwx_colour.xml',
     'wxml/classwx_colour_picker_ctrl.xml',
+    'wxml/classwx_combo_box.xml',
     'wxml/classwx_command_event.xml',
     'wxml/classwx_control.xml',
     'wxml/classwx_event.xml',
