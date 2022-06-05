@@ -124,7 +124,7 @@ impl WidgetsFrame {
             base,
             panel,
             book,
-            pages: vec![clrpicker_page, button_page, check_box_page, choice_page],
+            pages: vec![button_page, check_box_page, choice_page, clrpicker_page],
         };
         frame.on_create();
 
