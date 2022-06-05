@@ -14,7 +14,9 @@ extern "C" {
 
     int wxRustMessageBox(const wxString *message, const wxString *caption, int style, wxWindow *parent, int x, int y);
 
+    // wxItemContainer
     wxItemContainer *wxChoice_AsItemContainer(wxChoice * obj);
+    wxItemContainer *wxComboBox_AsItemContainer(wxComboBox * obj);
 
     wxItemContainerImmutable *wxRadioBox_AsItemContainerImmutable(wxRadioBox * obj);
 

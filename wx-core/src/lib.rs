@@ -77,6 +77,7 @@ mod ffi {
         );
 
         pub fn wxChoice_AsItemContainer(obj: *mut c_void) -> *mut c_void;
+        pub fn wxComboBox_AsItemContainer(obj: *mut c_void) -> *mut c_void;
 
         pub fn wxRadioBox_AsItemContainerImmutable(obj: *mut c_void) -> *mut c_void;
 
@@ -90,11 +91,21 @@ impl<const OWNED: bool> ItemContainerMethods for ChoiceIsOwned<OWNED> {
         unsafe { ffi::wxChoice_AsItemContainer(self.as_ptr()) }
     }
 }
+impl<const OWNED: bool> ItemContainerMethods for ComboBoxIsOwned<OWNED> {
+    fn as_item_container(&self) -> *mut c_void {
+        unsafe { ffi::wxComboBox_AsItemContainer(self.as_ptr()) }
+    }
+}
 
 // Mix-in wxItemContainerImmutable manually
 impl<const OWNED: bool> ItemContainerImmutableMethods for ChoiceIsOwned<OWNED> {
     fn as_item_container_immutable(&self) -> *mut c_void {
         unsafe { ffi::wxChoice_AsItemContainer(self.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> ItemContainerImmutableMethods for ComboBoxIsOwned<OWNED> {
+    fn as_item_container_immutable(&self) -> *mut c_void {
+        unsafe { ffi::wxComboBox_AsItemContainer(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> ItemContainerImmutableMethods for RadioBoxIsOwned<OWNED> {
