@@ -411,6 +411,56 @@ impl<const OWNED: bool> Drop for ColourIsOwned<OWNED> {
     }
 }
 
+// wxColourPickerCtrl
+wx_class! { ColourPickerCtrl =
+    ColourPickerCtrlIsOwned<true>(wxColourPickerCtrl) impl
+        ColourPickerCtrlMethods,
+        PickerBaseMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> ColourPickerCtrlIsOwned<OWNED> {
+    pub fn new_2step() -> ColourPickerCtrlIsOwned<OWNED> {
+        unsafe { ColourPickerCtrlIsOwned(ffi::wxColourPickerCtrl_new()) }
+    }
+    pub fn new<
+        W: WindowMethods,
+        C: ColourMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        V: ValidatorMethods,
+    >(
+        parent: Option<&W>,
+        id: c_int,
+        colour: &C,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> ColourPickerCtrlIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let colour = colour.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            ColourPickerCtrlIsOwned(ffi::wxColourPickerCtrl_new1(
+                parent, id, colour, pos, size, style, validator, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
 // wxCommandEvent
 wx_class! { CommandEvent =
     CommandEventIsOwned<true>(wxCommandEvent) impl
@@ -878,6 +928,22 @@ impl<const OWNED: bool> WindowMethods for PanelIsOwned<OWNED> {
             let name = wx_base::wx_string_from(name);
             ffi::wxPanel_Create(self.as_ptr(), parent, id, pos, size, style, name)
         }
+    }
+}
+
+// wxPickerBase
+wx_class! { PickerBase =
+    PickerBaseIsOwned<true>(wxPickerBase) impl
+        PickerBaseMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> PickerBaseIsOwned<OWNED> {
+    // BLOCKED: fn wxPickerBase()
+    pub fn none() -> Option<&'static Self> {
+        None
     }
 }
 

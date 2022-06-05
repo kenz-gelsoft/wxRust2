@@ -141,6 +141,7 @@ def generated_h(classes, libname):
 //#include <wx/activityindicator.h>
 #include <wx/artprov.h>
 #include <wx/bookctrl.h>
+#include <wx/clrpicker.h>
 #include <wx/wrapsizer.h>\
 '''
     yield '''\

@@ -333,6 +333,33 @@ extern "C" {
     // NOT_SUPPORTED: pub fn wxColour_AlphaBlend(fg: unsigned char, bg: unsigned char, alpha: c_double) -> unsigned char;
     pub fn wxColour_ChangeLightness1(r: *mut c_void, g: *mut c_void, b: *mut c_void, ialpha: c_int);
 
+    // wxColourPickerCtrl
+    pub fn wxColourPickerCtrl_new() -> *mut c_void;
+    pub fn wxColourPickerCtrl_new1(
+        parent: *mut c_void,
+        id: c_int,
+        colour: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxColourPickerCtrl_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        colour: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxColourPickerCtrl_GetColour(self_: *const c_void) -> *mut c_void;
+    pub fn wxColourPickerCtrl_SetColour(self_: *mut c_void, col: *const c_void);
+    // BLOCKED: pub fn wxColourPickerCtrl_SetColour1(self_: *mut c_void, colname: *const c_void);
+
     // wxCommandEvent
     // NOT_SUPPORTED: pub fn wxCommandEvent_new(command_event_type: wxEventType, id: c_int) -> *mut c_void;
     pub fn wxCommandEvent_GetClientData(self_: *const c_void) -> *mut c_void;
@@ -918,6 +945,38 @@ extern "C" {
     ) -> bool;
     pub fn wxPanel_OnSysColourChanged(self_: *mut c_void, event: *mut c_void);
     pub fn wxPanel_SetFocusIgnoringChildren(self_: *mut c_void);
+
+    // wxPickerBase
+    // BLOCKED: pub fn wxPickerBase_new() -> *mut c_void;
+    // DTOR: pub fn wxPickerBase_~wxPickerBase(self_: *mut c_void);
+    pub fn wxPickerBase_CreateBase(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        text: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxPickerBase_GetInternalMargin(self_: *const c_void) -> c_int;
+    pub fn wxPickerBase_GetPickerCtrlProportion(self_: *const c_void) -> c_int;
+    pub fn wxPickerBase_GetTextCtrl(self_: *mut c_void) -> *mut c_void;
+    pub fn wxPickerBase_GetPickerCtrl(self_: *mut c_void) -> *mut c_void;
+    pub fn wxPickerBase_GetTextCtrlProportion(self_: *const c_void) -> c_int;
+    pub fn wxPickerBase_HasTextCtrl(self_: *const c_void) -> bool;
+    pub fn wxPickerBase_IsPickerCtrlGrowable(self_: *const c_void) -> bool;
+    pub fn wxPickerBase_IsTextCtrlGrowable(self_: *const c_void) -> bool;
+    pub fn wxPickerBase_SetInternalMargin(self_: *mut c_void, margin: c_int);
+    pub fn wxPickerBase_SetPickerCtrlGrowable(self_: *mut c_void, grow: bool);
+    pub fn wxPickerBase_SetPickerCtrlProportion(self_: *mut c_void, prop: c_int);
+    pub fn wxPickerBase_SetTextCtrlGrowable(self_: *mut c_void, grow: bool);
+    pub fn wxPickerBase_SetTextCtrlProportion(self_: *mut c_void, prop: c_int);
+    pub fn wxPickerBase_SetTextCtrl(self_: *mut c_void, text: *mut c_void);
+    pub fn wxPickerBase_SetPickerCtrl(self_: *mut c_void, picker: *mut c_void);
+    pub fn wxPickerBase_UpdatePickerFromTextCtrl(self_: *mut c_void);
+    pub fn wxPickerBase_UpdateTextCtrlFromPicker(self_: *mut c_void);
 
     // wxPoint
     pub fn wxPoint_delete(self_: *mut c_void);

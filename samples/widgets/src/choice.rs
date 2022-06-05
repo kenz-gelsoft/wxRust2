@@ -52,10 +52,6 @@ impl From<ChoicePage> for c_int {
     }
 }
 
-const CHECKBOX_KIND_2STATE: c_int = 0;
-const CHECKBOX_KIND_3STATE: c_int = 1;
-const CHECKBOX_KIND_3STATE_USER: c_int = 2;
-
 #[derive(Clone)]
 pub struct ConfigUI {
     // the controls
