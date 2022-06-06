@@ -595,6 +595,81 @@ impl<'a, P: WindowMethods> ChoiceBuilder<'a, P> {
     }
 }
 
+pub struct ComboBoxBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    id: c_int,
+    value: String,
+    pos: Option<Point>,
+    size: Option<Size>,
+    choices: Option<ArrayString>,
+    style: c_long,
+    validator: Option<Validator>,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, ComboBoxBuilder<'a, P>> for ComboBox {
+    fn builder(parent: Option<&'a P>) -> ComboBoxBuilder<'a, P> {
+        ComboBoxBuilder {
+            parent: parent,
+            id: ID_ANY,
+            value: "".to_string(),
+            pos: None,
+            size: None,
+            choices: None,
+            style: 0,
+            validator: None,
+        }
+    }
+}
+impl<'a, P: WindowMethods> ComboBoxBuilder<'a, P> {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn value(&mut self, value: &str) -> &mut Self {
+        self.value = value.to_string();
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn choices(&mut self, choices: ArrayString) -> &mut Self {
+        self.choices = Some(choices);
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn validator(&mut self, validator: Validator) -> &mut Self {
+        self.validator = Some(validator);
+        self
+    }
+    pub fn build(&mut self) -> ComboBox {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        let choices = self.choices.take().unwrap_or_else(|| ArrayString::new());
+        let validator = self
+            .validator
+            .take()
+            .unwrap_or_else(|| Validator::default());
+        ComboBox::new(
+            self.parent,
+            self.id,
+            &self.value,
+            &pos,
+            &size,
+            &choices,
+            self.style,
+            &validator,
+            "",
+        )
+    }
+}
+
 pub struct ListBoxBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
