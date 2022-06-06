@@ -76,12 +76,22 @@ impl From<ComboPage> for c_int {
     }
 }
 
+const COMBO_KIND_DEFAULT: c_int = 0;
+const COMBO_KIND_SIMPLE: c_int = 1;
+const COMBO_KIND_DROP_DOWN: c_int = 2;
+
 #[derive(Clone)]
 pub struct ConfigUI {
     // the controls
     // ------------
-    // the checkboxes
+
+    // the sel mode radiobox
+    radio_kind: wx::RadioBox,
+
+    // the checkboxes for styles
     chk_sort: wx::CheckBox,
+    chk_readonly: wx::CheckBox,
+    chk_process_enter: wx::CheckBox,
 
     // sizer
     sizer_combo: wx::BoxSizer,
@@ -370,7 +380,11 @@ impl WidgetsPage for ComboboxWidgetsPage {
                 .double_border(wx::ALL & !wx::RIGHT),
         );
         *self.config_ui.borrow_mut() = Some(ConfigUI {
+            radio_kind,
+
             chk_sort,
+            chk_readonly,
+            chk_process_enter,
 
             sizer_combo: sizer_right, // save it to modify it later
 
@@ -432,46 +446,62 @@ impl ComboboxWidgetsPage {
     fn reset(&self) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
             config_ui.chk_sort.set_value(false);
+            config_ui.chk_readonly.set_value(false);
+            config_ui.chk_process_enter.set_value(false);
         }
     }
 
     fn create_combo(&self) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            // let mut flags = wx::BORDER_DEFAULT;
+            let mut flags = wx::BORDER_DEFAULT;
 
-            // if config_ui.chk_sort.is_checked() {
-            //     flags |= wx::CB_SORT as c_long;
-            // }
+            if config_ui.chk_sort.get_value() {
+                flags |= wx::CB_SORT as c_long;
+            }
+            if config_ui.chk_readonly.get_value() {
+                flags |= wx::CB_READONLY as c_long;
+            }
+            if config_ui.chk_process_enter.get_value() {
+                flags |= wx::TE_PROCESS_ENTER as c_long;
+            }
 
-            // let items = wx::ArrayString::new();
-            // if let Some(combo) = self.combo.borrow().as_ref() {
-            //     // TODO: remove (and delete) all comboes
-            //     let count = combo.get_count();
-            //     for n in 0..count {
-            //         items.add(&combo.get_string(n));
-            //     }
+            flags |= match config_ui.radio_kind.get_selection() {
+                COMBO_KIND_SIMPLE => wx::CB_SIMPLE,
+                COMBO_KIND_DROP_DOWN => wx::CB_DROPDOWN,
+                _ => 0,
+            } as c_long;
 
-            //     config_ui.sizer_combo.detach_window(Some(combo));
-            //     combo.destroy();
-            // }
+            let items = wx::ArrayString::new();
+            let mut sel_item = wx::NOT_FOUND;
+            if let Some(combobox) = self.combobox.borrow().as_ref() {
+                let count = combobox.get_count();
+                for n in 0..count {
+                    items.add(&combobox.get_string(n));
+                }
 
-            // let new_combo = wx::ComboBox::builder(Some(&self.base))
-            //     .id(ComboPage::Combobox.into())
-            //     .style(flags)
-            //     .build();
-            // new_combo.set(&items);
+                sel_item = combobox.get_selection();
+            }
 
-            // let sizer_combo = &config_ui.sizer_combo;
-            // sizer_combo.add_window_int(
-            //     Some(&new_combo),
-            //     0,
-            //     wx::GROW | wx::ALL,
-            //     5,
-            //     wx::Object::none(),
-            // );
-            // sizer_combo.layout();
+            let new_cb = wx::ComboBox::builder(Some(&self.base))
+                .id(ComboPage::Combo.into())
+                .choices(items)
+                .style(flags)
+                .build();
+            if sel_item != wx::NOT_FOUND {
+                // TODO: Overload handling for mix-in
+                ItemContainerImmutableMethods::set_selection(&new_cb, sel_item);
+            }
 
-            // *self.combo.borrow_mut() = Some(new_combo);
+            if let Some(combobox) = self.combobox.borrow().as_ref() {
+                config_ui
+                    .sizer_combo
+                    .replace_window(Some(combobox), Some(&new_cb), false);
+                config_ui.sizer_combo.layout();
+
+                combobox.destroy();
+            }
+
+            *self.combobox.borrow_mut() = Some(new_cb);
         }
     }
 
