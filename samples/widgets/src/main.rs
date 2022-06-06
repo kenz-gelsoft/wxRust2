@@ -123,11 +123,18 @@ impl WidgetsFrame {
         let check_box_page = Rc::new(CheckBoxWidgetsPage::new(&book));
         let choice_page = Rc::new(ChoiceWidgetsPage::new(&book));
         let clrpicker_page = Rc::new(ColourPickerWidgetsPage::new(&book));
+        let combobox_page = Rc::new(ComboboxWidgetsPage::new(&book));
         let mut frame = WidgetsFrame {
             base,
             panel,
             book,
-            pages: vec![button_page, check_box_page, choice_page, clrpicker_page],
+            pages: vec![
+                combobox_page,
+                button_page,
+                check_box_page,
+                choice_page,
+                clrpicker_page,
+            ],
         };
         frame.on_create();
 
@@ -331,7 +338,7 @@ trait WidgetsPage {
 
     fn create_sizer_with_text(
         &self,
-        control: &wx::Button,
+        control: &wx::Control,
         id: c_int,
     ) -> (wx::BoxSizer, wx::TextCtrl) {
         let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
@@ -358,6 +365,22 @@ trait WidgetsPage {
         (sizer_row, text)
     }
 
+    // create a sizer containing a label and a text ctrl
+    fn create_sizer_with_text_and_label(
+        &self,
+        label: &str,
+        id: c_int,
+    ) -> (wx::BoxSizer, wx::TextCtrl) {
+        let static_text = wx::StaticText::builder(Some(self.base()))
+            .label(label)
+            .build();
+        let as_control = unsafe {
+            // FIXME: Support this safe upcast as safecall
+            wx::Control::from_ptr(static_text.as_ptr())
+        };
+        self.create_sizer_with_text(&as_control, id)
+    }
+
     // create a sizer containing a button and a text ctrl
     fn create_sizer_with_text_and_button(
         &self,
@@ -369,7 +392,11 @@ trait WidgetsPage {
             .id(id_btn)
             .label(label)
             .build();
-        self.create_sizer_with_text(&btn, id)
+        let as_control = unsafe {
+            // FIXME: Support this safe upcast as safecall
+            wx::Control::from_ptr(btn.as_ptr())
+        };
+        self.create_sizer_with_text(&as_control, id)
     }
 
     fn create_check_box_and_add_to_sizer(
