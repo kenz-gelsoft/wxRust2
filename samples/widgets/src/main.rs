@@ -19,6 +19,9 @@ use choice::*;
 mod clrpicker;
 use clrpicker::*;
 
+mod combobox;
+use combobox::*;
+
 enum Widgets {
     ClearLog = 100,
     Quit,

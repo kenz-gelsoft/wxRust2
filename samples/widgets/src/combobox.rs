@@ -6,10 +6,19 @@ use wx::methods::*;
 
 // control ids
 #[derive(Clone, Copy)]
-enum ChoicePage {
+enum ComboPage {
     Reset = wx::ID_HIGHEST as isize,
+    Popup,
+    Dismiss,
+    SetCurrent,
+    CurText,
+    InsertionPointText,
+    Insert,
+    InsertText,
     Add,
     AddText,
+    SetFirst,
+    SetFirstText,
     AddSeveral,
     AddMany,
     Clear,
@@ -18,16 +27,28 @@ enum ChoicePage {
     Delete,
     DeleteText,
     DeleteSel,
-    Choice,
+    SetValue,
+    SetValueText,
+    Combo,
     ContainerTests,
+    Dynamic,
 }
-impl ChoicePage {
+impl ComboPage {
     fn from(v: c_int) -> Option<Self> {
-        use ChoicePage::*;
+        use ComboPage::*;
         for e in [
             Reset,
+            Popup,
+            Dismiss,
+            SetCurrent,
+            CurText,
+            InsertionPointText,
+            Insert,
+            InsertText,
             Add,
             AddText,
+            SetFirst,
+            SetFirstText,
             AddSeveral,
             AddMany,
             Clear,
@@ -36,8 +57,11 @@ impl ChoicePage {
             Delete,
             DeleteText,
             DeleteSel,
-            Choice,
+            SetValue,
+            SetValueText,
+            Combo,
             ContainerTests,
+            Dynamic,
         ] {
             if v == e.into() {
                 return Some(e);
@@ -46,8 +70,8 @@ impl ChoicePage {
         return None;
     }
 }
-impl From<ChoicePage> for c_int {
-    fn from(w: ChoicePage) -> Self {
+impl From<ComboPage> for c_int {
+    fn from(w: ComboPage) -> Self {
         w as c_int
     }
 }
@@ -60,7 +84,7 @@ pub struct ConfigUI {
     chk_sort: wx::CheckBox,
 
     // sizer
-    sizer_choice: wx::BoxSizer,
+    sizer_combo: wx::BoxSizer,
 
     // the text entries for "Add/change string" and "Delete" buttons
     text_add: wx::TextCtrl,
@@ -69,33 +93,33 @@ pub struct ConfigUI {
 }
 
 #[derive(Clone)]
-pub struct ChoiceWidgetsPage {
+pub struct ComboboxWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
-    // the choice itself
-    choice: Rc<RefCell<Option<wx::Choice>>>,
+    // the combo itself
+    combo: Rc<RefCell<Option<wx::ComboBox>>>,
 
     s_item: RefCell<c_int>,
 }
-impl WidgetsPage for ChoiceWidgetsPage {
+impl WidgetsPage for ComboboxWidgetsPage {
     fn base(&self) -> &wx::Panel {
         return &self.base;
     }
     fn label(&self) -> &str {
-        return "Choice";
+        return "Combobox";
     }
     fn create_content(&self) {
         /*
            What we create here is a frame having 3 panes: style pane is the
            leftmost one, in the middle the pane with buttons allowing to perform
-           miscellaneous choice operations and the pane containing the choice
+           miscellaneous combo operations and the pane containing the combo
            itself to the right
         */
         let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
 
         // left pane
         let s_box = wx::StaticBox::builder(Some(&self.base))
-            .label("&Set choice parameters")
+            .label("&Set combo parameters")
             .build();
 
         let sizer_left = wx::StaticBoxSizer::new_with_staticbox(Some(&s_box), wx::VERTICAL);
@@ -104,7 +128,7 @@ impl WidgetsPage for ChoiceWidgetsPage {
             self.create_check_box_and_add_to_sizer(&sizer_left, "&Sort items", wx::ID_ANY);
 
         let btn = wx::Button::builder(Some(&self.base))
-            .id(ChoicePage::Reset.into())
+            .id(ComboPage::Reset.into())
             .label("&Reset")
             .build();
         sizer_left.add_window_int(
@@ -117,17 +141,17 @@ impl WidgetsPage for ChoiceWidgetsPage {
 
         // middle pane
         let s_box2 = wx::StaticBox::builder(Some(&self.base))
-            .label("&Change choice contents")
+            .label("&Change combo contents")
             .build();
         let sizer_middle = wx::StaticBoxSizer::new_with_staticbox(Some(&s_box2), wx::VERTICAL);
 
         let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
         let btn = wx::Button::builder(Some(&self.base))
-            .id(ChoicePage::Add.into())
+            .id(ComboPage::Add.into())
             .label("&Add this string")
             .build();
         let text_add = wx::TextCtrl::builder(Some(&self.base))
-            .id(ChoicePage::AddText.into())
+            .id(ComboPage::AddText.into())
             .value("test item 0")
             .build();
         sizer_row.add_window_int(Some(&btn), 0, wx::RIGHT, 5, wx::Object::none());
@@ -141,24 +165,24 @@ impl WidgetsPage for ChoiceWidgetsPage {
         );
 
         let btn = wx::Button::builder(Some(&self.base))
-            .id(ChoicePage::AddSeveral.into())
+            .id(ComboPage::AddSeveral.into())
             .label("&Insert a few strings")
             .build();
         sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
         let btn = wx::Button::builder(Some(&self.base))
-            .id(ChoicePage::AddMany.into())
+            .id(ComboPage::AddMany.into())
             .label("Add &many strings")
             .build();
         sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
         let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
         let btn = wx::Button::builder(Some(&self.base))
-            .id(ChoicePage::Change.into())
+            .id(ComboPage::Change.into())
             .label("C&hange current")
             .build();
         let text_change = wx::TextCtrl::builder(Some(&self.base))
-            .id(ChoicePage::ChangeText.into())
+            .id(ComboPage::ChangeText.into())
             .build();
         sizer_row.add_window_int(Some(&btn), 0, wx::RIGHT, 5, wx::Object::none());
         sizer_row.add_window_int(Some(&text_change), 1, wx::LEFT, 5, wx::Object::none());
@@ -172,11 +196,11 @@ impl WidgetsPage for ChoiceWidgetsPage {
 
         let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
         let btn = wx::Button::builder(Some(&self.base))
-            .id(ChoicePage::Delete.into())
+            .id(ComboPage::Delete.into())
             .label("&Delete this item")
             .build();
         let text_delete = wx::TextCtrl::builder(Some(&self.base))
-            .id(ChoicePage::DeleteText.into())
+            .id(ComboPage::DeleteText.into())
             .build();
         sizer_row.add_window_int(Some(&btn), 0, wx::RIGHT, 5, wx::Object::none());
         sizer_row.add_window_int(Some(&text_delete), 1, wx::LEFT, 5, wx::Object::none());
@@ -189,31 +213,31 @@ impl WidgetsPage for ChoiceWidgetsPage {
         );
 
         let btn = wx::Button::builder(Some(&self.base))
-            .id(ChoicePage::DeleteSel.into())
+            .id(ComboPage::DeleteSel.into())
             .label("Delete &selection")
             .build();
         sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
         let btn = wx::Button::builder(Some(&self.base))
-            .id(ChoicePage::Clear.into())
+            .id(ComboPage::Clear.into())
             .label("&Clear")
             .build();
         sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
         let btn = wx::Button::builder(Some(&self.base))
-            .id(ChoicePage::ContainerTests.into())
+            .id(ComboPage::ContainerTests.into())
             .label("Run &tests")
             .build();
         sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
         // right pane
         let sizer_right = wx::BoxSizer::new(wx::VERTICAL);
-        let choice = wx::Choice::builder(Some(&self.base))
-            .id(ChoicePage::Choice.into())
+        let combo = wx::ComboBox::builder(Some(&self.base))
+            .id(ComboPage::Combo.into())
             .build();
-        sizer_right.add_window_int(Some(&choice), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+        sizer_right.add_window_int(Some(&combo), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
         sizer_right.set_min_size_int(150, 0);
-        *self.choice.borrow_mut() = Some(choice);
+        *self.combo.borrow_mut() = Some(combo);
 
         // the 3 panes panes compose the window
         sizer_top.add_sizer_sizerflags(
@@ -235,7 +259,7 @@ impl WidgetsPage for ChoiceWidgetsPage {
         *self.config_ui.borrow_mut() = Some(ConfigUI {
             chk_sort,
 
-            sizer_choice: sizer_right, // save it to modify it later
+            sizer_combo: sizer_right, // save it to modify it later
 
             text_add,
             text_change,
@@ -244,24 +268,24 @@ impl WidgetsPage for ChoiceWidgetsPage {
 
         // do create the main control
         self.reset();
-        self.create_choice();
+        self.create_combo();
 
         self.base.set_sizer(Some(&sizer_top), true);
     }
 
     fn handle_button(&self, event: &wx::CommandEvent) {
         println!("event={}", event.get_id());
-        if let Some(m) = ChoicePage::from(event.get_id()) {
+        if let Some(m) = ComboPage::from(event.get_id()) {
             if let Some(config_ui) = self.config_ui.borrow().as_ref() {
                 match m {
-                    ChoicePage::Reset => self.on_button_reset(),
-                    ChoicePage::Change => self.on_button_change(config_ui),
-                    ChoicePage::Delete => self.on_button_delete(config_ui),
-                    ChoicePage::DeleteSel => self.on_button_delete_sel(),
-                    ChoicePage::Clear => self.on_button_clear(),
-                    ChoicePage::Add => self.on_button_add(config_ui),
-                    ChoicePage::AddSeveral => self.on_button_add_several(),
-                    ChoicePage::AddMany => self.on_button_add_many(),
+                    ComboPage::Reset => self.on_button_reset(),
+                    ComboPage::Change => self.on_button_change(config_ui),
+                    ComboPage::Delete => self.on_button_delete(config_ui),
+                    ComboPage::DeleteSel => self.on_button_delete_sel(),
+                    ComboPage::Clear => self.on_button_clear(),
+                    ComboPage::Add => self.on_button_add(config_ui),
+                    ComboPage::AddSeveral => self.on_button_add_several(),
+                    ComboPage::AddMany => self.on_button_add_many(),
                     // TODO: Support update ui event to disable this when not 3state
                     _ => (),
                 };
@@ -275,21 +299,21 @@ impl WidgetsPage for ChoiceWidgetsPage {
         self.on_check_or_radio_box();
     }
 }
-impl ChoiceWidgetsPage {
+impl ComboboxWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {
         let panel = wx::Panel::builder(Some(book))
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
-        ChoiceWidgetsPage {
+        ComboboxWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
-            choice: Rc::new(RefCell::new(None)),
+            combo: Rc::new(RefCell::new(None)),
             s_item: RefCell::new(1),
         }
     }
 
     fn recreate_widget(&self) {
-        self.create_choice();
+        self.create_combo();
     }
 
     fn reset(&self) {
@@ -298,56 +322,56 @@ impl ChoiceWidgetsPage {
         }
     }
 
-    fn create_choice(&self) {
+    fn create_combo(&self) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            let mut flags = wx::BORDER_DEFAULT;
+            // let mut flags = wx::BORDER_DEFAULT;
 
-            if config_ui.chk_sort.is_checked() {
-                flags |= wx::CB_SORT as c_long;
-            }
+            // if config_ui.chk_sort.is_checked() {
+            //     flags |= wx::CB_SORT as c_long;
+            // }
 
-            let items = wx::ArrayString::new();
-            if let Some(choice) = self.choice.borrow().as_ref() {
-                // TODO: remove (and delete) all choicees
-                let count = choice.get_count();
-                for n in 0..count {
-                    items.add(&choice.get_string(n));
-                }
+            // let items = wx::ArrayString::new();
+            // if let Some(combo) = self.combo.borrow().as_ref() {
+            //     // TODO: remove (and delete) all comboes
+            //     let count = combo.get_count();
+            //     for n in 0..count {
+            //         items.add(&combo.get_string(n));
+            //     }
 
-                config_ui.sizer_choice.detach_window(Some(choice));
-                choice.destroy();
-            }
+            //     config_ui.sizer_combo.detach_window(Some(combo));
+            //     combo.destroy();
+            // }
 
-            let new_choice = wx::Choice::builder(Some(&self.base))
-                .id(ChoicePage::Choice.into())
-                .style(flags)
-                .build();
-            new_choice.set(&items);
+            // let new_combo = wx::ComboBox::builder(Some(&self.base))
+            //     .id(ComboPage::Combobox.into())
+            //     .style(flags)
+            //     .build();
+            // new_combo.set(&items);
 
-            let sizer_choice = &config_ui.sizer_choice;
-            sizer_choice.add_window_int(
-                Some(&new_choice),
-                0,
-                wx::GROW | wx::ALL,
-                5,
-                wx::Object::none(),
-            );
-            sizer_choice.layout();
+            // let sizer_combo = &config_ui.sizer_combo;
+            // sizer_combo.add_window_int(
+            //     Some(&new_combo),
+            //     0,
+            //     wx::GROW | wx::ALL,
+            //     5,
+            //     wx::Object::none(),
+            // );
+            // sizer_combo.layout();
 
-            *self.choice.borrow_mut() = Some(new_choice);
+            // *self.combo.borrow_mut() = Some(new_combo);
         }
     }
 
     fn on_button_reset(&self) {
         self.reset();
-        self.create_choice();
+        self.create_combo();
     }
 
     fn on_button_change(&self, config_ui: &ConfigUI) {
-        if let Some(choice) = self.choice.borrow().as_ref() {
-            let selection = choice.get_selection();
+        if let Some(combo) = self.combo.borrow().as_ref() {
+            let selection = combo.get_selection();
             if selection != wx::NOT_FOUND {
-                choice.set_string(
+                combo.set_string(
                     selection.try_into().unwrap(),
                     &config_ui.text_change.get_value(),
                 );
@@ -358,26 +382,26 @@ impl ChoiceWidgetsPage {
     fn on_button_delete(&self, config_ui: &ConfigUI) {
         let n = config_ui.text_delete.get_value();
         if let Ok(n) = n.parse() {
-            if let Some(choice) = self.choice.borrow().as_ref() {
-                if n < choice.get_count() {
-                    choice.delete(n);
+            if let Some(combo) = self.combo.borrow().as_ref() {
+                if n < combo.get_count() {
+                    combo.delete(n);
                 }
             }
         }
     }
 
     fn on_button_delete_sel(&self) {
-        if let Some(choice) = self.choice.borrow().as_ref() {
-            let selection = choice.get_selection();
+        if let Some(combo) = self.combo.borrow().as_ref() {
+            let selection = combo.get_selection();
             if selection != wx::NOT_FOUND {
-                choice.delete(selection.try_into().unwrap());
+                combo.delete(selection.try_into().unwrap());
             }
         }
     }
 
     fn on_button_clear(&self) {
-        if let Some(choice) = self.choice.borrow().as_ref() {
-            choice.clear();
+        if let Some(combo) = self.combo.borrow().as_ref() {
+            // combo.clear();
         }
     }
 
@@ -392,8 +416,8 @@ impl ChoiceWidgetsPage {
             *self.s_item.borrow_mut() = s_item + 1;
         }
 
-        if let Some(choice) = self.choice.borrow().as_ref() {
-            choice.append_str(&s);
+        if let Some(combo) = self.combo.borrow().as_ref() {
+            combo.append_str(&s);
         }
     }
 
@@ -403,8 +427,8 @@ impl ChoiceWidgetsPage {
         for n in 0..1000 {
             strings.add(&format!("item #{}", n));
         }
-        if let Some(choice) = self.choice.borrow().as_ref() {
-            choice.append_arraystring(&strings);
+        if let Some(combo) = self.combo.borrow().as_ref() {
+            combo.append_arraystring(&strings);
         }
     }
 
@@ -413,12 +437,12 @@ impl ChoiceWidgetsPage {
         items.add("First");
         items.add("another one");
         items.add("and the last (very very very very very very very very very very long) one");
-        if let Some(choice) = self.choice.borrow().as_ref() {
-            choice.insert_arraystring(&items, 0);
+        if let Some(combo) = self.combo.borrow().as_ref() {
+            combo.insert_arraystring(&items, 0);
         }
     }
 
     fn on_check_or_radio_box(&self) {
-        self.create_choice();
+        self.create_combo();
     }
 }
