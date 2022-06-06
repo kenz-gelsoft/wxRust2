@@ -4247,9 +4247,7 @@ pub trait TextEntryMethods: WxRustMethods {
             wx_base::from_wx_string(ffi::wxTextEntry_GetRange(self.as_text_entry(), from, to))
         }
     }
-    fn get_selection(&self, from: *mut c_void, to: *mut c_void) {
-        unsafe { ffi::wxTextEntry_GetSelection(self.as_text_entry(), from, to) }
-    }
+    // BLOCKED: fn GetSelection()
     fn get_string_selection(&self) -> String {
         unsafe {
             wx_base::from_wx_string(ffi::wxTextEntry_GetStringSelection(self.as_text_entry()))

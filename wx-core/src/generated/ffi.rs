@@ -1769,7 +1769,7 @@ extern "C" {
     pub fn wxTextEntry_GetInsertionPoint(self_: *const c_void) -> c_long;
     // NOT_SUPPORTED: pub fn wxTextEntry_GetLastPosition(self_: *const c_void) -> wxTextPos;
     pub fn wxTextEntry_GetRange(self_: *const c_void, from: c_long, to: c_long) -> *mut c_void;
-    pub fn wxTextEntry_GetSelection(self_: *const c_void, from: *mut c_void, to: *mut c_void);
+    // BLOCKED: pub fn wxTextEntry_GetSelection(self_: *const c_void, from: *mut c_void, to: *mut c_void);
     pub fn wxTextEntry_GetStringSelection(self_: *const c_void) -> *mut c_void;
     pub fn wxTextEntry_GetValue(self_: *const c_void) -> *mut c_void;
     pub fn wxTextEntry_IsEditable(self_: *const c_void) -> bool;

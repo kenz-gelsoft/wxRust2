@@ -882,7 +882,6 @@ void wxTextEntry_ForceUpper(wxTextEntry * self);
 #endif
 long wxTextEntry_GetInsertionPoint(const wxTextEntry * self);
 wxString *wxTextEntry_GetRange(const wxTextEntry * self, long from, long to);
-void wxTextEntry_GetSelection(const wxTextEntry * self, long * from, long * to);
 wxString *wxTextEntry_GetStringSelection(const wxTextEntry * self);
 wxString *wxTextEntry_GetValue(const wxTextEntry * self);
 bool wxTextEntry_IsEditable(const wxTextEntry * self);

@@ -345,6 +345,9 @@ blocklist = [
 ]
 [types.wxTextEntry]
 as_mixin = 'as_text_entry'
+blocklist = [
+    'GetSelection',
+]
 wx31 = [
     'ForceUpper',
 ]
