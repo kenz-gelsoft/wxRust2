@@ -37,6 +37,9 @@ wxItemContainerImmutable *wxRadioBox_AsItemContainerImmutable(wxRadioBox * obj) 
 }
 
 // wxTextEntry
+wxTextEntry *wxComboBox_AsTextEntry(wxComboBox * obj) {
+    return static_cast<wxTextEntry *>(obj);
+}
 wxTextEntry *wxTextCtrl_AsTextEntry(wxTextCtrl * obj) {
     return static_cast<wxTextEntry *>(obj);
 }

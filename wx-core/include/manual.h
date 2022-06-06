@@ -20,5 +20,6 @@ extern "C" {
 
     wxItemContainerImmutable *wxRadioBox_AsItemContainerImmutable(wxRadioBox * obj);
 
+    wxTextEntry *wxComboBox_AsTextEntry(wxComboBox * obj);
     wxTextEntry *wxTextCtrl_AsTextEntry(wxTextCtrl * obj);
 }

@@ -81,6 +81,7 @@ mod ffi {
 
         pub fn wxRadioBox_AsItemContainerImmutable(obj: *mut c_void) -> *mut c_void;
 
+        pub fn wxComboBox_AsTextEntry(obj: *mut c_void) -> *mut c_void;
         pub fn wxTextCtrl_AsTextEntry(obj: *mut c_void) -> *mut c_void;
     }
 }
@@ -115,6 +116,11 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for RadioBoxIsOwned<OWNED>
 }
 
 // Mix-in wxTextEntry manually
+impl<const OWNED: bool> TextEntryMethods for ComboBoxIsOwned<OWNED> {
+    fn as_text_entry(&self) -> *mut c_void {
+        unsafe { ffi::wxComboBox_AsTextEntry(self.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> TextEntryMethods for TextCtrlIsOwned<OWNED> {
     fn as_text_entry(&self) -> *mut c_void {
         unsafe { ffi::wxTextCtrl_AsTextEntry(self.as_ptr()) }
