@@ -440,6 +440,32 @@ void wxColourPickerCtrl_SetColour(wxColourPickerCtrl * self, const wxColour * co
     return self->SetColour(*col);
 }
 
+// CLASS: wxComboBox
+wxComboBox *wxComboBox_new() {
+    return new wxComboBox();
+}
+wxComboBox *wxComboBox_new2(wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name) {
+    return new wxComboBox(parent, id, *value, *pos, *size, *choices, style, *validator, *name);
+}
+bool wxComboBox_Create1(wxComboBox * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, *value, *pos, *size, *choices, style, *validator, *name);
+}
+int wxComboBox_GetCurrentSelection(const wxComboBox * self) {
+    return self->GetCurrentSelection();
+}
+bool wxComboBox_IsListEmpty(const wxComboBox * self) {
+    return self->IsListEmpty();
+}
+bool wxComboBox_IsTextEmpty(const wxComboBox * self) {
+    return self->IsTextEmpty();
+}
+void wxComboBox_Popup(wxComboBox * self) {
+    return self->Popup();
+}
+void wxComboBox_Dismiss(wxComboBox * self) {
+    return self->Dismiss();
+}
+
 // CLASS: wxCommandEvent
 void * wxCommandEvent_GetClientData(const wxCommandEvent * self) {
     return self->GetClientData();

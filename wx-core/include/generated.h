@@ -178,6 +178,16 @@ bool wxColourPickerCtrl_Create(wxColourPickerCtrl * self, wxWindow * parent, wxW
 wxColour *wxColourPickerCtrl_GetColour(const wxColourPickerCtrl * self);
 void wxColourPickerCtrl_SetColour(wxColourPickerCtrl * self, const wxColour * col);
 
+// CLASS: wxComboBox
+wxComboBox *wxComboBox_new();
+wxComboBox *wxComboBox_new2(wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
+bool wxComboBox_Create1(wxComboBox * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
+int wxComboBox_GetCurrentSelection(const wxComboBox * self);
+bool wxComboBox_IsListEmpty(const wxComboBox * self);
+bool wxComboBox_IsTextEmpty(const wxComboBox * self);
+void wxComboBox_Popup(wxComboBox * self);
+void wxComboBox_Dismiss(wxComboBox * self);
+
 // CLASS: wxCommandEvent
 void * wxCommandEvent_GetClientData(const wxCommandEvent * self);
 wxClientData * wxCommandEvent_GetClientObject(const wxCommandEvent * self);

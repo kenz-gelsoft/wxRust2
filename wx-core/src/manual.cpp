@@ -23,14 +23,23 @@ int wxRustMessageBox(const wxString *message, const wxString *caption, int style
     return wxMessageBox(*message, *caption, style, parent, x, y);
 }
 
+// wxItemContainer
 wxItemContainer *wxChoice_AsItemContainer(wxChoice * obj) {
     return static_cast<wxItemContainer *>(obj);
 }
+wxItemContainer *wxComboBox_AsItemContainer(wxComboBox * obj) {
+    return static_cast<wxItemContainer *>(obj);
+}
 
+// wxItemContainerImmutable
 wxItemContainerImmutable *wxRadioBox_AsItemContainerImmutable(wxRadioBox * obj) {
     return static_cast<wxItemContainerImmutable *>(obj);
 }
 
+// wxTextEntry
+wxTextEntry *wxComboBox_AsTextEntry(wxComboBox * obj) {
+    return static_cast<wxTextEntry *>(obj);
+}
 wxTextEntry *wxTextCtrl_AsTextEntry(wxTextCtrl * obj) {
     return static_cast<wxTextEntry *>(obj);
 }

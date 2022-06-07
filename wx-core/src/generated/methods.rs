@@ -756,6 +756,70 @@ pub trait ColourPickerCtrlMethods: PickerBaseMethods {
     // BLOCKED: fn SetColour1()
 }
 
+// wxComboBox
+pub trait ComboBoxMethods: ControlMethods {
+    // DTOR: fn ~wxComboBox()
+    // NOT_SUPPORTED: fn Create()
+    fn create<
+        W: WindowMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        A: ArrayStringMethods,
+        V: ValidatorMethods,
+    >(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        value: &str,
+        pos: &P,
+        size: &S,
+        choices: &A,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let value = wx_base::wx_string_from(value);
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let choices = choices.as_ptr();
+            let validator = validator.as_ptr();
+            let name = wx_base::wx_string_from(name);
+            ffi::wxComboBox_Create1(
+                self.as_ptr(),
+                parent,
+                id,
+                value,
+                pos,
+                size,
+                choices,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+    fn get_current_selection(&self) -> c_int {
+        unsafe { ffi::wxComboBox_GetCurrentSelection(self.as_ptr()) }
+    }
+    fn is_list_empty(&self) -> bool {
+        unsafe { ffi::wxComboBox_IsListEmpty(self.as_ptr()) }
+    }
+    fn is_text_empty(&self) -> bool {
+        unsafe { ffi::wxComboBox_IsTextEmpty(self.as_ptr()) }
+    }
+    fn popup(&self) {
+        unsafe { ffi::wxComboBox_Popup(self.as_ptr()) }
+    }
+    fn dismiss(&self) {
+        unsafe { ffi::wxComboBox_Dismiss(self.as_ptr()) }
+    }
+}
+
 // wxCommandEvent
 pub trait CommandEventMethods: EventMethods {
     fn get_client_data(&self) -> *mut c_void {
