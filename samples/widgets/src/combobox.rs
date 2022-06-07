@@ -508,7 +508,7 @@ impl ComboboxWidgetsPage {
                     items.add(&combobox.get_string(n));
                 }
 
-                sel_item = combobox.get_selection();
+                sel_item = ItemContainerImmutableMethods::get_selection(combobox);
             }
 
             let new_cb = wx::ComboBox::builder(Some(&self.base))
@@ -545,7 +545,7 @@ impl ComboboxWidgetsPage {
 
     fn on_button_change(&self, config_ui: &ConfigUI) {
         if let Some(combobox) = self.combobox.borrow().as_ref() {
-            let sel = combobox.get_selection();
+            let sel = ItemContainerImmutableMethods::get_selection(combobox);
             if sel != wx::NOT_FOUND {
                 combobox.set_string(sel.try_into().unwrap(), &config_ui.text_change.get_value());
             }
@@ -566,7 +566,7 @@ impl ComboboxWidgetsPage {
 
     fn on_button_delete_sel(&self) {
         if let Some(combobox) = self.combobox.borrow().as_ref() {
-            let sel = combobox.get_selection();
+            let sel = ItemContainerImmutableMethods::get_selection(combobox);
             if sel != wx::NOT_FOUND {
                 combobox.delete(sel.try_into().unwrap());
             }
@@ -598,7 +598,7 @@ impl ComboboxWidgetsPage {
         }
 
         if let Some(combobox) = self.combobox.borrow().as_ref() {
-            let sel = combobox.get_selection();
+            let sel = ItemContainerImmutableMethods::get_selection(combobox);
             if sel >= 0 {
                 combobox.insert_str(&s, sel.try_into().unwrap());
             }

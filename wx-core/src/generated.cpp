@@ -2378,6 +2378,9 @@ long wxTextEntry_GetInsertionPoint(const wxTextEntry * self) {
 wxString *wxTextEntry_GetRange(const wxTextEntry * self, long from, long to) {
     return new wxString(self->GetRange(from, to));
 }
+void wxTextEntry_GetSelection(const wxTextEntry * self, long * from, long * to) {
+    return self->GetSelection(from, to);
+}
 wxString *wxTextEntry_GetStringSelection(const wxTextEntry * self) {
     return new wxString(self->GetStringSelection());
 }
