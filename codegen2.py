@@ -46,7 +46,9 @@ def generate_library(classes, config, libname):
             ):
                 print(chunk, file=f)
         if is_rust:
-            print(subprocess.check_output(['rustfmt', path]))
+            error = subprocess.check_output(['rustfmt', path])
+            if error:
+                print(error)
 
 def generated_ffi_rs(classes, libname):
     yield '''\

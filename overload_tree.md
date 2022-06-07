@@ -1,8 +1,5 @@
 - 2: wxObject.wxObject: wxObject ()
     - 1: `const wxObject&`: wxObject1 (object)
-b''
-b''
-b''
 - 2: wxAnyButton.SetBitmapMargins: None 
     - 1: `wxCoord`: None 
         - 1: `wxCoord`: SetBitmapMargins (coord)
@@ -609,6 +606,3 @@ b''
                 - 1: `const wxSize&`: None 
                     - 1: `long`: None 
                         - 1: `const wxString&`: wxWindow1 (window)
-b''
-b''
-b''
