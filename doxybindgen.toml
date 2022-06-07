@@ -150,19 +150,10 @@ blocklist = [
 [types.wxItemContainer]
 as_mixin = 'as_item_container'
 blocklist = [
+    # std::vector<T> is not supported
     'Append4',
     'Insert4',
     'Set1',
-    # TODO: support `unsigned int` in overload renaming
-    'Append7',
-    'Append8',
-    'Append9',
-    'Insert7',
-    'Insert8',
-    'Insert9',
-    'Set4',
-    'Set5',
-    'Set6',
 ]
 [types.wxItemContainerImmutable]
 blocklist = [

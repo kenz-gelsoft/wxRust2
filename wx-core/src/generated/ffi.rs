@@ -570,9 +570,19 @@ extern "C" {
         items: *const c_void,
         client_data: *mut c_void,
     ) -> c_int;
-    // BLOCKED: pub fn wxItemContainer_Append7(self_: *mut c_void, n: c_uint, items: *const c_void) -> c_int;
-    // BLOCKED: pub fn wxItemContainer_Append8(self_: *mut c_void, n: c_uint, items: *const c_void, client_data: *mut c_void) -> c_int;
-    // BLOCKED: pub fn wxItemContainer_Append9(self_: *mut c_void, n: c_uint, items: *const c_void, client_data: *mut c_void) -> c_int;
+    pub fn wxItemContainer_Append7(self_: *mut c_void, n: c_uint, items: *const c_void) -> c_int;
+    pub fn wxItemContainer_Append8(
+        self_: *mut c_void,
+        n: c_uint,
+        items: *const c_void,
+        client_data: *mut c_void,
+    ) -> c_int;
+    pub fn wxItemContainer_Append9(
+        self_: *mut c_void,
+        n: c_uint,
+        items: *const c_void,
+        client_data: *mut c_void,
+    ) -> c_int;
     pub fn wxItemContainer_Clear(self_: *mut c_void);
     pub fn wxItemContainer_Delete(self_: *mut c_void, n: c_uint);
     pub fn wxItemContainer_DetachClientObject(self_: *mut c_void, n: c_uint) -> *mut c_void;
@@ -610,16 +620,43 @@ extern "C" {
         pos: c_uint,
         client_data: *mut c_void,
     ) -> c_int;
-    // BLOCKED: pub fn wxItemContainer_Insert7(self_: *mut c_void, n: c_uint, items: *const c_void, pos: c_uint) -> c_int;
-    // BLOCKED: pub fn wxItemContainer_Insert8(self_: *mut c_void, n: c_uint, items: *const c_void, pos: c_uint, client_data: *mut c_void) -> c_int;
-    // BLOCKED: pub fn wxItemContainer_Insert9(self_: *mut c_void, n: c_uint, items: *const c_void, pos: c_uint, client_data: *mut c_void) -> c_int;
+    pub fn wxItemContainer_Insert7(
+        self_: *mut c_void,
+        n: c_uint,
+        items: *const c_void,
+        pos: c_uint,
+    ) -> c_int;
+    pub fn wxItemContainer_Insert8(
+        self_: *mut c_void,
+        n: c_uint,
+        items: *const c_void,
+        pos: c_uint,
+        client_data: *mut c_void,
+    ) -> c_int;
+    pub fn wxItemContainer_Insert9(
+        self_: *mut c_void,
+        n: c_uint,
+        items: *const c_void,
+        pos: c_uint,
+        client_data: *mut c_void,
+    ) -> c_int;
     pub fn wxItemContainer_Set(self_: *mut c_void, items: *const c_void);
     // BLOCKED: pub fn wxItemContainer_Set1(self_: *mut c_void, items: *const c_void);
     pub fn wxItemContainer_Set2(self_: *mut c_void, items: *const c_void, client_data: *mut c_void);
     pub fn wxItemContainer_Set3(self_: *mut c_void, items: *const c_void, client_data: *mut c_void);
-    // BLOCKED: pub fn wxItemContainer_Set4(self_: *mut c_void, n: c_uint, items: *const c_void);
-    // BLOCKED: pub fn wxItemContainer_Set5(self_: *mut c_void, n: c_uint, items: *const c_void, client_data: *mut c_void);
-    // BLOCKED: pub fn wxItemContainer_Set6(self_: *mut c_void, n: c_uint, items: *const c_void, client_data: *mut c_void);
+    pub fn wxItemContainer_Set4(self_: *mut c_void, n: c_uint, items: *const c_void);
+    pub fn wxItemContainer_Set5(
+        self_: *mut c_void,
+        n: c_uint,
+        items: *const c_void,
+        client_data: *mut c_void,
+    );
+    pub fn wxItemContainer_Set6(
+        self_: *mut c_void,
+        n: c_uint,
+        items: *const c_void,
+        client_data: *mut c_void,
+    );
 
     // wxItemContainerImmutable
     pub fn wxItemContainerImmutable_delete(self_: *mut c_void);

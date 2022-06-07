@@ -272,6 +272,9 @@ int wxItemContainer_Append2(wxItemContainer * self, const wxString * item, wxCli
 int wxItemContainer_Append3(wxItemContainer * self, const wxArrayString * items);
 int wxItemContainer_Append5(wxItemContainer * self, const wxArrayString * items, void ** client_data);
 int wxItemContainer_Append6(wxItemContainer * self, const wxArrayString * items, wxClientData ** client_data);
+int wxItemContainer_Append7(wxItemContainer * self, unsigned int n, const wxString * items);
+int wxItemContainer_Append8(wxItemContainer * self, unsigned int n, const wxString * items, void ** client_data);
+int wxItemContainer_Append9(wxItemContainer * self, unsigned int n, const wxString * items, wxClientData ** client_data);
 void wxItemContainer_Clear(wxItemContainer * self);
 void wxItemContainer_Delete(wxItemContainer * self, unsigned int n);
 wxClientData * wxItemContainer_DetachClientObject(wxItemContainer * self, unsigned int n);
@@ -288,9 +291,15 @@ int wxItemContainer_Insert2(wxItemContainer * self, const wxString * item, unsig
 int wxItemContainer_Insert3(wxItemContainer * self, const wxArrayString * items, unsigned int pos);
 int wxItemContainer_Insert5(wxItemContainer * self, const wxArrayString * items, unsigned int pos, void ** client_data);
 int wxItemContainer_Insert6(wxItemContainer * self, const wxArrayString * items, unsigned int pos, wxClientData ** client_data);
+int wxItemContainer_Insert7(wxItemContainer * self, unsigned int n, const wxString * items, unsigned int pos);
+int wxItemContainer_Insert8(wxItemContainer * self, unsigned int n, const wxString * items, unsigned int pos, void ** client_data);
+int wxItemContainer_Insert9(wxItemContainer * self, unsigned int n, const wxString * items, unsigned int pos, wxClientData ** client_data);
 void wxItemContainer_Set(wxItemContainer * self, const wxArrayString * items);
 void wxItemContainer_Set2(wxItemContainer * self, const wxArrayString * items, void ** client_data);
 void wxItemContainer_Set3(wxItemContainer * self, const wxArrayString * items, wxClientData ** client_data);
+void wxItemContainer_Set4(wxItemContainer * self, unsigned int n, const wxString * items);
+void wxItemContainer_Set5(wxItemContainer * self, unsigned int n, const wxString * items, void ** client_data);
+void wxItemContainer_Set6(wxItemContainer * self, unsigned int n, const wxString * items, wxClientData ** client_data);
 
 // CLASS: wxItemContainerImmutable
 void wxItemContainerImmutable_delete(wxItemContainerImmutable *self);

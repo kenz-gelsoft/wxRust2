@@ -113,14 +113,18 @@
     - 1: `const wxIcon&`: wxIcon1 (icon)
     - 1: `const char*`: wxIcon3 (char)
     - 1: `const wxIconLocation&`: wxIcon5 (iconlocation)
-- 6: wxItemContainer.Append: None 
+- 9: wxItemContainer.Append: None 
     - 3: `const wxString&`: Append (str)
         - 1: `void*`: Append1 (str, void)
         - 1: `wxClientData*`: Append2 (str, clientdata)
     - 3: `const wxArrayString&`: Append3 (arraystring)
         - 1: `void**`: Append5 (arraystring, void)
         - 1: `wxClientData**`: Append6 (arraystring, clientdata)
-- 6: wxItemContainer.Insert: None 
+    - 3: `unsigned int`: None 
+        - 3: `const wxString*`: Append7 (uint)
+            - 1: `void**`: Append8 (uint, void)
+            - 1: `wxClientData**`: Append9 (uint, clientdata)
+- 9: wxItemContainer.Insert: None 
     - 3: `const wxString&`: None 
         - 3: `unsigned int`: Insert (str)
             - 1: `void*`: Insert1 (str, void)
@@ -129,10 +133,19 @@
         - 3: `unsigned int`: Insert3 (arraystring)
             - 1: `void**`: Insert5 (arraystring, void)
             - 1: `wxClientData**`: Insert6 (arraystring, clientdata)
-- 3: wxItemContainer.Set: None 
-    - 3: `const wxArrayString&`: Set ()
-        - 1: `void**`: Set2 (void)
-        - 1: `wxClientData**`: Set3 (clientdata)
+    - 3: `unsigned int`: None 
+        - 3: `const wxString*`: None 
+            - 3: `unsigned int`: Insert7 (uint)
+                - 1: `void**`: Insert8 (uint, void)
+                - 1: `wxClientData**`: Insert9 (uint, clientdata)
+- 6: wxItemContainer.Set: None 
+    - 3: `const wxArrayString&`: Set (arraystring)
+        - 1: `void**`: Set2 (arraystring, void)
+        - 1: `wxClientData**`: Set3 (arraystring, clientdata)
+    - 3: `unsigned int`: None 
+        - 3: `const wxString*`: Set4 (uint)
+            - 1: `void**`: Set5 (uint, void)
+            - 1: `wxClientData**`: Set6 (uint, clientdata)
 - 2: wxListBox.wxListBox: wxListBox ()
     - 1: `wxWindow*`: None 
         - 1: `wxWindowID`: None 

@@ -373,6 +373,8 @@ class CxxType:
         t = self.typename
         if t == 'size_t':
             t = 'sz'
+        elif t.startswith('unsigned '):
+            t = re.sub('^unsigned ', 'u', t)
         elif t.startswith('wx'):
             t = t[2:]
         return t.lower()
