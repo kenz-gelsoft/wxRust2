@@ -97,9 +97,13 @@ pub struct ConfigUI {
     sizer_combo: wx::BoxSizer,
 
     // the text entries for "Add/change string" and "Delete" buttons
+    text_insert: wx::TextCtrl,
     text_add: wx::TextCtrl,
+    text_set_first: wx::TextCtrl,
     text_change: wx::TextCtrl,
+    text_set_value: wx::TextCtrl,
     text_delete: wx::TextCtrl,
+    text_cur: wx::TextCtrl,
 }
 
 #[derive(Clone)]
@@ -324,6 +328,19 @@ impl WidgetsPage for ComboboxWidgetsPage {
             .build();
         sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
+        let (sizer_row, text_set_value) = self.create_sizer_with_text_and_button(
+            ComboPage::SetValue.into(),
+            "SetValue",
+            ComboPage::SetValueText.into(),
+        );
+        sizer_middle.add_sizer_int(
+            Some(&sizer_row),
+            0,
+            wx::ALL | wx::GROW,
+            5,
+            wx::Object::none(),
+        );
+
         let btn = wx::Button::builder(Some(&self.base))
             .id(ComboPage::ContainerTests.into())
             .label("Run &tests")
@@ -388,9 +405,13 @@ impl WidgetsPage for ComboboxWidgetsPage {
 
             sizer_combo: sizer_right, // save it to modify it later
 
+            text_insert,
             text_add,
+            text_set_first,
             text_change,
+            text_set_value,
             text_delete,
+            text_cur,
         });
 
         // final initializations
@@ -409,9 +430,13 @@ impl WidgetsPage for ComboboxWidgetsPage {
                     ComboPage::Delete => self.on_button_delete(config_ui),
                     ComboPage::DeleteSel => self.on_button_delete_sel(),
                     ComboPage::Clear => self.on_button_clear(),
+                    ComboPage::Insert => self.on_button_insert(config_ui),
                     ComboPage::Add => self.on_button_add(config_ui),
+                    ComboPage::SetFirst => self.on_button_set_first(config_ui),
                     ComboPage::AddSeveral => self.on_button_add_several(),
                     ComboPage::AddMany => self.on_button_add_many(),
+                    ComboPage::SetValue => self.on_button_set_value(config_ui),
+                    ComboPage::SetCurrent => self.on_button_set_current(config_ui),
                     // TODO: Support update ui event to disable this when not 3state
                     _ => (),
                 };
@@ -442,6 +467,10 @@ impl ComboboxWidgetsPage {
     fn recreate_widget(&self) {
         self.create_combo();
     }
+
+    // ----------------------------------------------------------------------------
+    // operations
+    // ----------------------------------------------------------------------------
 
     fn reset(&self) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
@@ -505,6 +534,10 @@ impl ComboboxWidgetsPage {
         }
     }
 
+    // ----------------------------------------------------------------------------
+    // event handlers
+    // ----------------------------------------------------------------------------
+
     fn on_button_reset(&self) {
         self.reset();
         self.create_combo();
@@ -512,12 +545,9 @@ impl ComboboxWidgetsPage {
 
     fn on_button_change(&self, config_ui: &ConfigUI) {
         if let Some(combobox) = self.combobox.borrow().as_ref() {
-            let selection = combobox.get_selection();
-            if selection != wx::NOT_FOUND {
-                combobox.set_string(
-                    selection.try_into().unwrap(),
-                    &config_ui.text_change.get_value(),
-                );
+            let sel = combobox.get_selection();
+            if sel != wx::NOT_FOUND {
+                combobox.set_string(sel.try_into().unwrap(), &config_ui.text_change.get_value());
             }
         }
     }
@@ -526,25 +556,52 @@ impl ComboboxWidgetsPage {
         let n = config_ui.text_delete.get_value();
         if let Ok(n) = n.parse() {
             if let Some(combobox) = self.combobox.borrow().as_ref() {
-                if n < combobox.get_count() {
-                    combobox.delete(n);
+                if n >= combobox.get_count() {
+                    return;
                 }
+                combobox.delete(n);
             }
         }
     }
 
     fn on_button_delete_sel(&self) {
         if let Some(combobox) = self.combobox.borrow().as_ref() {
-            let selection = combobox.get_selection();
-            if selection != wx::NOT_FOUND {
-                combobox.delete(selection.try_into().unwrap());
+            let sel = combobox.get_selection();
+            if sel != wx::NOT_FOUND {
+                combobox.delete(sel.try_into().unwrap());
             }
+        }
+    }
+
+    fn on_button_set_value(&self, config_ui: &ConfigUI) {
+        let value = config_ui.text_set_value.get_value();
+        if let Some(combobox) = self.combobox.borrow().as_ref() {
+            combobox.set_value(&value);
         }
     }
 
     fn on_button_clear(&self) {
         if let Some(combobox) = self.combobox.borrow().as_ref() {
             ItemContainerMethods::clear(combobox);
+        }
+    }
+
+    fn on_button_insert(&self, config_ui: &ConfigUI) {
+        let s = config_ui.text_insert.get_value();
+        if !config_ui.text_insert.is_modified() {
+            // update the default string
+            let s_item = *self.s_item.borrow();
+            config_ui
+                .text_insert
+                .set_value(&format!("test item {}", s_item));
+            *self.s_item.borrow_mut() = s_item + 1;
+        }
+
+        if let Some(combobox) = self.combobox.borrow().as_ref() {
+            let sel = combobox.get_selection();
+            if sel >= 0 {
+                combobox.insert_str(&s, sel.try_into().unwrap());
+            }
         }
     }
 
@@ -564,14 +621,31 @@ impl ComboboxWidgetsPage {
         }
     }
 
+    fn on_button_set_first(&self, config_ui: &ConfigUI) {
+        if let Some(combobox) = self.combobox.borrow().as_ref() {
+            if combobox.is_list_empty() {
+                println!("No string to change.");
+                return;
+            }
+            combobox.set_string(0, &config_ui.text_set_first.get_value());
+        }
+    }
+
     fn on_button_add_many(&self) {
         // "many" means 1000 here
-        let strings = wx::ArrayString::new();
-        for n in 0..1000 {
-            strings.add(&format!("item #{}", n));
-        }
         if let Some(combobox) = self.combobox.borrow().as_ref() {
-            combobox.append_arraystring(&strings);
+            for n in 0..1000 {
+                combobox.append_str(&format!("item #{}", n));
+            }
+        }
+    }
+
+    fn on_button_set_current(&self, config_ui: &ConfigUI) {
+        let n = config_ui.text_cur.get_value();
+        if let Ok(n) = n.parse() {
+            if let Some(combobox) = self.combobox.borrow().as_ref() {
+                ItemContainerImmutableMethods::set_selection(combobox, n);
+            }
         }
     }
 
