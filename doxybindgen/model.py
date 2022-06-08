@@ -64,7 +64,7 @@ class Class:
     def __init__(self, manager, e, config):
         self.manager = manager
         self.name = e.findtext('compoundname')
-        self.base = e.findtext('basecompoundref')
+        self.__base_classes = [b.text for b in e.findall('basecompoundref')]
         self.enums = []
         self.methods = []
         config = config.get(self.name) or {}
@@ -81,6 +81,16 @@ class Class:
             if m.is_virtual_override:
                 continue
             self.methods.append(m)
+    
+    def primary_base(self):
+        if not self.__base_classes:
+            return None
+        return self.__base_classes[0]
+    
+    def mixins(self):
+        if len(self.__base_classes) < 2:
+            return None
+        return self.__base_classes[1:]
 
     def _find_libname(self, e):
         library = self.config.get('library')
@@ -331,7 +341,7 @@ class ClassManager:
         current = cls
         while current:
             base_classes.append(current)
-            current = self.by_name(current.base)
+            current = self.by_name(current.primary_base())
         return base_classes
 
     def is_a(self, cls, ancestor):

@@ -106,7 +106,7 @@ class RustClassBinding:
     
     def _trait_with_methods(self):
         indent = ' ' * 4 * 1
-        base = self.__model.base
+        base = self.__model.primary_base()
         if not base:
             base = '__WxRust'
         yield 'pub trait %sMethods: %sMethods {' % (
