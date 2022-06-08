@@ -115,8 +115,8 @@ class RustClassBinding:
         )
         as_mixin = self.__model.config.get('as_mixin')
         if as_mixin:
-            yield '    fn %s(&self) -> *mut c_void;' % (
-                as_mixin,
+            yield '    fn as_%s(&self) -> *mut c_void;' % (
+                pascal_to_snake(self.__model.unprefixed()),
             )
         ancestors = self.__model.manager.ancestors_of(self.__model)
         for method in self.__methods:
