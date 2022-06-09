@@ -89,8 +89,10 @@ class Class:
     
     def mixins(self):
         if len(self.__base_classes) < 2:
-            return None
-        return self.__base_classes[1:]
+            return
+        for mixin in self.__base_classes[1:]:
+            if self.manager.is_binding_type(mixin):
+                yield mixin
 
     def _find_libname(self, e):
         library = self.config.get('library')
@@ -334,8 +336,7 @@ class ClassManager:
         # TODO: optimize
         all_classes = self.all()
         for cls in all_classes:
-            mixins = cls.mixins()
-            if mixins and name in mixins:
+            if name in cls.mixins():
                 print('%s is mixed into %s' % (
                     name,
                     cls.name,

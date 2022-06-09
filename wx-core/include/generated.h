@@ -152,6 +152,8 @@ int wxChoice_GetColumns(const wxChoice * self);
 int wxChoice_GetCurrentSelection(const wxChoice * self);
 void wxChoice_SetColumns(wxChoice * self, int n);
 bool wxChoice_IsSorted(const wxChoice * self);
+// Mix-in(s) to wxChoice
+wxItemContainer *wxChoice_AsItemContainer(wxChoice* obj);
 
 // CLASS: wxColour
 wxColour *wxColour_new();
@@ -187,6 +189,9 @@ bool wxComboBox_IsListEmpty(const wxComboBox * self);
 bool wxComboBox_IsTextEmpty(const wxComboBox * self);
 void wxComboBox_Popup(wxComboBox * self);
 void wxComboBox_Dismiss(wxComboBox * self);
+// Mix-in(s) to wxComboBox
+wxItemContainer *wxComboBox_AsItemContainer(wxComboBox* obj);
+wxTextEntry *wxComboBox_AsTextEntry(wxComboBox* obj);
 
 // CLASS: wxCommandEvent
 void * wxCommandEvent_GetClientData(const wxCommandEvent * self);
@@ -334,6 +339,8 @@ bool wxListBox_IsSorted(const wxListBox * self);
 int wxListBox_GetCountPerPage(const wxListBox * self);
 int wxListBox_GetTopItem(const wxListBox * self);
 #endif
+// Mix-in(s) to wxListBox
+wxItemContainer *wxListBox_AsItemContainer(wxListBox* obj);
 
 // CLASS: wxMenu
 wxMenu *wxMenu_new();
@@ -537,6 +544,8 @@ bool wxRadioBox_IsItemShown(const wxRadioBox * self, unsigned int n);
 void wxRadioBox_SetItemHelpText(wxRadioBox * self, unsigned int item, const wxString * helptext);
 void wxRadioBox_SetItemToolTip(wxRadioBox * self, unsigned int item, const wxString * text);
 bool wxRadioBox_Show(wxRadioBox * self, unsigned int item, bool show);
+// Mix-in(s) to wxRadioBox
+wxItemContainerImmutable *wxRadioBox_AsItemContainerImmutable(wxRadioBox* obj);
 
 // CLASS: wxRect
 void wxRect_delete(wxRect *self);
@@ -869,6 +878,8 @@ void wxTextCtrl_SetModified(wxTextCtrl * self, bool modified);
 bool wxTextCtrl_SetStyle(wxTextCtrl * self, long start, long end, const wxTextAttr * style);
 void wxTextCtrl_ShowPosition(wxTextCtrl * self, long pos);
 long wxTextCtrl_XYToPosition(const wxTextCtrl * self, long x, long y);
+// Mix-in(s) to wxTextCtrl
+wxTextEntry *wxTextCtrl_AsTextEntry(wxTextCtrl* obj);
 
 // CLASS: wxTextEntry
 void wxTextEntry_delete(wxTextEntry *self);
