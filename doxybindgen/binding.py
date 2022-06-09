@@ -464,21 +464,26 @@ class CxxClassBinding:
         if self.in_condition:
             yield '#endif'
         mixins = list(self.__model.mixins())
-        if mixins and not is_cc:
+        if mixins:
             yield '// Mix-in(s) to %s' % (self.__model.name,)
         for mixin in mixins:
             for line in self._mixin_lines(mixin, is_cc=is_cc):
                 yield line
         yield ''
 
-    def _mixin_lines(self, mixin_class, is_cc):
-        if not is_cc:
-            yield '%s *%s_As%s(%s* obj);' % (
-                mixin_class,
-                self.__model.name,
-                mixin_class[2:], # TODO: unprefixed
-                self.__model.name,
-            )
+    def _mixin_lines(self, mixin, is_cc):
+        signature = '%s *%s_As%s(%s* obj)' % (
+            mixin,
+            self.__model.name,
+            mixin[2:], # TODO: unprefixed
+            self.__model.name,
+        )
+        if is_cc:
+            yield '%s {' % (signature,)
+            yield '    return static_cast<%s*>(obj);' % (mixin,)
+            yield '}'
+        else:
+            yield '%s;' % (signature,)
 
     def _ctors(self):
         return (m for m in self.__methods if m.is_ctor)

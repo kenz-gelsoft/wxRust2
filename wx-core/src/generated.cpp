@@ -380,6 +380,10 @@ void wxChoice_SetColumns(wxChoice * self, int n) {
 bool wxChoice_IsSorted(const wxChoice * self) {
     return self->IsSorted();
 }
+// Mix-in(s) to wxChoice
+wxItemContainer *wxChoice_AsItemContainer(wxChoice* obj) {
+    return static_cast<wxItemContainer*>(obj);
+}
 
 // CLASS: wxColour
 wxColour *wxColour_new() {
@@ -464,6 +468,13 @@ void wxComboBox_Popup(wxComboBox * self) {
 }
 void wxComboBox_Dismiss(wxComboBox * self) {
     return self->Dismiss();
+}
+// Mix-in(s) to wxComboBox
+wxItemContainer *wxComboBox_AsItemContainer(wxComboBox* obj) {
+    return static_cast<wxItemContainer*>(obj);
+}
+wxTextEntry *wxComboBox_AsTextEntry(wxComboBox* obj) {
+    return static_cast<wxTextEntry*>(obj);
 }
 
 // CLASS: wxCommandEvent
@@ -862,6 +873,10 @@ int wxListBox_GetTopItem(const wxListBox * self) {
     return self->GetTopItem();
 }
 #endif
+// Mix-in(s) to wxListBox
+wxItemContainer *wxListBox_AsItemContainer(wxListBox* obj) {
+    return static_cast<wxItemContainer*>(obj);
+}
 
 // CLASS: wxMenu
 wxMenu *wxMenu_new() {
@@ -1402,6 +1417,10 @@ void wxRadioBox_SetItemToolTip(wxRadioBox * self, unsigned int item, const wxStr
 }
 bool wxRadioBox_Show(wxRadioBox * self, unsigned int item, bool show) {
     return self->Show(item, show);
+}
+// Mix-in(s) to wxRadioBox
+wxItemContainerImmutable *wxRadioBox_AsItemContainerImmutable(wxRadioBox* obj) {
+    return static_cast<wxItemContainerImmutable*>(obj);
 }
 
 // CLASS: wxRect
@@ -2346,6 +2365,10 @@ void wxTextCtrl_ShowPosition(wxTextCtrl * self, long pos) {
 }
 long wxTextCtrl_XYToPosition(const wxTextCtrl * self, long x, long y) {
     return self->XYToPosition(x, y);
+}
+// Mix-in(s) to wxTextCtrl
+wxTextEntry *wxTextCtrl_AsTextEntry(wxTextCtrl* obj) {
+    return static_cast<wxTextEntry*>(obj);
 }
 
 // CLASS: wxTextEntry
