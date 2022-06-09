@@ -57,6 +57,8 @@ class RustClassBinding:
                 yield line
             for line in self._impl_drop_if_needed():
                 yield line
+            for line in self._impl_mixin_if_needed():
+                yield line
             for line in self._impl_non_virtual_overrides():
                 yield line
     
@@ -100,6 +102,30 @@ class RustClassBinding:
         yield '    }'
         yield '}'
     
+    def _impl_mixin_if_needed(self):
+        mixins = list(self.__model.mixins())
+        if not mixins:
+            return
+        yield '// Mix-in(s) to %s' % (self.__model.name,)
+        for mixin in mixins:
+            for cls in self._ancestors_names_of(mixin):
+                unprefixed = cls[2:]
+                yield 'impl<const OWNED: bool> %sMethods for %sIsOwned<OWNED> {' % (
+                    unprefixed,
+                    self.__model.unprefixed(),
+                )
+                yield '    fn as_%s(&self) -> *mut c_void {' % (pascal_to_snake(unprefixed),)
+                yield '        unsafe { ffi::%s_As%s(self.as_ptr()) }' % (
+                    self.__model.name,
+                    unprefixed,
+                )
+                yield '    }'
+                yield '}'
+    
+    def _ancestors_names_of(self, name):
+        cm = self.__model.manager
+        return (a.name for a in cm.ancestors_of(cm.by_name(name)))
+
     def _impl_non_virtual_overrides(self):
         for ancestor in self.__model.manager.ancestors_of(self.__model):
             methods = [m for m in self.__methods if m.is_non_virtual_override(ancestor)]

@@ -86,47 +86,6 @@ mod ffi {
     }
 }
 
-// Mix-in wxItemContainer manually
-impl<const OWNED: bool> ItemContainerMethods for ChoiceIsOwned<OWNED> {
-    fn as_item_container(&self) -> *mut c_void {
-        unsafe { ffi::wxChoice_AsItemContainer(self.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> ItemContainerMethods for ComboBoxIsOwned<OWNED> {
-    fn as_item_container(&self) -> *mut c_void {
-        unsafe { ffi::wxComboBox_AsItemContainer(self.as_ptr()) }
-    }
-}
-
-// Mix-in wxItemContainerImmutable manually
-impl<const OWNED: bool> ItemContainerImmutableMethods for ChoiceIsOwned<OWNED> {
-    fn as_item_container_immutable(&self) -> *mut c_void {
-        unsafe { ffi::wxChoice_AsItemContainer(self.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> ItemContainerImmutableMethods for ComboBoxIsOwned<OWNED> {
-    fn as_item_container_immutable(&self) -> *mut c_void {
-        unsafe { ffi::wxComboBox_AsItemContainer(self.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> ItemContainerImmutableMethods for RadioBoxIsOwned<OWNED> {
-    fn as_item_container_immutable(&self) -> *mut c_void {
-        unsafe { ffi::wxRadioBox_AsItemContainerImmutable(self.as_ptr()) }
-    }
-}
-
-// Mix-in wxTextEntry manually
-impl<const OWNED: bool> TextEntryMethods for ComboBoxIsOwned<OWNED> {
-    fn as_text_entry(&self) -> *mut c_void {
-        unsafe { ffi::wxComboBox_AsTextEntry(self.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> TextEntryMethods for TextCtrlIsOwned<OWNED> {
-    fn as_text_entry(&self) -> *mut c_void {
-        unsafe { ffi::wxTextCtrl_AsTextEntry(self.as_ptr()) }
-    }
-}
-
 pub struct ColourPickerCtrlBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
