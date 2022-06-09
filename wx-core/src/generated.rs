@@ -382,7 +382,7 @@ impl<const OWNED: bool> ItemContainerMethods for ChoiceIsOwned<OWNED> {
 }
 impl<const OWNED: bool> ItemContainerImmutableMethods for ChoiceIsOwned<OWNED> {
     fn as_item_container_immutable(&self) -> *mut c_void {
-        unsafe { ffi::wxChoice_AsItemContainerImmutable(self.as_ptr()) }
+        unsafe { ffi::wxChoice_AsItemContainer(self.as_ptr()) }
     }
 }
 
@@ -531,7 +531,7 @@ impl<const OWNED: bool> ItemContainerMethods for ComboBoxIsOwned<OWNED> {
 }
 impl<const OWNED: bool> ItemContainerImmutableMethods for ComboBoxIsOwned<OWNED> {
     fn as_item_container_immutable(&self) -> *mut c_void {
-        unsafe { ffi::wxComboBox_AsItemContainerImmutable(self.as_ptr()) }
+        unsafe { ffi::wxComboBox_AsItemContainer(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> TextEntryMethods for ComboBoxIsOwned<OWNED> {
@@ -788,7 +788,7 @@ impl<const OWNED: bool> ItemContainerMethods for ListBoxIsOwned<OWNED> {
 }
 impl<const OWNED: bool> ItemContainerImmutableMethods for ListBoxIsOwned<OWNED> {
     fn as_item_container_immutable(&self) -> *mut c_void {
-        unsafe { ffi::wxListBox_AsItemContainerImmutable(self.as_ptr()) }
+        unsafe { ffi::wxListBox_AsItemContainer(self.as_ptr()) }
     }
 }
 

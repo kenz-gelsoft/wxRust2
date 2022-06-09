@@ -38,6 +38,8 @@ class RustClassBinding:
             for method in self.__methods:
                 for line in method.lines(for_ffi=True):
                     yield line
+            for line in self._mixin_ffi_lines():
+                yield line
         elif for_methods:
             for line in self._trait_with_methods():
                 yield line
@@ -102,22 +104,36 @@ class RustClassBinding:
         yield '    }'
         yield '}'
     
+
+    def _mixin_ffi_lines(self):
+        mixins = list(self.__model.mixins())
+        if not mixins:
+            return
+        yield '// Mix-in(s) to %s' % (self.__model.name,)
+        for mixin in mixins:
+            yield 'pub fn %s_As%s(obj: *mut c_void) -> *mut c_void;' % (
+                self.__model.name,
+                mixin[2:],
+            )
+    
     def _impl_mixin_if_needed(self):
         mixins = list(self.__model.mixins())
         if not mixins:
             return
         yield '// Mix-in(s) to %s' % (self.__model.name,)
         for mixin in mixins:
-            for cls in self._ancestors_names_of(mixin):
-                unprefixed = cls[2:]
+            for ancestor in self._ancestors_names_of(mixin):
+                ancestor_unprefixed = ancestor[2:]
                 yield 'impl<const OWNED: bool> %sMethods for %sIsOwned<OWNED> {' % (
-                    unprefixed,
+                    ancestor_unprefixed,
                     self.__model.unprefixed(),
                 )
-                yield '    fn as_%s(&self) -> *mut c_void {' % (pascal_to_snake(unprefixed),)
+                yield '    fn as_%s(&self) -> *mut c_void {' % (
+                    pascal_to_snake(ancestor_unprefixed),
+                )
                 yield '        unsafe { ffi::%s_As%s(self.as_ptr()) }' % (
                     self.__model.name,
-                    unprefixed,
+                    mixin[2:],
                 )
                 yield '    }'
                 yield '}'
