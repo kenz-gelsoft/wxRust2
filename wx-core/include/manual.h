@@ -13,13 +13,4 @@ extern "C" {
     DECL_WX_LIST_BINDING(wxWindow);
 
     int wxRustMessageBox(const wxString *message, const wxString *caption, int style, wxWindow *parent, int x, int y);
-
-    // wxItemContainer
-    wxItemContainer *wxChoice_AsItemContainer(wxChoice * obj);
-    wxItemContainer *wxComboBox_AsItemContainer(wxComboBox * obj);
-
-    wxItemContainerImmutable *wxRadioBox_AsItemContainerImmutable(wxRadioBox * obj);
-
-    wxTextEntry *wxComboBox_AsTextEntry(wxComboBox * obj);
-    wxTextEntry *wxTextCtrl_AsTextEntry(wxTextCtrl * obj);
 }

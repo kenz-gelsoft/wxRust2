@@ -75,14 +75,6 @@ mod ffi {
             x: c_int,
             y: c_int,
         );
-
-        pub fn wxChoice_AsItemContainer(obj: *mut c_void) -> *mut c_void;
-        pub fn wxComboBox_AsItemContainer(obj: *mut c_void) -> *mut c_void;
-
-        pub fn wxRadioBox_AsItemContainerImmutable(obj: *mut c_void) -> *mut c_void;
-
-        pub fn wxComboBox_AsTextEntry(obj: *mut c_void) -> *mut c_void;
-        pub fn wxTextCtrl_AsTextEntry(obj: *mut c_void) -> *mut c_void;
     }
 }
 
