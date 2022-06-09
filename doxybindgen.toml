@@ -148,7 +148,6 @@ blocklist = [
     'operator=',
 ]
 [types.wxItemContainer]
-as_mixin = 'as_item_container'
 blocklist = [
     # std::vector<T> is not supported
     'Append4',
@@ -160,7 +159,6 @@ blocklist = [
     'GetStrings',
     'wxItemContainerImmutable',
 ]
-as_mixin = 'as_item_container_immutable'
 [types.wxListBox]
 blocklist = [
     'InsertItems',
@@ -335,7 +333,6 @@ blocklist = [
     'operator<<4',
 ]
 [types.wxTextEntry]
-as_mixin = 'as_text_entry'
 wx31 = [
     'ForceUpper',
 ]
