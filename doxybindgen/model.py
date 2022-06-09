@@ -330,6 +330,19 @@ class ClassManager:
         assert self.__by_name is not None
         return name in self.__by_name.keys()
     
+    def is_mixin(self, name):
+        # TODO: optimize
+        all_classes = self.all()
+        for cls in all_classes:
+            mixins = cls.mixins()
+            if mixins and name in mixins:
+                print('%s is mixed into %s' % (
+                    name,
+                    cls.name,
+                ))
+                return True
+        return False
+    
     def ancestors_of(self, cls):
         info = self.__by_name.get(cls.name)
         if info.ancestors is None:

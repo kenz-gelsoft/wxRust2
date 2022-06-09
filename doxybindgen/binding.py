@@ -8,9 +8,22 @@ class RustClassBinding:
         self.overloads = OverloadTree(model)
         self.overloads.print_tree()
         self.__methods = [RustMethodBinding(self, m) for m in model.methods]
+        self.__is_mixin_cache = None
     
     def is_a(self, base):
         return self.__model.manager.is_a(self.__model, base)
+    
+    def is_mixin(self):
+        if self.__is_mixin_cache is None:
+            self.__is_mixin_cache = self.__model.manager.is_mixin(self.__model.name)
+        return self.__is_mixin_cache
+    
+    def as_mixin(self):
+        if not self.is_mixin():
+            return None
+        return 'as_%s' % (
+            pascal_to_snake(self.__model.unprefixed()),
+        )
 
     def lines(self, for_ffi=False, for_methods=False):
         yield ''
@@ -29,7 +42,7 @@ class RustClassBinding:
             for line in self._trait_with_methods():
                 yield line
         else:
-            if self.__model.config.get('as_mixin'):
+            if self.is_mixin():
                 # Don't generate impl if mixin class
                 return
             unprefixed = self.__model.unprefixed()
@@ -113,10 +126,9 @@ class RustClassBinding:
             self.__model.unprefixed(),
             base[2:],
         )
-        as_mixin = self.__model.config.get('as_mixin')
-        if as_mixin:
-            yield '    fn as_%s(&self) -> *mut c_void;' % (
-                pascal_to_snake(self.__model.unprefixed()),
+        if self.is_mixin():
+            yield '    fn %s(&self) -> *mut c_void;' % (
+                self.as_mixin(),
             )
         ancestors = self.__model.manager.ancestors_of(self.__model)
         for method in self.__methods:
@@ -311,7 +323,7 @@ class RustMethodBinding:
         self_to_insert = None
         if self.__model.is_instance_method:
             self_param = self.__self_param.rust_ffi_ref(
-                as_mixin=self.__model.cls.config.get('as_mixin'),
+                as_mixin=self.__cls.as_mixin(),
             )
             self_to_insert = self_param
         call = '%s(%s)' % (
