@@ -1155,9 +1155,20 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
             ffi::wxItemContainer_Append6(self.as_item_container(), items, client_data)
         }
     }
-    // BLOCKED: fn Append7()
-    // BLOCKED: fn Append8()
-    // BLOCKED: fn Append9()
+    fn append_uint(&self, n: c_uint, items: *const c_void) -> c_int {
+        unsafe { ffi::wxItemContainer_Append7(self.as_item_container(), n, items) }
+    }
+    fn append_uint_void(&self, n: c_uint, items: *const c_void, client_data: *mut c_void) -> c_int {
+        unsafe { ffi::wxItemContainer_Append8(self.as_item_container(), n, items, client_data) }
+    }
+    fn append_uint_clientdata(
+        &self,
+        n: c_uint,
+        items: *const c_void,
+        client_data: *mut c_void,
+    ) -> c_int {
+        unsafe { ffi::wxItemContainer_Append9(self.as_item_container(), n, items, client_data) }
+    }
     fn clear(&self) {
         unsafe { ffi::wxItemContainer_Clear(self.as_item_container()) }
     }
@@ -1235,31 +1246,63 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
             ffi::wxItemContainer_Insert6(self.as_item_container(), items, pos, client_data)
         }
     }
-    // BLOCKED: fn Insert7()
-    // BLOCKED: fn Insert8()
-    // BLOCKED: fn Insert9()
-    fn set<A: ArrayStringMethods>(&self, items: &A) {
+    fn insert_uint(&self, n: c_uint, items: *const c_void, pos: c_uint) -> c_int {
+        unsafe { ffi::wxItemContainer_Insert7(self.as_item_container(), n, items, pos) }
+    }
+    fn insert_uint_void(
+        &self,
+        n: c_uint,
+        items: *const c_void,
+        pos: c_uint,
+        client_data: *mut c_void,
+    ) -> c_int {
+        unsafe {
+            ffi::wxItemContainer_Insert8(self.as_item_container(), n, items, pos, client_data)
+        }
+    }
+    fn insert_uint_clientdata(
+        &self,
+        n: c_uint,
+        items: *const c_void,
+        pos: c_uint,
+        client_data: *mut c_void,
+    ) -> c_int {
+        unsafe {
+            ffi::wxItemContainer_Insert9(self.as_item_container(), n, items, pos, client_data)
+        }
+    }
+    fn set_arraystring<A: ArrayStringMethods>(&self, items: &A) {
         unsafe {
             let items = items.as_ptr();
             ffi::wxItemContainer_Set(self.as_item_container(), items)
         }
     }
     // BLOCKED: fn Set1()
-    fn set_void<A: ArrayStringMethods>(&self, items: &A, client_data: *mut c_void) {
+    fn set_arraystring_void<A: ArrayStringMethods>(&self, items: &A, client_data: *mut c_void) {
         unsafe {
             let items = items.as_ptr();
             ffi::wxItemContainer_Set2(self.as_item_container(), items, client_data)
         }
     }
-    fn set_clientdata<A: ArrayStringMethods>(&self, items: &A, client_data: *mut c_void) {
+    fn set_arraystring_clientdata<A: ArrayStringMethods>(
+        &self,
+        items: &A,
+        client_data: *mut c_void,
+    ) {
         unsafe {
             let items = items.as_ptr();
             ffi::wxItemContainer_Set3(self.as_item_container(), items, client_data)
         }
     }
-    // BLOCKED: fn Set4()
-    // BLOCKED: fn Set5()
-    // BLOCKED: fn Set6()
+    fn set_uint(&self, n: c_uint, items: *const c_void) {
+        unsafe { ffi::wxItemContainer_Set4(self.as_item_container(), n, items) }
+    }
+    fn set_uint_void(&self, n: c_uint, items: *const c_void, client_data: *mut c_void) {
+        unsafe { ffi::wxItemContainer_Set5(self.as_item_container(), n, items, client_data) }
+    }
+    fn set_uint_clientdata(&self, n: c_uint, items: *const c_void, client_data: *mut c_void) {
+        unsafe { ffi::wxItemContainer_Set6(self.as_item_container(), n, items, client_data) }
+    }
 }
 
 // wxItemContainerImmutable

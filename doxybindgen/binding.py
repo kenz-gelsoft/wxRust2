@@ -8,9 +8,22 @@ class RustClassBinding:
         self.overloads = OverloadTree(model)
         self.overloads.print_tree()
         self.__methods = [RustMethodBinding(self, m) for m in model.methods]
+        self.__is_mixin_cache = None
     
     def is_a(self, base):
         return self.__model.manager.is_a(self.__model, base)
+    
+    def is_mixin(self):
+        if self.__is_mixin_cache is None:
+            self.__is_mixin_cache = self.__model.manager.is_mixin(self.__model.name)
+        return self.__is_mixin_cache
+    
+    def as_mixin(self):
+        if not self.is_mixin():
+            return None
+        return 'as_%s' % (
+            pascal_to_snake(self.__model.unprefixed()),
+        )
 
     def lines(self, for_ffi=False, for_methods=False):
         yield ''
@@ -25,11 +38,13 @@ class RustClassBinding:
             for method in self.__methods:
                 for line in method.lines(for_ffi=True):
                     yield line
+            for line in self._mixin_ffi_lines():
+                yield line
         elif for_methods:
             for line in self._trait_with_methods():
                 yield line
         else:
-            if self.__model.config.get('as_mixin'):
+            if self.is_mixin():
                 # Don't generate impl if mixin class
                 return
             unprefixed = self.__model.unprefixed()
@@ -43,6 +58,8 @@ class RustClassBinding:
             for line in self._impl_with_ctors():
                 yield line
             for line in self._impl_drop_if_needed():
+                yield line
+            for line in self._impl_mixin_if_needed():
                 yield line
             for line in self._impl_non_virtual_overrides():
                 yield line
@@ -87,6 +104,44 @@ class RustClassBinding:
         yield '    }'
         yield '}'
     
+
+    def _mixin_ffi_lines(self):
+        mixins = list(self.__model.mixins())
+        if not mixins:
+            return
+        yield '// Mix-in(s) to %s' % (self.__model.name,)
+        for mixin in mixins:
+            yield 'pub fn %s_As%s(obj: *mut c_void) -> *mut c_void;' % (
+                self.__model.name,
+                mixin[2:],
+            )
+    
+    def _impl_mixin_if_needed(self):
+        mixins = list(self.__model.mixins())
+        if not mixins:
+            return
+        yield '// Mix-in(s) to %s' % (self.__model.name,)
+        for mixin in mixins:
+            for ancestor in self._ancestors_names_of(mixin):
+                ancestor_unprefixed = ancestor[2:]
+                yield 'impl<const OWNED: bool> %sMethods for %sIsOwned<OWNED> {' % (
+                    ancestor_unprefixed,
+                    self.__model.unprefixed(),
+                )
+                yield '    fn as_%s(&self) -> *mut c_void {' % (
+                    pascal_to_snake(ancestor_unprefixed),
+                )
+                yield '        unsafe { ffi::%s_As%s(self.as_ptr()) }' % (
+                    self.__model.name,
+                    mixin[2:],
+                )
+                yield '    }'
+                yield '}'
+    
+    def _ancestors_names_of(self, name):
+        cm = self.__model.manager
+        return (a.name for a in cm.ancestors_of(cm.by_name(name)))
+
     def _impl_non_virtual_overrides(self):
         for ancestor in self.__model.manager.ancestors_of(self.__model):
             methods = [m for m in self.__methods if m.is_non_virtual_override(ancestor)]
@@ -106,17 +161,16 @@ class RustClassBinding:
     
     def _trait_with_methods(self):
         indent = ' ' * 4 * 1
-        base = self.__model.base
+        base = self.__model.primary_base()
         if not base:
             base = '__WxRust'
         yield 'pub trait %sMethods: %sMethods {' % (
             self.__model.unprefixed(),
             base[2:],
         )
-        as_mixin = self.__model.config.get('as_mixin')
-        if as_mixin:
+        if self.is_mixin():
             yield '    fn %s(&self) -> *mut c_void;' % (
-                as_mixin,
+                self.as_mixin(),
             )
         ancestors = self.__model.manager.ancestors_of(self.__model)
         for method in self.__methods:
@@ -311,7 +365,7 @@ class RustMethodBinding:
         self_to_insert = None
         if self.__model.is_instance_method:
             self_param = self.__self_param.rust_ffi_ref(
-                as_mixin=self.__model.cls.config.get('as_mixin'),
+                as_mixin=self.__cls.as_mixin(),
             )
             self_to_insert = self_param
         call = '%s(%s)' % (
@@ -451,7 +505,27 @@ class CxxClassBinding:
                 yield line
         if self.in_condition:
             yield '#endif'
+        mixins = list(self.__model.mixins())
+        if mixins:
+            yield '// Mix-in(s) to %s' % (self.__model.name,)
+        for mixin in mixins:
+            for line in self._mixin_lines(mixin, is_cc=is_cc):
+                yield line
         yield ''
+
+    def _mixin_lines(self, mixin, is_cc):
+        signature = '%s *%s_As%s(%s* obj)' % (
+            mixin,
+            self.__model.name,
+            mixin[2:], # TODO: unprefixed
+            self.__model.name,
+        )
+        if is_cc:
+            yield '%s {' % (signature,)
+            yield '    return static_cast<%s*>(obj);' % (mixin,)
+            yield '}'
+        else:
+            yield '%s;' % (signature,)
 
     def _ctors(self):
         return (m for m in self.__methods if m.is_ctor)

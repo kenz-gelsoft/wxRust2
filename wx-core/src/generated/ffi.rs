@@ -291,6 +291,8 @@ extern "C" {
     pub fn wxChoice_GetCurrentSelection(self_: *const c_void) -> c_int;
     pub fn wxChoice_SetColumns(self_: *mut c_void, n: c_int);
     pub fn wxChoice_IsSorted(self_: *const c_void) -> bool;
+    // Mix-in(s) to wxChoice
+    pub fn wxChoice_AsItemContainer(obj: *mut c_void) -> *mut c_void;
 
     // wxColour
     pub fn wxColour_new() -> *mut c_void;
@@ -393,6 +395,9 @@ extern "C" {
     pub fn wxComboBox_IsTextEmpty(self_: *const c_void) -> bool;
     pub fn wxComboBox_Popup(self_: *mut c_void);
     pub fn wxComboBox_Dismiss(self_: *mut c_void);
+    // Mix-in(s) to wxComboBox
+    pub fn wxComboBox_AsItemContainer(obj: *mut c_void) -> *mut c_void;
+    pub fn wxComboBox_AsTextEntry(obj: *mut c_void) -> *mut c_void;
 
     // wxCommandEvent
     // NOT_SUPPORTED: pub fn wxCommandEvent_new(command_event_type: wxEventType, id: c_int) -> *mut c_void;
@@ -570,9 +575,19 @@ extern "C" {
         items: *const c_void,
         client_data: *mut c_void,
     ) -> c_int;
-    // BLOCKED: pub fn wxItemContainer_Append7(self_: *mut c_void, n: c_uint, items: *const c_void) -> c_int;
-    // BLOCKED: pub fn wxItemContainer_Append8(self_: *mut c_void, n: c_uint, items: *const c_void, client_data: *mut c_void) -> c_int;
-    // BLOCKED: pub fn wxItemContainer_Append9(self_: *mut c_void, n: c_uint, items: *const c_void, client_data: *mut c_void) -> c_int;
+    pub fn wxItemContainer_Append7(self_: *mut c_void, n: c_uint, items: *const c_void) -> c_int;
+    pub fn wxItemContainer_Append8(
+        self_: *mut c_void,
+        n: c_uint,
+        items: *const c_void,
+        client_data: *mut c_void,
+    ) -> c_int;
+    pub fn wxItemContainer_Append9(
+        self_: *mut c_void,
+        n: c_uint,
+        items: *const c_void,
+        client_data: *mut c_void,
+    ) -> c_int;
     pub fn wxItemContainer_Clear(self_: *mut c_void);
     pub fn wxItemContainer_Delete(self_: *mut c_void, n: c_uint);
     pub fn wxItemContainer_DetachClientObject(self_: *mut c_void, n: c_uint) -> *mut c_void;
@@ -610,16 +625,43 @@ extern "C" {
         pos: c_uint,
         client_data: *mut c_void,
     ) -> c_int;
-    // BLOCKED: pub fn wxItemContainer_Insert7(self_: *mut c_void, n: c_uint, items: *const c_void, pos: c_uint) -> c_int;
-    // BLOCKED: pub fn wxItemContainer_Insert8(self_: *mut c_void, n: c_uint, items: *const c_void, pos: c_uint, client_data: *mut c_void) -> c_int;
-    // BLOCKED: pub fn wxItemContainer_Insert9(self_: *mut c_void, n: c_uint, items: *const c_void, pos: c_uint, client_data: *mut c_void) -> c_int;
+    pub fn wxItemContainer_Insert7(
+        self_: *mut c_void,
+        n: c_uint,
+        items: *const c_void,
+        pos: c_uint,
+    ) -> c_int;
+    pub fn wxItemContainer_Insert8(
+        self_: *mut c_void,
+        n: c_uint,
+        items: *const c_void,
+        pos: c_uint,
+        client_data: *mut c_void,
+    ) -> c_int;
+    pub fn wxItemContainer_Insert9(
+        self_: *mut c_void,
+        n: c_uint,
+        items: *const c_void,
+        pos: c_uint,
+        client_data: *mut c_void,
+    ) -> c_int;
     pub fn wxItemContainer_Set(self_: *mut c_void, items: *const c_void);
     // BLOCKED: pub fn wxItemContainer_Set1(self_: *mut c_void, items: *const c_void);
     pub fn wxItemContainer_Set2(self_: *mut c_void, items: *const c_void, client_data: *mut c_void);
     pub fn wxItemContainer_Set3(self_: *mut c_void, items: *const c_void, client_data: *mut c_void);
-    // BLOCKED: pub fn wxItemContainer_Set4(self_: *mut c_void, n: c_uint, items: *const c_void);
-    // BLOCKED: pub fn wxItemContainer_Set5(self_: *mut c_void, n: c_uint, items: *const c_void, client_data: *mut c_void);
-    // BLOCKED: pub fn wxItemContainer_Set6(self_: *mut c_void, n: c_uint, items: *const c_void, client_data: *mut c_void);
+    pub fn wxItemContainer_Set4(self_: *mut c_void, n: c_uint, items: *const c_void);
+    pub fn wxItemContainer_Set5(
+        self_: *mut c_void,
+        n: c_uint,
+        items: *const c_void,
+        client_data: *mut c_void,
+    );
+    pub fn wxItemContainer_Set6(
+        self_: *mut c_void,
+        n: c_uint,
+        items: *const c_void,
+        client_data: *mut c_void,
+    );
 
     // wxItemContainerImmutable
     pub fn wxItemContainerImmutable_delete(self_: *mut c_void);
@@ -686,6 +728,8 @@ extern "C" {
     pub fn wxListBox_GetCountPerPage(self_: *const c_void) -> c_int;
     pub fn wxListBox_GetTopItem(self_: *const c_void) -> c_int;
     // BLOCKED: pub fn wxListBox_MSWSetTabStops(self_: *mut c_void, tab_stops: *const c_void);
+    // Mix-in(s) to wxListBox
+    pub fn wxListBox_AsItemContainer(obj: *mut c_void) -> *mut c_void;
 
     // wxMenu
     pub fn wxMenu_new() -> *mut c_void;
@@ -1079,6 +1123,8 @@ extern "C" {
     pub fn wxRadioBox_SetItemHelpText(self_: *mut c_void, item: c_uint, helptext: *const c_void);
     pub fn wxRadioBox_SetItemToolTip(self_: *mut c_void, item: c_uint, text: *const c_void);
     pub fn wxRadioBox_Show(self_: *mut c_void, item: c_uint, show: bool) -> bool;
+    // Mix-in(s) to wxRadioBox
+    pub fn wxRadioBox_AsItemContainerImmutable(obj: *mut c_void) -> *mut c_void;
 
     // wxRect
     pub fn wxRect_delete(self_: *mut c_void);
@@ -1748,6 +1794,8 @@ extern "C" {
     // BLOCKED: pub fn wxTextCtrl_operator<<4(self_: *mut c_void, d: c_double) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxTextCtrl_operator<<5(self_: *mut c_void, c: char) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxTextCtrl_operator<<6(self_: *mut c_void, c: wchar_t) -> *mut c_void;
+    // Mix-in(s) to wxTextCtrl
+    pub fn wxTextCtrl_AsTextEntry(obj: *mut c_void) -> *mut c_void;
 
     // wxTextEntry
     pub fn wxTextEntry_delete(self_: *mut c_void);

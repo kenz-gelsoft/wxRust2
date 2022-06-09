@@ -380,6 +380,10 @@ void wxChoice_SetColumns(wxChoice * self, int n) {
 bool wxChoice_IsSorted(const wxChoice * self) {
     return self->IsSorted();
 }
+// Mix-in(s) to wxChoice
+wxItemContainer *wxChoice_AsItemContainer(wxChoice* obj) {
+    return static_cast<wxItemContainer*>(obj);
+}
 
 // CLASS: wxColour
 wxColour *wxColour_new() {
@@ -464,6 +468,13 @@ void wxComboBox_Popup(wxComboBox * self) {
 }
 void wxComboBox_Dismiss(wxComboBox * self) {
     return self->Dismiss();
+}
+// Mix-in(s) to wxComboBox
+wxItemContainer *wxComboBox_AsItemContainer(wxComboBox* obj) {
+    return static_cast<wxItemContainer*>(obj);
+}
+wxTextEntry *wxComboBox_AsTextEntry(wxComboBox* obj) {
+    return static_cast<wxTextEntry*>(obj);
 }
 
 // CLASS: wxCommandEvent
@@ -688,6 +699,15 @@ int wxItemContainer_Append5(wxItemContainer * self, const wxArrayString * items,
 int wxItemContainer_Append6(wxItemContainer * self, const wxArrayString * items, wxClientData ** client_data) {
     return self->Append(*items, client_data);
 }
+int wxItemContainer_Append7(wxItemContainer * self, unsigned int n, const wxString * items) {
+    return self->Append(n, items);
+}
+int wxItemContainer_Append8(wxItemContainer * self, unsigned int n, const wxString * items, void ** client_data) {
+    return self->Append(n, items, client_data);
+}
+int wxItemContainer_Append9(wxItemContainer * self, unsigned int n, const wxString * items, wxClientData ** client_data) {
+    return self->Append(n, items, client_data);
+}
 void wxItemContainer_Clear(wxItemContainer * self) {
     return self->Clear();
 }
@@ -736,6 +756,15 @@ int wxItemContainer_Insert5(wxItemContainer * self, const wxArrayString * items,
 int wxItemContainer_Insert6(wxItemContainer * self, const wxArrayString * items, unsigned int pos, wxClientData ** client_data) {
     return self->Insert(*items, pos, client_data);
 }
+int wxItemContainer_Insert7(wxItemContainer * self, unsigned int n, const wxString * items, unsigned int pos) {
+    return self->Insert(n, items, pos);
+}
+int wxItemContainer_Insert8(wxItemContainer * self, unsigned int n, const wxString * items, unsigned int pos, void ** client_data) {
+    return self->Insert(n, items, pos, client_data);
+}
+int wxItemContainer_Insert9(wxItemContainer * self, unsigned int n, const wxString * items, unsigned int pos, wxClientData ** client_data) {
+    return self->Insert(n, items, pos, client_data);
+}
 void wxItemContainer_Set(wxItemContainer * self, const wxArrayString * items) {
     return self->Set(*items);
 }
@@ -744,6 +773,15 @@ void wxItemContainer_Set2(wxItemContainer * self, const wxArrayString * items, v
 }
 void wxItemContainer_Set3(wxItemContainer * self, const wxArrayString * items, wxClientData ** client_data) {
     return self->Set(*items, client_data);
+}
+void wxItemContainer_Set4(wxItemContainer * self, unsigned int n, const wxString * items) {
+    return self->Set(n, items);
+}
+void wxItemContainer_Set5(wxItemContainer * self, unsigned int n, const wxString * items, void ** client_data) {
+    return self->Set(n, items, client_data);
+}
+void wxItemContainer_Set6(wxItemContainer * self, unsigned int n, const wxString * items, wxClientData ** client_data) {
+    return self->Set(n, items, client_data);
 }
 
 // CLASS: wxItemContainerImmutable
@@ -835,6 +873,10 @@ int wxListBox_GetTopItem(const wxListBox * self) {
     return self->GetTopItem();
 }
 #endif
+// Mix-in(s) to wxListBox
+wxItemContainer *wxListBox_AsItemContainer(wxListBox* obj) {
+    return static_cast<wxItemContainer*>(obj);
+}
 
 // CLASS: wxMenu
 wxMenu *wxMenu_new() {
@@ -1375,6 +1417,10 @@ void wxRadioBox_SetItemToolTip(wxRadioBox * self, unsigned int item, const wxStr
 }
 bool wxRadioBox_Show(wxRadioBox * self, unsigned int item, bool show) {
     return self->Show(item, show);
+}
+// Mix-in(s) to wxRadioBox
+wxItemContainerImmutable *wxRadioBox_AsItemContainerImmutable(wxRadioBox* obj) {
+    return static_cast<wxItemContainerImmutable*>(obj);
 }
 
 // CLASS: wxRect
@@ -2319,6 +2365,10 @@ void wxTextCtrl_ShowPosition(wxTextCtrl * self, long pos) {
 }
 long wxTextCtrl_XYToPosition(const wxTextCtrl * self, long x, long y) {
     return self->XYToPosition(x, y);
+}
+// Mix-in(s) to wxTextCtrl
+wxTextEntry *wxTextCtrl_AsTextEntry(wxTextCtrl* obj) {
+    return static_cast<wxTextEntry*>(obj);
 }
 
 // CLASS: wxTextEntry

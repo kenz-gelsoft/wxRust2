@@ -322,7 +322,7 @@ impl ChoiceWidgetsPage {
                 .id(ChoicePage::Choice.into())
                 .style(flags)
                 .build();
-            new_choice.set(&items);
+            new_choice.set_arraystring(&items);
 
             let sizer_choice = &config_ui.sizer_choice;
             sizer_choice.add_window_int(

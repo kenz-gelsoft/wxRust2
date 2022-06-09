@@ -64,7 +64,7 @@ class Class:
     def __init__(self, manager, e, config):
         self.manager = manager
         self.name = e.findtext('compoundname')
-        self.base = e.findtext('basecompoundref')
+        self.__base_classes = [b.text for b in e.findall('basecompoundref')]
         self.enums = []
         self.methods = []
         config = config.get(self.name) or {}
@@ -81,6 +81,18 @@ class Class:
             if m.is_virtual_override:
                 continue
             self.methods.append(m)
+    
+    def primary_base(self):
+        if not self.__base_classes:
+            return None
+        return self.__base_classes[0]
+    
+    def mixins(self):
+        if len(self.__base_classes) < 2:
+            return
+        for mixin in self.__base_classes[1:]:
+            if self.manager.is_binding_type(mixin):
+                yield mixin
 
     def _find_libname(self, e):
         library = self.config.get('library')
@@ -320,6 +332,18 @@ class ClassManager:
         assert self.__by_name is not None
         return name in self.__by_name.keys()
     
+    def is_mixin(self, name):
+        # TODO: optimize
+        all_classes = self.all()
+        for cls in all_classes:
+            if name in cls.mixins():
+                print('%s is mixed into %s' % (
+                    name,
+                    cls.name,
+                ))
+                return True
+        return False
+    
     def ancestors_of(self, cls):
         info = self.__by_name.get(cls.name)
         if info.ancestors is None:
@@ -331,7 +355,7 @@ class ClassManager:
         current = cls
         while current:
             base_classes.append(current)
-            current = self.by_name(current.base)
+            current = self.by_name(current.primary_base())
         return base_classes
 
     def is_a(self, cls, ancestor):
@@ -373,6 +397,8 @@ class CxxType:
         t = self.typename
         if t == 'size_t':
             t = 'sz'
+        elif t.startswith('unsigned '):
+            t = re.sub('^unsigned ', 'u', t)
         elif t.startswith('wx'):
             t = t[2:]
         return t.lower()

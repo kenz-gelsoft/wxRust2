@@ -374,6 +374,17 @@ impl<const OWNED: bool> ChoiceIsOwned<OWNED> {
         None
     }
 }
+// Mix-in(s) to wxChoice
+impl<const OWNED: bool> ItemContainerMethods for ChoiceIsOwned<OWNED> {
+    fn as_item_container(&self) -> *mut c_void {
+        unsafe { ffi::wxChoice_AsItemContainer(self.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> ItemContainerImmutableMethods for ChoiceIsOwned<OWNED> {
+    fn as_item_container_immutable(&self) -> *mut c_void {
+        unsafe { ffi::wxChoice_AsItemContainer(self.as_ptr()) }
+    }
+}
 
 // wxColour
 wx_class! { Colour =
@@ -510,6 +521,22 @@ impl<const OWNED: bool> ComboBoxIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+// Mix-in(s) to wxComboBox
+impl<const OWNED: bool> ItemContainerMethods for ComboBoxIsOwned<OWNED> {
+    fn as_item_container(&self) -> *mut c_void {
+        unsafe { ffi::wxComboBox_AsItemContainer(self.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> ItemContainerImmutableMethods for ComboBoxIsOwned<OWNED> {
+    fn as_item_container_immutable(&self) -> *mut c_void {
+        unsafe { ffi::wxComboBox_AsItemContainer(self.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> TextEntryMethods for ComboBoxIsOwned<OWNED> {
+    fn as_text_entry(&self) -> *mut c_void {
+        unsafe { ffi::wxComboBox_AsTextEntry(self.as_ptr()) }
     }
 }
 
@@ -751,6 +778,17 @@ impl<const OWNED: bool> ListBoxIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+// Mix-in(s) to wxListBox
+impl<const OWNED: bool> ItemContainerMethods for ListBoxIsOwned<OWNED> {
+    fn as_item_container(&self) -> *mut c_void {
+        unsafe { ffi::wxListBox_AsItemContainer(self.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> ItemContainerImmutableMethods for ListBoxIsOwned<OWNED> {
+    fn as_item_container_immutable(&self) -> *mut c_void {
+        unsafe { ffi::wxListBox_AsItemContainer(self.as_ptr()) }
     }
 }
 
@@ -1085,6 +1123,12 @@ impl<const OWNED: bool> RadioBoxIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+// Mix-in(s) to wxRadioBox
+impl<const OWNED: bool> ItemContainerImmutableMethods for RadioBoxIsOwned<OWNED> {
+    fn as_item_container_immutable(&self) -> *mut c_void {
+        unsafe { ffi::wxRadioBox_AsItemContainerImmutable(self.as_ptr()) }
     }
 }
 
@@ -1434,6 +1478,12 @@ impl<const OWNED: bool> TextCtrlIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+// Mix-in(s) to wxTextCtrl
+impl<const OWNED: bool> TextEntryMethods for TextCtrlIsOwned<OWNED> {
+    fn as_text_entry(&self) -> *mut c_void {
+        unsafe { ffi::wxTextCtrl_AsTextEntry(self.as_ptr()) }
     }
 }
 
