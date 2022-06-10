@@ -619,6 +619,3 @@
                 - 1: `const wxSize&`: None 
                     - 1: `long`: None 
                         - 1: `const wxString&`: wxWindow1 (window)
-wxItemContainer is mixed into wxChoice
-wxItemContainerImmutable is mixed into wxRadioBox
-wxTextEntry is mixed into wxComboBox

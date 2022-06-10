@@ -337,10 +337,10 @@ class ClassManager:
         all_classes = self.all()
         for cls in all_classes:
             if name in cls.mixins():
-                print('%s is mixed into %s' % (
-                    name,
-                    cls.name,
-                ))
+                # print('%s is mixed into %s' % (
+                #     name,
+                #     cls.name,
+                # ))
                 return True
         return False
     
