@@ -172,7 +172,7 @@ impl<const OWNED: bool> BookCtrlBaseIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> WindowMethods for BookCtrlBaseIsOwned<OWNED> {
-    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+    fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
         winid: c_int,
@@ -641,7 +641,7 @@ impl<const OWNED: bool> FrameIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> TopLevelWindowMethods for FrameIsOwned<OWNED> {
-    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+    fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
         id: c_int,

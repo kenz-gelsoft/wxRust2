@@ -272,7 +272,7 @@ pub trait BitmapMethods: GDIObjectMethods {
 
 // wxBitmapButton
 pub trait BitmapButtonMethods: ButtonMethods {
-    fn create<
+    fn create_bitmap<
         W: WindowMethods,
         B: BitmapMethods,
         P: PointMethods,
@@ -471,7 +471,7 @@ pub trait BoxSizerMethods: SizerMethods {
 
 // wxButton
 pub trait ButtonMethods: AnyButtonMethods {
-    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+    fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
         parent: Option<&W>,
         id: c_int,
@@ -528,7 +528,7 @@ pub trait ButtonMethods: AnyButtonMethods {
 // wxCheckBox
 pub trait CheckBoxMethods: ControlMethods {
     // DTOR: fn ~wxCheckBox()
-    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+    fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
         parent: Option<&W>,
         id: c_int,
@@ -589,7 +589,7 @@ pub trait CheckBoxMethods: ControlMethods {
 pub trait ChoiceMethods: ControlMethods {
     // DTOR: fn ~wxChoice()
     // NOT_SUPPORTED: fn Create()
-    fn create<
+    fn create_arraystring<
         W: WindowMethods,
         P: PointMethods,
         S: SizeMethods,
@@ -704,7 +704,7 @@ pub trait ColourMethods: ObjectMethods {
 
 // wxColourPickerCtrl
 pub trait ColourPickerCtrlMethods: PickerBaseMethods {
-    fn create<
+    fn create_colour<
         W: WindowMethods,
         C: ColourMethods,
         P: PointMethods,
@@ -760,7 +760,7 @@ pub trait ColourPickerCtrlMethods: PickerBaseMethods {
 pub trait ComboBoxMethods: ControlMethods {
     // DTOR: fn ~wxComboBox()
     // NOT_SUPPORTED: fn Create()
-    fn create<
+    fn create_str<
         W: WindowMethods,
         P: PointMethods,
         S: SizeMethods,
@@ -868,7 +868,7 @@ pub trait CommandEventMethods: EventMethods {
 
 // wxControl
 pub trait ControlMethods: WindowMethods {
-    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+    fn create_validator<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
         parent: Option<&W>,
         id: c_int,
@@ -1370,7 +1370,7 @@ pub trait ItemContainerImmutableMethods: WxRustMethods {
 pub trait ListBoxMethods: ControlMethods {
     // DTOR: fn ~wxListBox()
     // NOT_SUPPORTED: fn Create()
-    fn create<
+    fn create_arraystring<
         W: WindowMethods,
         P: PointMethods,
         S: SizeMethods,
@@ -1948,7 +1948,7 @@ pub trait MenuBarMethods: WindowMethods {
     fn check(&self, id: c_int, check: bool) {
         unsafe { ffi::wxMenuBar_Check(self.as_ptr(), id, check) }
     }
-    fn enable(&self, id: c_int, enable: bool) {
+    fn enable_int(&self, id: c_int, enable: bool) {
         unsafe { ffi::wxMenuBar_Enable(self.as_ptr(), id, enable) }
     }
     fn is_enabled_top(&self, pos: usize) -> bool {
@@ -1986,7 +1986,7 @@ pub trait MenuBarMethods: WindowMethods {
     fn get_help_string(&self, id: c_int) -> String {
         unsafe { wx_base::from_wx_string(ffi::wxMenuBar_GetHelpString(self.as_ptr(), id)) }
     }
-    fn get_label(&self, id: c_int) -> String {
+    fn get_label_int(&self, id: c_int) -> String {
         unsafe { wx_base::from_wx_string(ffi::wxMenuBar_GetLabel(self.as_ptr(), id)) }
     }
     // BLOCKED: fn GetLabelTop()
@@ -2015,7 +2015,7 @@ pub trait MenuBarMethods: WindowMethods {
     fn is_checked(&self, id: c_int) -> bool {
         unsafe { ffi::wxMenuBar_IsChecked(self.as_ptr(), id) }
     }
-    fn is_enabled(&self, id: c_int) -> bool {
+    fn is_enabled_int(&self, id: c_int) -> bool {
         unsafe { ffi::wxMenuBar_IsEnabled(self.as_ptr(), id) }
     }
     fn remove(&self, pos: usize) -> WeakRef<Menu> {
@@ -2037,7 +2037,7 @@ pub trait MenuBarMethods: WindowMethods {
             ffi::wxMenuBar_SetHelpString(self.as_ptr(), id, help_string)
         }
     }
-    fn set_label(&self, id: c_int, label: &str) {
+    fn set_label_int(&self, id: c_int, label: &str) {
         unsafe {
             let label = wx_base::wx_string_from(label);
             ffi::wxMenuBar_SetLabel(self.as_ptr(), id, label)
@@ -2417,7 +2417,7 @@ pub trait PointMethods: WxRustMethods {
 pub trait RadioBoxMethods: ControlMethods {
     // DTOR: fn ~wxRadioBox()
     // NOT_SUPPORTED: fn Create()
-    fn create<
+    fn create_str<
         W: WindowMethods,
         P: PointMethods,
         S: SizeMethods,
@@ -2499,7 +2499,7 @@ pub trait RadioBoxMethods: ControlMethods {
             ffi::wxRadioBox_SetItemToolTip(self.as_ptr(), item, text)
         }
     }
-    fn show(&self, item: c_uint, show: bool) -> bool {
+    fn show_uint(&self, item: c_uint, show: bool) -> bool {
         unsafe { ffi::wxRadioBox_Show(self.as_ptr(), item, show) }
     }
 }
@@ -3644,7 +3644,7 @@ pub trait SizerFlagsMethods: WxRustMethods {
 
 // wxStaticBitmap
 pub trait StaticBitmapMethods: ControlMethods {
-    fn create<W: WindowMethods, B: BitmapMethods, P: PointMethods, S: SizeMethods>(
+    fn create_bitmap<W: WindowMethods, B: BitmapMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
         id: c_int,
@@ -3691,7 +3691,7 @@ pub trait StaticBitmapMethods: ControlMethods {
 // wxStaticBox
 pub trait StaticBoxMethods: ControlMethods {
     // DTOR: fn ~wxStaticBox()
-    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+    fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
         id: c_int,
@@ -3725,7 +3725,7 @@ pub trait StaticBoxSizerMethods: BoxSizerMethods {
 
 // wxStaticText
 pub trait StaticTextMethods: ControlMethods {
-    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+    fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
         id: c_int,
@@ -4104,7 +4104,7 @@ pub trait TextAttrMethods: WxRustMethods {
 // wxTextCtrl
 pub trait TextCtrlMethods: ControlMethods {
     // DTOR: fn ~wxTextCtrl()
-    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+    fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
         parent: Option<&W>,
         id: c_int,
@@ -4772,7 +4772,7 @@ pub trait ToolBarMethods: ControlMethods {
 // wxTopLevelWindow
 pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     // DTOR: fn ~wxTopLevelWindow()
-    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+    fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
         id: c_int,

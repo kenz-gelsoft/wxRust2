@@ -195,8 +195,9 @@ class OverloadTree:
         self.__cls = cls
         self.__root = Overload("")
 
-        for m in cls.methods:
-            self._add(m)
+        for c in cls.manager.ancestors_of(cls):
+            for m in c.methods:
+                self._add(m)
     
     def _path(self, method):
         path = []
