@@ -8,18 +8,18 @@ class RustClassBinding:
         self.overloads = OverloadTree(model)
         self.overloads.print_tree()
         self.__methods = [RustMethodBinding(self, m) for m in model.methods]
-        self.__is_mixin_cache = None
+        self.__mixin_cache = None
     
     def is_a(self, base):
         return self.__model.manager.is_a(self.__model, base)
     
-    def is_mixin(self):
-        if self.__is_mixin_cache is None:
-            self.__is_mixin_cache = self.__model.manager.is_mixin(self.__model.name)
-        return self.__is_mixin_cache
+    def mixed_into(self):
+        if self.__mixin_cache is None:
+            self.__mixin_cache = self.__model.manager.mixed_into(self.__model.name)
+        return self.__mixin_cache
     
     def as_mixin(self):
-        if not self.is_mixin():
+        if not self.mixed_into():
             return None
         return 'as_%s' % (
             pascal_to_snake(self.__model.unprefixed()),
@@ -44,7 +44,7 @@ class RustClassBinding:
             for line in self._trait_with_methods():
                 yield line
         else:
-            if self.is_mixin():
+            if self.mixed_into():
                 # Don't generate impl if mixin class
                 return
             unprefixed = self.__model.unprefixed()
@@ -171,7 +171,7 @@ class RustClassBinding:
             self.__model.unprefixed(),
             base[2:],
         )
-        if self.is_mixin():
+        if self.mixed_into():
             yield '    fn %s(&self) -> *mut c_void;' % (
                 self.as_mixin(),
             )
