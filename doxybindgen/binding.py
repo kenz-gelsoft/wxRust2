@@ -151,8 +151,11 @@ class RustClassBinding:
                 ancestor.unprefixed(),
                 self.__model.unprefixed(),
             )
+            ancestor_overloads = OverloadTree(ancestor)
             for method in methods:
-                for line in method.lines():
+                for line in method.lines(
+                    with_overloads=ancestor_overloads,
+                ):
                     yield '    %s' % (line)
             yield '}'
 
@@ -316,14 +319,14 @@ class RustMethodBinding:
                     returns = 'String'
         return ' -> %s' % (returns,)
     
-    def lines(self, for_ffi=False):
+    def lines(self, for_ffi=False, with_overloads=None):
         pub_or_not = 'pub '
         gen_params = ''
         name = self.__model.name(for_ffi=True)
         if not for_ffi:
             if not self.is_ctor:
                 pub_or_not = '' if not self.is_ctor else 'pub '
-            name = self._rust_method_name()
+            name = self._rust_method_name(with_overloads)
             if self.__generic_params.names:
                 gen_params = '<%s>' % (
                     ', '.join('%s: %s' % p for p in self.__generic_params.names),
@@ -381,11 +384,13 @@ class RustMethodBinding:
             params.insert(0, self_to_insert)
         return ', '.join(params)
 
-    def _rust_method_name(self):
+    def _rust_method_name(self, with_overloads):
         method_name = pascal_to_snake(self.__model.name(
             without_index=True,
         ))
         overloads = self.__cls.overloads
+        if with_overloads:
+            overloads = with_overloads
         if self.__model.is_ctor:
             method_name = 'new'
         if overloads.has_overload(self.__model):
