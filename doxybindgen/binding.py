@@ -451,7 +451,7 @@ class RustMethodBinding:
 
     def _wrap_return_type(self, call):
         if self.__model.returns.is_str():
-            return 'wx_base::from_wx_string(%s)' % (call,)
+            return 'from_wx_string(%s)' % (call,)
         if self.__model.maybe_returns_self():
             return '%s; &self' % (call,)
         wrapped = self.__model.wrapped_return_type(allows_ptr=False)

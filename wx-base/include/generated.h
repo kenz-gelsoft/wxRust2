@@ -1,6 +1,10 @@
 #pragma once
 #include <wx/wx.h>
 
+typedef wxDateTime::TimeZone TimeZone;
+typedef wxDateTime::Tm       Tm;
+typedef wxDateTime::WeekDay  WeekDay;
+
 extern "C" {
 
 // CLASS: wxDateTime
@@ -13,11 +17,15 @@ wxDateTime * wxDateTime_Set2(wxDateTime * self, const Tm * tm);
 wxDateTime * wxDateTime_Set3(wxDateTime * self, double jdn);
 wxDateTime * wxDateTime_SetToCurrent(wxDateTime * self);
 wxDateTime * wxDateTime_SetYear(wxDateTime * self, int year);
+#ifdef __WXMSW__
 wxDateTime * wxDateTime_SetFromMSWSysTime(wxDateTime * self, const struct _SYSTEMTIME * st);
 void wxDateTime_GetAsMSWSysTime(const wxDateTime * self, struct _SYSTEMTIME * st);
+#endif
 int wxDateTime_GetCentury(const wxDateTime * self, const TimeZone * tz);
 wxDateTime *wxDateTime_GetDateOnly(const wxDateTime * self);
+#if wxCHECK_VERSION(3, 1, 0)
 int wxDateTime_GetWeekBasedYear(const wxDateTime * self, const TimeZone * tz);
+#endif
 int wxDateTime_GetYear(const wxDateTime * self, const TimeZone * tz);
 bool wxDateTime_IsValid(const wxDateTime * self);
 bool wxDateTime_IsEarlierThan(const wxDateTime * self, const wxDateTime * datetime);
@@ -28,13 +36,9 @@ bool wxDateTime_IsSameDate(const wxDateTime * self, const wxDateTime * dt);
 bool wxDateTime_IsSameTime(const wxDateTime * self, const wxDateTime * dt);
 bool wxDateTime_IsStrictlyBetween(const wxDateTime * self, const wxDateTime * t1, const wxDateTime * t2);
 bool wxDateTime_IsBetween(const wxDateTime * self, const wxDateTime * t1, const wxDateTime * t2);
-wxDateTime *wxDateTime_Add(const wxDateTime * self, const wxDateSpan * diff);
 wxDateTime * wxDateTime_Add1(wxDateTime * self, const wxDateSpan * diff);
-wxDateTime *wxDateTime_Add2(const wxDateTime * self, const wxTimeSpan * diff);
 wxDateTime * wxDateTime_Add3(wxDateTime * self, const wxTimeSpan * diff);
-wxDateTime *wxDateTime_Subtract(const wxDateTime * self, const wxTimeSpan * diff);
 wxDateTime * wxDateTime_Subtract1(wxDateTime * self, const wxTimeSpan * diff);
-wxDateTime *wxDateTime_Subtract2(const wxDateTime * self, const wxDateSpan * diff);
 wxDateTime * wxDateTime_Subtract3(wxDateTime * self, const wxDateSpan * diff);
 wxString *wxDateTime_Format(const wxDateTime * self, const wxString * format, const TimeZone * tz);
 wxString *wxDateTime_FormatDate(const wxDateTime * self);
@@ -63,7 +67,9 @@ int wxDateTime_ConvertYearToBC(int year);
 void wxDateTime_GetAmPmStrings(wxString * am, wxString * pm);
 int wxDateTime_GetCentury1(int year);
 tm * wxDateTime_GetTmNow1();
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxDateTime_GetFirstWeekDay(WeekDay * first_day);
+#endif
 wxDateTime *wxDateTime_Now();
 wxDateTime *wxDateTime_Today();
 wxDateTime *wxDateTime_UNow();

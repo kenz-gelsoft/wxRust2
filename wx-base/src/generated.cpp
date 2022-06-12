@@ -30,21 +30,25 @@ wxDateTime * wxDateTime_SetToCurrent(wxDateTime * self) {
 wxDateTime * wxDateTime_SetYear(wxDateTime * self, int year) {
     return &(self->SetYear(year));
 }
+#ifdef __WXMSW__
 wxDateTime * wxDateTime_SetFromMSWSysTime(wxDateTime * self, const struct _SYSTEMTIME * st) {
     return &(self->SetFromMSWSysTime(*st));
 }
 void wxDateTime_GetAsMSWSysTime(const wxDateTime * self, struct _SYSTEMTIME * st) {
     return self->GetAsMSWSysTime(st);
 }
+#endif
 int wxDateTime_GetCentury(const wxDateTime * self, const TimeZone * tz) {
     return self->GetCentury(*tz);
 }
 wxDateTime *wxDateTime_GetDateOnly(const wxDateTime * self) {
     return new wxDateTime(self->GetDateOnly());
 }
+#if wxCHECK_VERSION(3, 1, 0)
 int wxDateTime_GetWeekBasedYear(const wxDateTime * self, const TimeZone * tz) {
     return self->GetWeekBasedYear(*tz);
 }
+#endif
 int wxDateTime_GetYear(const wxDateTime * self, const TimeZone * tz) {
     return self->GetYear(*tz);
 }
@@ -75,26 +79,14 @@ bool wxDateTime_IsStrictlyBetween(const wxDateTime * self, const wxDateTime * t1
 bool wxDateTime_IsBetween(const wxDateTime * self, const wxDateTime * t1, const wxDateTime * t2) {
     return self->IsBetween(*t1, *t2);
 }
-wxDateTime *wxDateTime_Add(const wxDateTime * self, const wxDateSpan * diff) {
-    return new wxDateTime(self->Add(*diff));
-}
 wxDateTime * wxDateTime_Add1(wxDateTime * self, const wxDateSpan * diff) {
     return &(self->Add(*diff));
-}
-wxDateTime *wxDateTime_Add2(const wxDateTime * self, const wxTimeSpan * diff) {
-    return new wxDateTime(self->Add(*diff));
 }
 wxDateTime * wxDateTime_Add3(wxDateTime * self, const wxTimeSpan * diff) {
     return &(self->Add(*diff));
 }
-wxDateTime *wxDateTime_Subtract(const wxDateTime * self, const wxTimeSpan * diff) {
-    return new wxDateTime(self->Subtract(*diff));
-}
 wxDateTime * wxDateTime_Subtract1(wxDateTime * self, const wxTimeSpan * diff) {
     return &(self->Subtract(*diff));
-}
-wxDateTime *wxDateTime_Subtract2(const wxDateTime * self, const wxDateSpan * diff) {
-    return new wxDateTime(self->Subtract(*diff));
 }
 wxDateTime * wxDateTime_Subtract3(wxDateTime * self, const wxDateSpan * diff) {
     return &(self->Subtract(*diff));
@@ -180,9 +172,11 @@ int wxDateTime_GetCentury1(int year) {
 tm * wxDateTime_GetTmNow1() {
     return wxDateTime::GetTmNow();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxDateTime_GetFirstWeekDay(WeekDay * first_day) {
     return wxDateTime::GetFirstWeekDay(first_day);
 }
+#endif
 wxDateTime *wxDateTime_Now() {
     return new wxDateTime(wxDateTime::Now());
 }

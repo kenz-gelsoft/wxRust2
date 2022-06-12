@@ -48,34 +48,34 @@ impl<const OWNED: bool> DateTimeIsOwned<OWNED> {
     pub const GMT11: c_int = 0 + 24;
     pub const GMT12: c_int = 0 + 25;
     pub const GMT13: c_int = 0 + 26;
-    pub const WET: c_int = GMT0;
-    pub const WEST: c_int = GMT1;
-    pub const CET: c_int = GMT1;
-    pub const CEST: c_int = GMT2;
-    pub const EET: c_int = GMT2;
-    pub const EEST: c_int = GMT3;
-    pub const MSK: c_int = GMT3;
-    pub const MSD: c_int = GMT4;
-    pub const AST: c_int = GMT_4;
-    pub const ADT: c_int = GMT_3;
-    pub const EST: c_int = GMT_5;
-    pub const EDT: c_int = GMT_4;
-    pub const CST: c_int = GMT_6;
-    pub const CDT: c_int = GMT_5;
-    pub const MST: c_int = GMT_7;
-    pub const MDT: c_int = GMT_6;
-    pub const PST: c_int = GMT_8;
-    pub const PDT: c_int = GMT_7;
-    pub const HST: c_int = GMT_10;
-    pub const AKST: c_int = GMT_9;
-    pub const AKDT: c_int = GMT_8;
-    pub const A_WST: c_int = GMT8;
-    pub const A_CST: c_int = GMT13 + 1;
-    pub const A_EST: c_int = GMT10;
-    pub const A_ESST: c_int = GMT11;
-    pub const NZST: c_int = GMT12;
-    pub const NZDT: c_int = GMT13;
-    pub const UTC: c_int = GMT0;
+    //  SKIP: WET
+    //  SKIP: WEST
+    //  SKIP: CET
+    //  SKIP: CEST
+    //  SKIP: EET
+    //  SKIP: EEST
+    //  SKIP: MSK
+    //  SKIP: MSD
+    //  SKIP: AST
+    //  SKIP: ADT
+    //  SKIP: EST
+    //  SKIP: EDT
+    //  SKIP: CST
+    //  SKIP: CDT
+    //  SKIP: MST
+    //  SKIP: MDT
+    //  SKIP: PST
+    //  SKIP: PDT
+    //  SKIP: HST
+    //  SKIP: AKST
+    //  SKIP: AKDT
+    //  SKIP: A_WST
+    //  SKIP: A_CST
+    //  SKIP: A_EST
+    //  SKIP: A_ESST
+    //  SKIP: NZST
+    //  SKIP: NZDT
+    //  SKIP: UTC
 
     //  ENUM: Calendar
     pub const Gregorian: c_int = 0;
@@ -85,13 +85,13 @@ impl<const OWNED: bool> DateTimeIsOwned<OWNED> {
     pub const Country_Unknown: c_int = 0;
     pub const Country_Default: c_int = 0 + 1;
     pub const Country_WesternEurope_Start: c_int = 0 + 2;
-    pub const Country_EEC: c_int = Country_WesternEurope_Start;
-    pub const France: c_int = Country_WesternEurope_Start + 1;
-    pub const Germany: c_int = Country_WesternEurope_Start + 2;
-    pub const UK: c_int = Country_WesternEurope_Start + 3;
-    pub const Country_WesternEurope_End: c_int = UK;
-    pub const Russia: c_int = UK + 1;
-    pub const USA: c_int = UK + 2;
+    //  SKIP: Country_EEC
+    //  SKIP: France
+    //  SKIP: Germany
+    //  SKIP: UK
+    //  SKIP: Country_WesternEurope_End
+    //  SKIP: Russia
+    //  SKIP: USA
 
     //  ENUM: Month
     pub const Jan: c_int = 0;
@@ -119,7 +119,7 @@ impl<const OWNED: bool> DateTimeIsOwned<OWNED> {
     pub const Inv_WeekDay: c_int = 0 + 7;
 
     //  ENUM: Year
-    pub const Inv_Year: c_int = SHRT_MIN;
+    //  SKIP: Inv_Year
 
     //  ENUM: NameFlags
     pub const Name_Full: c_int = 0x01;

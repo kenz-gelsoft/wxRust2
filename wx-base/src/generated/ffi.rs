@@ -71,13 +71,13 @@ extern "C" {
     ) -> bool;
     pub fn wxDateTime_IsBetween(self_: *const c_void, t1: *const c_void, t2: *const c_void)
         -> bool;
-    pub fn wxDateTime_Add(self_: *const c_void, diff: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxDateTime_Add(self_: *const c_void, diff: *const c_void) -> wxDateTime;
     pub fn wxDateTime_Add1(self_: *mut c_void, diff: *const c_void) -> *mut c_void;
-    pub fn wxDateTime_Add2(self_: *const c_void, diff: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxDateTime_Add2(self_: *const c_void, diff: *const c_void) -> wxDateTime;
     pub fn wxDateTime_Add3(self_: *mut c_void, diff: *const c_void) -> *mut c_void;
-    pub fn wxDateTime_Subtract(self_: *const c_void, diff: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxDateTime_Subtract(self_: *const c_void, diff: *const c_void) -> wxDateTime;
     pub fn wxDateTime_Subtract1(self_: *mut c_void, diff: *const c_void) -> *mut c_void;
-    pub fn wxDateTime_Subtract2(self_: *const c_void, diff: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxDateTime_Subtract2(self_: *const c_void, diff: *const c_void) -> wxDateTime;
     pub fn wxDateTime_Subtract3(self_: *mut c_void, diff: *const c_void) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxDateTime_Subtract4(self_: *const c_void, dt: *const c_void) -> wxTimeSpan;
     // NOT_SUPPORTED: pub fn wxDateTime_DiffAsDateSpan(self_: *const c_void, dt: *const c_void) -> wxDateSpan;
