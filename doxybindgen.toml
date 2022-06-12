@@ -156,12 +156,15 @@ blocklist = [
 ]
 [types.wxItemContainerImmutable]
 blocklist = [
-    'GetStrings',
     'wxItemContainerImmutable',
+    # TODO: use ArrayString::from_ptr()
+    'GetStrings',
 ]
 [types.wxListBox]
 blocklist = [
+    # C++ array not supported
     'InsertItems',
+    # Maybe windows specific
     'MSWSetTabStops',
 ]
 wx31 = [
