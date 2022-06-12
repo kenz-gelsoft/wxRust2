@@ -2462,7 +2462,9 @@ pub trait RadioBoxMethods: ControlMethods {
             )
         }
     }
-    // BLOCKED: fn Enable()
+    fn enable_uint(&self, n: c_uint, enable: bool) -> bool {
+        unsafe { ffi::wxRadioBox_Enable(self.as_ptr(), n, enable) }
+    }
     fn get_column_count(&self) -> c_uint {
         unsafe { ffi::wxRadioBox_GetColumnCount(self.as_ptr()) }
     }

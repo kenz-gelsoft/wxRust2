@@ -1112,7 +1112,7 @@ extern "C" {
         validator: *const c_void,
         name: *const c_void,
     ) -> bool;
-    // BLOCKED: pub fn wxRadioBox_Enable(self_: *mut c_void, n: c_uint, enable: bool) -> bool;
+    pub fn wxRadioBox_Enable(self_: *mut c_void, n: c_uint, enable: bool) -> bool;
     pub fn wxRadioBox_GetColumnCount(self_: *const c_void) -> c_uint;
     pub fn wxRadioBox_GetItemFromPoint(self_: *const c_void, pt: *const c_void) -> c_int;
     pub fn wxRadioBox_GetItemHelpText(self_: *const c_void, item: c_uint) -> *mut c_void;

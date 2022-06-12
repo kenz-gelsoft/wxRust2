@@ -249,11 +249,6 @@ blocklist = [
     'operator/=',
     'operator*=',
 ]
-[types.wxRadioBox]
-blocklist = [
-    # FIXME: Conflicts with wxWindow's method, this should be OverloadTree's bug
-    'Enable',
-]
 [types.wxRect]
 blocklist = [
     'operator==',

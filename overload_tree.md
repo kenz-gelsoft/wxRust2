@@ -1954,6 +1954,10 @@
                         - 1: `const wxValidator&`: None 
                             - 1: `const wxString&`: Create (point, validator)
                         - 1: `const wxString&`: Create (point, str)
+- 2: wxItemContainerImmutable.Enable: None 
+    - 1: `unsigned int`: None 
+        - 1: `bool`: Enable (uint)
+    - 1: `bool`: Enable (bool)
 - 2: wxItemContainerImmutable.Show: None 
     - 1: `unsigned int`: None 
         - 1: `bool`: Show (uint)
@@ -2978,6 +2982,10 @@
                         - 1: `const wxValidator&`: None 
                             - 1: `const wxString&`: Create (point, validator)
                         - 1: `const wxString&`: Create (point, str)
+- 2: wxRadioBox.Enable: None 
+    - 1: `unsigned int`: None 
+        - 1: `bool`: Enable (uint)
+    - 1: `bool`: Enable (bool)
 - 2: wxRadioBox.Show: None 
     - 1: `unsigned int`: None 
         - 1: `bool`: Show (uint)
