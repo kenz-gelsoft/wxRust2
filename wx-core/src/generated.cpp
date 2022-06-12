@@ -1388,6 +1388,9 @@ wxRadioBox *wxRadioBox_new2(wxWindow * parent, wxWindowID id, const wxString * l
 bool wxRadioBox_Create1(wxRadioBox * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, int major_dimension, long style, const wxValidator * validator, const wxString * name) {
     return self->Create(parent, id, *label, *pos, *size, *choices, major_dimension, style, *validator, *name);
 }
+bool wxRadioBox_Enable(wxRadioBox * self, unsigned int n, bool enable) {
+    return self->Enable(n, enable);
+}
 unsigned int wxRadioBox_GetColumnCount(const wxRadioBox * self) {
     return self->GetColumnCount();
 }

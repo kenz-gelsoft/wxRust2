@@ -156,12 +156,15 @@ blocklist = [
 ]
 [types.wxItemContainerImmutable]
 blocklist = [
-    'GetStrings',
     'wxItemContainerImmutable',
+    # TODO: use ArrayString::from_ptr()
+    'GetStrings',
 ]
 [types.wxListBox]
 blocklist = [
+    # C++ array not supported
     'InsertItems',
+    # Maybe windows specific
     'MSWSetTabStops',
 ]
 wx31 = [
@@ -248,11 +251,6 @@ blocklist = [
     'operator-=1',
     'operator/=',
     'operator*=',
-]
-[types.wxRadioBox]
-blocklist = [
-    # FIXME: Conflicts with wxWindow's method, this should be OverloadTree's bug
-    'Enable',
 ]
 [types.wxRect]
 blocklist = [

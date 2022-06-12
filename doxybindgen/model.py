@@ -305,6 +305,7 @@ class ClassManager:
     def __init__(self):
         self.__all = None
         self.__by_name = None
+        self.__mixin_cache = {}
 
     def all(self):
         return (i.cls for i in self.__all)
@@ -332,17 +333,22 @@ class ClassManager:
         assert self.__by_name is not None
         return name in self.__by_name.keys()
     
-    def is_mixin(self, name):
-        # TODO: optimize
+    def mixed_into(self, name):
+        cached = self.__mixin_cache.get(name)
+        if cached is not None:
+            return cached
+
         all_classes = self.all()
+        result = []
         for cls in all_classes:
             if name in cls.mixins():
-                print('%s is mixed into %s' % (
-                    name,
-                    cls.name,
-                ))
-                return True
-        return False
+                # print('%s is mixed into %s' % (
+                #     name,
+                #     cls.name,
+                # ))
+                result.append(cls.name)
+        self.__mixin_cache[name] = result
+        return result
     
     def ancestors_of(self, cls):
         info = self.__by_name.get(cls.name)

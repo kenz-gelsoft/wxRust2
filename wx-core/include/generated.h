@@ -534,6 +534,7 @@ wxPoint *wxPoint_new2(const wxRealPoint * pt);
 wxRadioBox *wxRadioBox_new();
 wxRadioBox *wxRadioBox_new2(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, int major_dimension, long style, const wxValidator * validator, const wxString * name);
 bool wxRadioBox_Create1(wxRadioBox * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, int major_dimension, long style, const wxValidator * validator, const wxString * name);
+bool wxRadioBox_Enable(wxRadioBox * self, unsigned int n, bool enable);
 unsigned int wxRadioBox_GetColumnCount(const wxRadioBox * self);
 int wxRadioBox_GetItemFromPoint(const wxRadioBox * self, const wxPoint * pt);
 wxString *wxRadioBox_GetItemHelpText(const wxRadioBox * self, unsigned int item);
