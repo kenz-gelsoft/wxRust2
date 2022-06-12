@@ -8,15 +8,12 @@ class RustClassBinding:
         self.overloads = OverloadTree(model)
         self.overloads.print_tree()
         self.__methods = [RustMethodBinding(self, m) for m in model.methods]
-        self.__mixin_cache = None
     
     def is_a(self, base):
         return self.__model.manager.is_a(self.__model, base)
     
     def mixed_into(self):
-        if self.__mixin_cache is None:
-            self.__mixin_cache = self.__model.manager.mixed_into(self.__model.name)
-        return self.__mixin_cache
+        return self.__model.manager.mixed_into(self.__model.name)
     
     def as_mixin(self):
         if not self.mixed_into():

@@ -305,6 +305,7 @@ class ClassManager:
     def __init__(self):
         self.__all = None
         self.__by_name = None
+        self.__mixin_cache = {}
 
     def all(self):
         return (i.cls for i in self.__all)
@@ -333,7 +334,10 @@ class ClassManager:
         return name in self.__by_name.keys()
     
     def mixed_into(self, name):
-        # TODO: optimize
+        cache = self.__mixin_cache.get(name)
+        if cache is not None:
+            return cache
+
         all_classes = self.all()
         result = []
         for cls in all_classes:
@@ -343,6 +347,7 @@ class ClassManager:
                 #     cls.name,
                 # ))
                 result.append(cls.name)
+        self.__mixin_cache[name] = result
         return result
     
     def ancestors_of(self, cls):
