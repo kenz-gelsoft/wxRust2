@@ -195,7 +195,23 @@ class OverloadTree:
         self.__cls = cls
         self.__root = Overload("")
 
-        for c in cls.manager.ancestors_of(cls):
+        self._add_ancestors_methods(cls)
+        
+        # If `cls` is mixin class,
+        mixed_into = cls.manager.mixed_into(cls.name)
+        for mixed_in in mixed_into:
+            # Consider mixed-in classes
+            mixed_in = cls.manager.by_name(mixed_in)
+            self._add_ancestors_methods(mixed_in)
+
+            # and those (other) mix-ins to resolve overload methods 
+            for mixin in mixed_in.mixins():
+                mixin = cls.manager.by_name(mixin)
+                self._add_ancestors_methods(mixin)
+    
+    def _add_ancestors_methods(self, cls):
+        cm = self.__cls.manager
+        for c in cm.ancestors_of(cls):
             for m in c.methods:
                 self._add(m)
     

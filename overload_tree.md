@@ -1697,6 +1697,12 @@
         - 3: `const wxString*`: Append7 (uint)
             - 1: `void**`: Append8 (uint, void)
             - 1: `wxClientData**`: Append9 (uint, clientdata)
+- 2: wxItemContainer.GetClientObject: GetClientObject ()
+    - 1: `unsigned int`: GetClientObject (uint)
+- 2: wxItemContainer.SetClientObject: None 
+    - 1: `unsigned int`: None 
+        - 1: `wxClientData*`: SetClientObject (uint)
+    - 1: `wxClientData*`: SetClientObject (clientdata)
 - 9: wxItemContainer.Insert: None 
     - 3: `const wxString&`: None 
         - 3: `unsigned int`: Insert (str)
@@ -1719,6 +1725,368 @@
         - 3: `const wxString*`: Set4 (uint)
             - 1: `void**`: Set5 (uint, void)
             - 1: `wxClientData**`: Set6 (uint, clientdata)
+- 2: wxItemContainer.SetSelection: None 
+    - 1: `int`: SetSelection (int)
+    - 1: `long`: None 
+        - 1: `long`: SetSelection (long)
+- 2: wxItemContainer.GetSelection: GetSelection ()
+    - 1: `long*`: None 
+        - 1: `long*`: GetSelection (long)
+- 2: wxItemContainer.SetStringSelection: None 
+    - 2: `const wxString&`: SetStringSelection ()
+        - 1: `bool`: SetStringSelection (bool)
+- 2: wxItemContainer.wxChoice: wxChoice ()
+    - 1: `wxWindow*`: None 
+        - 1: `wxWindowID`: None 
+            - 1: `const wxPoint&`: None 
+                - 1: `const wxSize&`: None 
+                    - 1: `const wxArrayString&`: None 
+                        - 1: `long`: None 
+                            - 1: `const wxValidator&`: None 
+                                - 1: `const wxString&`: wxChoice2 (window)
+- 4: wxItemContainer.Create: None 
+    - 4: `wxWindow*`: None 
+        - 4: `wxWindowID`: None 
+            - 3: `const wxPoint&`: None 
+                - 3: `const wxSize&`: None 
+                    - 1: `const wxArrayString&`: None 
+                        - 1: `long`: None 
+                            - 1: `const wxValidator&`: None 
+                                - 1: `const wxString&`: Create1 (point, arraystring)
+                    - 2: `long`: None 
+                        - 1: `const wxValidator&`: None 
+                            - 1: `const wxString&`: Create (point, long, validator)
+                        - 1: `const wxString&`: Create (point, long, str)
+            - 1: `const wxString&`: None 
+                - 1: `const wxPoint&`: None 
+                    - 1: `const wxSize&`: None 
+                        - 1: `const wxArrayString&`: None 
+                            - 1: `long`: None 
+                                - 1: `const wxValidator&`: None 
+                                    - 1: `const wxString&`: Create1 (str)
+- 2: wxItemContainer.wxControl: wxControl1 ()
+    - 1: `wxWindow*`: None 
+        - 1: `wxWindowID`: None 
+            - 1: `const wxPoint&`: None 
+                - 1: `const wxSize&`: None 
+                    - 1: `long`: None 
+                        - 1: `const wxValidator&`: None 
+                            - 1: `const wxString&`: wxControl (window)
+- 2: wxItemContainer.GetLabelText: GetLabelText ()
+    - 1: `const wxString&`: GetLabelText1 (str)
+- 2: wxItemContainer.GetSizeFromTextSize: None 
+    - 1: `int`: None 
+        - 1: `int`: GetSizeFromTextSize (int)
+    - 1: `const wxSize&`: GetSizeFromTextSize1 (size)
+- 2: wxItemContainer.FindWindow: None 
+    - 1: `long`: FindWindow (long)
+    - 1: `const wxString&`: FindWindow1 (str)
+- 6: wxItemContainer.FromDIP: None 
+    - 2: `const wxSize&`: FromDIP (size)
+        - 1: `const wxWindow*`: FromDIP3 (size, window)
+    - 2: `const wxPoint&`: FromDIP1 (point)
+        - 1: `const wxWindow*`: FromDIP4 (point, window)
+    - 2: `int`: FromDIP2 (int)
+        - 1: `const wxWindow*`: FromDIP5 (int, window)
+- 6: wxItemContainer.ToDIP: None 
+    - 2: `const wxSize&`: ToDIP (size)
+        - 1: `const wxWindow*`: ToDIP3 (size, window)
+    - 2: `const wxPoint&`: ToDIP1 (point)
+        - 1: `const wxWindow*`: ToDIP4 (point, window)
+    - 2: `int`: ToDIP2 (int)
+        - 1: `const wxWindow*`: ToDIP5 (int, window)
+- 2: wxItemContainer.GetClientSize: GetClientSize1 ()
+    - 1: `int*`: None 
+        - 1: `int*`: GetClientSize (int)
+- 2: wxItemContainer.GetSize: GetSize1 ()
+    - 1: `int*`: None 
+        - 1: `int*`: GetSize (int)
+- 2: wxItemContainer.GetVirtualSize: GetVirtualSize ()
+    - 1: `int*`: None 
+        - 1: `int*`: GetVirtualSize1 (int)
+- 3: wxItemContainer.SetClientSize: None 
+    - 1: `int`: None 
+        - 1: `int`: SetClientSize (int)
+    - 1: `const wxSize&`: SetClientSize1 (size)
+    - 1: `const wxRect&`: SetClientSize2 (rect)
+- 4: wxItemContainer.SetSize: None 
+    - 2: `int`: None 
+        - 2: `int`: SetSize3 (int)
+            - 1: `int`: None 
+                - 1: `int`: None 
+                    - 1: `int`: SetSize (int, int)
+    - 1: `const wxRect&`: SetSize1 (rect)
+    - 1: `const wxSize&`: SetSize2 (size)
+- 2: wxItemContainer.SetSizeHints: None 
+    - 1: `const wxSize&`: None 
+        - 1: `const wxSize&`: None 
+            - 1: `const wxSize&`: SetSizeHints (size)
+    - 1: `int`: None 
+        - 1: `int`: None 
+            - 1: `int`: None 
+                - 1: `int`: None 
+                    - 1: `int`: None 
+                        - 1: `int`: SetSizeHints1 (int)
+- 2: wxItemContainer.SetVirtualSize: None 
+    - 1: `int`: None 
+        - 1: `int`: SetVirtualSize (int)
+    - 1: `const wxSize&`: SetVirtualSize1 (size)
+- 2: wxItemContainer.GetPosition: GetPosition1 ()
+    - 1: `int*`: None 
+        - 1: `int*`: GetPosition (int)
+- 2: wxItemContainer.GetScreenPosition: GetScreenPosition1 ()
+    - 1: `int*`: None 
+        - 1: `int*`: GetScreenPosition (int)
+- 2: wxItemContainer.Move: None 
+    - 1: `int`: None 
+        - 1: `int`: None 
+            - 1: `int`: Move (int)
+    - 1: `const wxPoint&`: None 
+        - 1: `int`: Move1 (point)
+- 2: wxItemContainer.ClientToScreen: None 
+    - 1: `int*`: None 
+        - 1: `int*`: ClientToScreen (int)
+    - 1: `const wxPoint&`: ClientToScreen1 (point)
+- 2: wxItemContainer.ConvertDialogToPixels: None 
+    - 1: `const wxPoint&`: ConvertDialogToPixels (point)
+    - 1: `const wxSize&`: ConvertDialogToPixels1 (size)
+- 2: wxItemContainer.ConvertPixelsToDialog: None 
+    - 1: `const wxPoint&`: ConvertPixelsToDialog (point)
+    - 1: `const wxSize&`: ConvertPixelsToDialog1 (size)
+- 2: wxItemContainer.ScreenToClient: None 
+    - 1: `int*`: None 
+        - 1: `int*`: ScreenToClient (int)
+    - 1: `const wxPoint&`: ScreenToClient1 (point)
+- 2: wxItemContainer.GetTextExtent: None 
+    - 2: `const wxString&`: GetTextExtent1 ()
+        - 1: `int*`: None 
+            - 1: `int*`: None 
+                - 1: `int*`: None 
+                    - 1: `int*`: None 
+                        - 1: `const wxFont*`: GetTextExtent (int)
+- 4: wxItemContainer.IsExposed: None 
+    - 2: `int`: None 
+        - 2: `int`: IsExposed (int)
+            - 1: `int`: None 
+                - 1: `int`: IsExposed2 (int, int)
+    - 1: `wxPoint&`: IsExposed1 (point)
+    - 1: `wxRect&`: IsExposed3 (rect)
+- 2: wxItemContainer.SetToolTip: None 
+    - 1: `const wxString&`: SetToolTip (str)
+    - 1: `wxToolTip*`: SetToolTip1 (tooltip)
+- 2: wxItemContainer.GetPopupMenuSelectionFromUser: None 
+    - 2: `wxMenu&`: None 
+        - 1: `const wxPoint&`: GetPopupMenuSelectionFromUser (point)
+        - 1: `int`: None 
+            - 1: `int`: GetPopupMenuSelectionFromUser1 (int)
+- 2: wxItemContainer.PopupMenu: None 
+    - 2: `wxMenu*`: None 
+        - 1: `const wxPoint&`: PopupMenu (point)
+        - 1: `int`: None 
+            - 1: `int`: PopupMenu1 (int)
+- 2: wxItemContainer.wxWindow: wxWindow ()
+    - 1: `wxWindow*`: None 
+        - 1: `wxWindowID`: None 
+            - 1: `const wxPoint&`: None 
+                - 1: `const wxSize&`: None 
+                    - 1: `long`: None 
+                        - 1: `const wxString&`: wxWindow1 (window)
+- 2: wxItemContainer.wxObject: wxObject ()
+    - 1: `const wxObject&`: wxObject1 (object)
+- 2: wxItemContainer.wxComboBox: wxComboBox ()
+    - 1: `wxWindow*`: None 
+        - 1: `wxWindowID`: None 
+            - 1: `const wxString&`: None 
+                - 1: `const wxPoint&`: None 
+                    - 1: `const wxSize&`: None 
+                        - 1: `const wxArrayString&`: None 
+                            - 1: `long`: None 
+                                - 1: `const wxValidator&`: None 
+                                    - 1: `const wxString&`: wxComboBox2 (window)
+- 2: wxItemContainer.AutoComplete: None 
+    - 1: `const wxArrayString&`: AutoComplete (arraystring)
+    - 1: `wxTextCompleter*`: AutoComplete1 (textcompleter)
+- 2: wxItemContainer.SetMargins: None 
+    - 1: `const wxPoint&`: SetMargins (point)
+    - 1: `wxCoord`: None 
+        - 1: `wxCoord`: SetMargins1 (coord)
+- 2: wxItemContainer.wxListBox: wxListBox ()
+    - 1: `wxWindow*`: None 
+        - 1: `wxWindowID`: None 
+            - 1: `const wxPoint&`: None 
+                - 1: `const wxSize&`: None 
+                    - 1: `const wxArrayString&`: None 
+                        - 1: `long`: None 
+                            - 1: `const wxValidator&`: None 
+                                - 1: `const wxString&`: wxListBox2 (window)
+- 2: wxItemContainer.HitTest: None 
+    - 1: `const wxPoint&`: HitTest (point)
+    - 1: `int`: None 
+        - 1: `int`: HitTest1 (int)
+- 2: wxItemContainer.SetFirstItem: None 
+    - 1: `int`: SetFirstItem (int)
+    - 1: `const wxString&`: SetFirstItem1 (str)
+- 2: wxItemContainerImmutable.wxRadioBox: wxRadioBox ()
+    - 1: `wxWindow*`: None 
+        - 1: `wxWindowID`: None 
+            - 1: `const wxString&`: None 
+                - 1: `const wxPoint&`: None 
+                    - 1: `const wxSize&`: None 
+                        - 1: `const wxArrayString&`: None 
+                            - 1: `int`: None 
+                                - 1: `long`: None 
+                                    - 1: `const wxValidator&`: None 
+                                        - 1: `const wxString&`: wxRadioBox2 (window)
+- 3: wxItemContainerImmutable.Create: None 
+    - 3: `wxWindow*`: None 
+        - 3: `wxWindowID`: None 
+            - 1: `const wxString&`: None 
+                - 1: `const wxPoint&`: None 
+                    - 1: `const wxSize&`: None 
+                        - 1: `const wxArrayString&`: None 
+                            - 1: `int`: None 
+                                - 1: `long`: None 
+                                    - 1: `const wxValidator&`: None 
+                                        - 1: `const wxString&`: Create1 (str)
+            - 2: `const wxPoint&`: None 
+                - 2: `const wxSize&`: None 
+                    - 2: `long`: None 
+                        - 1: `const wxValidator&`: None 
+                            - 1: `const wxString&`: Create (point, validator)
+                        - 1: `const wxString&`: Create (point, str)
+- 2: wxItemContainerImmutable.Show: None 
+    - 1: `unsigned int`: None 
+        - 1: `bool`: Show (uint)
+    - 1: `bool`: Show (bool)
+- 2: wxItemContainerImmutable.wxControl: wxControl1 ()
+    - 1: `wxWindow*`: None 
+        - 1: `wxWindowID`: None 
+            - 1: `const wxPoint&`: None 
+                - 1: `const wxSize&`: None 
+                    - 1: `long`: None 
+                        - 1: `const wxValidator&`: None 
+                            - 1: `const wxString&`: wxControl (window)
+- 2: wxItemContainerImmutable.GetLabelText: GetLabelText ()
+    - 1: `const wxString&`: GetLabelText1 (str)
+- 2: wxItemContainerImmutable.GetSizeFromTextSize: None 
+    - 1: `int`: None 
+        - 1: `int`: GetSizeFromTextSize (int)
+    - 1: `const wxSize&`: GetSizeFromTextSize1 (size)
+- 2: wxItemContainerImmutable.FindWindow: None 
+    - 1: `long`: FindWindow (long)
+    - 1: `const wxString&`: FindWindow1 (str)
+- 6: wxItemContainerImmutable.FromDIP: None 
+    - 2: `const wxSize&`: FromDIP (size)
+        - 1: `const wxWindow*`: FromDIP3 (size, window)
+    - 2: `const wxPoint&`: FromDIP1 (point)
+        - 1: `const wxWindow*`: FromDIP4 (point, window)
+    - 2: `int`: FromDIP2 (int)
+        - 1: `const wxWindow*`: FromDIP5 (int, window)
+- 6: wxItemContainerImmutable.ToDIP: None 
+    - 2: `const wxSize&`: ToDIP (size)
+        - 1: `const wxWindow*`: ToDIP3 (size, window)
+    - 2: `const wxPoint&`: ToDIP1 (point)
+        - 1: `const wxWindow*`: ToDIP4 (point, window)
+    - 2: `int`: ToDIP2 (int)
+        - 1: `const wxWindow*`: ToDIP5 (int, window)
+- 2: wxItemContainerImmutable.GetClientSize: GetClientSize1 ()
+    - 1: `int*`: None 
+        - 1: `int*`: GetClientSize (int)
+- 2: wxItemContainerImmutable.GetSize: GetSize1 ()
+    - 1: `int*`: None 
+        - 1: `int*`: GetSize (int)
+- 2: wxItemContainerImmutable.GetVirtualSize: GetVirtualSize ()
+    - 1: `int*`: None 
+        - 1: `int*`: GetVirtualSize1 (int)
+- 3: wxItemContainerImmutable.SetClientSize: None 
+    - 1: `int`: None 
+        - 1: `int`: SetClientSize (int)
+    - 1: `const wxSize&`: SetClientSize1 (size)
+    - 1: `const wxRect&`: SetClientSize2 (rect)
+- 4: wxItemContainerImmutable.SetSize: None 
+    - 2: `int`: None 
+        - 2: `int`: SetSize3 (int)
+            - 1: `int`: None 
+                - 1: `int`: None 
+                    - 1: `int`: SetSize (int, int)
+    - 1: `const wxRect&`: SetSize1 (rect)
+    - 1: `const wxSize&`: SetSize2 (size)
+- 2: wxItemContainerImmutable.SetSizeHints: None 
+    - 1: `const wxSize&`: None 
+        - 1: `const wxSize&`: None 
+            - 1: `const wxSize&`: SetSizeHints (size)
+    - 1: `int`: None 
+        - 1: `int`: None 
+            - 1: `int`: None 
+                - 1: `int`: None 
+                    - 1: `int`: None 
+                        - 1: `int`: SetSizeHints1 (int)
+- 2: wxItemContainerImmutable.SetVirtualSize: None 
+    - 1: `int`: None 
+        - 1: `int`: SetVirtualSize (int)
+    - 1: `const wxSize&`: SetVirtualSize1 (size)
+- 2: wxItemContainerImmutable.GetPosition: GetPosition1 ()
+    - 1: `int*`: None 
+        - 1: `int*`: GetPosition (int)
+- 2: wxItemContainerImmutable.GetScreenPosition: GetScreenPosition1 ()
+    - 1: `int*`: None 
+        - 1: `int*`: GetScreenPosition (int)
+- 2: wxItemContainerImmutable.Move: None 
+    - 1: `int`: None 
+        - 1: `int`: None 
+            - 1: `int`: Move (int)
+    - 1: `const wxPoint&`: None 
+        - 1: `int`: Move1 (point)
+- 2: wxItemContainerImmutable.ClientToScreen: None 
+    - 1: `int*`: None 
+        - 1: `int*`: ClientToScreen (int)
+    - 1: `const wxPoint&`: ClientToScreen1 (point)
+- 2: wxItemContainerImmutable.ConvertDialogToPixels: None 
+    - 1: `const wxPoint&`: ConvertDialogToPixels (point)
+    - 1: `const wxSize&`: ConvertDialogToPixels1 (size)
+- 2: wxItemContainerImmutable.ConvertPixelsToDialog: None 
+    - 1: `const wxPoint&`: ConvertPixelsToDialog (point)
+    - 1: `const wxSize&`: ConvertPixelsToDialog1 (size)
+- 2: wxItemContainerImmutable.ScreenToClient: None 
+    - 1: `int*`: None 
+        - 1: `int*`: ScreenToClient (int)
+    - 1: `const wxPoint&`: ScreenToClient1 (point)
+- 2: wxItemContainerImmutable.GetTextExtent: None 
+    - 2: `const wxString&`: GetTextExtent1 ()
+        - 1: `int*`: None 
+            - 1: `int*`: None 
+                - 1: `int*`: None 
+                    - 1: `int*`: None 
+                        - 1: `const wxFont*`: GetTextExtent (int)
+- 4: wxItemContainerImmutable.IsExposed: None 
+    - 2: `int`: None 
+        - 2: `int`: IsExposed (int)
+            - 1: `int`: None 
+                - 1: `int`: IsExposed2 (int, int)
+    - 1: `wxPoint&`: IsExposed1 (point)
+    - 1: `wxRect&`: IsExposed3 (rect)
+- 2: wxItemContainerImmutable.SetToolTip: None 
+    - 1: `const wxString&`: SetToolTip (str)
+    - 1: `wxToolTip*`: SetToolTip1 (tooltip)
+- 2: wxItemContainerImmutable.GetPopupMenuSelectionFromUser: None 
+    - 2: `wxMenu&`: None 
+        - 1: `const wxPoint&`: GetPopupMenuSelectionFromUser (point)
+        - 1: `int`: None 
+            - 1: `int`: GetPopupMenuSelectionFromUser1 (int)
+- 2: wxItemContainerImmutable.PopupMenu: None 
+    - 2: `wxMenu*`: None 
+        - 1: `const wxPoint&`: PopupMenu (point)
+        - 1: `int`: None 
+            - 1: `int`: PopupMenu1 (int)
+- 2: wxItemContainerImmutable.wxWindow: wxWindow ()
+    - 1: `wxWindow*`: None 
+        - 1: `wxWindowID`: None 
+            - 1: `const wxPoint&`: None 
+                - 1: `const wxSize&`: None 
+                    - 1: `long`: None 
+                        - 1: `const wxString&`: wxWindow1 (window)
+- 2: wxItemContainerImmutable.wxObject: wxObject ()
+    - 1: `const wxObject&`: wxObject1 (object)
 - 2: wxListBox.wxListBox: wxListBox ()
     - 1: `wxWindow*`: None 
         - 1: `wxWindowID`: None 
@@ -3659,10 +4027,223 @@
 - 2: wxTextEntry.AutoComplete: None 
     - 1: `const wxArrayString&`: AutoComplete (arraystring)
     - 1: `wxTextCompleter*`: AutoComplete1 (textcompleter)
+- 2: wxTextEntry.GetSelection: GetSelection ()
+    - 1: `long*`: None 
+        - 1: `long*`: GetSelection (long)
+- 2: wxTextEntry.SetSelection: None 
+    - 1: `long`: None 
+        - 1: `long`: SetSelection (long)
+    - 1: `int`: SetSelection (int)
 - 2: wxTextEntry.SetMargins: None 
     - 1: `const wxPoint&`: SetMargins (point)
     - 1: `wxCoord`: None 
         - 1: `wxCoord`: SetMargins1 (coord)
+- 2: wxTextEntry.wxComboBox: wxComboBox ()
+    - 1: `wxWindow*`: None 
+        - 1: `wxWindowID`: None 
+            - 1: `const wxString&`: None 
+                - 1: `const wxPoint&`: None 
+                    - 1: `const wxSize&`: None 
+                        - 1: `const wxArrayString&`: None 
+                            - 1: `long`: None 
+                                - 1: `const wxValidator&`: None 
+                                    - 1: `const wxString&`: wxComboBox2 (window)
+- 4: wxTextEntry.Create: None 
+    - 4: `wxWindow*`: None 
+        - 4: `wxWindowID`: None 
+            - 2: `const wxString&`: None 
+                - 2: `const wxPoint&`: None 
+                    - 2: `const wxSize&`: None 
+                        - 1: `const wxArrayString&`: None 
+                            - 1: `long`: None 
+                                - 1: `const wxValidator&`: None 
+                                    - 1: `const wxString&`: Create1 (str, arraystring)
+                        - 1: `long`: None 
+                            - 1: `const wxValidator&`: None 
+                                - 1: `const wxString&`: Create (str, long)
+            - 2: `const wxPoint&`: None 
+                - 2: `const wxSize&`: None 
+                    - 2: `long`: None 
+                        - 1: `const wxValidator&`: None 
+                            - 1: `const wxString&`: Create (point, validator)
+                        - 1: `const wxString&`: Create (point, str)
+- 2: wxTextEntry.wxControl: wxControl1 ()
+    - 1: `wxWindow*`: None 
+        - 1: `wxWindowID`: None 
+            - 1: `const wxPoint&`: None 
+                - 1: `const wxSize&`: None 
+                    - 1: `long`: None 
+                        - 1: `const wxValidator&`: None 
+                            - 1: `const wxString&`: wxControl (window)
+- 2: wxTextEntry.GetLabelText: GetLabelText ()
+    - 1: `const wxString&`: GetLabelText1 (str)
+- 2: wxTextEntry.GetSizeFromTextSize: None 
+    - 1: `int`: None 
+        - 1: `int`: GetSizeFromTextSize (int)
+    - 1: `const wxSize&`: GetSizeFromTextSize1 (size)
+- 2: wxTextEntry.FindWindow: None 
+    - 1: `long`: FindWindow (long)
+    - 1: `const wxString&`: FindWindow1 (str)
+- 6: wxTextEntry.FromDIP: None 
+    - 2: `const wxSize&`: FromDIP (size)
+        - 1: `const wxWindow*`: FromDIP3 (size, window)
+    - 2: `const wxPoint&`: FromDIP1 (point)
+        - 1: `const wxWindow*`: FromDIP4 (point, window)
+    - 2: `int`: FromDIP2 (int)
+        - 1: `const wxWindow*`: FromDIP5 (int, window)
+- 6: wxTextEntry.ToDIP: None 
+    - 2: `const wxSize&`: ToDIP (size)
+        - 1: `const wxWindow*`: ToDIP3 (size, window)
+    - 2: `const wxPoint&`: ToDIP1 (point)
+        - 1: `const wxWindow*`: ToDIP4 (point, window)
+    - 2: `int`: ToDIP2 (int)
+        - 1: `const wxWindow*`: ToDIP5 (int, window)
+- 2: wxTextEntry.GetClientSize: GetClientSize1 ()
+    - 1: `int*`: None 
+        - 1: `int*`: GetClientSize (int)
+- 2: wxTextEntry.GetSize: GetSize1 ()
+    - 1: `int*`: None 
+        - 1: `int*`: GetSize (int)
+- 2: wxTextEntry.GetVirtualSize: GetVirtualSize ()
+    - 1: `int*`: None 
+        - 1: `int*`: GetVirtualSize1 (int)
+- 3: wxTextEntry.SetClientSize: None 
+    - 1: `int`: None 
+        - 1: `int`: SetClientSize (int)
+    - 1: `const wxSize&`: SetClientSize1 (size)
+    - 1: `const wxRect&`: SetClientSize2 (rect)
+- 4: wxTextEntry.SetSize: None 
+    - 2: `int`: None 
+        - 2: `int`: SetSize3 (int)
+            - 1: `int`: None 
+                - 1: `int`: None 
+                    - 1: `int`: SetSize (int, int)
+    - 1: `const wxRect&`: SetSize1 (rect)
+    - 1: `const wxSize&`: SetSize2 (size)
+- 2: wxTextEntry.SetSizeHints: None 
+    - 1: `const wxSize&`: None 
+        - 1: `const wxSize&`: None 
+            - 1: `const wxSize&`: SetSizeHints (size)
+    - 1: `int`: None 
+        - 1: `int`: None 
+            - 1: `int`: None 
+                - 1: `int`: None 
+                    - 1: `int`: None 
+                        - 1: `int`: SetSizeHints1 (int)
+- 2: wxTextEntry.SetVirtualSize: None 
+    - 1: `int`: None 
+        - 1: `int`: SetVirtualSize (int)
+    - 1: `const wxSize&`: SetVirtualSize1 (size)
+- 2: wxTextEntry.GetPosition: GetPosition1 ()
+    - 1: `int*`: None 
+        - 1: `int*`: GetPosition (int)
+- 2: wxTextEntry.GetScreenPosition: GetScreenPosition1 ()
+    - 1: `int*`: None 
+        - 1: `int*`: GetScreenPosition (int)
+- 2: wxTextEntry.Move: None 
+    - 1: `int`: None 
+        - 1: `int`: None 
+            - 1: `int`: Move (int)
+    - 1: `const wxPoint&`: None 
+        - 1: `int`: Move1 (point)
+- 2: wxTextEntry.ClientToScreen: None 
+    - 1: `int*`: None 
+        - 1: `int*`: ClientToScreen (int)
+    - 1: `const wxPoint&`: ClientToScreen1 (point)
+- 2: wxTextEntry.ConvertDialogToPixels: None 
+    - 1: `const wxPoint&`: ConvertDialogToPixels (point)
+    - 1: `const wxSize&`: ConvertDialogToPixels1 (size)
+- 2: wxTextEntry.ConvertPixelsToDialog: None 
+    - 1: `const wxPoint&`: ConvertPixelsToDialog (point)
+    - 1: `const wxSize&`: ConvertPixelsToDialog1 (size)
+- 2: wxTextEntry.ScreenToClient: None 
+    - 1: `int*`: None 
+        - 1: `int*`: ScreenToClient (int)
+    - 1: `const wxPoint&`: ScreenToClient1 (point)
+- 2: wxTextEntry.GetTextExtent: None 
+    - 2: `const wxString&`: GetTextExtent1 ()
+        - 1: `int*`: None 
+            - 1: `int*`: None 
+                - 1: `int*`: None 
+                    - 1: `int*`: None 
+                        - 1: `const wxFont*`: GetTextExtent (int)
+- 4: wxTextEntry.IsExposed: None 
+    - 2: `int`: None 
+        - 2: `int`: IsExposed (int)
+            - 1: `int`: None 
+                - 1: `int`: IsExposed2 (int, int)
+    - 1: `wxPoint&`: IsExposed1 (point)
+    - 1: `wxRect&`: IsExposed3 (rect)
+- 2: wxTextEntry.SetToolTip: None 
+    - 1: `const wxString&`: SetToolTip (str)
+    - 1: `wxToolTip*`: SetToolTip1 (tooltip)
+- 2: wxTextEntry.GetPopupMenuSelectionFromUser: None 
+    - 2: `wxMenu&`: None 
+        - 1: `const wxPoint&`: GetPopupMenuSelectionFromUser (point)
+        - 1: `int`: None 
+            - 1: `int`: GetPopupMenuSelectionFromUser1 (int)
+- 2: wxTextEntry.PopupMenu: None 
+    - 2: `wxMenu*`: None 
+        - 1: `const wxPoint&`: PopupMenu (point)
+        - 1: `int`: None 
+            - 1: `int`: PopupMenu1 (int)
+- 2: wxTextEntry.wxWindow: wxWindow ()
+    - 1: `wxWindow*`: None 
+        - 1: `wxWindowID`: None 
+            - 1: `const wxPoint&`: None 
+                - 1: `const wxSize&`: None 
+                    - 1: `long`: None 
+                        - 1: `const wxString&`: wxWindow1 (window)
+- 2: wxTextEntry.GetClientObject: GetClientObject ()
+    - 1: `unsigned int`: GetClientObject (uint)
+- 2: wxTextEntry.SetClientObject: None 
+    - 1: `wxClientData*`: SetClientObject (clientdata)
+    - 1: `unsigned int`: None 
+        - 1: `wxClientData*`: SetClientObject (uint)
+- 2: wxTextEntry.wxObject: wxObject ()
+    - 1: `const wxObject&`: wxObject1 (object)
+- 9: wxTextEntry.Append: None 
+    - 3: `const wxString&`: Append (str)
+        - 1: `void*`: Append1 (str, void)
+        - 1: `wxClientData*`: Append2 (str, clientdata)
+    - 3: `const wxArrayString&`: Append3 (arraystring)
+        - 1: `void**`: Append5 (arraystring, void)
+        - 1: `wxClientData**`: Append6 (arraystring, clientdata)
+    - 3: `unsigned int`: None 
+        - 3: `const wxString*`: Append7 (uint)
+            - 1: `void**`: Append8 (uint, void)
+            - 1: `wxClientData**`: Append9 (uint, clientdata)
+- 9: wxTextEntry.Insert: None 
+    - 3: `const wxString&`: None 
+        - 3: `unsigned int`: Insert (str)
+            - 1: `void*`: Insert1 (str, void)
+            - 1: `wxClientData*`: Insert2 (str, clientdata)
+    - 3: `const wxArrayString&`: None 
+        - 3: `unsigned int`: Insert3 (arraystring)
+            - 1: `void**`: Insert5 (arraystring, void)
+            - 1: `wxClientData**`: Insert6 (arraystring, clientdata)
+    - 3: `unsigned int`: None 
+        - 3: `const wxString*`: None 
+            - 3: `unsigned int`: Insert7 (uint)
+                - 1: `void**`: Insert8 (uint, void)
+                - 1: `wxClientData**`: Insert9 (uint, clientdata)
+- 6: wxTextEntry.Set: None 
+    - 3: `const wxArrayString&`: Set (arraystring)
+        - 1: `void**`: Set2 (arraystring, void)
+        - 1: `wxClientData**`: Set3 (arraystring, clientdata)
+    - 3: `unsigned int`: None 
+        - 3: `const wxString*`: Set4 (uint)
+            - 1: `void**`: Set5 (uint, void)
+            - 1: `wxClientData**`: Set6 (uint, clientdata)
+- 2: wxTextEntry.wxTextCtrl: wxTextCtrl ()
+    - 1: `wxWindow*`: None 
+        - 1: `wxWindowID`: None 
+            - 1: `const wxString&`: None 
+                - 1: `const wxPoint&`: None 
+                    - 1: `const wxSize&`: None 
+                        - 1: `long`: None 
+                            - 1: `const wxValidator&`: None 
+                                - 1: `const wxString&`: wxTextCtrl1 (window)
 - 2: wxToolBar.wxToolBar: wxToolBar ()
     - 1: `wxWindow*`: None 
         - 1: `wxWindowID`: None 

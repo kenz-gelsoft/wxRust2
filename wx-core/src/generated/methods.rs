@@ -1190,13 +1190,13 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     fn get_client_data(&self, n: c_uint) -> *mut c_void {
         unsafe { ffi::wxItemContainer_GetClientData(self.as_item_container(), n) }
     }
-    fn get_client_object(&self, n: c_uint) -> *mut c_void {
+    fn get_client_object_uint(&self, n: c_uint) -> *mut c_void {
         unsafe { ffi::wxItemContainer_GetClientObject(self.as_item_container(), n) }
     }
     fn set_client_data(&self, n: c_uint, data: *mut c_void) {
         unsafe { ffi::wxItemContainer_SetClientData(self.as_item_container(), n, data) }
     }
-    fn set_client_object(&self, n: c_uint, data: *mut c_void) {
+    fn set_client_object_uint(&self, n: c_uint, data: *mut c_void) {
         unsafe { ffi::wxItemContainer_SetClientObject(self.as_item_container(), n, data) }
     }
     fn insert_str(&self, item: &str, pos: c_uint) -> c_int {
@@ -4290,7 +4290,7 @@ pub trait TextEntryMethods: WxRustMethods {
             wx_base::from_wx_string(ffi::wxTextEntry_GetRange(self.as_text_entry(), from, to))
         }
     }
-    fn get_selection(&self, from: *mut c_void, to: *mut c_void) {
+    fn get_selection_long(&self, from: *mut c_void, to: *mut c_void) {
         unsafe { ffi::wxTextEntry_GetSelection(self.as_text_entry(), from, to) }
     }
     fn get_string_selection(&self) -> String {
@@ -4332,7 +4332,7 @@ pub trait TextEntryMethods: WxRustMethods {
         unsafe { ffi::wxTextEntry_SetInsertionPointEnd(self.as_text_entry()) }
     }
     // NOT_SUPPORTED: fn SetMaxLength()
-    fn set_selection(&self, from: c_long, to: c_long) {
+    fn set_selection_long(&self, from: c_long, to: c_long) {
         unsafe { ffi::wxTextEntry_SetSelection(self.as_text_entry(), from, to) }
     }
     fn select_all(&self) {
