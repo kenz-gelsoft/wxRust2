@@ -334,9 +334,9 @@ class ClassManager:
         return name in self.__by_name.keys()
     
     def mixed_into(self, name):
-        cache = self.__mixin_cache.get(name)
-        if cache is not None:
-            return cache
+        cached = self.__mixin_cache.get(name)
+        if cached is not None:
+            return cached
 
         all_classes = self.all()
         result = []

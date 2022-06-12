@@ -210,8 +210,7 @@ class OverloadTree:
                 self._add_ancestors_methods(mixin)
     
     def _add_ancestors_methods(self, cls):
-        cm = self.__cls.manager
-        for c in cm.ancestors_of(cls):
+        for c in self.__cls.manager.ancestors_of(cls):
             for m in c.methods:
                 self._add(m)
     

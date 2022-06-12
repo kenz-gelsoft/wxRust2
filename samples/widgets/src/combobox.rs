@@ -365,7 +365,6 @@ impl WidgetsPage for ComboboxWidgetsPage {
             .id(ComboPage::Combo.into())
             .build();
         combobox1.append_str("Dynamic ComboBox Test - Click me!");
-        // TODO: overload renaming for mix-in methods
         combobox1.set_selection(0);
         sizer_right.add_int_int(20, 20, 0, wx::EXPAND, 0, wx::Object::none());
         sizer_right.add_window_int(
@@ -517,7 +516,6 @@ impl ComboboxWidgetsPage {
                 .style(flags)
                 .build();
             if sel_item != wx::NOT_FOUND {
-                // TODO: Overload handling for mix-in
                 new_cb.set_selection(sel_item);
             }
 
