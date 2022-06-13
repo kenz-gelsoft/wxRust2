@@ -38,25 +38,25 @@ pub struct ConfigUI {
 }
 
 #[derive(Clone)]
-pub struct ColourPickerWidgetsPage {
+pub struct DatePickerWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
     // the picker
-    clr_picker: Rc<RefCell<Option<wx::ColourPickerCtrl>>>,
+    date_picker: Rc<RefCell<Option<wx::DatePickerCtrl>>>,
 }
-impl WidgetsPage for ColourPickerWidgetsPage {
+impl WidgetsPage for DatePickerWidgetsPage {
     fn base(&self) -> &wx::Panel {
         return &self.base;
     }
     fn label(&self) -> &str {
-        return "ColourPicker";
+        return "DatePicker";
     }
     fn create_content(&self) {
         // left pane
         let boxleft = wx::BoxSizer::new(wx::VERTICAL);
 
         let clrbox =
-            wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&self.base), "&ColourPicker style");
+            wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&self.base), "&DatePicker style");
         let chk_colour_text_ctrl =
             self.create_check_box_and_add_to_sizer(&clrbox, "With label", wx::ID_ANY);
         let chk_colour_show_label =
@@ -86,9 +86,9 @@ impl WidgetsPage for ColourPickerWidgetsPage {
         // right pane
         let sizer = wx::BoxSizer::new(wx::VERTICAL);
         sizer.add_int_int(1, 1, 1, wx::GROW | wx::ALL, 5, wx::Object::none()); // spacer
-        if let Some(clr_picker) = self.clr_picker.borrow().as_ref() {
+        if let Some(date_picker) = self.date_picker.borrow().as_ref() {
             sizer.add_window_int(
-                Some(clr_picker),
+                Some(date_picker),
                 0,
                 wx::ALIGN_CENTER | wx::ALL,
                 5,
@@ -123,15 +123,15 @@ impl WidgetsPage for ColourPickerWidgetsPage {
         // Do nothing
     }
 }
-impl ColourPickerWidgetsPage {
+impl DatePickerWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {
         let panel = wx::Panel::builder(Some(book))
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
-        ColourPickerWidgetsPage {
+        DatePickerWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
-            clr_picker: Rc::new(RefCell::new(None)),
+            date_picker: Rc::new(RefCell::new(None)),
         }
     }
 
@@ -142,10 +142,10 @@ impl ColourPickerWidgetsPage {
             // MEMO: Destroy()ing in create_picker() removes from its sizer.
             // config_ui.sizer.remove_int(1);
             self.create_picker();
-            if let Some(clr_pickr) = self.clr_picker.borrow().as_ref() {
+            if let Some(date_picker) = self.date_picker.borrow().as_ref() {
                 config_ui.sizer.insert_window_int(
                     1,
-                    Some(clr_pickr),
+                    Some(date_picker),
                     0,
                     wx::ALIGN_CENTER | wx::ALL,
                     5,
@@ -171,8 +171,8 @@ impl ColourPickerWidgetsPage {
     }
 
     fn create_picker(&self) {
-        if let Some(clr_picker) = self.clr_picker.borrow().as_ref() {
-            clr_picker.destroy();
+        if let Some(date_picker) = self.date_picker.borrow().as_ref() {
+            date_picker.destroy();
         }
 
         let mut style = wx::BORDER_DEFAULT;
@@ -188,12 +188,12 @@ impl ColourPickerWidgetsPage {
             }
         }
 
-        let clr_picker = wx::ColourPickerCtrl::builder(Some(&self.base))
+        let date_picker = wx::DatePickerCtrl::builder(Some(&self.base))
             .id(PickerPage::Colour.into())
-            .colour(wx::Colour::new_with_str("RED"))
+            // .colour(wx::Colour::new_with_str("RED"))
             .style(style)
             .build();
-        *self.clr_picker.borrow_mut() = Some(clr_picker);
+        *self.date_picker.borrow_mut() = Some(date_picker);
     }
 
     fn on_button_reset(&self) {

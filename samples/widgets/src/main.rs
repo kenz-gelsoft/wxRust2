@@ -22,6 +22,9 @@ use clrpicker::*;
 mod combobox;
 use combobox::*;
 
+mod datepicker;
+use datepicker::*;
+
 enum Widgets {
     ClearLog = 100,
     Quit,
