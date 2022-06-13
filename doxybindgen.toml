@@ -15,7 +15,7 @@ wxml_files = [
     'wxml/classwx_combo_box.xml',
     'wxml/classwx_command_event.xml',
     'wxml/classwx_control.xml',
-    #'wxml/classwx_date_picker_ctrl.xml',
+    'wxml/classwx_date_picker_ctrl.xml',
     'wxml/classwx_date_time.xml',
     'wxml/classwx_event.xml',
     'wxml/classwx_evt_handler.xml',
@@ -124,6 +124,14 @@ blocklist = [
 wx31 = [
     'GetSizeFromText',
 ]
+[types.wxDatePickerCtrl]
+blocklist = [
+    # TODO: use from_ptr() to construct other crate's value
+    'GetValue',
+]
+wx31 = [
+    'SetNullText',
+]
 [types.wxDateTime]
 blocklist = [
     'operator=1',
@@ -157,10 +165,6 @@ windows = [
 wx31 = [
     'GetFirstWeekDay',
     'GetWeekBasedYear',
-]
-[types.wxDatePickerCtrl]
-wx31 = [
-    'SetNullText',
 ]
 [types.wxEvent]
 returns_owned = [
