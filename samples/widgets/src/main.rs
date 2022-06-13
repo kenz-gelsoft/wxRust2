@@ -127,11 +127,13 @@ impl WidgetsFrame {
         let choice_page = Rc::new(ChoiceWidgetsPage::new(&book));
         let clrpicker_page = Rc::new(ColourPickerWidgetsPage::new(&book));
         let combobox_page = Rc::new(ComboboxWidgetsPage::new(&book));
+        let datepicker_page = Rc::new(DatePickerWidgetsPage::new(&book));
         let mut frame = WidgetsFrame {
             base,
             panel,
             book,
             pages: vec![
+                datepicker_page,
                 button_page,
                 check_box_page,
                 choice_page,

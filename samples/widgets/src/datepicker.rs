@@ -6,14 +6,17 @@ use wx::methods::*;
 
 // control ids
 #[derive(Clone, Copy)]
-enum PickerPage {
+enum DatePickerPage {
     Reset = wx::ID_HIGHEST as isize,
-    Colour,
+    Set,
+    SetRange,
+    SetNullText,
+    Picker,
 }
-impl PickerPage {
+impl DatePickerPage {
     fn from(v: c_int) -> Option<Self> {
-        use PickerPage::*;
-        for e in [Reset, Colour] {
+        use DatePickerPage::*;
+        for e in [Reset, Set, SetRange, SetNullText, Picker] {
             if v == e.into() {
                 return Some(e);
             }
@@ -21,8 +24,8 @@ impl PickerPage {
         return None;
     }
 }
-impl From<PickerPage> for c_int {
-    fn from(w: PickerPage) -> Self {
+impl From<DatePickerPage> for c_int {
+    fn from(w: DatePickerPage) -> Self {
         w as c_int
     }
 }
@@ -68,7 +71,7 @@ impl WidgetsPage for DatePickerWidgetsPage {
         boxleft.add_window_int(
             Some(
                 &wx::Button::builder(Some(&self.base))
-                    .id(PickerPage::Reset.into())
+                    .id(DatePickerPage::Reset.into())
                     .label("&Reset")
                     .build(),
             ),
@@ -189,7 +192,7 @@ impl DatePickerWidgetsPage {
         }
 
         let date_picker = wx::DatePickerCtrl::builder(Some(&self.base))
-            .id(PickerPage::Colour.into())
+            // .id(PickerPage::Colour.into())
             // .colour(wx::Colour::new_with_str("RED"))
             .style(style)
             .build();
