@@ -232,6 +232,7 @@ wxDatePickerCtrl *wxDatePickerCtrl_new();
 wxDatePickerCtrl *wxDatePickerCtrl_new1(wxWindow * parent, wxWindowID id, const wxDateTime * dt, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 bool wxDatePickerCtrl_Create(wxDatePickerCtrl * self, wxWindow * parent, wxWindowID id, const wxDateTime * dt, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 bool wxDatePickerCtrl_GetRange(const wxDatePickerCtrl * self, wxDateTime * dt1, wxDateTime * dt2);
+wxDateTime *wxDatePickerCtrl_GetValue(const wxDatePickerCtrl * self);
 #if wxCHECK_VERSION(3, 1, 0)
 void wxDatePickerCtrl_SetNullText(wxDatePickerCtrl * self, const wxString * text);
 #endif

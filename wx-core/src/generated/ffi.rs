@@ -489,7 +489,7 @@ extern "C" {
         dt1: *mut c_void,
         dt2: *mut c_void,
     ) -> bool;
-    // BLOCKED: pub fn wxDatePickerCtrl_GetValue(self_: *const c_void) -> wxDateTime;
+    pub fn wxDatePickerCtrl_GetValue(self_: *const c_void) -> *mut c_void;
     pub fn wxDatePickerCtrl_SetNullText(self_: *mut c_void, text: *const c_void);
     pub fn wxDatePickerCtrl_SetRange(self_: *mut c_void, dt1: *const c_void, dt2: *const c_void);
     pub fn wxDatePickerCtrl_SetValue(self_: *mut c_void, dt: *const c_void);

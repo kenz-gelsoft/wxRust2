@@ -577,6 +577,9 @@ bool wxDatePickerCtrl_Create(wxDatePickerCtrl * self, wxWindow * parent, wxWindo
 bool wxDatePickerCtrl_GetRange(const wxDatePickerCtrl * self, wxDateTime * dt1, wxDateTime * dt2) {
     return self->GetRange(dt1, dt2);
 }
+wxDateTime *wxDatePickerCtrl_GetValue(const wxDatePickerCtrl * self) {
+    return new wxDateTime(self->GetValue());
+}
 #if wxCHECK_VERSION(3, 1, 0)
 void wxDatePickerCtrl_SetNullText(wxDatePickerCtrl * self, const wxString * text) {
     return self->SetNullText(*text);

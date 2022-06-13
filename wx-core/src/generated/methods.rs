@@ -1020,7 +1020,9 @@ pub trait DatePickerCtrlMethods: ControlMethods {
             ffi::wxDatePickerCtrl_GetRange(self.as_ptr(), dt1, dt2)
         }
     }
-    // BLOCKED: fn GetValue()
+    fn get_value(&self) -> DateTime {
+        unsafe { DateTimeIsOwned::from_ptr(ffi::wxDatePickerCtrl_GetValue(self.as_ptr())) }
+    }
     fn set_null_text(&self, text: &str) {
         unsafe {
             let text = wx_string_from(text);

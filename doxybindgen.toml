@@ -125,10 +125,6 @@ wx31 = [
     'GetSizeFromText',
 ]
 [types.wxDatePickerCtrl]
-blocklist = [
-    # TODO: use from_ptr() to construct other crate's value
-    'GetValue',
-]
 wx31 = [
     'SetNullText',
 ]
