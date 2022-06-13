@@ -456,7 +456,7 @@ class RustMethodBinding:
             return '%s; &self' % (call,)
         wrapped = self.__model.wrapped_return_type(allows_ptr=False)
         if wrapped:
-            return '%sIsOwned(%s)' % (wrapped[2:], call)
+            return '%sIsOwned::from_ptr(%s)' % (wrapped[2:], call)
         wrapped = self.__model.wrapped_return_type(allows_ptr=True)
         if wrapped:
             if self.__model.returns_owned():
