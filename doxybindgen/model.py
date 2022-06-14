@@ -252,15 +252,14 @@ class ReturnTypeWrapper:
         if self.__returns.is_str():
             return ['String',
                     'from_wx_string(%s)' % (call,)]
+        if self.is_ctor:
+            return ['%sIsOwned<OWNED>' % (returns,),
+                    '%sIsOwned(%s)' % (returns, call)]
         if self.__returns.is_ref_to_binding():
             return ['%sIsOwned<false>' % (returns,),
                     '%sIsOwned::from_ptr(%s)' % (returns, call)]
-        elif (self.is_ctor or
-                self.__returns.is_ptr_to_binding()):
-            if self.is_ctor:
-                return ['%sIsOwned<OWNED>' % (returns,),
-                        '%sIsOwned(%s)' % (returns, call)]
-            elif not self.is_owned:
+        if self.__returns.is_ptr_to_binding():
+            if not self.is_owned:
                 if self.is_trackable:
                     return ['WeakRef<%s>' % (returns,),
                             'WeakRef::<%s>::from(%s)' % (returns, call)]
