@@ -80,7 +80,7 @@ pub trait DateTimeMethods: WxRustMethods {
         unsafe { ffi::wxDateTime_GetCentury(self.as_ptr(), tz) }
     }
     fn get_date_only(&self) -> DateTime {
-        unsafe { DateTimeIsOwned::from_ptr(ffi::wxDateTime_GetDateOnly(self.as_ptr())) }
+        unsafe { DateTime::from_ptr(ffi::wxDateTime_GetDateOnly(self.as_ptr())) }
     }
     // NOT_SUPPORTED: fn GetDay()
     // NOT_SUPPORTED: fn GetDayOfYear()
@@ -300,9 +300,7 @@ pub trait DateTimeMethods: WxRustMethods {
         unsafe { ffi::wxDateTime_GetRataDie(self.as_ptr()) }
     }
     fn from_timezone(&self, tz: *const c_void, no_dst: bool) -> DateTime {
-        unsafe {
-            DateTimeIsOwned::from_ptr(ffi::wxDateTime_FromTimezone(self.as_ptr(), tz, no_dst))
-        }
+        unsafe { DateTime::from_ptr(ffi::wxDateTime_FromTimezone(self.as_ptr(), tz, no_dst)) }
     }
     // NOT_SUPPORTED: fn IsDST()
     fn make_from_timezone(&self, tz: *const c_void, no_dst: bool) -> &Self {
@@ -324,10 +322,10 @@ pub trait DateTimeMethods: WxRustMethods {
         }
     }
     fn to_timezone(&self, tz: *const c_void, no_dst: bool) -> DateTime {
-        unsafe { DateTimeIsOwned::from_ptr(ffi::wxDateTime_ToTimezone(self.as_ptr(), tz, no_dst)) }
+        unsafe { DateTime::from_ptr(ffi::wxDateTime_ToTimezone(self.as_ptr(), tz, no_dst)) }
     }
     fn to_utc(&self, no_dst: bool) -> DateTime {
-        unsafe { DateTimeIsOwned::from_ptr(ffi::wxDateTime_ToUTC(self.as_ptr(), no_dst)) }
+        unsafe { DateTime::from_ptr(ffi::wxDateTime_ToUTC(self.as_ptr(), no_dst)) }
     }
     fn convert_year_to_bc(year: c_int) -> c_int {
         unsafe { ffi::wxDateTime_ConvertYearToBC(year) }
@@ -361,15 +359,15 @@ pub trait DateTimeMethods: WxRustMethods {
     // NOT_SUPPORTED: fn IsLeapYear()
     // NOT_SUPPORTED: fn IsWestEuropeanCountry()
     fn now() -> DateTime {
-        unsafe { DateTimeIsOwned::from_ptr(ffi::wxDateTime_Now()) }
+        unsafe { DateTime::from_ptr(ffi::wxDateTime_Now()) }
     }
     // NOT_SUPPORTED: fn SetCountry()
     // NOT_SUPPORTED: fn SetToWeekOfYear()
     fn today() -> DateTime {
-        unsafe { DateTimeIsOwned::from_ptr(ffi::wxDateTime_Today()) }
+        unsafe { DateTime::from_ptr(ffi::wxDateTime_Today()) }
     }
     fn u_now() -> DateTime {
-        unsafe { DateTimeIsOwned::from_ptr(ffi::wxDateTime_UNow()) }
+        unsafe { DateTime::from_ptr(ffi::wxDateTime_UNow()) }
     }
 }
 

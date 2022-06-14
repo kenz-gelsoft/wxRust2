@@ -209,10 +209,6 @@ class Method:
                         return [wrapped,
                                 'Option<%sIsOwned<false>>' % (returns,),
                                 '%s::option_from(%s)' % (returns, call)]
-            if self.returns_new():
-                return [wrapped,
-                        returns,
-                        '%sIsOwned::from_ptr(%s)' % (returns, call)]
             return [wrapped,
                     returns,
                     '%s::from_ptr(%s)' % (returns, call)]
