@@ -315,20 +315,7 @@ class RustMethodBinding:
             if for_ffi:
                 returns = '*mut c_void'
             else:
-                returns = wrapped[2:]
-                if self.__model.returns.is_ref_to_binding():
-                    returns = '%sIsOwned<false>' % (returns,)
-                elif (self.is_ctor or
-                      self.__model.returns.is_ptr_to_binding()):
-                    if self.is_ctor:
-                        returns = '%sIsOwned<OWNED>' % (returns,)
-                    elif not self.__model.returns_owned():
-                        if self.__model.returns_trackable():
-                            returns = 'WeakRef<%s>' % (returns,)
-                        else:
-                            returns = 'Option<%sIsOwned<false>>' % (returns,)
-                if self.__model.returns.is_str():
-                    returns = 'String'
+                returns = wrapped[1]
         return ' -> %s' % (returns,)
     
     def lines(self, for_ffi=False, with_overloads=None):
@@ -456,17 +443,18 @@ class RustMethodBinding:
             return '%s; &self' % (call,)
         wrapped = self.__model.wrapped_return_type(allows_ptr=False)
         if wrapped:
-            return '%sIsOwned::from_ptr(%s)' % (wrapped[2:], call)
+            return '%sIsOwned::from_ptr(%s)' % (wrapped[0][2:], call)
         wrapped = self.__model.wrapped_return_type(allows_ptr=True)
         if wrapped:
+            wrapped = wrapped[0][2:]
             if self.__model.returns_owned():
-                return '%s::from_ptr(%s)' % (wrapped[2:], call)
+                return '%s::from_ptr(%s)' % (wrapped, call)
             elif self.__model.returns.is_ref_to_binding():
-                return '%sIsOwned::from_ptr(%s)' % (wrapped[2:], call)
+                return '%sIsOwned::from_ptr(%s)' % (wrapped, call)
             elif self.__model.returns_trackable():
-                return 'WeakRef::<%s>::from(%s)' % (wrapped[2:], call)
+                return 'WeakRef::<%s>::from(%s)' % (wrapped, call)
             else:
-                return '%s::option_from(%s)' % (wrapped[2:], call)
+                return '%s::option_from(%s)' % (wrapped, call)
         return call
 
     def _uses_ptr_type(self):
@@ -577,7 +565,7 @@ class CxxMethodBinding:
         returns = self.__model.returns.in_cxx() + ' '
         if wrapped:
             returns = '%s *' % (
-                wrapped,
+                wrapped[0],
             )
         signature = '%s%s(%s)' % (
             returns,
@@ -610,7 +598,7 @@ class CxxMethodBinding:
             self.__model.returns.is_ref_to_binding()):
             yield '    return &(%s);' % (new_params_or_expr,)
         elif wrapped:
-            yield '    return new %s(%s);' % (wrapped, new_params_or_expr)
+            yield '    return new %s(%s);' % (wrapped[0], new_params_or_expr)
         else:
             yield '    return %s;' % (new_params_or_expr,)
         yield '}'

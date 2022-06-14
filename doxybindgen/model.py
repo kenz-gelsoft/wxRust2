@@ -184,7 +184,22 @@ class Method:
             self.returns_new() or 
             allows_ptr and (self.returns.is_ptr_to_binding() or
                             self.returns.is_ref_to_binding())):
-            return self.returns.typename
+            wrapped = self.returns.typename
+            returns = wrapped[2:]
+            if self.returns.is_str():
+                return [wrapped, 'String']
+            if self.returns.is_ref_to_binding():
+                return [wrapped, '%sIsOwned<false>' % (returns,)]
+            elif (self.is_ctor or
+                  self.returns.is_ptr_to_binding()):
+                if self.is_ctor:
+                    return [wrapped, '%sIsOwned<OWNED>' % (returns,)]
+                elif not self.returns_owned():
+                    if self.returns_trackable():
+                        return [wrapped, 'WeakRef<%s>' % (returns,)]
+                    else:
+                        return [wrapped, 'Option<%sIsOwned<false>>' % (returns,)]
+            return [wrapped, returns]
         else:
             return None
 
