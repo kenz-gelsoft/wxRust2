@@ -233,47 +233,41 @@ class Method:
 class ReturnTypeWrapper:
     def __init__(self, method):
         self.__returns = method.returns
+        self.__wrapped = self.__returns.typename
         self.is_ctor = method.is_ctor
         self.is_owned = method.returns_owned()
         self.is_trackable = method.returns_trackable()
     
     def in_cxx(self):
-        return self._wrap()[0]
+        return self.__wrapped
 
     def returns(self):
-        return self._wrap()[1]
+        return self._wrap()[0]
     
     def call(self, call):
-        return self._wrap(call)[2]
+        return self._wrap(call)[1]
 
     def _wrap(self, call=""):
-        wrapped = self.__returns.typename
-        returns = wrapped[2:]
+        returns = self.__wrapped[2:]
         if self.__returns.is_str():
-            return [wrapped,
-                    'String',
+            return ['String',
                     'from_wx_string(%s)' % (call,)]
         if self.__returns.is_ref_to_binding():
-            return [wrapped,
-                    '%sIsOwned<false>' % (returns,),
+            return ['%sIsOwned<false>' % (returns,),
                     '%sIsOwned::from_ptr(%s)' % (returns, call)]
         elif (self.is_ctor or
                 self.__returns.is_ptr_to_binding()):
             if self.is_ctor:
-                return [wrapped,
-                        '%sIsOwned<OWNED>' % (returns,),
+                return ['%sIsOwned<OWNED>' % (returns,),
                         '%sIsOwned(%s)' % (returns, call)]
             elif not self.is_owned:
                 if self.is_trackable:
-                    return [wrapped,
-                            'WeakRef<%s>' % (returns,),
+                    return ['WeakRef<%s>' % (returns,),
                             'WeakRef::<%s>::from(%s)' % (returns, call)]
                 else:
-                    return [wrapped,
-                            'Option<%sIsOwned<false>>' % (returns,),
+                    return ['Option<%sIsOwned<false>>' % (returns,),
                             '%s::option_from(%s)' % (returns, call)]
-        return [wrapped,
-                returns,
+        return [returns,
                 '%s::from_ptr(%s)' % (returns, call)]
 
 class Param:
