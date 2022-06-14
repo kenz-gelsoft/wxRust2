@@ -437,24 +437,14 @@ class RustMethodBinding:
             yield '}'
 
     def _wrap_return_type(self, call):
-        if self.__model.returns.is_str():
-            return 'from_wx_string(%s)' % (call,)
         if self.__model.maybe_returns_self():
             return '%s; &self' % (call,)
-        wrapped = self.__model.wrapped_return_type(allows_ptr=False)
+        wrapped = self.__model.wrapped_return_type(
+            allows_ptr=True,
+            call=call,
+        )
         if wrapped:
-            return '%sIsOwned::from_ptr(%s)' % (wrapped[0][2:], call)
-        wrapped = self.__model.wrapped_return_type(allows_ptr=True)
-        if wrapped:
-            wrapped = wrapped[0][2:]
-            if self.__model.returns_owned():
-                return '%s::from_ptr(%s)' % (wrapped, call)
-            elif self.__model.returns.is_ref_to_binding():
-                return '%sIsOwned::from_ptr(%s)' % (wrapped, call)
-            elif self.__model.returns_trackable():
-                return 'WeakRef::<%s>::from(%s)' % (wrapped, call)
-            else:
-                return '%s::option_from(%s)' % (wrapped, call)
+            return wrapped[2]
         return call
 
     def _uses_ptr_type(self):

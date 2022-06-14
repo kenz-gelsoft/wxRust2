@@ -179,7 +179,7 @@ class Method:
             index = ''
         return '%s%s' % (name, index)
 
-    def wrapped_return_type(self, allows_ptr):
+    def wrapped_return_type(self, allows_ptr, call=""):
         if (self.is_ctor or
             self.returns_new() or 
             allows_ptr and (self.returns.is_ptr_to_binding() or
@@ -187,19 +187,35 @@ class Method:
             wrapped = self.returns.typename
             returns = wrapped[2:]
             if self.returns.is_str():
-                return [wrapped, 'String']
+                return [wrapped,
+                        'String',
+                        'from_wx_string(%s)' % (call,)]
             if self.returns.is_ref_to_binding():
-                return [wrapped, '%sIsOwned<false>' % (returns,)]
+                return [wrapped,
+                        '%sIsOwned<false>' % (returns,),
+                        '%sIsOwned::from_ptr(%s)' % (returns, call)]
             elif (self.is_ctor or
                   self.returns.is_ptr_to_binding()):
                 if self.is_ctor:
-                    return [wrapped, '%sIsOwned<OWNED>' % (returns,)]
+                    return [wrapped,
+                            '%sIsOwned<OWNED>' % (returns,),
+                            '%sIsOwned::from_ptr(%s)' % (returns, call)]
                 elif not self.returns_owned():
                     if self.returns_trackable():
-                        return [wrapped, 'WeakRef<%s>' % (returns,)]
+                        return [wrapped,
+                                'WeakRef<%s>' % (returns,),
+                                'WeakRef::<%s>::from(%s)' % (returns, call)]
                     else:
-                        return [wrapped, 'Option<%sIsOwned<false>>' % (returns,)]
-            return [wrapped, returns]
+                        return [wrapped,
+                                'Option<%sIsOwned<false>>' % (returns,),
+                                '%s::option_from(%s)' % (returns, call)]
+            if self.returns_new():
+                return [wrapped,
+                        returns,
+                        '%sIsOwned::from_ptr(%s)' % (returns, call)]
+            return [wrapped,
+                    returns,
+                    '%s::from_ptr(%s)' % (returns, call)]
         else:
             return None
 
