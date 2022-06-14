@@ -39,6 +39,11 @@ mod ffi {
         pub fn wxString_new(psz: *const c_uchar, nLength: usize) -> *mut c_void;
         pub fn wxString_UTF8Data(self_: *mut c_void) -> UTF8Data;
 
+        // (wx)String::const_iterator
+        pub fn wxStringConstIterator_new() -> *mut c_void;
+        pub fn wxStringConstIterator_delete(self_: *mut c_void);
+        pub fn wxStringConstIterator_IsEnd(self_: *mut c_void, s: *mut c_void);
+
         // ArrayString
         pub fn wxArrayString_new() -> *mut c_void;
         pub fn wxArrayString_delete(self_: *mut c_void);

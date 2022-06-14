@@ -44,6 +44,11 @@ struct UTF8Data {
 wxString *wxString_new(const unsigned char *psz, const size_t nLength);
 UTF8Data wxString_UTF8Data(wxString *self);
 
+// (wx)String::const_iterator
+wxString::const_iterator *wxStringConstIterator_new();
+void wxStringConstIterator_delete(wxString::const_iterator *self);
+bool wxStringConstIterator_IsEnd(wxString::const_iterator *self, wxString *s);
+
 // ArrayString
 wxArrayString *wxArrayString_new();
 void wxArrayString_delete(wxArrayString *self);

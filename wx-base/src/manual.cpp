@@ -75,6 +75,17 @@ UTF8Data wxString_UTF8Data(wxString *self) {
     };
 }
 
+// (wx)String::const_iterator
+wxString::const_iterator *wxStringConstIterator_new() {
+    return new wxString::const_iterator;
+}
+void wxStringConstIterator_delete(wxString::const_iterator *self) {
+    delete self;
+}
+bool wxStringConstIterator_IsEnd(wxString::const_iterator *self, wxString *s) {
+    return *self == s->end();
+}
+
 // ArrayString
 wxArrayString *wxArrayString_new() {
     return new wxArrayString();
