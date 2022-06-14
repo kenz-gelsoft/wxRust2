@@ -34,10 +34,11 @@ impl From<DatePickerPage> for c_int {
 pub struct ConfigUI {
     // other controls
     // --------------
-    // chk_colour_text_ctrl: wx::CheckBox,
-    // chk_colour_show_label: wx::CheckBox,
-    // chk_colour_show_alpha: wx::CheckBox,
-    sizer: wx::BoxSizer,
+    sizer_date_picker: wx::BoxSizer,
+    text_cur: wx::TextCtrl,
+    radio_kind: wx::RadioBox,
+    chk_style_century: wx::CheckBox,
+    chk_style_allow_none: wx::CheckBox,
 }
 
 #[derive(Clone)]
@@ -165,6 +166,7 @@ impl WidgetsPage for DatePickerWidgetsPage {
         sizer_right.add_int_int(0, 0, 1, centre, 0, wx::Object::none());
         sizer_right.add_window_int(Some(&date_picker), 1, centre, 0, wx::Object::none());
         sizer_right.add_int_int(0, 0, 1, centre, 0, wx::Object::none());
+        *self.date_picker.borrow_mut() = Some(date_picker);
 
         // the 3 panes panes compose the window
         sizer_top.add_sizer_int(
@@ -189,11 +191,16 @@ impl WidgetsPage for DatePickerWidgetsPage {
             wx::Object::none(),
         );
 
+        // final initializations
+        chk_style_century.set_value(true);
+        self.reset();
+
         *self.config_ui.borrow_mut() = Some(ConfigUI {
-            // chk_colour_text_ctrl,
-            // chk_colour_show_label,
-            // chk_colour_show_alpha,
-            sizer: sizer_right,
+            text_cur,
+            radio_kind,
+            chk_style_century,
+            chk_style_allow_none,
+            sizer_date_picker: sizer_right, // save it to modify it later
         });
 
         self.base.set_sizer(Some(&sizer_top), true);
@@ -203,7 +210,7 @@ impl WidgetsPage for DatePickerWidgetsPage {
         self.on_button_reset();
     }
     fn handle_checkbox(&self, _: &wx::CommandEvent) {
-        self.on_check_box();
+        // Do nothing
     }
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
         // Do nothing
@@ -222,14 +229,14 @@ impl DatePickerWidgetsPage {
     }
 
     fn recreate_widget(&self) {
-        self.create_picker();
+        self.create_date_picker();
 
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            // MEMO: Destroy()ing in create_picker() removes from its sizer.
+            // MEMO: Destroy()ing in create_date_picker() removes from its sizer.
             // config_ui.sizer.remove_int(1);
-            self.create_picker();
+            self.create_date_picker();
             if let Some(date_picker) = self.date_picker.borrow().as_ref() {
-                config_ui.sizer.insert_window_int(
+                config_ui.sizer_date_picker.insert_window_int(
                     1,
                     Some(date_picker),
                     0,
@@ -238,56 +245,79 @@ impl DatePickerWidgetsPage {
                     wx::Object::none(),
                 );
             }
-            config_ui.sizer.layout();
+            config_ui.sizer_date_picker.layout();
         }
     }
 
     fn reset(&self) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            // config_ui
-            //     .chk_colour_text_ctrl
-            //     .set_value((wx::CLRP_DEFAULT_STYLE & wx::CLRP_USE_TEXTCTRL) != 0);
-            // config_ui
-            //     .chk_colour_show_label
-            //     .set_value((wx::CLRP_DEFAULT_STYLE & wx::CLRP_SHOW_LABEL) != 0);
-            // config_ui
-            //     .chk_colour_show_alpha
-            //     .set_value((wx::CLRP_DEFAULT_STYLE & wx::CLRP_SHOW_ALPHA) != 0);
+            let today = wx::DateTime::today();
+
+            if let Some(date_picker) = self.date_picker.borrow().as_ref() {
+                date_picker.set_value(&today);
+            }
+            config_ui.text_cur.set_value(&today.format_iso_date());
         }
     }
 
-    fn create_picker(&self) {
-        if let Some(date_picker) = self.date_picker.borrow().as_ref() {
-            date_picker.destroy();
-        }
-
-        let mut style = wx::BORDER_DEFAULT;
+    fn create_date_picker(&self) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            // if config_ui.chk_colour_text_ctrl.get_value() {
-            //     style |= wx::CLRP_USE_TEXTCTRL as c_long;
-            // }
-            // if config_ui.chk_colour_show_label.get_value() {
-            //     style |= wx::CLRP_SHOW_LABEL as c_long;
-            // }
-            // if config_ui.chk_colour_show_alpha.get_value() {
-            //     style |= wx::CLRP_SHOW_ALPHA as c_long;
-            // }
-        }
+            let mut value: Option<wx::DateTime> = None;
+            if let Some(date_picker) = self.date_picker.borrow().as_ref() {
+                value = Some(date_picker.get_value());
 
-        let date_picker = wx::DatePickerCtrl::builder(Some(&self.base))
-            // .id(PickerPage::Colour.into())
-            // .colour(wx::Colour::new_with_str("RED"))
-            .style(style)
-            .build();
-        *self.date_picker.borrow_mut() = Some(date_picker);
+                // TODO: remove (and delete) all buttons
+                let count = config_ui.sizer_date_picker.get_children().get_count();
+                for _ in 0..count {
+                    config_ui.sizer_date_picker.remove_int(0);
+                }
+                date_picker.destroy();
+            }
+
+            let mut style = wx::BORDER_DEFAULT;
+            style |= match config_ui.radio_kind.get_selection() {
+                0 => wx::DP_DEFAULT,
+                1 => wx::DP_SPIN,
+                2 => wx::DP_DROPDOWN,
+                _ => 0,
+            } as c_long;
+
+            if config_ui.chk_style_century.get_value() {
+                style |= wx::DP_SHOWCENTURY as c_long;
+            }
+            if config_ui.chk_style_allow_none.get_value() {
+                style |= wx::DP_ALLOWNONE as c_long;
+            }
+
+            let mut builder = wx::DatePickerCtrl::builder(Some(&self.base));
+            builder.id(DatePickerPage::Picker.into()).style(style);
+            if let Some(value) = value {
+                // TODO: make optional args optional
+                builder.dt(value);
+            }
+            let date_picker = builder.build();
+
+            let centre = wx::CENTRE.try_into().unwrap();
+            config_ui
+                .sizer_date_picker
+                .add_int_int(0, 0, 1, centre, 0, wx::Object::none());
+            config_ui.sizer_date_picker.add_window_int(
+                Some(&date_picker),
+                1,
+                centre,
+                0,
+                wx::Object::none(),
+            );
+            config_ui
+                .sizer_date_picker
+                .add_int_int(0, 0, 1, centre, 0, wx::Object::none());
+            config_ui.sizer_date_picker.layout();
+            *self.date_picker.borrow_mut() = Some(date_picker);
+        }
     }
 
     fn on_button_reset(&self) {
         self.reset();
-        self.recreate_widget();
-    }
-
-    fn on_check_box(&self) {
-        self.recreate_widget();
+        self.create_date_picker();
     }
 }
