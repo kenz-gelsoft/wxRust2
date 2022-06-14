@@ -199,7 +199,7 @@ class Method:
                 if self.is_ctor:
                     return [wrapped,
                             '%sIsOwned<OWNED>' % (returns,),
-                            '%sIsOwned::from_ptr(%s)' % (returns, call)]
+                            '%sIsOwned(%s)' % (returns, call)]
                 elif not self.returns_owned():
                     if self.returns_trackable():
                         return [wrapped,

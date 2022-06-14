@@ -26,7 +26,7 @@ wx_class! { AnyButton =
 }
 impl<const OWNED: bool> AnyButtonIsOwned<OWNED> {
     pub fn new() -> AnyButtonIsOwned<OWNED> {
-        unsafe { AnyButtonIsOwned::from_ptr(ffi::wxAnyButton_new()) }
+        unsafe { AnyButtonIsOwned(ffi::wxAnyButton_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -61,33 +61,33 @@ wx_class! { Bitmap =
 }
 impl<const OWNED: bool> BitmapIsOwned<OWNED> {
     pub fn new() -> BitmapIsOwned<OWNED> {
-        unsafe { BitmapIsOwned::from_ptr(ffi::wxBitmap_new()) }
+        unsafe { BitmapIsOwned(ffi::wxBitmap_new()) }
     }
     pub fn new_with_bitmap<B: BitmapMethods>(bitmap: &B) -> BitmapIsOwned<OWNED> {
         unsafe {
             let bitmap = bitmap.as_ptr();
-            BitmapIsOwned::from_ptr(ffi::wxBitmap_new1(bitmap))
+            BitmapIsOwned(ffi::wxBitmap_new1(bitmap))
         }
     }
     // NOT_SUPPORTED: fn wxBitmap2()
     pub fn new_with_int(width: c_int, height: c_int, depth: c_int) -> BitmapIsOwned<OWNED> {
-        unsafe { BitmapIsOwned::from_ptr(ffi::wxBitmap_new3(width, height, depth)) }
+        unsafe { BitmapIsOwned(ffi::wxBitmap_new3(width, height, depth)) }
     }
     pub fn new_with_size<S: SizeMethods>(sz: &S, depth: c_int) -> BitmapIsOwned<OWNED> {
         unsafe {
             let sz = sz.as_ptr();
-            BitmapIsOwned::from_ptr(ffi::wxBitmap_new4(sz, depth))
+            BitmapIsOwned(ffi::wxBitmap_new4(sz, depth))
         }
     }
     pub fn new_with_char(bits: *const c_void) -> BitmapIsOwned<OWNED> {
-        unsafe { BitmapIsOwned::from_ptr(ffi::wxBitmap_new5(bits)) }
+        unsafe { BitmapIsOwned(ffi::wxBitmap_new5(bits)) }
     }
     // NOT_SUPPORTED: fn wxBitmap6()
     pub fn new_with_image(img: *const c_void, depth: c_int) -> BitmapIsOwned<OWNED> {
-        unsafe { BitmapIsOwned::from_ptr(ffi::wxBitmap_new7(img, depth)) }
+        unsafe { BitmapIsOwned(ffi::wxBitmap_new7(img, depth)) }
     }
     pub fn new_with_cursor(cursor: *const c_void) -> BitmapIsOwned<OWNED> {
-        unsafe { BitmapIsOwned::from_ptr(ffi::wxBitmap_new8(cursor)) }
+        unsafe { BitmapIsOwned(ffi::wxBitmap_new8(cursor)) }
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -114,7 +114,7 @@ wx_class! { BitmapButton =
 }
 impl<const OWNED: bool> BitmapButtonIsOwned<OWNED> {
     pub fn new_2step() -> BitmapButtonIsOwned<OWNED> {
-        unsafe { BitmapButtonIsOwned::from_ptr(ffi::wxBitmapButton_new()) }
+        unsafe { BitmapButtonIsOwned(ffi::wxBitmapButton_new()) }
     }
     pub fn new<
         W: WindowMethods,
@@ -142,7 +142,7 @@ impl<const OWNED: bool> BitmapButtonIsOwned<OWNED> {
             let size = size.as_ptr();
             let validator = validator.as_ptr();
             let name = wx_string_from(name);
-            BitmapButtonIsOwned::from_ptr(ffi::wxBitmapButton_new1(
+            BitmapButtonIsOwned(ffi::wxBitmapButton_new1(
                 parent, id, bitmap, pos, size, style, validator, name,
             ))
         }
@@ -231,7 +231,7 @@ wx_class! { BoxSizer =
 }
 impl<const OWNED: bool> BoxSizerIsOwned<OWNED> {
     pub fn new(orient: c_int) -> BoxSizerIsOwned<OWNED> {
-        unsafe { BoxSizerIsOwned::from_ptr(ffi::wxBoxSizer_new(orient)) }
+        unsafe { BoxSizerIsOwned(ffi::wxBoxSizer_new(orient)) }
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -250,7 +250,7 @@ wx_class! { Button =
 }
 impl<const OWNED: bool> ButtonIsOwned<OWNED> {
     pub fn new_2step() -> ButtonIsOwned<OWNED> {
-        unsafe { ButtonIsOwned::from_ptr(ffi::wxButton_new()) }
+        unsafe { ButtonIsOwned(ffi::wxButton_new()) }
     }
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
@@ -272,7 +272,7 @@ impl<const OWNED: bool> ButtonIsOwned<OWNED> {
             let size = size.as_ptr();
             let validator = validator.as_ptr();
             let name = wx_string_from(name);
-            ButtonIsOwned::from_ptr(ffi::wxButton_new1(
+            ButtonIsOwned(ffi::wxButton_new1(
                 parent, id, label, pos, size, style, validator, name,
             ))
         }
@@ -293,7 +293,7 @@ wx_class! { CheckBox =
 }
 impl<const OWNED: bool> CheckBoxIsOwned<OWNED> {
     pub fn new_2step() -> CheckBoxIsOwned<OWNED> {
-        unsafe { CheckBoxIsOwned::from_ptr(ffi::wxCheckBox_new()) }
+        unsafe { CheckBoxIsOwned(ffi::wxCheckBox_new()) }
     }
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
@@ -315,7 +315,7 @@ impl<const OWNED: bool> CheckBoxIsOwned<OWNED> {
             let size = size.as_ptr();
             let validator = validator.as_ptr();
             let name = wx_string_from(name);
-            CheckBoxIsOwned::from_ptr(ffi::wxCheckBox_new1(
+            CheckBoxIsOwned(ffi::wxCheckBox_new1(
                 parent, id, label, pos, size, style, validator, name,
             ))
         }
@@ -336,7 +336,7 @@ wx_class! { Choice =
 }
 impl<const OWNED: bool> ChoiceIsOwned<OWNED> {
     pub fn new_2step() -> ChoiceIsOwned<OWNED> {
-        unsafe { ChoiceIsOwned::from_ptr(ffi::wxChoice_new()) }
+        unsafe { ChoiceIsOwned(ffi::wxChoice_new()) }
     }
     // NOT_SUPPORTED: fn wxChoice1()
     pub fn new<
@@ -365,7 +365,7 @@ impl<const OWNED: bool> ChoiceIsOwned<OWNED> {
             let choices = choices.as_ptr();
             let validator = validator.as_ptr();
             let name = wx_string_from(name);
-            ChoiceIsOwned::from_ptr(ffi::wxChoice_new2(
+            ChoiceIsOwned(ffi::wxChoice_new2(
                 parent, id, pos, size, choices, style, validator, name,
             ))
         }
@@ -394,20 +394,20 @@ wx_class! { Colour =
 }
 impl<const OWNED: bool> ColourIsOwned<OWNED> {
     pub fn new() -> ColourIsOwned<OWNED> {
-        unsafe { ColourIsOwned::from_ptr(ffi::wxColour_new()) }
+        unsafe { ColourIsOwned(ffi::wxColour_new()) }
     }
     // NOT_SUPPORTED: fn wxColour1()
     pub fn new_with_str(colour_name: &str) -> ColourIsOwned<OWNED> {
         unsafe {
             let colour_name = wx_string_from(colour_name);
-            ColourIsOwned::from_ptr(ffi::wxColour_new2(colour_name))
+            ColourIsOwned(ffi::wxColour_new2(colour_name))
         }
     }
     // NOT_SUPPORTED: fn wxColour3()
     pub fn new_with_colour<C: ColourMethods>(colour: &C) -> ColourIsOwned<OWNED> {
         unsafe {
             let colour = colour.as_ptr();
-            ColourIsOwned::from_ptr(ffi::wxColour_new4(colour))
+            ColourIsOwned(ffi::wxColour_new4(colour))
         }
     }
     pub fn none() -> Option<&'static Self> {
@@ -434,7 +434,7 @@ wx_class! { ColourPickerCtrl =
 }
 impl<const OWNED: bool> ColourPickerCtrlIsOwned<OWNED> {
     pub fn new_2step() -> ColourPickerCtrlIsOwned<OWNED> {
-        unsafe { ColourPickerCtrlIsOwned::from_ptr(ffi::wxColourPickerCtrl_new()) }
+        unsafe { ColourPickerCtrlIsOwned(ffi::wxColourPickerCtrl_new()) }
     }
     pub fn new<
         W: WindowMethods,
@@ -462,7 +462,7 @@ impl<const OWNED: bool> ColourPickerCtrlIsOwned<OWNED> {
             let size = size.as_ptr();
             let validator = validator.as_ptr();
             let name = wx_string_from(name);
-            ColourPickerCtrlIsOwned::from_ptr(ffi::wxColourPickerCtrl_new1(
+            ColourPickerCtrlIsOwned(ffi::wxColourPickerCtrl_new1(
                 parent, id, colour, pos, size, style, validator, name,
             ))
         }
@@ -483,7 +483,7 @@ wx_class! { ComboBox =
 }
 impl<const OWNED: bool> ComboBoxIsOwned<OWNED> {
     pub fn new_2step() -> ComboBoxIsOwned<OWNED> {
-        unsafe { ComboBoxIsOwned::from_ptr(ffi::wxComboBox_new()) }
+        unsafe { ComboBoxIsOwned(ffi::wxComboBox_new()) }
     }
     // NOT_SUPPORTED: fn wxComboBox1()
     pub fn new<
@@ -514,7 +514,7 @@ impl<const OWNED: bool> ComboBoxIsOwned<OWNED> {
             let choices = choices.as_ptr();
             let validator = validator.as_ptr();
             let name = wx_string_from(name);
-            ComboBoxIsOwned::from_ptr(ffi::wxComboBox_new2(
+            ComboBoxIsOwned(ffi::wxComboBox_new2(
                 parent, id, value, pos, size, choices, style, validator, name,
             ))
         }
@@ -588,13 +588,13 @@ impl<const OWNED: bool> ControlIsOwned<OWNED> {
             let size = size.as_ptr();
             let validator = validator.as_ptr();
             let name = wx_string_from(name);
-            ControlIsOwned::from_ptr(ffi::wxControl_new(
+            ControlIsOwned(ffi::wxControl_new(
                 parent, id, pos, size, style, validator, name,
             ))
         }
     }
     pub fn new_2step() -> ControlIsOwned<OWNED> {
-        unsafe { ControlIsOwned::from_ptr(ffi::wxControl_new1()) }
+        unsafe { ControlIsOwned(ffi::wxControl_new1()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -612,7 +612,7 @@ wx_class! { DatePickerCtrl =
 }
 impl<const OWNED: bool> DatePickerCtrlIsOwned<OWNED> {
     pub fn new_2step() -> DatePickerCtrlIsOwned<OWNED> {
-        unsafe { DatePickerCtrlIsOwned::from_ptr(ffi::wxDatePickerCtrl_new()) }
+        unsafe { DatePickerCtrlIsOwned(ffi::wxDatePickerCtrl_new()) }
     }
     pub fn new<
         W: WindowMethods,
@@ -640,7 +640,7 @@ impl<const OWNED: bool> DatePickerCtrlIsOwned<OWNED> {
             let size = size.as_ptr();
             let validator = validator.as_ptr();
             let name = wx_string_from(name);
-            DatePickerCtrlIsOwned::from_ptr(ffi::wxDatePickerCtrl_new1(
+            DatePickerCtrlIsOwned(ffi::wxDatePickerCtrl_new1(
                 parent, id, dt, pos, size, style, validator, name,
             ))
         }
@@ -662,7 +662,7 @@ wx_class! { Frame =
 }
 impl<const OWNED: bool> FrameIsOwned<OWNED> {
     pub fn new_2step() -> FrameIsOwned<OWNED> {
-        unsafe { FrameIsOwned::from_ptr(ffi::wxFrame_new()) }
+        unsafe { FrameIsOwned(ffi::wxFrame_new()) }
     }
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
@@ -682,7 +682,7 @@ impl<const OWNED: bool> FrameIsOwned<OWNED> {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let name = wx_string_from(name);
-            FrameIsOwned::from_ptr(ffi::wxFrame_new1(parent, id, title, pos, size, style, name))
+            FrameIsOwned(ffi::wxFrame_new1(parent, id, title, pos, size, style, name))
         }
     }
     pub fn none() -> Option<&'static Self> {
@@ -748,21 +748,21 @@ wx_class! { Icon =
 }
 impl<const OWNED: bool> IconIsOwned<OWNED> {
     pub fn new() -> IconIsOwned<OWNED> {
-        unsafe { IconIsOwned::from_ptr(ffi::wxIcon_new()) }
+        unsafe { IconIsOwned(ffi::wxIcon_new()) }
     }
     pub fn new_with_icon<I: IconMethods>(icon: &I) -> IconIsOwned<OWNED> {
         unsafe {
             let icon = icon.as_ptr();
-            IconIsOwned::from_ptr(ffi::wxIcon_new1(icon))
+            IconIsOwned(ffi::wxIcon_new1(icon))
         }
     }
     // NOT_SUPPORTED: fn wxIcon2()
     pub fn new_with_char(bits: *const c_void) -> IconIsOwned<OWNED> {
-        unsafe { IconIsOwned::from_ptr(ffi::wxIcon_new3(bits)) }
+        unsafe { IconIsOwned(ffi::wxIcon_new3(bits)) }
     }
     // NOT_SUPPORTED: fn wxIcon4()
     pub fn new_with_iconlocation(loc: *const c_void) -> IconIsOwned<OWNED> {
-        unsafe { IconIsOwned::from_ptr(ffi::wxIcon_new5(loc)) }
+        unsafe { IconIsOwned(ffi::wxIcon_new5(loc)) }
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -791,7 +791,7 @@ wx_class! { ListBox =
 }
 impl<const OWNED: bool> ListBoxIsOwned<OWNED> {
     pub fn new_2step() -> ListBoxIsOwned<OWNED> {
-        unsafe { ListBoxIsOwned::from_ptr(ffi::wxListBox_new()) }
+        unsafe { ListBoxIsOwned(ffi::wxListBox_new()) }
     }
     // NOT_SUPPORTED: fn wxListBox1()
     pub fn new<
@@ -820,7 +820,7 @@ impl<const OWNED: bool> ListBoxIsOwned<OWNED> {
             let choices = choices.as_ptr();
             let validator = validator.as_ptr();
             let name = wx_string_from(name);
-            ListBoxIsOwned::from_ptr(ffi::wxListBox_new2(
+            ListBoxIsOwned(ffi::wxListBox_new2(
                 parent, id, pos, size, choices, style, validator, name,
             ))
         }
@@ -850,15 +850,15 @@ wx_class! { Menu =
 }
 impl<const OWNED: bool> MenuIsOwned<OWNED> {
     pub fn new() -> MenuIsOwned<OWNED> {
-        unsafe { MenuIsOwned::from_ptr(ffi::wxMenu_new()) }
+        unsafe { MenuIsOwned(ffi::wxMenu_new()) }
     }
     pub fn new_with_long(style: c_long) -> MenuIsOwned<OWNED> {
-        unsafe { MenuIsOwned::from_ptr(ffi::wxMenu_new1(style)) }
+        unsafe { MenuIsOwned(ffi::wxMenu_new1(style)) }
     }
     pub fn new_with_str(title: &str, style: c_long) -> MenuIsOwned<OWNED> {
         unsafe {
             let title = wx_string_from(title);
-            MenuIsOwned::from_ptr(ffi::wxMenu_new2(title, style))
+            MenuIsOwned(ffi::wxMenu_new2(title, style))
         }
     }
     pub fn none() -> Option<&'static Self> {
@@ -876,7 +876,7 @@ wx_class! { MenuBar =
 }
 impl<const OWNED: bool> MenuBarIsOwned<OWNED> {
     pub fn new(style: c_long) -> MenuBarIsOwned<OWNED> {
-        unsafe { MenuBarIsOwned::from_ptr(ffi::wxMenuBar_new(style)) }
+        unsafe { MenuBarIsOwned(ffi::wxMenuBar_new(style)) }
     }
     // NOT_SUPPORTED: fn wxMenuBar1()
     pub fn none() -> Option<&'static Self> {
@@ -910,7 +910,7 @@ impl<const OWNED: bool> MenuItemIsOwned<OWNED> {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            MenuItemIsOwned::from_ptr(ffi::wxMenuItem_new(
+            MenuItemIsOwned(ffi::wxMenuItem_new(
                 parent_menu,
                 id,
                 text,
@@ -958,7 +958,7 @@ wx_class! { Notebook =
 }
 impl<const OWNED: bool> NotebookIsOwned<OWNED> {
     pub fn new_2step() -> NotebookIsOwned<OWNED> {
-        unsafe { NotebookIsOwned::from_ptr(ffi::wxNotebook_new()) }
+        unsafe { NotebookIsOwned(ffi::wxNotebook_new()) }
     }
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
@@ -976,7 +976,7 @@ impl<const OWNED: bool> NotebookIsOwned<OWNED> {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let name = wx_string_from(name);
-            NotebookIsOwned::from_ptr(ffi::wxNotebook_new1(parent, id, pos, size, style, name))
+            NotebookIsOwned(ffi::wxNotebook_new1(parent, id, pos, size, style, name))
         }
     }
     pub fn none() -> Option<&'static Self> {
@@ -1022,7 +1022,7 @@ wx_class! { Panel =
 }
 impl<const OWNED: bool> PanelIsOwned<OWNED> {
     pub fn new_2step() -> PanelIsOwned<OWNED> {
-        unsafe { PanelIsOwned::from_ptr(ffi::wxPanel_new()) }
+        unsafe { PanelIsOwned(ffi::wxPanel_new()) }
     }
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
@@ -1040,7 +1040,7 @@ impl<const OWNED: bool> PanelIsOwned<OWNED> {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let name = wx_string_from(name);
-            PanelIsOwned::from_ptr(ffi::wxPanel_new1(parent, id, pos, size, style, name))
+            PanelIsOwned(ffi::wxPanel_new1(parent, id, pos, size, style, name))
         }
     }
     pub fn none() -> Option<&'static Self> {
@@ -1093,13 +1093,13 @@ wx_class! { Point =
 }
 impl<const OWNED: bool> PointIsOwned<OWNED> {
     pub fn new() -> PointIsOwned<OWNED> {
-        unsafe { PointIsOwned::from_ptr(ffi::wxPoint_new()) }
+        unsafe { PointIsOwned(ffi::wxPoint_new()) }
     }
     pub fn new_with_int(x: c_int, y: c_int) -> PointIsOwned<OWNED> {
-        unsafe { PointIsOwned::from_ptr(ffi::wxPoint_new1(x, y)) }
+        unsafe { PointIsOwned(ffi::wxPoint_new1(x, y)) }
     }
     pub fn new_with_realpoint(pt: *const c_void) -> PointIsOwned<OWNED> {
-        unsafe { PointIsOwned::from_ptr(ffi::wxPoint_new2(pt)) }
+        unsafe { PointIsOwned(ffi::wxPoint_new2(pt)) }
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -1124,7 +1124,7 @@ wx_class! { RadioBox =
 }
 impl<const OWNED: bool> RadioBoxIsOwned<OWNED> {
     pub fn new_2step() -> RadioBoxIsOwned<OWNED> {
-        unsafe { RadioBoxIsOwned::from_ptr(ffi::wxRadioBox_new()) }
+        unsafe { RadioBoxIsOwned(ffi::wxRadioBox_new()) }
     }
     // NOT_SUPPORTED: fn wxRadioBox1()
     pub fn new<
@@ -1156,7 +1156,7 @@ impl<const OWNED: bool> RadioBoxIsOwned<OWNED> {
             let choices = choices.as_ptr();
             let validator = validator.as_ptr();
             let name = wx_string_from(name);
-            RadioBoxIsOwned::from_ptr(ffi::wxRadioBox_new2(
+            RadioBoxIsOwned(ffi::wxRadioBox_new2(
                 parent,
                 id,
                 label,
@@ -1188,10 +1188,10 @@ wx_class! { Rect =
 }
 impl<const OWNED: bool> RectIsOwned<OWNED> {
     pub fn new() -> RectIsOwned<OWNED> {
-        unsafe { RectIsOwned::from_ptr(ffi::wxRect_new()) }
+        unsafe { RectIsOwned(ffi::wxRect_new()) }
     }
     pub fn new_with_int(x: c_int, y: c_int, width: c_int, height: c_int) -> RectIsOwned<OWNED> {
-        unsafe { RectIsOwned::from_ptr(ffi::wxRect_new1(x, y, width, height)) }
+        unsafe { RectIsOwned(ffi::wxRect_new1(x, y, width, height)) }
     }
     pub fn new_with_point_point<P: PointMethods, P2: PointMethods>(
         top_left: &P,
@@ -1200,7 +1200,7 @@ impl<const OWNED: bool> RectIsOwned<OWNED> {
         unsafe {
             let top_left = top_left.as_ptr();
             let bottom_right = bottom_right.as_ptr();
-            RectIsOwned::from_ptr(ffi::wxRect_new2(top_left, bottom_right))
+            RectIsOwned(ffi::wxRect_new2(top_left, bottom_right))
         }
     }
     pub fn new_with_point_size<P: PointMethods, S: SizeMethods>(
@@ -1210,13 +1210,13 @@ impl<const OWNED: bool> RectIsOwned<OWNED> {
         unsafe {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
-            RectIsOwned::from_ptr(ffi::wxRect_new3(pos, size))
+            RectIsOwned(ffi::wxRect_new3(pos, size))
         }
     }
     pub fn new_with_size<S: SizeMethods>(size: &S) -> RectIsOwned<OWNED> {
         unsafe {
             let size = size.as_ptr();
-            RectIsOwned::from_ptr(ffi::wxRect_new4(size))
+            RectIsOwned(ffi::wxRect_new4(size))
         }
     }
     pub fn none() -> Option<&'static Self> {
@@ -1238,10 +1238,10 @@ wx_class! { Size =
 }
 impl<const OWNED: bool> SizeIsOwned<OWNED> {
     pub fn new() -> SizeIsOwned<OWNED> {
-        unsafe { SizeIsOwned::from_ptr(ffi::wxSize_new()) }
+        unsafe { SizeIsOwned(ffi::wxSize_new()) }
     }
     pub fn new_with_int(width: c_int, height: c_int) -> SizeIsOwned<OWNED> {
-        unsafe { SizeIsOwned::from_ptr(ffi::wxSize_new1(width, height)) }
+        unsafe { SizeIsOwned(ffi::wxSize_new1(width, height)) }
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -1275,7 +1275,7 @@ wx_class! { SizerFlags =
 }
 impl<const OWNED: bool> SizerFlagsIsOwned<OWNED> {
     pub fn new(proportion: c_int) -> SizerFlagsIsOwned<OWNED> {
-        unsafe { SizerFlagsIsOwned::from_ptr(ffi::wxSizerFlags_new(proportion)) }
+        unsafe { SizerFlagsIsOwned(ffi::wxSizerFlags_new(proportion)) }
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -1306,7 +1306,7 @@ impl<const OWNED: bool> StaticBitmapIsOwned<OWNED> {
     pub const Scale_AspectFill: c_int = 0 + 3;
 
     pub fn new_2step() -> StaticBitmapIsOwned<OWNED> {
-        unsafe { StaticBitmapIsOwned::from_ptr(ffi::wxStaticBitmap_new()) }
+        unsafe { StaticBitmapIsOwned(ffi::wxStaticBitmap_new()) }
     }
     pub fn new<W: WindowMethods, B: BitmapMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
@@ -1326,7 +1326,7 @@ impl<const OWNED: bool> StaticBitmapIsOwned<OWNED> {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let name = wx_string_from(name);
-            StaticBitmapIsOwned::from_ptr(ffi::wxStaticBitmap_new1(
+            StaticBitmapIsOwned(ffi::wxStaticBitmap_new1(
                 parent, id, label, pos, size, style, name,
             ))
         }
@@ -1347,7 +1347,7 @@ wx_class! { StaticBox =
 }
 impl<const OWNED: bool> StaticBoxIsOwned<OWNED> {
     pub fn new_2step() -> StaticBoxIsOwned<OWNED> {
-        unsafe { StaticBoxIsOwned::from_ptr(ffi::wxStaticBox_new()) }
+        unsafe { StaticBoxIsOwned(ffi::wxStaticBox_new()) }
     }
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
@@ -1367,7 +1367,7 @@ impl<const OWNED: bool> StaticBoxIsOwned<OWNED> {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let name = wx_string_from(name);
-            StaticBoxIsOwned::from_ptr(ffi::wxStaticBox_new1(
+            StaticBoxIsOwned(ffi::wxStaticBox_new1(
                 parent, id, label, pos, size, style, name,
             ))
         }
@@ -1396,7 +1396,7 @@ impl<const OWNED: bool> StaticBoxSizerIsOwned<OWNED> {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            StaticBoxSizerIsOwned::from_ptr(ffi::wxStaticBoxSizer_new(box_, orient))
+            StaticBoxSizerIsOwned(ffi::wxStaticBoxSizer_new(box_, orient))
         }
     }
     pub fn new_with_int<W: WindowMethods>(
@@ -1410,7 +1410,7 @@ impl<const OWNED: bool> StaticBoxSizerIsOwned<OWNED> {
                 None => ptr::null_mut(),
             };
             let label = wx_string_from(label);
-            StaticBoxSizerIsOwned::from_ptr(ffi::wxStaticBoxSizer_new1(orient, parent, label))
+            StaticBoxSizerIsOwned(ffi::wxStaticBoxSizer_new1(orient, parent, label))
         }
     }
     pub fn none() -> Option<&'static Self> {
@@ -1429,7 +1429,7 @@ wx_class! { StaticText =
 }
 impl<const OWNED: bool> StaticTextIsOwned<OWNED> {
     pub fn new_2step() -> StaticTextIsOwned<OWNED> {
-        unsafe { StaticTextIsOwned::from_ptr(ffi::wxStaticText_new()) }
+        unsafe { StaticTextIsOwned(ffi::wxStaticText_new()) }
     }
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
@@ -1449,7 +1449,7 @@ impl<const OWNED: bool> StaticTextIsOwned<OWNED> {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let name = wx_string_from(name);
-            StaticTextIsOwned::from_ptr(ffi::wxStaticText_new1(
+            StaticTextIsOwned(ffi::wxStaticText_new1(
                 parent, id, label, pos, size, style, name,
             ))
         }
@@ -1466,13 +1466,13 @@ wx_class! { TextAttr =
 }
 impl<const OWNED: bool> TextAttrIsOwned<OWNED> {
     pub fn new() -> TextAttrIsOwned<OWNED> {
-        unsafe { TextAttrIsOwned::from_ptr(ffi::wxTextAttr_new()) }
+        unsafe { TextAttrIsOwned(ffi::wxTextAttr_new()) }
     }
     // NOT_SUPPORTED: fn wxTextAttr1()
     pub fn new_with_textattr<T: TextAttrMethods>(attr: &T) -> TextAttrIsOwned<OWNED> {
         unsafe {
             let attr = attr.as_ptr();
-            TextAttrIsOwned::from_ptr(ffi::wxTextAttr_new2(attr))
+            TextAttrIsOwned(ffi::wxTextAttr_new2(attr))
         }
     }
     pub fn none() -> Option<&'static Self> {
@@ -1498,7 +1498,7 @@ wx_class! { TextCtrl =
 }
 impl<const OWNED: bool> TextCtrlIsOwned<OWNED> {
     pub fn new_2step() -> TextCtrlIsOwned<OWNED> {
-        unsafe { TextCtrlIsOwned::from_ptr(ffi::wxTextCtrl_new()) }
+        unsafe { TextCtrlIsOwned(ffi::wxTextCtrl_new()) }
     }
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
@@ -1520,7 +1520,7 @@ impl<const OWNED: bool> TextCtrlIsOwned<OWNED> {
             let size = size.as_ptr();
             let validator = validator.as_ptr();
             let name = wx_string_from(name);
-            TextCtrlIsOwned::from_ptr(ffi::wxTextCtrl_new1(
+            TextCtrlIsOwned(ffi::wxTextCtrl_new1(
                 parent, id, value, pos, size, style, validator, name,
             ))
         }
@@ -1549,7 +1549,7 @@ wx_class! { ToolBar =
 }
 impl<const OWNED: bool> ToolBarIsOwned<OWNED> {
     pub fn new_2step() -> ToolBarIsOwned<OWNED> {
-        unsafe { ToolBarIsOwned::from_ptr(ffi::wxToolBar_new()) }
+        unsafe { ToolBarIsOwned(ffi::wxToolBar_new()) }
     }
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
@@ -1567,7 +1567,7 @@ impl<const OWNED: bool> ToolBarIsOwned<OWNED> {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let name = wx_string_from(name);
-            ToolBarIsOwned::from_ptr(ffi::wxToolBar_new1(parent, id, pos, size, style, name))
+            ToolBarIsOwned(ffi::wxToolBar_new1(parent, id, pos, size, style, name))
         }
     }
     pub fn none() -> Option<&'static Self> {
@@ -1586,7 +1586,7 @@ wx_class! { TopLevelWindow =
 }
 impl<const OWNED: bool> TopLevelWindowIsOwned<OWNED> {
     pub fn new_2step() -> TopLevelWindowIsOwned<OWNED> {
-        unsafe { TopLevelWindowIsOwned::from_ptr(ffi::wxTopLevelWindow_new()) }
+        unsafe { TopLevelWindowIsOwned(ffi::wxTopLevelWindow_new()) }
     }
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
@@ -1606,7 +1606,7 @@ impl<const OWNED: bool> TopLevelWindowIsOwned<OWNED> {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let name = wx_string_from(name);
-            TopLevelWindowIsOwned::from_ptr(ffi::wxTopLevelWindow_new1(
+            TopLevelWindowIsOwned(ffi::wxTopLevelWindow_new1(
                 parent, id, title, pos, size, style, name,
             ))
         }
@@ -1625,7 +1625,7 @@ wx_class! { Validator =
 }
 impl<const OWNED: bool> ValidatorIsOwned<OWNED> {
     pub fn new() -> ValidatorIsOwned<OWNED> {
-        unsafe { ValidatorIsOwned::from_ptr(ffi::wxValidator_new()) }
+        unsafe { ValidatorIsOwned(ffi::wxValidator_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -1641,7 +1641,7 @@ wx_class! { Window =
 }
 impl<const OWNED: bool> WindowIsOwned<OWNED> {
     pub fn new_2step() -> WindowIsOwned<OWNED> {
-        unsafe { WindowIsOwned::from_ptr(ffi::wxWindow_new()) }
+        unsafe { WindowIsOwned(ffi::wxWindow_new()) }
     }
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
@@ -1659,7 +1659,7 @@ impl<const OWNED: bool> WindowIsOwned<OWNED> {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let name = wx_string_from(name);
-            WindowIsOwned::from_ptr(ffi::wxWindow_new1(parent, id, pos, size, style, name))
+            WindowIsOwned(ffi::wxWindow_new1(parent, id, pos, size, style, name))
         }
     }
     pub fn none() -> Option<&'static Self> {
@@ -1677,7 +1677,7 @@ wx_class! { WrapSizer =
 }
 impl<const OWNED: bool> WrapSizerIsOwned<OWNED> {
     pub fn new(orient: c_int, flags: c_int) -> WrapSizerIsOwned<OWNED> {
-        unsafe { WrapSizerIsOwned::from_ptr(ffi::wxWrapSizer_new(orient, flags)) }
+        unsafe { WrapSizerIsOwned(ffi::wxWrapSizer_new(orient, flags)) }
     }
     pub fn none() -> Option<&'static Self> {
         None

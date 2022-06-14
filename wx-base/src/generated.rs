@@ -131,18 +131,18 @@ impl<const OWNED: bool> DateTimeIsOwned<OWNED> {
     pub const Sunday_First: c_int = 0 + 2;
 
     pub fn new() -> DateTimeIsOwned<OWNED> {
-        unsafe { DateTimeIsOwned::from_ptr(ffi::wxDateTime_new()) }
+        unsafe { DateTimeIsOwned(ffi::wxDateTime_new()) }
     }
     pub fn new_with_datetime<D: DateTimeMethods>(date: &D) -> DateTimeIsOwned<OWNED> {
         unsafe {
             let date = date.as_ptr();
-            DateTimeIsOwned::from_ptr(ffi::wxDateTime_new1(date))
+            DateTimeIsOwned(ffi::wxDateTime_new1(date))
         }
     }
     // NOT_SUPPORTED: fn wxDateTime2()
     // BLOCKED: fn wxDateTime3()
     pub fn new_with_double(jdn: c_double) -> DateTimeIsOwned<OWNED> {
-        unsafe { DateTimeIsOwned::from_ptr(ffi::wxDateTime_new4(jdn)) }
+        unsafe { DateTimeIsOwned(ffi::wxDateTime_new4(jdn)) }
     }
     // NOT_SUPPORTED: fn wxDateTime5()
     // NOT_SUPPORTED: fn wxDateTime6()
@@ -187,7 +187,7 @@ wx_class! { EvtHandler =
 }
 impl<const OWNED: bool> EvtHandlerIsOwned<OWNED> {
     pub fn new() -> EvtHandlerIsOwned<OWNED> {
-        unsafe { EvtHandlerIsOwned::from_ptr(ffi::wxEvtHandler_new()) }
+        unsafe { EvtHandlerIsOwned(ffi::wxEvtHandler_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -201,12 +201,12 @@ wx_class! { Object =
 }
 impl<const OWNED: bool> ObjectIsOwned<OWNED> {
     pub fn new() -> ObjectIsOwned<OWNED> {
-        unsafe { ObjectIsOwned::from_ptr(ffi::wxObject_new()) }
+        unsafe { ObjectIsOwned(ffi::wxObject_new()) }
     }
     pub fn new_with_object<O: ObjectMethods>(other: &O) -> ObjectIsOwned<OWNED> {
         unsafe {
             let other = other.as_ptr();
-            ObjectIsOwned::from_ptr(ffi::wxObject_new1(other))
+            ObjectIsOwned(ffi::wxObject_new1(other))
         }
     }
     pub fn none() -> Option<&'static Self> {
