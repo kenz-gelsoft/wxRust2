@@ -305,7 +305,7 @@ class RustMethodBinding:
         if self.__model.returns.is_void():
             return ''
         returns = self.__model.returns.in_rust(for_ffi=True)
-        wrapped = self.__model.wrapped_return_type(allows_ptr=True)
+        wrapped = self.__model.wrap_return_type(allows_ptr=True)
         if self.__model.maybe_returns_self():
             if for_ffi:
                 returns = '*mut c_void'
@@ -315,7 +315,7 @@ class RustMethodBinding:
             if for_ffi:
                 returns = '*mut c_void'
             else:
-                returns = wrapped[1]
+                returns = wrapped.returns()
         return ' -> %s' % (returns,)
     
     def lines(self, for_ffi=False, with_overloads=None):
@@ -439,12 +439,9 @@ class RustMethodBinding:
     def _wrap_return_type(self, call):
         if self.__model.maybe_returns_self():
             return '%s; &self' % (call,)
-        wrapped = self.__model.wrapped_return_type(
-            allows_ptr=True,
-            call=call,
-        )
+        wrapped = self.__model.wrap_return_type(allows_ptr=True)
         if wrapped:
-            return wrapped[2]
+            return wrapped.call(call)
         return call
 
     def _uses_ptr_type(self):
@@ -551,11 +548,11 @@ class CxxMethodBinding:
     def lines(self, is_cc):
         if self.__model.suppressed_reason():
             return
-        wrapped = self.__model.wrapped_return_type(allows_ptr=False)
+        wrapped = self.__model.wrap_return_type(allows_ptr=False)
         returns = self.__model.returns.in_cxx() + ' '
         if wrapped:
             returns = '%s *' % (
-                wrapped[0],
+                wrapped.in_cxx(),
             )
         signature = '%s%s(%s)' % (
             returns,
@@ -588,7 +585,7 @@ class CxxMethodBinding:
             self.__model.returns.is_ref_to_binding()):
             yield '    return &(%s);' % (new_params_or_expr,)
         elif wrapped:
-            yield '    return new %s(%s);' % (wrapped[0], new_params_or_expr)
+            yield '    return new %s(%s);' % (wrapped.in_cxx(), new_params_or_expr)
         else:
             yield '    return %s;' % (new_params_or_expr,)
         yield '}'

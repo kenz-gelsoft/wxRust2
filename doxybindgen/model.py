@@ -179,12 +179,12 @@ class Method:
             index = ''
         return '%s%s' % (name, index)
 
-    def wrapped_return_type(self, allows_ptr, call=""):
+    def wrap_return_type(self, allows_ptr):
         if (self.is_ctor or
             self.returns_new() or 
             allows_ptr and (self.returns.is_ptr_to_binding() or
                             self.returns.is_ref_to_binding())):
-            return ReturnType(self).wrap(call)
+            return ReturnTypeWrapper(self)
         else:
             return None
 
@@ -230,26 +230,35 @@ class Method:
         signature = self.cxx_signature()
         return any(m.cxx_signature() == signature for m in cls.methods)
 
-class ReturnType:
+class ReturnTypeWrapper:
     def __init__(self, method):
-        self.returns = method.returns
+        self.__returns = method.returns
         self.is_ctor = method.is_ctor
         self.is_owned = method.returns_owned()
         self.is_trackable = method.returns_trackable()
+    
+    def in_cxx(self):
+        return self._wrap()[0]
 
-    def wrap(self, call=""):
-        wrapped = self.returns.typename
+    def returns(self):
+        return self._wrap()[1]
+    
+    def call(self, call):
+        return self._wrap(call)[2]
+
+    def _wrap(self, call=""):
+        wrapped = self.__returns.typename
         returns = wrapped[2:]
-        if self.returns.is_str():
+        if self.__returns.is_str():
             return [wrapped,
                     'String',
                     'from_wx_string(%s)' % (call,)]
-        if self.returns.is_ref_to_binding():
+        if self.__returns.is_ref_to_binding():
             return [wrapped,
                     '%sIsOwned<false>' % (returns,),
                     '%sIsOwned::from_ptr(%s)' % (returns, call)]
         elif (self.is_ctor or
-                self.returns.is_ptr_to_binding()):
+                self.__returns.is_ptr_to_binding()):
             if self.is_ctor:
                 return [wrapped,
                         '%sIsOwned<OWNED>' % (returns,),
