@@ -184,34 +184,7 @@ class Method:
             self.returns_new() or 
             allows_ptr and (self.returns.is_ptr_to_binding() or
                             self.returns.is_ref_to_binding())):
-            wrapped = self.returns.typename
-            returns = wrapped[2:]
-            if self.returns.is_str():
-                return [wrapped,
-                        'String',
-                        'from_wx_string(%s)' % (call,)]
-            if self.returns.is_ref_to_binding():
-                return [wrapped,
-                        '%sIsOwned<false>' % (returns,),
-                        '%sIsOwned::from_ptr(%s)' % (returns, call)]
-            elif (self.is_ctor or
-                  self.returns.is_ptr_to_binding()):
-                if self.is_ctor:
-                    return [wrapped,
-                            '%sIsOwned<OWNED>' % (returns,),
-                            '%sIsOwned(%s)' % (returns, call)]
-                elif not self.returns_owned():
-                    if self.returns_trackable():
-                        return [wrapped,
-                                'WeakRef<%s>' % (returns,),
-                                'WeakRef::<%s>::from(%s)' % (returns, call)]
-                    else:
-                        return [wrapped,
-                                'Option<%sIsOwned<false>>' % (returns,),
-                                '%s::option_from(%s)' % (returns, call)]
-            return [wrapped,
-                    returns,
-                    '%s::from_ptr(%s)' % (returns, call)]
+            return ReturnType(self).wrap(call)
         else:
             return None
 
@@ -256,7 +229,44 @@ class Method:
             return False
         signature = self.cxx_signature()
         return any(m.cxx_signature() == signature for m in cls.methods)
-    
+
+class ReturnType:
+    def __init__(self, method):
+        self.returns = method.returns
+        self.is_ctor = method.is_ctor
+        self.is_owned = method.returns_owned()
+        self.is_trackable = method.returns_trackable()
+
+    def wrap(self, call=""):
+        wrapped = self.returns.typename
+        returns = wrapped[2:]
+        if self.returns.is_str():
+            return [wrapped,
+                    'String',
+                    'from_wx_string(%s)' % (call,)]
+        if self.returns.is_ref_to_binding():
+            return [wrapped,
+                    '%sIsOwned<false>' % (returns,),
+                    '%sIsOwned::from_ptr(%s)' % (returns, call)]
+        elif (self.is_ctor or
+                self.returns.is_ptr_to_binding()):
+            if self.is_ctor:
+                return [wrapped,
+                        '%sIsOwned<OWNED>' % (returns,),
+                        '%sIsOwned(%s)' % (returns, call)]
+            elif not self.is_owned:
+                if self.is_trackable:
+                    return [wrapped,
+                            'WeakRef<%s>' % (returns,),
+                            'WeakRef::<%s>::from(%s)' % (returns, call)]
+                else:
+                    return [wrapped,
+                            'Option<%sIsOwned<false>>' % (returns,),
+                            '%s::option_from(%s)' % (returns, call)]
+        return [wrapped,
+                returns,
+                '%s::from_ptr(%s)' % (returns, call)]
+
 class Param:
     def __init__(self, type, name):
         self.type = type
