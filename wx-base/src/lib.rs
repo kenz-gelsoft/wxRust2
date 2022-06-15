@@ -42,7 +42,7 @@ mod ffi {
         // (wx)String::const_iterator
         pub fn wxStringConstIterator_new() -> *mut c_void;
         pub fn wxStringConstIterator_delete(self_: *mut c_void);
-        pub fn wxStringConstIterator_IsEnd(self_: *mut c_void, s: *mut c_void);
+        pub fn wxStringConstIterator_IndexIn(self_: *mut c_void, s: *const c_void) -> usize;
 
         // ArrayString
         pub fn wxArrayString_new() -> *mut c_void;
@@ -55,6 +55,9 @@ mod ffi {
         pub fn OpaqueWeakRef_new(obj: *mut c_void) -> *mut c_void;
         pub fn OpaqueWeakRef_delete(self_: *mut c_void);
         pub fn OpaqueWeakRef_Get(self_: *mut c_void) -> *mut c_void;
+
+        // DateTime
+        pub fn wxDateTime_ParseDate(self_: *mut c_void, date: *const c_void, end: *mut c_void) -> bool;
     }
 }
 
@@ -70,6 +73,26 @@ pub mod methods {
     pub trait ArrayStringMethods: WxRustMethods {
         fn add(&self, s: &str) {
             unsafe { ffi::wxArrayString_Add(self.as_ptr(), wx_string_from(s)) }
+        }
+    }
+
+    // TODO: Support manual(semi-auto) binding in codegen
+    //
+    // This trait should be `DateTimeMethods` and, the base trait
+    // should be `DateTimeMethodsAuto` to API consistencey.
+    pub trait DateTimeMethodsManual: DateTimeMethods {
+        fn parse_date(&self, date: &str) -> Option<usize> {
+            unsafe {
+                let end = ffi::wxStringConstIterator_new();
+                let date = wx_string_from(date);
+                let result = if ffi::wxDateTime_ParseDate(self.as_ptr(), date, end) {
+                    Some(ffi::wxStringConstIterator_IndexIn(end, date))
+                } else {
+                    None
+                };
+                ffi::wxStringConstIterator_delete(end);
+                result
+            }
         }
     }
 }
@@ -195,3 +218,5 @@ impl<T> Drop for WeakRef<T> {
         unsafe { ffi::OpaqueWeakRef_delete(self.0) }
     }
 }
+
+impl<const OWNED: bool> DateTimeMethodsManual for DateTimeIsOwned<OWNED> {}

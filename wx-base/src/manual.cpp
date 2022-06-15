@@ -82,8 +82,8 @@ wxString::const_iterator *wxStringConstIterator_new() {
 void wxStringConstIterator_delete(wxString::const_iterator *self) {
     delete self;
 }
-bool wxStringConstIterator_IsEnd(wxString::const_iterator *self, wxString *s) {
-    return *self == s->end();
+size_t wxStringConstIterator_IndexIn(wxString::const_iterator *self, const wxString *s) {
+    return std::distance(s->begin(), *self);
 }
 
 // ArrayString
