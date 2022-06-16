@@ -80,6 +80,12 @@ pub mod methods {
         }
     }
 
+    pub trait StringConstIteratorMethods: WxRustMethods {
+        fn index_in(&self, s: *const c_void) -> usize {
+            unsafe { ffi::wxStringConstIterator_IndexIn(self.as_ptr(), s) }
+        }
+    }
+
     // TODO: Support manual(semi-auto) binding in codegen
     //
     // This trait should be `DateTimeMethods` and, the base trait
@@ -87,15 +93,13 @@ pub mod methods {
     pub trait DateTimeMethodsManual: DateTimeMethods {
         fn parse_date(&self, date: &str) -> Option<usize> {
             unsafe {
-                let end = ffi::wxStringConstIterator_new();
+                let end = StringConstIterator::new();
                 let date = wx_string_from(date);
-                let result = if ffi::wxDateTime_ParseDate(self.as_ptr(), date, end) {
-                    Some(ffi::wxStringConstIterator_IndexIn(end, date))
+                if ffi::wxDateTime_ParseDate(self.as_ptr(), date, end.as_ptr()) {
+                    Some(end.index_in(date))
                 } else {
                     None
-                };
-                ffi::wxStringConstIterator_delete(end);
-                result
+                }
             }
         }
     }
@@ -172,6 +176,24 @@ impl<const OWNED: bool> Drop for ArrayStringIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxArrayString_delete(self.0) }
+        }
+    }
+}
+
+// (wx)String::const_iterator
+wx_class! { StringConstIterator =
+    StringConstIteratorIsOwned<true>(wxStringConstIterator) impl
+        StringConstIteratorMethods
+}
+impl<const OWNED: bool> StringConstIteratorIsOwned<OWNED> {
+    pub fn new() -> Self {
+        unsafe { StringConstIteratorIsOwned(ffi::wxStringConstIterator_new()) }
+    }
+}
+impl<const OWNED: bool> Drop for StringConstIteratorIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxStringConstIterator_delete(self.0) }
         }
     }
 }
