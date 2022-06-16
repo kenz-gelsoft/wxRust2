@@ -146,6 +146,7 @@ blocklist = [
     # Not supported struct _systemtime in overload renaming
     'wxDateTime7',
     # Not supported string_const_itrator
+    'ParseDate',
     'ParseFormat1',
     'ParseFormat2',
     # const vs non-const

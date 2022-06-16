@@ -283,13 +283,11 @@ impl DatePickerWidgetsPage {
             style |= wx::DP_ALLOWNONE as c_long;
         }
 
-        let mut builder = wx::DatePickerCtrl::builder(Some(&self.base));
-        builder.id(DatePickerPage::Picker.into()).style(style);
-        if let Some(value) = value {
-            // TODO: make optional args optional
-            builder.dt(value);
-        }
-        let date_picker = builder.build();
+        let date_picker = wx::DatePickerCtrl::builder(Some(&self.base))
+            .id(DatePickerPage::Picker.into())
+            .style(style)
+            .dt(value)
+            .build();
 
         let centre = wx::CENTRE.try_into().unwrap();
         config_ui

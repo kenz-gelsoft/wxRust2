@@ -176,8 +176,8 @@ impl<'a, P: WindowMethods> DatePickerCtrlBuilder<'a, P> {
         self.id = id;
         self
     }
-    pub fn dt(&mut self, dt: DateTime) -> &mut Self {
-        self.dt = Some(dt);
+    pub fn dt(&mut self, dt: Option<DateTime>) -> &mut Self {
+        self.dt = dt;
         self
     }
     pub fn pos(&mut self, pos: Point) -> &mut Self {
