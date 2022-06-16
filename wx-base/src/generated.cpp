@@ -106,9 +106,6 @@ wxString *wxDateTime_FormatISOTime(const wxDateTime * self) {
 wxString *wxDateTime_FormatTime(const wxDateTime * self) {
     return new wxString(self->FormatTime());
 }
-bool wxDateTime_ParseDate(wxDateTime * self, const wxString * date, wxString::const_iterator * end) {
-    return self->ParseDate(*date, end);
-}
 bool wxDateTime_ParseDateTime(wxDateTime * self, const wxString * datetime, wxString::const_iterator * end) {
     return self->ParseDateTime(*datetime, end);
 }

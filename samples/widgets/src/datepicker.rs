@@ -318,15 +318,12 @@ impl DatePickerWidgetsPage {
         let value = text.get_value();
         if !value.is_empty() {
             let dt = wx::DateTime::new();
-            if let Some(len) = wx::methods::DateTimeMethodsManual::parse_date(&dt, &value) {
-                if len != value.len() {
-                    println!("Invalid date \"{}\"", value);
-                    return None;
+            if let Some(len) = dt.parse_date(&value) {
+                if len == value.len() {
+                    return Some(dt);
                 }
-                return Some(dt);
-            } else {
-                return None;
             }
+            println!("Invalid date \"{}\"", value);
         }
         return None;
     }

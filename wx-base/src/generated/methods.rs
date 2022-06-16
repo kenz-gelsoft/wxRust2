@@ -217,12 +217,7 @@ pub trait DateTimeMethods: WxRustMethods {
     fn format_time(&self) -> String {
         unsafe { from_wx_string(ffi::wxDateTime_FormatTime(self.as_ptr())) }
     }
-    fn parse_date(&self, date: &str, end: *mut c_void) -> bool {
-        unsafe {
-            let date = wx_string_from(date);
-            ffi::wxDateTime_ParseDate(self.as_ptr(), date, end)
-        }
-    }
+    // BLOCKED: fn ParseDate()
     fn parse_date_time(&self, datetime: &str, end: *mut c_void) -> bool {
         unsafe {
             let datetime = wx_string_from(datetime);

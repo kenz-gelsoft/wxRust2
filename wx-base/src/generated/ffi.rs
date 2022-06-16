@@ -100,7 +100,7 @@ extern "C" {
     pub fn wxDateTime_FormatISODate(self_: *const c_void) -> *mut c_void;
     pub fn wxDateTime_FormatISOTime(self_: *const c_void) -> *mut c_void;
     pub fn wxDateTime_FormatTime(self_: *const c_void) -> *mut c_void;
-    pub fn wxDateTime_ParseDate(self_: *mut c_void, date: *const c_void, end: *mut c_void) -> bool;
+    // BLOCKED: pub fn wxDateTime_ParseDate(self_: *mut c_void, date: *const c_void, end: *mut c_void) -> bool;
     pub fn wxDateTime_ParseDateTime(
         self_: *mut c_void,
         datetime: *const c_void,

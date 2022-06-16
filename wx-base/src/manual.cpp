@@ -97,6 +97,10 @@ void wxArrayString_Add(wxArrayString *self, const wxString *s) {
     self->Add(*s);
 }
 
+// DateTime
+bool wxDateTime_ParseDate(wxDateTime * self, const wxString * date, wxString::const_iterator * end) {
+    return self->ParseDate(*date, end);
+}
 
 class OpaqueWeakRef : public wxTrackerNode
 {

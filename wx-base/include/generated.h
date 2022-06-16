@@ -45,7 +45,6 @@ wxString *wxDateTime_FormatDate(const wxDateTime * self);
 wxString *wxDateTime_FormatISODate(const wxDateTime * self);
 wxString *wxDateTime_FormatISOTime(const wxDateTime * self);
 wxString *wxDateTime_FormatTime(const wxDateTime * self);
-bool wxDateTime_ParseDate(wxDateTime * self, const wxString * date, wxString::const_iterator * end);
 bool wxDateTime_ParseDateTime(wxDateTime * self, const wxString * datetime, wxString::const_iterator * end);
 bool wxDateTime_ParseFormat(wxDateTime * self, const wxString * date, const wxString * format, const wxDateTime * date_def, wxString::const_iterator * end);
 bool wxDateTime_ParseISODate(wxDateTime * self, const wxString * date);

@@ -54,6 +54,9 @@ wxArrayString *wxArrayString_new();
 void wxArrayString_delete(wxArrayString *self);
 void wxArrayString_Add(wxArrayString *self, const wxString *s);
 
+// DateTime
+bool wxDateTime_ParseDate(wxDateTime * self, const wxString * date, wxString::const_iterator * end);
+
 // WeakRef
 void *OpaqueWeakRef_new(void *obj);
 void OpaqueWeakRef_delete(void *self);

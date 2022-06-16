@@ -89,7 +89,7 @@ pub mod methods {
     // TODO: Support manual(semi-auto) binding in codegen
     //
     // This trait should be `DateTimeMethods` and, the base trait
-    // should be `DateTimeMethodsAuto` to API consistencey.
+    // should be `DateTimeMethodsAuto` for API consistencey.
     pub trait DateTimeMethodsManual: DateTimeMethods {
         fn parse_date(&self, date: &str) -> Option<usize> {
             unsafe {
