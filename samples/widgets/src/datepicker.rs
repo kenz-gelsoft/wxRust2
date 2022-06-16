@@ -193,21 +193,33 @@ impl WidgetsPage for DatePickerWidgetsPage {
 
         // final initializations
         chk_style_century.set_value(true);
-        self.reset();
 
-        *self.config_ui.borrow_mut() = Some(ConfigUI {
+        let config_ui = ConfigUI {
             text_cur,
             radio_kind,
             chk_style_century,
             chk_style_allow_none,
             sizer_date_picker: sizer_right, // save it to modify it later
-        });
+        };
+        self.reset(&config_ui);
+        *self.config_ui.borrow_mut() = Some(config_ui);
 
         self.base.set_sizer(Some(&sizer_top), true);
     }
 
-    fn handle_button(&self, _: &wx::CommandEvent) {
-        self.on_button_reset();
+    fn handle_button(&self, event: &wx::CommandEvent) {
+        println!("event={}", event.get_id());
+        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+            if let Some(m) = DatePickerPage::from(event.get_id()) {
+                match m {
+                    DatePickerPage::Reset => self.on_button_reset(config_ui),
+                    DatePickerPage::Set => self.on_button_set(config_ui),
+                    DatePickerPage::SetRange => self.on_button_set_range(),
+                    DatePickerPage::SetNullText => self.on_button_set_null_text(),
+                    _ => (),
+                };
+            }
+        }
     }
     fn handle_checkbox(&self, _: &wx::CommandEvent) {
         // Do nothing
@@ -229,95 +241,105 @@ impl DatePickerWidgetsPage {
     }
 
     fn recreate_widget(&self) {
-        self.create_date_picker();
-
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            // MEMO: Destroy()ing in create_date_picker() removes from its sizer.
-            // config_ui.sizer.remove_int(1);
-            self.create_date_picker();
-            if let Some(date_picker) = self.date_picker.borrow().as_ref() {
-                config_ui.sizer_date_picker.insert_window_int(
-                    1,
-                    Some(date_picker),
-                    0,
-                    wx::ALIGN_CENTER | wx::ALL,
-                    5,
-                    wx::Object::none(),
-                );
-            }
-            config_ui.sizer_date_picker.layout();
+            self.create_date_picker(config_ui);
         }
     }
 
-    fn reset(&self) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            let today = wx::DateTime::today();
+    fn reset(&self, config_ui: &ConfigUI) {
+        let today = wx::DateTime::today();
 
-            if let Some(date_picker) = self.date_picker.borrow().as_ref() {
-                date_picker.set_value(&today);
-            }
-            config_ui.text_cur.set_value(&today.format_iso_date());
+        if let Some(date_picker) = self.date_picker.borrow().as_ref() {
+            date_picker.set_value(&today);
         }
+        config_ui.text_cur.set_value(&today.format_iso_date());
     }
 
-    fn create_date_picker(&self) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            let mut value: Option<wx::DateTime> = None;
-            if let Some(date_picker) = self.date_picker.borrow().as_ref() {
-                value = Some(date_picker.get_value());
+    fn create_date_picker(&self, config_ui: &ConfigUI) {
+        let mut value: Option<wx::DateTime> = None;
+        if let Some(date_picker) = self.date_picker.borrow().as_ref() {
+            value = Some(date_picker.get_value());
 
-                // TODO: remove (and delete) all buttons
-                let count = config_ui.sizer_date_picker.get_children().get_count();
-                for _ in 0..count {
-                    config_ui.sizer_date_picker.remove_int(0);
+            // TODO: remove (and delete) all buttons
+            let count = config_ui.sizer_date_picker.get_children().get_count();
+            for _ in 0..count {
+                config_ui.sizer_date_picker.remove_int(0);
+            }
+            date_picker.destroy();
+        }
+
+        let mut style = wx::BORDER_DEFAULT;
+        style |= match config_ui.radio_kind.get_selection() {
+            0 => wx::DP_DEFAULT,
+            1 => wx::DP_SPIN,
+            2 => wx::DP_DROPDOWN,
+            _ => 0,
+        } as c_long;
+
+        if config_ui.chk_style_century.get_value() {
+            style |= wx::DP_SHOWCENTURY as c_long;
+        }
+        if config_ui.chk_style_allow_none.get_value() {
+            style |= wx::DP_ALLOWNONE as c_long;
+        }
+
+        let mut builder = wx::DatePickerCtrl::builder(Some(&self.base));
+        builder.id(DatePickerPage::Picker.into()).style(style);
+        if let Some(value) = value {
+            // TODO: make optional args optional
+            builder.dt(value);
+        }
+        let date_picker = builder.build();
+
+        let centre = wx::CENTRE.try_into().unwrap();
+        config_ui
+            .sizer_date_picker
+            .add_int_int(0, 0, 1, centre, 0, wx::Object::none());
+        config_ui.sizer_date_picker.add_window_int(
+            Some(&date_picker),
+            1,
+            centre,
+            0,
+            wx::Object::none(),
+        );
+        config_ui
+            .sizer_date_picker
+            .add_int_int(0, 0, 1, centre, 0, wx::Object::none());
+        config_ui.sizer_date_picker.layout();
+        *self.date_picker.borrow_mut() = Some(date_picker);
+    }
+
+    fn on_button_reset(&self, config_ui: &ConfigUI) {
+        self.reset(config_ui);
+        self.create_date_picker(config_ui);
+    }
+
+    fn get_date_from_text_control(&self, text: &wx::TextCtrl) -> Option<wx::DateTime> {
+        let value = text.get_value();
+        if !value.is_empty() {
+            let dt = wx::DateTime::new();
+            if let Some(len) = wx::methods::DateTimeMethodsManual::parse_date(&dt, &value) {
+                if len != value.len() {
+                    println!("Invalid date \"{}\"", value);
+                    return None;
                 }
-                date_picker.destroy();
+                return Some(dt);
+            } else {
+                return None;
             }
+        }
+        return None;
+    }
 
-            let mut style = wx::BORDER_DEFAULT;
-            style |= match config_ui.radio_kind.get_selection() {
-                0 => wx::DP_DEFAULT,
-                1 => wx::DP_SPIN,
-                2 => wx::DP_DROPDOWN,
-                _ => 0,
-            } as c_long;
-
-            if config_ui.chk_style_century.get_value() {
-                style |= wx::DP_SHOWCENTURY as c_long;
+    fn on_button_set(&self, config_ui: &ConfigUI) {
+        if let Some(dt) = self.get_date_from_text_control(&config_ui.text_cur) {
+            if let Some(date_picker) = self.date_picker.borrow().as_ref() {
+                date_picker.set_value(&dt);
             }
-            if config_ui.chk_style_allow_none.get_value() {
-                style |= wx::DP_ALLOWNONE as c_long;
-            }
-
-            let mut builder = wx::DatePickerCtrl::builder(Some(&self.base));
-            builder.id(DatePickerPage::Picker.into()).style(style);
-            if let Some(value) = value {
-                // TODO: make optional args optional
-                builder.dt(value);
-            }
-            let date_picker = builder.build();
-
-            let centre = wx::CENTRE.try_into().unwrap();
-            config_ui
-                .sizer_date_picker
-                .add_int_int(0, 0, 1, centre, 0, wx::Object::none());
-            config_ui.sizer_date_picker.add_window_int(
-                Some(&date_picker),
-                1,
-                centre,
-                0,
-                wx::Object::none(),
-            );
-            config_ui
-                .sizer_date_picker
-                .add_int_int(0, 0, 1, centre, 0, wx::Object::none());
-            config_ui.sizer_date_picker.layout();
-            *self.date_picker.borrow_mut() = Some(date_picker);
         }
     }
 
-    fn on_button_reset(&self) {
-        self.reset();
-        self.create_date_picker();
-    }
+    fn on_button_set_range(&self) {}
+
+    fn on_button_set_null_text(&self) {}
 }
