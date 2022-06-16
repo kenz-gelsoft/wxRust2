@@ -57,7 +57,11 @@ mod ffi {
         pub fn OpaqueWeakRef_Get(self_: *mut c_void) -> *mut c_void;
 
         // DateTime
-        pub fn wxDateTime_ParseDate(self_: *mut c_void, date: *const c_void, end: *mut c_void) -> bool;
+        pub fn wxDateTime_ParseDate(
+            self_: *mut c_void,
+            date: *const c_void,
+            end: *mut c_void,
+        ) -> bool;
     }
 }
 
