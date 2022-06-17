@@ -10,13 +10,16 @@ enum DatePickerPage {
     Reset = wx::ID_HIGHEST as isize,
     Set,
     SetRange,
-    SetNullText,
+    // SetNullText,
     Picker,
 }
 impl DatePickerPage {
     fn from(v: c_int) -> Option<Self> {
         use DatePickerPage::*;
-        for e in [Reset, Set, SetRange, SetNullText, Picker] {
+        for e in [
+            Reset, Set, SetRange, // SetNullText,
+            Picker,
+        ] {
             if v == e.into() {
                 return Some(e);
             }
@@ -39,8 +42,7 @@ pub struct ConfigUI {
     text_cur: wx::TextCtrl,
     text_min: wx::TextCtrl,
     text_max: wx::TextCtrl,
-    text_null: wx::TextCtrl,
-
+    // text_null: wx::TextCtrl,
     radio_kind: wx::RadioBox,
     chk_style_century: wx::CheckBox,
     chk_style_allow_none: wx::CheckBox,
@@ -143,22 +145,22 @@ impl WidgetsPage for DatePickerWidgetsPage {
 
         sizer_middle.add_spacer(10);
 
-        let (sizer_row, text_null) =
-            self.create_sizer_with_text_and_label("&Null text", wx::ID_ANY);
-        sizer_middle.add_sizer_sizerflags(
-            Some(&sizer_row),
-            wx::SizerFlags::new(0).expand().border(wx::ALL),
-        );
+        // let (sizer_row, text_null) =
+        //     self.create_sizer_with_text_and_label("&Null text", wx::ID_ANY);
+        // sizer_middle.add_sizer_sizerflags(
+        //     Some(&sizer_row),
+        //     wx::SizerFlags::new(0).expand().border(wx::ALL),
+        // );
 
-        sizer_middle.add_window_sizerflags(
-            Some(
-                &wx::Button::builder(Some(&self.base))
-                    .id(DatePickerPage::SetNullText.into())
-                    .label("Set &null text")
-                    .build(),
-            ),
-            wx::SizerFlags::new(0).centre().border(wx::ALL),
-        );
+        // sizer_middle.add_window_sizerflags(
+        //     Some(
+        //         &wx::Button::builder(Some(&self.base))
+        //             .id(DatePickerPage::SetNullText.into())
+        //             .label("Set &null text")
+        //             .build(),
+        //     ),
+        //     wx::SizerFlags::new(0).centre().border(wx::ALL),
+        // );
 
         // right pane: control itself
         let sizer_right = wx::BoxSizer::new(wx::HORIZONTAL);
@@ -205,8 +207,7 @@ impl WidgetsPage for DatePickerWidgetsPage {
             text_cur,
             text_min,
             text_max,
-            text_null,
-
+            // text_null,
             radio_kind,
             chk_style_century,
             chk_style_allow_none,
@@ -227,7 +228,7 @@ impl WidgetsPage for DatePickerWidgetsPage {
                 DatePickerPage::Reset => self.on_button_reset(config_ui),
                 DatePickerPage::Set => self.on_button_set(config_ui),
                 DatePickerPage::SetRange => self.on_button_set_range(config_ui),
-                DatePickerPage::SetNullText => self.on_button_set_null_text(config_ui),
+                // DatePickerPage::SetNullText => self.on_button_set_null_text(config_ui),
                 _ => (),
             };
         }
@@ -375,9 +376,9 @@ impl DatePickerWidgetsPage {
         }
     }
 
-    fn on_button_set_null_text(&self, config_ui: &ConfigUI) {
-        if let Some(date_picker) = self.date_picker.borrow().as_ref() {
-            date_picker.set_null_text(&config_ui.text_null.get_value());
-        }
-    }
+    // fn on_button_set_null_text(&self, config_ui: &ConfigUI) {
+    //     if let Some(date_picker) = self.date_picker.borrow().as_ref() {
+    //         date_picker.set_null_text(&config_ui.text_null.get_value());
+    //     }
+    // }
 }
