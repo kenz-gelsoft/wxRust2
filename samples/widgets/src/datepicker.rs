@@ -35,7 +35,12 @@ pub struct ConfigUI {
     // other controls
     // --------------
     sizer_date_picker: wx::BoxSizer,
+
     text_cur: wx::TextCtrl,
+    text_min: wx::TextCtrl,
+    text_max: wx::TextCtrl,
+    text_null: wx::TextCtrl,
+
     radio_kind: wx::RadioBox,
     chk_style_century: wx::CheckBox,
     chk_style_allow_none: wx::CheckBox,
@@ -195,11 +200,16 @@ impl WidgetsPage for DatePickerWidgetsPage {
         chk_style_century.set_value(true);
 
         let config_ui = ConfigUI {
+            sizer_date_picker: sizer_right, // save it to modify it later
+
             text_cur,
+            text_min,
+            text_max,
+            text_null,
+
             radio_kind,
             chk_style_century,
             chk_style_allow_none,
-            sizer_date_picker: sizer_right, // save it to modify it later
         };
         self.reset(&config_ui);
         *self.config_ui.borrow_mut() = Some(config_ui);
@@ -209,16 +219,17 @@ impl WidgetsPage for DatePickerWidgetsPage {
 
     fn handle_button(&self, event: &wx::CommandEvent) {
         println!("event={}", event.get_id());
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            if let Some(m) = DatePickerPage::from(event.get_id()) {
-                match m {
-                    DatePickerPage::Reset => self.on_button_reset(config_ui),
-                    DatePickerPage::Set => self.on_button_set(config_ui),
-                    DatePickerPage::SetRange => self.on_button_set_range(),
-                    DatePickerPage::SetNullText => self.on_button_set_null_text(),
-                    _ => (),
-                };
-            }
+        if let (Some(config_ui), Some(m)) = (
+            self.config_ui.borrow().as_ref(),
+            DatePickerPage::from(event.get_id()),
+        ) {
+            match m {
+                DatePickerPage::Reset => self.on_button_reset(config_ui),
+                DatePickerPage::Set => self.on_button_set(config_ui),
+                DatePickerPage::SetRange => self.on_button_set_range(config_ui),
+                DatePickerPage::SetNullText => self.on_button_set_null_text(config_ui),
+                _ => (),
+            };
         }
     }
     fn handle_checkbox(&self, _: &wx::CommandEvent) {
@@ -327,14 +338,46 @@ impl DatePickerWidgetsPage {
     }
 
     fn on_button_set(&self, config_ui: &ConfigUI) {
-        if let Some(dt) = self.get_date_from_text_control(&config_ui.text_cur) {
-            if let Some(date_picker) = self.date_picker.borrow().as_ref() {
-                date_picker.set_value(&dt);
+        if let (Some(dt), Some(date_picker)) = (
+            self.get_date_from_text_control(&config_ui.text_cur),
+            self.date_picker.borrow().as_ref(),
+        ) {
+            date_picker.set_value(&dt);
+        }
+    }
+
+    fn on_button_set_range(&self, config_ui: &ConfigUI) {
+        if let (Some(dt1), Some(dt2), Some(date_picker)) = (
+            self.get_date_from_text_control(&config_ui.text_min),
+            self.get_date_from_text_control(&config_ui.text_max),
+            self.date_picker.borrow().as_ref(),
+        ) {
+            date_picker.set_range(&dt1, &dt2);
+
+            if !date_picker.get_range(Some(&dt1), Some(&dt2)) {
+                println!("No range set");
+            } else {
+                let dt1 = if dt1.is_valid() {
+                    dt1.format_iso_date()
+                } else {
+                    String::new()
+                };
+                config_ui.text_min.set_value(&dt1);
+                let dt2 = if dt2.is_valid() {
+                    dt2.format_iso_date()
+                } else {
+                    String::new()
+                };
+                config_ui.text_max.set_value(&dt2);
+
+                println!("Date picker range updated");
             }
         }
     }
 
-    fn on_button_set_range(&self) {}
-
-    fn on_button_set_null_text(&self) {}
+    fn on_button_set_null_text(&self, config_ui: &ConfigUI) {
+        if let Some(date_picker) = self.date_picker.borrow().as_ref() {
+            date_picker.set_null_text(&config_ui.text_null.get_value());
+        }
+    }
 }
