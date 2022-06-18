@@ -251,7 +251,7 @@ class ReturnTypeWrapper:
         returns = self.__wrapped[2:]
         if self.__returns.is_str():
             return ['String',
-                    'from_wx_string(%s)' % (call,)]
+                    'WxString::from_ptr(%s).into()' % (call,)]
         if self.is_ctor:
             return ['%sIsOwned<OWNED>' % (returns,),
                     '%sIsOwned(%s)' % (returns, call)]
@@ -461,11 +461,14 @@ class CxxType:
     def marshal(self, param):
         name = camel_to_snake(param.name)
         if self._is_const_ref_to_string():
-            yield 'let %s = wx_string_from(%s);' % (
+            # This variable keeps temporary wxString object in this scope.
+            yield 'let %s = WxString::from(%s);' % (
                 name,
                 name,
             )
-        if self.is_const_ref_to_binding():
+        if (self.is_const_ref_to_binding() or
+            # So, taking pointer must be another expression for its lifetime.
+            self._is_const_ref_to_string()):
             yield 'let %s = %s;' % (
                 name,
                 param.rust_ffi_ref(),

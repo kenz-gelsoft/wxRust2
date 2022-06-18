@@ -1188,8 +1188,10 @@ pub fn message_box<T: WindowMethods>(
     parent: Option<&T>,
 ) {
     unsafe {
-        let message = wx_base::wx_string_from(message);
-        let caption = wx_base::wx_string_from(caption);
+        let message = WxString::from(message);
+        let message = message.as_ptr();
+        let caption = WxString::from(caption);
+        let caption = caption.as_ptr();
         let parent = match parent {
             Some(r) => r.as_ptr(),
             None => ptr::null_mut(),

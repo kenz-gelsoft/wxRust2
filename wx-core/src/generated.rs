@@ -141,7 +141,8 @@ impl<const OWNED: bool> BitmapButtonIsOwned<OWNED> {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let validator = validator.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             BitmapButtonIsOwned(ffi::wxBitmapButton_new1(
                 parent, id, bitmap, pos, size, style, validator, name,
             ))
@@ -188,7 +189,8 @@ impl<const OWNED: bool> WindowMethods for BookCtrlBaseIsOwned<OWNED> {
             };
             let pos = pos.as_ptr();
             let size = size.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxBookCtrlBase_Create(self.as_ptr(), parent, winid, pos, size, style, name)
         }
     }
@@ -267,11 +269,13 @@ impl<const OWNED: bool> ButtonIsOwned<OWNED> {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let validator = validator.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ButtonIsOwned(ffi::wxButton_new1(
                 parent, id, label, pos, size, style, validator, name,
             ))
@@ -310,11 +314,13 @@ impl<const OWNED: bool> CheckBoxIsOwned<OWNED> {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let validator = validator.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             CheckBoxIsOwned(ffi::wxCheckBox_new1(
                 parent, id, label, pos, size, style, validator, name,
             ))
@@ -364,7 +370,8 @@ impl<const OWNED: bool> ChoiceIsOwned<OWNED> {
             let size = size.as_ptr();
             let choices = choices.as_ptr();
             let validator = validator.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ChoiceIsOwned(ffi::wxChoice_new2(
                 parent, id, pos, size, choices, style, validator, name,
             ))
@@ -399,7 +406,8 @@ impl<const OWNED: bool> ColourIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxColour1()
     pub fn new_with_str(colour_name: &str) -> ColourIsOwned<OWNED> {
         unsafe {
-            let colour_name = wx_string_from(colour_name);
+            let colour_name = WxString::from(colour_name);
+            let colour_name = colour_name.as_ptr();
             ColourIsOwned(ffi::wxColour_new2(colour_name))
         }
     }
@@ -461,7 +469,8 @@ impl<const OWNED: bool> ColourPickerCtrlIsOwned<OWNED> {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let validator = validator.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ColourPickerCtrlIsOwned(ffi::wxColourPickerCtrl_new1(
                 parent, id, colour, pos, size, style, validator, name,
             ))
@@ -508,12 +517,14 @@ impl<const OWNED: bool> ComboBoxIsOwned<OWNED> {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let value = wx_string_from(value);
+            let value = WxString::from(value);
+            let value = value.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let choices = choices.as_ptr();
             let validator = validator.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ComboBoxIsOwned(ffi::wxComboBox_new2(
                 parent, id, value, pos, size, choices, style, validator, name,
             ))
@@ -587,7 +598,8 @@ impl<const OWNED: bool> ControlIsOwned<OWNED> {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let validator = validator.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ControlIsOwned(ffi::wxControl_new(
                 parent, id, pos, size, style, validator, name,
             ))
@@ -639,7 +651,8 @@ impl<const OWNED: bool> DatePickerCtrlIsOwned<OWNED> {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let validator = validator.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             DatePickerCtrlIsOwned(ffi::wxDatePickerCtrl_new1(
                 parent, id, dt, pos, size, style, validator, name,
             ))
@@ -678,10 +691,12 @@ impl<const OWNED: bool> FrameIsOwned<OWNED> {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let title = wx_string_from(title);
+            let title = WxString::from(title);
+            let title = title.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             FrameIsOwned(ffi::wxFrame_new1(parent, id, title, pos, size, style, name))
         }
     }
@@ -705,10 +720,12 @@ impl<const OWNED: bool> TopLevelWindowMethods for FrameIsOwned<OWNED> {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let title = wx_string_from(title);
+            let title = WxString::from(title);
+            let title = title.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxFrame_Create(self.as_ptr(), parent, id, title, pos, size, style, name)
         }
     }
@@ -819,7 +836,8 @@ impl<const OWNED: bool> ListBoxIsOwned<OWNED> {
             let size = size.as_ptr();
             let choices = choices.as_ptr();
             let validator = validator.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ListBoxIsOwned(ffi::wxListBox_new2(
                 parent, id, pos, size, choices, style, validator, name,
             ))
@@ -857,7 +875,8 @@ impl<const OWNED: bool> MenuIsOwned<OWNED> {
     }
     pub fn new_with_str(title: &str, style: c_long) -> MenuIsOwned<OWNED> {
         unsafe {
-            let title = wx_string_from(title);
+            let title = WxString::from(title);
+            let title = title.as_ptr();
             MenuIsOwned(ffi::wxMenu_new2(title, style))
         }
     }
@@ -904,8 +923,10 @@ impl<const OWNED: bool> MenuItemIsOwned<OWNED> {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let text = wx_string_from(text);
-            let help_string = wx_string_from(help_string);
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let help_string = WxString::from(help_string);
+            let help_string = help_string.as_ptr();
             let sub_menu = match sub_menu {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
@@ -975,7 +996,8 @@ impl<const OWNED: bool> NotebookIsOwned<OWNED> {
             };
             let pos = pos.as_ptr();
             let size = size.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             NotebookIsOwned(ffi::wxNotebook_new1(parent, id, pos, size, style, name))
         }
     }
@@ -1039,7 +1061,8 @@ impl<const OWNED: bool> PanelIsOwned<OWNED> {
             };
             let pos = pos.as_ptr();
             let size = size.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             PanelIsOwned(ffi::wxPanel_new1(parent, id, pos, size, style, name))
         }
     }
@@ -1064,7 +1087,8 @@ impl<const OWNED: bool> WindowMethods for PanelIsOwned<OWNED> {
             };
             let pos = pos.as_ptr();
             let size = size.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxPanel_Create(self.as_ptr(), parent, id, pos, size, style, name)
         }
     }
@@ -1150,12 +1174,14 @@ impl<const OWNED: bool> RadioBoxIsOwned<OWNED> {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let choices = choices.as_ptr();
             let validator = validator.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             RadioBoxIsOwned(ffi::wxRadioBox_new2(
                 parent,
                 id,
@@ -1325,7 +1351,8 @@ impl<const OWNED: bool> StaticBitmapIsOwned<OWNED> {
             let label = label.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             StaticBitmapIsOwned(ffi::wxStaticBitmap_new1(
                 parent, id, label, pos, size, style, name,
             ))
@@ -1363,10 +1390,12 @@ impl<const OWNED: bool> StaticBoxIsOwned<OWNED> {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             StaticBoxIsOwned(ffi::wxStaticBox_new1(
                 parent, id, label, pos, size, style, name,
             ))
@@ -1409,7 +1438,8 @@ impl<const OWNED: bool> StaticBoxSizerIsOwned<OWNED> {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             StaticBoxSizerIsOwned(ffi::wxStaticBoxSizer_new1(orient, parent, label))
         }
     }
@@ -1445,10 +1475,12 @@ impl<const OWNED: bool> StaticTextIsOwned<OWNED> {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             StaticTextIsOwned(ffi::wxStaticText_new1(
                 parent, id, label, pos, size, style, name,
             ))
@@ -1515,11 +1547,13 @@ impl<const OWNED: bool> TextCtrlIsOwned<OWNED> {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let value = wx_string_from(value);
+            let value = WxString::from(value);
+            let value = value.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let validator = validator.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             TextCtrlIsOwned(ffi::wxTextCtrl_new1(
                 parent, id, value, pos, size, style, validator, name,
             ))
@@ -1566,7 +1600,8 @@ impl<const OWNED: bool> ToolBarIsOwned<OWNED> {
             };
             let pos = pos.as_ptr();
             let size = size.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ToolBarIsOwned(ffi::wxToolBar_new1(parent, id, pos, size, style, name))
         }
     }
@@ -1602,10 +1637,12 @@ impl<const OWNED: bool> TopLevelWindowIsOwned<OWNED> {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let title = wx_string_from(title);
+            let title = WxString::from(title);
+            let title = title.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             TopLevelWindowIsOwned(ffi::wxTopLevelWindow_new1(
                 parent, id, title, pos, size, style, name,
             ))
@@ -1658,7 +1695,8 @@ impl<const OWNED: bool> WindowIsOwned<OWNED> {
             };
             let pos = pos.as_ptr();
             let size = size.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             WindowIsOwned(ffi::wxWindow_new1(parent, id, pos, size, style, name))
         }
     }

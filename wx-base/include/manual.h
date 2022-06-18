@@ -42,6 +42,7 @@ struct UTF8Data {
     size_t length;
 };
 wxString *wxString_new(const unsigned char *psz, const size_t nLength);
+void wxString_delete(wxString *self);
 UTF8Data wxString_UTF8Data(wxString *self);
 
 // (wx)String::const_iterator
