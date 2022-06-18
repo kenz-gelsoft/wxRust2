@@ -133,12 +133,12 @@ impl WidgetsFrame {
             panel,
             book,
             pages: vec![
-                datepicker_page,
                 button_page,
                 check_box_page,
                 choice_page,
                 clrpicker_page,
                 combobox_page,
+                datepicker_page,
             ],
         };
         frame.on_create();
