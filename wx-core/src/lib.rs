@@ -149,6 +149,74 @@ impl<'a, P: WindowMethods> ColourPickerCtrlBuilder<'a, P> {
     }
 }
 
+pub struct DatePickerCtrlBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    id: c_int,
+    dt: Option<DateTime>,
+    pos: Option<Point>,
+    size: Option<Size>,
+    style: c_long,
+    validator: Option<Validator>,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, DatePickerCtrlBuilder<'a, P>> for DatePickerCtrl {
+    fn builder(parent: Option<&'a P>) -> DatePickerCtrlBuilder<'a, P> {
+        DatePickerCtrlBuilder {
+            parent: parent,
+            id: ID_ANY,
+            dt: None,
+            pos: None,
+            size: None,
+            style: (DP_DEFAULT | DP_SHOWCENTURY).into(),
+            validator: None,
+        }
+    }
+}
+impl<'a, P: WindowMethods> DatePickerCtrlBuilder<'a, P> {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn dt(&mut self, dt: Option<DateTime>) -> &mut Self {
+        self.dt = dt;
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn validator(&mut self, validator: Validator) -> &mut Self {
+        self.validator = Some(validator);
+        self
+    }
+    pub fn build(&mut self) -> DatePickerCtrl {
+        let dt = self.dt.take().unwrap_or_else(|| DateTime::new());
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        let validator = self
+            .validator
+            .take()
+            .unwrap_or_else(|| Validator::default());
+        DatePickerCtrl::new(
+            self.parent,
+            self.id,
+            &dt,
+            &pos,
+            &size,
+            self.style,
+            &validator,
+            "",
+        )
+    }
+}
+
 pub struct FrameBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,

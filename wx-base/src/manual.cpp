@@ -75,6 +75,17 @@ UTF8Data wxString_UTF8Data(wxString *self) {
     };
 }
 
+// (wx)String::const_iterator
+wxString::const_iterator *wxStringConstIterator_new() {
+    return new wxString::const_iterator;
+}
+void wxStringConstIterator_delete(wxString::const_iterator *self) {
+    delete self;
+}
+size_t wxStringConstIterator_IndexIn(wxString::const_iterator *self, const wxString *s) {
+    return std::distance(s->begin(), *self);
+}
+
 // ArrayString
 wxArrayString *wxArrayString_new() {
     return new wxArrayString();
@@ -86,6 +97,10 @@ void wxArrayString_Add(wxArrayString *self, const wxString *s) {
     self->Add(*s);
 }
 
+// DateTime
+bool wxDateTime_ParseDate(wxDateTime * self, const wxString * date, wxString::const_iterator * end) {
+    return self->ParseDate(*date, end);
+}
 
 class OpaqueWeakRef : public wxTrackerNode
 {

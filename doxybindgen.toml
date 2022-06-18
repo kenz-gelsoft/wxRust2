@@ -15,6 +15,8 @@ wxml_files = [
     'wxml/classwx_combo_box.xml',
     'wxml/classwx_command_event.xml',
     'wxml/classwx_control.xml',
+    'wxml/classwx_date_picker_ctrl.xml',
+    'wxml/classwx_date_time.xml',
     'wxml/classwx_event.xml',
     'wxml/classwx_evt_handler.xml',
     'wxml/classwx_frame.xml',
@@ -121,6 +123,45 @@ blocklist = [
 [types.wxControl]
 wx31 = [
     'GetSizeFromText',
+]
+[types.wxDatePickerCtrl]
+wx31 = [
+    'SetNullText',
+]
+[types.wxDateTime]
+blocklist = [
+    'operator=1',
+    'operator+=',
+    'operator+=1',
+    'operator+',
+    'operator+1',
+    'operator-=',
+    'operator-=1',
+    'operator-',
+    'operator-1',
+    # Not supported struct tm in overload renaming
+    'Set1',
+    'GetTmNow',
+    'wxDateTime3',
+    # Not supported struct _systemtime in overload renaming
+    'wxDateTime7',
+    # Not supported string_const_itrator
+    'ParseDate',
+    'ParseFormat1',
+    'ParseFormat2',
+    # const vs non-const
+    'Add',
+    'Add2',
+    'Subtract',
+    'Subtract2',
+]
+windows = [
+    'GetAsMSWSysTime',
+    'SetFromMSWSysTime',
+]
+wx31 = [
+    'GetFirstWeekDay',
+    'GetWeekBasedYear',
 ]
 [types.wxEvent]
 returns_owned = [

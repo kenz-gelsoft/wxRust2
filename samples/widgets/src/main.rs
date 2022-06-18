@@ -22,6 +22,9 @@ use clrpicker::*;
 mod combobox;
 use combobox::*;
 
+mod datepicker;
+use datepicker::*;
+
 enum Widgets {
     ClearLog = 100,
     Quit,
@@ -124,6 +127,7 @@ impl WidgetsFrame {
         let choice_page = Rc::new(ChoiceWidgetsPage::new(&book));
         let clrpicker_page = Rc::new(ColourPickerWidgetsPage::new(&book));
         let combobox_page = Rc::new(ComboboxWidgetsPage::new(&book));
+        let datepicker_page = Rc::new(DatePickerWidgetsPage::new(&book));
         let mut frame = WidgetsFrame {
             base,
             panel,
@@ -134,6 +138,7 @@ impl WidgetsFrame {
                 choice_page,
                 clrpicker_page,
                 combobox_page,
+                datepicker_page,
             ],
         };
         frame.on_create();

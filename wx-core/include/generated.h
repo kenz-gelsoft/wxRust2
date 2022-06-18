@@ -4,6 +4,7 @@
 #include <wx/artprov.h>
 #include <wx/bookctrl.h>
 #include <wx/clrpicker.h>
+#include <wx/datectrl.h>
 #include <wx/wrapsizer.h>
 
 extern "C" {
@@ -225,6 +226,18 @@ wxString *wxControl_GetLabelText1(const wxString * label);
 wxString *wxControl_RemoveMnemonics(const wxString * str);
 wxString *wxControl_EscapeMnemonics(const wxString * text);
 wxString *wxControl_Ellipsize(const wxString * label, const wxDC * dc, wxEllipsizeMode mode, int max_width, int flags);
+
+// CLASS: wxDatePickerCtrl
+wxDatePickerCtrl *wxDatePickerCtrl_new();
+wxDatePickerCtrl *wxDatePickerCtrl_new1(wxWindow * parent, wxWindowID id, const wxDateTime * dt, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+bool wxDatePickerCtrl_Create(wxDatePickerCtrl * self, wxWindow * parent, wxWindowID id, const wxDateTime * dt, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+bool wxDatePickerCtrl_GetRange(const wxDatePickerCtrl * self, wxDateTime * dt1, wxDateTime * dt2);
+wxDateTime *wxDatePickerCtrl_GetValue(const wxDatePickerCtrl * self);
+#if wxCHECK_VERSION(3, 1, 0)
+void wxDatePickerCtrl_SetNullText(wxDatePickerCtrl * self, const wxString * text);
+#endif
+void wxDatePickerCtrl_SetRange(wxDatePickerCtrl * self, const wxDateTime * dt1, const wxDateTime * dt2);
+void wxDatePickerCtrl_SetValue(wxDatePickerCtrl * self, const wxDateTime * dt);
 
 // CLASS: wxFrame
 wxFrame *wxFrame_new();

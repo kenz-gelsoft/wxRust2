@@ -39,6 +39,11 @@ mod ffi {
         pub fn wxString_new(psz: *const c_uchar, nLength: usize) -> *mut c_void;
         pub fn wxString_UTF8Data(self_: *mut c_void) -> UTF8Data;
 
+        // (wx)String::const_iterator
+        pub fn wxStringConstIterator_new() -> *mut c_void;
+        pub fn wxStringConstIterator_delete(self_: *mut c_void);
+        pub fn wxStringConstIterator_IndexIn(self_: *mut c_void, s: *const c_void) -> usize;
+
         // ArrayString
         pub fn wxArrayString_new() -> *mut c_void;
         pub fn wxArrayString_delete(self_: *mut c_void);
@@ -50,6 +55,13 @@ mod ffi {
         pub fn OpaqueWeakRef_new(obj: *mut c_void) -> *mut c_void;
         pub fn OpaqueWeakRef_delete(self_: *mut c_void);
         pub fn OpaqueWeakRef_Get(self_: *mut c_void) -> *mut c_void;
+
+        // DateTime
+        pub fn wxDateTime_ParseDate(
+            self_: *mut c_void,
+            date: *const c_void,
+            end: *mut c_void,
+        ) -> bool;
     }
 }
 
@@ -65,6 +77,30 @@ pub mod methods {
     pub trait ArrayStringMethods: WxRustMethods {
         fn add(&self, s: &str) {
             unsafe { ffi::wxArrayString_Add(self.as_ptr(), wx_string_from(s)) }
+        }
+    }
+
+    pub trait StringConstIteratorMethods: WxRustMethods {
+        fn index_in(&self, s: *const c_void) -> usize {
+            unsafe { ffi::wxStringConstIterator_IndexIn(self.as_ptr(), s) }
+        }
+    }
+
+    // TODO: Support manual(semi-auto) binding in codegen
+    //
+    // This trait should be `DateTimeMethods` and, the base trait
+    // should be `DateTimeMethodsAuto` for API consistencey.
+    pub trait DateTimeMethodsManual: DateTimeMethods {
+        fn parse_date(&self, date: &str) -> Option<usize> {
+            unsafe {
+                let end = StringConstIterator::new();
+                let date = wx_string_from(date);
+                if ffi::wxDateTime_ParseDate(self.as_ptr(), date, end.as_ptr()) {
+                    Some(end.index_in(date))
+                } else {
+                    None
+                }
+            }
         }
     }
 }
@@ -144,6 +180,24 @@ impl<const OWNED: bool> Drop for ArrayStringIsOwned<OWNED> {
     }
 }
 
+// (wx)String::const_iterator
+wx_class! { StringConstIterator =
+    StringConstIteratorIsOwned<true>(wxStringConstIterator) impl
+        StringConstIteratorMethods
+}
+impl<const OWNED: bool> StringConstIteratorIsOwned<OWNED> {
+    pub fn new() -> Self {
+        unsafe { StringConstIteratorIsOwned(ffi::wxStringConstIterator_new()) }
+    }
+}
+impl<const OWNED: bool> Drop for StringConstIteratorIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxStringConstIterator_delete(self.0) }
+        }
+    }
+}
+
 // wxEntry
 pub fn entry() {
     let args: Vec<String> = std::env::args().collect();
@@ -190,3 +244,5 @@ impl<T> Drop for WeakRef<T> {
         unsafe { ffi::OpaqueWeakRef_delete(self.0) }
     }
 }
+
+impl<const OWNED: bool> DateTimeMethodsManual for DateTimeIsOwned<OWNED> {}

@@ -144,7 +144,15 @@ def generated_h(classes, libname):
 #include <wx/artprov.h>
 #include <wx/bookctrl.h>
 #include <wx/clrpicker.h>
+#include <wx/datectrl.h>
 #include <wx/wrapsizer.h>\
+'''
+    else:
+        yield '''\
+
+typedef wxDateTime::TimeZone TimeZone;
+typedef wxDateTime::Tm       Tm;
+typedef wxDateTime::WeekDay  WeekDay;\
 '''
     yield '''\
 

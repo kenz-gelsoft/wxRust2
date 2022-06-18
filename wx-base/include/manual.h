@@ -44,10 +44,18 @@ struct UTF8Data {
 wxString *wxString_new(const unsigned char *psz, const size_t nLength);
 UTF8Data wxString_UTF8Data(wxString *self);
 
+// (wx)String::const_iterator
+wxString::const_iterator *wxStringConstIterator_new();
+void wxStringConstIterator_delete(wxString::const_iterator *self);
+size_t wxStringConstIterator_IndexIn(wxString::const_iterator *self, const wxString *s);
+
 // ArrayString
 wxArrayString *wxArrayString_new();
 void wxArrayString_delete(wxArrayString *self);
 void wxArrayString_Add(wxArrayString *self, const wxString *s);
+
+// DateTime
+bool wxDateTime_ParseDate(wxDateTime * self, const wxString * date, wxString::const_iterator * end);
 
 // WeakRef
 void *OpaqueWeakRef_new(void *obj);

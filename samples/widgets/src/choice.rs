@@ -251,21 +251,22 @@ impl WidgetsPage for ChoiceWidgetsPage {
 
     fn handle_button(&self, event: &wx::CommandEvent) {
         println!("event={}", event.get_id());
-        if let Some(m) = ChoicePage::from(event.get_id()) {
-            if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-                match m {
-                    ChoicePage::Reset => self.on_button_reset(),
-                    ChoicePage::Change => self.on_button_change(config_ui),
-                    ChoicePage::Delete => self.on_button_delete(config_ui),
-                    ChoicePage::DeleteSel => self.on_button_delete_sel(),
-                    ChoicePage::Clear => self.on_button_clear(),
-                    ChoicePage::Add => self.on_button_add(config_ui),
-                    ChoicePage::AddSeveral => self.on_button_add_several(),
-                    ChoicePage::AddMany => self.on_button_add_many(),
-                    // TODO: Support update ui event to disable this when not 3state
-                    _ => (),
-                };
-            }
+        if let (Some(m), Some(config_ui)) = (
+            ChoicePage::from(event.get_id()),
+            self.config_ui.borrow().as_ref(),
+        ) {
+            match m {
+                ChoicePage::Reset => self.on_button_reset(),
+                ChoicePage::Change => self.on_button_change(config_ui),
+                ChoicePage::Delete => self.on_button_delete(config_ui),
+                ChoicePage::DeleteSel => self.on_button_delete_sel(),
+                ChoicePage::Clear => self.on_button_clear(),
+                ChoicePage::Add => self.on_button_add(config_ui),
+                ChoicePage::AddSeveral => self.on_button_add_several(),
+                ChoicePage::AddMany => self.on_button_add_many(),
+                // TODO: Support update ui event to disable this when not 3state
+                _ => (),
+            };
         }
     }
     fn handle_checkbox(&self, event: &wx::CommandEvent) {
@@ -357,11 +358,9 @@ impl ChoiceWidgetsPage {
 
     fn on_button_delete(&self, config_ui: &ConfigUI) {
         let n = config_ui.text_delete.get_value();
-        if let Ok(n) = n.parse() {
-            if let Some(choice) = self.choice.borrow().as_ref() {
-                if n < choice.get_count() {
-                    choice.delete(n);
-                }
+        if let (Ok(n), Some(choice)) = (n.parse(), self.choice.borrow().as_ref()) {
+            if n < choice.get_count() {
+                choice.delete(n);
             }
         }
     }

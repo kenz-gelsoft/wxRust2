@@ -179,12 +179,12 @@ class Method:
             index = ''
         return '%s%s' % (name, index)
 
-    def wrapped_return_type(self, allows_ptr):
+    def wrap_return_type(self, allows_ptr):
         if (self.is_ctor or
             self.returns_new() or 
             allows_ptr and (self.returns.is_ptr_to_binding() or
                             self.returns.is_ref_to_binding())):
-            return self.returns.typename
+            return ReturnTypeWrapper(self)
         else:
             return None
 
@@ -229,7 +229,46 @@ class Method:
             return False
         signature = self.cxx_signature()
         return any(m.cxx_signature() == signature for m in cls.methods)
+
+class ReturnTypeWrapper:
+    def __init__(self, method):
+        self.__returns = method.returns
+        self.__wrapped = self.__returns.typename
+        self.is_ctor = method.is_ctor
+        self.is_owned = method.returns_owned()
+        self.is_trackable = method.returns_trackable()
     
+    def in_cxx(self):
+        return self.__wrapped
+
+    def returns(self):
+        return self._wrap()[0]
+    
+    def call(self, call):
+        return self._wrap(call)[1]
+
+    def _wrap(self, call=""):
+        returns = self.__wrapped[2:]
+        if self.__returns.is_str():
+            return ['String',
+                    'from_wx_string(%s)' % (call,)]
+        if self.is_ctor:
+            return ['%sIsOwned<OWNED>' % (returns,),
+                    '%sIsOwned(%s)' % (returns, call)]
+        if self.__returns.is_ref_to_binding():
+            return ['%sIsOwned<false>' % (returns,),
+                    '%sIsOwned::from_ptr(%s)' % (returns, call)]
+        if self.__returns.is_ptr_to_binding():
+            if not self.is_owned:
+                if self.is_trackable:
+                    return ['WeakRef<%s>' % (returns,),
+                            'WeakRef::<%s>::from(%s)' % (returns, call)]
+                else:
+                    return ['Option<%sIsOwned<false>>' % (returns,),
+                            '%s::option_from(%s)' % (returns, call)]
+        return [returns,
+                '%s::from_ptr(%s)' % (returns, call)]
+
 class Param:
     def __init__(self, type, name):
         self.type = type
@@ -422,7 +461,7 @@ class CxxType:
     def marshal(self, param):
         name = camel_to_snake(param.name)
         if self._is_const_ref_to_string():
-            yield 'let %s = wx_base::wx_string_from(%s);' % (
+            yield 'let %s = wx_string_from(%s);' % (
                 name,
                 name,
             )

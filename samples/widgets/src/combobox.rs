@@ -421,25 +421,26 @@ impl WidgetsPage for ComboboxWidgetsPage {
 
     fn handle_button(&self, event: &wx::CommandEvent) {
         println!("event={}", event.get_id());
-        if let Some(m) = ComboPage::from(event.get_id()) {
-            if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-                match m {
-                    ComboPage::Reset => self.on_button_reset(),
-                    ComboPage::Change => self.on_button_change(config_ui),
-                    ComboPage::Delete => self.on_button_delete(config_ui),
-                    ComboPage::DeleteSel => self.on_button_delete_sel(),
-                    ComboPage::Clear => self.on_button_clear(),
-                    ComboPage::Insert => self.on_button_insert(config_ui),
-                    ComboPage::Add => self.on_button_add(config_ui),
-                    ComboPage::SetFirst => self.on_button_set_first(config_ui),
-                    ComboPage::AddSeveral => self.on_button_add_several(),
-                    ComboPage::AddMany => self.on_button_add_many(),
-                    ComboPage::SetValue => self.on_button_set_value(config_ui),
-                    ComboPage::SetCurrent => self.on_button_set_current(config_ui),
-                    // TODO: Support update ui event to disable this when not 3state
-                    _ => (),
-                };
-            }
+        if let (Some(m), Some(config_ui)) = (
+            ComboPage::from(event.get_id()),
+            self.config_ui.borrow().as_ref(),
+        ) {
+            match m {
+                ComboPage::Reset => self.on_button_reset(),
+                ComboPage::Change => self.on_button_change(config_ui),
+                ComboPage::Delete => self.on_button_delete(config_ui),
+                ComboPage::DeleteSel => self.on_button_delete_sel(),
+                ComboPage::Clear => self.on_button_clear(),
+                ComboPage::Insert => self.on_button_insert(config_ui),
+                ComboPage::Add => self.on_button_add(config_ui),
+                ComboPage::SetFirst => self.on_button_set_first(config_ui),
+                ComboPage::AddSeveral => self.on_button_add_several(),
+                ComboPage::AddMany => self.on_button_add_many(),
+                ComboPage::SetValue => self.on_button_set_value(config_ui),
+                ComboPage::SetCurrent => self.on_button_set_current(config_ui),
+                // TODO: Support update ui event to disable this when not 3state
+                _ => (),
+            };
         }
     }
     fn handle_checkbox(&self, event: &wx::CommandEvent) {
@@ -552,13 +553,11 @@ impl ComboboxWidgetsPage {
 
     fn on_button_delete(&self, config_ui: &ConfigUI) {
         let n = config_ui.text_delete.get_value();
-        if let Ok(n) = n.parse() {
-            if let Some(combobox) = self.combobox.borrow().as_ref() {
-                if n >= combobox.get_count() {
-                    return;
-                }
-                combobox.delete(n);
+        if let (Ok(n), Some(combobox)) = (n.parse(), self.combobox.borrow().as_ref()) {
+            if n >= combobox.get_count() {
+                return;
             }
+            combobox.delete(n);
         }
     }
 
@@ -640,10 +639,8 @@ impl ComboboxWidgetsPage {
 
     fn on_button_set_current(&self, config_ui: &ConfigUI) {
         let n = config_ui.text_cur.get_value();
-        if let Ok(n) = n.parse() {
-            if let Some(combobox) = self.combobox.borrow().as_ref() {
-                combobox.set_selection(n);
-            }
+        if let (Ok(n), Some(combobox)) = (n.parse(), self.combobox.borrow().as_ref()) {
+            combobox.set_selection(n);
         }
     }
 
