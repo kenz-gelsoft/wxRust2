@@ -20,7 +20,7 @@ use crate::manual::*;
 # place wxWidgets doxygen xml files in wxml/ dir and run this.
 def main():
     outpath = 'wx-base/src/constants.rs'
-    with open(outpath, 'w') as f:
+    with open(outpath, 'w', newline='\n') as f:
         print(PROLOGUE, file=f)
         for file in xml_files_in('wxml/'):
             # print(file)
