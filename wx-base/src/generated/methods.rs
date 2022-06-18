@@ -202,21 +202,21 @@ pub trait DateTimeMethods: WxRustMethods {
         unsafe {
             let format = WxString::from(format);
             let format = format.as_ptr();
-            from_wx_string(ffi::wxDateTime_Format(self.as_ptr(), format, tz))
+            WxString::from_ptr(ffi::wxDateTime_Format(self.as_ptr(), format, tz)).into()
         }
     }
     fn format_date(&self) -> String {
-        unsafe { from_wx_string(ffi::wxDateTime_FormatDate(self.as_ptr())) }
+        unsafe { WxString::from_ptr(ffi::wxDateTime_FormatDate(self.as_ptr())).into() }
     }
     // NOT_SUPPORTED: fn FormatISOCombined()
     fn format_iso_date(&self) -> String {
-        unsafe { from_wx_string(ffi::wxDateTime_FormatISODate(self.as_ptr())) }
+        unsafe { WxString::from_ptr(ffi::wxDateTime_FormatISODate(self.as_ptr())).into() }
     }
     fn format_iso_time(&self) -> String {
-        unsafe { from_wx_string(ffi::wxDateTime_FormatISOTime(self.as_ptr())) }
+        unsafe { WxString::from_ptr(ffi::wxDateTime_FormatISOTime(self.as_ptr())).into() }
     }
     fn format_time(&self) -> String {
-        unsafe { from_wx_string(ffi::wxDateTime_FormatTime(self.as_ptr())) }
+        unsafe { WxString::from_ptr(ffi::wxDateTime_FormatTime(self.as_ptr())).into() }
     }
     // BLOCKED: fn ParseDate()
     fn parse_date_time(&self, datetime: &str, end: *mut c_void) -> bool {

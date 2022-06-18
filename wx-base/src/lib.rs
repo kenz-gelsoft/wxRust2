@@ -109,19 +109,27 @@ pub mod methods {
     }
 }
 
-pub fn from_wx_string(s: *mut c_void) -> String {
-    unsafe {
-        let utf8 = ffi::wxString_UTF8Data(s);
-        let len = utf8.length;
-        return String::from_raw_parts(utf8.data, len, len);
-    }
-}
+// wxString
 pub struct WxString(*mut c_void);
 impl WxString {
+    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+        WxString(ptr)
+    }
     pub unsafe fn as_ptr(&self) -> *mut c_void {
         return self.0;
     }
-    pub fn from(s: &str) -> Self {
+}
+impl From<WxString> for String {
+    fn from(s: WxString) -> Self {
+        unsafe {
+            let utf8 = ffi::wxString_UTF8Data(s.as_ptr());
+            let len = utf8.length;
+            return String::from_raw_parts(utf8.data, len, len);
+        }
+    }
+}
+impl From<&str> for WxString {
+    fn from(s: &str) -> Self {
         unsafe { WxString(ffi::wxString_new(s.as_ptr(), s.len())) }
     }
 }

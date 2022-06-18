@@ -161,7 +161,7 @@ pub trait ArtProviderMethods: ObjectMethods {
         }
     }
     fn get_message_box_icon_id(flags: c_int) -> String {
-        unsafe { from_wx_string(ffi::wxArtProvider_GetMessageBoxIconId(flags)) }
+        unsafe { WxString::from_ptr(ffi::wxArtProvider_GetMessageBoxIconId(flags)).into() }
     }
     fn get_message_box_icon(flags: c_int) -> Icon {
         unsafe { Icon::from_ptr(ffi::wxArtProvider_GetMessageBoxIcon(flags)) }
@@ -363,7 +363,7 @@ pub trait BookCtrlBaseMethods: ControlMethods {
         unsafe { ffi::wxBookCtrlBase_SetPageImage(self.as_ptr(), page, image) }
     }
     fn get_page_text(&self, n_page: usize) -> String {
-        unsafe { from_wx_string(ffi::wxBookCtrlBase_GetPageText(self.as_ptr(), n_page)) }
+        unsafe { WxString::from_ptr(ffi::wxBookCtrlBase_GetPageText(self.as_ptr(), n_page)).into() }
     }
     fn set_page_text(&self, page: usize, text: &str) -> bool {
         unsafe {
@@ -667,7 +667,7 @@ pub trait ColourMethods: ObjectMethods {
     // NOT_SUPPORTED: fn Alpha()
     // NOT_SUPPORTED: fn Blue()
     fn get_as_string(&self, flags: c_long) -> String {
-        unsafe { from_wx_string(ffi::wxColour_GetAsString(self.as_ptr(), flags)) }
+        unsafe { WxString::from_ptr(ffi::wxColour_GetAsString(self.as_ptr(), flags)).into() }
     }
     // NOT_SUPPORTED: fn SetRGB()
     // NOT_SUPPORTED: fn SetRGBA()
@@ -861,7 +861,7 @@ pub trait CommandEventMethods: EventMethods {
         unsafe { ffi::wxCommandEvent_GetSelection(self.as_ptr()) }
     }
     fn get_string(&self) -> String {
-        unsafe { from_wx_string(ffi::wxCommandEvent_GetString(self.as_ptr())) }
+        unsafe { WxString::from_ptr(ffi::wxCommandEvent_GetString(self.as_ptr())).into() }
     }
     fn is_checked(&self) -> bool {
         unsafe { ffi::wxCommandEvent_IsChecked(self.as_ptr()) }
@@ -919,7 +919,7 @@ pub trait ControlMethods: WindowMethods {
         unsafe { ffi::wxControl_Command(self.as_ptr(), event) }
     }
     fn get_label_text(&self) -> String {
-        unsafe { from_wx_string(ffi::wxControl_GetLabelText(self.as_ptr())) }
+        unsafe { WxString::from_ptr(ffi::wxControl_GetLabelText(self.as_ptr())).into() }
     }
     fn get_size_from_text_size_int(&self, xlen: c_int, ylen: c_int) -> Size {
         unsafe {
@@ -961,21 +961,21 @@ pub trait ControlMethods: WindowMethods {
         unsafe {
             let label = WxString::from(label);
             let label = label.as_ptr();
-            from_wx_string(ffi::wxControl_GetLabelText1(label))
+            WxString::from_ptr(ffi::wxControl_GetLabelText1(label)).into()
         }
     }
     fn remove_mnemonics(str: &str) -> String {
         unsafe {
             let str = WxString::from(str);
             let str = str.as_ptr();
-            from_wx_string(ffi::wxControl_RemoveMnemonics(str))
+            WxString::from_ptr(ffi::wxControl_RemoveMnemonics(str)).into()
         }
     }
     fn escape_mnemonics(text: &str) -> String {
         unsafe {
             let text = WxString::from(text);
             let text = text.as_ptr();
-            from_wx_string(ffi::wxControl_EscapeMnemonics(text))
+            WxString::from_ptr(ffi::wxControl_EscapeMnemonics(text)).into()
         }
     }
     fn ellipsize(
@@ -988,7 +988,7 @@ pub trait ControlMethods: WindowMethods {
         unsafe {
             let label = WxString::from(label);
             let label = label.as_ptr();
-            from_wx_string(ffi::wxControl_Ellipsize(label, dc, mode, max_width, flags))
+            WxString::from_ptr(ffi::wxControl_Ellipsize(label, dc, mode, max_width, flags)).into()
         }
     }
 }
@@ -1456,9 +1456,10 @@ pub trait ItemContainerImmutableMethods: WxRustMethods {
     }
     fn get_string_selection(&self) -> String {
         unsafe {
-            from_wx_string(ffi::wxItemContainerImmutable_GetStringSelection(
+            WxString::from_ptr(ffi::wxItemContainerImmutable_GetStringSelection(
                 self.as_item_container_immutable(),
             ))
+            .into()
         }
     }
     fn select(&self, n: c_int) {
@@ -1472,10 +1473,11 @@ pub trait ItemContainerImmutableMethods: WxRustMethods {
     }
     fn get_string(&self, n: c_uint) -> String {
         unsafe {
-            from_wx_string(ffi::wxItemContainerImmutable_GetString(
+            WxString::from_ptr(ffi::wxItemContainerImmutable_GetString(
                 self.as_item_container_immutable(),
                 n,
             ))
+            .into()
         }
     }
     // BLOCKED: fn GetStrings()
@@ -1783,13 +1785,13 @@ pub trait MenuMethods: EvtHandlerMethods {
         unsafe { MenuItem::option_from(ffi::wxMenu_FindItemByPosition(self.as_ptr(), position)) }
     }
     fn get_help_string(&self, id: c_int) -> String {
-        unsafe { from_wx_string(ffi::wxMenu_GetHelpString(self.as_ptr(), id)) }
+        unsafe { WxString::from_ptr(ffi::wxMenu_GetHelpString(self.as_ptr(), id)).into() }
     }
     fn get_label(&self, id: c_int) -> String {
-        unsafe { from_wx_string(ffi::wxMenu_GetLabel(self.as_ptr(), id)) }
+        unsafe { WxString::from_ptr(ffi::wxMenu_GetLabel(self.as_ptr(), id)).into() }
     }
     fn get_label_text(&self, id: c_int) -> String {
-        unsafe { from_wx_string(ffi::wxMenu_GetLabelText(self.as_ptr(), id)) }
+        unsafe { WxString::from_ptr(ffi::wxMenu_GetLabelText(self.as_ptr(), id)).into() }
     }
     fn get_menu_item_count(&self) -> usize {
         unsafe { ffi::wxMenu_GetMenuItemCount(self.as_ptr()) }
@@ -1797,7 +1799,7 @@ pub trait MenuMethods: EvtHandlerMethods {
     // BLOCKED: fn GetMenuItems()
     // BLOCKED: fn GetMenuItems1()
     fn get_title(&self) -> String {
-        unsafe { from_wx_string(ffi::wxMenu_GetTitle(self.as_ptr())) }
+        unsafe { WxString::from_ptr(ffi::wxMenu_GetTitle(self.as_ptr())).into() }
     }
     fn insert_menuitem<M: MenuItemMethods>(
         &self,
@@ -2155,10 +2157,10 @@ pub trait MenuBarMethods: WindowMethods {
         }
     }
     fn get_help_string(&self, id: c_int) -> String {
-        unsafe { from_wx_string(ffi::wxMenuBar_GetHelpString(self.as_ptr(), id)) }
+        unsafe { WxString::from_ptr(ffi::wxMenuBar_GetHelpString(self.as_ptr(), id)).into() }
     }
     fn get_label_int(&self, id: c_int) -> String {
-        unsafe { from_wx_string(ffi::wxMenuBar_GetLabel(self.as_ptr(), id)) }
+        unsafe { WxString::from_ptr(ffi::wxMenuBar_GetLabel(self.as_ptr(), id)).into() }
     }
     // BLOCKED: fn GetLabelTop()
     fn get_menu(&self, menu_index: usize) -> WeakRef<Menu> {
@@ -2168,10 +2170,10 @@ pub trait MenuBarMethods: WindowMethods {
         unsafe { ffi::wxMenuBar_GetMenuCount(self.as_ptr()) }
     }
     fn get_menu_label(&self, pos: usize) -> String {
-        unsafe { from_wx_string(ffi::wxMenuBar_GetMenuLabel(self.as_ptr(), pos)) }
+        unsafe { WxString::from_ptr(ffi::wxMenuBar_GetMenuLabel(self.as_ptr(), pos)).into() }
     }
     fn get_menu_label_text(&self, pos: usize) -> String {
-        unsafe { from_wx_string(ffi::wxMenuBar_GetMenuLabelText(self.as_ptr(), pos)) }
+        unsafe { WxString::from_ptr(ffi::wxMenuBar_GetMenuLabelText(self.as_ptr(), pos)).into() }
     }
     fn insert<M: MenuMethods>(&self, pos: usize, menu: Option<&M>, title: &str) -> bool {
         unsafe {
@@ -2270,16 +2272,16 @@ pub trait MenuItemMethods: ObjectMethods {
     }
     // BLOCKED: fn GetFont()
     fn get_help(&self) -> String {
-        unsafe { from_wx_string(ffi::wxMenuItem_GetHelp(self.as_ptr())) }
+        unsafe { WxString::from_ptr(ffi::wxMenuItem_GetHelp(self.as_ptr())).into() }
     }
     fn get_id(&self) -> c_int {
         unsafe { ffi::wxMenuItem_GetId(self.as_ptr()) }
     }
     fn get_item_label(&self) -> String {
-        unsafe { from_wx_string(ffi::wxMenuItem_GetItemLabel(self.as_ptr())) }
+        unsafe { WxString::from_ptr(ffi::wxMenuItem_GetItemLabel(self.as_ptr())).into() }
     }
     fn get_item_label_text(&self) -> String {
-        unsafe { from_wx_string(ffi::wxMenuItem_GetItemLabelText(self.as_ptr())) }
+        unsafe { WxString::from_ptr(ffi::wxMenuItem_GetItemLabelText(self.as_ptr())).into() }
     }
     fn get_kind(&self) -> c_int {
         unsafe { ffi::wxMenuItem_GetKind(self.as_ptr()) }
@@ -2402,7 +2404,7 @@ pub trait MenuItemMethods: ObjectMethods {
         unsafe {
             let text = WxString::from(text);
             let text = text.as_ptr();
-            from_wx_string(ffi::wxMenuItem_GetLabelText(text))
+            WxString::from_ptr(ffi::wxMenuItem_GetLabelText(text)).into()
         }
     }
 }
@@ -2658,7 +2660,7 @@ pub trait RadioBoxMethods: ControlMethods {
         }
     }
     fn get_item_help_text(&self, item: c_uint) -> String {
-        unsafe { from_wx_string(ffi::wxRadioBox_GetItemHelpText(self.as_ptr(), item)) }
+        unsafe { WxString::from_ptr(ffi::wxRadioBox_GetItemHelpText(self.as_ptr(), item)).into() }
     }
     fn get_item_tool_tip(&self, item: c_uint) -> *mut c_void {
         unsafe { ffi::wxRadioBox_GetItemToolTip(self.as_ptr(), item) }
@@ -3954,10 +3956,10 @@ pub trait TextAttrMethods: WxRustMethods {
         unsafe { ColourIsOwned::from_ptr(ffi::wxTextAttr_GetBackgroundColour(self.as_ptr())) }
     }
     fn get_bullet_font(&self) -> String {
-        unsafe { from_wx_string(ffi::wxTextAttr_GetBulletFont(self.as_ptr())) }
+        unsafe { WxString::from_ptr(ffi::wxTextAttr_GetBulletFont(self.as_ptr())).into() }
     }
     fn get_bullet_name(&self) -> String {
-        unsafe { from_wx_string(ffi::wxTextAttr_GetBulletName(self.as_ptr())) }
+        unsafe { WxString::from_ptr(ffi::wxTextAttr_GetBulletName(self.as_ptr())).into() }
     }
     fn get_bullet_number(&self) -> c_int {
         unsafe { ffi::wxTextAttr_GetBulletNumber(self.as_ptr()) }
@@ -3966,10 +3968,10 @@ pub trait TextAttrMethods: WxRustMethods {
         unsafe { ffi::wxTextAttr_GetBulletStyle(self.as_ptr()) }
     }
     fn get_bullet_text(&self) -> String {
-        unsafe { from_wx_string(ffi::wxTextAttr_GetBulletText(self.as_ptr())) }
+        unsafe { WxString::from_ptr(ffi::wxTextAttr_GetBulletText(self.as_ptr())).into() }
     }
     fn get_character_style_name(&self) -> String {
-        unsafe { from_wx_string(ffi::wxTextAttr_GetCharacterStyleName(self.as_ptr())) }
+        unsafe { WxString::from_ptr(ffi::wxTextAttr_GetCharacterStyleName(self.as_ptr())).into() }
     }
     fn get_flags(&self) -> c_long {
         unsafe { ffi::wxTextAttr_GetFlags(self.as_ptr()) }
@@ -3980,7 +3982,7 @@ pub trait TextAttrMethods: WxRustMethods {
     }
     // NOT_SUPPORTED: fn GetFontEncoding()
     fn get_font_face_name(&self) -> String {
-        unsafe { from_wx_string(ffi::wxTextAttr_GetFontFaceName(self.as_ptr())) }
+        unsafe { WxString::from_ptr(ffi::wxTextAttr_GetFontFaceName(self.as_ptr())).into() }
     }
     // NOT_SUPPORTED: fn GetFontFamily()
     fn get_font_size(&self) -> c_int {
@@ -4005,7 +4007,7 @@ pub trait TextAttrMethods: WxRustMethods {
         unsafe { ffi::wxTextAttr_GetLineSpacing(self.as_ptr()) }
     }
     fn get_list_style_name(&self) -> String {
-        unsafe { from_wx_string(ffi::wxTextAttr_GetListStyleName(self.as_ptr())) }
+        unsafe { WxString::from_ptr(ffi::wxTextAttr_GetListStyleName(self.as_ptr())).into() }
     }
     fn get_outline_level(&self) -> c_int {
         unsafe { ffi::wxTextAttr_GetOutlineLevel(self.as_ptr()) }
@@ -4017,7 +4019,7 @@ pub trait TextAttrMethods: WxRustMethods {
         unsafe { ffi::wxTextAttr_GetParagraphSpacingBefore(self.as_ptr()) }
     }
     fn get_paragraph_style_name(&self) -> String {
-        unsafe { from_wx_string(ffi::wxTextAttr_GetParagraphStyleName(self.as_ptr())) }
+        unsafe { WxString::from_ptr(ffi::wxTextAttr_GetParagraphStyleName(self.as_ptr())).into() }
     }
     fn get_right_indent(&self) -> c_long {
         unsafe { ffi::wxTextAttr_GetRightIndent(self.as_ptr()) }
@@ -4033,7 +4035,7 @@ pub trait TextAttrMethods: WxRustMethods {
         unsafe { ffi::wxTextAttr_GetTextEffects(self.as_ptr()) }
     }
     fn get_url(&self) -> String {
-        unsafe { from_wx_string(ffi::wxTextAttr_GetURL(self.as_ptr())) }
+        unsafe { WxString::from_ptr(ffi::wxTextAttr_GetURL(self.as_ptr())).into() }
     }
     fn has_alignment(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasAlignment(self.as_ptr()) }
@@ -4353,7 +4355,7 @@ pub trait TextCtrlMethods: ControlMethods {
         unsafe { ffi::wxTextCtrl_GetLineLength(self.as_ptr(), line_no) }
     }
     fn get_line_text(&self, line_no: c_long) -> String {
-        unsafe { from_wx_string(ffi::wxTextCtrl_GetLineText(self.as_ptr(), line_no)) }
+        unsafe { WxString::from_ptr(ffi::wxTextCtrl_GetLineText(self.as_ptr(), line_no)).into() }
     }
     fn get_number_of_lines(&self) -> c_int {
         unsafe { ffi::wxTextCtrl_GetNumberOfLines(self.as_ptr()) }
@@ -4492,16 +4494,20 @@ pub trait TextEntryMethods: WxRustMethods {
     }
     // NOT_SUPPORTED: fn GetLastPosition()
     fn get_range(&self, from: c_long, to: c_long) -> String {
-        unsafe { from_wx_string(ffi::wxTextEntry_GetRange(self.as_text_entry(), from, to)) }
+        unsafe {
+            WxString::from_ptr(ffi::wxTextEntry_GetRange(self.as_text_entry(), from, to)).into()
+        }
     }
     fn get_selection_long(&self, from: *mut c_void, to: *mut c_void) {
         unsafe { ffi::wxTextEntry_GetSelection(self.as_text_entry(), from, to) }
     }
     fn get_string_selection(&self) -> String {
-        unsafe { from_wx_string(ffi::wxTextEntry_GetStringSelection(self.as_text_entry())) }
+        unsafe {
+            WxString::from_ptr(ffi::wxTextEntry_GetStringSelection(self.as_text_entry())).into()
+        }
     }
     fn get_value(&self) -> String {
-        unsafe { from_wx_string(ffi::wxTextEntry_GetValue(self.as_text_entry())) }
+        unsafe { WxString::from_ptr(ffi::wxTextEntry_GetValue(self.as_text_entry())).into() }
     }
     fn is_editable(&self) -> bool {
         unsafe { ffi::wxTextEntry_IsEditable(self.as_text_entry()) }
@@ -4552,7 +4558,7 @@ pub trait TextEntryMethods: WxRustMethods {
         }
     }
     fn get_hint(&self) -> String {
-        unsafe { from_wx_string(ffi::wxTextEntry_GetHint(self.as_text_entry())) }
+        unsafe { WxString::from_ptr(ffi::wxTextEntry_GetHint(self.as_text_entry())).into() }
     }
     fn set_margins_point<P: PointMethods>(&self, pt: &P) -> bool {
         unsafe {
@@ -4770,7 +4776,7 @@ pub trait ToolBarMethods: ControlMethods {
         unsafe { ffi::wxToolBar_GetToolEnabled(self.as_ptr(), tool_id) }
     }
     fn get_tool_long_help(&self, tool_id: c_int) -> String {
-        unsafe { from_wx_string(ffi::wxToolBar_GetToolLongHelp(self.as_ptr(), tool_id)) }
+        unsafe { WxString::from_ptr(ffi::wxToolBar_GetToolLongHelp(self.as_ptr(), tool_id)).into() }
     }
     fn get_tool_packing(&self) -> c_int {
         unsafe { ffi::wxToolBar_GetToolPacking(self.as_ptr()) }
@@ -4782,7 +4788,9 @@ pub trait ToolBarMethods: ControlMethods {
         unsafe { ffi::wxToolBar_GetToolSeparation(self.as_ptr()) }
     }
     fn get_tool_short_help(&self, tool_id: c_int) -> String {
-        unsafe { from_wx_string(ffi::wxToolBar_GetToolShortHelp(self.as_ptr(), tool_id)) }
+        unsafe {
+            WxString::from_ptr(ffi::wxToolBar_GetToolShortHelp(self.as_ptr(), tool_id)).into()
+        }
     }
     fn get_tool_size(&self) -> Size {
         unsafe { Size::from_ptr(ffi::wxToolBar_GetToolSize(self.as_ptr())) }
@@ -5047,7 +5055,7 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     }
     // BLOCKED: fn GetIcons()
     fn get_title(&self) -> String {
-        unsafe { from_wx_string(ffi::wxTopLevelWindow_GetTitle(self.as_ptr())) }
+        unsafe { WxString::from_ptr(ffi::wxTopLevelWindow_GetTitle(self.as_ptr())).into() }
     }
     fn iconize(&self, iconize: bool) {
         unsafe { ffi::wxTopLevelWindow_Iconize(self.as_ptr(), iconize) }
@@ -6069,7 +6077,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     // NOT_SUPPORTED: fn ShowWithEffect()
     fn get_help_text(&self) -> String {
-        unsafe { from_wx_string(ffi::wxWindow_GetHelpText(self.as_ptr())) }
+        unsafe { WxString::from_ptr(ffi::wxWindow_GetHelpText(self.as_ptr())).into() }
     }
     fn set_help_text(&self, help_text: &str) {
         unsafe {
@@ -6083,7 +6091,7 @@ pub trait WindowMethods: EvtHandlerMethods {
         unsafe { ffi::wxWindow_GetToolTip(self.as_ptr()) }
     }
     fn get_tool_tip_text(&self) -> String {
-        unsafe { from_wx_string(ffi::wxWindow_GetToolTipText(self.as_ptr())) }
+        unsafe { WxString::from_ptr(ffi::wxWindow_GetToolTipText(self.as_ptr())).into() }
     }
     fn set_tool_tip_str(&self, tip_string: &str) {
         unsafe {
@@ -6157,7 +6165,7 @@ pub trait WindowMethods: EvtHandlerMethods {
         unsafe { ffi::wxWindow_GetId(self.as_ptr()) }
     }
     fn get_label(&self) -> String {
-        unsafe { from_wx_string(ffi::wxWindow_GetLabel(self.as_ptr())) }
+        unsafe { WxString::from_ptr(ffi::wxWindow_GetLabel(self.as_ptr())).into() }
     }
     fn get_layout_direction(&self) -> c_int {
         unsafe { ffi::wxWindow_GetLayoutDirection(self.as_ptr()) }
@@ -6166,7 +6174,7 @@ pub trait WindowMethods: EvtHandlerMethods {
         unsafe { ffi::wxWindow_AdjustForLayoutDirection(self.as_ptr(), x, width, width_total) }
     }
     fn get_name(&self) -> String {
-        unsafe { from_wx_string(ffi::wxWindow_GetName(self.as_ptr())) }
+        unsafe { WxString::from_ptr(ffi::wxWindow_GetName(self.as_ptr())).into() }
     }
     // NOT_SUPPORTED: fn GetWindowVariant()
     fn set_id(&self, winid: c_int) {

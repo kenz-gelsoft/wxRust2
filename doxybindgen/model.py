@@ -251,7 +251,7 @@ class ReturnTypeWrapper:
         returns = self.__wrapped[2:]
         if self.__returns.is_str():
             return ['String',
-                    'from_wx_string(%s)' % (call,)]
+                    'WxString::from_ptr(%s).into()' % (call,)]
         if self.is_ctor:
             return ['%sIsOwned<OWNED>' % (returns,),
                     '%sIsOwned(%s)' % (returns, call)]
