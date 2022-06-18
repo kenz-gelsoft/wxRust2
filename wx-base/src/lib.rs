@@ -2,6 +2,8 @@ use std::marker::PhantomData;
 use std::mem;
 use std::os::raw::{c_char, c_int, c_void};
 use std::ptr;
+use std::slice;
+use std::str;
 
 mod macros;
 
@@ -118,14 +120,18 @@ impl WxString {
     pub unsafe fn as_ptr(&self) -> *mut c_void {
         return self.0;
     }
+    pub fn to_str<'a>(&'a self) -> &'a str {
+        unsafe {
+            let utf8 = ffi::wxString_UTF8Data(self.as_ptr());
+            let len = utf8.length;
+            let slice = slice::from_raw_parts(utf8.data, len);
+            str::from_utf8_unchecked(slice)
+        }
+    }
 }
 impl From<WxString> for String {
     fn from(s: WxString) -> Self {
-        unsafe {
-            let utf8 = ffi::wxString_UTF8Data(s.as_ptr());
-            let len = utf8.length;
-            return String::from_raw_parts(utf8.data, len, len);
-        }
+        s.to_str().to_owned()
     }
 }
 impl From<&str> for WxString {
