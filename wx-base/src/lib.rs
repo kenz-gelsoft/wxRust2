@@ -1,4 +1,3 @@
-use std::convert::TryInto;
 use std::marker::PhantomData;
 use std::mem;
 use std::os::raw::{c_char, c_int, c_void};
@@ -37,6 +36,7 @@ mod ffi {
 
         // String
         pub fn wxString_new(psz: *const c_uchar, nLength: usize) -> *mut c_void;
+        pub fn wxString_delete(self_: *mut c_void);
         pub fn wxString_UTF8Data(self_: *mut c_void) -> UTF8Data;
 
         // (wx)String::const_iterator
@@ -76,7 +76,10 @@ pub mod methods {
 
     pub trait ArrayStringMethods: WxRustMethods {
         fn add(&self, s: &str) {
-            unsafe { ffi::wxArrayString_Add(self.as_ptr(), wx_string_from(s)) }
+            unsafe {
+                let s = WxString::from(s);
+                ffi::wxArrayString_Add(self.as_ptr(), s.as_ptr())
+            }
         }
     }
 
@@ -94,7 +97,8 @@ pub mod methods {
         fn parse_date(&self, date: &str) -> Option<usize> {
             unsafe {
                 let end = StringConstIterator::new();
-                let date = wx_string_from(date);
+                let date = WxString::from(date);
+                let date = date.as_ptr();
                 if ffi::wxDateTime_ParseDate(self.as_ptr(), date, end.as_ptr()) {
                     Some(end.index_in(date))
                 } else {
@@ -112,8 +116,19 @@ pub fn from_wx_string(s: *mut c_void) -> String {
         return String::from_raw_parts(utf8.data, len, len);
     }
 }
-pub unsafe fn wx_string_from(s: &str) -> *const c_void {
-    return ffi::wxString_new(s.as_ptr(), s.len());
+pub struct WxString(*mut c_void);
+impl WxString {
+    pub unsafe fn as_ptr(&self) -> *mut c_void {
+        return self.0;
+    }
+    pub fn from(s: &str) -> Self {
+        unsafe { WxString(ffi::wxString_new(s.as_ptr(), s.len())) }
+    }
+}
+impl Drop for WxString {
+    fn drop(&mut self) {
+        unsafe { ffi::wxString_delete(self.0) }
+    }
 }
 
 // Rust closure to wx calablle function+param pair.

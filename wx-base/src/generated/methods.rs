@@ -200,7 +200,8 @@ pub trait DateTimeMethods: WxRustMethods {
     // NOT_SUPPORTED: fn operator-2()
     fn format(&self, format: &str, tz: *const c_void) -> String {
         unsafe {
-            let format = wx_string_from(format);
+            let format = WxString::from(format);
+            let format = format.as_ptr();
             from_wx_string(ffi::wxDateTime_Format(self.as_ptr(), format, tz))
         }
     }
@@ -220,7 +221,8 @@ pub trait DateTimeMethods: WxRustMethods {
     // BLOCKED: fn ParseDate()
     fn parse_date_time(&self, datetime: &str, end: *mut c_void) -> bool {
         unsafe {
-            let datetime = wx_string_from(datetime);
+            let datetime = WxString::from(datetime);
+            let datetime = datetime.as_ptr();
             ffi::wxDateTime_ParseDateTime(self.as_ptr(), datetime, end)
         }
     }
@@ -232,8 +234,10 @@ pub trait DateTimeMethods: WxRustMethods {
         end: *mut c_void,
     ) -> bool {
         unsafe {
-            let date = wx_string_from(date);
-            let format = wx_string_from(format);
+            let date = WxString::from(date);
+            let date = date.as_ptr();
+            let format = WxString::from(format);
+            let format = format.as_ptr();
             let date_def = date_def.as_ptr();
             ffi::wxDateTime_ParseFormat(self.as_ptr(), date, format, date_def, end)
         }
@@ -243,25 +247,29 @@ pub trait DateTimeMethods: WxRustMethods {
     // NOT_SUPPORTED: fn ParseISOCombined()
     fn parse_iso_date(&self, date: &str) -> bool {
         unsafe {
-            let date = wx_string_from(date);
+            let date = WxString::from(date);
+            let date = date.as_ptr();
             ffi::wxDateTime_ParseISODate(self.as_ptr(), date)
         }
     }
     fn parse_iso_time(&self, date: &str) -> bool {
         unsafe {
-            let date = wx_string_from(date);
+            let date = WxString::from(date);
+            let date = date.as_ptr();
             ffi::wxDateTime_ParseISOTime(self.as_ptr(), date)
         }
     }
     fn parse_rfc822_date(&self, date: &str, end: *mut c_void) -> bool {
         unsafe {
-            let date = wx_string_from(date);
+            let date = WxString::from(date);
+            let date = date.as_ptr();
             ffi::wxDateTime_ParseRfc822Date(self.as_ptr(), date, end)
         }
     }
     fn parse_time(&self, time: &str, end: *mut c_void) -> bool {
         unsafe {
-            let time = wx_string_from(time);
+            let time = WxString::from(time);
+            let time = time.as_ptr();
             ffi::wxDateTime_ParseTime(self.as_ptr(), time, end)
         }
     }

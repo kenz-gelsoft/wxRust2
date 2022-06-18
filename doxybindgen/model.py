@@ -461,11 +461,14 @@ class CxxType:
     def marshal(self, param):
         name = camel_to_snake(param.name)
         if self._is_const_ref_to_string():
-            yield 'let %s = wx_string_from(%s);' % (
+            # This variable keeps temporary wxString object in this scope.
+            yield 'let %s = WxString::from(%s);' % (
                 name,
                 name,
             )
-        if self.is_const_ref_to_binding():
+        if (self.is_const_ref_to_binding() or
+            # So, taking pointer must be another expression for its lifetime.
+            self._is_const_ref_to_string()):
             yield 'let %s = %s;' % (
                 name,
                 param.rust_ffi_ref(),

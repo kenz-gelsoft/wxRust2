@@ -93,29 +93,35 @@ pub trait ArtProviderMethods: ObjectMethods {
     }
     fn get_bitmap<S: SizeMethods>(id: &str, client: &str, size: &S) -> Bitmap {
         unsafe {
-            let id = wx_string_from(id);
-            let client = wx_string_from(client);
+            let id = WxString::from(id);
+            let id = id.as_ptr();
+            let client = WxString::from(client);
+            let client = client.as_ptr();
             let size = size.as_ptr();
             Bitmap::from_ptr(ffi::wxArtProvider_GetBitmap(id, client, size))
         }
     }
     fn get_icon<S: SizeMethods>(id: &str, client: &str, size: &S) -> Icon {
         unsafe {
-            let id = wx_string_from(id);
-            let client = wx_string_from(client);
+            let id = WxString::from(id);
+            let id = id.as_ptr();
+            let client = WxString::from(client);
+            let client = client.as_ptr();
             let size = size.as_ptr();
             Icon::from_ptr(ffi::wxArtProvider_GetIcon(id, client, size))
         }
     }
     fn get_native_size_hint(client: &str) -> Size {
         unsafe {
-            let client = wx_string_from(client);
+            let client = WxString::from(client);
+            let client = client.as_ptr();
             Size::from_ptr(ffi::wxArtProvider_GetNativeSizeHint(client))
         }
     }
     fn get_size_hint(client: &str, platform_default: bool) -> Size {
         unsafe {
-            let client = wx_string_from(client);
+            let client = WxString::from(client);
+            let client = client.as_ptr();
             Size::from_ptr(ffi::wxArtProvider_GetSizeHint(client, platform_default))
         }
     }
@@ -246,7 +252,8 @@ pub trait BitmapMethods: GDIObjectMethods {
     }
     fn find_handler(name: &str) -> *mut c_void {
         unsafe {
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxBitmap_FindHandler(name)
         }
     }
@@ -264,7 +271,8 @@ pub trait BitmapMethods: GDIObjectMethods {
     }
     fn remove_handler(name: &str) -> bool {
         unsafe {
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxBitmap_RemoveHandler(name)
         }
     }
@@ -298,7 +306,8 @@ pub trait BitmapButtonMethods: ButtonMethods {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let validator = validator.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxBitmapButton_Create(
                 self.as_ptr(),
                 parent,
@@ -323,7 +332,8 @@ pub trait BitmapButtonMethods: ButtonMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxBitmapButton_CreateCloseButton(self.as_ptr(), parent, winid, name)
         }
     }
@@ -337,7 +347,8 @@ pub trait BitmapButtonMethods: ButtonMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             WeakRef::<BitmapButton>::from(ffi::wxBitmapButton_NewCloseButton(parent, winid, name))
         }
     }
@@ -356,7 +367,8 @@ pub trait BookCtrlBaseMethods: ControlMethods {
     }
     fn set_page_text(&self, page: usize, text: &str) -> bool {
         unsafe {
-            let text = wx_string_from(text);
+            let text = WxString::from(text);
+            let text = text.as_ptr();
             ffi::wxBookCtrlBase_SetPageText(self.as_ptr(), page, text)
         }
     }
@@ -408,7 +420,8 @@ pub trait BookCtrlBaseMethods: ControlMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let text = wx_string_from(text);
+            let text = WxString::from(text);
+            let text = text.as_ptr();
             ffi::wxBookCtrlBase_AddPage(self.as_ptr(), page, text, select, image_id)
         }
     }
@@ -431,7 +444,8 @@ pub trait BookCtrlBaseMethods: ControlMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let text = wx_string_from(text);
+            let text = WxString::from(text);
+            let text = text.as_ptr();
             ffi::wxBookCtrlBase_InsertPage(self.as_ptr(), index, page, text, select, image_id)
         }
     }
@@ -487,11 +501,13 @@ pub trait ButtonMethods: AnyButtonMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let validator = validator.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxButton_Create(
                 self.as_ptr(),
                 parent,
@@ -544,11 +560,13 @@ pub trait CheckBoxMethods: ControlMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let validator = validator.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxCheckBox_Create(
                 self.as_ptr(),
                 parent,
@@ -615,7 +633,8 @@ pub trait ChoiceMethods: ControlMethods {
             let size = size.as_ptr();
             let choices = choices.as_ptr();
             let validator = validator.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxChoice_Create1(
                 self.as_ptr(),
                 parent,
@@ -670,7 +689,8 @@ pub trait ColourMethods: ObjectMethods {
     // NOT_SUPPORTED: fn Set1()
     fn set(&self, str: &str) -> bool {
         unsafe {
-            let str = wx_string_from(str);
+            let str = WxString::from(str);
+            let str = str.as_ptr();
             ffi::wxColour_Set2(self.as_ptr(), str)
         }
     }
@@ -730,7 +750,8 @@ pub trait ColourPickerCtrlMethods: PickerBaseMethods {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let validator = validator.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxColourPickerCtrl_Create(
                 self.as_ptr(),
                 parent,
@@ -783,12 +804,14 @@ pub trait ComboBoxMethods: ControlMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let value = wx_string_from(value);
+            let value = WxString::from(value);
+            let value = value.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let choices = choices.as_ptr();
             let validator = validator.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxComboBox_Create1(
                 self.as_ptr(),
                 parent,
@@ -860,7 +883,8 @@ pub trait CommandEventMethods: EventMethods {
     }
     fn set_string(&self, string: &str) {
         unsafe {
-            let string = wx_string_from(string);
+            let string = WxString::from(string);
+            let string = string.as_ptr();
             ffi::wxCommandEvent_SetString(self.as_ptr(), string)
         }
     }
@@ -886,7 +910,8 @@ pub trait ControlMethods: WindowMethods {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let validator = validator.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxControl_Create(self.as_ptr(), parent, id, pos, size, style, validator, name)
         }
     }
@@ -913,37 +938,43 @@ pub trait ControlMethods: WindowMethods {
     }
     fn get_size_from_text(&self, text: &str) -> Size {
         unsafe {
-            let text = wx_string_from(text);
+            let text = WxString::from(text);
+            let text = text.as_ptr();
             Size::from_ptr(ffi::wxControl_GetSizeFromText(self.as_ptr(), text))
         }
     }
     fn set_label_text(&self, text: &str) {
         unsafe {
-            let text = wx_string_from(text);
+            let text = WxString::from(text);
+            let text = text.as_ptr();
             ffi::wxControl_SetLabelText(self.as_ptr(), text)
         }
     }
     fn set_label_markup(&self, markup: &str) -> bool {
         unsafe {
-            let markup = wx_string_from(markup);
+            let markup = WxString::from(markup);
+            let markup = markup.as_ptr();
             ffi::wxControl_SetLabelMarkup(self.as_ptr(), markup)
         }
     }
     fn get_label_text_str(label: &str) -> String {
         unsafe {
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             from_wx_string(ffi::wxControl_GetLabelText1(label))
         }
     }
     fn remove_mnemonics(str: &str) -> String {
         unsafe {
-            let str = wx_string_from(str);
+            let str = WxString::from(str);
+            let str = str.as_ptr();
             from_wx_string(ffi::wxControl_RemoveMnemonics(str))
         }
     }
     fn escape_mnemonics(text: &str) -> String {
         unsafe {
-            let text = wx_string_from(text);
+            let text = WxString::from(text);
+            let text = text.as_ptr();
             from_wx_string(ffi::wxControl_EscapeMnemonics(text))
         }
     }
@@ -955,7 +986,8 @@ pub trait ControlMethods: WindowMethods {
         flags: c_int,
     ) -> String {
         unsafe {
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             from_wx_string(ffi::wxControl_Ellipsize(label, dc, mode, max_width, flags))
         }
     }
@@ -989,7 +1021,8 @@ pub trait DatePickerCtrlMethods: ControlMethods {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let validator = validator.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxDatePickerCtrl_Create(
                 self.as_ptr(),
                 parent,
@@ -1025,7 +1058,8 @@ pub trait DatePickerCtrlMethods: ControlMethods {
     }
     fn set_null_text(&self, text: &str) {
         unsafe {
-            let text = wx_string_from(text);
+            let text = WxString::from(text);
+            let text = text.as_ptr();
             ffi::wxDatePickerCtrl_SetNullText(self.as_ptr(), text)
         }
     }
@@ -1055,19 +1089,22 @@ pub trait FrameMethods: TopLevelWindowMethods {
         name: &str,
     ) -> *mut c_void {
         unsafe {
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxFrame_CreateStatusBar(self.as_ptr(), number, style, id, name)
         }
     }
     fn create_tool_bar(&self, style: c_long, id: c_int, name: &str) -> WeakRef<ToolBar> {
         unsafe {
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             WeakRef::<ToolBar>::from(ffi::wxFrame_CreateToolBar(self.as_ptr(), style, id, name))
         }
     }
     fn do_give_help(&self, text: &str, show: bool) {
         unsafe {
-            let text = wx_string_from(text);
+            let text = WxString::from(text);
+            let text = text.as_ptr();
             ffi::wxFrame_DoGiveHelp(self.as_ptr(), text, show)
         }
     }
@@ -1091,13 +1128,15 @@ pub trait FrameMethods: TopLevelWindowMethods {
         name: &str,
     ) -> *mut c_void {
         unsafe {
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxFrame_OnCreateStatusBar(self.as_ptr(), number, style, id, name)
         }
     }
     fn on_create_tool_bar(&self, style: c_long, id: c_int, name: &str) -> WeakRef<ToolBar> {
         unsafe {
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             WeakRef::<ToolBar>::from(ffi::wxFrame_OnCreateToolBar(self.as_ptr(), style, id, name))
         }
     }
@@ -1121,7 +1160,8 @@ pub trait FrameMethods: TopLevelWindowMethods {
     }
     fn set_status_text(&self, text: &str, number: c_int) {
         unsafe {
-            let text = wx_string_from(text);
+            let text = WxString::from(text);
+            let text = text.as_ptr();
             ffi::wxFrame_SetStatusText(self.as_ptr(), text, number)
         }
     }
@@ -1142,7 +1182,8 @@ pub trait FrameMethods: TopLevelWindowMethods {
     }
     fn push_status_text(&self, text: &str, number: c_int) {
         unsafe {
-            let text = wx_string_from(text);
+            let text = WxString::from(text);
+            let text = text.as_ptr();
             ffi::wxFrame_PushStatusText(self.as_ptr(), text, number)
         }
     }
@@ -1195,19 +1236,22 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     fn as_item_container(&self) -> *mut c_void;
     fn append_str(&self, item: &str) -> c_int {
         unsafe {
-            let item = wx_string_from(item);
+            let item = WxString::from(item);
+            let item = item.as_ptr();
             ffi::wxItemContainer_Append(self.as_item_container(), item)
         }
     }
     fn append_str_void(&self, item: &str, client_data: *mut c_void) -> c_int {
         unsafe {
-            let item = wx_string_from(item);
+            let item = WxString::from(item);
+            let item = item.as_ptr();
             ffi::wxItemContainer_Append1(self.as_item_container(), item, client_data)
         }
     }
     fn append_str_clientdata(&self, item: &str, client_data: *mut c_void) -> c_int {
         unsafe {
-            let item = wx_string_from(item);
+            let item = WxString::from(item);
+            let item = item.as_ptr();
             ffi::wxItemContainer_Append2(self.as_item_container(), item, client_data)
         }
     }
@@ -1284,19 +1328,22 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     }
     fn insert_str(&self, item: &str, pos: c_uint) -> c_int {
         unsafe {
-            let item = wx_string_from(item);
+            let item = WxString::from(item);
+            let item = item.as_ptr();
             ffi::wxItemContainer_Insert(self.as_item_container(), item, pos)
         }
     }
     fn insert_str_void(&self, item: &str, pos: c_uint, client_data: *mut c_void) -> c_int {
         unsafe {
-            let item = wx_string_from(item);
+            let item = WxString::from(item);
+            let item = item.as_ptr();
             ffi::wxItemContainer_Insert1(self.as_item_container(), item, pos, client_data)
         }
     }
     fn insert_str_clientdata(&self, item: &str, pos: c_uint, client_data: *mut c_void) -> c_int {
         unsafe {
-            let item = wx_string_from(item);
+            let item = WxString::from(item);
+            let item = item.as_ptr();
             ffi::wxItemContainer_Insert2(self.as_item_container(), item, pos, client_data)
         }
     }
@@ -1399,7 +1446,8 @@ pub trait ItemContainerImmutableMethods: WxRustMethods {
     }
     fn set_string_selection(&self, string: &str) -> bool {
         unsafe {
-            let string = wx_string_from(string);
+            let string = WxString::from(string);
+            let string = string.as_ptr();
             ffi::wxItemContainerImmutable_SetStringSelection(
                 self.as_item_container_immutable(),
                 string,
@@ -1433,13 +1481,15 @@ pub trait ItemContainerImmutableMethods: WxRustMethods {
     // BLOCKED: fn GetStrings()
     fn set_string(&self, n: c_uint, string: &str) {
         unsafe {
-            let string = wx_string_from(string);
+            let string = WxString::from(string);
+            let string = string.as_ptr();
             ffi::wxItemContainerImmutable_SetString(self.as_item_container_immutable(), n, string)
         }
     }
     fn find_string(&self, string: &str, case_sensitive: bool) -> c_int {
         unsafe {
-            let string = wx_string_from(string);
+            let string = WxString::from(string);
+            let string = string.as_ptr();
             ffi::wxItemContainerImmutable_FindString(
                 self.as_item_container_immutable(),
                 string,
@@ -1479,7 +1529,8 @@ pub trait ListBoxMethods: ControlMethods {
             let size = size.as_ptr();
             let choices = choices.as_ptr();
             let validator = validator.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxListBox_Create1(
                 self.as_ptr(),
                 parent,
@@ -1498,13 +1549,15 @@ pub trait ListBoxMethods: ControlMethods {
     }
     fn set_string_selection_bool(&self, s: &str, select: bool) -> bool {
         unsafe {
-            let s = wx_string_from(s);
+            let s = WxString::from(s);
+            let s = s.as_ptr();
             ffi::wxListBox_SetStringSelection(self.as_ptr(), s, select)
         }
     }
     fn set_string_selection(&self, s: &str) -> bool {
         unsafe {
-            let s = wx_string_from(s);
+            let s = WxString::from(s);
+            let s = s.as_ptr();
             ffi::wxListBox_SetStringSelection1(self.as_ptr(), s)
         }
     }
@@ -1535,7 +1588,8 @@ pub trait ListBoxMethods: ControlMethods {
     }
     fn set_first_item_str(&self, string: &str) {
         unsafe {
-            let string = wx_string_from(string);
+            let string = WxString::from(string);
+            let string = string.as_ptr();
             ffi::wxListBox_SetFirstItem1(self.as_ptr(), string)
         }
     }
@@ -1565,8 +1619,10 @@ pub trait MenuMethods: EvtHandlerMethods {
         kind: c_int,
     ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
-            let item = wx_string_from(item);
-            let help_string = wx_string_from(help_string);
+            let item = WxString::from(item);
+            let item = item.as_ptr();
+            let help_string = WxString::from(help_string);
+            let help_string = help_string.as_ptr();
             MenuItem::option_from(ffi::wxMenu_Append(
                 self.as_ptr(),
                 id,
@@ -1584,12 +1640,14 @@ pub trait MenuMethods: EvtHandlerMethods {
         help_string: &str,
     ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
-            let item = wx_string_from(item);
+            let item = WxString::from(item);
+            let item = item.as_ptr();
             let sub_menu = match sub_menu {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let help_string = wx_string_from(help_string);
+            let help_string = WxString::from(help_string);
+            let help_string = help_string.as_ptr();
             MenuItem::option_from(ffi::wxMenu_Append1(
                 self.as_ptr(),
                 id,
@@ -1618,8 +1676,10 @@ pub trait MenuMethods: EvtHandlerMethods {
         help: &str,
     ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
-            let item = wx_string_from(item);
-            let help = wx_string_from(help);
+            let item = WxString::from(item);
+            let item = item.as_ptr();
+            let help = WxString::from(help);
+            let help = help.as_ptr();
             MenuItem::option_from(ffi::wxMenu_AppendCheckItem(self.as_ptr(), id, item, help))
         }
     }
@@ -1630,8 +1690,10 @@ pub trait MenuMethods: EvtHandlerMethods {
         help: &str,
     ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
-            let item = wx_string_from(item);
-            let help = wx_string_from(help);
+            let item = WxString::from(item);
+            let item = item.as_ptr();
+            let help = WxString::from(help);
+            let help = help.as_ptr();
             MenuItem::option_from(ffi::wxMenu_AppendRadioItem(self.as_ptr(), id, item, help))
         }
     }
@@ -1649,8 +1711,10 @@ pub trait MenuMethods: EvtHandlerMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let text = wx_string_from(text);
-            let help = wx_string_from(help);
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let help = WxString::from(help);
+            let help = help.as_ptr();
             MenuItem::option_from(ffi::wxMenu_AppendSubMenu(
                 self.as_ptr(),
                 submenu,
@@ -1697,7 +1761,8 @@ pub trait MenuMethods: EvtHandlerMethods {
     }
     fn find_item_str(&self, item_string: &str) -> c_int {
         unsafe {
-            let item_string = wx_string_from(item_string);
+            let item_string = WxString::from(item_string);
+            let item_string = item_string.as_ptr();
             ffi::wxMenu_FindItem(self.as_ptr(), item_string)
         }
     }
@@ -1756,8 +1821,10 @@ pub trait MenuMethods: EvtHandlerMethods {
         kind: c_int,
     ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
-            let item = wx_string_from(item);
-            let help_string = wx_string_from(help_string);
+            let item = WxString::from(item);
+            let item = item.as_ptr();
+            let help_string = WxString::from(help_string);
+            let help_string = help_string.as_ptr();
             MenuItem::option_from(ffi::wxMenu_Insert1(
                 self.as_ptr(),
                 pos,
@@ -1777,12 +1844,14 @@ pub trait MenuMethods: EvtHandlerMethods {
         help: &str,
     ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
-            let text = wx_string_from(text);
+            let text = WxString::from(text);
+            let text = text.as_ptr();
             let submenu = match submenu {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let help = wx_string_from(help);
+            let help = WxString::from(help);
+            let help = help.as_ptr();
             MenuItem::option_from(ffi::wxMenu_Insert2(
                 self.as_ptr(),
                 pos,
@@ -1801,8 +1870,10 @@ pub trait MenuMethods: EvtHandlerMethods {
         help_string: &str,
     ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
-            let item = wx_string_from(item);
-            let help_string = wx_string_from(help_string);
+            let item = WxString::from(item);
+            let item = item.as_ptr();
+            let help_string = WxString::from(help_string);
+            let help_string = help_string.as_ptr();
             MenuItem::option_from(ffi::wxMenu_InsertCheckItem(
                 self.as_ptr(),
                 pos,
@@ -1820,8 +1891,10 @@ pub trait MenuMethods: EvtHandlerMethods {
         help_string: &str,
     ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
-            let item = wx_string_from(item);
-            let help_string = wx_string_from(help_string);
+            let item = WxString::from(item);
+            let item = item.as_ptr();
+            let help_string = WxString::from(help_string);
+            let help_string = help_string.as_ptr();
             MenuItem::option_from(ffi::wxMenu_InsertRadioItem(
                 self.as_ptr(),
                 pos,
@@ -1861,8 +1934,10 @@ pub trait MenuMethods: EvtHandlerMethods {
         kind: c_int,
     ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
-            let item = wx_string_from(item);
-            let help_string = wx_string_from(help_string);
+            let item = WxString::from(item);
+            let item = item.as_ptr();
+            let help_string = WxString::from(help_string);
+            let help_string = help_string.as_ptr();
             MenuItem::option_from(ffi::wxMenu_Prepend1(
                 self.as_ptr(),
                 id,
@@ -1880,12 +1955,14 @@ pub trait MenuMethods: EvtHandlerMethods {
         help: &str,
     ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
-            let text = wx_string_from(text);
+            let text = WxString::from(text);
+            let text = text.as_ptr();
             let submenu = match submenu {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let help = wx_string_from(help);
+            let help = WxString::from(help);
+            let help = help.as_ptr();
             MenuItem::option_from(ffi::wxMenu_Prepend2(self.as_ptr(), id, text, submenu, help))
         }
     }
@@ -1896,8 +1973,10 @@ pub trait MenuMethods: EvtHandlerMethods {
         help_string: &str,
     ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
-            let item = wx_string_from(item);
-            let help_string = wx_string_from(help_string);
+            let item = WxString::from(item);
+            let item = item.as_ptr();
+            let help_string = WxString::from(help_string);
+            let help_string = help_string.as_ptr();
             MenuItem::option_from(ffi::wxMenu_PrependCheckItem(
                 self.as_ptr(),
                 id,
@@ -1913,8 +1992,10 @@ pub trait MenuMethods: EvtHandlerMethods {
         help_string: &str,
     ) -> Option<MenuItemIsOwned<false>> {
         unsafe {
-            let item = wx_string_from(item);
-            let help_string = wx_string_from(help_string);
+            let item = WxString::from(item);
+            let item = item.as_ptr();
+            let help_string = WxString::from(help_string);
+            let help_string = help_string.as_ptr();
             MenuItem::option_from(ffi::wxMenu_PrependRadioItem(
                 self.as_ptr(),
                 id,
@@ -1943,19 +2024,22 @@ pub trait MenuMethods: EvtHandlerMethods {
     }
     fn set_help_string(&self, id: c_int, help_string: &str) {
         unsafe {
-            let help_string = wx_string_from(help_string);
+            let help_string = WxString::from(help_string);
+            let help_string = help_string.as_ptr();
             ffi::wxMenu_SetHelpString(self.as_ptr(), id, help_string)
         }
     }
     fn set_label(&self, id: c_int, label: &str) {
         unsafe {
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             ffi::wxMenu_SetLabel(self.as_ptr(), id, label)
         }
     }
     fn set_title(&self, title: &str) {
         unsafe {
-            let title = wx_string_from(title);
+            let title = WxString::from(title);
+            let title = title.as_ptr();
             ffi::wxMenu_SetTitle(self.as_ptr(), title)
         }
     }
@@ -2024,7 +2108,8 @@ pub trait MenuBarMethods: WindowMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let title = wx_string_from(title);
+            let title = WxString::from(title);
+            let title = title.as_ptr();
             ffi::wxMenuBar_Append(self.as_ptr(), menu, title)
         }
     }
@@ -2055,14 +2140,17 @@ pub trait MenuBarMethods: WindowMethods {
     }
     fn find_menu(&self, title: &str) -> c_int {
         unsafe {
-            let title = wx_string_from(title);
+            let title = WxString::from(title);
+            let title = title.as_ptr();
             ffi::wxMenuBar_FindMenu(self.as_ptr(), title)
         }
     }
     fn find_menu_item(&self, menu_string: &str, item_string: &str) -> c_int {
         unsafe {
-            let menu_string = wx_string_from(menu_string);
-            let item_string = wx_string_from(item_string);
+            let menu_string = WxString::from(menu_string);
+            let menu_string = menu_string.as_ptr();
+            let item_string = WxString::from(item_string);
+            let item_string = item_string.as_ptr();
             ffi::wxMenuBar_FindMenuItem(self.as_ptr(), menu_string, item_string)
         }
     }
@@ -2091,7 +2179,8 @@ pub trait MenuBarMethods: WindowMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let title = wx_string_from(title);
+            let title = WxString::from(title);
+            let title = title.as_ptr();
             ffi::wxMenuBar_Insert(self.as_ptr(), pos, menu, title)
         }
     }
@@ -2110,26 +2199,30 @@ pub trait MenuBarMethods: WindowMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let title = wx_string_from(title);
+            let title = WxString::from(title);
+            let title = title.as_ptr();
             WeakRef::<Menu>::from(ffi::wxMenuBar_Replace(self.as_ptr(), pos, menu, title))
         }
     }
     fn set_help_string(&self, id: c_int, help_string: &str) {
         unsafe {
-            let help_string = wx_string_from(help_string);
+            let help_string = WxString::from(help_string);
+            let help_string = help_string.as_ptr();
             ffi::wxMenuBar_SetHelpString(self.as_ptr(), id, help_string)
         }
     }
     fn set_label_int(&self, id: c_int, label: &str) {
         unsafe {
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             ffi::wxMenuBar_SetLabel(self.as_ptr(), id, label)
         }
     }
     // BLOCKED: fn SetLabelTop()
     fn set_menu_label(&self, pos: usize, label: &str) {
         unsafe {
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             ffi::wxMenuBar_SetMenuLabel(self.as_ptr(), pos, label)
         }
     }
@@ -2254,13 +2347,15 @@ pub trait MenuItemMethods: ObjectMethods {
     }
     fn set_help(&self, help_string: &str) {
         unsafe {
-            let help_string = wx_string_from(help_string);
+            let help_string = WxString::from(help_string);
+            let help_string = help_string.as_ptr();
             ffi::wxMenuItem_SetHelp(self.as_ptr(), help_string)
         }
     }
     fn set_item_label(&self, label: &str) {
         unsafe {
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             ffi::wxMenuItem_SetItemLabel(self.as_ptr(), label)
         }
     }
@@ -2305,7 +2400,8 @@ pub trait MenuItemMethods: ObjectMethods {
     // BLOCKED: fn GetLabelFromText()
     fn get_label_text(text: &str) -> String {
         unsafe {
-            let text = wx_string_from(text);
+            let text = WxString::from(text);
+            let text = text.as_ptr();
             from_wx_string(ffi::wxMenuItem_GetLabelText(text))
         }
     }
@@ -2382,11 +2478,13 @@ pub trait PickerBaseMethods: ControlMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let text = wx_string_from(text);
+            let text = WxString::from(text);
+            let text = text.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let validator = validator.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxPickerBase_CreateBase(
                 self.as_ptr(),
                 parent,
@@ -2524,12 +2622,14 @@ pub trait RadioBoxMethods: ControlMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let choices = choices.as_ptr();
             let validator = validator.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxRadioBox_Create1(
                 self.as_ptr(),
                 parent,
@@ -2574,13 +2674,15 @@ pub trait RadioBoxMethods: ControlMethods {
     }
     fn set_item_help_text(&self, item: c_uint, helptext: &str) {
         unsafe {
-            let helptext = wx_string_from(helptext);
+            let helptext = WxString::from(helptext);
+            let helptext = helptext.as_ptr();
             ffi::wxRadioBox_SetItemHelpText(self.as_ptr(), item, helptext)
         }
     }
     fn set_item_tool_tip(&self, item: c_uint, text: &str) {
         unsafe {
-            let text = wx_string_from(text);
+            let text = WxString::from(text);
+            let text = text.as_ptr();
             ffi::wxRadioBox_SetItemToolTip(self.as_ptr(), item, text)
         }
     }
@@ -3747,7 +3849,8 @@ pub trait StaticBitmapMethods: ControlMethods {
             let label = label.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxStaticBitmap_Create(self.as_ptr(), parent, id, label, pos, size, style, name)
         }
     }
@@ -3791,10 +3894,12 @@ pub trait StaticBoxMethods: ControlMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxStaticBox_Create(self.as_ptr(), parent, id, label, pos, size, style, name)
         }
     }
@@ -3825,10 +3930,12 @@ pub trait StaticTextMethods: ControlMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxStaticText_Create(self.as_ptr(), parent, id, label, pos, size, style, name)
         }
     }
@@ -4039,13 +4146,15 @@ pub trait TextAttrMethods: WxRustMethods {
     }
     fn set_bullet_font(&self, font: &str) {
         unsafe {
-            let font = wx_string_from(font);
+            let font = WxString::from(font);
+            let font = font.as_ptr();
             ffi::wxTextAttr_SetBulletFont(self.as_ptr(), font)
         }
     }
     fn set_bullet_name(&self, name: &str) {
         unsafe {
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxTextAttr_SetBulletName(self.as_ptr(), name)
         }
     }
@@ -4057,13 +4166,15 @@ pub trait TextAttrMethods: WxRustMethods {
     }
     fn set_bullet_text(&self, text: &str) {
         unsafe {
-            let text = wx_string_from(text);
+            let text = WxString::from(text);
+            let text = text.as_ptr();
             ffi::wxTextAttr_SetBulletText(self.as_ptr(), text)
         }
     }
     fn set_character_style_name(&self, name: &str) {
         unsafe {
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxTextAttr_SetCharacterStyleName(self.as_ptr(), name)
         }
     }
@@ -4076,7 +4187,8 @@ pub trait TextAttrMethods: WxRustMethods {
     // NOT_SUPPORTED: fn SetFontEncoding()
     fn set_font_face_name(&self, face_name: &str) {
         unsafe {
-            let face_name = wx_string_from(face_name);
+            let face_name = WxString::from(face_name);
+            let face_name = face_name.as_ptr();
             ffi::wxTextAttr_SetFontFaceName(self.as_ptr(), face_name)
         }
     }
@@ -4104,7 +4216,8 @@ pub trait TextAttrMethods: WxRustMethods {
     }
     fn set_list_style_name(&self, name: &str) {
         unsafe {
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxTextAttr_SetListStyleName(self.as_ptr(), name)
         }
     }
@@ -4122,7 +4235,8 @@ pub trait TextAttrMethods: WxRustMethods {
     }
     fn set_paragraph_style_name(&self, name: &str) {
         unsafe {
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxTextAttr_SetParagraphStyleName(self.as_ptr(), name)
         }
     }
@@ -4146,7 +4260,8 @@ pub trait TextAttrMethods: WxRustMethods {
     }
     fn set_url(&self, url: &str) {
         unsafe {
-            let url = wx_string_from(url);
+            let url = WxString::from(url);
+            let url = url.as_ptr();
             ffi::wxTextAttr_SetURL(self.as_ptr(), url)
         }
     }
@@ -4205,11 +4320,13 @@ pub trait TextCtrlMethods: ControlMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let value = wx_string_from(value);
+            let value = WxString::from(value);
+            let value = value.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let validator = validator.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxTextCtrl_Create(
                 self.as_ptr(),
                 parent,
@@ -4257,7 +4374,8 @@ pub trait TextCtrlMethods: ControlMethods {
     }
     fn load_file(&self, filename: &str, file_type: c_int) -> bool {
         unsafe {
-            let filename = wx_string_from(filename);
+            let filename = WxString::from(filename);
+            let filename = filename.as_ptr();
             ffi::wxTextCtrl_LoadFile(self.as_ptr(), filename, file_type)
         }
     }
@@ -4275,7 +4393,8 @@ pub trait TextCtrlMethods: ControlMethods {
     }
     fn save_file(&self, filename: &str, file_type: c_int) -> bool {
         unsafe {
-            let filename = wx_string_from(filename);
+            let filename = WxString::from(filename);
+            let filename = filename.as_ptr();
             ffi::wxTextCtrl_SaveFile(self.as_ptr(), filename, file_type)
         }
     }
@@ -4314,7 +4433,8 @@ pub trait TextEntryMethods: WxRustMethods {
     fn as_text_entry(&self) -> *mut c_void;
     fn append_text(&self, text: &str) {
         unsafe {
-            let text = wx_string_from(text);
+            let text = WxString::from(text);
+            let text = text.as_ptr();
             ffi::wxTextEntry_AppendText(self.as_text_entry(), text)
         }
     }
@@ -4350,7 +4470,8 @@ pub trait TextEntryMethods: WxRustMethods {
     }
     fn change_value(&self, value: &str) {
         unsafe {
-            let value = wx_string_from(value);
+            let value = WxString::from(value);
+            let value = value.as_ptr();
             ffi::wxTextEntry_ChangeValue(self.as_text_entry(), value)
         }
     }
@@ -4399,7 +4520,8 @@ pub trait TextEntryMethods: WxRustMethods {
     }
     fn replace(&self, from: c_long, to: c_long, value: &str) {
         unsafe {
-            let value = wx_string_from(value);
+            let value = WxString::from(value);
+            let value = value.as_ptr();
             ffi::wxTextEntry_Replace(self.as_text_entry(), from, to, value)
         }
     }
@@ -4424,7 +4546,8 @@ pub trait TextEntryMethods: WxRustMethods {
     }
     fn set_hint(&self, hint: &str) -> bool {
         unsafe {
-            let hint = wx_string_from(hint);
+            let hint = WxString::from(hint);
+            let hint = hint.as_ptr();
             ffi::wxTextEntry_SetHint(self.as_text_entry(), hint)
         }
     }
@@ -4445,7 +4568,8 @@ pub trait TextEntryMethods: WxRustMethods {
     }
     fn set_value(&self, value: &str) {
         unsafe {
-            let value = wx_string_from(value);
+            let value = WxString::from(value);
+            let value = value.as_ptr();
             ffi::wxTextEntry_SetValue(self.as_text_entry(), value)
         }
     }
@@ -4454,7 +4578,8 @@ pub trait TextEntryMethods: WxRustMethods {
     }
     fn write_text(&self, text: &str) {
         unsafe {
-            let text = wx_string_from(text);
+            let text = WxString::from(text);
+            let text = text.as_ptr();
             ffi::wxTextEntry_WriteText(self.as_text_entry(), text)
         }
     }
@@ -4474,11 +4599,14 @@ pub trait ToolBarMethods: ControlMethods {
         client_data: Option<&O>,
     ) -> *mut c_void {
         unsafe {
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             let bitmap1 = bitmap1.as_ptr();
             let bmp_disabled = bmp_disabled.as_ptr();
-            let short_help = wx_string_from(short_help);
-            let long_help = wx_string_from(long_help);
+            let short_help = WxString::from(short_help);
+            let short_help = short_help.as_ptr();
+            let long_help = WxString::from(long_help);
+            let long_help = long_help.as_ptr();
             let client_data = match client_data {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
@@ -4501,7 +4629,8 @@ pub trait ToolBarMethods: ControlMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             ffi::wxToolBar_AddControl(self.as_ptr(), control, label)
         }
     }
@@ -4516,11 +4645,14 @@ pub trait ToolBarMethods: ControlMethods {
         client_data: Option<&O>,
     ) -> *mut c_void {
         unsafe {
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             let bitmap1 = bitmap1.as_ptr();
             let bmp_disabled = bmp_disabled.as_ptr();
-            let short_help = wx_string_from(short_help);
-            let long_help = wx_string_from(long_help);
+            let short_help = WxString::from(short_help);
+            let short_help = short_help.as_ptr();
+            let long_help = WxString::from(long_help);
+            let long_help = long_help.as_ptr();
             let client_data = match client_data {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
@@ -4555,9 +4687,11 @@ pub trait ToolBarMethods: ControlMethods {
         kind: c_int,
     ) -> *mut c_void {
         unsafe {
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             let bitmap = bitmap.as_ptr();
-            let short_help = wx_string_from(short_help);
+            let short_help = WxString::from(short_help);
+            let short_help = short_help.as_ptr();
             ffi::wxToolBar_AddTool1(self.as_ptr(), tool_id, label, bitmap, short_help, kind)
         }
     }
@@ -4573,11 +4707,14 @@ pub trait ToolBarMethods: ControlMethods {
         client_data: Option<&O>,
     ) -> *mut c_void {
         unsafe {
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             let bitmap = bitmap.as_ptr();
             let bmp_disabled = bmp_disabled.as_ptr();
-            let short_help = wx_string_from(short_help);
-            let long_help = wx_string_from(long_help);
+            let short_help = WxString::from(short_help);
+            let short_help = short_help.as_ptr();
+            let long_help = WxString::from(long_help);
+            let long_help = long_help.as_ptr();
             let client_data = match client_data {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
@@ -4667,7 +4804,8 @@ pub trait ToolBarMethods: ControlMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             ffi::wxToolBar_InsertControl(self.as_ptr(), pos, control, label)
         }
     }
@@ -4690,11 +4828,14 @@ pub trait ToolBarMethods: ControlMethods {
         client_data: Option<&O>,
     ) -> *mut c_void {
         unsafe {
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             let bitmap = bitmap.as_ptr();
             let bmp_disabled = bmp_disabled.as_ptr();
-            let short_help = wx_string_from(short_help);
-            let long_help = wx_string_from(long_help);
+            let short_help = WxString::from(short_help);
+            let short_help = short_help.as_ptr();
+            let long_help = WxString::from(long_help);
+            let long_help = long_help.as_ptr();
             let client_data = match client_data {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
@@ -4772,7 +4913,8 @@ pub trait ToolBarMethods: ControlMethods {
     }
     fn set_tool_long_help(&self, tool_id: c_int, help_string: &str) {
         unsafe {
-            let help_string = wx_string_from(help_string);
+            let help_string = WxString::from(help_string);
+            let help_string = help_string.as_ptr();
             ffi::wxToolBar_SetToolLongHelp(self.as_ptr(), tool_id, help_string)
         }
     }
@@ -4790,7 +4932,8 @@ pub trait ToolBarMethods: ControlMethods {
     }
     fn set_tool_short_help(&self, tool_id: c_int, help_string: &str) {
         unsafe {
-            let help_string = wx_string_from(help_string);
+            let help_string = WxString::from(help_string);
+            let help_string = help_string.as_ptr();
             ffi::wxToolBar_SetToolShortHelp(self.as_ptr(), tool_id, help_string)
         }
     }
@@ -4809,15 +4952,18 @@ pub trait ToolBarMethods: ControlMethods {
         long_help: &str,
     ) -> *mut c_void {
         unsafe {
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             let bmp_normal = bmp_normal.as_ptr();
             let bmp_disabled = bmp_disabled.as_ptr();
             let client_data = match client_data {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let short_help = wx_string_from(short_help);
-            let long_help = wx_string_from(long_help);
+            let short_help = WxString::from(short_help);
+            let short_help = short_help.as_ptr();
+            let long_help = WxString::from(long_help);
+            let long_help = long_help.as_ptr();
             ffi::wxToolBar_CreateTool(
                 self.as_ptr(),
                 tool_id,
@@ -4841,7 +4987,8 @@ pub trait ToolBarMethods: ControlMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             ffi::wxToolBar_CreateTool1(self.as_ptr(), control, label)
         }
     }
@@ -4868,10 +5015,12 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            let title = wx_string_from(title);
+            let title = WxString::from(title);
+            let title = title.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxTopLevelWindow_Create(self.as_ptr(), parent, id, title, pos, size, style, name)
         }
     }
@@ -4965,7 +5114,8 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     }
     fn set_title(&self, title: &str) {
         unsafe {
-            let title = wx_string_from(title);
+            let title = WxString::from(title);
+            let title = title.as_ptr();
             ffi::wxTopLevelWindow_SetTitle(self.as_ptr(), title)
         }
     }
@@ -4980,7 +5130,8 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     }
     fn set_represented_filename(&self, filename: &str) {
         unsafe {
-            let filename = wx_string_from(filename);
+            let filename = WxString::from(filename);
+            let filename = filename.as_ptr();
             ffi::wxTopLevelWindow_SetRepresentedFilename(self.as_ptr(), filename)
         }
     }
@@ -5096,7 +5247,8 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     fn find_window_str(&self, name: &str) -> WeakRef<Window> {
         unsafe {
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             WeakRef::<Window>::from(ffi::wxWindow_FindWindow1(self.as_ptr(), name))
         }
     }
@@ -5662,7 +5814,8 @@ pub trait WindowMethods: EvtHandlerMethods {
         font: *const c_void,
     ) {
         unsafe {
-            let string = wx_string_from(string);
+            let string = WxString::from(string);
+            let string = string.as_ptr();
             ffi::wxWindow_GetTextExtent(
                 self.as_ptr(),
                 string,
@@ -5676,7 +5829,8 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     fn get_text_extent(&self, string: &str) -> Size {
         unsafe {
-            let string = wx_string_from(string);
+            let string = WxString::from(string);
+            let string = string.as_ptr();
             Size::from_ptr(ffi::wxWindow_GetTextExtent1(self.as_ptr(), string))
         }
     }
@@ -5919,7 +6073,8 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     fn set_help_text(&self, help_text: &str) {
         unsafe {
-            let help_text = wx_string_from(help_text);
+            let help_text = WxString::from(help_text);
+            let help_text = help_text.as_ptr();
             ffi::wxWindow_SetHelpText(self.as_ptr(), help_text)
         }
     }
@@ -5932,7 +6087,8 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     fn set_tool_tip_str(&self, tip_string: &str) {
         unsafe {
-            let tip_string = wx_string_from(tip_string);
+            let tip_string = WxString::from(tip_string);
+            let tip_string = tip_string.as_ptr();
             ffi::wxWindow_SetToolTip(self.as_ptr(), tip_string)
         }
     }
@@ -6018,7 +6174,8 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     fn set_label(&self, label: &str) {
         unsafe {
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             ffi::wxWindow_SetLabel(self.as_ptr(), label)
         }
     }
@@ -6027,7 +6184,8 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     fn set_name(&self, name: &str) {
         unsafe {
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxWindow_SetName(self.as_ptr(), name)
         }
     }
@@ -6191,7 +6349,8 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     fn find_window_by_label<W: WindowMethods>(label: &str, parent: Option<&W>) -> WeakRef<Window> {
         unsafe {
-            let label = wx_string_from(label);
+            let label = WxString::from(label);
+            let label = label.as_ptr();
             let parent = match parent {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
@@ -6201,7 +6360,8 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     fn find_window_by_name<W: WindowMethods>(name: &str, parent: Option<&W>) -> WeakRef<Window> {
         unsafe {
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             let parent = match parent {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
@@ -6235,7 +6395,8 @@ pub trait WindowMethods: EvtHandlerMethods {
             };
             let pos = pos.as_ptr();
             let size = size.as_ptr();
-            let name = wx_string_from(name);
+            let name = WxString::from(name);
+            let name = name.as_ptr();
             ffi::wxWindow_Create(self.as_ptr(), parent, id, pos, size, style, name)
         }
     }
