@@ -38,7 +38,7 @@ extern "C" {
         size: *const c_void,
     ) -> *mut c_void;
     pub fn wxArtProvider_GetNativeSizeHint(client: *const c_void) -> *mut c_void;
-    pub fn wxArtProvider_GetSizeHint(client: *const c_void, platform_default: bool) -> *mut c_void;
+    // BLOCKED: pub fn wxArtProvider_GetSizeHint(client: *const c_void, platform_default: bool) -> wxSize;
     // NOT_SUPPORTED: pub fn wxArtProvider_GetIconBundle(id: *const c_void, client: *const c_void) -> wxIconBundle;
     pub fn wxArtProvider_HasNativeProvider() -> bool;
     // BLOCKED: pub fn wxArtProvider_Insert(provider: *mut c_void);
@@ -88,11 +88,11 @@ extern "C" {
     pub fn wxBitmap_IsOk(self_: *const c_void) -> bool;
     // NOT_SUPPORTED: pub fn wxBitmap_LoadFile(self_: *mut c_void, name: *const c_void, type_: wxBitmapType) -> bool;
     // NOT_SUPPORTED: pub fn wxBitmap_SaveFile(self_: *const c_void, name: *const c_void, type_: wxBitmapType, palette: *const c_void) -> bool;
-    pub fn wxBitmap_SetDepth(self_: *mut c_void, depth: c_int);
-    pub fn wxBitmap_SetHeight(self_: *mut c_void, height: c_int);
+    // BLOCKED: pub fn wxBitmap_SetDepth(self_: *mut c_void, depth: c_int);
+    // BLOCKED: pub fn wxBitmap_SetHeight(self_: *mut c_void, height: c_int);
     pub fn wxBitmap_SetMask(self_: *mut c_void, mask: *mut c_void);
     pub fn wxBitmap_SetPalette(self_: *mut c_void, palette: *const c_void);
-    pub fn wxBitmap_SetWidth(self_: *mut c_void, width: c_int);
+    // BLOCKED: pub fn wxBitmap_SetWidth(self_: *mut c_void, width: c_int);
     pub fn wxBitmap_AddHandler(handler: *mut c_void);
     pub fn wxBitmap_CleanUpHandlers();
     pub fn wxBitmap_FindHandler(name: *const c_void) -> *mut c_void;
@@ -578,9 +578,9 @@ extern "C" {
     pub fn wxIcon_GetWidth(self_: *const c_void) -> c_int;
     pub fn wxIcon_IsOk(self_: *const c_void) -> bool;
     // NOT_SUPPORTED: pub fn wxIcon_LoadFile(self_: *mut c_void, name: *const c_void, type_: wxBitmapType, desired_width: c_int, desired_height: c_int) -> bool;
-    pub fn wxIcon_SetDepth(self_: *mut c_void, depth: c_int);
-    pub fn wxIcon_SetHeight(self_: *mut c_void, height: c_int);
-    pub fn wxIcon_SetWidth(self_: *mut c_void, width: c_int);
+    // BLOCKED: pub fn wxIcon_SetDepth(self_: *mut c_void, depth: c_int);
+    // BLOCKED: pub fn wxIcon_SetHeight(self_: *mut c_void, height: c_int);
+    // BLOCKED: pub fn wxIcon_SetWidth(self_: *mut c_void, width: c_int);
     // BLOCKED: pub fn wxIcon_operator=(self_: *mut c_void, icon: *const c_void) -> *mut c_void;
 
     // wxItemContainer
@@ -1148,7 +1148,7 @@ extern "C" {
     pub fn wxRadioBox_Enable(self_: *mut c_void, n: c_uint, enable: bool) -> bool;
     pub fn wxRadioBox_GetColumnCount(self_: *const c_void) -> c_uint;
     pub fn wxRadioBox_GetItemFromPoint(self_: *const c_void, pt: *const c_void) -> c_int;
-    pub fn wxRadioBox_GetItemHelpText(self_: *const c_void, item: c_uint) -> *mut c_void;
+    // BLOCKED: pub fn wxRadioBox_GetItemHelpText(self_: *const c_void, item: c_uint) -> wxString;
     pub fn wxRadioBox_GetItemToolTip(self_: *const c_void, item: c_uint) -> *mut c_void;
     pub fn wxRadioBox_GetRowCount(self_: *const c_void) -> c_uint;
     pub fn wxRadioBox_IsItemEnabled(self_: *const c_void, n: c_uint) -> bool;
@@ -2345,7 +2345,7 @@ extern "C" {
     pub fn wxWindow_Enable(self_: *mut c_void, enable: bool) -> bool;
     pub fn wxWindow_Show(self_: *mut c_void, show: bool) -> bool;
     // NOT_SUPPORTED: pub fn wxWindow_ShowWithEffect(self_: *mut c_void, effect: wxShowEffect, timeout: c_uint) -> bool;
-    pub fn wxWindow_GetHelpText(self_: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxWindow_GetHelpText(self_: *const c_void) -> wxString;
     pub fn wxWindow_SetHelpText(self_: *mut c_void, help_text: *const c_void);
     // NOT_SUPPORTED: pub fn wxWindow_GetHelpTextAtPoint(self_: *const c_void, point: *const c_void, origin: wxHelpEvent::Origin) -> *mut c_void;
     pub fn wxWindow_GetToolTip(self_: *const c_void) -> *mut c_void;

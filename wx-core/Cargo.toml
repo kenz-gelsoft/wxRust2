@@ -6,6 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+wx-bin = { git = "https://github.com/ancwrd1/wx-universal-apple-darwin", package = "wx-universal-apple-darwin" }
 wx-base = { path = "../wx-base" }
 
 [build-dependencies]

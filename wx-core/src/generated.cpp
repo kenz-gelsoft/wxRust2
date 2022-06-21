@@ -68,9 +68,6 @@ wxIcon *wxArtProvider_GetIcon(const wxArtID * id, const wxArtClient * client, co
 wxSize *wxArtProvider_GetNativeSizeHint(const wxArtClient * client) {
     return new wxSize(wxArtProvider::GetNativeSizeHint(*client));
 }
-wxSize *wxArtProvider_GetSizeHint(const wxArtClient * client, bool platform_default) {
-    return new wxSize(wxArtProvider::GetSizeHint(*client, platform_default));
-}
 bool wxArtProvider_HasNativeProvider() {
     return wxArtProvider::HasNativeProvider();
 }
@@ -156,20 +153,11 @@ int wxBitmap_GetWidth(const wxBitmap * self) {
 bool wxBitmap_IsOk(const wxBitmap * self) {
     return self->IsOk();
 }
-void wxBitmap_SetDepth(wxBitmap * self, int depth) {
-    return self->SetDepth(depth);
-}
-void wxBitmap_SetHeight(wxBitmap * self, int height) {
-    return self->SetHeight(height);
-}
 void wxBitmap_SetMask(wxBitmap * self, wxMask * mask) {
     return self->SetMask(mask);
 }
 void wxBitmap_SetPalette(wxBitmap * self, const wxPalette * palette) {
     return self->SetPalette(*palette);
-}
-void wxBitmap_SetWidth(wxBitmap * self, int width) {
-    return self->SetWidth(width);
 }
 void wxBitmap_AddHandler(wxBitmapHandler * handler) {
     return wxBitmap::AddHandler(handler);
@@ -694,15 +682,6 @@ int wxIcon_GetWidth(const wxIcon * self) {
 }
 bool wxIcon_IsOk(const wxIcon * self) {
     return self->IsOk();
-}
-void wxIcon_SetDepth(wxIcon * self, int depth) {
-    return self->SetDepth(depth);
-}
-void wxIcon_SetHeight(wxIcon * self, int height) {
-    return self->SetHeight(height);
-}
-void wxIcon_SetWidth(wxIcon * self, int width) {
-    return self->SetWidth(width);
 }
 
 // CLASS: wxItemContainer
@@ -1424,9 +1403,6 @@ unsigned int wxRadioBox_GetColumnCount(const wxRadioBox * self) {
 }
 int wxRadioBox_GetItemFromPoint(const wxRadioBox * self, const wxPoint * pt) {
     return self->GetItemFromPoint(*pt);
-}
-wxString *wxRadioBox_GetItemHelpText(const wxRadioBox * self, unsigned int item) {
-    return new wxString(self->GetItemHelpText(item));
 }
 wxToolTip * wxRadioBox_GetItemToolTip(const wxRadioBox * self, unsigned int item) {
     return self->GetItemToolTip(item);
@@ -3442,9 +3418,6 @@ bool wxWindow_Enable(wxWindow * self, bool enable) {
 }
 bool wxWindow_Show(wxWindow * self, bool show) {
     return self->Show(show);
-}
-wxString *wxWindow_GetHelpText(const wxWindow * self) {
-    return new wxString(self->GetHelpText());
 }
 void wxWindow_SetHelpText(wxWindow * self, const wxString * help_text) {
     return self->SetHelpText(*help_text);
