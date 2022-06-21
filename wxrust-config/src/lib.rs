@@ -36,7 +36,9 @@ pub fn print_wx_config_libs_for_cargo() {
     let libs = wx_config(&["--libs"]);
     for f in libs.split_whitespace() {
         println!("cargo:rustc-flags={}", f);
-    }    // let mut next_is_framework_name = false;
+    }
+    println!("cargo:rustc-link-arg=-fapple-link-rtlib");
+    // let mut next_is_framework_name = false;
     // for arg in libs.split_whitespace() {
     //     if next_is_framework_name {
     //         println!("cargo:rustc-link-lib=framework={}", arg);
