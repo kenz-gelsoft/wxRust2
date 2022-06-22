@@ -5,13 +5,10 @@ pub fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
     // from `wx-config --cflags`
     let cflags = wx_config(&["--cflags"]);
     // ignore too many warnings with wx3.0
-    cc_build
-        .flag("-DNDEBUG")
-        .flag("-std=c++14")
-        .cpp(true);
-        // .flag_if_supported("-Wno-deprecated-copy")
-        // .flag_if_supported("-Wno-ignored-qualifiers")
-        // .flag_if_supported("-Wno-unused-parameter");
+    cc_build.flag("-DNDEBUG").flag("-std=c++14").cpp(true);
+    // .flag_if_supported("-Wno-deprecated-copy")
+    // .flag_if_supported("-Wno-ignored-qualifiers")
+    // .flag_if_supported("-Wno-unused-parameter");
     for arg in cflags.split_whitespace() {
         cc_build.flag(arg);
         // if arg.starts_with("-I") {
@@ -25,9 +22,9 @@ pub fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
         //     panic!("unsupported argument '{}'. please file a bug.", arg)
         // }
     }
-    // if cfg!(windows) {
-    //     cc_build.flag("/EHsc");
-    // }
+    if cfg!(windows) {
+        cc_build.flag("/EHsc");
+    }
     cc_build
 }
 
@@ -57,28 +54,37 @@ pub fn print_wx_config_libs_for_cargo() {
     // }
 }
 
+fn dep_links() -> String {
+    let target = env::var("TARGET").unwrap().replace('-', "_").to_uppercase();
+    if target.contains("APPLE") {
+        "UNIVERSAL_APPLE_DARWIN".to_owned()
+    } else {
+        target
+    }
+}
+
 fn wx_config(args: &[&str]) -> String {
     // if cfg!(windows) {
     //     wx_config_win(args)
     // } else {
-        // let output = Command::new("wx-config")
-        //     .args(args)
-        //     .output()
-        //     .expect("failed execute wx-config command.");
-        // String::from_utf8_lossy(&output.stdout).to_string()
-        let flags: Vec<_> = env::var("DEP_WX_UNIVERSAL_APPLE_DARWIN_CFLAGS")
-            .unwrap()
-            .split_whitespace()
-            .map(ToOwned::to_owned)
-            .collect();
-        let (ldflags, cflags): (Vec<_>, Vec<_>) = flags
-            .into_iter()
-            .partition(|f| f.starts_with("-l") || f.starts_with("-L"));
-        if args.contains(&"--cflags") {
-            cflags.join(" ")
-        } else {
-            ldflags.join(" ")
-        }
+    // let output = Command::new("wx-config")
+    //     .args(args)
+    //     .output()
+    //     .expect("failed execute wx-config command.");
+    // String::from_utf8_lossy(&output.stdout).to_string()
+    let flags: Vec<_> = env::var(format!("DEP_WX_{}_CFLAGS", dep_links()))
+        .unwrap()
+        .split_whitespace()
+        .map(ToOwned::to_owned)
+        .collect();
+    let (ldflags, cflags): (Vec<_>, Vec<_>) = flags
+        .into_iter()
+        .partition(|f| f.starts_with("-l") || f.starts_with("-L"));
+    if args.contains(&"--cflags") {
+        cflags.join(" ")
+    } else {
+        ldflags.join(" ")
+    }
     // }
 }
 

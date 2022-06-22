@@ -51,6 +51,7 @@ dependencies = [
  "cc",
  "wx-base",
  "wx-universal-apple-darwin",
+ "wx-x86_64-pc-windows-msvc",
  "wxrust-config",
 ]
 
@@ -60,6 +61,7 @@ version = "0.1.0"
 dependencies = [
  "cc",
  "wx-universal-apple-darwin",
+ "wx-x86_64-pc-windows-msvc",
  "wxrust-config",
 ]
 
@@ -67,6 +69,11 @@ dependencies = [
 name = "wx-universal-apple-darwin"
 version = "3.1.6"
 source = "git+https://github.com/ancwrd1/wx-universal-apple-darwin#4e512d2c125436007a7ee1331a48d8b5de430fb4"
+
+[[package]]
+name = "wx-x86_64-pc-windows-msvc"
+version = "3.1.7"
+source = "git+https://github.com/kenz-gelsoft/wx-x86_64-pc-windows-msvc#baac6119a393ab49c25edc3926747d5ce2644d56"
 
 [[package]]
 name = "wxrust-config"
