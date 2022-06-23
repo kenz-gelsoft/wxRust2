@@ -8,7 +8,7 @@ edition = "2021"
 [dependencies]
 wx-base = { path = "../wx-base" }
 
-[target.universal-apple-darwin.dependencies]
+[target.'cfg(target_os = "macos")'.dependencies]
 wx-universal-apple-darwin = { git = "https://github.com/ancwrd1/wx-universal-apple-darwin" }
 
 [target.x86_64-pc-windows-msvc.dependencies]

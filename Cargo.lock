@@ -14,7 +14,6 @@ version = "0.1.0"
 dependencies = [
  "wx",
  "wx-base",
- "wx-universal-apple-darwin",
 ]
 
 [[package]]
@@ -23,7 +22,6 @@ version = "0.1.0"
 dependencies = [
  "wx",
  "wx-base",
- "wx-universal-apple-darwin",
 ]
 
 [[package]]
@@ -32,7 +30,6 @@ version = "0.1.0"
 dependencies = [
  "wx",
  "wx-base",
- "wx-universal-apple-darwin",
 ]
 
 [[package]]
@@ -41,7 +38,6 @@ version = "0.1.0"
 dependencies = [
  "wx",
  "wx-base",
- "wx-universal-apple-darwin",
 ]
 
 [[package]]
