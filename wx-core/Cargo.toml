@@ -6,7 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [features]
-use_binary = ["wxrust-config/use_binary"]
+use_binary = ["wxrust-config/use_binary", "dep:wx-universal-apple-darwin"]
 
 [dependencies]
 wx-base = { path = "../wx-base" }
