@@ -25,7 +25,7 @@ pub fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
             panic!("unsupported argument '{}'. please file a bug.", arg)
         }
     }
-    if cfg!(windows) {
+    if cfg!(target_env = "msvc") {
         cc_build.flag("/EHsc");
     }
     cc_build
