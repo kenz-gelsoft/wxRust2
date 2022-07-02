@@ -443,7 +443,7 @@ wxMenuBar * wxMenuBar_MacGetCommonMenuBar();
 
 // CLASS: wxMenuItem
 #ifdef __WXMSW__
-const wxBitmap * wxMenuItem_GetDisabledBitmap(const wxMenuItem * self);
+wxBitmap *wxMenuItem_GetDisabledBitmap(const wxMenuItem * self);
 #endif
 wxString *wxMenuItem_GetHelp(const wxMenuItem * self);
 int wxMenuItem_GetId(const wxMenuItem * self);
@@ -762,7 +762,7 @@ void wxStaticText_Wrap(wxStaticText * self, int width);
 
 // CLASS: wxTextAttr
 void wxTextAttr_delete(wxTextAttr *self);
-const wxColour * wxTextAttr_GetBackgroundColour(const wxTextAttr * self);
+wxColour *wxTextAttr_GetBackgroundColour(const wxTextAttr * self);
 wxString *wxTextAttr_GetBulletFont(const wxTextAttr * self);
 wxString *wxTextAttr_GetBulletName(const wxTextAttr * self);
 int wxTextAttr_GetBulletNumber(const wxTextAttr * self);
@@ -775,7 +775,7 @@ wxString *wxTextAttr_GetFontFaceName(const wxTextAttr * self);
 int wxTextAttr_GetFontSize(const wxTextAttr * self);
 bool wxTextAttr_GetFontUnderlined(const wxTextAttr * self);
 #if wxCHECK_VERSION(3, 1, 0)
-const wxColour * wxTextAttr_GetUnderlineColour(const wxTextAttr * self);
+wxColour *wxTextAttr_GetUnderlineColour(const wxTextAttr * self);
 #endif
 long wxTextAttr_GetLeftIndent(const wxTextAttr * self);
 long wxTextAttr_GetLeftSubIndent(const wxTextAttr * self);
@@ -786,7 +786,7 @@ int wxTextAttr_GetParagraphSpacingAfter(const wxTextAttr * self);
 int wxTextAttr_GetParagraphSpacingBefore(const wxTextAttr * self);
 wxString *wxTextAttr_GetParagraphStyleName(const wxTextAttr * self);
 long wxTextAttr_GetRightIndent(const wxTextAttr * self);
-const wxColour * wxTextAttr_GetTextColour(const wxTextAttr * self);
+wxColour *wxTextAttr_GetTextColour(const wxTextAttr * self);
 int wxTextAttr_GetTextEffectFlags(const wxTextAttr * self);
 int wxTextAttr_GetTextEffects(const wxTextAttr * self);
 wxString *wxTextAttr_GetURL(const wxTextAttr * self);
@@ -865,7 +865,7 @@ wxTextCtrl *wxTextCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * v
 bool wxTextCtrl_Create(wxTextCtrl * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 void wxTextCtrl_DiscardEdits(wxTextCtrl * self);
 bool wxTextCtrl_EmulateKeyPress(wxTextCtrl * self, const wxKeyEvent * event);
-const wxTextAttr * wxTextCtrl_GetDefaultStyle(const wxTextCtrl * self);
+wxTextAttr *wxTextCtrl_GetDefaultStyle(const wxTextCtrl * self);
 int wxTextCtrl_GetLineLength(const wxTextCtrl * self, long line_no);
 wxString *wxTextCtrl_GetLineText(const wxTextCtrl * self, long line_no);
 int wxTextCtrl_GetNumberOfLines(const wxTextCtrl * self);
@@ -1064,7 +1064,7 @@ void wxWindow_AddChild(wxWindow * self, wxWindow * child);
 bool wxWindow_DestroyChildren(wxWindow * self);
 wxWindow * wxWindow_FindWindow(const wxWindow * self, long id);
 wxWindow * wxWindow_FindWindow1(const wxWindow * self, const wxString * name);
-const wxWindowList * wxWindow_GetChildren1(const wxWindow * self);
+wxWindowList *wxWindow_GetChildren1(const wxWindow * self);
 void wxWindow_RemoveChild(wxWindow * self, wxWindow * child);
 wxWindow * wxWindow_GetGrandParent(const wxWindow * self);
 wxWindow * wxWindow_GetNextSibling(const wxWindow * self);

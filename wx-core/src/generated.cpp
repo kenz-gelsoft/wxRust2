@@ -1150,8 +1150,8 @@ wxMenuBar * wxMenuBar_MacGetCommonMenuBar() {
 
 // CLASS: wxMenuItem
 #ifdef __WXMSW__
-const wxBitmap * wxMenuItem_GetDisabledBitmap(const wxMenuItem * self) {
-    return &(self->GetDisabledBitmap());
+wxBitmap *wxMenuItem_GetDisabledBitmap(const wxMenuItem * self) {
+    return new wxBitmap(self->GetDisabledBitmap());
 }
 #endif
 wxString *wxMenuItem_GetHelp(const wxMenuItem * self) {
@@ -2015,8 +2015,8 @@ void wxStaticText_Wrap(wxStaticText * self, int width) {
 void wxTextAttr_delete(wxTextAttr *self) {
     delete self;
 }
-const wxColour * wxTextAttr_GetBackgroundColour(const wxTextAttr * self) {
-    return &(self->GetBackgroundColour());
+wxColour *wxTextAttr_GetBackgroundColour(const wxTextAttr * self) {
+    return new wxColour(self->GetBackgroundColour());
 }
 wxString *wxTextAttr_GetBulletFont(const wxTextAttr * self) {
     return new wxString(self->GetBulletFont());
@@ -2052,8 +2052,8 @@ bool wxTextAttr_GetFontUnderlined(const wxTextAttr * self) {
     return self->GetFontUnderlined();
 }
 #if wxCHECK_VERSION(3, 1, 0)
-const wxColour * wxTextAttr_GetUnderlineColour(const wxTextAttr * self) {
-    return &(self->GetUnderlineColour());
+wxColour *wxTextAttr_GetUnderlineColour(const wxTextAttr * self) {
+    return new wxColour(self->GetUnderlineColour());
 }
 #endif
 long wxTextAttr_GetLeftIndent(const wxTextAttr * self) {
@@ -2083,8 +2083,8 @@ wxString *wxTextAttr_GetParagraphStyleName(const wxTextAttr * self) {
 long wxTextAttr_GetRightIndent(const wxTextAttr * self) {
     return self->GetRightIndent();
 }
-const wxColour * wxTextAttr_GetTextColour(const wxTextAttr * self) {
-    return &(self->GetTextColour());
+wxColour *wxTextAttr_GetTextColour(const wxTextAttr * self) {
+    return new wxColour(self->GetTextColour());
 }
 int wxTextAttr_GetTextEffectFlags(const wxTextAttr * self) {
     return self->GetTextEffectFlags();
@@ -2316,8 +2316,8 @@ void wxTextCtrl_DiscardEdits(wxTextCtrl * self) {
 bool wxTextCtrl_EmulateKeyPress(wxTextCtrl * self, const wxKeyEvent * event) {
     return self->EmulateKeyPress(*event);
 }
-const wxTextAttr * wxTextCtrl_GetDefaultStyle(const wxTextCtrl * self) {
-    return &(self->GetDefaultStyle());
+wxTextAttr *wxTextCtrl_GetDefaultStyle(const wxTextCtrl * self) {
+    return new wxTextAttr(self->GetDefaultStyle());
 }
 int wxTextCtrl_GetLineLength(const wxTextCtrl * self, long line_no) {
     return self->GetLineLength(line_no);
@@ -2867,8 +2867,8 @@ wxWindow * wxWindow_FindWindow(const wxWindow * self, long id) {
 wxWindow * wxWindow_FindWindow1(const wxWindow * self, const wxString * name) {
     return self->FindWindow(*name);
 }
-const wxWindowList * wxWindow_GetChildren1(const wxWindow * self) {
-    return &(self->GetChildren());
+wxWindowList *wxWindow_GetChildren1(const wxWindow * self) {
+    return new wxWindowList(self->GetChildren());
 }
 void wxWindow_RemoveChild(wxWindow * self, wxWindow * child) {
     return self->RemoveChild(child);

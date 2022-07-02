@@ -181,7 +181,8 @@ class Method:
 
     def wrap_return_type(self, allows_ptr):
         if (self.is_ctor or
-            self.returns_new() or 
+            self.returns_new() or
+            self.returns.is_const_ref_to_binding() or 
             allows_ptr and (self.returns.is_ptr_to_binding() or
                             self.returns.is_ref_to_binding())):
             return ReturnTypeWrapper(self)
