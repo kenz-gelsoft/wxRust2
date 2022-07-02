@@ -12,7 +12,7 @@ use_binary = ["wxrust-config/use_binary"]
 wx-base = { path = "../wx-base" }
 
 [target.'cfg(target_os = "macos")'.dependencies]
-wx-universal-apple-darwin = { git = "https://github.com/ancwrd1/wx-universal-apple-darwin" }
+wx-universal-apple-darwin = { git = "https://github.com/ancwrd1/wx-universal-apple-darwin", optional = true }
 
 [target.x86_64-pc-windows-msvc.dependencies]
 wx-x86_64-pc-windows-msvc = { git = "https://github.com/kenz-gelsoft/wx-x86_64-pc-windows-msvc" }
