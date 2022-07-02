@@ -75,6 +75,6 @@ jobs:
     # - name: Install Prerequisites
     #   run: brew install wxwidgets
     - name: Build
-      run: cargo build --verbose
+      run: cargo build --verbose --features use_binary
     - name: Run tests
       run: cargo test --verbose
