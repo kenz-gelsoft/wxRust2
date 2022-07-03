@@ -6,14 +6,10 @@ pub fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
     let cflags = wx_config(&["--cflags"]);
     // ignore too many warnings with wx3.0
     cc_build
-        .flag("-DNDEBUG") // for Windows
-        // .flag("-std=c++14")
-        // .cpp(true)
         .flag_if_supported("-Wno-deprecated-copy")
         .flag_if_supported("-Wno-ignored-qualifiers")
         .flag_if_supported("-Wno-unused-parameter");
     for arg in cflags.split_whitespace() {
-        // cc_build.flag(arg);
         if arg.starts_with("-I") {
             cc_build.include(&arg[2..]);
         } else if arg.starts_with("-D") {
@@ -34,9 +30,6 @@ pub fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
 pub fn print_wx_config_libs_for_cargo() {
     // from `wx-config --libs`
     let libs = wx_config(&["--libs"]);
-    // for f in libs.split_whitespace() {
-    //     println!("cargo:rustc-flags={}", f);
-    // }
     let mut next_is_framework_name = false;
     for arg in libs.split_whitespace() {
         if next_is_framework_name {
