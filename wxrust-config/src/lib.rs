@@ -66,7 +66,7 @@ fn dep_links() -> String {
 }
 
 fn wx_config(args: &[&str]) -> String {
-    if cfg!(feature = "use_binary") {
+    if cfg!(feature = "vendored") {
         let flags: Vec<_> = env::var(format!("DEP_WX_{}_CFLAGS", dep_links()))
             .unwrap()
             .split_whitespace()

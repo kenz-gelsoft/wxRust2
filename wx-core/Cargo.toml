@@ -6,8 +6,8 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [features]
-use_binary = [
-    "wxrust-config/use_binary",
+vendored = [
+    "wxrust-config/vendored",
     "dep:wx-universal-apple-darwin",
     "dep:wx-x86_64-pc-windows-gnu",
     "dep:wx-x86_64-pc-windows-msvc",
