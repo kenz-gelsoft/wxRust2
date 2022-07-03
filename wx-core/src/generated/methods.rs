@@ -118,7 +118,13 @@ pub trait ArtProviderMethods: ObjectMethods {
             Size::from_ptr(ffi::wxArtProvider_GetNativeSizeHint(client))
         }
     }
-    // BLOCKED: fn GetSizeHint()
+    fn get_size_hint(client: &str, platform_default: bool) -> Size {
+        unsafe {
+            let client = WxString::from(client);
+            let client = client.as_ptr();
+            Size::from_ptr(ffi::wxArtProvider_GetSizeHint(client, platform_default))
+        }
+    }
     // NOT_SUPPORTED: fn GetIconBundle()
     fn has_native_provider() -> bool {
         unsafe { ffi::wxArtProvider_HasNativeProvider() }
@@ -223,15 +229,21 @@ pub trait BitmapMethods: GDIObjectMethods {
     }
     // NOT_SUPPORTED: fn LoadFile()
     // NOT_SUPPORTED: fn SaveFile()
-    // BLOCKED: fn SetDepth()
-    // BLOCKED: fn SetHeight()
+    fn set_depth(&self, depth: c_int) {
+        unsafe { ffi::wxBitmap_SetDepth(self.as_ptr(), depth) }
+    }
+    fn set_height(&self, height: c_int) {
+        unsafe { ffi::wxBitmap_SetHeight(self.as_ptr(), height) }
+    }
     fn set_mask(&self, mask: *mut c_void) {
         unsafe { ffi::wxBitmap_SetMask(self.as_ptr(), mask) }
     }
     fn set_palette(&self, palette: *const c_void) {
         unsafe { ffi::wxBitmap_SetPalette(self.as_ptr(), palette) }
     }
-    // BLOCKED: fn SetWidth()
+    fn set_width(&self, width: c_int) {
+        unsafe { ffi::wxBitmap_SetWidth(self.as_ptr(), width) }
+    }
     fn add_handler(handler: *mut c_void) {
         unsafe { ffi::wxBitmap_AddHandler(handler) }
     }
@@ -1207,9 +1219,15 @@ pub trait IconMethods: GDIObjectMethods {
         unsafe { ffi::wxIcon_IsOk(self.as_ptr()) }
     }
     // NOT_SUPPORTED: fn LoadFile()
-    // BLOCKED: fn SetDepth()
-    // BLOCKED: fn SetHeight()
-    // BLOCKED: fn SetWidth()
+    fn set_depth(&self, depth: c_int) {
+        unsafe { ffi::wxIcon_SetDepth(self.as_ptr(), depth) }
+    }
+    fn set_height(&self, height: c_int) {
+        unsafe { ffi::wxIcon_SetHeight(self.as_ptr(), height) }
+    }
+    fn set_width(&self, width: c_int) {
+        unsafe { ffi::wxIcon_SetWidth(self.as_ptr(), width) }
+    }
     // BLOCKED: fn operator=()
 }
 
@@ -2641,7 +2659,9 @@ pub trait RadioBoxMethods: ControlMethods {
             ffi::wxRadioBox_GetItemFromPoint(self.as_ptr(), pt)
         }
     }
-    // BLOCKED: fn GetItemHelpText()
+    fn get_item_help_text(&self, item: c_uint) -> String {
+        unsafe { WxString::from_ptr(ffi::wxRadioBox_GetItemHelpText(self.as_ptr(), item)).into() }
+    }
     fn get_item_tool_tip(&self, item: c_uint) -> *mut c_void {
         unsafe { ffi::wxRadioBox_GetItemToolTip(self.as_ptr(), item) }
     }
@@ -6056,7 +6076,9 @@ pub trait WindowMethods: EvtHandlerMethods {
         unsafe { ffi::wxWindow_Show(self.as_ptr(), show) }
     }
     // NOT_SUPPORTED: fn ShowWithEffect()
-    // BLOCKED: fn GetHelpText()
+    fn get_help_text(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxWindow_GetHelpText(self.as_ptr())).into() }
+    }
     fn set_help_text(&self, help_text: &str) {
         unsafe {
             let help_text = WxString::from(help_text);
