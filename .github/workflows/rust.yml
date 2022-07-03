@@ -100,6 +100,25 @@ jobs:
     - name: Run tests
       run: cargo test --verbose --features vendored
 
+  build-vendored-mingw64:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cargo/bin/
+          ~/.cargo/registry/index/
+          ~/.cargo/registry/cache/
+          ~/.cargo/git/db/
+          target/
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+    - name: Build
+      run: cargo build --verbose --features vendored --target x86_64-pc-windows-gnu
+    - name: Run tests
+      run: cargo test --verbose --features vendored --target x86_64-pc-windows-gnu
+
   build-vendored-msvc:
     runs-on: windows-latest
 
