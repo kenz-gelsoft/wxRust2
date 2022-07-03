@@ -8,4 +8,3 @@ edition = "2021"
 [dependencies]
 wx-base = { path = "../../wx-base" }
 wx = { path = "../../wx-core" }
-

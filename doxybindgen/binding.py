@@ -581,11 +581,12 @@ class CxxMethodBinding:
                 self.__model.name(without_index=True),
                 new_params_or_expr,
             )
-        if (self.__model.maybe_returns_self() or
-            self.__model.returns.is_ref_to_binding()):
-            yield '    return &(%s);' % (new_params_or_expr,)
-        elif wrapped:
+        if (wrapped or
+              self.__model.returns.is_const_ref_to_binding()):
             yield '    return new %s(%s);' % (wrapped.in_cxx(), new_params_or_expr)
+        elif (self.__model.maybe_returns_self() or
+              self.__model.returns.is_ref_to_binding()):
+            yield '    return &(%s);' % (new_params_or_expr,)
         else:
             yield '    return %s;' % (new_params_or_expr,)
         yield '}'

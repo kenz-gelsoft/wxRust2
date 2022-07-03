@@ -21,7 +21,7 @@ pub fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
             panic!("unsupported argument '{}'. please file a bug.", arg)
         }
     }
-    if cfg!(windows) {
+    if cfg!(target_env = "msvc") {
         cc_build.flag("/EHsc");
     }
     cc_build
@@ -49,7 +49,32 @@ pub fn print_wx_config_libs_for_cargo() {
     }
 }
 
+fn dep_links() -> String {
+    let target = env::var("TARGET").unwrap().replace('-', "_").to_uppercase();
+    if target.contains("APPLE") {
+        "UNIVERSAL_APPLE_DARWIN".to_owned()
+    } else {
+        target
+    }
+}
+
 fn wx_config(args: &[&str]) -> String {
+    if cfg!(feature = "vendored") {
+        let flags: Vec<_> = env::var(format!("DEP_WX_{}_CFLAGS", dep_links()))
+            .unwrap()
+            .split_whitespace()
+            .map(ToOwned::to_owned)
+            .collect();
+        let (ldflags, cflags): (Vec<_>, Vec<_>) = flags
+            .into_iter()
+            .partition(|f| f.starts_with("-l") || f.starts_with("-L"));
+        return if args.contains(&"--cflags") {
+            cflags.join(" ")
+        } else {
+            ldflags.join(" ")
+        };
+    }
+
     if cfg!(windows) {
         wx_config_win(args)
     } else {

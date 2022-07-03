@@ -71,12 +71,19 @@ cxx = "#ifndef __WXGTK__"
 [conditions.wx31]
 cxx = "#if wxCHECK_VERSION(3, 1, 0)"
 
+[conditions.wx317]
+cxx = "#if wxCHECK_VERSION(3, 1, 7)"
+
 [types]
 [types.wxAnyButton]
 library = 'core'
 [types.wxArtProvider]
 blocklist = [
     'Insert',
+]
+wx317 = [
+    # Doc isn't up-to-date in wx3.1.6
+    'GetSizeHint',
 ]
 [types.wxBitmapButton]
 wx31 = [
@@ -88,6 +95,12 @@ wx31 = [
 blocklist = [
     # doesn't support returning wxList
     'GetHandlers',
+]
+wx317 = [
+    # Doc isn't up-to-date in wx3.1.6
+    'SetDepth',
+    'SetHeight',
+    'SetWidth',
 ]
 wx31 = [
     'wxBitmap8',
@@ -187,6 +200,12 @@ blocklist = [
 [types.wxIcon]
 blocklist = [
     'operator=',
+]
+wx317 = [
+    # Doc isn't up-to-date in wx3.1.6
+    'SetDepth',
+    'SetHeight',
+    'SetWidth',
 ]
 [types.wxItemContainer]
 blocklist = [
@@ -292,6 +311,11 @@ blocklist = [
     'operator-=1',
     'operator/=',
     'operator*=',
+]
+[types.wxRadioBox]
+wx317 = [
+    # Doc isn't up-to-date in wx3.1.6
+    'GetItemHelpText',
 ]
 [types.wxRect]
 blocklist = [
@@ -410,6 +434,10 @@ blocklist = [
     'GetChildren',
     'GetCursor',
     'GetUpdateRegion',
+]
+wx317 = [
+    # Doc isn't up-to-date in wx3.1.6
+    'GetHelpText',
 ]
 not_gtk = [
     'RegisterHotKey',

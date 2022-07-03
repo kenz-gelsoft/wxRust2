@@ -33,7 +33,9 @@ bool wxArtProvider_Delete(wxArtProvider * provider);
 wxBitmap *wxArtProvider_GetBitmap(const wxArtID * id, const wxArtClient * client, const wxSize * size);
 wxIcon *wxArtProvider_GetIcon(const wxArtID * id, const wxArtClient * client, const wxSize * size);
 wxSize *wxArtProvider_GetNativeSizeHint(const wxArtClient * client);
+#if wxCHECK_VERSION(3, 1, 7)
 wxSize *wxArtProvider_GetSizeHint(const wxArtClient * client, bool platform_default);
+#endif
 bool wxArtProvider_HasNativeProvider();
 bool wxArtProvider_Pop();
 void wxArtProvider_Push(wxArtProvider * provider);
@@ -65,11 +67,15 @@ wxBitmap *wxBitmap_GetSubBitmap(const wxBitmap * self, const wxRect * rect);
 wxSize *wxBitmap_GetSize(const wxBitmap * self);
 int wxBitmap_GetWidth(const wxBitmap * self);
 bool wxBitmap_IsOk(const wxBitmap * self);
+#if wxCHECK_VERSION(3, 1, 7)
 void wxBitmap_SetDepth(wxBitmap * self, int depth);
 void wxBitmap_SetHeight(wxBitmap * self, int height);
+#endif
 void wxBitmap_SetMask(wxBitmap * self, wxMask * mask);
 void wxBitmap_SetPalette(wxBitmap * self, const wxPalette * palette);
+#if wxCHECK_VERSION(3, 1, 7)
 void wxBitmap_SetWidth(wxBitmap * self, int width);
+#endif
 void wxBitmap_AddHandler(wxBitmapHandler * handler);
 void wxBitmap_CleanUpHandlers();
 #ifndef __WXMSW__
@@ -278,9 +284,11 @@ int wxIcon_GetDepth(const wxIcon * self);
 int wxIcon_GetHeight(const wxIcon * self);
 int wxIcon_GetWidth(const wxIcon * self);
 bool wxIcon_IsOk(const wxIcon * self);
+#if wxCHECK_VERSION(3, 1, 7)
 void wxIcon_SetDepth(wxIcon * self, int depth);
 void wxIcon_SetHeight(wxIcon * self, int height);
 void wxIcon_SetWidth(wxIcon * self, int width);
+#endif
 
 // CLASS: wxItemContainer
 void wxItemContainer_delete(wxItemContainer *self);
@@ -450,7 +458,7 @@ wxMenuBar * wxMenuBar_MacGetCommonMenuBar();
 
 // CLASS: wxMenuItem
 #ifdef __WXMSW__
-const wxBitmap * wxMenuItem_GetDisabledBitmap(const wxMenuItem * self);
+wxBitmap *wxMenuItem_GetDisabledBitmap(const wxMenuItem * self);
 #endif
 wxString *wxMenuItem_GetHelp(const wxMenuItem * self);
 int wxMenuItem_GetId(const wxMenuItem * self);
@@ -550,7 +558,9 @@ bool wxRadioBox_Create1(wxRadioBox * self, wxWindow * parent, wxWindowID id, con
 bool wxRadioBox_Enable(wxRadioBox * self, unsigned int n, bool enable);
 unsigned int wxRadioBox_GetColumnCount(const wxRadioBox * self);
 int wxRadioBox_GetItemFromPoint(const wxRadioBox * self, const wxPoint * pt);
+#if wxCHECK_VERSION(3, 1, 7)
 wxString *wxRadioBox_GetItemHelpText(const wxRadioBox * self, unsigned int item);
+#endif
 wxToolTip * wxRadioBox_GetItemToolTip(const wxRadioBox * self, unsigned int item);
 unsigned int wxRadioBox_GetRowCount(const wxRadioBox * self);
 bool wxRadioBox_IsItemEnabled(const wxRadioBox * self, unsigned int n);
@@ -770,7 +780,7 @@ void wxStaticText_Wrap(wxStaticText * self, int width);
 
 // CLASS: wxTextAttr
 void wxTextAttr_delete(wxTextAttr *self);
-const wxColour * wxTextAttr_GetBackgroundColour(const wxTextAttr * self);
+wxColour *wxTextAttr_GetBackgroundColour(const wxTextAttr * self);
 wxString *wxTextAttr_GetBulletFont(const wxTextAttr * self);
 wxString *wxTextAttr_GetBulletName(const wxTextAttr * self);
 int wxTextAttr_GetBulletNumber(const wxTextAttr * self);
@@ -783,7 +793,7 @@ wxString *wxTextAttr_GetFontFaceName(const wxTextAttr * self);
 int wxTextAttr_GetFontSize(const wxTextAttr * self);
 bool wxTextAttr_GetFontUnderlined(const wxTextAttr * self);
 #if wxCHECK_VERSION(3, 1, 0)
-const wxColour * wxTextAttr_GetUnderlineColour(const wxTextAttr * self);
+wxColour *wxTextAttr_GetUnderlineColour(const wxTextAttr * self);
 #endif
 long wxTextAttr_GetLeftIndent(const wxTextAttr * self);
 long wxTextAttr_GetLeftSubIndent(const wxTextAttr * self);
@@ -794,7 +804,7 @@ int wxTextAttr_GetParagraphSpacingAfter(const wxTextAttr * self);
 int wxTextAttr_GetParagraphSpacingBefore(const wxTextAttr * self);
 wxString *wxTextAttr_GetParagraphStyleName(const wxTextAttr * self);
 long wxTextAttr_GetRightIndent(const wxTextAttr * self);
-const wxColour * wxTextAttr_GetTextColour(const wxTextAttr * self);
+wxColour *wxTextAttr_GetTextColour(const wxTextAttr * self);
 int wxTextAttr_GetTextEffectFlags(const wxTextAttr * self);
 int wxTextAttr_GetTextEffects(const wxTextAttr * self);
 wxString *wxTextAttr_GetURL(const wxTextAttr * self);
@@ -873,7 +883,7 @@ wxTextCtrl *wxTextCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * v
 bool wxTextCtrl_Create(wxTextCtrl * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 void wxTextCtrl_DiscardEdits(wxTextCtrl * self);
 bool wxTextCtrl_EmulateKeyPress(wxTextCtrl * self, const wxKeyEvent * event);
-const wxTextAttr * wxTextCtrl_GetDefaultStyle(const wxTextCtrl * self);
+wxTextAttr *wxTextCtrl_GetDefaultStyle(const wxTextCtrl * self);
 int wxTextCtrl_GetLineLength(const wxTextCtrl * self, long line_no);
 wxString *wxTextCtrl_GetLineText(const wxTextCtrl * self, long line_no);
 int wxTextCtrl_GetNumberOfLines(const wxTextCtrl * self);
@@ -1072,7 +1082,7 @@ void wxWindow_AddChild(wxWindow * self, wxWindow * child);
 bool wxWindow_DestroyChildren(wxWindow * self);
 wxWindow * wxWindow_FindWindow(const wxWindow * self, long id);
 wxWindow * wxWindow_FindWindow1(const wxWindow * self, const wxString * name);
-const wxWindowList * wxWindow_GetChildren1(const wxWindow * self);
+wxWindowList *wxWindow_GetChildren1(const wxWindow * self);
 void wxWindow_RemoveChild(wxWindow * self, wxWindow * child);
 wxWindow * wxWindow_GetGrandParent(const wxWindow * self);
 wxWindow * wxWindow_GetNextSibling(const wxWindow * self);
@@ -1264,7 +1274,9 @@ bool wxWindow_IsShownOnScreen(const wxWindow * self);
 bool wxWindow_Disable(wxWindow * self);
 bool wxWindow_Enable(wxWindow * self, bool enable);
 bool wxWindow_Show(wxWindow * self, bool show);
+#if wxCHECK_VERSION(3, 1, 7)
 wxString *wxWindow_GetHelpText(const wxWindow * self);
+#endif
 void wxWindow_SetHelpText(wxWindow * self, const wxString * help_text);
 wxToolTip * wxWindow_GetToolTip(const wxWindow * self);
 wxString *wxWindow_GetToolTipText(const wxWindow * self);
