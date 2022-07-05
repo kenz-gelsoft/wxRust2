@@ -21,13 +21,9 @@ pub fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
             panic!("unsupported argument '{}'. please file a bug.", arg)
         }
     }
-    if cfg!(windows) {
-        let target_env = env::var("CARGO_CFG_TARGET_ENV").unwrap();
-        if target_env.eq("msvc") {
-            cc_build.flag("/EHsc");
-        } else {
-            cc_build.flag("-lstdc++");
-        }
+    let target_env = env::var("CARGO_CFG_TARGET_ENV").unwrap();
+    if target_env.eq("msvc") {
+        cc_build.flag("/EHsc");
     }
     cc_build
 }
