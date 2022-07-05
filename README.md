@@ -49,11 +49,11 @@ Specify `--features vendored` to cargo, to use vendored prebuilt wx binary crate
 
 |Build target|Crate name|Git repository|Build configuration|
 |------------|----------|--------------|-------------------|
-|`cfg(target_os = "macos")`|wx-universal-apple-darwin|https://github.com/ancwrd1/wx-universal-apple-darwin|Lean and mean config, see repo.| 
-|x86_64-pc-windows-gnu|wx-x86_64-pc-windows-gnu|https://github.com/ancwrd1/wx-x86_64-pc-windows-gnu|Lean and mean config, see repo.|
-|x86_64-pc-windows-msvc|wx-x86_64-pc-windows-msvc|https://github.com/kenz-gelsoft/wx-x86_64-pc-windows-msvc|Bundled wx3.1.7 official build|
+|`cfg(target_os = "macos")`|`wx-universal-apple-darwin`|https://github.com/ancwrd1/wx-universal-apple-darwin|Lean and mean config, see repo.| 
+|`x86_64-pc-windows-gnu`|`wx-x86_64-pc-windows-gnu`|https://github.com/ancwrd1/wx-x86_64-pc-windows-gnu|Lean and mean config, see repo.|
+|`x86_64-pc-windows-msvc`|`wx-x86_64-pc-windows-msvc`|https://github.com/kenz-gelsoft/wx-x86_64-pc-windows-msvc|Bundled wx3.1.7 official build|
 
-This feature is suggested by @ancwrd1 and kindly helped to support this. Thank you!
+[@ancwrd1](https://github.com/ancwrd1) suggested this feature and kindly helped to support this. Thank you!
 
 ## License
 
