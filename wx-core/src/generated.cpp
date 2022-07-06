@@ -598,6 +598,32 @@ void wxDatePickerCtrl_SetValue(wxDatePickerCtrl * self, const wxDateTime * dt) {
     return self->SetValue(*dt);
 }
 
+// CLASS: wxDirPickerCtrl
+wxDirPickerCtrl *wxDirPickerCtrl_new() {
+    return new wxDirPickerCtrl();
+}
+wxDirPickerCtrl *wxDirPickerCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * path, const wxString * message, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return new wxDirPickerCtrl(parent, id, *path, *message, *pos, *size, style, *validator, *name);
+}
+bool wxDirPickerCtrl_Create(wxDirPickerCtrl * self, wxWindow * parent, wxWindowID id, const wxString * path, const wxString * message, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, *path, *message, *pos, *size, style, *validator, *name);
+}
+wxFileName *wxDirPickerCtrl_GetDirName(const wxDirPickerCtrl * self) {
+    return new wxFileName(self->GetDirName());
+}
+wxString *wxDirPickerCtrl_GetPath(const wxDirPickerCtrl * self) {
+    return new wxString(self->GetPath());
+}
+void wxDirPickerCtrl_SetDirName(wxDirPickerCtrl * self, const wxFileName * dirname) {
+    return self->SetDirName(*dirname);
+}
+void wxDirPickerCtrl_SetInitialDirectory(wxDirPickerCtrl * self, const wxString * dir) {
+    return self->SetInitialDirectory(*dir);
+}
+void wxDirPickerCtrl_SetPath(wxDirPickerCtrl * self, const wxString * dirname) {
+    return self->SetPath(*dirname);
+}
+
 // CLASS: wxFrame
 wxFrame *wxFrame_new() {
     return new wxFrame();

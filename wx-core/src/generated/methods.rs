@@ -1078,6 +1078,76 @@ pub trait DatePickerCtrlMethods: ControlMethods {
     }
 }
 
+// wxDirPickerCtrl
+pub trait DirPickerCtrlMethods: PickerBaseMethods {
+    fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        path: &str,
+        message: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let path = WxString::from(path);
+            let path = path.as_ptr();
+            let message = WxString::from(message);
+            let message = message.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxDirPickerCtrl_Create(
+                self.as_ptr(),
+                parent,
+                id,
+                path,
+                message,
+                pos,
+                size,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+    fn get_dir_name(&self) -> FileName {
+        unsafe { FileName::from_ptr(ffi::wxDirPickerCtrl_GetDirName(self.as_ptr())) }
+    }
+    fn get_path(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxDirPickerCtrl_GetPath(self.as_ptr())).into() }
+    }
+    fn set_dir_name<F: FileNameMethods>(&self, dirname: &F) {
+        unsafe {
+            let dirname = dirname.as_ptr();
+            ffi::wxDirPickerCtrl_SetDirName(self.as_ptr(), dirname)
+        }
+    }
+    fn set_initial_directory(&self, dir: &str) {
+        unsafe {
+            let dir = WxString::from(dir);
+            let dir = dir.as_ptr();
+            ffi::wxDirPickerCtrl_SetInitialDirectory(self.as_ptr(), dir)
+        }
+    }
+    fn set_path(&self, dirname: &str) {
+        unsafe {
+            let dirname = WxString::from(dirname);
+            let dirname = dirname.as_ptr();
+            ffi::wxDirPickerCtrl_SetPath(self.as_ptr(), dirname)
+        }
+    }
+}
+
 // wxFrame
 pub trait FrameMethods: TopLevelWindowMethods {
     // DTOR: fn ~wxFrame()

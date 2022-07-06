@@ -5,6 +5,7 @@
 #include <wx/bookctrl.h>
 #include <wx/clrpicker.h>
 #include <wx/datectrl.h>
+#include <wx/filepicker.h>
 #include <wx/wrapsizer.h>
 
 extern "C" {
@@ -244,6 +245,16 @@ void wxDatePickerCtrl_SetNullText(wxDatePickerCtrl * self, const wxString * text
 #endif
 void wxDatePickerCtrl_SetRange(wxDatePickerCtrl * self, const wxDateTime * dt1, const wxDateTime * dt2);
 void wxDatePickerCtrl_SetValue(wxDatePickerCtrl * self, const wxDateTime * dt);
+
+// CLASS: wxDirPickerCtrl
+wxDirPickerCtrl *wxDirPickerCtrl_new();
+wxDirPickerCtrl *wxDirPickerCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * path, const wxString * message, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+bool wxDirPickerCtrl_Create(wxDirPickerCtrl * self, wxWindow * parent, wxWindowID id, const wxString * path, const wxString * message, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+wxFileName *wxDirPickerCtrl_GetDirName(const wxDirPickerCtrl * self);
+wxString *wxDirPickerCtrl_GetPath(const wxDirPickerCtrl * self);
+void wxDirPickerCtrl_SetDirName(wxDirPickerCtrl * self, const wxFileName * dirname);
+void wxDirPickerCtrl_SetInitialDirectory(wxDirPickerCtrl * self, const wxString * dir);
+void wxDirPickerCtrl_SetPath(wxDirPickerCtrl * self, const wxString * dirname);
 
 // CLASS: wxFrame
 wxFrame *wxFrame_new();
