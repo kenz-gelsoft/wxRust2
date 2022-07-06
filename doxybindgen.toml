@@ -17,8 +17,10 @@ wxml_files = [
     'wxml/classwx_control.xml',
     'wxml/classwx_date_picker_ctrl.xml',
     'wxml/classwx_date_time.xml',
+    # 'wxml/classwx_dir_picker_ctrl.xml',
     'wxml/classwx_event.xml',
     'wxml/classwx_evt_handler.xml',
+    'wxml/classwx_file_name.xml',
     'wxml/classwx_frame.xml',
     'wxml/classwx_g_d_i_object.xml',
     'wxml/classwx_icon.xml',
@@ -187,6 +189,15 @@ blocklist = [
     'GetClientData',
     'SetClientData',
     'Unbind1',
+]
+[types.wxFileName]
+blocklist = [
+    'operator!=',
+    'operator!=1',
+    'operator==',
+    'operator==1',
+    'operator=',
+    'operator=1',
 ]
 [types.wxFrame]
 windows = [

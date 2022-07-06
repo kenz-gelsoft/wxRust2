@@ -149,6 +149,7 @@ def generated_h(classes, libname):
 '''
     else:
         yield '''\
+#include <wx/filename.h>
 
 typedef wxDateTime::TimeZone TimeZone;
 typedef wxDateTime::Tm       Tm;
