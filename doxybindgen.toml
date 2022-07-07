@@ -199,6 +199,11 @@ blocklist = [
     'operator=',
     'operator=1',
 ]
+wx31 = [
+    'FileNameToURL',
+    'ResolveLink',
+    'URLToFileName',
+]
 [types.wxFrame] 
 windows = [
     'MSWGetTaskBarButton',

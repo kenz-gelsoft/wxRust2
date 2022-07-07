@@ -414,9 +414,11 @@ void wxFileName_RemoveDir(wxFileName * self, size_t pos) {
 void wxFileName_RemoveLastDir(wxFileName * self) {
     return self->RemoveLastDir();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxFileName *wxFileName_ResolveLink(wxFileName * self) {
     return new wxFileName(self->ResolveLink());
 }
+#endif
 bool wxFileName_Rmdir(const wxFileName * self, int flags) {
     return self->Rmdir(flags);
 }
@@ -498,12 +500,14 @@ bool wxFileName_Rmdir1(const wxString * dir, int flags) {
 bool wxFileName_SetCwd1(const wxString * cwd) {
     return wxFileName::SetCwd(*cwd);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxFileName *wxFileName_URLToFileName(const wxString * url) {
     return new wxFileName(wxFileName::URLToFileName(*url));
 }
 wxString *wxFileName_FileNameToURL(const wxFileName * filename) {
     return new wxString(wxFileName::FileNameToURL(*filename));
 }
+#endif
 wxString *wxFileName_StripExtension(const wxString * fullname) {
     return new wxString(wxFileName::StripExtension(*fullname));
 }

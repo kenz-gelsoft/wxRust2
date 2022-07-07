@@ -154,7 +154,9 @@ bool wxFileName_Mkdir(const wxFileName * self, int perm, int flags);
 void wxFileName_PrependDir(wxFileName * self, const wxString * dir);
 void wxFileName_RemoveDir(wxFileName * self, size_t pos);
 void wxFileName_RemoveLastDir(wxFileName * self);
+#if wxCHECK_VERSION(3, 1, 0)
 wxFileName *wxFileName_ResolveLink(wxFileName * self);
+#endif
 bool wxFileName_Rmdir(const wxFileName * self, int flags);
 bool wxFileName_SetCwd(const wxFileName * self);
 void wxFileName_SetEmptyExt(wxFileName * self);
@@ -182,8 +184,10 @@ bool wxFileName_IsFileWritable1(const wxString * file);
 bool wxFileName_Mkdir1(const wxString * dir, int perm, int flags);
 bool wxFileName_Rmdir1(const wxString * dir, int flags);
 bool wxFileName_SetCwd1(const wxString * cwd);
+#if wxCHECK_VERSION(3, 1, 0)
 wxFileName *wxFileName_URLToFileName(const wxString * url);
 wxString *wxFileName_FileNameToURL(const wxFileName * filename);
+#endif
 wxString *wxFileName_StripExtension(const wxString * fullname);
 
 // CLASS: wxObject
