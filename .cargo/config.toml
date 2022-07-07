@@ -1,2 +1,5 @@
 [target.'cfg(target_os = "macos")']
 rustflags = "-C link-arg=-fapple-link-rtlib"
+
+[target.x86_64-pc-windows-gnu]
+rustflags = "-C link-arg=-lstdc++"
