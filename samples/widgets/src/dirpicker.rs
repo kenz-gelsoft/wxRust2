@@ -109,7 +109,7 @@ impl WidgetsPage for DirPickerWidgetsPage {
             sizer,
         };
         // create pickers
-        self.create_dir_picker(&config_ui);
+        self.create_picker(&config_ui);
 
         // right pane
         config_ui
@@ -174,7 +174,7 @@ impl DirPickerWidgetsPage {
 
     fn recreate_widget(&self) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            self.create_dir_picker(config_ui);
+            self.create_picker(config_ui);
         }
     }
 
@@ -187,61 +187,43 @@ impl DirPickerWidgetsPage {
         // config_ui.text_cur.set_value(&today.format_iso_dir());
     }
 
-    fn create_dir_picker(&self, config_ui: &ConfigUI) {
-        // let mut value: Option<wx::DirTime> = None;
+    fn create_picker(&self, config_ui: &ConfigUI) {
         if let Some(dir_picker) = self.dir_picker.borrow().as_ref() {
-            // value = Some(dir_picker.get_value());
-
-            // TODO: remove (and delete) all buttons
-            let count = config_ui.sizer.get_children().get_count();
-            for _ in 0..count {
-                config_ui.sizer.remove_int(0);
-            }
             dir_picker.destroy();
         }
 
-        // let mut style = wx::BORDER_DEFAULT;
-        // style |= match config_ui.radio_kind.get_selection() {
-        //     0 => wx::DP_DEFAULT,
-        //     1 => wx::DP_SPIN,
-        //     2 => wx::DP_DROPDOWN,
-        //     _ => 0,
-        // } as c_long;
+        let mut style = wx::BORDER_DEFAULT;
 
-        // if config_ui.chk_style_century.get_value() {
-        //     style |= wx::DP_SHOWCENTURY as c_long;
-        // }
-        // if config_ui.chk_style_allow_none.get_value() {
-        //     style |= wx::DP_ALLOWNONE as c_long;
-        // }
+        if config_ui.chk_dir_text_ctrl.get_value() {
+            style |= wx::DIRP_USE_TEXTCTRL as c_long;
+        }
 
-        // let dir_picker = wx::DirPickerCtrl::builder(Some(&self.base))
-        //     .id(PickerPage::Picker.into())
-        //     .style(style)
-        //     // .dt(value)
-        //     .build();
+        if config_ui.chk_dir_must_exist.get_value() {
+            style |= wx::DIRP_DIR_MUST_EXIST as c_long;
+        }
 
-        let centre = wx::CENTRE.try_into().unwrap();
-        config_ui
-            .sizer
-            .add_int_int(0, 0, 1, centre, 0, wx::Object::none());
-        // config_ui.sizer.add_window_int(
-        //     Some(&dir_picker),
-        //     1,
-        //     centre,
-        //     0,
-        //     wx::Object::none(),
-        // );
-        config_ui
-            .sizer
-            .add_int_int(0, 0, 1, centre, 0, wx::Object::none());
-        config_ui.sizer.layout();
-        // *self.dir_picker.borrow_mut() = Some(dir_picker);
+        if config_ui.chk_dir_change_dir.get_value() {
+            style |= wx::DIRP_CHANGE_DIR as c_long;
+        }
+
+        if config_ui.chk_small.get_value() {
+            style |= wx::DIRP_SMALL as c_long;
+        }
+
+        // FIXME: wxGetHomeDir() is needed?
+        let dir_picker = wx::DirPickerCtrl::builder(Some(&self.base))
+            .id(PickerPage::Dir.into())
+            .message("Hello!".into())
+            .style(style)
+            // .dt(value)
+            .build();
+
+        *self.dir_picker.borrow_mut() = Some(dir_picker);
     }
 
     fn on_button_reset(&self, config_ui: &ConfigUI) {
         self.reset();
-        self.create_dir_picker(config_ui);
+        self.create_picker(config_ui);
     }
 
     // fn get_dir_from_text_control(&self, text: &wx::TextCtrl) -> Option<wx::DirTime> {
