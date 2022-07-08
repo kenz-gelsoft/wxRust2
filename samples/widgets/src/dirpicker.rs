@@ -6,20 +6,15 @@ use wx::methods::*;
 
 // control ids
 #[derive(Clone, Copy)]
-enum DirPickerPage {
+enum PickerPage {
     Reset = wx::ID_HIGHEST as isize,
-    Set,
-    SetRange,
-    // SetNullText,
-    Picker,
+    Dir,
+    SetDir,
 }
-impl DirPickerPage {
+impl PickerPage {
     fn from(v: c_int) -> Option<Self> {
-        use DirPickerPage::*;
-        for e in [
-            Reset, Set, SetRange, // SetNullText,
-            Picker,
-        ] {
+        use PickerPage::*;
+        for e in [Reset, Dir, SetDir] {
             if v == e.into() {
                 return Some(e);
             }
@@ -27,8 +22,8 @@ impl DirPickerPage {
         return None;
     }
 }
-impl From<DirPickerPage> for c_int {
-    fn from(w: DirPickerPage) -> Self {
+impl From<PickerPage> for c_int {
+    fn from(w: PickerPage) -> Self {
         w as c_int
     }
 }
@@ -37,15 +32,13 @@ impl From<DirPickerPage> for c_int {
 pub struct ConfigUI {
     // other controls
     // --------------
-    sizer_dir_picker: wx::BoxSizer,
+    chk_dir_text_ctrl: wx::CheckBox,
+    chk_dir_change_dir: wx::CheckBox,
+    chk_dir_must_exist: wx::CheckBox,
+    chk_small: wx::CheckBox,
+    text_initial_dir: wx::TextCtrl,
 
-    text_cur: wx::TextCtrl,
-    text_min: wx::TextCtrl,
-    text_max: wx::TextCtrl,
-    // text_null: wx::TextCtrl,
-    radio_kind: wx::RadioBox,
-    chk_style_century: wx::CheckBox,
-    chk_style_allow_none: wx::CheckBox,
+    sizer: wx::BoxSizer,
 }
 
 #[derive(Clone)]
@@ -63,174 +56,101 @@ impl WidgetsPage for DirPickerWidgetsPage {
         return "DirPicker";
     }
     fn create_content(&self) {
-        let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
+        // left pane
+        let boxleft = wx::BoxSizer::new(wx::VERTICAL);
 
-        // left pane: style
-        let sizer_left = wx::BoxSizer::new(wx::VERTICAL);
+        let dirbox =
+            wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&self.base), "&DirPicker style");
+        let chk_dir_text_ctrl =
+            self.create_check_box_and_add_to_sizer(&dirbox, "With textctrl", wx::ID_ANY);
+        let chk_dir_must_exist =
+            self.create_check_box_and_add_to_sizer(&dirbox, "Dir must exist", wx::ID_ANY);
+        let chk_dir_change_dir =
+            self.create_check_box_and_add_to_sizer(&dirbox, "Change working dir", wx::ID_ANY);
+        let chk_small =
+            self.create_check_box_and_add_to_sizer(&dirbox, "&Small version", wx::ID_ANY);
+        boxleft.add_sizer_int(Some(&dirbox), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
-        let kinds = wx::ArrayString::new();
-        kinds.add("&Default");
-        kinds.add("&Spin");
-        kinds.add("Drop do&wn");
-        let radio_kind = wx::RadioBox::builder(Some(&self.base))
-            .choices(kinds)
-            .major_dimension(1)
-            .style(wx::RA_SPECIFY_COLS.into())
-            .build();
-        sizer_left.add_window_sizerflags(
-            Some(&radio_kind),
-            wx::SizerFlags::new(0).expand().border(wx::ALL),
-        );
-
-        let sizer_style =
-            wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&self.base), "&Style");
-        let chk_style_century =
-            self.create_check_box_and_add_to_sizer(&sizer_style, "Show &century", wx::ID_ANY);
-        let chk_style_allow_none =
-            self.create_check_box_and_add_to_sizer(&sizer_style, "Allow &no value", wx::ID_ANY);
-        sizer_left.add_sizer_sizerflags(
-            Some(&sizer_style),
-            wx::SizerFlags::new(0).expand().border(wx::ALL),
-        );
-        sizer_left.add_window_sizerflags(
-            Some(
-                &wx::Button::builder(Some(&self.base))
-                    .id(DirPickerPage::Reset.into())
-                    .label("&Recreate")
-                    .build(),
-            ),
-            wx::SizerFlags::new(0).centre().border(wx::ALL),
-        );
-
-        // middle pane: operations
-        let sizer_middle = wx::BoxSizer::new(wx::VERTICAL);
-        let (sizer_row, text_cur) = self.create_sizer_with_text_and_button(
-            DirPickerPage::Set.into(),
-            "&Set dir",
+        let (sizer_initial_dir, text_initial_dir) = self.create_sizer_with_text_and_button(
+            PickerPage::SetDir.into(),
+            "&Initial directory",
             wx::ID_ANY,
         );
-        sizer_middle.add_sizer_sizerflags(
-            Some(&sizer_row),
+        boxleft.add_sizer_sizerflags(
+            Some(&sizer_initial_dir),
             wx::SizerFlags::new(0).expand().border(wx::ALL),
         );
 
-        text_cur.set_min_size(&wx::Size::new_with_int(
-            self.base.get_text_extent("  9999-99-99  ").get_width(),
-            -1,
-        ));
+        boxleft.add_spacer(10);
 
-        sizer_middle.add_spacer(10);
-
-        let (sizer_row, text_min) = self.create_sizer_with_text_and_label("&Min dir", wx::ID_ANY);
-        sizer_middle.add_sizer_sizerflags(
-            Some(&sizer_row),
-            wx::SizerFlags::new(0).expand().border(wx::ALL),
-        );
-
-        let (sizer_row, text_max) = self.create_sizer_with_text_and_label("Ma&x dir", wx::ID_ANY);
-        sizer_middle.add_sizer_sizerflags(
-            Some(&sizer_row),
-            wx::SizerFlags::new(0).expand().border(wx::ALL),
-        );
-
-        sizer_middle.add_window_sizerflags(
+        boxleft.add_window_int(
             Some(
                 &wx::Button::builder(Some(&self.base))
-                    .id(DirPickerPage::SetRange.into())
-                    .label("Set &range")
+                    .id(PickerPage::Reset.into())
+                    .label("&Reset")
                     .build(),
             ),
-            wx::SizerFlags::new(0).centre().border(wx::ALL),
-        );
-
-        sizer_middle.add_spacer(10);
-
-        // let (sizer_row, text_null) =
-        //     self.create_sizer_with_text_and_label("&Null text", wx::ID_ANY);
-        // sizer_middle.add_sizer_sizerflags(
-        //     Some(&sizer_row),
-        //     wx::SizerFlags::new(0).expand().border(wx::ALL),
-        // );
-
-        // sizer_middle.add_window_sizerflags(
-        //     Some(
-        //         &wx::Button::builder(Some(&self.base))
-        //             .id(DirPickerPage::SetNullText.into())
-        //             .label("Set &null text")
-        //             .build(),
-        //     ),
-        //     wx::SizerFlags::new(0).centre().border(wx::ALL),
-        // );
-
-        // right pane: control itself
-        let sizer_right = wx::BoxSizer::new(wx::HORIZONTAL);
-
-        let dir_picker = wx::DirPickerCtrl::builder(Some(&self.base))
-            .id(DirPickerPage::Picker.into())
-            .build();
-
-        let centre = wx::CENTRE.try_into().unwrap();
-        sizer_right.add_int_int(0, 0, 1, centre, 0, wx::Object::none());
-        sizer_right.add_window_int(Some(&dir_picker), 1, centre, 0, wx::Object::none());
-        sizer_right.add_int_int(0, 0, 1, centre, 0, wx::Object::none());
-        *self.dir_picker.borrow_mut() = Some(dir_picker);
-
-        // the 3 panes panes compose the window
-        sizer_top.add_sizer_int(
-            Some(&sizer_left),
             0,
-            (wx::ALL & !wx::LEFT),
-            10,
-            wx::Object::none(),
-        );
-        sizer_top.add_sizer_int(
-            Some(&sizer_middle),
-            0,
-            (wx::TOP | wx::BOTTOM),
-            10,
-            wx::Object::none(),
-        );
-        sizer_top.add_sizer_int(
-            Some(&sizer_right),
-            1,
-            wx::GROW | (wx::ALL & !wx::RIGHT),
-            10,
+            wx::ALIGN_CENTRE_HORIZONTAL | wx::ALL,
+            15,
             wx::Object::none(),
         );
 
-        // final initializations
-        chk_style_century.set_value(true);
+        self.reset(); // set checkboxes state
 
+        let sizer = wx::BoxSizer::new(wx::VERTICAL);
         let config_ui = ConfigUI {
-            sizer_dir_picker: sizer_right, // save it to modify it later
+            chk_dir_text_ctrl,
+            chk_dir_change_dir,
+            chk_dir_must_exist,
+            chk_small,
+            text_initial_dir,
 
-            text_cur,
-            text_min,
-            text_max,
-            // text_null,
-            radio_kind,
-            chk_style_century,
-            chk_style_allow_none,
+            sizer,
         };
-        self.reset(&config_ui);
+        // create pickers
+        self.create_dir_picker(&config_ui);
+
+        // right pane
+        config_ui
+            .sizer
+            .add_int_int(1, 1, 1, wx::GROW | wx::ALL, 5, wx::Object::none());
+        // TODO: insert picker in create_picker()
+        // config_ui
+        //     .sizer
+        //     .add_window_int(&dir_picker, 0, wxEXPAND | wxALL, 5);
+        config_ui
+            .sizer
+            .add_int_int(1, 1, 1, wx::GROW | wx::ALL, 5, wx::Object::none()); // spacer
+
+        // global pane
+        let sz = wx::BoxSizer::new(wx::HORIZONTAL);
+        sz.add_sizer_int(Some(&boxleft), 0, wx::GROW | wx::ALL, 5, wx::Object::none());
+        sz.add_sizer_int(
+            Some(&config_ui.sizer),
+            1,
+            wx::GROW | wx::ALL,
+            5,
+            wx::Object::none(),
+        );
         *self.config_ui.borrow_mut() = Some(config_ui);
 
-        self.base.set_sizer(Some(&sizer_top), true);
+        self.base.set_sizer(Some(&sz), true);
     }
 
     fn handle_button(&self, event: &wx::CommandEvent) {
         println!("event={}", event.get_id());
         if let (Some(config_ui), Some(m)) = (
             self.config_ui.borrow().as_ref(),
-            DirPickerPage::from(event.get_id()),
+            PickerPage::from(event.get_id()),
         ) {
-            match m {
-                DirPickerPage::Reset => self.on_button_reset(config_ui),
-                DirPickerPage::Set => self.on_button_set(config_ui),
-                DirPickerPage::SetRange => self.on_button_set_range(config_ui),
-                // DirPickerPage::SetNullText => self.on_button_set_null_text(config_ui),
-                _ => (),
-            };
+            // match m {
+            //     PickerPage::Reset => self.on_button_reset(config_ui),
+            //     PickerPage::Set => self.on_button_set(config_ui),
+            //     PickerPage::SetRange => self.on_button_set_range(config_ui),
+            //     // PickerPage::SetNullText => self.on_button_set_null_text(config_ui),
+            //     _ => (),
+            // };
         }
     }
     fn handle_checkbox(&self, _: &wx::CommandEvent) {
@@ -258,7 +178,7 @@ impl DirPickerWidgetsPage {
         }
     }
 
-    fn reset(&self, config_ui: &ConfigUI) {
+    fn reset(&self) {
         // let today = wx::DirTime::today();
 
         // if let Some(dir_picker) = self.dir_picker.borrow().as_ref() {
@@ -273,54 +193,54 @@ impl DirPickerWidgetsPage {
             // value = Some(dir_picker.get_value());
 
             // TODO: remove (and delete) all buttons
-            let count = config_ui.sizer_dir_picker.get_children().get_count();
+            let count = config_ui.sizer.get_children().get_count();
             for _ in 0..count {
-                config_ui.sizer_dir_picker.remove_int(0);
+                config_ui.sizer.remove_int(0);
             }
             dir_picker.destroy();
         }
 
-        let mut style = wx::BORDER_DEFAULT;
-        style |= match config_ui.radio_kind.get_selection() {
-            0 => wx::DP_DEFAULT,
-            1 => wx::DP_SPIN,
-            2 => wx::DP_DROPDOWN,
-            _ => 0,
-        } as c_long;
+        // let mut style = wx::BORDER_DEFAULT;
+        // style |= match config_ui.radio_kind.get_selection() {
+        //     0 => wx::DP_DEFAULT,
+        //     1 => wx::DP_SPIN,
+        //     2 => wx::DP_DROPDOWN,
+        //     _ => 0,
+        // } as c_long;
 
-        if config_ui.chk_style_century.get_value() {
-            style |= wx::DP_SHOWCENTURY as c_long;
-        }
-        if config_ui.chk_style_allow_none.get_value() {
-            style |= wx::DP_ALLOWNONE as c_long;
-        }
+        // if config_ui.chk_style_century.get_value() {
+        //     style |= wx::DP_SHOWCENTURY as c_long;
+        // }
+        // if config_ui.chk_style_allow_none.get_value() {
+        //     style |= wx::DP_ALLOWNONE as c_long;
+        // }
 
-        let dir_picker = wx::DirPickerCtrl::builder(Some(&self.base))
-            .id(DirPickerPage::Picker.into())
-            .style(style)
-            // .dt(value)
-            .build();
+        // let dir_picker = wx::DirPickerCtrl::builder(Some(&self.base))
+        //     .id(PickerPage::Picker.into())
+        //     .style(style)
+        //     // .dt(value)
+        //     .build();
 
         let centre = wx::CENTRE.try_into().unwrap();
         config_ui
-            .sizer_dir_picker
+            .sizer
             .add_int_int(0, 0, 1, centre, 0, wx::Object::none());
-        config_ui.sizer_dir_picker.add_window_int(
-            Some(&dir_picker),
-            1,
-            centre,
-            0,
-            wx::Object::none(),
-        );
+        // config_ui.sizer.add_window_int(
+        //     Some(&dir_picker),
+        //     1,
+        //     centre,
+        //     0,
+        //     wx::Object::none(),
+        // );
         config_ui
-            .sizer_dir_picker
+            .sizer
             .add_int_int(0, 0, 1, centre, 0, wx::Object::none());
-        config_ui.sizer_dir_picker.layout();
-        *self.dir_picker.borrow_mut() = Some(dir_picker);
+        config_ui.sizer.layout();
+        // *self.dir_picker.borrow_mut() = Some(dir_picker);
     }
 
     fn on_button_reset(&self, config_ui: &ConfigUI) {
-        self.reset(config_ui);
+        self.reset();
         self.create_dir_picker(config_ui);
     }
 
