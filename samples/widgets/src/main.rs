@@ -25,6 +25,9 @@ use combobox::*;
 mod datepicker;
 use datepicker::*;
 
+mod dirpicker;
+use dirpicker::*;
+
 enum Widgets {
     ClearLog = 100,
     Quit,
@@ -128,6 +131,7 @@ impl WidgetsFrame {
         let clrpicker_page = Rc::new(ColourPickerWidgetsPage::new(&book));
         let combobox_page = Rc::new(ComboboxWidgetsPage::new(&book));
         let datepicker_page = Rc::new(DatePickerWidgetsPage::new(&book));
+        let dirpicker_page = Rc::new(DirPickerWidgetsPage::new(&book));
         let mut frame = WidgetsFrame {
             base,
             panel,
@@ -139,6 +143,7 @@ impl WidgetsFrame {
                 clrpicker_page,
                 combobox_page,
                 datepicker_page,
+                dirpicker_page,
             ],
         };
         frame.on_create();

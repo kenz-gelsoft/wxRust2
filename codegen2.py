@@ -145,10 +145,12 @@ def generated_h(classes, libname):
 #include <wx/bookctrl.h>
 #include <wx/clrpicker.h>
 #include <wx/datectrl.h>
+#include <wx/filepicker.h>
 #include <wx/wrapsizer.h>\
 '''
     else:
         yield '''\
+#include <wx/filename.h>
 
 typedef wxDateTime::TimeZone TimeZone;
 typedef wxDateTime::Tm       Tm;

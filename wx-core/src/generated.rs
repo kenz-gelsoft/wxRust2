@@ -663,6 +663,55 @@ impl<const OWNED: bool> DatePickerCtrlIsOwned<OWNED> {
     }
 }
 
+// wxDirPickerCtrl
+wx_class! { DirPickerCtrl =
+    DirPickerCtrlIsOwned<true>(wxDirPickerCtrl) impl
+        DirPickerCtrlMethods,
+        PickerBaseMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> DirPickerCtrlIsOwned<OWNED> {
+    pub fn new_2step() -> DirPickerCtrlIsOwned<OWNED> {
+        unsafe { DirPickerCtrlIsOwned(ffi::wxDirPickerCtrl_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        path: &str,
+        message: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> DirPickerCtrlIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let path = WxString::from(path);
+            let path = path.as_ptr();
+            let message = WxString::from(message);
+            let message = message.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            DirPickerCtrlIsOwned(ffi::wxDirPickerCtrl_new1(
+                parent, id, path, message, pos, size, style, validator, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
 // wxFrame
 wx_class! { Frame =
     FrameIsOwned<true>(wxFrame) impl
