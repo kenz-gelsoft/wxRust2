@@ -152,15 +152,13 @@ impl WidgetsPage for DirPickerWidgetsPage {
         ) {
             match m {
                 PickerPage::Reset => self.on_button_reset(config_ui),
-                //     PickerPage::Set => self.on_button_set(config_ui),
-                //     PickerPage::SetRange => self.on_button_set_range(config_ui),
-                //     // PickerPage::SetNullText => self.on_button_set_null_text(config_ui),
+                PickerPage::SetDir => self.on_button_set_dir(config_ui),
                 _ => (),
             };
         }
     }
     fn handle_checkbox(&self, _: &wx::CommandEvent) {
-        // Do nothing
+        self.on_check_box();
     }
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
         // Do nothing
@@ -241,10 +239,15 @@ impl DirPickerWidgetsPage {
             .id(PickerPage::Dir.into())
             .message("Hello!".into())
             .style(style)
-            // .dt(value)
             .build();
 
         *self.dir_picker.borrow_mut() = Some(dir_picker);
+    }
+
+    fn on_button_set_dir(&self, config_ui: &ConfigUI) {
+        if let Some(dir_picker) = self.dir_picker.borrow().as_ref() {
+            dir_picker.set_initial_directory(&config_ui.text_initial_dir.get_value());
+        }
     }
 
     fn on_button_reset(&self, config_ui: &ConfigUI) {
@@ -252,61 +255,7 @@ impl DirPickerWidgetsPage {
         self.recreate_widget();
     }
 
-    // fn get_dir_from_text_control(&self, text: &wx::TextCtrl) -> Option<wx::DirTime> {
-    //     let value = text.get_value();
-    //     if !value.is_empty() {
-    //         let dt = wx::DirTime::new();
-    //         if let Some(len) = dt.parse_dir(&value) {
-    //             if len == value.len() {
-    //                 return Some(dt);
-    //             }
-    //         }
-    //         println!("Invalid dir \"{}\"", value);
-    //     }
-    //     return None;
-    // }
-
-    fn on_button_set(&self, config_ui: &ConfigUI) {
-        // if let (Some(dt), Some(dir_picker)) = (
-        //     self.get_dir_from_text_control(&config_ui.text_cur),
-        //     self.dir_picker.borrow().as_ref(),
-        // ) {
-        //     dir_picker.set_value(&dt);
-        // }
+    fn on_check_box(&self) {
+        self.recreate_widget();
     }
-
-    fn on_button_set_range(&self, config_ui: &ConfigUI) {
-        // if let (Some(dt1), Some(dt2), Some(dir_picker)) = (
-        //     self.get_dir_from_text_control(&config_ui.text_min),
-        //     self.get_dir_from_text_control(&config_ui.text_max),
-        //     self.dir_picker.borrow().as_ref(),
-        // ) {
-        //     dir_picker.set_range(&dt1, &dt2);
-
-        //     if !dir_picker.get_range(Some(&dt1), Some(&dt2)) {
-        //         println!("No range set");
-        //     } else {
-        //         let dt1 = if dt1.is_valid() {
-        //             dt1.format_iso_dir()
-        //         } else {
-        //             String::new()
-        //         };
-        //         config_ui.text_min.set_value(&dt1);
-        //         let dt2 = if dt2.is_valid() {
-        //             dt2.format_iso_dir()
-        //         } else {
-        //             String::new()
-        //         };
-        //         config_ui.text_max.set_value(&dt2);
-
-        //         println!("Dir picker range updird");
-        //     }
-        // }
-    }
-
-    // fn on_button_set_null_text(&self, config_ui: &ConfigUI) {
-    //     if let Some(dir_picker) = self.dir_picker.borrow().as_ref() {
-    //         dir_picker.set_null_text(&config_ui.text_null.get_value());
-    //     }
-    // }
 }
