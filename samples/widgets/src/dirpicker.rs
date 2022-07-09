@@ -96,8 +96,6 @@ impl WidgetsPage for DirPickerWidgetsPage {
             wx::Object::none(),
         );
 
-        self.reset(); // set checkboxes state
-
         let sizer = wx::BoxSizer::new(wx::VERTICAL);
         let config_ui = ConfigUI {
             chk_dir_text_ctrl,
@@ -108,6 +106,8 @@ impl WidgetsPage for DirPickerWidgetsPage {
 
             sizer,
         };
+        self.reset(&config_ui); // set checkboxes state
+
         // create pickers
         self.create_picker(&config_ui);
 
@@ -116,9 +116,15 @@ impl WidgetsPage for DirPickerWidgetsPage {
             .sizer
             .add_int_int(1, 1, 1, wx::GROW | wx::ALL, 5, wx::Object::none());
         // TODO: insert picker in create_picker()
-        // config_ui
-        //     .sizer
-        //     .add_window_int(&dir_picker, 0, wxEXPAND | wxALL, 5);
+        if let Some(dir_picker) = self.dir_picker.borrow().as_ref() {
+            config_ui.sizer.add_window_int(
+                Some(dir_picker),
+                0,
+                wx::EXPAND | wx::ALL,
+                5,
+                wx::Object::none(),
+            );
+        }
         config_ui
             .sizer
             .add_int_int(1, 1, 1, wx::GROW | wx::ALL, 5, wx::Object::none()); // spacer
@@ -144,13 +150,13 @@ impl WidgetsPage for DirPickerWidgetsPage {
             self.config_ui.borrow().as_ref(),
             PickerPage::from(event.get_id()),
         ) {
-            // match m {
-            //     PickerPage::Reset => self.on_button_reset(config_ui),
-            //     PickerPage::Set => self.on_button_set(config_ui),
-            //     PickerPage::SetRange => self.on_button_set_range(config_ui),
-            //     // PickerPage::SetNullText => self.on_button_set_null_text(config_ui),
-            //     _ => (),
-            // };
+            match m {
+                PickerPage::Reset => self.on_button_reset(config_ui),
+                //     PickerPage::Set => self.on_button_set(config_ui),
+                //     PickerPage::SetRange => self.on_button_set_range(config_ui),
+                //     // PickerPage::SetNullText => self.on_button_set_null_text(config_ui),
+                _ => (),
+            };
         }
     }
     fn handle_checkbox(&self, _: &wx::CommandEvent) {
@@ -174,17 +180,37 @@ impl DirPickerWidgetsPage {
 
     fn recreate_widget(&self) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+            config_ui.sizer.remove_int(1);
             self.create_picker(config_ui);
+
+            if let Some(dir_picker) = self.dir_picker.borrow().as_ref() {
+                config_ui.sizer.insert_window_int(
+                    1,
+                    Some(dir_picker),
+                    0,
+                    wx::EXPAND | wx::ALL,
+                    5,
+                    wx::Object::none(),
+                );
+            }
+
+            config_ui.sizer.layout();
         }
     }
 
-    fn reset(&self) {
-        // let today = wx::DirTime::today();
-
-        // if let Some(dir_picker) = self.dir_picker.borrow().as_ref() {
-        //     dir_picker.set_value(&today);
-        // }
-        // config_ui.text_cur.set_value(&today.format_iso_dir());
+    fn reset(&self, config_ui: &ConfigUI) {
+        config_ui
+            .chk_dir_text_ctrl
+            .set_value((wx::DIRP_DEFAULT_STYLE & wx::DIRP_USE_TEXTCTRL) != 0);
+        config_ui
+            .chk_dir_must_exist
+            .set_value((wx::DIRP_DEFAULT_STYLE & wx::DIRP_DIR_MUST_EXIST) != 0);
+        config_ui
+            .chk_dir_change_dir
+            .set_value((wx::DIRP_DEFAULT_STYLE & wx::DIRP_CHANGE_DIR) != 0);
+        config_ui
+            .chk_small
+            .set_value((wx::FLP_DEFAULT_STYLE & wx::DIRP_SMALL) != 0);
     }
 
     fn create_picker(&self, config_ui: &ConfigUI) {
@@ -222,8 +248,8 @@ impl DirPickerWidgetsPage {
     }
 
     fn on_button_reset(&self, config_ui: &ConfigUI) {
-        self.reset();
-        self.create_picker(config_ui);
+        self.reset(config_ui);
+        self.recreate_widget();
     }
 
     // fn get_dir_from_text_control(&self, text: &wx::TextCtrl) -> Option<wx::DirTime> {
