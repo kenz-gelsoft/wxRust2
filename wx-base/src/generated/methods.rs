@@ -596,6 +596,7 @@ pub trait FileNameMethods: WxRustMethods {
     fn file_exists(&self) -> bool {
         unsafe { ffi::wxFileName_FileExists(self.as_ptr()) }
     }
+    // NOT_SUPPORTED: fn GetAbsolutePath()
     fn get_dir_count(&self) -> usize {
         unsafe { ffi::wxFileName_GetDirCount(self.as_ptr()) }
     }

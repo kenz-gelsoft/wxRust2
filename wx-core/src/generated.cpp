@@ -24,22 +24,22 @@ wxBitmap *wxAnyButton_GetBitmapLabel(const wxAnyButton * self) {
 wxBitmap *wxAnyButton_GetBitmapPressed(const wxAnyButton * self) {
     return new wxBitmap(self->GetBitmapPressed());
 }
-void wxAnyButton_SetBitmap(wxAnyButton * self, const wxBitmap * bitmap, wxDirection dir) {
+void wxAnyButton_SetBitmap(wxAnyButton * self, const wxBitmapBundle * bitmap, wxDirection dir) {
     return self->SetBitmap(*bitmap, dir);
 }
-void wxAnyButton_SetBitmapCurrent(wxAnyButton * self, const wxBitmap * bitmap) {
+void wxAnyButton_SetBitmapCurrent(wxAnyButton * self, const wxBitmapBundle * bitmap) {
     return self->SetBitmapCurrent(*bitmap);
 }
-void wxAnyButton_SetBitmapDisabled(wxAnyButton * self, const wxBitmap * bitmap) {
+void wxAnyButton_SetBitmapDisabled(wxAnyButton * self, const wxBitmapBundle * bitmap) {
     return self->SetBitmapDisabled(*bitmap);
 }
-void wxAnyButton_SetBitmapFocus(wxAnyButton * self, const wxBitmap * bitmap) {
+void wxAnyButton_SetBitmapFocus(wxAnyButton * self, const wxBitmapBundle * bitmap) {
     return self->SetBitmapFocus(*bitmap);
 }
-void wxAnyButton_SetBitmapLabel(wxAnyButton * self, const wxBitmap * bitmap) {
+void wxAnyButton_SetBitmapLabel(wxAnyButton * self, const wxBitmapBundle * bitmap) {
     return self->SetBitmapLabel(*bitmap);
 }
-void wxAnyButton_SetBitmapPressed(wxAnyButton * self, const wxBitmap * bitmap) {
+void wxAnyButton_SetBitmapPressed(wxAnyButton * self, const wxBitmapBundle * bitmap) {
     return self->SetBitmapPressed(*bitmap);
 }
 wxSize *wxAnyButton_GetBitmapMargins(wxAnyButton * self) {
@@ -65,12 +65,18 @@ wxBitmap *wxArtProvider_GetBitmap(const wxArtID * id, const wxArtClient * client
 wxIcon *wxArtProvider_GetIcon(const wxArtID * id, const wxArtClient * client, const wxSize * size) {
     return new wxIcon(wxArtProvider::GetIcon(*id, *client, *size));
 }
-wxSize *wxArtProvider_GetNativeSizeHint(const wxArtClient * client) {
-    return new wxSize(wxArtProvider::GetNativeSizeHint(*client));
+wxSize *wxArtProvider_GetNativeDIPSizeHint(const wxArtClient * client) {
+    return new wxSize(wxArtProvider::GetNativeDIPSizeHint(*client));
+}
+wxSize *wxArtProvider_GetNativeSizeHint(const wxArtClient * client, wxWindow * win) {
+    return new wxSize(wxArtProvider::GetNativeSizeHint(*client, win));
+}
+wxSize *wxArtProvider_GetDIPSizeHint(const wxArtClient * client) {
+    return new wxSize(wxArtProvider::GetDIPSizeHint(*client));
 }
 #if wxCHECK_VERSION(3, 1, 7)
-wxSize *wxArtProvider_GetSizeHint(const wxArtClient * client, bool platform_default) {
-    return new wxSize(wxArtProvider::GetSizeHint(*client, platform_default));
+wxSize *wxArtProvider_GetSizeHint(const wxArtClient * client, wxWindow * win) {
+    return new wxSize(wxArtProvider::GetSizeHint(*client, win));
 }
 #endif
 bool wxArtProvider_HasNativeProvider() {
@@ -108,17 +114,23 @@ wxBitmap *wxBitmap_new3(int width, int height, int depth) {
 wxBitmap *wxBitmap_new4(const wxSize * sz, int depth) {
     return new wxBitmap(*sz, depth);
 }
-wxBitmap *wxBitmap_new5(const char *const * bits) {
+wxBitmap *wxBitmap_new5(int width, int height, const wxDC * dc) {
+    return new wxBitmap(width, height, *dc);
+}
+wxBitmap *wxBitmap_new6(const char *const * bits) {
     return new wxBitmap(bits);
 }
-wxBitmap *wxBitmap_new7(const wxImage * img, int depth) {
+#if wxCHECK_VERSION(3, 1, 0)
+wxBitmap *wxBitmap_new8(const wxImage * img, int depth) {
     return new wxBitmap(*img, depth);
 }
-#if wxCHECK_VERSION(3, 1, 0)
-wxBitmap *wxBitmap_new8(const wxCursor * cursor) {
+#endif
+wxBitmap *wxBitmap_new9(const wxImage * img, const wxDC * dc) {
+    return new wxBitmap(*img, *dc);
+}
+wxBitmap *wxBitmap_new10(const wxCursor * cursor) {
     return new wxBitmap(*cursor);
 }
-#endif
 bool wxBitmap_CopyFromIcon(wxBitmap * self, const wxIcon * icon) {
     return self->CopyFromIcon(*icon);
 }
@@ -131,14 +143,32 @@ bool wxBitmap_Create1(wxBitmap * self, const wxSize * sz, int depth) {
 bool wxBitmap_Create2(wxBitmap * self, int width, int height, const wxDC * dc) {
     return self->Create(width, height, *dc);
 }
+bool wxBitmap_CreateWithDIPSize(wxBitmap * self, const wxSize * size, double scale, int depth) {
+    return self->CreateWithDIPSize(*size, scale, depth);
+}
+bool wxBitmap_CreateWithDIPSize1(wxBitmap * self, int width, int height, double scale, int depth) {
+    return self->CreateWithDIPSize(width, height, scale, depth);
+}
 bool wxBitmap_CreateScaled(wxBitmap * self, int width, int height, int depth, double logical_scale) {
     return self->CreateScaled(width, height, depth, logical_scale);
 }
 int wxBitmap_GetDepth(const wxBitmap * self) {
     return self->GetDepth();
 }
+wxSize *wxBitmap_GetDIPSize(const wxBitmap * self) {
+    return new wxSize(self->GetDIPSize());
+}
 int wxBitmap_GetHeight(const wxBitmap * self) {
     return self->GetHeight();
+}
+double wxBitmap_GetLogicalHeight(const wxBitmap * self) {
+    return self->GetLogicalHeight();
+}
+wxSize *wxBitmap_GetLogicalSize(const wxBitmap * self) {
+    return new wxSize(self->GetLogicalSize());
+}
+double wxBitmap_GetLogicalWidth(const wxBitmap * self) {
+    return self->GetLogicalWidth();
 }
 wxMask * wxBitmap_GetMask(const wxBitmap * self) {
     return self->GetMask();
@@ -149,14 +179,32 @@ wxPalette * wxBitmap_GetPalette(const wxBitmap * self) {
 wxBitmap *wxBitmap_GetSubBitmap(const wxBitmap * self, const wxRect * rect) {
     return new wxBitmap(self->GetSubBitmap(*rect));
 }
+double wxBitmap_GetScaleFactor(const wxBitmap * self) {
+    return self->GetScaleFactor();
+}
+double wxBitmap_GetScaledHeight(const wxBitmap * self) {
+    return self->GetScaledHeight();
+}
+wxSize *wxBitmap_GetScaledSize(const wxBitmap * self) {
+    return new wxSize(self->GetScaledSize());
+}
+double wxBitmap_GetScaledWidth(const wxBitmap * self) {
+    return self->GetScaledWidth();
+}
 wxSize *wxBitmap_GetSize(const wxBitmap * self) {
     return new wxSize(self->GetSize());
 }
 int wxBitmap_GetWidth(const wxBitmap * self) {
     return self->GetWidth();
 }
+bool wxBitmap_HasAlpha(const wxBitmap * self) {
+    return self->HasAlpha();
+}
 bool wxBitmap_IsOk(const wxBitmap * self) {
     return self->IsOk();
+}
+void wxBitmap_ResetAlpha(wxBitmap * self) {
+    return self->ResetAlpha();
 }
 #if wxCHECK_VERSION(3, 1, 7)
 void wxBitmap_SetDepth(wxBitmap * self, int depth) {
@@ -166,6 +214,9 @@ void wxBitmap_SetHeight(wxBitmap * self, int height) {
     return self->SetHeight(height);
 }
 #endif
+void wxBitmap_SetScaleFactor(wxBitmap * self, double scale) {
+    return self->SetScaleFactor(scale);
+}
 void wxBitmap_SetMask(wxBitmap * self, wxMask * mask) {
     return self->SetMask(mask);
 }
@@ -177,6 +228,9 @@ void wxBitmap_SetWidth(wxBitmap * self, int width) {
     return self->SetWidth(width);
 }
 #endif
+bool wxBitmap_UseAlpha(wxBitmap * self, bool use_) {
+    return self->UseAlpha(use_);
+}
 void wxBitmap_AddHandler(wxBitmapHandler * handler) {
     return wxBitmap::AddHandler(handler);
 }
@@ -200,15 +254,18 @@ wxBitmap *wxBitmap_NewFromPNGData(const void * data, size_t size) {
 bool wxBitmap_RemoveHandler(const wxString * name) {
     return wxBitmap::RemoveHandler(*name);
 }
+void wxBitmap_Rescale(wxBitmap * bmp, const wxSize * size_needed) {
+    return wxBitmap::Rescale(*bmp, *size_needed);
+}
 
 // CLASS: wxBitmapButton
 wxBitmapButton *wxBitmapButton_new() {
     return new wxBitmapButton();
 }
-wxBitmapButton *wxBitmapButton_new1(wxWindow * parent, wxWindowID id, const wxBitmap * bitmap, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+wxBitmapButton *wxBitmapButton_new1(wxWindow * parent, wxWindowID id, const wxBitmapBundle * bitmap, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
     return new wxBitmapButton(parent, id, *bitmap, *pos, *size, style, *validator, *name);
 }
-bool wxBitmapButton_Create(wxBitmapButton * self, wxWindow * parent, wxWindowID id, const wxBitmap * bitmap, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+bool wxBitmapButton_Create(wxBitmapButton * self, wxWindow * parent, wxWindowID id, const wxBitmapBundle * bitmap, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
     return self->Create(parent, id, *bitmap, *pos, *size, style, *validator, *name);
 }
 #if wxCHECK_VERSION(3, 1, 0)
@@ -400,6 +457,18 @@ wxColour *wxColour_new2(const wxString * colour_name) {
 }
 wxColour *wxColour_new4(const wxColour * colour) {
     return new wxColour(*colour);
+}
+unsigned int wxColour_GetAlpha(const wxColour * self) {
+    return self->GetAlpha();
+}
+unsigned int wxColour_GetBlue(const wxColour * self) {
+    return self->GetBlue();
+}
+unsigned int wxColour_GetGreen(const wxColour * self) {
+    return self->GetGreen();
+}
+unsigned int wxColour_GetRed(const wxColour * self) {
+    return self->GetRed();
 }
 wxString *wxColour_GetAsString(const wxColour * self, long flags) {
     return new wxString(self->GetAsString(flags));
@@ -720,6 +789,21 @@ int wxIcon_GetDepth(const wxIcon * self) {
 }
 int wxIcon_GetHeight(const wxIcon * self) {
     return self->GetHeight();
+}
+double wxIcon_GetLogicalHeight(const wxIcon * self) {
+    return self->GetLogicalHeight();
+}
+wxSize *wxIcon_GetLogicalSize(const wxIcon * self) {
+    return new wxSize(self->GetLogicalSize());
+}
+double wxIcon_GetLogicalWidth(const wxIcon * self) {
+    return self->GetLogicalWidth();
+}
+double wxIcon_GetScaleFactor(const wxIcon * self) {
+    return self->GetScaleFactor();
+}
+wxSize *wxIcon_GetSize(const wxIcon * self) {
+    return new wxSize(self->GetSize());
 }
 int wxIcon_GetWidth(const wxIcon * self) {
     return self->GetWidth();
@@ -1204,6 +1288,9 @@ wxMenuBar * wxMenuBar_MacGetCommonMenuBar() {
 #endif
 
 // CLASS: wxMenuItem
+wxBitmap *wxMenuItem_GetBitmap1(const wxMenuItem * self, bool checked) {
+    return new wxBitmap(self->GetBitmap(checked));
+}
 #ifdef __WXMSW__
 wxBitmap *wxMenuItem_GetDisabledBitmap(const wxMenuItem * self) {
     return new wxBitmap(self->GetDisabledBitmap());
@@ -1263,10 +1350,15 @@ bool wxMenuItem_IsSubMenu(const wxMenuItem * self) {
 void wxMenuItem_SetBackgroundColour(wxMenuItem * self, const wxColour * colour) {
     return self->SetBackgroundColour(*colour);
 }
-void wxMenuItem_SetBitmaps(wxMenuItem * self, const wxBitmap * checked, const wxBitmap * unchecked) {
+#endif
+void wxMenuItem_SetBitmap1(wxMenuItem * self, const wxBitmapBundle * bmp, bool checked) {
+    return self->SetBitmap(*bmp, checked);
+}
+#ifdef __WXMSW__
+void wxMenuItem_SetBitmaps(wxMenuItem * self, const wxBitmapBundle * checked, const wxBitmapBundle * unchecked) {
     return self->SetBitmaps(*checked, *unchecked);
 }
-void wxMenuItem_SetDisabledBitmap(wxMenuItem * self, const wxBitmap * disabled) {
+void wxMenuItem_SetDisabledBitmap(wxMenuItem * self, const wxBitmapBundle * disabled) {
     return self->SetDisabledBitmap(*disabled);
 }
 void wxMenuItem_SetFont(wxMenuItem * self, const wxFont * font) {
@@ -1297,6 +1389,12 @@ void wxMenuItem_SetTextColour(wxMenuItem * self, const wxColour * colour) {
 #endif
 void wxMenuItem_SetAccel(wxMenuItem * self, wxAcceleratorEntry * accel) {
     return self->SetAccel(accel);
+}
+void wxMenuItem_AddExtraAccel(wxMenuItem * self, const wxAcceleratorEntry * accel) {
+    return self->AddExtraAccel(*accel);
+}
+void wxMenuItem_ClearExtraAccels(wxMenuItem * self) {
+    return self->ClearExtraAccels();
 }
 wxMenuItem *wxMenuItem_new(wxMenu * parent_menu, int id, const wxString * text, const wxString * help_string, wxItemKind kind, wxMenu * sub_menu) {
     return new wxMenuItem(parent_menu, id, *text, *help_string, kind, sub_menu);
@@ -2005,6 +2103,9 @@ wxSizerFlags * wxSizerFlags_Top(wxSizerFlags * self) {
 wxSizerFlags * wxSizerFlags_TripleBorder(wxSizerFlags * self, int direction) {
     return &(self->TripleBorder(direction));
 }
+void wxSizerFlags_DisableConsistencyChecks() {
+    return wxSizerFlags::DisableConsistencyChecks();
+}
 int wxSizerFlags_GetDefaultBorder() {
     return wxSizerFlags::GetDefaultBorder();
 }
@@ -2013,10 +2114,10 @@ int wxSizerFlags_GetDefaultBorder() {
 wxStaticBitmap *wxStaticBitmap_new() {
     return new wxStaticBitmap();
 }
-wxStaticBitmap *wxStaticBitmap_new1(wxWindow * parent, wxWindowID id, const wxBitmap * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+wxStaticBitmap *wxStaticBitmap_new1(wxWindow * parent, wxWindowID id, const wxBitmapBundle * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return new wxStaticBitmap(parent, id, *label, *pos, *size, style, *name);
 }
-bool wxStaticBitmap_Create(wxStaticBitmap * self, wxWindow * parent, wxWindowID id, const wxBitmap * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+bool wxStaticBitmap_Create(wxStaticBitmap * self, wxWindow * parent, wxWindowID id, const wxBitmapBundle * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return self->Create(parent, id, *label, *pos, *size, style, *name);
 }
 wxBitmap *wxStaticBitmap_GetBitmap(const wxStaticBitmap * self) {
@@ -2025,7 +2126,7 @@ wxBitmap *wxStaticBitmap_GetBitmap(const wxStaticBitmap * self) {
 wxIcon *wxStaticBitmap_GetIcon(const wxStaticBitmap * self) {
     return new wxIcon(self->GetIcon());
 }
-void wxStaticBitmap_SetBitmap(wxStaticBitmap * self, const wxBitmap * label) {
+void wxStaticBitmap_SetBitmap(wxStaticBitmap * self, const wxBitmapBundle * label) {
     return self->SetBitmap(*label);
 }
 void wxStaticBitmap_SetIcon(wxStaticBitmap * self, const wxIcon * label) {
@@ -2361,6 +2462,9 @@ wxTextAttr *wxTextAttr_Merge1(const wxTextAttr * base, const wxTextAttr * overla
 }
 
 // CLASS: wxTextCtrl
+void wxTextCtrl_OSXEnableNewLineReplacement(wxTextCtrl * self, bool enable) {
+    return self->OSXEnableNewLineReplacement(enable);
+}
 wxTextCtrl *wxTextCtrl_new() {
     return new wxTextCtrl();
 }
@@ -2373,8 +2477,14 @@ bool wxTextCtrl_Create(wxTextCtrl * self, wxWindow * parent, wxWindowID id, cons
 void wxTextCtrl_DiscardEdits(wxTextCtrl * self) {
     return self->DiscardEdits();
 }
+void wxTextCtrl_EmptyUndoBuffer(wxTextCtrl * self) {
+    return self->EmptyUndoBuffer();
+}
 bool wxTextCtrl_EmulateKeyPress(wxTextCtrl * self, const wxKeyEvent * event) {
     return self->EmulateKeyPress(*event);
+}
+bool wxTextCtrl_EnableProofCheck(wxTextCtrl * self, const wxTextProofOptions * options) {
+    return self->EnableProofCheck(*options);
 }
 wxTextAttr *wxTextCtrl_GetDefaultStyle(const wxTextCtrl * self) {
     return new wxTextAttr(self->GetDefaultStyle());
@@ -2572,13 +2682,13 @@ wxToolBar *wxToolBar_new() {
 wxToolBar *wxToolBar_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return new wxToolBar(parent, id, *pos, *size, style, *name);
 }
-wxToolBarToolBase * wxToolBar_AddCheckTool(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap1, const wxBitmap * bmp_disabled, const wxString * short_help, const wxString * long_help, wxObject * client_data) {
+wxToolBarToolBase * wxToolBar_AddCheckTool(wxToolBar * self, int tool_id, const wxString * label, const wxBitmapBundle * bitmap1, const wxBitmapBundle * bmp_disabled, const wxString * short_help, const wxString * long_help, wxObject * client_data) {
     return self->AddCheckTool(tool_id, *label, *bitmap1, *bmp_disabled, *short_help, *long_help, client_data);
 }
 wxToolBarToolBase * wxToolBar_AddControl(wxToolBar * self, wxControl * control, const wxString * label) {
     return self->AddControl(control, *label);
 }
-wxToolBarToolBase * wxToolBar_AddRadioTool(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap1, const wxBitmap * bmp_disabled, const wxString * short_help, const wxString * long_help, wxObject * client_data) {
+wxToolBarToolBase * wxToolBar_AddRadioTool(wxToolBar * self, int tool_id, const wxString * label, const wxBitmapBundle * bitmap1, const wxBitmapBundle * bmp_disabled, const wxString * short_help, const wxString * long_help, wxObject * client_data) {
     return self->AddRadioTool(tool_id, *label, *bitmap1, *bmp_disabled, *short_help, *long_help, client_data);
 }
 wxToolBarToolBase * wxToolBar_AddSeparator(wxToolBar * self) {
@@ -2590,10 +2700,10 @@ wxToolBarToolBase * wxToolBar_AddStretchableSpace(wxToolBar * self) {
 wxToolBarToolBase * wxToolBar_AddTool(wxToolBar * self, wxToolBarToolBase * tool) {
     return self->AddTool(tool);
 }
-wxToolBarToolBase * wxToolBar_AddTool1(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap, const wxString * short_help, wxItemKind kind) {
+wxToolBarToolBase * wxToolBar_AddTool1(wxToolBar * self, int tool_id, const wxString * label, const wxBitmapBundle * bitmap, const wxString * short_help, wxItemKind kind) {
     return self->AddTool(tool_id, *label, *bitmap, *short_help, kind);
 }
-wxToolBarToolBase * wxToolBar_AddTool2(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bitmap, const wxBitmap * bmp_disabled, wxItemKind kind, const wxString * short_help, const wxString * long_help, wxObject * client_data) {
+wxToolBarToolBase * wxToolBar_AddTool2(wxToolBar * self, int tool_id, const wxString * label, const wxBitmapBundle * bitmap, const wxBitmapBundle * bmp_disabled, wxItemKind kind, const wxString * short_help, const wxString * long_help, wxObject * client_data) {
     return self->AddTool(tool_id, *label, *bitmap, *bmp_disabled, kind, *short_help, *long_help, client_data);
 }
 void wxToolBar_ClearTools(wxToolBar * self) {
@@ -2665,7 +2775,7 @@ wxToolBarToolBase * wxToolBar_InsertSeparator(wxToolBar * self, size_t pos) {
 wxToolBarToolBase * wxToolBar_InsertStretchableSpace(wxToolBar * self, size_t pos) {
     return self->InsertStretchableSpace(pos);
 }
-wxToolBarToolBase * wxToolBar_InsertTool(wxToolBar * self, size_t pos, int tool_id, const wxString * label, const wxBitmap * bitmap, const wxBitmap * bmp_disabled, wxItemKind kind, const wxString * short_help, const wxString * long_help, wxObject * client_data) {
+wxToolBarToolBase * wxToolBar_InsertTool(wxToolBar * self, size_t pos, int tool_id, const wxString * label, const wxBitmapBundle * bitmap, const wxBitmapBundle * bmp_disabled, wxItemKind kind, const wxString * short_help, const wxString * long_help, wxObject * client_data) {
     return self->InsertTool(pos, tool_id, *label, *bitmap, *bmp_disabled, kind, *short_help, *long_help, client_data);
 }
 wxToolBarToolBase * wxToolBar_InsertTool1(wxToolBar * self, size_t pos, wxToolBarToolBase * tool) {
@@ -2701,13 +2811,13 @@ void wxToolBar_SetToolBitmapSize(wxToolBar * self, const wxSize * size) {
 void wxToolBar_SetToolClientData(wxToolBar * self, int id, wxObject * client_data) {
     return self->SetToolClientData(id, client_data);
 }
-void wxToolBar_SetToolDisabledBitmap(wxToolBar * self, int id, const wxBitmap * bitmap) {
+void wxToolBar_SetToolDisabledBitmap(wxToolBar * self, int id, const wxBitmapBundle * bitmap) {
     return self->SetToolDisabledBitmap(id, *bitmap);
 }
 void wxToolBar_SetToolLongHelp(wxToolBar * self, int tool_id, const wxString * help_string) {
     return self->SetToolLongHelp(tool_id, *help_string);
 }
-void wxToolBar_SetToolNormalBitmap(wxToolBar * self, int id, const wxBitmap * bitmap) {
+void wxToolBar_SetToolNormalBitmap(wxToolBar * self, int id, const wxBitmapBundle * bitmap) {
     return self->SetToolNormalBitmap(id, *bitmap);
 }
 void wxToolBar_SetToolPacking(wxToolBar * self, int packing) {
@@ -2722,7 +2832,7 @@ void wxToolBar_SetToolShortHelp(wxToolBar * self, int tool_id, const wxString * 
 void wxToolBar_ToggleTool(wxToolBar * self, int tool_id, bool toggle) {
     return self->ToggleTool(tool_id, toggle);
 }
-wxToolBarToolBase * wxToolBar_CreateTool(wxToolBar * self, int tool_id, const wxString * label, const wxBitmap * bmp_normal, const wxBitmap * bmp_disabled, wxItemKind kind, wxObject * client_data, const wxString * short_help, const wxString * long_help) {
+wxToolBarToolBase * wxToolBar_CreateTool(wxToolBar * self, int tool_id, const wxString * label, const wxBitmapBundle * bmp_normal, const wxBitmapBundle * bmp_disabled, wxItemKind kind, wxObject * client_data, const wxString * short_help, const wxString * long_help) {
     return self->CreateTool(tool_id, *label, *bmp_normal, *bmp_disabled, kind, client_data, *short_help, *long_help);
 }
 wxToolBarToolBase * wxToolBar_CreateTool1(wxToolBar * self, wxControl * control, const wxString * label) {
@@ -2834,8 +2944,8 @@ void wxTopLevelWindow_ShowWithoutActivating(wxTopLevelWindow * self) {
     return self->ShowWithoutActivating();
 }
 #if wxCHECK_VERSION(3, 1, 0)
-bool wxTopLevelWindow_EnableFullScreenView(wxTopLevelWindow * self, bool enable) {
-    return self->EnableFullScreenView(enable);
+bool wxTopLevelWindow_EnableFullScreenView(wxTopLevelWindow * self, bool enable, long style) {
+    return self->EnableFullScreenView(enable, style);
 }
 #endif
 bool wxTopLevelWindow_ShowFullScreen(wxTopLevelWindow * self, bool show, long style) {
@@ -3040,6 +3150,24 @@ int wxWindow_ToDIP2(const wxWindow * self, int d) {
     return self->ToDIP(d);
 }
 #endif
+wxSize *wxWindow_FromPhys(const wxWindow * self, const wxSize * sz) {
+    return new wxSize(self->FromPhys(*sz));
+}
+wxPoint *wxWindow_FromPhys1(const wxWindow * self, const wxPoint * pt) {
+    return new wxPoint(self->FromPhys(*pt));
+}
+int wxWindow_FromPhys2(const wxWindow * self, int d) {
+    return self->FromPhys(d);
+}
+wxSize *wxWindow_ToPhys(const wxWindow * self, const wxSize * sz) {
+    return new wxSize(self->ToPhys(*sz));
+}
+wxPoint *wxWindow_ToPhys1(const wxWindow * self, const wxPoint * pt) {
+    return new wxPoint(self->ToPhys(*pt));
+}
+int wxWindow_ToPhys2(const wxWindow * self, int d) {
+    return self->ToPhys(d);
+}
 wxSize *wxWindow_GetBestSize(const wxWindow * self) {
     return new wxSize(self->GetBestSize());
 }
@@ -3197,6 +3325,24 @@ int wxWindow_ToDIP5(int d, const wxWindow * w) {
     return wxWindow::ToDIP(d, w);
 }
 #endif
+wxSize *wxWindow_FromPhys3(const wxSize * sz, const wxWindow * w) {
+    return new wxSize(wxWindow::FromPhys(*sz, w));
+}
+wxPoint *wxWindow_FromPhys4(const wxPoint * pt, const wxWindow * w) {
+    return new wxPoint(wxWindow::FromPhys(*pt, w));
+}
+int wxWindow_FromPhys5(int d, const wxWindow * w) {
+    return wxWindow::FromPhys(d, w);
+}
+wxSize *wxWindow_ToPhys3(const wxSize * sz, const wxWindow * w) {
+    return new wxSize(wxWindow::ToPhys(*sz, w));
+}
+wxPoint *wxWindow_ToPhys4(const wxPoint * pt, const wxWindow * w) {
+    return new wxPoint(wxWindow::ToPhys(*pt, w));
+}
+int wxWindow_ToPhys5(int d, const wxWindow * w) {
+    return wxWindow::ToPhys(d, w);
+}
 void wxWindow_Center(wxWindow * self, int dir) {
     return self->Center(dir);
 }

@@ -32,13 +32,16 @@ extern "C" {
         client: *const c_void,
         size: *const c_void,
     ) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxArtProvider_GetBitmapBundle(id: *const c_void, client: *const c_void, size: *const c_void) -> wxBitmapBundle;
     pub fn wxArtProvider_GetIcon(
         id: *const c_void,
         client: *const c_void,
         size: *const c_void,
     ) -> *mut c_void;
-    pub fn wxArtProvider_GetNativeSizeHint(client: *const c_void) -> *mut c_void;
-    pub fn wxArtProvider_GetSizeHint(client: *const c_void, platform_default: bool) -> *mut c_void;
+    pub fn wxArtProvider_GetNativeDIPSizeHint(client: *const c_void) -> *mut c_void;
+    pub fn wxArtProvider_GetNativeSizeHint(client: *const c_void, win: *mut c_void) -> *mut c_void;
+    pub fn wxArtProvider_GetDIPSizeHint(client: *const c_void) -> *mut c_void;
+    pub fn wxArtProvider_GetSizeHint(client: *const c_void, win: *mut c_void) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxArtProvider_GetIconBundle(id: *const c_void, client: *const c_void) -> wxIconBundle;
     pub fn wxArtProvider_HasNativeProvider() -> bool;
     // BLOCKED: pub fn wxArtProvider_Insert(provider: *mut c_void);
@@ -55,11 +58,14 @@ extern "C" {
     // NOT_SUPPORTED: pub fn wxBitmap_new2(bits: char, width: c_int, height: c_int, depth: c_int) -> *mut c_void;
     pub fn wxBitmap_new3(width: c_int, height: c_int, depth: c_int) -> *mut c_void;
     pub fn wxBitmap_new4(sz: *const c_void, depth: c_int) -> *mut c_void;
-    pub fn wxBitmap_new5(bits: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxBitmap_new6(name: *const c_void, type_: wxBitmapType) -> *mut c_void;
-    pub fn wxBitmap_new7(img: *const c_void, depth: c_int) -> *mut c_void;
-    pub fn wxBitmap_new8(cursor: *const c_void) -> *mut c_void;
+    pub fn wxBitmap_new5(width: c_int, height: c_int, dc: *const c_void) -> *mut c_void;
+    pub fn wxBitmap_new6(bits: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxBitmap_new7(name: *const c_void, type_: wxBitmapType) -> *mut c_void;
+    pub fn wxBitmap_new8(img: *const c_void, depth: c_int) -> *mut c_void;
+    pub fn wxBitmap_new9(img: *const c_void, dc: *const c_void) -> *mut c_void;
+    pub fn wxBitmap_new10(cursor: *const c_void) -> *mut c_void;
     // DTOR: pub fn wxBitmap_~wxBitmap(self_: *mut c_void);
+    // NOT_SUPPORTED: pub fn wxBitmap_ConvertToDisabled(self_: *const c_void, brightness: unsigned char) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxBitmap_ConvertToImage(self_: *const c_void) -> wxImage;
     pub fn wxBitmap_CopyFromIcon(self_: *mut c_void, icon: *const c_void) -> bool;
     pub fn wxBitmap_Create(self_: *mut c_void, width: c_int, height: c_int, depth: c_int) -> bool;
@@ -70,6 +76,19 @@ extern "C" {
         height: c_int,
         dc: *const c_void,
     ) -> bool;
+    pub fn wxBitmap_CreateWithDIPSize(
+        self_: *mut c_void,
+        size: *const c_void,
+        scale: c_double,
+        depth: c_int,
+    ) -> bool;
+    pub fn wxBitmap_CreateWithDIPSize1(
+        self_: *mut c_void,
+        width: c_int,
+        height: c_int,
+        scale: c_double,
+        depth: c_int,
+    ) -> bool;
     pub fn wxBitmap_CreateScaled(
         self_: *mut c_void,
         width: c_int,
@@ -78,21 +97,32 @@ extern "C" {
         logical_scale: c_double,
     ) -> bool;
     pub fn wxBitmap_GetDepth(self_: *const c_void) -> c_int;
+    pub fn wxBitmap_GetDIPSize(self_: *const c_void) -> *mut c_void;
     pub fn wxBitmap_GetHeight(self_: *const c_void) -> c_int;
+    pub fn wxBitmap_GetLogicalHeight(self_: *const c_void) -> c_double;
+    pub fn wxBitmap_GetLogicalSize(self_: *const c_void) -> *mut c_void;
+    pub fn wxBitmap_GetLogicalWidth(self_: *const c_void) -> c_double;
     pub fn wxBitmap_GetMask(self_: *const c_void) -> *mut c_void;
     pub fn wxBitmap_GetPalette(self_: *const c_void) -> *mut c_void;
     pub fn wxBitmap_GetSubBitmap(self_: *const c_void, rect: *const c_void) -> *mut c_void;
+    pub fn wxBitmap_GetScaleFactor(self_: *const c_void) -> c_double;
+    pub fn wxBitmap_GetScaledHeight(self_: *const c_void) -> c_double;
+    pub fn wxBitmap_GetScaledSize(self_: *const c_void) -> *mut c_void;
+    pub fn wxBitmap_GetScaledWidth(self_: *const c_void) -> c_double;
     pub fn wxBitmap_GetSize(self_: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxBitmap_ConvertToDisabled(self_: *const c_void, brightness: unsigned char) -> *mut c_void;
     pub fn wxBitmap_GetWidth(self_: *const c_void) -> c_int;
+    pub fn wxBitmap_HasAlpha(self_: *const c_void) -> bool;
     pub fn wxBitmap_IsOk(self_: *const c_void) -> bool;
     // NOT_SUPPORTED: pub fn wxBitmap_LoadFile(self_: *mut c_void, name: *const c_void, type_: wxBitmapType) -> bool;
+    pub fn wxBitmap_ResetAlpha(self_: *mut c_void);
     // NOT_SUPPORTED: pub fn wxBitmap_SaveFile(self_: *const c_void, name: *const c_void, type_: wxBitmapType, palette: *const c_void) -> bool;
     pub fn wxBitmap_SetDepth(self_: *mut c_void, depth: c_int);
     pub fn wxBitmap_SetHeight(self_: *mut c_void, height: c_int);
+    pub fn wxBitmap_SetScaleFactor(self_: *mut c_void, scale: c_double);
     pub fn wxBitmap_SetMask(self_: *mut c_void, mask: *mut c_void);
     pub fn wxBitmap_SetPalette(self_: *mut c_void, palette: *const c_void);
     pub fn wxBitmap_SetWidth(self_: *mut c_void, width: c_int);
+    pub fn wxBitmap_UseAlpha(self_: *mut c_void, use_: bool) -> bool;
     pub fn wxBitmap_AddHandler(handler: *mut c_void);
     pub fn wxBitmap_CleanUpHandlers();
     pub fn wxBitmap_FindHandler(name: *const c_void) -> *mut c_void;
@@ -103,6 +133,7 @@ extern "C" {
     pub fn wxBitmap_InsertHandler(handler: *mut c_void);
     pub fn wxBitmap_NewFromPNGData(data: *const c_void, size: usize) -> *mut c_void;
     pub fn wxBitmap_RemoveHandler(name: *const c_void) -> bool;
+    pub fn wxBitmap_Rescale(bmp: *mut c_void, size_needed: *const c_void);
 
     // wxBitmapButton
     pub fn wxBitmapButton_new() -> *mut c_void;
@@ -302,6 +333,10 @@ extern "C" {
     pub fn wxColour_new4(colour: *const c_void) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxColour_Alpha(self_: *const c_void) -> unsigned char;
     // NOT_SUPPORTED: pub fn wxColour_Blue(self_: *const c_void) -> unsigned char;
+    pub fn wxColour_GetAlpha(self_: *const c_void) -> c_uint;
+    pub fn wxColour_GetBlue(self_: *const c_void) -> c_uint;
+    pub fn wxColour_GetGreen(self_: *const c_void) -> c_uint;
+    pub fn wxColour_GetRed(self_: *const c_void) -> c_uint;
     pub fn wxColour_GetAsString(self_: *const c_void, flags: c_long) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxColour_SetRGB(self_: *mut c_void, col_rgb: wxUint32);
     // NOT_SUPPORTED: pub fn wxColour_SetRGBA(self_: *mut c_void, col_rgba: wxUint32);
@@ -606,6 +641,11 @@ extern "C" {
     pub fn wxIcon_CopyFromBitmap(self_: *mut c_void, bmp: *const c_void);
     pub fn wxIcon_GetDepth(self_: *const c_void) -> c_int;
     pub fn wxIcon_GetHeight(self_: *const c_void) -> c_int;
+    pub fn wxIcon_GetLogicalHeight(self_: *const c_void) -> c_double;
+    pub fn wxIcon_GetLogicalSize(self_: *const c_void) -> *mut c_void;
+    pub fn wxIcon_GetLogicalWidth(self_: *const c_void) -> c_double;
+    pub fn wxIcon_GetScaleFactor(self_: *const c_void) -> c_double;
+    pub fn wxIcon_GetSize(self_: *const c_void) -> *mut c_void;
     pub fn wxIcon_GetWidth(self_: *const c_void) -> c_int;
     pub fn wxIcon_IsOk(self_: *const c_void) -> bool;
     // NOT_SUPPORTED: pub fn wxIcon_LoadFile(self_: *mut c_void, name: *const c_void, type_: wxBitmapType, desired_width: c_int, desired_height: c_int) -> bool;
@@ -791,7 +831,7 @@ extern "C" {
     pub fn wxListBox_IsSorted(self_: *const c_void) -> bool;
     pub fn wxListBox_GetCountPerPage(self_: *const c_void) -> c_int;
     pub fn wxListBox_GetTopItem(self_: *const c_void) -> c_int;
-    // BLOCKED: pub fn wxListBox_MSWSetTabStops(self_: *mut c_void, tab_stops: *const c_void);
+    // BLOCKED: pub fn wxListBox_MSWSetTabStops(self_: *mut c_void, tab_stops: *const c_void) -> bool;
     // Mix-in(s) to wxListBox
     pub fn wxListBox_AsItemContainer(obj: *mut c_void) -> *mut c_void;
 
@@ -983,7 +1023,9 @@ extern "C" {
 
     // wxMenuItem
     // BLOCKED: pub fn wxMenuItem_GetBackgroundColour(self_: *const c_void) -> *mut c_void;
-    // BLOCKED: pub fn wxMenuItem_GetBitmap(self_: *const c_void, checked: bool) -> *mut c_void;
+    // BLOCKED: pub fn wxMenuItem_GetBitmap(self_: *const c_void) -> wxBitmap;
+    pub fn wxMenuItem_GetBitmap1(self_: *const c_void, checked: bool) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxMenuItem_GetBitmapBundle(self_: *const c_void) -> wxBitmapBundle;
     pub fn wxMenuItem_GetDisabledBitmap(self_: *const c_void) -> *mut c_void;
     // BLOCKED: pub fn wxMenuItem_GetFont(self_: *const c_void) -> *mut c_void;
     pub fn wxMenuItem_GetHelp(self_: *const c_void) -> *mut c_void;
@@ -1008,7 +1050,8 @@ extern "C" {
     pub fn wxMenuItem_IsSeparator(self_: *const c_void) -> bool;
     pub fn wxMenuItem_IsSubMenu(self_: *const c_void) -> bool;
     pub fn wxMenuItem_SetBackgroundColour(self_: *mut c_void, colour: *const c_void);
-    // BLOCKED: pub fn wxMenuItem_SetBitmap(self_: *mut c_void, bmp: *const c_void, checked: bool);
+    // BLOCKED: pub fn wxMenuItem_SetBitmap(self_: *mut c_void, bmp: *const c_void);
+    pub fn wxMenuItem_SetBitmap1(self_: *mut c_void, bmp: *const c_void, checked: bool);
     pub fn wxMenuItem_SetBitmaps(
         self_: *mut c_void,
         checked: *const c_void,
@@ -1024,6 +1067,8 @@ extern "C" {
     // BLOCKED: pub fn wxMenuItem_SetText(self_: *mut c_void, text: *const c_void);
     pub fn wxMenuItem_SetTextColour(self_: *mut c_void, colour: *const c_void);
     pub fn wxMenuItem_SetAccel(self_: *mut c_void, accel: *mut c_void);
+    pub fn wxMenuItem_AddExtraAccel(self_: *mut c_void, accel: *const c_void);
+    pub fn wxMenuItem_ClearExtraAccels(self_: *mut c_void);
     pub fn wxMenuItem_new(
         parent_menu: *mut c_void,
         id: c_int,
@@ -1264,10 +1309,15 @@ extern "C" {
     // BLOCKED: pub fn wxSize_operator+=(self_: *mut c_void, sz: *const c_void) -> *mut c_void;
     // BLOCKED: pub fn wxSize_operator-=(self_: *mut c_void, sz: *const c_void) -> *mut c_void;
     // BLOCKED: pub fn wxSize_operator/(self_: *mut c_void, sz: *const c_void, factor: c_int) -> wxSize;
+    // BLOCKED: pub fn wxSize_operator/1(self_: *mut c_void, sz: *const c_void, factor: c_double) -> wxSize;
     // BLOCKED: pub fn wxSize_operator*(self_: *mut c_void, sz: *const c_void, factor: c_int) -> wxSize;
-    // BLOCKED: pub fn wxSize_operator*1(self_: *mut c_void, factor: c_int, sz: *const c_void) -> wxSize;
+    // BLOCKED: pub fn wxSize_operator*1(self_: *mut c_void, sz: *const c_void, factor: c_double) -> wxSize;
+    // BLOCKED: pub fn wxSize_operator*2(self_: *mut c_void, factor: c_int, sz: *const c_void) -> wxSize;
+    // BLOCKED: pub fn wxSize_operator*3(self_: *mut c_void, factor: c_double, sz: *const c_void) -> wxSize;
     // BLOCKED: pub fn wxSize_operator/=(self_: *mut c_void, factor: c_int) -> *mut c_void;
+    // BLOCKED: pub fn wxSize_operator/=1(self_: *mut c_void, factor: c_double) -> *mut c_void;
     // BLOCKED: pub fn wxSize_operator*=(self_: *mut c_void, factor: c_int) -> *mut c_void;
+    // BLOCKED: pub fn wxSize_operator*=1(self_: *mut c_void, factor: c_double) -> *mut c_void;
     pub fn wxSize_new() -> *mut c_void;
     pub fn wxSize_new1(width: c_int, height: c_int) -> *mut c_void;
     pub fn wxSize_DecBy(self_: *mut c_void, pt: *const c_void);
@@ -1575,6 +1625,7 @@ extern "C" {
     pub fn wxSizerFlags_Shaped(self_: *mut c_void) -> *mut c_void;
     pub fn wxSizerFlags_Top(self_: *mut c_void) -> *mut c_void;
     pub fn wxSizerFlags_TripleBorder(self_: *mut c_void, direction: c_int) -> *mut c_void;
+    pub fn wxSizerFlags_DisableConsistencyChecks();
     pub fn wxSizerFlags_GetDefaultBorder() -> c_int;
     // NOT_SUPPORTED: pub fn wxSizerFlags_GetDefaultBorderFractional() -> float;
 
@@ -1787,6 +1838,14 @@ extern "C" {
     pub fn wxTextAttr_Merge1(base: *const c_void, overlay: *const c_void) -> *mut c_void;
 
     // wxTextCtrl
+    pub fn wxTextCtrl_OSXEnableNewLineReplacement(self_: *mut c_void, enable: bool);
+    // BLOCKED: pub fn wxTextCtrl_operator<<(self_: *mut c_void, s: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxTextCtrl_operator<<1(self_: *mut c_void, i: c_int) -> *mut c_void;
+    // BLOCKED: pub fn wxTextCtrl_operator<<2(self_: *mut c_void, i: c_long) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxTextCtrl_operator<<3(self_: *mut c_void, f: float) -> *mut c_void;
+    // BLOCKED: pub fn wxTextCtrl_operator<<4(self_: *mut c_void, d: c_double) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxTextCtrl_operator<<5(self_: *mut c_void, c: char) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxTextCtrl_operator<<6(self_: *mut c_void, c: wchar_t) -> *mut c_void;
     pub fn wxTextCtrl_new() -> *mut c_void;
     pub fn wxTextCtrl_new1(
         parent: *mut c_void,
@@ -1811,7 +1870,9 @@ extern "C" {
         name: *const c_void,
     ) -> bool;
     pub fn wxTextCtrl_DiscardEdits(self_: *mut c_void);
+    pub fn wxTextCtrl_EmptyUndoBuffer(self_: *mut c_void);
     pub fn wxTextCtrl_EmulateKeyPress(self_: *mut c_void, event: *const c_void) -> bool;
+    pub fn wxTextCtrl_EnableProofCheck(self_: *mut c_void, options: *const c_void) -> bool;
     pub fn wxTextCtrl_GetDefaultStyle(self_: *const c_void) -> *mut c_void;
     pub fn wxTextCtrl_GetLineLength(self_: *const c_void, line_no: c_long) -> c_int;
     pub fn wxTextCtrl_GetLineText(self_: *const c_void, line_no: c_long) -> *mut c_void;
@@ -1822,6 +1883,7 @@ extern "C" {
     pub fn wxTextCtrl_IsModified(self_: *const c_void) -> bool;
     pub fn wxTextCtrl_IsMultiLine(self_: *const c_void) -> bool;
     pub fn wxTextCtrl_IsSingleLine(self_: *const c_void) -> bool;
+    // NOT_SUPPORTED: pub fn wxTextCtrl_GetProofCheckOptions(self_: *mut c_void) -> wxTextProofOptions;
     pub fn wxTextCtrl_LoadFile(
         self_: *mut c_void,
         filename: *const c_void,
@@ -1851,13 +1913,6 @@ extern "C" {
     ) -> bool;
     pub fn wxTextCtrl_ShowPosition(self_: *mut c_void, pos: c_long);
     pub fn wxTextCtrl_XYToPosition(self_: *const c_void, x: c_long, y: c_long) -> c_long;
-    // BLOCKED: pub fn wxTextCtrl_operator<<(self_: *mut c_void, s: *const c_void) -> *mut c_void;
-    // BLOCKED: pub fn wxTextCtrl_operator<<1(self_: *mut c_void, i: c_int) -> *mut c_void;
-    // BLOCKED: pub fn wxTextCtrl_operator<<2(self_: *mut c_void, i: c_long) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxTextCtrl_operator<<3(self_: *mut c_void, f: float) -> *mut c_void;
-    // BLOCKED: pub fn wxTextCtrl_operator<<4(self_: *mut c_void, d: c_double) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxTextCtrl_operator<<5(self_: *mut c_void, c: char) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxTextCtrl_operator<<6(self_: *mut c_void, c: wchar_t) -> *mut c_void;
     // Mix-in(s) to wxTextCtrl
     pub fn wxTextCtrl_AsTextEntry(obj: *mut c_void) -> *mut c_void;
 
@@ -2104,8 +2159,14 @@ extern "C" {
     pub fn wxTopLevelWindow_OSXIsModified(self_: *const c_void) -> bool;
     pub fn wxTopLevelWindow_SetRepresentedFilename(self_: *mut c_void, filename: *const c_void);
     pub fn wxTopLevelWindow_ShowWithoutActivating(self_: *mut c_void);
-    pub fn wxTopLevelWindow_EnableFullScreenView(self_: *mut c_void, enable: bool) -> bool;
+    pub fn wxTopLevelWindow_EnableFullScreenView(
+        self_: *mut c_void,
+        enable: bool,
+        style: c_long,
+    ) -> bool;
     pub fn wxTopLevelWindow_ShowFullScreen(self_: *mut c_void, show: bool, style: c_long) -> bool;
+    // NOT_SUPPORTED: pub fn wxTopLevelWindow_GetContentProtection(self_: *const c_void) -> wxContentProtection;
+    // NOT_SUPPORTED: pub fn wxTopLevelWindow_SetContentProtection(self_: *mut c_void, content_protection: wxContentProtection) -> bool;
     // BLOCKED: pub fn wxTopLevelWindow_UseNativeDecorations(self_: *mut c_void, native: bool);
     // BLOCKED: pub fn wxTopLevelWindow_UseNativeDecorationsByDefault(self_: *mut c_void, native: bool);
     pub fn wxTopLevelWindow_GetDefaultSize() -> *mut c_void;
@@ -2184,6 +2245,12 @@ extern "C" {
     pub fn wxWindow_ToDIP(self_: *const c_void, sz: *const c_void) -> *mut c_void;
     pub fn wxWindow_ToDIP1(self_: *const c_void, pt: *const c_void) -> *mut c_void;
     pub fn wxWindow_ToDIP2(self_: *const c_void, d: c_int) -> c_int;
+    pub fn wxWindow_FromPhys(self_: *const c_void, sz: *const c_void) -> *mut c_void;
+    pub fn wxWindow_FromPhys1(self_: *const c_void, pt: *const c_void) -> *mut c_void;
+    pub fn wxWindow_FromPhys2(self_: *const c_void, d: c_int) -> c_int;
+    pub fn wxWindow_ToPhys(self_: *const c_void, sz: *const c_void) -> *mut c_void;
+    pub fn wxWindow_ToPhys1(self_: *const c_void, pt: *const c_void) -> *mut c_void;
+    pub fn wxWindow_ToPhys2(self_: *const c_void, d: c_int) -> c_int;
     pub fn wxWindow_GetBestSize(self_: *const c_void) -> *mut c_void;
     pub fn wxWindow_GetBestHeight(self_: *const c_void, width: c_int) -> c_int;
     pub fn wxWindow_GetBestWidth(self_: *const c_void, height: c_int) -> c_int;
@@ -2260,6 +2327,12 @@ extern "C" {
     pub fn wxWindow_ToDIP3(sz: *const c_void, w: *const c_void) -> *mut c_void;
     pub fn wxWindow_ToDIP4(pt: *const c_void, w: *const c_void) -> *mut c_void;
     pub fn wxWindow_ToDIP5(d: c_int, w: *const c_void) -> c_int;
+    pub fn wxWindow_FromPhys3(sz: *const c_void, w: *const c_void) -> *mut c_void;
+    pub fn wxWindow_FromPhys4(pt: *const c_void, w: *const c_void) -> *mut c_void;
+    pub fn wxWindow_FromPhys5(d: c_int, w: *const c_void) -> c_int;
+    pub fn wxWindow_ToPhys3(sz: *const c_void, w: *const c_void) -> *mut c_void;
+    pub fn wxWindow_ToPhys4(pt: *const c_void, w: *const c_void) -> *mut c_void;
+    pub fn wxWindow_ToPhys5(d: c_int, w: *const c_void) -> c_int;
     pub fn wxWindow_Center(self_: *mut c_void, dir: c_int);
     pub fn wxWindow_CenterOnParent(self_: *mut c_void, dir: c_int);
     pub fn wxWindow_Centre(self_: *mut c_void, direction: c_int);

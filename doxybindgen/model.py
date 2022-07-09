@@ -51,6 +51,7 @@ RUST_KEYWORDS = [
     'move',
     'ref',
     'type',
+    'use',
 ]
 
 
