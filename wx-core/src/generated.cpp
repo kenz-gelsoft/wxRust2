@@ -624,6 +624,32 @@ void wxDirPickerCtrl_SetPath(wxDirPickerCtrl * self, const wxString * dirname) {
     return self->SetPath(*dirname);
 }
 
+// CLASS: wxFilePickerCtrl
+wxFilePickerCtrl *wxFilePickerCtrl_new() {
+    return new wxFilePickerCtrl();
+}
+wxFilePickerCtrl *wxFilePickerCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * path, const wxString * message, const wxString * wildcard, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return new wxFilePickerCtrl(parent, id, *path, *message, *wildcard, *pos, *size, style, *validator, *name);
+}
+bool wxFilePickerCtrl_Create(wxFilePickerCtrl * self, wxWindow * parent, wxWindowID id, const wxString * path, const wxString * message, const wxString * wildcard, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, *path, *message, *wildcard, *pos, *size, style, *validator, *name);
+}
+wxFileName *wxFilePickerCtrl_GetFileName(const wxFilePickerCtrl * self) {
+    return new wxFileName(self->GetFileName());
+}
+wxString *wxFilePickerCtrl_GetPath(const wxFilePickerCtrl * self) {
+    return new wxString(self->GetPath());
+}
+void wxFilePickerCtrl_SetFileName(wxFilePickerCtrl * self, const wxFileName * filename) {
+    return self->SetFileName(*filename);
+}
+void wxFilePickerCtrl_SetInitialDirectory(wxFilePickerCtrl * self, const wxString * dir) {
+    return self->SetInitialDirectory(*dir);
+}
+void wxFilePickerCtrl_SetPath(wxFilePickerCtrl * self, const wxString * filename) {
+    return self->SetPath(*filename);
+}
+
 // CLASS: wxFrame
 wxFrame *wxFrame_new() {
     return new wxFrame();

@@ -6,6 +6,7 @@
 #include <wx/clrpicker.h>
 #include <wx/datectrl.h>
 #include <wx/filepicker.h>
+#include <wx/filedlg.h>
 #include <wx/wrapsizer.h>
 
 extern "C" {
@@ -255,6 +256,16 @@ wxString *wxDirPickerCtrl_GetPath(const wxDirPickerCtrl * self);
 void wxDirPickerCtrl_SetDirName(wxDirPickerCtrl * self, const wxFileName * dirname);
 void wxDirPickerCtrl_SetInitialDirectory(wxDirPickerCtrl * self, const wxString * dir);
 void wxDirPickerCtrl_SetPath(wxDirPickerCtrl * self, const wxString * dirname);
+
+// CLASS: wxFilePickerCtrl
+wxFilePickerCtrl *wxFilePickerCtrl_new();
+wxFilePickerCtrl *wxFilePickerCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * path, const wxString * message, const wxString * wildcard, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+bool wxFilePickerCtrl_Create(wxFilePickerCtrl * self, wxWindow * parent, wxWindowID id, const wxString * path, const wxString * message, const wxString * wildcard, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+wxFileName *wxFilePickerCtrl_GetFileName(const wxFilePickerCtrl * self);
+wxString *wxFilePickerCtrl_GetPath(const wxFilePickerCtrl * self);
+void wxFilePickerCtrl_SetFileName(wxFilePickerCtrl * self, const wxFileName * filename);
+void wxFilePickerCtrl_SetInitialDirectory(wxFilePickerCtrl * self, const wxString * dir);
+void wxFilePickerCtrl_SetPath(wxFilePickerCtrl * self, const wxString * filename);
 
 // CLASS: wxFrame
 wxFrame *wxFrame_new();

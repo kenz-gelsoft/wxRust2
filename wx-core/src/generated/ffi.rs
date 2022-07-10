@@ -525,6 +525,39 @@ extern "C" {
     pub fn wxDirPickerCtrl_SetInitialDirectory(self_: *mut c_void, dir: *const c_void);
     pub fn wxDirPickerCtrl_SetPath(self_: *mut c_void, dirname: *const c_void);
 
+    // wxFilePickerCtrl
+    pub fn wxFilePickerCtrl_new() -> *mut c_void;
+    pub fn wxFilePickerCtrl_new1(
+        parent: *mut c_void,
+        id: c_int,
+        path: *const c_void,
+        message: *const c_void,
+        wildcard: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxFilePickerCtrl_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        path: *const c_void,
+        message: *const c_void,
+        wildcard: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxFilePickerCtrl_GetFileName(self_: *const c_void) -> *mut c_void;
+    pub fn wxFilePickerCtrl_GetPath(self_: *const c_void) -> *mut c_void;
+    pub fn wxFilePickerCtrl_SetFileName(self_: *mut c_void, filename: *const c_void);
+    pub fn wxFilePickerCtrl_SetInitialDirectory(self_: *mut c_void, dir: *const c_void);
+    pub fn wxFilePickerCtrl_SetPath(self_: *mut c_void, filename: *const c_void);
+
     // wxFrame
     pub fn wxFrame_new() -> *mut c_void;
     pub fn wxFrame_new1(
