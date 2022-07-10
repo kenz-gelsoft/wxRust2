@@ -168,7 +168,7 @@ extern "C" {
     pub fn wxBitmapBundle_GetIcon(self_: *const c_void, size: *const c_void) -> *mut c_void;
     pub fn wxBitmapBundle_GetIconFor(self_: *const c_void, window: *const c_void) -> *mut c_void;
     pub fn wxBitmapBundle_IsSameAs(self_: *const c_void, other: *const c_void) -> bool;
-    pub fn wxBitmapBundle_FromBitmaps(bitmaps: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxBitmapBundle_FromBitmaps(bitmaps: *const c_void) -> wxBitmapBundle;
     pub fn wxBitmapBundle_FromBitmaps1(
         bitmap1: *const c_void,
         bitmap2: *const c_void,
@@ -184,7 +184,7 @@ extern "C" {
         extension: *const c_void,
     ) -> *mut c_void;
     pub fn wxBitmapBundle_FromFiles1(fullpathname: *const c_void) -> *mut c_void;
-    pub fn wxBitmapBundle_FromSVG(data: *mut c_void, size_def: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxBitmapBundle_FromSVG(data: *mut c_void, size_def: *const c_void) -> wxBitmapBundle;
     pub fn wxBitmapBundle_FromSVG1(data: *const c_void, size_def: *const c_void) -> *mut c_void;
     pub fn wxBitmapBundle_FromSVGFile(path: *const c_void, size_def: *const c_void) -> *mut c_void;
     pub fn wxBitmapBundle_FromSVGResource(
@@ -1080,7 +1080,7 @@ extern "C" {
 
     // wxMenuItem
     // BLOCKED: pub fn wxMenuItem_GetBackgroundColour(self_: *const c_void) -> *mut c_void;
-    // BLOCKED: pub fn wxMenuItem_GetBitmap(self_: *const c_void) -> wxBitmap;
+    pub fn wxMenuItem_GetBitmap(self_: *const c_void) -> *mut c_void;
     pub fn wxMenuItem_GetBitmap1(self_: *const c_void, checked: bool) -> *mut c_void;
     pub fn wxMenuItem_GetBitmapBundle(self_: *const c_void) -> *mut c_void;
     pub fn wxMenuItem_GetDisabledBitmap(self_: *const c_void) -> *mut c_void;
@@ -1107,7 +1107,7 @@ extern "C" {
     pub fn wxMenuItem_IsSeparator(self_: *const c_void) -> bool;
     pub fn wxMenuItem_IsSubMenu(self_: *const c_void) -> bool;
     pub fn wxMenuItem_SetBackgroundColour(self_: *mut c_void, colour: *const c_void);
-    // BLOCKED: pub fn wxMenuItem_SetBitmap(self_: *mut c_void, bmp: *const c_void);
+    pub fn wxMenuItem_SetBitmap(self_: *mut c_void, bmp: *const c_void);
     pub fn wxMenuItem_SetBitmap1(self_: *mut c_void, bmp: *const c_void, checked: bool);
     pub fn wxMenuItem_SetBitmaps(
         self_: *mut c_void,

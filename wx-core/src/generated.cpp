@@ -316,9 +316,6 @@ wxIcon *wxBitmapBundle_GetIconFor(const wxBitmapBundle * self, const wxWindow * 
 bool wxBitmapBundle_IsSameAs(const wxBitmapBundle * self, const wxBitmapBundle * other) {
     return self->IsSameAs(*other);
 }
-wxBitmapBundle *wxBitmapBundle_FromBitmaps(const wxVector< wxBitmap > * bitmaps) {
-    return new wxBitmapBundle(wxBitmapBundle::FromBitmaps(*bitmaps));
-}
 wxBitmapBundle *wxBitmapBundle_FromBitmaps1(const wxBitmap * bitmap1, const wxBitmap * bitmap2) {
     return new wxBitmapBundle(wxBitmapBundle::FromBitmaps(*bitmap1, *bitmap2));
 }
@@ -342,9 +339,6 @@ wxBitmapBundle *wxBitmapBundle_FromFiles(const wxString * path, const wxString *
 }
 wxBitmapBundle *wxBitmapBundle_FromFiles1(const wxString * fullpathname) {
     return new wxBitmapBundle(wxBitmapBundle::FromFiles(*fullpathname));
-}
-wxBitmapBundle *wxBitmapBundle_FromSVG(char * data, const wxSize * size_def) {
-    return new wxBitmapBundle(wxBitmapBundle::FromSVG(data, *size_def));
 }
 wxBitmapBundle *wxBitmapBundle_FromSVG1(const char * data, const wxSize * size_def) {
     return new wxBitmapBundle(wxBitmapBundle::FromSVG(data, *size_def));
@@ -1386,9 +1380,14 @@ wxMenuBar * wxMenuBar_MacGetCommonMenuBar() {
 #endif
 
 // CLASS: wxMenuItem
+wxBitmap *wxMenuItem_GetBitmap(const wxMenuItem * self) {
+    return new wxBitmap(self->GetBitmap());
+}
+#ifdef __WXMSW__
 wxBitmap *wxMenuItem_GetBitmap1(const wxMenuItem * self, bool checked) {
     return new wxBitmap(self->GetBitmap(checked));
 }
+#endif
 wxBitmapBundle *wxMenuItem_GetBitmapBundle(const wxMenuItem * self) {
     return new wxBitmapBundle(self->GetBitmapBundle());
 }
@@ -1452,10 +1451,13 @@ void wxMenuItem_SetBackgroundColour(wxMenuItem * self, const wxColour * colour) 
     return self->SetBackgroundColour(*colour);
 }
 #endif
+void wxMenuItem_SetBitmap(wxMenuItem * self, const wxBitmapBundle * bmp) {
+    return self->SetBitmap(*bmp);
+}
+#ifdef __WXMSW__
 void wxMenuItem_SetBitmap1(wxMenuItem * self, const wxBitmapBundle * bmp, bool checked) {
     return self->SetBitmap(*bmp, checked);
 }
-#ifdef __WXMSW__
 void wxMenuItem_SetBitmaps(wxMenuItem * self, const wxBitmapBundle * checked, const wxBitmapBundle * unchecked) {
     return self->SetBitmaps(*checked, *unchecked);
 }

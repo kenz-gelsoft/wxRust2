@@ -91,6 +91,9 @@ wx317 = [
 [types.wxBitmapBundle]
 blocklist = [
     'operator=',
+    'FromBitmaps',
+    # conflict on const vs mut
+    'FromSVG',
 ]
 [types.wxBitmapButton]
 wx31 = [
@@ -271,9 +274,6 @@ mac = [
 [types.wxMenuItem]
 blocklist = [
     'GetLabelFromText',
-    # Probably documentation mismatch
-    'GetBitmap',
-    'SetBitmap',
     # Deprecated, maybe removed
     'GetLabel',
     'GetName',
@@ -287,9 +287,11 @@ blocklist = [
     'GetTextColour',
 ]
 windows = [
+    'GetBitmap1',
     'GetDisabledBitmap',
     'GetMarginWidth',
     'SetBackgroundColour',
+    'SetBitmap1',
     'SetBitmaps',
     'SetDisabledBitmap',
     'SetFont',

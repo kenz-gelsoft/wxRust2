@@ -126,7 +126,6 @@ wxBitmap *wxBitmapBundle_GetBitmapFor(const wxBitmapBundle * self, const wxWindo
 wxIcon *wxBitmapBundle_GetIcon(const wxBitmapBundle * self, const wxSize * size);
 wxIcon *wxBitmapBundle_GetIconFor(const wxBitmapBundle * self, const wxWindow * window);
 bool wxBitmapBundle_IsSameAs(const wxBitmapBundle * self, const wxBitmapBundle * other);
-wxBitmapBundle *wxBitmapBundle_FromBitmaps(const wxVector< wxBitmap > * bitmaps);
 wxBitmapBundle *wxBitmapBundle_FromBitmaps1(const wxBitmap * bitmap1, const wxBitmap * bitmap2);
 wxBitmapBundle *wxBitmapBundle_FromBitmap(const wxBitmap * bitmap);
 wxBitmapBundle *wxBitmapBundle_FromIconBundle(const wxIconBundle * icon_bundle);
@@ -135,7 +134,6 @@ wxBitmapBundle *wxBitmapBundle_FromImpl(wxBitmapBundleImpl * impl_);
 wxBitmapBundle *wxBitmapBundle_FromResources(const wxString * name);
 wxBitmapBundle *wxBitmapBundle_FromFiles(const wxString * path, const wxString * filename, const wxString * extension);
 wxBitmapBundle *wxBitmapBundle_FromFiles1(const wxString * fullpathname);
-wxBitmapBundle *wxBitmapBundle_FromSVG(char * data, const wxSize * size_def);
 wxBitmapBundle *wxBitmapBundle_FromSVG1(const char * data, const wxSize * size_def);
 wxBitmapBundle *wxBitmapBundle_FromSVGFile(const wxString * path, const wxSize * size_def);
 wxBitmapBundle *wxBitmapBundle_FromSVGResource(const wxString * name, const wxSize * size_def);
@@ -530,7 +528,10 @@ wxMenuBar * wxMenuBar_MacGetCommonMenuBar();
 #endif
 
 // CLASS: wxMenuItem
+wxBitmap *wxMenuItem_GetBitmap(const wxMenuItem * self);
+#ifdef __WXMSW__
 wxBitmap *wxMenuItem_GetBitmap1(const wxMenuItem * self, bool checked);
+#endif
 wxBitmapBundle *wxMenuItem_GetBitmapBundle(const wxMenuItem * self);
 #ifdef __WXMSW__
 wxBitmap *wxMenuItem_GetDisabledBitmap(const wxMenuItem * self);
@@ -556,8 +557,9 @@ bool wxMenuItem_IsSubMenu(const wxMenuItem * self);
 #ifdef __WXMSW__
 void wxMenuItem_SetBackgroundColour(wxMenuItem * self, const wxColour * colour);
 #endif
-void wxMenuItem_SetBitmap1(wxMenuItem * self, const wxBitmapBundle * bmp, bool checked);
+void wxMenuItem_SetBitmap(wxMenuItem * self, const wxBitmapBundle * bmp);
 #ifdef __WXMSW__
+void wxMenuItem_SetBitmap1(wxMenuItem * self, const wxBitmapBundle * bmp, bool checked);
 void wxMenuItem_SetBitmaps(wxMenuItem * self, const wxBitmapBundle * checked, const wxBitmapBundle * unchecked);
 void wxMenuItem_SetDisabledBitmap(wxMenuItem * self, const wxBitmapBundle * disabled);
 void wxMenuItem_SetFont(wxMenuItem * self, const wxFont * font);

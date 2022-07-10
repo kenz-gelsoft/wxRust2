@@ -452,10 +452,8 @@ pub trait BitmapBundleMethods: WxRustMethods {
             ffi::wxBitmapBundle_IsSameAs(self.as_ptr(), other)
         }
     }
-    fn from_bitmaps_vector<wxbitmap>(bitmaps: *const c_void) -> BitmapBundle {
-        unsafe { BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromBitmaps(bitmaps)) }
-    }
-    fn from_bitmaps_bitmap<B: BitmapMethods, B2: BitmapMethods>(
+    // BLOCKED: fn FromBitmaps()
+    fn from_bitmaps<B: BitmapMethods, B2: BitmapMethods>(
         bitmap1: &B,
         bitmap2: &B2,
     ) -> BitmapBundle {
@@ -505,13 +503,8 @@ pub trait BitmapBundleMethods: WxRustMethods {
             BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromFiles1(fullpathname))
         }
     }
-    fn from_svg_char<S: SizeMethods>(data: *mut c_void, size_def: &S) -> BitmapBundle {
-        unsafe {
-            let size_def = size_def.as_ptr();
-            BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromSVG(data, size_def))
-        }
-    }
-    fn from_svg_char<S: SizeMethods>(data: *const c_void, size_def: &S) -> BitmapBundle {
+    // BLOCKED: fn FromSVG()
+    fn from_svg<S: SizeMethods>(data: *const c_void, size_def: &S) -> BitmapBundle {
         unsafe {
             let size_def = size_def.as_ptr();
             BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromSVG1(data, size_def))
@@ -2620,8 +2613,10 @@ pub trait MenuBarMethods: WindowMethods {
 // wxMenuItem
 pub trait MenuItemMethods: ObjectMethods {
     // BLOCKED: fn GetBackgroundColour()
-    // BLOCKED: fn GetBitmap()
-    fn get_bitmap(&self, checked: bool) -> Bitmap {
+    fn get_bitmap(&self) -> Bitmap {
+        unsafe { Bitmap::from_ptr(ffi::wxMenuItem_GetBitmap(self.as_ptr())) }
+    }
+    fn get_bitmap_bool(&self, checked: bool) -> Bitmap {
         unsafe { Bitmap::from_ptr(ffi::wxMenuItem_GetBitmap1(self.as_ptr(), checked)) }
     }
     fn get_bitmap_bundle(&self) -> BitmapBundle {
@@ -2690,8 +2685,13 @@ pub trait MenuItemMethods: ObjectMethods {
             ffi::wxMenuItem_SetBackgroundColour(self.as_ptr(), colour)
         }
     }
-    // BLOCKED: fn SetBitmap()
-    fn set_bitmap<B: BitmapBundleMethods>(&self, bmp: &B, checked: bool) {
+    fn set_bitmap<B: BitmapBundleMethods>(&self, bmp: &B) {
+        unsafe {
+            let bmp = bmp.as_ptr();
+            ffi::wxMenuItem_SetBitmap(self.as_ptr(), bmp)
+        }
+    }
+    fn set_bitmap_bool<B: BitmapBundleMethods>(&self, bmp: &B, checked: bool) {
         unsafe {
             let bmp = bmp.as_ptr();
             ffi::wxMenuItem_SetBitmap1(self.as_ptr(), bmp, checked)
