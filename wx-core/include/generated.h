@@ -32,6 +32,7 @@ void wxAnyButton_SetBitmapPosition(wxAnyButton * self, wxDirection dir);
 // CLASS: wxArtProvider
 bool wxArtProvider_Delete(wxArtProvider * provider);
 wxBitmap *wxArtProvider_GetBitmap(const wxArtID * id, const wxArtClient * client, const wxSize * size);
+wxBitmapBundle *wxArtProvider_GetBitmapBundle(const wxArtID * id, const wxArtClient * client, const wxSize * size);
 wxIcon *wxArtProvider_GetIcon(const wxArtID * id, const wxArtClient * client, const wxSize * size);
 wxSize *wxArtProvider_GetNativeDIPSizeHint(const wxArtClient * client);
 wxSize *wxArtProvider_GetNativeSizeHint(const wxArtClient * client, wxWindow * win);
@@ -105,6 +106,39 @@ void wxBitmap_InsertHandler(wxBitmapHandler * handler);
 wxBitmap *wxBitmap_NewFromPNGData(const void * data, size_t size);
 bool wxBitmap_RemoveHandler(const wxString * name);
 void wxBitmap_Rescale(wxBitmap * bmp, const wxSize * size_needed);
+
+// CLASS: wxBitmapBundle
+void wxBitmapBundle_delete(wxBitmapBundle *self);
+wxBitmapBundle *wxBitmapBundle_new();
+wxBitmapBundle *wxBitmapBundle_new1(const wxBitmap * bitmap);
+wxBitmapBundle *wxBitmapBundle_new2(const wxIcon * icon);
+wxBitmapBundle *wxBitmapBundle_new3(const wxImage * image);
+wxBitmapBundle *wxBitmapBundle_new4(const char *const * xpm);
+wxBitmapBundle *wxBitmapBundle_new5(const wxBitmapBundle * other);
+void wxBitmapBundle_Clear(wxBitmapBundle * self);
+bool wxBitmapBundle_IsOk(const wxBitmapBundle * self);
+wxSize *wxBitmapBundle_GetDefaultSize(const wxBitmapBundle * self);
+wxSize *wxBitmapBundle_GetPreferredBitmapSizeAtScale(const wxBitmapBundle * self, double scale);
+wxSize *wxBitmapBundle_GetPreferredBitmapSizeFor(const wxBitmapBundle * self, const wxWindow * window);
+wxSize *wxBitmapBundle_GetPreferredLogicalSizeFor(const wxBitmapBundle * self, const wxWindow * window);
+wxBitmap *wxBitmapBundle_GetBitmap(const wxBitmapBundle * self, const wxSize * size);
+wxBitmap *wxBitmapBundle_GetBitmapFor(const wxBitmapBundle * self, const wxWindow * window);
+wxIcon *wxBitmapBundle_GetIcon(const wxBitmapBundle * self, const wxSize * size);
+wxIcon *wxBitmapBundle_GetIconFor(const wxBitmapBundle * self, const wxWindow * window);
+bool wxBitmapBundle_IsSameAs(const wxBitmapBundle * self, const wxBitmapBundle * other);
+wxBitmapBundle *wxBitmapBundle_FromBitmaps(const wxVector< wxBitmap > * bitmaps);
+wxBitmapBundle *wxBitmapBundle_FromBitmaps1(const wxBitmap * bitmap1, const wxBitmap * bitmap2);
+wxBitmapBundle *wxBitmapBundle_FromBitmap(const wxBitmap * bitmap);
+wxBitmapBundle *wxBitmapBundle_FromIconBundle(const wxIconBundle * icon_bundle);
+wxBitmapBundle *wxBitmapBundle_FromImage(const wxImage * image);
+wxBitmapBundle *wxBitmapBundle_FromImpl(wxBitmapBundleImpl * impl_);
+wxBitmapBundle *wxBitmapBundle_FromResources(const wxString * name);
+wxBitmapBundle *wxBitmapBundle_FromFiles(const wxString * path, const wxString * filename, const wxString * extension);
+wxBitmapBundle *wxBitmapBundle_FromFiles1(const wxString * fullpathname);
+wxBitmapBundle *wxBitmapBundle_FromSVG(char * data, const wxSize * size_def);
+wxBitmapBundle *wxBitmapBundle_FromSVG1(const char * data, const wxSize * size_def);
+wxBitmapBundle *wxBitmapBundle_FromSVGFile(const wxString * path, const wxSize * size_def);
+wxBitmapBundle *wxBitmapBundle_FromSVGResource(const wxString * name, const wxSize * size_def);
 
 // CLASS: wxBitmapButton
 wxBitmapButton *wxBitmapButton_new();
@@ -497,6 +531,7 @@ wxMenuBar * wxMenuBar_MacGetCommonMenuBar();
 
 // CLASS: wxMenuItem
 wxBitmap *wxMenuItem_GetBitmap1(const wxMenuItem * self, bool checked);
+wxBitmapBundle *wxMenuItem_GetBitmapBundle(const wxMenuItem * self);
 #ifdef __WXMSW__
 wxBitmap *wxMenuItem_GetDisabledBitmap(const wxMenuItem * self);
 #endif

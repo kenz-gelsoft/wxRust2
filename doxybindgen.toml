@@ -3,6 +3,7 @@ wxml_files = [
     'wxml/classwx_any_button.xml',
     'wxml/classwx_art_provider.xml',
     'wxml/classwx_bitmap.xml',
+    'wxml/classwx_bitmap_bundle.xml',
     'wxml/classwx_bitmap_button.xml',
     'wxml/classwx_book_ctrl_base.xml',
     'wxml/classwx_book_ctrl_event.xml',
@@ -86,6 +87,10 @@ blocklist = [
 wx317 = [
     # Doc isn't up-to-date in wx3.1.6
     'GetSizeHint',
+]
+[types.wxBitmapBundle]
+blocklist = [
+    'operator=',
 ]
 [types.wxBitmapButton]
 wx31 = [

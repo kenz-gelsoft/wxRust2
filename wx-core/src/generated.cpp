@@ -62,6 +62,9 @@ bool wxArtProvider_Delete(wxArtProvider * provider) {
 wxBitmap *wxArtProvider_GetBitmap(const wxArtID * id, const wxArtClient * client, const wxSize * size) {
     return new wxBitmap(wxArtProvider::GetBitmap(*id, *client, *size));
 }
+wxBitmapBundle *wxArtProvider_GetBitmapBundle(const wxArtID * id, const wxArtClient * client, const wxSize * size) {
+    return new wxBitmapBundle(wxArtProvider::GetBitmapBundle(*id, *client, *size));
+}
 wxIcon *wxArtProvider_GetIcon(const wxArtID * id, const wxArtClient * client, const wxSize * size) {
     return new wxIcon(wxArtProvider::GetIcon(*id, *client, *size));
 }
@@ -256,6 +259,101 @@ bool wxBitmap_RemoveHandler(const wxString * name) {
 }
 void wxBitmap_Rescale(wxBitmap * bmp, const wxSize * size_needed) {
     return wxBitmap::Rescale(*bmp, *size_needed);
+}
+
+// CLASS: wxBitmapBundle
+void wxBitmapBundle_delete(wxBitmapBundle *self) {
+    delete self;
+}
+wxBitmapBundle *wxBitmapBundle_new() {
+    return new wxBitmapBundle();
+}
+wxBitmapBundle *wxBitmapBundle_new1(const wxBitmap * bitmap) {
+    return new wxBitmapBundle(*bitmap);
+}
+wxBitmapBundle *wxBitmapBundle_new2(const wxIcon * icon) {
+    return new wxBitmapBundle(*icon);
+}
+wxBitmapBundle *wxBitmapBundle_new3(const wxImage * image) {
+    return new wxBitmapBundle(*image);
+}
+wxBitmapBundle *wxBitmapBundle_new4(const char *const * xpm) {
+    return new wxBitmapBundle(xpm);
+}
+wxBitmapBundle *wxBitmapBundle_new5(const wxBitmapBundle * other) {
+    return new wxBitmapBundle(*other);
+}
+void wxBitmapBundle_Clear(wxBitmapBundle * self) {
+    return self->Clear();
+}
+bool wxBitmapBundle_IsOk(const wxBitmapBundle * self) {
+    return self->IsOk();
+}
+wxSize *wxBitmapBundle_GetDefaultSize(const wxBitmapBundle * self) {
+    return new wxSize(self->GetDefaultSize());
+}
+wxSize *wxBitmapBundle_GetPreferredBitmapSizeAtScale(const wxBitmapBundle * self, double scale) {
+    return new wxSize(self->GetPreferredBitmapSizeAtScale(scale));
+}
+wxSize *wxBitmapBundle_GetPreferredBitmapSizeFor(const wxBitmapBundle * self, const wxWindow * window) {
+    return new wxSize(self->GetPreferredBitmapSizeFor(window));
+}
+wxSize *wxBitmapBundle_GetPreferredLogicalSizeFor(const wxBitmapBundle * self, const wxWindow * window) {
+    return new wxSize(self->GetPreferredLogicalSizeFor(window));
+}
+wxBitmap *wxBitmapBundle_GetBitmap(const wxBitmapBundle * self, const wxSize * size) {
+    return new wxBitmap(self->GetBitmap(*size));
+}
+wxBitmap *wxBitmapBundle_GetBitmapFor(const wxBitmapBundle * self, const wxWindow * window) {
+    return new wxBitmap(self->GetBitmapFor(window));
+}
+wxIcon *wxBitmapBundle_GetIcon(const wxBitmapBundle * self, const wxSize * size) {
+    return new wxIcon(self->GetIcon(*size));
+}
+wxIcon *wxBitmapBundle_GetIconFor(const wxBitmapBundle * self, const wxWindow * window) {
+    return new wxIcon(self->GetIconFor(window));
+}
+bool wxBitmapBundle_IsSameAs(const wxBitmapBundle * self, const wxBitmapBundle * other) {
+    return self->IsSameAs(*other);
+}
+wxBitmapBundle *wxBitmapBundle_FromBitmaps(const wxVector< wxBitmap > * bitmaps) {
+    return new wxBitmapBundle(wxBitmapBundle::FromBitmaps(*bitmaps));
+}
+wxBitmapBundle *wxBitmapBundle_FromBitmaps1(const wxBitmap * bitmap1, const wxBitmap * bitmap2) {
+    return new wxBitmapBundle(wxBitmapBundle::FromBitmaps(*bitmap1, *bitmap2));
+}
+wxBitmapBundle *wxBitmapBundle_FromBitmap(const wxBitmap * bitmap) {
+    return new wxBitmapBundle(wxBitmapBundle::FromBitmap(*bitmap));
+}
+wxBitmapBundle *wxBitmapBundle_FromIconBundle(const wxIconBundle * icon_bundle) {
+    return new wxBitmapBundle(wxBitmapBundle::FromIconBundle(*icon_bundle));
+}
+wxBitmapBundle *wxBitmapBundle_FromImage(const wxImage * image) {
+    return new wxBitmapBundle(wxBitmapBundle::FromImage(*image));
+}
+wxBitmapBundle *wxBitmapBundle_FromImpl(wxBitmapBundleImpl * impl_) {
+    return new wxBitmapBundle(wxBitmapBundle::FromImpl(impl_));
+}
+wxBitmapBundle *wxBitmapBundle_FromResources(const wxString * name) {
+    return new wxBitmapBundle(wxBitmapBundle::FromResources(*name));
+}
+wxBitmapBundle *wxBitmapBundle_FromFiles(const wxString * path, const wxString * filename, const wxString * extension) {
+    return new wxBitmapBundle(wxBitmapBundle::FromFiles(*path, *filename, *extension));
+}
+wxBitmapBundle *wxBitmapBundle_FromFiles1(const wxString * fullpathname) {
+    return new wxBitmapBundle(wxBitmapBundle::FromFiles(*fullpathname));
+}
+wxBitmapBundle *wxBitmapBundle_FromSVG(char * data, const wxSize * size_def) {
+    return new wxBitmapBundle(wxBitmapBundle::FromSVG(data, *size_def));
+}
+wxBitmapBundle *wxBitmapBundle_FromSVG1(const char * data, const wxSize * size_def) {
+    return new wxBitmapBundle(wxBitmapBundle::FromSVG(data, *size_def));
+}
+wxBitmapBundle *wxBitmapBundle_FromSVGFile(const wxString * path, const wxSize * size_def) {
+    return new wxBitmapBundle(wxBitmapBundle::FromSVGFile(*path, *size_def));
+}
+wxBitmapBundle *wxBitmapBundle_FromSVGResource(const wxString * name, const wxSize * size_def) {
+    return new wxBitmapBundle(wxBitmapBundle::FromSVGResource(*name, *size_def));
 }
 
 // CLASS: wxBitmapButton
@@ -1290,6 +1388,9 @@ wxMenuBar * wxMenuBar_MacGetCommonMenuBar() {
 // CLASS: wxMenuItem
 wxBitmap *wxMenuItem_GetBitmap1(const wxMenuItem * self, bool checked) {
     return new wxBitmap(self->GetBitmap(checked));
+}
+wxBitmapBundle *wxMenuItem_GetBitmapBundle(const wxMenuItem * self) {
+    return new wxBitmapBundle(self->GetBitmapBundle());
 }
 #ifdef __WXMSW__
 wxBitmap *wxMenuItem_GetDisabledBitmap(const wxMenuItem * self) {

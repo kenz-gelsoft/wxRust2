@@ -32,7 +32,11 @@ extern "C" {
         client: *const c_void,
         size: *const c_void,
     ) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxArtProvider_GetBitmapBundle(id: *const c_void, client: *const c_void, size: *const c_void) -> wxBitmapBundle;
+    pub fn wxArtProvider_GetBitmapBundle(
+        id: *const c_void,
+        client: *const c_void,
+        size: *const c_void,
+    ) -> *mut c_void;
     pub fn wxArtProvider_GetIcon(
         id: *const c_void,
         client: *const c_void,
@@ -134,6 +138,59 @@ extern "C" {
     pub fn wxBitmap_NewFromPNGData(data: *const c_void, size: usize) -> *mut c_void;
     pub fn wxBitmap_RemoveHandler(name: *const c_void) -> bool;
     pub fn wxBitmap_Rescale(bmp: *mut c_void, size_needed: *const c_void);
+
+    // wxBitmapBundle
+    pub fn wxBitmapBundle_delete(self_: *mut c_void);
+    pub fn wxBitmapBundle_new() -> *mut c_void;
+    pub fn wxBitmapBundle_new1(bitmap: *const c_void) -> *mut c_void;
+    pub fn wxBitmapBundle_new2(icon: *const c_void) -> *mut c_void;
+    pub fn wxBitmapBundle_new3(image: *const c_void) -> *mut c_void;
+    pub fn wxBitmapBundle_new4(xpm: *const c_void) -> *mut c_void;
+    pub fn wxBitmapBundle_new5(other: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxBitmapBundle_operator=(self_: *mut c_void, other: *const c_void) -> *mut c_void;
+    pub fn wxBitmapBundle_Clear(self_: *mut c_void);
+    pub fn wxBitmapBundle_IsOk(self_: *const c_void) -> bool;
+    pub fn wxBitmapBundle_GetDefaultSize(self_: *const c_void) -> *mut c_void;
+    pub fn wxBitmapBundle_GetPreferredBitmapSizeAtScale(
+        self_: *const c_void,
+        scale: c_double,
+    ) -> *mut c_void;
+    pub fn wxBitmapBundle_GetPreferredBitmapSizeFor(
+        self_: *const c_void,
+        window: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxBitmapBundle_GetPreferredLogicalSizeFor(
+        self_: *const c_void,
+        window: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxBitmapBundle_GetBitmap(self_: *const c_void, size: *const c_void) -> *mut c_void;
+    pub fn wxBitmapBundle_GetBitmapFor(self_: *const c_void, window: *const c_void) -> *mut c_void;
+    pub fn wxBitmapBundle_GetIcon(self_: *const c_void, size: *const c_void) -> *mut c_void;
+    pub fn wxBitmapBundle_GetIconFor(self_: *const c_void, window: *const c_void) -> *mut c_void;
+    pub fn wxBitmapBundle_IsSameAs(self_: *const c_void, other: *const c_void) -> bool;
+    pub fn wxBitmapBundle_FromBitmaps(bitmaps: *const c_void) -> *mut c_void;
+    pub fn wxBitmapBundle_FromBitmaps1(
+        bitmap1: *const c_void,
+        bitmap2: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxBitmapBundle_FromBitmap(bitmap: *const c_void) -> *mut c_void;
+    pub fn wxBitmapBundle_FromIconBundle(icon_bundle: *const c_void) -> *mut c_void;
+    pub fn wxBitmapBundle_FromImage(image: *const c_void) -> *mut c_void;
+    pub fn wxBitmapBundle_FromImpl(impl_: *mut c_void) -> *mut c_void;
+    pub fn wxBitmapBundle_FromResources(name: *const c_void) -> *mut c_void;
+    pub fn wxBitmapBundle_FromFiles(
+        path: *const c_void,
+        filename: *const c_void,
+        extension: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxBitmapBundle_FromFiles1(fullpathname: *const c_void) -> *mut c_void;
+    pub fn wxBitmapBundle_FromSVG(data: *mut c_void, size_def: *const c_void) -> *mut c_void;
+    pub fn wxBitmapBundle_FromSVG1(data: *const c_void, size_def: *const c_void) -> *mut c_void;
+    pub fn wxBitmapBundle_FromSVGFile(path: *const c_void, size_def: *const c_void) -> *mut c_void;
+    pub fn wxBitmapBundle_FromSVGResource(
+        name: *const c_void,
+        size_def: *const c_void,
+    ) -> *mut c_void;
 
     // wxBitmapButton
     pub fn wxBitmapButton_new() -> *mut c_void;
@@ -1025,7 +1082,7 @@ extern "C" {
     // BLOCKED: pub fn wxMenuItem_GetBackgroundColour(self_: *const c_void) -> *mut c_void;
     // BLOCKED: pub fn wxMenuItem_GetBitmap(self_: *const c_void) -> wxBitmap;
     pub fn wxMenuItem_GetBitmap1(self_: *const c_void, checked: bool) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxMenuItem_GetBitmapBundle(self_: *const c_void) -> wxBitmapBundle;
+    pub fn wxMenuItem_GetBitmapBundle(self_: *const c_void) -> *mut c_void;
     pub fn wxMenuItem_GetDisabledBitmap(self_: *const c_void) -> *mut c_void;
     // BLOCKED: pub fn wxMenuItem_GetFont(self_: *const c_void) -> *mut c_void;
     pub fn wxMenuItem_GetHelp(self_: *const c_void) -> *mut c_void;
