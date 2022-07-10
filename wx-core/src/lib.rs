@@ -220,13 +220,13 @@ pub struct FilePickerCtrlBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
     path: String,
-    message: &'a str,
-    wildcard: &'a str,
+    message: String,
+    wildcard: String,
     pos: Option<Point>,
     size: Option<Size>,
     style: c_long,
     validator: Option<Validator>,
-    name: &'a str,
+    name: String,
 }
 impl<'a, P: WindowMethods> Buildable<'a, P, FilePickerCtrlBuilder<'a, P>> for FilePickerCtrl {
     fn builder(parent: Option<&'a P>) -> FilePickerCtrlBuilder<'a, P> {
@@ -236,12 +236,12 @@ impl<'a, P: WindowMethods> Buildable<'a, P, FilePickerCtrlBuilder<'a, P>> for Fi
             path: "".into(),
             // TODO: wxDirSelectorPromptStr should be handled as constant
             message: "Select a file".into(),
-	    wildcard: "*",
+            wildcard: "*".into(),
             pos: None,
             size: None,
             style: (DP_DEFAULT | DP_SHOWCENTURY).into(),
             validator: None,
-	name: ""
+            name: "".into(),
         }
     }
 }
@@ -254,12 +254,10 @@ impl<'a, P: WindowMethods> FilePickerCtrlBuilder<'a, P> {
         self.path = path;
         self
     }
-/*
     pub fn message(&mut self, message: String) -> &mut Self {
         self.message = message;
         self
     }
-*/
     pub fn pos(&mut self, pos: Point) -> &mut Self {
         self.pos = Some(pos);
         self
@@ -272,12 +270,10 @@ impl<'a, P: WindowMethods> FilePickerCtrlBuilder<'a, P> {
         self.style = style;
         self
     }
-/*
     pub fn validator(&mut self, validator: Validator) -> &mut Self {
         self.validator = Some(validator);
         self
     }
-*/
     pub fn build(&mut self) -> FilePickerCtrl {
         let pos = self.pos.take().unwrap_or_else(|| Point::default());
         let size = self.size.take().unwrap_or_else(|| Size::default());
