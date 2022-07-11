@@ -403,6 +403,7 @@ impl ButtonWidgetsPage {
                     "wxART_BUTTON_C",
                     &wx::Size::default(),
                 ));
+                let icon_bitmap = wx::BitmapBundle::from_bitmap(&icon_bitmap);
                 bbtn.set_bitmap_label(&icon_bitmap);
                 // }
 
@@ -445,7 +446,7 @@ impl ButtonWidgetsPage {
                     &wx::Size::default(),
                 ));
                 new_button.set_bitmap(
-                    &icon_bitmap,
+                    &wx::BitmapBundle::from_bitmap(&icon_bitmap),
                     positions[config_ui.radio_image_pos.get_selection() as usize],
                 );
 
@@ -456,7 +457,7 @@ impl ButtonWidgetsPage {
                         "wxART_BUTTON_C",
                         &wx::Size::default(),
                     ));
-                    new_button.set_bitmap_pressed(&icon_bitmap);
+                    new_button.set_bitmap_pressed(&wx::BitmapBundle::from_bitmap(&icon_bitmap));
                 }
                 if config_ui.chk_use_focused.get_value() {
                     let icon_bitmap = wx::Bitmap::new();
@@ -465,7 +466,7 @@ impl ButtonWidgetsPage {
                         "wxART_BUTTON_C",
                         &wx::Size::default(),
                     ));
-                    new_button.set_bitmap_focus(&icon_bitmap);
+                    new_button.set_bitmap_focus(&wx::BitmapBundle::from_bitmap(&icon_bitmap));
                 }
                 if config_ui.chk_use_current.get_value() {
                     let icon_bitmap = wx::Bitmap::new();
@@ -474,7 +475,7 @@ impl ButtonWidgetsPage {
                         "wxART_BUTTON_C",
                         &wx::Size::default(),
                     ));
-                    new_button.set_bitmap_current(&icon_bitmap);
+                    new_button.set_bitmap_current(&wx::BitmapBundle::from_bitmap(&icon_bitmap));
                 }
                 if config_ui.chk_use_disabled.get_value() {
                     let icon_bitmap = wx::Bitmap::new();
@@ -483,7 +484,7 @@ impl ButtonWidgetsPage {
                         "wxART_BUTTON_C",
                         &wx::Size::default(),
                     ));
-                    new_button.set_bitmap_disabled(&icon_bitmap);
+                    new_button.set_bitmap_disabled(&wx::BitmapBundle::from_bitmap(&icon_bitmap));
                 }
             }
 
