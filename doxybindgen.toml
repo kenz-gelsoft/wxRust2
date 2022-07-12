@@ -428,6 +428,10 @@ blocklist = [
 mac = [
     'OSXEnableNewLineReplacement',
 ]
+not_gtk = [
+    # It looks codelite's binary doesn't enable libgspell integration
+    'EnableProofCheck',
+]
 [types.wxTextEntry]
 wx31 = [
     'ForceUpper',
