@@ -2590,9 +2590,11 @@ void wxTextCtrl_EmptyUndoBuffer(wxTextCtrl * self) {
 bool wxTextCtrl_EmulateKeyPress(wxTextCtrl * self, const wxKeyEvent * event) {
     return self->EmulateKeyPress(*event);
 }
+#ifndef __WXGTK__
 bool wxTextCtrl_EnableProofCheck(wxTextCtrl * self, const wxTextProofOptions * options) {
     return self->EnableProofCheck(*options);
 }
+#endif
 wxTextAttr *wxTextCtrl_GetDefaultStyle(const wxTextCtrl * self) {
     return new wxTextAttr(self->GetDefaultStyle());
 }

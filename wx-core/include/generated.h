@@ -972,7 +972,9 @@ bool wxTextCtrl_Create(wxTextCtrl * self, wxWindow * parent, wxWindowID id, cons
 void wxTextCtrl_DiscardEdits(wxTextCtrl * self);
 void wxTextCtrl_EmptyUndoBuffer(wxTextCtrl * self);
 bool wxTextCtrl_EmulateKeyPress(wxTextCtrl * self, const wxKeyEvent * event);
+#ifndef __WXGTK__
 bool wxTextCtrl_EnableProofCheck(wxTextCtrl * self, const wxTextProofOptions * options);
+#endif
 wxTextAttr *wxTextCtrl_GetDefaultStyle(const wxTextCtrl * self);
 int wxTextCtrl_GetLineLength(const wxTextCtrl * self, long line_no);
 wxString *wxTextCtrl_GetLineText(const wxTextCtrl * self, long line_no);
