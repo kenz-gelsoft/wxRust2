@@ -231,9 +231,11 @@ void wxBitmap_SetWidth(wxBitmap * self, int width) {
     return self->SetWidth(width);
 }
 #endif
+#ifndef __WXMSW__
 bool wxBitmap_UseAlpha(wxBitmap * self, bool use_) {
     return self->UseAlpha(use_);
 }
+#endif
 void wxBitmap_AddHandler(wxBitmapHandler * handler) {
     return wxBitmap::AddHandler(handler);
 }
@@ -2565,9 +2567,11 @@ wxTextAttr *wxTextAttr_Merge1(const wxTextAttr * base, const wxTextAttr * overla
 }
 
 // CLASS: wxTextCtrl
+#ifdef __WXOSX__
 void wxTextCtrl_OSXEnableNewLineReplacement(wxTextCtrl * self, bool enable) {
     return self->OSXEnableNewLineReplacement(enable);
 }
+#endif
 wxTextCtrl *wxTextCtrl_new() {
     return new wxTextCtrl();
 }

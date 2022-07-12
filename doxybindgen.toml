@@ -118,6 +118,8 @@ wx31 = [
 not_windows = [
     # FIXME: FindHandler on MSW requires dynamic_cast in C++ generated code.
     'FindHandler',
+    # MSW impl is not compatible as it return void
+    'UseAlpha',
 ]
 [types.wxBookCtrlBase]
 blocklist = [
@@ -422,6 +424,9 @@ blocklist = [
     'operator<<1',
     'operator<<2',
     'operator<<4',
+]
+mac = [
+    'OSXEnableNewLineReplacement',
 ]
 [types.wxTextEntry]
 wx31 = [

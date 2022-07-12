@@ -95,7 +95,9 @@ void wxBitmap_SetPalette(wxBitmap * self, const wxPalette * palette);
 #if wxCHECK_VERSION(3, 1, 7)
 void wxBitmap_SetWidth(wxBitmap * self, int width);
 #endif
+#ifndef __WXMSW__
 bool wxBitmap_UseAlpha(wxBitmap * self, bool use_);
+#endif
 void wxBitmap_AddHandler(wxBitmapHandler * handler);
 void wxBitmap_CleanUpHandlers();
 #ifndef __WXMSW__
@@ -961,7 +963,9 @@ bool wxTextAttr_EqPartial(const wxTextAttr * self, const wxTextAttr * attr, bool
 wxTextAttr *wxTextAttr_Merge1(const wxTextAttr * base, const wxTextAttr * overlay);
 
 // CLASS: wxTextCtrl
+#ifdef __WXOSX__
 void wxTextCtrl_OSXEnableNewLineReplacement(wxTextCtrl * self, bool enable);
+#endif
 wxTextCtrl *wxTextCtrl_new();
 wxTextCtrl *wxTextCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 bool wxTextCtrl_Create(wxTextCtrl * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);

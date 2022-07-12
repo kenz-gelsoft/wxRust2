@@ -22,9 +22,9 @@ pub fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
         }
     }
     let target_env = env::var("CARGO_CFG_TARGET_ENV").unwrap();
-    if target_env.eq("msvc") {
+    // if target_env.eq("msvc") {
         cc_build.flag("/EHsc");
-    }
+    // }
     cc_build
 }
 
@@ -110,8 +110,8 @@ fn wx_config_win(args: &[&str]) -> String {
     } else {
         let libs = vec![
             format!("-L{}\\lib\\vc14x_x64_dll", wxwin),
-            format!("-lwxbase31u{}", d_or_not),
-            format!("-lwxmsw31u{}_core", d_or_not),
+            format!("-lwxbase32u{}", d_or_not),
+            format!("-lwxmsw32u{}_core", d_or_not),
         ];
         libs.join(" ")
     }
