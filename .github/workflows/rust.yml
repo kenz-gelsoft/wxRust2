@@ -33,7 +33,7 @@ jobs:
     - name: Run tests
       run: cargo test --verbose
 
-  build-wx31gtk:
+  build-wx32gtk:
     runs-on: ubuntu-20.04
 
     steps:
@@ -50,9 +50,9 @@ jobs:
     - name: Install Prerequisites
       run: |
         sudo apt-key adv --fetch-keys https://repos.codelite.org/CodeLite.asc
-        sudo apt-add-repository 'deb https://repos.codelite.org/wx3.1.6/ubuntu/ focal universe'
+        sudo apt-add-repository 'deb https://repos.codelite.org/wx3.2.0/ubuntu/ focal universe'
         sudo apt update
-        sudo apt install libwxgtk3.1unofficial-dev
+        sudo apt install libwxgtk3.2unofficial-dev
     - name: Build
       run: cargo build --verbose
     - name: Run tests
