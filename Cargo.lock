@@ -76,7 +76,7 @@ source = "git+https://github.com/ancwrd1/wx-x86_64-pc-windows-gnu#b41af996f76669
 [[package]]
 name = "wx-x86_64-pc-windows-msvc"
 version = "3.2.0"
-source = "git+https://github.com/kenz-gelsoft/wx-x86_64-pc-windows-msvc?branch=wx320#a03efd01c2e5f72d809220e70a30b4c9b1f34b76"
+source = "git+https://github.com/kenz-gelsoft/wx-x86_64-pc-windows-msvc?branch=wx320#837319a7e7defb6166b4299b3ffe52d80e721d58"
 
 [[package]]
 name = "wxrust-config"
