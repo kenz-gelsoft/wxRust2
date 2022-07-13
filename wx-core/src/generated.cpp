@@ -279,15 +279,19 @@ wxBitmapBundle *wxBitmapBundle_new2(const wxIcon * icon) {
 wxBitmapBundle *wxBitmapBundle_new3(const wxImage * image) {
     return new wxBitmapBundle(*image);
 }
+#if wxCHECK_VERSION(3, 2, 0)
 wxBitmapBundle *wxBitmapBundle_new4(const char *const * xpm) {
     return new wxBitmapBundle(xpm);
 }
+#endif
 wxBitmapBundle *wxBitmapBundle_new5(const wxBitmapBundle * other) {
     return new wxBitmapBundle(*other);
 }
+#if wxCHECK_VERSION(3, 1, 7)
 void wxBitmapBundle_Clear(wxBitmapBundle * self) {
     return self->Clear();
 }
+#endif
 bool wxBitmapBundle_IsOk(const wxBitmapBundle * self) {
     return self->IsOk();
 }
@@ -324,9 +328,11 @@ wxBitmapBundle *wxBitmapBundle_FromBitmaps1(const wxBitmap * bitmap1, const wxBi
 wxBitmapBundle *wxBitmapBundle_FromBitmap(const wxBitmap * bitmap) {
     return new wxBitmapBundle(wxBitmapBundle::FromBitmap(*bitmap));
 }
+#if wxCHECK_VERSION(3, 1, 7)
 wxBitmapBundle *wxBitmapBundle_FromIconBundle(const wxIconBundle * icon_bundle) {
     return new wxBitmapBundle(wxBitmapBundle::FromIconBundle(*icon_bundle));
 }
+#endif
 wxBitmapBundle *wxBitmapBundle_FromImage(const wxImage * image) {
     return new wxBitmapBundle(wxBitmapBundle::FromImage(*image));
 }
@@ -1390,9 +1396,11 @@ wxBitmap *wxMenuItem_GetBitmap1(const wxMenuItem * self, bool checked) {
     return new wxBitmap(self->GetBitmap(checked));
 }
 #endif
+#if wxCHECK_VERSION(3, 2, 0)
 wxBitmapBundle *wxMenuItem_GetBitmapBundle(const wxMenuItem * self) {
     return new wxBitmapBundle(self->GetBitmapBundle());
 }
+#endif
 #ifdef __WXMSW__
 wxBitmap *wxMenuItem_GetDisabledBitmap(const wxMenuItem * self) {
     return new wxBitmap(self->GetDisabledBitmap());

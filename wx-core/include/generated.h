@@ -115,9 +115,13 @@ wxBitmapBundle *wxBitmapBundle_new();
 wxBitmapBundle *wxBitmapBundle_new1(const wxBitmap * bitmap);
 wxBitmapBundle *wxBitmapBundle_new2(const wxIcon * icon);
 wxBitmapBundle *wxBitmapBundle_new3(const wxImage * image);
+#if wxCHECK_VERSION(3, 2, 0)
 wxBitmapBundle *wxBitmapBundle_new4(const char *const * xpm);
+#endif
 wxBitmapBundle *wxBitmapBundle_new5(const wxBitmapBundle * other);
+#if wxCHECK_VERSION(3, 1, 7)
 void wxBitmapBundle_Clear(wxBitmapBundle * self);
+#endif
 bool wxBitmapBundle_IsOk(const wxBitmapBundle * self);
 wxSize *wxBitmapBundle_GetDefaultSize(const wxBitmapBundle * self);
 wxSize *wxBitmapBundle_GetPreferredBitmapSizeAtScale(const wxBitmapBundle * self, double scale);
@@ -130,7 +134,9 @@ wxIcon *wxBitmapBundle_GetIconFor(const wxBitmapBundle * self, const wxWindow * 
 bool wxBitmapBundle_IsSameAs(const wxBitmapBundle * self, const wxBitmapBundle * other);
 wxBitmapBundle *wxBitmapBundle_FromBitmaps1(const wxBitmap * bitmap1, const wxBitmap * bitmap2);
 wxBitmapBundle *wxBitmapBundle_FromBitmap(const wxBitmap * bitmap);
+#if wxCHECK_VERSION(3, 1, 7)
 wxBitmapBundle *wxBitmapBundle_FromIconBundle(const wxIconBundle * icon_bundle);
+#endif
 wxBitmapBundle *wxBitmapBundle_FromImage(const wxImage * image);
 wxBitmapBundle *wxBitmapBundle_FromImpl(wxBitmapBundleImpl * impl_);
 wxBitmapBundle *wxBitmapBundle_FromResources(const wxString * name);
@@ -534,7 +540,9 @@ wxBitmap *wxMenuItem_GetBitmap(const wxMenuItem * self);
 #ifdef __WXMSW__
 wxBitmap *wxMenuItem_GetBitmap1(const wxMenuItem * self, bool checked);
 #endif
+#if wxCHECK_VERSION(3, 2, 0)
 wxBitmapBundle *wxMenuItem_GetBitmapBundle(const wxMenuItem * self);
+#endif
 #ifdef __WXMSW__
 wxBitmap *wxMenuItem_GetDisabledBitmap(const wxMenuItem * self);
 #endif

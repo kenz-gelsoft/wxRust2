@@ -77,6 +77,9 @@ cxx = "#if wxCHECK_VERSION(3, 1, 0)"
 [conditions.wx317]
 cxx = "#if wxCHECK_VERSION(3, 1, 7)"
 
+[conditions.wx32]
+cxx = "#if wxCHECK_VERSION(3, 2, 0)"
+
 [types]
 [types.wxAnyButton]
 library = 'core'
@@ -94,6 +97,13 @@ blocklist = [
     'FromBitmaps',
     # conflict on const vs mut
     'FromSVG',
+]
+wx317 = [
+    'Clear',
+    'FromIconBundle',
+]
+wx32 = [
+    'wxBitmapBundle4',
 ]
 [types.wxBitmapButton]
 wx31 = [
@@ -299,6 +309,9 @@ windows = [
     'SetFont',
     'SetMarginWidth',
     'SetTextColour',
+]
+wx32 = [
+    'GetBitmapBundle',
 ]
 [types.wxNonOwnedWindow]
 library = 'core'
