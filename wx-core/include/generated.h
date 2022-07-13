@@ -58,7 +58,9 @@ wxBitmap *wxBitmap_new6(const char *const * bits);
 #if wxCHECK_VERSION(3, 1, 0)
 wxBitmap *wxBitmap_new8(const wxImage * img, int depth);
 #endif
+#if wxCHECK_VERSION(3, 1, 7)
 wxBitmap *wxBitmap_new9(const wxImage * img, const wxDC * dc);
+#endif
 wxBitmap *wxBitmap_new10(const wxCursor * cursor);
 bool wxBitmap_CopyFromIcon(wxBitmap * self, const wxIcon * icon);
 bool wxBitmap_Create(wxBitmap * self, int width, int height, int depth);
@@ -84,7 +86,6 @@ wxSize *wxBitmap_GetSize(const wxBitmap * self);
 int wxBitmap_GetWidth(const wxBitmap * self);
 bool wxBitmap_HasAlpha(const wxBitmap * self);
 bool wxBitmap_IsOk(const wxBitmap * self);
-void wxBitmap_ResetAlpha(wxBitmap * self);
 #if wxCHECK_VERSION(3, 1, 7)
 void wxBitmap_SetDepth(wxBitmap * self, int depth);
 void wxBitmap_SetHeight(wxBitmap * self, int height);
@@ -94,9 +95,6 @@ void wxBitmap_SetMask(wxBitmap * self, wxMask * mask);
 void wxBitmap_SetPalette(wxBitmap * self, const wxPalette * palette);
 #if wxCHECK_VERSION(3, 1, 7)
 void wxBitmap_SetWidth(wxBitmap * self, int width);
-#endif
-#ifndef __WXMSW__
-bool wxBitmap_UseAlpha(wxBitmap * self, bool use_);
 #endif
 void wxBitmap_AddHandler(wxBitmapHandler * handler);
 void wxBitmap_CleanUpHandlers();

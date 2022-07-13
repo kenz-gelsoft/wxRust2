@@ -115,9 +115,15 @@ wx31 = [
 blocklist = [
     # doesn't support returning wxList
     'GetHandlers',
+    # Just block since it requires complex condition and not popular API
+    # - MSW impl is not compatible as it return void
+    # - Not supported before 3.2.0
+    'ResetAlpha',
+    'UseAlpha',
 ]
 wx317 = [
     # Doc isn't up-to-date in wx3.1.6
+    'wxBitmap9',
     'SetDepth',
     'SetHeight',
     'SetWidth',
@@ -128,8 +134,6 @@ wx31 = [
 not_windows = [
     # FIXME: FindHandler on MSW requires dynamic_cast in C++ generated code.
     'FindHandler',
-    # MSW impl is not compatible as it return void
-    'UseAlpha',
 ]
 [types.wxBookCtrlBase]
 blocklist = [

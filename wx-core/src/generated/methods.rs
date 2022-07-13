@@ -307,9 +307,7 @@ pub trait BitmapMethods: GDIObjectMethods {
         unsafe { ffi::wxBitmap_IsOk(self.as_ptr()) }
     }
     // NOT_SUPPORTED: fn LoadFile()
-    fn reset_alpha(&self) {
-        unsafe { ffi::wxBitmap_ResetAlpha(self.as_ptr()) }
-    }
+    // BLOCKED: fn ResetAlpha()
     // NOT_SUPPORTED: fn SaveFile()
     fn set_depth(&self, depth: c_int) {
         unsafe { ffi::wxBitmap_SetDepth(self.as_ptr(), depth) }
@@ -329,9 +327,7 @@ pub trait BitmapMethods: GDIObjectMethods {
     fn set_width(&self, width: c_int) {
         unsafe { ffi::wxBitmap_SetWidth(self.as_ptr(), width) }
     }
-    fn use_alpha(&self, use_: bool) -> bool {
-        unsafe { ffi::wxBitmap_UseAlpha(self.as_ptr(), use_) }
-    }
+    // BLOCKED: fn UseAlpha()
     fn add_handler(handler: *mut c_void) {
         unsafe { ffi::wxBitmap_AddHandler(handler) }
     }
