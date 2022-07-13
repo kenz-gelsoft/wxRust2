@@ -3,6 +3,7 @@ wxml_files = [
     'wxml/classwx_any_button.xml',
     'wxml/classwx_art_provider.xml',
     'wxml/classwx_bitmap.xml',
+    'wxml/classwx_bitmap_bundle.xml',
     'wxml/classwx_bitmap_button.xml',
     'wxml/classwx_book_ctrl_base.xml',
     'wxml/classwx_book_ctrl_event.xml',
@@ -76,6 +77,9 @@ cxx = "#if wxCHECK_VERSION(3, 1, 0)"
 [conditions.wx317]
 cxx = "#if wxCHECK_VERSION(3, 1, 7)"
 
+[conditions.wx32]
+cxx = "#if wxCHECK_VERSION(3, 2, 0)"
+
 [types]
 [types.wxAnyButton]
 library = 'core'
@@ -87,6 +91,20 @@ wx317 = [
     # Doc isn't up-to-date in wx3.1.6
     'GetSizeHint',
 ]
+[types.wxBitmapBundle]
+blocklist = [
+    'operator=',
+    'FromBitmaps',
+    # conflict on const vs mut
+    'FromSVG',
+]
+wx317 = [
+    'Clear',
+    'FromIconBundle',
+]
+wx32 = [
+    'wxBitmapBundle4',
+]
 [types.wxBitmapButton]
 wx31 = [
     'CreateCloseButton',
@@ -97,9 +115,15 @@ wx31 = [
 blocklist = [
     # doesn't support returning wxList
     'GetHandlers',
+    # Just block since it requires complex condition and not popular API
+    # - MSW impl is not compatible as it return void
+    # - Not supported before 3.2.0
+    'ResetAlpha',
+    'UseAlpha',
 ]
 wx317 = [
     # Doc isn't up-to-date in wx3.1.6
+    'wxBitmap9',
     'SetDepth',
     'SetHeight',
     'SetWidth',
@@ -266,9 +290,6 @@ mac = [
 [types.wxMenuItem]
 blocklist = [
     'GetLabelFromText',
-    # Probably documentation mismatch
-    'GetBitmap',
-    'SetBitmap',
     # Deprecated, maybe removed
     'GetLabel',
     'GetName',
@@ -282,14 +303,19 @@ blocklist = [
     'GetTextColour',
 ]
 windows = [
+    'GetBitmap1',
     'GetDisabledBitmap',
     'GetMarginWidth',
     'SetBackgroundColour',
+    'SetBitmap1',
     'SetBitmaps',
     'SetDisabledBitmap',
     'SetFont',
     'SetMarginWidth',
     'SetTextColour',
+]
+wx32 = [
+    'GetBitmapBundle',
 ]
 [types.wxNonOwnedWindow]
 library = 'core'
@@ -357,15 +383,20 @@ blocklist = [
     'operator+',
     'operator-',
     'operator/',
+    'operator/1',
     'operator*',
     'operator*1',
+    'operator*2',
+    'operator*3',
     'operator=',
     'operator==',
     'operator!=',
     'operator+=',
     'operator-=',
     'operator/=',
+    'operator/=1',
     'operator*=',
+    'operator*=1',
     # Didn't support
     'Scale',
 ]
@@ -410,6 +441,13 @@ blocklist = [
     'operator<<1',
     'operator<<2',
     'operator<<4',
+]
+mac = [
+    'OSXEnableNewLineReplacement',
+]
+not_gtk = [
+    # It looks codelite's binary doesn't enable libgspell integration
+    'EnableProofCheck',
 ]
 [types.wxTextEntry]
 wx31 = [

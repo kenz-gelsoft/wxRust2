@@ -285,6 +285,7 @@ extern "C" {
     pub fn wxFileName_DontFollowLink(self_: *mut c_void);
     pub fn wxFileName_Exists(self_: *const c_void, flags: c_int) -> bool;
     pub fn wxFileName_FileExists(self_: *const c_void) -> bool;
+    // NOT_SUPPORTED: pub fn wxFileName_GetAbsolutePath(self_: *const c_void, cwd: *const c_void, format: wxPathFormat) -> *mut c_void;
     pub fn wxFileName_GetDirCount(self_: *const c_void) -> usize;
     pub fn wxFileName_GetDirs(self_: *const c_void) -> *mut c_void;
     pub fn wxFileName_GetExt(self_: *const c_void) -> *mut c_void;

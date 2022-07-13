@@ -26,37 +26,37 @@ pub trait AnyButtonMethods: ControlMethods {
     fn get_bitmap_pressed(&self) -> Bitmap {
         unsafe { Bitmap::from_ptr(ffi::wxAnyButton_GetBitmapPressed(self.as_ptr())) }
     }
-    fn set_bitmap<B: BitmapMethods>(&self, bitmap: &B, dir: c_int) {
+    fn set_bitmap<B: BitmapBundleMethods>(&self, bitmap: &B, dir: c_int) {
         unsafe {
             let bitmap = bitmap.as_ptr();
             ffi::wxAnyButton_SetBitmap(self.as_ptr(), bitmap, dir)
         }
     }
-    fn set_bitmap_current<B: BitmapMethods>(&self, bitmap: &B) {
+    fn set_bitmap_current<B: BitmapBundleMethods>(&self, bitmap: &B) {
         unsafe {
             let bitmap = bitmap.as_ptr();
             ffi::wxAnyButton_SetBitmapCurrent(self.as_ptr(), bitmap)
         }
     }
-    fn set_bitmap_disabled<B: BitmapMethods>(&self, bitmap: &B) {
+    fn set_bitmap_disabled<B: BitmapBundleMethods>(&self, bitmap: &B) {
         unsafe {
             let bitmap = bitmap.as_ptr();
             ffi::wxAnyButton_SetBitmapDisabled(self.as_ptr(), bitmap)
         }
     }
-    fn set_bitmap_focus<B: BitmapMethods>(&self, bitmap: &B) {
+    fn set_bitmap_focus<B: BitmapBundleMethods>(&self, bitmap: &B) {
         unsafe {
             let bitmap = bitmap.as_ptr();
             ffi::wxAnyButton_SetBitmapFocus(self.as_ptr(), bitmap)
         }
     }
-    fn set_bitmap_label<B: BitmapMethods>(&self, bitmap: &B) {
+    fn set_bitmap_label<B: BitmapBundleMethods>(&self, bitmap: &B) {
         unsafe {
             let bitmap = bitmap.as_ptr();
             ffi::wxAnyButton_SetBitmapLabel(self.as_ptr(), bitmap)
         }
     }
-    fn set_bitmap_pressed<B: BitmapMethods>(&self, bitmap: &B) {
+    fn set_bitmap_pressed<B: BitmapBundleMethods>(&self, bitmap: &B) {
         unsafe {
             let bitmap = bitmap.as_ptr();
             ffi::wxAnyButton_SetBitmapPressed(self.as_ptr(), bitmap)
@@ -101,6 +101,16 @@ pub trait ArtProviderMethods: ObjectMethods {
             Bitmap::from_ptr(ffi::wxArtProvider_GetBitmap(id, client, size))
         }
     }
+    fn get_bitmap_bundle<S: SizeMethods>(id: &str, client: &str, size: &S) -> BitmapBundle {
+        unsafe {
+            let id = WxString::from(id);
+            let id = id.as_ptr();
+            let client = WxString::from(client);
+            let client = client.as_ptr();
+            let size = size.as_ptr();
+            BitmapBundle::from_ptr(ffi::wxArtProvider_GetBitmapBundle(id, client, size))
+        }
+    }
     fn get_icon<S: SizeMethods>(id: &str, client: &str, size: &S) -> Icon {
         unsafe {
             let id = WxString::from(id);
@@ -111,18 +121,40 @@ pub trait ArtProviderMethods: ObjectMethods {
             Icon::from_ptr(ffi::wxArtProvider_GetIcon(id, client, size))
         }
     }
-    fn get_native_size_hint(client: &str) -> Size {
+    fn get_native_dip_size_hint(client: &str) -> Size {
         unsafe {
             let client = WxString::from(client);
             let client = client.as_ptr();
-            Size::from_ptr(ffi::wxArtProvider_GetNativeSizeHint(client))
+            Size::from_ptr(ffi::wxArtProvider_GetNativeDIPSizeHint(client))
         }
     }
-    fn get_size_hint(client: &str, platform_default: bool) -> Size {
+    fn get_native_size_hint<W: WindowMethods>(client: &str, win: Option<&W>) -> Size {
         unsafe {
             let client = WxString::from(client);
             let client = client.as_ptr();
-            Size::from_ptr(ffi::wxArtProvider_GetSizeHint(client, platform_default))
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            Size::from_ptr(ffi::wxArtProvider_GetNativeSizeHint(client, win))
+        }
+    }
+    fn get_dip_size_hint(client: &str) -> Size {
+        unsafe {
+            let client = WxString::from(client);
+            let client = client.as_ptr();
+            Size::from_ptr(ffi::wxArtProvider_GetDIPSizeHint(client))
+        }
+    }
+    fn get_size_hint<W: WindowMethods>(client: &str, win: Option<&W>) -> Size {
+        unsafe {
+            let client = WxString::from(client);
+            let client = client.as_ptr();
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            Size::from_ptr(ffi::wxArtProvider_GetSizeHint(client, win))
         }
     }
     // NOT_SUPPORTED: fn GetIconBundle()
@@ -171,6 +203,7 @@ pub trait ArtProviderMethods: ObjectMethods {
 // wxBitmap
 pub trait BitmapMethods: GDIObjectMethods {
     // DTOR: fn ~wxBitmap()
+    // NOT_SUPPORTED: fn ConvertToDisabled()
     // NOT_SUPPORTED: fn ConvertToImage()
     fn copy_from_icon<I: IconMethods>(&self, icon: &I) -> bool {
         unsafe {
@@ -190,6 +223,26 @@ pub trait BitmapMethods: GDIObjectMethods {
     fn create_int_dc(&self, width: c_int, height: c_int, dc: *const c_void) -> bool {
         unsafe { ffi::wxBitmap_Create2(self.as_ptr(), width, height, dc) }
     }
+    fn create_with_dip_size_size<S: SizeMethods>(
+        &self,
+        size: &S,
+        scale: c_double,
+        depth: c_int,
+    ) -> bool {
+        unsafe {
+            let size = size.as_ptr();
+            ffi::wxBitmap_CreateWithDIPSize(self.as_ptr(), size, scale, depth)
+        }
+    }
+    fn create_with_dip_size_int(
+        &self,
+        width: c_int,
+        height: c_int,
+        scale: c_double,
+        depth: c_int,
+    ) -> bool {
+        unsafe { ffi::wxBitmap_CreateWithDIPSize1(self.as_ptr(), width, height, scale, depth) }
+    }
     fn create_scaled(
         &self,
         width: c_int,
@@ -202,8 +255,20 @@ pub trait BitmapMethods: GDIObjectMethods {
     fn get_depth(&self) -> c_int {
         unsafe { ffi::wxBitmap_GetDepth(self.as_ptr()) }
     }
+    fn get_dip_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxBitmap_GetDIPSize(self.as_ptr())) }
+    }
     fn get_height(&self) -> c_int {
         unsafe { ffi::wxBitmap_GetHeight(self.as_ptr()) }
+    }
+    fn get_logical_height(&self) -> c_double {
+        unsafe { ffi::wxBitmap_GetLogicalHeight(self.as_ptr()) }
+    }
+    fn get_logical_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxBitmap_GetLogicalSize(self.as_ptr())) }
+    }
+    fn get_logical_width(&self) -> c_double {
+        unsafe { ffi::wxBitmap_GetLogicalWidth(self.as_ptr()) }
     }
     fn get_mask(&self) -> *mut c_void {
         unsafe { ffi::wxBitmap_GetMask(self.as_ptr()) }
@@ -217,23 +282,41 @@ pub trait BitmapMethods: GDIObjectMethods {
             Bitmap::from_ptr(ffi::wxBitmap_GetSubBitmap(self.as_ptr(), rect))
         }
     }
+    fn get_scale_factor(&self) -> c_double {
+        unsafe { ffi::wxBitmap_GetScaleFactor(self.as_ptr()) }
+    }
+    fn get_scaled_height(&self) -> c_double {
+        unsafe { ffi::wxBitmap_GetScaledHeight(self.as_ptr()) }
+    }
+    fn get_scaled_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxBitmap_GetScaledSize(self.as_ptr())) }
+    }
+    fn get_scaled_width(&self) -> c_double {
+        unsafe { ffi::wxBitmap_GetScaledWidth(self.as_ptr()) }
+    }
     fn get_size(&self) -> Size {
         unsafe { Size::from_ptr(ffi::wxBitmap_GetSize(self.as_ptr())) }
     }
-    // NOT_SUPPORTED: fn ConvertToDisabled()
     fn get_width(&self) -> c_int {
         unsafe { ffi::wxBitmap_GetWidth(self.as_ptr()) }
+    }
+    fn has_alpha(&self) -> bool {
+        unsafe { ffi::wxBitmap_HasAlpha(self.as_ptr()) }
     }
     fn is_ok(&self) -> bool {
         unsafe { ffi::wxBitmap_IsOk(self.as_ptr()) }
     }
     // NOT_SUPPORTED: fn LoadFile()
+    // BLOCKED: fn ResetAlpha()
     // NOT_SUPPORTED: fn SaveFile()
     fn set_depth(&self, depth: c_int) {
         unsafe { ffi::wxBitmap_SetDepth(self.as_ptr(), depth) }
     }
     fn set_height(&self, height: c_int) {
         unsafe { ffi::wxBitmap_SetHeight(self.as_ptr(), height) }
+    }
+    fn set_scale_factor(&self, scale: c_double) {
+        unsafe { ffi::wxBitmap_SetScaleFactor(self.as_ptr(), scale) }
     }
     fn set_mask(&self, mask: *mut c_void) {
         unsafe { ffi::wxBitmap_SetMask(self.as_ptr(), mask) }
@@ -244,6 +327,7 @@ pub trait BitmapMethods: GDIObjectMethods {
     fn set_width(&self, width: c_int) {
         unsafe { ffi::wxBitmap_SetWidth(self.as_ptr(), width) }
     }
+    // BLOCKED: fn UseAlpha()
     fn add_handler(handler: *mut c_void) {
         unsafe { ffi::wxBitmap_AddHandler(handler) }
     }
@@ -276,13 +360,175 @@ pub trait BitmapMethods: GDIObjectMethods {
             ffi::wxBitmap_RemoveHandler(name)
         }
     }
+    fn rescale<S: SizeMethods>(bmp: *mut c_void, size_needed: &S) {
+        unsafe {
+            let size_needed = size_needed.as_ptr();
+            ffi::wxBitmap_Rescale(bmp, size_needed)
+        }
+    }
+}
+
+// wxBitmapBundle
+pub trait BitmapBundleMethods: WxRustMethods {
+    // BLOCKED: fn operator=()
+    fn clear(&self) {
+        unsafe { ffi::wxBitmapBundle_Clear(self.as_ptr()) }
+    }
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxBitmapBundle_IsOk(self.as_ptr()) }
+    }
+    fn get_default_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxBitmapBundle_GetDefaultSize(self.as_ptr())) }
+    }
+    fn get_preferred_bitmap_size_at_scale(&self, scale: c_double) -> Size {
+        unsafe {
+            Size::from_ptr(ffi::wxBitmapBundle_GetPreferredBitmapSizeAtScale(
+                self.as_ptr(),
+                scale,
+            ))
+        }
+    }
+    fn get_preferred_bitmap_size_for<W: WindowMethods>(&self, window: Option<&W>) -> Size {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            Size::from_ptr(ffi::wxBitmapBundle_GetPreferredBitmapSizeFor(
+                self.as_ptr(),
+                window,
+            ))
+        }
+    }
+    fn get_preferred_logical_size_for<W: WindowMethods>(&self, window: Option<&W>) -> Size {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            Size::from_ptr(ffi::wxBitmapBundle_GetPreferredLogicalSizeFor(
+                self.as_ptr(),
+                window,
+            ))
+        }
+    }
+    fn get_bitmap<S: SizeMethods>(&self, size: &S) -> Bitmap {
+        unsafe {
+            let size = size.as_ptr();
+            Bitmap::from_ptr(ffi::wxBitmapBundle_GetBitmap(self.as_ptr(), size))
+        }
+    }
+    fn get_bitmap_for<W: WindowMethods>(&self, window: Option<&W>) -> Bitmap {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            Bitmap::from_ptr(ffi::wxBitmapBundle_GetBitmapFor(self.as_ptr(), window))
+        }
+    }
+    fn get_icon<S: SizeMethods>(&self, size: &S) -> Icon {
+        unsafe {
+            let size = size.as_ptr();
+            Icon::from_ptr(ffi::wxBitmapBundle_GetIcon(self.as_ptr(), size))
+        }
+    }
+    fn get_icon_for<W: WindowMethods>(&self, window: Option<&W>) -> Icon {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            Icon::from_ptr(ffi::wxBitmapBundle_GetIconFor(self.as_ptr(), window))
+        }
+    }
+    fn is_same_as<B: BitmapBundleMethods>(&self, other: &B) -> bool {
+        unsafe {
+            let other = other.as_ptr();
+            ffi::wxBitmapBundle_IsSameAs(self.as_ptr(), other)
+        }
+    }
+    // BLOCKED: fn FromBitmaps()
+    fn from_bitmaps<B: BitmapMethods, B2: BitmapMethods>(
+        bitmap1: &B,
+        bitmap2: &B2,
+    ) -> BitmapBundle {
+        unsafe {
+            let bitmap1 = bitmap1.as_ptr();
+            let bitmap2 = bitmap2.as_ptr();
+            BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromBitmaps1(bitmap1, bitmap2))
+        }
+    }
+    fn from_bitmap<B: BitmapMethods>(bitmap: &B) -> BitmapBundle {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromBitmap(bitmap))
+        }
+    }
+    fn from_icon_bundle(icon_bundle: *const c_void) -> BitmapBundle {
+        unsafe { BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromIconBundle(icon_bundle)) }
+    }
+    fn from_image(image: *const c_void) -> BitmapBundle {
+        unsafe { BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromImage(image)) }
+    }
+    fn from_impl(impl_: *mut c_void) -> BitmapBundle {
+        unsafe { BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromImpl(impl_)) }
+    }
+    fn from_resources(name: &str) -> BitmapBundle {
+        unsafe {
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromResources(name))
+        }
+    }
+    fn from_files_str(path: &str, filename: &str, extension: &str) -> BitmapBundle {
+        unsafe {
+            let path = WxString::from(path);
+            let path = path.as_ptr();
+            let filename = WxString::from(filename);
+            let filename = filename.as_ptr();
+            let extension = WxString::from(extension);
+            let extension = extension.as_ptr();
+            BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromFiles(path, filename, extension))
+        }
+    }
+    fn from_files(fullpathname: &str) -> BitmapBundle {
+        unsafe {
+            let fullpathname = WxString::from(fullpathname);
+            let fullpathname = fullpathname.as_ptr();
+            BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromFiles1(fullpathname))
+        }
+    }
+    // BLOCKED: fn FromSVG()
+    fn from_svg<S: SizeMethods>(data: *const c_void, size_def: &S) -> BitmapBundle {
+        unsafe {
+            let size_def = size_def.as_ptr();
+            BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromSVG1(data, size_def))
+        }
+    }
+    fn from_svg_file<S: SizeMethods>(path: &str, size_def: &S) -> BitmapBundle {
+        unsafe {
+            let path = WxString::from(path);
+            let path = path.as_ptr();
+            let size_def = size_def.as_ptr();
+            BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromSVGFile(path, size_def))
+        }
+    }
+    fn from_svg_resource<S: SizeMethods>(name: &str, size_def: &S) -> BitmapBundle {
+        unsafe {
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            let size_def = size_def.as_ptr();
+            BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromSVGResource(name, size_def))
+        }
+    }
 }
 
 // wxBitmapButton
 pub trait BitmapButtonMethods: ButtonMethods {
-    fn create_bitmap<
+    fn create_bitmapbundle<
         W: WindowMethods,
-        B: BitmapMethods,
+        B: BitmapBundleMethods,
         P: PointMethods,
         S: SizeMethods,
         V: ValidatorMethods,
@@ -666,6 +912,18 @@ pub trait ChoiceMethods: ControlMethods {
 pub trait ColourMethods: ObjectMethods {
     // NOT_SUPPORTED: fn Alpha()
     // NOT_SUPPORTED: fn Blue()
+    fn get_alpha(&self) -> c_uint {
+        unsafe { ffi::wxColour_GetAlpha(self.as_ptr()) }
+    }
+    fn get_blue(&self) -> c_uint {
+        unsafe { ffi::wxColour_GetBlue(self.as_ptr()) }
+    }
+    fn get_green(&self) -> c_uint {
+        unsafe { ffi::wxColour_GetGreen(self.as_ptr()) }
+    }
+    fn get_red(&self) -> c_uint {
+        unsafe { ffi::wxColour_GetRed(self.as_ptr()) }
+    }
     fn get_as_string(&self, flags: c_long) -> String {
         unsafe { WxString::from_ptr(ffi::wxColour_GetAsString(self.as_ptr(), flags)).into() }
     }
@@ -1281,6 +1539,21 @@ pub trait IconMethods: GDIObjectMethods {
     }
     fn get_height(&self) -> c_int {
         unsafe { ffi::wxIcon_GetHeight(self.as_ptr()) }
+    }
+    fn get_logical_height(&self) -> c_double {
+        unsafe { ffi::wxIcon_GetLogicalHeight(self.as_ptr()) }
+    }
+    fn get_logical_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxIcon_GetLogicalSize(self.as_ptr())) }
+    }
+    fn get_logical_width(&self) -> c_double {
+        unsafe { ffi::wxIcon_GetLogicalWidth(self.as_ptr()) }
+    }
+    fn get_scale_factor(&self) -> c_double {
+        unsafe { ffi::wxIcon_GetScaleFactor(self.as_ptr()) }
+    }
+    fn get_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxIcon_GetSize(self.as_ptr())) }
     }
     fn get_width(&self) -> c_int {
         unsafe { ffi::wxIcon_GetWidth(self.as_ptr()) }
@@ -2336,9 +2609,17 @@ pub trait MenuBarMethods: WindowMethods {
 // wxMenuItem
 pub trait MenuItemMethods: ObjectMethods {
     // BLOCKED: fn GetBackgroundColour()
-    // BLOCKED: fn GetBitmap()
-    fn get_disabled_bitmap(&self) -> BitmapIsOwned<false> {
-        unsafe { BitmapIsOwned::from_ptr(ffi::wxMenuItem_GetDisabledBitmap(self.as_ptr())) }
+    fn get_bitmap(&self) -> Bitmap {
+        unsafe { Bitmap::from_ptr(ffi::wxMenuItem_GetBitmap(self.as_ptr())) }
+    }
+    fn get_bitmap_bool(&self, checked: bool) -> Bitmap {
+        unsafe { Bitmap::from_ptr(ffi::wxMenuItem_GetBitmap1(self.as_ptr(), checked)) }
+    }
+    fn get_bitmap_bundle(&self) -> BitmapBundle {
+        unsafe { BitmapBundle::from_ptr(ffi::wxMenuItem_GetBitmapBundle(self.as_ptr())) }
+    }
+    fn get_disabled_bitmap(&self) -> Bitmap {
+        unsafe { Bitmap::from_ptr(ffi::wxMenuItem_GetDisabledBitmap(self.as_ptr())) }
     }
     // BLOCKED: fn GetFont()
     fn get_help(&self) -> String {
@@ -2400,15 +2681,30 @@ pub trait MenuItemMethods: ObjectMethods {
             ffi::wxMenuItem_SetBackgroundColour(self.as_ptr(), colour)
         }
     }
-    // BLOCKED: fn SetBitmap()
-    fn set_bitmaps<B: BitmapMethods, B2: BitmapMethods>(&self, checked: &B, unchecked: &B2) {
+    fn set_bitmap<B: BitmapBundleMethods>(&self, bmp: &B) {
+        unsafe {
+            let bmp = bmp.as_ptr();
+            ffi::wxMenuItem_SetBitmap(self.as_ptr(), bmp)
+        }
+    }
+    fn set_bitmap_bool<B: BitmapBundleMethods>(&self, bmp: &B, checked: bool) {
+        unsafe {
+            let bmp = bmp.as_ptr();
+            ffi::wxMenuItem_SetBitmap1(self.as_ptr(), bmp, checked)
+        }
+    }
+    fn set_bitmaps<B: BitmapBundleMethods, B2: BitmapBundleMethods>(
+        &self,
+        checked: &B,
+        unchecked: &B2,
+    ) {
         unsafe {
             let checked = checked.as_ptr();
             let unchecked = unchecked.as_ptr();
             ffi::wxMenuItem_SetBitmaps(self.as_ptr(), checked, unchecked)
         }
     }
-    fn set_disabled_bitmap<B: BitmapMethods>(&self, disabled: &B) {
+    fn set_disabled_bitmap<B: BitmapBundleMethods>(&self, disabled: &B) {
         unsafe {
             let disabled = disabled.as_ptr();
             ffi::wxMenuItem_SetDisabledBitmap(self.as_ptr(), disabled)
@@ -2461,6 +2757,12 @@ pub trait MenuItemMethods: ObjectMethods {
     }
     fn set_accel(&self, accel: *mut c_void) {
         unsafe { ffi::wxMenuItem_SetAccel(self.as_ptr(), accel) }
+    }
+    fn add_extra_accel(&self, accel: *const c_void) {
+        unsafe { ffi::wxMenuItem_AddExtraAccel(self.as_ptr(), accel) }
+    }
+    fn clear_extra_accels(&self) {
+        unsafe { ffi::wxMenuItem_ClearExtraAccels(self.as_ptr()) }
     }
     // DTOR: fn ~wxMenuItem()
     fn check(&self, check: bool) {
@@ -2957,10 +3259,15 @@ pub trait SizeMethods: WxRustMethods {
     // BLOCKED: fn operator+=()
     // BLOCKED: fn operator-=()
     // BLOCKED: fn operator/()
+    // BLOCKED: fn operator/1()
     // BLOCKED: fn operator*()
     // BLOCKED: fn operator*1()
+    // BLOCKED: fn operator*2()
+    // BLOCKED: fn operator*3()
     // BLOCKED: fn operator/=()
+    // BLOCKED: fn operator/=1()
     // BLOCKED: fn operator*=()
+    // BLOCKED: fn operator*=1()
     fn dec_by_point<P: PointMethods>(&self, pt: &P) {
         unsafe {
             let pt = pt.as_ptr();
@@ -3895,6 +4202,9 @@ pub trait SizerFlagsMethods: WxRustMethods {
             &self
         }
     }
+    fn disable_consistency_checks() {
+        unsafe { ffi::wxSizerFlags_DisableConsistencyChecks() }
+    }
     fn get_default_border() -> c_int {
         unsafe { ffi::wxSizerFlags_GetDefaultBorder() }
     }
@@ -3903,7 +4213,12 @@ pub trait SizerFlagsMethods: WxRustMethods {
 
 // wxStaticBitmap
 pub trait StaticBitmapMethods: ControlMethods {
-    fn create_bitmap<W: WindowMethods, B: BitmapMethods, P: PointMethods, S: SizeMethods>(
+    fn create_bitmapbundle<
+        W: WindowMethods,
+        B: BitmapBundleMethods,
+        P: PointMethods,
+        S: SizeMethods,
+    >(
         &self,
         parent: Option<&W>,
         id: c_int,
@@ -3932,7 +4247,7 @@ pub trait StaticBitmapMethods: ControlMethods {
     fn get_icon(&self) -> Icon {
         unsafe { Icon::from_ptr(ffi::wxStaticBitmap_GetIcon(self.as_ptr())) }
     }
-    fn set_bitmap<B: BitmapMethods>(&self, label: &B) {
+    fn set_bitmap<B: BitmapBundleMethods>(&self, label: &B) {
         unsafe {
             let label = label.as_ptr();
             ffi::wxStaticBitmap_SetBitmap(self.as_ptr(), label)
@@ -4375,6 +4690,16 @@ pub trait TextAttrMethods: WxRustMethods {
 
 // wxTextCtrl
 pub trait TextCtrlMethods: ControlMethods {
+    fn osx_enable_new_line_replacement(&self, enable: bool) {
+        unsafe { ffi::wxTextCtrl_OSXEnableNewLineReplacement(self.as_ptr(), enable) }
+    }
+    // BLOCKED: fn operator<<()
+    // BLOCKED: fn operator<<1()
+    // BLOCKED: fn operator<<2()
+    // NOT_SUPPORTED: fn operator<<3()
+    // BLOCKED: fn operator<<4()
+    // NOT_SUPPORTED: fn operator<<5()
+    // NOT_SUPPORTED: fn operator<<6()
     // DTOR: fn ~wxTextCtrl()
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
@@ -4415,8 +4740,14 @@ pub trait TextCtrlMethods: ControlMethods {
     fn discard_edits(&self) {
         unsafe { ffi::wxTextCtrl_DiscardEdits(self.as_ptr()) }
     }
+    fn empty_undo_buffer(&self) {
+        unsafe { ffi::wxTextCtrl_EmptyUndoBuffer(self.as_ptr()) }
+    }
     fn emulate_key_press(&self, event: *const c_void) -> bool {
         unsafe { ffi::wxTextCtrl_EmulateKeyPress(self.as_ptr(), event) }
+    }
+    fn enable_proof_check(&self, options: *const c_void) -> bool {
+        unsafe { ffi::wxTextCtrl_EnableProofCheck(self.as_ptr(), options) }
     }
     fn get_default_style(&self) -> TextAttrIsOwned<false> {
         unsafe { TextAttrIsOwned::from_ptr(ffi::wxTextCtrl_GetDefaultStyle(self.as_ptr())) }
@@ -4444,6 +4775,7 @@ pub trait TextCtrlMethods: ControlMethods {
     fn is_single_line(&self) -> bool {
         unsafe { ffi::wxTextCtrl_IsSingleLine(self.as_ptr()) }
     }
+    // NOT_SUPPORTED: fn GetProofCheckOptions()
     fn load_file(&self, filename: &str, file_type: c_int) -> bool {
         unsafe {
             let filename = WxString::from(filename);
@@ -4491,13 +4823,6 @@ pub trait TextCtrlMethods: ControlMethods {
     fn xy_to_position(&self, x: c_long, y: c_long) -> c_long {
         unsafe { ffi::wxTextCtrl_XYToPosition(self.as_ptr(), x, y) }
     }
-    // BLOCKED: fn operator<<()
-    // BLOCKED: fn operator<<1()
-    // BLOCKED: fn operator<<2()
-    // NOT_SUPPORTED: fn operator<<3()
-    // BLOCKED: fn operator<<4()
-    // NOT_SUPPORTED: fn operator<<5()
-    // NOT_SUPPORTED: fn operator<<6()
 }
 
 // wxTextEntry
@@ -4664,7 +4989,7 @@ pub trait TextEntryMethods: WxRustMethods {
 // wxToolBar
 pub trait ToolBarMethods: ControlMethods {
     // DTOR: fn ~wxToolBar()
-    fn add_check_tool<B: BitmapMethods, B2: BitmapMethods, O: ObjectMethods>(
+    fn add_check_tool<B: BitmapBundleMethods, B2: BitmapBundleMethods, O: ObjectMethods>(
         &self,
         tool_id: c_int,
         label: &str,
@@ -4710,7 +5035,7 @@ pub trait ToolBarMethods: ControlMethods {
             ffi::wxToolBar_AddControl(self.as_ptr(), control, label)
         }
     }
-    fn add_radio_tool<B: BitmapMethods, B2: BitmapMethods, O: ObjectMethods>(
+    fn add_radio_tool<B: BitmapBundleMethods, B2: BitmapBundleMethods, O: ObjectMethods>(
         &self,
         tool_id: c_int,
         label: &str,
@@ -4754,7 +5079,7 @@ pub trait ToolBarMethods: ControlMethods {
     fn add_tool_toolbartoolbase(&self, tool: *mut c_void) -> *mut c_void {
         unsafe { ffi::wxToolBar_AddTool(self.as_ptr(), tool) }
     }
-    fn add_tool_int_str<B: BitmapMethods>(
+    fn add_tool_int_str<B: BitmapBundleMethods>(
         &self,
         tool_id: c_int,
         label: &str,
@@ -4771,7 +5096,11 @@ pub trait ToolBarMethods: ControlMethods {
             ffi::wxToolBar_AddTool1(self.as_ptr(), tool_id, label, bitmap, short_help, kind)
         }
     }
-    fn add_tool_int_bitmap<B: BitmapMethods, B2: BitmapMethods, O: ObjectMethods>(
+    fn add_tool_int_bitmapbundle<
+        B: BitmapBundleMethods,
+        B2: BitmapBundleMethods,
+        O: ObjectMethods,
+    >(
         &self,
         tool_id: c_int,
         label: &str,
@@ -4893,7 +5222,7 @@ pub trait ToolBarMethods: ControlMethods {
     fn insert_stretchable_space(&self, pos: usize) -> *mut c_void {
         unsafe { ffi::wxToolBar_InsertStretchableSpace(self.as_ptr(), pos) }
     }
-    fn insert_tool_int<B: BitmapMethods, B2: BitmapMethods, O: ObjectMethods>(
+    fn insert_tool_int<B: BitmapBundleMethods, B2: BitmapBundleMethods, O: ObjectMethods>(
         &self,
         pos: usize,
         tool_id: c_int,
@@ -4983,7 +5312,7 @@ pub trait ToolBarMethods: ControlMethods {
             ffi::wxToolBar_SetToolClientData(self.as_ptr(), id, client_data)
         }
     }
-    fn set_tool_disabled_bitmap<B: BitmapMethods>(&self, id: c_int, bitmap: &B) {
+    fn set_tool_disabled_bitmap<B: BitmapBundleMethods>(&self, id: c_int, bitmap: &B) {
         unsafe {
             let bitmap = bitmap.as_ptr();
             ffi::wxToolBar_SetToolDisabledBitmap(self.as_ptr(), id, bitmap)
@@ -4996,7 +5325,7 @@ pub trait ToolBarMethods: ControlMethods {
             ffi::wxToolBar_SetToolLongHelp(self.as_ptr(), tool_id, help_string)
         }
     }
-    fn set_tool_normal_bitmap<B: BitmapMethods>(&self, id: c_int, bitmap: &B) {
+    fn set_tool_normal_bitmap<B: BitmapBundleMethods>(&self, id: c_int, bitmap: &B) {
         unsafe {
             let bitmap = bitmap.as_ptr();
             ffi::wxToolBar_SetToolNormalBitmap(self.as_ptr(), id, bitmap)
@@ -5018,7 +5347,7 @@ pub trait ToolBarMethods: ControlMethods {
     fn toggle_tool(&self, tool_id: c_int, toggle: bool) {
         unsafe { ffi::wxToolBar_ToggleTool(self.as_ptr(), tool_id, toggle) }
     }
-    fn create_tool_int<B: BitmapMethods, B2: BitmapMethods, O: ObjectMethods>(
+    fn create_tool_int<B: BitmapBundleMethods, B2: BitmapBundleMethods, O: ObjectMethods>(
         &self,
         tool_id: c_int,
         label: &str,
@@ -5216,12 +5545,14 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     fn show_without_activating(&self) {
         unsafe { ffi::wxTopLevelWindow_ShowWithoutActivating(self.as_ptr()) }
     }
-    fn enable_full_screen_view(&self, enable: bool) -> bool {
-        unsafe { ffi::wxTopLevelWindow_EnableFullScreenView(self.as_ptr(), enable) }
+    fn enable_full_screen_view(&self, enable: bool, style: c_long) -> bool {
+        unsafe { ffi::wxTopLevelWindow_EnableFullScreenView(self.as_ptr(), enable, style) }
     }
     fn show_full_screen(&self, show: bool, style: c_long) -> bool {
         unsafe { ffi::wxTopLevelWindow_ShowFullScreen(self.as_ptr(), show, style) }
     }
+    // NOT_SUPPORTED: fn GetContentProtection()
+    // NOT_SUPPORTED: fn SetContentProtection()
     // BLOCKED: fn UseNativeDecorations()
     // BLOCKED: fn UseNativeDecorationsByDefault()
     fn get_default_size() -> Size {
@@ -5503,6 +5834,36 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn to_dip_int(&self, d: c_int) -> c_int {
         unsafe { ffi::wxWindow_ToDIP2(self.as_ptr(), d) }
     }
+    fn from_phys_size<S: SizeMethods>(&self, sz: &S) -> Size {
+        unsafe {
+            let sz = sz.as_ptr();
+            Size::from_ptr(ffi::wxWindow_FromPhys(self.as_ptr(), sz))
+        }
+    }
+    fn from_phys_point<P: PointMethods>(&self, pt: &P) -> Point {
+        unsafe {
+            let pt = pt.as_ptr();
+            Point::from_ptr(ffi::wxWindow_FromPhys1(self.as_ptr(), pt))
+        }
+    }
+    fn from_phys_int(&self, d: c_int) -> c_int {
+        unsafe { ffi::wxWindow_FromPhys2(self.as_ptr(), d) }
+    }
+    fn to_phys_size<S: SizeMethods>(&self, sz: &S) -> Size {
+        unsafe {
+            let sz = sz.as_ptr();
+            Size::from_ptr(ffi::wxWindow_ToPhys(self.as_ptr(), sz))
+        }
+    }
+    fn to_phys_point<P: PointMethods>(&self, pt: &P) -> Point {
+        unsafe {
+            let pt = pt.as_ptr();
+            Point::from_ptr(ffi::wxWindow_ToPhys1(self.as_ptr(), pt))
+        }
+    }
+    fn to_phys_int(&self, d: c_int) -> c_int {
+        unsafe { ffi::wxWindow_ToPhys2(self.as_ptr(), d) }
+    }
     fn get_best_size(&self) -> Size {
         unsafe { Size::from_ptr(ffi::wxWindow_GetBestSize(self.as_ptr())) }
     }
@@ -5757,6 +6118,64 @@ pub trait WindowMethods: EvtHandlerMethods {
                 None => ptr::null_mut(),
             };
             ffi::wxWindow_ToDIP5(d, w)
+        }
+    }
+    fn from_phys_size_window<S: SizeMethods, W: WindowMethods>(sz: &S, w: Option<&W>) -> Size {
+        unsafe {
+            let sz = sz.as_ptr();
+            let w = match w {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            Size::from_ptr(ffi::wxWindow_FromPhys3(sz, w))
+        }
+    }
+    fn from_phys_point_window<P: PointMethods, W: WindowMethods>(pt: &P, w: Option<&W>) -> Point {
+        unsafe {
+            let pt = pt.as_ptr();
+            let w = match w {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            Point::from_ptr(ffi::wxWindow_FromPhys4(pt, w))
+        }
+    }
+    fn from_phys_int_window<W: WindowMethods>(d: c_int, w: Option<&W>) -> c_int {
+        unsafe {
+            let w = match w {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWindow_FromPhys5(d, w)
+        }
+    }
+    fn to_phys_size_window<S: SizeMethods, W: WindowMethods>(sz: &S, w: Option<&W>) -> Size {
+        unsafe {
+            let sz = sz.as_ptr();
+            let w = match w {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            Size::from_ptr(ffi::wxWindow_ToPhys3(sz, w))
+        }
+    }
+    fn to_phys_point_window<P: PointMethods, W: WindowMethods>(pt: &P, w: Option<&W>) -> Point {
+        unsafe {
+            let pt = pt.as_ptr();
+            let w = match w {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            Point::from_ptr(ffi::wxWindow_ToPhys4(pt, w))
+        }
+    }
+    fn to_phys_int_window<W: WindowMethods>(d: c_int, w: Option<&W>) -> c_int {
+        unsafe {
+            let w = match w {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWindow_ToPhys5(d, w)
         }
     }
     fn center(&self, dir: c_int) {

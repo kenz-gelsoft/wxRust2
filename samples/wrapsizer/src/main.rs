@@ -127,6 +127,7 @@ impl WrapSizerFrame {
     fn add_tool_bar_button(&self, tb: &wx::ToolBar, label: &str, artid: &str) {
         let bm =
             wx::ArtProvider::get_bitmap(artid, "wxART_OTHER_C", &wx::Size::new_with_int(16, 16));
+        let bm = wx::BitmapBundle::from_bitmap(&bm);
         tb.add_tool_int_str(wx::ID_ANY, label, &bm, "", wx::ITEM_NORMAL);
     }
 

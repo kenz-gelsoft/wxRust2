@@ -10,30 +10,7 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build-wx30gtk:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-    - uses: actions/cache@v3
-      with:
-        path: |
-          ~/.cargo/bin/
-          ~/.cargo/registry/index/
-          ~/.cargo/registry/cache/
-          ~/.cargo/git/db/
-          target/
-        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    - name: Install Prerequisites
-      run: sudo apt install libwxgtk3.0-gtk3-dev
-    - name: Check fmt
-      run: cargo fmt --check --all
-    - name: Build
-      run: cargo build --verbose
-    - name: Run tests
-      run: cargo test --verbose
-
-  build-wx31gtk:
+  build-wx32gtk:
     runs-on: ubuntu-20.04
 
     steps:
@@ -50,9 +27,11 @@ jobs:
     - name: Install Prerequisites
       run: |
         sudo apt-key adv --fetch-keys https://repos.codelite.org/CodeLite.asc
-        sudo apt-add-repository 'deb https://repos.codelite.org/wx3.1.6/ubuntu/ focal universe'
+        sudo apt-add-repository 'deb https://repos.codelite.org/wx3.2.0/ubuntu/ focal universe'
         sudo apt update
-        sudo apt install libwxgtk3.1unofficial-dev
+        sudo apt install libwxgtk3.2unofficial-dev
+    - name: Check fmt
+      run: cargo fmt --check --all
     - name: Build
       run: cargo build --verbose
     - name: Run tests
@@ -73,7 +52,7 @@ jobs:
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
     - name: Install Prerequisites
-      run: brew install wxwidgets
+      run: brew update && brew install wxwidgets
     - name: Build
       run: cargo build --verbose
     - name: Run tests

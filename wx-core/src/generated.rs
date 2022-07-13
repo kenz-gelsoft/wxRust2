@@ -70,7 +70,7 @@ impl<const OWNED: bool> BitmapIsOwned<OWNED> {
         }
     }
     // NOT_SUPPORTED: fn wxBitmap2()
-    pub fn new_with_int(width: c_int, height: c_int, depth: c_int) -> BitmapIsOwned<OWNED> {
+    pub fn new_with_int_int(width: c_int, height: c_int, depth: c_int) -> BitmapIsOwned<OWNED> {
         unsafe { BitmapIsOwned(ffi::wxBitmap_new3(width, height, depth)) }
     }
     pub fn new_with_size<S: SizeMethods>(sz: &S, depth: c_int) -> BitmapIsOwned<OWNED> {
@@ -79,15 +79,21 @@ impl<const OWNED: bool> BitmapIsOwned<OWNED> {
             BitmapIsOwned(ffi::wxBitmap_new4(sz, depth))
         }
     }
-    pub fn new_with_char(bits: *const c_void) -> BitmapIsOwned<OWNED> {
-        unsafe { BitmapIsOwned(ffi::wxBitmap_new5(bits)) }
+    pub fn new_with_int_dc(width: c_int, height: c_int, dc: *const c_void) -> BitmapIsOwned<OWNED> {
+        unsafe { BitmapIsOwned(ffi::wxBitmap_new5(width, height, dc)) }
     }
-    // NOT_SUPPORTED: fn wxBitmap6()
-    pub fn new_with_image(img: *const c_void, depth: c_int) -> BitmapIsOwned<OWNED> {
-        unsafe { BitmapIsOwned(ffi::wxBitmap_new7(img, depth)) }
+    pub fn new_with_char(bits: *const c_void) -> BitmapIsOwned<OWNED> {
+        unsafe { BitmapIsOwned(ffi::wxBitmap_new6(bits)) }
+    }
+    // NOT_SUPPORTED: fn wxBitmap7()
+    pub fn new_with_image_int(img: *const c_void, depth: c_int) -> BitmapIsOwned<OWNED> {
+        unsafe { BitmapIsOwned(ffi::wxBitmap_new8(img, depth)) }
+    }
+    pub fn new_with_image_dc(img: *const c_void, dc: *const c_void) -> BitmapIsOwned<OWNED> {
+        unsafe { BitmapIsOwned(ffi::wxBitmap_new9(img, dc)) }
     }
     pub fn new_with_cursor(cursor: *const c_void) -> BitmapIsOwned<OWNED> {
-        unsafe { BitmapIsOwned(ffi::wxBitmap_new8(cursor)) }
+        unsafe { BitmapIsOwned(ffi::wxBitmap_new10(cursor)) }
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -97,6 +103,51 @@ impl<const OWNED: bool> Drop for BitmapIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
+// wxBitmapBundle
+wx_class! { BitmapBundle =
+    BitmapBundleIsOwned<true>(wxBitmapBundle) impl
+        BitmapBundleMethods
+}
+impl<const OWNED: bool> BitmapBundleIsOwned<OWNED> {
+    pub fn new() -> BitmapBundleIsOwned<OWNED> {
+        unsafe { BitmapBundleIsOwned(ffi::wxBitmapBundle_new()) }
+    }
+    pub fn new_with_bitmap<B: BitmapMethods>(bitmap: &B) -> BitmapBundleIsOwned<OWNED> {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            BitmapBundleIsOwned(ffi::wxBitmapBundle_new1(bitmap))
+        }
+    }
+    pub fn new_with_icon<I: IconMethods>(icon: &I) -> BitmapBundleIsOwned<OWNED> {
+        unsafe {
+            let icon = icon.as_ptr();
+            BitmapBundleIsOwned(ffi::wxBitmapBundle_new2(icon))
+        }
+    }
+    pub fn new_with_image(image: *const c_void) -> BitmapBundleIsOwned<OWNED> {
+        unsafe { BitmapBundleIsOwned(ffi::wxBitmapBundle_new3(image)) }
+    }
+    pub fn new_with_char(xpm: *const c_void) -> BitmapBundleIsOwned<OWNED> {
+        unsafe { BitmapBundleIsOwned(ffi::wxBitmapBundle_new4(xpm)) }
+    }
+    pub fn new_with_bitmapbundle<B: BitmapBundleMethods>(other: &B) -> BitmapBundleIsOwned<OWNED> {
+        unsafe {
+            let other = other.as_ptr();
+            BitmapBundleIsOwned(ffi::wxBitmapBundle_new5(other))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for BitmapBundleIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxBitmapBundle_delete(self.0) }
         }
     }
 }
@@ -118,7 +169,7 @@ impl<const OWNED: bool> BitmapButtonIsOwned<OWNED> {
     }
     pub fn new<
         W: WindowMethods,
-        B: BitmapMethods,
+        B: BitmapBundleMethods,
         P: PointMethods,
         S: SizeMethods,
         V: ValidatorMethods,
@@ -1383,7 +1434,7 @@ impl<const OWNED: bool> StaticBitmapIsOwned<OWNED> {
     pub fn new_2step() -> StaticBitmapIsOwned<OWNED> {
         unsafe { StaticBitmapIsOwned(ffi::wxStaticBitmap_new()) }
     }
-    pub fn new<W: WindowMethods, B: BitmapMethods, P: PointMethods, S: SizeMethods>(
+    pub fn new<W: WindowMethods, B: BitmapBundleMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
         label: &B,

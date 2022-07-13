@@ -467,7 +467,7 @@ impl<'a, P: WindowMethods> BitmapButtonBuilder<'a, P> {
         self.validator = Some(validator);
         self
     }
-    pub fn build<B: BitmapMethods>(&mut self, bitmap: &B) -> BitmapButton {
+    pub fn build<B: BitmapBundleMethods>(&mut self, bitmap: &B) -> BitmapButton {
         let pos = self.pos.take().unwrap_or_else(|| Point::default());
         let size = self.size.take().unwrap_or_else(|| Size::default());
         let validator = self

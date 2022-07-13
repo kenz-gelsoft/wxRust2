@@ -48,9 +48,11 @@ MANUAL_BINDINGS = [
 RUST_KEYWORDS = [
     'box',
     'break',
+    'impl',
     'move',
     'ref',
     'type',
+    'use',
 ]
 
 
