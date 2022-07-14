@@ -19,6 +19,16 @@
 IMPL_WX_LIST_BINDING(wxSizerItem);
 IMPL_WX_LIST_BINDING(wxWindow);
 
+// wxBitmapBundle compatibility hack(for a while)
+void *wxBitmapBundle_From(wxBitmap *bitmap) {
+#if wxCHECK_VERSION(3, 1, 6)
+    return new wxBitmapBundle(*bitmap);
+#else
+    // Need to return new instance to avoid double-free.
+    return new wxBitmap(*bitmap);
+#endif
+}
+
 int wxRustMessageBox(const wxString *message, const wxString *caption, int style, wxWindow *parent, int x, int y) {
     return wxMessageBox(*message, *caption, style, parent, x, y);
 }

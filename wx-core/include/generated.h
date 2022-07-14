@@ -8,6 +8,7 @@
 #include <wx/filepicker.h>
 #include <wx/wrapsizer.h>
 
+// wxBitmapBundle compatibility hack(for a while)
 #if !wxCHECK_VERSION(3, 1, 6)
 typedef wxBitmap wxBitmapBundle;
 #endif

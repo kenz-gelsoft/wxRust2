@@ -67,6 +67,9 @@ mod ffi {
         pub fn wxWindowList_GetCount(self_: *mut c_void) -> usize;
         pub fn wxWindowList_IsEmpty(self_: *mut c_void) -> bool;
 
+        // wxBitmapBundle compatibility hack(for a while)
+        pub fn wxBitmapBundle_From(bitmap: *mut c_void) -> *mut c_void;
+
         pub fn wxRustMessageBox(
             message: *const c_void,
             caption: *const c_void,
@@ -1252,6 +1255,15 @@ impl<const OWNED: bool> Drop for WindowListIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxWindowList_delete(self.0) }
+        }
+    }
+}
+
+// wxBitmapBundle compatibility hack(for a while)
+impl From<Bitmap> for BitmapBundle {
+    fn from(bitmap: Bitmap) -> Self {
+        unsafe {
+            BitmapBundle::from_ptr(ffi::wxBitmapBundle_From(bitmap.as_ptr()))
         }
     }
 }

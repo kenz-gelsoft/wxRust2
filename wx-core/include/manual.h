@@ -12,5 +12,8 @@ extern "C" {
     DECL_WX_LIST_BINDING(wxSizerItem);
     DECL_WX_LIST_BINDING(wxWindow);
 
+    // wxBitmapBundle compatibility hack(for a while)
+    void *wxBitmapBundle_From(wxBitmap *bitmap);
+
     int wxRustMessageBox(const wxString *message, const wxString *caption, int style, wxWindow *parent, int x, int y);
 }
