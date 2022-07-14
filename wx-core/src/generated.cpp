@@ -888,6 +888,83 @@ void wxFrame_PopStatusText(wxFrame * self, int number) {
 
 // CLASS: wxGDIObject
 
+// CLASS: wxGenericDirCtrl
+wxGenericDirCtrl *wxGenericDirCtrl_new() {
+    return new wxGenericDirCtrl();
+}
+wxGenericDirCtrl *wxGenericDirCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * dir, const wxPoint * pos, const wxSize * size, long style, const wxString * filter, int default_filter, const wxString * name) {
+    return new wxGenericDirCtrl(parent, id, *dir, *pos, *size, style, *filter, default_filter, *name);
+}
+bool wxGenericDirCtrl_CollapsePath(wxGenericDirCtrl * self, const wxString * path) {
+    return self->CollapsePath(*path);
+}
+void wxGenericDirCtrl_CollapseTree(wxGenericDirCtrl * self) {
+    return self->CollapseTree();
+}
+bool wxGenericDirCtrl_Create(wxGenericDirCtrl * self, wxWindow * parent, wxWindowID id, const wxString * dir, const wxPoint * pos, const wxSize * size, long style, const wxString * filter, int default_filter, const wxString * name) {
+    return self->Create(parent, id, *dir, *pos, *size, style, *filter, default_filter, *name);
+}
+bool wxGenericDirCtrl_ExpandPath(wxGenericDirCtrl * self, const wxString * path) {
+    return self->ExpandPath(*path);
+}
+wxString *wxGenericDirCtrl_GetDefaultPath(const wxGenericDirCtrl * self) {
+    return new wxString(self->GetDefaultPath());
+}
+wxString *wxGenericDirCtrl_GetFilePath(const wxGenericDirCtrl * self) {
+    return new wxString(self->GetFilePath());
+}
+void wxGenericDirCtrl_GetFilePaths(const wxGenericDirCtrl * self, wxArrayString * paths) {
+    return self->GetFilePaths(*paths);
+}
+wxString *wxGenericDirCtrl_GetFilter(const wxGenericDirCtrl * self) {
+    return new wxString(self->GetFilter());
+}
+int wxGenericDirCtrl_GetFilterIndex(const wxGenericDirCtrl * self) {
+    return self->GetFilterIndex();
+}
+wxDirFilterListCtrl * wxGenericDirCtrl_GetFilterListCtrl(const wxGenericDirCtrl * self) {
+    return self->GetFilterListCtrl();
+}
+wxString *wxGenericDirCtrl_GetPath(const wxGenericDirCtrl * self) {
+    return new wxString(self->GetPath());
+}
+void wxGenericDirCtrl_GetPaths(const wxGenericDirCtrl * self, wxArrayString * paths) {
+    return self->GetPaths(*paths);
+}
+wxTreeCtrl * wxGenericDirCtrl_GetTreeCtrl(const wxGenericDirCtrl * self) {
+    return self->GetTreeCtrl();
+}
+void wxGenericDirCtrl_Init(wxGenericDirCtrl * self) {
+    return self->Init();
+}
+void wxGenericDirCtrl_ReCreateTree(wxGenericDirCtrl * self) {
+    return self->ReCreateTree();
+}
+void wxGenericDirCtrl_SetDefaultPath(wxGenericDirCtrl * self, const wxString * path) {
+    return self->SetDefaultPath(*path);
+}
+void wxGenericDirCtrl_SetFilter(wxGenericDirCtrl * self, const wxString * filter) {
+    return self->SetFilter(*filter);
+}
+void wxGenericDirCtrl_SetFilterIndex(wxGenericDirCtrl * self, int n) {
+    return self->SetFilterIndex(n);
+}
+void wxGenericDirCtrl_SetPath(wxGenericDirCtrl * self, const wxString * path) {
+    return self->SetPath(*path);
+}
+void wxGenericDirCtrl_ShowHidden(wxGenericDirCtrl * self, bool show) {
+    return self->ShowHidden(show);
+}
+void wxGenericDirCtrl_SelectPath(wxGenericDirCtrl * self, const wxString * path, bool select) {
+    return self->SelectPath(*path, select);
+}
+void wxGenericDirCtrl_SelectPaths(wxGenericDirCtrl * self, const wxArrayString * paths) {
+    return self->SelectPaths(*paths);
+}
+void wxGenericDirCtrl_UnselectAll(wxGenericDirCtrl * self) {
+    return self->UnselectAll();
+}
+
 // CLASS: wxIcon
 wxIcon *wxIcon_new() {
     return new wxIcon();
