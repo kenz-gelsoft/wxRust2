@@ -1262,9 +1262,7 @@ impl<const OWNED: bool> Drop for WindowListIsOwned<OWNED> {
 // wxBitmapBundle compatibility hack(for a while)
 impl From<Bitmap> for BitmapBundle {
     fn from(bitmap: Bitmap) -> Self {
-        unsafe {
-            BitmapBundle::from_ptr(ffi::wxBitmapBundle_From(bitmap.as_ptr()))
-        }
+        unsafe { BitmapBundle::from_ptr(ffi::wxBitmapBundle_From(bitmap.as_ptr())) }
     }
 }
 
