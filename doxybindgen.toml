@@ -87,6 +87,12 @@ library = 'core'
 blocklist = [
     'Insert',
 ]
+wx31 = [
+    'GetBitmapBundle',
+    'GetDIPSizeHint',
+    'GetNativeDIPSizeHint',
+    'GetNativeSizeHint',
+]
 wx317 = [
     # Doc isn't up-to-date in wx3.1.6
     'GetSizeHint',
@@ -97,6 +103,26 @@ blocklist = [
     'FromBitmaps',
     # conflict on const vs mut
     'FromSVG',
+]
+wx31 = [
+    'FromBitmap',
+    'FromBitmaps1',
+    'FromFiles',
+    'FromFiles1',
+    'FromImage',
+    'FromImpl',
+    'FromResources',
+    'FromSVG1',
+    'FromSVGFile',
+    'FromSVGResource',
+    'GetBitmap',
+    'GetBitmapFor',
+    'GetDefaultSize',
+    'GetIcon',
+    'GetIconFor',
+    'GetPreferredBitmapSizeAtScale',
+    'GetPreferredBitmapSizeFor',
+    'GetPreferredLogicalSizeFor',
 ]
 wx317 = [
     'Clear',
@@ -121,15 +147,25 @@ blocklist = [
     'ResetAlpha',
     'UseAlpha',
 ]
+wx31 = [
+    'wxBitmap5',
+    'wxBitmap8',
+    'wxBitmap10',
+    'CreateWithDIPSize',
+    'CreateWithDIPSize1',
+    'GetDIPSize',
+    'GetLogicalHeight',
+    'GetLogicalSize',
+    'GetLogicalWidth',
+    'Rescale',
+    'SetScaleFactor',
+]
 wx317 = [
     # Doc isn't up-to-date in wx3.1.6
     'wxBitmap9',
     'SetDepth',
     'SetHeight',
     'SetWidth',
-]
-wx31 = [
-    'wxBitmap8',
 ]
 not_windows = [
     # FIXME: FindHandler on MSW requires dynamic_cast in C++ generated code.
@@ -152,7 +188,11 @@ blocklist = [
     'ChangeLightness',
 ]
 wx31 = [
+    'GetAlpha',
+    'GetBlue',
+    'GetGreen',
     'GetLuminance',
+    'GetRed',
     'IsSolid',
 ]
 [types.wxColourPickerCtrl]
@@ -241,6 +281,11 @@ blocklist = [
 blocklist = [
     'operator=',
 ]
+wx31 = [
+    'GetLogicalHeight',
+    'GetLogicalSize',
+    'GetLogicalWidth',
+]
 wx317 = [
     # Doc isn't up-to-date in wx3.1.6
     'SetDepth',
@@ -313,6 +358,10 @@ windows = [
     'SetFont',
     'SetMarginWidth',
     'SetTextColour',
+]
+wx31 = [
+    'AddExtraAccel',
+    'ClearExtraAccels',
 ]
 wx32 = [
     'GetBitmapBundle',
@@ -420,6 +469,7 @@ wx31 = [
     'CenterVertical',
     'CentreHorizontal',
     'CentreVertical',
+    'DisableConsistencyChecks',
 ]
 [types.wxStaticBox]
 blocklist = [
@@ -448,6 +498,9 @@ mac = [
 not_gtk = [
     # It looks codelite's binary doesn't enable libgspell integration
     'EnableProofCheck',
+]
+wx31 = [
+    'EmptyUndoBuffer',
 ]
 [types.wxTextEntry]
 wx31 = [
@@ -507,6 +560,12 @@ wx31 = [
     'FromDIP3',
     'FromDIP4',
     'FromDIP5',
+    'FromPhys',
+    'FromPhys1',
+    'FromPhys2',
+    'FromPhys3',
+    'FromPhys4',
+    'FromPhys5',
     'GetDPI',
     'GetDPIScaleFactor',
     'InheritsForegroundColour',
@@ -516,6 +575,12 @@ wx31 = [
     'ToDIP3',
     'ToDIP4',
     'ToDIP5',
+    'ToPhys',
+    'ToPhys1',
+    'ToPhys2',
+    'ToPhys3',
+    'ToPhys4',
+    'ToPhys5',
     'UseBackgroundColour',
     'UseForegroundColour',
 ]

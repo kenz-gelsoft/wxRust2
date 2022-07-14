@@ -8,6 +8,11 @@
 #include <wx/filepicker.h>
 #include <wx/wrapsizer.h>
 
+// wxBitmapBundle compatibility hack(for a while)
+#if !wxCHECK_VERSION(3, 1, 6)
+typedef wxBitmap wxBitmapBundle;
+#endif
+
 extern "C" {
 
 // CLASS: wxAnyButton
@@ -32,11 +37,15 @@ void wxAnyButton_SetBitmapPosition(wxAnyButton * self, wxDirection dir);
 // CLASS: wxArtProvider
 bool wxArtProvider_Delete(wxArtProvider * provider);
 wxBitmap *wxArtProvider_GetBitmap(const wxArtID * id, const wxArtClient * client, const wxSize * size);
+#if wxCHECK_VERSION(3, 1, 0)
 wxBitmapBundle *wxArtProvider_GetBitmapBundle(const wxArtID * id, const wxArtClient * client, const wxSize * size);
+#endif
 wxIcon *wxArtProvider_GetIcon(const wxArtID * id, const wxArtClient * client, const wxSize * size);
+#if wxCHECK_VERSION(3, 1, 0)
 wxSize *wxArtProvider_GetNativeDIPSizeHint(const wxArtClient * client);
 wxSize *wxArtProvider_GetNativeSizeHint(const wxArtClient * client, wxWindow * win);
 wxSize *wxArtProvider_GetDIPSizeHint(const wxArtClient * client);
+#endif
 #if wxCHECK_VERSION(3, 1, 7)
 wxSize *wxArtProvider_GetSizeHint(const wxArtClient * client, wxWindow * win);
 #endif
@@ -53,7 +62,9 @@ wxBitmap *wxBitmap_new();
 wxBitmap *wxBitmap_new1(const wxBitmap * bitmap);
 wxBitmap *wxBitmap_new3(int width, int height, int depth);
 wxBitmap *wxBitmap_new4(const wxSize * sz, int depth);
+#if wxCHECK_VERSION(3, 1, 0)
 wxBitmap *wxBitmap_new5(int width, int height, const wxDC * dc);
+#endif
 wxBitmap *wxBitmap_new6(const char *const * bits);
 #if wxCHECK_VERSION(3, 1, 0)
 wxBitmap *wxBitmap_new8(const wxImage * img, int depth);
@@ -61,20 +72,28 @@ wxBitmap *wxBitmap_new8(const wxImage * img, int depth);
 #if wxCHECK_VERSION(3, 1, 7)
 wxBitmap *wxBitmap_new9(const wxImage * img, const wxDC * dc);
 #endif
+#if wxCHECK_VERSION(3, 1, 0)
 wxBitmap *wxBitmap_new10(const wxCursor * cursor);
+#endif
 bool wxBitmap_CopyFromIcon(wxBitmap * self, const wxIcon * icon);
 bool wxBitmap_Create(wxBitmap * self, int width, int height, int depth);
 bool wxBitmap_Create1(wxBitmap * self, const wxSize * sz, int depth);
 bool wxBitmap_Create2(wxBitmap * self, int width, int height, const wxDC * dc);
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxBitmap_CreateWithDIPSize(wxBitmap * self, const wxSize * size, double scale, int depth);
 bool wxBitmap_CreateWithDIPSize1(wxBitmap * self, int width, int height, double scale, int depth);
+#endif
 bool wxBitmap_CreateScaled(wxBitmap * self, int width, int height, int depth, double logical_scale);
 int wxBitmap_GetDepth(const wxBitmap * self);
+#if wxCHECK_VERSION(3, 1, 0)
 wxSize *wxBitmap_GetDIPSize(const wxBitmap * self);
+#endif
 int wxBitmap_GetHeight(const wxBitmap * self);
+#if wxCHECK_VERSION(3, 1, 0)
 double wxBitmap_GetLogicalHeight(const wxBitmap * self);
 wxSize *wxBitmap_GetLogicalSize(const wxBitmap * self);
 double wxBitmap_GetLogicalWidth(const wxBitmap * self);
+#endif
 wxMask * wxBitmap_GetMask(const wxBitmap * self);
 wxPalette * wxBitmap_GetPalette(const wxBitmap * self);
 wxBitmap *wxBitmap_GetSubBitmap(const wxBitmap * self, const wxRect * rect);
@@ -90,7 +109,9 @@ bool wxBitmap_IsOk(const wxBitmap * self);
 void wxBitmap_SetDepth(wxBitmap * self, int depth);
 void wxBitmap_SetHeight(wxBitmap * self, int height);
 #endif
+#if wxCHECK_VERSION(3, 1, 0)
 void wxBitmap_SetScaleFactor(wxBitmap * self, double scale);
+#endif
 void wxBitmap_SetMask(wxBitmap * self, wxMask * mask);
 void wxBitmap_SetPalette(wxBitmap * self, const wxPalette * palette);
 #if wxCHECK_VERSION(3, 1, 7)
@@ -105,7 +126,9 @@ void wxBitmap_InitStandardHandlers();
 void wxBitmap_InsertHandler(wxBitmapHandler * handler);
 wxBitmap *wxBitmap_NewFromPNGData(const void * data, size_t size);
 bool wxBitmap_RemoveHandler(const wxString * name);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxBitmap_Rescale(wxBitmap * bmp, const wxSize * size_needed);
+#endif
 
 // CLASS: wxBitmapBundle
 void wxBitmapBundle_delete(wxBitmapBundle *self);
@@ -121,6 +144,7 @@ wxBitmapBundle *wxBitmapBundle_new5(const wxBitmapBundle * other);
 void wxBitmapBundle_Clear(wxBitmapBundle * self);
 #endif
 bool wxBitmapBundle_IsOk(const wxBitmapBundle * self);
+#if wxCHECK_VERSION(3, 1, 0)
 wxSize *wxBitmapBundle_GetDefaultSize(const wxBitmapBundle * self);
 wxSize *wxBitmapBundle_GetPreferredBitmapSizeAtScale(const wxBitmapBundle * self, double scale);
 wxSize *wxBitmapBundle_GetPreferredBitmapSizeFor(const wxBitmapBundle * self, const wxWindow * window);
@@ -129,12 +153,16 @@ wxBitmap *wxBitmapBundle_GetBitmap(const wxBitmapBundle * self, const wxSize * s
 wxBitmap *wxBitmapBundle_GetBitmapFor(const wxBitmapBundle * self, const wxWindow * window);
 wxIcon *wxBitmapBundle_GetIcon(const wxBitmapBundle * self, const wxSize * size);
 wxIcon *wxBitmapBundle_GetIconFor(const wxBitmapBundle * self, const wxWindow * window);
+#endif
 bool wxBitmapBundle_IsSameAs(const wxBitmapBundle * self, const wxBitmapBundle * other);
+#if wxCHECK_VERSION(3, 1, 0)
 wxBitmapBundle *wxBitmapBundle_FromBitmaps1(const wxBitmap * bitmap1, const wxBitmap * bitmap2);
 wxBitmapBundle *wxBitmapBundle_FromBitmap(const wxBitmap * bitmap);
+#endif
 #if wxCHECK_VERSION(3, 1, 7)
 wxBitmapBundle *wxBitmapBundle_FromIconBundle(const wxIconBundle * icon_bundle);
 #endif
+#if wxCHECK_VERSION(3, 1, 0)
 wxBitmapBundle *wxBitmapBundle_FromImage(const wxImage * image);
 wxBitmapBundle *wxBitmapBundle_FromImpl(wxBitmapBundleImpl * impl_);
 wxBitmapBundle *wxBitmapBundle_FromResources(const wxString * name);
@@ -143,6 +171,7 @@ wxBitmapBundle *wxBitmapBundle_FromFiles1(const wxString * fullpathname);
 wxBitmapBundle *wxBitmapBundle_FromSVG1(const char * data, const wxSize * size_def);
 wxBitmapBundle *wxBitmapBundle_FromSVGFile(const wxString * path, const wxSize * size_def);
 wxBitmapBundle *wxBitmapBundle_FromSVGResource(const wxString * name, const wxSize * size_def);
+#endif
 
 // CLASS: wxBitmapButton
 wxBitmapButton *wxBitmapButton_new();
@@ -224,10 +253,12 @@ wxItemContainer *wxChoice_AsItemContainer(wxChoice* obj);
 wxColour *wxColour_new();
 wxColour *wxColour_new2(const wxString * colour_name);
 wxColour *wxColour_new4(const wxColour * colour);
+#if wxCHECK_VERSION(3, 1, 0)
 unsigned int wxColour_GetAlpha(const wxColour * self);
 unsigned int wxColour_GetBlue(const wxColour * self);
 unsigned int wxColour_GetGreen(const wxColour * self);
 unsigned int wxColour_GetRed(const wxColour * self);
+#endif
 wxString *wxColour_GetAsString(const wxColour * self, long flags);
 #if wxCHECK_VERSION(3, 1, 0)
 double wxColour_GetLuminance(const wxColour * self);
@@ -354,9 +385,11 @@ wxIcon *wxIcon_new5(const wxIconLocation * loc);
 void wxIcon_CopyFromBitmap(wxIcon * self, const wxBitmap * bmp);
 int wxIcon_GetDepth(const wxIcon * self);
 int wxIcon_GetHeight(const wxIcon * self);
+#if wxCHECK_VERSION(3, 1, 0)
 double wxIcon_GetLogicalHeight(const wxIcon * self);
 wxSize *wxIcon_GetLogicalSize(const wxIcon * self);
 double wxIcon_GetLogicalWidth(const wxIcon * self);
+#endif
 double wxIcon_GetScaleFactor(const wxIcon * self);
 wxSize *wxIcon_GetSize(const wxIcon * self);
 int wxIcon_GetWidth(const wxIcon * self);
@@ -583,8 +616,10 @@ void wxMenuItem_SetSubMenu(wxMenuItem * self, wxMenu * menu);
 void wxMenuItem_SetTextColour(wxMenuItem * self, const wxColour * colour);
 #endif
 void wxMenuItem_SetAccel(wxMenuItem * self, wxAcceleratorEntry * accel);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxMenuItem_AddExtraAccel(wxMenuItem * self, const wxAcceleratorEntry * accel);
 void wxMenuItem_ClearExtraAccels(wxMenuItem * self);
+#endif
 wxMenuItem *wxMenuItem_new(wxMenu * parent_menu, int id, const wxString * text, const wxString * help_string, wxItemKind kind, wxMenu * sub_menu);
 void wxMenuItem_Check(wxMenuItem * self, bool check);
 void wxMenuItem_Enable(wxMenuItem * self, bool enable);
@@ -840,7 +875,9 @@ wxSizerFlags * wxSizerFlags_Right(wxSizerFlags * self);
 wxSizerFlags * wxSizerFlags_Shaped(wxSizerFlags * self);
 wxSizerFlags * wxSizerFlags_Top(wxSizerFlags * self);
 wxSizerFlags * wxSizerFlags_TripleBorder(wxSizerFlags * self, int direction);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxSizerFlags_DisableConsistencyChecks();
+#endif
 int wxSizerFlags_GetDefaultBorder();
 
 // CLASS: wxStaticBitmap
@@ -976,7 +1013,9 @@ wxTextCtrl *wxTextCtrl_new();
 wxTextCtrl *wxTextCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 bool wxTextCtrl_Create(wxTextCtrl * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 void wxTextCtrl_DiscardEdits(wxTextCtrl * self);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxTextCtrl_EmptyUndoBuffer(wxTextCtrl * self);
+#endif
 bool wxTextCtrl_EmulateKeyPress(wxTextCtrl * self, const wxKeyEvent * event);
 #ifndef __WXGTK__
 bool wxTextCtrl_EnableProofCheck(wxTextCtrl * self, const wxTextProofOptions * options);
@@ -1218,13 +1257,13 @@ int wxWindow_FromDIP2(const wxWindow * self, int d);
 wxSize *wxWindow_ToDIP(const wxWindow * self, const wxSize * sz);
 wxPoint *wxWindow_ToDIP1(const wxWindow * self, const wxPoint * pt);
 int wxWindow_ToDIP2(const wxWindow * self, int d);
-#endif
 wxSize *wxWindow_FromPhys(const wxWindow * self, const wxSize * sz);
 wxPoint *wxWindow_FromPhys1(const wxWindow * self, const wxPoint * pt);
 int wxWindow_FromPhys2(const wxWindow * self, int d);
 wxSize *wxWindow_ToPhys(const wxWindow * self, const wxSize * sz);
 wxPoint *wxWindow_ToPhys1(const wxWindow * self, const wxPoint * pt);
 int wxWindow_ToPhys2(const wxWindow * self, int d);
+#endif
 wxSize *wxWindow_GetBestSize(const wxWindow * self);
 int wxWindow_GetBestHeight(const wxWindow * self, int width);
 int wxWindow_GetBestWidth(const wxWindow * self, int height);
@@ -1279,13 +1318,13 @@ int wxWindow_FromDIP5(int d, const wxWindow * w);
 wxSize *wxWindow_ToDIP3(const wxSize * sz, const wxWindow * w);
 wxPoint *wxWindow_ToDIP4(const wxPoint * pt, const wxWindow * w);
 int wxWindow_ToDIP5(int d, const wxWindow * w);
-#endif
 wxSize *wxWindow_FromPhys3(const wxSize * sz, const wxWindow * w);
 wxPoint *wxWindow_FromPhys4(const wxPoint * pt, const wxWindow * w);
 int wxWindow_FromPhys5(int d, const wxWindow * w);
 wxSize *wxWindow_ToPhys3(const wxSize * sz, const wxWindow * w);
 wxPoint *wxWindow_ToPhys4(const wxPoint * pt, const wxWindow * w);
 int wxWindow_ToPhys5(int d, const wxWindow * w);
+#endif
 void wxWindow_Center(wxWindow * self, int dir);
 void wxWindow_CenterOnParent(wxWindow * self, int dir);
 void wxWindow_Centre(wxWindow * self, int direction);

@@ -62,12 +62,15 @@ bool wxArtProvider_Delete(wxArtProvider * provider) {
 wxBitmap *wxArtProvider_GetBitmap(const wxArtID * id, const wxArtClient * client, const wxSize * size) {
     return new wxBitmap(wxArtProvider::GetBitmap(*id, *client, *size));
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxBitmapBundle *wxArtProvider_GetBitmapBundle(const wxArtID * id, const wxArtClient * client, const wxSize * size) {
     return new wxBitmapBundle(wxArtProvider::GetBitmapBundle(*id, *client, *size));
 }
+#endif
 wxIcon *wxArtProvider_GetIcon(const wxArtID * id, const wxArtClient * client, const wxSize * size) {
     return new wxIcon(wxArtProvider::GetIcon(*id, *client, *size));
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxSize *wxArtProvider_GetNativeDIPSizeHint(const wxArtClient * client) {
     return new wxSize(wxArtProvider::GetNativeDIPSizeHint(*client));
 }
@@ -77,6 +80,7 @@ wxSize *wxArtProvider_GetNativeSizeHint(const wxArtClient * client, wxWindow * w
 wxSize *wxArtProvider_GetDIPSizeHint(const wxArtClient * client) {
     return new wxSize(wxArtProvider::GetDIPSizeHint(*client));
 }
+#endif
 #if wxCHECK_VERSION(3, 1, 7)
 wxSize *wxArtProvider_GetSizeHint(const wxArtClient * client, wxWindow * win) {
     return new wxSize(wxArtProvider::GetSizeHint(*client, win));
@@ -117,9 +121,11 @@ wxBitmap *wxBitmap_new3(int width, int height, int depth) {
 wxBitmap *wxBitmap_new4(const wxSize * sz, int depth) {
     return new wxBitmap(*sz, depth);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxBitmap *wxBitmap_new5(int width, int height, const wxDC * dc) {
     return new wxBitmap(width, height, *dc);
 }
+#endif
 wxBitmap *wxBitmap_new6(const char *const * bits) {
     return new wxBitmap(bits);
 }
@@ -133,9 +139,11 @@ wxBitmap *wxBitmap_new9(const wxImage * img, const wxDC * dc) {
     return new wxBitmap(*img, *dc);
 }
 #endif
+#if wxCHECK_VERSION(3, 1, 0)
 wxBitmap *wxBitmap_new10(const wxCursor * cursor) {
     return new wxBitmap(*cursor);
 }
+#endif
 bool wxBitmap_CopyFromIcon(wxBitmap * self, const wxIcon * icon) {
     return self->CopyFromIcon(*icon);
 }
@@ -148,24 +156,29 @@ bool wxBitmap_Create1(wxBitmap * self, const wxSize * sz, int depth) {
 bool wxBitmap_Create2(wxBitmap * self, int width, int height, const wxDC * dc) {
     return self->Create(width, height, *dc);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxBitmap_CreateWithDIPSize(wxBitmap * self, const wxSize * size, double scale, int depth) {
     return self->CreateWithDIPSize(*size, scale, depth);
 }
 bool wxBitmap_CreateWithDIPSize1(wxBitmap * self, int width, int height, double scale, int depth) {
     return self->CreateWithDIPSize(width, height, scale, depth);
 }
+#endif
 bool wxBitmap_CreateScaled(wxBitmap * self, int width, int height, int depth, double logical_scale) {
     return self->CreateScaled(width, height, depth, logical_scale);
 }
 int wxBitmap_GetDepth(const wxBitmap * self) {
     return self->GetDepth();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxSize *wxBitmap_GetDIPSize(const wxBitmap * self) {
     return new wxSize(self->GetDIPSize());
 }
+#endif
 int wxBitmap_GetHeight(const wxBitmap * self) {
     return self->GetHeight();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 double wxBitmap_GetLogicalHeight(const wxBitmap * self) {
     return self->GetLogicalHeight();
 }
@@ -175,6 +188,7 @@ wxSize *wxBitmap_GetLogicalSize(const wxBitmap * self) {
 double wxBitmap_GetLogicalWidth(const wxBitmap * self) {
     return self->GetLogicalWidth();
 }
+#endif
 wxMask * wxBitmap_GetMask(const wxBitmap * self) {
     return self->GetMask();
 }
@@ -216,9 +230,11 @@ void wxBitmap_SetHeight(wxBitmap * self, int height) {
     return self->SetHeight(height);
 }
 #endif
+#if wxCHECK_VERSION(3, 1, 0)
 void wxBitmap_SetScaleFactor(wxBitmap * self, double scale) {
     return self->SetScaleFactor(scale);
 }
+#endif
 void wxBitmap_SetMask(wxBitmap * self, wxMask * mask) {
     return self->SetMask(mask);
 }
@@ -253,9 +269,11 @@ wxBitmap *wxBitmap_NewFromPNGData(const void * data, size_t size) {
 bool wxBitmap_RemoveHandler(const wxString * name) {
     return wxBitmap::RemoveHandler(*name);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxBitmap_Rescale(wxBitmap * bmp, const wxSize * size_needed) {
     return wxBitmap::Rescale(*bmp, *size_needed);
 }
+#endif
 
 // CLASS: wxBitmapBundle
 void wxBitmapBundle_delete(wxBitmapBundle *self) {
@@ -289,6 +307,7 @@ void wxBitmapBundle_Clear(wxBitmapBundle * self) {
 bool wxBitmapBundle_IsOk(const wxBitmapBundle * self) {
     return self->IsOk();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxSize *wxBitmapBundle_GetDefaultSize(const wxBitmapBundle * self) {
     return new wxSize(self->GetDefaultSize());
 }
@@ -313,20 +332,24 @@ wxIcon *wxBitmapBundle_GetIcon(const wxBitmapBundle * self, const wxSize * size)
 wxIcon *wxBitmapBundle_GetIconFor(const wxBitmapBundle * self, const wxWindow * window) {
     return new wxIcon(self->GetIconFor(window));
 }
+#endif
 bool wxBitmapBundle_IsSameAs(const wxBitmapBundle * self, const wxBitmapBundle * other) {
     return self->IsSameAs(*other);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxBitmapBundle *wxBitmapBundle_FromBitmaps1(const wxBitmap * bitmap1, const wxBitmap * bitmap2) {
     return new wxBitmapBundle(wxBitmapBundle::FromBitmaps(*bitmap1, *bitmap2));
 }
 wxBitmapBundle *wxBitmapBundle_FromBitmap(const wxBitmap * bitmap) {
     return new wxBitmapBundle(wxBitmapBundle::FromBitmap(*bitmap));
 }
+#endif
 #if wxCHECK_VERSION(3, 1, 7)
 wxBitmapBundle *wxBitmapBundle_FromIconBundle(const wxIconBundle * icon_bundle) {
     return new wxBitmapBundle(wxBitmapBundle::FromIconBundle(*icon_bundle));
 }
 #endif
+#if wxCHECK_VERSION(3, 1, 0)
 wxBitmapBundle *wxBitmapBundle_FromImage(const wxImage * image) {
     return new wxBitmapBundle(wxBitmapBundle::FromImage(*image));
 }
@@ -351,6 +374,7 @@ wxBitmapBundle *wxBitmapBundle_FromSVGFile(const wxString * path, const wxSize *
 wxBitmapBundle *wxBitmapBundle_FromSVGResource(const wxString * name, const wxSize * size_def) {
     return new wxBitmapBundle(wxBitmapBundle::FromSVGResource(*name, *size_def));
 }
+#endif
 
 // CLASS: wxBitmapButton
 wxBitmapButton *wxBitmapButton_new() {
@@ -552,6 +576,7 @@ wxColour *wxColour_new2(const wxString * colour_name) {
 wxColour *wxColour_new4(const wxColour * colour) {
     return new wxColour(*colour);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 unsigned int wxColour_GetAlpha(const wxColour * self) {
     return self->GetAlpha();
 }
@@ -564,6 +589,7 @@ unsigned int wxColour_GetGreen(const wxColour * self) {
 unsigned int wxColour_GetRed(const wxColour * self) {
     return self->GetRed();
 }
+#endif
 wxString *wxColour_GetAsString(const wxColour * self, long flags) {
     return new wxString(self->GetAsString(flags));
 }
@@ -884,6 +910,7 @@ int wxIcon_GetDepth(const wxIcon * self) {
 int wxIcon_GetHeight(const wxIcon * self) {
     return self->GetHeight();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 double wxIcon_GetLogicalHeight(const wxIcon * self) {
     return self->GetLogicalHeight();
 }
@@ -893,6 +920,7 @@ wxSize *wxIcon_GetLogicalSize(const wxIcon * self) {
 double wxIcon_GetLogicalWidth(const wxIcon * self) {
     return self->GetLogicalWidth();
 }
+#endif
 double wxIcon_GetScaleFactor(const wxIcon * self) {
     return self->GetScaleFactor();
 }
@@ -1497,12 +1525,14 @@ void wxMenuItem_SetTextColour(wxMenuItem * self, const wxColour * colour) {
 void wxMenuItem_SetAccel(wxMenuItem * self, wxAcceleratorEntry * accel) {
     return self->SetAccel(accel);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxMenuItem_AddExtraAccel(wxMenuItem * self, const wxAcceleratorEntry * accel) {
     return self->AddExtraAccel(*accel);
 }
 void wxMenuItem_ClearExtraAccels(wxMenuItem * self) {
     return self->ClearExtraAccels();
 }
+#endif
 wxMenuItem *wxMenuItem_new(wxMenu * parent_menu, int id, const wxString * text, const wxString * help_string, wxItemKind kind, wxMenu * sub_menu) {
     return new wxMenuItem(parent_menu, id, *text, *help_string, kind, sub_menu);
 }
@@ -2210,9 +2240,11 @@ wxSizerFlags * wxSizerFlags_Top(wxSizerFlags * self) {
 wxSizerFlags * wxSizerFlags_TripleBorder(wxSizerFlags * self, int direction) {
     return &(self->TripleBorder(direction));
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxSizerFlags_DisableConsistencyChecks() {
     return wxSizerFlags::DisableConsistencyChecks();
 }
+#endif
 int wxSizerFlags_GetDefaultBorder() {
     return wxSizerFlags::GetDefaultBorder();
 }
@@ -2586,9 +2618,11 @@ bool wxTextCtrl_Create(wxTextCtrl * self, wxWindow * parent, wxWindowID id, cons
 void wxTextCtrl_DiscardEdits(wxTextCtrl * self) {
     return self->DiscardEdits();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxTextCtrl_EmptyUndoBuffer(wxTextCtrl * self) {
     return self->EmptyUndoBuffer();
 }
+#endif
 bool wxTextCtrl_EmulateKeyPress(wxTextCtrl * self, const wxKeyEvent * event) {
     return self->EmulateKeyPress(*event);
 }
@@ -3260,7 +3294,6 @@ wxPoint *wxWindow_ToDIP1(const wxWindow * self, const wxPoint * pt) {
 int wxWindow_ToDIP2(const wxWindow * self, int d) {
     return self->ToDIP(d);
 }
-#endif
 wxSize *wxWindow_FromPhys(const wxWindow * self, const wxSize * sz) {
     return new wxSize(self->FromPhys(*sz));
 }
@@ -3279,6 +3312,7 @@ wxPoint *wxWindow_ToPhys1(const wxWindow * self, const wxPoint * pt) {
 int wxWindow_ToPhys2(const wxWindow * self, int d) {
     return self->ToPhys(d);
 }
+#endif
 wxSize *wxWindow_GetBestSize(const wxWindow * self) {
     return new wxSize(self->GetBestSize());
 }
@@ -3435,7 +3469,6 @@ wxPoint *wxWindow_ToDIP4(const wxPoint * pt, const wxWindow * w) {
 int wxWindow_ToDIP5(int d, const wxWindow * w) {
     return wxWindow::ToDIP(d, w);
 }
-#endif
 wxSize *wxWindow_FromPhys3(const wxSize * sz, const wxWindow * w) {
     return new wxSize(wxWindow::FromPhys(*sz, w));
 }
@@ -3454,6 +3487,7 @@ wxPoint *wxWindow_ToPhys4(const wxPoint * pt, const wxWindow * w) {
 int wxWindow_ToPhys5(int d, const wxWindow * w) {
     return wxWindow::ToPhys(d, w);
 }
+#endif
 void wxWindow_Center(wxWindow * self, int dir) {
     return self->Center(dir);
 }
