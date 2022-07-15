@@ -8,13 +8,13 @@ use wx::methods::*;
 #[derive(Clone, Copy)]
 enum DirCtrlPage {
     Reset = wx::ID_HIGHEST as isize,
-    Dir,
-    SetDir,
+    SetPath,
+    Ctrl,
 }
 impl DirCtrlPage {
     fn from(v: c_int) -> Option<Self> {
         use DirCtrlPage::*;
-        for e in [Reset, Dir, SetDir] {
+        for e in [Reset, SetPath, Ctrl] {
             if v == e.into() {
                 return Some(e);
             }
@@ -28,6 +28,62 @@ impl From<DirCtrlPage> for c_int {
     }
 }
 
+// const StdPaths: [str] = [
+//     "&none",
+//     "&config",
+//     "&data",
+//     "&documents",
+//     "&local data",
+//     "&plugins",
+//     "&resources",
+//     "&user config",
+//     "&user data",
+//     "&user local data",
+// ];
+
+#[derive(Clone, Copy)]
+enum StdPath {
+    Unknown = 0,
+    Config,
+    Data,
+    Documents,
+    LocalData,
+    Plugins,
+    Resources,
+    UserConfig,
+    UserData,
+    UserLocalData,
+    Max,
+}
+impl StdPath {
+    fn from(v: c_int) -> Option<Self> {
+        use StdPath::*;
+        for e in [
+            Unknown,
+            Config,
+            Data,
+            Documents,
+            LocalData,
+            Plugins,
+            Resources,
+            UserConfig,
+            UserData,
+            UserLocalData,
+            Max,
+        ] {
+            if v == e.into() {
+                return Some(e);
+            }
+        }
+        return None;
+    }
+}
+impl From<StdPath> for c_int {
+    fn from(p: StdPath) -> Self {
+        p as c_int
+    }
+}
+
 #[derive(Clone)]
 pub struct ConfigUI {
     // other controls
@@ -36,8 +92,7 @@ pub struct ConfigUI {
     chk_dir_change_dir: wx::CheckBox,
     chk_dir_must_exist: wx::CheckBox,
     chk_small: wx::CheckBox,
-    text_initial_dir: wx::TextCtrl,
-
+    // text_initial_dir: wx::TextCtrl,
     sizer: wx::BoxSizer,
 }
 
@@ -56,6 +111,72 @@ impl WidgetsPage for DirCtrlWidgetsPage {
         return "DirCtrl";
     }
     fn create_content(&self) {
+        let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
+
+        // left pane
+        let box_left = wx::StaticBox::builder(Some(&self.base))
+            .label("Dir control details")
+            .build();
+
+        let sizer_left = wx::StaticBoxSizer::new_with_staticbox(Some(&box_left), wx::VERTICAL);
+
+        let (sizer, path) = self.create_sizer_with_text_and_button(
+            DirCtrlPage::SetPath.into(),
+            "Set &path",
+            wx::ID_ANY,
+        );
+        sizer_left.add_sizer_int(
+            Some(&sizer),
+            0,
+            wx::ALL | wx::ALIGN_RIGHT,
+            5,
+            wx::Object::none(),
+        );
+
+        let sizer_use_flags =
+            wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&self.base), "&Flags");
+        let chk_dir_only = self.create_check_box_and_add_to_sizer(
+            &sizer_use_flags,
+            "wxDIRCTRL_DIR_ONLY",
+            wx::ID_ANY,
+        );
+        let chk_3d = self.create_check_box_and_add_to_sizer(
+            &sizer_use_flags,
+            "wxDIRCTRL_3D_INTERNAL",
+            wx::ID_ANY,
+        );
+        let chk_first = self.create_check_box_and_add_to_sizer(
+            &sizer_use_flags,
+            "wxDIRCTRL_SELECT_FIRST",
+            wx::ID_ANY,
+        );
+        let chk_filters = self.create_check_box_and_add_to_sizer(
+            &sizer_use_flags,
+            "wxDIRCTRL_SHOW_FILTERS",
+            wx::ID_ANY,
+        );
+        let chk_labels = self.create_check_box_and_add_to_sizer(
+            &sizer_use_flags,
+            "wxDIRCTRL_EDIT_LABELS",
+            wx::ID_ANY,
+        );
+        let chk_multi = self.create_check_box_and_add_to_sizer(
+            &sizer_use_flags,
+            "wxDIRCTRL_MULTIPLE",
+            wx::ID_ANY,
+        );
+        sizer_left.add_sizer_sizerflags(
+            Some(&sizer_use_flags),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
+        );
+
+        let filters = [
+            self.create_check_box_and_add_to_sizer(sizerFilters, wxString::Format("all files (%s)|%s",
+                wxFileSelectorDefaultWildcardStr, wxFileSelectorDefaultWildcardStr)),
+            self.create_check_box_and_add_to_sizer(sizerFilters, "C++ files (*.cpp; *.h)|*.cpp;*.h"),
+            m_fltr[2] = self.create_check_box_and_add_to_sizer(sizerFilters, "PNG images (*.png)|*.png");
+        ];
+
         // left pane
         let boxleft = wx::BoxSizer::new(wx::VERTICAL);
 
@@ -71,15 +192,15 @@ impl WidgetsPage for DirCtrlWidgetsPage {
             self.create_check_box_and_add_to_sizer(&dirbox, "&Small version", wx::ID_ANY);
         boxleft.add_sizer_int(Some(&dirbox), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
-        let (sizer_initial_dir, text_initial_dir) = self.create_sizer_with_text_and_button(
-            DirCtrlPage::SetDir.into(),
-            "&Initial directory",
-            wx::ID_ANY,
-        );
-        boxleft.add_sizer_sizerflags(
-            Some(&sizer_initial_dir),
-            wx::SizerFlags::new(0).expand().border(wx::ALL),
-        );
+        // let (sizer_initial_dir, text_initial_dir) = self.create_sizer_with_text_and_button(
+        //     DirCtrlPage::SetDir.into(),
+        //     "&Initial directory",
+        //     wx::ID_ANY,
+        // );
+        // boxleft.add_sizer_sizerflags(
+        //     Some(&sizer_initial_dir),
+        //     wx::SizerFlags::new(0).expand().border(wx::ALL),
+        // );
 
         boxleft.add_spacer(10);
 
@@ -102,8 +223,7 @@ impl WidgetsPage for DirCtrlWidgetsPage {
             chk_dir_change_dir,
             chk_dir_must_exist,
             chk_small,
-            text_initial_dir,
-
+            // text_initial_dir,
             sizer,
         };
         self.reset(&config_ui); // set checkboxes state
@@ -148,11 +268,11 @@ impl WidgetsPage for DirCtrlWidgetsPage {
             self.config_ui.borrow().as_ref(),
             DirCtrlPage::from(event.get_id()),
         ) {
-            match m {
-                DirCtrlPage::Reset => self.on_button_reset(config_ui),
-                DirCtrlPage::SetDir => self.on_button_set_dir(config_ui),
-                _ => (),
-            };
+            // match m {
+            //     DirCtrlPage::Reset => self.on_button_reset(config_ui),
+            //     DirCtrlPage::SetDir => self.on_button_set_dir(config_ui),
+            //     _ => (),
+            // };
         }
     }
     fn handle_checkbox(&self, _: &wx::CommandEvent) {
@@ -233,18 +353,18 @@ impl DirCtrlWidgetsPage {
         }
 
         // FIXME: wxGetHomeDir() is needed?
-        let dir_ctrl = wx::GenericDirCtrl::builder(Some(&self.base))
-            .id(DirCtrlPage::Dir.into())
-            .message("Hello!".into())
-            .style(style)
-            .build();
+        // let dir_ctrl = wx::GenericDirCtrl::builder(Some(&self.base))
+        //     .id(DirCtrlPage::Dir.into())
+        //     .message("Hello!".into())
+        //     .style(style)
+        //     .build();
 
-        *self.dir_ctrl.borrow_mut() = Some(dir_ctrl);
+        // *self.dir_ctrl.borrow_mut() = Some(dir_ctrl);
     }
 
     fn on_button_set_dir(&self, config_ui: &ConfigUI) {
         if let Some(dir_ctrl) = self.dir_ctrl.borrow().as_ref() {
-            dir_ctrl.set_initial_directory(&config_ui.text_initial_dir.get_value());
+            // dir_ctrl.set_initial_directory(&config_ui.text_initial_dir.get_value());
         }
     }
 
