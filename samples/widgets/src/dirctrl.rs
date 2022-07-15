@@ -6,14 +6,14 @@ use wx::methods::*;
 
 // control ids
 #[derive(Clone, Copy)]
-enum PickerPage {
+enum DirCtrlPage {
     Reset = wx::ID_HIGHEST as isize,
     Dir,
     SetDir,
 }
-impl PickerPage {
+impl DirCtrlPage {
     fn from(v: c_int) -> Option<Self> {
-        use PickerPage::*;
+        use DirCtrlPage::*;
         for e in [Reset, Dir, SetDir] {
             if v == e.into() {
                 return Some(e);
@@ -22,8 +22,8 @@ impl PickerPage {
         return None;
     }
 }
-impl From<PickerPage> for c_int {
-    fn from(w: PickerPage) -> Self {
+impl From<DirCtrlPage> for c_int {
+    fn from(w: DirCtrlPage) -> Self {
         w as c_int
     }
 }
@@ -42,18 +42,18 @@ pub struct ConfigUI {
 }
 
 #[derive(Clone)]
-pub struct DirPickerWidgetsPage {
+pub struct DirCtrlWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
-    // the picker
-    dir_picker: Rc<RefCell<Option<wx::DirPickerCtrl>>>,
+    // the control itself
+    dir_ctrl: Rc<RefCell<Option<wx::GenericDirCtrl>>>,
 }
-impl WidgetsPage for DirPickerWidgetsPage {
+impl WidgetsPage for DirCtrlWidgetsPage {
     fn base(&self) -> &wx::Panel {
         return &self.base;
     }
     fn label(&self) -> &str {
-        return "DirPicker";
+        return "DirCtrl";
     }
     fn create_content(&self) {
         // left pane
@@ -72,7 +72,7 @@ impl WidgetsPage for DirPickerWidgetsPage {
         boxleft.add_sizer_int(Some(&dirbox), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
         let (sizer_initial_dir, text_initial_dir) = self.create_sizer_with_text_and_button(
-            PickerPage::SetDir.into(),
+            DirCtrlPage::SetDir.into(),
             "&Initial directory",
             wx::ID_ANY,
         );
@@ -86,7 +86,7 @@ impl WidgetsPage for DirPickerWidgetsPage {
         boxleft.add_window_int(
             Some(
                 &wx::Button::builder(Some(&self.base))
-                    .id(PickerPage::Reset.into())
+                    .id(DirCtrlPage::Reset.into())
                     .label("&Reset")
                     .build(),
             ),
@@ -108,17 +108,15 @@ impl WidgetsPage for DirPickerWidgetsPage {
         };
         self.reset(&config_ui); // set checkboxes state
 
-        // create pickers
-        self.create_picker(&config_ui);
+        self.create_dir_ctrl(&config_ui);
 
         // right pane
         config_ui
             .sizer
             .add_int_int(1, 1, 1, wx::GROW | wx::ALL, 5, wx::Object::none());
-        // TODO: insert picker in create_picker()
-        if let Some(dir_picker) = self.dir_picker.borrow().as_ref() {
+        if let Some(dir_ctrl) = self.dir_ctrl.borrow().as_ref() {
             config_ui.sizer.add_window_int(
-                Some(dir_picker),
+                Some(dir_ctrl),
                 0,
                 wx::EXPAND | wx::ALL,
                 5,
@@ -148,11 +146,11 @@ impl WidgetsPage for DirPickerWidgetsPage {
         println!("event={}", event.get_id());
         if let (Some(config_ui), Some(m)) = (
             self.config_ui.borrow().as_ref(),
-            PickerPage::from(event.get_id()),
+            DirCtrlPage::from(event.get_id()),
         ) {
             match m {
-                PickerPage::Reset => self.on_button_reset(config_ui),
-                PickerPage::SetDir => self.on_button_set_dir(config_ui),
+                DirCtrlPage::Reset => self.on_button_reset(config_ui),
+                DirCtrlPage::SetDir => self.on_button_set_dir(config_ui),
                 _ => (),
             };
         }
@@ -164,27 +162,27 @@ impl WidgetsPage for DirPickerWidgetsPage {
         // Do nothing
     }
 }
-impl DirPickerWidgetsPage {
+impl DirCtrlWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {
         let panel = wx::Panel::builder(Some(book))
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
-        DirPickerWidgetsPage {
+        DirCtrlWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
-            dir_picker: Rc::new(RefCell::new(None)),
+            dir_ctrl: Rc::new(RefCell::new(None)),
         }
     }
 
     fn recreate_widget(&self) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
             config_ui.sizer.remove_int(1);
-            self.create_picker(config_ui);
+            self.create_dir_ctrl(config_ui);
 
-            if let Some(dir_picker) = self.dir_picker.borrow().as_ref() {
+            if let Some(dir_ctrl) = self.dir_ctrl.borrow().as_ref() {
                 config_ui.sizer.insert_window_int(
                     1,
-                    Some(dir_picker),
+                    Some(dir_ctrl),
                     0,
                     wx::EXPAND | wx::ALL,
                     5,
@@ -211,9 +209,9 @@ impl DirPickerWidgetsPage {
             .set_value((wx::FLP_DEFAULT_STYLE & wx::DIRP_SMALL) != 0);
     }
 
-    fn create_picker(&self, config_ui: &ConfigUI) {
-        if let Some(dir_picker) = self.dir_picker.borrow().as_ref() {
-            dir_picker.destroy();
+    fn create_dir_ctrl(&self, config_ui: &ConfigUI) {
+        if let Some(dir_ctrl) = self.dir_ctrl.borrow().as_ref() {
+            dir_ctrl.destroy();
         }
 
         let mut style = wx::BORDER_DEFAULT;
@@ -235,18 +233,18 @@ impl DirPickerWidgetsPage {
         }
 
         // FIXME: wxGetHomeDir() is needed?
-        let dir_picker = wx::DirPickerCtrl::builder(Some(&self.base))
-            .id(PickerPage::Dir.into())
+        let dir_ctrl = wx::GenericDirCtrl::builder(Some(&self.base))
+            .id(DirCtrlPage::Dir.into())
             .message("Hello!".into())
             .style(style)
             .build();
 
-        *self.dir_picker.borrow_mut() = Some(dir_picker);
+        *self.dir_ctrl.borrow_mut() = Some(dir_ctrl);
     }
 
     fn on_button_set_dir(&self, config_ui: &ConfigUI) {
-        if let Some(dir_picker) = self.dir_picker.borrow().as_ref() {
-            dir_picker.set_initial_directory(&config_ui.text_initial_dir.get_value());
+        if let Some(dir_ctrl) = self.dir_ctrl.borrow().as_ref() {
+            dir_ctrl.set_initial_directory(&config_ui.text_initial_dir.get_value());
         }
     }
 
