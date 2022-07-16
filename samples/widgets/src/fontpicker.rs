@@ -57,11 +57,11 @@ impl WidgetsPage for FontPickerWidgetsPage {
 
         let fontbox =
             wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&self.base), "&FontPicker style");
-        let chk_font_text_ctrl  =
+        let chk_font_text_ctrl =
             self.create_check_box_and_add_to_sizer(&fontbox, "With textctrl", wx::ID_ANY);
-        let chk_font_desc_as_label  =
+        let chk_font_desc_as_label =
             self.create_check_box_and_add_to_sizer(&fontbox, "Font desc as btn label", wx::ID_ANY);
-        let chk_font_use_font_for_label  =
+        let chk_font_use_font_for_label =
             self.create_check_box_and_add_to_sizer(&fontbox, "Use font for label", wx::ID_ANY);
         boxleft.add_sizer_int(Some(&fontbox), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
@@ -77,8 +77,6 @@ impl WidgetsPage for FontPickerWidgetsPage {
             15,
             wx::Object::none(),
         );
-
-        self.reset(); // set checkboxes state
 
         // create pickers
         self.create_picker();
@@ -102,13 +100,15 @@ impl WidgetsPage for FontPickerWidgetsPage {
         sz.add_sizer_int(Some(&boxleft), 0, wx::GROW | wx::ALL, 5, wx::Object::none());
         sz.add_sizer_int(Some(&sizer), 1, wx::GROW | wx::ALL, 5, wx::Object::none());
 
-        *self.config_ui.borrow_mut() = Some(ConfigUI {
+        let config_ui = ConfigUI {
             chk_font_text_ctrl,
             chk_font_desc_as_label,
             chk_font_use_font_for_label,
 
             sizer,
-        });
+        };
+        self.reset(&config_ui); // set checkboxes state
+        *self.config_ui.borrow_mut() = Some(config_ui);
 
         self.base.set_sizer(Some(&sz), true);
     }
@@ -135,13 +135,37 @@ impl FontPickerWidgetsPage {
         }
     }
 
-    fn recreate_widget(&self) {
-        self.create_picker();
+    fn create_picker(&self) {
+        if let Some(font_picker) = self.font_picker.borrow().as_ref() {
+            font_picker.destroy();
+        }
 
+        let mut style = wx::BORDER_DEFAULT;
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            // MEMO: Destroy()ing in create_picker() removes from its sizer.
-            // config_ui.sizer.remove_int(1);
+            if config_ui.chk_font_text_ctrl.get_value() {
+                style |= wx::FNTP_USE_TEXTCTRL as c_long;
+            }
+            if config_ui.chk_font_use_font_for_label.get_value() {
+                style |= wx::FNTP_USEFONT_FOR_LABEL as c_long;
+            }
+            if config_ui.chk_font_desc_as_label.get_value() {
+                style |= wx::FNTP_FONTDESC_AS_LABEL as c_long;
+            }
+        }
+
+        let font_picker = wx::FontPickerCtrl::builder(Some(&self.base))
+            .id(PickerPage::Font.into())
+            // TODO: wxSWISS_FONT
+            .style(style)
+            .build();
+        *self.font_picker.borrow_mut() = Some(font_picker);
+    }
+
+    fn recreate_widget(&self) {
+        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+            config_ui.sizer.remove_int(1);
             self.create_picker();
+
             if let Some(font_pickr) = self.font_picker.borrow().as_ref() {
                 config_ui.sizer.insert_window_int(
                     1,
@@ -156,48 +180,26 @@ impl FontPickerWidgetsPage {
         }
     }
 
-    fn reset(&self) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            // config_ui
-            //     .chk_font_text_ctrl
-            //     .set_value((wx::CLRP_DEFAULT_STYLE & wx::CLRP_USE_TEXTCTRL) != 0);
-            // config_ui
-            //     .chk_font_show_label
-            //     .set_value((wx::CLRP_DEFAULT_STYLE & wx::CLRP_SHOW_LABEL) != 0);
-            // config_ui
-            //     .chk_font_show_alpha
-            //     .set_value((wx::CLRP_DEFAULT_STYLE & wx::CLRP_SHOW_ALPHA) != 0);
-        }
+    fn reset(&self, config_ui: &ConfigUI) {
+        config_ui
+            .chk_font_text_ctrl
+            .set_value((wx::FNTP_DEFAULT_STYLE & wx::FNTP_USE_TEXTCTRL) != 0);
+        config_ui
+            .chk_font_use_font_for_label
+            .set_value((wx::FNTP_DEFAULT_STYLE & wx::FNTP_USEFONT_FOR_LABEL) != 0);
+        config_ui
+            .chk_font_desc_as_label
+            .set_value((wx::FNTP_DEFAULT_STYLE & wx::FNTP_FONTDESC_AS_LABEL) != 0);
     }
 
-    fn create_picker(&self) {
-        if let Some(font_picker) = self.font_picker.borrow().as_ref() {
-            font_picker.destroy();
-        }
-
-        let mut style = wx::BORDER_DEFAULT;
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            // if config_ui.chk_font_text_ctrl.get_value() {
-            //     style |= wx::CLRP_USE_TEXTCTRL as c_long;
-            // }
-            // if config_ui.chk_font_show_label.get_value() {
-            //     style |= wx::CLRP_SHOW_LABEL as c_long;
-            // }
-            // if config_ui.chk_font_show_alpha.get_value() {
-            //     style |= wx::CLRP_SHOW_ALPHA as c_long;
-            // }
-        }
-
-        let font_picker = wx::FontPickerCtrl::builder(Some(&self.base))
-            .id(PickerPage::Font.into())
-            // .font(wx::Font::new_with_str("RED"))
-            .style(style)
-            .build();
-        *self.font_picker.borrow_mut() = Some(font_picker);
-    }
+    // ----------------------------------------------------------------------------
+    // event handlers
+    // ----------------------------------------------------------------------------
 
     fn on_button_reset(&self) {
-        self.reset();
+        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+            self.reset(config_ui);
+        }
         self.recreate_widget();
     }
 
