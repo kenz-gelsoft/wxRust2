@@ -94,6 +94,9 @@ pub struct ConfigUI {
 
     // filters
     fltr: [wx::CheckBox; 3],
+
+    // sizer
+    sizer: wx::BoxSizer,
 }
 
 #[derive(Clone)]
@@ -262,6 +265,7 @@ impl WidgetsPage for DirCtrlWidgetsPage {
             10,
             wx::Object::none(),
         );
+        *self.dir_ctrl.borrow_mut() = Some(dir_ctrl);
 
         self.base.set_sizer(Some(&sizer_top), true);
 
@@ -276,6 +280,7 @@ impl WidgetsPage for DirCtrlWidgetsPage {
             chk_labels,
             chk_multi,
             fltr,
+            sizer: sizer_top,
         };
         self.reset(&config_ui);
         *self.config_ui.borrow_mut() = Some(config_ui);
@@ -353,36 +358,47 @@ impl DirCtrlWidgetsPage {
     }
 
     fn create_dir_ctrl(&self, config_ui: &ConfigUI) {
-        // if let Some(dir_ctrl) = self.dir_ctrl.borrow().as_ref() {
-        //     dir_ctrl.destroy();
-        // }
+        // TODO: wxWindowUpdateLocker
 
-        // let mut style = wx::BORDER_DEFAULT;
+        let mut style = wx::BORDER_DEFAULT;
+        if config_ui.chk_dir_only.is_checked() {
+            style |= wx::DIRCTRL_DIR_ONLY as c_long;
+        }
+        if config_ui.chk_3d.is_checked() {
+            style |= wx::DIRCTRL_3D_INTERNAL as c_long;
+        }
+        if config_ui.chk_first.is_checked() {
+            style |= wx::DIRCTRL_SELECT_FIRST as c_long;
+        }
+        if config_ui.chk_filters.is_checked() {
+            style |= wx::DIRCTRL_SHOW_FILTERS as c_long;
+        }
+        if config_ui.chk_labels.is_checked() {
+            style |= wx::DIRCTRL_EDIT_LABELS as c_long;
+        }
+        if config_ui.chk_multi.is_checked() {
+            style |= wx::DIRCTRL_MULTIPLE as c_long;
+        }
 
-        // if config_ui.chk_dir_text_ctrl.get_value() {
-        //     style |= wx::DIRP_USE_TEXTCTRL as c_long;
-        // }
+        let dir_ctrl = wx::GenericDirCtrl::builder(Some(&self.base))
+            .id(DirCtrlPage::Ctrl.into())
+            // wxDirDialogDefaultFolderStr
+            .dir("/")
+            .build();
 
-        // if config_ui.chk_dir_must_exist.get_value() {
-        //     style |= wx::DIRP_DIR_MUST_EXIST as c_long;
-        // }
+        // update sizer's child window
+        if let Some(old_dir_ctrl) = self.dir_ctrl.borrow().as_ref() {
+            config_ui
+                .sizer
+                .replace_window(Some(old_dir_ctrl), Some(&dir_ctrl), false);
 
-        // if config_ui.chk_dir_change_dir.get_value() {
-        //     style |= wx::DIRP_CHANGE_DIR as c_long;
-        // }
+            old_dir_ctrl.destroy();
+        }
+        // update our pointer
+        *self.dir_ctrl.borrow_mut() = Some(dir_ctrl);
 
-        // if config_ui.chk_small.get_value() {
-        //     style |= wx::DIRP_SMALL as c_long;
-        // }
-
-        // FIXME: wxGetHomeDir() is needed?
-        // let dir_ctrl = wx::GenericDirCtrl::builder(Some(&self.base))
-        //     .id(DirCtrlPage::Dir.into())
-        //     .message("Hello!".into())
-        //     .style(style)
-        //     .build();
-
-        // *self.dir_ctrl.borrow_mut() = Some(dir_ctrl);
+        // relayout the sizer
+        config_ui.sizer.layout();
     }
 
     fn on_button_set_dir(&self, config_ui: &ConfigUI) {
