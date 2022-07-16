@@ -4,6 +4,12 @@ use std::os::raw::{c_int, c_long};
 use std::rc::Rc;
 use wx::methods::*;
 
+#[cfg(target_os = "windows")]
+const FILE_SELECTOR_DEFAULT_WILDCARD_STR: &str = "*.*";
+
+#[cfg(not(target_os = "windows"))]
+const FILE_SELECTOR_DEFAULT_WILDCARD_STR: &str = "*";
+
 // control ids
 #[derive(Clone, Copy)]
 enum DirCtrlPage {
@@ -27,19 +33,6 @@ impl From<DirCtrlPage> for c_int {
         w as c_int
     }
 }
-
-// const StdPaths: [str] = [
-//     "&none",
-//     "&config",
-//     "&data",
-//     "&documents",
-//     "&local data",
-//     "&plugins",
-//     "&resources",
-//     "&user config",
-//     "&user data",
-//     "&user local data",
-// ];
 
 #[derive(Clone, Copy)]
 enum StdPath {
@@ -87,13 +80,13 @@ impl From<StdPath> for c_int {
 #[derive(Clone)]
 pub struct ConfigUI {
     // other controls
-    // --------------
-    chk_dir_text_ctrl: wx::CheckBox,
-    chk_dir_change_dir: wx::CheckBox,
-    chk_dir_must_exist: wx::CheckBox,
-    chk_small: wx::CheckBox,
-    // text_initial_dir: wx::TextCtrl,
-    sizer: wx::BoxSizer,
+// --------------
+// chk_dir_text_ctrl: wx::CheckBox,
+// chk_dir_change_dir: wx::CheckBox,
+// chk_dir_must_exist: wx::CheckBox,
+// chk_small: wx::CheckBox,
+// // text_initial_dir: wx::TextCtrl,
+// sizer: wx::BoxSizer,
 }
 
 #[derive(Clone)]
@@ -170,96 +163,112 @@ impl WidgetsPage for DirCtrlWidgetsPage {
             wx::SizerFlags::new(0).expand().border(wx::ALL),
         );
 
+        let sizer_filters =
+            wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&self.base), "&Filters");
         let filters = [
-            self.create_check_box_and_add_to_sizer(sizerFilters, wxString::Format("all files (%s)|%s",
-                wxFileSelectorDefaultWildcardStr, wxFileSelectorDefaultWildcardStr)),
-            self.create_check_box_and_add_to_sizer(sizerFilters, "C++ files (*.cpp; *.h)|*.cpp;*.h"),
-            m_fltr[2] = self.create_check_box_and_add_to_sizer(sizerFilters, "PNG images (*.png)|*.png");
-        ];
-
-        // left pane
-        let boxleft = wx::BoxSizer::new(wx::VERTICAL);
-
-        let dirbox =
-            wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&self.base), "&DirPicker style");
-        let chk_dir_text_ctrl =
-            self.create_check_box_and_add_to_sizer(&dirbox, "With textctrl", wx::ID_ANY);
-        let chk_dir_must_exist =
-            self.create_check_box_and_add_to_sizer(&dirbox, "Dir must exist", wx::ID_ANY);
-        let chk_dir_change_dir =
-            self.create_check_box_and_add_to_sizer(&dirbox, "Change working dir", wx::ID_ANY);
-        let chk_small =
-            self.create_check_box_and_add_to_sizer(&dirbox, "&Small version", wx::ID_ANY);
-        boxleft.add_sizer_int(Some(&dirbox), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
-
-        // let (sizer_initial_dir, text_initial_dir) = self.create_sizer_with_text_and_button(
-        //     DirCtrlPage::SetDir.into(),
-        //     "&Initial directory",
-        //     wx::ID_ANY,
-        // );
-        // boxleft.add_sizer_sizerflags(
-        //     Some(&sizer_initial_dir),
-        //     wx::SizerFlags::new(0).expand().border(wx::ALL),
-        // );
-
-        boxleft.add_spacer(10);
-
-        boxleft.add_window_int(
-            Some(
-                &wx::Button::builder(Some(&self.base))
-                    .id(DirCtrlPage::Reset.into())
-                    .label("&Reset")
-                    .build(),
+            self.create_check_box_and_add_to_sizer(
+                &sizer_filters,
+                &format!(
+                    "all files ({})|{}",
+                    FILE_SELECTOR_DEFAULT_WILDCARD_STR, FILE_SELECTOR_DEFAULT_WILDCARD_STR
+                ),
+                wx::ID_ANY,
             ),
+            self.create_check_box_and_add_to_sizer(
+                &sizer_filters,
+                "C++ files (*.cpp; *.h)|*.cpp;*.h",
+                wx::ID_ANY,
+            ),
+            self.create_check_box_and_add_to_sizer(
+                &sizer_filters,
+                "PNG images (*.png)|*.png",
+                wx::ID_ANY,
+            ),
+        ];
+        sizer_left.add_sizer_sizerflags(
+            Some(&sizer_filters),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
+        );
+
+        let btn = wx::Button::builder(Some(&self.base))
+            .id(DirCtrlPage::Reset.into())
+            .label("&Reset")
+            .build();
+        sizer_left.add_window_int(
+            Some(&btn),
             0,
             wx::ALIGN_CENTRE_HORIZONTAL | wx::ALL,
             15,
             wx::Object::none(),
         );
 
-        let sizer = wx::BoxSizer::new(wx::VERTICAL);
-        let config_ui = ConfigUI {
-            chk_dir_text_ctrl,
-            chk_dir_change_dir,
-            chk_dir_must_exist,
-            chk_small,
-            // text_initial_dir,
-            sizer,
-        };
-        self.reset(&config_ui); // set checkboxes state
+        let std_paths = wx::ArrayString::new();
+        for path in [
+            "&none",
+            "&config",
+            "&data",
+            "&documents",
+            "&local data",
+            "&plugins",
+            "&resources",
+            "&user config",
+            "&user data",
+            "&user local data",
+        ] {
+            std_paths.add(path);
+        }
 
-        self.create_dir_ctrl(&config_ui);
+        // middle pane
+        let radio_std_path = wx::RadioBox::builder(Some(&self.base))
+            .label("Standard path")
+            .choices(std_paths)
+            .major_dimension(1)
+            .build();
 
         // right pane
-        config_ui
-            .sizer
-            .add_int_int(1, 1, 1, wx::GROW | wx::ALL, 5, wx::Object::none());
-        if let Some(dir_ctrl) = self.dir_ctrl.borrow().as_ref() {
-            config_ui.sizer.add_window_int(
-                Some(dir_ctrl),
-                0,
-                wx::EXPAND | wx::ALL,
-                5,
-                wx::Object::none(),
-            );
-        }
-        config_ui
-            .sizer
-            .add_int_int(1, 1, 1, wx::GROW | wx::ALL, 5, wx::Object::none()); // spacer
+        let dir_ctrl = wx::GenericDirCtrl::builder(Some(&self.base))
+            .id(DirCtrlPage::Ctrl.into())
+            // wxDirDialogDefaultFolderStr
+            .dir("/")
+            .style(0)
+            .build();
 
-        // global pane
-        let sz = wx::BoxSizer::new(wx::HORIZONTAL);
-        sz.add_sizer_int(Some(&boxleft), 0, wx::GROW | wx::ALL, 5, wx::Object::none());
-        sz.add_sizer_int(
-            Some(&config_ui.sizer),
-            1,
-            wx::GROW | wx::ALL,
-            5,
+        // the 3 panes panes compose the window
+        sizer_top.add_sizer_int(
+            Some(&sizer_left),
+            0,
+            (wx::ALL & !wx::LEFT),
+            10,
             wx::Object::none(),
         );
-        *self.config_ui.borrow_mut() = Some(config_ui);
+        sizer_top.add_window_int(
+            Some(&radio_std_path),
+            0,
+            wx::GROW | wx::ALL,
+            10,
+            wx::Object::none(),
+        );
+        sizer_top.add_window_int(
+            Some(&dir_ctrl),
+            1,
+            wx::GROW | (wx::ALL & !wx::RIGHT),
+            10,
+            wx::Object::none(),
+        );
 
-        self.base.set_sizer(Some(&sz), true);
+        self.base.set_sizer(Some(&sizer_top), true);
+
+        // final initializations
+        let config_ui = ConfigUI {
+            // chk_dir_text_ctrl,
+            // chk_dir_change_dir,
+            // chk_dir_must_exist,
+            // chk_small,
+            // // text_initial_dir,
+            // sizer,
+        };
+        self.reset(&config_ui);
+        *self.config_ui.borrow_mut() = Some(config_ui);
     }
 
     fn handle_button(&self, event: &wx::CommandEvent) {
@@ -295,62 +304,62 @@ impl DirCtrlWidgetsPage {
     }
 
     fn recreate_widget(&self) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            config_ui.sizer.remove_int(1);
-            self.create_dir_ctrl(config_ui);
+        // if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+        //     config_ui.sizer.remove_int(1);
+        //     self.create_dir_ctrl(config_ui);
 
-            if let Some(dir_ctrl) = self.dir_ctrl.borrow().as_ref() {
-                config_ui.sizer.insert_window_int(
-                    1,
-                    Some(dir_ctrl),
-                    0,
-                    wx::EXPAND | wx::ALL,
-                    5,
-                    wx::Object::none(),
-                );
-            }
+        //     if let Some(dir_ctrl) = self.dir_ctrl.borrow().as_ref() {
+        //         config_ui.sizer.insert_window_int(
+        //             1,
+        //             Some(dir_ctrl),
+        //             0,
+        //             wx::EXPAND | wx::ALL,
+        //             5,
+        //             wx::Object::none(),
+        //         );
+        //     }
 
-            config_ui.sizer.layout();
-        }
+        //     config_ui.sizer.layout();
+        // }
     }
 
     fn reset(&self, config_ui: &ConfigUI) {
-        config_ui
-            .chk_dir_text_ctrl
-            .set_value((wx::DIRP_DEFAULT_STYLE & wx::DIRP_USE_TEXTCTRL) != 0);
-        config_ui
-            .chk_dir_must_exist
-            .set_value((wx::DIRP_DEFAULT_STYLE & wx::DIRP_DIR_MUST_EXIST) != 0);
-        config_ui
-            .chk_dir_change_dir
-            .set_value((wx::DIRP_DEFAULT_STYLE & wx::DIRP_CHANGE_DIR) != 0);
-        config_ui
-            .chk_small
-            .set_value((wx::FLP_DEFAULT_STYLE & wx::DIRP_SMALL) != 0);
+        // config_ui
+        //     .chk_dir_text_ctrl
+        //     .set_value((wx::DIRP_DEFAULT_STYLE & wx::DIRP_USE_TEXTCTRL) != 0);
+        // config_ui
+        //     .chk_dir_must_exist
+        //     .set_value((wx::DIRP_DEFAULT_STYLE & wx::DIRP_DIR_MUST_EXIST) != 0);
+        // config_ui
+        //     .chk_dir_change_dir
+        //     .set_value((wx::DIRP_DEFAULT_STYLE & wx::DIRP_CHANGE_DIR) != 0);
+        // config_ui
+        //     .chk_small
+        //     .set_value((wx::FLP_DEFAULT_STYLE & wx::DIRP_SMALL) != 0);
     }
 
     fn create_dir_ctrl(&self, config_ui: &ConfigUI) {
-        if let Some(dir_ctrl) = self.dir_ctrl.borrow().as_ref() {
-            dir_ctrl.destroy();
-        }
+        // if let Some(dir_ctrl) = self.dir_ctrl.borrow().as_ref() {
+        //     dir_ctrl.destroy();
+        // }
 
-        let mut style = wx::BORDER_DEFAULT;
+        // let mut style = wx::BORDER_DEFAULT;
 
-        if config_ui.chk_dir_text_ctrl.get_value() {
-            style |= wx::DIRP_USE_TEXTCTRL as c_long;
-        }
+        // if config_ui.chk_dir_text_ctrl.get_value() {
+        //     style |= wx::DIRP_USE_TEXTCTRL as c_long;
+        // }
 
-        if config_ui.chk_dir_must_exist.get_value() {
-            style |= wx::DIRP_DIR_MUST_EXIST as c_long;
-        }
+        // if config_ui.chk_dir_must_exist.get_value() {
+        //     style |= wx::DIRP_DIR_MUST_EXIST as c_long;
+        // }
 
-        if config_ui.chk_dir_change_dir.get_value() {
-            style |= wx::DIRP_CHANGE_DIR as c_long;
-        }
+        // if config_ui.chk_dir_change_dir.get_value() {
+        //     style |= wx::DIRP_CHANGE_DIR as c_long;
+        // }
 
-        if config_ui.chk_small.get_value() {
-            style |= wx::DIRP_SMALL as c_long;
-        }
+        // if config_ui.chk_small.get_value() {
+        //     style |= wx::DIRP_SMALL as c_long;
+        // }
 
         // FIXME: wxGetHomeDir() is needed?
         // let dir_ctrl = wx::GenericDirCtrl::builder(Some(&self.base))
