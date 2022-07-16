@@ -340,8 +340,7 @@ impl DirCtrlWidgetsPage {
     }
 
     fn create_dir_ctrl(&self, config_ui: &ConfigUI, default_path: bool) {
-        // TODO: wxWindowUpdateLocker
-        self.base.freeze();
+        let no_updates = wx::WindowUpdateLocker::new_with_window(Some(&self.base));
 
         let mut style = wx::BORDER_DEFAULT;
         if config_ui.chk_dir_only.is_checked() {
@@ -399,9 +398,6 @@ impl DirCtrlWidgetsPage {
 
         // relayout the sizer
         config_ui.sizer.layout();
-
-        // TODO: wxWindowUpdateLocker
-        self.base.thaw();
     }
 
     // ----------------------------------------------------------------------------
