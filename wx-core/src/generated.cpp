@@ -881,9 +881,11 @@ void wxFileCtrl_ShowHidden(wxFileCtrl * self, bool show) {
 }
 
 // CLASS: wxFont
+#if wxCHECK_VERSION(3, 1, 0)
 wxFont *wxFont_GetBaseFont(const wxFont * self) {
     return new wxFont(self->GetBaseFont());
 }
+#endif
 wxString *wxFont_GetFaceName(const wxFont * self) {
     return new wxString(self->GetFaceName());
 }
@@ -899,9 +901,11 @@ const wxNativeFontInfo * wxFont_GetNativeFontInfo(const wxFont * self) {
 int wxFont_GetPointSize(const wxFont * self) {
     return self->GetPointSize();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 double wxFont_GetFractionalPointSize(const wxFont * self) {
     return self->GetFractionalPointSize();
 }
+#endif
 wxSize *wxFont_GetPixelSize(const wxFont * self) {
     return new wxSize(self->GetPixelSize());
 }
@@ -911,18 +915,22 @@ bool wxFont_GetUnderlined(const wxFont * self) {
 bool wxFont_GetStrikethrough(const wxFont * self) {
     return self->GetStrikethrough();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 int wxFont_GetNumericWeight(const wxFont * self) {
     return self->GetNumericWeight();
 }
+#endif
 bool wxFont_IsFixedWidth(const wxFont * self) {
     return self->IsFixedWidth();
 }
 bool wxFont_IsOk(const wxFont * self) {
     return self->IsOk();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxFont_AddPrivateFont(const wxString * filename) {
     return wxFont::AddPrivateFont(*filename);
 }
+#endif
 wxFont *wxFont_Bold(const wxFont * self) {
     return new wxFont(self->Bold());
 }
@@ -974,9 +982,11 @@ void wxFont_SetNativeFontInfo1(wxFont * self, const wxNativeFontInfo * info) {
 void wxFont_SetPointSize(wxFont * self, int point_size) {
     return self->SetPointSize(point_size);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxFont_SetFractionalPointSize(wxFont * self, double point_size) {
     return self->SetFractionalPointSize(point_size);
 }
+#endif
 void wxFont_SetPixelSize(wxFont * self, const wxSize * pixel_size) {
     return self->SetPixelSize(*pixel_size);
 }
@@ -986,9 +996,11 @@ void wxFont_SetUnderlined(wxFont * self, bool underlined) {
 void wxFont_SetStrikethrough(wxFont * self, bool strikethrough) {
     return self->SetStrikethrough(strikethrough);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxFont_SetNumericWeight(wxFont * self, int weight) {
     return self->SetNumericWeight(weight);
 }
+#endif
 wxFont * wxFont_New4(const wxNativeFontInfo * native_info) {
     return wxFont::New(*native_info);
 }
@@ -1024,24 +1036,28 @@ bool wxFontPickerCtrl_Create(wxFontPickerCtrl * self, wxWindow * parent, wxWindo
 unsigned int wxFontPickerCtrl_GetMaxPointSize(const wxFontPickerCtrl * self) {
     return self->GetMaxPointSize();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 unsigned int wxFontPickerCtrl_GetMinPointSize(const wxFontPickerCtrl * self) {
     return self->GetMinPointSize();
 }
 wxColour *wxFontPickerCtrl_GetSelectedColour(const wxFontPickerCtrl * self) {
     return new wxColour(self->GetSelectedColour());
 }
+#endif
 wxFont *wxFontPickerCtrl_GetSelectedFont(const wxFontPickerCtrl * self) {
     return new wxFont(self->GetSelectedFont());
 }
 void wxFontPickerCtrl_SetMaxPointSize(wxFontPickerCtrl * self, unsigned int max) {
     return self->SetMaxPointSize(max);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxFontPickerCtrl_SetMinPointSize(wxFontPickerCtrl * self, unsigned int min) {
     return self->SetMinPointSize(min);
 }
 void wxFontPickerCtrl_SetSelectedColour(wxFontPickerCtrl * self, const wxColour * colour) {
     return self->SetSelectedColour(*colour);
 }
+#endif
 void wxFontPickerCtrl_SetSelectedFont(wxFontPickerCtrl * self, const wxFont * font) {
     return self->SetSelectedFont(*font);
 }
