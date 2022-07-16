@@ -1544,6 +1544,69 @@ pub trait FileCtrlMethods: ControlMethods {
     }
 }
 
+// wxFontPickerCtrl
+pub trait FontPickerCtrlMethods: PickerBaseMethods {
+    fn create_font<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        font: *const c_void,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxFontPickerCtrl_Create(
+                self.as_ptr(),
+                parent,
+                id,
+                font,
+                pos,
+                size,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+    fn get_max_point_size(&self) -> c_uint {
+        unsafe { ffi::wxFontPickerCtrl_GetMaxPointSize(self.as_ptr()) }
+    }
+    fn get_min_point_size(&self) -> c_uint {
+        unsafe { ffi::wxFontPickerCtrl_GetMinPointSize(self.as_ptr()) }
+    }
+    fn get_selected_colour(&self) -> Colour {
+        unsafe { Colour::from_ptr(ffi::wxFontPickerCtrl_GetSelectedColour(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn GetSelectedFont()
+    fn set_max_point_size(&self, max: c_uint) {
+        unsafe { ffi::wxFontPickerCtrl_SetMaxPointSize(self.as_ptr(), max) }
+    }
+    fn set_min_point_size(&self, min: c_uint) {
+        unsafe { ffi::wxFontPickerCtrl_SetMinPointSize(self.as_ptr(), min) }
+    }
+    fn set_selected_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxFontPickerCtrl_SetSelectedColour(self.as_ptr(), colour)
+        }
+    }
+    fn set_selected_font(&self, font: *const c_void) {
+        unsafe { ffi::wxFontPickerCtrl_SetSelectedFont(self.as_ptr(), font) }
+    }
+}
+
 // wxFrame
 pub trait FrameMethods: TopLevelWindowMethods {
     // DTOR: fn ~wxFrame()

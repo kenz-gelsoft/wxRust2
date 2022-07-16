@@ -863,6 +863,50 @@ impl<const OWNED: bool> FileCtrlIsOwned<OWNED> {
     }
 }
 
+// wxFontPickerCtrl
+wx_class! { FontPickerCtrl =
+    FontPickerCtrlIsOwned<true>(wxFontPickerCtrl) impl
+        FontPickerCtrlMethods,
+        PickerBaseMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> FontPickerCtrlIsOwned<OWNED> {
+    pub fn new_2step() -> FontPickerCtrlIsOwned<OWNED> {
+        unsafe { FontPickerCtrlIsOwned(ffi::wxFontPickerCtrl_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        font: *const c_void,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> FontPickerCtrlIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            FontPickerCtrlIsOwned(ffi::wxFontPickerCtrl_new1(
+                parent, id, font, pos, size, style, validator, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
 // wxFrame
 wx_class! { Frame =
     FrameIsOwned<true>(wxFrame) impl

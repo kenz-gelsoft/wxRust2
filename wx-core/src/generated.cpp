@@ -880,6 +880,38 @@ void wxFileCtrl_ShowHidden(wxFileCtrl * self, bool show) {
     return self->ShowHidden(show);
 }
 
+// CLASS: wxFontPickerCtrl
+wxFontPickerCtrl *wxFontPickerCtrl_new() {
+    return new wxFontPickerCtrl();
+}
+wxFontPickerCtrl *wxFontPickerCtrl_new1(wxWindow * parent, wxWindowID id, const wxFont * font, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return new wxFontPickerCtrl(parent, id, *font, *pos, *size, style, *validator, *name);
+}
+bool wxFontPickerCtrl_Create(wxFontPickerCtrl * self, wxWindow * parent, wxWindowID id, const wxFont * font, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, *font, *pos, *size, style, *validator, *name);
+}
+unsigned int wxFontPickerCtrl_GetMaxPointSize(const wxFontPickerCtrl * self) {
+    return self->GetMaxPointSize();
+}
+unsigned int wxFontPickerCtrl_GetMinPointSize(const wxFontPickerCtrl * self) {
+    return self->GetMinPointSize();
+}
+wxColour *wxFontPickerCtrl_GetSelectedColour(const wxFontPickerCtrl * self) {
+    return new wxColour(self->GetSelectedColour());
+}
+void wxFontPickerCtrl_SetMaxPointSize(wxFontPickerCtrl * self, unsigned int max) {
+    return self->SetMaxPointSize(max);
+}
+void wxFontPickerCtrl_SetMinPointSize(wxFontPickerCtrl * self, unsigned int min) {
+    return self->SetMinPointSize(min);
+}
+void wxFontPickerCtrl_SetSelectedColour(wxFontPickerCtrl * self, const wxColour * colour) {
+    return self->SetSelectedColour(*colour);
+}
+void wxFontPickerCtrl_SetSelectedFont(wxFontPickerCtrl * self, const wxFont * font) {
+    return self->SetSelectedFont(*font);
+}
+
 // CLASS: wxFrame
 wxFrame *wxFrame_new() {
     return new wxFrame();

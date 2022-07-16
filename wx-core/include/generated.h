@@ -9,6 +9,7 @@
 #include <wx/editlbox.h>
 #include <wx/filectrl.h>
 #include <wx/filepicker.h>
+#include <wx/fontpicker.h>
 #include <wx/wrapsizer.h>
 
 // wxBitmapBundle compatibility hack(for a while)
@@ -375,6 +376,18 @@ bool wxFileCtrl_SetPath(wxFileCtrl * self, const wxString * path);
 void wxFileCtrl_SetFilterIndex(wxFileCtrl * self, int filter_index);
 void wxFileCtrl_SetWildcard(wxFileCtrl * self, const wxString * wild_card);
 void wxFileCtrl_ShowHidden(wxFileCtrl * self, bool show);
+
+// CLASS: wxFontPickerCtrl
+wxFontPickerCtrl *wxFontPickerCtrl_new();
+wxFontPickerCtrl *wxFontPickerCtrl_new1(wxWindow * parent, wxWindowID id, const wxFont * font, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+bool wxFontPickerCtrl_Create(wxFontPickerCtrl * self, wxWindow * parent, wxWindowID id, const wxFont * font, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+unsigned int wxFontPickerCtrl_GetMaxPointSize(const wxFontPickerCtrl * self);
+unsigned int wxFontPickerCtrl_GetMinPointSize(const wxFontPickerCtrl * self);
+wxColour *wxFontPickerCtrl_GetSelectedColour(const wxFontPickerCtrl * self);
+void wxFontPickerCtrl_SetMaxPointSize(wxFontPickerCtrl * self, unsigned int max);
+void wxFontPickerCtrl_SetMinPointSize(wxFontPickerCtrl * self, unsigned int min);
+void wxFontPickerCtrl_SetSelectedColour(wxFontPickerCtrl * self, const wxColour * colour);
+void wxFontPickerCtrl_SetSelectedFont(wxFontPickerCtrl * self, const wxFont * font);
 
 // CLASS: wxFrame
 wxFrame *wxFrame_new();

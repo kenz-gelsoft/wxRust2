@@ -681,6 +681,38 @@ extern "C" {
     pub fn wxFileCtrl_SetWildcard(self_: *mut c_void, wild_card: *const c_void);
     pub fn wxFileCtrl_ShowHidden(self_: *mut c_void, show: bool);
 
+    // wxFontPickerCtrl
+    pub fn wxFontPickerCtrl_new() -> *mut c_void;
+    pub fn wxFontPickerCtrl_new1(
+        parent: *mut c_void,
+        id: c_int,
+        font: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxFontPickerCtrl_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        font: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxFontPickerCtrl_GetMaxPointSize(self_: *const c_void) -> c_uint;
+    pub fn wxFontPickerCtrl_GetMinPointSize(self_: *const c_void) -> c_uint;
+    pub fn wxFontPickerCtrl_GetSelectedColour(self_: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxFontPickerCtrl_GetSelectedFont(self_: *const c_void) -> wxFont;
+    pub fn wxFontPickerCtrl_SetMaxPointSize(self_: *mut c_void, max: c_uint);
+    pub fn wxFontPickerCtrl_SetMinPointSize(self_: *mut c_void, min: c_uint);
+    pub fn wxFontPickerCtrl_SetSelectedColour(self_: *mut c_void, colour: *const c_void);
+    pub fn wxFontPickerCtrl_SetSelectedFont(self_: *mut c_void, font: *const c_void);
+
     // wxFrame
     pub fn wxFrame_new() -> *mut c_void;
     pub fn wxFrame_new1(
