@@ -185,7 +185,7 @@ impl WidgetsPage for FileCtrlWidgetsPage {
         // right pane
         let file_ctrl = wx::FileCtrl::builder(Some(&self.base))
             .id(FileCtrlPage::Ctrl.into())
-            .style(wx::FC_OPEN)
+            .style(wx::FC_OPEN.into())
             .build();
 
         // the 3 panes panes compose the window
@@ -281,7 +281,7 @@ impl FileCtrlWidgetsPage {
         if FileCtrlMode::from(config_ui.radio_file_ctrl_mode.get_selection())
             == Some(FileCtrlMode::Open)
         {
-            style |= wx::FC_OPEN;
+            style |= wx::FC_OPEN as c_long;
             config_ui.chk_multiple.enable(true);
             if config_ui.chk_multiple.is_checked() {
                 style |= wx::FC_MULTIPLE as c_long;
