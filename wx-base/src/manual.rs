@@ -46,3 +46,8 @@ pub const STIPPLE_MASK_OPAQUE: i32 = 107;
 pub const STIPPLE_MASK: i32 = 108;
 /*  drawn with a Pen, and without any Brush -- and it can be stippled. */
 pub const STIPPLE: i32 = 110;
+
+#[cfg(target_os = "windows")]
+pub const FILE_SELECTOR_DEFAULT_WILDCARD_STR: &str = "*.*";
+#[cfg(not(target_os = "windows"))]
+pub const FILE_SELECTOR_DEFAULT_WILDCARD_STR: &str = "*";
