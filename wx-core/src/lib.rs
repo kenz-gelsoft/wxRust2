@@ -767,6 +767,62 @@ impl<'a, P: WindowMethods> ComboBoxBuilder<'a, P> {
     }
 }
 
+pub struct EditableListBoxBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    id: c_int,
+    label: String,
+    pos: Option<Point>,
+    size: Option<Size>,
+    style: c_long,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, EditableListBoxBuilder<'a, P>> for EditableListBox {
+    fn builder(parent: Option<&'a P>) -> EditableListBoxBuilder<'a, P> {
+        EditableListBoxBuilder {
+            parent: parent,
+            id: ID_ANY,
+            label: "".to_owned(),
+            pos: None,
+            size: None,
+            style: EL_DEFAULT_STYLE.into(),
+        }
+    }
+}
+impl<'a, P: WindowMethods> EditableListBoxBuilder<'a, P> {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn label(&mut self, label: &str) -> &mut Self {
+        self.label = label.to_owned();
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn build(&mut self) -> EditableListBox {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        EditableListBox::new(
+            self.parent,
+            self.id,
+            &self.label,
+            &pos,
+            &size,
+            self.style,
+            "",
+        )
+    }
+}
+
 pub struct GenericDirCtrlBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,

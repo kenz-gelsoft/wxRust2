@@ -146,6 +146,7 @@ def generated_h(classes, libname):
 #include <wx/clrpicker.h>
 #include <wx/datectrl.h>
 #include <wx/dirctrl.h>
+#include <wx/editlbox.h>
 #include <wx/filepicker.h>
 #include <wx/wrapsizer.h>
 
