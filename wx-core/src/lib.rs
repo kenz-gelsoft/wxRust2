@@ -295,6 +295,74 @@ impl<'a, P: WindowMethods> DirPickerCtrlBuilder<'a, P> {
     }
 }
 
+pub struct FontPickerCtrlBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    id: c_int,
+    font: Option<Font>,
+    pos: Option<Point>,
+    size: Option<Size>,
+    style: c_long,
+    validator: Option<Validator>,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, FontPickerCtrlBuilder<'a, P>> for FontPickerCtrl {
+    fn builder(parent: Option<&'a P>) -> FontPickerCtrlBuilder<'a, P> {
+        FontPickerCtrlBuilder {
+            parent: parent,
+            id: ID_ANY,
+            font: None,
+            pos: None,
+            size: None,
+            style: FNTP_DEFAULT_STYLE.into(),
+            validator: None,
+        }
+    }
+}
+impl<'a, P: WindowMethods> FontPickerCtrlBuilder<'a, P> {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn font(&mut self, font: Font) -> &mut Self {
+        self.font = Some(font);
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn validator(&mut self, validator: Validator) -> &mut Self {
+        self.validator = Some(validator);
+        self
+    }
+    pub fn build(&mut self) -> FontPickerCtrl {
+        let font = self.font.take().unwrap_or_else(|| Font::new());
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        let validator = self
+            .validator
+            .take()
+            .unwrap_or_else(|| Validator::default());
+        FontPickerCtrl::new(
+            self.parent,
+            self.id,
+            &font,
+            &pos,
+            &size,
+            self.style,
+            &validator,
+            "",
+        )
+    }
+}
+
 pub struct FrameBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,

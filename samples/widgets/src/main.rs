@@ -37,6 +37,9 @@ use editlbox::*;
 mod filectrl;
 use filectrl::*;
 
+mod fontpicker;
+use fontpicker::*;
+
 enum Widgets {
     ClearLog = 100,
     Quit,
@@ -144,11 +147,13 @@ impl WidgetsFrame {
         let dirpicker_page = Rc::new(DirPickerWidgetsPage::new(&book));
         let editlbox_page = Rc::new(EditableListboxWidgetsPage::new(&book));
         let filectrl_page = Rc::new(FileCtrlWidgetsPage::new(&book));
+        let fontpicker_page = Rc::new(FontPickerWidgetsPage::new(&book));
         let mut frame = WidgetsFrame {
             base,
             panel,
             book,
             pages: vec![
+                fontpicker_page,
                 button_page,
                 check_box_page,
                 choice_page,

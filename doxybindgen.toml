@@ -24,6 +24,8 @@ wxml_files = [
     'wxml/classwx_evt_handler.xml',
     'wxml/classwx_file_ctrl.xml',
     'wxml/classwx_file_name.xml',
+    'wxml/classwx_font.xml',
+    'wxml/classwx_font_picker_ctrl.xml',
     'wxml/classwx_frame.xml',
     'wxml/classwx_g_d_i_object.xml',
     'wxml/classwx_generic_dir_ctrl.xml',
@@ -275,7 +277,28 @@ wx31 = [
     'ResolveLink',
     'URLToFileName',
 ]
-[types.wxFrame] 
+[types.wxFont]
+blocklist = [
+    'operator=',
+    'operator==',
+    'operator!=',
+]
+wx31 = [
+    'AddPrivateFont',
+    'GetBaseFont',
+    'GetFractionalPointSize',
+    'GetNumericWeight',
+    'SetFractionalPointSize',
+    'SetNumericWeight',
+]
+[types.wxFontPickerCtrl]
+wx31 = [
+    'GetMinPointSize',
+    'GetSelectedColour',
+    'SetMinPointSize',
+    'SetSelectedColour',
+]
+[types.wxFrame]
 windows = [
     'MSWGetTaskBarButton',
 ]

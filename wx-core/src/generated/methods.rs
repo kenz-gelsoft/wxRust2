@@ -1544,6 +1544,263 @@ pub trait FileCtrlMethods: ControlMethods {
     }
 }
 
+// wxFont
+pub trait FontMethods: GDIObjectMethods {
+    fn get_base_font(&self) -> Font {
+        unsafe { Font::from_ptr(ffi::wxFont_GetBaseFont(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn GetEncoding()
+    fn get_face_name(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFont_GetFaceName(self.as_ptr())).into() }
+    }
+    // NOT_SUPPORTED: fn GetFamily()
+    fn get_native_font_info_desc(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFont_GetNativeFontInfoDesc(self.as_ptr())).into() }
+    }
+    fn get_native_font_info_user_desc(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFont_GetNativeFontInfoUserDesc(self.as_ptr())).into() }
+    }
+    fn get_native_font_info(&self) -> *const c_void {
+        unsafe { ffi::wxFont_GetNativeFontInfo(self.as_ptr()) }
+    }
+    fn get_point_size(&self) -> c_int {
+        unsafe { ffi::wxFont_GetPointSize(self.as_ptr()) }
+    }
+    fn get_fractional_point_size(&self) -> c_double {
+        unsafe { ffi::wxFont_GetFractionalPointSize(self.as_ptr()) }
+    }
+    fn get_pixel_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxFont_GetPixelSize(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn GetStyle()
+    fn get_underlined(&self) -> bool {
+        unsafe { ffi::wxFont_GetUnderlined(self.as_ptr()) }
+    }
+    fn get_strikethrough(&self) -> bool {
+        unsafe { ffi::wxFont_GetStrikethrough(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetWeight()
+    fn get_numeric_weight(&self) -> c_int {
+        unsafe { ffi::wxFont_GetNumericWeight(self.as_ptr()) }
+    }
+    fn is_fixed_width(&self) -> bool {
+        unsafe { ffi::wxFont_IsFixedWidth(self.as_ptr()) }
+    }
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxFont_IsOk(self.as_ptr()) }
+    }
+    fn add_private_font(filename: &str) -> bool {
+        unsafe {
+            let filename = WxString::from(filename);
+            let filename = filename.as_ptr();
+            ffi::wxFont_AddPrivateFont(filename)
+        }
+    }
+    fn bold(&self) -> Font {
+        unsafe { Font::from_ptr(ffi::wxFont_Bold(self.as_ptr())) }
+    }
+    fn italic(&self) -> Font {
+        unsafe { Font::from_ptr(ffi::wxFont_Italic(self.as_ptr())) }
+    }
+    fn larger(&self) -> Font {
+        unsafe { Font::from_ptr(ffi::wxFont_Larger(self.as_ptr())) }
+    }
+    fn smaller(&self) -> Font {
+        unsafe { Font::from_ptr(ffi::wxFont_Smaller(self.as_ptr())) }
+    }
+    fn underlined(&self) -> Font {
+        unsafe { Font::from_ptr(ffi::wxFont_Underlined(self.as_ptr())) }
+    }
+    fn strikethrough(&self) -> Font {
+        unsafe { Font::from_ptr(ffi::wxFont_Strikethrough(self.as_ptr())) }
+    }
+    fn make_bold(&self) -> &Self {
+        unsafe {
+            ffi::wxFont_MakeBold(self.as_ptr());
+            &self
+        }
+    }
+    fn make_italic(&self) -> &Self {
+        unsafe {
+            ffi::wxFont_MakeItalic(self.as_ptr());
+            &self
+        }
+    }
+    fn make_larger(&self) -> &Self {
+        unsafe {
+            ffi::wxFont_MakeLarger(self.as_ptr());
+            &self
+        }
+    }
+    fn make_smaller(&self) -> &Self {
+        unsafe {
+            ffi::wxFont_MakeSmaller(self.as_ptr());
+            &self
+        }
+    }
+    fn make_underlined(&self) -> &Self {
+        unsafe {
+            ffi::wxFont_MakeUnderlined(self.as_ptr());
+            &self
+        }
+    }
+    fn make_strikethrough(&self) -> &Self {
+        unsafe {
+            ffi::wxFont_MakeStrikethrough(self.as_ptr());
+            &self
+        }
+    }
+    // NOT_SUPPORTED: fn Scale()
+    // NOT_SUPPORTED: fn Scaled()
+    // NOT_SUPPORTED: fn SetEncoding()
+    fn set_face_name(&self, face_name: &str) -> bool {
+        unsafe {
+            let face_name = WxString::from(face_name);
+            let face_name = face_name.as_ptr();
+            ffi::wxFont_SetFaceName(self.as_ptr(), face_name)
+        }
+    }
+    // NOT_SUPPORTED: fn SetFamily()
+    fn set_native_font_info_str(&self, info: &str) -> bool {
+        unsafe {
+            let info = WxString::from(info);
+            let info = info.as_ptr();
+            ffi::wxFont_SetNativeFontInfo(self.as_ptr(), info)
+        }
+    }
+    fn set_native_font_info_user_desc(&self, info: &str) -> bool {
+        unsafe {
+            let info = WxString::from(info);
+            let info = info.as_ptr();
+            ffi::wxFont_SetNativeFontInfoUserDesc(self.as_ptr(), info)
+        }
+    }
+    fn set_native_font_info_nativefontinfo(&self, info: *const c_void) {
+        unsafe { ffi::wxFont_SetNativeFontInfo1(self.as_ptr(), info) }
+    }
+    fn set_point_size(&self, point_size: c_int) {
+        unsafe { ffi::wxFont_SetPointSize(self.as_ptr(), point_size) }
+    }
+    fn set_fractional_point_size(&self, point_size: c_double) {
+        unsafe { ffi::wxFont_SetFractionalPointSize(self.as_ptr(), point_size) }
+    }
+    fn set_pixel_size<S: SizeMethods>(&self, pixel_size: &S) {
+        unsafe {
+            let pixel_size = pixel_size.as_ptr();
+            ffi::wxFont_SetPixelSize(self.as_ptr(), pixel_size)
+        }
+    }
+    // NOT_SUPPORTED: fn SetStyle()
+    // NOT_SUPPORTED: fn SetSymbolicSize()
+    // NOT_SUPPORTED: fn SetSymbolicSizeRelativeTo()
+    fn set_underlined(&self, underlined: bool) {
+        unsafe { ffi::wxFont_SetUnderlined(self.as_ptr(), underlined) }
+    }
+    fn set_strikethrough(&self, strikethrough: bool) {
+        unsafe { ffi::wxFont_SetStrikethrough(self.as_ptr(), strikethrough) }
+    }
+    // NOT_SUPPORTED: fn SetWeight()
+    fn set_numeric_weight(&self, weight: c_int) {
+        unsafe { ffi::wxFont_SetNumericWeight(self.as_ptr(), weight) }
+    }
+    // BLOCKED: fn operator!=()
+    // BLOCKED: fn operator==()
+    // BLOCKED: fn operator=()
+    // NOT_SUPPORTED: fn GetDefaultEncoding()
+    // NOT_SUPPORTED: fn SetDefaultEncoding()
+    // NOT_SUPPORTED: fn GetNumericWeightOf()
+    // NOT_SUPPORTED: fn New()
+    // NOT_SUPPORTED: fn New1()
+    // NOT_SUPPORTED: fn New2()
+    // NOT_SUPPORTED: fn New3()
+    fn new_nativefontinfo(native_info: *const c_void) -> Option<FontIsOwned<false>> {
+        unsafe { Font::option_from(ffi::wxFont_New4(native_info)) }
+    }
+    fn new_str(native_info_string: &str) -> Option<FontIsOwned<false>> {
+        unsafe {
+            let native_info_string = WxString::from(native_info_string);
+            let native_info_string = native_info_string.as_ptr();
+            Font::option_from(ffi::wxFont_New5(native_info_string))
+        }
+    }
+    // DTOR: fn ~wxFont()
+}
+
+// wxFontPickerCtrl
+pub trait FontPickerCtrlMethods: PickerBaseMethods {
+    fn create_font<
+        W: WindowMethods,
+        F: FontMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        V: ValidatorMethods,
+    >(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        font: &F,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let font = font.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxFontPickerCtrl_Create(
+                self.as_ptr(),
+                parent,
+                id,
+                font,
+                pos,
+                size,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+    fn get_max_point_size(&self) -> c_uint {
+        unsafe { ffi::wxFontPickerCtrl_GetMaxPointSize(self.as_ptr()) }
+    }
+    fn get_min_point_size(&self) -> c_uint {
+        unsafe { ffi::wxFontPickerCtrl_GetMinPointSize(self.as_ptr()) }
+    }
+    fn get_selected_colour(&self) -> Colour {
+        unsafe { Colour::from_ptr(ffi::wxFontPickerCtrl_GetSelectedColour(self.as_ptr())) }
+    }
+    fn get_selected_font(&self) -> Font {
+        unsafe { Font::from_ptr(ffi::wxFontPickerCtrl_GetSelectedFont(self.as_ptr())) }
+    }
+    fn set_max_point_size(&self, max: c_uint) {
+        unsafe { ffi::wxFontPickerCtrl_SetMaxPointSize(self.as_ptr(), max) }
+    }
+    fn set_min_point_size(&self, min: c_uint) {
+        unsafe { ffi::wxFontPickerCtrl_SetMinPointSize(self.as_ptr(), min) }
+    }
+    fn set_selected_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxFontPickerCtrl_SetSelectedColour(self.as_ptr(), colour)
+        }
+    }
+    fn set_selected_font<F: FontMethods>(&self, font: &F) {
+        unsafe {
+            let font = font.as_ptr();
+            ffi::wxFontPickerCtrl_SetSelectedFont(self.as_ptr(), font)
+        }
+    }
+}
+
 // wxFrame
 pub trait FrameMethods: TopLevelWindowMethods {
     // DTOR: fn ~wxFrame()
@@ -2987,8 +3244,11 @@ pub trait MenuItemMethods: ObjectMethods {
             ffi::wxMenuItem_SetDisabledBitmap(self.as_ptr(), disabled)
         }
     }
-    fn set_font(&self, font: *const c_void) {
-        unsafe { ffi::wxMenuItem_SetFont(self.as_ptr(), font) }
+    fn set_font<F: FontMethods>(&self, font: &F) {
+        unsafe {
+            let font = font.as_ptr();
+            ffi::wxMenuItem_SetFont(self.as_ptr(), font)
+        }
     }
     fn set_help(&self, help_string: &str) {
         unsafe {
@@ -4638,9 +4898,14 @@ pub trait TextAttrMethods: WxRustMethods {
     fn get_flags(&self) -> c_long {
         unsafe { ffi::wxTextAttr_GetFlags(self.as_ptr()) }
     }
-    // NOT_SUPPORTED: fn GetFont()
-    fn get_font_attributes(&self, font: *const c_void, flags: c_int) -> bool {
-        unsafe { ffi::wxTextAttr_GetFontAttributes(self.as_ptr(), font, flags) }
+    fn get_font(&self) -> Font {
+        unsafe { Font::from_ptr(ffi::wxTextAttr_GetFont(self.as_ptr())) }
+    }
+    fn get_font_attributes<F: FontMethods>(&self, font: &F, flags: c_int) -> bool {
+        unsafe {
+            let font = font.as_ptr();
+            ffi::wxTextAttr_GetFontAttributes(self.as_ptr(), font, flags)
+        }
     }
     // NOT_SUPPORTED: fn GetFontEncoding()
     fn get_font_face_name(&self) -> String {
@@ -4845,8 +5110,11 @@ pub trait TextAttrMethods: WxRustMethods {
     fn set_flags(&self, flags: c_long) {
         unsafe { ffi::wxTextAttr_SetFlags(self.as_ptr(), flags) }
     }
-    fn set_font(&self, font: *const c_void, flags: c_int) {
-        unsafe { ffi::wxTextAttr_SetFont(self.as_ptr(), font, flags) }
+    fn set_font<F: FontMethods>(&self, font: &F, flags: c_int) {
+        unsafe {
+            let font = font.as_ptr();
+            ffi::wxTextAttr_SetFont(self.as_ptr(), font, flags)
+        }
     }
     // NOT_SUPPORTED: fn SetFontEncoding()
     fn set_font_face_name(&self, face_name: &str) {
@@ -6574,22 +6842,28 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn get_dpi(&self) -> Size {
         unsafe { Size::from_ptr(ffi::wxWindow_GetDPI(self.as_ptr())) }
     }
-    // NOT_SUPPORTED: fn GetFont()
+    fn get_font(&self) -> Font {
+        unsafe { Font::from_ptr(ffi::wxWindow_GetFont(self.as_ptr())) }
+    }
     fn get_foreground_colour(&self) -> Colour {
         unsafe { Colour::from_ptr(ffi::wxWindow_GetForegroundColour(self.as_ptr())) }
     }
-    fn get_text_extent_int(
+    fn get_text_extent_int<F: FontMethods>(
         &self,
         string: &str,
         w: *mut c_void,
         h: *mut c_void,
         descent: *mut c_void,
         external_leading: *mut c_void,
-        font: *const c_void,
+        font: Option<&F>,
     ) {
         unsafe {
             let string = WxString::from(string);
             let string = string.as_ptr();
+            let font = match font {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             ffi::wxWindow_GetTextExtent(
                 self.as_ptr(),
                 string,
@@ -6643,8 +6917,11 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn is_transparent_background_supported(&self, reason: *mut c_void) -> bool {
         unsafe { ffi::wxWindow_IsTransparentBackgroundSupported(self.as_ptr(), reason) }
     }
-    fn set_font(&self, font: *const c_void) -> bool {
-        unsafe { ffi::wxWindow_SetFont(self.as_ptr(), font) }
+    fn set_font<F: FontMethods>(&self, font: &F) -> bool {
+        unsafe {
+            let font = font.as_ptr();
+            ffi::wxWindow_SetFont(self.as_ptr(), font)
+        }
     }
     fn set_foreground_colour<C: ColourMethods>(&self, colour: &C) -> bool {
         unsafe {
@@ -6667,8 +6944,11 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn use_background_colour(&self) -> bool {
         unsafe { ffi::wxWindow_UseBackgroundColour(self.as_ptr()) }
     }
-    fn set_own_font(&self, font: *const c_void) {
-        unsafe { ffi::wxWindow_SetOwnFont(self.as_ptr(), font) }
+    fn set_own_font<F: FontMethods>(&self, font: &F) {
+        unsafe {
+            let font = font.as_ptr();
+            ffi::wxWindow_SetOwnFont(self.as_ptr(), font)
+        }
     }
     fn set_own_foreground_colour<C: ColourMethods>(&self, colour: &C) {
         unsafe {
