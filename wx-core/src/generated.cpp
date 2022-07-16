@@ -4076,20 +4076,6 @@ bool wxWindow_Create(wxWindow * self, wxWindow * parent, wxWindowID id, const wx
     return self->Create(parent, id, *pos, *size, style, *name);
 }
 
-// CLASS: wxWindowUpdateLocker
-void wxWindowUpdateLocker_delete(wxWindowUpdateLocker *self) {
-    delete self;
-}
-wxWindowUpdateLocker *wxWindowUpdateLocker_new() {
-    return new wxWindowUpdateLocker();
-}
-wxWindowUpdateLocker *wxWindowUpdateLocker_new1(wxWindow * win) {
-    return new wxWindowUpdateLocker(win);
-}
-void wxWindowUpdateLocker_Lock(wxWindowUpdateLocker * self, wxWindow * win) {
-    return self->Lock(win);
-}
-
 // CLASS: wxWrapSizer
 wxWrapSizer *wxWrapSizer_new(int orient, int flags) {
     return new wxWrapSizer(orient, flags);

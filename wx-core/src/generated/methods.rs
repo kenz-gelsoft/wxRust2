@@ -7038,19 +7038,5 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
 }
 
-// wxWindowUpdateLocker
-pub trait WindowUpdateLockerMethods: WxRustMethods {
-    fn lock<W: WindowMethods>(&self, win: Option<&W>) {
-        unsafe {
-            let win = match win {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxWindowUpdateLocker_Lock(self.as_ptr(), win)
-        }
-    }
-    // DTOR: fn ~wxWindowUpdateLocker()
-}
-
 // wxWrapSizer
 pub trait WrapSizerMethods: BoxSizerMethods {}

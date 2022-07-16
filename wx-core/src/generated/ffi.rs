@@ -2679,13 +2679,6 @@ extern "C" {
         name: *const c_void,
     ) -> bool;
 
-    // wxWindowUpdateLocker
-    pub fn wxWindowUpdateLocker_delete(self_: *mut c_void);
-    pub fn wxWindowUpdateLocker_new() -> *mut c_void;
-    pub fn wxWindowUpdateLocker_new1(win: *mut c_void) -> *mut c_void;
-    pub fn wxWindowUpdateLocker_Lock(self_: *mut c_void, win: *mut c_void);
-    // DTOR: pub fn wxWindowUpdateLocker_~wxWindowUpdateLocker(self_: *mut c_void);
-
     // wxWrapSizer
     pub fn wxWrapSizer_new(orient: c_int, flags: c_int) -> *mut c_void;
 

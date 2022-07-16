@@ -1860,36 +1860,6 @@ impl<const OWNED: bool> WindowIsOwned<OWNED> {
     }
 }
 
-// wxWindowUpdateLocker
-wx_class! { WindowUpdateLocker =
-    WindowUpdateLockerIsOwned<true>(wxWindowUpdateLocker) impl
-        WindowUpdateLockerMethods
-}
-impl<const OWNED: bool> WindowUpdateLockerIsOwned<OWNED> {
-    pub fn new() -> WindowUpdateLockerIsOwned<OWNED> {
-        unsafe { WindowUpdateLockerIsOwned(ffi::wxWindowUpdateLocker_new()) }
-    }
-    pub fn new_with_window<W: WindowMethods>(win: Option<&W>) -> WindowUpdateLockerIsOwned<OWNED> {
-        unsafe {
-            let win = match win {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            WindowUpdateLockerIsOwned(ffi::wxWindowUpdateLocker_new1(win))
-        }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for WindowUpdateLockerIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxWindowUpdateLocker_delete(self.0) }
-        }
-    }
-}
-
 // wxWrapSizer
 wx_class! { WrapSizer =
     WrapSizerIsOwned<true>(wxWrapSizer) impl
