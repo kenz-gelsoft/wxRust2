@@ -145,7 +145,6 @@ impl WidgetsFrame {
             panel,
             book,
             pages: vec![
-                editlbox_page,
                 button_page,
                 check_box_page,
                 choice_page,
@@ -154,6 +153,7 @@ impl WidgetsFrame {
                 datepicker_page,
                 dirctrl_page,
                 dirpicker_page,
+                editlbox_page,
             ],
         };
         frame.on_create();

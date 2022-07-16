@@ -150,12 +150,12 @@ impl WidgetsPage for EditableListboxWidgetsPage {
         }
     }
     fn handle_checkbox(&self, _: &wx::CommandEvent) {
-        self.on_check_box();
+        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+            self.on_check_box(config_ui);
+        }
     }
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            self.on_radio_box(config_ui);
-        }
+        // Do nothing.
     }
 }
 impl EditableListboxWidgetsPage {
@@ -177,7 +177,7 @@ impl EditableListboxWidgetsPage {
         config_ui.chk_allow_no_reorder.set_value(false);
     }
 
-    fn create_lbox(&self, config_ui: &ConfigUI, default_path: bool) {
+    fn create_lbox(&self, config_ui: &ConfigUI) {
         let mut flags = wx::BORDER_DEFAULT;
 
         if config_ui.chk_allow_new.get_value() {
@@ -230,16 +230,10 @@ impl EditableListboxWidgetsPage {
     fn on_button_reset(&self, config_ui: &ConfigUI) {
         self.reset(config_ui);
 
-        self.create_lbox(config_ui, false);
+        self.create_lbox(config_ui);
     }
 
-    fn on_check_box(&self) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            self.create_lbox(config_ui, false);
-        }
-    }
-
-    fn on_radio_box(&self, config_ui: &ConfigUI) {
-        // do nothing
+    fn on_check_box(&self, config_ui: &ConfigUI) {
+        self.create_lbox(config_ui);
     }
 }
