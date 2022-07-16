@@ -34,6 +34,9 @@ use dirpicker::*;
 mod editlbox;
 use editlbox::*;
 
+mod filectrl;
+use filectrl::*;
+
 enum Widgets {
     ClearLog = 100,
     Quit,
@@ -140,11 +143,13 @@ impl WidgetsFrame {
         let dirctrl_page = Rc::new(DirCtrlWidgetsPage::new(&book));
         let dirpicker_page = Rc::new(DirPickerWidgetsPage::new(&book));
         let editlbox_page = Rc::new(EditableListboxWidgetsPage::new(&book));
+        let filectrl_page = Rc::new(FileCtrlWidgetsPage::new(&book));
         let mut frame = WidgetsFrame {
             base,
             panel,
             book,
             pages: vec![
+                filectrl_page,
                 button_page,
                 check_box_page,
                 choice_page,

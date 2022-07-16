@@ -4,12 +4,6 @@ use std::os::raw::{c_int, c_long};
 use std::rc::Rc;
 use wx::{methods::*, ArrayString};
 
-#[cfg(target_os = "windows")]
-const FILE_SELECTOR_DEFAULT_WILDCARD_STR: &str = "*.*";
-
-#[cfg(not(target_os = "windows"))]
-const FILE_SELECTOR_DEFAULT_WILDCARD_STR: &str = "*";
-
 // control ids
 #[derive(Clone, Copy)]
 enum EditableListboxPage {

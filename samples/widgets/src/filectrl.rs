@@ -12,15 +12,17 @@ const FILE_SELECTOR_DEFAULT_WILDCARD_STR: &str = "*";
 
 // control ids
 #[derive(Clone, Copy)]
-enum EditableListboxPage {
+enum FileCtrlPage {
     Reset = wx::ID_HIGHEST as isize,
-    Listbox,
-    ContainerTests,
+    SetDirectory,
+    SetPath,
+    SetFilename,
+    Ctrl,
 }
-impl EditableListboxPage {
+impl FileCtrlPage {
     fn from(v: c_int) -> Option<Self> {
-        use EditableListboxPage::*;
-        for e in [Reset, Listbox, ContainerTests] {
+        use FileCtrlPage::*;
+        for e in [Reset, SetDirectory, SetPath, SetFilename, Ctrl] {
             if v == e.into() {
                 return Some(e);
             }
@@ -28,64 +30,122 @@ impl EditableListboxPage {
         return None;
     }
 }
-impl From<EditableListboxPage> for c_int {
-    fn from(w: EditableListboxPage) -> Self {
+impl From<FileCtrlPage> for c_int {
+    fn from(w: FileCtrlPage) -> Self {
         w as c_int
     }
 }
 
 #[derive(Clone)]
 pub struct ConfigUI {
-    // the checkboxes
-    chk_allow_new: wx::CheckBox,
-    chk_allow_edit: wx::CheckBox,
-    chk_allow_delete: wx::CheckBox,
-    chk_allow_no_reorder: wx::CheckBox,
+    // // the checkboxes
+    // chk_allow_new: wx::CheckBox,
+    // chk_allow_edit: wx::CheckBox,
+    // chk_allow_delete: wx::CheckBox,
+    // chk_allow_no_reorder: wx::CheckBox,
 
-    sizer_lbox: wx::BoxSizer,
+    // sizer_file_ctrl: wx::BoxSizer,
 }
 
 #[derive(Clone)]
-pub struct EditableListboxWidgetsPage {
+pub struct FileCtrlWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
     // the control itself
-    lbox: Rc<RefCell<Option<wx::EditableListBox>>>,
+    file_ctrl: Rc<RefCell<Option<wx::EditableListBox>>>,
 }
-impl WidgetsPage for EditableListboxWidgetsPage {
+impl WidgetsPage for FileCtrlWidgetsPage {
     fn base(&self) -> &wx::Panel {
         return &self.base;
     }
     fn label(&self) -> &str {
-        return "EditableListbox";
+        return "FileCtrl";
     }
     fn create_content(&self) {
-        /*
-        What we create here is a frame having 2 panes: style pane is the
-        leftmost one and the pane containing the listbox itself to the right
-        */
         let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
 
         // left pane
-        let box_left = wx::StaticBox::builder(Some(&self.base))
-            .label("&Set listbox parameters")
-            .build();
-        let sizer_left = wx::StaticBoxSizer::new_with_staticbox(Some(&box_left), wx::VERTICAL);
+        let sizer_left = wx::BoxSizer::new(wx::VERTICAL);
 
-        let chk_allow_new =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "Allow new items", wx::ID_ANY);
-        let chk_allow_edit =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "Allow editing items", wx::ID_ANY);
-        let chk_allow_delete =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "Allow deleting items", wx::ID_ANY);
-        let chk_allow_no_reorder = self.create_check_box_and_add_to_sizer(
-            &sizer_left,
-            "Block user reordering",
+        let mut mode = wx::ArrayString::new();
+        mode.add("open");
+        mode.add("save");
+        let radio_file_ctrl_mode = wx::RadioBox::builder(Some(&self.base))
+            .label("wxFileCtrl mode")
+            .choices(mode)
+            .build();
+
+        sizer_left.add_window_int(
+            Some(&radio_file_ctrl_mode),
+            0,
+            wx::ALL | wx::EXPAND,
+            5,
+            wx::Object::none(),
+        );
+
+        let (sizer, dir) = self.create_sizer_with_text_and_button(
+            FileCtrlPage::SetDirectory.into(),
+            "Set &directory",
             wx::ID_ANY,
+        );
+        sizer_left.add_sizer_int(Some(&sizer), 0, wx::ALL | wx::EXPAND, 5, wx::Object::none());
+        let (sizer, path) = self.create_sizer_with_text_and_button(
+            FileCtrlPage::SetPath.into(),
+            "Set &path",
+            wx::ID_ANY,
+        );
+        sizer_left.add_sizer_int(Some(&sizer), 0, wx::ALL | wx::EXPAND, 5, wx::Object::none());
+        let (sizer, filename) = self.create_sizer_with_text_and_button(
+            FileCtrlPage::SetFilename.into(),
+            "Set &filename",
+            wx::ID_ANY,
+        );
+        sizer_left.add_sizer_int(Some(&sizer), 0, wx::ALL | wx::EXPAND, 5, wx::Object::none());
+
+        let sizer_use_flags =
+            wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&self.base), "&Flags");
+
+        let chk_multiple =
+            self.create_check_box_and_add_to_sizer(&sizer_use_flags, "wxFC_MULTIPLE", wx::ID_ANY);
+        let chk_no_show_hidden = self.create_check_box_and_add_to_sizer(
+            &sizer_use_flags,
+            "wxFC_NOSHOWHIDDEN",
+            wx::ID_ANY,
+        );
+        sizer_left.add_sizer_sizerflags(
+            Some(&sizer_use_flags),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
+        );
+
+        let sizer_filters =
+            wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&self.base), "&Filters");
+        let fltr = [
+            self.create_check_box_and_add_to_sizer(
+                &sizer_filters,
+                &format!(
+                    "all files ({})|{}",
+                    FILE_SELECTOR_DEFAULT_WILDCARD_STR, FILE_SELECTOR_DEFAULT_WILDCARD_STR
+                ),
+                wx::ID_ANY,
+            ),
+            self.create_check_box_and_add_to_sizer(
+                &sizer_filters,
+                "C++ files (*.cpp; *.h)|*.cpp;*.h",
+                wx::ID_ANY,
+            ),
+            self.create_check_box_and_add_to_sizer(
+                &sizer_filters,
+                "PNG images (*.png)|*.png",
+                wx::ID_ANY,
+            ),
+        ];
+        sizer_left.add_sizer_sizerflags(
+            Some(&sizer_filters),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
         );
 
         let btn = wx::Button::builder(Some(&self.base))
-            .id(EditableListboxPage::Reset.into())
+            .id(FileCtrlPage::Reset.into())
             .label("&Reset")
             .build();
         sizer_left.add_window_int(
@@ -97,39 +157,36 @@ impl WidgetsPage for EditableListboxWidgetsPage {
         );
 
         // right pane
-        let sizer_right = wx::BoxSizer::new(wx::VERTICAL);
-        let lbox = wx::EditableListBox::builder(Some(&self.base))
-            .id(EditableListboxPage::Listbox.into())
-            .style(0)
+        let file_ctrl = wx::EditableListBox::builder(Some(&self.base))
+            .id(FileCtrlPage::Ctrl.into())
+            .style(wx::FC_OPEN)
             .build();
-        sizer_right.add_window_int(Some(&lbox), 1, wx::GROW | wx::ALL, 5, wx::Object::none());
-        sizer_right.set_min_size_int(150, 0);
-        *self.lbox.borrow_mut() = Some(lbox);
 
         // the 3 panes panes compose the window
         sizer_top.add_sizer_int(
             Some(&sizer_left),
             0,
-            wx::GROW | (wx::ALL & !wx::LEFT),
+            (wx::ALL & !wx::LEFT),
             10,
             wx::Object::none(),
         );
-        sizer_top.add_sizer_int(
-            Some(&sizer_right),
+        sizer_top.add_window_int(
+            Some(&file_ctrl),
             1,
             wx::GROW | (wx::ALL & !wx::RIGHT),
             10,
             wx::Object::none(),
         );
+        *self.file_ctrl.borrow_mut() = Some(file_ctrl);
 
         // final initializations
         let config_ui = ConfigUI {
-            chk_allow_new,
-            chk_allow_edit,
-            chk_allow_delete,
-            chk_allow_no_reorder,
+            // chk_allow_new,
+            // chk_allow_edit,
+            // chk_allow_delete,
+            // chk_allow_no_reorder,
 
-            sizer_lbox: sizer_right, // save it to modify it later
+            // sizer_file_ctrl: sizer_right, // save it to modify it later
         };
         self.reset(&config_ui);
         *self.config_ui.borrow_mut() = Some(config_ui);
@@ -141,86 +198,86 @@ impl WidgetsPage for EditableListboxWidgetsPage {
         println!("event={}", event.get_id());
         if let (Some(config_ui), Some(m)) = (
             self.config_ui.borrow().as_ref(),
-            EditableListboxPage::from(event.get_id()),
+            FileCtrlPage::from(event.get_id()),
         ) {
-            match m {
-                EditableListboxPage::Reset => self.on_button_reset(&config_ui),
-                _ => (),
-            };
+            // match m {
+            //     FileCtrlPage::Reset => self.on_button_reset(&config_ui),
+            //     _ => (),
+            // };
         }
     }
     fn handle_checkbox(&self, _: &wx::CommandEvent) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            self.on_check_box(config_ui);
+            // self.on_check_box(config_ui);
         }
     }
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
         // Do nothing.
     }
 }
-impl EditableListboxWidgetsPage {
+impl FileCtrlWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {
         let panel = wx::Panel::builder(Some(book))
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
-        EditableListboxWidgetsPage {
+        FileCtrlWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
-            lbox: Rc::new(RefCell::new(None)),
+            file_ctrl: Rc::new(RefCell::new(None)),
         }
     }
 
     fn reset(&self, config_ui: &ConfigUI) {
-        config_ui.chk_allow_new.set_value(false);
-        config_ui.chk_allow_edit.set_value(false);
-        config_ui.chk_allow_delete.set_value(false);
-        config_ui.chk_allow_no_reorder.set_value(false);
+        // config_ui.chk_allow_new.set_value(false);
+        // config_ui.chk_allow_edit.set_value(false);
+        // config_ui.chk_allow_delete.set_value(false);
+        // config_ui.chk_allow_no_reorder.set_value(false);
     }
 
-    fn create_lbox(&self, config_ui: &ConfigUI) {
+    fn create_file_ctrl(&self, config_ui: &ConfigUI) {
         let mut flags = wx::BORDER_DEFAULT;
 
-        if config_ui.chk_allow_new.get_value() {
-            flags |= wx::EL_ALLOW_NEW as c_long;
-        }
-        if config_ui.chk_allow_edit.get_value() {
-            flags |= wx::EL_ALLOW_EDIT as c_long;
-        }
-        if config_ui.chk_allow_delete.get_value() {
-            flags |= wx::EL_ALLOW_DELETE as c_long;
-        }
-        if config_ui.chk_allow_no_reorder.get_value() {
-            flags |= wx::EL_NO_REORDER as c_long;
-        }
+        // if config_ui.chk_allow_new.get_value() {
+        //     flags |= wx::EL_ALLOW_NEW as c_long;
+        // }
+        // if config_ui.chk_allow_edit.get_value() {
+        //     flags |= wx::EL_ALLOW_EDIT as c_long;
+        // }
+        // if config_ui.chk_allow_delete.get_value() {
+        //     flags |= wx::EL_ALLOW_DELETE as c_long;
+        // }
+        // if config_ui.chk_allow_no_reorder.get_value() {
+        //     flags |= wx::EL_NO_REORDER as c_long;
+        // }
 
-        let items = wx::ArrayString::new();
-        if let Some(lbox) = self.lbox.borrow().as_ref() {
-            // TODO: provide safe solution
-            unsafe {
-                lbox.get_strings(items.as_ptr());
-            }
-            config_ui.sizer_lbox.detach_window(Some(lbox));
-            lbox.destroy();
-        }
+        // let items = wx::ArrayString::new();
+        // if let Some(file_ctrl) = self.file_ctrl.borrow().as_ref() {
+        //     // TODO: provide safe solution
+        //     unsafe {
+        //         file_ctrl.get_strings(items.as_ptr());
+        //     }
+        //     config_ui.sizer_file_ctrl.detach_window(Some(file_ctrl));
+        //     file_ctrl.destroy();
+        // }
 
-        let lbox = wx::EditableListBox::builder(Some(&self.base))
-            .id(EditableListboxPage::Listbox.into())
-            .label("Match these wildcards:")
-            .style(flags)
-            .build();
-        lbox.set_strings(&items);
+        // let file_ctrl = wx::EditableListBox::builder(Some(&self.base))
+        //     .id(FileCtrlPage::Listbox.into())
+        //     .label("Match these wildcards:")
+        //     .style(flags)
+        //     .build();
+        // file_ctrl.set_strings(&items);
 
-        config_ui.sizer_lbox.add_window_int(
-            Some(&lbox),
-            1,
-            wx::GROW | wx::ALL,
-            5,
-            wx::Object::none(),
-        );
-        *self.lbox.borrow_mut() = Some(lbox);
+        // config_ui.sizer_file_ctrl.add_window_int(
+        //     Some(&file_ctrl),
+        //     1,
+        //     wx::GROW | wx::ALL,
+        //     5,
+        //     wx::Object::none(),
+        // );
+        // *self.file_ctrl.borrow_mut() = Some(file_ctrl);
 
-        // relayout the sizer
-        config_ui.sizer_lbox.layout();
+        // // relayout the sizer
+        // config_ui.sizer_file_ctrl.layout();
     }
 
     // ----------------------------------------------------------------------------
@@ -230,10 +287,10 @@ impl EditableListboxWidgetsPage {
     fn on_button_reset(&self, config_ui: &ConfigUI) {
         self.reset(config_ui);
 
-        self.create_lbox(config_ui);
+        self.create_file_ctrl(config_ui);
     }
 
     fn on_check_box(&self, config_ui: &ConfigUI) {
-        self.create_lbox(config_ui);
+        self.create_file_ctrl(config_ui);
     }
 }
