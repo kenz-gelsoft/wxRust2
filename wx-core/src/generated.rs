@@ -863,6 +863,50 @@ impl<const OWNED: bool> FileCtrlIsOwned<OWNED> {
     }
 }
 
+// wxFont
+wx_class! { Font =
+    FontIsOwned<true>(wxFont) impl
+        FontMethods,
+        GDIObjectMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> FontIsOwned<OWNED> {
+    pub fn new() -> FontIsOwned<OWNED> {
+        unsafe { FontIsOwned(ffi::wxFont_new()) }
+    }
+    pub fn new_with_font<F: FontMethods>(font: &F) -> FontIsOwned<OWNED> {
+        unsafe {
+            let font = font.as_ptr();
+            FontIsOwned(ffi::wxFont_new1(font))
+        }
+    }
+    pub fn new_with_fontinfo(font_info: *const c_void) -> FontIsOwned<OWNED> {
+        unsafe { FontIsOwned(ffi::wxFont_new2(font_info)) }
+    }
+    // NOT_SUPPORTED: fn wxFont3()
+    // NOT_SUPPORTED: fn wxFont4()
+    pub fn new_with_str(native_info_string: &str) -> FontIsOwned<OWNED> {
+        unsafe {
+            let native_info_string = WxString::from(native_info_string);
+            let native_info_string = native_info_string.as_ptr();
+            FontIsOwned(ffi::wxFont_new5(native_info_string))
+        }
+    }
+    pub fn new_with_nativefontinfo(native_info: *const c_void) -> FontIsOwned<OWNED> {
+        unsafe { FontIsOwned(ffi::wxFont_new6(native_info)) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for FontIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
 // wxFontPickerCtrl
 wx_class! { FontPickerCtrl =
     FontPickerCtrlIsOwned<true>(wxFontPickerCtrl) impl
@@ -877,10 +921,16 @@ impl<const OWNED: bool> FontPickerCtrlIsOwned<OWNED> {
     pub fn new_2step() -> FontPickerCtrlIsOwned<OWNED> {
         unsafe { FontPickerCtrlIsOwned(ffi::wxFontPickerCtrl_new()) }
     }
-    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+    pub fn new<
+        W: WindowMethods,
+        F: FontMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        V: ValidatorMethods,
+    >(
         parent: Option<&W>,
         id: c_int,
-        font: *const c_void,
+        font: &F,
         pos: &P,
         size: &S,
         style: c_long,
@@ -892,6 +942,7 @@ impl<const OWNED: bool> FontPickerCtrlIsOwned<OWNED> {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
+            let font = font.as_ptr();
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let validator = validator.as_ptr();
