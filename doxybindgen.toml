@@ -56,6 +56,7 @@ wxml_files = [
     'wxml/classwx_top_level_window.xml',
     'wxml/classwx_validator.xml',
     'wxml/classwx_window.xml',
+    'wxml/classwx_window_update_locker.xml',
     'wxml/classwx_wrap_sizer.xml',
 ]
 
@@ -593,3 +594,5 @@ wx31 = [
     'UseBackgroundColour',
     'UseForegroundColour',
 ]
+[types.wxWindowUpdateLocker]
+library = 'core'

@@ -148,6 +148,7 @@ def generated_h(classes, libname):
 #include <wx/dirctrl.h>
 #include <wx/filepicker.h>
 #include <wx/wrapsizer.h>
+#include <wx/wupdlock.h>
 
 // wxBitmapBundle compatibility hack(for a while)
 #if !wxCHECK_VERSION(3, 1, 6)

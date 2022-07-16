@@ -8,6 +8,7 @@
 #include <wx/dirctrl.h>
 #include <wx/filepicker.h>
 #include <wx/wrapsizer.h>
+#include <wx/wupdlock.h>
 
 // wxBitmapBundle compatibility hack(for a while)
 #if !wxCHECK_VERSION(3, 1, 6)
@@ -1531,6 +1532,12 @@ void wxWindow_UnreserveControlId(wxWindowID id, int count);
 wxWindow *wxWindow_new();
 wxWindow *wxWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxWindow_Create(wxWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+
+// CLASS: wxWindowUpdateLocker
+void wxWindowUpdateLocker_delete(wxWindowUpdateLocker *self);
+wxWindowUpdateLocker *wxWindowUpdateLocker_new();
+wxWindowUpdateLocker *wxWindowUpdateLocker_new1(wxWindow * win);
+void wxWindowUpdateLocker_Lock(wxWindowUpdateLocker * self, wxWindow * win);
 
 // CLASS: wxWrapSizer
 wxWrapSizer *wxWrapSizer_new(int orient, int flags);
