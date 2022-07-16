@@ -830,6 +830,56 @@ void wxEditableListBox_GetStrings(const wxEditableListBox * self, wxArrayString 
     return self->GetStrings(*strings);
 }
 
+// CLASS: wxFileCtrl
+wxFileCtrl *wxFileCtrl_new() {
+    return new wxFileCtrl();
+}
+wxFileCtrl *wxFileCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * default_directory, const wxString * default_filename, const wxString * wild_card, long style, const wxPoint * pos, const wxSize * size, const wxString * name) {
+    return new wxFileCtrl(parent, id, *default_directory, *default_filename, *wild_card, style, *pos, *size, *name);
+}
+bool wxFileCtrl_Create(wxFileCtrl * self, wxWindow * parent, wxWindowID id, const wxString * default_directory, const wxString * default_filename, const wxString * wild_card, long style, const wxPoint * pos, const wxSize * size, const wxString * name) {
+    return self->Create(parent, id, *default_directory, *default_filename, *wild_card, style, *pos, *size, *name);
+}
+wxString *wxFileCtrl_GetDirectory(const wxFileCtrl * self) {
+    return new wxString(self->GetDirectory());
+}
+wxString *wxFileCtrl_GetFilename(const wxFileCtrl * self) {
+    return new wxString(self->GetFilename());
+}
+void wxFileCtrl_GetFilenames(const wxFileCtrl * self, wxArrayString * filenames) {
+    return self->GetFilenames(*filenames);
+}
+int wxFileCtrl_GetFilterIndex(const wxFileCtrl * self) {
+    return self->GetFilterIndex();
+}
+wxString *wxFileCtrl_GetPath(const wxFileCtrl * self) {
+    return new wxString(self->GetPath());
+}
+void wxFileCtrl_GetPaths(const wxFileCtrl * self, wxArrayString * paths) {
+    return self->GetPaths(*paths);
+}
+wxString *wxFileCtrl_GetWildcard(const wxFileCtrl * self) {
+    return new wxString(self->GetWildcard());
+}
+bool wxFileCtrl_SetDirectory(wxFileCtrl * self, const wxString * directory) {
+    return self->SetDirectory(*directory);
+}
+bool wxFileCtrl_SetFilename(wxFileCtrl * self, const wxString * filename) {
+    return self->SetFilename(*filename);
+}
+bool wxFileCtrl_SetPath(wxFileCtrl * self, const wxString * path) {
+    return self->SetPath(*path);
+}
+void wxFileCtrl_SetFilterIndex(wxFileCtrl * self, int filter_index) {
+    return self->SetFilterIndex(filter_index);
+}
+void wxFileCtrl_SetWildcard(wxFileCtrl * self, const wxString * wild_card) {
+    return self->SetWildcard(*wild_card);
+}
+void wxFileCtrl_ShowHidden(wxFileCtrl * self, bool show) {
+    return self->ShowHidden(show);
+}
+
 // CLASS: wxFrame
 wxFrame *wxFrame_new() {
     return new wxFrame();

@@ -642,6 +642,45 @@ extern "C" {
     pub fn wxEditableListBox_SetStrings(self_: *mut c_void, strings: *const c_void);
     pub fn wxEditableListBox_GetStrings(self_: *const c_void, strings: *mut c_void);
 
+    // wxFileCtrl
+    pub fn wxFileCtrl_new() -> *mut c_void;
+    pub fn wxFileCtrl_new1(
+        parent: *mut c_void,
+        id: c_int,
+        default_directory: *const c_void,
+        default_filename: *const c_void,
+        wild_card: *const c_void,
+        style: c_long,
+        pos: *const c_void,
+        size: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxFileCtrl_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        default_directory: *const c_void,
+        default_filename: *const c_void,
+        wild_card: *const c_void,
+        style: c_long,
+        pos: *const c_void,
+        size: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxFileCtrl_GetDirectory(self_: *const c_void) -> *mut c_void;
+    pub fn wxFileCtrl_GetFilename(self_: *const c_void) -> *mut c_void;
+    pub fn wxFileCtrl_GetFilenames(self_: *const c_void, filenames: *mut c_void);
+    pub fn wxFileCtrl_GetFilterIndex(self_: *const c_void) -> c_int;
+    pub fn wxFileCtrl_GetPath(self_: *const c_void) -> *mut c_void;
+    pub fn wxFileCtrl_GetPaths(self_: *const c_void, paths: *mut c_void);
+    pub fn wxFileCtrl_GetWildcard(self_: *const c_void) -> *mut c_void;
+    pub fn wxFileCtrl_SetDirectory(self_: *mut c_void, directory: *const c_void) -> bool;
+    pub fn wxFileCtrl_SetFilename(self_: *mut c_void, filename: *const c_void) -> bool;
+    pub fn wxFileCtrl_SetPath(self_: *mut c_void, path: *const c_void) -> bool;
+    pub fn wxFileCtrl_SetFilterIndex(self_: *mut c_void, filter_index: c_int);
+    pub fn wxFileCtrl_SetWildcard(self_: *mut c_void, wild_card: *const c_void);
+    pub fn wxFileCtrl_ShowHidden(self_: *mut c_void, show: bool);
+
     // wxFrame
     pub fn wxFrame_new() -> *mut c_void;
     pub fn wxFrame_new1(

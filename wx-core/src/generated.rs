@@ -806,6 +806,63 @@ impl<const OWNED: bool> EditableListBoxIsOwned<OWNED> {
     }
 }
 
+// wxFileCtrl
+wx_class! { FileCtrl =
+    FileCtrlIsOwned<true>(wxFileCtrl) impl
+        FileCtrlMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> FileCtrlIsOwned<OWNED> {
+    pub fn new_2step() -> FileCtrlIsOwned<OWNED> {
+        unsafe { FileCtrlIsOwned(ffi::wxFileCtrl_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        default_directory: &str,
+        default_filename: &str,
+        wild_card: &str,
+        style: c_long,
+        pos: &P,
+        size: &S,
+        name: &str,
+    ) -> FileCtrlIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let default_directory = WxString::from(default_directory);
+            let default_directory = default_directory.as_ptr();
+            let default_filename = WxString::from(default_filename);
+            let default_filename = default_filename.as_ptr();
+            let wild_card = WxString::from(wild_card);
+            let wild_card = wild_card.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            FileCtrlIsOwned(ffi::wxFileCtrl_new1(
+                parent,
+                id,
+                default_directory,
+                default_filename,
+                wild_card,
+                style,
+                pos,
+                size,
+                name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
 // wxFrame
 wx_class! { Frame =
     FrameIsOwned<true>(wxFrame) impl

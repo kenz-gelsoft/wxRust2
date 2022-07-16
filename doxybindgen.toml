@@ -22,6 +22,7 @@ wxml_files = [
     'wxml/classwx_editable_list_box.xml',
     'wxml/classwx_event.xml',
     'wxml/classwx_evt_handler.xml',
+    'wxml/classwx_file_ctrl.xml',
     'wxml/classwx_file_name.xml',
     'wxml/classwx_frame.xml',
     'wxml/classwx_g_d_i_object.xml',
