@@ -4,12 +4,6 @@ use std::os::raw::{c_int, c_long};
 use std::rc::Rc;
 use wx::{methods::*, ArrayString};
 
-#[cfg(target_os = "windows")]
-const FILE_SELECTOR_DEFAULT_WILDCARD_STR: &str = "*.*";
-
-#[cfg(not(target_os = "windows"))]
-const FILE_SELECTOR_DEFAULT_WILDCARD_STR: &str = "*";
-
 // control ids
 #[derive(Clone, Copy)]
 enum FileCtrlPage {
@@ -36,15 +30,46 @@ impl From<FileCtrlPage> for c_int {
     }
 }
 
+#[derive(Clone, Copy)]
+enum FileCtrlMode {
+    Open = 0,
+    Save,
+}
+impl FileCtrlMode {
+    fn from(v: c_int) -> Option<Self> {
+        use FileCtrlMode::*;
+        for e in [Open, Save] {
+            if v == e.into() {
+                return Some(e);
+            }
+        }
+        return None;
+    }
+}
+impl From<FileCtrlMode> for c_int {
+    fn from(m: FileCtrlMode) -> Self {
+        m as c_int
+    }
+}
+
 #[derive(Clone)]
 pub struct ConfigUI {
-    // // the checkboxes
-    // chk_allow_new: wx::CheckBox,
-    // chk_allow_edit: wx::CheckBox,
-    // chk_allow_delete: wx::CheckBox,
-    // chk_allow_no_reorder: wx::CheckBox,
+    // the text entries for command parameters
+    dir: wx::TextCtrl,
+    path: wx::TextCtrl,
+    filename: wx::TextCtrl,
 
-    // sizer_file_ctrl: wx::BoxSizer,
+    // flags
+    chk_multiple: wx::CheckBox,
+    chk_no_show_hidden: wx::CheckBox,
+
+    radio_file_ctrl_mode: wx::RadioBox,
+
+    // filters
+    fltr: [wx::CheckBox; 3],
+
+    // sizer
+    sizer: wx::BoxSizer,
 }
 
 #[derive(Clone)]
@@ -52,7 +77,7 @@ pub struct FileCtrlWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
     // the control itself
-    file_ctrl: Rc<RefCell<Option<wx::EditableListBox>>>,
+    file_ctrl: Rc<RefCell<Option<wx::FileCtrl>>>,
 }
 impl WidgetsPage for FileCtrlWidgetsPage {
     fn base(&self) -> &wx::Panel {
@@ -124,7 +149,8 @@ impl WidgetsPage for FileCtrlWidgetsPage {
                 &sizer_filters,
                 &format!(
                     "all files ({})|{}",
-                    FILE_SELECTOR_DEFAULT_WILDCARD_STR, FILE_SELECTOR_DEFAULT_WILDCARD_STR
+                    wx::FILE_SELECTOR_DEFAULT_WILDCARD_STR,
+                    wx::FILE_SELECTOR_DEFAULT_WILDCARD_STR
                 ),
                 wx::ID_ANY,
             ),
@@ -157,7 +183,7 @@ impl WidgetsPage for FileCtrlWidgetsPage {
         );
 
         // right pane
-        let file_ctrl = wx::EditableListBox::builder(Some(&self.base))
+        let file_ctrl = wx::FileCtrl::builder(Some(&self.base))
             .id(FileCtrlPage::Ctrl.into())
             .style(wx::FC_OPEN)
             .build();
@@ -179,19 +205,21 @@ impl WidgetsPage for FileCtrlWidgetsPage {
         );
         *self.file_ctrl.borrow_mut() = Some(file_ctrl);
 
+        self.base.set_sizer(Some(&sizer_top), true);
+
         // final initializations
         let config_ui = ConfigUI {
-            // chk_allow_new,
-            // chk_allow_edit,
-            // chk_allow_delete,
-            // chk_allow_no_reorder,
-
-            // sizer_file_ctrl: sizer_right, // save it to modify it later
+            dir,
+            path,
+            filename,
+            chk_multiple,
+            chk_no_show_hidden,
+            radio_file_ctrl_mode,
+            fltr,
+            sizer: sizer_top,
         };
         self.reset(&config_ui);
         *self.config_ui.borrow_mut() = Some(config_ui);
-
-        self.base.set_sizer(Some(&sizer_top), true);
     }
 
     fn handle_button(&self, event: &wx::CommandEvent) {
@@ -200,10 +228,10 @@ impl WidgetsPage for FileCtrlWidgetsPage {
             self.config_ui.borrow().as_ref(),
             FileCtrlPage::from(event.get_id()),
         ) {
-            // match m {
-            //     FileCtrlPage::Reset => self.on_button_reset(&config_ui),
-            //     _ => (),
-            // };
+            match m {
+                FileCtrlPage::Reset => self.on_button_reset(&config_ui),
+                _ => (),
+            };
         }
     }
     fn handle_checkbox(&self, _: &wx::CommandEvent) {
@@ -228,10 +256,16 @@ impl FileCtrlWidgetsPage {
     }
 
     fn reset(&self, config_ui: &ConfigUI) {
-        // config_ui.chk_allow_new.set_value(false);
-        // config_ui.chk_allow_edit.set_value(false);
-        // config_ui.chk_allow_delete.set_value(false);
-        // config_ui.chk_allow_no_reorder.set_value(false);
+        if let Some(file_ctrl) = self.file_ctrl.borrow().as_ref() {
+            config_ui.dir.set_value(&file_ctrl.get_directory());
+        }
+        config_ui.radio_file_ctrl_mode.set_selection(
+            if (wx::FC_DEFAULT_STYLE & wx::FC_OPEN) != 0 {
+                FileCtrlMode::Open.into()
+            } else {
+                FileCtrlMode::Save.into()
+            },
+        );
     }
 
     fn create_file_ctrl(&self, config_ui: &ConfigUI) {
@@ -260,7 +294,7 @@ impl FileCtrlWidgetsPage {
         //     file_ctrl.destroy();
         // }
 
-        // let file_ctrl = wx::EditableListBox::builder(Some(&self.base))
+        // let file_ctrl = wx::FileCtrl::builder(Some(&self.base))
         //     .id(FileCtrlPage::Listbox.into())
         //     .label("Match these wildcards:")
         //     .style(flags)
