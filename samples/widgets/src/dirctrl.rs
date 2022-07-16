@@ -387,6 +387,17 @@ impl DirCtrlWidgetsPage {
             .dir("/")
             .build();
 
+        let mut filter = String::new();
+        for fltr in config_ui.fltr.iter() {
+            if fltr.is_checked() {
+                if !filter.is_empty() {
+                    filter.push_str("|");
+                }
+                filter.push_str(&fltr.get_label());
+            }
+        }
+        dir_ctrl.set_filter(&filter);
+
         // update sizer's child window
         if let Some(old_dir_ctrl) = self.dir_ctrl.borrow().as_ref() {
             config_ui
