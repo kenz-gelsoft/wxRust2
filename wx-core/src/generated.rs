@@ -856,6 +856,61 @@ impl<const OWNED: bool> Drop for GDIObjectIsOwned<OWNED> {
     }
 }
 
+// wxGenericDirCtrl
+wx_class! { GenericDirCtrl =
+    GenericDirCtrlIsOwned<true>(wxGenericDirCtrl) impl
+        GenericDirCtrlMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> GenericDirCtrlIsOwned<OWNED> {
+    pub fn new_2step() -> GenericDirCtrlIsOwned<OWNED> {
+        unsafe { GenericDirCtrlIsOwned(ffi::wxGenericDirCtrl_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        dir: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        filter: &str,
+        default_filter: c_int,
+        name: &str,
+    ) -> GenericDirCtrlIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dir = WxString::from(dir);
+            let dir = dir.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let filter = WxString::from(filter);
+            let filter = filter.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            GenericDirCtrlIsOwned(ffi::wxGenericDirCtrl_new1(
+                parent,
+                id,
+                dir,
+                pos,
+                size,
+                style,
+                filter,
+                default_filter,
+                name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
 // wxIcon
 wx_class! { Icon =
     IconIsOwned<true>(wxIcon) impl

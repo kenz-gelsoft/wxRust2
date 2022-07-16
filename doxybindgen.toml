@@ -24,6 +24,7 @@ wxml_files = [
     'wxml/classwx_file_name.xml',
     'wxml/classwx_frame.xml',
     'wxml/classwx_g_d_i_object.xml',
+    'wxml/classwx_generic_dir_ctrl.xml',
     'wxml/classwx_icon.xml',
     'wxml/classwx_item_container.xml',
     'wxml/classwx_item_container_immutable.xml',
@@ -43,6 +44,7 @@ wxml_files = [
     'wxml/classwx_size.xml',
     'wxml/classwx_sizer.xml',
     'wxml/classwx_sizer_flags.xml',
+    'wxml/classwx_standard_paths.xml',
     'wxml/classwx_static_bitmap.xml',
     'wxml/classwx_static_box.xml',
     'wxml/classwx_static_box_sizer.xml',
@@ -67,6 +69,9 @@ cxx = "#ifndef __WXMSW__"
 
 [conditions.mac]
 cxx = "#ifdef __WXOSX__"
+
+[conditions.gtk]
+cxx = "#ifdef __WXGTK__"
 
 [conditions.not_gtk]
 cxx = "#ifndef __WXGTK__"
@@ -470,6 +475,17 @@ wx31 = [
     'CentreHorizontal',
     'CentreVertical',
     'DisableConsistencyChecks',
+]
+[types.wxStandardPaths]
+windows = [
+    'DontIgnoreAppSubDir',
+    'IgnoreAppSubDir',
+    'IgnoreAppBuildSubDirs',
+    'MSWGetShellDir',
+]
+gtk = [
+    'GetInstallPrefix',
+    'SetInstallPrefix',
 ]
 [types.wxStaticBox]
 blocklist = [

@@ -214,7 +214,8 @@ class Method:
         return is_trackable
     
     def maybe_returns_self(self):
-        return self.returns.is_self_ref(self.cls.name)
+        return (self.returns.is_self_ref(self.cls.name) and
+                not self.is_static)
 
     def cxx_signature(self):
         items = []

@@ -145,6 +145,7 @@ def generated_h(classes, libname):
 #include <wx/bookctrl.h>
 #include <wx/clrpicker.h>
 #include <wx/datectrl.h>
+#include <wx/dirctrl.h>
 #include <wx/filepicker.h>
 #include <wx/wrapsizer.h>
 
@@ -156,6 +157,7 @@ typedef wxBitmap wxBitmapBundle;
     else:
         yield '''\
 #include <wx/filename.h>
+#include <wx/stdpaths.h>
 
 typedef wxDateTime::TimeZone TimeZone;
 typedef wxDateTime::Tm       Tm;

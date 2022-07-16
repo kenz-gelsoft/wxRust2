@@ -25,6 +25,9 @@ use combobox::*;
 mod datepicker;
 use datepicker::*;
 
+mod dirctrl;
+use dirctrl::*;
+
 mod dirpicker;
 use dirpicker::*;
 
@@ -131,6 +134,7 @@ impl WidgetsFrame {
         let clrpicker_page = Rc::new(ColourPickerWidgetsPage::new(&book));
         let combobox_page = Rc::new(ComboboxWidgetsPage::new(&book));
         let datepicker_page = Rc::new(DatePickerWidgetsPage::new(&book));
+        let dirctrl_page = Rc::new(DirCtrlWidgetsPage::new(&book));
         let dirpicker_page = Rc::new(DirPickerWidgetsPage::new(&book));
         let mut frame = WidgetsFrame {
             base,
@@ -143,6 +147,7 @@ impl WidgetsFrame {
                 clrpicker_page,
                 combobox_page,
                 datepicker_page,
+                dirctrl_page,
                 dirpicker_page,
             ],
         };
