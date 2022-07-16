@@ -30,7 +30,7 @@ impl From<FileCtrlPage> for c_int {
     }
 }
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, PartialEq)]
 enum FileCtrlMode {
     Open = 0,
     Save,
@@ -269,49 +269,61 @@ impl FileCtrlWidgetsPage {
     }
 
     fn create_file_ctrl(&self, config_ui: &ConfigUI) {
-        let mut flags = wx::BORDER_DEFAULT;
+        let no_updates = wx::WindowUpdateLocker::new_with_window(Some(&self.base));
 
-        // if config_ui.chk_allow_new.get_value() {
-        //     flags |= wx::EL_ALLOW_NEW as c_long;
-        // }
-        // if config_ui.chk_allow_edit.get_value() {
-        //     flags |= wx::EL_ALLOW_EDIT as c_long;
-        // }
-        // if config_ui.chk_allow_delete.get_value() {
-        //     flags |= wx::EL_ALLOW_DELETE as c_long;
-        // }
-        // if config_ui.chk_allow_no_reorder.get_value() {
-        //     flags |= wx::EL_NO_REORDER as c_long;
-        // }
+        let mut style = wx::BORDER_DEFAULT;
 
-        // let items = wx::ArrayString::new();
-        // if let Some(file_ctrl) = self.file_ctrl.borrow().as_ref() {
-        //     // TODO: provide safe solution
-        //     unsafe {
-        //         file_ctrl.get_strings(items.as_ptr());
-        //     }
-        //     config_ui.sizer_file_ctrl.detach_window(Some(file_ctrl));
-        //     file_ctrl.destroy();
-        // }
+        if FileCtrlMode::from(config_ui.radio_file_ctrl_mode.get_selection())
+            == Some(FileCtrlMode::Open)
+        {
+            style |= wx::FC_OPEN;
+            config_ui.chk_multiple.enable(true);
+            if config_ui.chk_multiple.is_checked() {
+                style |= wx::FC_MULTIPLE as c_long;
+            }
+        } else {
+            style |= wx::FC_SAVE as c_long;
+            // wxFC_SAVE is incompatible with wxFC_MULTIPLE
+            config_ui.chk_multiple.set_value(false);
+            config_ui.chk_multiple.enable(false);
+        }
 
-        // let file_ctrl = wx::FileCtrl::builder(Some(&self.base))
-        //     .id(FileCtrlPage::Listbox.into())
-        //     .label("Match these wildcards:")
-        //     .style(flags)
-        //     .build();
-        // file_ctrl.set_strings(&items);
+        if config_ui.chk_no_show_hidden.is_checked() {
+            style |= wx::FC_NOSHOWHIDDEN as c_long;
+        }
 
-        // config_ui.sizer_file_ctrl.add_window_int(
-        //     Some(&file_ctrl),
-        //     1,
-        //     wx::GROW | wx::ALL,
-        //     5,
-        //     wx::Object::none(),
-        // );
-        // *self.file_ctrl.borrow_mut() = Some(file_ctrl);
+        let file_ctrl = wx::FileCtrl::builder(Some(&self.base))
+            .id(FileCtrlPage::Ctrl.into())
+            .default_directory("")
+            .default_filename("")
+            .wild_card("")
+            .style(style)
+            .build();
 
-        // // relayout the sizer
-        // config_ui.sizer_file_ctrl.layout();
+        let mut wildcard = String::new();
+        for fltr in config_ui.fltr.iter() {
+            if fltr.is_checked() {
+                if !wildcard.is_empty() {
+                    wildcard.push_str("|");
+                }
+                wildcard.push_str(&fltr.get_label());
+            }
+        }
+        file_ctrl.set_wildcard(&wildcard);
+
+        // update sizer's child window
+        if let Some(old_file_ctrl) = self.file_ctrl.borrow().as_ref() {
+            config_ui
+                .sizer
+                .replace_window(Some(old_file_ctrl), Some(&file_ctrl), false);
+
+            old_file_ctrl.destroy();
+        }
+        // update our pointer
+        *self.file_ctrl.borrow_mut() = Some(file_ctrl);
+
+        // relayout the sizer
+        config_ui.sizer.layout();
     }
 
     // ----------------------------------------------------------------------------
