@@ -213,7 +213,9 @@ wxString *wxStandardPaths_GetConfigDir(const wxStandardPaths * self);
 wxString *wxStandardPaths_GetDataDir(const wxStandardPaths * self);
 wxString *wxStandardPaths_GetDocumentsDir(const wxStandardPaths * self);
 wxString *wxStandardPaths_GetExecutablePath(const wxStandardPaths * self);
+#ifdef __WXGTK__
 wxString *wxStandardPaths_GetInstallPrefix(const wxStandardPaths * self);
+#endif
 wxString *wxStandardPaths_GetLocalDataDir(const wxStandardPaths * self);
 wxString *wxStandardPaths_GetPluginsDir(const wxStandardPaths * self);
 wxString *wxStandardPaths_GetResourcesDir(const wxStandardPaths * self);
@@ -225,7 +227,9 @@ wxString *wxStandardPaths_GetUserLocalDataDir(const wxStandardPaths * self);
 void wxStandardPaths_IgnoreAppSubDir(wxStandardPaths * self, const wxString * subdir_pattern);
 void wxStandardPaths_IgnoreAppBuildSubDirs(wxStandardPaths * self);
 #endif
+#ifdef __WXGTK__
 void wxStandardPaths_SetInstallPrefix(wxStandardPaths * self, const wxString * prefix);
+#endif
 void wxStandardPaths_UseAppInfo(wxStandardPaths * self, int info);
 wxStandardPaths * wxStandardPaths_Get();
 #ifdef __WXMSW__

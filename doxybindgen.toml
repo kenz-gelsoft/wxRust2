@@ -71,6 +71,9 @@ cxx = "#ifndef __WXMSW__"
 [conditions.mac]
 cxx = "#ifdef __WXOSX__"
 
+[conditions.gtk]
+cxx = "#ifdef __WXGTK__"
+
 [conditions.not_gtk]
 cxx = "#ifndef __WXGTK__"
 
@@ -480,6 +483,10 @@ windows = [
     'IgnoreAppSubDir',
     'IgnoreAppBuildSubDirs',
     'MSWGetShellDir',
+]
+gtk = [
+    'GetInstallPrefix',
+    'SetInstallPrefix',
 ]
 [types.wxStaticBox]
 blocklist = [

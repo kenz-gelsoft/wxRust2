@@ -568,9 +568,11 @@ wxString *wxStandardPaths_GetDocumentsDir(const wxStandardPaths * self) {
 wxString *wxStandardPaths_GetExecutablePath(const wxStandardPaths * self) {
     return new wxString(self->GetExecutablePath());
 }
+#ifdef __WXGTK__
 wxString *wxStandardPaths_GetInstallPrefix(const wxStandardPaths * self) {
     return new wxString(self->GetInstallPrefix());
 }
+#endif
 wxString *wxStandardPaths_GetLocalDataDir(const wxStandardPaths * self) {
     return new wxString(self->GetLocalDataDir());
 }
@@ -600,9 +602,11 @@ void wxStandardPaths_IgnoreAppBuildSubDirs(wxStandardPaths * self) {
     return self->IgnoreAppBuildSubDirs();
 }
 #endif
+#ifdef __WXGTK__
 void wxStandardPaths_SetInstallPrefix(wxStandardPaths * self, const wxString * prefix) {
     return self->SetInstallPrefix(*prefix);
 }
+#endif
 void wxStandardPaths_UseAppInfo(wxStandardPaths * self, int info) {
     return self->UseAppInfo(info);
 }
