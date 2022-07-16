@@ -767,6 +767,76 @@ impl<'a, P: WindowMethods> ComboBoxBuilder<'a, P> {
     }
 }
 
+pub struct GenericDirCtrlBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    id: c_int,
+    dir: String,
+    pos: Option<Point>,
+    size: Option<Size>,
+    style: c_long,
+    filter: String,
+    default_filter: c_int,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, GenericDirCtrlBuilder<'a, P>> for GenericDirCtrl {
+    fn builder(parent: Option<&'a P>) -> GenericDirCtrlBuilder<'a, P> {
+        GenericDirCtrlBuilder {
+            parent: parent,
+            id: ID_ANY,
+            dir: "".to_string(),
+            pos: None,
+            size: None,
+            style: 0,
+            filter: "".to_string(),
+            default_filter: 0,
+        }
+    }
+}
+impl<'a, P: WindowMethods> GenericDirCtrlBuilder<'a, P> {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn dir(&mut self, dir: &str) -> &mut Self {
+        self.dir = dir.to_string();
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn filter(&mut self, filter: &str) -> &mut Self {
+        self.filter = filter.to_string();
+        self
+    }
+    pub fn default_filter(&mut self, default_filter: c_int) -> &mut Self {
+        self.default_filter = default_filter;
+        self
+    }
+    pub fn build(&mut self) -> GenericDirCtrl {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        GenericDirCtrl::new(
+            self.parent,
+            self.id,
+            &self.dir,
+            &pos,
+            &size,
+            self.style,
+            &self.filter,
+            self.default_filter,
+            "",
+        )
+    }
+}
+
 pub struct ListBoxBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
