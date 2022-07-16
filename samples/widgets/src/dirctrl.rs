@@ -79,14 +79,21 @@ impl From<StdPath> for c_int {
 
 #[derive(Clone)]
 pub struct ConfigUI {
-    // other controls
-// --------------
-// chk_dir_text_ctrl: wx::CheckBox,
-// chk_dir_change_dir: wx::CheckBox,
-// chk_dir_must_exist: wx::CheckBox,
-// chk_small: wx::CheckBox,
-// // text_initial_dir: wx::TextCtrl,
-// sizer: wx::BoxSizer,
+    // the text entries for command parameters
+    path: wx::TextCtrl,
+
+    radio_std_path: wx::RadioBox,
+
+    // flags
+    chk_dir_only: wx::CheckBox,
+    chk_3d: wx::CheckBox,
+    chk_first: wx::CheckBox,
+    chk_filters: wx::CheckBox,
+    chk_labels: wx::CheckBox,
+    chk_multi: wx::CheckBox,
+
+    // filters
+    fltr: [wx::CheckBox; 3],
 }
 
 #[derive(Clone)]
@@ -165,7 +172,7 @@ impl WidgetsPage for DirCtrlWidgetsPage {
 
         let sizer_filters =
             wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&self.base), "&Filters");
-        let filters = [
+        let fltr = [
             self.create_check_box_and_add_to_sizer(
                 &sizer_filters,
                 &format!(
@@ -260,12 +267,15 @@ impl WidgetsPage for DirCtrlWidgetsPage {
 
         // final initializations
         let config_ui = ConfigUI {
-            // chk_dir_text_ctrl,
-            // chk_dir_change_dir,
-            // chk_dir_must_exist,
-            // chk_small,
-            // // text_initial_dir,
-            // sizer,
+            path,
+            radio_std_path,
+            chk_dir_only,
+            chk_3d,
+            chk_first,
+            chk_filters,
+            chk_labels,
+            chk_multi,
+            fltr,
         };
         self.reset(&config_ui);
         *self.config_ui.borrow_mut() = Some(config_ui);
@@ -324,18 +334,22 @@ impl DirCtrlWidgetsPage {
     }
 
     fn reset(&self, config_ui: &ConfigUI) {
-        // config_ui
-        //     .chk_dir_text_ctrl
-        //     .set_value((wx::DIRP_DEFAULT_STYLE & wx::DIRP_USE_TEXTCTRL) != 0);
-        // config_ui
-        //     .chk_dir_must_exist
-        //     .set_value((wx::DIRP_DEFAULT_STYLE & wx::DIRP_DIR_MUST_EXIST) != 0);
-        // config_ui
-        //     .chk_dir_change_dir
-        //     .set_value((wx::DIRP_DEFAULT_STYLE & wx::DIRP_CHANGE_DIR) != 0);
-        // config_ui
-        //     .chk_small
-        //     .set_value((wx::FLP_DEFAULT_STYLE & wx::DIRP_SMALL) != 0);
+        config_ui.path.clear();
+
+        config_ui.chk_dir_only.set_value(false);
+        config_ui.chk_3d.set_value(false);
+        config_ui.chk_first.set_value(false);
+        config_ui.chk_filters.set_value(false);
+        config_ui.chk_labels.set_value(false);
+        config_ui.chk_multi.set_value(false);
+
+        config_ui.radio_std_path.set_selection(0);
+
+        for fltr in config_ui.fltr.iter() {
+            fltr.set_value(false);
+        }
+
+        self.create_dir_ctrl(config_ui);
     }
 
     fn create_dir_ctrl(&self, config_ui: &ConfigUI) {
