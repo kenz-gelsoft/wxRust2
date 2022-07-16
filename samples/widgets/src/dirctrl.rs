@@ -292,11 +292,11 @@ impl WidgetsPage for DirCtrlWidgetsPage {
             self.config_ui.borrow().as_ref(),
             DirCtrlPage::from(event.get_id()),
         ) {
-            // match m {
-            //     DirCtrlPage::Reset => self.on_button_reset(config_ui),
-            //     DirCtrlPage::SetDir => self.on_button_set_dir(config_ui),
-            //     _ => (),
-            // };
+            match m {
+                DirCtrlPage::Reset => self.on_button_reset(&config_ui),
+                DirCtrlPage::SetPath => self.on_button_set_path(&config_ui),
+                _ => (),
+            };
         }
     }
     fn handle_checkbox(&self, _: &wx::CommandEvent) {
@@ -416,9 +416,13 @@ impl DirCtrlWidgetsPage {
         self.base.thaw();
     }
 
-    fn on_button_set_dir(&self, config_ui: &ConfigUI) {
+    // ----------------------------------------------------------------------------
+    // event handlers
+    // ----------------------------------------------------------------------------
+
+    fn on_button_set_path(&self, config_ui: &ConfigUI) {
         if let Some(dir_ctrl) = self.dir_ctrl.borrow().as_ref() {
-            // dir_ctrl.set_initial_directory(&config_ui.text_initial_dir.get_value());
+            dir_ctrl.set_path(&config_ui.path.get_value());
         }
     }
 
