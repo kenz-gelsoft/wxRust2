@@ -1336,6 +1336,25 @@ impl From<Bitmap> for BitmapBundle {
     }
 }
 
+// FIXME: wxWindowUpdateLocker shim for wx3.0.x
+// TODO: use generated code once dropped wx3.0.x support
+pub struct WindowUpdateLocker<'a, T: WindowMethods>(Option<&'a T>);
+impl<'a, T: WindowMethods> WindowUpdateLocker<'a, T> {
+    pub fn new_with_window(window: Option<&'a T>) -> Self {
+        if let Some(window) = window {
+            window.freeze();
+        }
+        WindowUpdateLocker(window)
+    }
+}
+impl<'a, T: WindowMethods> Drop for WindowUpdateLocker<'a, T> {
+    fn drop(&mut self) {
+        if let Some(window) = self.0 {
+            window.thaw();
+        }
+    }
+}
+
 pub fn message_box<T: WindowMethods>(
     message: &str,
     caption: &str,
