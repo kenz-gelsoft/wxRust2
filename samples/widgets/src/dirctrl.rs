@@ -354,10 +354,10 @@ impl DirCtrlWidgetsPage {
             fltr.set_value(false);
         }
 
-        self.create_dir_ctrl(config_ui);
+        self.create_dir_ctrl(config_ui, true);
     }
 
-    fn create_dir_ctrl(&self, config_ui: &ConfigUI) {
+    fn create_dir_ctrl(&self, config_ui: &ConfigUI, default_path: bool) {
         // TODO: wxWindowUpdateLocker
         self.base.freeze();
 
@@ -381,10 +381,15 @@ impl DirCtrlWidgetsPage {
             style |= wx::DIRCTRL_MULTIPLE as c_long;
         }
 
+        let mut path = "/".to_owned(); // wxDirDialogDefaultFolderStr
+        if !default_path {
+            if let Some(old_dir_ctrl) = self.dir_ctrl.borrow().as_ref() {
+                path = old_dir_ctrl.get_path();
+            }
+        }
         let dir_ctrl = wx::GenericDirCtrl::builder(Some(&self.base))
             .id(DirCtrlPage::Ctrl.into())
-            // wxDirDialogDefaultFolderStr
-            .dir("/")
+            .dir(&path)
             .build();
 
         let mut filter = String::new();
@@ -428,7 +433,8 @@ impl DirCtrlWidgetsPage {
 
     fn on_button_reset(&self, config_ui: &ConfigUI) {
         self.reset(config_ui);
-        self.recreate_widget();
+
+        self.create_dir_ctrl(config_ui, false);
     }
 
     fn on_check_box(&self) {
