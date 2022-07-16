@@ -4,12 +4,6 @@ use std::os::raw::{c_int, c_long};
 use std::rc::Rc;
 use wx::methods::*;
 
-#[cfg(target_os = "windows")]
-const FILE_SELECTOR_DEFAULT_WILDCARD_STR: &str = "*.*";
-
-#[cfg(not(target_os = "windows"))]
-const FILE_SELECTOR_DEFAULT_WILDCARD_STR: &str = "*";
-
 // control ids
 #[derive(Clone, Copy)]
 enum DirCtrlPage {
@@ -180,7 +174,8 @@ impl WidgetsPage for DirCtrlWidgetsPage {
                 &sizer_filters,
                 &format!(
                     "all files ({})|{}",
-                    FILE_SELECTOR_DEFAULT_WILDCARD_STR, FILE_SELECTOR_DEFAULT_WILDCARD_STR
+                    wx::FILE_SELECTOR_DEFAULT_WILDCARD_STR,
+                    wx::FILE_SELECTOR_DEFAULT_WILDCARD_STR
                 ),
                 wx::ID_ANY,
             ),
@@ -293,8 +288,8 @@ impl WidgetsPage for DirCtrlWidgetsPage {
             DirCtrlPage::from(event.get_id()),
         ) {
             match m {
-                DirCtrlPage::Reset => self.on_button_reset(&config_ui),
-                DirCtrlPage::SetPath => self.on_button_set_path(&config_ui),
+                DirCtrlPage::Reset => self.on_button_reset(config_ui),
+                DirCtrlPage::SetPath => self.on_button_set_path(config_ui),
                 _ => (),
             };
         }

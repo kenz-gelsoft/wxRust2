@@ -1444,6 +1444,106 @@ pub trait EditableListBoxMethods: PanelMethods {
     }
 }
 
+// wxFileCtrl
+pub trait FileCtrlMethods: ControlMethods {
+    fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        default_directory: &str,
+        default_filename: &str,
+        wild_card: &str,
+        style: c_long,
+        pos: &P,
+        size: &S,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let default_directory = WxString::from(default_directory);
+            let default_directory = default_directory.as_ptr();
+            let default_filename = WxString::from(default_filename);
+            let default_filename = default_filename.as_ptr();
+            let wild_card = WxString::from(wild_card);
+            let wild_card = wild_card.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxFileCtrl_Create(
+                self.as_ptr(),
+                parent,
+                id,
+                default_directory,
+                default_filename,
+                wild_card,
+                style,
+                pos,
+                size,
+                name,
+            )
+        }
+    }
+    fn get_directory(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFileCtrl_GetDirectory(self.as_ptr())).into() }
+    }
+    fn get_filename(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFileCtrl_GetFilename(self.as_ptr())).into() }
+    }
+    fn get_filenames(&self, filenames: *mut c_void) {
+        unsafe { ffi::wxFileCtrl_GetFilenames(self.as_ptr(), filenames) }
+    }
+    fn get_filter_index(&self) -> c_int {
+        unsafe { ffi::wxFileCtrl_GetFilterIndex(self.as_ptr()) }
+    }
+    fn get_path(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFileCtrl_GetPath(self.as_ptr())).into() }
+    }
+    fn get_paths(&self, paths: *mut c_void) {
+        unsafe { ffi::wxFileCtrl_GetPaths(self.as_ptr(), paths) }
+    }
+    fn get_wildcard(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFileCtrl_GetWildcard(self.as_ptr())).into() }
+    }
+    fn set_directory(&self, directory: &str) -> bool {
+        unsafe {
+            let directory = WxString::from(directory);
+            let directory = directory.as_ptr();
+            ffi::wxFileCtrl_SetDirectory(self.as_ptr(), directory)
+        }
+    }
+    fn set_filename(&self, filename: &str) -> bool {
+        unsafe {
+            let filename = WxString::from(filename);
+            let filename = filename.as_ptr();
+            ffi::wxFileCtrl_SetFilename(self.as_ptr(), filename)
+        }
+    }
+    fn set_path(&self, path: &str) -> bool {
+        unsafe {
+            let path = WxString::from(path);
+            let path = path.as_ptr();
+            ffi::wxFileCtrl_SetPath(self.as_ptr(), path)
+        }
+    }
+    fn set_filter_index(&self, filter_index: c_int) {
+        unsafe { ffi::wxFileCtrl_SetFilterIndex(self.as_ptr(), filter_index) }
+    }
+    fn set_wildcard(&self, wild_card: &str) {
+        unsafe {
+            let wild_card = WxString::from(wild_card);
+            let wild_card = wild_card.as_ptr();
+            ffi::wxFileCtrl_SetWildcard(self.as_ptr(), wild_card)
+        }
+    }
+    fn show_hidden(&self, show: bool) {
+        unsafe { ffi::wxFileCtrl_ShowHidden(self.as_ptr(), show) }
+    }
+}
+
 // wxFrame
 pub trait FrameMethods: TopLevelWindowMethods {
     // DTOR: fn ~wxFrame()

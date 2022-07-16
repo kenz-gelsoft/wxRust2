@@ -7,6 +7,7 @@
 #include <wx/datectrl.h>
 #include <wx/dirctrl.h>
 #include <wx/editlbox.h>
+#include <wx/filectrl.h>
 #include <wx/filepicker.h>
 #include <wx/wrapsizer.h>
 
@@ -356,6 +357,24 @@ wxEditableListBox *wxEditableListBox_new1(wxWindow * parent, wxWindowID id, cons
 bool wxEditableListBox_Create(wxEditableListBox * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 void wxEditableListBox_SetStrings(wxEditableListBox * self, const wxArrayString * strings);
 void wxEditableListBox_GetStrings(const wxEditableListBox * self, wxArrayString * strings);
+
+// CLASS: wxFileCtrl
+wxFileCtrl *wxFileCtrl_new();
+wxFileCtrl *wxFileCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * default_directory, const wxString * default_filename, const wxString * wild_card, long style, const wxPoint * pos, const wxSize * size, const wxString * name);
+bool wxFileCtrl_Create(wxFileCtrl * self, wxWindow * parent, wxWindowID id, const wxString * default_directory, const wxString * default_filename, const wxString * wild_card, long style, const wxPoint * pos, const wxSize * size, const wxString * name);
+wxString *wxFileCtrl_GetDirectory(const wxFileCtrl * self);
+wxString *wxFileCtrl_GetFilename(const wxFileCtrl * self);
+void wxFileCtrl_GetFilenames(const wxFileCtrl * self, wxArrayString * filenames);
+int wxFileCtrl_GetFilterIndex(const wxFileCtrl * self);
+wxString *wxFileCtrl_GetPath(const wxFileCtrl * self);
+void wxFileCtrl_GetPaths(const wxFileCtrl * self, wxArrayString * paths);
+wxString *wxFileCtrl_GetWildcard(const wxFileCtrl * self);
+bool wxFileCtrl_SetDirectory(wxFileCtrl * self, const wxString * directory);
+bool wxFileCtrl_SetFilename(wxFileCtrl * self, const wxString * filename);
+bool wxFileCtrl_SetPath(wxFileCtrl * self, const wxString * path);
+void wxFileCtrl_SetFilterIndex(wxFileCtrl * self, int filter_index);
+void wxFileCtrl_SetWildcard(wxFileCtrl * self, const wxString * wild_card);
+void wxFileCtrl_ShowHidden(wxFileCtrl * self, bool show);
 
 // CLASS: wxFrame
 wxFrame *wxFrame_new();

@@ -2,13 +2,7 @@ use crate::WidgetsPage;
 use std::cell::RefCell;
 use std::os::raw::{c_int, c_long};
 use std::rc::Rc;
-use wx::{methods::*, ArrayString};
-
-#[cfg(target_os = "windows")]
-const FILE_SELECTOR_DEFAULT_WILDCARD_STR: &str = "*.*";
-
-#[cfg(not(target_os = "windows"))]
-const FILE_SELECTOR_DEFAULT_WILDCARD_STR: &str = "*";
+use wx::methods::*;
 
 // control ids
 #[derive(Clone, Copy)]
@@ -144,7 +138,7 @@ impl WidgetsPage for EditableListboxWidgetsPage {
             EditableListboxPage::from(event.get_id()),
         ) {
             match m {
-                EditableListboxPage::Reset => self.on_button_reset(&config_ui),
+                EditableListboxPage::Reset => self.on_button_reset(config_ui),
                 _ => (),
             };
         }

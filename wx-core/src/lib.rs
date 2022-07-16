@@ -893,6 +893,76 @@ impl<'a, P: WindowMethods> GenericDirCtrlBuilder<'a, P> {
     }
 }
 
+pub struct FileCtrlBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    id: c_int,
+    default_directory: String,
+    default_filename: String,
+    wild_card: String,
+    style: c_long,
+    pos: Option<Point>,
+    size: Option<Size>,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, FileCtrlBuilder<'a, P>> for FileCtrl {
+    fn builder(parent: Option<&'a P>) -> FileCtrlBuilder<'a, P> {
+        FileCtrlBuilder {
+            parent: parent,
+            id: ID_ANY,
+            default_directory: "".to_owned(),
+            default_filename: "".to_owned(),
+            wild_card: FILE_SELECTOR_DEFAULT_WILDCARD_STR.to_owned(),
+            style: 0,
+            pos: None,
+            size: None,
+        }
+    }
+}
+impl<'a, P: WindowMethods> FileCtrlBuilder<'a, P> {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn default_directory(&mut self, default_directory: &str) -> &mut Self {
+        self.default_directory = default_directory.to_owned();
+        self
+    }
+    pub fn default_filename(&mut self, default_filename: &str) -> &mut Self {
+        self.default_filename = default_filename.to_owned();
+        self
+    }
+    pub fn wild_card(&mut self, wild_card: &str) -> &mut Self {
+        self.wild_card = wild_card.to_owned();
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn build(&mut self) -> FileCtrl {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        FileCtrl::new(
+            self.parent,
+            self.id,
+            &self.default_directory,
+            &self.default_filename,
+            &self.wild_card,
+            self.style,
+            &pos,
+            &size,
+            "",
+        )
+    }
+}
+
 pub struct ListBoxBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
