@@ -288,8 +288,8 @@ impl WidgetsPage for DirCtrlWidgetsPage {
             DirCtrlPage::from(event.get_id()),
         ) {
             match m {
-                DirCtrlPage::Reset => self.on_button_reset(&config_ui),
-                DirCtrlPage::SetPath => self.on_button_set_path(&config_ui),
+                DirCtrlPage::Reset => self.on_button_reset(config_ui),
+                DirCtrlPage::SetPath => self.on_button_set_path(config_ui),
                 _ => (),
             };
         }

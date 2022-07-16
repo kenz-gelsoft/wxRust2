@@ -2,7 +2,7 @@ use crate::WidgetsPage;
 use std::cell::RefCell;
 use std::os::raw::{c_int, c_long};
 use std::rc::Rc;
-use wx::{methods::*, ArrayString};
+use wx::methods::*;
 
 // control ids
 #[derive(Clone, Copy)]
@@ -229,18 +229,23 @@ impl WidgetsPage for FileCtrlWidgetsPage {
             FileCtrlPage::from(event.get_id()),
         ) {
             match m {
-                FileCtrlPage::Reset => self.on_button_reset(&config_ui),
+                FileCtrlPage::Reset => self.on_button_reset(config_ui),
+                FileCtrlPage::SetDirectory => self.on_button_set_directory(config_ui),
+                FileCtrlPage::SetPath => self.on_button_set_path(config_ui),
+                FileCtrlPage::SetFilename => self.on_button_set_filename(config_ui),
                 _ => (),
             };
         }
     }
     fn handle_checkbox(&self, _: &wx::CommandEvent) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            // self.on_check_box(config_ui);
+            self.on_check_box(config_ui);
         }
     }
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
-        // Do nothing.
+        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+            self.on_switch_mode(config_ui);
+        }
     }
 }
 impl FileCtrlWidgetsPage {
@@ -330,6 +335,24 @@ impl FileCtrlWidgetsPage {
     // event handlers
     // ----------------------------------------------------------------------------
 
+    fn on_button_set_directory(&self, config_ui: &ConfigUI) {
+        if let Some(file_ctrl) = self.file_ctrl.borrow().as_ref() {
+            file_ctrl.set_directory(&config_ui.dir.get_value());
+        }
+    }
+
+    fn on_button_set_path(&self, config_ui: &ConfigUI) {
+        if let Some(file_ctrl) = self.file_ctrl.borrow().as_ref() {
+            file_ctrl.set_path(&config_ui.path.get_value());
+        }
+    }
+
+    fn on_button_set_filename(&self, config_ui: &ConfigUI) {
+        if let Some(file_ctrl) = self.file_ctrl.borrow().as_ref() {
+            file_ctrl.set_filename(&config_ui.filename.get_value());
+        }
+    }
+
     fn on_button_reset(&self, config_ui: &ConfigUI) {
         self.reset(config_ui);
 
@@ -337,6 +360,10 @@ impl FileCtrlWidgetsPage {
     }
 
     fn on_check_box(&self, config_ui: &ConfigUI) {
+        self.create_file_ctrl(config_ui);
+    }
+
+    fn on_switch_mode(&self, config_ui: &ConfigUI) {
         self.create_file_ctrl(config_ui);
     }
 }

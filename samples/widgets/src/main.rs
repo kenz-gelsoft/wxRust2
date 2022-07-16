@@ -149,7 +149,6 @@ impl WidgetsFrame {
             panel,
             book,
             pages: vec![
-                filectrl_page,
                 button_page,
                 check_box_page,
                 choice_page,
@@ -159,6 +158,7 @@ impl WidgetsFrame {
                 dirctrl_page,
                 dirpicker_page,
                 editlbox_page,
+                filectrl_page,
             ],
         };
         frame.on_create();
