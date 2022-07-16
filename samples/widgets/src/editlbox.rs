@@ -2,7 +2,7 @@ use crate::WidgetsPage;
 use std::cell::RefCell;
 use std::os::raw::{c_int, c_long};
 use std::rc::Rc;
-use wx::methods::*;
+use wx::{methods::*, ArrayString};
 
 #[cfg(target_os = "windows")]
 const FILE_SELECTOR_DEFAULT_WILDCARD_STR: &str = "*.*";
@@ -36,24 +36,13 @@ impl From<EditableListboxPage> for c_int {
 
 #[derive(Clone)]
 pub struct ConfigUI {
-    // // the text entries for command parameters
-    // path: wx::TextCtrl,
+    // the checkboxes
+    chk_allow_new: wx::CheckBox,
+    chk_allow_edit: wx::CheckBox,
+    chk_allow_delete: wx::CheckBox,
+    chk_allow_no_reorder: wx::CheckBox,
 
-    // radio_std_path: wx::RadioBox,
-
-    // // flags
-    // chk_dir_only: wx::CheckBox,
-    // chk_3d: wx::CheckBox,
-    // chk_first: wx::CheckBox,
-    // chk_filters: wx::CheckBox,
-    // chk_labels: wx::CheckBox,
-    // chk_multi: wx::CheckBox,
-
-    // // filters
-    // fltr: [wx::CheckBox; 3],
-
-    // // sizer
-    // sizer: wx::BoxSizer,
+    sizer_lbox: wx::BoxSizer,
 }
 
 #[derive(Clone)]
@@ -135,16 +124,12 @@ impl WidgetsPage for EditableListboxWidgetsPage {
 
         // final initializations
         let config_ui = ConfigUI {
-            // path,
-            // radio_std_path,
-            // chk_dir_only,
-            // chk_3d,
-            // chk_first,
-            // chk_filters,
-            // chk_labels,
-            // chk_multi,
-            // fltr,
-            // sizer: sizer_top,
+            chk_allow_new,
+            chk_allow_edit,
+            chk_allow_delete,
+            chk_allow_no_reorder,
+
+            sizer_lbox: sizer_right, // save it to modify it later
         };
         self.reset(&config_ui);
         *self.config_ui.borrow_mut() = Some(config_ui);
@@ -158,11 +143,10 @@ impl WidgetsPage for EditableListboxWidgetsPage {
             self.config_ui.borrow().as_ref(),
             EditableListboxPage::from(event.get_id()),
         ) {
-            // match m {
-            //     EditableListboxPage::Reset => self.on_button_reset(&config_ui),
-            //     EditableListboxPage::SetPath => self.on_button_set_path(&config_ui),
-            //     _ => (),
-            // };
+            match m {
+                EditableListboxPage::Reset => self.on_button_reset(&config_ui),
+                _ => (),
+            };
         }
     }
     fn handle_checkbox(&self, _: &wx::CommandEvent) {
@@ -187,71 +171,61 @@ impl EditableListboxWidgetsPage {
     }
 
     fn reset(&self, config_ui: &ConfigUI) {
-        // config_ui.path.clear();
-
-        // config_ui.chk_dir_only.set_value(false);
-        // config_ui.chk_3d.set_value(false);
-        // config_ui.chk_first.set_value(false);
-        // config_ui.chk_filters.set_value(false);
-        // config_ui.chk_labels.set_value(false);
-        // config_ui.chk_multi.set_value(false);
-
-        // config_ui.radio_std_path.set_selection(0);
-
-        // self.create_lbox(config_ui, true);
+        config_ui.chk_allow_new.set_value(false);
+        config_ui.chk_allow_edit.set_value(false);
+        config_ui.chk_allow_delete.set_value(false);
+        config_ui.chk_allow_no_reorder.set_value(false);
     }
 
     fn create_lbox(&self, config_ui: &ConfigUI, default_path: bool) {
-        let no_updates = wx::WindowUpdateLocker::new_with_window(Some(&self.base));
+        let mut flags = wx::BORDER_DEFAULT;
 
-        let mut style = wx::BORDER_DEFAULT;
-        // if config_ui.chk_dir_only.is_checked() {
-        //     style |= wx::DIRCTRL_DIR_ONLY as c_long;
-        // }
-        // if config_ui.chk_3d.is_checked() {
-        //     style |= wx::DIRCTRL_3D_INTERNAL as c_long;
-        // }
-        // if config_ui.chk_first.is_checked() {
-        //     style |= wx::DIRCTRL_SELECT_FIRST as c_long;
-        // }
-        // if config_ui.chk_filters.is_checked() {
-        //     style |= wx::DIRCTRL_SHOW_FILTERS as c_long;
-        // }
-        // if config_ui.chk_labels.is_checked() {
-        //     style |= wx::DIRCTRL_EDIT_LABELS as c_long;
-        // }
-        // if config_ui.chk_multi.is_checked() {
-        //     style |= wx::DIRCTRL_MULTIPLE as c_long;
-        // }
+        if config_ui.chk_allow_new.get_value() {
+            flags |= wx::EL_ALLOW_NEW as c_long;
+        }
+        if config_ui.chk_allow_edit.get_value() {
+            flags |= wx::EL_ALLOW_EDIT as c_long;
+        }
+        if config_ui.chk_allow_delete.get_value() {
+            flags |= wx::EL_ALLOW_DELETE as c_long;
+        }
+        if config_ui.chk_allow_no_reorder.get_value() {
+            flags |= wx::EL_NO_REORDER as c_long;
+        }
+
+        let items = wx::ArrayString::new();
+        if let Some(lbox) = self.lbox.borrow().as_ref() {
+            // TODO: provide safe solution
+            unsafe {
+                lbox.get_strings(items.as_ptr());
+            }
+            config_ui.sizer_lbox.detach_window(Some(lbox));
+            lbox.destroy();
+        }
+
         let lbox = wx::EditableListBox::builder(Some(&self.base))
             .id(EditableListboxPage::Listbox.into())
-            .style(style)
+            .label("Match these wildcards:")
+            .style(flags)
             .build();
+        lbox.set_strings(&items);
 
-        // update sizer's child window
-        if let Some(old_lbox) = self.lbox.borrow().as_ref() {
-            // config_ui
-            //     .sizer
-            //     .replace_window(Some(old_lbox), Some(&lbox), false);
-
-            old_lbox.destroy();
-        }
-        // update our pointer
+        config_ui.sizer_lbox.add_window_int(
+            Some(&lbox),
+            1,
+            wx::GROW | wx::ALL,
+            5,
+            wx::Object::none(),
+        );
         *self.lbox.borrow_mut() = Some(lbox);
 
         // relayout the sizer
-        // config_ui.sizer.layout();
+        config_ui.sizer_lbox.layout();
     }
 
     // ----------------------------------------------------------------------------
     // event handlers
     // ----------------------------------------------------------------------------
-
-    fn on_button_set_path(&self, config_ui: &ConfigUI) {
-        if let Some(lbox) = self.lbox.borrow().as_ref() {
-            // lbox.set_path(&config_ui.path.get_value());
-        }
-    }
 
     fn on_button_reset(&self, config_ui: &ConfigUI) {
         self.reset(config_ui);
