@@ -318,26 +318,6 @@ impl DirCtrlWidgetsPage {
         }
     }
 
-    fn recreate_widget(&self) {
-        // if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-        //     config_ui.sizer.remove_int(1);
-        //     self.create_dir_ctrl(config_ui);
-
-        //     if let Some(dir_ctrl) = self.dir_ctrl.borrow().as_ref() {
-        //         config_ui.sizer.insert_window_int(
-        //             1,
-        //             Some(dir_ctrl),
-        //             0,
-        //             wx::EXPAND | wx::ALL,
-        //             5,
-        //             wx::Object::none(),
-        //         );
-        //     }
-
-        //     config_ui.sizer.layout();
-        // }
-    }
-
     fn reset(&self, config_ui: &ConfigUI) {
         config_ui.path.clear();
 
@@ -390,6 +370,7 @@ impl DirCtrlWidgetsPage {
         let dir_ctrl = wx::GenericDirCtrl::builder(Some(&self.base))
             .id(DirCtrlPage::Ctrl.into())
             .dir(&path)
+            .style(style)
             .build();
 
         let mut filter = String::new();
@@ -438,6 +419,8 @@ impl DirCtrlWidgetsPage {
     }
 
     fn on_check_box(&self) {
-        self.recreate_widget();
+        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+            self.create_dir_ctrl(config_ui, false);
+        }
     }
 }
