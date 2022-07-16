@@ -44,6 +44,7 @@ wxml_files = [
     'wxml/classwx_size.xml',
     'wxml/classwx_sizer.xml',
     'wxml/classwx_sizer_flags.xml',
+    'wxml/classwx_standard_paths.xml',
     'wxml/classwx_static_bitmap.xml',
     'wxml/classwx_static_box.xml',
     'wxml/classwx_static_box_sizer.xml',
@@ -471,6 +472,13 @@ wx31 = [
     'CentreHorizontal',
     'CentreVertical',
     'DisableConsistencyChecks',
+]
+[types.wxStandardPaths]
+windows = [
+    'DontIgnoreAppSubDir',
+    'IgnoreAppSubDir',
+    'IgnoreAppBuildSubDirs',
+    'MSWGetShellDir',
 ]
 [types.wxStaticBox]
 blocklist = [

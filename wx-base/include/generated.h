@@ -1,6 +1,7 @@
 #pragma once
 #include <wx/wx.h>
 #include <wx/filename.h>
+#include <wx/stdpaths.h>
 
 typedef wxDateTime::TimeZone TimeZone;
 typedef wxDateTime::Tm       Tm;
@@ -201,6 +202,35 @@ void wxObject_Ref(wxObject * self, const wxObject * clone);
 void wxObject_SetRefData(wxObject * self, wxObjectRefData * data);
 void wxObject_UnRef(wxObject * self);
 void wxObject_UnShare(wxObject * self);
+
+// CLASS: wxStandardPaths
+void wxStandardPaths_delete(wxStandardPaths *self);
+#ifdef __WXMSW__
+void wxStandardPaths_DontIgnoreAppSubDir(wxStandardPaths * self);
+#endif
+wxString *wxStandardPaths_GetAppDocumentsDir(const wxStandardPaths * self);
+wxString *wxStandardPaths_GetConfigDir(const wxStandardPaths * self);
+wxString *wxStandardPaths_GetDataDir(const wxStandardPaths * self);
+wxString *wxStandardPaths_GetDocumentsDir(const wxStandardPaths * self);
+wxString *wxStandardPaths_GetExecutablePath(const wxStandardPaths * self);
+wxString *wxStandardPaths_GetInstallPrefix(const wxStandardPaths * self);
+wxString *wxStandardPaths_GetLocalDataDir(const wxStandardPaths * self);
+wxString *wxStandardPaths_GetPluginsDir(const wxStandardPaths * self);
+wxString *wxStandardPaths_GetResourcesDir(const wxStandardPaths * self);
+wxString *wxStandardPaths_GetTempDir(const wxStandardPaths * self);
+wxString *wxStandardPaths_GetUserConfigDir(const wxStandardPaths * self);
+wxString *wxStandardPaths_GetUserDataDir(const wxStandardPaths * self);
+wxString *wxStandardPaths_GetUserLocalDataDir(const wxStandardPaths * self);
+#ifdef __WXMSW__
+void wxStandardPaths_IgnoreAppSubDir(wxStandardPaths * self, const wxString * subdir_pattern);
+void wxStandardPaths_IgnoreAppBuildSubDirs(wxStandardPaths * self);
+#endif
+void wxStandardPaths_SetInstallPrefix(wxStandardPaths * self, const wxString * prefix);
+void wxStandardPaths_UseAppInfo(wxStandardPaths * self, int info);
+wxStandardPaths * wxStandardPaths_Get();
+#ifdef __WXMSW__
+wxString *wxStandardPaths_MSWGetShellDir(int csidl);
+#endif
 
 } // extern "C"
 

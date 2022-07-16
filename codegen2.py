@@ -157,6 +157,7 @@ typedef wxBitmap wxBitmapBundle;
     else:
         yield '''\
 #include <wx/filename.h>
+#include <wx/stdpaths.h>
 
 typedef wxDateTime::TimeZone TimeZone;
 typedef wxDateTime::Tm       Tm;
