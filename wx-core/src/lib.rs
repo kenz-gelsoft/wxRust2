@@ -783,7 +783,7 @@ impl<'a, P: WindowMethods> Buildable<'a, P, EditableListBoxBuilder<'a, P>> for E
             label: "".to_owned(),
             pos: None,
             size: None,
-            style: EL_DEFAULT_STYLE,
+            style: EL_DEFAULT_STYLE.into(),
         }
     }
 }
