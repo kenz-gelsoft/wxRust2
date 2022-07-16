@@ -19,6 +19,7 @@ wxml_files = [
     'wxml/classwx_date_picker_ctrl.xml',
     'wxml/classwx_date_time.xml',
     'wxml/classwx_dir_picker_ctrl.xml',
+    'wxml/classwx_editable_list_box.xml',
     'wxml/classwx_event.xml',
     'wxml/classwx_evt_handler.xml',
     'wxml/classwx_file_name.xml',
