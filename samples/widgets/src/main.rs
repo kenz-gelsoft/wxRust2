@@ -141,13 +141,13 @@ impl WidgetsFrame {
             panel,
             book,
             pages: vec![
-                dirctrl_page,
                 button_page,
                 check_box_page,
                 choice_page,
                 clrpicker_page,
                 combobox_page,
                 datepicker_page,
+                dirctrl_page,
                 dirpicker_page,
             ],
         };
