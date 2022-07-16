@@ -303,7 +303,9 @@ impl WidgetsPage for DirCtrlWidgetsPage {
         self.on_check_box();
     }
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
-        // Do nothing
+        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+            self.on_radio_box(config_ui);
+        }
     }
 }
 impl DirCtrlWidgetsPage {
@@ -421,6 +423,29 @@ impl DirCtrlWidgetsPage {
     fn on_check_box(&self) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
             self.create_dir_ctrl(config_ui, false);
+        }
+    }
+
+    fn on_radio_box(&self, config_ui: &ConfigUI) {
+        if let (Some(std_path), Some(dir_ctrl)) = (
+            StdPath::from(config_ui.radio_std_path.get_selection()),
+            self.dir_ctrl.borrow().as_ref(),
+        ) {
+            let stdp = wx::StandardPaths::get();
+
+            let path = match std_path {
+                StdPath::Config => stdp.get_config_dir(),
+                StdPath::Data => stdp.get_data_dir(),
+                StdPath::Documents => stdp.get_documents_dir(),
+                StdPath::LocalData => stdp.get_local_data_dir(),
+                StdPath::Plugins => stdp.get_plugins_dir(),
+                StdPath::Resources => stdp.get_resources_dir(),
+                StdPath::UserConfig => stdp.get_user_config_dir(),
+                StdPath::UserData => stdp.get_user_data_dir(),
+                StdPath::UserLocalData => stdp.get_user_local_data_dir(),
+                _ => "".to_owned(),
+            };
+            dir_ctrl.set_path(&path);
         }
     }
 }
