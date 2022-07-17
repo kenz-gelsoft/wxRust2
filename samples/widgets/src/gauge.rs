@@ -53,11 +53,10 @@ impl From<GaugePage> for c_int {
 #[derive(Clone)]
 pub struct ConfigUI {
     // the checkboxes
-    chk_allow_new: wx::CheckBox,
-    chk_allow_edit: wx::CheckBox,
-    chk_allow_delete: wx::CheckBox,
-    chk_allow_no_reorder: wx::CheckBox,
-
+    // chk_allow_new: wx::CheckBox,
+    // chk_allow_edit: wx::CheckBox,
+    // chk_allow_delete: wx::CheckBox,
+    // chk_allow_no_reorder: wx::CheckBox,
     sizer_gauge: wx::BoxSizer,
 }
 
@@ -67,6 +66,7 @@ pub struct GaugeWidgetsPage {
     config_ui: RefCell<Option<ConfigUI>>,
     // the control itself
     gauge: Rc<RefCell<Option<wx::Gauge>>>,
+    range: c_int,
 }
 impl WidgetsPage for GaugeWidgetsPage {
     fn base(&self) -> &wx::Panel {
@@ -76,29 +76,21 @@ impl WidgetsPage for GaugeWidgetsPage {
         return "Gauge";
     }
     fn create_content(&self) {
-        /*
-        What we create here is a frame having 2 panes: style pane is the
-        leftmost one and the pane containing the gauge itself to the right
-        */
         let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
 
         // left pane
         let box_left = wx::StaticBox::builder(Some(&self.base))
-            .label("&Set gauge parameters")
+            .label("&Set style")
             .build();
+
         let sizer_left = wx::StaticBoxSizer::new_with_staticbox(Some(&box_left), wx::VERTICAL);
 
-        let chk_allow_new =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "Allow new items", wx::ID_ANY);
-        let chk_allow_edit =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "Allow editing items", wx::ID_ANY);
-        let chk_allow_delete =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "Allow deleting items", wx::ID_ANY);
-        let chk_allow_no_reorder = self.create_check_box_and_add_to_sizer(
-            &sizer_left,
-            "Block user reordering",
-            wx::ID_ANY,
-        );
+        let chk_vert = self.create_check_box_and_add_to_sizer(&sizer_left, "&Vertical", wx::ID_ANY);
+        let chk_smooth = self.create_check_box_and_add_to_sizer(&sizer_left, "&Smooth", wx::ID_ANY);
+        let chk_progress =
+            self.create_check_box_and_add_to_sizer(&sizer_left, "&Progress", wx::ID_ANY);
+
+        sizer_left.add_int_int(5, 5, 0, wx::GROW | wx::ALL, 5, wx::Object::none());
 
         let btn = wx::Button::builder(Some(&self.base))
             .id(GaugePage::Reset.into())
@@ -112,13 +104,80 @@ impl WidgetsPage for GaugeWidgetsPage {
             wx::Object::none(),
         );
 
+        // middle pane
+        let box2 = wx::StaticBox::builder(Some(&self.base))
+            .label("&Set style")
+            .build();
+
+        let sizer_middle = wx::StaticBoxSizer::new_with_staticbox(Some(&box2), wx::VERTICAL);
+
+        let (sizer_row, text) = self.create_sizer_with_text_and_button(
+            GaugePage::CurValueText.into(),
+            "Current value",
+            wx::ID_ANY,
+        );
+        text.set_editable(false);
+
+        sizer_middle.add_sizer_int(
+            Some(&sizer_row),
+            0,
+            wx::ALL | wx::GROW,
+            5,
+            wx::Object::none(),
+        );
+
+        let (sizer_row, text_value) = self.create_sizer_with_text_and_button(
+            GaugePage::SetValue.into(),
+            "Set &value",
+            GaugePage::ValueText.into(),
+        );
+        sizer_middle.add_sizer_int(
+            Some(&sizer_row),
+            0,
+            wx::ALL | wx::GROW,
+            5,
+            wx::Object::none(),
+        );
+
+        let (sizer_row, text_range) = self.create_sizer_with_text_and_button(
+            GaugePage::SetRange.into(),
+            "Set &range",
+            GaugePage::RangeText.into(),
+        );
+        text_range.set_value(&format!("{}", self.range));
+        sizer_middle.add_sizer_int(
+            Some(&sizer_row),
+            0,
+            wx::ALL | wx::GROW,
+            5,
+            wx::Object::none(),
+        );
+
+        let btn = wx::Button::builder(Some(&self.base))
+            .id(GaugePage::Progress.into())
+            .label("Simulate &progress")
+            .build();
+        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+
+        let btn = wx::Button::builder(Some(&self.base))
+            .id(GaugePage::IndeterminateProgress.into())
+            .label("Simulate &indeterminate job")
+            .build();
+        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+
+        let btn = wx::Button::builder(Some(&self.base))
+            .id(GaugePage::Clear.into())
+            .label("&Clear")
+            .build();
+        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+
         // right pane
-        let sizer_right = wx::BoxSizer::new(wx::VERTICAL);
+        let sizer_right = wx::BoxSizer::new(wx::HORIZONTAL);
         let gauge = wx::Gauge::builder(Some(&self.base))
             .id(GaugePage::Gauge.into())
-            .style(0)
+            .range(self.range)
             .build();
-        sizer_right.add_window_int(Some(&gauge), 1, wx::GROW | wx::ALL, 5, wx::Object::none());
+        sizer_right.add_window_int(Some(&gauge), 1, wx::CENTRE | wx::ALL, 5, wx::Object::none());
         sizer_right.set_min_size_int(150, 0);
         *self.gauge.borrow_mut() = Some(gauge);
 
@@ -127,6 +186,13 @@ impl WidgetsPage for GaugeWidgetsPage {
             Some(&sizer_left),
             0,
             wx::GROW | (wx::ALL & !wx::LEFT),
+            10,
+            wx::Object::none(),
+        );
+        sizer_top.add_sizer_int(
+            Some(&sizer_middle),
+            1,
+            wx::GROW | wx::ALL,
             10,
             wx::Object::none(),
         );
@@ -140,11 +206,10 @@ impl WidgetsPage for GaugeWidgetsPage {
 
         // final initializations
         let config_ui = ConfigUI {
-            chk_allow_new,
-            chk_allow_edit,
-            chk_allow_delete,
-            chk_allow_no_reorder,
-
+            // chk_allow_new,
+            // chk_allow_edit,
+            // chk_allow_delete,
+            // chk_allow_no_reorder,
             sizer_gauge: sizer_right, // save it to modify it later
         };
         self.reset(&config_ui);
@@ -183,31 +248,32 @@ impl GaugeWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
             gauge: Rc::new(RefCell::new(None)),
+            range: 100,
         }
     }
 
     fn reset(&self, config_ui: &ConfigUI) {
-        config_ui.chk_allow_new.set_value(false);
-        config_ui.chk_allow_edit.set_value(false);
-        config_ui.chk_allow_delete.set_value(false);
-        config_ui.chk_allow_no_reorder.set_value(false);
+        // config_ui.chk_allow_new.set_value(false);
+        // config_ui.chk_allow_edit.set_value(false);
+        // config_ui.chk_allow_delete.set_value(false);
+        // config_ui.chk_allow_no_reorder.set_value(false);
     }
 
     fn create_gauge(&self, config_ui: &ConfigUI) {
         let mut flags = wx::BORDER_DEFAULT;
 
-        if config_ui.chk_allow_new.get_value() {
-            flags |= wx::EL_ALLOW_NEW as c_long;
-        }
-        if config_ui.chk_allow_edit.get_value() {
-            flags |= wx::EL_ALLOW_EDIT as c_long;
-        }
-        if config_ui.chk_allow_delete.get_value() {
-            flags |= wx::EL_ALLOW_DELETE as c_long;
-        }
-        if config_ui.chk_allow_no_reorder.get_value() {
-            flags |= wx::EL_NO_REORDER as c_long;
-        }
+        // if config_ui.chk_allow_new.get_value() {
+        //     flags |= wx::EL_ALLOW_NEW as c_long;
+        // }
+        // if config_ui.chk_allow_edit.get_value() {
+        //     flags |= wx::EL_ALLOW_EDIT as c_long;
+        // }
+        // if config_ui.chk_allow_delete.get_value() {
+        //     flags |= wx::EL_ALLOW_DELETE as c_long;
+        // }
+        // if config_ui.chk_allow_no_reorder.get_value() {
+        //     flags |= wx::EL_NO_REORDER as c_long;
+        // }
 
         let items = wx::ArrayString::new();
         if let Some(gauge) = self.gauge.borrow().as_ref() {
