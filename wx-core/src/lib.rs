@@ -419,6 +419,73 @@ impl<'a, P: WindowMethods> FrameBuilder<'a, P> {
     }
 }
 
+pub struct GaugeBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    id: c_int,
+    range: c_int,
+    pos: Option<Point>,
+    size: Option<Size>,
+    style: c_long,
+    validator: Option<Validator>,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, GaugeBuilder<'a, P>> for Gauge {
+    fn builder(parent: Option<&'a P>) -> GaugeBuilder<'a, P> {
+        GaugeBuilder {
+            parent: parent,
+            id: ID_ANY,
+            range: 0,
+            pos: None,
+            size: None,
+            style: 0,
+            validator: None,
+        }
+    }
+}
+impl<'a, P: WindowMethods> GaugeBuilder<'a, P> {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn range(&mut self, range: c_int) -> &mut Self {
+        self.range = range;
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn validator(&mut self, validator: Validator) -> &mut Self {
+        self.validator = Some(validator);
+        self
+    }
+    pub fn build(&mut self) -> Gauge {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        let validator = self
+            .validator
+            .take()
+            .unwrap_or_else(|| Validator::default());
+        Gauge::new(
+            self.parent,
+            self.id,
+            self.range,
+            &pos,
+            &size,
+            self.style,
+            &validator,
+            "",
+        )
+    }
+}
+
 pub struct PanelBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     pos: Option<Point>,
