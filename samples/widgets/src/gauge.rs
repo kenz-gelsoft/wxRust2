@@ -177,7 +177,13 @@ impl WidgetsPage for GaugeWidgetsPage {
             .id(GaugePage::Gauge.into())
             .range(self.range)
             .build();
-        sizer_right.add_window_int(Some(&gauge), 1, wx::CENTRE | wx::ALL, 5, wx::Object::none());
+        sizer_right.add_window_int(
+            Some(&gauge),
+            1,
+            wx::CENTRE as i32 | wx::ALL,
+            5,
+            wx::Object::none(),
+        );
         sizer_right.set_min_size_int(150, 0);
         *self.gauge.borrow_mut() = Some(gauge);
 
