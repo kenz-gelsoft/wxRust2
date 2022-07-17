@@ -1137,6 +1137,35 @@ void wxFrame_PopStatusText(wxFrame * self, int number) {
 
 // CLASS: wxGDIObject
 
+// CLASS: wxGauge
+wxGauge *wxGauge_new() {
+    return new wxGauge();
+}
+wxGauge *wxGauge_new1(wxWindow * parent, wxWindowID id, int range, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return new wxGauge(parent, id, range, *pos, *size, style, *validator, *name);
+}
+bool wxGauge_Create(wxGauge * self, wxWindow * parent, wxWindowID id, int range, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, range, *pos, *size, style, *validator, *name);
+}
+int wxGauge_GetRange(const wxGauge * self) {
+    return self->GetRange();
+}
+int wxGauge_GetValue(const wxGauge * self) {
+    return self->GetValue();
+}
+bool wxGauge_IsVertical(const wxGauge * self) {
+    return self->IsVertical();
+}
+void wxGauge_Pulse(wxGauge * self) {
+    return self->Pulse();
+}
+void wxGauge_SetRange(wxGauge * self, int range) {
+    return self->SetRange(range);
+}
+void wxGauge_SetValue(wxGauge * self, int pos) {
+    return self->SetValue(pos);
+}
+
 // CLASS: wxGenericDirCtrl
 wxGenericDirCtrl *wxGenericDirCtrl_new() {
     return new wxGenericDirCtrl();

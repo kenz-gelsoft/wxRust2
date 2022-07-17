@@ -1918,6 +1918,63 @@ pub trait FrameMethods: TopLevelWindowMethods {
 // wxGDIObject
 pub trait GDIObjectMethods: ObjectMethods {}
 
+// wxGauge
+pub trait GaugeMethods: ControlMethods {
+    // DTOR: fn ~wxGauge()
+    fn create_int<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        range: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxGauge_Create(
+                self.as_ptr(),
+                parent,
+                id,
+                range,
+                pos,
+                size,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+    fn get_range(&self) -> c_int {
+        unsafe { ffi::wxGauge_GetRange(self.as_ptr()) }
+    }
+    fn get_value(&self) -> c_int {
+        unsafe { ffi::wxGauge_GetValue(self.as_ptr()) }
+    }
+    fn is_vertical(&self) -> bool {
+        unsafe { ffi::wxGauge_IsVertical(self.as_ptr()) }
+    }
+    fn pulse(&self) {
+        unsafe { ffi::wxGauge_Pulse(self.as_ptr()) }
+    }
+    fn set_range(&self, range: c_int) {
+        unsafe { ffi::wxGauge_SetRange(self.as_ptr(), range) }
+    }
+    fn set_value(&self, pos: c_int) {
+        unsafe { ffi::wxGauge_SetValue(self.as_ptr(), pos) }
+    }
+}
+
 // wxGenericDirCtrl
 pub trait GenericDirCtrlMethods: ControlMethods {
     // DTOR: fn ~wxGenericDirCtrl()

@@ -1051,6 +1051,49 @@ impl<const OWNED: bool> Drop for GDIObjectIsOwned<OWNED> {
     }
 }
 
+// wxGauge
+wx_class! { Gauge =
+    GaugeIsOwned<true>(wxGauge) impl
+        GaugeMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> GaugeIsOwned<OWNED> {
+    pub fn new_2step() -> GaugeIsOwned<OWNED> {
+        unsafe { GaugeIsOwned(ffi::wxGauge_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        range: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> GaugeIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            GaugeIsOwned(ffi::wxGauge_new1(
+                parent, id, range, pos, size, style, validator, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
 // wxGenericDirCtrl
 wx_class! { GenericDirCtrl =
     GenericDirCtrlIsOwned<true>(wxGenericDirCtrl) impl
