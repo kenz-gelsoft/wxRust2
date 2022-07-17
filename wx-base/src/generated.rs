@@ -290,3 +290,31 @@ impl<const OWNED: bool> Drop for StandardPathsIsOwned<OWNED> {
         }
     }
 }
+
+// wxTimer
+wx_class! { Timer =
+    TimerIsOwned<true>(wxTimer) impl
+        TimerMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> TimerIsOwned<OWNED> {
+    pub fn new() -> TimerIsOwned<OWNED> {
+        unsafe { TimerIsOwned(ffi::wxTimer_new()) }
+    }
+    pub fn new_with_evthandler<E: EvtHandlerMethods>(
+        owner: Option<&E>,
+        id: c_int,
+    ) -> TimerIsOwned<OWNED> {
+        unsafe {
+            let owner = match owner {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            TimerIsOwned(ffi::wxTimer_new1(owner, id))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
