@@ -40,6 +40,9 @@ use filectrl::*;
 mod fontpicker;
 use fontpicker::*;
 
+mod gauge;
+use gauge::*;
+
 enum Widgets {
     ClearLog = 100,
     Quit,
@@ -148,12 +151,13 @@ impl WidgetsFrame {
         let editlbox_page = Rc::new(EditableListboxWidgetsPage::new(&book));
         let filectrl_page = Rc::new(FileCtrlWidgetsPage::new(&book));
         let fontpicker_page = Rc::new(FontPickerWidgetsPage::new(&book));
+        let gauge_page = Rc::new(GaugeWidgetsPage::new(&book));
         let mut frame = WidgetsFrame {
             base,
             panel,
             book,
             pages: vec![
-                fontpicker_page,
+                gauge_page,
                 button_page,
                 check_box_page,
                 choice_page,
@@ -164,6 +168,7 @@ impl WidgetsFrame {
                 dirpicker_page,
                 editlbox_page,
                 filectrl_page,
+                fontpicker_page,
             ],
         };
         frame.on_create();

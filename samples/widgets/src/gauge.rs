@@ -6,15 +6,37 @@ use wx::methods::*;
 
 // control ids
 #[derive(Clone, Copy)]
-enum EditableListboxPage {
+enum GaugePage {
     Reset = wx::ID_HIGHEST as isize,
-    Listbox,
-    ContainerTests,
+    Progress,
+    IndeterminateProgress,
+    Clear,
+    SetValue,
+    SetRange,
+    CurValueText,
+    ValueText,
+    RangeText,
+    Timer,
+    IndeterminateTimer,
+    Gauge,
 }
-impl EditableListboxPage {
+impl GaugePage {
     fn from(v: c_int) -> Option<Self> {
-        use EditableListboxPage::*;
-        for e in [Reset, Listbox, ContainerTests] {
+        use GaugePage::*;
+        for e in [
+            Reset,
+            Progress,
+            IndeterminateProgress,
+            Clear,
+            SetValue,
+            SetRange,
+            CurValueText,
+            ValueText,
+            RangeText,
+            Timer,
+            IndeterminateTimer,
+            Gauge,
+        ] {
             if v == e.into() {
                 return Some(e);
             }
@@ -22,8 +44,8 @@ impl EditableListboxPage {
         return None;
     }
 }
-impl From<EditableListboxPage> for c_int {
-    fn from(w: EditableListboxPage) -> Self {
+impl From<GaugePage> for c_int {
+    fn from(w: GaugePage) -> Self {
         w as c_int
     }
 }
@@ -36,33 +58,33 @@ pub struct ConfigUI {
     chk_allow_delete: wx::CheckBox,
     chk_allow_no_reorder: wx::CheckBox,
 
-    sizer_lbox: wx::BoxSizer,
+    sizer_gauge: wx::BoxSizer,
 }
 
 #[derive(Clone)]
-pub struct EditableListboxWidgetsPage {
+pub struct GaugeWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
     // the control itself
-    lbox: Rc<RefCell<Option<wx::EditableListBox>>>,
+    gauge: Rc<RefCell<Option<wx::Gauge>>>,
 }
-impl WidgetsPage for EditableListboxWidgetsPage {
+impl WidgetsPage for GaugeWidgetsPage {
     fn base(&self) -> &wx::Panel {
         return &self.base;
     }
     fn label(&self) -> &str {
-        return "EditableListbox";
+        return "Gauge";
     }
     fn create_content(&self) {
         /*
         What we create here is a frame having 2 panes: style pane is the
-        leftmost one and the pane containing the listbox itself to the right
+        leftmost one and the pane containing the gauge itself to the right
         */
         let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
 
         // left pane
         let box_left = wx::StaticBox::builder(Some(&self.base))
-            .label("&Set listbox parameters")
+            .label("&Set gauge parameters")
             .build();
         let sizer_left = wx::StaticBoxSizer::new_with_staticbox(Some(&box_left), wx::VERTICAL);
 
@@ -79,7 +101,7 @@ impl WidgetsPage for EditableListboxWidgetsPage {
         );
 
         let btn = wx::Button::builder(Some(&self.base))
-            .id(EditableListboxPage::Reset.into())
+            .id(GaugePage::Reset.into())
             .label("&Reset")
             .build();
         sizer_left.add_window_int(
@@ -92,13 +114,13 @@ impl WidgetsPage for EditableListboxWidgetsPage {
 
         // right pane
         let sizer_right = wx::BoxSizer::new(wx::VERTICAL);
-        let lbox = wx::EditableListBox::builder(Some(&self.base))
-            .id(EditableListboxPage::Listbox.into())
+        let gauge = wx::Gauge::builder(Some(&self.base))
+            .id(GaugePage::Gauge.into())
             .style(0)
             .build();
-        sizer_right.add_window_int(Some(&lbox), 1, wx::GROW | wx::ALL, 5, wx::Object::none());
+        sizer_right.add_window_int(Some(&gauge), 1, wx::GROW | wx::ALL, 5, wx::Object::none());
         sizer_right.set_min_size_int(150, 0);
-        *self.lbox.borrow_mut() = Some(lbox);
+        *self.gauge.borrow_mut() = Some(gauge);
 
         // the 3 panes panes compose the window
         sizer_top.add_sizer_int(
@@ -123,7 +145,7 @@ impl WidgetsPage for EditableListboxWidgetsPage {
             chk_allow_delete,
             chk_allow_no_reorder,
 
-            sizer_lbox: sizer_right, // save it to modify it later
+            sizer_gauge: sizer_right, // save it to modify it later
         };
         self.reset(&config_ui);
         *self.config_ui.borrow_mut() = Some(config_ui);
@@ -135,10 +157,10 @@ impl WidgetsPage for EditableListboxWidgetsPage {
         println!("event={}", event.get_id());
         if let (Some(config_ui), Some(m)) = (
             self.config_ui.borrow().as_ref(),
-            EditableListboxPage::from(event.get_id()),
+            GaugePage::from(event.get_id()),
         ) {
             match m {
-                EditableListboxPage::Reset => self.on_button_reset(config_ui),
+                GaugePage::Reset => self.on_button_reset(config_ui),
                 _ => (),
             };
         }
@@ -152,15 +174,15 @@ impl WidgetsPage for EditableListboxWidgetsPage {
         // Do nothing.
     }
 }
-impl EditableListboxWidgetsPage {
+impl GaugeWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {
         let panel = wx::Panel::builder(Some(book))
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
-        EditableListboxWidgetsPage {
+        GaugeWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
-            lbox: Rc::new(RefCell::new(None)),
+            gauge: Rc::new(RefCell::new(None)),
         }
     }
 
@@ -171,7 +193,7 @@ impl EditableListboxWidgetsPage {
         config_ui.chk_allow_no_reorder.set_value(false);
     }
 
-    fn create_lbox(&self, config_ui: &ConfigUI) {
+    fn create_gauge(&self, config_ui: &ConfigUI) {
         let mut flags = wx::BORDER_DEFAULT;
 
         if config_ui.chk_allow_new.get_value() {
@@ -188,33 +210,33 @@ impl EditableListboxWidgetsPage {
         }
 
         let items = wx::ArrayString::new();
-        if let Some(lbox) = self.lbox.borrow().as_ref() {
+        if let Some(gauge) = self.gauge.borrow().as_ref() {
             // TODO: provide safe solution
             unsafe {
-                lbox.get_strings(items.as_ptr());
+                // gauge.get_strings(items.as_ptr());
             }
-            config_ui.sizer_lbox.detach_window(Some(lbox));
-            lbox.destroy();
+            config_ui.sizer_gauge.detach_window(Some(gauge));
+            gauge.destroy();
         }
 
-        let lbox = wx::EditableListBox::builder(Some(&self.base))
-            .id(EditableListboxPage::Listbox.into())
-            .label("Match these wildcards:")
+        let gauge = wx::Gauge::builder(Some(&self.base))
+            .id(GaugePage::Gauge.into())
+            // .label("Match these wildcards:")
             .style(flags)
             .build();
-        lbox.set_strings(&items);
+        // gauge.set_strings(&items);
 
-        config_ui.sizer_lbox.add_window_int(
-            Some(&lbox),
+        config_ui.sizer_gauge.add_window_int(
+            Some(&gauge),
             1,
             wx::GROW | wx::ALL,
             5,
             wx::Object::none(),
         );
-        *self.lbox.borrow_mut() = Some(lbox);
+        *self.gauge.borrow_mut() = Some(gauge);
 
         // relayout the sizer
-        config_ui.sizer_lbox.layout();
+        config_ui.sizer_gauge.layout();
     }
 
     // ----------------------------------------------------------------------------
@@ -224,10 +246,10 @@ impl EditableListboxWidgetsPage {
     fn on_button_reset(&self, config_ui: &ConfigUI) {
         self.reset(config_ui);
 
-        self.create_lbox(config_ui);
+        self.create_gauge(config_ui);
     }
 
     fn on_check_box(&self, config_ui: &ConfigUI) {
-        self.create_lbox(config_ui);
+        self.create_gauge(config_ui);
     }
 }
