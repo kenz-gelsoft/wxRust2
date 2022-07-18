@@ -52,11 +52,11 @@ impl From<GaugePage> for c_int {
 
 #[derive(Clone)]
 pub struct ConfigUI {
-    // the checkboxes
-    // chk_allow_new: wx::CheckBox,
-    // chk_allow_edit: wx::CheckBox,
-    // chk_allow_delete: wx::CheckBox,
-    // chk_allow_no_reorder: wx::CheckBox,
+    // the checkboxes for styles
+    chk_vert: wx::CheckBox,
+    chk_smooth: wx::CheckBox,
+    chk_progress: wx::CheckBox,
+
     sizer_gauge: wx::BoxSizer,
 }
 
@@ -212,10 +212,10 @@ impl WidgetsPage for GaugeWidgetsPage {
 
         // final initializations
         let config_ui = ConfigUI {
-            // chk_allow_new,
-            // chk_allow_edit,
-            // chk_allow_delete,
-            // chk_allow_no_reorder,
+            chk_vert,
+            chk_smooth,
+            chk_progress,
+
             sizer_gauge: sizer_right, // save it to modify it later
         };
         self.reset(&config_ui);
@@ -259,52 +259,59 @@ impl GaugeWidgetsPage {
     }
 
     fn reset(&self, config_ui: &ConfigUI) {
-        // config_ui.chk_allow_new.set_value(false);
-        // config_ui.chk_allow_edit.set_value(false);
-        // config_ui.chk_allow_delete.set_value(false);
-        // config_ui.chk_allow_no_reorder.set_value(false);
+        config_ui.chk_vert.set_value(false);
+        config_ui.chk_smooth.set_value(false);
+        config_ui.chk_progress.set_value(false);
     }
 
     fn create_gauge(&self, config_ui: &ConfigUI) {
         let mut flags = wx::BORDER_DEFAULT;
 
-        // if config_ui.chk_allow_new.get_value() {
-        //     flags |= wx::EL_ALLOW_NEW as c_long;
-        // }
-        // if config_ui.chk_allow_edit.get_value() {
-        //     flags |= wx::EL_ALLOW_EDIT as c_long;
-        // }
-        // if config_ui.chk_allow_delete.get_value() {
-        //     flags |= wx::EL_ALLOW_DELETE as c_long;
-        // }
-        // if config_ui.chk_allow_no_reorder.get_value() {
-        //     flags |= wx::EL_NO_REORDER as c_long;
-        // }
+        flags |= if config_ui.chk_vert.get_value() {
+            wx::GA_VERTICAL
+        } else {
+            wx::GA_HORIZONTAL
+        } as c_long;
 
-        let items = wx::ArrayString::new();
+        if config_ui.chk_smooth.get_value() {
+            flags |= wx::GA_SMOOTH as c_long;
+        }
+        if config_ui.chk_progress.get_value() {
+            flags |= wx::GA_PROGRESS as c_long;
+        }
+
+        let mut val = 0;
         if let Some(gauge) = self.gauge.borrow().as_ref() {
-            // TODO: provide safe solution
-            unsafe {
-                // gauge.get_strings(items.as_ptr());
-            }
+            val = gauge.get_value();
+
             config_ui.sizer_gauge.detach_window(Some(gauge));
             gauge.destroy();
         }
 
         let gauge = wx::Gauge::builder(Some(&self.base))
             .id(GaugePage::Gauge.into())
-            // .label("Match these wildcards:")
+            .range(self.range)
             .style(flags)
             .build();
-        // gauge.set_strings(&items);
+        gauge.set_value(val);
 
-        config_ui.sizer_gauge.add_window_int(
-            Some(&gauge),
-            1,
-            wx::GROW | wx::ALL,
-            5,
-            wx::Object::none(),
-        );
+        if (flags & wx::GA_VERTICAL as c_long) != 0 {
+            config_ui.sizer_gauge.add_window_int(
+                Some(&gauge),
+                0,
+                wx::GROW | wx::ALL,
+                5,
+                wx::Object::none(),
+            );
+        } else {
+            config_ui.sizer_gauge.add_window_int(
+                Some(&gauge),
+                1,
+                wx::CENTRE as i32 | wx::ALL,
+                5,
+                wx::Object::none(),
+            );
+        }
         *self.gauge.borrow_mut() = Some(gauge);
 
         // relayout the sizer
