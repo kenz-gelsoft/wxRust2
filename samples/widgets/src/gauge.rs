@@ -419,7 +419,11 @@ impl GaugeWidgetsPage {
     }
 
     fn on_button_progress(&self) {
-        if let Some(b) = self.base.find_window_long(GaugePage::Progress as c_long).get() {
+        if let Some(b) = self
+            .base
+            .find_window_long(GaugePage::Progress as c_long)
+            .get()
+        {
             if self.timer.borrow().is_none() {
                 self.start_timer(&b);
             } else {
@@ -495,7 +499,11 @@ impl GaugeWidgetsPage {
                 gauge.set_value(val + 1);
             } else {
                 // reached the end
-                if let Some(b) = self.base.find_window_long(GaugePage::Progress as c_long).get() {
+                if let Some(b) = self
+                    .base
+                    .find_window_long(GaugePage::Progress as c_long)
+                    .get()
+                {
                     self.stop_timer(&b);
                 }
             }
