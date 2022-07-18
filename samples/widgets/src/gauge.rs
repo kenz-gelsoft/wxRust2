@@ -67,6 +67,9 @@ pub struct GaugeWidgetsPage {
     // the control itself
     gauge: Rc<RefCell<Option<wx::Gauge>>>,
     range: c_int,
+
+    // the timer for simulating gauge progress
+    timer: Rc<RefCell<Option<wx::Timer>>>,
 }
 impl WidgetsPage for GaugeWidgetsPage {
     fn base(&self) -> &wx::Panel {
@@ -232,6 +235,11 @@ impl WidgetsPage for GaugeWidgetsPage {
         ) {
             match m {
                 GaugePage::Reset => self.on_button_reset(config_ui),
+                GaugePage::Progress => self.on_button_progress(),
+                // GaugePage::IndeterminateProgress => self.on_button_indeterminate_progress(),
+                // GaugePage::Clear => self.on_button_clear(),
+                // GaugePage::SetValue => self.on_button_set_value(),
+                // GaugePage::SetRange => self.on_button_set_range(),
                 _ => (),
             };
         }
@@ -250,12 +258,22 @@ impl GaugeWidgetsPage {
         let panel = wx::Panel::builder(Some(book))
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
-        GaugeWidgetsPage {
+
+        let page = GaugeWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
             gauge: Rc::new(RefCell::new(None)),
             range: 100,
-        }
+            timer: Rc::new(RefCell::new(None)),
+        };
+
+        let page_copy = page.clone();
+        page.base
+            .bind(wx::RustEvent::Timer, move |_: &wx::TimerEvent| {
+                page_copy.on_progress_timer();
+            });
+
+        page
     }
 
     fn reset(&self, config_ui: &ConfigUI) {
@@ -318,6 +336,69 @@ impl GaugeWidgetsPage {
         config_ui.sizer_gauge.layout();
     }
 
+    fn start_timer<W: WindowMethods>(&self, clicked: &W) {
+        let INTERVAL = 300;
+
+        let is_progress_button = clicked.get_id() == GaugePage::Progress.into();
+        let timer = wx::Timer::new_with_evthandler(
+            Some(&self.base),
+            if is_progress_button {
+                GaugePage::Timer.into()
+            } else {
+                GaugePage::IndeterminateTimer.into()
+            },
+        );
+        timer.start(INTERVAL, wx::TIMER_CONTINUOUS);
+        *self.timer.borrow_mut() = Some(timer);
+
+        clicked.set_label("&Stop timer");
+
+        if is_progress_button {
+            if let Some(gauge) = self
+                .base
+                .find_window_long(GaugePage::IndeterminateProgress as c_long)
+                .get()
+            {
+                gauge.disable();
+            }
+        } else {
+            if let Some(gauge) = self
+                .base
+                .find_window_long(GaugePage::Progress as c_long)
+                .get()
+            {
+                gauge.disable();
+            }
+        }
+    }
+
+    fn stop_timer<W: WindowMethods>(&self, clicked: &W) {
+        if let Some(timer) = self.timer.borrow().as_ref() {
+            timer.stop();
+        }
+        *self.timer.borrow_mut() = None;
+
+        if clicked.get_id() == GaugePage::Progress.into() {
+            clicked.set_label("Simulate &progress");
+            if let Some(gauge) = self
+                .base
+                .find_window_long(GaugePage::IndeterminateProgress as c_long)
+                .get()
+            {
+                gauge.enable(true);
+            }
+        } else {
+            clicked.set_label("Simulate indeterminate job");
+            if let Some(gauge) = self
+                .base
+                .find_window_long(GaugePage::IndeterminateProgress as c_long)
+                .get()
+            {
+                gauge.enable(true);
+            }
+        }
+    }
+
     // ----------------------------------------------------------------------------
     // event handlers
     // ----------------------------------------------------------------------------
@@ -328,7 +409,31 @@ impl GaugeWidgetsPage {
         self.create_gauge(config_ui);
     }
 
+    fn on_button_progress(&self) {
+        if let Some(b) = self.base.find_window_long(GaugePage::Progress as i64).get() {
+            if self.timer.borrow().is_none() {
+                self.start_timer(&b);
+            } else {
+                self.stop_timer(&b);
+            }
+        }
+    }
+
     fn on_check_box(&self, config_ui: &ConfigUI) {
         self.create_gauge(config_ui);
+    }
+
+    fn on_progress_timer(&self) {
+        if let Some(gauge) = self.gauge.borrow().as_ref() {
+            let val = gauge.get_value();
+            if val < self.range {
+                gauge.set_value(val + 1);
+            } else {
+                // reached the end
+                if let Some(b) = self.base.find_window_long(GaugePage::Progress as i64).get() {
+                    self.stop_timer(&b);
+                }
+            }
+        }
     }
 }
