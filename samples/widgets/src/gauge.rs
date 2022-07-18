@@ -57,6 +57,10 @@ pub struct ConfigUI {
     chk_smooth: wx::CheckBox,
     chk_progress: wx::CheckBox,
 
+    // the text entries for set value/range
+    text_value: wx::TextCtrl,
+    text_range: wx::TextCtrl,
+
     sizer_gauge: wx::BoxSizer,
 }
 
@@ -66,7 +70,7 @@ pub struct GaugeWidgetsPage {
     config_ui: RefCell<Option<ConfigUI>>,
     // the control itself
     gauge: Rc<RefCell<Option<wx::Gauge>>>,
-    range: c_int,
+    range: Rc<RefCell<c_int>>,
 
     // the timer for simulating gauge progress
     timer: Rc<RefCell<Option<wx::Timer>>>,
@@ -114,11 +118,9 @@ impl WidgetsPage for GaugeWidgetsPage {
 
         let sizer_middle = wx::StaticBoxSizer::new_with_staticbox(Some(&box2), wx::VERTICAL);
 
-        let (sizer_row, text) = self.create_sizer_with_text_and_button(
-            GaugePage::CurValueText.into(),
-            "Current value",
-            wx::ID_ANY,
-        );
+        // TODO: OnUpdateUI event
+        let (sizer_row, text) =
+            self.create_sizer_with_text_and_label("Current value", GaugePage::CurValueText.into());
         text.set_editable(false);
 
         sizer_middle.add_sizer_int(
@@ -147,7 +149,8 @@ impl WidgetsPage for GaugeWidgetsPage {
             "Set &range",
             GaugePage::RangeText.into(),
         );
-        text_range.set_value(&format!("{}", self.range));
+        let range = *self.range.borrow();
+        text_range.set_value(&format!("{}", range));
         sizer_middle.add_sizer_int(
             Some(&sizer_row),
             0,
@@ -178,7 +181,7 @@ impl WidgetsPage for GaugeWidgetsPage {
         let sizer_right = wx::BoxSizer::new(wx::HORIZONTAL);
         let gauge = wx::Gauge::builder(Some(&self.base))
             .id(GaugePage::Gauge.into())
-            .range(self.range)
+            .range(range)
             .build();
         sizer_right.add_window_int(
             Some(&gauge),
@@ -219,6 +222,9 @@ impl WidgetsPage for GaugeWidgetsPage {
             chk_smooth,
             chk_progress,
 
+            text_value,
+            text_range,
+
             sizer_gauge: sizer_right, // save it to modify it later
         };
         self.reset(&config_ui);
@@ -237,20 +243,22 @@ impl WidgetsPage for GaugeWidgetsPage {
                 GaugePage::Reset => self.on_button_reset(config_ui),
                 GaugePage::Progress => self.on_button_progress(),
                 GaugePage::IndeterminateProgress => self.on_button_indeterminate_progress(),
-                // GaugePage::Clear => self.on_button_clear(),
-                // GaugePage::SetValue => self.on_button_set_value(),
-                // GaugePage::SetRange => self.on_button_set_range(),
+                GaugePage::Clear => self.on_button_clear(),
+                GaugePage::SetValue => self.on_button_set_value(),
+                GaugePage::SetRange => self.on_button_set_range(),
                 _ => (),
             };
         }
     }
     fn handle_checkbox(&self, _: &wx::CommandEvent) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            self.on_check_box(config_ui);
+            self.on_check_or_radio_box(config_ui);
         }
     }
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
-        // Do nothing.
+        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+            self.on_check_or_radio_box(config_ui);
+        }
     }
 }
 impl GaugeWidgetsPage {
@@ -263,7 +271,7 @@ impl GaugeWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
             gauge: Rc::new(RefCell::new(None)),
-            range: 100,
+            range: Rc::new(RefCell::new(100)),
             timer: Rc::new(RefCell::new(None)),
         };
 
@@ -306,9 +314,10 @@ impl GaugeWidgetsPage {
             gauge.destroy();
         }
 
+        let range = *self.range.borrow();
         let gauge = wx::Gauge::builder(Some(&self.base))
             .id(GaugePage::Gauge.into())
-            .range(self.range)
+            .range(range)
             .style(flags)
             .build();
         gauge.set_value(val);
@@ -391,7 +400,7 @@ impl GaugeWidgetsPage {
             clicked.set_label("Simulate indeterminate job");
             if let Some(gauge) = self
                 .base
-                .find_window_long(GaugePage::IndeterminateProgress as c_long)
+                .find_window_long(GaugePage::Progress as c_long)
                 .get()
             {
                 gauge.enable(true);
@@ -436,7 +445,36 @@ impl GaugeWidgetsPage {
         }
     }
 
-    fn on_check_box(&self, config_ui: &ConfigUI) {
+    fn on_button_clear(&self) {
+        if let Some(gauge) = self.gauge.borrow().as_ref() {
+            gauge.set_value(0);
+        }
+    }
+
+    fn on_button_set_range(&self) {
+        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+            if let (Ok(val), Some(gauge)) = (
+                config_ui.text_range.get_value().parse(),
+                self.gauge.borrow().as_ref(),
+            ) {
+                *self.range.borrow_mut() = val;
+                gauge.set_range(val);
+            }
+        }
+    }
+
+    fn on_button_set_value(&self) {
+        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+            if let (Ok(val), Some(gauge)) = (
+                config_ui.text_value.get_value().parse(),
+                self.gauge.borrow().as_ref(),
+            ) {
+                gauge.set_value(val);
+            }
+        }
+    }
+
+    fn on_check_or_radio_box(&self, config_ui: &ConfigUI) {
         self.create_gauge(config_ui);
     }
 
@@ -451,9 +489,9 @@ impl GaugeWidgetsPage {
     }
 
     fn on_progress_timer(&self) {
-        if let Some(gauge) = self.gauge.borrow().as_ref() {
+        if let (Some(gauge), range) = (self.gauge.borrow().as_ref(), *self.range.borrow()) {
             let val = gauge.get_value();
-            if val < self.range {
+            if val < range {
                 gauge.set_value(val + 1);
             } else {
                 // reached the end
