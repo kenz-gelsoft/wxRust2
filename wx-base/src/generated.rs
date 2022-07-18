@@ -318,3 +318,26 @@ impl<const OWNED: bool> TimerIsOwned<OWNED> {
         None
     }
 }
+
+// wxTimerEvent
+wx_class! { TimerEvent =
+    TimerEventIsOwned<true>(wxTimerEvent) impl
+        TimerEventMethods,
+        EventMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> TimerEventIsOwned<OWNED> {
+    pub fn new(timer: *mut c_void) -> TimerEventIsOwned<OWNED> {
+        unsafe { TimerEventIsOwned(ffi::wxTimerEvent_new(timer)) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for TimerEventIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}

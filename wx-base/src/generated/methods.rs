@@ -1090,3 +1090,13 @@ pub trait TimerMethods: EvtHandlerMethods {
         unsafe { ffi::wxTimer_Stop(self.as_ptr()) }
     }
 }
+
+// wxTimerEvent
+pub trait TimerEventMethods: EventMethods {
+    fn get_interval(&self) -> c_int {
+        unsafe { ffi::wxTimerEvent_GetInterval(self.as_ptr()) }
+    }
+    fn get_timer(&self) -> TimerIsOwned<false> {
+        unsafe { TimerIsOwned::from_ptr(ffi::wxTimerEvent_GetTimer(self.as_ptr())) }
+    }
+}

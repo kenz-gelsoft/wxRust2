@@ -455,4 +455,9 @@ extern "C" {
     pub fn wxTimer_StartOnce(self_: *mut c_void, milliseconds: c_int) -> bool;
     pub fn wxTimer_Stop(self_: *mut c_void);
 
+    // wxTimerEvent
+    pub fn wxTimerEvent_new(timer: *mut c_void) -> *mut c_void;
+    pub fn wxTimerEvent_GetInterval(self_: *const c_void) -> c_int;
+    pub fn wxTimerEvent_GetTimer(self_: *const c_void) -> *mut c_void;
+
 }

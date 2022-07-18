@@ -250,5 +250,10 @@ bool wxTimer_Start(wxTimer * self, int milliseconds, bool one_shot);
 bool wxTimer_StartOnce(wxTimer * self, int milliseconds);
 void wxTimer_Stop(wxTimer * self);
 
+// CLASS: wxTimerEvent
+wxTimerEvent *wxTimerEvent_new(wxTimer * timer);
+int wxTimerEvent_GetInterval(const wxTimerEvent * self);
+wxTimer * wxTimerEvent_GetTimer(const wxTimerEvent * self);
+
 } // extern "C"
 

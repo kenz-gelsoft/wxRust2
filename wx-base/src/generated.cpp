@@ -657,5 +657,16 @@ void wxTimer_Stop(wxTimer * self) {
     return self->Stop();
 }
 
+// CLASS: wxTimerEvent
+wxTimerEvent *wxTimerEvent_new(wxTimer * timer) {
+    return new wxTimerEvent(*timer);
+}
+int wxTimerEvent_GetInterval(const wxTimerEvent * self) {
+    return self->GetInterval();
+}
+wxTimer * wxTimerEvent_GetTimer(const wxTimerEvent * self) {
+    return &(self->GetTimer());
+}
+
 } // extern "C"
 
