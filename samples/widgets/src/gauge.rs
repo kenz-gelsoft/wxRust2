@@ -236,7 +236,7 @@ impl WidgetsPage for GaugeWidgetsPage {
             match m {
                 GaugePage::Reset => self.on_button_reset(config_ui),
                 GaugePage::Progress => self.on_button_progress(),
-                // GaugePage::IndeterminateProgress => self.on_button_indeterminate_progress(),
+                GaugePage::IndeterminateProgress => self.on_button_indeterminate_progress(),
                 // GaugePage::Clear => self.on_button_clear(),
                 // GaugePage::SetValue => self.on_button_set_value(),
                 // GaugePage::SetRange => self.on_button_set_range(),
@@ -269,8 +269,8 @@ impl GaugeWidgetsPage {
 
         let page_copy = page.clone();
         page.base
-            .bind(wx::RustEvent::Timer, move |_: &wx::TimerEvent| {
-                page_copy.on_progress_timer();
+            .bind(wx::RustEvent::Timer, move |event: &wx::TimerEvent| {
+                page_copy.handle_timer(event);
             });
 
         page
@@ -419,8 +419,35 @@ impl GaugeWidgetsPage {
         }
     }
 
+    fn on_button_indeterminate_progress(&self) {
+        if let Some(b) = self
+            .base
+            .find_window_long(GaugePage::IndeterminateProgress as i64)
+            .get()
+        {
+            if self.timer.borrow().is_none() {
+                self.start_timer(&b);
+            } else {
+                self.stop_timer(&b);
+                if let Some(gauge) = self.gauge.borrow().as_ref() {
+                    gauge.set_value(0);
+                }
+            }
+        }
+    }
+
     fn on_check_box(&self, config_ui: &ConfigUI) {
         self.create_gauge(config_ui);
+    }
+
+    fn handle_timer(&self, event: &wx::TimerEvent) {
+        if let Some(m) = GaugePage::from(event.get_id()) {
+            match m {
+                GaugePage::Timer => self.on_progress_timer(),
+                GaugePage::IndeterminateTimer => self.on_intermediate_progress_timer(),
+                _ => (),
+            }
+        }
     }
 
     fn on_progress_timer(&self) {
@@ -434,6 +461,12 @@ impl GaugeWidgetsPage {
                     self.stop_timer(&b);
                 }
             }
+        }
+    }
+
+    fn on_intermediate_progress_timer(&self) {
+        if let Some(gauge) = self.gauge.borrow().as_ref() {
+            gauge.pulse();
         }
     }
 }
