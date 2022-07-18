@@ -851,6 +851,37 @@ extern "C" {
     // wxGDIObject
     // BLOCKED: pub fn wxGDIObject_new() -> *mut c_void;
 
+    // wxGauge
+    pub fn wxGauge_new() -> *mut c_void;
+    pub fn wxGauge_new1(
+        parent: *mut c_void,
+        id: c_int,
+        range: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    // DTOR: pub fn wxGauge_~wxGauge(self_: *mut c_void);
+    pub fn wxGauge_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        range: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxGauge_GetRange(self_: *const c_void) -> c_int;
+    pub fn wxGauge_GetValue(self_: *const c_void) -> c_int;
+    pub fn wxGauge_IsVertical(self_: *const c_void) -> bool;
+    pub fn wxGauge_Pulse(self_: *mut c_void);
+    pub fn wxGauge_SetRange(self_: *mut c_void, range: c_int);
+    pub fn wxGauge_SetValue(self_: *mut c_void, pos: c_int);
+
     // wxGenericDirCtrl
     pub fn wxGenericDirCtrl_new() -> *mut c_void;
     pub fn wxGenericDirCtrl_new1(

@@ -27,6 +27,7 @@ enum WxRustEvent {
     RUST_EVT_CHECKBOX,
     RUST_EVT_MENU,
     RUST_EVT_RADIOBOX,
+    RUST_EVT_TIMER,
 };
 template<typename T> wxEventTypeTag<T> TypeTagOf(int eventType) {
     return wxEVT_NULL;
@@ -51,6 +52,13 @@ template<> wxEventTypeTag<wxCommandEvent> TypeTagOf(int eventType) {
     }
     return wxEVT_NULL;
 }
+template<> wxEventTypeTag<wxTimerEvent> TypeTagOf(int eventType) {
+    switch (eventType) {
+    case RUST_EVT_TIMER:
+        return wxEVT_TIMER;
+    }
+    return wxEVT_NULL;
+}
 template<typename T> void BindIfEventIs(wxEvtHandler *self, int eventType, void *aFn, void *aParam) {
     wxEventTypeTag<T> typeTag = TypeTagOf<T>(eventType);
     if (typeTag != wxEVT_NULL) {
@@ -61,6 +69,7 @@ template<typename T> void BindIfEventIs(wxEvtHandler *self, int eventType, void 
 void wxEvtHandler_Bind(wxEvtHandler *self, int eventType, void *aFn, void *aParam) {
     BindIfEventIs<wxBookCtrlEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxCommandEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxTimerEvent>(self, eventType, aFn, aParam);
 }
 
 // String

@@ -163,6 +163,7 @@ pub enum RustEvent {
     CheckBox,
     Menu,
     RadioBox,
+    Timer,
 }
 impl<T: EvtHandlerMethods> Bindable for T {
     fn bind<E: EventMethods, F: Fn(&E) + 'static>(&self, event_type: RustEvent, closure: F) {
