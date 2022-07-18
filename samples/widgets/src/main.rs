@@ -157,7 +157,6 @@ impl WidgetsFrame {
             panel,
             book,
             pages: vec![
-                gauge_page,
                 button_page,
                 check_box_page,
                 choice_page,
@@ -169,6 +168,7 @@ impl WidgetsFrame {
                 editlbox_page,
                 filectrl_page,
                 fontpicker_page,
+                gauge_page,
             ],
         };
         frame.on_create();
