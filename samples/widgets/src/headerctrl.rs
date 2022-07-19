@@ -4,78 +4,40 @@ use std::os::raw::{c_int, c_long};
 use std::rc::Rc;
 use wx::methods::*;
 
-// control ids
-#[derive(Clone, Copy)]
-enum GaugePage {
-    Reset = wx::ID_HIGHEST as isize,
-    Progress,
-    IndeterminateProgress,
-    Clear,
-    SetValue,
-    SetRange,
-    CurValueText,
-    ValueText,
-    RangeText,
-    Timer,
-    IndeterminateTimer,
-    Gauge,
-}
-impl GaugePage {
-    fn from(v: c_int) -> Option<Self> {
-        use GaugePage::*;
-        for e in [
-            Reset,
-            Progress,
-            IndeterminateProgress,
-            Clear,
-            SetValue,
-            SetRange,
-            CurValueText,
-            ValueText,
-            RangeText,
-            Timer,
-            IndeterminateTimer,
-            Gauge,
-        ] {
-            if v == e.into() {
-                return Some(e);
-            }
-        }
-        return None;
-    }
-}
-impl From<GaugePage> for c_int {
-    fn from(w: GaugePage) -> Self {
-        w as c_int
-    }
+const NUMBER_OF_COLUMNS: usize = 4;
+const COL_WITH_BITMAP_DEFAULT: bool = false;
+const COL_ALIGNMENT_INDEX_DEFAULT: c_int = 0;
+
+#[derive(Clone)]
+struct ColSetting {
+    chk_allow_resize: wx::CheckBox,
+    chk_allow_reorder: wx::CheckBox,
+    chk_allow_sort: wx::CheckBox,
+    chk_allow_hide: wx::CheckBox,
+    chk_with_bitmap: wx::CheckBox,
+    rb_alignments: wx::RadioBox,
 }
 
 #[derive(Clone)]
 pub struct ConfigUI {
     // the checkboxes for styles
-    chk_vert: wx::CheckBox,
-    chk_smooth: wx::CheckBox,
-    chk_progress: wx::CheckBox,
+    chk_allow_reorder: wx::CheckBox,
+    chk_allow_hide: wx::CheckBox,
+    chk_bitmap_on_right: wx::CheckBox,
 
-    // the text entries for set value/range
-    text_value: wx::TextCtrl,
-    text_range: wx::TextCtrl,
+    col_settings: [ColSetting; NUMBER_OF_COLUMNS],
 
-    sizer_gauge: wx::BoxSizer,
+    sizer_header: wx::StaticBoxSizer,
 }
 
 #[derive(Clone)]
-pub struct GaugeWidgetsPage {
+pub struct HeaderCtrlWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
     // the control itself
-    gauge: Rc<RefCell<Option<wx::Gauge>>>,
-    range: Rc<RefCell<c_int>>,
-
-    // the timer for simulating gauge progress
-    timer: Rc<RefCell<Option<wx::Timer>>>,
+    header: Rc<RefCell<Option<wx::Gauge>>>,
 }
-impl WidgetsPage for GaugeWidgetsPage {
+impl WidgetsPage for HeaderCtrlWidgetsPage {
     fn base(&self) -> &wx::Panel {
         return &self.base;
     }
@@ -85,434 +47,225 @@ impl WidgetsPage for GaugeWidgetsPage {
     fn create_content(&self) {
         let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
 
-        // left pane
-        let box_left = wx::StaticBox::builder(Some(&self.base))
-            .label("&Set style")
-            .build();
+        // header style
+        let sizer_header =
+            wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&self.base), "&Header style");
 
-        let sizer_left = wx::StaticBoxSizer::new_with_staticbox(Some(&box_left), wx::VERTICAL);
+        let chk_allow_reorder =
+            self.create_check_box_and_add_to_sizer(&sizer_header, "Allow &reorder", wx::ID_ANY);
+        let chk_allow_hide =
+            self.create_check_box_and_add_to_sizer(&sizer_header, "Alow &hide", wx::ID_ANY);
+        let chk_bitmap_on_right =
+            self.create_check_box_and_add_to_sizer(&sizer_header, "&Bitmap on right", wx::ID_ANY);
 
-        let chk_vert = self.create_check_box_and_add_to_sizer(&sizer_left, "&Vertical", wx::ID_ANY);
-        let chk_smooth = self.create_check_box_and_add_to_sizer(&sizer_left, "&Smooth", wx::ID_ANY);
-        let chk_progress =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "&Progress", wx::ID_ANY);
-
-        sizer_left.add_int_int(5, 5, 0, wx::GROW | wx::ALL, 5, wx::Object::none());
+        sizer_header.add_stretch_spacer(1);
 
         let btn = wx::Button::builder(Some(&self.base))
-            .id(GaugePage::Reset.into())
             .label("&Reset")
             .build();
-        sizer_left.add_window_int(
+        sizer_header.add_window_sizerflags(
             Some(&btn),
-            0,
-            wx::ALIGN_CENTRE_HORIZONTAL | wx::ALL,
-            15,
-            wx::Object::none(),
+            wx::SizerFlags::new(0).center_horizontal().border(wx::ALL),
+        );
+        sizer_top.add_sizer_sizerflags(Some(&sizer_header), wx::SizerFlags::new(0).expand());
+
+        // column flags
+        let mut col_settings: Vec<ColSetting> = vec![];
+        for i in 0..NUMBER_OF_COLUMNS {
+            let col_alignments = wx::ArrayString::new();
+            col_alignments.add("none");
+            col_alignments.add("left");
+            col_alignments.add("centre");
+            col_alignments.add("right");
+
+            let sizer_col = wx::StaticBoxSizer::new_with_int(
+                wx::VERTICAL,
+                Some(&self.base),
+                &format!("Column {} style", i + 1),
+            );
+            let col_setting = ColSetting {
+                chk_allow_resize: self.create_check_box_and_add_to_sizer(
+                    &sizer_col,
+                    "Allow resize",
+                    wx::ID_ANY,
+                ),
+                chk_allow_reorder: self.create_check_box_and_add_to_sizer(
+                    &sizer_col,
+                    "Allow reorder",
+                    wx::ID_ANY,
+                ),
+                chk_allow_sort: self.create_check_box_and_add_to_sizer(
+                    &sizer_col,
+                    "Allow sort",
+                    wx::ID_ANY,
+                ),
+                chk_allow_hide: self.create_check_box_and_add_to_sizer(
+                    &sizer_col,
+                    "Hidden",
+                    wx::ID_ANY,
+                ),
+                chk_with_bitmap: self.create_check_box_and_add_to_sizer(
+                    &sizer_col,
+                    "With bitmap",
+                    wx::ID_ANY,
+                ),
+                rb_alignments: wx::RadioBox::builder(Some(&self.base))
+                    .label("Alignment")
+                    .choices(col_alignments)
+                    .major_dimension(2)
+                    .style(wx::RA_SPECIFY_COLS)
+                    .build(),
+            };
+            sizer_col.add_window_sizerflags(
+                Some(&col_setting.rb_alignments),
+                wx::SizerFlags::new(0).expand().border(wx::ALL),
+            );
+            self.reset_column_style(&col_setting);
+            col_settings.push(col_setting);
+            sizer_top.add_spacer(15);
+            sizer_top.add_sizer_sizerflags(Some(&sizer_col), wx::SizerFlags::new(0).expand());
+        }
+
+        // bottom pane
+        let sizer_header =
+            wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&self.base), "Header");
+        self.recreate_widget();
+
+        // the 2 panes compose the window
+        let sizer_all = wx::BoxSizer::new(wx::VERTICAL);
+        sizer_all.add_sizer_sizerflags(
+            Some(&sizer_top),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
+        );
+        sizer_all.add_sizer_sizerflags(
+            Some(&sizer_header),
+            wx::SizerFlags::new(1).expand().border(wx::ALL),
         );
 
-        // middle pane
-        let box2 = wx::StaticBox::builder(Some(&self.base))
-            .label("&Set style")
-            .build();
-
-        let sizer_middle = wx::StaticBoxSizer::new_with_staticbox(Some(&box2), wx::VERTICAL);
-
-        // TODO: OnUpdateUI event
-        let (sizer_row, text) =
-            self.create_sizer_with_text_and_label("Current value", GaugePage::CurValueText.into());
-        text.set_editable(false);
-
-        sizer_middle.add_sizer_int(
-            Some(&sizer_row),
-            0,
-            wx::ALL | wx::GROW,
-            5,
-            wx::Object::none(),
-        );
-
-        let (sizer_row, text_value) = self.create_sizer_with_text_and_button(
-            GaugePage::SetValue.into(),
-            "Set &value",
-            GaugePage::ValueText.into(),
-        );
-        sizer_middle.add_sizer_int(
-            Some(&sizer_row),
-            0,
-            wx::ALL | wx::GROW,
-            5,
-            wx::Object::none(),
-        );
-
-        let (sizer_row, text_range) = self.create_sizer_with_text_and_button(
-            GaugePage::SetRange.into(),
-            "Set &range",
-            GaugePage::RangeText.into(),
-        );
-        let range = *self.range.borrow();
-        text_range.set_value(&format!("{}", range));
-        sizer_middle.add_sizer_int(
-            Some(&sizer_row),
-            0,
-            wx::ALL | wx::GROW,
-            5,
-            wx::Object::none(),
-        );
-
-        let btn = wx::Button::builder(Some(&self.base))
-            .id(GaugePage::Progress.into())
-            .label("Simulate &progress")
-            .build();
-        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
-
-        let btn = wx::Button::builder(Some(&self.base))
-            .id(GaugePage::IndeterminateProgress.into())
-            .label("Simulate &indeterminate job")
-            .build();
-        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
-
-        let btn = wx::Button::builder(Some(&self.base))
-            .id(GaugePage::Clear.into())
-            .label("&Clear")
-            .build();
-        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
-
-        // right pane
-        let sizer_right = wx::BoxSizer::new(wx::HORIZONTAL);
-        let gauge = wx::Gauge::builder(Some(&self.base))
-            .id(GaugePage::Gauge.into())
-            .range(range)
-            .build();
-        sizer_right.add_window_int(
-            Some(&gauge),
-            1,
-            wx::CENTRE as i32 | wx::ALL,
-            5,
-            wx::Object::none(),
-        );
-        sizer_right.set_min_size_int(150, 0);
-        *self.gauge.borrow_mut() = Some(gauge);
-
-        // the 3 panes panes compose the window
-        sizer_top.add_sizer_int(
-            Some(&sizer_left),
-            0,
-            wx::GROW | (wx::ALL & !wx::LEFT),
-            10,
-            wx::Object::none(),
-        );
-        sizer_top.add_sizer_int(
-            Some(&sizer_middle),
-            1,
-            wx::GROW | wx::ALL,
-            10,
-            wx::Object::none(),
-        );
-        sizer_top.add_sizer_int(
-            Some(&sizer_right),
-            1,
-            wx::GROW | (wx::ALL & !wx::RIGHT),
-            10,
-            wx::Object::none(),
-        );
+        self.base.set_sizer(Some(&sizer_all), true);
 
         // final initializations
+        let col_settings: [ColSetting; NUMBER_OF_COLUMNS] = col_settings.try_into().ok().unwrap();
         let config_ui = ConfigUI {
-            chk_vert,
-            chk_smooth,
-            chk_progress,
+            chk_allow_reorder,
+            chk_allow_hide,
+            chk_bitmap_on_right,
 
-            text_value,
-            text_range,
+            col_settings: col_settings.try_into().unwrap(),
 
-            sizer_gauge: sizer_right, // save it to modify it later
+            sizer_header, // save it to modify it later
         };
-        self.reset(&config_ui);
+        self.reset_header_style(&config_ui);
         *self.config_ui.borrow_mut() = Some(config_ui);
-
-        self.base.set_sizer(Some(&sizer_top), true);
     }
 
     fn handle_button(&self, event: &wx::CommandEvent) {
-        println!("event={}", event.get_id());
-        if let (Some(config_ui), Some(m)) = (
-            self.config_ui.borrow().as_ref(),
-            GaugePage::from(event.get_id()),
-        ) {
-            match m {
-                GaugePage::Reset => self.on_button_reset(config_ui),
-                GaugePage::Progress => self.on_button_progress(),
-                GaugePage::IndeterminateProgress => self.on_button_indeterminate_progress(),
-                GaugePage::Clear => self.on_button_clear(),
-                GaugePage::SetValue => self.on_button_set_value(),
-                GaugePage::SetRange => self.on_button_set_range(),
-                _ => (),
-            };
-        }
+        // Do nothing.
     }
     fn handle_checkbox(&self, _: &wx::CommandEvent) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            self.on_check_or_radio_box(config_ui);
-        }
+        // Do nothing.
     }
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            self.on_check_or_radio_box(config_ui);
-        }
+        // Do nothing.
     }
 }
-impl GaugeWidgetsPage {
+impl HeaderCtrlWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {
         let panel = wx::Panel::builder(Some(book))
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
 
-        let page = GaugeWidgetsPage {
+        HeaderCtrlWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
-            gauge: Rc::new(RefCell::new(None)),
-            range: Rc::new(RefCell::new(100)),
-            timer: Rc::new(RefCell::new(None)),
-        };
-
-        let page_copy = page.clone();
-        page.base
-            .bind(wx::RustEvent::Timer, move |event: &wx::TimerEvent| {
-                page_copy.handle_timer(event);
-            });
-
-        page
+            header: Rc::new(RefCell::new(None)),
+        }
     }
 
-    fn reset(&self, config_ui: &ConfigUI) {
-        config_ui.chk_vert.set_value(false);
-        config_ui.chk_smooth.set_value(false);
-        config_ui.chk_progress.set_value(false);
+    fn recreate_widget(&self) {
+        // TODO
     }
 
-    fn create_gauge(&self, config_ui: &ConfigUI) {
+    fn reset_header_style(&self, config_ui: &ConfigUI) {
+        config_ui
+            .chk_allow_reorder
+            .set_value((wx::HD_DEFAULT_STYLE & wx::HD_ALLOW_REORDER) != 0);
+        config_ui
+            .chk_allow_hide
+            .set_value((wx::HD_DEFAULT_STYLE & wx::HD_ALLOW_HIDE) != 0);
+        config_ui
+            .chk_bitmap_on_right
+            .set_value((wx::HD_DEFAULT_STYLE & wx::HD_BITMAP_ON_RIGHT) != 0);
+    }
+
+    fn reset_column_style(&self, col_setting: &ColSetting) {
+        col_setting
+            .chk_allow_resize
+            .set_value((wx::COL_DEFAULT_FLAGS & wx::COL_RESIZABLE) != 0);
+        col_setting
+            .chk_allow_reorder
+            .set_value((wx::COL_DEFAULT_FLAGS & wx::COL_REORDERABLE) != 0);
+        col_setting
+            .chk_allow_sort
+            .set_value((wx::COL_DEFAULT_FLAGS & wx::COL_SORTABLE) != 0);
+        col_setting
+            .chk_allow_hide
+            .set_value((wx::COL_DEFAULT_FLAGS & wx::COL_HIDDEN) != 0);
+        col_setting
+            .chk_with_bitmap
+            .set_value(COL_WITH_BITMAP_DEFAULT);
+        col_setting
+            .rb_alignments
+            .set_selection(COL_ALIGNMENT_INDEX_DEFAULT);
+    }
+
+    fn create_header(&self, config_ui: &ConfigUI) {
         let mut flags = wx::BORDER_DEFAULT;
 
-        flags |= if config_ui.chk_vert.get_value() {
-            wx::GA_VERTICAL
-        } else {
-            wx::GA_HORIZONTAL
-        } as c_long;
+        // flags |= if config_ui.chk_vert.get_value() {
+        //     wx::GA_VERTICAL
+        // } else {
+        //     wx::GA_HORIZONTAL
+        // } as c_long;
 
-        if config_ui.chk_smooth.get_value() {
-            flags |= wx::GA_SMOOTH as c_long;
-        }
-        if config_ui.chk_progress.get_value() {
-            flags |= wx::GA_PROGRESS as c_long;
-        }
+        // if config_ui.chk_smooth.get_value() {
+        //     flags |= wx::GA_SMOOTH as c_long;
+        // }
+        // if config_ui.chk_progress.get_value() {
+        //     flags |= wx::GA_PROGRESS as c_long;
+        // }
 
         let mut val = 0;
-        if let Some(gauge) = self.gauge.borrow().as_ref() {
-            val = gauge.get_value();
+        if let Some(header) = self.header.borrow().as_ref() {
+            val = header.get_value();
 
-            config_ui.sizer_gauge.detach_window(Some(gauge));
-            gauge.destroy();
+            config_ui.sizer_header.detach_window(Some(header));
+            header.destroy();
         }
 
-        let range = *self.range.borrow();
-        let gauge = wx::Gauge::builder(Some(&self.base))
-            .id(GaugePage::Gauge.into())
-            .range(range)
-            .style(flags)
-            .build();
-        gauge.set_value(val);
+        let header = wx::Gauge::builder(Some(&self.base)).style(flags).build();
+        header.set_value(val);
 
         if (flags & wx::GA_VERTICAL as c_long) != 0 {
-            config_ui.sizer_gauge.add_window_int(
-                Some(&gauge),
+            config_ui.sizer_header.add_window_int(
+                Some(&header),
                 0,
                 wx::GROW | wx::ALL,
                 5,
                 wx::Object::none(),
             );
         } else {
-            config_ui.sizer_gauge.add_window_int(
-                Some(&gauge),
+            config_ui.sizer_header.add_window_int(
+                Some(&header),
                 1,
                 wx::CENTRE as i32 | wx::ALL,
                 5,
                 wx::Object::none(),
             );
         }
-        *self.gauge.borrow_mut() = Some(gauge);
+        *self.header.borrow_mut() = Some(header);
 
         // relayout the sizer
-        config_ui.sizer_gauge.layout();
-    }
-
-    fn start_timer<W: WindowMethods>(&self, clicked: &W) {
-        let INTERVAL = 300;
-
-        let is_progress_button = clicked.get_id() == GaugePage::Progress.into();
-        let timer = wx::Timer::new_with_evthandler(
-            Some(&self.base),
-            if is_progress_button {
-                GaugePage::Timer.into()
-            } else {
-                GaugePage::IndeterminateTimer.into()
-            },
-        );
-        timer.start(INTERVAL, wx::TIMER_CONTINUOUS);
-        *self.timer.borrow_mut() = Some(timer);
-
-        clicked.set_label("&Stop timer");
-
-        if is_progress_button {
-            if let Some(gauge) = self
-                .base
-                .find_window_long(GaugePage::IndeterminateProgress as c_long)
-                .get()
-            {
-                gauge.disable();
-            }
-        } else {
-            if let Some(gauge) = self
-                .base
-                .find_window_long(GaugePage::Progress as c_long)
-                .get()
-            {
-                gauge.disable();
-            }
-        }
-    }
-
-    fn stop_timer<W: WindowMethods>(&self, clicked: &W) {
-        if let Some(timer) = self.timer.borrow().as_ref() {
-            timer.stop();
-        }
-        *self.timer.borrow_mut() = None;
-
-        if clicked.get_id() == GaugePage::Progress.into() {
-            clicked.set_label("Simulate &progress");
-            if let Some(gauge) = self
-                .base
-                .find_window_long(GaugePage::IndeterminateProgress as c_long)
-                .get()
-            {
-                gauge.enable(true);
-            }
-        } else {
-            clicked.set_label("Simulate indeterminate job");
-            if let Some(gauge) = self
-                .base
-                .find_window_long(GaugePage::Progress as c_long)
-                .get()
-            {
-                gauge.enable(true);
-            }
-        }
-    }
-
-    // ----------------------------------------------------------------------------
-    // event handlers
-    // ----------------------------------------------------------------------------
-
-    fn on_button_reset(&self, config_ui: &ConfigUI) {
-        self.reset(config_ui);
-
-        self.create_gauge(config_ui);
-    }
-
-    fn on_button_progress(&self) {
-        if let Some(b) = self
-            .base
-            .find_window_long(GaugePage::Progress as c_long)
-            .get()
-        {
-            if self.timer.borrow().is_none() {
-                self.start_timer(&b);
-            } else {
-                self.stop_timer(&b);
-            }
-        }
-    }
-
-    fn on_button_indeterminate_progress(&self) {
-        if let Some(b) = self
-            .base
-            .find_window_long(GaugePage::IndeterminateProgress as c_long)
-            .get()
-        {
-            if self.timer.borrow().is_none() {
-                self.start_timer(&b);
-            } else {
-                self.stop_timer(&b);
-                if let Some(gauge) = self.gauge.borrow().as_ref() {
-                    gauge.set_value(0);
-                }
-            }
-        }
-    }
-
-    fn on_button_clear(&self) {
-        if let Some(gauge) = self.gauge.borrow().as_ref() {
-            gauge.set_value(0);
-        }
-    }
-
-    fn on_button_set_range(&self) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            if let (Ok(val), Some(gauge)) = (
-                config_ui.text_range.get_value().parse(),
-                self.gauge.borrow().as_ref(),
-            ) {
-                *self.range.borrow_mut() = val;
-                gauge.set_range(val);
-            }
-        }
-    }
-
-    fn on_button_set_value(&self) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            if let (Ok(val), Some(gauge)) = (
-                config_ui.text_value.get_value().parse(),
-                self.gauge.borrow().as_ref(),
-            ) {
-                gauge.set_value(val);
-            }
-        }
-    }
-
-    fn on_check_or_radio_box(&self, config_ui: &ConfigUI) {
-        self.create_gauge(config_ui);
-    }
-
-    fn handle_timer(&self, event: &wx::TimerEvent) {
-        if let Some(m) = GaugePage::from(event.get_id()) {
-            match m {
-                GaugePage::Timer => self.on_progress_timer(),
-                GaugePage::IndeterminateTimer => self.on_intermediate_progress_timer(),
-                _ => (),
-            }
-        }
-    }
-
-    fn on_progress_timer(&self) {
-        if let (Some(gauge), range) = (self.gauge.borrow().as_ref(), *self.range.borrow()) {
-            let val = gauge.get_value();
-            if val < range {
-                gauge.set_value(val + 1);
-            } else {
-                // reached the end
-                if let Some(b) = self
-                    .base
-                    .find_window_long(GaugePage::Progress as c_long)
-                    .get()
-                {
-                    self.stop_timer(&b);
-                }
-            }
-        }
-    }
-
-    fn on_intermediate_progress_timer(&self) {
-        if let Some(gauge) = self.gauge.borrow().as_ref() {
-            gauge.pulse();
-        }
+        config_ui.sizer_header.layout();
     }
 }
