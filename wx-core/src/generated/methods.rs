@@ -2166,6 +2166,31 @@ pub trait HeaderCtrlMethods: ControlMethods {
     }
 }
 
+// wxHeaderCtrlSimple
+pub trait HeaderCtrlSimpleMethods: HeaderCtrlMethods {
+    fn insert_column(&self, col: *const c_void, idx: c_uint) {
+        unsafe { ffi::wxHeaderCtrlSimple_InsertColumn(self.as_ptr(), col, idx) }
+    }
+    fn append_column(&self, col: *const c_void) {
+        unsafe { ffi::wxHeaderCtrlSimple_AppendColumn(self.as_ptr(), col) }
+    }
+    fn delete_column(&self, idx: c_uint) {
+        unsafe { ffi::wxHeaderCtrlSimple_DeleteColumn(self.as_ptr(), idx) }
+    }
+    fn show_column(&self, idx: c_uint, show: bool) {
+        unsafe { ffi::wxHeaderCtrlSimple_ShowColumn(self.as_ptr(), idx, show) }
+    }
+    fn hide_column(&self, idx: c_uint) {
+        unsafe { ffi::wxHeaderCtrlSimple_HideColumn(self.as_ptr(), idx) }
+    }
+    fn show_sort_indicator(&self, idx: c_uint, sort_order: bool) {
+        unsafe { ffi::wxHeaderCtrlSimple_ShowSortIndicator(self.as_ptr(), idx, sort_order) }
+    }
+    fn remove_sort_indicator(&self) {
+        unsafe { ffi::wxHeaderCtrlSimple_RemoveSortIndicator(self.as_ptr()) }
+    }
+}
+
 // wxIcon
 pub trait IconMethods: GDIObjectMethods {
     // DTOR: fn ~wxIcon()

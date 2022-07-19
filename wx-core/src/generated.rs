@@ -1189,6 +1189,47 @@ impl<const OWNED: bool> WindowMethods for HeaderCtrlIsOwned<OWNED> {
     }
 }
 
+// wxHeaderCtrlSimple
+wx_class! { HeaderCtrlSimple =
+    HeaderCtrlSimpleIsOwned<true>(wxHeaderCtrlSimple) impl
+        HeaderCtrlSimpleMethods,
+        HeaderCtrlMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> HeaderCtrlSimpleIsOwned<OWNED> {
+    pub fn new_2step() -> HeaderCtrlSimpleIsOwned<OWNED> {
+        unsafe { HeaderCtrlSimpleIsOwned(ffi::wxHeaderCtrlSimple_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&W>,
+        winid: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> HeaderCtrlSimpleIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            HeaderCtrlSimpleIsOwned(ffi::wxHeaderCtrlSimple_new1(
+                parent, winid, pos, size, style, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
 // wxIcon
 wx_class! { Icon =
     IconIsOwned<true>(wxIcon) impl

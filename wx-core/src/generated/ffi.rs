@@ -969,6 +969,24 @@ extern "C" {
     pub fn wxHeaderCtrl_GetColumnTitleWidth1(self_: *mut c_void, idx: c_uint) -> c_int;
     pub fn wxHeaderCtrl_MoveColumnInOrderArray(order: *mut c_void, idx: c_uint, pos: c_uint);
 
+    // wxHeaderCtrlSimple
+    pub fn wxHeaderCtrlSimple_new() -> *mut c_void;
+    pub fn wxHeaderCtrlSimple_new1(
+        parent: *mut c_void,
+        winid: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxHeaderCtrlSimple_InsertColumn(self_: *mut c_void, col: *const c_void, idx: c_uint);
+    pub fn wxHeaderCtrlSimple_AppendColumn(self_: *mut c_void, col: *const c_void);
+    pub fn wxHeaderCtrlSimple_DeleteColumn(self_: *mut c_void, idx: c_uint);
+    pub fn wxHeaderCtrlSimple_ShowColumn(self_: *mut c_void, idx: c_uint, show: bool);
+    pub fn wxHeaderCtrlSimple_HideColumn(self_: *mut c_void, idx: c_uint);
+    pub fn wxHeaderCtrlSimple_ShowSortIndicator(self_: *mut c_void, idx: c_uint, sort_order: bool);
+    pub fn wxHeaderCtrlSimple_RemoveSortIndicator(self_: *mut c_void);
+
     // wxIcon
     pub fn wxIcon_new() -> *mut c_void;
     pub fn wxIcon_new1(icon: *const c_void) -> *mut c_void;

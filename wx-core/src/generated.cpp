@@ -1290,6 +1290,35 @@ void wxHeaderCtrl_MoveColumnInOrderArray(wxArrayInt * order, unsigned int idx, u
     return wxHeaderCtrl::MoveColumnInOrderArray(*order, idx, pos);
 }
 
+// CLASS: wxHeaderCtrlSimple
+wxHeaderCtrlSimple *wxHeaderCtrlSimple_new() {
+    return new wxHeaderCtrlSimple();
+}
+wxHeaderCtrlSimple *wxHeaderCtrlSimple_new1(wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxHeaderCtrlSimple(parent, winid, *pos, *size, style, *name);
+}
+void wxHeaderCtrlSimple_InsertColumn(wxHeaderCtrlSimple * self, const wxHeaderColumnSimple * col, unsigned int idx) {
+    return self->InsertColumn(*col, idx);
+}
+void wxHeaderCtrlSimple_AppendColumn(wxHeaderCtrlSimple * self, const wxHeaderColumnSimple * col) {
+    return self->AppendColumn(*col);
+}
+void wxHeaderCtrlSimple_DeleteColumn(wxHeaderCtrlSimple * self, unsigned int idx) {
+    return self->DeleteColumn(idx);
+}
+void wxHeaderCtrlSimple_ShowColumn(wxHeaderCtrlSimple * self, unsigned int idx, bool show) {
+    return self->ShowColumn(idx, show);
+}
+void wxHeaderCtrlSimple_HideColumn(wxHeaderCtrlSimple * self, unsigned int idx) {
+    return self->HideColumn(idx);
+}
+void wxHeaderCtrlSimple_ShowSortIndicator(wxHeaderCtrlSimple * self, unsigned int idx, bool sort_order) {
+    return self->ShowSortIndicator(idx, sort_order);
+}
+void wxHeaderCtrlSimple_RemoveSortIndicator(wxHeaderCtrlSimple * self) {
+    return self->RemoveSortIndicator();
+}
+
 // CLASS: wxIcon
 wxIcon *wxIcon_new() {
     return new wxIcon();
