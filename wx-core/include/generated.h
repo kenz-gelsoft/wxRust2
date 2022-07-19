@@ -536,6 +536,9 @@ bool wxHeaderColumn_IsShown(const wxHeaderColumn * self);
 bool wxHeaderColumn_IsSortKey(const wxHeaderColumn * self);
 bool wxHeaderColumn_IsSortOrderAscending(const wxHeaderColumn * self);
 
+// CLASS: wxHeaderColumnSimple
+void wxHeaderColumnSimple_delete(wxHeaderColumnSimple *self);
+
 // CLASS: wxHeaderCtrl
 bool wxHeaderCtrl_Create(wxHeaderCtrl * self, wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 void wxHeaderCtrl_SetColumnCount(wxHeaderCtrl * self, unsigned int count);

@@ -1290,6 +1290,11 @@ bool wxHeaderColumn_IsSortOrderAscending(const wxHeaderColumn * self) {
     return self->IsSortOrderAscending();
 }
 
+// CLASS: wxHeaderColumnSimple
+void wxHeaderColumnSimple_delete(wxHeaderColumnSimple *self) {
+    delete self;
+}
+
 // CLASS: wxHeaderCtrl
 bool wxHeaderCtrl_Create(wxHeaderCtrl * self, wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return self->Create(parent, winid, *pos, *size, style, *name);

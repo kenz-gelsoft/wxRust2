@@ -951,6 +951,11 @@ extern "C" {
     pub fn wxHeaderColumn_IsSortKey(self_: *const c_void) -> bool;
     pub fn wxHeaderColumn_IsSortOrderAscending(self_: *const c_void) -> bool;
 
+    // wxHeaderColumnSimple
+    pub fn wxHeaderColumnSimple_delete(self_: *mut c_void);
+    // NOT_SUPPORTED: pub fn wxHeaderColumnSimple_new(title: *const c_void, width: c_int, align: wxAlignment, flags: c_int) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxHeaderColumnSimple_new1(bitmap: *const c_void, width: c_int, align: wxAlignment, flags: c_int) -> *mut c_void;
+
     // wxHeaderCtrl
     // BLOCKED: pub fn wxHeaderCtrl_new() -> *mut c_void;
     // BLOCKED: pub fn wxHeaderCtrl_new1(parent: *mut c_void, winid: c_int, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> *mut c_void;

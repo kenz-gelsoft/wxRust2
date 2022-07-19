@@ -1167,6 +1167,28 @@ impl<const OWNED: bool> Drop for HeaderColumnIsOwned<OWNED> {
     }
 }
 
+// wxHeaderColumnSimple
+wx_class! { HeaderColumnSimple =
+    HeaderColumnSimpleIsOwned<true>(wxHeaderColumnSimple) impl
+        HeaderColumnSimpleMethods,
+        SettableHeaderColumnMethods,
+        HeaderColumnMethods
+}
+impl<const OWNED: bool> HeaderColumnSimpleIsOwned<OWNED> {
+    // NOT_SUPPORTED: fn wxHeaderColumnSimple()
+    // NOT_SUPPORTED: fn wxHeaderColumnSimple1()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for HeaderColumnSimpleIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxHeaderColumnSimple_delete(self.0) }
+        }
+    }
+}
+
 // wxHeaderCtrl
 wx_class! { HeaderCtrl =
     HeaderCtrlIsOwned<true>(wxHeaderCtrl) impl

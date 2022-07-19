@@ -2161,6 +2161,9 @@ pub trait HeaderColumnMethods: WxRustMethods {
     }
 }
 
+// wxHeaderColumnSimple
+pub trait HeaderColumnSimpleMethods: SettableHeaderColumnMethods {}
+
 // wxHeaderCtrl
 pub trait HeaderCtrlMethods: ControlMethods {
     fn set_column_count(&self, count: c_uint) {
@@ -2218,11 +2221,17 @@ pub trait HeaderCtrlMethods: ControlMethods {
 
 // wxHeaderCtrlSimple
 pub trait HeaderCtrlSimpleMethods: HeaderCtrlMethods {
-    fn insert_column(&self, col: *const c_void, idx: c_uint) {
-        unsafe { ffi::wxHeaderCtrlSimple_InsertColumn(self.as_ptr(), col, idx) }
+    fn insert_column<H: HeaderColumnSimpleMethods>(&self, col: &H, idx: c_uint) {
+        unsafe {
+            let col = col.as_ptr();
+            ffi::wxHeaderCtrlSimple_InsertColumn(self.as_ptr(), col, idx)
+        }
     }
-    fn append_column(&self, col: *const c_void) {
-        unsafe { ffi::wxHeaderCtrlSimple_AppendColumn(self.as_ptr(), col) }
+    fn append_column<H: HeaderColumnSimpleMethods>(&self, col: &H) {
+        unsafe {
+            let col = col.as_ptr();
+            ffi::wxHeaderCtrlSimple_AppendColumn(self.as_ptr(), col)
+        }
     }
     fn delete_column(&self, idx: c_uint) {
         unsafe { ffi::wxHeaderCtrlSimple_DeleteColumn(self.as_ptr(), idx) }
