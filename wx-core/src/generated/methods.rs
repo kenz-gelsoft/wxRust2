@@ -3970,6 +3970,66 @@ pub trait RectMethods: WxRustMethods {
     // BLOCKED: fn operator==()
 }
 
+// wxSettableHeaderColumn
+pub trait SettableHeaderColumnMethods: HeaderColumnMethods {
+    fn set_title(&self, title: &str) {
+        unsafe {
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            ffi::wxSettableHeaderColumn_SetTitle(self.as_ptr(), title)
+        }
+    }
+    fn set_bitmap<B: BitmapBundleMethods>(&self, bitmap: &B) {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            ffi::wxSettableHeaderColumn_SetBitmap(self.as_ptr(), bitmap)
+        }
+    }
+    fn set_width(&self, width: c_int) {
+        unsafe { ffi::wxSettableHeaderColumn_SetWidth(self.as_ptr(), width) }
+    }
+    fn set_min_width(&self, min_width: c_int) {
+        unsafe { ffi::wxSettableHeaderColumn_SetMinWidth(self.as_ptr(), min_width) }
+    }
+    // NOT_SUPPORTED: fn SetAlignment()
+    fn set_flags(&self, flags: c_int) {
+        unsafe { ffi::wxSettableHeaderColumn_SetFlags(self.as_ptr(), flags) }
+    }
+    fn change_flag(&self, flag: c_int, set: bool) {
+        unsafe { ffi::wxSettableHeaderColumn_ChangeFlag(self.as_ptr(), flag, set) }
+    }
+    fn set_flag(&self, flag: c_int) {
+        unsafe { ffi::wxSettableHeaderColumn_SetFlag(self.as_ptr(), flag) }
+    }
+    fn clear_flag(&self, flag: c_int) {
+        unsafe { ffi::wxSettableHeaderColumn_ClearFlag(self.as_ptr(), flag) }
+    }
+    fn toggle_flag(&self, flag: c_int) {
+        unsafe { ffi::wxSettableHeaderColumn_ToggleFlag(self.as_ptr(), flag) }
+    }
+    fn set_resizeable(&self, resizable: bool) {
+        unsafe { ffi::wxSettableHeaderColumn_SetResizeable(self.as_ptr(), resizable) }
+    }
+    fn set_sortable(&self, sortable: bool) {
+        unsafe { ffi::wxSettableHeaderColumn_SetSortable(self.as_ptr(), sortable) }
+    }
+    fn set_reorderable(&self, reorderable: bool) {
+        unsafe { ffi::wxSettableHeaderColumn_SetReorderable(self.as_ptr(), reorderable) }
+    }
+    fn set_hidden(&self, hidden: bool) {
+        unsafe { ffi::wxSettableHeaderColumn_SetHidden(self.as_ptr(), hidden) }
+    }
+    fn unset_as_sort_key(&self) {
+        unsafe { ffi::wxSettableHeaderColumn_UnsetAsSortKey(self.as_ptr()) }
+    }
+    fn set_sort_order(&self, ascending: bool) {
+        unsafe { ffi::wxSettableHeaderColumn_SetSortOrder(self.as_ptr(), ascending) }
+    }
+    fn toggle_sort_order(&self) {
+        unsafe { ffi::wxSettableHeaderColumn_ToggleSortOrder(self.as_ptr()) }
+    }
+}
+
 // wxSize
 pub trait SizeMethods: WxRustMethods {
     // BLOCKED: fn operator=()

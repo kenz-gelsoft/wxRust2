@@ -1749,6 +1749,25 @@ impl<const OWNED: bool> Drop for RectIsOwned<OWNED> {
     }
 }
 
+// wxSettableHeaderColumn
+wx_class! { SettableHeaderColumn =
+    SettableHeaderColumnIsOwned<true>(wxSettableHeaderColumn) impl
+        SettableHeaderColumnMethods,
+        HeaderColumnMethods
+}
+impl<const OWNED: bool> SettableHeaderColumnIsOwned<OWNED> {
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for SettableHeaderColumnIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxSettableHeaderColumn_delete(self.0) }
+        }
+    }
+}
+
 // wxSize
 wx_class! { Size =
     SizeIsOwned<true>(wxSize) impl

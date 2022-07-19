@@ -1676,6 +1676,26 @@ extern "C" {
     // BLOCKED: pub fn wxRect_operator=(self_: *mut c_void, rect: *const c_void) -> *mut c_void;
     // BLOCKED: pub fn wxRect_operator==(self_: *mut c_void, r1: *const c_void, r2: *const c_void) -> bool;
 
+    // wxSettableHeaderColumn
+    pub fn wxSettableHeaderColumn_delete(self_: *mut c_void);
+    pub fn wxSettableHeaderColumn_SetTitle(self_: *mut c_void, title: *const c_void);
+    pub fn wxSettableHeaderColumn_SetBitmap(self_: *mut c_void, bitmap: *const c_void);
+    pub fn wxSettableHeaderColumn_SetWidth(self_: *mut c_void, width: c_int);
+    pub fn wxSettableHeaderColumn_SetMinWidth(self_: *mut c_void, min_width: c_int);
+    // NOT_SUPPORTED: pub fn wxSettableHeaderColumn_SetAlignment(self_: *mut c_void, align: wxAlignment);
+    pub fn wxSettableHeaderColumn_SetFlags(self_: *mut c_void, flags: c_int);
+    pub fn wxSettableHeaderColumn_ChangeFlag(self_: *mut c_void, flag: c_int, set: bool);
+    pub fn wxSettableHeaderColumn_SetFlag(self_: *mut c_void, flag: c_int);
+    pub fn wxSettableHeaderColumn_ClearFlag(self_: *mut c_void, flag: c_int);
+    pub fn wxSettableHeaderColumn_ToggleFlag(self_: *mut c_void, flag: c_int);
+    pub fn wxSettableHeaderColumn_SetResizeable(self_: *mut c_void, resizable: bool);
+    pub fn wxSettableHeaderColumn_SetSortable(self_: *mut c_void, sortable: bool);
+    pub fn wxSettableHeaderColumn_SetReorderable(self_: *mut c_void, reorderable: bool);
+    pub fn wxSettableHeaderColumn_SetHidden(self_: *mut c_void, hidden: bool);
+    pub fn wxSettableHeaderColumn_UnsetAsSortKey(self_: *mut c_void);
+    pub fn wxSettableHeaderColumn_SetSortOrder(self_: *mut c_void, ascending: bool);
+    pub fn wxSettableHeaderColumn_ToggleSortOrder(self_: *mut c_void);
+
     // wxSize
     pub fn wxSize_delete(self_: *mut c_void);
     // BLOCKED: pub fn wxSize_operator=(self_: *mut c_void, sz: *const c_void) -> *mut c_void;

@@ -932,6 +932,25 @@ void wxRect_SetTopRight(wxRect * self, const wxPoint * p);
 void wxRect_SetBottomLeft(wxRect * self, const wxPoint * p);
 wxRect *wxRect_Union(const wxRect * self, const wxRect * rect);
 
+// CLASS: wxSettableHeaderColumn
+void wxSettableHeaderColumn_delete(wxSettableHeaderColumn *self);
+void wxSettableHeaderColumn_SetTitle(wxSettableHeaderColumn * self, const wxString * title);
+void wxSettableHeaderColumn_SetBitmap(wxSettableHeaderColumn * self, const wxBitmapBundle * bitmap);
+void wxSettableHeaderColumn_SetWidth(wxSettableHeaderColumn * self, int width);
+void wxSettableHeaderColumn_SetMinWidth(wxSettableHeaderColumn * self, int min_width);
+void wxSettableHeaderColumn_SetFlags(wxSettableHeaderColumn * self, int flags);
+void wxSettableHeaderColumn_ChangeFlag(wxSettableHeaderColumn * self, int flag, bool set);
+void wxSettableHeaderColumn_SetFlag(wxSettableHeaderColumn * self, int flag);
+void wxSettableHeaderColumn_ClearFlag(wxSettableHeaderColumn * self, int flag);
+void wxSettableHeaderColumn_ToggleFlag(wxSettableHeaderColumn * self, int flag);
+void wxSettableHeaderColumn_SetResizeable(wxSettableHeaderColumn * self, bool resizable);
+void wxSettableHeaderColumn_SetSortable(wxSettableHeaderColumn * self, bool sortable);
+void wxSettableHeaderColumn_SetReorderable(wxSettableHeaderColumn * self, bool reorderable);
+void wxSettableHeaderColumn_SetHidden(wxSettableHeaderColumn * self, bool hidden);
+void wxSettableHeaderColumn_UnsetAsSortKey(wxSettableHeaderColumn * self);
+void wxSettableHeaderColumn_SetSortOrder(wxSettableHeaderColumn * self, bool ascending);
+void wxSettableHeaderColumn_ToggleSortOrder(wxSettableHeaderColumn * self);
+
 // CLASS: wxSize
 void wxSize_delete(wxSize *self);
 wxSize *wxSize_new();

@@ -2346,6 +2346,59 @@ wxRect *wxRect_Union(const wxRect * self, const wxRect * rect) {
     return new wxRect(self->Union(*rect));
 }
 
+// CLASS: wxSettableHeaderColumn
+void wxSettableHeaderColumn_delete(wxSettableHeaderColumn *self) {
+    delete self;
+}
+void wxSettableHeaderColumn_SetTitle(wxSettableHeaderColumn * self, const wxString * title) {
+    return self->SetTitle(*title);
+}
+void wxSettableHeaderColumn_SetBitmap(wxSettableHeaderColumn * self, const wxBitmapBundle * bitmap) {
+    return self->SetBitmap(*bitmap);
+}
+void wxSettableHeaderColumn_SetWidth(wxSettableHeaderColumn * self, int width) {
+    return self->SetWidth(width);
+}
+void wxSettableHeaderColumn_SetMinWidth(wxSettableHeaderColumn * self, int min_width) {
+    return self->SetMinWidth(min_width);
+}
+void wxSettableHeaderColumn_SetFlags(wxSettableHeaderColumn * self, int flags) {
+    return self->SetFlags(flags);
+}
+void wxSettableHeaderColumn_ChangeFlag(wxSettableHeaderColumn * self, int flag, bool set) {
+    return self->ChangeFlag(flag, set);
+}
+void wxSettableHeaderColumn_SetFlag(wxSettableHeaderColumn * self, int flag) {
+    return self->SetFlag(flag);
+}
+void wxSettableHeaderColumn_ClearFlag(wxSettableHeaderColumn * self, int flag) {
+    return self->ClearFlag(flag);
+}
+void wxSettableHeaderColumn_ToggleFlag(wxSettableHeaderColumn * self, int flag) {
+    return self->ToggleFlag(flag);
+}
+void wxSettableHeaderColumn_SetResizeable(wxSettableHeaderColumn * self, bool resizable) {
+    return self->SetResizeable(resizable);
+}
+void wxSettableHeaderColumn_SetSortable(wxSettableHeaderColumn * self, bool sortable) {
+    return self->SetSortable(sortable);
+}
+void wxSettableHeaderColumn_SetReorderable(wxSettableHeaderColumn * self, bool reorderable) {
+    return self->SetReorderable(reorderable);
+}
+void wxSettableHeaderColumn_SetHidden(wxSettableHeaderColumn * self, bool hidden) {
+    return self->SetHidden(hidden);
+}
+void wxSettableHeaderColumn_UnsetAsSortKey(wxSettableHeaderColumn * self) {
+    return self->UnsetAsSortKey();
+}
+void wxSettableHeaderColumn_SetSortOrder(wxSettableHeaderColumn * self, bool ascending) {
+    return self->SetSortOrder(ascending);
+}
+void wxSettableHeaderColumn_ToggleSortOrder(wxSettableHeaderColumn * self) {
+    return self->ToggleSortOrder();
+}
+
 // CLASS: wxSize
 void wxSize_delete(wxSize *self) {
     delete self;
