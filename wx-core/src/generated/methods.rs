@@ -2114,6 +2114,58 @@ pub trait GenericDirCtrlMethods: ControlMethods {
     }
 }
 
+// wxHeaderCtrl
+pub trait HeaderCtrlMethods: ControlMethods {
+    fn set_column_count(&self, count: c_uint) {
+        unsafe { ffi::wxHeaderCtrl_SetColumnCount(self.as_ptr(), count) }
+    }
+    fn get_column_count(&self) -> c_uint {
+        unsafe { ffi::wxHeaderCtrl_GetColumnCount(self.as_ptr()) }
+    }
+    fn is_empty(&self) -> bool {
+        unsafe { ffi::wxHeaderCtrl_IsEmpty(self.as_ptr()) }
+    }
+    fn update_column(&self, idx: c_uint) {
+        unsafe { ffi::wxHeaderCtrl_UpdateColumn(self.as_ptr(), idx) }
+    }
+    fn set_columns_order(&self, order: *const c_void) {
+        unsafe { ffi::wxHeaderCtrl_SetColumnsOrder(self.as_ptr(), order) }
+    }
+    // NOT_SUPPORTED: fn GetColumnsOrder()
+    fn get_column_at(&self, pos: c_uint) -> c_uint {
+        unsafe { ffi::wxHeaderCtrl_GetColumnAt(self.as_ptr(), pos) }
+    }
+    fn get_column_pos(&self, idx: c_uint) -> c_uint {
+        unsafe { ffi::wxHeaderCtrl_GetColumnPos(self.as_ptr(), idx) }
+    }
+    fn reset_columns_order(&self) {
+        unsafe { ffi::wxHeaderCtrl_ResetColumnsOrder(self.as_ptr()) }
+    }
+    fn show_columns_menu<P: PointMethods>(&self, pt: &P, title: &str) -> bool {
+        unsafe {
+            let pt = pt.as_ptr();
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            ffi::wxHeaderCtrl_ShowColumnsMenu(self.as_ptr(), pt, title)
+        }
+    }
+    fn add_columns_items(&self, menu: *mut c_void, id_columns_base: c_int) {
+        unsafe { ffi::wxHeaderCtrl_AddColumnsItems(self.as_ptr(), menu, id_columns_base) }
+    }
+    fn show_customize_dialog(&self) -> bool {
+        unsafe { ffi::wxHeaderCtrl_ShowCustomizeDialog(self.as_ptr()) }
+    }
+    fn get_column_title_width_headercolumn(&self, col: *const c_void) -> c_int {
+        unsafe { ffi::wxHeaderCtrl_GetColumnTitleWidth(self.as_ptr(), col) }
+    }
+    fn get_column_title_width_uint(&self, idx: c_uint) -> c_int {
+        unsafe { ffi::wxHeaderCtrl_GetColumnTitleWidth1(self.as_ptr(), idx) }
+    }
+    fn move_column_in_order_array(order: *mut c_void, idx: c_uint, pos: c_uint) {
+        unsafe { ffi::wxHeaderCtrl_MoveColumnInOrderArray(order, idx, pos) }
+    }
+}
+
 // wxIcon
 pub trait IconMethods: GDIObjectMethods {
     // DTOR: fn ~wxIcon()

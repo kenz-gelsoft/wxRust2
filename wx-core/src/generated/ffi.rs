@@ -933,6 +933,42 @@ extern "C" {
     pub fn wxGenericDirCtrl_SelectPaths(self_: *mut c_void, paths: *const c_void);
     pub fn wxGenericDirCtrl_UnselectAll(self_: *mut c_void);
 
+    // wxHeaderCtrl
+    // BLOCKED: pub fn wxHeaderCtrl_new() -> *mut c_void;
+    // BLOCKED: pub fn wxHeaderCtrl_new1(parent: *mut c_void, winid: c_int, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> *mut c_void;
+    pub fn wxHeaderCtrl_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        winid: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxHeaderCtrl_SetColumnCount(self_: *mut c_void, count: c_uint);
+    pub fn wxHeaderCtrl_GetColumnCount(self_: *const c_void) -> c_uint;
+    pub fn wxHeaderCtrl_IsEmpty(self_: *const c_void) -> bool;
+    pub fn wxHeaderCtrl_UpdateColumn(self_: *mut c_void, idx: c_uint);
+    pub fn wxHeaderCtrl_SetColumnsOrder(self_: *mut c_void, order: *const c_void);
+    // NOT_SUPPORTED: pub fn wxHeaderCtrl_GetColumnsOrder(self_: *const c_void) -> wxArrayInt;
+    pub fn wxHeaderCtrl_GetColumnAt(self_: *const c_void, pos: c_uint) -> c_uint;
+    pub fn wxHeaderCtrl_GetColumnPos(self_: *const c_void, idx: c_uint) -> c_uint;
+    pub fn wxHeaderCtrl_ResetColumnsOrder(self_: *mut c_void);
+    pub fn wxHeaderCtrl_ShowColumnsMenu(
+        self_: *mut c_void,
+        pt: *const c_void,
+        title: *const c_void,
+    ) -> bool;
+    pub fn wxHeaderCtrl_AddColumnsItems(
+        self_: *mut c_void,
+        menu: *mut c_void,
+        id_columns_base: c_int,
+    );
+    pub fn wxHeaderCtrl_ShowCustomizeDialog(self_: *mut c_void) -> bool;
+    pub fn wxHeaderCtrl_GetColumnTitleWidth(self_: *mut c_void, col: *const c_void) -> c_int;
+    pub fn wxHeaderCtrl_GetColumnTitleWidth1(self_: *mut c_void, idx: c_uint) -> c_int;
+    pub fn wxHeaderCtrl_MoveColumnInOrderArray(order: *mut c_void, idx: c_uint, pos: c_uint);
+
     // wxIcon
     pub fn wxIcon_new() -> *mut c_void;
     pub fn wxIcon_new1(icon: *const c_void) -> *mut c_void;

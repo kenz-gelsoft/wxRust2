@@ -1243,6 +1243,53 @@ void wxGenericDirCtrl_UnselectAll(wxGenericDirCtrl * self) {
     return self->UnselectAll();
 }
 
+// CLASS: wxHeaderCtrl
+bool wxHeaderCtrl_Create(wxHeaderCtrl * self, wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, winid, *pos, *size, style, *name);
+}
+void wxHeaderCtrl_SetColumnCount(wxHeaderCtrl * self, unsigned int count) {
+    return self->SetColumnCount(count);
+}
+unsigned int wxHeaderCtrl_GetColumnCount(const wxHeaderCtrl * self) {
+    return self->GetColumnCount();
+}
+bool wxHeaderCtrl_IsEmpty(const wxHeaderCtrl * self) {
+    return self->IsEmpty();
+}
+void wxHeaderCtrl_UpdateColumn(wxHeaderCtrl * self, unsigned int idx) {
+    return self->UpdateColumn(idx);
+}
+void wxHeaderCtrl_SetColumnsOrder(wxHeaderCtrl * self, const wxArrayInt * order) {
+    return self->SetColumnsOrder(*order);
+}
+unsigned int wxHeaderCtrl_GetColumnAt(const wxHeaderCtrl * self, unsigned int pos) {
+    return self->GetColumnAt(pos);
+}
+unsigned int wxHeaderCtrl_GetColumnPos(const wxHeaderCtrl * self, unsigned int idx) {
+    return self->GetColumnPos(idx);
+}
+void wxHeaderCtrl_ResetColumnsOrder(wxHeaderCtrl * self) {
+    return self->ResetColumnsOrder();
+}
+bool wxHeaderCtrl_ShowColumnsMenu(wxHeaderCtrl * self, const wxPoint * pt, const wxString * title) {
+    return self->ShowColumnsMenu(*pt, *title);
+}
+void wxHeaderCtrl_AddColumnsItems(wxHeaderCtrl * self, wxMenu * menu, int id_columns_base) {
+    return self->AddColumnsItems(*menu, id_columns_base);
+}
+bool wxHeaderCtrl_ShowCustomizeDialog(wxHeaderCtrl * self) {
+    return self->ShowCustomizeDialog();
+}
+int wxHeaderCtrl_GetColumnTitleWidth(wxHeaderCtrl * self, const wxHeaderColumn * col) {
+    return self->GetColumnTitleWidth(*col);
+}
+int wxHeaderCtrl_GetColumnTitleWidth1(wxHeaderCtrl * self, unsigned int idx) {
+    return self->GetColumnTitleWidth(idx);
+}
+void wxHeaderCtrl_MoveColumnInOrderArray(wxArrayInt * order, unsigned int idx, unsigned int pos) {
+    return wxHeaderCtrl::MoveColumnInOrderArray(*order, idx, pos);
+}
+
 // CLASS: wxIcon
 wxIcon *wxIcon_new() {
     return new wxIcon();

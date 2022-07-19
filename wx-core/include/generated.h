@@ -10,6 +10,7 @@
 #include <wx/filectrl.h>
 #include <wx/filepicker.h>
 #include <wx/fontpicker.h>
+#include <wx/headerctrl.h>
 #include <wx/wrapsizer.h>
 
 // wxBitmapBundle compatibility hack(for a while)
@@ -517,6 +518,23 @@ void wxGenericDirCtrl_ShowHidden(wxGenericDirCtrl * self, bool show);
 void wxGenericDirCtrl_SelectPath(wxGenericDirCtrl * self, const wxString * path, bool select);
 void wxGenericDirCtrl_SelectPaths(wxGenericDirCtrl * self, const wxArrayString * paths);
 void wxGenericDirCtrl_UnselectAll(wxGenericDirCtrl * self);
+
+// CLASS: wxHeaderCtrl
+bool wxHeaderCtrl_Create(wxHeaderCtrl * self, wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+void wxHeaderCtrl_SetColumnCount(wxHeaderCtrl * self, unsigned int count);
+unsigned int wxHeaderCtrl_GetColumnCount(const wxHeaderCtrl * self);
+bool wxHeaderCtrl_IsEmpty(const wxHeaderCtrl * self);
+void wxHeaderCtrl_UpdateColumn(wxHeaderCtrl * self, unsigned int idx);
+void wxHeaderCtrl_SetColumnsOrder(wxHeaderCtrl * self, const wxArrayInt * order);
+unsigned int wxHeaderCtrl_GetColumnAt(const wxHeaderCtrl * self, unsigned int pos);
+unsigned int wxHeaderCtrl_GetColumnPos(const wxHeaderCtrl * self, unsigned int idx);
+void wxHeaderCtrl_ResetColumnsOrder(wxHeaderCtrl * self);
+bool wxHeaderCtrl_ShowColumnsMenu(wxHeaderCtrl * self, const wxPoint * pt, const wxString * title);
+void wxHeaderCtrl_AddColumnsItems(wxHeaderCtrl * self, wxMenu * menu, int id_columns_base);
+bool wxHeaderCtrl_ShowCustomizeDialog(wxHeaderCtrl * self);
+int wxHeaderCtrl_GetColumnTitleWidth(wxHeaderCtrl * self, const wxHeaderColumn * col);
+int wxHeaderCtrl_GetColumnTitleWidth1(wxHeaderCtrl * self, unsigned int idx);
+void wxHeaderCtrl_MoveColumnInOrderArray(wxArrayInt * order, unsigned int idx, unsigned int pos);
 
 // CLASS: wxIcon
 wxIcon *wxIcon_new();

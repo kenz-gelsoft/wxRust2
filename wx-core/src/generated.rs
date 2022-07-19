@@ -1149,6 +1149,46 @@ impl<const OWNED: bool> GenericDirCtrlIsOwned<OWNED> {
     }
 }
 
+// wxHeaderCtrl
+wx_class! { HeaderCtrl =
+    HeaderCtrlIsOwned<true>(wxHeaderCtrl) impl
+        HeaderCtrlMethods,
+        ControlMethods,
+        // WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> HeaderCtrlIsOwned<OWNED> {
+    // BLOCKED: fn wxHeaderCtrl()
+    // BLOCKED: fn wxHeaderCtrl1()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> WindowMethods for HeaderCtrlIsOwned<OWNED> {
+    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        parent: Option<&W>,
+        winid: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxHeaderCtrl_Create(self.as_ptr(), parent, winid, pos, size, style, name)
+        }
+    }
+}
+
 // wxIcon
 wx_class! { Icon =
     IconIsOwned<true>(wxIcon) impl

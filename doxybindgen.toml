@@ -30,6 +30,7 @@ wxml_files = [
     'wxml/classwx_g_d_i_object.xml',
     'wxml/classwx_gauge.xml',
     'wxml/classwx_generic_dir_ctrl.xml',
+    'wxml/classwx_header_ctrl.xml',
     'wxml/classwx_icon.xml',
     'wxml/classwx_item_container.xml',
     'wxml/classwx_item_container_immutable.xml',
@@ -304,6 +305,11 @@ wx31 = [
 [types.wxFrame]
 windows = [
     'MSWGetTaskBarButton',
+]
+[types.wxHeaderCtrl]
+blocklist = [
+    'wxHeaderCtrl',
+    'wxHeaderCtrl1',
 ]
 [types.wxGDIObject]
 blocklist = [
