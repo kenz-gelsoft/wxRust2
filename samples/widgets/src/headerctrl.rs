@@ -113,7 +113,7 @@ impl WidgetsPage for HeaderCtrlWidgetsPage {
                     .label("Alignment")
                     .choices(col_alignments)
                     .major_dimension(2)
-                    .style(wx::RA_SPECIFY_COLS)
+                    .style(wx::RA_SPECIFY_COLS.into())
                     .build(),
             };
             sizer_col.add_window_sizerflags(
