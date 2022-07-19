@@ -2114,6 +2114,53 @@ pub trait GenericDirCtrlMethods: ControlMethods {
     }
 }
 
+// wxHeaderColumn
+pub trait HeaderColumnMethods: WxRustMethods {
+    fn get_title(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxHeaderColumn_GetTitle(self.as_ptr())).into() }
+    }
+    fn get_bitmap(&self) -> Bitmap {
+        unsafe { Bitmap::from_ptr(ffi::wxHeaderColumn_GetBitmap(self.as_ptr())) }
+    }
+    fn get_bitmap_bundle(&self) -> BitmapBundle {
+        unsafe { BitmapBundle::from_ptr(ffi::wxHeaderColumn_GetBitmapBundle(self.as_ptr())) }
+    }
+    fn get_width(&self) -> c_int {
+        unsafe { ffi::wxHeaderColumn_GetWidth(self.as_ptr()) }
+    }
+    fn get_min_width(&self) -> c_int {
+        unsafe { ffi::wxHeaderColumn_GetMinWidth(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetAlignment()
+    fn get_flags(&self) -> c_int {
+        unsafe { ffi::wxHeaderColumn_GetFlags(self.as_ptr()) }
+    }
+    fn has_flag(&self, flag: c_int) -> bool {
+        unsafe { ffi::wxHeaderColumn_HasFlag(self.as_ptr(), flag) }
+    }
+    fn is_resizeable(&self) -> bool {
+        unsafe { ffi::wxHeaderColumn_IsResizeable(self.as_ptr()) }
+    }
+    fn is_sortable(&self) -> bool {
+        unsafe { ffi::wxHeaderColumn_IsSortable(self.as_ptr()) }
+    }
+    fn is_reorderable(&self) -> bool {
+        unsafe { ffi::wxHeaderColumn_IsReorderable(self.as_ptr()) }
+    }
+    fn is_hidden(&self) -> bool {
+        unsafe { ffi::wxHeaderColumn_IsHidden(self.as_ptr()) }
+    }
+    fn is_shown(&self) -> bool {
+        unsafe { ffi::wxHeaderColumn_IsShown(self.as_ptr()) }
+    }
+    fn is_sort_key(&self) -> bool {
+        unsafe { ffi::wxHeaderColumn_IsSortKey(self.as_ptr()) }
+    }
+    fn is_sort_order_ascending(&self) -> bool {
+        unsafe { ffi::wxHeaderColumn_IsSortOrderAscending(self.as_ptr()) }
+    }
+}
+
 // wxHeaderCtrl
 pub trait HeaderCtrlMethods: ControlMethods {
     fn set_column_count(&self, count: c_uint) {
@@ -2155,8 +2202,11 @@ pub trait HeaderCtrlMethods: ControlMethods {
     fn show_customize_dialog(&self) -> bool {
         unsafe { ffi::wxHeaderCtrl_ShowCustomizeDialog(self.as_ptr()) }
     }
-    fn get_column_title_width_headercolumn(&self, col: *const c_void) -> c_int {
-        unsafe { ffi::wxHeaderCtrl_GetColumnTitleWidth(self.as_ptr(), col) }
+    fn get_column_title_width_headercolumn<H: HeaderColumnMethods>(&self, col: &H) -> c_int {
+        unsafe {
+            let col = col.as_ptr();
+            ffi::wxHeaderCtrl_GetColumnTitleWidth(self.as_ptr(), col)
+        }
     }
     fn get_column_title_width_uint(&self, idx: c_uint) -> c_int {
         unsafe { ffi::wxHeaderCtrl_GetColumnTitleWidth1(self.as_ptr(), idx) }

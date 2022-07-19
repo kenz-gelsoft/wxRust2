@@ -1243,6 +1243,53 @@ void wxGenericDirCtrl_UnselectAll(wxGenericDirCtrl * self) {
     return self->UnselectAll();
 }
 
+// CLASS: wxHeaderColumn
+void wxHeaderColumn_delete(wxHeaderColumn *self) {
+    delete self;
+}
+wxString *wxHeaderColumn_GetTitle(const wxHeaderColumn * self) {
+    return new wxString(self->GetTitle());
+}
+wxBitmap *wxHeaderColumn_GetBitmap(const wxHeaderColumn * self) {
+    return new wxBitmap(self->GetBitmap());
+}
+wxBitmapBundle *wxHeaderColumn_GetBitmapBundle(const wxHeaderColumn * self) {
+    return new wxBitmapBundle(self->GetBitmapBundle());
+}
+int wxHeaderColumn_GetWidth(const wxHeaderColumn * self) {
+    return self->GetWidth();
+}
+int wxHeaderColumn_GetMinWidth(const wxHeaderColumn * self) {
+    return self->GetMinWidth();
+}
+int wxHeaderColumn_GetFlags(const wxHeaderColumn * self) {
+    return self->GetFlags();
+}
+bool wxHeaderColumn_HasFlag(const wxHeaderColumn * self, int flag) {
+    return self->HasFlag(flag);
+}
+bool wxHeaderColumn_IsResizeable(const wxHeaderColumn * self) {
+    return self->IsResizeable();
+}
+bool wxHeaderColumn_IsSortable(const wxHeaderColumn * self) {
+    return self->IsSortable();
+}
+bool wxHeaderColumn_IsReorderable(const wxHeaderColumn * self) {
+    return self->IsReorderable();
+}
+bool wxHeaderColumn_IsHidden(const wxHeaderColumn * self) {
+    return self->IsHidden();
+}
+bool wxHeaderColumn_IsShown(const wxHeaderColumn * self) {
+    return self->IsShown();
+}
+bool wxHeaderColumn_IsSortKey(const wxHeaderColumn * self) {
+    return self->IsSortKey();
+}
+bool wxHeaderColumn_IsSortOrderAscending(const wxHeaderColumn * self) {
+    return self->IsSortOrderAscending();
+}
+
 // CLASS: wxHeaderCtrl
 bool wxHeaderCtrl_Create(wxHeaderCtrl * self, wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return self->Create(parent, winid, *pos, *size, style, *name);

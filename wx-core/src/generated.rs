@@ -1149,6 +1149,24 @@ impl<const OWNED: bool> GenericDirCtrlIsOwned<OWNED> {
     }
 }
 
+// wxHeaderColumn
+wx_class! { HeaderColumn =
+    HeaderColumnIsOwned<true>(wxHeaderColumn) impl
+        HeaderColumnMethods
+}
+impl<const OWNED: bool> HeaderColumnIsOwned<OWNED> {
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for HeaderColumnIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxHeaderColumn_delete(self.0) }
+        }
+    }
+}
+
 // wxHeaderCtrl
 wx_class! { HeaderCtrl =
     HeaderCtrlIsOwned<true>(wxHeaderCtrl) impl

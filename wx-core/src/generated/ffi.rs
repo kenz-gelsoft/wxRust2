@@ -933,6 +933,24 @@ extern "C" {
     pub fn wxGenericDirCtrl_SelectPaths(self_: *mut c_void, paths: *const c_void);
     pub fn wxGenericDirCtrl_UnselectAll(self_: *mut c_void);
 
+    // wxHeaderColumn
+    pub fn wxHeaderColumn_delete(self_: *mut c_void);
+    pub fn wxHeaderColumn_GetTitle(self_: *const c_void) -> *mut c_void;
+    pub fn wxHeaderColumn_GetBitmap(self_: *const c_void) -> *mut c_void;
+    pub fn wxHeaderColumn_GetBitmapBundle(self_: *const c_void) -> *mut c_void;
+    pub fn wxHeaderColumn_GetWidth(self_: *const c_void) -> c_int;
+    pub fn wxHeaderColumn_GetMinWidth(self_: *const c_void) -> c_int;
+    // NOT_SUPPORTED: pub fn wxHeaderColumn_GetAlignment(self_: *const c_void) -> wxAlignment;
+    pub fn wxHeaderColumn_GetFlags(self_: *const c_void) -> c_int;
+    pub fn wxHeaderColumn_HasFlag(self_: *const c_void, flag: c_int) -> bool;
+    pub fn wxHeaderColumn_IsResizeable(self_: *const c_void) -> bool;
+    pub fn wxHeaderColumn_IsSortable(self_: *const c_void) -> bool;
+    pub fn wxHeaderColumn_IsReorderable(self_: *const c_void) -> bool;
+    pub fn wxHeaderColumn_IsHidden(self_: *const c_void) -> bool;
+    pub fn wxHeaderColumn_IsShown(self_: *const c_void) -> bool;
+    pub fn wxHeaderColumn_IsSortKey(self_: *const c_void) -> bool;
+    pub fn wxHeaderColumn_IsSortOrderAscending(self_: *const c_void) -> bool;
+
     // wxHeaderCtrl
     // BLOCKED: pub fn wxHeaderCtrl_new() -> *mut c_void;
     // BLOCKED: pub fn wxHeaderCtrl_new1(parent: *mut c_void, winid: c_int, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> *mut c_void;

@@ -519,6 +519,23 @@ void wxGenericDirCtrl_SelectPath(wxGenericDirCtrl * self, const wxString * path,
 void wxGenericDirCtrl_SelectPaths(wxGenericDirCtrl * self, const wxArrayString * paths);
 void wxGenericDirCtrl_UnselectAll(wxGenericDirCtrl * self);
 
+// CLASS: wxHeaderColumn
+void wxHeaderColumn_delete(wxHeaderColumn *self);
+wxString *wxHeaderColumn_GetTitle(const wxHeaderColumn * self);
+wxBitmap *wxHeaderColumn_GetBitmap(const wxHeaderColumn * self);
+wxBitmapBundle *wxHeaderColumn_GetBitmapBundle(const wxHeaderColumn * self);
+int wxHeaderColumn_GetWidth(const wxHeaderColumn * self);
+int wxHeaderColumn_GetMinWidth(const wxHeaderColumn * self);
+int wxHeaderColumn_GetFlags(const wxHeaderColumn * self);
+bool wxHeaderColumn_HasFlag(const wxHeaderColumn * self, int flag);
+bool wxHeaderColumn_IsResizeable(const wxHeaderColumn * self);
+bool wxHeaderColumn_IsSortable(const wxHeaderColumn * self);
+bool wxHeaderColumn_IsReorderable(const wxHeaderColumn * self);
+bool wxHeaderColumn_IsHidden(const wxHeaderColumn * self);
+bool wxHeaderColumn_IsShown(const wxHeaderColumn * self);
+bool wxHeaderColumn_IsSortKey(const wxHeaderColumn * self);
+bool wxHeaderColumn_IsSortOrderAscending(const wxHeaderColumn * self);
+
 // CLASS: wxHeaderCtrl
 bool wxHeaderCtrl_Create(wxHeaderCtrl * self, wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 void wxHeaderCtrl_SetColumnCount(wxHeaderCtrl * self, unsigned int count);
