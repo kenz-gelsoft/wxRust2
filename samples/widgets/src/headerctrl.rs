@@ -69,11 +69,13 @@ impl WidgetsPage for HeaderCtrlWidgetsPage {
 
         sizer_header.add_stretch_spacer(1);
 
-        let btn = wx::Button::builder(Some(&self.base))
+        let btn_reset = wx::Button::builder(Some(&self.base))
             .label("&Reset")
             .build();
-        sizer_header
-            .add_window_sizerflags(Some(&btn), wx::SizerFlags::new(0).center().border(wx::ALL));
+        sizer_header.add_window_sizerflags(
+            Some(&btn_reset),
+            wx::SizerFlags::new(0).center().border(wx::ALL),
+        );
         sizer_top.add_sizer_sizerflags(Some(&sizer_header), wx::SizerFlags::new(0).expand());
 
         // column flags
@@ -164,16 +166,22 @@ impl WidgetsPage for HeaderCtrlWidgetsPage {
         self.recreate_widget(&config_ui);
         self.reset_header_style(&config_ui);
         *self.config_ui.borrow_mut() = Some(config_ui);
+
+        // Bind event handlers
+        let copy_self = self.clone();
+        btn_reset.bind(wx::RustEvent::Button, move |_: &wx::CommandEvent| {
+            copy_self.on_reset_button();
+        });
     }
 
-    fn handle_button(&self, event: &wx::CommandEvent) {
+    fn handle_button(&self, _: &wx::CommandEvent) {
         // Do nothing.
     }
     fn handle_checkbox(&self, _: &wx::CommandEvent) {
-        // Do nothing.
+        self.on_style_check_or_radio_box();
     }
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
-        // Do nothing.
+        self.on_style_check_or_radio_box();
     }
 }
 impl HeaderCtrlWidgetsPage {
@@ -317,6 +325,26 @@ impl HeaderCtrlWidgetsPage {
             COL_ALIGNMENT_FLAG_DEFAULT
         } else {
             COL_ALIGN_FLAGS[sel as usize]
+        }
+    }
+
+    // ----------------------------------------------------------------------------
+    // event handlers
+    // ----------------------------------------------------------------------------
+
+    fn on_style_check_or_radio_box(&self) {
+        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+            self.recreate_widget(config_ui);
+        }
+    }
+
+    fn on_reset_button(&self) {
+        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+            self.reset_header_style(config_ui);
+            for col_setting in config_ui.col_settings.iter() {
+                self.reset_column_style(col_setting);
+            }
+            self.recreate_widget(config_ui);
         }
     }
 }
