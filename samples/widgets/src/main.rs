@@ -79,8 +79,8 @@ enum Widgets {
     BusyCursor,
 
     GoToPage,
-    // GoToPageLast = Widgets::GoToPage as isize + 100,
-    //
+    _GoToPageLast = Widgets::GoToPage as isize + 100,
+
     End,
 }
 impl From<Widgets> for c_int {
@@ -98,7 +98,7 @@ enum TextEntry {
     AutoCompleteKeyLength,
 
     SetHint,
-    // End,
+    _End,
 }
 // const TEXT_ENTRY_BEGIN: c_int = TextEntry::DisableAutoComplete as c_int;
 impl From<TextEntry> for c_int {
