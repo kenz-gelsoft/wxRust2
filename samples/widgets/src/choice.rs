@@ -269,7 +269,7 @@ impl WidgetsPage for ChoiceWidgetsPage {
             };
         }
     }
-    fn handle_checkbox(&self, event: &wx::CommandEvent) {
+    fn handle_checkbox(&self, _: &wx::CommandEvent) {
         self.on_check_or_radio_box();
     }
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
@@ -287,10 +287,6 @@ impl ChoiceWidgetsPage {
             choice: Rc::new(RefCell::new(None)),
             s_item: RefCell::new(1),
         }
-    }
-
-    fn recreate_widget(&self) {
-        self.create_choice();
     }
 
     fn reset(&self) {

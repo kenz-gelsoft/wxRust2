@@ -47,7 +47,7 @@ mod headerctrl;
 use headerctrl::*;
 
 enum Widgets {
-    ClearLog = 100,
+    _ClearLog = 100,
     Quit,
 
     BookCtrl,
@@ -79,8 +79,8 @@ enum Widgets {
     BusyCursor,
 
     GoToPage,
-    GoToPageLast = Widgets::GoToPage as isize + 100,
-
+    // GoToPageLast = Widgets::GoToPage as isize + 100,
+    //
     End,
 }
 impl From<Widgets> for c_int {
@@ -98,9 +98,9 @@ enum TextEntry {
     AutoCompleteKeyLength,
 
     SetHint,
-    End,
+    // End,
 }
-const TEXT_ENTRY_BEGIN: c_int = TextEntry::DisableAutoComplete as c_int;
+// const TEXT_ENTRY_BEGIN: c_int = TextEntry::DisableAutoComplete as c_int;
 impl From<TextEntry> for c_int {
     fn from(te: TextEntry) -> Self {
         te as c_int
@@ -343,9 +343,9 @@ impl WidgetsFrame {
         &self.pages[index]
     }
 
-    fn connect_to_widget_events(&self) {
-        // TODO
-    }
+    // fn connect_to_widget_events(&self) {
+    //     // TODO
+    // }
 
     fn on_page_changed(&self, sel: c_int) {
         let menu_bar = self.base.get_menu_bar().get().unwrap();

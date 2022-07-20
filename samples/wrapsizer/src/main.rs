@@ -5,7 +5,7 @@ use wx::methods::*;
 
 fn main() {
     wx::App::run(|_| {
-        let frame = WrapSizerFrame::new();
+        let _frame = WrapSizerFrame::new();
     });
 }
 

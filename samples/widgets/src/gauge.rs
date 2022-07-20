@@ -346,7 +346,7 @@ impl GaugeWidgetsPage {
     }
 
     fn start_timer<W: WindowMethods>(&self, clicked: &W) {
-        let INTERVAL = 300;
+        let interval = 300;
 
         let is_progress_button = clicked.get_id() == GaugePage::Progress.into();
         let timer = wx::Timer::new_with_evthandler(
@@ -357,7 +357,7 @@ impl GaugeWidgetsPage {
                 GaugePage::IndeterminateTimer.into()
             },
         );
-        timer.start(INTERVAL, wx::TIMER_CONTINUOUS);
+        timer.start(interval, wx::TIMER_CONTINUOUS);
         *self.timer.borrow_mut() = Some(timer);
 
         clicked.set_label("&Stop timer");
