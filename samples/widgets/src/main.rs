@@ -80,7 +80,7 @@ enum Widgets {
 
     GoToPage,
     // GoToPageLast = Widgets::GoToPage as isize + 100,
-
+    //
     End,
 }
 impl From<Widgets> for c_int {
