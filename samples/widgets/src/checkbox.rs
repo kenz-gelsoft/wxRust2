@@ -256,10 +256,6 @@ impl CheckBoxWidgetsPage {
         }
     }
 
-    fn recreate_widget(&self) {
-        self.create_check_box();
-    }
-
     fn reset(&self) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
             config_ui.chk_right.set_value(false);

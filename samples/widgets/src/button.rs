@@ -35,9 +35,9 @@ impl From<ButtonPage> for c_int {
 }
 
 const BUTTON_IMAGE_POS_LEFT: c_int = 0;
-const BUTTON_IMAGE_POS_RIGHT: c_int = 1;
-const BUTTON_IMAGE_POS_TOP: c_int = 2;
-const BUTTON_IMAGE_POS_BOTTOM: c_int = 3;
+// const BUTTON_IMAGE_POS_RIGHT: c_int = 1;
+// const BUTTON_IMAGE_POS_TOP: c_int = 2;
+// const BUTTON_IMAGE_POS_BOTTOM: c_int = 3;
 
 const BUTTON_HALIGN_LEFT: c_int = 0;
 const BUTTON_HALIGN_CENTRE: c_int = 1;
@@ -323,10 +323,6 @@ impl ButtonWidgetsPage {
             config_ui: RefCell::new(None),
             button: Rc::new(RefCell::new(None)),
         }
-    }
-
-    fn recreate_widget(&self) {
-        self.create_button();
     }
 
     fn reset(&self) {

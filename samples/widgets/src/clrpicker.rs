@@ -10,17 +10,6 @@ enum PickerPage {
     Reset = wx::ID_HIGHEST as isize,
     Colour,
 }
-impl PickerPage {
-    fn from(v: c_int) -> Option<Self> {
-        use PickerPage::*;
-        for e in [Reset, Colour] {
-            if v == e.into() {
-                return Some(e);
-            }
-        }
-        return None;
-    }
-}
 impl From<PickerPage> for c_int {
     fn from(w: PickerPage) -> Self {
         w as c_int

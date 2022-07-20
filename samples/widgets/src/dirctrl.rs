@@ -242,7 +242,7 @@ impl WidgetsPage for DirCtrlWidgetsPage {
         sizer_top.add_sizer_int(
             Some(&sizer_left),
             0,
-            (wx::ALL & !wx::LEFT),
+            wx::ALL & !wx::LEFT,
             10,
             wx::Object::none(),
         );
@@ -335,7 +335,7 @@ impl DirCtrlWidgetsPage {
     }
 
     fn create_dir_ctrl(&self, config_ui: &ConfigUI, default_path: bool) {
-        let no_updates = wx::WindowUpdateLocker::new_with_window(Some(&self.base));
+        let _no_updates = wx::WindowUpdateLocker::new_with_window(Some(&self.base));
 
         let mut style = wx::BORDER_DEFAULT;
         if config_ui.chk_dir_only.is_checked() {

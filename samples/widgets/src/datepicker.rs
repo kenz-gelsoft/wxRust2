@@ -179,14 +179,14 @@ impl WidgetsPage for DatePickerWidgetsPage {
         sizer_top.add_sizer_int(
             Some(&sizer_left),
             0,
-            (wx::ALL & !wx::LEFT),
+            wx::ALL & !wx::LEFT,
             10,
             wx::Object::none(),
         );
         sizer_top.add_sizer_int(
             Some(&sizer_middle),
             0,
-            (wx::TOP | wx::BOTTOM),
+            wx::TOP | wx::BOTTOM,
             10,
             wx::Object::none(),
         );
@@ -249,12 +249,6 @@ impl DatePickerWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
             date_picker: Rc::new(RefCell::new(None)),
-        }
-    }
-
-    fn recreate_widget(&self) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            self.create_date_picker(config_ui);
         }
     }
 

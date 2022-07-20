@@ -92,7 +92,7 @@ impl WidgetsPage for FileCtrlWidgetsPage {
         // left pane
         let sizer_left = wx::BoxSizer::new(wx::VERTICAL);
 
-        let mut mode = wx::ArrayString::new();
+        let mode = wx::ArrayString::new();
         mode.add("open");
         mode.add("save");
         let radio_file_ctrl_mode = wx::RadioBox::builder(Some(&self.base))
@@ -192,7 +192,7 @@ impl WidgetsPage for FileCtrlWidgetsPage {
         sizer_top.add_sizer_int(
             Some(&sizer_left),
             0,
-            (wx::ALL & !wx::LEFT),
+            wx::ALL & !wx::LEFT,
             10,
             wx::Object::none(),
         );
@@ -274,7 +274,7 @@ impl FileCtrlWidgetsPage {
     }
 
     fn create_file_ctrl(&self, config_ui: &ConfigUI) {
-        let no_updates = wx::WindowUpdateLocker::new_with_window(Some(&self.base));
+        let _no_updates = wx::WindowUpdateLocker::new_with_window(Some(&self.base));
 
         let mut style = wx::BORDER_DEFAULT;
 
