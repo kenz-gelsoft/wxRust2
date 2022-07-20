@@ -523,7 +523,9 @@ void wxGenericDirCtrl_UnselectAll(wxGenericDirCtrl * self);
 void wxHeaderColumn_delete(wxHeaderColumn *self);
 wxString *wxHeaderColumn_GetTitle(const wxHeaderColumn * self);
 wxBitmap *wxHeaderColumn_GetBitmap(const wxHeaderColumn * self);
+#if wxCHECK_VERSION(3, 1, 0)
 wxBitmapBundle *wxHeaderColumn_GetBitmapBundle(const wxHeaderColumn * self);
+#endif
 int wxHeaderColumn_GetWidth(const wxHeaderColumn * self);
 int wxHeaderColumn_GetMinWidth(const wxHeaderColumn * self);
 int wxHeaderColumn_GetFlags(const wxHeaderColumn * self);
@@ -553,7 +555,9 @@ bool wxHeaderCtrl_ShowColumnsMenu(wxHeaderCtrl * self, const wxPoint * pt, const
 void wxHeaderCtrl_AddColumnsItems(wxHeaderCtrl * self, wxMenu * menu, int id_columns_base);
 bool wxHeaderCtrl_ShowCustomizeDialog(wxHeaderCtrl * self);
 int wxHeaderCtrl_GetColumnTitleWidth(wxHeaderCtrl * self, const wxHeaderColumn * col);
+#if wxCHECK_VERSION(3, 1, 0)
 int wxHeaderCtrl_GetColumnTitleWidth1(wxHeaderCtrl * self, unsigned int idx);
+#endif
 void wxHeaderCtrl_MoveColumnInOrderArray(wxArrayInt * order, unsigned int idx, unsigned int pos);
 
 // CLASS: wxHeaderCtrlSimple

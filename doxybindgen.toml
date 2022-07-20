@@ -310,10 +310,17 @@ wx31 = [
 windows = [
     'MSWGetTaskBarButton',
 ]
+[types.wxHeaderColumn]
+wx31 = [
+    'GetBitmapBundle',
+]
 [types.wxHeaderCtrl]
 blocklist = [
     'wxHeaderCtrl',
     'wxHeaderCtrl1',
+]
+wx31 = [
+    'GetColumnTitleWidth1',
 ]
 [types.wxGDIObject]
 blocklist = [

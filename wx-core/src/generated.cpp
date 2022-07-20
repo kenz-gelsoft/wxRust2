@@ -1253,9 +1253,11 @@ wxString *wxHeaderColumn_GetTitle(const wxHeaderColumn * self) {
 wxBitmap *wxHeaderColumn_GetBitmap(const wxHeaderColumn * self) {
     return new wxBitmap(self->GetBitmap());
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxBitmapBundle *wxHeaderColumn_GetBitmapBundle(const wxHeaderColumn * self) {
     return new wxBitmapBundle(self->GetBitmapBundle());
 }
+#endif
 int wxHeaderColumn_GetWidth(const wxHeaderColumn * self) {
     return self->GetWidth();
 }
@@ -1335,9 +1337,11 @@ bool wxHeaderCtrl_ShowCustomizeDialog(wxHeaderCtrl * self) {
 int wxHeaderCtrl_GetColumnTitleWidth(wxHeaderCtrl * self, const wxHeaderColumn * col) {
     return self->GetColumnTitleWidth(*col);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 int wxHeaderCtrl_GetColumnTitleWidth1(wxHeaderCtrl * self, unsigned int idx) {
     return self->GetColumnTitleWidth(idx);
 }
+#endif
 void wxHeaderCtrl_MoveColumnInOrderArray(wxArrayInt * order, unsigned int idx, unsigned int pos) {
     return wxHeaderCtrl::MoveColumnInOrderArray(*order, idx, pos);
 }
