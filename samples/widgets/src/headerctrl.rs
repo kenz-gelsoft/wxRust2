@@ -5,7 +5,16 @@ use std::rc::Rc;
 use wx::methods::*;
 
 const NUMBER_OF_COLUMNS: usize = 4;
+
+const COL_ALIGN_FLAGS: [c_int; 4] = [
+    wx::ALIGN_NOT,
+    wx::ALIGN_LEFT,
+    wx::ALIGN_CENTRE,
+    wx::ALIGN_RIGHT,
+];
+
 const COL_WITH_BITMAP_DEFAULT: bool = false;
+const COL_ALIGNMENT_FLAG_DEFAULT: c_int = wx::ALIGN_NOT;
 const COL_ALIGNMENT_INDEX_DEFAULT: c_int = 0;
 
 #[derive(Clone)]
@@ -35,7 +44,7 @@ pub struct HeaderCtrlWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
     // the control itself
-    header: Rc<RefCell<Option<wx::Gauge>>>,
+    header: Rc<RefCell<Option<wx::HeaderCtrlSimple>>>,
 }
 impl WidgetsPage for HeaderCtrlWidgetsPage {
     fn base(&self) -> &wx::Panel {
@@ -127,7 +136,6 @@ impl WidgetsPage for HeaderCtrlWidgetsPage {
         // bottom pane
         let sizer_header =
             wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&self.base), "Header");
-        self.recreate_widget();
 
         // the 2 panes compose the window
         let sizer_all = wx::BoxSizer::new(wx::VERTICAL);
@@ -153,6 +161,7 @@ impl WidgetsPage for HeaderCtrlWidgetsPage {
 
             sizer_header, // save it to modify it later
         };
+        self.recreate_widget(&config_ui);
         self.reset_header_style(&config_ui);
         *self.config_ui.borrow_mut() = Some(config_ui);
     }
@@ -180,8 +189,58 @@ impl HeaderCtrlWidgetsPage {
         }
     }
 
-    fn recreate_widget(&self) {
-        // TODO
+    fn recreate_widget(&self, config_ui: &ConfigUI) {
+        config_ui.sizer_header.clear(true /* delete windows */);
+
+        let flags = wx::BORDER_DEFAULT | self.get_header_style_flags(config_ui);
+
+        let header = wx::HeaderCtrlSimple::builder(Some(&self.base))
+            .style(flags)
+            .build();
+
+        let col_setting1 = &config_ui.col_settings[0];
+        let col1 = wx::HeaderColumnSimple::new_with_str(
+            "First",
+            100,
+            self.get_column_alignment_flag(col_setting1),
+            self.get_column_style_flags(col_setting1),
+        );
+        if col_setting1.chk_with_bitmap.is_checked() {
+            let icon_bitmap = wx::Bitmap::new();
+            icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
+                "wxART_ERROR",
+                "wxART_BUTTON_C",
+                &wx::Size::default(),
+            ));
+            col1.set_bitmap(&wx::BitmapBundle::from(icon_bitmap));
+        }
+        header.append_column(&col1);
+
+        let col_setting2 = &config_ui.col_settings[1];
+        let col2 = wx::HeaderColumnSimple::new_with_str(
+            "Second",
+            200,
+            self.get_column_alignment_flag(col_setting2),
+            self.get_column_style_flags(col_setting2),
+        );
+        if col_setting2.chk_with_bitmap.is_checked() {
+            let icon_bitmap = wx::Bitmap::new();
+            icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
+                "wxART_QUESTION",
+                "wxART_BUTTON_C",
+                &wx::Size::default(),
+            ));
+            col2.set_bitmap(&wx::BitmapBundle::from(icon_bitmap));
+        }
+        header.append_column(&col2);
+
+        config_ui.sizer_header.add_stretch_spacer(1);
+        config_ui
+            .sizer_header
+            .add_window_sizerflags(Some(&header), wx::SizerFlags::new(0).expand());
+        *self.header.borrow_mut() = Some(header);
+        config_ui.sizer_header.add_stretch_spacer(1);
+        config_ui.sizer_header.layout();
     }
 
     fn reset_header_style(&self, config_ui: &ConfigUI) {
@@ -194,6 +253,22 @@ impl HeaderCtrlWidgetsPage {
         config_ui
             .chk_bitmap_on_right
             .set_value((wx::HD_DEFAULT_STYLE & wx::HD_BITMAP_ON_RIGHT) != 0);
+    }
+
+    fn get_header_style_flags(&self, config_ui: &ConfigUI) -> c_long {
+        let mut flags = 0;
+
+        if config_ui.chk_allow_reorder.is_checked() {
+            flags |= wx::HD_ALLOW_REORDER;
+        }
+        if config_ui.chk_allow_hide.is_checked() {
+            flags |= wx::HD_ALLOW_HIDE;
+        }
+        if config_ui.chk_bitmap_on_right.is_checked() {
+            flags |= wx::HD_BITMAP_ON_RIGHT;
+        }
+
+        flags
     }
 
     fn reset_column_style(&self, col_setting: &ColSetting) {
@@ -217,53 +292,31 @@ impl HeaderCtrlWidgetsPage {
             .set_selection(COL_ALIGNMENT_INDEX_DEFAULT);
     }
 
-    fn create_header(&self, config_ui: &ConfigUI) {
-        let mut flags = wx::BORDER_DEFAULT;
+    fn get_column_style_flags(&self, col_setting: &ColSetting) -> c_long {
+        let mut flags = 0;
 
-        // flags |= if config_ui.chk_vert.get_value() {
-        //     wx::GA_VERTICAL
-        // } else {
-        //     wx::GA_HORIZONTAL
-        // } as c_long;
-
-        // if config_ui.chk_smooth.get_value() {
-        //     flags |= wx::GA_SMOOTH as c_long;
-        // }
-        // if config_ui.chk_progress.get_value() {
-        //     flags |= wx::GA_PROGRESS as c_long;
-        // }
-
-        let mut val = 0;
-        if let Some(header) = self.header.borrow().as_ref() {
-            val = header.get_value();
-
-            config_ui.sizer_header.detach_window(Some(header));
-            header.destroy();
+        if col_setting.chk_allow_resize.is_checked() {
+            flags |= wx::COL_RESIZABLE;
+        }
+        if col_setting.chk_allow_reorder.is_checked() {
+            flags |= wx::COL_REORDERABLE;
+        }
+        if col_setting.chk_allow_sort.is_checked() {
+            flags |= wx::COL_SORTABLE;
+        }
+        if col_setting.chk_allow_hide.is_checked() {
+            flags |= wx::COL_HIDDEN;
         }
 
-        let header = wx::Gauge::builder(Some(&self.base)).style(flags).build();
-        header.set_value(val);
+        flags
+    }
 
-        if (flags & wx::GA_VERTICAL as c_long) != 0 {
-            config_ui.sizer_header.add_window_int(
-                Some(&header),
-                0,
-                wx::GROW | wx::ALL,
-                5,
-                wx::Object::none(),
-            );
+    fn get_column_alignment_flag(&self, col_setting: &ColSetting) -> c_int {
+        let sel = col_setting.rb_alignments.get_selection();
+        if sel == wx::NOT_FOUND {
+            COL_ALIGNMENT_FLAG_DEFAULT
         } else {
-            config_ui.sizer_header.add_window_int(
-                Some(&header),
-                1,
-                wx::CENTRE as i32 | wx::ALL,
-                5,
-                wx::Object::none(),
-            );
+            COL_ALIGN_FLAGS[sel as usize]
         }
-        *self.header.borrow_mut() = Some(header);
-
-        // relayout the sizer
-        config_ui.sizer_header.layout();
     }
 }
