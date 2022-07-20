@@ -276,7 +276,7 @@ impl HeaderCtrlWidgetsPage {
             flags |= wx::HD_BITMAP_ON_RIGHT;
         }
 
-        flags
+        flags.into()
     }
 
     fn reset_column_style(&self, col_setting: &ColSetting) {
@@ -300,7 +300,7 @@ impl HeaderCtrlWidgetsPage {
             .set_selection(COL_ALIGNMENT_INDEX_DEFAULT);
     }
 
-    fn get_column_style_flags(&self, col_setting: &ColSetting) -> c_long {
+    fn get_column_style_flags(&self, col_setting: &ColSetting) -> c_int {
         let mut flags = 0;
 
         if col_setting.chk_allow_resize.is_checked() {
