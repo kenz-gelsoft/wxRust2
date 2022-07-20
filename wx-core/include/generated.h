@@ -528,6 +528,7 @@ wxBitmapBundle *wxHeaderColumn_GetBitmapBundle(const wxHeaderColumn * self);
 #endif
 int wxHeaderColumn_GetWidth(const wxHeaderColumn * self);
 int wxHeaderColumn_GetMinWidth(const wxHeaderColumn * self);
+wxAlignment wxHeaderColumn_GetAlignment(const wxHeaderColumn * self);
 int wxHeaderColumn_GetFlags(const wxHeaderColumn * self);
 bool wxHeaderColumn_HasFlag(const wxHeaderColumn * self, int flag);
 bool wxHeaderColumn_IsResizeable(const wxHeaderColumn * self);
@@ -540,6 +541,8 @@ bool wxHeaderColumn_IsSortOrderAscending(const wxHeaderColumn * self);
 
 // CLASS: wxHeaderColumnSimple
 void wxHeaderColumnSimple_delete(wxHeaderColumnSimple *self);
+wxHeaderColumnSimple *wxHeaderColumnSimple_new(const wxString * title, int width, wxAlignment align, int flags);
+wxHeaderColumnSimple *wxHeaderColumnSimple_new1(const wxBitmapBundle * bitmap, int width, wxAlignment align, int flags);
 
 // CLASS: wxHeaderCtrl
 bool wxHeaderCtrl_Create(wxHeaderCtrl * self, wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
@@ -945,6 +948,7 @@ void wxSettableHeaderColumn_SetTitle(wxSettableHeaderColumn * self, const wxStri
 void wxSettableHeaderColumn_SetBitmap(wxSettableHeaderColumn * self, const wxBitmapBundle * bitmap);
 void wxSettableHeaderColumn_SetWidth(wxSettableHeaderColumn * self, int width);
 void wxSettableHeaderColumn_SetMinWidth(wxSettableHeaderColumn * self, int min_width);
+void wxSettableHeaderColumn_SetAlignment(wxSettableHeaderColumn * self, wxAlignment align);
 void wxSettableHeaderColumn_SetFlags(wxSettableHeaderColumn * self, int flags);
 void wxSettableHeaderColumn_ChangeFlag(wxSettableHeaderColumn * self, int flag, bool set);
 void wxSettableHeaderColumn_SetFlag(wxSettableHeaderColumn * self, int flag);

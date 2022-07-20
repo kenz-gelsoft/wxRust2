@@ -1175,8 +1175,29 @@ wx_class! { HeaderColumnSimple =
         HeaderColumnMethods
 }
 impl<const OWNED: bool> HeaderColumnSimpleIsOwned<OWNED> {
-    // NOT_SUPPORTED: fn wxHeaderColumnSimple()
-    // NOT_SUPPORTED: fn wxHeaderColumnSimple1()
+    pub fn new_with_str(
+        title: &str,
+        width: c_int,
+        align: c_int,
+        flags: c_int,
+    ) -> HeaderColumnSimpleIsOwned<OWNED> {
+        unsafe {
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            HeaderColumnSimpleIsOwned(ffi::wxHeaderColumnSimple_new(title, width, align, flags))
+        }
+    }
+    pub fn new_with_bitmapbundle<B: BitmapBundleMethods>(
+        bitmap: &B,
+        width: c_int,
+        align: c_int,
+        flags: c_int,
+    ) -> HeaderColumnSimpleIsOwned<OWNED> {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            HeaderColumnSimpleIsOwned(ffi::wxHeaderColumnSimple_new1(bitmap, width, align, flags))
+        }
+    }
     pub fn none() -> Option<&'static Self> {
         None
     }

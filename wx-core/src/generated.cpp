@@ -1264,6 +1264,9 @@ int wxHeaderColumn_GetWidth(const wxHeaderColumn * self) {
 int wxHeaderColumn_GetMinWidth(const wxHeaderColumn * self) {
     return self->GetMinWidth();
 }
+wxAlignment wxHeaderColumn_GetAlignment(const wxHeaderColumn * self) {
+    return self->GetAlignment();
+}
 int wxHeaderColumn_GetFlags(const wxHeaderColumn * self) {
     return self->GetFlags();
 }
@@ -1295,6 +1298,12 @@ bool wxHeaderColumn_IsSortOrderAscending(const wxHeaderColumn * self) {
 // CLASS: wxHeaderColumnSimple
 void wxHeaderColumnSimple_delete(wxHeaderColumnSimple *self) {
     delete self;
+}
+wxHeaderColumnSimple *wxHeaderColumnSimple_new(const wxString * title, int width, wxAlignment align, int flags) {
+    return new wxHeaderColumnSimple(*title, width, align, flags);
+}
+wxHeaderColumnSimple *wxHeaderColumnSimple_new1(const wxBitmapBundle * bitmap, int width, wxAlignment align, int flags) {
+    return new wxHeaderColumnSimple(*bitmap, width, align, flags);
 }
 
 // CLASS: wxHeaderCtrl
@@ -2370,6 +2379,9 @@ void wxSettableHeaderColumn_SetWidth(wxSettableHeaderColumn * self, int width) {
 }
 void wxSettableHeaderColumn_SetMinWidth(wxSettableHeaderColumn * self, int min_width) {
     return self->SetMinWidth(min_width);
+}
+void wxSettableHeaderColumn_SetAlignment(wxSettableHeaderColumn * self, wxAlignment align) {
+    return self->SetAlignment(align);
 }
 void wxSettableHeaderColumn_SetFlags(wxSettableHeaderColumn * self, int flags) {
     return self->SetFlags(flags);

@@ -2131,7 +2131,9 @@ pub trait HeaderColumnMethods: WxRustMethods {
     fn get_min_width(&self) -> c_int {
         unsafe { ffi::wxHeaderColumn_GetMinWidth(self.as_ptr()) }
     }
-    // NOT_SUPPORTED: fn GetAlignment()
+    fn get_alignment(&self) -> c_int {
+        unsafe { ffi::wxHeaderColumn_GetAlignment(self.as_ptr()) }
+    }
     fn get_flags(&self) -> c_int {
         unsafe { ffi::wxHeaderColumn_GetFlags(self.as_ptr()) }
     }
@@ -4000,7 +4002,9 @@ pub trait SettableHeaderColumnMethods: HeaderColumnMethods {
     fn set_min_width(&self, min_width: c_int) {
         unsafe { ffi::wxSettableHeaderColumn_SetMinWidth(self.as_ptr(), min_width) }
     }
-    // NOT_SUPPORTED: fn SetAlignment()
+    fn set_alignment(&self, align: c_int) {
+        unsafe { ffi::wxSettableHeaderColumn_SetAlignment(self.as_ptr(), align) }
+    }
     fn set_flags(&self, flags: c_int) {
         unsafe { ffi::wxSettableHeaderColumn_SetFlags(self.as_ptr(), flags) }
     }

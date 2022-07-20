@@ -940,7 +940,7 @@ extern "C" {
     pub fn wxHeaderColumn_GetBitmapBundle(self_: *const c_void) -> *mut c_void;
     pub fn wxHeaderColumn_GetWidth(self_: *const c_void) -> c_int;
     pub fn wxHeaderColumn_GetMinWidth(self_: *const c_void) -> c_int;
-    // NOT_SUPPORTED: pub fn wxHeaderColumn_GetAlignment(self_: *const c_void) -> wxAlignment;
+    pub fn wxHeaderColumn_GetAlignment(self_: *const c_void) -> c_int;
     pub fn wxHeaderColumn_GetFlags(self_: *const c_void) -> c_int;
     pub fn wxHeaderColumn_HasFlag(self_: *const c_void, flag: c_int) -> bool;
     pub fn wxHeaderColumn_IsResizeable(self_: *const c_void) -> bool;
@@ -953,8 +953,18 @@ extern "C" {
 
     // wxHeaderColumnSimple
     pub fn wxHeaderColumnSimple_delete(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxHeaderColumnSimple_new(title: *const c_void, width: c_int, align: wxAlignment, flags: c_int) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxHeaderColumnSimple_new1(bitmap: *const c_void, width: c_int, align: wxAlignment, flags: c_int) -> *mut c_void;
+    pub fn wxHeaderColumnSimple_new(
+        title: *const c_void,
+        width: c_int,
+        align: c_int,
+        flags: c_int,
+    ) -> *mut c_void;
+    pub fn wxHeaderColumnSimple_new1(
+        bitmap: *const c_void,
+        width: c_int,
+        align: c_int,
+        flags: c_int,
+    ) -> *mut c_void;
 
     // wxHeaderCtrl
     // BLOCKED: pub fn wxHeaderCtrl_new() -> *mut c_void;
@@ -1687,7 +1697,7 @@ extern "C" {
     pub fn wxSettableHeaderColumn_SetBitmap(self_: *mut c_void, bitmap: *const c_void);
     pub fn wxSettableHeaderColumn_SetWidth(self_: *mut c_void, width: c_int);
     pub fn wxSettableHeaderColumn_SetMinWidth(self_: *mut c_void, min_width: c_int);
-    // NOT_SUPPORTED: pub fn wxSettableHeaderColumn_SetAlignment(self_: *mut c_void, align: wxAlignment);
+    pub fn wxSettableHeaderColumn_SetAlignment(self_: *mut c_void, align: c_int);
     pub fn wxSettableHeaderColumn_SetFlags(self_: *mut c_void, flags: c_int);
     pub fn wxSettableHeaderColumn_ChangeFlag(self_: *mut c_void, flag: c_int, set: bool);
     pub fn wxSettableHeaderColumn_SetFlag(self_: *mut c_void, flag: c_int);
