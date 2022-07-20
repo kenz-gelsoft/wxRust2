@@ -30,6 +30,10 @@ wxml_files = [
     'wxml/classwx_g_d_i_object.xml',
     'wxml/classwx_gauge.xml',
     'wxml/classwx_generic_dir_ctrl.xml',
+    'wxml/classwx_header_column.xml',
+    'wxml/classwx_header_column_simple.xml',
+    'wxml/classwx_header_ctrl.xml',
+    'wxml/classwx_header_ctrl_simple.xml',
     'wxml/classwx_icon.xml',
     'wxml/classwx_item_container.xml',
     'wxml/classwx_item_container_immutable.xml',
@@ -46,6 +50,7 @@ wxml_files = [
     'wxml/classwx_point.xml',
     'wxml/classwx_radio_box.xml',
     'wxml/classwx_rect.xml',
+    'wxml/classwx_settable_header_column.xml',
     'wxml/classwx_size.xml',
     'wxml/classwx_sizer.xml',
     'wxml/classwx_sizer_flags.xml',
@@ -304,6 +309,18 @@ wx31 = [
 [types.wxFrame]
 windows = [
     'MSWGetTaskBarButton',
+]
+[types.wxHeaderColumn]
+wx31 = [
+    'GetBitmapBundle',
+]
+[types.wxHeaderCtrl]
+blocklist = [
+    'wxHeaderCtrl',
+    'wxHeaderCtrl1',
+]
+wx31 = [
+    'GetColumnTitleWidth1',
 ]
 [types.wxGDIObject]
 blocklist = [

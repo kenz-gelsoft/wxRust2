@@ -43,6 +43,9 @@ use fontpicker::*;
 mod gauge;
 use gauge::*;
 
+mod headerctrl;
+use headerctrl::*;
+
 enum Widgets {
     ClearLog = 100,
     Quit,
@@ -152,11 +155,13 @@ impl WidgetsFrame {
         let filectrl_page = Rc::new(FileCtrlWidgetsPage::new(&book));
         let fontpicker_page = Rc::new(FontPickerWidgetsPage::new(&book));
         let gauge_page = Rc::new(GaugeWidgetsPage::new(&book));
+        let headerctrl_page = Rc::new(HeaderCtrlWidgetsPage::new(&book));
         let mut frame = WidgetsFrame {
             base,
             panel,
             book,
             pages: vec![
+                headerctrl_page,
                 button_page,
                 check_box_page,
                 choice_page,

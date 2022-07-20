@@ -9,6 +9,7 @@ CXX2RUST = {
     'long': 'c_long',
     'size_t': 'usize',
     'unsigned int': 'c_uint',
+    'wxAlignment': 'c_int',
     'wxByte': 'c_uchar',
     'wxCheckBoxState': 'c_int',
     'wxCoord': 'c_int',

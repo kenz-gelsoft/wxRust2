@@ -10,6 +10,7 @@
 #include <wx/filectrl.h>
 #include <wx/filepicker.h>
 #include <wx/fontpicker.h>
+#include <wx/headerctrl.h>
 #include <wx/wrapsizer.h>
 
 // wxBitmapBundle compatibility hack(for a while)
@@ -518,6 +519,61 @@ void wxGenericDirCtrl_SelectPath(wxGenericDirCtrl * self, const wxString * path,
 void wxGenericDirCtrl_SelectPaths(wxGenericDirCtrl * self, const wxArrayString * paths);
 void wxGenericDirCtrl_UnselectAll(wxGenericDirCtrl * self);
 
+// CLASS: wxHeaderColumn
+void wxHeaderColumn_delete(wxHeaderColumn *self);
+wxString *wxHeaderColumn_GetTitle(const wxHeaderColumn * self);
+wxBitmap *wxHeaderColumn_GetBitmap(const wxHeaderColumn * self);
+#if wxCHECK_VERSION(3, 1, 0)
+wxBitmapBundle *wxHeaderColumn_GetBitmapBundle(const wxHeaderColumn * self);
+#endif
+int wxHeaderColumn_GetWidth(const wxHeaderColumn * self);
+int wxHeaderColumn_GetMinWidth(const wxHeaderColumn * self);
+wxAlignment wxHeaderColumn_GetAlignment(const wxHeaderColumn * self);
+int wxHeaderColumn_GetFlags(const wxHeaderColumn * self);
+bool wxHeaderColumn_HasFlag(const wxHeaderColumn * self, int flag);
+bool wxHeaderColumn_IsResizeable(const wxHeaderColumn * self);
+bool wxHeaderColumn_IsSortable(const wxHeaderColumn * self);
+bool wxHeaderColumn_IsReorderable(const wxHeaderColumn * self);
+bool wxHeaderColumn_IsHidden(const wxHeaderColumn * self);
+bool wxHeaderColumn_IsShown(const wxHeaderColumn * self);
+bool wxHeaderColumn_IsSortKey(const wxHeaderColumn * self);
+bool wxHeaderColumn_IsSortOrderAscending(const wxHeaderColumn * self);
+
+// CLASS: wxHeaderColumnSimple
+void wxHeaderColumnSimple_delete(wxHeaderColumnSimple *self);
+wxHeaderColumnSimple *wxHeaderColumnSimple_new(const wxString * title, int width, wxAlignment align, int flags);
+wxHeaderColumnSimple *wxHeaderColumnSimple_new1(const wxBitmapBundle * bitmap, int width, wxAlignment align, int flags);
+
+// CLASS: wxHeaderCtrl
+bool wxHeaderCtrl_Create(wxHeaderCtrl * self, wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+void wxHeaderCtrl_SetColumnCount(wxHeaderCtrl * self, unsigned int count);
+unsigned int wxHeaderCtrl_GetColumnCount(const wxHeaderCtrl * self);
+bool wxHeaderCtrl_IsEmpty(const wxHeaderCtrl * self);
+void wxHeaderCtrl_UpdateColumn(wxHeaderCtrl * self, unsigned int idx);
+void wxHeaderCtrl_SetColumnsOrder(wxHeaderCtrl * self, const wxArrayInt * order);
+unsigned int wxHeaderCtrl_GetColumnAt(const wxHeaderCtrl * self, unsigned int pos);
+unsigned int wxHeaderCtrl_GetColumnPos(const wxHeaderCtrl * self, unsigned int idx);
+void wxHeaderCtrl_ResetColumnsOrder(wxHeaderCtrl * self);
+bool wxHeaderCtrl_ShowColumnsMenu(wxHeaderCtrl * self, const wxPoint * pt, const wxString * title);
+void wxHeaderCtrl_AddColumnsItems(wxHeaderCtrl * self, wxMenu * menu, int id_columns_base);
+bool wxHeaderCtrl_ShowCustomizeDialog(wxHeaderCtrl * self);
+int wxHeaderCtrl_GetColumnTitleWidth(wxHeaderCtrl * self, const wxHeaderColumn * col);
+#if wxCHECK_VERSION(3, 1, 0)
+int wxHeaderCtrl_GetColumnTitleWidth1(wxHeaderCtrl * self, unsigned int idx);
+#endif
+void wxHeaderCtrl_MoveColumnInOrderArray(wxArrayInt * order, unsigned int idx, unsigned int pos);
+
+// CLASS: wxHeaderCtrlSimple
+wxHeaderCtrlSimple *wxHeaderCtrlSimple_new();
+wxHeaderCtrlSimple *wxHeaderCtrlSimple_new1(wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+void wxHeaderCtrlSimple_InsertColumn(wxHeaderCtrlSimple * self, const wxHeaderColumnSimple * col, unsigned int idx);
+void wxHeaderCtrlSimple_AppendColumn(wxHeaderCtrlSimple * self, const wxHeaderColumnSimple * col);
+void wxHeaderCtrlSimple_DeleteColumn(wxHeaderCtrlSimple * self, unsigned int idx);
+void wxHeaderCtrlSimple_ShowColumn(wxHeaderCtrlSimple * self, unsigned int idx, bool show);
+void wxHeaderCtrlSimple_HideColumn(wxHeaderCtrlSimple * self, unsigned int idx);
+void wxHeaderCtrlSimple_ShowSortIndicator(wxHeaderCtrlSimple * self, unsigned int idx, bool sort_order);
+void wxHeaderCtrlSimple_RemoveSortIndicator(wxHeaderCtrlSimple * self);
+
 // CLASS: wxIcon
 wxIcon *wxIcon_new();
 wxIcon *wxIcon_new1(const wxIcon * icon);
@@ -885,6 +941,26 @@ void wxRect_SetBottomRight(wxRect * self, const wxPoint * p);
 void wxRect_SetTopRight(wxRect * self, const wxPoint * p);
 void wxRect_SetBottomLeft(wxRect * self, const wxPoint * p);
 wxRect *wxRect_Union(const wxRect * self, const wxRect * rect);
+
+// CLASS: wxSettableHeaderColumn
+void wxSettableHeaderColumn_delete(wxSettableHeaderColumn *self);
+void wxSettableHeaderColumn_SetTitle(wxSettableHeaderColumn * self, const wxString * title);
+void wxSettableHeaderColumn_SetBitmap(wxSettableHeaderColumn * self, const wxBitmapBundle * bitmap);
+void wxSettableHeaderColumn_SetWidth(wxSettableHeaderColumn * self, int width);
+void wxSettableHeaderColumn_SetMinWidth(wxSettableHeaderColumn * self, int min_width);
+void wxSettableHeaderColumn_SetAlignment(wxSettableHeaderColumn * self, wxAlignment align);
+void wxSettableHeaderColumn_SetFlags(wxSettableHeaderColumn * self, int flags);
+void wxSettableHeaderColumn_ChangeFlag(wxSettableHeaderColumn * self, int flag, bool set);
+void wxSettableHeaderColumn_SetFlag(wxSettableHeaderColumn * self, int flag);
+void wxSettableHeaderColumn_ClearFlag(wxSettableHeaderColumn * self, int flag);
+void wxSettableHeaderColumn_ToggleFlag(wxSettableHeaderColumn * self, int flag);
+void wxSettableHeaderColumn_SetResizeable(wxSettableHeaderColumn * self, bool resizable);
+void wxSettableHeaderColumn_SetSortable(wxSettableHeaderColumn * self, bool sortable);
+void wxSettableHeaderColumn_SetReorderable(wxSettableHeaderColumn * self, bool reorderable);
+void wxSettableHeaderColumn_SetHidden(wxSettableHeaderColumn * self, bool hidden);
+void wxSettableHeaderColumn_UnsetAsSortKey(wxSettableHeaderColumn * self);
+void wxSettableHeaderColumn_SetSortOrder(wxSettableHeaderColumn * self, bool ascending);
+void wxSettableHeaderColumn_ToggleSortOrder(wxSettableHeaderColumn * self);
 
 // CLASS: wxSize
 void wxSize_delete(wxSize *self);

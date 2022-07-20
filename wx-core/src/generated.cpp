@@ -1243,6 +1243,147 @@ void wxGenericDirCtrl_UnselectAll(wxGenericDirCtrl * self) {
     return self->UnselectAll();
 }
 
+// CLASS: wxHeaderColumn
+void wxHeaderColumn_delete(wxHeaderColumn *self) {
+    delete self;
+}
+wxString *wxHeaderColumn_GetTitle(const wxHeaderColumn * self) {
+    return new wxString(self->GetTitle());
+}
+wxBitmap *wxHeaderColumn_GetBitmap(const wxHeaderColumn * self) {
+    return new wxBitmap(self->GetBitmap());
+}
+#if wxCHECK_VERSION(3, 1, 0)
+wxBitmapBundle *wxHeaderColumn_GetBitmapBundle(const wxHeaderColumn * self) {
+    return new wxBitmapBundle(self->GetBitmapBundle());
+}
+#endif
+int wxHeaderColumn_GetWidth(const wxHeaderColumn * self) {
+    return self->GetWidth();
+}
+int wxHeaderColumn_GetMinWidth(const wxHeaderColumn * self) {
+    return self->GetMinWidth();
+}
+wxAlignment wxHeaderColumn_GetAlignment(const wxHeaderColumn * self) {
+    return self->GetAlignment();
+}
+int wxHeaderColumn_GetFlags(const wxHeaderColumn * self) {
+    return self->GetFlags();
+}
+bool wxHeaderColumn_HasFlag(const wxHeaderColumn * self, int flag) {
+    return self->HasFlag(flag);
+}
+bool wxHeaderColumn_IsResizeable(const wxHeaderColumn * self) {
+    return self->IsResizeable();
+}
+bool wxHeaderColumn_IsSortable(const wxHeaderColumn * self) {
+    return self->IsSortable();
+}
+bool wxHeaderColumn_IsReorderable(const wxHeaderColumn * self) {
+    return self->IsReorderable();
+}
+bool wxHeaderColumn_IsHidden(const wxHeaderColumn * self) {
+    return self->IsHidden();
+}
+bool wxHeaderColumn_IsShown(const wxHeaderColumn * self) {
+    return self->IsShown();
+}
+bool wxHeaderColumn_IsSortKey(const wxHeaderColumn * self) {
+    return self->IsSortKey();
+}
+bool wxHeaderColumn_IsSortOrderAscending(const wxHeaderColumn * self) {
+    return self->IsSortOrderAscending();
+}
+
+// CLASS: wxHeaderColumnSimple
+void wxHeaderColumnSimple_delete(wxHeaderColumnSimple *self) {
+    delete self;
+}
+wxHeaderColumnSimple *wxHeaderColumnSimple_new(const wxString * title, int width, wxAlignment align, int flags) {
+    return new wxHeaderColumnSimple(*title, width, align, flags);
+}
+wxHeaderColumnSimple *wxHeaderColumnSimple_new1(const wxBitmapBundle * bitmap, int width, wxAlignment align, int flags) {
+    return new wxHeaderColumnSimple(*bitmap, width, align, flags);
+}
+
+// CLASS: wxHeaderCtrl
+bool wxHeaderCtrl_Create(wxHeaderCtrl * self, wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, winid, *pos, *size, style, *name);
+}
+void wxHeaderCtrl_SetColumnCount(wxHeaderCtrl * self, unsigned int count) {
+    return self->SetColumnCount(count);
+}
+unsigned int wxHeaderCtrl_GetColumnCount(const wxHeaderCtrl * self) {
+    return self->GetColumnCount();
+}
+bool wxHeaderCtrl_IsEmpty(const wxHeaderCtrl * self) {
+    return self->IsEmpty();
+}
+void wxHeaderCtrl_UpdateColumn(wxHeaderCtrl * self, unsigned int idx) {
+    return self->UpdateColumn(idx);
+}
+void wxHeaderCtrl_SetColumnsOrder(wxHeaderCtrl * self, const wxArrayInt * order) {
+    return self->SetColumnsOrder(*order);
+}
+unsigned int wxHeaderCtrl_GetColumnAt(const wxHeaderCtrl * self, unsigned int pos) {
+    return self->GetColumnAt(pos);
+}
+unsigned int wxHeaderCtrl_GetColumnPos(const wxHeaderCtrl * self, unsigned int idx) {
+    return self->GetColumnPos(idx);
+}
+void wxHeaderCtrl_ResetColumnsOrder(wxHeaderCtrl * self) {
+    return self->ResetColumnsOrder();
+}
+bool wxHeaderCtrl_ShowColumnsMenu(wxHeaderCtrl * self, const wxPoint * pt, const wxString * title) {
+    return self->ShowColumnsMenu(*pt, *title);
+}
+void wxHeaderCtrl_AddColumnsItems(wxHeaderCtrl * self, wxMenu * menu, int id_columns_base) {
+    return self->AddColumnsItems(*menu, id_columns_base);
+}
+bool wxHeaderCtrl_ShowCustomizeDialog(wxHeaderCtrl * self) {
+    return self->ShowCustomizeDialog();
+}
+int wxHeaderCtrl_GetColumnTitleWidth(wxHeaderCtrl * self, const wxHeaderColumn * col) {
+    return self->GetColumnTitleWidth(*col);
+}
+#if wxCHECK_VERSION(3, 1, 0)
+int wxHeaderCtrl_GetColumnTitleWidth1(wxHeaderCtrl * self, unsigned int idx) {
+    return self->GetColumnTitleWidth(idx);
+}
+#endif
+void wxHeaderCtrl_MoveColumnInOrderArray(wxArrayInt * order, unsigned int idx, unsigned int pos) {
+    return wxHeaderCtrl::MoveColumnInOrderArray(*order, idx, pos);
+}
+
+// CLASS: wxHeaderCtrlSimple
+wxHeaderCtrlSimple *wxHeaderCtrlSimple_new() {
+    return new wxHeaderCtrlSimple();
+}
+wxHeaderCtrlSimple *wxHeaderCtrlSimple_new1(wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxHeaderCtrlSimple(parent, winid, *pos, *size, style, *name);
+}
+void wxHeaderCtrlSimple_InsertColumn(wxHeaderCtrlSimple * self, const wxHeaderColumnSimple * col, unsigned int idx) {
+    return self->InsertColumn(*col, idx);
+}
+void wxHeaderCtrlSimple_AppendColumn(wxHeaderCtrlSimple * self, const wxHeaderColumnSimple * col) {
+    return self->AppendColumn(*col);
+}
+void wxHeaderCtrlSimple_DeleteColumn(wxHeaderCtrlSimple * self, unsigned int idx) {
+    return self->DeleteColumn(idx);
+}
+void wxHeaderCtrlSimple_ShowColumn(wxHeaderCtrlSimple * self, unsigned int idx, bool show) {
+    return self->ShowColumn(idx, show);
+}
+void wxHeaderCtrlSimple_HideColumn(wxHeaderCtrlSimple * self, unsigned int idx) {
+    return self->HideColumn(idx);
+}
+void wxHeaderCtrlSimple_ShowSortIndicator(wxHeaderCtrlSimple * self, unsigned int idx, bool sort_order) {
+    return self->ShowSortIndicator(idx, sort_order);
+}
+void wxHeaderCtrlSimple_RemoveSortIndicator(wxHeaderCtrlSimple * self) {
+    return self->RemoveSortIndicator();
+}
+
 // CLASS: wxIcon
 wxIcon *wxIcon_new() {
     return new wxIcon();
@@ -2221,6 +2362,62 @@ void wxRect_SetBottomLeft(wxRect * self, const wxPoint * p) {
 }
 wxRect *wxRect_Union(const wxRect * self, const wxRect * rect) {
     return new wxRect(self->Union(*rect));
+}
+
+// CLASS: wxSettableHeaderColumn
+void wxSettableHeaderColumn_delete(wxSettableHeaderColumn *self) {
+    delete self;
+}
+void wxSettableHeaderColumn_SetTitle(wxSettableHeaderColumn * self, const wxString * title) {
+    return self->SetTitle(*title);
+}
+void wxSettableHeaderColumn_SetBitmap(wxSettableHeaderColumn * self, const wxBitmapBundle * bitmap) {
+    return self->SetBitmap(*bitmap);
+}
+void wxSettableHeaderColumn_SetWidth(wxSettableHeaderColumn * self, int width) {
+    return self->SetWidth(width);
+}
+void wxSettableHeaderColumn_SetMinWidth(wxSettableHeaderColumn * self, int min_width) {
+    return self->SetMinWidth(min_width);
+}
+void wxSettableHeaderColumn_SetAlignment(wxSettableHeaderColumn * self, wxAlignment align) {
+    return self->SetAlignment(align);
+}
+void wxSettableHeaderColumn_SetFlags(wxSettableHeaderColumn * self, int flags) {
+    return self->SetFlags(flags);
+}
+void wxSettableHeaderColumn_ChangeFlag(wxSettableHeaderColumn * self, int flag, bool set) {
+    return self->ChangeFlag(flag, set);
+}
+void wxSettableHeaderColumn_SetFlag(wxSettableHeaderColumn * self, int flag) {
+    return self->SetFlag(flag);
+}
+void wxSettableHeaderColumn_ClearFlag(wxSettableHeaderColumn * self, int flag) {
+    return self->ClearFlag(flag);
+}
+void wxSettableHeaderColumn_ToggleFlag(wxSettableHeaderColumn * self, int flag) {
+    return self->ToggleFlag(flag);
+}
+void wxSettableHeaderColumn_SetResizeable(wxSettableHeaderColumn * self, bool resizable) {
+    return self->SetResizeable(resizable);
+}
+void wxSettableHeaderColumn_SetSortable(wxSettableHeaderColumn * self, bool sortable) {
+    return self->SetSortable(sortable);
+}
+void wxSettableHeaderColumn_SetReorderable(wxSettableHeaderColumn * self, bool reorderable) {
+    return self->SetReorderable(reorderable);
+}
+void wxSettableHeaderColumn_SetHidden(wxSettableHeaderColumn * self, bool hidden) {
+    return self->SetHidden(hidden);
+}
+void wxSettableHeaderColumn_UnsetAsSortKey(wxSettableHeaderColumn * self) {
+    return self->UnsetAsSortKey();
+}
+void wxSettableHeaderColumn_SetSortOrder(wxSettableHeaderColumn * self, bool ascending) {
+    return self->SetSortOrder(ascending);
+}
+void wxSettableHeaderColumn_ToggleSortOrder(wxSettableHeaderColumn * self) {
+    return self->ToggleSortOrder();
 }
 
 // CLASS: wxSize

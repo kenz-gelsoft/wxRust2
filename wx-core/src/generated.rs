@@ -1149,6 +1149,148 @@ impl<const OWNED: bool> GenericDirCtrlIsOwned<OWNED> {
     }
 }
 
+// wxHeaderColumn
+wx_class! { HeaderColumn =
+    HeaderColumnIsOwned<true>(wxHeaderColumn) impl
+        HeaderColumnMethods
+}
+impl<const OWNED: bool> HeaderColumnIsOwned<OWNED> {
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for HeaderColumnIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxHeaderColumn_delete(self.0) }
+        }
+    }
+}
+
+// wxHeaderColumnSimple
+wx_class! { HeaderColumnSimple =
+    HeaderColumnSimpleIsOwned<true>(wxHeaderColumnSimple) impl
+        HeaderColumnSimpleMethods,
+        SettableHeaderColumnMethods,
+        HeaderColumnMethods
+}
+impl<const OWNED: bool> HeaderColumnSimpleIsOwned<OWNED> {
+    pub fn new_with_str(
+        title: &str,
+        width: c_int,
+        align: c_int,
+        flags: c_int,
+    ) -> HeaderColumnSimpleIsOwned<OWNED> {
+        unsafe {
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            HeaderColumnSimpleIsOwned(ffi::wxHeaderColumnSimple_new(title, width, align, flags))
+        }
+    }
+    pub fn new_with_bitmapbundle<B: BitmapBundleMethods>(
+        bitmap: &B,
+        width: c_int,
+        align: c_int,
+        flags: c_int,
+    ) -> HeaderColumnSimpleIsOwned<OWNED> {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            HeaderColumnSimpleIsOwned(ffi::wxHeaderColumnSimple_new1(bitmap, width, align, flags))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for HeaderColumnSimpleIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxHeaderColumnSimple_delete(self.0) }
+        }
+    }
+}
+
+// wxHeaderCtrl
+wx_class! { HeaderCtrl =
+    HeaderCtrlIsOwned<true>(wxHeaderCtrl) impl
+        HeaderCtrlMethods,
+        ControlMethods,
+        // WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> HeaderCtrlIsOwned<OWNED> {
+    // BLOCKED: fn wxHeaderCtrl()
+    // BLOCKED: fn wxHeaderCtrl1()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> WindowMethods for HeaderCtrlIsOwned<OWNED> {
+    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        parent: Option<&W>,
+        winid: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxHeaderCtrl_Create(self.as_ptr(), parent, winid, pos, size, style, name)
+        }
+    }
+}
+
+// wxHeaderCtrlSimple
+wx_class! { HeaderCtrlSimple =
+    HeaderCtrlSimpleIsOwned<true>(wxHeaderCtrlSimple) impl
+        HeaderCtrlSimpleMethods,
+        HeaderCtrlMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> HeaderCtrlSimpleIsOwned<OWNED> {
+    pub fn new_2step() -> HeaderCtrlSimpleIsOwned<OWNED> {
+        unsafe { HeaderCtrlSimpleIsOwned(ffi::wxHeaderCtrlSimple_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&W>,
+        winid: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> HeaderCtrlSimpleIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            HeaderCtrlSimpleIsOwned(ffi::wxHeaderCtrlSimple_new1(
+                parent, winid, pos, size, style, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
 // wxIcon
 wx_class! { Icon =
     IconIsOwned<true>(wxIcon) impl
@@ -1646,6 +1788,25 @@ impl<const OWNED: bool> Drop for RectIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxRect_delete(self.0) }
+        }
+    }
+}
+
+// wxSettableHeaderColumn
+wx_class! { SettableHeaderColumn =
+    SettableHeaderColumnIsOwned<true>(wxSettableHeaderColumn) impl
+        SettableHeaderColumnMethods,
+        HeaderColumnMethods
+}
+impl<const OWNED: bool> SettableHeaderColumnIsOwned<OWNED> {
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for SettableHeaderColumnIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxSettableHeaderColumn_delete(self.0) }
         }
     }
 }

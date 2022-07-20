@@ -933,6 +933,93 @@ extern "C" {
     pub fn wxGenericDirCtrl_SelectPaths(self_: *mut c_void, paths: *const c_void);
     pub fn wxGenericDirCtrl_UnselectAll(self_: *mut c_void);
 
+    // wxHeaderColumn
+    pub fn wxHeaderColumn_delete(self_: *mut c_void);
+    pub fn wxHeaderColumn_GetTitle(self_: *const c_void) -> *mut c_void;
+    pub fn wxHeaderColumn_GetBitmap(self_: *const c_void) -> *mut c_void;
+    pub fn wxHeaderColumn_GetBitmapBundle(self_: *const c_void) -> *mut c_void;
+    pub fn wxHeaderColumn_GetWidth(self_: *const c_void) -> c_int;
+    pub fn wxHeaderColumn_GetMinWidth(self_: *const c_void) -> c_int;
+    pub fn wxHeaderColumn_GetAlignment(self_: *const c_void) -> c_int;
+    pub fn wxHeaderColumn_GetFlags(self_: *const c_void) -> c_int;
+    pub fn wxHeaderColumn_HasFlag(self_: *const c_void, flag: c_int) -> bool;
+    pub fn wxHeaderColumn_IsResizeable(self_: *const c_void) -> bool;
+    pub fn wxHeaderColumn_IsSortable(self_: *const c_void) -> bool;
+    pub fn wxHeaderColumn_IsReorderable(self_: *const c_void) -> bool;
+    pub fn wxHeaderColumn_IsHidden(self_: *const c_void) -> bool;
+    pub fn wxHeaderColumn_IsShown(self_: *const c_void) -> bool;
+    pub fn wxHeaderColumn_IsSortKey(self_: *const c_void) -> bool;
+    pub fn wxHeaderColumn_IsSortOrderAscending(self_: *const c_void) -> bool;
+
+    // wxHeaderColumnSimple
+    pub fn wxHeaderColumnSimple_delete(self_: *mut c_void);
+    pub fn wxHeaderColumnSimple_new(
+        title: *const c_void,
+        width: c_int,
+        align: c_int,
+        flags: c_int,
+    ) -> *mut c_void;
+    pub fn wxHeaderColumnSimple_new1(
+        bitmap: *const c_void,
+        width: c_int,
+        align: c_int,
+        flags: c_int,
+    ) -> *mut c_void;
+
+    // wxHeaderCtrl
+    // BLOCKED: pub fn wxHeaderCtrl_new() -> *mut c_void;
+    // BLOCKED: pub fn wxHeaderCtrl_new1(parent: *mut c_void, winid: c_int, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> *mut c_void;
+    pub fn wxHeaderCtrl_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        winid: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxHeaderCtrl_SetColumnCount(self_: *mut c_void, count: c_uint);
+    pub fn wxHeaderCtrl_GetColumnCount(self_: *const c_void) -> c_uint;
+    pub fn wxHeaderCtrl_IsEmpty(self_: *const c_void) -> bool;
+    pub fn wxHeaderCtrl_UpdateColumn(self_: *mut c_void, idx: c_uint);
+    pub fn wxHeaderCtrl_SetColumnsOrder(self_: *mut c_void, order: *const c_void);
+    // NOT_SUPPORTED: pub fn wxHeaderCtrl_GetColumnsOrder(self_: *const c_void) -> wxArrayInt;
+    pub fn wxHeaderCtrl_GetColumnAt(self_: *const c_void, pos: c_uint) -> c_uint;
+    pub fn wxHeaderCtrl_GetColumnPos(self_: *const c_void, idx: c_uint) -> c_uint;
+    pub fn wxHeaderCtrl_ResetColumnsOrder(self_: *mut c_void);
+    pub fn wxHeaderCtrl_ShowColumnsMenu(
+        self_: *mut c_void,
+        pt: *const c_void,
+        title: *const c_void,
+    ) -> bool;
+    pub fn wxHeaderCtrl_AddColumnsItems(
+        self_: *mut c_void,
+        menu: *mut c_void,
+        id_columns_base: c_int,
+    );
+    pub fn wxHeaderCtrl_ShowCustomizeDialog(self_: *mut c_void) -> bool;
+    pub fn wxHeaderCtrl_GetColumnTitleWidth(self_: *mut c_void, col: *const c_void) -> c_int;
+    pub fn wxHeaderCtrl_GetColumnTitleWidth1(self_: *mut c_void, idx: c_uint) -> c_int;
+    pub fn wxHeaderCtrl_MoveColumnInOrderArray(order: *mut c_void, idx: c_uint, pos: c_uint);
+
+    // wxHeaderCtrlSimple
+    pub fn wxHeaderCtrlSimple_new() -> *mut c_void;
+    pub fn wxHeaderCtrlSimple_new1(
+        parent: *mut c_void,
+        winid: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxHeaderCtrlSimple_InsertColumn(self_: *mut c_void, col: *const c_void, idx: c_uint);
+    pub fn wxHeaderCtrlSimple_AppendColumn(self_: *mut c_void, col: *const c_void);
+    pub fn wxHeaderCtrlSimple_DeleteColumn(self_: *mut c_void, idx: c_uint);
+    pub fn wxHeaderCtrlSimple_ShowColumn(self_: *mut c_void, idx: c_uint, show: bool);
+    pub fn wxHeaderCtrlSimple_HideColumn(self_: *mut c_void, idx: c_uint);
+    pub fn wxHeaderCtrlSimple_ShowSortIndicator(self_: *mut c_void, idx: c_uint, sort_order: bool);
+    pub fn wxHeaderCtrlSimple_RemoveSortIndicator(self_: *mut c_void);
+
     // wxIcon
     pub fn wxIcon_new() -> *mut c_void;
     pub fn wxIcon_new1(icon: *const c_void) -> *mut c_void;
@@ -1603,6 +1690,26 @@ extern "C" {
     // BLOCKED: pub fn wxRect_operator*=(self_: *mut c_void, r: *const c_void) -> *mut c_void;
     // BLOCKED: pub fn wxRect_operator=(self_: *mut c_void, rect: *const c_void) -> *mut c_void;
     // BLOCKED: pub fn wxRect_operator==(self_: *mut c_void, r1: *const c_void, r2: *const c_void) -> bool;
+
+    // wxSettableHeaderColumn
+    pub fn wxSettableHeaderColumn_delete(self_: *mut c_void);
+    pub fn wxSettableHeaderColumn_SetTitle(self_: *mut c_void, title: *const c_void);
+    pub fn wxSettableHeaderColumn_SetBitmap(self_: *mut c_void, bitmap: *const c_void);
+    pub fn wxSettableHeaderColumn_SetWidth(self_: *mut c_void, width: c_int);
+    pub fn wxSettableHeaderColumn_SetMinWidth(self_: *mut c_void, min_width: c_int);
+    pub fn wxSettableHeaderColumn_SetAlignment(self_: *mut c_void, align: c_int);
+    pub fn wxSettableHeaderColumn_SetFlags(self_: *mut c_void, flags: c_int);
+    pub fn wxSettableHeaderColumn_ChangeFlag(self_: *mut c_void, flag: c_int, set: bool);
+    pub fn wxSettableHeaderColumn_SetFlag(self_: *mut c_void, flag: c_int);
+    pub fn wxSettableHeaderColumn_ClearFlag(self_: *mut c_void, flag: c_int);
+    pub fn wxSettableHeaderColumn_ToggleFlag(self_: *mut c_void, flag: c_int);
+    pub fn wxSettableHeaderColumn_SetResizeable(self_: *mut c_void, resizable: bool);
+    pub fn wxSettableHeaderColumn_SetSortable(self_: *mut c_void, sortable: bool);
+    pub fn wxSettableHeaderColumn_SetReorderable(self_: *mut c_void, reorderable: bool);
+    pub fn wxSettableHeaderColumn_SetHidden(self_: *mut c_void, hidden: bool);
+    pub fn wxSettableHeaderColumn_UnsetAsSortKey(self_: *mut c_void);
+    pub fn wxSettableHeaderColumn_SetSortOrder(self_: *mut c_void, ascending: bool);
+    pub fn wxSettableHeaderColumn_ToggleSortOrder(self_: *mut c_void);
 
     // wxSize
     pub fn wxSize_delete(self_: *mut c_void);
