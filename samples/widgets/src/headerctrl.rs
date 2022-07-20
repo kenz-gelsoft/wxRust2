@@ -63,10 +63,8 @@ impl WidgetsPage for HeaderCtrlWidgetsPage {
         let btn = wx::Button::builder(Some(&self.base))
             .label("&Reset")
             .build();
-        sizer_header.add_window_sizerflags(
-            Some(&btn),
-            wx::SizerFlags::new(0).center_horizontal().border(wx::ALL),
-        );
+        sizer_header
+            .add_window_sizerflags(Some(&btn), wx::SizerFlags::new(0).center().border(wx::ALL));
         sizer_top.add_sizer_sizerflags(Some(&sizer_header), wx::SizerFlags::new(0).expand());
 
         // column flags
