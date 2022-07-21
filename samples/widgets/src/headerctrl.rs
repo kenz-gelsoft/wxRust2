@@ -51,7 +51,7 @@ impl WidgetsPage for HeaderCtrlWidgetsPage {
         return &self.base;
     }
     fn label(&self) -> &str {
-        return "Gauge";
+        return "HeaderCtrl";
     }
     fn create_content(&self) {
         let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
