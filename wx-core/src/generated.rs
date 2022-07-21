@@ -1291,6 +1291,52 @@ impl<const OWNED: bool> HeaderCtrlSimpleIsOwned<OWNED> {
     }
 }
 
+// wxHyperlinkCtrl
+wx_class! { HyperlinkCtrl =
+    HyperlinkCtrlIsOwned<true>(wxHyperlinkCtrl) impl
+        HyperlinkCtrlMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> HyperlinkCtrlIsOwned<OWNED> {
+    pub fn new_2step() -> HyperlinkCtrlIsOwned<OWNED> {
+        unsafe { HyperlinkCtrlIsOwned(ffi::wxHyperlinkCtrl_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        label: &str,
+        url: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> HyperlinkCtrlIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            let url = WxString::from(url);
+            let url = url.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            HyperlinkCtrlIsOwned(ffi::wxHyperlinkCtrl_new1(
+                parent, id, label, url, pos, size, style, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+
 // wxIcon
 wx_class! { Icon =
     IconIsOwned<true>(wxIcon) impl

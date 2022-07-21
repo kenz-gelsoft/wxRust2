@@ -34,6 +34,7 @@ wxml_files = [
     'wxml/classwx_header_column_simple.xml',
     'wxml/classwx_header_ctrl.xml',
     'wxml/classwx_header_ctrl_simple.xml',
+    'wxml/classwx_hyperlink_ctrl.xml',
     'wxml/classwx_icon.xml',
     'wxml/classwx_item_container.xml',
     'wxml/classwx_item_container_immutable.xml',

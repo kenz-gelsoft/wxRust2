@@ -2252,6 +2252,90 @@ pub trait HeaderCtrlSimpleMethods: HeaderCtrlMethods {
     }
 }
 
+// wxHyperlinkCtrl
+pub trait HyperlinkCtrlMethods: ControlMethods {
+    fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        label: &str,
+        url: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            let url = WxString::from(url);
+            let url = url.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxHyperlinkCtrl_Create(
+                self.as_ptr(),
+                parent,
+                id,
+                label,
+                url,
+                pos,
+                size,
+                style,
+                name,
+            )
+        }
+    }
+    fn get_hover_colour(&self) -> Colour {
+        unsafe { Colour::from_ptr(ffi::wxHyperlinkCtrl_GetHoverColour(self.as_ptr())) }
+    }
+    fn get_normal_colour(&self) -> Colour {
+        unsafe { Colour::from_ptr(ffi::wxHyperlinkCtrl_GetNormalColour(self.as_ptr())) }
+    }
+    fn get_url(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxHyperlinkCtrl_GetURL(self.as_ptr())).into() }
+    }
+    fn get_visited(&self) -> bool {
+        unsafe { ffi::wxHyperlinkCtrl_GetVisited(self.as_ptr()) }
+    }
+    fn get_visited_colour(&self) -> Colour {
+        unsafe { Colour::from_ptr(ffi::wxHyperlinkCtrl_GetVisitedColour(self.as_ptr())) }
+    }
+    fn set_hover_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxHyperlinkCtrl_SetHoverColour(self.as_ptr(), colour)
+        }
+    }
+    fn set_normal_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxHyperlinkCtrl_SetNormalColour(self.as_ptr(), colour)
+        }
+    }
+    fn set_url(&self, url: &str) {
+        unsafe {
+            let url = WxString::from(url);
+            let url = url.as_ptr();
+            ffi::wxHyperlinkCtrl_SetURL(self.as_ptr(), url)
+        }
+    }
+    fn set_visited(&self, visited: bool) {
+        unsafe { ffi::wxHyperlinkCtrl_SetVisited(self.as_ptr(), visited) }
+    }
+    fn set_visited_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxHyperlinkCtrl_SetVisitedColour(self.as_ptr(), colour)
+        }
+    }
+}
+
 // wxIcon
 pub trait IconMethods: GDIObjectMethods {
     // DTOR: fn ~wxIcon()
