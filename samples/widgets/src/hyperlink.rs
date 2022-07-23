@@ -49,7 +49,6 @@ pub struct HyperlinkWidgetsPage {
     // the control itself
     hyperlink: Rc<RefCell<Option<wx::HyperlinkCtrl>>>,
     range: Rc<RefCell<c_int>>,
-
     // the timer for simulating hyperlink progress
     // timer: Rc<RefCell<Option<wx::Timer>>>,
 }
@@ -130,11 +129,19 @@ impl WidgetsPage for HyperlinkWidgetsPage {
         let sz_hyperlink_long = wx::BoxSizer::new(wx::VERTICAL);
         let sz_hyperlink = wx::BoxSizer::new(wx::HORIZONTAL);
 
-        let visit = wx::StaticText::builder(Some(&self.base)).label("Visit ").build();
+        let visit = wx::StaticText::builder(Some(&self.base))
+            .label("Visit ")
+            .build();
 
-        let hyperlink = wx::HyperlinkCtrl::builder(Some(&self.base)).id(HyperlinkPage::Ctrl.into()).label("wxWidgets website").url("www.wxwidgets.org").build();
+        let hyperlink = wx::HyperlinkCtrl::builder(Some(&self.base))
+            .id(HyperlinkPage::Ctrl.into())
+            .label("wxWidgets website")
+            .url("www.wxwidgets.org")
+            .build();
 
-        let fun = wx::StaticText::builder(Some(&self.base)).label(" for fun!").build();
+        let fun = wx::StaticText::builder(Some(&self.base))
+            .label(" for fun!")
+            .build();
 
         sz_hyperlink.add_int_int(0, 0, 1, wx::CENTRE, 0, wx::Object::none());
         sz_hyperlink.add_window_int(Some(&visit), 0, wx::CENTRE, 0, wx::Object::none());
@@ -143,10 +150,19 @@ impl WidgetsPage for HyperlinkWidgetsPage {
         sz_hyperlink.add_int_int(0, 0, 1, wx::CENTRE, 0, wx::Object::none());
         sz_hyperlink.set_min_size_int(150, 0);
 
-        let hyperlink_long = wx::HyperlinkCtrl::builder(Some(&self.base)).label("This is a long hyperlink").url("www.wxwidgets.org").build();
+        let hyperlink_long = wx::HyperlinkCtrl::builder(Some(&self.base))
+            .label("This is a long hyperlink")
+            .url("www.wxwidgets.org")
+            .build();
 
         sz_hyperlink_long.add_int_int(0, 0, 1, wx::CENTRE, 0, wx::Object::none());
-        sz_hyperlink_long.add_sizer_int(Some(&sz_hyperlink), 0, wx::CENTRE|wx::GROW, 0, wx::Object::none());
+        sz_hyperlink_long.add_sizer_int(
+            Some(&sz_hyperlink),
+            0,
+            wx::CENTRE | wx::GROW,
+            0,
+            wx::Object::none(),
+        );
         sz_hyperlink_long.add_int_int(0, 0, 1, wx::CENTRE, 0, wx::Object::none());
         sz_hyperlink_long.add_window_int(Some(&hyperlink_long), 0, wx::GROW, 0, wx::Object::none());
         sz_hyperlink_long.add_int_int(0, 0, 1, wx::CENTRE, 0, wx::Object::none());
