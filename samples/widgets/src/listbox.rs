@@ -6,7 +6,7 @@ use wx::methods::*;
 
 // control ids
 #[derive(Clone, Copy)]
-enum ChoicePage {
+enum ListboxPage {
     Reset = wx::ID_HIGHEST as isize,
     Add,
     AddText,
@@ -18,12 +18,18 @@ enum ChoicePage {
     Delete,
     DeleteText,
     DeleteSel,
-    Choice,
+    Listbox,
+    EnsureVisible,
+    EnsureVisibleText,
     ContainerTests,
+    GetTopItem,
+    GetCountPerPage,
+    MoveUp,
+    MoveDown,
 }
-impl ChoicePage {
+impl ListboxPage {
     fn from(v: c_int) -> Option<Self> {
-        use ChoicePage::*;
+        use ListboxPage::*;
         for e in [
             Reset,
             Add,
@@ -36,8 +42,14 @@ impl ChoicePage {
             Delete,
             DeleteText,
             DeleteSel,
-            Choice,
+            Listbox,
+            EnsureVisible,
+            EnsureVisibleText,
             ContainerTests,
+            GetTopItem,
+            GetCountPerPage,
+            MoveUp,
+            MoveDown,
         ] {
             if v == e.into() {
                 return Some(e);
@@ -46,8 +58,8 @@ impl ChoicePage {
         return None;
     }
 }
-impl From<ChoicePage> for c_int {
-    fn from(w: ChoicePage) -> Self {
+impl From<ListboxPage> for c_int {
+    fn from(w: ListboxPage) -> Self {
         w as c_int
     }
 }
@@ -60,7 +72,7 @@ pub struct ConfigUI {
     chk_sort: wx::CheckBox,
 
     // sizer
-    sizer_choice: wx::BoxSizer,
+    sizer_lbox: wx::BoxSizer,
 
     // the text entries for "Add/change string" and "Delete" buttons
     text_add: wx::TextCtrl,
@@ -69,15 +81,15 @@ pub struct ConfigUI {
 }
 
 #[derive(Clone)]
-pub struct ListBoxWidgetsPage {
+pub struct ListboxWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
-    // the choice itself
-    choice: Rc<RefCell<Option<wx::Choice>>>,
+    // the lbox itself
+    lbox: Rc<RefCell<Option<wx::ListBox>>>,
 
     s_item: RefCell<c_int>,
 }
-impl WidgetsPage for ListBoxWidgetsPage {
+impl WidgetsPage for ListboxWidgetsPage {
     fn base(&self) -> &wx::Panel {
         return &self.base;
     }
@@ -86,16 +98,16 @@ impl WidgetsPage for ListBoxWidgetsPage {
     }
     fn create_content(&self) {
         /*
-           What we create here is a frame having 3 panes: style pane is the
-           leftmost one, in the middle the pane with buttons allowing to perform
-           miscellaneous choice operations and the pane containing the choice
-           itself to the right
+            What we create here is a frame having 3 panes: style pane is the
+            leftmost one, in the middle the pane with buttons allowing to perform
+            miscellaneous listbox operations and the pane containing the listbox
+            itself to the right
         */
         let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
 
         // left pane
         let s_box = wx::StaticBox::builder(Some(&self.base))
-            .label("&Set choice parameters")
+            .label("&Set lbox parameters")
             .build();
 
         let sizer_left = wx::StaticBoxSizer::new_with_staticbox(Some(&s_box), wx::VERTICAL);
@@ -104,7 +116,7 @@ impl WidgetsPage for ListBoxWidgetsPage {
             self.create_check_box_and_add_to_sizer(&sizer_left, "&Sort items", wx::ID_ANY);
 
         let btn = wx::Button::builder(Some(&self.base))
-            .id(ChoicePage::Reset.into())
+            .id(ListboxPage::Reset.into())
             .label("&Reset")
             .build();
         sizer_left.add_window_int(
@@ -117,17 +129,17 @@ impl WidgetsPage for ListBoxWidgetsPage {
 
         // middle pane
         let s_box2 = wx::StaticBox::builder(Some(&self.base))
-            .label("&Change choice contents")
+            .label("&Change lbox contents")
             .build();
         let sizer_middle = wx::StaticBoxSizer::new_with_staticbox(Some(&s_box2), wx::VERTICAL);
 
         let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
         let btn = wx::Button::builder(Some(&self.base))
-            .id(ChoicePage::Add.into())
+            .id(ListboxPage::Add.into())
             .label("&Add this string")
             .build();
         let text_add = wx::TextCtrl::builder(Some(&self.base))
-            .id(ChoicePage::AddText.into())
+            .id(ListboxPage::AddText.into())
             .value("test item 0")
             .build();
         sizer_row.add_window_int(Some(&btn), 0, wx::RIGHT, 5, wx::Object::none());
@@ -141,24 +153,24 @@ impl WidgetsPage for ListBoxWidgetsPage {
         );
 
         let btn = wx::Button::builder(Some(&self.base))
-            .id(ChoicePage::AddSeveral.into())
+            .id(ListboxPage::AddSeveral.into())
             .label("&Insert a few strings")
             .build();
         sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
         let btn = wx::Button::builder(Some(&self.base))
-            .id(ChoicePage::AddMany.into())
+            .id(ListboxPage::AddMany.into())
             .label("Add &many strings")
             .build();
         sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
         let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
         let btn = wx::Button::builder(Some(&self.base))
-            .id(ChoicePage::Change.into())
+            .id(ListboxPage::Change.into())
             .label("C&hange current")
             .build();
         let text_change = wx::TextCtrl::builder(Some(&self.base))
-            .id(ChoicePage::ChangeText.into())
+            .id(ListboxPage::ChangeText.into())
             .build();
         sizer_row.add_window_int(Some(&btn), 0, wx::RIGHT, 5, wx::Object::none());
         sizer_row.add_window_int(Some(&text_change), 1, wx::LEFT, 5, wx::Object::none());
@@ -172,11 +184,11 @@ impl WidgetsPage for ListBoxWidgetsPage {
 
         let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
         let btn = wx::Button::builder(Some(&self.base))
-            .id(ChoicePage::Delete.into())
+            .id(ListboxPage::Delete.into())
             .label("&Delete this item")
             .build();
         let text_delete = wx::TextCtrl::builder(Some(&self.base))
-            .id(ChoicePage::DeleteText.into())
+            .id(ListboxPage::DeleteText.into())
             .build();
         sizer_row.add_window_int(Some(&btn), 0, wx::RIGHT, 5, wx::Object::none());
         sizer_row.add_window_int(Some(&text_delete), 1, wx::LEFT, 5, wx::Object::none());
@@ -189,31 +201,31 @@ impl WidgetsPage for ListBoxWidgetsPage {
         );
 
         let btn = wx::Button::builder(Some(&self.base))
-            .id(ChoicePage::DeleteSel.into())
+            .id(ListboxPage::DeleteSel.into())
             .label("Delete &selection")
             .build();
         sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
         let btn = wx::Button::builder(Some(&self.base))
-            .id(ChoicePage::Clear.into())
+            .id(ListboxPage::Clear.into())
             .label("&Clear")
             .build();
         sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
         let btn = wx::Button::builder(Some(&self.base))
-            .id(ChoicePage::ContainerTests.into())
+            .id(ListboxPage::ContainerTests.into())
             .label("Run &tests")
             .build();
         sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
         // right pane
         let sizer_right = wx::BoxSizer::new(wx::VERTICAL);
-        let choice = wx::Choice::builder(Some(&self.base))
-            .id(ChoicePage::Choice.into())
+        let lbox = wx::ListBox::builder(Some(&self.base))
+            .id(ListboxPage::Listbox.into())
             .build();
-        sizer_right.add_window_int(Some(&choice), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+        sizer_right.add_window_int(Some(&lbox), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
         sizer_right.set_min_size_int(150, 0);
-        *self.choice.borrow_mut() = Some(choice);
+        *self.lbox.borrow_mut() = Some(lbox);
 
         // the 3 panes panes compose the window
         sizer_top.add_sizer_sizerflags(
@@ -235,7 +247,7 @@ impl WidgetsPage for ListBoxWidgetsPage {
         *self.config_ui.borrow_mut() = Some(ConfigUI {
             chk_sort,
 
-            sizer_choice: sizer_right, // save it to modify it later
+            sizer_lbox: sizer_right, // save it to modify it later
 
             text_add,
             text_change,
@@ -244,7 +256,7 @@ impl WidgetsPage for ListBoxWidgetsPage {
 
         // do create the main control
         self.reset();
-        self.create_choice();
+        self.create_lbox();
 
         self.base.set_sizer(Some(&sizer_top), true);
     }
@@ -252,18 +264,18 @@ impl WidgetsPage for ListBoxWidgetsPage {
     fn handle_button(&self, event: &wx::CommandEvent) {
         println!("event={}", event.get_id());
         if let (Some(m), Some(config_ui)) = (
-            ChoicePage::from(event.get_id()),
+            ListboxPage::from(event.get_id()),
             self.config_ui.borrow().as_ref(),
         ) {
             match m {
-                ChoicePage::Reset => self.on_button_reset(),
-                ChoicePage::Change => self.on_button_change(config_ui),
-                ChoicePage::Delete => self.on_button_delete(config_ui),
-                ChoicePage::DeleteSel => self.on_button_delete_sel(),
-                ChoicePage::Clear => self.on_button_clear(),
-                ChoicePage::Add => self.on_button_add(config_ui),
-                ChoicePage::AddSeveral => self.on_button_add_several(),
-                ChoicePage::AddMany => self.on_button_add_many(),
+                ListboxPage::Reset => self.on_button_reset(),
+                ListboxPage::Change => self.on_button_change(config_ui),
+                ListboxPage::Delete => self.on_button_delete(config_ui),
+                ListboxPage::DeleteSel => self.on_button_delete_sel(),
+                ListboxPage::Clear => self.on_button_clear(),
+                ListboxPage::Add => self.on_button_add(config_ui),
+                ListboxPage::AddSeveral => self.on_button_add_several(),
+                ListboxPage::AddMany => self.on_button_add_many(),
                 // TODO: Support update ui event to disable this when not 3state
                 _ => (),
             };
@@ -276,15 +288,15 @@ impl WidgetsPage for ListBoxWidgetsPage {
         self.on_check_or_radio_box();
     }
 }
-impl ListBoxWidgetsPage {
+impl ListboxWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {
         let panel = wx::Panel::builder(Some(book))
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
-        ListBoxWidgetsPage {
+        ListboxWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
-            choice: Rc::new(RefCell::new(None)),
+            lbox: Rc::new(RefCell::new(None)),
             s_item: RefCell::new(1),
         }
     }
@@ -295,7 +307,7 @@ impl ListBoxWidgetsPage {
         }
     }
 
-    fn create_choice(&self) {
+    fn create_lbox(&self) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
             let mut flags = wx::BORDER_DEFAULT;
 
@@ -304,47 +316,47 @@ impl ListBoxWidgetsPage {
             }
 
             let items = wx::ArrayString::new();
-            if let Some(choice) = self.choice.borrow().as_ref() {
-                // TODO: remove (and delete) all choicees
-                let count = choice.get_count();
+            if let Some(lbox) = self.lbox.borrow().as_ref() {
+                // TODO: remove (and delete) all lboxes
+                let count = lbox.get_count();
                 for n in 0..count {
-                    items.add(&choice.get_string(n));
+                    items.add(&lbox.get_string(n));
                 }
 
-                config_ui.sizer_choice.detach_window(Some(choice));
-                choice.destroy();
+                config_ui.sizer_lbox.detach_window(Some(lbox));
+                lbox.destroy();
             }
 
-            let new_choice = wx::Choice::builder(Some(&self.base))
-                .id(ChoicePage::Choice.into())
+            let new_lbox = wx::ListBox::builder(Some(&self.base))
+                .id(ListboxPage::Listbox.into())
                 .style(flags)
                 .build();
-            new_choice.set_arraystring(&items);
+            new_lbox.set_arraystring(&items);
 
-            let sizer_choice = &config_ui.sizer_choice;
-            sizer_choice.add_window_int(
-                Some(&new_choice),
+            let sizer_lbox = &config_ui.sizer_lbox;
+            sizer_lbox.add_window_int(
+                Some(&new_lbox),
                 0,
                 wx::GROW | wx::ALL,
                 5,
                 wx::Object::none(),
             );
-            sizer_choice.layout();
+            sizer_lbox.layout();
 
-            *self.choice.borrow_mut() = Some(new_choice);
+            *self.lbox.borrow_mut() = Some(new_lbox);
         }
     }
 
     fn on_button_reset(&self) {
         self.reset();
-        self.create_choice();
+        self.create_lbox();
     }
 
     fn on_button_change(&self, config_ui: &ConfigUI) {
-        if let Some(choice) = self.choice.borrow().as_ref() {
-            let selection = choice.get_selection();
+        if let Some(lbox) = self.lbox.borrow().as_ref() {
+            let selection = lbox.get_selection();
             if selection != wx::NOT_FOUND {
-                choice.set_string(
+                lbox.set_string(
                     selection.try_into().unwrap(),
                     &config_ui.text_change.get_value(),
                 );
@@ -354,25 +366,25 @@ impl ListBoxWidgetsPage {
 
     fn on_button_delete(&self, config_ui: &ConfigUI) {
         let n = config_ui.text_delete.get_value();
-        if let (Ok(n), Some(choice)) = (n.parse(), self.choice.borrow().as_ref()) {
-            if n < choice.get_count() {
-                choice.delete(n);
+        if let (Ok(n), Some(lbox)) = (n.parse(), self.lbox.borrow().as_ref()) {
+            if n < lbox.get_count() {
+                lbox.delete(n);
             }
         }
     }
 
     fn on_button_delete_sel(&self) {
-        if let Some(choice) = self.choice.borrow().as_ref() {
-            let selection = choice.get_selection();
+        if let Some(lbox) = self.lbox.borrow().as_ref() {
+            let selection = lbox.get_selection();
             if selection != wx::NOT_FOUND {
-                choice.delete(selection.try_into().unwrap());
+                lbox.delete(selection.try_into().unwrap());
             }
         }
     }
 
     fn on_button_clear(&self) {
-        if let Some(choice) = self.choice.borrow().as_ref() {
-            choice.clear();
+        if let Some(lbox) = self.lbox.borrow().as_ref() {
+            lbox.clear();
         }
     }
 
@@ -387,8 +399,8 @@ impl ListBoxWidgetsPage {
             *self.s_item.borrow_mut() = s_item + 1;
         }
 
-        if let Some(choice) = self.choice.borrow().as_ref() {
-            choice.append_str(&s);
+        if let Some(lbox) = self.lbox.borrow().as_ref() {
+            lbox.append_str(&s);
         }
     }
 
@@ -398,8 +410,8 @@ impl ListBoxWidgetsPage {
         for n in 0..1000 {
             strings.add(&format!("item #{}", n));
         }
-        if let Some(choice) = self.choice.borrow().as_ref() {
-            choice.append_arraystring(&strings);
+        if let Some(lbox) = self.lbox.borrow().as_ref() {
+            lbox.append_arraystring(&strings);
         }
     }
 
@@ -408,12 +420,12 @@ impl ListBoxWidgetsPage {
         items.add("First");
         items.add("another one");
         items.add("and the last (very very very very very very very very very very long) one");
-        if let Some(choice) = self.choice.borrow().as_ref() {
-            choice.insert_arraystring(&items, 0);
+        if let Some(lbox) = self.lbox.borrow().as_ref() {
+            lbox.insert_arraystring(&items, 0);
         }
     }
 
     fn on_check_or_radio_box(&self) {
-        self.create_choice();
+        self.create_lbox();
     }
 }

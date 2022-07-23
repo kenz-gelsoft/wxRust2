@@ -163,7 +163,7 @@ impl WidgetsFrame {
         let gauge_page = Rc::new(GaugeWidgetsPage::new(&book));
         let headerctrl_page = Rc::new(HeaderCtrlWidgetsPage::new(&book));
         let hyperlink_page = Rc::new(HyperlinkWidgetsPage::new(&book));
-        let listbox_page = Rc::new(ListBoxWidgetsPage::new(&book));
+        let listbox_page = Rc::new(ListboxWidgetsPage::new(&book));
         let mut frame = WidgetsFrame {
             base,
             panel,
