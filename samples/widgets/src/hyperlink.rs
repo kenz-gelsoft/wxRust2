@@ -31,12 +31,6 @@ impl From<HyperlinkPage> for c_int {
 
 #[derive(Clone)]
 pub struct ConfigUI {
-    // the checkboxes for styles
-    // chk_vert: wx::CheckBox,
-    // chk_smooth: wx::CheckBox,
-    // chk_progress: wx::CheckBox,
-
-    // the text entries for set value/range
     label: wx::TextCtrl,
     url: wx::TextCtrl,
 
@@ -49,9 +43,6 @@ pub struct HyperlinkWidgetsPage {
     config_ui: RefCell<Option<ConfigUI>>,
     // the control itself
     hyperlink: Rc<RefCell<Option<wx::HyperlinkCtrl>>>,
-    range: Rc<RefCell<c_int>>,
-    // the timer for simulating hyperlink progress
-    // timer: Rc<RefCell<Option<wx::Timer>>>,
 }
 impl WidgetsPage for HyperlinkWidgetsPage {
     fn base(&self) -> &wx::Panel {
@@ -187,10 +178,6 @@ impl WidgetsPage for HyperlinkWidgetsPage {
 
         // final initializations
         let config_ui = ConfigUI {
-            // chk_vert,
-            // chk_smooth,
-            // chk_progress,
-
             label,
             url,
 
@@ -210,9 +197,6 @@ impl WidgetsPage for HyperlinkWidgetsPage {
         ) {
             // match m {
             //     HyperlinkPage::Reset => self.on_button_reset(config_ui),
-            //     HyperlinkPage::Progress => self.on_button_progress(),
-            //     HyperlinkPage::IndeterminateProgress => self.on_button_indeterminate_progress(),
-            //     HyperlinkPage::Clear => self.on_button_clear(),
             //     HyperlinkPage::SetValue => self.on_button_set_value(),
             //     HyperlinkPage::SetRange => self.on_button_set_range(),
             //     _ => (),
@@ -240,8 +224,6 @@ impl HyperlinkWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
             hyperlink: Rc::new(RefCell::new(None)),
-            range: Rc::new(RefCell::new(100)),
-            // timer: Rc::new(RefCell::new(None)),
         };
 
         let page_copy = page.clone();
@@ -261,121 +243,41 @@ impl HyperlinkWidgetsPage {
     }
 
     fn create_hyperlink(&self, config_ui: &ConfigUI) {
+        let (label, url) = if let Some(hyperlink) = self.hyperlink.borrow().as_ref() {
+            (hyperlink.get_label(), hyperlink.get_url())
+        } else {
+            ("".to_owned(), "".to_owned())
+        };
+
         let mut flags = wx::BORDER_DEFAULT;
 
-        // flags |= if config_ui.chk_vert.get_value() {
-        //     wx::GA_VERTICAL
-        // } else {
-        //     wx::GA_HORIZONTAL
-        // } as c_long;
+        flags |= wx::HL_DEFAULT_STYLE & !wx::BORDER_MASK;
 
-        // if config_ui.chk_smooth.get_value() {
-        //     flags |= wx::GA_SMOOTH as c_long;
-        // }
-        // if config_ui.chk_progress.get_value() {
-        //     flags |= wx::GA_PROGRESS as c_long;
-        // }
-
-        let mut val = 0;
         if let Some(hyperlink) = self.hyperlink.borrow().as_ref() {
-            // val = hyperlink.get_value();
-
             config_ui.sizer_hyperlink.detach_window(Some(hyperlink));
             hyperlink.destroy();
         }
 
-        let range = *self.range.borrow();
-        // let hyperlink = wx::HyperlinkCtrl::builder(Some(&self.base))
-        //     .id(HyperlinkPage::HyperlinkCtrl.into())
-        //     .range(range)
-        //     .style(flags)
-        //     .build();
-        // hyperlink.set_value(val);
+        let hyperlink = wx::HyperlinkCtrl::builder(Some(&self.base))
+            .id(HyperlinkPage::Ctrl.into())
+            .label(&label)
+            .url(&url)
+            .style(flags)
+            .build();
 
-        // if (flags & wx::GA_VERTICAL as c_long) != 0 {
-        //     config_ui.sizer_hyperlink.add_window_int(
-        //         Some(&hyperlink),
-        //         0,
-        //         wx::GROW | wx::ALL,
-        //         5,
-        //         wx::Object::none(),
-        //     );
-        // } else {
-        //     config_ui.sizer_hyperlink.add_window_int(
-        //         Some(&hyperlink),
-        //         1,
-        //         wx::CENTRE as i32 | wx::ALL,
-        //         5,
-        //         wx::Object::none(),
-        //     );
-        // }
-        // *self.hyperlink.borrow_mut() = Some(hyperlink);
+        // update sizer's child window
+        if let Some(old_hyperlink) = self.hyperlink.borrow().as_ref() {
+            config_ui
+                .sizer_hyperlink
+                .replace_window(Some(old_hyperlink), Some(&hyperlink), false);
+
+            old_hyperlink.destroy();
+        }
+        // update our pointer
+        *self.hyperlink.borrow_mut() = Some(hyperlink);
 
         // relayout the sizer
         config_ui.sizer_hyperlink.layout();
-    }
-
-    fn start_timer<W: WindowMethods>(&self, clicked: &W) {
-        let interval = 300;
-
-        // let is_progress_button = clicked.get_id() == HyperlinkPage::Progress.into();
-        // let timer = wx::Timer::new_with_evthandler(
-        //     Some(&self.base),
-        //     if is_progress_button {
-        //         HyperlinkPage::Timer.into()
-        //     } else {
-        //         HyperlinkPage::IndeterminateTimer.into()
-        //     },
-        // );
-        // timer.start(interval, wx::TIMER_CONTINUOUS);
-        // *self.timer.borrow_mut() = Some(timer);
-
-        clicked.set_label("&Stop timer");
-
-        // if is_progress_button {
-        //     if let Some(hyperlink) = self
-        //         .base
-        //         .find_window_long(HyperlinkPage::IndeterminateProgress as c_long)
-        //         .get()
-        //     {
-        //         hyperlink.disable();
-        //     }
-        // } else {
-        //     if let Some(hyperlink) = self
-        //         .base
-        //         .find_window_long(HyperlinkPage::Progress as c_long)
-        //         .get()
-        //     {
-        //         hyperlink.disable();
-        //     }
-        // }
-    }
-
-    fn stop_timer<W: WindowMethods>(&self, clicked: &W) {
-        // if let Some(timer) = self.timer.borrow().as_ref() {
-        //     timer.stop();
-        // }
-        // *self.timer.borrow_mut() = None;
-
-        // if clicked.get_id() == HyperlinkPage::Progress.into() {
-        //     clicked.set_label("Simulate &progress");
-        //     if let Some(hyperlink) = self
-        //         .base
-        //         .find_window_long(HyperlinkPage::IndeterminateProgress as c_long)
-        //         .get()
-        //     {
-        //         hyperlink.enable(true);
-        //     }
-        // } else {
-        //     clicked.set_label("Simulate indeterminate job");
-        //     if let Some(hyperlink) = self
-        //         .base
-        //         .find_window_long(HyperlinkPage::Progress as c_long)
-        //         .get()
-        //     {
-        //         hyperlink.enable(true);
-        //     }
-        // }
     }
 
     // ----------------------------------------------------------------------------
@@ -386,43 +288,6 @@ impl HyperlinkWidgetsPage {
         self.reset(config_ui);
 
         self.create_hyperlink(config_ui);
-    }
-
-    fn on_button_progress(&self) {
-        // if let Some(b) = self
-        //     .base
-        //     .find_window_long(HyperlinkPage::Progress as c_long)
-        //     .get()
-        // {
-        //     if self.timer.borrow().is_none() {
-        //         self.start_timer(&b);
-        //     } else {
-        //         self.stop_timer(&b);
-        //     }
-        // }
-    }
-
-    fn on_button_indeterminate_progress(&self) {
-        // if let Some(b) = self
-        //     .base
-        //     .find_window_long(HyperlinkPage::IndeterminateProgress as c_long)
-        //     .get()
-        // {
-        //     if self.timer.borrow().is_none() {
-        //         self.start_timer(&b);
-        //     } else {
-        //         self.stop_timer(&b);
-        //         if let Some(hyperlink) = self.hyperlink.borrow().as_ref() {
-        //             hyperlink.set_value(0);
-        //         }
-        //     }
-        // }
-    }
-
-    fn on_button_clear(&self) {
-        if let Some(hyperlink) = self.hyperlink.borrow().as_ref() {
-            // hyperlink.set_value(0);
-        }
     }
 
     fn on_button_set_range(&self) {
@@ -463,7 +328,7 @@ impl HyperlinkWidgetsPage {
     }
 
     fn on_progress_timer(&self) {
-        if let (Some(hyperlink), range) = (self.hyperlink.borrow().as_ref(), *self.range.borrow()) {
+        if let Some(hyperlink) = self.hyperlink.borrow().as_ref() {
             // let val = hyperlink.get_value();
             // if val < range {
             //     hyperlink.set_value(val + 1);
