@@ -349,6 +349,39 @@ extern "C" {
     pub fn wxCheckBox_SetValue(self_: *mut c_void, state: bool);
     pub fn wxCheckBox_Set3StateValue(self_: *mut c_void, state: c_int);
 
+    // wxCheckListBox
+    pub fn wxCheckListBox_new() -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxCheckListBox_new1(parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
+    pub fn wxCheckListBox_new2(
+        parent: *mut c_void,
+        id: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        choices: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxCheckListBox_Create(self_: *mut c_void, parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, n_strings: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> bool;
+    pub fn wxCheckListBox_Create1(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        choices: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    // DTOR: pub fn wxCheckListBox_~wxCheckListBox(self_: *mut c_void);
+    pub fn wxCheckListBox_Check(self_: *mut c_void, item: c_uint, check: bool);
+    pub fn wxCheckListBox_IsChecked(self_: *const c_void, item: c_uint) -> bool;
+    pub fn wxCheckListBox_GetCheckedItems(
+        self_: *const c_void,
+        checked_items: *mut c_void,
+    ) -> c_uint;
+
     // wxChoice
     pub fn wxChoice_new() -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxChoice_new1(parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;

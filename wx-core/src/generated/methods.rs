@@ -849,6 +849,20 @@ pub trait CheckBoxMethods: ControlMethods {
     }
 }
 
+// wxCheckListBox
+pub trait CheckListBoxMethods: ListBoxMethods {
+    // DTOR: fn ~wxCheckListBox()
+    fn check(&self, item: c_uint, check: bool) {
+        unsafe { ffi::wxCheckListBox_Check(self.as_ptr(), item, check) }
+    }
+    fn is_checked(&self, item: c_uint) -> bool {
+        unsafe { ffi::wxCheckListBox_IsChecked(self.as_ptr(), item) }
+    }
+    fn get_checked_items(&self, checked_items: *mut c_void) -> c_uint {
+        unsafe { ffi::wxCheckListBox_GetCheckedItems(self.as_ptr(), checked_items) }
+    }
+}
+
 // wxChoice
 pub trait ChoiceMethods: ControlMethods {
     // DTOR: fn ~wxChoice()

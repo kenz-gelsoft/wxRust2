@@ -539,6 +539,26 @@ void wxCheckBox_Set3StateValue(wxCheckBox * self, wxCheckBoxState state) {
     return self->Set3StateValue(state);
 }
 
+// CLASS: wxCheckListBox
+wxCheckListBox *wxCheckListBox_new() {
+    return new wxCheckListBox();
+}
+wxCheckListBox *wxCheckListBox_new2(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name) {
+    return new wxCheckListBox(parent, id, *pos, *size, *choices, style, *validator, *name);
+}
+bool wxCheckListBox_Create1(wxCheckListBox * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, *pos, *size, *choices, style, *validator, *name);
+}
+void wxCheckListBox_Check(wxCheckListBox * self, unsigned int item, bool check) {
+    return self->Check(item, check);
+}
+bool wxCheckListBox_IsChecked(const wxCheckListBox * self, unsigned int item) {
+    return self->IsChecked(item);
+}
+unsigned int wxCheckListBox_GetCheckedItems(const wxCheckListBox * self, wxArrayInt * checked_items) {
+    return self->GetCheckedItems(*checked_items);
+}
+
 // CLASS: wxChoice
 wxChoice *wxChoice_new() {
     return new wxChoice();

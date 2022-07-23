@@ -244,6 +244,14 @@ bool wxCheckBox_IsChecked(const wxCheckBox * self);
 void wxCheckBox_SetValue(wxCheckBox * self, bool state);
 void wxCheckBox_Set3StateValue(wxCheckBox * self, wxCheckBoxState state);
 
+// CLASS: wxCheckListBox
+wxCheckListBox *wxCheckListBox_new();
+wxCheckListBox *wxCheckListBox_new2(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
+bool wxCheckListBox_Create1(wxCheckListBox * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
+void wxCheckListBox_Check(wxCheckListBox * self, unsigned int item, bool check);
+bool wxCheckListBox_IsChecked(const wxCheckListBox * self, unsigned int item);
+unsigned int wxCheckListBox_GetCheckedItems(const wxCheckListBox * self, wxArrayInt * checked_items);
+
 // CLASS: wxChoice
 wxChoice *wxChoice_new();
 wxChoice *wxChoice_new2(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
