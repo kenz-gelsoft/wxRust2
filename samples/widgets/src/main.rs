@@ -49,6 +49,9 @@ use headerctrl::*;
 mod hyperlink;
 use hyperlink::*;
 
+mod listbox;
+use listbox::*;
+
 enum Widgets {
     _ClearLog = 100,
     Quit,
@@ -160,12 +163,13 @@ impl WidgetsFrame {
         let gauge_page = Rc::new(GaugeWidgetsPage::new(&book));
         let headerctrl_page = Rc::new(HeaderCtrlWidgetsPage::new(&book));
         let hyperlink_page = Rc::new(HyperlinkWidgetsPage::new(&book));
+        let listbox_page = Rc::new(ListBoxWidgetsPage::new(&book));
         let mut frame = WidgetsFrame {
             base,
             panel,
             book,
             pages: vec![
-                hyperlink_page,
+                listbox_page,
                 button_page,
                 check_box_page,
                 choice_page,
@@ -179,6 +183,7 @@ impl WidgetsFrame {
                 fontpicker_page,
                 gauge_page,
                 headerctrl_page,
+                hyperlink_page,
             ],
         };
         frame.on_create();
