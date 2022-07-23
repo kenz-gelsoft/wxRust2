@@ -29,12 +29,37 @@ impl From<HyperlinkPage> for c_int {
     }
 }
 
+#[derive(Clone, Copy)]
+enum Align {
+    Left,
+    Centre,
+    Right,
+    Max,
+}
+impl Align {
+    fn from(v: c_int) -> Option<Self> {
+        use Align::*;
+        for e in [Left, Centre, Right, Max] {
+            if v == e.into() {
+                return Some(e);
+            }
+        }
+        return None;
+    }
+}
+impl From<Align> for c_int {
+    fn from(w: Align) -> Self {
+        w as c_int
+    }
+}
+
 #[derive(Clone)]
 pub struct ConfigUI {
     label: wx::TextCtrl,
     url: wx::TextCtrl,
+    radio_align_mode: wx::RadioBox,
 
-    sizer_hyperlink: wx::BoxSizer,
+    sizer: wx::BoxSizer,
 }
 
 #[derive(Clone)]
@@ -43,6 +68,7 @@ pub struct HyperlinkWidgetsPage {
     config_ui: RefCell<Option<ConfigUI>>,
     // the control itself
     hyperlink: Rc<RefCell<Option<wx::HyperlinkCtrl>>>,
+    hyperlink_long: Rc<RefCell<Option<wx::HyperlinkCtrl>>>,
 }
 impl WidgetsPage for HyperlinkWidgetsPage {
     fn base(&self) -> &wx::Panel {
@@ -142,6 +168,7 @@ impl WidgetsPage for HyperlinkWidgetsPage {
         sz_hyperlink.add_window_int(Some(&fun), 0, centre, 0, wx::Object::none());
         sz_hyperlink.add_int_int(0, 0, 1, centre, 0, wx::Object::none());
         sz_hyperlink.set_min_size_int(150, 0);
+        *self.hyperlink.borrow_mut() = Some(hyperlink);
 
         let hyperlink_long = wx::HyperlinkCtrl::builder(Some(&self.base))
             .label("This is a long hyperlink")
@@ -159,6 +186,7 @@ impl WidgetsPage for HyperlinkWidgetsPage {
         sz_hyperlink_long.add_int_int(0, 0, 1, centre, 0, wx::Object::none());
         sz_hyperlink_long.add_window_int(Some(&hyperlink_long), 0, wx::GROW, 0, wx::Object::none());
         sz_hyperlink_long.add_int_int(0, 0, 1, centre, 0, wx::Object::none());
+        *self.hyperlink_long.borrow_mut() = Some(hyperlink_long);
 
         // the 3 panes panes compose the window
         sizer_top.add_sizer_int(
@@ -176,17 +204,18 @@ impl WidgetsPage for HyperlinkWidgetsPage {
             wx::Object::none(),
         );
 
+        self.base.set_sizer(Some(&sizer_top), true);
+
         // final initializations
         let config_ui = ConfigUI {
             label,
             url,
+            radio_align_mode,
 
-            sizer_hyperlink: sz_hyperlink_long, // save it to modify it later
+            sizer: sizer_top,
         };
         self.reset(&config_ui);
         *self.config_ui.borrow_mut() = Some(config_ui);
-
-        self.base.set_sizer(Some(&sizer_top), true);
     }
 
     fn handle_button(&self, event: &wx::CommandEvent) {
@@ -195,22 +224,20 @@ impl WidgetsPage for HyperlinkWidgetsPage {
             self.config_ui.borrow().as_ref(),
             HyperlinkPage::from(event.get_id()),
         ) {
-            // match m {
-            //     HyperlinkPage::Reset => self.on_button_reset(config_ui),
-            //     HyperlinkPage::SetValue => self.on_button_set_value(),
-            //     HyperlinkPage::SetRange => self.on_button_set_range(),
-            //     _ => (),
-            // };
+            match m {
+                HyperlinkPage::Reset => self.on_button_reset(config_ui),
+                HyperlinkPage::SetLabel => self.on_button_set_label(config_ui),
+                HyperlinkPage::SetURL => self.on_button_set_url(config_ui),
+                _ => (),
+            };
         }
     }
     fn handle_checkbox(&self, _: &wx::CommandEvent) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            self.on_check_or_radio_box(config_ui);
-        }
+        // Do nothing.
     }
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            self.on_check_or_radio_box(config_ui);
+            self.on_alignment(config_ui);
         }
     }
 }
@@ -220,19 +247,12 @@ impl HyperlinkWidgetsPage {
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
 
-        let page = HyperlinkWidgetsPage {
+        HyperlinkWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
             hyperlink: Rc::new(RefCell::new(None)),
-        };
-
-        let page_copy = page.clone();
-        page.base
-            .bind(wx::RustEvent::Timer, move |event: &wx::TimerEvent| {
-                page_copy.handle_timer(event);
-            });
-
-        page
+            hyperlink_long: Rc::new(RefCell::new(None)),
+        }
     }
 
     fn reset(&self, config_ui: &ConfigUI) {
@@ -249,27 +269,22 @@ impl HyperlinkWidgetsPage {
             ("".to_owned(), "".to_owned())
         };
 
-        let mut flags = wx::BORDER_DEFAULT;
+        let mut style = wx::BORDER_DEFAULT;
 
-        flags |= wx::HL_DEFAULT_STYLE & !wx::BORDER_MASK;
-
-        if let Some(hyperlink) = self.hyperlink.borrow().as_ref() {
-            config_ui.sizer_hyperlink.detach_window(Some(hyperlink));
-            hyperlink.destroy();
-        }
+        style |= wx::HL_DEFAULT_STYLE & !wx::BORDER_MASK;
 
         let hyperlink = wx::HyperlinkCtrl::builder(Some(&self.base))
             .id(HyperlinkPage::Ctrl.into())
             .label(&label)
             .url(&url)
-            .style(flags)
+            .style(style)
             .build();
 
         // update sizer's child window
         if let Some(old_hyperlink) = self.hyperlink.borrow().as_ref() {
             config_ui
-                .sizer_hyperlink
-                .replace_window(Some(old_hyperlink), Some(&hyperlink), false);
+                .sizer
+                .replace_window(Some(old_hyperlink), Some(&hyperlink), true);
 
             old_hyperlink.destroy();
         }
@@ -277,7 +292,33 @@ impl HyperlinkWidgetsPage {
         *self.hyperlink.borrow_mut() = Some(hyperlink);
 
         // relayout the sizer
-        config_ui.sizer_hyperlink.layout();
+        config_ui.sizer.layout();
+    }
+
+    fn create_hyperlink_long(&self, config_ui: &ConfigUI, align: c_long) {
+        let mut style = wx::BORDER_DEFAULT;
+        style |= align;
+        style |= wx::HL_DEFAULT_STYLE & !(wx::HL_ALIGN_CENTRE | wx::BORDER_MASK);
+
+        let hyperlink_long = wx::HyperlinkCtrl::builder(Some(&self.base))
+            .label("This is a long hyperlink")
+            .url("www.wxwidgets.org")
+            .style(style)
+            .build();
+
+        // update sizer's child window
+        if let Some(old_hyperlink_long) = self.hyperlink_long.borrow().as_ref() {
+            config_ui
+                .sizer
+                .replace_window(Some(old_hyperlink_long), Some(&hyperlink_long), true);
+
+            old_hyperlink_long.destroy();
+        }
+        // update our pointer
+        *self.hyperlink_long.borrow_mut() = Some(hyperlink_long);
+
+        // relayout the sizer
+        config_ui.sizer.layout();
     }
 
     // ----------------------------------------------------------------------------
@@ -290,64 +331,28 @@ impl HyperlinkWidgetsPage {
         self.create_hyperlink(config_ui);
     }
 
-    fn on_button_set_range(&self) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            // if let (Ok(val), Some(hyperlink)) = (
-            //     config_ui.text_range.get_value().parse(),
-            //     self.hyperlink.borrow().as_ref(),
-            // ) {
-            //     *self.range.borrow_mut() = val;
-            //     hyperlink.set_range(val);
-            // }
+    fn on_button_set_label(&self, config_ui: &ConfigUI) {
+        if let Some(hyperlink) = self.hyperlink.borrow().as_ref() {
+            hyperlink.set_label(&config_ui.label.get_value());
         }
-    }
-
-    fn on_button_set_value(&self) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            // if let (Ok(val), Some(hyperlink)) = (
-            //     config_ui.text_value.get_value().parse(),
-            //     self.hyperlink.borrow().as_ref(),
-            // ) {
-            //     hyperlink.set_value(val);
-            // }
-        }
-    }
-
-    fn on_check_or_radio_box(&self, config_ui: &ConfigUI) {
         self.create_hyperlink(config_ui);
     }
 
-    fn handle_timer(&self, event: &wx::TimerEvent) {
-        if let Some(m) = HyperlinkPage::from(event.get_id()) {
-            // match m {
-            //     HyperlinkPage::Timer => self.on_progress_timer(),
-            //     HyperlinkPage::IndeterminateTimer => self.on_intermediate_progress_timer(),
-            //     _ => (),
-            // }
+    fn on_button_set_url(&self, config_ui: &ConfigUI) {
+        if let Some(hyperlink) = self.hyperlink.borrow().as_ref() {
+            hyperlink.set_url(&config_ui.url.get_value());
         }
+        self.create_hyperlink(config_ui);
     }
 
-    fn on_progress_timer(&self) {
-        if let Some(hyperlink) = self.hyperlink.borrow().as_ref() {
-            // let val = hyperlink.get_value();
-            // if val < range {
-            //     hyperlink.set_value(val + 1);
-            // } else {
-            //     // reached the end
-            //     if let Some(b) = self
-            //         .base
-            //         .find_window_long(HyperlinkPage::Progress as c_long)
-            //         .get()
-            //     {
-            //         self.stop_timer(&b);
-            //     }
-            // }
-        }
-    }
-
-    fn on_intermediate_progress_timer(&self) {
-        if let Some(hyperlink) = self.hyperlink.borrow().as_ref() {
-            // hyperlink.pulse();
+    fn on_alignment(&self, config_ui: &ConfigUI) {
+        if let Some(a) = Align::from(config_ui.radio_align_mode.get_selection()) {
+            let addstyle = match a {
+                Align::Centre => wx::HL_ALIGN_CENTRE,
+                Align::Right => wx::HL_ALIGN_RIGHT as c_long,
+                _ => wx::HL_ALIGN_LEFT as c_long,
+            };
+            self.create_hyperlink_long(config_ui, addstyle);
         }
     }
 }
