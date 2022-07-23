@@ -1384,6 +1384,47 @@ void wxHeaderCtrlSimple_RemoveSortIndicator(wxHeaderCtrlSimple * self) {
     return self->RemoveSortIndicator();
 }
 
+// CLASS: wxHyperlinkCtrl
+wxHyperlinkCtrl *wxHyperlinkCtrl_new() {
+    return new wxHyperlinkCtrl();
+}
+wxHyperlinkCtrl *wxHyperlinkCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxString * url, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxHyperlinkCtrl(parent, id, *label, *url, *pos, *size, style, *name);
+}
+bool wxHyperlinkCtrl_Create(wxHyperlinkCtrl * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxString * url, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, id, *label, *url, *pos, *size, style, *name);
+}
+wxColour *wxHyperlinkCtrl_GetHoverColour(const wxHyperlinkCtrl * self) {
+    return new wxColour(self->GetHoverColour());
+}
+wxColour *wxHyperlinkCtrl_GetNormalColour(const wxHyperlinkCtrl * self) {
+    return new wxColour(self->GetNormalColour());
+}
+wxString *wxHyperlinkCtrl_GetURL(const wxHyperlinkCtrl * self) {
+    return new wxString(self->GetURL());
+}
+bool wxHyperlinkCtrl_GetVisited(const wxHyperlinkCtrl * self) {
+    return self->GetVisited();
+}
+wxColour *wxHyperlinkCtrl_GetVisitedColour(const wxHyperlinkCtrl * self) {
+    return new wxColour(self->GetVisitedColour());
+}
+void wxHyperlinkCtrl_SetHoverColour(wxHyperlinkCtrl * self, const wxColour * colour) {
+    return self->SetHoverColour(*colour);
+}
+void wxHyperlinkCtrl_SetNormalColour(wxHyperlinkCtrl * self, const wxColour * colour) {
+    return self->SetNormalColour(*colour);
+}
+void wxHyperlinkCtrl_SetURL(wxHyperlinkCtrl * self, const wxString * url) {
+    return self->SetURL(*url);
+}
+void wxHyperlinkCtrl_SetVisited(wxHyperlinkCtrl * self, bool visited) {
+    return self->SetVisited(visited);
+}
+void wxHyperlinkCtrl_SetVisitedColour(wxHyperlinkCtrl * self, const wxColour * colour) {
+    return self->SetVisitedColour(*colour);
+}
+
 // CLASS: wxIcon
 wxIcon *wxIcon_new() {
     return new wxIcon();

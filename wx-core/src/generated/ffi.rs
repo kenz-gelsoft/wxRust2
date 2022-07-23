@@ -1020,6 +1020,40 @@ extern "C" {
     pub fn wxHeaderCtrlSimple_ShowSortIndicator(self_: *mut c_void, idx: c_uint, sort_order: bool);
     pub fn wxHeaderCtrlSimple_RemoveSortIndicator(self_: *mut c_void);
 
+    // wxHyperlinkCtrl
+    pub fn wxHyperlinkCtrl_new() -> *mut c_void;
+    pub fn wxHyperlinkCtrl_new1(
+        parent: *mut c_void,
+        id: c_int,
+        label: *const c_void,
+        url: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxHyperlinkCtrl_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        label: *const c_void,
+        url: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxHyperlinkCtrl_GetHoverColour(self_: *const c_void) -> *mut c_void;
+    pub fn wxHyperlinkCtrl_GetNormalColour(self_: *const c_void) -> *mut c_void;
+    pub fn wxHyperlinkCtrl_GetURL(self_: *const c_void) -> *mut c_void;
+    pub fn wxHyperlinkCtrl_GetVisited(self_: *const c_void) -> bool;
+    pub fn wxHyperlinkCtrl_GetVisitedColour(self_: *const c_void) -> *mut c_void;
+    pub fn wxHyperlinkCtrl_SetHoverColour(self_: *mut c_void, colour: *const c_void);
+    pub fn wxHyperlinkCtrl_SetNormalColour(self_: *mut c_void, colour: *const c_void);
+    pub fn wxHyperlinkCtrl_SetURL(self_: *mut c_void, url: *const c_void);
+    pub fn wxHyperlinkCtrl_SetVisited(self_: *mut c_void, visited: bool);
+    pub fn wxHyperlinkCtrl_SetVisitedColour(self_: *mut c_void, colour: *const c_void);
+
     // wxIcon
     pub fn wxIcon_new() -> *mut c_void;
     pub fn wxIcon_new1(icon: *const c_void) -> *mut c_void;

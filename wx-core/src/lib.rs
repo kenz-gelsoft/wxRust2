@@ -528,6 +528,69 @@ impl<'a, P: WindowMethods> HeaderCtrlSimpleBuilder<'a, P> {
     }
 }
 
+pub struct HyperlinkCtrlBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    id: c_int,
+    label: String,
+    url: String,
+    pos: Option<Point>,
+    size: Option<Size>,
+    style: c_long,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, HyperlinkCtrlBuilder<'a, P>> for HyperlinkCtrl {
+    fn builder(parent: Option<&'a P>) -> HyperlinkCtrlBuilder<'a, P> {
+        HyperlinkCtrlBuilder {
+            parent: parent,
+            id: ID_ANY,
+            label: "".to_owned(),
+            url: "".to_owned(),
+            pos: None,
+            size: None,
+            style: HL_DEFAULT_STYLE,
+        }
+    }
+}
+impl<'a, P: WindowMethods> HyperlinkCtrlBuilder<'a, P> {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn label(&mut self, label: &str) -> &mut Self {
+        self.label = label.to_string();
+        self
+    }
+    pub fn url(&mut self, url: &str) -> &mut Self {
+        self.url = url.to_string();
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn build(&mut self) -> HyperlinkCtrl {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        HyperlinkCtrl::new(
+            self.parent,
+            self.id,
+            &self.label,
+            &self.url,
+            &pos,
+            &size,
+            self.style,
+            "",
+        )
+    }
+}
+
 pub struct PanelBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     pos: Option<Point>,

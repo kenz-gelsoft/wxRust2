@@ -11,6 +11,7 @@
 #include <wx/filepicker.h>
 #include <wx/fontpicker.h>
 #include <wx/headerctrl.h>
+#include <wx/hyperlink.h>
 #include <wx/wrapsizer.h>
 
 // wxBitmapBundle compatibility hack(for a while)
@@ -573,6 +574,21 @@ void wxHeaderCtrlSimple_ShowColumn(wxHeaderCtrlSimple * self, unsigned int idx, 
 void wxHeaderCtrlSimple_HideColumn(wxHeaderCtrlSimple * self, unsigned int idx);
 void wxHeaderCtrlSimple_ShowSortIndicator(wxHeaderCtrlSimple * self, unsigned int idx, bool sort_order);
 void wxHeaderCtrlSimple_RemoveSortIndicator(wxHeaderCtrlSimple * self);
+
+// CLASS: wxHyperlinkCtrl
+wxHyperlinkCtrl *wxHyperlinkCtrl_new();
+wxHyperlinkCtrl *wxHyperlinkCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxString * url, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+bool wxHyperlinkCtrl_Create(wxHyperlinkCtrl * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxString * url, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+wxColour *wxHyperlinkCtrl_GetHoverColour(const wxHyperlinkCtrl * self);
+wxColour *wxHyperlinkCtrl_GetNormalColour(const wxHyperlinkCtrl * self);
+wxString *wxHyperlinkCtrl_GetURL(const wxHyperlinkCtrl * self);
+bool wxHyperlinkCtrl_GetVisited(const wxHyperlinkCtrl * self);
+wxColour *wxHyperlinkCtrl_GetVisitedColour(const wxHyperlinkCtrl * self);
+void wxHyperlinkCtrl_SetHoverColour(wxHyperlinkCtrl * self, const wxColour * colour);
+void wxHyperlinkCtrl_SetNormalColour(wxHyperlinkCtrl * self, const wxColour * colour);
+void wxHyperlinkCtrl_SetURL(wxHyperlinkCtrl * self, const wxString * url);
+void wxHyperlinkCtrl_SetVisited(wxHyperlinkCtrl * self, bool visited);
+void wxHyperlinkCtrl_SetVisitedColour(wxHyperlinkCtrl * self, const wxColour * colour);
 
 // CLASS: wxIcon
 wxIcon *wxIcon_new();
