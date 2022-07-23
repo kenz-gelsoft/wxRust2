@@ -37,8 +37,9 @@ pub struct ConfigUI {
     // chk_progress: wx::CheckBox,
 
     // the text entries for set value/range
-    // text_value: wx::TextCtrl,
-    // text_range: wx::TextCtrl,
+    label: wx::TextCtrl,
+    url: wx::TextCtrl,
+
     sizer_hyperlink: wx::BoxSizer,
 }
 
@@ -190,8 +191,9 @@ impl WidgetsPage for HyperlinkWidgetsPage {
             // chk_smooth,
             // chk_progress,
 
-            // text_value,
-            // text_range,
+            label,
+            url,
+
             sizer_hyperlink: sz_hyperlink_long, // save it to modify it later
         };
         self.reset(&config_ui);
@@ -252,9 +254,10 @@ impl HyperlinkWidgetsPage {
     }
 
     fn reset(&self, config_ui: &ConfigUI) {
-        // config_ui.chk_vert.set_value(false);
-        // config_ui.chk_smooth.set_value(false);
-        // config_ui.chk_progress.set_value(false);
+        if let Some(hyperlink) = self.hyperlink.borrow().as_ref() {
+            config_ui.label.set_value(&hyperlink.get_label());
+            config_ui.url.set_value(&hyperlink.get_url());
+        }
     }
 
     fn create_hyperlink(&self, config_ui: &ConfigUI) {
