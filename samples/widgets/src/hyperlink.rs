@@ -32,9 +32,9 @@ impl From<HyperlinkPage> for c_int {
 #[derive(Clone)]
 pub struct ConfigUI {
     // the checkboxes for styles
-    chk_vert: wx::CheckBox,
-    chk_smooth: wx::CheckBox,
-    chk_progress: wx::CheckBox,
+    // chk_vert: wx::CheckBox,
+    // chk_smooth: wx::CheckBox,
+    // chk_progress: wx::CheckBox,
 
     // the text entries for set value/range
     // text_value: wx::TextCtrl,
@@ -51,7 +51,7 @@ pub struct HyperlinkWidgetsPage {
     range: Rc<RefCell<c_int>>,
 
     // the timer for simulating hyperlink progress
-    timer: Rc<RefCell<Option<wx::Timer>>>,
+    // timer: Rc<RefCell<Option<wx::Timer>>>,
 }
 impl WidgetsPage for HyperlinkWidgetsPage {
     fn base(&self) -> &wx::Panel {
@@ -65,111 +65,91 @@ impl WidgetsPage for HyperlinkWidgetsPage {
 
         // left pane
         let box_left = wx::StaticBox::builder(Some(&self.base))
-            .label("&Set style")
+            .label("Hyperlink details")
             .build();
 
         let sizer_left = wx::StaticBoxSizer::new_with_staticbox(Some(&box_left), wx::VERTICAL);
 
-        let chk_vert = self.create_check_box_and_add_to_sizer(&sizer_left, "&Vertical", wx::ID_ANY);
-        let chk_smooth = self.create_check_box_and_add_to_sizer(&sizer_left, "&Smooth", wx::ID_ANY);
-        let chk_progress =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "&Progress", wx::ID_ANY);
-
-        sizer_left.add_int_int(5, 5, 0, wx::GROW | wx::ALL, 5, wx::Object::none());
-
-        let btn = wx::Button::builder(Some(&self.base))
-            .id(HyperlinkPage::Reset.into())
-            .label("&Reset")
-            .build();
-        sizer_left.add_window_int(
-            Some(&btn),
+        let (sizer_row, label) = self.create_sizer_with_text_and_button(
+            HyperlinkPage::SetLabel.into(),
+            "Set &Label",
+            wx::ID_ANY,
+        );
+        sizer_left.add_sizer_int(
+            Some(&sizer_row),
             0,
-            wx::ALIGN_CENTRE_HORIZONTAL | wx::ALL,
-            15,
+            wx::ALL | wx::ALIGN_RIGHT,
+            5,
             wx::Object::none(),
         );
 
-        // middle pane
-        let box2 = wx::StaticBox::builder(Some(&self.base))
-            .label("&Set style")
+        let (sizer_row, url) = self.create_sizer_with_text_and_button(
+            HyperlinkPage::SetURL.into(),
+            "Set &URL",
+            wx::ID_ANY,
+        );
+        sizer_left.add_sizer_int(
+            Some(&sizer_row),
+            0,
+            wx::ALL | wx::ALIGN_RIGHT,
+            5,
+            wx::Object::none(),
+        );
+
+        let alignments = wx::ArrayString::new();
+        alignments.add("&left");
+        alignments.add("&centre");
+        alignments.add("&right");
+
+        let radio_align_mode = wx::RadioBox::builder(Some(&self.base))
+            .label("alignment")
+            .choices(alignments)
             .build();
+        radio_align_mode.set_selection(1); // start with "centre" selected since
+                                           // wxHL_DEFAULT_STYLE contains wxHL_ALIGN_CENTRE
+        sizer_left.add_window_int(
+            Some(&radio_align_mode),
+            0,
+            wx::ALL | wx::GROW,
+            5,
+            wx::Object::none(),
+        );
 
-        let sizer_middle = wx::StaticBoxSizer::new_with_staticbox(Some(&box2), wx::VERTICAL);
-
-        // TODO: OnUpdateUI event
-        // let (sizer_row, text) = self
-        //     .create_sizer_with_text_and_label("Current value", HyperlinkPage::CurValueText.into());
-        // text.set_editable(false);
-
-        // sizer_middle.add_sizer_int(
-        //     Some(&sizer_row),
-        //     0,
-        //     wx::ALL | wx::GROW,
-        //     5,
-        //     wx::Object::none(),
-        // );
-
-        // let (sizer_row, text_value) = self.create_sizer_with_text_and_button(
-        //     HyperlinkPage::SetValue.into(),
-        //     "Set &value",
-        //     HyperlinkPage::ValueText.into(),
-        // );
-        // sizer_middle.add_sizer_int(
-        //     Some(&sizer_row),
-        //     0,
-        //     wx::ALL | wx::GROW,
-        //     5,
-        //     wx::Object::none(),
-        // );
-
-        // let (sizer_row, text_range) = self.create_sizer_with_text_and_button(
-        //     HyperlinkPage::SetRange.into(),
-        //     "Set &range",
-        //     HyperlinkPage::RangeText.into(),
-        // );
-        // let range = *self.range.borrow();
-        // text_range.set_value(&format!("{}", range));
-        // sizer_middle.add_sizer_int(
-        //     Some(&sizer_row),
-        //     0,
-        //     wx::ALL | wx::GROW,
-        //     5,
-        //     wx::Object::none(),
-        // );
-
-        // let btn = wx::Button::builder(Some(&self.base))
-        //     .id(HyperlinkPage::Progress.into())
-        //     .label("Simulate &progress")
-        //     .build();
-        // sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
-
-        // let btn = wx::Button::builder(Some(&self.base))
-        //     .id(HyperlinkPage::IndeterminateProgress.into())
-        //     .label("Simulate &indeterminate job")
-        //     .build();
-        // sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
-
-        // let btn = wx::Button::builder(Some(&self.base))
-        //     .id(HyperlinkPage::Clear.into())
-        //     .label("&Clear")
-        //     .build();
-        // sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+        let check_generic = wx::CheckBox::builder(Some(&self.base))
+            .label("Use generic version")
+            .build();
+        sizer_left.add_window_int(
+            Some(&check_generic),
+            0,
+            wx::ALL | wx::GROW,
+            5,
+            wx::Object::none(),
+        );
 
         // right pane
-        let sizer_right = wx::BoxSizer::new(wx::HORIZONTAL);
-        // let hyperlink = wx::HyperlinkCtrl::builder(Some(&self.base))
-        //     .id(HyperlinkPage::HyperlinkCtrl.into())
-        //     .range(range)
-        //     .build();
-        // sizer_right.add_window_int(
-        //     Some(&hyperlink),
-        //     1,
-        //     wx::CENTRE as i32 | wx::ALL,
-        //     5,
-        //     wx::Object::none(),
-        // );
-        // sizer_right.set_min_size_int(150, 0);
-        // *self.hyperlink.borrow_mut() = Some(hyperlink);
+        let sz_hyperlink_long = wx::BoxSizer::new(wx::VERTICAL);
+        let sz_hyperlink = wx::BoxSizer::new(wx::HORIZONTAL);
+
+        let visit = wx::StaticText::builder(Some(&self.base)).label("Visit ").build();
+
+        let hyperlink = wx::HyperlinkCtrl::builder(Some(&self.base)).id(HyperlinkPage::Ctrl.into()).label("wxWidgets website").url("www.wxwidgets.org").build();
+
+        let fun = wx::StaticText::builder(Some(&self.base)).label(" for fun!").build();
+
+        sz_hyperlink.add_int_int(0, 0, 1, wx::CENTRE, 0, wx::Object::none());
+        sz_hyperlink.add_window_int(Some(&visit), 0, wx::CENTRE, 0, wx::Object::none());
+        sz_hyperlink.add_window_int(Some(&hyperlink), 0, wx::CENTRE, 0, wx::Object::none());
+        sz_hyperlink.add_window_int(Some(&fun), 0, wx::CENTRE, 0, wx::Object::none());
+        sz_hyperlink.add_int_int(0, 0, 1, wx::CENTRE, 0, wx::Object::none());
+        sz_hyperlink.set_min_size_int(150, 0);
+
+        let hyperlink_long = wx::HyperlinkCtrl::builder(Some(&self.base)).label("This is a long hyperlink").url("www.wxwidgets.org").build();
+
+        sz_hyperlink_long.add_int_int(0, 0, 1, wx::CENTRE, 0, wx::Object::none());
+        sz_hyperlink_long.add_sizer_int(Some(&sz_hyperlink), 0, wx::CENTRE|wx::GROW, 0, wx::Object::none());
+        sz_hyperlink_long.add_int_int(0, 0, 1, wx::CENTRE, 0, wx::Object::none());
+        sz_hyperlink_long.add_window_int(Some(&hyperlink_long), 0, wx::GROW, 0, wx::Object::none());
+        sz_hyperlink_long.add_int_int(0, 0, 1, wx::CENTRE, 0, wx::Object::none());
 
         // the 3 panes panes compose the window
         sizer_top.add_sizer_int(
@@ -180,14 +160,7 @@ impl WidgetsPage for HyperlinkWidgetsPage {
             wx::Object::none(),
         );
         sizer_top.add_sizer_int(
-            Some(&sizer_middle),
-            1,
-            wx::GROW | wx::ALL,
-            10,
-            wx::Object::none(),
-        );
-        sizer_top.add_sizer_int(
-            Some(&sizer_right),
+            Some(&sz_hyperlink_long),
             1,
             wx::GROW | (wx::ALL & !wx::RIGHT),
             10,
@@ -196,13 +169,13 @@ impl WidgetsPage for HyperlinkWidgetsPage {
 
         // final initializations
         let config_ui = ConfigUI {
-            chk_vert,
-            chk_smooth,
-            chk_progress,
+            // chk_vert,
+            // chk_smooth,
+            // chk_progress,
 
             // text_value,
             // text_range,
-            sizer_hyperlink: sizer_right, // save it to modify it later
+            sizer_hyperlink: sz_hyperlink_long, // save it to modify it later
         };
         self.reset(&config_ui);
         *self.config_ui.borrow_mut() = Some(config_ui);
@@ -249,7 +222,7 @@ impl HyperlinkWidgetsPage {
             config_ui: RefCell::new(None),
             hyperlink: Rc::new(RefCell::new(None)),
             range: Rc::new(RefCell::new(100)),
-            timer: Rc::new(RefCell::new(None)),
+            // timer: Rc::new(RefCell::new(None)),
         };
 
         let page_copy = page.clone();
@@ -262,26 +235,26 @@ impl HyperlinkWidgetsPage {
     }
 
     fn reset(&self, config_ui: &ConfigUI) {
-        config_ui.chk_vert.set_value(false);
-        config_ui.chk_smooth.set_value(false);
-        config_ui.chk_progress.set_value(false);
+        // config_ui.chk_vert.set_value(false);
+        // config_ui.chk_smooth.set_value(false);
+        // config_ui.chk_progress.set_value(false);
     }
 
     fn create_hyperlink(&self, config_ui: &ConfigUI) {
         let mut flags = wx::BORDER_DEFAULT;
 
-        flags |= if config_ui.chk_vert.get_value() {
-            wx::GA_VERTICAL
-        } else {
-            wx::GA_HORIZONTAL
-        } as c_long;
+        // flags |= if config_ui.chk_vert.get_value() {
+        //     wx::GA_VERTICAL
+        // } else {
+        //     wx::GA_HORIZONTAL
+        // } as c_long;
 
-        if config_ui.chk_smooth.get_value() {
-            flags |= wx::GA_SMOOTH as c_long;
-        }
-        if config_ui.chk_progress.get_value() {
-            flags |= wx::GA_PROGRESS as c_long;
-        }
+        // if config_ui.chk_smooth.get_value() {
+        //     flags |= wx::GA_SMOOTH as c_long;
+        // }
+        // if config_ui.chk_progress.get_value() {
+        //     flags |= wx::GA_PROGRESS as c_long;
+        // }
 
         let mut val = 0;
         if let Some(hyperlink) = self.hyperlink.borrow().as_ref() {
@@ -359,10 +332,10 @@ impl HyperlinkWidgetsPage {
     }
 
     fn stop_timer<W: WindowMethods>(&self, clicked: &W) {
-        if let Some(timer) = self.timer.borrow().as_ref() {
-            timer.stop();
-        }
-        *self.timer.borrow_mut() = None;
+        // if let Some(timer) = self.timer.borrow().as_ref() {
+        //     timer.stop();
+        // }
+        // *self.timer.borrow_mut() = None;
 
         // if clicked.get_id() == HyperlinkPage::Progress.into() {
         //     clicked.set_label("Simulate &progress");

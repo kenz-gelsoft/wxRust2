@@ -159,7 +159,7 @@ impl WidgetsFrame {
         let fontpicker_page = Rc::new(FontPickerWidgetsPage::new(&book));
         let gauge_page = Rc::new(GaugeWidgetsPage::new(&book));
         let headerctrl_page = Rc::new(HeaderCtrlWidgetsPage::new(&book));
-        let hyperlink_page = Rc::new(GaugeWidgetsPage::new(&book));
+        let hyperlink_page = Rc::new(HyperlinkWidgetsPage::new(&book));
         let mut frame = WidgetsFrame {
             base,
             panel,
