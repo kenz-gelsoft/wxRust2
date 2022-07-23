@@ -143,11 +143,12 @@ impl WidgetsPage for HyperlinkWidgetsPage {
             .label(" for fun!")
             .build();
 
-        sz_hyperlink.add_int_int(0, 0, 1, wx::CENTRE, 0, wx::Object::none());
-        sz_hyperlink.add_window_int(Some(&visit), 0, wx::CENTRE, 0, wx::Object::none());
-        sz_hyperlink.add_window_int(Some(&hyperlink), 0, wx::CENTRE, 0, wx::Object::none());
-        sz_hyperlink.add_window_int(Some(&fun), 0, wx::CENTRE, 0, wx::Object::none());
-        sz_hyperlink.add_int_int(0, 0, 1, wx::CENTRE, 0, wx::Object::none());
+        let centre = wx::CENTRE as i32;
+        sz_hyperlink.add_int_int(0, 0, 1, centre, 0, wx::Object::none());
+        sz_hyperlink.add_window_int(Some(&visit), 0, centre, 0, wx::Object::none());
+        sz_hyperlink.add_window_int(Some(&hyperlink), 0, centre, 0, wx::Object::none());
+        sz_hyperlink.add_window_int(Some(&fun), 0, centre, 0, wx::Object::none());
+        sz_hyperlink.add_int_int(0, 0, 1, centre, 0, wx::Object::none());
         sz_hyperlink.set_min_size_int(150, 0);
 
         let hyperlink_long = wx::HyperlinkCtrl::builder(Some(&self.base))
@@ -155,17 +156,17 @@ impl WidgetsPage for HyperlinkWidgetsPage {
             .url("www.wxwidgets.org")
             .build();
 
-        sz_hyperlink_long.add_int_int(0, 0, 1, wx::CENTRE, 0, wx::Object::none());
+        sz_hyperlink_long.add_int_int(0, 0, 1, centre, 0, wx::Object::none());
         sz_hyperlink_long.add_sizer_int(
             Some(&sz_hyperlink),
             0,
-            wx::CENTRE | wx::GROW,
+            centre | wx::GROW,
             0,
             wx::Object::none(),
         );
-        sz_hyperlink_long.add_int_int(0, 0, 1, wx::CENTRE, 0, wx::Object::none());
+        sz_hyperlink_long.add_int_int(0, 0, 1, centre, 0, wx::Object::none());
         sz_hyperlink_long.add_window_int(Some(&hyperlink_long), 0, wx::GROW, 0, wx::Object::none());
-        sz_hyperlink_long.add_int_int(0, 0, 1, wx::CENTRE, 0, wx::Object::none());
+        sz_hyperlink_long.add_int_int(0, 0, 1, centre, 0, wx::Object::none());
 
         // the 3 panes panes compose the window
         sizer_top.add_sizer_int(
