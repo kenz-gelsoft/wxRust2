@@ -177,7 +177,7 @@ impl WidgetsPage for ListboxWidgetsPage {
             .label("Selection &mode:")
             .choices(modes)
             .major_dimension(1)
-            .style(wx::RA_SPECIFY_COLS)
+            .style(wx::RA_SPECIFY_COLS.into())
             .build();
 
         let list_types = wx::ArrayString::new();
@@ -189,7 +189,7 @@ impl WidgetsPage for ListboxWidgetsPage {
             .label("&List type:")
             .choices(list_types)
             .major_dimension(1)
-            .style(wx::RA_SPECIFY_COLS)
+            .style(wx::RA_SPECIFY_COLS.into())
             .build();
 
         let chk_v_scroll = self.create_check_box_and_add_to_sizer(
@@ -497,7 +497,7 @@ impl ListboxWidgetsPage {
                 LboxSel::Extended => wx::LB_EXTENDED,
                 LboxSel::Multiple => wx::LB_MULTIPLE,
                 _ => wx::LB_SINGLE,
-            };
+            } as c_long;
         }
 
         if config_ui.chk_v_scroll.is_checked() {
