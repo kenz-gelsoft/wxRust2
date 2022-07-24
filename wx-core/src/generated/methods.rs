@@ -2683,7 +2683,13 @@ pub trait ItemContainerImmutableMethods: WxRustMethods {
             .into()
         }
     }
-    // BLOCKED: fn GetStrings()
+    fn get_strings(&self) -> ArrayString {
+        unsafe {
+            ArrayString::from_ptr(ffi::wxItemContainerImmutable_GetStrings(
+                self.as_item_container_immutable(),
+            ))
+        }
+    }
     fn set_string(&self, n: c_uint, string: &str) {
         unsafe {
             let string = WxString::from(string);
@@ -5342,7 +5348,9 @@ pub trait TextAttrMethods: WxRustMethods {
     fn get_right_indent(&self) -> c_long {
         unsafe { ffi::wxTextAttr_GetRightIndent(self.as_ptr()) }
     }
-    // BLOCKED: fn GetTabs()
+    fn get_tabs(&self) -> ArrayIntIsOwned<false> {
+        unsafe { ArrayIntIsOwned::from_ptr(ffi::wxTextAttr_GetTabs(self.as_ptr())) }
+    }
     fn get_text_colour(&self) -> ColourIsOwned<false> {
         unsafe { ColourIsOwned::from_ptr(ffi::wxTextAttr_GetTextColour(self.as_ptr())) }
     }

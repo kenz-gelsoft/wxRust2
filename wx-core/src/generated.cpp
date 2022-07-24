@@ -1640,6 +1640,9 @@ bool wxItemContainerImmutable_IsEmpty(const wxItemContainerImmutable * self) {
 wxString *wxItemContainerImmutable_GetString(const wxItemContainerImmutable * self, unsigned int n) {
     return new wxString(self->GetString(n));
 }
+wxArrayString *wxItemContainerImmutable_GetStrings(const wxItemContainerImmutable * self) {
+    return new wxArrayString(self->GetStrings());
+}
 void wxItemContainerImmutable_SetString(wxItemContainerImmutable * self, unsigned int n, const wxString * string) {
     return self->SetString(n, *string);
 }
@@ -3001,6 +3004,9 @@ wxString *wxTextAttr_GetParagraphStyleName(const wxTextAttr * self) {
 }
 long wxTextAttr_GetRightIndent(const wxTextAttr * self) {
     return self->GetRightIndent();
+}
+wxArrayInt *wxTextAttr_GetTabs(const wxTextAttr * self) {
+    return new wxArrayInt(self->GetTabs());
 }
 wxColour *wxTextAttr_GetTextColour(const wxTextAttr * self) {
     return new wxColour(self->GetTextColour());

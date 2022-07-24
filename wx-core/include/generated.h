@@ -669,6 +669,7 @@ void wxItemContainerImmutable_Select(wxItemContainerImmutable * self, int n);
 unsigned int wxItemContainerImmutable_GetCount(const wxItemContainerImmutable * self);
 bool wxItemContainerImmutable_IsEmpty(const wxItemContainerImmutable * self);
 wxString *wxItemContainerImmutable_GetString(const wxItemContainerImmutable * self, unsigned int n);
+wxArrayString *wxItemContainerImmutable_GetStrings(const wxItemContainerImmutable * self);
 void wxItemContainerImmutable_SetString(wxItemContainerImmutable * self, unsigned int n, const wxString * string);
 int wxItemContainerImmutable_FindString(const wxItemContainerImmutable * self, const wxString * string, bool case_sensitive);
 
@@ -1175,6 +1176,7 @@ int wxTextAttr_GetParagraphSpacingAfter(const wxTextAttr * self);
 int wxTextAttr_GetParagraphSpacingBefore(const wxTextAttr * self);
 wxString *wxTextAttr_GetParagraphStyleName(const wxTextAttr * self);
 long wxTextAttr_GetRightIndent(const wxTextAttr * self);
+wxArrayInt *wxTextAttr_GetTabs(const wxTextAttr * self);
 wxColour *wxTextAttr_GetTextColour(const wxTextAttr * self);
 int wxTextAttr_GetTextEffectFlags(const wxTextAttr * self);
 int wxTextAttr_GetTextEffects(const wxTextAttr * self);

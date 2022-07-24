@@ -1240,7 +1240,7 @@ extern "C" {
     pub fn wxItemContainerImmutable_GetCount(self_: *const c_void) -> c_uint;
     pub fn wxItemContainerImmutable_IsEmpty(self_: *const c_void) -> bool;
     pub fn wxItemContainerImmutable_GetString(self_: *const c_void, n: c_uint) -> *mut c_void;
-    // BLOCKED: pub fn wxItemContainerImmutable_GetStrings(self_: *const c_void) -> wxArrayString;
+    pub fn wxItemContainerImmutable_GetStrings(self_: *const c_void) -> *mut c_void;
     pub fn wxItemContainerImmutable_SetString(self_: *mut c_void, n: c_uint, string: *const c_void);
     pub fn wxItemContainerImmutable_FindString(
         self_: *const c_void,
@@ -2229,7 +2229,7 @@ extern "C" {
     pub fn wxTextAttr_GetParagraphSpacingBefore(self_: *const c_void) -> c_int;
     pub fn wxTextAttr_GetParagraphStyleName(self_: *const c_void) -> *mut c_void;
     pub fn wxTextAttr_GetRightIndent(self_: *const c_void) -> c_long;
-    // BLOCKED: pub fn wxTextAttr_GetTabs(self_: *const c_void) -> *mut c_void;
+    pub fn wxTextAttr_GetTabs(self_: *const c_void) -> *mut c_void;
     pub fn wxTextAttr_GetTextColour(self_: *const c_void) -> *mut c_void;
     pub fn wxTextAttr_GetTextEffectFlags(self_: *const c_void) -> c_int;
     pub fn wxTextAttr_GetTextEffects(self_: *const c_void) -> c_int;

@@ -354,8 +354,6 @@ blocklist = [
 [types.wxItemContainerImmutable]
 blocklist = [
     'wxItemContainerImmutable',
-    # TODO: use ArrayString::from_ptr()
-    'GetStrings',
 ]
 [types.wxListBox]
 blocklist = [
@@ -542,8 +540,6 @@ blocklist = [
 [types.wxTextAttr]
 blocklist = [
     'operator=',
-    # TODO: wxArrayInt is not supported
-    'GetTabs',
 ]
 wx31 = [
     'GetUnderlineColour',
