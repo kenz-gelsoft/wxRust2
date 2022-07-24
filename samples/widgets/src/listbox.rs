@@ -447,16 +447,16 @@ impl WidgetsPage for ListboxWidgetsPage {
                 ListboxPage::Reset => self.on_button_reset(config_ui),
                 ListboxPage::Change => self.on_button_change(config_ui),
                 ListboxPage::Delete => self.on_button_delete(config_ui),
-                ListboxPage::DeleteSel => self.on_button_delete_sel(),
+                ListboxPage::DeleteSel => self.on_button_delete_sel(config_ui),
                 ListboxPage::EnsureVisible => self.on_button_ensure_visible(config_ui),
                 ListboxPage::Clear => self.on_button_clear(),
                 ListboxPage::Add => self.on_button_add(config_ui),
                 ListboxPage::AddSeveral => self.on_button_add_several(),
                 ListboxPage::AddMany => self.on_button_add_many(),
-                // ListboxPage::GetTopItem => self.on_button_top_item(),
-                // ListboxPage::GetCountPerPage => self.on_button_page_count(),
-                // ListboxPage::MoveUp => self.on_button_move_up(),
-                // ListboxPage::MoveDown => self.on_button_move_down(),
+                ListboxPage::GetTopItem => self.on_button_top_item(),
+                ListboxPage::GetCountPerPage => self.on_button_page_count(),
+                ListboxPage::MoveUp => self.on_button_move_up(),
+                ListboxPage::MoveDown => self.on_button_move_down(),
                 // TODO: Support update ui event to disable this when not 3state
                 _ => (),
             };
@@ -604,19 +604,22 @@ impl ListboxWidgetsPage {
     }
 
     fn on_button_delete(&self, config_ui: &ConfigUI) {
-        let n = config_ui.text_delete.get_value();
-        if let (Ok(n), Some(lbox)) = (n.parse(), self.lbox.borrow().as_ref()) {
-            if n < lbox.get_count() {
-                lbox.delete(n);
-            }
+        if let (Some(n), Some(lbox)) = (
+            self.get_valid_index_from_text(&config_ui.text_delete),
+            self.lbox.borrow().as_ref(),
+        ) {
+            lbox.delete(n.try_into().unwrap());
         }
     }
 
-    fn on_button_delete_sel(&self) {
+    fn on_button_delete_sel(&self, config_ui: &ConfigUI) {
         if let Some(lbox) = self.lbox.borrow().as_ref() {
-            let selection = lbox.get_selection();
-            if selection != wx::NOT_FOUND {
-                lbox.delete(selection.try_into().unwrap());
+            let selections = wx::ArrayInt::new();
+            let mut n = lbox.get_selections(&selections) - 1;
+            while n >= 0 {
+                let i = selections.item(n.try_into().unwrap()).try_into().unwrap();
+                lbox.delete(i);
+                n -= 1;
             }
         }
     }
@@ -627,6 +630,20 @@ impl ListboxWidgetsPage {
         }
     }
 
+    fn on_button_top_item(&self) {
+        if let Some(lbox) = self.lbox.borrow().as_ref() {
+            let item = lbox.get_top_item();
+            println!("Topmost visible item is: {}", item);
+        }
+    }
+
+    fn on_button_page_count(&self) {
+        if let Some(lbox) = self.lbox.borrow().as_ref() {
+            let count = lbox.get_count_per_page();
+            println!("{} items fit into this listbox.", count);
+        }
+    }
+
     fn on_button_add(&self, config_ui: &ConfigUI) {
         let s = config_ui.text_add.get_value();
         if !config_ui.text_add.is_modified() {
@@ -634,7 +651,7 @@ impl ListboxWidgetsPage {
             let s_item = *self.s_item.borrow();
             config_ui
                 .text_add
-                .set_value(&format!("test item {}", s_item));
+                .set_value(&format!("test item \t{}", s_item));
             *self.s_item.borrow_mut() = s_item + 1;
         }
 
@@ -662,6 +679,14 @@ impl ListboxWidgetsPage {
         if let Some(lbox) = self.lbox.borrow().as_ref() {
             lbox.insert_arraystring(&items, 0);
         }
+    }
+
+    fn on_button_move_up(&self) {
+        // TODO: RearrangeList
+    }
+
+    fn on_button_move_down(&self) {
+        // TODO: RearrangeList
     }
 
     fn on_check_or_radio_box(&self) {
