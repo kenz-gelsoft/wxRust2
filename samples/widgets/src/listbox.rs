@@ -567,12 +567,12 @@ impl ListboxWidgetsPage {
 
     fn on_button_change(&self, config_ui: &ConfigUI) {
         if let Some(lbox) = self.lbox.borrow().as_ref() {
-            let selection = lbox.get_selection();
-            if selection != wx::NOT_FOUND {
-                lbox.set_string(
-                    selection.try_into().unwrap(),
-                    &config_ui.text_change.get_value(),
-                );
+            let selections = wx::ArrayInt::new();
+            let count = lbox.get_selections(&selections);
+            let s = config_ui.text_change.get_value();
+            for n in 0..count {
+                let i = selections.item(n.try_into().unwrap()).try_into().unwrap();
+                lbox.set_string(i, &s);
             }
         }
     }
