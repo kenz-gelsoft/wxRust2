@@ -134,6 +134,7 @@ pub struct ConfigUI {
     // the text entries for "Add/change string" and "Delete" buttons
     text_add: wx::TextCtrl,
     text_change: wx::TextCtrl,
+    text_ensure_visible: wx::TextCtrl,
     text_delete: wx::TextCtrl,
 }
 
@@ -425,6 +426,7 @@ impl WidgetsPage for ListboxWidgetsPage {
 
             text_add,
             text_change,
+            text_ensure_visible,
             text_delete,
         };
 
@@ -446,10 +448,15 @@ impl WidgetsPage for ListboxWidgetsPage {
                 ListboxPage::Change => self.on_button_change(config_ui),
                 ListboxPage::Delete => self.on_button_delete(config_ui),
                 ListboxPage::DeleteSel => self.on_button_delete_sel(),
+                ListboxPage::EnsureVisible => self.on_button_ensure_visible(config_ui),
                 ListboxPage::Clear => self.on_button_clear(),
                 ListboxPage::Add => self.on_button_add(config_ui),
                 ListboxPage::AddSeveral => self.on_button_add_several(),
                 ListboxPage::AddMany => self.on_button_add_many(),
+                // ListboxPage::GetTopItem => self.on_button_top_item(),
+                // ListboxPage::GetCountPerPage => self.on_button_page_count(),
+                // ListboxPage::MoveUp => self.on_button_move_up(),
+                // ListboxPage::MoveDown => self.on_button_move_down(),
                 // TODO: Support update ui event to disable this when not 3state
                 _ => (),
             };
@@ -560,6 +567,16 @@ impl ListboxWidgetsPage {
         *self.lbox.borrow_mut() = Some(new_lbox);
     }
 
+    fn get_valid_index_from_text(&self, text: &wx::TextCtrl) -> Option<u32> {
+        let idx = text.get_value();
+        if let (Ok(idx), Some(lbox)) = (idx.parse(), self.lbox.borrow().as_ref()) {
+            if idx < lbox.get_count() {
+                return Some(idx);
+            }
+        }
+        return None;
+    }
+
     fn on_button_reset(&self, config_ui: &ConfigUI) {
         self.reset(config_ui);
         self.create_lbox(config_ui);
@@ -574,6 +591,15 @@ impl ListboxWidgetsPage {
                 let i = selections.item(n.try_into().unwrap()).try_into().unwrap();
                 lbox.set_string(i, &s);
             }
+        }
+    }
+
+    fn on_button_ensure_visible(&self, config_ui: &ConfigUI) {
+        if let (Some(n), Some(lbox)) = (
+            self.get_valid_index_from_text(&config_ui.text_ensure_visible),
+            self.lbox.borrow().as_ref(),
+        ) {
+            lbox.ensure_visible(n.try_into().unwrap());
         }
     }
 
