@@ -64,12 +64,69 @@ impl From<ListboxPage> for c_int {
     }
 }
 
+// the selection mode
+#[derive(Clone, Copy)]
+enum LboxSel {
+    Single,
+    Extended,
+    Multiple,
+}
+impl LboxSel {
+    fn from(v: c_int) -> Option<Self> {
+        use LboxSel::*;
+        for e in [Single, Extended, Multiple] {
+            if v == e.into() {
+                return Some(e);
+            }
+        }
+        return None;
+    }
+}
+impl From<LboxSel> for c_int {
+    fn from(w: LboxSel) -> Self {
+        w as c_int
+    }
+}
+
+// the list type
+#[derive(Clone, Copy)]
+enum LboxType {
+    ListBox,
+    CheckListBox,
+    RearrangeList,
+}
+impl LboxType {
+    fn from(v: c_int) -> Option<Self> {
+        use LboxType::*;
+        for e in [ListBox, CheckListBox, RearrangeList] {
+            if v == e.into() {
+                return Some(e);
+            }
+        }
+        return None;
+    }
+}
+impl From<LboxType> for c_int {
+    fn from(w: LboxType) -> Self {
+        w as c_int
+    }
+}
+
 #[derive(Clone)]
 pub struct ConfigUI {
     // the controls
     // ------------
+    // the sel mode radiobox
+    radio_sel_mode: wx::RadioBox,
+
+    // List type selection radiobox
+    radio_list_type: wx::RadioBox,
+
     // the checkboxes
+    chk_v_scroll: wx::CheckBox,
+    chk_h_scroll: wx::CheckBox,
     chk_sort: wx::CheckBox,
+    chk_owner_draw: wx::CheckBox,
 
     // sizer
     sizer_lbox: wx::BoxSizer,
@@ -352,18 +409,28 @@ impl WidgetsPage for ListboxWidgetsPage {
             10,
             wx::Object::none(),
         );
-        *self.config_ui.borrow_mut() = Some(ConfigUI {
+        let config_ui = ConfigUI {
+            radio_sel_mode,
+
+            // List type selection radiobox
+            radio_list_type,
+
+            // the checkboxes
+            chk_v_scroll,
+            chk_h_scroll,
             chk_sort,
+            chk_owner_draw,
 
             sizer_lbox: sizer_right, // save it to modify it later
 
             text_add,
             text_change,
             text_delete,
-        });
+        };
 
         // do create the main control
-        self.reset();
+        self.reset(&config_ui);
+        *self.config_ui.borrow_mut() = Some(config_ui);
 
         self.base.set_sizer(Some(&sizer_top), true);
     }
@@ -375,7 +442,7 @@ impl WidgetsPage for ListboxWidgetsPage {
             self.config_ui.borrow().as_ref(),
         ) {
             match m {
-                ListboxPage::Reset => self.on_button_reset(),
+                ListboxPage::Reset => self.on_button_reset(config_ui),
                 ListboxPage::Change => self.on_button_change(config_ui),
                 ListboxPage::Delete => self.on_button_delete(config_ui),
                 ListboxPage::DeleteSel => self.on_button_delete_sel(),
@@ -408,55 +475,94 @@ impl ListboxWidgetsPage {
         }
     }
 
-    fn reset(&self) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            config_ui.chk_sort.set_value(false);
-        }
+    fn reset(&self, config_ui: &ConfigUI) {
+        config_ui
+            .radio_sel_mode
+            .set_selection(LboxSel::Single.into());
+        config_ui
+            .radio_list_type
+            .set_selection(LboxType::ListBox.into());
+        config_ui.chk_v_scroll.set_value(false);
+        config_ui.chk_h_scroll.set_value(true);
+        config_ui.chk_sort.set_value(false);
+
+        config_ui.chk_owner_draw.set_value(false);
     }
 
-    fn create_lbox(&self) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            let mut flags = wx::BORDER_DEFAULT;
+    fn create_lbox(&self, config_ui: &ConfigUI) {
+        let mut flags = wx::BORDER_DEFAULT;
 
-            if config_ui.chk_sort.is_checked() {
-                flags |= wx::CB_SORT as c_long;
-            }
-
-            let items = wx::ArrayString::new();
-            if let Some(lbox) = self.lbox.borrow().as_ref() {
-                // TODO: remove (and delete) all lboxes
-                let count = lbox.get_count();
-                for n in 0..count {
-                    items.add(&lbox.get_string(n));
-                }
-
-                config_ui.sizer_lbox.detach_window(Some(lbox));
-                lbox.destroy();
-            }
-
-            let new_lbox = wx::ListBox::builder(Some(&self.base))
-                .id(ListboxPage::Listbox.into())
-                .style(flags)
-                .build();
-            new_lbox.set_arraystring(&items);
-
-            let sizer_lbox = &config_ui.sizer_lbox;
-            sizer_lbox.add_window_int(
-                Some(&new_lbox),
-                0,
-                wx::GROW | wx::ALL,
-                5,
-                wx::Object::none(),
-            );
-            sizer_lbox.layout();
-
-            *self.lbox.borrow_mut() = Some(new_lbox);
+        if let Some(m) = LboxSel::from(config_ui.radio_sel_mode.get_selection()) {
+            flags |= match m {
+                LboxSel::Extended => wx::LB_EXTENDED,
+                LboxSel::Multiple => wx::LB_MULTIPLE,
+                _ => wx::LB_SINGLE,
+            };
         }
+
+        if config_ui.chk_v_scroll.is_checked() {
+            flags |= wx::LB_ALWAYS_SB as c_long;
+        }
+        if config_ui.chk_h_scroll.is_checked() {
+            flags |= wx::LB_HSCROLL as c_long;
+        }
+        if config_ui.chk_sort.is_checked() {
+            flags |= wx::LB_SORT as c_long;
+        }
+        if config_ui.chk_owner_draw.is_checked() {
+            flags |= wx::LB_OWNERDRAW as c_long;
+        }
+
+        let items = wx::ArrayString::new();
+        if let Some(lbox) = self.lbox.borrow().as_ref() {
+            // TODO: remove (and delete) all lboxes
+            let count = lbox.get_count();
+            for n in 0..count {
+                items.add(&lbox.get_string(n));
+            }
+
+            config_ui.sizer_lbox.detach_window(Some(lbox));
+            lbox.destroy();
+        }
+
+        // TODO
+        // if let Some(m) = LboxType::from(config_ui.radio_sel_mode.get_selection()) {
+        //     match m {
+        //         LboxType::CheckListBox => {
+        //             // TODO
+        //         },
+        //         LboxType::RearrangeList => {
+        //             // TODO
+        //         },
+        //         LboxType::ListBox => {
+
+        //         },
+        //         _ =>,
+        //     };
+        // }
+
+        let new_lbox = wx::ListBox::builder(Some(&self.base))
+            .id(ListboxPage::Listbox.into())
+            .choices(items)
+            .style(flags)
+            .build();
+
+        let sizer_lbox = &config_ui.sizer_lbox;
+        sizer_lbox.add_window_int(
+            Some(&new_lbox),
+            1,
+            wx::GROW | wx::ALL,
+            5,
+            wx::Object::none(),
+        );
+        sizer_lbox.layout();
+
+        *self.lbox.borrow_mut() = Some(new_lbox);
     }
 
-    fn on_button_reset(&self) {
-        self.reset();
-        self.create_lbox();
+    fn on_button_reset(&self, config_ui: &ConfigUI) {
+        self.reset(config_ui);
+        self.create_lbox(config_ui);
     }
 
     fn on_button_change(&self, config_ui: &ConfigUI) {
@@ -533,6 +639,8 @@ impl ListboxWidgetsPage {
     }
 
     fn on_check_or_radio_box(&self) {
-        self.create_lbox();
+        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+            self.create_lbox(config_ui);
+        }
     }
 }
