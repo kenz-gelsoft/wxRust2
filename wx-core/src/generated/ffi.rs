@@ -1016,7 +1016,7 @@ extern "C" {
     pub fn wxHeaderCtrl_IsEmpty(self_: *const c_void) -> bool;
     pub fn wxHeaderCtrl_UpdateColumn(self_: *mut c_void, idx: c_uint);
     pub fn wxHeaderCtrl_SetColumnsOrder(self_: *mut c_void, order: *const c_void);
-    // NOT_SUPPORTED: pub fn wxHeaderCtrl_GetColumnsOrder(self_: *const c_void) -> wxArrayInt;
+    pub fn wxHeaderCtrl_GetColumnsOrder(self_: *const c_void) -> *mut c_void;
     pub fn wxHeaderCtrl_GetColumnAt(self_: *const c_void, pos: c_uint) -> c_uint;
     pub fn wxHeaderCtrl_GetColumnPos(self_: *const c_void, idx: c_uint) -> c_uint;
     pub fn wxHeaderCtrl_ResetColumnsOrder(self_: *mut c_void);
@@ -2229,7 +2229,7 @@ extern "C" {
     pub fn wxTextAttr_GetParagraphSpacingBefore(self_: *const c_void) -> c_int;
     pub fn wxTextAttr_GetParagraphStyleName(self_: *const c_void) -> *mut c_void;
     pub fn wxTextAttr_GetRightIndent(self_: *const c_void) -> c_long;
-    // BLOCKED: pub fn wxTextAttr_GetTabs(self_: *const c_void) -> *const c_void;
+    // BLOCKED: pub fn wxTextAttr_GetTabs(self_: *const c_void) -> *mut c_void;
     pub fn wxTextAttr_GetTextColour(self_: *const c_void) -> *mut c_void;
     pub fn wxTextAttr_GetTextEffectFlags(self_: *const c_void) -> c_int;
     pub fn wxTextAttr_GetTextEffects(self_: *const c_void) -> c_int;

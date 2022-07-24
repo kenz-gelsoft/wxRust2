@@ -560,6 +560,7 @@ unsigned int wxHeaderCtrl_GetColumnCount(const wxHeaderCtrl * self);
 bool wxHeaderCtrl_IsEmpty(const wxHeaderCtrl * self);
 void wxHeaderCtrl_UpdateColumn(wxHeaderCtrl * self, unsigned int idx);
 void wxHeaderCtrl_SetColumnsOrder(wxHeaderCtrl * self, const wxArrayInt * order);
+wxArrayInt *wxHeaderCtrl_GetColumnsOrder(const wxHeaderCtrl * self);
 unsigned int wxHeaderCtrl_GetColumnAt(const wxHeaderCtrl * self, unsigned int pos);
 unsigned int wxHeaderCtrl_GetColumnPos(const wxHeaderCtrl * self, unsigned int idx);
 void wxHeaderCtrl_ResetColumnsOrder(wxHeaderCtrl * self);

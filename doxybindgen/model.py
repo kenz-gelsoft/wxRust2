@@ -41,6 +41,7 @@ OS_UNSUPPORTED_TYPES = [
     'wxAccessible',
 ]
 MANUAL_BINDINGS = [
+    'wxArrayInt',
     'wxArrayString',
     'wxSizerItemList',
     'wxWindowList',

@@ -2194,10 +2194,15 @@ pub trait HeaderCtrlMethods: ControlMethods {
     fn update_column(&self, idx: c_uint) {
         unsafe { ffi::wxHeaderCtrl_UpdateColumn(self.as_ptr(), idx) }
     }
-    fn set_columns_order(&self, order: *const c_void) {
-        unsafe { ffi::wxHeaderCtrl_SetColumnsOrder(self.as_ptr(), order) }
+    fn set_columns_order<A: ArrayIntMethods>(&self, order: &A) {
+        unsafe {
+            let order = order.as_ptr();
+            ffi::wxHeaderCtrl_SetColumnsOrder(self.as_ptr(), order)
+        }
     }
-    // NOT_SUPPORTED: fn GetColumnsOrder()
+    fn get_columns_order(&self) -> ArrayInt {
+        unsafe { ArrayInt::from_ptr(ffi::wxHeaderCtrl_GetColumnsOrder(self.as_ptr())) }
+    }
     fn get_column_at(&self, pos: c_uint) -> c_uint {
         unsafe { ffi::wxHeaderCtrl_GetColumnAt(self.as_ptr(), pos) }
     }
@@ -5530,8 +5535,11 @@ pub trait TextAttrMethods: WxRustMethods {
     fn set_right_indent(&self, indent: c_int) {
         unsafe { ffi::wxTextAttr_SetRightIndent(self.as_ptr(), indent) }
     }
-    fn set_tabs(&self, tabs: *const c_void) {
-        unsafe { ffi::wxTextAttr_SetTabs(self.as_ptr(), tabs) }
+    fn set_tabs<A: ArrayIntMethods>(&self, tabs: &A) {
+        unsafe {
+            let tabs = tabs.as_ptr();
+            ffi::wxTextAttr_SetTabs(self.as_ptr(), tabs)
+        }
     }
     fn set_text_colour<C: ColourMethods>(&self, col_text: &C) {
         unsafe {

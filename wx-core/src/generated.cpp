@@ -1345,6 +1345,9 @@ void wxHeaderCtrl_UpdateColumn(wxHeaderCtrl * self, unsigned int idx) {
 void wxHeaderCtrl_SetColumnsOrder(wxHeaderCtrl * self, const wxArrayInt * order) {
     return self->SetColumnsOrder(*order);
 }
+wxArrayInt *wxHeaderCtrl_GetColumnsOrder(const wxHeaderCtrl * self) {
+    return new wxArrayInt(self->GetColumnsOrder());
+}
 unsigned int wxHeaderCtrl_GetColumnAt(const wxHeaderCtrl * self, unsigned int pos) {
     return self->GetColumnAt(pos);
 }
