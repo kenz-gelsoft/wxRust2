@@ -54,6 +54,7 @@ size_t wxStringConstIterator_IndexIn(wxString::const_iterator *self, const wxStr
 wxArrayInt *wxArrayInt_new();
 void wxArrayInt_delete(wxArrayInt *self);
 void wxArrayInt_Add(wxArrayInt *self, int i);
+int wxArrayInt_Item(wxArrayInt *self, size_t index);
 
 // ArrayString
 wxArrayString *wxArrayString_new();

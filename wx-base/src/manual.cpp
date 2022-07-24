@@ -108,6 +108,9 @@ void wxArrayInt_delete(wxArrayInt *self) {
 void wxArrayInt_Add(wxArrayInt *self, int i) {
     self->Add(i);
 }
+int wxArrayInt_Item(wxArrayInt *self, size_t index) {
+    return self->Item(index);
+}
 
 // ArrayString
 wxArrayString *wxArrayString_new() {

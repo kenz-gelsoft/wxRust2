@@ -50,6 +50,7 @@ mod ffi {
         pub fn wxArrayInt_new() -> *mut c_void;
         pub fn wxArrayInt_delete(self_: *mut c_void);
         pub fn wxArrayInt_Add(self_: *mut c_void, i: c_int);
+        pub fn wxArrayInt_Item(self_: *mut c_void, index: usize) -> c_int;
 
         // ArrayString
         pub fn wxArrayString_new() -> *mut c_void;
@@ -83,9 +84,10 @@ pub mod methods {
 
     pub trait ArrayIntMethods: WxRustMethods {
         fn add(&self, i: c_int) {
-            unsafe {
-                ffi::wxArrayInt_Add(self.as_ptr(), i)
-            }
+            unsafe { ffi::wxArrayInt_Add(self.as_ptr(), i) }
+        }
+        fn item(&self, index: usize) -> c_int {
+            unsafe { ffi::wxArrayInt_Item(self.as_ptr(), index) }
         }
     }
 
