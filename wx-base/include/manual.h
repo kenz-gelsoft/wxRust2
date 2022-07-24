@@ -50,6 +50,11 @@ wxString::const_iterator *wxStringConstIterator_new();
 void wxStringConstIterator_delete(wxString::const_iterator *self);
 size_t wxStringConstIterator_IndexIn(wxString::const_iterator *self, const wxString *s);
 
+// ArrayInt
+wxArrayInt *wxArrayInt_new();
+void wxArrayInt_delete(wxArrayInt *self);
+void wxArrayInt_Add(wxArrayInt *self, int i);
+
 // ArrayString
 wxArrayString *wxArrayString_new();
 void wxArrayString_delete(wxArrayString *self);

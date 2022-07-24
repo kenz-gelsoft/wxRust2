@@ -98,6 +98,17 @@ size_t wxStringConstIterator_IndexIn(wxString::const_iterator *self, const wxStr
     return std::distance(s->begin(), *self);
 }
 
+// ArrayInt
+wxArrayInt *wxArrayInt_new() {
+    return new wxArrayInt();
+}
+void wxArrayInt_delete(wxArrayInt *self) {
+    delete self;
+}
+void wxArrayInt_Add(wxArrayInt *self, int i) {
+    self->Add(i);
+}
+
 // ArrayString
 wxArrayString *wxArrayString_new() {
     return new wxArrayString();

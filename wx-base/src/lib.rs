@@ -46,6 +46,11 @@ mod ffi {
         pub fn wxStringConstIterator_delete(self_: *mut c_void);
         pub fn wxStringConstIterator_IndexIn(self_: *mut c_void, s: *const c_void) -> usize;
 
+        // ArrayInt
+        pub fn wxArrayInt_new() -> *mut c_void;
+        pub fn wxArrayInt_delete(self_: *mut c_void);
+        pub fn wxArrayInt_Add(self_: *mut c_void, i: c_int);
+
         // ArrayString
         pub fn wxArrayString_new() -> *mut c_void;
         pub fn wxArrayString_delete(self_: *mut c_void);
@@ -74,6 +79,14 @@ pub mod methods {
 
     pub trait Bindable {
         fn bind<E: EventMethods, F: Fn(&E) + 'static>(&self, event_type: RustEvent, closure: F);
+    }
+
+    pub trait ArrayIntMethods: WxRustMethods {
+        fn add(&self, i: c_int) {
+            unsafe {
+                ffi::wxArrayInt_Add(self.as_ptr(), i)
+            }
+        }
     }
 
     pub trait ArrayStringMethods: WxRustMethods {
@@ -190,6 +203,23 @@ impl App {
     pub fn run<F: Fn(*mut c_void) + 'static>(closure: F) {
         Self::on_init(closure);
         entry();
+    }
+}
+
+wx_class! { ArrayInt =
+    ArrayIntIsOwned<true>(wxArrayInt) impl
+        ArrayIntMethods
+}
+impl<const OWNED: bool> ArrayIntIsOwned<OWNED> {
+    pub fn new() -> Self {
+        unsafe { ArrayIntIsOwned(ffi::wxArrayInt_new()) }
+    }
+}
+impl<const OWNED: bool> Drop for ArrayIntIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxArrayInt_delete(self.0) }
+        }
     }
 }
 
