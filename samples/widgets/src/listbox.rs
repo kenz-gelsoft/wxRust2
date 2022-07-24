@@ -453,8 +453,9 @@ impl WidgetsPage for ListboxWidgetsPage {
                 ListboxPage::Add => self.on_button_add(config_ui),
                 ListboxPage::AddSeveral => self.on_button_add_several(),
                 ListboxPage::AddMany => self.on_button_add_many(),
-                ListboxPage::GetTopItem => self.on_button_top_item(),
-                ListboxPage::GetCountPerPage => self.on_button_page_count(),
+                // wx3.0 unsupported
+                // ListboxPage::GetTopItem => self.on_button_top_item(),
+                // ListboxPage::GetCountPerPage => self.on_button_page_count(),
                 ListboxPage::MoveUp => self.on_button_move_up(),
                 ListboxPage::MoveDown => self.on_button_move_down(),
                 // TODO: Support update ui event to disable this when not 3state
@@ -630,19 +631,19 @@ impl ListboxWidgetsPage {
         }
     }
 
-    fn on_button_top_item(&self) {
-        if let Some(lbox) = self.lbox.borrow().as_ref() {
-            let item = lbox.get_top_item();
-            println!("Topmost visible item is: {}", item);
-        }
-    }
+    // fn on_button_top_item(&self) {
+    //     if let Some(lbox) = self.lbox.borrow().as_ref() {
+    //         let item = lbox.get_top_item();
+    //         println!("Topmost visible item is: {}", item);
+    //     }
+    // }
 
-    fn on_button_page_count(&self) {
-        if let Some(lbox) = self.lbox.borrow().as_ref() {
-            let count = lbox.get_count_per_page();
-            println!("{} items fit into this listbox.", count);
-        }
-    }
+    // fn on_button_page_count(&self) {
+    //     if let Some(lbox) = self.lbox.borrow().as_ref() {
+    //         let count = lbox.get_count_per_page();
+    //         println!("{} items fit into this listbox.", count);
+    //     }
+    // }
 
     fn on_button_add(&self, config_ui: &ConfigUI) {
         let s = config_ui.text_add.get_value();
