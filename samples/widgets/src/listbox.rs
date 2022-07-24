@@ -107,13 +107,67 @@ impl WidgetsPage for ListboxWidgetsPage {
 
         // left pane
         let s_box = wx::StaticBox::builder(Some(&self.base))
-            .label("&Set lbox parameters")
+            .label("&Set listbox parameters")
+            .build();
+        let sizer_left = wx::StaticBoxSizer::new_with_staticbox(Some(&s_box), wx::VERTICAL);
+
+        let modes = wx::ArrayString::new();
+        modes.add("single");
+        modes.add("extended");
+        modes.add("multiple");
+
+        let radio_sel_mode = wx::RadioBox::builder(Some(&self.base))
+            .label("Selection &mode:")
+            .choices(modes)
+            .major_dimension(1)
+            .style(wx::RA_SPECIFY_COLS)
             .build();
 
-        let sizer_left = wx::StaticBoxSizer::new_with_staticbox(Some(&s_box), wx::VERTICAL);
+        let list_types = wx::ArrayString::new();
+        list_types.add("list box");
+        list_types.add("check list box");
+        list_types.add("rearrange list");
+
+        let radio_list_type = wx::RadioBox::builder(Some(&self.base))
+            .label("&List type:")
+            .choices(list_types)
+            .major_dimension(1)
+            .style(wx::RA_SPECIFY_COLS)
+            .build();
+
+        let chk_v_scroll = self.create_check_box_and_add_to_sizer(
+            &sizer_left,
+            "Always show &vertical scrollbar",
+            wx::ID_ANY,
+        );
+        let chk_h_scroll = self.create_check_box_and_add_to_sizer(
+            &sizer_left,
+            "Show &horizontal scrollbar",
+            wx::ID_ANY,
+        );
 
         let chk_sort =
             self.create_check_box_and_add_to_sizer(&sizer_left, "&Sort items", wx::ID_ANY);
+        let chk_owner_draw =
+            self.create_check_box_and_add_to_sizer(&sizer_left, "&Owner drawn", wx::ID_ANY);
+
+        sizer_left.add_int_int(5, 5, 0, wx::GROW | wx::ALL, 5, wx::Object::none()); // spacer
+        sizer_left.add_window_int(
+            Some(&radio_sel_mode),
+            0,
+            wx::GROW | wx::ALL,
+            5,
+            wx::Object::none(),
+        );
+
+        sizer_left.add_int_int(5, 5, 0, wx::GROW | wx::ALL, 5, wx::Object::none()); // spacer
+        sizer_left.add_window_int(
+            Some(&radio_list_type),
+            0,
+            wx::GROW | wx::ALL,
+            5,
+            wx::Object::none(),
+        );
 
         let btn = wx::Button::builder(Some(&self.base))
             .id(ListboxPage::Reset.into())
@@ -129,7 +183,7 @@ impl WidgetsPage for ListboxWidgetsPage {
 
         // middle pane
         let s_box2 = wx::StaticBox::builder(Some(&self.base))
-            .label("&Change lbox contents")
+            .label("&Change listbox contents")
             .build();
         let sizer_middle = wx::StaticBoxSizer::new_with_staticbox(Some(&s_box2), wx::VERTICAL);
 
@@ -140,7 +194,7 @@ impl WidgetsPage for ListboxWidgetsPage {
             .build();
         let text_add = wx::TextCtrl::builder(Some(&self.base))
             .id(ListboxPage::AddText.into())
-            .value("test item 0")
+            .value("test item \t0")
             .build();
         sizer_row.add_window_int(Some(&btn), 0, wx::RIGHT, 5, wx::Object::none());
         sizer_row.add_window_int(Some(&text_add), 1, wx::LEFT, 5, wx::Object::none());
@@ -184,6 +238,30 @@ impl WidgetsPage for ListboxWidgetsPage {
 
         let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
         let btn = wx::Button::builder(Some(&self.base))
+            .id(ListboxPage::EnsureVisible.into())
+            .label("Make item &visible")
+            .build();
+        let text_ensure_visible = wx::TextCtrl::builder(Some(&self.base))
+            .id(ListboxPage::EnsureVisibleText.into())
+            .build();
+        sizer_row.add_window_int(Some(&btn), 0, wx::RIGHT, 5, wx::Object::none());
+        sizer_row.add_window_int(
+            Some(&text_ensure_visible),
+            1,
+            wx::LEFT,
+            5,
+            wx::Object::none(),
+        );
+        sizer_middle.add_sizer_int(
+            Some(&sizer_row),
+            0,
+            wx::ALL | wx::GROW,
+            5,
+            wx::Object::none(),
+        );
+
+        let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
+        let btn = wx::Button::builder(Some(&self.base))
             .id(ListboxPage::Delete.into())
             .label("&Delete this item")
             .build();
@@ -213,6 +291,30 @@ impl WidgetsPage for ListboxWidgetsPage {
         sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
         let btn = wx::Button::builder(Some(&self.base))
+            .id(ListboxPage::MoveUp.into())
+            .label("Move item &up")
+            .build();
+        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+
+        let btn = wx::Button::builder(Some(&self.base))
+            .id(ListboxPage::MoveDown.into())
+            .label("Move item &down")
+            .build();
+        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+
+        let btn = wx::Button::builder(Some(&self.base))
+            .id(ListboxPage::GetTopItem.into())
+            .label("Get top item")
+            .build();
+        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+
+        let btn = wx::Button::builder(Some(&self.base))
+            .id(ListboxPage::GetCountPerPage.into())
+            .label("Get count per page")
+            .build();
+        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+
+        let btn = wx::Button::builder(Some(&self.base))
             .id(ListboxPage::ContainerTests.into())
             .label("Run &tests")
             .build();
@@ -222,27 +324,33 @@ impl WidgetsPage for ListboxWidgetsPage {
         let sizer_right = wx::BoxSizer::new(wx::VERTICAL);
         let lbox = wx::ListBox::builder(Some(&self.base))
             .id(ListboxPage::Listbox.into())
+            .style(wx::LB_HSCROLL.into())
             .build();
-        sizer_right.add_window_int(Some(&lbox), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+        sizer_right.add_window_int(Some(&lbox), 1, wx::ALL | wx::GROW, 5, wx::Object::none());
         sizer_right.set_min_size_int(150, 0);
         *self.lbox.borrow_mut() = Some(lbox);
 
         // the 3 panes panes compose the window
-        sizer_top.add_sizer_sizerflags(
+        sizer_top.add_sizer_int(
             Some(&sizer_left),
-            wx::SizerFlags::new(0)
-                .expand()
-                .double_border(wx::ALL & !wx::LEFT),
+            0,
+            wx::GROW | (wx::ALL & !wx::LEFT),
+            10,
+            wx::Object::none(),
         );
-        sizer_top.add_sizer_sizerflags(
+        sizer_top.add_sizer_int(
             Some(&sizer_middle),
-            wx::SizerFlags::new(1).expand().double_border(wx::ALL),
+            1,
+            wx::GROW | wx::ALL,
+            10,
+            wx::Object::none(),
         );
-        sizer_top.add_sizer_sizerflags(
+        sizer_top.add_sizer_int(
             Some(&sizer_right),
-            wx::SizerFlags::new(1)
-                .expand()
-                .double_border(wx::ALL & !wx::RIGHT),
+            1,
+            wx::GROW | (wx::ALL & !wx::RIGHT),
+            10,
+            wx::Object::none(),
         );
         *self.config_ui.borrow_mut() = Some(ConfigUI {
             chk_sort,
@@ -256,7 +364,6 @@ impl WidgetsPage for ListboxWidgetsPage {
 
         // do create the main control
         self.reset();
-        self.create_lbox();
 
         self.base.set_sizer(Some(&sizer_top), true);
     }
