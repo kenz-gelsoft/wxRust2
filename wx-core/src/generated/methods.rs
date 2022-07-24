@@ -360,8 +360,9 @@ pub trait BitmapMethods: GDIObjectMethods {
             ffi::wxBitmap_RemoveHandler(name)
         }
     }
-    fn rescale<S: SizeMethods>(bmp: *mut c_void, size_needed: &S) {
+    fn rescale<B: BitmapMethods, S: SizeMethods>(bmp: &B, size_needed: &S) {
         unsafe {
+            let bmp = bmp.as_ptr();
             let size_needed = size_needed.as_ptr();
             ffi::wxBitmap_Rescale(bmp, size_needed)
         }
@@ -858,8 +859,11 @@ pub trait CheckListBoxMethods: ListBoxMethods {
     fn is_checked(&self, item: c_uint) -> bool {
         unsafe { ffi::wxCheckListBox_IsChecked(self.as_ptr(), item) }
     }
-    fn get_checked_items(&self, checked_items: *mut c_void) -> c_uint {
-        unsafe { ffi::wxCheckListBox_GetCheckedItems(self.as_ptr(), checked_items) }
+    fn get_checked_items<A: ArrayIntMethods>(&self, checked_items: &A) -> c_uint {
+        unsafe {
+            let checked_items = checked_items.as_ptr();
+            ffi::wxCheckListBox_GetCheckedItems(self.as_ptr(), checked_items)
+        }
     }
 }
 
@@ -1187,8 +1191,11 @@ pub trait ControlMethods: WindowMethods {
             ffi::wxControl_Create(self.as_ptr(), parent, id, pos, size, style, validator, name)
         }
     }
-    fn command(&self, event: *mut c_void) {
-        unsafe { ffi::wxControl_Command(self.as_ptr(), event) }
+    fn command<C: CommandEventMethods>(&self, event: &C) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxControl_Command(self.as_ptr(), event)
+        }
     }
     fn get_label_text(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxControl_GetLabelText(self.as_ptr())).into() }
@@ -1453,8 +1460,11 @@ pub trait EditableListBoxMethods: PanelMethods {
             ffi::wxEditableListBox_SetStrings(self.as_ptr(), strings)
         }
     }
-    fn get_strings(&self, strings: *mut c_void) {
-        unsafe { ffi::wxEditableListBox_GetStrings(self.as_ptr(), strings) }
+    fn get_strings<A: ArrayStringMethods>(&self, strings: &A) {
+        unsafe {
+            let strings = strings.as_ptr();
+            ffi::wxEditableListBox_GetStrings(self.as_ptr(), strings)
+        }
     }
 }
 
@@ -1507,8 +1517,11 @@ pub trait FileCtrlMethods: ControlMethods {
     fn get_filename(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxFileCtrl_GetFilename(self.as_ptr())).into() }
     }
-    fn get_filenames(&self, filenames: *mut c_void) {
-        unsafe { ffi::wxFileCtrl_GetFilenames(self.as_ptr(), filenames) }
+    fn get_filenames<A: ArrayStringMethods>(&self, filenames: &A) {
+        unsafe {
+            let filenames = filenames.as_ptr();
+            ffi::wxFileCtrl_GetFilenames(self.as_ptr(), filenames)
+        }
     }
     fn get_filter_index(&self) -> c_int {
         unsafe { ffi::wxFileCtrl_GetFilterIndex(self.as_ptr()) }
@@ -1516,8 +1529,11 @@ pub trait FileCtrlMethods: ControlMethods {
     fn get_path(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxFileCtrl_GetPath(self.as_ptr())).into() }
     }
-    fn get_paths(&self, paths: *mut c_void) {
-        unsafe { ffi::wxFileCtrl_GetPaths(self.as_ptr(), paths) }
+    fn get_paths<A: ArrayStringMethods>(&self, paths: &A) {
+        unsafe {
+            let paths = paths.as_ptr();
+            ffi::wxFileCtrl_GetPaths(self.as_ptr(), paths)
+        }
     }
     fn get_wildcard(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxFileCtrl_GetWildcard(self.as_ptr())).into() }
@@ -2054,8 +2070,11 @@ pub trait GenericDirCtrlMethods: ControlMethods {
     fn get_file_path(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxGenericDirCtrl_GetFilePath(self.as_ptr())).into() }
     }
-    fn get_file_paths(&self, paths: *mut c_void) {
-        unsafe { ffi::wxGenericDirCtrl_GetFilePaths(self.as_ptr(), paths) }
+    fn get_file_paths<A: ArrayStringMethods>(&self, paths: &A) {
+        unsafe {
+            let paths = paths.as_ptr();
+            ffi::wxGenericDirCtrl_GetFilePaths(self.as_ptr(), paths)
+        }
     }
     fn get_filter(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxGenericDirCtrl_GetFilter(self.as_ptr())).into() }
@@ -2070,8 +2089,11 @@ pub trait GenericDirCtrlMethods: ControlMethods {
         unsafe { WxString::from_ptr(ffi::wxGenericDirCtrl_GetPath(self.as_ptr())).into() }
     }
     // NOT_SUPPORTED: fn GetPath1()
-    fn get_paths(&self, paths: *mut c_void) {
-        unsafe { ffi::wxGenericDirCtrl_GetPaths(self.as_ptr(), paths) }
+    fn get_paths<A: ArrayStringMethods>(&self, paths: &A) {
+        unsafe {
+            let paths = paths.as_ptr();
+            ffi::wxGenericDirCtrl_GetPaths(self.as_ptr(), paths)
+        }
     }
     // NOT_SUPPORTED: fn GetRootId()
     fn get_tree_ctrl(&self) -> *mut c_void {
@@ -2220,8 +2242,11 @@ pub trait HeaderCtrlMethods: ControlMethods {
             ffi::wxHeaderCtrl_ShowColumnsMenu(self.as_ptr(), pt, title)
         }
     }
-    fn add_columns_items(&self, menu: *mut c_void, id_columns_base: c_int) {
-        unsafe { ffi::wxHeaderCtrl_AddColumnsItems(self.as_ptr(), menu, id_columns_base) }
+    fn add_columns_items<M: MenuMethods>(&self, menu: &M, id_columns_base: c_int) {
+        unsafe {
+            let menu = menu.as_ptr();
+            ffi::wxHeaderCtrl_AddColumnsItems(self.as_ptr(), menu, id_columns_base)
+        }
     }
     fn show_customize_dialog(&self) -> bool {
         unsafe { ffi::wxHeaderCtrl_ShowCustomizeDialog(self.as_ptr()) }
@@ -2235,8 +2260,11 @@ pub trait HeaderCtrlMethods: ControlMethods {
     fn get_column_title_width_uint(&self, idx: c_uint) -> c_int {
         unsafe { ffi::wxHeaderCtrl_GetColumnTitleWidth1(self.as_ptr(), idx) }
     }
-    fn move_column_in_order_array(order: *mut c_void, idx: c_uint, pos: c_uint) {
-        unsafe { ffi::wxHeaderCtrl_MoveColumnInOrderArray(order, idx, pos) }
+    fn move_column_in_order_array<A: ArrayIntMethods>(order: &A, idx: c_uint, pos: c_uint) {
+        unsafe {
+            let order = order.as_ptr();
+            ffi::wxHeaderCtrl_MoveColumnInOrderArray(order, idx, pos)
+        }
     }
 }
 
@@ -2738,8 +2766,11 @@ pub trait ListBoxMethods: ControlMethods {
             ffi::wxListBox_SetStringSelection1(self.as_ptr(), s)
         }
     }
-    fn get_selections(&self, selections: *mut c_void) -> c_int {
-        unsafe { ffi::wxListBox_GetSelections(self.as_ptr(), selections) }
+    fn get_selections<A: ArrayIntMethods>(&self, selections: &A) -> c_int {
+        unsafe {
+            let selections = selections.as_ptr();
+            ffi::wxListBox_GetSelections(self.as_ptr(), selections)
+        }
     }
     fn hit_test_point<P: PointMethods>(&self, point: &P) -> c_int {
         unsafe {
@@ -5669,8 +5700,11 @@ pub trait TextCtrlMethods: ControlMethods {
     fn get_number_of_lines(&self) -> c_int {
         unsafe { ffi::wxTextCtrl_GetNumberOfLines(self.as_ptr()) }
     }
-    fn get_style(&self, position: c_long, style: *mut c_void) -> bool {
-        unsafe { ffi::wxTextCtrl_GetStyle(self.as_ptr(), position, style) }
+    fn get_style<T: TextAttrMethods>(&self, position: c_long, style: &T) -> bool {
+        unsafe {
+            let style = style.as_ptr();
+            ffi::wxTextCtrl_GetStyle(self.as_ptr(), position, style)
+        }
     }
     // NOT_SUPPORTED: fn HitTest()
     // NOT_SUPPORTED: fn HitTest1()
@@ -7349,14 +7383,23 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn handle_as_navigation_key(&self, event: *const c_void) -> bool {
         unsafe { ffi::wxWindow_HandleAsNavigationKey(self.as_ptr(), event) }
     }
-    fn handle_window_event(&self, event: *mut c_void) -> bool {
-        unsafe { ffi::wxWindow_HandleWindowEvent(self.as_ptr(), event) }
+    fn handle_window_event<E: EventMethods>(&self, event: &E) -> bool {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxWindow_HandleWindowEvent(self.as_ptr(), event)
+        }
     }
-    fn process_window_event(&self, event: *mut c_void) -> bool {
-        unsafe { ffi::wxWindow_ProcessWindowEvent(self.as_ptr(), event) }
+    fn process_window_event<E: EventMethods>(&self, event: &E) -> bool {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxWindow_ProcessWindowEvent(self.as_ptr(), event)
+        }
     }
-    fn process_window_event_locally(&self, event: *mut c_void) -> bool {
-        unsafe { ffi::wxWindow_ProcessWindowEventLocally(self.as_ptr(), event) }
+    fn process_window_event_locally<E: EventMethods>(&self, event: &E) -> bool {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxWindow_ProcessWindowEventLocally(self.as_ptr(), event)
+        }
     }
     fn pop_event_handler(&self, delete_handler: bool) -> WeakRef<EvtHandler> {
         unsafe {
@@ -7460,14 +7503,20 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn is_exposed_int(&self, x: c_int, y: c_int) -> bool {
         unsafe { ffi::wxWindow_IsExposed(self.as_ptr(), x, y) }
     }
-    fn is_exposed_point(&self, pt: *mut c_void) -> bool {
-        unsafe { ffi::wxWindow_IsExposed1(self.as_ptr(), pt) }
+    fn is_exposed_point<P: PointMethods>(&self, pt: &P) -> bool {
+        unsafe {
+            let pt = pt.as_ptr();
+            ffi::wxWindow_IsExposed1(self.as_ptr(), pt)
+        }
     }
     fn is_exposed_int_int(&self, x: c_int, y: c_int, w: c_int, h: c_int) -> bool {
         unsafe { ffi::wxWindow_IsExposed2(self.as_ptr(), x, y, w, h) }
     }
-    fn is_exposed_rect(&self, rect: *mut c_void) -> bool {
-        unsafe { ffi::wxWindow_IsExposed3(self.as_ptr(), rect) }
+    fn is_exposed_rect<R: RectMethods>(&self, rect: &R) -> bool {
+        unsafe {
+            let rect = rect.as_ptr();
+            ffi::wxWindow_IsExposed3(self.as_ptr(), rect)
+        }
     }
     fn is_shown(&self) -> bool {
         unsafe { ffi::wxWindow_IsShown(self.as_ptr()) }
@@ -7515,23 +7564,27 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn unset_tool_tip(&self) {
         unsafe { ffi::wxWindow_UnsetToolTip(self.as_ptr()) }
     }
-    fn get_popup_menu_selection_from_user_point<P: PointMethods>(
+    fn get_popup_menu_selection_from_user_point<M: MenuMethods, P: PointMethods>(
         &self,
-        menu: *mut c_void,
+        menu: &M,
         pos: &P,
     ) -> c_int {
         unsafe {
+            let menu = menu.as_ptr();
             let pos = pos.as_ptr();
             ffi::wxWindow_GetPopupMenuSelectionFromUser(self.as_ptr(), menu, pos)
         }
     }
-    fn get_popup_menu_selection_from_user_int(
+    fn get_popup_menu_selection_from_user_int<M: MenuMethods>(
         &self,
-        menu: *mut c_void,
+        menu: &M,
         x: c_int,
         y: c_int,
     ) -> c_int {
-        unsafe { ffi::wxWindow_GetPopupMenuSelectionFromUser1(self.as_ptr(), menu, x, y) }
+        unsafe {
+            let menu = menu.as_ptr();
+            ffi::wxWindow_GetPopupMenuSelectionFromUser1(self.as_ptr(), menu, x, y)
+        }
     }
     fn popup_menu_point<M: MenuMethods, P: PointMethods>(&self, menu: Option<&M>, pos: &P) -> bool {
         unsafe {

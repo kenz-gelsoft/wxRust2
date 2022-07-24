@@ -461,7 +461,7 @@ class GenericParams:
         for param in params:
             is_ptr_to_binding = param.type.is_ptr_to_binding()
             if (is_ptr_to_binding or
-                param.type.is_const_ref_to_binding()):
+                param.type.is_ref_to_binding()):
                 name = self._new_name_for(param.type)
                 self.names.append(param.type.make_generic(
                     name,

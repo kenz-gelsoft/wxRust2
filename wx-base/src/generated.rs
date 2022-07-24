@@ -327,8 +327,11 @@ wx_class! { TimerEvent =
         ObjectMethods
 }
 impl<const OWNED: bool> TimerEventIsOwned<OWNED> {
-    pub fn new(timer: *mut c_void) -> TimerEventIsOwned<OWNED> {
-        unsafe { TimerEventIsOwned(ffi::wxTimerEvent_new(timer)) }
+    pub fn new<T: TimerMethods>(timer: &T) -> TimerEventIsOwned<OWNED> {
+        unsafe {
+            let timer = timer.as_ptr();
+            TimerEventIsOwned(ffi::wxTimerEvent_new(timer))
+        }
     }
     pub fn none() -> Option<&'static Self> {
         None

@@ -189,10 +189,7 @@ impl EditableListboxWidgetsPage {
 
         let items = wx::ArrayString::new();
         if let Some(lbox) = self.lbox.borrow().as_ref() {
-            // TODO: provide safe solution
-            unsafe {
-                lbox.get_strings(items.as_ptr());
-            }
+            lbox.get_strings(&items);
             config_ui.sizer_lbox.detach_window(Some(lbox));
             lbox.destroy();
         }

@@ -448,14 +448,23 @@ pub trait EvtHandlerMethods: ObjectMethods {
     }
     // NOT_SUPPORTED: fn CallAfter()
     // BLOCKED: fn CallAfter1()
-    fn process_event(&self, event: *mut c_void) -> bool {
-        unsafe { ffi::wxEvtHandler_ProcessEvent(self.as_ptr(), event) }
+    fn process_event<E: EventMethods>(&self, event: &E) -> bool {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxEvtHandler_ProcessEvent(self.as_ptr(), event)
+        }
     }
-    fn process_event_locally(&self, event: *mut c_void) -> bool {
-        unsafe { ffi::wxEvtHandler_ProcessEventLocally(self.as_ptr(), event) }
+    fn process_event_locally<E: EventMethods>(&self, event: &E) -> bool {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxEvtHandler_ProcessEventLocally(self.as_ptr(), event)
+        }
     }
-    fn safely_process_event(&self, event: *mut c_void) -> bool {
-        unsafe { ffi::wxEvtHandler_SafelyProcessEvent(self.as_ptr(), event) }
+    fn safely_process_event<E: EventMethods>(&self, event: &E) -> bool {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxEvtHandler_SafelyProcessEvent(self.as_ptr(), event)
+        }
     }
     fn process_pending_events(&self) {
         unsafe { ffi::wxEvtHandler_ProcessPendingEvents(self.as_ptr()) }

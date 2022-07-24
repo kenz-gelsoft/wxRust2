@@ -472,7 +472,7 @@ class CxxType:
                 name,
                 name,
             )
-        if (self.is_const_ref_to_binding() or
+        if (self.is_ref_to_binding() or
             # So, taking pointer must be another expression for its lifetime.
             self._is_const_ref_to_string()):
             yield 'let %s = %s;' % (
