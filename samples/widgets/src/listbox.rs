@@ -522,6 +522,7 @@ impl ListboxWidgetsPage {
         }
 
         let items = wx::ArrayString::new();
+        let mut order: Vec<bool> = vec![];
         if let Some(lbox) = self.lbox.borrow().as_ref() {
             // TODO: remove (and delete) all lboxes
             let count = lbox.get_count();
@@ -529,11 +530,17 @@ impl ListboxWidgetsPage {
                 items.add(&lbox.get_string(n));
             }
 
+            if lbox.is_kind_of(Some(&wx::CheckListBox::class_info())) {
+                // TODO: safe downcasting
+                let check_lbox = unsafe { wx::CheckListBox::from_unowned_ptr(lbox.as_ptr()) };
+                for n in 0..count {
+                    order.push(check_lbox.is_checked(n));
+                }
+            }
+
             config_ui.sizer_lbox.detach_window(Some(lbox));
             lbox.destroy();
         }
-
-        // TODO: save/restore check state if CheckListBox
 
         if let Some(m) = LboxType::from(config_ui.radio_list_type.get_selection()) {
             let new_lbox = match m {
@@ -543,6 +550,9 @@ impl ListboxWidgetsPage {
                         .choices(items)
                         .style(flags)
                         .build();
+                    for n in 0..order.len() {
+                        check_lbox.check(n as u32, order[n]);
+                    }
                     // TODO: Support safe upcasting
                     unsafe { wx::ListBox::from_ptr(check_lbox.as_ptr()) }
                 }
