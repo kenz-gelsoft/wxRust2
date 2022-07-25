@@ -533,39 +533,41 @@ impl ListboxWidgetsPage {
             lbox.destroy();
         }
 
-        // TODO
-        // if let Some(m) = LboxType::from(config_ui.radio_sel_mode.get_selection()) {
-        //     match m {
-        //         LboxType::CheckListBox => {
-        //             // TODO
-        //         },
-        //         LboxType::RearrangeList => {
-        //             // TODO
-        //         },
-        //         LboxType::ListBox => {
+        // TODO: save/restore check state if CheckListBox
 
-        //         },
-        //         _ =>,
-        //     };
-        // }
+        if let Some(m) = LboxType::from(config_ui.radio_list_type.get_selection()) {
+            let new_lbox = match m {
+                LboxType::CheckListBox => {
+                    let check_lbox = wx::CheckListBox::builder(Some(&self.base))
+                        .id(ListboxPage::Listbox.into())
+                        .choices(items)
+                        .style(flags)
+                        .build();
+                    // TODO: Support safe upcasting
+                    unsafe { wx::ListBox::from_ptr(check_lbox.as_ptr()) }
+                }
+                // LboxType::RearrangeList => {
+                //     // TODO
+                // }
+                _ => wx::ListBox::builder(Some(&self.base))
+                    .id(ListboxPage::Listbox.into())
+                    .choices(items)
+                    .style(flags)
+                    .build(),
+            };
 
-        let new_lbox = wx::ListBox::builder(Some(&self.base))
-            .id(ListboxPage::Listbox.into())
-            .choices(items)
-            .style(flags)
-            .build();
+            let sizer_lbox = &config_ui.sizer_lbox;
+            sizer_lbox.add_window_int(
+                Some(&new_lbox),
+                1,
+                wx::GROW | wx::ALL,
+                5,
+                wx::Object::none(),
+            );
+            sizer_lbox.layout();
 
-        let sizer_lbox = &config_ui.sizer_lbox;
-        sizer_lbox.add_window_int(
-            Some(&new_lbox),
-            1,
-            wx::GROW | wx::ALL,
-            5,
-            wx::Object::none(),
-        );
-        sizer_lbox.layout();
-
-        *self.lbox.borrow_mut() = Some(new_lbox);
+            *self.lbox.borrow_mut() = Some(new_lbox);
+        }
     }
 
     fn get_valid_index_from_text(&self, text: &wx::TextCtrl) -> Option<u32> {
