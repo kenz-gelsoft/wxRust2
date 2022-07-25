@@ -251,6 +251,8 @@ bool wxCheckListBox_Create1(wxCheckListBox * self, wxWindow * parent, wxWindowID
 void wxCheckListBox_Check(wxCheckListBox * self, unsigned int item, bool check);
 bool wxCheckListBox_IsChecked(const wxCheckListBox * self, unsigned int item);
 unsigned int wxCheckListBox_GetCheckedItems(const wxCheckListBox * self, wxArrayInt * checked_items);
+// Mix-in(s) to wxCheckListBox
+wxItemContainer *wxCheckListBox_AsItemContainer(wxCheckListBox* obj);
 
 // CLASS: wxChoice
 wxChoice *wxChoice_new();

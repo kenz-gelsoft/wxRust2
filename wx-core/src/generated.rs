@@ -433,6 +433,17 @@ impl<const OWNED: bool> CheckListBoxIsOwned<OWNED> {
         None
     }
 }
+// Mix-in(s) to wxCheckListBox
+impl<const OWNED: bool> ItemContainerMethods for CheckListBoxIsOwned<OWNED> {
+    fn as_item_container(&self) -> *mut c_void {
+        unsafe { ffi::wxCheckListBox_AsItemContainer(self.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> ItemContainerImmutableMethods for CheckListBoxIsOwned<OWNED> {
+    fn as_item_container_immutable(&self) -> *mut c_void {
+        unsafe { ffi::wxCheckListBox_AsItemContainer(self.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> ListBoxMethods for CheckListBoxIsOwned<OWNED> {
     // NOT_SUPPORTED: fn Create()
     fn create_arraystring<

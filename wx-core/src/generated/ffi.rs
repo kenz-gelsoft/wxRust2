@@ -381,6 +381,8 @@ extern "C" {
         self_: *const c_void,
         checked_items: *mut c_void,
     ) -> c_uint;
+    // Mix-in(s) to wxCheckListBox
+    pub fn wxCheckListBox_AsItemContainer(obj: *mut c_void) -> *mut c_void;
 
     // wxChoice
     pub fn wxChoice_new() -> *mut c_void;

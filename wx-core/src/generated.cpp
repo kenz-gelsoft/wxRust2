@@ -558,6 +558,10 @@ bool wxCheckListBox_IsChecked(const wxCheckListBox * self, unsigned int item) {
 unsigned int wxCheckListBox_GetCheckedItems(const wxCheckListBox * self, wxArrayInt * checked_items) {
     return self->GetCheckedItems(*checked_items);
 }
+// Mix-in(s) to wxCheckListBox
+wxItemContainer *wxCheckListBox_AsItemContainer(wxCheckListBox* obj) {
+    return static_cast<wxItemContainer*>(obj);
+}
 
 // CLASS: wxChoice
 wxChoice *wxChoice_new() {

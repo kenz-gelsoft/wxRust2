@@ -92,11 +92,14 @@ class Class:
         return self.__base_classes[0]
     
     def mixins(self):
-        if len(self.__base_classes) < 2:
+        if not self.__base_classes:
             return
-        for mixin in self.__base_classes[1:]:
-            if self.manager.is_binding_type(mixin):
-                yield mixin
+        if len(self.__base_classes) > 1:
+            for mixin in self.__base_classes[1:]:
+                if self.manager.is_binding_type(mixin):
+                    yield mixin
+        for mixin in self.manager.by_name(self.__base_classes[0]).mixins():
+            yield mixin
 
     def _find_libname(self, e):
         library = self.config.get('library')
