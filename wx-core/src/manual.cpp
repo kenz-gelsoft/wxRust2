@@ -29,6 +29,11 @@ void *wxBitmapBundle_From(wxBitmap *bitmap) {
 #endif
 }
 
+// wxCLASSINFO()
+wxClassInfo *wxCheckListBox_CLASSINFO() {
+    return wxCLASSINFO(wxCheckListBox);
+}
+
 int wxRustMessageBox(const wxString *message, const wxString *caption, int style, wxWindow *parent, int x, int y) {
     return wxMessageBox(*message, *caption, style, parent, x, y);
 }

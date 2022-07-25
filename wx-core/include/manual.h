@@ -15,5 +15,8 @@ extern "C" {
     // wxBitmapBundle compatibility hack(for a while)
     void *wxBitmapBundle_From(wxBitmap *bitmap);
 
+    // wxCLASSINFO()
+    wxClassInfo *wxCheckListBox_CLASSINFO();
+
     int wxRustMessageBox(const wxString *message, const wxString *caption, int style, wxWindow *parent, int x, int y);
 }
