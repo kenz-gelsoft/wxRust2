@@ -10,7 +10,9 @@ wxml_files = [
     'wxml/classwx_box_sizer.xml',
     'wxml/classwx_button.xml',
     'wxml/classwx_check_box.xml',
+    'wxml/classwx_check_list_box.xml',
     'wxml/classwx_choice.xml',
+    'wxml/classwx_class_info.xml',
     'wxml/classwx_colour.xml',
     'wxml/classwx_colour_picker_ctrl.xml',
     'wxml/classwx_combo_box.xml',
@@ -353,8 +355,6 @@ blocklist = [
 [types.wxItemContainerImmutable]
 blocklist = [
     'wxItemContainerImmutable',
-    # TODO: use ArrayString::from_ptr()
-    'GetStrings',
 ]
 [types.wxListBox]
 blocklist = [
@@ -541,8 +541,6 @@ blocklist = [
 [types.wxTextAttr]
 blocklist = [
     'operator=',
-    # TODO: wxArrayInt is not supported
-    'GetTabs',
 ]
 wx31 = [
     'GetUnderlineColour',

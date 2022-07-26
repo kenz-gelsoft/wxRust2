@@ -21,6 +21,44 @@ pub trait WxRustMethods {
     }
 }
 
+// wxClassInfo
+pub trait ClassInfoMethods: WxRustMethods {
+    fn create_object(&self) -> Option<ObjectIsOwned<false>> {
+        unsafe { Object::option_from(ffi::wxClassInfo_CreateObject(self.as_ptr())) }
+    }
+    fn get_base_class_name1(&self) -> *const c_void {
+        unsafe { ffi::wxClassInfo_GetBaseClassName1(self.as_ptr()) }
+    }
+    fn get_base_class_name2(&self) -> *const c_void {
+        unsafe { ffi::wxClassInfo_GetBaseClassName2(self.as_ptr()) }
+    }
+    fn get_class_name(&self) -> *const c_void {
+        unsafe { ffi::wxClassInfo_GetClassName(self.as_ptr()) }
+    }
+    fn get_size(&self) -> c_int {
+        unsafe { ffi::wxClassInfo_GetSize(self.as_ptr()) }
+    }
+    fn is_dynamic(&self) -> bool {
+        unsafe { ffi::wxClassInfo_IsDynamic(self.as_ptr()) }
+    }
+    fn is_kind_of<C: ClassInfoMethods>(&self, info: Option<&C>) -> bool {
+        unsafe {
+            let info = match info {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxClassInfo_IsKindOf(self.as_ptr(), info)
+        }
+    }
+    fn find_class(class_name: &str) -> Option<ClassInfoIsOwned<false>> {
+        unsafe {
+            let class_name = WxString::from(class_name);
+            let class_name = class_name.as_ptr();
+            ClassInfo::option_from(ffi::wxClassInfo_FindClass(class_name))
+        }
+    }
+}
+
 // wxDateTime
 pub trait DateTimeMethods: WxRustMethods {
     fn reset_time(&self) -> &Self {
@@ -448,14 +486,23 @@ pub trait EvtHandlerMethods: ObjectMethods {
     }
     // NOT_SUPPORTED: fn CallAfter()
     // BLOCKED: fn CallAfter1()
-    fn process_event(&self, event: *mut c_void) -> bool {
-        unsafe { ffi::wxEvtHandler_ProcessEvent(self.as_ptr(), event) }
+    fn process_event<E: EventMethods>(&self, event: &E) -> bool {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxEvtHandler_ProcessEvent(self.as_ptr(), event)
+        }
     }
-    fn process_event_locally(&self, event: *mut c_void) -> bool {
-        unsafe { ffi::wxEvtHandler_ProcessEventLocally(self.as_ptr(), event) }
+    fn process_event_locally<E: EventMethods>(&self, event: &E) -> bool {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxEvtHandler_ProcessEventLocally(self.as_ptr(), event)
+        }
     }
-    fn safely_process_event(&self, event: *mut c_void) -> bool {
-        unsafe { ffi::wxEvtHandler_SafelyProcessEvent(self.as_ptr(), event) }
+    fn safely_process_event<E: EventMethods>(&self, event: &E) -> bool {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxEvtHandler_SafelyProcessEvent(self.as_ptr(), event)
+        }
     }
     fn process_pending_events(&self) {
         unsafe { ffi::wxEvtHandler_ProcessPendingEvents(self.as_ptr()) }
@@ -937,14 +984,20 @@ pub trait FileNameMethods: WxRustMethods {
 // wxObject
 pub trait ObjectMethods: WxRustMethods {
     // DTOR: fn ~wxObject()
-    fn get_class_info(&self) -> *mut c_void {
-        unsafe { ffi::wxObject_GetClassInfo(self.as_ptr()) }
+    fn get_class_info(&self) -> Option<ClassInfoIsOwned<false>> {
+        unsafe { ClassInfo::option_from(ffi::wxObject_GetClassInfo(self.as_ptr())) }
     }
     fn get_ref_data(&self) -> *mut c_void {
         unsafe { ffi::wxObject_GetRefData(self.as_ptr()) }
     }
-    fn is_kind_of(&self, info: *const c_void) -> bool {
-        unsafe { ffi::wxObject_IsKindOf(self.as_ptr(), info) }
+    fn is_kind_of<C: ClassInfoMethods>(&self, info: Option<&C>) -> bool {
+        unsafe {
+            let info = match info {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxObject_IsKindOf(self.as_ptr(), info)
+        }
     }
     fn is_same_as<O: ObjectMethods>(&self, obj: &O) -> bool {
         unsafe {

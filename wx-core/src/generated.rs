@@ -382,6 +382,113 @@ impl<const OWNED: bool> CheckBoxIsOwned<OWNED> {
     }
 }
 
+// wxCheckListBox
+wx_class! { CheckListBox =
+    CheckListBoxIsOwned<true>(wxCheckListBox) impl
+        CheckListBoxMethods,
+        // ListBoxMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> CheckListBoxIsOwned<OWNED> {
+    pub fn new_2step() -> CheckListBoxIsOwned<OWNED> {
+        unsafe { CheckListBoxIsOwned(ffi::wxCheckListBox_new()) }
+    }
+    // NOT_SUPPORTED: fn wxCheckListBox1()
+    pub fn new<
+        W: WindowMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        A: ArrayStringMethods,
+        V: ValidatorMethods,
+    >(
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        choices: &A,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> CheckListBoxIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let choices = choices.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            CheckListBoxIsOwned(ffi::wxCheckListBox_new2(
+                parent, id, pos, size, choices, style, validator, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+// Mix-in(s) to wxCheckListBox
+impl<const OWNED: bool> ItemContainerMethods for CheckListBoxIsOwned<OWNED> {
+    fn as_item_container(&self) -> *mut c_void {
+        unsafe { ffi::wxCheckListBox_AsItemContainer(self.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> ItemContainerImmutableMethods for CheckListBoxIsOwned<OWNED> {
+    fn as_item_container_immutable(&self) -> *mut c_void {
+        unsafe { ffi::wxCheckListBox_AsItemContainer(self.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> ListBoxMethods for CheckListBoxIsOwned<OWNED> {
+    // NOT_SUPPORTED: fn Create()
+    fn create_arraystring<
+        W: WindowMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        A: ArrayStringMethods,
+        V: ValidatorMethods,
+    >(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        choices: &A,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let choices = choices.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxCheckListBox_Create1(
+                self.as_ptr(),
+                parent,
+                id,
+                pos,
+                size,
+                choices,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+}
+
 // wxChoice
 wx_class! { Choice =
     ChoiceIsOwned<true>(wxChoice) impl

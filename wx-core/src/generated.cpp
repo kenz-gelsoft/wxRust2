@@ -539,6 +539,30 @@ void wxCheckBox_Set3StateValue(wxCheckBox * self, wxCheckBoxState state) {
     return self->Set3StateValue(state);
 }
 
+// CLASS: wxCheckListBox
+wxCheckListBox *wxCheckListBox_new() {
+    return new wxCheckListBox();
+}
+wxCheckListBox *wxCheckListBox_new2(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name) {
+    return new wxCheckListBox(parent, id, *pos, *size, *choices, style, *validator, *name);
+}
+bool wxCheckListBox_Create1(wxCheckListBox * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, *pos, *size, *choices, style, *validator, *name);
+}
+void wxCheckListBox_Check(wxCheckListBox * self, unsigned int item, bool check) {
+    return self->Check(item, check);
+}
+bool wxCheckListBox_IsChecked(const wxCheckListBox * self, unsigned int item) {
+    return self->IsChecked(item);
+}
+unsigned int wxCheckListBox_GetCheckedItems(const wxCheckListBox * self, wxArrayInt * checked_items) {
+    return self->GetCheckedItems(*checked_items);
+}
+// Mix-in(s) to wxCheckListBox
+wxItemContainer *wxCheckListBox_AsItemContainer(wxCheckListBox* obj) {
+    return static_cast<wxItemContainer*>(obj);
+}
+
 // CLASS: wxChoice
 wxChoice *wxChoice_new() {
     return new wxChoice();
@@ -1325,6 +1349,9 @@ void wxHeaderCtrl_UpdateColumn(wxHeaderCtrl * self, unsigned int idx) {
 void wxHeaderCtrl_SetColumnsOrder(wxHeaderCtrl * self, const wxArrayInt * order) {
     return self->SetColumnsOrder(*order);
 }
+wxArrayInt *wxHeaderCtrl_GetColumnsOrder(const wxHeaderCtrl * self) {
+    return new wxArrayInt(self->GetColumnsOrder());
+}
 unsigned int wxHeaderCtrl_GetColumnAt(const wxHeaderCtrl * self, unsigned int pos) {
     return self->GetColumnAt(pos);
 }
@@ -1616,6 +1643,9 @@ bool wxItemContainerImmutable_IsEmpty(const wxItemContainerImmutable * self) {
 }
 wxString *wxItemContainerImmutable_GetString(const wxItemContainerImmutable * self, unsigned int n) {
     return new wxString(self->GetString(n));
+}
+wxArrayString *wxItemContainerImmutable_GetStrings(const wxItemContainerImmutable * self) {
+    return new wxArrayString(self->GetStrings());
 }
 void wxItemContainerImmutable_SetString(wxItemContainerImmutable * self, unsigned int n, const wxString * string) {
     return self->SetString(n, *string);
@@ -2978,6 +3008,9 @@ wxString *wxTextAttr_GetParagraphStyleName(const wxTextAttr * self) {
 }
 long wxTextAttr_GetRightIndent(const wxTextAttr * self) {
     return self->GetRightIndent();
+}
+wxArrayInt *wxTextAttr_GetTabs(const wxTextAttr * self) {
+    return new wxArrayInt(self->GetTabs());
 }
 wxColour *wxTextAttr_GetTextColour(const wxTextAttr * self) {
     return new wxColour(self->GetTextColour());

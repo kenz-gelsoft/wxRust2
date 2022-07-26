@@ -349,6 +349,41 @@ extern "C" {
     pub fn wxCheckBox_SetValue(self_: *mut c_void, state: bool);
     pub fn wxCheckBox_Set3StateValue(self_: *mut c_void, state: c_int);
 
+    // wxCheckListBox
+    pub fn wxCheckListBox_new() -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxCheckListBox_new1(parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
+    pub fn wxCheckListBox_new2(
+        parent: *mut c_void,
+        id: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        choices: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxCheckListBox_Create(self_: *mut c_void, parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, n_strings: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> bool;
+    pub fn wxCheckListBox_Create1(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        choices: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    // DTOR: pub fn wxCheckListBox_~wxCheckListBox(self_: *mut c_void);
+    pub fn wxCheckListBox_Check(self_: *mut c_void, item: c_uint, check: bool);
+    pub fn wxCheckListBox_IsChecked(self_: *const c_void, item: c_uint) -> bool;
+    pub fn wxCheckListBox_GetCheckedItems(
+        self_: *const c_void,
+        checked_items: *mut c_void,
+    ) -> c_uint;
+    // Mix-in(s) to wxCheckListBox
+    pub fn wxCheckListBox_AsItemContainer(obj: *mut c_void) -> *mut c_void;
+
     // wxChoice
     pub fn wxChoice_new() -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxChoice_new1(parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
@@ -983,7 +1018,7 @@ extern "C" {
     pub fn wxHeaderCtrl_IsEmpty(self_: *const c_void) -> bool;
     pub fn wxHeaderCtrl_UpdateColumn(self_: *mut c_void, idx: c_uint);
     pub fn wxHeaderCtrl_SetColumnsOrder(self_: *mut c_void, order: *const c_void);
-    // NOT_SUPPORTED: pub fn wxHeaderCtrl_GetColumnsOrder(self_: *const c_void) -> wxArrayInt;
+    pub fn wxHeaderCtrl_GetColumnsOrder(self_: *const c_void) -> *mut c_void;
     pub fn wxHeaderCtrl_GetColumnAt(self_: *const c_void, pos: c_uint) -> c_uint;
     pub fn wxHeaderCtrl_GetColumnPos(self_: *const c_void, idx: c_uint) -> c_uint;
     pub fn wxHeaderCtrl_ResetColumnsOrder(self_: *mut c_void);
@@ -1207,7 +1242,7 @@ extern "C" {
     pub fn wxItemContainerImmutable_GetCount(self_: *const c_void) -> c_uint;
     pub fn wxItemContainerImmutable_IsEmpty(self_: *const c_void) -> bool;
     pub fn wxItemContainerImmutable_GetString(self_: *const c_void, n: c_uint) -> *mut c_void;
-    // BLOCKED: pub fn wxItemContainerImmutable_GetStrings(self_: *const c_void) -> wxArrayString;
+    pub fn wxItemContainerImmutable_GetStrings(self_: *const c_void) -> *mut c_void;
     pub fn wxItemContainerImmutable_SetString(self_: *mut c_void, n: c_uint, string: *const c_void);
     pub fn wxItemContainerImmutable_FindString(
         self_: *const c_void,
@@ -2196,7 +2231,7 @@ extern "C" {
     pub fn wxTextAttr_GetParagraphSpacingBefore(self_: *const c_void) -> c_int;
     pub fn wxTextAttr_GetParagraphStyleName(self_: *const c_void) -> *mut c_void;
     pub fn wxTextAttr_GetRightIndent(self_: *const c_void) -> c_long;
-    // BLOCKED: pub fn wxTextAttr_GetTabs(self_: *const c_void) -> *const c_void;
+    pub fn wxTextAttr_GetTabs(self_: *const c_void) -> *mut c_void;
     pub fn wxTextAttr_GetTextColour(self_: *const c_void) -> *mut c_void;
     pub fn wxTextAttr_GetTextEffectFlags(self_: *const c_void) -> c_int;
     pub fn wxTextAttr_GetTextEffects(self_: *const c_void) -> c_int;

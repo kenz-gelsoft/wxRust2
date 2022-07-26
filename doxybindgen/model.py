@@ -41,6 +41,7 @@ OS_UNSUPPORTED_TYPES = [
     'wxAccessible',
 ]
 MANUAL_BINDINGS = [
+    'wxArrayInt',
     'wxArrayString',
     'wxSizerItemList',
     'wxWindowList',
@@ -91,11 +92,14 @@ class Class:
         return self.__base_classes[0]
     
     def mixins(self):
-        if len(self.__base_classes) < 2:
+        if not self.__base_classes:
             return
-        for mixin in self.__base_classes[1:]:
-            if self.manager.is_binding_type(mixin):
-                yield mixin
+        if len(self.__base_classes) > 1:
+            for mixin in self.__base_classes[1:]:
+                if self.manager.is_binding_type(mixin):
+                    yield mixin
+        for mixin in self.manager.by_name(self.__base_classes[0]).mixins():
+            yield mixin
 
     def _find_libname(self, e):
         library = self.config.get('library')
@@ -471,7 +475,7 @@ class CxxType:
                 name,
                 name,
             )
-        if (self.is_const_ref_to_binding() or
+        if (self.is_ref_to_binding() or
             # So, taking pointer must be another expression for its lifetime.
             self._is_const_ref_to_string()):
             yield 'let %s = %s;' % (

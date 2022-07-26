@@ -14,6 +14,25 @@ use crate::wx_class;
 mod ffi;
 pub mod methods;
 
+// wxClassInfo
+wx_class! { ClassInfo =
+    ClassInfoIsOwned<true>(wxClassInfo) impl
+        ClassInfoMethods
+}
+impl<const OWNED: bool> ClassInfoIsOwned<OWNED> {
+    // NOT_SUPPORTED: fn wxClassInfo()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for ClassInfoIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxClassInfo_delete(self.0) }
+        }
+    }
+}
+
 // wxDateTime
 wx_class! { DateTime =
     DateTimeIsOwned<true>(wxDateTime) impl
@@ -327,8 +346,11 @@ wx_class! { TimerEvent =
         ObjectMethods
 }
 impl<const OWNED: bool> TimerEventIsOwned<OWNED> {
-    pub fn new(timer: *mut c_void) -> TimerEventIsOwned<OWNED> {
-        unsafe { TimerEventIsOwned(ffi::wxTimerEvent_new(timer)) }
+    pub fn new<T: TimerMethods>(timer: &T) -> TimerEventIsOwned<OWNED> {
+        unsafe {
+            let timer = timer.as_ptr();
+            TimerEventIsOwned(ffi::wxTimerEvent_new(timer))
+        }
     }
     pub fn none() -> Option<&'static Self> {
         None
