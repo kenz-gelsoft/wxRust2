@@ -41,9 +41,9 @@ class RustClassBinding:
             for line in self._trait_with_methods():
                 yield line
         else:
-            if self.mixed_into():
-                # Don't generate impl if mixin class
-                return
+            # if self.mixed_into():
+            #     # Don't generate impl if mixin class
+            #     return
             unprefixed = self.__model.unprefixed()
             yield 'wx_class! { %s = ' % (unprefixed,)
             yield '    %sIsOwned<true>(%s) impl' % (
@@ -52,6 +52,20 @@ class RustClassBinding:
             )
             yield ',\n'.join(self._ancestor_methods())
             yield '}'
+            if self.mixed_into():
+                yield 'impl<const OWNED: bool> %sMethods for %sIsOwned<OWNED> {' % (
+                    unprefixed,
+                    unprefixed,
+                )
+                yield '    fn as_%s(&self) -> *mut c_void {' % (
+                    pascal_to_snake(unprefixed),
+                )
+                yield '        unsafe { ffi::%s_As%s(self.as_ptr()) }' % (
+                    self.__model.name,
+                    unprefixed,
+                )
+                yield '    }'
+                yield '}'
             for line in self._impl_with_ctors():
                 yield line
             for line in self._impl_drop_if_needed():
@@ -62,6 +76,8 @@ class RustClassBinding:
                 yield line
     
     def _ancestor_methods(self):
+        if self.mixed_into():
+            return
         for ancestor in self.__model.manager.ancestors_of(self.__model):
             comment_or_not = ''
             if any(m.is_non_virtual_override(ancestor) for m in self.__methods):
