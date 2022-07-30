@@ -488,6 +488,11 @@ impl<const OWNED: bool> ListBoxMethods for CheckListBoxIsOwned<OWNED> {
         }
     }
 }
+impl<const OWNED: bool> From<CheckListBoxIsOwned<OWNED>> for ListBoxIsOwned<OWNED> {
+    fn from(o: CheckListBoxIsOwned<OWNED>) -> Self {
+        unsafe { ListBoxIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 
 // wxChoice
 wx_class! { Choice =
