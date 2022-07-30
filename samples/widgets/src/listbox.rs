@@ -530,9 +530,7 @@ impl ListboxWidgetsPage {
                 items.add(&lbox.get_string(n));
             }
 
-            if lbox.is_kind_of(Some(&wx::CheckListBox::class_info())) {
-                // TODO: safe downcasting
-                let check_lbox = unsafe { wx::CheckListBox::from_unowned_ptr(lbox.as_ptr()) };
+            if let Ok(check_lbox) = wx::CheckListBoxIsOwned::<false>::try_from(lbox) {
                 for n in 0..count {
                     order.push(check_lbox.is_checked(n));
                 }
