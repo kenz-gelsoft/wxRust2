@@ -2435,7 +2435,7 @@ pub trait IconMethods: GDIObjectMethods {
 }
 
 // wxItemContainer
-pub trait ItemContainerMethods: ItemContainerImmutableMethods + AsRef<ItemContainer> {
+pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     fn append_str(&self, item: &str) -> c_int {
         unsafe {
             let item = WxString::from(item);
@@ -2634,45 +2634,41 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods + AsRef<ItemContai
 }
 
 // wxItemContainerImmutable
-pub trait ItemContainerImmutableMethods: WxRustMethods {
-    fn as_item_container_immutable(&self) -> *mut c_void;
+pub trait ItemContainerImmutableMethods: WxRustMethods + AsRef<ItemContainerImmutable> {
     fn set_selection(&self, n: c_int) {
-        unsafe { ffi::wxItemContainerImmutable_SetSelection(self.as_item_container_immutable(), n) }
+        unsafe { ffi::wxItemContainerImmutable_SetSelection(self.as_ref().as_ptr(), n) }
     }
     fn get_selection(&self) -> c_int {
-        unsafe { ffi::wxItemContainerImmutable_GetSelection(self.as_item_container_immutable()) }
+        unsafe { ffi::wxItemContainerImmutable_GetSelection(self.as_ref().as_ptr()) }
     }
     fn set_string_selection(&self, string: &str) -> bool {
         unsafe {
             let string = WxString::from(string);
             let string = string.as_ptr();
-            ffi::wxItemContainerImmutable_SetStringSelection(
-                self.as_item_container_immutable(),
-                string,
-            )
+            ffi::wxItemContainerImmutable_SetStringSelection(self.as_ref().as_ptr(), string)
         }
     }
     fn get_string_selection(&self) -> String {
         unsafe {
             WxString::from_ptr(ffi::wxItemContainerImmutable_GetStringSelection(
-                self.as_item_container_immutable(),
+                self.as_ref().as_ptr(),
             ))
             .into()
         }
     }
     fn select(&self, n: c_int) {
-        unsafe { ffi::wxItemContainerImmutable_Select(self.as_item_container_immutable(), n) }
+        unsafe { ffi::wxItemContainerImmutable_Select(self.as_ref().as_ptr(), n) }
     }
     fn get_count(&self) -> c_uint {
-        unsafe { ffi::wxItemContainerImmutable_GetCount(self.as_item_container_immutable()) }
+        unsafe { ffi::wxItemContainerImmutable_GetCount(self.as_ref().as_ptr()) }
     }
     fn is_empty(&self) -> bool {
-        unsafe { ffi::wxItemContainerImmutable_IsEmpty(self.as_item_container_immutable()) }
+        unsafe { ffi::wxItemContainerImmutable_IsEmpty(self.as_ref().as_ptr()) }
     }
     fn get_string(&self, n: c_uint) -> String {
         unsafe {
             WxString::from_ptr(ffi::wxItemContainerImmutable_GetString(
-                self.as_item_container_immutable(),
+                self.as_ref().as_ptr(),
                 n,
             ))
             .into()
@@ -2681,7 +2677,7 @@ pub trait ItemContainerImmutableMethods: WxRustMethods {
     fn get_strings(&self) -> ArrayString {
         unsafe {
             ArrayString::from_ptr(ffi::wxItemContainerImmutable_GetStrings(
-                self.as_item_container_immutable(),
+                self.as_ref().as_ptr(),
             ))
         }
     }
@@ -2689,18 +2685,14 @@ pub trait ItemContainerImmutableMethods: WxRustMethods {
         unsafe {
             let string = WxString::from(string);
             let string = string.as_ptr();
-            ffi::wxItemContainerImmutable_SetString(self.as_item_container_immutable(), n, string)
+            ffi::wxItemContainerImmutable_SetString(self.as_ref().as_ptr(), n, string)
         }
     }
     fn find_string(&self, string: &str, case_sensitive: bool) -> c_int {
         unsafe {
             let string = WxString::from(string);
             let string = string.as_ptr();
-            ffi::wxItemContainerImmutable_FindString(
-                self.as_item_container_immutable(),
-                string,
-                case_sensitive,
-            )
+            ffi::wxItemContainerImmutable_FindString(self.as_ref().as_ptr(), string, case_sensitive)
         }
     }
 }
