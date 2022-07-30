@@ -390,7 +390,8 @@ wx_class! { CheckListBox =
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
-        ObjectMethods
+        ObjectMethods,
+        ItemContainerMethods
 }
 impl<const OWNED: bool> CheckListBoxIsOwned<OWNED> {
     pub fn new_2step() -> CheckListBoxIsOwned<OWNED> {
@@ -434,9 +435,13 @@ impl<const OWNED: bool> CheckListBoxIsOwned<OWNED> {
     }
 }
 // Mix-in(s) to wxCheckListBox
-impl<const OWNED: bool> ItemContainerMethods for CheckListBoxIsOwned<OWNED> {
-    fn as_item_container(&self) -> *mut c_void {
-        unsafe { ffi::wxCheckListBox_AsItemContainer(self.as_ptr()) }
+impl<const OWNED: bool> AsRef<ItemContainer> for CheckListBoxIsOwned<OWNED> {
+    fn as_ref(&self) -> &ItemContainer {
+        unsafe {
+            let p = &ffi::wxCheckListBox_AsItemContainer(self.as_ptr()) as *const *mut c_void
+                as *mut ItemContainer;
+            p.as_ref().unwrap()
+        }
     }
 }
 impl<const OWNED: bool> ItemContainerImmutableMethods for CheckListBoxIsOwned<OWNED> {
@@ -496,7 +501,8 @@ wx_class! { Choice =
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
-        ObjectMethods
+        ObjectMethods,
+        ItemContainerMethods
 }
 impl<const OWNED: bool> ChoiceIsOwned<OWNED> {
     pub fn new_2step() -> ChoiceIsOwned<OWNED> {
@@ -540,9 +546,13 @@ impl<const OWNED: bool> ChoiceIsOwned<OWNED> {
     }
 }
 // Mix-in(s) to wxChoice
-impl<const OWNED: bool> ItemContainerMethods for ChoiceIsOwned<OWNED> {
-    fn as_item_container(&self) -> *mut c_void {
-        unsafe { ffi::wxChoice_AsItemContainer(self.as_ptr()) }
+impl<const OWNED: bool> AsRef<ItemContainer> for ChoiceIsOwned<OWNED> {
+    fn as_ref(&self) -> &ItemContainer {
+        unsafe {
+            let p = &ffi::wxChoice_AsItemContainer(self.as_ptr()) as *const *mut c_void
+                as *mut ItemContainer;
+            p.as_ref().unwrap()
+        }
     }
 }
 impl<const OWNED: bool> ItemContainerImmutableMethods for ChoiceIsOwned<OWNED> {
@@ -647,6 +657,7 @@ wx_class! { ComboBox =
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods,
+        ItemContainerMethods,
         TextEntryMethods
 }
 impl<const OWNED: bool> ComboBoxIsOwned<OWNED> {
@@ -694,9 +705,13 @@ impl<const OWNED: bool> ComboBoxIsOwned<OWNED> {
     }
 }
 // Mix-in(s) to wxComboBox
-impl<const OWNED: bool> ItemContainerMethods for ComboBoxIsOwned<OWNED> {
-    fn as_item_container(&self) -> *mut c_void {
-        unsafe { ffi::wxComboBox_AsItemContainer(self.as_ptr()) }
+impl<const OWNED: bool> AsRef<ItemContainer> for ComboBoxIsOwned<OWNED> {
+    fn as_ref(&self) -> &ItemContainer {
+        unsafe {
+            let p = &ffi::wxComboBox_AsItemContainer(self.as_ptr()) as *const *mut c_void
+                as *mut ItemContainer;
+            p.as_ref().unwrap()
+        }
     }
 }
 impl<const OWNED: bool> ItemContainerImmutableMethods for ComboBoxIsOwned<OWNED> {
@@ -1486,28 +1501,36 @@ impl<const OWNED: bool> Drop for IconIsOwned<OWNED> {
     }
 }
 
-// // wxItemContainer
-// wx_class! { ItemContainer =
-//     ItemContainerIsOwned<true>(wxItemContainer) impl
-
-// }
-// impl<const OWNED: bool> ItemContainerMethods for ItemContainerIsOwned<OWNED> {
-//     fn as_item_container(&self) -> *mut c_void {
-//         unsafe { ffi::wxItemContainer_AsItemContainer(self.as_ptr()) }
-//     }
-// }
-// impl<const OWNED: bool> ItemContainerIsOwned<OWNED> {
-//     pub fn none() -> Option<&'static Self> {
-//         None
-//     }
-// }
-// impl<const OWNED: bool> Drop for ItemContainerIsOwned<OWNED> {
-//     fn drop(&mut self) {
-//         if OWNED {
-//             unsafe { ffi::wxItemContainer_delete(self.0) }
-//         }
-//     }
-// }
+// wxItemContainer
+wx_class! { ItemContainer =
+    ItemContainerIsOwned<true>(wxItemContainer) impl
+        ItemContainerMethods
+}
+impl<const OWNED: bool> AsRef<ItemContainer> for ItemContainerIsOwned<OWNED> {
+    fn as_ref(&self) -> &ItemContainer {
+        unsafe {
+            let p = self.as_ptr() as *mut ItemContainer;
+            p.as_ref().unwrap()
+        }
+    }
+}
+impl<const OWNED: bool> ItemContainerImmutableMethods for ItemContainerIsOwned<OWNED> {
+    fn as_item_container_immutable(&self) -> *mut c_void {
+        unsafe { self.as_ptr() }
+    }
+}
+impl<const OWNED: bool> ItemContainerIsOwned<OWNED> {
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for ItemContainerIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxItemContainer_delete(self.0) }
+        }
+    }
+}
 
 // // wxItemContainerImmutable
 // wx_class! { ItemContainerImmutable =
@@ -1540,7 +1563,8 @@ wx_class! { ListBox =
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
-        ObjectMethods
+        ObjectMethods,
+        ItemContainerMethods
 }
 impl<const OWNED: bool> ListBoxIsOwned<OWNED> {
     pub fn new_2step() -> ListBoxIsOwned<OWNED> {
@@ -1584,9 +1608,13 @@ impl<const OWNED: bool> ListBoxIsOwned<OWNED> {
     }
 }
 // Mix-in(s) to wxListBox
-impl<const OWNED: bool> ItemContainerMethods for ListBoxIsOwned<OWNED> {
-    fn as_item_container(&self) -> *mut c_void {
-        unsafe { ffi::wxListBox_AsItemContainer(self.as_ptr()) }
+impl<const OWNED: bool> AsRef<ItemContainer> for ListBoxIsOwned<OWNED> {
+    fn as_ref(&self) -> &ItemContainer {
+        unsafe {
+            let p = &ffi::wxListBox_AsItemContainer(self.as_ptr()) as *const *mut c_void
+                as *mut ItemContainer;
+            p.as_ref().unwrap()
+        }
     }
 }
 impl<const OWNED: bool> ItemContainerImmutableMethods for ListBoxIsOwned<OWNED> {
