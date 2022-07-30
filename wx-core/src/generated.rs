@@ -646,7 +646,8 @@ wx_class! { ComboBox =
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
-        ObjectMethods
+        ObjectMethods,
+        TextEntryMethods
 }
 impl<const OWNED: bool> ComboBoxIsOwned<OWNED> {
     pub fn new_2step() -> ComboBoxIsOwned<OWNED> {
@@ -703,9 +704,13 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for ComboBoxIsOwned<OWNED>
         unsafe { ffi::wxComboBox_AsItemContainer(self.as_ptr()) }
     }
 }
-impl<const OWNED: bool> TextEntryMethods for ComboBoxIsOwned<OWNED> {
-    fn as_text_entry(&self) -> *mut c_void {
-        unsafe { ffi::wxComboBox_AsTextEntry(self.as_ptr()) }
+impl<const OWNED: bool> AsRef<TextEntry> for ComboBoxIsOwned<OWNED> {
+    fn as_ref(&self) -> &TextEntry {
+        unsafe {
+            let p =
+                &ffi::wxComboBox_AsTextEntry(self.as_ptr()) as *const *mut c_void as *mut TextEntry;
+            p.as_ref().unwrap()
+        }
     }
 }
 
@@ -1481,52 +1486,52 @@ impl<const OWNED: bool> Drop for IconIsOwned<OWNED> {
     }
 }
 
-// wxItemContainer
-wx_class! { ItemContainer =
-    ItemContainerIsOwned<true>(wxItemContainer) impl
+// // wxItemContainer
+// wx_class! { ItemContainer =
+//     ItemContainerIsOwned<true>(wxItemContainer) impl
 
-}
-impl<const OWNED: bool> ItemContainerMethods for ItemContainerIsOwned<OWNED> {
-    fn as_item_container(&self) -> *mut c_void {
-        unsafe { ffi::wxItemContainer_AsItemContainer(self.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> ItemContainerIsOwned<OWNED> {
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for ItemContainerIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxItemContainer_delete(self.0) }
-        }
-    }
-}
+// }
+// impl<const OWNED: bool> ItemContainerMethods for ItemContainerIsOwned<OWNED> {
+//     fn as_item_container(&self) -> *mut c_void {
+//         unsafe { ffi::wxItemContainer_AsItemContainer(self.as_ptr()) }
+//     }
+// }
+// impl<const OWNED: bool> ItemContainerIsOwned<OWNED> {
+//     pub fn none() -> Option<&'static Self> {
+//         None
+//     }
+// }
+// impl<const OWNED: bool> Drop for ItemContainerIsOwned<OWNED> {
+//     fn drop(&mut self) {
+//         if OWNED {
+//             unsafe { ffi::wxItemContainer_delete(self.0) }
+//         }
+//     }
+// }
 
-// wxItemContainerImmutable
-wx_class! { ItemContainerImmutable =
-    ItemContainerImmutableIsOwned<true>(wxItemContainerImmutable) impl
+// // wxItemContainerImmutable
+// wx_class! { ItemContainerImmutable =
+//     ItemContainerImmutableIsOwned<true>(wxItemContainerImmutable) impl
 
-}
-impl<const OWNED: bool> ItemContainerImmutableMethods for ItemContainerImmutableIsOwned<OWNED> {
-    fn as_item_container_immutable(&self) -> *mut c_void {
-        unsafe { ffi::wxItemContainerImmutable_AsItemContainerImmutable(self.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> ItemContainerImmutableIsOwned<OWNED> {
-    // BLOCKED: fn wxItemContainerImmutable()
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for ItemContainerImmutableIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxItemContainerImmutable_delete(self.0) }
-        }
-    }
-}
+// }
+// impl<const OWNED: bool> ItemContainerImmutableMethods for ItemContainerImmutableIsOwned<OWNED> {
+//     fn as_item_container_immutable(&self) -> *mut c_void {
+//         unsafe { ffi::wxItemContainerImmutable_AsItemContainerImmutable(self.as_ptr()) }
+//     }
+// }
+// impl<const OWNED: bool> ItemContainerImmutableIsOwned<OWNED> {
+//     // BLOCKED: fn wxItemContainerImmutable()
+//     pub fn none() -> Option<&'static Self> {
+//         None
+//     }
+// }
+// impl<const OWNED: bool> Drop for ItemContainerImmutableIsOwned<OWNED> {
+//     fn drop(&mut self) {
+//         if OWNED {
+//             unsafe { ffi::wxItemContainerImmutable_delete(self.0) }
+//         }
+//     }
+// }
 
 // wxListBox
 wx_class! { ListBox =
@@ -2276,7 +2281,8 @@ wx_class! { TextCtrl =
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
-        ObjectMethods
+        ObjectMethods,
+        TextEntryMethods
 }
 impl<const OWNED: bool> TextCtrlIsOwned<OWNED> {
     pub fn new_2step() -> TextCtrlIsOwned<OWNED> {
@@ -2314,20 +2320,24 @@ impl<const OWNED: bool> TextCtrlIsOwned<OWNED> {
     }
 }
 // Mix-in(s) to wxTextCtrl
-impl<const OWNED: bool> TextEntryMethods for TextCtrlIsOwned<OWNED> {
-    fn as_text_entry(&self) -> *mut c_void {
-        unsafe { ffi::wxTextCtrl_AsTextEntry(self.as_ptr()) }
+impl<const OWNED: bool> AsRef<TextEntry> for TextCtrlIsOwned<OWNED> {
+    fn as_ref(&self) -> &TextEntry {
+        unsafe {
+            let p = &ffi::wxTextCtrl_AsTextEntry(self.as_ptr()) as *const *mut c_void
+                as *const TextEntry;
+            p.as_ref().unwrap()
+        }
     }
 }
 
 // wxTextEntry
 wx_class! { TextEntry =
     TextEntryIsOwned<true>(wxTextEntry) impl
-
+        TextEntryMethods
 }
-impl<const OWNED: bool> TextEntryMethods for TextEntryIsOwned<OWNED> {
-    fn as_text_entry(&self) -> *mut c_void {
-        unsafe { ffi::wxTextEntry_AsTextEntry(self.as_ptr()) }
+impl<const OWNED: bool> AsRef<TextEntry> for TextEntryIsOwned<OWNED> {
+    fn as_ref(&self) -> &TextEntry {
+        unsafe { (self.as_ptr() as *const TextEntry).as_ref().unwrap() }
     }
 }
 impl<const OWNED: bool> TextEntryIsOwned<OWNED> {
