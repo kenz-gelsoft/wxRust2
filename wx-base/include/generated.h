@@ -87,6 +87,7 @@ wxDateTime *wxDateTime_Today();
 wxDateTime *wxDateTime_UNow();
 
 // CLASS: wxEvent
+wxClassInfo *wxEvent_CLASSINFO();
 wxEvent * wxEvent_Clone(const wxEvent * self);
 wxObject * wxEvent_GetEventObject(const wxEvent * self);
 int wxEvent_GetId(const wxEvent * self);
@@ -103,6 +104,7 @@ void wxEvent_Skip(wxEvent * self, bool skip);
 int wxEvent_StopPropagation(wxEvent * self);
 
 // CLASS: wxEvtHandler
+wxClassInfo *wxEvtHandler_CLASSINFO();
 void wxEvtHandler_QueueEvent(wxEvtHandler * self, wxEvent * event);
 void wxEvtHandler_AddPendingEvent(wxEvtHandler * self, const wxEvent * event);
 bool wxEvtHandler_ProcessEvent(wxEvtHandler * self, wxEvent * event);
@@ -203,6 +205,7 @@ wxString *wxFileName_FileNameToURL(const wxFileName * filename);
 wxString *wxFileName_StripExtension(const wxString * fullname);
 
 // CLASS: wxObject
+wxClassInfo *wxObject_CLASSINFO();
 wxObject *wxObject_new();
 wxObject *wxObject_new1(const wxObject * other);
 wxClassInfo * wxObject_GetClassInfo(const wxObject * self);
@@ -248,6 +251,7 @@ wxString *wxStandardPaths_MSWGetShellDir(int csidl);
 #endif
 
 // CLASS: wxTimer
+wxClassInfo *wxTimer_CLASSINFO();
 wxTimer *wxTimer_new();
 wxTimer *wxTimer_new1(wxEvtHandler * owner, int id);
 int wxTimer_GetId(const wxTimer * self);
@@ -262,6 +266,7 @@ bool wxTimer_StartOnce(wxTimer * self, int milliseconds);
 void wxTimer_Stop(wxTimer * self);
 
 // CLASS: wxTimerEvent
+wxClassInfo *wxTimerEvent_CLASSINFO();
 wxTimerEvent *wxTimerEvent_new(wxTimer * timer);
 int wxTimerEvent_GetInterval(const wxTimerEvent * self);
 wxTimer * wxTimerEvent_GetTimer(const wxTimerEvent * self);

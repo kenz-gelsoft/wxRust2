@@ -47,10 +47,6 @@ pub mod methods {
         fn sub_menu<M: MenuMethods>(self, s: &str, submenu: &M) -> Self;
         fn separator(self) -> Self;
     }
-    
-    pub trait ClassInfoMacro: ObjectMethods {
-        fn class_info() -> ClassInfoIsOwned<false>;
-    }
 }
 use methods::*;
 
@@ -73,9 +69,6 @@ mod ffi {
 
         // wxBitmapBundle compatibility hack(for a while)
         pub fn wxBitmapBundle_From(bitmap: *mut c_void) -> *mut c_void;
-
-        // wxCLASSINFO()
-        pub fn wxCheckListBox_CLASSINFO() -> *mut c_void;
 
         pub fn wxRustMessageBox(
             message: *const c_void,
@@ -1774,13 +1767,6 @@ impl<const OWNED: bool> Drop for WindowListIsOwned<OWNED> {
 impl From<Bitmap> for BitmapBundle {
     fn from(bitmap: Bitmap) -> Self {
         unsafe { BitmapBundle::from_ptr(ffi::wxBitmapBundle_From(bitmap.as_ptr())) }
-    }
-}
-
-// wxCLASSINFO()
-impl ClassInfoMacro for CheckListBox {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxCheckListBox_CLASSINFO()) }
     }
 }
 

@@ -206,6 +206,7 @@ extern "C" {
     pub fn wxDateTime_UNow() -> *mut c_void;
 
     // wxEvent
+    pub fn wxEvent_CLASSINFO() -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxEvent_new(id: c_int, event_type: wxEventType) -> *mut c_void;
     pub fn wxEvent_Clone(self_: *const c_void) -> *mut c_void;
     pub fn wxEvent_GetEventObject(self_: *const c_void) -> *mut c_void;
@@ -226,6 +227,7 @@ extern "C" {
     pub fn wxEvent_StopPropagation(self_: *mut c_void) -> c_int;
 
     // wxEvtHandler
+    pub fn wxEvtHandler_CLASSINFO() -> *mut c_void;
     pub fn wxEvtHandler_QueueEvent(self_: *mut c_void, event: *mut c_void);
     pub fn wxEvtHandler_AddPendingEvent(self_: *mut c_void, event: *const c_void);
     // NOT_SUPPORTED: pub fn wxEvtHandler_CallAfter(self_: *mut c_void, method: *mut c_void, x1: T1, None: ...);
@@ -410,6 +412,7 @@ extern "C" {
     pub fn wxFileName_StripExtension(fullname: *const c_void) -> *mut c_void;
 
     // wxObject
+    pub fn wxObject_CLASSINFO() -> *mut c_void;
     pub fn wxObject_new() -> *mut c_void;
     pub fn wxObject_new1(other: *const c_void) -> *mut c_void;
     // DTOR: pub fn wxObject_~wxObject(self_: *mut c_void);
@@ -453,6 +456,7 @@ extern "C" {
     pub fn wxStandardPaths_MSWGetShellDir(csidl: c_int) -> *mut c_void;
 
     // wxTimer
+    pub fn wxTimer_CLASSINFO() -> *mut c_void;
     pub fn wxTimer_new() -> *mut c_void;
     pub fn wxTimer_new1(owner: *mut c_void, id: c_int) -> *mut c_void;
     // DTOR: pub fn wxTimer_~wxTimer(self_: *mut c_void);
@@ -468,6 +472,7 @@ extern "C" {
     pub fn wxTimer_Stop(self_: *mut c_void);
 
     // wxTimerEvent
+    pub fn wxTimerEvent_CLASSINFO() -> *mut c_void;
     pub fn wxTimerEvent_new(timer: *mut c_void) -> *mut c_void;
     pub fn wxTimerEvent_GetInterval(self_: *const c_void) -> c_int;
     pub fn wxTimerEvent_GetTimer(self_: *const c_void) -> *mut c_void;

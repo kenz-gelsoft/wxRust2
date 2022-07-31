@@ -22,6 +22,7 @@ typedef wxBitmap wxBitmapBundle;
 extern "C" {
 
 // CLASS: wxAnyButton
+wxClassInfo *wxAnyButton_CLASSINFO();
 wxAnyButton *wxAnyButton_new();
 wxBitmap *wxAnyButton_GetBitmap(const wxAnyButton * self);
 wxBitmap *wxAnyButton_GetBitmapCurrent(const wxAnyButton * self);
@@ -41,6 +42,7 @@ void wxAnyButton_SetBitmapMargins1(wxAnyButton * self, const wxSize * sz);
 void wxAnyButton_SetBitmapPosition(wxAnyButton * self, wxDirection dir);
 
 // CLASS: wxArtProvider
+wxClassInfo *wxArtProvider_CLASSINFO();
 bool wxArtProvider_Delete(wxArtProvider * provider);
 wxBitmap *wxArtProvider_GetBitmap(const wxArtID * id, const wxArtClient * client, const wxSize * size);
 #if wxCHECK_VERSION(3, 1, 0)
@@ -64,6 +66,7 @@ wxArtID *wxArtProvider_GetMessageBoxIconId(int flags);
 wxIcon *wxArtProvider_GetMessageBoxIcon(int flags);
 
 // CLASS: wxBitmap
+wxClassInfo *wxBitmap_CLASSINFO();
 wxBitmap *wxBitmap_new();
 wxBitmap *wxBitmap_new1(const wxBitmap * bitmap);
 wxBitmap *wxBitmap_new3(int width, int height, int depth);
@@ -180,6 +183,7 @@ wxBitmapBundle *wxBitmapBundle_FromSVGResource(const wxString * name, const wxSi
 #endif
 
 // CLASS: wxBitmapButton
+wxClassInfo *wxBitmapButton_CLASSINFO();
 wxBitmapButton *wxBitmapButton_new();
 wxBitmapButton *wxBitmapButton_new1(wxWindow * parent, wxWindowID id, const wxBitmapBundle * bitmap, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 bool wxBitmapButton_Create(wxBitmapButton * self, wxWindow * parent, wxWindowID id, const wxBitmapBundle * bitmap, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
@@ -189,6 +193,7 @@ wxBitmapButton * wxBitmapButton_NewCloseButton(wxWindow * parent, wxWindowID win
 #endif
 
 // CLASS: wxBookCtrlBase
+wxClassInfo *wxBookCtrlBase_CLASSINFO();
 int wxBookCtrlBase_GetPageImage(const wxBookCtrlBase * self, size_t n_page);
 bool wxBookCtrlBase_SetPageImage(wxBookCtrlBase * self, size_t page, int image);
 wxString *wxBookCtrlBase_GetPageText(const wxBookCtrlBase * self, size_t n_page);
@@ -211,17 +216,20 @@ wxWindow * wxBookCtrlBase_GetPage(const wxBookCtrlBase * self, size_t page);
 bool wxBookCtrlBase_Create(wxBookCtrlBase * self, wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 
 // CLASS: wxBookCtrlEvent
+wxClassInfo *wxBookCtrlEvent_CLASSINFO();
 int wxBookCtrlEvent_GetOldSelection(const wxBookCtrlEvent * self);
 int wxBookCtrlEvent_GetSelection(const wxBookCtrlEvent * self);
 void wxBookCtrlEvent_SetOldSelection(wxBookCtrlEvent * self, int page);
 void wxBookCtrlEvent_SetSelection(wxBookCtrlEvent * self, int page);
 
 // CLASS: wxBoxSizer
+wxClassInfo *wxBoxSizer_CLASSINFO();
 wxBoxSizer *wxBoxSizer_new(int orient);
 int wxBoxSizer_GetOrientation(const wxBoxSizer * self);
 void wxBoxSizer_SetOrientation(wxBoxSizer * self, int orient);
 
 // CLASS: wxButton
+wxClassInfo *wxButton_CLASSINFO();
 wxButton *wxButton_new();
 wxButton *wxButton_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 bool wxButton_Create(wxButton * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
@@ -233,6 +241,7 @@ wxSize *wxButton_GetDefaultSize(wxWindow * win);
 #endif
 
 // CLASS: wxCheckBox
+wxClassInfo *wxCheckBox_CLASSINFO();
 wxCheckBox *wxCheckBox_new();
 wxCheckBox *wxCheckBox_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 bool wxCheckBox_Create(wxCheckBox * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
@@ -245,6 +254,7 @@ void wxCheckBox_SetValue(wxCheckBox * self, bool state);
 void wxCheckBox_Set3StateValue(wxCheckBox * self, wxCheckBoxState state);
 
 // CLASS: wxCheckListBox
+wxClassInfo *wxCheckListBox_CLASSINFO();
 wxCheckListBox *wxCheckListBox_new();
 wxCheckListBox *wxCheckListBox_new2(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
 bool wxCheckListBox_Create1(wxCheckListBox * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
@@ -255,6 +265,7 @@ unsigned int wxCheckListBox_GetCheckedItems(const wxCheckListBox * self, wxArray
 wxItemContainer *wxCheckListBox_AsItemContainer(wxCheckListBox* obj);
 
 // CLASS: wxChoice
+wxClassInfo *wxChoice_CLASSINFO();
 wxChoice *wxChoice_new();
 wxChoice *wxChoice_new2(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
 bool wxChoice_Create1(wxChoice * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
@@ -266,6 +277,7 @@ bool wxChoice_IsSorted(const wxChoice * self);
 wxItemContainer *wxChoice_AsItemContainer(wxChoice* obj);
 
 // CLASS: wxColour
+wxClassInfo *wxColour_CLASSINFO();
 wxColour *wxColour_new();
 wxColour *wxColour_new2(const wxString * colour_name);
 wxColour *wxColour_new4(const wxColour * colour);
@@ -290,6 +302,7 @@ void wxColour_MakeGrey1(unsigned char * r, unsigned char * g, unsigned char * b,
 void wxColour_ChangeLightness1(unsigned char * r, unsigned char * g, unsigned char * b, int ialpha);
 
 // CLASS: wxColourPickerCtrl
+wxClassInfo *wxColourPickerCtrl_CLASSINFO();
 wxColourPickerCtrl *wxColourPickerCtrl_new();
 wxColourPickerCtrl *wxColourPickerCtrl_new1(wxWindow * parent, wxWindowID id, const wxColour * colour, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 bool wxColourPickerCtrl_Create(wxColourPickerCtrl * self, wxWindow * parent, wxWindowID id, const wxColour * colour, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
@@ -297,6 +310,7 @@ wxColour *wxColourPickerCtrl_GetColour(const wxColourPickerCtrl * self);
 void wxColourPickerCtrl_SetColour(wxColourPickerCtrl * self, const wxColour * col);
 
 // CLASS: wxComboBox
+wxClassInfo *wxComboBox_CLASSINFO();
 wxComboBox *wxComboBox_new();
 wxComboBox *wxComboBox_new2(wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
 bool wxComboBox_Create1(wxComboBox * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
@@ -310,6 +324,7 @@ wxItemContainer *wxComboBox_AsItemContainer(wxComboBox* obj);
 wxTextEntry *wxComboBox_AsTextEntry(wxComboBox* obj);
 
 // CLASS: wxCommandEvent
+wxClassInfo *wxCommandEvent_CLASSINFO();
 void * wxCommandEvent_GetClientData(const wxCommandEvent * self);
 wxClientData * wxCommandEvent_GetClientObject(const wxCommandEvent * self);
 long wxCommandEvent_GetExtraLong(const wxCommandEvent * self);
@@ -325,6 +340,7 @@ void wxCommandEvent_SetInt(wxCommandEvent * self, int int_command);
 void wxCommandEvent_SetString(wxCommandEvent * self, const wxString * string);
 
 // CLASS: wxControl
+wxClassInfo *wxControl_CLASSINFO();
 wxControl *wxControl_new(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 wxControl *wxControl_new1();
 bool wxControl_Create(wxControl * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
@@ -343,6 +359,7 @@ wxString *wxControl_EscapeMnemonics(const wxString * text);
 wxString *wxControl_Ellipsize(const wxString * label, const wxDC * dc, wxEllipsizeMode mode, int max_width, int flags);
 
 // CLASS: wxDatePickerCtrl
+wxClassInfo *wxDatePickerCtrl_CLASSINFO();
 wxDatePickerCtrl *wxDatePickerCtrl_new();
 wxDatePickerCtrl *wxDatePickerCtrl_new1(wxWindow * parent, wxWindowID id, const wxDateTime * dt, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 bool wxDatePickerCtrl_Create(wxDatePickerCtrl * self, wxWindow * parent, wxWindowID id, const wxDateTime * dt, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
@@ -355,6 +372,7 @@ void wxDatePickerCtrl_SetRange(wxDatePickerCtrl * self, const wxDateTime * dt1, 
 void wxDatePickerCtrl_SetValue(wxDatePickerCtrl * self, const wxDateTime * dt);
 
 // CLASS: wxDirPickerCtrl
+wxClassInfo *wxDirPickerCtrl_CLASSINFO();
 wxDirPickerCtrl *wxDirPickerCtrl_new();
 wxDirPickerCtrl *wxDirPickerCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * path, const wxString * message, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 bool wxDirPickerCtrl_Create(wxDirPickerCtrl * self, wxWindow * parent, wxWindowID id, const wxString * path, const wxString * message, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
@@ -365,6 +383,7 @@ void wxDirPickerCtrl_SetInitialDirectory(wxDirPickerCtrl * self, const wxString 
 void wxDirPickerCtrl_SetPath(wxDirPickerCtrl * self, const wxString * dirname);
 
 // CLASS: wxEditableListBox
+wxClassInfo *wxEditableListBox_CLASSINFO();
 wxEditableListBox *wxEditableListBox_new();
 wxEditableListBox *wxEditableListBox_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxEditableListBox_Create(wxEditableListBox * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
@@ -372,6 +391,7 @@ void wxEditableListBox_SetStrings(wxEditableListBox * self, const wxArrayString 
 void wxEditableListBox_GetStrings(const wxEditableListBox * self, wxArrayString * strings);
 
 // CLASS: wxFileCtrl
+wxClassInfo *wxFileCtrl_CLASSINFO();
 wxFileCtrl *wxFileCtrl_new();
 wxFileCtrl *wxFileCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * default_directory, const wxString * default_filename, const wxString * wild_card, long style, const wxPoint * pos, const wxSize * size, const wxString * name);
 bool wxFileCtrl_Create(wxFileCtrl * self, wxWindow * parent, wxWindowID id, const wxString * default_directory, const wxString * default_filename, const wxString * wild_card, long style, const wxPoint * pos, const wxSize * size, const wxString * name);
@@ -390,6 +410,7 @@ void wxFileCtrl_SetWildcard(wxFileCtrl * self, const wxString * wild_card);
 void wxFileCtrl_ShowHidden(wxFileCtrl * self, bool show);
 
 // CLASS: wxFont
+wxClassInfo *wxFont_CLASSINFO();
 #if wxCHECK_VERSION(3, 1, 0)
 wxFont *wxFont_GetBaseFont(const wxFont * self);
 #endif
@@ -447,6 +468,7 @@ wxFont *wxFont_new5(const wxString * native_info_string);
 wxFont *wxFont_new6(const wxNativeFontInfo * native_info);
 
 // CLASS: wxFontPickerCtrl
+wxClassInfo *wxFontPickerCtrl_CLASSINFO();
 wxFontPickerCtrl *wxFontPickerCtrl_new();
 wxFontPickerCtrl *wxFontPickerCtrl_new1(wxWindow * parent, wxWindowID id, const wxFont * font, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 bool wxFontPickerCtrl_Create(wxFontPickerCtrl * self, wxWindow * parent, wxWindowID id, const wxFont * font, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
@@ -464,6 +486,7 @@ void wxFontPickerCtrl_SetSelectedColour(wxFontPickerCtrl * self, const wxColour 
 void wxFontPickerCtrl_SetSelectedFont(wxFontPickerCtrl * self, const wxFont * font);
 
 // CLASS: wxFrame
+wxClassInfo *wxFrame_CLASSINFO();
 wxFrame *wxFrame_new();
 wxFrame *wxFrame_new1(wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 void wxFrame_Centre(wxFrame * self, int direction);
@@ -491,8 +514,10 @@ void wxFrame_PushStatusText(wxFrame * self, const wxString * text, int number);
 void wxFrame_PopStatusText(wxFrame * self, int number);
 
 // CLASS: wxGDIObject
+wxClassInfo *wxGDIObject_CLASSINFO();
 
 // CLASS: wxGauge
+wxClassInfo *wxGauge_CLASSINFO();
 wxGauge *wxGauge_new();
 wxGauge *wxGauge_new1(wxWindow * parent, wxWindowID id, int range, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 bool wxGauge_Create(wxGauge * self, wxWindow * parent, wxWindowID id, int range, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
@@ -504,6 +529,7 @@ void wxGauge_SetRange(wxGauge * self, int range);
 void wxGauge_SetValue(wxGauge * self, int pos);
 
 // CLASS: wxGenericDirCtrl
+wxClassInfo *wxGenericDirCtrl_CLASSINFO();
 wxGenericDirCtrl *wxGenericDirCtrl_new();
 wxGenericDirCtrl *wxGenericDirCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * dir, const wxPoint * pos, const wxSize * size, long style, const wxString * filter, int default_filter, const wxString * name);
 bool wxGenericDirCtrl_CollapsePath(wxGenericDirCtrl * self, const wxString * path);
@@ -556,6 +582,7 @@ wxHeaderColumnSimple *wxHeaderColumnSimple_new(const wxString * title, int width
 wxHeaderColumnSimple *wxHeaderColumnSimple_new1(const wxBitmapBundle * bitmap, int width, wxAlignment align, int flags);
 
 // CLASS: wxHeaderCtrl
+wxClassInfo *wxHeaderCtrl_CLASSINFO();
 bool wxHeaderCtrl_Create(wxHeaderCtrl * self, wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 void wxHeaderCtrl_SetColumnCount(wxHeaderCtrl * self, unsigned int count);
 unsigned int wxHeaderCtrl_GetColumnCount(const wxHeaderCtrl * self);
@@ -576,6 +603,7 @@ int wxHeaderCtrl_GetColumnTitleWidth1(wxHeaderCtrl * self, unsigned int idx);
 void wxHeaderCtrl_MoveColumnInOrderArray(wxArrayInt * order, unsigned int idx, unsigned int pos);
 
 // CLASS: wxHeaderCtrlSimple
+wxClassInfo *wxHeaderCtrlSimple_CLASSINFO();
 wxHeaderCtrlSimple *wxHeaderCtrlSimple_new();
 wxHeaderCtrlSimple *wxHeaderCtrlSimple_new1(wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 void wxHeaderCtrlSimple_InsertColumn(wxHeaderCtrlSimple * self, const wxHeaderColumnSimple * col, unsigned int idx);
@@ -587,6 +615,7 @@ void wxHeaderCtrlSimple_ShowSortIndicator(wxHeaderCtrlSimple * self, unsigned in
 void wxHeaderCtrlSimple_RemoveSortIndicator(wxHeaderCtrlSimple * self);
 
 // CLASS: wxHyperlinkCtrl
+wxClassInfo *wxHyperlinkCtrl_CLASSINFO();
 wxHyperlinkCtrl *wxHyperlinkCtrl_new();
 wxHyperlinkCtrl *wxHyperlinkCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxString * url, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxHyperlinkCtrl_Create(wxHyperlinkCtrl * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxString * url, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
@@ -602,6 +631,7 @@ void wxHyperlinkCtrl_SetVisited(wxHyperlinkCtrl * self, bool visited);
 void wxHyperlinkCtrl_SetVisitedColour(wxHyperlinkCtrl * self, const wxColour * colour);
 
 // CLASS: wxIcon
+wxClassInfo *wxIcon_CLASSINFO();
 wxIcon *wxIcon_new();
 wxIcon *wxIcon_new1(const wxIcon * icon);
 wxIcon *wxIcon_new3(const char *const * bits);
@@ -676,6 +706,7 @@ void wxItemContainerImmutable_SetString(wxItemContainerImmutable * self, unsigne
 int wxItemContainerImmutable_FindString(const wxItemContainerImmutable * self, const wxString * string, bool case_sensitive);
 
 // CLASS: wxListBox
+wxClassInfo *wxListBox_CLASSINFO();
 wxListBox *wxListBox_new();
 wxListBox *wxListBox_new2(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
 bool wxListBox_Create1(wxListBox * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
@@ -699,6 +730,7 @@ int wxListBox_GetTopItem(const wxListBox * self);
 wxItemContainer *wxListBox_AsItemContainer(wxListBox* obj);
 
 // CLASS: wxMenu
+wxClassInfo *wxMenu_CLASSINFO();
 wxMenu *wxMenu_new();
 wxMenu *wxMenu_new1(long style);
 wxMenu *wxMenu_new2(const wxString * title, long style);
@@ -756,6 +788,7 @@ void wxMenu_Detach(wxMenu * self);
 bool wxMenu_IsAttached(const wxMenu * self);
 
 // CLASS: wxMenuBar
+wxClassInfo *wxMenuBar_CLASSINFO();
 wxMenuBar *wxMenuBar_new(long style);
 bool wxMenuBar_Append(wxMenuBar * self, wxMenu * menu, const wxString * title);
 void wxMenuBar_Check(wxMenuBar * self, int id, bool check);
@@ -792,6 +825,7 @@ wxMenuBar * wxMenuBar_MacGetCommonMenuBar();
 #endif
 
 // CLASS: wxMenuItem
+wxClassInfo *wxMenuItem_CLASSINFO();
 wxBitmap *wxMenuItem_GetBitmap(const wxMenuItem * self);
 #ifdef __WXMSW__
 wxBitmap *wxMenuItem_GetBitmap1(const wxMenuItem * self, bool checked);
@@ -851,10 +885,12 @@ void wxMenuItem_Enable(wxMenuItem * self, bool enable);
 wxString *wxMenuItem_GetLabelText(const wxString * text);
 
 // CLASS: wxNonOwnedWindow
+wxClassInfo *wxNonOwnedWindow_CLASSINFO();
 bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow * self, const wxRegion * region);
 bool wxNonOwnedWindow_SetShape1(wxNonOwnedWindow * self, const wxGraphicsPath * path);
 
 // CLASS: wxNotebook
+wxClassInfo *wxNotebook_CLASSINFO();
 wxNotebook *wxNotebook_new();
 wxNotebook *wxNotebook_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 int wxNotebook_GetRowCount(const wxNotebook * self);
@@ -862,11 +898,13 @@ wxColour *wxNotebook_GetThemeBackgroundColour(const wxNotebook * self);
 void wxNotebook_SetPadding(wxNotebook * self, const wxSize * padding);
 
 // CLASS: wxNotifyEvent
+wxClassInfo *wxNotifyEvent_CLASSINFO();
 void wxNotifyEvent_Allow(wxNotifyEvent * self);
 bool wxNotifyEvent_IsAllowed(const wxNotifyEvent * self);
 void wxNotifyEvent_Veto(wxNotifyEvent * self);
 
 // CLASS: wxPanel
+wxClassInfo *wxPanel_CLASSINFO();
 wxPanel *wxPanel_new();
 wxPanel *wxPanel_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxPanel_Create(wxPanel * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
@@ -874,6 +912,7 @@ void wxPanel_OnSysColourChanged(wxPanel * self, wxSysColourChangedEvent * event)
 void wxPanel_SetFocusIgnoringChildren(wxPanel * self);
 
 // CLASS: wxPickerBase
+wxClassInfo *wxPickerBase_CLASSINFO();
 bool wxPickerBase_CreateBase(wxPickerBase * self, wxWindow * parent, wxWindowID id, const wxString * text, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 int wxPickerBase_GetInternalMargin(const wxPickerBase * self);
 int wxPickerBase_GetPickerCtrlProportion(const wxPickerBase * self);
@@ -902,6 +941,7 @@ wxPoint *wxPoint_new1(int x, int y);
 wxPoint *wxPoint_new2(const wxRealPoint * pt);
 
 // CLASS: wxRadioBox
+wxClassInfo *wxRadioBox_CLASSINFO();
 wxRadioBox *wxRadioBox_new();
 wxRadioBox *wxRadioBox_new2(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, int major_dimension, long style, const wxValidator * validator, const wxString * name);
 bool wxRadioBox_Create1(wxRadioBox * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, int major_dimension, long style, const wxValidator * validator, const wxString * name);
@@ -1014,6 +1054,7 @@ void wxSize_SetHeight(wxSize * self, int height);
 void wxSize_SetWidth(wxSize * self, int width);
 
 // CLASS: wxSizer
+wxClassInfo *wxSizer_CLASSINFO();
 wxSizerItem * wxSizer_Add(wxSizer * self, wxWindow * window, const wxSizerFlags * flags);
 wxSizerItem * wxSizer_Add1(wxSizer * self, wxWindow * window, int proportion, int flag, int border, wxObject * user_data);
 wxSizerItem * wxSizer_Add2(wxSizer * self, wxSizer * sizer, const wxSizerFlags * flags);
@@ -1126,6 +1167,7 @@ void wxSizerFlags_DisableConsistencyChecks();
 int wxSizerFlags_GetDefaultBorder();
 
 // CLASS: wxStaticBitmap
+wxClassInfo *wxStaticBitmap_CLASSINFO();
 wxStaticBitmap *wxStaticBitmap_new();
 wxStaticBitmap *wxStaticBitmap_new1(wxWindow * parent, wxWindowID id, const wxBitmapBundle * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxStaticBitmap_Create(wxStaticBitmap * self, wxWindow * parent, wxWindowID id, const wxBitmapBundle * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
@@ -1135,16 +1177,19 @@ void wxStaticBitmap_SetBitmap(wxStaticBitmap * self, const wxBitmapBundle * labe
 void wxStaticBitmap_SetIcon(wxStaticBitmap * self, const wxIcon * label);
 
 // CLASS: wxStaticBox
+wxClassInfo *wxStaticBox_CLASSINFO();
 wxStaticBox *wxStaticBox_new();
 wxStaticBox *wxStaticBox_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxStaticBox_Create(wxStaticBox * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 
 // CLASS: wxStaticBoxSizer
+wxClassInfo *wxStaticBoxSizer_CLASSINFO();
 wxStaticBoxSizer *wxStaticBoxSizer_new(wxStaticBox * box_, int orient);
 wxStaticBoxSizer *wxStaticBoxSizer_new1(int orient, wxWindow * parent, const wxString * label);
 wxStaticBox * wxStaticBoxSizer_GetStaticBox(const wxStaticBoxSizer * self);
 
 // CLASS: wxStaticText
+wxClassInfo *wxStaticText_CLASSINFO();
 wxStaticText *wxStaticText_new();
 wxStaticText *wxStaticText_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxStaticText_Create(wxStaticText * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
@@ -1253,6 +1298,7 @@ bool wxTextAttr_EqPartial(const wxTextAttr * self, const wxTextAttr * attr, bool
 wxTextAttr *wxTextAttr_Merge1(const wxTextAttr * base, const wxTextAttr * overlay);
 
 // CLASS: wxTextCtrl
+wxClassInfo *wxTextCtrl_CLASSINFO();
 #ifdef __WXOSX__
 void wxTextCtrl_OSXEnableNewLineReplacement(wxTextCtrl * self, bool enable);
 #endif
@@ -1335,6 +1381,7 @@ void wxTextEntry_Undo(wxTextEntry * self);
 void wxTextEntry_WriteText(wxTextEntry * self, const wxString * text);
 
 // CLASS: wxToolBar
+wxClassInfo *wxToolBar_CLASSINFO();
 wxToolBar *wxToolBar_new();
 wxToolBar *wxToolBar_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 wxToolBarToolBase * wxToolBar_AddCheckTool(wxToolBar * self, int tool_id, const wxString * label, const wxBitmapBundle * bitmap1, const wxBitmapBundle * bmp_disabled, const wxString * short_help, const wxString * long_help, wxObject * client_data);
@@ -1392,6 +1439,7 @@ wxToolBarToolBase * wxToolBar_CreateTool1(wxToolBar * self, wxControl * control,
 wxToolBarToolBase * wxToolBar_CreateSeparator(wxToolBar * self);
 
 // CLASS: wxTopLevelWindow
+wxClassInfo *wxTopLevelWindow_CLASSINFO();
 wxTopLevelWindow *wxTopLevelWindow_new();
 wxTopLevelWindow *wxTopLevelWindow_new1(wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxTopLevelWindow_Create(wxTopLevelWindow * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
@@ -1435,6 +1483,7 @@ bool wxTopLevelWindow_ShowFullScreen(wxTopLevelWindow * self, bool show, long st
 wxSize *wxTopLevelWindow_GetDefaultSize();
 
 // CLASS: wxValidator
+wxClassInfo *wxValidator_CLASSINFO();
 wxValidator *wxValidator_new();
 wxObject * wxValidator_Clone(const wxValidator * self);
 wxWindow * wxValidator_GetWindow(const wxValidator * self);
@@ -1446,6 +1495,7 @@ void wxValidator_SuppressBellOnError(bool suppress);
 bool wxValidator_IsSilent();
 
 // CLASS: wxWindow
+wxClassInfo *wxWindow_CLASSINFO();
 bool wxWindow_AcceptsFocus(const wxWindow * self);
 bool wxWindow_AcceptsFocusFromKeyboard(const wxWindow * self);
 bool wxWindow_AcceptsFocusRecursively(const wxWindow * self);
@@ -1753,6 +1803,7 @@ wxWindow *wxWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, c
 bool wxWindow_Create(wxWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 
 // CLASS: wxWrapSizer
+wxClassInfo *wxWrapSizer_CLASSINFO();
 wxWrapSizer *wxWrapSizer_new(int orient, int flags);
 
 } // extern "C"

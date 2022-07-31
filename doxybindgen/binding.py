@@ -32,6 +32,10 @@ class RustClassBinding:
                 yield 'pub fn %s_delete(self_: *mut c_void);' % (
                     self.__model.name,
                 )
+            else:
+                yield 'pub fn %s_CLASSINFO() -> *mut c_void;' % (
+                    self.__model.name,
+                )
             for method in self.__methods:
                 for line in method.lines(for_ffi=True):
                     yield line
@@ -53,6 +57,8 @@ class RustClassBinding:
             yield ',\n'.join(self._ancestor_methods())
             yield '}'
             for line in self._impl_with_ctors():
+                yield line
+            for line in self._impl_class_info_if_needed():
                 yield line
             for line in self._impl_drop_if_needed():
                 yield line
@@ -83,6 +89,15 @@ class RustClassBinding:
                 yield '    %s' % (line,)
         yield "    pub fn none() -> Option<&'static Self> {"
         yield '        None'
+        yield '    }'
+        yield '}'
+    
+    def _impl_class_info_if_needed(self):
+        if not self.is_a('wxObject'):
+            return
+        yield 'impl<const OWNED: bool> ClassInfoMacro for %sIsOwned<OWNED> {' % (self.__model.unprefixed(),)
+        yield '    fn class_info() -> ClassInfoIsOwned<false> {'
+        yield '        unsafe { ClassInfoIsOwned::from_ptr(ffi::%s_CLASSINFO()) }' % (self.__model.name)
         yield '    }'
         yield '}'
     
@@ -492,6 +507,8 @@ class CxxClassBinding:
         yield '// CLASS: %s' % (self.__model.name,)
         for line in self._dtor_lines(is_cc):
             yield line
+        for line in self._class_info_lines(is_cc):
+            yield line
         self.in_condition = None
         for method in self.__methods:
             for line in method.lines(is_cc):
@@ -533,6 +550,19 @@ class CxxClassBinding:
         if is_cc:
             yield '%s {' % (signature,)
             yield '    delete self;'
+            yield '}'
+        else:
+            yield '%s;' % (signature,)
+    
+    def _class_info_lines(self, is_cc):
+        if not self.__model.manager.is_a(self.__model, 'wxObject'):
+            return
+        signature = 'wxClassInfo *%s_CLASSINFO()' % (
+            self.__model.name,
+        )
+        if is_cc:
+            yield '%s {' % (signature,)
+            yield '    return wxCLASSINFO(%s);' % (self.__model.name,)
             yield '}'
         else:
             yield '%s;' % (signature,)

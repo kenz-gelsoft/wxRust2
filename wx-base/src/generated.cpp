@@ -214,6 +214,9 @@ wxDateTime *wxDateTime_UNow() {
 }
 
 // CLASS: wxEvent
+wxClassInfo *wxEvent_CLASSINFO() {
+    return wxCLASSINFO(wxEvent);
+}
 wxEvent * wxEvent_Clone(const wxEvent * self) {
     return self->Clone();
 }
@@ -258,6 +261,9 @@ int wxEvent_StopPropagation(wxEvent * self) {
 }
 
 // CLASS: wxEvtHandler
+wxClassInfo *wxEvtHandler_CLASSINFO() {
+    return wxCLASSINFO(wxEvtHandler);
+}
 void wxEvtHandler_QueueEvent(wxEvtHandler * self, wxEvent * event) {
     return self->QueueEvent(event);
 }
@@ -542,6 +548,9 @@ wxString *wxFileName_StripExtension(const wxString * fullname) {
 }
 
 // CLASS: wxObject
+wxClassInfo *wxObject_CLASSINFO() {
+    return wxCLASSINFO(wxObject);
+}
 wxObject *wxObject_new() {
     return new wxObject();
 }
@@ -649,6 +658,9 @@ wxString *wxStandardPaths_MSWGetShellDir(int csidl) {
 #endif
 
 // CLASS: wxTimer
+wxClassInfo *wxTimer_CLASSINFO() {
+    return wxCLASSINFO(wxTimer);
+}
 wxTimer *wxTimer_new() {
     return new wxTimer();
 }
@@ -687,6 +699,9 @@ void wxTimer_Stop(wxTimer * self) {
 }
 
 // CLASS: wxTimerEvent
+wxClassInfo *wxTimerEvent_CLASSINFO() {
+    return wxCLASSINFO(wxTimerEvent);
+}
 wxTimerEvent *wxTimerEvent_new(wxTimer * timer) {
     return new wxTimerEvent(*timer);
 }

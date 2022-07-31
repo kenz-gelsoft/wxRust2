@@ -124,6 +124,10 @@ pub mod methods {
             }
         }
     }
+
+    pub trait ClassInfoMacro: ObjectMethods {
+        fn class_info() -> ClassInfoIsOwned<false>;
+    }
 }
 
 // wxString
