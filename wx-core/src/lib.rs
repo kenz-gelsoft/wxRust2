@@ -47,7 +47,7 @@ pub mod methods {
         fn sub_menu<M: MenuMethods>(self, s: &str, submenu: &M) -> Self;
         fn separator(self) -> Self;
     }
-
+    
     pub trait ClassInfoMacro: ObjectMethods {
         fn class_info() -> ClassInfoIsOwned<false>;
     }
@@ -1781,6 +1781,22 @@ impl From<Bitmap> for BitmapBundle {
 impl ClassInfoMacro for CheckListBox {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxCheckListBox_CLASSINFO()) }
+    }
+}
+
+impl<const OWNED: bool> From<CheckListBoxIsOwned<OWNED>> for ListBoxIsOwned<OWNED> {
+    fn from(o: CheckListBoxIsOwned<OWNED>) -> Self {
+        unsafe { ListBoxIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> TryFrom<&ListBoxIsOwned<OWNED>> for CheckListBoxIsOwned<false> {
+    type Error = ();
+    fn try_from(lbox: &ListBoxIsOwned<OWNED>) -> Result<Self, Self::Error> {
+        if lbox.is_kind_of(Some(&CheckListBox::class_info())) {
+            unsafe { Ok(CheckListBox::from_unowned_ptr(lbox.as_ptr())) }
+        } else {
+            Err(())
+        }
     }
 }
 
