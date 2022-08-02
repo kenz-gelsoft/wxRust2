@@ -74,15 +74,17 @@ impl From<SliderPage> for c_int {
 
 // the selection mode
 #[derive(Clone, Copy)]
-enum LboxSel {
-    Single,
-    Extended,
-    Multiple,
+enum SliderTicks {
+    _None,
+    Top,
+    Bottom,
+    Left,
+    Right,
 }
-impl LboxSel {
+impl SliderTicks {
     fn from(v: c_int) -> Option<Self> {
-        use LboxSel::*;
-        for e in [Single, Extended, Multiple] {
+        use SliderTicks::*;
+        for e in [_None, Top, Bottom, Left, Right] {
             if v == e.into() {
                 return Some(e);
             }
@@ -90,8 +92,8 @@ impl LboxSel {
         return None;
     }
 }
-impl From<LboxSel> for c_int {
-    fn from(w: LboxSel) -> Self {
+impl From<SliderTicks> for c_int {
+    fn from(w: SliderTicks) -> Self {
         w as c_int
     }
 }
@@ -125,19 +127,16 @@ pub struct ConfigUI {
     // the controls
     // ------------
     // the sel mode radiobox
-    radio_sel_mode: wx::RadioBox,
-
-    // List type selection radiobox
-    radio_list_type: wx::RadioBox,
+    radio_sides: wx::RadioBox,
 
     // the checkboxes
-    chk_v_scroll: wx::CheckBox,
-    chk_h_scroll: wx::CheckBox,
-    chk_sort: wx::CheckBox,
-    chk_owner_draw: wx::CheckBox,
+    chk_inverse: wx::CheckBox,
+    chk_ticks: wx::CheckBox,
+    chk_min_max_labels: wx::CheckBox,
+    chk_value_label: wx::CheckBox,
 
     // sizer
-    sizer_lbox: wx::BoxSizer,
+    sizer_slider: wx::BoxSizer,
     // // the text entries for "Add/change string" and "Delete" buttons
     // text_add: wx::TextCtrl,
     // text_change: wx::TextCtrl,
@@ -152,6 +151,14 @@ pub struct SliderWidgetsPage {
     // the lbox itself
     lbox: Rc<RefCell<Option<wx::ListBox>>>,
 
+    // the slider range
+    min: RefCell<c_int>,
+    max: RefCell<c_int>,
+
+    // the slider selection range
+    range_min: RefCell<c_int>,
+    range_max: RefCell<c_int>,
+
     s_item: RefCell<c_int>,
 }
 impl WidgetsPage for SliderWidgetsPage {
@@ -159,234 +166,180 @@ impl WidgetsPage for SliderWidgetsPage {
         return &self.base;
     }
     fn label(&self) -> &str {
-        return "ListBox";
+        return "Slider";
     }
     fn create_content(&self) {
-        /*
-            What we create here is a frame having 3 panes: style pane is the
-            leftmost one, in the middle the pane with buttons allowing to perform
-            miscellaneous listbox operations and the pane containing the listbox
-            itself to the right
-        */
         let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
 
         // left pane
         let s_box = wx::StaticBox::builder(Some(&self.base))
-            .label("&Set listbox parameters")
+            .label("&Set style")
             .build();
         let sizer_left = wx::StaticBoxSizer::new_with_staticbox(Some(&s_box), wx::VERTICAL);
 
-        let modes = wx::ArrayString::new();
-        modes.add("single");
-        modes.add("extended");
-        modes.add("multiple");
+        let chk_inverse =
+            self.create_check_box_and_add_to_sizer(&sizer_left, "&Inverse", wx::ID_ANY);
+        let chk_ticks =
+            self.create_check_box_and_add_to_sizer(&sizer_left, "Show &ticks", wx::ID_ANY);
+        let chk_min_max_labels =
+            self.create_check_box_and_add_to_sizer(&sizer_left, "Show min/max &labels", wx::ID_ANY);
+        let chk_value_label =
+            self.create_check_box_and_add_to_sizer(&sizer_left, "Show &value label", wx::ID_ANY);
 
-        let radio_sel_mode = wx::RadioBox::builder(Some(&self.base))
-            .label("Selection &mode:")
-            .choices(modes)
+        let sides = wx::ArrayString::new();
+        sides.add("default");
+        sides.add("top");
+        sides.add("bottom");
+        sides.add("left");
+        sides.add("right");
+        let radio_sides = wx::RadioBox::builder(Some(&self.base))
+            .id(SliderPage::RadioSides.into())
+            .label("&Label position")
+            .choices(sides)
             .major_dimension(1)
             .style(wx::RA_SPECIFY_COLS.into())
             .build();
+        sizer_left.add_window_sizerflags(
+            Some(&radio_sides),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
+        );
 
-        let list_types = wx::ArrayString::new();
-        list_types.add("list box");
-        list_types.add("check list box");
-        list_types.add("rearrange list");
-
-        let radio_list_type = wx::RadioBox::builder(Some(&self.base))
-            .label("&List type:")
-            .choices(list_types)
-            .major_dimension(1)
-            .style(wx::RA_SPECIFY_COLS.into())
-            .build();
-
-        let chk_v_scroll = self.create_check_box_and_add_to_sizer(
+        let chk_both_sides = self.create_check_box_and_add_to_sizer(
             &sizer_left,
-            "Always show &vertical scrollbar",
-            wx::ID_ANY,
+            "&Both sides",
+            SliderPage::BothSides.into(),
         );
-        let chk_h_scroll = self.create_check_box_and_add_to_sizer(
+        let chk_select_range = self.create_check_box_and_add_to_sizer(
             &sizer_left,
-            "Show &horizontal scrollbar",
-            wx::ID_ANY,
+            "&Selection range",
+            SliderPage::SelectRange.into(),
         );
+        chk_both_sides.set_tool_tip_str("\"Both sides\" is only supported \nin Universal");
+        chk_select_range.set_tool_tip_str("\"Select range\" is only supported \nin wxMSW");
 
-        let chk_sort =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "&Sort items", wx::ID_ANY);
-        let chk_owner_draw =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "&Owner drawn", wx::ID_ANY);
-
-        sizer_left.add_int_int(5, 5, 0, wx::GROW | wx::ALL, 5, wx::Object::none()); // spacer
-        sizer_left.add_window_int(
-            Some(&radio_sel_mode),
-            0,
-            wx::GROW | wx::ALL,
-            5,
-            wx::Object::none(),
-        );
-
-        sizer_left.add_int_int(5, 5, 0, wx::GROW | wx::ALL, 5, wx::Object::none()); // spacer
-        sizer_left.add_window_int(
-            Some(&radio_list_type),
-            0,
-            wx::GROW | wx::ALL,
-            5,
-            wx::Object::none(),
-        );
+        sizer_left.add_spacer(5);
 
         let btn = wx::Button::builder(Some(&self.base))
             .id(SliderPage::Reset.into())
             .label("&Reset")
             .build();
-        sizer_left.add_window_int(
+        sizer_left.add_window_sizerflags(
             Some(&btn),
-            0,
-            wx::ALIGN_CENTRE_HORIZONTAL | wx::ALL,
-            15,
-            wx::Object::none(),
+            wx::SizerFlags::new(0)
+                .centre_horizontal()
+                .border_int(wx::ALL, 15),
         );
 
         // middle pane
         let s_box2 = wx::StaticBox::builder(Some(&self.base))
-            .label("&Change listbox contents")
+            .label("&Change slider value")
             .build();
         let sizer_middle = wx::StaticBoxSizer::new_with_staticbox(Some(&s_box2), wx::VERTICAL);
 
-        let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
-        // let btn = wx::Button::builder(Some(&self.base))
-        //     .id(SliderPage::Add.into())
-        //     .label("&Add this string")
-        //     .build();
-        // let text_add = wx::TextCtrl::builder(Some(&self.base))
-        //     .id(SliderPage::AddText.into())
-        //     .value("test item \t0")
-        //     .build();
-        sizer_row.add_window_int(Some(&btn), 0, wx::RIGHT, 5, wx::Object::none());
-        // sizer_row.add_window_int(Some(&text_add), 1, wx::LEFT, 5, wx::Object::none());
-        sizer_middle.add_sizer_int(
+        let (sizer_row, text) =
+            self.create_sizer_with_text_and_label("Current value", SliderPage::CurValueText.into());
+        text.set_editable(false);
+        sizer_middle.add_sizer_sizerflags(
             Some(&sizer_row),
-            0,
-            wx::ALL | wx::GROW,
-            5,
-            wx::Object::none(),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
         );
 
-        // let btn = wx::Button::builder(Some(&self.base))
-        //     .id(SliderPage::AddSeveral.into())
-        //     .label("&Insert a few strings")
-        //     .build();
-        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
-
-        // let btn = wx::Button::builder(Some(&self.base))
-        //     .id(SliderPage::AddMany.into())
-        //     .label("Add &many strings")
-        //     .build();
-        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
-
-        let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
-        // let btn = wx::Button::builder(Some(&self.base))
-        //     .id(SliderPage::Change.into())
-        //     .label("C&hange current")
-        //     .build();
-        // let text_change = wx::TextCtrl::builder(Some(&self.base))
-        //     .id(SliderPage::ChangeText.into())
-        //     .build();
-        sizer_row.add_window_int(Some(&btn), 0, wx::RIGHT, 5, wx::Object::none());
-        // sizer_row.add_window_int(Some(&text_change), 1, wx::LEFT, 5, wx::Object::none());
-        sizer_middle.add_sizer_int(
+        let (sizer_row, text_value) = self.create_sizer_with_text_and_button(
+            SliderPage::SetValue.into(),
+            "Set &value",
+            SliderPage::ValueText.into(),
+        );
+        sizer_middle.add_sizer_sizerflags(
             Some(&sizer_row),
-            0,
-            wx::ALL | wx::GROW,
-            5,
-            wx::Object::none(),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
         );
 
-        let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
-        // let btn = wx::Button::builder(Some(&self.base))
-        //     .id(SliderPage::EnsureVisible.into())
-        //     .label("Make item &visible")
-        //     .build();
-        // let text_ensure_visible = wx::TextCtrl::builder(Some(&self.base))
-        //     .id(SliderPage::EnsureVisibleText.into())
-        //     .build();
-        sizer_row.add_window_int(Some(&btn), 0, wx::RIGHT, 5, wx::Object::none());
-        // sizer_row.add_window_int(
-        //     Some(&text_ensure_visible),
-        //     1,
-        //     wx::LEFT,
-        //     5,
-        //     wx::Object::none(),
-        // );
-        sizer_middle.add_sizer_int(
-            Some(&sizer_row),
-            0,
-            wx::ALL | wx::GROW,
-            5,
-            wx::Object::none(),
+        let (sizer_row, text_min) = self.create_sizer_with_text_and_button(
+            SliderPage::SetMinAndMax.into(),
+            "&Min and max",
+            SliderPage::MinText.into(),
         );
 
-        let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
-        // let btn = wx::Button::builder(Some(&self.base))
-        //     .id(SliderPage::Delete.into())
-        //     .label("&Delete this item")
-        //     .build();
-        // let text_delete = wx::TextCtrl::builder(Some(&self.base))
-        //     .id(SliderPage::DeleteText.into())
-        //     .build();
-        sizer_row.add_window_int(Some(&btn), 0, wx::RIGHT, 5, wx::Object::none());
-        // sizer_row.add_window_int(Some(&text_delete), 1, wx::LEFT, 5, wx::Object::none());
-        sizer_middle.add_sizer_int(
-            Some(&sizer_row),
-            0,
-            wx::ALL | wx::GROW,
-            5,
-            wx::Object::none(),
-        );
-
-        // let btn = wx::Button::builder(Some(&self.base))
-        //     .id(SliderPage::DeleteSel.into())
-        //     .label("Delete &selection")
-        //     .build();
-        // sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
-
-        let btn = wx::Button::builder(Some(&self.base))
-            .id(SliderPage::Clear.into())
-            .label("&Clear")
+        let text_max = wx::TextCtrl::builder(Some(&self.base))
+            .id(SliderPage::MaxText.into())
             .build();
-        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+        sizer_row.add_window_sizerflags(
+            Some(&text_max),
+            wx::SizerFlags::new(1).centre_vertical().border(wx::LEFT),
+        );
 
-        // let btn = wx::Button::builder(Some(&self.base))
-        //     .id(SliderPage::MoveUp.into())
-        //     .label("Move item &up")
-        //     .build();
-        // sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+        text_min.set_value(&format!("{}", self.min.borrow()));
+        text_max.set_value(&format!("{}", self.max.borrow()));
 
-        // let btn = wx::Button::builder(Some(&self.base))
-        //     .id(SliderPage::MoveDown.into())
-        //     .label("Move item &down")
-        //     .build();
-        // sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+        sizer_middle.add_sizer_sizerflags(
+            Some(&sizer_row),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
+        );
 
-        // let btn = wx::Button::builder(Some(&self.base))
-        //     .id(SliderPage::GetTopItem.into())
-        //     .label("Get top item")
-        //     .build();
-        // sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+        let (sizer_row, text_range_min) = self.create_sizer_with_text_and_button(
+            SliderPage::SetRange.into(),
+            "&Selection",
+            SliderPage::RangeMinText.into(),
+        );
+        let text_range_max = wx::TextCtrl::builder(Some(&self.base))
+            .id(SliderPage::RangeMaxText.into())
+            .build();
+        sizer_row.add_window_sizerflags(
+            Some(&text_range_max),
+            wx::SizerFlags::new(1).centre_vertical().border(wx::LEFT),
+        );
 
-        // let btn = wx::Button::builder(Some(&self.base))
-        //     .id(SliderPage::GetCountPerPage.into())
-        //     .label("Get count per page")
-        //     .build();
-        // sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+        text_range_min.set_value(&format!("{}", self.range_min.borrow()));
+        text_range_max.set_value(&format!("{}", self.range_max.borrow()));
 
-        // let btn = wx::Button::builder(Some(&self.base))
-        //     .id(SliderPage::ContainerTests.into())
-        //     .label("Run &tests")
-        //     .build();
-        // sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+        sizer_middle.add_sizer_sizerflags(
+            Some(&sizer_row),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
+        );
+
+        let (sizer_row, text_line_size) = self.create_sizer_with_text_and_button(
+            SliderPage::SetLineSize.into(),
+            "Li&ne size",
+            SliderPage::LineSizeText.into(),
+        );
+        sizer_middle.add_sizer_sizerflags(
+            Some(&sizer_row),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
+        );
+
+        let (sizer_row, text_page_size) = self.create_sizer_with_text_and_button(
+            SliderPage::SetPageSize.into(),
+            "P&age size",
+            SliderPage::PageSizeText.into(),
+        );
+        sizer_middle.add_sizer_sizerflags(
+            Some(&sizer_row),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
+        );
+
+        let (sizer_row, text_tick_freq) = self.create_sizer_with_text_and_button(
+            SliderPage::SetTickFreq.into(),
+            "Tick &frequency",
+            SliderPage::TickFreqText.into(),
+        );
+        text_tick_freq.set_value("10");
+        sizer_middle.add_sizer_sizerflags(
+            Some(&sizer_row),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
+        );
+
+        let (sizer_row, text_thumb_len) = self.create_sizer_with_text_and_button(
+            SliderPage::SetThumbLen.into(),
+            "Thumb &length",
+            SliderPage::ThumbLenText.into(),
+        );
+        sizer_middle.add_sizer_sizerflags(
+            Some(&sizer_row),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
+        );
 
         // right pane
-        let sizer_right = wx::BoxSizer::new(wx::VERTICAL);
+        let sizer_right = wx::BoxSizer::new(wx::HORIZONTAL);
         // let lbox = wx::ListBox::builder(Some(&self.base))
         //     .id(SliderPage::Listbox.into())
         //     .style(wx::LB_HSCROLL.into())
@@ -396,51 +349,38 @@ impl WidgetsPage for SliderWidgetsPage {
         // *self.lbox.borrow_mut() = Some(lbox);
 
         // the 3 panes panes compose the window
-        sizer_top.add_sizer_int(
+        sizer_top.add_sizer_sizerflags(
             Some(&sizer_left),
-            0,
-            wx::GROW | (wx::ALL & !wx::LEFT),
-            10,
-            wx::Object::none(),
+            wx::SizerFlags::new(0)
+                .expand()
+                .border_int((wx::ALL & !wx::LEFT), 10),
         );
-        sizer_top.add_sizer_int(
+        sizer_top.add_sizer_sizerflags(
             Some(&sizer_middle),
-            1,
-            wx::GROW | wx::ALL,
-            10,
-            wx::Object::none(),
+            wx::SizerFlags::new(0).expand().border_int(wx::ALL, 10),
         );
-        sizer_top.add_sizer_int(
+        sizer_top.add_sizer_sizerflags(
             Some(&sizer_right),
-            1,
-            wx::GROW | (wx::ALL & !wx::RIGHT),
-            10,
-            wx::Object::none(),
+            wx::SizerFlags::new(0)
+                .expand()
+                .border_int((wx::ALL & !wx::RIGHT), 10),
         );
         let config_ui = ConfigUI {
-            radio_sel_mode,
-
-            // List type selection radiobox
-            radio_list_type,
+            radio_sides,
 
             // the checkboxes
-            chk_v_scroll,
-            chk_h_scroll,
-            chk_sort,
-            chk_owner_draw,
+            chk_inverse,
+            chk_ticks,
+            chk_min_max_labels,
+            chk_value_label,
 
-            sizer_lbox: sizer_right, // save it to modify it later
-
-                                     // text_add,
-                                     // text_change,
-                                     // text_ensure_visible,
-                                     // text_delete,
+            sizer_slider: sizer_right, // save it to modify it later
         };
 
-        // do create the main control
         self.reset(&config_ui);
         *self.config_ui.borrow_mut() = Some(config_ui);
 
+        // final initializations
         self.base.set_sizer(Some(&sizer_top), true);
     }
 
@@ -486,45 +426,46 @@ impl SliderWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
             lbox: Rc::new(RefCell::new(None)),
+            min: RefCell::new(0),
+            max: RefCell::new(100),
+            range_min: RefCell::new(20),
+            range_max: RefCell::new(80),
             s_item: RefCell::new(1),
         }
     }
 
     fn reset(&self, config_ui: &ConfigUI) {
-        config_ui
-            .radio_sel_mode
-            .set_selection(LboxSel::Single.into());
-        config_ui
-            .radio_list_type
-            .set_selection(LboxType::ListBox.into());
-        config_ui.chk_v_scroll.set_value(false);
-        config_ui.chk_h_scroll.set_value(true);
-        config_ui.chk_sort.set_value(false);
+        // config_ui
+        //     .radio_sides
+        //     .set_selection(SliderTicks::Single.into());
+        config_ui.chk_inverse.set_value(false);
+        config_ui.chk_ticks.set_value(true);
+        config_ui.chk_min_max_labels.set_value(false);
 
-        config_ui.chk_owner_draw.set_value(false);
+        config_ui.chk_value_label.set_value(false);
     }
 
     fn create_lbox(&self, config_ui: &ConfigUI) {
         let mut flags = wx::BORDER_DEFAULT;
 
-        if let Some(m) = LboxSel::from(config_ui.radio_sel_mode.get_selection()) {
-            flags |= match m {
-                LboxSel::Extended => wx::LB_EXTENDED,
-                LboxSel::Multiple => wx::LB_MULTIPLE,
-                _ => wx::LB_SINGLE,
-            } as c_long;
-        }
+        // if let Some(m) = SliderTicks::from(config_ui.radio_sides.get_selection()) {
+        //     flags |= match m {
+        //         SliderTicks::Extended => wx::LB_EXTENDED,
+        //         SliderTicks::Multiple => wx::LB_MULTIPLE,
+        //         _ => wx::LB_SINGLE,
+        //     } as c_long;
+        // }
 
-        if config_ui.chk_v_scroll.is_checked() {
+        if config_ui.chk_inverse.is_checked() {
             flags |= wx::LB_ALWAYS_SB as c_long;
         }
-        if config_ui.chk_h_scroll.is_checked() {
+        if config_ui.chk_ticks.is_checked() {
             flags |= wx::LB_HSCROLL as c_long;
         }
-        if config_ui.chk_sort.is_checked() {
+        if config_ui.chk_min_max_labels.is_checked() {
             flags |= wx::LB_SORT as c_long;
         }
-        if config_ui.chk_owner_draw.is_checked() {
+        if config_ui.chk_value_label.is_checked() {
             flags |= wx::LB_OWNERDRAW as c_long;
         }
 
@@ -543,45 +484,45 @@ impl SliderWidgetsPage {
                 }
             }
 
-            config_ui.sizer_lbox.detach_window(Some(lbox));
+            config_ui.sizer_slider.detach_window(Some(lbox));
             lbox.destroy();
         }
 
-        if let Some(m) = LboxType::from(config_ui.radio_list_type.get_selection()) {
-            // let new_lbox = match m {
-            //     LboxType::CheckListBox => {
-            //         let check_lbox = wx::CheckListBox::builder(Some(&self.base))
-            //             .id(SliderPage::Listbox.into())
-            //             .choices(items)
-            //             .style(flags)
-            //             .build();
-            //         for n in 0..order.len() {
-            //             check_lbox.check(n as u32, order[n]);
-            //         }
-            //         check_lbox.into()
-            //     }
-            //     // LboxType::RearrangeList => {
-            //     //     // TODO
-            //     // }
-            //     _ => wx::ListBox::builder(Some(&self.base))
-            //         .id(SliderPage::Listbox.into())
-            //         .choices(items)
-            //         .style(flags)
-            //         .build(),
-            // };
+        // if let Some(m) = LboxType::from(config_ui.radio_list_type.get_selection()) {
+        //     // let new_lbox = match m {
+        //     //     LboxType::CheckListBox => {
+        //     //         let check_lbox = wx::CheckListBox::builder(Some(&self.base))
+        //     //             .id(SliderPage::Listbox.into())
+        //     //             .choices(items)
+        //     //             .style(flags)
+        //     //             .build();
+        //     //         for n in 0..order.len() {
+        //     //             check_lbox.check(n as u32, order[n]);
+        //     //         }
+        //     //         check_lbox.into()
+        //     //     }
+        //     //     // LboxType::RearrangeList => {
+        //     //     //     // TODO
+        //     //     // }
+        //     //     _ => wx::ListBox::builder(Some(&self.base))
+        //     //         .id(SliderPage::Listbox.into())
+        //     //         .choices(items)
+        //     //         .style(flags)
+        //     //         .build(),
+        //     // };
 
-            let sizer_lbox = &config_ui.sizer_lbox;
-            // sizer_lbox.add_window_int(
-            //     Some(&new_lbox),
-            //     1,
-            //     wx::GROW | wx::ALL,
-            //     5,
-            //     wx::Object::none(),
-            // );
-            sizer_lbox.layout();
+        //     let sizer_slider  = &config_ui.sizer_slider ;
+        //     // sizer_slider .add_window_int(
+        //     //     Some(&new_lbox),
+        //     //     1,
+        //     //     wx::GROW | wx::ALL,
+        //     //     5,
+        //     //     wx::Object::none(),
+        //     // );
+        //     sizer_slider .layout();
 
-            // *self.lbox.borrow_mut() = Some(new_lbox);
-        }
+        //     // *self.lbox.borrow_mut() = Some(new_lbox);
+        // }
     }
 
     fn get_valid_index_from_text(&self, text: &wx::TextCtrl) -> Option<u32> {
