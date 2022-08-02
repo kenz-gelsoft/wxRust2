@@ -107,9 +107,7 @@ class RustClassBinding:
             yield '    fn from(o: %sIsOwned<OWNED>) -> Self {' % (
                 unprefixed,
             )
-            yield '        unsafe { %sIsOwned::from_ptr(o.as_ptr()) }' % (
-                unprefixed_ancestor,
-            )
+            yield '        unsafe { Self::from_ptr(o.as_ptr()) }'
             yield '    }'
             yield '}'
 

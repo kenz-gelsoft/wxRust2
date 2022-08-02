@@ -192,7 +192,7 @@ impl<const OWNED: bool> EventIsOwned<OWNED> {
 }
 impl<const OWNED: bool> From<EventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
     fn from(o: EventIsOwned<OWNED>) -> Self {
-        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+        unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for EventIsOwned<OWNED> {
@@ -224,7 +224,7 @@ impl<const OWNED: bool> EvtHandlerIsOwned<OWNED> {
 }
 impl<const OWNED: bool> From<EvtHandlerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
     fn from(o: EvtHandlerIsOwned<OWNED>) -> Self {
-        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+        unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for EvtHandlerIsOwned<OWNED> {
@@ -364,12 +364,12 @@ impl<const OWNED: bool> TimerIsOwned<OWNED> {
 }
 impl<const OWNED: bool> From<TimerIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
     fn from(o: TimerIsOwned<OWNED>) -> Self {
-        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+        unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> From<TimerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
     fn from(o: TimerIsOwned<OWNED>) -> Self {
-        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+        unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for TimerIsOwned<OWNED> {
@@ -398,12 +398,12 @@ impl<const OWNED: bool> TimerEventIsOwned<OWNED> {
 }
 impl<const OWNED: bool> From<TimerEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
     fn from(o: TimerEventIsOwned<OWNED>) -> Self {
-        unsafe { EventIsOwned::from_ptr(o.as_ptr()) }
+        unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> From<TimerEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
     fn from(o: TimerEventIsOwned<OWNED>) -> Self {
-        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+        unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for TimerEventIsOwned<OWNED> {
