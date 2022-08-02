@@ -124,6 +124,17 @@ pub mod methods {
             }
         }
     }
+
+    pub trait DynamicCast: ObjectMethods {
+        fn class_info() -> ClassInfoIsOwned<false>;
+        fn as_unowned<T: DynamicCast>(&self) -> Option<T::Unowned> {
+            if self.is_kind_of(Some(&T::class_info())) {
+                unsafe { Some(T::from_unowned_ptr(self.as_ptr())) }
+            } else {
+                None
+            }
+        }
+    }
 }
 
 // wxString

@@ -3,6 +3,9 @@
 extern "C" {
 
 // CLASS: wxAnyButton
+wxClassInfo *wxAnyButton_CLASSINFO() {
+    return wxCLASSINFO(wxAnyButton);
+}
 wxAnyButton *wxAnyButton_new() {
     return new wxAnyButton();
 }
@@ -56,6 +59,9 @@ void wxAnyButton_SetBitmapPosition(wxAnyButton * self, wxDirection dir) {
 }
 
 // CLASS: wxArtProvider
+wxClassInfo *wxArtProvider_CLASSINFO() {
+    return wxCLASSINFO(wxArtProvider);
+}
 bool wxArtProvider_Delete(wxArtProvider * provider) {
     return wxArtProvider::Delete(provider);
 }
@@ -109,6 +115,9 @@ wxIcon *wxArtProvider_GetMessageBoxIcon(int flags) {
 }
 
 // CLASS: wxBitmap
+wxClassInfo *wxBitmap_CLASSINFO() {
+    return wxCLASSINFO(wxBitmap);
+}
 wxBitmap *wxBitmap_new() {
     return new wxBitmap();
 }
@@ -377,6 +386,9 @@ wxBitmapBundle *wxBitmapBundle_FromSVGResource(const wxString * name, const wxSi
 #endif
 
 // CLASS: wxBitmapButton
+wxClassInfo *wxBitmapButton_CLASSINFO() {
+    return wxCLASSINFO(wxBitmapButton);
+}
 wxBitmapButton *wxBitmapButton_new() {
     return new wxBitmapButton();
 }
@@ -396,6 +408,9 @@ wxBitmapButton * wxBitmapButton_NewCloseButton(wxWindow * parent, wxWindowID win
 #endif
 
 // CLASS: wxBookCtrlBase
+wxClassInfo *wxBookCtrlBase_CLASSINFO() {
+    return wxCLASSINFO(wxBookCtrlBase);
+}
 int wxBookCtrlBase_GetPageImage(const wxBookCtrlBase * self, size_t n_page) {
     return self->GetPageImage(n_page);
 }
@@ -458,6 +473,9 @@ bool wxBookCtrlBase_Create(wxBookCtrlBase * self, wxWindow * parent, wxWindowID 
 }
 
 // CLASS: wxBookCtrlEvent
+wxClassInfo *wxBookCtrlEvent_CLASSINFO() {
+    return wxCLASSINFO(wxBookCtrlEvent);
+}
 int wxBookCtrlEvent_GetOldSelection(const wxBookCtrlEvent * self) {
     return self->GetOldSelection();
 }
@@ -472,6 +490,9 @@ void wxBookCtrlEvent_SetSelection(wxBookCtrlEvent * self, int page) {
 }
 
 // CLASS: wxBoxSizer
+wxClassInfo *wxBoxSizer_CLASSINFO() {
+    return wxCLASSINFO(wxBoxSizer);
+}
 wxBoxSizer *wxBoxSizer_new(int orient) {
     return new wxBoxSizer(orient);
 }
@@ -483,6 +504,9 @@ void wxBoxSizer_SetOrientation(wxBoxSizer * self, int orient) {
 }
 
 // CLASS: wxButton
+wxClassInfo *wxButton_CLASSINFO() {
+    return wxCLASSINFO(wxButton);
+}
 wxButton *wxButton_new() {
     return new wxButton();
 }
@@ -508,6 +532,9 @@ wxSize *wxButton_GetDefaultSize(wxWindow * win) {
 #endif
 
 // CLASS: wxCheckBox
+wxClassInfo *wxCheckBox_CLASSINFO() {
+    return wxCLASSINFO(wxCheckBox);
+}
 wxCheckBox *wxCheckBox_new() {
     return new wxCheckBox();
 }
@@ -540,6 +567,9 @@ void wxCheckBox_Set3StateValue(wxCheckBox * self, wxCheckBoxState state) {
 }
 
 // CLASS: wxCheckListBox
+wxClassInfo *wxCheckListBox_CLASSINFO() {
+    return wxCLASSINFO(wxCheckListBox);
+}
 wxCheckListBox *wxCheckListBox_new() {
     return new wxCheckListBox();
 }
@@ -564,6 +594,9 @@ wxItemContainer *wxCheckListBox_AsItemContainer(wxCheckListBox* obj) {
 }
 
 // CLASS: wxChoice
+wxClassInfo *wxChoice_CLASSINFO() {
+    return wxCLASSINFO(wxChoice);
+}
 wxChoice *wxChoice_new() {
     return new wxChoice();
 }
@@ -591,6 +624,9 @@ wxItemContainer *wxChoice_AsItemContainer(wxChoice* obj) {
 }
 
 // CLASS: wxColour
+wxClassInfo *wxColour_CLASSINFO() {
+    return wxCLASSINFO(wxColour);
+}
 wxColour *wxColour_new() {
     return new wxColour();
 }
@@ -647,6 +683,9 @@ void wxColour_ChangeLightness1(unsigned char * r, unsigned char * g, unsigned ch
 }
 
 // CLASS: wxColourPickerCtrl
+wxClassInfo *wxColourPickerCtrl_CLASSINFO() {
+    return wxCLASSINFO(wxColourPickerCtrl);
+}
 wxColourPickerCtrl *wxColourPickerCtrl_new() {
     return new wxColourPickerCtrl();
 }
@@ -664,6 +703,9 @@ void wxColourPickerCtrl_SetColour(wxColourPickerCtrl * self, const wxColour * co
 }
 
 // CLASS: wxComboBox
+wxClassInfo *wxComboBox_CLASSINFO() {
+    return wxCLASSINFO(wxComboBox);
+}
 wxComboBox *wxComboBox_new() {
     return new wxComboBox();
 }
@@ -697,6 +739,9 @@ wxTextEntry *wxComboBox_AsTextEntry(wxComboBox* obj) {
 }
 
 // CLASS: wxCommandEvent
+wxClassInfo *wxCommandEvent_CLASSINFO() {
+    return wxCLASSINFO(wxCommandEvent);
+}
 void * wxCommandEvent_GetClientData(const wxCommandEvent * self) {
     return self->GetClientData();
 }
@@ -738,6 +783,9 @@ void wxCommandEvent_SetString(wxCommandEvent * self, const wxString * string) {
 }
 
 // CLASS: wxControl
+wxClassInfo *wxControl_CLASSINFO() {
+    return wxCLASSINFO(wxControl);
+}
 wxControl *wxControl_new(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
     return new wxControl(parent, id, *pos, *size, style, *validator, *name);
 }
@@ -784,6 +832,9 @@ wxString *wxControl_Ellipsize(const wxString * label, const wxDC * dc, wxEllipsi
 }
 
 // CLASS: wxDatePickerCtrl
+wxClassInfo *wxDatePickerCtrl_CLASSINFO() {
+    return wxCLASSINFO(wxDatePickerCtrl);
+}
 wxDatePickerCtrl *wxDatePickerCtrl_new() {
     return new wxDatePickerCtrl();
 }
@@ -812,6 +863,9 @@ void wxDatePickerCtrl_SetValue(wxDatePickerCtrl * self, const wxDateTime * dt) {
 }
 
 // CLASS: wxDirPickerCtrl
+wxClassInfo *wxDirPickerCtrl_CLASSINFO() {
+    return wxCLASSINFO(wxDirPickerCtrl);
+}
 wxDirPickerCtrl *wxDirPickerCtrl_new() {
     return new wxDirPickerCtrl();
 }
@@ -838,6 +892,9 @@ void wxDirPickerCtrl_SetPath(wxDirPickerCtrl * self, const wxString * dirname) {
 }
 
 // CLASS: wxEditableListBox
+wxClassInfo *wxEditableListBox_CLASSINFO() {
+    return wxCLASSINFO(wxEditableListBox);
+}
 wxEditableListBox *wxEditableListBox_new() {
     return new wxEditableListBox();
 }
@@ -855,6 +912,9 @@ void wxEditableListBox_GetStrings(const wxEditableListBox * self, wxArrayString 
 }
 
 // CLASS: wxFileCtrl
+wxClassInfo *wxFileCtrl_CLASSINFO() {
+    return wxCLASSINFO(wxFileCtrl);
+}
 wxFileCtrl *wxFileCtrl_new() {
     return new wxFileCtrl();
 }
@@ -905,6 +965,9 @@ void wxFileCtrl_ShowHidden(wxFileCtrl * self, bool show) {
 }
 
 // CLASS: wxFont
+wxClassInfo *wxFont_CLASSINFO() {
+    return wxCLASSINFO(wxFont);
+}
 #if wxCHECK_VERSION(3, 1, 0)
 wxFont *wxFont_GetBaseFont(const wxFont * self) {
     return new wxFont(self->GetBaseFont());
@@ -1048,6 +1111,9 @@ wxFont *wxFont_new6(const wxNativeFontInfo * native_info) {
 }
 
 // CLASS: wxFontPickerCtrl
+wxClassInfo *wxFontPickerCtrl_CLASSINFO() {
+    return wxCLASSINFO(wxFontPickerCtrl);
+}
 wxFontPickerCtrl *wxFontPickerCtrl_new() {
     return new wxFontPickerCtrl();
 }
@@ -1087,6 +1153,9 @@ void wxFontPickerCtrl_SetSelectedFont(wxFontPickerCtrl * self, const wxFont * fo
 }
 
 // CLASS: wxFrame
+wxClassInfo *wxFrame_CLASSINFO() {
+    return wxCLASSINFO(wxFrame);
+}
 wxFrame *wxFrame_new() {
     return new wxFrame();
 }
@@ -1160,8 +1229,14 @@ void wxFrame_PopStatusText(wxFrame * self, int number) {
 }
 
 // CLASS: wxGDIObject
+wxClassInfo *wxGDIObject_CLASSINFO() {
+    return wxCLASSINFO(wxGDIObject);
+}
 
 // CLASS: wxGauge
+wxClassInfo *wxGauge_CLASSINFO() {
+    return wxCLASSINFO(wxGauge);
+}
 wxGauge *wxGauge_new() {
     return new wxGauge();
 }
@@ -1191,6 +1266,9 @@ void wxGauge_SetValue(wxGauge * self, int pos) {
 }
 
 // CLASS: wxGenericDirCtrl
+wxClassInfo *wxGenericDirCtrl_CLASSINFO() {
+    return wxCLASSINFO(wxGenericDirCtrl);
+}
 wxGenericDirCtrl *wxGenericDirCtrl_new() {
     return new wxGenericDirCtrl();
 }
@@ -1331,6 +1409,9 @@ wxHeaderColumnSimple *wxHeaderColumnSimple_new1(const wxBitmapBundle * bitmap, i
 }
 
 // CLASS: wxHeaderCtrl
+wxClassInfo *wxHeaderCtrl_CLASSINFO() {
+    return wxCLASSINFO(wxHeaderCtrl);
+}
 bool wxHeaderCtrl_Create(wxHeaderCtrl * self, wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return self->Create(parent, winid, *pos, *size, style, *name);
 }
@@ -1383,6 +1464,9 @@ void wxHeaderCtrl_MoveColumnInOrderArray(wxArrayInt * order, unsigned int idx, u
 }
 
 // CLASS: wxHeaderCtrlSimple
+wxClassInfo *wxHeaderCtrlSimple_CLASSINFO() {
+    return wxCLASSINFO(wxHeaderCtrlSimple);
+}
 wxHeaderCtrlSimple *wxHeaderCtrlSimple_new() {
     return new wxHeaderCtrlSimple();
 }
@@ -1412,6 +1496,9 @@ void wxHeaderCtrlSimple_RemoveSortIndicator(wxHeaderCtrlSimple * self) {
 }
 
 // CLASS: wxHyperlinkCtrl
+wxClassInfo *wxHyperlinkCtrl_CLASSINFO() {
+    return wxCLASSINFO(wxHyperlinkCtrl);
+}
 wxHyperlinkCtrl *wxHyperlinkCtrl_new() {
     return new wxHyperlinkCtrl();
 }
@@ -1453,6 +1540,9 @@ void wxHyperlinkCtrl_SetVisitedColour(wxHyperlinkCtrl * self, const wxColour * c
 }
 
 // CLASS: wxIcon
+wxClassInfo *wxIcon_CLASSINFO() {
+    return wxCLASSINFO(wxIcon);
+}
 wxIcon *wxIcon_new() {
     return new wxIcon();
 }
@@ -1655,6 +1745,9 @@ int wxItemContainerImmutable_FindString(const wxItemContainerImmutable * self, c
 }
 
 // CLASS: wxListBox
+wxClassInfo *wxListBox_CLASSINFO() {
+    return wxCLASSINFO(wxListBox);
+}
 wxListBox *wxListBox_new() {
     return new wxListBox();
 }
@@ -1714,6 +1807,9 @@ wxItemContainer *wxListBox_AsItemContainer(wxListBox* obj) {
 }
 
 // CLASS: wxMenu
+wxClassInfo *wxMenu_CLASSINFO() {
+    return wxCLASSINFO(wxMenu);
+}
 wxMenu *wxMenu_new() {
     return new wxMenu();
 }
@@ -1881,6 +1977,9 @@ bool wxMenu_IsAttached(const wxMenu * self) {
 }
 
 // CLASS: wxMenuBar
+wxClassInfo *wxMenuBar_CLASSINFO() {
+    return wxCLASSINFO(wxMenuBar);
+}
 wxMenuBar *wxMenuBar_new(long style) {
     return new wxMenuBar(style);
 }
@@ -1977,6 +2076,9 @@ wxMenuBar * wxMenuBar_MacGetCommonMenuBar() {
 #endif
 
 // CLASS: wxMenuItem
+wxClassInfo *wxMenuItem_CLASSINFO() {
+    return wxCLASSINFO(wxMenuItem);
+}
 wxBitmap *wxMenuItem_GetBitmap(const wxMenuItem * self) {
     return new wxBitmap(self->GetBitmap());
 }
@@ -2114,6 +2216,9 @@ wxString *wxMenuItem_GetLabelText(const wxString * text) {
 }
 
 // CLASS: wxNonOwnedWindow
+wxClassInfo *wxNonOwnedWindow_CLASSINFO() {
+    return wxCLASSINFO(wxNonOwnedWindow);
+}
 bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow * self, const wxRegion * region) {
     return self->SetShape(*region);
 }
@@ -2122,6 +2227,9 @@ bool wxNonOwnedWindow_SetShape1(wxNonOwnedWindow * self, const wxGraphicsPath * 
 }
 
 // CLASS: wxNotebook
+wxClassInfo *wxNotebook_CLASSINFO() {
+    return wxCLASSINFO(wxNotebook);
+}
 wxNotebook *wxNotebook_new() {
     return new wxNotebook();
 }
@@ -2139,6 +2247,9 @@ void wxNotebook_SetPadding(wxNotebook * self, const wxSize * padding) {
 }
 
 // CLASS: wxNotifyEvent
+wxClassInfo *wxNotifyEvent_CLASSINFO() {
+    return wxCLASSINFO(wxNotifyEvent);
+}
 void wxNotifyEvent_Allow(wxNotifyEvent * self) {
     return self->Allow();
 }
@@ -2150,6 +2261,9 @@ void wxNotifyEvent_Veto(wxNotifyEvent * self) {
 }
 
 // CLASS: wxPanel
+wxClassInfo *wxPanel_CLASSINFO() {
+    return wxCLASSINFO(wxPanel);
+}
 wxPanel *wxPanel_new() {
     return new wxPanel();
 }
@@ -2167,6 +2281,9 @@ void wxPanel_SetFocusIgnoringChildren(wxPanel * self) {
 }
 
 // CLASS: wxPickerBase
+wxClassInfo *wxPickerBase_CLASSINFO() {
+    return wxCLASSINFO(wxPickerBase);
+}
 bool wxPickerBase_CreateBase(wxPickerBase * self, wxWindow * parent, wxWindowID id, const wxString * text, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
     return self->CreateBase(parent, id, *text, *pos, *size, style, *validator, *name);
 }
@@ -2243,6 +2360,9 @@ wxPoint *wxPoint_new2(const wxRealPoint * pt) {
 }
 
 // CLASS: wxRadioBox
+wxClassInfo *wxRadioBox_CLASSINFO() {
+    return wxCLASSINFO(wxRadioBox);
+}
 wxRadioBox *wxRadioBox_new() {
     return new wxRadioBox();
 }
@@ -2557,6 +2677,9 @@ void wxSize_SetWidth(wxSize * self, int width) {
 }
 
 // CLASS: wxSizer
+wxClassInfo *wxSizer_CLASSINFO() {
+    return wxCLASSINFO(wxSizer);
+}
 wxSizerItem * wxSizer_Add(wxSizer * self, wxWindow * window, const wxSizerFlags * flags) {
     return self->Add(window, *flags);
 }
@@ -2873,6 +2996,9 @@ int wxSizerFlags_GetDefaultBorder() {
 }
 
 // CLASS: wxStaticBitmap
+wxClassInfo *wxStaticBitmap_CLASSINFO() {
+    return wxCLASSINFO(wxStaticBitmap);
+}
 wxStaticBitmap *wxStaticBitmap_new() {
     return new wxStaticBitmap();
 }
@@ -2896,6 +3022,9 @@ void wxStaticBitmap_SetIcon(wxStaticBitmap * self, const wxIcon * label) {
 }
 
 // CLASS: wxStaticBox
+wxClassInfo *wxStaticBox_CLASSINFO() {
+    return wxCLASSINFO(wxStaticBox);
+}
 wxStaticBox *wxStaticBox_new() {
     return new wxStaticBox();
 }
@@ -2907,6 +3036,9 @@ bool wxStaticBox_Create(wxStaticBox * self, wxWindow * parent, wxWindowID id, co
 }
 
 // CLASS: wxStaticBoxSizer
+wxClassInfo *wxStaticBoxSizer_CLASSINFO() {
+    return wxCLASSINFO(wxStaticBoxSizer);
+}
 wxStaticBoxSizer *wxStaticBoxSizer_new(wxStaticBox * box_, int orient) {
     return new wxStaticBoxSizer(box_, orient);
 }
@@ -2918,6 +3050,9 @@ wxStaticBox * wxStaticBoxSizer_GetStaticBox(const wxStaticBoxSizer * self) {
 }
 
 // CLASS: wxStaticText
+wxClassInfo *wxStaticText_CLASSINFO() {
+    return wxCLASSINFO(wxStaticText);
+}
 wxStaticText *wxStaticText_new() {
     return new wxStaticText();
 }
@@ -3230,6 +3365,9 @@ wxTextAttr *wxTextAttr_Merge1(const wxTextAttr * base, const wxTextAttr * overla
 }
 
 // CLASS: wxTextCtrl
+wxClassInfo *wxTextCtrl_CLASSINFO() {
+    return wxCLASSINFO(wxTextCtrl);
+}
 #ifdef __WXOSX__
 void wxTextCtrl_OSXEnableNewLineReplacement(wxTextCtrl * self, bool enable) {
     return self->OSXEnableNewLineReplacement(enable);
@@ -3450,6 +3588,9 @@ void wxTextEntry_WriteText(wxTextEntry * self, const wxString * text) {
 }
 
 // CLASS: wxToolBar
+wxClassInfo *wxToolBar_CLASSINFO() {
+    return wxCLASSINFO(wxToolBar);
+}
 wxToolBar *wxToolBar_new() {
     return new wxToolBar();
 }
@@ -3617,6 +3758,9 @@ wxToolBarToolBase * wxToolBar_CreateSeparator(wxToolBar * self) {
 }
 
 // CLASS: wxTopLevelWindow
+wxClassInfo *wxTopLevelWindow_CLASSINFO() {
+    return wxCLASSINFO(wxTopLevelWindow);
+}
 wxTopLevelWindow *wxTopLevelWindow_new() {
     return new wxTopLevelWindow();
 }
@@ -3730,6 +3874,9 @@ wxSize *wxTopLevelWindow_GetDefaultSize() {
 }
 
 // CLASS: wxValidator
+wxClassInfo *wxValidator_CLASSINFO() {
+    return wxCLASSINFO(wxValidator);
+}
 wxValidator *wxValidator_new() {
     return new wxValidator();
 }
@@ -3759,6 +3906,9 @@ bool wxValidator_IsSilent() {
 }
 
 // CLASS: wxWindow
+wxClassInfo *wxWindow_CLASSINFO() {
+    return wxCLASSINFO(wxWindow);
+}
 bool wxWindow_AcceptsFocus(const wxWindow * self) {
     return self->AcceptsFocus();
 }
@@ -4632,6 +4782,9 @@ bool wxWindow_Create(wxWindow * self, wxWindow * parent, wxWindowID id, const wx
 }
 
 // CLASS: wxWrapSizer
+wxClassInfo *wxWrapSizer_CLASSINFO() {
+    return wxCLASSINFO(wxWrapSizer);
+}
 wxWrapSizer *wxWrapSizer_new(int orient, int flags) {
     return new wxWrapSizer(orient, flags);
 }

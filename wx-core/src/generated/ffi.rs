@@ -5,6 +5,7 @@ pub use crate::ffi::*;
 extern "C" {
 
     // wxAnyButton
+    pub fn wxAnyButton_CLASSINFO() -> *mut c_void;
     pub fn wxAnyButton_new() -> *mut c_void;
     // DTOR: pub fn wxAnyButton_~wxAnyButton(self_: *mut c_void);
     pub fn wxAnyButton_GetBitmap(self_: *const c_void) -> *mut c_void;
@@ -25,6 +26,7 @@ extern "C" {
     pub fn wxAnyButton_SetBitmapPosition(self_: *mut c_void, dir: c_int);
 
     // wxArtProvider
+    pub fn wxArtProvider_CLASSINFO() -> *mut c_void;
     // DTOR: pub fn wxArtProvider_~wxArtProvider(self_: *mut c_void);
     pub fn wxArtProvider_Delete(provider: *mut c_void) -> bool;
     pub fn wxArtProvider_GetBitmap(
@@ -57,6 +59,7 @@ extern "C" {
     pub fn wxArtProvider_GetMessageBoxIcon(flags: c_int) -> *mut c_void;
 
     // wxBitmap
+    pub fn wxBitmap_CLASSINFO() -> *mut c_void;
     pub fn wxBitmap_new() -> *mut c_void;
     pub fn wxBitmap_new1(bitmap: *const c_void) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxBitmap_new2(bits: char, width: c_int, height: c_int, depth: c_int) -> *mut c_void;
@@ -193,6 +196,7 @@ extern "C" {
     ) -> *mut c_void;
 
     // wxBitmapButton
+    pub fn wxBitmapButton_CLASSINFO() -> *mut c_void;
     pub fn wxBitmapButton_new() -> *mut c_void;
     pub fn wxBitmapButton_new1(
         parent: *mut c_void,
@@ -228,6 +232,7 @@ extern "C" {
     ) -> *mut c_void;
 
     // wxBookCtrlBase
+    pub fn wxBookCtrlBase_CLASSINFO() -> *mut c_void;
     pub fn wxBookCtrlBase_GetPageImage(self_: *const c_void, n_page: usize) -> c_int;
     pub fn wxBookCtrlBase_SetPageImage(self_: *mut c_void, page: usize, image: c_int) -> bool;
     pub fn wxBookCtrlBase_GetPageText(self_: *const c_void, n_page: usize) -> *mut c_void;
@@ -278,6 +283,7 @@ extern "C" {
     ) -> bool;
 
     // wxBookCtrlEvent
+    pub fn wxBookCtrlEvent_CLASSINFO() -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxBookCtrlEvent_new(event_type: wxEventType, id: c_int, sel: c_int, old_sel: c_int) -> *mut c_void;
     pub fn wxBookCtrlEvent_GetOldSelection(self_: *const c_void) -> c_int;
     pub fn wxBookCtrlEvent_GetSelection(self_: *const c_void) -> c_int;
@@ -285,11 +291,13 @@ extern "C" {
     pub fn wxBookCtrlEvent_SetSelection(self_: *mut c_void, page: c_int);
 
     // wxBoxSizer
+    pub fn wxBoxSizer_CLASSINFO() -> *mut c_void;
     pub fn wxBoxSizer_new(orient: c_int) -> *mut c_void;
     pub fn wxBoxSizer_GetOrientation(self_: *const c_void) -> c_int;
     pub fn wxBoxSizer_SetOrientation(self_: *mut c_void, orient: c_int);
 
     // wxButton
+    pub fn wxButton_CLASSINFO() -> *mut c_void;
     pub fn wxButton_new() -> *mut c_void;
     pub fn wxButton_new1(
         parent: *mut c_void,
@@ -318,6 +326,7 @@ extern "C" {
     pub fn wxButton_GetDefaultSize(win: *mut c_void) -> *mut c_void;
 
     // wxCheckBox
+    pub fn wxCheckBox_CLASSINFO() -> *mut c_void;
     pub fn wxCheckBox_new() -> *mut c_void;
     pub fn wxCheckBox_new1(
         parent: *mut c_void,
@@ -350,6 +359,7 @@ extern "C" {
     pub fn wxCheckBox_Set3StateValue(self_: *mut c_void, state: c_int);
 
     // wxCheckListBox
+    pub fn wxCheckListBox_CLASSINFO() -> *mut c_void;
     pub fn wxCheckListBox_new() -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxCheckListBox_new1(parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
     pub fn wxCheckListBox_new2(
@@ -385,6 +395,7 @@ extern "C" {
     pub fn wxCheckListBox_AsItemContainer(obj: *mut c_void) -> *mut c_void;
 
     // wxChoice
+    pub fn wxChoice_CLASSINFO() -> *mut c_void;
     pub fn wxChoice_new() -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxChoice_new1(parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
     pub fn wxChoice_new2(
@@ -418,6 +429,7 @@ extern "C" {
     pub fn wxChoice_AsItemContainer(obj: *mut c_void) -> *mut c_void;
 
     // wxColour
+    pub fn wxColour_CLASSINFO() -> *mut c_void;
     pub fn wxColour_new() -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxColour_new1(red: unsigned char, green: unsigned char, blue: unsigned char, alpha: unsigned char) -> *mut c_void;
     pub fn wxColour_new2(colour_name: *const c_void) -> *mut c_void;
@@ -463,6 +475,7 @@ extern "C" {
     pub fn wxColour_ChangeLightness1(r: *mut c_void, g: *mut c_void, b: *mut c_void, ialpha: c_int);
 
     // wxColourPickerCtrl
+    pub fn wxColourPickerCtrl_CLASSINFO() -> *mut c_void;
     pub fn wxColourPickerCtrl_new() -> *mut c_void;
     pub fn wxColourPickerCtrl_new1(
         parent: *mut c_void,
@@ -490,6 +503,7 @@ extern "C" {
     // BLOCKED: pub fn wxColourPickerCtrl_SetColour1(self_: *mut c_void, colname: *const c_void);
 
     // wxComboBox
+    pub fn wxComboBox_CLASSINFO() -> *mut c_void;
     pub fn wxComboBox_new() -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxComboBox_new1(parent: *mut c_void, id: c_int, value: *const c_void, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
     pub fn wxComboBox_new2(
@@ -527,6 +541,7 @@ extern "C" {
     pub fn wxComboBox_AsTextEntry(obj: *mut c_void) -> *mut c_void;
 
     // wxCommandEvent
+    pub fn wxCommandEvent_CLASSINFO() -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxCommandEvent_new(command_event_type: wxEventType, id: c_int) -> *mut c_void;
     pub fn wxCommandEvent_GetClientData(self_: *const c_void) -> *mut c_void;
     pub fn wxCommandEvent_GetClientObject(self_: *const c_void) -> *mut c_void;
@@ -543,6 +558,7 @@ extern "C" {
     pub fn wxCommandEvent_SetString(self_: *mut c_void, string: *const c_void);
 
     // wxControl
+    pub fn wxControl_CLASSINFO() -> *mut c_void;
     pub fn wxControl_new(
         parent: *mut c_void,
         id: c_int,
@@ -589,6 +605,7 @@ extern "C" {
     ) -> *mut c_void;
 
     // wxDatePickerCtrl
+    pub fn wxDatePickerCtrl_CLASSINFO() -> *mut c_void;
     pub fn wxDatePickerCtrl_new() -> *mut c_void;
     pub fn wxDatePickerCtrl_new1(
         parent: *mut c_void,
@@ -622,6 +639,7 @@ extern "C" {
     pub fn wxDatePickerCtrl_SetValue(self_: *mut c_void, dt: *const c_void);
 
     // wxDirPickerCtrl
+    pub fn wxDirPickerCtrl_CLASSINFO() -> *mut c_void;
     pub fn wxDirPickerCtrl_new() -> *mut c_void;
     pub fn wxDirPickerCtrl_new1(
         parent: *mut c_void,
@@ -653,6 +671,7 @@ extern "C" {
     pub fn wxDirPickerCtrl_SetPath(self_: *mut c_void, dirname: *const c_void);
 
     // wxEditableListBox
+    pub fn wxEditableListBox_CLASSINFO() -> *mut c_void;
     pub fn wxEditableListBox_new() -> *mut c_void;
     pub fn wxEditableListBox_new1(
         parent: *mut c_void,
@@ -678,6 +697,7 @@ extern "C" {
     pub fn wxEditableListBox_GetStrings(self_: *const c_void, strings: *mut c_void);
 
     // wxFileCtrl
+    pub fn wxFileCtrl_CLASSINFO() -> *mut c_void;
     pub fn wxFileCtrl_new() -> *mut c_void;
     pub fn wxFileCtrl_new1(
         parent: *mut c_void,
@@ -717,6 +737,7 @@ extern "C" {
     pub fn wxFileCtrl_ShowHidden(self_: *mut c_void, show: bool);
 
     // wxFont
+    pub fn wxFont_CLASSINFO() -> *mut c_void;
     pub fn wxFont_GetBaseFont(self_: *const c_void) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxFont_GetEncoding(self_: *const c_void) -> wxFontEncoding;
     pub fn wxFont_GetFaceName(self_: *const c_void) -> *mut c_void;
@@ -787,6 +808,7 @@ extern "C" {
     // DTOR: pub fn wxFont_~wxFont(self_: *mut c_void);
 
     // wxFontPickerCtrl
+    pub fn wxFontPickerCtrl_CLASSINFO() -> *mut c_void;
     pub fn wxFontPickerCtrl_new() -> *mut c_void;
     pub fn wxFontPickerCtrl_new1(
         parent: *mut c_void,
@@ -819,6 +841,7 @@ extern "C" {
     pub fn wxFontPickerCtrl_SetSelectedFont(self_: *mut c_void, font: *const c_void);
 
     // wxFrame
+    pub fn wxFrame_CLASSINFO() -> *mut c_void;
     pub fn wxFrame_new() -> *mut c_void;
     pub fn wxFrame_new1(
         parent: *mut c_void,
@@ -884,9 +907,11 @@ extern "C" {
     pub fn wxFrame_PopStatusText(self_: *mut c_void, number: c_int);
 
     // wxGDIObject
+    pub fn wxGDIObject_CLASSINFO() -> *mut c_void;
     // BLOCKED: pub fn wxGDIObject_new() -> *mut c_void;
 
     // wxGauge
+    pub fn wxGauge_CLASSINFO() -> *mut c_void;
     pub fn wxGauge_new() -> *mut c_void;
     pub fn wxGauge_new1(
         parent: *mut c_void,
@@ -918,6 +943,7 @@ extern "C" {
     pub fn wxGauge_SetValue(self_: *mut c_void, pos: c_int);
 
     // wxGenericDirCtrl
+    pub fn wxGenericDirCtrl_CLASSINFO() -> *mut c_void;
     pub fn wxGenericDirCtrl_new() -> *mut c_void;
     pub fn wxGenericDirCtrl_new1(
         parent: *mut c_void,
@@ -1002,6 +1028,7 @@ extern "C" {
     ) -> *mut c_void;
 
     // wxHeaderCtrl
+    pub fn wxHeaderCtrl_CLASSINFO() -> *mut c_void;
     // BLOCKED: pub fn wxHeaderCtrl_new() -> *mut c_void;
     // BLOCKED: pub fn wxHeaderCtrl_new1(parent: *mut c_void, winid: c_int, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> *mut c_void;
     pub fn wxHeaderCtrl_Create(
@@ -1038,6 +1065,7 @@ extern "C" {
     pub fn wxHeaderCtrl_MoveColumnInOrderArray(order: *mut c_void, idx: c_uint, pos: c_uint);
 
     // wxHeaderCtrlSimple
+    pub fn wxHeaderCtrlSimple_CLASSINFO() -> *mut c_void;
     pub fn wxHeaderCtrlSimple_new() -> *mut c_void;
     pub fn wxHeaderCtrlSimple_new1(
         parent: *mut c_void,
@@ -1056,6 +1084,7 @@ extern "C" {
     pub fn wxHeaderCtrlSimple_RemoveSortIndicator(self_: *mut c_void);
 
     // wxHyperlinkCtrl
+    pub fn wxHyperlinkCtrl_CLASSINFO() -> *mut c_void;
     pub fn wxHyperlinkCtrl_new() -> *mut c_void;
     pub fn wxHyperlinkCtrl_new1(
         parent: *mut c_void,
@@ -1090,6 +1119,7 @@ extern "C" {
     pub fn wxHyperlinkCtrl_SetVisitedColour(self_: *mut c_void, colour: *const c_void);
 
     // wxIcon
+    pub fn wxIcon_CLASSINFO() -> *mut c_void;
     pub fn wxIcon_new() -> *mut c_void;
     pub fn wxIcon_new1(icon: *const c_void) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxIcon_new2(bits: char, width: c_int, height: c_int) -> *mut c_void;
@@ -1251,6 +1281,7 @@ extern "C" {
     ) -> c_int;
 
     // wxListBox
+    pub fn wxListBox_CLASSINFO() -> *mut c_void;
     pub fn wxListBox_new() -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxListBox_new1(parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
     pub fn wxListBox_new2(
@@ -1297,6 +1328,7 @@ extern "C" {
     pub fn wxListBox_AsItemContainer(obj: *mut c_void) -> *mut c_void;
 
     // wxMenu
+    pub fn wxMenu_CLASSINFO() -> *mut c_void;
     pub fn wxMenu_new() -> *mut c_void;
     pub fn wxMenu_new1(style: c_long) -> *mut c_void;
     pub fn wxMenu_new2(title: *const c_void, style: c_long) -> *mut c_void;
@@ -1433,6 +1465,7 @@ extern "C" {
     pub fn wxMenu_IsAttached(self_: *const c_void) -> bool;
 
     // wxMenuBar
+    pub fn wxMenuBar_CLASSINFO() -> *mut c_void;
     pub fn wxMenuBar_new(style: c_long) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxMenuBar_new1(n: usize, menus: *mut c_void, titles: wxString, style: c_long) -> *mut c_void;
     // DTOR: pub fn wxMenuBar_~wxMenuBar(self_: *mut c_void);
@@ -1483,6 +1516,7 @@ extern "C" {
     pub fn wxMenuBar_MacGetCommonMenuBar() -> *mut c_void;
 
     // wxMenuItem
+    pub fn wxMenuItem_CLASSINFO() -> *mut c_void;
     // BLOCKED: pub fn wxMenuItem_GetBackgroundColour(self_: *const c_void) -> *mut c_void;
     pub fn wxMenuItem_GetBitmap(self_: *const c_void) -> *mut c_void;
     pub fn wxMenuItem_GetBitmap1(self_: *const c_void, checked: bool) -> *mut c_void;
@@ -1545,10 +1579,12 @@ extern "C" {
     pub fn wxMenuItem_GetLabelText(text: *const c_void) -> *mut c_void;
 
     // wxNonOwnedWindow
+    pub fn wxNonOwnedWindow_CLASSINFO() -> *mut c_void;
     pub fn wxNonOwnedWindow_SetShape(self_: *mut c_void, region: *const c_void) -> bool;
     pub fn wxNonOwnedWindow_SetShape1(self_: *mut c_void, path: *const c_void) -> bool;
 
     // wxNotebook
+    pub fn wxNotebook_CLASSINFO() -> *mut c_void;
     pub fn wxNotebook_new() -> *mut c_void;
     pub fn wxNotebook_new1(
         parent: *mut c_void,
@@ -1566,12 +1602,14 @@ extern "C" {
     pub fn wxNotebook_SetPadding(self_: *mut c_void, padding: *const c_void);
 
     // wxNotifyEvent
+    pub fn wxNotifyEvent_CLASSINFO() -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxNotifyEvent_new(event_type: wxEventType, id: c_int) -> *mut c_void;
     pub fn wxNotifyEvent_Allow(self_: *mut c_void);
     pub fn wxNotifyEvent_IsAllowed(self_: *const c_void) -> bool;
     pub fn wxNotifyEvent_Veto(self_: *mut c_void);
 
     // wxPanel
+    pub fn wxPanel_CLASSINFO() -> *mut c_void;
     pub fn wxPanel_new() -> *mut c_void;
     pub fn wxPanel_new1(
         parent: *mut c_void,
@@ -1595,6 +1633,7 @@ extern "C" {
     pub fn wxPanel_SetFocusIgnoringChildren(self_: *mut c_void);
 
     // wxPickerBase
+    pub fn wxPickerBase_CLASSINFO() -> *mut c_void;
     // BLOCKED: pub fn wxPickerBase_new() -> *mut c_void;
     // DTOR: pub fn wxPickerBase_~wxPickerBase(self_: *mut c_void);
     pub fn wxPickerBase_CreateBase(
@@ -1653,6 +1692,7 @@ extern "C" {
     pub fn wxPoint_new2(pt: *const c_void) -> *mut c_void;
 
     // wxRadioBox
+    pub fn wxRadioBox_CLASSINFO() -> *mut c_void;
     pub fn wxRadioBox_new() -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxRadioBox_new1(parent: *mut c_void, id: c_int, label: *const c_void, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, major_dimension: c_int, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
     pub fn wxRadioBox_new2(
@@ -1822,6 +1862,7 @@ extern "C" {
     pub fn wxSize_SetWidth(self_: *mut c_void, width: c_int);
 
     // wxSizer
+    pub fn wxSizer_CLASSINFO() -> *mut c_void;
     // BLOCKED: pub fn wxSizer_new() -> *mut c_void;
     // DTOR: pub fn wxSizer_~wxSizer(self_: *mut c_void);
     pub fn wxSizer_Add(
@@ -2111,6 +2152,7 @@ extern "C" {
     // NOT_SUPPORTED: pub fn wxSizerFlags_GetDefaultBorderFractional() -> float;
 
     // wxStaticBitmap
+    pub fn wxStaticBitmap_CLASSINFO() -> *mut c_void;
     pub fn wxStaticBitmap_new() -> *mut c_void;
     pub fn wxStaticBitmap_new1(
         parent: *mut c_void,
@@ -2139,6 +2181,7 @@ extern "C" {
     // NOT_SUPPORTED: pub fn wxStaticBitmap_GetScaleMode(self_: *const c_void) -> ScaleMode;
 
     // wxStaticBox
+    pub fn wxStaticBox_CLASSINFO() -> *mut c_void;
     pub fn wxStaticBox_new() -> *mut c_void;
     pub fn wxStaticBox_new1(
         parent: *mut c_void,
@@ -2164,6 +2207,7 @@ extern "C" {
     // BLOCKED: pub fn wxStaticBox_Create1(self_: *mut c_void, parent: *mut c_void, id: c_int, label: *mut c_void, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> bool;
 
     // wxStaticBoxSizer
+    pub fn wxStaticBoxSizer_CLASSINFO() -> *mut c_void;
     pub fn wxStaticBoxSizer_new(box_: *mut c_void, orient: c_int) -> *mut c_void;
     pub fn wxStaticBoxSizer_new1(
         orient: c_int,
@@ -2173,6 +2217,7 @@ extern "C" {
     pub fn wxStaticBoxSizer_GetStaticBox(self_: *const c_void) -> *mut c_void;
 
     // wxStaticText
+    pub fn wxStaticText_CLASSINFO() -> *mut c_void;
     pub fn wxStaticText_new() -> *mut c_void;
     pub fn wxStaticText_new1(
         parent: *mut c_void,
@@ -2319,6 +2364,7 @@ extern "C" {
     pub fn wxTextAttr_Merge1(base: *const c_void, overlay: *const c_void) -> *mut c_void;
 
     // wxTextCtrl
+    pub fn wxTextCtrl_CLASSINFO() -> *mut c_void;
     pub fn wxTextCtrl_OSXEnableNewLineReplacement(self_: *mut c_void, enable: bool);
     // BLOCKED: pub fn wxTextCtrl_operator<<(self_: *mut c_void, s: *const c_void) -> *mut c_void;
     // BLOCKED: pub fn wxTextCtrl_operator<<1(self_: *mut c_void, i: c_int) -> *mut c_void;
@@ -2443,6 +2489,7 @@ extern "C" {
     pub fn wxTextEntry_WriteText(self_: *mut c_void, text: *const c_void);
 
     // wxToolBar
+    pub fn wxToolBar_CLASSINFO() -> *mut c_void;
     pub fn wxToolBar_new() -> *mut c_void;
     pub fn wxToolBar_new1(
         parent: *mut c_void,
@@ -2586,6 +2633,7 @@ extern "C" {
     pub fn wxToolBar_CreateSeparator(self_: *mut c_void) -> *mut c_void;
 
     // wxTopLevelWindow
+    pub fn wxTopLevelWindow_CLASSINFO() -> *mut c_void;
     pub fn wxTopLevelWindow_new() -> *mut c_void;
     pub fn wxTopLevelWindow_new1(
         parent: *mut c_void,
@@ -2653,6 +2701,7 @@ extern "C" {
     pub fn wxTopLevelWindow_GetDefaultSize() -> *mut c_void;
 
     // wxValidator
+    pub fn wxValidator_CLASSINFO() -> *mut c_void;
     pub fn wxValidator_new() -> *mut c_void;
     // DTOR: pub fn wxValidator_~wxValidator(self_: *mut c_void);
     pub fn wxValidator_Clone(self_: *const c_void) -> *mut c_void;
@@ -2665,6 +2714,7 @@ extern "C" {
     pub fn wxValidator_IsSilent() -> bool;
 
     // wxWindow
+    pub fn wxWindow_CLASSINFO() -> *mut c_void;
     pub fn wxWindow_AcceptsFocus(self_: *const c_void) -> bool;
     pub fn wxWindow_AcceptsFocusFromKeyboard(self_: *const c_void) -> bool;
     pub fn wxWindow_AcceptsFocusRecursively(self_: *const c_void) -> bool;
@@ -3053,6 +3103,7 @@ extern "C" {
     ) -> bool;
 
     // wxWrapSizer
+    pub fn wxWrapSizer_CLASSINFO() -> *mut c_void;
     pub fn wxWrapSizer_new(orient: c_int, flags: c_int) -> *mut c_void;
 
 }

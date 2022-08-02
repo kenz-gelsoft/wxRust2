@@ -530,9 +530,7 @@ impl ListboxWidgetsPage {
                 items.add(&lbox.get_string(n));
             }
 
-            if lbox.is_kind_of(Some(&wx::CheckListBox::class_info())) {
-                // TODO: safe downcasting
-                let check_lbox = unsafe { wx::CheckListBox::from_unowned_ptr(lbox.as_ptr()) };
+            if let Some(check_lbox) = lbox.as_unowned::<wx::CheckListBox>() {
                 for n in 0..count {
                     order.push(check_lbox.is_checked(n));
                 }
@@ -553,8 +551,7 @@ impl ListboxWidgetsPage {
                     for n in 0..order.len() {
                         check_lbox.check(n as u32, order[n]);
                     }
-                    // TODO: Support safe upcasting
-                    unsafe { wx::ListBox::from_ptr(check_lbox.as_ptr()) }
+                    check_lbox.into()
                 }
                 // LboxType::RearrangeList => {
                 //     // TODO
