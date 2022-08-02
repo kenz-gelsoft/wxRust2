@@ -58,7 +58,7 @@ class RustClassBinding:
             yield '}'
             for line in self._impl_with_ctors():
                 yield line
-            for line in self._impl_class_info_if_needed():
+            for line in self._impl_dynamic_cast_if_needed():
                 yield line
             for line in self._impl_drop_if_needed():
                 yield line
@@ -92,7 +92,7 @@ class RustClassBinding:
         yield '    }'
         yield '}'
     
-    def _impl_class_info_if_needed(self):
+    def _impl_dynamic_cast_if_needed(self):
         if not self.is_a('wxObject'):
             return
         yield 'impl<const OWNED: bool> DynamicCast for %sIsOwned<OWNED> {' % (self.__model.unprefixed(),)
