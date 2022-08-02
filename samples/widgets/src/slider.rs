@@ -6,50 +6,58 @@ use wx::methods::*;
 
 // control ids
 #[derive(Clone, Copy)]
-enum ListboxPage {
+enum SliderPage {
     Reset = wx::ID_HIGHEST as isize,
-    Add,
-    AddText,
-    AddSeveral,
-    AddMany,
     Clear,
-    Change,
-    ChangeText,
-    Delete,
-    DeleteText,
-    DeleteSel,
-    Listbox,
-    EnsureVisible,
-    EnsureVisibleText,
-    ContainerTests,
-    GetTopItem,
-    GetCountPerPage,
-    MoveUp,
-    MoveDown,
+    SetValue,
+    SetMinAndMax,
+    SetRange,
+    SetLineSize,
+    SetPageSize,
+    SetTickFreq,
+    SetThumbLen,
+    CurValueText,
+    ValueText,
+    MinText,
+    MaxText,
+    RangeMinText,
+    RangeMaxText,
+    LineSizeText,
+    PageSizeText,
+    TickFreqText,
+    ThumbLenText,
+    RadioSides,
+    BothSides,
+    SelectRange,
+    Slider,
 }
-impl ListboxPage {
+impl SliderPage {
     fn from(v: c_int) -> Option<Self> {
-        use ListboxPage::*;
+        use SliderPage::*;
         for e in [
             Reset,
-            Add,
-            AddText,
-            AddSeveral,
-            AddMany,
             Clear,
-            Change,
-            ChangeText,
-            Delete,
-            DeleteText,
-            DeleteSel,
-            Listbox,
-            EnsureVisible,
-            EnsureVisibleText,
-            ContainerTests,
-            GetTopItem,
-            GetCountPerPage,
-            MoveUp,
-            MoveDown,
+            SetValue,
+            SetMinAndMax,
+            SetRange,
+            SetLineSize,
+            SetPageSize,
+            SetTickFreq,
+            SetThumbLen,
+            CurValueText,
+            ValueText,
+            MinText,
+            MaxText,
+            RangeMinText,
+            RangeMaxText,
+            LineSizeText,
+            PageSizeText,
+            TickFreqText,
+            ThumbLenText,
+            RadioSides,
+            BothSides,
+            SelectRange,
+            Slider,
         ] {
             if v == e.into() {
                 return Some(e);
@@ -58,8 +66,8 @@ impl ListboxPage {
         return None;
     }
 }
-impl From<ListboxPage> for c_int {
-    fn from(w: ListboxPage) -> Self {
+impl From<SliderPage> for c_int {
+    fn from(w: SliderPage) -> Self {
         w as c_int
     }
 }
@@ -130,12 +138,11 @@ pub struct ConfigUI {
 
     // sizer
     sizer_lbox: wx::BoxSizer,
-
-    // the text entries for "Add/change string" and "Delete" buttons
-    text_add: wx::TextCtrl,
-    text_change: wx::TextCtrl,
-    text_ensure_visible: wx::TextCtrl,
-    text_delete: wx::TextCtrl,
+    // // the text entries for "Add/change string" and "Delete" buttons
+    // text_add: wx::TextCtrl,
+    // text_change: wx::TextCtrl,
+    // text_ensure_visible: wx::TextCtrl,
+    // text_delete: wx::TextCtrl,
 }
 
 #[derive(Clone)]
@@ -228,7 +235,7 @@ impl WidgetsPage for SliderWidgetsPage {
         );
 
         let btn = wx::Button::builder(Some(&self.base))
-            .id(ListboxPage::Reset.into())
+            .id(SliderPage::Reset.into())
             .label("&Reset")
             .build();
         sizer_left.add_window_int(
@@ -246,16 +253,16 @@ impl WidgetsPage for SliderWidgetsPage {
         let sizer_middle = wx::StaticBoxSizer::new_with_staticbox(Some(&s_box2), wx::VERTICAL);
 
         let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
-        let btn = wx::Button::builder(Some(&self.base))
-            .id(ListboxPage::Add.into())
-            .label("&Add this string")
-            .build();
-        let text_add = wx::TextCtrl::builder(Some(&self.base))
-            .id(ListboxPage::AddText.into())
-            .value("test item \t0")
-            .build();
+        // let btn = wx::Button::builder(Some(&self.base))
+        //     .id(SliderPage::Add.into())
+        //     .label("&Add this string")
+        //     .build();
+        // let text_add = wx::TextCtrl::builder(Some(&self.base))
+        //     .id(SliderPage::AddText.into())
+        //     .value("test item \t0")
+        //     .build();
         sizer_row.add_window_int(Some(&btn), 0, wx::RIGHT, 5, wx::Object::none());
-        sizer_row.add_window_int(Some(&text_add), 1, wx::LEFT, 5, wx::Object::none());
+        // sizer_row.add_window_int(Some(&text_add), 1, wx::LEFT, 5, wx::Object::none());
         sizer_middle.add_sizer_int(
             Some(&sizer_row),
             0,
@@ -264,52 +271,28 @@ impl WidgetsPage for SliderWidgetsPage {
             wx::Object::none(),
         );
 
-        let btn = wx::Button::builder(Some(&self.base))
-            .id(ListboxPage::AddSeveral.into())
-            .label("&Insert a few strings")
-            .build();
+        // let btn = wx::Button::builder(Some(&self.base))
+        //     .id(SliderPage::AddSeveral.into())
+        //     .label("&Insert a few strings")
+        //     .build();
         sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
-        let btn = wx::Button::builder(Some(&self.base))
-            .id(ListboxPage::AddMany.into())
-            .label("Add &many strings")
-            .build();
+        // let btn = wx::Button::builder(Some(&self.base))
+        //     .id(SliderPage::AddMany.into())
+        //     .label("Add &many strings")
+        //     .build();
         sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
         let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
-        let btn = wx::Button::builder(Some(&self.base))
-            .id(ListboxPage::Change.into())
-            .label("C&hange current")
-            .build();
-        let text_change = wx::TextCtrl::builder(Some(&self.base))
-            .id(ListboxPage::ChangeText.into())
-            .build();
+        // let btn = wx::Button::builder(Some(&self.base))
+        //     .id(SliderPage::Change.into())
+        //     .label("C&hange current")
+        //     .build();
+        // let text_change = wx::TextCtrl::builder(Some(&self.base))
+        //     .id(SliderPage::ChangeText.into())
+        //     .build();
         sizer_row.add_window_int(Some(&btn), 0, wx::RIGHT, 5, wx::Object::none());
-        sizer_row.add_window_int(Some(&text_change), 1, wx::LEFT, 5, wx::Object::none());
-        sizer_middle.add_sizer_int(
-            Some(&sizer_row),
-            0,
-            wx::ALL | wx::GROW,
-            5,
-            wx::Object::none(),
-        );
-
-        let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
-        let btn = wx::Button::builder(Some(&self.base))
-            .id(ListboxPage::EnsureVisible.into())
-            .label("Make item &visible")
-            .build();
-        let text_ensure_visible = wx::TextCtrl::builder(Some(&self.base))
-            .id(ListboxPage::EnsureVisibleText.into())
-            .build();
-        sizer_row.add_window_int(Some(&btn), 0, wx::RIGHT, 5, wx::Object::none());
-        sizer_row.add_window_int(
-            Some(&text_ensure_visible),
-            1,
-            wx::LEFT,
-            5,
-            wx::Object::none(),
-        );
+        // sizer_row.add_window_int(Some(&text_change), 1, wx::LEFT, 5, wx::Object::none());
         sizer_middle.add_sizer_int(
             Some(&sizer_row),
             0,
@@ -319,15 +302,21 @@ impl WidgetsPage for SliderWidgetsPage {
         );
 
         let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
-        let btn = wx::Button::builder(Some(&self.base))
-            .id(ListboxPage::Delete.into())
-            .label("&Delete this item")
-            .build();
-        let text_delete = wx::TextCtrl::builder(Some(&self.base))
-            .id(ListboxPage::DeleteText.into())
-            .build();
+        // let btn = wx::Button::builder(Some(&self.base))
+        //     .id(SliderPage::EnsureVisible.into())
+        //     .label("Make item &visible")
+        //     .build();
+        // let text_ensure_visible = wx::TextCtrl::builder(Some(&self.base))
+        //     .id(SliderPage::EnsureVisibleText.into())
+        //     .build();
         sizer_row.add_window_int(Some(&btn), 0, wx::RIGHT, 5, wx::Object::none());
-        sizer_row.add_window_int(Some(&text_delete), 1, wx::LEFT, 5, wx::Object::none());
+        // sizer_row.add_window_int(
+        //     Some(&text_ensure_visible),
+        //     1,
+        //     wx::LEFT,
+        //     5,
+        //     wx::Object::none(),
+        // );
         sizer_middle.add_sizer_int(
             Some(&sizer_row),
             0,
@@ -336,57 +325,75 @@ impl WidgetsPage for SliderWidgetsPage {
             wx::Object::none(),
         );
 
-        let btn = wx::Button::builder(Some(&self.base))
-            .id(ListboxPage::DeleteSel.into())
-            .label("Delete &selection")
-            .build();
-        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+        let sizer_row = wx::BoxSizer::new(wx::HORIZONTAL);
+        // let btn = wx::Button::builder(Some(&self.base))
+        //     .id(SliderPage::Delete.into())
+        //     .label("&Delete this item")
+        //     .build();
+        // let text_delete = wx::TextCtrl::builder(Some(&self.base))
+        //     .id(SliderPage::DeleteText.into())
+        //     .build();
+        sizer_row.add_window_int(Some(&btn), 0, wx::RIGHT, 5, wx::Object::none());
+        // sizer_row.add_window_int(Some(&text_delete), 1, wx::LEFT, 5, wx::Object::none());
+        sizer_middle.add_sizer_int(
+            Some(&sizer_row),
+            0,
+            wx::ALL | wx::GROW,
+            5,
+            wx::Object::none(),
+        );
+
+        // let btn = wx::Button::builder(Some(&self.base))
+        //     .id(SliderPage::DeleteSel.into())
+        //     .label("Delete &selection")
+        //     .build();
+        // sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
         let btn = wx::Button::builder(Some(&self.base))
-            .id(ListboxPage::Clear.into())
+            .id(SliderPage::Clear.into())
             .label("&Clear")
             .build();
         sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
-        let btn = wx::Button::builder(Some(&self.base))
-            .id(ListboxPage::MoveUp.into())
-            .label("Move item &up")
-            .build();
-        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+        // let btn = wx::Button::builder(Some(&self.base))
+        //     .id(SliderPage::MoveUp.into())
+        //     .label("Move item &up")
+        //     .build();
+        // sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
-        let btn = wx::Button::builder(Some(&self.base))
-            .id(ListboxPage::MoveDown.into())
-            .label("Move item &down")
-            .build();
-        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+        // let btn = wx::Button::builder(Some(&self.base))
+        //     .id(SliderPage::MoveDown.into())
+        //     .label("Move item &down")
+        //     .build();
+        // sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
-        let btn = wx::Button::builder(Some(&self.base))
-            .id(ListboxPage::GetTopItem.into())
-            .label("Get top item")
-            .build();
-        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+        // let btn = wx::Button::builder(Some(&self.base))
+        //     .id(SliderPage::GetTopItem.into())
+        //     .label("Get top item")
+        //     .build();
+        // sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
-        let btn = wx::Button::builder(Some(&self.base))
-            .id(ListboxPage::GetCountPerPage.into())
-            .label("Get count per page")
-            .build();
-        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+        // let btn = wx::Button::builder(Some(&self.base))
+        //     .id(SliderPage::GetCountPerPage.into())
+        //     .label("Get count per page")
+        //     .build();
+        // sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
-        let btn = wx::Button::builder(Some(&self.base))
-            .id(ListboxPage::ContainerTests.into())
-            .label("Run &tests")
-            .build();
-        sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+        // let btn = wx::Button::builder(Some(&self.base))
+        //     .id(SliderPage::ContainerTests.into())
+        //     .label("Run &tests")
+        //     .build();
+        // sizer_middle.add_window_int(Some(&btn), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
         // right pane
         let sizer_right = wx::BoxSizer::new(wx::VERTICAL);
-        let lbox = wx::ListBox::builder(Some(&self.base))
-            .id(ListboxPage::Listbox.into())
-            .style(wx::LB_HSCROLL.into())
-            .build();
-        sizer_right.add_window_int(Some(&lbox), 1, wx::ALL | wx::GROW, 5, wx::Object::none());
-        sizer_right.set_min_size_int(150, 0);
-        *self.lbox.borrow_mut() = Some(lbox);
+        // let lbox = wx::ListBox::builder(Some(&self.base))
+        //     .id(SliderPage::Listbox.into())
+        //     .style(wx::LB_HSCROLL.into())
+        //     .build();
+        // sizer_right.add_window_int(Some(&lbox), 1, wx::ALL | wx::GROW, 5, wx::Object::none());
+        // sizer_right.set_min_size_int(150, 0);
+        // *self.lbox.borrow_mut() = Some(lbox);
 
         // the 3 panes panes compose the window
         sizer_top.add_sizer_int(
@@ -424,10 +431,10 @@ impl WidgetsPage for SliderWidgetsPage {
 
             sizer_lbox: sizer_right, // save it to modify it later
 
-            text_add,
-            text_change,
-            text_ensure_visible,
-            text_delete,
+                                     // text_add,
+                                     // text_change,
+                                     // text_ensure_visible,
+                                     // text_delete,
         };
 
         // do create the main control
@@ -440,27 +447,27 @@ impl WidgetsPage for SliderWidgetsPage {
     fn handle_button(&self, event: &wx::CommandEvent) {
         println!("event={}", event.get_id());
         if let (Some(m), Some(config_ui)) = (
-            ListboxPage::from(event.get_id()),
+            SliderPage::from(event.get_id()),
             self.config_ui.borrow().as_ref(),
         ) {
-            match m {
-                ListboxPage::Reset => self.on_button_reset(config_ui),
-                ListboxPage::Change => self.on_button_change(config_ui),
-                ListboxPage::Delete => self.on_button_delete(config_ui),
-                ListboxPage::DeleteSel => self.on_button_delete_sel(config_ui),
-                ListboxPage::EnsureVisible => self.on_button_ensure_visible(config_ui),
-                ListboxPage::Clear => self.on_button_clear(),
-                ListboxPage::Add => self.on_button_add(config_ui),
-                ListboxPage::AddSeveral => self.on_button_add_several(),
-                ListboxPage::AddMany => self.on_button_add_many(),
-                // wx3.0 unsupported
-                // ListboxPage::GetTopItem => self.on_button_top_item(),
-                // ListboxPage::GetCountPerPage => self.on_button_page_count(),
-                ListboxPage::MoveUp => self.on_button_move_up(),
-                ListboxPage::MoveDown => self.on_button_move_down(),
-                // TODO: Support update ui event to disable this when not 3state
-                _ => (),
-            };
+            // match m {
+            //     SliderPage::Reset => self.on_button_reset(config_ui),
+            //     SliderPage::Change => self.on_button_change(config_ui),
+            //     SliderPage::Delete => self.on_button_delete(config_ui),
+            //     SliderPage::DeleteSel => self.on_button_delete_sel(config_ui),
+            //     SliderPage::EnsureVisible => self.on_button_ensure_visible(config_ui),
+            //     SliderPage::Clear => self.on_button_clear(),
+            //     SliderPage::Add => self.on_button_add(config_ui),
+            //     SliderPage::AddSeveral => self.on_button_add_several(),
+            //     SliderPage::AddMany => self.on_button_add_many(),
+            //     // wx3.0 unsupported
+            //     // SliderPage::GetTopItem => self.on_button_top_item(),
+            //     // SliderPage::GetCountPerPage => self.on_button_page_count(),
+            //     SliderPage::MoveUp => self.on_button_move_up(),
+            //     SliderPage::MoveDown => self.on_button_move_down(),
+            //     // TODO: Support update ui event to disable this when not 3state
+            //     _ => (),
+            // };
         }
     }
     fn handle_checkbox(&self, _: &wx::CommandEvent) {
@@ -541,39 +548,39 @@ impl SliderWidgetsPage {
         }
 
         if let Some(m) = LboxType::from(config_ui.radio_list_type.get_selection()) {
-            let new_lbox = match m {
-                LboxType::CheckListBox => {
-                    let check_lbox = wx::CheckListBox::builder(Some(&self.base))
-                        .id(ListboxPage::Listbox.into())
-                        .choices(items)
-                        .style(flags)
-                        .build();
-                    for n in 0..order.len() {
-                        check_lbox.check(n as u32, order[n]);
-                    }
-                    check_lbox.into()
-                }
-                // LboxType::RearrangeList => {
-                //     // TODO
-                // }
-                _ => wx::ListBox::builder(Some(&self.base))
-                    .id(ListboxPage::Listbox.into())
-                    .choices(items)
-                    .style(flags)
-                    .build(),
-            };
+            // let new_lbox = match m {
+            //     LboxType::CheckListBox => {
+            //         let check_lbox = wx::CheckListBox::builder(Some(&self.base))
+            //             .id(SliderPage::Listbox.into())
+            //             .choices(items)
+            //             .style(flags)
+            //             .build();
+            //         for n in 0..order.len() {
+            //             check_lbox.check(n as u32, order[n]);
+            //         }
+            //         check_lbox.into()
+            //     }
+            //     // LboxType::RearrangeList => {
+            //     //     // TODO
+            //     // }
+            //     _ => wx::ListBox::builder(Some(&self.base))
+            //         .id(SliderPage::Listbox.into())
+            //         .choices(items)
+            //         .style(flags)
+            //         .build(),
+            // };
 
             let sizer_lbox = &config_ui.sizer_lbox;
-            sizer_lbox.add_window_int(
-                Some(&new_lbox),
-                1,
-                wx::GROW | wx::ALL,
-                5,
-                wx::Object::none(),
-            );
+            // sizer_lbox.add_window_int(
+            //     Some(&new_lbox),
+            //     1,
+            //     wx::GROW | wx::ALL,
+            //     5,
+            //     wx::Object::none(),
+            // );
             sizer_lbox.layout();
 
-            *self.lbox.borrow_mut() = Some(new_lbox);
+            // *self.lbox.borrow_mut() = Some(new_lbox);
         }
     }
 
@@ -596,30 +603,30 @@ impl SliderWidgetsPage {
         if let Some(lbox) = self.lbox.borrow().as_ref() {
             let selections = wx::ArrayInt::new();
             let count = lbox.get_selections(&selections);
-            let s = config_ui.text_change.get_value();
-            for n in 0..count {
-                let i = selections.item(n.try_into().unwrap()).try_into().unwrap();
-                lbox.set_string(i, &s);
-            }
+            // let s = config_ui.text_change.get_value();
+            // for n in 0..count {
+            //     let i = selections.item(n.try_into().unwrap()).try_into().unwrap();
+            //     lbox.set_string(i, &s);
+            // }
         }
     }
 
     fn on_button_ensure_visible(&self, config_ui: &ConfigUI) {
-        if let (Some(n), Some(lbox)) = (
-            self.get_valid_index_from_text(&config_ui.text_ensure_visible),
-            self.lbox.borrow().as_ref(),
-        ) {
-            lbox.ensure_visible(n.try_into().unwrap());
-        }
+        // if let (Some(n), Some(lbox)) = (
+        //     self.get_valid_index_from_text(&config_ui.text_ensure_visible),
+        //     self.lbox.borrow().as_ref(),
+        // ) {
+        //     lbox.ensure_visible(n.try_into().unwrap());
+        // }
     }
 
     fn on_button_delete(&self, config_ui: &ConfigUI) {
-        if let (Some(n), Some(lbox)) = (
-            self.get_valid_index_from_text(&config_ui.text_delete),
-            self.lbox.borrow().as_ref(),
-        ) {
-            lbox.delete(n.try_into().unwrap());
-        }
+        // if let (Some(n), Some(lbox)) = (
+        //     self.get_valid_index_from_text(&config_ui.text_delete),
+        //     self.lbox.borrow().as_ref(),
+        // ) {
+        //     lbox.delete(n.try_into().unwrap());
+        // }
     }
 
     fn on_button_delete_sel(&self, config_ui: &ConfigUI) {
@@ -655,19 +662,19 @@ impl SliderWidgetsPage {
     // }
 
     fn on_button_add(&self, config_ui: &ConfigUI) {
-        let s = config_ui.text_add.get_value();
-        if !config_ui.text_add.is_modified() {
-            // update the default string
-            let s_item = *self.s_item.borrow();
-            config_ui
-                .text_add
-                .set_value(&format!("test item \t{}", s_item));
-            *self.s_item.borrow_mut() = s_item + 1;
-        }
+        // let s = config_ui.text_add.get_value();
+        // if !config_ui.text_add.is_modified() {
+        //     // update the default string
+        //     let s_item = *self.s_item.borrow();
+        //     config_ui
+        //         .text_add
+        //         .set_value(&format!("test item \t{}", s_item));
+        //     *self.s_item.borrow_mut() = s_item + 1;
+        // }
 
-        if let Some(lbox) = self.lbox.borrow().as_ref() {
-            lbox.append_str(&s);
-        }
+        // if let Some(lbox) = self.lbox.borrow().as_ref() {
+        //     lbox.append_str(&s);
+        // }
     }
 
     fn on_button_add_many(&self) {
