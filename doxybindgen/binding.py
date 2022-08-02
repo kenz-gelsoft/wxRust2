@@ -95,7 +95,7 @@ class RustClassBinding:
     def _impl_class_info_if_needed(self):
         if not self.is_a('wxObject'):
             return
-        yield 'impl<const OWNED: bool> ClassInfoMacro for %sIsOwned<OWNED> {' % (self.__model.unprefixed(),)
+        yield 'impl<const OWNED: bool> DynamicCast for %sIsOwned<OWNED> {' % (self.__model.unprefixed(),)
         yield '    fn class_info() -> ClassInfoIsOwned<false> {'
         yield '        unsafe { ClassInfoIsOwned::from_ptr(ffi::%s_CLASSINFO()) }' % (self.__model.name)
         yield '    }'

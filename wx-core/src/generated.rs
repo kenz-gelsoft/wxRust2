@@ -32,7 +32,7 @@ impl<const OWNED: bool> AnyButtonIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for AnyButtonIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for AnyButtonIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxAnyButton_CLASSINFO()) }
     }
@@ -49,7 +49,7 @@ impl<const OWNED: bool> ArtProviderIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for ArtProviderIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for ArtProviderIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxArtProvider_CLASSINFO()) }
     }
@@ -109,7 +109,7 @@ impl<const OWNED: bool> BitmapIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for BitmapIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for BitmapIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxBitmap_CLASSINFO()) }
     }
@@ -218,7 +218,7 @@ impl<const OWNED: bool> BitmapButtonIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for BitmapButtonIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for BitmapButtonIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxBitmapButton_CLASSINFO()) }
     }
@@ -243,7 +243,7 @@ impl<const OWNED: bool> BookCtrlBaseIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for BookCtrlBaseIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for BookCtrlBaseIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxBookCtrlBase_CLASSINFO()) }
     }
@@ -287,7 +287,7 @@ impl<const OWNED: bool> BookCtrlEventIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for BookCtrlEventIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for BookCtrlEventIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxBookCtrlEvent_CLASSINFO()) }
     }
@@ -320,7 +320,7 @@ impl<const OWNED: bool> BoxSizerIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for BoxSizerIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for BoxSizerIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxBoxSizer_CLASSINFO()) }
     }
@@ -371,7 +371,7 @@ impl<const OWNED: bool> ButtonIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for ButtonIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for ButtonIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxButton_CLASSINFO()) }
     }
@@ -421,7 +421,7 @@ impl<const OWNED: bool> CheckBoxIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for CheckBoxIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for CheckBoxIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxCheckBox_CLASSINFO()) }
     }
@@ -478,7 +478,7 @@ impl<const OWNED: bool> CheckListBoxIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for CheckListBoxIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for CheckListBoxIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxCheckListBox_CLASSINFO()) }
     }
@@ -589,7 +589,7 @@ impl<const OWNED: bool> ChoiceIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for ChoiceIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for ChoiceIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxChoice_CLASSINFO()) }
     }
@@ -635,7 +635,7 @@ impl<const OWNED: bool> ColourIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for ColourIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for ColourIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxColour_CLASSINFO()) }
     }
@@ -698,7 +698,7 @@ impl<const OWNED: bool> ColourPickerCtrlIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for ColourPickerCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for ColourPickerCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxColourPickerCtrl_CLASSINFO()) }
     }
@@ -757,7 +757,7 @@ impl<const OWNED: bool> ComboBoxIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for ComboBoxIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for ComboBoxIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxComboBox_CLASSINFO()) }
     }
@@ -792,7 +792,7 @@ impl<const OWNED: bool> CommandEventIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for CommandEventIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for CommandEventIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxCommandEvent_CLASSINFO()) }
     }
@@ -845,7 +845,7 @@ impl<const OWNED: bool> ControlIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for ControlIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for ControlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxControl_CLASSINFO()) }
     }
@@ -900,7 +900,7 @@ impl<const OWNED: bool> DatePickerCtrlIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for DatePickerCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for DatePickerCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDatePickerCtrl_CLASSINFO()) }
     }
@@ -954,7 +954,7 @@ impl<const OWNED: bool> DirPickerCtrlIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for DirPickerCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for DirPickerCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDirPickerCtrl_CLASSINFO()) }
     }
@@ -1002,7 +1002,7 @@ impl<const OWNED: bool> EditableListBoxIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for EditableListBoxIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for EditableListBoxIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxEditableListBox_CLASSINFO()) }
     }
@@ -1064,7 +1064,7 @@ impl<const OWNED: bool> FileCtrlIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for FileCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for FileCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxFileCtrl_CLASSINFO()) }
     }
@@ -1106,7 +1106,7 @@ impl<const OWNED: bool> FontIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for FontIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for FontIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxFont_CLASSINFO()) }
     }
@@ -1169,7 +1169,7 @@ impl<const OWNED: bool> FontPickerCtrlIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for FontPickerCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for FontPickerCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxFontPickerCtrl_CLASSINFO()) }
     }
@@ -1216,7 +1216,7 @@ impl<const OWNED: bool> FrameIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for FrameIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for FrameIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxFrame_CLASSINFO()) }
     }
@@ -1265,7 +1265,7 @@ impl<const OWNED: bool> GDIObjectIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for GDIObjectIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for GDIObjectIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxGDIObject_CLASSINFO()) }
     }
@@ -1320,7 +1320,7 @@ impl<const OWNED: bool> GaugeIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for GaugeIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for GaugeIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxGauge_CLASSINFO()) }
     }
@@ -1380,7 +1380,7 @@ impl<const OWNED: bool> GenericDirCtrlIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for GenericDirCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for GenericDirCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxGenericDirCtrl_CLASSINFO()) }
     }
@@ -1463,7 +1463,7 @@ impl<const OWNED: bool> HeaderCtrlIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for HeaderCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for HeaderCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxHeaderCtrl_CLASSINFO()) }
     }
@@ -1532,7 +1532,7 @@ impl<const OWNED: bool> HeaderCtrlSimpleIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for HeaderCtrlSimpleIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for HeaderCtrlSimpleIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxHeaderCtrlSimple_CLASSINFO()) }
     }
@@ -1583,7 +1583,7 @@ impl<const OWNED: bool> HyperlinkCtrlIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for HyperlinkCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for HyperlinkCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxHyperlinkCtrl_CLASSINFO()) }
     }
@@ -1618,7 +1618,7 @@ impl<const OWNED: bool> IconIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for IconIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for IconIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxIcon_CLASSINFO()) }
     }
@@ -1685,7 +1685,7 @@ impl<const OWNED: bool> ListBoxIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for ListBoxIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for ListBoxIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxListBox_CLASSINFO()) }
     }
@@ -1727,7 +1727,7 @@ impl<const OWNED: bool> MenuIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for MenuIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for MenuIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxMenu_CLASSINFO()) }
     }
@@ -1750,7 +1750,7 @@ impl<const OWNED: bool> MenuBarIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for MenuBarIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for MenuBarIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxMenuBar_CLASSINFO()) }
     }
@@ -1798,7 +1798,7 @@ impl<const OWNED: bool> MenuItemIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for MenuItemIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for MenuItemIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxMenuItem_CLASSINFO()) }
     }
@@ -1824,7 +1824,7 @@ impl<const OWNED: bool> NonOwnedWindowIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for NonOwnedWindowIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for NonOwnedWindowIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxNonOwnedWindow_CLASSINFO()) }
     }
@@ -1868,7 +1868,7 @@ impl<const OWNED: bool> NotebookIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for NotebookIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for NotebookIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxNotebook_CLASSINFO()) }
     }
@@ -1894,7 +1894,7 @@ impl<const OWNED: bool> NotifyEventIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for NotifyEventIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for NotifyEventIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxNotifyEvent_CLASSINFO()) }
     }
@@ -1943,7 +1943,7 @@ impl<const OWNED: bool> PanelIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for PanelIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for PanelIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxPanel_CLASSINFO()) }
     }
@@ -1987,7 +1987,7 @@ impl<const OWNED: bool> PickerBaseIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for PickerBaseIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for PickerBaseIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxPickerBase_CLASSINFO()) }
     }
@@ -2083,7 +2083,7 @@ impl<const OWNED: bool> RadioBoxIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for RadioBoxIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for RadioBoxIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxRadioBox_CLASSINFO()) }
     }
@@ -2200,7 +2200,7 @@ impl<const OWNED: bool> SizerIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for SizerIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for SizerIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSizer_CLASSINFO()) }
     }
@@ -2274,7 +2274,7 @@ impl<const OWNED: bool> StaticBitmapIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for StaticBitmapIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for StaticBitmapIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStaticBitmap_CLASSINFO()) }
     }
@@ -2323,7 +2323,7 @@ impl<const OWNED: bool> StaticBoxIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for StaticBoxIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for StaticBoxIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStaticBox_CLASSINFO()) }
     }
@@ -2369,7 +2369,7 @@ impl<const OWNED: bool> StaticBoxSizerIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for StaticBoxSizerIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for StaticBoxSizerIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStaticBoxSizer_CLASSINFO()) }
     }
@@ -2417,7 +2417,7 @@ impl<const OWNED: bool> StaticTextIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for StaticTextIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for StaticTextIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStaticText_CLASSINFO()) }
     }
@@ -2495,7 +2495,7 @@ impl<const OWNED: bool> TextCtrlIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for TextCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for TextCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTextCtrl_CLASSINFO()) }
     }
@@ -2546,7 +2546,7 @@ impl<const OWNED: bool> ToolBarIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for ToolBarIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for ToolBarIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxToolBar_CLASSINFO()) }
     }
@@ -2594,7 +2594,7 @@ impl<const OWNED: bool> TopLevelWindowIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for TopLevelWindowIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for TopLevelWindowIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTopLevelWindow_CLASSINFO()) }
     }
@@ -2615,7 +2615,7 @@ impl<const OWNED: bool> ValidatorIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for ValidatorIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for ValidatorIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxValidator_CLASSINFO()) }
     }
@@ -2656,7 +2656,7 @@ impl<const OWNED: bool> WindowIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for WindowIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for WindowIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxWindow_CLASSINFO()) }
     }
@@ -2678,7 +2678,7 @@ impl<const OWNED: bool> WrapSizerIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for WrapSizerIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for WrapSizerIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxWrapSizer_CLASSINFO()) }
     }

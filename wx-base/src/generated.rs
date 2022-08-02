@@ -190,7 +190,7 @@ impl<const OWNED: bool> EventIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for EventIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for EventIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxEvent_CLASSINFO()) }
     }
@@ -217,7 +217,7 @@ impl<const OWNED: bool> EvtHandlerIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for EvtHandlerIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for EvtHandlerIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxEvtHandler_CLASSINFO()) }
     }
@@ -273,7 +273,7 @@ impl<const OWNED: bool> ObjectIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for ObjectIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for ObjectIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxObject_CLASSINFO()) }
     }
@@ -352,7 +352,7 @@ impl<const OWNED: bool> TimerIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for TimerIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for TimerIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTimer_CLASSINFO()) }
     }
@@ -376,7 +376,7 @@ impl<const OWNED: bool> TimerEventIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> ClassInfoMacro for TimerEventIsOwned<OWNED> {
+impl<const OWNED: bool> DynamicCast for TimerEventIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTimerEvent_CLASSINFO()) }
     }
