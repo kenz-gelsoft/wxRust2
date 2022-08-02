@@ -58,6 +58,8 @@ class RustClassBinding:
             yield '}'
             for line in self._impl_with_ctors():
                 yield line
+            for line in self._impl_from_ancestors():
+                yield line
             for line in self._impl_dynamic_cast_if_needed():
                 yield line
             for line in self._impl_drop_if_needed():
@@ -92,6 +94,25 @@ class RustClassBinding:
         yield '    }'
         yield '}'
     
+    def _impl_from_ancestors(self):
+        unprefixed = self.__model.unprefixed()
+        for ancestor in self.__model.manager.ancestors_of(self.__model):
+            unprefixed_ancestor = ancestor.name[2:]
+            if unprefixed == unprefixed_ancestor:
+                continue
+            yield 'impl<const OWNED: bool> From<%sIsOwned<OWNED>> for %sIsOwned<OWNED> {' % (
+                unprefixed,
+                unprefixed_ancestor,
+            )
+            yield '    fn from(o: %sIsOwned<OWNED>) -> Self {' % (
+                unprefixed,
+            )
+            yield '        unsafe { %sIsOwned::from_ptr(o.as_ptr()) }' % (
+                unprefixed_ancestor,
+            )
+            yield '    }'
+            yield '}'
+
     def _impl_dynamic_cast_if_needed(self):
         if not self.is_a('wxObject'):
             return

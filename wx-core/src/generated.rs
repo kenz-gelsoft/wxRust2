@@ -32,6 +32,26 @@ impl<const OWNED: bool> AnyButtonIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<AnyButtonIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: AnyButtonIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<AnyButtonIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: AnyButtonIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<AnyButtonIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: AnyButtonIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<AnyButtonIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: AnyButtonIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for AnyButtonIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxAnyButton_CLASSINFO()) }
@@ -47,6 +67,11 @@ wx_class! { ArtProvider =
 impl<const OWNED: bool> ArtProviderIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<ArtProviderIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: ArtProviderIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for ArtProviderIsOwned<OWNED> {
@@ -107,6 +132,16 @@ impl<const OWNED: bool> BitmapIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<BitmapIsOwned<OWNED>> for GDIObjectIsOwned<OWNED> {
+    fn from(o: BitmapIsOwned<OWNED>) -> Self {
+        unsafe { GDIObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BitmapIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: BitmapIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for BitmapIsOwned<OWNED> {
@@ -218,6 +253,36 @@ impl<const OWNED: bool> BitmapButtonIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<BitmapButtonIsOwned<OWNED>> for ButtonIsOwned<OWNED> {
+    fn from(o: BitmapButtonIsOwned<OWNED>) -> Self {
+        unsafe { ButtonIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BitmapButtonIsOwned<OWNED>> for AnyButtonIsOwned<OWNED> {
+    fn from(o: BitmapButtonIsOwned<OWNED>) -> Self {
+        unsafe { AnyButtonIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BitmapButtonIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: BitmapButtonIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BitmapButtonIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: BitmapButtonIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BitmapButtonIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: BitmapButtonIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BitmapButtonIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: BitmapButtonIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for BitmapButtonIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxBitmapButton_CLASSINFO()) }
@@ -241,6 +306,26 @@ impl<const OWNED: bool> BookCtrlBaseIsOwned<OWNED> {
     // BLOCKED: fn wxBookCtrlBase1()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<BookCtrlBaseIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: BookCtrlBaseIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BookCtrlBaseIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: BookCtrlBaseIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BookCtrlBaseIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: BookCtrlBaseIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BookCtrlBaseIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: BookCtrlBaseIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for BookCtrlBaseIsOwned<OWNED> {
@@ -287,6 +372,26 @@ impl<const OWNED: bool> BookCtrlEventIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<BookCtrlEventIsOwned<OWNED>> for NotifyEventIsOwned<OWNED> {
+    fn from(o: BookCtrlEventIsOwned<OWNED>) -> Self {
+        unsafe { NotifyEventIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BookCtrlEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
+    fn from(o: BookCtrlEventIsOwned<OWNED>) -> Self {
+        unsafe { CommandEventIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BookCtrlEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
+    fn from(o: BookCtrlEventIsOwned<OWNED>) -> Self {
+        unsafe { EventIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BookCtrlEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: BookCtrlEventIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for BookCtrlEventIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxBookCtrlEvent_CLASSINFO()) }
@@ -318,6 +423,16 @@ impl<const OWNED: bool> BoxSizerIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<BoxSizerIsOwned<OWNED>> for SizerIsOwned<OWNED> {
+    fn from(o: BoxSizerIsOwned<OWNED>) -> Self {
+        unsafe { SizerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BoxSizerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: BoxSizerIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for BoxSizerIsOwned<OWNED> {
@@ -371,6 +486,31 @@ impl<const OWNED: bool> ButtonIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<ButtonIsOwned<OWNED>> for AnyButtonIsOwned<OWNED> {
+    fn from(o: ButtonIsOwned<OWNED>) -> Self {
+        unsafe { AnyButtonIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ButtonIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: ButtonIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ButtonIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: ButtonIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ButtonIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: ButtonIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ButtonIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: ButtonIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for ButtonIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxButton_CLASSINFO()) }
@@ -419,6 +559,26 @@ impl<const OWNED: bool> CheckBoxIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<CheckBoxIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: CheckBoxIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<CheckBoxIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: CheckBoxIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<CheckBoxIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: CheckBoxIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<CheckBoxIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: CheckBoxIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for CheckBoxIsOwned<OWNED> {
@@ -476,6 +636,31 @@ impl<const OWNED: bool> CheckListBoxIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<CheckListBoxIsOwned<OWNED>> for ListBoxIsOwned<OWNED> {
+    fn from(o: CheckListBoxIsOwned<OWNED>) -> Self {
+        unsafe { ListBoxIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<CheckListBoxIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: CheckListBoxIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<CheckListBoxIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: CheckListBoxIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<CheckListBoxIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: CheckListBoxIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<CheckListBoxIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: CheckListBoxIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for CheckListBoxIsOwned<OWNED> {
@@ -589,6 +774,26 @@ impl<const OWNED: bool> ChoiceIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<ChoiceIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: ChoiceIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ChoiceIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: ChoiceIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ChoiceIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: ChoiceIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ChoiceIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: ChoiceIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for ChoiceIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxChoice_CLASSINFO()) }
@@ -633,6 +838,11 @@ impl<const OWNED: bool> ColourIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<ColourIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: ColourIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for ColourIsOwned<OWNED> {
@@ -698,6 +908,31 @@ impl<const OWNED: bool> ColourPickerCtrlIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<ColourPickerCtrlIsOwned<OWNED>> for PickerBaseIsOwned<OWNED> {
+    fn from(o: ColourPickerCtrlIsOwned<OWNED>) -> Self {
+        unsafe { PickerBaseIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ColourPickerCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: ColourPickerCtrlIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ColourPickerCtrlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: ColourPickerCtrlIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ColourPickerCtrlIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: ColourPickerCtrlIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ColourPickerCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: ColourPickerCtrlIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for ColourPickerCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxColourPickerCtrl_CLASSINFO()) }
@@ -757,6 +992,26 @@ impl<const OWNED: bool> ComboBoxIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<ComboBoxIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: ComboBoxIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ComboBoxIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: ComboBoxIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ComboBoxIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: ComboBoxIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ComboBoxIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: ComboBoxIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for ComboBoxIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxComboBox_CLASSINFO()) }
@@ -790,6 +1045,16 @@ impl<const OWNED: bool> CommandEventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxCommandEvent()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<CommandEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
+    fn from(o: CommandEventIsOwned<OWNED>) -> Self {
+        unsafe { EventIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<CommandEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: CommandEventIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for CommandEventIsOwned<OWNED> {
@@ -843,6 +1108,21 @@ impl<const OWNED: bool> ControlIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<ControlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: ControlIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ControlIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: ControlIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ControlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: ControlIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for ControlIsOwned<OWNED> {
@@ -900,6 +1180,26 @@ impl<const OWNED: bool> DatePickerCtrlIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<DatePickerCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: DatePickerCtrlIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<DatePickerCtrlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: DatePickerCtrlIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<DatePickerCtrlIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: DatePickerCtrlIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<DatePickerCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: DatePickerCtrlIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for DatePickerCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDatePickerCtrl_CLASSINFO()) }
@@ -954,6 +1254,31 @@ impl<const OWNED: bool> DirPickerCtrlIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<DirPickerCtrlIsOwned<OWNED>> for PickerBaseIsOwned<OWNED> {
+    fn from(o: DirPickerCtrlIsOwned<OWNED>) -> Self {
+        unsafe { PickerBaseIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<DirPickerCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: DirPickerCtrlIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<DirPickerCtrlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: DirPickerCtrlIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<DirPickerCtrlIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: DirPickerCtrlIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<DirPickerCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: DirPickerCtrlIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for DirPickerCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDirPickerCtrl_CLASSINFO()) }
@@ -1000,6 +1325,26 @@ impl<const OWNED: bool> EditableListBoxIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<EditableListBoxIsOwned<OWNED>> for PanelIsOwned<OWNED> {
+    fn from(o: EditableListBoxIsOwned<OWNED>) -> Self {
+        unsafe { PanelIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<EditableListBoxIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: EditableListBoxIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<EditableListBoxIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: EditableListBoxIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<EditableListBoxIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: EditableListBoxIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for EditableListBoxIsOwned<OWNED> {
@@ -1064,6 +1409,26 @@ impl<const OWNED: bool> FileCtrlIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<FileCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: FileCtrlIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<FileCtrlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: FileCtrlIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<FileCtrlIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: FileCtrlIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<FileCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: FileCtrlIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for FileCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxFileCtrl_CLASSINFO()) }
@@ -1104,6 +1469,16 @@ impl<const OWNED: bool> FontIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<FontIsOwned<OWNED>> for GDIObjectIsOwned<OWNED> {
+    fn from(o: FontIsOwned<OWNED>) -> Self {
+        unsafe { GDIObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<FontIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: FontIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for FontIsOwned<OWNED> {
@@ -1169,6 +1544,31 @@ impl<const OWNED: bool> FontPickerCtrlIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<FontPickerCtrlIsOwned<OWNED>> for PickerBaseIsOwned<OWNED> {
+    fn from(o: FontPickerCtrlIsOwned<OWNED>) -> Self {
+        unsafe { PickerBaseIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<FontPickerCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: FontPickerCtrlIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<FontPickerCtrlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: FontPickerCtrlIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<FontPickerCtrlIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: FontPickerCtrlIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<FontPickerCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: FontPickerCtrlIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for FontPickerCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxFontPickerCtrl_CLASSINFO()) }
@@ -1214,6 +1614,31 @@ impl<const OWNED: bool> FrameIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<FrameIsOwned<OWNED>> for TopLevelWindowIsOwned<OWNED> {
+    fn from(o: FrameIsOwned<OWNED>) -> Self {
+        unsafe { TopLevelWindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<FrameIsOwned<OWNED>> for NonOwnedWindowIsOwned<OWNED> {
+    fn from(o: FrameIsOwned<OWNED>) -> Self {
+        unsafe { NonOwnedWindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<FrameIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: FrameIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<FrameIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: FrameIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<FrameIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: FrameIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for FrameIsOwned<OWNED> {
@@ -1263,6 +1688,11 @@ impl<const OWNED: bool> GDIObjectIsOwned<OWNED> {
     // BLOCKED: fn wxGDIObject()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<GDIObjectIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: GDIObjectIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for GDIObjectIsOwned<OWNED> {
@@ -1318,6 +1748,26 @@ impl<const OWNED: bool> GaugeIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<GaugeIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: GaugeIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<GaugeIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: GaugeIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<GaugeIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: GaugeIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<GaugeIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: GaugeIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for GaugeIsOwned<OWNED> {
@@ -1380,6 +1830,26 @@ impl<const OWNED: bool> GenericDirCtrlIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<GenericDirCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: GenericDirCtrlIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<GenericDirCtrlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: GenericDirCtrlIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<GenericDirCtrlIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: GenericDirCtrlIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<GenericDirCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: GenericDirCtrlIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for GenericDirCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxGenericDirCtrl_CLASSINFO()) }
@@ -1439,6 +1909,18 @@ impl<const OWNED: bool> HeaderColumnSimpleIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<HeaderColumnSimpleIsOwned<OWNED>>
+    for SettableHeaderColumnIsOwned<OWNED>
+{
+    fn from(o: HeaderColumnSimpleIsOwned<OWNED>) -> Self {
+        unsafe { SettableHeaderColumnIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<HeaderColumnSimpleIsOwned<OWNED>> for HeaderColumnIsOwned<OWNED> {
+    fn from(o: HeaderColumnSimpleIsOwned<OWNED>) -> Self {
+        unsafe { HeaderColumnIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> Drop for HeaderColumnSimpleIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -1461,6 +1943,26 @@ impl<const OWNED: bool> HeaderCtrlIsOwned<OWNED> {
     // BLOCKED: fn wxHeaderCtrl1()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<HeaderCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: HeaderCtrlIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<HeaderCtrlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: HeaderCtrlIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<HeaderCtrlIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: HeaderCtrlIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<HeaderCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: HeaderCtrlIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for HeaderCtrlIsOwned<OWNED> {
@@ -1532,6 +2034,31 @@ impl<const OWNED: bool> HeaderCtrlSimpleIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<HeaderCtrlSimpleIsOwned<OWNED>> for HeaderCtrlIsOwned<OWNED> {
+    fn from(o: HeaderCtrlSimpleIsOwned<OWNED>) -> Self {
+        unsafe { HeaderCtrlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<HeaderCtrlSimpleIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: HeaderCtrlSimpleIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<HeaderCtrlSimpleIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: HeaderCtrlSimpleIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<HeaderCtrlSimpleIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: HeaderCtrlSimpleIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<HeaderCtrlSimpleIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: HeaderCtrlSimpleIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for HeaderCtrlSimpleIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxHeaderCtrlSimple_CLASSINFO()) }
@@ -1583,6 +2110,26 @@ impl<const OWNED: bool> HyperlinkCtrlIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<HyperlinkCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: HyperlinkCtrlIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<HyperlinkCtrlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: HyperlinkCtrlIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<HyperlinkCtrlIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: HyperlinkCtrlIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<HyperlinkCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: HyperlinkCtrlIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for HyperlinkCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxHyperlinkCtrl_CLASSINFO()) }
@@ -1616,6 +2163,16 @@ impl<const OWNED: bool> IconIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<IconIsOwned<OWNED>> for GDIObjectIsOwned<OWNED> {
+    fn from(o: IconIsOwned<OWNED>) -> Self {
+        unsafe { GDIObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<IconIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: IconIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for IconIsOwned<OWNED> {
@@ -1685,6 +2242,26 @@ impl<const OWNED: bool> ListBoxIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<ListBoxIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: ListBoxIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ListBoxIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: ListBoxIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ListBoxIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: ListBoxIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ListBoxIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: ListBoxIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for ListBoxIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxListBox_CLASSINFO()) }
@@ -1727,6 +2304,16 @@ impl<const OWNED: bool> MenuIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<MenuIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: MenuIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<MenuIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: MenuIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for MenuIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxMenu_CLASSINFO()) }
@@ -1748,6 +2335,21 @@ impl<const OWNED: bool> MenuBarIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxMenuBar1()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<MenuBarIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: MenuBarIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<MenuBarIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: MenuBarIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<MenuBarIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: MenuBarIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for MenuBarIsOwned<OWNED> {
@@ -1798,6 +2400,11 @@ impl<const OWNED: bool> MenuItemIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<MenuItemIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: MenuItemIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for MenuItemIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxMenuItem_CLASSINFO()) }
@@ -1822,6 +2429,21 @@ wx_class! { NonOwnedWindow =
 impl<const OWNED: bool> NonOwnedWindowIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<NonOwnedWindowIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: NonOwnedWindowIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<NonOwnedWindowIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: NonOwnedWindowIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<NonOwnedWindowIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: NonOwnedWindowIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for NonOwnedWindowIsOwned<OWNED> {
@@ -1868,6 +2490,31 @@ impl<const OWNED: bool> NotebookIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<NotebookIsOwned<OWNED>> for BookCtrlBaseIsOwned<OWNED> {
+    fn from(o: NotebookIsOwned<OWNED>) -> Self {
+        unsafe { BookCtrlBaseIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<NotebookIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: NotebookIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<NotebookIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: NotebookIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<NotebookIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: NotebookIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<NotebookIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: NotebookIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for NotebookIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxNotebook_CLASSINFO()) }
@@ -1892,6 +2539,21 @@ impl<const OWNED: bool> NotifyEventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxNotifyEvent()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<NotifyEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
+    fn from(o: NotifyEventIsOwned<OWNED>) -> Self {
+        unsafe { CommandEventIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<NotifyEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
+    fn from(o: NotifyEventIsOwned<OWNED>) -> Self {
+        unsafe { EventIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<NotifyEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: NotifyEventIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for NotifyEventIsOwned<OWNED> {
@@ -1943,6 +2605,21 @@ impl<const OWNED: bool> PanelIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<PanelIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: PanelIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<PanelIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: PanelIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<PanelIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: PanelIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for PanelIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxPanel_CLASSINFO()) }
@@ -1985,6 +2662,26 @@ impl<const OWNED: bool> PickerBaseIsOwned<OWNED> {
     // BLOCKED: fn wxPickerBase()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<PickerBaseIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: PickerBaseIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<PickerBaseIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: PickerBaseIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<PickerBaseIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: PickerBaseIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<PickerBaseIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: PickerBaseIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for PickerBaseIsOwned<OWNED> {
@@ -2083,6 +2780,26 @@ impl<const OWNED: bool> RadioBoxIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<RadioBoxIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: RadioBoxIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<RadioBoxIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: RadioBoxIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<RadioBoxIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: RadioBoxIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<RadioBoxIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: RadioBoxIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for RadioBoxIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxRadioBox_CLASSINFO()) }
@@ -2156,6 +2873,11 @@ impl<const OWNED: bool> SettableHeaderColumnIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<SettableHeaderColumnIsOwned<OWNED>> for HeaderColumnIsOwned<OWNED> {
+    fn from(o: SettableHeaderColumnIsOwned<OWNED>) -> Self {
+        unsafe { HeaderColumnIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> Drop for SettableHeaderColumnIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -2198,6 +2920,11 @@ impl<const OWNED: bool> SizerIsOwned<OWNED> {
     // BLOCKED: fn wxSizer()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<SizerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: SizerIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for SizerIsOwned<OWNED> {
@@ -2274,6 +3001,26 @@ impl<const OWNED: bool> StaticBitmapIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<StaticBitmapIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: StaticBitmapIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<StaticBitmapIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: StaticBitmapIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<StaticBitmapIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: StaticBitmapIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<StaticBitmapIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: StaticBitmapIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for StaticBitmapIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStaticBitmap_CLASSINFO()) }
@@ -2323,6 +3070,26 @@ impl<const OWNED: bool> StaticBoxIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<StaticBoxIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: StaticBoxIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<StaticBoxIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: StaticBoxIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<StaticBoxIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: StaticBoxIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<StaticBoxIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: StaticBoxIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for StaticBoxIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStaticBox_CLASSINFO()) }
@@ -2367,6 +3134,21 @@ impl<const OWNED: bool> StaticBoxSizerIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<StaticBoxSizerIsOwned<OWNED>> for BoxSizerIsOwned<OWNED> {
+    fn from(o: StaticBoxSizerIsOwned<OWNED>) -> Self {
+        unsafe { BoxSizerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<StaticBoxSizerIsOwned<OWNED>> for SizerIsOwned<OWNED> {
+    fn from(o: StaticBoxSizerIsOwned<OWNED>) -> Self {
+        unsafe { SizerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<StaticBoxSizerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: StaticBoxSizerIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for StaticBoxSizerIsOwned<OWNED> {
@@ -2415,6 +3197,26 @@ impl<const OWNED: bool> StaticTextIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<StaticTextIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: StaticTextIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<StaticTextIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: StaticTextIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<StaticTextIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: StaticTextIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<StaticTextIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: StaticTextIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for StaticTextIsOwned<OWNED> {
@@ -2495,6 +3297,26 @@ impl<const OWNED: bool> TextCtrlIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<TextCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: TextCtrlIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<TextCtrlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: TextCtrlIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<TextCtrlIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: TextCtrlIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<TextCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: TextCtrlIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for TextCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTextCtrl_CLASSINFO()) }
@@ -2546,6 +3368,26 @@ impl<const OWNED: bool> ToolBarIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<ToolBarIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: ToolBarIsOwned<OWNED>) -> Self {
+        unsafe { ControlIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ToolBarIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: ToolBarIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ToolBarIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: ToolBarIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ToolBarIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: ToolBarIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for ToolBarIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxToolBar_CLASSINFO()) }
@@ -2594,6 +3436,26 @@ impl<const OWNED: bool> TopLevelWindowIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<TopLevelWindowIsOwned<OWNED>> for NonOwnedWindowIsOwned<OWNED> {
+    fn from(o: TopLevelWindowIsOwned<OWNED>) -> Self {
+        unsafe { NonOwnedWindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<TopLevelWindowIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: TopLevelWindowIsOwned<OWNED>) -> Self {
+        unsafe { WindowIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<TopLevelWindowIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: TopLevelWindowIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<TopLevelWindowIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: TopLevelWindowIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for TopLevelWindowIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTopLevelWindow_CLASSINFO()) }
@@ -2613,6 +3475,16 @@ impl<const OWNED: bool> ValidatorIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<ValidatorIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: ValidatorIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ValidatorIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: ValidatorIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for ValidatorIsOwned<OWNED> {
@@ -2656,6 +3528,16 @@ impl<const OWNED: bool> WindowIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> From<WindowIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: WindowIsOwned<OWNED>) -> Self {
+        unsafe { EvtHandlerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<WindowIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: WindowIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> DynamicCast for WindowIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxWindow_CLASSINFO()) }
@@ -2676,6 +3558,21 @@ impl<const OWNED: bool> WrapSizerIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> From<WrapSizerIsOwned<OWNED>> for BoxSizerIsOwned<OWNED> {
+    fn from(o: WrapSizerIsOwned<OWNED>) -> Self {
+        unsafe { BoxSizerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<WrapSizerIsOwned<OWNED>> for SizerIsOwned<OWNED> {
+    fn from(o: WrapSizerIsOwned<OWNED>) -> Self {
+        unsafe { SizerIsOwned::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<WrapSizerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: WrapSizerIsOwned<OWNED>) -> Self {
+        unsafe { ObjectIsOwned::from_ptr(o.as_ptr()) }
     }
 }
 impl<const OWNED: bool> DynamicCast for WrapSizerIsOwned<OWNED> {

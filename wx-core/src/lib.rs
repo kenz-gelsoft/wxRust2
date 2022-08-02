@@ -1770,12 +1770,6 @@ impl From<Bitmap> for BitmapBundle {
     }
 }
 
-impl<const OWNED: bool> From<CheckListBoxIsOwned<OWNED>> for ListBoxIsOwned<OWNED> {
-    fn from(o: CheckListBoxIsOwned<OWNED>) -> Self {
-        unsafe { ListBoxIsOwned::from_ptr(o.as_ptr()) }
-    }
-}
-
 // FIXME: wxWindowUpdateLocker shim for wx3.0.x
 // TODO: use generated code once dropped wx3.0.x support
 pub struct WindowUpdateLocker<'a, T: WindowMethods>(Option<&'a T>);
