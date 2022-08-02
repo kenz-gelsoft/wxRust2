@@ -139,7 +139,7 @@ pub struct ConfigUI {
 }
 
 #[derive(Clone)]
-pub struct ListboxWidgetsPage {
+pub struct SliderWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
     // the lbox itself
@@ -147,7 +147,7 @@ pub struct ListboxWidgetsPage {
 
     s_item: RefCell<c_int>,
 }
-impl WidgetsPage for ListboxWidgetsPage {
+impl WidgetsPage for SliderWidgetsPage {
     fn base(&self) -> &wx::Panel {
         return &self.base;
     }
@@ -470,12 +470,12 @@ impl WidgetsPage for ListboxWidgetsPage {
         self.on_check_or_radio_box();
     }
 }
-impl ListboxWidgetsPage {
+impl SliderWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {
         let panel = wx::Panel::builder(Some(book))
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
-        ListboxWidgetsPage {
+        SliderWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
             lbox: Rc::new(RefCell::new(None)),
