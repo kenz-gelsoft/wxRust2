@@ -98,30 +98,6 @@ impl From<SliderTicks> for c_int {
     }
 }
 
-// the list type
-#[derive(Clone, Copy)]
-enum LboxType {
-    Slider,
-    CheckSlider,
-    RearrangeList,
-}
-impl LboxType {
-    fn from(v: c_int) -> Option<Self> {
-        use LboxType::*;
-        for e in [Slider, CheckSlider, RearrangeList] {
-            if v == e.into() {
-                return Some(e);
-            }
-        }
-        return None;
-    }
-}
-impl From<LboxType> for c_int {
-    fn from(w: LboxType) -> Self {
-        w as c_int
-    }
-}
-
 #[derive(Clone)]
 pub struct ConfigUI {
     // the controls
@@ -166,8 +142,6 @@ pub struct SliderWidgetsPage {
     // the slider selection range
     range_min: RefCell<c_int>,
     range_max: RefCell<c_int>,
-
-    s_item: RefCell<c_int>,
 }
 impl WidgetsPage for SliderWidgetsPage {
     fn base(&self) -> &wx::Panel {
@@ -437,7 +411,6 @@ impl SliderWidgetsPage {
             max: RefCell::new(100),
             range_min: RefCell::new(20),
             range_max: RefCell::new(80),
-            s_item: RefCell::new(1),
         }
     }
 
@@ -558,16 +531,6 @@ impl SliderWidgetsPage {
         let min = *self.min.borrow();
         let max = *self.max.borrow();
         return (val >= min) && (val <= max);
-    }
-
-    fn get_valid_index_from_text(&self, text: &wx::TextCtrl) -> Option<u32> {
-        let idx = text.get_value();
-        // if let (Ok(idx), Some(slider)) = (idx.parse(), self.slider.borrow().as_ref()) {
-        //     if idx < slider.get_count() {
-        //         return Some(idx);
-        //     }
-        // }
-        return None;
     }
 
     // set the tick frequency from the text field value
