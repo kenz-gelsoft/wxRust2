@@ -101,14 +101,14 @@ impl From<SliderTicks> for c_int {
 // the list type
 #[derive(Clone, Copy)]
 enum LboxType {
-    ListBox,
-    CheckListBox,
+    Slider,
+    CheckSlider,
     RearrangeList,
 }
 impl LboxType {
     fn from(v: c_int) -> Option<Self> {
         use LboxType::*;
-        for e in [ListBox, CheckListBox, RearrangeList] {
+        for e in [Slider, CheckSlider, RearrangeList] {
             if v == e.into() {
                 return Some(e);
             }
@@ -126,30 +126,38 @@ impl From<LboxType> for c_int {
 pub struct ConfigUI {
     // the controls
     // ------------
-    // the sel mode radiobox
-    radio_sides: wx::RadioBox,
 
-    // the checkboxes
-    chk_inverse: wx::CheckBox,
-    chk_ticks: wx::CheckBox,
+    // the check/radio boxes for styles
     chk_min_max_labels: wx::CheckBox,
     chk_value_label: wx::CheckBox,
+    chk_inverse: wx::CheckBox,
+    chk_ticks: wx::CheckBox,
+    chk_both_sides: wx::CheckBox,
+    chk_select_range: wx::CheckBox,
+
+    radio_sides: wx::RadioBox,
 
     // sizer
     sizer_slider: wx::BoxSizer,
-    // // the text entries for "Add/change string" and "Delete" buttons
-    // text_add: wx::TextCtrl,
-    // text_change: wx::TextCtrl,
-    // text_ensure_visible: wx::TextCtrl,
-    // text_delete: wx::TextCtrl,
+
+    // the text entries for set value/range
+    text_value: wx::TextCtrl,
+    text_min: wx::TextCtrl,
+    text_max: wx::TextCtrl,
+    text_range_min: wx::TextCtrl,
+    text_range_max: wx::TextCtrl,
+    text_line_size: wx::TextCtrl,
+    text_page_size: wx::TextCtrl,
+    text_tick_freq: wx::TextCtrl,
+    text_thumb_len: wx::TextCtrl,
 }
 
 #[derive(Clone)]
 pub struct SliderWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
-    // the lbox itself
-    lbox: Rc<RefCell<Option<wx::ListBox>>>,
+    // the slider itself
+    slider: Rc<RefCell<Option<wx::Slider>>>,
 
     // the slider range
     min: RefCell<c_int>,
@@ -340,13 +348,6 @@ impl WidgetsPage for SliderWidgetsPage {
 
         // right pane
         let sizer_right = wx::BoxSizer::new(wx::HORIZONTAL);
-        // let lbox = wx::ListBox::builder(Some(&self.base))
-        //     .id(SliderPage::Listbox.into())
-        //     .style(wx::LB_HSCROLL.into())
-        //     .build();
-        // sizer_right.add_window_int(Some(&lbox), 1, wx::ALL | wx::GROW, 5, wx::Object::none());
-        // sizer_right.set_min_size_int(150, 0);
-        // *self.lbox.borrow_mut() = Some(lbox);
 
         // the 3 panes panes compose the window
         sizer_top.add_sizer_sizerflags(
@@ -357,27 +358,39 @@ impl WidgetsPage for SliderWidgetsPage {
         );
         sizer_top.add_sizer_sizerflags(
             Some(&sizer_middle),
-            wx::SizerFlags::new(0).expand().border_int(wx::ALL, 10),
+            wx::SizerFlags::new(1).expand().border_int(wx::ALL, 10),
         );
         sizer_top.add_sizer_sizerflags(
             Some(&sizer_right),
-            wx::SizerFlags::new(0)
+            wx::SizerFlags::new(1)
                 .expand()
                 .border_int((wx::ALL & !wx::RIGHT), 10),
         );
         let config_ui = ConfigUI {
-            radio_sides,
-
-            // the checkboxes
-            chk_inverse,
-            chk_ticks,
             chk_min_max_labels,
             chk_value_label,
+            chk_inverse,
+            chk_ticks,
+            chk_both_sides,
+            chk_select_range,
 
-            sizer_slider: sizer_right, // save it to modify it later
+            radio_sides,
+
+            sizer_slider: sizer_right,
+
+            text_value,
+            text_min,
+            text_max,
+            text_range_min,
+            text_range_max,
+            text_line_size,
+            text_page_size,
+            text_tick_freq,
+            text_thumb_len,
         };
 
         self.reset(&config_ui);
+        self.create_slider(&config_ui);
         *self.config_ui.borrow_mut() = Some(config_ui);
 
         // final initializations
@@ -390,24 +403,24 @@ impl WidgetsPage for SliderWidgetsPage {
             SliderPage::from(event.get_id()),
             self.config_ui.borrow().as_ref(),
         ) {
-            // match m {
-            //     SliderPage::Reset => self.on_button_reset(config_ui),
-            //     SliderPage::Change => self.on_button_change(config_ui),
-            //     SliderPage::Delete => self.on_button_delete(config_ui),
-            //     SliderPage::DeleteSel => self.on_button_delete_sel(config_ui),
-            //     SliderPage::EnsureVisible => self.on_button_ensure_visible(config_ui),
-            //     SliderPage::Clear => self.on_button_clear(),
-            //     SliderPage::Add => self.on_button_add(config_ui),
-            //     SliderPage::AddSeveral => self.on_button_add_several(),
-            //     SliderPage::AddMany => self.on_button_add_many(),
-            //     // wx3.0 unsupported
-            //     // SliderPage::GetTopItem => self.on_button_top_item(),
-            //     // SliderPage::GetCountPerPage => self.on_button_page_count(),
-            //     SliderPage::MoveUp => self.on_button_move_up(),
-            //     SliderPage::MoveDown => self.on_button_move_down(),
-            //     // TODO: Support update ui event to disable this when not 3state
-            //     _ => (),
-            // };
+            match m {
+                SliderPage::Reset => self.on_button_reset(config_ui),
+                //     SliderPage::Change => self.on_button_change(config_ui),
+                //     SliderPage::Delete => self.on_button_delete(config_ui),
+                //     SliderPage::DeleteSel => self.on_button_delete_sel(config_ui),
+                //     SliderPage::EnsureVisible => self.on_button_ensure_visible(config_ui),
+                //     SliderPage::Clear => self.on_button_clear(),
+                //     SliderPage::Add => self.on_button_add(config_ui),
+                //     SliderPage::AddSeveral => self.on_button_add_several(),
+                //     SliderPage::AddMany => self.on_button_add_many(),
+                //     // wx3.0 unsupported
+                //     // SliderPage::GetTopItem => self.on_button_top_item(),
+                //     // SliderPage::GetCountPerPage => self.on_button_page_count(),
+                //     SliderPage::MoveUp => self.on_button_move_up(),
+                //     SliderPage::MoveDown => self.on_button_move_down(),
+                // TODO: Support update ui event to disable this when not 3state
+                _ => (),
+            };
         }
     }
     fn handle_checkbox(&self, _: &wx::CommandEvent) {
@@ -425,7 +438,7 @@ impl SliderWidgetsPage {
         SliderWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
-            lbox: Rc::new(RefCell::new(None)),
+            slider: Rc::new(RefCell::new(None)),
             min: RefCell::new(0),
             max: RefCell::new(100),
             range_min: RefCell::new(20),
@@ -435,169 +448,201 @@ impl SliderWidgetsPage {
     }
 
     fn reset(&self, config_ui: &ConfigUI) {
-        // config_ui
-        //     .radio_sides
-        //     .set_selection(SliderTicks::Single.into());
         config_ui.chk_inverse.set_value(false);
         config_ui.chk_ticks.set_value(true);
-        config_ui.chk_min_max_labels.set_value(false);
+        config_ui.chk_value_label.set_value(true);
+        config_ui.chk_min_max_labels.set_value(true);
+        config_ui.chk_both_sides.set_value(false);
+        config_ui.chk_select_range.set_value(false);
 
-        config_ui.chk_value_label.set_value(false);
+        config_ui
+            .radio_sides
+            .set_selection(SliderTicks::_None.into());
     }
 
-    fn create_lbox(&self, config_ui: &ConfigUI) {
+    fn create_slider(&self, config_ui: &ConfigUI) {
         let mut flags = wx::BORDER_DEFAULT;
 
-        // if let Some(m) = SliderTicks::from(config_ui.radio_sides.get_selection()) {
-        //     flags |= match m {
-        //         SliderTicks::Extended => wx::LB_EXTENDED,
-        //         SliderTicks::Multiple => wx::LB_MULTIPLE,
-        //         _ => wx::LB_SINGLE,
-        //     } as c_long;
-        // }
-
-        if config_ui.chk_inverse.is_checked() {
-            flags |= wx::LB_ALWAYS_SB as c_long;
+        if config_ui.chk_inverse.get_value() {
+            flags |= wx::SL_INVERSE as c_long;
         }
-        if config_ui.chk_ticks.is_checked() {
-            flags |= wx::LB_HSCROLL as c_long;
+        if config_ui.chk_min_max_labels.get_value() {
+            flags |= wx::SL_MIN_MAX_LABELS as c_long;
         }
-        if config_ui.chk_min_max_labels.is_checked() {
-            flags |= wx::LB_SORT as c_long;
+        if config_ui.chk_value_label.get_value() {
+            flags |= wx::SL_VALUE_LABEL as c_long;
         }
-        if config_ui.chk_value_label.is_checked() {
-            flags |= wx::LB_OWNERDRAW as c_long;
+        if config_ui.chk_ticks.get_value() {
+            flags |= wx::SL_AUTOTICKS as c_long;
         }
 
-        let items = wx::ArrayString::new();
-        let mut order: Vec<bool> = vec![];
-        if let Some(lbox) = self.lbox.borrow().as_ref() {
-            // TODO: remove (and delete) all lboxes
-            let count = lbox.get_count();
-            for n in 0..count {
-                items.add(&lbox.get_string(n));
+        // notice that the style names refer to the _ticks_ positions while we want
+        // to allow the user to select the label(s) positions and the labels are on
+        // the opposite side from the ticks, hence the apparent reversal below
+        if let Some(m) = SliderTicks::from(config_ui.radio_sides.get_selection()) {
+            flags |= match m {
+                SliderTicks::Top => wx::SL_BOTTOM,
+                SliderTicks::Left => wx::SL_RIGHT | wx::SL_VERTICAL,
+                SliderTicks::Bottom => wx::SL_TOP,
+                SliderTicks::Right => wx::SL_LEFT | wx::SL_VERTICAL,
+                _ => 0,
+            } as c_long;
+        }
+
+        if config_ui.chk_both_sides.get_value() {
+            flags |= wx::SL_BOTH as c_long;
+        }
+        if config_ui.chk_select_range.get_value() {
+            flags |= wx::SL_SELRANGE as c_long;
+        }
+
+        let min = *self.min.borrow();
+        let max = *self.max.borrow();
+        let mut val = min;
+        if let Some(slider) = self.slider.borrow().as_ref() {
+            let val_old = slider.get_value();
+            if self.is_valid_value(val_old) {
+                val = val_old;
             }
 
-            if let Some(check_lbox) = lbox.as_unowned::<wx::CheckListBox>() {
-                for n in 0..count {
-                    order.push(check_lbox.is_checked(n));
-                }
+            config_ui.sizer_slider.detach_window(Some(slider));
+
+            if config_ui.sizer_slider.get_children().get_count() > 0 {
+                // we have 2 spacers, remove them too
+                config_ui.sizer_slider.remove_int(0);
+                config_ui.sizer_slider.remove_int(0);
             }
 
-            config_ui.sizer_slider.detach_window(Some(lbox));
-            lbox.destroy();
+            slider.destroy();
         }
 
-        // if let Some(m) = LboxType::from(config_ui.radio_list_type.get_selection()) {
-        //     // let new_lbox = match m {
-        //     //     LboxType::CheckListBox => {
-        //     //         let check_lbox = wx::CheckListBox::builder(Some(&self.base))
-        //     //             .id(SliderPage::Listbox.into())
-        //     //             .choices(items)
-        //     //             .style(flags)
-        //     //             .build();
-        //     //         for n in 0..order.len() {
-        //     //             check_lbox.check(n as u32, order[n]);
-        //     //         }
-        //     //         check_lbox.into()
-        //     //     }
-        //     //     // LboxType::RearrangeList => {
-        //     //     //     // TODO
-        //     //     // }
-        //     //     _ => wx::ListBox::builder(Some(&self.base))
-        //     //         .id(SliderPage::Listbox.into())
-        //     //         .choices(items)
-        //     //         .style(flags)
-        //     //         .build(),
-        //     // };
+        let slider = wx::Slider::builder(Some(&self.base))
+            .id(SliderPage::Slider.into())
+            .value(val)
+            .min_value(min)
+            .max_value(max)
+            .style(flags)
+            .build();
 
-        //     let sizer_slider  = &config_ui.sizer_slider ;
-        //     // sizer_slider .add_window_int(
-        //     //     Some(&new_lbox),
-        //     //     1,
-        //     //     wx::GROW | wx::ALL,
-        //     //     5,
-        //     //     wx::Object::none(),
-        //     // );
-        //     sizer_slider .layout();
+        if slider.has_flag(wx::SL_VERTICAL) {
+            config_ui.sizer_slider.add_stretch_spacer(1);
+            config_ui.sizer_slider.add_window_sizerflags(
+                Some(&slider),
+                wx::SizerFlags::new(0).expand().border(wx::ALL),
+            );
+            config_ui.sizer_slider.add_stretch_spacer(1);
+        } else {
+            config_ui.sizer_slider.add_window_sizerflags(
+                Some(&slider),
+                wx::SizerFlags::new(1).centre().border(wx::ALL),
+            );
+        }
 
-        //     // *self.lbox.borrow_mut() = Some(new_lbox);
-        // }
+        config_ui
+            .text_line_size
+            .set_value(&format!("{}", slider.get_line_size()));
+        config_ui
+            .text_page_size
+            .set_value(&format!("{}", slider.get_page_size()));
+        config_ui
+            .text_thumb_len
+            .set_value(&format!("{}", slider.get_thumb_length()));
+        *self.slider.borrow_mut() = Some(slider);
+
+        if config_ui.chk_ticks.get_value() {
+            self.do_set_tick_freq();
+        }
+        if config_ui.chk_select_range.get_value() {
+            self.do_set_selection_range();
+        }
+
+        self.base.layout();
+    }
+
+    // is this slider value in range?
+    fn is_valid_value(&self, val: c_int) -> bool {
+        let min = *self.min.borrow();
+        let max = *self.max.borrow();
+        return (val >= min) && (val <= max);
     }
 
     fn get_valid_index_from_text(&self, text: &wx::TextCtrl) -> Option<u32> {
         let idx = text.get_value();
-        if let (Ok(idx), Some(lbox)) = (idx.parse(), self.lbox.borrow().as_ref()) {
-            if idx < lbox.get_count() {
-                return Some(idx);
-            }
-        }
+        // if let (Ok(idx), Some(slider)) = (idx.parse(), self.slider.borrow().as_ref()) {
+        //     if idx < slider.get_count() {
+        //         return Some(idx);
+        //     }
+        // }
         return None;
     }
 
+    fn do_set_tick_freq(&self) {}
+
+    fn do_set_selection_range(&self) {}
+
     fn on_button_reset(&self, config_ui: &ConfigUI) {
         self.reset(config_ui);
-        self.create_lbox(config_ui);
+        self.create_slider(config_ui);
     }
 
     fn on_button_change(&self, config_ui: &ConfigUI) {
-        if let Some(lbox) = self.lbox.borrow().as_ref() {
+        if let Some(slider) = self.slider.borrow().as_ref() {
             let selections = wx::ArrayInt::new();
-            let count = lbox.get_selections(&selections);
+            // let count = slider.get_selections(&selections);
             // let s = config_ui.text_change.get_value();
             // for n in 0..count {
             //     let i = selections.item(n.try_into().unwrap()).try_into().unwrap();
-            //     lbox.set_string(i, &s);
+            //     slider.set_string(i, &s);
             // }
         }
     }
 
     fn on_button_ensure_visible(&self, config_ui: &ConfigUI) {
-        // if let (Some(n), Some(lbox)) = (
+        // if let (Some(n), Some(slider)) = (
         //     self.get_valid_index_from_text(&config_ui.text_ensure_visible),
-        //     self.lbox.borrow().as_ref(),
+        //     self.slider.borrow().as_ref(),
         // ) {
-        //     lbox.ensure_visible(n.try_into().unwrap());
+        //     slider.ensure_visible(n.try_into().unwrap());
         // }
     }
 
     fn on_button_delete(&self, config_ui: &ConfigUI) {
-        // if let (Some(n), Some(lbox)) = (
+        // if let (Some(n), Some(slider)) = (
         //     self.get_valid_index_from_text(&config_ui.text_delete),
-        //     self.lbox.borrow().as_ref(),
+        //     self.slider.borrow().as_ref(),
         // ) {
-        //     lbox.delete(n.try_into().unwrap());
+        //     slider.delete(n.try_into().unwrap());
         // }
     }
 
     fn on_button_delete_sel(&self, config_ui: &ConfigUI) {
-        if let Some(lbox) = self.lbox.borrow().as_ref() {
+        if let Some(slider) = self.slider.borrow().as_ref() {
             let selections = wx::ArrayInt::new();
-            let mut n = lbox.get_selections(&selections) - 1;
-            while n >= 0 {
-                let i = selections.item(n.try_into().unwrap()).try_into().unwrap();
-                lbox.delete(i);
-                n -= 1;
-            }
+            // let mut n = slider.get_selections(&selections) - 1;
+            // while n >= 0 {
+            //     let i = selections.item(n.try_into().unwrap()).try_into().unwrap();
+            //     slider.delete(i);
+            //     n -= 1;
+            // }
         }
     }
 
     fn on_button_clear(&self) {
-        if let Some(lbox) = self.lbox.borrow().as_ref() {
-            lbox.clear();
-        }
+        // if let Some(slider) = self.slider.borrow().as_ref() {
+        //     slider.clear();
+        // }
     }
 
     // fn on_button_top_item(&self) {
-    //     if let Some(lbox) = self.lbox.borrow().as_ref() {
-    //         let item = lbox.get_top_item();
+    //     if let Some(slider) = self.slider.borrow().as_ref() {
+    //         let item = slider.get_top_item();
     //         println!("Topmost visible item is: {}", item);
     //     }
     // }
 
     // fn on_button_page_count(&self) {
-    //     if let Some(lbox) = self.lbox.borrow().as_ref() {
-    //         let count = lbox.get_count_per_page();
+    //     if let Some(slider) = self.slider.borrow().as_ref() {
+    //         let count = slider.get_count_per_page();
     //         println!("{} items fit into this listbox.", count);
     //     }
     // }
@@ -613,8 +658,8 @@ impl SliderWidgetsPage {
         //     *self.s_item.borrow_mut() = s_item + 1;
         // }
 
-        // if let Some(lbox) = self.lbox.borrow().as_ref() {
-        //     lbox.append_str(&s);
+        // if let Some(slider) = self.slider.borrow().as_ref() {
+        //     slider.append_str(&s);
         // }
     }
 
@@ -624,9 +669,9 @@ impl SliderWidgetsPage {
         for n in 0..1000 {
             strings.add(&format!("item #{}", n));
         }
-        if let Some(lbox) = self.lbox.borrow().as_ref() {
-            lbox.append_arraystring(&strings);
-        }
+        // if let Some(slider) = self.slider.borrow().as_ref() {
+        //     slider.append_arraystring(&strings);
+        // }
     }
 
     fn on_button_add_several(&self) {
@@ -634,9 +679,9 @@ impl SliderWidgetsPage {
         items.add("First");
         items.add("another one");
         items.add("and the last (very very very very very very very very very very long) one");
-        if let Some(lbox) = self.lbox.borrow().as_ref() {
-            lbox.insert_arraystring(&items, 0);
-        }
+        // if let Some(slider) = self.slider.borrow().as_ref() {
+        //     slider.insert_arraystring(&items, 0);
+        // }
     }
 
     fn on_button_move_up(&self) {
@@ -649,7 +694,7 @@ impl SliderWidgetsPage {
 
     fn on_check_or_radio_box(&self) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            self.create_lbox(config_ui);
+            self.create_slider(config_ui);
         }
     }
 }
