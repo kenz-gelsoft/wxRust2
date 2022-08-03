@@ -52,6 +52,9 @@ use hyperlink::*;
 mod listbox;
 use listbox::*;
 
+mod slider;
+use slider::*;
+
 enum Widgets {
     _ClearLog = 100,
     Quit,
@@ -164,12 +167,13 @@ impl WidgetsFrame {
         let headerctrl_page = Rc::new(HeaderCtrlWidgetsPage::new(&book));
         let hyperlink_page = Rc::new(HyperlinkWidgetsPage::new(&book));
         let listbox_page = Rc::new(ListboxWidgetsPage::new(&book));
+        let slider_page = Rc::new(SliderWidgetsPage::new(&book));
         let mut frame = WidgetsFrame {
             base,
             panel,
             book,
             pages: vec![
-                listbox_page,
+                slider_page,
                 button_page,
                 check_box_page,
                 choice_page,
@@ -184,6 +188,7 @@ impl WidgetsFrame {
                 gauge_page,
                 headerctrl_page,
                 hyperlink_page,
+                listbox_page,
             ],
         };
         frame.on_create();

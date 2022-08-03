@@ -2995,6 +2995,83 @@ int wxSizerFlags_GetDefaultBorder() {
     return wxSizerFlags::GetDefaultBorder();
 }
 
+// CLASS: wxSlider
+wxClassInfo *wxSlider_CLASSINFO() {
+    return wxCLASSINFO(wxSlider);
+}
+wxSlider *wxSlider_new() {
+    return new wxSlider();
+}
+wxSlider *wxSlider_new1(wxWindow * parent, wxWindowID id, int value, int min_value, int max_value, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return new wxSlider(parent, id, value, min_value, max_value, *pos, *size, style, *validator, *name);
+}
+void wxSlider_ClearSel(wxSlider * self) {
+    return self->ClearSel();
+}
+void wxSlider_ClearTicks(wxSlider * self) {
+    return self->ClearTicks();
+}
+bool wxSlider_Create(wxSlider * self, wxWindow * parent, wxWindowID id, int value, int min_value, int max_value, const wxPoint * point, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, value, min_value, max_value, *point, *size, style, *validator, *name);
+}
+int wxSlider_GetLineSize(const wxSlider * self) {
+    return self->GetLineSize();
+}
+int wxSlider_GetMax(const wxSlider * self) {
+    return self->GetMax();
+}
+int wxSlider_GetMin(const wxSlider * self) {
+    return self->GetMin();
+}
+int wxSlider_GetPageSize(const wxSlider * self) {
+    return self->GetPageSize();
+}
+int wxSlider_GetSelEnd(const wxSlider * self) {
+    return self->GetSelEnd();
+}
+int wxSlider_GetSelStart(const wxSlider * self) {
+    return self->GetSelStart();
+}
+int wxSlider_GetThumbLength(const wxSlider * self) {
+    return self->GetThumbLength();
+}
+int wxSlider_GetTickFreq(const wxSlider * self) {
+    return self->GetTickFreq();
+}
+int wxSlider_GetValue(const wxSlider * self) {
+    return self->GetValue();
+}
+void wxSlider_SetLineSize(wxSlider * self, int line_size) {
+    return self->SetLineSize(line_size);
+}
+void wxSlider_SetMin(wxSlider * self, int min_value) {
+    return self->SetMin(min_value);
+}
+void wxSlider_SetMax(wxSlider * self, int max_value) {
+    return self->SetMax(max_value);
+}
+void wxSlider_SetPageSize(wxSlider * self, int page_size) {
+    return self->SetPageSize(page_size);
+}
+void wxSlider_SetRange(wxSlider * self, int min_value, int max_value) {
+    return self->SetRange(min_value, max_value);
+}
+void wxSlider_SetSelection(wxSlider * self, int start_pos, int end_pos) {
+    return self->SetSelection(start_pos, end_pos);
+}
+void wxSlider_SetThumbLength(wxSlider * self, int len) {
+    return self->SetThumbLength(len);
+}
+void wxSlider_SetTick(wxSlider * self, int tick_pos) {
+    return self->SetTick(tick_pos);
+}
+void wxSlider_SetTickFreq(wxSlider * self, int freq) {
+    return self->SetTickFreq(freq);
+}
+void wxSlider_SetValue(wxSlider * self, int value) {
+    return self->SetValue(value);
+}
+
 // CLASS: wxStaticBitmap
 wxClassInfo *wxStaticBitmap_CLASSINFO() {
     return wxCLASSINFO(wxStaticBitmap);

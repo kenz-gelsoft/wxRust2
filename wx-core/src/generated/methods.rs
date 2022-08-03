@@ -5145,6 +5145,112 @@ pub trait SizerFlagsMethods: WxRustMethods {
     // NOT_SUPPORTED: fn GetDefaultBorderFractional()
 }
 
+// wxSlider
+pub trait SliderMethods: ControlMethods {
+    // DTOR: fn ~wxSlider()
+    fn clear_sel(&self) {
+        unsafe { ffi::wxSlider_ClearSel(self.as_ptr()) }
+    }
+    fn clear_ticks(&self) {
+        unsafe { ffi::wxSlider_ClearTicks(self.as_ptr()) }
+    }
+    fn create_int<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        value: c_int,
+        min_value: c_int,
+        max_value: c_int,
+        point: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let point = point.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxSlider_Create(
+                self.as_ptr(),
+                parent,
+                id,
+                value,
+                min_value,
+                max_value,
+                point,
+                size,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+    fn get_line_size(&self) -> c_int {
+        unsafe { ffi::wxSlider_GetLineSize(self.as_ptr()) }
+    }
+    fn get_max(&self) -> c_int {
+        unsafe { ffi::wxSlider_GetMax(self.as_ptr()) }
+    }
+    fn get_min(&self) -> c_int {
+        unsafe { ffi::wxSlider_GetMin(self.as_ptr()) }
+    }
+    fn get_page_size(&self) -> c_int {
+        unsafe { ffi::wxSlider_GetPageSize(self.as_ptr()) }
+    }
+    fn get_sel_end(&self) -> c_int {
+        unsafe { ffi::wxSlider_GetSelEnd(self.as_ptr()) }
+    }
+    fn get_sel_start(&self) -> c_int {
+        unsafe { ffi::wxSlider_GetSelStart(self.as_ptr()) }
+    }
+    fn get_thumb_length(&self) -> c_int {
+        unsafe { ffi::wxSlider_GetThumbLength(self.as_ptr()) }
+    }
+    fn get_tick_freq(&self) -> c_int {
+        unsafe { ffi::wxSlider_GetTickFreq(self.as_ptr()) }
+    }
+    fn get_value(&self) -> c_int {
+        unsafe { ffi::wxSlider_GetValue(self.as_ptr()) }
+    }
+    fn set_line_size(&self, line_size: c_int) {
+        unsafe { ffi::wxSlider_SetLineSize(self.as_ptr(), line_size) }
+    }
+    fn set_min(&self, min_value: c_int) {
+        unsafe { ffi::wxSlider_SetMin(self.as_ptr(), min_value) }
+    }
+    fn set_max(&self, max_value: c_int) {
+        unsafe { ffi::wxSlider_SetMax(self.as_ptr(), max_value) }
+    }
+    fn set_page_size(&self, page_size: c_int) {
+        unsafe { ffi::wxSlider_SetPageSize(self.as_ptr(), page_size) }
+    }
+    fn set_range(&self, min_value: c_int, max_value: c_int) {
+        unsafe { ffi::wxSlider_SetRange(self.as_ptr(), min_value, max_value) }
+    }
+    fn set_selection(&self, start_pos: c_int, end_pos: c_int) {
+        unsafe { ffi::wxSlider_SetSelection(self.as_ptr(), start_pos, end_pos) }
+    }
+    fn set_thumb_length(&self, len: c_int) {
+        unsafe { ffi::wxSlider_SetThumbLength(self.as_ptr(), len) }
+    }
+    fn set_tick(&self, tick_pos: c_int) {
+        unsafe { ffi::wxSlider_SetTick(self.as_ptr(), tick_pos) }
+    }
+    fn set_tick_freq(&self, freq: c_int) {
+        unsafe { ffi::wxSlider_SetTickFreq(self.as_ptr(), freq) }
+    }
+    fn set_value(&self, value: c_int) {
+        unsafe { ffi::wxSlider_SetValue(self.as_ptr(), value) }
+    }
+}
+
 // wxStaticBitmap
 pub trait StaticBitmapMethods: ControlMethods {
     fn create_bitmapbundle<

@@ -1166,6 +1166,33 @@ void wxSizerFlags_DisableConsistencyChecks();
 #endif
 int wxSizerFlags_GetDefaultBorder();
 
+// CLASS: wxSlider
+wxClassInfo *wxSlider_CLASSINFO();
+wxSlider *wxSlider_new();
+wxSlider *wxSlider_new1(wxWindow * parent, wxWindowID id, int value, int min_value, int max_value, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+void wxSlider_ClearSel(wxSlider * self);
+void wxSlider_ClearTicks(wxSlider * self);
+bool wxSlider_Create(wxSlider * self, wxWindow * parent, wxWindowID id, int value, int min_value, int max_value, const wxPoint * point, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+int wxSlider_GetLineSize(const wxSlider * self);
+int wxSlider_GetMax(const wxSlider * self);
+int wxSlider_GetMin(const wxSlider * self);
+int wxSlider_GetPageSize(const wxSlider * self);
+int wxSlider_GetSelEnd(const wxSlider * self);
+int wxSlider_GetSelStart(const wxSlider * self);
+int wxSlider_GetThumbLength(const wxSlider * self);
+int wxSlider_GetTickFreq(const wxSlider * self);
+int wxSlider_GetValue(const wxSlider * self);
+void wxSlider_SetLineSize(wxSlider * self, int line_size);
+void wxSlider_SetMin(wxSlider * self, int min_value);
+void wxSlider_SetMax(wxSlider * self, int max_value);
+void wxSlider_SetPageSize(wxSlider * self, int page_size);
+void wxSlider_SetRange(wxSlider * self, int min_value, int max_value);
+void wxSlider_SetSelection(wxSlider * self, int start_pos, int end_pos);
+void wxSlider_SetThumbLength(wxSlider * self, int len);
+void wxSlider_SetTick(wxSlider * self, int tick_pos);
+void wxSlider_SetTickFreq(wxSlider * self, int freq);
+void wxSlider_SetValue(wxSlider * self, int value);
+
 // CLASS: wxStaticBitmap
 wxClassInfo *wxStaticBitmap_CLASSINFO();
 wxStaticBitmap *wxStaticBitmap_new();

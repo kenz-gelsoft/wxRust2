@@ -2151,6 +2151,57 @@ extern "C" {
     pub fn wxSizerFlags_GetDefaultBorder() -> c_int;
     // NOT_SUPPORTED: pub fn wxSizerFlags_GetDefaultBorderFractional() -> float;
 
+    // wxSlider
+    pub fn wxSlider_CLASSINFO() -> *mut c_void;
+    pub fn wxSlider_new() -> *mut c_void;
+    pub fn wxSlider_new1(
+        parent: *mut c_void,
+        id: c_int,
+        value: c_int,
+        min_value: c_int,
+        max_value: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    // DTOR: pub fn wxSlider_~wxSlider(self_: *mut c_void);
+    pub fn wxSlider_ClearSel(self_: *mut c_void);
+    pub fn wxSlider_ClearTicks(self_: *mut c_void);
+    pub fn wxSlider_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        value: c_int,
+        min_value: c_int,
+        max_value: c_int,
+        point: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxSlider_GetLineSize(self_: *const c_void) -> c_int;
+    pub fn wxSlider_GetMax(self_: *const c_void) -> c_int;
+    pub fn wxSlider_GetMin(self_: *const c_void) -> c_int;
+    pub fn wxSlider_GetPageSize(self_: *const c_void) -> c_int;
+    pub fn wxSlider_GetSelEnd(self_: *const c_void) -> c_int;
+    pub fn wxSlider_GetSelStart(self_: *const c_void) -> c_int;
+    pub fn wxSlider_GetThumbLength(self_: *const c_void) -> c_int;
+    pub fn wxSlider_GetTickFreq(self_: *const c_void) -> c_int;
+    pub fn wxSlider_GetValue(self_: *const c_void) -> c_int;
+    pub fn wxSlider_SetLineSize(self_: *mut c_void, line_size: c_int);
+    pub fn wxSlider_SetMin(self_: *mut c_void, min_value: c_int);
+    pub fn wxSlider_SetMax(self_: *mut c_void, max_value: c_int);
+    pub fn wxSlider_SetPageSize(self_: *mut c_void, page_size: c_int);
+    pub fn wxSlider_SetRange(self_: *mut c_void, min_value: c_int, max_value: c_int);
+    pub fn wxSlider_SetSelection(self_: *mut c_void, start_pos: c_int, end_pos: c_int);
+    pub fn wxSlider_SetThumbLength(self_: *mut c_void, len: c_int);
+    pub fn wxSlider_SetTick(self_: *mut c_void, tick_pos: c_int);
+    pub fn wxSlider_SetTickFreq(self_: *mut c_void, freq: c_int);
+    pub fn wxSlider_SetValue(self_: *mut c_void, value: c_int);
+
     // wxStaticBitmap
     pub fn wxStaticBitmap_CLASSINFO() -> *mut c_void;
     pub fn wxStaticBitmap_new() -> *mut c_void;
