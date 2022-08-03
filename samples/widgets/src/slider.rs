@@ -247,7 +247,10 @@ impl WidgetsPage for SliderWidgetsPage {
             .build();
         sizer_row.add_window_sizerflags(
             Some(&text_max),
-            wx::SizerFlags::new(1).centre_vertical().border(wx::LEFT),
+            wx::SizerFlags::new(1)
+                // .centre_vertical()
+                .centre()
+                .border(wx::LEFT),
         );
 
         text_min.set_value(&format!("{}", self.min.borrow()));
@@ -268,7 +271,10 @@ impl WidgetsPage for SliderWidgetsPage {
             .build();
         sizer_row.add_window_sizerflags(
             Some(&text_range_max),
-            wx::SizerFlags::new(1).centre_vertical().border(wx::LEFT),
+            wx::SizerFlags::new(1)
+                // .centre_vertical()
+                .centre()
+                .border(wx::LEFT),
         );
 
         text_range_min.set_value(&format!("{}", self.range_min.borrow()));
