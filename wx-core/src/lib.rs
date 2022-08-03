@@ -1463,6 +1463,87 @@ impl<'a, P: WindowMethods> RadioBoxBuilder<'a, P> {
     }
 }
 
+pub struct SliderBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    id: c_int,
+    value: c_int,
+    min_value: c_int,
+    max_value: c_int,
+    pos: Option<Point>,
+    size: Option<Size>,
+    style: c_long,
+    validator: Option<Validator>,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, SliderBuilder<'a, P>> for Slider {
+    fn builder(parent: Option<&'a P>) -> SliderBuilder<'a, P> {
+        SliderBuilder {
+            parent: parent,
+            id: ID_ANY,
+            value: 0,
+            min_value: 0,
+            max_value: 0,
+            pos: None,
+            size: None,
+            style: 0,
+            validator: None,
+        }
+    }
+}
+impl<'a, P: WindowMethods> SliderBuilder<'a, P> {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn value(&mut self, value: c_int) -> &mut Self {
+        self.value = value;
+        self
+    }
+    pub fn min_value(&mut self, min_value: c_int) -> &mut Self {
+        self.min_value = min_value;
+        self
+    }
+    pub fn max_value(&mut self, max_value: c_int) -> &mut Self {
+        self.max_value = max_value;
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn validator(&mut self, validator: Validator) -> &mut Self {
+        self.validator = Some(validator);
+        self
+    }
+    pub fn build(&mut self) -> Slider {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        let validator = self
+            .validator
+            .take()
+            .unwrap_or_else(|| Validator::default());
+        Slider::new(
+            self.parent,
+            self.id,
+            self.value,
+            self.min_value,
+            self.max_value,
+            &pos,
+            &size,
+            self.style,
+            &validator,
+            "",
+        )
+    }
+}
+
 pub struct StaticBoxBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
