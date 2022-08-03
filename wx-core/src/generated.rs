@@ -2862,6 +2862,126 @@ impl<const OWNED: bool> Drop for RectIsOwned<OWNED> {
     }
 }
 
+// wxSearchCtrl
+wx_class! { SearchCtrl =
+    SearchCtrlIsOwned<true>(wxSearchCtrl) impl
+        SearchCtrlMethods,
+        // TextCtrlMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> SearchCtrlIsOwned<OWNED> {
+    pub fn new_2step() -> SearchCtrlIsOwned<OWNED> {
+        unsafe { SearchCtrlIsOwned(ffi::wxSearchCtrl_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        value: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> SearchCtrlIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let value = WxString::from(value);
+            let value = value.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            SearchCtrlIsOwned(ffi::wxSearchCtrl_new1(
+                parent, id, value, pos, size, style, validator, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<SearchCtrlIsOwned<OWNED>> for TextCtrlIsOwned<OWNED> {
+    fn from(o: SearchCtrlIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SearchCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: SearchCtrlIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SearchCtrlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: SearchCtrlIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SearchCtrlIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: SearchCtrlIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SearchCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: SearchCtrlIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for SearchCtrlIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSearchCtrl_CLASSINFO()) }
+    }
+}
+// Mix-in(s) to wxSearchCtrl
+impl<const OWNED: bool> TextEntryMethods for SearchCtrlIsOwned<OWNED> {
+    fn as_text_entry(&self) -> *mut c_void {
+        unsafe { ffi::wxSearchCtrl_AsTextEntry(self.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> TextCtrlMethods for SearchCtrlIsOwned<OWNED> {
+    fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        value: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let value = WxString::from(value);
+            let value = value.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxSearchCtrl_Create(
+                self.as_ptr(),
+                parent,
+                id,
+                value,
+                pos,
+                size,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+}
+
 // wxSettableHeaderColumn
 wx_class! { SettableHeaderColumn =
     SettableHeaderColumnIsOwned<true>(wxSettableHeaderColumn) impl

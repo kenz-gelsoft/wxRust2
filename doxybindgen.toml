@@ -53,6 +53,7 @@ wxml_files = [
     'wxml/classwx_point.xml',
     'wxml/classwx_radio_box.xml',
     'wxml/classwx_rect.xml',
+    'wxml/classwx_search_ctrl.xml',
     'wxml/classwx_settable_header_column.xml',
     'wxml/classwx_size.xml',
     'wxml/classwx_sizer.xml',

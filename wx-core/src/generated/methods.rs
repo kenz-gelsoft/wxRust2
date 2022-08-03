@@ -4121,6 +4121,45 @@ pub trait RectMethods: WxRustMethods {
     // BLOCKED: fn operator==()
 }
 
+// wxSearchCtrl
+pub trait SearchCtrlMethods: TextCtrlMethods {
+    // DTOR: fn ~wxSearchCtrl()
+    fn get_menu(&self) -> WeakRef<Menu> {
+        unsafe { WeakRef::<Menu>::from(ffi::wxSearchCtrl_GetMenu(self.as_ptr())) }
+    }
+    fn is_search_button_visible(&self) -> bool {
+        unsafe { ffi::wxSearchCtrl_IsSearchButtonVisible(self.as_ptr()) }
+    }
+    fn is_cancel_button_visible(&self) -> bool {
+        unsafe { ffi::wxSearchCtrl_IsCancelButtonVisible(self.as_ptr()) }
+    }
+    fn set_menu<M: MenuMethods>(&self, menu: Option<&M>) {
+        unsafe {
+            let menu = match menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxSearchCtrl_SetMenu(self.as_ptr(), menu)
+        }
+    }
+    fn show_cancel_button(&self, show: bool) {
+        unsafe { ffi::wxSearchCtrl_ShowCancelButton(self.as_ptr(), show) }
+    }
+    fn show_search_button(&self, show: bool) {
+        unsafe { ffi::wxSearchCtrl_ShowSearchButton(self.as_ptr(), show) }
+    }
+    fn set_descriptive_text(&self, text: &str) {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxSearchCtrl_SetDescriptiveText(self.as_ptr(), text)
+        }
+    }
+    fn get_descriptive_text(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxSearchCtrl_GetDescriptiveText(self.as_ptr())).into() }
+    }
+}
+
 // wxSettableHeaderColumn
 pub trait SettableHeaderColumnMethods: HeaderColumnMethods {
     fn set_title(&self, title: &str) {
