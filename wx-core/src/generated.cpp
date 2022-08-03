@@ -2593,8 +2593,8 @@ wxString *wxSearchCtrl_GetDescriptiveText(const wxSearchCtrl * self) {
     return new wxString(self->GetDescriptiveText());
 }
 // Mix-in(s) to wxSearchCtrl
-wxTextEntry *wxSearchCtrl_AsTextEntry(wxSearchCtrl* obj) {
-    return static_cast<wxTextEntry*>(obj);
+wxTextEntryBase *wxSearchCtrl_AsTextEntry(wxSearchCtrl* obj) {
+    return static_cast<wxTextEntryBase*>(obj);
 }
 
 // CLASS: wxSettableHeaderColumn

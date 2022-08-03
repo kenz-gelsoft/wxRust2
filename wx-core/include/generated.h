@@ -1025,7 +1025,7 @@ void wxSearchCtrl_ShowSearchButton(wxSearchCtrl * self, bool show);
 void wxSearchCtrl_SetDescriptiveText(wxSearchCtrl * self, const wxString * text);
 wxString *wxSearchCtrl_GetDescriptiveText(const wxSearchCtrl * self);
 // Mix-in(s) to wxSearchCtrl
-wxTextEntry *wxSearchCtrl_AsTextEntry(wxSearchCtrl* obj);
+wxTextEntryBase *wxSearchCtrl_AsTextEntry(wxSearchCtrl* obj);
 
 // CLASS: wxSettableHeaderColumn
 void wxSettableHeaderColumn_delete(wxSettableHeaderColumn *self);
