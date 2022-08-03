@@ -405,19 +405,13 @@ impl WidgetsPage for SliderWidgetsPage {
         ) {
             match m {
                 SliderPage::Reset => self.on_button_reset(config_ui),
-                //     SliderPage::Change => self.on_button_change(config_ui),
-                //     SliderPage::Delete => self.on_button_delete(config_ui),
-                //     SliderPage::DeleteSel => self.on_button_delete_sel(config_ui),
-                //     SliderPage::EnsureVisible => self.on_button_ensure_visible(config_ui),
-                //     SliderPage::Clear => self.on_button_clear(),
-                //     SliderPage::Add => self.on_button_add(config_ui),
-                //     SliderPage::AddSeveral => self.on_button_add_several(),
-                //     SliderPage::AddMany => self.on_button_add_many(),
-                //     // wx3.0 unsupported
-                //     // SliderPage::GetTopItem => self.on_button_top_item(),
-                //     // SliderPage::GetCountPerPage => self.on_button_page_count(),
-                //     SliderPage::MoveUp => self.on_button_move_up(),
-                //     SliderPage::MoveDown => self.on_button_move_down(),
+                SliderPage::SetValue => self.on_button_set_value(config_ui),
+                SliderPage::SetMinAndMax => self.on_button_set_min_and_max(config_ui),
+                SliderPage::SetRange => self.on_button_set_range(config_ui),
+                SliderPage::SetLineSize => self.on_button_set_line_size(config_ui),
+                SliderPage::SetPageSize => self.on_button_set_page_size(config_ui),
+                SliderPage::SetTickFreq => self.on_button_set_tick_freq(config_ui),
+                SliderPage::SetThumbLen => self.on_button_set_thumb_len(config_ui),
                 // TODO: Support update ui event to disable this when not 3state
                 _ => (),
             };
@@ -550,10 +544,10 @@ impl SliderWidgetsPage {
         *self.slider.borrow_mut() = Some(slider);
 
         if config_ui.chk_ticks.get_value() {
-            self.do_set_tick_freq();
+            self.do_set_tick_freq(config_ui);
         }
         if config_ui.chk_select_range.get_value() {
-            self.do_set_selection_range();
+            self.do_set_selection_range(config_ui);
         }
 
         self.base.layout();
@@ -576,120 +570,100 @@ impl SliderWidgetsPage {
         return None;
     }
 
-    fn do_set_tick_freq(&self) {}
+    // set the tick frequency from the text field value
+    fn do_set_tick_freq(&self, config_ui: &ConfigUI) {
+        let freq = config_ui.text_tick_freq.get_value();
+        if let (Ok(freq), Some(slider)) = (freq.parse(), self.slider.borrow().as_ref()) {
+            slider.set_tick_freq(freq);
+        }
+    }
 
-    fn do_set_selection_range(&self) {}
+    // set the selection range from the text field values
+    fn do_set_selection_range(&self, config_ui: &ConfigUI) {
+        let min_new = config_ui.text_range_min.get_value();
+        let max_new = config_ui.text_range_max.get_value();
+        if let (Ok(min_new), Ok(max_new), Some(slider)) = (
+            min_new.parse(),
+            max_new.parse(),
+            self.slider.borrow().as_ref(),
+        ) {
+            let min = *self.min.borrow();
+            let max = *self.max.borrow();
+            if min_new >= max_new || min_new < min || max_new > max {
+                return;
+            }
+            *self.range_min.borrow_mut() = min_new;
+            *self.range_max.borrow_mut() = max_new;
+
+            slider.set_selection(min_new, max_new);
+        }
+    }
+
+    // ----------------------------------------------------------------------------
+    // event handlers
+    // ----------------------------------------------------------------------------
 
     fn on_button_reset(&self, config_ui: &ConfigUI) {
         self.reset(config_ui);
         self.create_slider(config_ui);
     }
 
-    fn on_button_change(&self, config_ui: &ConfigUI) {
-        if let Some(slider) = self.slider.borrow().as_ref() {
-            let selections = wx::ArrayInt::new();
-            // let count = slider.get_selections(&selections);
-            // let s = config_ui.text_change.get_value();
-            // for n in 0..count {
-            //     let i = selections.item(n.try_into().unwrap()).try_into().unwrap();
-            //     slider.set_string(i, &s);
-            // }
+    // set the line size from the text field value
+    fn on_button_set_line_size(&self, config_ui: &ConfigUI) {
+        let line_size = config_ui.text_line_size.get_value();
+        if let (Ok(line_size), Some(slider)) = (line_size.parse(), self.slider.borrow().as_ref()) {
+            slider.set_line_size(line_size);
         }
     }
 
-    fn on_button_ensure_visible(&self, config_ui: &ConfigUI) {
-        // if let (Some(n), Some(slider)) = (
-        //     self.get_valid_index_from_text(&config_ui.text_ensure_visible),
-        //     self.slider.borrow().as_ref(),
-        // ) {
-        //     slider.ensure_visible(n.try_into().unwrap());
-        // }
-    }
-
-    fn on_button_delete(&self, config_ui: &ConfigUI) {
-        // if let (Some(n), Some(slider)) = (
-        //     self.get_valid_index_from_text(&config_ui.text_delete),
-        //     self.slider.borrow().as_ref(),
-        // ) {
-        //     slider.delete(n.try_into().unwrap());
-        // }
-    }
-
-    fn on_button_delete_sel(&self, config_ui: &ConfigUI) {
-        if let Some(slider) = self.slider.borrow().as_ref() {
-            let selections = wx::ArrayInt::new();
-            // let mut n = slider.get_selections(&selections) - 1;
-            // while n >= 0 {
-            //     let i = selections.item(n.try_into().unwrap()).try_into().unwrap();
-            //     slider.delete(i);
-            //     n -= 1;
-            // }
+    // set the page size from the text field value
+    fn on_button_set_page_size(&self, config_ui: &ConfigUI) {
+        let page_size = config_ui.text_page_size.get_value();
+        if let (Ok(page_size), Some(slider)) = (page_size.parse(), self.slider.borrow().as_ref()) {
+            slider.set_page_size(page_size);
         }
     }
 
-    fn on_button_clear(&self) {
-        // if let Some(slider) = self.slider.borrow().as_ref() {
-        //     slider.clear();
-        // }
+    fn on_button_set_tick_freq(&self, config_ui: &ConfigUI) {
+        self.do_set_tick_freq(config_ui);
     }
 
-    // fn on_button_top_item(&self) {
-    //     if let Some(slider) = self.slider.borrow().as_ref() {
-    //         let item = slider.get_top_item();
-    //         println!("Topmost visible item is: {}", item);
-    //     }
-    // }
-
-    // fn on_button_page_count(&self) {
-    //     if let Some(slider) = self.slider.borrow().as_ref() {
-    //         let count = slider.get_count_per_page();
-    //         println!("{} items fit into this listbox.", count);
-    //     }
-    // }
-
-    fn on_button_add(&self, config_ui: &ConfigUI) {
-        // let s = config_ui.text_add.get_value();
-        // if !config_ui.text_add.is_modified() {
-        //     // update the default string
-        //     let s_item = *self.s_item.borrow();
-        //     config_ui
-        //         .text_add
-        //         .set_value(&format!("test item \t{}", s_item));
-        //     *self.s_item.borrow_mut() = s_item + 1;
-        // }
-
-        // if let Some(slider) = self.slider.borrow().as_ref() {
-        //     slider.append_str(&s);
-        // }
-    }
-
-    fn on_button_add_many(&self) {
-        // "many" means 1000 here
-        let strings = wx::ArrayString::new();
-        for n in 0..1000 {
-            strings.add(&format!("item #{}", n));
+    // set the thumb len from the text field value
+    fn on_button_set_thumb_len(&self, config_ui: &ConfigUI) {
+        let len = config_ui.text_thumb_len.get_value();
+        if let (Ok(len), Some(slider)) = (len.parse(), self.slider.borrow().as_ref()) {
+            slider.set_thumb_length(len);
         }
-        // if let Some(slider) = self.slider.borrow().as_ref() {
-        //     slider.append_arraystring(&strings);
-        // }
+        self.base.layout();
     }
 
-    fn on_button_add_several(&self) {
-        let items = wx::ArrayString::new();
-        items.add("First");
-        items.add("another one");
-        items.add("and the last (very very very very very very very very very very long) one");
-        // if let Some(slider) = self.slider.borrow().as_ref() {
-        //     slider.insert_arraystring(&items, 0);
-        // }
+    fn on_button_set_min_and_max(&self, config_ui: &ConfigUI) {
+        let min_new = config_ui.text_min.get_value();
+        let max_new = config_ui.text_max.get_value();
+        if let (Ok(min_new), Ok(max_new), Some(slider)) = (
+            min_new.parse(),
+            max_new.parse(),
+            self.slider.borrow().as_ref(),
+        ) {
+            if min_new >= max_new {
+                return;
+            }
+            *self.min.borrow_mut() = min_new;
+            *self.max.borrow_mut() = max_new;
+
+            slider.set_range(min_new, max_new);
+        }
     }
 
-    fn on_button_move_up(&self) {
-        // TODO: RearrangeList
+    fn on_button_set_range(&self, config_ui: &ConfigUI) {
+        self.do_set_selection_range(config_ui);
     }
 
-    fn on_button_move_down(&self) {
-        // TODO: RearrangeList
+    fn on_button_set_value(&self, config_ui: &ConfigUI) {
+        let val = config_ui.text_value.get_value();
+        if let (Ok(val), Some(slider)) = (val.parse(), self.slider.borrow().as_ref()) {
+            slider.set_value(val);
+        }
     }
 
     fn on_check_or_radio_box(&self) {
