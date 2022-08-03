@@ -208,7 +208,8 @@ impl WidgetsPage for SliderWidgetsPage {
         sizer_left.add_window_sizerflags(
             Some(&btn),
             wx::SizerFlags::new(0)
-                .centre_horizontal()
+                // .centre_horizontal()
+                .centre()
                 .border_int(wx::ALL, 15),
         );
 
