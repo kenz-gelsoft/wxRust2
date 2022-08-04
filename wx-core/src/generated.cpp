@@ -734,8 +734,8 @@ void wxComboBox_Dismiss(wxComboBox * self) {
 wxItemContainer *wxComboBox_AsItemContainer(wxComboBox* obj) {
     return static_cast<wxItemContainer*>(obj);
 }
-wxTextEntry *wxComboBox_AsTextEntry(wxComboBox* obj) {
-    return static_cast<wxTextEntry*>(obj);
+wxTextEntryBase *wxComboBox_AsTextEntry(wxComboBox* obj) {
+    return static_cast<wxTextEntryBase*>(obj);
 }
 
 // CLASS: wxCommandEvent
@@ -3575,8 +3575,8 @@ long wxTextCtrl_XYToPosition(const wxTextCtrl * self, long x, long y) {
     return self->XYToPosition(x, y);
 }
 // Mix-in(s) to wxTextCtrl
-wxTextEntry *wxTextCtrl_AsTextEntry(wxTextCtrl* obj) {
-    return static_cast<wxTextEntry*>(obj);
+wxTextEntryBase *wxTextCtrl_AsTextEntry(wxTextCtrl* obj) {
+    return static_cast<wxTextEntryBase*>(obj);
 }
 
 // CLASS: wxTextEntry

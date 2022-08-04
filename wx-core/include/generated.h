@@ -322,7 +322,7 @@ void wxComboBox_Popup(wxComboBox * self);
 void wxComboBox_Dismiss(wxComboBox * self);
 // Mix-in(s) to wxComboBox
 wxItemContainer *wxComboBox_AsItemContainer(wxComboBox* obj);
-wxTextEntry *wxComboBox_AsTextEntry(wxComboBox* obj);
+wxTextEntryBase *wxComboBox_AsTextEntry(wxComboBox* obj);
 
 // CLASS: wxCommandEvent
 wxClassInfo *wxCommandEvent_CLASSINFO();
@@ -1377,7 +1377,7 @@ bool wxTextCtrl_SetStyle(wxTextCtrl * self, long start, long end, const wxTextAt
 void wxTextCtrl_ShowPosition(wxTextCtrl * self, long pos);
 long wxTextCtrl_XYToPosition(const wxTextCtrl * self, long x, long y);
 // Mix-in(s) to wxTextCtrl
-wxTextEntry *wxTextCtrl_AsTextEntry(wxTextCtrl* obj);
+wxTextEntryBase *wxTextCtrl_AsTextEntry(wxTextCtrl* obj);
 
 // CLASS: wxTextEntry
 void wxTextEntry_delete(wxTextEntry *self);

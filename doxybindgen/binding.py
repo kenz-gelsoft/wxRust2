@@ -1,6 +1,10 @@
 from collections import OrderedDict
 from .model import Param, RustType, non_keyword_name, prefixed, pascal_to_snake
 
+MIXIN_CXX_CLASS = {
+    # MSW: Some wxTextEntry-derived classes actually derived from its base
+    'wxTextEntry': 'wxTextEntryBase',
+}
 
 class RustClassBinding:
     def __init__(self, model):
@@ -541,15 +545,18 @@ class CxxClassBinding:
         yield ''
 
     def _mixin_lines(self, mixin, is_cc):
+        cxx_class = mixin
+        if cxx_class in MIXIN_CXX_CLASS:
+            cxx_class = MIXIN_CXX_CLASS[cxx_class]
         signature = '%s *%s_As%s(%s* obj)' % (
-            mixin,
+            cxx_class,
             self.__model.name,
             mixin[2:], # TODO: unprefixed
             self.__model.name,
         )
         if is_cc:
             yield '%s {' % (signature,)
-            yield '    return static_cast<%s*>(obj);' % (mixin,)
+            yield '    return static_cast<%s*>(obj);' % (cxx_class,)
             yield '}'
         else:
             yield '%s;' % (signature,)
