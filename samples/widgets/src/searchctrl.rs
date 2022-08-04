@@ -27,25 +27,25 @@ pub struct ConfigUI {
 }
 
 #[derive(Clone)]
-pub struct FontPickerWidgetsPage {
+pub struct SearchCtrlWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
     // the picker
-    font_picker: Rc<RefCell<Option<wx::FontPickerCtrl>>>,
+    font_picker: Rc<RefCell<Option<wx::SearchCtrl>>>,
 }
-impl WidgetsPage for FontPickerWidgetsPage {
+impl WidgetsPage for SearchCtrlWidgetsPage {
     fn base(&self) -> &wx::Panel {
         return &self.base;
     }
     fn label(&self) -> &str {
-        return "FontPicker";
+        return "SearchCtrl";
     }
     fn create_content(&self) {
         // left pane
         let boxleft = wx::BoxSizer::new(wx::VERTICAL);
 
         let fontbox =
-            wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&self.base), "&FontPicker style");
+            wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&self.base), "&SearchCtrl style");
         let chk_font_text_ctrl =
             self.create_check_box_and_add_to_sizer(&fontbox, "With textctrl", wx::ID_ANY);
         let chk_font_desc_as_label =
@@ -112,12 +112,12 @@ impl WidgetsPage for FontPickerWidgetsPage {
         // Do nothing
     }
 }
-impl FontPickerWidgetsPage {
+impl SearchCtrlWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {
         let panel = wx::Panel::builder(Some(book))
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
-        FontPickerWidgetsPage {
+        SearchCtrlWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
             font_picker: Rc::new(RefCell::new(None)),
@@ -142,7 +142,7 @@ impl FontPickerWidgetsPage {
             }
         }
 
-        let font_picker = wx::FontPickerCtrl::builder(Some(&self.base))
+        let font_picker = wx::SearchCtrl::builder(Some(&self.base))
             .id(PickerPage::Font.into())
             // TODO: wxSWISS_FONT
             .style(style)

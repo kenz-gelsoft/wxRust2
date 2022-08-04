@@ -52,6 +52,9 @@ use hyperlink::*;
 mod listbox;
 use listbox::*;
 
+mod searchctrl;
+use searchctrl::*;
+
 mod slider;
 use slider::*;
 
@@ -167,13 +170,14 @@ impl WidgetsFrame {
         let headerctrl_page = Rc::new(HeaderCtrlWidgetsPage::new(&book));
         let hyperlink_page = Rc::new(HyperlinkWidgetsPage::new(&book));
         let listbox_page = Rc::new(ListboxWidgetsPage::new(&book));
+        let searchctrl_page = Rc::new(SearchCtrlWidgetsPage::new(&book));
         let slider_page = Rc::new(SliderWidgetsPage::new(&book));
         let mut frame = WidgetsFrame {
             base,
             panel,
             book,
             pages: vec![
-                slider_page,
+                searchctrl_page,
                 button_page,
                 check_box_page,
                 choice_page,
@@ -189,6 +193,7 @@ impl WidgetsFrame {
                 headerctrl_page,
                 hyperlink_page,
                 listbox_page,
+                slider_page,
             ],
         };
         frame.on_create();
