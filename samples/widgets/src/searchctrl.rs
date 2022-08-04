@@ -1,37 +1,48 @@
 use crate::WidgetsPage;
 use std::cell::RefCell;
-use std::os::raw::{c_int, c_long};
+use std::os::raw::c_int;
 use std::rc::Rc;
 use wx::methods::*;
 
 // control ids
 #[derive(Clone, Copy)]
-enum PickerPage {
-    Reset = wx::ID_HIGHEST as isize,
-    Font,
+enum ID {
+    SEARCH_CB = wx::ID_HIGHEST as isize,
+    CANCEL_CB,
+    MENU_CB,
+
+    SEARCHMENU,
+    SEARCHMENU_LAST = ID::SEARCHMENU as isize + 5,
 }
-impl From<PickerPage> for c_int {
-    fn from(w: PickerPage) -> Self {
+impl ID {
+    fn from(v: c_int) -> Option<Self> {
+        use ID::*;
+        for e in [SEARCH_CB, CANCEL_CB, MENU_CB, SEARCHMENU, SEARCHMENU_LAST] {
+            if v == e.into() {
+                return Some(e);
+            }
+        }
+        return None;
+    }
+}
+impl From<ID> for c_int {
+    fn from(w: ID) -> Self {
         w as c_int
     }
 }
 
 #[derive(Clone)]
 pub struct ConfigUI {
-    // other controls
-    // --------------
-    chk_font_text_ctrl: wx::CheckBox,
-    chk_font_desc_as_label: wx::CheckBox,
-    chk_font_use_font_for_label: wx::CheckBox,
-    sizer: wx::BoxSizer,
+    search_btn_check: wx::CheckBox,
+    cancel_btn_check: wx::CheckBox,
+    menu_btn_check: wx::CheckBox,
 }
 
 #[derive(Clone)]
 pub struct SearchCtrlWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
-    // the picker
-    font_picker: Rc<RefCell<Option<wx::SearchCtrl>>>,
+    srch_ctrl: Rc<RefCell<Option<wx::SearchCtrl>>>,
 }
 impl WidgetsPage for SearchCtrlWidgetsPage {
     fn base(&self) -> &wx::Panel {
@@ -41,72 +52,80 @@ impl WidgetsPage for SearchCtrlWidgetsPage {
         return "SearchCtrl";
     }
     fn create_content(&self) {
-        // left pane
-        let boxleft = wx::BoxSizer::new(wx::VERTICAL);
+        self.create_control();
 
-        let fontbox =
-            wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&self.base), "&SearchCtrl style");
-        let chk_font_text_ctrl =
-            self.create_check_box_and_add_to_sizer(&fontbox, "With textctrl", wx::ID_ANY);
-        let chk_font_desc_as_label =
-            self.create_check_box_and_add_to_sizer(&fontbox, "Font desc as btn label", wx::ID_ANY);
-        let chk_font_use_font_for_label =
-            self.create_check_box_and_add_to_sizer(&fontbox, "Use font for label", wx::ID_ANY);
-        boxleft.add_sizer_int(Some(&fontbox), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
-
-        boxleft.add_window_int(
+        let s_box = wx::StaticBoxSizer::new_with_staticbox(
             Some(
-                &wx::Button::builder(Some(&self.base))
-                    .id(PickerPage::Reset.into())
-                    .label("&Reset")
+                &wx::StaticBox::builder(Some(&self.base))
+                    .label("Options")
                     .build(),
             ),
-            0,
-            wx::ALIGN_CENTRE_HORIZONTAL | wx::ALL,
-            15,
-            wx::Object::none(),
+            wx::VERTICAL,
         );
 
-        // create pickers
-        self.create_picker();
+        let search_btn_check = wx::CheckBox::builder(Some(&self.base))
+            .id(ID::SEARCH_CB.into())
+            .label("Search button")
+            .build();
+        let cancel_btn_check = wx::CheckBox::builder(Some(&self.base))
+            .id(ID::CANCEL_CB.into())
+            .label("Cancel button")
+            .build();
+        let menu_btn_check = wx::CheckBox::builder(Some(&self.base))
+            .id(ID::MENU_CB.into())
+            .label("Search menu")
+            .build();
 
-        // right pane
-        let sizer = wx::BoxSizer::new(wx::VERTICAL);
-        sizer.add_int_int(1, 1, 1, wx::GROW | wx::ALL, 5, wx::Object::none()); // spacer
-        if let Some(font_picker) = self.font_picker.borrow().as_ref() {
-            sizer.add_window_int(
-                Some(font_picker),
-                0,
-                wx::ALIGN_CENTER | wx::ALL,
-                5,
-                wx::Object::none(),
+        search_btn_check.set_value(true);
+
+        s_box.add_window_sizerflags(
+            Some(&search_btn_check),
+            wx::SizerFlags::new(0).border(wx::ALL),
+        );
+        s_box.add_window_sizerflags(
+            Some(&cancel_btn_check),
+            wx::SizerFlags::new(0).border(wx::ALL),
+        );
+        s_box.add_window_sizerflags(
+            Some(&menu_btn_check),
+            wx::SizerFlags::new(0).border(wx::ALL),
+        );
+
+        let sizer = wx::BoxSizer::new(wx::HORIZONTAL);
+        sizer.add_sizer_sizerflags(
+            Some(&s_box),
+            wx::SizerFlags::new(0).expand().triple_border(wx::ALL),
+        );
+        if let Some(srch_ctrl) = self.srch_ctrl.borrow().as_ref() {
+            sizer.add_window_sizerflags(
+                Some(srch_ctrl),
+                wx::SizerFlags::new(0).expand().triple_border(wx::ALL),
             );
         }
-        sizer.add_int_int(1, 1, 1, wx::GROW | wx::ALL, 5, wx::Object::none()); // spacer
 
-        // global pane
-        let sz = wx::BoxSizer::new(wx::HORIZONTAL);
-        sz.add_sizer_int(Some(&boxleft), 0, wx::GROW | wx::ALL, 5, wx::Object::none());
-        sz.add_sizer_int(Some(&sizer), 1, wx::GROW | wx::ALL, 5, wx::Object::none());
-
+        self.base.set_sizer(Some(&sizer), true);
         let config_ui = ConfigUI {
-            chk_font_text_ctrl,
-            chk_font_desc_as_label,
-            chk_font_use_font_for_label,
-
-            sizer,
+            search_btn_check,
+            cancel_btn_check,
+            menu_btn_check,
         };
-        self.reset(&config_ui); // set checkboxes state
         *self.config_ui.borrow_mut() = Some(config_ui);
-
-        self.base.set_sizer(Some(&sz), true);
     }
 
     fn handle_button(&self, _: &wx::CommandEvent) {
-        self.on_button_reset();
+        // Do nothing
     }
-    fn handle_checkbox(&self, _: &wx::CommandEvent) {
-        self.on_check_box();
+    fn handle_checkbox(&self, event: &wx::CommandEvent) {
+        if let (Some(m), Some(config_ui)) =
+            (ID::from(event.get_id()), self.config_ui.borrow().as_ref())
+        {
+            match m {
+                ID::SEARCH_CB => self.on_toggle_search_button(config_ui),
+                ID::CANCEL_CB => self.on_toggle_cancel_button(config_ui),
+                ID::MENU_CB => self.on_toggle_search_menu(config_ui),
+                _ => (),
+            };
+        }
     }
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
         // Do nothing
@@ -120,79 +139,65 @@ impl SearchCtrlWidgetsPage {
         SearchCtrlWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
-            font_picker: Rc::new(RefCell::new(None)),
+            srch_ctrl: Rc::new(RefCell::new(None)),
         }
     }
 
-    fn create_picker(&self) {
-        if let Some(font_picker) = self.font_picker.borrow().as_ref() {
-            font_picker.destroy();
+    fn create_control(&self) {
+        if let Some(srch_ctrl) = self.srch_ctrl.borrow().as_ref() {
+            srch_ctrl.destroy();
         }
 
-        let mut style = wx::BORDER_DEFAULT;
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            if config_ui.chk_font_text_ctrl.get_value() {
-                style |= wx::FNTP_USE_TEXTCTRL as c_long;
-            }
-            if config_ui.chk_font_use_font_for_label.get_value() {
-                style |= wx::FNTP_USEFONT_FOR_LABEL as c_long;
-            }
-            if config_ui.chk_font_desc_as_label.get_value() {
-                style |= wx::FNTP_FONTDESC_AS_LABEL as c_long;
-            }
-        }
+        let style = wx::BORDER_DEFAULT;
 
-        let font_picker = wx::SearchCtrl::builder(Some(&self.base))
-            .id(PickerPage::Font.into())
-            // TODO: wxSWISS_FONT
+        let srch_ctrl = wx::SearchCtrl::builder(Some(&self.base))
+            .size(self.base.from_dip_size(&wx::Size::new_with_int(150, -1)))
             .style(style)
             .build();
-        *self.font_picker.borrow_mut() = Some(font_picker);
+        *self.srch_ctrl.borrow_mut() = Some(srch_ctrl);
     }
 
-    fn recreate_widget(&self) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            config_ui.sizer.remove_int(1);
-            self.create_picker();
-
-            if let Some(font_pickr) = self.font_picker.borrow().as_ref() {
-                config_ui.sizer.insert_window_int(
-                    1,
-                    Some(font_pickr),
-                    0,
-                    wx::ALIGN_CENTER | wx::ALL,
-                    5,
-                    wx::Object::none(),
+    fn create_test_menu(&self) -> wx::Menu {
+        let menu = wx::Menu::new();
+        if let Some(menu_item) =
+            menu.append_int_str(wx::ID_ANY, "Recent Searches", "", wx::ITEM_NORMAL)
+        {
+            menu_item.enable(false);
+            for i in 0..(ID::SEARCHMENU_LAST as c_int - ID::SEARCHMENU as c_int) {
+                let item_text = format!("item {}", i);
+                let tip_text = format!("tip {}", i);
+                menu.append_int_str(
+                    (ID::SEARCHMENU as c_int) + i,
+                    &item_text,
+                    &tip_text,
+                    wx::ITEM_CHECK,
                 );
             }
-            config_ui.sizer.layout();
         }
-    }
-
-    fn reset(&self, config_ui: &ConfigUI) {
-        config_ui
-            .chk_font_text_ctrl
-            .set_value((wx::FNTP_DEFAULT_STYLE & wx::FNTP_USE_TEXTCTRL) != 0);
-        config_ui
-            .chk_font_use_font_for_label
-            .set_value((wx::FNTP_DEFAULT_STYLE & wx::FNTP_USEFONT_FOR_LABEL) != 0);
-        config_ui
-            .chk_font_desc_as_label
-            .set_value((wx::FNTP_DEFAULT_STYLE & wx::FNTP_FONTDESC_AS_LABEL) != 0);
+        menu
     }
 
     // ----------------------------------------------------------------------------
     // event handlers
     // ----------------------------------------------------------------------------
 
-    fn on_button_reset(&self) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            self.reset(config_ui);
+    fn on_toggle_search_button(&self, config_ui: &ConfigUI) {
+        if let Some(srch_ctrl) = self.srch_ctrl.borrow().as_ref() {
+            srch_ctrl.show_search_button(config_ui.search_btn_check.get_value());
         }
-        self.recreate_widget();
     }
-
-    fn on_check_box(&self) {
-        self.recreate_widget();
+    fn on_toggle_cancel_button(&self, config_ui: &ConfigUI) {
+        if let Some(srch_ctrl) = self.srch_ctrl.borrow().as_ref() {
+            srch_ctrl.show_cancel_button(config_ui.cancel_btn_check.get_value());
+        }
+    }
+    fn on_toggle_search_menu(&self, config_ui: &ConfigUI) {
+        if let Some(srch_ctrl) = self.srch_ctrl.borrow().as_ref() {
+            if config_ui.menu_btn_check.get_value() {
+                srch_ctrl.set_menu(Some(&self.create_test_menu()));
+            } else {
+                srch_ctrl.set_menu(wx::Menu::none());
+            }
+        }
     }
 }
