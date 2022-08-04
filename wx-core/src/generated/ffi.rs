@@ -1800,6 +1800,42 @@ extern "C" {
     // BLOCKED: pub fn wxRect_operator=(self_: *mut c_void, rect: *const c_void) -> *mut c_void;
     // BLOCKED: pub fn wxRect_operator==(self_: *mut c_void, r1: *const c_void, r2: *const c_void) -> bool;
 
+    // wxSearchCtrl
+    pub fn wxSearchCtrl_CLASSINFO() -> *mut c_void;
+    pub fn wxSearchCtrl_new() -> *mut c_void;
+    pub fn wxSearchCtrl_new1(
+        parent: *mut c_void,
+        id: c_int,
+        value: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    // DTOR: pub fn wxSearchCtrl_~wxSearchCtrl(self_: *mut c_void);
+    pub fn wxSearchCtrl_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        value: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxSearchCtrl_GetMenu(self_: *mut c_void) -> *mut c_void;
+    pub fn wxSearchCtrl_IsSearchButtonVisible(self_: *const c_void) -> bool;
+    pub fn wxSearchCtrl_IsCancelButtonVisible(self_: *const c_void) -> bool;
+    pub fn wxSearchCtrl_SetMenu(self_: *mut c_void, menu: *mut c_void);
+    pub fn wxSearchCtrl_ShowCancelButton(self_: *mut c_void, show: bool);
+    pub fn wxSearchCtrl_ShowSearchButton(self_: *mut c_void, show: bool);
+    pub fn wxSearchCtrl_SetDescriptiveText(self_: *mut c_void, text: *const c_void);
+    pub fn wxSearchCtrl_GetDescriptiveText(self_: *const c_void) -> *mut c_void;
+    // Mix-in(s) to wxSearchCtrl
+    pub fn wxSearchCtrl_AsTextEntry(obj: *mut c_void) -> *mut c_void;
+
     // wxSettableHeaderColumn
     pub fn wxSettableHeaderColumn_delete(self_: *mut c_void);
     pub fn wxSettableHeaderColumn_SetTitle(self_: *mut c_void, title: *const c_void);

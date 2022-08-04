@@ -734,8 +734,8 @@ void wxComboBox_Dismiss(wxComboBox * self) {
 wxItemContainer *wxComboBox_AsItemContainer(wxComboBox* obj) {
     return static_cast<wxItemContainer*>(obj);
 }
-wxTextEntry *wxComboBox_AsTextEntry(wxComboBox* obj) {
-    return static_cast<wxTextEntry*>(obj);
+wxTextEntryBase *wxComboBox_AsTextEntry(wxComboBox* obj) {
+    return static_cast<wxTextEntryBase*>(obj);
 }
 
 // CLASS: wxCommandEvent
@@ -2555,6 +2555,48 @@ wxRect *wxRect_Union(const wxRect * self, const wxRect * rect) {
     return new wxRect(self->Union(*rect));
 }
 
+// CLASS: wxSearchCtrl
+wxClassInfo *wxSearchCtrl_CLASSINFO() {
+    return wxCLASSINFO(wxSearchCtrl);
+}
+wxSearchCtrl *wxSearchCtrl_new() {
+    return new wxSearchCtrl();
+}
+wxSearchCtrl *wxSearchCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return new wxSearchCtrl(parent, id, *value, *pos, *size, style, *validator, *name);
+}
+bool wxSearchCtrl_Create(wxSearchCtrl * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, *value, *pos, *size, style, *validator, *name);
+}
+wxMenu * wxSearchCtrl_GetMenu(wxSearchCtrl * self) {
+    return self->GetMenu();
+}
+bool wxSearchCtrl_IsSearchButtonVisible(const wxSearchCtrl * self) {
+    return self->IsSearchButtonVisible();
+}
+bool wxSearchCtrl_IsCancelButtonVisible(const wxSearchCtrl * self) {
+    return self->IsCancelButtonVisible();
+}
+void wxSearchCtrl_SetMenu(wxSearchCtrl * self, wxMenu * menu) {
+    return self->SetMenu(menu);
+}
+void wxSearchCtrl_ShowCancelButton(wxSearchCtrl * self, bool show) {
+    return self->ShowCancelButton(show);
+}
+void wxSearchCtrl_ShowSearchButton(wxSearchCtrl * self, bool show) {
+    return self->ShowSearchButton(show);
+}
+void wxSearchCtrl_SetDescriptiveText(wxSearchCtrl * self, const wxString * text) {
+    return self->SetDescriptiveText(*text);
+}
+wxString *wxSearchCtrl_GetDescriptiveText(const wxSearchCtrl * self) {
+    return new wxString(self->GetDescriptiveText());
+}
+// Mix-in(s) to wxSearchCtrl
+wxTextEntryBase *wxSearchCtrl_AsTextEntry(wxSearchCtrl* obj) {
+    return static_cast<wxTextEntryBase*>(obj);
+}
+
 // CLASS: wxSettableHeaderColumn
 void wxSettableHeaderColumn_delete(wxSettableHeaderColumn *self) {
     delete self;
@@ -3533,8 +3575,8 @@ long wxTextCtrl_XYToPosition(const wxTextCtrl * self, long x, long y) {
     return self->XYToPosition(x, y);
 }
 // Mix-in(s) to wxTextCtrl
-wxTextEntry *wxTextCtrl_AsTextEntry(wxTextCtrl* obj) {
-    return static_cast<wxTextEntry*>(obj);
+wxTextEntryBase *wxTextCtrl_AsTextEntry(wxTextCtrl* obj) {
+    return static_cast<wxTextEntryBase*>(obj);
 }
 
 // CLASS: wxTextEntry

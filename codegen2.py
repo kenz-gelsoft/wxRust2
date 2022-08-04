@@ -152,6 +152,7 @@ def generated_h(classes, libname):
 #include <wx/fontpicker.h>
 #include <wx/headerctrl.h>
 #include <wx/hyperlink.h>
+#include <wx/srchctrl.h>
 #include <wx/wrapsizer.h>
 
 // wxBitmapBundle compatibility hack(for a while)

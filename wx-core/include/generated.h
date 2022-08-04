@@ -12,6 +12,7 @@
 #include <wx/fontpicker.h>
 #include <wx/headerctrl.h>
 #include <wx/hyperlink.h>
+#include <wx/srchctrl.h>
 #include <wx/wrapsizer.h>
 
 // wxBitmapBundle compatibility hack(for a while)
@@ -321,7 +322,7 @@ void wxComboBox_Popup(wxComboBox * self);
 void wxComboBox_Dismiss(wxComboBox * self);
 // Mix-in(s) to wxComboBox
 wxItemContainer *wxComboBox_AsItemContainer(wxComboBox* obj);
-wxTextEntry *wxComboBox_AsTextEntry(wxComboBox* obj);
+wxTextEntryBase *wxComboBox_AsTextEntry(wxComboBox* obj);
 
 // CLASS: wxCommandEvent
 wxClassInfo *wxCommandEvent_CLASSINFO();
@@ -1010,6 +1011,22 @@ void wxRect_SetTopRight(wxRect * self, const wxPoint * p);
 void wxRect_SetBottomLeft(wxRect * self, const wxPoint * p);
 wxRect *wxRect_Union(const wxRect * self, const wxRect * rect);
 
+// CLASS: wxSearchCtrl
+wxClassInfo *wxSearchCtrl_CLASSINFO();
+wxSearchCtrl *wxSearchCtrl_new();
+wxSearchCtrl *wxSearchCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+bool wxSearchCtrl_Create(wxSearchCtrl * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+wxMenu * wxSearchCtrl_GetMenu(wxSearchCtrl * self);
+bool wxSearchCtrl_IsSearchButtonVisible(const wxSearchCtrl * self);
+bool wxSearchCtrl_IsCancelButtonVisible(const wxSearchCtrl * self);
+void wxSearchCtrl_SetMenu(wxSearchCtrl * self, wxMenu * menu);
+void wxSearchCtrl_ShowCancelButton(wxSearchCtrl * self, bool show);
+void wxSearchCtrl_ShowSearchButton(wxSearchCtrl * self, bool show);
+void wxSearchCtrl_SetDescriptiveText(wxSearchCtrl * self, const wxString * text);
+wxString *wxSearchCtrl_GetDescriptiveText(const wxSearchCtrl * self);
+// Mix-in(s) to wxSearchCtrl
+wxTextEntryBase *wxSearchCtrl_AsTextEntry(wxSearchCtrl* obj);
+
 // CLASS: wxSettableHeaderColumn
 void wxSettableHeaderColumn_delete(wxSettableHeaderColumn *self);
 void wxSettableHeaderColumn_SetTitle(wxSettableHeaderColumn * self, const wxString * title);
@@ -1360,7 +1377,7 @@ bool wxTextCtrl_SetStyle(wxTextCtrl * self, long start, long end, const wxTextAt
 void wxTextCtrl_ShowPosition(wxTextCtrl * self, long pos);
 long wxTextCtrl_XYToPosition(const wxTextCtrl * self, long x, long y);
 // Mix-in(s) to wxTextCtrl
-wxTextEntry *wxTextCtrl_AsTextEntry(wxTextCtrl* obj);
+wxTextEntryBase *wxTextCtrl_AsTextEntry(wxTextCtrl* obj);
 
 // CLASS: wxTextEntry
 void wxTextEntry_delete(wxTextEntry *self);
