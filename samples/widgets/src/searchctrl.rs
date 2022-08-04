@@ -151,7 +151,10 @@ impl SearchCtrlWidgetsPage {
         let style = wx::BORDER_DEFAULT;
 
         let srch_ctrl = wx::SearchCtrl::builder(Some(&self.base))
-            .size(self.base.from_dip_size(&wx::Size::new_with_int(150, -1)))
+            .size(
+                // self.base.from_dip_size(&wx::Size::new_with_int(150, -1)) // requires wx3.1+
+                wx::Size::new_with_int(150, -1),
+            )
             .style(style)
             .build();
         *self.srch_ctrl.borrow_mut() = Some(srch_ctrl);
