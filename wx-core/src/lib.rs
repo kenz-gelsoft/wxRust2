@@ -295,6 +295,88 @@ impl<'a, P: WindowMethods> DirPickerCtrlBuilder<'a, P> {
     }
 }
 
+pub struct FilePickerCtrlBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    id: c_int,
+    path: String,
+    message: String,
+    wildcard: String,
+    pos: Option<Point>,
+    size: Option<Size>,
+    style: c_long,
+    validator: Option<Validator>,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, FilePickerCtrlBuilder<'a, P>> for FilePickerCtrl {
+    fn builder(parent: Option<&'a P>) -> FilePickerCtrlBuilder<'a, P> {
+        FilePickerCtrlBuilder {
+            parent: parent,
+            id: ID_ANY,
+            path: "".into(),
+            // TODO: wxDirSelectorPromptStr should be handled as constant
+            message: "Select a directory".into(),
+            wildcard: FILE_SELECTOR_DEFAULT_WILDCARD_STR.into(),
+            pos: None,
+            size: None,
+            style: FLP_DEFAULT_STYLE.into(),
+            validator: None,
+        }
+    }
+}
+impl<'a, P: WindowMethods> FilePickerCtrlBuilder<'a, P> {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn path(&mut self, path: String) -> &mut Self {
+        self.path = path;
+        self
+    }
+    pub fn message(&mut self, message: String) -> &mut Self {
+        self.message = message;
+        self
+    }
+    pub fn wildcard(&mut self, wildcard: String) -> &mut Self {
+        self.wildcard = wildcard;
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn validator(&mut self, validator: Validator) -> &mut Self {
+        self.validator = Some(validator);
+        self
+    }
+    pub fn build(&mut self) -> FilePickerCtrl {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        let validator = self
+            .validator
+            .take()
+            .unwrap_or_else(|| Validator::default());
+        FilePickerCtrl::new(
+            self.parent,
+            self.id,
+            &self.path,
+            &self.message,
+            &self.wildcard,
+            &pos,
+            &size,
+            self.style,
+            &validator,
+            "",
+        )
+    }
+}
+
 pub struct FontPickerCtrlBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
