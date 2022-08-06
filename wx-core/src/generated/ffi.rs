@@ -2267,6 +2267,47 @@ extern "C" {
     pub fn wxSpinButton_SetRange(self_: *mut c_void, min: c_int, max: c_int);
     pub fn wxSpinButton_SetValue(self_: *mut c_void, value: c_int);
 
+    // wxSpinCtrl
+    pub fn wxSpinCtrl_CLASSINFO() -> *mut c_void;
+    pub fn wxSpinCtrl_new() -> *mut c_void;
+    pub fn wxSpinCtrl_new1(
+        parent: *mut c_void,
+        id: c_int,
+        value: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        min: c_int,
+        max: c_int,
+        initial: c_int,
+        name: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxSpinCtrl_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        value: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        min: c_int,
+        max: c_int,
+        initial: c_int,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxSpinCtrl_GetBase(self_: *const c_void) -> c_int;
+    pub fn wxSpinCtrl_GetMax(self_: *const c_void) -> c_int;
+    pub fn wxSpinCtrl_GetMin(self_: *const c_void) -> c_int;
+    pub fn wxSpinCtrl_GetTextValue(self_: *const c_void) -> *mut c_void;
+    pub fn wxSpinCtrl_GetValue(self_: *const c_void) -> c_int;
+    pub fn wxSpinCtrl_GetIncrement(self_: *const c_void) -> c_int;
+    pub fn wxSpinCtrl_SetBase(self_: *mut c_void, base: c_int) -> bool;
+    pub fn wxSpinCtrl_SetRange(self_: *mut c_void, min_val: c_int, max_val: c_int);
+    pub fn wxSpinCtrl_SetSelection(self_: *mut c_void, from: c_long, to: c_long);
+    pub fn wxSpinCtrl_SetValue(self_: *mut c_void, text: *const c_void);
+    pub fn wxSpinCtrl_SetValue1(self_: *mut c_void, value: c_int);
+    pub fn wxSpinCtrl_SetIncrement(self_: *mut c_void, value: c_int);
+
     // wxStaticBitmap
     pub fn wxStaticBitmap_CLASSINFO() -> *mut c_void;
     pub fn wxStaticBitmap_new() -> *mut c_void;

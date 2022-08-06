@@ -5316,6 +5316,89 @@ pub trait SpinButtonMethods: ControlMethods {
     }
 }
 
+// wxSpinCtrl
+pub trait SpinCtrlMethods: ControlMethods {
+    fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        value: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        min: c_int,
+        max: c_int,
+        initial: c_int,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let value = WxString::from(value);
+            let value = value.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxSpinCtrl_Create(
+                self.as_ptr(),
+                parent,
+                id,
+                value,
+                pos,
+                size,
+                style,
+                min,
+                max,
+                initial,
+                name,
+            )
+        }
+    }
+    fn get_base(&self) -> c_int {
+        unsafe { ffi::wxSpinCtrl_GetBase(self.as_ptr()) }
+    }
+    fn get_max(&self) -> c_int {
+        unsafe { ffi::wxSpinCtrl_GetMax(self.as_ptr()) }
+    }
+    fn get_min(&self) -> c_int {
+        unsafe { ffi::wxSpinCtrl_GetMin(self.as_ptr()) }
+    }
+    fn get_text_value(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxSpinCtrl_GetTextValue(self.as_ptr())).into() }
+    }
+    fn get_value(&self) -> c_int {
+        unsafe { ffi::wxSpinCtrl_GetValue(self.as_ptr()) }
+    }
+    fn get_increment(&self) -> c_int {
+        unsafe { ffi::wxSpinCtrl_GetIncrement(self.as_ptr()) }
+    }
+    fn set_base(&self, base: c_int) -> bool {
+        unsafe { ffi::wxSpinCtrl_SetBase(self.as_ptr(), base) }
+    }
+    fn set_range(&self, min_val: c_int, max_val: c_int) {
+        unsafe { ffi::wxSpinCtrl_SetRange(self.as_ptr(), min_val, max_val) }
+    }
+    fn set_selection(&self, from: c_long, to: c_long) {
+        unsafe { ffi::wxSpinCtrl_SetSelection(self.as_ptr(), from, to) }
+    }
+    fn set_value_str(&self, text: &str) {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxSpinCtrl_SetValue(self.as_ptr(), text)
+        }
+    }
+    fn set_value_int(&self, value: c_int) {
+        unsafe { ffi::wxSpinCtrl_SetValue1(self.as_ptr(), value) }
+    }
+    fn set_increment(&self, value: c_int) {
+        unsafe { ffi::wxSpinCtrl_SetIncrement(self.as_ptr(), value) }
+    }
+}
+
 // wxStaticBitmap
 pub trait StaticBitmapMethods: ControlMethods {
     fn create_bitmapbundle<

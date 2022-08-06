@@ -60,6 +60,7 @@ wxml_files = [
     'wxml/classwx_sizer_flags.xml',
     'wxml/classwx_slider.xml',
     'wxml/classwx_spin_button.xml',
+    'wxml/classwx_spin_ctrl.xml',
     'wxml/classwx_standard_paths.xml',
     'wxml/classwx_static_bitmap.xml',
     'wxml/classwx_static_box.xml',

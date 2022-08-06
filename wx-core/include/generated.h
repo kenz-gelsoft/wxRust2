@@ -13,6 +13,7 @@
 #include <wx/headerctrl.h>
 #include <wx/hyperlink.h>
 #include <wx/spinbutt.h>
+#include <wx/spinctrl.h>
 #include <wx/srchctrl.h>
 #include <wx/wrapsizer.h>
 
@@ -1223,6 +1224,24 @@ int wxSpinButton_GetValue(const wxSpinButton * self);
 void wxSpinButton_SetIncrement(wxSpinButton * self, int value);
 void wxSpinButton_SetRange(wxSpinButton * self, int min, int max);
 void wxSpinButton_SetValue(wxSpinButton * self, int value);
+
+// CLASS: wxSpinCtrl
+wxClassInfo *wxSpinCtrl_CLASSINFO();
+wxSpinCtrl *wxSpinCtrl_new();
+wxSpinCtrl *wxSpinCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, int min, int max, int initial, const wxString * name);
+bool wxSpinCtrl_Create(wxSpinCtrl * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, int min, int max, int initial, const wxString * name);
+int wxSpinCtrl_GetBase(const wxSpinCtrl * self);
+int wxSpinCtrl_GetMax(const wxSpinCtrl * self);
+int wxSpinCtrl_GetMin(const wxSpinCtrl * self);
+wxString *wxSpinCtrl_GetTextValue(const wxSpinCtrl * self);
+int wxSpinCtrl_GetValue(const wxSpinCtrl * self);
+int wxSpinCtrl_GetIncrement(const wxSpinCtrl * self);
+bool wxSpinCtrl_SetBase(wxSpinCtrl * self, int base);
+void wxSpinCtrl_SetRange(wxSpinCtrl * self, int min_val, int max_val);
+void wxSpinCtrl_SetSelection(wxSpinCtrl * self, long from, long to);
+void wxSpinCtrl_SetValue(wxSpinCtrl * self, const wxString * text);
+void wxSpinCtrl_SetValue1(wxSpinCtrl * self, int value);
+void wxSpinCtrl_SetIncrement(wxSpinCtrl * self, int value);
 
 // CLASS: wxStaticBitmap
 wxClassInfo *wxStaticBitmap_CLASSINFO();
