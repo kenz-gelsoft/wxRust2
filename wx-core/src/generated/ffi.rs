@@ -231,6 +231,31 @@ extern "C" {
         name: *const c_void,
     ) -> *mut c_void;
 
+    // wxBitmapToggleButton
+    pub fn wxBitmapToggleButton_CLASSINFO() -> *mut c_void;
+    pub fn wxBitmapToggleButton_new() -> *mut c_void;
+    pub fn wxBitmapToggleButton_new1(
+        parent: *mut c_void,
+        id: c_int,
+        label: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        val: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxBitmapToggleButton_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        label: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        val: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+
     // wxBookCtrlBase
     pub fn wxBookCtrlBase_CLASSINFO() -> *mut c_void;
     pub fn wxBookCtrlBase_GetPageImage(self_: *const c_void, n_page: usize) -> c_int;
@@ -2725,6 +2750,34 @@ extern "C" {
         sec: c_int,
     ) -> bool;
     pub fn wxTimePickerCtrl_SetValue(self_: *mut c_void, dt: *const c_void);
+
+    // wxToggleButton
+    pub fn wxToggleButton_CLASSINFO() -> *mut c_void;
+    pub fn wxToggleButton_new() -> *mut c_void;
+    pub fn wxToggleButton_new1(
+        parent: *mut c_void,
+        id: c_int,
+        label: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        val: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    // DTOR: pub fn wxToggleButton_~wxToggleButton(self_: *mut c_void);
+    pub fn wxToggleButton_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        label: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        val: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxToggleButton_GetValue(self_: *const c_void) -> bool;
+    pub fn wxToggleButton_SetValue(self_: *mut c_void, state: bool);
 
     // wxToolBar
     pub fn wxToolBar_CLASSINFO() -> *mut c_void;

@@ -730,6 +730,69 @@ impl<'a, P: WindowMethods> BitmapButtonBuilder<'a, P> {
     }
 }
 
+pub struct BitmapToggleButtonBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    id: c_int,
+    pos: Option<Point>,
+    size: Option<Size>,
+    style: c_long,
+    validator: Option<Validator>,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, BitmapToggleButtonBuilder<'a, P>>
+    for BitmapToggleButton
+{
+    fn builder(parent: Option<&'a P>) -> BitmapToggleButtonBuilder<'a, P> {
+        BitmapToggleButtonBuilder {
+            parent: parent,
+            id: ID_ANY,
+            pos: None,
+            size: None,
+            style: 0,
+            validator: None,
+        }
+    }
+}
+impl<'a, P: WindowMethods> BitmapToggleButtonBuilder<'a, P> {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn validator(&mut self, validator: Validator) -> &mut Self {
+        self.validator = Some(validator);
+        self
+    }
+    pub fn build<B: BitmapBundleMethods>(&mut self, bitmap: &B) -> BitmapToggleButton {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        let validator = self
+            .validator
+            .take()
+            .unwrap_or_else(|| Validator::default());
+        BitmapToggleButton::new(
+            self.parent,
+            self.id,
+            bitmap,
+            &pos,
+            &size,
+            self.style,
+            &validator,
+            "",
+        )
+    }
+}
+
 pub struct ButtonBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
@@ -2057,6 +2120,73 @@ impl<'a, P: WindowMethods> TimePickerCtrlBuilder<'a, P> {
             self.style,
             &validator,
             "timectrl",
+        )
+    }
+}
+
+pub struct ToggleButtonBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    id: c_int,
+    label: String,
+    pos: Option<Point>,
+    size: Option<Size>,
+    style: c_long,
+    validator: Option<Validator>,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, ToggleButtonBuilder<'a, P>> for ToggleButton {
+    fn builder(parent: Option<&'a P>) -> ToggleButtonBuilder<'a, P> {
+        ToggleButtonBuilder {
+            parent: parent,
+            id: ID_ANY,
+            label: "".to_string(),
+            pos: None,
+            size: None,
+            style: 0,
+            validator: None,
+        }
+    }
+}
+impl<'a, P: WindowMethods> ToggleButtonBuilder<'a, P> {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn label(&mut self, label: &str) -> &mut Self {
+        self.label = label.to_string();
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn validator(&mut self, validator: Validator) -> &mut Self {
+        self.validator = Some(validator);
+        self
+    }
+    pub fn build(&mut self) -> ToggleButton {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        let validator = self
+            .validator
+            .take()
+            .unwrap_or_else(|| Validator::default());
+        ToggleButton::new(
+            self.parent,
+            self.id,
+            &self.label,
+            &pos,
+            &size,
+            self.style,
+            &validator,
+            "",
         )
     }
 }

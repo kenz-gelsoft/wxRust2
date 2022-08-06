@@ -407,6 +407,20 @@ wxBitmapButton * wxBitmapButton_NewCloseButton(wxWindow * parent, wxWindowID win
 }
 #endif
 
+// CLASS: wxBitmapToggleButton
+wxClassInfo *wxBitmapToggleButton_CLASSINFO() {
+    return wxCLASSINFO(wxBitmapToggleButton);
+}
+wxBitmapToggleButton *wxBitmapToggleButton_new() {
+    return new wxBitmapToggleButton();
+}
+wxBitmapToggleButton *wxBitmapToggleButton_new1(wxWindow * parent, wxWindowID id, const wxBitmapBundle * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * val, const wxString * name) {
+    return new wxBitmapToggleButton(parent, id, *label, *pos, *size, style, *val, *name);
+}
+bool wxBitmapToggleButton_Create(wxBitmapToggleButton * self, wxWindow * parent, wxWindowID id, const wxBitmapBundle * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * val, const wxString * name) {
+    return self->Create(parent, id, *label, *pos, *size, style, *val, *name);
+}
+
 // CLASS: wxBookCtrlBase
 wxClassInfo *wxBookCtrlBase_CLASSINFO() {
     return wxCLASSINFO(wxBookCtrlBase);
@@ -3870,6 +3884,26 @@ bool wxTimePickerCtrl_SetTime(wxTimePickerCtrl * self, int hour, int min, int se
 }
 void wxTimePickerCtrl_SetValue(wxTimePickerCtrl * self, const wxDateTime * dt) {
     return self->SetValue(*dt);
+}
+
+// CLASS: wxToggleButton
+wxClassInfo *wxToggleButton_CLASSINFO() {
+    return wxCLASSINFO(wxToggleButton);
+}
+wxToggleButton *wxToggleButton_new() {
+    return new wxToggleButton();
+}
+wxToggleButton *wxToggleButton_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * val, const wxString * name) {
+    return new wxToggleButton(parent, id, *label, *pos, *size, style, *val, *name);
+}
+bool wxToggleButton_Create(wxToggleButton * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * val, const wxString * name) {
+    return self->Create(parent, id, *label, *pos, *size, style, *val, *name);
+}
+bool wxToggleButton_GetValue(const wxToggleButton * self) {
+    return self->GetValue();
+}
+void wxToggleButton_SetValue(wxToggleButton * self, bool state) {
+    return self->SetValue(state);
 }
 
 // CLASS: wxToolBar
