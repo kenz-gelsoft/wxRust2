@@ -6,21 +6,15 @@ use wx::methods::*;
 
 // control ids
 #[derive(Clone, Copy)]
-enum ButtonPage {
+enum TogglePage {
     Reset = wx::ID_HIGHEST as isize,
     ChangeLabel,
-    // ChangeNote, // for CommandLinkButton
-    Button,
+    Picker,
 }
-impl ButtonPage {
+impl TogglePage {
     fn from(v: c_int) -> Option<Self> {
-        use ButtonPage::*;
-        for e in [
-            Reset,
-            ChangeLabel,
-            // ChangeNote,
-            Button,
-        ] {
+        use TogglePage::*;
+        for e in [Reset, ChangeLabel, Picker] {
             if v == e.into() {
                 return Some(e);
             }
@@ -28,24 +22,24 @@ impl ButtonPage {
         return None;
     }
 }
-impl From<ButtonPage> for c_int {
-    fn from(w: ButtonPage) -> Self {
+impl From<TogglePage> for c_int {
+    fn from(w: TogglePage) -> Self {
         w as c_int
     }
 }
 
-const BUTTON_IMAGE_POS_LEFT: c_int = 0;
-// const BUTTON_IMAGE_POS_RIGHT: c_int = 1;
-// const BUTTON_IMAGE_POS_TOP: c_int = 2;
-// const BUTTON_IMAGE_POS_BOTTOM: c_int = 3;
+const TOGGLE_IMAGE_POS_LEFT: c_int = 0;
+// const TOGGLE_IMAGE_POS_RIGHT: c_int = 1;
+// const TOGGLE_IMAGE_POS_TOP: c_int = 2;
+// const TOGGLE_IMAGE_POS_BOTTOM: c_int = 3;
 
-const BUTTON_HALIGN_LEFT: c_int = 0;
-const BUTTON_HALIGN_CENTRE: c_int = 1;
-const BUTTON_HALIGN_RIGHT: c_int = 2;
+const TOGGLE_HALIGN_LEFT: c_int = 0;
+const TOGGLE_HALIGN_CENTRE: c_int = 1;
+const TOGGLE_HALIGN_RIGHT: c_int = 2;
 
-const BUTTON_VALIGN_TOP: c_int = 0;
-const BUTTON_VALIGN_CENTRE: c_int = 1;
-const BUTTON_VALIGN_BOTTOM: c_int = 2;
+const TOGGLE_VALIGN_TOP: c_int = 0;
+const TOGGLE_VALIGN_CENTRE: c_int = 1;
+const TOGGLE_VALIGN_BOTTOM: c_int = 2;
 
 #[derive(Clone)]
 pub struct ConfigUI {
@@ -53,8 +47,6 @@ pub struct ConfigUI {
     chk_bitmap_only: wx::CheckBox,
     chk_text_and_bitmap: wx::CheckBox,
     chk_fit: wx::CheckBox,
-    chk_auth_needed: wx::CheckBox,
-    chk_default: wx::CheckBox,
     chk_use_bitmap_class: wx::CheckBox,
     chk_disable: wx::CheckBox,
 
@@ -70,7 +62,7 @@ pub struct ConfigUI {
     radio_valign: wx::RadioBox,
 
     // sizer
-    sizer_button: wx::BoxSizer,
+    sizer_toggle: wx::BoxSizer,
 
     // the text entries for command parameters
     text_label: wx::TextCtrl,
@@ -79,9 +71,7 @@ impl ConfigUI {
     fn reset(&self) {
         self.chk_bitmap_only.set_value(false);
         self.chk_fit.set_value(false);
-        self.chk_auth_needed.set_value(false);
         self.chk_text_and_bitmap.set_value(false);
-        self.chk_default.set_value(false);
         self.chk_use_bitmap_class.set_value(true);
         self.chk_disable.set_value(false);
 
@@ -90,9 +80,9 @@ impl ConfigUI {
         self.chk_use_current.set_value(true);
         self.chk_use_disabled.set_value(true);
 
-        self.radio_image_pos.set_selection(BUTTON_IMAGE_POS_LEFT);
-        self.radio_halign.set_selection(BUTTON_HALIGN_CENTRE);
-        self.radio_valign.set_selection(BUTTON_VALIGN_CENTRE);
+        self.radio_image_pos.set_selection(TOGGLE_IMAGE_POS_LEFT);
+        self.radio_halign.set_selection(TOGGLE_HALIGN_CENTRE);
+        self.radio_valign.set_selection(TOGGLE_VALIGN_CENTRE);
     }
 }
 
@@ -115,7 +105,7 @@ impl WidgetsPage for ToggleWidgetsPage {
 
         // left pane
         let s_box = wx::StaticBox::builder(Some(&self.base))
-            .label("&Set style")
+            .label("Styles")
             .build();
 
         let sizer_left = wx::StaticBoxSizer::new_with_staticbox(Some(&s_box), wx::VERTICAL);
@@ -124,19 +114,18 @@ impl WidgetsPage for ToggleWidgetsPage {
             self.create_check_box_and_add_to_sizer(&sizer_left, "&Bitmap only", wx::ID_ANY);
         let chk_text_and_bitmap =
             self.create_check_box_and_add_to_sizer(&sizer_left, "Text &and bitmap", wx::ID_ANY);
+
         let chk_fit =
             self.create_check_box_and_add_to_sizer(&sizer_left, "&Fit exactly", wx::ID_ANY);
-        let chk_auth_needed =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "Require a&uth", wx::ID_ANY);
-        let chk_default =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "&Default", wx::ID_ANY);
-
-        let chk_use_bitmap_class =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "Use wxBitmapButton", wx::ID_ANY);
-        chk_use_bitmap_class.set_value(true);
-
         let chk_disable =
             self.create_check_box_and_add_to_sizer(&sizer_left, "Disable", wx::ID_ANY);
+
+        let chk_use_bitmap_class = self.create_check_box_and_add_to_sizer(
+            &sizer_left,
+            "Use wxBitmapToggleButton",
+            wx::ID_ANY,
+        );
+        chk_use_bitmap_class.set_value(true);
 
         sizer_left.add_spacer(5);
 
@@ -217,7 +206,7 @@ impl WidgetsPage for ToggleWidgetsPage {
         sizer_left.add_spacer(5);
 
         let btn = wx::Button::builder(Some(&self.base))
-            .id(ButtonPage::Reset.into())
+            .id(TogglePage::Reset.into())
             .label("&Reset")
             .build();
         sizer_left.add_window_int(
@@ -235,43 +224,43 @@ impl WidgetsPage for ToggleWidgetsPage {
         let sizer_middle = wx::StaticBoxSizer::new_with_staticbox(Some(&s_box2), wx::VERTICAL);
 
         let (sizer_row, text_label) = self.create_sizer_with_text_and_button(
-            ButtonPage::ChangeLabel.into(),
+            TogglePage::ChangeLabel.into(),
             "Change label",
             wx::ID_ANY,
         );
-        text_label.set_value("&Press me!");
+        text_label.set_value("&Toggle me!");
+
         sizer_middle.add_sizer_sizerflags(
             Some(&sizer_row),
             wx::SizerFlags::new(0).expand().border(wx::ALL),
         );
 
         // right pane
-        let sizer_button = wx::BoxSizer::new(wx::HORIZONTAL);
-        sizer_button.set_min_size_int(150, 0);
+        let sizer_toggle = wx::BoxSizer::new(wx::HORIZONTAL);
+        sizer_toggle.set_min_size_int(150, 0);
 
         // the 3 panes panes compose the window
         sizer_top.add_sizer_sizerflags(
             Some(&sizer_left),
             wx::SizerFlags::new(0)
                 .expand()
-                .double_border(wx::ALL & !wx::LEFT),
+                .border_int(wx::ALL & !wx::LEFT, 10),
         );
         sizer_top.add_sizer_sizerflags(
             Some(&sizer_middle),
-            wx::SizerFlags::new(1).expand().double_border(wx::ALL),
+            wx::SizerFlags::new(1).expand().border_int(wx::ALL, 10),
         );
         sizer_top.add_sizer_sizerflags(
-            Some(&sizer_button),
+            Some(&sizer_toggle),
             wx::SizerFlags::new(1)
                 .expand()
-                .double_border(wx::ALL & !wx::RIGHT),
+                .border_int(wx::ALL & !wx::RIGHT, 10),
         );
+
         *self.config_ui.borrow_mut() = Some(ConfigUI {
             chk_bitmap_only,
             chk_text_and_bitmap,
             chk_fit,
-            chk_auth_needed,
-            chk_default,
             chk_use_bitmap_class,
             chk_disable,
 
@@ -284,24 +273,24 @@ impl WidgetsPage for ToggleWidgetsPage {
             radio_halign,
             radio_valign,
 
-            sizer_button,
+            sizer_toggle,
 
             text_label,
         });
 
         // do create the main control
         self.reset();
-        self.create_button();
+        self.create_toggle();
 
         self.base.set_sizer(Some(&sizer_top), true);
     }
 
     fn handle_button(&self, event: &wx::CommandEvent) {
         println!("event={}", event.get_id());
-        if let Some(m) = ButtonPage::from(event.get_id()) {
+        if let Some(m) = TogglePage::from(event.get_id()) {
             match m {
-                ButtonPage::Reset => self.on_button_reset(),
-                ButtonPage::ChangeLabel => self.on_button_change_label(),
+                TogglePage::Reset => self.on_button_reset(),
+                TogglePage::ChangeLabel => self.on_button_change_label(),
                 _ => (),
             };
         }
@@ -331,16 +320,16 @@ impl ToggleWidgetsPage {
         }
     }
 
-    fn create_button(&self) {
+    fn create_toggle(&self) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
             let mut label = "".to_string();
             if let Some(button) = self.button.borrow().as_ref() {
                 label = button.get_label();
 
                 // TODO: remove (and delete) all buttons
-                let count = config_ui.sizer_button.get_children().get_count();
+                let count = config_ui.sizer_toggle.get_children().get_count();
                 for _ in 0..count {
-                    config_ui.sizer_button.remove_int(0);
+                    config_ui.sizer_toggle.remove_int(0);
                 }
                 button.destroy();
             }
@@ -351,14 +340,14 @@ impl ToggleWidgetsPage {
 
             let mut flags = wx::BORDER_DEFAULT;
             flags |= match config_ui.radio_halign.get_selection() {
-                BUTTON_HALIGN_LEFT => wx::BU_LEFT,
-                BUTTON_HALIGN_RIGHT => wx::BU_RIGHT,
+                TOGGLE_HALIGN_LEFT => wx::BU_LEFT,
+                TOGGLE_HALIGN_RIGHT => wx::BU_RIGHT,
                 _ => 0,
             } as c_long;
 
             flags |= match config_ui.radio_valign.get_selection() {
-                BUTTON_VALIGN_TOP => wx::BU_TOP,
-                BUTTON_VALIGN_BOTTOM => wx::BU_BOTTOM,
+                TOGGLE_VALIGN_TOP => wx::BU_TOP,
+                TOGGLE_VALIGN_BOTTOM => wx::BU_BOTTOM,
                 // centre vertical alignment is the default (no style)
                 _ => 0,
             } as c_long;
@@ -390,7 +379,7 @@ impl ToggleWidgetsPage {
                 // } else {
                 // TODO: create bitmap
                 bbtn = wx::Button::builder(Some(&self.base))
-                    .id(ButtonPage::Button.into())
+                    .id(TogglePage::Picker.into())
                     .build();
                 let icon_bitmap = wx::Bitmap::new();
                 icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
@@ -423,7 +412,7 @@ impl ToggleWidgetsPage {
                 bbtn
             } else {
                 wx::Button::builder(Some(&self.base))
-                    .id(ButtonPage::Button.into())
+                    .id(TogglePage::Picker.into())
                     .label(&label)
                     .style(flags)
                     .build()
@@ -494,25 +483,17 @@ impl ToggleWidgetsPage {
                 .radio_image_pos
                 .enable(config_ui.chk_text_and_bitmap.is_checked());
 
-            if config_ui.chk_auth_needed.get_value() {
-                new_button.set_auth_needed(true);
-            }
-
-            if config_ui.chk_default.get_value() {
-                new_button.set_default();
-            }
-
             new_button.enable(!config_ui.chk_disable.is_checked());
 
-            let sizer_button = &config_ui.sizer_button;
-            sizer_button.add_stretch_spacer(1);
-            sizer_button.add_window_sizerflags(
+            let sizer_toggle = &config_ui.sizer_toggle;
+            sizer_toggle.add_stretch_spacer(1);
+            sizer_toggle.add_window_sizerflags(
                 Some(&new_button),
                 wx::SizerFlags::new(0).centre().border(wx::ALL),
             );
-            sizer_button.add_stretch_spacer(1);
+            sizer_toggle.add_stretch_spacer(1);
 
-            sizer_button.layout();
+            sizer_toggle.layout();
 
             *self.button.borrow_mut() = Some(new_button);
         }
@@ -520,11 +501,11 @@ impl ToggleWidgetsPage {
 
     fn on_button_reset(&self) {
         self.reset();
-        self.create_button();
+        self.create_toggle();
     }
 
     fn on_check_or_radio_box(&self) {
-        self.create_button();
+        self.create_toggle();
         self.base.layout(); // make sure the text field for changing note displays correctly.
     }
 
@@ -539,7 +520,7 @@ impl ToggleWidgetsPage {
                 .unwrap()
                 .set_label(&label_text);
 
-            config_ui.sizer_button.layout();
+            config_ui.sizer_toggle.layout();
         }
     }
 }
