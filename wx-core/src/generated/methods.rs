@@ -5290,6 +5290,32 @@ pub trait SliderMethods: ControlMethods {
     }
 }
 
+// wxSpinButton
+pub trait SpinButtonMethods: ControlMethods {
+    // DTOR: fn ~wxSpinButton()
+    fn get_increment(&self) -> c_int {
+        unsafe { ffi::wxSpinButton_GetIncrement(self.as_ptr()) }
+    }
+    fn get_max(&self) -> c_int {
+        unsafe { ffi::wxSpinButton_GetMax(self.as_ptr()) }
+    }
+    fn get_min(&self) -> c_int {
+        unsafe { ffi::wxSpinButton_GetMin(self.as_ptr()) }
+    }
+    fn get_value(&self) -> c_int {
+        unsafe { ffi::wxSpinButton_GetValue(self.as_ptr()) }
+    }
+    fn set_increment(&self, value: c_int) {
+        unsafe { ffi::wxSpinButton_SetIncrement(self.as_ptr(), value) }
+    }
+    fn set_range(&self, min: c_int, max: c_int) {
+        unsafe { ffi::wxSpinButton_SetRange(self.as_ptr(), min, max) }
+    }
+    fn set_value(&self, value: c_int) {
+        unsafe { ffi::wxSpinButton_SetValue(self.as_ptr(), value) }
+    }
+}
+
 // wxStaticBitmap
 pub trait StaticBitmapMethods: ControlMethods {
     fn create_bitmapbundle<

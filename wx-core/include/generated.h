@@ -12,6 +12,7 @@
 #include <wx/fontpicker.h>
 #include <wx/headerctrl.h>
 #include <wx/hyperlink.h>
+#include <wx/spinbutt.h>
 #include <wx/srchctrl.h>
 #include <wx/wrapsizer.h>
 
@@ -1209,6 +1210,19 @@ void wxSlider_SetThumbLength(wxSlider * self, int len);
 void wxSlider_SetTick(wxSlider * self, int tick_pos);
 void wxSlider_SetTickFreq(wxSlider * self, int freq);
 void wxSlider_SetValue(wxSlider * self, int value);
+
+// CLASS: wxSpinButton
+wxClassInfo *wxSpinButton_CLASSINFO();
+wxSpinButton *wxSpinButton_new();
+wxSpinButton *wxSpinButton_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+bool wxSpinButton_Create(wxSpinButton * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+int wxSpinButton_GetIncrement(const wxSpinButton * self);
+int wxSpinButton_GetMax(const wxSpinButton * self);
+int wxSpinButton_GetMin(const wxSpinButton * self);
+int wxSpinButton_GetValue(const wxSpinButton * self);
+void wxSpinButton_SetIncrement(wxSpinButton * self, int value);
+void wxSpinButton_SetRange(wxSpinButton * self, int min, int max);
+void wxSpinButton_SetValue(wxSpinButton * self, int value);
 
 // CLASS: wxStaticBitmap
 wxClassInfo *wxStaticBitmap_CLASSINFO();

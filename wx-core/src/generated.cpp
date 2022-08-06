@@ -3114,6 +3114,41 @@ void wxSlider_SetValue(wxSlider * self, int value) {
     return self->SetValue(value);
 }
 
+// CLASS: wxSpinButton
+wxClassInfo *wxSpinButton_CLASSINFO() {
+    return wxCLASSINFO(wxSpinButton);
+}
+wxSpinButton *wxSpinButton_new() {
+    return new wxSpinButton();
+}
+wxSpinButton *wxSpinButton_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxSpinButton(parent, id, *pos, *size, style, *name);
+}
+bool wxSpinButton_Create(wxSpinButton * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, id, *pos, *size, style, *name);
+}
+int wxSpinButton_GetIncrement(const wxSpinButton * self) {
+    return self->GetIncrement();
+}
+int wxSpinButton_GetMax(const wxSpinButton * self) {
+    return self->GetMax();
+}
+int wxSpinButton_GetMin(const wxSpinButton * self) {
+    return self->GetMin();
+}
+int wxSpinButton_GetValue(const wxSpinButton * self) {
+    return self->GetValue();
+}
+void wxSpinButton_SetIncrement(wxSpinButton * self, int value) {
+    return self->SetIncrement(value);
+}
+void wxSpinButton_SetRange(wxSpinButton * self, int min, int max) {
+    return self->SetRange(min, max);
+}
+void wxSpinButton_SetValue(wxSpinButton * self, int value) {
+    return self->SetValue(value);
+}
+
 // CLASS: wxStaticBitmap
 wxClassInfo *wxStaticBitmap_CLASSINFO() {
     return wxCLASSINFO(wxStaticBitmap);
