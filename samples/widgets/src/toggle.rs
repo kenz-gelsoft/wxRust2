@@ -67,31 +67,13 @@ pub struct ConfigUI {
     // the text entries for command parameters
     text_label: wx::TextCtrl,
 }
-impl ConfigUI {
-    fn reset(&self) {
-        self.chk_bitmap_only.set_value(false);
-        self.chk_fit.set_value(false);
-        self.chk_text_and_bitmap.set_value(false);
-        self.chk_use_bitmap_class.set_value(true);
-        self.chk_disable.set_value(false);
-
-        self.chk_use_pressed.set_value(true);
-        self.chk_use_focused.set_value(true);
-        self.chk_use_current.set_value(true);
-        self.chk_use_disabled.set_value(true);
-
-        self.radio_image_pos.set_selection(TOGGLE_IMAGE_POS_LEFT);
-        self.radio_halign.set_selection(TOGGLE_HALIGN_CENTRE);
-        self.radio_valign.set_selection(TOGGLE_VALIGN_CENTRE);
-    }
-}
 
 #[derive(Clone)]
 pub struct ToggleWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
-    // the button itself
-    button: Rc<RefCell<Option<wx::Button>>>,
+    // the toggle itself
+    toggle: Rc<RefCell<Option<wx::ToggleButton>>>,
 }
 impl WidgetsPage for ToggleWidgetsPage {
     fn base(&self) -> &wx::Panel {
@@ -257,7 +239,7 @@ impl WidgetsPage for ToggleWidgetsPage {
                 .border_int(wx::ALL & !wx::RIGHT, 10),
         );
 
-        *self.config_ui.borrow_mut() = Some(ConfigUI {
+        let config_ui = ConfigUI {
             chk_bitmap_only,
             chk_text_and_bitmap,
             chk_fit,
@@ -276,10 +258,11 @@ impl WidgetsPage for ToggleWidgetsPage {
             sizer_toggle,
 
             text_label,
-        });
+        };
 
         // do create the main control
-        self.reset();
+        self.reset(&config_ui);
+        *self.config_ui.borrow_mut() = Some(config_ui);
         self.create_toggle();
 
         self.base.set_sizer(Some(&sizer_top), true);
@@ -287,10 +270,13 @@ impl WidgetsPage for ToggleWidgetsPage {
 
     fn handle_button(&self, event: &wx::CommandEvent) {
         println!("event={}", event.get_id());
-        if let Some(m) = TogglePage::from(event.get_id()) {
+        if let (Some(m), Some(config_ui)) = (
+            TogglePage::from(event.get_id()),
+            self.config_ui.borrow().as_ref(),
+        ) {
             match m {
-                TogglePage::Reset => self.on_button_reset(),
-                TogglePage::ChangeLabel => self.on_button_change_label(),
+                TogglePage::Reset => self.on_toggle_reset(config_ui),
+                TogglePage::ChangeLabel => self.on_toggle_change_label(),
                 _ => (),
             };
         }
@@ -310,28 +296,46 @@ impl ToggleWidgetsPage {
         ToggleWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
-            button: Rc::new(RefCell::new(None)),
+            toggle: Rc::new(RefCell::new(None)),
         }
     }
 
-    fn reset(&self) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            config_ui.reset();
+    fn reset(&self, config_ui: &ConfigUI) {
+        config_ui.chk_fit.set_value(true);
+        config_ui.chk_disable.set_value(false);
+
+        config_ui.chk_bitmap_only.set_value(false);
+        config_ui.chk_text_and_bitmap.set_value(false);
+        config_ui.chk_use_bitmap_class.set_value(true);
+
+        config_ui.chk_use_pressed.set_value(true);
+        config_ui.chk_use_focused.set_value(true);
+        config_ui.chk_use_current.set_value(true);
+        config_ui.chk_use_disabled.set_value(true);
+
+        config_ui
+            .radio_image_pos
+            .set_selection(TOGGLE_IMAGE_POS_LEFT);
+        config_ui.radio_halign.set_selection(TOGGLE_HALIGN_CENTRE);
+        config_ui.radio_valign.set_selection(TOGGLE_VALIGN_CENTRE);
+
+        if let Some(toggle) = self.toggle.borrow().as_ref() {
+            toggle.set_value(false);
         }
     }
 
     fn create_toggle(&self) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
             let mut label = "".to_string();
-            if let Some(button) = self.button.borrow().as_ref() {
-                label = button.get_label();
+            if let Some(toggle) = self.toggle.borrow().as_ref() {
+                label = toggle.get_label();
 
-                // TODO: remove (and delete) all buttons
+                // TODO: remove (and delete) all toggles
                 let count = config_ui.sizer_toggle.get_children().get_count();
                 for _ in 0..count {
                     config_ui.sizer_toggle.remove_int(0);
                 }
-                button.destroy();
+                toggle.destroy();
             }
 
             if label.is_empty() {
@@ -357,10 +361,10 @@ impl ToggleWidgetsPage {
             }
 
             let mut shows_bitmap = false;
-            let new_button = if config_ui.chk_bitmap_only.get_value() {
+            let new_toggle = if config_ui.chk_bitmap_only.get_value() {
                 shows_bitmap = true;
 
-                let bbtn: wx::Button;
+                let bbtn: wx::ToggleButton;
                 // TODO: Support downcasting from BitmapButton into Button
                 //
                 // let bbtn: wx::BitmapButton;
@@ -378,7 +382,7 @@ impl ToggleWidgetsPage {
                 //         .build(&icon_bitmap);
                 // } else {
                 // TODO: create bitmap
-                bbtn = wx::Button::builder(Some(&self.base))
+                bbtn = wx::ToggleButton::builder(Some(&self.base))
                     .id(TogglePage::Picker.into())
                     .build();
                 let icon_bitmap = wx::Bitmap::new();
@@ -411,7 +415,7 @@ impl ToggleWidgetsPage {
 
                 bbtn
             } else {
-                wx::Button::builder(Some(&self.base))
+                wx::ToggleButton::builder(Some(&self.base))
                     .id(TogglePage::Picker.into())
                     .label(&label)
                     .style(flags)
@@ -430,7 +434,7 @@ impl ToggleWidgetsPage {
                     "wxART_BUTTON_C",
                     &wx::Size::default(),
                 ));
-                new_button.set_bitmap(
+                new_toggle.set_bitmap(
                     &wx::BitmapBundle::from(icon_bitmap),
                     positions[config_ui.radio_image_pos.get_selection() as usize],
                 );
@@ -442,7 +446,7 @@ impl ToggleWidgetsPage {
                         "wxART_BUTTON_C",
                         &wx::Size::default(),
                     ));
-                    new_button.set_bitmap_pressed(&wx::BitmapBundle::from(icon_bitmap));
+                    new_toggle.set_bitmap_pressed(&wx::BitmapBundle::from(icon_bitmap));
                 }
                 if config_ui.chk_use_focused.get_value() {
                     let icon_bitmap = wx::Bitmap::new();
@@ -451,7 +455,7 @@ impl ToggleWidgetsPage {
                         "wxART_BUTTON_C",
                         &wx::Size::default(),
                     ));
-                    new_button.set_bitmap_focus(&wx::BitmapBundle::from(icon_bitmap));
+                    new_toggle.set_bitmap_focus(&wx::BitmapBundle::from(icon_bitmap));
                 }
                 if config_ui.chk_use_current.get_value() {
                     let icon_bitmap = wx::Bitmap::new();
@@ -460,7 +464,7 @@ impl ToggleWidgetsPage {
                         "wxART_BUTTON_C",
                         &wx::Size::default(),
                     ));
-                    new_button.set_bitmap_current(&wx::BitmapBundle::from(icon_bitmap));
+                    new_toggle.set_bitmap_current(&wx::BitmapBundle::from(icon_bitmap));
                 }
                 if config_ui.chk_use_disabled.get_value() {
                     let icon_bitmap = wx::Bitmap::new();
@@ -469,7 +473,7 @@ impl ToggleWidgetsPage {
                         "wxART_BUTTON_C",
                         &wx::Size::default(),
                     ));
-                    new_button.set_bitmap_disabled(&wx::BitmapBundle::from(icon_bitmap));
+                    new_toggle.set_bitmap_disabled(&wx::BitmapBundle::from(icon_bitmap));
                 }
             }
 
@@ -483,24 +487,24 @@ impl ToggleWidgetsPage {
                 .radio_image_pos
                 .enable(config_ui.chk_text_and_bitmap.is_checked());
 
-            new_button.enable(!config_ui.chk_disable.is_checked());
+            new_toggle.enable(!config_ui.chk_disable.is_checked());
 
             let sizer_toggle = &config_ui.sizer_toggle;
             sizer_toggle.add_stretch_spacer(1);
             sizer_toggle.add_window_sizerflags(
-                Some(&new_button),
+                Some(&new_toggle),
                 wx::SizerFlags::new(0).centre().border(wx::ALL),
             );
             sizer_toggle.add_stretch_spacer(1);
 
             sizer_toggle.layout();
 
-            *self.button.borrow_mut() = Some(new_button);
+            *self.toggle.borrow_mut() = Some(new_toggle);
         }
     }
 
-    fn on_button_reset(&self) {
-        self.reset();
+    fn on_toggle_reset(&self, config_ui: &ConfigUI) {
+        self.reset(config_ui);
         self.create_toggle();
     }
 
@@ -509,12 +513,12 @@ impl ToggleWidgetsPage {
         self.base.layout(); // make sure the text field for changing note displays correctly.
     }
 
-    fn on_button_change_label(&self) {
+    fn on_toggle_change_label(&self) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
             let label_text = config_ui.text_label.get_value();
             println!("{}", label_text);
 
-            self.button
+            self.toggle
                 .borrow()
                 .as_ref()
                 .unwrap()
