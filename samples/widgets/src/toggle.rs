@@ -262,8 +262,8 @@ impl WidgetsPage for ToggleWidgetsPage {
 
         // do create the main control
         self.reset(&config_ui);
+        self.create_toggle(&config_ui);
         *self.config_ui.borrow_mut() = Some(config_ui);
-        self.create_toggle();
 
         self.base.set_sizer(Some(&sizer_top), true);
     }
@@ -324,192 +324,189 @@ impl ToggleWidgetsPage {
         }
     }
 
-    fn create_toggle(&self) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            let mut label = "".to_string();
-            if let Some(toggle) = self.toggle.borrow().as_ref() {
-                label = toggle.get_label();
+    fn create_toggle(&self, config_ui: &ConfigUI) {
+        let mut label = "".to_string();
+        let mut value = false;
 
-                // TODO: remove (and delete) all toggles
-                let count = config_ui.sizer_toggle.get_children().get_count();
-                for _ in 0..count {
-                    config_ui.sizer_toggle.remove_int(0);
-                }
-                toggle.destroy();
+        if let Some(toggle) = self.toggle.borrow().as_ref() {
+            label = toggle.get_label();
+            value = toggle.get_value();
+
+            let count = config_ui.sizer_toggle.get_children().get_count();
+            for _ in 0..count {
+                config_ui.sizer_toggle.remove_int(0);
             }
+            toggle.destroy();
+        }
 
-            if label.is_empty() {
-                label = config_ui.text_label.get_value();
-            }
+        if label.is_empty() {
+            // creating for the first time or recreating a toggle button after bitmap
+            // button
+            label = config_ui.text_label.get_value();
+        }
 
-            let mut flags = wx::BORDER_DEFAULT;
-            flags |= match config_ui.radio_halign.get_selection() {
-                TOGGLE_HALIGN_LEFT => wx::BU_LEFT,
-                TOGGLE_HALIGN_RIGHT => wx::BU_RIGHT,
-                _ => 0,
-            } as c_long;
+        let mut flags = wx::BORDER_DEFAULT;
+        flags |= match config_ui.radio_halign.get_selection() {
+            TOGGLE_HALIGN_LEFT => wx::BU_LEFT,
+            TOGGLE_HALIGN_RIGHT => wx::BU_RIGHT,
+            _ => 0,
+        } as c_long;
 
-            flags |= match config_ui.radio_valign.get_selection() {
-                TOGGLE_VALIGN_TOP => wx::BU_TOP,
-                TOGGLE_VALIGN_BOTTOM => wx::BU_BOTTOM,
-                // centre vertical alignment is the default (no style)
-                _ => 0,
-            } as c_long;
+        flags |= match config_ui.radio_valign.get_selection() {
+            TOGGLE_VALIGN_TOP => wx::BU_TOP,
+            TOGGLE_VALIGN_BOTTOM => wx::BU_BOTTOM,
+            // centre vertical alignment is the default (no style)
+            _ => 0,
+        } as c_long;
 
-            if config_ui.chk_fit.get_value() {
-                flags |= wx::BU_EXACTFIT as c_long;
-            }
+        let mut shows_bitmap = false;
+        let new_toggle = if config_ui.chk_bitmap_only.get_value() {
+            shows_bitmap = true;
 
-            let mut shows_bitmap = false;
-            let new_toggle = if config_ui.chk_bitmap_only.get_value() {
-                shows_bitmap = true;
+            // TODO: create bitmap
+            let icon_bitmap = wx::Bitmap::new();
+            icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
+                // wxRust TODO: generate these constants...
+                "wxART_INFORMATION",
+                "wxART_BUTTON_C",
+                &wx::Size::default(),
+            ));
+            let icon_bitmap = wx::BitmapBundle::from(icon_bitmap);
 
-                let bbtn: wx::ToggleButton;
-                // TODO: Support downcasting from BitmapButton into Button
-                //
-                // let bbtn: wx::BitmapButton;
-                // if config_ui.chk_use_bitmap_class.get_value() {
-                //     // TODO: create bitmap
-                //     let icon_bitmap = wx::Bitmap::new();
-                //     icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
-                //         // wxRust TODO: generate these constants...
-                //         "wxART_INFORMATION",
-                //         "wxART_BUTTON_C",
-                //         &wx::Size::default(),
-                //     ));
-                //     bbtn = wx::BitmapButton::builder(Some(&self.base))
-                //         .style(flags)
-                //         .build(&icon_bitmap);
-                // } else {
-                // TODO: create bitmap
-                bbtn = wx::ToggleButton::builder(Some(&self.base))
+            let btgl: wx::ToggleButton;
+            if config_ui.chk_use_bitmap_class.get_value() {
+                btgl = wx::BitmapToggleButton::builder(Some(&self.base))
+                    .style(flags)
+                    .build(&icon_bitmap)
+                    .into();
+            } else {
+                btgl = wx::ToggleButton::builder(Some(&self.base))
                     .id(TogglePage::Picker.into())
                     .build();
-                let icon_bitmap = wx::Bitmap::new();
-                icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
-                    // wxRust TODO: generate these constants...
-                    "wxART_INFORMATION",
-                    "wxART_BUTTON_C",
-                    &wx::Size::default(),
-                ));
-                let icon_bitmap = wx::BitmapBundle::from(icon_bitmap);
-                bbtn.set_bitmap_label(&icon_bitmap);
-                // }
-
-                if config_ui.chk_use_pressed.get_value() {
-                    // TODO: CreateBitmap("pushed", wxART_HELP)
-                    bbtn.set_bitmap_pressed(&icon_bitmap);
-                }
-                if config_ui.chk_use_focused.get_value() {
-                    // TODO: CreateBitmap("focused", wxART_ERROR)
-                    bbtn.set_bitmap_focus(&icon_bitmap);
-                }
-                if config_ui.chk_use_current.get_value() {
-                    // TODO: CreateBitmap("hover", wxART_WARNING)
-                    bbtn.set_bitmap_current(&icon_bitmap);
-                }
-                if config_ui.chk_use_disabled.get_value() {
-                    // TODO: CreateBitmap("disabled", wxART_MISSING_IMAGE)
-                    bbtn.set_bitmap_disabled(&icon_bitmap);
-                }
-
-                bbtn
-            } else {
-                wx::ToggleButton::builder(Some(&self.base))
-                    .id(TogglePage::Picker.into())
-                    .label(&label)
-                    .style(flags)
-                    .build()
-            };
-
-            if !shows_bitmap && config_ui.chk_text_and_bitmap.get_value() {
-                shows_bitmap = true;
-
-                let positions = [wx::LEFT, wx::RIGHT, wx::TOP, wx::BOTTOM];
-                // TODO: implement From<> trait
-                let icon_bitmap = wx::Bitmap::new();
-                icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
-                    // wxRust TODO: generate these constants...
-                    "wxART_INFORMATION",
-                    "wxART_BUTTON_C",
-                    &wx::Size::default(),
-                ));
-                new_toggle.set_bitmap(
-                    &wx::BitmapBundle::from(icon_bitmap),
-                    positions[config_ui.radio_image_pos.get_selection() as usize],
-                );
-
-                if config_ui.chk_use_pressed.get_value() {
-                    let icon_bitmap = wx::Bitmap::new();
-                    icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
-                        "wxART_HELP",
-                        "wxART_BUTTON_C",
-                        &wx::Size::default(),
-                    ));
-                    new_toggle.set_bitmap_pressed(&wx::BitmapBundle::from(icon_bitmap));
-                }
-                if config_ui.chk_use_focused.get_value() {
-                    let icon_bitmap = wx::Bitmap::new();
-                    icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
-                        "wxART_ERROR",
-                        "wxART_BUTTON_C",
-                        &wx::Size::default(),
-                    ));
-                    new_toggle.set_bitmap_focus(&wx::BitmapBundle::from(icon_bitmap));
-                }
-                if config_ui.chk_use_current.get_value() {
-                    let icon_bitmap = wx::Bitmap::new();
-                    icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
-                        "wxART_WARNING",
-                        "wxART_BUTTON_C",
-                        &wx::Size::default(),
-                    ));
-                    new_toggle.set_bitmap_current(&wx::BitmapBundle::from(icon_bitmap));
-                }
-                if config_ui.chk_use_disabled.get_value() {
-                    let icon_bitmap = wx::Bitmap::new();
-                    icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
-                        "wxART_MISSING_IMAGE",
-                        "wxART_BUTTON_C",
-                        &wx::Size::default(),
-                    ));
-                    new_toggle.set_bitmap_disabled(&wx::BitmapBundle::from(icon_bitmap));
-                }
+                btgl.set_bitmap_label(&icon_bitmap);
             }
 
-            config_ui.chk_use_bitmap_class.enable(shows_bitmap);
+            if config_ui.chk_use_pressed.get_value() {
+                // TODO: CreateBitmap("pushed", wxART_HELP)
+                btgl.set_bitmap_pressed(&icon_bitmap);
+            }
+            if config_ui.chk_use_focused.get_value() {
+                // TODO: CreateBitmap("focused", wxART_ERROR)
+                btgl.set_bitmap_focus(&icon_bitmap);
+            }
+            if config_ui.chk_use_current.get_value() {
+                // TODO: CreateBitmap("hover", wxART_WARNING)
+                btgl.set_bitmap_current(&icon_bitmap);
+            }
+            if config_ui.chk_use_disabled.get_value() {
+                // TODO: CreateBitmap("disabled", wxART_MISSING_IMAGE)
+                btgl.set_bitmap_disabled(&icon_bitmap);
+            }
 
-            config_ui.chk_use_pressed.enable(shows_bitmap);
-            config_ui.chk_use_focused.enable(shows_bitmap);
-            config_ui.chk_use_current.enable(shows_bitmap);
-            config_ui.chk_use_disabled.enable(shows_bitmap);
-            config_ui
-                .radio_image_pos
-                .enable(config_ui.chk_text_and_bitmap.is_checked());
+            btgl
+        } else {
+            wx::ToggleButton::builder(Some(&self.base))
+                .id(TogglePage::Picker.into())
+                .label(&label)
+                .style(flags)
+                .build()
+        };
+        new_toggle.set_value(value);
 
-            new_toggle.enable(!config_ui.chk_disable.is_checked());
+        if !shows_bitmap && config_ui.chk_text_and_bitmap.get_value() {
+            shows_bitmap = true;
 
-            let sizer_toggle = &config_ui.sizer_toggle;
+            let positions = [wx::LEFT, wx::RIGHT, wx::TOP, wx::BOTTOM];
+            // TODO: implement From<> trait
+            let icon_bitmap = wx::Bitmap::new();
+            icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
+                // wxRust TODO: generate these constants...
+                "wxART_INFORMATION",
+                "wxART_BUTTON_C",
+                &wx::Size::default(),
+            ));
+            new_toggle.set_bitmap(
+                &wx::BitmapBundle::from(icon_bitmap),
+                positions[config_ui.radio_image_pos.get_selection() as usize],
+            );
+
+            if config_ui.chk_use_pressed.get_value() {
+                let icon_bitmap = wx::Bitmap::new();
+                icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
+                    "wxART_HELP",
+                    "wxART_BUTTON_C",
+                    &wx::Size::default(),
+                ));
+                new_toggle.set_bitmap_pressed(&wx::BitmapBundle::from(icon_bitmap));
+            }
+            if config_ui.chk_use_focused.get_value() {
+                let icon_bitmap = wx::Bitmap::new();
+                icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
+                    "wxART_ERROR",
+                    "wxART_BUTTON_C",
+                    &wx::Size::default(),
+                ));
+                new_toggle.set_bitmap_focus(&wx::BitmapBundle::from(icon_bitmap));
+            }
+            if config_ui.chk_use_current.get_value() {
+                let icon_bitmap = wx::Bitmap::new();
+                icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
+                    "wxART_WARNING",
+                    "wxART_BUTTON_C",
+                    &wx::Size::default(),
+                ));
+                new_toggle.set_bitmap_current(&wx::BitmapBundle::from(icon_bitmap));
+            }
+            if config_ui.chk_use_disabled.get_value() {
+                let icon_bitmap = wx::Bitmap::new();
+                icon_bitmap.copy_from_icon(&wx::ArtProvider::get_icon(
+                    "wxART_MISSING_IMAGE",
+                    "wxART_BUTTON_C",
+                    &wx::Size::default(),
+                ));
+                new_toggle.set_bitmap_disabled(&wx::BitmapBundle::from(icon_bitmap));
+            }
+        }
+
+        config_ui.chk_use_bitmap_class.enable(shows_bitmap);
+        config_ui.chk_text_and_bitmap.enable(!shows_bitmap);
+
+        config_ui.chk_use_pressed.enable(shows_bitmap);
+        config_ui.chk_use_focused.enable(shows_bitmap);
+        config_ui.chk_use_current.enable(shows_bitmap);
+        config_ui.chk_use_disabled.enable(shows_bitmap);
+
+        new_toggle.enable(!config_ui.chk_disable.is_checked());
+
+        let sizer_toggle = &config_ui.sizer_toggle;
+        if config_ui.chk_fit.get_value() {
             sizer_toggle.add_stretch_spacer(1);
             sizer_toggle.add_window_sizerflags(
                 Some(&new_toggle),
                 wx::SizerFlags::new(0).centre().border(wx::ALL),
             );
             sizer_toggle.add_stretch_spacer(1);
-
-            sizer_toggle.layout();
-
-            *self.toggle.borrow_mut() = Some(new_toggle);
+        } else {
+            // take up the entire space
+            sizer_toggle.add_window_sizerflags(
+                Some(&new_toggle),
+                wx::SizerFlags::new(1).centre().border(wx::ALL),
+            );
         }
+        *self.toggle.borrow_mut() = Some(new_toggle);
+
+        sizer_toggle.layout();
     }
 
     fn on_toggle_reset(&self, config_ui: &ConfigUI) {
         self.reset(config_ui);
-        self.create_toggle();
+        self.create_toggle(config_ui);
     }
 
     fn on_check_or_radio_box(&self) {
-        self.create_toggle();
+        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+            self.create_toggle(config_ui);
+        }
         self.base.layout(); // make sure the text field for changing note displays correctly.
     }
 
