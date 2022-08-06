@@ -58,6 +58,9 @@ use searchctrl::*;
 mod slider;
 use slider::*;
 
+mod spinbutton;
+use spinbutton::*;
+
 enum Widgets {
     _ClearLog = 100,
     Quit,
@@ -172,12 +175,13 @@ impl WidgetsFrame {
         let listbox_page = Rc::new(ListboxWidgetsPage::new(&book));
         let searchctrl_page = Rc::new(SearchCtrlWidgetsPage::new(&book));
         let slider_page = Rc::new(SliderWidgetsPage::new(&book));
+        let spinbutton_page = Rc::new(SpinButtonWidgetsPage::new(&book));
         let mut frame = WidgetsFrame {
             base,
             panel,
             book,
             pages: vec![
-                searchctrl_page,
+                spinbutton_page,
                 button_page,
                 check_box_page,
                 choice_page,
@@ -193,6 +197,7 @@ impl WidgetsFrame {
                 headerctrl_page,
                 hyperlink_page,
                 listbox_page,
+                searchctrl_page,
                 slider_page,
             ],
         };
