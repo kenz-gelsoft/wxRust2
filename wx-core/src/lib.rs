@@ -1993,6 +1993,74 @@ impl<'a, P: WindowMethods> TextCtrlBuilder<'a, P> {
     }
 }
 
+pub struct TimePickerCtrlBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    id: c_int,
+    dt: Option<DateTime>,
+    pos: Option<Point>,
+    size: Option<Size>,
+    style: c_long,
+    validator: Option<Validator>,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, TimePickerCtrlBuilder<'a, P>> for TimePickerCtrl {
+    fn builder(parent: Option<&'a P>) -> TimePickerCtrlBuilder<'a, P> {
+        TimePickerCtrlBuilder {
+            parent: parent,
+            id: ID_ANY,
+            dt: None,
+            pos: None,
+            size: None,
+            style: TP_DEFAULT.into(),
+            validator: None,
+        }
+    }
+}
+impl<'a, P: WindowMethods> TimePickerCtrlBuilder<'a, P> {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn dt(&mut self, dt: Option<DateTime>) -> &mut Self {
+        self.dt = dt;
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn validator(&mut self, validator: Validator) -> &mut Self {
+        self.validator = Some(validator);
+        self
+    }
+    pub fn build(&mut self) -> TimePickerCtrl {
+        let dt = self.dt.take().unwrap_or_else(|| DateTime::new());
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        let validator = self
+            .validator
+            .take()
+            .unwrap_or_else(|| Validator::default());
+        TimePickerCtrl::new(
+            self.parent,
+            self.id,
+            &dt,
+            &pos,
+            &size,
+            self.style,
+            &validator,
+            "timectrl",
+        )
+    }
+}
+
 pub struct ToolBarBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
