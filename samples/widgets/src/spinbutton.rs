@@ -56,13 +56,45 @@ impl From<SpinBtnPage> for c_int {
     }
 }
 
+#[derive(Clone, Copy)]
+enum Align {
+    Left,
+    Centre,
+    Right,
+}
+impl Align {
+    fn from(v: c_int) -> Option<Self> {
+        use Align::*;
+        for e in [Left, Centre, Right] {
+            if v == e.into() {
+                return Some(e);
+            }
+        }
+        return None;
+    }
+}
+impl From<Align> for c_int {
+    fn from(v: Align) -> Self {
+        v as c_int
+    }
+}
+
 #[derive(Clone)]
 pub struct ConfigUI {
-    // the checkboxes
+    // the check/radio boxes for styles
     chk_vert: wx::CheckBox,
     chk_arrow_keys: wx::CheckBox,
     chk_wrap: wx::CheckBox,
     chk_process_enter: wx::CheckBox,
+
+    radio_align: wx::RadioBox,
+
+    // the text entries for set value/range
+    text_value: wx::TextCtrl,
+    text_min: wx::TextCtrl,
+    text_max: wx::TextCtrl,
+    text_base: wx::TextCtrl,
+    text_increment: wx::TextCtrl,
 
     sizer_spin: wx::BoxSizer,
 }
@@ -71,7 +103,8 @@ pub struct ConfigUI {
 pub struct SpinButtonWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
-    // the control itself
+
+    // the spinbtn and the spinctrl
     spinbtn: Rc<RefCell<Option<wx::SpinButton>>>,
     spinctrl: Rc<RefCell<Option<wx::SpinCtrl>>>,
     spinctrldbl: Rc<RefCell<Option<wx::SpinCtrlDouble>>>,
@@ -253,14 +286,21 @@ impl WidgetsPage for SpinButtonWidgetsPage {
             chk_wrap,
             chk_process_enter,
 
+            radio_align,
+
+            text_value,
+            text_min,
+            text_max,
+            text_base,
+            text_increment,
+
             sizer_spin: sizer_right, // save it to modify it later
         };
-        self.create_spin(&config_ui);
-
-        // final initializations
         self.reset(&config_ui);
+        self.create_spin(&config_ui);
         *self.config_ui.borrow_mut() = Some(config_ui);
 
+        // final initializations
         self.base.set_sizer(Some(&sizer_top), true);
     }
 
@@ -302,10 +342,11 @@ impl SpinButtonWidgetsPage {
     }
 
     fn reset(&self, config_ui: &ConfigUI) {
-        config_ui.chk_vert.set_value(false);
-        config_ui.chk_arrow_keys.set_value(false);
+        config_ui.chk_vert.set_value(true);
+        config_ui.chk_arrow_keys.set_value(true);
         config_ui.chk_wrap.set_value(false);
         config_ui.chk_process_enter.set_value(false);
+        config_ui.radio_align.set_selection(Align::Right.into());
     }
 
     fn create_spin(&self, config_ui: &ConfigUI) {
@@ -327,7 +368,15 @@ impl SpinButtonWidgetsPage {
             flags |= wx::TE_PROCESS_ENTER as c_long;
         }
 
-        // TODO: textFlags
+        let mut text_flags = 0;
+        if let Some(align) = Align::from(config_ui.radio_align.get_selection()) {
+            text_flags = match align {
+                Align::Centre => wx::ALIGN_CENTRE_HORIZONTAL,
+                Align::Right => wx::ALIGN_RIGHT,
+                _ => wx::ALIGN_LEFT, // no-op
+            } as c_long;
+        }
+
         let mut val = *self.min.borrow();
         if let Some(spinbtn) = self.spinbtn.borrow().as_ref() {
             let val_old = spinbtn.get_value();
@@ -339,7 +388,7 @@ impl SpinButtonWidgetsPage {
 
         let spinbtn = wx::SpinButton::builder(Some(&self.base))
             .id(SpinBtnPage::SpinBtn.into())
-            .style(flags)
+            .style(flags | text_flags)
             .build();
         spinbtn.set_value(val);
         let (min, max) = (*self.min.borrow(), *self.max.borrow());
@@ -348,7 +397,7 @@ impl SpinButtonWidgetsPage {
         let spinctrl = wx::SpinCtrl::builder(Some(&self.base))
             .id(SpinBtnPage::SpinCtrl.into())
             .value(&format!("{}", val))
-            .style(flags)
+            .style(flags | text_flags)
             .min(min)
             .max(max)
             .initial(val)
@@ -357,7 +406,7 @@ impl SpinButtonWidgetsPage {
         let spinctrldbl = wx::SpinCtrlDouble::builder(Some(&self.base))
             .id(SpinBtnPage::SpinCtrlDouble.into())
             .value(&format!("{}", val))
-            .style(flags)
+            .style(flags | text_flags)
             .min(min.into())
             .max(max.into())
             .initial(val.into())
