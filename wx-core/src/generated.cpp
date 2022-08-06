@@ -3127,9 +3127,11 @@ wxSpinButton *wxSpinButton_new1(wxWindow * parent, wxWindowID id, const wxPoint 
 bool wxSpinButton_Create(wxSpinButton * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return self->Create(parent, id, *pos, *size, style, *name);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 int wxSpinButton_GetIncrement(const wxSpinButton * self) {
     return self->GetIncrement();
 }
+#endif
 int wxSpinButton_GetMax(const wxSpinButton * self) {
     return self->GetMax();
 }
@@ -3139,9 +3141,11 @@ int wxSpinButton_GetMin(const wxSpinButton * self) {
 int wxSpinButton_GetValue(const wxSpinButton * self) {
     return self->GetValue();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxSpinButton_SetIncrement(wxSpinButton * self, int value) {
     return self->SetIncrement(value);
 }
+#endif
 void wxSpinButton_SetRange(wxSpinButton * self, int min, int max) {
     return self->SetRange(min, max);
 }
@@ -3171,9 +3175,11 @@ int wxSpinCtrl_GetMax(const wxSpinCtrl * self) {
 int wxSpinCtrl_GetMin(const wxSpinCtrl * self) {
     return self->GetMin();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxSpinCtrl_GetTextValue(const wxSpinCtrl * self) {
     return new wxString(self->GetTextValue());
 }
+#endif
 int wxSpinCtrl_GetValue(const wxSpinCtrl * self) {
     return self->GetValue();
 }
@@ -3224,9 +3230,11 @@ double wxSpinCtrlDouble_GetMax(const wxSpinCtrlDouble * self) {
 double wxSpinCtrlDouble_GetMin(const wxSpinCtrlDouble * self) {
     return self->GetMin();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxSpinCtrlDouble_GetTextValue(const wxSpinCtrlDouble * self) {
     return new wxString(self->GetTextValue());
 }
+#endif
 double wxSpinCtrlDouble_GetValue(const wxSpinCtrlDouble * self) {
     return self->GetValue();
 }

@@ -538,6 +538,19 @@ gtk = [
     'GetInstallPrefix',
     'SetInstallPrefix',
 ]
+[types.wxSpinButton]
+wx31 = [
+    'GetIncrement',
+    'SetIncrement',
+]
+[types.wxSpinCtrl]
+wx31 = [
+    'GetTextValue',
+]
+[types.wxSpinCtrlDouble]
+wx31 = [
+    'GetTextValue',
+]
 [types.wxStaticBox]
 blocklist = [
     'wxStaticBox2',

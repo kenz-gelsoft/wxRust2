@@ -1217,11 +1217,15 @@ wxClassInfo *wxSpinButton_CLASSINFO();
 wxSpinButton *wxSpinButton_new();
 wxSpinButton *wxSpinButton_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxSpinButton_Create(wxSpinButton * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+#if wxCHECK_VERSION(3, 1, 0)
 int wxSpinButton_GetIncrement(const wxSpinButton * self);
+#endif
 int wxSpinButton_GetMax(const wxSpinButton * self);
 int wxSpinButton_GetMin(const wxSpinButton * self);
 int wxSpinButton_GetValue(const wxSpinButton * self);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxSpinButton_SetIncrement(wxSpinButton * self, int value);
+#endif
 void wxSpinButton_SetRange(wxSpinButton * self, int min, int max);
 void wxSpinButton_SetValue(wxSpinButton * self, int value);
 
@@ -1233,7 +1237,9 @@ bool wxSpinCtrl_Create(wxSpinCtrl * self, wxWindow * parent, wxWindowID id, cons
 int wxSpinCtrl_GetBase(const wxSpinCtrl * self);
 int wxSpinCtrl_GetMax(const wxSpinCtrl * self);
 int wxSpinCtrl_GetMin(const wxSpinCtrl * self);
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxSpinCtrl_GetTextValue(const wxSpinCtrl * self);
+#endif
 int wxSpinCtrl_GetValue(const wxSpinCtrl * self);
 int wxSpinCtrl_GetIncrement(const wxSpinCtrl * self);
 bool wxSpinCtrl_SetBase(wxSpinCtrl * self, int base);
@@ -1252,7 +1258,9 @@ unsigned int wxSpinCtrlDouble_GetDigits(const wxSpinCtrlDouble * self);
 double wxSpinCtrlDouble_GetIncrement(const wxSpinCtrlDouble * self);
 double wxSpinCtrlDouble_GetMax(const wxSpinCtrlDouble * self);
 double wxSpinCtrlDouble_GetMin(const wxSpinCtrlDouble * self);
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxSpinCtrlDouble_GetTextValue(const wxSpinCtrlDouble * self);
+#endif
 double wxSpinCtrlDouble_GetValue(const wxSpinCtrlDouble * self);
 void wxSpinCtrlDouble_SetDigits(wxSpinCtrlDouble * self, unsigned int digits);
 void wxSpinCtrlDouble_SetIncrement(wxSpinCtrlDouble * self, double inc);
