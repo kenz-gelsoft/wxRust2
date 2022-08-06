@@ -1,5 +1,5 @@
 use std::mem;
-use std::os::raw::{c_int, c_long, c_void};
+use std::os::raw::{c_double, c_int, c_long, c_void};
 use std::ptr;
 
 mod generated;
@@ -1625,7 +1625,7 @@ impl<'a, P: WindowMethods> Buildable<'a, P, SpinButtonBuilder<'a, P>> for SpinBu
             id: ID_ANY,
             pos: None,
             size: None,
-            style: 0,
+            style: SP_VERTICAL.into(),
         }
     }
 }
@@ -1672,9 +1672,9 @@ impl<'a, P: WindowMethods> Buildable<'a, P, SpinCtrlBuilder<'a, P>> for SpinCtrl
             value: "".to_owned(),
             pos: None,
             size: None,
-            style: 0,
+            style: SP_ARROW_KEYS.into(),
             min: 0,
-            max: 0,
+            max: 100,
             initial: 0,
         }
     }
@@ -1725,6 +1725,90 @@ impl<'a, P: WindowMethods> SpinCtrlBuilder<'a, P> {
             self.min,
             self.max,
             self.initial,
+            "",
+        )
+    }
+}
+
+pub struct SpinCtrlDoubleBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    id: c_int,
+    value: String,
+    pos: Option<Point>,
+    size: Option<Size>,
+    style: c_long,
+    min: c_double,
+    max: c_double,
+    initial: c_double,
+    inc: c_double,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, SpinCtrlDoubleBuilder<'a, P>> for SpinCtrlDouble {
+    fn builder(parent: Option<&'a P>) -> SpinCtrlDoubleBuilder<'a, P> {
+        SpinCtrlDoubleBuilder {
+            parent: parent,
+            id: ID_ANY,
+            value: "".to_owned(),
+            pos: None,
+            size: None,
+            style: SP_ARROW_KEYS.into(),
+            min: 0.0,
+            max: 100.0,
+            initial: 0.0,
+            inc: 1.0,
+        }
+    }
+}
+impl<'a, P: WindowMethods> SpinCtrlDoubleBuilder<'a, P> {
+    pub fn id(&mut self, id: c_int) -> &mut Self {
+        self.id = id;
+        self
+    }
+    pub fn value(&mut self, value: &str) -> &mut Self {
+        self.value = value.to_owned();
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn min(&mut self, min: c_double) -> &mut Self {
+        self.min = min;
+        self
+    }
+    pub fn max(&mut self, max: c_double) -> &mut Self {
+        self.max = max;
+        self
+    }
+    pub fn initial(&mut self, initial: c_double) -> &mut Self {
+        self.initial = initial;
+        self
+    }
+    pub fn inc(&mut self, inc: c_double) -> &mut Self {
+        self.inc = inc;
+        self
+    }
+    pub fn build(&mut self) -> SpinCtrlDouble {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        SpinCtrlDouble::new(
+            self.parent,
+            self.id,
+            &self.value,
+            &pos,
+            &size,
+            self.style,
+            self.min,
+            self.max,
+            self.initial,
+            self.inc,
             "",
         )
     }
