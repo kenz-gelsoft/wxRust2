@@ -3114,6 +3114,146 @@ void wxSlider_SetValue(wxSlider * self, int value) {
     return self->SetValue(value);
 }
 
+// CLASS: wxSpinButton
+wxClassInfo *wxSpinButton_CLASSINFO() {
+    return wxCLASSINFO(wxSpinButton);
+}
+wxSpinButton *wxSpinButton_new() {
+    return new wxSpinButton();
+}
+wxSpinButton *wxSpinButton_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxSpinButton(parent, id, *pos, *size, style, *name);
+}
+bool wxSpinButton_Create(wxSpinButton * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, id, *pos, *size, style, *name);
+}
+#if wxCHECK_VERSION(3, 1, 0)
+int wxSpinButton_GetIncrement(const wxSpinButton * self) {
+    return self->GetIncrement();
+}
+#endif
+int wxSpinButton_GetMax(const wxSpinButton * self) {
+    return self->GetMax();
+}
+int wxSpinButton_GetMin(const wxSpinButton * self) {
+    return self->GetMin();
+}
+int wxSpinButton_GetValue(const wxSpinButton * self) {
+    return self->GetValue();
+}
+#if wxCHECK_VERSION(3, 1, 0)
+void wxSpinButton_SetIncrement(wxSpinButton * self, int value) {
+    return self->SetIncrement(value);
+}
+#endif
+void wxSpinButton_SetRange(wxSpinButton * self, int min, int max) {
+    return self->SetRange(min, max);
+}
+void wxSpinButton_SetValue(wxSpinButton * self, int value) {
+    return self->SetValue(value);
+}
+
+// CLASS: wxSpinCtrl
+wxClassInfo *wxSpinCtrl_CLASSINFO() {
+    return wxCLASSINFO(wxSpinCtrl);
+}
+wxSpinCtrl *wxSpinCtrl_new() {
+    return new wxSpinCtrl();
+}
+wxSpinCtrl *wxSpinCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, int min, int max, int initial, const wxString * name) {
+    return new wxSpinCtrl(parent, id, *value, *pos, *size, style, min, max, initial, *name);
+}
+bool wxSpinCtrl_Create(wxSpinCtrl * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, int min, int max, int initial, const wxString * name) {
+    return self->Create(parent, id, *value, *pos, *size, style, min, max, initial, *name);
+}
+int wxSpinCtrl_GetBase(const wxSpinCtrl * self) {
+    return self->GetBase();
+}
+int wxSpinCtrl_GetMax(const wxSpinCtrl * self) {
+    return self->GetMax();
+}
+int wxSpinCtrl_GetMin(const wxSpinCtrl * self) {
+    return self->GetMin();
+}
+#if wxCHECK_VERSION(3, 1, 0)
+wxString *wxSpinCtrl_GetTextValue(const wxSpinCtrl * self) {
+    return new wxString(self->GetTextValue());
+}
+#endif
+int wxSpinCtrl_GetValue(const wxSpinCtrl * self) {
+    return self->GetValue();
+}
+int wxSpinCtrl_GetIncrement(const wxSpinCtrl * self) {
+    return self->GetIncrement();
+}
+bool wxSpinCtrl_SetBase(wxSpinCtrl * self, int base) {
+    return self->SetBase(base);
+}
+void wxSpinCtrl_SetRange(wxSpinCtrl * self, int min_val, int max_val) {
+    return self->SetRange(min_val, max_val);
+}
+void wxSpinCtrl_SetSelection(wxSpinCtrl * self, long from, long to) {
+    return self->SetSelection(from, to);
+}
+void wxSpinCtrl_SetValue(wxSpinCtrl * self, const wxString * text) {
+    return self->SetValue(*text);
+}
+void wxSpinCtrl_SetValue1(wxSpinCtrl * self, int value) {
+    return self->SetValue(value);
+}
+void wxSpinCtrl_SetIncrement(wxSpinCtrl * self, int value) {
+    return self->SetIncrement(value);
+}
+
+// CLASS: wxSpinCtrlDouble
+wxClassInfo *wxSpinCtrlDouble_CLASSINFO() {
+    return wxCLASSINFO(wxSpinCtrlDouble);
+}
+wxSpinCtrlDouble *wxSpinCtrlDouble_new() {
+    return new wxSpinCtrlDouble();
+}
+wxSpinCtrlDouble *wxSpinCtrlDouble_new1(wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, double min, double max, double initial, double inc, const wxString * name) {
+    return new wxSpinCtrlDouble(parent, id, *value, *pos, *size, style, min, max, initial, inc, *name);
+}
+bool wxSpinCtrlDouble_Create(wxSpinCtrlDouble * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, double min, double max, double initial, double inc, const wxString * name) {
+    return self->Create(parent, id, *value, *pos, *size, style, min, max, initial, inc, *name);
+}
+unsigned int wxSpinCtrlDouble_GetDigits(const wxSpinCtrlDouble * self) {
+    return self->GetDigits();
+}
+double wxSpinCtrlDouble_GetIncrement(const wxSpinCtrlDouble * self) {
+    return self->GetIncrement();
+}
+double wxSpinCtrlDouble_GetMax(const wxSpinCtrlDouble * self) {
+    return self->GetMax();
+}
+double wxSpinCtrlDouble_GetMin(const wxSpinCtrlDouble * self) {
+    return self->GetMin();
+}
+#if wxCHECK_VERSION(3, 1, 0)
+wxString *wxSpinCtrlDouble_GetTextValue(const wxSpinCtrlDouble * self) {
+    return new wxString(self->GetTextValue());
+}
+#endif
+double wxSpinCtrlDouble_GetValue(const wxSpinCtrlDouble * self) {
+    return self->GetValue();
+}
+void wxSpinCtrlDouble_SetDigits(wxSpinCtrlDouble * self, unsigned int digits) {
+    return self->SetDigits(digits);
+}
+void wxSpinCtrlDouble_SetIncrement(wxSpinCtrlDouble * self, double inc) {
+    return self->SetIncrement(inc);
+}
+void wxSpinCtrlDouble_SetRange(wxSpinCtrlDouble * self, double min_val, double max_val) {
+    return self->SetRange(min_val, max_val);
+}
+void wxSpinCtrlDouble_SetValue(wxSpinCtrlDouble * self, const wxString * text) {
+    return self->SetValue(*text);
+}
+void wxSpinCtrlDouble_SetValue1(wxSpinCtrlDouble * self, double value) {
+    return self->SetValue(value);
+}
+
 // CLASS: wxStaticBitmap
 wxClassInfo *wxStaticBitmap_CLASSINFO() {
     return wxCLASSINFO(wxStaticBitmap);

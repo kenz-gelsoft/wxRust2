@@ -59,6 +59,9 @@ wxml_files = [
     'wxml/classwx_sizer.xml',
     'wxml/classwx_sizer_flags.xml',
     'wxml/classwx_slider.xml',
+    'wxml/classwx_spin_button.xml',
+    'wxml/classwx_spin_ctrl.xml',
+    'wxml/classwx_spin_ctrl_double.xml',
     'wxml/classwx_standard_paths.xml',
     'wxml/classwx_static_bitmap.xml',
     'wxml/classwx_static_box.xml',
@@ -534,6 +537,19 @@ windows = [
 gtk = [
     'GetInstallPrefix',
     'SetInstallPrefix',
+]
+[types.wxSpinButton]
+wx31 = [
+    'GetIncrement',
+    'SetIncrement',
+]
+[types.wxSpinCtrl]
+wx31 = [
+    'GetTextValue',
+]
+[types.wxSpinCtrlDouble]
+wx31 = [
+    'GetTextValue',
 ]
 [types.wxStaticBox]
 blocklist = [

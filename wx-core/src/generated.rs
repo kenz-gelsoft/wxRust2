@@ -3144,6 +3144,235 @@ impl<const OWNED: bool> DynamicCast for SliderIsOwned<OWNED> {
     }
 }
 
+// wxSpinButton
+wx_class! { SpinButton =
+    SpinButtonIsOwned<true>(wxSpinButton) impl
+        SpinButtonMethods,
+        ControlMethods,
+        // WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> SpinButtonIsOwned<OWNED> {
+    pub fn new_2step() -> SpinButtonIsOwned<OWNED> {
+        unsafe { SpinButtonIsOwned(ffi::wxSpinButton_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> SpinButtonIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            SpinButtonIsOwned(ffi::wxSpinButton_new1(parent, id, pos, size, style, name))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<SpinButtonIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: SpinButtonIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SpinButtonIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: SpinButtonIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SpinButtonIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: SpinButtonIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SpinButtonIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: SpinButtonIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for SpinButtonIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSpinButton_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> WindowMethods for SpinButtonIsOwned<OWNED> {
+    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxSpinButton_Create(self.as_ptr(), parent, id, pos, size, style, name)
+        }
+    }
+}
+
+// wxSpinCtrl
+wx_class! { SpinCtrl =
+    SpinCtrlIsOwned<true>(wxSpinCtrl) impl
+        SpinCtrlMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> SpinCtrlIsOwned<OWNED> {
+    pub fn new_2step() -> SpinCtrlIsOwned<OWNED> {
+        unsafe { SpinCtrlIsOwned(ffi::wxSpinCtrl_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        value: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        min: c_int,
+        max: c_int,
+        initial: c_int,
+        name: &str,
+    ) -> SpinCtrlIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let value = WxString::from(value);
+            let value = value.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            SpinCtrlIsOwned(ffi::wxSpinCtrl_new1(
+                parent, id, value, pos, size, style, min, max, initial, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<SpinCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: SpinCtrlIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SpinCtrlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: SpinCtrlIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SpinCtrlIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: SpinCtrlIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SpinCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: SpinCtrlIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for SpinCtrlIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSpinCtrl_CLASSINFO()) }
+    }
+}
+
+// wxSpinCtrlDouble
+wx_class! { SpinCtrlDouble =
+    SpinCtrlDoubleIsOwned<true>(wxSpinCtrlDouble) impl
+        SpinCtrlDoubleMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> SpinCtrlDoubleIsOwned<OWNED> {
+    pub fn new_2step() -> SpinCtrlDoubleIsOwned<OWNED> {
+        unsafe { SpinCtrlDoubleIsOwned(ffi::wxSpinCtrlDouble_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        value: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        min: c_double,
+        max: c_double,
+        initial: c_double,
+        inc: c_double,
+        name: &str,
+    ) -> SpinCtrlDoubleIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let value = WxString::from(value);
+            let value = value.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            SpinCtrlDoubleIsOwned(ffi::wxSpinCtrlDouble_new1(
+                parent, id, value, pos, size, style, min, max, initial, inc, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<SpinCtrlDoubleIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: SpinCtrlDoubleIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SpinCtrlDoubleIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: SpinCtrlDoubleIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SpinCtrlDoubleIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: SpinCtrlDoubleIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SpinCtrlDoubleIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: SpinCtrlDoubleIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for SpinCtrlDoubleIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSpinCtrlDouble_CLASSINFO()) }
+    }
+}
+
 // wxStaticBitmap
 wx_class! { StaticBitmap =
     StaticBitmapIsOwned<true>(wxStaticBitmap) impl
