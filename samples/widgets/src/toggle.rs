@@ -276,7 +276,7 @@ impl WidgetsPage for ToggleWidgetsPage {
         ) {
             match m {
                 TogglePage::Reset => self.on_toggle_reset(config_ui),
-                TogglePage::ChangeLabel => self.on_toggle_change_label(),
+                TogglePage::ChangeLabel => self.on_toggle_change_label(config_ui),
                 _ => (),
             };
         }
@@ -500,6 +500,7 @@ impl ToggleWidgetsPage {
 
     fn on_toggle_reset(&self, config_ui: &ConfigUI) {
         self.reset(config_ui);
+
         self.create_toggle(config_ui);
     }
 
@@ -507,21 +508,18 @@ impl ToggleWidgetsPage {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
             self.create_toggle(config_ui);
         }
-        self.base.layout(); // make sure the text field for changing note displays correctly.
     }
 
-    fn on_toggle_change_label(&self) {
-        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
-            let label_text = config_ui.text_label.get_value();
-            println!("{}", label_text);
+    fn on_toggle_change_label(&self, config_ui: &ConfigUI) {
+        let label_text = config_ui.text_label.get_value();
+        println!("{}", label_text);
 
-            self.toggle
-                .borrow()
-                .as_ref()
-                .unwrap()
-                .set_label(&label_text);
+        if let Some(toggle) = self.toggle.borrow().as_ref() {
+            toggle.set_label(&label_text);
+        }
 
-            config_ui.sizer_toggle.layout();
+        if config_ui.chk_bitmap_only.is_checked() {
+            self.create_toggle(config_ui);
         }
     }
 }
