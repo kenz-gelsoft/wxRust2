@@ -64,6 +64,9 @@ use spinbutton::*;
 mod timepicker;
 use timepicker::*;
 
+mod toggle;
+use toggle::*;
+
 enum Widgets {
     _ClearLog = 100,
     Quit,
@@ -180,12 +183,13 @@ impl WidgetsFrame {
         let slider_page = Rc::new(SliderWidgetsPage::new(&book));
         let spinbutton_page = Rc::new(SpinButtonWidgetsPage::new(&book));
         let timepicker_page = Rc::new(TimePickerWidgetsPage::new(&book));
+        let toggle_page = Rc::new(ToggleWidgetsPage::new(&book));
         let mut frame = WidgetsFrame {
             base,
             panel,
             book,
             pages: vec![
-                timepicker_page,
+                toggle_page,
                 button_page,
                 check_box_page,
                 choice_page,
@@ -204,6 +208,7 @@ impl WidgetsFrame {
                 searchctrl_page,
                 slider_page,
                 spinbutton_page,
+                timepicker_page,
             ],
         };
         frame.on_create();
