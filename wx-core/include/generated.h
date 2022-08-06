@@ -15,6 +15,7 @@
 #include <wx/spinbutt.h>
 #include <wx/spinctrl.h>
 #include <wx/srchctrl.h>
+#include <wx/timectrl.h>
 #include <wx/wrapsizer.h>
 
 // wxBitmapBundle compatibility hack(for a while)
@@ -1481,6 +1482,16 @@ wxPoint *wxTextEntry_GetMargins(const wxTextEntry * self);
 void wxTextEntry_SetValue(wxTextEntry * self, const wxString * value);
 void wxTextEntry_Undo(wxTextEntry * self);
 void wxTextEntry_WriteText(wxTextEntry * self, const wxString * text);
+
+// CLASS: wxTimePickerCtrl
+wxClassInfo *wxTimePickerCtrl_CLASSINFO();
+wxTimePickerCtrl *wxTimePickerCtrl_new();
+wxTimePickerCtrl *wxTimePickerCtrl_new1(wxWindow * parent, wxWindowID id, const wxDateTime * dt, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+bool wxTimePickerCtrl_Create(wxTimePickerCtrl * self, wxWindow * parent, wxWindowID id, const wxDateTime * dt, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+bool wxTimePickerCtrl_GetTime(const wxTimePickerCtrl * self, int * hour, int * min, int * sec);
+wxDateTime *wxTimePickerCtrl_GetValue(const wxTimePickerCtrl * self);
+bool wxTimePickerCtrl_SetTime(wxTimePickerCtrl * self, int hour, int min, int sec);
+void wxTimePickerCtrl_SetValue(wxTimePickerCtrl * self, const wxDateTime * dt);
 
 // CLASS: wxToolBar
 wxClassInfo *wxToolBar_CLASSINFO();

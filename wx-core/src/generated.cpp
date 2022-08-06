@@ -3846,6 +3846,32 @@ void wxTextEntry_WriteText(wxTextEntry * self, const wxString * text) {
     return self->WriteText(*text);
 }
 
+// CLASS: wxTimePickerCtrl
+wxClassInfo *wxTimePickerCtrl_CLASSINFO() {
+    return wxCLASSINFO(wxTimePickerCtrl);
+}
+wxTimePickerCtrl *wxTimePickerCtrl_new() {
+    return new wxTimePickerCtrl();
+}
+wxTimePickerCtrl *wxTimePickerCtrl_new1(wxWindow * parent, wxWindowID id, const wxDateTime * dt, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return new wxTimePickerCtrl(parent, id, *dt, *pos, *size, style, *validator, *name);
+}
+bool wxTimePickerCtrl_Create(wxTimePickerCtrl * self, wxWindow * parent, wxWindowID id, const wxDateTime * dt, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, *dt, *pos, *size, style, *validator, *name);
+}
+bool wxTimePickerCtrl_GetTime(const wxTimePickerCtrl * self, int * hour, int * min, int * sec) {
+    return self->GetTime(hour, min, sec);
+}
+wxDateTime *wxTimePickerCtrl_GetValue(const wxTimePickerCtrl * self) {
+    return new wxDateTime(self->GetValue());
+}
+bool wxTimePickerCtrl_SetTime(wxTimePickerCtrl * self, int hour, int min, int sec) {
+    return self->SetTime(hour, min, sec);
+}
+void wxTimePickerCtrl_SetValue(wxTimePickerCtrl * self, const wxDateTime * dt) {
+    return self->SetValue(*dt);
+}
+
 // CLASS: wxToolBar
 wxClassInfo *wxToolBar_CLASSINFO() {
     return wxCLASSINFO(wxToolBar);

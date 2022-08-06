@@ -3750,6 +3750,81 @@ impl<const OWNED: bool> TextEntryMethods for TextCtrlIsOwned<OWNED> {
 
 // wxTextEntry
 
+// wxTimePickerCtrl
+wx_class! { TimePickerCtrl =
+    TimePickerCtrlIsOwned<true>(wxTimePickerCtrl) impl
+        TimePickerCtrlMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> TimePickerCtrlIsOwned<OWNED> {
+    pub fn new_2step() -> TimePickerCtrlIsOwned<OWNED> {
+        unsafe { TimePickerCtrlIsOwned(ffi::wxTimePickerCtrl_new()) }
+    }
+    pub fn new<
+        W: WindowMethods,
+        D: DateTimeMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        V: ValidatorMethods,
+    >(
+        parent: Option<&W>,
+        id: c_int,
+        dt: &D,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> TimePickerCtrlIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dt = dt.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            TimePickerCtrlIsOwned(ffi::wxTimePickerCtrl_new1(
+                parent, id, dt, pos, size, style, validator, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<TimePickerCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: TimePickerCtrlIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<TimePickerCtrlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: TimePickerCtrlIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<TimePickerCtrlIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: TimePickerCtrlIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<TimePickerCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: TimePickerCtrlIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for TimePickerCtrlIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTimePickerCtrl_CLASSINFO()) }
+    }
+}
+
 // wxToolBar
 wx_class! { ToolBar =
     ToolBarIsOwned<true>(wxToolBar) impl

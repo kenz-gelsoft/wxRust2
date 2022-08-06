@@ -70,6 +70,7 @@ wxml_files = [
     'wxml/classwx_text_attr.xml',
     'wxml/classwx_text_ctrl.xml',
     'wxml/classwx_text_entry.xml',
+    'wxml/classwx_time_picker_ctrl.xml',
     'wxml/classwx_timer.xml',
     'wxml/classwx_timer_event.xml',
     'wxml/classwx_tool_bar.xml',
