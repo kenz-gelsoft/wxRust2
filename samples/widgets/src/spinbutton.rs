@@ -109,8 +109,15 @@ pub struct SpinButtonWidgetsPage {
     spinctrl: Rc<RefCell<Option<wx::SpinCtrl>>>,
     spinctrldbl: Rc<RefCell<Option<wx::SpinCtrlDouble>>>,
 
+    // the spinbtn range
     min: RefCell<c_int>,
     max: RefCell<c_int>,
+
+    // and numeric base
+    base_val: RefCell<c_int>,
+
+    // the increment
+    increment: RefCell<c_int>,
 }
 impl WidgetsPage for SpinButtonWidgetsPage {
     fn base(&self) -> &wx::Panel {
@@ -312,6 +319,10 @@ impl WidgetsPage for SpinButtonWidgetsPage {
         ) {
             match m {
                 SpinBtnPage::Reset => self.on_button_reset(config_ui),
+                SpinBtnPage::SetValue => self.on_button_set_value(config_ui),
+                SpinBtnPage::SetMinAndMax => self.on_button_set_min_and_max(config_ui),
+                SpinBtnPage::SetBase => self.on_button_set_base(config_ui),
+                SpinBtnPage::SetIncrement => self.on_button_set_increment(config_ui),
                 _ => (),
             };
         }
@@ -336,8 +347,12 @@ impl SpinButtonWidgetsPage {
             spinbtn: Rc::new(RefCell::new(None)),
             spinctrl: Rc::new(RefCell::new(None)),
             spinctrldbl: Rc::new(RefCell::new(None)),
+
             min: RefCell::new(0),
-            max: RefCell::new(0),
+            max: RefCell::new(10),
+
+            base_val: RefCell::new(10),
+            increment: RefCell::new(1),
         }
     }
 
@@ -499,6 +514,79 @@ impl SpinButtonWidgetsPage {
         self.reset(config_ui);
 
         self.create_spin(config_ui);
+    }
+
+    fn on_button_set_min_and_max(&self, config_ui: &ConfigUI) {
+        let min_new = config_ui.text_min.get_value();
+        let max_new = config_ui.text_max.get_value();
+        if let (Ok(min_new), Ok(max_new), Some(spinbtn), Some(spinctrl), Some(spinctrldbl)) = (
+            min_new.parse(),
+            max_new.parse(),
+            self.spinbtn.borrow().as_ref(),
+            self.spinctrl.borrow().as_ref(),
+            self.spinctrldbl.borrow().as_ref(),
+        ) {
+            if min_new > max_new {
+                return;
+            }
+
+            *self.min.borrow_mut() = min_new;
+            *self.max.borrow_mut() = max_new;
+
+            spinbtn.set_range(min_new, max_new);
+            spinctrl.set_range(min_new, max_new);
+            spinctrldbl.set_range(min_new.into(), max_new.into());
+
+            config_ui.sizer_spin.layout();
+        }
+    }
+
+    fn on_button_set_base(&self, config_ui: &ConfigUI) {
+        let base = config_ui.text_base.get_value();
+        if let (Ok(base), Some(spinctrl)) = (base.parse(), self.spinctrl.borrow().as_ref()) {
+            *self.base_val.borrow_mut() = base;
+
+            spinctrl.set_base(base);
+
+            config_ui.sizer_spin.layout();
+        }
+    }
+
+    fn on_button_set_increment(&self, config_ui: &ConfigUI) {
+        let increment = config_ui.text_increment.get_value();
+        if let (Ok(increment), Some(spinctrl)) =
+            (increment.parse(), self.spinctrl.borrow().as_ref())
+        {
+            *self.increment.borrow_mut() = increment;
+
+            spinctrl.set_increment(increment);
+
+            config_ui.sizer_spin.layout();
+        }
+    }
+
+    fn on_button_set_value(&self, config_ui: &ConfigUI) {
+        if let (Some(spinbtn), Some(spinctrl), Some(spinctrldbl)) = (
+            self.spinbtn.borrow().as_ref(),
+            self.spinctrl.borrow().as_ref(),
+            self.spinctrldbl.borrow().as_ref(),
+        ) {
+            if config_ui.text_value.is_empty() {
+                spinctrl.set_value_str("");
+                spinctrldbl.set_value_str("");
+                return;
+            }
+
+            let val = config_ui.text_value.get_value();
+            if let Ok(val) = val.parse() {
+                if !self.is_valid_value(val) {
+                    return;
+                }
+                spinbtn.set_value(val);
+                spinctrl.set_value_int(val);
+                spinctrldbl.set_value_double(val.into());
+            }
+        }
     }
 
     fn on_check_box(&self, config_ui: &ConfigUI) {
