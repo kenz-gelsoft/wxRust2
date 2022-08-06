@@ -6332,6 +6332,53 @@ pub trait TimePickerCtrlMethods: ControlMethods {
     }
 }
 
+// wxToggleButton
+pub trait ToggleButtonMethods: AnyButtonMethods {
+    // DTOR: fn ~wxToggleButton()
+    fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        label: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        val: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let val = val.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxToggleButton_Create(
+                self.as_ptr(),
+                parent,
+                id,
+                label,
+                pos,
+                size,
+                style,
+                val,
+                name,
+            )
+        }
+    }
+    fn get_value(&self) -> bool {
+        unsafe { ffi::wxToggleButton_GetValue(self.as_ptr()) }
+    }
+    fn set_value(&self, state: bool) {
+        unsafe { ffi::wxToggleButton_SetValue(self.as_ptr(), state) }
+    }
+}
+
 // wxToolBar
 pub trait ToolBarMethods: ControlMethods {
     // DTOR: fn ~wxToolBar()

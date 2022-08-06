@@ -3825,6 +3825,82 @@ impl<const OWNED: bool> DynamicCast for TimePickerCtrlIsOwned<OWNED> {
     }
 }
 
+// wxToggleButton
+wx_class! { ToggleButton =
+    ToggleButtonIsOwned<true>(wxToggleButton) impl
+        ToggleButtonMethods,
+        AnyButtonMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> ToggleButtonIsOwned<OWNED> {
+    pub fn new_2step() -> ToggleButtonIsOwned<OWNED> {
+        unsafe { ToggleButtonIsOwned(ffi::wxToggleButton_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        label: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        val: &V,
+        name: &str,
+    ) -> ToggleButtonIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let val = val.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ToggleButtonIsOwned(ffi::wxToggleButton_new1(
+                parent, id, label, pos, size, style, val, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<ToggleButtonIsOwned<OWNED>> for AnyButtonIsOwned<OWNED> {
+    fn from(o: ToggleButtonIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ToggleButtonIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: ToggleButtonIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ToggleButtonIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: ToggleButtonIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ToggleButtonIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: ToggleButtonIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ToggleButtonIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: ToggleButtonIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for ToggleButtonIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxToggleButton_CLASSINFO()) }
+    }
+}
+
 // wxToolBar
 wx_class! { ToolBar =
     ToolBarIsOwned<true>(wxToolBar) impl

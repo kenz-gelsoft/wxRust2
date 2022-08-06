@@ -155,6 +155,7 @@ def generated_h(classes, libname):
 #include <wx/spinbutt.h>
 #include <wx/spinctrl.h>
 #include <wx/srchctrl.h>
+#include <wx/tglbtn.h>
 #include <wx/timectrl.h>
 #include <wx/wrapsizer.h>
 

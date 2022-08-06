@@ -15,6 +15,7 @@
 #include <wx/spinbutt.h>
 #include <wx/spinctrl.h>
 #include <wx/srchctrl.h>
+#include <wx/tglbtn.h>
 #include <wx/timectrl.h>
 #include <wx/wrapsizer.h>
 
@@ -1492,6 +1493,14 @@ bool wxTimePickerCtrl_GetTime(const wxTimePickerCtrl * self, int * hour, int * m
 wxDateTime *wxTimePickerCtrl_GetValue(const wxTimePickerCtrl * self);
 bool wxTimePickerCtrl_SetTime(wxTimePickerCtrl * self, int hour, int min, int sec);
 void wxTimePickerCtrl_SetValue(wxTimePickerCtrl * self, const wxDateTime * dt);
+
+// CLASS: wxToggleButton
+wxClassInfo *wxToggleButton_CLASSINFO();
+wxToggleButton *wxToggleButton_new();
+wxToggleButton *wxToggleButton_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * val, const wxString * name);
+bool wxToggleButton_Create(wxToggleButton * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * val, const wxString * name);
+bool wxToggleButton_GetValue(const wxToggleButton * self);
+void wxToggleButton_SetValue(wxToggleButton * self, bool state);
 
 // CLASS: wxToolBar
 wxClassInfo *wxToolBar_CLASSINFO();
