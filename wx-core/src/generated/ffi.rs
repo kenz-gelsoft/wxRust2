@@ -2687,6 +2687,45 @@ extern "C" {
     pub fn wxTextEntry_Undo(self_: *mut c_void);
     pub fn wxTextEntry_WriteText(self_: *mut c_void, text: *const c_void);
 
+    // wxTimePickerCtrl
+    pub fn wxTimePickerCtrl_CLASSINFO() -> *mut c_void;
+    pub fn wxTimePickerCtrl_new() -> *mut c_void;
+    pub fn wxTimePickerCtrl_new1(
+        parent: *mut c_void,
+        id: c_int,
+        dt: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxTimePickerCtrl_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        dt: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxTimePickerCtrl_GetTime(
+        self_: *const c_void,
+        hour: *mut c_void,
+        min: *mut c_void,
+        sec: *mut c_void,
+    ) -> bool;
+    pub fn wxTimePickerCtrl_GetValue(self_: *const c_void) -> *mut c_void;
+    pub fn wxTimePickerCtrl_SetTime(
+        self_: *mut c_void,
+        hour: c_int,
+        min: c_int,
+        sec: c_int,
+    ) -> bool;
+    pub fn wxTimePickerCtrl_SetValue(self_: *mut c_void, dt: *const c_void);
+
     // wxToolBar
     pub fn wxToolBar_CLASSINFO() -> *mut c_void;
     pub fn wxToolBar_new() -> *mut c_void;

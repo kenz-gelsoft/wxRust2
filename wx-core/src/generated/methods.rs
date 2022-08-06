@@ -6272,6 +6272,66 @@ pub trait TextEntryMethods: WxRustMethods {
     }
 }
 
+// wxTimePickerCtrl
+pub trait TimePickerCtrlMethods: ControlMethods {
+    fn create_datetime<
+        W: WindowMethods,
+        D: DateTimeMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        V: ValidatorMethods,
+    >(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        dt: &D,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dt = dt.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxTimePickerCtrl_Create(
+                self.as_ptr(),
+                parent,
+                id,
+                dt,
+                pos,
+                size,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+    fn get_time(&self, hour: *mut c_void, min: *mut c_void, sec: *mut c_void) -> bool {
+        unsafe { ffi::wxTimePickerCtrl_GetTime(self.as_ptr(), hour, min, sec) }
+    }
+    fn get_value(&self) -> DateTime {
+        unsafe { DateTime::from_ptr(ffi::wxTimePickerCtrl_GetValue(self.as_ptr())) }
+    }
+    fn set_time(&self, hour: c_int, min: c_int, sec: c_int) -> bool {
+        unsafe { ffi::wxTimePickerCtrl_SetTime(self.as_ptr(), hour, min, sec) }
+    }
+    fn set_value<D: DateTimeMethods>(&self, dt: &D) {
+        unsafe {
+            let dt = dt.as_ptr();
+            ffi::wxTimePickerCtrl_SetValue(self.as_ptr(), dt)
+        }
+    }
+}
+
 // wxToolBar
 pub trait ToolBarMethods: ControlMethods {
     // DTOR: fn ~wxToolBar()
