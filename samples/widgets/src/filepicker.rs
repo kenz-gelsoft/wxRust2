@@ -4,17 +4,40 @@ use std::os::raw::{c_int, c_long};
 use std::rc::Rc;
 use wx::methods::*;
 
+#[derive(Clone, Copy)]
+enum FilePickerMode {
+    Open = 0,
+    Save,
+}
+impl FilePickerMode {
+    fn from(v: c_int) -> Option<Self> {
+        use FilePickerMode::*;
+        for e in [Open, Save] {
+            if v == e.into() {
+                return Some(e);
+            }
+        }
+        return None;
+    }
+}
+impl From<FilePickerMode> for c_int {
+    fn from(e: FilePickerMode) -> Self {
+        e as c_int
+    }
+}
+
 // control ids
 #[derive(Clone, Copy)]
 enum PickerPage {
     Reset = wx::ID_HIGHEST as isize,
-    Dir,
+    File,
     SetDir,
+    CurrentPath,
 }
 impl PickerPage {
     fn from(v: c_int) -> Option<Self> {
         use PickerPage::*;
-        for e in [Reset, Dir, SetDir] {
+        for e in [Reset, File, SetDir, CurrentPath] {
             if v == e.into() {
                 return Some(e);
             }
@@ -32,9 +55,10 @@ impl From<PickerPage> for c_int {
 pub struct ConfigUI {
     // other controls
     // --------------
-    chk_dir_text_ctrl: wx::CheckBox,
-    chk_dir_change_dir: wx::CheckBox,
-    chk_dir_must_exist: wx::CheckBox,
+    chk_file_text_ctrl: wx::CheckBox,
+    chk_file_overwrite_prompt: wx::CheckBox,
+    chk_file_must_exist: wx::CheckBox,
+    chk_file_change_dir: wx::CheckBox,
     chk_small: wx::CheckBox,
     text_initial_dir: wx::TextCtrl,
 
@@ -46,7 +70,7 @@ pub struct FilePickerWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
     // the picker
-    dir_picker: Rc<RefCell<Option<wx::DirPickerCtrl>>>,
+    file_picker: Rc<RefCell<Option<wx::DirPickerCtrl>>>,
 }
 impl WidgetsPage for FilePickerWidgetsPage {
     fn base(&self) -> &wx::Panel {
@@ -59,17 +83,35 @@ impl WidgetsPage for FilePickerWidgetsPage {
         // left pane
         let boxleft = wx::BoxSizer::new(wx::VERTICAL);
 
-        let dirbox =
-            wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&self.base), "&DirPicker style");
-        let chk_dir_text_ctrl =
-            self.create_check_box_and_add_to_sizer(&dirbox, "With textctrl", wx::ID_ANY);
-        let chk_dir_must_exist =
-            self.create_check_box_and_add_to_sizer(&dirbox, "Dir must exist", wx::ID_ANY);
-        let chk_dir_change_dir =
-            self.create_check_box_and_add_to_sizer(&dirbox, "Change working dir", wx::ID_ANY);
+        let mode = wx::ArrayString::new();
+        mode.add("open");
+        mode.add("save");
+        let radio_file_picker_mode = wx::RadioBox::builder(Some(&self.base))
+            .label("wxFilePicker mode")
+            .choices(mode)
+            .build();
+        boxleft.add_window_int(
+            Some(&radio_file_picker_mode),
+            0,
+            wx::ALL | wx::GROW,
+            5,
+            wx::Object::none(),
+        );
+
+        let filebox =
+            wx::StaticBoxSizer::new_with_int(wx::VERTICAL, Some(&self.base), "&FilePicker style");
+        let chk_file_text_ctrl =
+            self.create_check_box_and_add_to_sizer(&filebox, "With textctrl", wx::ID_ANY);
+        let chk_file_overwrite_prompt =
+            self.create_check_box_and_add_to_sizer(&filebox, "Overwrite prompt", wx::ID_ANY);
+        let chk_file_must_exist =
+            self.create_check_box_and_add_to_sizer(&filebox, "Dir must exist", wx::ID_ANY);
+        let chk_file_change_dir =
+            self.create_check_box_and_add_to_sizer(&filebox, "Change working dir", wx::ID_ANY);
         let chk_small =
-            self.create_check_box_and_add_to_sizer(&dirbox, "&Small version", wx::ID_ANY);
-        boxleft.add_sizer_int(Some(&dirbox), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
+            self.create_check_box_and_add_to_sizer(&filebox, "&Small version", wx::ID_ANY);
+
+        boxleft.add_sizer_int(Some(&filebox), 0, wx::ALL | wx::GROW, 5, wx::Object::none());
 
         let (sizer_initial_dir, text_initial_dir) = self.create_sizer_with_text_and_button(
             PickerPage::SetDir.into(),
@@ -98,9 +140,10 @@ impl WidgetsPage for FilePickerWidgetsPage {
 
         let sizer = wx::BoxSizer::new(wx::VERTICAL);
         let config_ui = ConfigUI {
-            chk_dir_text_ctrl,
-            chk_dir_change_dir,
-            chk_dir_must_exist,
+            chk_file_text_ctrl,
+            chk_file_overwrite_prompt,
+            chk_file_must_exist,
+            chk_file_change_dir,
             chk_small,
             text_initial_dir,
 
@@ -108,37 +151,34 @@ impl WidgetsPage for FilePickerWidgetsPage {
         };
         self.reset(&config_ui); // set checkboxes state
 
+        let label_path = wx::StaticText::builder(Some(&self.base))
+            .id(PickerPage::CurrentPath.into())
+            .label("")
+            .build();
+
         // create pickers
         self.create_picker(&config_ui);
 
         // right pane
-        config_ui
-            .sizer
-            .add_int_int(1, 1, 1, wx::GROW | wx::ALL, 5, wx::Object::none());
-        // TODO: insert picker in create_picker()
-        if let Some(dir_picker) = self.dir_picker.borrow().as_ref() {
-            config_ui.sizer.add_window_int(
-                Some(dir_picker),
-                0,
-                wx::EXPAND | wx::ALL,
-                5,
-                wx::Object::none(),
+        let sizer = &config_ui.sizer;
+        sizer.add_stretch_spacer(1);
+        if let Some(file_picker) = self.file_picker.borrow().as_ref() {
+            sizer.add_window_sizerflags(
+                Some(file_picker),
+                wx::SizerFlags::new(0).expand().border(wx::ALL),
             );
         }
-        config_ui
-            .sizer
-            .add_int_int(1, 1, 1, wx::GROW | wx::ALL, 5, wx::Object::none()); // spacer
+        sizer.add_stretch_spacer(1);
+        sizer.add_window_sizerflags(
+            Some(&label_path),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
+        );
+        sizer.add_stretch_spacer(1);
 
         // global pane
         let sz = wx::BoxSizer::new(wx::HORIZONTAL);
         sz.add_sizer_int(Some(&boxleft), 0, wx::GROW | wx::ALL, 5, wx::Object::none());
-        sz.add_sizer_int(
-            Some(&config_ui.sizer),
-            1,
-            wx::GROW | wx::ALL,
-            5,
-            wx::Object::none(),
-        );
+        sz.add_sizer_int(Some(sizer), 1, wx::GROW | wx::ALL, 5, wx::Object::none());
         *self.config_ui.borrow_mut() = Some(config_ui);
 
         self.base.set_sizer(Some(&sz), true);
@@ -172,7 +212,7 @@ impl FilePickerWidgetsPage {
         FilePickerWidgetsPage {
             base: panel,
             config_ui: RefCell::new(None),
-            dir_picker: Rc::new(RefCell::new(None)),
+            file_picker: Rc::new(RefCell::new(None)),
         }
     }
 
@@ -181,10 +221,10 @@ impl FilePickerWidgetsPage {
             config_ui.sizer.remove_int(1);
             self.create_picker(config_ui);
 
-            if let Some(dir_picker) = self.dir_picker.borrow().as_ref() {
+            if let Some(file_picker) = self.file_picker.borrow().as_ref() {
                 config_ui.sizer.insert_window_int(
                     1,
-                    Some(dir_picker),
+                    Some(file_picker),
                     0,
                     wx::EXPAND | wx::ALL,
                     5,
@@ -198,13 +238,16 @@ impl FilePickerWidgetsPage {
 
     fn reset(&self, config_ui: &ConfigUI) {
         config_ui
-            .chk_dir_text_ctrl
+            .chk_file_text_ctrl
             .set_value((wx::DIRP_DEFAULT_STYLE & wx::DIRP_USE_TEXTCTRL) != 0);
         config_ui
-            .chk_dir_must_exist
+            .chk_file_overwrite_prompt
+            .set_value((wx::DIRP_DEFAULT_STYLE & wx::DIRP_USE_TEXTCTRL) != 0);
+        config_ui
+            .chk_file_must_exist
             .set_value((wx::DIRP_DEFAULT_STYLE & wx::DIRP_DIR_MUST_EXIST) != 0);
         config_ui
-            .chk_dir_change_dir
+            .chk_file_change_dir
             .set_value((wx::DIRP_DEFAULT_STYLE & wx::DIRP_CHANGE_DIR) != 0);
         config_ui
             .chk_small
@@ -212,21 +255,25 @@ impl FilePickerWidgetsPage {
     }
 
     fn create_picker(&self, config_ui: &ConfigUI) {
-        if let Some(dir_picker) = self.dir_picker.borrow().as_ref() {
-            dir_picker.destroy();
+        if let Some(file_picker) = self.file_picker.borrow().as_ref() {
+            file_picker.destroy();
         }
 
         let mut style = wx::BORDER_DEFAULT;
 
-        if config_ui.chk_dir_text_ctrl.get_value() {
+        if config_ui.chk_file_text_ctrl.get_value() {
             style |= wx::DIRP_USE_TEXTCTRL as c_long;
         }
 
-        if config_ui.chk_dir_must_exist.get_value() {
+        if config_ui.chk_file_overwrite_prompt.get_value() {
+            style |= wx::DIRP_USE_TEXTCTRL as c_long;
+        }
+
+        if config_ui.chk_file_must_exist.get_value() {
             style |= wx::DIRP_DIR_MUST_EXIST as c_long;
         }
 
-        if config_ui.chk_dir_change_dir.get_value() {
+        if config_ui.chk_file_change_dir.get_value() {
             style |= wx::DIRP_CHANGE_DIR as c_long;
         }
 
@@ -235,18 +282,18 @@ impl FilePickerWidgetsPage {
         }
 
         // FIXME: wxGetHomeDir() is needed?
-        let dir_picker = wx::DirPickerCtrl::builder(Some(&self.base))
-            .id(PickerPage::Dir.into())
+        let file_picker = wx::DirPickerCtrl::builder(Some(&self.base))
+            .id(PickerPage::File.into())
             .message("Hello!".into())
             .style(style)
             .build();
 
-        *self.dir_picker.borrow_mut() = Some(dir_picker);
+        *self.file_picker.borrow_mut() = Some(file_picker);
     }
 
     fn on_button_set_dir(&self, config_ui: &ConfigUI) {
-        if let Some(dir_picker) = self.dir_picker.borrow().as_ref() {
-            dir_picker.set_initial_directory(&config_ui.text_initial_dir.get_value());
+        if let Some(file_picker) = self.file_picker.borrow().as_ref() {
+            file_picker.set_initial_directory(&config_ui.text_initial_dir.get_value());
         }
     }
 
