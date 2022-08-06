@@ -60,6 +60,7 @@ pub struct ConfigUI {
     chk_file_must_exist: wx::CheckBox,
     chk_file_change_dir: wx::CheckBox,
     chk_small: wx::CheckBox,
+    radio_file_picker_mode: wx::RadioBox,
     text_initial_dir: wx::TextCtrl,
 
     sizer: wx::BoxSizer,
@@ -70,7 +71,7 @@ pub struct FilePickerWidgetsPage {
     pub base: wx::Panel,
     config_ui: RefCell<Option<ConfigUI>>,
     // the picker
-    file_picker: Rc<RefCell<Option<wx::DirPickerCtrl>>>,
+    file_picker: Rc<RefCell<Option<wx::FilePickerCtrl>>>,
 }
 impl WidgetsPage for FilePickerWidgetsPage {
     fn base(&self) -> &wx::Panel {
@@ -145,6 +146,7 @@ impl WidgetsPage for FilePickerWidgetsPage {
             chk_file_must_exist,
             chk_file_change_dir,
             chk_small,
+            radio_file_picker_mode,
             text_initial_dir,
 
             sizer,
@@ -216,6 +218,50 @@ impl FilePickerWidgetsPage {
         }
     }
 
+    fn create_picker(&self, config_ui: &ConfigUI) {
+        if let Some(file_picker) = self.file_picker.borrow().as_ref() {
+            file_picker.destroy();
+        }
+
+        let mut style = wx::BORDER_DEFAULT;
+
+        if config_ui.chk_file_text_ctrl.get_value() {
+            style |= wx::FLP_USE_TEXTCTRL as c_long;
+        }
+
+        if config_ui.chk_file_overwrite_prompt.get_value() {
+            style |= wx::FLP_OVERWRITE_PROMPT as c_long;
+        }
+
+        if config_ui.chk_file_must_exist.get_value() {
+            style |= wx::FLP_FILE_MUST_EXIST as c_long;
+        }
+
+        if config_ui.chk_file_change_dir.get_value() {
+            style |= wx::FLP_CHANGE_DIR as c_long;
+        }
+
+        if config_ui.chk_small.get_value() {
+            style |= wx::FLP_SMALL as c_long;
+        }
+
+        if config_ui.radio_file_picker_mode.get_selection() == FilePickerMode::Open.into() {
+            style |= wx::FLP_OPEN as c_long;
+        } else {
+            style |= wx::FLP_SAVE as c_long;
+        }
+
+        // FIXME: wxGetHomeDir() is needed?
+        let file_picker = wx::FilePickerCtrl::builder(Some(&self.base))
+            .id(PickerPage::File.into())
+            .message("Hello!".into())
+            .wildcard("*".into())
+            .style(style)
+            .build();
+
+        *self.file_picker.borrow_mut() = Some(file_picker);
+    }
+
     fn recreate_widget(&self) {
         if let Some(config_ui) = self.config_ui.borrow().as_ref() {
             config_ui.sizer.remove_int(1);
@@ -237,6 +283,15 @@ impl FilePickerWidgetsPage {
     }
 
     fn reset(&self, config_ui: &ConfigUI) {
+        config_ui.radio_file_picker_mode.set_selection(
+            if (wx::FLP_DEFAULT_STYLE & wx::FLP_OPEN) != 0 {
+                FilePickerMode::Open
+            } else {
+                FilePickerMode::Save
+            }
+            .into(),
+        );
+
         config_ui
             .chk_file_text_ctrl
             .set_value((wx::DIRP_DEFAULT_STYLE & wx::DIRP_USE_TEXTCTRL) != 0);
@@ -252,44 +307,30 @@ impl FilePickerWidgetsPage {
         config_ui
             .chk_small
             .set_value((wx::FLP_DEFAULT_STYLE & wx::DIRP_SMALL) != 0);
+
+        self.update_file_picker_mode(config_ui);
     }
 
-    fn create_picker(&self, config_ui: &ConfigUI) {
-        if let Some(file_picker) = self.file_picker.borrow().as_ref() {
-            file_picker.destroy();
+    fn update_file_picker_mode(&self, config_ui: &ConfigUI) {
+        if let Some(mode) = FilePickerMode::from(config_ui.radio_file_picker_mode.get_selection()) {
+            match mode {
+                FilePickerMode::Open => {
+                    config_ui.chk_file_overwrite_prompt.set_value(false);
+                    config_ui.chk_file_overwrite_prompt.disable();
+                    config_ui.chk_file_must_exist.enable(true);
+                }
+                FilePickerMode::Save => {
+                    config_ui.chk_file_must_exist.set_value(false);
+                    config_ui.chk_file_must_exist.disable();
+                    config_ui.chk_file_overwrite_prompt.enable(true);
+                }
+            }
         }
-
-        let mut style = wx::BORDER_DEFAULT;
-
-        if config_ui.chk_file_text_ctrl.get_value() {
-            style |= wx::DIRP_USE_TEXTCTRL as c_long;
-        }
-
-        if config_ui.chk_file_overwrite_prompt.get_value() {
-            style |= wx::DIRP_USE_TEXTCTRL as c_long;
-        }
-
-        if config_ui.chk_file_must_exist.get_value() {
-            style |= wx::DIRP_DIR_MUST_EXIST as c_long;
-        }
-
-        if config_ui.chk_file_change_dir.get_value() {
-            style |= wx::DIRP_CHANGE_DIR as c_long;
-        }
-
-        if config_ui.chk_small.get_value() {
-            style |= wx::DIRP_SMALL as c_long;
-        }
-
-        // FIXME: wxGetHomeDir() is needed?
-        let file_picker = wx::DirPickerCtrl::builder(Some(&self.base))
-            .id(PickerPage::File.into())
-            .message("Hello!".into())
-            .style(style)
-            .build();
-
-        *self.file_picker.borrow_mut() = Some(file_picker);
     }
+
+    // ----------------------------------------------------------------------------
+    // event handlers
+    // ----------------------------------------------------------------------------
 
     fn on_button_set_dir(&self, config_ui: &ConfigUI) {
         if let Some(file_picker) = self.file_picker.borrow().as_ref() {
