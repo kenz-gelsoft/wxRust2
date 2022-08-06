@@ -203,7 +203,7 @@ impl WidgetsPage for FilePickerWidgetsPage {
         self.on_check_box();
     }
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
-        // Do nothing
+        self.on_radio_box();
     }
 }
 impl FilePickerWidgetsPage {
@@ -334,16 +334,25 @@ impl FilePickerWidgetsPage {
 
     fn on_button_set_dir(&self, config_ui: &ConfigUI) {
         if let Some(file_picker) = self.file_picker.borrow().as_ref() {
-            file_picker.set_initial_directory(&config_ui.text_initial_dir.get_value());
+            let dir = config_ui.text_initial_dir.get_value();
+            file_picker.set_initial_directory(&dir);
         }
     }
 
     fn on_button_reset(&self, config_ui: &ConfigUI) {
         self.reset(config_ui);
+
         self.recreate_widget();
     }
 
     fn on_check_box(&self) {
         self.recreate_widget();
+    }
+
+    fn on_radio_box(&self) {
+        if let Some(config_ui) = self.config_ui.borrow().as_ref() {
+            self.update_file_picker_mode(config_ui);
+            self.recreate_widget();
+        }
     }
 }
