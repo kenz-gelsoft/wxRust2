@@ -601,6 +601,51 @@ pub trait BitmapButtonMethods: ButtonMethods {
     }
 }
 
+// wxBitmapToggleButton
+pub trait BitmapToggleButtonMethods: ToggleButtonMethods {
+    fn create_bitmapbundle<
+        W: WindowMethods,
+        B: BitmapBundleMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        V: ValidatorMethods,
+    >(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        label: &B,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        val: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let label = label.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let val = val.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxBitmapToggleButton_Create(
+                self.as_ptr(),
+                parent,
+                id,
+                label,
+                pos,
+                size,
+                style,
+                val,
+                name,
+            )
+        }
+    }
+}
+
 // wxBookCtrlBase
 pub trait BookCtrlBaseMethods: ControlMethods {
     fn get_page_image(&self, n_page: usize) -> c_int {

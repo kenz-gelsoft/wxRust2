@@ -289,6 +289,93 @@ impl<const OWNED: bool> DynamicCast for BitmapButtonIsOwned<OWNED> {
     }
 }
 
+// wxBitmapToggleButton
+wx_class! { BitmapToggleButton =
+    BitmapToggleButtonIsOwned<true>(wxBitmapToggleButton) impl
+        BitmapToggleButtonMethods,
+        ToggleButtonMethods,
+        AnyButtonMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> BitmapToggleButtonIsOwned<OWNED> {
+    pub fn new_2step() -> BitmapToggleButtonIsOwned<OWNED> {
+        unsafe { BitmapToggleButtonIsOwned(ffi::wxBitmapToggleButton_new()) }
+    }
+    pub fn new<
+        W: WindowMethods,
+        B: BitmapBundleMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        V: ValidatorMethods,
+    >(
+        parent: Option<&W>,
+        id: c_int,
+        label: &B,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        val: &V,
+        name: &str,
+    ) -> BitmapToggleButtonIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let label = label.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let val = val.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            BitmapToggleButtonIsOwned(ffi::wxBitmapToggleButton_new1(
+                parent, id, label, pos, size, style, val, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<BitmapToggleButtonIsOwned<OWNED>> for ToggleButtonIsOwned<OWNED> {
+    fn from(o: BitmapToggleButtonIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BitmapToggleButtonIsOwned<OWNED>> for AnyButtonIsOwned<OWNED> {
+    fn from(o: BitmapToggleButtonIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BitmapToggleButtonIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: BitmapToggleButtonIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BitmapToggleButtonIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: BitmapToggleButtonIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BitmapToggleButtonIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: BitmapToggleButtonIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BitmapToggleButtonIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: BitmapToggleButtonIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for BitmapToggleButtonIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxBitmapToggleButton_CLASSINFO()) }
+    }
+}
+
 // wxBookCtrlBase
 wx_class! { BookCtrlBase =
     BookCtrlBaseIsOwned<true>(wxBookCtrlBase) impl

@@ -197,6 +197,12 @@ bool wxBitmapButton_CreateCloseButton(wxBitmapButton * self, wxWindow * parent, 
 wxBitmapButton * wxBitmapButton_NewCloseButton(wxWindow * parent, wxWindowID winid, const wxString * name);
 #endif
 
+// CLASS: wxBitmapToggleButton
+wxClassInfo *wxBitmapToggleButton_CLASSINFO();
+wxBitmapToggleButton *wxBitmapToggleButton_new();
+wxBitmapToggleButton *wxBitmapToggleButton_new1(wxWindow * parent, wxWindowID id, const wxBitmapBundle * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * val, const wxString * name);
+bool wxBitmapToggleButton_Create(wxBitmapToggleButton * self, wxWindow * parent, wxWindowID id, const wxBitmapBundle * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * val, const wxString * name);
+
 // CLASS: wxBookCtrlBase
 wxClassInfo *wxBookCtrlBase_CLASSINFO();
 int wxBookCtrlBase_GetPageImage(const wxBookCtrlBase * self, size_t n_page);

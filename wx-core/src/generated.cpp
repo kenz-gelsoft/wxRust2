@@ -407,6 +407,20 @@ wxBitmapButton * wxBitmapButton_NewCloseButton(wxWindow * parent, wxWindowID win
 }
 #endif
 
+// CLASS: wxBitmapToggleButton
+wxClassInfo *wxBitmapToggleButton_CLASSINFO() {
+    return wxCLASSINFO(wxBitmapToggleButton);
+}
+wxBitmapToggleButton *wxBitmapToggleButton_new() {
+    return new wxBitmapToggleButton();
+}
+wxBitmapToggleButton *wxBitmapToggleButton_new1(wxWindow * parent, wxWindowID id, const wxBitmapBundle * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * val, const wxString * name) {
+    return new wxBitmapToggleButton(parent, id, *label, *pos, *size, style, *val, *name);
+}
+bool wxBitmapToggleButton_Create(wxBitmapToggleButton * self, wxWindow * parent, wxWindowID id, const wxBitmapBundle * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * val, const wxString * name) {
+    return self->Create(parent, id, *label, *pos, *size, style, *val, *name);
+}
+
 // CLASS: wxBookCtrlBase
 wxClassInfo *wxBookCtrlBase_CLASSINFO() {
     return wxCLASSINFO(wxBookCtrlBase);
