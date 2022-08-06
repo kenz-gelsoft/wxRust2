@@ -420,6 +420,17 @@ void wxFileCtrl_SetFilterIndex(wxFileCtrl * self, int filter_index);
 void wxFileCtrl_SetWildcard(wxFileCtrl * self, const wxString * wild_card);
 void wxFileCtrl_ShowHidden(wxFileCtrl * self, bool show);
 
+// CLASS: wxFilePickerCtrl
+wxClassInfo *wxFilePickerCtrl_CLASSINFO();
+wxFilePickerCtrl *wxFilePickerCtrl_new();
+wxFilePickerCtrl *wxFilePickerCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * path, const wxString * message, const wxString * wildcard, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+bool wxFilePickerCtrl_Create(wxFilePickerCtrl * self, wxWindow * parent, wxWindowID id, const wxString * path, const wxString * message, const wxString * wildcard, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+wxFileName *wxFilePickerCtrl_GetFileName(const wxFilePickerCtrl * self);
+wxString *wxFilePickerCtrl_GetPath(const wxFilePickerCtrl * self);
+void wxFilePickerCtrl_SetFileName(wxFilePickerCtrl * self, const wxFileName * filename);
+void wxFilePickerCtrl_SetInitialDirectory(wxFilePickerCtrl * self, const wxString * dir);
+void wxFilePickerCtrl_SetPath(wxFilePickerCtrl * self, const wxString * filename);
+
 // CLASS: wxFont
 wxClassInfo *wxFont_CLASSINFO();
 #if wxCHECK_VERSION(3, 1, 0)

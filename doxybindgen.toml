@@ -27,6 +27,7 @@ wxml_files = [
     'wxml/classwx_evt_handler.xml',
     'wxml/classwx_file_ctrl.xml',
     'wxml/classwx_file_name.xml',
+    'wxml/classwx_file_picker_ctrl.xml',
     'wxml/classwx_font.xml',
     'wxml/classwx_font_picker_ctrl.xml',
     'wxml/classwx_frame.xml',
