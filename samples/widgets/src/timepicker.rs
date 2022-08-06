@@ -6,43 +6,15 @@ use wx::methods::*;
 
 // control ids
 #[derive(Clone, Copy)]
-enum SpinBtnPage {
+enum TimePickerPage {
     Reset = wx::ID_HIGHEST as isize,
-    Clear,
-    SetValue,
-    SetMinAndMax,
-    SetBase,
-    SetIncrement,
-    CurValueText,
-    ValueText,
-    MinText,
-    MaxText,
-    BaseText,
-    SetIncrementText,
-    SpinBtn,
-    SpinCtrl,
-    SpinCtrlDouble,
+    Set,
+    Picker,
 }
-impl SpinBtnPage {
+impl TimePickerPage {
     fn from(v: c_int) -> Option<Self> {
-        use SpinBtnPage::*;
-        for e in [
-            Reset,
-            Clear,
-            SetValue,
-            SetMinAndMax,
-            SetBase,
-            SetIncrement,
-            CurValueText,
-            ValueText,
-            MinText,
-            MaxText,
-            BaseText,
-            SetIncrementText,
-            SpinBtn,
-            SpinCtrl,
-            SpinCtrlDouble,
-        ] {
+        use TimePickerPage::*;
+        for e in [Reset, Set, Picker] {
             if v == e.into() {
                 return Some(e);
             }
@@ -50,8 +22,8 @@ impl SpinBtnPage {
         return None;
     }
 }
-impl From<SpinBtnPage> for c_int {
-    fn from(w: SpinBtnPage) -> Self {
+impl From<TimePickerPage> for c_int {
+    fn from(w: TimePickerPage) -> Self {
         w as c_int
     }
 }
@@ -81,22 +53,21 @@ impl From<Align> for c_int {
 
 #[derive(Clone)]
 pub struct ConfigUI {
-    // the check/radio boxes for styles
-    chk_vert: wx::CheckBox,
-    chk_arrow_keys: wx::CheckBox,
-    chk_wrap: wx::CheckBox,
-    chk_process_enter: wx::CheckBox,
+    // // the check/radio boxes for styles
+    // chk_vert: wx::CheckBox,
+    // chk_arrow_keys: wx::CheckBox,
+    // chk_wrap: wx::CheckBox,
+    // chk_process_enter: wx::CheckBox,
 
-    radio_align: wx::RadioBox,
+    // radio_align: wx::RadioBox,
 
-    // the text entries for set value/range
-    text_value: wx::TextCtrl,
-    text_min: wx::TextCtrl,
-    text_max: wx::TextCtrl,
-    text_base: wx::TextCtrl,
-    text_increment: wx::TextCtrl,
-
-    sizer_spin: wx::BoxSizer,
+    // // the text entries for set value/range
+    // text_value: wx::TextCtrl,
+    // text_min: wx::TextCtrl,
+    // text_max: wx::TextCtrl,
+    // text_base: wx::TextCtrl,
+    // text_increment: wx::TextCtrl,
+    sizer_time_picker: wx::BoxSizer,
 }
 
 #[derive(Clone)]
@@ -130,139 +101,49 @@ impl WidgetsPage for TimePickerWidgetsPage {
         let sizer_top = wx::BoxSizer::new(wx::HORIZONTAL);
 
         // left pane
-        let s_box = wx::StaticBox::builder(Some(&self.base))
-            .label("&Set style")
-            .build();
-        let sizer_left = wx::StaticBoxSizer::new_with_staticbox(Some(&s_box), wx::VERTICAL);
-
-        let chk_vert = self.create_check_box_and_add_to_sizer(&sizer_left, "&Vertical", wx::ID_ANY);
-        let chk_arrow_keys =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "&Arrow Keys", wx::ID_ANY);
-        let chk_wrap = self.create_check_box_and_add_to_sizer(&sizer_left, "&Wrap", wx::ID_ANY);
-        let chk_process_enter =
-            self.create_check_box_and_add_to_sizer(&sizer_left, "Process &Enter", wx::ID_ANY);
-
-        sizer_left.add_int_int(5, 5, 0, wx::GROW | wx::ALL, 5, wx::Object::none()); // spacer
-
-        let halign = wx::ArrayString::new();
-        halign.add("left");
-        halign.add("centre");
-        halign.add("right");
-
-        let radio_align = wx::RadioBox::builder(Some(&self.base))
-            .label("&Text alignment")
-            .choices(halign)
-            .major_dimension(1)
-            .build();
-        sizer_left.add_window_int(
-            Some(&radio_align),
-            0,
-            wx::GROW | wx::ALL,
-            5,
-            wx::Object::none(),
-        );
-
-        sizer_left.add_int_int(5, 5, 0, wx::GROW | wx::ALL, 5, wx::Object::none()); // spacer
-
-        let btn = wx::Button::builder(Some(&self.base))
-            .id(SpinBtnPage::Reset.into())
-            .label("&Reset")
-            .build();
-        sizer_left.add_window_int(
-            Some(&btn),
-            0,
-            wx::ALIGN_CENTRE_HORIZONTAL | wx::ALL,
-            15,
-            wx::Object::none(),
+        let sizer_left = wx::BoxSizer::new(wx::VERTICAL);
+        sizer_left.add_window_sizerflags(
+            Some(
+                &wx::Button::builder(Some(&self.base))
+                    .id(TimePickerPage::Reset.into())
+                    .label("&Reset")
+                    .build(),
+            ),
+            wx::SizerFlags::new(0).centre().border(wx::ALL),
         );
 
         // middle pane
-        let s_box2 = wx::StaticBox::builder(Some(&self.base))
-            .label("&Change spinbtn value")
-            .build();
-        let sizer_middle = wx::StaticBoxSizer::new_with_staticbox(Some(&s_box2), wx::VERTICAL);
-
-        let (sizer_row, text) = self
-            .create_sizer_with_text_and_label("Current value", SpinBtnPage::CurValueText.into());
-        text.set_editable(false);
-        sizer_middle.add_sizer_int(
+        let sizer_middle = wx::BoxSizer::new(wx::VERTICAL);
+        let (sizer_row, text_cur) = self.create_sizer_with_text_and_button(
+            TimePickerPage::Set.into(),
+            "&Set time",
+            wx::ID_ANY,
+        );
+        sizer_middle.add_sizer_sizerflags(
             Some(&sizer_row),
-            0,
-            wx::ALL | wx::GROW,
-            5,
-            wx::Object::none(),
+            wx::SizerFlags::new(0).expand().border(wx::ALL),
         );
+        text_cur.set_min_size(&wx::Size::new_with_int(
+            self.base.get_text_extent("  99:99:99  ").get_width(),
+            -1,
+        ));
 
-        let (sizer_row, text_value) = self.create_sizer_with_text_and_button(
-            SpinBtnPage::SetValue.into(),
-            "Set &value",
-            SpinBtnPage::ValueText.into(),
-        );
-        sizer_middle.add_sizer_int(
-            Some(&sizer_row),
-            0,
-            wx::ALL | wx::GROW,
-            5,
-            wx::Object::none(),
-        );
+        // right pane: control itself
+        let sizer_right = wx::BoxSizer::new(wx::HORIZONTAL);
 
-        let (sizer_row, text_min) = self.create_sizer_with_text_and_button(
-            SpinBtnPage::SetMinAndMax.into(),
-            "&Min and max",
-            SpinBtnPage::MinText.into(),
-        );
-        let text_max = wx::TextCtrl::builder(Some(&self.base))
-            .id(SpinBtnPage::MaxText.into())
+        let time_picker = wx::TimePickerCtrl::builder(Some(&self.base))
+            .id(TimePickerPage::Picker.into())
             .build();
-        sizer_row.add_window_int(
-            Some(&text_max),
+
+        sizer_right.add_int_int(0, 0, 1, wx::CENTRE as c_int, 0, wx::Object::none());
+        sizer_right.add_window_int(
+            Some(&time_picker),
             1,
-            wx::LEFT | wx::ALIGN_CENTRE_VERTICAL,
-            5,
-            wx::Object::none(),
-        );
-        let (min, max) = (*self.min.borrow(), *self.max.borrow());
-        text_min.set_value(&format!("{}", min));
-        text_max.set_value(&format!("{}", max));
-        sizer_middle.add_sizer_int(
-            Some(&sizer_row),
+            wx::CENTRE as c_int,
             0,
-            wx::ALL | wx::GROW,
-            5,
             wx::Object::none(),
         );
-
-        let (sizer_row, text_base) = self.create_sizer_with_text_and_button(
-            SpinBtnPage::SetBase.into(),
-            "Set &base",
-            SpinBtnPage::BaseText.into(),
-        );
-        text_base.set_value("10");
-        sizer_middle.add_sizer_int(
-            Some(&sizer_row),
-            0,
-            wx::ALL | wx::GROW,
-            5,
-            wx::Object::none(),
-        );
-
-        let (sizer_row, text_increment) = self.create_sizer_with_text_and_button(
-            SpinBtnPage::SetIncrement.into(),
-            "Set Increment",
-            SpinBtnPage::SetIncrementText.into(),
-        );
-        text_increment.set_value("1");
-        sizer_middle.add_sizer_int(
-            Some(&sizer_row),
-            0,
-            wx::ALL | wx::GROW,
-            5,
-            wx::Object::none(),
-        );
-
-        // right pane
-        let sizer_right = wx::BoxSizer::new(wx::VERTICAL);
-        sizer_right.set_min_size_int(150, 0);
+        sizer_right.add_int_int(0, 0, 1, wx::CENTRE as c_int, 0, wx::Object::none());
 
         // the 3 panes panes compose the window
         sizer_top.add_sizer_int(
@@ -274,8 +155,8 @@ impl WidgetsPage for TimePickerWidgetsPage {
         );
         sizer_top.add_sizer_int(
             Some(&sizer_middle),
-            1,
-            wx::GROW | wx::ALL,
+            0,
+            wx::TOP | wx::BOTTOM,
             10,
             wx::Object::none(),
         );
@@ -288,26 +169,25 @@ impl WidgetsPage for TimePickerWidgetsPage {
         );
 
         let config_ui = ConfigUI {
-            chk_vert,
-            chk_arrow_keys,
-            chk_wrap,
-            chk_process_enter,
+            // chk_vert,
+            // chk_arrow_keys,
+            // chk_wrap,
+            // chk_process_enter,
 
-            radio_align,
+            // radio_align,
 
-            text_value,
-            text_min,
-            text_max,
-            text_base,
-            text_increment,
-
-            sizer_spin: sizer_right, // save it to modify it later
+            // text_value,
+            // text_min,
+            // text_max,
+            // text_base,
+            // text_increment,
+            sizer_time_picker: sizer_right, // save it to modify it later
         };
-        self.reset(&config_ui);
-        self.create_spin(&config_ui);
-        *self.config_ui.borrow_mut() = Some(config_ui);
 
         // final initializations
+        self.reset(&config_ui);
+        *self.config_ui.borrow_mut() = Some(config_ui);
+
         self.base.set_sizer(Some(&sizer_top), true);
     }
 
@@ -315,14 +195,14 @@ impl WidgetsPage for TimePickerWidgetsPage {
         println!("event={}", event.get_id());
         if let (Some(config_ui), Some(m)) = (
             self.config_ui.borrow().as_ref(),
-            SpinBtnPage::from(event.get_id()),
+            TimePickerPage::from(event.get_id()),
         ) {
             match m {
-                SpinBtnPage::Reset => self.on_button_reset(config_ui),
-                SpinBtnPage::SetValue => self.on_button_set_value(config_ui),
-                SpinBtnPage::SetMinAndMax => self.on_button_set_min_and_max(config_ui),
-                SpinBtnPage::SetBase => self.on_button_set_base(config_ui),
-                SpinBtnPage::SetIncrement => self.on_button_set_increment(config_ui),
+                TimePickerPage::Reset => self.on_button_reset(config_ui),
+                // TimePickerPage::SetValue => self.on_button_set_value(config_ui),
+                // TimePickerPage::SetMinAndMax => self.on_button_set_min_and_max(config_ui),
+                // TimePickerPage::SetBase => self.on_button_set_base(config_ui),
+                // TimePickerPage::SetIncrement => self.on_button_set_increment(config_ui),
                 _ => (),
             };
         }
@@ -357,40 +237,40 @@ impl TimePickerWidgetsPage {
     }
 
     fn reset(&self, config_ui: &ConfigUI) {
-        config_ui.chk_vert.set_value(true);
-        config_ui.chk_arrow_keys.set_value(true);
-        config_ui.chk_wrap.set_value(false);
-        config_ui.chk_process_enter.set_value(false);
-        config_ui.radio_align.set_selection(Align::Right.into());
+        // config_ui.chk_vert.set_value(true);
+        // config_ui.chk_arrow_keys.set_value(true);
+        // config_ui.chk_wrap.set_value(false);
+        // config_ui.chk_process_enter.set_value(false);
+        // config_ui.radio_align.set_selection(Align::Right.into());
     }
 
     fn create_spin(&self, config_ui: &ConfigUI) {
         let mut flags = wx::BORDER_DEFAULT;
 
-        flags |= if config_ui.chk_vert.get_value() {
-            wx::SP_VERTICAL
-        } else {
-            wx::SP_HORIZONTAL
-        } as c_long;
+        // flags |= if config_ui.chk_vert.get_value() {
+        //     wx::SP_VERTICAL
+        // } else {
+        //     wx::SP_HORIZONTAL
+        // } as c_long;
 
-        if config_ui.chk_arrow_keys.get_value() {
-            flags |= wx::SP_ARROW_KEYS as c_long;
-        }
-        if config_ui.chk_wrap.get_value() {
-            flags |= wx::SP_WRAP as c_long;
-        }
-        if config_ui.chk_process_enter.get_value() {
-            flags |= wx::TE_PROCESS_ENTER as c_long;
-        }
+        // if config_ui.chk_arrow_keys.get_value() {
+        //     flags |= wx::SP_ARROW_KEYS as c_long;
+        // }
+        // if config_ui.chk_wrap.get_value() {
+        //     flags |= wx::SP_WRAP as c_long;
+        // }
+        // if config_ui.chk_process_enter.get_value() {
+        //     flags |= wx::TE_PROCESS_ENTER as c_long;
+        // }
 
         let mut text_flags = 0;
-        if let Some(align) = Align::from(config_ui.radio_align.get_selection()) {
-            text_flags = match align {
-                Align::Centre => wx::ALIGN_CENTRE_HORIZONTAL,
-                Align::Right => wx::ALIGN_RIGHT,
-                _ => wx::ALIGN_LEFT, // no-op
-            } as c_long;
-        }
+        // if let Some(align) = Align::from(config_ui.radio_align.get_selection()) {
+        //     text_flags = match align {
+        //         Align::Centre => wx::ALIGN_CENTRE_HORIZONTAL,
+        //         Align::Right => wx::ALIGN_RIGHT,
+        //         _ => wx::ALIGN_LEFT, // no-op
+        //     } as c_long;
+        // }
 
         let mut val = *self.min.borrow();
         if let Some(spinbtn) = self.spinbtn.borrow().as_ref() {
@@ -398,11 +278,11 @@ impl TimePickerWidgetsPage {
             if self.is_valid_value(val_old) {
                 val = val_old;
             }
-            config_ui.sizer_spin.clear(true);
+            config_ui.sizer_time_picker.clear(true);
         }
 
         let spinbtn = wx::SpinButton::builder(Some(&self.base))
-            .id(SpinBtnPage::SpinBtn.into())
+            // .id(TimePickerPage::SpinBtn.into())
             .style(flags | text_flags)
             .build();
         spinbtn.set_value(val);
@@ -410,7 +290,7 @@ impl TimePickerWidgetsPage {
         spinbtn.set_range(min, max);
 
         let spinctrl = wx::SpinCtrl::builder(Some(&self.base))
-            .id(SpinBtnPage::SpinCtrl.into())
+            // .id(TimePickerPage::SpinCtrl.into())
             .value(&format!("{}", val))
             .style(flags | text_flags)
             .min(min)
@@ -419,7 +299,7 @@ impl TimePickerWidgetsPage {
             .build();
 
         let spinctrldbl = wx::SpinCtrlDouble::builder(Some(&self.base))
-            .id(SpinBtnPage::SpinCtrlDouble.into())
+            // .id(TimePickerPage::SpinCtrlDouble.into())
             .value(&format!("{}", val))
             .style(flags | text_flags)
             .min(min.into())
@@ -429,10 +309,10 @@ impl TimePickerWidgetsPage {
             .build();
 
         // Add spacers, labels and spin controls to the sizer.
-        let sizer_spin = &config_ui.sizer_spin;
+        let sizer_time_picker = &config_ui.sizer_time_picker;
 
-        sizer_spin.add_int_int(0, 0, 1, 0, 0, wx::Object::none());
-        sizer_spin.add_window_int(
+        sizer_time_picker.add_int_int(0, 0, 1, 0, 0, wx::Object::none());
+        sizer_time_picker.add_window_int(
             Some(
                 &wx::StaticText::builder(Some(&self.base))
                     .label("wxSpinButton")
@@ -443,7 +323,7 @@ impl TimePickerWidgetsPage {
             5,
             wx::Object::none(),
         );
-        sizer_spin.add_window_int(
+        sizer_time_picker.add_window_int(
             Some(&spinbtn),
             0,
             wx::ALIGN_CENTRE | wx::ALL,
@@ -452,8 +332,8 @@ impl TimePickerWidgetsPage {
         );
         *self.spinbtn.borrow_mut() = Some(spinbtn);
 
-        sizer_spin.add_int_int(0, 0, 1, 0, 0, wx::Object::none());
-        sizer_spin.add_window_int(
+        sizer_time_picker.add_int_int(0, 0, 1, 0, 0, wx::Object::none());
+        sizer_time_picker.add_window_int(
             Some(
                 &wx::StaticText::builder(Some(&self.base))
                     .label("wxSpinCtrl")
@@ -464,7 +344,7 @@ impl TimePickerWidgetsPage {
             5,
             wx::Object::none(),
         );
-        sizer_spin.add_window_int(
+        sizer_time_picker.add_window_int(
             Some(&spinctrl),
             0,
             wx::ALIGN_CENTRE | wx::ALL,
@@ -473,8 +353,8 @@ impl TimePickerWidgetsPage {
         );
         *self.spinctrl.borrow_mut() = Some(spinctrl);
 
-        sizer_spin.add_int_int(0, 0, 1, 0, 0, wx::Object::none());
-        sizer_spin.add_window_int(
+        sizer_time_picker.add_int_int(0, 0, 1, 0, 0, wx::Object::none());
+        sizer_time_picker.add_window_int(
             Some(
                 &wx::StaticText::builder(Some(&self.base))
                     .label("wxSpinCtrlDouble")
@@ -485,7 +365,7 @@ impl TimePickerWidgetsPage {
             5,
             wx::Object::none(),
         );
-        sizer_spin.add_window_int(
+        sizer_time_picker.add_window_int(
             Some(&spinctrldbl),
             0,
             wx::ALIGN_CENTRE | wx::ALL,
@@ -494,9 +374,9 @@ impl TimePickerWidgetsPage {
         );
         *self.spinctrldbl.borrow_mut() = Some(spinctrldbl);
 
-        sizer_spin.add_int_int(0, 0, 1, 0, 0, wx::Object::none());
+        sizer_time_picker.add_int_int(0, 0, 1, 0, 0, wx::Object::none());
 
-        config_ui.sizer_spin.layout();
+        config_ui.sizer_time_picker.layout();
     }
 
     // is this spinbtn value in range?
@@ -517,52 +397,52 @@ impl TimePickerWidgetsPage {
     }
 
     fn on_button_set_min_and_max(&self, config_ui: &ConfigUI) {
-        let min_new = config_ui.text_min.get_value();
-        let max_new = config_ui.text_max.get_value();
-        if let (Ok(min_new), Ok(max_new), Some(spinbtn), Some(spinctrl), Some(spinctrldbl)) = (
-            min_new.parse(),
-            max_new.parse(),
-            self.spinbtn.borrow().as_ref(),
-            self.spinctrl.borrow().as_ref(),
-            self.spinctrldbl.borrow().as_ref(),
-        ) {
-            if min_new > max_new {
-                return;
-            }
+        // let min_new = config_ui.text_min.get_value();
+        // let max_new = config_ui.text_max.get_value();
+        // if let (Ok(min_new), Ok(max_new), Some(spinbtn), Some(spinctrl), Some(spinctrldbl)) = (
+        //     min_new.parse(),
+        //     max_new.parse(),
+        //     self.spinbtn.borrow().as_ref(),
+        //     self.spinctrl.borrow().as_ref(),
+        //     self.spinctrldbl.borrow().as_ref(),
+        // ) {
+        //     if min_new > max_new {
+        //         return;
+        //     }
 
-            *self.min.borrow_mut() = min_new;
-            *self.max.borrow_mut() = max_new;
+        //     *self.min.borrow_mut() = min_new;
+        //     *self.max.borrow_mut() = max_new;
 
-            spinbtn.set_range(min_new, max_new);
-            spinctrl.set_range(min_new, max_new);
-            spinctrldbl.set_range(min_new.into(), max_new.into());
+        //     spinbtn.set_range(min_new, max_new);
+        //     spinctrl.set_range(min_new, max_new);
+        //     spinctrldbl.set_range(min_new.into(), max_new.into());
 
-            config_ui.sizer_spin.layout();
-        }
+        //     config_ui.sizer_time_picker.layout();
+        // }
     }
 
     fn on_button_set_base(&self, config_ui: &ConfigUI) {
-        let base = config_ui.text_base.get_value();
-        if let (Ok(base), Some(spinctrl)) = (base.parse(), self.spinctrl.borrow().as_ref()) {
-            *self.base_val.borrow_mut() = base;
+        // let base = config_ui.text_base.get_value();
+        // if let (Ok(base), Some(spinctrl)) = (base.parse(), self.spinctrl.borrow().as_ref()) {
+        //     *self.base_val.borrow_mut() = base;
 
-            spinctrl.set_base(base);
+        //     spinctrl.set_base(base);
 
-            config_ui.sizer_spin.layout();
-        }
+        //     config_ui.sizer_time_picker.layout();
+        // }
     }
 
     fn on_button_set_increment(&self, config_ui: &ConfigUI) {
-        let increment = config_ui.text_increment.get_value();
-        if let (Ok(increment), Some(spinctrl)) =
-            (increment.parse(), self.spinctrl.borrow().as_ref())
-        {
-            *self.increment.borrow_mut() = increment;
+        // let increment = config_ui.text_increment.get_value();
+        // if let (Ok(increment), Some(spinctrl)) =
+        //     (increment.parse(), self.spinctrl.borrow().as_ref())
+        // {
+        //     *self.increment.borrow_mut() = increment;
 
-            spinctrl.set_increment(increment);
+        //     spinctrl.set_increment(increment);
 
-            config_ui.sizer_spin.layout();
-        }
+        //     config_ui.sizer_time_picker.layout();
+        // }
     }
 
     fn on_button_set_value(&self, config_ui: &ConfigUI) {
@@ -571,21 +451,21 @@ impl TimePickerWidgetsPage {
             self.spinctrl.borrow().as_ref(),
             self.spinctrldbl.borrow().as_ref(),
         ) {
-            if config_ui.text_value.is_empty() {
-                spinctrl.set_value_str("");
-                spinctrldbl.set_value_str("");
-                return;
-            }
+            // if config_ui.text_value.is_empty() {
+            //     spinctrl.set_value_str("");
+            //     spinctrldbl.set_value_str("");
+            //     return;
+            // }
 
-            let val = config_ui.text_value.get_value();
-            if let Ok(val) = val.parse() {
-                if !self.is_valid_value(val) {
-                    return;
-                }
-                spinbtn.set_value(val);
-                spinctrl.set_value_int(val);
-                spinctrldbl.set_value_double(val.into());
-            }
+            // let val = config_ui.text_value.get_value();
+            // if let Ok(val) = val.parse() {
+            //     if !self.is_valid_value(val) {
+            //         return;
+            //     }
+            //     spinbtn.set_value(val);
+            //     spinctrl.set_value_int(val);
+            //     spinctrldbl.set_value_double(val.into());
+            // }
         }
     }
 
