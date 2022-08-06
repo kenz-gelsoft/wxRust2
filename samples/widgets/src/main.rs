@@ -37,6 +37,9 @@ use editlbox::*;
 mod filectrl;
 use filectrl::*;
 
+mod filepicker;
+use filepicker::*;
+
 mod fontpicker;
 use fontpicker::*;
 
@@ -174,6 +177,7 @@ impl WidgetsFrame {
         let dirpicker_page = Rc::new(DirPickerWidgetsPage::new(&book));
         let editlbox_page = Rc::new(EditableListboxWidgetsPage::new(&book));
         let filectrl_page = Rc::new(FileCtrlWidgetsPage::new(&book));
+        let filepicker_page = Rc::new(FilePickerWidgetsPage::new(&book));
         let fontpicker_page = Rc::new(FontPickerWidgetsPage::new(&book));
         let gauge_page = Rc::new(GaugeWidgetsPage::new(&book));
         let headerctrl_page = Rc::new(HeaderCtrlWidgetsPage::new(&book));
@@ -189,7 +193,7 @@ impl WidgetsFrame {
             panel,
             book,
             pages: vec![
-                toggle_page,
+                filepicker_page,
                 button_page,
                 check_box_page,
                 choice_page,
@@ -209,6 +213,7 @@ impl WidgetsFrame {
                 slider_page,
                 spinbutton_page,
                 timepicker_page,
+                toggle_page,
             ],
         };
         frame.on_create();
