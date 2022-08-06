@@ -193,7 +193,6 @@ impl WidgetsFrame {
             panel,
             book,
             pages: vec![
-                filepicker_page,
                 button_page,
                 check_box_page,
                 choice_page,
@@ -204,6 +203,7 @@ impl WidgetsFrame {
                 dirpicker_page,
                 editlbox_page,
                 filectrl_page,
+                filepicker_page,
                 fontpicker_page,
                 gauge_page,
                 headerctrl_page,
