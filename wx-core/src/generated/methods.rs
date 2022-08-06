@@ -5399,6 +5399,88 @@ pub trait SpinCtrlMethods: ControlMethods {
     }
 }
 
+// wxSpinCtrlDouble
+pub trait SpinCtrlDoubleMethods: ControlMethods {
+    fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        value: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        min: c_double,
+        max: c_double,
+        initial: c_double,
+        inc: c_double,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let value = WxString::from(value);
+            let value = value.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxSpinCtrlDouble_Create(
+                self.as_ptr(),
+                parent,
+                id,
+                value,
+                pos,
+                size,
+                style,
+                min,
+                max,
+                initial,
+                inc,
+                name,
+            )
+        }
+    }
+    fn get_digits(&self) -> c_uint {
+        unsafe { ffi::wxSpinCtrlDouble_GetDigits(self.as_ptr()) }
+    }
+    fn get_increment(&self) -> c_double {
+        unsafe { ffi::wxSpinCtrlDouble_GetIncrement(self.as_ptr()) }
+    }
+    fn get_max(&self) -> c_double {
+        unsafe { ffi::wxSpinCtrlDouble_GetMax(self.as_ptr()) }
+    }
+    fn get_min(&self) -> c_double {
+        unsafe { ffi::wxSpinCtrlDouble_GetMin(self.as_ptr()) }
+    }
+    fn get_text_value(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxSpinCtrlDouble_GetTextValue(self.as_ptr())).into() }
+    }
+    fn get_value(&self) -> c_double {
+        unsafe { ffi::wxSpinCtrlDouble_GetValue(self.as_ptr()) }
+    }
+    fn set_digits(&self, digits: c_uint) {
+        unsafe { ffi::wxSpinCtrlDouble_SetDigits(self.as_ptr(), digits) }
+    }
+    fn set_increment(&self, inc: c_double) {
+        unsafe { ffi::wxSpinCtrlDouble_SetIncrement(self.as_ptr(), inc) }
+    }
+    fn set_range(&self, min_val: c_double, max_val: c_double) {
+        unsafe { ffi::wxSpinCtrlDouble_SetRange(self.as_ptr(), min_val, max_val) }
+    }
+    fn set_value_str(&self, text: &str) {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxSpinCtrlDouble_SetValue(self.as_ptr(), text)
+        }
+    }
+    fn set_value_double(&self, value: c_double) {
+        unsafe { ffi::wxSpinCtrlDouble_SetValue1(self.as_ptr(), value) }
+    }
+}
+
 // wxStaticBitmap
 pub trait StaticBitmapMethods: ControlMethods {
     fn create_bitmapbundle<

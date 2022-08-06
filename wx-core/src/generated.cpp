@@ -3199,6 +3199,53 @@ void wxSpinCtrl_SetIncrement(wxSpinCtrl * self, int value) {
     return self->SetIncrement(value);
 }
 
+// CLASS: wxSpinCtrlDouble
+wxClassInfo *wxSpinCtrlDouble_CLASSINFO() {
+    return wxCLASSINFO(wxSpinCtrlDouble);
+}
+wxSpinCtrlDouble *wxSpinCtrlDouble_new() {
+    return new wxSpinCtrlDouble();
+}
+wxSpinCtrlDouble *wxSpinCtrlDouble_new1(wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, double min, double max, double initial, double inc, const wxString * name) {
+    return new wxSpinCtrlDouble(parent, id, *value, *pos, *size, style, min, max, initial, inc, *name);
+}
+bool wxSpinCtrlDouble_Create(wxSpinCtrlDouble * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, double min, double max, double initial, double inc, const wxString * name) {
+    return self->Create(parent, id, *value, *pos, *size, style, min, max, initial, inc, *name);
+}
+unsigned int wxSpinCtrlDouble_GetDigits(const wxSpinCtrlDouble * self) {
+    return self->GetDigits();
+}
+double wxSpinCtrlDouble_GetIncrement(const wxSpinCtrlDouble * self) {
+    return self->GetIncrement();
+}
+double wxSpinCtrlDouble_GetMax(const wxSpinCtrlDouble * self) {
+    return self->GetMax();
+}
+double wxSpinCtrlDouble_GetMin(const wxSpinCtrlDouble * self) {
+    return self->GetMin();
+}
+wxString *wxSpinCtrlDouble_GetTextValue(const wxSpinCtrlDouble * self) {
+    return new wxString(self->GetTextValue());
+}
+double wxSpinCtrlDouble_GetValue(const wxSpinCtrlDouble * self) {
+    return self->GetValue();
+}
+void wxSpinCtrlDouble_SetDigits(wxSpinCtrlDouble * self, unsigned int digits) {
+    return self->SetDigits(digits);
+}
+void wxSpinCtrlDouble_SetIncrement(wxSpinCtrlDouble * self, double inc) {
+    return self->SetIncrement(inc);
+}
+void wxSpinCtrlDouble_SetRange(wxSpinCtrlDouble * self, double min_val, double max_val) {
+    return self->SetRange(min_val, max_val);
+}
+void wxSpinCtrlDouble_SetValue(wxSpinCtrlDouble * self, const wxString * text) {
+    return self->SetValue(*text);
+}
+void wxSpinCtrlDouble_SetValue1(wxSpinCtrlDouble * self, double value) {
+    return self->SetValue(value);
+}
+
 // CLASS: wxStaticBitmap
 wxClassInfo *wxStaticBitmap_CLASSINFO() {
     return wxCLASSINFO(wxStaticBitmap);

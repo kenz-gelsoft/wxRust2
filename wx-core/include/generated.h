@@ -1243,6 +1243,23 @@ void wxSpinCtrl_SetValue(wxSpinCtrl * self, const wxString * text);
 void wxSpinCtrl_SetValue1(wxSpinCtrl * self, int value);
 void wxSpinCtrl_SetIncrement(wxSpinCtrl * self, int value);
 
+// CLASS: wxSpinCtrlDouble
+wxClassInfo *wxSpinCtrlDouble_CLASSINFO();
+wxSpinCtrlDouble *wxSpinCtrlDouble_new();
+wxSpinCtrlDouble *wxSpinCtrlDouble_new1(wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, double min, double max, double initial, double inc, const wxString * name);
+bool wxSpinCtrlDouble_Create(wxSpinCtrlDouble * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, double min, double max, double initial, double inc, const wxString * name);
+unsigned int wxSpinCtrlDouble_GetDigits(const wxSpinCtrlDouble * self);
+double wxSpinCtrlDouble_GetIncrement(const wxSpinCtrlDouble * self);
+double wxSpinCtrlDouble_GetMax(const wxSpinCtrlDouble * self);
+double wxSpinCtrlDouble_GetMin(const wxSpinCtrlDouble * self);
+wxString *wxSpinCtrlDouble_GetTextValue(const wxSpinCtrlDouble * self);
+double wxSpinCtrlDouble_GetValue(const wxSpinCtrlDouble * self);
+void wxSpinCtrlDouble_SetDigits(wxSpinCtrlDouble * self, unsigned int digits);
+void wxSpinCtrlDouble_SetIncrement(wxSpinCtrlDouble * self, double inc);
+void wxSpinCtrlDouble_SetRange(wxSpinCtrlDouble * self, double min_val, double max_val);
+void wxSpinCtrlDouble_SetValue(wxSpinCtrlDouble * self, const wxString * text);
+void wxSpinCtrlDouble_SetValue1(wxSpinCtrlDouble * self, double value);
+
 // CLASS: wxStaticBitmap
 wxClassInfo *wxStaticBitmap_CLASSINFO();
 wxStaticBitmap *wxStaticBitmap_new();

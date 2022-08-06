@@ -2308,6 +2308,48 @@ extern "C" {
     pub fn wxSpinCtrl_SetValue1(self_: *mut c_void, value: c_int);
     pub fn wxSpinCtrl_SetIncrement(self_: *mut c_void, value: c_int);
 
+    // wxSpinCtrlDouble
+    pub fn wxSpinCtrlDouble_CLASSINFO() -> *mut c_void;
+    pub fn wxSpinCtrlDouble_new() -> *mut c_void;
+    pub fn wxSpinCtrlDouble_new1(
+        parent: *mut c_void,
+        id: c_int,
+        value: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        min: c_double,
+        max: c_double,
+        initial: c_double,
+        inc: c_double,
+        name: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxSpinCtrlDouble_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        value: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        min: c_double,
+        max: c_double,
+        initial: c_double,
+        inc: c_double,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxSpinCtrlDouble_GetDigits(self_: *const c_void) -> c_uint;
+    pub fn wxSpinCtrlDouble_GetIncrement(self_: *const c_void) -> c_double;
+    pub fn wxSpinCtrlDouble_GetMax(self_: *const c_void) -> c_double;
+    pub fn wxSpinCtrlDouble_GetMin(self_: *const c_void) -> c_double;
+    pub fn wxSpinCtrlDouble_GetTextValue(self_: *const c_void) -> *mut c_void;
+    pub fn wxSpinCtrlDouble_GetValue(self_: *const c_void) -> c_double;
+    pub fn wxSpinCtrlDouble_SetDigits(self_: *mut c_void, digits: c_uint);
+    pub fn wxSpinCtrlDouble_SetIncrement(self_: *mut c_void, inc: c_double);
+    pub fn wxSpinCtrlDouble_SetRange(self_: *mut c_void, min_val: c_double, max_val: c_double);
+    pub fn wxSpinCtrlDouble_SetValue(self_: *mut c_void, text: *const c_void);
+    pub fn wxSpinCtrlDouble_SetValue1(self_: *mut c_void, value: c_double);
+
     // wxStaticBitmap
     pub fn wxStaticBitmap_CLASSINFO() -> *mut c_void;
     pub fn wxStaticBitmap_new() -> *mut c_void;
