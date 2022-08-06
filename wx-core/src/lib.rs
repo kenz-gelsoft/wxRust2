@@ -1660,9 +1660,9 @@ pub struct SpinCtrlBuilder<'a, P: WindowMethods> {
     pos: Option<Point>,
     size: Option<Size>,
     style: c_long,
-    initial: c_int,
     min: c_int,
     max: c_int,
+    initial: c_int,
 }
 impl<'a, P: WindowMethods> Buildable<'a, P, SpinCtrlBuilder<'a, P>> for SpinCtrl {
     fn builder(parent: Option<&'a P>) -> SpinCtrlBuilder<'a, P> {
@@ -1673,9 +1673,9 @@ impl<'a, P: WindowMethods> Buildable<'a, P, SpinCtrlBuilder<'a, P>> for SpinCtrl
             pos: None,
             size: None,
             style: 0,
-            initial: 0,
             min: 0,
             max: 0,
+            initial: 0,
         }
     }
 }
@@ -1700,16 +1700,16 @@ impl<'a, P: WindowMethods> SpinCtrlBuilder<'a, P> {
         self.style = style;
         self
     }
-    pub fn initial(&mut self, initial: c_int) -> &mut Self {
-        self.initial = initial;
-        self
-    }
     pub fn min(&mut self, min: c_int) -> &mut Self {
         self.min = min;
         self
     }
     pub fn max(&mut self, max: c_int) -> &mut Self {
         self.max = max;
+        self
+    }
+    pub fn initial(&mut self, initial: c_int) -> &mut Self {
+        self.initial = initial;
         self
     }
     pub fn build(&mut self) -> SpinCtrl {
@@ -1722,9 +1722,9 @@ impl<'a, P: WindowMethods> SpinCtrlBuilder<'a, P> {
             &pos,
             &size,
             self.style,
-            self.initial,
             self.min,
             self.max,
+            self.initial,
             "",
         )
     }
