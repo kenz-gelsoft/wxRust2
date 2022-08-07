@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-2.0-or-later WITH WxWindows-exception-3.1
+//
 // wxWidgets Sample (partially/incompletely) ported in Rust.
 // Ported by:   KENZ<KENZ.gelsoft@gmail.com>
 // Original C++ Version's Copyright is:
@@ -8,7 +10,6 @@
 // Author:      Vadim Zeitlin
 // Created:     2015-03-06
 // Copyright:   (c) 2015 wxWindows team
-// Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
 use std::os::raw::c_int;

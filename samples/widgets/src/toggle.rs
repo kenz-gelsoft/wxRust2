@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-2.0-or-later WITH WxWindows-exception-3.1
+//
 // wxWidgets Sample (partially/incompletely) ported in Rust.
 // Ported by:   KENZ<KENZ.gelsoft@gmail.com>
 // Original C++ Version's Copyright is:
@@ -8,7 +10,6 @@
 // Author:      Dimitri Schoolwerth, Vadim Zeitlin
 // Created:     27 Sep 2003
 // Copyright:   (c) 2006 Wlodzmierz Skiba
-// Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
 use crate::WidgetsPage;
