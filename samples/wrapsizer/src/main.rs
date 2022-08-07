@@ -1,3 +1,12 @@
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wrapsizer.cpp
+// Purpose:     wxWidgets sample demonstrating wxWrapSizer use
+// Author:      Arne Steinarson
+// Created:     21.01.2008
+// Copyright:   (c) Arne Steinarson
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
 #![windows_subsystem = "windows"]
 
 use wx;

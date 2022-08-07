@@ -1,3 +1,13 @@
+/////////////////////////////////////////////////////////////////////////////
+// Program:     wxWidgets Widgets Sample
+// Name:        activityindicator.cpp
+// Purpose:     Part of the widgets sample showing wxActivityIndicator
+// Author:      Vadim Zeitlin
+// Created:     2015-03-06
+// Copyright:   (c) 2015 wxWindows team
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
 use std::os::raw::c_int;
 use wx::methods::*;
 

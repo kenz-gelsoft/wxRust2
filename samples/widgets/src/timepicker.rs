@@ -1,3 +1,13 @@
+/////////////////////////////////////////////////////////////////////////////
+// Program:     wxWidgets Widgets Sample
+// Name:        timepick.cpp
+// Purpose:     Part of the widgets sample showing time picker
+// Author:      Vadim Zeitlin
+// Created:     2011-12-20
+// Copyright:   (c) 2011 wxWindows team
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
 extern crate regex;
 
 use crate::WidgetsPage;

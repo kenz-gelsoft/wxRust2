@@ -1,3 +1,13 @@
+/////////////////////////////////////////////////////////////////////////////
+// Program:     wxWidgets Widgets Sample
+// Name:        editlbox.cpp
+// Purpose:     Part of the widgets sample showing wxEditableListbox
+// Author:      Francesco Montorsi
+// Created:     8/2/2009
+// Copyright:   (c) 2009 Francesco Montorsi
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
 use crate::WidgetsPage;
 use std::cell::RefCell;
 use std::os::raw::{c_int, c_long};

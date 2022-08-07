@@ -1,3 +1,13 @@
+/////////////////////////////////////////////////////////////////////////////
+// Program:     wxWidgets Widgets Sample
+// Name:        headerctrl.cpp
+// Purpose:     Part of the widgets sample showing wxHeaderCtrl
+// Author:      Vadim Zeitlin
+// Created:     2016-04-17
+// Copyright:   (c) 2016 wxWindows team
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
 use crate::WidgetsPage;
 use std::cell::RefCell;
 use std::os::raw::{c_int, c_long};

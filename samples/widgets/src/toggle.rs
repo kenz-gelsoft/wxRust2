@@ -1,3 +1,13 @@
+/////////////////////////////////////////////////////////////////////////////
+// Program:     wxWidgets Widgets Sample
+// Name:        toggle.cpp
+// Purpose:     Part of the widgets sample showing toggle control
+// Author:      Dimitri Schoolwerth, Vadim Zeitlin
+// Created:     27 Sep 2003
+// Copyright:   (c) 2006 Wlodzmierz Skiba
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
 use crate::WidgetsPage;
 use std::cell::RefCell;
 use std::os::raw::{c_int, c_long};

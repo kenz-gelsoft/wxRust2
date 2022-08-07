@@ -1,3 +1,13 @@
+/////////////////////////////////////////////////////////////////////////////
+// Program:     wxWidgets Widgets Sample
+// Name:        samples/widgets/widgets.cpp
+// Purpose:     Sample showing most of the simple wxWidgets widgets
+// Author:      Vadim Zeitlin
+// Created:     27.03.01
+// Copyright:   (c) 2001 Vadim Zeitlin
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
 #![windows_subsystem = "windows"]
 
 use std::os::raw::c_int;

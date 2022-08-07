@@ -1,3 +1,13 @@
+/////////////////////////////////////////////////////////////////////////////
+// Program:     wxWidgets Widgets Sample
+// Name:        searchctrl.cpp
+// Purpose:     Shows wxSearchCtrl
+// Author:      Robin Dunn
+// Created:     9-Dec-2006
+// Copyright:   (c) 2006
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
 use crate::WidgetsPage;
 use std::cell::RefCell;
 use std::os::raw::c_int;

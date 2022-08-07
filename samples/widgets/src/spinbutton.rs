@@ -1,3 +1,13 @@
+/////////////////////////////////////////////////////////////////////////////
+// Program:     wxWidgets Widgets Sample
+// Name:        spinbtn.cpp
+// Purpose:     Part of the widgets sample showing wxSpinButton
+// Author:      Vadim Zeitlin
+// Created:     16.04.01
+// Copyright:   (c) 2001 Vadim Zeitlin
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
 use crate::WidgetsPage;
 use std::cell::RefCell;
 use std::os::raw::{c_int, c_long};

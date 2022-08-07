@@ -1,3 +1,13 @@
+/////////////////////////////////////////////////////////////////////////////
+// Program:     wxWidgets Widgets Sample
+// Name:        dirctrl.cpp
+// Purpose:     Part of the widgets sample showing wxGenericDirCtrl
+// Author:      Wlodzimierz 'ABX' Skiba
+// Created:     4 Oct 2006
+// Copyright:   (c) 2006 wxWindows team
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
 use crate::WidgetsPage;
 use std::cell::RefCell;
 use std::os::raw::{c_int, c_long};

@@ -1,3 +1,13 @@
+/////////////////////////////////////////////////////////////////////////////
+// Program:     wxWidgets Widgets Sample
+// Name:        clrpicker.cpp
+// Purpose:     Shows wxColourPickerCtrl
+// Author:      Francesco Montorsi
+// Created:     20/6/2006
+// Copyright:   (c) 2006 Francesco Montorsi
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
 use crate::WidgetsPage;
 use std::cell::RefCell;
 use std::os::raw::{c_int, c_long};

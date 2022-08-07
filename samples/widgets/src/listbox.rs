@@ -1,3 +1,13 @@
+/////////////////////////////////////////////////////////////////////////////
+// Program:     wxWidgets Widgets Sample
+// Name:        listbox.cpp
+// Purpose:     Part of the widgets sample showing wxListbox
+// Author:      Vadim Zeitlin
+// Created:     27.03.01
+// Copyright:   (c) 2001 Vadim Zeitlin
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
 use crate::WidgetsPage;
 use std::cell::RefCell;
 use std::os::raw::{c_int, c_long};

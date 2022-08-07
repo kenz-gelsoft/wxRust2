@@ -1,3 +1,13 @@
+/////////////////////////////////////////////////////////////////////////////
+// Program:     wxWidgets Widgets Sample
+// Name:        hyperlnk.cpp
+// Purpose:     Part of the widgets sample showing wxHyperlinkCtrl
+// Author:      Dimitri Schoolwerth, Vadim Zeitlin
+// Created:     27 Sep 2003
+// Copyright:   (c) 2003 wxWindows team
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
 use crate::WidgetsPage;
 use std::cell::RefCell;
 use std::os::raw::{c_int, c_long};
