@@ -1,3 +1,6 @@
+// wxWidgets Sample (partially/incompletely) ported in Rust.
+// Ported by:   KENZ<KENZ.gelsoft@gmail.com>
+// Original C++ Version's Copyright is:
 /////////////////////////////////////////////////////////////////////////////
 // Program:     wxWidgets Widgets Sample
 // Name:        clrpicker.cpp
