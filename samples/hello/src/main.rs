@@ -1,3 +1,8 @@
+// SPDX-License-Identifier: MIT
+//
+// wxRust2 Hello World Sample.
+// Created by:  KENZ<KENZ.gelsoft@gmail.com>
+
 #![windows_subsystem = "windows"]
 
 use wx;

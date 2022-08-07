@@ -1,3 +1,17 @@
+// SPDX-License-Identifier: LGPL-2.0-or-later WITH WxWindows-exception-3.1
+//
+// wxWidgets Sample (partially/incompletely) ported in Rust.
+// Ported by:   KENZ<KENZ.gelsoft@gmail.com>
+// Original C++ Version's Copyright is:
+/////////////////////////////////////////////////////////////////////////////
+// Program:     wxWidgets Widgets Sample
+// Name:        dirctrl.cpp
+// Purpose:     Part of the widgets sample showing wxGenericDirCtrl
+// Author:      Wlodzimierz 'ABX' Skiba
+// Created:     4 Oct 2006
+// Copyright:   (c) 2006 wxWindows team
+/////////////////////////////////////////////////////////////////////////////
+
 use crate::WidgetsPage;
 use std::cell::RefCell;
 use std::os::raw::{c_int, c_long};

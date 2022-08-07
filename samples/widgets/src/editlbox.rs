@@ -1,3 +1,17 @@
+// SPDX-License-Identifier: LGPL-2.0-or-later WITH WxWindows-exception-3.1
+//
+// wxWidgets Sample (partially/incompletely) ported in Rust.
+// Ported by:   KENZ<KENZ.gelsoft@gmail.com>
+// Original C++ Version's Copyright is:
+/////////////////////////////////////////////////////////////////////////////
+// Program:     wxWidgets Widgets Sample
+// Name:        editlbox.cpp
+// Purpose:     Part of the widgets sample showing wxEditableListbox
+// Author:      Francesco Montorsi
+// Created:     8/2/2009
+// Copyright:   (c) 2009 Francesco Montorsi
+/////////////////////////////////////////////////////////////////////////////
+
 use crate::WidgetsPage;
 use std::cell::RefCell;
 use std::os::raw::{c_int, c_long};

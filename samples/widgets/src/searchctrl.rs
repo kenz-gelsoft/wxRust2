@@ -1,3 +1,17 @@
+// SPDX-License-Identifier: LGPL-2.0-or-later WITH WxWindows-exception-3.1
+//
+// wxWidgets Sample (partially/incompletely) ported in Rust.
+// Ported by:   KENZ<KENZ.gelsoft@gmail.com>
+// Original C++ Version's Copyright is:
+/////////////////////////////////////////////////////////////////////////////
+// Program:     wxWidgets Widgets Sample
+// Name:        searchctrl.cpp
+// Purpose:     Shows wxSearchCtrl
+// Author:      Robin Dunn
+// Created:     9-Dec-2006
+// Copyright:   (c) 2006
+/////////////////////////////////////////////////////////////////////////////
+
 use crate::WidgetsPage;
 use std::cell::RefCell;
 use std::os::raw::c_int;

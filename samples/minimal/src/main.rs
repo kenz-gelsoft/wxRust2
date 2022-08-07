@@ -1,3 +1,17 @@
+// SPDX-License-Identifier: LGPL-2.0-or-later WITH WxWindows-exception-3.1
+//
+// wxWidgets Sample (partially/incompletely) ported in Rust.
+// Ported by:   KENZ<KENZ.gelsoft@gmail.com>
+// Original C++ Version's Copyright is:
+/////////////////////////////////////////////////////////////////////////////
+// Name:        minimal.cpp
+// Purpose:     Minimal wxWidgets sample
+// Author:      Julian Smart
+// Modified by:
+// Created:     04/01/98
+// Copyright:   (c) Julian Smart
+/////////////////////////////////////////////////////////////////////////////
+
 #![windows_subsystem = "windows"]
 
 use std::os::raw::{c_int, c_long};

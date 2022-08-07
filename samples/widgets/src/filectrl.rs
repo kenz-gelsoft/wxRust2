@@ -1,3 +1,17 @@
+// SPDX-License-Identifier: LGPL-2.0-or-later WITH WxWindows-exception-3.1
+//
+// wxWidgets Sample (partially/incompletely) ported in Rust.
+// Ported by:   KENZ<KENZ.gelsoft@gmail.com>
+// Original C++ Version's Copyright is:
+/////////////////////////////////////////////////////////////////////////////
+// Program:     wxWidgets Widgets Sample
+// Name:        filectrl.cpp
+// Purpose:     Part of the widgets sample showing wxFileCtrl
+// Author:      Diaa M. Sami
+// Created:     28 Jul 2007
+// Copyright:   (c) 2007 Diaa M. Sami
+/////////////////////////////////////////////////////////////////////////////
+
 use crate::WidgetsPage;
 use std::cell::RefCell;
 use std::os::raw::{c_int, c_long};
