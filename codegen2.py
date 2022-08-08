@@ -1,6 +1,7 @@
 from doxybindgen.model import Class, ClassManager
 from doxybindgen.binding import CxxClassBinding, RustClassBinding
 
+import os
 import subprocess
 import toml
 
@@ -12,15 +13,24 @@ def main():
     
     classes = ClassManager()
     parsed = []
-    xmlfiles = config['wxml_files']
-    for file in xmlfiles:
-        for cls in Class.in_xml(classes, file, config['types']):
-            parsed.append(cls)
+    includes = config['includes']
+    for wxml in sorted(wxml_files()):
+        for cls in Class.in_xml(classes, wxml, config['types']):
+            if cls.name in includes:
+                parsed.append(cls)
     # Register all classes once parsing finished.
     classes.register(parsed)
     
     generate_library(classes, config, 'base')
     generate_library(classes, config, 'core')
+
+
+def wxml_files():
+    for root, dirs, files in os.walk('wxml'):
+        for file in files:
+            if (file.startswith('classwx_') and
+                file.endswith('.xml')):
+                yield os.path.join(root, file)
 
 
 generated = []
