@@ -5,6 +5,504 @@ use crate::WeakRef;
 
 pub use wx_base::methods::*;
 
+// wxAboutDialogInfo
+pub trait AboutDialogInfoMethods: WxRustMethods {
+    fn add_artist(&self, artist: &str) {
+        unsafe {
+            let artist = WxString::from(artist);
+            let artist = artist.as_ptr();
+            ffi::wxAboutDialogInfo_AddArtist(self.as_ptr(), artist)
+        }
+    }
+    fn add_developer(&self, developer: &str) {
+        unsafe {
+            let developer = WxString::from(developer);
+            let developer = developer.as_ptr();
+            ffi::wxAboutDialogInfo_AddDeveloper(self.as_ptr(), developer)
+        }
+    }
+    fn add_doc_writer(&self, docwriter: &str) {
+        unsafe {
+            let docwriter = WxString::from(docwriter);
+            let docwriter = docwriter.as_ptr();
+            ffi::wxAboutDialogInfo_AddDocWriter(self.as_ptr(), docwriter)
+        }
+    }
+    fn add_translator(&self, translator: &str) {
+        unsafe {
+            let translator = WxString::from(translator);
+            let translator = translator.as_ptr();
+            ffi::wxAboutDialogInfo_AddTranslator(self.as_ptr(), translator)
+        }
+    }
+    fn get_name(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxAboutDialogInfo_GetName(self.as_ptr())).into() }
+    }
+    fn has_description(&self) -> bool {
+        unsafe { ffi::wxAboutDialogInfo_HasDescription(self.as_ptr()) }
+    }
+    fn get_description(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxAboutDialogInfo_GetDescription(self.as_ptr())).into() }
+    }
+    fn has_copyright(&self) -> bool {
+        unsafe { ffi::wxAboutDialogInfo_HasCopyright(self.as_ptr()) }
+    }
+    fn get_copyright(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxAboutDialogInfo_GetCopyright(self.as_ptr())).into() }
+    }
+    fn set_artists<A: ArrayStringMethods>(&self, artists: &A) {
+        unsafe {
+            let artists = artists.as_ptr();
+            ffi::wxAboutDialogInfo_SetArtists(self.as_ptr(), artists)
+        }
+    }
+    fn set_copyright(&self, copyright: &str) {
+        unsafe {
+            let copyright = WxString::from(copyright);
+            let copyright = copyright.as_ptr();
+            ffi::wxAboutDialogInfo_SetCopyright(self.as_ptr(), copyright)
+        }
+    }
+    fn set_description(&self, desc: &str) {
+        unsafe {
+            let desc = WxString::from(desc);
+            let desc = desc.as_ptr();
+            ffi::wxAboutDialogInfo_SetDescription(self.as_ptr(), desc)
+        }
+    }
+    fn set_developers<A: ArrayStringMethods>(&self, developers: &A) {
+        unsafe {
+            let developers = developers.as_ptr();
+            ffi::wxAboutDialogInfo_SetDevelopers(self.as_ptr(), developers)
+        }
+    }
+    fn set_doc_writers<A: ArrayStringMethods>(&self, docwriters: &A) {
+        unsafe {
+            let docwriters = docwriters.as_ptr();
+            ffi::wxAboutDialogInfo_SetDocWriters(self.as_ptr(), docwriters)
+        }
+    }
+    fn has_icon(&self) -> bool {
+        unsafe { ffi::wxAboutDialogInfo_HasIcon(self.as_ptr()) }
+    }
+    fn get_icon(&self) -> Icon {
+        unsafe { Icon::from_ptr(ffi::wxAboutDialogInfo_GetIcon(self.as_ptr())) }
+    }
+    fn set_icon<I: IconMethods>(&self, icon: &I) {
+        unsafe {
+            let icon = icon.as_ptr();
+            ffi::wxAboutDialogInfo_SetIcon(self.as_ptr(), icon)
+        }
+    }
+    fn has_licence(&self) -> bool {
+        unsafe { ffi::wxAboutDialogInfo_HasLicence(self.as_ptr()) }
+    }
+    fn get_licence(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxAboutDialogInfo_GetLicence(self.as_ptr())).into() }
+    }
+    fn set_licence(&self, licence: &str) {
+        unsafe {
+            let licence = WxString::from(licence);
+            let licence = licence.as_ptr();
+            ffi::wxAboutDialogInfo_SetLicence(self.as_ptr(), licence)
+        }
+    }
+    fn set_license(&self, licence: &str) {
+        unsafe {
+            let licence = WxString::from(licence);
+            let licence = licence.as_ptr();
+            ffi::wxAboutDialogInfo_SetLicense(self.as_ptr(), licence)
+        }
+    }
+    fn set_name(&self, name: &str) {
+        unsafe {
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxAboutDialogInfo_SetName(self.as_ptr(), name)
+        }
+    }
+    fn set_translators<A: ArrayStringMethods>(&self, translators: &A) {
+        unsafe {
+            let translators = translators.as_ptr();
+            ffi::wxAboutDialogInfo_SetTranslators(self.as_ptr(), translators)
+        }
+    }
+    fn set_version(&self, version: &str, long_version: &str) {
+        unsafe {
+            let version = WxString::from(version);
+            let version = version.as_ptr();
+            let long_version = WxString::from(long_version);
+            let long_version = long_version.as_ptr();
+            ffi::wxAboutDialogInfo_SetVersion(self.as_ptr(), version, long_version)
+        }
+    }
+    fn get_version(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxAboutDialogInfo_GetVersion(self.as_ptr())).into() }
+    }
+    fn get_long_version(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxAboutDialogInfo_GetLongVersion(self.as_ptr())).into() }
+    }
+    fn has_web_site(&self) -> bool {
+        unsafe { ffi::wxAboutDialogInfo_HasWebSite(self.as_ptr()) }
+    }
+    fn get_web_site_url(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxAboutDialogInfo_GetWebSiteURL(self.as_ptr())).into() }
+    }
+    fn get_web_site_description(&self) -> String {
+        unsafe {
+            WxString::from_ptr(ffi::wxAboutDialogInfo_GetWebSiteDescription(self.as_ptr())).into()
+        }
+    }
+    fn set_web_site(&self, url: &str, desc: &str) {
+        unsafe {
+            let url = WxString::from(url);
+            let url = url.as_ptr();
+            let desc = WxString::from(desc);
+            let desc = desc.as_ptr();
+            ffi::wxAboutDialogInfo_SetWebSite(self.as_ptr(), url, desc)
+        }
+    }
+    fn has_developers(&self) -> bool {
+        unsafe { ffi::wxAboutDialogInfo_HasDevelopers(self.as_ptr()) }
+    }
+    fn get_developers(&self) -> ArrayStringIsOwned<false> {
+        unsafe { ArrayStringIsOwned::from_ptr(ffi::wxAboutDialogInfo_GetDevelopers(self.as_ptr())) }
+    }
+    fn has_doc_writers(&self) -> bool {
+        unsafe { ffi::wxAboutDialogInfo_HasDocWriters(self.as_ptr()) }
+    }
+    fn get_doc_writers(&self) -> ArrayStringIsOwned<false> {
+        unsafe { ArrayStringIsOwned::from_ptr(ffi::wxAboutDialogInfo_GetDocWriters(self.as_ptr())) }
+    }
+    fn has_artists(&self) -> bool {
+        unsafe { ffi::wxAboutDialogInfo_HasArtists(self.as_ptr()) }
+    }
+    fn get_artists(&self) -> ArrayStringIsOwned<false> {
+        unsafe { ArrayStringIsOwned::from_ptr(ffi::wxAboutDialogInfo_GetArtists(self.as_ptr())) }
+    }
+    fn has_translators(&self) -> bool {
+        unsafe { ffi::wxAboutDialogInfo_HasTranslators(self.as_ptr()) }
+    }
+    fn get_translators(&self) -> ArrayStringIsOwned<false> {
+        unsafe {
+            ArrayStringIsOwned::from_ptr(ffi::wxAboutDialogInfo_GetTranslators(self.as_ptr()))
+        }
+    }
+}
+
+// wxAcceleratorEntry
+pub trait AcceleratorEntryMethods: WxRustMethods {
+    fn get_command(&self) -> c_int {
+        unsafe { ffi::wxAcceleratorEntry_GetCommand(self.as_ptr()) }
+    }
+    fn get_flags(&self) -> c_int {
+        unsafe { ffi::wxAcceleratorEntry_GetFlags(self.as_ptr()) }
+    }
+    fn get_key_code(&self) -> c_int {
+        unsafe { ffi::wxAcceleratorEntry_GetKeyCode(self.as_ptr()) }
+    }
+    fn get_menu_item(&self) -> Option<MenuItemIsOwned<false>> {
+        unsafe { MenuItem::option_from(ffi::wxAcceleratorEntry_GetMenuItem(self.as_ptr())) }
+    }
+    fn set<M: MenuItemMethods>(&self, flags: c_int, key_code: c_int, cmd: c_int, item: Option<&M>) {
+        unsafe {
+            let item = match item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxAcceleratorEntry_Set(self.as_ptr(), flags, key_code, cmd, item)
+        }
+    }
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxAcceleratorEntry_IsOk(self.as_ptr()) }
+    }
+    fn to_string(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxAcceleratorEntry_ToString(self.as_ptr())).into() }
+    }
+    fn to_raw_string(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxAcceleratorEntry_ToRawString(self.as_ptr())).into() }
+    }
+    fn from_string(&self, str: &str) -> bool {
+        unsafe {
+            let str = WxString::from(str);
+            let str = str.as_ptr();
+            ffi::wxAcceleratorEntry_FromString(self.as_ptr(), str)
+        }
+    }
+    // BLOCKED: fn operator=()
+    // BLOCKED: fn operator==()
+    // BLOCKED: fn operator!=()
+}
+
+// wxAcceleratorTable
+pub trait AcceleratorTableMethods: ObjectMethods {
+    // DTOR: fn ~wxAcceleratorTable()
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxAcceleratorTable_IsOk(self.as_ptr()) }
+    }
+}
+
+// wxAccessible
+pub trait AccessibleMethods: ObjectMethods {
+    // DTOR: fn ~wxAccessible()
+    // NOT_SUPPORTED: fn DoDefaultAction()
+    // NOT_SUPPORTED: fn GetChild()
+    // NOT_SUPPORTED: fn GetChildCount()
+    // NOT_SUPPORTED: fn GetDefaultAction()
+    // NOT_SUPPORTED: fn GetDescription()
+    // NOT_SUPPORTED: fn GetFocus()
+    // NOT_SUPPORTED: fn GetHelpText()
+    // NOT_SUPPORTED: fn GetKeyboardShortcut()
+    // NOT_SUPPORTED: fn GetLocation()
+    // NOT_SUPPORTED: fn GetName()
+    // NOT_SUPPORTED: fn GetParent()
+    // NOT_SUPPORTED: fn GetRole()
+    // NOT_SUPPORTED: fn GetSelections()
+    // NOT_SUPPORTED: fn GetState()
+    // NOT_SUPPORTED: fn GetValue()
+    fn get_window(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxAccessible_GetWindow(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn HitTest()
+    // NOT_SUPPORTED: fn Navigate()
+    // NOT_SUPPORTED: fn Select()
+    fn set_window<W: WindowMethods>(&self, window: Option<&W>) {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxAccessible_SetWindow(self.as_ptr(), window)
+        }
+    }
+    // NOT_SUPPORTED: fn NotifyEvent()
+}
+
+// wxActivateEvent
+pub trait ActivateEventMethods: EventMethods {
+    fn get_active(&self) -> bool {
+        unsafe { ffi::wxActivateEvent_GetActive(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetActivationReason()
+}
+
+// wxActiveXContainer
+pub trait ActiveXContainerMethods: ControlMethods {
+    // NOT_SUPPORTED: fn QueryClientSiteInterface()
+}
+
+// wxActiveXEvent
+pub trait ActiveXEventMethods: CommandEventMethods {
+    // NOT_SUPPORTED: fn GetDispatchId()
+    fn param_count(&self) -> usize {
+        unsafe { ffi::wxActiveXEvent_ParamCount(self.as_ptr()) }
+    }
+    fn param_name(&self, idx: usize) -> String {
+        unsafe { WxString::from_ptr(ffi::wxActiveXEvent_ParamName(self.as_ptr(), idx)).into() }
+    }
+    fn param_type(&self, idx: usize) -> String {
+        unsafe { WxString::from_ptr(ffi::wxActiveXEvent_ParamType(self.as_ptr(), idx)).into() }
+    }
+    // NOT_SUPPORTED: fn operator[]()
+    fn get_native_parameters(&self) -> *mut c_void {
+        unsafe { ffi::wxActiveXEvent_GetNativeParameters(self.as_ptr()) }
+    }
+}
+
+// wxActivityIndicator
+pub trait ActivityIndicatorMethods: ControlMethods {
+    fn start(&self) {
+        unsafe { ffi::wxActivityIndicator_Start(self.as_ptr()) }
+    }
+    fn stop(&self) {
+        unsafe { ffi::wxActivityIndicator_Stop(self.as_ptr()) }
+    }
+    fn is_running(&self) -> bool {
+        unsafe { ffi::wxActivityIndicator_IsRunning(self.as_ptr()) }
+    }
+}
+
+// wxAddRemoveAdaptor
+pub trait AddRemoveAdaptorMethods: WxRustMethods {
+    // DTOR: fn ~wxAddRemoveAdaptor()
+    fn get_items_ctrl(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxAddRemoveAdaptor_GetItemsCtrl(self.as_ptr())) }
+    }
+    fn can_add(&self) -> bool {
+        unsafe { ffi::wxAddRemoveAdaptor_CanAdd(self.as_ptr()) }
+    }
+    fn can_remove(&self) -> bool {
+        unsafe { ffi::wxAddRemoveAdaptor_CanRemove(self.as_ptr()) }
+    }
+    fn on_add(&self) {
+        unsafe { ffi::wxAddRemoveAdaptor_OnAdd(self.as_ptr()) }
+    }
+    fn on_remove(&self) {
+        unsafe { ffi::wxAddRemoveAdaptor_OnRemove(self.as_ptr()) }
+    }
+}
+
+// wxAddRemoveCtrl
+pub trait AddRemoveCtrlMethods: PanelMethods {
+    fn set_adaptor<A: AddRemoveAdaptorMethods>(&self, adaptor: Option<&A>) {
+        unsafe {
+            let adaptor = match adaptor {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxAddRemoveCtrl_SetAdaptor(self.as_ptr(), adaptor)
+        }
+    }
+    fn set_buttons_tool_tips(&self, addtip: &str, removetip: &str) {
+        unsafe {
+            let addtip = WxString::from(addtip);
+            let addtip = addtip.as_ptr();
+            let removetip = WxString::from(removetip);
+            let removetip = removetip.as_ptr();
+            ffi::wxAddRemoveCtrl_SetButtonsToolTips(self.as_ptr(), addtip, removetip)
+        }
+    }
+}
+
+// wxAffineMatrix2D
+pub trait AffineMatrix2DMethods: AffineMatrix2DBaseMethods {
+    fn is_equal<A: AffineMatrix2DBaseMethods>(&self, t: &A) {
+        unsafe {
+            let t = t.as_ptr();
+            ffi::wxAffineMatrix2D_IsEqual(self.as_ptr(), t)
+        }
+    }
+}
+
+// wxAffineMatrix2DBase
+pub trait AffineMatrix2DBaseMethods: WxRustMethods {
+    // DTOR: fn ~wxAffineMatrix2DBase()
+    fn set<P: Point2DDoubleMethods>(&self, mat2_d: *const c_void, tr: &P) {
+        unsafe {
+            let tr = tr.as_ptr();
+            ffi::wxAffineMatrix2DBase_Set(self.as_ptr(), mat2_d, tr)
+        }
+    }
+    fn get<P: Point2DDoubleMethods>(&self, mat2_d: *mut c_void, tr: Option<&P>) {
+        unsafe {
+            let tr = match tr {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxAffineMatrix2DBase_Get(self.as_ptr(), mat2_d, tr)
+        }
+    }
+    fn concat<A: AffineMatrix2DBaseMethods>(&self, t: &A) {
+        unsafe {
+            let t = t.as_ptr();
+            ffi::wxAffineMatrix2DBase_Concat(self.as_ptr(), t)
+        }
+    }
+    fn invert(&self) -> bool {
+        unsafe { ffi::wxAffineMatrix2DBase_Invert(self.as_ptr()) }
+    }
+    fn is_identity(&self) -> bool {
+        unsafe { ffi::wxAffineMatrix2DBase_IsIdentity(self.as_ptr()) }
+    }
+    fn is_equal<A: AffineMatrix2DBaseMethods>(&self, t: &A) -> bool {
+        unsafe {
+            let t = t.as_ptr();
+            ffi::wxAffineMatrix2DBase_IsEqual(self.as_ptr(), t)
+        }
+    }
+    // BLOCKED: fn operator==()
+    // BLOCKED: fn operator!=()
+    // NOT_SUPPORTED: fn Translate()
+    // NOT_SUPPORTED: fn Scale()
+    // NOT_SUPPORTED: fn Rotate()
+    fn mirror(&self, direction: c_int) {
+        unsafe { ffi::wxAffineMatrix2DBase_Mirror(self.as_ptr(), direction) }
+    }
+    fn transform_point_point2ddouble<P: Point2DDoubleMethods>(&self, p: &P) -> Point2DDouble {
+        unsafe {
+            let p = p.as_ptr();
+            Point2DDouble::from_ptr(ffi::wxAffineMatrix2DBase_TransformPoint(self.as_ptr(), p))
+        }
+    }
+    fn transform_point_double(&self, x: *mut c_void, y: *mut c_void) {
+        unsafe { ffi::wxAffineMatrix2DBase_TransformPoint1(self.as_ptr(), x, y) }
+    }
+    fn transform_distance_point2ddouble<P: Point2DDoubleMethods>(&self, p: &P) -> Point2DDouble {
+        unsafe {
+            let p = p.as_ptr();
+            Point2DDouble::from_ptr(ffi::wxAffineMatrix2DBase_TransformDistance(
+                self.as_ptr(),
+                p,
+            ))
+        }
+    }
+    fn transform_distance_double(&self, dx: *mut c_void, dy: *mut c_void) {
+        unsafe { ffi::wxAffineMatrix2DBase_TransformDistance1(self.as_ptr(), dx, dy) }
+    }
+}
+
+// wxAnimationCtrl
+pub trait AnimationCtrlMethods: ControlMethods {
+    fn create_animation<W: WindowMethods, A: AnimationMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        anim: &A,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let anim = anim.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxAnimationCtrl_Create(self.as_ptr(), parent, id, anim, pos, size, style, name)
+        }
+    }
+    fn create_animation(&self) -> Animation {
+        unsafe { Animation::from_ptr(ffi::wxAnimationCtrl_CreateAnimation(self.as_ptr())) }
+    }
+    fn get_animation(&self) -> Animation {
+        unsafe { Animation::from_ptr(ffi::wxAnimationCtrl_GetAnimation(self.as_ptr())) }
+    }
+    fn get_inactive_bitmap(&self) -> Bitmap {
+        unsafe { Bitmap::from_ptr(ffi::wxAnimationCtrl_GetInactiveBitmap(self.as_ptr())) }
+    }
+    fn is_playing(&self) -> bool {
+        unsafe { ffi::wxAnimationCtrl_IsPlaying(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn LoadFile()
+    // NOT_SUPPORTED: fn Load()
+    fn play(&self) -> bool {
+        unsafe { ffi::wxAnimationCtrl_Play(self.as_ptr()) }
+    }
+    fn set_animation<A: AnimationMethods>(&self, anim: &A) {
+        unsafe {
+            let anim = anim.as_ptr();
+            ffi::wxAnimationCtrl_SetAnimation(self.as_ptr(), anim)
+        }
+    }
+    fn set_inactive_bitmap<B: BitmapBundleMethods>(&self, bmp: &B) {
+        unsafe {
+            let bmp = bmp.as_ptr();
+            ffi::wxAnimationCtrl_SetInactiveBitmap(self.as_ptr(), bmp)
+        }
+    }
+    fn stop(&self) {
+        unsafe { ffi::wxAnimationCtrl_Stop(self.as_ptr()) }
+    }
+    fn create_compatible_animation() -> Animation {
+        unsafe { Animation::from_ptr(ffi::wxAnimationCtrl_CreateCompatibleAnimation()) }
+    }
+}
+
 // wxAnyButton
 pub trait AnyButtonMethods: ControlMethods {
     // DTOR: fn ~wxAnyButton()
@@ -76,6 +574,23 @@ pub trait AnyButtonMethods: ControlMethods {
     }
     fn set_bitmap_position(&self, dir: c_int) {
         unsafe { ffi::wxAnyButton_SetBitmapPosition(self.as_ptr(), dir) }
+    }
+}
+
+// wxAppProgressIndicator
+pub trait AppProgressIndicatorMethods: WxRustMethods {
+    // DTOR: fn ~wxAppProgressIndicator()
+    fn is_available(&self) -> bool {
+        unsafe { ffi::wxAppProgressIndicator_IsAvailable(self.as_ptr()) }
+    }
+    fn set_value(&self, value: c_int) {
+        unsafe { ffi::wxAppProgressIndicator_SetValue(self.as_ptr(), value) }
+    }
+    fn set_range(&self, range: c_int) {
+        unsafe { ffi::wxAppProgressIndicator_SetRange(self.as_ptr(), range) }
+    }
+    fn pulse(&self) -> bool {
+        unsafe { ffi::wxAppProgressIndicator_Pulse(self.as_ptr()) }
     }
 }
 
@@ -157,7 +672,15 @@ pub trait ArtProviderMethods: ObjectMethods {
             Size::from_ptr(ffi::wxArtProvider_GetSizeHint(client, win))
         }
     }
-    // NOT_SUPPORTED: fn GetIconBundle()
+    fn get_icon_bundle(id: &str, client: &str) -> IconBundle {
+        unsafe {
+            let id = WxString::from(id);
+            let id = id.as_ptr();
+            let client = WxString::from(client);
+            let client = client.as_ptr();
+            IconBundle::from_ptr(ffi::wxArtProvider_GetIconBundle(id, client))
+        }
+    }
     fn has_native_provider() -> bool {
         unsafe { ffi::wxArtProvider_HasNativeProvider() }
     }
@@ -200,11 +723,108 @@ pub trait ArtProviderMethods: ObjectMethods {
     }
 }
 
+// wxAutoBufferedPaintDC
+pub trait AutoBufferedPaintDCMethods: BufferedPaintDCMethods {}
+
+// wxAutomationObject
+pub trait AutomationObjectMethods: ObjectMethods {
+    // DTOR: fn ~wxAutomationObject()
+    // NOT_SUPPORTED: fn CallMethod()
+    // NOT_SUPPORTED: fn CallMethod1()
+    fn create_instance(&self, prog_id: &str) -> bool {
+        unsafe {
+            let prog_id = WxString::from(prog_id);
+            let prog_id = prog_id.as_ptr();
+            ffi::wxAutomationObject_CreateInstance(self.as_ptr(), prog_id)
+        }
+    }
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxAutomationObject_IsOk(self.as_ptr()) }
+    }
+    fn get_dispatch_ptr(&self) -> *mut c_void {
+        unsafe { ffi::wxAutomationObject_GetDispatchPtr(self.as_ptr()) }
+    }
+    fn get_instance(&self, prog_id: &str, flags: c_int) -> bool {
+        unsafe {
+            let prog_id = WxString::from(prog_id);
+            let prog_id = prog_id.as_ptr();
+            ffi::wxAutomationObject_GetInstance(self.as_ptr(), prog_id, flags)
+        }
+    }
+    // NOT_SUPPORTED: fn GetObject()
+    // NOT_SUPPORTED: fn GetProperty()
+    // NOT_SUPPORTED: fn GetProperty1()
+    // NOT_SUPPORTED: fn Invoke()
+    // NOT_SUPPORTED: fn PutProperty()
+    // NOT_SUPPORTED: fn PutProperty1()
+    fn set_dispatch_ptr(&self, dispatch_ptr: *mut c_void) {
+        unsafe { ffi::wxAutomationObject_SetDispatchPtr(self.as_ptr(), dispatch_ptr) }
+    }
+    // NOT_SUPPORTED: fn GetLCID()
+    // NOT_SUPPORTED: fn SetLCID()
+    fn get_convert_variant_flags(&self) -> c_long {
+        unsafe { ffi::wxAutomationObject_GetConvertVariantFlags(self.as_ptr()) }
+    }
+    fn set_convert_variant_flags(&self, flags: c_long) {
+        unsafe { ffi::wxAutomationObject_SetConvertVariantFlags(self.as_ptr(), flags) }
+    }
+}
+
+// wxBannerWindow
+pub trait BannerWindowMethods: WindowMethods {
+    fn create_direction<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        parent: Option<&W>,
+        winid: c_int,
+        dir: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxBannerWindow_Create(self.as_ptr(), parent, winid, dir, pos, size, style, name)
+        }
+    }
+    fn set_bitmap<B: BitmapBundleMethods>(&self, bmp: &B) {
+        unsafe {
+            let bmp = bmp.as_ptr();
+            ffi::wxBannerWindow_SetBitmap(self.as_ptr(), bmp)
+        }
+    }
+    fn set_text(&self, title: &str, message: &str) {
+        unsafe {
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            let message = WxString::from(message);
+            let message = message.as_ptr();
+            ffi::wxBannerWindow_SetText(self.as_ptr(), title, message)
+        }
+    }
+    fn set_gradient<C: ColourMethods, C2: ColourMethods>(&self, start: &C, end: &C2) {
+        unsafe {
+            let start = start.as_ptr();
+            let end = end.as_ptr();
+            ffi::wxBannerWindow_SetGradient(self.as_ptr(), start, end)
+        }
+    }
+}
+
 // wxBitmap
 pub trait BitmapMethods: GDIObjectMethods {
     // DTOR: fn ~wxBitmap()
     // NOT_SUPPORTED: fn ConvertToDisabled()
-    // NOT_SUPPORTED: fn ConvertToImage()
+    fn convert_to_image(&self) -> Image {
+        unsafe { Image::from_ptr(ffi::wxBitmap_ConvertToImage(self.as_ptr())) }
+    }
     fn copy_from_icon<I: IconMethods>(&self, icon: &I) -> bool {
         unsafe {
             let icon = icon.as_ptr();
@@ -220,8 +840,11 @@ pub trait BitmapMethods: GDIObjectMethods {
             ffi::wxBitmap_Create1(self.as_ptr(), sz, depth)
         }
     }
-    fn create_int_dc(&self, width: c_int, height: c_int, dc: *const c_void) -> bool {
-        unsafe { ffi::wxBitmap_Create2(self.as_ptr(), width, height, dc) }
+    fn create_int_dc<D: DCMethods>(&self, width: c_int, height: c_int, dc: &D) -> bool {
+        unsafe {
+            let dc = dc.as_ptr();
+            ffi::wxBitmap_Create2(self.as_ptr(), width, height, dc)
+        }
     }
     fn create_with_dip_size_size<S: SizeMethods>(
         &self,
@@ -270,11 +893,11 @@ pub trait BitmapMethods: GDIObjectMethods {
     fn get_logical_width(&self) -> c_double {
         unsafe { ffi::wxBitmap_GetLogicalWidth(self.as_ptr()) }
     }
-    fn get_mask(&self) -> *mut c_void {
-        unsafe { ffi::wxBitmap_GetMask(self.as_ptr()) }
+    fn get_mask(&self) -> Option<MaskIsOwned<false>> {
+        unsafe { Mask::option_from(ffi::wxBitmap_GetMask(self.as_ptr())) }
     }
-    fn get_palette(&self) -> *mut c_void {
-        unsafe { ffi::wxBitmap_GetPalette(self.as_ptr()) }
+    fn get_palette(&self) -> Option<PaletteIsOwned<false>> {
+        unsafe { Palette::option_from(ffi::wxBitmap_GetPalette(self.as_ptr())) }
     }
     fn get_sub_bitmap<R: RectMethods>(&self, rect: &R) -> Bitmap {
         unsafe {
@@ -318,27 +941,42 @@ pub trait BitmapMethods: GDIObjectMethods {
     fn set_scale_factor(&self, scale: c_double) {
         unsafe { ffi::wxBitmap_SetScaleFactor(self.as_ptr(), scale) }
     }
-    fn set_mask(&self, mask: *mut c_void) {
-        unsafe { ffi::wxBitmap_SetMask(self.as_ptr(), mask) }
+    fn set_mask<M: MaskMethods>(&self, mask: Option<&M>) {
+        unsafe {
+            let mask = match mask {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxBitmap_SetMask(self.as_ptr(), mask)
+        }
     }
-    fn set_palette(&self, palette: *const c_void) {
-        unsafe { ffi::wxBitmap_SetPalette(self.as_ptr(), palette) }
+    fn set_palette<P: PaletteMethods>(&self, palette: &P) {
+        unsafe {
+            let palette = palette.as_ptr();
+            ffi::wxBitmap_SetPalette(self.as_ptr(), palette)
+        }
     }
     fn set_width(&self, width: c_int) {
         unsafe { ffi::wxBitmap_SetWidth(self.as_ptr(), width) }
     }
     // BLOCKED: fn UseAlpha()
-    fn add_handler(handler: *mut c_void) {
-        unsafe { ffi::wxBitmap_AddHandler(handler) }
+    fn add_handler<B: BitmapHandlerMethods>(handler: Option<&B>) {
+        unsafe {
+            let handler = match handler {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxBitmap_AddHandler(handler)
+        }
     }
     fn clean_up_handlers() {
         unsafe { ffi::wxBitmap_CleanUpHandlers() }
     }
-    fn find_handler(name: &str) -> *mut c_void {
+    fn find_handler(name: &str) -> Option<BitmapHandlerIsOwned<false>> {
         unsafe {
             let name = WxString::from(name);
             let name = name.as_ptr();
-            ffi::wxBitmap_FindHandler(name)
+            BitmapHandler::option_from(ffi::wxBitmap_FindHandler(name))
         }
     }
     // NOT_SUPPORTED: fn FindHandler1()
@@ -347,8 +985,14 @@ pub trait BitmapMethods: GDIObjectMethods {
     fn init_standard_handlers() {
         unsafe { ffi::wxBitmap_InitStandardHandlers() }
     }
-    fn insert_handler(handler: *mut c_void) {
-        unsafe { ffi::wxBitmap_InsertHandler(handler) }
+    fn insert_handler<B: BitmapHandlerMethods>(handler: Option<&B>) {
+        unsafe {
+            let handler = match handler {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxBitmap_InsertHandler(handler)
+        }
     }
     fn new_from_png_data(data: *const c_void, size: usize) -> Bitmap {
         unsafe { Bitmap::from_ptr(ffi::wxBitmap_NewFromPNGData(data, size)) }
@@ -466,14 +1110,26 @@ pub trait BitmapBundleMethods: WxRustMethods {
             BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromBitmap(bitmap))
         }
     }
-    fn from_icon_bundle(icon_bundle: *const c_void) -> BitmapBundle {
-        unsafe { BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromIconBundle(icon_bundle)) }
+    fn from_icon_bundle<I: IconBundleMethods>(icon_bundle: &I) -> BitmapBundle {
+        unsafe {
+            let icon_bundle = icon_bundle.as_ptr();
+            BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromIconBundle(icon_bundle))
+        }
     }
-    fn from_image(image: *const c_void) -> BitmapBundle {
-        unsafe { BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromImage(image)) }
+    fn from_image<I: ImageMethods>(image: &I) -> BitmapBundle {
+        unsafe {
+            let image = image.as_ptr();
+            BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromImage(image))
+        }
     }
-    fn from_impl(impl_: *mut c_void) -> BitmapBundle {
-        unsafe { BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromImpl(impl_)) }
+    fn from_impl<B: BitmapBundleImplMethods>(impl_: Option<&B>) -> BitmapBundle {
+        unsafe {
+            let impl_ = match impl_ {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromImpl(impl_))
+        }
     }
     fn from_resources(name: &str) -> BitmapBundle {
         unsafe {
@@ -521,6 +1177,27 @@ pub trait BitmapBundleMethods: WxRustMethods {
             let name = name.as_ptr();
             let size_def = size_def.as_ptr();
             BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromSVGResource(name, size_def))
+        }
+    }
+}
+
+// wxBitmapBundleImpl
+pub trait BitmapBundleImplMethods: RefCounterMethods {
+    fn get_default_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxBitmapBundleImpl_GetDefaultSize(self.as_ptr())) }
+    }
+    fn get_preferred_bitmap_size_at_scale(&self, scale: c_double) -> Size {
+        unsafe {
+            Size::from_ptr(ffi::wxBitmapBundleImpl_GetPreferredBitmapSizeAtScale(
+                self.as_ptr(),
+                scale,
+            ))
+        }
+    }
+    fn get_bitmap<S: SizeMethods>(&self, size: &S) -> Bitmap {
+        unsafe {
+            let size = size.as_ptr();
+            Bitmap::from_ptr(ffi::wxBitmapBundleImpl_GetBitmap(self.as_ptr(), size))
         }
     }
 }
@@ -599,6 +1276,144 @@ pub trait BitmapButtonMethods: ButtonMethods {
             WeakRef::<BitmapButton>::from(ffi::wxBitmapButton_NewCloseButton(parent, winid, name))
         }
     }
+}
+
+// wxBitmapComboBox
+pub trait BitmapComboBoxMethods: ComboBoxMethods {
+    // DTOR: fn ~wxBitmapComboBox()
+    fn append<B: BitmapMethods>(&self, item: &str, bitmap: &B) -> c_int {
+        unsafe {
+            let item = WxString::from(item);
+            let item = item.as_ptr();
+            let bitmap = bitmap.as_ptr();
+            ffi::wxBitmapComboBox_Append(self.as_ptr(), item, bitmap)
+        }
+    }
+    fn append_void<B: BitmapMethods>(
+        &self,
+        item: &str,
+        bitmap: &B,
+        client_data: *mut c_void,
+    ) -> c_int {
+        unsafe {
+            let item = WxString::from(item);
+            let item = item.as_ptr();
+            let bitmap = bitmap.as_ptr();
+            ffi::wxBitmapComboBox_Append1(self.as_ptr(), item, bitmap, client_data)
+        }
+    }
+    fn append_clientdata<B: BitmapMethods, C: ClientDataMethods>(
+        &self,
+        item: &str,
+        bitmap: &B,
+        client_data: Option<&C>,
+    ) -> c_int {
+        unsafe {
+            let item = WxString::from(item);
+            let item = item.as_ptr();
+            let bitmap = bitmap.as_ptr();
+            let client_data = match client_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxBitmapComboBox_Append2(self.as_ptr(), item, bitmap, client_data)
+        }
+    }
+    fn get_bitmap_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxBitmapComboBox_GetBitmapSize(self.as_ptr())) }
+    }
+    fn get_item_bitmap(&self, n: c_uint) -> Bitmap {
+        unsafe { Bitmap::from_ptr(ffi::wxBitmapComboBox_GetItemBitmap(self.as_ptr(), n)) }
+    }
+    fn insert<B: BitmapMethods>(&self, item: &str, bitmap: &B, pos: c_uint) -> c_int {
+        unsafe {
+            let item = WxString::from(item);
+            let item = item.as_ptr();
+            let bitmap = bitmap.as_ptr();
+            ffi::wxBitmapComboBox_Insert(self.as_ptr(), item, bitmap, pos)
+        }
+    }
+    fn insert_void<B: BitmapMethods>(
+        &self,
+        item: &str,
+        bitmap: &B,
+        pos: c_uint,
+        client_data: *mut c_void,
+    ) -> c_int {
+        unsafe {
+            let item = WxString::from(item);
+            let item = item.as_ptr();
+            let bitmap = bitmap.as_ptr();
+            ffi::wxBitmapComboBox_Insert1(self.as_ptr(), item, bitmap, pos, client_data)
+        }
+    }
+    fn insert_clientdata<B: BitmapMethods, C: ClientDataMethods>(
+        &self,
+        item: &str,
+        bitmap: &B,
+        pos: c_uint,
+        client_data: Option<&C>,
+    ) -> c_int {
+        unsafe {
+            let item = WxString::from(item);
+            let item = item.as_ptr();
+            let bitmap = bitmap.as_ptr();
+            let client_data = match client_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxBitmapComboBox_Insert2(self.as_ptr(), item, bitmap, pos, client_data)
+        }
+    }
+    fn set_item_bitmap<B: BitmapBundleMethods>(&self, n: c_uint, bitmap: &B) {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            ffi::wxBitmapComboBox_SetItemBitmap(self.as_ptr(), n, bitmap)
+        }
+    }
+}
+
+// wxBitmapDataObject
+pub trait BitmapDataObjectMethods: DataObjectSimpleMethods {
+    fn get_bitmap(&self) -> Bitmap {
+        unsafe { Bitmap::from_ptr(ffi::wxBitmapDataObject_GetBitmap(self.as_ptr())) }
+    }
+    fn set_bitmap<B: BitmapMethods>(&self, bitmap: &B) {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            ffi::wxBitmapDataObject_SetBitmap(self.as_ptr(), bitmap)
+        }
+    }
+}
+
+// wxBitmapHandler
+pub trait BitmapHandlerMethods: ObjectMethods {
+    // DTOR: fn ~wxBitmapHandler()
+    // NOT_SUPPORTED: fn Create()
+    fn get_extension(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxBitmapHandler_GetExtension(self.as_ptr())).into() }
+    }
+    fn get_name(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxBitmapHandler_GetName(self.as_ptr())).into() }
+    }
+    // NOT_SUPPORTED: fn GetType()
+    // NOT_SUPPORTED: fn LoadFile()
+    // NOT_SUPPORTED: fn SaveFile()
+    fn set_extension(&self, extension: &str) {
+        unsafe {
+            let extension = WxString::from(extension);
+            let extension = extension.as_ptr();
+            ffi::wxBitmapHandler_SetExtension(self.as_ptr(), extension)
+        }
+    }
+    fn set_name(&self, name: &str) {
+        unsafe {
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxBitmapHandler_SetName(self.as_ptr(), name)
+        }
+    }
+    // NOT_SUPPORTED: fn SetType()
 }
 
 // wxBitmapToggleButton
@@ -775,6 +1590,119 @@ pub trait BoxSizerMethods: SizerMethods {
     }
 }
 
+// wxBrush
+pub trait BrushMethods: GDIObjectMethods {
+    // DTOR: fn ~wxBrush()
+    fn get_colour(&self) -> Colour {
+        unsafe { Colour::from_ptr(ffi::wxBrush_GetColour(self.as_ptr())) }
+    }
+    fn get_stipple(&self) -> Option<BitmapIsOwned<false>> {
+        unsafe { Bitmap::option_from(ffi::wxBrush_GetStipple(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn GetStyle()
+    fn is_hatch(&self) -> bool {
+        unsafe { ffi::wxBrush_IsHatch(self.as_ptr()) }
+    }
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxBrush_IsOk(self.as_ptr()) }
+    }
+    fn is_non_transparent(&self) -> bool {
+        unsafe { ffi::wxBrush_IsNonTransparent(self.as_ptr()) }
+    }
+    fn is_transparent(&self) -> bool {
+        unsafe { ffi::wxBrush_IsTransparent(self.as_ptr()) }
+    }
+    fn set_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxBrush_SetColour(self.as_ptr(), colour)
+        }
+    }
+    // NOT_SUPPORTED: fn SetColour1()
+    fn set_stipple<B: BitmapMethods>(&self, bitmap: &B) {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            ffi::wxBrush_SetStipple(self.as_ptr(), bitmap)
+        }
+    }
+    // NOT_SUPPORTED: fn SetStyle()
+    // BLOCKED: fn operator!=()
+    // BLOCKED: fn operator==()
+}
+
+// wxBrushList
+pub trait BrushListMethods: WxRustMethods {
+    // NOT_SUPPORTED: fn FindOrCreateBrush()
+}
+
+// wxBufferedDC
+pub trait BufferedDCMethods: MemoryDCMethods {
+    // DTOR: fn ~wxBufferedDC()
+    fn init_size<D: DCMethods, S: SizeMethods>(&self, dc: Option<&D>, area: &S, style: c_int) {
+        unsafe {
+            let dc = match dc {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let area = area.as_ptr();
+            ffi::wxBufferedDC_Init(self.as_ptr(), dc, area, style)
+        }
+    }
+    fn init_bitmap<D: DCMethods, B: BitmapMethods>(
+        &self,
+        dc: Option<&D>,
+        buffer: &B,
+        style: c_int,
+    ) {
+        unsafe {
+            let dc = match dc {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let buffer = buffer.as_ptr();
+            ffi::wxBufferedDC_Init1(self.as_ptr(), dc, buffer, style)
+        }
+    }
+    fn un_mask(&self) {
+        unsafe { ffi::wxBufferedDC_UnMask(self.as_ptr()) }
+    }
+    fn set_style(&self, style: c_int) {
+        unsafe { ffi::wxBufferedDC_SetStyle(self.as_ptr(), style) }
+    }
+    fn get_style(&self) -> c_int {
+        unsafe { ffi::wxBufferedDC_GetStyle(self.as_ptr()) }
+    }
+}
+
+// wxBufferedPaintDC
+pub trait BufferedPaintDCMethods: BufferedDCMethods {
+    // DTOR: fn ~wxBufferedPaintDC()
+}
+
+// wxBusyCursor
+pub trait BusyCursorMethods: WxRustMethods {
+    // DTOR: fn ~wxBusyCursor()
+}
+
+// wxBusyInfo
+pub trait BusyInfoMethods: WxRustMethods {
+    fn update_text(&self, str: &str) {
+        unsafe {
+            let str = WxString::from(str);
+            let str = str.as_ptr();
+            ffi::wxBusyInfo_UpdateText(self.as_ptr(), str)
+        }
+    }
+    fn update_label(&self, str: &str) {
+        unsafe {
+            let str = WxString::from(str);
+            let str = str.as_ptr();
+            ffi::wxBusyInfo_UpdateLabel(self.as_ptr(), str)
+        }
+    }
+    // DTOR: fn ~wxBusyInfo()
+}
+
 // wxButton
 pub trait ButtonMethods: AnyButtonMethods {
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
@@ -830,6 +1758,319 @@ pub trait ButtonMethods: AnyButtonMethods {
             };
             Size::from_ptr(ffi::wxButton_GetDefaultSize(win))
         }
+    }
+}
+
+// wxCalculateLayoutEvent
+pub trait CalculateLayoutEventMethods: EventMethods {
+    fn get_flags(&self) -> c_int {
+        unsafe { ffi::wxCalculateLayoutEvent_GetFlags(self.as_ptr()) }
+    }
+    fn get_rect(&self) -> Rect {
+        unsafe { Rect::from_ptr(ffi::wxCalculateLayoutEvent_GetRect(self.as_ptr())) }
+    }
+    fn set_flags(&self, flags: c_int) {
+        unsafe { ffi::wxCalculateLayoutEvent_SetFlags(self.as_ptr(), flags) }
+    }
+    fn set_rect<R: RectMethods>(&self, rect: &R) {
+        unsafe {
+            let rect = rect.as_ptr();
+            ffi::wxCalculateLayoutEvent_SetRect(self.as_ptr(), rect)
+        }
+    }
+}
+
+// wxCalendarCtrl
+pub trait CalendarCtrlMethods: ControlMethods {
+    fn set_date_range<D: DateTimeMethods, D2: DateTimeMethods>(
+        &self,
+        lowerdate: &D,
+        upperdate: &D2,
+    ) -> bool {
+        unsafe {
+            let lowerdate = lowerdate.as_ptr();
+            let upperdate = upperdate.as_ptr();
+            ffi::wxCalendarCtrl_SetDateRange(self.as_ptr(), lowerdate, upperdate)
+        }
+    }
+    fn get_date_range<D: DateTimeMethods, D2: DateTimeMethods>(
+        &self,
+        lowerdate: Option<&D>,
+        upperdate: Option<&D2>,
+    ) -> bool {
+        unsafe {
+            let lowerdate = match lowerdate {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let upperdate = match upperdate {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxCalendarCtrl_GetDateRange(self.as_ptr(), lowerdate, upperdate)
+        }
+    }
+    // DTOR: fn ~wxCalendarCtrl()
+    fn create_datetime<W: WindowMethods, D: DateTimeMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        date: &D,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let date = date.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxCalendarCtrl_Create(self.as_ptr(), parent, id, date, pos, size, style, name)
+        }
+    }
+    fn enable_holiday_display(&self, display: bool) {
+        unsafe { ffi::wxCalendarCtrl_EnableHolidayDisplay(self.as_ptr(), display) }
+    }
+    fn enable_month_change(&self, enable: bool) -> bool {
+        unsafe { ffi::wxCalendarCtrl_EnableMonthChange(self.as_ptr(), enable) }
+    }
+    fn enable_year_change(&self, enable: bool) {
+        unsafe { ffi::wxCalendarCtrl_EnableYearChange(self.as_ptr(), enable) }
+    }
+    fn get_attr(&self, day: usize) -> Option<CalendarDateAttrIsOwned<false>> {
+        unsafe { CalendarDateAttr::option_from(ffi::wxCalendarCtrl_GetAttr(self.as_ptr(), day)) }
+    }
+    fn get_date(&self) -> DateTime {
+        unsafe { DateTime::from_ptr(ffi::wxCalendarCtrl_GetDate(self.as_ptr())) }
+    }
+    fn get_header_colour_bg(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarCtrl_GetHeaderColourBg(self.as_ptr())) }
+    }
+    fn get_header_colour_fg(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarCtrl_GetHeaderColourFg(self.as_ptr())) }
+    }
+    fn get_highlight_colour_bg(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarCtrl_GetHighlightColourBg(self.as_ptr())) }
+    }
+    fn get_highlight_colour_fg(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarCtrl_GetHighlightColourFg(self.as_ptr())) }
+    }
+    fn get_holiday_colour_bg(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarCtrl_GetHolidayColourBg(self.as_ptr())) }
+    }
+    fn get_holiday_colour_fg(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarCtrl_GetHolidayColourFg(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn HitTest()
+    fn reset_attr(&self, day: usize) {
+        unsafe { ffi::wxCalendarCtrl_ResetAttr(self.as_ptr(), day) }
+    }
+    fn set_attr<C: CalendarDateAttrMethods>(&self, day: usize, attr: Option<&C>) {
+        unsafe {
+            let attr = match attr {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxCalendarCtrl_SetAttr(self.as_ptr(), day, attr)
+        }
+    }
+    fn set_date<D: DateTimeMethods>(&self, date: &D) -> bool {
+        unsafe {
+            let date = date.as_ptr();
+            ffi::wxCalendarCtrl_SetDate(self.as_ptr(), date)
+        }
+    }
+    fn set_header_colours<C: ColourMethods, C2: ColourMethods>(&self, col_fg: &C, col_bg: &C2) {
+        unsafe {
+            let col_fg = col_fg.as_ptr();
+            let col_bg = col_bg.as_ptr();
+            ffi::wxCalendarCtrl_SetHeaderColours(self.as_ptr(), col_fg, col_bg)
+        }
+    }
+    fn set_highlight_colours<C: ColourMethods, C2: ColourMethods>(&self, col_fg: &C, col_bg: &C2) {
+        unsafe {
+            let col_fg = col_fg.as_ptr();
+            let col_bg = col_bg.as_ptr();
+            ffi::wxCalendarCtrl_SetHighlightColours(self.as_ptr(), col_fg, col_bg)
+        }
+    }
+    fn set_holiday(&self, day: usize) {
+        unsafe { ffi::wxCalendarCtrl_SetHoliday(self.as_ptr(), day) }
+    }
+    fn set_holiday_colours<C: ColourMethods, C2: ColourMethods>(&self, col_fg: &C, col_bg: &C2) {
+        unsafe {
+            let col_fg = col_fg.as_ptr();
+            let col_bg = col_bg.as_ptr();
+            ffi::wxCalendarCtrl_SetHolidayColours(self.as_ptr(), col_fg, col_bg)
+        }
+    }
+    fn mark(&self, day: usize, mark: bool) {
+        unsafe { ffi::wxCalendarCtrl_Mark(self.as_ptr(), day, mark) }
+    }
+}
+
+// wxCalendarDateAttr
+pub trait CalendarDateAttrMethods: WxRustMethods {
+    fn get_background_colour(&self) -> ColourIsOwned<false> {
+        unsafe {
+            ColourIsOwned::from_ptr(ffi::wxCalendarDateAttr_GetBackgroundColour(self.as_ptr()))
+        }
+    }
+    // NOT_SUPPORTED: fn GetBorder()
+    fn get_border_colour(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarDateAttr_GetBorderColour(self.as_ptr())) }
+    }
+    fn get_font(&self) -> FontIsOwned<false> {
+        unsafe { FontIsOwned::from_ptr(ffi::wxCalendarDateAttr_GetFont(self.as_ptr())) }
+    }
+    fn get_text_colour(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarDateAttr_GetTextColour(self.as_ptr())) }
+    }
+    fn has_background_colour(&self) -> bool {
+        unsafe { ffi::wxCalendarDateAttr_HasBackgroundColour(self.as_ptr()) }
+    }
+    fn has_border(&self) -> bool {
+        unsafe { ffi::wxCalendarDateAttr_HasBorder(self.as_ptr()) }
+    }
+    fn has_border_colour(&self) -> bool {
+        unsafe { ffi::wxCalendarDateAttr_HasBorderColour(self.as_ptr()) }
+    }
+    fn has_font(&self) -> bool {
+        unsafe { ffi::wxCalendarDateAttr_HasFont(self.as_ptr()) }
+    }
+    fn has_text_colour(&self) -> bool {
+        unsafe { ffi::wxCalendarDateAttr_HasTextColour(self.as_ptr()) }
+    }
+    fn is_holiday(&self) -> bool {
+        unsafe { ffi::wxCalendarDateAttr_IsHoliday(self.as_ptr()) }
+    }
+    fn set_background_colour<C: ColourMethods>(&self, col_back: &C) {
+        unsafe {
+            let col_back = col_back.as_ptr();
+            ffi::wxCalendarDateAttr_SetBackgroundColour(self.as_ptr(), col_back)
+        }
+    }
+    // NOT_SUPPORTED: fn SetBorder()
+    fn set_border_colour<C: ColourMethods>(&self, col: &C) {
+        unsafe {
+            let col = col.as_ptr();
+            ffi::wxCalendarDateAttr_SetBorderColour(self.as_ptr(), col)
+        }
+    }
+    fn set_font<F: FontMethods>(&self, font: &F) {
+        unsafe {
+            let font = font.as_ptr();
+            ffi::wxCalendarDateAttr_SetFont(self.as_ptr(), font)
+        }
+    }
+    fn set_holiday(&self, holiday: bool) {
+        unsafe { ffi::wxCalendarDateAttr_SetHoliday(self.as_ptr(), holiday) }
+    }
+    fn set_text_colour<C: ColourMethods>(&self, col_text: &C) {
+        unsafe {
+            let col_text = col_text.as_ptr();
+            ffi::wxCalendarDateAttr_SetTextColour(self.as_ptr(), col_text)
+        }
+    }
+    fn get_mark() -> CalendarDateAttrIsOwned<false> {
+        unsafe { CalendarDateAttrIsOwned::from_ptr(ffi::wxCalendarDateAttr_GetMark()) }
+    }
+    fn set_mark<C: CalendarDateAttrMethods>(m: &C) {
+        unsafe {
+            let m = m.as_ptr();
+            ffi::wxCalendarDateAttr_SetMark(m)
+        }
+    }
+}
+
+// wxCalendarEvent
+pub trait CalendarEventMethods: DateEventMethods {
+    // NOT_SUPPORTED: fn GetWeekDay()
+    // NOT_SUPPORTED: fn SetWeekDay()
+}
+
+// wxCaret
+pub trait CaretMethods: WxRustMethods {
+    fn create_int<W: WindowMethods>(
+        &self,
+        window: Option<&W>,
+        width: c_int,
+        height: c_int,
+    ) -> bool {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxCaret_Create(self.as_ptr(), window, width, height)
+        }
+    }
+    fn create_size<W: WindowMethods, S: SizeMethods>(&self, window: Option<&W>, size: &S) -> bool {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let size = size.as_ptr();
+            ffi::wxCaret_Create1(self.as_ptr(), window, size)
+        }
+    }
+    fn get_position_int(&self, x: *mut c_void, y: *mut c_void) {
+        unsafe { ffi::wxCaret_GetPosition(self.as_ptr(), x, y) }
+    }
+    fn get_position(&self) -> Point {
+        unsafe { Point::from_ptr(ffi::wxCaret_GetPosition1(self.as_ptr())) }
+    }
+    fn get_size_int(&self, width: *mut c_void, height: *mut c_void) {
+        unsafe { ffi::wxCaret_GetSize(self.as_ptr(), width, height) }
+    }
+    fn get_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxCaret_GetSize1(self.as_ptr())) }
+    }
+    fn get_window(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxCaret_GetWindow(self.as_ptr())) }
+    }
+    fn hide(&self) {
+        unsafe { ffi::wxCaret_Hide(self.as_ptr()) }
+    }
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxCaret_IsOk(self.as_ptr()) }
+    }
+    fn is_visible(&self) -> bool {
+        unsafe { ffi::wxCaret_IsVisible(self.as_ptr()) }
+    }
+    fn move_int(&self, x: c_int, y: c_int) {
+        unsafe { ffi::wxCaret_Move(self.as_ptr(), x, y) }
+    }
+    fn move_point<P: PointMethods>(&self, pt: &P) {
+        unsafe {
+            let pt = pt.as_ptr();
+            ffi::wxCaret_Move1(self.as_ptr(), pt)
+        }
+    }
+    fn set_size_int(&self, width: c_int, height: c_int) {
+        unsafe { ffi::wxCaret_SetSize(self.as_ptr(), width, height) }
+    }
+    fn set_size_size<S: SizeMethods>(&self, size: &S) {
+        unsafe {
+            let size = size.as_ptr();
+            ffi::wxCaret_SetSize1(self.as_ptr(), size)
+        }
+    }
+    fn show(&self, show: bool) {
+        unsafe { ffi::wxCaret_Show(self.as_ptr(), show) }
+    }
+    fn get_blink_time() -> c_int {
+        unsafe { ffi::wxCaret_GetBlinkTime() }
+    }
+    fn set_blink_time(milliseconds: c_int) {
+        unsafe { ffi::wxCaret_SetBlinkTime(milliseconds) }
     }
 }
 
@@ -912,6 +2153,13 @@ pub trait CheckListBoxMethods: ListBoxMethods {
     }
 }
 
+// wxChildFocusEvent
+pub trait ChildFocusEventMethods: CommandEventMethods {
+    fn get_window(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxChildFocusEvent_GetWindow(self.as_ptr())) }
+    }
+}
+
 // wxChoice
 pub trait ChoiceMethods: ControlMethods {
     // DTOR: fn ~wxChoice()
@@ -968,6 +2216,208 @@ pub trait ChoiceMethods: ControlMethods {
     }
     fn is_sorted(&self) -> bool {
         unsafe { ffi::wxChoice_IsSorted(self.as_ptr()) }
+    }
+}
+
+// wxChoicebook
+pub trait ChoicebookMethods: BookCtrlBaseMethods {
+    fn get_choice_ctrl(&self) -> WeakRef<Choice> {
+        unsafe { WeakRef::<Choice>::from(ffi::wxChoicebook_GetChoiceCtrl(self.as_ptr())) }
+    }
+}
+
+// wxClientDC
+pub trait ClientDCMethods: WindowDCMethods {}
+
+// wxClipboard
+pub trait ClipboardMethods: ObjectMethods {
+    // DTOR: fn ~wxClipboard()
+    fn add_data<D: DataObjectMethods>(&self, data: Option<&D>) -> bool {
+        unsafe {
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxClipboard_AddData(self.as_ptr(), data)
+        }
+    }
+    fn clear(&self) {
+        unsafe { ffi::wxClipboard_Clear(self.as_ptr()) }
+    }
+    fn close(&self) {
+        unsafe { ffi::wxClipboard_Close(self.as_ptr()) }
+    }
+    fn flush(&self) -> bool {
+        unsafe { ffi::wxClipboard_Flush(self.as_ptr()) }
+    }
+    fn get_data<D: DataObjectMethods>(&self, data: &D) -> bool {
+        unsafe {
+            let data = data.as_ptr();
+            ffi::wxClipboard_GetData(self.as_ptr(), data)
+        }
+    }
+    fn is_opened(&self) -> bool {
+        unsafe { ffi::wxClipboard_IsOpened(self.as_ptr()) }
+    }
+    fn is_supported(&self, format: *const c_void) -> bool {
+        unsafe { ffi::wxClipboard_IsSupported(self.as_ptr(), format) }
+    }
+    fn is_using_primary_selection(&self) -> bool {
+        unsafe { ffi::wxClipboard_IsUsingPrimarySelection(self.as_ptr()) }
+    }
+    fn open(&self) -> bool {
+        unsafe { ffi::wxClipboard_Open(self.as_ptr()) }
+    }
+    fn set_data<D: DataObjectMethods>(&self, data: Option<&D>) -> bool {
+        unsafe {
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxClipboard_SetData(self.as_ptr(), data)
+        }
+    }
+    fn use_primary_selection(&self, primary: bool) {
+        unsafe { ffi::wxClipboard_UsePrimarySelection(self.as_ptr(), primary) }
+    }
+    fn get() -> Option<ClipboardIsOwned<false>> {
+        unsafe { Clipboard::option_from(ffi::wxClipboard_Get()) }
+    }
+}
+
+// wxClipboardTextEvent
+pub trait ClipboardTextEventMethods: CommandEventMethods {}
+
+// wxCloseEvent
+pub trait CloseEventMethods: EventMethods {
+    fn can_veto(&self) -> bool {
+        unsafe { ffi::wxCloseEvent_CanVeto(self.as_ptr()) }
+    }
+    fn get_logging_off(&self) -> bool {
+        unsafe { ffi::wxCloseEvent_GetLoggingOff(self.as_ptr()) }
+    }
+    fn set_can_veto(&self, can_veto: bool) {
+        unsafe { ffi::wxCloseEvent_SetCanVeto(self.as_ptr(), can_veto) }
+    }
+    fn set_logging_off(&self, logging_off: bool) {
+        unsafe { ffi::wxCloseEvent_SetLoggingOff(self.as_ptr(), logging_off) }
+    }
+    fn veto(&self, veto: bool) {
+        unsafe { ffi::wxCloseEvent_Veto(self.as_ptr(), veto) }
+    }
+    fn get_veto(&self) -> bool {
+        unsafe { ffi::wxCloseEvent_GetVeto(self.as_ptr()) }
+    }
+}
+
+// wxCollapsibleHeaderCtrl
+pub trait CollapsibleHeaderCtrlMethods: ControlMethods {
+    fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        label: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxCollapsibleHeaderCtrl_Create(
+                self.as_ptr(),
+                parent,
+                id,
+                label,
+                pos,
+                size,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+    fn set_collapsed(&self, collapsed: bool) {
+        unsafe { ffi::wxCollapsibleHeaderCtrl_SetCollapsed(self.as_ptr(), collapsed) }
+    }
+    fn is_collapsed(&self) -> bool {
+        unsafe { ffi::wxCollapsibleHeaderCtrl_IsCollapsed(self.as_ptr()) }
+    }
+}
+
+// wxCollapsiblePane
+pub trait CollapsiblePaneMethods: ControlMethods {
+    fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        label: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxCollapsiblePane_Create(
+                self.as_ptr(),
+                parent,
+                id,
+                label,
+                pos,
+                size,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+    fn collapse(&self, collapse: bool) {
+        unsafe { ffi::wxCollapsiblePane_Collapse(self.as_ptr(), collapse) }
+    }
+    fn expand(&self) {
+        unsafe { ffi::wxCollapsiblePane_Expand(self.as_ptr()) }
+    }
+    fn get_pane(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxCollapsiblePane_GetPane(self.as_ptr())) }
+    }
+    fn is_collapsed(&self) -> bool {
+        unsafe { ffi::wxCollapsiblePane_IsCollapsed(self.as_ptr()) }
+    }
+    fn is_expanded(&self) -> bool {
+        unsafe { ffi::wxCollapsiblePane_IsExpanded(self.as_ptr()) }
+    }
+}
+
+// wxCollapsiblePaneEvent
+pub trait CollapsiblePaneEventMethods: CommandEventMethods {
+    fn get_collapsed(&self) -> bool {
+        unsafe { ffi::wxCollapsiblePaneEvent_GetCollapsed(self.as_ptr()) }
+    }
+    fn set_collapsed(&self, collapsed: bool) {
+        unsafe { ffi::wxCollapsiblePaneEvent_SetCollapsed(self.as_ptr(), collapsed) }
     }
 }
 
@@ -1043,6 +2493,115 @@ pub trait ColourMethods: ObjectMethods {
     }
 }
 
+// wxColourData
+pub trait ColourDataMethods: ObjectMethods {
+    // DTOR: fn ~wxColourData()
+    fn get_choose_full(&self) -> bool {
+        unsafe { ffi::wxColourData_GetChooseFull(self.as_ptr()) }
+    }
+    fn get_choose_alpha(&self) -> bool {
+        unsafe { ffi::wxColourData_GetChooseAlpha(self.as_ptr()) }
+    }
+    fn get_colour(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxColourData_GetColour(self.as_ptr())) }
+    }
+    fn get_custom_colour(&self, i: c_int) -> Colour {
+        unsafe { Colour::from_ptr(ffi::wxColourData_GetCustomColour(self.as_ptr(), i)) }
+    }
+    fn set_choose_full(&self, flag: bool) {
+        unsafe { ffi::wxColourData_SetChooseFull(self.as_ptr(), flag) }
+    }
+    fn set_choose_alpha(&self, flag: bool) {
+        unsafe { ffi::wxColourData_SetChooseAlpha(self.as_ptr(), flag) }
+    }
+    fn set_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxColourData_SetColour(self.as_ptr(), colour)
+        }
+    }
+    fn set_custom_colour<C: ColourMethods>(&self, i: c_int, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxColourData_SetCustomColour(self.as_ptr(), i, colour)
+        }
+    }
+    fn to_string(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxColourData_ToString(self.as_ptr())).into() }
+    }
+    fn from_string(&self, str: &str) -> bool {
+        unsafe {
+            let str = WxString::from(str);
+            let str = str.as_ptr();
+            ffi::wxColourData_FromString(self.as_ptr(), str)
+        }
+    }
+    // BLOCKED: fn operator=()
+}
+
+// wxColourDatabase
+pub trait ColourDatabaseMethods: WxRustMethods {
+    fn add_colour<C: ColourMethods>(&self, colour_name: &str, colour: &C) {
+        unsafe {
+            let colour_name = WxString::from(colour_name);
+            let colour_name = colour_name.as_ptr();
+            let colour = colour.as_ptr();
+            ffi::wxColourDatabase_AddColour(self.as_ptr(), colour_name, colour)
+        }
+    }
+    fn find(&self, colour_name: &str) -> Colour {
+        unsafe {
+            let colour_name = WxString::from(colour_name);
+            let colour_name = colour_name.as_ptr();
+            Colour::from_ptr(ffi::wxColourDatabase_Find(self.as_ptr(), colour_name))
+        }
+    }
+    fn find_name<C: ColourMethods>(&self, colour: &C) -> String {
+        unsafe {
+            let colour = colour.as_ptr();
+            WxString::from_ptr(ffi::wxColourDatabase_FindName(self.as_ptr(), colour)).into()
+        }
+    }
+}
+
+// wxColourDialog
+pub trait ColourDialogMethods: DialogMethods {
+    // DTOR: fn ~wxColourDialog()
+    fn create_colourdata<W: WindowMethods, C: ColourDataMethods>(
+        &self,
+        parent: Option<&W>,
+        data: Option<&C>,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxColourDialog_Create(self.as_ptr(), parent, data)
+        }
+    }
+    fn get_colour_data(&self) -> ColourDataIsOwned<false> {
+        unsafe { ColourDataIsOwned::from_ptr(ffi::wxColourDialog_GetColourData(self.as_ptr())) }
+    }
+}
+
+// wxColourDialogEvent
+pub trait ColourDialogEventMethods: CommandEventMethods {
+    fn get_colour(&self) -> Colour {
+        unsafe { Colour::from_ptr(ffi::wxColourDialogEvent_GetColour(self.as_ptr())) }
+    }
+    fn set_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxColourDialogEvent_SetColour(self.as_ptr(), colour)
+        }
+    }
+}
+
 // wxColourPickerCtrl
 pub trait ColourPickerCtrlMethods: PickerBaseMethods {
     fn create_colour<
@@ -1096,6 +2655,19 @@ pub trait ColourPickerCtrlMethods: PickerBaseMethods {
         }
     }
     // BLOCKED: fn SetColour1()
+}
+
+// wxColourPickerEvent
+pub trait ColourPickerEventMethods: CommandEventMethods {
+    fn get_colour(&self) -> Colour {
+        unsafe { Colour::from_ptr(ffi::wxColourPickerEvent_GetColour(self.as_ptr())) }
+    }
+    fn set_colour<C: ColourMethods>(&self, pos: &C) {
+        unsafe {
+            let pos = pos.as_ptr();
+            ffi::wxColourPickerEvent_SetColour(self.as_ptr(), pos)
+        }
+    }
 }
 
 // wxComboBox
@@ -1164,13 +2736,329 @@ pub trait ComboBoxMethods: ControlMethods {
     }
 }
 
+// wxComboCtrl
+pub trait ComboCtrlMethods: ControlMethods {
+    // DTOR: fn ~wxComboCtrl()
+    fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        value: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let value = WxString::from(value);
+            let value = value.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxComboCtrl_Create(
+                self.as_ptr(),
+                parent,
+                id,
+                value,
+                pos,
+                size,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+    fn dismiss(&self) {
+        unsafe { ffi::wxComboCtrl_Dismiss(self.as_ptr()) }
+    }
+    fn enable_popup_animation(&self, enable: bool) {
+        unsafe { ffi::wxComboCtrl_EnablePopupAnimation(self.as_ptr(), enable) }
+    }
+    fn is_key_popup_toggle<K: KeyEventMethods>(&self, event: &K) -> bool {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxComboCtrl_IsKeyPopupToggle(self.as_ptr(), event)
+        }
+    }
+    fn prepare_background<D: DCMethods, R: RectMethods>(&self, dc: &D, rect: &R, flags: c_int) {
+        unsafe {
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxComboCtrl_PrepareBackground(self.as_ptr(), dc, rect, flags)
+        }
+    }
+    fn should_draw_focus(&self) -> bool {
+        unsafe { ffi::wxComboCtrl_ShouldDrawFocus(self.as_ptr()) }
+    }
+    fn get_bitmap_disabled(&self) -> Bitmap {
+        unsafe { Bitmap::from_ptr(ffi::wxComboCtrl_GetBitmapDisabled(self.as_ptr())) }
+    }
+    fn get_bitmap_hover(&self) -> Bitmap {
+        unsafe { Bitmap::from_ptr(ffi::wxComboCtrl_GetBitmapHover(self.as_ptr())) }
+    }
+    fn get_bitmap_normal(&self) -> Bitmap {
+        unsafe { Bitmap::from_ptr(ffi::wxComboCtrl_GetBitmapNormal(self.as_ptr())) }
+    }
+    fn get_bitmap_pressed(&self) -> Bitmap {
+        unsafe { Bitmap::from_ptr(ffi::wxComboCtrl_GetBitmapPressed(self.as_ptr())) }
+    }
+    fn get_button_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxComboCtrl_GetButtonSize(self.as_ptr())) }
+    }
+    fn get_custom_paint_width(&self) -> c_int {
+        unsafe { ffi::wxComboCtrl_GetCustomPaintWidth(self.as_ptr()) }
+    }
+    fn get_margins(&self) -> Point {
+        unsafe { Point::from_ptr(ffi::wxComboCtrl_GetMargins(self.as_ptr())) }
+    }
+    fn get_popup_control(&self) -> Option<ComboPopupIsOwned<false>> {
+        unsafe { ComboPopup::option_from(ffi::wxComboCtrl_GetPopupControl(self.as_ptr())) }
+    }
+    fn get_popup_window(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxComboCtrl_GetPopupWindow(self.as_ptr())) }
+    }
+    fn get_text_ctrl(&self) -> WeakRef<TextCtrl> {
+        unsafe { WeakRef::<TextCtrl>::from(ffi::wxComboCtrl_GetTextCtrl(self.as_ptr())) }
+    }
+    fn get_text_indent(&self) -> c_int {
+        unsafe { ffi::wxComboCtrl_GetTextIndent(self.as_ptr()) }
+    }
+    fn get_text_rect(&self) -> RectIsOwned<false> {
+        unsafe { RectIsOwned::from_ptr(ffi::wxComboCtrl_GetTextRect(self.as_ptr())) }
+    }
+    fn hide_popup(&self, generate_event: bool) {
+        unsafe { ffi::wxComboCtrl_HidePopup(self.as_ptr(), generate_event) }
+    }
+    fn is_popup_shown(&self) -> bool {
+        unsafe { ffi::wxComboCtrl_IsPopupShown(self.as_ptr()) }
+    }
+    fn is_popup_window_state(&self, state: c_int) -> bool {
+        unsafe { ffi::wxComboCtrl_IsPopupWindowState(self.as_ptr(), state) }
+    }
+    fn on_button_click(&self) {
+        unsafe { ffi::wxComboCtrl_OnButtonClick(self.as_ptr()) }
+    }
+    fn popup(&self) {
+        unsafe { ffi::wxComboCtrl_Popup(self.as_ptr()) }
+    }
+    fn set_button_bitmaps<
+        B: BitmapBundleMethods,
+        B2: BitmapBundleMethods,
+        B3: BitmapBundleMethods,
+        B4: BitmapBundleMethods,
+    >(
+        &self,
+        bmp_normal: &B,
+        push_button_bg: bool,
+        bmp_pressed: &B2,
+        bmp_hover: &B3,
+        bmp_disabled: &B4,
+    ) {
+        unsafe {
+            let bmp_normal = bmp_normal.as_ptr();
+            let bmp_pressed = bmp_pressed.as_ptr();
+            let bmp_hover = bmp_hover.as_ptr();
+            let bmp_disabled = bmp_disabled.as_ptr();
+            ffi::wxComboCtrl_SetButtonBitmaps(
+                self.as_ptr(),
+                bmp_normal,
+                push_button_bg,
+                bmp_pressed,
+                bmp_hover,
+                bmp_disabled,
+            )
+        }
+    }
+    fn set_button_position(&self, width: c_int, height: c_int, side: c_int, spacing_x: c_int) {
+        unsafe { ffi::wxComboCtrl_SetButtonPosition(self.as_ptr(), width, height, side, spacing_x) }
+    }
+    fn set_custom_paint_width(&self, width: c_int) {
+        unsafe { ffi::wxComboCtrl_SetCustomPaintWidth(self.as_ptr(), width) }
+    }
+    fn set_main_control<W: WindowMethods>(&self, win: Option<&W>) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxComboCtrl_SetMainControl(self.as_ptr(), win)
+        }
+    }
+    fn set_margins_point<P: PointMethods>(&self, pt: &P) -> bool {
+        unsafe {
+            let pt = pt.as_ptr();
+            ffi::wxComboCtrl_SetMargins(self.as_ptr(), pt)
+        }
+    }
+    fn set_margins_coord(&self, left: c_int, top: c_int) -> bool {
+        unsafe { ffi::wxComboCtrl_SetMargins1(self.as_ptr(), left, top) }
+    }
+    fn set_popup_anchor(&self, anchor_side: c_int) {
+        unsafe { ffi::wxComboCtrl_SetPopupAnchor(self.as_ptr(), anchor_side) }
+    }
+    fn set_popup_control<C: ComboPopupMethods>(&self, popup: Option<&C>) {
+        unsafe {
+            let popup = match popup {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxComboCtrl_SetPopupControl(self.as_ptr(), popup)
+        }
+    }
+    fn set_popup_extents(&self, ext_left: c_int, ext_right: c_int) {
+        unsafe { ffi::wxComboCtrl_SetPopupExtents(self.as_ptr(), ext_left, ext_right) }
+    }
+    fn set_popup_max_height(&self, height: c_int) {
+        unsafe { ffi::wxComboCtrl_SetPopupMaxHeight(self.as_ptr(), height) }
+    }
+    fn set_popup_min_width(&self, width: c_int) {
+        unsafe { ffi::wxComboCtrl_SetPopupMinWidth(self.as_ptr(), width) }
+    }
+    fn set_text(&self, value: &str) {
+        unsafe {
+            let value = WxString::from(value);
+            let value = value.as_ptr();
+            ffi::wxComboCtrl_SetText(self.as_ptr(), value)
+        }
+    }
+    fn set_text_ctrl_style(&self, style: c_int) {
+        unsafe { ffi::wxComboCtrl_SetTextCtrlStyle(self.as_ptr(), style) }
+    }
+    fn set_text_indent(&self, indent: c_int) {
+        unsafe { ffi::wxComboCtrl_SetTextIndent(self.as_ptr(), indent) }
+    }
+    fn set_value_by_user(&self, value: &str) {
+        unsafe {
+            let value = WxString::from(value);
+            let value = value.as_ptr();
+            ffi::wxComboCtrl_SetValueByUser(self.as_ptr(), value)
+        }
+    }
+    fn show_popup(&self) {
+        unsafe { ffi::wxComboCtrl_ShowPopup(self.as_ptr()) }
+    }
+    fn use_alt_popup_window(&self, enable: bool) {
+        unsafe { ffi::wxComboCtrl_UseAltPopupWindow(self.as_ptr(), enable) }
+    }
+    fn get_features() -> c_int {
+        unsafe { ffi::wxComboCtrl_GetFeatures() }
+    }
+}
+
+// wxComboPopup
+pub trait ComboPopupMethods: WxRustMethods {
+    fn create<W: WindowMethods>(&self, parent: Option<&W>) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxComboPopup_Create(self.as_ptr(), parent)
+        }
+    }
+    fn destroy_popup(&self) {
+        unsafe { ffi::wxComboPopup_DestroyPopup(self.as_ptr()) }
+    }
+    fn dismiss(&self) {
+        unsafe { ffi::wxComboPopup_Dismiss(self.as_ptr()) }
+    }
+    fn find_item(&self, item: &str, true_item: *mut c_void) -> bool {
+        unsafe {
+            let item = WxString::from(item);
+            let item = item.as_ptr();
+            ffi::wxComboPopup_FindItem(self.as_ptr(), item, true_item)
+        }
+    }
+    fn get_adjusted_size(&self, min_width: c_int, pref_height: c_int, max_height: c_int) -> Size {
+        unsafe {
+            Size::from_ptr(ffi::wxComboPopup_GetAdjustedSize(
+                self.as_ptr(),
+                min_width,
+                pref_height,
+                max_height,
+            ))
+        }
+    }
+    fn get_combo_ctrl(&self) -> WeakRef<ComboCtrl> {
+        unsafe { WeakRef::<ComboCtrl>::from(ffi::wxComboPopup_GetComboCtrl(self.as_ptr())) }
+    }
+    fn get_control(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxComboPopup_GetControl(self.as_ptr())) }
+    }
+    fn get_string_value(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxComboPopup_GetStringValue(self.as_ptr())).into() }
+    }
+    fn init(&self) {
+        unsafe { ffi::wxComboPopup_Init(self.as_ptr()) }
+    }
+    fn is_created(&self) -> bool {
+        unsafe { ffi::wxComboPopup_IsCreated(self.as_ptr()) }
+    }
+    fn lazy_create(&self) -> bool {
+        unsafe { ffi::wxComboPopup_LazyCreate(self.as_ptr()) }
+    }
+    fn on_combo_double_click(&self) {
+        unsafe { ffi::wxComboPopup_OnComboDoubleClick(self.as_ptr()) }
+    }
+    fn on_combo_key_event<K: KeyEventMethods>(&self, event: &K) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxComboPopup_OnComboKeyEvent(self.as_ptr(), event)
+        }
+    }
+    fn on_dismiss(&self) {
+        unsafe { ffi::wxComboPopup_OnDismiss(self.as_ptr()) }
+    }
+    fn on_popup(&self) {
+        unsafe { ffi::wxComboPopup_OnPopup(self.as_ptr()) }
+    }
+    fn paint_combo_control<D: DCMethods, R: RectMethods>(&self, dc: &D, rect: &R) {
+        unsafe {
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxComboPopup_PaintComboControl(self.as_ptr(), dc, rect)
+        }
+    }
+    fn set_string_value(&self, value: &str) {
+        unsafe {
+            let value = WxString::from(value);
+            let value = value.as_ptr();
+            ffi::wxComboPopup_SetStringValue(self.as_ptr(), value)
+        }
+    }
+}
+
+// wxCommand
+pub trait CommandMethods: ObjectMethods {
+    // DTOR: fn ~wxCommand()
+    fn can_undo(&self) -> bool {
+        unsafe { ffi::wxCommand_CanUndo(self.as_ptr()) }
+    }
+    fn do_(&self) -> bool {
+        unsafe { ffi::wxCommand_Do(self.as_ptr()) }
+    }
+    fn get_name(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxCommand_GetName(self.as_ptr())).into() }
+    }
+    fn undo(&self) -> bool {
+        unsafe { ffi::wxCommand_Undo(self.as_ptr()) }
+    }
+}
+
 // wxCommandEvent
 pub trait CommandEventMethods: EventMethods {
     fn get_client_data(&self) -> *mut c_void {
         unsafe { ffi::wxCommandEvent_GetClientData(self.as_ptr()) }
     }
-    fn get_client_object(&self) -> *mut c_void {
-        unsafe { ffi::wxCommandEvent_GetClientObject(self.as_ptr()) }
+    fn get_client_object(&self) -> Option<ClientDataIsOwned<false>> {
+        unsafe { ClientData::option_from(ffi::wxCommandEvent_GetClientObject(self.as_ptr())) }
     }
     fn get_extra_long(&self) -> c_long {
         unsafe { ffi::wxCommandEvent_GetExtraLong(self.as_ptr()) }
@@ -1193,8 +3081,14 @@ pub trait CommandEventMethods: EventMethods {
     fn set_client_data(&self, client_data: *mut c_void) {
         unsafe { ffi::wxCommandEvent_SetClientData(self.as_ptr(), client_data) }
     }
-    fn set_client_object(&self, client_object: *mut c_void) {
-        unsafe { ffi::wxCommandEvent_SetClientObject(self.as_ptr(), client_object) }
+    fn set_client_object<C: ClientDataMethods>(&self, client_object: Option<&C>) {
+        unsafe {
+            let client_object = match client_object {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxCommandEvent_SetClientObject(self.as_ptr(), client_object)
+        }
     }
     fn set_extra_long(&self, extra_long: c_long) {
         unsafe { ffi::wxCommandEvent_SetExtraLong(self.as_ptr(), extra_long) }
@@ -1207,6 +3101,217 @@ pub trait CommandEventMethods: EventMethods {
             let string = WxString::from(string);
             let string = string.as_ptr();
             ffi::wxCommandEvent_SetString(self.as_ptr(), string)
+        }
+    }
+}
+
+// wxCommandLinkButton
+pub trait CommandLinkButtonMethods: ButtonMethods {
+    fn create_str_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        main_label: &str,
+        note: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let main_label = WxString::from(main_label);
+            let main_label = main_label.as_ptr();
+            let note = WxString::from(note);
+            let note = note.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxCommandLinkButton_Create(
+                self.as_ptr(),
+                parent,
+                id,
+                main_label,
+                note,
+                pos,
+                size,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+    fn set_main_label_and_note(&self, main_label: &str, note: &str) {
+        unsafe {
+            let main_label = WxString::from(main_label);
+            let main_label = main_label.as_ptr();
+            let note = WxString::from(note);
+            let note = note.as_ptr();
+            ffi::wxCommandLinkButton_SetMainLabelAndNote(self.as_ptr(), main_label, note)
+        }
+    }
+    fn set_main_label(&self, main_label: &str) {
+        unsafe {
+            let main_label = WxString::from(main_label);
+            let main_label = main_label.as_ptr();
+            ffi::wxCommandLinkButton_SetMainLabel(self.as_ptr(), main_label)
+        }
+    }
+    fn set_note(&self, note: &str) {
+        unsafe {
+            let note = WxString::from(note);
+            let note = note.as_ptr();
+            ffi::wxCommandLinkButton_SetNote(self.as_ptr(), note)
+        }
+    }
+    fn get_main_label(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxCommandLinkButton_GetMainLabel(self.as_ptr())).into() }
+    }
+    fn get_note(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxCommandLinkButton_GetNote(self.as_ptr())).into() }
+    }
+}
+
+// wxCommandProcessor
+pub trait CommandProcessorMethods: ObjectMethods {
+    // DTOR: fn ~wxCommandProcessor()
+    fn can_undo(&self) -> bool {
+        unsafe { ffi::wxCommandProcessor_CanUndo(self.as_ptr()) }
+    }
+    fn can_redo(&self) -> bool {
+        unsafe { ffi::wxCommandProcessor_CanRedo(self.as_ptr()) }
+    }
+    fn clear_commands(&self) {
+        unsafe { ffi::wxCommandProcessor_ClearCommands(self.as_ptr()) }
+    }
+    fn get_commands(&self) -> *mut c_void {
+        unsafe { ffi::wxCommandProcessor_GetCommands(self.as_ptr()) }
+    }
+    fn get_current_command(&self) -> Option<CommandIsOwned<false>> {
+        unsafe { Command::option_from(ffi::wxCommandProcessor_GetCurrentCommand(self.as_ptr())) }
+    }
+    fn get_edit_menu(&self) -> WeakRef<Menu> {
+        unsafe { WeakRef::<Menu>::from(ffi::wxCommandProcessor_GetEditMenu(self.as_ptr())) }
+    }
+    fn get_max_commands(&self) -> c_int {
+        unsafe { ffi::wxCommandProcessor_GetMaxCommands(self.as_ptr()) }
+    }
+    fn get_redo_accelerator(&self) -> String {
+        unsafe {
+            WxString::from_ptr(ffi::wxCommandProcessor_GetRedoAccelerator(self.as_ptr())).into()
+        }
+    }
+    fn get_redo_menu_label(&self) -> String {
+        unsafe {
+            WxString::from_ptr(ffi::wxCommandProcessor_GetRedoMenuLabel(self.as_ptr())).into()
+        }
+    }
+    fn get_undo_accelerator(&self) -> String {
+        unsafe {
+            WxString::from_ptr(ffi::wxCommandProcessor_GetUndoAccelerator(self.as_ptr())).into()
+        }
+    }
+    fn get_undo_menu_label(&self) -> String {
+        unsafe {
+            WxString::from_ptr(ffi::wxCommandProcessor_GetUndoMenuLabel(self.as_ptr())).into()
+        }
+    }
+    fn initialize(&self) {
+        unsafe { ffi::wxCommandProcessor_Initialize(self.as_ptr()) }
+    }
+    fn is_dirty(&self) -> bool {
+        unsafe { ffi::wxCommandProcessor_IsDirty(self.as_ptr()) }
+    }
+    fn mark_as_saved(&self) {
+        unsafe { ffi::wxCommandProcessor_MarkAsSaved(self.as_ptr()) }
+    }
+    fn redo(&self) -> bool {
+        unsafe { ffi::wxCommandProcessor_Redo(self.as_ptr()) }
+    }
+    fn set_edit_menu<M: MenuMethods>(&self, menu: Option<&M>) {
+        unsafe {
+            let menu = match menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxCommandProcessor_SetEditMenu(self.as_ptr(), menu)
+        }
+    }
+    fn set_menu_strings(&self) {
+        unsafe { ffi::wxCommandProcessor_SetMenuStrings(self.as_ptr()) }
+    }
+    fn set_redo_accelerator(&self, accel: &str) {
+        unsafe {
+            let accel = WxString::from(accel);
+            let accel = accel.as_ptr();
+            ffi::wxCommandProcessor_SetRedoAccelerator(self.as_ptr(), accel)
+        }
+    }
+    fn set_undo_accelerator(&self, accel: &str) {
+        unsafe {
+            let accel = WxString::from(accel);
+            let accel = accel.as_ptr();
+            ffi::wxCommandProcessor_SetUndoAccelerator(self.as_ptr(), accel)
+        }
+    }
+    fn submit<C: CommandMethods>(&self, command: Option<&C>, store_it: bool) -> bool {
+        unsafe {
+            let command = match command {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxCommandProcessor_Submit(self.as_ptr(), command, store_it)
+        }
+    }
+    fn store<C: CommandMethods>(&self, command: Option<&C>) {
+        unsafe {
+            let command = match command {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxCommandProcessor_Store(self.as_ptr(), command)
+        }
+    }
+    fn undo(&self) -> bool {
+        unsafe { ffi::wxCommandProcessor_Undo(self.as_ptr()) }
+    }
+}
+
+// wxContextHelp
+pub trait ContextHelpMethods: ObjectMethods {
+    // DTOR: fn ~wxContextHelp()
+    fn begin_context_help<W: WindowMethods>(&self, window: Option<&W>) -> bool {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxContextHelp_BeginContextHelp(self.as_ptr(), window)
+        }
+    }
+    fn end_context_help(&self) -> bool {
+        unsafe { ffi::wxContextHelp_EndContextHelp(self.as_ptr()) }
+    }
+}
+
+// wxContextHelpButton
+pub trait ContextHelpButtonMethods: BitmapButtonMethods {}
+
+// wxContextMenuEvent
+pub trait ContextMenuEventMethods: CommandEventMethods {
+    fn get_position(&self) -> PointIsOwned<false> {
+        unsafe { PointIsOwned::from_ptr(ffi::wxContextMenuEvent_GetPosition(self.as_ptr())) }
+    }
+    fn set_position<P: PointMethods>(&self, point: &P) {
+        unsafe {
+            let point = point.as_ptr();
+            ffi::wxContextMenuEvent_SetPosition(self.as_ptr(), point)
         }
     }
 }
@@ -1302,9 +3407,9 @@ pub trait ControlMethods: WindowMethods {
             WxString::from_ptr(ffi::wxControl_EscapeMnemonics(text)).into()
         }
     }
-    fn ellipsize(
+    fn ellipsize<D: DCMethods>(
         label: &str,
-        dc: *const c_void,
+        dc: &D,
         mode: c_int,
         max_width: c_int,
         flags: c_int,
@@ -1312,7 +3417,2957 @@ pub trait ControlMethods: WindowMethods {
         unsafe {
             let label = WxString::from(label);
             let label = label.as_ptr();
+            let dc = dc.as_ptr();
             WxString::from_ptr(ffi::wxControl_Ellipsize(label, dc, mode, max_width, flags)).into()
+        }
+    }
+}
+
+// wxControlWithItems
+pub trait ControlWithItemsMethods: ControlMethods {}
+
+// wxCredentialEntryDialog
+pub trait CredentialEntryDialogMethods: DialogMethods {
+    fn create_str<W: WindowMethods, W2: WebCredentialsMethods>(
+        &self,
+        parent: Option<&W>,
+        message: &str,
+        title: &str,
+        cred: &W2,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let message = WxString::from(message);
+            let message = message.as_ptr();
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            let cred = cred.as_ptr();
+            ffi::wxCredentialEntryDialog_Create(self.as_ptr(), parent, message, title, cred)
+        }
+    }
+    fn get_credentials(&self) -> WebCredentials {
+        unsafe {
+            WebCredentials::from_ptr(ffi::wxCredentialEntryDialog_GetCredentials(self.as_ptr()))
+        }
+    }
+    fn set_user(&self, user: &str) {
+        unsafe {
+            let user = WxString::from(user);
+            let user = user.as_ptr();
+            ffi::wxCredentialEntryDialog_SetUser(self.as_ptr(), user)
+        }
+    }
+    fn set_password(&self, password: &str) {
+        unsafe {
+            let password = WxString::from(password);
+            let password = password.as_ptr();
+            ffi::wxCredentialEntryDialog_SetPassword(self.as_ptr(), password)
+        }
+    }
+}
+
+// wxCursor
+pub trait CursorMethods: GDIObjectMethods {
+    // DTOR: fn ~wxCursor()
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxCursor_IsOk(self.as_ptr()) }
+    }
+    fn get_hot_spot(&self) -> Point {
+        unsafe { Point::from_ptr(ffi::wxCursor_GetHotSpot(self.as_ptr())) }
+    }
+    // BLOCKED: fn operator=()
+}
+
+// wxCustomDataObject
+pub trait CustomDataObjectMethods: DataObjectSimpleMethods {
+    // DTOR: fn ~wxCustomDataObject()
+    fn alloc(&self, size: usize) -> *mut c_void {
+        unsafe { ffi::wxCustomDataObject_Alloc(self.as_ptr(), size) }
+    }
+    fn free(&self) {
+        unsafe { ffi::wxCustomDataObject_Free(self.as_ptr()) }
+    }
+    fn get_data(&self) -> *mut c_void {
+        unsafe { ffi::wxCustomDataObject_GetData(self.as_ptr()) }
+    }
+    fn get_size(&self) -> usize {
+        unsafe { ffi::wxCustomDataObject_GetSize(self.as_ptr()) }
+    }
+    fn take_data(&self, size: usize, data: *mut c_void) {
+        unsafe { ffi::wxCustomDataObject_TakeData(self.as_ptr(), size, data) }
+    }
+}
+
+// wxDC
+pub trait DCMethods: ObjectMethods {
+    fn device_to_logical_x(&self, x: c_int) -> c_int {
+        unsafe { ffi::wxDC_DeviceToLogicalX(self.as_ptr(), x) }
+    }
+    fn device_to_logical_x_rel(&self, x: c_int) -> c_int {
+        unsafe { ffi::wxDC_DeviceToLogicalXRel(self.as_ptr(), x) }
+    }
+    fn device_to_logical_y(&self, y: c_int) -> c_int {
+        unsafe { ffi::wxDC_DeviceToLogicalY(self.as_ptr(), y) }
+    }
+    fn device_to_logical_y_rel(&self, y: c_int) -> c_int {
+        unsafe { ffi::wxDC_DeviceToLogicalYRel(self.as_ptr(), y) }
+    }
+    fn logical_to_device_x(&self, x: c_int) -> c_int {
+        unsafe { ffi::wxDC_LogicalToDeviceX(self.as_ptr(), x) }
+    }
+    fn logical_to_device_x_rel(&self, x: c_int) -> c_int {
+        unsafe { ffi::wxDC_LogicalToDeviceXRel(self.as_ptr(), x) }
+    }
+    fn logical_to_device_y(&self, y: c_int) -> c_int {
+        unsafe { ffi::wxDC_LogicalToDeviceY(self.as_ptr(), y) }
+    }
+    fn logical_to_device_y_rel(&self, y: c_int) -> c_int {
+        unsafe { ffi::wxDC_LogicalToDeviceYRel(self.as_ptr(), y) }
+    }
+    fn device_to_logical_coord(&self, x: c_int, y: c_int) -> Point {
+        unsafe { Point::from_ptr(ffi::wxDC_DeviceToLogical(self.as_ptr(), x, y)) }
+    }
+    fn device_to_logical_point<P: PointMethods>(&self, pt: &P) -> Point {
+        unsafe {
+            let pt = pt.as_ptr();
+            Point::from_ptr(ffi::wxDC_DeviceToLogical1(self.as_ptr(), pt))
+        }
+    }
+    fn device_to_logical_rel_int(&self, x: c_int, y: c_int) -> Size {
+        unsafe { Size::from_ptr(ffi::wxDC_DeviceToLogicalRel(self.as_ptr(), x, y)) }
+    }
+    fn device_to_logical_rel_size<S: SizeMethods>(&self, dim: &S) -> Size {
+        unsafe {
+            let dim = dim.as_ptr();
+            Size::from_ptr(ffi::wxDC_DeviceToLogicalRel1(self.as_ptr(), dim))
+        }
+    }
+    fn logical_to_device_coord(&self, x: c_int, y: c_int) -> Point {
+        unsafe { Point::from_ptr(ffi::wxDC_LogicalToDevice(self.as_ptr(), x, y)) }
+    }
+    fn logical_to_device_point<P: PointMethods>(&self, pt: &P) -> Point {
+        unsafe {
+            let pt = pt.as_ptr();
+            Point::from_ptr(ffi::wxDC_LogicalToDevice1(self.as_ptr(), pt))
+        }
+    }
+    fn logical_to_device_rel_int(&self, x: c_int, y: c_int) -> Size {
+        unsafe { Size::from_ptr(ffi::wxDC_LogicalToDeviceRel(self.as_ptr(), x, y)) }
+    }
+    fn logical_to_device_rel_size<S: SizeMethods>(&self, dim: &S) -> Size {
+        unsafe {
+            let dim = dim.as_ptr();
+            Size::from_ptr(ffi::wxDC_LogicalToDeviceRel1(self.as_ptr(), dim))
+        }
+    }
+    fn clear(&self) {
+        unsafe { ffi::wxDC_Clear(self.as_ptr()) }
+    }
+    fn draw_arc_coord(
+        &self,
+        x_start: c_int,
+        y_start: c_int,
+        x_end: c_int,
+        y_end: c_int,
+        xc: c_int,
+        yc: c_int,
+    ) {
+        unsafe { ffi::wxDC_DrawArc(self.as_ptr(), x_start, y_start, x_end, y_end, xc, yc) }
+    }
+    fn draw_arc_point<P: PointMethods, P2: PointMethods, P3: PointMethods>(
+        &self,
+        pt_start: &P,
+        pt_end: &P2,
+        centre: &P3,
+    ) {
+        unsafe {
+            let pt_start = pt_start.as_ptr();
+            let pt_end = pt_end.as_ptr();
+            let centre = centre.as_ptr();
+            ffi::wxDC_DrawArc1(self.as_ptr(), pt_start, pt_end, centre)
+        }
+    }
+    fn draw_bitmap_coord<B: BitmapMethods>(&self, bitmap: &B, x: c_int, y: c_int, use_mask: bool) {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            ffi::wxDC_DrawBitmap(self.as_ptr(), bitmap, x, y, use_mask)
+        }
+    }
+    fn draw_bitmap_point<B: BitmapMethods, P: PointMethods>(
+        &self,
+        bmp: &B,
+        pt: &P,
+        use_mask: bool,
+    ) {
+        unsafe {
+            let bmp = bmp.as_ptr();
+            let pt = pt.as_ptr();
+            ffi::wxDC_DrawBitmap1(self.as_ptr(), bmp, pt, use_mask)
+        }
+    }
+    fn draw_check_mark_coord(&self, x: c_int, y: c_int, width: c_int, height: c_int) {
+        unsafe { ffi::wxDC_DrawCheckMark(self.as_ptr(), x, y, width, height) }
+    }
+    fn draw_check_mark_rect<R: RectMethods>(&self, rect: &R) {
+        unsafe {
+            let rect = rect.as_ptr();
+            ffi::wxDC_DrawCheckMark1(self.as_ptr(), rect)
+        }
+    }
+    fn draw_circle_coord(&self, x: c_int, y: c_int, radius: c_int) {
+        unsafe { ffi::wxDC_DrawCircle(self.as_ptr(), x, y, radius) }
+    }
+    fn draw_circle_point<P: PointMethods>(&self, pt: &P, radius: c_int) {
+        unsafe {
+            let pt = pt.as_ptr();
+            ffi::wxDC_DrawCircle1(self.as_ptr(), pt, radius)
+        }
+    }
+    fn draw_ellipse_coord(&self, x: c_int, y: c_int, width: c_int, height: c_int) {
+        unsafe { ffi::wxDC_DrawEllipse(self.as_ptr(), x, y, width, height) }
+    }
+    fn draw_ellipse_point<P: PointMethods, S: SizeMethods>(&self, pt: &P, size: &S) {
+        unsafe {
+            let pt = pt.as_ptr();
+            let size = size.as_ptr();
+            ffi::wxDC_DrawEllipse1(self.as_ptr(), pt, size)
+        }
+    }
+    fn draw_ellipse_rect<R: RectMethods>(&self, rect: &R) {
+        unsafe {
+            let rect = rect.as_ptr();
+            ffi::wxDC_DrawEllipse2(self.as_ptr(), rect)
+        }
+    }
+    fn draw_elliptic_arc_coord(
+        &self,
+        x: c_int,
+        y: c_int,
+        width: c_int,
+        height: c_int,
+        start: c_double,
+        end: c_double,
+    ) {
+        unsafe { ffi::wxDC_DrawEllipticArc(self.as_ptr(), x, y, width, height, start, end) }
+    }
+    fn draw_elliptic_arc_point<P: PointMethods, S: SizeMethods>(
+        &self,
+        pt: &P,
+        sz: &S,
+        sa: c_double,
+        ea: c_double,
+    ) {
+        unsafe {
+            let pt = pt.as_ptr();
+            let sz = sz.as_ptr();
+            ffi::wxDC_DrawEllipticArc1(self.as_ptr(), pt, sz, sa, ea)
+        }
+    }
+    fn draw_icon_coord<I: IconMethods>(&self, icon: &I, x: c_int, y: c_int) {
+        unsafe {
+            let icon = icon.as_ptr();
+            ffi::wxDC_DrawIcon(self.as_ptr(), icon, x, y)
+        }
+    }
+    fn draw_icon_point<I: IconMethods, P: PointMethods>(&self, icon: &I, pt: &P) {
+        unsafe {
+            let icon = icon.as_ptr();
+            let pt = pt.as_ptr();
+            ffi::wxDC_DrawIcon1(self.as_ptr(), icon, pt)
+        }
+    }
+    fn draw_label_bitmap<B: BitmapMethods, R: RectMethods, R2: RectMethods>(
+        &self,
+        text: &str,
+        bitmap: &B,
+        rect: &R,
+        alignment: c_int,
+        index_accel: c_int,
+        rect_bounding: Option<&R2>,
+    ) {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let bitmap = bitmap.as_ptr();
+            let rect = rect.as_ptr();
+            let rect_bounding = match rect_bounding {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDC_DrawLabel(
+                self.as_ptr(),
+                text,
+                bitmap,
+                rect,
+                alignment,
+                index_accel,
+                rect_bounding,
+            )
+        }
+    }
+    fn draw_label_rect<R: RectMethods>(
+        &self,
+        text: &str,
+        rect: &R,
+        alignment: c_int,
+        index_accel: c_int,
+    ) {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxDC_DrawLabel1(self.as_ptr(), text, rect, alignment, index_accel)
+        }
+    }
+    fn draw_line_coord(&self, x1: c_int, y1: c_int, x2: c_int, y2: c_int) {
+        unsafe { ffi::wxDC_DrawLine(self.as_ptr(), x1, y1, x2, y2) }
+    }
+    fn draw_line_point<P: PointMethods, P2: PointMethods>(&self, pt1: &P, pt2: &P2) {
+        unsafe {
+            let pt1 = pt1.as_ptr();
+            let pt2 = pt2.as_ptr();
+            ffi::wxDC_DrawLine1(self.as_ptr(), pt1, pt2)
+        }
+    }
+    // NOT_SUPPORTED: fn DrawLines()
+    fn draw_lines(&self, points: *const c_void, xoffset: c_int, yoffset: c_int) {
+        unsafe { ffi::wxDC_DrawLines1(self.as_ptr(), points, xoffset, yoffset) }
+    }
+    fn draw_point_coord(&self, x: c_int, y: c_int) {
+        unsafe { ffi::wxDC_DrawPoint(self.as_ptr(), x, y) }
+    }
+    fn draw_point_point<P: PointMethods>(&self, pt: &P) {
+        unsafe {
+            let pt = pt.as_ptr();
+            ffi::wxDC_DrawPoint1(self.as_ptr(), pt)
+        }
+    }
+    // NOT_SUPPORTED: fn DrawPolygon()
+    // NOT_SUPPORTED: fn DrawPolygon1()
+    // NOT_SUPPORTED: fn DrawPolyPolygon()
+    fn draw_rectangle_coord(&self, x: c_int, y: c_int, width: c_int, height: c_int) {
+        unsafe { ffi::wxDC_DrawRectangle(self.as_ptr(), x, y, width, height) }
+    }
+    fn draw_rectangle_point<P: PointMethods, S: SizeMethods>(&self, pt: &P, sz: &S) {
+        unsafe {
+            let pt = pt.as_ptr();
+            let sz = sz.as_ptr();
+            ffi::wxDC_DrawRectangle1(self.as_ptr(), pt, sz)
+        }
+    }
+    fn draw_rectangle_rect<R: RectMethods>(&self, rect: &R) {
+        unsafe {
+            let rect = rect.as_ptr();
+            ffi::wxDC_DrawRectangle2(self.as_ptr(), rect)
+        }
+    }
+    fn draw_rotated_text_coord(&self, text: &str, x: c_int, y: c_int, angle: c_double) {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxDC_DrawRotatedText(self.as_ptr(), text, x, y, angle)
+        }
+    }
+    fn draw_rotated_text_point<P: PointMethods>(&self, text: &str, point: &P, angle: c_double) {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let point = point.as_ptr();
+            ffi::wxDC_DrawRotatedText1(self.as_ptr(), text, point, angle)
+        }
+    }
+    fn draw_rounded_rectangle_coord(
+        &self,
+        x: c_int,
+        y: c_int,
+        width: c_int,
+        height: c_int,
+        radius: c_double,
+    ) {
+        unsafe { ffi::wxDC_DrawRoundedRectangle(self.as_ptr(), x, y, width, height, radius) }
+    }
+    fn draw_rounded_rectangle_point<P: PointMethods, S: SizeMethods>(
+        &self,
+        pt: &P,
+        sz: &S,
+        radius: c_double,
+    ) {
+        unsafe {
+            let pt = pt.as_ptr();
+            let sz = sz.as_ptr();
+            ffi::wxDC_DrawRoundedRectangle1(self.as_ptr(), pt, sz, radius)
+        }
+    }
+    fn draw_rounded_rectangle_rect<R: RectMethods>(&self, rect: &R, radius: c_double) {
+        unsafe {
+            let rect = rect.as_ptr();
+            ffi::wxDC_DrawRoundedRectangle2(self.as_ptr(), rect, radius)
+        }
+    }
+    // NOT_SUPPORTED: fn DrawSpline()
+    fn draw_spline_pointlist(&self, points: *const c_void) {
+        unsafe { ffi::wxDC_DrawSpline1(self.as_ptr(), points) }
+    }
+    fn draw_spline_coord(&self, x1: c_int, y1: c_int, x2: c_int, y2: c_int, x3: c_int, y3: c_int) {
+        unsafe { ffi::wxDC_DrawSpline2(self.as_ptr(), x1, y1, x2, y2, x3, y3) }
+    }
+    fn draw_text_coord(&self, text: &str, x: c_int, y: c_int) {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxDC_DrawText(self.as_ptr(), text, x, y)
+        }
+    }
+    fn draw_text_point<P: PointMethods>(&self, text: &str, pt: &P) {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let pt = pt.as_ptr();
+            ffi::wxDC_DrawText1(self.as_ptr(), text, pt)
+        }
+    }
+    fn gradient_fill_concentric<R: RectMethods, C: ColourMethods, C2: ColourMethods>(
+        &self,
+        rect: &R,
+        initial_colour: &C,
+        dest_colour: &C2,
+    ) {
+        unsafe {
+            let rect = rect.as_ptr();
+            let initial_colour = initial_colour.as_ptr();
+            let dest_colour = dest_colour.as_ptr();
+            ffi::wxDC_GradientFillConcentric(self.as_ptr(), rect, initial_colour, dest_colour)
+        }
+    }
+    fn gradient_fill_concentric_point<
+        R: RectMethods,
+        C: ColourMethods,
+        C2: ColourMethods,
+        P: PointMethods,
+    >(
+        &self,
+        rect: &R,
+        initial_colour: &C,
+        dest_colour: &C2,
+        circle_center: &P,
+    ) {
+        unsafe {
+            let rect = rect.as_ptr();
+            let initial_colour = initial_colour.as_ptr();
+            let dest_colour = dest_colour.as_ptr();
+            let circle_center = circle_center.as_ptr();
+            ffi::wxDC_GradientFillConcentric1(
+                self.as_ptr(),
+                rect,
+                initial_colour,
+                dest_colour,
+                circle_center,
+            )
+        }
+    }
+    fn gradient_fill_linear<R: RectMethods, C: ColourMethods, C2: ColourMethods>(
+        &self,
+        rect: &R,
+        initial_colour: &C,
+        dest_colour: &C2,
+        n_direction: c_int,
+    ) {
+        unsafe {
+            let rect = rect.as_ptr();
+            let initial_colour = initial_colour.as_ptr();
+            let dest_colour = dest_colour.as_ptr();
+            ffi::wxDC_GradientFillLinear(
+                self.as_ptr(),
+                rect,
+                initial_colour,
+                dest_colour,
+                n_direction,
+            )
+        }
+    }
+    // NOT_SUPPORTED: fn FloodFill()
+    // NOT_SUPPORTED: fn FloodFill1()
+    fn cross_hair_coord(&self, x: c_int, y: c_int) {
+        unsafe { ffi::wxDC_CrossHair(self.as_ptr(), x, y) }
+    }
+    fn cross_hair_point<P: PointMethods>(&self, pt: &P) {
+        unsafe {
+            let pt = pt.as_ptr();
+            ffi::wxDC_CrossHair1(self.as_ptr(), pt)
+        }
+    }
+    fn destroy_clipping_region(&self) {
+        unsafe { ffi::wxDC_DestroyClippingRegion(self.as_ptr()) }
+    }
+    fn get_clipping_box_coord(
+        &self,
+        x: *mut c_void,
+        y: *mut c_void,
+        width: *mut c_void,
+        height: *mut c_void,
+    ) -> bool {
+        unsafe { ffi::wxDC_GetClippingBox(self.as_ptr(), x, y, width, height) }
+    }
+    fn get_clipping_box_rect<R: RectMethods>(&self, rect: &R) -> bool {
+        unsafe {
+            let rect = rect.as_ptr();
+            ffi::wxDC_GetClippingBox1(self.as_ptr(), rect)
+        }
+    }
+    fn set_clipping_region_coord(&self, x: c_int, y: c_int, width: c_int, height: c_int) {
+        unsafe { ffi::wxDC_SetClippingRegion(self.as_ptr(), x, y, width, height) }
+    }
+    fn set_clipping_region_point<P: PointMethods, S: SizeMethods>(&self, pt: &P, sz: &S) {
+        unsafe {
+            let pt = pt.as_ptr();
+            let sz = sz.as_ptr();
+            ffi::wxDC_SetClippingRegion1(self.as_ptr(), pt, sz)
+        }
+    }
+    fn set_clipping_region_rect<R: RectMethods>(&self, rect: &R) {
+        unsafe {
+            let rect = rect.as_ptr();
+            ffi::wxDC_SetClippingRegion2(self.as_ptr(), rect)
+        }
+    }
+    fn set_device_clipping_region<R: RegionMethods>(&self, region: &R) {
+        unsafe {
+            let region = region.as_ptr();
+            ffi::wxDC_SetDeviceClippingRegion(self.as_ptr(), region)
+        }
+    }
+    fn get_char_height(&self) -> c_int {
+        unsafe { ffi::wxDC_GetCharHeight(self.as_ptr()) }
+    }
+    fn get_char_width(&self) -> c_int {
+        unsafe { ffi::wxDC_GetCharWidth(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetFontMetrics()
+    fn get_multi_line_text_extent_coord<F: FontMethods>(
+        &self,
+        string: &str,
+        w: *mut c_void,
+        h: *mut c_void,
+        height_line: *mut c_void,
+        font: Option<&F>,
+    ) {
+        unsafe {
+            let string = WxString::from(string);
+            let string = string.as_ptr();
+            let font = match font {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDC_GetMultiLineTextExtent(self.as_ptr(), string, w, h, height_line, font)
+        }
+    }
+    fn get_multi_line_text_extent(&self, string: &str) -> Size {
+        unsafe {
+            let string = WxString::from(string);
+            let string = string.as_ptr();
+            Size::from_ptr(ffi::wxDC_GetMultiLineTextExtent1(self.as_ptr(), string))
+        }
+    }
+    fn get_partial_text_extents<A: ArrayIntMethods>(&self, text: &str, widths: &A) -> bool {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let widths = widths.as_ptr();
+            ffi::wxDC_GetPartialTextExtents(self.as_ptr(), text, widths)
+        }
+    }
+    fn get_text_extent_coord<F: FontMethods>(
+        &self,
+        string: &str,
+        w: *mut c_void,
+        h: *mut c_void,
+        descent: *mut c_void,
+        external_leading: *mut c_void,
+        font: Option<&F>,
+    ) {
+        unsafe {
+            let string = WxString::from(string);
+            let string = string.as_ptr();
+            let font = match font {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDC_GetTextExtent(self.as_ptr(), string, w, h, descent, external_leading, font)
+        }
+    }
+    fn get_text_extent(&self, string: &str) -> Size {
+        unsafe {
+            let string = WxString::from(string);
+            let string = string.as_ptr();
+            Size::from_ptr(ffi::wxDC_GetTextExtent1(self.as_ptr(), string))
+        }
+    }
+    fn get_background_mode(&self) -> c_int {
+        unsafe { ffi::wxDC_GetBackgroundMode(self.as_ptr()) }
+    }
+    fn get_font(&self) -> FontIsOwned<false> {
+        unsafe { FontIsOwned::from_ptr(ffi::wxDC_GetFont(self.as_ptr())) }
+    }
+    fn get_layout_direction(&self) -> c_int {
+        unsafe { ffi::wxDC_GetLayoutDirection(self.as_ptr()) }
+    }
+    fn get_text_background(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxDC_GetTextBackground(self.as_ptr())) }
+    }
+    fn get_text_foreground(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxDC_GetTextForeground(self.as_ptr())) }
+    }
+    fn set_background_mode(&self, mode: c_int) {
+        unsafe { ffi::wxDC_SetBackgroundMode(self.as_ptr(), mode) }
+    }
+    fn set_font<F: FontMethods>(&self, font: &F) {
+        unsafe {
+            let font = font.as_ptr();
+            ffi::wxDC_SetFont(self.as_ptr(), font)
+        }
+    }
+    fn set_text_background<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxDC_SetTextBackground(self.as_ptr(), colour)
+        }
+    }
+    fn set_text_foreground<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxDC_SetTextForeground(self.as_ptr(), colour)
+        }
+    }
+    fn set_layout_direction(&self, dir: c_int) {
+        unsafe { ffi::wxDC_SetLayoutDirection(self.as_ptr(), dir) }
+    }
+    fn calc_bounding_box(&self, x: c_int, y: c_int) {
+        unsafe { ffi::wxDC_CalcBoundingBox(self.as_ptr(), x, y) }
+    }
+    fn max_x(&self) -> c_int {
+        unsafe { ffi::wxDC_MaxX(self.as_ptr()) }
+    }
+    fn max_y(&self) -> c_int {
+        unsafe { ffi::wxDC_MaxY(self.as_ptr()) }
+    }
+    fn min_x(&self) -> c_int {
+        unsafe { ffi::wxDC_MinX(self.as_ptr()) }
+    }
+    fn min_y(&self) -> c_int {
+        unsafe { ffi::wxDC_MinY(self.as_ptr()) }
+    }
+    fn reset_bounding_box(&self) {
+        unsafe { ffi::wxDC_ResetBoundingBox(self.as_ptr()) }
+    }
+    fn start_doc(&self, message: &str) -> bool {
+        unsafe {
+            let message = WxString::from(message);
+            let message = message.as_ptr();
+            ffi::wxDC_StartDoc(self.as_ptr(), message)
+        }
+    }
+    fn start_page(&self) {
+        unsafe { ffi::wxDC_StartPage(self.as_ptr()) }
+    }
+    fn end_doc(&self) {
+        unsafe { ffi::wxDC_EndDoc(self.as_ptr()) }
+    }
+    fn end_page(&self) {
+        unsafe { ffi::wxDC_EndPage(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn Blit()
+    // NOT_SUPPORTED: fn StretchBlit()
+    fn get_background(&self) -> BrushIsOwned<false> {
+        unsafe { BrushIsOwned::from_ptr(ffi::wxDC_GetBackground(self.as_ptr())) }
+    }
+    fn get_brush(&self) -> BrushIsOwned<false> {
+        unsafe { BrushIsOwned::from_ptr(ffi::wxDC_GetBrush(self.as_ptr())) }
+    }
+    fn get_pen(&self) -> PenIsOwned<false> {
+        unsafe { PenIsOwned::from_ptr(ffi::wxDC_GetPen(self.as_ptr())) }
+    }
+    fn set_background<B: BrushMethods>(&self, brush: &B) {
+        unsafe {
+            let brush = brush.as_ptr();
+            ffi::wxDC_SetBackground(self.as_ptr(), brush)
+        }
+    }
+    fn set_brush<B: BrushMethods>(&self, brush: &B) {
+        unsafe {
+            let brush = brush.as_ptr();
+            ffi::wxDC_SetBrush(self.as_ptr(), brush)
+        }
+    }
+    fn set_pen<P: PenMethods>(&self, pen: &P) {
+        unsafe {
+            let pen = pen.as_ptr();
+            ffi::wxDC_SetPen(self.as_ptr(), pen)
+        }
+    }
+    fn copy_attributes<D: DCMethods>(&self, dc: &D) {
+        unsafe {
+            let dc = dc.as_ptr();
+            ffi::wxDC_CopyAttributes(self.as_ptr(), dc)
+        }
+    }
+    fn get_content_scale_factor(&self) -> c_double {
+        unsafe { ffi::wxDC_GetContentScaleFactor(self.as_ptr()) }
+    }
+    fn get_depth(&self) -> c_int {
+        unsafe { ffi::wxDC_GetDepth(self.as_ptr()) }
+    }
+    fn get_device_origin(&self) -> Point {
+        unsafe { Point::from_ptr(ffi::wxDC_GetDeviceOrigin(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn GetLogicalFunction()
+    // NOT_SUPPORTED: fn GetMapMode()
+    fn get_pixel<C: ColourMethods>(&self, x: c_int, y: c_int, colour: Option<&C>) -> bool {
+        unsafe {
+            let colour = match colour {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDC_GetPixel(self.as_ptr(), x, y, colour)
+        }
+    }
+    fn get_ppi(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxDC_GetPPI(self.as_ptr())) }
+    }
+    fn from_dip_size<S: SizeMethods>(&self, sz: &S) -> Size {
+        unsafe {
+            let sz = sz.as_ptr();
+            Size::from_ptr(ffi::wxDC_FromDIP(self.as_ptr(), sz))
+        }
+    }
+    fn from_dip_point<P: PointMethods>(&self, pt: &P) -> Point {
+        unsafe {
+            let pt = pt.as_ptr();
+            Point::from_ptr(ffi::wxDC_FromDIP1(self.as_ptr(), pt))
+        }
+    }
+    fn from_dip_int(&self, d: c_int) -> c_int {
+        unsafe { ffi::wxDC_FromDIP2(self.as_ptr(), d) }
+    }
+    fn to_dip_size<S: SizeMethods>(&self, sz: &S) -> Size {
+        unsafe {
+            let sz = sz.as_ptr();
+            Size::from_ptr(ffi::wxDC_ToDIP(self.as_ptr(), sz))
+        }
+    }
+    fn to_dip_point<P: PointMethods>(&self, pt: &P) -> Point {
+        unsafe {
+            let pt = pt.as_ptr();
+            Point::from_ptr(ffi::wxDC_ToDIP1(self.as_ptr(), pt))
+        }
+    }
+    fn to_dip_int(&self, d: c_int) -> c_int {
+        unsafe { ffi::wxDC_ToDIP2(self.as_ptr(), d) }
+    }
+    fn get_size_coord(&self, width: *mut c_void, height: *mut c_void) {
+        unsafe { ffi::wxDC_GetSize(self.as_ptr(), width, height) }
+    }
+    fn get_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxDC_GetSize1(self.as_ptr())) }
+    }
+    fn get_size_mm_coord(&self, width: *mut c_void, height: *mut c_void) {
+        unsafe { ffi::wxDC_GetSizeMM(self.as_ptr(), width, height) }
+    }
+    fn get_size_mm(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxDC_GetSizeMM1(self.as_ptr())) }
+    }
+    fn get_user_scale(&self, x: *mut c_void, y: *mut c_void) {
+        unsafe { ffi::wxDC_GetUserScale(self.as_ptr(), x, y) }
+    }
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxDC_IsOk(self.as_ptr()) }
+    }
+    fn set_axis_orientation(&self, x_left_right: bool, y_bottom_up: bool) {
+        unsafe { ffi::wxDC_SetAxisOrientation(self.as_ptr(), x_left_right, y_bottom_up) }
+    }
+    fn set_device_origin(&self, x: c_int, y: c_int) {
+        unsafe { ffi::wxDC_SetDeviceOrigin(self.as_ptr(), x, y) }
+    }
+    // NOT_SUPPORTED: fn SetLogicalFunction()
+    // NOT_SUPPORTED: fn SetMapMode()
+    fn set_palette<P: PaletteMethods>(&self, palette: &P) {
+        unsafe {
+            let palette = palette.as_ptr();
+            ffi::wxDC_SetPalette(self.as_ptr(), palette)
+        }
+    }
+    fn set_user_scale(&self, x_scale: c_double, y_scale: c_double) {
+        unsafe { ffi::wxDC_SetUserScale(self.as_ptr(), x_scale, y_scale) }
+    }
+    fn can_use_transform_matrix(&self) -> bool {
+        unsafe { ffi::wxDC_CanUseTransformMatrix(self.as_ptr()) }
+    }
+    fn set_transform_matrix<A: AffineMatrix2DMethods>(&self, matrix: &A) -> bool {
+        unsafe {
+            let matrix = matrix.as_ptr();
+            ffi::wxDC_SetTransformMatrix(self.as_ptr(), matrix)
+        }
+    }
+    fn get_transform_matrix(&self) -> AffineMatrix2D {
+        unsafe { AffineMatrix2D::from_ptr(ffi::wxDC_GetTransformMatrix(self.as_ptr())) }
+    }
+    fn reset_transform_matrix(&self) {
+        unsafe { ffi::wxDC_ResetTransformMatrix(self.as_ptr()) }
+    }
+    fn can_draw_bitmap(&self) -> bool {
+        unsafe { ffi::wxDC_CanDrawBitmap(self.as_ptr()) }
+    }
+    fn can_get_text_extent(&self) -> bool {
+        unsafe { ffi::wxDC_CanGetTextExtent(self.as_ptr()) }
+    }
+    fn get_handle(&self) -> *mut c_void {
+        unsafe { ffi::wxDC_GetHandle(self.as_ptr()) }
+    }
+    fn get_as_bitmap<R: RectMethods>(&self, subrect: Option<&R>) -> Bitmap {
+        unsafe {
+            let subrect = match subrect {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            Bitmap::from_ptr(ffi::wxDC_GetAsBitmap(self.as_ptr(), subrect))
+        }
+    }
+    fn set_logical_scale(&self, x: c_double, y: c_double) {
+        unsafe { ffi::wxDC_SetLogicalScale(self.as_ptr(), x, y) }
+    }
+    fn get_logical_scale(&self, x: *mut c_void, y: *mut c_void) {
+        unsafe { ffi::wxDC_GetLogicalScale(self.as_ptr(), x, y) }
+    }
+    fn set_logical_origin(&self, x: c_int, y: c_int) {
+        unsafe { ffi::wxDC_SetLogicalOrigin(self.as_ptr(), x, y) }
+    }
+    fn get_logical_origin_coord(&self, x: *mut c_void, y: *mut c_void) {
+        unsafe { ffi::wxDC_GetLogicalOrigin(self.as_ptr(), x, y) }
+    }
+    fn get_logical_origin(&self) -> Point {
+        unsafe { Point::from_ptr(ffi::wxDC_GetLogicalOrigin1(self.as_ptr())) }
+    }
+    fn get_graphics_context(&self) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe { GraphicsContext::option_from(ffi::wxDC_GetGraphicsContext(self.as_ptr())) }
+    }
+    fn set_graphics_context<G: GraphicsContextMethods>(&self, ctx: Option<&G>) {
+        unsafe {
+            let ctx = match ctx {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDC_SetGraphicsContext(self.as_ptr(), ctx)
+        }
+    }
+}
+
+// wxDCBrushChanger
+pub trait DCBrushChangerMethods: WxRustMethods {
+    // DTOR: fn ~wxDCBrushChanger()
+}
+
+// wxDCClipper
+pub trait DCClipperMethods: WxRustMethods {
+    // DTOR: fn ~wxDCClipper()
+}
+
+// wxDCFontChanger
+pub trait DCFontChangerMethods: WxRustMethods {
+    fn set<F: FontMethods>(&self, font: &F) {
+        unsafe {
+            let font = font.as_ptr();
+            ffi::wxDCFontChanger_Set(self.as_ptr(), font)
+        }
+    }
+    // DTOR: fn ~wxDCFontChanger()
+}
+
+// wxDCOverlay
+pub trait DCOverlayMethods: WxRustMethods {
+    // DTOR: fn ~wxDCOverlay()
+    fn clear(&self) {
+        unsafe { ffi::wxDCOverlay_Clear(self.as_ptr()) }
+    }
+}
+
+// wxDCPenChanger
+pub trait DCPenChangerMethods: WxRustMethods {
+    // DTOR: fn ~wxDCPenChanger()
+}
+
+// wxDCTextBgColourChanger
+pub trait DCTextBgColourChangerMethods: WxRustMethods {
+    fn set<C: ColourMethods>(&self, col: &C) {
+        unsafe {
+            let col = col.as_ptr();
+            ffi::wxDCTextBgColourChanger_Set(self.as_ptr(), col)
+        }
+    }
+    // DTOR: fn ~wxDCTextBgColourChanger()
+}
+
+// wxDCTextBgModeChanger
+pub trait DCTextBgModeChangerMethods: WxRustMethods {}
+
+// wxDCTextColourChanger
+pub trait DCTextColourChangerMethods: WxRustMethods {
+    fn set<C: ColourMethods>(&self, col: &C) {
+        unsafe {
+            let col = col.as_ptr();
+            ffi::wxDCTextColourChanger_Set(self.as_ptr(), col)
+        }
+    }
+    // DTOR: fn ~wxDCTextColourChanger()
+}
+
+// wxDPIChangedEvent
+pub trait DPIChangedEventMethods: EventMethods {
+    fn get_old_dpi(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxDPIChangedEvent_GetOldDPI(self.as_ptr())) }
+    }
+    fn get_new_dpi(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxDPIChangedEvent_GetNewDPI(self.as_ptr())) }
+    }
+    fn scale(&self, sz: ffi::wxSize) -> Size {
+        unsafe { Size::from_ptr(ffi::wxDPIChangedEvent_Scale(self.as_ptr(), sz)) }
+    }
+    fn scale_x(&self, x: c_int) -> c_int {
+        unsafe { ffi::wxDPIChangedEvent_ScaleX(self.as_ptr(), x) }
+    }
+    fn scale_y(&self, y: c_int) -> c_int {
+        unsafe { ffi::wxDPIChangedEvent_ScaleY(self.as_ptr(), y) }
+    }
+}
+
+// wxDataObject
+pub trait DataObjectMethods: WxRustMethods {
+    // DTOR: fn ~wxDataObject()
+    // NOT_SUPPORTED: fn GetAllFormats()
+    fn get_data_here(&self, format: *const c_void, buf: *mut c_void) -> bool {
+        unsafe { ffi::wxDataObject_GetDataHere(self.as_ptr(), format, buf) }
+    }
+    fn get_data_size(&self, format: *const c_void) -> usize {
+        unsafe { ffi::wxDataObject_GetDataSize(self.as_ptr(), format) }
+    }
+    // NOT_SUPPORTED: fn GetFormatCount()
+    // NOT_SUPPORTED: fn GetPreferredFormat()
+    fn set_data(&self, format: *const c_void, len: usize, buf: *const c_void) -> bool {
+        unsafe { ffi::wxDataObject_SetData(self.as_ptr(), format, len, buf) }
+    }
+    // NOT_SUPPORTED: fn IsSupported()
+}
+
+// wxDataObjectComposite
+pub trait DataObjectCompositeMethods: DataObjectMethods {
+    fn add<D: DataObjectSimpleMethods>(&self, data_object: Option<&D>, preferred: bool) {
+        unsafe {
+            let data_object = match data_object {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataObjectComposite_Add(self.as_ptr(), data_object, preferred)
+        }
+    }
+    // NOT_SUPPORTED: fn GetReceivedFormat()
+    // NOT_SUPPORTED: fn GetObject()
+}
+
+// wxDataObjectSimple
+pub trait DataObjectSimpleMethods: DataObjectMethods {
+    fn get_data_here_void(&self, buf: *mut c_void) -> bool {
+        unsafe { ffi::wxDataObjectSimple_GetDataHere(self.as_ptr(), buf) }
+    }
+    fn get_data_size(&self) -> usize {
+        unsafe { ffi::wxDataObjectSimple_GetDataSize(self.as_ptr()) }
+    }
+    fn get_format(&self) -> *const c_void {
+        unsafe { ffi::wxDataObjectSimple_GetFormat(self.as_ptr()) }
+    }
+    fn set_data_sz(&self, len: usize, buf: *const c_void) -> bool {
+        unsafe { ffi::wxDataObjectSimple_SetData(self.as_ptr(), len, buf) }
+    }
+    fn set_format(&self, format: *const c_void) {
+        unsafe { ffi::wxDataObjectSimple_SetFormat(self.as_ptr(), format) }
+    }
+}
+
+// wxDataViewBitmapRenderer
+pub trait DataViewBitmapRendererMethods: DataViewRendererMethods {
+    fn get_default_type() -> String {
+        unsafe { WxString::from_ptr(ffi::wxDataViewBitmapRenderer_GetDefaultType()).into() }
+    }
+}
+
+// wxDataViewCheckIconTextRenderer
+pub trait DataViewCheckIconTextRendererMethods: DataViewRendererMethods {
+    fn get_default_type() -> String {
+        unsafe { WxString::from_ptr(ffi::wxDataViewCheckIconTextRenderer_GetDefaultType()).into() }
+    }
+    fn allow3rd_state_for_user(&self, allow: bool) {
+        unsafe { ffi::wxDataViewCheckIconTextRenderer_Allow3rdStateForUser(self.as_ptr(), allow) }
+    }
+}
+
+// wxDataViewChoiceByIndexRenderer
+pub trait DataViewChoiceByIndexRendererMethods: DataViewChoiceRendererMethods {}
+
+// wxDataViewChoiceRenderer
+pub trait DataViewChoiceRendererMethods: DataViewRendererMethods {
+    fn get_choice(&self, index: usize) -> String {
+        unsafe {
+            WxString::from_ptr(ffi::wxDataViewChoiceRenderer_GetChoice(
+                self.as_ptr(),
+                index,
+            ))
+            .into()
+        }
+    }
+    fn get_choices(&self) -> ArrayStringIsOwned<false> {
+        unsafe {
+            ArrayStringIsOwned::from_ptr(ffi::wxDataViewChoiceRenderer_GetChoices(self.as_ptr()))
+        }
+    }
+}
+
+// wxDataViewColumn
+pub trait DataViewColumnMethods: SettableHeaderColumnMethods {
+    fn get_model_column(&self) -> c_uint {
+        unsafe { ffi::wxDataViewColumn_GetModelColumn(self.as_ptr()) }
+    }
+    fn get_owner(&self) -> WeakRef<DataViewCtrl> {
+        unsafe { WeakRef::<DataViewCtrl>::from(ffi::wxDataViewColumn_GetOwner(self.as_ptr())) }
+    }
+    fn get_renderer(&self) -> Option<DataViewRendererIsOwned<false>> {
+        unsafe { DataViewRenderer::option_from(ffi::wxDataViewColumn_GetRenderer(self.as_ptr())) }
+    }
+}
+
+// wxDataViewCtrl
+pub trait DataViewCtrlMethods: ControlMethods {
+    // DTOR: fn ~wxDataViewCtrl()
+    fn allow_multi_column_sort(&self, allow: bool) -> bool {
+        unsafe { ffi::wxDataViewCtrl_AllowMultiColumnSort(self.as_ptr(), allow) }
+    }
+    fn append_column<D: DataViewColumnMethods>(&self, col: Option<&D>) -> bool {
+        unsafe {
+            let col = match col {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewCtrl_AppendColumn(self.as_ptr(), col)
+        }
+    }
+    fn prepend_column<D: DataViewColumnMethods>(&self, col: Option<&D>) -> bool {
+        unsafe {
+            let col = match col {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewCtrl_PrependColumn(self.as_ptr(), col)
+        }
+    }
+    fn insert_column<D: DataViewColumnMethods>(&self, pos: c_uint, col: Option<&D>) -> bool {
+        unsafe {
+            let col = match col {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewCtrl_InsertColumn(self.as_ptr(), pos, col)
+        }
+    }
+    // NOT_SUPPORTED: fn AppendBitmapColumn()
+    // NOT_SUPPORTED: fn AppendBitmapColumn1()
+    // NOT_SUPPORTED: fn PrependBitmapColumn()
+    // NOT_SUPPORTED: fn PrependBitmapColumn1()
+    // NOT_SUPPORTED: fn AppendDateColumn()
+    // NOT_SUPPORTED: fn AppendDateColumn1()
+    // NOT_SUPPORTED: fn PrependDateColumn()
+    // NOT_SUPPORTED: fn PrependDateColumn1()
+    // NOT_SUPPORTED: fn AppendIconTextColumn()
+    // NOT_SUPPORTED: fn AppendIconTextColumn1()
+    // NOT_SUPPORTED: fn PrependIconTextColumn()
+    // NOT_SUPPORTED: fn PrependIconTextColumn1()
+    // NOT_SUPPORTED: fn AppendProgressColumn()
+    // NOT_SUPPORTED: fn AppendProgressColumn1()
+    // NOT_SUPPORTED: fn PrependProgressColumn()
+    // NOT_SUPPORTED: fn PrependProgressColumn1()
+    // NOT_SUPPORTED: fn AppendTextColumn()
+    // NOT_SUPPORTED: fn AppendTextColumn1()
+    // NOT_SUPPORTED: fn PrependTextColumn()
+    // NOT_SUPPORTED: fn PrependTextColumn1()
+    // NOT_SUPPORTED: fn AppendToggleColumn()
+    // NOT_SUPPORTED: fn AppendToggleColumn1()
+    // NOT_SUPPORTED: fn PrependToggleColumn()
+    // NOT_SUPPORTED: fn PrependToggleColumn1()
+    fn associate_model<D: DataViewModelMethods>(&self, model: Option<&D>) -> bool {
+        unsafe {
+            let model = match model {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewCtrl_AssociateModel(self.as_ptr(), model)
+        }
+    }
+    fn clear_columns(&self) -> bool {
+        unsafe { ffi::wxDataViewCtrl_ClearColumns(self.as_ptr()) }
+    }
+    fn collapse<D: DataViewItemMethods>(&self, item: &D) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewCtrl_Collapse(self.as_ptr(), item)
+        }
+    }
+    fn delete_column<D: DataViewColumnMethods>(&self, column: Option<&D>) -> bool {
+        unsafe {
+            let column = match column {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewCtrl_DeleteColumn(self.as_ptr(), column)
+        }
+    }
+    fn edit_item<D: DataViewItemMethods, D2: DataViewColumnMethods>(
+        &self,
+        item: &D,
+        column: Option<&D2>,
+    ) {
+        unsafe {
+            let item = item.as_ptr();
+            let column = match column {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewCtrl_EditItem(self.as_ptr(), item, column)
+        }
+    }
+    fn enable_drag_source(&self, format: *const c_void) -> bool {
+        unsafe { ffi::wxDataViewCtrl_EnableDragSource(self.as_ptr(), format) }
+    }
+    fn enable_drop_targets(&self, formats: *const c_void) -> bool {
+        unsafe { ffi::wxDataViewCtrl_EnableDropTargets(self.as_ptr(), formats) }
+    }
+    fn enable_drop_target(&self, format: *const c_void) -> bool {
+        unsafe { ffi::wxDataViewCtrl_EnableDropTarget(self.as_ptr(), format) }
+    }
+    fn ensure_visible<D: DataViewItemMethods, D2: DataViewColumnMethods>(
+        &self,
+        item: &D,
+        column: Option<&D2>,
+    ) {
+        unsafe {
+            let item = item.as_ptr();
+            let column = match column {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewCtrl_EnsureVisible(self.as_ptr(), item, column)
+        }
+    }
+    fn expand<D: DataViewItemMethods>(&self, item: &D) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewCtrl_Expand(self.as_ptr(), item)
+        }
+    }
+    fn expand_ancestors<D: DataViewItemMethods>(&self, item: &D) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewCtrl_ExpandAncestors(self.as_ptr(), item)
+        }
+    }
+    fn expand_children<D: DataViewItemMethods>(&self, item: &D) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewCtrl_ExpandChildren(self.as_ptr(), item)
+        }
+    }
+    fn get_column(&self, pos: c_uint) -> Option<DataViewColumnIsOwned<false>> {
+        unsafe { DataViewColumn::option_from(ffi::wxDataViewCtrl_GetColumn(self.as_ptr(), pos)) }
+    }
+    fn get_column_count(&self) -> c_uint {
+        unsafe { ffi::wxDataViewCtrl_GetColumnCount(self.as_ptr()) }
+    }
+    fn get_column_position<D: DataViewColumnMethods>(&self, column: Option<&D>) -> c_int {
+        unsafe {
+            let column = match column {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewCtrl_GetColumnPosition(self.as_ptr(), column)
+        }
+    }
+    fn get_expander_column(&self) -> Option<DataViewColumnIsOwned<false>> {
+        unsafe { DataViewColumn::option_from(ffi::wxDataViewCtrl_GetExpanderColumn(self.as_ptr())) }
+    }
+    fn get_current_item(&self) -> DataViewItem {
+        unsafe { DataViewItem::from_ptr(ffi::wxDataViewCtrl_GetCurrentItem(self.as_ptr())) }
+    }
+    fn get_current_column(&self) -> Option<DataViewColumnIsOwned<false>> {
+        unsafe { DataViewColumn::option_from(ffi::wxDataViewCtrl_GetCurrentColumn(self.as_ptr())) }
+    }
+    fn get_indent(&self) -> c_int {
+        unsafe { ffi::wxDataViewCtrl_GetIndent(self.as_ptr()) }
+    }
+    fn get_item_rect<D: DataViewItemMethods, D2: DataViewColumnMethods>(
+        &self,
+        item: &D,
+        col: Option<&D2>,
+    ) -> Rect {
+        unsafe {
+            let item = item.as_ptr();
+            let col = match col {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            Rect::from_ptr(ffi::wxDataViewCtrl_GetItemRect(self.as_ptr(), item, col))
+        }
+    }
+    fn get_main_window(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxDataViewCtrl_GetMainWindow(self.as_ptr())) }
+    }
+    fn get_model(&self) -> Option<DataViewModelIsOwned<false>> {
+        unsafe { DataViewModel::option_from(ffi::wxDataViewCtrl_GetModel(self.as_ptr())) }
+    }
+    fn get_selected_items_count(&self) -> c_int {
+        unsafe { ffi::wxDataViewCtrl_GetSelectedItemsCount(self.as_ptr()) }
+    }
+    fn get_selection(&self) -> DataViewItem {
+        unsafe { DataViewItem::from_ptr(ffi::wxDataViewCtrl_GetSelection(self.as_ptr())) }
+    }
+    fn get_selections(&self, sel: *mut c_void) -> c_int {
+        unsafe { ffi::wxDataViewCtrl_GetSelections(self.as_ptr(), sel) }
+    }
+    fn get_sorting_column(&self) -> Option<DataViewColumnIsOwned<false>> {
+        unsafe { DataViewColumn::option_from(ffi::wxDataViewCtrl_GetSortingColumn(self.as_ptr())) }
+    }
+    fn get_sorting_columns(&self) -> *mut c_void {
+        unsafe { ffi::wxDataViewCtrl_GetSortingColumns(self.as_ptr()) }
+    }
+    fn has_selection(&self) -> bool {
+        unsafe { ffi::wxDataViewCtrl_HasSelection(self.as_ptr()) }
+    }
+    fn hit_test<P: PointMethods, D: DataViewItemMethods, D2: DataViewColumnMethods>(
+        &self,
+        point: &P,
+        item: &D,
+        col: Option<&D2>,
+    ) {
+        unsafe {
+            let point = point.as_ptr();
+            let item = item.as_ptr();
+            let col = match col {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewCtrl_HitTest(self.as_ptr(), point, item, col)
+        }
+    }
+    fn is_expanded<D: DataViewItemMethods>(&self, item: &D) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewCtrl_IsExpanded(self.as_ptr(), item)
+        }
+    }
+    fn is_multi_column_sort_allowed(&self) -> bool {
+        unsafe { ffi::wxDataViewCtrl_IsMultiColumnSortAllowed(self.as_ptr()) }
+    }
+    fn is_selected<D: DataViewItemMethods>(&self, item: &D) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewCtrl_IsSelected(self.as_ptr(), item)
+        }
+    }
+    fn select<D: DataViewItemMethods>(&self, item: &D) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewCtrl_Select(self.as_ptr(), item)
+        }
+    }
+    fn select_all(&self) {
+        unsafe { ffi::wxDataViewCtrl_SelectAll(self.as_ptr()) }
+    }
+    fn set_alternate_row_colour<C: ColourMethods>(&self, colour: &C) -> bool {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxDataViewCtrl_SetAlternateRowColour(self.as_ptr(), colour)
+        }
+    }
+    fn set_expander_column<D: DataViewColumnMethods>(&self, col: Option<&D>) {
+        unsafe {
+            let col = match col {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewCtrl_SetExpanderColumn(self.as_ptr(), col)
+        }
+    }
+    fn set_current_item<D: DataViewItemMethods>(&self, item: &D) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewCtrl_SetCurrentItem(self.as_ptr(), item)
+        }
+    }
+    fn set_header_attr<I: ItemAttrMethods>(&self, attr: &I) -> bool {
+        unsafe {
+            let attr = attr.as_ptr();
+            ffi::wxDataViewCtrl_SetHeaderAttr(self.as_ptr(), attr)
+        }
+    }
+    fn set_indent(&self, indent: c_int) {
+        unsafe { ffi::wxDataViewCtrl_SetIndent(self.as_ptr(), indent) }
+    }
+    fn set_selections(&self, sel: *const c_void) {
+        unsafe { ffi::wxDataViewCtrl_SetSelections(self.as_ptr(), sel) }
+    }
+    fn unselect<D: DataViewItemMethods>(&self, item: &D) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewCtrl_Unselect(self.as_ptr(), item)
+        }
+    }
+    fn unselect_all(&self) {
+        unsafe { ffi::wxDataViewCtrl_UnselectAll(self.as_ptr()) }
+    }
+    fn set_row_height(&self, row_height: c_int) -> bool {
+        unsafe { ffi::wxDataViewCtrl_SetRowHeight(self.as_ptr(), row_height) }
+    }
+    fn toggle_sort_by_column(&self, column: c_int) {
+        unsafe { ffi::wxDataViewCtrl_ToggleSortByColumn(self.as_ptr(), column) }
+    }
+    fn get_count_per_page(&self) -> c_int {
+        unsafe { ffi::wxDataViewCtrl_GetCountPerPage(self.as_ptr()) }
+    }
+    fn get_top_item(&self) -> DataViewItem {
+        unsafe { DataViewItem::from_ptr(ffi::wxDataViewCtrl_GetTopItem(self.as_ptr())) }
+    }
+}
+
+// wxDataViewCustomRenderer
+pub trait DataViewCustomRendererMethods: DataViewRendererMethods {
+    fn get_default_type() -> String {
+        unsafe { WxString::from_ptr(ffi::wxDataViewCustomRenderer_GetDefaultType()).into() }
+    }
+    // DTOR: fn ~wxDataViewCustomRenderer()
+    fn activate_cell<
+        R: RectMethods,
+        D: DataViewModelMethods,
+        D2: DataViewItemMethods,
+        M: MouseEventMethods,
+    >(
+        &self,
+        cell: &R,
+        model: Option<&D>,
+        item: &D2,
+        col: c_uint,
+        mouse_event: Option<&M>,
+    ) -> bool {
+        unsafe {
+            let cell = cell.as_ptr();
+            let model = match model {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let item = item.as_ptr();
+            let mouse_event = match mouse_event {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewCustomRenderer_ActivateCell(
+                self.as_ptr(),
+                cell,
+                model,
+                item,
+                col,
+                mouse_event,
+            )
+        }
+    }
+    fn get_attr(&self) -> DataViewItemAttrIsOwned<false> {
+        unsafe {
+            DataViewItemAttrIsOwned::from_ptr(ffi::wxDataViewCustomRenderer_GetAttr(self.as_ptr()))
+        }
+    }
+    fn get_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxDataViewCustomRenderer_GetSize(self.as_ptr())) }
+    }
+    fn left_click<D: DataViewModelMethods, D2: DataViewItemMethods>(
+        &self,
+        cursor: ffi::wxPoint,
+        cell: ffi::wxRect,
+        model: Option<&D>,
+        item: &D2,
+        col: c_uint,
+    ) -> bool {
+        unsafe {
+            let model = match model {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let item = item.as_ptr();
+            ffi::wxDataViewCustomRenderer_LeftClick(self.as_ptr(), cursor, cell, model, item, col)
+        }
+    }
+    fn activate<D: DataViewModelMethods, D2: DataViewItemMethods>(
+        &self,
+        cell: ffi::wxRect,
+        model: Option<&D>,
+        item: &D2,
+        col: c_uint,
+    ) -> bool {
+        unsafe {
+            let model = match model {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let item = item.as_ptr();
+            ffi::wxDataViewCustomRenderer_Activate(self.as_ptr(), cell, model, item, col)
+        }
+    }
+    fn render<D: DCMethods>(&self, cell: ffi::wxRect, dc: Option<&D>, state: c_int) -> bool {
+        unsafe {
+            let dc = match dc {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewCustomRenderer_Render(self.as_ptr(), cell, dc, state)
+        }
+    }
+    fn render_text<D: DCMethods>(
+        &self,
+        text: &str,
+        xoffset: c_int,
+        cell: ffi::wxRect,
+        dc: Option<&D>,
+        state: c_int,
+    ) {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let dc = match dc {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewCustomRenderer_RenderText(self.as_ptr(), text, xoffset, cell, dc, state)
+        }
+    }
+    fn start_drag<
+        P: PointMethods,
+        R: RectMethods,
+        D: DataViewModelMethods,
+        D2: DataViewItemMethods,
+    >(
+        &self,
+        cursor: &P,
+        cell: &R,
+        model: Option<&D>,
+        item: &D2,
+        col: c_uint,
+    ) -> bool {
+        unsafe {
+            let cursor = cursor.as_ptr();
+            let cell = cell.as_ptr();
+            let model = match model {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let item = item.as_ptr();
+            ffi::wxDataViewCustomRenderer_StartDrag(self.as_ptr(), cursor, cell, model, item, col)
+        }
+    }
+}
+
+// wxDataViewDateRenderer
+pub trait DataViewDateRendererMethods: DataViewRendererMethods {
+    fn get_default_type() -> String {
+        unsafe { WxString::from_ptr(ffi::wxDataViewDateRenderer_GetDefaultType()).into() }
+    }
+}
+
+// wxDataViewEvent
+pub trait DataViewEventMethods: NotifyEventMethods {
+    fn get_column(&self) -> c_int {
+        unsafe { ffi::wxDataViewEvent_GetColumn(self.as_ptr()) }
+    }
+    fn get_data_view_column(&self) -> Option<DataViewColumnIsOwned<false>> {
+        unsafe {
+            DataViewColumn::option_from(ffi::wxDataViewEvent_GetDataViewColumn(self.as_ptr()))
+        }
+    }
+    fn get_model(&self) -> Option<DataViewModelIsOwned<false>> {
+        unsafe { DataViewModel::option_from(ffi::wxDataViewEvent_GetModel(self.as_ptr())) }
+    }
+    fn get_position(&self) -> Point {
+        unsafe { Point::from_ptr(ffi::wxDataViewEvent_GetPosition(self.as_ptr())) }
+    }
+    fn get_value(&self) -> *const c_void {
+        unsafe { ffi::wxDataViewEvent_GetValue(self.as_ptr()) }
+    }
+    fn is_edit_cancelled(&self) -> bool {
+        unsafe { ffi::wxDataViewEvent_IsEditCancelled(self.as_ptr()) }
+    }
+    fn set_column(&self, col: c_int) {
+        unsafe { ffi::wxDataViewEvent_SetColumn(self.as_ptr(), col) }
+    }
+    fn set_data_view_column<D: DataViewColumnMethods>(&self, col: Option<&D>) {
+        unsafe {
+            let col = match col {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewEvent_SetDataViewColumn(self.as_ptr(), col)
+        }
+    }
+    fn set_model<D: DataViewModelMethods>(&self, model: Option<&D>) {
+        unsafe {
+            let model = match model {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewEvent_SetModel(self.as_ptr(), model)
+        }
+    }
+    fn set_value(&self, value: *const c_void) {
+        unsafe { ffi::wxDataViewEvent_SetValue(self.as_ptr(), value) }
+    }
+    fn set_data_object<D: DataObjectMethods>(&self, obj: Option<&D>) {
+        unsafe {
+            let obj = match obj {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewEvent_SetDataObject(self.as_ptr(), obj)
+        }
+    }
+    // NOT_SUPPORTED: fn GetDataFormat()
+    fn get_data_size(&self) -> usize {
+        unsafe { ffi::wxDataViewEvent_GetDataSize(self.as_ptr()) }
+    }
+    fn get_data_buffer(&self) -> *mut c_void {
+        unsafe { ffi::wxDataViewEvent_GetDataBuffer(self.as_ptr()) }
+    }
+    fn set_drag_flags(&self, flags: c_int) {
+        unsafe { ffi::wxDataViewEvent_SetDragFlags(self.as_ptr(), flags) }
+    }
+    // NOT_SUPPORTED: fn GetDropEffect()
+    fn get_cache_from(&self) -> c_int {
+        unsafe { ffi::wxDataViewEvent_GetCacheFrom(self.as_ptr()) }
+    }
+    fn get_cache_to(&self) -> c_int {
+        unsafe { ffi::wxDataViewEvent_GetCacheTo(self.as_ptr()) }
+    }
+    fn get_proposed_drop_index(&self) -> c_int {
+        unsafe { ffi::wxDataViewEvent_GetProposedDropIndex(self.as_ptr()) }
+    }
+    fn get_item(&self) -> DataViewItem {
+        unsafe { DataViewItem::from_ptr(ffi::wxDataViewEvent_GetItem(self.as_ptr())) }
+    }
+    fn set_item<D: DataViewItemMethods>(&self, item: &D) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewEvent_SetItem(self.as_ptr(), item)
+        }
+    }
+    fn set_position(&self, x: c_int, y: c_int) {
+        unsafe { ffi::wxDataViewEvent_SetPosition(self.as_ptr(), x, y) }
+    }
+    fn set_cache(&self, from: c_int, to: c_int) {
+        unsafe { ffi::wxDataViewEvent_SetCache(self.as_ptr(), from, to) }
+    }
+    fn get_data_object(&self) -> Option<DataObjectIsOwned<false>> {
+        unsafe { DataObject::option_from(ffi::wxDataViewEvent_GetDataObject(self.as_ptr())) }
+    }
+    fn set_data_format(&self, format: *const c_void) {
+        unsafe { ffi::wxDataViewEvent_SetDataFormat(self.as_ptr(), format) }
+    }
+    fn set_data_size(&self, size: usize) {
+        unsafe { ffi::wxDataViewEvent_SetDataSize(self.as_ptr(), size) }
+    }
+    fn set_data_buffer(&self, buf: *mut c_void) {
+        unsafe { ffi::wxDataViewEvent_SetDataBuffer(self.as_ptr(), buf) }
+    }
+    fn get_drag_flags(&self) -> c_int {
+        unsafe { ffi::wxDataViewEvent_GetDragFlags(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn SetDropEffect()
+}
+
+// wxDataViewIconText
+pub trait DataViewIconTextMethods: ObjectMethods {
+    fn get_bitmap_bundle(&self) -> BitmapBundleIsOwned<false> {
+        unsafe {
+            BitmapBundleIsOwned::from_ptr(ffi::wxDataViewIconText_GetBitmapBundle(self.as_ptr()))
+        }
+    }
+    fn get_icon(&self) -> Icon {
+        unsafe { Icon::from_ptr(ffi::wxDataViewIconText_GetIcon(self.as_ptr())) }
+    }
+    fn get_text(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxDataViewIconText_GetText(self.as_ptr())).into() }
+    }
+    fn set_bitmap_bundle<B: BitmapBundleMethods>(&self, bitmap: &B) {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            ffi::wxDataViewIconText_SetBitmapBundle(self.as_ptr(), bitmap)
+        }
+    }
+    fn set_icon<I: IconMethods>(&self, icon: &I) {
+        unsafe {
+            let icon = icon.as_ptr();
+            ffi::wxDataViewIconText_SetIcon(self.as_ptr(), icon)
+        }
+    }
+    fn set_text(&self, text: &str) {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxDataViewIconText_SetText(self.as_ptr(), text)
+        }
+    }
+}
+
+// wxDataViewIconTextRenderer
+pub trait DataViewIconTextRendererMethods: DataViewRendererMethods {
+    fn get_default_type() -> String {
+        unsafe { WxString::from_ptr(ffi::wxDataViewIconTextRenderer_GetDefaultType()).into() }
+    }
+}
+
+// wxDataViewIndexListModel
+pub trait DataViewIndexListModelMethods: DataViewListModelMethods {
+    fn get_item(&self, row: c_uint) -> DataViewItem {
+        unsafe { DataViewItem::from_ptr(ffi::wxDataViewIndexListModel_GetItem(self.as_ptr(), row)) }
+    }
+    fn reset(&self, new_size: c_uint) {
+        unsafe { ffi::wxDataViewIndexListModel_Reset(self.as_ptr(), new_size) }
+    }
+    fn row_appended(&self) {
+        unsafe { ffi::wxDataViewIndexListModel_RowAppended(self.as_ptr()) }
+    }
+    fn row_changed(&self, row: c_uint) {
+        unsafe { ffi::wxDataViewIndexListModel_RowChanged(self.as_ptr(), row) }
+    }
+    fn row_deleted(&self, row: c_uint) {
+        unsafe { ffi::wxDataViewIndexListModel_RowDeleted(self.as_ptr(), row) }
+    }
+    fn row_inserted(&self, before: c_uint) {
+        unsafe { ffi::wxDataViewIndexListModel_RowInserted(self.as_ptr(), before) }
+    }
+    fn row_prepended(&self) {
+        unsafe { ffi::wxDataViewIndexListModel_RowPrepended(self.as_ptr()) }
+    }
+    fn row_value_changed(&self, row: c_uint, col: c_uint) {
+        unsafe { ffi::wxDataViewIndexListModel_RowValueChanged(self.as_ptr(), row, col) }
+    }
+    fn rows_deleted<A: ArrayIntMethods>(&self, rows: &A) {
+        unsafe {
+            let rows = rows.as_ptr();
+            ffi::wxDataViewIndexListModel_RowsDeleted(self.as_ptr(), rows)
+        }
+    }
+}
+
+// wxDataViewItem
+pub trait DataViewItemMethods: WxRustMethods {
+    fn get_id(&self) -> *mut c_void {
+        unsafe { ffi::wxDataViewItem_GetID(self.as_ptr()) }
+    }
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxDataViewItem_IsOk(self.as_ptr()) }
+    }
+}
+
+// wxDataViewItemAttr
+pub trait DataViewItemAttrMethods: WxRustMethods {
+    fn set_bold(&self, set: bool) {
+        unsafe { ffi::wxDataViewItemAttr_SetBold(self.as_ptr(), set) }
+    }
+    fn set_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxDataViewItemAttr_SetColour(self.as_ptr(), colour)
+        }
+    }
+    fn set_background_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxDataViewItemAttr_SetBackgroundColour(self.as_ptr(), colour)
+        }
+    }
+    fn set_italic(&self, set: bool) {
+        unsafe { ffi::wxDataViewItemAttr_SetItalic(self.as_ptr(), set) }
+    }
+    fn set_strikethrough(&self, set: bool) {
+        unsafe { ffi::wxDataViewItemAttr_SetStrikethrough(self.as_ptr(), set) }
+    }
+    fn has_colour(&self) -> bool {
+        unsafe { ffi::wxDataViewItemAttr_HasColour(self.as_ptr()) }
+    }
+    fn get_colour(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxDataViewItemAttr_GetColour(self.as_ptr())) }
+    }
+    fn has_font(&self) -> bool {
+        unsafe { ffi::wxDataViewItemAttr_HasFont(self.as_ptr()) }
+    }
+    fn get_bold(&self) -> bool {
+        unsafe { ffi::wxDataViewItemAttr_GetBold(self.as_ptr()) }
+    }
+    fn get_italic(&self) -> bool {
+        unsafe { ffi::wxDataViewItemAttr_GetItalic(self.as_ptr()) }
+    }
+    fn has_background_colour(&self) -> bool {
+        unsafe { ffi::wxDataViewItemAttr_HasBackgroundColour(self.as_ptr()) }
+    }
+    fn get_background_colour(&self) -> ColourIsOwned<false> {
+        unsafe {
+            ColourIsOwned::from_ptr(ffi::wxDataViewItemAttr_GetBackgroundColour(self.as_ptr()))
+        }
+    }
+    fn is_default(&self) -> bool {
+        unsafe { ffi::wxDataViewItemAttr_IsDefault(self.as_ptr()) }
+    }
+    fn get_effective_font<F: FontMethods>(&self, font: &F) -> Font {
+        unsafe {
+            let font = font.as_ptr();
+            Font::from_ptr(ffi::wxDataViewItemAttr_GetEffectiveFont(
+                self.as_ptr(),
+                font,
+            ))
+        }
+    }
+}
+
+// wxDataViewListCtrl
+pub trait DataViewListCtrlMethods: DataViewCtrlMethods {
+    fn get_selected_row(&self) -> c_int {
+        unsafe { ffi::wxDataViewListCtrl_GetSelectedRow(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn SelectRow()
+    // NOT_SUPPORTED: fn UnselectRow()
+    // NOT_SUPPORTED: fn IsRowSelected()
+    fn append_column_str<D: DataViewColumnMethods>(&self, column: Option<&D>, varianttype: &str) {
+        unsafe {
+            let column = match column {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let varianttype = WxString::from(varianttype);
+            let varianttype = varianttype.as_ptr();
+            ffi::wxDataViewListCtrl_AppendColumn(self.as_ptr(), column, varianttype)
+        }
+    }
+    // NOT_SUPPORTED: fn AppendTextColumn()
+    // NOT_SUPPORTED: fn AppendToggleColumn()
+    // NOT_SUPPORTED: fn AppendProgressColumn()
+    // NOT_SUPPORTED: fn AppendIconTextColumn()
+    fn insert_column_str<D: DataViewColumnMethods>(
+        &self,
+        pos: c_uint,
+        column: Option<&D>,
+        varianttype: &str,
+    ) {
+        unsafe {
+            let column = match column {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let varianttype = WxString::from(varianttype);
+            let varianttype = varianttype.as_ptr();
+            ffi::wxDataViewListCtrl_InsertColumn(self.as_ptr(), pos, column, varianttype)
+        }
+    }
+    fn prepend_column_str<D: DataViewColumnMethods>(&self, column: Option<&D>, varianttype: &str) {
+        unsafe {
+            let column = match column {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let varianttype = WxString::from(varianttype);
+            let varianttype = varianttype.as_ptr();
+            ffi::wxDataViewListCtrl_PrependColumn(self.as_ptr(), column, varianttype)
+        }
+    }
+    // NOT_SUPPORTED: fn AppendItem()
+    // NOT_SUPPORTED: fn PrependItem()
+    // NOT_SUPPORTED: fn InsertItem()
+    // NOT_SUPPORTED: fn DeleteItem()
+    fn delete_all_items(&self) {
+        unsafe { ffi::wxDataViewListCtrl_DeleteAllItems(self.as_ptr()) }
+    }
+    fn get_item_count(&self) -> c_uint {
+        unsafe { ffi::wxDataViewListCtrl_GetItemCount(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetItemData()
+    fn set_value(&self, value: *const c_void, row: c_uint, col: c_uint) {
+        unsafe { ffi::wxDataViewListCtrl_SetValue(self.as_ptr(), value, row, col) }
+    }
+    fn get_value(&self, value: *mut c_void, row: c_uint, col: c_uint) {
+        unsafe { ffi::wxDataViewListCtrl_GetValue(self.as_ptr(), value, row, col) }
+    }
+    fn set_text_value(&self, value: &str, row: c_uint, col: c_uint) {
+        unsafe {
+            let value = WxString::from(value);
+            let value = value.as_ptr();
+            ffi::wxDataViewListCtrl_SetTextValue(self.as_ptr(), value, row, col)
+        }
+    }
+    fn get_text_value(&self, row: c_uint, col: c_uint) -> String {
+        unsafe {
+            WxString::from_ptr(ffi::wxDataViewListCtrl_GetTextValue(
+                self.as_ptr(),
+                row,
+                col,
+            ))
+            .into()
+        }
+    }
+    fn set_toggle_value(&self, value: bool, row: c_uint, col: c_uint) {
+        unsafe { ffi::wxDataViewListCtrl_SetToggleValue(self.as_ptr(), value, row, col) }
+    }
+    fn get_toggle_value(&self, row: c_uint, col: c_uint) -> bool {
+        unsafe { ffi::wxDataViewListCtrl_GetToggleValue(self.as_ptr(), row, col) }
+    }
+    // NOT_SUPPORTED: fn SetItemData()
+    // DTOR: fn ~wxDataViewListCtrl()
+    fn create_validator<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            ffi::wxDataViewListCtrl_Create(self.as_ptr(), parent, id, pos, size, style, validator)
+        }
+    }
+    fn get_store(&self) -> Option<DataViewListStoreIsOwned<false>> {
+        unsafe { DataViewListStore::option_from(ffi::wxDataViewListCtrl_GetStore(self.as_ptr())) }
+    }
+    fn get_store(&self) -> Option<DataViewListStoreIsOwned<false>> {
+        unsafe { DataViewListStore::option_from(ffi::wxDataViewListCtrl_GetStore1(self.as_ptr())) }
+    }
+    fn item_to_row<D: DataViewItemMethods>(&self, item: &D) -> c_int {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewListCtrl_ItemToRow(self.as_ptr(), item)
+        }
+    }
+    fn row_to_item(&self, row: c_int) -> DataViewItem {
+        unsafe { DataViewItem::from_ptr(ffi::wxDataViewListCtrl_RowToItem(self.as_ptr(), row)) }
+    }
+}
+
+// wxDataViewListModel
+pub trait DataViewListModelMethods: DataViewModelMethods {
+    // DTOR: fn ~wxDataViewListModel()
+    fn get_attr_by_row<D: DataViewItemAttrMethods>(
+        &self,
+        row: c_uint,
+        col: c_uint,
+        attr: &D,
+    ) -> bool {
+        unsafe {
+            let attr = attr.as_ptr();
+            ffi::wxDataViewListModel_GetAttrByRow(self.as_ptr(), row, col, attr)
+        }
+    }
+    fn is_enabled_by_row(&self, row: c_uint, col: c_uint) -> bool {
+        unsafe { ffi::wxDataViewListModel_IsEnabledByRow(self.as_ptr(), row, col) }
+    }
+    fn get_count(&self) -> c_uint {
+        unsafe { ffi::wxDataViewListModel_GetCount(self.as_ptr()) }
+    }
+    fn get_row<D: DataViewItemMethods>(&self, item: &D) -> c_uint {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewListModel_GetRow(self.as_ptr(), item)
+        }
+    }
+    fn get_value_by_row(&self, variant: *mut c_void, row: c_uint, col: c_uint) {
+        unsafe { ffi::wxDataViewListModel_GetValueByRow(self.as_ptr(), variant, row, col) }
+    }
+    fn set_value_by_row(&self, variant: *const c_void, row: c_uint, col: c_uint) -> bool {
+        unsafe { ffi::wxDataViewListModel_SetValueByRow(self.as_ptr(), variant, row, col) }
+    }
+}
+
+// wxDataViewListStore
+pub trait DataViewListStoreMethods: DataViewIndexListModelMethods {
+    // DTOR: fn ~wxDataViewListStore()
+    fn prepend_column(&self, varianttype: &str) {
+        unsafe {
+            let varianttype = WxString::from(varianttype);
+            let varianttype = varianttype.as_ptr();
+            ffi::wxDataViewListStore_PrependColumn(self.as_ptr(), varianttype)
+        }
+    }
+    fn insert_column(&self, pos: c_uint, varianttype: &str) {
+        unsafe {
+            let varianttype = WxString::from(varianttype);
+            let varianttype = varianttype.as_ptr();
+            ffi::wxDataViewListStore_InsertColumn(self.as_ptr(), pos, varianttype)
+        }
+    }
+    fn append_column(&self, varianttype: &str) {
+        unsafe {
+            let varianttype = WxString::from(varianttype);
+            let varianttype = varianttype.as_ptr();
+            ffi::wxDataViewListStore_AppendColumn(self.as_ptr(), varianttype)
+        }
+    }
+    // NOT_SUPPORTED: fn AppendItem()
+    // NOT_SUPPORTED: fn PrependItem()
+    // NOT_SUPPORTED: fn InsertItem()
+    // NOT_SUPPORTED: fn DeleteItem()
+    fn delete_all_items(&self) {
+        unsafe { ffi::wxDataViewListStore_DeleteAllItems(self.as_ptr()) }
+    }
+    fn get_item_count(&self) -> c_uint {
+        unsafe { ffi::wxDataViewListStore_GetItemCount(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetItemData()
+    // NOT_SUPPORTED: fn SetItemData()
+}
+
+// wxDataViewModel
+pub trait DataViewModelMethods: RefCounterMethods {
+    fn add_notifier<D: DataViewModelNotifierMethods>(&self, notifier: Option<&D>) {
+        unsafe {
+            let notifier = match notifier {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewModel_AddNotifier(self.as_ptr(), notifier)
+        }
+    }
+    fn change_value<D: DataViewItemMethods>(
+        &self,
+        variant: *const c_void,
+        item: &D,
+        col: c_uint,
+    ) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewModel_ChangeValue(self.as_ptr(), variant, item, col)
+        }
+    }
+    fn cleared(&self) -> bool {
+        unsafe { ffi::wxDataViewModel_Cleared(self.as_ptr()) }
+    }
+    fn compare<D: DataViewItemMethods, D2: DataViewItemMethods>(
+        &self,
+        item1: &D,
+        item2: &D2,
+        column: c_uint,
+        ascending: bool,
+    ) -> c_int {
+        unsafe {
+            let item1 = item1.as_ptr();
+            let item2 = item2.as_ptr();
+            ffi::wxDataViewModel_Compare(self.as_ptr(), item1, item2, column, ascending)
+        }
+    }
+    fn get_attr<D: DataViewItemMethods, D2: DataViewItemAttrMethods>(
+        &self,
+        item: &D,
+        col: c_uint,
+        attr: &D2,
+    ) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            let attr = attr.as_ptr();
+            ffi::wxDataViewModel_GetAttr(self.as_ptr(), item, col, attr)
+        }
+    }
+    fn is_enabled<D: DataViewItemMethods>(&self, item: &D, col: c_uint) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewModel_IsEnabled(self.as_ptr(), item, col)
+        }
+    }
+    fn get_children<D: DataViewItemMethods>(&self, item: &D, children: *mut c_void) -> c_uint {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewModel_GetChildren(self.as_ptr(), item, children)
+        }
+    }
+    fn get_parent<D: DataViewItemMethods>(&self, item: &D) -> DataViewItem {
+        unsafe {
+            let item = item.as_ptr();
+            DataViewItem::from_ptr(ffi::wxDataViewModel_GetParent(self.as_ptr(), item))
+        }
+    }
+    fn get_value<D: DataViewItemMethods>(&self, variant: *mut c_void, item: &D, col: c_uint) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewModel_GetValue(self.as_ptr(), variant, item, col)
+        }
+    }
+    fn has_container_columns<D: DataViewItemMethods>(&self, item: &D) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewModel_HasContainerColumns(self.as_ptr(), item)
+        }
+    }
+    fn has_default_compare(&self) -> bool {
+        unsafe { ffi::wxDataViewModel_HasDefaultCompare(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn HasValue()
+    fn is_container<D: DataViewItemMethods>(&self, item: &D) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewModel_IsContainer(self.as_ptr(), item)
+        }
+    }
+    fn item_added<D: DataViewItemMethods, D2: DataViewItemMethods>(
+        &self,
+        parent: &D,
+        item: &D2,
+    ) -> bool {
+        unsafe {
+            let parent = parent.as_ptr();
+            let item = item.as_ptr();
+            ffi::wxDataViewModel_ItemAdded(self.as_ptr(), parent, item)
+        }
+    }
+    fn item_changed<D: DataViewItemMethods>(&self, item: &D) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewModel_ItemChanged(self.as_ptr(), item)
+        }
+    }
+    fn item_deleted<D: DataViewItemMethods, D2: DataViewItemMethods>(
+        &self,
+        parent: &D,
+        item: &D2,
+    ) -> bool {
+        unsafe {
+            let parent = parent.as_ptr();
+            let item = item.as_ptr();
+            ffi::wxDataViewModel_ItemDeleted(self.as_ptr(), parent, item)
+        }
+    }
+    fn items_added<D: DataViewItemMethods>(&self, parent: &D, items: *const c_void) -> bool {
+        unsafe {
+            let parent = parent.as_ptr();
+            ffi::wxDataViewModel_ItemsAdded(self.as_ptr(), parent, items)
+        }
+    }
+    fn items_changed(&self, items: *const c_void) -> bool {
+        unsafe { ffi::wxDataViewModel_ItemsChanged(self.as_ptr(), items) }
+    }
+    fn items_deleted<D: DataViewItemMethods>(&self, parent: &D, items: *const c_void) -> bool {
+        unsafe {
+            let parent = parent.as_ptr();
+            ffi::wxDataViewModel_ItemsDeleted(self.as_ptr(), parent, items)
+        }
+    }
+    fn remove_notifier<D: DataViewModelNotifierMethods>(&self, notifier: Option<&D>) {
+        unsafe {
+            let notifier = match notifier {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewModel_RemoveNotifier(self.as_ptr(), notifier)
+        }
+    }
+    fn resort(&self) {
+        unsafe { ffi::wxDataViewModel_Resort(self.as_ptr()) }
+    }
+    fn set_value<D: DataViewItemMethods>(
+        &self,
+        variant: *const c_void,
+        item: &D,
+        col: c_uint,
+    ) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewModel_SetValue(self.as_ptr(), variant, item, col)
+        }
+    }
+    fn value_changed<D: DataViewItemMethods>(&self, item: &D, col: c_uint) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewModel_ValueChanged(self.as_ptr(), item, col)
+        }
+    }
+    fn is_list_model(&self) -> bool {
+        unsafe { ffi::wxDataViewModel_IsListModel(self.as_ptr()) }
+    }
+    fn is_virtual_list_model(&self) -> bool {
+        unsafe { ffi::wxDataViewModel_IsVirtualListModel(self.as_ptr()) }
+    }
+}
+
+// wxDataViewModelNotifier
+pub trait DataViewModelNotifierMethods: WxRustMethods {
+    // DTOR: fn ~wxDataViewModelNotifier()
+    fn cleared(&self) -> bool {
+        unsafe { ffi::wxDataViewModelNotifier_Cleared(self.as_ptr()) }
+    }
+    fn get_owner(&self) -> Option<DataViewModelIsOwned<false>> {
+        unsafe { DataViewModel::option_from(ffi::wxDataViewModelNotifier_GetOwner(self.as_ptr())) }
+    }
+    fn item_added<D: DataViewItemMethods, D2: DataViewItemMethods>(
+        &self,
+        parent: &D,
+        item: &D2,
+    ) -> bool {
+        unsafe {
+            let parent = parent.as_ptr();
+            let item = item.as_ptr();
+            ffi::wxDataViewModelNotifier_ItemAdded(self.as_ptr(), parent, item)
+        }
+    }
+    fn item_changed<D: DataViewItemMethods>(&self, item: &D) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewModelNotifier_ItemChanged(self.as_ptr(), item)
+        }
+    }
+    fn item_deleted<D: DataViewItemMethods, D2: DataViewItemMethods>(
+        &self,
+        parent: &D,
+        item: &D2,
+    ) -> bool {
+        unsafe {
+            let parent = parent.as_ptr();
+            let item = item.as_ptr();
+            ffi::wxDataViewModelNotifier_ItemDeleted(self.as_ptr(), parent, item)
+        }
+    }
+    fn items_added<D: DataViewItemMethods>(&self, parent: &D, items: *const c_void) -> bool {
+        unsafe {
+            let parent = parent.as_ptr();
+            ffi::wxDataViewModelNotifier_ItemsAdded(self.as_ptr(), parent, items)
+        }
+    }
+    fn items_changed(&self, items: *const c_void) -> bool {
+        unsafe { ffi::wxDataViewModelNotifier_ItemsChanged(self.as_ptr(), items) }
+    }
+    fn items_deleted<D: DataViewItemMethods>(&self, parent: &D, items: *const c_void) -> bool {
+        unsafe {
+            let parent = parent.as_ptr();
+            ffi::wxDataViewModelNotifier_ItemsDeleted(self.as_ptr(), parent, items)
+        }
+    }
+    fn resort(&self) {
+        unsafe { ffi::wxDataViewModelNotifier_Resort(self.as_ptr()) }
+    }
+    fn set_owner<D: DataViewModelMethods>(&self, owner: Option<&D>) {
+        unsafe {
+            let owner = match owner {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewModelNotifier_SetOwner(self.as_ptr(), owner)
+        }
+    }
+    fn value_changed<D: DataViewItemMethods>(&self, item: &D, col: c_uint) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewModelNotifier_ValueChanged(self.as_ptr(), item, col)
+        }
+    }
+}
+
+// wxDataViewProgressRenderer
+pub trait DataViewProgressRendererMethods: DataViewRendererMethods {
+    fn get_default_type() -> String {
+        unsafe { WxString::from_ptr(ffi::wxDataViewProgressRenderer_GetDefaultType()).into() }
+    }
+}
+
+// wxDataViewRenderer
+pub trait DataViewRendererMethods: ObjectMethods {
+    fn enable_ellipsize(&self, mode: c_int) {
+        unsafe { ffi::wxDataViewRenderer_EnableEllipsize(self.as_ptr(), mode) }
+    }
+    fn disable_ellipsize(&self) {
+        unsafe { ffi::wxDataViewRenderer_DisableEllipsize(self.as_ptr()) }
+    }
+    fn get_accessible_description(&self) -> String {
+        unsafe {
+            WxString::from_ptr(ffi::wxDataViewRenderer_GetAccessibleDescription(
+                self.as_ptr(),
+            ))
+            .into()
+        }
+    }
+    fn get_alignment(&self) -> c_int {
+        unsafe { ffi::wxDataViewRenderer_GetAlignment(self.as_ptr()) }
+    }
+    fn get_ellipsize_mode(&self) -> c_int {
+        unsafe { ffi::wxDataViewRenderer_GetEllipsizeMode(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetMode()
+    fn get_owner(&self) -> Option<DataViewColumnIsOwned<false>> {
+        unsafe { DataViewColumn::option_from(ffi::wxDataViewRenderer_GetOwner(self.as_ptr())) }
+    }
+    fn get_value(&self, value: *mut c_void) -> bool {
+        unsafe { ffi::wxDataViewRenderer_GetValue(self.as_ptr(), value) }
+    }
+    fn get_variant_type(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxDataViewRenderer_GetVariantType(self.as_ptr())).into() }
+    }
+    fn is_compatible_variant_type(&self, variant_type: &str) -> bool {
+        unsafe {
+            let variant_type = WxString::from(variant_type);
+            let variant_type = variant_type.as_ptr();
+            ffi::wxDataViewRenderer_IsCompatibleVariantType(self.as_ptr(), variant_type)
+        }
+    }
+    fn set_alignment(&self, align: c_int) {
+        unsafe { ffi::wxDataViewRenderer_SetAlignment(self.as_ptr(), align) }
+    }
+    fn set_owner<D: DataViewColumnMethods>(&self, owner: Option<&D>) {
+        unsafe {
+            let owner = match owner {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewRenderer_SetOwner(self.as_ptr(), owner)
+        }
+    }
+    fn set_value(&self, value: *const c_void) -> bool {
+        unsafe { ffi::wxDataViewRenderer_SetValue(self.as_ptr(), value) }
+    }
+    fn set_value_adjuster<D: DataViewValueAdjusterMethods>(&self, transformer: Option<&D>) {
+        unsafe {
+            let transformer = match transformer {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewRenderer_SetValueAdjuster(self.as_ptr(), transformer)
+        }
+    }
+    fn validate(&self, value: *mut c_void) -> bool {
+        unsafe { ffi::wxDataViewRenderer_Validate(self.as_ptr(), value) }
+    }
+    fn has_editor_ctrl(&self) -> bool {
+        unsafe { ffi::wxDataViewRenderer_HasEditorCtrl(self.as_ptr()) }
+    }
+    fn create_editor_ctrl<W: WindowMethods>(
+        &self,
+        parent: Option<&W>,
+        label_rect: ffi::wxRect,
+        value: *const c_void,
+    ) -> WeakRef<Window> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            WeakRef::<Window>::from(ffi::wxDataViewRenderer_CreateEditorCtrl(
+                self.as_ptr(),
+                parent,
+                label_rect,
+                value,
+            ))
+        }
+    }
+    fn get_value_from_editor_ctrl<W: WindowMethods>(
+        &self,
+        editor: Option<&W>,
+        value: *mut c_void,
+    ) -> bool {
+        unsafe {
+            let editor = match editor {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewRenderer_GetValueFromEditorCtrl(self.as_ptr(), editor, value)
+        }
+    }
+    fn start_editing<D: DataViewItemMethods>(&self, item: &D, label_rect: ffi::wxRect) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewRenderer_StartEditing(self.as_ptr(), item, label_rect)
+        }
+    }
+    fn cancel_editing(&self) {
+        unsafe { ffi::wxDataViewRenderer_CancelEditing(self.as_ptr()) }
+    }
+    fn finish_editing(&self) -> bool {
+        unsafe { ffi::wxDataViewRenderer_FinishEditing(self.as_ptr()) }
+    }
+    fn get_editor_ctrl(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxDataViewRenderer_GetEditorCtrl(self.as_ptr())) }
+    }
+}
+
+// wxDataViewSpinRenderer
+pub trait DataViewSpinRendererMethods: DataViewCustomRendererMethods {}
+
+// wxDataViewTextRenderer
+pub trait DataViewTextRendererMethods: DataViewRendererMethods {
+    fn get_default_type() -> String {
+        unsafe { WxString::from_ptr(ffi::wxDataViewTextRenderer_GetDefaultType()).into() }
+    }
+    fn enable_markup(&self, enable: bool) {
+        unsafe { ffi::wxDataViewTextRenderer_EnableMarkup(self.as_ptr(), enable) }
+    }
+}
+
+// wxDataViewToggleRenderer
+pub trait DataViewToggleRendererMethods: DataViewRendererMethods {
+    fn get_default_type() -> String {
+        unsafe { WxString::from_ptr(ffi::wxDataViewToggleRenderer_GetDefaultType()).into() }
+    }
+    fn show_as_radio(&self) {
+        unsafe { ffi::wxDataViewToggleRenderer_ShowAsRadio(self.as_ptr()) }
+    }
+}
+
+// wxDataViewTreeCtrl
+pub trait DataViewTreeCtrlMethods: DataViewCtrlMethods {
+    // DTOR: fn ~wxDataViewTreeCtrl()
+    fn append_container<D: DataViewItemMethods, C: ClientDataMethods>(
+        &self,
+        parent: &D,
+        text: &str,
+        icon: c_int,
+        expanded: c_int,
+        data: Option<&C>,
+    ) -> DataViewItem {
+        unsafe {
+            let parent = parent.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            DataViewItem::from_ptr(ffi::wxDataViewTreeCtrl_AppendContainer(
+                self.as_ptr(),
+                parent,
+                text,
+                icon,
+                expanded,
+                data,
+            ))
+        }
+    }
+    fn append_item<D: DataViewItemMethods, C: ClientDataMethods>(
+        &self,
+        parent: &D,
+        text: &str,
+        icon: c_int,
+        data: Option<&C>,
+    ) -> DataViewItem {
+        unsafe {
+            let parent = parent.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            DataViewItem::from_ptr(ffi::wxDataViewTreeCtrl_AppendItem(
+                self.as_ptr(),
+                parent,
+                text,
+                icon,
+                data,
+            ))
+        }
+    }
+    fn create_validator<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            ffi::wxDataViewTreeCtrl_Create(self.as_ptr(), parent, id, pos, size, style, validator)
+        }
+    }
+    fn delete_all_items(&self) {
+        unsafe { ffi::wxDataViewTreeCtrl_DeleteAllItems(self.as_ptr()) }
+    }
+    fn delete_children<D: DataViewItemMethods>(&self, item: &D) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewTreeCtrl_DeleteChildren(self.as_ptr(), item)
+        }
+    }
+    fn delete_item<D: DataViewItemMethods>(&self, item: &D) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewTreeCtrl_DeleteItem(self.as_ptr(), item)
+        }
+    }
+    fn get_child_count<D: DataViewItemMethods>(&self, parent: &D) -> c_int {
+        unsafe {
+            let parent = parent.as_ptr();
+            ffi::wxDataViewTreeCtrl_GetChildCount(self.as_ptr(), parent)
+        }
+    }
+    fn get_image_list(&self) -> Option<ImageListIsOwned<false>> {
+        unsafe { ImageList::option_from(ffi::wxDataViewTreeCtrl_GetImageList(self.as_ptr())) }
+    }
+    fn get_item_data<D: DataViewItemMethods>(&self, item: &D) -> Option<ClientDataIsOwned<false>> {
+        unsafe {
+            let item = item.as_ptr();
+            ClientData::option_from(ffi::wxDataViewTreeCtrl_GetItemData(self.as_ptr(), item))
+        }
+    }
+    fn get_item_expanded_icon<D: DataViewItemMethods>(&self, item: &D) -> Icon {
+        unsafe {
+            let item = item.as_ptr();
+            Icon::from_ptr(ffi::wxDataViewTreeCtrl_GetItemExpandedIcon(
+                self.as_ptr(),
+                item,
+            ))
+        }
+    }
+    fn get_item_icon<D: DataViewItemMethods>(&self, item: &D) -> Icon {
+        unsafe {
+            let item = item.as_ptr();
+            Icon::from_ptr(ffi::wxDataViewTreeCtrl_GetItemIcon(self.as_ptr(), item))
+        }
+    }
+    fn get_item_parent(&self, item: ffi::wxDataViewItem) -> DataViewItem {
+        unsafe {
+            DataViewItem::from_ptr(ffi::wxDataViewTreeCtrl_GetItemParent(self.as_ptr(), item))
+        }
+    }
+    fn get_item_text<D: DataViewItemMethods>(&self, item: &D) -> String {
+        unsafe {
+            let item = item.as_ptr();
+            WxString::from_ptr(ffi::wxDataViewTreeCtrl_GetItemText(self.as_ptr(), item)).into()
+        }
+    }
+    fn get_nth_child<D: DataViewItemMethods>(&self, parent: &D, pos: c_uint) -> DataViewItem {
+        unsafe {
+            let parent = parent.as_ptr();
+            DataViewItem::from_ptr(ffi::wxDataViewTreeCtrl_GetNthChild(
+                self.as_ptr(),
+                parent,
+                pos,
+            ))
+        }
+    }
+    fn get_store(&self) -> Option<DataViewTreeStoreIsOwned<false>> {
+        unsafe { DataViewTreeStore::option_from(ffi::wxDataViewTreeCtrl_GetStore(self.as_ptr())) }
+    }
+    fn get_store(&self) -> Option<DataViewTreeStoreIsOwned<false>> {
+        unsafe { DataViewTreeStore::option_from(ffi::wxDataViewTreeCtrl_GetStore1(self.as_ptr())) }
+    }
+    fn insert_container<D: DataViewItemMethods, D2: DataViewItemMethods, C: ClientDataMethods>(
+        &self,
+        parent: &D,
+        previous: &D2,
+        text: &str,
+        icon: c_int,
+        expanded: c_int,
+        data: Option<&C>,
+    ) -> DataViewItem {
+        unsafe {
+            let parent = parent.as_ptr();
+            let previous = previous.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            DataViewItem::from_ptr(ffi::wxDataViewTreeCtrl_InsertContainer(
+                self.as_ptr(),
+                parent,
+                previous,
+                text,
+                icon,
+                expanded,
+                data,
+            ))
+        }
+    }
+    fn insert_item<D: DataViewItemMethods, D2: DataViewItemMethods, C: ClientDataMethods>(
+        &self,
+        parent: &D,
+        previous: &D2,
+        text: &str,
+        icon: c_int,
+        data: Option<&C>,
+    ) -> DataViewItem {
+        unsafe {
+            let parent = parent.as_ptr();
+            let previous = previous.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            DataViewItem::from_ptr(ffi::wxDataViewTreeCtrl_InsertItem(
+                self.as_ptr(),
+                parent,
+                previous,
+                text,
+                icon,
+                data,
+            ))
+        }
+    }
+    fn is_container<D: DataViewItemMethods>(&self, item: &D) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewTreeCtrl_IsContainer(self.as_ptr(), item)
+        }
+    }
+    fn prepend_container<D: DataViewItemMethods, C: ClientDataMethods>(
+        &self,
+        parent: &D,
+        text: &str,
+        icon: c_int,
+        expanded: c_int,
+        data: Option<&C>,
+    ) -> DataViewItem {
+        unsafe {
+            let parent = parent.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            DataViewItem::from_ptr(ffi::wxDataViewTreeCtrl_PrependContainer(
+                self.as_ptr(),
+                parent,
+                text,
+                icon,
+                expanded,
+                data,
+            ))
+        }
+    }
+    fn prepend_item<D: DataViewItemMethods, C: ClientDataMethods>(
+        &self,
+        parent: &D,
+        text: &str,
+        icon: c_int,
+        data: Option<&C>,
+    ) -> DataViewItem {
+        unsafe {
+            let parent = parent.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            DataViewItem::from_ptr(ffi::wxDataViewTreeCtrl_PrependItem(
+                self.as_ptr(),
+                parent,
+                text,
+                icon,
+                data,
+            ))
+        }
+    }
+    fn set_image_list<I: ImageListMethods>(&self, imagelist: Option<&I>) {
+        unsafe {
+            let imagelist = match imagelist {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewTreeCtrl_SetImageList(self.as_ptr(), imagelist)
+        }
+    }
+    fn set_item_data<D: DataViewItemMethods, C: ClientDataMethods>(
+        &self,
+        item: &D,
+        data: Option<&C>,
+    ) {
+        unsafe {
+            let item = item.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewTreeCtrl_SetItemData(self.as_ptr(), item, data)
+        }
+    }
+    fn set_item_expanded_icon<D: DataViewItemMethods, B: BitmapBundleMethods>(
+        &self,
+        item: &D,
+        icon: &B,
+    ) {
+        unsafe {
+            let item = item.as_ptr();
+            let icon = icon.as_ptr();
+            ffi::wxDataViewTreeCtrl_SetItemExpandedIcon(self.as_ptr(), item, icon)
+        }
+    }
+    fn set_item_icon<D: DataViewItemMethods, B: BitmapBundleMethods>(&self, item: &D, icon: &B) {
+        unsafe {
+            let item = item.as_ptr();
+            let icon = icon.as_ptr();
+            ffi::wxDataViewTreeCtrl_SetItemIcon(self.as_ptr(), item, icon)
+        }
+    }
+    fn set_item_text<D: DataViewItemMethods>(&self, item: &D, text: &str) {
+        unsafe {
+            let item = item.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxDataViewTreeCtrl_SetItemText(self.as_ptr(), item, text)
+        }
+    }
+}
+
+// wxDataViewTreeStore
+pub trait DataViewTreeStoreMethods: DataViewModelMethods {
+    // DTOR: fn ~wxDataViewTreeStore()
+    fn append_container<
+        D: DataViewItemMethods,
+        B: BitmapBundleMethods,
+        B2: BitmapBundleMethods,
+        C: ClientDataMethods,
+    >(
+        &self,
+        parent: &D,
+        text: &str,
+        icon: &B,
+        expanded: &B2,
+        data: Option<&C>,
+    ) -> DataViewItem {
+        unsafe {
+            let parent = parent.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let icon = icon.as_ptr();
+            let expanded = expanded.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            DataViewItem::from_ptr(ffi::wxDataViewTreeStore_AppendContainer(
+                self.as_ptr(),
+                parent,
+                text,
+                icon,
+                expanded,
+                data,
+            ))
+        }
+    }
+    fn append_item<D: DataViewItemMethods, B: BitmapBundleMethods, C: ClientDataMethods>(
+        &self,
+        parent: &D,
+        text: &str,
+        icon: &B,
+        data: Option<&C>,
+    ) -> DataViewItem {
+        unsafe {
+            let parent = parent.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let icon = icon.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            DataViewItem::from_ptr(ffi::wxDataViewTreeStore_AppendItem(
+                self.as_ptr(),
+                parent,
+                text,
+                icon,
+                data,
+            ))
+        }
+    }
+    fn delete_all_items(&self) {
+        unsafe { ffi::wxDataViewTreeStore_DeleteAllItems(self.as_ptr()) }
+    }
+    fn delete_children<D: DataViewItemMethods>(&self, item: &D) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewTreeStore_DeleteChildren(self.as_ptr(), item)
+        }
+    }
+    fn delete_item<D: DataViewItemMethods>(&self, item: &D) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxDataViewTreeStore_DeleteItem(self.as_ptr(), item)
+        }
+    }
+    fn get_child_count<D: DataViewItemMethods>(&self, parent: &D) -> c_int {
+        unsafe {
+            let parent = parent.as_ptr();
+            ffi::wxDataViewTreeStore_GetChildCount(self.as_ptr(), parent)
+        }
+    }
+    fn get_item_data<D: DataViewItemMethods>(&self, item: &D) -> Option<ClientDataIsOwned<false>> {
+        unsafe {
+            let item = item.as_ptr();
+            ClientData::option_from(ffi::wxDataViewTreeStore_GetItemData(self.as_ptr(), item))
+        }
+    }
+    fn get_item_expanded_icon<D: DataViewItemMethods>(&self, item: &D) -> Icon {
+        unsafe {
+            let item = item.as_ptr();
+            Icon::from_ptr(ffi::wxDataViewTreeStore_GetItemExpandedIcon(
+                self.as_ptr(),
+                item,
+            ))
+        }
+    }
+    fn get_item_icon<D: DataViewItemMethods>(&self, item: &D) -> Icon {
+        unsafe {
+            let item = item.as_ptr();
+            Icon::from_ptr(ffi::wxDataViewTreeStore_GetItemIcon(self.as_ptr(), item))
+        }
+    }
+    fn get_item_text<D: DataViewItemMethods>(&self, item: &D) -> String {
+        unsafe {
+            let item = item.as_ptr();
+            WxString::from_ptr(ffi::wxDataViewTreeStore_GetItemText(self.as_ptr(), item)).into()
+        }
+    }
+    fn get_nth_child<D: DataViewItemMethods>(&self, parent: &D, pos: c_uint) -> DataViewItem {
+        unsafe {
+            let parent = parent.as_ptr();
+            DataViewItem::from_ptr(ffi::wxDataViewTreeStore_GetNthChild(
+                self.as_ptr(),
+                parent,
+                pos,
+            ))
+        }
+    }
+    fn insert_container<
+        D: DataViewItemMethods,
+        D2: DataViewItemMethods,
+        B: BitmapBundleMethods,
+        B2: BitmapBundleMethods,
+        C: ClientDataMethods,
+    >(
+        &self,
+        parent: &D,
+        previous: &D2,
+        text: &str,
+        icon: &B,
+        expanded: &B2,
+        data: Option<&C>,
+    ) -> DataViewItem {
+        unsafe {
+            let parent = parent.as_ptr();
+            let previous = previous.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let icon = icon.as_ptr();
+            let expanded = expanded.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            DataViewItem::from_ptr(ffi::wxDataViewTreeStore_InsertContainer(
+                self.as_ptr(),
+                parent,
+                previous,
+                text,
+                icon,
+                expanded,
+                data,
+            ))
+        }
+    }
+    fn insert_item<
+        D: DataViewItemMethods,
+        D2: DataViewItemMethods,
+        B: BitmapBundleMethods,
+        C: ClientDataMethods,
+    >(
+        &self,
+        parent: &D,
+        previous: &D2,
+        text: &str,
+        icon: &B,
+        data: Option<&C>,
+    ) -> DataViewItem {
+        unsafe {
+            let parent = parent.as_ptr();
+            let previous = previous.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let icon = icon.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            DataViewItem::from_ptr(ffi::wxDataViewTreeStore_InsertItem(
+                self.as_ptr(),
+                parent,
+                previous,
+                text,
+                icon,
+                data,
+            ))
+        }
+    }
+    fn prepend_container<
+        D: DataViewItemMethods,
+        B: BitmapBundleMethods,
+        B2: BitmapBundleMethods,
+        C: ClientDataMethods,
+    >(
+        &self,
+        parent: &D,
+        text: &str,
+        icon: &B,
+        expanded: &B2,
+        data: Option<&C>,
+    ) -> DataViewItem {
+        unsafe {
+            let parent = parent.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let icon = icon.as_ptr();
+            let expanded = expanded.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            DataViewItem::from_ptr(ffi::wxDataViewTreeStore_PrependContainer(
+                self.as_ptr(),
+                parent,
+                text,
+                icon,
+                expanded,
+                data,
+            ))
+        }
+    }
+    fn prepend_item<D: DataViewItemMethods, B: BitmapBundleMethods, C: ClientDataMethods>(
+        &self,
+        parent: &D,
+        text: &str,
+        icon: &B,
+        data: Option<&C>,
+    ) -> DataViewItem {
+        unsafe {
+            let parent = parent.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let icon = icon.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            DataViewItem::from_ptr(ffi::wxDataViewTreeStore_PrependItem(
+                self.as_ptr(),
+                parent,
+                text,
+                icon,
+                data,
+            ))
+        }
+    }
+    fn set_item_data<D: DataViewItemMethods, C: ClientDataMethods>(
+        &self,
+        item: &D,
+        data: Option<&C>,
+    ) {
+        unsafe {
+            let item = item.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewTreeStore_SetItemData(self.as_ptr(), item, data)
+        }
+    }
+    fn set_item_expanded_icon<D: DataViewItemMethods, B: BitmapBundleMethods>(
+        &self,
+        item: &D,
+        icon: &B,
+    ) {
+        unsafe {
+            let item = item.as_ptr();
+            let icon = icon.as_ptr();
+            ffi::wxDataViewTreeStore_SetItemExpandedIcon(self.as_ptr(), item, icon)
+        }
+    }
+    fn set_item_icon<D: DataViewItemMethods, B: BitmapBundleMethods>(&self, item: &D, icon: &B) {
+        unsafe {
+            let item = item.as_ptr();
+            let icon = icon.as_ptr();
+            ffi::wxDataViewTreeStore_SetItemIcon(self.as_ptr(), item, icon)
+        }
+    }
+}
+
+// wxDataViewValueAdjuster
+pub trait DataViewValueAdjusterMethods: WxRustMethods {
+    // NOT_SUPPORTED: fn MakeHighlighted()
+}
+
+// wxDataViewVirtualListModel
+pub trait DataViewVirtualListModelMethods: DataViewListModelMethods {
+    fn get_item(&self, row: c_uint) -> DataViewItem {
+        unsafe {
+            DataViewItem::from_ptr(ffi::wxDataViewVirtualListModel_GetItem(self.as_ptr(), row))
+        }
+    }
+    fn reset(&self, new_size: c_uint) {
+        unsafe { ffi::wxDataViewVirtualListModel_Reset(self.as_ptr(), new_size) }
+    }
+    fn row_appended(&self) {
+        unsafe { ffi::wxDataViewVirtualListModel_RowAppended(self.as_ptr()) }
+    }
+    fn row_changed(&self, row: c_uint) {
+        unsafe { ffi::wxDataViewVirtualListModel_RowChanged(self.as_ptr(), row) }
+    }
+    fn row_deleted(&self, row: c_uint) {
+        unsafe { ffi::wxDataViewVirtualListModel_RowDeleted(self.as_ptr(), row) }
+    }
+    fn row_inserted(&self, before: c_uint) {
+        unsafe { ffi::wxDataViewVirtualListModel_RowInserted(self.as_ptr(), before) }
+    }
+    fn row_prepended(&self) {
+        unsafe { ffi::wxDataViewVirtualListModel_RowPrepended(self.as_ptr()) }
+    }
+    fn row_value_changed(&self, row: c_uint, col: c_uint) {
+        unsafe { ffi::wxDataViewVirtualListModel_RowValueChanged(self.as_ptr(), row, col) }
+    }
+    fn rows_deleted<A: ArrayIntMethods>(&self, rows: &A) {
+        unsafe {
+            let rows = rows.as_ptr();
+            ffi::wxDataViewVirtualListModel_RowsDeleted(self.as_ptr(), rows)
+        }
+    }
+}
+
+// wxDateEvent
+pub trait DateEventMethods: CommandEventMethods {
+    fn get_date(&self) -> DateTimeIsOwned<false> {
+        unsafe { DateTimeIsOwned::from_ptr(ffi::wxDateEvent_GetDate(self.as_ptr())) }
+    }
+    fn set_date<D: DateTimeMethods>(&self, date: &D) {
+        unsafe {
+            let date = date.as_ptr();
+            ffi::wxDateEvent_SetDate(self.as_ptr(), date)
         }
     }
 }
@@ -1402,6 +6457,210 @@ pub trait DatePickerCtrlMethods: ControlMethods {
     }
 }
 
+// wxDelegateRendererNative
+pub trait DelegateRendererNativeMethods: RendererNativeMethods {}
+
+// wxDialUpEvent
+pub trait DialUpEventMethods: EventMethods {
+    fn is_connected_event(&self) -> bool {
+        unsafe { ffi::wxDialUpEvent_IsConnectedEvent(self.as_ptr()) }
+    }
+    fn is_own_event(&self) -> bool {
+        unsafe { ffi::wxDialUpEvent_IsOwnEvent(self.as_ptr()) }
+    }
+}
+
+// wxDialog
+pub trait DialogMethods: TopLevelWindowMethods {
+    // DTOR: fn ~wxDialog()
+    fn add_main_button_id(&self, id: c_int) {
+        unsafe { ffi::wxDialog_AddMainButtonId(self.as_ptr(), id) }
+    }
+    fn can_do_layout_adaptation(&self) -> bool {
+        unsafe { ffi::wxDialog_CanDoLayoutAdaptation(self.as_ptr()) }
+    }
+    fn create_button_sizer(&self, flags: c_long) -> Option<SizerIsOwned<false>> {
+        unsafe { Sizer::option_from(ffi::wxDialog_CreateButtonSizer(self.as_ptr(), flags)) }
+    }
+    fn create_separated_button_sizer(&self, flags: c_long) -> Option<SizerIsOwned<false>> {
+        unsafe {
+            Sizer::option_from(ffi::wxDialog_CreateSeparatedButtonSizer(
+                self.as_ptr(),
+                flags,
+            ))
+        }
+    }
+    fn create_separated_sizer<S: SizerMethods>(
+        &self,
+        sizer: Option<&S>,
+    ) -> Option<SizerIsOwned<false>> {
+        unsafe {
+            let sizer = match sizer {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            Sizer::option_from(ffi::wxDialog_CreateSeparatedSizer(self.as_ptr(), sizer))
+        }
+    }
+    fn create_std_dialog_button_sizer(
+        &self,
+        flags: c_long,
+    ) -> Option<StdDialogButtonSizerIsOwned<false>> {
+        unsafe {
+            StdDialogButtonSizer::option_from(ffi::wxDialog_CreateStdDialogButtonSizer(
+                self.as_ptr(),
+                flags,
+            ))
+        }
+    }
+    fn create_text_sizer(&self, message: &str, width_max: c_int) -> Option<SizerIsOwned<false>> {
+        unsafe {
+            let message = WxString::from(message);
+            let message = message.as_ptr();
+            Sizer::option_from(ffi::wxDialog_CreateTextSizer(
+                self.as_ptr(),
+                message,
+                width_max,
+            ))
+        }
+    }
+    fn do_layout_adaptation(&self) -> bool {
+        unsafe { ffi::wxDialog_DoLayoutAdaptation(self.as_ptr()) }
+    }
+    fn end_modal(&self, ret_code: c_int) {
+        unsafe { ffi::wxDialog_EndModal(self.as_ptr(), ret_code) }
+    }
+    fn get_affirmative_id(&self) -> c_int {
+        unsafe { ffi::wxDialog_GetAffirmativeId(self.as_ptr()) }
+    }
+    fn get_content_window(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxDialog_GetContentWindow(self.as_ptr())) }
+    }
+    fn get_escape_id(&self) -> c_int {
+        unsafe { ffi::wxDialog_GetEscapeId(self.as_ptr()) }
+    }
+    fn get_layout_adaptation_done(&self) -> bool {
+        unsafe { ffi::wxDialog_GetLayoutAdaptationDone(self.as_ptr()) }
+    }
+    fn get_layout_adaptation_level(&self) -> c_int {
+        unsafe { ffi::wxDialog_GetLayoutAdaptationLevel(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetLayoutAdaptationMode()
+    fn get_main_button_ids(&self) -> ArrayIntIsOwned<false> {
+        unsafe { ArrayIntIsOwned::from_ptr(ffi::wxDialog_GetMainButtonIds(self.as_ptr())) }
+    }
+    fn get_return_code(&self) -> c_int {
+        unsafe { ffi::wxDialog_GetReturnCode(self.as_ptr()) }
+    }
+    fn get_tool_bar(&self) -> WeakRef<ToolBar> {
+        unsafe { WeakRef::<ToolBar>::from(ffi::wxDialog_GetToolBar(self.as_ptr())) }
+    }
+    fn is_main_button_id(&self, id: c_int) -> bool {
+        unsafe { ffi::wxDialog_IsMainButtonId(self.as_ptr(), id) }
+    }
+    fn is_modal(&self) -> bool {
+        unsafe { ffi::wxDialog_IsModal(self.as_ptr()) }
+    }
+    fn set_affirmative_id(&self, id: c_int) {
+        unsafe { ffi::wxDialog_SetAffirmativeId(self.as_ptr(), id) }
+    }
+    fn set_escape_id(&self, id: c_int) {
+        unsafe { ffi::wxDialog_SetEscapeId(self.as_ptr(), id) }
+    }
+    fn set_layout_adaptation_done(&self, done: bool) {
+        unsafe { ffi::wxDialog_SetLayoutAdaptationDone(self.as_ptr(), done) }
+    }
+    fn set_layout_adaptation_level(&self, level: c_int) {
+        unsafe { ffi::wxDialog_SetLayoutAdaptationLevel(self.as_ptr(), level) }
+    }
+    // NOT_SUPPORTED: fn SetLayoutAdaptationMode()
+    fn set_return_code(&self, ret_code: c_int) {
+        unsafe { ffi::wxDialog_SetReturnCode(self.as_ptr(), ret_code) }
+    }
+    fn show_modal(&self) -> c_int {
+        unsafe { ffi::wxDialog_ShowModal(self.as_ptr()) }
+    }
+    fn show_window_modal(&self) {
+        unsafe { ffi::wxDialog_ShowWindowModal(self.as_ptr()) }
+    }
+    fn show_window_modal_then_do(&self, on_end_modal: *const c_void) {
+        unsafe { ffi::wxDialog_ShowWindowModalThenDo(self.as_ptr(), on_end_modal) }
+    }
+    fn enable_layout_adaptation(enable: bool) {
+        unsafe { ffi::wxDialog_EnableLayoutAdaptation(enable) }
+    }
+    fn get_layout_adapter() -> Option<DialogLayoutAdapterIsOwned<false>> {
+        unsafe { DialogLayoutAdapter::option_from(ffi::wxDialog_GetLayoutAdapter()) }
+    }
+    fn is_layout_adaptation_enabled() -> bool {
+        unsafe { ffi::wxDialog_IsLayoutAdaptationEnabled() }
+    }
+    fn set_layout_adapter<D: DialogLayoutAdapterMethods>(
+        adapter: Option<&D>,
+    ) -> Option<DialogLayoutAdapterIsOwned<false>> {
+        unsafe {
+            let adapter = match adapter {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            DialogLayoutAdapter::option_from(ffi::wxDialog_SetLayoutAdapter(adapter))
+        }
+    }
+}
+
+// wxDialogLayoutAdapter
+pub trait DialogLayoutAdapterMethods: WxRustMethods {
+    fn can_do_layout_adaptation<D: DialogMethods>(&self, dialog: Option<&D>) -> bool {
+        unsafe {
+            let dialog = match dialog {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDialogLayoutAdapter_CanDoLayoutAdaptation(self.as_ptr(), dialog)
+        }
+    }
+    fn do_layout_adaptation<D: DialogMethods>(&self, dialog: Option<&D>) -> bool {
+        unsafe {
+            let dialog = match dialog {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDialogLayoutAdapter_DoLayoutAdaptation(self.as_ptr(), dialog)
+        }
+    }
+}
+
+// wxDirDialog
+pub trait DirDialogMethods: DialogMethods {
+    // DTOR: fn ~wxDirDialog()
+    fn get_message(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxDirDialog_GetMessage(self.as_ptr())).into() }
+    }
+    fn get_path(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxDirDialog_GetPath(self.as_ptr())).into() }
+    }
+    fn get_paths<A: ArrayStringMethods>(&self, paths: &A) {
+        unsafe {
+            let paths = paths.as_ptr();
+            ffi::wxDirDialog_GetPaths(self.as_ptr(), paths)
+        }
+    }
+    fn set_message(&self, message: &str) {
+        unsafe {
+            let message = WxString::from(message);
+            let message = message.as_ptr();
+            ffi::wxDirDialog_SetMessage(self.as_ptr(), message)
+        }
+    }
+    fn set_path(&self, path: &str) {
+        unsafe {
+            let path = WxString::from(path);
+            let path = path.as_ptr();
+            ffi::wxDirDialog_SetPath(self.as_ptr(), path)
+        }
+    }
+}
+
 // wxDirPickerCtrl
 pub trait DirPickerCtrlMethods: PickerBaseMethods {
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
@@ -1472,6 +6731,1011 @@ pub trait DirPickerCtrlMethods: PickerBaseMethods {
     }
 }
 
+// wxDisplay
+pub trait DisplayMethods: WxRustMethods {
+    // DTOR: fn ~wxDisplay()
+    fn change_mode(&self, mode: *const c_void) -> bool {
+        unsafe { ffi::wxDisplay_ChangeMode(self.as_ptr(), mode) }
+    }
+    fn get_client_area(&self) -> Rect {
+        unsafe { Rect::from_ptr(ffi::wxDisplay_GetClientArea(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn GetCurrentMode()
+    fn get_geometry(&self) -> Rect {
+        unsafe { Rect::from_ptr(ffi::wxDisplay_GetGeometry(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn GetModes()
+    fn get_name(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxDisplay_GetName(self.as_ptr())).into() }
+    }
+    fn get_ppi(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxDisplay_GetPPI(self.as_ptr())) }
+    }
+    fn get_scale_factor(&self) -> c_double {
+        unsafe { ffi::wxDisplay_GetScaleFactor(self.as_ptr()) }
+    }
+    fn is_primary(&self) -> bool {
+        unsafe { ffi::wxDisplay_IsPrimary(self.as_ptr()) }
+    }
+    fn get_count() -> c_uint {
+        unsafe { ffi::wxDisplay_GetCount() }
+    }
+    fn get_from_point<P: PointMethods>(pt: &P) -> c_int {
+        unsafe {
+            let pt = pt.as_ptr();
+            ffi::wxDisplay_GetFromPoint(pt)
+        }
+    }
+    fn get_from_window<W: WindowMethods>(win: Option<&W>) -> c_int {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDisplay_GetFromWindow(win)
+        }
+    }
+    fn get_std_ppi_value() -> c_int {
+        unsafe { ffi::wxDisplay_GetStdPPIValue() }
+    }
+    fn get_std_ppi() -> Size {
+        unsafe { Size::from_ptr(ffi::wxDisplay_GetStdPPI()) }
+    }
+}
+
+// wxDisplayChangedEvent
+pub trait DisplayChangedEventMethods: EventMethods {}
+
+// wxDocChildFrame
+pub trait DocChildFrameMethods: FrameMethods {
+    // DTOR: fn ~wxDocChildFrame()
+    fn get_document(&self) -> WeakRef<Document> {
+        unsafe { WeakRef::<Document>::from(ffi::wxDocChildFrame_GetDocument(self.as_ptr())) }
+    }
+    fn get_view(&self) -> WeakRef<View> {
+        unsafe { WeakRef::<View>::from(ffi::wxDocChildFrame_GetView(self.as_ptr())) }
+    }
+    fn set_document<D: DocumentMethods>(&self, doc: Option<&D>) {
+        unsafe {
+            let doc = match doc {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDocChildFrame_SetDocument(self.as_ptr(), doc)
+        }
+    }
+    fn set_view<V: ViewMethods>(&self, view: Option<&V>) {
+        unsafe {
+            let view = match view {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDocChildFrame_SetView(self.as_ptr(), view)
+        }
+    }
+}
+
+// wxDocMDIChildFrame
+pub trait DocMDIChildFrameMethods: MDIChildFrameMethods {
+    // DTOR: fn ~wxDocMDIChildFrame()
+    fn get_document(&self) -> WeakRef<Document> {
+        unsafe { WeakRef::<Document>::from(ffi::wxDocMDIChildFrame_GetDocument(self.as_ptr())) }
+    }
+    fn get_view(&self) -> WeakRef<View> {
+        unsafe { WeakRef::<View>::from(ffi::wxDocMDIChildFrame_GetView(self.as_ptr())) }
+    }
+    fn set_document<D: DocumentMethods>(&self, doc: Option<&D>) {
+        unsafe {
+            let doc = match doc {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDocMDIChildFrame_SetDocument(self.as_ptr(), doc)
+        }
+    }
+    fn set_view<V: ViewMethods>(&self, view: Option<&V>) {
+        unsafe {
+            let view = match view {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDocMDIChildFrame_SetView(self.as_ptr(), view)
+        }
+    }
+}
+
+// wxDocMDIParentFrame
+pub trait DocMDIParentFrameMethods: MDIParentFrameMethods {
+    // DTOR: fn ~wxDocMDIParentFrame()
+    fn create_docmanager<D: DocManagerMethods, F: FrameMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        manager: Option<&D>,
+        parent: Option<&F>,
+        id: c_int,
+        title: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let manager = match manager {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxDocMDIParentFrame_Create(
+                self.as_ptr(),
+                manager,
+                parent,
+                id,
+                title,
+                pos,
+                size,
+                style,
+                name,
+            )
+        }
+    }
+}
+
+// wxDocManager
+pub trait DocManagerMethods: EvtHandlerMethods {
+    // DTOR: fn ~wxDocManager()
+    fn activate_view<V: ViewMethods>(&self, doc: Option<&V>, activate: bool) {
+        unsafe {
+            let doc = match doc {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDocManager_ActivateView(self.as_ptr(), doc, activate)
+        }
+    }
+    fn add_document<D: DocumentMethods>(&self, doc: Option<&D>) {
+        unsafe {
+            let doc = match doc {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDocManager_AddDocument(self.as_ptr(), doc)
+        }
+    }
+    fn add_file_to_history(&self, filename: &str) {
+        unsafe {
+            let filename = WxString::from(filename);
+            let filename = filename.as_ptr();
+            ffi::wxDocManager_AddFileToHistory(self.as_ptr(), filename)
+        }
+    }
+    fn associate_template<D: DocTemplateMethods>(&self, temp: Option<&D>) {
+        unsafe {
+            let temp = match temp {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDocManager_AssociateTemplate(self.as_ptr(), temp)
+        }
+    }
+    fn find_template<C: ClassInfoMethods>(
+        &self,
+        classinfo: Option<&C>,
+    ) -> Option<DocTemplateIsOwned<false>> {
+        unsafe {
+            let classinfo = match classinfo {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            DocTemplate::option_from(ffi::wxDocManager_FindTemplate(self.as_ptr(), classinfo))
+        }
+    }
+    fn find_document_by_path(&self, path: &str) -> WeakRef<Document> {
+        unsafe {
+            let path = WxString::from(path);
+            let path = path.as_ptr();
+            WeakRef::<Document>::from(ffi::wxDocManager_FindDocumentByPath(self.as_ptr(), path))
+        }
+    }
+    fn close_document<D: DocumentMethods>(&self, doc: Option<&D>, force: bool) -> bool {
+        unsafe {
+            let doc = match doc {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDocManager_CloseDocument(self.as_ptr(), doc, force)
+        }
+    }
+    fn close_documents(&self, force: bool) -> bool {
+        unsafe { ffi::wxDocManager_CloseDocuments(self.as_ptr(), force) }
+    }
+    fn create_document(&self, path: &str, flags: c_long) -> WeakRef<Document> {
+        unsafe {
+            let path = WxString::from(path);
+            let path = path.as_ptr();
+            WeakRef::<Document>::from(ffi::wxDocManager_CreateDocument(self.as_ptr(), path, flags))
+        }
+    }
+    fn create_new_document(&self) -> WeakRef<Document> {
+        unsafe { WeakRef::<Document>::from(ffi::wxDocManager_CreateNewDocument(self.as_ptr())) }
+    }
+    fn create_view<D: DocumentMethods>(&self, doc: Option<&D>, flags: c_long) -> WeakRef<View> {
+        unsafe {
+            let doc = match doc {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            WeakRef::<View>::from(ffi::wxDocManager_CreateView(self.as_ptr(), doc, flags))
+        }
+    }
+    fn disassociate_template<D: DocTemplateMethods>(&self, temp: Option<&D>) {
+        unsafe {
+            let temp = match temp {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDocManager_DisassociateTemplate(self.as_ptr(), temp)
+        }
+    }
+    fn file_history_add_files_to_menu(&self) {
+        unsafe { ffi::wxDocManager_FileHistoryAddFilesToMenu(self.as_ptr()) }
+    }
+    fn file_history_add_files_to_menu_menu<M: MenuMethods>(&self, menu: Option<&M>) {
+        unsafe {
+            let menu = match menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDocManager_FileHistoryAddFilesToMenu1(self.as_ptr(), menu)
+        }
+    }
+    fn file_history_load(&self, config: *const c_void) {
+        unsafe { ffi::wxDocManager_FileHistoryLoad(self.as_ptr(), config) }
+    }
+    fn file_history_remove_menu<M: MenuMethods>(&self, menu: Option<&M>) {
+        unsafe {
+            let menu = match menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDocManager_FileHistoryRemoveMenu(self.as_ptr(), menu)
+        }
+    }
+    fn file_history_save(&self, resource_file: *mut c_void) {
+        unsafe { ffi::wxDocManager_FileHistorySave(self.as_ptr(), resource_file) }
+    }
+    fn file_history_use_menu<M: MenuMethods>(&self, menu: Option<&M>) {
+        unsafe {
+            let menu = match menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDocManager_FileHistoryUseMenu(self.as_ptr(), menu)
+        }
+    }
+    fn find_template_for_path(&self, path: &str) -> Option<DocTemplateIsOwned<false>> {
+        unsafe {
+            let path = WxString::from(path);
+            let path = path.as_ptr();
+            DocTemplate::option_from(ffi::wxDocManager_FindTemplateForPath(self.as_ptr(), path))
+        }
+    }
+    fn get_any_usable_view(&self) -> WeakRef<View> {
+        unsafe { WeakRef::<View>::from(ffi::wxDocManager_GetAnyUsableView(self.as_ptr())) }
+    }
+    fn get_current_document(&self) -> WeakRef<Document> {
+        unsafe { WeakRef::<Document>::from(ffi::wxDocManager_GetCurrentDocument(self.as_ptr())) }
+    }
+    fn get_current_view(&self) -> WeakRef<View> {
+        unsafe { WeakRef::<View>::from(ffi::wxDocManager_GetCurrentView(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn GetDocumentsVector()
+    // NOT_SUPPORTED: fn GetTemplatesVector()
+    fn get_documents(&self) -> *mut c_void {
+        unsafe { ffi::wxDocManager_GetDocuments(self.as_ptr()) }
+    }
+    fn get_file_history(&self) -> Option<FileHistoryIsOwned<false>> {
+        unsafe { FileHistory::option_from(ffi::wxDocManager_GetFileHistory(self.as_ptr())) }
+    }
+    fn get_history_files_count(&self) -> usize {
+        unsafe { ffi::wxDocManager_GetHistoryFilesCount(self.as_ptr()) }
+    }
+    fn get_last_directory(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxDocManager_GetLastDirectory(self.as_ptr())).into() }
+    }
+    fn get_max_docs_open(&self) -> c_int {
+        unsafe { ffi::wxDocManager_GetMaxDocsOpen(self.as_ptr()) }
+    }
+    fn get_templates(&self) -> *mut c_void {
+        unsafe { ffi::wxDocManager_GetTemplates(self.as_ptr()) }
+    }
+    fn initialize(&self) -> bool {
+        unsafe { ffi::wxDocManager_Initialize(self.as_ptr()) }
+    }
+    fn make_new_document_name(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxDocManager_MakeNewDocumentName(self.as_ptr())).into() }
+    }
+    fn on_create_file_history(&self) -> Option<FileHistoryIsOwned<false>> {
+        unsafe { FileHistory::option_from(ffi::wxDocManager_OnCreateFileHistory(self.as_ptr())) }
+    }
+    fn on_file_close<C: CommandEventMethods>(&self, event: &C) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxDocManager_OnFileClose(self.as_ptr(), event)
+        }
+    }
+    fn on_file_close_all<C: CommandEventMethods>(&self, event: &C) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxDocManager_OnFileCloseAll(self.as_ptr(), event)
+        }
+    }
+    fn on_file_new<C: CommandEventMethods>(&self, event: &C) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxDocManager_OnFileNew(self.as_ptr(), event)
+        }
+    }
+    fn on_file_open<C: CommandEventMethods>(&self, event: &C) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxDocManager_OnFileOpen(self.as_ptr(), event)
+        }
+    }
+    fn on_file_revert<C: CommandEventMethods>(&self, event: &C) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxDocManager_OnFileRevert(self.as_ptr(), event)
+        }
+    }
+    fn on_file_save<C: CommandEventMethods>(&self, event: &C) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxDocManager_OnFileSave(self.as_ptr(), event)
+        }
+    }
+    fn on_file_save_as<C: CommandEventMethods>(&self, event: &C) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxDocManager_OnFileSaveAs(self.as_ptr(), event)
+        }
+    }
+    fn remove_document<D: DocumentMethods>(&self, doc: Option<&D>) {
+        unsafe {
+            let doc = match doc {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDocManager_RemoveDocument(self.as_ptr(), doc)
+        }
+    }
+    fn select_document_path<D: DocTemplateMethods>(
+        &self,
+        templates: Option<&D>,
+        no_templates: c_int,
+        path: *mut c_void,
+        flags: c_long,
+        save: bool,
+    ) -> Option<DocTemplateIsOwned<false>> {
+        unsafe {
+            let templates = match templates {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            DocTemplate::option_from(ffi::wxDocManager_SelectDocumentPath(
+                self.as_ptr(),
+                templates,
+                no_templates,
+                path,
+                flags,
+                save,
+            ))
+        }
+    }
+    fn select_document_type<D: DocTemplateMethods>(
+        &self,
+        templates: Option<&D>,
+        no_templates: c_int,
+        sort: bool,
+    ) -> Option<DocTemplateIsOwned<false>> {
+        unsafe {
+            let templates = match templates {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            DocTemplate::option_from(ffi::wxDocManager_SelectDocumentType(
+                self.as_ptr(),
+                templates,
+                no_templates,
+                sort,
+            ))
+        }
+    }
+    fn select_view_type<D: DocTemplateMethods>(
+        &self,
+        templates: Option<&D>,
+        no_templates: c_int,
+        sort: bool,
+    ) -> Option<DocTemplateIsOwned<false>> {
+        unsafe {
+            let templates = match templates {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            DocTemplate::option_from(ffi::wxDocManager_SelectViewType(
+                self.as_ptr(),
+                templates,
+                no_templates,
+                sort,
+            ))
+        }
+    }
+    fn set_last_directory(&self, dir: &str) {
+        unsafe {
+            let dir = WxString::from(dir);
+            let dir = dir.as_ptr();
+            ffi::wxDocManager_SetLastDirectory(self.as_ptr(), dir)
+        }
+    }
+    fn set_max_docs_open(&self, n: c_int) {
+        unsafe { ffi::wxDocManager_SetMaxDocsOpen(self.as_ptr(), n) }
+    }
+}
+
+// wxDocParentFrame
+pub trait DocParentFrameMethods: FrameMethods {
+    // DTOR: fn ~wxDocParentFrame()
+    fn create_docmanager<D: DocManagerMethods, F: FrameMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        manager: Option<&D>,
+        parent: Option<&F>,
+        id: c_int,
+        title: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let manager = match manager {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxDocParentFrame_Create(
+                self.as_ptr(),
+                manager,
+                parent,
+                id,
+                title,
+                pos,
+                size,
+                style,
+                name,
+            )
+        }
+    }
+    fn get_document_manager(&self) -> WeakRef<DocManager> {
+        unsafe {
+            WeakRef::<DocManager>::from(ffi::wxDocParentFrame_GetDocumentManager(self.as_ptr()))
+        }
+    }
+}
+
+// wxDocTemplate
+pub trait DocTemplateMethods: ObjectMethods {
+    // DTOR: fn ~wxDocTemplate()
+    fn create_document(&self, path: &str, flags: c_long) -> WeakRef<Document> {
+        unsafe {
+            let path = WxString::from(path);
+            let path = path.as_ptr();
+            WeakRef::<Document>::from(ffi::wxDocTemplate_CreateDocument(
+                self.as_ptr(),
+                path,
+                flags,
+            ))
+        }
+    }
+    fn create_view<D: DocumentMethods>(&self, doc: Option<&D>, flags: c_long) -> WeakRef<View> {
+        unsafe {
+            let doc = match doc {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            WeakRef::<View>::from(ffi::wxDocTemplate_CreateView(self.as_ptr(), doc, flags))
+        }
+    }
+    fn file_matches_template(&self, path: &str) -> bool {
+        unsafe {
+            let path = WxString::from(path);
+            let path = path.as_ptr();
+            ffi::wxDocTemplate_FileMatchesTemplate(self.as_ptr(), path)
+        }
+    }
+    fn get_default_extension(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxDocTemplate_GetDefaultExtension(self.as_ptr())).into() }
+    }
+    fn get_description(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxDocTemplate_GetDescription(self.as_ptr())).into() }
+    }
+    fn get_directory(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxDocTemplate_GetDirectory(self.as_ptr())).into() }
+    }
+    fn get_doc_class_info(&self) -> Option<ClassInfoIsOwned<false>> {
+        unsafe { ClassInfo::option_from(ffi::wxDocTemplate_GetDocClassInfo(self.as_ptr())) }
+    }
+    fn get_document_manager(&self) -> WeakRef<DocManager> {
+        unsafe { WeakRef::<DocManager>::from(ffi::wxDocTemplate_GetDocumentManager(self.as_ptr())) }
+    }
+    fn get_document_name(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxDocTemplate_GetDocumentName(self.as_ptr())).into() }
+    }
+    fn get_file_filter(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxDocTemplate_GetFileFilter(self.as_ptr())).into() }
+    }
+    fn get_flags(&self) -> c_long {
+        unsafe { ffi::wxDocTemplate_GetFlags(self.as_ptr()) }
+    }
+    fn get_page_setup_dialog_data(&self) -> PageSetupDialogDataIsOwned<false> {
+        unsafe {
+            PageSetupDialogDataIsOwned::from_ptr(ffi::wxDocTemplate_GetPageSetupDialogData(
+                self.as_ptr(),
+            ))
+        }
+    }
+    fn get_page_setup_dialog_data(&self) -> PageSetupDialogDataIsOwned<false> {
+        unsafe {
+            PageSetupDialogDataIsOwned::from_ptr(ffi::wxDocTemplate_GetPageSetupDialogData1(
+                self.as_ptr(),
+            ))
+        }
+    }
+    fn get_view_class_info(&self) -> Option<ClassInfoIsOwned<false>> {
+        unsafe { ClassInfo::option_from(ffi::wxDocTemplate_GetViewClassInfo(self.as_ptr())) }
+    }
+    fn get_view_name(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxDocTemplate_GetViewName(self.as_ptr())).into() }
+    }
+    fn init_document<D: DocumentMethods>(
+        &self,
+        doc: Option<&D>,
+        path: &str,
+        flags: c_long,
+    ) -> bool {
+        unsafe {
+            let doc = match doc {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let path = WxString::from(path);
+            let path = path.as_ptr();
+            ffi::wxDocTemplate_InitDocument(self.as_ptr(), doc, path, flags)
+        }
+    }
+    fn is_visible(&self) -> bool {
+        unsafe { ffi::wxDocTemplate_IsVisible(self.as_ptr()) }
+    }
+    fn set_default_extension(&self, ext: &str) {
+        unsafe {
+            let ext = WxString::from(ext);
+            let ext = ext.as_ptr();
+            ffi::wxDocTemplate_SetDefaultExtension(self.as_ptr(), ext)
+        }
+    }
+    fn set_description(&self, descr: &str) {
+        unsafe {
+            let descr = WxString::from(descr);
+            let descr = descr.as_ptr();
+            ffi::wxDocTemplate_SetDescription(self.as_ptr(), descr)
+        }
+    }
+    fn set_directory(&self, dir: &str) {
+        unsafe {
+            let dir = WxString::from(dir);
+            let dir = dir.as_ptr();
+            ffi::wxDocTemplate_SetDirectory(self.as_ptr(), dir)
+        }
+    }
+    fn set_document_manager<D: DocManagerMethods>(&self, manager: Option<&D>) {
+        unsafe {
+            let manager = match manager {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDocTemplate_SetDocumentManager(self.as_ptr(), manager)
+        }
+    }
+    fn set_file_filter(&self, filter: &str) {
+        unsafe {
+            let filter = WxString::from(filter);
+            let filter = filter.as_ptr();
+            ffi::wxDocTemplate_SetFileFilter(self.as_ptr(), filter)
+        }
+    }
+    fn set_flags(&self, flags: c_long) {
+        unsafe { ffi::wxDocTemplate_SetFlags(self.as_ptr(), flags) }
+    }
+}
+
+// wxDocument
+pub trait DocumentMethods: EvtHandlerMethods {
+    // DTOR: fn ~wxDocument()
+    fn add_view<V: ViewMethods>(&self, view: Option<&V>) -> bool {
+        unsafe {
+            let view = match view {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDocument_AddView(self.as_ptr(), view)
+        }
+    }
+    fn already_saved(&self) -> bool {
+        unsafe { ffi::wxDocument_AlreadySaved(self.as_ptr()) }
+    }
+    fn activate(&self) {
+        unsafe { ffi::wxDocument_Activate(self.as_ptr()) }
+    }
+    fn close(&self) -> bool {
+        unsafe { ffi::wxDocument_Close(self.as_ptr()) }
+    }
+    fn delete_all_views(&self) -> bool {
+        unsafe { ffi::wxDocument_DeleteAllViews(self.as_ptr()) }
+    }
+    fn delete_contents(&self) -> bool {
+        unsafe { ffi::wxDocument_DeleteContents(self.as_ptr()) }
+    }
+    fn get_command_processor(&self) -> Option<CommandProcessorIsOwned<false>> {
+        unsafe { CommandProcessor::option_from(ffi::wxDocument_GetCommandProcessor(self.as_ptr())) }
+    }
+    fn get_document_manager(&self) -> WeakRef<DocManager> {
+        unsafe { WeakRef::<DocManager>::from(ffi::wxDocument_GetDocumentManager(self.as_ptr())) }
+    }
+    fn get_document_name(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxDocument_GetDocumentName(self.as_ptr())).into() }
+    }
+    fn get_document_saved(&self) -> bool {
+        unsafe { ffi::wxDocument_GetDocumentSaved(self.as_ptr()) }
+    }
+    fn get_document_template(&self) -> Option<DocTemplateIsOwned<false>> {
+        unsafe { DocTemplate::option_from(ffi::wxDocument_GetDocumentTemplate(self.as_ptr())) }
+    }
+    fn get_document_window(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxDocument_GetDocumentWindow(self.as_ptr())) }
+    }
+    fn get_filename(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxDocument_GetFilename(self.as_ptr())).into() }
+    }
+    fn get_first_view(&self) -> WeakRef<View> {
+        unsafe { WeakRef::<View>::from(ffi::wxDocument_GetFirstView(self.as_ptr())) }
+    }
+    fn get_title(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxDocument_GetTitle(self.as_ptr())).into() }
+    }
+    fn get_user_readable_name(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxDocument_GetUserReadableName(self.as_ptr())).into() }
+    }
+    // NOT_SUPPORTED: fn GetViewsVector()
+    fn get_views(&self) -> *mut c_void {
+        unsafe { ffi::wxDocument_GetViews(self.as_ptr()) }
+    }
+    fn get_views(&self) -> *const c_void {
+        unsafe { ffi::wxDocument_GetViews1(self.as_ptr()) }
+    }
+    fn is_child_document(&self) -> bool {
+        unsafe { ffi::wxDocument_IsChildDocument(self.as_ptr()) }
+    }
+    fn is_modified(&self) -> bool {
+        unsafe { ffi::wxDocument_IsModified(self.as_ptr()) }
+    }
+    fn load_object_istream(&self, stream: *mut c_void) -> *mut c_void {
+        unsafe { ffi::wxDocument_LoadObject(self.as_ptr(), stream) }
+    }
+    fn load_object_inputstream(&self, stream: *mut c_void) -> *mut c_void {
+        unsafe { ffi::wxDocument_LoadObject1(self.as_ptr(), stream) }
+    }
+    fn modify(&self, modify: bool) {
+        unsafe { ffi::wxDocument_Modify(self.as_ptr(), modify) }
+    }
+    fn on_changed_view_list(&self) {
+        unsafe { ffi::wxDocument_OnChangedViewList(self.as_ptr()) }
+    }
+    fn on_close_document(&self) -> bool {
+        unsafe { ffi::wxDocument_OnCloseDocument(self.as_ptr()) }
+    }
+    fn on_create(&self, path: &str, flags: c_long) -> bool {
+        unsafe {
+            let path = WxString::from(path);
+            let path = path.as_ptr();
+            ffi::wxDocument_OnCreate(self.as_ptr(), path, flags)
+        }
+    }
+    fn on_create_command_processor(&self) -> Option<CommandProcessorIsOwned<false>> {
+        unsafe {
+            CommandProcessor::option_from(ffi::wxDocument_OnCreateCommandProcessor(self.as_ptr()))
+        }
+    }
+    fn on_new_document(&self) -> bool {
+        unsafe { ffi::wxDocument_OnNewDocument(self.as_ptr()) }
+    }
+    fn on_open_document(&self, filename: &str) -> bool {
+        unsafe {
+            let filename = WxString::from(filename);
+            let filename = filename.as_ptr();
+            ffi::wxDocument_OnOpenDocument(self.as_ptr(), filename)
+        }
+    }
+    fn on_save_document(&self, filename: &str) -> bool {
+        unsafe {
+            let filename = WxString::from(filename);
+            let filename = filename.as_ptr();
+            ffi::wxDocument_OnSaveDocument(self.as_ptr(), filename)
+        }
+    }
+    fn on_save_modified(&self) -> bool {
+        unsafe { ffi::wxDocument_OnSaveModified(self.as_ptr()) }
+    }
+    fn remove_view<V: ViewMethods>(&self, view: Option<&V>) -> bool {
+        unsafe {
+            let view = match view {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDocument_RemoveView(self.as_ptr(), view)
+        }
+    }
+    fn save(&self) -> bool {
+        unsafe { ffi::wxDocument_Save(self.as_ptr()) }
+    }
+    fn save_as(&self) -> bool {
+        unsafe { ffi::wxDocument_SaveAs(self.as_ptr()) }
+    }
+    fn revert(&self) -> bool {
+        unsafe { ffi::wxDocument_Revert(self.as_ptr()) }
+    }
+    fn save_object_ostream(&self, stream: *mut c_void) -> *mut c_void {
+        unsafe { ffi::wxDocument_SaveObject(self.as_ptr(), stream) }
+    }
+    fn save_object_outputstream(&self, stream: *mut c_void) -> *mut c_void {
+        unsafe { ffi::wxDocument_SaveObject1(self.as_ptr(), stream) }
+    }
+    fn set_command_processor<C: CommandProcessorMethods>(&self, processor: Option<&C>) {
+        unsafe {
+            let processor = match processor {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDocument_SetCommandProcessor(self.as_ptr(), processor)
+        }
+    }
+    fn set_document_name(&self, name: &str) {
+        unsafe {
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxDocument_SetDocumentName(self.as_ptr(), name)
+        }
+    }
+    fn set_document_template<D: DocTemplateMethods>(&self, templ: Option<&D>) {
+        unsafe {
+            let templ = match templ {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDocument_SetDocumentTemplate(self.as_ptr(), templ)
+        }
+    }
+    fn set_document_saved(&self, saved: bool) {
+        unsafe { ffi::wxDocument_SetDocumentSaved(self.as_ptr(), saved) }
+    }
+    fn set_filename(&self, filename: &str, notify_views: bool) {
+        unsafe {
+            let filename = WxString::from(filename);
+            let filename = filename.as_ptr();
+            ffi::wxDocument_SetFilename(self.as_ptr(), filename, notify_views)
+        }
+    }
+    fn on_change_filename(&self, notify_views: bool) {
+        unsafe { ffi::wxDocument_OnChangeFilename(self.as_ptr(), notify_views) }
+    }
+    fn set_title(&self, title: &str) {
+        unsafe {
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            ffi::wxDocument_SetTitle(self.as_ptr(), title)
+        }
+    }
+    fn update_all_views<V: ViewMethods, O: ObjectMethods>(
+        &self,
+        sender: Option<&V>,
+        hint: Option<&O>,
+    ) {
+        unsafe {
+            let sender = match sender {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let hint = match hint {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDocument_UpdateAllViews(self.as_ptr(), sender, hint)
+        }
+    }
+}
+
+// wxDragImage
+pub trait DragImageMethods: ObjectMethods {
+    fn begin_drag_bool<P: PointMethods, W: WindowMethods, R: RectMethods>(
+        &self,
+        hotspot: &P,
+        window: Option<&W>,
+        full_screen: bool,
+        rect: Option<&R>,
+    ) -> bool {
+        unsafe {
+            let hotspot = hotspot.as_ptr();
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let rect = match rect {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDragImage_BeginDrag(self.as_ptr(), hotspot, window, full_screen, rect)
+        }
+    }
+    fn begin_drag_window<P: PointMethods, W: WindowMethods, W2: WindowMethods>(
+        &self,
+        hotspot: &P,
+        window: Option<&W>,
+        bounding_window: Option<&W2>,
+    ) -> bool {
+        unsafe {
+            let hotspot = hotspot.as_ptr();
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let bounding_window = match bounding_window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDragImage_BeginDrag1(self.as_ptr(), hotspot, window, bounding_window)
+        }
+    }
+    fn do_draw_image<D: DCMethods, P: PointMethods>(&self, dc: &D, pos: &P) -> bool {
+        unsafe {
+            let dc = dc.as_ptr();
+            let pos = pos.as_ptr();
+            ffi::wxDragImage_DoDrawImage(self.as_ptr(), dc, pos)
+        }
+    }
+    fn end_drag(&self) -> bool {
+        unsafe { ffi::wxDragImage_EndDrag(self.as_ptr()) }
+    }
+    fn get_image_rect<P: PointMethods>(&self, pos: &P) -> Rect {
+        unsafe {
+            let pos = pos.as_ptr();
+            Rect::from_ptr(ffi::wxDragImage_GetImageRect(self.as_ptr(), pos))
+        }
+    }
+    fn hide(&self) -> bool {
+        unsafe { ffi::wxDragImage_Hide(self.as_ptr()) }
+    }
+    fn move_<P: PointMethods>(&self, pt: &P) -> bool {
+        unsafe {
+            let pt = pt.as_ptr();
+            ffi::wxDragImage_Move(self.as_ptr(), pt)
+        }
+    }
+    fn show(&self) -> bool {
+        unsafe { ffi::wxDragImage_Show(self.as_ptr()) }
+    }
+    fn update_backing_from_window<
+        D: DCMethods,
+        M: MemoryDCMethods,
+        R: RectMethods,
+        R2: RectMethods,
+    >(
+        &self,
+        window_dc: &D,
+        dest_dc: &M,
+        source_rect: &R,
+        dest_rect: &R2,
+    ) -> bool {
+        unsafe {
+            let window_dc = window_dc.as_ptr();
+            let dest_dc = dest_dc.as_ptr();
+            let source_rect = source_rect.as_ptr();
+            let dest_rect = dest_rect.as_ptr();
+            ffi::wxDragImage_UpdateBackingFromWindow(
+                self.as_ptr(),
+                window_dc,
+                dest_dc,
+                source_rect,
+                dest_rect,
+            )
+        }
+    }
+}
+
+// wxDropFilesEvent
+pub trait DropFilesEventMethods: EventMethods {
+    fn get_files(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxDropFilesEvent_GetFiles(self.as_ptr())).into() }
+    }
+    fn get_number_of_files(&self) -> c_int {
+        unsafe { ffi::wxDropFilesEvent_GetNumberOfFiles(self.as_ptr()) }
+    }
+    fn get_position(&self) -> Point {
+        unsafe { Point::from_ptr(ffi::wxDropFilesEvent_GetPosition(self.as_ptr())) }
+    }
+}
+
+// wxDropSource
+pub trait DropSourceMethods: WxRustMethods {
+    // NOT_SUPPORTED: fn DoDragDrop()
+    fn get_data_object(&self) -> Option<DataObjectIsOwned<false>> {
+        unsafe { DataObject::option_from(ffi::wxDropSource_GetDataObject(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn GiveFeedback()
+    // NOT_SUPPORTED: fn SetCursor()
+    // NOT_SUPPORTED: fn SetIcon()
+    fn set_data<D: DataObjectMethods>(&self, data: &D) {
+        unsafe {
+            let data = data.as_ptr();
+            ffi::wxDropSource_SetData(self.as_ptr(), data)
+        }
+    }
+}
+
+// wxDropTarget
+pub trait DropTargetMethods: WxRustMethods {
+    // DTOR: fn ~wxDropTarget()
+    fn get_data(&self) -> bool {
+        unsafe { ffi::wxDropTarget_GetData(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn OnData()
+    // NOT_SUPPORTED: fn OnDragOver()
+    fn on_drop(&self, x: c_int, y: c_int) -> bool {
+        unsafe { ffi::wxDropTarget_OnDrop(self.as_ptr(), x, y) }
+    }
+    // NOT_SUPPORTED: fn OnEnter()
+    fn on_leave(&self) {
+        unsafe { ffi::wxDropTarget_OnLeave(self.as_ptr()) }
+    }
+    fn get_data_object(&self) -> Option<DataObjectIsOwned<false>> {
+        unsafe { DataObject::option_from(ffi::wxDropTarget_GetDataObject(self.as_ptr())) }
+    }
+    fn set_data_object<D: DataObjectMethods>(&self, data: Option<&D>) {
+        unsafe {
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDropTarget_SetDataObject(self.as_ptr(), data)
+        }
+    }
+    // NOT_SUPPORTED: fn SetDefaultAction()
+    // NOT_SUPPORTED: fn GetDefaultAction()
+}
+
 // wxEditableListBox
 pub trait EditableListBoxMethods: PanelMethods {
     // DTOR: fn ~wxEditableListBox()
@@ -1509,6 +7773,31 @@ pub trait EditableListBoxMethods: PanelMethods {
         unsafe {
             let strings = strings.as_ptr();
             ffi::wxEditableListBox_GetStrings(self.as_ptr(), strings)
+        }
+    }
+}
+
+// wxEraseEvent
+pub trait EraseEventMethods: EventMethods {
+    fn get_dc(&self) -> Option<DCIsOwned<false>> {
+        unsafe { DC::option_from(ffi::wxEraseEvent_GetDC(self.as_ptr())) }
+    }
+}
+
+// wxEventBlocker
+pub trait EventBlockerMethods: EvtHandlerMethods {
+    // DTOR: fn ~wxEventBlocker()
+    // NOT_SUPPORTED: fn Block()
+}
+
+// wxExtHelpController
+pub trait ExtHelpControllerMethods: HelpControllerBaseMethods {
+    // DTOR: fn ~wxExtHelpController()
+    fn display_help(&self, relative_url: &str) -> bool {
+        unsafe {
+            let relative_url = WxString::from(relative_url);
+            let relative_url = relative_url.as_ptr();
+            ffi::wxExtHelpController_DisplayHelp(self.as_ptr(), relative_url)
         }
     }
 }
@@ -1619,6 +7908,322 @@ pub trait FileCtrlMethods: ControlMethods {
     }
 }
 
+// wxFileCtrlEvent
+pub trait FileCtrlEventMethods: CommandEventMethods {
+    fn get_directory(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFileCtrlEvent_GetDirectory(self.as_ptr())).into() }
+    }
+    fn get_file(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFileCtrlEvent_GetFile(self.as_ptr())).into() }
+    }
+    fn get_files(&self) -> ArrayString {
+        unsafe { ArrayString::from_ptr(ffi::wxFileCtrlEvent_GetFiles(self.as_ptr())) }
+    }
+    fn get_filter_index(&self) -> c_int {
+        unsafe { ffi::wxFileCtrlEvent_GetFilterIndex(self.as_ptr()) }
+    }
+    fn set_files<A: ArrayStringMethods>(&self, files: &A) {
+        unsafe {
+            let files = files.as_ptr();
+            ffi::wxFileCtrlEvent_SetFiles(self.as_ptr(), files)
+        }
+    }
+    fn set_directory(&self, directory: &str) {
+        unsafe {
+            let directory = WxString::from(directory);
+            let directory = directory.as_ptr();
+            ffi::wxFileCtrlEvent_SetDirectory(self.as_ptr(), directory)
+        }
+    }
+    fn set_filter_index(&self, index: c_int) {
+        unsafe { ffi::wxFileCtrlEvent_SetFilterIndex(self.as_ptr(), index) }
+    }
+}
+
+// wxFileDataObject
+pub trait FileDataObjectMethods: DataObjectSimpleMethods {
+    fn add_file(&self, file: &str) {
+        unsafe {
+            let file = WxString::from(file);
+            let file = file.as_ptr();
+            ffi::wxFileDataObject_AddFile(self.as_ptr(), file)
+        }
+    }
+    fn get_filenames(&self) -> ArrayStringIsOwned<false> {
+        unsafe { ArrayStringIsOwned::from_ptr(ffi::wxFileDataObject_GetFilenames(self.as_ptr())) }
+    }
+}
+
+// wxFileDialog
+pub trait FileDialogMethods: DialogMethods {
+    // DTOR: fn ~wxFileDialog()
+    fn get_currently_selected_filename(&self) -> String {
+        unsafe {
+            WxString::from_ptr(ffi::wxFileDialog_GetCurrentlySelectedFilename(
+                self.as_ptr(),
+            ))
+            .into()
+        }
+    }
+    fn get_currently_selected_filter_index(&self) -> c_int {
+        unsafe { ffi::wxFileDialog_GetCurrentlySelectedFilterIndex(self.as_ptr()) }
+    }
+    fn get_directory(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFileDialog_GetDirectory(self.as_ptr())).into() }
+    }
+    fn get_extra_control(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxFileDialog_GetExtraControl(self.as_ptr())) }
+    }
+    fn get_filename(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFileDialog_GetFilename(self.as_ptr())).into() }
+    }
+    fn get_filenames<A: ArrayStringMethods>(&self, filenames: &A) {
+        unsafe {
+            let filenames = filenames.as_ptr();
+            ffi::wxFileDialog_GetFilenames(self.as_ptr(), filenames)
+        }
+    }
+    fn get_filter_index(&self) -> c_int {
+        unsafe { ffi::wxFileDialog_GetFilterIndex(self.as_ptr()) }
+    }
+    fn get_message(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFileDialog_GetMessage(self.as_ptr())).into() }
+    }
+    fn get_path(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFileDialog_GetPath(self.as_ptr())).into() }
+    }
+    fn get_paths<A: ArrayStringMethods>(&self, paths: &A) {
+        unsafe {
+            let paths = paths.as_ptr();
+            ffi::wxFileDialog_GetPaths(self.as_ptr(), paths)
+        }
+    }
+    fn get_wildcard(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFileDialog_GetWildcard(self.as_ptr())).into() }
+    }
+    fn set_customize_hook<F: FileDialogCustomizeHookMethods>(&self, customize_hook: &F) -> bool {
+        unsafe {
+            let customize_hook = customize_hook.as_ptr();
+            ffi::wxFileDialog_SetCustomizeHook(self.as_ptr(), customize_hook)
+        }
+    }
+    fn set_directory(&self, directory: &str) {
+        unsafe {
+            let directory = WxString::from(directory);
+            let directory = directory.as_ptr();
+            ffi::wxFileDialog_SetDirectory(self.as_ptr(), directory)
+        }
+    }
+    // NOT_SUPPORTED: fn SetExtraControlCreator()
+    fn set_filename(&self, setfilename: &str) {
+        unsafe {
+            let setfilename = WxString::from(setfilename);
+            let setfilename = setfilename.as_ptr();
+            ffi::wxFileDialog_SetFilename(self.as_ptr(), setfilename)
+        }
+    }
+    fn set_filter_index(&self, filter_index: c_int) {
+        unsafe { ffi::wxFileDialog_SetFilterIndex(self.as_ptr(), filter_index) }
+    }
+    fn set_message(&self, message: &str) {
+        unsafe {
+            let message = WxString::from(message);
+            let message = message.as_ptr();
+            ffi::wxFileDialog_SetMessage(self.as_ptr(), message)
+        }
+    }
+    fn set_path(&self, path: &str) {
+        unsafe {
+            let path = WxString::from(path);
+            let path = path.as_ptr();
+            ffi::wxFileDialog_SetPath(self.as_ptr(), path)
+        }
+    }
+    fn set_wildcard(&self, wild_card: &str) {
+        unsafe {
+            let wild_card = WxString::from(wild_card);
+            let wild_card = wild_card.as_ptr();
+            ffi::wxFileDialog_SetWildcard(self.as_ptr(), wild_card)
+        }
+    }
+}
+
+// wxFileDialogCustomize
+pub trait FileDialogCustomizeMethods: WxRustMethods {
+    fn add_button(&self, label: &str) -> WeakRef<FileDialogButton> {
+        unsafe {
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            WeakRef::<FileDialogButton>::from(ffi::wxFileDialogCustomize_AddButton(
+                self.as_ptr(),
+                label,
+            ))
+        }
+    }
+    fn add_check_box(&self, label: &str) -> WeakRef<FileDialogCheckBox> {
+        unsafe {
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            WeakRef::<FileDialogCheckBox>::from(ffi::wxFileDialogCustomize_AddCheckBox(
+                self.as_ptr(),
+                label,
+            ))
+        }
+    }
+    fn add_radio_button(&self, label: &str) -> WeakRef<FileDialogRadioButton> {
+        unsafe {
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            WeakRef::<FileDialogRadioButton>::from(ffi::wxFileDialogCustomize_AddRadioButton(
+                self.as_ptr(),
+                label,
+            ))
+        }
+    }
+    fn add_choice(&self, n: usize, strings: *const c_void) -> WeakRef<FileDialogChoice> {
+        unsafe {
+            WeakRef::<FileDialogChoice>::from(ffi::wxFileDialogCustomize_AddChoice(
+                self.as_ptr(),
+                n,
+                strings,
+            ))
+        }
+    }
+    fn add_text_ctrl(&self, label: &str) -> WeakRef<FileDialogTextCtrl> {
+        unsafe {
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            WeakRef::<FileDialogTextCtrl>::from(ffi::wxFileDialogCustomize_AddTextCtrl(
+                self.as_ptr(),
+                label,
+            ))
+        }
+    }
+    fn add_static_text(&self, label: &str) -> WeakRef<FileDialogStaticText> {
+        unsafe {
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            WeakRef::<FileDialogStaticText>::from(ffi::wxFileDialogCustomize_AddStaticText(
+                self.as_ptr(),
+                label,
+            ))
+        }
+    }
+}
+
+// wxFileDialogCustomizeHook
+pub trait FileDialogCustomizeHookMethods: WxRustMethods {
+    fn add_custom_controls<F: FileDialogCustomizeMethods>(&self, customizer: &F) {
+        unsafe {
+            let customizer = customizer.as_ptr();
+            ffi::wxFileDialogCustomizeHook_AddCustomControls(self.as_ptr(), customizer)
+        }
+    }
+    fn update_custom_controls(&self) {
+        unsafe { ffi::wxFileDialogCustomizeHook_UpdateCustomControls(self.as_ptr()) }
+    }
+    fn transfer_data_from_custom_controls(&self) {
+        unsafe { ffi::wxFileDialogCustomizeHook_TransferDataFromCustomControls(self.as_ptr()) }
+    }
+}
+
+// wxFileDirPickerEvent
+pub trait FileDirPickerEventMethods: CommandEventMethods {
+    fn get_path(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFileDirPickerEvent_GetPath(self.as_ptr())).into() }
+    }
+    fn set_path(&self, path: &str) {
+        unsafe {
+            let path = WxString::from(path);
+            let path = path.as_ptr();
+            ffi::wxFileDirPickerEvent_SetPath(self.as_ptr(), path)
+        }
+    }
+}
+
+// wxFileDropTarget
+pub trait FileDropTargetMethods: DropTargetMethods {
+    fn on_drop_files<A: ArrayStringMethods>(&self, x: c_int, y: c_int, filenames: &A) -> bool {
+        unsafe {
+            let filenames = filenames.as_ptr();
+            ffi::wxFileDropTarget_OnDropFiles(self.as_ptr(), x, y, filenames)
+        }
+    }
+}
+
+// wxFileHistory
+pub trait FileHistoryMethods: ObjectMethods {
+    // DTOR: fn ~wxFileHistory()
+    fn add_file_to_history(&self, filename: &str) {
+        unsafe {
+            let filename = WxString::from(filename);
+            let filename = filename.as_ptr();
+            ffi::wxFileHistory_AddFileToHistory(self.as_ptr(), filename)
+        }
+    }
+    fn add_files_to_menu(&self) {
+        unsafe { ffi::wxFileHistory_AddFilesToMenu(self.as_ptr()) }
+    }
+    fn add_files_to_menu_menu<M: MenuMethods>(&self, menu: Option<&M>) {
+        unsafe {
+            let menu = match menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxFileHistory_AddFilesToMenu1(self.as_ptr(), menu)
+        }
+    }
+    fn get_base_id(&self) -> c_int {
+        unsafe { ffi::wxFileHistory_GetBaseId(self.as_ptr()) }
+    }
+    fn get_count(&self) -> usize {
+        unsafe { ffi::wxFileHistory_GetCount(self.as_ptr()) }
+    }
+    fn get_history_file(&self, index: usize) -> String {
+        unsafe {
+            WxString::from_ptr(ffi::wxFileHistory_GetHistoryFile(self.as_ptr(), index)).into()
+        }
+    }
+    fn get_max_files(&self) -> c_int {
+        unsafe { ffi::wxFileHistory_GetMaxFiles(self.as_ptr()) }
+    }
+    fn get_menus(&self) -> *const c_void {
+        unsafe { ffi::wxFileHistory_GetMenus(self.as_ptr()) }
+    }
+    fn load(&self, config: *const c_void) {
+        unsafe { ffi::wxFileHistory_Load(self.as_ptr(), config) }
+    }
+    fn remove_file_from_history(&self, i: usize) {
+        unsafe { ffi::wxFileHistory_RemoveFileFromHistory(self.as_ptr(), i) }
+    }
+    fn remove_menu<M: MenuMethods>(&self, menu: Option<&M>) {
+        unsafe {
+            let menu = match menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxFileHistory_RemoveMenu(self.as_ptr(), menu)
+        }
+    }
+    fn save(&self, config: *mut c_void) {
+        unsafe { ffi::wxFileHistory_Save(self.as_ptr(), config) }
+    }
+    fn set_base_id(&self, base_id: c_int) {
+        unsafe { ffi::wxFileHistory_SetBaseId(self.as_ptr(), base_id) }
+    }
+    fn use_menu<M: MenuMethods>(&self, menu: Option<&M>) {
+        unsafe {
+            let menu = match menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxFileHistory_UseMenu(self.as_ptr(), menu)
+        }
+    }
+    // NOT_SUPPORTED: fn SetMenuPathStyle()
+    // NOT_SUPPORTED: fn GetMenuPathStyle()
+}
+
 // wxFilePickerCtrl
 pub trait FilePickerCtrlMethods: PickerBaseMethods {
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
@@ -1693,6 +8298,133 @@ pub trait FilePickerCtrlMethods: PickerBaseMethods {
     }
 }
 
+// wxFindDialogEvent
+pub trait FindDialogEventMethods: CommandEventMethods {
+    fn get_dialog(&self) -> WeakRef<FindReplaceDialog> {
+        unsafe {
+            WeakRef::<FindReplaceDialog>::from(ffi::wxFindDialogEvent_GetDialog(self.as_ptr()))
+        }
+    }
+    fn get_find_string(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFindDialogEvent_GetFindString(self.as_ptr())).into() }
+    }
+    fn get_flags(&self) -> c_int {
+        unsafe { ffi::wxFindDialogEvent_GetFlags(self.as_ptr()) }
+    }
+    fn get_replace_string(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFindDialogEvent_GetReplaceString(self.as_ptr())).into() }
+    }
+}
+
+// wxFindReplaceData
+pub trait FindReplaceDataMethods: ObjectMethods {
+    fn get_find_string(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFindReplaceData_GetFindString(self.as_ptr())).into() }
+    }
+    fn get_flags(&self) -> c_int {
+        unsafe { ffi::wxFindReplaceData_GetFlags(self.as_ptr()) }
+    }
+    fn get_replace_string(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFindReplaceData_GetReplaceString(self.as_ptr())).into() }
+    }
+    fn set_find_string(&self, str: &str) {
+        unsafe {
+            let str = WxString::from(str);
+            let str = str.as_ptr();
+            ffi::wxFindReplaceData_SetFindString(self.as_ptr(), str)
+        }
+    }
+    // NOT_SUPPORTED: fn SetFlags()
+    fn set_replace_string(&self, str: &str) {
+        unsafe {
+            let str = WxString::from(str);
+            let str = str.as_ptr();
+            ffi::wxFindReplaceData_SetReplaceString(self.as_ptr(), str)
+        }
+    }
+}
+
+// wxFindReplaceDialog
+pub trait FindReplaceDialogMethods: DialogMethods {
+    // DTOR: fn ~wxFindReplaceDialog()
+    fn create_findreplacedata<W: WindowMethods, F: FindReplaceDataMethods>(
+        &self,
+        parent: Option<&W>,
+        data: Option<&F>,
+        title: &str,
+        style: c_int,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            ffi::wxFindReplaceDialog_Create(self.as_ptr(), parent, data, title, style)
+        }
+    }
+    fn get_data(&self) -> Option<FindReplaceDataIsOwned<false>> {
+        unsafe { FindReplaceData::option_from(ffi::wxFindReplaceDialog_GetData(self.as_ptr())) }
+    }
+}
+
+// wxFlexGridSizer
+pub trait FlexGridSizerMethods: GridSizerMethods {
+    fn add_growable_col(&self, idx: usize, proportion: c_int) {
+        unsafe { ffi::wxFlexGridSizer_AddGrowableCol(self.as_ptr(), idx, proportion) }
+    }
+    fn add_growable_row(&self, idx: usize, proportion: c_int) {
+        unsafe { ffi::wxFlexGridSizer_AddGrowableRow(self.as_ptr(), idx, proportion) }
+    }
+    fn get_flexible_direction(&self) -> c_int {
+        unsafe { ffi::wxFlexGridSizer_GetFlexibleDirection(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetNonFlexibleGrowMode()
+    fn is_col_growable(&self, idx: usize) -> bool {
+        unsafe { ffi::wxFlexGridSizer_IsColGrowable(self.as_ptr(), idx) }
+    }
+    fn is_row_growable(&self, idx: usize) -> bool {
+        unsafe { ffi::wxFlexGridSizer_IsRowGrowable(self.as_ptr(), idx) }
+    }
+    fn remove_growable_col(&self, idx: usize) {
+        unsafe { ffi::wxFlexGridSizer_RemoveGrowableCol(self.as_ptr(), idx) }
+    }
+    fn remove_growable_row(&self, idx: usize) {
+        unsafe { ffi::wxFlexGridSizer_RemoveGrowableRow(self.as_ptr(), idx) }
+    }
+    fn set_flexible_direction(&self, direction: c_int) {
+        unsafe { ffi::wxFlexGridSizer_SetFlexibleDirection(self.as_ptr(), direction) }
+    }
+    // NOT_SUPPORTED: fn SetNonFlexibleGrowMode()
+    fn get_row_heights(&self) -> ArrayIntIsOwned<false> {
+        unsafe { ArrayIntIsOwned::from_ptr(ffi::wxFlexGridSizer_GetRowHeights(self.as_ptr())) }
+    }
+    fn get_col_widths(&self) -> ArrayIntIsOwned<false> {
+        unsafe { ArrayIntIsOwned::from_ptr(ffi::wxFlexGridSizer_GetColWidths(self.as_ptr())) }
+    }
+}
+
+// wxFocusEvent
+pub trait FocusEventMethods: EventMethods {
+    fn get_window(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxFocusEvent_GetWindow(self.as_ptr())) }
+    }
+    fn set_window<W: WindowMethods>(&self, win: Option<&W>) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxFocusEvent_SetWindow(self.as_ptr(), win)
+        }
+    }
+}
+
 // wxFont
 pub trait FontMethods: GDIObjectMethods {
     fn get_base_font(&self) -> Font {
@@ -1709,8 +8441,8 @@ pub trait FontMethods: GDIObjectMethods {
     fn get_native_font_info_user_desc(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxFont_GetNativeFontInfoUserDesc(self.as_ptr())).into() }
     }
-    fn get_native_font_info(&self) -> *const c_void {
-        unsafe { ffi::wxFont_GetNativeFontInfo(self.as_ptr()) }
+    fn get_native_font_info(&self) -> Option<NativeFontInfoIsOwned<false>> {
+        unsafe { NativeFontInfo::option_from(ffi::wxFont_GetNativeFontInfo(self.as_ptr())) }
     }
     fn get_point_size(&self) -> c_int {
         unsafe { ffi::wxFont_GetPointSize(self.as_ptr()) }
@@ -1824,8 +8556,11 @@ pub trait FontMethods: GDIObjectMethods {
             ffi::wxFont_SetNativeFontInfoUserDesc(self.as_ptr(), info)
         }
     }
-    fn set_native_font_info_nativefontinfo(&self, info: *const c_void) {
-        unsafe { ffi::wxFont_SetNativeFontInfo1(self.as_ptr(), info) }
+    fn set_native_font_info_nativefontinfo<N: NativeFontInfoMethods>(&self, info: &N) {
+        unsafe {
+            let info = info.as_ptr();
+            ffi::wxFont_SetNativeFontInfo1(self.as_ptr(), info)
+        }
     }
     fn set_point_size(&self, point_size: c_int) {
         unsafe { ffi::wxFont_SetPointSize(self.as_ptr(), point_size) }
@@ -1862,8 +8597,11 @@ pub trait FontMethods: GDIObjectMethods {
     // NOT_SUPPORTED: fn New1()
     // NOT_SUPPORTED: fn New2()
     // NOT_SUPPORTED: fn New3()
-    fn new_nativefontinfo(native_info: *const c_void) -> Option<FontIsOwned<false>> {
-        unsafe { Font::option_from(ffi::wxFont_New4(native_info)) }
+    fn new_nativefontinfo<N: NativeFontInfoMethods>(native_info: &N) -> Option<FontIsOwned<false>> {
+        unsafe {
+            let native_info = native_info.as_ptr();
+            Font::option_from(ffi::wxFont_New4(native_info))
+        }
     }
     fn new_str(native_info_string: &str) -> Option<FontIsOwned<false>> {
         unsafe {
@@ -1873,6 +8611,208 @@ pub trait FontMethods: GDIObjectMethods {
         }
     }
     // DTOR: fn ~wxFont()
+}
+
+// wxFontData
+pub trait FontDataMethods: ObjectMethods {
+    fn enable_effects(&self, enable: bool) {
+        unsafe { ffi::wxFontData_EnableEffects(self.as_ptr(), enable) }
+    }
+    fn get_allow_symbols(&self) -> bool {
+        unsafe { ffi::wxFontData_GetAllowSymbols(self.as_ptr()) }
+    }
+    fn get_chosen_font(&self) -> Font {
+        unsafe { Font::from_ptr(ffi::wxFontData_GetChosenFont(self.as_ptr())) }
+    }
+    fn get_colour(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxFontData_GetColour(self.as_ptr())) }
+    }
+    fn get_enable_effects(&self) -> bool {
+        unsafe { ffi::wxFontData_GetEnableEffects(self.as_ptr()) }
+    }
+    fn get_restrict_selection(&self) -> c_int {
+        unsafe { ffi::wxFontData_GetRestrictSelection(self.as_ptr()) }
+    }
+    fn get_initial_font(&self) -> Font {
+        unsafe { Font::from_ptr(ffi::wxFontData_GetInitialFont(self.as_ptr())) }
+    }
+    fn get_show_help(&self) -> bool {
+        unsafe { ffi::wxFontData_GetShowHelp(self.as_ptr()) }
+    }
+    fn restrict_selection(&self, flags: c_int) {
+        unsafe { ffi::wxFontData_RestrictSelection(self.as_ptr(), flags) }
+    }
+    fn set_allow_symbols(&self, allow_symbols: bool) {
+        unsafe { ffi::wxFontData_SetAllowSymbols(self.as_ptr(), allow_symbols) }
+    }
+    fn set_chosen_font<F: FontMethods>(&self, font: &F) {
+        unsafe {
+            let font = font.as_ptr();
+            ffi::wxFontData_SetChosenFont(self.as_ptr(), font)
+        }
+    }
+    fn set_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxFontData_SetColour(self.as_ptr(), colour)
+        }
+    }
+    fn set_initial_font<F: FontMethods>(&self, font: &F) {
+        unsafe {
+            let font = font.as_ptr();
+            ffi::wxFontData_SetInitialFont(self.as_ptr(), font)
+        }
+    }
+    fn set_range(&self, min: c_int, max: c_int) {
+        unsafe { ffi::wxFontData_SetRange(self.as_ptr(), min, max) }
+    }
+    fn set_show_help(&self, show_help: bool) {
+        unsafe { ffi::wxFontData_SetShowHelp(self.as_ptr(), show_help) }
+    }
+    // BLOCKED: fn operator=()
+}
+
+// wxFontDialog
+pub trait FontDialogMethods: DialogMethods {
+    fn create<W: WindowMethods>(&self, parent: Option<&W>) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxFontDialog_Create(self.as_ptr(), parent)
+        }
+    }
+    fn create_fontdata<W: WindowMethods, F: FontDataMethods>(
+        &self,
+        parent: Option<&W>,
+        data: &F,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let data = data.as_ptr();
+            ffi::wxFontDialog_Create1(self.as_ptr(), parent, data)
+        }
+    }
+    fn get_font_data(&self) -> FontDataIsOwned<false> {
+        unsafe { FontDataIsOwned::from_ptr(ffi::wxFontDialog_GetFontData(self.as_ptr())) }
+    }
+    fn get_font_data(&self) -> FontDataIsOwned<false> {
+        unsafe { FontDataIsOwned::from_ptr(ffi::wxFontDialog_GetFontData1(self.as_ptr())) }
+    }
+}
+
+// wxFontEnumerator
+pub trait FontEnumeratorMethods: WxRustMethods {
+    // DTOR: fn ~wxFontEnumerator()
+    fn enumerate_encodings(&self, font: &str) -> bool {
+        unsafe {
+            let font = WxString::from(font);
+            let font = font.as_ptr();
+            ffi::wxFontEnumerator_EnumerateEncodings(self.as_ptr(), font)
+        }
+    }
+    // NOT_SUPPORTED: fn EnumerateFacenames()
+    fn on_facename(&self, font: &str) -> bool {
+        unsafe {
+            let font = WxString::from(font);
+            let font = font.as_ptr();
+            ffi::wxFontEnumerator_OnFacename(self.as_ptr(), font)
+        }
+    }
+    fn on_font_encoding(&self, font: &str, encoding: &str) -> bool {
+        unsafe {
+            let font = WxString::from(font);
+            let font = font.as_ptr();
+            let encoding = WxString::from(encoding);
+            let encoding = encoding.as_ptr();
+            ffi::wxFontEnumerator_OnFontEncoding(self.as_ptr(), font, encoding)
+        }
+    }
+    fn get_encodings(facename: &str) -> ArrayString {
+        unsafe {
+            let facename = WxString::from(facename);
+            let facename = facename.as_ptr();
+            ArrayString::from_ptr(ffi::wxFontEnumerator_GetEncodings(facename))
+        }
+    }
+    // NOT_SUPPORTED: fn GetFacenames()
+    fn is_valid_facename(facename: &str) -> bool {
+        unsafe {
+            let facename = WxString::from(facename);
+            let facename = facename.as_ptr();
+            ffi::wxFontEnumerator_IsValidFacename(facename)
+        }
+    }
+    fn invalidate_cache() {
+        unsafe { ffi::wxFontEnumerator_InvalidateCache() }
+    }
+}
+
+// wxFontList
+pub trait FontListMethods: WxRustMethods {
+    // NOT_SUPPORTED: fn FindOrCreateFont()
+    fn find_or_create_font<F: FontInfoMethods>(&self, font_info: &F) -> Option<FontIsOwned<false>> {
+        unsafe {
+            let font_info = font_info.as_ptr();
+            Font::option_from(ffi::wxFontList_FindOrCreateFont1(self.as_ptr(), font_info))
+        }
+    }
+}
+
+// wxFontMapper
+pub trait FontMapperMethods: WxRustMethods {
+    // DTOR: fn ~wxFontMapper()
+    // NOT_SUPPORTED: fn CharsetToEncoding()
+    // NOT_SUPPORTED: fn GetAltForEncoding()
+    // NOT_SUPPORTED: fn GetAltForEncoding1()
+    // NOT_SUPPORTED: fn IsEncodingAvailable()
+    fn set_config_path(&self, prefix: &str) {
+        unsafe {
+            let prefix = WxString::from(prefix);
+            let prefix = prefix.as_ptr();
+            ffi::wxFontMapper_SetConfigPath(self.as_ptr(), prefix)
+        }
+    }
+    fn set_dialog_parent<W: WindowMethods>(&self, parent: Option<&W>) {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxFontMapper_SetDialogParent(self.as_ptr(), parent)
+        }
+    }
+    fn set_dialog_title(&self, title: &str) {
+        unsafe {
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            ffi::wxFontMapper_SetDialogTitle(self.as_ptr(), title)
+        }
+    }
+    fn get() -> Option<FontMapperIsOwned<false>> {
+        unsafe { FontMapper::option_from(ffi::wxFontMapper_Get()) }
+    }
+    // NOT_SUPPORTED: fn GetAllEncodingNames()
+    // NOT_SUPPORTED: fn GetEncoding()
+    // NOT_SUPPORTED: fn GetEncodingDescription()
+    // NOT_SUPPORTED: fn GetEncodingFromName()
+    // NOT_SUPPORTED: fn GetEncodingName()
+    fn get_supported_encodings_count() -> usize {
+        unsafe { ffi::wxFontMapper_GetSupportedEncodingsCount() }
+    }
+    fn set<F: FontMapperMethods>(mapper: Option<&F>) -> Option<FontMapperIsOwned<false>> {
+        unsafe {
+            let mapper = match mapper {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            FontMapper::option_from(ffi::wxFontMapper_Set(mapper))
+        }
+    }
 }
 
 // wxFontPickerCtrl
@@ -1950,6 +8890,19 @@ pub trait FontPickerCtrlMethods: PickerBaseMethods {
     }
 }
 
+// wxFontPickerEvent
+pub trait FontPickerEventMethods: CommandEventMethods {
+    fn get_font(&self) -> Font {
+        unsafe { Font::from_ptr(ffi::wxFontPickerEvent_GetFont(self.as_ptr())) }
+    }
+    fn set_font<F: FontMethods>(&self, f: &F) {
+        unsafe {
+            let f = f.as_ptr();
+            ffi::wxFontPickerEvent_SetFont(self.as_ptr(), f)
+        }
+    }
+}
+
 // wxFrame
 pub trait FrameMethods: TopLevelWindowMethods {
     // DTOR: fn ~wxFrame()
@@ -1959,11 +8912,17 @@ pub trait FrameMethods: TopLevelWindowMethods {
         style: c_long,
         id: c_int,
         name: &str,
-    ) -> *mut c_void {
+    ) -> WeakRef<StatusBar> {
         unsafe {
             let name = WxString::from(name);
             let name = name.as_ptr();
-            ffi::wxFrame_CreateStatusBar(self.as_ptr(), number, style, id, name)
+            WeakRef::<StatusBar>::from(ffi::wxFrame_CreateStatusBar(
+                self.as_ptr(),
+                number,
+                style,
+                id,
+                name,
+            ))
         }
     }
     fn create_tool_bar(&self, style: c_long, id: c_int, name: &str) -> WeakRef<ToolBar> {
@@ -1983,8 +8942,8 @@ pub trait FrameMethods: TopLevelWindowMethods {
     fn get_menu_bar(&self) -> WeakRef<MenuBar> {
         unsafe { WeakRef::<MenuBar>::from(ffi::wxFrame_GetMenuBar(self.as_ptr())) }
     }
-    fn get_status_bar(&self) -> *mut c_void {
-        unsafe { ffi::wxFrame_GetStatusBar(self.as_ptr()) }
+    fn get_status_bar(&self) -> WeakRef<StatusBar> {
+        unsafe { WeakRef::<StatusBar>::from(ffi::wxFrame_GetStatusBar(self.as_ptr())) }
     }
     fn get_status_bar_pane(&self) -> c_int {
         unsafe { ffi::wxFrame_GetStatusBarPane(self.as_ptr()) }
@@ -1998,11 +8957,17 @@ pub trait FrameMethods: TopLevelWindowMethods {
         style: c_long,
         id: c_int,
         name: &str,
-    ) -> *mut c_void {
+    ) -> WeakRef<StatusBar> {
         unsafe {
             let name = WxString::from(name);
             let name = name.as_ptr();
-            ffi::wxFrame_OnCreateStatusBar(self.as_ptr(), number, style, id, name)
+            WeakRef::<StatusBar>::from(ffi::wxFrame_OnCreateStatusBar(
+                self.as_ptr(),
+                number,
+                style,
+                id,
+                name,
+            ))
         }
     }
     fn on_create_tool_bar(&self, style: c_long, id: c_int, name: &str) -> WeakRef<ToolBar> {
@@ -2024,8 +8989,14 @@ pub trait FrameMethods: TopLevelWindowMethods {
             ffi::wxFrame_SetMenuBar(self.as_ptr(), menu_bar)
         }
     }
-    fn set_status_bar(&self, status_bar: *mut c_void) {
-        unsafe { ffi::wxFrame_SetStatusBar(self.as_ptr(), status_bar) }
+    fn set_status_bar<S: StatusBarMethods>(&self, status_bar: Option<&S>) {
+        unsafe {
+            let status_bar = match status_bar {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxFrame_SetStatusBar(self.as_ptr(), status_bar)
+        }
     }
     fn set_status_bar_pane(&self, n: c_int) {
         unsafe { ffi::wxFrame_SetStatusBarPane(self.as_ptr(), n) }
@@ -2049,8 +9020,8 @@ pub trait FrameMethods: TopLevelWindowMethods {
             ffi::wxFrame_SetToolBar(self.as_ptr(), tool_bar)
         }
     }
-    fn msw_get_task_bar_button(&self) -> *mut c_void {
-        unsafe { ffi::wxFrame_MSWGetTaskBarButton(self.as_ptr()) }
+    fn msw_get_task_bar_button(&self) -> Option<TaskBarButtonIsOwned<false>> {
+        unsafe { TaskBarButton::option_from(ffi::wxFrame_MSWGetTaskBarButton(self.as_ptr())) }
     }
     fn push_status_text(&self, text: &str, number: c_int) {
         unsafe {
@@ -2064,8 +9035,137 @@ pub trait FrameMethods: TopLevelWindowMethods {
     }
 }
 
+// wxFullScreenEvent
+pub trait FullScreenEventMethods: EventMethods {
+    fn is_full_screen(&self) -> bool {
+        unsafe { ffi::wxFullScreenEvent_IsFullScreen(self.as_ptr()) }
+    }
+}
+
+// wxGBPosition
+pub trait GBPositionMethods: WxRustMethods {
+    fn get_col(&self) -> c_int {
+        unsafe { ffi::wxGBPosition_GetCol(self.as_ptr()) }
+    }
+    fn get_row(&self) -> c_int {
+        unsafe { ffi::wxGBPosition_GetRow(self.as_ptr()) }
+    }
+    fn set_col(&self, col: c_int) {
+        unsafe { ffi::wxGBPosition_SetCol(self.as_ptr(), col) }
+    }
+    fn set_row(&self, row: c_int) {
+        unsafe { ffi::wxGBPosition_SetRow(self.as_ptr(), row) }
+    }
+    // BLOCKED: fn operator!=()
+    // BLOCKED: fn operator==()
+}
+
+// wxGBSizerItem
+pub trait GBSizerItemMethods: SizerItemMethods {
+    fn get_end_pos(&self, row: *mut c_void, col: *mut c_void) {
+        unsafe { ffi::wxGBSizerItem_GetEndPos(self.as_ptr(), row, col) }
+    }
+    fn get_pos(&self) -> GBPosition {
+        unsafe { GBPosition::from_ptr(ffi::wxGBSizerItem_GetPos(self.as_ptr())) }
+    }
+    fn get_pos_int(&self, row: *mut c_void, col: *mut c_void) {
+        unsafe { ffi::wxGBSizerItem_GetPos1(self.as_ptr(), row, col) }
+    }
+    fn get_span(&self) -> GBSpan {
+        unsafe { GBSpan::from_ptr(ffi::wxGBSizerItem_GetSpan(self.as_ptr())) }
+    }
+    fn get_span_int(&self, rowspan: *mut c_void, colspan: *mut c_void) {
+        unsafe { ffi::wxGBSizerItem_GetSpan1(self.as_ptr(), rowspan, colspan) }
+    }
+    fn intersects_gbsizeritem<G: GBSizerItemMethods>(&self, other: &G) -> bool {
+        unsafe {
+            let other = other.as_ptr();
+            ffi::wxGBSizerItem_Intersects(self.as_ptr(), other)
+        }
+    }
+    fn intersects_gbposition<G: GBPositionMethods, G2: GBSpanMethods>(
+        &self,
+        pos: &G,
+        span: &G2,
+    ) -> bool {
+        unsafe {
+            let pos = pos.as_ptr();
+            let span = span.as_ptr();
+            ffi::wxGBSizerItem_Intersects1(self.as_ptr(), pos, span)
+        }
+    }
+    fn set_pos<G: GBPositionMethods>(&self, pos: &G) -> bool {
+        unsafe {
+            let pos = pos.as_ptr();
+            ffi::wxGBSizerItem_SetPos(self.as_ptr(), pos)
+        }
+    }
+    fn set_span<G: GBSpanMethods>(&self, span: &G) -> bool {
+        unsafe {
+            let span = span.as_ptr();
+            ffi::wxGBSizerItem_SetSpan(self.as_ptr(), span)
+        }
+    }
+    fn get_gb_sizer(&self) -> Option<GridBagSizerIsOwned<false>> {
+        unsafe { GridBagSizer::option_from(ffi::wxGBSizerItem_GetGBSizer(self.as_ptr())) }
+    }
+    fn set_gb_sizer<G: GridBagSizerMethods>(&self, sizer: Option<&G>) {
+        unsafe {
+            let sizer = match sizer {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxGBSizerItem_SetGBSizer(self.as_ptr(), sizer)
+        }
+    }
+}
+
+// wxGBSpan
+pub trait GBSpanMethods: WxRustMethods {
+    fn get_colspan(&self) -> c_int {
+        unsafe { ffi::wxGBSpan_GetColspan(self.as_ptr()) }
+    }
+    fn get_rowspan(&self) -> c_int {
+        unsafe { ffi::wxGBSpan_GetRowspan(self.as_ptr()) }
+    }
+    fn set_colspan(&self, colspan: c_int) {
+        unsafe { ffi::wxGBSpan_SetColspan(self.as_ptr(), colspan) }
+    }
+    fn set_rowspan(&self, rowspan: c_int) {
+        unsafe { ffi::wxGBSpan_SetRowspan(self.as_ptr(), rowspan) }
+    }
+    // BLOCKED: fn operator!=()
+    // BLOCKED: fn operator==()
+}
+
+// wxGCDC
+pub trait GCDCMethods: DCMethods {
+    // DTOR: fn ~wxGCDC()
+}
+
 // wxGDIObject
 pub trait GDIObjectMethods: ObjectMethods {}
+
+// wxGIFHandler
+pub trait GIFHandlerMethods: ImageHandlerMethods {
+    fn save_animation(
+        &self,
+        images: *const c_void,
+        stream: *mut c_void,
+        verbose: bool,
+        delay_milli_secs: c_int,
+    ) -> bool {
+        unsafe {
+            ffi::wxGIFHandler_SaveAnimation(
+                self.as_ptr(),
+                images,
+                stream,
+                verbose,
+                delay_milli_secs,
+            )
+        }
+    }
+}
 
 // wxGauge
 pub trait GaugeMethods: ControlMethods {
@@ -2121,6 +9221,53 @@ pub trait GaugeMethods: ControlMethods {
     }
     fn set_value(&self, pos: c_int) {
         unsafe { ffi::wxGauge_SetValue(self.as_ptr(), pos) }
+    }
+}
+
+// wxGenericAboutDialog
+pub trait GenericAboutDialogMethods: WxRustMethods {
+    fn create<A: AboutDialogInfoMethods, W: WindowMethods>(
+        &self,
+        info: &A,
+        parent: Option<&W>,
+    ) -> bool {
+        unsafe {
+            let info = info.as_ptr();
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxGenericAboutDialog_Create(self.as_ptr(), info, parent)
+        }
+    }
+}
+
+// wxGenericAnimationCtrl
+pub trait GenericAnimationCtrlMethods: AnimationCtrlMethods {
+    fn draw_current_frame<D: DCMethods>(&self, dc: &D) {
+        unsafe {
+            let dc = dc.as_ptr();
+            ffi::wxGenericAnimationCtrl_DrawCurrentFrame(self.as_ptr(), dc)
+        }
+    }
+    fn get_backing_store(&self) -> BitmapIsOwned<false> {
+        unsafe {
+            BitmapIsOwned::from_ptr(ffi::wxGenericAnimationCtrl_GetBackingStore(self.as_ptr()))
+        }
+    }
+    fn play_bool(&self, looped: bool) -> bool {
+        unsafe { ffi::wxGenericAnimationCtrl_Play(self.as_ptr(), looped) }
+    }
+    fn set_use_window_background_colour(&self, use_win_background: bool) {
+        unsafe {
+            ffi::wxGenericAnimationCtrl_SetUseWindowBackgroundColour(
+                self.as_ptr(),
+                use_win_background,
+            )
+        }
+    }
+    fn is_using_window_background_colour(&self) -> bool {
+        unsafe { ffi::wxGenericAnimationCtrl_IsUsingWindowBackgroundColour(self.as_ptr()) }
     }
 }
 
@@ -2201,22 +9348,30 @@ pub trait GenericDirCtrlMethods: ControlMethods {
     fn get_filter_index(&self) -> c_int {
         unsafe { ffi::wxGenericDirCtrl_GetFilterIndex(self.as_ptr()) }
     }
-    fn get_filter_list_ctrl(&self) -> *mut c_void {
-        unsafe { ffi::wxGenericDirCtrl_GetFilterListCtrl(self.as_ptr()) }
+    fn get_filter_list_ctrl(&self) -> WeakRef<DirFilterListCtrl> {
+        unsafe {
+            WeakRef::<DirFilterListCtrl>::from(ffi::wxGenericDirCtrl_GetFilterListCtrl(
+                self.as_ptr(),
+            ))
+        }
     }
     fn get_path(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxGenericDirCtrl_GetPath(self.as_ptr())).into() }
     }
-    // NOT_SUPPORTED: fn GetPath1()
+    fn get_path_treeitemid(&self, item_id: ffi::wxTreeItemId) -> String {
+        unsafe { WxString::from_ptr(ffi::wxGenericDirCtrl_GetPath1(self.as_ptr(), item_id)).into() }
+    }
     fn get_paths<A: ArrayStringMethods>(&self, paths: &A) {
         unsafe {
             let paths = paths.as_ptr();
             ffi::wxGenericDirCtrl_GetPaths(self.as_ptr(), paths)
         }
     }
-    // NOT_SUPPORTED: fn GetRootId()
-    fn get_tree_ctrl(&self) -> *mut c_void {
-        unsafe { ffi::wxGenericDirCtrl_GetTreeCtrl(self.as_ptr()) }
+    fn get_root_id(&self) -> TreeItemId {
+        unsafe { TreeItemId::from_ptr(ffi::wxGenericDirCtrl_GetRootId(self.as_ptr())) }
+    }
+    fn get_tree_ctrl(&self) -> WeakRef<TreeCtrl> {
+        unsafe { WeakRef::<TreeCtrl>::from(ffi::wxGenericDirCtrl_GetTreeCtrl(self.as_ptr())) }
     }
     fn init(&self) {
         unsafe { ffi::wxGenericDirCtrl_Init(self.as_ptr()) }
@@ -2268,6 +9423,2177 @@ pub trait GenericDirCtrlMethods: ControlMethods {
         unsafe { ffi::wxGenericDirCtrl_UnselectAll(self.as_ptr()) }
     }
 }
+
+// wxGenericProgressDialog
+pub trait GenericProgressDialogMethods: DialogMethods {
+    // DTOR: fn ~wxGenericProgressDialog()
+    fn get_value(&self) -> c_int {
+        unsafe { ffi::wxGenericProgressDialog_GetValue(self.as_ptr()) }
+    }
+    fn get_range(&self) -> c_int {
+        unsafe { ffi::wxGenericProgressDialog_GetRange(self.as_ptr()) }
+    }
+    fn get_message(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxGenericProgressDialog_GetMessage(self.as_ptr())).into() }
+    }
+    fn pulse(&self, newmsg: &str, skip: *mut c_void) -> bool {
+        unsafe {
+            let newmsg = WxString::from(newmsg);
+            let newmsg = newmsg.as_ptr();
+            ffi::wxGenericProgressDialog_Pulse(self.as_ptr(), newmsg, skip)
+        }
+    }
+    fn resume(&self) {
+        unsafe { ffi::wxGenericProgressDialog_Resume(self.as_ptr()) }
+    }
+    fn set_range(&self, maximum: c_int) {
+        unsafe { ffi::wxGenericProgressDialog_SetRange(self.as_ptr(), maximum) }
+    }
+    fn was_cancelled(&self) -> bool {
+        unsafe { ffi::wxGenericProgressDialog_WasCancelled(self.as_ptr()) }
+    }
+    fn was_skipped(&self) -> bool {
+        unsafe { ffi::wxGenericProgressDialog_WasSkipped(self.as_ptr()) }
+    }
+    fn update_int(&self, value: c_int, newmsg: &str, skip: *mut c_void) -> bool {
+        unsafe {
+            let newmsg = WxString::from(newmsg);
+            let newmsg = newmsg.as_ptr();
+            ffi::wxGenericProgressDialog_Update(self.as_ptr(), value, newmsg, skip)
+        }
+    }
+}
+
+// wxGenericValidator
+pub trait GenericValidatorMethods: ValidatorMethods {
+    // DTOR: fn ~wxGenericValidator()
+}
+
+// wxGestureEvent
+pub trait GestureEventMethods: EventMethods {
+    fn get_position(&self) -> PointIsOwned<false> {
+        unsafe { PointIsOwned::from_ptr(ffi::wxGestureEvent_GetPosition(self.as_ptr())) }
+    }
+    fn is_gesture_start(&self) -> bool {
+        unsafe { ffi::wxGestureEvent_IsGestureStart(self.as_ptr()) }
+    }
+    fn is_gesture_end(&self) -> bool {
+        unsafe { ffi::wxGestureEvent_IsGestureEnd(self.as_ptr()) }
+    }
+    fn set_position<P: PointMethods>(&self, pos: &P) {
+        unsafe {
+            let pos = pos.as_ptr();
+            ffi::wxGestureEvent_SetPosition(self.as_ptr(), pos)
+        }
+    }
+    fn set_gesture_start(&self, is_start: bool) {
+        unsafe { ffi::wxGestureEvent_SetGestureStart(self.as_ptr(), is_start) }
+    }
+    fn set_gesture_end(&self, is_end: bool) {
+        unsafe { ffi::wxGestureEvent_SetGestureEnd(self.as_ptr(), is_end) }
+    }
+}
+
+// wxGraphicsBrush
+pub trait GraphicsBrushMethods: GraphicsObjectMethods {}
+
+// wxGraphicsContext
+pub trait GraphicsContextMethods: GraphicsObjectMethods {
+    fn create_window<W: WindowMethods>(
+        window: Option<&W>,
+    ) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            GraphicsContext::option_from(ffi::wxGraphicsContext_Create(window))
+        }
+    }
+    fn create_windowdc<W: WindowDCMethods>(window_dc: &W) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe {
+            let window_dc = window_dc.as_ptr();
+            GraphicsContext::option_from(ffi::wxGraphicsContext_Create1(window_dc))
+        }
+    }
+    fn create_memorydc<M: MemoryDCMethods>(memory_dc: &M) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe {
+            let memory_dc = memory_dc.as_ptr();
+            GraphicsContext::option_from(ffi::wxGraphicsContext_Create2(memory_dc))
+        }
+    }
+    fn create_printerdc<P: PrinterDCMethods>(
+        printer_dc: &P,
+    ) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe {
+            let printer_dc = printer_dc.as_ptr();
+            GraphicsContext::option_from(ffi::wxGraphicsContext_Create3(printer_dc))
+        }
+    }
+    fn create_enhmetafiledc(meta_file_dc: *const c_void) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe { GraphicsContext::option_from(ffi::wxGraphicsContext_Create4(meta_file_dc)) }
+    }
+    fn create_from_unknown_dc<D: DCMethods>(dc: &D) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe {
+            let dc = dc.as_ptr();
+            GraphicsContext::option_from(ffi::wxGraphicsContext_CreateFromUnknownDC(dc))
+        }
+    }
+    fn create_image<I: ImageMethods>(image: &I) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe {
+            let image = image.as_ptr();
+            GraphicsContext::option_from(ffi::wxGraphicsContext_Create5(image))
+        }
+    }
+    fn create_from_native(context: *mut c_void) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe { GraphicsContext::option_from(ffi::wxGraphicsContext_CreateFromNative(context)) }
+    }
+    fn create_from_native_window(window: *mut c_void) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe {
+            GraphicsContext::option_from(ffi::wxGraphicsContext_CreateFromNativeWindow(window))
+        }
+    }
+    // NOT_SUPPORTED: fn CreateFromNativeHDC()
+    fn create() -> Option<GraphicsContextIsOwned<false>> {
+        unsafe { GraphicsContext::option_from(ffi::wxGraphicsContext_Create6()) }
+    }
+    fn reset_clip(&self) {
+        unsafe { ffi::wxGraphicsContext_ResetClip(self.as_ptr()) }
+    }
+    fn clip<R: RegionMethods>(&self, region: &R) {
+        unsafe {
+            let region = region.as_ptr();
+            ffi::wxGraphicsContext_Clip(self.as_ptr(), region)
+        }
+    }
+    // NOT_SUPPORTED: fn Clip1()
+    fn get_clip_box(&self, x: *mut c_void, y: *mut c_void, w: *mut c_void, h: *mut c_void) {
+        unsafe { ffi::wxGraphicsContext_GetClipBox(self.as_ptr(), x, y, w, h) }
+    }
+    // NOT_SUPPORTED: fn CreateMatrix()
+    fn create_matrix<A: AffineMatrix2DBaseMethods>(&self, mat: &A) -> GraphicsMatrix {
+        unsafe {
+            let mat = mat.as_ptr();
+            GraphicsMatrix::from_ptr(ffi::wxGraphicsContext_CreateMatrix1(self.as_ptr(), mat))
+        }
+    }
+    fn concat_transform<G: GraphicsMatrixMethods>(&self, matrix: &G) {
+        unsafe {
+            let matrix = matrix.as_ptr();
+            ffi::wxGraphicsContext_ConcatTransform(self.as_ptr(), matrix)
+        }
+    }
+    fn get_transform(&self) -> GraphicsMatrix {
+        unsafe { GraphicsMatrix::from_ptr(ffi::wxGraphicsContext_GetTransform(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn Rotate()
+    // NOT_SUPPORTED: fn Scale()
+    fn set_transform<G: GraphicsMatrixMethods>(&self, matrix: &G) {
+        unsafe {
+            let matrix = matrix.as_ptr();
+            ffi::wxGraphicsContext_SetTransform(self.as_ptr(), matrix)
+        }
+    }
+    // NOT_SUPPORTED: fn Translate()
+    fn create_brush<B: BrushMethods>(&self, brush: &B) -> GraphicsBrush {
+        unsafe {
+            let brush = brush.as_ptr();
+            GraphicsBrush::from_ptr(ffi::wxGraphicsContext_CreateBrush(self.as_ptr(), brush))
+        }
+    }
+    // NOT_SUPPORTED: fn CreateLinearGradientBrush()
+    // NOT_SUPPORTED: fn CreateLinearGradientBrush1()
+    // NOT_SUPPORTED: fn CreateRadialGradientBrush()
+    // NOT_SUPPORTED: fn CreateRadialGradientBrush1()
+    fn set_brush_brush<B: BrushMethods>(&self, brush: &B) {
+        unsafe {
+            let brush = brush.as_ptr();
+            ffi::wxGraphicsContext_SetBrush(self.as_ptr(), brush)
+        }
+    }
+    fn set_brush_graphicsbrush<G: GraphicsBrushMethods>(&self, brush: &G) {
+        unsafe {
+            let brush = brush.as_ptr();
+            ffi::wxGraphicsContext_SetBrush1(self.as_ptr(), brush)
+        }
+    }
+    fn create_pen_pen<P: PenMethods>(&self, pen: &P) -> GraphicsPen {
+        unsafe {
+            let pen = pen.as_ptr();
+            GraphicsPen::from_ptr(ffi::wxGraphicsContext_CreatePen(self.as_ptr(), pen))
+        }
+    }
+    fn create_pen_graphicspeninfo<G: GraphicsPenInfoMethods>(&self, info: &G) -> GraphicsPen {
+        unsafe {
+            let info = info.as_ptr();
+            GraphicsPen::from_ptr(ffi::wxGraphicsContext_CreatePen1(self.as_ptr(), info))
+        }
+    }
+    fn set_pen_pen<P: PenMethods>(&self, pen: &P) {
+        unsafe {
+            let pen = pen.as_ptr();
+            ffi::wxGraphicsContext_SetPen(self.as_ptr(), pen)
+        }
+    }
+    fn set_pen_graphicspen<G: GraphicsPenMethods>(&self, pen: &G) {
+        unsafe {
+            let pen = pen.as_ptr();
+            ffi::wxGraphicsContext_SetPen1(self.as_ptr(), pen)
+        }
+    }
+    // NOT_SUPPORTED: fn DrawBitmap()
+    // NOT_SUPPORTED: fn DrawBitmap1()
+    // NOT_SUPPORTED: fn DrawEllipse()
+    // NOT_SUPPORTED: fn DrawIcon()
+    // NOT_SUPPORTED: fn DrawLines()
+    // NOT_SUPPORTED: fn DrawPath()
+    // NOT_SUPPORTED: fn DrawRectangle()
+    // NOT_SUPPORTED: fn DrawRoundedRectangle()
+    // NOT_SUPPORTED: fn DrawText()
+    // NOT_SUPPORTED: fn DrawText1()
+    // NOT_SUPPORTED: fn DrawText2()
+    // NOT_SUPPORTED: fn DrawText3()
+    fn create_path(&self) -> GraphicsPath {
+        unsafe { GraphicsPath::from_ptr(ffi::wxGraphicsContext_CreatePath(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn FillPath()
+    // NOT_SUPPORTED: fn StrokeLine()
+    fn stroke_lines_point2ddouble<P: Point2DDoubleMethods, P2: Point2DDoubleMethods>(
+        &self,
+        n: usize,
+        begin_points: Option<&P>,
+        end_points: Option<&P2>,
+    ) {
+        unsafe {
+            let begin_points = match begin_points {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let end_points = match end_points {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxGraphicsContext_StrokeLines(self.as_ptr(), n, begin_points, end_points)
+        }
+    }
+    fn stroke_lines<P: Point2DDoubleMethods>(&self, n: usize, points: Option<&P>) {
+        unsafe {
+            let points = match points {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxGraphicsContext_StrokeLines1(self.as_ptr(), n, points)
+        }
+    }
+    fn stroke_path<G: GraphicsPathMethods>(&self, path: &G) {
+        unsafe {
+            let path = path.as_ptr();
+            ffi::wxGraphicsContext_StrokePath(self.as_ptr(), path)
+        }
+    }
+    fn create_font_font<F: FontMethods, C: ColourMethods>(
+        &self,
+        font: &F,
+        col: &C,
+    ) -> GraphicsFont {
+        unsafe {
+            let font = font.as_ptr();
+            let col = col.as_ptr();
+            GraphicsFont::from_ptr(ffi::wxGraphicsContext_CreateFont(self.as_ptr(), font, col))
+        }
+    }
+    fn create_font_double<C: ColourMethods>(
+        &self,
+        size_in_pixels: c_double,
+        facename: &str,
+        flags: c_int,
+        col: &C,
+    ) -> GraphicsFont {
+        unsafe {
+            let facename = WxString::from(facename);
+            let facename = facename.as_ptr();
+            let col = col.as_ptr();
+            GraphicsFont::from_ptr(ffi::wxGraphicsContext_CreateFont1(
+                self.as_ptr(),
+                size_in_pixels,
+                facename,
+                flags,
+                col,
+            ))
+        }
+    }
+    fn set_font_font<F: FontMethods, C: ColourMethods>(&self, font: &F, colour: &C) {
+        unsafe {
+            let font = font.as_ptr();
+            let colour = colour.as_ptr();
+            ffi::wxGraphicsContext_SetFont(self.as_ptr(), font, colour)
+        }
+    }
+    fn set_font_graphicsfont<G: GraphicsFontMethods>(&self, font: &G) {
+        unsafe {
+            let font = font.as_ptr();
+            ffi::wxGraphicsContext_SetFont1(self.as_ptr(), font)
+        }
+    }
+    fn get_partial_text_extents(&self, text: &str, widths: *mut c_void) {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxGraphicsContext_GetPartialTextExtents(self.as_ptr(), text, widths)
+        }
+    }
+    fn get_text_extent(
+        &self,
+        text: &str,
+        width: *mut c_void,
+        height: *mut c_void,
+        descent: *mut c_void,
+        external_leading: *mut c_void,
+    ) {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxGraphicsContext_GetTextExtent(
+                self.as_ptr(),
+                text,
+                width,
+                height,
+                descent,
+                external_leading,
+            )
+        }
+    }
+    fn start_doc(&self, message: &str) -> bool {
+        unsafe {
+            let message = WxString::from(message);
+            let message = message.as_ptr();
+            ffi::wxGraphicsContext_StartDoc(self.as_ptr(), message)
+        }
+    }
+    fn end_doc(&self) {
+        unsafe { ffi::wxGraphicsContext_EndDoc(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn StartPage()
+    fn end_page(&self) {
+        unsafe { ffi::wxGraphicsContext_EndPage(self.as_ptr()) }
+    }
+    fn create_bitmap<B: BitmapMethods>(&self, bitmap: &B) -> GraphicsBitmap {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            GraphicsBitmap::from_ptr(ffi::wxGraphicsContext_CreateBitmap(self.as_ptr(), bitmap))
+        }
+    }
+    fn create_bitmap_from_image<I: ImageMethods>(&self, image: &I) -> GraphicsBitmap {
+        unsafe {
+            let image = image.as_ptr();
+            GraphicsBitmap::from_ptr(ffi::wxGraphicsContext_CreateBitmapFromImage(
+                self.as_ptr(),
+                image,
+            ))
+        }
+    }
+    // NOT_SUPPORTED: fn CreateSubBitmap()
+    // NOT_SUPPORTED: fn BeginLayer()
+    fn end_layer(&self) {
+        unsafe { ffi::wxGraphicsContext_EndLayer(self.as_ptr()) }
+    }
+    fn push_state(&self) {
+        unsafe { ffi::wxGraphicsContext_PushState(self.as_ptr()) }
+    }
+    fn pop_state(&self) {
+        unsafe { ffi::wxGraphicsContext_PopState(self.as_ptr()) }
+    }
+    fn flush(&self) {
+        unsafe { ffi::wxGraphicsContext_Flush(self.as_ptr()) }
+    }
+    fn get_native_context(&self) -> *mut c_void {
+        unsafe { ffi::wxGraphicsContext_GetNativeContext(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn SetAntialiasMode()
+    // NOT_SUPPORTED: fn GetAntialiasMode()
+    // NOT_SUPPORTED: fn SetInterpolationQuality()
+    // NOT_SUPPORTED: fn GetInterpolationQuality()
+    // NOT_SUPPORTED: fn SetCompositionMode()
+    // NOT_SUPPORTED: fn GetCompositionMode()
+    fn get_size(&self, width: *mut c_void, height: *mut c_void) {
+        unsafe { ffi::wxGraphicsContext_GetSize(self.as_ptr(), width, height) }
+    }
+    fn get_dpi(&self, dpi_x: *mut c_void, dpi_y: *mut c_void) {
+        unsafe { ffi::wxGraphicsContext_GetDPI(self.as_ptr(), dpi_x, dpi_y) }
+    }
+    fn get_window(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxGraphicsContext_GetWindow(self.as_ptr())) }
+    }
+    fn should_offset(&self) -> bool {
+        unsafe { ffi::wxGraphicsContext_ShouldOffset(self.as_ptr()) }
+    }
+    fn enable_offset(&self, enable: bool) {
+        unsafe { ffi::wxGraphicsContext_EnableOffset(self.as_ptr(), enable) }
+    }
+    fn disable_offset(&self) {
+        unsafe { ffi::wxGraphicsContext_DisableOffset(self.as_ptr()) }
+    }
+    fn offset_enabled(&self) -> bool {
+        unsafe { ffi::wxGraphicsContext_OffsetEnabled(self.as_ptr()) }
+    }
+    fn from_dip_size<S: SizeMethods>(&self, sz: &S) -> Size {
+        unsafe {
+            let sz = sz.as_ptr();
+            Size::from_ptr(ffi::wxGraphicsContext_FromDIP(self.as_ptr(), sz))
+        }
+    }
+    fn from_dip_point<P: PointMethods>(&self, pt: &P) -> Point {
+        unsafe {
+            let pt = pt.as_ptr();
+            Point::from_ptr(ffi::wxGraphicsContext_FromDIP1(self.as_ptr(), pt))
+        }
+    }
+    fn from_dip_int(&self, d: c_int) -> c_int {
+        unsafe { ffi::wxGraphicsContext_FromDIP2(self.as_ptr(), d) }
+    }
+    fn to_dip_size<S: SizeMethods>(&self, sz: &S) -> Size {
+        unsafe {
+            let sz = sz.as_ptr();
+            Size::from_ptr(ffi::wxGraphicsContext_ToDIP(self.as_ptr(), sz))
+        }
+    }
+    fn to_dip_point<P: PointMethods>(&self, pt: &P) -> Point {
+        unsafe {
+            let pt = pt.as_ptr();
+            Point::from_ptr(ffi::wxGraphicsContext_ToDIP1(self.as_ptr(), pt))
+        }
+    }
+    fn to_dip_int(&self, d: c_int) -> c_int {
+        unsafe { ffi::wxGraphicsContext_ToDIP2(self.as_ptr(), d) }
+    }
+}
+
+// wxGraphicsFont
+pub trait GraphicsFontMethods: GraphicsObjectMethods {}
+
+// wxGraphicsGradientStop
+pub trait GraphicsGradientStopMethods: WxRustMethods {
+    fn get_colour(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxGraphicsGradientStop_GetColour(self.as_ptr())) }
+    }
+    fn set_colour<C: ColourMethods>(&self, col: &C) {
+        unsafe {
+            let col = col.as_ptr();
+            ffi::wxGraphicsGradientStop_SetColour(self.as_ptr(), col)
+        }
+    }
+    // NOT_SUPPORTED: fn GetPosition()
+    // NOT_SUPPORTED: fn SetPosition()
+}
+
+// wxGraphicsGradientStops
+pub trait GraphicsGradientStopsMethods: WxRustMethods {
+    fn add<G: GraphicsGradientStopMethods>(&self, stop: &G) {
+        unsafe {
+            let stop = stop.as_ptr();
+            ffi::wxGraphicsGradientStops_Add(self.as_ptr(), stop)
+        }
+    }
+    // NOT_SUPPORTED: fn Add1()
+    // NOT_SUPPORTED: fn Item()
+    fn get_count(&self) -> usize {
+        unsafe { ffi::wxGraphicsGradientStops_GetCount(self.as_ptr()) }
+    }
+    fn set_start_colour(&self, col: ffi::wxColour) {
+        unsafe { ffi::wxGraphicsGradientStops_SetStartColour(self.as_ptr(), col) }
+    }
+    fn get_start_colour(&self) -> Colour {
+        unsafe { Colour::from_ptr(ffi::wxGraphicsGradientStops_GetStartColour(self.as_ptr())) }
+    }
+    fn set_end_colour(&self, col: ffi::wxColour) {
+        unsafe { ffi::wxGraphicsGradientStops_SetEndColour(self.as_ptr(), col) }
+    }
+    fn get_end_colour(&self) -> Colour {
+        unsafe { Colour::from_ptr(ffi::wxGraphicsGradientStops_GetEndColour(self.as_ptr())) }
+    }
+}
+
+// wxGraphicsMatrix
+pub trait GraphicsMatrixMethods: GraphicsObjectMethods {
+    fn concat_graphicsmatrix<G: GraphicsMatrixMethods>(&self, t: Option<&G>) {
+        unsafe {
+            let t = match t {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxGraphicsMatrix_Concat(self.as_ptr(), t)
+        }
+    }
+    fn concat_graphicsmatrix<G: GraphicsMatrixMethods>(&self, t: &G) {
+        unsafe {
+            let t = t.as_ptr();
+            ffi::wxGraphicsMatrix_Concat1(self.as_ptr(), t)
+        }
+    }
+    fn get(
+        &self,
+        a: *mut c_void,
+        b: *mut c_void,
+        c: *mut c_void,
+        d: *mut c_void,
+        tx: *mut c_void,
+        ty: *mut c_void,
+    ) {
+        unsafe { ffi::wxGraphicsMatrix_Get(self.as_ptr(), a, b, c, d, tx, ty) }
+    }
+    fn get_native_matrix(&self) -> *mut c_void {
+        unsafe { ffi::wxGraphicsMatrix_GetNativeMatrix(self.as_ptr()) }
+    }
+    fn invert(&self) {
+        unsafe { ffi::wxGraphicsMatrix_Invert(self.as_ptr()) }
+    }
+    fn is_equal_graphicsmatrix<G: GraphicsMatrixMethods>(&self, t: Option<&G>) -> bool {
+        unsafe {
+            let t = match t {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxGraphicsMatrix_IsEqual(self.as_ptr(), t)
+        }
+    }
+    fn is_equal_graphicsmatrix<G: GraphicsMatrixMethods>(&self, t: &G) -> bool {
+        unsafe {
+            let t = t.as_ptr();
+            ffi::wxGraphicsMatrix_IsEqual1(self.as_ptr(), t)
+        }
+    }
+    fn is_identity(&self) -> bool {
+        unsafe { ffi::wxGraphicsMatrix_IsIdentity(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn Rotate()
+    // NOT_SUPPORTED: fn Scale()
+    // NOT_SUPPORTED: fn Set()
+    fn transform_distance(&self, dx: *mut c_void, dy: *mut c_void) {
+        unsafe { ffi::wxGraphicsMatrix_TransformDistance(self.as_ptr(), dx, dy) }
+    }
+    fn transform_point(&self, x: *mut c_void, y: *mut c_void) {
+        unsafe { ffi::wxGraphicsMatrix_TransformPoint(self.as_ptr(), x, y) }
+    }
+    // NOT_SUPPORTED: fn Translate()
+}
+
+// wxGraphicsObject
+pub trait GraphicsObjectMethods: ObjectMethods {
+    fn get_renderer(&self) -> Option<GraphicsRendererIsOwned<false>> {
+        unsafe { GraphicsRenderer::option_from(ffi::wxGraphicsObject_GetRenderer(self.as_ptr())) }
+    }
+    fn is_null(&self) -> bool {
+        unsafe { ffi::wxGraphicsObject_IsNull(self.as_ptr()) }
+    }
+}
+
+// wxGraphicsPath
+pub trait GraphicsPathMethods: GraphicsObjectMethods {
+    // NOT_SUPPORTED: fn AddArc()
+    // NOT_SUPPORTED: fn AddArc1()
+    // NOT_SUPPORTED: fn AddArcToPoint()
+    // NOT_SUPPORTED: fn AddCircle()
+    // NOT_SUPPORTED: fn AddCurveToPoint()
+    fn add_curve_to_point<
+        P: Point2DDoubleMethods,
+        P2: Point2DDoubleMethods,
+        P3: Point2DDoubleMethods,
+    >(
+        &self,
+        c1: &P,
+        c2: &P2,
+        e: &P3,
+    ) {
+        unsafe {
+            let c1 = c1.as_ptr();
+            let c2 = c2.as_ptr();
+            let e = e.as_ptr();
+            ffi::wxGraphicsPath_AddCurveToPoint1(self.as_ptr(), c1, c2, e)
+        }
+    }
+    // NOT_SUPPORTED: fn AddEllipse()
+    // NOT_SUPPORTED: fn AddLineToPoint()
+    fn add_line_to_point<P: Point2DDoubleMethods>(&self, p: &P) {
+        unsafe {
+            let p = p.as_ptr();
+            ffi::wxGraphicsPath_AddLineToPoint1(self.as_ptr(), p)
+        }
+    }
+    fn add_path<G: GraphicsPathMethods>(&self, path: &G) {
+        unsafe {
+            let path = path.as_ptr();
+            ffi::wxGraphicsPath_AddPath(self.as_ptr(), path)
+        }
+    }
+    // NOT_SUPPORTED: fn AddQuadCurveToPoint()
+    // NOT_SUPPORTED: fn AddRectangle()
+    // NOT_SUPPORTED: fn AddRoundedRectangle()
+    fn close_subpath(&self) {
+        unsafe { ffi::wxGraphicsPath_CloseSubpath(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn Contains()
+    // NOT_SUPPORTED: fn Contains1()
+    fn get_box(&self) -> Rect2DDouble {
+        unsafe { Rect2DDouble::from_ptr(ffi::wxGraphicsPath_GetBox(self.as_ptr())) }
+    }
+    fn get_box_double(&self, x: *mut c_void, y: *mut c_void, w: *mut c_void, h: *mut c_void) {
+        unsafe { ffi::wxGraphicsPath_GetBox1(self.as_ptr(), x, y, w, h) }
+    }
+    fn get_current_point_double(&self, x: *mut c_void, y: *mut c_void) {
+        unsafe { ffi::wxGraphicsPath_GetCurrentPoint(self.as_ptr(), x, y) }
+    }
+    fn get_current_point(&self) -> Point2DDouble {
+        unsafe { Point2DDouble::from_ptr(ffi::wxGraphicsPath_GetCurrentPoint1(self.as_ptr())) }
+    }
+    fn get_native_path(&self) -> *mut c_void {
+        unsafe { ffi::wxGraphicsPath_GetNativePath(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn MoveToPoint()
+    fn move_to_point<P: Point2DDoubleMethods>(&self, p: &P) {
+        unsafe {
+            let p = p.as_ptr();
+            ffi::wxGraphicsPath_MoveToPoint1(self.as_ptr(), p)
+        }
+    }
+    fn transform<G: GraphicsMatrixMethods>(&self, matrix: &G) {
+        unsafe {
+            let matrix = matrix.as_ptr();
+            ffi::wxGraphicsPath_Transform(self.as_ptr(), matrix)
+        }
+    }
+    fn un_get_native_path(&self, p: *mut c_void) {
+        unsafe { ffi::wxGraphicsPath_UnGetNativePath(self.as_ptr(), p) }
+    }
+}
+
+// wxGraphicsPen
+pub trait GraphicsPenMethods: GraphicsObjectMethods {}
+
+// wxGraphicsRenderer
+pub trait GraphicsRendererMethods: ObjectMethods {
+    fn create_bitmap<B: BitmapMethods>(&self, bitmap: &B) -> GraphicsBitmap {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            GraphicsBitmap::from_ptr(ffi::wxGraphicsRenderer_CreateBitmap(self.as_ptr(), bitmap))
+        }
+    }
+    fn create_bitmap_from_image<I: ImageMethods>(&self, image: &I) -> GraphicsBitmap {
+        unsafe {
+            let image = image.as_ptr();
+            GraphicsBitmap::from_ptr(ffi::wxGraphicsRenderer_CreateBitmapFromImage(
+                self.as_ptr(),
+                image,
+            ))
+        }
+    }
+    fn create_image_from_bitmap<G: GraphicsBitmapMethods>(&self, bmp: &G) -> Image {
+        unsafe {
+            let bmp = bmp.as_ptr();
+            Image::from_ptr(ffi::wxGraphicsRenderer_CreateImageFromBitmap(
+                self.as_ptr(),
+                bmp,
+            ))
+        }
+    }
+    fn create_bitmap_from_native_bitmap(&self, bitmap: *mut c_void) -> GraphicsBitmap {
+        unsafe {
+            GraphicsBitmap::from_ptr(ffi::wxGraphicsRenderer_CreateBitmapFromNativeBitmap(
+                self.as_ptr(),
+                bitmap,
+            ))
+        }
+    }
+    fn create_context_window<W: WindowMethods>(
+        &self,
+        window: Option<&W>,
+    ) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContext(
+                self.as_ptr(),
+                window,
+            ))
+        }
+    }
+    fn create_context_windowdc<W: WindowDCMethods>(
+        &self,
+        window_dc: &W,
+    ) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe {
+            let window_dc = window_dc.as_ptr();
+            GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContext1(
+                self.as_ptr(),
+                window_dc,
+            ))
+        }
+    }
+    fn create_context_memorydc<M: MemoryDCMethods>(
+        &self,
+        memory_dc: &M,
+    ) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe {
+            let memory_dc = memory_dc.as_ptr();
+            GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContext2(
+                self.as_ptr(),
+                memory_dc,
+            ))
+        }
+    }
+    fn create_context_printerdc<P: PrinterDCMethods>(
+        &self,
+        printer_dc: &P,
+    ) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe {
+            let printer_dc = printer_dc.as_ptr();
+            GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContext3(
+                self.as_ptr(),
+                printer_dc,
+            ))
+        }
+    }
+    fn create_context_enhmetafiledc(
+        &self,
+        meta_file_dc: *const c_void,
+    ) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe {
+            GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContext4(
+                self.as_ptr(),
+                meta_file_dc,
+            ))
+        }
+    }
+    fn create_context_from_unknown_dc<D: DCMethods>(
+        &self,
+        dc: &D,
+    ) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe {
+            let dc = dc.as_ptr();
+            GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContextFromUnknownDC(
+                self.as_ptr(),
+                dc,
+            ))
+        }
+    }
+    fn create_context_from_image<I: ImageMethods>(
+        &self,
+        image: &I,
+    ) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe {
+            let image = image.as_ptr();
+            GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContextFromImage(
+                self.as_ptr(),
+                image,
+            ))
+        }
+    }
+    fn create_brush<B: BrushMethods>(&self, brush: &B) -> GraphicsBrush {
+        unsafe {
+            let brush = brush.as_ptr();
+            GraphicsBrush::from_ptr(ffi::wxGraphicsRenderer_CreateBrush(self.as_ptr(), brush))
+        }
+    }
+    fn create_context_from_native_context(
+        &self,
+        context: *mut c_void,
+    ) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe {
+            GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContextFromNativeContext(
+                self.as_ptr(),
+                context,
+            ))
+        }
+    }
+    fn create_context_from_native_window(
+        &self,
+        window: *mut c_void,
+    ) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe {
+            GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContextFromNativeWindow(
+                self.as_ptr(),
+                window,
+            ))
+        }
+    }
+    fn create_measuring_context(&self) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe {
+            GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateMeasuringContext(
+                self.as_ptr(),
+            ))
+        }
+    }
+    fn create_font_font<F: FontMethods, C: ColourMethods>(
+        &self,
+        font: &F,
+        col: &C,
+    ) -> GraphicsFont {
+        unsafe {
+            let font = font.as_ptr();
+            let col = col.as_ptr();
+            GraphicsFont::from_ptr(ffi::wxGraphicsRenderer_CreateFont(self.as_ptr(), font, col))
+        }
+    }
+    fn create_font_double<C: ColourMethods>(
+        &self,
+        size_in_pixels: c_double,
+        facename: &str,
+        flags: c_int,
+        col: &C,
+    ) -> GraphicsFont {
+        unsafe {
+            let facename = WxString::from(facename);
+            let facename = facename.as_ptr();
+            let col = col.as_ptr();
+            GraphicsFont::from_ptr(ffi::wxGraphicsRenderer_CreateFont1(
+                self.as_ptr(),
+                size_in_pixels,
+                facename,
+                flags,
+                col,
+            ))
+        }
+    }
+    fn create_font_at_dpi<F: FontMethods, R: RealPointMethods, C: ColourMethods>(
+        &self,
+        font: &F,
+        dpi: &R,
+        col: &C,
+    ) -> GraphicsFont {
+        unsafe {
+            let font = font.as_ptr();
+            let dpi = dpi.as_ptr();
+            let col = col.as_ptr();
+            GraphicsFont::from_ptr(ffi::wxGraphicsRenderer_CreateFontAtDPI(
+                self.as_ptr(),
+                font,
+                dpi,
+                col,
+            ))
+        }
+    }
+    // NOT_SUPPORTED: fn CreateLinearGradientBrush()
+    // NOT_SUPPORTED: fn CreateMatrix()
+    fn create_path(&self) -> GraphicsPath {
+        unsafe { GraphicsPath::from_ptr(ffi::wxGraphicsRenderer_CreatePath(self.as_ptr())) }
+    }
+    fn create_pen<G: GraphicsPenInfoMethods>(&self, info: &G) -> GraphicsPen {
+        unsafe {
+            let info = info.as_ptr();
+            GraphicsPen::from_ptr(ffi::wxGraphicsRenderer_CreatePen(self.as_ptr(), info))
+        }
+    }
+    // NOT_SUPPORTED: fn CreateRadialGradientBrush()
+    // NOT_SUPPORTED: fn CreateSubBitmap()
+    fn get_name(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxGraphicsRenderer_GetName(self.as_ptr())).into() }
+    }
+    fn get_version(&self, major: *mut c_void, minor: *mut c_void, micro: *mut c_void) {
+        unsafe { ffi::wxGraphicsRenderer_GetVersion(self.as_ptr(), major, minor, micro) }
+    }
+    // NOT_SUPPORTED: fn CreateContextFromNativeHDC()
+    fn get_default_renderer() -> Option<GraphicsRendererIsOwned<false>> {
+        unsafe { GraphicsRenderer::option_from(ffi::wxGraphicsRenderer_GetDefaultRenderer()) }
+    }
+    fn get_cairo_renderer() -> Option<GraphicsRendererIsOwned<false>> {
+        unsafe { GraphicsRenderer::option_from(ffi::wxGraphicsRenderer_GetCairoRenderer()) }
+    }
+    fn get_gdi_plus_renderer() -> Option<GraphicsRendererIsOwned<false>> {
+        unsafe { GraphicsRenderer::option_from(ffi::wxGraphicsRenderer_GetGDIPlusRenderer()) }
+    }
+    fn get_direct2_d_renderer() -> Option<GraphicsRendererIsOwned<false>> {
+        unsafe { GraphicsRenderer::option_from(ffi::wxGraphicsRenderer_GetDirect2DRenderer()) }
+    }
+}
+
+// wxGridBagSizer
+pub trait GridBagSizerMethods: FlexGridSizerMethods {
+    fn add_window_gbposition<
+        W: WindowMethods,
+        G: GBPositionMethods,
+        G2: GBSpanMethods,
+        O: ObjectMethods,
+    >(
+        &self,
+        window: Option<&W>,
+        pos: &G,
+        span: &G2,
+        flag: c_int,
+        border: c_int,
+        user_data: Option<&O>,
+    ) -> Option<SizerItemIsOwned<false>> {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let span = span.as_ptr();
+            let user_data = match user_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            SizerItem::option_from(ffi::wxGridBagSizer_Add(
+                self.as_ptr(),
+                window,
+                pos,
+                span,
+                flag,
+                border,
+                user_data,
+            ))
+        }
+    }
+    fn add_sizer_gbposition<
+        S: SizerMethods,
+        G: GBPositionMethods,
+        G2: GBSpanMethods,
+        O: ObjectMethods,
+    >(
+        &self,
+        sizer: Option<&S>,
+        pos: &G,
+        span: &G2,
+        flag: c_int,
+        border: c_int,
+        user_data: Option<&O>,
+    ) -> Option<SizerItemIsOwned<false>> {
+        unsafe {
+            let sizer = match sizer {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let span = span.as_ptr();
+            let user_data = match user_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            SizerItem::option_from(ffi::wxGridBagSizer_Add1(
+                self.as_ptr(),
+                sizer,
+                pos,
+                span,
+                flag,
+                border,
+                user_data,
+            ))
+        }
+    }
+    fn add_gbsizeritem<G: GBSizerItemMethods>(
+        &self,
+        item: Option<&G>,
+    ) -> Option<SizerItemIsOwned<false>> {
+        unsafe {
+            let item = match item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            SizerItem::option_from(ffi::wxGridBagSizer_Add2(self.as_ptr(), item))
+        }
+    }
+    fn add_int_gbposition<G: GBPositionMethods, G2: GBSpanMethods, O: ObjectMethods>(
+        &self,
+        width: c_int,
+        height: c_int,
+        pos: &G,
+        span: &G2,
+        flag: c_int,
+        border: c_int,
+        user_data: Option<&O>,
+    ) -> Option<SizerItemIsOwned<false>> {
+        unsafe {
+            let pos = pos.as_ptr();
+            let span = span.as_ptr();
+            let user_data = match user_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            SizerItem::option_from(ffi::wxGridBagSizer_Add3(
+                self.as_ptr(),
+                width,
+                height,
+                pos,
+                span,
+                flag,
+                border,
+                user_data,
+            ))
+        }
+    }
+    fn check_for_intersection_gbsizeritem<G: GBSizerItemMethods, G2: GBSizerItemMethods>(
+        &self,
+        item: Option<&G>,
+        exclude_item: Option<&G2>,
+    ) -> bool {
+        unsafe {
+            let item = match item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let exclude_item = match exclude_item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxGridBagSizer_CheckForIntersection(self.as_ptr(), item, exclude_item)
+        }
+    }
+    fn check_for_intersection_gbposition<
+        G: GBPositionMethods,
+        G2: GBSpanMethods,
+        G3: GBSizerItemMethods,
+    >(
+        &self,
+        pos: &G,
+        span: &G2,
+        exclude_item: Option<&G3>,
+    ) -> bool {
+        unsafe {
+            let pos = pos.as_ptr();
+            let span = span.as_ptr();
+            let exclude_item = match exclude_item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxGridBagSizer_CheckForIntersection1(self.as_ptr(), pos, span, exclude_item)
+        }
+    }
+    fn find_item_window<W: WindowMethods>(
+        &self,
+        window: Option<&W>,
+    ) -> Option<GBSizerItemIsOwned<false>> {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            GBSizerItem::option_from(ffi::wxGridBagSizer_FindItem(self.as_ptr(), window))
+        }
+    }
+    fn find_item_sizer<S: SizerMethods>(
+        &self,
+        sizer: Option<&S>,
+    ) -> Option<GBSizerItemIsOwned<false>> {
+        unsafe {
+            let sizer = match sizer {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            GBSizerItem::option_from(ffi::wxGridBagSizer_FindItem1(self.as_ptr(), sizer))
+        }
+    }
+    fn find_item_at_point<P: PointMethods>(&self, pt: &P) -> Option<GBSizerItemIsOwned<false>> {
+        unsafe {
+            let pt = pt.as_ptr();
+            GBSizerItem::option_from(ffi::wxGridBagSizer_FindItemAtPoint(self.as_ptr(), pt))
+        }
+    }
+    fn find_item_at_position<G: GBPositionMethods>(
+        &self,
+        pos: &G,
+    ) -> Option<GBSizerItemIsOwned<false>> {
+        unsafe {
+            let pos = pos.as_ptr();
+            GBSizerItem::option_from(ffi::wxGridBagSizer_FindItemAtPosition(self.as_ptr(), pos))
+        }
+    }
+    fn find_item_with_data<O: ObjectMethods>(
+        &self,
+        user_data: Option<&O>,
+    ) -> Option<GBSizerItemIsOwned<false>> {
+        unsafe {
+            let user_data = match user_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            GBSizerItem::option_from(ffi::wxGridBagSizer_FindItemWithData(
+                self.as_ptr(),
+                user_data,
+            ))
+        }
+    }
+    fn get_cell_size(&self, row: c_int, col: c_int) -> Size {
+        unsafe { Size::from_ptr(ffi::wxGridBagSizer_GetCellSize(self.as_ptr(), row, col)) }
+    }
+    fn get_empty_cell_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxGridBagSizer_GetEmptyCellSize(self.as_ptr())) }
+    }
+    fn get_item_position_window<W: WindowMethods>(&self, window: Option<&W>) -> GBPosition {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            GBPosition::from_ptr(ffi::wxGridBagSizer_GetItemPosition(self.as_ptr(), window))
+        }
+    }
+    fn get_item_position_sizer<S: SizerMethods>(&self, sizer: Option<&S>) -> GBPosition {
+        unsafe {
+            let sizer = match sizer {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            GBPosition::from_ptr(ffi::wxGridBagSizer_GetItemPosition1(self.as_ptr(), sizer))
+        }
+    }
+    fn get_item_position_sz(&self, index: usize) -> GBPosition {
+        unsafe { GBPosition::from_ptr(ffi::wxGridBagSizer_GetItemPosition2(self.as_ptr(), index)) }
+    }
+    fn get_item_span_window<W: WindowMethods>(&self, window: Option<&W>) -> GBSpan {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            GBSpan::from_ptr(ffi::wxGridBagSizer_GetItemSpan(self.as_ptr(), window))
+        }
+    }
+    fn get_item_span_sizer<S: SizerMethods>(&self, sizer: Option<&S>) -> GBSpan {
+        unsafe {
+            let sizer = match sizer {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            GBSpan::from_ptr(ffi::wxGridBagSizer_GetItemSpan1(self.as_ptr(), sizer))
+        }
+    }
+    fn get_item_span_sz(&self, index: usize) -> GBSpan {
+        unsafe { GBSpan::from_ptr(ffi::wxGridBagSizer_GetItemSpan2(self.as_ptr(), index)) }
+    }
+    fn set_empty_cell_size<S: SizeMethods>(&self, sz: &S) {
+        unsafe {
+            let sz = sz.as_ptr();
+            ffi::wxGridBagSizer_SetEmptyCellSize(self.as_ptr(), sz)
+        }
+    }
+    fn set_item_position_window<W: WindowMethods, G: GBPositionMethods>(
+        &self,
+        window: Option<&W>,
+        pos: &G,
+    ) -> bool {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            ffi::wxGridBagSizer_SetItemPosition(self.as_ptr(), window, pos)
+        }
+    }
+    fn set_item_position_sizer<S: SizerMethods, G: GBPositionMethods>(
+        &self,
+        sizer: Option<&S>,
+        pos: &G,
+    ) -> bool {
+        unsafe {
+            let sizer = match sizer {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            ffi::wxGridBagSizer_SetItemPosition1(self.as_ptr(), sizer, pos)
+        }
+    }
+    fn set_item_position_sz<G: GBPositionMethods>(&self, index: usize, pos: &G) -> bool {
+        unsafe {
+            let pos = pos.as_ptr();
+            ffi::wxGridBagSizer_SetItemPosition2(self.as_ptr(), index, pos)
+        }
+    }
+    fn set_item_span_window<W: WindowMethods, G: GBSpanMethods>(
+        &self,
+        window: Option<&W>,
+        span: &G,
+    ) -> bool {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let span = span.as_ptr();
+            ffi::wxGridBagSizer_SetItemSpan(self.as_ptr(), window, span)
+        }
+    }
+    fn set_item_span_sizer<S: SizerMethods, G: GBSpanMethods>(
+        &self,
+        sizer: Option<&S>,
+        span: &G,
+    ) -> bool {
+        unsafe {
+            let sizer = match sizer {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let span = span.as_ptr();
+            ffi::wxGridBagSizer_SetItemSpan1(self.as_ptr(), sizer, span)
+        }
+    }
+    fn set_item_span_sz<G: GBSpanMethods>(&self, index: usize, span: &G) -> bool {
+        unsafe {
+            let span = span.as_ptr();
+            ffi::wxGridBagSizer_SetItemSpan2(self.as_ptr(), index, span)
+        }
+    }
+}
+
+// wxGridCellAttr
+pub trait GridCellAttrMethods: SharedClientDataContainerMethods {
+    fn clone(&self) -> Option<GridCellAttrIsOwned<false>> {
+        unsafe { GridCellAttr::option_from(ffi::wxGridCellAttr_Clone(self.as_ptr())) }
+    }
+    fn dec_ref(&self) {
+        unsafe { ffi::wxGridCellAttr_DecRef(self.as_ptr()) }
+    }
+    fn get_alignment(&self, h_align: *mut c_void, v_align: *mut c_void) {
+        unsafe { ffi::wxGridCellAttr_GetAlignment(self.as_ptr(), h_align, v_align) }
+    }
+    fn get_background_colour(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxGridCellAttr_GetBackgroundColour(self.as_ptr())) }
+    }
+    fn get_editor(
+        &self,
+        grid: *const c_void,
+        row: c_int,
+        col: c_int,
+    ) -> Option<GridCellEditorIsOwned<false>> {
+        unsafe {
+            GridCellEditor::option_from(ffi::wxGridCellAttr_GetEditor(
+                self.as_ptr(),
+                grid,
+                row,
+                col,
+            ))
+        }
+    }
+    // NOT_SUPPORTED: fn GetEditorPtr()
+    fn get_font(&self) -> FontIsOwned<false> {
+        unsafe { FontIsOwned::from_ptr(ffi::wxGridCellAttr_GetFont(self.as_ptr())) }
+    }
+    fn get_non_default_alignment(&self, h_align: *mut c_void, v_align: *mut c_void) {
+        unsafe { ffi::wxGridCellAttr_GetNonDefaultAlignment(self.as_ptr(), h_align, v_align) }
+    }
+    fn get_renderer(
+        &self,
+        grid: *const c_void,
+        row: c_int,
+        col: c_int,
+    ) -> Option<GridCellRendererIsOwned<false>> {
+        unsafe {
+            GridCellRenderer::option_from(ffi::wxGridCellAttr_GetRenderer(
+                self.as_ptr(),
+                grid,
+                row,
+                col,
+            ))
+        }
+    }
+    // NOT_SUPPORTED: fn GetRendererPtr()
+    fn get_text_colour(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxGridCellAttr_GetTextColour(self.as_ptr())) }
+    }
+    fn has_alignment(&self) -> bool {
+        unsafe { ffi::wxGridCellAttr_HasAlignment(self.as_ptr()) }
+    }
+    fn has_background_colour(&self) -> bool {
+        unsafe { ffi::wxGridCellAttr_HasBackgroundColour(self.as_ptr()) }
+    }
+    fn has_editor(&self) -> bool {
+        unsafe { ffi::wxGridCellAttr_HasEditor(self.as_ptr()) }
+    }
+    fn has_font(&self) -> bool {
+        unsafe { ffi::wxGridCellAttr_HasFont(self.as_ptr()) }
+    }
+    fn has_renderer(&self) -> bool {
+        unsafe { ffi::wxGridCellAttr_HasRenderer(self.as_ptr()) }
+    }
+    fn has_text_colour(&self) -> bool {
+        unsafe { ffi::wxGridCellAttr_HasTextColour(self.as_ptr()) }
+    }
+    fn inc_ref(&self) {
+        unsafe { ffi::wxGridCellAttr_IncRef(self.as_ptr()) }
+    }
+    fn is_read_only(&self) -> bool {
+        unsafe { ffi::wxGridCellAttr_IsReadOnly(self.as_ptr()) }
+    }
+    fn set_alignment(&self, h_align: c_int, v_align: c_int) {
+        unsafe { ffi::wxGridCellAttr_SetAlignment(self.as_ptr(), h_align, v_align) }
+    }
+    fn set_background_colour<C: ColourMethods>(&self, col_back: &C) {
+        unsafe {
+            let col_back = col_back.as_ptr();
+            ffi::wxGridCellAttr_SetBackgroundColour(self.as_ptr(), col_back)
+        }
+    }
+    fn set_def_attr<G: GridCellAttrMethods>(&self, def_attr: Option<&G>) {
+        unsafe {
+            let def_attr = match def_attr {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxGridCellAttr_SetDefAttr(self.as_ptr(), def_attr)
+        }
+    }
+    fn set_editor<G: GridCellEditorMethods>(&self, editor: Option<&G>) {
+        unsafe {
+            let editor = match editor {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxGridCellAttr_SetEditor(self.as_ptr(), editor)
+        }
+    }
+    fn set_font<F: FontMethods>(&self, font: &F) {
+        unsafe {
+            let font = font.as_ptr();
+            ffi::wxGridCellAttr_SetFont(self.as_ptr(), font)
+        }
+    }
+    fn set_read_only(&self, is_read_only: bool) {
+        unsafe { ffi::wxGridCellAttr_SetReadOnly(self.as_ptr(), is_read_only) }
+    }
+    fn set_renderer<G: GridCellRendererMethods>(&self, renderer: Option<&G>) {
+        unsafe {
+            let renderer = match renderer {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxGridCellAttr_SetRenderer(self.as_ptr(), renderer)
+        }
+    }
+    fn set_text_colour<C: ColourMethods>(&self, col_text: &C) {
+        unsafe {
+            let col_text = col_text.as_ptr();
+            ffi::wxGridCellAttr_SetTextColour(self.as_ptr(), col_text)
+        }
+    }
+    fn merge_with<G: GridCellAttrMethods>(&self, mergefrom: Option<&G>) {
+        unsafe {
+            let mergefrom = match mergefrom {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxGridCellAttr_MergeWith(self.as_ptr(), mergefrom)
+        }
+    }
+    fn set_size(&self, num_rows: c_int, num_cols: c_int) {
+        unsafe { ffi::wxGridCellAttr_SetSize(self.as_ptr(), num_rows, num_cols) }
+    }
+    fn set_fit_mode(&self, fit_mode: ffi::wxGridFitMode) {
+        unsafe { ffi::wxGridCellAttr_SetFitMode(self.as_ptr(), fit_mode) }
+    }
+    fn set_overflow(&self, allow: bool) {
+        unsafe { ffi::wxGridCellAttr_SetOverflow(self.as_ptr(), allow) }
+    }
+    // NOT_SUPPORTED: fn SetKind()
+    fn has_read_write_mode(&self) -> bool {
+        unsafe { ffi::wxGridCellAttr_HasReadWriteMode(self.as_ptr()) }
+    }
+    fn has_overflow_mode(&self) -> bool {
+        unsafe { ffi::wxGridCellAttr_HasOverflowMode(self.as_ptr()) }
+    }
+    fn has_size(&self) -> bool {
+        unsafe { ffi::wxGridCellAttr_HasSize(self.as_ptr()) }
+    }
+    fn get_size(&self, num_rows: *mut c_void, num_cols: *mut c_void) {
+        unsafe { ffi::wxGridCellAttr_GetSize(self.as_ptr(), num_rows, num_cols) }
+    }
+    fn get_fit_mode(&self) -> GridFitMode {
+        unsafe { GridFitMode::from_ptr(ffi::wxGridCellAttr_GetFitMode(self.as_ptr())) }
+    }
+    fn get_overflow(&self) -> bool {
+        unsafe { ffi::wxGridCellAttr_GetOverflow(self.as_ptr()) }
+    }
+    fn can_overflow(&self) -> bool {
+        unsafe { ffi::wxGridCellAttr_CanOverflow(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetKind()
+}
+
+// wxGridCellAutoWrapStringEditor
+pub trait GridCellAutoWrapStringEditorMethods: GridCellTextEditorMethods {}
+
+// wxGridCellAutoWrapStringRenderer
+pub trait GridCellAutoWrapStringRendererMethods: GridCellStringRendererMethods {}
+
+// wxGridCellBoolEditor
+pub trait GridCellBoolEditorMethods: GridCellEditorMethods {
+    fn is_true_value(value: &str) -> bool {
+        unsafe {
+            let value = WxString::from(value);
+            let value = value.as_ptr();
+            ffi::wxGridCellBoolEditor_IsTrueValue(value)
+        }
+    }
+    fn use_string_values(value_true: &str, value_false: &str) {
+        unsafe {
+            let value_true = WxString::from(value_true);
+            let value_true = value_true.as_ptr();
+            let value_false = WxString::from(value_false);
+            let value_false = value_false.as_ptr();
+            ffi::wxGridCellBoolEditor_UseStringValues(value_true, value_false)
+        }
+    }
+}
+
+// wxGridCellBoolRenderer
+pub trait GridCellBoolRendererMethods: GridCellRendererMethods {}
+
+// wxGridCellChoiceEditor
+pub trait GridCellChoiceEditorMethods: GridCellEditorMethods {
+    fn set_parameters(&self, params: &str) {
+        unsafe {
+            let params = WxString::from(params);
+            let params = params.as_ptr();
+            ffi::wxGridCellChoiceEditor_SetParameters(self.as_ptr(), params)
+        }
+    }
+}
+
+// wxGridCellDateEditor
+pub trait GridCellDateEditorMethods: GridCellEditorMethods {}
+
+// wxGridCellDateRenderer
+pub trait GridCellDateRendererMethods: GridCellStringRendererMethods {
+    fn set_parameters(&self, params: &str) {
+        unsafe {
+            let params = WxString::from(params);
+            let params = params.as_ptr();
+            ffi::wxGridCellDateRenderer_SetParameters(self.as_ptr(), params)
+        }
+    }
+}
+
+// wxGridCellDateTimeRenderer
+pub trait GridCellDateTimeRendererMethods: GridCellDateRendererMethods {}
+
+// wxGridCellEditor
+pub trait GridCellEditorMethods: SharedClientDataContainerMethods {
+    fn begin_edit(&self, row: c_int, col: c_int, grid: *mut c_void) {
+        unsafe { ffi::wxGridCellEditor_BeginEdit(self.as_ptr(), row, col, grid) }
+    }
+    fn clone(&self) -> Option<GridCellEditorIsOwned<false>> {
+        unsafe { GridCellEditor::option_from(ffi::wxGridCellEditor_Clone(self.as_ptr())) }
+    }
+    fn create<W: WindowMethods, E: EvtHandlerMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        evt_handler: Option<&E>,
+    ) {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let evt_handler = match evt_handler {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxGridCellEditor_Create(self.as_ptr(), parent, id, evt_handler)
+        }
+    }
+    fn destroy(&self) {
+        unsafe { ffi::wxGridCellEditor_Destroy(self.as_ptr()) }
+    }
+    fn end_edit(
+        &self,
+        row: c_int,
+        col: c_int,
+        grid: *const c_void,
+        oldval: &str,
+        newval: *mut c_void,
+    ) -> bool {
+        unsafe {
+            let oldval = WxString::from(oldval);
+            let oldval = oldval.as_ptr();
+            ffi::wxGridCellEditor_EndEdit(self.as_ptr(), row, col, grid, oldval, newval)
+        }
+    }
+    fn apply_edit(&self, row: c_int, col: c_int, grid: *mut c_void) {
+        unsafe { ffi::wxGridCellEditor_ApplyEdit(self.as_ptr(), row, col, grid) }
+    }
+    fn handle_return<K: KeyEventMethods>(&self, event: &K) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxGridCellEditor_HandleReturn(self.as_ptr(), event)
+        }
+    }
+    fn is_created(&self) -> bool {
+        unsafe { ffi::wxGridCellEditor_IsCreated(self.as_ptr()) }
+    }
+    fn paint_background<D: DCMethods, R: RectMethods, G: GridCellAttrMethods>(
+        &self,
+        dc: &D,
+        rect_cell: &R,
+        attr: &G,
+    ) {
+        unsafe {
+            let dc = dc.as_ptr();
+            let rect_cell = rect_cell.as_ptr();
+            let attr = attr.as_ptr();
+            ffi::wxGridCellEditor_PaintBackground(self.as_ptr(), dc, rect_cell, attr)
+        }
+    }
+    fn reset(&self) {
+        unsafe { ffi::wxGridCellEditor_Reset(self.as_ptr()) }
+    }
+    fn set_size<R: RectMethods>(&self, rect: &R) {
+        unsafe {
+            let rect = rect.as_ptr();
+            ffi::wxGridCellEditor_SetSize(self.as_ptr(), rect)
+        }
+    }
+    fn show<G: GridCellAttrMethods>(&self, show: bool, attr: Option<&G>) {
+        unsafe {
+            let attr = match attr {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxGridCellEditor_Show(self.as_ptr(), show, attr)
+        }
+    }
+    fn starting_click(&self) {
+        unsafe { ffi::wxGridCellEditor_StartingClick(self.as_ptr()) }
+    }
+    fn starting_key<K: KeyEventMethods>(&self, event: &K) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxGridCellEditor_StartingKey(self.as_ptr(), event)
+        }
+    }
+    fn is_accepted_key<K: KeyEventMethods>(&self, event: &K) -> bool {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxGridCellEditor_IsAcceptedKey(self.as_ptr(), event)
+        }
+    }
+    fn get_value(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxGridCellEditor_GetValue(self.as_ptr())).into() }
+    }
+    fn get_window(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxGridCellEditor_GetWindow(self.as_ptr())) }
+    }
+    fn set_window<W: WindowMethods>(&self, window: Option<&W>) {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxGridCellEditor_SetWindow(self.as_ptr(), window)
+        }
+    }
+    fn get_control(&self) -> WeakRef<Control> {
+        unsafe { WeakRef::<Control>::from(ffi::wxGridCellEditor_GetControl(self.as_ptr())) }
+    }
+    fn set_control<C: ControlMethods>(&self, control: Option<&C>) {
+        unsafe {
+            let control = match control {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxGridCellEditor_SetControl(self.as_ptr(), control)
+        }
+    }
+    fn try_activate<G: GridActivationSourceMethods>(
+        &self,
+        row: c_int,
+        col: c_int,
+        grid: *mut c_void,
+        act_source: &G,
+    ) -> GridActivationResult {
+        unsafe {
+            let act_source = act_source.as_ptr();
+            GridActivationResult::from_ptr(ffi::wxGridCellEditor_TryActivate(
+                self.as_ptr(),
+                row,
+                col,
+                grid,
+                act_source,
+            ))
+        }
+    }
+    fn do_activate(&self, row: c_int, col: c_int, grid: *mut c_void) {
+        unsafe { ffi::wxGridCellEditor_DoActivate(self.as_ptr(), row, col, grid) }
+    }
+}
+
+// wxGridCellEnumEditor
+pub trait GridCellEnumEditorMethods: GridCellChoiceEditorMethods {}
+
+// wxGridCellEnumRenderer
+pub trait GridCellEnumRendererMethods: GridCellStringRendererMethods {
+    fn set_parameters(&self, params: &str) {
+        unsafe {
+            let params = WxString::from(params);
+            let params = params.as_ptr();
+            ffi::wxGridCellEnumRenderer_SetParameters(self.as_ptr(), params)
+        }
+    }
+}
+
+// wxGridCellFloatEditor
+pub trait GridCellFloatEditorMethods: GridCellTextEditorMethods {}
+
+// wxGridCellFloatRenderer
+pub trait GridCellFloatRendererMethods: GridCellStringRendererMethods {
+    fn get_format(&self) -> c_int {
+        unsafe { ffi::wxGridCellFloatRenderer_GetFormat(self.as_ptr()) }
+    }
+    fn get_precision(&self) -> c_int {
+        unsafe { ffi::wxGridCellFloatRenderer_GetPrecision(self.as_ptr()) }
+    }
+    fn get_width(&self) -> c_int {
+        unsafe { ffi::wxGridCellFloatRenderer_GetWidth(self.as_ptr()) }
+    }
+    fn set_format(&self, format: c_int) {
+        unsafe { ffi::wxGridCellFloatRenderer_SetFormat(self.as_ptr(), format) }
+    }
+    fn set_parameters(&self, params: &str) {
+        unsafe {
+            let params = WxString::from(params);
+            let params = params.as_ptr();
+            ffi::wxGridCellFloatRenderer_SetParameters(self.as_ptr(), params)
+        }
+    }
+    fn set_precision(&self, precision: c_int) {
+        unsafe { ffi::wxGridCellFloatRenderer_SetPrecision(self.as_ptr(), precision) }
+    }
+    fn set_width(&self, width: c_int) {
+        unsafe { ffi::wxGridCellFloatRenderer_SetWidth(self.as_ptr(), width) }
+    }
+}
+
+// wxGridCellNumberEditor
+pub trait GridCellNumberEditorMethods: GridCellTextEditorMethods {}
+
+// wxGridCellNumberRenderer
+pub trait GridCellNumberRendererMethods: GridCellStringRendererMethods {}
+
+// wxGridCellRenderer
+pub trait GridCellRendererMethods: SharedClientDataContainerMethods {
+    fn clone(&self) -> Option<GridCellRendererIsOwned<false>> {
+        unsafe { GridCellRenderer::option_from(ffi::wxGridCellRenderer_Clone(self.as_ptr())) }
+    }
+    fn draw<G: GridCellAttrMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        grid: *mut c_void,
+        attr: &G,
+        dc: &D,
+        rect: &R,
+        row: c_int,
+        col: c_int,
+        is_selected: bool,
+    ) {
+        unsafe {
+            let attr = attr.as_ptr();
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxGridCellRenderer_Draw(self.as_ptr(), grid, attr, dc, rect, row, col, is_selected)
+        }
+    }
+    fn get_best_size<G: GridCellAttrMethods, D: DCMethods>(
+        &self,
+        grid: *mut c_void,
+        attr: &G,
+        dc: &D,
+        row: c_int,
+        col: c_int,
+    ) -> Size {
+        unsafe {
+            let attr = attr.as_ptr();
+            let dc = dc.as_ptr();
+            Size::from_ptr(ffi::wxGridCellRenderer_GetBestSize(
+                self.as_ptr(),
+                grid,
+                attr,
+                dc,
+                row,
+                col,
+            ))
+        }
+    }
+    fn get_best_height<G: GridCellAttrMethods, D: DCMethods>(
+        &self,
+        grid: *mut c_void,
+        attr: &G,
+        dc: &D,
+        row: c_int,
+        col: c_int,
+        width: c_int,
+    ) -> c_int {
+        unsafe {
+            let attr = attr.as_ptr();
+            let dc = dc.as_ptr();
+            ffi::wxGridCellRenderer_GetBestHeight(self.as_ptr(), grid, attr, dc, row, col, width)
+        }
+    }
+    fn get_best_width<G: GridCellAttrMethods, D: DCMethods>(
+        &self,
+        grid: *mut c_void,
+        attr: &G,
+        dc: &D,
+        row: c_int,
+        col: c_int,
+        height: c_int,
+    ) -> c_int {
+        unsafe {
+            let attr = attr.as_ptr();
+            let dc = dc.as_ptr();
+            ffi::wxGridCellRenderer_GetBestWidth(self.as_ptr(), grid, attr, dc, row, col, height)
+        }
+    }
+    fn get_max_best_size<G: GridCellAttrMethods, D: DCMethods>(
+        &self,
+        grid: *mut c_void,
+        attr: &G,
+        dc: &D,
+    ) -> Size {
+        unsafe {
+            let attr = attr.as_ptr();
+            let dc = dc.as_ptr();
+            Size::from_ptr(ffi::wxGridCellRenderer_GetMaxBestSize(
+                self.as_ptr(),
+                grid,
+                attr,
+                dc,
+            ))
+        }
+    }
+}
+
+// wxGridCellStringRenderer
+pub trait GridCellStringRendererMethods: GridCellRendererMethods {}
+
+// wxGridCellTextEditor
+pub trait GridCellTextEditorMethods: GridCellEditorMethods {
+    fn set_parameters(&self, params: &str) {
+        unsafe {
+            let params = WxString::from(params);
+            let params = params.as_ptr();
+            ffi::wxGridCellTextEditor_SetParameters(self.as_ptr(), params)
+        }
+    }
+    fn set_validator<V: ValidatorMethods>(&self, validator: &V) {
+        unsafe {
+            let validator = validator.as_ptr();
+            ffi::wxGridCellTextEditor_SetValidator(self.as_ptr(), validator)
+        }
+    }
+}
+
+// wxGridEditorCreatedEvent
+pub trait GridEditorCreatedEventMethods: CommandEventMethods {
+    fn get_col(&self) -> c_int {
+        unsafe { ffi::wxGridEditorCreatedEvent_GetCol(self.as_ptr()) }
+    }
+    fn get_control(&self) -> WeakRef<Control> {
+        unsafe { WeakRef::<Control>::from(ffi::wxGridEditorCreatedEvent_GetControl(self.as_ptr())) }
+    }
+    fn get_row(&self) -> c_int {
+        unsafe { ffi::wxGridEditorCreatedEvent_GetRow(self.as_ptr()) }
+    }
+    fn get_window(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxGridEditorCreatedEvent_GetWindow(self.as_ptr())) }
+    }
+    fn set_col(&self, col: c_int) {
+        unsafe { ffi::wxGridEditorCreatedEvent_SetCol(self.as_ptr(), col) }
+    }
+    fn set_control<C: ControlMethods>(&self, ctrl: Option<&C>) {
+        unsafe {
+            let ctrl = match ctrl {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxGridEditorCreatedEvent_SetControl(self.as_ptr(), ctrl)
+        }
+    }
+    fn set_row(&self, row: c_int) {
+        unsafe { ffi::wxGridEditorCreatedEvent_SetRow(self.as_ptr(), row) }
+    }
+    fn set_window<W: WindowMethods>(&self, window: Option<&W>) {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxGridEditorCreatedEvent_SetWindow(self.as_ptr(), window)
+        }
+    }
+}
+
+// wxGridEvent
+pub trait GridEventMethods: NotifyEventMethods {
+    fn alt_down(&self) -> bool {
+        unsafe { ffi::wxGridEvent_AltDown(self.as_ptr()) }
+    }
+    fn control_down(&self) -> bool {
+        unsafe { ffi::wxGridEvent_ControlDown(self.as_ptr()) }
+    }
+    fn get_col(&self) -> c_int {
+        unsafe { ffi::wxGridEvent_GetCol(self.as_ptr()) }
+    }
+    fn get_position(&self) -> Point {
+        unsafe { Point::from_ptr(ffi::wxGridEvent_GetPosition(self.as_ptr())) }
+    }
+    fn get_row(&self) -> c_int {
+        unsafe { ffi::wxGridEvent_GetRow(self.as_ptr()) }
+    }
+    fn meta_down(&self) -> bool {
+        unsafe { ffi::wxGridEvent_MetaDown(self.as_ptr()) }
+    }
+    fn selecting(&self) -> bool {
+        unsafe { ffi::wxGridEvent_Selecting(self.as_ptr()) }
+    }
+    fn shift_down(&self) -> bool {
+        unsafe { ffi::wxGridEvent_ShiftDown(self.as_ptr()) }
+    }
+}
+
+// wxGridFitMode
+pub trait GridFitModeMethods: WxRustMethods {
+    fn is_specified(&self) -> bool {
+        unsafe { ffi::wxGridFitMode_IsSpecified(self.as_ptr()) }
+    }
+    fn is_clip(&self) -> bool {
+        unsafe { ffi::wxGridFitMode_IsClip(self.as_ptr()) }
+    }
+    fn is_overflow(&self) -> bool {
+        unsafe { ffi::wxGridFitMode_IsOverflow(self.as_ptr()) }
+    }
+    fn get_ellipsize_mode(&self) -> c_int {
+        unsafe { ffi::wxGridFitMode_GetEllipsizeMode(self.as_ptr()) }
+    }
+    fn clip() -> GridFitMode {
+        unsafe { GridFitMode::from_ptr(ffi::wxGridFitMode_Clip()) }
+    }
+    fn overflow() -> GridFitMode {
+        unsafe { GridFitMode::from_ptr(ffi::wxGridFitMode_Overflow()) }
+    }
+    fn ellipsize(ellipsize: c_int) -> GridFitMode {
+        unsafe { GridFitMode::from_ptr(ffi::wxGridFitMode_Ellipsize(ellipsize)) }
+    }
+}
+
+// wxGridRangeSelectEvent
+pub trait GridRangeSelectEventMethods: NotifyEventMethods {
+    fn alt_down(&self) -> bool {
+        unsafe { ffi::wxGridRangeSelectEvent_AltDown(self.as_ptr()) }
+    }
+    fn control_down(&self) -> bool {
+        unsafe { ffi::wxGridRangeSelectEvent_ControlDown(self.as_ptr()) }
+    }
+    fn get_bottom_right_coords(&self) -> GridCellCoords {
+        unsafe {
+            GridCellCoords::from_ptr(ffi::wxGridRangeSelectEvent_GetBottomRightCoords(
+                self.as_ptr(),
+            ))
+        }
+    }
+    fn get_bottom_row(&self) -> c_int {
+        unsafe { ffi::wxGridRangeSelectEvent_GetBottomRow(self.as_ptr()) }
+    }
+    fn get_left_col(&self) -> c_int {
+        unsafe { ffi::wxGridRangeSelectEvent_GetLeftCol(self.as_ptr()) }
+    }
+    fn get_right_col(&self) -> c_int {
+        unsafe { ffi::wxGridRangeSelectEvent_GetRightCol(self.as_ptr()) }
+    }
+    fn get_top_left_coords(&self) -> GridCellCoords {
+        unsafe {
+            GridCellCoords::from_ptr(ffi::wxGridRangeSelectEvent_GetTopLeftCoords(self.as_ptr()))
+        }
+    }
+    fn get_top_row(&self) -> c_int {
+        unsafe { ffi::wxGridRangeSelectEvent_GetTopRow(self.as_ptr()) }
+    }
+    fn meta_down(&self) -> bool {
+        unsafe { ffi::wxGridRangeSelectEvent_MetaDown(self.as_ptr()) }
+    }
+    fn selecting(&self) -> bool {
+        unsafe { ffi::wxGridRangeSelectEvent_Selecting(self.as_ptr()) }
+    }
+    fn shift_down(&self) -> bool {
+        unsafe { ffi::wxGridRangeSelectEvent_ShiftDown(self.as_ptr()) }
+    }
+}
+
+// wxGridSizeEvent
+pub trait GridSizeEventMethods: NotifyEventMethods {
+    fn alt_down(&self) -> bool {
+        unsafe { ffi::wxGridSizeEvent_AltDown(self.as_ptr()) }
+    }
+    fn control_down(&self) -> bool {
+        unsafe { ffi::wxGridSizeEvent_ControlDown(self.as_ptr()) }
+    }
+    fn get_position(&self) -> Point {
+        unsafe { Point::from_ptr(ffi::wxGridSizeEvent_GetPosition(self.as_ptr())) }
+    }
+    fn get_row_or_col(&self) -> c_int {
+        unsafe { ffi::wxGridSizeEvent_GetRowOrCol(self.as_ptr()) }
+    }
+    fn meta_down(&self) -> bool {
+        unsafe { ffi::wxGridSizeEvent_MetaDown(self.as_ptr()) }
+    }
+    fn shift_down(&self) -> bool {
+        unsafe { ffi::wxGridSizeEvent_ShiftDown(self.as_ptr()) }
+    }
+}
+
+// wxGridSizer
+pub trait GridSizerMethods: SizerMethods {
+    fn get_cols(&self) -> c_int {
+        unsafe { ffi::wxGridSizer_GetCols(self.as_ptr()) }
+    }
+    fn get_rows(&self) -> c_int {
+        unsafe { ffi::wxGridSizer_GetRows(self.as_ptr()) }
+    }
+    fn get_effective_cols_count(&self) -> c_int {
+        unsafe { ffi::wxGridSizer_GetEffectiveColsCount(self.as_ptr()) }
+    }
+    fn get_effective_rows_count(&self) -> c_int {
+        unsafe { ffi::wxGridSizer_GetEffectiveRowsCount(self.as_ptr()) }
+    }
+    fn get_h_gap(&self) -> c_int {
+        unsafe { ffi::wxGridSizer_GetHGap(self.as_ptr()) }
+    }
+    fn get_v_gap(&self) -> c_int {
+        unsafe { ffi::wxGridSizer_GetVGap(self.as_ptr()) }
+    }
+    fn set_cols(&self, cols: c_int) {
+        unsafe { ffi::wxGridSizer_SetCols(self.as_ptr(), cols) }
+    }
+    fn set_h_gap(&self, gap: c_int) {
+        unsafe { ffi::wxGridSizer_SetHGap(self.as_ptr(), gap) }
+    }
+    fn set_rows(&self, rows: c_int) {
+        unsafe { ffi::wxGridSizer_SetRows(self.as_ptr(), rows) }
+    }
+    fn set_v_gap(&self, gap: c_int) {
+        unsafe { ffi::wxGridSizer_SetVGap(self.as_ptr(), gap) }
+    }
+}
+
+// wxGridTableBase
+pub trait GridTableBaseMethods: ObjectMethods {
+    fn is_empty_cell(&self, row: c_int, col: c_int) -> bool {
+        unsafe { ffi::wxGridTableBase_IsEmptyCell(self.as_ptr(), row, col) }
+    }
+    fn is_empty<G: GridCellCoordsMethods>(&self, coords: &G) -> bool {
+        unsafe {
+            let coords = coords.as_ptr();
+            ffi::wxGridTableBase_IsEmpty(self.as_ptr(), coords)
+        }
+    }
+    fn get_value(&self, row: c_int, col: c_int) -> String {
+        unsafe { WxString::from_ptr(ffi::wxGridTableBase_GetValue(self.as_ptr(), row, col)).into() }
+    }
+    fn set_value(&self, row: c_int, col: c_int, value: &str) {
+        unsafe {
+            let value = WxString::from(value);
+            let value = value.as_ptr();
+            ffi::wxGridTableBase_SetValue(self.as_ptr(), row, col, value)
+        }
+    }
+    fn get_type_name(&self, row: c_int, col: c_int) -> String {
+        unsafe {
+            WxString::from_ptr(ffi::wxGridTableBase_GetTypeName(self.as_ptr(), row, col)).into()
+        }
+    }
+    fn can_get_value_as(&self, row: c_int, col: c_int, type_name: &str) -> bool {
+        unsafe {
+            let type_name = WxString::from(type_name);
+            let type_name = type_name.as_ptr();
+            ffi::wxGridTableBase_CanGetValueAs(self.as_ptr(), row, col, type_name)
+        }
+    }
+    fn can_set_value_as(&self, row: c_int, col: c_int, type_name: &str) -> bool {
+        unsafe {
+            let type_name = WxString::from(type_name);
+            let type_name = type_name.as_ptr();
+            ffi::wxGridTableBase_CanSetValueAs(self.as_ptr(), row, col, type_name)
+        }
+    }
+    fn get_value_as_long(&self, row: c_int, col: c_int) -> c_long {
+        unsafe { ffi::wxGridTableBase_GetValueAsLong(self.as_ptr(), row, col) }
+    }
+    fn get_value_as_double(&self, row: c_int, col: c_int) -> c_double {
+        unsafe { ffi::wxGridTableBase_GetValueAsDouble(self.as_ptr(), row, col) }
+    }
+    fn get_value_as_bool(&self, row: c_int, col: c_int) -> bool {
+        unsafe { ffi::wxGridTableBase_GetValueAsBool(self.as_ptr(), row, col) }
+    }
+    fn get_value_as_custom(&self, row: c_int, col: c_int, type_name: &str) -> *mut c_void {
+        unsafe {
+            let type_name = WxString::from(type_name);
+            let type_name = type_name.as_ptr();
+            ffi::wxGridTableBase_GetValueAsCustom(self.as_ptr(), row, col, type_name)
+        }
+    }
+    fn set_value_as_long(&self, row: c_int, col: c_int, value: c_long) {
+        unsafe { ffi::wxGridTableBase_SetValueAsLong(self.as_ptr(), row, col, value) }
+    }
+    fn set_value_as_double(&self, row: c_int, col: c_int, value: c_double) {
+        unsafe { ffi::wxGridTableBase_SetValueAsDouble(self.as_ptr(), row, col, value) }
+    }
+    fn set_value_as_bool(&self, row: c_int, col: c_int, value: bool) {
+        unsafe { ffi::wxGridTableBase_SetValueAsBool(self.as_ptr(), row, col, value) }
+    }
+    fn set_value_as_custom(&self, row: c_int, col: c_int, type_name: &str, value: *mut c_void) {
+        unsafe {
+            let type_name = WxString::from(type_name);
+            let type_name = type_name.as_ptr();
+            ffi::wxGridTableBase_SetValueAsCustom(self.as_ptr(), row, col, type_name, value)
+        }
+    }
+    fn set_view(&self, grid: *mut c_void) {
+        unsafe { ffi::wxGridTableBase_SetView(self.as_ptr(), grid) }
+    }
+    fn get_view(&self) -> *mut c_void {
+        unsafe { ffi::wxGridTableBase_GetView(self.as_ptr()) }
+    }
+    fn clear(&self) {
+        unsafe { ffi::wxGridTableBase_Clear(self.as_ptr()) }
+    }
+    fn insert_rows(&self, pos: usize, num_rows: usize) -> bool {
+        unsafe { ffi::wxGridTableBase_InsertRows(self.as_ptr(), pos, num_rows) }
+    }
+    fn append_rows(&self, num_rows: usize) -> bool {
+        unsafe { ffi::wxGridTableBase_AppendRows(self.as_ptr(), num_rows) }
+    }
+    fn delete_rows(&self, pos: usize, num_rows: usize) -> bool {
+        unsafe { ffi::wxGridTableBase_DeleteRows(self.as_ptr(), pos, num_rows) }
+    }
+    fn insert_cols(&self, pos: usize, num_cols: usize) -> bool {
+        unsafe { ffi::wxGridTableBase_InsertCols(self.as_ptr(), pos, num_cols) }
+    }
+    fn append_cols(&self, num_cols: usize) -> bool {
+        unsafe { ffi::wxGridTableBase_AppendCols(self.as_ptr(), num_cols) }
+    }
+    fn delete_cols(&self, pos: usize, num_cols: usize) -> bool {
+        unsafe { ffi::wxGridTableBase_DeleteCols(self.as_ptr(), pos, num_cols) }
+    }
+    fn get_row_label_value(&self, row: c_int) -> String {
+        unsafe {
+            WxString::from_ptr(ffi::wxGridTableBase_GetRowLabelValue(self.as_ptr(), row)).into()
+        }
+    }
+    fn get_col_label_value(&self, col: c_int) -> String {
+        unsafe {
+            WxString::from_ptr(ffi::wxGridTableBase_GetColLabelValue(self.as_ptr(), col)).into()
+        }
+    }
+    fn get_corner_label_value(&self) -> String {
+        unsafe {
+            WxString::from_ptr(ffi::wxGridTableBase_GetCornerLabelValue(self.as_ptr())).into()
+        }
+    }
+    fn set_row_label_value(&self, row: c_int, label: &str) {
+        unsafe {
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            ffi::wxGridTableBase_SetRowLabelValue(self.as_ptr(), row, label)
+        }
+    }
+    fn set_col_label_value(&self, col: c_int, label: &str) {
+        unsafe {
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            ffi::wxGridTableBase_SetColLabelValue(self.as_ptr(), col, label)
+        }
+    }
+    // BLOCKED: fn SetCornerLabelValue()
+    fn set_attr_provider<G: GridCellAttrProviderMethods>(&self, attr_provider: Option<&G>) {
+        unsafe {
+            let attr_provider = match attr_provider {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxGridTableBase_SetAttrProvider(self.as_ptr(), attr_provider)
+        }
+    }
+    fn get_attr_provider(&self) -> Option<GridCellAttrProviderIsOwned<false>> {
+        unsafe {
+            GridCellAttrProvider::option_from(ffi::wxGridTableBase_GetAttrProvider(self.as_ptr()))
+        }
+    }
+    // NOT_SUPPORTED: fn GetAttr()
+    // NOT_SUPPORTED: fn GetAttrPtr()
+    fn set_attr<G: GridCellAttrMethods>(&self, attr: Option<&G>, row: c_int, col: c_int) {
+        unsafe {
+            let attr = match attr {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxGridTableBase_SetAttr(self.as_ptr(), attr, row, col)
+        }
+    }
+    fn set_row_attr<G: GridCellAttrMethods>(&self, attr: Option<&G>, row: c_int) {
+        unsafe {
+            let attr = match attr {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxGridTableBase_SetRowAttr(self.as_ptr(), attr, row)
+        }
+    }
+    fn set_col_attr<G: GridCellAttrMethods>(&self, attr: Option<&G>, col: c_int) {
+        unsafe {
+            let attr = match attr {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxGridTableBase_SetColAttr(self.as_ptr(), attr, col)
+        }
+    }
+    fn can_have_attributes(&self) -> bool {
+        unsafe { ffi::wxGridTableBase_CanHaveAttributes(self.as_ptr()) }
+    }
+    fn can_measure_col_using_same_attr(&self, col: c_int) -> bool {
+        unsafe { ffi::wxGridTableBase_CanMeasureColUsingSameAttr(self.as_ptr(), col) }
+    }
+    // DTOR: fn ~wxGridTableBase()
+    fn get_number_rows(&self) -> c_int {
+        unsafe { ffi::wxGridTableBase_GetNumberRows(self.as_ptr()) }
+    }
+    fn get_number_cols(&self) -> c_int {
+        unsafe { ffi::wxGridTableBase_GetNumberCols(self.as_ptr()) }
+    }
+    fn get_rows_count(&self) -> c_int {
+        unsafe { ffi::wxGridTableBase_GetRowsCount(self.as_ptr()) }
+    }
+    fn get_cols_count(&self) -> c_int {
+        unsafe { ffi::wxGridTableBase_GetColsCount(self.as_ptr()) }
+    }
+}
+
+// wxGridUpdateLocker
+pub trait GridUpdateLockerMethods: WxRustMethods {
+    // DTOR: fn ~wxGridUpdateLocker()
+    fn create(&self, grid: *mut c_void) {
+        unsafe { ffi::wxGridUpdateLocker_Create(self.as_ptr(), grid) }
+    }
+}
+
+// wxHScrolledWindow
+pub trait HScrolledWindowMethods: PanelMethods {}
+
+// wxHTMLDataObject
+pub trait HTMLDataObjectMethods: DataObjectSimpleMethods {
+    fn get_html(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxHTMLDataObject_GetHTML(self.as_ptr())).into() }
+    }
+    fn set_html(&self, html: &str) {
+        unsafe {
+            let html = WxString::from(html);
+            let html = html.as_ptr();
+            ffi::wxHTMLDataObject_SetHTML(self.as_ptr(), html)
+        }
+    }
+}
+
+// wxHVScrolledWindow
+pub trait HVScrolledWindowMethods: PanelMethods {}
 
 // wxHeaderColumn
 pub trait HeaderColumnMethods: WxRustMethods {
@@ -2387,6 +11713,28 @@ pub trait HeaderCtrlMethods: ControlMethods {
     }
 }
 
+// wxHeaderCtrlEvent
+pub trait HeaderCtrlEventMethods: NotifyEventMethods {
+    fn get_column(&self) -> c_int {
+        unsafe { ffi::wxHeaderCtrlEvent_GetColumn(self.as_ptr()) }
+    }
+    fn set_column(&self, col: c_int) {
+        unsafe { ffi::wxHeaderCtrlEvent_SetColumn(self.as_ptr(), col) }
+    }
+    fn get_width(&self) -> c_int {
+        unsafe { ffi::wxHeaderCtrlEvent_GetWidth(self.as_ptr()) }
+    }
+    fn set_width(&self, width: c_int) {
+        unsafe { ffi::wxHeaderCtrlEvent_SetWidth(self.as_ptr(), width) }
+    }
+    fn get_new_order(&self) -> c_uint {
+        unsafe { ffi::wxHeaderCtrlEvent_GetNewOrder(self.as_ptr()) }
+    }
+    fn set_new_order(&self, order: c_uint) {
+        unsafe { ffi::wxHeaderCtrlEvent_SetNewOrder(self.as_ptr(), order) }
+    }
+}
+
 // wxHeaderCtrlSimple
 pub trait HeaderCtrlSimpleMethods: HeaderCtrlMethods {
     fn insert_column<H: HeaderColumnSimpleMethods>(&self, col: &H, idx: c_uint) {
@@ -2415,6 +11763,225 @@ pub trait HeaderCtrlSimpleMethods: HeaderCtrlMethods {
     }
     fn remove_sort_indicator(&self) {
         unsafe { ffi::wxHeaderCtrlSimple_RemoveSortIndicator(self.as_ptr()) }
+    }
+}
+
+// wxHelpController
+pub trait HelpControllerMethods: HelpControllerBaseMethods {}
+
+// wxHelpControllerBase
+pub trait HelpControllerBaseMethods: ObjectMethods {
+    // DTOR: fn ~wxHelpControllerBase()
+    fn display_block(&self, block_no: c_long) -> bool {
+        unsafe { ffi::wxHelpControllerBase_DisplayBlock(self.as_ptr(), block_no) }
+    }
+    fn display_contents(&self) -> bool {
+        unsafe { ffi::wxHelpControllerBase_DisplayContents(self.as_ptr()) }
+    }
+    fn display_context_popup(&self, context_id: c_int) -> bool {
+        unsafe { ffi::wxHelpControllerBase_DisplayContextPopup(self.as_ptr(), context_id) }
+    }
+    fn display_section_str(&self, section: &str) -> bool {
+        unsafe {
+            let section = WxString::from(section);
+            let section = section.as_ptr();
+            ffi::wxHelpControllerBase_DisplaySection(self.as_ptr(), section)
+        }
+    }
+    fn display_section_int(&self, section_no: c_int) -> bool {
+        unsafe { ffi::wxHelpControllerBase_DisplaySection1(self.as_ptr(), section_no) }
+    }
+    fn display_text_popup<P: PointMethods>(&self, text: &str, pos: &P) -> bool {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let pos = pos.as_ptr();
+            ffi::wxHelpControllerBase_DisplayTextPopup(self.as_ptr(), text, pos)
+        }
+    }
+    fn get_frame_parameters<S: SizeMethods, P: PointMethods>(
+        &self,
+        size: Option<&S>,
+        pos: Option<&P>,
+        new_frame_each_time: *mut c_void,
+    ) -> WeakRef<Frame> {
+        unsafe {
+            let size = match size {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = match pos {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            WeakRef::<Frame>::from(ffi::wxHelpControllerBase_GetFrameParameters(
+                self.as_ptr(),
+                size,
+                pos,
+                new_frame_each_time,
+            ))
+        }
+    }
+    fn get_parent_window(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxHelpControllerBase_GetParentWindow(self.as_ptr())) }
+    }
+    fn initialize(&self, file: &str) -> bool {
+        unsafe {
+            let file = WxString::from(file);
+            let file = file.as_ptr();
+            ffi::wxHelpControllerBase_Initialize(self.as_ptr(), file)
+        }
+    }
+    // NOT_SUPPORTED: fn KeywordSearch()
+    fn load_file(&self, file: &str) -> bool {
+        unsafe {
+            let file = WxString::from(file);
+            let file = file.as_ptr();
+            ffi::wxHelpControllerBase_LoadFile(self.as_ptr(), file)
+        }
+    }
+    fn on_quit(&self) {
+        unsafe { ffi::wxHelpControllerBase_OnQuit(self.as_ptr()) }
+    }
+    fn quit(&self) -> bool {
+        unsafe { ffi::wxHelpControllerBase_Quit(self.as_ptr()) }
+    }
+    fn set_frame_parameters<S: SizeMethods, P: PointMethods>(
+        &self,
+        title_format: &str,
+        size: &S,
+        pos: &P,
+        new_frame_each_time: bool,
+    ) {
+        unsafe {
+            let title_format = WxString::from(title_format);
+            let title_format = title_format.as_ptr();
+            let size = size.as_ptr();
+            let pos = pos.as_ptr();
+            ffi::wxHelpControllerBase_SetFrameParameters(
+                self.as_ptr(),
+                title_format,
+                size,
+                pos,
+                new_frame_each_time,
+            )
+        }
+    }
+    fn set_parent_window<W: WindowMethods>(&self, parent_window: Option<&W>) {
+        unsafe {
+            let parent_window = match parent_window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxHelpControllerBase_SetParentWindow(self.as_ptr(), parent_window)
+        }
+    }
+    fn set_viewer(&self, viewer: &str, flags: c_long) {
+        unsafe {
+            let viewer = WxString::from(viewer);
+            let viewer = viewer.as_ptr();
+            ffi::wxHelpControllerBase_SetViewer(self.as_ptr(), viewer, flags)
+        }
+    }
+}
+
+// wxHelpControllerHelpProvider
+pub trait HelpControllerHelpProviderMethods: SimpleHelpProviderMethods {
+    fn get_help_controller(&self) -> Option<HelpControllerBaseIsOwned<false>> {
+        unsafe {
+            HelpControllerBase::option_from(ffi::wxHelpControllerHelpProvider_GetHelpController(
+                self.as_ptr(),
+            ))
+        }
+    }
+    fn set_help_controller<H: HelpControllerBaseMethods>(&self, hc: Option<&H>) {
+        unsafe {
+            let hc = match hc {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxHelpControllerHelpProvider_SetHelpController(self.as_ptr(), hc)
+        }
+    }
+}
+
+// wxHelpEvent
+pub trait HelpEventMethods: CommandEventMethods {
+    // NOT_SUPPORTED: fn GetOrigin()
+    fn get_position(&self) -> PointIsOwned<false> {
+        unsafe { PointIsOwned::from_ptr(ffi::wxHelpEvent_GetPosition(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn SetOrigin()
+    fn set_position<P: PointMethods>(&self, pt: &P) {
+        unsafe {
+            let pt = pt.as_ptr();
+            ffi::wxHelpEvent_SetPosition(self.as_ptr(), pt)
+        }
+    }
+}
+
+// wxHelpProvider
+pub trait HelpProviderMethods: WxRustMethods {
+    // DTOR: fn ~wxHelpProvider()
+    fn add_help_window<W: WindowMethods>(&self, window: Option<&W>, text: &str) {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxHelpProvider_AddHelp(self.as_ptr(), window, text)
+        }
+    }
+    fn add_help_windowid(&self, id: c_int, text: &str) {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxHelpProvider_AddHelp1(self.as_ptr(), id, text)
+        }
+    }
+    fn get_help<W: WindowMethods>(&self, window: Option<&W>) -> String {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            WxString::from_ptr(ffi::wxHelpProvider_GetHelp(self.as_ptr(), window)).into()
+        }
+    }
+    fn remove_help<W: WindowMethods>(&self, window: Option<&W>) {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxHelpProvider_RemoveHelp(self.as_ptr(), window)
+        }
+    }
+    fn show_help<W: WindowMethods>(&self, window: Option<&W>) -> bool {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxHelpProvider_ShowHelp(self.as_ptr(), window)
+        }
+    }
+    // NOT_SUPPORTED: fn ShowHelpAtPoint()
+    fn get() -> Option<HelpProviderIsOwned<false>> {
+        unsafe { HelpProvider::option_from(ffi::wxHelpProvider_Get()) }
+    }
+    fn set<H: HelpProviderMethods>(
+        help_provider: Option<&H>,
+    ) -> Option<HelpProviderIsOwned<false>> {
+        unsafe {
+            let help_provider = match help_provider {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            HelpProvider::option_from(ffi::wxHelpProvider_Set(help_provider))
+        }
     }
 }
 
@@ -2502,6 +12069,23 @@ pub trait HyperlinkCtrlMethods: ControlMethods {
     }
 }
 
+// wxHyperlinkEvent
+pub trait HyperlinkEventMethods: CommandEventMethods {
+    fn get_url(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxHyperlinkEvent_GetURL(self.as_ptr())).into() }
+    }
+    fn set_url(&self, url: &str) {
+        unsafe {
+            let url = WxString::from(url);
+            let url = url.as_ptr();
+            ffi::wxHyperlinkEvent_SetURL(self.as_ptr(), url)
+        }
+    }
+}
+
+// wxIFFHandler
+pub trait IFFHandlerMethods: ImageHandlerMethods {}
+
 // wxIcon
 pub trait IconMethods: GDIObjectMethods {
     // DTOR: fn ~wxIcon()
@@ -2553,6 +12137,795 @@ pub trait IconMethods: GDIObjectMethods {
     // BLOCKED: fn operator=()
 }
 
+// wxIconBundle
+pub trait IconBundleMethods: GDIObjectMethods {
+    // DTOR: fn ~wxIconBundle()
+    // NOT_SUPPORTED: fn AddIcon()
+    // NOT_SUPPORTED: fn AddIcon1()
+    // NOT_SUPPORTED: fn AddIcon2()
+    fn add_icon<I: IconMethods>(&self, icon: &I) {
+        unsafe {
+            let icon = icon.as_ptr();
+            ffi::wxIconBundle_AddIcon3(self.as_ptr(), icon)
+        }
+    }
+    fn get_icon_size<S: SizeMethods>(&self, size: &S, flags: c_int) -> Icon {
+        unsafe {
+            let size = size.as_ptr();
+            Icon::from_ptr(ffi::wxIconBundle_GetIcon(self.as_ptr(), size, flags))
+        }
+    }
+    fn get_icon_coord(&self, size: c_int, flags: c_int) -> Icon {
+        unsafe { Icon::from_ptr(ffi::wxIconBundle_GetIcon1(self.as_ptr(), size, flags)) }
+    }
+    fn get_icon_of_exact_size<S: SizeMethods>(&self, size: &S) -> Icon {
+        unsafe {
+            let size = size.as_ptr();
+            Icon::from_ptr(ffi::wxIconBundle_GetIconOfExactSize(self.as_ptr(), size))
+        }
+    }
+    fn get_icon_count(&self) -> usize {
+        unsafe { ffi::wxIconBundle_GetIconCount(self.as_ptr()) }
+    }
+    fn get_icon_by_index(&self, n: usize) -> Icon {
+        unsafe { Icon::from_ptr(ffi::wxIconBundle_GetIconByIndex(self.as_ptr(), n)) }
+    }
+    fn is_empty(&self) -> bool {
+        unsafe { ffi::wxIconBundle_IsEmpty(self.as_ptr()) }
+    }
+    // BLOCKED: fn operator=()
+}
+
+// wxIconizeEvent
+pub trait IconizeEventMethods: EventMethods {
+    fn is_iconized(&self) -> bool {
+        unsafe { ffi::wxIconizeEvent_IsIconized(self.as_ptr()) }
+    }
+    fn iconized(&self) -> bool {
+        unsafe { ffi::wxIconizeEvent_Iconized(self.as_ptr()) }
+    }
+}
+
+// wxIdManager
+pub trait IdManagerMethods: WxRustMethods {
+    fn reserve_id(count: c_int) -> c_int {
+        unsafe { ffi::wxIdManager_ReserveId(count) }
+    }
+    fn unreserve_id(id: c_int, count: c_int) {
+        unsafe { ffi::wxIdManager_UnreserveId(id, count) }
+    }
+}
+
+// wxImage
+pub trait ImageMethods: ObjectMethods {
+    fn copy(&self) -> Image {
+        unsafe { Image::from_ptr(ffi::wxImage_Copy(self.as_ptr())) }
+    }
+    fn create_int_bool(&self, width: c_int, height: c_int, clear: bool) -> bool {
+        unsafe { ffi::wxImage_Create(self.as_ptr(), width, height, clear) }
+    }
+    fn create_size_bool<S: SizeMethods>(&self, sz: &S, clear: bool) -> bool {
+        unsafe {
+            let sz = sz.as_ptr();
+            ffi::wxImage_Create1(self.as_ptr(), sz, clear)
+        }
+    }
+    fn create_int_uchar_bool(
+        &self,
+        width: c_int,
+        height: c_int,
+        data: *mut c_void,
+        static_data: bool,
+    ) -> bool {
+        unsafe { ffi::wxImage_Create2(self.as_ptr(), width, height, data, static_data) }
+    }
+    fn create_size_uchar_bool<S: SizeMethods>(
+        &self,
+        sz: &S,
+        data: *mut c_void,
+        static_data: bool,
+    ) -> bool {
+        unsafe {
+            let sz = sz.as_ptr();
+            ffi::wxImage_Create3(self.as_ptr(), sz, data, static_data)
+        }
+    }
+    fn create_int_uchar_uchar(
+        &self,
+        width: c_int,
+        height: c_int,
+        data: *mut c_void,
+        alpha: *mut c_void,
+        static_data: bool,
+    ) -> bool {
+        unsafe { ffi::wxImage_Create4(self.as_ptr(), width, height, data, alpha, static_data) }
+    }
+    fn create_size_uchar_uchar<S: SizeMethods>(
+        &self,
+        sz: &S,
+        data: *mut c_void,
+        alpha: *mut c_void,
+        static_data: bool,
+    ) -> bool {
+        unsafe {
+            let sz = sz.as_ptr();
+            ffi::wxImage_Create5(self.as_ptr(), sz, data, alpha, static_data)
+        }
+    }
+    // NOT_SUPPORTED: fn Clear()
+    fn destroy(&self) {
+        unsafe { ffi::wxImage_Destroy(self.as_ptr()) }
+    }
+    fn init_alpha(&self) {
+        unsafe { ffi::wxImage_InitAlpha(self.as_ptr()) }
+    }
+    fn blur(&self, blur_radius: c_int) -> Image {
+        unsafe { Image::from_ptr(ffi::wxImage_Blur(self.as_ptr(), blur_radius)) }
+    }
+    fn blur_horizontal(&self, blur_radius: c_int) -> Image {
+        unsafe { Image::from_ptr(ffi::wxImage_BlurHorizontal(self.as_ptr(), blur_radius)) }
+    }
+    fn blur_vertical(&self, blur_radius: c_int) -> Image {
+        unsafe { Image::from_ptr(ffi::wxImage_BlurVertical(self.as_ptr(), blur_radius)) }
+    }
+    fn mirror(&self, horizontally: bool) -> Image {
+        unsafe { Image::from_ptr(ffi::wxImage_Mirror(self.as_ptr(), horizontally)) }
+    }
+    // NOT_SUPPORTED: fn Paste()
+    // NOT_SUPPORTED: fn Replace()
+    // NOT_SUPPORTED: fn Rescale()
+    fn resize<S: SizeMethods, P: PointMethods>(
+        &self,
+        size: &S,
+        pos: &P,
+        red: c_int,
+        green: c_int,
+        blue: c_int,
+    ) -> &Self {
+        unsafe {
+            let size = size.as_ptr();
+            let pos = pos.as_ptr();
+            ffi::wxImage_Resize(self.as_ptr(), size, pos, red, green, blue);
+            &self
+        }
+    }
+    fn rotate<P: PointMethods, P2: PointMethods>(
+        &self,
+        angle: c_double,
+        rotation_centre: &P,
+        interpolating: bool,
+        offset_after_rotation: Option<&P2>,
+    ) -> Image {
+        unsafe {
+            let rotation_centre = rotation_centre.as_ptr();
+            let offset_after_rotation = match offset_after_rotation {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            Image::from_ptr(ffi::wxImage_Rotate(
+                self.as_ptr(),
+                angle,
+                rotation_centre,
+                interpolating,
+                offset_after_rotation,
+            ))
+        }
+    }
+    fn rotate90(&self, clockwise: bool) -> Image {
+        unsafe { Image::from_ptr(ffi::wxImage_Rotate90(self.as_ptr(), clockwise)) }
+    }
+    fn rotate180(&self) -> Image {
+        unsafe { Image::from_ptr(ffi::wxImage_Rotate180(self.as_ptr())) }
+    }
+    fn rotate_hue(&self, angle: c_double) {
+        unsafe { ffi::wxImage_RotateHue(self.as_ptr(), angle) }
+    }
+    fn change_saturation(&self, factor: c_double) {
+        unsafe { ffi::wxImage_ChangeSaturation(self.as_ptr(), factor) }
+    }
+    fn change_brightness(&self, factor: c_double) {
+        unsafe { ffi::wxImage_ChangeBrightness(self.as_ptr(), factor) }
+    }
+    fn change_hsv(&self, angle_h: c_double, factor_s: c_double, factor_v: c_double) {
+        unsafe { ffi::wxImage_ChangeHSV(self.as_ptr(), angle_h, factor_s, factor_v) }
+    }
+    // NOT_SUPPORTED: fn Scale()
+    fn size<S: SizeMethods, P: PointMethods>(
+        &self,
+        size: &S,
+        pos: &P,
+        red: c_int,
+        green: c_int,
+        blue: c_int,
+    ) -> Image {
+        unsafe {
+            let size = size.as_ptr();
+            let pos = pos.as_ptr();
+            Image::from_ptr(ffi::wxImage_Size(
+                self.as_ptr(),
+                size,
+                pos,
+                red,
+                green,
+                blue,
+            ))
+        }
+    }
+    // NOT_SUPPORTED: fn ConvertAlphaToMask()
+    // NOT_SUPPORTED: fn ConvertAlphaToMask1()
+    fn convert_to_greyscale_double(
+        &self,
+        weight_r: c_double,
+        weight_g: c_double,
+        weight_b: c_double,
+    ) -> Image {
+        unsafe {
+            Image::from_ptr(ffi::wxImage_ConvertToGreyscale(
+                self.as_ptr(),
+                weight_r,
+                weight_g,
+                weight_b,
+            ))
+        }
+    }
+    fn convert_to_greyscale(&self) -> Image {
+        unsafe { Image::from_ptr(ffi::wxImage_ConvertToGreyscale1(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn ConvertToMono()
+    // NOT_SUPPORTED: fn ConvertToDisabled()
+    fn change_lightness(&self, alpha: c_int) -> Image {
+        unsafe { Image::from_ptr(ffi::wxImage_ChangeLightness(self.as_ptr(), alpha)) }
+    }
+    // NOT_SUPPORTED: fn ComputeHistogram()
+    // NOT_SUPPORTED: fn FindFirstUnusedColour()
+    // BLOCKED: fn operator=()
+    fn get_alpha(&self) -> *mut c_void {
+        unsafe { ffi::wxImage_GetAlpha(self.as_ptr()) }
+    }
+    fn get_data(&self) -> *mut c_void {
+        unsafe { ffi::wxImage_GetData(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetAlpha1()
+    // NOT_SUPPORTED: fn GetRed()
+    // NOT_SUPPORTED: fn GetGreen()
+    // NOT_SUPPORTED: fn GetBlue()
+    // NOT_SUPPORTED: fn GetMaskRed()
+    // NOT_SUPPORTED: fn GetMaskGreen()
+    // NOT_SUPPORTED: fn GetMaskBlue()
+    fn get_width(&self) -> c_int {
+        unsafe { ffi::wxImage_GetWidth(self.as_ptr()) }
+    }
+    fn get_height(&self) -> c_int {
+        unsafe { ffi::wxImage_GetHeight(self.as_ptr()) }
+    }
+    fn get_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxImage_GetSize(self.as_ptr())) }
+    }
+    fn get_option(&self, name: &str) -> String {
+        unsafe {
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            WxString::from_ptr(ffi::wxImage_GetOption(self.as_ptr(), name)).into()
+        }
+    }
+    fn get_option_int(&self, name: &str) -> c_int {
+        unsafe {
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxImage_GetOptionInt(self.as_ptr(), name)
+        }
+    }
+    fn get_or_find_mask_colour(&self, r: *mut c_void, g: *mut c_void, b: *mut c_void) -> bool {
+        unsafe { ffi::wxImage_GetOrFindMaskColour(self.as_ptr(), r, g, b) }
+    }
+    fn get_palette(&self) -> PaletteIsOwned<false> {
+        unsafe { PaletteIsOwned::from_ptr(ffi::wxImage_GetPalette(self.as_ptr())) }
+    }
+    fn get_sub_image<R: RectMethods>(&self, rect: &R) -> Image {
+        unsafe {
+            let rect = rect.as_ptr();
+            Image::from_ptr(ffi::wxImage_GetSubImage(self.as_ptr(), rect))
+        }
+    }
+    // NOT_SUPPORTED: fn GetType()
+    fn has_alpha(&self) -> bool {
+        unsafe { ffi::wxImage_HasAlpha(self.as_ptr()) }
+    }
+    fn has_mask(&self) -> bool {
+        unsafe { ffi::wxImage_HasMask(self.as_ptr()) }
+    }
+    fn has_option(&self, name: &str) -> bool {
+        unsafe {
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxImage_HasOption(self.as_ptr(), name)
+        }
+    }
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxImage_IsOk(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn IsTransparent()
+    // NOT_SUPPORTED: fn LoadFile()
+    // NOT_SUPPORTED: fn LoadFile1()
+    fn load_file_str(&self, name: &str, mimetype: &str, index: c_int) -> bool {
+        unsafe {
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            let mimetype = WxString::from(mimetype);
+            let mimetype = mimetype.as_ptr();
+            ffi::wxImage_LoadFile2(self.as_ptr(), name, mimetype, index)
+        }
+    }
+    fn load_file_inputstream(&self, stream: *mut c_void, mimetype: &str, index: c_int) -> bool {
+        unsafe {
+            let mimetype = WxString::from(mimetype);
+            let mimetype = mimetype.as_ptr();
+            ffi::wxImage_LoadFile3(self.as_ptr(), stream, mimetype, index)
+        }
+    }
+    fn save_file_outputstream(&self, stream: *mut c_void, mimetype: &str) -> bool {
+        unsafe {
+            let mimetype = WxString::from(mimetype);
+            let mimetype = mimetype.as_ptr();
+            ffi::wxImage_SaveFile(self.as_ptr(), stream, mimetype)
+        }
+    }
+    // NOT_SUPPORTED: fn SaveFile1()
+    fn save_file_str_str(&self, name: &str, mimetype: &str) -> bool {
+        unsafe {
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            let mimetype = WxString::from(mimetype);
+            let mimetype = mimetype.as_ptr();
+            ffi::wxImage_SaveFile2(self.as_ptr(), name, mimetype)
+        }
+    }
+    fn save_file_str(&self, name: &str) -> bool {
+        unsafe {
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxImage_SaveFile3(self.as_ptr(), name)
+        }
+    }
+    // NOT_SUPPORTED: fn SaveFile4()
+    fn set_alpha(&self, alpha: *mut c_void, static_data: bool) {
+        unsafe { ffi::wxImage_SetAlpha(self.as_ptr(), alpha, static_data) }
+    }
+    // NOT_SUPPORTED: fn SetAlpha1()
+    fn clear_alpha(&self) {
+        unsafe { ffi::wxImage_ClearAlpha(self.as_ptr()) }
+    }
+    fn set_data_bool(&self, data: *mut c_void, static_data: bool) {
+        unsafe { ffi::wxImage_SetData(self.as_ptr(), data, static_data) }
+    }
+    fn set_data_int(
+        &self,
+        data: *mut c_void,
+        new_width: c_int,
+        new_height: c_int,
+        static_data: bool,
+    ) {
+        unsafe { ffi::wxImage_SetData1(self.as_ptr(), data, new_width, new_height, static_data) }
+    }
+    fn set_load_flags(&self, flags: c_int) {
+        unsafe { ffi::wxImage_SetLoadFlags(self.as_ptr(), flags) }
+    }
+    fn set_mask(&self, has_mask: bool) {
+        unsafe { ffi::wxImage_SetMask(self.as_ptr(), has_mask) }
+    }
+    // NOT_SUPPORTED: fn SetMaskColour()
+    // NOT_SUPPORTED: fn SetMaskFromImage()
+    fn set_option_str(&self, name: &str, value: &str) {
+        unsafe {
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            let value = WxString::from(value);
+            let value = value.as_ptr();
+            ffi::wxImage_SetOption(self.as_ptr(), name, value)
+        }
+    }
+    fn set_option_int(&self, name: &str, value: c_int) {
+        unsafe {
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxImage_SetOption1(self.as_ptr(), name, value)
+        }
+    }
+    fn set_palette<P: PaletteMethods>(&self, palette: &P) {
+        unsafe {
+            let palette = palette.as_ptr();
+            ffi::wxImage_SetPalette(self.as_ptr(), palette)
+        }
+    }
+    // NOT_SUPPORTED: fn SetRGB()
+    // NOT_SUPPORTED: fn SetRGB1()
+    // NOT_SUPPORTED: fn SetType()
+    fn set_default_load_flags(flags: c_int) {
+        unsafe { ffi::wxImage_SetDefaultLoadFlags(flags) }
+    }
+    fn get_load_flags(&self) -> c_int {
+        unsafe { ffi::wxImage_GetLoadFlags(self.as_ptr()) }
+    }
+    fn add_handler<I: ImageHandlerMethods>(handler: Option<&I>) {
+        unsafe {
+            let handler = match handler {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxImage_AddHandler(handler)
+        }
+    }
+    fn clean_up_handlers() {
+        unsafe { ffi::wxImage_CleanUpHandlers() }
+    }
+    fn find_handler(name: &str) -> Option<ImageHandlerIsOwned<false>> {
+        unsafe {
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ImageHandler::option_from(ffi::wxImage_FindHandler(name))
+        }
+    }
+    // NOT_SUPPORTED: fn FindHandler1()
+    // NOT_SUPPORTED: fn FindHandler2()
+    fn find_handler_mime(mimetype: &str) -> Option<ImageHandlerIsOwned<false>> {
+        unsafe {
+            let mimetype = WxString::from(mimetype);
+            let mimetype = mimetype.as_ptr();
+            ImageHandler::option_from(ffi::wxImage_FindHandlerMime(mimetype))
+        }
+    }
+    fn get_handlers() -> *mut c_void {
+        unsafe { ffi::wxImage_GetHandlers() }
+    }
+    fn init_standard_handlers() {
+        unsafe { ffi::wxImage_InitStandardHandlers() }
+    }
+    fn insert_handler<I: ImageHandlerMethods>(handler: Option<&I>) {
+        unsafe {
+            let handler = match handler {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxImage_InsertHandler(handler)
+        }
+    }
+    fn remove_handler(name: &str) -> bool {
+        unsafe {
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxImage_RemoveHandler(name)
+        }
+    }
+    fn can_read_str(filename: &str) -> bool {
+        unsafe {
+            let filename = WxString::from(filename);
+            let filename = filename.as_ptr();
+            ffi::wxImage_CanRead(filename)
+        }
+    }
+    fn can_read_inputstream(stream: *mut c_void) -> bool {
+        unsafe { ffi::wxImage_CanRead1(stream) }
+    }
+    fn get_default_load_flags() -> c_int {
+        unsafe { ffi::wxImage_GetDefaultLoadFlags() }
+    }
+    // NOT_SUPPORTED: fn GetImageCount()
+    // NOT_SUPPORTED: fn GetImageCount1()
+    fn get_image_ext_wildcard() -> String {
+        unsafe { WxString::from_ptr(ffi::wxImage_GetImageExtWildcard()).into() }
+    }
+    fn rg_bto_hsv<I: Image::RGBValueMethods>(rgb: &I) -> Image::HSVValue {
+        unsafe {
+            let rgb = rgb.as_ptr();
+            Image::HSVValue::from_ptr(ffi::wxImage_RGBtoHSV(rgb))
+        }
+    }
+    fn hs_vto_rgb<I: Image::HSVValueMethods>(hsv: &I) -> Image::RGBValue {
+        unsafe {
+            let hsv = hsv.as_ptr();
+            Image::RGBValue::from_ptr(ffi::wxImage_HSVtoRGB(hsv))
+        }
+    }
+    // DTOR: fn ~wxImage()
+}
+
+// wxImageDataObject
+pub trait ImageDataObjectMethods: CustomDataObjectMethods {
+    fn get_image(&self) -> Image {
+        unsafe { Image::from_ptr(ffi::wxImageDataObject_GetImage(self.as_ptr())) }
+    }
+    fn set_image<I: ImageMethods>(&self, image: &I) {
+        unsafe {
+            let image = image.as_ptr();
+            ffi::wxImageDataObject_SetImage(self.as_ptr(), image)
+        }
+    }
+}
+
+// wxImageHandler
+pub trait ImageHandlerMethods: ObjectMethods {
+    // DTOR: fn ~wxImageHandler()
+    fn can_read_inputstream(&self, stream: *mut c_void) -> bool {
+        unsafe { ffi::wxImageHandler_CanRead(self.as_ptr(), stream) }
+    }
+    fn can_read_str(&self, filename: &str) -> bool {
+        unsafe {
+            let filename = WxString::from(filename);
+            let filename = filename.as_ptr();
+            ffi::wxImageHandler_CanRead1(self.as_ptr(), filename)
+        }
+    }
+    fn get_extension(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxImageHandler_GetExtension(self.as_ptr())).into() }
+    }
+    fn get_alt_extensions(&self) -> ArrayStringIsOwned<false> {
+        unsafe { ArrayStringIsOwned::from_ptr(ffi::wxImageHandler_GetAltExtensions(self.as_ptr())) }
+    }
+    fn get_image_count(&self, stream: *mut c_void) -> c_int {
+        unsafe { ffi::wxImageHandler_GetImageCount(self.as_ptr(), stream) }
+    }
+    fn get_mime_type(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxImageHandler_GetMimeType(self.as_ptr())).into() }
+    }
+    fn get_name(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxImageHandler_GetName(self.as_ptr())).into() }
+    }
+    // NOT_SUPPORTED: fn GetType()
+    fn load_file<I: ImageMethods>(
+        &self,
+        image: Option<&I>,
+        stream: *mut c_void,
+        verbose: bool,
+        index: c_int,
+    ) -> bool {
+        unsafe {
+            let image = match image {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxImageHandler_LoadFile(self.as_ptr(), image, stream, verbose, index)
+        }
+    }
+    fn save_file<I: ImageMethods>(
+        &self,
+        image: Option<&I>,
+        stream: *mut c_void,
+        verbose: bool,
+    ) -> bool {
+        unsafe {
+            let image = match image {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxImageHandler_SaveFile(self.as_ptr(), image, stream, verbose)
+        }
+    }
+    fn set_extension(&self, extension: &str) {
+        unsafe {
+            let extension = WxString::from(extension);
+            let extension = extension.as_ptr();
+            ffi::wxImageHandler_SetExtension(self.as_ptr(), extension)
+        }
+    }
+    fn set_alt_extensions<A: ArrayStringMethods>(&self, extensions: &A) {
+        unsafe {
+            let extensions = extensions.as_ptr();
+            ffi::wxImageHandler_SetAltExtensions(self.as_ptr(), extensions)
+        }
+    }
+    fn set_mime_type(&self, mimetype: &str) {
+        unsafe {
+            let mimetype = WxString::from(mimetype);
+            let mimetype = mimetype.as_ptr();
+            ffi::wxImageHandler_SetMimeType(self.as_ptr(), mimetype)
+        }
+    }
+    fn set_name(&self, name: &str) {
+        unsafe {
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxImageHandler_SetName(self.as_ptr(), name)
+        }
+    }
+    // NOT_SUPPORTED: fn SetType()
+    fn get_library_version_info() -> VersionInfo {
+        unsafe { VersionInfo::from_ptr(ffi::wxImageHandler_GetLibraryVersionInfo()) }
+    }
+}
+
+// wxImageList
+pub trait ImageListMethods: ObjectMethods {
+    fn add_bitmap_bitmap<B: BitmapMethods, B2: BitmapMethods>(
+        &self,
+        bitmap: &B,
+        mask: &B2,
+    ) -> c_int {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            let mask = mask.as_ptr();
+            ffi::wxImageList_Add(self.as_ptr(), bitmap, mask)
+        }
+    }
+    fn add_bitmap_colour<B: BitmapMethods, C: ColourMethods>(
+        &self,
+        bitmap: &B,
+        mask_colour: &C,
+    ) -> c_int {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            let mask_colour = mask_colour.as_ptr();
+            ffi::wxImageList_Add1(self.as_ptr(), bitmap, mask_colour)
+        }
+    }
+    fn add_icon<I: IconMethods>(&self, icon: &I) -> c_int {
+        unsafe {
+            let icon = icon.as_ptr();
+            ffi::wxImageList_Add2(self.as_ptr(), icon)
+        }
+    }
+    fn create(&self, width: c_int, height: c_int, mask: bool, initial_count: c_int) -> bool {
+        unsafe { ffi::wxImageList_Create(self.as_ptr(), width, height, mask, initial_count) }
+    }
+    fn destroy(&self) {
+        unsafe { ffi::wxImageList_Destroy(self.as_ptr()) }
+    }
+    fn draw<D: DCMethods>(
+        &self,
+        index: c_int,
+        dc: &D,
+        x: c_int,
+        y: c_int,
+        flags: c_int,
+        solid_background: bool,
+    ) -> bool {
+        unsafe {
+            let dc = dc.as_ptr();
+            ffi::wxImageList_Draw(self.as_ptr(), index, dc, x, y, flags, solid_background)
+        }
+    }
+    fn get_bitmap(&self, index: c_int) -> Bitmap {
+        unsafe { Bitmap::from_ptr(ffi::wxImageList_GetBitmap(self.as_ptr(), index)) }
+    }
+    fn get_icon(&self, index: c_int) -> Icon {
+        unsafe { Icon::from_ptr(ffi::wxImageList_GetIcon(self.as_ptr(), index)) }
+    }
+    fn get_image_count(&self) -> c_int {
+        unsafe { ffi::wxImageList_GetImageCount(self.as_ptr()) }
+    }
+    fn get_size_int(&self, index: c_int, width: *mut c_void, height: *mut c_void) -> bool {
+        unsafe { ffi::wxImageList_GetSize(self.as_ptr(), index, width, height) }
+    }
+    fn get_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxImageList_GetSize1(self.as_ptr())) }
+    }
+    fn remove(&self, index: c_int) -> bool {
+        unsafe { ffi::wxImageList_Remove(self.as_ptr(), index) }
+    }
+    fn remove_all(&self) -> bool {
+        unsafe { ffi::wxImageList_RemoveAll(self.as_ptr()) }
+    }
+    fn replace_bitmap<B: BitmapMethods, B2: BitmapMethods>(
+        &self,
+        index: c_int,
+        bitmap: &B,
+        mask: &B2,
+    ) -> bool {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            let mask = mask.as_ptr();
+            ffi::wxImageList_Replace(self.as_ptr(), index, bitmap, mask)
+        }
+    }
+    fn replace_icon<I: IconMethods>(&self, index: c_int, icon: &I) -> bool {
+        unsafe {
+            let icon = icon.as_ptr();
+            ffi::wxImageList_Replace1(self.as_ptr(), index, icon)
+        }
+    }
+}
+
+// wxInfoBar
+pub trait InfoBarMethods: ControlMethods {
+    // NOT_SUPPORTED: fn SetShowHideEffects()
+    // NOT_SUPPORTED: fn GetShowEffect()
+    // NOT_SUPPORTED: fn GetHideEffect()
+    fn set_effect_duration(&self, duration: c_int) {
+        unsafe { ffi::wxInfoBar_SetEffectDuration(self.as_ptr(), duration) }
+    }
+    fn get_effect_duration(&self) -> c_int {
+        unsafe { ffi::wxInfoBar_GetEffectDuration(self.as_ptr()) }
+    }
+    fn create<W: WindowMethods>(&self, parent: Option<&W>, winid: c_int) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxInfoBar_Create(self.as_ptr(), parent, winid)
+        }
+    }
+    fn add_button(&self, btnid: c_int, label: &str) {
+        unsafe {
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            ffi::wxInfoBar_AddButton(self.as_ptr(), btnid, label)
+        }
+    }
+    fn dismiss(&self) {
+        unsafe { ffi::wxInfoBar_Dismiss(self.as_ptr()) }
+    }
+    fn remove_button(&self, btnid: c_int) {
+        unsafe { ffi::wxInfoBar_RemoveButton(self.as_ptr(), btnid) }
+    }
+    fn show_message(&self, msg: &str, flags: c_int) {
+        unsafe {
+            let msg = WxString::from(msg);
+            let msg = msg.as_ptr();
+            ffi::wxInfoBar_ShowMessage(self.as_ptr(), msg, flags)
+        }
+    }
+    fn get_button_count(&self) -> usize {
+        unsafe { ffi::wxInfoBar_GetButtonCount(self.as_ptr()) }
+    }
+    fn get_button_id(&self, idx: usize) -> c_int {
+        unsafe { ffi::wxInfoBar_GetButtonId(self.as_ptr(), idx) }
+    }
+    fn has_button_id(&self, btnid: c_int) -> bool {
+        unsafe { ffi::wxInfoBar_HasButtonId(self.as_ptr(), btnid) }
+    }
+}
+
+// wxInitDialogEvent
+pub trait InitDialogEventMethods: EventMethods {}
+
+// wxItemAttr
+pub trait ItemAttrMethods: WxRustMethods {
+    // BLOCKED: fn operator==()
+    // BLOCKED: fn operator!=()
+    fn get_background_colour(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxItemAttr_GetBackgroundColour(self.as_ptr())) }
+    }
+    fn get_font(&self) -> FontIsOwned<false> {
+        unsafe { FontIsOwned::from_ptr(ffi::wxItemAttr_GetFont(self.as_ptr())) }
+    }
+    fn get_text_colour(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxItemAttr_GetTextColour(self.as_ptr())) }
+    }
+    fn has_background_colour(&self) -> bool {
+        unsafe { ffi::wxItemAttr_HasBackgroundColour(self.as_ptr()) }
+    }
+    fn has_colours(&self) -> bool {
+        unsafe { ffi::wxItemAttr_HasColours(self.as_ptr()) }
+    }
+    fn has_font(&self) -> bool {
+        unsafe { ffi::wxItemAttr_HasFont(self.as_ptr()) }
+    }
+    fn has_text_colour(&self) -> bool {
+        unsafe { ffi::wxItemAttr_HasTextColour(self.as_ptr()) }
+    }
+    fn is_default(&self) -> bool {
+        unsafe { ffi::wxItemAttr_IsDefault(self.as_ptr()) }
+    }
+    fn set_background_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxItemAttr_SetBackgroundColour(self.as_ptr(), colour)
+        }
+    }
+    fn set_font<F: FontMethods>(&self, font: &F) {
+        unsafe {
+            let font = font.as_ptr();
+            ffi::wxItemAttr_SetFont(self.as_ptr(), font)
+        }
+    }
+    fn set_text_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxItemAttr_SetTextColour(self.as_ptr(), colour)
+        }
+    }
+}
+
 // wxItemContainer
 pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     fn as_item_container(&self) -> *mut c_void;
@@ -2570,10 +12943,18 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
             ffi::wxItemContainer_Append1(self.as_item_container(), item, client_data)
         }
     }
-    fn append_str_clientdata(&self, item: &str, client_data: *mut c_void) -> c_int {
+    fn append_str_clientdata<C: ClientDataMethods>(
+        &self,
+        item: &str,
+        client_data: Option<&C>,
+    ) -> c_int {
         unsafe {
             let item = WxString::from(item);
             let item = item.as_ptr();
+            let client_data = match client_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             ffi::wxItemContainer_Append2(self.as_item_container(), item, client_data)
         }
     }
@@ -2594,13 +12975,17 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
             ffi::wxItemContainer_Append5(self.as_item_container(), items, client_data)
         }
     }
-    fn append_arraystring_clientdata<A: ArrayStringMethods>(
+    fn append_arraystring_clientdata<A: ArrayStringMethods, C: ClientDataMethods>(
         &self,
         items: &A,
-        client_data: *mut c_void,
+        client_data: Option<&C>,
     ) -> c_int {
         unsafe {
             let items = items.as_ptr();
+            let client_data = match client_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             ffi::wxItemContainer_Append6(self.as_item_container(), items, client_data)
         }
     }
@@ -2610,13 +12995,19 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     fn append_uint_void(&self, n: c_uint, items: *const c_void, client_data: *mut c_void) -> c_int {
         unsafe { ffi::wxItemContainer_Append8(self.as_item_container(), n, items, client_data) }
     }
-    fn append_uint_clientdata(
+    fn append_uint_clientdata<C: ClientDataMethods>(
         &self,
         n: c_uint,
         items: *const c_void,
-        client_data: *mut c_void,
+        client_data: Option<&C>,
     ) -> c_int {
-        unsafe { ffi::wxItemContainer_Append9(self.as_item_container(), n, items, client_data) }
+        unsafe {
+            let client_data = match client_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxItemContainer_Append9(self.as_item_container(), n, items, client_data)
+        }
     }
     fn clear(&self) {
         unsafe { ffi::wxItemContainer_Clear(self.as_item_container()) }
@@ -2624,8 +13015,13 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     fn delete(&self, n: c_uint) {
         unsafe { ffi::wxItemContainer_Delete(self.as_item_container(), n) }
     }
-    fn detach_client_object(&self, n: c_uint) -> *mut c_void {
-        unsafe { ffi::wxItemContainer_DetachClientObject(self.as_item_container(), n) }
+    fn detach_client_object(&self, n: c_uint) -> Option<ClientDataIsOwned<false>> {
+        unsafe {
+            ClientData::option_from(ffi::wxItemContainer_DetachClientObject(
+                self.as_item_container(),
+                n,
+            ))
+        }
     }
     fn has_client_data(&self) -> bool {
         unsafe { ffi::wxItemContainer_HasClientData(self.as_item_container()) }
@@ -2639,33 +13035,53 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     fn get_client_data(&self, n: c_uint) -> *mut c_void {
         unsafe { ffi::wxItemContainer_GetClientData(self.as_item_container(), n) }
     }
-    fn get_client_object_uint(&self, n: c_uint) -> *mut c_void {
-        unsafe { ffi::wxItemContainer_GetClientObject(self.as_item_container(), n) }
+    fn get_client_object_uint(&self, n: c_uint) -> Option<ClientDataIsOwned<false>> {
+        unsafe {
+            ClientData::option_from(ffi::wxItemContainer_GetClientObject(
+                self.as_item_container(),
+                n,
+            ))
+        }
     }
     fn set_client_data(&self, n: c_uint, data: *mut c_void) {
         unsafe { ffi::wxItemContainer_SetClientData(self.as_item_container(), n, data) }
     }
-    fn set_client_object_uint(&self, n: c_uint, data: *mut c_void) {
-        unsafe { ffi::wxItemContainer_SetClientObject(self.as_item_container(), n, data) }
+    fn set_client_object_uint<C: ClientDataMethods>(&self, n: c_uint, data: Option<&C>) {
+        unsafe {
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxItemContainer_SetClientObject(self.as_item_container(), n, data)
+        }
     }
-    fn insert_str(&self, item: &str, pos: c_uint) -> c_int {
+    fn insert_str_uint(&self, item: &str, pos: c_uint) -> c_int {
         unsafe {
             let item = WxString::from(item);
             let item = item.as_ptr();
             ffi::wxItemContainer_Insert(self.as_item_container(), item, pos)
         }
     }
-    fn insert_str_void(&self, item: &str, pos: c_uint, client_data: *mut c_void) -> c_int {
+    fn insert_str_uint_void(&self, item: &str, pos: c_uint, client_data: *mut c_void) -> c_int {
         unsafe {
             let item = WxString::from(item);
             let item = item.as_ptr();
             ffi::wxItemContainer_Insert1(self.as_item_container(), item, pos, client_data)
         }
     }
-    fn insert_str_clientdata(&self, item: &str, pos: c_uint, client_data: *mut c_void) -> c_int {
+    fn insert_str_uint_clientdata<C: ClientDataMethods>(
+        &self,
+        item: &str,
+        pos: c_uint,
+        client_data: Option<&C>,
+    ) -> c_int {
         unsafe {
             let item = WxString::from(item);
             let item = item.as_ptr();
+            let client_data = match client_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             ffi::wxItemContainer_Insert2(self.as_item_container(), item, pos, client_data)
         }
     }
@@ -2687,14 +13103,18 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
             ffi::wxItemContainer_Insert5(self.as_item_container(), items, pos, client_data)
         }
     }
-    fn insert_arraystring_clientdata<A: ArrayStringMethods>(
+    fn insert_arraystring_clientdata<A: ArrayStringMethods, C: ClientDataMethods>(
         &self,
         items: &A,
         pos: c_uint,
-        client_data: *mut c_void,
+        client_data: Option<&C>,
     ) -> c_int {
         unsafe {
             let items = items.as_ptr();
+            let client_data = match client_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             ffi::wxItemContainer_Insert6(self.as_item_container(), items, pos, client_data)
         }
     }
@@ -2712,14 +13132,18 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
             ffi::wxItemContainer_Insert8(self.as_item_container(), n, items, pos, client_data)
         }
     }
-    fn insert_uint_clientdata(
+    fn insert_uint_clientdata<C: ClientDataMethods>(
         &self,
         n: c_uint,
         items: *const c_void,
         pos: c_uint,
-        client_data: *mut c_void,
+        client_data: Option<&C>,
     ) -> c_int {
         unsafe {
+            let client_data = match client_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             ffi::wxItemContainer_Insert9(self.as_item_container(), n, items, pos, client_data)
         }
     }
@@ -2736,13 +13160,17 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
             ffi::wxItemContainer_Set2(self.as_item_container(), items, client_data)
         }
     }
-    fn set_arraystring_clientdata<A: ArrayStringMethods>(
+    fn set_arraystring_clientdata<A: ArrayStringMethods, C: ClientDataMethods>(
         &self,
         items: &A,
-        client_data: *mut c_void,
+        client_data: Option<&C>,
     ) {
         unsafe {
             let items = items.as_ptr();
+            let client_data = match client_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             ffi::wxItemContainer_Set3(self.as_item_container(), items, client_data)
         }
     }
@@ -2752,8 +13180,19 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     fn set_uint_void(&self, n: c_uint, items: *const c_void, client_data: *mut c_void) {
         unsafe { ffi::wxItemContainer_Set5(self.as_item_container(), n, items, client_data) }
     }
-    fn set_uint_clientdata(&self, n: c_uint, items: *const c_void, client_data: *mut c_void) {
-        unsafe { ffi::wxItemContainer_Set6(self.as_item_container(), n, items, client_data) }
+    fn set_uint_clientdata<C: ClientDataMethods>(
+        &self,
+        n: c_uint,
+        items: *const c_void,
+        client_data: Option<&C>,
+    ) {
+        unsafe {
+            let client_data = match client_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxItemContainer_Set6(self.as_item_container(), n, items, client_data)
+        }
     }
 }
 
@@ -2825,6 +13264,276 @@ pub trait ItemContainerImmutableMethods: WxRustMethods {
                 string,
                 case_sensitive,
             )
+        }
+    }
+}
+
+// wxJPEGHandler
+pub trait JPEGHandlerMethods: ImageHandlerMethods {}
+
+// wxJoystick
+pub trait JoystickMethods: ObjectMethods {
+    // DTOR: fn ~wxJoystick()
+    fn get_button_state(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetButtonState(self.as_ptr()) }
+    }
+    fn get_button_state_uint(&self, id: c_uint) -> bool {
+        unsafe { ffi::wxJoystick_GetButtonState1(self.as_ptr(), id) }
+    }
+    fn get_manufacturer_id(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetManufacturerId(self.as_ptr()) }
+    }
+    fn get_movement_threshold(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetMovementThreshold(self.as_ptr()) }
+    }
+    fn get_number_axes(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetNumberAxes(self.as_ptr()) }
+    }
+    fn get_number_buttons(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetNumberButtons(self.as_ptr()) }
+    }
+    fn get_povcts_position(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetPOVCTSPosition(self.as_ptr()) }
+    }
+    fn get_pov_position(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetPOVPosition(self.as_ptr()) }
+    }
+    fn get_polling_max(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetPollingMax(self.as_ptr()) }
+    }
+    fn get_polling_min(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetPollingMin(self.as_ptr()) }
+    }
+    fn get_position(&self) -> Point {
+        unsafe { Point::from_ptr(ffi::wxJoystick_GetPosition(self.as_ptr())) }
+    }
+    fn get_position_uint(&self, axis: c_uint) -> c_int {
+        unsafe { ffi::wxJoystick_GetPosition1(self.as_ptr(), axis) }
+    }
+    fn get_product_id(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetProductId(self.as_ptr()) }
+    }
+    fn get_product_name(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxJoystick_GetProductName(self.as_ptr())).into() }
+    }
+    fn get_rudder_max(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetRudderMax(self.as_ptr()) }
+    }
+    fn get_rudder_min(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetRudderMin(self.as_ptr()) }
+    }
+    fn get_rudder_position(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetRudderPosition(self.as_ptr()) }
+    }
+    fn get_u_max(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetUMax(self.as_ptr()) }
+    }
+    fn get_u_min(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetUMin(self.as_ptr()) }
+    }
+    fn get_u_position(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetUPosition(self.as_ptr()) }
+    }
+    fn get_v_max(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetVMax(self.as_ptr()) }
+    }
+    fn get_v_min(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetVMin(self.as_ptr()) }
+    }
+    fn get_v_position(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetVPosition(self.as_ptr()) }
+    }
+    fn get_x_max(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetXMax(self.as_ptr()) }
+    }
+    fn get_x_min(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetXMin(self.as_ptr()) }
+    }
+    fn get_y_max(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetYMax(self.as_ptr()) }
+    }
+    fn get_y_min(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetYMin(self.as_ptr()) }
+    }
+    fn get_z_max(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetZMax(self.as_ptr()) }
+    }
+    fn get_z_min(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetZMin(self.as_ptr()) }
+    }
+    fn get_z_position(&self) -> c_int {
+        unsafe { ffi::wxJoystick_GetZPosition(self.as_ptr()) }
+    }
+    fn has_pov(&self) -> bool {
+        unsafe { ffi::wxJoystick_HasPOV(self.as_ptr()) }
+    }
+    fn has_po_v4_dir(&self) -> bool {
+        unsafe { ffi::wxJoystick_HasPOV4Dir(self.as_ptr()) }
+    }
+    fn has_povcts(&self) -> bool {
+        unsafe { ffi::wxJoystick_HasPOVCTS(self.as_ptr()) }
+    }
+    fn has_rudder(&self) -> bool {
+        unsafe { ffi::wxJoystick_HasRudder(self.as_ptr()) }
+    }
+    fn has_u(&self) -> bool {
+        unsafe { ffi::wxJoystick_HasU(self.as_ptr()) }
+    }
+    fn has_v(&self) -> bool {
+        unsafe { ffi::wxJoystick_HasV(self.as_ptr()) }
+    }
+    fn has_z(&self) -> bool {
+        unsafe { ffi::wxJoystick_HasZ(self.as_ptr()) }
+    }
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxJoystick_IsOk(self.as_ptr()) }
+    }
+    fn release_capture(&self) -> bool {
+        unsafe { ffi::wxJoystick_ReleaseCapture(self.as_ptr()) }
+    }
+    fn set_capture<W: WindowMethods>(&self, win: Option<&W>, polling_freq: c_int) -> bool {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxJoystick_SetCapture(self.as_ptr(), win, polling_freq)
+        }
+    }
+    fn set_movement_threshold(&self, threshold: c_int) {
+        unsafe { ffi::wxJoystick_SetMovementThreshold(self.as_ptr(), threshold) }
+    }
+    fn get_number_joysticks() -> c_int {
+        unsafe { ffi::wxJoystick_GetNumberJoysticks() }
+    }
+}
+
+// wxJoystickEvent
+pub trait JoystickEventMethods: EventMethods {
+    fn button_down(&self, button: c_int) -> bool {
+        unsafe { ffi::wxJoystickEvent_ButtonDown(self.as_ptr(), button) }
+    }
+    fn button_is_down(&self, button: c_int) -> bool {
+        unsafe { ffi::wxJoystickEvent_ButtonIsDown(self.as_ptr(), button) }
+    }
+    fn button_up(&self, button: c_int) -> bool {
+        unsafe { ffi::wxJoystickEvent_ButtonUp(self.as_ptr(), button) }
+    }
+    fn get_button_change(&self) -> c_int {
+        unsafe { ffi::wxJoystickEvent_GetButtonChange(self.as_ptr()) }
+    }
+    fn get_button_ordinal(&self) -> c_int {
+        unsafe { ffi::wxJoystickEvent_GetButtonOrdinal(self.as_ptr()) }
+    }
+    fn get_button_state(&self) -> c_int {
+        unsafe { ffi::wxJoystickEvent_GetButtonState(self.as_ptr()) }
+    }
+    fn get_joystick(&self) -> c_int {
+        unsafe { ffi::wxJoystickEvent_GetJoystick(self.as_ptr()) }
+    }
+    fn get_position(&self) -> Point {
+        unsafe { Point::from_ptr(ffi::wxJoystickEvent_GetPosition(self.as_ptr())) }
+    }
+    fn get_z_position(&self) -> c_int {
+        unsafe { ffi::wxJoystickEvent_GetZPosition(self.as_ptr()) }
+    }
+    fn is_button(&self) -> bool {
+        unsafe { ffi::wxJoystickEvent_IsButton(self.as_ptr()) }
+    }
+    fn is_move(&self) -> bool {
+        unsafe { ffi::wxJoystickEvent_IsMove(self.as_ptr()) }
+    }
+    fn is_z_move(&self) -> bool {
+        unsafe { ffi::wxJoystickEvent_IsZMove(self.as_ptr()) }
+    }
+}
+
+// wxKeyEvent
+pub trait KeyEventMethods: EventMethods {
+    fn get_key_code(&self) -> c_int {
+        unsafe { ffi::wxKeyEvent_GetKeyCode(self.as_ptr()) }
+    }
+    fn is_key_in_category(&self, category: c_int) -> bool {
+        unsafe { ffi::wxKeyEvent_IsKeyInCategory(self.as_ptr(), category) }
+    }
+    fn is_auto_repeat(&self) -> bool {
+        unsafe { ffi::wxKeyEvent_IsAutoRepeat(self.as_ptr()) }
+    }
+    fn get_position(&self) -> Point {
+        unsafe { Point::from_ptr(ffi::wxKeyEvent_GetPosition(self.as_ptr())) }
+    }
+    fn get_position_coord(&self, x: *mut c_void, y: *mut c_void) {
+        unsafe { ffi::wxKeyEvent_GetPosition1(self.as_ptr(), x, y) }
+    }
+    // NOT_SUPPORTED: fn GetRawKeyCode()
+    // NOT_SUPPORTED: fn GetRawKeyFlags()
+    // NOT_SUPPORTED: fn GetUnicodeKey()
+    fn get_x(&self) -> c_int {
+        unsafe { ffi::wxKeyEvent_GetX(self.as_ptr()) }
+    }
+    fn get_y(&self) -> c_int {
+        unsafe { ffi::wxKeyEvent_GetY(self.as_ptr()) }
+    }
+    fn do_allow_next_event(&self) {
+        unsafe { ffi::wxKeyEvent_DoAllowNextEvent(self.as_ptr()) }
+    }
+    fn is_next_event_allowed(&self) -> bool {
+        unsafe { ffi::wxKeyEvent_IsNextEventAllowed(self.as_ptr()) }
+    }
+}
+
+// wxLayoutAlgorithm
+pub trait LayoutAlgorithmMethods: ObjectMethods {
+    // DTOR: fn ~wxLayoutAlgorithm()
+    fn layout_frame<F: FrameMethods, W: WindowMethods>(
+        &self,
+        frame: Option<&F>,
+        main_window: Option<&W>,
+    ) -> bool {
+        unsafe {
+            let frame = match frame {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let main_window = match main_window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxLayoutAlgorithm_LayoutFrame(self.as_ptr(), frame, main_window)
+        }
+    }
+    fn layout_mdi_frame<M: MDIParentFrameMethods, R: RectMethods>(
+        &self,
+        frame: Option<&M>,
+        rect: Option<&R>,
+    ) -> bool {
+        unsafe {
+            let frame = match frame {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let rect = match rect {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxLayoutAlgorithm_LayoutMDIFrame(self.as_ptr(), frame, rect)
+        }
+    }
+    fn layout_window<W: WindowMethods, W2: WindowMethods>(
+        &self,
+        parent: Option<&W>,
+        main_window: Option<&W2>,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let main_window = match main_window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxLayoutAlgorithm_LayoutWindow(self.as_ptr(), parent, main_window)
         }
     }
 }
@@ -2939,6 +13648,771 @@ pub trait ListBoxMethods: ControlMethods {
         unsafe { ffi::wxListBox_GetTopItem(self.as_ptr()) }
     }
     // BLOCKED: fn MSWSetTabStops()
+}
+
+// wxListCtrl
+pub trait ListCtrlMethods: ControlMethods {
+    // DTOR: fn ~wxListCtrl()
+    // NOT_SUPPORTED: fn AppendColumn()
+    fn arrange(&self, flag: c_int) -> bool {
+        unsafe { ffi::wxListCtrl_Arrange(self.as_ptr(), flag) }
+    }
+    fn assign_image_list<I: ImageListMethods>(&self, image_list: Option<&I>, which: c_int) {
+        unsafe {
+            let image_list = match image_list {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxListCtrl_AssignImageList(self.as_ptr(), image_list, which)
+        }
+    }
+    fn clear_all(&self) {
+        unsafe { ffi::wxListCtrl_ClearAll(self.as_ptr()) }
+    }
+    fn delete_all_columns(&self) -> bool {
+        unsafe { ffi::wxListCtrl_DeleteAllColumns(self.as_ptr()) }
+    }
+    fn delete_all_items(&self) -> bool {
+        unsafe { ffi::wxListCtrl_DeleteAllItems(self.as_ptr()) }
+    }
+    fn delete_column(&self, col: c_int) -> bool {
+        unsafe { ffi::wxListCtrl_DeleteColumn(self.as_ptr(), col) }
+    }
+    fn delete_item(&self, item: c_long) -> bool {
+        unsafe { ffi::wxListCtrl_DeleteItem(self.as_ptr(), item) }
+    }
+    fn edit_label<C: ClassInfoMethods>(
+        &self,
+        item: c_long,
+        text_control_class: Option<&C>,
+    ) -> WeakRef<TextCtrl> {
+        unsafe {
+            let text_control_class = match text_control_class {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            WeakRef::<TextCtrl>::from(ffi::wxListCtrl_EditLabel(
+                self.as_ptr(),
+                item,
+                text_control_class,
+            ))
+        }
+    }
+    fn enable_alternate_row_colours(&self, enable: bool) {
+        unsafe { ffi::wxListCtrl_EnableAlternateRowColours(self.as_ptr(), enable) }
+    }
+    fn enable_bell_on_no_match(&self, on: bool) {
+        unsafe { ffi::wxListCtrl_EnableBellOnNoMatch(self.as_ptr(), on) }
+    }
+    fn end_edit_label(&self, cancel: bool) -> bool {
+        unsafe { ffi::wxListCtrl_EndEditLabel(self.as_ptr(), cancel) }
+    }
+    fn ensure_visible(&self, item: c_long) -> bool {
+        unsafe { ffi::wxListCtrl_EnsureVisible(self.as_ptr(), item) }
+    }
+    fn find_item_str(&self, start: c_long, str: &str, partial: bool) -> c_long {
+        unsafe {
+            let str = WxString::from(str);
+            let str = str.as_ptr();
+            ffi::wxListCtrl_FindItem(self.as_ptr(), start, str, partial)
+        }
+    }
+    // NOT_SUPPORTED: fn FindItem1()
+    fn find_item_point<P: PointMethods>(&self, start: c_long, pt: &P, direction: c_int) -> c_long {
+        unsafe {
+            let pt = pt.as_ptr();
+            ffi::wxListCtrl_FindItem2(self.as_ptr(), start, pt, direction)
+        }
+    }
+    fn get_column<L: ListItemMethods>(&self, col: c_int, item: &L) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxListCtrl_GetColumn(self.as_ptr(), col, item)
+        }
+    }
+    fn get_column_count(&self) -> c_int {
+        unsafe { ffi::wxListCtrl_GetColumnCount(self.as_ptr()) }
+    }
+    fn get_column_index_from_order(&self, pos: c_int) -> c_int {
+        unsafe { ffi::wxListCtrl_GetColumnIndexFromOrder(self.as_ptr(), pos) }
+    }
+    fn get_column_order(&self, col: c_int) -> c_int {
+        unsafe { ffi::wxListCtrl_GetColumnOrder(self.as_ptr(), col) }
+    }
+    fn get_column_width(&self, col: c_int) -> c_int {
+        unsafe { ffi::wxListCtrl_GetColumnWidth(self.as_ptr(), col) }
+    }
+    fn get_columns_order(&self) -> ArrayInt {
+        unsafe { ArrayInt::from_ptr(ffi::wxListCtrl_GetColumnsOrder(self.as_ptr())) }
+    }
+    fn get_count_per_page(&self) -> c_int {
+        unsafe { ffi::wxListCtrl_GetCountPerPage(self.as_ptr()) }
+    }
+    fn get_edit_control(&self) -> WeakRef<TextCtrl> {
+        unsafe { WeakRef::<TextCtrl>::from(ffi::wxListCtrl_GetEditControl(self.as_ptr())) }
+    }
+    fn get_image_list(&self, which: c_int) -> Option<ImageListIsOwned<false>> {
+        unsafe { ImageList::option_from(ffi::wxListCtrl_GetImageList(self.as_ptr(), which)) }
+    }
+    fn get_item<L: ListItemMethods>(&self, info: &L) -> bool {
+        unsafe {
+            let info = info.as_ptr();
+            ffi::wxListCtrl_GetItem(self.as_ptr(), info)
+        }
+    }
+    fn get_item_background_colour(&self, item: c_long) -> Colour {
+        unsafe { Colour::from_ptr(ffi::wxListCtrl_GetItemBackgroundColour(self.as_ptr(), item)) }
+    }
+    fn get_item_count(&self) -> c_int {
+        unsafe { ffi::wxListCtrl_GetItemCount(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetItemData()
+    fn get_item_font(&self, item: c_long) -> Font {
+        unsafe { Font::from_ptr(ffi::wxListCtrl_GetItemFont(self.as_ptr(), item)) }
+    }
+    fn get_item_position<P: PointMethods>(&self, item: c_long, pos: &P) -> bool {
+        unsafe {
+            let pos = pos.as_ptr();
+            ffi::wxListCtrl_GetItemPosition(self.as_ptr(), item, pos)
+        }
+    }
+    fn get_item_rect<R: RectMethods>(&self, item: c_long, rect: &R, code: c_int) -> bool {
+        unsafe {
+            let rect = rect.as_ptr();
+            ffi::wxListCtrl_GetItemRect(self.as_ptr(), item, rect, code)
+        }
+    }
+    fn get_item_spacing(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxListCtrl_GetItemSpacing(self.as_ptr())) }
+    }
+    fn get_item_state(&self, item: c_long, state_mask: c_long) -> c_int {
+        unsafe { ffi::wxListCtrl_GetItemState(self.as_ptr(), item, state_mask) }
+    }
+    fn get_item_text(&self, item: c_long, col: c_int) -> String {
+        unsafe { WxString::from_ptr(ffi::wxListCtrl_GetItemText(self.as_ptr(), item, col)).into() }
+    }
+    fn get_item_text_colour(&self, item: c_long) -> Colour {
+        unsafe { Colour::from_ptr(ffi::wxListCtrl_GetItemTextColour(self.as_ptr(), item)) }
+    }
+    fn get_next_item(&self, item: c_long, geometry: c_int, state: c_int) -> c_long {
+        unsafe { ffi::wxListCtrl_GetNextItem(self.as_ptr(), item, geometry, state) }
+    }
+    fn get_selected_item_count(&self) -> c_int {
+        unsafe { ffi::wxListCtrl_GetSelectedItemCount(self.as_ptr()) }
+    }
+    fn get_sub_item_rect<R: RectMethods>(
+        &self,
+        item: c_long,
+        sub_item: c_long,
+        rect: &R,
+        code: c_int,
+    ) -> bool {
+        unsafe {
+            let rect = rect.as_ptr();
+            ffi::wxListCtrl_GetSubItemRect(self.as_ptr(), item, sub_item, rect, code)
+        }
+    }
+    fn get_text_colour(&self) -> Colour {
+        unsafe { Colour::from_ptr(ffi::wxListCtrl_GetTextColour(self.as_ptr())) }
+    }
+    fn get_top_item(&self) -> c_long {
+        unsafe { ffi::wxListCtrl_GetTopItem(self.as_ptr()) }
+    }
+    fn get_view_rect(&self) -> Rect {
+        unsafe { Rect::from_ptr(ffi::wxListCtrl_GetViewRect(self.as_ptr())) }
+    }
+    fn set_alternate_row_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxListCtrl_SetAlternateRowColour(self.as_ptr(), colour)
+        }
+    }
+    fn get_alternate_row_colour(&self) -> Colour {
+        unsafe { Colour::from_ptr(ffi::wxListCtrl_GetAlternateRowColour(self.as_ptr())) }
+    }
+    fn hit_test<P: PointMethods>(
+        &self,
+        point: &P,
+        flags: *mut c_void,
+        ptr_sub_item: *mut c_void,
+    ) -> c_long {
+        unsafe {
+            let point = point.as_ptr();
+            ffi::wxListCtrl_HitTest(self.as_ptr(), point, flags, ptr_sub_item)
+        }
+    }
+    fn in_report_view(&self) -> bool {
+        unsafe { ffi::wxListCtrl_InReportView(self.as_ptr()) }
+    }
+    fn insert_column_listitem<L: ListItemMethods>(&self, col: c_long, info: &L) -> c_long {
+        unsafe {
+            let info = info.as_ptr();
+            ffi::wxListCtrl_InsertColumn(self.as_ptr(), col, info)
+        }
+    }
+    fn insert_column_str(&self, col: c_long, heading: &str, format: c_int, width: c_int) -> c_long {
+        unsafe {
+            let heading = WxString::from(heading);
+            let heading = heading.as_ptr();
+            ffi::wxListCtrl_InsertColumn1(self.as_ptr(), col, heading, format, width)
+        }
+    }
+    fn insert_item_listitem<L: ListItemMethods>(&self, info: &L) -> c_long {
+        unsafe {
+            let info = info.as_ptr();
+            ffi::wxListCtrl_InsertItem(self.as_ptr(), info)
+        }
+    }
+    fn insert_item_long_str(&self, index: c_long, label: &str) -> c_long {
+        unsafe {
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            ffi::wxListCtrl_InsertItem1(self.as_ptr(), index, label)
+        }
+    }
+    fn insert_item_long_int(&self, index: c_long, image_index: c_int) -> c_long {
+        unsafe { ffi::wxListCtrl_InsertItem2(self.as_ptr(), index, image_index) }
+    }
+    fn insert_item_long_str_int(&self, index: c_long, label: &str, image_index: c_int) -> c_long {
+        unsafe {
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            ffi::wxListCtrl_InsertItem3(self.as_ptr(), index, label, image_index)
+        }
+    }
+    fn is_empty(&self) -> bool {
+        unsafe { ffi::wxListCtrl_IsEmpty(self.as_ptr()) }
+    }
+    fn is_virtual(&self) -> bool {
+        unsafe { ffi::wxListCtrl_IsVirtual(self.as_ptr()) }
+    }
+    fn refresh_item(&self, item: c_long) {
+        unsafe { ffi::wxListCtrl_RefreshItem(self.as_ptr(), item) }
+    }
+    fn refresh_items(&self, item_from: c_long, item_to: c_long) {
+        unsafe { ffi::wxListCtrl_RefreshItems(self.as_ptr(), item_from, item_to) }
+    }
+    fn scroll_list(&self, dx: c_int, dy: c_int) -> bool {
+        unsafe { ffi::wxListCtrl_ScrollList(self.as_ptr(), dx, dy) }
+    }
+    fn set_column<L: ListItemMethods>(&self, col: c_int, item: &L) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxListCtrl_SetColumn(self.as_ptr(), col, item)
+        }
+    }
+    fn set_column_width(&self, col: c_int, width: c_int) -> bool {
+        unsafe { ffi::wxListCtrl_SetColumnWidth(self.as_ptr(), col, width) }
+    }
+    fn set_columns_order<A: ArrayIntMethods>(&self, orders: &A) -> bool {
+        unsafe {
+            let orders = orders.as_ptr();
+            ffi::wxListCtrl_SetColumnsOrder(self.as_ptr(), orders)
+        }
+    }
+    fn set_header_attr<I: ItemAttrMethods>(&self, attr: &I) -> bool {
+        unsafe {
+            let attr = attr.as_ptr();
+            ffi::wxListCtrl_SetHeaderAttr(self.as_ptr(), attr)
+        }
+    }
+    fn set_image_list<I: ImageListMethods>(&self, image_list: Option<&I>, which: c_int) {
+        unsafe {
+            let image_list = match image_list {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxListCtrl_SetImageList(self.as_ptr(), image_list, which)
+        }
+    }
+    fn set_normal_images(&self, images: *const c_void) {
+        unsafe { ffi::wxListCtrl_SetNormalImages(self.as_ptr(), images) }
+    }
+    fn set_small_images(&self, images: *const c_void) {
+        unsafe { ffi::wxListCtrl_SetSmallImages(self.as_ptr(), images) }
+    }
+    fn is_visible(&self, item: c_long) -> bool {
+        unsafe { ffi::wxListCtrl_IsVisible(self.as_ptr(), item) }
+    }
+    fn set_item_listitem<L: ListItemMethods>(&self, info: &L) -> bool {
+        unsafe {
+            let info = info.as_ptr();
+            ffi::wxListCtrl_SetItem(self.as_ptr(), info)
+        }
+    }
+    fn set_item_long(&self, index: c_long, column: c_int, label: &str, image_id: c_int) -> bool {
+        unsafe {
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            ffi::wxListCtrl_SetItem1(self.as_ptr(), index, column, label, image_id)
+        }
+    }
+    fn set_item_background_colour<C: ColourMethods>(&self, item: c_long, col: &C) {
+        unsafe {
+            let col = col.as_ptr();
+            ffi::wxListCtrl_SetItemBackgroundColour(self.as_ptr(), item, col)
+        }
+    }
+    fn set_item_column_image(&self, item: c_long, column: c_long, image: c_int) -> bool {
+        unsafe { ffi::wxListCtrl_SetItemColumnImage(self.as_ptr(), item, column, image) }
+    }
+    fn set_item_count(&self, count: c_long) {
+        unsafe { ffi::wxListCtrl_SetItemCount(self.as_ptr(), count) }
+    }
+    fn set_item_data(&self, item: c_long, data: c_long) -> bool {
+        unsafe { ffi::wxListCtrl_SetItemData(self.as_ptr(), item, data) }
+    }
+    fn set_item_font<F: FontMethods>(&self, item: c_long, font: &F) {
+        unsafe {
+            let font = font.as_ptr();
+            ffi::wxListCtrl_SetItemFont(self.as_ptr(), item, font)
+        }
+    }
+    fn set_item_image(&self, item: c_long, image: c_int, sel_image: c_int) -> bool {
+        unsafe { ffi::wxListCtrl_SetItemImage(self.as_ptr(), item, image, sel_image) }
+    }
+    fn set_item_position<P: PointMethods>(&self, item: c_long, pos: &P) -> bool {
+        unsafe {
+            let pos = pos.as_ptr();
+            ffi::wxListCtrl_SetItemPosition(self.as_ptr(), item, pos)
+        }
+    }
+    // NOT_SUPPORTED: fn SetItemPtrData()
+    fn set_item_state(&self, item: c_long, state: c_long, state_mask: c_long) -> bool {
+        unsafe { ffi::wxListCtrl_SetItemState(self.as_ptr(), item, state, state_mask) }
+    }
+    fn set_item_text(&self, item: c_long, text: &str) {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxListCtrl_SetItemText(self.as_ptr(), item, text)
+        }
+    }
+    fn set_item_text_colour<C: ColourMethods>(&self, item: c_long, col: &C) {
+        unsafe {
+            let col = col.as_ptr();
+            ffi::wxListCtrl_SetItemTextColour(self.as_ptr(), item, col)
+        }
+    }
+    fn set_single_style(&self, style: c_long, add: bool) {
+        unsafe { ffi::wxListCtrl_SetSingleStyle(self.as_ptr(), style, add) }
+    }
+    fn set_text_colour<C: ColourMethods>(&self, col: &C) {
+        unsafe {
+            let col = col.as_ptr();
+            ffi::wxListCtrl_SetTextColour(self.as_ptr(), col)
+        }
+    }
+    // NOT_SUPPORTED: fn SortItems()
+    fn has_check_boxes(&self) -> bool {
+        unsafe { ffi::wxListCtrl_HasCheckBoxes(self.as_ptr()) }
+    }
+    fn enable_check_boxes(&self, enable: bool) -> bool {
+        unsafe { ffi::wxListCtrl_EnableCheckBoxes(self.as_ptr(), enable) }
+    }
+    fn is_item_checked(&self, item: c_long) -> bool {
+        unsafe { ffi::wxListCtrl_IsItemChecked(self.as_ptr(), item) }
+    }
+    fn check_item(&self, item: c_long, check: bool) {
+        unsafe { ffi::wxListCtrl_CheckItem(self.as_ptr(), item, check) }
+    }
+    fn extend_rules_and_alternate_colour(&self, extend: bool) {
+        unsafe { ffi::wxListCtrl_ExtendRulesAndAlternateColour(self.as_ptr(), extend) }
+    }
+    fn show_sort_indicator(&self, col: c_int, ascending: bool) {
+        unsafe { ffi::wxListCtrl_ShowSortIndicator(self.as_ptr(), col, ascending) }
+    }
+    fn remove_sort_indicator(&self) {
+        unsafe { ffi::wxListCtrl_RemoveSortIndicator(self.as_ptr()) }
+    }
+    fn get_sort_indicator(&self) -> c_int {
+        unsafe { ffi::wxListCtrl_GetSortIndicator(self.as_ptr()) }
+    }
+    fn get_updated_ascending_sort_indicator(&self, col: c_int) -> bool {
+        unsafe { ffi::wxListCtrl_GetUpdatedAscendingSortIndicator(self.as_ptr(), col) }
+    }
+    fn is_ascending_sort_indicator(&self) -> bool {
+        unsafe { ffi::wxListCtrl_IsAscendingSortIndicator(self.as_ptr()) }
+    }
+}
+
+// wxListEvent
+pub trait ListEventMethods: NotifyEventMethods {
+    fn get_cache_from(&self) -> c_long {
+        unsafe { ffi::wxListEvent_GetCacheFrom(self.as_ptr()) }
+    }
+    fn get_cache_to(&self) -> c_long {
+        unsafe { ffi::wxListEvent_GetCacheTo(self.as_ptr()) }
+    }
+    fn get_column(&self) -> c_int {
+        unsafe { ffi::wxListEvent_GetColumn(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetData()
+    fn get_image(&self) -> c_int {
+        unsafe { ffi::wxListEvent_GetImage(self.as_ptr()) }
+    }
+    fn get_index(&self) -> c_long {
+        unsafe { ffi::wxListEvent_GetIndex(self.as_ptr()) }
+    }
+    fn get_item(&self) -> ListItemIsOwned<false> {
+        unsafe { ListItemIsOwned::from_ptr(ffi::wxListEvent_GetItem(self.as_ptr())) }
+    }
+    fn get_key_code(&self) -> c_int {
+        unsafe { ffi::wxListEvent_GetKeyCode(self.as_ptr()) }
+    }
+    fn get_label(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxListEvent_GetLabel(self.as_ptr())).into() }
+    }
+    fn get_mask(&self) -> c_long {
+        unsafe { ffi::wxListEvent_GetMask(self.as_ptr()) }
+    }
+    fn get_point(&self) -> Point {
+        unsafe { Point::from_ptr(ffi::wxListEvent_GetPoint(self.as_ptr())) }
+    }
+    fn get_text(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxListEvent_GetText(self.as_ptr())).into() }
+    }
+    fn is_edit_cancelled(&self) -> bool {
+        unsafe { ffi::wxListEvent_IsEditCancelled(self.as_ptr()) }
+    }
+    fn set_key_code(&self, code: c_int) {
+        unsafe { ffi::wxListEvent_SetKeyCode(self.as_ptr(), code) }
+    }
+    fn set_index(&self, index: c_long) {
+        unsafe { ffi::wxListEvent_SetIndex(self.as_ptr(), index) }
+    }
+    fn set_column(&self, col: c_int) {
+        unsafe { ffi::wxListEvent_SetColumn(self.as_ptr(), col) }
+    }
+    fn set_point<P: PointMethods>(&self, point: &P) {
+        unsafe {
+            let point = point.as_ptr();
+            ffi::wxListEvent_SetPoint(self.as_ptr(), point)
+        }
+    }
+    fn set_item<L: ListItemMethods>(&self, item: &L) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxListEvent_SetItem(self.as_ptr(), item)
+        }
+    }
+    fn set_cache_from(&self, cache_from: c_long) {
+        unsafe { ffi::wxListEvent_SetCacheFrom(self.as_ptr(), cache_from) }
+    }
+    fn set_cache_to(&self, cache_to: c_long) {
+        unsafe { ffi::wxListEvent_SetCacheTo(self.as_ptr(), cache_to) }
+    }
+}
+
+// wxListItem
+pub trait ListItemMethods: ObjectMethods {
+    fn clear(&self) {
+        unsafe { ffi::wxListItem_Clear(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetAlign()
+    fn get_background_colour(&self) -> Colour {
+        unsafe { Colour::from_ptr(ffi::wxListItem_GetBackgroundColour(self.as_ptr())) }
+    }
+    fn get_column(&self) -> c_int {
+        unsafe { ffi::wxListItem_GetColumn(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetData()
+    fn get_font(&self) -> Font {
+        unsafe { Font::from_ptr(ffi::wxListItem_GetFont(self.as_ptr())) }
+    }
+    fn get_id(&self) -> c_long {
+        unsafe { ffi::wxListItem_GetId(self.as_ptr()) }
+    }
+    fn get_image(&self) -> c_int {
+        unsafe { ffi::wxListItem_GetImage(self.as_ptr()) }
+    }
+    fn get_mask(&self) -> c_long {
+        unsafe { ffi::wxListItem_GetMask(self.as_ptr()) }
+    }
+    fn get_state(&self) -> c_long {
+        unsafe { ffi::wxListItem_GetState(self.as_ptr()) }
+    }
+    fn get_text(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxListItem_GetText(self.as_ptr())).into() }
+    }
+    fn get_text_colour(&self) -> Colour {
+        unsafe { Colour::from_ptr(ffi::wxListItem_GetTextColour(self.as_ptr())) }
+    }
+    fn get_width(&self) -> c_int {
+        unsafe { ffi::wxListItem_GetWidth(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn SetAlign()
+    fn set_background_colour<C: ColourMethods>(&self, col_back: &C) {
+        unsafe {
+            let col_back = col_back.as_ptr();
+            ffi::wxListItem_SetBackgroundColour(self.as_ptr(), col_back)
+        }
+    }
+    fn set_column(&self, col: c_int) {
+        unsafe { ffi::wxListItem_SetColumn(self.as_ptr(), col) }
+    }
+    fn set_data_long(&self, data: c_long) {
+        unsafe { ffi::wxListItem_SetData(self.as_ptr(), data) }
+    }
+    fn set_data_void(&self, data: *mut c_void) {
+        unsafe { ffi::wxListItem_SetData1(self.as_ptr(), data) }
+    }
+    fn set_font<F: FontMethods>(&self, font: &F) {
+        unsafe {
+            let font = font.as_ptr();
+            ffi::wxListItem_SetFont(self.as_ptr(), font)
+        }
+    }
+    fn set_id(&self, id: c_long) {
+        unsafe { ffi::wxListItem_SetId(self.as_ptr(), id) }
+    }
+    fn set_image(&self, image: c_int) {
+        unsafe { ffi::wxListItem_SetImage(self.as_ptr(), image) }
+    }
+    fn set_mask(&self, mask: c_long) {
+        unsafe { ffi::wxListItem_SetMask(self.as_ptr(), mask) }
+    }
+    fn set_state(&self, state: c_long) {
+        unsafe { ffi::wxListItem_SetState(self.as_ptr(), state) }
+    }
+    fn set_state_mask(&self, state_mask: c_long) {
+        unsafe { ffi::wxListItem_SetStateMask(self.as_ptr(), state_mask) }
+    }
+    fn set_text(&self, text: &str) {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxListItem_SetText(self.as_ptr(), text)
+        }
+    }
+    fn set_text_colour<C: ColourMethods>(&self, col_text: &C) {
+        unsafe {
+            let col_text = col_text.as_ptr();
+            ffi::wxListItem_SetTextColour(self.as_ptr(), col_text)
+        }
+    }
+    fn set_width(&self, width: c_int) {
+        unsafe { ffi::wxListItem_SetWidth(self.as_ptr(), width) }
+    }
+}
+
+// wxListView
+pub trait ListViewMethods: ListCtrlMethods {
+    // DTOR: fn ~wxListView()
+    fn clear_column_image(&self, col: c_int) {
+        unsafe { ffi::wxListView_ClearColumnImage(self.as_ptr(), col) }
+    }
+    fn focus(&self, index: c_long) {
+        unsafe { ffi::wxListView_Focus(self.as_ptr(), index) }
+    }
+    fn get_first_selected(&self) -> c_long {
+        unsafe { ffi::wxListView_GetFirstSelected(self.as_ptr()) }
+    }
+    fn get_focused_item(&self) -> c_long {
+        unsafe { ffi::wxListView_GetFocusedItem(self.as_ptr()) }
+    }
+    fn get_next_selected(&self, item: c_long) -> c_long {
+        unsafe { ffi::wxListView_GetNextSelected(self.as_ptr(), item) }
+    }
+    fn is_selected(&self, index: c_long) -> bool {
+        unsafe { ffi::wxListView_IsSelected(self.as_ptr(), index) }
+    }
+    fn select(&self, n: c_long, on: bool) {
+        unsafe { ffi::wxListView_Select(self.as_ptr(), n, on) }
+    }
+    fn set_column_image(&self, col: c_int, image: c_int) {
+        unsafe { ffi::wxListView_SetColumnImage(self.as_ptr(), col, image) }
+    }
+}
+
+// wxListbook
+pub trait ListbookMethods: BookCtrlBaseMethods {
+    fn get_list_view(&self) -> WeakRef<ListView> {
+        unsafe { WeakRef::<ListView>::from(ffi::wxListbook_GetListView(self.as_ptr())) }
+    }
+}
+
+// wxLogGui
+pub trait LogGuiMethods: LogMethods {}
+
+// wxLogTextCtrl
+pub trait LogTextCtrlMethods: LogMethods {}
+
+// wxLogWindow
+pub trait LogWindowMethods: LogInterposerMethods {
+    fn get_frame(&self) -> WeakRef<Frame> {
+        unsafe { WeakRef::<Frame>::from(ffi::wxLogWindow_GetFrame(self.as_ptr())) }
+    }
+    fn on_frame_close<F: FrameMethods>(&self, frame: Option<&F>) -> bool {
+        unsafe {
+            let frame = match frame {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxLogWindow_OnFrameClose(self.as_ptr(), frame)
+        }
+    }
+    fn on_frame_delete<F: FrameMethods>(&self, frame: Option<&F>) {
+        unsafe {
+            let frame = match frame {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxLogWindow_OnFrameDelete(self.as_ptr(), frame)
+        }
+    }
+    fn show(&self, show: bool) {
+        unsafe { ffi::wxLogWindow_Show(self.as_ptr(), show) }
+    }
+}
+
+// wxLongPressEvent
+pub trait LongPressEventMethods: GestureEventMethods {}
+
+// wxMDIChildFrame
+pub trait MDIChildFrameMethods: FrameMethods {
+    // DTOR: fn ~wxMDIChildFrame()
+    fn activate(&self) {
+        unsafe { ffi::wxMDIChildFrame_Activate(self.as_ptr()) }
+    }
+    fn create_mdiparentframe<M: MDIParentFrameMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        parent: Option<&M>,
+        id: c_int,
+        title: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxMDIChildFrame_Create(self.as_ptr(), parent, id, title, pos, size, style, name)
+        }
+    }
+    fn get_mdi_parent(&self) -> WeakRef<MDIParentFrame> {
+        unsafe { WeakRef::<MDIParentFrame>::from(ffi::wxMDIChildFrame_GetMDIParent(self.as_ptr())) }
+    }
+}
+
+// wxMDIClientWindow
+pub trait MDIClientWindowMethods: WindowMethods {
+    fn create_client<M: MDIParentFrameMethods>(&self, parent: Option<&M>, style: c_long) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxMDIClientWindow_CreateClient(self.as_ptr(), parent, style)
+        }
+    }
+}
+
+// wxMDIParentFrame
+pub trait MDIParentFrameMethods: FrameMethods {
+    // DTOR: fn ~wxMDIParentFrame()
+    fn activate_next(&self) {
+        unsafe { ffi::wxMDIParentFrame_ActivateNext(self.as_ptr()) }
+    }
+    fn activate_previous(&self) {
+        unsafe { ffi::wxMDIParentFrame_ActivatePrevious(self.as_ptr()) }
+    }
+    fn arrange_icons(&self) {
+        unsafe { ffi::wxMDIParentFrame_ArrangeIcons(self.as_ptr()) }
+    }
+    fn cascade(&self) {
+        unsafe { ffi::wxMDIParentFrame_Cascade(self.as_ptr()) }
+    }
+    fn get_active_child(&self) -> WeakRef<MDIChildFrame> {
+        unsafe {
+            WeakRef::<MDIChildFrame>::from(ffi::wxMDIParentFrame_GetActiveChild(self.as_ptr()))
+        }
+    }
+    fn get_client_window(&self) -> *mut c_void {
+        unsafe { ffi::wxMDIParentFrame_GetClientWindow(self.as_ptr()) }
+    }
+    fn get_window_menu(&self) -> WeakRef<Menu> {
+        unsafe { WeakRef::<Menu>::from(ffi::wxMDIParentFrame_GetWindowMenu(self.as_ptr())) }
+    }
+    fn on_create_client(&self) -> WeakRef<MDIClientWindow> {
+        unsafe {
+            WeakRef::<MDIClientWindow>::from(ffi::wxMDIParentFrame_OnCreateClient(self.as_ptr()))
+        }
+    }
+    fn set_window_menu<M: MenuMethods>(&self, menu: Option<&M>) {
+        unsafe {
+            let menu = match menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxMDIParentFrame_SetWindowMenu(self.as_ptr(), menu)
+        }
+    }
+    // NOT_SUPPORTED: fn Tile()
+    fn is_tdi() -> bool {
+        unsafe { ffi::wxMDIParentFrame_IsTDI() }
+    }
+}
+
+// wxMask
+pub trait MaskMethods: ObjectMethods {
+    // DTOR: fn ~wxMask()
+    fn create_int<B: BitmapMethods>(&self, bitmap: &B, index: c_int) -> bool {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            ffi::wxMask_Create(self.as_ptr(), bitmap, index)
+        }
+    }
+    fn create<B: BitmapMethods>(&self, bitmap: &B) -> bool {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            ffi::wxMask_Create1(self.as_ptr(), bitmap)
+        }
+    }
+    fn create_colour<B: BitmapMethods, C: ColourMethods>(&self, bitmap: &B, colour: &C) -> bool {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            let colour = colour.as_ptr();
+            ffi::wxMask_Create2(self.as_ptr(), bitmap, colour)
+        }
+    }
+    fn get_bitmap(&self) -> Bitmap {
+        unsafe { Bitmap::from_ptr(ffi::wxMask_GetBitmap(self.as_ptr())) }
+    }
+}
+
+// wxMaximizeEvent
+pub trait MaximizeEventMethods: EventMethods {}
+
+// wxMemoryDC
+pub trait MemoryDCMethods: DCMethods {
+    fn select_object<B: BitmapMethods>(&self, bitmap: &B) {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            ffi::wxMemoryDC_SelectObject(self.as_ptr(), bitmap)
+        }
+    }
+    fn select_object_as_source<B: BitmapMethods>(&self, bitmap: &B) {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            ffi::wxMemoryDC_SelectObjectAsSource(self.as_ptr(), bitmap)
+        }
+    }
+    fn get_selected_bitmap(&self) -> BitmapIsOwned<false> {
+        unsafe { BitmapIsOwned::from_ptr(ffi::wxMemoryDC_GetSelectedBitmap(self.as_ptr())) }
+    }
+    fn get_selected_bitmap(&self) -> BitmapIsOwned<false> {
+        unsafe { BitmapIsOwned::from_ptr(ffi::wxMemoryDC_GetSelectedBitmap1(self.as_ptr())) }
+    }
 }
 
 // wxMenu
@@ -3594,6 +15068,19 @@ pub trait MenuBarMethods: WindowMethods {
     }
 }
 
+// wxMenuEvent
+pub trait MenuEventMethods: EventMethods {
+    fn get_menu(&self) -> WeakRef<Menu> {
+        unsafe { WeakRef::<Menu>::from(ffi::wxMenuEvent_GetMenu(self.as_ptr())) }
+    }
+    fn get_menu_id(&self) -> c_int {
+        unsafe { ffi::wxMenuEvent_GetMenuId(self.as_ptr()) }
+    }
+    fn is_popup(&self) -> bool {
+        unsafe { ffi::wxMenuEvent_IsPopup(self.as_ptr()) }
+    }
+}
+
 // wxMenuItem
 pub trait MenuItemMethods: ObjectMethods {
     // BLOCKED: fn GetBackgroundColour()
@@ -3638,8 +15125,8 @@ pub trait MenuItemMethods: ObjectMethods {
     }
     // BLOCKED: fn GetText()
     // BLOCKED: fn GetTextColour()
-    fn get_accel(&self) -> *mut c_void {
-        unsafe { ffi::wxMenuItem_GetAccel(self.as_ptr()) }
+    fn get_accel(&self) -> Option<AcceleratorEntryIsOwned<false>> {
+        unsafe { AcceleratorEntry::option_from(ffi::wxMenuItem_GetAccel(self.as_ptr())) }
     }
     // BLOCKED: fn GetAccelFromString()
     fn is_check(&self) -> bool {
@@ -3746,11 +15233,20 @@ pub trait MenuItemMethods: ObjectMethods {
             ffi::wxMenuItem_SetTextColour(self.as_ptr(), colour)
         }
     }
-    fn set_accel(&self, accel: *mut c_void) {
-        unsafe { ffi::wxMenuItem_SetAccel(self.as_ptr(), accel) }
+    fn set_accel<A: AcceleratorEntryMethods>(&self, accel: Option<&A>) {
+        unsafe {
+            let accel = match accel {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxMenuItem_SetAccel(self.as_ptr(), accel)
+        }
     }
-    fn add_extra_accel(&self, accel: *const c_void) {
-        unsafe { ffi::wxMenuItem_AddExtraAccel(self.as_ptr(), accel) }
+    fn add_extra_accel<A: AcceleratorEntryMethods>(&self, accel: &A) {
+        unsafe {
+            let accel = accel.as_ptr();
+            ffi::wxMenuItem_AddExtraAccel(self.as_ptr(), accel)
+        }
     }
     fn clear_extra_accels(&self) {
         unsafe { ffi::wxMenuItem_ClearExtraAccels(self.as_ptr()) }
@@ -3772,13 +15268,417 @@ pub trait MenuItemMethods: ObjectMethods {
     }
 }
 
+// wxMessageDialog
+pub trait MessageDialogMethods: DialogMethods {
+    fn set_extended_message(&self, extended_message: &str) {
+        unsafe {
+            let extended_message = WxString::from(extended_message);
+            let extended_message = extended_message.as_ptr();
+            ffi::wxMessageDialog_SetExtendedMessage(self.as_ptr(), extended_message)
+        }
+    }
+    fn set_help_label(&self, help: *const c_void) -> bool {
+        unsafe { ffi::wxMessageDialog_SetHelpLabel(self.as_ptr(), help) }
+    }
+    fn set_message(&self, message: &str) {
+        unsafe {
+            let message = WxString::from(message);
+            let message = message.as_ptr();
+            ffi::wxMessageDialog_SetMessage(self.as_ptr(), message)
+        }
+    }
+    fn set_ok_cancel_labels(&self, ok: *const c_void, cancel: *const c_void) -> bool {
+        unsafe { ffi::wxMessageDialog_SetOKCancelLabels(self.as_ptr(), ok, cancel) }
+    }
+    fn set_ok_label(&self, ok: *const c_void) -> bool {
+        unsafe { ffi::wxMessageDialog_SetOKLabel(self.as_ptr(), ok) }
+    }
+    fn set_yes_no_cancel_labels(
+        &self,
+        yes: *const c_void,
+        no: *const c_void,
+        cancel: *const c_void,
+    ) -> bool {
+        unsafe { ffi::wxMessageDialog_SetYesNoCancelLabels(self.as_ptr(), yes, no, cancel) }
+    }
+    fn set_yes_no_labels(&self, yes: *const c_void, no: *const c_void) -> bool {
+        unsafe { ffi::wxMessageDialog_SetYesNoLabels(self.as_ptr(), yes, no) }
+    }
+    fn get_caption(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxMessageDialog_GetCaption(self.as_ptr())).into() }
+    }
+    fn get_message(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxMessageDialog_GetMessage(self.as_ptr())).into() }
+    }
+    fn get_extended_message(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxMessageDialog_GetExtendedMessage(self.as_ptr())).into() }
+    }
+    fn get_message_dialog_style(&self) -> c_long {
+        unsafe { ffi::wxMessageDialog_GetMessageDialogStyle(self.as_ptr()) }
+    }
+    fn has_custom_labels(&self) -> bool {
+        unsafe { ffi::wxMessageDialog_HasCustomLabels(self.as_ptr()) }
+    }
+    fn get_yes_label(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxMessageDialog_GetYesLabel(self.as_ptr())).into() }
+    }
+    fn get_no_label(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxMessageDialog_GetNoLabel(self.as_ptr())).into() }
+    }
+    fn get_ok_label(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxMessageDialog_GetOKLabel(self.as_ptr())).into() }
+    }
+    fn get_cancel_label(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxMessageDialog_GetCancelLabel(self.as_ptr())).into() }
+    }
+    fn get_help_label(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxMessageDialog_GetHelpLabel(self.as_ptr())).into() }
+    }
+    fn get_effective_icon(&self) -> c_long {
+        unsafe { ffi::wxMessageDialog_GetEffectiveIcon(self.as_ptr()) }
+    }
+}
+
+// wxMessageOutputMessageBox
+pub trait MessageOutputMessageBoxMethods: MessageOutputMethods {}
+
+// wxMetafile
+pub trait MetafileMethods: ObjectMethods {
+    // DTOR: fn ~wxMetafile()
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxMetafile_IsOk(self.as_ptr()) }
+    }
+    fn play<D: DCMethods>(&self, dc: Option<&D>) -> bool {
+        unsafe {
+            let dc = match dc {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxMetafile_Play(self.as_ptr(), dc)
+        }
+    }
+    fn set_clipboard(&self, width: c_int, height: c_int) -> bool {
+        unsafe { ffi::wxMetafile_SetClipboard(self.as_ptr(), width, height) }
+    }
+}
+
+// wxMetafileDC
+pub trait MetafileDCMethods: DCMethods {
+    // DTOR: fn ~wxMetafileDC()
+    fn close(&self) -> Option<MetafileIsOwned<false>> {
+        unsafe { Metafile::option_from(ffi::wxMetafileDC_Close(self.as_ptr())) }
+    }
+}
+
+// wxMiniFrame
+pub trait MiniFrameMethods: FrameMethods {
+    // DTOR: fn ~wxMiniFrame()
+}
+
+// wxMirrorDC
+pub trait MirrorDCMethods: DCMethods {}
+
+// wxMouseCaptureChangedEvent
+pub trait MouseCaptureChangedEventMethods: EventMethods {
+    fn get_captured_window(&self) -> WeakRef<Window> {
+        unsafe {
+            WeakRef::<Window>::from(ffi::wxMouseCaptureChangedEvent_GetCapturedWindow(
+                self.as_ptr(),
+            ))
+        }
+    }
+}
+
+// wxMouseCaptureLostEvent
+pub trait MouseCaptureLostEventMethods: EventMethods {}
+
+// wxMouseEvent
+pub trait MouseEventMethods: EventMethods {
+    fn aux1_d_click(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_Aux1DClick(self.as_ptr()) }
+    }
+    fn aux1_down(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_Aux1Down(self.as_ptr()) }
+    }
+    fn aux1_up(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_Aux1Up(self.as_ptr()) }
+    }
+    fn aux2_d_click(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_Aux2DClick(self.as_ptr()) }
+    }
+    fn aux2_down(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_Aux2Down(self.as_ptr()) }
+    }
+    fn aux2_up(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_Aux2Up(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn Button()
+    // NOT_SUPPORTED: fn ButtonDClick()
+    // NOT_SUPPORTED: fn ButtonDown()
+    // NOT_SUPPORTED: fn ButtonUp()
+    fn dragging(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_Dragging(self.as_ptr()) }
+    }
+    fn entering(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_Entering(self.as_ptr()) }
+    }
+    fn get_button(&self) -> c_int {
+        unsafe { ffi::wxMouseEvent_GetButton(self.as_ptr()) }
+    }
+    fn get_click_count(&self) -> c_int {
+        unsafe { ffi::wxMouseEvent_GetClickCount(self.as_ptr()) }
+    }
+    fn get_lines_per_action(&self) -> c_int {
+        unsafe { ffi::wxMouseEvent_GetLinesPerAction(self.as_ptr()) }
+    }
+    fn get_columns_per_action(&self) -> c_int {
+        unsafe { ffi::wxMouseEvent_GetColumnsPerAction(self.as_ptr()) }
+    }
+    fn get_logical_position<D: DCMethods>(&self, dc: &D) -> Point {
+        unsafe {
+            let dc = dc.as_ptr();
+            Point::from_ptr(ffi::wxMouseEvent_GetLogicalPosition(self.as_ptr(), dc))
+        }
+    }
+    // NOT_SUPPORTED: fn GetMagnification()
+    fn get_wheel_delta(&self) -> c_int {
+        unsafe { ffi::wxMouseEvent_GetWheelDelta(self.as_ptr()) }
+    }
+    fn is_wheel_inverted(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_IsWheelInverted(self.as_ptr()) }
+    }
+    fn get_wheel_rotation(&self) -> c_int {
+        unsafe { ffi::wxMouseEvent_GetWheelRotation(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetWheelAxis()
+    fn is_button(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_IsButton(self.as_ptr()) }
+    }
+    fn is_page_scroll(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_IsPageScroll(self.as_ptr()) }
+    }
+    fn leaving(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_Leaving(self.as_ptr()) }
+    }
+    fn left_d_click(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_LeftDClick(self.as_ptr()) }
+    }
+    fn left_down(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_LeftDown(self.as_ptr()) }
+    }
+    fn left_up(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_LeftUp(self.as_ptr()) }
+    }
+    fn magnify(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_Magnify(self.as_ptr()) }
+    }
+    fn meta_down(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_MetaDown(self.as_ptr()) }
+    }
+    fn middle_d_click(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_MiddleDClick(self.as_ptr()) }
+    }
+    fn middle_down(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_MiddleDown(self.as_ptr()) }
+    }
+    fn middle_up(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_MiddleUp(self.as_ptr()) }
+    }
+    fn moving(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_Moving(self.as_ptr()) }
+    }
+    fn right_d_click(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_RightDClick(self.as_ptr()) }
+    }
+    fn right_down(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_RightDown(self.as_ptr()) }
+    }
+    fn right_up(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_RightUp(self.as_ptr()) }
+    }
+}
+
+// wxMouseEventsManager
+pub trait MouseEventsManagerMethods: EvtHandlerMethods {
+    fn create<W: WindowMethods>(&self, win: Option<&W>) -> bool {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxMouseEventsManager_Create(self.as_ptr(), win)
+        }
+    }
+}
+
+// wxMoveEvent
+pub trait MoveEventMethods: EventMethods {
+    fn get_position(&self) -> Point {
+        unsafe { Point::from_ptr(ffi::wxMoveEvent_GetPosition(self.as_ptr())) }
+    }
+    fn get_rect(&self) -> Rect {
+        unsafe { Rect::from_ptr(ffi::wxMoveEvent_GetRect(self.as_ptr())) }
+    }
+    fn set_rect<R: RectMethods>(&self, rect: &R) {
+        unsafe {
+            let rect = rect.as_ptr();
+            ffi::wxMoveEvent_SetRect(self.as_ptr(), rect)
+        }
+    }
+    fn set_position<P: PointMethods>(&self, pos: &P) {
+        unsafe {
+            let pos = pos.as_ptr();
+            ffi::wxMoveEvent_SetPosition(self.as_ptr(), pos)
+        }
+    }
+}
+
+// wxNativeFontInfo
+pub trait NativeFontInfoMethods: WxRustMethods {
+    // DTOR: fn ~wxNativeFontInfo()
+    // BLOCKED: fn operator=()
+    fn init(&self) {
+        unsafe { ffi::wxNativeFontInfo_Init(self.as_ptr()) }
+    }
+    fn init_from_font<F: FontMethods>(&self, font: &F) {
+        unsafe {
+            let font = font.as_ptr();
+            ffi::wxNativeFontInfo_InitFromFont(self.as_ptr(), font)
+        }
+    }
+    fn get_point_size(&self) -> c_int {
+        unsafe { ffi::wxNativeFontInfo_GetPointSize(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetFractionalPointSize()
+    fn get_pixel_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxNativeFontInfo_GetPixelSize(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn GetStyle()
+    fn get_numeric_weight(&self) -> c_int {
+        unsafe { ffi::wxNativeFontInfo_GetNumericWeight(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetWeight()
+    fn get_underlined(&self) -> bool {
+        unsafe { ffi::wxNativeFontInfo_GetUnderlined(self.as_ptr()) }
+    }
+    fn get_face_name(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxNativeFontInfo_GetFaceName(self.as_ptr())).into() }
+    }
+    // NOT_SUPPORTED: fn GetFamily()
+    // NOT_SUPPORTED: fn GetEncoding()
+    fn set_point_size(&self, pointsize: c_int) {
+        unsafe { ffi::wxNativeFontInfo_SetPointSize(self.as_ptr(), pointsize) }
+    }
+    // NOT_SUPPORTED: fn SetFractionalPointSize()
+    fn set_pixel_size<S: SizeMethods>(&self, pixel_size: &S) {
+        unsafe {
+            let pixel_size = pixel_size.as_ptr();
+            ffi::wxNativeFontInfo_SetPixelSize(self.as_ptr(), pixel_size)
+        }
+    }
+    // NOT_SUPPORTED: fn SetStyle()
+    fn set_numeric_weight(&self, weight: c_int) {
+        unsafe { ffi::wxNativeFontInfo_SetNumericWeight(self.as_ptr(), weight) }
+    }
+    // NOT_SUPPORTED: fn SetWeight()
+    fn set_underlined(&self, underlined: bool) {
+        unsafe { ffi::wxNativeFontInfo_SetUnderlined(self.as_ptr(), underlined) }
+    }
+    fn set_face_name_str(&self, facename: &str) -> bool {
+        unsafe {
+            let facename = WxString::from(facename);
+            let facename = facename.as_ptr();
+            ffi::wxNativeFontInfo_SetFaceName(self.as_ptr(), facename)
+        }
+    }
+    // NOT_SUPPORTED: fn SetFamily()
+    // NOT_SUPPORTED: fn SetEncoding()
+    fn set_face_name_arraystring<A: ArrayStringMethods>(&self, facenames: &A) {
+        unsafe {
+            let facenames = facenames.as_ptr();
+            ffi::wxNativeFontInfo_SetFaceName1(self.as_ptr(), facenames)
+        }
+    }
+    fn from_string(&self, s: &str) -> bool {
+        unsafe {
+            let s = WxString::from(s);
+            let s = s.as_ptr();
+            ffi::wxNativeFontInfo_FromString(self.as_ptr(), s)
+        }
+    }
+    fn to_string(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxNativeFontInfo_ToString(self.as_ptr())).into() }
+    }
+    fn from_user_string(&self, s: &str) -> bool {
+        unsafe {
+            let s = WxString::from(s);
+            let s = s.as_ptr();
+            ffi::wxNativeFontInfo_FromUserString(self.as_ptr(), s)
+        }
+    }
+    fn to_user_string(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxNativeFontInfo_ToUserString(self.as_ptr())).into() }
+    }
+}
+
+// wxNativeWindow
+pub trait NativeWindowMethods: WindowMethods {
+    // NOT_SUPPORTED: fn Create()
+    fn disown(&self) {
+        unsafe { ffi::wxNativeWindow_Disown(self.as_ptr()) }
+    }
+}
+
+// wxNavigationKeyEvent
+pub trait NavigationKeyEventMethods: EventMethods {
+    fn get_current_focus(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxNavigationKeyEvent_GetCurrentFocus(self.as_ptr())) }
+    }
+    fn get_direction(&self) -> bool {
+        unsafe { ffi::wxNavigationKeyEvent_GetDirection(self.as_ptr()) }
+    }
+    fn is_from_tab(&self) -> bool {
+        unsafe { ffi::wxNavigationKeyEvent_IsFromTab(self.as_ptr()) }
+    }
+    fn is_window_change(&self) -> bool {
+        unsafe { ffi::wxNavigationKeyEvent_IsWindowChange(self.as_ptr()) }
+    }
+    fn set_current_focus<W: WindowMethods>(&self, current_focus: Option<&W>) {
+        unsafe {
+            let current_focus = match current_focus {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxNavigationKeyEvent_SetCurrentFocus(self.as_ptr(), current_focus)
+        }
+    }
+    fn set_direction(&self, direction: bool) {
+        unsafe { ffi::wxNavigationKeyEvent_SetDirection(self.as_ptr(), direction) }
+    }
+    fn set_flags(&self, flags: c_long) {
+        unsafe { ffi::wxNavigationKeyEvent_SetFlags(self.as_ptr(), flags) }
+    }
+    fn set_from_tab(&self, from_tab: bool) {
+        unsafe { ffi::wxNavigationKeyEvent_SetFromTab(self.as_ptr(), from_tab) }
+    }
+    fn set_window_change(&self, window_change: bool) {
+        unsafe { ffi::wxNavigationKeyEvent_SetWindowChange(self.as_ptr(), window_change) }
+    }
+}
+
 // wxNonOwnedWindow
 pub trait NonOwnedWindowMethods: WindowMethods {
-    fn set_shape_region(&self, region: *const c_void) -> bool {
-        unsafe { ffi::wxNonOwnedWindow_SetShape(self.as_ptr(), region) }
+    fn set_shape_region<R: RegionMethods>(&self, region: &R) -> bool {
+        unsafe {
+            let region = region.as_ptr();
+            ffi::wxNonOwnedWindow_SetShape(self.as_ptr(), region)
+        }
     }
-    fn set_shape_graphicspath(&self, path: *const c_void) -> bool {
-        unsafe { ffi::wxNonOwnedWindow_SetShape1(self.as_ptr(), path) }
+    fn set_shape_graphicspath<G: GraphicsPathMethods>(&self, path: &G) -> bool {
+        unsafe {
+            let path = path.as_ptr();
+            ffi::wxNonOwnedWindow_SetShape1(self.as_ptr(), path)
+        }
     }
 }
 
@@ -3800,6 +15700,74 @@ pub trait NotebookMethods: BookCtrlBaseMethods {
     }
 }
 
+// wxNotificationMessage
+pub trait NotificationMessageMethods: EvtHandlerMethods {
+    // DTOR: fn ~wxNotificationMessage()
+    fn add_action(&self, actionid: c_int, label: &str) -> bool {
+        unsafe {
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            ffi::wxNotificationMessage_AddAction(self.as_ptr(), actionid, label)
+        }
+    }
+    fn close(&self) -> bool {
+        unsafe { ffi::wxNotificationMessage_Close(self.as_ptr()) }
+    }
+    fn set_flags(&self, flags: c_int) {
+        unsafe { ffi::wxNotificationMessage_SetFlags(self.as_ptr(), flags) }
+    }
+    fn set_icon<I: IconMethods>(&self, icon: &I) {
+        unsafe {
+            let icon = icon.as_ptr();
+            ffi::wxNotificationMessage_SetIcon(self.as_ptr(), icon)
+        }
+    }
+    fn set_message(&self, message: &str) {
+        unsafe {
+            let message = WxString::from(message);
+            let message = message.as_ptr();
+            ffi::wxNotificationMessage_SetMessage(self.as_ptr(), message)
+        }
+    }
+    fn set_parent<W: WindowMethods>(&self, parent: Option<&W>) {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxNotificationMessage_SetParent(self.as_ptr(), parent)
+        }
+    }
+    fn set_title(&self, title: &str) {
+        unsafe {
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            ffi::wxNotificationMessage_SetTitle(self.as_ptr(), title)
+        }
+    }
+    fn show(&self, timeout: c_int) -> bool {
+        unsafe { ffi::wxNotificationMessage_Show(self.as_ptr(), timeout) }
+    }
+    fn use_task_bar_icon<T: TaskBarIconMethods>(icon: Option<&T>) -> WeakRef<TaskBarIcon> {
+        unsafe {
+            let icon = match icon {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            WeakRef::<TaskBarIcon>::from(ffi::wxNotificationMessage_UseTaskBarIcon(icon))
+        }
+    }
+    fn msw_use_toasts(shortcut_path: &str, app_id: &str) -> bool {
+        unsafe {
+            let shortcut_path = WxString::from(shortcut_path);
+            let shortcut_path = shortcut_path.as_ptr();
+            let app_id = WxString::from(app_id);
+            let app_id = app_id.as_ptr();
+            ffi::wxNotificationMessage_MSWUseToasts(shortcut_path, app_id)
+        }
+    }
+}
+
 // wxNotifyEvent
 pub trait NotifyEventMethods: CommandEventMethods {
     fn allow(&self) {
@@ -3813,14 +15781,468 @@ pub trait NotifyEventMethods: CommandEventMethods {
     }
 }
 
+// wxNumberEntryDialog
+pub trait NumberEntryDialogMethods: DialogMethods {
+    fn create_str<W: WindowMethods, P: PointMethods>(
+        &self,
+        parent: Option<&W>,
+        message: &str,
+        prompt: &str,
+        caption: &str,
+        value: c_long,
+        min: c_long,
+        max: c_long,
+        pos: &P,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let message = WxString::from(message);
+            let message = message.as_ptr();
+            let prompt = WxString::from(prompt);
+            let prompt = prompt.as_ptr();
+            let caption = WxString::from(caption);
+            let caption = caption.as_ptr();
+            let pos = pos.as_ptr();
+            ffi::wxNumberEntryDialog_Create(
+                self.as_ptr(),
+                parent,
+                message,
+                prompt,
+                caption,
+                value,
+                min,
+                max,
+                pos,
+            )
+        }
+    }
+    fn get_value(&self) -> c_long {
+        unsafe { ffi::wxNumberEntryDialog_GetValue(self.as_ptr()) }
+    }
+}
+
+// wxOverlay
+pub trait OverlayMethods: WxRustMethods {
+    // DTOR: fn ~wxOverlay()
+    fn reset(&self) {
+        unsafe { ffi::wxOverlay_Reset(self.as_ptr()) }
+    }
+}
+
+// wxOwnerDrawnComboBox
+pub trait OwnerDrawnComboBoxMethods: ComboCtrlMethods {
+    // DTOR: fn ~wxOwnerDrawnComboBox()
+    // NOT_SUPPORTED: fn Create1()
+    fn create_str_arraystring<
+        W: WindowMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        A: ArrayStringMethods,
+        V: ValidatorMethods,
+    >(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        value: &str,
+        pos: &P,
+        size: &S,
+        choices: &A,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let value = WxString::from(value);
+            let value = value.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let choices = choices.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxOwnerDrawnComboBox_Create2(
+                self.as_ptr(),
+                parent,
+                id,
+                value,
+                pos,
+                size,
+                choices,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+    fn is_list_empty(&self) -> bool {
+        unsafe { ffi::wxOwnerDrawnComboBox_IsListEmpty(self.as_ptr()) }
+    }
+    fn is_text_empty(&self) -> bool {
+        unsafe { ffi::wxOwnerDrawnComboBox_IsTextEmpty(self.as_ptr()) }
+    }
+    fn get_widest_item(&self) -> c_int {
+        unsafe { ffi::wxOwnerDrawnComboBox_GetWidestItem(self.as_ptr()) }
+    }
+    fn get_widest_item_width(&self) -> c_int {
+        unsafe { ffi::wxOwnerDrawnComboBox_GetWidestItemWidth(self.as_ptr()) }
+    }
+}
+
+// wxPCXHandler
+pub trait PCXHandlerMethods: ImageHandlerMethods {}
+
+// wxPNGHandler
+pub trait PNGHandlerMethods: ImageHandlerMethods {}
+
+// wxPNMHandler
+pub trait PNMHandlerMethods: ImageHandlerMethods {}
+
+// wxPageSetupDialog
+pub trait PageSetupDialogMethods: ObjectMethods {
+    // DTOR: fn ~wxPageSetupDialog()
+    fn get_page_setup_data(&self) -> PageSetupDialogDataIsOwned<false> {
+        unsafe {
+            PageSetupDialogDataIsOwned::from_ptr(ffi::wxPageSetupDialog_GetPageSetupData(
+                self.as_ptr(),
+            ))
+        }
+    }
+    fn show_modal(&self) -> c_int {
+        unsafe { ffi::wxPageSetupDialog_ShowModal(self.as_ptr()) }
+    }
+}
+
+// wxPageSetupDialogData
+pub trait PageSetupDialogDataMethods: ObjectMethods {
+    // DTOR: fn ~wxPageSetupDialogData()
+    fn enable_help(&self, flag: bool) {
+        unsafe { ffi::wxPageSetupDialogData_EnableHelp(self.as_ptr(), flag) }
+    }
+    fn enable_margins(&self, flag: bool) {
+        unsafe { ffi::wxPageSetupDialogData_EnableMargins(self.as_ptr(), flag) }
+    }
+    fn enable_orientation(&self, flag: bool) {
+        unsafe { ffi::wxPageSetupDialogData_EnableOrientation(self.as_ptr(), flag) }
+    }
+    fn enable_paper(&self, flag: bool) {
+        unsafe { ffi::wxPageSetupDialogData_EnablePaper(self.as_ptr(), flag) }
+    }
+    fn enable_printer(&self, flag: bool) {
+        unsafe { ffi::wxPageSetupDialogData_EnablePrinter(self.as_ptr(), flag) }
+    }
+    fn get_default_info(&self) -> bool {
+        unsafe { ffi::wxPageSetupDialogData_GetDefaultInfo(self.as_ptr()) }
+    }
+    fn get_default_min_margins(&self) -> bool {
+        unsafe { ffi::wxPageSetupDialogData_GetDefaultMinMargins(self.as_ptr()) }
+    }
+    fn get_enable_help(&self) -> bool {
+        unsafe { ffi::wxPageSetupDialogData_GetEnableHelp(self.as_ptr()) }
+    }
+    fn get_enable_margins(&self) -> bool {
+        unsafe { ffi::wxPageSetupDialogData_GetEnableMargins(self.as_ptr()) }
+    }
+    fn get_enable_orientation(&self) -> bool {
+        unsafe { ffi::wxPageSetupDialogData_GetEnableOrientation(self.as_ptr()) }
+    }
+    fn get_enable_paper(&self) -> bool {
+        unsafe { ffi::wxPageSetupDialogData_GetEnablePaper(self.as_ptr()) }
+    }
+    fn get_enable_printer(&self) -> bool {
+        unsafe { ffi::wxPageSetupDialogData_GetEnablePrinter(self.as_ptr()) }
+    }
+    fn get_margin_bottom_right(&self) -> Point {
+        unsafe {
+            Point::from_ptr(ffi::wxPageSetupDialogData_GetMarginBottomRight(
+                self.as_ptr(),
+            ))
+        }
+    }
+    fn get_margin_top_left(&self) -> Point {
+        unsafe { Point::from_ptr(ffi::wxPageSetupDialogData_GetMarginTopLeft(self.as_ptr())) }
+    }
+    fn get_min_margin_bottom_right(&self) -> Point {
+        unsafe {
+            Point::from_ptr(ffi::wxPageSetupDialogData_GetMinMarginBottomRight(
+                self.as_ptr(),
+            ))
+        }
+    }
+    fn get_min_margin_top_left(&self) -> Point {
+        unsafe {
+            Point::from_ptr(ffi::wxPageSetupDialogData_GetMinMarginTopLeft(
+                self.as_ptr(),
+            ))
+        }
+    }
+    // NOT_SUPPORTED: fn GetPaperId()
+    fn get_paper_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxPageSetupDialogData_GetPaperSize(self.as_ptr())) }
+    }
+    fn get_print_data(&self) -> PrintDataIsOwned<false> {
+        unsafe {
+            PrintDataIsOwned::from_ptr(ffi::wxPageSetupDialogData_GetPrintData(self.as_ptr()))
+        }
+    }
+    fn get_print_data(&self) -> PrintDataIsOwned<false> {
+        unsafe {
+            PrintDataIsOwned::from_ptr(ffi::wxPageSetupDialogData_GetPrintData1(self.as_ptr()))
+        }
+    }
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxPageSetupDialogData_IsOk(self.as_ptr()) }
+    }
+    fn set_default_info(&self, flag: bool) {
+        unsafe { ffi::wxPageSetupDialogData_SetDefaultInfo(self.as_ptr(), flag) }
+    }
+    fn set_default_min_margins(&self, flag: bool) {
+        unsafe { ffi::wxPageSetupDialogData_SetDefaultMinMargins(self.as_ptr(), flag) }
+    }
+    fn set_margin_bottom_right<P: PointMethods>(&self, pt: &P) {
+        unsafe {
+            let pt = pt.as_ptr();
+            ffi::wxPageSetupDialogData_SetMarginBottomRight(self.as_ptr(), pt)
+        }
+    }
+    fn set_margin_top_left<P: PointMethods>(&self, pt: &P) {
+        unsafe {
+            let pt = pt.as_ptr();
+            ffi::wxPageSetupDialogData_SetMarginTopLeft(self.as_ptr(), pt)
+        }
+    }
+    fn set_min_margin_bottom_right<P: PointMethods>(&self, pt: &P) {
+        unsafe {
+            let pt = pt.as_ptr();
+            ffi::wxPageSetupDialogData_SetMinMarginBottomRight(self.as_ptr(), pt)
+        }
+    }
+    fn set_min_margin_top_left<P: PointMethods>(&self, pt: &P) {
+        unsafe {
+            let pt = pt.as_ptr();
+            ffi::wxPageSetupDialogData_SetMinMarginTopLeft(self.as_ptr(), pt)
+        }
+    }
+    // NOT_SUPPORTED: fn SetPaperId()
+    fn set_paper_size<S: SizeMethods>(&self, size: &S) {
+        unsafe {
+            let size = size.as_ptr();
+            ffi::wxPageSetupDialogData_SetPaperSize(self.as_ptr(), size)
+        }
+    }
+    fn set_print_data<P: PrintDataMethods>(&self, print_data: &P) {
+        unsafe {
+            let print_data = print_data.as_ptr();
+            ffi::wxPageSetupDialogData_SetPrintData(self.as_ptr(), print_data)
+        }
+    }
+    // BLOCKED: fn operator=()
+    // BLOCKED: fn operator=1()
+}
+
+// wxPaintDC
+pub trait PaintDCMethods: ClientDCMethods {}
+
+// wxPaintEvent
+pub trait PaintEventMethods: EventMethods {}
+
+// wxPalette
+pub trait PaletteMethods: GDIObjectMethods {
+    // DTOR: fn ~wxPalette()
+    fn create(
+        &self,
+        n: c_int,
+        red: *const c_void,
+        green: *const c_void,
+        blue: *const c_void,
+    ) -> bool {
+        unsafe { ffi::wxPalette_Create(self.as_ptr(), n, red, green, blue) }
+    }
+    fn get_colours_count(&self) -> c_int {
+        unsafe { ffi::wxPalette_GetColoursCount(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetPixel()
+    fn get_rgb(
+        &self,
+        pixel: c_int,
+        red: *mut c_void,
+        green: *mut c_void,
+        blue: *mut c_void,
+    ) -> bool {
+        unsafe { ffi::wxPalette_GetRGB(self.as_ptr(), pixel, red, green, blue) }
+    }
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxPalette_IsOk(self.as_ptr()) }
+    }
+    // BLOCKED: fn operator=()
+}
+
+// wxPanGestureEvent
+pub trait PanGestureEventMethods: GestureEventMethods {
+    fn get_delta(&self) -> Point {
+        unsafe { Point::from_ptr(ffi::wxPanGestureEvent_GetDelta(self.as_ptr())) }
+    }
+    fn set_delta<P: PointMethods>(&self, delta: &P) {
+        unsafe {
+            let delta = delta.as_ptr();
+            ffi::wxPanGestureEvent_SetDelta(self.as_ptr(), delta)
+        }
+    }
+}
+
 // wxPanel
 pub trait PanelMethods: WindowMethods {
     // DTOR: fn ~wxPanel()
-    fn on_sys_colour_changed(&self, event: *mut c_void) {
-        unsafe { ffi::wxPanel_OnSysColourChanged(self.as_ptr(), event) }
+    fn on_sys_colour_changed<S: SysColourChangedEventMethods>(&self, event: &S) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxPanel_OnSysColourChanged(self.as_ptr(), event)
+        }
     }
     fn set_focus_ignoring_children(&self) {
         unsafe { ffi::wxPanel_SetFocusIgnoringChildren(self.as_ptr()) }
+    }
+}
+
+// wxPasswordEntryDialog
+pub trait PasswordEntryDialogMethods: TextEntryDialogMethods {}
+
+// wxPen
+pub trait PenMethods: GDIObjectMethods {
+    // DTOR: fn ~wxPen()
+    // NOT_SUPPORTED: fn GetCap()
+    // NOT_SUPPORTED: fn GetQuality()
+    fn get_colour(&self) -> Colour {
+        unsafe { Colour::from_ptr(ffi::wxPen_GetColour(self.as_ptr())) }
+    }
+    fn get_dashes(&self, dashes: *mut c_void) -> c_int {
+        unsafe { ffi::wxPen_GetDashes(self.as_ptr(), dashes) }
+    }
+    // NOT_SUPPORTED: fn GetJoin()
+    fn get_stipple(&self) -> Option<BitmapIsOwned<false>> {
+        unsafe { Bitmap::option_from(ffi::wxPen_GetStipple(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn GetStyle()
+    fn get_width(&self) -> c_int {
+        unsafe { ffi::wxPen_GetWidth(self.as_ptr()) }
+    }
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxPen_IsOk(self.as_ptr()) }
+    }
+    fn is_non_transparent(&self) -> bool {
+        unsafe { ffi::wxPen_IsNonTransparent(self.as_ptr()) }
+    }
+    fn is_transparent(&self) -> bool {
+        unsafe { ffi::wxPen_IsTransparent(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn SetCap()
+    // NOT_SUPPORTED: fn SetQuality()
+    fn set_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxPen_SetColour(self.as_ptr(), colour)
+        }
+    }
+    // NOT_SUPPORTED: fn SetColour1()
+    fn set_dashes(&self, n: c_int, dash: *const c_void) {
+        unsafe { ffi::wxPen_SetDashes(self.as_ptr(), n, dash) }
+    }
+    // NOT_SUPPORTED: fn SetJoin()
+    fn set_stipple<B: BitmapMethods>(&self, stipple: &B) {
+        unsafe {
+            let stipple = stipple.as_ptr();
+            ffi::wxPen_SetStipple(self.as_ptr(), stipple)
+        }
+    }
+    // NOT_SUPPORTED: fn SetStyle()
+    fn set_width(&self, width: c_int) {
+        unsafe { ffi::wxPen_SetWidth(self.as_ptr(), width) }
+    }
+    // BLOCKED: fn operator!=()
+    // BLOCKED: fn operator=()
+    // BLOCKED: fn operator==()
+}
+
+// wxPenList
+pub trait PenListMethods: WxRustMethods {
+    // NOT_SUPPORTED: fn FindOrCreatePen()
+}
+
+// wxPersistenceManager
+pub trait PersistenceManagerMethods: WxRustMethods {
+    fn set<P: PersistenceManagerMethods>(manager: &P) {
+        unsafe {
+            let manager = manager.as_ptr();
+            ffi::wxPersistenceManager_Set(manager)
+        }
+    }
+    fn get() -> PersistenceManagerIsOwned<false> {
+        unsafe { PersistenceManagerIsOwned::from_ptr(ffi::wxPersistenceManager_Get()) }
+    }
+    fn disable_saving(&self) {
+        unsafe { ffi::wxPersistenceManager_DisableSaving(self.as_ptr()) }
+    }
+    fn disable_restoring(&self) {
+        unsafe { ffi::wxPersistenceManager_DisableRestoring(self.as_ptr()) }
+    }
+    fn register_t(&self, obj: *mut c_void) -> Option<PersistentObjectIsOwned<false>> {
+        unsafe {
+            PersistentObject::option_from(ffi::wxPersistenceManager_Register(self.as_ptr(), obj))
+        }
+    }
+    fn register_void<P: PersistentObjectMethods>(
+        &self,
+        obj: *mut c_void,
+        po: Option<&P>,
+    ) -> Option<PersistentObjectIsOwned<false>> {
+        unsafe {
+            let po = match po {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            PersistentObject::option_from(ffi::wxPersistenceManager_Register1(
+                self.as_ptr(),
+                obj,
+                po,
+            ))
+        }
+    }
+    fn find(&self, obj: *mut c_void) -> Option<PersistentObjectIsOwned<false>> {
+        unsafe { PersistentObject::option_from(ffi::wxPersistenceManager_Find(self.as_ptr(), obj)) }
+    }
+    fn unregister(&self, obj: *mut c_void) {
+        unsafe { ffi::wxPersistenceManager_Unregister(self.as_ptr(), obj) }
+    }
+    fn save(&self, obj: *mut c_void) {
+        unsafe { ffi::wxPersistenceManager_Save(self.as_ptr(), obj) }
+    }
+    fn restore(&self, obj: *mut c_void) -> bool {
+        unsafe { ffi::wxPersistenceManager_Restore(self.as_ptr(), obj) }
+    }
+    fn save_and_unregister(&self, obj: *mut c_void) {
+        unsafe { ffi::wxPersistenceManager_SaveAndUnregister(self.as_ptr(), obj) }
+    }
+    fn register_and_restore_t(&self, obj: *mut c_void) -> bool {
+        unsafe { ffi::wxPersistenceManager_RegisterAndRestore(self.as_ptr(), obj) }
+    }
+    fn register_and_restore_void<P: PersistentObjectMethods>(
+        &self,
+        obj: *mut c_void,
+        po: Option<&P>,
+    ) -> bool {
+        unsafe {
+            let po = match po {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxPersistenceManager_RegisterAndRestore1(self.as_ptr(), obj, po)
+        }
     }
 }
 
@@ -3959,6 +16381,753 @@ pub trait PointMethods: WxRustMethods {
     // BLOCKED: fn operator*=()
 }
 
+// wxPopupTransientWindow
+pub trait PopupTransientWindowMethods: PopupWindowMethods {
+    fn popup<W: WindowMethods>(&self, focus: Option<&W>) {
+        unsafe {
+            let focus = match focus {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxPopupTransientWindow_Popup(self.as_ptr(), focus)
+        }
+    }
+    fn dismiss(&self) {
+        unsafe { ffi::wxPopupTransientWindow_Dismiss(self.as_ptr()) }
+    }
+    fn process_left_down<M: MouseEventMethods>(&self, event: &M) -> bool {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxPopupTransientWindow_ProcessLeftDown(self.as_ptr(), event)
+        }
+    }
+}
+
+// wxPopupWindow
+pub trait PopupWindowMethods: NonOwnedWindowMethods {
+    fn create_int<W: WindowMethods>(&self, parent: Option<&W>, flags: c_int) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxPopupWindow_Create(self.as_ptr(), parent, flags)
+        }
+    }
+    fn position<P: PointMethods, S: SizeMethods>(&self, pt_origin: &P, size_popup: &S) {
+        unsafe {
+            let pt_origin = pt_origin.as_ptr();
+            let size_popup = size_popup.as_ptr();
+            ffi::wxPopupWindow_Position(self.as_ptr(), pt_origin, size_popup)
+        }
+    }
+}
+
+// wxPreferencesEditor
+pub trait PreferencesEditorMethods: WxRustMethods {
+    // DTOR: fn ~wxPreferencesEditor()
+    fn add_page<P: PreferencesPageMethods>(&self, page: Option<&P>) {
+        unsafe {
+            let page = match page {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxPreferencesEditor_AddPage(self.as_ptr(), page)
+        }
+    }
+    fn show<W: WindowMethods>(&self, parent: Option<&W>) {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxPreferencesEditor_Show(self.as_ptr(), parent)
+        }
+    }
+    fn dismiss(&self) {
+        unsafe { ffi::wxPreferencesEditor_Dismiss(self.as_ptr()) }
+    }
+    fn should_apply_changes_immediately() -> bool {
+        unsafe { ffi::wxPreferencesEditor_ShouldApplyChangesImmediately() }
+    }
+    fn shown_modally() -> bool {
+        unsafe { ffi::wxPreferencesEditor_ShownModally() }
+    }
+}
+
+// wxPreferencesPage
+pub trait PreferencesPageMethods: WxRustMethods {
+    // DTOR: fn ~wxPreferencesPage()
+    fn get_name(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxPreferencesPage_GetName(self.as_ptr())).into() }
+    }
+    fn get_icon(&self) -> BitmapBundle {
+        unsafe { BitmapBundle::from_ptr(ffi::wxPreferencesPage_GetIcon(self.as_ptr())) }
+    }
+    fn get_large_icon(&self) -> Bitmap {
+        unsafe { Bitmap::from_ptr(ffi::wxPreferencesPage_GetLargeIcon(self.as_ptr())) }
+    }
+    fn create_window<W: WindowMethods>(&self, parent: Option<&W>) -> WeakRef<Window> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            WeakRef::<Window>::from(ffi::wxPreferencesPage_CreateWindow(self.as_ptr(), parent))
+        }
+    }
+}
+
+// wxPressAndTapEvent
+pub trait PressAndTapEventMethods: GestureEventMethods {}
+
+// wxPreviewControlBar
+pub trait PreviewControlBarMethods: PanelMethods {
+    // DTOR: fn ~wxPreviewControlBar()
+    fn create_buttons(&self) {
+        unsafe { ffi::wxPreviewControlBar_CreateButtons(self.as_ptr()) }
+    }
+    fn get_print_preview(&self) -> *mut c_void {
+        unsafe { ffi::wxPreviewControlBar_GetPrintPreview(self.as_ptr()) }
+    }
+    fn get_zoom_control(&self) -> c_int {
+        unsafe { ffi::wxPreviewControlBar_GetZoomControl(self.as_ptr()) }
+    }
+    fn set_zoom_control(&self, percent: c_int) {
+        unsafe { ffi::wxPreviewControlBar_SetZoomControl(self.as_ptr(), percent) }
+    }
+}
+
+// wxPreviewFrame
+pub trait PreviewFrameMethods: FrameMethods {
+    // DTOR: fn ~wxPreviewFrame()
+    fn create_canvas(&self) {
+        unsafe { ffi::wxPreviewFrame_CreateCanvas(self.as_ptr()) }
+    }
+    fn create_control_bar(&self) {
+        unsafe { ffi::wxPreviewFrame_CreateControlBar(self.as_ptr()) }
+    }
+    fn initialize(&self) {
+        unsafe { ffi::wxPreviewFrame_Initialize(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn InitializeWithModality()
+    fn on_close_window<C: CloseEventMethods>(&self, event: &C) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxPreviewFrame_OnCloseWindow(self.as_ptr(), event)
+        }
+    }
+}
+
+// wxPrintData
+pub trait PrintDataMethods: ObjectMethods {
+    // DTOR: fn ~wxPrintData()
+    // NOT_SUPPORTED: fn GetBin()
+    fn get_collate(&self) -> bool {
+        unsafe { ffi::wxPrintData_GetCollate(self.as_ptr()) }
+    }
+    fn get_colour(&self) -> bool {
+        unsafe { ffi::wxPrintData_GetColour(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetDuplex()
+    fn get_no_copies(&self) -> c_int {
+        unsafe { ffi::wxPrintData_GetNoCopies(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetOrientation()
+    // NOT_SUPPORTED: fn GetPaperId()
+    fn get_printer_name(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxPrintData_GetPrinterName(self.as_ptr())).into() }
+    }
+    // NOT_SUPPORTED: fn GetQuality()
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxPrintData_IsOk(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn SetBin()
+    fn set_collate(&self, flag: bool) {
+        unsafe { ffi::wxPrintData_SetCollate(self.as_ptr(), flag) }
+    }
+    fn set_colour(&self, flag: bool) {
+        unsafe { ffi::wxPrintData_SetColour(self.as_ptr(), flag) }
+    }
+    // NOT_SUPPORTED: fn SetDuplex()
+    fn set_no_copies(&self, n: c_int) {
+        unsafe { ffi::wxPrintData_SetNoCopies(self.as_ptr(), n) }
+    }
+    // NOT_SUPPORTED: fn SetOrientation()
+    // NOT_SUPPORTED: fn SetPaperId()
+    fn set_paper_size<S: SizeMethods>(&self, size: &S) {
+        unsafe {
+            let size = size.as_ptr();
+            ffi::wxPrintData_SetPaperSize(self.as_ptr(), size)
+        }
+    }
+    fn set_printer_name(&self, printer_name: &str) {
+        unsafe {
+            let printer_name = WxString::from(printer_name);
+            let printer_name = printer_name.as_ptr();
+            ffi::wxPrintData_SetPrinterName(self.as_ptr(), printer_name)
+        }
+    }
+    // NOT_SUPPORTED: fn SetQuality()
+    // BLOCKED: fn operator=()
+    fn get_filename(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxPrintData_GetFilename(self.as_ptr())).into() }
+    }
+    fn set_filename(&self, filename: &str) {
+        unsafe {
+            let filename = WxString::from(filename);
+            let filename = filename.as_ptr();
+            ffi::wxPrintData_SetFilename(self.as_ptr(), filename)
+        }
+    }
+    // NOT_SUPPORTED: fn GetPrintMode()
+    // NOT_SUPPORTED: fn SetPrintMode()
+}
+
+// wxPrintDialog
+pub trait PrintDialogMethods: ObjectMethods {
+    // DTOR: fn ~wxPrintDialog()
+    fn get_print_dc(&self) -> Option<DCIsOwned<false>> {
+        unsafe { DC::option_from(ffi::wxPrintDialog_GetPrintDC(self.as_ptr())) }
+    }
+    fn get_print_dialog_data(&self) -> PrintDialogDataIsOwned<false> {
+        unsafe {
+            PrintDialogDataIsOwned::from_ptr(ffi::wxPrintDialog_GetPrintDialogData(self.as_ptr()))
+        }
+    }
+    fn get_print_data(&self) -> PrintDataIsOwned<false> {
+        unsafe { PrintDataIsOwned::from_ptr(ffi::wxPrintDialog_GetPrintData(self.as_ptr())) }
+    }
+    fn show_modal(&self) -> c_int {
+        unsafe { ffi::wxPrintDialog_ShowModal(self.as_ptr()) }
+    }
+}
+
+// wxPrintDialogData
+pub trait PrintDialogDataMethods: ObjectMethods {
+    // DTOR: fn ~wxPrintDialogData()
+    fn enable_help(&self, flag: bool) {
+        unsafe { ffi::wxPrintDialogData_EnableHelp(self.as_ptr(), flag) }
+    }
+    fn enable_page_numbers(&self, flag: bool) {
+        unsafe { ffi::wxPrintDialogData_EnablePageNumbers(self.as_ptr(), flag) }
+    }
+    fn enable_print_to_file(&self, flag: bool) {
+        unsafe { ffi::wxPrintDialogData_EnablePrintToFile(self.as_ptr(), flag) }
+    }
+    fn enable_selection(&self, flag: bool) {
+        unsafe { ffi::wxPrintDialogData_EnableSelection(self.as_ptr(), flag) }
+    }
+    fn get_all_pages(&self) -> bool {
+        unsafe { ffi::wxPrintDialogData_GetAllPages(self.as_ptr()) }
+    }
+    fn get_collate(&self) -> bool {
+        unsafe { ffi::wxPrintDialogData_GetCollate(self.as_ptr()) }
+    }
+    fn get_from_page(&self) -> c_int {
+        unsafe { ffi::wxPrintDialogData_GetFromPage(self.as_ptr()) }
+    }
+    fn get_max_page(&self) -> c_int {
+        unsafe { ffi::wxPrintDialogData_GetMaxPage(self.as_ptr()) }
+    }
+    fn get_min_page(&self) -> c_int {
+        unsafe { ffi::wxPrintDialogData_GetMinPage(self.as_ptr()) }
+    }
+    fn get_no_copies(&self) -> c_int {
+        unsafe { ffi::wxPrintDialogData_GetNoCopies(self.as_ptr()) }
+    }
+    fn get_print_data(&self) -> PrintDataIsOwned<false> {
+        unsafe { PrintDataIsOwned::from_ptr(ffi::wxPrintDialogData_GetPrintData(self.as_ptr())) }
+    }
+    fn get_print_to_file(&self) -> bool {
+        unsafe { ffi::wxPrintDialogData_GetPrintToFile(self.as_ptr()) }
+    }
+    fn get_selection(&self) -> bool {
+        unsafe { ffi::wxPrintDialogData_GetSelection(self.as_ptr()) }
+    }
+    fn get_to_page(&self) -> c_int {
+        unsafe { ffi::wxPrintDialogData_GetToPage(self.as_ptr()) }
+    }
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxPrintDialogData_IsOk(self.as_ptr()) }
+    }
+    fn set_collate(&self, flag: bool) {
+        unsafe { ffi::wxPrintDialogData_SetCollate(self.as_ptr(), flag) }
+    }
+    fn set_from_page(&self, page: c_int) {
+        unsafe { ffi::wxPrintDialogData_SetFromPage(self.as_ptr(), page) }
+    }
+    fn set_max_page(&self, page: c_int) {
+        unsafe { ffi::wxPrintDialogData_SetMaxPage(self.as_ptr(), page) }
+    }
+    fn set_min_page(&self, page: c_int) {
+        unsafe { ffi::wxPrintDialogData_SetMinPage(self.as_ptr(), page) }
+    }
+    fn set_no_copies(&self, n: c_int) {
+        unsafe { ffi::wxPrintDialogData_SetNoCopies(self.as_ptr(), n) }
+    }
+    fn set_print_data<P: PrintDataMethods>(&self, print_data: &P) {
+        unsafe {
+            let print_data = print_data.as_ptr();
+            ffi::wxPrintDialogData_SetPrintData(self.as_ptr(), print_data)
+        }
+    }
+    fn set_print_to_file(&self, flag: bool) {
+        unsafe { ffi::wxPrintDialogData_SetPrintToFile(self.as_ptr(), flag) }
+    }
+    fn set_selection(&self, flag: bool) {
+        unsafe { ffi::wxPrintDialogData_SetSelection(self.as_ptr(), flag) }
+    }
+    fn set_setup_dialog(&self, flag: bool) {
+        unsafe { ffi::wxPrintDialogData_SetSetupDialog(self.as_ptr(), flag) }
+    }
+    fn set_to_page(&self, page: c_int) {
+        unsafe { ffi::wxPrintDialogData_SetToPage(self.as_ptr(), page) }
+    }
+    // BLOCKED: fn operator=()
+    // BLOCKED: fn operator=1()
+}
+
+// wxPrintPreview
+pub trait PrintPreviewMethods: ObjectMethods {
+    // DTOR: fn ~wxPrintPreview()
+    fn get_canvas(&self) -> *mut c_void {
+        unsafe { ffi::wxPrintPreview_GetCanvas(self.as_ptr()) }
+    }
+    fn get_current_page(&self) -> c_int {
+        unsafe { ffi::wxPrintPreview_GetCurrentPage(self.as_ptr()) }
+    }
+    fn get_frame(&self) -> WeakRef<Frame> {
+        unsafe { WeakRef::<Frame>::from(ffi::wxPrintPreview_GetFrame(self.as_ptr())) }
+    }
+    fn get_max_page(&self) -> c_int {
+        unsafe { ffi::wxPrintPreview_GetMaxPage(self.as_ptr()) }
+    }
+    fn get_min_page(&self) -> c_int {
+        unsafe { ffi::wxPrintPreview_GetMinPage(self.as_ptr()) }
+    }
+    fn get_printout(&self) -> Option<PrintoutIsOwned<false>> {
+        unsafe { Printout::option_from(ffi::wxPrintPreview_GetPrintout(self.as_ptr())) }
+    }
+    fn get_printout_for_printing(&self) -> Option<PrintoutIsOwned<false>> {
+        unsafe { Printout::option_from(ffi::wxPrintPreview_GetPrintoutForPrinting(self.as_ptr())) }
+    }
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxPrintPreview_IsOk(self.as_ptr()) }
+    }
+    fn paint_page<D: DCMethods>(&self, canvas: *mut c_void, dc: &D) -> bool {
+        unsafe {
+            let dc = dc.as_ptr();
+            ffi::wxPrintPreview_PaintPage(self.as_ptr(), canvas, dc)
+        }
+    }
+    fn print(&self, prompt: bool) -> bool {
+        unsafe { ffi::wxPrintPreview_Print(self.as_ptr(), prompt) }
+    }
+    fn render_page(&self, page_num: c_int) -> bool {
+        unsafe { ffi::wxPrintPreview_RenderPage(self.as_ptr(), page_num) }
+    }
+    fn set_canvas(&self, window: *mut c_void) {
+        unsafe { ffi::wxPrintPreview_SetCanvas(self.as_ptr(), window) }
+    }
+    fn set_current_page(&self, page_num: c_int) -> bool {
+        unsafe { ffi::wxPrintPreview_SetCurrentPage(self.as_ptr(), page_num) }
+    }
+    fn set_frame<F: FrameMethods>(&self, frame: Option<&F>) {
+        unsafe {
+            let frame = match frame {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxPrintPreview_SetFrame(self.as_ptr(), frame)
+        }
+    }
+    fn set_printout<P: PrintoutMethods>(&self, printout: Option<&P>) {
+        unsafe {
+            let printout = match printout {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxPrintPreview_SetPrintout(self.as_ptr(), printout)
+        }
+    }
+    fn set_zoom(&self, percent: c_int) {
+        unsafe { ffi::wxPrintPreview_SetZoom(self.as_ptr(), percent) }
+    }
+}
+
+// wxPrinter
+pub trait PrinterMethods: ObjectMethods {
+    fn create_abort_window<W: WindowMethods, P: PrintoutMethods>(
+        &self,
+        parent: Option<&W>,
+        printout: Option<&P>,
+    ) -> WeakRef<PrintAbortDialog> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let printout = match printout {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            WeakRef::<PrintAbortDialog>::from(ffi::wxPrinter_CreateAbortWindow(
+                self.as_ptr(),
+                parent,
+                printout,
+            ))
+        }
+    }
+    fn get_abort(&self) -> bool {
+        unsafe { ffi::wxPrinter_GetAbort(self.as_ptr()) }
+    }
+    fn get_print_dialog_data(&self) -> PrintDialogDataIsOwned<false> {
+        unsafe {
+            PrintDialogDataIsOwned::from_ptr(ffi::wxPrinter_GetPrintDialogData(self.as_ptr()))
+        }
+    }
+    fn print<W: WindowMethods, P: PrintoutMethods>(
+        &self,
+        parent: Option<&W>,
+        printout: Option<&P>,
+        prompt: bool,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let printout = match printout {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxPrinter_Print(self.as_ptr(), parent, printout, prompt)
+        }
+    }
+    fn print_dialog<W: WindowMethods>(&self, parent: Option<&W>) -> Option<DCIsOwned<false>> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            DC::option_from(ffi::wxPrinter_PrintDialog(self.as_ptr(), parent))
+        }
+    }
+    fn report_error<W: WindowMethods, P: PrintoutMethods>(
+        &self,
+        parent: Option<&W>,
+        printout: Option<&P>,
+        message: &str,
+    ) {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let printout = match printout {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let message = WxString::from(message);
+            let message = message.as_ptr();
+            ffi::wxPrinter_ReportError(self.as_ptr(), parent, printout, message)
+        }
+    }
+    fn setup<W: WindowMethods>(&self, parent: Option<&W>) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxPrinter_Setup(self.as_ptr(), parent)
+        }
+    }
+    // NOT_SUPPORTED: fn GetLastError()
+}
+
+// wxPrinterDC
+pub trait PrinterDCMethods: DCMethods {
+    fn get_paper_rect(&self) -> Rect {
+        unsafe { Rect::from_ptr(ffi::wxPrinterDC_GetPaperRect(self.as_ptr())) }
+    }
+}
+
+// wxPrintout
+pub trait PrintoutMethods: ObjectMethods {
+    // DTOR: fn ~wxPrintout()
+    fn fit_this_size_to_page<S: SizeMethods>(&self, image_size: &S) {
+        unsafe {
+            let image_size = image_size.as_ptr();
+            ffi::wxPrintout_FitThisSizeToPage(self.as_ptr(), image_size)
+        }
+    }
+    fn fit_this_size_to_page_margins<S: SizeMethods, P: PageSetupDialogDataMethods>(
+        &self,
+        image_size: &S,
+        page_setup_data: &P,
+    ) {
+        unsafe {
+            let image_size = image_size.as_ptr();
+            let page_setup_data = page_setup_data.as_ptr();
+            ffi::wxPrintout_FitThisSizeToPageMargins(self.as_ptr(), image_size, page_setup_data)
+        }
+    }
+    fn fit_this_size_to_paper<S: SizeMethods>(&self, image_size: &S) {
+        unsafe {
+            let image_size = image_size.as_ptr();
+            ffi::wxPrintout_FitThisSizeToPaper(self.as_ptr(), image_size)
+        }
+    }
+    fn get_dc(&self) -> Option<DCIsOwned<false>> {
+        unsafe { DC::option_from(ffi::wxPrintout_GetDC(self.as_ptr())) }
+    }
+    fn get_logical_page_margins_rect<P: PageSetupDialogDataMethods>(
+        &self,
+        page_setup_data: &P,
+    ) -> Rect {
+        unsafe {
+            let page_setup_data = page_setup_data.as_ptr();
+            Rect::from_ptr(ffi::wxPrintout_GetLogicalPageMarginsRect(
+                self.as_ptr(),
+                page_setup_data,
+            ))
+        }
+    }
+    fn get_logical_page_rect(&self) -> Rect {
+        unsafe { Rect::from_ptr(ffi::wxPrintout_GetLogicalPageRect(self.as_ptr())) }
+    }
+    fn get_logical_paper_rect(&self) -> Rect {
+        unsafe { Rect::from_ptr(ffi::wxPrintout_GetLogicalPaperRect(self.as_ptr())) }
+    }
+    fn get_ppi_printer(&self, w: *mut c_void, h: *mut c_void) {
+        unsafe { ffi::wxPrintout_GetPPIPrinter(self.as_ptr(), w, h) }
+    }
+    fn get_ppi_screen(&self, w: *mut c_void, h: *mut c_void) {
+        unsafe { ffi::wxPrintout_GetPPIScreen(self.as_ptr(), w, h) }
+    }
+    fn get_page_info(
+        &self,
+        min_page: *mut c_void,
+        max_page: *mut c_void,
+        page_from: *mut c_void,
+        page_to: *mut c_void,
+    ) {
+        unsafe {
+            ffi::wxPrintout_GetPageInfo(self.as_ptr(), min_page, max_page, page_from, page_to)
+        }
+    }
+    fn get_page_size_mm(&self, w: *mut c_void, h: *mut c_void) {
+        unsafe { ffi::wxPrintout_GetPageSizeMM(self.as_ptr(), w, h) }
+    }
+    fn get_page_size_pixels(&self, w: *mut c_void, h: *mut c_void) {
+        unsafe { ffi::wxPrintout_GetPageSizePixels(self.as_ptr(), w, h) }
+    }
+    fn get_paper_rect_pixels(&self) -> Rect {
+        unsafe { Rect::from_ptr(ffi::wxPrintout_GetPaperRectPixels(self.as_ptr())) }
+    }
+    fn get_title(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxPrintout_GetTitle(self.as_ptr())).into() }
+    }
+    fn has_page(&self, page_num: c_int) -> bool {
+        unsafe { ffi::wxPrintout_HasPage(self.as_ptr(), page_num) }
+    }
+    fn is_preview(&self) -> bool {
+        unsafe { ffi::wxPrintout_IsPreview(self.as_ptr()) }
+    }
+    fn get_preview(&self) -> Option<PrintPreviewIsOwned<false>> {
+        unsafe { PrintPreview::option_from(ffi::wxPrintout_GetPreview(self.as_ptr())) }
+    }
+    fn map_screen_size_to_device(&self) {
+        unsafe { ffi::wxPrintout_MapScreenSizeToDevice(self.as_ptr()) }
+    }
+    fn map_screen_size_to_page(&self) {
+        unsafe { ffi::wxPrintout_MapScreenSizeToPage(self.as_ptr()) }
+    }
+    fn map_screen_size_to_page_margins<P: PageSetupDialogDataMethods>(&self, page_setup_data: &P) {
+        unsafe {
+            let page_setup_data = page_setup_data.as_ptr();
+            ffi::wxPrintout_MapScreenSizeToPageMargins(self.as_ptr(), page_setup_data)
+        }
+    }
+    fn map_screen_size_to_paper(&self) {
+        unsafe { ffi::wxPrintout_MapScreenSizeToPaper(self.as_ptr()) }
+    }
+    fn offset_logical_origin(&self, xoff: c_int, yoff: c_int) {
+        unsafe { ffi::wxPrintout_OffsetLogicalOrigin(self.as_ptr(), xoff, yoff) }
+    }
+    fn on_begin_document(&self, start_page: c_int, end_page: c_int) -> bool {
+        unsafe { ffi::wxPrintout_OnBeginDocument(self.as_ptr(), start_page, end_page) }
+    }
+    fn on_begin_printing(&self) {
+        unsafe { ffi::wxPrintout_OnBeginPrinting(self.as_ptr()) }
+    }
+    fn on_end_document(&self) {
+        unsafe { ffi::wxPrintout_OnEndDocument(self.as_ptr()) }
+    }
+    fn on_end_printing(&self) {
+        unsafe { ffi::wxPrintout_OnEndPrinting(self.as_ptr()) }
+    }
+    fn on_prepare_printing(&self) {
+        unsafe { ffi::wxPrintout_OnPreparePrinting(self.as_ptr()) }
+    }
+    fn on_print_page(&self, page_num: c_int) -> bool {
+        unsafe { ffi::wxPrintout_OnPrintPage(self.as_ptr(), page_num) }
+    }
+    fn set_logical_origin(&self, x: c_int, y: c_int) {
+        unsafe { ffi::wxPrintout_SetLogicalOrigin(self.as_ptr(), x, y) }
+    }
+}
+
+// wxPropertySheetDialog
+pub trait PropertySheetDialogMethods: DialogMethods {
+    fn add_book_ctrl<S: SizerMethods>(&self, sizer: Option<&S>) {
+        unsafe {
+            let sizer = match sizer {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxPropertySheetDialog_AddBookCtrl(self.as_ptr(), sizer)
+        }
+    }
+    fn create_book_ctrl(&self) -> WeakRef<BookCtrlBase> {
+        unsafe {
+            WeakRef::<BookCtrlBase>::from(ffi::wxPropertySheetDialog_CreateBookCtrl(self.as_ptr()))
+        }
+    }
+    fn create_buttons(&self, flags: c_int) {
+        unsafe { ffi::wxPropertySheetDialog_CreateButtons(self.as_ptr(), flags) }
+    }
+    fn get_book_ctrl(&self) -> WeakRef<BookCtrlBase> {
+        unsafe {
+            WeakRef::<BookCtrlBase>::from(ffi::wxPropertySheetDialog_GetBookCtrl(self.as_ptr()))
+        }
+    }
+    fn get_inner_sizer(&self) -> Option<SizerIsOwned<false>> {
+        unsafe { Sizer::option_from(ffi::wxPropertySheetDialog_GetInnerSizer(self.as_ptr())) }
+    }
+    fn set_inner_sizer<S: SizerMethods>(&self, sizer: Option<&S>) {
+        unsafe {
+            let sizer = match sizer {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxPropertySheetDialog_SetInnerSizer(self.as_ptr(), sizer)
+        }
+    }
+    fn get_sheet_style(&self) -> c_long {
+        unsafe { ffi::wxPropertySheetDialog_GetSheetStyle(self.as_ptr()) }
+    }
+    fn layout_dialog(&self, centre_flags: c_int) {
+        unsafe { ffi::wxPropertySheetDialog_LayoutDialog(self.as_ptr(), centre_flags) }
+    }
+    fn set_book_ctrl<B: BookCtrlBaseMethods>(&self, book_ctrl: Option<&B>) {
+        unsafe {
+            let book_ctrl = match book_ctrl {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxPropertySheetDialog_SetBookCtrl(self.as_ptr(), book_ctrl)
+        }
+    }
+    fn set_sheet_style(&self, style: c_long) {
+        unsafe { ffi::wxPropertySheetDialog_SetSheetStyle(self.as_ptr(), style) }
+    }
+    fn set_sheet_outer_border(&self, border: c_int) {
+        unsafe { ffi::wxPropertySheetDialog_SetSheetOuterBorder(self.as_ptr(), border) }
+    }
+    fn get_sheet_outer_border(&self) -> c_int {
+        unsafe { ffi::wxPropertySheetDialog_GetSheetOuterBorder(self.as_ptr()) }
+    }
+    fn set_sheet_inner_border(&self, border: c_int) {
+        unsafe { ffi::wxPropertySheetDialog_SetSheetInnerBorder(self.as_ptr(), border) }
+    }
+    fn get_sheet_inner_border(&self) -> c_int {
+        unsafe { ffi::wxPropertySheetDialog_GetSheetInnerBorder(self.as_ptr()) }
+    }
+}
+
+// wxQuantize
+pub trait QuantizeMethods: ObjectMethods {
+    fn do_quantize(
+        w: c_uint,
+        h: c_uint,
+        in_rows: *mut c_void,
+        out_rows: *mut c_void,
+        palette: *mut c_void,
+        desired_no_colours: c_int,
+    ) {
+        unsafe { ffi::wxQuantize_DoQuantize(w, h, in_rows, out_rows, palette, desired_no_colours) }
+    }
+    fn quantize_palette<I: ImageMethods, I2: ImageMethods, P: PaletteMethods>(
+        src: &I,
+        dest: &I2,
+        p_palette: Option<&P>,
+        desired_no_colours: c_int,
+        eight_bit_data: *mut c_void,
+        flags: c_int,
+    ) -> bool {
+        unsafe {
+            let src = src.as_ptr();
+            let dest = dest.as_ptr();
+            let p_palette = match p_palette {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxQuantize_Quantize(
+                src,
+                dest,
+                p_palette,
+                desired_no_colours,
+                eight_bit_data,
+                flags,
+            )
+        }
+    }
+    fn quantize_int<I: ImageMethods, I2: ImageMethods>(
+        src: &I,
+        dest: &I2,
+        desired_no_colours: c_int,
+        eight_bit_data: *mut c_void,
+        flags: c_int,
+    ) -> bool {
+        unsafe {
+            let src = src.as_ptr();
+            let dest = dest.as_ptr();
+            ffi::wxQuantize_Quantize1(src, dest, desired_no_colours, eight_bit_data, flags)
+        }
+    }
+}
+
+// wxQueryLayoutInfoEvent
+pub trait QueryLayoutInfoEventMethods: EventMethods {
+    // NOT_SUPPORTED: fn GetAlignment()
+    fn get_flags(&self) -> c_int {
+        unsafe { ffi::wxQueryLayoutInfoEvent_GetFlags(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetOrientation()
+    fn get_requested_length(&self) -> c_int {
+        unsafe { ffi::wxQueryLayoutInfoEvent_GetRequestedLength(self.as_ptr()) }
+    }
+    fn get_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxQueryLayoutInfoEvent_GetSize(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn SetAlignment()
+    fn set_flags(&self, flags: c_int) {
+        unsafe { ffi::wxQueryLayoutInfoEvent_SetFlags(self.as_ptr(), flags) }
+    }
+    // NOT_SUPPORTED: fn SetOrientation()
+    fn set_requested_length(&self, length: c_int) {
+        unsafe { ffi::wxQueryLayoutInfoEvent_SetRequestedLength(self.as_ptr(), length) }
+    }
+    fn set_size<S: SizeMethods>(&self, size: &S) {
+        unsafe {
+            let size = size.as_ptr();
+            ffi::wxQueryLayoutInfoEvent_SetSize(self.as_ptr(), size)
+        }
+    }
+}
+
 // wxRadioBox
 pub trait RadioBoxMethods: ControlMethods {
     // DTOR: fn ~wxRadioBox()
@@ -4025,8 +17194,8 @@ pub trait RadioBoxMethods: ControlMethods {
     fn get_item_help_text(&self, item: c_uint) -> String {
         unsafe { WxString::from_ptr(ffi::wxRadioBox_GetItemHelpText(self.as_ptr(), item)).into() }
     }
-    fn get_item_tool_tip(&self, item: c_uint) -> *mut c_void {
-        unsafe { ffi::wxRadioBox_GetItemToolTip(self.as_ptr(), item) }
+    fn get_item_tool_tip(&self, item: c_uint) -> Option<ToolTipIsOwned<false>> {
+        unsafe { ToolTip::option_from(ffi::wxRadioBox_GetItemToolTip(self.as_ptr(), item)) }
     }
     fn get_row_count(&self) -> c_uint {
         unsafe { ffi::wxRadioBox_GetRowCount(self.as_ptr()) }
@@ -4053,6 +17222,260 @@ pub trait RadioBoxMethods: ControlMethods {
     }
     fn show_uint(&self, item: c_uint, show: bool) -> bool {
         unsafe { ffi::wxRadioBox_Show(self.as_ptr(), item, show) }
+    }
+}
+
+// wxRadioButton
+pub trait RadioButtonMethods: ControlMethods {
+    // DTOR: fn ~wxRadioButton()
+    fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        label: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxRadioButton_Create(
+                self.as_ptr(),
+                parent,
+                id,
+                label,
+                pos,
+                size,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+    fn get_value(&self) -> bool {
+        unsafe { ffi::wxRadioButton_GetValue(self.as_ptr()) }
+    }
+    fn set_value(&self, value: bool) {
+        unsafe { ffi::wxRadioButton_SetValue(self.as_ptr(), value) }
+    }
+    fn get_first_in_group(&self) -> WeakRef<RadioButton> {
+        unsafe { WeakRef::<RadioButton>::from(ffi::wxRadioButton_GetFirstInGroup(self.as_ptr())) }
+    }
+    fn get_last_in_group(&self) -> WeakRef<RadioButton> {
+        unsafe { WeakRef::<RadioButton>::from(ffi::wxRadioButton_GetLastInGroup(self.as_ptr())) }
+    }
+    fn get_previous_in_group(&self) -> WeakRef<RadioButton> {
+        unsafe {
+            WeakRef::<RadioButton>::from(ffi::wxRadioButton_GetPreviousInGroup(self.as_ptr()))
+        }
+    }
+    fn get_next_in_group(&self) -> WeakRef<RadioButton> {
+        unsafe { WeakRef::<RadioButton>::from(ffi::wxRadioButton_GetNextInGroup(self.as_ptr())) }
+    }
+}
+
+// wxRealPoint
+pub trait RealPointMethods: WxRustMethods {
+    // BLOCKED: fn operator=()
+    // BLOCKED: fn operator==()
+    // BLOCKED: fn operator!=()
+    // BLOCKED: fn operator+()
+    // BLOCKED: fn operator-()
+    // BLOCKED: fn operator+=()
+    // BLOCKED: fn operator-=()
+    // BLOCKED: fn operator+1()
+    // BLOCKED: fn operator-1()
+    // BLOCKED: fn operator+2()
+    // BLOCKED: fn operator-2()
+    // BLOCKED: fn operator+=1()
+    // BLOCKED: fn operator-=1()
+    // BLOCKED: fn operator/()
+    // BLOCKED: fn operator*()
+    // BLOCKED: fn operator*1()
+    // BLOCKED: fn operator/=()
+    // BLOCKED: fn operator*=()
+}
+
+// wxRearrangeCtrl
+pub trait RearrangeCtrlMethods: PanelMethods {
+    fn create_arrayint<
+        W: WindowMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        A: ArrayIntMethods,
+        A2: ArrayStringMethods,
+        V: ValidatorMethods,
+    >(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        order: &A,
+        items: &A2,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let order = order.as_ptr();
+            let items = items.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxRearrangeCtrl_Create(
+                self.as_ptr(),
+                parent,
+                id,
+                pos,
+                size,
+                order,
+                items,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+    fn get_list(&self) -> WeakRef<RearrangeList> {
+        unsafe { WeakRef::<RearrangeList>::from(ffi::wxRearrangeCtrl_GetList(self.as_ptr())) }
+    }
+}
+
+// wxRearrangeDialog
+pub trait RearrangeDialogMethods: DialogMethods {
+    fn create_str<W: WindowMethods, A: ArrayIntMethods, A2: ArrayStringMethods, P: PointMethods>(
+        &self,
+        parent: Option<&W>,
+        message: &str,
+        title: &str,
+        order: &A,
+        items: &A2,
+        pos: &P,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let message = WxString::from(message);
+            let message = message.as_ptr();
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            let order = order.as_ptr();
+            let items = items.as_ptr();
+            let pos = pos.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxRearrangeDialog_Create(
+                self.as_ptr(),
+                parent,
+                message,
+                title,
+                order,
+                items,
+                pos,
+                name,
+            )
+        }
+    }
+    fn add_extra_controls<W: WindowMethods>(&self, win: Option<&W>) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxRearrangeDialog_AddExtraControls(self.as_ptr(), win)
+        }
+    }
+    fn get_list(&self) -> WeakRef<RearrangeList> {
+        unsafe { WeakRef::<RearrangeList>::from(ffi::wxRearrangeDialog_GetList(self.as_ptr())) }
+    }
+    fn get_order(&self) -> ArrayInt {
+        unsafe { ArrayInt::from_ptr(ffi::wxRearrangeDialog_GetOrder(self.as_ptr())) }
+    }
+}
+
+// wxRearrangeList
+pub trait RearrangeListMethods: CheckListBoxMethods {
+    fn create_arrayint<
+        W: WindowMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        A: ArrayIntMethods,
+        A2: ArrayStringMethods,
+        V: ValidatorMethods,
+    >(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        order: &A,
+        items: &A2,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let order = order.as_ptr();
+            let items = items.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxRearrangeList_Create(
+                self.as_ptr(),
+                parent,
+                id,
+                pos,
+                size,
+                order,
+                items,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+    fn get_current_order(&self) -> ArrayIntIsOwned<false> {
+        unsafe { ArrayIntIsOwned::from_ptr(ffi::wxRearrangeList_GetCurrentOrder(self.as_ptr())) }
+    }
+    fn can_move_current_up(&self) -> bool {
+        unsafe { ffi::wxRearrangeList_CanMoveCurrentUp(self.as_ptr()) }
+    }
+    fn can_move_current_down(&self) -> bool {
+        unsafe { ffi::wxRearrangeList_CanMoveCurrentDown(self.as_ptr()) }
+    }
+    fn move_current_up(&self) -> bool {
+        unsafe { ffi::wxRearrangeList_MoveCurrentUp(self.as_ptr()) }
+    }
+    fn move_current_down(&self) -> bool {
+        unsafe { ffi::wxRearrangeList_MoveCurrentDown(self.as_ptr()) }
     }
 }
 
@@ -4240,6 +17663,816 @@ pub trait RectMethods: WxRustMethods {
     // BLOCKED: fn operator==()
 }
 
+// wxRegion
+pub trait RegionMethods: GDIObjectMethods {
+    // DTOR: fn ~wxRegion()
+    fn clear(&self) {
+        unsafe { ffi::wxRegion_Clear(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn Contains()
+    // NOT_SUPPORTED: fn Contains1()
+    // NOT_SUPPORTED: fn Contains2()
+    // NOT_SUPPORTED: fn Contains3()
+    fn convert_to_bitmap(&self) -> Bitmap {
+        unsafe { Bitmap::from_ptr(ffi::wxRegion_ConvertToBitmap(self.as_ptr())) }
+    }
+    fn get_box_coord(
+        &self,
+        x: *mut c_void,
+        y: *mut c_void,
+        width: *mut c_void,
+        height: *mut c_void,
+    ) {
+        unsafe { ffi::wxRegion_GetBox(self.as_ptr(), x, y, width, height) }
+    }
+    fn get_box(&self) -> Rect {
+        unsafe { Rect::from_ptr(ffi::wxRegion_GetBox1(self.as_ptr())) }
+    }
+    fn intersect_coord(&self, x: c_int, y: c_int, width: c_int, height: c_int) -> bool {
+        unsafe { ffi::wxRegion_Intersect(self.as_ptr(), x, y, width, height) }
+    }
+    fn intersect_rect<R: RectMethods>(&self, rect: &R) -> bool {
+        unsafe {
+            let rect = rect.as_ptr();
+            ffi::wxRegion_Intersect1(self.as_ptr(), rect)
+        }
+    }
+    fn intersect_region<R: RegionMethods>(&self, region: &R) -> bool {
+        unsafe {
+            let region = region.as_ptr();
+            ffi::wxRegion_Intersect2(self.as_ptr(), region)
+        }
+    }
+    fn is_empty(&self) -> bool {
+        unsafe { ffi::wxRegion_IsEmpty(self.as_ptr()) }
+    }
+    fn is_equal<R: RegionMethods>(&self, region: &R) -> bool {
+        unsafe {
+            let region = region.as_ptr();
+            ffi::wxRegion_IsEqual(self.as_ptr(), region)
+        }
+    }
+    fn offset_coord(&self, x: c_int, y: c_int) -> bool {
+        unsafe { ffi::wxRegion_Offset(self.as_ptr(), x, y) }
+    }
+    fn offset_point<P: PointMethods>(&self, pt: &P) -> bool {
+        unsafe {
+            let pt = pt.as_ptr();
+            ffi::wxRegion_Offset1(self.as_ptr(), pt)
+        }
+    }
+    fn subtract_rect<R: RectMethods>(&self, rect: &R) -> bool {
+        unsafe {
+            let rect = rect.as_ptr();
+            ffi::wxRegion_Subtract(self.as_ptr(), rect)
+        }
+    }
+    fn subtract_region<R: RegionMethods>(&self, region: &R) -> bool {
+        unsafe {
+            let region = region.as_ptr();
+            ffi::wxRegion_Subtract1(self.as_ptr(), region)
+        }
+    }
+    fn union_coord(&self, x: c_int, y: c_int, width: c_int, height: c_int) -> bool {
+        unsafe { ffi::wxRegion_Union(self.as_ptr(), x, y, width, height) }
+    }
+    fn union_rect<R: RectMethods>(&self, rect: &R) -> bool {
+        unsafe {
+            let rect = rect.as_ptr();
+            ffi::wxRegion_Union1(self.as_ptr(), rect)
+        }
+    }
+    fn union_region<R: RegionMethods>(&self, region: &R) -> bool {
+        unsafe {
+            let region = region.as_ptr();
+            ffi::wxRegion_Union2(self.as_ptr(), region)
+        }
+    }
+    fn union_bitmap<B: BitmapMethods>(&self, bmp: &B) -> bool {
+        unsafe {
+            let bmp = bmp.as_ptr();
+            ffi::wxRegion_Union3(self.as_ptr(), bmp)
+        }
+    }
+    fn union_bitmap_colour<B: BitmapMethods, C: ColourMethods>(
+        &self,
+        bmp: &B,
+        trans_colour: &C,
+        tolerance: c_int,
+    ) -> bool {
+        unsafe {
+            let bmp = bmp.as_ptr();
+            let trans_colour = trans_colour.as_ptr();
+            ffi::wxRegion_Union4(self.as_ptr(), bmp, trans_colour, tolerance)
+        }
+    }
+    fn xor_coord(&self, x: c_int, y: c_int, width: c_int, height: c_int) -> bool {
+        unsafe { ffi::wxRegion_Xor(self.as_ptr(), x, y, width, height) }
+    }
+    fn xor_rect<R: RectMethods>(&self, rect: &R) -> bool {
+        unsafe {
+            let rect = rect.as_ptr();
+            ffi::wxRegion_Xor1(self.as_ptr(), rect)
+        }
+    }
+    fn xor_region<R: RegionMethods>(&self, region: &R) -> bool {
+        unsafe {
+            let region = region.as_ptr();
+            ffi::wxRegion_Xor2(self.as_ptr(), region)
+        }
+    }
+    // BLOCKED: fn operator=()
+}
+
+// wxRegionIterator
+pub trait RegionIteratorMethods: ObjectMethods {
+    fn get_h(&self) -> c_int {
+        unsafe { ffi::wxRegionIterator_GetH(self.as_ptr()) }
+    }
+    fn get_height(&self) -> c_int {
+        unsafe { ffi::wxRegionIterator_GetHeight(self.as_ptr()) }
+    }
+    fn get_rect(&self) -> Rect {
+        unsafe { Rect::from_ptr(ffi::wxRegionIterator_GetRect(self.as_ptr())) }
+    }
+    fn get_w(&self) -> c_int {
+        unsafe { ffi::wxRegionIterator_GetW(self.as_ptr()) }
+    }
+    fn get_width(&self) -> c_int {
+        unsafe { ffi::wxRegionIterator_GetWidth(self.as_ptr()) }
+    }
+    fn get_x(&self) -> c_int {
+        unsafe { ffi::wxRegionIterator_GetX(self.as_ptr()) }
+    }
+    fn get_y(&self) -> c_int {
+        unsafe { ffi::wxRegionIterator_GetY(self.as_ptr()) }
+    }
+    fn have_rects(&self) -> bool {
+        unsafe { ffi::wxRegionIterator_HaveRects(self.as_ptr()) }
+    }
+    fn reset(&self) {
+        unsafe { ffi::wxRegionIterator_Reset(self.as_ptr()) }
+    }
+    fn reset_region<R: RegionMethods>(&self, region: &R) {
+        unsafe {
+            let region = region.as_ptr();
+            ffi::wxRegionIterator_Reset1(self.as_ptr(), region)
+        }
+    }
+    // BLOCKED: fn operator++()
+    // NOT_SUPPORTED: fn operator bool()
+}
+
+// wxRendererNative
+pub trait RendererNativeMethods: WxRustMethods {
+    // DTOR: fn ~wxRendererNative()
+    fn draw_check_box<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawCheckBox(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn draw_combo_box_drop_button<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawComboBoxDropButton(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn draw_drop_arrow<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawDropArrow(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn draw_focus_rect<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawFocusRect(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn draw_gauge<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        value: c_int,
+        max: c_int,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawGauge(self.as_ptr(), win, dc, rect, value, max, flags)
+        }
+    }
+    // NOT_SUPPORTED: fn DrawHeaderButton()
+    // NOT_SUPPORTED: fn DrawHeaderButtonContents()
+    fn draw_item_selection_rect<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawItemSelectionRect(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn draw_item_text<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        text: &str,
+        rect: &R,
+        align: c_int,
+        flags: c_int,
+        ellipsize_mode: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawItemText(
+                self.as_ptr(),
+                win,
+                dc,
+                text,
+                rect,
+                align,
+                flags,
+                ellipsize_mode,
+            )
+        }
+    }
+    fn draw_push_button<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawPushButton(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn draw_collapse_button<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawCollapseButton(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn get_collapse_button_size<W: WindowMethods, D: DCMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+    ) -> Size {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            Size::from_ptr(ffi::wxRendererNative_GetCollapseButtonSize(
+                self.as_ptr(),
+                win,
+                dc,
+            ))
+        }
+    }
+    fn draw_splitter_border<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawSplitterBorder(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    // NOT_SUPPORTED: fn DrawSplitterSash()
+    fn draw_tree_item_button<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawTreeItemButton(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn draw_choice<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawChoice(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn draw_combo_box<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawComboBox(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn draw_text_ctrl<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawTextCtrl(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn draw_radio_bitmap<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawRadioBitmap(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    // NOT_SUPPORTED: fn DrawTitleBarBitmap()
+    fn draw_check_mark<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawCheckMark(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn get_check_box_size<W: WindowMethods>(&self, win: Option<&W>, flags: c_int) -> Size {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            Size::from_ptr(ffi::wxRendererNative_GetCheckBoxSize(
+                self.as_ptr(),
+                win,
+                flags,
+            ))
+        }
+    }
+    fn get_check_mark_size<W: WindowMethods>(&self, win: Option<&W>) -> Size {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            Size::from_ptr(ffi::wxRendererNative_GetCheckMarkSize(self.as_ptr(), win))
+        }
+    }
+    fn get_expander_size<W: WindowMethods>(&self, win: Option<&W>) -> Size {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            Size::from_ptr(ffi::wxRendererNative_GetExpanderSize(self.as_ptr(), win))
+        }
+    }
+    fn get_header_button_height<W: WindowMethods>(&self, win: Option<&W>) -> c_int {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxRendererNative_GetHeaderButtonHeight(self.as_ptr(), win)
+        }
+    }
+    fn get_header_button_margin<W: WindowMethods>(&self, win: Option<&W>) -> c_int {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxRendererNative_GetHeaderButtonMargin(self.as_ptr(), win)
+        }
+    }
+    // NOT_SUPPORTED: fn GetSplitterParams()
+    // NOT_SUPPORTED: fn GetVersion()
+    fn get() -> RendererNativeIsOwned<false> {
+        unsafe { RendererNativeIsOwned::from_ptr(ffi::wxRendererNative_Get()) }
+    }
+    fn get_default() -> RendererNativeIsOwned<false> {
+        unsafe { RendererNativeIsOwned::from_ptr(ffi::wxRendererNative_GetDefault()) }
+    }
+    fn get_generic() -> RendererNativeIsOwned<false> {
+        unsafe { RendererNativeIsOwned::from_ptr(ffi::wxRendererNative_GetGeneric()) }
+    }
+    fn load(name: &str) -> Option<RendererNativeIsOwned<false>> {
+        unsafe {
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            RendererNative::option_from(ffi::wxRendererNative_Load(name))
+        }
+    }
+    fn set<R: RendererNativeMethods>(renderer: Option<&R>) -> Option<RendererNativeIsOwned<false>> {
+        unsafe {
+            let renderer = match renderer {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            RendererNative::option_from(ffi::wxRendererNative_Set(renderer))
+        }
+    }
+}
+
+// wxRichToolTip
+pub trait RichToolTipMethods: WxRustMethods {
+    fn set_background_colour<C: ColourMethods, C2: ColourMethods>(&self, col: &C, col_end: &C2) {
+        unsafe {
+            let col = col.as_ptr();
+            let col_end = col_end.as_ptr();
+            ffi::wxRichToolTip_SetBackgroundColour(self.as_ptr(), col, col_end)
+        }
+    }
+    fn set_icon_int(&self, icon: c_int) {
+        unsafe { ffi::wxRichToolTip_SetIcon(self.as_ptr(), icon) }
+    }
+    fn set_icon_bitmapbundle<B: BitmapBundleMethods>(&self, icon: &B) {
+        unsafe {
+            let icon = icon.as_ptr();
+            ffi::wxRichToolTip_SetIcon1(self.as_ptr(), icon)
+        }
+    }
+    // NOT_SUPPORTED: fn SetTimeout()
+    // NOT_SUPPORTED: fn SetTipKind()
+    fn set_title_font<F: FontMethods>(&self, font: &F) {
+        unsafe {
+            let font = font.as_ptr();
+            ffi::wxRichToolTip_SetTitleFont(self.as_ptr(), font)
+        }
+    }
+    fn show_for<W: WindowMethods, R: RectMethods>(&self, win: Option<&W>, rect: Option<&R>) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let rect = match rect {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxRichToolTip_ShowFor(self.as_ptr(), win, rect)
+        }
+    }
+    // DTOR: fn ~wxRichToolTip()
+}
+
+// wxRotateGestureEvent
+pub trait RotateGestureEventMethods: GestureEventMethods {
+    fn get_rotation_angle(&self) -> c_double {
+        unsafe { ffi::wxRotateGestureEvent_GetRotationAngle(self.as_ptr()) }
+    }
+    fn set_rotation_angle(&self, rotation_angle: c_double) {
+        unsafe { ffi::wxRotateGestureEvent_SetRotationAngle(self.as_ptr(), rotation_angle) }
+    }
+}
+
+// wxSVGBitmapEmbedHandler
+pub trait SVGBitmapEmbedHandlerMethods: SVGBitmapHandlerMethods {}
+
+// wxSVGBitmapFileHandler
+pub trait SVGBitmapFileHandlerMethods: SVGBitmapHandlerMethods {}
+
+// wxSVGBitmapHandler
+pub trait SVGBitmapHandlerMethods: WxRustMethods {
+    fn process_bitmap<B: BitmapMethods>(
+        &self,
+        bitmap: &B,
+        x: c_int,
+        y: c_int,
+        stream: *mut c_void,
+    ) -> bool {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            ffi::wxSVGBitmapHandler_ProcessBitmap(self.as_ptr(), bitmap, x, y, stream)
+        }
+    }
+}
+
+// wxSVGFileDC
+pub trait SVGFileDCMethods: DCMethods {
+    fn set_bitmap_handler<S: SVGBitmapHandlerMethods>(&self, handler: Option<&S>) {
+        unsafe {
+            let handler = match handler {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxSVGFileDC_SetBitmapHandler(self.as_ptr(), handler)
+        }
+    }
+    // NOT_SUPPORTED: fn SetShapeRenderingMode()
+}
+
+// wxSashEvent
+pub trait SashEventMethods: CommandEventMethods {
+    fn get_drag_rect(&self) -> Rect {
+        unsafe { Rect::from_ptr(ffi::wxSashEvent_GetDragRect(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn GetDragStatus()
+    // NOT_SUPPORTED: fn GetEdge()
+    // NOT_SUPPORTED: fn SetEdge()
+    fn set_drag_rect<R: RectMethods>(&self, rect: &R) {
+        unsafe {
+            let rect = rect.as_ptr();
+            ffi::wxSashEvent_SetDragRect(self.as_ptr(), rect)
+        }
+    }
+    // NOT_SUPPORTED: fn SetDragStatus()
+}
+
+// wxSashLayoutWindow
+pub trait SashLayoutWindowMethods: SashWindowMethods {
+    // NOT_SUPPORTED: fn GetAlignment()
+    // NOT_SUPPORTED: fn GetOrientation()
+    fn on_calculate_layout<C: CalculateLayoutEventMethods>(&self, event: &C) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxSashLayoutWindow_OnCalculateLayout(self.as_ptr(), event)
+        }
+    }
+    fn on_query_layout_info<Q: QueryLayoutInfoEventMethods>(&self, event: &Q) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxSashLayoutWindow_OnQueryLayoutInfo(self.as_ptr(), event)
+        }
+    }
+    // NOT_SUPPORTED: fn SetAlignment()
+    fn set_default_size<S: SizeMethods>(&self, size: &S) {
+        unsafe {
+            let size = size.as_ptr();
+            ffi::wxSashLayoutWindow_SetDefaultSize(self.as_ptr(), size)
+        }
+    }
+    // NOT_SUPPORTED: fn SetOrientation()
+}
+
+// wxSashWindow
+pub trait SashWindowMethods: WindowMethods {
+    // DTOR: fn ~wxSashWindow()
+    fn get_maximum_size_x(&self) -> c_int {
+        unsafe { ffi::wxSashWindow_GetMaximumSizeX(self.as_ptr()) }
+    }
+    fn get_maximum_size_y(&self) -> c_int {
+        unsafe { ffi::wxSashWindow_GetMaximumSizeY(self.as_ptr()) }
+    }
+    fn get_minimum_size_x(&self) -> c_int {
+        unsafe { ffi::wxSashWindow_GetMinimumSizeX(self.as_ptr()) }
+    }
+    fn get_minimum_size_y(&self) -> c_int {
+        unsafe { ffi::wxSashWindow_GetMinimumSizeY(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetSashVisible()
+    fn set_maximum_size_x(&self, min: c_int) {
+        unsafe { ffi::wxSashWindow_SetMaximumSizeX(self.as_ptr(), min) }
+    }
+    fn set_maximum_size_y(&self, min: c_int) {
+        unsafe { ffi::wxSashWindow_SetMaximumSizeY(self.as_ptr(), min) }
+    }
+    fn set_minimum_size_x(&self, min: c_int) {
+        unsafe { ffi::wxSashWindow_SetMinimumSizeX(self.as_ptr(), min) }
+    }
+    fn set_minimum_size_y(&self, min: c_int) {
+        unsafe { ffi::wxSashWindow_SetMinimumSizeY(self.as_ptr(), min) }
+    }
+    // NOT_SUPPORTED: fn SetSashVisible()
+    // NOT_SUPPORTED: fn GetEdgeMargin()
+    fn set_default_border_size(&self, width: c_int) {
+        unsafe { ffi::wxSashWindow_SetDefaultBorderSize(self.as_ptr(), width) }
+    }
+    fn get_default_border_size(&self) -> c_int {
+        unsafe { ffi::wxSashWindow_GetDefaultBorderSize(self.as_ptr()) }
+    }
+    fn set_extra_border_size(&self, width: c_int) {
+        unsafe { ffi::wxSashWindow_SetExtraBorderSize(self.as_ptr(), width) }
+    }
+    fn get_extra_border_size(&self) -> c_int {
+        unsafe { ffi::wxSashWindow_GetExtraBorderSize(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn SashHitTest()
+    fn size_windows(&self) {
+        unsafe { ffi::wxSashWindow_SizeWindows(self.as_ptr()) }
+    }
+}
+
+// wxScreenDC
+pub trait ScreenDCMethods: DCMethods {
+    fn end_drawing_on_top() -> bool {
+        unsafe { ffi::wxScreenDC_EndDrawingOnTop() }
+    }
+    fn start_drawing_on_top_window<W: WindowMethods>(window: Option<&W>) -> bool {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxScreenDC_StartDrawingOnTop(window)
+        }
+    }
+    fn start_drawing_on_top_rect<R: RectMethods>(rect: Option<&R>) -> bool {
+        unsafe {
+            let rect = match rect {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxScreenDC_StartDrawingOnTop1(rect)
+        }
+    }
+}
+
+// wxScrollBar
+pub trait ScrollBarMethods: ControlMethods {
+    // DTOR: fn ~wxScrollBar()
+    fn get_page_size(&self) -> c_int {
+        unsafe { ffi::wxScrollBar_GetPageSize(self.as_ptr()) }
+    }
+    fn get_range(&self) -> c_int {
+        unsafe { ffi::wxScrollBar_GetRange(self.as_ptr()) }
+    }
+    fn get_thumb_position(&self) -> c_int {
+        unsafe { ffi::wxScrollBar_GetThumbPosition(self.as_ptr()) }
+    }
+    fn get_thumb_size(&self) -> c_int {
+        unsafe { ffi::wxScrollBar_GetThumbSize(self.as_ptr()) }
+    }
+    fn set_thumb_position(&self, view_start: c_int) {
+        unsafe { ffi::wxScrollBar_SetThumbPosition(self.as_ptr(), view_start) }
+    }
+    fn is_vertical(&self) -> bool {
+        unsafe { ffi::wxScrollBar_IsVertical(self.as_ptr()) }
+    }
+}
+
+// wxScrollEvent
+pub trait ScrollEventMethods: CommandEventMethods {
+    fn get_orientation(&self) -> c_int {
+        unsafe { ffi::wxScrollEvent_GetOrientation(self.as_ptr()) }
+    }
+    fn get_position(&self) -> c_int {
+        unsafe { ffi::wxScrollEvent_GetPosition(self.as_ptr()) }
+    }
+    fn set_orientation(&self, orient: c_int) {
+        unsafe { ffi::wxScrollEvent_SetOrientation(self.as_ptr(), orient) }
+    }
+    fn set_position(&self, pos: c_int) {
+        unsafe { ffi::wxScrollEvent_SetPosition(self.as_ptr(), pos) }
+    }
+}
+
+// wxScrollWinEvent
+pub trait ScrollWinEventMethods: EventMethods {
+    fn get_orientation(&self) -> c_int {
+        unsafe { ffi::wxScrollWinEvent_GetOrientation(self.as_ptr()) }
+    }
+    fn get_position(&self) -> c_int {
+        unsafe { ffi::wxScrollWinEvent_GetPosition(self.as_ptr()) }
+    }
+    fn set_orientation(&self, orient: c_int) {
+        unsafe { ffi::wxScrollWinEvent_SetOrientation(self.as_ptr(), orient) }
+    }
+    fn set_position(&self, pos: c_int) {
+        unsafe { ffi::wxScrollWinEvent_SetPosition(self.as_ptr(), pos) }
+    }
+}
+
 // wxSearchCtrl
 pub trait SearchCtrlMethods: TextCtrlMethods {
     // DTOR: fn ~wxSearchCtrl()
@@ -4276,6 +18509,28 @@ pub trait SearchCtrlMethods: TextCtrlMethods {
     }
     fn get_descriptive_text(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxSearchCtrl_GetDescriptiveText(self.as_ptr())).into() }
+    }
+}
+
+// wxSetCursorEvent
+pub trait SetCursorEventMethods: EventMethods {
+    fn get_cursor(&self) -> CursorIsOwned<false> {
+        unsafe { CursorIsOwned::from_ptr(ffi::wxSetCursorEvent_GetCursor(self.as_ptr())) }
+    }
+    fn get_x(&self) -> c_int {
+        unsafe { ffi::wxSetCursorEvent_GetX(self.as_ptr()) }
+    }
+    fn get_y(&self) -> c_int {
+        unsafe { ffi::wxSetCursorEvent_GetY(self.as_ptr()) }
+    }
+    fn has_cursor(&self) -> bool {
+        unsafe { ffi::wxSetCursorEvent_HasCursor(self.as_ptr()) }
+    }
+    fn set_cursor<C: CursorMethods>(&self, cursor: &C) {
+        unsafe {
+            let cursor = cursor.as_ptr();
+            ffi::wxSetCursorEvent_SetCursor(self.as_ptr(), cursor)
+        }
     }
 }
 
@@ -4338,6 +18593,39 @@ pub trait SettableHeaderColumnMethods: HeaderColumnMethods {
     }
     fn toggle_sort_order(&self) {
         unsafe { ffi::wxSettableHeaderColumn_ToggleSortOrder(self.as_ptr()) }
+    }
+}
+
+// wxShowEvent
+pub trait ShowEventMethods: EventMethods {
+    fn set_show(&self, show: bool) {
+        unsafe { ffi::wxShowEvent_SetShow(self.as_ptr(), show) }
+    }
+    fn is_shown(&self) -> bool {
+        unsafe { ffi::wxShowEvent_IsShown(self.as_ptr()) }
+    }
+    fn get_show(&self) -> bool {
+        unsafe { ffi::wxShowEvent_GetShow(self.as_ptr()) }
+    }
+}
+
+// wxSimpleHelpProvider
+pub trait SimpleHelpProviderMethods: HelpProviderMethods {}
+
+// wxSimplebook
+pub trait SimplebookMethods: BookCtrlBaseMethods {
+    // NOT_SUPPORTED: fn SetEffects()
+    // NOT_SUPPORTED: fn SetEffect()
+    // NOT_SUPPORTED: fn SetEffectsTimeouts()
+    // NOT_SUPPORTED: fn SetEffectTimeout()
+    fn show_new_page<W: WindowMethods>(&self, page: Option<&W>) -> bool {
+        unsafe {
+            let page = match page {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxSimplebook_ShowNewPage(self.as_ptr(), page)
+        }
     }
 }
 
@@ -4441,6 +18729,22 @@ pub trait SizeMethods: WxRustMethods {
     }
 }
 
+// wxSizeEvent
+pub trait SizeEventMethods: EventMethods {
+    fn get_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxSizeEvent_GetSize(self.as_ptr())) }
+    }
+    fn set_size(&self, size: ffi::wxSize) {
+        unsafe { ffi::wxSizeEvent_SetSize(self.as_ptr(), size) }
+    }
+    fn get_rect(&self) -> Rect {
+        unsafe { Rect::from_ptr(ffi::wxSizeEvent_GetRect(self.as_ptr())) }
+    }
+    fn set_rect(&self, rect: ffi::wxRect) {
+        unsafe { ffi::wxSizeEvent_SetRect(self.as_ptr(), rect) }
+    }
+}
+
 // wxSizer
 pub trait SizerMethods: ObjectMethods {
     // DTOR: fn ~wxSizer()
@@ -4448,14 +18752,14 @@ pub trait SizerMethods: ObjectMethods {
         &self,
         window: Option<&W>,
         flags: &S,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
             let flags = flags.as_ptr();
-            ffi::wxSizer_Add(self.as_ptr(), window, flags)
+            SizerItem::option_from(ffi::wxSizer_Add(self.as_ptr(), window, flags))
         }
     }
     fn add_window_int<W: WindowMethods, O: ObjectMethods>(
@@ -4465,7 +18769,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -4475,21 +18779,28 @@ pub trait SizerMethods: ObjectMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxSizer_Add1(self.as_ptr(), window, proportion, flag, border, user_data)
+            SizerItem::option_from(ffi::wxSizer_Add1(
+                self.as_ptr(),
+                window,
+                proportion,
+                flag,
+                border,
+                user_data,
+            ))
         }
     }
     fn add_sizer_sizerflags<S: SizerMethods, S2: SizerFlagsMethods>(
         &self,
         sizer: Option<&S>,
         flags: &S2,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
             let flags = flags.as_ptr();
-            ffi::wxSizer_Add2(self.as_ptr(), sizer, flags)
+            SizerItem::option_from(ffi::wxSizer_Add2(self.as_ptr(), sizer, flags))
         }
     }
     fn add_sizer_int<S: SizerMethods, O: ObjectMethods>(
@@ -4499,7 +18810,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -4509,7 +18820,14 @@ pub trait SizerMethods: ObjectMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxSizer_Add3(self.as_ptr(), sizer, proportion, flag, border, user_data)
+            SizerItem::option_from(ffi::wxSizer_Add3(
+                self.as_ptr(),
+                sizer,
+                proportion,
+                flag,
+                border,
+                user_data,
+            ))
         }
     }
     fn add_int_int<O: ObjectMethods>(
@@ -4520,13 +18838,13 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let user_data = match user_data {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxSizer_Add4(
+            SizerItem::option_from(ffi::wxSizer_Add4(
                 self.as_ptr(),
                 width,
                 height,
@@ -4534,7 +18852,7 @@ pub trait SizerMethods: ObjectMethods {
                 flag,
                 border,
                 user_data,
-            )
+            ))
         }
     }
     fn add_int_sizerflags<S: SizerFlagsMethods>(
@@ -4542,20 +18860,29 @@ pub trait SizerMethods: ObjectMethods {
         width: c_int,
         height: c_int,
         flags: &S,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let flags = flags.as_ptr();
-            ffi::wxSizer_Add5(self.as_ptr(), width, height, flags)
+            SizerItem::option_from(ffi::wxSizer_Add5(self.as_ptr(), width, height, flags))
         }
     }
-    fn add_sizeritem(&self, item: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxSizer_Add6(self.as_ptr(), item) }
+    fn add_sizeritem<S: SizerItemMethods>(
+        &self,
+        item: Option<&S>,
+    ) -> Option<SizerItemIsOwned<false>> {
+        unsafe {
+            let item = match item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            SizerItem::option_from(ffi::wxSizer_Add6(self.as_ptr(), item))
+        }
     }
-    fn add_spacer(&self, size: c_int) -> *mut c_void {
-        unsafe { ffi::wxSizer_AddSpacer(self.as_ptr(), size) }
+    fn add_spacer(&self, size: c_int) -> Option<SizerItemIsOwned<false>> {
+        unsafe { SizerItem::option_from(ffi::wxSizer_AddSpacer(self.as_ptr(), size)) }
     }
-    fn add_stretch_spacer(&self, prop: c_int) -> *mut c_void {
-        unsafe { ffi::wxSizer_AddStretchSpacer(self.as_ptr(), prop) }
+    fn add_stretch_spacer(&self, prop: c_int) -> Option<SizerItemIsOwned<false>> {
+        unsafe { SizerItem::option_from(ffi::wxSizer_AddStretchSpacer(self.as_ptr(), prop)) }
     }
     fn calc_min(&self) -> Size {
         unsafe { Size::from_ptr(ffi::wxSizer_CalcMin(self.as_ptr())) }
@@ -4653,29 +18980,33 @@ pub trait SizerMethods: ObjectMethods {
         &self,
         window: Option<&W>,
         recursive: bool,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxSizer_GetItem(self.as_ptr(), window, recursive)
+            SizerItem::option_from(ffi::wxSizer_GetItem(self.as_ptr(), window, recursive))
         }
     }
-    fn get_item_sizer<S: SizerMethods>(&self, sizer: Option<&S>, recursive: bool) -> *mut c_void {
+    fn get_item_sizer<S: SizerMethods>(
+        &self,
+        sizer: Option<&S>,
+        recursive: bool,
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxSizer_GetItem1(self.as_ptr(), sizer, recursive)
+            SizerItem::option_from(ffi::wxSizer_GetItem1(self.as_ptr(), sizer, recursive))
         }
     }
-    fn get_item_sz(&self, index: usize) -> *mut c_void {
-        unsafe { ffi::wxSizer_GetItem2(self.as_ptr(), index) }
+    fn get_item_sz(&self, index: usize) -> Option<SizerItemIsOwned<false>> {
+        unsafe { SizerItem::option_from(ffi::wxSizer_GetItem2(self.as_ptr(), index)) }
     }
-    fn get_item_by_id(&self, id: c_int, recursive: bool) -> *mut c_void {
-        unsafe { ffi::wxSizer_GetItemById(self.as_ptr(), id, recursive) }
+    fn get_item_by_id(&self, id: c_int, recursive: bool) -> Option<SizerItemIsOwned<false>> {
+        unsafe { SizerItem::option_from(ffi::wxSizer_GetItemById(self.as_ptr(), id, recursive)) }
     }
     fn get_min_size(&self) -> Size {
         unsafe { Size::from_ptr(ffi::wxSizer_GetMinSize(self.as_ptr())) }
@@ -4712,14 +19043,14 @@ pub trait SizerMethods: ObjectMethods {
         index: usize,
         window: Option<&W>,
         flags: &S,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
             let flags = flags.as_ptr();
-            ffi::wxSizer_Insert(self.as_ptr(), index, window, flags)
+            SizerItem::option_from(ffi::wxSizer_Insert(self.as_ptr(), index, window, flags))
         }
     }
     fn insert_window_int<W: WindowMethods, O: ObjectMethods>(
@@ -4730,7 +19061,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -4740,7 +19071,7 @@ pub trait SizerMethods: ObjectMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxSizer_Insert1(
+            SizerItem::option_from(ffi::wxSizer_Insert1(
                 self.as_ptr(),
                 index,
                 window,
@@ -4748,7 +19079,7 @@ pub trait SizerMethods: ObjectMethods {
                 flag,
                 border,
                 user_data,
-            )
+            ))
         }
     }
     fn insert_sizer_sizerflags<S: SizerMethods, S2: SizerFlagsMethods>(
@@ -4756,14 +19087,14 @@ pub trait SizerMethods: ObjectMethods {
         index: usize,
         sizer: Option<&S>,
         flags: &S2,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
             let flags = flags.as_ptr();
-            ffi::wxSizer_Insert2(self.as_ptr(), index, sizer, flags)
+            SizerItem::option_from(ffi::wxSizer_Insert2(self.as_ptr(), index, sizer, flags))
         }
     }
     fn insert_sizer_int<S: SizerMethods, O: ObjectMethods>(
@@ -4774,7 +19105,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -4784,7 +19115,7 @@ pub trait SizerMethods: ObjectMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxSizer_Insert3(
+            SizerItem::option_from(ffi::wxSizer_Insert3(
                 self.as_ptr(),
                 index,
                 sizer,
@@ -4792,7 +19123,7 @@ pub trait SizerMethods: ObjectMethods {
                 flag,
                 border,
                 user_data,
-            )
+            ))
         }
     }
     fn insert_int_int<O: ObjectMethods>(
@@ -4804,13 +19135,13 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let user_data = match user_data {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxSizer_Insert4(
+            SizerItem::option_from(ffi::wxSizer_Insert4(
                 self.as_ptr(),
                 index,
                 width,
@@ -4819,7 +19150,7 @@ pub trait SizerMethods: ObjectMethods {
                 flag,
                 border,
                 user_data,
-            )
+            ))
         }
     }
     fn insert_int_sizerflags<S: SizerFlagsMethods>(
@@ -4828,20 +19159,38 @@ pub trait SizerMethods: ObjectMethods {
         width: c_int,
         height: c_int,
         flags: &S,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let flags = flags.as_ptr();
-            ffi::wxSizer_Insert5(self.as_ptr(), index, width, height, flags)
+            SizerItem::option_from(ffi::wxSizer_Insert5(
+                self.as_ptr(),
+                index,
+                width,
+                height,
+                flags,
+            ))
         }
     }
-    fn insert_sizeritem(&self, index: usize, item: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxSizer_Insert6(self.as_ptr(), index, item) }
+    fn insert_sizeritem<S: SizerItemMethods>(
+        &self,
+        index: usize,
+        item: Option<&S>,
+    ) -> Option<SizerItemIsOwned<false>> {
+        unsafe {
+            let item = match item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            SizerItem::option_from(ffi::wxSizer_Insert6(self.as_ptr(), index, item))
+        }
     }
-    fn insert_spacer(&self, index: usize, size: c_int) -> *mut c_void {
-        unsafe { ffi::wxSizer_InsertSpacer(self.as_ptr(), index, size) }
+    fn insert_spacer(&self, index: usize, size: c_int) -> Option<SizerItemIsOwned<false>> {
+        unsafe { SizerItem::option_from(ffi::wxSizer_InsertSpacer(self.as_ptr(), index, size)) }
     }
-    fn insert_stretch_spacer(&self, index: usize, prop: c_int) -> *mut c_void {
-        unsafe { ffi::wxSizer_InsertStretchSpacer(self.as_ptr(), index, prop) }
+    fn insert_stretch_spacer(&self, index: usize, prop: c_int) -> Option<SizerItemIsOwned<false>> {
+        unsafe {
+            SizerItem::option_from(ffi::wxSizer_InsertStretchSpacer(self.as_ptr(), index, prop))
+        }
     }
     fn is_empty(&self) -> bool {
         unsafe { ffi::wxSizer_IsEmpty(self.as_ptr()) }
@@ -4874,14 +19223,14 @@ pub trait SizerMethods: ObjectMethods {
         &self,
         window: Option<&W>,
         flags: &S,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
             let flags = flags.as_ptr();
-            ffi::wxSizer_Prepend(self.as_ptr(), window, flags)
+            SizerItem::option_from(ffi::wxSizer_Prepend(self.as_ptr(), window, flags))
         }
     }
     fn prepend_window_int<W: WindowMethods, O: ObjectMethods>(
@@ -4891,7 +19240,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -4901,21 +19250,28 @@ pub trait SizerMethods: ObjectMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxSizer_Prepend1(self.as_ptr(), window, proportion, flag, border, user_data)
+            SizerItem::option_from(ffi::wxSizer_Prepend1(
+                self.as_ptr(),
+                window,
+                proportion,
+                flag,
+                border,
+                user_data,
+            ))
         }
     }
     fn prepend_sizer_sizerflags<S: SizerMethods, S2: SizerFlagsMethods>(
         &self,
         sizer: Option<&S>,
         flags: &S2,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
             let flags = flags.as_ptr();
-            ffi::wxSizer_Prepend2(self.as_ptr(), sizer, flags)
+            SizerItem::option_from(ffi::wxSizer_Prepend2(self.as_ptr(), sizer, flags))
         }
     }
     fn prepend_sizer_int<S: SizerMethods, O: ObjectMethods>(
@@ -4925,7 +19281,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -4935,7 +19291,14 @@ pub trait SizerMethods: ObjectMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxSizer_Prepend3(self.as_ptr(), sizer, proportion, flag, border, user_data)
+            SizerItem::option_from(ffi::wxSizer_Prepend3(
+                self.as_ptr(),
+                sizer,
+                proportion,
+                flag,
+                border,
+                user_data,
+            ))
         }
     }
     fn prepend_int_int<O: ObjectMethods>(
@@ -4946,13 +19309,13 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let user_data = match user_data {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxSizer_Prepend4(
+            SizerItem::option_from(ffi::wxSizer_Prepend4(
                 self.as_ptr(),
                 width,
                 height,
@@ -4960,7 +19323,7 @@ pub trait SizerMethods: ObjectMethods {
                 flag,
                 border,
                 user_data,
-            )
+            ))
         }
     }
     fn prepend_int_sizerflags<S: SizerFlagsMethods>(
@@ -4968,20 +19331,29 @@ pub trait SizerMethods: ObjectMethods {
         width: c_int,
         height: c_int,
         flags: &S,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let flags = flags.as_ptr();
-            ffi::wxSizer_Prepend5(self.as_ptr(), width, height, flags)
+            SizerItem::option_from(ffi::wxSizer_Prepend5(self.as_ptr(), width, height, flags))
         }
     }
-    fn prepend_sizeritem(&self, item: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxSizer_Prepend6(self.as_ptr(), item) }
+    fn prepend_sizeritem<S: SizerItemMethods>(
+        &self,
+        item: Option<&S>,
+    ) -> Option<SizerItemIsOwned<false>> {
+        unsafe {
+            let item = match item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            SizerItem::option_from(ffi::wxSizer_Prepend6(self.as_ptr(), item))
+        }
     }
-    fn prepend_spacer(&self, size: c_int) -> *mut c_void {
-        unsafe { ffi::wxSizer_PrependSpacer(self.as_ptr(), size) }
+    fn prepend_spacer(&self, size: c_int) -> Option<SizerItemIsOwned<false>> {
+        unsafe { SizerItem::option_from(ffi::wxSizer_PrependSpacer(self.as_ptr(), size)) }
     }
-    fn prepend_stretch_spacer(&self, prop: c_int) -> *mut c_void {
-        unsafe { ffi::wxSizer_PrependStretchSpacer(self.as_ptr(), prop) }
+    fn prepend_stretch_spacer(&self, prop: c_int) -> Option<SizerItemIsOwned<false>> {
+        unsafe { SizerItem::option_from(ffi::wxSizer_PrependStretchSpacer(self.as_ptr(), prop)) }
     }
     fn reposition_children<S: SizeMethods>(&self, min_size: &S) {
         unsafe {
@@ -5038,8 +19410,14 @@ pub trait SizerMethods: ObjectMethods {
             ffi::wxSizer_Replace1(self.as_ptr(), oldsz, newsz, recursive)
         }
     }
-    fn replace_sz(&self, index: usize, newitem: *mut c_void) -> bool {
-        unsafe { ffi::wxSizer_Replace2(self.as_ptr(), index, newitem) }
+    fn replace_sz<S: SizerItemMethods>(&self, index: usize, newitem: Option<&S>) -> bool {
+        unsafe {
+            let newitem = match newitem {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxSizer_Replace2(self.as_ptr(), index, newitem)
+        }
     }
     fn set_dimension_int(&self, x: c_int, y: c_int, width: c_int, height: c_int) {
         unsafe { ffi::wxSizer_SetDimension(self.as_ptr(), x, y, width, height) }
@@ -5303,6 +19681,170 @@ pub trait SizerFlagsMethods: WxRustMethods {
     // NOT_SUPPORTED: fn GetDefaultBorderFractional()
 }
 
+// wxSizerItem
+pub trait SizerItemMethods: ObjectMethods {
+    // DTOR: fn ~wxSizerItem()
+    fn assign_window<W: WindowMethods>(&self, window: Option<&W>) {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxSizerItem_AssignWindow(self.as_ptr(), window)
+        }
+    }
+    fn assign_sizer<S: SizerMethods>(&self, sizer: Option<&S>) {
+        unsafe {
+            let sizer = match sizer {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxSizerItem_AssignSizer(self.as_ptr(), sizer)
+        }
+    }
+    fn assign_spacer_size<S: SizeMethods>(&self, size: &S) {
+        unsafe {
+            let size = size.as_ptr();
+            ffi::wxSizerItem_AssignSpacer(self.as_ptr(), size)
+        }
+    }
+    fn assign_spacer_int(&self, w: c_int, h: c_int) {
+        unsafe { ffi::wxSizerItem_AssignSpacer1(self.as_ptr(), w, h) }
+    }
+    fn calc_min(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxSizerItem_CalcMin(self.as_ptr())) }
+    }
+    fn delete_windows(&self) {
+        unsafe { ffi::wxSizerItem_DeleteWindows(self.as_ptr()) }
+    }
+    fn detach_sizer(&self) {
+        unsafe { ffi::wxSizerItem_DetachSizer(self.as_ptr()) }
+    }
+    fn get_border(&self) -> c_int {
+        unsafe { ffi::wxSizerItem_GetBorder(self.as_ptr()) }
+    }
+    fn get_flag(&self) -> c_int {
+        unsafe { ffi::wxSizerItem_GetFlag(self.as_ptr()) }
+    }
+    fn get_id(&self) -> c_int {
+        unsafe { ffi::wxSizerItem_GetId(self.as_ptr()) }
+    }
+    fn get_min_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxSizerItem_GetMinSize(self.as_ptr())) }
+    }
+    fn set_min_size_size<S: SizeMethods>(&self, size: &S) {
+        unsafe {
+            let size = size.as_ptr();
+            ffi::wxSizerItem_SetMinSize(self.as_ptr(), size)
+        }
+    }
+    fn set_min_size_int(&self, x: c_int, y: c_int) {
+        unsafe { ffi::wxSizerItem_SetMinSize1(self.as_ptr(), x, y) }
+    }
+    fn get_position(&self) -> Point {
+        unsafe { Point::from_ptr(ffi::wxSizerItem_GetPosition(self.as_ptr())) }
+    }
+    fn get_proportion(&self) -> c_int {
+        unsafe { ffi::wxSizerItem_GetProportion(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetRatio()
+    fn get_rect(&self) -> Rect {
+        unsafe { Rect::from_ptr(ffi::wxSizerItem_GetRect(self.as_ptr())) }
+    }
+    fn get_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxSizerItem_GetSize(self.as_ptr())) }
+    }
+    fn get_sizer(&self) -> Option<SizerIsOwned<false>> {
+        unsafe { Sizer::option_from(ffi::wxSizerItem_GetSizer(self.as_ptr())) }
+    }
+    fn get_spacer(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxSizerItem_GetSpacer(self.as_ptr())) }
+    }
+    fn get_user_data(&self) -> Option<ObjectIsOwned<false>> {
+        unsafe { Object::option_from(ffi::wxSizerItem_GetUserData(self.as_ptr())) }
+    }
+    fn get_window(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxSizerItem_GetWindow(self.as_ptr())) }
+    }
+    fn is_shown(&self) -> bool {
+        unsafe { ffi::wxSizerItem_IsShown(self.as_ptr()) }
+    }
+    fn is_sizer(&self) -> bool {
+        unsafe { ffi::wxSizerItem_IsSizer(self.as_ptr()) }
+    }
+    fn is_spacer(&self) -> bool {
+        unsafe { ffi::wxSizerItem_IsSpacer(self.as_ptr()) }
+    }
+    fn is_window(&self) -> bool {
+        unsafe { ffi::wxSizerItem_IsWindow(self.as_ptr()) }
+    }
+    fn set_border(&self, border: c_int) {
+        unsafe { ffi::wxSizerItem_SetBorder(self.as_ptr(), border) }
+    }
+    fn set_dimension<P: PointMethods, S: SizeMethods>(&self, pos: &P, size: &S) {
+        unsafe {
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            ffi::wxSizerItem_SetDimension(self.as_ptr(), pos, size)
+        }
+    }
+    fn set_flag(&self, flag: c_int) {
+        unsafe { ffi::wxSizerItem_SetFlag(self.as_ptr(), flag) }
+    }
+    fn set_id(&self, id: c_int) {
+        unsafe { ffi::wxSizerItem_SetId(self.as_ptr(), id) }
+    }
+    fn set_init_size(&self, x: c_int, y: c_int) {
+        unsafe { ffi::wxSizerItem_SetInitSize(self.as_ptr(), x, y) }
+    }
+    fn set_proportion(&self, proportion: c_int) {
+        unsafe { ffi::wxSizerItem_SetProportion(self.as_ptr(), proportion) }
+    }
+    fn set_ratio_int(&self, width: c_int, height: c_int) {
+        unsafe { ffi::wxSizerItem_SetRatio(self.as_ptr(), width, height) }
+    }
+    fn set_ratio_size(&self, size: ffi::wxSize) {
+        unsafe { ffi::wxSizerItem_SetRatio1(self.as_ptr(), size) }
+    }
+    // NOT_SUPPORTED: fn SetRatio2()
+    fn set_sizer<S: SizerMethods>(&self, sizer: Option<&S>) {
+        unsafe {
+            let sizer = match sizer {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxSizerItem_SetSizer(self.as_ptr(), sizer)
+        }
+    }
+    fn set_spacer<S: SizeMethods>(&self, size: &S) {
+        unsafe {
+            let size = size.as_ptr();
+            ffi::wxSizerItem_SetSpacer(self.as_ptr(), size)
+        }
+    }
+    fn set_user_data<O: ObjectMethods>(&self, user_data: Option<&O>) {
+        unsafe {
+            let user_data = match user_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxSizerItem_SetUserData(self.as_ptr(), user_data)
+        }
+    }
+    fn set_window<W: WindowMethods>(&self, window: Option<&W>) {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxSizerItem_SetWindow(self.as_ptr(), window)
+        }
+    }
+    fn show(&self, show: bool) {
+        unsafe { ffi::wxSizerItem_Show(self.as_ptr(), show) }
+    }
+}
+
 // wxSlider
 pub trait SliderMethods: ControlMethods {
     // DTOR: fn ~wxSlider()
@@ -5406,6 +19948,32 @@ pub trait SliderMethods: ControlMethods {
     }
     fn set_value(&self, value: c_int) {
         unsafe { ffi::wxSlider_SetValue(self.as_ptr(), value) }
+    }
+}
+
+// wxSound
+pub trait SoundMethods: ObjectMethods {
+    // DTOR: fn ~wxSound()
+    fn create_str(&self, file_name: &str, is_resource: bool) -> bool {
+        unsafe {
+            let file_name = WxString::from(file_name);
+            let file_name = file_name.as_ptr();
+            ffi::wxSound_Create(self.as_ptr(), file_name, is_resource)
+        }
+    }
+    fn create_sz(&self, size: usize, data: *const c_void) -> bool {
+        unsafe { ffi::wxSound_Create1(self.as_ptr(), size, data) }
+    }
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxSound_IsOk(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn Play()
+    fn is_playing() -> bool {
+        unsafe { ffi::wxSound_IsPlaying() }
+    }
+    // NOT_SUPPORTED: fn Play1()
+    fn stop() {
+        unsafe { ffi::wxSound_Stop() }
     }
 }
 
@@ -5600,6 +20168,210 @@ pub trait SpinCtrlDoubleMethods: ControlMethods {
     }
 }
 
+// wxSpinDoubleEvent
+pub trait SpinDoubleEventMethods: NotifyEventMethods {
+    fn get_value(&self) -> c_double {
+        unsafe { ffi::wxSpinDoubleEvent_GetValue(self.as_ptr()) }
+    }
+    fn set_value(&self, value: c_double) {
+        unsafe { ffi::wxSpinDoubleEvent_SetValue(self.as_ptr(), value) }
+    }
+}
+
+// wxSpinEvent
+pub trait SpinEventMethods: NotifyEventMethods {
+    fn get_position(&self) -> c_int {
+        unsafe { ffi::wxSpinEvent_GetPosition(self.as_ptr()) }
+    }
+    fn set_position(&self, pos: c_int) {
+        unsafe { ffi::wxSpinEvent_SetPosition(self.as_ptr(), pos) }
+    }
+}
+
+// wxSplashScreen
+pub trait SplashScreenMethods: FrameMethods {
+    // DTOR: fn ~wxSplashScreen()
+    fn get_splash_style(&self) -> c_long {
+        unsafe { ffi::wxSplashScreen_GetSplashStyle(self.as_ptr()) }
+    }
+    fn get_splash_window(&self) -> *mut c_void {
+        unsafe { ffi::wxSplashScreen_GetSplashWindow(self.as_ptr()) }
+    }
+    fn get_timeout(&self) -> c_int {
+        unsafe { ffi::wxSplashScreen_GetTimeout(self.as_ptr()) }
+    }
+    fn on_close_window<C: CloseEventMethods>(&self, event: &C) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxSplashScreen_OnCloseWindow(self.as_ptr(), event)
+        }
+    }
+}
+
+// wxSplitterEvent
+pub trait SplitterEventMethods: NotifyEventMethods {
+    fn get_sash_position(&self) -> c_int {
+        unsafe { ffi::wxSplitterEvent_GetSashPosition(self.as_ptr()) }
+    }
+    fn get_window_being_removed(&self) -> WeakRef<Window> {
+        unsafe {
+            WeakRef::<Window>::from(ffi::wxSplitterEvent_GetWindowBeingRemoved(self.as_ptr()))
+        }
+    }
+    fn get_x(&self) -> c_int {
+        unsafe { ffi::wxSplitterEvent_GetX(self.as_ptr()) }
+    }
+    fn get_y(&self) -> c_int {
+        unsafe { ffi::wxSplitterEvent_GetY(self.as_ptr()) }
+    }
+    fn set_sash_position(&self, pos: c_int) {
+        unsafe { ffi::wxSplitterEvent_SetSashPosition(self.as_ptr(), pos) }
+    }
+    fn set_size(&self, old_size: c_int, new_size: c_int) {
+        unsafe { ffi::wxSplitterEvent_SetSize(self.as_ptr(), old_size, new_size) }
+    }
+    fn get_old_size(&self) -> c_int {
+        unsafe { ffi::wxSplitterEvent_GetOldSize(self.as_ptr()) }
+    }
+}
+
+// wxSplitterWindow
+pub trait SplitterWindowMethods: WindowMethods {
+    // DTOR: fn ~wxSplitterWindow()
+    fn get_minimum_pane_size(&self) -> c_int {
+        unsafe { ffi::wxSplitterWindow_GetMinimumPaneSize(self.as_ptr()) }
+    }
+    fn get_sash_gravity(&self) -> c_double {
+        unsafe { ffi::wxSplitterWindow_GetSashGravity(self.as_ptr()) }
+    }
+    fn get_sash_position(&self) -> c_int {
+        unsafe { ffi::wxSplitterWindow_GetSashPosition(self.as_ptr()) }
+    }
+    fn get_sash_size(&self) -> c_int {
+        unsafe { ffi::wxSplitterWindow_GetSashSize(self.as_ptr()) }
+    }
+    fn get_default_sash_size(&self) -> c_int {
+        unsafe { ffi::wxSplitterWindow_GetDefaultSashSize(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetSplitMode()
+    fn get_window1(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxSplitterWindow_GetWindow1(self.as_ptr())) }
+    }
+    fn get_window2(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxSplitterWindow_GetWindow2(self.as_ptr())) }
+    }
+    fn initialize<W: WindowMethods>(&self, window: Option<&W>) {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxSplitterWindow_Initialize(self.as_ptr(), window)
+        }
+    }
+    fn is_sash_invisible(&self) -> bool {
+        unsafe { ffi::wxSplitterWindow_IsSashInvisible(self.as_ptr()) }
+    }
+    fn is_split(&self) -> bool {
+        unsafe { ffi::wxSplitterWindow_IsSplit(self.as_ptr()) }
+    }
+    fn on_double_click_sash(&self, x: c_int, y: c_int) {
+        unsafe { ffi::wxSplitterWindow_OnDoubleClickSash(self.as_ptr(), x, y) }
+    }
+    fn on_sash_position_change(&self, new_sash_position: c_int) -> bool {
+        unsafe { ffi::wxSplitterWindow_OnSashPositionChange(self.as_ptr(), new_sash_position) }
+    }
+    fn on_unsplit<W: WindowMethods>(&self, removed: Option<&W>) {
+        unsafe {
+            let removed = match removed {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxSplitterWindow_OnUnsplit(self.as_ptr(), removed)
+        }
+    }
+    fn replace_window<W: WindowMethods, W2: WindowMethods>(
+        &self,
+        win_old: Option<&W>,
+        win_new: Option<&W2>,
+    ) -> bool {
+        unsafe {
+            let win_old = match win_old {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let win_new = match win_new {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxSplitterWindow_ReplaceWindow(self.as_ptr(), win_old, win_new)
+        }
+    }
+    fn set_minimum_pane_size(&self, pane_size: c_int) {
+        unsafe { ffi::wxSplitterWindow_SetMinimumPaneSize(self.as_ptr(), pane_size) }
+    }
+    fn set_sash_gravity(&self, gravity: c_double) {
+        unsafe { ffi::wxSplitterWindow_SetSashGravity(self.as_ptr(), gravity) }
+    }
+    fn set_sash_position(&self, position: c_int, redraw: bool) {
+        unsafe { ffi::wxSplitterWindow_SetSashPosition(self.as_ptr(), position, redraw) }
+    }
+    fn set_split_mode(&self, mode: c_int) {
+        unsafe { ffi::wxSplitterWindow_SetSplitMode(self.as_ptr(), mode) }
+    }
+    fn set_sash_invisible(&self, invisible: bool) {
+        unsafe { ffi::wxSplitterWindow_SetSashInvisible(self.as_ptr(), invisible) }
+    }
+    fn split_horizontally<W: WindowMethods, W2: WindowMethods>(
+        &self,
+        window1: Option<&W>,
+        window2: Option<&W2>,
+        sash_position: c_int,
+    ) -> bool {
+        unsafe {
+            let window1 = match window1 {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let window2 = match window2 {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxSplitterWindow_SplitHorizontally(self.as_ptr(), window1, window2, sash_position)
+        }
+    }
+    fn split_vertically<W: WindowMethods, W2: WindowMethods>(
+        &self,
+        window1: Option<&W>,
+        window2: Option<&W2>,
+        sash_position: c_int,
+    ) -> bool {
+        unsafe {
+            let window1 = match window1 {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let window2 = match window2 {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxSplitterWindow_SplitVertically(self.as_ptr(), window1, window2, sash_position)
+        }
+    }
+    fn unsplit<W: WindowMethods>(&self, to_remove: Option<&W>) -> bool {
+        unsafe {
+            let to_remove = match to_remove {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxSplitterWindow_Unsplit(self.as_ptr(), to_remove)
+        }
+    }
+    fn update_size(&self) {
+        unsafe { ffi::wxSplitterWindow_UpdateSize(self.as_ptr()) }
+    }
+}
+
 // wxStaticBitmap
 pub trait StaticBitmapMethods: ControlMethods {
     fn create_bitmapbundle<
@@ -5689,6 +20461,16 @@ pub trait StaticBoxSizerMethods: BoxSizerMethods {
     }
 }
 
+// wxStaticLine
+pub trait StaticLineMethods: ControlMethods {
+    fn is_vertical(&self) -> bool {
+        unsafe { ffi::wxStaticLine_IsVertical(self.as_ptr()) }
+    }
+    fn get_default_size() -> c_int {
+        unsafe { ffi::wxStaticLine_GetDefaultSize() }
+    }
+}
+
 // wxStaticText
 pub trait StaticTextMethods: ControlMethods {
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods>(
@@ -5720,6 +20502,546 @@ pub trait StaticTextMethods: ControlMethods {
     }
     fn wrap(&self, width: c_int) {
         unsafe { ffi::wxStaticText_Wrap(self.as_ptr(), width) }
+    }
+}
+
+// wxStatusBar
+pub trait StatusBarMethods: ControlMethods {
+    // DTOR: fn ~wxStatusBar()
+    fn create_long<W: WindowMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        style: c_long,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxStatusBar_Create(self.as_ptr(), parent, id, style, name)
+        }
+    }
+    fn get_field_rect<R: RectMethods>(&self, i: c_int, rect: &R) -> bool {
+        unsafe {
+            let rect = rect.as_ptr();
+            ffi::wxStatusBar_GetFieldRect(self.as_ptr(), i, rect)
+        }
+    }
+    fn get_fields_count(&self) -> c_int {
+        unsafe { ffi::wxStatusBar_GetFieldsCount(self.as_ptr()) }
+    }
+    fn get_field(&self, n: c_int) -> StatusBarPaneIsOwned<false> {
+        unsafe { StatusBarPaneIsOwned::from_ptr(ffi::wxStatusBar_GetField(self.as_ptr(), n)) }
+    }
+    fn get_borders(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxStatusBar_GetBorders(self.as_ptr())) }
+    }
+    fn get_status_text(&self, i: c_int) -> String {
+        unsafe { WxString::from_ptr(ffi::wxStatusBar_GetStatusText(self.as_ptr(), i)).into() }
+    }
+    fn get_status_width(&self, n: c_int) -> c_int {
+        unsafe { ffi::wxStatusBar_GetStatusWidth(self.as_ptr(), n) }
+    }
+    fn get_status_style(&self, n: c_int) -> c_int {
+        unsafe { ffi::wxStatusBar_GetStatusStyle(self.as_ptr(), n) }
+    }
+    fn pop_status_text(&self, field: c_int) {
+        unsafe { ffi::wxStatusBar_PopStatusText(self.as_ptr(), field) }
+    }
+    fn push_status_text(&self, string: &str, field: c_int) {
+        unsafe {
+            let string = WxString::from(string);
+            let string = string.as_ptr();
+            ffi::wxStatusBar_PushStatusText(self.as_ptr(), string, field)
+        }
+    }
+    fn set_fields_count(&self, number: c_int, widths: *const c_void) {
+        unsafe { ffi::wxStatusBar_SetFieldsCount(self.as_ptr(), number, widths) }
+    }
+    fn set_min_height(&self, height: c_int) {
+        unsafe { ffi::wxStatusBar_SetMinHeight(self.as_ptr(), height) }
+    }
+    fn set_status_styles(&self, n: c_int, styles: *const c_void) {
+        unsafe { ffi::wxStatusBar_SetStatusStyles(self.as_ptr(), n, styles) }
+    }
+    fn set_status_text(&self, text: &str, i: c_int) {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxStatusBar_SetStatusText(self.as_ptr(), text, i)
+        }
+    }
+    fn set_status_widths(&self, n: c_int, widths_field: *const c_void) {
+        unsafe { ffi::wxStatusBar_SetStatusWidths(self.as_ptr(), n, widths_field) }
+    }
+}
+
+// wxStatusBarPane
+pub trait StatusBarPaneMethods: WxRustMethods {
+    fn get_width(&self) -> c_int {
+        unsafe { ffi::wxStatusBarPane_GetWidth(self.as_ptr()) }
+    }
+    fn get_style(&self) -> c_int {
+        unsafe { ffi::wxStatusBarPane_GetStyle(self.as_ptr()) }
+    }
+    fn get_text(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxStatusBarPane_GetText(self.as_ptr())).into() }
+    }
+}
+
+// wxStdDialogButtonSizer
+pub trait StdDialogButtonSizerMethods: BoxSizerMethods {
+    fn add_button<B: ButtonMethods>(&self, button: Option<&B>) {
+        unsafe {
+            let button = match button {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxStdDialogButtonSizer_AddButton(self.as_ptr(), button)
+        }
+    }
+    fn realize(&self) {
+        unsafe { ffi::wxStdDialogButtonSizer_Realize(self.as_ptr()) }
+    }
+    fn set_affirmative_button<B: ButtonMethods>(&self, button: Option<&B>) {
+        unsafe {
+            let button = match button {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxStdDialogButtonSizer_SetAffirmativeButton(self.as_ptr(), button)
+        }
+    }
+    fn set_cancel_button<B: ButtonMethods>(&self, button: Option<&B>) {
+        unsafe {
+            let button = match button {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxStdDialogButtonSizer_SetCancelButton(self.as_ptr(), button)
+        }
+    }
+    fn set_negative_button<B: ButtonMethods>(&self, button: Option<&B>) {
+        unsafe {
+            let button = match button {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxStdDialogButtonSizer_SetNegativeButton(self.as_ptr(), button)
+        }
+    }
+}
+
+// wxStockPreferencesPage
+pub trait StockPreferencesPageMethods: PreferencesPageMethods {
+    // NOT_SUPPORTED: fn GetKind()
+}
+
+// wxStreamToTextRedirector
+pub trait StreamToTextRedirectorMethods: WxRustMethods {
+    // DTOR: fn ~wxStreamToTextRedirector()
+}
+
+// wxSysColourChangedEvent
+pub trait SysColourChangedEventMethods: EventMethods {}
+
+// wxSystemSettings
+pub trait SystemSettingsMethods: WxRustMethods {
+    // NOT_SUPPORTED: fn GetColour()
+    // NOT_SUPPORTED: fn GetFont()
+    // NOT_SUPPORTED: fn GetMetric()
+    // NOT_SUPPORTED: fn GetScreenType()
+    fn get_appearance() -> SystemAppearance {
+        unsafe { SystemAppearance::from_ptr(ffi::wxSystemSettings_GetAppearance()) }
+    }
+    // NOT_SUPPORTED: fn HasFeature()
+}
+
+// wxTGAHandler
+pub trait TGAHandlerMethods: ImageHandlerMethods {}
+
+// wxTIFFHandler
+pub trait TIFFHandlerMethods: ImageHandlerMethods {}
+
+// wxTaskBarButton
+pub trait TaskBarButtonMethods: WxRustMethods {
+    fn set_progress_range(&self, range: c_int) {
+        unsafe { ffi::wxTaskBarButton_SetProgressRange(self.as_ptr(), range) }
+    }
+    fn set_progress_value(&self, value: c_int) {
+        unsafe { ffi::wxTaskBarButton_SetProgressValue(self.as_ptr(), value) }
+    }
+    fn pulse_progress(&self) {
+        unsafe { ffi::wxTaskBarButton_PulseProgress(self.as_ptr()) }
+    }
+    fn show(&self, show: bool) {
+        unsafe { ffi::wxTaskBarButton_Show(self.as_ptr(), show) }
+    }
+    fn hide(&self) {
+        unsafe { ffi::wxTaskBarButton_Hide(self.as_ptr()) }
+    }
+    fn set_thumbnail_tooltip(&self, tooltip: &str) {
+        unsafe {
+            let tooltip = WxString::from(tooltip);
+            let tooltip = tooltip.as_ptr();
+            ffi::wxTaskBarButton_SetThumbnailTooltip(self.as_ptr(), tooltip)
+        }
+    }
+    // NOT_SUPPORTED: fn SetProgressState()
+    fn set_overlay_icon<I: IconMethods>(&self, icon: &I, description: &str) {
+        unsafe {
+            let icon = icon.as_ptr();
+            let description = WxString::from(description);
+            let description = description.as_ptr();
+            ffi::wxTaskBarButton_SetOverlayIcon(self.as_ptr(), icon, description)
+        }
+    }
+    fn set_thumbnail_clip<R: RectMethods>(&self, rect: &R) {
+        unsafe {
+            let rect = rect.as_ptr();
+            ffi::wxTaskBarButton_SetThumbnailClip(self.as_ptr(), rect)
+        }
+    }
+    fn set_thumbnail_contents<W: WindowMethods>(&self, child: Option<&W>) {
+        unsafe {
+            let child = match child {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTaskBarButton_SetThumbnailContents(self.as_ptr(), child)
+        }
+    }
+    fn insert_thumb_bar_button<T: ThumbBarButtonMethods>(
+        &self,
+        pos: usize,
+        button: Option<&T>,
+    ) -> bool {
+        unsafe {
+            let button = match button {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTaskBarButton_InsertThumbBarButton(self.as_ptr(), pos, button)
+        }
+    }
+    fn append_thumb_bar_button<T: ThumbBarButtonMethods>(&self, button: Option<&T>) -> bool {
+        unsafe {
+            let button = match button {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTaskBarButton_AppendThumbBarButton(self.as_ptr(), button)
+        }
+    }
+    fn append_separator_in_thumb_bar(&self) -> bool {
+        unsafe { ffi::wxTaskBarButton_AppendSeparatorInThumbBar(self.as_ptr()) }
+    }
+    fn remove_thumb_bar_button_thumbbarbutton<T: ThumbBarButtonMethods>(
+        &self,
+        button: Option<&T>,
+    ) -> Option<ThumbBarButtonIsOwned<false>> {
+        unsafe {
+            let button = match button {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ThumbBarButton::option_from(ffi::wxTaskBarButton_RemoveThumbBarButton(
+                self.as_ptr(),
+                button,
+            ))
+        }
+    }
+    fn remove_thumb_bar_button_int(&self, id: c_int) -> Option<ThumbBarButtonIsOwned<false>> {
+        unsafe {
+            ThumbBarButton::option_from(ffi::wxTaskBarButton_RemoveThumbBarButton1(
+                self.as_ptr(),
+                id,
+            ))
+        }
+    }
+}
+
+// wxTaskBarIcon
+pub trait TaskBarIconMethods: EvtHandlerMethods {
+    // DTOR: fn ~wxTaskBarIcon()
+    fn destroy(&self) {
+        unsafe { ffi::wxTaskBarIcon_Destroy(self.as_ptr()) }
+    }
+    fn is_icon_installed(&self) -> bool {
+        unsafe { ffi::wxTaskBarIcon_IsIconInstalled(self.as_ptr()) }
+    }
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxTaskBarIcon_IsOk(self.as_ptr()) }
+    }
+    fn popup_menu<M: MenuMethods>(&self, menu: Option<&M>) -> bool {
+        unsafe {
+            let menu = match menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTaskBarIcon_PopupMenu(self.as_ptr(), menu)
+        }
+    }
+    fn remove_icon(&self) -> bool {
+        unsafe { ffi::wxTaskBarIcon_RemoveIcon(self.as_ptr()) }
+    }
+    fn set_icon<B: BitmapBundleMethods>(&self, icon: &B, tooltip: &str) -> bool {
+        unsafe {
+            let icon = icon.as_ptr();
+            let tooltip = WxString::from(tooltip);
+            let tooltip = tooltip.as_ptr();
+            ffi::wxTaskBarIcon_SetIcon(self.as_ptr(), icon, tooltip)
+        }
+    }
+    fn is_available() -> bool {
+        unsafe { ffi::wxTaskBarIcon_IsAvailable() }
+    }
+}
+
+// wxTaskBarIconEvent
+pub trait TaskBarIconEventMethods: EventMethods {}
+
+// wxTaskBarJumpList
+pub trait TaskBarJumpListMethods: WxRustMethods {
+    // DTOR: fn ~wxTaskBarJumpList()
+    fn show_recent_category(&self, shown: bool) {
+        unsafe { ffi::wxTaskBarJumpList_ShowRecentCategory(self.as_ptr(), shown) }
+    }
+    fn hide_recent_category(&self) {
+        unsafe { ffi::wxTaskBarJumpList_HideRecentCategory(self.as_ptr()) }
+    }
+    fn show_frequent_category(&self, shown: bool) {
+        unsafe { ffi::wxTaskBarJumpList_ShowFrequentCategory(self.as_ptr(), shown) }
+    }
+    fn hide_frequent_category(&self) {
+        unsafe { ffi::wxTaskBarJumpList_HideFrequentCategory(self.as_ptr()) }
+    }
+    fn get_tasks(&self) -> TaskBarJumpListCategoryIsOwned<false> {
+        unsafe {
+            TaskBarJumpListCategoryIsOwned::from_ptr(ffi::wxTaskBarJumpList_GetTasks(self.as_ptr()))
+        }
+    }
+    fn get_frequent_category(&self) -> TaskBarJumpListCategoryIsOwned<false> {
+        unsafe {
+            TaskBarJumpListCategoryIsOwned::from_ptr(ffi::wxTaskBarJumpList_GetFrequentCategory(
+                self.as_ptr(),
+            ))
+        }
+    }
+    fn get_recent_category(&self) -> TaskBarJumpListCategoryIsOwned<false> {
+        unsafe {
+            TaskBarJumpListCategoryIsOwned::from_ptr(ffi::wxTaskBarJumpList_GetRecentCategory(
+                self.as_ptr(),
+            ))
+        }
+    }
+    fn get_custom_categories(&self) -> *const c_void {
+        unsafe { ffi::wxTaskBarJumpList_GetCustomCategories(self.as_ptr()) }
+    }
+    fn add_custom_category<T: TaskBarJumpListCategoryMethods>(&self, category: Option<&T>) {
+        unsafe {
+            let category = match category {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTaskBarJumpList_AddCustomCategory(self.as_ptr(), category)
+        }
+    }
+    fn remove_custom_category(&self, title: &str) -> Option<TaskBarJumpListCategoryIsOwned<false>> {
+        unsafe {
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            TaskBarJumpListCategory::option_from(ffi::wxTaskBarJumpList_RemoveCustomCategory(
+                self.as_ptr(),
+                title,
+            ))
+        }
+    }
+    fn delete_custom_category(&self, title: &str) {
+        unsafe {
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            ffi::wxTaskBarJumpList_DeleteCustomCategory(self.as_ptr(), title)
+        }
+    }
+}
+
+// wxTaskBarJumpListCategory
+pub trait TaskBarJumpListCategoryMethods: WxRustMethods {
+    // DTOR: fn ~wxTaskBarJumpListCategory()
+    fn append<T: TaskBarJumpListItemMethods>(
+        &self,
+        item: Option<&T>,
+    ) -> Option<TaskBarJumpListItemIsOwned<false>> {
+        unsafe {
+            let item = match item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            TaskBarJumpListItem::option_from(ffi::wxTaskBarJumpListCategory_Append(
+                self.as_ptr(),
+                item,
+            ))
+        }
+    }
+    fn delete<T: TaskBarJumpListItemMethods>(&self, item: Option<&T>) {
+        unsafe {
+            let item = match item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTaskBarJumpListCategory_Delete(self.as_ptr(), item)
+        }
+    }
+    fn remove<T: TaskBarJumpListItemMethods>(
+        &self,
+        item: Option<&T>,
+    ) -> Option<TaskBarJumpListItemIsOwned<false>> {
+        unsafe {
+            let item = match item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            TaskBarJumpListItem::option_from(ffi::wxTaskBarJumpListCategory_Remove(
+                self.as_ptr(),
+                item,
+            ))
+        }
+    }
+    fn find_item_by_position(&self, pos: usize) -> Option<TaskBarJumpListItemIsOwned<false>> {
+        unsafe {
+            TaskBarJumpListItem::option_from(ffi::wxTaskBarJumpListCategory_FindItemByPosition(
+                self.as_ptr(),
+                pos,
+            ))
+        }
+    }
+    fn insert<T: TaskBarJumpListItemMethods>(
+        &self,
+        pos: usize,
+        item: Option<&T>,
+    ) -> Option<TaskBarJumpListItemIsOwned<false>> {
+        unsafe {
+            let item = match item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            TaskBarJumpListItem::option_from(ffi::wxTaskBarJumpListCategory_Insert(
+                self.as_ptr(),
+                pos,
+                item,
+            ))
+        }
+    }
+    fn prepend<T: TaskBarJumpListItemMethods>(
+        &self,
+        item: Option<&T>,
+    ) -> Option<TaskBarJumpListItemIsOwned<false>> {
+        unsafe {
+            let item = match item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            TaskBarJumpListItem::option_from(ffi::wxTaskBarJumpListCategory_Prepend(
+                self.as_ptr(),
+                item,
+            ))
+        }
+    }
+    fn set_title(&self, title: &str) {
+        unsafe {
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            ffi::wxTaskBarJumpListCategory_SetTitle(self.as_ptr(), title)
+        }
+    }
+    fn get_title(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxTaskBarJumpListCategory_GetTitle(self.as_ptr())).into() }
+    }
+    fn get_items(&self) -> *const c_void {
+        unsafe { ffi::wxTaskBarJumpListCategory_GetItems(self.as_ptr()) }
+    }
+}
+
+// wxTaskBarJumpListItem
+pub trait TaskBarJumpListItemMethods: WxRustMethods {
+    // NOT_SUPPORTED: fn GetType()
+    // NOT_SUPPORTED: fn SetType()
+    fn get_title(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxTaskBarJumpListItem_GetTitle(self.as_ptr())).into() }
+    }
+    fn set_title(&self, title: &str) {
+        unsafe {
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            ffi::wxTaskBarJumpListItem_SetTitle(self.as_ptr(), title)
+        }
+    }
+    fn get_file_path(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxTaskBarJumpListItem_GetFilePath(self.as_ptr())).into() }
+    }
+    fn set_file_path(&self, file_path: &str) {
+        unsafe {
+            let file_path = WxString::from(file_path);
+            let file_path = file_path.as_ptr();
+            ffi::wxTaskBarJumpListItem_SetFilePath(self.as_ptr(), file_path)
+        }
+    }
+    fn get_arguments(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxTaskBarJumpListItem_GetArguments(self.as_ptr())).into() }
+    }
+    fn set_arguments(&self, arguments: &str) {
+        unsafe {
+            let arguments = WxString::from(arguments);
+            let arguments = arguments.as_ptr();
+            ffi::wxTaskBarJumpListItem_SetArguments(self.as_ptr(), arguments)
+        }
+    }
+    fn get_tooltip(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxTaskBarJumpListItem_GetTooltip(self.as_ptr())).into() }
+    }
+    fn set_tooltip(&self, tooltip: &str) {
+        unsafe {
+            let tooltip = WxString::from(tooltip);
+            let tooltip = tooltip.as_ptr();
+            ffi::wxTaskBarJumpListItem_SetTooltip(self.as_ptr(), tooltip)
+        }
+    }
+    fn get_icon_path(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxTaskBarJumpListItem_GetIconPath(self.as_ptr())).into() }
+    }
+    fn set_icon_path(&self, icon_path: &str) {
+        unsafe {
+            let icon_path = WxString::from(icon_path);
+            let icon_path = icon_path.as_ptr();
+            ffi::wxTaskBarJumpListItem_SetIconPath(self.as_ptr(), icon_path)
+        }
+    }
+    fn get_icon_index(&self) -> c_int {
+        unsafe { ffi::wxTaskBarJumpListItem_GetIconIndex(self.as_ptr()) }
+    }
+    fn set_icon_index(&self, icon_index: c_int) {
+        unsafe { ffi::wxTaskBarJumpListItem_SetIconIndex(self.as_ptr(), icon_index) }
+    }
+    fn get_category(&self) -> Option<TaskBarJumpListCategoryIsOwned<false>> {
+        unsafe {
+            TaskBarJumpListCategory::option_from(ffi::wxTaskBarJumpListItem_GetCategory(
+                self.as_ptr(),
+            ))
+        }
+    }
+    fn set_category<T: TaskBarJumpListCategoryMethods>(&self, category: Option<&T>) {
+        unsafe {
+            let category = match category {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTaskBarJumpListItem_SetCategory(self.as_ptr(), category)
+        }
     }
 }
 
@@ -6090,6 +21412,18 @@ pub trait TextAttrMethods: WxRustMethods {
     }
 }
 
+// wxTextCompleterSimple
+pub trait TextCompleterSimpleMethods: TextCompleterMethods {
+    fn get_completions<A: ArrayStringMethods>(&self, prefix: &str, res: &A) {
+        unsafe {
+            let prefix = WxString::from(prefix);
+            let prefix = prefix.as_ptr();
+            let res = res.as_ptr();
+            ffi::wxTextCompleterSimple_GetCompletions(self.as_ptr(), prefix, res)
+        }
+    }
+}
+
 // wxTextCtrl
 pub trait TextCtrlMethods: ControlMethods {
     fn osx_enable_new_line_replacement(&self, enable: bool) {
@@ -6145,11 +21479,17 @@ pub trait TextCtrlMethods: ControlMethods {
     fn empty_undo_buffer(&self) {
         unsafe { ffi::wxTextCtrl_EmptyUndoBuffer(self.as_ptr()) }
     }
-    fn emulate_key_press(&self, event: *const c_void) -> bool {
-        unsafe { ffi::wxTextCtrl_EmulateKeyPress(self.as_ptr(), event) }
+    fn emulate_key_press<K: KeyEventMethods>(&self, event: &K) -> bool {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxTextCtrl_EmulateKeyPress(self.as_ptr(), event)
+        }
     }
-    fn enable_proof_check(&self, options: *const c_void) -> bool {
-        unsafe { ffi::wxTextCtrl_EnableProofCheck(self.as_ptr(), options) }
+    fn enable_proof_check<T: TextProofOptionsMethods>(&self, options: &T) -> bool {
+        unsafe {
+            let options = options.as_ptr();
+            ffi::wxTextCtrl_EnableProofCheck(self.as_ptr(), options)
+        }
     }
     fn get_default_style(&self) -> TextAttrIsOwned<false> {
         unsafe { TextAttrIsOwned::from_ptr(ffi::wxTextCtrl_GetDefaultStyle(self.as_ptr())) }
@@ -6180,7 +21520,9 @@ pub trait TextCtrlMethods: ControlMethods {
     fn is_single_line(&self) -> bool {
         unsafe { ffi::wxTextCtrl_IsSingleLine(self.as_ptr()) }
     }
-    // NOT_SUPPORTED: fn GetProofCheckOptions()
+    fn get_proof_check_options(&self) -> TextProofOptions {
+        unsafe { TextProofOptions::from_ptr(ffi::wxTextCtrl_GetProofCheckOptions(self.as_ptr())) }
+    }
     fn load_file(&self, filename: &str, file_type: c_int) -> bool {
         unsafe {
             let filename = WxString::from(filename);
@@ -6191,8 +21533,11 @@ pub trait TextCtrlMethods: ControlMethods {
     fn mark_dirty(&self) {
         unsafe { ffi::wxTextCtrl_MarkDirty(self.as_ptr()) }
     }
-    fn on_drop_files(&self, event: *mut c_void) {
-        unsafe { ffi::wxTextCtrl_OnDropFiles(self.as_ptr(), event) }
+    fn on_drop_files<D: DropFilesEventMethods>(&self, event: &D) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxTextCtrl_OnDropFiles(self.as_ptr(), event)
+        }
     }
     fn position_to_xy(&self, pos: c_long, x: *mut c_void, y: *mut c_void) -> bool {
         unsafe { ffi::wxTextCtrl_PositionToXY(self.as_ptr(), pos, x, y) }
@@ -6230,6 +21575,34 @@ pub trait TextCtrlMethods: ControlMethods {
     }
 }
 
+// wxTextDataObject
+pub trait TextDataObjectMethods: DataObjectSimpleMethods {
+    fn get_text(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxTextDataObject_GetText(self.as_ptr())).into() }
+    }
+    fn get_text_length(&self) -> usize {
+        unsafe { ffi::wxTextDataObject_GetTextLength(self.as_ptr()) }
+    }
+    fn set_text(&self, str_text: &str) {
+        unsafe {
+            let str_text = WxString::from(str_text);
+            let str_text = str_text.as_ptr();
+            ffi::wxTextDataObject_SetText(self.as_ptr(), str_text)
+        }
+    }
+}
+
+// wxTextDropTarget
+pub trait TextDropTargetMethods: DropTargetMethods {
+    fn on_drop_text(&self, x: c_int, y: c_int, data: &str) -> bool {
+        unsafe {
+            let data = WxString::from(data);
+            let data = data.as_ptr();
+            ffi::wxTextDropTarget_OnDropText(self.as_ptr(), x, y, data)
+        }
+    }
+}
+
 // wxTextEntry
 pub trait TextEntryMethods: WxRustMethods {
     fn as_text_entry(&self) -> *mut c_void;
@@ -6246,8 +21619,14 @@ pub trait TextEntryMethods: WxRustMethods {
             ffi::wxTextEntry_AutoComplete(self.as_text_entry(), choices)
         }
     }
-    fn auto_complete_textcompleter(&self, completer: *mut c_void) -> bool {
-        unsafe { ffi::wxTextEntry_AutoComplete1(self.as_text_entry(), completer) }
+    fn auto_complete_textcompleter<T: TextCompleterMethods>(&self, completer: Option<&T>) -> bool {
+        unsafe {
+            let completer = match completer {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTextEntry_AutoComplete1(self.as_text_entry(), completer)
+        }
     }
     fn auto_complete_file_names(&self) -> bool {
         unsafe { ffi::wxTextEntry_AutoCompleteFileNames(self.as_text_entry()) }
@@ -6391,6 +21770,265 @@ pub trait TextEntryMethods: WxRustMethods {
     }
 }
 
+// wxTextEntryDialog
+pub trait TextEntryDialogMethods: DialogMethods {
+    fn create_str<W: WindowMethods, P: PointMethods>(
+        &self,
+        parent: Option<&W>,
+        message: &str,
+        caption: &str,
+        value: &str,
+        style: c_long,
+        pos: &P,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let message = WxString::from(message);
+            let message = message.as_ptr();
+            let caption = WxString::from(caption);
+            let caption = caption.as_ptr();
+            let value = WxString::from(value);
+            let value = value.as_ptr();
+            let pos = pos.as_ptr();
+            ffi::wxTextEntryDialog_Create(
+                self.as_ptr(),
+                parent,
+                message,
+                caption,
+                value,
+                style,
+                pos,
+            )
+        }
+    }
+    // DTOR: fn ~wxTextEntryDialog()
+    fn get_value(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxTextEntryDialog_GetValue(self.as_ptr())).into() }
+    }
+    fn set_text_validator<T: TextValidatorMethods>(&self, validator: &T) {
+        unsafe {
+            let validator = validator.as_ptr();
+            ffi::wxTextEntryDialog_SetTextValidator(self.as_ptr(), validator)
+        }
+    }
+    // NOT_SUPPORTED: fn SetTextValidator1()
+    // NOT_SUPPORTED: fn SetMaxLength()
+    fn set_value(&self, value: &str) {
+        unsafe {
+            let value = WxString::from(value);
+            let value = value.as_ptr();
+            ffi::wxTextEntryDialog_SetValue(self.as_ptr(), value)
+        }
+    }
+    fn force_upper(&self) {
+        unsafe { ffi::wxTextEntryDialog_ForceUpper(self.as_ptr()) }
+    }
+}
+
+// wxTextValidator
+pub trait TextValidatorMethods: ValidatorMethods {
+    fn get_char_excludes(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxTextValidator_GetCharExcludes(self.as_ptr())).into() }
+    }
+    fn get_char_includes(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxTextValidator_GetCharIncludes(self.as_ptr())).into() }
+    }
+    fn get_excludes(&self) -> ArrayStringIsOwned<false> {
+        unsafe { ArrayStringIsOwned::from_ptr(ffi::wxTextValidator_GetExcludes(self.as_ptr())) }
+    }
+    fn get_includes(&self) -> ArrayStringIsOwned<false> {
+        unsafe { ArrayStringIsOwned::from_ptr(ffi::wxTextValidator_GetIncludes(self.as_ptr())) }
+    }
+    fn get_style(&self) -> c_long {
+        unsafe { ffi::wxTextValidator_GetStyle(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn HasFlag()
+    fn on_char<K: KeyEventMethods>(&self, event: &K) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxTextValidator_OnChar(self.as_ptr(), event)
+        }
+    }
+    fn set_excludes<A: ArrayStringMethods>(&self, string_list: &A) {
+        unsafe {
+            let string_list = string_list.as_ptr();
+            ffi::wxTextValidator_SetExcludes(self.as_ptr(), string_list)
+        }
+    }
+    fn set_char_excludes(&self, chars: &str) {
+        unsafe {
+            let chars = WxString::from(chars);
+            let chars = chars.as_ptr();
+            ffi::wxTextValidator_SetCharExcludes(self.as_ptr(), chars)
+        }
+    }
+    fn set_includes<A: ArrayStringMethods>(&self, string_list: &A) {
+        unsafe {
+            let string_list = string_list.as_ptr();
+            ffi::wxTextValidator_SetIncludes(self.as_ptr(), string_list)
+        }
+    }
+    fn set_char_includes(&self, chars: &str) {
+        unsafe {
+            let chars = WxString::from(chars);
+            let chars = chars.as_ptr();
+            ffi::wxTextValidator_SetCharIncludes(self.as_ptr(), chars)
+        }
+    }
+    fn add_exclude(&self, exclude: &str) {
+        unsafe {
+            let exclude = WxString::from(exclude);
+            let exclude = exclude.as_ptr();
+            ffi::wxTextValidator_AddExclude(self.as_ptr(), exclude)
+        }
+    }
+    fn add_include(&self, include: &str) {
+        unsafe {
+            let include = WxString::from(include);
+            let include = include.as_ptr();
+            ffi::wxTextValidator_AddInclude(self.as_ptr(), include)
+        }
+    }
+    fn add_char_excludes(&self, chars: &str) {
+        unsafe {
+            let chars = WxString::from(chars);
+            let chars = chars.as_ptr();
+            ffi::wxTextValidator_AddCharExcludes(self.as_ptr(), chars)
+        }
+    }
+    fn add_char_includes(&self, chars: &str) {
+        unsafe {
+            let chars = WxString::from(chars);
+            let chars = chars.as_ptr();
+            ffi::wxTextValidator_AddCharIncludes(self.as_ptr(), chars)
+        }
+    }
+    fn set_style(&self, style: c_long) {
+        unsafe { ffi::wxTextValidator_SetStyle(self.as_ptr(), style) }
+    }
+    fn is_valid(&self, val: &str) -> String {
+        unsafe {
+            let val = WxString::from(val);
+            let val = val.as_ptr();
+            WxString::from_ptr(ffi::wxTextValidator_IsValid(self.as_ptr(), val)).into()
+        }
+    }
+}
+
+// wxThreadEvent
+pub trait ThreadEventMethods: EventMethods {
+    fn set_payload(&self, payload: *const c_void) {
+        unsafe { ffi::wxThreadEvent_SetPayload(self.as_ptr(), payload) }
+    }
+    // NOT_SUPPORTED: fn GetPayload()
+    fn get_extra_long(&self) -> c_long {
+        unsafe { ffi::wxThreadEvent_GetExtraLong(self.as_ptr()) }
+    }
+    fn get_int(&self) -> c_int {
+        unsafe { ffi::wxThreadEvent_GetInt(self.as_ptr()) }
+    }
+    fn get_string(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxThreadEvent_GetString(self.as_ptr())).into() }
+    }
+    fn set_extra_long(&self, extra_long: c_long) {
+        unsafe { ffi::wxThreadEvent_SetExtraLong(self.as_ptr(), extra_long) }
+    }
+    fn set_int(&self, int_command: c_int) {
+        unsafe { ffi::wxThreadEvent_SetInt(self.as_ptr(), int_command) }
+    }
+    fn set_string(&self, string: &str) {
+        unsafe {
+            let string = WxString::from(string);
+            let string = string.as_ptr();
+            ffi::wxThreadEvent_SetString(self.as_ptr(), string)
+        }
+    }
+}
+
+// wxThumbBarButton
+pub trait ThumbBarButtonMethods: WxRustMethods {
+    fn create<I: IconMethods>(
+        &self,
+        id: c_int,
+        icon: &I,
+        tooltip: &str,
+        enable: bool,
+        dismiss_on_click: bool,
+        has_background: bool,
+        shown: bool,
+        interactive: bool,
+    ) -> bool {
+        unsafe {
+            let icon = icon.as_ptr();
+            let tooltip = WxString::from(tooltip);
+            let tooltip = tooltip.as_ptr();
+            ffi::wxThumbBarButton_Create(
+                self.as_ptr(),
+                id,
+                icon,
+                tooltip,
+                enable,
+                dismiss_on_click,
+                has_background,
+                shown,
+                interactive,
+            )
+        }
+    }
+    // DTOR: fn ~wxThumbBarButton()
+    fn get_id(&self) -> c_int {
+        unsafe { ffi::wxThumbBarButton_GetID(self.as_ptr()) }
+    }
+    fn get_icon(&self) -> IconIsOwned<false> {
+        unsafe { IconIsOwned::from_ptr(ffi::wxThumbBarButton_GetIcon(self.as_ptr())) }
+    }
+    fn get_tooltip(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxThumbBarButton_GetTooltip(self.as_ptr())).into() }
+    }
+    fn is_enable(&self) -> bool {
+        unsafe { ffi::wxThumbBarButton_IsEnable(self.as_ptr()) }
+    }
+    fn enable(&self, enable: bool) {
+        unsafe { ffi::wxThumbBarButton_Enable(self.as_ptr(), enable) }
+    }
+    fn disable(&self) {
+        unsafe { ffi::wxThumbBarButton_Disable(self.as_ptr()) }
+    }
+    fn is_dismiss_on_click(&self) -> bool {
+        unsafe { ffi::wxThumbBarButton_IsDismissOnClick(self.as_ptr()) }
+    }
+    fn enable_dismiss_on_click(&self, enable: bool) {
+        unsafe { ffi::wxThumbBarButton_EnableDismissOnClick(self.as_ptr(), enable) }
+    }
+    fn disable_dimiss_on_click(&self) {
+        unsafe { ffi::wxThumbBarButton_DisableDimissOnClick(self.as_ptr()) }
+    }
+    fn has_background(&self) -> bool {
+        unsafe { ffi::wxThumbBarButton_HasBackground(self.as_ptr()) }
+    }
+    fn set_has_background(&self, has: bool) {
+        unsafe { ffi::wxThumbBarButton_SetHasBackground(self.as_ptr(), has) }
+    }
+    fn is_shown(&self) -> bool {
+        unsafe { ffi::wxThumbBarButton_IsShown(self.as_ptr()) }
+    }
+    fn show(&self, shown: bool) {
+        unsafe { ffi::wxThumbBarButton_Show(self.as_ptr(), shown) }
+    }
+    fn hide(&self) {
+        unsafe { ffi::wxThumbBarButton_Hide(self.as_ptr()) }
+    }
+    fn is_interactive(&self) -> bool {
+        unsafe { ffi::wxThumbBarButton_IsInteractive(self.as_ptr()) }
+    }
+    fn set_interactive(&self, interactive: bool) {
+        unsafe { ffi::wxThumbBarButton_SetInteractive(self.as_ptr(), interactive) }
+    }
+}
+
 // wxTimePickerCtrl
 pub trait TimePickerCtrlMethods: ControlMethods {
     fn create_datetime<
@@ -6447,6 +22085,36 @@ pub trait TimePickerCtrlMethods: ControlMethods {
         unsafe {
             let dt = dt.as_ptr();
             ffi::wxTimePickerCtrl_SetValue(self.as_ptr(), dt)
+        }
+    }
+}
+
+// wxTipProvider
+pub trait TipProviderMethods: WxRustMethods {
+    // DTOR: fn ~wxTipProvider()
+    fn get_current_tip(&self) -> usize {
+        unsafe { ffi::wxTipProvider_GetCurrentTip(self.as_ptr()) }
+    }
+    fn get_tip(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxTipProvider_GetTip(self.as_ptr())).into() }
+    }
+}
+
+// wxTipWindow
+pub trait TipWindowMethods: WindowMethods {
+    fn set_bounding_rect<R: RectMethods>(&self, rect_bound: &R) {
+        unsafe {
+            let rect_bound = rect_bound.as_ptr();
+            ffi::wxTipWindow_SetBoundingRect(self.as_ptr(), rect_bound)
+        }
+    }
+    fn set_tip_window_ptr<T: TipWindowMethods>(&self, window_ptr: Option<&T>) {
+        unsafe {
+            let window_ptr = match window_ptr {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTipWindow_SetTipWindowPtr(self.as_ptr(), window_ptr)
         }
     }
 }
@@ -6510,7 +22178,7 @@ pub trait ToolBarMethods: ControlMethods {
         short_help: &str,
         long_help: &str,
         client_data: Option<&O>,
-    ) -> *mut c_void {
+    ) -> Option<ToolBarToolBaseIsOwned<false>> {
         unsafe {
             let label = WxString::from(label);
             let label = label.as_ptr();
@@ -6524,7 +22192,7 @@ pub trait ToolBarMethods: ControlMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxToolBar_AddCheckTool(
+            ToolBarToolBase::option_from(ffi::wxToolBar_AddCheckTool(
                 self.as_ptr(),
                 tool_id,
                 label,
@@ -6533,10 +22201,14 @@ pub trait ToolBarMethods: ControlMethods {
                 short_help,
                 long_help,
                 client_data,
-            )
+            ))
         }
     }
-    fn add_control<C: ControlMethods>(&self, control: Option<&C>, label: &str) -> *mut c_void {
+    fn add_control<C: ControlMethods>(
+        &self,
+        control: Option<&C>,
+        label: &str,
+    ) -> Option<ToolBarToolBaseIsOwned<false>> {
         unsafe {
             let control = match control {
                 Some(r) => r.as_ptr(),
@@ -6544,7 +22216,7 @@ pub trait ToolBarMethods: ControlMethods {
             };
             let label = WxString::from(label);
             let label = label.as_ptr();
-            ffi::wxToolBar_AddControl(self.as_ptr(), control, label)
+            ToolBarToolBase::option_from(ffi::wxToolBar_AddControl(self.as_ptr(), control, label))
         }
     }
     fn add_radio_tool<B: BitmapBundleMethods, B2: BitmapBundleMethods, O: ObjectMethods>(
@@ -6556,7 +22228,7 @@ pub trait ToolBarMethods: ControlMethods {
         short_help: &str,
         long_help: &str,
         client_data: Option<&O>,
-    ) -> *mut c_void {
+    ) -> Option<ToolBarToolBaseIsOwned<false>> {
         unsafe {
             let label = WxString::from(label);
             let label = label.as_ptr();
@@ -6570,7 +22242,7 @@ pub trait ToolBarMethods: ControlMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxToolBar_AddRadioTool(
+            ToolBarToolBase::option_from(ffi::wxToolBar_AddRadioTool(
                 self.as_ptr(),
                 tool_id,
                 label,
@@ -6579,17 +22251,26 @@ pub trait ToolBarMethods: ControlMethods {
                 short_help,
                 long_help,
                 client_data,
-            )
+            ))
         }
     }
-    fn add_separator(&self) -> *mut c_void {
-        unsafe { ffi::wxToolBar_AddSeparator(self.as_ptr()) }
+    fn add_separator(&self) -> Option<ToolBarToolBaseIsOwned<false>> {
+        unsafe { ToolBarToolBase::option_from(ffi::wxToolBar_AddSeparator(self.as_ptr())) }
     }
-    fn add_stretchable_space(&self) -> *mut c_void {
-        unsafe { ffi::wxToolBar_AddStretchableSpace(self.as_ptr()) }
+    fn add_stretchable_space(&self) -> Option<ToolBarToolBaseIsOwned<false>> {
+        unsafe { ToolBarToolBase::option_from(ffi::wxToolBar_AddStretchableSpace(self.as_ptr())) }
     }
-    fn add_tool_toolbartoolbase(&self, tool: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxToolBar_AddTool(self.as_ptr(), tool) }
+    fn add_tool_toolbartoolbase<T: ToolBarToolBaseMethods>(
+        &self,
+        tool: Option<&T>,
+    ) -> Option<ToolBarToolBaseIsOwned<false>> {
+        unsafe {
+            let tool = match tool {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ToolBarToolBase::option_from(ffi::wxToolBar_AddTool(self.as_ptr(), tool))
+        }
     }
     fn add_tool_int_str<B: BitmapBundleMethods>(
         &self,
@@ -6598,14 +22279,21 @@ pub trait ToolBarMethods: ControlMethods {
         bitmap: &B,
         short_help: &str,
         kind: c_int,
-    ) -> *mut c_void {
+    ) -> Option<ToolBarToolBaseIsOwned<false>> {
         unsafe {
             let label = WxString::from(label);
             let label = label.as_ptr();
             let bitmap = bitmap.as_ptr();
             let short_help = WxString::from(short_help);
             let short_help = short_help.as_ptr();
-            ffi::wxToolBar_AddTool1(self.as_ptr(), tool_id, label, bitmap, short_help, kind)
+            ToolBarToolBase::option_from(ffi::wxToolBar_AddTool1(
+                self.as_ptr(),
+                tool_id,
+                label,
+                bitmap,
+                short_help,
+                kind,
+            ))
         }
     }
     fn add_tool_int_bitmapbundle<
@@ -6622,7 +22310,7 @@ pub trait ToolBarMethods: ControlMethods {
         short_help: &str,
         long_help: &str,
         client_data: Option<&O>,
-    ) -> *mut c_void {
+    ) -> Option<ToolBarToolBaseIsOwned<false>> {
         unsafe {
             let label = WxString::from(label);
             let label = label.as_ptr();
@@ -6636,7 +22324,7 @@ pub trait ToolBarMethods: ControlMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxToolBar_AddTool2(
+            ToolBarToolBase::option_from(ffi::wxToolBar_AddTool2(
                 self.as_ptr(),
                 tool_id,
                 label,
@@ -6646,7 +22334,7 @@ pub trait ToolBarMethods: ControlMethods {
                 short_help,
                 long_help,
                 client_data,
-            )
+            ))
         }
     }
     fn clear_tools(&self) {
@@ -6661,14 +22349,16 @@ pub trait ToolBarMethods: ControlMethods {
     fn enable_tool(&self, tool_id: c_int, enable: bool) {
         unsafe { ffi::wxToolBar_EnableTool(self.as_ptr(), tool_id, enable) }
     }
-    fn find_by_id(&self, id: c_int) -> *mut c_void {
-        unsafe { ffi::wxToolBar_FindById(self.as_ptr(), id) }
+    fn find_by_id(&self, id: c_int) -> Option<ToolBarToolBaseIsOwned<false>> {
+        unsafe { ToolBarToolBase::option_from(ffi::wxToolBar_FindById(self.as_ptr(), id)) }
     }
     fn find_control(&self, id: c_int) -> WeakRef<Control> {
         unsafe { WeakRef::<Control>::from(ffi::wxToolBar_FindControl(self.as_ptr(), id)) }
     }
-    fn find_tool_for_position(&self, x: c_int, y: c_int) -> *mut c_void {
-        unsafe { ffi::wxToolBar_FindToolForPosition(self.as_ptr(), x, y) }
+    fn find_tool_for_position(&self, x: c_int, y: c_int) -> Option<ToolBarToolBaseIsOwned<false>> {
+        unsafe {
+            ToolBarToolBase::option_from(ffi::wxToolBar_FindToolForPosition(self.as_ptr(), x, y))
+        }
     }
     fn get_margins(&self) -> Size {
         unsafe { Size::from_ptr(ffi::wxToolBar_GetMargins(self.as_ptr())) }
@@ -6677,8 +22367,8 @@ pub trait ToolBarMethods: ControlMethods {
         unsafe { Size::from_ptr(ffi::wxToolBar_GetToolBitmapSize(self.as_ptr())) }
     }
     // BLOCKED: fn GetToolByPos()
-    fn get_tool_by_pos(&self, pos: c_int) -> *const c_void {
-        unsafe { ffi::wxToolBar_GetToolByPos1(self.as_ptr(), pos) }
+    fn get_tool_by_pos(&self, pos: c_int) -> Option<ToolBarToolBaseIsOwned<false>> {
+        unsafe { ToolBarToolBase::option_from(ffi::wxToolBar_GetToolByPos1(self.as_ptr(), pos)) }
     }
     fn get_tool_client_data(&self, tool_id: c_int) -> Option<ObjectIsOwned<false>> {
         unsafe { Object::option_from(ffi::wxToolBar_GetToolClientData(self.as_ptr(), tool_id)) }
@@ -6717,7 +22407,7 @@ pub trait ToolBarMethods: ControlMethods {
         pos: usize,
         control: Option<&C>,
         label: &str,
-    ) -> *mut c_void {
+    ) -> Option<ToolBarToolBaseIsOwned<false>> {
         unsafe {
             let control = match control {
                 Some(r) => r.as_ptr(),
@@ -6725,14 +22415,21 @@ pub trait ToolBarMethods: ControlMethods {
             };
             let label = WxString::from(label);
             let label = label.as_ptr();
-            ffi::wxToolBar_InsertControl(self.as_ptr(), pos, control, label)
+            ToolBarToolBase::option_from(ffi::wxToolBar_InsertControl(
+                self.as_ptr(),
+                pos,
+                control,
+                label,
+            ))
         }
     }
-    fn insert_separator(&self, pos: usize) -> *mut c_void {
-        unsafe { ffi::wxToolBar_InsertSeparator(self.as_ptr(), pos) }
+    fn insert_separator(&self, pos: usize) -> Option<ToolBarToolBaseIsOwned<false>> {
+        unsafe { ToolBarToolBase::option_from(ffi::wxToolBar_InsertSeparator(self.as_ptr(), pos)) }
     }
-    fn insert_stretchable_space(&self, pos: usize) -> *mut c_void {
-        unsafe { ffi::wxToolBar_InsertStretchableSpace(self.as_ptr(), pos) }
+    fn insert_stretchable_space(&self, pos: usize) -> Option<ToolBarToolBaseIsOwned<false>> {
+        unsafe {
+            ToolBarToolBase::option_from(ffi::wxToolBar_InsertStretchableSpace(self.as_ptr(), pos))
+        }
     }
     fn insert_tool_int<B: BitmapBundleMethods, B2: BitmapBundleMethods, O: ObjectMethods>(
         &self,
@@ -6745,7 +22442,7 @@ pub trait ToolBarMethods: ControlMethods {
         short_help: &str,
         long_help: &str,
         client_data: Option<&O>,
-    ) -> *mut c_void {
+    ) -> Option<ToolBarToolBaseIsOwned<false>> {
         unsafe {
             let label = WxString::from(label);
             let label = label.as_ptr();
@@ -6759,7 +22456,7 @@ pub trait ToolBarMethods: ControlMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxToolBar_InsertTool(
+            ToolBarToolBase::option_from(ffi::wxToolBar_InsertTool(
                 self.as_ptr(),
                 pos,
                 tool_id,
@@ -6770,11 +22467,21 @@ pub trait ToolBarMethods: ControlMethods {
                 short_help,
                 long_help,
                 client_data,
-            )
+            ))
         }
     }
-    fn insert_tool_toolbartoolbase(&self, pos: usize, tool: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxToolBar_InsertTool1(self.as_ptr(), pos, tool) }
+    fn insert_tool_toolbartoolbase<T: ToolBarToolBaseMethods>(
+        &self,
+        pos: usize,
+        tool: Option<&T>,
+    ) -> Option<ToolBarToolBaseIsOwned<false>> {
+        unsafe {
+            let tool = match tool {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ToolBarToolBase::option_from(ffi::wxToolBar_InsertTool1(self.as_ptr(), pos, tool))
+        }
     }
     fn on_left_click(&self, tool_id: c_int, toggle_down: bool) -> bool {
         unsafe { ffi::wxToolBar_OnLeftClick(self.as_ptr(), tool_id, toggle_down) }
@@ -6788,8 +22495,8 @@ pub trait ToolBarMethods: ControlMethods {
     fn realize(&self) -> bool {
         unsafe { ffi::wxToolBar_Realize(self.as_ptr()) }
     }
-    fn remove_tool(&self, id: c_int) -> *mut c_void {
-        unsafe { ffi::wxToolBar_RemoveTool(self.as_ptr(), id) }
+    fn remove_tool(&self, id: c_int) -> Option<ToolBarToolBaseIsOwned<false>> {
+        unsafe { ToolBarToolBase::option_from(ffi::wxToolBar_RemoveTool(self.as_ptr(), id)) }
     }
     fn set_dropdown_menu<M: MenuMethods>(&self, id: c_int, menu: Option<&M>) -> bool {
         unsafe {
@@ -6869,7 +22576,7 @@ pub trait ToolBarMethods: ControlMethods {
         client_data: Option<&O>,
         short_help: &str,
         long_help: &str,
-    ) -> *mut c_void {
+    ) -> Option<ToolBarToolBaseIsOwned<false>> {
         unsafe {
             let label = WxString::from(label);
             let label = label.as_ptr();
@@ -6883,7 +22590,7 @@ pub trait ToolBarMethods: ControlMethods {
             let short_help = short_help.as_ptr();
             let long_help = WxString::from(long_help);
             let long_help = long_help.as_ptr();
-            ffi::wxToolBar_CreateTool(
+            ToolBarToolBase::option_from(ffi::wxToolBar_CreateTool(
                 self.as_ptr(),
                 tool_id,
                 label,
@@ -6893,14 +22600,14 @@ pub trait ToolBarMethods: ControlMethods {
                 client_data,
                 short_help,
                 long_help,
-            )
+            ))
         }
     }
     fn create_tool_control<C: ControlMethods>(
         &self,
         control: Option<&C>,
         label: &str,
-    ) -> *mut c_void {
+    ) -> Option<ToolBarToolBaseIsOwned<false>> {
         unsafe {
             let control = match control {
                 Some(r) => r.as_ptr(),
@@ -6908,11 +22615,62 @@ pub trait ToolBarMethods: ControlMethods {
             };
             let label = WxString::from(label);
             let label = label.as_ptr();
-            ffi::wxToolBar_CreateTool1(self.as_ptr(), control, label)
+            ToolBarToolBase::option_from(ffi::wxToolBar_CreateTool1(self.as_ptr(), control, label))
         }
     }
-    fn create_separator(&self) -> *mut c_void {
-        unsafe { ffi::wxToolBar_CreateSeparator(self.as_ptr()) }
+    fn create_separator(&self) -> Option<ToolBarToolBaseIsOwned<false>> {
+        unsafe { ToolBarToolBase::option_from(ffi::wxToolBar_CreateSeparator(self.as_ptr())) }
+    }
+}
+
+// wxToolTip
+pub trait ToolTipMethods: ObjectMethods {
+    fn get_tip(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxToolTip_GetTip(self.as_ptr())).into() }
+    }
+    fn get_window(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxToolTip_GetWindow(self.as_ptr())) }
+    }
+    fn set_tip(&self, tip: &str) {
+        unsafe {
+            let tip = WxString::from(tip);
+            let tip = tip.as_ptr();
+            ffi::wxToolTip_SetTip(self.as_ptr(), tip)
+        }
+    }
+    fn enable(flag: bool) {
+        unsafe { ffi::wxToolTip_Enable(flag) }
+    }
+    fn set_auto_pop(msecs: c_long) {
+        unsafe { ffi::wxToolTip_SetAutoPop(msecs) }
+    }
+    fn set_delay(msecs: c_long) {
+        unsafe { ffi::wxToolTip_SetDelay(msecs) }
+    }
+    fn set_max_width(width: c_int) {
+        unsafe { ffi::wxToolTip_SetMaxWidth(width) }
+    }
+    fn set_reshow(msecs: c_long) {
+        unsafe { ffi::wxToolTip_SetReshow(msecs) }
+    }
+}
+
+// wxToolbook
+pub trait ToolbookMethods: BookCtrlBaseMethods {
+    fn get_tool_bar(&self) -> *mut c_void {
+        unsafe { ffi::wxToolbook_GetToolBar(self.as_ptr()) }
+    }
+    fn enable_page_sz(&self, page: usize, enable: bool) -> bool {
+        unsafe { ffi::wxToolbook_EnablePage(self.as_ptr(), page, enable) }
+    }
+    fn enable_page_window<W: WindowMethods>(&self, page: Option<&W>, enable: bool) -> bool {
+        unsafe {
+            let page = match page {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxToolbook_EnablePage1(self.as_ptr(), page, enable)
+        }
     }
 }
 
@@ -7028,8 +22786,11 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
             ffi::wxTopLevelWindow_SetIcon(self.as_ptr(), icon)
         }
     }
-    fn set_icons(&self, icons: *const c_void) {
-        unsafe { ffi::wxTopLevelWindow_SetIcons(self.as_ptr(), icons) }
+    fn set_icons<I: IconBundleMethods>(&self, icons: &I) {
+        unsafe {
+            let icons = icons.as_ptr();
+            ffi::wxTopLevelWindow_SetIcons(self.as_ptr(), icons)
+        }
     }
     fn set_title(&self, title: &str) {
         unsafe {
@@ -7072,6 +22833,1172 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     }
 }
 
+// wxTreeCtrl
+pub trait TreeCtrlMethods: ControlMethods {
+    // DTOR: fn ~wxTreeCtrl()
+    fn add_root<T: TreeItemDataMethods>(
+        &self,
+        text: &str,
+        image: c_int,
+        sel_image: c_int,
+        data: Option<&T>,
+    ) -> TreeItemId {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_AddRoot(
+                self.as_ptr(),
+                text,
+                image,
+                sel_image,
+                data,
+            ))
+        }
+    }
+    fn append_item<T: TreeItemIdMethods, T2: TreeItemDataMethods>(
+        &self,
+        parent: &T,
+        text: &str,
+        image: c_int,
+        sel_image: c_int,
+        data: Option<&T2>,
+    ) -> TreeItemId {
+        unsafe {
+            let parent = parent.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_AppendItem(
+                self.as_ptr(),
+                parent,
+                text,
+                image,
+                sel_image,
+                data,
+            ))
+        }
+    }
+    fn assign_buttons_image_list<I: ImageListMethods>(&self, image_list: Option<&I>) {
+        unsafe {
+            let image_list = match image_list {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTreeCtrl_AssignButtonsImageList(self.as_ptr(), image_list)
+        }
+    }
+    fn assign_state_image_list<I: ImageListMethods>(&self, image_list: Option<&I>) {
+        unsafe {
+            let image_list = match image_list {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTreeCtrl_AssignStateImageList(self.as_ptr(), image_list)
+        }
+    }
+    fn collapse<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_Collapse(self.as_ptr(), item)
+        }
+    }
+    fn collapse_all(&self) {
+        unsafe { ffi::wxTreeCtrl_CollapseAll(self.as_ptr()) }
+    }
+    fn collapse_all_children<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_CollapseAllChildren(self.as_ptr(), item)
+        }
+    }
+    fn collapse_and_reset<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_CollapseAndReset(self.as_ptr(), item)
+        }
+    }
+    fn delete<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_Delete(self.as_ptr(), item)
+        }
+    }
+    fn delete_all_items(&self) {
+        unsafe { ffi::wxTreeCtrl_DeleteAllItems(self.as_ptr()) }
+    }
+    fn delete_children<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_DeleteChildren(self.as_ptr(), item)
+        }
+    }
+    fn edit_label<T: TreeItemIdMethods, C: ClassInfoMethods>(
+        &self,
+        item: &T,
+        text_ctrl_class: Option<&C>,
+    ) -> WeakRef<TextCtrl> {
+        unsafe {
+            let item = item.as_ptr();
+            let text_ctrl_class = match text_ctrl_class {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            WeakRef::<TextCtrl>::from(ffi::wxTreeCtrl_EditLabel(
+                self.as_ptr(),
+                item,
+                text_ctrl_class,
+            ))
+        }
+    }
+    fn enable_bell_on_no_match(&self, on: bool) {
+        unsafe { ffi::wxTreeCtrl_EnableBellOnNoMatch(self.as_ptr(), on) }
+    }
+    fn end_edit_label<T: TreeItemIdMethods>(&self, item: &T, discard_changes: bool) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_EndEditLabel(self.as_ptr(), item, discard_changes)
+        }
+    }
+    fn ensure_visible<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_EnsureVisible(self.as_ptr(), item)
+        }
+    }
+    fn expand<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_Expand(self.as_ptr(), item)
+        }
+    }
+    fn expand_all(&self) {
+        unsafe { ffi::wxTreeCtrl_ExpandAll(self.as_ptr()) }
+    }
+    fn expand_all_children<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_ExpandAllChildren(self.as_ptr(), item)
+        }
+    }
+    fn get_bounding_rect<T: TreeItemIdMethods, R: RectMethods>(
+        &self,
+        item: &T,
+        rect: &R,
+        text_only: bool,
+    ) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxTreeCtrl_GetBoundingRect(self.as_ptr(), item, rect, text_only)
+        }
+    }
+    fn get_buttons_image_list(&self) -> Option<ImageListIsOwned<false>> {
+        unsafe { ImageList::option_from(ffi::wxTreeCtrl_GetButtonsImageList(self.as_ptr())) }
+    }
+    fn get_children_count<T: TreeItemIdMethods>(&self, item: &T, recursively: bool) -> usize {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_GetChildrenCount(self.as_ptr(), item, recursively)
+        }
+    }
+    fn get_count(&self) -> c_uint {
+        unsafe { ffi::wxTreeCtrl_GetCount(self.as_ptr()) }
+    }
+    fn get_edit_control(&self) -> WeakRef<TextCtrl> {
+        unsafe { WeakRef::<TextCtrl>::from(ffi::wxTreeCtrl_GetEditControl(self.as_ptr())) }
+    }
+    fn get_first_child<T: TreeItemIdMethods>(&self, item: &T, cookie: *mut c_void) -> TreeItemId {
+        unsafe {
+            let item = item.as_ptr();
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_GetFirstChild(self.as_ptr(), item, cookie))
+        }
+    }
+    fn get_first_visible_item(&self) -> TreeItemId {
+        unsafe { TreeItemId::from_ptr(ffi::wxTreeCtrl_GetFirstVisibleItem(self.as_ptr())) }
+    }
+    fn get_focused_item(&self) -> TreeItemId {
+        unsafe { TreeItemId::from_ptr(ffi::wxTreeCtrl_GetFocusedItem(self.as_ptr())) }
+    }
+    fn clear_focused_item(&self) {
+        unsafe { ffi::wxTreeCtrl_ClearFocusedItem(self.as_ptr()) }
+    }
+    fn set_focused_item<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_SetFocusedItem(self.as_ptr(), item)
+        }
+    }
+    fn get_indent(&self) -> c_uint {
+        unsafe { ffi::wxTreeCtrl_GetIndent(self.as_ptr()) }
+    }
+    fn get_spacing(&self) -> c_uint {
+        unsafe { ffi::wxTreeCtrl_GetSpacing(self.as_ptr()) }
+    }
+    fn get_item_background_colour<T: TreeItemIdMethods>(&self, item: &T) -> Colour {
+        unsafe {
+            let item = item.as_ptr();
+            Colour::from_ptr(ffi::wxTreeCtrl_GetItemBackgroundColour(self.as_ptr(), item))
+        }
+    }
+    fn get_item_data<T: TreeItemIdMethods>(&self, item: &T) -> Option<TreeItemDataIsOwned<false>> {
+        unsafe {
+            let item = item.as_ptr();
+            TreeItemData::option_from(ffi::wxTreeCtrl_GetItemData(self.as_ptr(), item))
+        }
+    }
+    fn get_item_font<T: TreeItemIdMethods>(&self, item: &T) -> Font {
+        unsafe {
+            let item = item.as_ptr();
+            Font::from_ptr(ffi::wxTreeCtrl_GetItemFont(self.as_ptr(), item))
+        }
+    }
+    // NOT_SUPPORTED: fn GetItemImage()
+    fn get_item_parent<T: TreeItemIdMethods>(&self, item: &T) -> TreeItemId {
+        unsafe {
+            let item = item.as_ptr();
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_GetItemParent(self.as_ptr(), item))
+        }
+    }
+    fn get_item_state<T: TreeItemIdMethods>(&self, item: &T) -> c_int {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_GetItemState(self.as_ptr(), item)
+        }
+    }
+    fn get_item_text<T: TreeItemIdMethods>(&self, item: &T) -> String {
+        unsafe {
+            let item = item.as_ptr();
+            WxString::from_ptr(ffi::wxTreeCtrl_GetItemText(self.as_ptr(), item)).into()
+        }
+    }
+    fn get_item_text_colour<T: TreeItemIdMethods>(&self, item: &T) -> Colour {
+        unsafe {
+            let item = item.as_ptr();
+            Colour::from_ptr(ffi::wxTreeCtrl_GetItemTextColour(self.as_ptr(), item))
+        }
+    }
+    fn get_last_child<T: TreeItemIdMethods>(&self, item: &T) -> TreeItemId {
+        unsafe {
+            let item = item.as_ptr();
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_GetLastChild(self.as_ptr(), item))
+        }
+    }
+    fn get_next_child<T: TreeItemIdMethods>(&self, item: &T, cookie: *mut c_void) -> TreeItemId {
+        unsafe {
+            let item = item.as_ptr();
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_GetNextChild(self.as_ptr(), item, cookie))
+        }
+    }
+    fn get_next_sibling_treeitemid<T: TreeItemIdMethods>(&self, item: &T) -> TreeItemId {
+        unsafe {
+            let item = item.as_ptr();
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_GetNextSibling(self.as_ptr(), item))
+        }
+    }
+    fn get_next_visible<T: TreeItemIdMethods>(&self, item: &T) -> TreeItemId {
+        unsafe {
+            let item = item.as_ptr();
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_GetNextVisible(self.as_ptr(), item))
+        }
+    }
+    fn get_prev_sibling_treeitemid<T: TreeItemIdMethods>(&self, item: &T) -> TreeItemId {
+        unsafe {
+            let item = item.as_ptr();
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_GetPrevSibling(self.as_ptr(), item))
+        }
+    }
+    fn get_prev_visible<T: TreeItemIdMethods>(&self, item: &T) -> TreeItemId {
+        unsafe {
+            let item = item.as_ptr();
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_GetPrevVisible(self.as_ptr(), item))
+        }
+    }
+    fn get_quick_best_size(&self) -> bool {
+        unsafe { ffi::wxTreeCtrl_GetQuickBestSize(self.as_ptr()) }
+    }
+    fn get_root_item(&self) -> TreeItemId {
+        unsafe { TreeItemId::from_ptr(ffi::wxTreeCtrl_GetRootItem(self.as_ptr())) }
+    }
+    fn get_selection(&self) -> TreeItemId {
+        unsafe { TreeItemId::from_ptr(ffi::wxTreeCtrl_GetSelection(self.as_ptr())) }
+    }
+    fn get_selections(&self, selection: *mut c_void) -> usize {
+        unsafe { ffi::wxTreeCtrl_GetSelections(self.as_ptr(), selection) }
+    }
+    fn get_state_image_list(&self) -> Option<ImageListIsOwned<false>> {
+        unsafe { ImageList::option_from(ffi::wxTreeCtrl_GetStateImageList(self.as_ptr())) }
+    }
+    fn hit_test<P: PointMethods>(&self, point: &P, flags: *mut c_void) -> TreeItemId {
+        unsafe {
+            let point = point.as_ptr();
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_HitTest(self.as_ptr(), point, flags))
+        }
+    }
+    fn insert_item_treeitemid<
+        T: TreeItemIdMethods,
+        T2: TreeItemIdMethods,
+        T3: TreeItemDataMethods,
+    >(
+        &self,
+        parent: &T,
+        previous: &T2,
+        text: &str,
+        image: c_int,
+        sel_image: c_int,
+        data: Option<&T3>,
+    ) -> TreeItemId {
+        unsafe {
+            let parent = parent.as_ptr();
+            let previous = previous.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_InsertItem(
+                self.as_ptr(),
+                parent,
+                previous,
+                text,
+                image,
+                sel_image,
+                data,
+            ))
+        }
+    }
+    fn insert_item_sz<T: TreeItemIdMethods, T2: TreeItemDataMethods>(
+        &self,
+        parent: &T,
+        pos: usize,
+        text: &str,
+        image: c_int,
+        sel_image: c_int,
+        data: Option<&T2>,
+    ) -> TreeItemId {
+        unsafe {
+            let parent = parent.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_InsertItem1(
+                self.as_ptr(),
+                parent,
+                pos,
+                text,
+                image,
+                sel_image,
+                data,
+            ))
+        }
+    }
+    fn is_bold<T: TreeItemIdMethods>(&self, item: &T) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_IsBold(self.as_ptr(), item)
+        }
+    }
+    fn is_empty(&self) -> bool {
+        unsafe { ffi::wxTreeCtrl_IsEmpty(self.as_ptr()) }
+    }
+    fn is_expanded<T: TreeItemIdMethods>(&self, item: &T) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_IsExpanded(self.as_ptr(), item)
+        }
+    }
+    fn is_selected<T: TreeItemIdMethods>(&self, item: &T) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_IsSelected(self.as_ptr(), item)
+        }
+    }
+    fn is_visible<T: TreeItemIdMethods>(&self, item: &T) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_IsVisible(self.as_ptr(), item)
+        }
+    }
+    fn item_has_children<T: TreeItemIdMethods>(&self, item: &T) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_ItemHasChildren(self.as_ptr(), item)
+        }
+    }
+    fn on_compare_items<T: TreeItemIdMethods, T2: TreeItemIdMethods>(
+        &self,
+        item1: &T,
+        item2: &T2,
+    ) -> c_int {
+        unsafe {
+            let item1 = item1.as_ptr();
+            let item2 = item2.as_ptr();
+            ffi::wxTreeCtrl_OnCompareItems(self.as_ptr(), item1, item2)
+        }
+    }
+    fn prepend_item<T: TreeItemIdMethods, T2: TreeItemDataMethods>(
+        &self,
+        parent: &T,
+        text: &str,
+        image: c_int,
+        sel_image: c_int,
+        data: Option<&T2>,
+    ) -> TreeItemId {
+        unsafe {
+            let parent = parent.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_PrependItem(
+                self.as_ptr(),
+                parent,
+                text,
+                image,
+                sel_image,
+                data,
+            ))
+        }
+    }
+    fn scroll_to<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_ScrollTo(self.as_ptr(), item)
+        }
+    }
+    fn select_item<T: TreeItemIdMethods>(&self, item: &T, select: bool) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_SelectItem(self.as_ptr(), item, select)
+        }
+    }
+    fn set_buttons_image_list<I: ImageListMethods>(&self, image_list: Option<&I>) {
+        unsafe {
+            let image_list = match image_list {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTreeCtrl_SetButtonsImageList(self.as_ptr(), image_list)
+        }
+    }
+    fn set_indent(&self, indent: c_uint) {
+        unsafe { ffi::wxTreeCtrl_SetIndent(self.as_ptr(), indent) }
+    }
+    fn set_spacing(&self, spacing: c_uint) {
+        unsafe { ffi::wxTreeCtrl_SetSpacing(self.as_ptr(), spacing) }
+    }
+    fn set_item_background_colour<T: TreeItemIdMethods, C: ColourMethods>(
+        &self,
+        item: &T,
+        col: &C,
+    ) {
+        unsafe {
+            let item = item.as_ptr();
+            let col = col.as_ptr();
+            ffi::wxTreeCtrl_SetItemBackgroundColour(self.as_ptr(), item, col)
+        }
+    }
+    fn set_item_bold<T: TreeItemIdMethods>(&self, item: &T, bold: bool) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_SetItemBold(self.as_ptr(), item, bold)
+        }
+    }
+    fn set_item_data<T: TreeItemIdMethods, T2: TreeItemDataMethods>(
+        &self,
+        item: &T,
+        data: Option<&T2>,
+    ) {
+        unsafe {
+            let item = item.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTreeCtrl_SetItemData(self.as_ptr(), item, data)
+        }
+    }
+    fn set_item_drop_highlight<T: TreeItemIdMethods>(&self, item: &T, highlight: bool) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_SetItemDropHighlight(self.as_ptr(), item, highlight)
+        }
+    }
+    fn set_item_font<T: TreeItemIdMethods, F: FontMethods>(&self, item: &T, font: &F) {
+        unsafe {
+            let item = item.as_ptr();
+            let font = font.as_ptr();
+            ffi::wxTreeCtrl_SetItemFont(self.as_ptr(), item, font)
+        }
+    }
+    fn set_item_has_children<T: TreeItemIdMethods>(&self, item: &T, has_children: bool) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_SetItemHasChildren(self.as_ptr(), item, has_children)
+        }
+    }
+    // NOT_SUPPORTED: fn SetItemImage()
+    fn set_item_state<T: TreeItemIdMethods>(&self, item: &T, state: c_int) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_SetItemState(self.as_ptr(), item, state)
+        }
+    }
+    fn set_item_text<T: TreeItemIdMethods>(&self, item: &T, text: &str) {
+        unsafe {
+            let item = item.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxTreeCtrl_SetItemText(self.as_ptr(), item, text)
+        }
+    }
+    fn set_item_text_colour<T: TreeItemIdMethods, C: ColourMethods>(&self, item: &T, col: &C) {
+        unsafe {
+            let item = item.as_ptr();
+            let col = col.as_ptr();
+            ffi::wxTreeCtrl_SetItemTextColour(self.as_ptr(), item, col)
+        }
+    }
+    fn set_quick_best_size(&self, quick_best_size: bool) {
+        unsafe { ffi::wxTreeCtrl_SetQuickBestSize(self.as_ptr(), quick_best_size) }
+    }
+    fn set_state_image_list<I: ImageListMethods>(&self, image_list: Option<&I>) {
+        unsafe {
+            let image_list = match image_list {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTreeCtrl_SetStateImageList(self.as_ptr(), image_list)
+        }
+    }
+    fn sort_children<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_SortChildren(self.as_ptr(), item)
+        }
+    }
+    fn toggle<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_Toggle(self.as_ptr(), item)
+        }
+    }
+    fn toggle_item_selection<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_ToggleItemSelection(self.as_ptr(), item)
+        }
+    }
+    fn unselect(&self) {
+        unsafe { ffi::wxTreeCtrl_Unselect(self.as_ptr()) }
+    }
+    fn unselect_all(&self) {
+        unsafe { ffi::wxTreeCtrl_UnselectAll(self.as_ptr()) }
+    }
+    fn unselect_item<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_UnselectItem(self.as_ptr(), item)
+        }
+    }
+    fn select_children<T: TreeItemIdMethods>(&self, parent: &T) {
+        unsafe {
+            let parent = parent.as_ptr();
+            ffi::wxTreeCtrl_SelectChildren(self.as_ptr(), parent)
+        }
+    }
+}
+
+// wxTreeEvent
+pub trait TreeEventMethods: NotifyEventMethods {
+    fn get_item(&self) -> TreeItemId {
+        unsafe { TreeItemId::from_ptr(ffi::wxTreeEvent_GetItem(self.as_ptr())) }
+    }
+    fn get_key_code(&self) -> c_int {
+        unsafe { ffi::wxTreeEvent_GetKeyCode(self.as_ptr()) }
+    }
+    fn get_key_event(&self) -> KeyEventIsOwned<false> {
+        unsafe { KeyEventIsOwned::from_ptr(ffi::wxTreeEvent_GetKeyEvent(self.as_ptr())) }
+    }
+    fn get_label(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxTreeEvent_GetLabel(self.as_ptr())).into() }
+    }
+    fn get_old_item(&self) -> TreeItemId {
+        unsafe { TreeItemId::from_ptr(ffi::wxTreeEvent_GetOldItem(self.as_ptr())) }
+    }
+    fn get_point(&self) -> Point {
+        unsafe { Point::from_ptr(ffi::wxTreeEvent_GetPoint(self.as_ptr())) }
+    }
+    fn is_edit_cancelled(&self) -> bool {
+        unsafe { ffi::wxTreeEvent_IsEditCancelled(self.as_ptr()) }
+    }
+    fn set_tool_tip(&self, tooltip: &str) {
+        unsafe {
+            let tooltip = WxString::from(tooltip);
+            let tooltip = tooltip.as_ptr();
+            ffi::wxTreeEvent_SetToolTip(self.as_ptr(), tooltip)
+        }
+    }
+}
+
+// wxTreeItemData
+pub trait TreeItemDataMethods: ClientDataMethods {
+    // DTOR: fn ~wxTreeItemData()
+    fn get_id(&self) -> TreeItemIdIsOwned<false> {
+        unsafe { TreeItemIdIsOwned::from_ptr(ffi::wxTreeItemData_GetId(self.as_ptr())) }
+    }
+    fn set_id<T: TreeItemIdMethods>(&self, id: &T) {
+        unsafe {
+            let id = id.as_ptr();
+            ffi::wxTreeItemData_SetId(self.as_ptr(), id)
+        }
+    }
+}
+
+// wxTreeItemId
+pub trait TreeItemIdMethods: WxRustMethods {
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxTreeItemId_IsOk(self.as_ptr()) }
+    }
+    fn get_id(&self) -> *mut c_void {
+        unsafe { ffi::wxTreeItemId_GetID(self.as_ptr()) }
+    }
+    fn unset(&self) {
+        unsafe { ffi::wxTreeItemId_Unset(self.as_ptr()) }
+    }
+}
+
+// wxTreeListCtrl
+pub trait TreeListCtrlMethods: WindowMethods {
+    fn assign_image_list<I: ImageListMethods>(&self, image_list: Option<&I>) {
+        unsafe {
+            let image_list = match image_list {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTreeListCtrl_AssignImageList(self.as_ptr(), image_list)
+        }
+    }
+    fn set_image_list<I: ImageListMethods>(&self, image_list: Option<&I>) {
+        unsafe {
+            let image_list = match image_list {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTreeListCtrl_SetImageList(self.as_ptr(), image_list)
+        }
+    }
+    fn append_column(&self, title: &str, width: c_int, align: c_int, flags: c_int) -> c_int {
+        unsafe {
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            ffi::wxTreeListCtrl_AppendColumn(self.as_ptr(), title, width, align, flags)
+        }
+    }
+    // NOT_SUPPORTED: fn GetColumnCount()
+    // NOT_SUPPORTED: fn DeleteColumn()
+    fn clear_columns(&self) {
+        unsafe { ffi::wxTreeListCtrl_ClearColumns(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn SetColumnWidth()
+    // NOT_SUPPORTED: fn GetColumnWidth()
+    fn width_for(&self, text: &str) -> c_int {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxTreeListCtrl_WidthFor(self.as_ptr(), text)
+        }
+    }
+    fn append_item<C: ClientDataMethods>(
+        &self,
+        parent: ffi::wxTreeListItem,
+        text: &str,
+        image_closed: c_int,
+        image_opened: c_int,
+        data: Option<&C>,
+    ) -> TreeListItem {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            TreeListItem::from_ptr(ffi::wxTreeListCtrl_AppendItem(
+                self.as_ptr(),
+                parent,
+                text,
+                image_closed,
+                image_opened,
+                data,
+            ))
+        }
+    }
+    fn insert_item<C: ClientDataMethods>(
+        &self,
+        parent: ffi::wxTreeListItem,
+        previous: ffi::wxTreeListItem,
+        text: &str,
+        image_closed: c_int,
+        image_opened: c_int,
+        data: Option<&C>,
+    ) -> TreeListItem {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            TreeListItem::from_ptr(ffi::wxTreeListCtrl_InsertItem(
+                self.as_ptr(),
+                parent,
+                previous,
+                text,
+                image_closed,
+                image_opened,
+                data,
+            ))
+        }
+    }
+    fn prepend_item<C: ClientDataMethods>(
+        &self,
+        parent: ffi::wxTreeListItem,
+        text: &str,
+        image_closed: c_int,
+        image_opened: c_int,
+        data: Option<&C>,
+    ) -> TreeListItem {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            TreeListItem::from_ptr(ffi::wxTreeListCtrl_PrependItem(
+                self.as_ptr(),
+                parent,
+                text,
+                image_closed,
+                image_opened,
+                data,
+            ))
+        }
+    }
+    fn delete_item(&self, item: ffi::wxTreeListItem) {
+        unsafe { ffi::wxTreeListCtrl_DeleteItem(self.as_ptr(), item) }
+    }
+    fn delete_all_items(&self) {
+        unsafe { ffi::wxTreeListCtrl_DeleteAllItems(self.as_ptr()) }
+    }
+    fn get_root_item(&self) -> TreeListItem {
+        unsafe { TreeListItem::from_ptr(ffi::wxTreeListCtrl_GetRootItem(self.as_ptr())) }
+    }
+    fn get_item_parent(&self, item: ffi::wxTreeListItem) -> TreeListItem {
+        unsafe { TreeListItem::from_ptr(ffi::wxTreeListCtrl_GetItemParent(self.as_ptr(), item)) }
+    }
+    fn get_first_child(&self, item: ffi::wxTreeListItem) -> TreeListItem {
+        unsafe { TreeListItem::from_ptr(ffi::wxTreeListCtrl_GetFirstChild(self.as_ptr(), item)) }
+    }
+    fn get_next_sibling_treelistitem(&self, item: ffi::wxTreeListItem) -> TreeListItem {
+        unsafe { TreeListItem::from_ptr(ffi::wxTreeListCtrl_GetNextSibling(self.as_ptr(), item)) }
+    }
+    fn get_first_item(&self) -> TreeListItem {
+        unsafe { TreeListItem::from_ptr(ffi::wxTreeListCtrl_GetFirstItem(self.as_ptr())) }
+    }
+    fn get_next_item(&self, item: ffi::wxTreeListItem) -> TreeListItem {
+        unsafe { TreeListItem::from_ptr(ffi::wxTreeListCtrl_GetNextItem(self.as_ptr(), item)) }
+    }
+    // NOT_SUPPORTED: fn GetItemText()
+    // NOT_SUPPORTED: fn SetItemText()
+    fn set_item_text(&self, item: ffi::wxTreeListItem, text: &str) {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxTreeListCtrl_SetItemText1(self.as_ptr(), item, text)
+        }
+    }
+    fn set_item_image(&self, item: ffi::wxTreeListItem, closed: c_int, opened: c_int) {
+        unsafe { ffi::wxTreeListCtrl_SetItemImage(self.as_ptr(), item, closed, opened) }
+    }
+    fn get_item_data(&self, item: ffi::wxTreeListItem) -> Option<ClientDataIsOwned<false>> {
+        unsafe { ClientData::option_from(ffi::wxTreeListCtrl_GetItemData(self.as_ptr(), item)) }
+    }
+    fn set_item_data<C: ClientDataMethods>(&self, item: ffi::wxTreeListItem, data: Option<&C>) {
+        unsafe {
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTreeListCtrl_SetItemData(self.as_ptr(), item, data)
+        }
+    }
+    fn expand(&self, item: ffi::wxTreeListItem) {
+        unsafe { ffi::wxTreeListCtrl_Expand(self.as_ptr(), item) }
+    }
+    fn collapse(&self, item: ffi::wxTreeListItem) {
+        unsafe { ffi::wxTreeListCtrl_Collapse(self.as_ptr(), item) }
+    }
+    fn is_expanded(&self, item: ffi::wxTreeListItem) -> bool {
+        unsafe { ffi::wxTreeListCtrl_IsExpanded(self.as_ptr(), item) }
+    }
+    fn get_selection(&self) -> TreeListItem {
+        unsafe { TreeListItem::from_ptr(ffi::wxTreeListCtrl_GetSelection(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn GetSelections()
+    fn select(&self, item: ffi::wxTreeListItem) {
+        unsafe { ffi::wxTreeListCtrl_Select(self.as_ptr(), item) }
+    }
+    fn unselect(&self, item: ffi::wxTreeListItem) {
+        unsafe { ffi::wxTreeListCtrl_Unselect(self.as_ptr(), item) }
+    }
+    fn is_selected(&self, item: ffi::wxTreeListItem) -> bool {
+        unsafe { ffi::wxTreeListCtrl_IsSelected(self.as_ptr(), item) }
+    }
+    fn select_all(&self) {
+        unsafe { ffi::wxTreeListCtrl_SelectAll(self.as_ptr()) }
+    }
+    fn unselect_all(&self) {
+        unsafe { ffi::wxTreeListCtrl_UnselectAll(self.as_ptr()) }
+    }
+    fn ensure_visible(&self, item: ffi::wxTreeListItem) {
+        unsafe { ffi::wxTreeListCtrl_EnsureVisible(self.as_ptr(), item) }
+    }
+    fn check_item(&self, item: ffi::wxTreeListItem, state: c_int) {
+        unsafe { ffi::wxTreeListCtrl_CheckItem(self.as_ptr(), item, state) }
+    }
+    fn check_item_recursively(&self, item: ffi::wxTreeListItem, state: c_int) {
+        unsafe { ffi::wxTreeListCtrl_CheckItemRecursively(self.as_ptr(), item, state) }
+    }
+    fn uncheck_item(&self, item: ffi::wxTreeListItem) {
+        unsafe { ffi::wxTreeListCtrl_UncheckItem(self.as_ptr(), item) }
+    }
+    fn update_item_parent_state_recursively(&self, item: ffi::wxTreeListItem) {
+        unsafe { ffi::wxTreeListCtrl_UpdateItemParentStateRecursively(self.as_ptr(), item) }
+    }
+    fn get_checked_state(&self, item: ffi::wxTreeListItem) -> c_int {
+        unsafe { ffi::wxTreeListCtrl_GetCheckedState(self.as_ptr(), item) }
+    }
+    fn are_all_children_in_state(&self, item: ffi::wxTreeListItem, state: c_int) -> bool {
+        unsafe { ffi::wxTreeListCtrl_AreAllChildrenInState(self.as_ptr(), item, state) }
+    }
+    // NOT_SUPPORTED: fn SetSortColumn()
+    fn get_sort_column(&self, col: *mut c_void, ascending_order: *mut c_void) -> bool {
+        unsafe { ffi::wxTreeListCtrl_GetSortColumn(self.as_ptr(), col, ascending_order) }
+    }
+    fn set_item_comparator<T: TreeListItemComparatorMethods>(&self, comparator: Option<&T>) {
+        unsafe {
+            let comparator = match comparator {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTreeListCtrl_SetItemComparator(self.as_ptr(), comparator)
+        }
+    }
+    fn get_view(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxTreeListCtrl_GetView(self.as_ptr())) }
+    }
+    fn get_data_view(&self) -> WeakRef<DataViewCtrl> {
+        unsafe { WeakRef::<DataViewCtrl>::from(ffi::wxTreeListCtrl_GetDataView(self.as_ptr())) }
+    }
+}
+
+// wxTreeListItem
+pub trait TreeListItemMethods: WxRustMethods {
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxTreeListItem_IsOk(self.as_ptr()) }
+    }
+}
+
+// wxTreeListItemComparator
+pub trait TreeListItemComparatorMethods: WxRustMethods {
+    // NOT_SUPPORTED: fn Compare()
+    // DTOR: fn ~wxTreeListItemComparator()
+}
+
+// wxTreebook
+pub trait TreebookMethods: BookCtrlBaseMethods {
+    // DTOR: fn ~wxTreebook()
+    fn add_sub_page<W: WindowMethods>(
+        &self,
+        page: Option<&W>,
+        text: &str,
+        b_select: bool,
+        image_id: c_int,
+    ) -> bool {
+        unsafe {
+            let page = match page {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxTreebook_AddSubPage(self.as_ptr(), page, text, b_select, image_id)
+        }
+    }
+    fn collapse_node(&self, page_id: usize) -> bool {
+        unsafe { ffi::wxTreebook_CollapseNode(self.as_ptr(), page_id) }
+    }
+    fn expand_node(&self, page_id: usize, expand: bool) -> bool {
+        unsafe { ffi::wxTreebook_ExpandNode(self.as_ptr(), page_id, expand) }
+    }
+    fn get_page_parent(&self, page: usize) -> c_int {
+        unsafe { ffi::wxTreebook_GetPageParent(self.as_ptr(), page) }
+    }
+    fn insert_sub_page<W: WindowMethods>(
+        &self,
+        page_pos: usize,
+        page: Option<&W>,
+        text: &str,
+        b_select: bool,
+        image_id: c_int,
+    ) -> bool {
+        unsafe {
+            let page = match page {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxTreebook_InsertSubPage(self.as_ptr(), page_pos, page, text, b_select, image_id)
+        }
+    }
+    fn is_node_expanded(&self, page_id: usize) -> bool {
+        unsafe { ffi::wxTreebook_IsNodeExpanded(self.as_ptr(), page_id) }
+    }
+}
+
+// wxTwoFingerTapEvent
+pub trait TwoFingerTapEventMethods: GestureEventMethods {}
+
+// wxUIActionSimulator
+pub trait UIActionSimulatorMethods: WxRustMethods {
+    fn mouse_move_long(&self, x: c_long, y: c_long) -> bool {
+        unsafe { ffi::wxUIActionSimulator_MouseMove(self.as_ptr(), x, y) }
+    }
+    fn mouse_move_point<P: PointMethods>(&self, point: &P) -> bool {
+        unsafe {
+            let point = point.as_ptr();
+            ffi::wxUIActionSimulator_MouseMove1(self.as_ptr(), point)
+        }
+    }
+    fn mouse_down(&self, button: c_int) -> bool {
+        unsafe { ffi::wxUIActionSimulator_MouseDown(self.as_ptr(), button) }
+    }
+    fn mouse_up(&self, button: c_int) -> bool {
+        unsafe { ffi::wxUIActionSimulator_MouseUp(self.as_ptr(), button) }
+    }
+    fn mouse_click(&self, button: c_int) -> bool {
+        unsafe { ffi::wxUIActionSimulator_MouseClick(self.as_ptr(), button) }
+    }
+    fn mouse_dbl_click(&self, button: c_int) -> bool {
+        unsafe { ffi::wxUIActionSimulator_MouseDblClick(self.as_ptr(), button) }
+    }
+    fn mouse_drag_drop(
+        &self,
+        x1: c_long,
+        y1: c_long,
+        x2: c_long,
+        y2: c_long,
+        button: c_int,
+    ) -> bool {
+        unsafe { ffi::wxUIActionSimulator_MouseDragDrop(self.as_ptr(), x1, y1, x2, y2, button) }
+    }
+    fn key_down(&self, keycode: c_int, modifiers: c_int) -> bool {
+        unsafe { ffi::wxUIActionSimulator_KeyDown(self.as_ptr(), keycode, modifiers) }
+    }
+    fn key_up(&self, keycode: c_int, modifiers: c_int) -> bool {
+        unsafe { ffi::wxUIActionSimulator_KeyUp(self.as_ptr(), keycode, modifiers) }
+    }
+    fn char(&self, keycode: c_int, modifiers: c_int) -> bool {
+        unsafe { ffi::wxUIActionSimulator_Char(self.as_ptr(), keycode, modifiers) }
+    }
+    fn select(&self, text: &str) -> bool {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxUIActionSimulator_Select(self.as_ptr(), text)
+        }
+    }
+    fn text(&self, text: *const c_void) -> bool {
+        unsafe { ffi::wxUIActionSimulator_Text(self.as_ptr(), text) }
+    }
+}
+
+// wxURLDataObject
+pub trait URLDataObjectMethods: DataObjectMethods {
+    fn get_url(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxURLDataObject_GetURL(self.as_ptr())).into() }
+    }
+    fn set_url(&self, url: &str) {
+        unsafe {
+            let url = WxString::from(url);
+            let url = url.as_ptr();
+            ffi::wxURLDataObject_SetURL(self.as_ptr(), url)
+        }
+    }
+}
+
+// wxUpdateUIEvent
+pub trait UpdateUIEventMethods: CommandEventMethods {
+    fn check(&self, check: bool) {
+        unsafe { ffi::wxUpdateUIEvent_Check(self.as_ptr(), check) }
+    }
+    fn enable(&self, enable: bool) {
+        unsafe { ffi::wxUpdateUIEvent_Enable(self.as_ptr(), enable) }
+    }
+    fn get_checked(&self) -> bool {
+        unsafe { ffi::wxUpdateUIEvent_GetChecked(self.as_ptr()) }
+    }
+    fn get_enabled(&self) -> bool {
+        unsafe { ffi::wxUpdateUIEvent_GetEnabled(self.as_ptr()) }
+    }
+    fn is_checkable(&self) -> bool {
+        unsafe { ffi::wxUpdateUIEvent_IsCheckable(self.as_ptr()) }
+    }
+    fn get_set_checked(&self) -> bool {
+        unsafe { ffi::wxUpdateUIEvent_GetSetChecked(self.as_ptr()) }
+    }
+    fn get_set_enabled(&self) -> bool {
+        unsafe { ffi::wxUpdateUIEvent_GetSetEnabled(self.as_ptr()) }
+    }
+    fn get_set_shown(&self) -> bool {
+        unsafe { ffi::wxUpdateUIEvent_GetSetShown(self.as_ptr()) }
+    }
+    fn get_set_text(&self) -> bool {
+        unsafe { ffi::wxUpdateUIEvent_GetSetText(self.as_ptr()) }
+    }
+    fn get_shown(&self) -> bool {
+        unsafe { ffi::wxUpdateUIEvent_GetShown(self.as_ptr()) }
+    }
+    fn get_text(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxUpdateUIEvent_GetText(self.as_ptr())).into() }
+    }
+    fn set_text(&self, text: &str) {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxUpdateUIEvent_SetText(self.as_ptr(), text)
+        }
+    }
+    fn show(&self, show: bool) {
+        unsafe { ffi::wxUpdateUIEvent_Show(self.as_ptr(), show) }
+    }
+    fn can_update<W: WindowMethods>(window: Option<&W>) -> bool {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxUpdateUIEvent_CanUpdate(window)
+        }
+    }
+    // NOT_SUPPORTED: fn GetMode()
+    fn get_update_interval() -> c_long {
+        unsafe { ffi::wxUpdateUIEvent_GetUpdateInterval() }
+    }
+    fn reset_update_time() {
+        unsafe { ffi::wxUpdateUIEvent_ResetUpdateTime() }
+    }
+    // NOT_SUPPORTED: fn SetMode()
+    fn set_update_interval(update_interval: c_long) {
+        unsafe { ffi::wxUpdateUIEvent_SetUpdateInterval(update_interval) }
+    }
+}
+
+// wxVListBox
+pub trait VListBoxMethods: VScrolledWindowMethods {
+    // DTOR: fn ~wxVListBox()
+    fn clear(&self) {
+        unsafe { ffi::wxVListBox_Clear(self.as_ptr()) }
+    }
+    fn deselect_all(&self) -> bool {
+        unsafe { ffi::wxVListBox_DeselectAll(self.as_ptr()) }
+    }
+    fn get_first_selected(&self, cookie: *mut c_void) -> c_int {
+        unsafe { ffi::wxVListBox_GetFirstSelected(self.as_ptr(), cookie) }
+    }
+    fn get_item_count(&self) -> usize {
+        unsafe { ffi::wxVListBox_GetItemCount(self.as_ptr()) }
+    }
+    fn get_margins(&self) -> Point {
+        unsafe { Point::from_ptr(ffi::wxVListBox_GetMargins(self.as_ptr())) }
+    }
+    fn get_item_rect(&self, item: usize) -> Rect {
+        unsafe { Rect::from_ptr(ffi::wxVListBox_GetItemRect(self.as_ptr(), item)) }
+    }
+    fn get_next_selected(&self, cookie: *mut c_void) -> c_int {
+        unsafe { ffi::wxVListBox_GetNextSelected(self.as_ptr(), cookie) }
+    }
+    fn get_selected_count(&self) -> usize {
+        unsafe { ffi::wxVListBox_GetSelectedCount(self.as_ptr()) }
+    }
+    fn get_selection(&self) -> c_int {
+        unsafe { ffi::wxVListBox_GetSelection(self.as_ptr()) }
+    }
+    fn get_selection_background(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxVListBox_GetSelectionBackground(self.as_ptr())) }
+    }
+    fn has_multiple_selection(&self) -> bool {
+        unsafe { ffi::wxVListBox_HasMultipleSelection(self.as_ptr()) }
+    }
+    fn is_current(&self, item: usize) -> bool {
+        unsafe { ffi::wxVListBox_IsCurrent(self.as_ptr(), item) }
+    }
+    fn is_selected(&self, item: usize) -> bool {
+        unsafe { ffi::wxVListBox_IsSelected(self.as_ptr(), item) }
+    }
+    fn select(&self, item: usize, select: bool) -> bool {
+        unsafe { ffi::wxVListBox_Select(self.as_ptr(), item, select) }
+    }
+    fn select_all(&self) -> bool {
+        unsafe { ffi::wxVListBox_SelectAll(self.as_ptr()) }
+    }
+    fn select_range(&self, from: usize, to: usize) -> bool {
+        unsafe { ffi::wxVListBox_SelectRange(self.as_ptr(), from, to) }
+    }
+    fn set_item_count(&self, count: usize) {
+        unsafe { ffi::wxVListBox_SetItemCount(self.as_ptr(), count) }
+    }
+    fn set_margins_point<P: PointMethods>(&self, pt: &P) {
+        unsafe {
+            let pt = pt.as_ptr();
+            ffi::wxVListBox_SetMargins(self.as_ptr(), pt)
+        }
+    }
+    fn set_margins_coord(&self, x: c_int, y: c_int) {
+        unsafe { ffi::wxVListBox_SetMargins1(self.as_ptr(), x, y) }
+    }
+    fn set_selection(&self, selection: c_int) {
+        unsafe { ffi::wxVListBox_SetSelection(self.as_ptr(), selection) }
+    }
+    fn set_selection_background<C: ColourMethods>(&self, col: &C) {
+        unsafe {
+            let col = col.as_ptr();
+            ffi::wxVListBox_SetSelectionBackground(self.as_ptr(), col)
+        }
+    }
+    fn toggle(&self, item: usize) {
+        unsafe { ffi::wxVListBox_Toggle(self.as_ptr(), item) }
+    }
+}
+
+// wxVScrolledWindow
+pub trait VScrolledWindowMethods: PanelMethods {}
+
 // wxValidator
 pub trait ValidatorMethods: EvtHandlerMethods {
     // DTOR: fn ~wxValidator()
@@ -7110,6 +24037,410 @@ pub trait ValidatorMethods: EvtHandlerMethods {
     }
     fn is_silent() -> bool {
         unsafe { ffi::wxValidator_IsSilent() }
+    }
+}
+
+// wxVarHScrollHelper
+pub trait VarHScrollHelperMethods: VarScrollHelperBaseMethods {
+    fn as_var_h_scroll_helper(&self) -> *mut c_void;
+    fn get_column_count(&self) -> usize {
+        unsafe { ffi::wxVarHScrollHelper_GetColumnCount(self.as_var_h_scroll_helper()) }
+    }
+    fn get_visible_columns_begin(&self) -> usize {
+        unsafe { ffi::wxVarHScrollHelper_GetVisibleColumnsBegin(self.as_var_h_scroll_helper()) }
+    }
+    fn get_visible_columns_end(&self) -> usize {
+        unsafe { ffi::wxVarHScrollHelper_GetVisibleColumnsEnd(self.as_var_h_scroll_helper()) }
+    }
+    fn is_column_visible(&self, column: usize) -> bool {
+        unsafe { ffi::wxVarHScrollHelper_IsColumnVisible(self.as_var_h_scroll_helper(), column) }
+    }
+    fn refresh_column(&self, column: usize) {
+        unsafe { ffi::wxVarHScrollHelper_RefreshColumn(self.as_var_h_scroll_helper(), column) }
+    }
+    fn refresh_columns(&self, from: usize, to: usize) {
+        unsafe { ffi::wxVarHScrollHelper_RefreshColumns(self.as_var_h_scroll_helper(), from, to) }
+    }
+    fn scroll_column_pages(&self, pages: c_int) -> bool {
+        unsafe { ffi::wxVarHScrollHelper_ScrollColumnPages(self.as_var_h_scroll_helper(), pages) }
+    }
+    fn scroll_columns(&self, columns: c_int) -> bool {
+        unsafe { ffi::wxVarHScrollHelper_ScrollColumns(self.as_var_h_scroll_helper(), columns) }
+    }
+    fn scroll_to_column(&self, column: usize) -> bool {
+        unsafe { ffi::wxVarHScrollHelper_ScrollToColumn(self.as_var_h_scroll_helper(), column) }
+    }
+    fn set_column_count(&self, column_count: usize) {
+        unsafe {
+            ffi::wxVarHScrollHelper_SetColumnCount(self.as_var_h_scroll_helper(), column_count)
+        }
+    }
+}
+
+// wxVarHVScrollHelper
+pub trait VarHVScrollHelperMethods: VarVScrollHelperMethods {
+    fn as_var_hv_scroll_helper(&self) -> *mut c_void;
+    fn enable_physical_scrolling_bool(&self, vscrolling: bool, hscrolling: bool) {
+        unsafe {
+            ffi::wxVarHVScrollHelper_EnablePhysicalScrolling(
+                self.as_var_hv_scroll_helper(),
+                vscrolling,
+                hscrolling,
+            )
+        }
+    }
+    fn get_row_column_count(&self) -> Size {
+        unsafe {
+            Size::from_ptr(ffi::wxVarHVScrollHelper_GetRowColumnCount(
+                self.as_var_hv_scroll_helper(),
+            ))
+        }
+    }
+    fn get_visible_begin(&self) -> Position {
+        unsafe {
+            Position::from_ptr(ffi::wxVarHVScrollHelper_GetVisibleBegin(
+                self.as_var_hv_scroll_helper(),
+            ))
+        }
+    }
+    fn get_visible_end(&self) -> Position {
+        unsafe {
+            Position::from_ptr(ffi::wxVarHVScrollHelper_GetVisibleEnd(
+                self.as_var_hv_scroll_helper(),
+            ))
+        }
+    }
+    fn is_visible_sz_sz(&self, row: usize, column: usize) -> bool {
+        unsafe { ffi::wxVarHVScrollHelper_IsVisible(self.as_var_hv_scroll_helper(), row, column) }
+    }
+    fn is_visible_position<P: PositionMethods>(&self, pos: &P) -> bool {
+        unsafe {
+            let pos = pos.as_ptr();
+            ffi::wxVarHVScrollHelper_IsVisible1(self.as_var_hv_scroll_helper(), pos)
+        }
+    }
+    fn refresh_row_column_sz(&self, row: usize, column: usize) {
+        unsafe {
+            ffi::wxVarHVScrollHelper_RefreshRowColumn(self.as_var_hv_scroll_helper(), row, column)
+        }
+    }
+    fn refresh_row_column_position<P: PositionMethods>(&self, pos: &P) {
+        unsafe {
+            let pos = pos.as_ptr();
+            ffi::wxVarHVScrollHelper_RefreshRowColumn1(self.as_var_hv_scroll_helper(), pos)
+        }
+    }
+    fn refresh_rows_columns_sz(
+        &self,
+        from_row: usize,
+        to_row: usize,
+        from_column: usize,
+        to_column: usize,
+    ) {
+        unsafe {
+            ffi::wxVarHVScrollHelper_RefreshRowsColumns(
+                self.as_var_hv_scroll_helper(),
+                from_row,
+                to_row,
+                from_column,
+                to_column,
+            )
+        }
+    }
+    fn refresh_rows_columns_position<P: PositionMethods, P2: PositionMethods>(
+        &self,
+        from: &P,
+        to: &P2,
+    ) {
+        unsafe {
+            let from = from.as_ptr();
+            let to = to.as_ptr();
+            ffi::wxVarHVScrollHelper_RefreshRowsColumns1(self.as_var_hv_scroll_helper(), from, to)
+        }
+    }
+    fn scroll_to_row_column_sz(&self, row: usize, column: usize) -> bool {
+        unsafe {
+            ffi::wxVarHVScrollHelper_ScrollToRowColumn(self.as_var_hv_scroll_helper(), row, column)
+        }
+    }
+    fn scroll_to_row_column_position<P: PositionMethods>(&self, pos: &P) -> bool {
+        unsafe {
+            let pos = pos.as_ptr();
+            ffi::wxVarHVScrollHelper_ScrollToRowColumn1(self.as_var_hv_scroll_helper(), pos)
+        }
+    }
+    fn set_row_column_count(&self, row_count: usize, column_count: usize) {
+        unsafe {
+            ffi::wxVarHVScrollHelper_SetRowColumnCount(
+                self.as_var_hv_scroll_helper(),
+                row_count,
+                column_count,
+            )
+        }
+    }
+    fn virtual_hit_test_coord_coord(&self, x: c_int, y: c_int) -> Position {
+        unsafe {
+            Position::from_ptr(ffi::wxVarHVScrollHelper_VirtualHitTest(
+                self.as_var_hv_scroll_helper(),
+                x,
+                y,
+            ))
+        }
+    }
+    fn virtual_hit_test_point<P: PointMethods>(&self, pos: &P) -> Position {
+        unsafe {
+            let pos = pos.as_ptr();
+            Position::from_ptr(ffi::wxVarHVScrollHelper_VirtualHitTest1(
+                self.as_var_hv_scroll_helper(),
+                pos,
+            ))
+        }
+    }
+}
+
+// wxVarScrollHelperBase
+pub trait VarScrollHelperBaseMethods: WxRustMethods {
+    // DTOR: fn ~wxVarScrollHelperBase()
+    fn calc_scrolled_position(&self, coord: c_int) -> c_int {
+        unsafe { ffi::wxVarScrollHelperBase_CalcScrolledPosition(self.as_ptr(), coord) }
+    }
+    fn calc_unscrolled_position(&self, coord: c_int) -> c_int {
+        unsafe { ffi::wxVarScrollHelperBase_CalcUnscrolledPosition(self.as_ptr(), coord) }
+    }
+    fn enable_physical_scrolling(&self, scrolling: bool) {
+        unsafe { ffi::wxVarScrollHelperBase_EnablePhysicalScrolling(self.as_ptr(), scrolling) }
+    }
+    fn get_non_orientation_target_size(&self) -> c_int {
+        unsafe { ffi::wxVarScrollHelperBase_GetNonOrientationTargetSize(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetOrientation()
+    fn get_orientation_target_size(&self) -> c_int {
+        unsafe { ffi::wxVarScrollHelperBase_GetOrientationTargetSize(self.as_ptr()) }
+    }
+    fn get_target_window(&self) -> WeakRef<Window> {
+        unsafe {
+            WeakRef::<Window>::from(ffi::wxVarScrollHelperBase_GetTargetWindow(self.as_ptr()))
+        }
+    }
+    fn get_visible_begin(&self) -> usize {
+        unsafe { ffi::wxVarScrollHelperBase_GetVisibleBegin(self.as_ptr()) }
+    }
+    fn get_visible_end(&self) -> usize {
+        unsafe { ffi::wxVarScrollHelperBase_GetVisibleEnd(self.as_ptr()) }
+    }
+    fn is_visible(&self, unit: usize) -> bool {
+        unsafe { ffi::wxVarScrollHelperBase_IsVisible(self.as_ptr(), unit) }
+    }
+    fn refresh_all(&self) {
+        unsafe { ffi::wxVarScrollHelperBase_RefreshAll(self.as_ptr()) }
+    }
+    fn set_target_window<W: WindowMethods>(&self, target: Option<&W>) {
+        unsafe {
+            let target = match target {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxVarScrollHelperBase_SetTargetWindow(self.as_ptr(), target)
+        }
+    }
+    fn update_scrollbar(&self) {
+        unsafe { ffi::wxVarScrollHelperBase_UpdateScrollbar(self.as_ptr()) }
+    }
+    fn virtual_hit_test(&self, coord: c_int) -> c_int {
+        unsafe { ffi::wxVarScrollHelperBase_VirtualHitTest(self.as_ptr(), coord) }
+    }
+}
+
+// wxVarVScrollHelper
+pub trait VarVScrollHelperMethods: VarScrollHelperBaseMethods {
+    fn as_var_v_scroll_helper(&self) -> *mut c_void;
+    fn get_row_count(&self) -> usize {
+        unsafe { ffi::wxVarVScrollHelper_GetRowCount(self.as_var_v_scroll_helper()) }
+    }
+    fn get_visible_rows_begin(&self) -> usize {
+        unsafe { ffi::wxVarVScrollHelper_GetVisibleRowsBegin(self.as_var_v_scroll_helper()) }
+    }
+    fn get_visible_rows_end(&self) -> usize {
+        unsafe { ffi::wxVarVScrollHelper_GetVisibleRowsEnd(self.as_var_v_scroll_helper()) }
+    }
+    fn is_row_visible(&self, row: usize) -> bool {
+        unsafe { ffi::wxVarVScrollHelper_IsRowVisible(self.as_var_v_scroll_helper(), row) }
+    }
+    fn refresh_row(&self, row: usize) {
+        unsafe { ffi::wxVarVScrollHelper_RefreshRow(self.as_var_v_scroll_helper(), row) }
+    }
+    fn refresh_rows(&self, from: usize, to: usize) {
+        unsafe { ffi::wxVarVScrollHelper_RefreshRows(self.as_var_v_scroll_helper(), from, to) }
+    }
+    fn scroll_row_pages(&self, pages: c_int) -> bool {
+        unsafe { ffi::wxVarVScrollHelper_ScrollRowPages(self.as_var_v_scroll_helper(), pages) }
+    }
+    fn scroll_rows(&self, rows: c_int) -> bool {
+        unsafe { ffi::wxVarVScrollHelper_ScrollRows(self.as_var_v_scroll_helper(), rows) }
+    }
+    fn scroll_to_row(&self, row: usize) -> bool {
+        unsafe { ffi::wxVarVScrollHelper_ScrollToRow(self.as_var_v_scroll_helper(), row) }
+    }
+    fn set_row_count(&self, row_count: usize) {
+        unsafe { ffi::wxVarVScrollHelper_SetRowCount(self.as_var_v_scroll_helper(), row_count) }
+    }
+}
+
+// wxVariantDataCurrency
+pub trait VariantDataCurrencyMethods: VariantDataMethods {
+    // NOT_SUPPORTED: fn GetValue()
+    // NOT_SUPPORTED: fn SetValue()
+    fn get_as_any<A: AnyMethods>(&self, any: Option<&A>) -> bool {
+        unsafe {
+            let any = match any {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxVariantDataCurrency_GetAsAny(self.as_ptr(), any)
+        }
+    }
+}
+
+// wxVariantDataErrorCode
+pub trait VariantDataErrorCodeMethods: VariantDataMethods {
+    // NOT_SUPPORTED: fn GetValue()
+    // NOT_SUPPORTED: fn SetValue()
+    fn get_as_any<A: AnyMethods>(&self, any: Option<&A>) -> bool {
+        unsafe {
+            let any = match any {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxVariantDataErrorCode_GetAsAny(self.as_ptr(), any)
+        }
+    }
+}
+
+// wxVariantDataSafeArray
+pub trait VariantDataSafeArrayMethods: VariantDataMethods {
+    fn get_value(&self) -> *mut c_void {
+        unsafe { ffi::wxVariantDataSafeArray_GetValue(self.as_ptr()) }
+    }
+    fn set_value(&self, value: *mut c_void) {
+        unsafe { ffi::wxVariantDataSafeArray_SetValue(self.as_ptr(), value) }
+    }
+    fn get_as_any<A: AnyMethods>(&self, any: Option<&A>) -> bool {
+        unsafe {
+            let any = match any {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxVariantDataSafeArray_GetAsAny(self.as_ptr(), any)
+        }
+    }
+}
+
+// wxView
+pub trait ViewMethods: EvtHandlerMethods {
+    // DTOR: fn ~wxView()
+    fn activate(&self, activate: bool) {
+        unsafe { ffi::wxView_Activate(self.as_ptr(), activate) }
+    }
+    fn close(&self, delete_window: bool) -> bool {
+        unsafe { ffi::wxView_Close(self.as_ptr(), delete_window) }
+    }
+    fn get_document(&self) -> WeakRef<Document> {
+        unsafe { WeakRef::<Document>::from(ffi::wxView_GetDocument(self.as_ptr())) }
+    }
+    fn get_document_manager(&self) -> WeakRef<DocManager> {
+        unsafe { WeakRef::<DocManager>::from(ffi::wxView_GetDocumentManager(self.as_ptr())) }
+    }
+    fn get_frame(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxView_GetFrame(self.as_ptr())) }
+    }
+    fn get_view_name(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxView_GetViewName(self.as_ptr())).into() }
+    }
+    fn on_activate_view<V: ViewMethods, V2: ViewMethods>(
+        &self,
+        activate: bool,
+        active_view: Option<&V>,
+        deactive_view: Option<&V2>,
+    ) {
+        unsafe {
+            let active_view = match active_view {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let deactive_view = match deactive_view {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxView_OnActivateView(self.as_ptr(), activate, active_view, deactive_view)
+        }
+    }
+    fn on_change_filename(&self) {
+        unsafe { ffi::wxView_OnChangeFilename(self.as_ptr()) }
+    }
+    fn on_close(&self, delete_window: bool) -> bool {
+        unsafe { ffi::wxView_OnClose(self.as_ptr(), delete_window) }
+    }
+    fn on_closing_document(&self) {
+        unsafe { ffi::wxView_OnClosingDocument(self.as_ptr()) }
+    }
+    fn on_create<D: DocumentMethods>(&self, doc: Option<&D>, flags: c_long) -> bool {
+        unsafe {
+            let doc = match doc {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxView_OnCreate(self.as_ptr(), doc, flags)
+        }
+    }
+    fn on_create_printout(&self) -> Option<PrintoutIsOwned<false>> {
+        unsafe { Printout::option_from(ffi::wxView_OnCreatePrintout(self.as_ptr())) }
+    }
+    fn on_draw<D: DCMethods>(&self, dc: Option<&D>) {
+        unsafe {
+            let dc = match dc {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxView_OnDraw(self.as_ptr(), dc)
+        }
+    }
+    fn on_update<V: ViewMethods, O: ObjectMethods>(&self, sender: Option<&V>, hint: Option<&O>) {
+        unsafe {
+            let sender = match sender {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let hint = match hint {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxView_OnUpdate(self.as_ptr(), sender, hint)
+        }
+    }
+    fn set_document<D: DocumentMethods>(&self, doc: Option<&D>) {
+        unsafe {
+            let doc = match doc {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxView_SetDocument(self.as_ptr(), doc)
+        }
+    }
+    fn set_frame<W: WindowMethods>(&self, frame: Option<&W>) {
+        unsafe {
+            let frame = match frame {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxView_SetFrame(self.as_ptr(), frame)
+        }
+    }
+    fn set_view_name(&self, name: &str) {
+        unsafe {
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxView_SetViewName(self.as_ptr(), name)
+        }
     }
 }
 
@@ -7929,8 +25260,11 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn inherits_foreground_colour(&self) -> bool {
         unsafe { ffi::wxWindow_InheritsForegroundColour(self.as_ptr()) }
     }
-    fn set_palette(&self, pal: *const c_void) {
-        unsafe { ffi::wxWindow_SetPalette(self.as_ptr(), pal) }
+    fn set_palette<P: PaletteMethods>(&self, pal: &P) {
+        unsafe {
+            let pal = pal.as_ptr();
+            ffi::wxWindow_SetPalette(self.as_ptr(), pal)
+        }
     }
     fn should_inherit_colours(&self) -> bool {
         unsafe { ffi::wxWindow_ShouldInheritColours(self.as_ptr()) }
@@ -7950,8 +25284,11 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn get_event_handler(&self) -> WeakRef<EvtHandler> {
         unsafe { WeakRef::<EvtHandler>::from(ffi::wxWindow_GetEventHandler(self.as_ptr())) }
     }
-    fn handle_as_navigation_key(&self, event: *const c_void) -> bool {
-        unsafe { ffi::wxWindow_HandleAsNavigationKey(self.as_ptr(), event) }
+    fn handle_as_navigation_key<K: KeyEventMethods>(&self, event: &K) -> bool {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxWindow_HandleAsNavigationKey(self.as_ptr(), event)
+        }
     }
     fn handle_window_event<E: EventMethods>(&self, event: &E) -> bool {
         unsafe {
@@ -8115,8 +25452,8 @@ pub trait WindowMethods: EvtHandlerMethods {
         }
     }
     // NOT_SUPPORTED: fn GetHelpTextAtPoint()
-    fn get_tool_tip(&self) -> *mut c_void {
-        unsafe { ffi::wxWindow_GetToolTip(self.as_ptr()) }
+    fn get_tool_tip(&self) -> Option<ToolTipIsOwned<false>> {
+        unsafe { ToolTip::option_from(ffi::wxWindow_GetToolTip(self.as_ptr())) }
     }
     fn get_tool_tip_text(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxWindow_GetToolTipText(self.as_ptr())).into() }
@@ -8128,8 +25465,14 @@ pub trait WindowMethods: EvtHandlerMethods {
             ffi::wxWindow_SetToolTip(self.as_ptr(), tip_string)
         }
     }
-    fn set_tool_tip_tooltip(&self, tip: *mut c_void) {
-        unsafe { ffi::wxWindow_SetToolTip1(self.as_ptr(), tip) }
+    fn set_tool_tip_tooltip<T: ToolTipMethods>(&self, tip: Option<&T>) {
+        unsafe {
+            let tip = match tip {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWindow_SetToolTip1(self.as_ptr(), tip)
+        }
     }
     fn unset_tool_tip(&self) {
         unsafe { ffi::wxWindow_UnsetToolTip(self.as_ptr()) }
@@ -8230,12 +25573,15 @@ pub trait WindowMethods: EvtHandlerMethods {
         }
     }
     // NOT_SUPPORTED: fn SetWindowVariant()
-    fn get_accelerator_table(&self) -> *mut c_void {
-        unsafe { ffi::wxWindow_GetAcceleratorTable(self.as_ptr()) }
+    fn get_accelerator_table(&self) -> Option<AcceleratorTableIsOwned<false>> {
+        unsafe { AcceleratorTable::option_from(ffi::wxWindow_GetAcceleratorTable(self.as_ptr())) }
     }
     // NOT_SUPPORTED: fn GetAccessible()
-    fn set_accelerator_table(&self, accel: *const c_void) {
-        unsafe { ffi::wxWindow_SetAcceleratorTable(self.as_ptr(), accel) }
+    fn set_accelerator_table<A: AcceleratorTableMethods>(&self, accel: &A) {
+        unsafe {
+            let accel = accel.as_ptr();
+            ffi::wxWindow_SetAcceleratorTable(self.as_ptr(), accel)
+        }
     }
     // NOT_SUPPORTED: fn SetAccessible()
     fn close(&self, force: bool) -> bool {
@@ -8247,11 +25593,17 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn is_being_deleted(&self) -> bool {
         unsafe { ffi::wxWindow_IsBeingDeleted(self.as_ptr()) }
     }
-    fn get_drop_target(&self) -> *mut c_void {
-        unsafe { ffi::wxWindow_GetDropTarget(self.as_ptr()) }
+    fn get_drop_target(&self) -> Option<DropTargetIsOwned<false>> {
+        unsafe { DropTarget::option_from(ffi::wxWindow_GetDropTarget(self.as_ptr())) }
     }
-    fn set_drop_target(&self, target: *mut c_void) {
-        unsafe { ffi::wxWindow_SetDropTarget(self.as_ptr(), target) }
+    fn set_drop_target<D: DropTargetMethods>(&self, target: Option<&D>) {
+        unsafe {
+            let target = match target {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWindow_SetDropTarget(self.as_ptr(), target)
+        }
     }
     fn drag_accept_files(&self, accept: bool) {
         unsafe { ffi::wxWindow_DragAcceptFiles(self.as_ptr(), accept) }
@@ -8280,11 +25632,17 @@ pub trait WindowMethods: EvtHandlerMethods {
             ffi::wxWindow_SetSizerAndFit(self.as_ptr(), sizer, delete_old)
         }
     }
-    fn get_constraints(&self) -> *mut c_void {
-        unsafe { ffi::wxWindow_GetConstraints(self.as_ptr()) }
+    fn get_constraints(&self) -> Option<LayoutConstraintsIsOwned<false>> {
+        unsafe { LayoutConstraints::option_from(ffi::wxWindow_GetConstraints(self.as_ptr())) }
     }
-    fn set_constraints(&self, constraints: *mut c_void) {
-        unsafe { ffi::wxWindow_SetConstraints(self.as_ptr(), constraints) }
+    fn set_constraints<L: LayoutConstraintsMethods>(&self, constraints: Option<&L>) {
+        unsafe {
+            let constraints = match constraints {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWindow_SetConstraints(self.as_ptr(), constraints)
+        }
     }
     fn layout(&self) -> bool {
         unsafe { ffi::wxWindow_Layout(self.as_ptr()) }
@@ -8298,8 +25656,8 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn capture_mouse(&self) {
         unsafe { ffi::wxWindow_CaptureMouse(self.as_ptr()) }
     }
-    fn get_caret(&self) -> *mut c_void {
-        unsafe { ffi::wxWindow_GetCaret(self.as_ptr()) }
+    fn get_caret(&self) -> Option<CaretIsOwned<false>> {
+        unsafe { Caret::option_from(ffi::wxWindow_GetCaret(self.as_ptr())) }
     }
     // BLOCKED: fn GetCursor()
     fn has_capture(&self) -> bool {
@@ -8308,11 +25666,20 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn release_mouse(&self) {
         unsafe { ffi::wxWindow_ReleaseMouse(self.as_ptr()) }
     }
-    fn set_caret(&self, caret: *mut c_void) {
-        unsafe { ffi::wxWindow_SetCaret(self.as_ptr(), caret) }
+    fn set_caret<C: CaretMethods>(&self, caret: Option<&C>) {
+        unsafe {
+            let caret = match caret {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWindow_SetCaret(self.as_ptr(), caret)
+        }
     }
-    fn set_cursor(&self, cursor: *const c_void) -> bool {
-        unsafe { ffi::wxWindow_SetCursor(self.as_ptr(), cursor) }
+    fn set_cursor<C: CursorMethods>(&self, cursor: &C) -> bool {
+        unsafe {
+            let cursor = cursor.as_ptr();
+            ffi::wxWindow_SetCursor(self.as_ptr(), cursor)
+        }
     }
     fn warp_pointer(&self, x: c_int, y: c_int) {
         unsafe { ffi::wxWindow_WarpPointer(self.as_ptr(), x, y) }
@@ -8324,8 +25691,11 @@ pub trait WindowMethods: EvtHandlerMethods {
     // NOT_SUPPORTED: fn HitTest1()
     // NOT_SUPPORTED: fn GetBorder()
     // NOT_SUPPORTED: fn GetBorder1()
-    fn do_update_window_ui(&self, event: *mut c_void) {
-        unsafe { ffi::wxWindow_DoUpdateWindowUI(self.as_ptr(), event) }
+    fn do_update_window_ui<U: UpdateUIEventMethods>(&self, event: &U) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxWindow_DoUpdateWindowUI(self.as_ptr(), event)
+        }
     }
     // NOT_SUPPORTED: fn GetHandle()
     fn has_multiple_pages(&self) -> bool {
@@ -8355,8 +25725,11 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn on_internal_idle(&self) {
         unsafe { ffi::wxWindow_OnInternalIdle(self.as_ptr()) }
     }
-    fn send_idle_events(&self, event: *mut c_void) -> bool {
-        unsafe { ffi::wxWindow_SendIdleEvents(self.as_ptr(), event) }
+    fn send_idle_events<I: IdleEventMethods>(&self, event: &I) -> bool {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxWindow_SendIdleEvents(self.as_ptr(), event)
+        }
     }
     fn register_hot_key(
         &self,
@@ -8442,5 +25815,263 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
 }
 
+// wxWindowCreateEvent
+pub trait WindowCreateEventMethods: CommandEventMethods {
+    fn get_window(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxWindowCreateEvent_GetWindow(self.as_ptr())) }
+    }
+}
+
+// wxWindowDC
+pub trait WindowDCMethods: DCMethods {}
+
+// wxWindowDestroyEvent
+pub trait WindowDestroyEventMethods: CommandEventMethods {
+    fn get_window(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxWindowDestroyEvent_GetWindow(self.as_ptr())) }
+    }
+}
+
+// wxWindowDisabler
+pub trait WindowDisablerMethods: WxRustMethods {
+    // DTOR: fn ~wxWindowDisabler()
+}
+
+// wxWizard
+pub trait WizardMethods: DialogMethods {
+    fn create_int<W: WindowMethods, B: BitmapBundleMethods, P: PointMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        title: &str,
+        bitmap: &B,
+        pos: &P,
+        style: c_long,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            let bitmap = bitmap.as_ptr();
+            let pos = pos.as_ptr();
+            ffi::wxWizard_Create(self.as_ptr(), parent, id, title, bitmap, pos, style)
+        }
+    }
+    fn fit_to_page<W: WizardPageMethods>(&self, first_page: Option<&W>) {
+        unsafe {
+            let first_page = match first_page {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWizard_FitToPage(self.as_ptr(), first_page)
+        }
+    }
+    fn get_bitmap(&self) -> BitmapIsOwned<false> {
+        unsafe { BitmapIsOwned::from_ptr(ffi::wxWizard_GetBitmap(self.as_ptr())) }
+    }
+    fn get_bitmap_background_colour(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxWizard_GetBitmapBackgroundColour(self.as_ptr())) }
+    }
+    fn get_bitmap_placement(&self) -> c_int {
+        unsafe { ffi::wxWizard_GetBitmapPlacement(self.as_ptr()) }
+    }
+    fn get_current_page(&self) -> WeakRef<WizardPage> {
+        unsafe { WeakRef::<WizardPage>::from(ffi::wxWizard_GetCurrentPage(self.as_ptr())) }
+    }
+    fn get_minimum_bitmap_width(&self) -> c_int {
+        unsafe { ffi::wxWizard_GetMinimumBitmapWidth(self.as_ptr()) }
+    }
+    fn get_page_area_sizer(&self) -> Option<SizerIsOwned<false>> {
+        unsafe { Sizer::option_from(ffi::wxWizard_GetPageAreaSizer(self.as_ptr())) }
+    }
+    fn get_page_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxWizard_GetPageSize(self.as_ptr())) }
+    }
+    fn has_next_page<W: WizardPageMethods>(&self, page: Option<&W>) -> bool {
+        unsafe {
+            let page = match page {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWizard_HasNextPage(self.as_ptr(), page)
+        }
+    }
+    fn has_prev_page<W: WizardPageMethods>(&self, page: Option<&W>) -> bool {
+        unsafe {
+            let page = match page {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWizard_HasPrevPage(self.as_ptr(), page)
+        }
+    }
+    fn run_wizard<W: WizardPageMethods>(&self, first_page: Option<&W>) -> bool {
+        unsafe {
+            let first_page = match first_page {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWizard_RunWizard(self.as_ptr(), first_page)
+        }
+    }
+    fn set_bitmap<B: BitmapBundleMethods>(&self, bitmap: &B) {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            ffi::wxWizard_SetBitmap(self.as_ptr(), bitmap)
+        }
+    }
+    fn set_bitmap_background_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxWizard_SetBitmapBackgroundColour(self.as_ptr(), colour)
+        }
+    }
+    fn set_bitmap_placement(&self, placement: c_int) {
+        unsafe { ffi::wxWizard_SetBitmapPlacement(self.as_ptr(), placement) }
+    }
+    fn set_border(&self, border: c_int) {
+        unsafe { ffi::wxWizard_SetBorder(self.as_ptr(), border) }
+    }
+    fn set_minimum_bitmap_width(&self, width: c_int) {
+        unsafe { ffi::wxWizard_SetMinimumBitmapWidth(self.as_ptr(), width) }
+    }
+    fn set_page_size<S: SizeMethods>(&self, size_page: &S) {
+        unsafe {
+            let size_page = size_page.as_ptr();
+            ffi::wxWizard_SetPageSize(self.as_ptr(), size_page)
+        }
+    }
+}
+
+// wxWizardEvent
+pub trait WizardEventMethods: NotifyEventMethods {
+    fn get_direction(&self) -> bool {
+        unsafe { ffi::wxWizardEvent_GetDirection(self.as_ptr()) }
+    }
+    fn get_page(&self) -> WeakRef<WizardPage> {
+        unsafe { WeakRef::<WizardPage>::from(ffi::wxWizardEvent_GetPage(self.as_ptr())) }
+    }
+}
+
+// wxWizardPage
+pub trait WizardPageMethods: PanelMethods {
+    fn create_wizard<W: WizardMethods, B: BitmapBundleMethods>(
+        &self,
+        parent: Option<&W>,
+        bitmap: &B,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let bitmap = bitmap.as_ptr();
+            ffi::wxWizardPage_Create(self.as_ptr(), parent, bitmap)
+        }
+    }
+    fn get_bitmap(&self) -> Bitmap {
+        unsafe { Bitmap::from_ptr(ffi::wxWizardPage_GetBitmap(self.as_ptr())) }
+    }
+    fn get_next(&self) -> WeakRef<WizardPage> {
+        unsafe { WeakRef::<WizardPage>::from(ffi::wxWizardPage_GetNext(self.as_ptr())) }
+    }
+    fn get_prev(&self) -> WeakRef<WizardPage> {
+        unsafe { WeakRef::<WizardPage>::from(ffi::wxWizardPage_GetPrev(self.as_ptr())) }
+    }
+}
+
+// wxWizardPageSimple
+pub trait WizardPageSimpleMethods: WizardPageMethods {
+    fn create_wizard_wizardpage<
+        W: WizardMethods,
+        W2: WizardPageMethods,
+        W3: WizardPageMethods,
+        B: BitmapBundleMethods,
+    >(
+        &self,
+        parent: Option<&W>,
+        prev: Option<&W2>,
+        next: Option<&W3>,
+        bitmap: &B,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let prev = match prev {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let next = match next {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let bitmap = bitmap.as_ptr();
+            ffi::wxWizardPageSimple_Create(self.as_ptr(), parent, prev, next, bitmap)
+        }
+    }
+    fn chain<W: WizardPageSimpleMethods>(&self, next: Option<&W>) -> &Self {
+        unsafe {
+            let next = match next {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWizardPageSimple_Chain(self.as_ptr(), next);
+            &self
+        }
+    }
+    fn set_next<W: WizardPageMethods>(&self, next: Option<&W>) {
+        unsafe {
+            let next = match next {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWizardPageSimple_SetNext(self.as_ptr(), next)
+        }
+    }
+    fn set_prev<W: WizardPageMethods>(&self, prev: Option<&W>) {
+        unsafe {
+            let prev = match prev {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWizardPageSimple_SetPrev(self.as_ptr(), prev)
+        }
+    }
+    fn chain_wizardpagesimple<W: WizardPageSimpleMethods, W2: WizardPageSimpleMethods>(
+        first: Option<&W>,
+        second: Option<&W2>,
+    ) {
+        unsafe {
+            let first = match first {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let second = match second {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWizardPageSimple_Chain1(first, second)
+        }
+    }
+}
+
 // wxWrapSizer
 pub trait WrapSizerMethods: BoxSizerMethods {}
+
+// wxXPMHandler
+pub trait XPMHandlerMethods: ImageHandlerMethods {}
+
+// wxZoomGestureEvent
+pub trait ZoomGestureEventMethods: GestureEventMethods {
+    fn get_zoom_factor(&self) -> c_double {
+        unsafe { ffi::wxZoomGestureEvent_GetZoomFactor(self.as_ptr()) }
+    }
+    fn set_zoom_factor(&self, zoom_factor: c_double) {
+        unsafe { ffi::wxZoomGestureEvent_SetZoomFactor(self.as_ptr(), zoom_factor) }
+    }
+}

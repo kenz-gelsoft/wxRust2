@@ -109,8 +109,47 @@ cxx = "#if wxCHECK_VERSION(3, 1, 7)"
 cxx = "#if wxCHECK_VERSION(3, 2, 0)"
 
 [types]
+[types.wxAcceleratorEntry]
+blocklist = [
+    'operator=',
+    'operator==',
+    'operator!=',
+]
+[types.wxAffineMatrix2D]
+blocklist = [
+    'operator==',
+    'operator!=',
+]
+[types.wxAffineMatrix2DBase]
+blocklist = [
+    'operator==',
+    'operator!=',
+]
+[types.wxAny]
+blocklist = [
+    'operator=',
+    'operator=1',
+    'operator=2',
+    'operator==7',
+    'operator==11',
+    'operator==12',
+    'operator==13',
+    'operator==14',
+    'operator==15',
+    'operator!=7',
+    'operator!=11',
+    'operator!=12',
+    'operator!=13',
+    'operator!=14',
+    'operator!=15',
+]
 [types.wxAnyButton]
 library = 'core'
+[types.wxArchiveIterator]
+blocklist = [
+    'operator++',
+    'operator++1',
+]
 [types.wxArtProvider]
 blocklist = [
     'Insert',
@@ -204,6 +243,11 @@ blocklist = [
     'wxBookCtrlBase',
     'wxBookCtrlBase1',
 ]
+[types.wxBrush]
+blocklist = [
+    'operator!=',
+    'operator==',
+]
 [types.wxButton]
 wx31 = [
     'GetDefaultSize',
@@ -223,6 +267,10 @@ wx31 = [
     'GetRed',
     'IsSolid',
 ]
+[types.wxColourData]
+blocklist = [
+    'operator=',
+]
 [types.wxColourPickerCtrl]
 blocklist = [
     'SetColour1',
@@ -231,9 +279,22 @@ blocklist = [
 wx31 = [
     'GetSizeFromText',
 ]
+[types.wxCursor]
+blocklist = [
+    'operator=',
+]
 [types.wxDatePickerCtrl]
 wx31 = [
     'SetNullText',
+]
+[types.wxDateSpan]
+blocklist = [
+    'operator+=',
+    'operator-=',
+    'operator-',
+    'operator*=',
+    'operator!=',
+    'operator==',
 ]
 [types.wxDateTime]
 blocklist = [
@@ -246,6 +307,7 @@ blocklist = [
     'operator-=1',
     'operator-',
     'operator-1',
+    'operator-2',
     # Not supported struct tm in overload renaming
     'Set1',
     'GetTmNow',
@@ -310,6 +372,10 @@ wx31 = [
     'SetFractionalPointSize',
     'SetNumericWeight',
 ]
+[types.wxFontData]
+blocklist = [
+    'operator=',
+]
 [types.wxFontPickerCtrl]
 wx31 = [
     'GetMinPointSize',
@@ -320,6 +386,16 @@ wx31 = [
 [types.wxFrame]
 windows = [
     'MSWGetTaskBarButton',
+]
+[types.wxGBPosition]
+blocklist = [
+    'operator!=',
+    'operator==',
+]
+[types.wxGBSpan]
+blocklist = [
+    'operator!=',
+    'operator==',
 ]
 [types.wxHeaderColumn]
 wx31 = [
@@ -338,6 +414,11 @@ blocklist = [
     # abstract class
     'wxGDIObject',
 ]
+[types.wxGridTableBase]
+blocklist = [
+    # TODO: No param name, treat later
+    'SetCornerLabelValue',
+]
 [types.wxIcon]
 blocklist = [
     'operator=',
@@ -352,6 +433,19 @@ wx317 = [
     'SetDepth',
     'SetHeight',
     'SetWidth',
+]
+[types.wxIconBundle]
+blocklist = [
+    'operator=',
+]
+[types.wxImage]
+blocklist = [
+    'operator=',
+]
+[types.wxItemAttr]
+blocklist = [
+    'operator==',
+    'operator!=',
 ]
 [types.wxItemContainer]
 blocklist = [
@@ -425,6 +519,10 @@ wx31 = [
 wx32 = [
     'GetBitmapBundle',
 ]
+[types.wxNativeFontInfo]
+blocklist = [
+    'operator=',
+]
 [types.wxNonOwnedWindow]
 library = 'core'
 [types.wxNotebook]
@@ -437,9 +535,29 @@ blocklist = [
     'operator new',
     'operator delete',
 ]
+[types.wxPageSetupDialogData]
+blocklist = [
+    'operator=',
+    'operator=1',
+]
+[types.wxPalette]
+blocklist = [
+    'operator=',
+]
+[types.wxPen]
+blocklist = [
+    'operator!=',
+    'operator=',
+    'operator==',
+]
 [types.wxPickerBase]
 blocklist = [
     'wxPickerBase',
+]
+[types.wxPlatformInfo]
+blocklist = [
+    'operator!=',
+    'operator==',
 ]
 [types.wxPoint]
 blocklist = [
@@ -462,10 +580,53 @@ blocklist = [
     'operator/=',
     'operator*=',
 ]
+[types.wxPosition]
+blocklist = [
+    'operator==',
+    'operator!=',
+    'operator+=',
+    'operator+=1',
+    'operator-=',
+    'operator-=1',
+    'operator+',
+    'operator+1',
+    'operator-',
+    'operator-1',
+]
+[types.wxPrintData]
+blocklist = [
+    'operator=',
+]
+[types.wxPrintDialogData]
+blocklist = [
+    'operator=',
+    'operator=1',
+]
 [types.wxRadioBox]
 wx317 = [
     # Doc isn't up-to-date in wx3.1.6
     'GetItemHelpText',
+]
+[types.wxRealPoint]
+blocklist = [
+    'operator=',
+    'operator==',
+    'operator!=',
+    'operator+',
+    'operator+1',
+    'operator+2',
+    'operator-',
+    'operator-1',
+    'operator-2',
+    'operator+=',
+    'operator+=1',
+    'operator-=',
+    'operator-=1',
+    'operator/',
+    'operator*',
+    'operator*1',
+    'operator/=',
+    'operator*=',
 ]
 [types.wxRect]
 blocklist = [
@@ -485,6 +646,24 @@ blocklist = [
     'Inflate2',
     'Intersect',
     'Union1',
+]
+[types.wxRegion]
+blocklist = [
+    'operator=',
+]
+[types.wxRegionIterator]
+blocklist = [
+    'operator++',
+]
+[types.wxRegKey]
+blocklist = [
+    'operator=',
+]
+[types.wxSecretValue]
+blocklist = [
+    'operator=',
+    'operator==',
+    'operator!=',
 ]
 [types.wxSize]
 blocklist = [
@@ -611,6 +790,10 @@ wx31 = [
     'EnableFullScreenView',
     'EnableMaximizeButton',
     'EnableMinimizeButton',
+]
+[types.wxURI]
+blocklist = [
+    'operator==',
 ]
 [types.wxValidator]
 returns_owned = [

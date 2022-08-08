@@ -407,6 +407,7 @@ class RustMethodBinding:
                 as_mixin=self.__cls.as_mixin(),
             )
             self_to_insert = self_param
+        # print(name)
         call = '%s(%s)' % (
             name,
             self._call_params(params, self_to_insert),
