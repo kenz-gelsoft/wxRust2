@@ -524,7 +524,10 @@ class CxxClassBinding:
         self.__model = model
         self.conditions = config.get('conditions')
         self.__methods = [CxxMethodBinding(self, m) for m in model.methods]
-    
+
+    def includes(self):
+        yield '#include <%s>' % (self.__model.includes,)
+
     def lines(self, is_cc=False):
         yield '// CLASS: %s' % (self.__model.name,)
         for line in self._dtor_lines(is_cc):

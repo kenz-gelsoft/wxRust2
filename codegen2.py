@@ -260,26 +260,14 @@ def generated_h(classes, libname):
 #pragma once
 #include <wx/wx.h>\
 '''
+    uniq = set()
+    for cls in classes:
+        for include in cls.includes():
+            uniq.add(include)
+    for include in sorted(uniq):
+        yield include
     if libname == 'core':
         yield '''\
-//#include <wx/activityindicator.h>
-#include <wx/artprov.h>
-#include <wx/bookctrl.h>
-#include <wx/clrpicker.h>
-#include <wx/datectrl.h>
-#include <wx/dirctrl.h>
-#include <wx/editlbox.h>
-#include <wx/filectrl.h>
-#include <wx/filepicker.h>
-#include <wx/fontpicker.h>
-#include <wx/headerctrl.h>
-#include <wx/hyperlink.h>
-#include <wx/spinbutt.h>
-#include <wx/spinctrl.h>
-#include <wx/srchctrl.h>
-#include <wx/tglbtn.h>
-#include <wx/timectrl.h>
-#include <wx/wrapsizer.h>
 
 // wxBitmapBundle compatibility hack(for a while)
 #if !wxCHECK_VERSION(3, 1, 6)
@@ -288,8 +276,6 @@ typedef wxBitmap wxBitmapBundle;
 '''
     else:
         yield '''\
-#include <wx/filename.h>
-#include <wx/stdpaths.h>
 
 typedef wxDateTime::TimeZone TimeZone;
 typedef wxDateTime::Tm       Tm;
