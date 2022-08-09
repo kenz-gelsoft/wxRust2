@@ -14,60 +14,6 @@ use crate::wx_class;
 mod ffi;
 pub mod methods;
 
-// wxAny
-wx_class! { Any =
-    AnyIsOwned<true>(wxAny) impl
-        AnyMethods
-}
-impl<const OWNED: bool> AnyIsOwned<OWNED> {
-    pub fn new() -> AnyIsOwned<OWNED> {
-        unsafe { AnyIsOwned(ffi::wxAny_new()) }
-    }
-    pub fn new_with_t(value: *const c_void) -> AnyIsOwned<OWNED> {
-        unsafe { AnyIsOwned(ffi::wxAny_new1(value)) }
-    }
-    pub fn new_with_any<A: AnyMethods>(any: &A) -> AnyIsOwned<OWNED> {
-        unsafe {
-            let any = any.as_ptr();
-            AnyIsOwned(ffi::wxAny_new2(any))
-        }
-    }
-    pub fn new_with_variant(variant: *const c_void) -> AnyIsOwned<OWNED> {
-        unsafe { AnyIsOwned(ffi::wxAny_new3(variant)) }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for AnyIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxAny_delete(self.0) }
-        }
-    }
-}
-
-// wxAnyValueType
-wx_class! { AnyValueType =
-    AnyValueTypeIsOwned<true>(wxAnyValueType) impl
-        AnyValueTypeMethods
-}
-impl<const OWNED: bool> AnyValueTypeIsOwned<OWNED> {
-    pub fn new() -> AnyValueTypeIsOwned<OWNED> {
-        unsafe { AnyValueTypeIsOwned(ffi::wxAnyValueType_new()) }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for AnyValueTypeIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxAnyValueType_delete(self.0) }
-        }
-    }
-}
-
 // wxAppTraits
 wx_class! { AppTraits =
     AppTraitsIsOwned<true>(wxAppTraits) impl
@@ -82,35 +28,6 @@ impl<const OWNED: bool> Drop for AppTraitsIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxAppTraits_delete(self.0) }
-        }
-    }
-}
-
-// wxArchiveClassFactory
-wx_class! { ArchiveClassFactory =
-    ArchiveClassFactoryIsOwned<true>(wxArchiveClassFactory) impl
-        ArchiveClassFactoryMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> ArchiveClassFactoryIsOwned<OWNED> {
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<ArchiveClassFactoryIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: ArchiveClassFactoryIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for ArchiveClassFactoryIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxArchiveClassFactory_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Drop for ArchiveClassFactoryIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObject_delete(self.0) }
         }
     }
 }
@@ -140,30 +57,6 @@ impl<const OWNED: bool> Drop for ArchiveEntryIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
-        }
-    }
-}
-
-// wxArchiveIterator
-wx_class! { ArchiveIterator =
-    ArchiveIteratorIsOwned<true>(wxArchiveIterator) impl
-        ArchiveIteratorMethods
-}
-impl<const OWNED: bool> ArchiveIteratorIsOwned<OWNED> {
-    pub fn new() -> ArchiveIteratorIsOwned<OWNED> {
-        unsafe { ArchiveIteratorIsOwned(ffi::wxArchiveIterator_new()) }
-    }
-    pub fn new_with_arc(arc: *mut c_void) -> ArchiveIteratorIsOwned<OWNED> {
-        unsafe { ArchiveIteratorIsOwned(ffi::wxArchiveIterator_new1(arc)) }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for ArchiveIteratorIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxArchiveIterator_delete(self.0) }
         }
     }
 }
@@ -491,100 +384,6 @@ impl<const OWNED: bool> Drop for CriticalSectionLockerIsOwned<OWNED> {
     }
 }
 
-// wxDDEClient
-wx_class! { DDEClient =
-    DDEClientIsOwned<true>(wxDDEClient) impl
-        DDEClientMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> DDEClientIsOwned<OWNED> {
-    pub fn new() -> DDEClientIsOwned<OWNED> {
-        unsafe { DDEClientIsOwned(ffi::wxDDEClient_new()) }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<DDEClientIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DDEClientIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for DDEClientIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDDEClient_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Drop for DDEClientIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObject_delete(self.0) }
-        }
-    }
-}
-
-// wxDDEConnection
-wx_class! { DDEConnection =
-    DDEConnectionIsOwned<true>(wxDDEConnection) impl
-        DDEConnectionMethods,
-        ConnectionBaseMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> DDEConnectionIsOwned<OWNED> {
-    pub fn new() -> DDEConnectionIsOwned<OWNED> {
-        unsafe { DDEConnectionIsOwned(ffi::wxDDEConnection_new()) }
-    }
-    pub fn new_with_void(buffer: *mut c_void, size: usize) -> DDEConnectionIsOwned<OWNED> {
-        unsafe { DDEConnectionIsOwned(ffi::wxDDEConnection_new1(buffer, size)) }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<DDEConnectionIsOwned<OWNED>> for ConnectionBaseIsOwned<OWNED> {
-    fn from(o: DDEConnectionIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<DDEConnectionIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DDEConnectionIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for DDEConnectionIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDDEConnection_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Drop for DDEConnectionIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObject_delete(self.0) }
-        }
-    }
-}
-
-// wxDDEServer
-wx_class! { DDEServer =
-    DDEServerIsOwned<true>(wxDDEServer) impl
-        DDEServerMethods
-}
-impl<const OWNED: bool> DDEServerIsOwned<OWNED> {
-    pub fn new() -> DDEServerIsOwned<OWNED> {
-        unsafe { DDEServerIsOwned(ffi::wxDDEServer_new()) }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for DDEServerIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxDDEServer_delete(self.0) }
-        }
-    }
-}
-
 // wxDataInputStream
 wx_class! { DataInputStream =
     DataInputStreamIsOwned<true>(wxDataInputStream) impl
@@ -829,24 +628,6 @@ impl<const OWNED: bool> Drop for DateTimeWorkDaysIsOwned<OWNED> {
     }
 }
 
-// wxDebugContext
-wx_class! { DebugContext =
-    DebugContextIsOwned<true>(wxDebugContext) impl
-        DebugContextMethods
-}
-impl<const OWNED: bool> DebugContextIsOwned<OWNED> {
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for DebugContextIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxDebugContext_delete(self.0) }
-        }
-    }
-}
-
 // wxDir
 wx_class! { Dir =
     DirIsOwned<true>(wxDir) impl
@@ -889,52 +670,6 @@ impl<const OWNED: bool> Drop for DirTraverserIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDirTraverser_delete(self.0) }
-        }
-    }
-}
-
-// wxDynamicLibrary
-wx_class! { DynamicLibrary =
-    DynamicLibraryIsOwned<true>(wxDynamicLibrary) impl
-        DynamicLibraryMethods
-}
-impl<const OWNED: bool> DynamicLibraryIsOwned<OWNED> {
-    pub fn new() -> DynamicLibraryIsOwned<OWNED> {
-        unsafe { DynamicLibraryIsOwned(ffi::wxDynamicLibrary_new()) }
-    }
-    pub fn new_with_str(name: &str, flags: c_int) -> DynamicLibraryIsOwned<OWNED> {
-        unsafe {
-            let name = WxString::from(name);
-            let name = name.as_ptr();
-            DynamicLibraryIsOwned(ffi::wxDynamicLibrary_new1(name, flags))
-        }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for DynamicLibraryIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxDynamicLibrary_delete(self.0) }
-        }
-    }
-}
-
-// wxDynamicLibraryDetails
-wx_class! { DynamicLibraryDetails =
-    DynamicLibraryDetailsIsOwned<true>(wxDynamicLibraryDetails) impl
-        DynamicLibraryDetailsMethods
-}
-impl<const OWNED: bool> DynamicLibraryDetailsIsOwned<OWNED> {
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for DynamicLibraryDetailsIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxDynamicLibraryDetails_delete(self.0) }
         }
     }
 }
@@ -1023,12 +758,6 @@ impl<const OWNED: bool> From<EvtHandlerIsOwned<OWNED>> for ObjectIsOwned<OWNED> 
 impl<const OWNED: bool> DynamicCast for EvtHandlerIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxEvtHandler_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxEvtHandler
-impl<const OWNED: bool> TrackableMethods for EvtHandlerIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxEvtHandler_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -1240,38 +969,6 @@ impl<const OWNED: bool> Drop for FileSystemIsOwned<OWNED> {
     }
 }
 
-// wxFileSystemHandler
-wx_class! { FileSystemHandler =
-    FileSystemHandlerIsOwned<true>(wxFileSystemHandler) impl
-        FileSystemHandlerMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> FileSystemHandlerIsOwned<OWNED> {
-    pub fn new() -> FileSystemHandlerIsOwned<OWNED> {
-        unsafe { FileSystemHandlerIsOwned(ffi::wxFileSystemHandler_new()) }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<FileSystemHandlerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: FileSystemHandlerIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for FileSystemHandlerIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxFileSystemHandler_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Drop for FileSystemHandlerIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObject_delete(self.0) }
-        }
-    }
-}
-
 // wxFileSystemWatcher
 wx_class! { FileSystemWatcher =
     FileSystemWatcherIsOwned<true>(wxFileSystemWatcher) impl
@@ -1300,12 +997,6 @@ impl<const OWNED: bool> From<FileSystemWatcherIsOwned<OWNED>> for ObjectIsOwned<
 impl<const OWNED: bool> DynamicCast for FileSystemWatcherIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxFileSystemWatcher_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxFileSystemWatcher
-impl<const OWNED: bool> TrackableMethods for FileSystemWatcherIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxFileSystemWatcher_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -1419,56 +1110,6 @@ impl<const OWNED: bool> Drop for FilterClassFactoryIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
-        }
-    }
-}
-
-// wxHashMap
-wx_class! { HashMap =
-    HashMapIsOwned<true>(wxHashMap) impl
-        HashMapMethods
-}
-impl<const OWNED: bool> HashMapIsOwned<OWNED> {
-    // NOT_SUPPORTED: fn wxHashMap()
-    pub fn new<H: HashMapMethods>(map: &H) -> HashMapIsOwned<OWNED> {
-        unsafe {
-            let map = map.as_ptr();
-            HashMapIsOwned(ffi::wxHashMap_new1(map))
-        }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for HashMapIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxHashMap_delete(self.0) }
-        }
-    }
-}
-
-// wxHashSet
-wx_class! { HashSet =
-    HashSetIsOwned<true>(wxHashSet) impl
-        HashSetMethods
-}
-impl<const OWNED: bool> HashSetIsOwned<OWNED> {
-    // NOT_SUPPORTED: fn wxHashSet()
-    pub fn new<H: HashSetMethods>(set: &H) -> HashSetIsOwned<OWNED> {
-        unsafe {
-            let set = set.as_ptr();
-            HashSetIsOwned(ffi::wxHashSet_new1(set))
-        }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for HashSetIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxHashSet_delete(self.0) }
         }
     }
 }
@@ -1887,44 +1528,6 @@ impl<const OWNED: bool> Drop for MemoryBufferIsOwned<OWNED> {
     }
 }
 
-// wxMemoryFSHandler
-wx_class! { MemoryFSHandler =
-    MemoryFSHandlerIsOwned<true>(wxMemoryFSHandler) impl
-        MemoryFSHandlerMethods,
-        FileSystemHandlerMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> MemoryFSHandlerIsOwned<OWNED> {
-    pub fn new() -> MemoryFSHandlerIsOwned<OWNED> {
-        unsafe { MemoryFSHandlerIsOwned(ffi::wxMemoryFSHandler_new()) }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<MemoryFSHandlerIsOwned<OWNED>> for FileSystemHandlerIsOwned<OWNED> {
-    fn from(o: MemoryFSHandlerIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<MemoryFSHandlerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: MemoryFSHandlerIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for MemoryFSHandlerIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxMemoryFSHandler_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Drop for MemoryFSHandlerIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObject_delete(self.0) }
-        }
-    }
-}
-
 // wxMessageOutput
 wx_class! { MessageOutput =
     MessageOutputIsOwned<true>(wxMessageOutput) impl
@@ -2059,38 +1662,6 @@ impl<const OWNED: bool> Drop for MimeTypesManagerIsOwned<OWNED> {
     }
 }
 
-// wxModule
-wx_class! { Module =
-    ModuleIsOwned<true>(wxModule) impl
-        ModuleMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> ModuleIsOwned<OWNED> {
-    pub fn new() -> ModuleIsOwned<OWNED> {
-        unsafe { ModuleIsOwned(ffi::wxModule_new()) }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<ModuleIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: ModuleIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for ModuleIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxModule_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Drop for ModuleIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObject_delete(self.0) }
-        }
-    }
-}
-
 // wxMutex
 wx_class! { Mutex =
     MutexIsOwned<true>(wxMutex) impl
@@ -2162,24 +1733,6 @@ impl<const OWNED: bool> Drop for ObjectIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
-        }
-    }
-}
-
-// wxObjectRefData
-wx_class! { ObjectRefData =
-    ObjectRefDataIsOwned<true>(wxObjectRefData) impl
-        ObjectRefDataMethods
-}
-impl<const OWNED: bool> ObjectRefDataIsOwned<OWNED> {
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for ObjectRefDataIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObjectRefData_delete(self.0) }
         }
     }
 }
@@ -2274,45 +1827,6 @@ impl<const OWNED: bool> Drop for PostScriptDCIsOwned<OWNED> {
     }
 }
 
-// wxPowerEvent
-wx_class! { PowerEvent =
-    PowerEventIsOwned<true>(wxPowerEvent) impl
-        PowerEventMethods,
-        EventMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> PowerEventIsOwned<OWNED> {
-    pub fn new() -> PowerEventIsOwned<OWNED> {
-        unsafe { PowerEventIsOwned(ffi::wxPowerEvent_new()) }
-    }
-    // NOT_SUPPORTED: fn wxPowerEvent1()
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<PowerEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
-    fn from(o: PowerEventIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<PowerEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: PowerEventIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for PowerEventIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxPowerEvent_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Drop for PowerEventIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObject_delete(self.0) }
-        }
-    }
-}
-
 // wxPowerResource
 wx_class! { PowerResource =
     PowerResourceIsOwned<true>(wxPowerResource) impl
@@ -2390,12 +1904,6 @@ impl<const OWNED: bool> From<ProcessIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for ProcessIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxProcess_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxProcess
-impl<const OWNED: bool> TrackableMethods for ProcessIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxProcess_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -2479,27 +1987,6 @@ impl<const OWNED: bool> Drop for RecursionGuardFlagIsOwned<OWNED> {
     }
 }
 
-// wxRefCounter
-wx_class! { RefCounter =
-    RefCounterIsOwned<true>(wxRefCounter) impl
-        RefCounterMethods
-}
-impl<const OWNED: bool> RefCounterIsOwned<OWNED> {
-    pub fn new() -> RefCounterIsOwned<OWNED> {
-        unsafe { RefCounterIsOwned(ffi::wxRefCounter_new()) }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for RefCounterIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxRefCounter_delete(self.0) }
-        }
-    }
-}
-
 // wxRegEx
 wx_class! { RegEx =
     RegExIsOwned<true>(wxRegEx) impl
@@ -2524,68 +2011,6 @@ impl<const OWNED: bool> Drop for RegExIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxRegEx_delete(self.0) }
-        }
-    }
-}
-
-// wxRegKey
-wx_class! { RegKey =
-    RegKeyIsOwned<true>(wxRegKey) impl
-        RegKeyMethods
-}
-impl<const OWNED: bool> RegKeyIsOwned<OWNED> {
-    //  ENUM: AccessMode
-    pub const Read: c_int = 0;
-    pub const Write: c_int = 0 + 1;
-
-    //  ENUM: StdKey
-    pub const HKCR: c_int = 0;
-    pub const HKCU: c_int = 0 + 1;
-    pub const HKLM: c_int = 0 + 2;
-    pub const HKUSR: c_int = 0 + 3;
-    pub const HKPD: c_int = 0 + 4;
-    pub const HKCC: c_int = 0 + 5;
-    pub const HKDD: c_int = 0 + 6;
-    pub const HKMAX: c_int = 0 + 7;
-
-    //  ENUM: ValueType
-    pub const Type_None: c_int = 0;
-    pub const Type_String: c_int = 0 + 1;
-    pub const Type_Expand_String: c_int = 0 + 2;
-    pub const Type_Binary: c_int = 0 + 3;
-    pub const Type_Dword: c_int = 0 + 4;
-    pub const Type_Dword_little_endian: c_int = 0 + 5;
-    pub const Type_Dword_big_endian: c_int = 0 + 6;
-    pub const Type_Link: c_int = 0 + 7;
-    pub const Type_Multi_String: c_int = 0 + 8;
-    pub const Type_Resource_list: c_int = 0 + 9;
-    pub const Type_Full_resource_descriptor: c_int = 0 + 10;
-    pub const Type_Resource_requirements_list: c_int = 0 + 11;
-
-    //  ENUM: WOW64ViewMode
-    pub const WOW64ViewMode_Default: c_int = 0;
-    pub const WOW64ViewMode_32: c_int = 0 + 1;
-    pub const WOW64ViewMode_64: c_int = 0 + 2;
-
-    // NOT_SUPPORTED: fn wxRegKey()
-    // NOT_SUPPORTED: fn wxRegKey1()
-    // NOT_SUPPORTED: fn wxRegKey2()
-    pub fn new<R: RegKeyMethods>(key_parent: &R, str_key: &str) -> RegKeyIsOwned<OWNED> {
-        unsafe {
-            let key_parent = key_parent.as_ptr();
-            let str_key = WxString::from(str_key);
-            let str_key = str_key.as_ptr();
-            RegKeyIsOwned(ffi::wxRegKey_new3(key_parent, str_key))
-        }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for RegKeyIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxRegKey_delete(self.0) }
         }
     }
 }
@@ -2753,27 +2178,6 @@ impl<const OWNED: bool> Drop for StackFrameIsOwned<OWNED> {
     }
 }
 
-// wxStackWalker
-wx_class! { StackWalker =
-    StackWalkerIsOwned<true>(wxStackWalker) impl
-        StackWalkerMethods
-}
-impl<const OWNED: bool> StackWalkerIsOwned<OWNED> {
-    pub fn new(argv0: *const c_void) -> StackWalkerIsOwned<OWNED> {
-        unsafe { StackWalkerIsOwned(ffi::wxStackWalker_new(argv0)) }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for StackWalkerIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxStackWalker_delete(self.0) }
-        }
-    }
-}
-
 // wxStandardPaths
 wx_class! { StandardPaths =
     StandardPathsIsOwned<true>(wxStandardPaths) impl
@@ -2830,49 +2234,6 @@ impl<const OWNED: bool> Drop for StopWatchIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxStopWatch_delete(self.0) }
-        }
-    }
-}
-
-// wxStreamBuffer
-wx_class! { StreamBuffer =
-    StreamBufferIsOwned<true>(wxStreamBuffer) impl
-        StreamBufferMethods
-}
-impl<const OWNED: bool> StreamBufferIsOwned<OWNED> {
-    //  ENUM: BufMode
-    //   DUP: read
-    //   DUP: write
-    //   DUP: read_write
-
-    // NOT_SUPPORTED: fn wxStreamBuffer()
-    pub fn new_with_sz_inputstream(
-        bufsize: usize,
-        stream: *mut c_void,
-    ) -> StreamBufferIsOwned<OWNED> {
-        unsafe { StreamBufferIsOwned(ffi::wxStreamBuffer_new1(bufsize, stream)) }
-    }
-    pub fn new_with_sz_outputstream(
-        bufsize: usize,
-        stream: *mut c_void,
-    ) -> StreamBufferIsOwned<OWNED> {
-        unsafe { StreamBufferIsOwned(ffi::wxStreamBuffer_new2(bufsize, stream)) }
-    }
-    // NOT_SUPPORTED: fn wxStreamBuffer3()
-    pub fn new_with_streambuffer<S: StreamBufferMethods>(buffer: &S) -> StreamBufferIsOwned<OWNED> {
-        unsafe {
-            let buffer = buffer.as_ptr();
-            StreamBufferIsOwned(ffi::wxStreamBuffer_new4(buffer))
-        }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for StreamBufferIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxStreamBuffer_delete(self.0) }
         }
     }
 }
@@ -2976,41 +2337,6 @@ impl<const OWNED: bool> Drop for SystemOptionsIsOwned<OWNED> {
     }
 }
 
-// wxTarClassFactory
-wx_class! { TarClassFactory =
-    TarClassFactoryIsOwned<true>(wxTarClassFactory) impl
-        TarClassFactoryMethods,
-        ArchiveClassFactoryMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> TarClassFactoryIsOwned<OWNED> {
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<TarClassFactoryIsOwned<OWNED>> for ArchiveClassFactoryIsOwned<OWNED> {
-    fn from(o: TarClassFactoryIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<TarClassFactoryIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: TarClassFactoryIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for TarClassFactoryIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTarClassFactory_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Drop for TarClassFactoryIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObject_delete(self.0) }
-        }
-    }
-}
-
 // wxTempFFile
 wx_class! { TempFFile =
     TempFFileIsOwned<true>(wxTempFFile) impl
@@ -3067,25 +2393,6 @@ impl<const OWNED: bool> Drop for TempFileIsOwned<OWNED> {
     }
 }
 
-// wxThreadHelper
-wx_class! { ThreadHelper =
-    ThreadHelperIsOwned<true>(wxThreadHelper) impl
-        ThreadHelperMethods
-}
-impl<const OWNED: bool> ThreadHelperIsOwned<OWNED> {
-    // NOT_SUPPORTED: fn wxThreadHelper()
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for ThreadHelperIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxThreadHelper_delete(self.0) }
-        }
-    }
-}
-
 // wxTimer
 wx_class! { Timer =
     TimerIsOwned<true>(wxTimer) impl
@@ -3126,12 +2433,6 @@ impl<const OWNED: bool> From<TimerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for TimerIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTimer_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxTimer
-impl<const OWNED: bool> TrackableMethods for TimerIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxTimer_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -3176,19 +2477,14 @@ impl<const OWNED: bool> Drop for TimerEventIsOwned<OWNED> {
     }
 }
 
-// wxTrackable
-
 // wxUILocale
 wx_class! { UILocale =
     UILocaleIsOwned<true>(wxUILocale) impl
         UILocaleMethods
 }
 impl<const OWNED: bool> UILocaleIsOwned<OWNED> {
-    pub fn new<L: LocaleIdentMethods>(locale_id: &L) -> UILocaleIsOwned<OWNED> {
-        unsafe {
-            let locale_id = locale_id.as_ptr();
-            UILocaleIsOwned(ffi::wxUILocale_new(locale_id))
-        }
+    pub fn new(locale_id: *const c_void) -> UILocaleIsOwned<OWNED> {
+        unsafe { UILocaleIsOwned(ffi::wxUILocale_new(locale_id)) }
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -3265,33 +2561,6 @@ impl<const OWNED: bool> Drop for UniCharRefIsOwned<OWNED> {
     }
 }
 
-// wxVariantData
-wx_class! { VariantData =
-    VariantDataIsOwned<true>(wxVariantData) impl
-        VariantDataMethods,
-        ObjectRefDataMethods
-}
-impl<const OWNED: bool> VariantDataIsOwned<OWNED> {
-    pub fn new() -> VariantDataIsOwned<OWNED> {
-        unsafe { VariantDataIsOwned(ffi::wxVariantData_new()) }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<VariantDataIsOwned<OWNED>> for ObjectRefDataIsOwned<OWNED> {
-    fn from(o: VariantDataIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> Drop for VariantDataIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxVariantData_delete(self.0) }
-        }
-    }
-}
-
 // wxVersionInfo
 wx_class! { VersionInfo =
     VersionInfoIsOwned<true>(wxVersionInfo) impl
@@ -3363,41 +2632,6 @@ impl<const OWNED: bool> Drop for WindowUpdateLockerIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxWindowUpdateLocker_delete(self.0) }
-        }
-    }
-}
-
-// wxZipClassFactory
-wx_class! { ZipClassFactory =
-    ZipClassFactoryIsOwned<true>(wxZipClassFactory) impl
-        ZipClassFactoryMethods,
-        ArchiveClassFactoryMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> ZipClassFactoryIsOwned<OWNED> {
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<ZipClassFactoryIsOwned<OWNED>> for ArchiveClassFactoryIsOwned<OWNED> {
-    fn from(o: ZipClassFactoryIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<ZipClassFactoryIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: ZipClassFactoryIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for ZipClassFactoryIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxZipClassFactory_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Drop for ZipClassFactoryIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObject_delete(self.0) }
         }
     }
 }

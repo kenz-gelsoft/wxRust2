@@ -2,67 +2,6 @@
 
 extern "C" {
 
-// CLASS: wxAny
-void wxAny_delete(wxAny *self) {
-    delete self;
-}
-wxAny *wxAny_new() {
-    return new wxAny();
-}
-wxAny *wxAny_new1(const T * value) {
-    return new wxAny(*value);
-}
-wxAny *wxAny_new2(const wxAny * any) {
-    return new wxAny(*any);
-}
-wxAny *wxAny_new3(const wxVariant * variant) {
-    return new wxAny(*variant);
-}
-bool wxAny_CheckType(const wxAny * self) {
-    return self->CheckType();
-}
-bool wxAny_GetAs(const wxAny * self, T * value) {
-    return self->GetAs(value);
-}
-bool wxAny_GetAs1(const wxAny * self, wxVariant * value) {
-    return self->GetAs(value);
-}
-const wxAnyValueType * wxAny_GetType(const wxAny * self) {
-    return self->GetType();
-}
-bool wxAny_HasSameType(const wxAny * self, const wxAny * other) {
-    return self->HasSameType(*other);
-}
-bool wxAny_IsNull(const wxAny * self) {
-    return self->IsNull();
-}
-void wxAny_MakeNull(wxAny * self) {
-    return self->MakeNull();
-}
-
-// CLASS: wxAnyValueType
-void wxAnyValueType_delete(wxAnyValueType *self) {
-    delete self;
-}
-wxAnyValueType *wxAnyValueType_new() {
-    return new wxAnyValueType();
-}
-bool wxAnyValueType_CheckType(const wxAnyValueType * self) {
-    return self->CheckType();
-}
-bool wxAnyValueType_ConvertValue(const wxAnyValueType * self, const wxAnyValueBuffer * src, wxAnyValueType * dst_type, wxAnyValueBuffer * dst) {
-    return self->ConvertValue(*src, dst_type, *dst);
-}
-void wxAnyValueType_CopyBuffer(const wxAnyValueType * self, const wxAnyValueBuffer * src, wxAnyValueBuffer * dst) {
-    return self->CopyBuffer(*src, *dst);
-}
-void wxAnyValueType_DeleteValue(const wxAnyValueType * self, wxAnyValueBuffer * buf) {
-    return self->DeleteValue(*buf);
-}
-bool wxAnyValueType_IsSameType(const wxAnyValueType * self, const wxAnyValueType * other_type) {
-    return self->IsSameType(other_type);
-}
-
 // CLASS: wxAppTraits
 void wxAppTraits_delete(wxAppTraits *self) {
     delete self;
@@ -107,47 +46,6 @@ wxString *wxAppTraits_GetAssertStackTrace(wxAppTraits * self) {
     return new wxString(self->GetAssertStackTrace());
 }
 
-// CLASS: wxArchiveClassFactory
-wxClassInfo *wxArchiveClassFactory_CLASSINFO() {
-    return wxCLASSINFO(wxArchiveClassFactory);
-}
-wxMBConv * wxArchiveClassFactory_GetConv(const wxArchiveClassFactory * self) {
-    return self->GetConv();
-}
-void wxArchiveClassFactory_SetConv(wxArchiveClassFactory * self, wxMBConv * conv) {
-    return self->SetConv(*conv);
-}
-const wxArchiveClassFactory * wxArchiveClassFactory_GetNext(const wxArchiveClassFactory * self) {
-    return self->GetNext();
-}
-wxString *wxArchiveClassFactory_GetProtocol(const wxArchiveClassFactory * self) {
-    return new wxString(self->GetProtocol());
-}
-wxArchiveEntry * wxArchiveClassFactory_NewEntry(const wxArchiveClassFactory * self) {
-    return self->NewEntry();
-}
-wxArchiveInputStream * wxArchiveClassFactory_NewStream(const wxArchiveClassFactory * self, wxInputStream * stream) {
-    return self->NewStream(*stream);
-}
-wxArchiveOutputStream * wxArchiveClassFactory_NewStream1(const wxArchiveClassFactory * self, wxOutputStream * stream) {
-    return self->NewStream(*stream);
-}
-wxArchiveInputStream * wxArchiveClassFactory_NewStream2(const wxArchiveClassFactory * self, wxInputStream * stream) {
-    return self->NewStream(stream);
-}
-wxArchiveOutputStream * wxArchiveClassFactory_NewStream3(const wxArchiveClassFactory * self, wxOutputStream * stream) {
-    return self->NewStream(stream);
-}
-void wxArchiveClassFactory_PushFront(wxArchiveClassFactory * self) {
-    return self->PushFront();
-}
-void wxArchiveClassFactory_Remove(wxArchiveClassFactory * self) {
-    return self->Remove();
-}
-const wxArchiveClassFactory * wxArchiveClassFactory_GetFirst() {
-    return wxArchiveClassFactory::GetFirst();
-}
-
 // CLASS: wxArchiveEntry
 wxClassInfo *wxArchiveEntry_CLASSINFO() {
     return wxCLASSINFO(wxArchiveEntry);
@@ -181,17 +79,6 @@ void wxArchiveEntry_SetNotifier(wxArchiveEntry * self, wxArchiveNotifier * notif
 }
 void wxArchiveEntry_UnsetNotifier(wxArchiveEntry * self) {
     return self->UnsetNotifier();
-}
-
-// CLASS: wxArchiveIterator
-void wxArchiveIterator_delete(wxArchiveIterator *self) {
-    delete self;
-}
-wxArchiveIterator *wxArchiveIterator_new() {
-    return new wxArchiveIterator();
-}
-wxArchiveIterator *wxArchiveIterator_new1(Arc * arc) {
-    return new wxArchiveIterator(*arc);
 }
 
 // CLASS: wxArchiveNotifier
@@ -480,93 +367,6 @@ void wxCriticalSectionLocker_delete(wxCriticalSectionLocker *self) {
 }
 wxCriticalSectionLocker *wxCriticalSectionLocker_new(wxCriticalSection * criticalsection) {
     return new wxCriticalSectionLocker(*criticalsection);
-}
-
-// CLASS: wxDDEClient
-wxClassInfo *wxDDEClient_CLASSINFO() {
-    return wxCLASSINFO(wxDDEClient);
-}
-wxDDEClient *wxDDEClient_new() {
-    return new wxDDEClient();
-}
-wxConnectionBase * wxDDEClient_MakeConnection(wxDDEClient * self, const wxString * host, const wxString * service, const wxString * topic) {
-    return self->MakeConnection(*host, *service, *topic);
-}
-wxConnectionBase * wxDDEClient_OnMakeConnection(wxDDEClient * self) {
-    return self->OnMakeConnection();
-}
-bool wxDDEClient_ValidHost(wxDDEClient * self, const wxString * host) {
-    return self->ValidHost(*host);
-}
-
-// CLASS: wxDDEConnection
-wxClassInfo *wxDDEConnection_CLASSINFO() {
-    return wxCLASSINFO(wxDDEConnection);
-}
-wxDDEConnection *wxDDEConnection_new() {
-    return new wxDDEConnection();
-}
-wxDDEConnection *wxDDEConnection_new1(void * buffer, size_t size) {
-    return new wxDDEConnection(buffer, size);
-}
-bool wxDDEConnection_Advise1(wxDDEConnection * self, const wxString * item, const char * data) {
-    return self->Advise(*item, data);
-}
-bool wxDDEConnection_Advise2(wxDDEConnection * self, const wxString * item, const wchar_t * data) {
-    return self->Advise(*item, data);
-}
-bool wxDDEConnection_Advise3(wxDDEConnection * self, const wxString * item, const wxString data) {
-    return self->Advise(*item, data);
-}
-bool wxDDEConnection_Disconnect(wxDDEConnection * self) {
-    return self->Disconnect();
-}
-bool wxDDEConnection_Execute1(wxDDEConnection * self, const char * data) {
-    return self->Execute(data);
-}
-bool wxDDEConnection_Execute2(wxDDEConnection * self, const wchar_t * data) {
-    return self->Execute(data);
-}
-bool wxDDEConnection_Execute3(wxDDEConnection * self, const wxString data) {
-    return self->Execute(data);
-}
-bool wxDDEConnection_OnDisconnect(wxDDEConnection * self) {
-    return self->OnDisconnect();
-}
-bool wxDDEConnection_OnStartAdvise(wxDDEConnection * self, const wxString * topic, const wxString * item) {
-    return self->OnStartAdvise(*topic, *item);
-}
-bool wxDDEConnection_OnStopAdvise(wxDDEConnection * self, const wxString * topic, const wxString * item) {
-    return self->OnStopAdvise(*topic, *item);
-}
-bool wxDDEConnection_Poke1(wxDDEConnection * self, const wxString * item, const char * data) {
-    return self->Poke(*item, data);
-}
-bool wxDDEConnection_Poke2(wxDDEConnection * self, const wxString * item, const wchar_t * data) {
-    return self->Poke(*item, data);
-}
-bool wxDDEConnection_Poke3(wxDDEConnection * self, const wxString * item, const wxString data) {
-    return self->Poke(*item, data);
-}
-bool wxDDEConnection_StartAdvise(wxDDEConnection * self, const wxString * item) {
-    return self->StartAdvise(*item);
-}
-bool wxDDEConnection_StopAdvise(wxDDEConnection * self, const wxString * item) {
-    return self->StopAdvise(*item);
-}
-
-// CLASS: wxDDEServer
-void wxDDEServer_delete(wxDDEServer *self) {
-    delete self;
-}
-wxDDEServer *wxDDEServer_new() {
-    return new wxDDEServer();
-}
-bool wxDDEServer_Create(wxDDEServer * self, const wxString * service) {
-    return self->Create(*service);
-}
-wxConnectionBase * wxDDEServer_OnAcceptConnection(wxDDEServer * self, const wxString * topic) {
-    return self->OnAcceptConnection(*topic);
 }
 
 // CLASS: wxDataInputStream
@@ -944,44 +744,6 @@ void wxDateTimeWorkDays_delete(wxDateTimeWorkDays *self) {
     delete self;
 }
 
-// CLASS: wxDebugContext
-void wxDebugContext_delete(wxDebugContext *self) {
-    delete self;
-}
-int wxDebugContext_Check(bool check_all) {
-    return wxDebugContext::Check(check_all);
-}
-bool wxDebugContext_Dump() {
-    return wxDebugContext::Dump();
-}
-bool wxDebugContext_GetCheckPrevious() {
-    return wxDebugContext::GetCheckPrevious();
-}
-bool wxDebugContext_GetDebugMode() {
-    return wxDebugContext::GetDebugMode();
-}
-int wxDebugContext_GetLevel() {
-    return wxDebugContext::GetLevel();
-}
-bool wxDebugContext_PrintClasses() {
-    return wxDebugContext::PrintClasses();
-}
-bool wxDebugContext_PrintStatistics(bool detailed) {
-    return wxDebugContext::PrintStatistics(detailed);
-}
-void wxDebugContext_SetCheckPrevious(bool check) {
-    return wxDebugContext::SetCheckPrevious(check);
-}
-void wxDebugContext_SetCheckpoint(bool all) {
-    return wxDebugContext::SetCheckpoint(all);
-}
-void wxDebugContext_SetDebugMode(bool debug) {
-    return wxDebugContext::SetDebugMode(debug);
-}
-void wxDebugContext_SetLevel(int level) {
-    return wxDebugContext::SetLevel(level);
-}
-
 // CLASS: wxDir
 void wxDir_delete(wxDir *self) {
     delete self;
@@ -1041,55 +803,6 @@ bool wxDir_Remove(const wxString * dir, int flags) {
 // CLASS: wxDirTraverser
 void wxDirTraverser_delete(wxDirTraverser *self) {
     delete self;
-}
-
-// CLASS: wxDynamicLibrary
-void wxDynamicLibrary_delete(wxDynamicLibrary *self) {
-    delete self;
-}
-wxDynamicLibrary *wxDynamicLibrary_new() {
-    return new wxDynamicLibrary();
-}
-wxDynamicLibrary *wxDynamicLibrary_new1(const wxString * name, int flags) {
-    return new wxDynamicLibrary(*name, flags);
-}
-void * wxDynamicLibrary_GetSymbol(const wxDynamicLibrary * self, const wxString * name, bool * success) {
-    return self->GetSymbol(*name, success);
-}
-void * wxDynamicLibrary_GetSymbolAorW(const wxDynamicLibrary * self, const wxString * name) {
-    return self->GetSymbolAorW(*name);
-}
-bool wxDynamicLibrary_HasSymbol(const wxDynamicLibrary * self, const wxString * name) {
-    return self->HasSymbol(*name);
-}
-bool wxDynamicLibrary_IsLoaded(const wxDynamicLibrary * self) {
-    return self->IsLoaded();
-}
-bool wxDynamicLibrary_Load(wxDynamicLibrary * self, const wxString * name, int flags) {
-    return self->Load(*name, flags);
-}
-void wxDynamicLibrary_Unload(wxDynamicLibrary * self) {
-    return self->Unload();
-}
-void * wxDynamicLibrary_GetModuleFromAddress(const void * addr, wxString * path) {
-    return wxDynamicLibrary::GetModuleFromAddress(addr, path);
-}
-
-// CLASS: wxDynamicLibraryDetails
-void wxDynamicLibraryDetails_delete(wxDynamicLibraryDetails *self) {
-    delete self;
-}
-bool wxDynamicLibraryDetails_GetAddress(const wxDynamicLibraryDetails * self, void * addr, size_t * len) {
-    return self->GetAddress(addr, len);
-}
-wxString *wxDynamicLibraryDetails_GetName(const wxDynamicLibraryDetails * self) {
-    return new wxString(self->GetName());
-}
-wxString *wxDynamicLibraryDetails_GetPath(const wxDynamicLibraryDetails * self) {
-    return new wxString(self->GetPath());
-}
-wxString *wxDynamicLibraryDetails_GetVersion(const wxDynamicLibraryDetails * self) {
-    return new wxString(self->GetVersion());
 }
 
 // CLASS: wxEncodingConverter
@@ -1231,10 +944,6 @@ void wxEvtHandler_RemoveFilter(wxEventFilter * filter) {
 }
 wxEvtHandler *wxEvtHandler_new() {
     return new wxEvtHandler();
-}
-// Mix-in(s) to wxEvtHandler
-wxTrackable *wxEvtHandler_AsTrackable(wxEvtHandler* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxFFile
@@ -1670,29 +1379,6 @@ wxFileName *wxFileSystem_URLToFileName(const wxString * url) {
     return new wxFileName(wxFileSystem::URLToFileName(*url));
 }
 
-// CLASS: wxFileSystemHandler
-wxClassInfo *wxFileSystemHandler_CLASSINFO() {
-    return wxCLASSINFO(wxFileSystemHandler);
-}
-wxFileSystemHandler *wxFileSystemHandler_new() {
-    return new wxFileSystemHandler();
-}
-bool wxFileSystemHandler_CanOpen(wxFileSystemHandler * self, const wxString * location) {
-    return self->CanOpen(*location);
-}
-wxString *wxFileSystemHandler_FindFirst(wxFileSystemHandler * self, const wxString * wildcard, int flags) {
-    return new wxString(self->FindFirst(*wildcard, flags));
-}
-wxString *wxFileSystemHandler_FindNext(wxFileSystemHandler * self) {
-    return new wxString(self->FindNext());
-}
-wxFSFile * wxFileSystemHandler_OpenFile(wxFileSystemHandler * self, wxFileSystem * fs, const wxString * location) {
-    return self->OpenFile(*fs, *location);
-}
-wxString *wxFileSystemHandler_GetMimeTypeFromExt(const wxString * location) {
-    return new wxString(wxFileSystemHandler::GetMimeTypeFromExt(*location));
-}
-
 // CLASS: wxFileSystemWatcher
 wxClassInfo *wxFileSystemWatcher_CLASSINFO() {
     return wxCLASSINFO(wxFileSystemWatcher);
@@ -1723,10 +1409,6 @@ int wxFileSystemWatcher_GetWatchedPaths(const wxFileSystemWatcher * self, wxArra
 }
 void wxFileSystemWatcher_SetOwner(wxFileSystemWatcher * self, wxEvtHandler * handler) {
     return self->SetOwner(handler);
-}
-// Mix-in(s) to wxFileSystemWatcher
-wxTrackable *wxFileSystemWatcher_AsTrackable(wxFileSystemWatcher* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxFileSystemWatcherEvent
@@ -1832,34 +1514,6 @@ void wxFilterClassFactory_Remove(wxFilterClassFactory * self) {
 }
 const wxFilterClassFactory * wxFilterClassFactory_GetFirst() {
     return wxFilterClassFactory::GetFirst();
-}
-
-// CLASS: wxHashMap
-void wxHashMap_delete(wxHashMap *self) {
-    delete self;
-}
-wxHashMap *wxHashMap_new1(const wxHashMap * map) {
-    return new wxHashMap(*map);
-}
-void wxHashMap_clear(wxHashMap * self) {
-    return self->clear();
-}
-bool wxHashMap_empty(const wxHashMap * self) {
-    return self->empty();
-}
-
-// CLASS: wxHashSet
-void wxHashSet_delete(wxHashSet *self) {
-    delete self;
-}
-wxHashSet *wxHashSet_new1(const wxHashSet * set) {
-    return new wxHashSet(*set);
-}
-void wxHashSet_clear(wxHashSet * self) {
-    return self->clear();
-}
-bool wxHashSet_empty(const wxHashSet * self) {
-    return self->empty();
 }
 
 // CLASS: wxHashTable
@@ -2222,29 +1876,6 @@ void wxMemoryBuffer_UngetWriteBuf(wxMemoryBuffer * self, size_t size_used) {
     return self->UngetWriteBuf(size_used);
 }
 
-// CLASS: wxMemoryFSHandler
-wxClassInfo *wxMemoryFSHandler_CLASSINFO() {
-    return wxCLASSINFO(wxMemoryFSHandler);
-}
-wxMemoryFSHandler *wxMemoryFSHandler_new() {
-    return new wxMemoryFSHandler();
-}
-void wxMemoryFSHandler_AddFile2(const wxString * filename, const wxString * textdata) {
-    return wxMemoryFSHandler::AddFile(*filename, *textdata);
-}
-void wxMemoryFSHandler_AddFile3(const wxString * filename, const void * binarydata, size_t size) {
-    return wxMemoryFSHandler::AddFile(*filename, binarydata, size);
-}
-void wxMemoryFSHandler_AddFileWithMimeType(const wxString * filename, const wxString * textdata, const wxString * mimetype) {
-    return wxMemoryFSHandler::AddFileWithMimeType(*filename, *textdata, *mimetype);
-}
-void wxMemoryFSHandler_AddFileWithMimeType1(const wxString * filename, const void * binarydata, size_t size, const wxString * mimetype) {
-    return wxMemoryFSHandler::AddFileWithMimeType(*filename, binarydata, size, *mimetype);
-}
-void wxMemoryFSHandler_RemoveFile(const wxString * filename) {
-    return wxMemoryFSHandler::RemoveFile(*filename);
-}
-
 // CLASS: wxMessageOutput
 void wxMessageOutput_delete(wxMessageOutput *self) {
     delete self;
@@ -2309,20 +1940,6 @@ bool wxMimeTypesManager_IsOfType(const wxString * mime_type, const wxString * wi
     return wxMimeTypesManager::IsOfType(*mime_type, *wildcard);
 }
 
-// CLASS: wxModule
-wxClassInfo *wxModule_CLASSINFO() {
-    return wxCLASSINFO(wxModule);
-}
-wxModule *wxModule_new() {
-    return new wxModule();
-}
-void wxModule_OnExit(wxModule * self) {
-    return self->OnExit();
-}
-bool wxModule_OnInit(wxModule * self) {
-    return self->OnInit();
-}
-
 // CLASS: wxMutex
 void wxMutex_delete(wxMutex *self) {
     delete self;
@@ -2372,11 +1989,6 @@ void wxObject_UnRef(wxObject * self) {
 }
 void wxObject_UnShare(wxObject * self) {
     return self->UnShare();
-}
-
-// CLASS: wxObjectRefData
-void wxObjectRefData_delete(wxObjectRefData *self) {
-    delete self;
 }
 
 // CLASS: wxPlatformInfo
@@ -2511,20 +2123,6 @@ wxPostScriptDC *wxPostScriptDC_new1(const wxPrintData * print_data) {
     return new wxPostScriptDC(*print_data);
 }
 
-// CLASS: wxPowerEvent
-wxClassInfo *wxPowerEvent_CLASSINFO() {
-    return wxCLASSINFO(wxPowerEvent);
-}
-wxPowerEvent *wxPowerEvent_new() {
-    return new wxPowerEvent();
-}
-void wxPowerEvent_Veto(wxPowerEvent * self) {
-    return self->Veto();
-}
-bool wxPowerEvent_IsVetoed(const wxPowerEvent * self) {
-    return self->IsVetoed();
-}
-
 // CLASS: wxPowerResource
 void wxPowerResource_delete(wxPowerResource *self) {
     delete self;
@@ -2590,10 +2188,6 @@ bool wxProcess_Exists(int pid) {
 wxProcess * wxProcess_Open(const wxString * cmd, int flags) {
     return wxProcess::Open(*cmd, flags);
 }
-// Mix-in(s) to wxProcess
-wxTrackable *wxProcess_AsTrackable(wxProcess* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxProcessEvent
 wxClassInfo *wxProcessEvent_CLASSINFO() {
@@ -2623,23 +2217,6 @@ bool wxRecursionGuard_IsInside(const wxRecursionGuard * self) {
 // CLASS: wxRecursionGuardFlag
 void wxRecursionGuardFlag_delete(wxRecursionGuardFlag *self) {
     delete self;
-}
-
-// CLASS: wxRefCounter
-void wxRefCounter_delete(wxRefCounter *self) {
-    delete self;
-}
-wxRefCounter *wxRefCounter_new() {
-    return new wxRefCounter();
-}
-void wxRefCounter_DecRef(wxRefCounter * self) {
-    return self->DecRef();
-}
-int wxRefCounter_GetRefCount(const wxRefCounter * self) {
-    return self->GetRefCount();
-}
-void wxRefCounter_IncRef(wxRefCounter * self) {
-    return self->IncRef();
 }
 
 // CLASS: wxRegEx
@@ -2693,128 +2270,6 @@ wxString *wxRegEx_ConvertFromBasic(const wxString * bre) {
 }
 wxVersionInfo *wxRegEx_GetLibraryVersionInfo() {
     return new wxVersionInfo(wxRegEx::GetLibraryVersionInfo());
-}
-
-// CLASS: wxRegKey
-void wxRegKey_delete(wxRegKey *self) {
-    delete self;
-}
-wxRegKey *wxRegKey_new3(const wxRegKey * key_parent, const wxString * str_key) {
-    return new wxRegKey(*key_parent, *str_key);
-}
-void wxRegKey_Close(wxRegKey * self) {
-    return self->Close();
-}
-bool wxRegKey_Copy(wxRegKey * self, const wxString * sz_new_name) {
-    return self->Copy(*sz_new_name);
-}
-bool wxRegKey_Copy1(wxRegKey * self, wxRegKey * key_dst) {
-    return self->Copy(*key_dst);
-}
-bool wxRegKey_CopyValue(wxRegKey * self, const wxString * sz_value, wxRegKey * key_dst, const wxString * sz_new_name) {
-    return self->CopyValue(*sz_value, *key_dst, *sz_new_name);
-}
-bool wxRegKey_Create(wxRegKey * self, bool b_ok_if_exists) {
-    return self->Create(b_ok_if_exists);
-}
-void wxRegKey_DeleteKey(wxRegKey * self, const wxString * sz_key) {
-    return self->DeleteKey(*sz_key);
-}
-void wxRegKey_DeleteSelf(wxRegKey * self) {
-    return self->DeleteSelf();
-}
-void wxRegKey_DeleteValue(wxRegKey * self, const wxString * sz_key) {
-    return self->DeleteValue(*sz_key);
-}
-bool wxRegKey_Exists(const wxRegKey * self) {
-    return self->Exists();
-}
-bool wxRegKey_Export(const wxRegKey * self, const wxString * filename) {
-    return self->Export(*filename);
-}
-bool wxRegKey_Export1(const wxRegKey * self, wxOutputStream * ostr) {
-    return self->Export(*ostr);
-}
-bool wxRegKey_GetFirstKey(wxRegKey * self, wxString * str_key_name, long * l_index) {
-    return self->GetFirstKey(*str_key_name, *l_index);
-}
-bool wxRegKey_GetFirstValue(wxRegKey * self, wxString * str_value_name, long * l_index) {
-    return self->GetFirstValue(*str_value_name, *l_index);
-}
-bool wxRegKey_GetKeyInfo(const wxRegKey * self, size_t * pn_sub_keys, size_t * pn_max_key_len, size_t * pn_values, size_t * pn_max_value_len) {
-    return self->GetKeyInfo(pn_sub_keys, pn_max_key_len, pn_values, pn_max_value_len);
-}
-wxString *wxRegKey_GetName(const wxRegKey * self, bool b_short_prefix) {
-    return new wxString(self->GetName(b_short_prefix));
-}
-bool wxRegKey_GetNextKey(const wxRegKey * self, wxString * str_key_name, long * l_index) {
-    return self->GetNextKey(*str_key_name, *l_index);
-}
-bool wxRegKey_GetNextValue(const wxRegKey * self, wxString * str_value_name, long * l_index) {
-    return self->GetNextValue(*str_value_name, *l_index);
-}
-bool wxRegKey_HasSubKey(const wxRegKey * self, const wxString * sz_key) {
-    return self->HasSubKey(*sz_key);
-}
-bool wxRegKey_HasSubkeys(const wxRegKey * self) {
-    return self->HasSubkeys();
-}
-bool wxRegKey_HasValue(const wxRegKey * self, const wxString * sz_value) {
-    return self->HasValue(*sz_value);
-}
-bool wxRegKey_HasValues(const wxRegKey * self) {
-    return self->HasValues();
-}
-bool wxRegKey_IsEmpty(const wxRegKey * self) {
-    return self->IsEmpty();
-}
-bool wxRegKey_IsNumericValue(const wxRegKey * self, const wxString * sz_value) {
-    return self->IsNumericValue(*sz_value);
-}
-bool wxRegKey_IsOpened(const wxRegKey * self) {
-    return self->IsOpened();
-}
-wxString *wxRegKey_QueryDefaultValue(const wxRegKey * self) {
-    return new wxString(self->QueryDefaultValue());
-}
-bool wxRegKey_QueryRawValue(const wxRegKey * self, const wxString * sz_value, wxString * str_value) {
-    return self->QueryRawValue(*sz_value, *str_value);
-}
-bool wxRegKey_QueryValue(const wxRegKey * self, const wxString * sz_value, wxString * str_value, bool raw) {
-    return self->QueryValue(*sz_value, *str_value, raw);
-}
-bool wxRegKey_QueryValue1(const wxRegKey * self, const wxString * sz_value, long * pl_value) {
-    return self->QueryValue(*sz_value, pl_value);
-}
-bool wxRegKey_QueryValue64(const wxRegKey * self, const wxString * sz_value, wxLongLong_t * pl_value) {
-    return self->QueryValue64(*sz_value, pl_value);
-}
-bool wxRegKey_QueryValue2(const wxRegKey * self, const wxString * sz_value, wxMemoryBuffer * buf) {
-    return self->QueryValue(*sz_value, *buf);
-}
-bool wxRegKey_Rename(wxRegKey * self, const wxString * sz_new_name) {
-    return self->Rename(*sz_new_name);
-}
-bool wxRegKey_RenameValue(wxRegKey * self, const wxString * sz_value_old, const wxString * sz_value_new) {
-    return self->RenameValue(*sz_value_old, *sz_value_new);
-}
-void wxRegKey_ReserveMemoryForName(wxRegKey * self, size_t bytes) {
-    return self->ReserveMemoryForName(bytes);
-}
-void wxRegKey_SetName(wxRegKey * self, const wxString * str_key) {
-    return self->SetName(*str_key);
-}
-void wxRegKey_SetName2(wxRegKey * self, const wxRegKey * key_parent, const wxString * str_key) {
-    return self->SetName(*key_parent, *str_key);
-}
-bool wxRegKey_SetValue(wxRegKey * self, const wxString * sz_value, long l_value) {
-    return self->SetValue(*sz_value, l_value);
-}
-bool wxRegKey_SetValue1(wxRegKey * self, const wxString * sz_value, const wxString * str_value) {
-    return self->SetValue(*sz_value, *str_value);
-}
-bool wxRegKey_SetValue2(wxRegKey * self, const wxString * sz_value, const wxMemoryBuffer * buf) {
-    return self->SetValue(*sz_value, *buf);
 }
 
 // CLASS: wxSecretStore
@@ -2966,20 +2421,6 @@ bool wxStackFrame_HasSourceLocation(const wxStackFrame * self) {
     return self->HasSourceLocation();
 }
 
-// CLASS: wxStackWalker
-void wxStackWalker_delete(wxStackWalker *self) {
-    delete self;
-}
-wxStackWalker *wxStackWalker_new(const char * argv0) {
-    return new wxStackWalker(argv0);
-}
-void wxStackWalker_Walk(wxStackWalker * self, size_t skip, size_t max_depth) {
-    return self->Walk(skip, max_depth);
-}
-void wxStackWalker_WalkFromException(wxStackWalker * self, size_t max_depth) {
-    return self->WalkFromException(max_depth);
-}
-
 // CLASS: wxStandardPaths
 void wxStandardPaths_delete(wxStandardPaths *self) {
     delete self;
@@ -3075,83 +2516,6 @@ long wxStopWatch_Time(const wxStopWatch * self) {
     return self->Time();
 }
 
-// CLASS: wxStreamBuffer
-void wxStreamBuffer_delete(wxStreamBuffer *self) {
-    delete self;
-}
-wxStreamBuffer *wxStreamBuffer_new1(size_t bufsize, wxInputStream * stream) {
-    return new wxStreamBuffer(bufsize, *stream);
-}
-wxStreamBuffer *wxStreamBuffer_new2(size_t bufsize, wxOutputStream * stream) {
-    return new wxStreamBuffer(bufsize, *stream);
-}
-wxStreamBuffer *wxStreamBuffer_new4(const wxStreamBuffer * buffer) {
-    return new wxStreamBuffer(*buffer);
-}
-bool wxStreamBuffer_FillBuffer(wxStreamBuffer * self) {
-    return self->FillBuffer();
-}
-void wxStreamBuffer_Fixed(wxStreamBuffer * self, bool fixed) {
-    return self->Fixed(fixed);
-}
-bool wxStreamBuffer_FlushBuffer(wxStreamBuffer * self) {
-    return self->FlushBuffer();
-}
-void wxStreamBuffer_Flushable(wxStreamBuffer * self, bool flushable) {
-    return self->Flushable(flushable);
-}
-void * wxStreamBuffer_GetBufferEnd(const wxStreamBuffer * self) {
-    return self->GetBufferEnd();
-}
-void * wxStreamBuffer_GetBufferPos(const wxStreamBuffer * self) {
-    return self->GetBufferPos();
-}
-size_t wxStreamBuffer_GetBufferSize(const wxStreamBuffer * self) {
-    return self->GetBufferSize();
-}
-void * wxStreamBuffer_GetBufferStart(const wxStreamBuffer * self) {
-    return self->GetBufferStart();
-}
-size_t wxStreamBuffer_GetDataLeft(wxStreamBuffer * self) {
-    return self->GetDataLeft();
-}
-size_t wxStreamBuffer_GetIntPosition(const wxStreamBuffer * self) {
-    return self->GetIntPosition();
-}
-size_t wxStreamBuffer_GetLastAccess(const wxStreamBuffer * self) {
-    return self->GetLastAccess();
-}
-size_t wxStreamBuffer_Read(wxStreamBuffer * self, void * buffer, size_t size) {
-    return self->Read(buffer, size);
-}
-size_t wxStreamBuffer_Read1(wxStreamBuffer * self, wxStreamBuffer * buffer) {
-    return self->Read(buffer);
-}
-void wxStreamBuffer_ResetBuffer(wxStreamBuffer * self) {
-    return self->ResetBuffer();
-}
-void wxStreamBuffer_SetBufferIO(wxStreamBuffer * self, void * start, void * end, bool take_ownership) {
-    return self->SetBufferIO(start, end, take_ownership);
-}
-void wxStreamBuffer_SetBufferIO1(wxStreamBuffer * self, size_t bufsize) {
-    return self->SetBufferIO(bufsize);
-}
-void wxStreamBuffer_SetIntPosition(wxStreamBuffer * self, size_t pos) {
-    return self->SetIntPosition(pos);
-}
-wxStreamBase * wxStreamBuffer_Stream(wxStreamBuffer * self) {
-    return self->Stream();
-}
-void wxStreamBuffer_Truncate(wxStreamBuffer * self) {
-    return self->Truncate();
-}
-size_t wxStreamBuffer_Write(wxStreamBuffer * self, const void * buffer, size_t size) {
-    return self->Write(buffer, size);
-}
-size_t wxStreamBuffer_Write1(wxStreamBuffer * self, wxStreamBuffer * buffer) {
-    return self->Write(buffer);
-}
-
 // CLASS: wxStringClientData
 void wxStringClientData_delete(wxStringClientData *self) {
     delete self;
@@ -3218,11 +2582,6 @@ void wxSystemOptions_SetOption1(const wxString * name, int value) {
     return wxSystemOptions::SetOption(*name, value);
 }
 
-// CLASS: wxTarClassFactory
-wxClassInfo *wxTarClassFactory_CLASSINFO() {
-    return wxCLASSINFO(wxTarClassFactory);
-}
-
 // CLASS: wxTempFFile
 void wxTempFFile_delete(wxTempFFile *self) {
     delete self;
@@ -3281,23 +2640,6 @@ bool wxTempFile_Write(wxTempFile * self, const wxString * str, const wxMBConv * 
     return self->Write(*str, *conv);
 }
 
-// CLASS: wxThreadHelper
-void wxThreadHelper_delete(wxThreadHelper *self) {
-    delete self;
-}
-void wxThreadHelper_OnDelete(wxThreadHelper * self) {
-    return self->OnDelete();
-}
-void wxThreadHelper_OnKill(wxThreadHelper * self) {
-    return self->OnKill();
-}
-void wxThreadHelper_OnExit(wxThreadHelper * self) {
-    return self->OnExit();
-}
-wxThread * wxThreadHelper_GetThread(const wxThreadHelper * self) {
-    return self->GetThread();
-}
-
 // CLASS: wxTimer
 wxClassInfo *wxTimer_CLASSINFO() {
     return wxCLASSINFO(wxTimer);
@@ -3338,10 +2680,6 @@ bool wxTimer_StartOnce(wxTimer * self, int milliseconds) {
 void wxTimer_Stop(wxTimer * self) {
     return self->Stop();
 }
-// Mix-in(s) to wxTimer
-wxTrackable *wxTimer_AsTrackable(wxTimer* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxTimerEvent
 wxClassInfo *wxTimerEvent_CLASSINFO() {
@@ -3355,11 +2693,6 @@ int wxTimerEvent_GetInterval(const wxTimerEvent * self) {
 }
 wxTimer * wxTimerEvent_GetTimer(const wxTimerEvent * self) {
     return &(self->GetTimer());
-}
-
-// CLASS: wxTrackable
-void wxTrackable_delete(wxTrackable *self) {
-    delete self;
 }
 
 // CLASS: wxUILocale
@@ -3407,9 +2740,6 @@ int wxUILocale_CompareStrings(const wxUILocale * self, const wxString * lhs, con
 }
 wxString *wxUILocale_GetName(const wxUILocale * self) {
     return new wxString(self->GetName());
-}
-wxLocaleIdent *wxUILocale_GetLocaleId(const wxUILocale * self) {
-    return new wxLocaleIdent(self->GetLocaleId());
 }
 wxLayoutDirection wxUILocale_GetLayoutDirection(const wxUILocale * self) {
     return self->GetLayoutDirection();
@@ -3503,47 +2833,6 @@ void wxUniCharRef_delete(wxUniCharRef *self) {
     delete self;
 }
 
-// CLASS: wxVariantData
-void wxVariantData_delete(wxVariantData *self) {
-    delete self;
-}
-wxVariantData *wxVariantData_new() {
-    return new wxVariantData();
-}
-wxVariantData * wxVariantData_Clone(const wxVariantData * self) {
-    return self->Clone();
-}
-void wxVariantData_DecRef(wxVariantData * self) {
-    return self->DecRef();
-}
-bool wxVariantData_Eq(const wxVariantData * self, wxVariantData * data) {
-    return self->Eq(*data);
-}
-bool wxVariantData_GetAny(const wxVariantData * self, wxAny * any) {
-    return self->GetAny(any);
-}
-wxString *wxVariantData_GetType(const wxVariantData * self) {
-    return new wxString(self->GetType());
-}
-wxClassInfo * wxVariantData_GetValueClassInfo(wxVariantData * self) {
-    return self->GetValueClassInfo();
-}
-void wxVariantData_IncRef(wxVariantData * self) {
-    return self->IncRef();
-}
-bool wxVariantData_Read(wxVariantData * self, istream * stream) {
-    return self->Read(*stream);
-}
-bool wxVariantData_Read1(wxVariantData * self, wxString * string) {
-    return self->Read(*string);
-}
-bool wxVariantData_Write(const wxVariantData * self, ostream * stream) {
-    return self->Write(*stream);
-}
-bool wxVariantData_Write1(const wxVariantData * self, wxString * string) {
-    return self->Write(*string);
-}
-
 // CLASS: wxVersionInfo
 void wxVersionInfo_delete(wxVersionInfo *self) {
     delete self;
@@ -3597,11 +2886,6 @@ wxWindowUpdateLocker *wxWindowUpdateLocker_new1(wxWindow * win) {
 }
 void wxWindowUpdateLocker_Lock(wxWindowUpdateLocker * self, wxWindow * win) {
     return self->Lock(win);
-}
-
-// CLASS: wxZipClassFactory
-wxClassInfo *wxZipClassFactory_CLASSINFO() {
-    return wxCLASSINFO(wxZipClassFactory);
 }
 
 // CLASS: wxZipNotifier

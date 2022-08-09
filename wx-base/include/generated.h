@@ -1,6 +1,5 @@
 #pragma once
 #include <wx/wx.h>
-#include <wx/any.h>
 #include <wx/apptrait.h>
 #include <wx/archive.h>
 #include <wx/buffer.h>
@@ -10,31 +9,23 @@
 #include <wx/datetime.h>
 #include <wx/datstrm.h>
 #include <wx/dcps.h>
-#include <wx/dde.h>
 #include <wx/dir.h>
-#include <wx/dynlib.h>
 #include <wx/encconv.h>
 #include <wx/event.h>
 #include <wx/ffile.h>
 #include <wx/file.h>
 #include <wx/filename.h>
 #include <wx/filesys.h>
-#include <wx/fs_mem.h>
 #include <wx/fswatcher.h>
 #include <wx/hash.h>
-#include <wx/hashmap.h>
-#include <wx/hashset.h>
 #include <wx/iconloc.h>
 #include <wx/init.h>
 #include <wx/intl.h>
 #include <wx/ipc.h>
 #include <wx/ipcbase.h>
 #include <wx/log.h>
-#include <wx/memory.h>
 #include <wx/mimetype.h>
-#include <wx/module.h>
 #include <wx/msgout.h>
-#include <wx/msw/registry.h>
 #include <wx/object.h>
 #include <wx/platinfo.h>
 #include <wx/position.h>
@@ -49,15 +40,12 @@
 #include <wx/stopwatch.h>
 #include <wx/stream.h>
 #include <wx/sysopt.h>
-#include <wx/tarstrm.h>
 #include <wx/thread.h>
 #include <wx/timer.h>
 #include <wx/tokenzr.h>
-#include <wx/tracker.h>
 #include <wx/uilocale.h>
 #include <wx/unichar.h>
 #include <wx/uri.h>
-#include <wx/variant.h>
 #include <wx/versioninfo.h>
 #include <wx/volume.h>
 #include <wx/wupdlock.h>
@@ -66,31 +54,9 @@
 typedef wxDateTime::TimeZone TimeZone;
 typedef wxDateTime::Tm       Tm;
 typedef wxDateTime::WeekDay  WeekDay;
+typedef wxFileType::MessageParameters MessageParameters;
 
 extern "C" {
-
-// CLASS: wxAny
-void wxAny_delete(wxAny *self);
-wxAny *wxAny_new();
-wxAny *wxAny_new1(const T * value);
-wxAny *wxAny_new2(const wxAny * any);
-wxAny *wxAny_new3(const wxVariant * variant);
-bool wxAny_CheckType(const wxAny * self);
-bool wxAny_GetAs(const wxAny * self, T * value);
-bool wxAny_GetAs1(const wxAny * self, wxVariant * value);
-const wxAnyValueType * wxAny_GetType(const wxAny * self);
-bool wxAny_HasSameType(const wxAny * self, const wxAny * other);
-bool wxAny_IsNull(const wxAny * self);
-void wxAny_MakeNull(wxAny * self);
-
-// CLASS: wxAnyValueType
-void wxAnyValueType_delete(wxAnyValueType *self);
-wxAnyValueType *wxAnyValueType_new();
-bool wxAnyValueType_CheckType(const wxAnyValueType * self);
-bool wxAnyValueType_ConvertValue(const wxAnyValueType * self, const wxAnyValueBuffer * src, wxAnyValueType * dst_type, wxAnyValueBuffer * dst);
-void wxAnyValueType_CopyBuffer(const wxAnyValueType * self, const wxAnyValueBuffer * src, wxAnyValueBuffer * dst);
-void wxAnyValueType_DeleteValue(const wxAnyValueType * self, wxAnyValueBuffer * buf);
-bool wxAnyValueType_IsSameType(const wxAnyValueType * self, const wxAnyValueType * other_type);
 
 // CLASS: wxAppTraits
 void wxAppTraits_delete(wxAppTraits *self);
@@ -108,21 +74,6 @@ bool wxAppTraits_ShowAssertDialog(wxAppTraits * self, const wxString * msg);
 bool wxAppTraits_SafeMessageBox(wxAppTraits * self, const wxString * text, const wxString * title);
 wxString *wxAppTraits_GetAssertStackTrace(wxAppTraits * self);
 
-// CLASS: wxArchiveClassFactory
-wxClassInfo *wxArchiveClassFactory_CLASSINFO();
-wxMBConv * wxArchiveClassFactory_GetConv(const wxArchiveClassFactory * self);
-void wxArchiveClassFactory_SetConv(wxArchiveClassFactory * self, wxMBConv * conv);
-const wxArchiveClassFactory * wxArchiveClassFactory_GetNext(const wxArchiveClassFactory * self);
-wxString *wxArchiveClassFactory_GetProtocol(const wxArchiveClassFactory * self);
-wxArchiveEntry * wxArchiveClassFactory_NewEntry(const wxArchiveClassFactory * self);
-wxArchiveInputStream * wxArchiveClassFactory_NewStream(const wxArchiveClassFactory * self, wxInputStream * stream);
-wxArchiveOutputStream * wxArchiveClassFactory_NewStream1(const wxArchiveClassFactory * self, wxOutputStream * stream);
-wxArchiveInputStream * wxArchiveClassFactory_NewStream2(const wxArchiveClassFactory * self, wxInputStream * stream);
-wxArchiveOutputStream * wxArchiveClassFactory_NewStream3(const wxArchiveClassFactory * self, wxOutputStream * stream);
-void wxArchiveClassFactory_PushFront(wxArchiveClassFactory * self);
-void wxArchiveClassFactory_Remove(wxArchiveClassFactory * self);
-const wxArchiveClassFactory * wxArchiveClassFactory_GetFirst();
-
 // CLASS: wxArchiveEntry
 wxClassInfo *wxArchiveEntry_CLASSINFO();
 wxArchiveEntry * wxArchiveEntry_Clone(const wxArchiveEntry * self);
@@ -135,11 +86,6 @@ bool wxArchiveEntry_IsReadOnly(const wxArchiveEntry * self);
 void wxArchiveEntry_SetIsReadOnly(wxArchiveEntry * self, bool is_read_only);
 void wxArchiveEntry_SetNotifier(wxArchiveEntry * self, wxArchiveNotifier * notifier);
 void wxArchiveEntry_UnsetNotifier(wxArchiveEntry * self);
-
-// CLASS: wxArchiveIterator
-void wxArchiveIterator_delete(wxArchiveIterator *self);
-wxArchiveIterator *wxArchiveIterator_new();
-wxArchiveIterator *wxArchiveIterator_new1(Arc * arc);
 
 // CLASS: wxArchiveNotifier
 void wxArchiveNotifier_delete(wxArchiveNotifier *self);
@@ -252,39 +198,6 @@ void wxCriticalSection_Leave(wxCriticalSection * self);
 // CLASS: wxCriticalSectionLocker
 void wxCriticalSectionLocker_delete(wxCriticalSectionLocker *self);
 wxCriticalSectionLocker *wxCriticalSectionLocker_new(wxCriticalSection * criticalsection);
-
-// CLASS: wxDDEClient
-wxClassInfo *wxDDEClient_CLASSINFO();
-wxDDEClient *wxDDEClient_new();
-wxConnectionBase * wxDDEClient_MakeConnection(wxDDEClient * self, const wxString * host, const wxString * service, const wxString * topic);
-wxConnectionBase * wxDDEClient_OnMakeConnection(wxDDEClient * self);
-bool wxDDEClient_ValidHost(wxDDEClient * self, const wxString * host);
-
-// CLASS: wxDDEConnection
-wxClassInfo *wxDDEConnection_CLASSINFO();
-wxDDEConnection *wxDDEConnection_new();
-wxDDEConnection *wxDDEConnection_new1(void * buffer, size_t size);
-bool wxDDEConnection_Advise1(wxDDEConnection * self, const wxString * item, const char * data);
-bool wxDDEConnection_Advise2(wxDDEConnection * self, const wxString * item, const wchar_t * data);
-bool wxDDEConnection_Advise3(wxDDEConnection * self, const wxString * item, const wxString data);
-bool wxDDEConnection_Disconnect(wxDDEConnection * self);
-bool wxDDEConnection_Execute1(wxDDEConnection * self, const char * data);
-bool wxDDEConnection_Execute2(wxDDEConnection * self, const wchar_t * data);
-bool wxDDEConnection_Execute3(wxDDEConnection * self, const wxString data);
-bool wxDDEConnection_OnDisconnect(wxDDEConnection * self);
-bool wxDDEConnection_OnStartAdvise(wxDDEConnection * self, const wxString * topic, const wxString * item);
-bool wxDDEConnection_OnStopAdvise(wxDDEConnection * self, const wxString * topic, const wxString * item);
-bool wxDDEConnection_Poke1(wxDDEConnection * self, const wxString * item, const char * data);
-bool wxDDEConnection_Poke2(wxDDEConnection * self, const wxString * item, const wchar_t * data);
-bool wxDDEConnection_Poke3(wxDDEConnection * self, const wxString * item, const wxString data);
-bool wxDDEConnection_StartAdvise(wxDDEConnection * self, const wxString * item);
-bool wxDDEConnection_StopAdvise(wxDDEConnection * self, const wxString * item);
-
-// CLASS: wxDDEServer
-void wxDDEServer_delete(wxDDEServer *self);
-wxDDEServer *wxDDEServer_new();
-bool wxDDEServer_Create(wxDDEServer * self, const wxString * service);
-wxConnectionBase * wxDDEServer_OnAcceptConnection(wxDDEServer * self, const wxString * topic);
 
 // CLASS: wxDataInputStream
 void wxDataInputStream_delete(wxDataInputStream *self);
@@ -423,20 +336,6 @@ void wxDateTimeHolidayAuthority_delete(wxDateTimeHolidayAuthority *self);
 // CLASS: wxDateTimeWorkDays
 void wxDateTimeWorkDays_delete(wxDateTimeWorkDays *self);
 
-// CLASS: wxDebugContext
-void wxDebugContext_delete(wxDebugContext *self);
-int wxDebugContext_Check(bool check_all);
-bool wxDebugContext_Dump();
-bool wxDebugContext_GetCheckPrevious();
-bool wxDebugContext_GetDebugMode();
-int wxDebugContext_GetLevel();
-bool wxDebugContext_PrintClasses();
-bool wxDebugContext_PrintStatistics(bool detailed);
-void wxDebugContext_SetCheckPrevious(bool check);
-void wxDebugContext_SetCheckpoint(bool all);
-void wxDebugContext_SetDebugMode(bool debug);
-void wxDebugContext_SetLevel(int level);
-
 // CLASS: wxDir
 void wxDir_delete(wxDir *self);
 wxDir *wxDir_new();
@@ -459,25 +358,6 @@ bool wxDir_Remove(const wxString * dir, int flags);
 
 // CLASS: wxDirTraverser
 void wxDirTraverser_delete(wxDirTraverser *self);
-
-// CLASS: wxDynamicLibrary
-void wxDynamicLibrary_delete(wxDynamicLibrary *self);
-wxDynamicLibrary *wxDynamicLibrary_new();
-wxDynamicLibrary *wxDynamicLibrary_new1(const wxString * name, int flags);
-void * wxDynamicLibrary_GetSymbol(const wxDynamicLibrary * self, const wxString * name, bool * success);
-void * wxDynamicLibrary_GetSymbolAorW(const wxDynamicLibrary * self, const wxString * name);
-bool wxDynamicLibrary_HasSymbol(const wxDynamicLibrary * self, const wxString * name);
-bool wxDynamicLibrary_IsLoaded(const wxDynamicLibrary * self);
-bool wxDynamicLibrary_Load(wxDynamicLibrary * self, const wxString * name, int flags);
-void wxDynamicLibrary_Unload(wxDynamicLibrary * self);
-void * wxDynamicLibrary_GetModuleFromAddress(const void * addr, wxString * path);
-
-// CLASS: wxDynamicLibraryDetails
-void wxDynamicLibraryDetails_delete(wxDynamicLibraryDetails *self);
-bool wxDynamicLibraryDetails_GetAddress(const wxDynamicLibraryDetails * self, void * addr, size_t * len);
-wxString *wxDynamicLibraryDetails_GetName(const wxDynamicLibraryDetails * self);
-wxString *wxDynamicLibraryDetails_GetPath(const wxDynamicLibraryDetails * self);
-wxString *wxDynamicLibraryDetails_GetVersion(const wxDynamicLibraryDetails * self);
 
 // CLASS: wxEncodingConverter
 wxClassInfo *wxEncodingConverter_CLASSINFO();
@@ -529,8 +409,6 @@ bool wxEvtHandler_IsUnlinked(const wxEvtHandler * self);
 void wxEvtHandler_AddFilter(wxEventFilter * filter);
 void wxEvtHandler_RemoveFilter(wxEventFilter * filter);
 wxEvtHandler *wxEvtHandler_new();
-// Mix-in(s) to wxEvtHandler
-wxTrackable *wxEvtHandler_AsTrackable(wxEvtHandler* obj);
 
 // CLASS: wxFFile
 void wxFFile_delete(wxFFile *self);
@@ -687,15 +565,6 @@ wxString *wxFileSystem_FileNameToURL(const wxFileName * filename);
 bool wxFileSystem_HasHandlerForPath(const wxString * location);
 wxFileName *wxFileSystem_URLToFileName(const wxString * url);
 
-// CLASS: wxFileSystemHandler
-wxClassInfo *wxFileSystemHandler_CLASSINFO();
-wxFileSystemHandler *wxFileSystemHandler_new();
-bool wxFileSystemHandler_CanOpen(wxFileSystemHandler * self, const wxString * location);
-wxString *wxFileSystemHandler_FindFirst(wxFileSystemHandler * self, const wxString * wildcard, int flags);
-wxString *wxFileSystemHandler_FindNext(wxFileSystemHandler * self);
-wxFSFile * wxFileSystemHandler_OpenFile(wxFileSystemHandler * self, wxFileSystem * fs, const wxString * location);
-wxString *wxFileSystemHandler_GetMimeTypeFromExt(const wxString * location);
-
 // CLASS: wxFileSystemWatcher
 wxClassInfo *wxFileSystemWatcher_CLASSINFO();
 wxFileSystemWatcher *wxFileSystemWatcher_new();
@@ -707,8 +576,6 @@ bool wxFileSystemWatcher_RemoveAll(wxFileSystemWatcher * self);
 int wxFileSystemWatcher_GetWatchedPathsCount(const wxFileSystemWatcher * self);
 int wxFileSystemWatcher_GetWatchedPaths(const wxFileSystemWatcher * self, wxArrayString * paths);
 void wxFileSystemWatcher_SetOwner(wxFileSystemWatcher * self, wxEvtHandler * handler);
-// Mix-in(s) to wxFileSystemWatcher
-wxTrackable *wxFileSystemWatcher_AsTrackable(wxFileSystemWatcher* obj);
 
 // CLASS: wxFileSystemWatcherEvent
 wxClassInfo *wxFileSystemWatcherEvent_CLASSINFO();
@@ -748,18 +615,6 @@ wxString *wxFilterClassFactory_PopExtension(const wxFilterClassFactory * self, c
 void wxFilterClassFactory_PushFront(wxFilterClassFactory * self);
 void wxFilterClassFactory_Remove(wxFilterClassFactory * self);
 const wxFilterClassFactory * wxFilterClassFactory_GetFirst();
-
-// CLASS: wxHashMap
-void wxHashMap_delete(wxHashMap *self);
-wxHashMap *wxHashMap_new1(const wxHashMap * map);
-void wxHashMap_clear(wxHashMap * self);
-bool wxHashMap_empty(const wxHashMap * self);
-
-// CLASS: wxHashSet
-void wxHashSet_delete(wxHashSet *self);
-wxHashSet *wxHashSet_new1(const wxHashSet * set);
-void wxHashSet_clear(wxHashSet * self);
-bool wxHashSet_empty(const wxHashSet * self);
 
 // CLASS: wxHashTable
 wxClassInfo *wxHashTable_CLASSINFO();
@@ -901,15 +756,6 @@ void wxMemoryBuffer_SetDataLen(wxMemoryBuffer * self, size_t size);
 void wxMemoryBuffer_UngetAppendBuf(wxMemoryBuffer * self, size_t size_used);
 void wxMemoryBuffer_UngetWriteBuf(wxMemoryBuffer * self, size_t size_used);
 
-// CLASS: wxMemoryFSHandler
-wxClassInfo *wxMemoryFSHandler_CLASSINFO();
-wxMemoryFSHandler *wxMemoryFSHandler_new();
-void wxMemoryFSHandler_AddFile2(const wxString * filename, const wxString * textdata);
-void wxMemoryFSHandler_AddFile3(const wxString * filename, const void * binarydata, size_t size);
-void wxMemoryFSHandler_AddFileWithMimeType(const wxString * filename, const wxString * textdata, const wxString * mimetype);
-void wxMemoryFSHandler_AddFileWithMimeType1(const wxString * filename, const void * binarydata, size_t size, const wxString * mimetype);
-void wxMemoryFSHandler_RemoveFile(const wxString * filename);
-
 // CLASS: wxMessageOutput
 void wxMessageOutput_delete(wxMessageOutput *self);
 wxMessageOutput * wxMessageOutput_Get();
@@ -938,12 +784,6 @@ bool wxMimeTypesManager_Unassociate(wxMimeTypesManager * self, wxFileType * ft);
 size_t wxMimeTypesManager_EnumAllFileTypes(wxMimeTypesManager * self, wxArrayString * mimetypes);
 bool wxMimeTypesManager_IsOfType(const wxString * mime_type, const wxString * wildcard);
 
-// CLASS: wxModule
-wxClassInfo *wxModule_CLASSINFO();
-wxModule *wxModule_new();
-void wxModule_OnExit(wxModule * self);
-bool wxModule_OnInit(wxModule * self);
-
 // CLASS: wxMutex
 void wxMutex_delete(wxMutex *self);
 
@@ -964,9 +804,6 @@ void wxObject_Ref(wxObject * self, const wxObject * clone);
 void wxObject_SetRefData(wxObject * self, wxObjectRefData * data);
 void wxObject_UnRef(wxObject * self);
 void wxObject_UnShare(wxObject * self);
-
-// CLASS: wxObjectRefData
-void wxObjectRefData_delete(wxObjectRefData *self);
 
 // CLASS: wxPlatformInfo
 void wxPlatformInfo_delete(wxPlatformInfo *self);
@@ -1016,12 +853,6 @@ wxClassInfo *wxPostScriptDC_CLASSINFO();
 wxPostScriptDC *wxPostScriptDC_new();
 wxPostScriptDC *wxPostScriptDC_new1(const wxPrintData * print_data);
 
-// CLASS: wxPowerEvent
-wxClassInfo *wxPowerEvent_CLASSINFO();
-wxPowerEvent *wxPowerEvent_new();
-void wxPowerEvent_Veto(wxPowerEvent * self);
-bool wxPowerEvent_IsVetoed(const wxPowerEvent * self);
-
 // CLASS: wxPowerResource
 void wxPowerResource_delete(wxPowerResource *self);
 
@@ -1047,8 +878,6 @@ void wxProcess_OnTerminate(wxProcess * self, int pid, int status);
 void wxProcess_Redirect(wxProcess * self);
 bool wxProcess_Exists(int pid);
 wxProcess * wxProcess_Open(const wxString * cmd, int flags);
-// Mix-in(s) to wxProcess
-wxTrackable *wxProcess_AsTrackable(wxProcess* obj);
 
 // CLASS: wxProcessEvent
 wxClassInfo *wxProcessEvent_CLASSINFO();
@@ -1063,13 +892,6 @@ bool wxRecursionGuard_IsInside(const wxRecursionGuard * self);
 
 // CLASS: wxRecursionGuardFlag
 void wxRecursionGuardFlag_delete(wxRecursionGuardFlag *self);
-
-// CLASS: wxRefCounter
-void wxRefCounter_delete(wxRefCounter *self);
-wxRefCounter *wxRefCounter_new();
-void wxRefCounter_DecRef(wxRefCounter * self);
-int wxRefCounter_GetRefCount(const wxRefCounter * self);
-void wxRefCounter_IncRef(wxRefCounter * self);
 
 // CLASS: wxRegEx
 void wxRegEx_delete(wxRegEx *self);
@@ -1089,48 +911,6 @@ int wxRegEx_ReplaceFirst(const wxRegEx * self, wxString * text, const wxString *
 wxString *wxRegEx_QuoteMeta(const wxString * str);
 wxString *wxRegEx_ConvertFromBasic(const wxString * bre);
 wxVersionInfo *wxRegEx_GetLibraryVersionInfo();
-
-// CLASS: wxRegKey
-void wxRegKey_delete(wxRegKey *self);
-wxRegKey *wxRegKey_new3(const wxRegKey * key_parent, const wxString * str_key);
-void wxRegKey_Close(wxRegKey * self);
-bool wxRegKey_Copy(wxRegKey * self, const wxString * sz_new_name);
-bool wxRegKey_Copy1(wxRegKey * self, wxRegKey * key_dst);
-bool wxRegKey_CopyValue(wxRegKey * self, const wxString * sz_value, wxRegKey * key_dst, const wxString * sz_new_name);
-bool wxRegKey_Create(wxRegKey * self, bool b_ok_if_exists);
-void wxRegKey_DeleteKey(wxRegKey * self, const wxString * sz_key);
-void wxRegKey_DeleteSelf(wxRegKey * self);
-void wxRegKey_DeleteValue(wxRegKey * self, const wxString * sz_key);
-bool wxRegKey_Exists(const wxRegKey * self);
-bool wxRegKey_Export(const wxRegKey * self, const wxString * filename);
-bool wxRegKey_Export1(const wxRegKey * self, wxOutputStream * ostr);
-bool wxRegKey_GetFirstKey(wxRegKey * self, wxString * str_key_name, long * l_index);
-bool wxRegKey_GetFirstValue(wxRegKey * self, wxString * str_value_name, long * l_index);
-bool wxRegKey_GetKeyInfo(const wxRegKey * self, size_t * pn_sub_keys, size_t * pn_max_key_len, size_t * pn_values, size_t * pn_max_value_len);
-wxString *wxRegKey_GetName(const wxRegKey * self, bool b_short_prefix);
-bool wxRegKey_GetNextKey(const wxRegKey * self, wxString * str_key_name, long * l_index);
-bool wxRegKey_GetNextValue(const wxRegKey * self, wxString * str_value_name, long * l_index);
-bool wxRegKey_HasSubKey(const wxRegKey * self, const wxString * sz_key);
-bool wxRegKey_HasSubkeys(const wxRegKey * self);
-bool wxRegKey_HasValue(const wxRegKey * self, const wxString * sz_value);
-bool wxRegKey_HasValues(const wxRegKey * self);
-bool wxRegKey_IsEmpty(const wxRegKey * self);
-bool wxRegKey_IsNumericValue(const wxRegKey * self, const wxString * sz_value);
-bool wxRegKey_IsOpened(const wxRegKey * self);
-wxString *wxRegKey_QueryDefaultValue(const wxRegKey * self);
-bool wxRegKey_QueryRawValue(const wxRegKey * self, const wxString * sz_value, wxString * str_value);
-bool wxRegKey_QueryValue(const wxRegKey * self, const wxString * sz_value, wxString * str_value, bool raw);
-bool wxRegKey_QueryValue1(const wxRegKey * self, const wxString * sz_value, long * pl_value);
-bool wxRegKey_QueryValue64(const wxRegKey * self, const wxString * sz_value, wxLongLong_t * pl_value);
-bool wxRegKey_QueryValue2(const wxRegKey * self, const wxString * sz_value, wxMemoryBuffer * buf);
-bool wxRegKey_Rename(wxRegKey * self, const wxString * sz_new_name);
-bool wxRegKey_RenameValue(wxRegKey * self, const wxString * sz_value_old, const wxString * sz_value_new);
-void wxRegKey_ReserveMemoryForName(wxRegKey * self, size_t bytes);
-void wxRegKey_SetName(wxRegKey * self, const wxString * str_key);
-void wxRegKey_SetName2(wxRegKey * self, const wxRegKey * key_parent, const wxString * str_key);
-bool wxRegKey_SetValue(wxRegKey * self, const wxString * sz_value, long l_value);
-bool wxRegKey_SetValue1(wxRegKey * self, const wxString * sz_value, const wxString * str_value);
-bool wxRegKey_SetValue2(wxRegKey * self, const wxString * sz_value, const wxMemoryBuffer * buf);
 
 // CLASS: wxSecretStore
 void wxSecretStore_delete(wxSecretStore *self);
@@ -1191,12 +971,6 @@ bool wxStackFrame_GetParam(const wxStackFrame * self, size_t n, wxString * type_
 size_t wxStackFrame_GetParamCount(const wxStackFrame * self);
 bool wxStackFrame_HasSourceLocation(const wxStackFrame * self);
 
-// CLASS: wxStackWalker
-void wxStackWalker_delete(wxStackWalker *self);
-wxStackWalker *wxStackWalker_new(const char * argv0);
-void wxStackWalker_Walk(wxStackWalker * self, size_t skip, size_t max_depth);
-void wxStackWalker_WalkFromException(wxStackWalker * self, size_t max_depth);
-
 // CLASS: wxStandardPaths
 void wxStandardPaths_delete(wxStandardPaths *self);
 #ifdef __WXMSW__
@@ -1238,33 +1012,6 @@ void wxStopWatch_Resume(wxStopWatch * self);
 void wxStopWatch_Start(wxStopWatch * self, long milliseconds);
 long wxStopWatch_Time(const wxStopWatch * self);
 
-// CLASS: wxStreamBuffer
-void wxStreamBuffer_delete(wxStreamBuffer *self);
-wxStreamBuffer *wxStreamBuffer_new1(size_t bufsize, wxInputStream * stream);
-wxStreamBuffer *wxStreamBuffer_new2(size_t bufsize, wxOutputStream * stream);
-wxStreamBuffer *wxStreamBuffer_new4(const wxStreamBuffer * buffer);
-bool wxStreamBuffer_FillBuffer(wxStreamBuffer * self);
-void wxStreamBuffer_Fixed(wxStreamBuffer * self, bool fixed);
-bool wxStreamBuffer_FlushBuffer(wxStreamBuffer * self);
-void wxStreamBuffer_Flushable(wxStreamBuffer * self, bool flushable);
-void * wxStreamBuffer_GetBufferEnd(const wxStreamBuffer * self);
-void * wxStreamBuffer_GetBufferPos(const wxStreamBuffer * self);
-size_t wxStreamBuffer_GetBufferSize(const wxStreamBuffer * self);
-void * wxStreamBuffer_GetBufferStart(const wxStreamBuffer * self);
-size_t wxStreamBuffer_GetDataLeft(wxStreamBuffer * self);
-size_t wxStreamBuffer_GetIntPosition(const wxStreamBuffer * self);
-size_t wxStreamBuffer_GetLastAccess(const wxStreamBuffer * self);
-size_t wxStreamBuffer_Read(wxStreamBuffer * self, void * buffer, size_t size);
-size_t wxStreamBuffer_Read1(wxStreamBuffer * self, wxStreamBuffer * buffer);
-void wxStreamBuffer_ResetBuffer(wxStreamBuffer * self);
-void wxStreamBuffer_SetBufferIO(wxStreamBuffer * self, void * start, void * end, bool take_ownership);
-void wxStreamBuffer_SetBufferIO1(wxStreamBuffer * self, size_t bufsize);
-void wxStreamBuffer_SetIntPosition(wxStreamBuffer * self, size_t pos);
-wxStreamBase * wxStreamBuffer_Stream(wxStreamBuffer * self);
-void wxStreamBuffer_Truncate(wxStreamBuffer * self);
-size_t wxStreamBuffer_Write(wxStreamBuffer * self, const void * buffer, size_t size);
-size_t wxStreamBuffer_Write1(wxStreamBuffer * self, wxStreamBuffer * buffer);
-
 // CLASS: wxStringClientData
 void wxStringClientData_delete(wxStringClientData *self);
 wxStringClientData *wxStringClientData_new();
@@ -1291,9 +1038,6 @@ bool wxSystemOptions_IsFalse(const wxString * name);
 void wxSystemOptions_SetOption(const wxString * name, const wxString * value);
 void wxSystemOptions_SetOption1(const wxString * name, int value);
 
-// CLASS: wxTarClassFactory
-wxClassInfo *wxTarClassFactory_CLASSINFO();
-
 // CLASS: wxTempFFile
 void wxTempFFile_delete(wxTempFFile *self);
 wxTempFFile *wxTempFFile_new();
@@ -1316,13 +1060,6 @@ bool wxTempFile_IsOpened(const wxTempFile * self);
 bool wxTempFile_Open(wxTempFile * self, const wxString * str_name);
 bool wxTempFile_Write(wxTempFile * self, const wxString * str, const wxMBConv * conv);
 
-// CLASS: wxThreadHelper
-void wxThreadHelper_delete(wxThreadHelper *self);
-void wxThreadHelper_OnDelete(wxThreadHelper * self);
-void wxThreadHelper_OnKill(wxThreadHelper * self);
-void wxThreadHelper_OnExit(wxThreadHelper * self);
-wxThread * wxThreadHelper_GetThread(const wxThreadHelper * self);
-
 // CLASS: wxTimer
 wxClassInfo *wxTimer_CLASSINFO();
 wxTimer *wxTimer_new();
@@ -1337,17 +1074,12 @@ void wxTimer_SetOwner(wxTimer * self, wxEvtHandler * owner, int id);
 bool wxTimer_Start(wxTimer * self, int milliseconds, bool one_shot);
 bool wxTimer_StartOnce(wxTimer * self, int milliseconds);
 void wxTimer_Stop(wxTimer * self);
-// Mix-in(s) to wxTimer
-wxTrackable *wxTimer_AsTrackable(wxTimer* obj);
 
 // CLASS: wxTimerEvent
 wxClassInfo *wxTimerEvent_CLASSINFO();
 wxTimerEvent *wxTimerEvent_new(wxTimer * timer);
 int wxTimerEvent_GetInterval(const wxTimerEvent * self);
 wxTimer * wxTimerEvent_GetTimer(const wxTimerEvent * self);
-
-// CLASS: wxTrackable
-void wxTrackable_delete(wxTrackable *self);
 
 // CLASS: wxUILocale
 void wxUILocale_delete(wxUILocale *self);
@@ -1365,7 +1097,6 @@ int wxUILocale_GetSystemLocale();
 wxUILocale *wxUILocale_new(const wxLocaleIdent * locale_id);
 int wxUILocale_CompareStrings(const wxUILocale * self, const wxString * lhs, const wxString * rhs, int flags);
 wxString *wxUILocale_GetName(const wxUILocale * self);
-wxLocaleIdent *wxUILocale_GetLocaleId(const wxUILocale * self);
 wxLayoutDirection wxUILocale_GetLayoutDirection(const wxUILocale * self);
 bool wxUILocale_IsSupported(const wxUILocale * self);
 
@@ -1400,21 +1131,6 @@ wxString *wxURI_Unescape(const wxString * uri);
 // CLASS: wxUniCharRef
 void wxUniCharRef_delete(wxUniCharRef *self);
 
-// CLASS: wxVariantData
-void wxVariantData_delete(wxVariantData *self);
-wxVariantData *wxVariantData_new();
-wxVariantData * wxVariantData_Clone(const wxVariantData * self);
-void wxVariantData_DecRef(wxVariantData * self);
-bool wxVariantData_Eq(const wxVariantData * self, wxVariantData * data);
-bool wxVariantData_GetAny(const wxVariantData * self, wxAny * any);
-wxString *wxVariantData_GetType(const wxVariantData * self);
-wxClassInfo * wxVariantData_GetValueClassInfo(wxVariantData * self);
-void wxVariantData_IncRef(wxVariantData * self);
-bool wxVariantData_Read(wxVariantData * self, istream * stream);
-bool wxVariantData_Read1(wxVariantData * self, wxString * string);
-bool wxVariantData_Write(const wxVariantData * self, ostream * stream);
-bool wxVariantData_Write1(const wxVariantData * self, wxString * string);
-
 // CLASS: wxVersionInfo
 void wxVersionInfo_delete(wxVersionInfo *self);
 wxVersionInfo *wxVersionInfo_new(const wxString * name, int major, int minor, int micro, int revision, const wxString * description, const wxString * copyright);
@@ -1435,9 +1151,6 @@ void wxWindowUpdateLocker_delete(wxWindowUpdateLocker *self);
 wxWindowUpdateLocker *wxWindowUpdateLocker_new();
 wxWindowUpdateLocker *wxWindowUpdateLocker_new1(wxWindow * win);
 void wxWindowUpdateLocker_Lock(wxWindowUpdateLocker * self, wxWindow * win);
-
-// CLASS: wxZipClassFactory
-wxClassInfo *wxZipClassFactory_CLASSINFO();
 
 // CLASS: wxZipNotifier
 void wxZipNotifier_delete(wxZipNotifier *self);

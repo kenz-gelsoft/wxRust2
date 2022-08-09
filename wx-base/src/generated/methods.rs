@@ -21,108 +21,6 @@ pub trait WxRustMethods {
     }
 }
 
-// wxAny
-pub trait AnyMethods: WxRustMethods {
-    // BLOCKED: fn operator=()
-    // BLOCKED: fn operator=1()
-    // BLOCKED: fn operator=2()
-    // NOT_SUPPORTED: fn operator==()
-    // NOT_SUPPORTED: fn operator==1()
-    // NOT_SUPPORTED: fn operator==2()
-    // NOT_SUPPORTED: fn operator==3()
-    // NOT_SUPPORTED: fn operator==4()
-    // NOT_SUPPORTED: fn operator==5()
-    // NOT_SUPPORTED: fn operator==6()
-    // BLOCKED: fn operator==7()
-    // NOT_SUPPORTED: fn operator==8()
-    // NOT_SUPPORTED: fn operator==9()
-    // NOT_SUPPORTED: fn operator==10()
-    // BLOCKED: fn operator==11()
-    // BLOCKED: fn operator==12()
-    // BLOCKED: fn operator==13()
-    // BLOCKED: fn operator==14()
-    // BLOCKED: fn operator==15()
-    // NOT_SUPPORTED: fn operator!=()
-    // NOT_SUPPORTED: fn operator!=1()
-    // NOT_SUPPORTED: fn operator!=2()
-    // NOT_SUPPORTED: fn operator!=3()
-    // NOT_SUPPORTED: fn operator!=4()
-    // NOT_SUPPORTED: fn operator!=5()
-    // NOT_SUPPORTED: fn operator!=6()
-    // BLOCKED: fn operator!=7()
-    // NOT_SUPPORTED: fn operator!=8()
-    // NOT_SUPPORTED: fn operator!=9()
-    // NOT_SUPPORTED: fn operator!=10()
-    // BLOCKED: fn operator!=11()
-    // BLOCKED: fn operator!=12()
-    // BLOCKED: fn operator!=13()
-    // BLOCKED: fn operator!=14()
-    // BLOCKED: fn operator!=15()
-    // DTOR: fn ~wxAny()
-    // NOT_SUPPORTED: fn As()
-    fn check_type(&self) -> bool {
-        unsafe { ffi::wxAny_CheckType(self.as_ptr()) }
-    }
-    fn get_as_t(&self, value: *mut c_void) -> bool {
-        unsafe { ffi::wxAny_GetAs(self.as_ptr(), value) }
-    }
-    fn get_as_variant(&self, value: *mut c_void) -> bool {
-        unsafe { ffi::wxAny_GetAs1(self.as_ptr(), value) }
-    }
-    fn get_type(&self) -> Option<AnyValueTypeIsOwned<false>> {
-        unsafe { AnyValueType::option_from(ffi::wxAny_GetType(self.as_ptr())) }
-    }
-    fn has_same_type<A: AnyMethods>(&self, other: &A) -> bool {
-        unsafe {
-            let other = other.as_ptr();
-            ffi::wxAny_HasSameType(self.as_ptr(), other)
-        }
-    }
-    fn is_null(&self) -> bool {
-        unsafe { ffi::wxAny_IsNull(self.as_ptr()) }
-    }
-    fn make_null(&self) {
-        unsafe { ffi::wxAny_MakeNull(self.as_ptr()) }
-    }
-}
-
-// wxAnyValueType
-pub trait AnyValueTypeMethods: WxRustMethods {
-    // DTOR: fn ~wxAnyValueType()
-    fn check_type(&self) -> bool {
-        unsafe { ffi::wxAnyValueType_CheckType(self.as_ptr()) }
-    }
-    fn convert_value<A: AnyValueTypeMethods>(
-        &self,
-        src: *const c_void,
-        dst_type: Option<&A>,
-        dst: *mut c_void,
-    ) -> bool {
-        unsafe {
-            let dst_type = match dst_type {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxAnyValueType_ConvertValue(self.as_ptr(), src, dst_type, dst)
-        }
-    }
-    fn copy_buffer(&self, src: *const c_void, dst: *mut c_void) {
-        unsafe { ffi::wxAnyValueType_CopyBuffer(self.as_ptr(), src, dst) }
-    }
-    fn delete_value(&self, buf: *mut c_void) {
-        unsafe { ffi::wxAnyValueType_DeleteValue(self.as_ptr(), buf) }
-    }
-    fn is_same_type<A: AnyValueTypeMethods>(&self, other_type: Option<&A>) -> bool {
-        unsafe {
-            let other_type = match other_type {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxAnyValueType_IsSameType(self.as_ptr(), other_type)
-        }
-    }
-}
-
 // wxAppTraits
 pub trait AppTraitsMethods: WxRustMethods {
     fn create_config(&self) -> *mut c_void {
@@ -177,52 +75,6 @@ pub trait AppTraitsMethods: WxRustMethods {
     }
 }
 
-// wxArchiveClassFactory
-pub trait ArchiveClassFactoryMethods: ObjectMethods {
-    // NOT_SUPPORTED: fn CanHandle()
-    fn get_conv(&self) -> *mut c_void {
-        unsafe { ffi::wxArchiveClassFactory_GetConv(self.as_ptr()) }
-    }
-    fn set_conv(&self, conv: *mut c_void) {
-        unsafe { ffi::wxArchiveClassFactory_SetConv(self.as_ptr(), conv) }
-    }
-    fn get_next(&self) -> Option<ArchiveClassFactoryIsOwned<false>> {
-        unsafe {
-            ArchiveClassFactory::option_from(ffi::wxArchiveClassFactory_GetNext(self.as_ptr()))
-        }
-    }
-    // NOT_SUPPORTED: fn GetInternalName()
-    fn get_protocol(&self) -> String {
-        unsafe { WxString::from_ptr(ffi::wxArchiveClassFactory_GetProtocol(self.as_ptr())).into() }
-    }
-    // NOT_SUPPORTED: fn GetProtocols()
-    fn new_entry(&self) -> Option<ArchiveEntryIsOwned<false>> {
-        unsafe { ArchiveEntry::option_from(ffi::wxArchiveClassFactory_NewEntry(self.as_ptr())) }
-    }
-    fn new_stream_inputstream(&self, stream: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxArchiveClassFactory_NewStream(self.as_ptr(), stream) }
-    }
-    fn new_stream_outputstream(&self, stream: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxArchiveClassFactory_NewStream1(self.as_ptr(), stream) }
-    }
-    fn new_stream_inputstream(&self, stream: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxArchiveClassFactory_NewStream2(self.as_ptr(), stream) }
-    }
-    fn new_stream_outputstream(&self, stream: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxArchiveClassFactory_NewStream3(self.as_ptr(), stream) }
-    }
-    fn push_front(&self) {
-        unsafe { ffi::wxArchiveClassFactory_PushFront(self.as_ptr()) }
-    }
-    fn remove(&self) {
-        unsafe { ffi::wxArchiveClassFactory_Remove(self.as_ptr()) }
-    }
-    // NOT_SUPPORTED: fn Find()
-    fn get_first() -> Option<ArchiveClassFactoryIsOwned<false>> {
-        unsafe { ArchiveClassFactory::option_from(ffi::wxArchiveClassFactory_GetFirst()) }
-    }
-}
-
 // wxArchiveEntry
 pub trait ArchiveEntryMethods: ObjectMethods {
     fn clone(&self) -> Option<ArchiveEntryIsOwned<false>> {
@@ -267,13 +119,6 @@ pub trait ArchiveEntryMethods: ObjectMethods {
     fn unset_notifier(&self) {
         unsafe { ffi::wxArchiveEntry_UnsetNotifier(self.as_ptr()) }
     }
-}
-
-// wxArchiveIterator
-pub trait ArchiveIteratorMethods: WxRustMethods {
-    // NOT_SUPPORTED: fn operator*()
-    // BLOCKED: fn operator++()
-    // BLOCKED: fn operator++1()
 }
 
 // wxArchiveNotifier
@@ -677,160 +522,6 @@ pub trait CriticalSectionMethods: WxRustMethods {
 // wxCriticalSectionLocker
 pub trait CriticalSectionLockerMethods: WxRustMethods {
     // DTOR: fn ~wxCriticalSectionLocker()
-}
-
-// wxDDEClient
-pub trait DDEClientMethods: ObjectMethods {
-    fn make_connection(
-        &self,
-        host: &str,
-        service: &str,
-        topic: &str,
-    ) -> Option<ConnectionBaseIsOwned<false>> {
-        unsafe {
-            let host = WxString::from(host);
-            let host = host.as_ptr();
-            let service = WxString::from(service);
-            let service = service.as_ptr();
-            let topic = WxString::from(topic);
-            let topic = topic.as_ptr();
-            ConnectionBase::option_from(ffi::wxDDEClient_MakeConnection(
-                self.as_ptr(),
-                host,
-                service,
-                topic,
-            ))
-        }
-    }
-    fn on_make_connection(&self) -> Option<ConnectionBaseIsOwned<false>> {
-        unsafe { ConnectionBase::option_from(ffi::wxDDEClient_OnMakeConnection(self.as_ptr())) }
-    }
-    fn valid_host(&self, host: &str) -> bool {
-        unsafe {
-            let host = WxString::from(host);
-            let host = host.as_ptr();
-            ffi::wxDDEClient_ValidHost(self.as_ptr(), host)
-        }
-    }
-}
-
-// wxDDEConnection
-pub trait DDEConnectionMethods: ConnectionBaseMethods {
-    // NOT_SUPPORTED: fn Advise()
-    fn advise_char(&self, item: &str, data: *const c_void) -> bool {
-        unsafe {
-            let item = WxString::from(item);
-            let item = item.as_ptr();
-            ffi::wxDDEConnection_Advise1(self.as_ptr(), item, data)
-        }
-    }
-    fn advise_wchar_t(&self, item: &str, data: *const c_void) -> bool {
-        unsafe {
-            let item = WxString::from(item);
-            let item = item.as_ptr();
-            ffi::wxDDEConnection_Advise2(self.as_ptr(), item, data)
-        }
-    }
-    fn advise_str(&self, item: &str, data: ffi::wxString) -> bool {
-        unsafe {
-            let item = WxString::from(item);
-            let item = item.as_ptr();
-            ffi::wxDDEConnection_Advise3(self.as_ptr(), item, data)
-        }
-    }
-    fn disconnect(&self) -> bool {
-        unsafe { ffi::wxDDEConnection_Disconnect(self.as_ptr()) }
-    }
-    // NOT_SUPPORTED: fn Execute()
-    fn execute_char(&self, data: *const c_void) -> bool {
-        unsafe { ffi::wxDDEConnection_Execute1(self.as_ptr(), data) }
-    }
-    fn execute_wchar_t(&self, data: *const c_void) -> bool {
-        unsafe { ffi::wxDDEConnection_Execute2(self.as_ptr(), data) }
-    }
-    fn execute_str(&self, data: ffi::wxString) -> bool {
-        unsafe { ffi::wxDDEConnection_Execute3(self.as_ptr(), data) }
-    }
-    // NOT_SUPPORTED: fn OnAdvise()
-    fn on_disconnect(&self) -> bool {
-        unsafe { ffi::wxDDEConnection_OnDisconnect(self.as_ptr()) }
-    }
-    // NOT_SUPPORTED: fn OnExecute()
-    // NOT_SUPPORTED: fn OnPoke()
-    // NOT_SUPPORTED: fn OnRequest()
-    fn on_start_advise(&self, topic: &str, item: &str) -> bool {
-        unsafe {
-            let topic = WxString::from(topic);
-            let topic = topic.as_ptr();
-            let item = WxString::from(item);
-            let item = item.as_ptr();
-            ffi::wxDDEConnection_OnStartAdvise(self.as_ptr(), topic, item)
-        }
-    }
-    fn on_stop_advise(&self, topic: &str, item: &str) -> bool {
-        unsafe {
-            let topic = WxString::from(topic);
-            let topic = topic.as_ptr();
-            let item = WxString::from(item);
-            let item = item.as_ptr();
-            ffi::wxDDEConnection_OnStopAdvise(self.as_ptr(), topic, item)
-        }
-    }
-    // NOT_SUPPORTED: fn Poke()
-    fn poke_char(&self, item: &str, data: *const c_void) -> bool {
-        unsafe {
-            let item = WxString::from(item);
-            let item = item.as_ptr();
-            ffi::wxDDEConnection_Poke1(self.as_ptr(), item, data)
-        }
-    }
-    fn poke_wchar_t(&self, item: &str, data: *const c_void) -> bool {
-        unsafe {
-            let item = WxString::from(item);
-            let item = item.as_ptr();
-            ffi::wxDDEConnection_Poke2(self.as_ptr(), item, data)
-        }
-    }
-    fn poke_str(&self, item: &str, data: ffi::wxString) -> bool {
-        unsafe {
-            let item = WxString::from(item);
-            let item = item.as_ptr();
-            ffi::wxDDEConnection_Poke3(self.as_ptr(), item, data)
-        }
-    }
-    // NOT_SUPPORTED: fn Request()
-    fn start_advise(&self, item: &str) -> bool {
-        unsafe {
-            let item = WxString::from(item);
-            let item = item.as_ptr();
-            ffi::wxDDEConnection_StartAdvise(self.as_ptr(), item)
-        }
-    }
-    fn stop_advise(&self, item: &str) -> bool {
-        unsafe {
-            let item = WxString::from(item);
-            let item = item.as_ptr();
-            ffi::wxDDEConnection_StopAdvise(self.as_ptr(), item)
-        }
-    }
-}
-
-// wxDDEServer
-pub trait DDEServerMethods: WxRustMethods {
-    fn create(&self, service: &str) -> bool {
-        unsafe {
-            let service = WxString::from(service);
-            let service = service.as_ptr();
-            ffi::wxDDEServer_Create(self.as_ptr(), service)
-        }
-    }
-    fn on_accept_connection(&self, topic: &str) -> Option<ConnectionBaseIsOwned<false>> {
-        unsafe {
-            let topic = WxString::from(topic);
-            let topic = topic.as_ptr();
-            ConnectionBase::option_from(ffi::wxDDEServer_OnAcceptConnection(self.as_ptr(), topic))
-        }
-    }
 }
 
 // wxDataInputStream
@@ -1421,44 +1112,6 @@ pub trait DateTimeHolidayAuthorityMethods: WxRustMethods {}
 // wxDateTimeWorkDays
 pub trait DateTimeWorkDaysMethods: WxRustMethods {}
 
-// wxDebugContext
-pub trait DebugContextMethods: WxRustMethods {
-    fn check(check_all: bool) -> c_int {
-        unsafe { ffi::wxDebugContext_Check(check_all) }
-    }
-    fn dump() -> bool {
-        unsafe { ffi::wxDebugContext_Dump() }
-    }
-    fn get_check_previous() -> bool {
-        unsafe { ffi::wxDebugContext_GetCheckPrevious() }
-    }
-    fn get_debug_mode() -> bool {
-        unsafe { ffi::wxDebugContext_GetDebugMode() }
-    }
-    fn get_level() -> c_int {
-        unsafe { ffi::wxDebugContext_GetLevel() }
-    }
-    fn print_classes() -> bool {
-        unsafe { ffi::wxDebugContext_PrintClasses() }
-    }
-    fn print_statistics(detailed: bool) -> bool {
-        unsafe { ffi::wxDebugContext_PrintStatistics(detailed) }
-    }
-    fn set_check_previous(check: bool) {
-        unsafe { ffi::wxDebugContext_SetCheckPrevious(check) }
-    }
-    fn set_checkpoint(all: bool) {
-        unsafe { ffi::wxDebugContext_SetCheckpoint(all) }
-    }
-    fn set_debug_mode(debug: bool) {
-        unsafe { ffi::wxDebugContext_SetDebugMode(debug) }
-    }
-    fn set_level(level: c_int) {
-        unsafe { ffi::wxDebugContext_SetLevel(level) }
-    }
-    // NOT_SUPPORTED: fn SetShutdownNotifyFunction()
-}
-
 // wxDir
 pub trait DirMethods: WxRustMethods {
     // DTOR: fn ~wxDir()
@@ -1569,71 +1222,6 @@ pub trait DirTraverserMethods: WxRustMethods {
     // NOT_SUPPORTED: fn OnDir()
     // NOT_SUPPORTED: fn OnFile()
     // NOT_SUPPORTED: fn OnOpenError()
-}
-
-// wxDynamicLibrary
-pub trait DynamicLibraryMethods: WxRustMethods {
-    // NOT_SUPPORTED: fn Attach()
-    // NOT_SUPPORTED: fn Detach()
-    fn get_symbol(&self, name: &str, success: *mut c_void) -> *mut c_void {
-        unsafe {
-            let name = WxString::from(name);
-            let name = name.as_ptr();
-            ffi::wxDynamicLibrary_GetSymbol(self.as_ptr(), name, success)
-        }
-    }
-    fn get_symbol_aor_w(&self, name: &str) -> *mut c_void {
-        unsafe {
-            let name = WxString::from(name);
-            let name = name.as_ptr();
-            ffi::wxDynamicLibrary_GetSymbolAorW(self.as_ptr(), name)
-        }
-    }
-    fn has_symbol(&self, name: &str) -> bool {
-        unsafe {
-            let name = WxString::from(name);
-            let name = name.as_ptr();
-            ffi::wxDynamicLibrary_HasSymbol(self.as_ptr(), name)
-        }
-    }
-    fn is_loaded(&self) -> bool {
-        unsafe { ffi::wxDynamicLibrary_IsLoaded(self.as_ptr()) }
-    }
-    fn load(&self, name: &str, flags: c_int) -> bool {
-        unsafe {
-            let name = WxString::from(name);
-            let name = name.as_ptr();
-            ffi::wxDynamicLibrary_Load(self.as_ptr(), name, flags)
-        }
-    }
-    fn unload(&self) {
-        unsafe { ffi::wxDynamicLibrary_Unload(self.as_ptr()) }
-    }
-    // NOT_SUPPORTED: fn GetDllExt()
-    // NOT_SUPPORTED: fn CanonicalizeName()
-    // NOT_SUPPORTED: fn CanonicalizePluginName()
-    // NOT_SUPPORTED: fn GetProgramHandle()
-    // NOT_SUPPORTED: fn ListLoaded()
-    fn get_module_from_address(addr: *const c_void, path: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxDynamicLibrary_GetModuleFromAddress(addr, path) }
-    }
-    // NOT_SUPPORTED: fn Unload1()
-}
-
-// wxDynamicLibraryDetails
-pub trait DynamicLibraryDetailsMethods: WxRustMethods {
-    fn get_address(&self, addr: *mut c_void, len: *mut c_void) -> bool {
-        unsafe { ffi::wxDynamicLibraryDetails_GetAddress(self.as_ptr(), addr, len) }
-    }
-    fn get_name(&self) -> String {
-        unsafe { WxString::from_ptr(ffi::wxDynamicLibraryDetails_GetName(self.as_ptr())).into() }
-    }
-    fn get_path(&self) -> String {
-        unsafe { WxString::from_ptr(ffi::wxDynamicLibraryDetails_GetPath(self.as_ptr())).into() }
-    }
-    fn get_version(&self) -> String {
-        unsafe { WxString::from_ptr(ffi::wxDynamicLibraryDetails_GetVersion(self.as_ptr())).into() }
-    }
 }
 
 // wxEncodingConverter
@@ -2499,25 +2087,11 @@ pub trait FileSystemMethods: ObjectMethods {
             FSFile::option_from(ffi::wxFileSystem_OpenFile(self.as_ptr(), location, flags))
         }
     }
-    fn add_handler<F: FileSystemHandlerMethods>(handler: Option<&F>) {
-        unsafe {
-            let handler = match handler {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxFileSystem_AddHandler(handler)
-        }
+    fn add_handler(handler: *mut c_void) {
+        unsafe { ffi::wxFileSystem_AddHandler(handler) }
     }
-    fn remove_handler<F: FileSystemHandlerMethods>(
-        handler: Option<&F>,
-    ) -> Option<FileSystemHandlerIsOwned<false>> {
-        unsafe {
-            let handler = match handler {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            FileSystemHandler::option_from(ffi::wxFileSystem_RemoveHandler(handler))
-        }
+    fn remove_handler(handler: *mut c_void) -> *mut c_void {
+        unsafe { ffi::wxFileSystem_RemoveHandler(handler) }
     }
     fn file_name_to_url<F: FileNameMethods>(filename: &F) -> String {
         unsafe {
@@ -2537,55 +2111,6 @@ pub trait FileSystemMethods: ObjectMethods {
             let url = WxString::from(url);
             let url = url.as_ptr();
             FileName::from_ptr(ffi::wxFileSystem_URLToFileName(url))
-        }
-    }
-}
-
-// wxFileSystemHandler
-pub trait FileSystemHandlerMethods: ObjectMethods {
-    fn can_open(&self, location: &str) -> bool {
-        unsafe {
-            let location = WxString::from(location);
-            let location = location.as_ptr();
-            ffi::wxFileSystemHandler_CanOpen(self.as_ptr(), location)
-        }
-    }
-    fn find_first(&self, wildcard: &str, flags: c_int) -> String {
-        unsafe {
-            let wildcard = WxString::from(wildcard);
-            let wildcard = wildcard.as_ptr();
-            WxString::from_ptr(ffi::wxFileSystemHandler_FindFirst(
-                self.as_ptr(),
-                wildcard,
-                flags,
-            ))
-            .into()
-        }
-    }
-    fn find_next(&self) -> String {
-        unsafe { WxString::from_ptr(ffi::wxFileSystemHandler_FindNext(self.as_ptr())).into() }
-    }
-    fn open_file<F: FileSystemMethods>(
-        &self,
-        fs: &F,
-        location: &str,
-    ) -> Option<FSFileIsOwned<false>> {
-        unsafe {
-            let fs = fs.as_ptr();
-            let location = WxString::from(location);
-            let location = location.as_ptr();
-            FSFile::option_from(ffi::wxFileSystemHandler_OpenFile(
-                self.as_ptr(),
-                fs,
-                location,
-            ))
-        }
-    }
-    fn get_mime_type_from_ext(location: &str) -> String {
-        unsafe {
-            let location = WxString::from(location);
-            let location = location.as_ptr();
-            WxString::from_ptr(ffi::wxFileSystemHandler_GetMimeTypeFromExt(location)).into()
         }
     }
 }
@@ -2810,51 +2335,6 @@ pub trait FilterClassFactoryMethods: ObjectMethods {
     fn get_first() -> Option<FilterClassFactoryIsOwned<false>> {
         unsafe { FilterClassFactory::option_from(ffi::wxFilterClassFactory_GetFirst()) }
     }
-}
-
-// wxHashMap
-pub trait HashMapMethods: WxRustMethods {
-    // NOT_SUPPORTED: fn begin()
-    // NOT_SUPPORTED: fn begin1()
-    fn clear(&self) {
-        unsafe { ffi::wxHashMap_clear(self.as_ptr()) }
-    }
-    // NOT_SUPPORTED: fn count()
-    fn empty(&self) -> bool {
-        unsafe { ffi::wxHashMap_empty(self.as_ptr()) }
-    }
-    // NOT_SUPPORTED: fn end()
-    // NOT_SUPPORTED: fn end1()
-    // NOT_SUPPORTED: fn erase()
-    // NOT_SUPPORTED: fn erase1()
-    // NOT_SUPPORTED: fn erase2()
-    // NOT_SUPPORTED: fn find()
-    // NOT_SUPPORTED: fn find1()
-    // NOT_SUPPORTED: fn insert()
-    // NOT_SUPPORTED: fn operator[]()
-    // NOT_SUPPORTED: fn size()
-}
-
-// wxHashSet
-pub trait HashSetMethods: WxRustMethods {
-    // NOT_SUPPORTED: fn begin()
-    // NOT_SUPPORTED: fn begin1()
-    fn clear(&self) {
-        unsafe { ffi::wxHashSet_clear(self.as_ptr()) }
-    }
-    // NOT_SUPPORTED: fn count()
-    fn empty(&self) -> bool {
-        unsafe { ffi::wxHashSet_empty(self.as_ptr()) }
-    }
-    // NOT_SUPPORTED: fn end()
-    // NOT_SUPPORTED: fn end1()
-    // NOT_SUPPORTED: fn erase()
-    // NOT_SUPPORTED: fn erase1()
-    // NOT_SUPPORTED: fn erase2()
-    // NOT_SUPPORTED: fn find()
-    // NOT_SUPPORTED: fn find1()
-    // NOT_SUPPORTED: fn insert()
-    // NOT_SUPPORTED: fn size()
 }
 
 // wxHashTable
@@ -3276,60 +2756,6 @@ pub trait MemoryBufferMethods: WxRustMethods {
     }
 }
 
-// wxMemoryFSHandler
-pub trait MemoryFSHandlerMethods: FileSystemHandlerMethods {
-    // NOT_SUPPORTED: fn AddFile()
-    // NOT_SUPPORTED: fn AddFile1()
-    fn add_file_str(filename: &str, textdata: &str) {
-        unsafe {
-            let filename = WxString::from(filename);
-            let filename = filename.as_ptr();
-            let textdata = WxString::from(textdata);
-            let textdata = textdata.as_ptr();
-            ffi::wxMemoryFSHandler_AddFile2(filename, textdata)
-        }
-    }
-    fn add_file_void(filename: &str, binarydata: *const c_void, size: usize) {
-        unsafe {
-            let filename = WxString::from(filename);
-            let filename = filename.as_ptr();
-            ffi::wxMemoryFSHandler_AddFile3(filename, binarydata, size)
-        }
-    }
-    fn add_file_with_mime_type_str(filename: &str, textdata: &str, mimetype: &str) {
-        unsafe {
-            let filename = WxString::from(filename);
-            let filename = filename.as_ptr();
-            let textdata = WxString::from(textdata);
-            let textdata = textdata.as_ptr();
-            let mimetype = WxString::from(mimetype);
-            let mimetype = mimetype.as_ptr();
-            ffi::wxMemoryFSHandler_AddFileWithMimeType(filename, textdata, mimetype)
-        }
-    }
-    fn add_file_with_mime_type_void(
-        filename: &str,
-        binarydata: *const c_void,
-        size: usize,
-        mimetype: &str,
-    ) {
-        unsafe {
-            let filename = WxString::from(filename);
-            let filename = filename.as_ptr();
-            let mimetype = WxString::from(mimetype);
-            let mimetype = mimetype.as_ptr();
-            ffi::wxMemoryFSHandler_AddFileWithMimeType1(filename, binarydata, size, mimetype)
-        }
-    }
-    fn remove_file(filename: &str) {
-        unsafe {
-            let filename = WxString::from(filename);
-            let filename = filename.as_ptr();
-            ffi::wxMemoryFSHandler_RemoveFile(filename)
-        }
-    }
-}
-
 // wxMessageOutput
 pub trait MessageOutputMethods: WxRustMethods {
     fn get() -> Option<MessageOutputIsOwned<false>> {
@@ -3427,17 +2853,6 @@ pub trait MimeTypesManagerMethods: WxRustMethods {
     }
 }
 
-// wxModule
-pub trait ModuleMethods: ObjectMethods {
-    // DTOR: fn ~wxModule()
-    fn on_exit(&self) {
-        unsafe { ffi::wxModule_OnExit(self.as_ptr()) }
-    }
-    fn on_init(&self) -> bool {
-        unsafe { ffi::wxModule_OnInit(self.as_ptr()) }
-    }
-}
-
 // wxMutex
 pub trait MutexMethods: WxRustMethods {
     // DTOR: fn ~wxMutex()
@@ -3461,8 +2876,8 @@ pub trait ObjectMethods: WxRustMethods {
     fn get_class_info(&self) -> Option<ClassInfoIsOwned<false>> {
         unsafe { ClassInfo::option_from(ffi::wxObject_GetClassInfo(self.as_ptr())) }
     }
-    fn get_ref_data(&self) -> Option<ObjectRefDataIsOwned<false>> {
-        unsafe { ObjectRefData::option_from(ffi::wxObject_GetRefData(self.as_ptr())) }
+    fn get_ref_data(&self) -> *mut c_void {
+        unsafe { ffi::wxObject_GetRefData(self.as_ptr()) }
     }
     fn is_kind_of<C: ClassInfoMethods>(&self, info: Option<&C>) -> bool {
         unsafe {
@@ -3485,14 +2900,8 @@ pub trait ObjectMethods: WxRustMethods {
             ffi::wxObject_Ref(self.as_ptr(), clone)
         }
     }
-    fn set_ref_data<O: ObjectRefDataMethods>(&self, data: Option<&O>) {
-        unsafe {
-            let data = match data {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxObject_SetRefData(self.as_ptr(), data)
-        }
+    fn set_ref_data(&self, data: *mut c_void) {
+        unsafe { ffi::wxObject_SetRefData(self.as_ptr(), data) }
     }
     fn un_ref(&self) {
         unsafe { ffi::wxObject_UnRef(self.as_ptr()) }
@@ -3503,9 +2912,6 @@ pub trait ObjectMethods: WxRustMethods {
     // BLOCKED: fn operator delete()
     // BLOCKED: fn operator new()
 }
-
-// wxObjectRefData
-pub trait ObjectRefDataMethods: WxRustMethods {}
 
 // wxPlatformInfo
 pub trait PlatformInfoMethods: WxRustMethods {
@@ -3684,16 +3090,6 @@ pub trait PositionMethods: WxRustMethods {
 // wxPostScriptDC
 pub trait PostScriptDCMethods: DCMethods {}
 
-// wxPowerEvent
-pub trait PowerEventMethods: EventMethods {
-    fn veto(&self) {
-        unsafe { ffi::wxPowerEvent_Veto(self.as_ptr()) }
-    }
-    fn is_vetoed(&self) -> bool {
-        unsafe { ffi::wxPowerEvent_IsVetoed(self.as_ptr()) }
-    }
-}
-
 // wxPowerResource
 pub trait PowerResourceMethods: WxRustMethods {
     // NOT_SUPPORTED: fn Acquire()
@@ -3782,19 +3178,6 @@ pub trait RecursionGuardMethods: WxRustMethods {
 // wxRecursionGuardFlag
 pub trait RecursionGuardFlagMethods: WxRustMethods {}
 
-// wxRefCounter
-pub trait RefCounterMethods: WxRustMethods {
-    fn dec_ref(&self) {
-        unsafe { ffi::wxRefCounter_DecRef(self.as_ptr()) }
-    }
-    fn get_ref_count(&self) -> c_int {
-        unsafe { ffi::wxRefCounter_GetRefCount(self.as_ptr()) }
-    }
-    fn inc_ref(&self) {
-        unsafe { ffi::wxRefCounter_IncRef(self.as_ptr()) }
-    }
-}
-
 // wxRegEx
 pub trait RegExMethods: WxRustMethods {
     // DTOR: fn ~wxRegEx()
@@ -3871,238 +3254,6 @@ pub trait RegExMethods: WxRustMethods {
     }
     fn get_library_version_info() -> VersionInfo {
         unsafe { VersionInfo::from_ptr(ffi::wxRegEx_GetLibraryVersionInfo()) }
-    }
-}
-
-// wxRegKey
-pub trait RegKeyMethods: WxRustMethods {
-    fn close(&self) {
-        unsafe { ffi::wxRegKey_Close(self.as_ptr()) }
-    }
-    fn copy_str(&self, sz_new_name: &str) -> bool {
-        unsafe {
-            let sz_new_name = WxString::from(sz_new_name);
-            let sz_new_name = sz_new_name.as_ptr();
-            ffi::wxRegKey_Copy(self.as_ptr(), sz_new_name)
-        }
-    }
-    fn copy_regkey<R: RegKeyMethods>(&self, key_dst: &R) -> bool {
-        unsafe {
-            let key_dst = key_dst.as_ptr();
-            ffi::wxRegKey_Copy1(self.as_ptr(), key_dst)
-        }
-    }
-    fn copy_value<R: RegKeyMethods>(&self, sz_value: &str, key_dst: &R, sz_new_name: &str) -> bool {
-        unsafe {
-            let sz_value = WxString::from(sz_value);
-            let sz_value = sz_value.as_ptr();
-            let key_dst = key_dst.as_ptr();
-            let sz_new_name = WxString::from(sz_new_name);
-            let sz_new_name = sz_new_name.as_ptr();
-            ffi::wxRegKey_CopyValue(self.as_ptr(), sz_value, key_dst, sz_new_name)
-        }
-    }
-    fn create(&self, b_ok_if_exists: bool) -> bool {
-        unsafe { ffi::wxRegKey_Create(self.as_ptr(), b_ok_if_exists) }
-    }
-    fn delete_key(&self, sz_key: &str) {
-        unsafe {
-            let sz_key = WxString::from(sz_key);
-            let sz_key = sz_key.as_ptr();
-            ffi::wxRegKey_DeleteKey(self.as_ptr(), sz_key)
-        }
-    }
-    fn delete_self(&self) {
-        unsafe { ffi::wxRegKey_DeleteSelf(self.as_ptr()) }
-    }
-    fn delete_value(&self, sz_key: &str) {
-        unsafe {
-            let sz_key = WxString::from(sz_key);
-            let sz_key = sz_key.as_ptr();
-            ffi::wxRegKey_DeleteValue(self.as_ptr(), sz_key)
-        }
-    }
-    fn exists(&self) -> bool {
-        unsafe { ffi::wxRegKey_Exists(self.as_ptr()) }
-    }
-    fn export_str(&self, filename: &str) -> bool {
-        unsafe {
-            let filename = WxString::from(filename);
-            let filename = filename.as_ptr();
-            ffi::wxRegKey_Export(self.as_ptr(), filename)
-        }
-    }
-    fn export_outputstream(&self, ostr: *mut c_void) -> bool {
-        unsafe { ffi::wxRegKey_Export1(self.as_ptr(), ostr) }
-    }
-    fn get_first_key(&self, str_key_name: *mut c_void, l_index: *mut c_void) -> bool {
-        unsafe { ffi::wxRegKey_GetFirstKey(self.as_ptr(), str_key_name, l_index) }
-    }
-    fn get_first_value(&self, str_value_name: *mut c_void, l_index: *mut c_void) -> bool {
-        unsafe { ffi::wxRegKey_GetFirstValue(self.as_ptr(), str_value_name, l_index) }
-    }
-    fn get_key_info(
-        &self,
-        pn_sub_keys: *mut c_void,
-        pn_max_key_len: *mut c_void,
-        pn_values: *mut c_void,
-        pn_max_value_len: *mut c_void,
-    ) -> bool {
-        unsafe {
-            ffi::wxRegKey_GetKeyInfo(
-                self.as_ptr(),
-                pn_sub_keys,
-                pn_max_key_len,
-                pn_values,
-                pn_max_value_len,
-            )
-        }
-    }
-    fn get_name(&self, b_short_prefix: bool) -> String {
-        unsafe { WxString::from_ptr(ffi::wxRegKey_GetName(self.as_ptr(), b_short_prefix)).into() }
-    }
-    // NOT_SUPPORTED: fn GetView()
-    fn get_next_key(&self, str_key_name: *mut c_void, l_index: *mut c_void) -> bool {
-        unsafe { ffi::wxRegKey_GetNextKey(self.as_ptr(), str_key_name, l_index) }
-    }
-    fn get_next_value(&self, str_value_name: *mut c_void, l_index: *mut c_void) -> bool {
-        unsafe { ffi::wxRegKey_GetNextValue(self.as_ptr(), str_value_name, l_index) }
-    }
-    // NOT_SUPPORTED: fn GetValueType()
-    fn has_sub_key(&self, sz_key: &str) -> bool {
-        unsafe {
-            let sz_key = WxString::from(sz_key);
-            let sz_key = sz_key.as_ptr();
-            ffi::wxRegKey_HasSubKey(self.as_ptr(), sz_key)
-        }
-    }
-    fn has_subkeys(&self) -> bool {
-        unsafe { ffi::wxRegKey_HasSubkeys(self.as_ptr()) }
-    }
-    fn has_value(&self, sz_value: &str) -> bool {
-        unsafe {
-            let sz_value = WxString::from(sz_value);
-            let sz_value = sz_value.as_ptr();
-            ffi::wxRegKey_HasValue(self.as_ptr(), sz_value)
-        }
-    }
-    fn has_values(&self) -> bool {
-        unsafe { ffi::wxRegKey_HasValues(self.as_ptr()) }
-    }
-    fn is_empty(&self) -> bool {
-        unsafe { ffi::wxRegKey_IsEmpty(self.as_ptr()) }
-    }
-    fn is_numeric_value(&self, sz_value: &str) -> bool {
-        unsafe {
-            let sz_value = WxString::from(sz_value);
-            let sz_value = sz_value.as_ptr();
-            ffi::wxRegKey_IsNumericValue(self.as_ptr(), sz_value)
-        }
-    }
-    fn is_opened(&self) -> bool {
-        unsafe { ffi::wxRegKey_IsOpened(self.as_ptr()) }
-    }
-    // NOT_SUPPORTED: fn Open()
-    // BLOCKED: fn operator=()
-    fn query_default_value(&self) -> String {
-        unsafe { WxString::from_ptr(ffi::wxRegKey_QueryDefaultValue(self.as_ptr())).into() }
-    }
-    fn query_raw_value(&self, sz_value: &str, str_value: *mut c_void) -> bool {
-        unsafe {
-            let sz_value = WxString::from(sz_value);
-            let sz_value = sz_value.as_ptr();
-            ffi::wxRegKey_QueryRawValue(self.as_ptr(), sz_value, str_value)
-        }
-    }
-    fn query_value_str(&self, sz_value: &str, str_value: *mut c_void, raw: bool) -> bool {
-        unsafe {
-            let sz_value = WxString::from(sz_value);
-            let sz_value = sz_value.as_ptr();
-            ffi::wxRegKey_QueryValue(self.as_ptr(), sz_value, str_value, raw)
-        }
-    }
-    fn query_value_long(&self, sz_value: &str, pl_value: *mut c_void) -> bool {
-        unsafe {
-            let sz_value = WxString::from(sz_value);
-            let sz_value = sz_value.as_ptr();
-            ffi::wxRegKey_QueryValue1(self.as_ptr(), sz_value, pl_value)
-        }
-    }
-    fn query_value64(&self, sz_value: &str, pl_value: *mut c_void) -> bool {
-        unsafe {
-            let sz_value = WxString::from(sz_value);
-            let sz_value = sz_value.as_ptr();
-            ffi::wxRegKey_QueryValue64(self.as_ptr(), sz_value, pl_value)
-        }
-    }
-    fn query_value_memorybuffer<M: MemoryBufferMethods>(&self, sz_value: &str, buf: &M) -> bool {
-        unsafe {
-            let sz_value = WxString::from(sz_value);
-            let sz_value = sz_value.as_ptr();
-            let buf = buf.as_ptr();
-            ffi::wxRegKey_QueryValue2(self.as_ptr(), sz_value, buf)
-        }
-    }
-    fn rename(&self, sz_new_name: &str) -> bool {
-        unsafe {
-            let sz_new_name = WxString::from(sz_new_name);
-            let sz_new_name = sz_new_name.as_ptr();
-            ffi::wxRegKey_Rename(self.as_ptr(), sz_new_name)
-        }
-    }
-    fn rename_value(&self, sz_value_old: &str, sz_value_new: &str) -> bool {
-        unsafe {
-            let sz_value_old = WxString::from(sz_value_old);
-            let sz_value_old = sz_value_old.as_ptr();
-            let sz_value_new = WxString::from(sz_value_new);
-            let sz_value_new = sz_value_new.as_ptr();
-            ffi::wxRegKey_RenameValue(self.as_ptr(), sz_value_old, sz_value_new)
-        }
-    }
-    fn reserve_memory_for_name(&self, bytes: usize) {
-        unsafe { ffi::wxRegKey_ReserveMemoryForName(self.as_ptr(), bytes) }
-    }
-    // NOT_SUPPORTED: fn SetHkey()
-    fn set_name_str(&self, str_key: &str) {
-        unsafe {
-            let str_key = WxString::from(str_key);
-            let str_key = str_key.as_ptr();
-            ffi::wxRegKey_SetName(self.as_ptr(), str_key)
-        }
-    }
-    // NOT_SUPPORTED: fn SetName1()
-    fn set_name_regkey<R: RegKeyMethods>(&self, key_parent: &R, str_key: &str) {
-        unsafe {
-            let key_parent = key_parent.as_ptr();
-            let str_key = WxString::from(str_key);
-            let str_key = str_key.as_ptr();
-            ffi::wxRegKey_SetName2(self.as_ptr(), key_parent, str_key)
-        }
-    }
-    fn set_value_long(&self, sz_value: &str, l_value: c_long) -> bool {
-        unsafe {
-            let sz_value = WxString::from(sz_value);
-            let sz_value = sz_value.as_ptr();
-            ffi::wxRegKey_SetValue(self.as_ptr(), sz_value, l_value)
-        }
-    }
-    // NOT_SUPPORTED: fn SetValue64()
-    fn set_value_str(&self, sz_value: &str, str_value: &str) -> bool {
-        unsafe {
-            let sz_value = WxString::from(sz_value);
-            let sz_value = sz_value.as_ptr();
-            let str_value = WxString::from(str_value);
-            let str_value = str_value.as_ptr();
-            ffi::wxRegKey_SetValue1(self.as_ptr(), sz_value, str_value)
-        }
-    }
-    fn set_value_memorybuffer<M: MemoryBufferMethods>(&self, sz_value: &str, buf: &M) -> bool {
-        unsafe {
-            let sz_value = WxString::from(sz_value);
-            let sz_value = sz_value.as_ptr();
-            let buf = buf.as_ptr();
-            ffi::wxRegKey_SetValue2(self.as_ptr(), sz_value, buf)
-        }
     }
 }
 
@@ -4285,17 +3436,6 @@ pub trait StackFrameMethods: WxRustMethods {
     }
 }
 
-// wxStackWalker
-pub trait StackWalkerMethods: WxRustMethods {
-    // DTOR: fn ~wxStackWalker()
-    fn walk(&self, skip: usize, max_depth: usize) {
-        unsafe { ffi::wxStackWalker_Walk(self.as_ptr(), skip, max_depth) }
-    }
-    fn walk_from_exception(&self, max_depth: usize) {
-        unsafe { ffi::wxStackWalker_WalkFromException(self.as_ptr(), max_depth) }
-    }
-}
-
 // wxStandardPaths
 pub trait StandardPathsMethods: WxRustMethods {
     fn dont_ignore_app_sub_dir(&self) {
@@ -4392,90 +3532,6 @@ pub trait StopWatchMethods: WxRustMethods {
     // NOT_SUPPORTED: fn TimeInMicro()
 }
 
-// wxStreamBuffer
-pub trait StreamBufferMethods: WxRustMethods {
-    // DTOR: fn ~wxStreamBuffer()
-    fn fill_buffer(&self) -> bool {
-        unsafe { ffi::wxStreamBuffer_FillBuffer(self.as_ptr()) }
-    }
-    fn fixed(&self, fixed: bool) {
-        unsafe { ffi::wxStreamBuffer_Fixed(self.as_ptr(), fixed) }
-    }
-    fn flush_buffer(&self) -> bool {
-        unsafe { ffi::wxStreamBuffer_FlushBuffer(self.as_ptr()) }
-    }
-    fn flushable(&self, flushable: bool) {
-        unsafe { ffi::wxStreamBuffer_Flushable(self.as_ptr(), flushable) }
-    }
-    fn get_buffer_end(&self) -> *mut c_void {
-        unsafe { ffi::wxStreamBuffer_GetBufferEnd(self.as_ptr()) }
-    }
-    fn get_buffer_pos(&self) -> *mut c_void {
-        unsafe { ffi::wxStreamBuffer_GetBufferPos(self.as_ptr()) }
-    }
-    fn get_buffer_size(&self) -> usize {
-        unsafe { ffi::wxStreamBuffer_GetBufferSize(self.as_ptr()) }
-    }
-    fn get_buffer_start(&self) -> *mut c_void {
-        unsafe { ffi::wxStreamBuffer_GetBufferStart(self.as_ptr()) }
-    }
-    // NOT_SUPPORTED: fn GetChar()
-    fn get_data_left(&self) -> usize {
-        unsafe { ffi::wxStreamBuffer_GetDataLeft(self.as_ptr()) }
-    }
-    fn get_int_position(&self) -> usize {
-        unsafe { ffi::wxStreamBuffer_GetIntPosition(self.as_ptr()) }
-    }
-    fn get_last_access(&self) -> usize {
-        unsafe { ffi::wxStreamBuffer_GetLastAccess(self.as_ptr()) }
-    }
-    // NOT_SUPPORTED: fn PutChar()
-    fn read_void(&self, buffer: *mut c_void, size: usize) -> usize {
-        unsafe { ffi::wxStreamBuffer_Read(self.as_ptr(), buffer, size) }
-    }
-    fn read_streambuffer<S: StreamBufferMethods>(&self, buffer: Option<&S>) -> usize {
-        unsafe {
-            let buffer = match buffer {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxStreamBuffer_Read1(self.as_ptr(), buffer)
-        }
-    }
-    fn reset_buffer(&self) {
-        unsafe { ffi::wxStreamBuffer_ResetBuffer(self.as_ptr()) }
-    }
-    // NOT_SUPPORTED: fn Seek()
-    fn set_buffer_io_void(&self, start: *mut c_void, end: *mut c_void, take_ownership: bool) {
-        unsafe { ffi::wxStreamBuffer_SetBufferIO(self.as_ptr(), start, end, take_ownership) }
-    }
-    fn set_buffer_io_sz(&self, bufsize: usize) {
-        unsafe { ffi::wxStreamBuffer_SetBufferIO1(self.as_ptr(), bufsize) }
-    }
-    fn set_int_position(&self, pos: usize) {
-        unsafe { ffi::wxStreamBuffer_SetIntPosition(self.as_ptr(), pos) }
-    }
-    fn stream(&self) -> *mut c_void {
-        unsafe { ffi::wxStreamBuffer_Stream(self.as_ptr()) }
-    }
-    // NOT_SUPPORTED: fn Tell()
-    fn truncate(&self) {
-        unsafe { ffi::wxStreamBuffer_Truncate(self.as_ptr()) }
-    }
-    fn write_void(&self, buffer: *const c_void, size: usize) -> usize {
-        unsafe { ffi::wxStreamBuffer_Write(self.as_ptr(), buffer, size) }
-    }
-    fn write_streambuffer<S: StreamBufferMethods>(&self, buffer: Option<&S>) -> usize {
-        unsafe {
-            let buffer = match buffer {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxStreamBuffer_Write1(self.as_ptr(), buffer)
-        }
-    }
-}
-
 // wxStringClientData
 pub trait StringClientDataMethods: ClientDataMethods {
     fn get_data(&self) -> String {
@@ -4559,9 +3615,6 @@ pub trait SystemOptionsMethods: ObjectMethods {
     }
 }
 
-// wxTarClassFactory
-pub trait TarClassFactoryMethods: ArchiveClassFactoryMethods {}
-
 // wxTempFFile
 pub trait TempFFileMethods: WxRustMethods {
     // DTOR: fn ~wxTempFFile()
@@ -4630,27 +3683,6 @@ pub trait TempFileMethods: WxRustMethods {
     }
 }
 
-// wxThreadHelper
-pub trait ThreadHelperMethods: WxRustMethods {
-    // DTOR: fn ~wxThreadHelper()
-    // NOT_SUPPORTED: fn Entry()
-    fn on_delete(&self) {
-        unsafe { ffi::wxThreadHelper_OnDelete(self.as_ptr()) }
-    }
-    fn on_kill(&self) {
-        unsafe { ffi::wxThreadHelper_OnKill(self.as_ptr()) }
-    }
-    fn on_exit(&self) {
-        unsafe { ffi::wxThreadHelper_OnExit(self.as_ptr()) }
-    }
-    // NOT_SUPPORTED: fn Create()
-    // NOT_SUPPORTED: fn CreateThread()
-    fn get_thread(&self) -> *mut c_void {
-        unsafe { ffi::wxThreadHelper_GetThread(self.as_ptr()) }
-    }
-    // NOT_SUPPORTED: fn GetThreadKind()
-}
-
 // wxTimer
 pub trait TimerMethods: EvtHandlerMethods {
     // DTOR: fn ~wxTimer()
@@ -4702,11 +3734,6 @@ pub trait TimerEventMethods: EventMethods {
     }
 }
 
-// wxTrackable
-pub trait TrackableMethods: WxRustMethods {
-    fn as_trackable(&self) -> *mut c_void;
-}
-
 // wxUILocale
 pub trait UILocaleMethods: WxRustMethods {
     fn use_default() -> bool {
@@ -4732,11 +3759,8 @@ pub trait UILocaleMethods: WxRustMethods {
             ffi::wxUILocale_FindLanguageInfo(locale)
         }
     }
-    fn find_language_info_localeident<L: LocaleIdentMethods>(locale_id: &L) -> *const c_void {
-        unsafe {
-            let locale_id = locale_id.as_ptr();
-            ffi::wxUILocale_FindLanguageInfo1(locale_id)
-        }
+    fn find_language_info_localeident(locale_id: *const c_void) -> *const c_void {
+        unsafe { ffi::wxUILocale_FindLanguageInfo1(locale_id) }
     }
     fn get_language_info(lang: c_int) -> *const c_void {
         unsafe { ffi::wxUILocale_GetLanguageInfo(lang) }
@@ -4765,9 +3789,7 @@ pub trait UILocaleMethods: WxRustMethods {
     fn get_name(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxUILocale_GetName(self.as_ptr())).into() }
     }
-    fn get_locale_id(&self) -> LocaleIdent {
-        unsafe { LocaleIdent::from_ptr(ffi::wxUILocale_GetLocaleId(self.as_ptr())) }
-    }
+    // NOT_SUPPORTED: fn GetLocaleId()
     // NOT_SUPPORTED: fn GetInfo()
     // NOT_SUPPORTED: fn GetLocalizedName()
     fn get_layout_direction(&self) -> c_int {
@@ -4864,52 +3886,6 @@ pub trait URIMethods: ObjectMethods {
 // wxUniCharRef
 pub trait UniCharRefMethods: WxRustMethods {}
 
-// wxVariantData
-pub trait VariantDataMethods: ObjectRefDataMethods {
-    fn clone(&self) -> Option<VariantDataIsOwned<false>> {
-        unsafe { VariantData::option_from(ffi::wxVariantData_Clone(self.as_ptr())) }
-    }
-    fn dec_ref(&self) {
-        unsafe { ffi::wxVariantData_DecRef(self.as_ptr()) }
-    }
-    fn eq<V: VariantDataMethods>(&self, data: &V) -> bool {
-        unsafe {
-            let data = data.as_ptr();
-            ffi::wxVariantData_Eq(self.as_ptr(), data)
-        }
-    }
-    fn get_any<A: AnyMethods>(&self, any: Option<&A>) -> bool {
-        unsafe {
-            let any = match any {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxVariantData_GetAny(self.as_ptr(), any)
-        }
-    }
-    fn get_type(&self) -> String {
-        unsafe { WxString::from_ptr(ffi::wxVariantData_GetType(self.as_ptr())).into() }
-    }
-    fn get_value_class_info(&self) -> Option<ClassInfoIsOwned<false>> {
-        unsafe { ClassInfo::option_from(ffi::wxVariantData_GetValueClassInfo(self.as_ptr())) }
-    }
-    fn inc_ref(&self) {
-        unsafe { ffi::wxVariantData_IncRef(self.as_ptr()) }
-    }
-    fn read_istream(&self, stream: *mut c_void) -> bool {
-        unsafe { ffi::wxVariantData_Read(self.as_ptr(), stream) }
-    }
-    fn read_str(&self, string: *mut c_void) -> bool {
-        unsafe { ffi::wxVariantData_Read1(self.as_ptr(), string) }
-    }
-    fn write_ostream(&self, stream: *mut c_void) -> bool {
-        unsafe { ffi::wxVariantData_Write(self.as_ptr(), stream) }
-    }
-    fn write_str(&self, string: *mut c_void) -> bool {
-        unsafe { ffi::wxVariantData_Write1(self.as_ptr(), string) }
-    }
-}
-
 // wxVersionInfo
 pub trait VersionInfoMethods: WxRustMethods {
     fn get_name(&self) -> String {
@@ -4960,9 +3936,6 @@ pub trait WindowUpdateLockerMethods: WxRustMethods {
     }
     // DTOR: fn ~wxWindowUpdateLocker()
 }
-
-// wxZipClassFactory
-pub trait ZipClassFactoryMethods: ArchiveClassFactoryMethods {}
 
 // wxZipNotifier
 pub trait ZipNotifierMethods: WxRustMethods {

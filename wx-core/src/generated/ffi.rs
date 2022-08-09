@@ -111,18 +111,6 @@ extern "C" {
     pub fn wxActivityIndicator_Start(self_: *mut c_void);
     pub fn wxActivityIndicator_Stop(self_: *mut c_void);
     pub fn wxActivityIndicator_IsRunning(self_: *const c_void) -> bool;
-    // Mix-in(s) to wxActivityIndicator
-    pub fn wxActivityIndicator_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
-    // wxAddRemoveAdaptor
-    pub fn wxAddRemoveAdaptor_delete(self_: *mut c_void);
-    pub fn wxAddRemoveAdaptor_new() -> *mut c_void;
-    // DTOR: pub fn wxAddRemoveAdaptor_~wxAddRemoveAdaptor(self_: *mut c_void);
-    pub fn wxAddRemoveAdaptor_GetItemsCtrl(self_: *const c_void) -> *mut c_void;
-    pub fn wxAddRemoveAdaptor_CanAdd(self_: *const c_void) -> bool;
-    pub fn wxAddRemoveAdaptor_CanRemove(self_: *const c_void) -> bool;
-    pub fn wxAddRemoveAdaptor_OnAdd(self_: *mut c_void);
-    pub fn wxAddRemoveAdaptor_OnRemove(self_: *mut c_void);
 
     // wxAddRemoveCtrl
     pub fn wxAddRemoveCtrl_CLASSINFO() -> *mut c_void;
@@ -150,8 +138,6 @@ extern "C" {
         addtip: *const c_void,
         removetip: *const c_void,
     );
-    // Mix-in(s) to wxAddRemoveCtrl
-    pub fn wxAddRemoveCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxAnimationCtrl
     pub fn wxAnimationCtrl_CLASSINFO() -> *mut c_void;
@@ -185,8 +171,6 @@ extern "C" {
     pub fn wxAnimationCtrl_SetInactiveBitmap(self_: *mut c_void, bmp: *const c_void);
     pub fn wxAnimationCtrl_Stop(self_: *mut c_void);
     pub fn wxAnimationCtrl_CreateCompatibleAnimation() -> *mut c_void;
-    // Mix-in(s) to wxAnimationCtrl
-    pub fn wxAnimationCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxAnyButton
     pub fn wxAnyButton_CLASSINFO() -> *mut c_void;
@@ -208,17 +192,6 @@ extern "C" {
     pub fn wxAnyButton_SetBitmapMargins(self_: *mut c_void, x: c_int, y: c_int);
     pub fn wxAnyButton_SetBitmapMargins1(self_: *mut c_void, sz: *const c_void);
     pub fn wxAnyButton_SetBitmapPosition(self_: *mut c_void, dir: c_int);
-    // Mix-in(s) to wxAnyButton
-    pub fn wxAnyButton_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
-    // wxAppProgressIndicator
-    pub fn wxAppProgressIndicator_delete(self_: *mut c_void);
-    pub fn wxAppProgressIndicator_new(parent: *mut c_void, max_value: c_int) -> *mut c_void;
-    // DTOR: pub fn wxAppProgressIndicator_~wxAppProgressIndicator(self_: *mut c_void);
-    pub fn wxAppProgressIndicator_IsAvailable(self_: *const c_void) -> bool;
-    pub fn wxAppProgressIndicator_SetValue(self_: *mut c_void, value: c_int);
-    pub fn wxAppProgressIndicator_SetRange(self_: *mut c_void, range: c_int);
-    pub fn wxAppProgressIndicator_Pulse(self_: *mut c_void) -> bool;
 
     // wxArtProvider
     pub fn wxArtProvider_CLASSINFO() -> *mut c_void;
@@ -283,8 +256,6 @@ extern "C" {
     pub fn wxBannerWindow_SetBitmap(self_: *mut c_void, bmp: *const c_void);
     pub fn wxBannerWindow_SetText(self_: *mut c_void, title: *const c_void, message: *const c_void);
     pub fn wxBannerWindow_SetGradient(self_: *mut c_void, start: *const c_void, end: *const c_void);
-    // Mix-in(s) to wxBannerWindow
-    pub fn wxBannerWindow_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxBitmap
     pub fn wxBitmap_CLASSINFO() -> *mut c_void;
@@ -458,8 +429,6 @@ extern "C" {
         winid: c_int,
         name: *const c_void,
     ) -> *mut c_void;
-    // Mix-in(s) to wxBitmapButton
-    pub fn wxBitmapButton_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxBitmapComboBox
     pub fn wxBitmapComboBox_CLASSINFO() -> *mut c_void;
@@ -533,7 +502,6 @@ extern "C" {
     // Mix-in(s) to wxBitmapComboBox
     pub fn wxBitmapComboBox_AsItemContainer(obj: *mut c_void) -> *mut c_void;
     pub fn wxBitmapComboBox_AsTextEntry(obj: *mut c_void) -> *mut c_void;
-    pub fn wxBitmapComboBox_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxBitmapHandler
     pub fn wxBitmapHandler_CLASSINFO() -> *mut c_void;
@@ -573,8 +541,6 @@ extern "C" {
         val: *const c_void,
         name: *const c_void,
     ) -> bool;
-    // Mix-in(s) to wxBitmapToggleButton
-    pub fn wxBitmapToggleButton_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxBookCtrlBase
     pub fn wxBookCtrlBase_CLASSINFO() -> *mut c_void;
@@ -628,7 +594,6 @@ extern "C" {
     ) -> bool;
     // Mix-in(s) to wxBookCtrlBase
     pub fn wxBookCtrlBase_AsWithImages(obj: *mut c_void) -> *mut c_void;
-    pub fn wxBookCtrlBase_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxBookCtrlEvent
     pub fn wxBookCtrlEvent_CLASSINFO() -> *mut c_void;
@@ -742,8 +707,6 @@ extern "C" {
     pub fn wxButton_SetAuthNeeded(self_: *mut c_void, needed: bool);
     pub fn wxButton_SetDefault(self_: *mut c_void) -> *mut c_void;
     pub fn wxButton_GetDefaultSize(win: *mut c_void) -> *mut c_void;
-    // Mix-in(s) to wxButton
-    pub fn wxButton_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxCalculateLayoutEvent
     pub fn wxCalculateLayoutEvent_CLASSINFO() -> *mut c_void;
@@ -818,8 +781,6 @@ extern "C" {
         col_bg: *const c_void,
     );
     pub fn wxCalendarCtrl_Mark(self_: *mut c_void, day: usize, mark: bool);
-    // Mix-in(s) to wxCalendarCtrl
-    pub fn wxCalendarCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxCalendarDateAttr
     pub fn wxCalendarDateAttr_delete(self_: *mut c_void);
@@ -912,8 +873,6 @@ extern "C" {
     pub fn wxCheckBox_IsChecked(self_: *const c_void) -> bool;
     pub fn wxCheckBox_SetValue(self_: *mut c_void, state: bool);
     pub fn wxCheckBox_Set3StateValue(self_: *mut c_void, state: c_int);
-    // Mix-in(s) to wxCheckBox
-    pub fn wxCheckBox_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxCheckListBox
     pub fn wxCheckListBox_CLASSINFO() -> *mut c_void;
@@ -950,7 +909,6 @@ extern "C" {
     ) -> c_uint;
     // Mix-in(s) to wxCheckListBox
     pub fn wxCheckListBox_AsItemContainer(obj: *mut c_void) -> *mut c_void;
-    pub fn wxCheckListBox_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxChildFocusEvent
     pub fn wxChildFocusEvent_CLASSINFO() -> *mut c_void;
@@ -990,7 +948,6 @@ extern "C" {
     pub fn wxChoice_IsSorted(self_: *const c_void) -> bool;
     // Mix-in(s) to wxChoice
     pub fn wxChoice_AsItemContainer(obj: *mut c_void) -> *mut c_void;
-    pub fn wxChoice_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxChoicebook
     pub fn wxChoicebook_CLASSINFO() -> *mut c_void;
@@ -1015,7 +972,6 @@ extern "C" {
     pub fn wxChoicebook_GetChoiceCtrl(self_: *const c_void) -> *mut c_void;
     // Mix-in(s) to wxChoicebook
     pub fn wxChoicebook_AsWithImages(obj: *mut c_void) -> *mut c_void;
-    pub fn wxChoicebook_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxClientDC
     pub fn wxClientDC_CLASSINFO() -> *mut c_void;
@@ -1078,8 +1034,6 @@ extern "C" {
     ) -> bool;
     pub fn wxCollapsibleHeaderCtrl_SetCollapsed(self_: *mut c_void, collapsed: bool);
     pub fn wxCollapsibleHeaderCtrl_IsCollapsed(self_: *const c_void) -> bool;
-    // Mix-in(s) to wxCollapsibleHeaderCtrl
-    pub fn wxCollapsibleHeaderCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxCollapsiblePane
     pub fn wxCollapsiblePane_CLASSINFO() -> *mut c_void;
@@ -1110,8 +1064,6 @@ extern "C" {
     pub fn wxCollapsiblePane_GetPane(self_: *const c_void) -> *mut c_void;
     pub fn wxCollapsiblePane_IsCollapsed(self_: *const c_void) -> bool;
     pub fn wxCollapsiblePane_IsExpanded(self_: *const c_void) -> bool;
-    // Mix-in(s) to wxCollapsiblePane
-    pub fn wxCollapsiblePane_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxCollapsiblePaneEvent
     pub fn wxCollapsiblePaneEvent_CLASSINFO() -> *mut c_void;
@@ -1230,8 +1182,6 @@ extern "C" {
     pub fn wxColourPickerCtrl_GetColour(self_: *const c_void) -> *mut c_void;
     pub fn wxColourPickerCtrl_SetColour(self_: *mut c_void, col: *const c_void);
     // BLOCKED: pub fn wxColourPickerCtrl_SetColour1(self_: *mut c_void, colname: *const c_void);
-    // Mix-in(s) to wxColourPickerCtrl
-    pub fn wxColourPickerCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxColourPickerEvent
     pub fn wxColourPickerEvent_CLASSINFO() -> *mut c_void;
@@ -1281,7 +1231,6 @@ extern "C" {
     // Mix-in(s) to wxComboBox
     pub fn wxComboBox_AsItemContainer(obj: *mut c_void) -> *mut c_void;
     pub fn wxComboBox_AsTextEntry(obj: *mut c_void) -> *mut c_void;
-    pub fn wxComboBox_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxCommandEvent
     pub fn wxCommandEvent_CLASSINFO() -> *mut c_void;
@@ -1335,8 +1284,6 @@ extern "C" {
     pub fn wxCommandLinkButton_SetNote(self_: *mut c_void, note: *const c_void);
     pub fn wxCommandLinkButton_GetMainLabel(self_: *const c_void) -> *mut c_void;
     pub fn wxCommandLinkButton_GetNote(self_: *const c_void) -> *mut c_void;
-    // Mix-in(s) to wxCommandLinkButton
-    pub fn wxCommandLinkButton_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxContextHelp
     pub fn wxContextHelp_CLASSINFO() -> *mut c_void;
@@ -1354,8 +1301,6 @@ extern "C" {
         size: *const c_void,
         style: c_long,
     ) -> *mut c_void;
-    // Mix-in(s) to wxContextHelpButton
-    pub fn wxContextHelpButton_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxContextMenuEvent
     pub fn wxContextMenuEvent_CLASSINFO() -> *mut c_void;
@@ -1409,14 +1354,11 @@ extern "C" {
         max_width: c_int,
         flags: c_int,
     ) -> *mut c_void;
-    // Mix-in(s) to wxControl
-    pub fn wxControl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxControlWithItems
     pub fn wxControlWithItems_CLASSINFO() -> *mut c_void;
     // Mix-in(s) to wxControlWithItems
     pub fn wxControlWithItems_AsItemContainer(obj: *mut c_void) -> *mut c_void;
-    pub fn wxControlWithItems_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxCursor
     pub fn wxCursor_CLASSINFO() -> *mut c_void;
@@ -1915,8 +1857,6 @@ extern "C" {
     pub fn wxDataViewCtrl_ToggleSortByColumn(self_: *mut c_void, column: c_int);
     pub fn wxDataViewCtrl_GetCountPerPage(self_: *const c_void) -> c_int;
     pub fn wxDataViewCtrl_GetTopItem(self_: *const c_void) -> *mut c_void;
-    // Mix-in(s) to wxDataViewCtrl
-    pub fn wxDataViewCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxDataViewIconText
     pub fn wxDataViewIconText_CLASSINFO() -> *mut c_void;
@@ -2074,8 +2014,6 @@ extern "C" {
         item: *const c_void,
         text: *const c_void,
     );
-    // Mix-in(s) to wxDataViewTreeCtrl
-    pub fn wxDataViewTreeCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxDataViewValueAdjuster
     pub fn wxDataViewValueAdjuster_delete(self_: *mut c_void);
@@ -2121,8 +2059,6 @@ extern "C" {
     pub fn wxDatePickerCtrl_SetNullText(self_: *mut c_void, text: *const c_void);
     pub fn wxDatePickerCtrl_SetRange(self_: *mut c_void, dt1: *const c_void, dt2: *const c_void);
     pub fn wxDatePickerCtrl_SetValue(self_: *mut c_void, dt: *const c_void);
-    // Mix-in(s) to wxDatePickerCtrl
-    pub fn wxDatePickerCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxDelegateRendererNative
     pub fn wxDelegateRendererNative_delete(self_: *mut c_void);
@@ -2160,8 +2096,6 @@ extern "C" {
     pub fn wxDirPickerCtrl_SetDirName(self_: *mut c_void, dirname: *const c_void);
     pub fn wxDirPickerCtrl_SetInitialDirectory(self_: *mut c_void, dir: *const c_void);
     pub fn wxDirPickerCtrl_SetPath(self_: *mut c_void, dirname: *const c_void);
-    // Mix-in(s) to wxDirPickerCtrl
-    pub fn wxDirPickerCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxDisplay
     pub fn wxDisplay_delete(self_: *mut c_void);
@@ -2206,8 +2140,6 @@ extern "C" {
     pub fn wxDocChildFrame_GetView(self_: *const c_void) -> *mut c_void;
     pub fn wxDocChildFrame_SetDocument(self_: *mut c_void, doc: *mut c_void);
     pub fn wxDocChildFrame_SetView(self_: *mut c_void, view: *mut c_void);
-    // Mix-in(s) to wxDocChildFrame
-    pub fn wxDocChildFrame_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxDocMDIChildFrame
     pub fn wxDocMDIChildFrame_CLASSINFO() -> *mut c_void;
@@ -2227,8 +2159,6 @@ extern "C" {
     pub fn wxDocMDIChildFrame_GetView(self_: *const c_void) -> *mut c_void;
     pub fn wxDocMDIChildFrame_SetDocument(self_: *mut c_void, doc: *mut c_void);
     pub fn wxDocMDIChildFrame_SetView(self_: *mut c_void, view: *mut c_void);
-    // Mix-in(s) to wxDocMDIChildFrame
-    pub fn wxDocMDIChildFrame_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxDocMDIParentFrame
     pub fn wxDocMDIParentFrame_CLASSINFO() -> *mut c_void;
@@ -2255,8 +2185,6 @@ extern "C" {
         style: c_long,
         name: *const c_void,
     ) -> bool;
-    // Mix-in(s) to wxDocMDIParentFrame
-    pub fn wxDocMDIParentFrame_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxDocParentFrame
     pub fn wxDocParentFrame_CLASSINFO() -> *mut c_void;
@@ -2284,8 +2212,6 @@ extern "C" {
         name: *const c_void,
     ) -> bool;
     pub fn wxDocParentFrame_GetDocumentManager(self_: *const c_void) -> *mut c_void;
-    // Mix-in(s) to wxDocParentFrame
-    pub fn wxDocParentFrame_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxDragImage
     pub fn wxDragImage_CLASSINFO() -> *mut c_void;
@@ -2366,8 +2292,6 @@ extern "C" {
     ) -> bool;
     pub fn wxEditableListBox_SetStrings(self_: *mut c_void, strings: *const c_void);
     pub fn wxEditableListBox_GetStrings(self_: *const c_void, strings: *mut c_void);
-    // Mix-in(s) to wxEditableListBox
-    pub fn wxEditableListBox_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxEraseEvent
     pub fn wxEraseEvent_CLASSINFO() -> *mut c_void;
@@ -2379,8 +2303,6 @@ extern "C" {
     // NOT_SUPPORTED: pub fn wxEventBlocker_new(win: *mut c_void, type_: wxEventType) -> *mut c_void;
     // DTOR: pub fn wxEventBlocker_~wxEventBlocker(self_: *mut c_void);
     // NOT_SUPPORTED: pub fn wxEventBlocker_Block(self_: *mut c_void, event_type: wxEventType);
-    // Mix-in(s) to wxEventBlocker
-    pub fn wxEventBlocker_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxFileCtrl
     pub fn wxFileCtrl_CLASSINFO() -> *mut c_void;
@@ -2421,8 +2343,6 @@ extern "C" {
     pub fn wxFileCtrl_SetFilterIndex(self_: *mut c_void, filter_index: c_int);
     pub fn wxFileCtrl_SetWildcard(self_: *mut c_void, wild_card: *const c_void);
     pub fn wxFileCtrl_ShowHidden(self_: *mut c_void, show: bool);
-    // Mix-in(s) to wxFileCtrl
-    pub fn wxFileCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxFileCtrlEvent
     pub fn wxFileCtrlEvent_CLASSINFO() -> *mut c_void;
@@ -2507,8 +2427,6 @@ extern "C" {
     pub fn wxFilePickerCtrl_SetFileName(self_: *mut c_void, filename: *const c_void);
     pub fn wxFilePickerCtrl_SetInitialDirectory(self_: *mut c_void, dir: *const c_void);
     pub fn wxFilePickerCtrl_SetPath(self_: *mut c_void, filename: *const c_void);
-    // Mix-in(s) to wxFilePickerCtrl
-    pub fn wxFilePickerCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxFindDialogEvent
     pub fn wxFindDialogEvent_CLASSINFO() -> *mut c_void;
@@ -2722,8 +2640,6 @@ extern "C" {
     pub fn wxFontPickerCtrl_SetMinPointSize(self_: *mut c_void, min: c_uint);
     pub fn wxFontPickerCtrl_SetSelectedColour(self_: *mut c_void, colour: *const c_void);
     pub fn wxFontPickerCtrl_SetSelectedFont(self_: *mut c_void, font: *const c_void);
-    // Mix-in(s) to wxFontPickerCtrl
-    pub fn wxFontPickerCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxFontPickerEvent
     pub fn wxFontPickerEvent_CLASSINFO() -> *mut c_void;
@@ -2800,8 +2716,6 @@ extern "C" {
     pub fn wxFrame_MSWGetTaskBarButton(self_: *mut c_void) -> *mut c_void;
     pub fn wxFrame_PushStatusText(self_: *mut c_void, text: *const c_void, number: c_int);
     pub fn wxFrame_PopStatusText(self_: *mut c_void, number: c_int);
-    // Mix-in(s) to wxFrame
-    pub fn wxFrame_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxFullScreenEvent
     pub fn wxFullScreenEvent_CLASSINFO() -> *mut c_void;
@@ -2865,8 +2779,6 @@ extern "C" {
     pub fn wxGauge_Pulse(self_: *mut c_void);
     pub fn wxGauge_SetRange(self_: *mut c_void, range: c_int);
     pub fn wxGauge_SetValue(self_: *mut c_void, pos: c_int);
-    // Mix-in(s) to wxGauge
-    pub fn wxGauge_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxGenericAboutDialog
     pub fn wxGenericAboutDialog_delete(self_: *mut c_void);
@@ -2907,8 +2819,6 @@ extern "C" {
         use_win_background: bool,
     );
     pub fn wxGenericAnimationCtrl_IsUsingWindowBackgroundColour(self_: *const c_void) -> bool;
-    // Mix-in(s) to wxGenericAnimationCtrl
-    pub fn wxGenericAnimationCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxGenericDirCtrl
     pub fn wxGenericDirCtrl_CLASSINFO() -> *mut c_void;
@@ -2961,8 +2871,6 @@ extern "C" {
     pub fn wxGenericDirCtrl_SelectPath(self_: *mut c_void, path: *const c_void, select: bool);
     pub fn wxGenericDirCtrl_SelectPaths(self_: *mut c_void, paths: *const c_void);
     pub fn wxGenericDirCtrl_UnselectAll(self_: *mut c_void);
-    // Mix-in(s) to wxGenericDirCtrl
-    pub fn wxGenericDirCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxGenericValidator
     pub fn wxGenericValidator_CLASSINFO() -> *mut c_void;
@@ -2976,8 +2884,6 @@ extern "C" {
     pub fn wxGenericValidator_new7(val_ptr: *mut c_void) -> *mut c_void;
     pub fn wxGenericValidator_new8(val_ptr: *mut c_void) -> *mut c_void;
     // DTOR: pub fn wxGenericValidator_~wxGenericValidator(self_: *mut c_void);
-    // Mix-in(s) to wxGenericValidator
-    pub fn wxGenericValidator_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxGestureEvent
     pub fn wxGestureEvent_CLASSINFO() -> *mut c_void;
@@ -3339,8 +3245,6 @@ extern "C" {
     pub fn wxHeaderCtrl_GetColumnTitleWidth(self_: *mut c_void, col: *const c_void) -> c_int;
     pub fn wxHeaderCtrl_GetColumnTitleWidth1(self_: *mut c_void, idx: c_uint) -> c_int;
     pub fn wxHeaderCtrl_MoveColumnInOrderArray(order: *mut c_void, idx: c_uint, pos: c_uint);
-    // Mix-in(s) to wxHeaderCtrl
-    pub fn wxHeaderCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxHeaderCtrlEvent
     pub fn wxHeaderCtrlEvent_CLASSINFO() -> *mut c_void;
@@ -3371,8 +3275,6 @@ extern "C" {
     pub fn wxHeaderCtrlSimple_HideColumn(self_: *mut c_void, idx: c_uint);
     pub fn wxHeaderCtrlSimple_ShowSortIndicator(self_: *mut c_void, idx: c_uint, sort_order: bool);
     pub fn wxHeaderCtrlSimple_RemoveSortIndicator(self_: *mut c_void);
-    // Mix-in(s) to wxHeaderCtrlSimple
-    pub fn wxHeaderCtrlSimple_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxHelpControllerHelpProvider
     pub fn wxHelpControllerHelpProvider_delete(self_: *mut c_void);
@@ -3434,8 +3336,6 @@ extern "C" {
     pub fn wxHyperlinkCtrl_SetURL(self_: *mut c_void, url: *const c_void);
     pub fn wxHyperlinkCtrl_SetVisited(self_: *mut c_void, visited: bool);
     pub fn wxHyperlinkCtrl_SetVisitedColour(self_: *mut c_void, colour: *const c_void);
-    // Mix-in(s) to wxHyperlinkCtrl
-    pub fn wxHyperlinkCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxHyperlinkEvent
     pub fn wxHyperlinkEvent_CLASSINFO() -> *mut c_void;
@@ -3578,8 +3478,6 @@ extern "C" {
     pub fn wxInfoBar_GetButtonCount(self_: *const c_void) -> usize;
     pub fn wxInfoBar_GetButtonId(self_: *const c_void, idx: usize) -> c_int;
     pub fn wxInfoBar_HasButtonId(self_: *const c_void, btnid: c_int) -> bool;
-    // Mix-in(s) to wxInfoBar
-    pub fn wxInfoBar_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxInitDialogEvent
     pub fn wxInitDialogEvent_CLASSINFO() -> *mut c_void;
@@ -3890,7 +3788,6 @@ extern "C" {
     // BLOCKED: pub fn wxListBox_MSWSetTabStops(self_: *mut c_void, tab_stops: *const c_void) -> bool;
     // Mix-in(s) to wxListBox
     pub fn wxListBox_AsItemContainer(obj: *mut c_void) -> *mut c_void;
-    pub fn wxListBox_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxListCtrl
     pub fn wxListCtrl_CLASSINFO() -> *mut c_void;
@@ -4080,8 +3977,6 @@ extern "C" {
     pub fn wxListCtrl_GetSortIndicator(self_: *const c_void) -> c_int;
     pub fn wxListCtrl_GetUpdatedAscendingSortIndicator(self_: *const c_void, col: c_int) -> bool;
     pub fn wxListCtrl_IsAscendingSortIndicator(self_: *const c_void) -> bool;
-    // Mix-in(s) to wxListCtrl
-    pub fn wxListCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxListEvent
     pub fn wxListEvent_CLASSINFO() -> *mut c_void;
@@ -4159,8 +4054,6 @@ extern "C" {
     pub fn wxListView_IsSelected(self_: *const c_void, index: c_long) -> bool;
     pub fn wxListView_Select(self_: *mut c_void, n: c_long, on: bool);
     pub fn wxListView_SetColumnImage(self_: *mut c_void, col: c_int, image: c_int);
-    // Mix-in(s) to wxListView
-    pub fn wxListView_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxListbook
     pub fn wxListbook_CLASSINFO() -> *mut c_void;
@@ -4185,7 +4078,6 @@ extern "C" {
     pub fn wxListbook_GetListView(self_: *const c_void) -> *mut c_void;
     // Mix-in(s) to wxListbook
     pub fn wxListbook_AsWithImages(obj: *mut c_void) -> *mut c_void;
-    pub fn wxListbook_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxLogGui
     pub fn wxLogGui_delete(self_: *mut c_void);
@@ -4238,8 +4130,6 @@ extern "C" {
     ) -> bool;
     pub fn wxMDIChildFrame_GetMDIParent(self_: *const c_void) -> *mut c_void;
     pub fn wxMDIChildFrame_Restore(self_: *mut c_void);
-    // Mix-in(s) to wxMDIChildFrame
-    pub fn wxMDIChildFrame_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxMDIClientWindow
     pub fn wxMDIClientWindow_CLASSINFO() -> *mut c_void;
@@ -4249,8 +4139,6 @@ extern "C" {
         parent: *mut c_void,
         style: c_long,
     ) -> bool;
-    // Mix-in(s) to wxMDIClientWindow
-    pub fn wxMDIClientWindow_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxMDIParentFrame
     pub fn wxMDIParentFrame_CLASSINFO() -> *mut c_void;
@@ -4286,8 +4174,6 @@ extern "C" {
     pub fn wxMDIParentFrame_SetWindowMenu(self_: *mut c_void, menu: *mut c_void);
     // NOT_SUPPORTED: pub fn wxMDIParentFrame_Tile(self_: *mut c_void, orient: wxOrientation);
     pub fn wxMDIParentFrame_IsTDI() -> bool;
-    // Mix-in(s) to wxMDIParentFrame
-    pub fn wxMDIParentFrame_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxMask
     pub fn wxMask_CLASSINFO() -> *mut c_void;
@@ -4452,8 +4338,6 @@ extern "C" {
     pub fn wxMenu_Attach(self_: *mut c_void, menubar: *mut c_void);
     pub fn wxMenu_Detach(self_: *mut c_void);
     pub fn wxMenu_IsAttached(self_: *const c_void) -> bool;
-    // Mix-in(s) to wxMenu
-    pub fn wxMenu_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxMenuBar
     pub fn wxMenuBar_CLASSINFO() -> *mut c_void;
@@ -4505,8 +4389,6 @@ extern "C" {
     pub fn wxMenuBar_Detach(self_: *mut c_void);
     pub fn wxMenuBar_MacSetCommonMenuBar(menubar: *mut c_void);
     pub fn wxMenuBar_MacGetCommonMenuBar() -> *mut c_void;
-    // Mix-in(s) to wxMenuBar
-    pub fn wxMenuBar_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxMenuEvent
     pub fn wxMenuEvent_CLASSINFO() -> *mut c_void;
@@ -4613,8 +4495,6 @@ extern "C" {
         style: c_long,
         name: *const c_void,
     ) -> bool;
-    // Mix-in(s) to wxMiniFrame
-    pub fn wxMiniFrame_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxMirrorDC
     pub fn wxMirrorDC_CLASSINFO() -> *mut c_void;
@@ -4723,8 +4603,6 @@ extern "C" {
     // NOT_SUPPORTED: pub fn wxNativeWindow_new1(parent: *mut c_void, winid: c_int, handle: wxNativeWindowHandle) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxNativeWindow_Create(self_: *mut c_void, parent: *mut c_void, winid: c_int, handle: wxNativeWindowHandle) -> bool;
     pub fn wxNativeWindow_Disown(self_: *mut c_void);
-    // Mix-in(s) to wxNativeWindow
-    pub fn wxNativeWindow_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxNavigationKeyEvent
     pub fn wxNavigationKeyEvent_CLASSINFO() -> *mut c_void;
@@ -4744,8 +4622,6 @@ extern "C" {
     pub fn wxNonOwnedWindow_CLASSINFO() -> *mut c_void;
     pub fn wxNonOwnedWindow_SetShape(self_: *mut c_void, region: *const c_void) -> bool;
     pub fn wxNonOwnedWindow_SetShape1(self_: *mut c_void, path: *const c_void) -> bool;
-    // Mix-in(s) to wxNonOwnedWindow
-    pub fn wxNonOwnedWindow_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxNotebook
     pub fn wxNotebook_CLASSINFO() -> *mut c_void;
@@ -4766,7 +4642,6 @@ extern "C" {
     pub fn wxNotebook_SetPadding(self_: *mut c_void, padding: *const c_void);
     // Mix-in(s) to wxNotebook
     pub fn wxNotebook_AsWithImages(obj: *mut c_void) -> *mut c_void;
-    pub fn wxNotebook_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxNotifyEvent
     pub fn wxNotifyEvent_CLASSINFO() -> *mut c_void;
@@ -4890,8 +4765,6 @@ extern "C" {
     ) -> bool;
     pub fn wxPanel_OnSysColourChanged(self_: *mut c_void, event: *mut c_void);
     pub fn wxPanel_SetFocusIgnoringChildren(self_: *mut c_void);
-    // Mix-in(s) to wxPanel
-    pub fn wxPanel_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxPen
     pub fn wxPen_CLASSINFO() -> *mut c_void;
@@ -4962,8 +4835,6 @@ extern "C" {
     pub fn wxPickerBase_SetPickerCtrl(self_: *mut c_void, picker: *mut c_void);
     pub fn wxPickerBase_UpdatePickerFromTextCtrl(self_: *mut c_void);
     pub fn wxPickerBase_UpdateTextCtrlFromPicker(self_: *mut c_void);
-    // Mix-in(s) to wxPickerBase
-    pub fn wxPickerBase_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxPoint
     pub fn wxPoint_delete(self_: *mut c_void);
@@ -4998,8 +4869,6 @@ extern "C" {
     pub fn wxPopupTransientWindow_Popup(self_: *mut c_void, focus: *mut c_void);
     pub fn wxPopupTransientWindow_Dismiss(self_: *mut c_void);
     pub fn wxPopupTransientWindow_ProcessLeftDown(self_: *mut c_void, event: *mut c_void) -> bool;
-    // Mix-in(s) to wxPopupTransientWindow
-    pub fn wxPopupTransientWindow_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxPopupWindow
     pub fn wxPopupWindow_CLASSINFO() -> *mut c_void;
@@ -5011,8 +4880,6 @@ extern "C" {
         pt_origin: *const c_void,
         size_popup: *const c_void,
     );
-    // Mix-in(s) to wxPopupWindow
-    pub fn wxPopupWindow_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxPreferencesEditor
     pub fn wxPreferencesEditor_delete(self_: *mut c_void);
@@ -5044,8 +4911,6 @@ extern "C" {
     pub fn wxPreviewControlBar_GetPrintPreview(self_: *const c_void) -> *mut c_void;
     pub fn wxPreviewControlBar_GetZoomControl(self_: *mut c_void) -> c_int;
     pub fn wxPreviewControlBar_SetZoomControl(self_: *mut c_void, percent: c_int);
-    // Mix-in(s) to wxPreviewControlBar
-    pub fn wxPreviewControlBar_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxPreviewFrame
     pub fn wxPreviewFrame_CLASSINFO() -> *mut c_void;
@@ -5064,8 +4929,6 @@ extern "C" {
     pub fn wxPreviewFrame_Initialize(self_: *mut c_void);
     // NOT_SUPPORTED: pub fn wxPreviewFrame_InitializeWithModality(self_: *mut c_void, kind: wxPreviewFrameModalityKind);
     pub fn wxPreviewFrame_OnCloseWindow(self_: *mut c_void, event: *mut c_void);
-    // Mix-in(s) to wxPreviewFrame
-    pub fn wxPreviewFrame_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxPrintData
     pub fn wxPrintData_CLASSINFO() -> *mut c_void;
@@ -5222,7 +5085,6 @@ extern "C" {
     pub fn wxRadioBox_Show(self_: *mut c_void, item: c_uint, show: bool) -> bool;
     // Mix-in(s) to wxRadioBox
     pub fn wxRadioBox_AsItemContainerImmutable(obj: *mut c_void) -> *mut c_void;
-    pub fn wxRadioBox_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxRadioButton
     pub fn wxRadioButton_CLASSINFO() -> *mut c_void;
@@ -5255,8 +5117,6 @@ extern "C" {
     pub fn wxRadioButton_GetLastInGroup(self_: *const c_void) -> *mut c_void;
     pub fn wxRadioButton_GetPreviousInGroup(self_: *const c_void) -> *mut c_void;
     pub fn wxRadioButton_GetNextInGroup(self_: *const c_void) -> *mut c_void;
-    // Mix-in(s) to wxRadioButton
-    pub fn wxRadioButton_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxRealPoint
     pub fn wxRealPoint_delete(self_: *mut c_void);
@@ -5309,8 +5169,6 @@ extern "C" {
         name: *const c_void,
     ) -> bool;
     pub fn wxRearrangeCtrl_GetList(self_: *const c_void) -> *mut c_void;
-    // Mix-in(s) to wxRearrangeCtrl
-    pub fn wxRearrangeCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxRearrangeList
     pub fn wxRearrangeList_CLASSINFO() -> *mut c_void;
@@ -5345,7 +5203,6 @@ extern "C" {
     pub fn wxRearrangeList_MoveCurrentDown(self_: *mut c_void) -> bool;
     // Mix-in(s) to wxRearrangeList
     pub fn wxRearrangeList_AsItemContainer(obj: *mut c_void) -> *mut c_void;
-    pub fn wxRearrangeList_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxRect
     pub fn wxRect_delete(self_: *mut c_void);
@@ -5680,8 +5537,6 @@ extern "C" {
     // NOT_SUPPORTED: pub fn wxSashLayoutWindow_SetAlignment(self_: *mut c_void, alignment: wxLayoutAlignment);
     pub fn wxSashLayoutWindow_SetDefaultSize(self_: *mut c_void, size: *const c_void);
     // NOT_SUPPORTED: pub fn wxSashLayoutWindow_SetOrientation(self_: *mut c_void, orientation: wxLayoutOrientation);
-    // Mix-in(s) to wxSashLayoutWindow
-    pub fn wxSashLayoutWindow_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxSashWindow
     pub fn wxSashWindow_CLASSINFO() -> *mut c_void;
@@ -5712,8 +5567,6 @@ extern "C" {
     pub fn wxSashWindow_GetExtraBorderSize(self_: *const c_void) -> c_int;
     // NOT_SUPPORTED: pub fn wxSashWindow_SashHitTest(self_: *mut c_void, x: c_int, y: c_int, tolerance: c_int) -> wxSashEdgePosition;
     pub fn wxSashWindow_SizeWindows(self_: *mut c_void);
-    // Mix-in(s) to wxSashWindow
-    pub fn wxSashWindow_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxScreenDC
     pub fn wxScreenDC_CLASSINFO() -> *mut c_void;
@@ -5751,8 +5604,6 @@ extern "C" {
     pub fn wxScrollBar_GetThumbSize(self_: *const c_void) -> c_int;
     pub fn wxScrollBar_SetThumbPosition(self_: *mut c_void, view_start: c_int);
     pub fn wxScrollBar_IsVertical(self_: *const c_void) -> bool;
-    // Mix-in(s) to wxScrollBar
-    pub fn wxScrollBar_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxScrollEvent
     pub fn wxScrollEvent_CLASSINFO() -> *mut c_void;
@@ -5805,7 +5656,6 @@ extern "C" {
     pub fn wxSearchCtrl_GetDescriptiveText(self_: *const c_void) -> *mut c_void;
     // Mix-in(s) to wxSearchCtrl
     pub fn wxSearchCtrl_AsTextEntry(obj: *mut c_void) -> *mut c_void;
-    pub fn wxSearchCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxSetCursorEvent
     pub fn wxSetCursorEvent_CLASSINFO() -> *mut c_void;
@@ -5866,7 +5716,6 @@ extern "C" {
     pub fn wxSimplebook_ShowNewPage(self_: *mut c_void, page: *mut c_void) -> bool;
     // Mix-in(s) to wxSimplebook
     pub fn wxSimplebook_AsWithImages(obj: *mut c_void) -> *mut c_void;
-    pub fn wxSimplebook_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxSize
     pub fn wxSize_delete(self_: *mut c_void);
@@ -6257,8 +6106,6 @@ extern "C" {
     pub fn wxSlider_SetTick(self_: *mut c_void, tick_pos: c_int);
     pub fn wxSlider_SetTickFreq(self_: *mut c_void, freq: c_int);
     pub fn wxSlider_SetValue(self_: *mut c_void, value: c_int);
-    // Mix-in(s) to wxSlider
-    pub fn wxSlider_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxSound
     pub fn wxSound_CLASSINFO() -> *mut c_void;
@@ -6302,8 +6149,6 @@ extern "C" {
     pub fn wxSpinButton_SetIncrement(self_: *mut c_void, value: c_int);
     pub fn wxSpinButton_SetRange(self_: *mut c_void, min: c_int, max: c_int);
     pub fn wxSpinButton_SetValue(self_: *mut c_void, value: c_int);
-    // Mix-in(s) to wxSpinButton
-    pub fn wxSpinButton_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxSpinCtrl
     pub fn wxSpinCtrl_CLASSINFO() -> *mut c_void;
@@ -6345,8 +6190,6 @@ extern "C" {
     pub fn wxSpinCtrl_SetValue(self_: *mut c_void, text: *const c_void);
     pub fn wxSpinCtrl_SetValue1(self_: *mut c_void, value: c_int);
     pub fn wxSpinCtrl_SetIncrement(self_: *mut c_void, value: c_int);
-    // Mix-in(s) to wxSpinCtrl
-    pub fn wxSpinCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxSpinCtrlDouble
     pub fn wxSpinCtrlDouble_CLASSINFO() -> *mut c_void;
@@ -6389,8 +6232,6 @@ extern "C" {
     pub fn wxSpinCtrlDouble_SetRange(self_: *mut c_void, min_val: c_double, max_val: c_double);
     pub fn wxSpinCtrlDouble_SetValue(self_: *mut c_void, text: *const c_void);
     pub fn wxSpinCtrlDouble_SetValue1(self_: *mut c_void, value: c_double);
-    // Mix-in(s) to wxSpinCtrlDouble
-    pub fn wxSpinCtrlDouble_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxSpinDoubleEvent
     pub fn wxSpinDoubleEvent_CLASSINFO() -> *mut c_void;
@@ -6422,8 +6263,6 @@ extern "C" {
     pub fn wxSplashScreen_GetSplashWindow(self_: *const c_void) -> *mut c_void;
     pub fn wxSplashScreen_GetTimeout(self_: *const c_void) -> c_int;
     pub fn wxSplashScreen_OnCloseWindow(self_: *mut c_void, event: *mut c_void);
-    // Mix-in(s) to wxSplashScreen
-    pub fn wxSplashScreen_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxSplitterEvent
     pub fn wxSplitterEvent_CLASSINFO() -> *mut c_void;
@@ -6498,8 +6337,6 @@ extern "C" {
     ) -> bool;
     pub fn wxSplitterWindow_Unsplit(self_: *mut c_void, to_remove: *mut c_void) -> bool;
     pub fn wxSplitterWindow_UpdateSize(self_: *mut c_void);
-    // Mix-in(s) to wxSplitterWindow
-    pub fn wxSplitterWindow_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxStaticBitmap
     pub fn wxStaticBitmap_CLASSINFO() -> *mut c_void;
@@ -6529,8 +6366,6 @@ extern "C" {
     pub fn wxStaticBitmap_SetIcon(self_: *mut c_void, label: *const c_void);
     // NOT_SUPPORTED: pub fn wxStaticBitmap_SetScaleMode(self_: *mut c_void, scale_mode: ScaleMode);
     // NOT_SUPPORTED: pub fn wxStaticBitmap_GetScaleMode(self_: *const c_void) -> ScaleMode;
-    // Mix-in(s) to wxStaticBitmap
-    pub fn wxStaticBitmap_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxStaticBox
     pub fn wxStaticBox_CLASSINFO() -> *mut c_void;
@@ -6557,8 +6392,6 @@ extern "C" {
         name: *const c_void,
     ) -> bool;
     // BLOCKED: pub fn wxStaticBox_Create1(self_: *mut c_void, parent: *mut c_void, id: c_int, label: *mut c_void, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> bool;
-    // Mix-in(s) to wxStaticBox
-    pub fn wxStaticBox_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxStaticBoxSizer
     pub fn wxStaticBoxSizer_CLASSINFO() -> *mut c_void;
@@ -6592,8 +6425,6 @@ extern "C" {
     ) -> bool;
     pub fn wxStaticLine_IsVertical(self_: *const c_void) -> bool;
     pub fn wxStaticLine_GetDefaultSize() -> c_int;
-    // Mix-in(s) to wxStaticLine
-    pub fn wxStaticLine_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxStaticText
     pub fn wxStaticText_CLASSINFO() -> *mut c_void;
@@ -6619,8 +6450,6 @@ extern "C" {
     ) -> bool;
     pub fn wxStaticText_IsEllipsized(self_: *const c_void) -> bool;
     pub fn wxStaticText_Wrap(self_: *mut c_void, width: c_int);
-    // Mix-in(s) to wxStaticText
-    pub fn wxStaticText_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxStatusBar
     pub fn wxStatusBar_CLASSINFO() -> *mut c_void;
@@ -6653,8 +6482,6 @@ extern "C" {
     pub fn wxStatusBar_SetStatusStyles(self_: *mut c_void, n: c_int, styles: *const c_void);
     pub fn wxStatusBar_SetStatusText(self_: *mut c_void, text: *const c_void, i: c_int);
     pub fn wxStatusBar_SetStatusWidths(self_: *mut c_void, n: c_int, widths_field: *const c_void);
-    // Mix-in(s) to wxStatusBar
-    pub fn wxStatusBar_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxStatusBarPane
     pub fn wxStatusBarPane_delete(self_: *mut c_void);
@@ -6701,8 +6528,6 @@ extern "C" {
         tooltip: *const c_void,
     ) -> bool;
     pub fn wxTaskBarIcon_IsAvailable() -> bool;
-    // Mix-in(s) to wxTaskBarIcon
-    pub fn wxTaskBarIcon_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxTaskBarIconEvent
     pub fn wxTaskBarIconEvent_CLASSINFO() -> *mut c_void;
@@ -6917,7 +6742,6 @@ extern "C" {
     pub fn wxTextCtrl_XYToPosition(self_: *const c_void, x: c_long, y: c_long) -> c_long;
     // Mix-in(s) to wxTextCtrl
     pub fn wxTextCtrl_AsTextEntry(obj: *mut c_void) -> *mut c_void;
-    pub fn wxTextCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxTextEntry
     pub fn wxTextEntry_delete(self_: *mut c_void);
@@ -6985,8 +6809,6 @@ extern "C" {
     pub fn wxTextValidator_AddCharIncludes(self_: *mut c_void, chars: *const c_void);
     pub fn wxTextValidator_SetStyle(self_: *mut c_void, style: c_long);
     pub fn wxTextValidator_IsValid(self_: *const c_void, val: *const c_void) -> *mut c_void;
-    // Mix-in(s) to wxTextValidator
-    pub fn wxTextValidator_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxTimePickerCtrl
     pub fn wxTimePickerCtrl_CLASSINFO() -> *mut c_void;
@@ -7026,8 +6848,6 @@ extern "C" {
         sec: c_int,
     ) -> bool;
     pub fn wxTimePickerCtrl_SetValue(self_: *mut c_void, dt: *const c_void);
-    // Mix-in(s) to wxTimePickerCtrl
-    pub fn wxTimePickerCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxTipWindow
     pub fn wxTipWindow_CLASSINFO() -> *mut c_void;
@@ -7040,8 +6860,6 @@ extern "C" {
     ) -> *mut c_void;
     pub fn wxTipWindow_SetBoundingRect(self_: *mut c_void, rect_bound: *const c_void);
     pub fn wxTipWindow_SetTipWindowPtr(self_: *mut c_void, window_ptr: *mut c_void);
-    // Mix-in(s) to wxTipWindow
-    pub fn wxTipWindow_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxToggleButton
     pub fn wxToggleButton_CLASSINFO() -> *mut c_void;
@@ -7070,8 +6888,6 @@ extern "C" {
     ) -> bool;
     pub fn wxToggleButton_GetValue(self_: *const c_void) -> bool;
     pub fn wxToggleButton_SetValue(self_: *mut c_void, state: bool);
-    // Mix-in(s) to wxToggleButton
-    pub fn wxToggleButton_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxToolBar
     pub fn wxToolBar_CLASSINFO() -> *mut c_void;
@@ -7216,8 +7032,6 @@ extern "C" {
         label: *const c_void,
     ) -> *mut c_void;
     pub fn wxToolBar_CreateSeparator(self_: *mut c_void) -> *mut c_void;
-    // Mix-in(s) to wxToolBar
-    pub fn wxToolBar_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxToolbook
     pub fn wxToolbook_CLASSINFO() -> *mut c_void;
@@ -7244,7 +7058,6 @@ extern "C" {
     pub fn wxToolbook_EnablePage1(self_: *mut c_void, page: *mut c_void, enable: bool) -> bool;
     // Mix-in(s) to wxToolbook
     pub fn wxToolbook_AsWithImages(obj: *mut c_void) -> *mut c_void;
-    pub fn wxToolbook_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxTopLevelWindow
     pub fn wxTopLevelWindow_CLASSINFO() -> *mut c_void;
@@ -7313,8 +7126,6 @@ extern "C" {
     // BLOCKED: pub fn wxTopLevelWindow_UseNativeDecorations(self_: *mut c_void, native: bool);
     // BLOCKED: pub fn wxTopLevelWindow_UseNativeDecorationsByDefault(self_: *mut c_void, native: bool);
     pub fn wxTopLevelWindow_GetDefaultSize() -> *mut c_void;
-    // Mix-in(s) to wxTopLevelWindow
-    pub fn wxTopLevelWindow_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxTreeCtrl
     pub fn wxTreeCtrl_CLASSINFO() -> *mut c_void;
@@ -7510,7 +7321,6 @@ extern "C" {
     pub fn wxTreeCtrl_SelectChildren(self_: *mut c_void, parent: *const c_void);
     // Mix-in(s) to wxTreeCtrl
     pub fn wxTreeCtrl_AsWithImages(obj: *mut c_void) -> *mut c_void;
-    pub fn wxTreeCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxTreeEvent
     pub fn wxTreeEvent_CLASSINFO() -> *mut c_void;
@@ -7659,8 +7469,6 @@ extern "C" {
         style: c_long,
         name: *const c_void,
     ) -> bool;
-    // Mix-in(s) to wxTreeListCtrl
-    pub fn wxTreeListCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxTreeListItem
     pub fn wxTreeListItem_delete(self_: *mut c_void);
@@ -7709,7 +7517,6 @@ extern "C" {
     pub fn wxTreebook_IsNodeExpanded(self_: *const c_void, page_id: usize) -> bool;
     // Mix-in(s) to wxTreebook
     pub fn wxTreebook_AsWithImages(obj: *mut c_void) -> *mut c_void;
-    pub fn wxTreebook_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxTwoFingerTapEvent
     pub fn wxTwoFingerTapEvent_CLASSINFO() -> *mut c_void;
@@ -7777,8 +7584,6 @@ extern "C" {
     pub fn wxValidator_Validate(self_: *mut c_void, parent: *mut c_void) -> bool;
     pub fn wxValidator_SuppressBellOnError(suppress: bool);
     pub fn wxValidator_IsSilent() -> bool;
-    // Mix-in(s) to wxValidator
-    pub fn wxValidator_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxWindow
     pub fn wxWindow_CLASSINFO() -> *mut c_void;
@@ -8168,8 +7973,6 @@ extern "C" {
         style: c_long,
         name: *const c_void,
     ) -> bool;
-    // Mix-in(s) to wxWindow
-    pub fn wxWindow_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxWindowCreateEvent
     pub fn wxWindowCreateEvent_CLASSINFO() -> *mut c_void;

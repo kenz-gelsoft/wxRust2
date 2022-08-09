@@ -4,72 +4,6 @@ pub use crate::ffi::*;
 
 extern "C" {
 
-    // wxAny
-    pub fn wxAny_delete(self_: *mut c_void);
-    // BLOCKED: pub fn wxAny_operator=(self_: *mut c_void, value: *const c_void) -> *mut c_void;
-    // BLOCKED: pub fn wxAny_operator=1(self_: *mut c_void, any: *const c_void) -> *mut c_void;
-    // BLOCKED: pub fn wxAny_operator=2(self_: *mut c_void, variant: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxAny_operator==(self_: *const c_void, value: signed char) -> bool;
-    // NOT_SUPPORTED: pub fn wxAny_operator==1(self_: *const c_void, value: signed short) -> bool;
-    // NOT_SUPPORTED: pub fn wxAny_operator==2(self_: *const c_void, value: signed int) -> bool;
-    // NOT_SUPPORTED: pub fn wxAny_operator==3(self_: *const c_void, value: signed long) -> bool;
-    // NOT_SUPPORTED: pub fn wxAny_operator==4(self_: *const c_void, value: wxLongLong_t) -> bool;
-    // NOT_SUPPORTED: pub fn wxAny_operator==5(self_: *const c_void, value: unsigned char) -> bool;
-    // NOT_SUPPORTED: pub fn wxAny_operator==6(self_: *const c_void, value: unsigned short) -> bool;
-    // BLOCKED: pub fn wxAny_operator==7(self_: *const c_void, value: c_uint) -> bool;
-    // NOT_SUPPORTED: pub fn wxAny_operator==8(self_: *const c_void, value: unsigned long) -> bool;
-    // NOT_SUPPORTED: pub fn wxAny_operator==9(self_: *const c_void, value: wxULongLong_t) -> bool;
-    // NOT_SUPPORTED: pub fn wxAny_operator==10(self_: *const c_void, value: float) -> bool;
-    // BLOCKED: pub fn wxAny_operator==11(self_: *const c_void, value: c_double) -> bool;
-    // BLOCKED: pub fn wxAny_operator==12(self_: *const c_void, value: bool) -> bool;
-    // BLOCKED: pub fn wxAny_operator==13(self_: *const c_void, value: *const c_void) -> bool;
-    // BLOCKED: pub fn wxAny_operator==14(self_: *const c_void, value: *const c_void) -> bool;
-    // BLOCKED: pub fn wxAny_operator==15(self_: *const c_void, value: *const c_void) -> bool;
-    // NOT_SUPPORTED: pub fn wxAny_operator!=(self_: *const c_void, value: signed char) -> bool;
-    // NOT_SUPPORTED: pub fn wxAny_operator!=1(self_: *const c_void, value: signed short) -> bool;
-    // NOT_SUPPORTED: pub fn wxAny_operator!=2(self_: *const c_void, value: signed int) -> bool;
-    // NOT_SUPPORTED: pub fn wxAny_operator!=3(self_: *const c_void, value: signed long) -> bool;
-    // NOT_SUPPORTED: pub fn wxAny_operator!=4(self_: *const c_void, value: wxLongLong_t) -> bool;
-    // NOT_SUPPORTED: pub fn wxAny_operator!=5(self_: *const c_void, value: unsigned char) -> bool;
-    // NOT_SUPPORTED: pub fn wxAny_operator!=6(self_: *const c_void, value: unsigned short) -> bool;
-    // BLOCKED: pub fn wxAny_operator!=7(self_: *const c_void, value: c_uint) -> bool;
-    // NOT_SUPPORTED: pub fn wxAny_operator!=8(self_: *const c_void, value: unsigned long) -> bool;
-    // NOT_SUPPORTED: pub fn wxAny_operator!=9(self_: *const c_void, value: wxULongLong_t) -> bool;
-    // NOT_SUPPORTED: pub fn wxAny_operator!=10(self_: *const c_void, value: float) -> bool;
-    // BLOCKED: pub fn wxAny_operator!=11(self_: *const c_void, value: c_double) -> bool;
-    // BLOCKED: pub fn wxAny_operator!=12(self_: *const c_void, value: bool) -> bool;
-    // BLOCKED: pub fn wxAny_operator!=13(self_: *const c_void, value: *const c_void) -> bool;
-    // BLOCKED: pub fn wxAny_operator!=14(self_: *const c_void, value: *const c_void) -> bool;
-    // BLOCKED: pub fn wxAny_operator!=15(self_: *const c_void, value: *const c_void) -> bool;
-    pub fn wxAny_new() -> *mut c_void;
-    pub fn wxAny_new1(value: *const c_void) -> *mut c_void;
-    pub fn wxAny_new2(any: *const c_void) -> *mut c_void;
-    pub fn wxAny_new3(variant: *const c_void) -> *mut c_void;
-    // DTOR: pub fn wxAny_~wxAny(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxAny_As(self_: *const c_void) -> T;
-    pub fn wxAny_CheckType(self_: *const c_void) -> bool;
-    pub fn wxAny_GetAs(self_: *const c_void, value: *mut c_void) -> bool;
-    pub fn wxAny_GetAs1(self_: *const c_void, value: *mut c_void) -> bool;
-    pub fn wxAny_GetType(self_: *const c_void) -> *mut c_void;
-    pub fn wxAny_HasSameType(self_: *const c_void, other: *const c_void) -> bool;
-    pub fn wxAny_IsNull(self_: *const c_void) -> bool;
-    pub fn wxAny_MakeNull(self_: *mut c_void);
-
-    // wxAnyValueType
-    pub fn wxAnyValueType_delete(self_: *mut c_void);
-    pub fn wxAnyValueType_new() -> *mut c_void;
-    // DTOR: pub fn wxAnyValueType_~wxAnyValueType(self_: *mut c_void);
-    pub fn wxAnyValueType_CheckType(self_: *const c_void) -> bool;
-    pub fn wxAnyValueType_ConvertValue(
-        self_: *const c_void,
-        src: *const c_void,
-        dst_type: *mut c_void,
-        dst: *mut c_void,
-    ) -> bool;
-    pub fn wxAnyValueType_CopyBuffer(self_: *const c_void, src: *const c_void, dst: *mut c_void);
-    pub fn wxAnyValueType_DeleteValue(self_: *const c_void, buf: *mut c_void);
-    pub fn wxAnyValueType_IsSameType(self_: *const c_void, other_type: *const c_void) -> bool;
-
     // wxAppTraits
     pub fn wxAppTraits_delete(self_: *mut c_void);
     pub fn wxAppTraits_CreateConfig(self_: *mut c_void) -> *mut c_void;
@@ -91,37 +25,6 @@ extern "C" {
     ) -> bool;
     pub fn wxAppTraits_GetAssertStackTrace(self_: *mut c_void) -> *mut c_void;
 
-    // wxArchiveClassFactory
-    pub fn wxArchiveClassFactory_CLASSINFO() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxArchiveClassFactory_CanHandle(self_: *const c_void, protocol: *const c_void, type_: wxStreamProtocolType) -> bool;
-    pub fn wxArchiveClassFactory_GetConv(self_: *const c_void) -> *mut c_void;
-    pub fn wxArchiveClassFactory_SetConv(self_: *mut c_void, conv: *mut c_void);
-    pub fn wxArchiveClassFactory_GetNext(self_: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxArchiveClassFactory_GetInternalName(self_: *const c_void, name: *const c_void, format: wxPathFormat) -> *mut c_void;
-    pub fn wxArchiveClassFactory_GetProtocol(self_: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxArchiveClassFactory_GetProtocols(self_: *const c_void, type_: wxStreamProtocolType) -> *const c_void;
-    pub fn wxArchiveClassFactory_NewEntry(self_: *const c_void) -> *mut c_void;
-    pub fn wxArchiveClassFactory_NewStream(
-        self_: *const c_void,
-        stream: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxArchiveClassFactory_NewStream1(
-        self_: *const c_void,
-        stream: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxArchiveClassFactory_NewStream2(
-        self_: *const c_void,
-        stream: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxArchiveClassFactory_NewStream3(
-        self_: *const c_void,
-        stream: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxArchiveClassFactory_PushFront(self_: *mut c_void);
-    pub fn wxArchiveClassFactory_Remove(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxArchiveClassFactory_Find(protocol: *const c_void, type_: wxStreamProtocolType) -> *mut c_void;
-    pub fn wxArchiveClassFactory_GetFirst() -> *mut c_void;
-
     // wxArchiveEntry
     pub fn wxArchiveEntry_CLASSINFO() -> *mut c_void;
     pub fn wxArchiveEntry_Clone(self_: *const c_void) -> *mut c_void;
@@ -140,14 +43,6 @@ extern "C" {
     pub fn wxArchiveEntry_SetIsReadOnly(self_: *mut c_void, is_read_only: bool);
     pub fn wxArchiveEntry_SetNotifier(self_: *mut c_void, notifier: *mut c_void);
     pub fn wxArchiveEntry_UnsetNotifier(self_: *mut c_void);
-
-    // wxArchiveIterator
-    pub fn wxArchiveIterator_delete(self_: *mut c_void);
-    pub fn wxArchiveIterator_new() -> *mut c_void;
-    pub fn wxArchiveIterator_new1(arc: *mut c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxArchiveIterator_operator*(self_: *const c_void) -> T;
-    // BLOCKED: pub fn wxArchiveIterator_operator++(self_: *mut c_void) -> wxArchiveIterator;
-    // BLOCKED: pub fn wxArchiveIterator_operator++1(self_: *mut c_void, None: c_int) -> wxArchiveIterator;
 
     // wxArchiveNotifier
     pub fn wxArchiveNotifier_delete(self_: *mut c_void);
@@ -346,77 +241,6 @@ extern "C" {
     pub fn wxCriticalSectionLocker_delete(self_: *mut c_void);
     pub fn wxCriticalSectionLocker_new(criticalsection: *mut c_void) -> *mut c_void;
     // DTOR: pub fn wxCriticalSectionLocker_~wxCriticalSectionLocker(self_: *mut c_void);
-
-    // wxDDEClient
-    pub fn wxDDEClient_CLASSINFO() -> *mut c_void;
-    pub fn wxDDEClient_new() -> *mut c_void;
-    pub fn wxDDEClient_MakeConnection(
-        self_: *mut c_void,
-        host: *const c_void,
-        service: *const c_void,
-        topic: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxDDEClient_OnMakeConnection(self_: *mut c_void) -> *mut c_void;
-    pub fn wxDDEClient_ValidHost(self_: *mut c_void, host: *const c_void) -> bool;
-
-    // wxDDEConnection
-    pub fn wxDDEConnection_CLASSINFO() -> *mut c_void;
-    pub fn wxDDEConnection_new() -> *mut c_void;
-    pub fn wxDDEConnection_new1(buffer: *mut c_void, size: usize) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDDEConnection_Advise(self_: *mut c_void, item: *const c_void, data: *const c_void, size: usize, format: wxIPCFormat) -> bool;
-    pub fn wxDDEConnection_Advise1(
-        self_: *mut c_void,
-        item: *const c_void,
-        data: *const c_void,
-    ) -> bool;
-    pub fn wxDDEConnection_Advise2(
-        self_: *mut c_void,
-        item: *const c_void,
-        data: *const c_void,
-    ) -> bool;
-    pub fn wxDDEConnection_Advise3(self_: *mut c_void, item: *const c_void, data: wxString)
-        -> bool;
-    pub fn wxDDEConnection_Disconnect(self_: *mut c_void) -> bool;
-    // NOT_SUPPORTED: pub fn wxDDEConnection_Execute(self_: *mut c_void, data: *const c_void, size: usize, format: wxIPCFormat) -> bool;
-    pub fn wxDDEConnection_Execute1(self_: *mut c_void, data: *const c_void) -> bool;
-    pub fn wxDDEConnection_Execute2(self_: *mut c_void, data: *const c_void) -> bool;
-    pub fn wxDDEConnection_Execute3(self_: *mut c_void, data: wxString) -> bool;
-    // NOT_SUPPORTED: pub fn wxDDEConnection_OnAdvise(self_: *mut c_void, topic: *const c_void, item: *const c_void, data: *const c_void, size: usize, format: wxIPCFormat) -> bool;
-    pub fn wxDDEConnection_OnDisconnect(self_: *mut c_void) -> bool;
-    // NOT_SUPPORTED: pub fn wxDDEConnection_OnExecute(self_: *mut c_void, topic: *const c_void, data: *const c_void, size: usize, format: wxIPCFormat) -> bool;
-    // NOT_SUPPORTED: pub fn wxDDEConnection_OnPoke(self_: *mut c_void, topic: *const c_void, item: *const c_void, data: *const c_void, size: usize, format: wxIPCFormat) -> bool;
-    // NOT_SUPPORTED: pub fn wxDDEConnection_OnRequest(self_: *mut c_void, topic: *const c_void, item: *const c_void, size: *mut c_void, format: wxIPCFormat) -> *const c_void;
-    pub fn wxDDEConnection_OnStartAdvise(
-        self_: *mut c_void,
-        topic: *const c_void,
-        item: *const c_void,
-    ) -> bool;
-    pub fn wxDDEConnection_OnStopAdvise(
-        self_: *mut c_void,
-        topic: *const c_void,
-        item: *const c_void,
-    ) -> bool;
-    // NOT_SUPPORTED: pub fn wxDDEConnection_Poke(self_: *mut c_void, item: *const c_void, data: *const c_void, size: usize, format: wxIPCFormat) -> bool;
-    pub fn wxDDEConnection_Poke1(
-        self_: *mut c_void,
-        item: *const c_void,
-        data: *const c_void,
-    ) -> bool;
-    pub fn wxDDEConnection_Poke2(
-        self_: *mut c_void,
-        item: *const c_void,
-        data: *const c_void,
-    ) -> bool;
-    pub fn wxDDEConnection_Poke3(self_: *mut c_void, item: *const c_void, data: wxString) -> bool;
-    // NOT_SUPPORTED: pub fn wxDDEConnection_Request(self_: *mut c_void, item: *const c_void, size: *mut c_void, format: wxIPCFormat) -> *const c_void;
-    pub fn wxDDEConnection_StartAdvise(self_: *mut c_void, item: *const c_void) -> bool;
-    pub fn wxDDEConnection_StopAdvise(self_: *mut c_void, item: *const c_void) -> bool;
-
-    // wxDDEServer
-    pub fn wxDDEServer_delete(self_: *mut c_void);
-    pub fn wxDDEServer_new() -> *mut c_void;
-    pub fn wxDDEServer_Create(self_: *mut c_void, service: *const c_void) -> bool;
-    pub fn wxDDEServer_OnAcceptConnection(self_: *mut c_void, topic: *const c_void) -> *mut c_void;
 
     // wxDataInputStream
     pub fn wxDataInputStream_delete(self_: *mut c_void);
@@ -695,21 +519,6 @@ extern "C" {
     // wxDateTimeWorkDays
     pub fn wxDateTimeWorkDays_delete(self_: *mut c_void);
 
-    // wxDebugContext
-    pub fn wxDebugContext_delete(self_: *mut c_void);
-    pub fn wxDebugContext_Check(check_all: bool) -> c_int;
-    pub fn wxDebugContext_Dump() -> bool;
-    pub fn wxDebugContext_GetCheckPrevious() -> bool;
-    pub fn wxDebugContext_GetDebugMode() -> bool;
-    pub fn wxDebugContext_GetLevel() -> c_int;
-    pub fn wxDebugContext_PrintClasses() -> bool;
-    pub fn wxDebugContext_PrintStatistics(detailed: bool) -> bool;
-    pub fn wxDebugContext_SetCheckPrevious(check: bool);
-    pub fn wxDebugContext_SetCheckpoint(all: bool);
-    pub fn wxDebugContext_SetDebugMode(debug: bool);
-    pub fn wxDebugContext_SetLevel(level: c_int);
-    // NOT_SUPPORTED: pub fn wxDebugContext_SetShutdownNotifyFunction(func: wxShutdownNotifyFunction);
-
     // wxDir
     pub fn wxDir_delete(self_: *mut c_void);
     pub fn wxDir_new() -> *mut c_void;
@@ -756,45 +565,6 @@ extern "C" {
     // NOT_SUPPORTED: pub fn wxDirTraverser_OnDir(self_: *mut c_void, dirname: *const c_void) -> wxDirTraverseResult;
     // NOT_SUPPORTED: pub fn wxDirTraverser_OnFile(self_: *mut c_void, filename: *const c_void) -> wxDirTraverseResult;
     // NOT_SUPPORTED: pub fn wxDirTraverser_OnOpenError(self_: *mut c_void, openerrorname: *const c_void) -> wxDirTraverseResult;
-
-    // wxDynamicLibrary
-    pub fn wxDynamicLibrary_delete(self_: *mut c_void);
-    pub fn wxDynamicLibrary_new() -> *mut c_void;
-    pub fn wxDynamicLibrary_new1(name: *const c_void, flags: c_int) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDynamicLibrary_Attach(self_: *mut c_void, h: wxDllType);
-    // NOT_SUPPORTED: pub fn wxDynamicLibrary_Detach(self_: *mut c_void) -> wxDllType;
-    pub fn wxDynamicLibrary_GetSymbol(
-        self_: *const c_void,
-        name: *const c_void,
-        success: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxDynamicLibrary_GetSymbolAorW(self_: *const c_void, name: *const c_void)
-        -> *mut c_void;
-    pub fn wxDynamicLibrary_HasSymbol(self_: *const c_void, name: *const c_void) -> bool;
-    pub fn wxDynamicLibrary_IsLoaded(self_: *const c_void) -> bool;
-    pub fn wxDynamicLibrary_Load(self_: *mut c_void, name: *const c_void, flags: c_int) -> bool;
-    pub fn wxDynamicLibrary_Unload(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxDynamicLibrary_GetDllExt(cat: wxDynamicLibraryCategory) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDynamicLibrary_CanonicalizeName(name: *const c_void, cat: wxDynamicLibraryCategory) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDynamicLibrary_CanonicalizePluginName(name: *const c_void, cat: wxPluginCategory) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDynamicLibrary_GetProgramHandle() -> wxDllType;
-    // NOT_SUPPORTED: pub fn wxDynamicLibrary_ListLoaded() -> wxDynamicLibraryDetailsArray;
-    pub fn wxDynamicLibrary_GetModuleFromAddress(
-        addr: *const c_void,
-        path: *mut c_void,
-    ) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDynamicLibrary_Unload1(handle: wxDllType);
-
-    // wxDynamicLibraryDetails
-    pub fn wxDynamicLibraryDetails_delete(self_: *mut c_void);
-    pub fn wxDynamicLibraryDetails_GetAddress(
-        self_: *const c_void,
-        addr: *mut c_void,
-        len: *mut c_void,
-    ) -> bool;
-    pub fn wxDynamicLibraryDetails_GetName(self_: *const c_void) -> *mut c_void;
-    pub fn wxDynamicLibraryDetails_GetPath(self_: *const c_void) -> *mut c_void;
-    pub fn wxDynamicLibraryDetails_GetVersion(self_: *const c_void) -> *mut c_void;
 
     // wxEncodingConverter
     pub fn wxEncodingConverter_CLASSINFO() -> *mut c_void;
@@ -885,8 +655,6 @@ extern "C" {
     pub fn wxEvtHandler_RemoveFilter(filter: *mut c_void);
     pub fn wxEvtHandler_new() -> *mut c_void;
     // DTOR: pub fn wxEvtHandler_~wxEvtHandler(self_: *mut c_void);
-    // Mix-in(s) to wxEvtHandler
-    pub fn wxEvtHandler_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxFFile
     pub fn wxFFile_delete(self_: *mut c_void);
@@ -1154,23 +922,6 @@ extern "C" {
     pub fn wxFileSystem_HasHandlerForPath(location: *const c_void) -> bool;
     pub fn wxFileSystem_URLToFileName(url: *const c_void) -> *mut c_void;
 
-    // wxFileSystemHandler
-    pub fn wxFileSystemHandler_CLASSINFO() -> *mut c_void;
-    pub fn wxFileSystemHandler_new() -> *mut c_void;
-    pub fn wxFileSystemHandler_CanOpen(self_: *mut c_void, location: *const c_void) -> bool;
-    pub fn wxFileSystemHandler_FindFirst(
-        self_: *mut c_void,
-        wildcard: *const c_void,
-        flags: c_int,
-    ) -> *mut c_void;
-    pub fn wxFileSystemHandler_FindNext(self_: *mut c_void) -> *mut c_void;
-    pub fn wxFileSystemHandler_OpenFile(
-        self_: *mut c_void,
-        fs: *mut c_void,
-        location: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxFileSystemHandler_GetMimeTypeFromExt(location: *const c_void) -> *mut c_void;
-
     // wxFileSystemWatcher
     pub fn wxFileSystemWatcher_CLASSINFO() -> *mut c_void;
     pub fn wxFileSystemWatcher_new() -> *mut c_void;
@@ -1188,8 +939,6 @@ extern "C" {
     pub fn wxFileSystemWatcher_GetWatchedPathsCount(self_: *const c_void) -> c_int;
     pub fn wxFileSystemWatcher_GetWatchedPaths(self_: *const c_void, paths: *mut c_void) -> c_int;
     pub fn wxFileSystemWatcher_SetOwner(self_: *mut c_void, handler: *mut c_void);
-    // Mix-in(s) to wxFileSystemWatcher
-    pub fn wxFileSystemWatcher_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxFileSystemWatcherEvent
     pub fn wxFileSystemWatcherEvent_CLASSINFO() -> *mut c_void;
@@ -1271,45 +1020,6 @@ extern "C" {
     pub fn wxFilterClassFactory_Remove(self_: *mut c_void);
     // NOT_SUPPORTED: pub fn wxFilterClassFactory_Find(protocol: *const c_void, type_: wxStreamProtocolType) -> *mut c_void;
     pub fn wxFilterClassFactory_GetFirst() -> *mut c_void;
-
-    // wxHashMap
-    pub fn wxHashMap_delete(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxHashMap_new(size: size_type) -> *mut c_void;
-    pub fn wxHashMap_new1(map: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxHashMap_begin(self_: *const c_void) -> const_iterator;
-    // NOT_SUPPORTED: pub fn wxHashMap_begin1(self_: *mut c_void) -> iterator;
-    pub fn wxHashMap_clear(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxHashMap_count(self_: *const c_void, key: *const c_void) -> size_type;
-    pub fn wxHashMap_empty(self_: *const c_void) -> bool;
-    // NOT_SUPPORTED: pub fn wxHashMap_end(self_: *const c_void) -> const_iterator;
-    // NOT_SUPPORTED: pub fn wxHashMap_end1(self_: *mut c_void) -> iterator;
-    // NOT_SUPPORTED: pub fn wxHashMap_erase(self_: *mut c_void, key: *const c_void) -> size_type;
-    // NOT_SUPPORTED: pub fn wxHashMap_erase1(self_: *mut c_void, it: iterator);
-    // NOT_SUPPORTED: pub fn wxHashMap_erase2(self_: *mut c_void, it: const_iterator);
-    // NOT_SUPPORTED: pub fn wxHashMap_find(self_: *const c_void, key: *const c_void) -> iterator;
-    // NOT_SUPPORTED: pub fn wxHashMap_find1(self_: *const c_void, key: *const c_void) -> const_iterator;
-    // NOT_SUPPORTED: pub fn wxHashMap_insert(self_: *mut c_void, v: *const c_void) -> Insert_Result;
-    // NOT_SUPPORTED: pub fn wxHashMap_operator[](self_: *mut c_void, key: *const c_void) -> mapped_type;
-    // NOT_SUPPORTED: pub fn wxHashMap_size(self_: *const c_void) -> size_type;
-
-    // wxHashSet
-    pub fn wxHashSet_delete(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxHashSet_new(size: size_type) -> *mut c_void;
-    pub fn wxHashSet_new1(set: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxHashSet_begin(self_: *const c_void) -> const_iterator;
-    // NOT_SUPPORTED: pub fn wxHashSet_begin1(self_: *mut c_void) -> iterator;
-    pub fn wxHashSet_clear(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxHashSet_count(self_: *const c_void, key: *const c_void) -> size_type;
-    pub fn wxHashSet_empty(self_: *const c_void) -> bool;
-    // NOT_SUPPORTED: pub fn wxHashSet_end(self_: *const c_void) -> const_iterator;
-    // NOT_SUPPORTED: pub fn wxHashSet_end1(self_: *mut c_void) -> iterator;
-    // NOT_SUPPORTED: pub fn wxHashSet_erase(self_: *mut c_void, key: *const c_void) -> size_type;
-    // NOT_SUPPORTED: pub fn wxHashSet_erase1(self_: *mut c_void, it: iterator);
-    // NOT_SUPPORTED: pub fn wxHashSet_erase2(self_: *mut c_void, it: const_iterator);
-    // NOT_SUPPORTED: pub fn wxHashSet_find(self_: *const c_void, key: *const c_void) -> iterator;
-    // NOT_SUPPORTED: pub fn wxHashSet_find1(self_: *const c_void, key: *const c_void) -> const_iterator;
-    // NOT_SUPPORTED: pub fn wxHashSet_insert(self_: *mut c_void, v: *const c_void) -> Insert_Result;
-    // NOT_SUPPORTED: pub fn wxHashSet_size(self_: *const c_void) -> size_type;
 
     // wxHashTable
     pub fn wxHashTable_CLASSINFO() -> *mut c_void;
@@ -1491,30 +1201,6 @@ extern "C" {
     pub fn wxMemoryBuffer_UngetAppendBuf(self_: *mut c_void, size_used: usize);
     pub fn wxMemoryBuffer_UngetWriteBuf(self_: *mut c_void, size_used: usize);
 
-    // wxMemoryFSHandler
-    pub fn wxMemoryFSHandler_CLASSINFO() -> *mut c_void;
-    pub fn wxMemoryFSHandler_new() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxMemoryFSHandler_AddFile(filename: *const c_void, image: *mut c_void, type_: wxBitmapType);
-    // NOT_SUPPORTED: pub fn wxMemoryFSHandler_AddFile1(filename: *const c_void, bitmap: *const c_void, type_: wxBitmapType);
-    pub fn wxMemoryFSHandler_AddFile2(filename: *const c_void, textdata: *const c_void);
-    pub fn wxMemoryFSHandler_AddFile3(
-        filename: *const c_void,
-        binarydata: *const c_void,
-        size: usize,
-    );
-    pub fn wxMemoryFSHandler_AddFileWithMimeType(
-        filename: *const c_void,
-        textdata: *const c_void,
-        mimetype: *const c_void,
-    );
-    pub fn wxMemoryFSHandler_AddFileWithMimeType1(
-        filename: *const c_void,
-        binarydata: *const c_void,
-        size: usize,
-        mimetype: *const c_void,
-    );
-    pub fn wxMemoryFSHandler_RemoveFile(filename: *const c_void);
-
     // wxMessageOutput
     pub fn wxMessageOutput_delete(self_: *mut c_void);
     pub fn wxMessageOutput_Get() -> *mut c_void;
@@ -1553,13 +1239,6 @@ extern "C" {
         -> usize;
     pub fn wxMimeTypesManager_IsOfType(mime_type: *const c_void, wildcard: *const c_void) -> bool;
 
-    // wxModule
-    pub fn wxModule_CLASSINFO() -> *mut c_void;
-    pub fn wxModule_new() -> *mut c_void;
-    // DTOR: pub fn wxModule_~wxModule(self_: *mut c_void);
-    pub fn wxModule_OnExit(self_: *mut c_void);
-    pub fn wxModule_OnInit(self_: *mut c_void) -> bool;
-
     // wxMutex
     pub fn wxMutex_delete(self_: *mut c_void);
     // NOT_SUPPORTED: pub fn wxMutex_new(type_: wxMutexType) -> *mut c_void;
@@ -1590,9 +1269,6 @@ extern "C" {
     pub fn wxObject_UnShare(self_: *mut c_void);
     // BLOCKED: pub fn wxObject_operator delete(self_: *mut c_void, buf: *mut c_void);
     // BLOCKED: pub fn wxObject_operator new(self_: *mut c_void, size: usize, filename: *const c_void, line_num: c_int) -> *mut c_void;
-
-    // wxObjectRefData
-    pub fn wxObjectRefData_delete(self_: *mut c_void);
 
     // wxPlatformInfo
     pub fn wxPlatformInfo_delete(self_: *mut c_void);
@@ -1698,13 +1374,6 @@ extern "C" {
     pub fn wxPostScriptDC_new() -> *mut c_void;
     pub fn wxPostScriptDC_new1(print_data: *const c_void) -> *mut c_void;
 
-    // wxPowerEvent
-    pub fn wxPowerEvent_CLASSINFO() -> *mut c_void;
-    pub fn wxPowerEvent_new() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxPowerEvent_new1(evt_type: wxEventType) -> *mut c_void;
-    pub fn wxPowerEvent_Veto(self_: *mut c_void);
-    pub fn wxPowerEvent_IsVetoed(self_: *const c_void) -> bool;
-
     // wxPowerResource
     pub fn wxPowerResource_delete(self_: *mut c_void);
     // NOT_SUPPORTED: pub fn wxPowerResource_Acquire(kind: wxPowerResourceKind, reason: *const c_void) -> bool;
@@ -1737,8 +1406,6 @@ extern "C" {
     pub fn wxProcess_Exists(pid: c_int) -> bool;
     // NOT_SUPPORTED: pub fn wxProcess_Kill(pid: c_int, sig: wxSignal, flags: c_int) -> wxKillError;
     pub fn wxProcess_Open(cmd: *const c_void, flags: c_int) -> *mut c_void;
-    // Mix-in(s) to wxProcess
-    pub fn wxProcess_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxProcessEvent
     pub fn wxProcessEvent_CLASSINFO() -> *mut c_void;
@@ -1754,13 +1421,6 @@ extern "C" {
 
     // wxRecursionGuardFlag
     pub fn wxRecursionGuardFlag_delete(self_: *mut c_void);
-
-    // wxRefCounter
-    pub fn wxRefCounter_delete(self_: *mut c_void);
-    pub fn wxRefCounter_new() -> *mut c_void;
-    pub fn wxRefCounter_DecRef(self_: *mut c_void);
-    pub fn wxRefCounter_GetRefCount(self_: *const c_void) -> c_int;
-    pub fn wxRefCounter_IncRef(self_: *mut c_void);
 
     // wxRegEx
     pub fn wxRegEx_delete(self_: *mut c_void);
@@ -1808,118 +1468,6 @@ extern "C" {
     pub fn wxRegEx_QuoteMeta(str: *const c_void) -> *mut c_void;
     pub fn wxRegEx_ConvertFromBasic(bre: *const c_void) -> *mut c_void;
     pub fn wxRegEx_GetLibraryVersionInfo() -> *mut c_void;
-
-    // wxRegKey
-    pub fn wxRegKey_delete(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxRegKey_new(view_mode: WOW64ViewMode) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxRegKey_new1(str_key: *const c_void, view_mode: WOW64ViewMode) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxRegKey_new2(key_parent: StdKey, str_key: *const c_void, view_mode: WOW64ViewMode) -> *mut c_void;
-    pub fn wxRegKey_new3(key_parent: *const c_void, str_key: *const c_void) -> *mut c_void;
-    pub fn wxRegKey_Close(self_: *mut c_void);
-    pub fn wxRegKey_Copy(self_: *mut c_void, sz_new_name: *const c_void) -> bool;
-    pub fn wxRegKey_Copy1(self_: *mut c_void, key_dst: *mut c_void) -> bool;
-    pub fn wxRegKey_CopyValue(
-        self_: *mut c_void,
-        sz_value: *const c_void,
-        key_dst: *mut c_void,
-        sz_new_name: *const c_void,
-    ) -> bool;
-    pub fn wxRegKey_Create(self_: *mut c_void, b_ok_if_exists: bool) -> bool;
-    pub fn wxRegKey_DeleteKey(self_: *mut c_void, sz_key: *const c_void);
-    pub fn wxRegKey_DeleteSelf(self_: *mut c_void);
-    pub fn wxRegKey_DeleteValue(self_: *mut c_void, sz_key: *const c_void);
-    pub fn wxRegKey_Exists(self_: *const c_void) -> bool;
-    pub fn wxRegKey_Export(self_: *const c_void, filename: *const c_void) -> bool;
-    pub fn wxRegKey_Export1(self_: *const c_void, ostr: *mut c_void) -> bool;
-    pub fn wxRegKey_GetFirstKey(
-        self_: *mut c_void,
-        str_key_name: *mut c_void,
-        l_index: *mut c_void,
-    ) -> bool;
-    pub fn wxRegKey_GetFirstValue(
-        self_: *mut c_void,
-        str_value_name: *mut c_void,
-        l_index: *mut c_void,
-    ) -> bool;
-    pub fn wxRegKey_GetKeyInfo(
-        self_: *const c_void,
-        pn_sub_keys: *mut c_void,
-        pn_max_key_len: *mut c_void,
-        pn_values: *mut c_void,
-        pn_max_value_len: *mut c_void,
-    ) -> bool;
-    pub fn wxRegKey_GetName(self_: *const c_void, b_short_prefix: bool) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxRegKey_GetView(self_: *const c_void) -> WOW64ViewMode;
-    pub fn wxRegKey_GetNextKey(
-        self_: *const c_void,
-        str_key_name: *mut c_void,
-        l_index: *mut c_void,
-    ) -> bool;
-    pub fn wxRegKey_GetNextValue(
-        self_: *const c_void,
-        str_value_name: *mut c_void,
-        l_index: *mut c_void,
-    ) -> bool;
-    // NOT_SUPPORTED: pub fn wxRegKey_GetValueType(self_: *const c_void, sz_value: *const c_void) -> ValueType;
-    pub fn wxRegKey_HasSubKey(self_: *const c_void, sz_key: *const c_void) -> bool;
-    pub fn wxRegKey_HasSubkeys(self_: *const c_void) -> bool;
-    pub fn wxRegKey_HasValue(self_: *const c_void, sz_value: *const c_void) -> bool;
-    pub fn wxRegKey_HasValues(self_: *const c_void) -> bool;
-    pub fn wxRegKey_IsEmpty(self_: *const c_void) -> bool;
-    pub fn wxRegKey_IsNumericValue(self_: *const c_void, sz_value: *const c_void) -> bool;
-    pub fn wxRegKey_IsOpened(self_: *const c_void) -> bool;
-    // NOT_SUPPORTED: pub fn wxRegKey_Open(self_: *mut c_void, mode: AccessMode) -> bool;
-    // BLOCKED: pub fn wxRegKey_operator=(self_: *mut c_void, str_value: *const c_void) -> *mut c_void;
-    pub fn wxRegKey_QueryDefaultValue(self_: *const c_void) -> *mut c_void;
-    pub fn wxRegKey_QueryRawValue(
-        self_: *const c_void,
-        sz_value: *const c_void,
-        str_value: *mut c_void,
-    ) -> bool;
-    pub fn wxRegKey_QueryValue(
-        self_: *const c_void,
-        sz_value: *const c_void,
-        str_value: *mut c_void,
-        raw: bool,
-    ) -> bool;
-    pub fn wxRegKey_QueryValue1(
-        self_: *const c_void,
-        sz_value: *const c_void,
-        pl_value: *mut c_void,
-    ) -> bool;
-    pub fn wxRegKey_QueryValue64(
-        self_: *const c_void,
-        sz_value: *const c_void,
-        pl_value: *mut c_void,
-    ) -> bool;
-    pub fn wxRegKey_QueryValue2(
-        self_: *const c_void,
-        sz_value: *const c_void,
-        buf: *mut c_void,
-    ) -> bool;
-    pub fn wxRegKey_Rename(self_: *mut c_void, sz_new_name: *const c_void) -> bool;
-    pub fn wxRegKey_RenameValue(
-        self_: *mut c_void,
-        sz_value_old: *const c_void,
-        sz_value_new: *const c_void,
-    ) -> bool;
-    pub fn wxRegKey_ReserveMemoryForName(self_: *mut c_void, bytes: usize);
-    // NOT_SUPPORTED: pub fn wxRegKey_SetHkey(self_: *mut c_void, h_key: WXHKEY);
-    pub fn wxRegKey_SetName(self_: *mut c_void, str_key: *const c_void);
-    // NOT_SUPPORTED: pub fn wxRegKey_SetName1(self_: *mut c_void, key_parent: StdKey, str_key: *const c_void);
-    pub fn wxRegKey_SetName2(self_: *mut c_void, key_parent: *const c_void, str_key: *const c_void);
-    pub fn wxRegKey_SetValue(self_: *mut c_void, sz_value: *const c_void, l_value: c_long) -> bool;
-    // NOT_SUPPORTED: pub fn wxRegKey_SetValue64(self_: *mut c_void, sz_value: *const c_void, l_value: wxLongLong_t) -> bool;
-    pub fn wxRegKey_SetValue1(
-        self_: *mut c_void,
-        sz_value: *const c_void,
-        str_value: *const c_void,
-    ) -> bool;
-    pub fn wxRegKey_SetValue2(
-        self_: *mut c_void,
-        sz_value: *const c_void,
-        buf: *const c_void,
-    ) -> bool;
 
     // wxSecretStore
     pub fn wxSecretStore_delete(self_: *mut c_void);
@@ -2010,13 +1558,6 @@ extern "C" {
     pub fn wxStackFrame_GetParamCount(self_: *const c_void) -> usize;
     pub fn wxStackFrame_HasSourceLocation(self_: *const c_void) -> bool;
 
-    // wxStackWalker
-    pub fn wxStackWalker_delete(self_: *mut c_void);
-    pub fn wxStackWalker_new(argv0: *const c_void) -> *mut c_void;
-    // DTOR: pub fn wxStackWalker_~wxStackWalker(self_: *mut c_void);
-    pub fn wxStackWalker_Walk(self_: *mut c_void, skip: usize, max_depth: usize);
-    pub fn wxStackWalker_WalkFromException(self_: *mut c_void, max_depth: usize);
-
     // wxStandardPaths
     pub fn wxStandardPaths_delete(self_: *mut c_void);
     pub fn wxStandardPaths_DontIgnoreAppSubDir(self_: *mut c_void);
@@ -2054,45 +1595,6 @@ extern "C" {
     pub fn wxStopWatch_Time(self_: *const c_void) -> c_long;
     // NOT_SUPPORTED: pub fn wxStopWatch_TimeInMicro(self_: *const c_void) -> wxLongLong;
 
-    // wxStreamBuffer
-    pub fn wxStreamBuffer_delete(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxStreamBuffer_new(stream: *mut c_void, mode: BufMode) -> *mut c_void;
-    pub fn wxStreamBuffer_new1(bufsize: usize, stream: *mut c_void) -> *mut c_void;
-    pub fn wxStreamBuffer_new2(bufsize: usize, stream: *mut c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxStreamBuffer_new3(mode: BufMode) -> *mut c_void;
-    pub fn wxStreamBuffer_new4(buffer: *const c_void) -> *mut c_void;
-    // DTOR: pub fn wxStreamBuffer_~wxStreamBuffer(self_: *mut c_void);
-    pub fn wxStreamBuffer_FillBuffer(self_: *mut c_void) -> bool;
-    pub fn wxStreamBuffer_Fixed(self_: *mut c_void, fixed: bool);
-    pub fn wxStreamBuffer_FlushBuffer(self_: *mut c_void) -> bool;
-    pub fn wxStreamBuffer_Flushable(self_: *mut c_void, flushable: bool);
-    pub fn wxStreamBuffer_GetBufferEnd(self_: *const c_void) -> *mut c_void;
-    pub fn wxStreamBuffer_GetBufferPos(self_: *const c_void) -> *mut c_void;
-    pub fn wxStreamBuffer_GetBufferSize(self_: *const c_void) -> usize;
-    pub fn wxStreamBuffer_GetBufferStart(self_: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxStreamBuffer_GetChar(self_: *mut c_void) -> char;
-    pub fn wxStreamBuffer_GetDataLeft(self_: *mut c_void) -> usize;
-    pub fn wxStreamBuffer_GetIntPosition(self_: *const c_void) -> usize;
-    pub fn wxStreamBuffer_GetLastAccess(self_: *const c_void) -> usize;
-    // NOT_SUPPORTED: pub fn wxStreamBuffer_PutChar(self_: *mut c_void, c: char);
-    pub fn wxStreamBuffer_Read(self_: *mut c_void, buffer: *mut c_void, size: usize) -> usize;
-    pub fn wxStreamBuffer_Read1(self_: *mut c_void, buffer: *mut c_void) -> usize;
-    pub fn wxStreamBuffer_ResetBuffer(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxStreamBuffer_Seek(self_: *mut c_void, pos: wxFileOffset, mode: wxSeekMode) -> wxFileOffset;
-    pub fn wxStreamBuffer_SetBufferIO(
-        self_: *mut c_void,
-        start: *mut c_void,
-        end: *mut c_void,
-        take_ownership: bool,
-    );
-    pub fn wxStreamBuffer_SetBufferIO1(self_: *mut c_void, bufsize: usize);
-    pub fn wxStreamBuffer_SetIntPosition(self_: *mut c_void, pos: usize);
-    pub fn wxStreamBuffer_Stream(self_: *mut c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxStreamBuffer_Tell(self_: *const c_void) -> wxFileOffset;
-    pub fn wxStreamBuffer_Truncate(self_: *mut c_void);
-    pub fn wxStreamBuffer_Write(self_: *mut c_void, buffer: *const c_void, size: usize) -> usize;
-    pub fn wxStreamBuffer_Write1(self_: *mut c_void, buffer: *mut c_void) -> usize;
-
     // wxStringClientData
     pub fn wxStringClientData_delete(self_: *mut c_void);
     pub fn wxStringClientData_new() -> *mut c_void;
@@ -2121,9 +1623,6 @@ extern "C" {
     pub fn wxSystemOptions_IsFalse(name: *const c_void) -> bool;
     pub fn wxSystemOptions_SetOption(name: *const c_void, value: *const c_void);
     pub fn wxSystemOptions_SetOption1(name: *const c_void, value: c_int);
-
-    // wxTarClassFactory
-    pub fn wxTarClassFactory_CLASSINFO() -> *mut c_void;
 
     // wxTempFFile
     pub fn wxTempFFile_delete(self_: *mut c_void);
@@ -2155,19 +1654,6 @@ extern "C" {
     // NOT_SUPPORTED: pub fn wxTempFile_Tell(self_: *const c_void) -> wxFileOffset;
     pub fn wxTempFile_Write(self_: *mut c_void, str: *const c_void, conv: *const c_void) -> bool;
 
-    // wxThreadHelper
-    pub fn wxThreadHelper_delete(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxThreadHelper_new(kind: wxThreadKind) -> *mut c_void;
-    // DTOR: pub fn wxThreadHelper_~wxThreadHelper(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxThreadHelper_Entry(self_: *mut c_void) -> ExitCode;
-    pub fn wxThreadHelper_OnDelete(self_: *mut c_void);
-    pub fn wxThreadHelper_OnKill(self_: *mut c_void);
-    pub fn wxThreadHelper_OnExit(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxThreadHelper_Create(self_: *mut c_void, stack_size: c_uint) -> wxThreadError;
-    // NOT_SUPPORTED: pub fn wxThreadHelper_CreateThread(self_: *mut c_void, kind: wxThreadKind, stack_size: c_uint) -> wxThreadError;
-    pub fn wxThreadHelper_GetThread(self_: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxThreadHelper_GetThreadKind(self_: *const c_void) -> wxThreadKind;
-
     // wxTimer
     pub fn wxTimer_CLASSINFO() -> *mut c_void;
     pub fn wxTimer_new() -> *mut c_void;
@@ -2183,17 +1669,12 @@ extern "C" {
     pub fn wxTimer_Start(self_: *mut c_void, milliseconds: c_int, one_shot: bool) -> bool;
     pub fn wxTimer_StartOnce(self_: *mut c_void, milliseconds: c_int) -> bool;
     pub fn wxTimer_Stop(self_: *mut c_void);
-    // Mix-in(s) to wxTimer
-    pub fn wxTimer_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxTimerEvent
     pub fn wxTimerEvent_CLASSINFO() -> *mut c_void;
     pub fn wxTimerEvent_new(timer: *mut c_void) -> *mut c_void;
     pub fn wxTimerEvent_GetInterval(self_: *const c_void) -> c_int;
     pub fn wxTimerEvent_GetTimer(self_: *const c_void) -> *mut c_void;
-
-    // wxTrackable
-    pub fn wxTrackable_delete(self_: *mut c_void);
 
     // wxUILocale
     pub fn wxUILocale_delete(self_: *mut c_void);
@@ -2216,7 +1697,7 @@ extern "C" {
         flags: c_int,
     ) -> c_int;
     pub fn wxUILocale_GetName(self_: *const c_void) -> *mut c_void;
-    pub fn wxUILocale_GetLocaleId(self_: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxUILocale_GetLocaleId(self_: *const c_void) -> wxLocaleIdent;
     // NOT_SUPPORTED: pub fn wxUILocale_GetInfo(self_: *const c_void, index: wxLocaleInfo, cat: wxLocaleCategory) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxUILocale_GetLocalizedName(self_: *const c_void, name: wxLocaleName, form: wxLocaleForm) -> *mut c_void;
     pub fn wxUILocale_GetLayoutDirection(self_: *const c_void) -> c_int;
@@ -2255,21 +1736,6 @@ extern "C" {
     // wxUniCharRef
     pub fn wxUniCharRef_delete(self_: *mut c_void);
 
-    // wxVariantData
-    pub fn wxVariantData_delete(self_: *mut c_void);
-    pub fn wxVariantData_new() -> *mut c_void;
-    pub fn wxVariantData_Clone(self_: *const c_void) -> *mut c_void;
-    pub fn wxVariantData_DecRef(self_: *mut c_void);
-    pub fn wxVariantData_Eq(self_: *const c_void, data: *mut c_void) -> bool;
-    pub fn wxVariantData_GetAny(self_: *const c_void, any: *mut c_void) -> bool;
-    pub fn wxVariantData_GetType(self_: *const c_void) -> *mut c_void;
-    pub fn wxVariantData_GetValueClassInfo(self_: *mut c_void) -> *mut c_void;
-    pub fn wxVariantData_IncRef(self_: *mut c_void);
-    pub fn wxVariantData_Read(self_: *mut c_void, stream: *mut c_void) -> bool;
-    pub fn wxVariantData_Read1(self_: *mut c_void, string: *mut c_void) -> bool;
-    pub fn wxVariantData_Write(self_: *const c_void, stream: *mut c_void) -> bool;
-    pub fn wxVariantData_Write1(self_: *const c_void, string: *mut c_void) -> bool;
-
     // wxVersionInfo
     pub fn wxVersionInfo_delete(self_: *mut c_void);
     pub fn wxVersionInfo_new(
@@ -2299,9 +1765,6 @@ extern "C" {
     pub fn wxWindowUpdateLocker_new1(win: *mut c_void) -> *mut c_void;
     pub fn wxWindowUpdateLocker_Lock(self_: *mut c_void, win: *mut c_void);
     // DTOR: pub fn wxWindowUpdateLocker_~wxWindowUpdateLocker(self_: *mut c_void);
-
-    // wxZipClassFactory
-    pub fn wxZipClassFactory_CLASSINFO() -> *mut c_void;
 
     // wxZipNotifier
     pub fn wxZipNotifier_delete(self_: *mut c_void);

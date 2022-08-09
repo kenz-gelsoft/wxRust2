@@ -255,36 +255,10 @@ pub trait ActivityIndicatorMethods: ControlMethods {
     }
 }
 
-// wxAddRemoveAdaptor
-pub trait AddRemoveAdaptorMethods: WxRustMethods {
-    // DTOR: fn ~wxAddRemoveAdaptor()
-    fn get_items_ctrl(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from(ffi::wxAddRemoveAdaptor_GetItemsCtrl(self.as_ptr())) }
-    }
-    fn can_add(&self) -> bool {
-        unsafe { ffi::wxAddRemoveAdaptor_CanAdd(self.as_ptr()) }
-    }
-    fn can_remove(&self) -> bool {
-        unsafe { ffi::wxAddRemoveAdaptor_CanRemove(self.as_ptr()) }
-    }
-    fn on_add(&self) {
-        unsafe { ffi::wxAddRemoveAdaptor_OnAdd(self.as_ptr()) }
-    }
-    fn on_remove(&self) {
-        unsafe { ffi::wxAddRemoveAdaptor_OnRemove(self.as_ptr()) }
-    }
-}
-
 // wxAddRemoveCtrl
 pub trait AddRemoveCtrlMethods: PanelMethods {
-    fn set_adaptor<A: AddRemoveAdaptorMethods>(&self, adaptor: Option<&A>) {
-        unsafe {
-            let adaptor = match adaptor {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxAddRemoveCtrl_SetAdaptor(self.as_ptr(), adaptor)
-        }
+    fn set_adaptor(&self, adaptor: *mut c_void) {
+        unsafe { ffi::wxAddRemoveCtrl_SetAdaptor(self.as_ptr(), adaptor) }
     }
     fn set_buttons_tool_tips(&self, addtip: &str, removetip: &str) {
         unsafe {
@@ -430,23 +404,6 @@ pub trait AnyButtonMethods: ControlMethods {
     }
     fn set_bitmap_position(&self, dir: c_int) {
         unsafe { ffi::wxAnyButton_SetBitmapPosition(self.as_ptr(), dir) }
-    }
-}
-
-// wxAppProgressIndicator
-pub trait AppProgressIndicatorMethods: WxRustMethods {
-    // DTOR: fn ~wxAppProgressIndicator()
-    fn is_available(&self) -> bool {
-        unsafe { ffi::wxAppProgressIndicator_IsAvailable(self.as_ptr()) }
-    }
-    fn set_value(&self, value: c_int) {
-        unsafe { ffi::wxAppProgressIndicator_SetValue(self.as_ptr(), value) }
-    }
-    fn set_range(&self, range: c_int) {
-        unsafe { ffi::wxAppProgressIndicator_SetRange(self.as_ptr(), range) }
-    }
-    fn pulse(&self) -> bool {
-        unsafe { ffi::wxAppProgressIndicator_Pulse(self.as_ptr()) }
     }
 }
 

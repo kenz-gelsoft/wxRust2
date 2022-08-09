@@ -180,12 +180,6 @@ impl<const OWNED: bool> DynamicCast for ActivityIndicatorIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxActivityIndicator_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxActivityIndicator
-impl<const OWNED: bool> TrackableMethods for ActivityIndicatorIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxActivityIndicator_AsTrackable(self.as_ptr()) }
-    }
-}
 impl<const OWNED: bool> WindowMethods for ActivityIndicatorIsOwned<OWNED> {
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
@@ -206,27 +200,6 @@ impl<const OWNED: bool> WindowMethods for ActivityIndicatorIsOwned<OWNED> {
             let name = WxString::from(name);
             let name = name.as_ptr();
             ffi::wxActivityIndicator_Create(self.as_ptr(), parent, winid, pos, size, style, name)
-        }
-    }
-}
-
-// wxAddRemoveAdaptor
-wx_class! { AddRemoveAdaptor =
-    AddRemoveAdaptorIsOwned<true>(wxAddRemoveAdaptor) impl
-        AddRemoveAdaptorMethods
-}
-impl<const OWNED: bool> AddRemoveAdaptorIsOwned<OWNED> {
-    pub fn new() -> AddRemoveAdaptorIsOwned<OWNED> {
-        unsafe { AddRemoveAdaptorIsOwned(ffi::wxAddRemoveAdaptor_new()) }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for AddRemoveAdaptorIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxAddRemoveAdaptor_delete(self.0) }
         }
     }
 }
@@ -293,12 +266,6 @@ impl<const OWNED: bool> From<AddRemoveCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNE
 impl<const OWNED: bool> DynamicCast for AddRemoveCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxAddRemoveCtrl_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxAddRemoveCtrl
-impl<const OWNED: bool> TrackableMethods for AddRemoveCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxAddRemoveCtrl_AsTrackable(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> PanelMethods for AddRemoveCtrlIsOwned<OWNED> {
@@ -411,12 +378,6 @@ impl<const OWNED: bool> DynamicCast for AnimationCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxAnimationCtrl_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxAnimationCtrl
-impl<const OWNED: bool> TrackableMethods for AnimationCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxAnimationCtrl_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxAnyButton
 wx_class! { AnyButton =
@@ -458,42 +419,6 @@ impl<const OWNED: bool> From<AnyButtonIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for AnyButtonIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxAnyButton_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxAnyButton
-impl<const OWNED: bool> TrackableMethods for AnyButtonIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxAnyButton_AsTrackable(self.as_ptr()) }
-    }
-}
-
-// wxAppProgressIndicator
-wx_class! { AppProgressIndicator =
-    AppProgressIndicatorIsOwned<true>(wxAppProgressIndicator) impl
-        AppProgressIndicatorMethods
-}
-impl<const OWNED: bool> AppProgressIndicatorIsOwned<OWNED> {
-    pub fn new<W: WindowMethods>(
-        parent: Option<&W>,
-        max_value: c_int,
-    ) -> AppProgressIndicatorIsOwned<OWNED> {
-        unsafe {
-            let parent = match parent {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            AppProgressIndicatorIsOwned(ffi::wxAppProgressIndicator_new(parent, max_value))
-        }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for AppProgressIndicatorIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxAppProgressIndicator_delete(self.0) }
-        }
     }
 }
 
@@ -654,12 +579,6 @@ impl<const OWNED: bool> From<BannerWindowIsOwned<OWNED>> for ObjectIsOwned<OWNED
 impl<const OWNED: bool> DynamicCast for BannerWindowIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxBannerWindow_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxBannerWindow
-impl<const OWNED: bool> TrackableMethods for BannerWindowIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxBannerWindow_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -877,12 +796,6 @@ impl<const OWNED: bool> DynamicCast for BitmapButtonIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxBitmapButton_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxBitmapButton
-impl<const OWNED: bool> TrackableMethods for BitmapButtonIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxBitmapButton_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxBitmapComboBox
 wx_class! { BitmapComboBox =
@@ -982,11 +895,6 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for BitmapComboBoxIsOwned<
 impl<const OWNED: bool> TextEntryMethods for BitmapComboBoxIsOwned<OWNED> {
     fn as_text_entry(&self) -> *mut c_void {
         unsafe { ffi::wxBitmapComboBox_AsTextEntry(self.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> TrackableMethods for BitmapComboBoxIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxBitmapComboBox_AsTrackable(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> ComboBoxMethods for BitmapComboBoxIsOwned<OWNED> {
@@ -1156,12 +1064,6 @@ impl<const OWNED: bool> DynamicCast for BitmapToggleButtonIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxBitmapToggleButton_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxBitmapToggleButton
-impl<const OWNED: bool> TrackableMethods for BitmapToggleButtonIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxBitmapToggleButton_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxBookCtrlBase
 wx_class! { BookCtrlBase =
@@ -1211,11 +1113,6 @@ impl<const OWNED: bool> DynamicCast for BookCtrlBaseIsOwned<OWNED> {
 impl<const OWNED: bool> WithImagesMethods for BookCtrlBaseIsOwned<OWNED> {
     fn as_with_images(&self) -> *mut c_void {
         unsafe { ffi::wxBookCtrlBase_AsWithImages(self.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> TrackableMethods for BookCtrlBaseIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxBookCtrlBase_AsTrackable(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for BookCtrlBaseIsOwned<OWNED> {
@@ -1677,12 +1574,6 @@ impl<const OWNED: bool> DynamicCast for ButtonIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxButton_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxButton
-impl<const OWNED: bool> TrackableMethods for ButtonIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxButton_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxCalculateLayoutEvent
 wx_class! { CalculateLayoutEvent =
@@ -1786,12 +1677,6 @@ impl<const OWNED: bool> From<CalendarCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED
 impl<const OWNED: bool> DynamicCast for CalendarCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxCalendarCtrl_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxCalendarCtrl
-impl<const OWNED: bool> TrackableMethods for CalendarCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxCalendarCtrl_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -1982,12 +1867,6 @@ impl<const OWNED: bool> DynamicCast for CheckBoxIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxCheckBox_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxCheckBox
-impl<const OWNED: bool> TrackableMethods for CheckBoxIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxCheckBox_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxCheckListBox
 wx_class! { CheckListBox =
@@ -2079,11 +1958,6 @@ impl<const OWNED: bool> ItemContainerMethods for CheckListBoxIsOwned<OWNED> {
 impl<const OWNED: bool> ItemContainerImmutableMethods for CheckListBoxIsOwned<OWNED> {
     fn as_item_container_immutable(&self) -> *mut c_void {
         unsafe { ffi::wxCheckListBox_AsItemContainer(self.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> TrackableMethods for CheckListBoxIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxCheckListBox_AsTrackable(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> ListBoxMethods for CheckListBoxIsOwned<OWNED> {
@@ -2267,11 +2141,6 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for ChoiceIsOwned<OWNED> {
         unsafe { ffi::wxChoice_AsItemContainer(self.as_ptr()) }
     }
 }
-impl<const OWNED: bool> TrackableMethods for ChoiceIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxChoice_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxChoicebook
 wx_class! { Choicebook =
@@ -2345,11 +2214,6 @@ impl<const OWNED: bool> DynamicCast for ChoicebookIsOwned<OWNED> {
 impl<const OWNED: bool> WithImagesMethods for ChoicebookIsOwned<OWNED> {
     fn as_with_images(&self) -> *mut c_void {
         unsafe { ffi::wxChoicebook_AsWithImages(self.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> TrackableMethods for ChoicebookIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxChoicebook_AsTrackable(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> BookCtrlBaseMethods for ChoicebookIsOwned<OWNED> {
@@ -2628,12 +2492,6 @@ impl<const OWNED: bool> DynamicCast for CollapsibleHeaderCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxCollapsibleHeaderCtrl_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxCollapsibleHeaderCtrl
-impl<const OWNED: bool> TrackableMethods for CollapsibleHeaderCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxCollapsibleHeaderCtrl_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxCollapsiblePane
 wx_class! { CollapsiblePane =
@@ -2702,12 +2560,6 @@ impl<const OWNED: bool> From<CollapsiblePaneIsOwned<OWNED>> for ObjectIsOwned<OW
 impl<const OWNED: bool> DynamicCast for CollapsiblePaneIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxCollapsiblePane_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxCollapsiblePane
-impl<const OWNED: bool> TrackableMethods for CollapsiblePaneIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxCollapsiblePane_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -2993,12 +2845,6 @@ impl<const OWNED: bool> DynamicCast for ColourPickerCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxColourPickerCtrl_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxColourPickerCtrl
-impl<const OWNED: bool> TrackableMethods for ColourPickerCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxColourPickerCtrl_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxColourPickerEvent
 wx_class! { ColourPickerEvent =
@@ -3152,11 +2998,6 @@ impl<const OWNED: bool> TextEntryMethods for ComboBoxIsOwned<OWNED> {
         unsafe { ffi::wxComboBox_AsTextEntry(self.as_ptr()) }
     }
 }
-impl<const OWNED: bool> TrackableMethods for ComboBoxIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxComboBox_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxCommandEvent
 wx_class! { CommandEvent =
@@ -3278,12 +3119,6 @@ impl<const OWNED: bool> DynamicCast for CommandLinkButtonIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxCommandLinkButton_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxCommandLinkButton
-impl<const OWNED: bool> TrackableMethods for CommandLinkButtonIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxCommandLinkButton_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxContextHelp
 wx_class! { ContextHelp =
@@ -3397,12 +3232,6 @@ impl<const OWNED: bool> DynamicCast for ContextHelpButtonIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxContextHelpButton_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxContextHelpButton
-impl<const OWNED: bool> TrackableMethods for ContextHelpButtonIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxContextHelpButton_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxContextMenuEvent
 wx_class! { ContextMenuEvent =
@@ -3506,12 +3335,6 @@ impl<const OWNED: bool> DynamicCast for ControlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxControl_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxControl
-impl<const OWNED: bool> TrackableMethods for ControlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxControl_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxControlWithItems
 wx_class! { ControlWithItems =
@@ -3561,11 +3384,6 @@ impl<const OWNED: bool> ItemContainerMethods for ControlWithItemsIsOwned<OWNED> 
 impl<const OWNED: bool> ItemContainerImmutableMethods for ControlWithItemsIsOwned<OWNED> {
     fn as_item_container_immutable(&self) -> *mut c_void {
         unsafe { ffi::wxControlWithItems_AsItemContainer(self.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> TrackableMethods for ControlWithItemsIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxControlWithItems_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -4087,12 +3905,6 @@ impl<const OWNED: bool> DynamicCast for DataViewCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDataViewCtrl_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxDataViewCtrl
-impl<const OWNED: bool> TrackableMethods for DataViewCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxDataViewCtrl_AsTrackable(self.as_ptr()) }
-    }
-}
 impl<const OWNED: bool> ControlMethods for DataViewCtrlIsOwned<OWNED> {
     fn create_validator<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
@@ -4287,12 +4099,6 @@ impl<const OWNED: bool> DynamicCast for DataViewTreeCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDataViewTreeCtrl_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxDataViewTreeCtrl
-impl<const OWNED: bool> TrackableMethods for DataViewTreeCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxDataViewTreeCtrl_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxDataViewValueAdjuster
 wx_class! { DataViewValueAdjuster =
@@ -4431,12 +4237,6 @@ impl<const OWNED: bool> DynamicCast for DatePickerCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDatePickerCtrl_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxDatePickerCtrl
-impl<const OWNED: bool> TrackableMethods for DatePickerCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxDatePickerCtrl_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxDelegateRendererNative
 wx_class! { DelegateRendererNative =
@@ -4551,12 +4351,6 @@ impl<const OWNED: bool> From<DirPickerCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNE
 impl<const OWNED: bool> DynamicCast for DirPickerCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDirPickerCtrl_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxDirPickerCtrl
-impl<const OWNED: bool> TrackableMethods for DirPickerCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxDirPickerCtrl_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -4709,12 +4503,6 @@ impl<const OWNED: bool> DynamicCast for DocChildFrameIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDocChildFrame_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxDocChildFrame
-impl<const OWNED: bool> TrackableMethods for DocChildFrameIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxDocChildFrame_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxDocMDIChildFrame
 wx_class! { DocMDIChildFrame =
@@ -4798,12 +4586,6 @@ impl<const OWNED: bool> From<DocMDIChildFrameIsOwned<OWNED>> for ObjectIsOwned<O
 impl<const OWNED: bool> DynamicCast for DocMDIChildFrameIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDocMDIChildFrame_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxDocMDIChildFrame
-impl<const OWNED: bool> TrackableMethods for DocMDIChildFrameIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxDocMDIChildFrame_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -4893,12 +4675,6 @@ impl<const OWNED: bool> DynamicCast for DocMDIParentFrameIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDocMDIParentFrame_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxDocMDIParentFrame
-impl<const OWNED: bool> TrackableMethods for DocMDIParentFrameIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxDocMDIParentFrame_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxDocParentFrame
 wx_class! { DocParentFrame =
@@ -4978,12 +4754,6 @@ impl<const OWNED: bool> From<DocParentFrameIsOwned<OWNED>> for ObjectIsOwned<OWN
 impl<const OWNED: bool> DynamicCast for DocParentFrameIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDocParentFrame_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxDocParentFrame
-impl<const OWNED: bool> TrackableMethods for DocParentFrameIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxDocParentFrame_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -5154,12 +4924,6 @@ impl<const OWNED: bool> DynamicCast for EditableListBoxIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxEditableListBox_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxEditableListBox
-impl<const OWNED: bool> TrackableMethods for EditableListBoxIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxEditableListBox_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxEraseEvent
 wx_class! { EraseEvent =
@@ -5231,12 +4995,6 @@ impl<const OWNED: bool> From<EventBlockerIsOwned<OWNED>> for ObjectIsOwned<OWNED
 impl<const OWNED: bool> DynamicCast for EventBlockerIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxEventBlocker_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxEventBlocker
-impl<const OWNED: bool> TrackableMethods for EventBlockerIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxEventBlocker_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -5319,12 +5077,6 @@ impl<const OWNED: bool> From<FileCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for FileCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxFileCtrl_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxFileCtrl
-impl<const OWNED: bool> TrackableMethods for FileCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxFileCtrl_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -5530,12 +5282,6 @@ impl<const OWNED: bool> From<FilePickerCtrlIsOwned<OWNED>> for ObjectIsOwned<OWN
 impl<const OWNED: bool> DynamicCast for FilePickerCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxFilePickerCtrl_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxFilePickerCtrl
-impl<const OWNED: bool> TrackableMethods for FilePickerCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxFilePickerCtrl_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -5950,12 +5696,6 @@ impl<const OWNED: bool> DynamicCast for FontPickerCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxFontPickerCtrl_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxFontPickerCtrl
-impl<const OWNED: bool> TrackableMethods for FontPickerCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxFontPickerCtrl_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxFontPickerEvent
 wx_class! { FontPickerEvent =
@@ -6081,12 +5821,6 @@ impl<const OWNED: bool> From<FrameIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for FrameIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxFrame_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxFrame
-impl<const OWNED: bool> TrackableMethods for FrameIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxFrame_AsTrackable(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> TopLevelWindowMethods for FrameIsOwned<OWNED> {
@@ -6304,12 +6038,6 @@ impl<const OWNED: bool> DynamicCast for GaugeIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxGauge_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxGauge
-impl<const OWNED: bool> TrackableMethods for GaugeIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxGauge_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxGenericAboutDialog
 wx_class! { GenericAboutDialog =
@@ -6412,12 +6140,6 @@ impl<const OWNED: bool> From<GenericAnimationCtrlIsOwned<OWNED>> for ObjectIsOwn
 impl<const OWNED: bool> DynamicCast for GenericAnimationCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxGenericAnimationCtrl_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxGenericAnimationCtrl
-impl<const OWNED: bool> TrackableMethods for GenericAnimationCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxGenericAnimationCtrl_AsTrackable(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> AnimationCtrlMethods for GenericAnimationCtrlIsOwned<OWNED> {
@@ -6534,12 +6256,6 @@ impl<const OWNED: bool> DynamicCast for GenericDirCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxGenericDirCtrl_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxGenericDirCtrl
-impl<const OWNED: bool> TrackableMethods for GenericDirCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxGenericDirCtrl_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxGenericValidator
 wx_class! { GenericValidator =
@@ -6628,12 +6344,6 @@ impl<const OWNED: bool> From<GenericValidatorIsOwned<OWNED>> for ObjectIsOwned<O
 impl<const OWNED: bool> DynamicCast for GenericValidatorIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxGenericValidator_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxGenericValidator
-impl<const OWNED: bool> TrackableMethods for GenericValidatorIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxGenericValidator_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -7374,12 +7084,6 @@ impl<const OWNED: bool> DynamicCast for HeaderCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxHeaderCtrl_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxHeaderCtrl
-impl<const OWNED: bool> TrackableMethods for HeaderCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxHeaderCtrl_AsTrackable(self.as_ptr()) }
-    }
-}
 impl<const OWNED: bool> WindowMethods for HeaderCtrlIsOwned<OWNED> {
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
@@ -7526,12 +7230,6 @@ impl<const OWNED: bool> From<HeaderCtrlSimpleIsOwned<OWNED>> for ObjectIsOwned<O
 impl<const OWNED: bool> DynamicCast for HeaderCtrlSimpleIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxHeaderCtrlSimple_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxHeaderCtrlSimple
-impl<const OWNED: bool> TrackableMethods for HeaderCtrlSimpleIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxHeaderCtrlSimple_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -7705,12 +7403,6 @@ impl<const OWNED: bool> From<HyperlinkCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNE
 impl<const OWNED: bool> DynamicCast for HyperlinkCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxHyperlinkCtrl_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxHyperlinkCtrl
-impl<const OWNED: bool> TrackableMethods for HyperlinkCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxHyperlinkCtrl_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -7990,12 +7682,6 @@ impl<const OWNED: bool> From<InfoBarIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for InfoBarIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxInfoBar_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxInfoBar
-impl<const OWNED: bool> TrackableMethods for InfoBarIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxInfoBar_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -8302,11 +7988,6 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for ListBoxIsOwned<OWNED> 
         unsafe { ffi::wxListBox_AsItemContainer(self.as_ptr()) }
     }
 }
-impl<const OWNED: bool> TrackableMethods for ListBoxIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxListBox_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxListCtrl
 wx_class! { ListCtrl =
@@ -8372,12 +8053,6 @@ impl<const OWNED: bool> From<ListCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for ListCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxListCtrl_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxListCtrl
-impl<const OWNED: bool> TrackableMethods for ListCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxListCtrl_AsTrackable(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> ControlMethods for ListCtrlIsOwned<OWNED> {
@@ -8558,12 +8233,6 @@ impl<const OWNED: bool> DynamicCast for ListViewIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxListView_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxListView
-impl<const OWNED: bool> TrackableMethods for ListViewIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxListView_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxListbook
 wx_class! { Listbook =
@@ -8637,11 +8306,6 @@ impl<const OWNED: bool> DynamicCast for ListbookIsOwned<OWNED> {
 impl<const OWNED: bool> WithImagesMethods for ListbookIsOwned<OWNED> {
     fn as_with_images(&self) -> *mut c_void {
         unsafe { ffi::wxListbook_AsWithImages(self.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> TrackableMethods for ListbookIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxListbook_AsTrackable(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> BookCtrlBaseMethods for ListbookIsOwned<OWNED> {
@@ -8926,12 +8590,6 @@ impl<const OWNED: bool> DynamicCast for MDIChildFrameIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxMDIChildFrame_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxMDIChildFrame
-impl<const OWNED: bool> TrackableMethods for MDIChildFrameIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxMDIChildFrame_AsTrackable(self.as_ptr()) }
-    }
-}
 impl<const OWNED: bool> TopLevelWindowMethods for MDIChildFrameIsOwned<OWNED> {
     fn restore(&self) {
         unsafe { ffi::wxMDIChildFrame_Restore(self.as_ptr()) }
@@ -8972,12 +8630,6 @@ impl<const OWNED: bool> From<MDIClientWindowIsOwned<OWNED>> for ObjectIsOwned<OW
 impl<const OWNED: bool> DynamicCast for MDIClientWindowIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxMDIClientWindow_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxMDIClientWindow
-impl<const OWNED: bool> TrackableMethods for MDIClientWindowIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxMDIClientWindow_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -9058,12 +8710,6 @@ impl<const OWNED: bool> From<MDIParentFrameIsOwned<OWNED>> for ObjectIsOwned<OWN
 impl<const OWNED: bool> DynamicCast for MDIParentFrameIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxMDIParentFrame_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxMDIParentFrame
-impl<const OWNED: bool> TrackableMethods for MDIParentFrameIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxMDIParentFrame_AsTrackable(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> FrameMethods for MDIParentFrameIsOwned<OWNED> {
@@ -9304,12 +8950,6 @@ impl<const OWNED: bool> DynamicCast for MenuIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxMenu_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxMenu
-impl<const OWNED: bool> TrackableMethods for MenuIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxMenu_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxMenuBar
 wx_class! { MenuBar =
@@ -9346,12 +8986,6 @@ impl<const OWNED: bool> From<MenuBarIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for MenuBarIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxMenuBar_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxMenuBar
-impl<const OWNED: bool> TrackableMethods for MenuBarIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxMenuBar_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -9593,12 +9227,6 @@ impl<const OWNED: bool> From<MiniFrameIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for MiniFrameIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxMiniFrame_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxMiniFrame
-impl<const OWNED: bool> TrackableMethods for MiniFrameIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxMiniFrame_AsTrackable(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> FrameMethods for MiniFrameIsOwned<OWNED> {
@@ -9937,12 +9565,6 @@ impl<const OWNED: bool> DynamicCast for NativeWindowIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxNativeWindow_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxNativeWindow
-impl<const OWNED: bool> TrackableMethods for NativeWindowIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxNativeWindow_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxNavigationKeyEvent
 wx_class! { NavigationKeyEvent =
@@ -10029,12 +9651,6 @@ impl<const OWNED: bool> DynamicCast for NonOwnedWindowIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxNonOwnedWindow_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxNonOwnedWindow
-impl<const OWNED: bool> TrackableMethods for NonOwnedWindowIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxNonOwnedWindow_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxNotebook
 wx_class! { Notebook =
@@ -10108,11 +9724,6 @@ impl<const OWNED: bool> DynamicCast for NotebookIsOwned<OWNED> {
 impl<const OWNED: bool> WithImagesMethods for NotebookIsOwned<OWNED> {
     fn as_with_images(&self) -> *mut c_void {
         unsafe { ffi::wxNotebook_AsWithImages(self.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> TrackableMethods for NotebookIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxNotebook_AsTrackable(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> BookCtrlBaseMethods for NotebookIsOwned<OWNED> {
@@ -10486,12 +10097,6 @@ impl<const OWNED: bool> DynamicCast for PanelIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxPanel_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxPanel
-impl<const OWNED: bool> TrackableMethods for PanelIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxPanel_AsTrackable(self.as_ptr()) }
-    }
-}
 impl<const OWNED: bool> WindowMethods for PanelIsOwned<OWNED> {
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
@@ -10634,12 +10239,6 @@ impl<const OWNED: bool> DynamicCast for PickerBaseIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxPickerBase_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxPickerBase
-impl<const OWNED: bool> TrackableMethods for PickerBaseIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxPickerBase_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxPoint
 wx_class! { Point =
@@ -10731,12 +10330,6 @@ impl<const OWNED: bool> DynamicCast for PopupTransientWindowIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxPopupTransientWindow_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxPopupTransientWindow
-impl<const OWNED: bool> TrackableMethods for PopupTransientWindowIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxPopupTransientWindow_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxPopupWindow
 wx_class! { PopupWindow =
@@ -10787,12 +10380,6 @@ impl<const OWNED: bool> From<PopupWindowIsOwned<OWNED>> for ObjectIsOwned<OWNED>
 impl<const OWNED: bool> DynamicCast for PopupWindowIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxPopupWindow_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxPopupWindow
-impl<const OWNED: bool> TrackableMethods for PopupWindowIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxPopupWindow_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -10931,12 +10518,6 @@ impl<const OWNED: bool> DynamicCast for PreviewControlBarIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxPreviewControlBar_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxPreviewControlBar
-impl<const OWNED: bool> TrackableMethods for PreviewControlBarIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxPreviewControlBar_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxPreviewFrame
 wx_class! { PreviewFrame =
@@ -11012,12 +10593,6 @@ impl<const OWNED: bool> From<PreviewFrameIsOwned<OWNED>> for ObjectIsOwned<OWNED
 impl<const OWNED: bool> DynamicCast for PreviewFrameIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxPreviewFrame_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxPreviewFrame
-impl<const OWNED: bool> TrackableMethods for PreviewFrameIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxPreviewFrame_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -11323,11 +10898,6 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for RadioBoxIsOwned<OWNED>
         unsafe { ffi::wxRadioBox_AsItemContainerImmutable(self.as_ptr()) }
     }
 }
-impl<const OWNED: bool> TrackableMethods for RadioBoxIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxRadioBox_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxRadioButton
 wx_class! { RadioButton =
@@ -11396,12 +10966,6 @@ impl<const OWNED: bool> From<RadioButtonIsOwned<OWNED>> for ObjectIsOwned<OWNED>
 impl<const OWNED: bool> DynamicCast for RadioButtonIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxRadioButton_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxRadioButton
-impl<const OWNED: bool> TrackableMethods for RadioButtonIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxRadioButton_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -11512,12 +11076,6 @@ impl<const OWNED: bool> DynamicCast for RearrangeCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxRearrangeCtrl_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxRearrangeCtrl
-impl<const OWNED: bool> TrackableMethods for RearrangeCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxRearrangeCtrl_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxRearrangeList
 wx_class! { RearrangeList =
@@ -11617,11 +11175,6 @@ impl<const OWNED: bool> ItemContainerMethods for RearrangeListIsOwned<OWNED> {
 impl<const OWNED: bool> ItemContainerImmutableMethods for RearrangeListIsOwned<OWNED> {
     fn as_item_container_immutable(&self) -> *mut c_void {
         unsafe { ffi::wxRearrangeList_AsItemContainer(self.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> TrackableMethods for RearrangeListIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxRearrangeList_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -12079,12 +11632,6 @@ impl<const OWNED: bool> DynamicCast for SashLayoutWindowIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSashLayoutWindow_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxSashLayoutWindow
-impl<const OWNED: bool> TrackableMethods for SashLayoutWindowIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxSashLayoutWindow_AsTrackable(self.as_ptr()) }
-    }
-}
 impl<const OWNED: bool> WindowMethods for SashLayoutWindowIsOwned<OWNED> {
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
@@ -12163,12 +11710,6 @@ impl<const OWNED: bool> From<SashWindowIsOwned<OWNED>> for ObjectIsOwned<OWNED> 
 impl<const OWNED: bool> DynamicCast for SashWindowIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSashWindow_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxSashWindow
-impl<const OWNED: bool> TrackableMethods for SashWindowIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxSashWindow_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -12274,12 +11815,6 @@ impl<const OWNED: bool> From<ScrollBarIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for ScrollBarIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxScrollBar_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxScrollBar
-impl<const OWNED: bool> TrackableMethods for ScrollBarIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxScrollBar_AsTrackable(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> ControlMethods for ScrollBarIsOwned<OWNED> {
@@ -12465,11 +12000,6 @@ impl<const OWNED: bool> DynamicCast for SearchCtrlIsOwned<OWNED> {
 impl<const OWNED: bool> TextEntryMethods for SearchCtrlIsOwned<OWNED> {
     fn as_text_entry(&self) -> *mut c_void {
         unsafe { ffi::wxSearchCtrl_AsTextEntry(self.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> TrackableMethods for SearchCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxSearchCtrl_AsTrackable(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> TextCtrlMethods for SearchCtrlIsOwned<OWNED> {
@@ -12669,11 +12199,6 @@ impl<const OWNED: bool> DynamicCast for SimplebookIsOwned<OWNED> {
 impl<const OWNED: bool> WithImagesMethods for SimplebookIsOwned<OWNED> {
     fn as_with_images(&self) -> *mut c_void {
         unsafe { ffi::wxSimplebook_AsWithImages(self.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> TrackableMethods for SimplebookIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxSimplebook_AsTrackable(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> BookCtrlBaseMethods for SimplebookIsOwned<OWNED> {
@@ -12901,12 +12426,6 @@ impl<const OWNED: bool> DynamicCast for SliderIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSlider_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxSlider
-impl<const OWNED: bool> TrackableMethods for SliderIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxSlider_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxSound
 wx_class! { Sound =
@@ -13012,12 +12531,6 @@ impl<const OWNED: bool> DynamicCast for SpinButtonIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSpinButton_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxSpinButton
-impl<const OWNED: bool> TrackableMethods for SpinButtonIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxSpinButton_AsTrackable(self.as_ptr()) }
-    }
-}
 impl<const OWNED: bool> WindowMethods for SpinButtonIsOwned<OWNED> {
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
@@ -13112,12 +12625,6 @@ impl<const OWNED: bool> DynamicCast for SpinCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSpinCtrl_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxSpinCtrl
-impl<const OWNED: bool> TrackableMethods for SpinCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxSpinCtrl_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxSpinCtrlDouble
 wx_class! { SpinCtrlDouble =
@@ -13188,12 +12695,6 @@ impl<const OWNED: bool> From<SpinCtrlDoubleIsOwned<OWNED>> for ObjectIsOwned<OWN
 impl<const OWNED: bool> DynamicCast for SpinCtrlDoubleIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSpinCtrlDouble_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxSpinCtrlDouble
-impl<const OWNED: bool> TrackableMethods for SpinCtrlDoubleIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxSpinCtrlDouble_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -13380,12 +12881,6 @@ impl<const OWNED: bool> DynamicCast for SplashScreenIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSplashScreen_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxSplashScreen
-impl<const OWNED: bool> TrackableMethods for SplashScreenIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxSplashScreen_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxSplitterEvent
 wx_class! { SplitterEvent =
@@ -13493,12 +12988,6 @@ impl<const OWNED: bool> DynamicCast for SplitterWindowIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSplitterWindow_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxSplitterWindow
-impl<const OWNED: bool> TrackableMethods for SplitterWindowIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxSplitterWindow_AsTrackable(self.as_ptr()) }
-    }
-}
 impl<const OWNED: bool> WindowMethods for SplitterWindowIsOwned<OWNED> {
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
@@ -13595,12 +13084,6 @@ impl<const OWNED: bool> DynamicCast for StaticBitmapIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStaticBitmap_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxStaticBitmap
-impl<const OWNED: bool> TrackableMethods for StaticBitmapIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxStaticBitmap_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxStaticBox
 wx_class! { StaticBox =
@@ -13668,12 +13151,6 @@ impl<const OWNED: bool> From<StaticBoxIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for StaticBoxIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStaticBox_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxStaticBox
-impl<const OWNED: bool> TrackableMethods for StaticBoxIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxStaticBox_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -13800,12 +13277,6 @@ impl<const OWNED: bool> DynamicCast for StaticLineIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStaticLine_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxStaticLine
-impl<const OWNED: bool> TrackableMethods for StaticLineIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxStaticLine_AsTrackable(self.as_ptr()) }
-    }
-}
 impl<const OWNED: bool> WindowMethods for StaticLineIsOwned<OWNED> {
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
@@ -13897,12 +13368,6 @@ impl<const OWNED: bool> DynamicCast for StaticTextIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStaticText_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxStaticText
-impl<const OWNED: bool> TrackableMethods for StaticTextIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxStaticText_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxStatusBar
 wx_class! { StatusBar =
@@ -13960,12 +13425,6 @@ impl<const OWNED: bool> From<StatusBarIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for StatusBarIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStatusBar_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxStatusBar
-impl<const OWNED: bool> TrackableMethods for StatusBarIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxStatusBar_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -14112,12 +13571,6 @@ impl<const OWNED: bool> From<TaskBarIconIsOwned<OWNED>> for ObjectIsOwned<OWNED>
 impl<const OWNED: bool> DynamicCast for TaskBarIconIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTaskBarIcon_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxTaskBarIcon
-impl<const OWNED: bool> TrackableMethods for TaskBarIconIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxTaskBarIcon_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -14284,11 +13737,6 @@ impl<const OWNED: bool> TextEntryMethods for TextCtrlIsOwned<OWNED> {
         unsafe { ffi::wxTextCtrl_AsTextEntry(self.as_ptr()) }
     }
 }
-impl<const OWNED: bool> TrackableMethods for TextCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxTextCtrl_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxTextEntry
 
@@ -14334,12 +13782,6 @@ impl<const OWNED: bool> From<TextValidatorIsOwned<OWNED>> for ObjectIsOwned<OWNE
 impl<const OWNED: bool> DynamicCast for TextValidatorIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTextValidator_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxTextValidator
-impl<const OWNED: bool> TrackableMethods for TextValidatorIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxTextValidator_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -14417,12 +13859,6 @@ impl<const OWNED: bool> DynamicCast for TimePickerCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTimePickerCtrl_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxTimePickerCtrl
-impl<const OWNED: bool> TrackableMethods for TimePickerCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxTimePickerCtrl_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxTipWindow
 wx_class! { TipWindow =
@@ -14486,12 +13922,6 @@ impl<const OWNED: bool> From<TipWindowIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for TipWindowIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTipWindow_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxTipWindow
-impl<const OWNED: bool> TrackableMethods for TipWindowIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxTipWindow_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -14570,12 +14000,6 @@ impl<const OWNED: bool> DynamicCast for ToggleButtonIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxToggleButton_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxToggleButton
-impl<const OWNED: bool> TrackableMethods for ToggleButtonIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxToggleButton_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxToolBar
 wx_class! { ToolBar =
@@ -14637,12 +14061,6 @@ impl<const OWNED: bool> From<ToolBarIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for ToolBarIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxToolBar_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxToolBar
-impl<const OWNED: bool> TrackableMethods for ToolBarIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxToolBar_AsTrackable(self.as_ptr()) }
     }
 }
 
@@ -14718,11 +14136,6 @@ impl<const OWNED: bool> DynamicCast for ToolbookIsOwned<OWNED> {
 impl<const OWNED: bool> WithImagesMethods for ToolbookIsOwned<OWNED> {
     fn as_with_images(&self) -> *mut c_void {
         unsafe { ffi::wxToolbook_AsWithImages(self.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> TrackableMethods for ToolbookIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxToolbook_AsTrackable(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> BookCtrlBaseMethods for ToolbookIsOwned<OWNED> {
@@ -14839,12 +14252,6 @@ impl<const OWNED: bool> DynamicCast for TopLevelWindowIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTopLevelWindow_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxTopLevelWindow
-impl<const OWNED: bool> TrackableMethods for TopLevelWindowIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxTopLevelWindow_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxTreeCtrl
 wx_class! { TreeCtrl =
@@ -14916,11 +14323,6 @@ impl<const OWNED: bool> DynamicCast for TreeCtrlIsOwned<OWNED> {
 impl<const OWNED: bool> WithImagesMethods for TreeCtrlIsOwned<OWNED> {
     fn as_with_images(&self) -> *mut c_void {
         unsafe { ffi::wxTreeCtrl_AsWithImages(self.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> TrackableMethods for TreeCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxTreeCtrl_AsTrackable(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> ControlMethods for TreeCtrlIsOwned<OWNED> {
@@ -15106,12 +14508,6 @@ impl<const OWNED: bool> DynamicCast for TreeListCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTreeListCtrl_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxTreeListCtrl
-impl<const OWNED: bool> TrackableMethods for TreeListCtrlIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxTreeListCtrl_AsTrackable(self.as_ptr()) }
-    }
-}
 impl<const OWNED: bool> WindowMethods for TreeListCtrlIsOwned<OWNED> {
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
@@ -15229,11 +14625,6 @@ impl<const OWNED: bool> DynamicCast for TreebookIsOwned<OWNED> {
 impl<const OWNED: bool> WithImagesMethods for TreebookIsOwned<OWNED> {
     fn as_with_images(&self) -> *mut c_void {
         unsafe { ffi::wxTreebook_AsWithImages(self.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> TrackableMethods for TreebookIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxTreebook_AsTrackable(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> BookCtrlBaseMethods for TreebookIsOwned<OWNED> {
@@ -15422,12 +14813,6 @@ impl<const OWNED: bool> DynamicCast for ValidatorIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxValidator_CLASSINFO()) }
     }
 }
-// Mix-in(s) to wxValidator
-impl<const OWNED: bool> TrackableMethods for ValidatorIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxValidator_AsTrackable(self.as_ptr()) }
-    }
-}
 
 // wxWindow
 wx_class! { Window =
@@ -15477,12 +14862,6 @@ impl<const OWNED: bool> From<WindowIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for WindowIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxWindow_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxWindow
-impl<const OWNED: bool> TrackableMethods for WindowIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxWindow_AsTrackable(self.as_ptr()) }
     }
 }
 

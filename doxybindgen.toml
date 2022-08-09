@@ -469,6 +469,8 @@ wx31 = [
     'GetCountPerPage',
     'GetTopItem',
 ]
+[types.wxLocaleIdent]
+library = 'base'
 [types.wxMenu]
 blocklist = [
     # returns refs

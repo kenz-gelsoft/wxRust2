@@ -192,33 +192,6 @@ void wxActivityIndicator_Stop(wxActivityIndicator * self) {
 bool wxActivityIndicator_IsRunning(const wxActivityIndicator * self) {
     return self->IsRunning();
 }
-// Mix-in(s) to wxActivityIndicator
-wxTrackable *wxActivityIndicator_AsTrackable(wxActivityIndicator* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
-
-// CLASS: wxAddRemoveAdaptor
-void wxAddRemoveAdaptor_delete(wxAddRemoveAdaptor *self) {
-    delete self;
-}
-wxAddRemoveAdaptor *wxAddRemoveAdaptor_new() {
-    return new wxAddRemoveAdaptor();
-}
-wxWindow * wxAddRemoveAdaptor_GetItemsCtrl(const wxAddRemoveAdaptor * self) {
-    return self->GetItemsCtrl();
-}
-bool wxAddRemoveAdaptor_CanAdd(const wxAddRemoveAdaptor * self) {
-    return self->CanAdd();
-}
-bool wxAddRemoveAdaptor_CanRemove(const wxAddRemoveAdaptor * self) {
-    return self->CanRemove();
-}
-void wxAddRemoveAdaptor_OnAdd(wxAddRemoveAdaptor * self) {
-    return self->OnAdd();
-}
-void wxAddRemoveAdaptor_OnRemove(wxAddRemoveAdaptor * self) {
-    return self->OnRemove();
-}
 
 // CLASS: wxAddRemoveCtrl
 wxClassInfo *wxAddRemoveCtrl_CLASSINFO() {
@@ -238,10 +211,6 @@ void wxAddRemoveCtrl_SetAdaptor(wxAddRemoveCtrl * self, wxAddRemoveAdaptor * ada
 }
 void wxAddRemoveCtrl_SetButtonsToolTips(wxAddRemoveCtrl * self, const wxString * addtip, const wxString * removetip) {
     return self->SetButtonsToolTips(*addtip, *removetip);
-}
-// Mix-in(s) to wxAddRemoveCtrl
-wxTrackable *wxAddRemoveCtrl_AsTrackable(wxAddRemoveCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxAnimationCtrl
@@ -280,10 +249,6 @@ void wxAnimationCtrl_Stop(wxAnimationCtrl * self) {
 }
 wxAnimation *wxAnimationCtrl_CreateCompatibleAnimation() {
     return new wxAnimation(wxAnimationCtrl::CreateCompatibleAnimation());
-}
-// Mix-in(s) to wxAnimationCtrl
-wxTrackable *wxAnimationCtrl_AsTrackable(wxAnimationCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxAnyButton
@@ -340,30 +305,6 @@ void wxAnyButton_SetBitmapMargins1(wxAnyButton * self, const wxSize * sz) {
 }
 void wxAnyButton_SetBitmapPosition(wxAnyButton * self, wxDirection dir) {
     return self->SetBitmapPosition(dir);
-}
-// Mix-in(s) to wxAnyButton
-wxTrackable *wxAnyButton_AsTrackable(wxAnyButton* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
-
-// CLASS: wxAppProgressIndicator
-void wxAppProgressIndicator_delete(wxAppProgressIndicator *self) {
-    delete self;
-}
-wxAppProgressIndicator *wxAppProgressIndicator_new(wxWindow * parent, int max_value) {
-    return new wxAppProgressIndicator(parent, max_value);
-}
-bool wxAppProgressIndicator_IsAvailable(const wxAppProgressIndicator * self) {
-    return self->IsAvailable();
-}
-void wxAppProgressIndicator_SetValue(wxAppProgressIndicator * self, int value) {
-    return self->SetValue(value);
-}
-void wxAppProgressIndicator_SetRange(wxAppProgressIndicator * self, int range) {
-    return self->SetRange(range);
-}
-bool wxAppProgressIndicator_Pulse(wxAppProgressIndicator * self) {
-    return self->Pulse();
 }
 
 // CLASS: wxArtProvider
@@ -457,10 +398,6 @@ void wxBannerWindow_SetText(wxBannerWindow * self, const wxString * title, const
 }
 void wxBannerWindow_SetGradient(wxBannerWindow * self, const wxColour * start, const wxColour * end) {
     return self->SetGradient(*start, *end);
-}
-// Mix-in(s) to wxBannerWindow
-wxTrackable *wxBannerWindow_AsTrackable(wxBannerWindow* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxBitmap
@@ -755,10 +692,6 @@ wxBitmapButton * wxBitmapButton_NewCloseButton(wxWindow * parent, wxWindowID win
     return wxBitmapButton::NewCloseButton(parent, winid, *name);
 }
 #endif
-// Mix-in(s) to wxBitmapButton
-wxTrackable *wxBitmapButton_AsTrackable(wxBitmapButton* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxBitmapComboBox
 wxClassInfo *wxBitmapComboBox_CLASSINFO() {
@@ -807,9 +740,6 @@ wxItemContainer *wxBitmapComboBox_AsItemContainer(wxBitmapComboBox* obj) {
 wxTextEntryBase *wxBitmapComboBox_AsTextEntry(wxBitmapComboBox* obj) {
     return static_cast<wxTextEntryBase*>(obj);
 }
-wxTrackable *wxBitmapComboBox_AsTrackable(wxBitmapComboBox* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxBitmapHandler
 wxClassInfo *wxBitmapHandler_CLASSINFO() {
@@ -843,10 +773,6 @@ wxBitmapToggleButton *wxBitmapToggleButton_new1(wxWindow * parent, wxWindowID id
 }
 bool wxBitmapToggleButton_Create(wxBitmapToggleButton * self, wxWindow * parent, wxWindowID id, const wxBitmapBundle * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * val, const wxString * name) {
     return self->Create(parent, id, *label, *pos, *size, style, *val, *name);
-}
-// Mix-in(s) to wxBitmapToggleButton
-wxTrackable *wxBitmapToggleButton_AsTrackable(wxBitmapToggleButton* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxBookCtrlBase
@@ -916,9 +842,6 @@ bool wxBookCtrlBase_Create(wxBookCtrlBase * self, wxWindow * parent, wxWindowID 
 // Mix-in(s) to wxBookCtrlBase
 wxWithImages *wxBookCtrlBase_AsWithImages(wxBookCtrlBase* obj) {
     return static_cast<wxWithImages*>(obj);
-}
-wxTrackable *wxBookCtrlBase_AsTrackable(wxBookCtrlBase* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxBookCtrlEvent
@@ -1087,10 +1010,6 @@ wxSize *wxButton_GetDefaultSize(wxWindow * win) {
     return new wxSize(wxButton::GetDefaultSize(win));
 }
 #endif
-// Mix-in(s) to wxButton
-wxTrackable *wxButton_AsTrackable(wxButton* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxCalculateLayoutEvent
 wxClassInfo *wxCalculateLayoutEvent_CLASSINFO() {
@@ -1187,10 +1106,6 @@ void wxCalendarCtrl_SetHolidayColours(wxCalendarCtrl * self, const wxColour * co
 }
 void wxCalendarCtrl_Mark(wxCalendarCtrl * self, size_t day, bool mark) {
     return self->Mark(day, mark);
-}
-// Mix-in(s) to wxCalendarCtrl
-wxTrackable *wxCalendarCtrl_AsTrackable(wxCalendarCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxCalendarDateAttr
@@ -1356,10 +1271,6 @@ void wxCheckBox_SetValue(wxCheckBox * self, bool state) {
 void wxCheckBox_Set3StateValue(wxCheckBox * self, wxCheckBoxState state) {
     return self->Set3StateValue(state);
 }
-// Mix-in(s) to wxCheckBox
-wxTrackable *wxCheckBox_AsTrackable(wxCheckBox* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxCheckListBox
 wxClassInfo *wxCheckListBox_CLASSINFO() {
@@ -1386,9 +1297,6 @@ unsigned int wxCheckListBox_GetCheckedItems(const wxCheckListBox * self, wxArray
 // Mix-in(s) to wxCheckListBox
 wxItemContainer *wxCheckListBox_AsItemContainer(wxCheckListBox* obj) {
     return static_cast<wxItemContainer*>(obj);
-}
-wxTrackable *wxCheckListBox_AsTrackable(wxCheckListBox* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxChildFocusEvent
@@ -1431,9 +1339,6 @@ bool wxChoice_IsSorted(const wxChoice * self) {
 wxItemContainer *wxChoice_AsItemContainer(wxChoice* obj) {
     return static_cast<wxItemContainer*>(obj);
 }
-wxTrackable *wxChoice_AsTrackable(wxChoice* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxChoicebook
 wxClassInfo *wxChoicebook_CLASSINFO() {
@@ -1454,9 +1359,6 @@ wxChoice * wxChoicebook_GetChoiceCtrl(const wxChoicebook * self) {
 // Mix-in(s) to wxChoicebook
 wxWithImages *wxChoicebook_AsWithImages(wxChoicebook* obj) {
     return static_cast<wxWithImages*>(obj);
-}
-wxTrackable *wxChoicebook_AsTrackable(wxChoicebook* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxClientDC
@@ -1558,10 +1460,6 @@ void wxCollapsibleHeaderCtrl_SetCollapsed(wxCollapsibleHeaderCtrl * self, bool c
 bool wxCollapsibleHeaderCtrl_IsCollapsed(const wxCollapsibleHeaderCtrl * self) {
     return self->IsCollapsed();
 }
-// Mix-in(s) to wxCollapsibleHeaderCtrl
-wxTrackable *wxCollapsibleHeaderCtrl_AsTrackable(wxCollapsibleHeaderCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxCollapsiblePane
 wxClassInfo *wxCollapsiblePane_CLASSINFO() {
@@ -1590,10 +1488,6 @@ bool wxCollapsiblePane_IsCollapsed(const wxCollapsiblePane * self) {
 }
 bool wxCollapsiblePane_IsExpanded(const wxCollapsiblePane * self) {
     return self->IsExpanded();
-}
-// Mix-in(s) to wxCollapsiblePane
-wxTrackable *wxCollapsiblePane_AsTrackable(wxCollapsiblePane* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxCollapsiblePaneEvent
@@ -1757,10 +1651,6 @@ wxColour *wxColourPickerCtrl_GetColour(const wxColourPickerCtrl * self) {
 void wxColourPickerCtrl_SetColour(wxColourPickerCtrl * self, const wxColour * col) {
     return self->SetColour(*col);
 }
-// Mix-in(s) to wxColourPickerCtrl
-wxTrackable *wxColourPickerCtrl_AsTrackable(wxColourPickerCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxColourPickerEvent
 wxClassInfo *wxColourPickerEvent_CLASSINFO() {
@@ -1813,9 +1703,6 @@ wxItemContainer *wxComboBox_AsItemContainer(wxComboBox* obj) {
 }
 wxTextEntryBase *wxComboBox_AsTextEntry(wxComboBox* obj) {
     return static_cast<wxTextEntryBase*>(obj);
-}
-wxTrackable *wxComboBox_AsTrackable(wxComboBox* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxCommandEvent
@@ -1890,10 +1777,6 @@ wxString *wxCommandLinkButton_GetMainLabel(const wxCommandLinkButton * self) {
 wxString *wxCommandLinkButton_GetNote(const wxCommandLinkButton * self) {
     return new wxString(self->GetNote());
 }
-// Mix-in(s) to wxCommandLinkButton
-wxTrackable *wxCommandLinkButton_AsTrackable(wxCommandLinkButton* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxContextHelp
 wxClassInfo *wxContextHelp_CLASSINFO() {
@@ -1915,10 +1798,6 @@ wxClassInfo *wxContextHelpButton_CLASSINFO() {
 }
 wxContextHelpButton *wxContextHelpButton_new(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style) {
     return new wxContextHelpButton(parent, id, *pos, *size, style);
-}
-// Mix-in(s) to wxContextHelpButton
-wxTrackable *wxContextHelpButton_AsTrackable(wxContextHelpButton* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxContextMenuEvent
@@ -1980,10 +1859,6 @@ wxString *wxControl_EscapeMnemonics(const wxString * text) {
 wxString *wxControl_Ellipsize(const wxString * label, const wxDC * dc, wxEllipsizeMode mode, int max_width, int flags) {
     return new wxString(wxControl::Ellipsize(*label, *dc, mode, max_width, flags));
 }
-// Mix-in(s) to wxControl
-wxTrackable *wxControl_AsTrackable(wxControl* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxControlWithItems
 wxClassInfo *wxControlWithItems_CLASSINFO() {
@@ -1992,9 +1867,6 @@ wxClassInfo *wxControlWithItems_CLASSINFO() {
 // Mix-in(s) to wxControlWithItems
 wxItemContainer *wxControlWithItems_AsItemContainer(wxControlWithItems* obj) {
     return static_cast<wxItemContainer*>(obj);
-}
-wxTrackable *wxControlWithItems_AsTrackable(wxControlWithItems* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxCursor
@@ -2715,10 +2587,6 @@ int wxDataViewCtrl_GetCountPerPage(const wxDataViewCtrl * self) {
 wxDataViewItem *wxDataViewCtrl_GetTopItem(const wxDataViewCtrl * self) {
     return new wxDataViewItem(self->GetTopItem());
 }
-// Mix-in(s) to wxDataViewCtrl
-wxTrackable *wxDataViewCtrl_AsTrackable(wxDataViewCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxDataViewIconText
 wxClassInfo *wxDataViewIconText_CLASSINFO() {
@@ -2907,10 +2775,6 @@ void wxDataViewTreeCtrl_SetItemIcon(wxDataViewTreeCtrl * self, const wxDataViewI
 void wxDataViewTreeCtrl_SetItemText(wxDataViewTreeCtrl * self, const wxDataViewItem * item, const wxString * text) {
     return self->SetItemText(*item, *text);
 }
-// Mix-in(s) to wxDataViewTreeCtrl
-wxTrackable *wxDataViewTreeCtrl_AsTrackable(wxDataViewTreeCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxDataViewValueAdjuster
 void wxDataViewValueAdjuster_delete(wxDataViewValueAdjuster *self) {
@@ -2961,10 +2825,6 @@ void wxDatePickerCtrl_SetRange(wxDatePickerCtrl * self, const wxDateTime * dt1, 
 void wxDatePickerCtrl_SetValue(wxDatePickerCtrl * self, const wxDateTime * dt) {
     return self->SetValue(*dt);
 }
-// Mix-in(s) to wxDatePickerCtrl
-wxTrackable *wxDatePickerCtrl_AsTrackable(wxDatePickerCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxDelegateRendererNative
 void wxDelegateRendererNative_delete(wxDelegateRendererNative *self) {
@@ -3004,10 +2864,6 @@ void wxDirPickerCtrl_SetInitialDirectory(wxDirPickerCtrl * self, const wxString 
 }
 void wxDirPickerCtrl_SetPath(wxDirPickerCtrl * self, const wxString * dirname) {
     return self->SetPath(*dirname);
-}
-// Mix-in(s) to wxDirPickerCtrl
-wxTrackable *wxDirPickerCtrl_AsTrackable(wxDirPickerCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxDisplay
@@ -3087,10 +2943,6 @@ void wxDocChildFrame_SetDocument(wxDocChildFrame * self, wxDocument * doc) {
 void wxDocChildFrame_SetView(wxDocChildFrame * self, wxView * view) {
     return self->SetView(view);
 }
-// Mix-in(s) to wxDocChildFrame
-wxTrackable *wxDocChildFrame_AsTrackable(wxDocChildFrame* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxDocMDIChildFrame
 wxClassInfo *wxDocMDIChildFrame_CLASSINFO() {
@@ -3111,10 +2963,6 @@ void wxDocMDIChildFrame_SetDocument(wxDocMDIChildFrame * self, wxDocument * doc)
 void wxDocMDIChildFrame_SetView(wxDocMDIChildFrame * self, wxView * view) {
     return self->SetView(view);
 }
-// Mix-in(s) to wxDocMDIChildFrame
-wxTrackable *wxDocMDIChildFrame_AsTrackable(wxDocMDIChildFrame* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxDocMDIParentFrame
 wxClassInfo *wxDocMDIParentFrame_CLASSINFO() {
@@ -3128,10 +2976,6 @@ wxDocMDIParentFrame *wxDocMDIParentFrame_new1(wxDocManager * manager, wxFrame * 
 }
 bool wxDocMDIParentFrame_Create(wxDocMDIParentFrame * self, wxDocManager * manager, wxFrame * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return self->Create(manager, parent, id, *title, *pos, *size, style, *name);
-}
-// Mix-in(s) to wxDocMDIParentFrame
-wxTrackable *wxDocMDIParentFrame_AsTrackable(wxDocMDIParentFrame* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxDocParentFrame
@@ -3149,10 +2993,6 @@ bool wxDocParentFrame_Create(wxDocParentFrame * self, wxDocManager * manager, wx
 }
 wxDocManager * wxDocParentFrame_GetDocumentManager(const wxDocParentFrame * self) {
     return self->GetDocumentManager();
-}
-// Mix-in(s) to wxDocParentFrame
-wxTrackable *wxDocParentFrame_AsTrackable(wxDocParentFrame* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxDragImage
@@ -3247,10 +3087,6 @@ void wxEditableListBox_SetStrings(wxEditableListBox * self, const wxArrayString 
 void wxEditableListBox_GetStrings(const wxEditableListBox * self, wxArrayString * strings) {
     return self->GetStrings(*strings);
 }
-// Mix-in(s) to wxEditableListBox
-wxTrackable *wxEditableListBox_AsTrackable(wxEditableListBox* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxEraseEvent
 wxClassInfo *wxEraseEvent_CLASSINFO() {
@@ -3266,10 +3102,6 @@ wxDC * wxEraseEvent_GetDC(const wxEraseEvent * self) {
 // CLASS: wxEventBlocker
 wxClassInfo *wxEventBlocker_CLASSINFO() {
     return wxCLASSINFO(wxEventBlocker);
-}
-// Mix-in(s) to wxEventBlocker
-wxTrackable *wxEventBlocker_AsTrackable(wxEventBlocker* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxFileCtrl
@@ -3323,10 +3155,6 @@ void wxFileCtrl_SetWildcard(wxFileCtrl * self, const wxString * wild_card) {
 }
 void wxFileCtrl_ShowHidden(wxFileCtrl * self, bool show) {
     return self->ShowHidden(show);
-}
-// Mix-in(s) to wxFileCtrl
-wxTrackable *wxFileCtrl_AsTrackable(wxFileCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxFileCtrlEvent
@@ -3433,10 +3261,6 @@ void wxFilePickerCtrl_SetInitialDirectory(wxFilePickerCtrl * self, const wxStrin
 }
 void wxFilePickerCtrl_SetPath(wxFilePickerCtrl * self, const wxString * filename) {
     return self->SetPath(*filename);
-}
-// Mix-in(s) to wxFilePickerCtrl
-wxTrackable *wxFilePickerCtrl_AsTrackable(wxFilePickerCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxFindDialogEvent
@@ -3837,10 +3661,6 @@ void wxFontPickerCtrl_SetSelectedColour(wxFontPickerCtrl * self, const wxColour 
 void wxFontPickerCtrl_SetSelectedFont(wxFontPickerCtrl * self, const wxFont * font) {
     return self->SetSelectedFont(*font);
 }
-// Mix-in(s) to wxFontPickerCtrl
-wxTrackable *wxFontPickerCtrl_AsTrackable(wxFontPickerCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxFontPickerEvent
 wxClassInfo *wxFontPickerEvent_CLASSINFO() {
@@ -3930,10 +3750,6 @@ void wxFrame_PushStatusText(wxFrame * self, const wxString * text, int number) {
 }
 void wxFrame_PopStatusText(wxFrame * self, int number) {
     return self->PopStatusText(number);
-}
-// Mix-in(s) to wxFrame
-wxTrackable *wxFrame_AsTrackable(wxFrame* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxFullScreenEvent
@@ -4029,10 +3845,6 @@ void wxGauge_SetRange(wxGauge * self, int range) {
 void wxGauge_SetValue(wxGauge * self, int pos) {
     return self->SetValue(pos);
 }
-// Mix-in(s) to wxGauge
-wxTrackable *wxGauge_AsTrackable(wxGauge* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxGenericAboutDialog
 void wxGenericAboutDialog_delete(wxGenericAboutDialog *self) {
@@ -4072,10 +3884,6 @@ void wxGenericAnimationCtrl_SetUseWindowBackgroundColour(wxGenericAnimationCtrl 
 }
 bool wxGenericAnimationCtrl_IsUsingWindowBackgroundColour(const wxGenericAnimationCtrl * self) {
     return self->IsUsingWindowBackgroundColour();
-}
-// Mix-in(s) to wxGenericAnimationCtrl
-wxTrackable *wxGenericAnimationCtrl_AsTrackable(wxGenericAnimationCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxGenericDirCtrl
@@ -4163,10 +3971,6 @@ void wxGenericDirCtrl_SelectPaths(wxGenericDirCtrl * self, const wxArrayString *
 void wxGenericDirCtrl_UnselectAll(wxGenericDirCtrl * self) {
     return self->UnselectAll();
 }
-// Mix-in(s) to wxGenericDirCtrl
-wxTrackable *wxGenericDirCtrl_AsTrackable(wxGenericDirCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxGenericValidator
 wxClassInfo *wxGenericValidator_CLASSINFO() {
@@ -4198,10 +4002,6 @@ wxGenericValidator *wxGenericValidator_new7(float * val_ptr) {
 }
 wxGenericValidator *wxGenericValidator_new8(double * val_ptr) {
     return new wxGenericValidator(val_ptr);
-}
-// Mix-in(s) to wxGenericValidator
-wxTrackable *wxGenericValidator_AsTrackable(wxGenericValidator* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxGestureEvent
@@ -4787,10 +4587,6 @@ int wxHeaderCtrl_GetColumnTitleWidth1(wxHeaderCtrl * self, unsigned int idx) {
 void wxHeaderCtrl_MoveColumnInOrderArray(wxArrayInt * order, unsigned int idx, unsigned int pos) {
     return wxHeaderCtrl::MoveColumnInOrderArray(*order, idx, pos);
 }
-// Mix-in(s) to wxHeaderCtrl
-wxTrackable *wxHeaderCtrl_AsTrackable(wxHeaderCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxHeaderCtrlEvent
 wxClassInfo *wxHeaderCtrlEvent_CLASSINFO() {
@@ -4848,10 +4644,6 @@ void wxHeaderCtrlSimple_ShowSortIndicator(wxHeaderCtrlSimple * self, unsigned in
 }
 void wxHeaderCtrlSimple_RemoveSortIndicator(wxHeaderCtrlSimple * self) {
     return self->RemoveSortIndicator();
-}
-// Mix-in(s) to wxHeaderCtrlSimple
-wxTrackable *wxHeaderCtrlSimple_AsTrackable(wxHeaderCtrlSimple* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxHelpControllerHelpProvider
@@ -4947,10 +4739,6 @@ void wxHyperlinkCtrl_SetVisited(wxHyperlinkCtrl * self, bool visited) {
 }
 void wxHyperlinkCtrl_SetVisitedColour(wxHyperlinkCtrl * self, const wxColour * colour) {
     return self->SetVisitedColour(*colour);
-}
-// Mix-in(s) to wxHyperlinkCtrl
-wxTrackable *wxHyperlinkCtrl_AsTrackable(wxHyperlinkCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxHyperlinkEvent
@@ -5168,10 +4956,6 @@ wxWindowID wxInfoBar_GetButtonId(const wxInfoBar * self, size_t idx) {
 }
 bool wxInfoBar_HasButtonId(const wxInfoBar * self, wxWindowID btnid) {
     return self->HasButtonId(btnid);
-}
-// Mix-in(s) to wxInfoBar
-wxTrackable *wxInfoBar_AsTrackable(wxInfoBar* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxInitDialogEvent
@@ -5660,9 +5444,6 @@ int wxListBox_GetTopItem(const wxListBox * self) {
 wxItemContainer *wxListBox_AsItemContainer(wxListBox* obj) {
     return static_cast<wxItemContainer*>(obj);
 }
-wxTrackable *wxListBox_AsTrackable(wxListBox* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxListCtrl
 wxClassInfo *wxListCtrl_CLASSINFO() {
@@ -5935,10 +5716,6 @@ bool wxListCtrl_GetUpdatedAscendingSortIndicator(const wxListCtrl * self, int co
 bool wxListCtrl_IsAscendingSortIndicator(const wxListCtrl * self) {
     return self->IsAscendingSortIndicator();
 }
-// Mix-in(s) to wxListCtrl
-wxTrackable *wxListCtrl_AsTrackable(wxListCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxListEvent
 wxClassInfo *wxListEvent_CLASSINFO() {
@@ -6116,10 +5893,6 @@ void wxListView_Select(wxListView * self, long n, bool on) {
 void wxListView_SetColumnImage(wxListView * self, int col, int image) {
     return self->SetColumnImage(col, image);
 }
-// Mix-in(s) to wxListView
-wxTrackable *wxListView_AsTrackable(wxListView* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxListbook
 wxClassInfo *wxListbook_CLASSINFO() {
@@ -6140,9 +5913,6 @@ wxListView * wxListbook_GetListView(const wxListbook * self) {
 // Mix-in(s) to wxListbook
 wxWithImages *wxListbook_AsWithImages(wxListbook* obj) {
     return static_cast<wxWithImages*>(obj);
-}
-wxTrackable *wxListbook_AsTrackable(wxListbook* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxLogGui
@@ -6211,10 +5981,6 @@ wxMDIParentFrame * wxMDIChildFrame_GetMDIParent(const wxMDIChildFrame * self) {
 void wxMDIChildFrame_Restore(wxMDIChildFrame * self) {
     return self->Restore();
 }
-// Mix-in(s) to wxMDIChildFrame
-wxTrackable *wxMDIChildFrame_AsTrackable(wxMDIChildFrame* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxMDIClientWindow
 wxClassInfo *wxMDIClientWindow_CLASSINFO() {
@@ -6225,10 +5991,6 @@ wxMDIClientWindow *wxMDIClientWindow_new() {
 }
 bool wxMDIClientWindow_CreateClient(wxMDIClientWindow * self, wxMDIParentFrame * parent, long style) {
     return self->CreateClient(parent, style);
-}
-// Mix-in(s) to wxMDIClientWindow
-wxTrackable *wxMDIClientWindow_AsTrackable(wxMDIClientWindow* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxMDIParentFrame
@@ -6273,10 +6035,6 @@ void wxMDIParentFrame_SetWindowMenu(wxMDIParentFrame * self, wxMenu * menu) {
 }
 bool wxMDIParentFrame_IsTDI() {
     return wxMDIParentFrame::IsTDI();
-}
-// Mix-in(s) to wxMDIParentFrame
-wxTrackable *wxMDIParentFrame_AsTrackable(wxMDIParentFrame* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxMask
@@ -6511,10 +6269,6 @@ void wxMenu_Detach(wxMenu * self) {
 bool wxMenu_IsAttached(const wxMenu * self) {
     return self->IsAttached();
 }
-// Mix-in(s) to wxMenu
-wxTrackable *wxMenu_AsTrackable(wxMenu* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxMenuBar
 wxClassInfo *wxMenuBar_CLASSINFO() {
@@ -6614,10 +6368,6 @@ wxMenuBar * wxMenuBar_MacGetCommonMenuBar() {
     return wxMenuBar::MacGetCommonMenuBar();
 }
 #endif
-// Mix-in(s) to wxMenuBar
-wxTrackable *wxMenuBar_AsTrackable(wxMenuBar* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxMenuEvent
 wxClassInfo *wxMenuEvent_CLASSINFO() {
@@ -6810,10 +6560,6 @@ wxMiniFrame *wxMiniFrame_new1(wxWindow * parent, wxWindowID id, const wxString *
 }
 bool wxMiniFrame_Create(wxMiniFrame * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return self->Create(parent, id, *title, *pos, *size, style, *name);
-}
-// Mix-in(s) to wxMiniFrame
-wxTrackable *wxMiniFrame_AsTrackable(wxMiniFrame* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxMirrorDC
@@ -7037,10 +6783,6 @@ wxNativeWindow *wxNativeWindow_new() {
 void wxNativeWindow_Disown(wxNativeWindow * self) {
     return self->Disown();
 }
-// Mix-in(s) to wxNativeWindow
-wxTrackable *wxNativeWindow_AsTrackable(wxNativeWindow* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxNavigationKeyEvent
 wxClassInfo *wxNavigationKeyEvent_CLASSINFO() {
@@ -7090,10 +6832,6 @@ bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow * self, const wxRegion * region)
 bool wxNonOwnedWindow_SetShape1(wxNonOwnedWindow * self, const wxGraphicsPath * path) {
     return self->SetShape(*path);
 }
-// Mix-in(s) to wxNonOwnedWindow
-wxTrackable *wxNonOwnedWindow_AsTrackable(wxNonOwnedWindow* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxNotebook
 wxClassInfo *wxNotebook_CLASSINFO() {
@@ -7117,9 +6855,6 @@ void wxNotebook_SetPadding(wxNotebook * self, const wxSize * padding) {
 // Mix-in(s) to wxNotebook
 wxWithImages *wxNotebook_AsWithImages(wxNotebook* obj) {
     return static_cast<wxWithImages*>(obj);
-}
-wxTrackable *wxNotebook_AsTrackable(wxNotebook* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxNotifyEvent
@@ -7326,10 +7061,6 @@ void wxPanel_OnSysColourChanged(wxPanel * self, wxSysColourChangedEvent * event)
 void wxPanel_SetFocusIgnoringChildren(wxPanel * self) {
     return self->SetFocusIgnoringChildren();
 }
-// Mix-in(s) to wxPanel
-wxTrackable *wxPanel_AsTrackable(wxPanel* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxPen
 wxClassInfo *wxPen_CLASSINFO() {
@@ -7447,10 +7178,6 @@ void wxPickerBase_UpdatePickerFromTextCtrl(wxPickerBase * self) {
 void wxPickerBase_UpdateTextCtrlFromPicker(wxPickerBase * self) {
     return self->UpdateTextCtrlFromPicker();
 }
-// Mix-in(s) to wxPickerBase
-wxTrackable *wxPickerBase_AsTrackable(wxPickerBase* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxPoint
 void wxPoint_delete(wxPoint *self) {
@@ -7491,10 +7218,6 @@ void wxPopupTransientWindow_Dismiss(wxPopupTransientWindow * self) {
 bool wxPopupTransientWindow_ProcessLeftDown(wxPopupTransientWindow * self, wxMouseEvent * event) {
     return self->ProcessLeftDown(*event);
 }
-// Mix-in(s) to wxPopupTransientWindow
-wxTrackable *wxPopupTransientWindow_AsTrackable(wxPopupTransientWindow* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxPopupWindow
 wxClassInfo *wxPopupWindow_CLASSINFO() {
@@ -7511,10 +7234,6 @@ bool wxPopupWindow_Create(wxPopupWindow * self, wxWindow * parent, int flags) {
 }
 void wxPopupWindow_Position(wxPopupWindow * self, const wxPoint * pt_origin, const wxSize * size_popup) {
     return self->Position(*pt_origin, *size_popup);
-}
-// Mix-in(s) to wxPopupWindow
-wxTrackable *wxPopupWindow_AsTrackable(wxPopupWindow* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxPreferencesEditor
@@ -7567,10 +7286,6 @@ int wxPreviewControlBar_GetZoomControl(wxPreviewControlBar * self) {
 void wxPreviewControlBar_SetZoomControl(wxPreviewControlBar * self, int percent) {
     return self->SetZoomControl(percent);
 }
-// Mix-in(s) to wxPreviewControlBar
-wxTrackable *wxPreviewControlBar_AsTrackable(wxPreviewControlBar* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxPreviewFrame
 wxClassInfo *wxPreviewFrame_CLASSINFO() {
@@ -7590,10 +7305,6 @@ void wxPreviewFrame_Initialize(wxPreviewFrame * self) {
 }
 void wxPreviewFrame_OnCloseWindow(wxPreviewFrame * self, wxCloseEvent * event) {
     return self->OnCloseWindow(*event);
-}
-// Mix-in(s) to wxPreviewFrame
-wxTrackable *wxPreviewFrame_AsTrackable(wxPreviewFrame* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxPrintData
@@ -7808,9 +7519,6 @@ bool wxRadioBox_Show(wxRadioBox * self, unsigned int item, bool show) {
 wxItemContainerImmutable *wxRadioBox_AsItemContainerImmutable(wxRadioBox* obj) {
     return static_cast<wxItemContainerImmutable*>(obj);
 }
-wxTrackable *wxRadioBox_AsTrackable(wxRadioBox* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxRadioButton
 wxClassInfo *wxRadioButton_CLASSINFO() {
@@ -7843,10 +7551,6 @@ wxRadioButton * wxRadioButton_GetPreviousInGroup(const wxRadioButton * self) {
 wxRadioButton * wxRadioButton_GetNextInGroup(const wxRadioButton * self) {
     return self->GetNextInGroup();
 }
-// Mix-in(s) to wxRadioButton
-wxTrackable *wxRadioButton_AsTrackable(wxRadioButton* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxRealPoint
 void wxRealPoint_delete(wxRealPoint *self) {
@@ -7877,10 +7581,6 @@ bool wxRearrangeCtrl_Create(wxRearrangeCtrl * self, wxWindow * parent, wxWindowI
 }
 wxRearrangeList * wxRearrangeCtrl_GetList(const wxRearrangeCtrl * self) {
     return self->GetList();
-}
-// Mix-in(s) to wxRearrangeCtrl
-wxTrackable *wxRearrangeCtrl_AsTrackable(wxRearrangeCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxRearrangeList
@@ -7914,9 +7614,6 @@ bool wxRearrangeList_MoveCurrentDown(wxRearrangeList * self) {
 // Mix-in(s) to wxRearrangeList
 wxItemContainer *wxRearrangeList_AsItemContainer(wxRearrangeList* obj) {
     return static_cast<wxItemContainer*>(obj);
-}
-wxTrackable *wxRearrangeList_AsTrackable(wxRearrangeList* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxRect
@@ -8321,10 +8018,6 @@ void wxSashLayoutWindow_OnQueryLayoutInfo(wxSashLayoutWindow * self, wxQueryLayo
 void wxSashLayoutWindow_SetDefaultSize(wxSashLayoutWindow * self, const wxSize * size) {
     return self->SetDefaultSize(*size);
 }
-// Mix-in(s) to wxSashLayoutWindow
-wxTrackable *wxSashLayoutWindow_AsTrackable(wxSashLayoutWindow* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxSashWindow
 wxClassInfo *wxSashWindow_CLASSINFO() {
@@ -8375,10 +8068,6 @@ int wxSashWindow_GetExtraBorderSize(const wxSashWindow * self) {
 void wxSashWindow_SizeWindows(wxSashWindow * self) {
     return self->SizeWindows();
 }
-// Mix-in(s) to wxSashWindow
-wxTrackable *wxSashWindow_AsTrackable(wxSashWindow* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxScreenDC
 wxClassInfo *wxScreenDC_CLASSINFO() {
@@ -8427,10 +8116,6 @@ void wxScrollBar_SetThumbPosition(wxScrollBar * self, int view_start) {
 }
 bool wxScrollBar_IsVertical(const wxScrollBar * self) {
     return self->IsVertical();
-}
-// Mix-in(s) to wxScrollBar
-wxTrackable *wxScrollBar_AsTrackable(wxScrollBar* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxScrollEvent
@@ -8507,9 +8192,6 @@ wxString *wxSearchCtrl_GetDescriptiveText(const wxSearchCtrl * self) {
 // Mix-in(s) to wxSearchCtrl
 wxTextEntryBase *wxSearchCtrl_AsTextEntry(wxSearchCtrl* obj) {
     return static_cast<wxTextEntryBase*>(obj);
-}
-wxTrackable *wxSearchCtrl_AsTrackable(wxSearchCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxSetCursorEvent
@@ -8615,9 +8297,6 @@ bool wxSimplebook_ShowNewPage(wxSimplebook * self, wxWindow * page) {
 // Mix-in(s) to wxSimplebook
 wxWithImages *wxSimplebook_AsWithImages(wxSimplebook* obj) {
     return static_cast<wxWithImages*>(obj);
-}
-wxTrackable *wxSimplebook_AsTrackable(wxSimplebook* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxSize
@@ -9100,10 +8779,6 @@ void wxSlider_SetTickFreq(wxSlider * self, int freq) {
 void wxSlider_SetValue(wxSlider * self, int value) {
     return self->SetValue(value);
 }
-// Mix-in(s) to wxSlider
-wxTrackable *wxSlider_AsTrackable(wxSlider* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxSound
 wxClassInfo *wxSound_CLASSINFO() {
@@ -9172,10 +8847,6 @@ void wxSpinButton_SetRange(wxSpinButton * self, int min, int max) {
 void wxSpinButton_SetValue(wxSpinButton * self, int value) {
     return self->SetValue(value);
 }
-// Mix-in(s) to wxSpinButton
-wxTrackable *wxSpinButton_AsTrackable(wxSpinButton* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxSpinCtrl
 wxClassInfo *wxSpinCtrl_CLASSINFO() {
@@ -9228,10 +8899,6 @@ void wxSpinCtrl_SetValue1(wxSpinCtrl * self, int value) {
 void wxSpinCtrl_SetIncrement(wxSpinCtrl * self, int value) {
     return self->SetIncrement(value);
 }
-// Mix-in(s) to wxSpinCtrl
-wxTrackable *wxSpinCtrl_AsTrackable(wxSpinCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxSpinCtrlDouble
 wxClassInfo *wxSpinCtrlDouble_CLASSINFO() {
@@ -9281,10 +8948,6 @@ void wxSpinCtrlDouble_SetValue(wxSpinCtrlDouble * self, const wxString * text) {
 void wxSpinCtrlDouble_SetValue1(wxSpinCtrlDouble * self, double value) {
     return self->SetValue(value);
 }
-// Mix-in(s) to wxSpinCtrlDouble
-wxTrackable *wxSpinCtrlDouble_AsTrackable(wxSpinCtrlDouble* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxSpinDoubleEvent
 wxClassInfo *wxSpinDoubleEvent_CLASSINFO() {
@@ -9329,10 +8992,6 @@ int wxSplashScreen_GetTimeout(const wxSplashScreen * self) {
 }
 void wxSplashScreen_OnCloseWindow(wxSplashScreen * self, wxCloseEvent * event) {
     return self->OnCloseWindow(*event);
-}
-// Mix-in(s) to wxSplashScreen
-wxTrackable *wxSplashScreen_AsTrackable(wxSplashScreen* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxSplitterEvent
@@ -9443,10 +9102,6 @@ bool wxSplitterWindow_Unsplit(wxSplitterWindow * self, wxWindow * to_remove) {
 void wxSplitterWindow_UpdateSize(wxSplitterWindow * self) {
     return self->UpdateSize();
 }
-// Mix-in(s) to wxSplitterWindow
-wxTrackable *wxSplitterWindow_AsTrackable(wxSplitterWindow* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxStaticBitmap
 wxClassInfo *wxStaticBitmap_CLASSINFO() {
@@ -9473,10 +9128,6 @@ void wxStaticBitmap_SetBitmap(wxStaticBitmap * self, const wxBitmapBundle * labe
 void wxStaticBitmap_SetIcon(wxStaticBitmap * self, const wxIcon * label) {
     return self->SetIcon(*label);
 }
-// Mix-in(s) to wxStaticBitmap
-wxTrackable *wxStaticBitmap_AsTrackable(wxStaticBitmap* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxStaticBox
 wxClassInfo *wxStaticBox_CLASSINFO() {
@@ -9490,10 +9141,6 @@ wxStaticBox *wxStaticBox_new1(wxWindow * parent, wxWindowID id, const wxString *
 }
 bool wxStaticBox_Create(wxStaticBox * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return self->Create(parent, id, *label, *pos, *size, style, *name);
-}
-// Mix-in(s) to wxStaticBox
-wxTrackable *wxStaticBox_AsTrackable(wxStaticBox* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxStaticBoxSizer
@@ -9529,10 +9176,6 @@ bool wxStaticLine_IsVertical(const wxStaticLine * self) {
 int wxStaticLine_GetDefaultSize() {
     return wxStaticLine::GetDefaultSize();
 }
-// Mix-in(s) to wxStaticLine
-wxTrackable *wxStaticLine_AsTrackable(wxStaticLine* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxStaticText
 wxClassInfo *wxStaticText_CLASSINFO() {
@@ -9552,10 +9195,6 @@ bool wxStaticText_IsEllipsized(const wxStaticText * self) {
 }
 void wxStaticText_Wrap(wxStaticText * self, int width) {
     return self->Wrap(width);
-}
-// Mix-in(s) to wxStaticText
-wxTrackable *wxStaticText_AsTrackable(wxStaticText* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxStatusBar
@@ -9612,10 +9251,6 @@ void wxStatusBar_SetStatusText(wxStatusBar * self, const wxString * text, int i)
 }
 void wxStatusBar_SetStatusWidths(wxStatusBar * self, int n, const int * widths_field) {
     return self->SetStatusWidths(n, widths_field);
-}
-// Mix-in(s) to wxStatusBar
-wxTrackable *wxStatusBar_AsTrackable(wxStatusBar* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxStatusBarPane
@@ -9701,10 +9336,6 @@ bool wxTaskBarIcon_SetIcon(wxTaskBarIcon * self, const wxBitmapBundle * icon, co
 }
 bool wxTaskBarIcon_IsAvailable() {
     return wxTaskBarIcon::IsAvailable();
-}
-// Mix-in(s) to wxTaskBarIcon
-wxTrackable *wxTaskBarIcon_AsTrackable(wxTaskBarIcon* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxTaskBarIconEvent
@@ -10113,9 +9744,6 @@ long wxTextCtrl_XYToPosition(const wxTextCtrl * self, long x, long y) {
 wxTextEntryBase *wxTextCtrl_AsTextEntry(wxTextCtrl* obj) {
     return static_cast<wxTextEntryBase*>(obj);
 }
-wxTrackable *wxTextCtrl_AsTrackable(wxTextCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxTextEntry
 void wxTextEntry_delete(wxTextEntry *self) {
@@ -10302,10 +9930,6 @@ void wxTextValidator_SetStyle(wxTextValidator * self, long style) {
 wxString *wxTextValidator_IsValid(const wxTextValidator * self, const wxString * val) {
     return new wxString(self->IsValid(*val));
 }
-// Mix-in(s) to wxTextValidator
-wxTrackable *wxTextValidator_AsTrackable(wxTextValidator* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxTimePickerCtrl
 wxClassInfo *wxTimePickerCtrl_CLASSINFO() {
@@ -10332,10 +9956,6 @@ bool wxTimePickerCtrl_SetTime(wxTimePickerCtrl * self, int hour, int min, int se
 void wxTimePickerCtrl_SetValue(wxTimePickerCtrl * self, const wxDateTime * dt) {
     return self->SetValue(*dt);
 }
-// Mix-in(s) to wxTimePickerCtrl
-wxTrackable *wxTimePickerCtrl_AsTrackable(wxTimePickerCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxTipWindow
 wxClassInfo *wxTipWindow_CLASSINFO() {
@@ -10349,10 +9969,6 @@ void wxTipWindow_SetBoundingRect(wxTipWindow * self, const wxRect * rect_bound) 
 }
 void wxTipWindow_SetTipWindowPtr(wxTipWindow * self, wxTipWindow ** window_ptr) {
     return self->SetTipWindowPtr(window_ptr);
-}
-// Mix-in(s) to wxTipWindow
-wxTrackable *wxTipWindow_AsTrackable(wxTipWindow* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxToggleButton
@@ -10373,10 +9989,6 @@ bool wxToggleButton_GetValue(const wxToggleButton * self) {
 }
 void wxToggleButton_SetValue(wxToggleButton * self, bool state) {
     return self->SetValue(state);
-}
-// Mix-in(s) to wxToggleButton
-wxTrackable *wxToggleButton_AsTrackable(wxToggleButton* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxToolBar
@@ -10548,10 +10160,6 @@ wxToolBarToolBase * wxToolBar_CreateTool1(wxToolBar * self, wxControl * control,
 wxToolBarToolBase * wxToolBar_CreateSeparator(wxToolBar * self) {
     return self->CreateSeparator();
 }
-// Mix-in(s) to wxToolBar
-wxTrackable *wxToolBar_AsTrackable(wxToolBar* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxToolbook
 wxClassInfo *wxToolbook_CLASSINFO() {
@@ -10578,9 +10186,6 @@ bool wxToolbook_EnablePage1(wxToolbook * self, wxWindow * page, bool enable) {
 // Mix-in(s) to wxToolbook
 wxWithImages *wxToolbook_AsWithImages(wxToolbook* obj) {
     return static_cast<wxWithImages*>(obj);
-}
-wxTrackable *wxToolbook_AsTrackable(wxToolbook* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxTopLevelWindow
@@ -10697,10 +10302,6 @@ bool wxTopLevelWindow_ShowFullScreen(wxTopLevelWindow * self, bool show, long st
 }
 wxSize *wxTopLevelWindow_GetDefaultSize() {
     return new wxSize(wxTopLevelWindow::GetDefaultSize());
-}
-// Mix-in(s) to wxTopLevelWindow
-wxTrackable *wxTopLevelWindow_AsTrackable(wxTopLevelWindow* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxTreeCtrl
@@ -10969,9 +10570,6 @@ void wxTreeCtrl_SelectChildren(wxTreeCtrl * self, const wxTreeItemId * parent) {
 wxWithImages *wxTreeCtrl_AsWithImages(wxTreeCtrl* obj) {
     return static_cast<wxWithImages*>(obj);
 }
-wxTrackable *wxTreeCtrl_AsTrackable(wxTreeCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxTreeEvent
 wxClassInfo *wxTreeEvent_CLASSINFO() {
@@ -11166,10 +10764,6 @@ wxTreeListCtrl *wxTreeListCtrl_new1(wxWindow * parent, wxWindowID id, const wxPo
 bool wxTreeListCtrl_Create(wxTreeListCtrl * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return self->Create(parent, id, *pos, *size, style, *name);
 }
-// Mix-in(s) to wxTreeListCtrl
-wxTrackable *wxTreeListCtrl_AsTrackable(wxTreeListCtrl* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
 
 // CLASS: wxTreeListItem
 void wxTreeListItem_delete(wxTreeListItem *self) {
@@ -11216,9 +10810,6 @@ bool wxTreebook_IsNodeExpanded(const wxTreebook * self, size_t page_id) {
 // Mix-in(s) to wxTreebook
 wxWithImages *wxTreebook_AsWithImages(wxTreebook* obj) {
     return static_cast<wxWithImages*>(obj);
-}
-wxTrackable *wxTreebook_AsTrackable(wxTreebook* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxTwoFingerTapEvent
@@ -11362,10 +10953,6 @@ void wxValidator_SuppressBellOnError(bool suppress) {
 }
 bool wxValidator_IsSilent() {
     return wxValidator::IsSilent();
-}
-// Mix-in(s) to wxValidator
-wxTrackable *wxValidator_AsTrackable(wxValidator* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxWindow
@@ -12242,10 +11829,6 @@ wxWindow *wxWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, c
 }
 bool wxWindow_Create(wxWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return self->Create(parent, id, *pos, *size, style, *name);
-}
-// Mix-in(s) to wxWindow
-wxTrackable *wxWindow_AsTrackable(wxWindow* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxWindowCreateEvent

@@ -6,7 +6,6 @@
 #include <wx/addremovectrl.h>
 #include <wx/animate.h>
 #include <wx/anybutton.h>
-#include <wx/appprogress.h>
 #include <wx/artprov.h>
 #include <wx/bannerwindow.h>
 #include <wx/bitmap.h>
@@ -231,17 +230,6 @@ bool wxActivityIndicator_Create(wxActivityIndicator * self, wxWindow * parent, w
 void wxActivityIndicator_Start(wxActivityIndicator * self);
 void wxActivityIndicator_Stop(wxActivityIndicator * self);
 bool wxActivityIndicator_IsRunning(const wxActivityIndicator * self);
-// Mix-in(s) to wxActivityIndicator
-wxTrackable *wxActivityIndicator_AsTrackable(wxActivityIndicator* obj);
-
-// CLASS: wxAddRemoveAdaptor
-void wxAddRemoveAdaptor_delete(wxAddRemoveAdaptor *self);
-wxAddRemoveAdaptor *wxAddRemoveAdaptor_new();
-wxWindow * wxAddRemoveAdaptor_GetItemsCtrl(const wxAddRemoveAdaptor * self);
-bool wxAddRemoveAdaptor_CanAdd(const wxAddRemoveAdaptor * self);
-bool wxAddRemoveAdaptor_CanRemove(const wxAddRemoveAdaptor * self);
-void wxAddRemoveAdaptor_OnAdd(wxAddRemoveAdaptor * self);
-void wxAddRemoveAdaptor_OnRemove(wxAddRemoveAdaptor * self);
 
 // CLASS: wxAddRemoveCtrl
 wxClassInfo *wxAddRemoveCtrl_CLASSINFO();
@@ -250,8 +238,6 @@ wxAddRemoveCtrl *wxAddRemoveCtrl_new1(wxWindow * parent, wxWindowID winid, const
 bool wxAddRemoveCtrl_Create(wxAddRemoveCtrl * self, wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 void wxAddRemoveCtrl_SetAdaptor(wxAddRemoveCtrl * self, wxAddRemoveAdaptor * adaptor);
 void wxAddRemoveCtrl_SetButtonsToolTips(wxAddRemoveCtrl * self, const wxString * addtip, const wxString * removetip);
-// Mix-in(s) to wxAddRemoveCtrl
-wxTrackable *wxAddRemoveCtrl_AsTrackable(wxAddRemoveCtrl* obj);
 
 // CLASS: wxAnimationCtrl
 wxClassInfo *wxAnimationCtrl_CLASSINFO();
@@ -266,8 +252,6 @@ void wxAnimationCtrl_SetAnimation(wxAnimationCtrl * self, const wxAnimation * an
 void wxAnimationCtrl_SetInactiveBitmap(wxAnimationCtrl * self, const wxBitmapBundle * bmp);
 void wxAnimationCtrl_Stop(wxAnimationCtrl * self);
 wxAnimation *wxAnimationCtrl_CreateCompatibleAnimation();
-// Mix-in(s) to wxAnimationCtrl
-wxTrackable *wxAnimationCtrl_AsTrackable(wxAnimationCtrl* obj);
 
 // CLASS: wxAnyButton
 wxClassInfo *wxAnyButton_CLASSINFO();
@@ -288,16 +272,6 @@ wxSize *wxAnyButton_GetBitmapMargins(wxAnyButton * self);
 void wxAnyButton_SetBitmapMargins(wxAnyButton * self, wxCoord x, wxCoord y);
 void wxAnyButton_SetBitmapMargins1(wxAnyButton * self, const wxSize * sz);
 void wxAnyButton_SetBitmapPosition(wxAnyButton * self, wxDirection dir);
-// Mix-in(s) to wxAnyButton
-wxTrackable *wxAnyButton_AsTrackable(wxAnyButton* obj);
-
-// CLASS: wxAppProgressIndicator
-void wxAppProgressIndicator_delete(wxAppProgressIndicator *self);
-wxAppProgressIndicator *wxAppProgressIndicator_new(wxWindow * parent, int max_value);
-bool wxAppProgressIndicator_IsAvailable(const wxAppProgressIndicator * self);
-void wxAppProgressIndicator_SetValue(wxAppProgressIndicator * self, int value);
-void wxAppProgressIndicator_SetRange(wxAppProgressIndicator * self, int range);
-bool wxAppProgressIndicator_Pulse(wxAppProgressIndicator * self);
 
 // CLASS: wxArtProvider
 wxClassInfo *wxArtProvider_CLASSINFO();
@@ -337,8 +311,6 @@ bool wxBannerWindow_Create(wxBannerWindow * self, wxWindow * parent, wxWindowID 
 void wxBannerWindow_SetBitmap(wxBannerWindow * self, const wxBitmapBundle * bmp);
 void wxBannerWindow_SetText(wxBannerWindow * self, const wxString * title, const wxString * message);
 void wxBannerWindow_SetGradient(wxBannerWindow * self, const wxColour * start, const wxColour * end);
-// Mix-in(s) to wxBannerWindow
-wxTrackable *wxBannerWindow_AsTrackable(wxBannerWindow* obj);
 
 // CLASS: wxBitmap
 wxClassInfo *wxBitmap_CLASSINFO();
@@ -466,8 +438,6 @@ bool wxBitmapButton_Create(wxBitmapButton * self, wxWindow * parent, wxWindowID 
 bool wxBitmapButton_CreateCloseButton(wxBitmapButton * self, wxWindow * parent, wxWindowID winid, const wxString * name);
 wxBitmapButton * wxBitmapButton_NewCloseButton(wxWindow * parent, wxWindowID winid, const wxString * name);
 #endif
-// Mix-in(s) to wxBitmapButton
-wxTrackable *wxBitmapButton_AsTrackable(wxBitmapButton* obj);
 
 // CLASS: wxBitmapComboBox
 wxClassInfo *wxBitmapComboBox_CLASSINFO();
@@ -486,7 +456,6 @@ void wxBitmapComboBox_SetItemBitmap(wxBitmapComboBox * self, unsigned int n, con
 // Mix-in(s) to wxBitmapComboBox
 wxItemContainer *wxBitmapComboBox_AsItemContainer(wxBitmapComboBox* obj);
 wxTextEntryBase *wxBitmapComboBox_AsTextEntry(wxBitmapComboBox* obj);
-wxTrackable *wxBitmapComboBox_AsTrackable(wxBitmapComboBox* obj);
 
 // CLASS: wxBitmapHandler
 wxClassInfo *wxBitmapHandler_CLASSINFO();
@@ -501,8 +470,6 @@ wxClassInfo *wxBitmapToggleButton_CLASSINFO();
 wxBitmapToggleButton *wxBitmapToggleButton_new();
 wxBitmapToggleButton *wxBitmapToggleButton_new1(wxWindow * parent, wxWindowID id, const wxBitmapBundle * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * val, const wxString * name);
 bool wxBitmapToggleButton_Create(wxBitmapToggleButton * self, wxWindow * parent, wxWindowID id, const wxBitmapBundle * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * val, const wxString * name);
-// Mix-in(s) to wxBitmapToggleButton
-wxTrackable *wxBitmapToggleButton_AsTrackable(wxBitmapToggleButton* obj);
 
 // CLASS: wxBookCtrlBase
 wxClassInfo *wxBookCtrlBase_CLASSINFO();
@@ -528,7 +495,6 @@ wxWindow * wxBookCtrlBase_GetPage(const wxBookCtrlBase * self, size_t page);
 bool wxBookCtrlBase_Create(wxBookCtrlBase * self, wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 // Mix-in(s) to wxBookCtrlBase
 wxWithImages *wxBookCtrlBase_AsWithImages(wxBookCtrlBase* obj);
-wxTrackable *wxBookCtrlBase_AsTrackable(wxBookCtrlBase* obj);
 
 // CLASS: wxBookCtrlEvent
 wxClassInfo *wxBookCtrlEvent_CLASSINFO();
@@ -598,8 +564,6 @@ wxWindow * wxButton_SetDefault(wxButton * self);
 #if wxCHECK_VERSION(3, 1, 0)
 wxSize *wxButton_GetDefaultSize(wxWindow * win);
 #endif
-// Mix-in(s) to wxButton
-wxTrackable *wxButton_AsTrackable(wxButton* obj);
 
 // CLASS: wxCalculateLayoutEvent
 wxClassInfo *wxCalculateLayoutEvent_CLASSINFO();
@@ -635,8 +599,6 @@ void wxCalendarCtrl_SetHighlightColours(wxCalendarCtrl * self, const wxColour * 
 void wxCalendarCtrl_SetHoliday(wxCalendarCtrl * self, size_t day);
 void wxCalendarCtrl_SetHolidayColours(wxCalendarCtrl * self, const wxColour * col_fg, const wxColour * col_bg);
 void wxCalendarCtrl_Mark(wxCalendarCtrl * self, size_t day, bool mark);
-// Mix-in(s) to wxCalendarCtrl
-wxTrackable *wxCalendarCtrl_AsTrackable(wxCalendarCtrl* obj);
 
 // CLASS: wxCalendarDateAttr
 void wxCalendarDateAttr_delete(wxCalendarDateAttr *self);
@@ -697,8 +659,6 @@ bool wxCheckBox_Is3rdStateAllowedForUser(const wxCheckBox * self);
 bool wxCheckBox_IsChecked(const wxCheckBox * self);
 void wxCheckBox_SetValue(wxCheckBox * self, bool state);
 void wxCheckBox_Set3StateValue(wxCheckBox * self, wxCheckBoxState state);
-// Mix-in(s) to wxCheckBox
-wxTrackable *wxCheckBox_AsTrackable(wxCheckBox* obj);
 
 // CLASS: wxCheckListBox
 wxClassInfo *wxCheckListBox_CLASSINFO();
@@ -710,7 +670,6 @@ bool wxCheckListBox_IsChecked(const wxCheckListBox * self, unsigned int item);
 unsigned int wxCheckListBox_GetCheckedItems(const wxCheckListBox * self, wxArrayInt * checked_items);
 // Mix-in(s) to wxCheckListBox
 wxItemContainer *wxCheckListBox_AsItemContainer(wxCheckListBox* obj);
-wxTrackable *wxCheckListBox_AsTrackable(wxCheckListBox* obj);
 
 // CLASS: wxChildFocusEvent
 wxClassInfo *wxChildFocusEvent_CLASSINFO();
@@ -728,7 +687,6 @@ void wxChoice_SetColumns(wxChoice * self, int n);
 bool wxChoice_IsSorted(const wxChoice * self);
 // Mix-in(s) to wxChoice
 wxItemContainer *wxChoice_AsItemContainer(wxChoice* obj);
-wxTrackable *wxChoice_AsTrackable(wxChoice* obj);
 
 // CLASS: wxChoicebook
 wxClassInfo *wxChoicebook_CLASSINFO();
@@ -738,7 +696,6 @@ bool wxChoicebook_Create(wxChoicebook * self, wxWindow * parent, wxWindowID id, 
 wxChoice * wxChoicebook_GetChoiceCtrl(const wxChoicebook * self);
 // Mix-in(s) to wxChoicebook
 wxWithImages *wxChoicebook_AsWithImages(wxChoicebook* obj);
-wxTrackable *wxChoicebook_AsTrackable(wxChoicebook* obj);
 
 // CLASS: wxClientDC
 wxClassInfo *wxClientDC_CLASSINFO();
@@ -779,8 +736,6 @@ wxCollapsibleHeaderCtrl *wxCollapsibleHeaderCtrl_new1(wxWindow * parent, wxWindo
 bool wxCollapsibleHeaderCtrl_Create(wxCollapsibleHeaderCtrl * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 void wxCollapsibleHeaderCtrl_SetCollapsed(wxCollapsibleHeaderCtrl * self, bool collapsed);
 bool wxCollapsibleHeaderCtrl_IsCollapsed(const wxCollapsibleHeaderCtrl * self);
-// Mix-in(s) to wxCollapsibleHeaderCtrl
-wxTrackable *wxCollapsibleHeaderCtrl_AsTrackable(wxCollapsibleHeaderCtrl* obj);
 
 // CLASS: wxCollapsiblePane
 wxClassInfo *wxCollapsiblePane_CLASSINFO();
@@ -792,8 +747,6 @@ void wxCollapsiblePane_Expand(wxCollapsiblePane * self);
 wxWindow * wxCollapsiblePane_GetPane(const wxCollapsiblePane * self);
 bool wxCollapsiblePane_IsCollapsed(const wxCollapsiblePane * self);
 bool wxCollapsiblePane_IsExpanded(const wxCollapsiblePane * self);
-// Mix-in(s) to wxCollapsiblePane
-wxTrackable *wxCollapsiblePane_AsTrackable(wxCollapsiblePane* obj);
 
 // CLASS: wxCollapsiblePaneEvent
 wxClassInfo *wxCollapsiblePaneEvent_CLASSINFO();
@@ -860,8 +813,6 @@ wxColourPickerCtrl *wxColourPickerCtrl_new1(wxWindow * parent, wxWindowID id, co
 bool wxColourPickerCtrl_Create(wxColourPickerCtrl * self, wxWindow * parent, wxWindowID id, const wxColour * colour, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 wxColour *wxColourPickerCtrl_GetColour(const wxColourPickerCtrl * self);
 void wxColourPickerCtrl_SetColour(wxColourPickerCtrl * self, const wxColour * col);
-// Mix-in(s) to wxColourPickerCtrl
-wxTrackable *wxColourPickerCtrl_AsTrackable(wxColourPickerCtrl* obj);
 
 // CLASS: wxColourPickerEvent
 wxClassInfo *wxColourPickerEvent_CLASSINFO();
@@ -883,7 +834,6 @@ void wxComboBox_Dismiss(wxComboBox * self);
 // Mix-in(s) to wxComboBox
 wxItemContainer *wxComboBox_AsItemContainer(wxComboBox* obj);
 wxTextEntryBase *wxComboBox_AsTextEntry(wxComboBox* obj);
-wxTrackable *wxComboBox_AsTrackable(wxComboBox* obj);
 
 // CLASS: wxCommandEvent
 wxClassInfo *wxCommandEvent_CLASSINFO();
@@ -911,8 +861,6 @@ void wxCommandLinkButton_SetMainLabel(wxCommandLinkButton * self, const wxString
 void wxCommandLinkButton_SetNote(wxCommandLinkButton * self, const wxString * note);
 wxString *wxCommandLinkButton_GetMainLabel(const wxCommandLinkButton * self);
 wxString *wxCommandLinkButton_GetNote(const wxCommandLinkButton * self);
-// Mix-in(s) to wxCommandLinkButton
-wxTrackable *wxCommandLinkButton_AsTrackable(wxCommandLinkButton* obj);
 
 // CLASS: wxContextHelp
 wxClassInfo *wxContextHelp_CLASSINFO();
@@ -923,8 +871,6 @@ bool wxContextHelp_EndContextHelp(wxContextHelp * self);
 // CLASS: wxContextHelpButton
 wxClassInfo *wxContextHelpButton_CLASSINFO();
 wxContextHelpButton *wxContextHelpButton_new(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style);
-// Mix-in(s) to wxContextHelpButton
-wxTrackable *wxContextHelpButton_AsTrackable(wxContextHelpButton* obj);
 
 // CLASS: wxContextMenuEvent
 wxClassInfo *wxContextMenuEvent_CLASSINFO();
@@ -949,14 +895,11 @@ wxString *wxControl_GetLabelText1(const wxString * label);
 wxString *wxControl_RemoveMnemonics(const wxString * str);
 wxString *wxControl_EscapeMnemonics(const wxString * text);
 wxString *wxControl_Ellipsize(const wxString * label, const wxDC * dc, wxEllipsizeMode mode, int max_width, int flags);
-// Mix-in(s) to wxControl
-wxTrackable *wxControl_AsTrackable(wxControl* obj);
 
 // CLASS: wxControlWithItems
 wxClassInfo *wxControlWithItems_CLASSINFO();
 // Mix-in(s) to wxControlWithItems
 wxItemContainer *wxControlWithItems_AsItemContainer(wxControlWithItems* obj);
-wxTrackable *wxControlWithItems_AsTrackable(wxControlWithItems* obj);
 
 // CLASS: wxCursor
 wxClassInfo *wxCursor_CLASSINFO();
@@ -1214,8 +1157,6 @@ bool wxDataViewCtrl_SetRowHeight(wxDataViewCtrl * self, int row_height);
 void wxDataViewCtrl_ToggleSortByColumn(wxDataViewCtrl * self, int column);
 int wxDataViewCtrl_GetCountPerPage(const wxDataViewCtrl * self);
 wxDataViewItem *wxDataViewCtrl_GetTopItem(const wxDataViewCtrl * self);
-// Mix-in(s) to wxDataViewCtrl
-wxTrackable *wxDataViewCtrl_AsTrackable(wxDataViewCtrl* obj);
 
 // CLASS: wxDataViewIconText
 wxClassInfo *wxDataViewIconText_CLASSINFO();
@@ -1284,8 +1225,6 @@ void wxDataViewTreeCtrl_SetItemData(wxDataViewTreeCtrl * self, const wxDataViewI
 void wxDataViewTreeCtrl_SetItemExpandedIcon(wxDataViewTreeCtrl * self, const wxDataViewItem * item, const wxBitmapBundle * icon);
 void wxDataViewTreeCtrl_SetItemIcon(wxDataViewTreeCtrl * self, const wxDataViewItem * item, const wxBitmapBundle * icon);
 void wxDataViewTreeCtrl_SetItemText(wxDataViewTreeCtrl * self, const wxDataViewItem * item, const wxString * text);
-// Mix-in(s) to wxDataViewTreeCtrl
-wxTrackable *wxDataViewTreeCtrl_AsTrackable(wxDataViewTreeCtrl* obj);
 
 // CLASS: wxDataViewValueAdjuster
 void wxDataViewValueAdjuster_delete(wxDataViewValueAdjuster *self);
@@ -1308,8 +1247,6 @@ void wxDatePickerCtrl_SetNullText(wxDatePickerCtrl * self, const wxString * text
 #endif
 void wxDatePickerCtrl_SetRange(wxDatePickerCtrl * self, const wxDateTime * dt1, const wxDateTime * dt2);
 void wxDatePickerCtrl_SetValue(wxDatePickerCtrl * self, const wxDateTime * dt);
-// Mix-in(s) to wxDatePickerCtrl
-wxTrackable *wxDatePickerCtrl_AsTrackable(wxDatePickerCtrl* obj);
 
 // CLASS: wxDelegateRendererNative
 void wxDelegateRendererNative_delete(wxDelegateRendererNative *self);
@@ -1326,8 +1263,6 @@ wxString *wxDirPickerCtrl_GetPath(const wxDirPickerCtrl * self);
 void wxDirPickerCtrl_SetDirName(wxDirPickerCtrl * self, const wxFileName * dirname);
 void wxDirPickerCtrl_SetInitialDirectory(wxDirPickerCtrl * self, const wxString * dir);
 void wxDirPickerCtrl_SetPath(wxDirPickerCtrl * self, const wxString * dirname);
-// Mix-in(s) to wxDirPickerCtrl
-wxTrackable *wxDirPickerCtrl_AsTrackable(wxDirPickerCtrl* obj);
 
 // CLASS: wxDisplay
 void wxDisplay_delete(wxDisplay *self);
@@ -1358,8 +1293,6 @@ wxDocument * wxDocChildFrame_GetDocument(const wxDocChildFrame * self);
 wxView * wxDocChildFrame_GetView(const wxDocChildFrame * self);
 void wxDocChildFrame_SetDocument(wxDocChildFrame * self, wxDocument * doc);
 void wxDocChildFrame_SetView(wxDocChildFrame * self, wxView * view);
-// Mix-in(s) to wxDocChildFrame
-wxTrackable *wxDocChildFrame_AsTrackable(wxDocChildFrame* obj);
 
 // CLASS: wxDocMDIChildFrame
 wxClassInfo *wxDocMDIChildFrame_CLASSINFO();
@@ -1368,16 +1301,12 @@ wxDocument * wxDocMDIChildFrame_GetDocument(const wxDocMDIChildFrame * self);
 wxView * wxDocMDIChildFrame_GetView(const wxDocMDIChildFrame * self);
 void wxDocMDIChildFrame_SetDocument(wxDocMDIChildFrame * self, wxDocument * doc);
 void wxDocMDIChildFrame_SetView(wxDocMDIChildFrame * self, wxView * view);
-// Mix-in(s) to wxDocMDIChildFrame
-wxTrackable *wxDocMDIChildFrame_AsTrackable(wxDocMDIChildFrame* obj);
 
 // CLASS: wxDocMDIParentFrame
 wxClassInfo *wxDocMDIParentFrame_CLASSINFO();
 wxDocMDIParentFrame *wxDocMDIParentFrame_new();
 wxDocMDIParentFrame *wxDocMDIParentFrame_new1(wxDocManager * manager, wxFrame * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxDocMDIParentFrame_Create(wxDocMDIParentFrame * self, wxDocManager * manager, wxFrame * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-// Mix-in(s) to wxDocMDIParentFrame
-wxTrackable *wxDocMDIParentFrame_AsTrackable(wxDocMDIParentFrame* obj);
 
 // CLASS: wxDocParentFrame
 wxClassInfo *wxDocParentFrame_CLASSINFO();
@@ -1385,8 +1314,6 @@ wxDocParentFrame *wxDocParentFrame_new();
 wxDocParentFrame *wxDocParentFrame_new1(wxDocManager * manager, wxFrame * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxDocParentFrame_Create(wxDocParentFrame * self, wxDocManager * manager, wxFrame * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 wxDocManager * wxDocParentFrame_GetDocumentManager(const wxDocParentFrame * self);
-// Mix-in(s) to wxDocParentFrame
-wxTrackable *wxDocParentFrame_AsTrackable(wxDocParentFrame* obj);
 
 // CLASS: wxDragImage
 wxClassInfo *wxDragImage_CLASSINFO();
@@ -1422,8 +1349,6 @@ wxEditableListBox *wxEditableListBox_new1(wxWindow * parent, wxWindowID id, cons
 bool wxEditableListBox_Create(wxEditableListBox * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 void wxEditableListBox_SetStrings(wxEditableListBox * self, const wxArrayString * strings);
 void wxEditableListBox_GetStrings(const wxEditableListBox * self, wxArrayString * strings);
-// Mix-in(s) to wxEditableListBox
-wxTrackable *wxEditableListBox_AsTrackable(wxEditableListBox* obj);
 
 // CLASS: wxEraseEvent
 wxClassInfo *wxEraseEvent_CLASSINFO();
@@ -1432,8 +1357,6 @@ wxDC * wxEraseEvent_GetDC(const wxEraseEvent * self);
 
 // CLASS: wxEventBlocker
 wxClassInfo *wxEventBlocker_CLASSINFO();
-// Mix-in(s) to wxEventBlocker
-wxTrackable *wxEventBlocker_AsTrackable(wxEventBlocker* obj);
 
 // CLASS: wxFileCtrl
 wxClassInfo *wxFileCtrl_CLASSINFO();
@@ -1453,8 +1376,6 @@ bool wxFileCtrl_SetPath(wxFileCtrl * self, const wxString * path);
 void wxFileCtrl_SetFilterIndex(wxFileCtrl * self, int filter_index);
 void wxFileCtrl_SetWildcard(wxFileCtrl * self, const wxString * wild_card);
 void wxFileCtrl_ShowHidden(wxFileCtrl * self, bool show);
-// Mix-in(s) to wxFileCtrl
-wxTrackable *wxFileCtrl_AsTrackable(wxFileCtrl* obj);
 
 // CLASS: wxFileCtrlEvent
 wxClassInfo *wxFileCtrlEvent_CLASSINFO();
@@ -1497,8 +1418,6 @@ wxString *wxFilePickerCtrl_GetPath(const wxFilePickerCtrl * self);
 void wxFilePickerCtrl_SetFileName(wxFilePickerCtrl * self, const wxFileName * filename);
 void wxFilePickerCtrl_SetInitialDirectory(wxFilePickerCtrl * self, const wxString * dir);
 void wxFilePickerCtrl_SetPath(wxFilePickerCtrl * self, const wxString * filename);
-// Mix-in(s) to wxFilePickerCtrl
-wxTrackable *wxFilePickerCtrl_AsTrackable(wxFilePickerCtrl* obj);
 
 // CLASS: wxFindDialogEvent
 wxClassInfo *wxFindDialogEvent_CLASSINFO();
@@ -1656,8 +1575,6 @@ void wxFontPickerCtrl_SetMinPointSize(wxFontPickerCtrl * self, unsigned int min)
 void wxFontPickerCtrl_SetSelectedColour(wxFontPickerCtrl * self, const wxColour * colour);
 #endif
 void wxFontPickerCtrl_SetSelectedFont(wxFontPickerCtrl * self, const wxFont * font);
-// Mix-in(s) to wxFontPickerCtrl
-wxTrackable *wxFontPickerCtrl_AsTrackable(wxFontPickerCtrl* obj);
 
 // CLASS: wxFontPickerEvent
 wxClassInfo *wxFontPickerEvent_CLASSINFO();
@@ -1692,8 +1609,6 @@ wxTaskBarButton * wxFrame_MSWGetTaskBarButton(wxFrame * self);
 #endif
 void wxFrame_PushStatusText(wxFrame * self, const wxString * text, int number);
 void wxFrame_PopStatusText(wxFrame * self, int number);
-// Mix-in(s) to wxFrame
-wxTrackable *wxFrame_AsTrackable(wxFrame* obj);
 
 // CLASS: wxFullScreenEvent
 wxClassInfo *wxFullScreenEvent_CLASSINFO();
@@ -1732,8 +1647,6 @@ bool wxGauge_IsVertical(const wxGauge * self);
 void wxGauge_Pulse(wxGauge * self);
 void wxGauge_SetRange(wxGauge * self, int range);
 void wxGauge_SetValue(wxGauge * self, int pos);
-// Mix-in(s) to wxGauge
-wxTrackable *wxGauge_AsTrackable(wxGauge* obj);
 
 // CLASS: wxGenericAboutDialog
 void wxGenericAboutDialog_delete(wxGenericAboutDialog *self);
@@ -1750,8 +1663,6 @@ wxBitmap * wxGenericAnimationCtrl_GetBackingStore(wxGenericAnimationCtrl * self)
 bool wxGenericAnimationCtrl_Play(wxGenericAnimationCtrl * self, bool looped);
 void wxGenericAnimationCtrl_SetUseWindowBackgroundColour(wxGenericAnimationCtrl * self, bool use_win_background);
 bool wxGenericAnimationCtrl_IsUsingWindowBackgroundColour(const wxGenericAnimationCtrl * self);
-// Mix-in(s) to wxGenericAnimationCtrl
-wxTrackable *wxGenericAnimationCtrl_AsTrackable(wxGenericAnimationCtrl* obj);
 
 // CLASS: wxGenericDirCtrl
 wxClassInfo *wxGenericDirCtrl_CLASSINFO();
@@ -1782,8 +1693,6 @@ void wxGenericDirCtrl_ShowHidden(wxGenericDirCtrl * self, bool show);
 void wxGenericDirCtrl_SelectPath(wxGenericDirCtrl * self, const wxString * path, bool select);
 void wxGenericDirCtrl_SelectPaths(wxGenericDirCtrl * self, const wxArrayString * paths);
 void wxGenericDirCtrl_UnselectAll(wxGenericDirCtrl * self);
-// Mix-in(s) to wxGenericDirCtrl
-wxTrackable *wxGenericDirCtrl_AsTrackable(wxGenericDirCtrl* obj);
 
 // CLASS: wxGenericValidator
 wxClassInfo *wxGenericValidator_CLASSINFO();
@@ -1796,8 +1705,6 @@ wxGenericValidator *wxGenericValidator_new5(wxDateTime * val_ptr);
 wxGenericValidator *wxGenericValidator_new6(wxFileName * val_ptr);
 wxGenericValidator *wxGenericValidator_new7(float * val_ptr);
 wxGenericValidator *wxGenericValidator_new8(double * val_ptr);
-// Mix-in(s) to wxGenericValidator
-wxTrackable *wxGenericValidator_AsTrackable(wxGenericValidator* obj);
 
 // CLASS: wxGestureEvent
 wxClassInfo *wxGestureEvent_CLASSINFO();
@@ -2022,8 +1929,6 @@ int wxHeaderCtrl_GetColumnTitleWidth(wxHeaderCtrl * self, const wxHeaderColumn *
 int wxHeaderCtrl_GetColumnTitleWidth1(wxHeaderCtrl * self, unsigned int idx);
 #endif
 void wxHeaderCtrl_MoveColumnInOrderArray(wxArrayInt * order, unsigned int idx, unsigned int pos);
-// Mix-in(s) to wxHeaderCtrl
-wxTrackable *wxHeaderCtrl_AsTrackable(wxHeaderCtrl* obj);
 
 // CLASS: wxHeaderCtrlEvent
 wxClassInfo *wxHeaderCtrlEvent_CLASSINFO();
@@ -2046,8 +1951,6 @@ void wxHeaderCtrlSimple_ShowColumn(wxHeaderCtrlSimple * self, unsigned int idx, 
 void wxHeaderCtrlSimple_HideColumn(wxHeaderCtrlSimple * self, unsigned int idx);
 void wxHeaderCtrlSimple_ShowSortIndicator(wxHeaderCtrlSimple * self, unsigned int idx, bool sort_order);
 void wxHeaderCtrlSimple_RemoveSortIndicator(wxHeaderCtrlSimple * self);
-// Mix-in(s) to wxHeaderCtrlSimple
-wxTrackable *wxHeaderCtrlSimple_AsTrackable(wxHeaderCtrlSimple* obj);
 
 // CLASS: wxHelpControllerHelpProvider
 void wxHelpControllerHelpProvider_delete(wxHelpControllerHelpProvider *self);
@@ -2085,8 +1988,6 @@ void wxHyperlinkCtrl_SetNormalColour(wxHyperlinkCtrl * self, const wxColour * co
 void wxHyperlinkCtrl_SetURL(wxHyperlinkCtrl * self, const wxString * url);
 void wxHyperlinkCtrl_SetVisited(wxHyperlinkCtrl * self, bool visited);
 void wxHyperlinkCtrl_SetVisitedColour(wxHyperlinkCtrl * self, const wxColour * colour);
-// Mix-in(s) to wxHyperlinkCtrl
-wxTrackable *wxHyperlinkCtrl_AsTrackable(wxHyperlinkCtrl* obj);
 
 // CLASS: wxHyperlinkEvent
 wxClassInfo *wxHyperlinkEvent_CLASSINFO();
@@ -2170,8 +2071,6 @@ void wxInfoBar_ShowMessage(wxInfoBar * self, const wxString * msg, int flags);
 size_t wxInfoBar_GetButtonCount(const wxInfoBar * self);
 wxWindowID wxInfoBar_GetButtonId(const wxInfoBar * self, size_t idx);
 bool wxInfoBar_HasButtonId(const wxInfoBar * self, wxWindowID btnid);
-// Mix-in(s) to wxInfoBar
-wxTrackable *wxInfoBar_AsTrackable(wxInfoBar* obj);
 
 // CLASS: wxInitDialogEvent
 wxClassInfo *wxInitDialogEvent_CLASSINFO();
@@ -2349,7 +2248,6 @@ int wxListBox_GetTopItem(const wxListBox * self);
 #endif
 // Mix-in(s) to wxListBox
 wxItemContainer *wxListBox_AsItemContainer(wxListBox* obj);
-wxTrackable *wxListBox_AsTrackable(wxListBox* obj);
 
 // CLASS: wxListCtrl
 wxClassInfo *wxListCtrl_CLASSINFO();
@@ -2442,8 +2340,6 @@ void wxListCtrl_RemoveSortIndicator(wxListCtrl * self);
 int wxListCtrl_GetSortIndicator(const wxListCtrl * self);
 bool wxListCtrl_GetUpdatedAscendingSortIndicator(const wxListCtrl * self, int col);
 bool wxListCtrl_IsAscendingSortIndicator(const wxListCtrl * self);
-// Mix-in(s) to wxListCtrl
-wxTrackable *wxListCtrl_AsTrackable(wxListCtrl* obj);
 
 // CLASS: wxListEvent
 wxClassInfo *wxListEvent_CLASSINFO();
@@ -2507,8 +2403,6 @@ long wxListView_GetNextSelected(const wxListView * self, long item);
 bool wxListView_IsSelected(const wxListView * self, long index);
 void wxListView_Select(wxListView * self, long n, bool on);
 void wxListView_SetColumnImage(wxListView * self, int col, int image);
-// Mix-in(s) to wxListView
-wxTrackable *wxListView_AsTrackable(wxListView* obj);
 
 // CLASS: wxListbook
 wxClassInfo *wxListbook_CLASSINFO();
@@ -2518,7 +2412,6 @@ bool wxListbook_Create(wxListbook * self, wxWindow * parent, wxWindowID id, cons
 wxListView * wxListbook_GetListView(const wxListbook * self);
 // Mix-in(s) to wxListbook
 wxWithImages *wxListbook_AsWithImages(wxListbook* obj);
-wxTrackable *wxListbook_AsTrackable(wxListbook* obj);
 
 // CLASS: wxLogGui
 void wxLogGui_delete(wxLogGui *self);
@@ -2548,15 +2441,11 @@ void wxMDIChildFrame_Activate(wxMDIChildFrame * self);
 bool wxMDIChildFrame_Create(wxMDIChildFrame * self, wxMDIParentFrame * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 wxMDIParentFrame * wxMDIChildFrame_GetMDIParent(const wxMDIChildFrame * self);
 void wxMDIChildFrame_Restore(wxMDIChildFrame * self);
-// Mix-in(s) to wxMDIChildFrame
-wxTrackable *wxMDIChildFrame_AsTrackable(wxMDIChildFrame* obj);
 
 // CLASS: wxMDIClientWindow
 wxClassInfo *wxMDIClientWindow_CLASSINFO();
 wxMDIClientWindow *wxMDIClientWindow_new();
 bool wxMDIClientWindow_CreateClient(wxMDIClientWindow * self, wxMDIParentFrame * parent, long style);
-// Mix-in(s) to wxMDIClientWindow
-wxTrackable *wxMDIClientWindow_AsTrackable(wxMDIClientWindow* obj);
 
 // CLASS: wxMDIParentFrame
 wxClassInfo *wxMDIParentFrame_CLASSINFO();
@@ -2573,8 +2462,6 @@ wxMenu * wxMDIParentFrame_GetWindowMenu(const wxMDIParentFrame * self);
 wxMDIClientWindow * wxMDIParentFrame_OnCreateClient(wxMDIParentFrame * self);
 void wxMDIParentFrame_SetWindowMenu(wxMDIParentFrame * self, wxMenu * menu);
 bool wxMDIParentFrame_IsTDI();
-// Mix-in(s) to wxMDIParentFrame
-wxTrackable *wxMDIParentFrame_AsTrackable(wxMDIParentFrame* obj);
 
 // CLASS: wxMask
 wxClassInfo *wxMask_CLASSINFO();
@@ -2658,8 +2545,6 @@ wxMenu * wxMenu_GetParent(const wxMenu * self);
 void wxMenu_Attach(wxMenu * self, wxMenuBar * menubar);
 void wxMenu_Detach(wxMenu * self);
 bool wxMenu_IsAttached(const wxMenu * self);
-// Mix-in(s) to wxMenu
-wxTrackable *wxMenu_AsTrackable(wxMenu* obj);
 
 // CLASS: wxMenuBar
 wxClassInfo *wxMenuBar_CLASSINFO();
@@ -2697,8 +2582,6 @@ void wxMenuBar_Detach(wxMenuBar * self);
 void wxMenuBar_MacSetCommonMenuBar(wxMenuBar * menubar);
 wxMenuBar * wxMenuBar_MacGetCommonMenuBar();
 #endif
-// Mix-in(s) to wxMenuBar
-wxTrackable *wxMenuBar_AsTrackable(wxMenuBar* obj);
 
 // CLASS: wxMenuEvent
 wxClassInfo *wxMenuEvent_CLASSINFO();
@@ -2782,8 +2665,6 @@ wxClassInfo *wxMiniFrame_CLASSINFO();
 wxMiniFrame *wxMiniFrame_new();
 wxMiniFrame *wxMiniFrame_new1(wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxMiniFrame_Create(wxMiniFrame * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-// Mix-in(s) to wxMiniFrame
-wxTrackable *wxMiniFrame_AsTrackable(wxMiniFrame* obj);
 
 // CLASS: wxMirrorDC
 wxClassInfo *wxMirrorDC_CLASSINFO();
@@ -2868,8 +2749,6 @@ wxString *wxNativeFontInfo_ToUserString(const wxNativeFontInfo * self);
 wxClassInfo *wxNativeWindow_CLASSINFO();
 wxNativeWindow *wxNativeWindow_new();
 void wxNativeWindow_Disown(wxNativeWindow * self);
-// Mix-in(s) to wxNativeWindow
-wxTrackable *wxNativeWindow_AsTrackable(wxNativeWindow* obj);
 
 // CLASS: wxNavigationKeyEvent
 wxClassInfo *wxNavigationKeyEvent_CLASSINFO();
@@ -2889,8 +2768,6 @@ void wxNavigationKeyEvent_SetWindowChange(wxNavigationKeyEvent * self, bool wind
 wxClassInfo *wxNonOwnedWindow_CLASSINFO();
 bool wxNonOwnedWindow_SetShape(wxNonOwnedWindow * self, const wxRegion * region);
 bool wxNonOwnedWindow_SetShape1(wxNonOwnedWindow * self, const wxGraphicsPath * path);
-// Mix-in(s) to wxNonOwnedWindow
-wxTrackable *wxNonOwnedWindow_AsTrackable(wxNonOwnedWindow* obj);
 
 // CLASS: wxNotebook
 wxClassInfo *wxNotebook_CLASSINFO();
@@ -2901,7 +2778,6 @@ wxColour *wxNotebook_GetThemeBackgroundColour(const wxNotebook * self);
 void wxNotebook_SetPadding(wxNotebook * self, const wxSize * padding);
 // Mix-in(s) to wxNotebook
 wxWithImages *wxNotebook_AsWithImages(wxNotebook* obj);
-wxTrackable *wxNotebook_AsTrackable(wxNotebook* obj);
 
 // CLASS: wxNotifyEvent
 wxClassInfo *wxNotifyEvent_CLASSINFO();
@@ -2981,8 +2857,6 @@ wxPanel *wxPanel_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, con
 bool wxPanel_Create(wxPanel * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 void wxPanel_OnSysColourChanged(wxPanel * self, wxSysColourChangedEvent * event);
 void wxPanel_SetFocusIgnoringChildren(wxPanel * self);
-// Mix-in(s) to wxPanel
-wxTrackable *wxPanel_AsTrackable(wxPanel* obj);
 
 // CLASS: wxPen
 wxClassInfo *wxPen_CLASSINFO();
@@ -3026,8 +2900,6 @@ void wxPickerBase_SetTextCtrl(wxPickerBase * self, wxTextCtrl * text);
 void wxPickerBase_SetPickerCtrl(wxPickerBase * self, wxControl * picker);
 void wxPickerBase_UpdatePickerFromTextCtrl(wxPickerBase * self);
 void wxPickerBase_UpdateTextCtrlFromPicker(wxPickerBase * self);
-// Mix-in(s) to wxPickerBase
-wxTrackable *wxPickerBase_AsTrackable(wxPickerBase* obj);
 
 // CLASS: wxPoint
 void wxPoint_delete(wxPoint *self);
@@ -3044,8 +2916,6 @@ wxPopupTransientWindow *wxPopupTransientWindow_new1(wxWindow * parent, int flags
 void wxPopupTransientWindow_Popup(wxPopupTransientWindow * self, wxWindow * focus);
 void wxPopupTransientWindow_Dismiss(wxPopupTransientWindow * self);
 bool wxPopupTransientWindow_ProcessLeftDown(wxPopupTransientWindow * self, wxMouseEvent * event);
-// Mix-in(s) to wxPopupTransientWindow
-wxTrackable *wxPopupTransientWindow_AsTrackable(wxPopupTransientWindow* obj);
 
 // CLASS: wxPopupWindow
 wxClassInfo *wxPopupWindow_CLASSINFO();
@@ -3053,8 +2923,6 @@ wxPopupWindow *wxPopupWindow_new();
 wxPopupWindow *wxPopupWindow_new1(wxWindow * parent, int flags);
 bool wxPopupWindow_Create(wxPopupWindow * self, wxWindow * parent, int flags);
 void wxPopupWindow_Position(wxPopupWindow * self, const wxPoint * pt_origin, const wxSize * size_popup);
-// Mix-in(s) to wxPopupWindow
-wxTrackable *wxPopupWindow_AsTrackable(wxPopupWindow* obj);
 
 // CLASS: wxPreferencesEditor
 void wxPreferencesEditor_delete(wxPreferencesEditor *self);
@@ -3076,8 +2944,6 @@ void wxPreviewControlBar_CreateButtons(wxPreviewControlBar * self);
 wxPrintPreviewBase * wxPreviewControlBar_GetPrintPreview(const wxPreviewControlBar * self);
 int wxPreviewControlBar_GetZoomControl(wxPreviewControlBar * self);
 void wxPreviewControlBar_SetZoomControl(wxPreviewControlBar * self, int percent);
-// Mix-in(s) to wxPreviewControlBar
-wxTrackable *wxPreviewControlBar_AsTrackable(wxPreviewControlBar* obj);
 
 // CLASS: wxPreviewFrame
 wxClassInfo *wxPreviewFrame_CLASSINFO();
@@ -3086,8 +2952,6 @@ void wxPreviewFrame_CreateCanvas(wxPreviewFrame * self);
 void wxPreviewFrame_CreateControlBar(wxPreviewFrame * self);
 void wxPreviewFrame_Initialize(wxPreviewFrame * self);
 void wxPreviewFrame_OnCloseWindow(wxPreviewFrame * self, wxCloseEvent * event);
-// Mix-in(s) to wxPreviewFrame
-wxTrackable *wxPreviewFrame_AsTrackable(wxPreviewFrame* obj);
 
 // CLASS: wxPrintData
 wxClassInfo *wxPrintData_CLASSINFO();
@@ -3169,7 +3033,6 @@ void wxRadioBox_SetItemToolTip(wxRadioBox * self, unsigned int item, const wxStr
 bool wxRadioBox_Show(wxRadioBox * self, unsigned int item, bool show);
 // Mix-in(s) to wxRadioBox
 wxItemContainerImmutable *wxRadioBox_AsItemContainerImmutable(wxRadioBox* obj);
-wxTrackable *wxRadioBox_AsTrackable(wxRadioBox* obj);
 
 // CLASS: wxRadioButton
 wxClassInfo *wxRadioButton_CLASSINFO();
@@ -3182,8 +3045,6 @@ wxRadioButton * wxRadioButton_GetFirstInGroup(const wxRadioButton * self);
 wxRadioButton * wxRadioButton_GetLastInGroup(const wxRadioButton * self);
 wxRadioButton * wxRadioButton_GetPreviousInGroup(const wxRadioButton * self);
 wxRadioButton * wxRadioButton_GetNextInGroup(const wxRadioButton * self);
-// Mix-in(s) to wxRadioButton
-wxTrackable *wxRadioButton_AsTrackable(wxRadioButton* obj);
 
 // CLASS: wxRealPoint
 void wxRealPoint_delete(wxRealPoint *self);
@@ -3197,8 +3058,6 @@ wxRearrangeCtrl *wxRearrangeCtrl_new();
 wxRearrangeCtrl *wxRearrangeCtrl_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayInt * order, const wxArrayString * items, long style, const wxValidator * validator, const wxString * name);
 bool wxRearrangeCtrl_Create(wxRearrangeCtrl * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayInt * order, const wxArrayString * items, long style, const wxValidator * validator, const wxString * name);
 wxRearrangeList * wxRearrangeCtrl_GetList(const wxRearrangeCtrl * self);
-// Mix-in(s) to wxRearrangeCtrl
-wxTrackable *wxRearrangeCtrl_AsTrackable(wxRearrangeCtrl* obj);
 
 // CLASS: wxRearrangeList
 wxClassInfo *wxRearrangeList_CLASSINFO();
@@ -3212,7 +3071,6 @@ bool wxRearrangeList_MoveCurrentUp(wxRearrangeList * self);
 bool wxRearrangeList_MoveCurrentDown(wxRearrangeList * self);
 // Mix-in(s) to wxRearrangeList
 wxItemContainer *wxRearrangeList_AsItemContainer(wxRearrangeList* obj);
-wxTrackable *wxRearrangeList_AsTrackable(wxRearrangeList* obj);
 
 // CLASS: wxRect
 void wxRect_delete(wxRect *self);
@@ -3362,8 +3220,6 @@ bool wxSashLayoutWindow_Create(wxSashLayoutWindow * self, wxWindow * parent, wxW
 void wxSashLayoutWindow_OnCalculateLayout(wxSashLayoutWindow * self, wxCalculateLayoutEvent * event);
 void wxSashLayoutWindow_OnQueryLayoutInfo(wxSashLayoutWindow * self, wxQueryLayoutInfoEvent * event);
 void wxSashLayoutWindow_SetDefaultSize(wxSashLayoutWindow * self, const wxSize * size);
-// Mix-in(s) to wxSashLayoutWindow
-wxTrackable *wxSashLayoutWindow_AsTrackable(wxSashLayoutWindow* obj);
 
 // CLASS: wxSashWindow
 wxClassInfo *wxSashWindow_CLASSINFO();
@@ -3382,8 +3238,6 @@ int wxSashWindow_GetDefaultBorderSize(const wxSashWindow * self);
 void wxSashWindow_SetExtraBorderSize(wxSashWindow * self, int width);
 int wxSashWindow_GetExtraBorderSize(const wxSashWindow * self);
 void wxSashWindow_SizeWindows(wxSashWindow * self);
-// Mix-in(s) to wxSashWindow
-wxTrackable *wxSashWindow_AsTrackable(wxSashWindow* obj);
 
 // CLASS: wxScreenDC
 wxClassInfo *wxScreenDC_CLASSINFO();
@@ -3403,8 +3257,6 @@ int wxScrollBar_GetThumbPosition(const wxScrollBar * self);
 int wxScrollBar_GetThumbSize(const wxScrollBar * self);
 void wxScrollBar_SetThumbPosition(wxScrollBar * self, int view_start);
 bool wxScrollBar_IsVertical(const wxScrollBar * self);
-// Mix-in(s) to wxScrollBar
-wxTrackable *wxScrollBar_AsTrackable(wxScrollBar* obj);
 
 // CLASS: wxScrollEvent
 wxClassInfo *wxScrollEvent_CLASSINFO();
@@ -3435,7 +3287,6 @@ void wxSearchCtrl_SetDescriptiveText(wxSearchCtrl * self, const wxString * text)
 wxString *wxSearchCtrl_GetDescriptiveText(const wxSearchCtrl * self);
 // Mix-in(s) to wxSearchCtrl
 wxTextEntryBase *wxSearchCtrl_AsTextEntry(wxSearchCtrl* obj);
-wxTrackable *wxSearchCtrl_AsTrackable(wxSearchCtrl* obj);
 
 // CLASS: wxSetCursorEvent
 wxClassInfo *wxSetCursorEvent_CLASSINFO();
@@ -3477,7 +3328,6 @@ bool wxSimplebook_Create(wxSimplebook * self, wxWindow * parent, wxWindowID id, 
 bool wxSimplebook_ShowNewPage(wxSimplebook * self, wxWindow * page);
 // Mix-in(s) to wxSimplebook
 wxWithImages *wxSimplebook_AsWithImages(wxSimplebook* obj);
-wxTrackable *wxSimplebook_AsTrackable(wxSimplebook* obj);
 
 // CLASS: wxSize
 void wxSize_delete(wxSize *self);
@@ -3649,8 +3499,6 @@ void wxSlider_SetThumbLength(wxSlider * self, int len);
 void wxSlider_SetTick(wxSlider * self, int tick_pos);
 void wxSlider_SetTickFreq(wxSlider * self, int freq);
 void wxSlider_SetValue(wxSlider * self, int value);
-// Mix-in(s) to wxSlider
-wxTrackable *wxSlider_AsTrackable(wxSlider* obj);
 
 // CLASS: wxSound
 wxClassInfo *wxSound_CLASSINFO();
@@ -3679,8 +3527,6 @@ void wxSpinButton_SetIncrement(wxSpinButton * self, int value);
 #endif
 void wxSpinButton_SetRange(wxSpinButton * self, int min, int max);
 void wxSpinButton_SetValue(wxSpinButton * self, int value);
-// Mix-in(s) to wxSpinButton
-wxTrackable *wxSpinButton_AsTrackable(wxSpinButton* obj);
 
 // CLASS: wxSpinCtrl
 wxClassInfo *wxSpinCtrl_CLASSINFO();
@@ -3701,8 +3547,6 @@ void wxSpinCtrl_SetSelection(wxSpinCtrl * self, long from, long to);
 void wxSpinCtrl_SetValue(wxSpinCtrl * self, const wxString * text);
 void wxSpinCtrl_SetValue1(wxSpinCtrl * self, int value);
 void wxSpinCtrl_SetIncrement(wxSpinCtrl * self, int value);
-// Mix-in(s) to wxSpinCtrl
-wxTrackable *wxSpinCtrl_AsTrackable(wxSpinCtrl* obj);
 
 // CLASS: wxSpinCtrlDouble
 wxClassInfo *wxSpinCtrlDouble_CLASSINFO();
@@ -3722,8 +3566,6 @@ void wxSpinCtrlDouble_SetIncrement(wxSpinCtrlDouble * self, double inc);
 void wxSpinCtrlDouble_SetRange(wxSpinCtrlDouble * self, double min_val, double max_val);
 void wxSpinCtrlDouble_SetValue(wxSpinCtrlDouble * self, const wxString * text);
 void wxSpinCtrlDouble_SetValue1(wxSpinCtrlDouble * self, double value);
-// Mix-in(s) to wxSpinCtrlDouble
-wxTrackable *wxSpinCtrlDouble_AsTrackable(wxSpinCtrlDouble* obj);
 
 // CLASS: wxSpinDoubleEvent
 wxClassInfo *wxSpinDoubleEvent_CLASSINFO();
@@ -3743,8 +3585,6 @@ long wxSplashScreen_GetSplashStyle(const wxSplashScreen * self);
 wxSplashScreenWindow * wxSplashScreen_GetSplashWindow(const wxSplashScreen * self);
 int wxSplashScreen_GetTimeout(const wxSplashScreen * self);
 void wxSplashScreen_OnCloseWindow(wxSplashScreen * self, wxCloseEvent * event);
-// Mix-in(s) to wxSplashScreen
-wxTrackable *wxSplashScreen_AsTrackable(wxSplashScreen* obj);
 
 // CLASS: wxSplitterEvent
 wxClassInfo *wxSplitterEvent_CLASSINFO();
@@ -3784,8 +3624,6 @@ bool wxSplitterWindow_SplitHorizontally(wxSplitterWindow * self, wxWindow * wind
 bool wxSplitterWindow_SplitVertically(wxSplitterWindow * self, wxWindow * window1, wxWindow * window2, int sash_position);
 bool wxSplitterWindow_Unsplit(wxSplitterWindow * self, wxWindow * to_remove);
 void wxSplitterWindow_UpdateSize(wxSplitterWindow * self);
-// Mix-in(s) to wxSplitterWindow
-wxTrackable *wxSplitterWindow_AsTrackable(wxSplitterWindow* obj);
 
 // CLASS: wxStaticBitmap
 wxClassInfo *wxStaticBitmap_CLASSINFO();
@@ -3796,16 +3634,12 @@ wxBitmap *wxStaticBitmap_GetBitmap(const wxStaticBitmap * self);
 wxIcon *wxStaticBitmap_GetIcon(const wxStaticBitmap * self);
 void wxStaticBitmap_SetBitmap(wxStaticBitmap * self, const wxBitmapBundle * label);
 void wxStaticBitmap_SetIcon(wxStaticBitmap * self, const wxIcon * label);
-// Mix-in(s) to wxStaticBitmap
-wxTrackable *wxStaticBitmap_AsTrackable(wxStaticBitmap* obj);
 
 // CLASS: wxStaticBox
 wxClassInfo *wxStaticBox_CLASSINFO();
 wxStaticBox *wxStaticBox_new();
 wxStaticBox *wxStaticBox_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxStaticBox_Create(wxStaticBox * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-// Mix-in(s) to wxStaticBox
-wxTrackable *wxStaticBox_AsTrackable(wxStaticBox* obj);
 
 // CLASS: wxStaticBoxSizer
 wxClassInfo *wxStaticBoxSizer_CLASSINFO();
@@ -3820,8 +3654,6 @@ wxStaticLine *wxStaticLine_new1(wxWindow * parent, wxWindowID id, const wxPoint 
 bool wxStaticLine_Create(wxStaticLine * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxStaticLine_IsVertical(const wxStaticLine * self);
 int wxStaticLine_GetDefaultSize();
-// Mix-in(s) to wxStaticLine
-wxTrackable *wxStaticLine_AsTrackable(wxStaticLine* obj);
 
 // CLASS: wxStaticText
 wxClassInfo *wxStaticText_CLASSINFO();
@@ -3830,8 +3662,6 @@ wxStaticText *wxStaticText_new1(wxWindow * parent, wxWindowID id, const wxString
 bool wxStaticText_Create(wxStaticText * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxStaticText_IsEllipsized(const wxStaticText * self);
 void wxStaticText_Wrap(wxStaticText * self, int width);
-// Mix-in(s) to wxStaticText
-wxTrackable *wxStaticText_AsTrackable(wxStaticText* obj);
 
 // CLASS: wxStatusBar
 wxClassInfo *wxStatusBar_CLASSINFO();
@@ -3852,8 +3682,6 @@ void wxStatusBar_SetMinHeight(wxStatusBar * self, int height);
 void wxStatusBar_SetStatusStyles(wxStatusBar * self, int n, const int * styles);
 void wxStatusBar_SetStatusText(wxStatusBar * self, const wxString * text, int i);
 void wxStatusBar_SetStatusWidths(wxStatusBar * self, int n, const int * widths_field);
-// Mix-in(s) to wxStatusBar
-wxTrackable *wxStatusBar_AsTrackable(wxStatusBar* obj);
 
 // CLASS: wxStatusBarPane
 void wxStatusBarPane_delete(wxStatusBarPane *self);
@@ -3889,8 +3717,6 @@ bool wxTaskBarIcon_PopupMenu(wxTaskBarIcon * self, wxMenu * menu);
 bool wxTaskBarIcon_RemoveIcon(wxTaskBarIcon * self);
 bool wxTaskBarIcon_SetIcon(wxTaskBarIcon * self, const wxBitmapBundle * icon, const wxString * tooltip);
 bool wxTaskBarIcon_IsAvailable();
-// Mix-in(s) to wxTaskBarIcon
-wxTrackable *wxTaskBarIcon_AsTrackable(wxTaskBarIcon* obj);
 
 // CLASS: wxTaskBarIconEvent
 wxClassInfo *wxTaskBarIconEvent_CLASSINFO();
@@ -4038,7 +3864,6 @@ void wxTextCtrl_ShowPosition(wxTextCtrl * self, long pos);
 long wxTextCtrl_XYToPosition(const wxTextCtrl * self, long x, long y);
 // Mix-in(s) to wxTextCtrl
 wxTextEntryBase *wxTextCtrl_AsTextEntry(wxTextCtrl* obj);
-wxTrackable *wxTextCtrl_AsTrackable(wxTextCtrl* obj);
 
 // CLASS: wxTextEntry
 void wxTextEntry_delete(wxTextEntry *self);
@@ -4105,8 +3930,6 @@ void wxTextValidator_AddCharExcludes(wxTextValidator * self, const wxString * ch
 void wxTextValidator_AddCharIncludes(wxTextValidator * self, const wxString * chars);
 void wxTextValidator_SetStyle(wxTextValidator * self, long style);
 wxString *wxTextValidator_IsValid(const wxTextValidator * self, const wxString * val);
-// Mix-in(s) to wxTextValidator
-wxTrackable *wxTextValidator_AsTrackable(wxTextValidator* obj);
 
 // CLASS: wxTimePickerCtrl
 wxClassInfo *wxTimePickerCtrl_CLASSINFO();
@@ -4117,16 +3940,12 @@ bool wxTimePickerCtrl_GetTime(const wxTimePickerCtrl * self, int * hour, int * m
 wxDateTime *wxTimePickerCtrl_GetValue(const wxTimePickerCtrl * self);
 bool wxTimePickerCtrl_SetTime(wxTimePickerCtrl * self, int hour, int min, int sec);
 void wxTimePickerCtrl_SetValue(wxTimePickerCtrl * self, const wxDateTime * dt);
-// Mix-in(s) to wxTimePickerCtrl
-wxTrackable *wxTimePickerCtrl_AsTrackable(wxTimePickerCtrl* obj);
 
 // CLASS: wxTipWindow
 wxClassInfo *wxTipWindow_CLASSINFO();
 wxTipWindow *wxTipWindow_new(wxWindow * parent, const wxString * text, wxCoord max_length, wxTipWindow ** window_ptr, wxRect * rect_bounds);
 void wxTipWindow_SetBoundingRect(wxTipWindow * self, const wxRect * rect_bound);
 void wxTipWindow_SetTipWindowPtr(wxTipWindow * self, wxTipWindow ** window_ptr);
-// Mix-in(s) to wxTipWindow
-wxTrackable *wxTipWindow_AsTrackable(wxTipWindow* obj);
 
 // CLASS: wxToggleButton
 wxClassInfo *wxToggleButton_CLASSINFO();
@@ -4135,8 +3954,6 @@ wxToggleButton *wxToggleButton_new1(wxWindow * parent, wxWindowID id, const wxSt
 bool wxToggleButton_Create(wxToggleButton * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * val, const wxString * name);
 bool wxToggleButton_GetValue(const wxToggleButton * self);
 void wxToggleButton_SetValue(wxToggleButton * self, bool state);
-// Mix-in(s) to wxToggleButton
-wxTrackable *wxToggleButton_AsTrackable(wxToggleButton* obj);
 
 // CLASS: wxToolBar
 wxClassInfo *wxToolBar_CLASSINFO();
@@ -4195,8 +4012,6 @@ void wxToolBar_ToggleTool(wxToolBar * self, int tool_id, bool toggle);
 wxToolBarToolBase * wxToolBar_CreateTool(wxToolBar * self, int tool_id, const wxString * label, const wxBitmapBundle * bmp_normal, const wxBitmapBundle * bmp_disabled, wxItemKind kind, wxObject * client_data, const wxString * short_help, const wxString * long_help);
 wxToolBarToolBase * wxToolBar_CreateTool1(wxToolBar * self, wxControl * control, const wxString * label);
 wxToolBarToolBase * wxToolBar_CreateSeparator(wxToolBar * self);
-// Mix-in(s) to wxToolBar
-wxTrackable *wxToolBar_AsTrackable(wxToolBar* obj);
 
 // CLASS: wxToolbook
 wxClassInfo *wxToolbook_CLASSINFO();
@@ -4208,7 +4023,6 @@ bool wxToolbook_EnablePage(wxToolbook * self, size_t page, bool enable);
 bool wxToolbook_EnablePage1(wxToolbook * self, wxWindow * page, bool enable);
 // Mix-in(s) to wxToolbook
 wxWithImages *wxToolbook_AsWithImages(wxToolbook* obj);
-wxTrackable *wxToolbook_AsTrackable(wxToolbook* obj);
 
 // CLASS: wxTopLevelWindow
 wxClassInfo *wxTopLevelWindow_CLASSINFO();
@@ -4253,8 +4067,6 @@ bool wxTopLevelWindow_EnableFullScreenView(wxTopLevelWindow * self, bool enable,
 #endif
 bool wxTopLevelWindow_ShowFullScreen(wxTopLevelWindow * self, bool show, long style);
 wxSize *wxTopLevelWindow_GetDefaultSize();
-// Mix-in(s) to wxTopLevelWindow
-wxTrackable *wxTopLevelWindow_AsTrackable(wxTopLevelWindow* obj);
 
 // CLASS: wxTreeCtrl
 wxClassInfo *wxTreeCtrl_CLASSINFO();
@@ -4346,7 +4158,6 @@ void wxTreeCtrl_UnselectItem(wxTreeCtrl * self, const wxTreeItemId * item);
 void wxTreeCtrl_SelectChildren(wxTreeCtrl * self, const wxTreeItemId * parent);
 // Mix-in(s) to wxTreeCtrl
 wxWithImages *wxTreeCtrl_AsWithImages(wxTreeCtrl* obj);
-wxTrackable *wxTreeCtrl_AsTrackable(wxTreeCtrl* obj);
 
 // CLASS: wxTreeEvent
 wxClassInfo *wxTreeEvent_CLASSINFO();
@@ -4417,8 +4228,6 @@ wxDataViewCtrl * wxTreeListCtrl_GetDataView(const wxTreeListCtrl * self);
 wxTreeListCtrl *wxTreeListCtrl_new();
 wxTreeListCtrl *wxTreeListCtrl_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxTreeListCtrl_Create(wxTreeListCtrl * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-// Mix-in(s) to wxTreeListCtrl
-wxTrackable *wxTreeListCtrl_AsTrackable(wxTreeListCtrl* obj);
 
 // CLASS: wxTreeListItem
 void wxTreeListItem_delete(wxTreeListItem *self);
@@ -4438,7 +4247,6 @@ bool wxTreebook_InsertSubPage(wxTreebook * self, size_t page_pos, wxWindow * pag
 bool wxTreebook_IsNodeExpanded(const wxTreebook * self, size_t page_id);
 // Mix-in(s) to wxTreebook
 wxWithImages *wxTreebook_AsWithImages(wxTreebook* obj);
-wxTrackable *wxTreebook_AsTrackable(wxTreebook* obj);
 
 // CLASS: wxTwoFingerTapEvent
 wxClassInfo *wxTwoFingerTapEvent_CLASSINFO();
@@ -4492,8 +4300,6 @@ bool wxValidator_TransferToWindow(wxValidator * self);
 bool wxValidator_Validate(wxValidator * self, wxWindow * parent);
 void wxValidator_SuppressBellOnError(bool suppress);
 bool wxValidator_IsSilent();
-// Mix-in(s) to wxValidator
-wxTrackable *wxValidator_AsTrackable(wxValidator* obj);
 
 // CLASS: wxWindow
 wxClassInfo *wxWindow_CLASSINFO();
@@ -4802,8 +4608,6 @@ void wxWindow_UnreserveControlId(wxWindowID id, int count);
 wxWindow *wxWindow_new();
 wxWindow *wxWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxWindow_Create(wxWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-// Mix-in(s) to wxWindow
-wxTrackable *wxWindow_AsTrackable(wxWindow* obj);
 
 // CLASS: wxWindowCreateEvent
 wxClassInfo *wxWindowCreateEvent_CLASSINFO();
