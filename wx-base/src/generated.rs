@@ -2091,112 +2091,6 @@ impl<const OWNED: bool> Drop for ModuleIsOwned<OWNED> {
     }
 }
 
-// wxMultiChoiceDialog
-wx_class! { MultiChoiceDialog =
-    MultiChoiceDialogIsOwned<true>(wxMultiChoiceDialog) impl
-        MultiChoiceDialogMethods,
-        DialogMethods,
-        TopLevelWindowMethods,
-        NonOwnedWindowMethods,
-        WindowMethods,
-        EvtHandlerMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> MultiChoiceDialogIsOwned<OWNED> {
-    pub fn new<W: WindowMethods, P: PointMethods>(
-        parent: Option<&W>,
-        message: &str,
-        caption: &str,
-        n: c_int,
-        choices: *const c_void,
-        style: c_long,
-        pos: &P,
-    ) -> MultiChoiceDialogIsOwned<OWNED> {
-        unsafe {
-            let parent = match parent {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            let message = WxString::from(message);
-            let message = message.as_ptr();
-            let caption = WxString::from(caption);
-            let caption = caption.as_ptr();
-            let pos = pos.as_ptr();
-            MultiChoiceDialogIsOwned(ffi::wxMultiChoiceDialog_new(
-                parent, message, caption, n, choices, style, pos,
-            ))
-        }
-    }
-    pub fn new<W: WindowMethods, A: ArrayStringMethods, P: PointMethods>(
-        parent: Option<&W>,
-        message: &str,
-        caption: &str,
-        choices: &A,
-        style: c_long,
-        pos: &P,
-    ) -> MultiChoiceDialogIsOwned<OWNED> {
-        unsafe {
-            let parent = match parent {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            let message = WxString::from(message);
-            let message = message.as_ptr();
-            let caption = WxString::from(caption);
-            let caption = caption.as_ptr();
-            let choices = choices.as_ptr();
-            let pos = pos.as_ptr();
-            MultiChoiceDialogIsOwned(ffi::wxMultiChoiceDialog_new1(
-                parent, message, caption, choices, style, pos,
-            ))
-        }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<MultiChoiceDialogIsOwned<OWNED>> for DialogIsOwned<OWNED> {
-    fn from(o: MultiChoiceDialogIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<MultiChoiceDialogIsOwned<OWNED>> for TopLevelWindowIsOwned<OWNED> {
-    fn from(o: MultiChoiceDialogIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<MultiChoiceDialogIsOwned<OWNED>> for NonOwnedWindowIsOwned<OWNED> {
-    fn from(o: MultiChoiceDialogIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<MultiChoiceDialogIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: MultiChoiceDialogIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<MultiChoiceDialogIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: MultiChoiceDialogIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<MultiChoiceDialogIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: MultiChoiceDialogIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for MultiChoiceDialogIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxMultiChoiceDialog_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxMultiChoiceDialog
-impl<const OWNED: bool> TrackableMethods for MultiChoiceDialogIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxMultiChoiceDialog_AsTrackable(self.as_ptr()) }
-    }
-}
-
 // wxMutex
 wx_class! { Mutex =
     MutexIsOwned<true>(wxMutex) impl
@@ -2586,6 +2480,25 @@ impl<const OWNED: bool> Drop for RecursionGuardFlagIsOwned<OWNED> {
 }
 
 // wxRefCounter
+wx_class! { RefCounter =
+    RefCounterIsOwned<true>(wxRefCounter) impl
+        RefCounterMethods
+}
+impl<const OWNED: bool> RefCounterIsOwned<OWNED> {
+    pub fn new() -> RefCounterIsOwned<OWNED> {
+        unsafe { RefCounterIsOwned(ffi::wxRefCounter_new()) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for RefCounterIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxRefCounter_delete(self.0) }
+        }
+    }
+}
 
 // wxRegEx
 wx_class! { RegEx =
@@ -2789,127 +2702,6 @@ impl<const OWNED: bool> Drop for SharedClientDataContainerIsOwned<OWNED> {
         if OWNED {
             unsafe { ffi::wxSharedClientDataContainer_delete(self.0) }
         }
-    }
-}
-
-// wxSingleChoiceDialog
-wx_class! { SingleChoiceDialog =
-    SingleChoiceDialogIsOwned<true>(wxSingleChoiceDialog) impl
-        SingleChoiceDialogMethods,
-        DialogMethods,
-        TopLevelWindowMethods,
-        NonOwnedWindowMethods,
-        WindowMethods,
-        EvtHandlerMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> SingleChoiceDialogIsOwned<OWNED> {
-    pub fn new<W: WindowMethods, P: PointMethods>(
-        parent: Option<&W>,
-        message: &str,
-        caption: &str,
-        n: c_int,
-        choices: *const c_void,
-        client_data: *mut c_void,
-        style: c_long,
-        pos: &P,
-    ) -> SingleChoiceDialogIsOwned<OWNED> {
-        unsafe {
-            let parent = match parent {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            let message = WxString::from(message);
-            let message = message.as_ptr();
-            let caption = WxString::from(caption);
-            let caption = caption.as_ptr();
-            let pos = pos.as_ptr();
-            SingleChoiceDialogIsOwned(ffi::wxSingleChoiceDialog_new(
-                parent,
-                message,
-                caption,
-                n,
-                choices,
-                client_data,
-                style,
-                pos,
-            ))
-        }
-    }
-    pub fn new<W: WindowMethods, A: ArrayStringMethods, P: PointMethods>(
-        parent: Option<&W>,
-        message: &str,
-        caption: &str,
-        choices: &A,
-        client_data: *mut c_void,
-        style: c_long,
-        pos: &P,
-    ) -> SingleChoiceDialogIsOwned<OWNED> {
-        unsafe {
-            let parent = match parent {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            let message = WxString::from(message);
-            let message = message.as_ptr();
-            let caption = WxString::from(caption);
-            let caption = caption.as_ptr();
-            let choices = choices.as_ptr();
-            let pos = pos.as_ptr();
-            SingleChoiceDialogIsOwned(ffi::wxSingleChoiceDialog_new1(
-                parent,
-                message,
-                caption,
-                choices,
-                client_data,
-                style,
-                pos,
-            ))
-        }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<SingleChoiceDialogIsOwned<OWNED>> for DialogIsOwned<OWNED> {
-    fn from(o: SingleChoiceDialogIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<SingleChoiceDialogIsOwned<OWNED>> for TopLevelWindowIsOwned<OWNED> {
-    fn from(o: SingleChoiceDialogIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<SingleChoiceDialogIsOwned<OWNED>> for NonOwnedWindowIsOwned<OWNED> {
-    fn from(o: SingleChoiceDialogIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<SingleChoiceDialogIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: SingleChoiceDialogIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<SingleChoiceDialogIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: SingleChoiceDialogIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<SingleChoiceDialogIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: SingleChoiceDialogIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for SingleChoiceDialogIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSingleChoiceDialog_CLASSINFO()) }
-    }
-}
-// Mix-in(s) to wxSingleChoiceDialog
-impl<const OWNED: bool> TrackableMethods for SingleChoiceDialogIsOwned<OWNED> {
-    fn as_trackable(&self) -> *mut c_void {
-        unsafe { ffi::wxSingleChoiceDialog_AsTrackable(self.as_ptr()) }
     }
 }
 

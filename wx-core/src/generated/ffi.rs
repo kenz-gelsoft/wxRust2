@@ -82,61 +82,11 @@ extern "C" {
     // BLOCKED: pub fn wxAcceleratorEntry_operator==(self_: *const c_void, entry: *const c_void) -> bool;
     // BLOCKED: pub fn wxAcceleratorEntry_operator!=(self_: *const c_void, entry: *const c_void) -> bool;
 
-    // wxAcceleratorTable
-    pub fn wxAcceleratorTable_CLASSINFO() -> *mut c_void;
-    pub fn wxAcceleratorTable_new() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxAcceleratorTable_new1(n: c_int, entries: wxAcceleratorEntry) -> *mut c_void;
-    pub fn wxAcceleratorTable_new2(resource: *const c_void) -> *mut c_void;
-    // DTOR: pub fn wxAcceleratorTable_~wxAcceleratorTable(self_: *mut c_void);
-    pub fn wxAcceleratorTable_IsOk(self_: *const c_void) -> bool;
-
-    // wxAccessible
-    pub fn wxAccessible_CLASSINFO() -> *mut c_void;
-    pub fn wxAccessible_new(win: *mut c_void) -> *mut c_void;
-    // DTOR: pub fn wxAccessible_~wxAccessible(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxAccessible_DoDefaultAction(self_: *mut c_void, child_id: c_int) -> wxAccStatus;
-    // NOT_SUPPORTED: pub fn wxAccessible_GetChild(self_: *mut c_void, child_id: c_int, child: *mut c_void) -> wxAccStatus;
-    // NOT_SUPPORTED: pub fn wxAccessible_GetChildCount(self_: *mut c_void, child_count: *mut c_void) -> wxAccStatus;
-    // NOT_SUPPORTED: pub fn wxAccessible_GetDefaultAction(self_: *mut c_void, child_id: c_int, action_name: *mut c_void) -> wxAccStatus;
-    // NOT_SUPPORTED: pub fn wxAccessible_GetDescription(self_: *mut c_void, child_id: c_int, description: *mut c_void) -> wxAccStatus;
-    // NOT_SUPPORTED: pub fn wxAccessible_GetFocus(self_: *mut c_void, child_id: *mut c_void, child: *mut c_void) -> wxAccStatus;
-    // NOT_SUPPORTED: pub fn wxAccessible_GetHelpText(self_: *mut c_void, child_id: c_int, help_text: *mut c_void) -> wxAccStatus;
-    // NOT_SUPPORTED: pub fn wxAccessible_GetKeyboardShortcut(self_: *mut c_void, child_id: c_int, shortcut: *mut c_void) -> wxAccStatus;
-    // NOT_SUPPORTED: pub fn wxAccessible_GetLocation(self_: *mut c_void, rect: *mut c_void, element_id: c_int) -> wxAccStatus;
-    // NOT_SUPPORTED: pub fn wxAccessible_GetName(self_: *mut c_void, child_id: c_int, name: *mut c_void) -> wxAccStatus;
-    // NOT_SUPPORTED: pub fn wxAccessible_GetParent(self_: *mut c_void, parent: *mut c_void) -> wxAccStatus;
-    // NOT_SUPPORTED: pub fn wxAccessible_GetRole(self_: *mut c_void, child_id: c_int, role: *mut c_void) -> wxAccStatus;
-    // NOT_SUPPORTED: pub fn wxAccessible_GetSelections(self_: *mut c_void, selections: *mut c_void) -> wxAccStatus;
-    // NOT_SUPPORTED: pub fn wxAccessible_GetState(self_: *mut c_void, child_id: c_int, state: *mut c_void) -> wxAccStatus;
-    // NOT_SUPPORTED: pub fn wxAccessible_GetValue(self_: *mut c_void, child_id: c_int, str_value: *mut c_void) -> wxAccStatus;
-    pub fn wxAccessible_GetWindow(self_: *mut c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxAccessible_HitTest(self_: *mut c_void, pt: *const c_void, child_id: *mut c_void, child_object: *mut c_void) -> wxAccStatus;
-    // NOT_SUPPORTED: pub fn wxAccessible_Navigate(self_: *mut c_void, nav_dir: wxNavDir, from_id: c_int, to_id: *mut c_void, to_object: *mut c_void) -> wxAccStatus;
-    // NOT_SUPPORTED: pub fn wxAccessible_Select(self_: *mut c_void, child_id: c_int, select_flags: wxAccSelectionFlags) -> wxAccStatus;
-    pub fn wxAccessible_SetWindow(self_: *mut c_void, window: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxAccessible_NotifyEvent(event_type: c_int, window: *mut c_void, object_type: wxAccObject, object_id: c_int);
-
     // wxActivateEvent
     pub fn wxActivateEvent_CLASSINFO() -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxActivateEvent_new(event_type: wxEventType, active: bool, id: c_int, activation_reason: Reason) -> *mut c_void;
     pub fn wxActivateEvent_GetActive(self_: *const c_void) -> bool;
     // NOT_SUPPORTED: pub fn wxActivateEvent_GetActivationReason(self_: *const c_void) -> Reason;
-
-    // wxActiveXContainer
-    pub fn wxActiveXContainer_CLASSINFO() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxActiveXContainer_new(parent: *mut c_void, iid: REFIID, p_unk: *mut c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxActiveXContainer_QueryClientSiteInterface(self_: *mut c_void, iid: REFIID, _interface: *mut c_void, desc: *const c_void) -> bool;
-    // Mix-in(s) to wxActiveXContainer
-    pub fn wxActiveXContainer_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
-    // wxActiveXEvent
-    pub fn wxActiveXEvent_CLASSINFO() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxActiveXEvent_GetDispatchId(self_: *const c_void, idx: c_int) -> DISPID;
-    pub fn wxActiveXEvent_ParamCount(self_: *const c_void) -> usize;
-    pub fn wxActiveXEvent_ParamName(self_: *const c_void, idx: usize) -> *mut c_void;
-    pub fn wxActiveXEvent_ParamType(self_: *const c_void, idx: usize) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxActiveXEvent_operator[](self_: *mut c_void, idx: usize) -> wxVariant;
-    pub fn wxActiveXEvent_GetNativeParameters(self_: *const c_void) -> *mut c_void;
 
     // wxActivityIndicator
     pub fn wxActivityIndicator_CLASSINFO() -> *mut c_void;
@@ -202,60 +152,6 @@ extern "C" {
     );
     // Mix-in(s) to wxAddRemoveCtrl
     pub fn wxAddRemoveCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
-    // wxAffineMatrix2D
-    pub fn wxAffineMatrix2D_delete(self_: *mut c_void);
-    pub fn wxAffineMatrix2D_new() -> *mut c_void;
-    pub fn wxAffineMatrix2D_IsEqual(self_: *mut c_void, t: *const c_void);
-    // BLOCKED: pub fn wxAffineMatrix2D_operator==(self_: *const c_void, t: *const c_void) -> bool;
-    // BLOCKED: pub fn wxAffineMatrix2D_operator!=(self_: *const c_void, t: *const c_void) -> bool;
-    pub fn wxAffineMatrix2D_Mirror(self_: *mut c_void, direction: c_int);
-    pub fn wxAffineMatrix2D_TransformPoint(self_: *const c_void, p: *const c_void) -> *mut c_void;
-    pub fn wxAffineMatrix2D_TransformPoint1(self_: *const c_void, x: *mut c_void, y: *mut c_void);
-    pub fn wxAffineMatrix2D_TransformDistance(
-        self_: *const c_void,
-        p: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxAffineMatrix2D_TransformDistance1(
-        self_: *const c_void,
-        dx: *mut c_void,
-        dy: *mut c_void,
-    );
-
-    // wxAffineMatrix2DBase
-    pub fn wxAffineMatrix2DBase_delete(self_: *mut c_void);
-    pub fn wxAffineMatrix2DBase_new() -> *mut c_void;
-    // DTOR: pub fn wxAffineMatrix2DBase_~wxAffineMatrix2DBase(self_: *mut c_void);
-    pub fn wxAffineMatrix2DBase_Set(self_: *mut c_void, mat2_d: *const c_void, tr: *const c_void);
-    pub fn wxAffineMatrix2DBase_Get(self_: *const c_void, mat2_d: *mut c_void, tr: *mut c_void);
-    pub fn wxAffineMatrix2DBase_Concat(self_: *mut c_void, t: *const c_void);
-    pub fn wxAffineMatrix2DBase_Invert(self_: *mut c_void) -> bool;
-    pub fn wxAffineMatrix2DBase_IsIdentity(self_: *const c_void) -> bool;
-    pub fn wxAffineMatrix2DBase_IsEqual(self_: *const c_void, t: *const c_void) -> bool;
-    // BLOCKED: pub fn wxAffineMatrix2DBase_operator==(self_: *const c_void, t: *const c_void) -> bool;
-    // BLOCKED: pub fn wxAffineMatrix2DBase_operator!=(self_: *const c_void, t: *const c_void) -> bool;
-    // NOT_SUPPORTED: pub fn wxAffineMatrix2DBase_Translate(self_: *mut c_void, dx: wxDouble, dy: wxDouble);
-    // NOT_SUPPORTED: pub fn wxAffineMatrix2DBase_Scale(self_: *mut c_void, x_scale: wxDouble, y_scale: wxDouble);
-    // NOT_SUPPORTED: pub fn wxAffineMatrix2DBase_Rotate(self_: *mut c_void, c_radians: wxDouble);
-    pub fn wxAffineMatrix2DBase_Mirror(self_: *mut c_void, direction: c_int);
-    pub fn wxAffineMatrix2DBase_TransformPoint(
-        self_: *const c_void,
-        p: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxAffineMatrix2DBase_TransformPoint1(
-        self_: *const c_void,
-        x: *mut c_void,
-        y: *mut c_void,
-    );
-    pub fn wxAffineMatrix2DBase_TransformDistance(
-        self_: *const c_void,
-        p: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxAffineMatrix2DBase_TransformDistance1(
-        self_: *const c_void,
-        dx: *mut c_void,
-        dy: *mut c_void,
-    );
 
     // wxAnimationCtrl
     pub fn wxAnimationCtrl_CLASSINFO() -> *mut c_void;
@@ -361,32 +257,6 @@ extern "C" {
     pub fn wxAutoBufferedPaintDC_CLASSINFO() -> *mut c_void;
     pub fn wxAutoBufferedPaintDC_new(window: *mut c_void) -> *mut c_void;
 
-    // wxAutomationObject
-    pub fn wxAutomationObject_CLASSINFO() -> *mut c_void;
-    pub fn wxAutomationObject_new(dispatch_ptr: *mut c_void) -> *mut c_void;
-    // DTOR: pub fn wxAutomationObject_~wxAutomationObject(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxAutomationObject_CallMethod(self_: *const c_void, method: *const c_void, no_args: c_int, args: wxVariant) -> wxVariant;
-    // NOT_SUPPORTED: pub fn wxAutomationObject_CallMethod1(self_: *const c_void, method: *const c_void, None: ...) -> wxVariant;
-    pub fn wxAutomationObject_CreateInstance(self_: *const c_void, prog_id: *const c_void) -> bool;
-    pub fn wxAutomationObject_IsOk(self_: *const c_void) -> bool;
-    pub fn wxAutomationObject_GetDispatchPtr(self_: *const c_void) -> *mut c_void;
-    pub fn wxAutomationObject_GetInstance(
-        self_: *const c_void,
-        prog_id: *const c_void,
-        flags: c_int,
-    ) -> bool;
-    // NOT_SUPPORTED: pub fn wxAutomationObject_GetObject(self_: *const c_void, obj: *mut c_void, property: *const c_void, no_args: c_int, args: wxVariant) -> bool;
-    // NOT_SUPPORTED: pub fn wxAutomationObject_GetProperty(self_: *const c_void, property: *const c_void, no_args: c_int, args: wxVariant) -> wxVariant;
-    // NOT_SUPPORTED: pub fn wxAutomationObject_GetProperty1(self_: *const c_void, property: *const c_void, None: ...) -> wxVariant;
-    // NOT_SUPPORTED: pub fn wxAutomationObject_Invoke(self_: *const c_void, member: *const c_void, action: c_int, ret_value: *mut c_void, no_args: c_int, args: wxVariant, ptr_args: *const c_void) -> bool;
-    // NOT_SUPPORTED: pub fn wxAutomationObject_PutProperty(self_: *mut c_void, property: *const c_void, no_args: c_int, args: wxVariant) -> bool;
-    // NOT_SUPPORTED: pub fn wxAutomationObject_PutProperty1(self_: *mut c_void, property: *const c_void, None: ...) -> bool;
-    pub fn wxAutomationObject_SetDispatchPtr(self_: *mut c_void, dispatch_ptr: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxAutomationObject_GetLCID(self_: *const c_void) -> WXLCID;
-    // NOT_SUPPORTED: pub fn wxAutomationObject_SetLCID(self_: *mut c_void, lcid: WXLCID);
-    pub fn wxAutomationObject_GetConvertVariantFlags(self_: *const c_void) -> c_long;
-    pub fn wxAutomationObject_SetConvertVariantFlags(self_: *mut c_void, flags: c_long);
-
     // wxBannerWindow
     pub fn wxBannerWindow_CLASSINFO() -> *mut c_void;
     pub fn wxBannerWindow_new() -> *mut c_void;
@@ -431,7 +301,7 @@ extern "C" {
     pub fn wxBitmap_new10(cursor: *const c_void) -> *mut c_void;
     // DTOR: pub fn wxBitmap_~wxBitmap(self_: *mut c_void);
     // NOT_SUPPORTED: pub fn wxBitmap_ConvertToDisabled(self_: *const c_void, brightness: unsigned char) -> *mut c_void;
-    pub fn wxBitmap_ConvertToImage(self_: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxBitmap_ConvertToImage(self_: *const c_void) -> wxImage;
     pub fn wxBitmap_CopyFromIcon(self_: *mut c_void, icon: *const c_void) -> bool;
     pub fn wxBitmap_Create(self_: *mut c_void, width: c_int, height: c_int, depth: c_int) -> bool;
     pub fn wxBitmap_Create1(self_: *mut c_void, sz: *const c_void, depth: c_int) -> bool;
@@ -553,15 +423,6 @@ extern "C" {
         size_def: *const c_void,
     ) -> *mut c_void;
 
-    // wxBitmapBundleImpl
-    pub fn wxBitmapBundleImpl_delete(self_: *mut c_void);
-    pub fn wxBitmapBundleImpl_GetDefaultSize(self_: *const c_void) -> *mut c_void;
-    pub fn wxBitmapBundleImpl_GetPreferredBitmapSizeAtScale(
-        self_: *const c_void,
-        scale: c_double,
-    ) -> *mut c_void;
-    pub fn wxBitmapBundleImpl_GetBitmap(self_: *mut c_void, size: *const c_void) -> *mut c_void;
-
     // wxBitmapButton
     pub fn wxBitmapButton_CLASSINFO() -> *mut c_void;
     pub fn wxBitmapButton_new() -> *mut c_void;
@@ -673,12 +534,6 @@ extern "C" {
     pub fn wxBitmapComboBox_AsItemContainer(obj: *mut c_void) -> *mut c_void;
     pub fn wxBitmapComboBox_AsTextEntry(obj: *mut c_void) -> *mut c_void;
     pub fn wxBitmapComboBox_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
-    // wxBitmapDataObject
-    pub fn wxBitmapDataObject_delete(self_: *mut c_void);
-    pub fn wxBitmapDataObject_new(bitmap: *const c_void) -> *mut c_void;
-    pub fn wxBitmapDataObject_GetBitmap(self_: *const c_void) -> *mut c_void;
-    pub fn wxBitmapDataObject_SetBitmap(self_: *mut c_void, bitmap: *const c_void);
 
     // wxBitmapHandler
     pub fn wxBitmapHandler_CLASSINFO() -> *mut c_void;
@@ -1341,19 +1196,6 @@ extern "C" {
     pub fn wxColourDatabase_Find(self_: *const c_void, colour_name: *const c_void) -> *mut c_void;
     pub fn wxColourDatabase_FindName(self_: *const c_void, colour: *const c_void) -> *mut c_void;
 
-    // wxColourDialog
-    pub fn wxColourDialog_CLASSINFO() -> *mut c_void;
-    pub fn wxColourDialog_new(parent: *mut c_void, data: *const c_void) -> *mut c_void;
-    // DTOR: pub fn wxColourDialog_~wxColourDialog(self_: *mut c_void);
-    pub fn wxColourDialog_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        data: *const c_void,
-    ) -> bool;
-    pub fn wxColourDialog_GetColourData(self_: *mut c_void) -> *mut c_void;
-    // Mix-in(s) to wxColourDialog
-    pub fn wxColourDialog_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
     // wxColourDialogEvent
     pub fn wxColourDialogEvent_CLASSINFO() -> *mut c_void;
     pub fn wxColourDialogEvent_new() -> *mut c_void;
@@ -1441,132 +1283,6 @@ extern "C" {
     pub fn wxComboBox_AsTextEntry(obj: *mut c_void) -> *mut c_void;
     pub fn wxComboBox_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
-    // wxComboCtrl
-    pub fn wxComboCtrl_CLASSINFO() -> *mut c_void;
-    pub fn wxComboCtrl_new() -> *mut c_void;
-    pub fn wxComboCtrl_new1(
-        parent: *mut c_void,
-        id: c_int,
-        value: *const c_void,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        validator: *const c_void,
-        name: *const c_void,
-    ) -> *mut c_void;
-    // DTOR: pub fn wxComboCtrl_~wxComboCtrl(self_: *mut c_void);
-    pub fn wxComboCtrl_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        id: c_int,
-        value: *const c_void,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        validator: *const c_void,
-        name: *const c_void,
-    ) -> bool;
-    pub fn wxComboCtrl_Dismiss(self_: *mut c_void);
-    pub fn wxComboCtrl_EnablePopupAnimation(self_: *mut c_void, enable: bool);
-    pub fn wxComboCtrl_IsKeyPopupToggle(self_: *const c_void, event: *const c_void) -> bool;
-    pub fn wxComboCtrl_PrepareBackground(
-        self_: *const c_void,
-        dc: *mut c_void,
-        rect: *const c_void,
-        flags: c_int,
-    );
-    pub fn wxComboCtrl_ShouldDrawFocus(self_: *const c_void) -> bool;
-    pub fn wxComboCtrl_GetBitmapDisabled(self_: *const c_void) -> *mut c_void;
-    pub fn wxComboCtrl_GetBitmapHover(self_: *const c_void) -> *mut c_void;
-    pub fn wxComboCtrl_GetBitmapNormal(self_: *const c_void) -> *mut c_void;
-    pub fn wxComboCtrl_GetBitmapPressed(self_: *const c_void) -> *mut c_void;
-    pub fn wxComboCtrl_GetButtonSize(self_: *mut c_void) -> *mut c_void;
-    pub fn wxComboCtrl_GetCustomPaintWidth(self_: *const c_void) -> c_int;
-    pub fn wxComboCtrl_GetMargins(self_: *const c_void) -> *mut c_void;
-    pub fn wxComboCtrl_GetPopupControl(self_: *mut c_void) -> *mut c_void;
-    pub fn wxComboCtrl_GetPopupWindow(self_: *const c_void) -> *mut c_void;
-    pub fn wxComboCtrl_GetTextCtrl(self_: *const c_void) -> *mut c_void;
-    pub fn wxComboCtrl_GetTextIndent(self_: *const c_void) -> c_int;
-    pub fn wxComboCtrl_GetTextRect(self_: *const c_void) -> *mut c_void;
-    pub fn wxComboCtrl_HidePopup(self_: *mut c_void, generate_event: bool);
-    pub fn wxComboCtrl_IsPopupShown(self_: *const c_void) -> bool;
-    pub fn wxComboCtrl_IsPopupWindowState(self_: *const c_void, state: c_int) -> bool;
-    pub fn wxComboCtrl_OnButtonClick(self_: *mut c_void);
-    pub fn wxComboCtrl_Popup(self_: *mut c_void);
-    pub fn wxComboCtrl_SetButtonBitmaps(
-        self_: *mut c_void,
-        bmp_normal: *const c_void,
-        push_button_bg: bool,
-        bmp_pressed: *const c_void,
-        bmp_hover: *const c_void,
-        bmp_disabled: *const c_void,
-    );
-    pub fn wxComboCtrl_SetButtonPosition(
-        self_: *mut c_void,
-        width: c_int,
-        height: c_int,
-        side: c_int,
-        spacing_x: c_int,
-    );
-    pub fn wxComboCtrl_SetCustomPaintWidth(self_: *mut c_void, width: c_int);
-    pub fn wxComboCtrl_SetMainControl(self_: *mut c_void, win: *mut c_void);
-    pub fn wxComboCtrl_SetMargins(self_: *mut c_void, pt: *const c_void) -> bool;
-    pub fn wxComboCtrl_SetMargins1(self_: *mut c_void, left: c_int, top: c_int) -> bool;
-    pub fn wxComboCtrl_SetPopupAnchor(self_: *mut c_void, anchor_side: c_int);
-    pub fn wxComboCtrl_SetPopupControl(self_: *mut c_void, popup: *mut c_void);
-    pub fn wxComboCtrl_SetPopupExtents(self_: *mut c_void, ext_left: c_int, ext_right: c_int);
-    pub fn wxComboCtrl_SetPopupMaxHeight(self_: *mut c_void, height: c_int);
-    pub fn wxComboCtrl_SetPopupMinWidth(self_: *mut c_void, width: c_int);
-    pub fn wxComboCtrl_SetText(self_: *mut c_void, value: *const c_void);
-    pub fn wxComboCtrl_SetTextCtrlStyle(self_: *mut c_void, style: c_int);
-    pub fn wxComboCtrl_SetTextIndent(self_: *mut c_void, indent: c_int);
-    pub fn wxComboCtrl_SetValueByUser(self_: *mut c_void, value: *const c_void);
-    pub fn wxComboCtrl_ShowPopup(self_: *mut c_void);
-    pub fn wxComboCtrl_UseAltPopupWindow(self_: *mut c_void, enable: bool);
-    pub fn wxComboCtrl_GetFeatures() -> c_int;
-    // Mix-in(s) to wxComboCtrl
-    pub fn wxComboCtrl_AsTextEntry(obj: *mut c_void) -> *mut c_void;
-    pub fn wxComboCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
-    // wxComboPopup
-    pub fn wxComboPopup_delete(self_: *mut c_void);
-    pub fn wxComboPopup_new() -> *mut c_void;
-    pub fn wxComboPopup_Create(self_: *mut c_void, parent: *mut c_void) -> bool;
-    pub fn wxComboPopup_DestroyPopup(self_: *mut c_void);
-    pub fn wxComboPopup_Dismiss(self_: *mut c_void);
-    pub fn wxComboPopup_FindItem(
-        self_: *mut c_void,
-        item: *const c_void,
-        true_item: *mut c_void,
-    ) -> bool;
-    pub fn wxComboPopup_GetAdjustedSize(
-        self_: *mut c_void,
-        min_width: c_int,
-        pref_height: c_int,
-        max_height: c_int,
-    ) -> *mut c_void;
-    pub fn wxComboPopup_GetComboCtrl(self_: *const c_void) -> *mut c_void;
-    pub fn wxComboPopup_GetControl(self_: *mut c_void) -> *mut c_void;
-    pub fn wxComboPopup_GetStringValue(self_: *const c_void) -> *mut c_void;
-    pub fn wxComboPopup_Init(self_: *mut c_void);
-    pub fn wxComboPopup_IsCreated(self_: *const c_void) -> bool;
-    pub fn wxComboPopup_LazyCreate(self_: *mut c_void) -> bool;
-    pub fn wxComboPopup_OnComboDoubleClick(self_: *mut c_void);
-    pub fn wxComboPopup_OnComboKeyEvent(self_: *mut c_void, event: *mut c_void);
-    pub fn wxComboPopup_OnDismiss(self_: *mut c_void);
-    pub fn wxComboPopup_OnPopup(self_: *mut c_void);
-    pub fn wxComboPopup_PaintComboControl(self_: *mut c_void, dc: *mut c_void, rect: *const c_void);
-    pub fn wxComboPopup_SetStringValue(self_: *mut c_void, value: *const c_void);
-
-    // wxCommand
-    pub fn wxCommand_CLASSINFO() -> *mut c_void;
-    pub fn wxCommand_new(can_undo: bool, name: *const c_void) -> *mut c_void;
-    // DTOR: pub fn wxCommand_~wxCommand(self_: *mut c_void);
-    pub fn wxCommand_CanUndo(self_: *const c_void) -> bool;
-    pub fn wxCommand_Do(self_: *mut c_void) -> bool;
-    pub fn wxCommand_GetName(self_: *const c_void) -> *mut c_void;
-    pub fn wxCommand_Undo(self_: *mut c_void) -> bool;
-
     // wxCommandEvent
     pub fn wxCommandEvent_CLASSINFO() -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxCommandEvent_new(command_event_type: wxEventType, id: c_int) -> *mut c_void;
@@ -1621,37 +1337,6 @@ extern "C" {
     pub fn wxCommandLinkButton_GetNote(self_: *const c_void) -> *mut c_void;
     // Mix-in(s) to wxCommandLinkButton
     pub fn wxCommandLinkButton_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
-    // wxCommandProcessor
-    pub fn wxCommandProcessor_CLASSINFO() -> *mut c_void;
-    pub fn wxCommandProcessor_new(max_commands: c_int) -> *mut c_void;
-    // DTOR: pub fn wxCommandProcessor_~wxCommandProcessor(self_: *mut c_void);
-    pub fn wxCommandProcessor_CanUndo(self_: *const c_void) -> bool;
-    pub fn wxCommandProcessor_CanRedo(self_: *const c_void) -> bool;
-    pub fn wxCommandProcessor_ClearCommands(self_: *mut c_void);
-    pub fn wxCommandProcessor_GetCommands(self_: *mut c_void) -> *mut c_void;
-    pub fn wxCommandProcessor_GetCurrentCommand(self_: *const c_void) -> *mut c_void;
-    pub fn wxCommandProcessor_GetEditMenu(self_: *const c_void) -> *mut c_void;
-    pub fn wxCommandProcessor_GetMaxCommands(self_: *const c_void) -> c_int;
-    pub fn wxCommandProcessor_GetRedoAccelerator(self_: *const c_void) -> *mut c_void;
-    pub fn wxCommandProcessor_GetRedoMenuLabel(self_: *const c_void) -> *mut c_void;
-    pub fn wxCommandProcessor_GetUndoAccelerator(self_: *const c_void) -> *mut c_void;
-    pub fn wxCommandProcessor_GetUndoMenuLabel(self_: *const c_void) -> *mut c_void;
-    pub fn wxCommandProcessor_Initialize(self_: *mut c_void);
-    pub fn wxCommandProcessor_IsDirty(self_: *const c_void) -> bool;
-    pub fn wxCommandProcessor_MarkAsSaved(self_: *mut c_void);
-    pub fn wxCommandProcessor_Redo(self_: *mut c_void) -> bool;
-    pub fn wxCommandProcessor_SetEditMenu(self_: *mut c_void, menu: *mut c_void);
-    pub fn wxCommandProcessor_SetMenuStrings(self_: *mut c_void);
-    pub fn wxCommandProcessor_SetRedoAccelerator(self_: *mut c_void, accel: *const c_void);
-    pub fn wxCommandProcessor_SetUndoAccelerator(self_: *mut c_void, accel: *const c_void);
-    pub fn wxCommandProcessor_Submit(
-        self_: *mut c_void,
-        command: *mut c_void,
-        store_it: bool,
-    ) -> bool;
-    pub fn wxCommandProcessor_Store(self_: *mut c_void, command: *mut c_void);
-    pub fn wxCommandProcessor_Undo(self_: *mut c_void) -> bool;
 
     // wxContextHelp
     pub fn wxContextHelp_CLASSINFO() -> *mut c_void;
@@ -1733,28 +1418,6 @@ extern "C" {
     pub fn wxControlWithItems_AsItemContainer(obj: *mut c_void) -> *mut c_void;
     pub fn wxControlWithItems_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
-    // wxCredentialEntryDialog
-    pub fn wxCredentialEntryDialog_CLASSINFO() -> *mut c_void;
-    pub fn wxCredentialEntryDialog_new() -> *mut c_void;
-    pub fn wxCredentialEntryDialog_new1(
-        parent: *mut c_void,
-        message: *const c_void,
-        title: *const c_void,
-        cred: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxCredentialEntryDialog_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        message: *const c_void,
-        title: *const c_void,
-        cred: *const c_void,
-    ) -> bool;
-    pub fn wxCredentialEntryDialog_GetCredentials(self_: *const c_void) -> *mut c_void;
-    pub fn wxCredentialEntryDialog_SetUser(self_: *mut c_void, user: *const c_void);
-    pub fn wxCredentialEntryDialog_SetPassword(self_: *mut c_void, password: *const c_void);
-    // Mix-in(s) to wxCredentialEntryDialog
-    pub fn wxCredentialEntryDialog_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
     // wxCursor
     pub fn wxCursor_CLASSINFO() -> *mut c_void;
     pub fn wxCursor_new() -> *mut c_void;
@@ -1768,16 +1431,6 @@ extern "C" {
     pub fn wxCursor_IsOk(self_: *const c_void) -> bool;
     pub fn wxCursor_GetHotSpot(self_: *const c_void) -> *mut c_void;
     // BLOCKED: pub fn wxCursor_operator=(self_: *mut c_void, cursor: *const c_void) -> *mut c_void;
-
-    // wxCustomDataObject
-    pub fn wxCustomDataObject_delete(self_: *mut c_void);
-    pub fn wxCustomDataObject_new(format: *const c_void) -> *mut c_void;
-    // DTOR: pub fn wxCustomDataObject_~wxCustomDataObject(self_: *mut c_void);
-    pub fn wxCustomDataObject_Alloc(self_: *mut c_void, size: usize) -> *mut c_void;
-    pub fn wxCustomDataObject_Free(self_: *mut c_void);
-    pub fn wxCustomDataObject_GetData(self_: *const c_void) -> *mut c_void;
-    pub fn wxCustomDataObject_GetSize(self_: *const c_void) -> usize;
-    pub fn wxCustomDataObject_TakeData(self_: *mut c_void, size: usize, data: *mut c_void);
 
     // wxDC
     pub fn wxDC_CLASSINFO() -> *mut c_void;
@@ -2052,7 +1705,7 @@ extern "C" {
     pub fn wxDC_SetUserScale(self_: *mut c_void, x_scale: c_double, y_scale: c_double);
     pub fn wxDC_CanUseTransformMatrix(self_: *const c_void) -> bool;
     pub fn wxDC_SetTransformMatrix(self_: *mut c_void, matrix: *const c_void) -> bool;
-    pub fn wxDC_GetTransformMatrix(self_: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxDC_GetTransformMatrix(self_: *const c_void) -> wxAffineMatrix2D;
     pub fn wxDC_ResetTransformMatrix(self_: *mut c_void);
     pub fn wxDC_CanDrawBitmap(self_: *const c_void) -> bool;
     pub fn wxDC_CanGetTextExtent(self_: *const c_void) -> bool;
@@ -2129,64 +1782,6 @@ extern "C" {
     pub fn wxDPIChangedEvent_Scale(self_: *const c_void, sz: wxSize) -> *mut c_void;
     pub fn wxDPIChangedEvent_ScaleX(self_: *const c_void, x: c_int) -> c_int;
     pub fn wxDPIChangedEvent_ScaleY(self_: *const c_void, y: c_int) -> c_int;
-
-    // wxDataObject
-    pub fn wxDataObject_delete(self_: *mut c_void);
-    pub fn wxDataObject_new() -> *mut c_void;
-    // DTOR: pub fn wxDataObject_~wxDataObject(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxDataObject_GetAllFormats(self_: *const c_void, formats: *mut c_void, dir: Direction);
-    pub fn wxDataObject_GetDataHere(
-        self_: *const c_void,
-        format: *const c_void,
-        buf: *mut c_void,
-    ) -> bool;
-    pub fn wxDataObject_GetDataSize(self_: *const c_void, format: *const c_void) -> usize;
-    // NOT_SUPPORTED: pub fn wxDataObject_GetFormatCount(self_: *const c_void, dir: Direction) -> usize;
-    // NOT_SUPPORTED: pub fn wxDataObject_GetPreferredFormat(self_: *const c_void, dir: Direction) -> wxDataFormat;
-    pub fn wxDataObject_SetData(
-        self_: *mut c_void,
-        format: *const c_void,
-        len: usize,
-        buf: *const c_void,
-    ) -> bool;
-    // NOT_SUPPORTED: pub fn wxDataObject_IsSupported(self_: *const c_void, format: *const c_void, dir: Direction) -> bool;
-
-    // wxDataObjectComposite
-    pub fn wxDataObjectComposite_delete(self_: *mut c_void);
-    pub fn wxDataObjectComposite_new() -> *mut c_void;
-    pub fn wxDataObjectComposite_Add(self_: *mut c_void, data_object: *mut c_void, preferred: bool);
-    // NOT_SUPPORTED: pub fn wxDataObjectComposite_GetReceivedFormat(self_: *const c_void) -> wxDataFormat;
-    // NOT_SUPPORTED: pub fn wxDataObjectComposite_GetObject(self_: *const c_void, format: *const c_void, dir: wxDataObject::Direction) -> *mut c_void;
-
-    // wxDataObjectSimple
-    pub fn wxDataObjectSimple_delete(self_: *mut c_void);
-    pub fn wxDataObjectSimple_new(format: *const c_void) -> *mut c_void;
-    pub fn wxDataObjectSimple_GetDataHere(self_: *const c_void, buf: *mut c_void) -> bool;
-    pub fn wxDataObjectSimple_GetDataSize(self_: *const c_void) -> usize;
-    pub fn wxDataObjectSimple_GetFormat(self_: *const c_void) -> *const c_void;
-    pub fn wxDataObjectSimple_SetData(self_: *mut c_void, len: usize, buf: *const c_void) -> bool;
-    pub fn wxDataObjectSimple_SetFormat(self_: *mut c_void, format: *const c_void);
-
-    // wxDataViewBitmapRenderer
-    pub fn wxDataViewBitmapRenderer_CLASSINFO() -> *mut c_void;
-    pub fn wxDataViewBitmapRenderer_GetDefaultType() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDataViewBitmapRenderer_new(varianttype: *const c_void, mode: wxDataViewCellMode, align: c_int) -> *mut c_void;
-
-    // wxDataViewCheckIconTextRenderer
-    pub fn wxDataViewCheckIconTextRenderer_CLASSINFO() -> *mut c_void;
-    pub fn wxDataViewCheckIconTextRenderer_GetDefaultType() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDataViewCheckIconTextRenderer_new(mode: wxDataViewCellMode, align: c_int) -> *mut c_void;
-    pub fn wxDataViewCheckIconTextRenderer_Allow3rdStateForUser(self_: *mut c_void, allow: bool);
-
-    // wxDataViewChoiceByIndexRenderer
-    pub fn wxDataViewChoiceByIndexRenderer_CLASSINFO() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDataViewChoiceByIndexRenderer_new(choices: *const c_void, mode: wxDataViewCellMode, alignment: c_int) -> *mut c_void;
-
-    // wxDataViewChoiceRenderer
-    pub fn wxDataViewChoiceRenderer_CLASSINFO() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDataViewChoiceRenderer_new(choices: *const c_void, mode: wxDataViewCellMode, alignment: c_int) -> *mut c_void;
-    pub fn wxDataViewChoiceRenderer_GetChoice(self_: *const c_void, index: usize) -> *mut c_void;
-    pub fn wxDataViewChoiceRenderer_GetChoices(self_: *const c_void) -> *mut c_void;
 
     // wxDataViewColumn
     pub fn wxDataViewColumn_delete(self_: *mut c_void);
@@ -2323,100 +1918,6 @@ extern "C" {
     // Mix-in(s) to wxDataViewCtrl
     pub fn wxDataViewCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
-    // wxDataViewCustomRenderer
-    pub fn wxDataViewCustomRenderer_CLASSINFO() -> *mut c_void;
-    pub fn wxDataViewCustomRenderer_GetDefaultType() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDataViewCustomRenderer_new(varianttype: *const c_void, mode: wxDataViewCellMode, align: c_int) -> *mut c_void;
-    // DTOR: pub fn wxDataViewCustomRenderer_~wxDataViewCustomRenderer(self_: *mut c_void);
-    pub fn wxDataViewCustomRenderer_ActivateCell(
-        self_: *mut c_void,
-        cell: *const c_void,
-        model: *mut c_void,
-        item: *const c_void,
-        col: c_uint,
-        mouse_event: *const c_void,
-    ) -> bool;
-    pub fn wxDataViewCustomRenderer_GetAttr(self_: *const c_void) -> *mut c_void;
-    pub fn wxDataViewCustomRenderer_GetSize(self_: *const c_void) -> *mut c_void;
-    pub fn wxDataViewCustomRenderer_LeftClick(
-        self_: *mut c_void,
-        cursor: wxPoint,
-        cell: wxRect,
-        model: *mut c_void,
-        item: *const c_void,
-        col: c_uint,
-    ) -> bool;
-    pub fn wxDataViewCustomRenderer_Activate(
-        self_: *mut c_void,
-        cell: wxRect,
-        model: *mut c_void,
-        item: *const c_void,
-        col: c_uint,
-    ) -> bool;
-    pub fn wxDataViewCustomRenderer_Render(
-        self_: *mut c_void,
-        cell: wxRect,
-        dc: *mut c_void,
-        state: c_int,
-    ) -> bool;
-    pub fn wxDataViewCustomRenderer_RenderText(
-        self_: *mut c_void,
-        text: *const c_void,
-        xoffset: c_int,
-        cell: wxRect,
-        dc: *mut c_void,
-        state: c_int,
-    );
-    pub fn wxDataViewCustomRenderer_StartDrag(
-        self_: *mut c_void,
-        cursor: *const c_void,
-        cell: *const c_void,
-        model: *mut c_void,
-        item: *const c_void,
-        col: c_uint,
-    ) -> bool;
-
-    // wxDataViewDateRenderer
-    pub fn wxDataViewDateRenderer_CLASSINFO() -> *mut c_void;
-    pub fn wxDataViewDateRenderer_GetDefaultType() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDataViewDateRenderer_new(varianttype: *const c_void, mode: wxDataViewCellMode, align: c_int) -> *mut c_void;
-
-    // wxDataViewEvent
-    pub fn wxDataViewEvent_CLASSINFO() -> *mut c_void;
-    pub fn wxDataViewEvent_new() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDataViewEvent_new1(evt_type: wxEventType, dvc: *mut c_void, column: *mut c_void, item: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDataViewEvent_new2(evt_type: wxEventType, dvc: *mut c_void, item: *const c_void) -> *mut c_void;
-    pub fn wxDataViewEvent_new3(event: *const c_void) -> *mut c_void;
-    pub fn wxDataViewEvent_GetColumn(self_: *const c_void) -> c_int;
-    pub fn wxDataViewEvent_GetDataViewColumn(self_: *const c_void) -> *mut c_void;
-    pub fn wxDataViewEvent_GetModel(self_: *const c_void) -> *mut c_void;
-    pub fn wxDataViewEvent_GetPosition(self_: *const c_void) -> *mut c_void;
-    pub fn wxDataViewEvent_GetValue(self_: *const c_void) -> *const c_void;
-    pub fn wxDataViewEvent_IsEditCancelled(self_: *const c_void) -> bool;
-    pub fn wxDataViewEvent_SetColumn(self_: *mut c_void, col: c_int);
-    pub fn wxDataViewEvent_SetDataViewColumn(self_: *mut c_void, col: *mut c_void);
-    pub fn wxDataViewEvent_SetModel(self_: *mut c_void, model: *mut c_void);
-    pub fn wxDataViewEvent_SetValue(self_: *mut c_void, value: *const c_void);
-    pub fn wxDataViewEvent_SetDataObject(self_: *mut c_void, obj: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxDataViewEvent_GetDataFormat(self_: *const c_void) -> wxDataFormat;
-    pub fn wxDataViewEvent_GetDataSize(self_: *const c_void) -> usize;
-    pub fn wxDataViewEvent_GetDataBuffer(self_: *const c_void) -> *mut c_void;
-    pub fn wxDataViewEvent_SetDragFlags(self_: *mut c_void, flags: c_int);
-    // NOT_SUPPORTED: pub fn wxDataViewEvent_GetDropEffect(self_: *const c_void) -> wxDragResult;
-    pub fn wxDataViewEvent_GetCacheFrom(self_: *const c_void) -> c_int;
-    pub fn wxDataViewEvent_GetCacheTo(self_: *const c_void) -> c_int;
-    pub fn wxDataViewEvent_GetProposedDropIndex(self_: *const c_void) -> c_int;
-    pub fn wxDataViewEvent_GetItem(self_: *const c_void) -> *mut c_void;
-    pub fn wxDataViewEvent_SetItem(self_: *mut c_void, item: *const c_void);
-    pub fn wxDataViewEvent_SetPosition(self_: *mut c_void, x: c_int, y: c_int);
-    pub fn wxDataViewEvent_SetCache(self_: *mut c_void, from: c_int, to: c_int);
-    pub fn wxDataViewEvent_GetDataObject(self_: *const c_void) -> *mut c_void;
-    pub fn wxDataViewEvent_SetDataFormat(self_: *mut c_void, format: *const c_void);
-    pub fn wxDataViewEvent_SetDataSize(self_: *mut c_void, size: usize);
-    pub fn wxDataViewEvent_SetDataBuffer(self_: *mut c_void, buf: *mut c_void);
-    pub fn wxDataViewEvent_GetDragFlags(self_: *const c_void) -> c_int;
-    // NOT_SUPPORTED: pub fn wxDataViewEvent_SetDropEffect(self_: *mut c_void, effect: wxDragResult);
-
     // wxDataViewIconText
     pub fn wxDataViewIconText_CLASSINFO() -> *mut c_void;
     pub fn wxDataViewIconText_new(text: *const c_void, bitmap: *const c_void) -> *mut c_void;
@@ -2427,24 +1928,6 @@ extern "C" {
     pub fn wxDataViewIconText_SetBitmapBundle(self_: *mut c_void, bitmap: *const c_void);
     pub fn wxDataViewIconText_SetIcon(self_: *mut c_void, icon: *const c_void);
     pub fn wxDataViewIconText_SetText(self_: *mut c_void, text: *const c_void);
-
-    // wxDataViewIconTextRenderer
-    pub fn wxDataViewIconTextRenderer_CLASSINFO() -> *mut c_void;
-    pub fn wxDataViewIconTextRenderer_GetDefaultType() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDataViewIconTextRenderer_new(varianttype: *const c_void, mode: wxDataViewCellMode, align: c_int) -> *mut c_void;
-
-    // wxDataViewIndexListModel
-    pub fn wxDataViewIndexListModel_delete(self_: *mut c_void);
-    pub fn wxDataViewIndexListModel_new(initial_size: c_uint) -> *mut c_void;
-    pub fn wxDataViewIndexListModel_GetItem(self_: *const c_void, row: c_uint) -> *mut c_void;
-    pub fn wxDataViewIndexListModel_Reset(self_: *mut c_void, new_size: c_uint);
-    pub fn wxDataViewIndexListModel_RowAppended(self_: *mut c_void);
-    pub fn wxDataViewIndexListModel_RowChanged(self_: *mut c_void, row: c_uint);
-    pub fn wxDataViewIndexListModel_RowDeleted(self_: *mut c_void, row: c_uint);
-    pub fn wxDataViewIndexListModel_RowInserted(self_: *mut c_void, before: c_uint);
-    pub fn wxDataViewIndexListModel_RowPrepended(self_: *mut c_void);
-    pub fn wxDataViewIndexListModel_RowValueChanged(self_: *mut c_void, row: c_uint, col: c_uint);
-    pub fn wxDataViewIndexListModel_RowsDeleted(self_: *mut c_void, rows: *const c_void);
 
     // wxDataViewItem
     pub fn wxDataViewItem_delete(self_: *mut c_void);
@@ -2474,331 +1957,6 @@ extern "C" {
         self_: *const c_void,
         font: *const c_void,
     ) -> *mut c_void;
-
-    // wxDataViewListCtrl
-    pub fn wxDataViewListCtrl_CLASSINFO() -> *mut c_void;
-    pub fn wxDataViewListCtrl_GetSelectedRow(self_: *const c_void) -> c_int;
-    // NOT_SUPPORTED: pub fn wxDataViewListCtrl_SelectRow(self_: *mut c_void, row: unsigned);
-    // NOT_SUPPORTED: pub fn wxDataViewListCtrl_UnselectRow(self_: *mut c_void, row: unsigned);
-    // NOT_SUPPORTED: pub fn wxDataViewListCtrl_IsRowSelected(self_: *const c_void, row: unsigned) -> bool;
-    pub fn wxDataViewListCtrl_AppendColumn(
-        self_: *mut c_void,
-        column: *mut c_void,
-        varianttype: *const c_void,
-    );
-    // NOT_SUPPORTED: pub fn wxDataViewListCtrl_AppendTextColumn(self_: *mut c_void, label: *const c_void, mode: wxDataViewCellMode, width: c_int, align: c_int, flags: c_int) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDataViewListCtrl_AppendToggleColumn(self_: *mut c_void, label: *const c_void, mode: wxDataViewCellMode, width: c_int, align: c_int, flags: c_int) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDataViewListCtrl_AppendProgressColumn(self_: *mut c_void, label: *const c_void, mode: wxDataViewCellMode, width: c_int, align: c_int, flags: c_int) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDataViewListCtrl_AppendIconTextColumn(self_: *mut c_void, label: *const c_void, mode: wxDataViewCellMode, width: c_int, align: c_int, flags: c_int) -> *mut c_void;
-    pub fn wxDataViewListCtrl_InsertColumn(
-        self_: *mut c_void,
-        pos: c_uint,
-        column: *mut c_void,
-        varianttype: *const c_void,
-    );
-    pub fn wxDataViewListCtrl_PrependColumn(
-        self_: *mut c_void,
-        column: *mut c_void,
-        varianttype: *const c_void,
-    );
-    // NOT_SUPPORTED: pub fn wxDataViewListCtrl_AppendItem(self_: *mut c_void, values: *const c_void, data: wxUIntPtr);
-    // NOT_SUPPORTED: pub fn wxDataViewListCtrl_PrependItem(self_: *mut c_void, values: *const c_void, data: wxUIntPtr);
-    // NOT_SUPPORTED: pub fn wxDataViewListCtrl_InsertItem(self_: *mut c_void, row: c_uint, values: *const c_void, data: wxUIntPtr);
-    // NOT_SUPPORTED: pub fn wxDataViewListCtrl_DeleteItem(self_: *mut c_void, row: unsigned);
-    pub fn wxDataViewListCtrl_DeleteAllItems(self_: *mut c_void);
-    pub fn wxDataViewListCtrl_GetItemCount(self_: *const c_void) -> c_uint;
-    // NOT_SUPPORTED: pub fn wxDataViewListCtrl_GetItemData(self_: *const c_void, item: *const c_void) -> wxUIntPtr;
-    pub fn wxDataViewListCtrl_SetValue(
-        self_: *mut c_void,
-        value: *const c_void,
-        row: c_uint,
-        col: c_uint,
-    );
-    pub fn wxDataViewListCtrl_GetValue(
-        self_: *mut c_void,
-        value: *mut c_void,
-        row: c_uint,
-        col: c_uint,
-    );
-    pub fn wxDataViewListCtrl_SetTextValue(
-        self_: *mut c_void,
-        value: *const c_void,
-        row: c_uint,
-        col: c_uint,
-    );
-    pub fn wxDataViewListCtrl_GetTextValue(
-        self_: *const c_void,
-        row: c_uint,
-        col: c_uint,
-    ) -> *mut c_void;
-    pub fn wxDataViewListCtrl_SetToggleValue(
-        self_: *mut c_void,
-        value: bool,
-        row: c_uint,
-        col: c_uint,
-    );
-    pub fn wxDataViewListCtrl_GetToggleValue(
-        self_: *const c_void,
-        row: c_uint,
-        col: c_uint,
-    ) -> bool;
-    // NOT_SUPPORTED: pub fn wxDataViewListCtrl_SetItemData(self_: *mut c_void, item: *const c_void, data: wxUIntPtr);
-    pub fn wxDataViewListCtrl_new() -> *mut c_void;
-    pub fn wxDataViewListCtrl_new1(
-        parent: *mut c_void,
-        id: c_int,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        validator: *const c_void,
-    ) -> *mut c_void;
-    // DTOR: pub fn wxDataViewListCtrl_~wxDataViewListCtrl(self_: *mut c_void);
-    pub fn wxDataViewListCtrl_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        id: c_int,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        validator: *const c_void,
-    ) -> bool;
-    pub fn wxDataViewListCtrl_GetStore(self_: *mut c_void) -> *mut c_void;
-    pub fn wxDataViewListCtrl_GetStore1(self_: *const c_void) -> *mut c_void;
-    pub fn wxDataViewListCtrl_ItemToRow(self_: *const c_void, item: *const c_void) -> c_int;
-    pub fn wxDataViewListCtrl_RowToItem(self_: *const c_void, row: c_int) -> *mut c_void;
-    // Mix-in(s) to wxDataViewListCtrl
-    pub fn wxDataViewListCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
-    // wxDataViewListModel
-    pub fn wxDataViewListModel_delete(self_: *mut c_void);
-    // DTOR: pub fn wxDataViewListModel_~wxDataViewListModel(self_: *mut c_void);
-    pub fn wxDataViewListModel_GetAttrByRow(
-        self_: *const c_void,
-        row: c_uint,
-        col: c_uint,
-        attr: *mut c_void,
-    ) -> bool;
-    pub fn wxDataViewListModel_IsEnabledByRow(
-        self_: *const c_void,
-        row: c_uint,
-        col: c_uint,
-    ) -> bool;
-    pub fn wxDataViewListModel_GetCount(self_: *const c_void) -> c_uint;
-    pub fn wxDataViewListModel_GetRow(self_: *const c_void, item: *const c_void) -> c_uint;
-    pub fn wxDataViewListModel_GetValueByRow(
-        self_: *const c_void,
-        variant: *mut c_void,
-        row: c_uint,
-        col: c_uint,
-    );
-    pub fn wxDataViewListModel_SetValueByRow(
-        self_: *mut c_void,
-        variant: *const c_void,
-        row: c_uint,
-        col: c_uint,
-    ) -> bool;
-
-    // wxDataViewListStore
-    pub fn wxDataViewListStore_delete(self_: *mut c_void);
-    pub fn wxDataViewListStore_new() -> *mut c_void;
-    // DTOR: pub fn wxDataViewListStore_~wxDataViewListStore(self_: *mut c_void);
-    pub fn wxDataViewListStore_PrependColumn(self_: *mut c_void, varianttype: *const c_void);
-    pub fn wxDataViewListStore_InsertColumn(
-        self_: *mut c_void,
-        pos: c_uint,
-        varianttype: *const c_void,
-    );
-    pub fn wxDataViewListStore_AppendColumn(self_: *mut c_void, varianttype: *const c_void);
-    // NOT_SUPPORTED: pub fn wxDataViewListStore_AppendItem(self_: *mut c_void, values: *const c_void, data: wxUIntPtr);
-    // NOT_SUPPORTED: pub fn wxDataViewListStore_PrependItem(self_: *mut c_void, values: *const c_void, data: wxUIntPtr);
-    // NOT_SUPPORTED: pub fn wxDataViewListStore_InsertItem(self_: *mut c_void, row: c_uint, values: *const c_void, data: wxUIntPtr);
-    // NOT_SUPPORTED: pub fn wxDataViewListStore_DeleteItem(self_: *mut c_void, pos: unsigned);
-    pub fn wxDataViewListStore_DeleteAllItems(self_: *mut c_void);
-    pub fn wxDataViewListStore_GetItemCount(self_: *const c_void) -> c_uint;
-    // NOT_SUPPORTED: pub fn wxDataViewListStore_GetItemData(self_: *const c_void, item: *const c_void) -> wxUIntPtr;
-    // NOT_SUPPORTED: pub fn wxDataViewListStore_SetItemData(self_: *mut c_void, item: *const c_void, data: wxUIntPtr);
-
-    // wxDataViewModel
-    pub fn wxDataViewModel_delete(self_: *mut c_void);
-    pub fn wxDataViewModel_new() -> *mut c_void;
-    pub fn wxDataViewModel_AddNotifier(self_: *mut c_void, notifier: *mut c_void);
-    pub fn wxDataViewModel_ChangeValue(
-        self_: *mut c_void,
-        variant: *const c_void,
-        item: *const c_void,
-        col: c_uint,
-    ) -> bool;
-    pub fn wxDataViewModel_Cleared(self_: *mut c_void) -> bool;
-    pub fn wxDataViewModel_Compare(
-        self_: *const c_void,
-        item1: *const c_void,
-        item2: *const c_void,
-        column: c_uint,
-        ascending: bool,
-    ) -> c_int;
-    pub fn wxDataViewModel_GetAttr(
-        self_: *const c_void,
-        item: *const c_void,
-        col: c_uint,
-        attr: *mut c_void,
-    ) -> bool;
-    pub fn wxDataViewModel_IsEnabled(
-        self_: *const c_void,
-        item: *const c_void,
-        col: c_uint,
-    ) -> bool;
-    pub fn wxDataViewModel_GetChildren(
-        self_: *const c_void,
-        item: *const c_void,
-        children: *mut c_void,
-    ) -> c_uint;
-    pub fn wxDataViewModel_GetParent(self_: *const c_void, item: *const c_void) -> *mut c_void;
-    pub fn wxDataViewModel_GetValue(
-        self_: *const c_void,
-        variant: *mut c_void,
-        item: *const c_void,
-        col: c_uint,
-    );
-    pub fn wxDataViewModel_HasContainerColumns(self_: *const c_void, item: *const c_void) -> bool;
-    pub fn wxDataViewModel_HasDefaultCompare(self_: *const c_void) -> bool;
-    // NOT_SUPPORTED: pub fn wxDataViewModel_HasValue(self_: *const c_void, item: *const c_void, col: unsigned) -> bool;
-    pub fn wxDataViewModel_IsContainer(self_: *const c_void, item: *const c_void) -> bool;
-    pub fn wxDataViewModel_ItemAdded(
-        self_: *mut c_void,
-        parent: *const c_void,
-        item: *const c_void,
-    ) -> bool;
-    pub fn wxDataViewModel_ItemChanged(self_: *mut c_void, item: *const c_void) -> bool;
-    pub fn wxDataViewModel_ItemDeleted(
-        self_: *mut c_void,
-        parent: *const c_void,
-        item: *const c_void,
-    ) -> bool;
-    pub fn wxDataViewModel_ItemsAdded(
-        self_: *mut c_void,
-        parent: *const c_void,
-        items: *const c_void,
-    ) -> bool;
-    pub fn wxDataViewModel_ItemsChanged(self_: *mut c_void, items: *const c_void) -> bool;
-    pub fn wxDataViewModel_ItemsDeleted(
-        self_: *mut c_void,
-        parent: *const c_void,
-        items: *const c_void,
-    ) -> bool;
-    pub fn wxDataViewModel_RemoveNotifier(self_: *mut c_void, notifier: *mut c_void);
-    pub fn wxDataViewModel_Resort(self_: *mut c_void);
-    pub fn wxDataViewModel_SetValue(
-        self_: *mut c_void,
-        variant: *const c_void,
-        item: *const c_void,
-        col: c_uint,
-    ) -> bool;
-    pub fn wxDataViewModel_ValueChanged(
-        self_: *mut c_void,
-        item: *const c_void,
-        col: c_uint,
-    ) -> bool;
-    pub fn wxDataViewModel_IsListModel(self_: *const c_void) -> bool;
-    pub fn wxDataViewModel_IsVirtualListModel(self_: *const c_void) -> bool;
-
-    // wxDataViewModelNotifier
-    pub fn wxDataViewModelNotifier_delete(self_: *mut c_void);
-    pub fn wxDataViewModelNotifier_new() -> *mut c_void;
-    // DTOR: pub fn wxDataViewModelNotifier_~wxDataViewModelNotifier(self_: *mut c_void);
-    pub fn wxDataViewModelNotifier_Cleared(self_: *mut c_void) -> bool;
-    pub fn wxDataViewModelNotifier_GetOwner(self_: *const c_void) -> *mut c_void;
-    pub fn wxDataViewModelNotifier_ItemAdded(
-        self_: *mut c_void,
-        parent: *const c_void,
-        item: *const c_void,
-    ) -> bool;
-    pub fn wxDataViewModelNotifier_ItemChanged(self_: *mut c_void, item: *const c_void) -> bool;
-    pub fn wxDataViewModelNotifier_ItemDeleted(
-        self_: *mut c_void,
-        parent: *const c_void,
-        item: *const c_void,
-    ) -> bool;
-    pub fn wxDataViewModelNotifier_ItemsAdded(
-        self_: *mut c_void,
-        parent: *const c_void,
-        items: *const c_void,
-    ) -> bool;
-    pub fn wxDataViewModelNotifier_ItemsChanged(self_: *mut c_void, items: *const c_void) -> bool;
-    pub fn wxDataViewModelNotifier_ItemsDeleted(
-        self_: *mut c_void,
-        parent: *const c_void,
-        items: *const c_void,
-    ) -> bool;
-    pub fn wxDataViewModelNotifier_Resort(self_: *mut c_void);
-    pub fn wxDataViewModelNotifier_SetOwner(self_: *mut c_void, owner: *mut c_void);
-    pub fn wxDataViewModelNotifier_ValueChanged(
-        self_: *mut c_void,
-        item: *const c_void,
-        col: c_uint,
-    ) -> bool;
-
-    // wxDataViewProgressRenderer
-    pub fn wxDataViewProgressRenderer_CLASSINFO() -> *mut c_void;
-    pub fn wxDataViewProgressRenderer_GetDefaultType() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDataViewProgressRenderer_new(label: *const c_void, varianttype: *const c_void, mode: wxDataViewCellMode, align: c_int) -> *mut c_void;
-
-    // wxDataViewRenderer
-    pub fn wxDataViewRenderer_CLASSINFO() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDataViewRenderer_new(varianttype: *const c_void, mode: wxDataViewCellMode, align: c_int) -> *mut c_void;
-    pub fn wxDataViewRenderer_EnableEllipsize(self_: *mut c_void, mode: c_int);
-    pub fn wxDataViewRenderer_DisableEllipsize(self_: *mut c_void);
-    pub fn wxDataViewRenderer_GetAccessibleDescription(self_: *const c_void) -> *mut c_void;
-    pub fn wxDataViewRenderer_GetAlignment(self_: *const c_void) -> c_int;
-    pub fn wxDataViewRenderer_GetEllipsizeMode(self_: *const c_void) -> c_int;
-    // NOT_SUPPORTED: pub fn wxDataViewRenderer_GetMode(self_: *const c_void) -> wxDataViewCellMode;
-    pub fn wxDataViewRenderer_GetOwner(self_: *const c_void) -> *mut c_void;
-    pub fn wxDataViewRenderer_GetValue(self_: *const c_void, value: *mut c_void) -> bool;
-    pub fn wxDataViewRenderer_GetVariantType(self_: *const c_void) -> *mut c_void;
-    pub fn wxDataViewRenderer_IsCompatibleVariantType(
-        self_: *const c_void,
-        variant_type: *const c_void,
-    ) -> bool;
-    pub fn wxDataViewRenderer_SetAlignment(self_: *mut c_void, align: c_int);
-    pub fn wxDataViewRenderer_SetOwner(self_: *mut c_void, owner: *mut c_void);
-    pub fn wxDataViewRenderer_SetValue(self_: *mut c_void, value: *const c_void) -> bool;
-    pub fn wxDataViewRenderer_SetValueAdjuster(self_: *mut c_void, transformer: *mut c_void);
-    pub fn wxDataViewRenderer_Validate(self_: *mut c_void, value: *mut c_void) -> bool;
-    pub fn wxDataViewRenderer_HasEditorCtrl(self_: *const c_void) -> bool;
-    pub fn wxDataViewRenderer_CreateEditorCtrl(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        label_rect: wxRect,
-        value: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxDataViewRenderer_GetValueFromEditorCtrl(
-        self_: *mut c_void,
-        editor: *mut c_void,
-        value: *mut c_void,
-    ) -> bool;
-    pub fn wxDataViewRenderer_StartEditing(
-        self_: *mut c_void,
-        item: *const c_void,
-        label_rect: wxRect,
-    ) -> bool;
-    pub fn wxDataViewRenderer_CancelEditing(self_: *mut c_void);
-    pub fn wxDataViewRenderer_FinishEditing(self_: *mut c_void) -> bool;
-    pub fn wxDataViewRenderer_GetEditorCtrl(self_: *mut c_void) -> *mut c_void;
-
-    // wxDataViewSpinRenderer
-    pub fn wxDataViewSpinRenderer_CLASSINFO() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDataViewSpinRenderer_new(min: c_int, max: c_int, mode: wxDataViewCellMode, align: c_int) -> *mut c_void;
-
-    // wxDataViewTextRenderer
-    pub fn wxDataViewTextRenderer_CLASSINFO() -> *mut c_void;
-    pub fn wxDataViewTextRenderer_GetDefaultType() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDataViewTextRenderer_new(varianttype: *const c_void, mode: wxDataViewCellMode, align: c_int) -> *mut c_void;
-    pub fn wxDataViewTextRenderer_EnableMarkup(self_: *mut c_void, enable: bool);
-
-    // wxDataViewToggleRenderer
-    pub fn wxDataViewToggleRenderer_CLASSINFO() -> *mut c_void;
-    pub fn wxDataViewToggleRenderer_GetDefaultType() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDataViewToggleRenderer_new(varianttype: *const c_void, mode: wxDataViewCellMode, align: c_int) -> *mut c_void;
-    pub fn wxDataViewToggleRenderer_ShowAsRadio(self_: *mut c_void);
 
     // wxDataViewTreeCtrl
     pub fn wxDataViewTreeCtrl_CLASSINFO() -> *mut c_void;
@@ -2861,7 +2019,7 @@ extern "C" {
         pos: c_uint,
     ) -> *mut c_void;
     pub fn wxDataViewTreeCtrl_GetStore(self_: *mut c_void) -> *mut c_void;
-    pub fn wxDataViewTreeCtrl_GetStore1(self_: *const c_void) -> *mut c_void;
+    pub fn wxDataViewTreeCtrl_GetStore1(self_: *const c_void) -> *const c_void;
     pub fn wxDataViewTreeCtrl_InsertContainer(
         self_: *mut c_void,
         parent: *const c_void,
@@ -2919,114 +2077,9 @@ extern "C" {
     // Mix-in(s) to wxDataViewTreeCtrl
     pub fn wxDataViewTreeCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
-    // wxDataViewTreeStore
-    pub fn wxDataViewTreeStore_delete(self_: *mut c_void);
-    pub fn wxDataViewTreeStore_new() -> *mut c_void;
-    // DTOR: pub fn wxDataViewTreeStore_~wxDataViewTreeStore(self_: *mut c_void);
-    pub fn wxDataViewTreeStore_AppendContainer(
-        self_: *mut c_void,
-        parent: *const c_void,
-        text: *const c_void,
-        icon: *const c_void,
-        expanded: *const c_void,
-        data: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxDataViewTreeStore_AppendItem(
-        self_: *mut c_void,
-        parent: *const c_void,
-        text: *const c_void,
-        icon: *const c_void,
-        data: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxDataViewTreeStore_DeleteAllItems(self_: *mut c_void);
-    pub fn wxDataViewTreeStore_DeleteChildren(self_: *mut c_void, item: *const c_void);
-    pub fn wxDataViewTreeStore_DeleteItem(self_: *mut c_void, item: *const c_void);
-    pub fn wxDataViewTreeStore_GetChildCount(self_: *const c_void, parent: *const c_void) -> c_int;
-    pub fn wxDataViewTreeStore_GetItemData(
-        self_: *const c_void,
-        item: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxDataViewTreeStore_GetItemExpandedIcon(
-        self_: *const c_void,
-        item: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxDataViewTreeStore_GetItemIcon(
-        self_: *const c_void,
-        item: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxDataViewTreeStore_GetItemText(
-        self_: *const c_void,
-        item: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxDataViewTreeStore_GetNthChild(
-        self_: *const c_void,
-        parent: *const c_void,
-        pos: c_uint,
-    ) -> *mut c_void;
-    pub fn wxDataViewTreeStore_InsertContainer(
-        self_: *mut c_void,
-        parent: *const c_void,
-        previous: *const c_void,
-        text: *const c_void,
-        icon: *const c_void,
-        expanded: *const c_void,
-        data: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxDataViewTreeStore_InsertItem(
-        self_: *mut c_void,
-        parent: *const c_void,
-        previous: *const c_void,
-        text: *const c_void,
-        icon: *const c_void,
-        data: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxDataViewTreeStore_PrependContainer(
-        self_: *mut c_void,
-        parent: *const c_void,
-        text: *const c_void,
-        icon: *const c_void,
-        expanded: *const c_void,
-        data: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxDataViewTreeStore_PrependItem(
-        self_: *mut c_void,
-        parent: *const c_void,
-        text: *const c_void,
-        icon: *const c_void,
-        data: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxDataViewTreeStore_SetItemData(
-        self_: *mut c_void,
-        item: *const c_void,
-        data: *mut c_void,
-    );
-    pub fn wxDataViewTreeStore_SetItemExpandedIcon(
-        self_: *mut c_void,
-        item: *const c_void,
-        icon: *const c_void,
-    );
-    pub fn wxDataViewTreeStore_SetItemIcon(
-        self_: *mut c_void,
-        item: *const c_void,
-        icon: *const c_void,
-    );
-
     // wxDataViewValueAdjuster
     pub fn wxDataViewValueAdjuster_delete(self_: *mut c_void);
     // NOT_SUPPORTED: pub fn wxDataViewValueAdjuster_MakeHighlighted(self_: *const c_void, value: *const c_void) -> wxVariant;
-
-    // wxDataViewVirtualListModel
-    pub fn wxDataViewVirtualListModel_delete(self_: *mut c_void);
-    pub fn wxDataViewVirtualListModel_new(initial_size: c_uint) -> *mut c_void;
-    pub fn wxDataViewVirtualListModel_GetItem(self_: *const c_void, row: c_uint) -> *mut c_void;
-    pub fn wxDataViewVirtualListModel_Reset(self_: *mut c_void, new_size: c_uint);
-    pub fn wxDataViewVirtualListModel_RowAppended(self_: *mut c_void);
-    pub fn wxDataViewVirtualListModel_RowChanged(self_: *mut c_void, row: c_uint);
-    pub fn wxDataViewVirtualListModel_RowDeleted(self_: *mut c_void, row: c_uint);
-    pub fn wxDataViewVirtualListModel_RowInserted(self_: *mut c_void, before: c_uint);
-    pub fn wxDataViewVirtualListModel_RowPrepended(self_: *mut c_void);
-    pub fn wxDataViewVirtualListModel_RowValueChanged(self_: *mut c_void, row: c_uint, col: c_uint);
-    pub fn wxDataViewVirtualListModel_RowsDeleted(self_: *mut c_void, rows: *const c_void);
 
     // wxDateEvent
     pub fn wxDateEvent_CLASSINFO() -> *mut c_void;
@@ -3075,109 +2128,6 @@ extern "C" {
     pub fn wxDelegateRendererNative_delete(self_: *mut c_void);
     pub fn wxDelegateRendererNative_new() -> *mut c_void;
     pub fn wxDelegateRendererNative_new1(renderer_native: *mut c_void) -> *mut c_void;
-
-    // wxDialUpEvent
-    pub fn wxDialUpEvent_CLASSINFO() -> *mut c_void;
-    pub fn wxDialUpEvent_new(is_connected: bool, is_own_event: bool) -> *mut c_void;
-    pub fn wxDialUpEvent_IsConnectedEvent(self_: *const c_void) -> bool;
-    pub fn wxDialUpEvent_IsOwnEvent(self_: *const c_void) -> bool;
-
-    // wxDialog
-    pub fn wxDialog_CLASSINFO() -> *mut c_void;
-    pub fn wxDialog_new() -> *mut c_void;
-    pub fn wxDialog_new1(
-        parent: *mut c_void,
-        id: c_int,
-        title: *const c_void,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> *mut c_void;
-    // DTOR: pub fn wxDialog_~wxDialog(self_: *mut c_void);
-    pub fn wxDialog_AddMainButtonId(self_: *mut c_void, id: c_int);
-    pub fn wxDialog_CanDoLayoutAdaptation(self_: *mut c_void) -> bool;
-    pub fn wxDialog_Centre(self_: *mut c_void, direction: c_int);
-    pub fn wxDialog_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        id: c_int,
-        title: *const c_void,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> bool;
-    pub fn wxDialog_CreateButtonSizer(self_: *mut c_void, flags: c_long) -> *mut c_void;
-    pub fn wxDialog_CreateSeparatedButtonSizer(self_: *mut c_void, flags: c_long) -> *mut c_void;
-    pub fn wxDialog_CreateSeparatedSizer(self_: *mut c_void, sizer: *mut c_void) -> *mut c_void;
-    pub fn wxDialog_CreateStdDialogButtonSizer(self_: *mut c_void, flags: c_long) -> *mut c_void;
-    pub fn wxDialog_CreateTextSizer(
-        self_: *mut c_void,
-        message: *const c_void,
-        width_max: c_int,
-    ) -> *mut c_void;
-    pub fn wxDialog_DoLayoutAdaptation(self_: *mut c_void) -> bool;
-    pub fn wxDialog_EndModal(self_: *mut c_void, ret_code: c_int);
-    pub fn wxDialog_GetAffirmativeId(self_: *const c_void) -> c_int;
-    pub fn wxDialog_GetContentWindow(self_: *const c_void) -> *mut c_void;
-    pub fn wxDialog_GetEscapeId(self_: *const c_void) -> c_int;
-    pub fn wxDialog_GetLayoutAdaptationDone(self_: *const c_void) -> bool;
-    pub fn wxDialog_GetLayoutAdaptationLevel(self_: *const c_void) -> c_int;
-    // NOT_SUPPORTED: pub fn wxDialog_GetLayoutAdaptationMode(self_: *const c_void) -> wxDialogLayoutAdaptationMode;
-    pub fn wxDialog_GetMainButtonIds(self_: *mut c_void) -> *mut c_void;
-    pub fn wxDialog_GetReturnCode(self_: *const c_void) -> c_int;
-    pub fn wxDialog_GetToolBar(self_: *const c_void) -> *mut c_void;
-    pub fn wxDialog_IsMainButtonId(self_: *const c_void, id: c_int) -> bool;
-    pub fn wxDialog_IsModal(self_: *const c_void) -> bool;
-    pub fn wxDialog_SetAffirmativeId(self_: *mut c_void, id: c_int);
-    pub fn wxDialog_SetEscapeId(self_: *mut c_void, id: c_int);
-    pub fn wxDialog_SetIcon(self_: *mut c_void, icon: *const c_void);
-    pub fn wxDialog_SetLayoutAdaptationDone(self_: *mut c_void, done: bool);
-    pub fn wxDialog_SetLayoutAdaptationLevel(self_: *mut c_void, level: c_int);
-    // NOT_SUPPORTED: pub fn wxDialog_SetLayoutAdaptationMode(self_: *mut c_void, mode: wxDialogLayoutAdaptationMode);
-    pub fn wxDialog_SetReturnCode(self_: *mut c_void, ret_code: c_int);
-    pub fn wxDialog_ShowModal(self_: *mut c_void) -> c_int;
-    pub fn wxDialog_ShowWindowModal(self_: *mut c_void);
-    pub fn wxDialog_ShowWindowModalThenDo(self_: *mut c_void, on_end_modal: *const c_void);
-    pub fn wxDialog_EnableLayoutAdaptation(enable: bool);
-    pub fn wxDialog_GetLayoutAdapter() -> *mut c_void;
-    pub fn wxDialog_IsLayoutAdaptationEnabled() -> bool;
-    pub fn wxDialog_SetLayoutAdapter(adapter: *mut c_void) -> *mut c_void;
-    // Mix-in(s) to wxDialog
-    pub fn wxDialog_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
-    // wxDialogLayoutAdapter
-    pub fn wxDialogLayoutAdapter_delete(self_: *mut c_void);
-    pub fn wxDialogLayoutAdapter_new() -> *mut c_void;
-    pub fn wxDialogLayoutAdapter_CanDoLayoutAdaptation(
-        self_: *mut c_void,
-        dialog: *mut c_void,
-    ) -> bool;
-    pub fn wxDialogLayoutAdapter_DoLayoutAdaptation(
-        self_: *mut c_void,
-        dialog: *mut c_void,
-    ) -> bool;
-
-    // wxDirDialog
-    pub fn wxDirDialog_CLASSINFO() -> *mut c_void;
-    pub fn wxDirDialog_new(
-        parent: *mut c_void,
-        message: *const c_void,
-        default_path: *const c_void,
-        style: c_long,
-        pos: *const c_void,
-        size: *const c_void,
-        name: *const c_void,
-    ) -> *mut c_void;
-    // DTOR: pub fn wxDirDialog_~wxDirDialog(self_: *mut c_void);
-    pub fn wxDirDialog_GetMessage(self_: *const c_void) -> *mut c_void;
-    pub fn wxDirDialog_GetPath(self_: *const c_void) -> *mut c_void;
-    pub fn wxDirDialog_GetPaths(self_: *const c_void, paths: *mut c_void);
-    pub fn wxDirDialog_SetMessage(self_: *mut c_void, message: *const c_void);
-    pub fn wxDirDialog_SetPath(self_: *mut c_void, path: *const c_void);
-    // Mix-in(s) to wxDirDialog
-    pub fn wxDirDialog_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxDirPickerCtrl
     pub fn wxDirPickerCtrl_CLASSINFO() -> *mut c_void;
@@ -3308,88 +2258,6 @@ extern "C" {
     // Mix-in(s) to wxDocMDIParentFrame
     pub fn wxDocMDIParentFrame_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
-    // wxDocManager
-    pub fn wxDocManager_CLASSINFO() -> *mut c_void;
-    pub fn wxDocManager_new(flags: c_long, initialize: bool) -> *mut c_void;
-    // DTOR: pub fn wxDocManager_~wxDocManager(self_: *mut c_void);
-    pub fn wxDocManager_ActivateView(self_: *mut c_void, doc: *mut c_void, activate: bool);
-    pub fn wxDocManager_AddDocument(self_: *mut c_void, doc: *mut c_void);
-    pub fn wxDocManager_AddFileToHistory(self_: *mut c_void, filename: *const c_void);
-    pub fn wxDocManager_AssociateTemplate(self_: *mut c_void, temp: *mut c_void);
-    pub fn wxDocManager_FindTemplate(self_: *mut c_void, classinfo: *const c_void) -> *mut c_void;
-    pub fn wxDocManager_FindDocumentByPath(
-        self_: *const c_void,
-        path: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxDocManager_CloseDocument(self_: *mut c_void, doc: *mut c_void, force: bool) -> bool;
-    pub fn wxDocManager_CloseDocuments(self_: *mut c_void, force: bool) -> bool;
-    pub fn wxDocManager_CreateDocument(
-        self_: *mut c_void,
-        path: *const c_void,
-        flags: c_long,
-    ) -> *mut c_void;
-    pub fn wxDocManager_CreateNewDocument(self_: *mut c_void) -> *mut c_void;
-    pub fn wxDocManager_CreateView(
-        self_: *mut c_void,
-        doc: *mut c_void,
-        flags: c_long,
-    ) -> *mut c_void;
-    pub fn wxDocManager_DisassociateTemplate(self_: *mut c_void, temp: *mut c_void);
-    pub fn wxDocManager_FileHistoryAddFilesToMenu(self_: *mut c_void);
-    pub fn wxDocManager_FileHistoryAddFilesToMenu1(self_: *mut c_void, menu: *mut c_void);
-    pub fn wxDocManager_FileHistoryLoad(self_: *mut c_void, config: *const c_void);
-    pub fn wxDocManager_FileHistoryRemoveMenu(self_: *mut c_void, menu: *mut c_void);
-    pub fn wxDocManager_FileHistorySave(self_: *mut c_void, resource_file: *mut c_void);
-    pub fn wxDocManager_FileHistoryUseMenu(self_: *mut c_void, menu: *mut c_void);
-    pub fn wxDocManager_FindTemplateForPath(self_: *mut c_void, path: *const c_void)
-        -> *mut c_void;
-    pub fn wxDocManager_GetAnyUsableView(self_: *const c_void) -> *mut c_void;
-    pub fn wxDocManager_GetCurrentDocument(self_: *const c_void) -> *mut c_void;
-    pub fn wxDocManager_GetCurrentView(self_: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDocManager_GetDocumentsVector(self_: *const c_void) -> wxDocVector;
-    // NOT_SUPPORTED: pub fn wxDocManager_GetTemplatesVector(self_: *const c_void) -> wxDocTemplateVector;
-    pub fn wxDocManager_GetDocuments(self_: *mut c_void) -> *mut c_void;
-    pub fn wxDocManager_GetFileHistory(self_: *const c_void) -> *mut c_void;
-    pub fn wxDocManager_GetHistoryFilesCount(self_: *const c_void) -> usize;
-    pub fn wxDocManager_GetLastDirectory(self_: *const c_void) -> *mut c_void;
-    pub fn wxDocManager_GetMaxDocsOpen(self_: *const c_void) -> c_int;
-    pub fn wxDocManager_GetTemplates(self_: *mut c_void) -> *mut c_void;
-    pub fn wxDocManager_Initialize(self_: *mut c_void) -> bool;
-    pub fn wxDocManager_MakeNewDocumentName(self_: *mut c_void) -> *mut c_void;
-    pub fn wxDocManager_OnCreateFileHistory(self_: *mut c_void) -> *mut c_void;
-    pub fn wxDocManager_OnFileClose(self_: *mut c_void, event: *mut c_void);
-    pub fn wxDocManager_OnFileCloseAll(self_: *mut c_void, event: *mut c_void);
-    pub fn wxDocManager_OnFileNew(self_: *mut c_void, event: *mut c_void);
-    pub fn wxDocManager_OnFileOpen(self_: *mut c_void, event: *mut c_void);
-    pub fn wxDocManager_OnFileRevert(self_: *mut c_void, event: *mut c_void);
-    pub fn wxDocManager_OnFileSave(self_: *mut c_void, event: *mut c_void);
-    pub fn wxDocManager_OnFileSaveAs(self_: *mut c_void, event: *mut c_void);
-    pub fn wxDocManager_RemoveDocument(self_: *mut c_void, doc: *mut c_void);
-    pub fn wxDocManager_SelectDocumentPath(
-        self_: *mut c_void,
-        templates: *mut c_void,
-        no_templates: c_int,
-        path: *mut c_void,
-        flags: c_long,
-        save: bool,
-    ) -> *mut c_void;
-    pub fn wxDocManager_SelectDocumentType(
-        self_: *mut c_void,
-        templates: *mut c_void,
-        no_templates: c_int,
-        sort: bool,
-    ) -> *mut c_void;
-    pub fn wxDocManager_SelectViewType(
-        self_: *mut c_void,
-        templates: *mut c_void,
-        no_templates: c_int,
-        sort: bool,
-    ) -> *mut c_void;
-    pub fn wxDocManager_SetLastDirectory(self_: *mut c_void, dir: *const c_void);
-    pub fn wxDocManager_SetMaxDocsOpen(self_: *mut c_void, n: c_int);
-    // Mix-in(s) to wxDocManager
-    pub fn wxDocManager_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
     // wxDocParentFrame
     pub fn wxDocParentFrame_CLASSINFO() -> *mut c_void;
     pub fn wxDocParentFrame_new() -> *mut c_void;
@@ -3418,111 +2286,6 @@ extern "C" {
     pub fn wxDocParentFrame_GetDocumentManager(self_: *const c_void) -> *mut c_void;
     // Mix-in(s) to wxDocParentFrame
     pub fn wxDocParentFrame_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
-    // wxDocTemplate
-    pub fn wxDocTemplate_CLASSINFO() -> *mut c_void;
-    pub fn wxDocTemplate_new(
-        manager: *mut c_void,
-        descr: *const c_void,
-        filter: *const c_void,
-        dir: *const c_void,
-        ext: *const c_void,
-        doc_type_name: *const c_void,
-        view_type_name: *const c_void,
-        doc_class_info: *mut c_void,
-        view_class_info: *mut c_void,
-        flags: c_long,
-    ) -> *mut c_void;
-    // DTOR: pub fn wxDocTemplate_~wxDocTemplate(self_: *mut c_void);
-    pub fn wxDocTemplate_CreateDocument(
-        self_: *mut c_void,
-        path: *const c_void,
-        flags: c_long,
-    ) -> *mut c_void;
-    pub fn wxDocTemplate_CreateView(
-        self_: *mut c_void,
-        doc: *mut c_void,
-        flags: c_long,
-    ) -> *mut c_void;
-    pub fn wxDocTemplate_FileMatchesTemplate(self_: *mut c_void, path: *const c_void) -> bool;
-    pub fn wxDocTemplate_GetDefaultExtension(self_: *const c_void) -> *mut c_void;
-    pub fn wxDocTemplate_GetDescription(self_: *const c_void) -> *mut c_void;
-    pub fn wxDocTemplate_GetDirectory(self_: *const c_void) -> *mut c_void;
-    pub fn wxDocTemplate_GetDocClassInfo(self_: *const c_void) -> *mut c_void;
-    pub fn wxDocTemplate_GetDocumentManager(self_: *const c_void) -> *mut c_void;
-    pub fn wxDocTemplate_GetDocumentName(self_: *const c_void) -> *mut c_void;
-    pub fn wxDocTemplate_GetFileFilter(self_: *const c_void) -> *mut c_void;
-    pub fn wxDocTemplate_GetFlags(self_: *const c_void) -> c_long;
-    pub fn wxDocTemplate_GetPageSetupDialogData(self_: *mut c_void) -> *mut c_void;
-    pub fn wxDocTemplate_GetPageSetupDialogData1(self_: *const c_void) -> *mut c_void;
-    pub fn wxDocTemplate_GetViewClassInfo(self_: *const c_void) -> *mut c_void;
-    pub fn wxDocTemplate_GetViewName(self_: *const c_void) -> *mut c_void;
-    pub fn wxDocTemplate_InitDocument(
-        self_: *mut c_void,
-        doc: *mut c_void,
-        path: *const c_void,
-        flags: c_long,
-    ) -> bool;
-    pub fn wxDocTemplate_IsVisible(self_: *const c_void) -> bool;
-    pub fn wxDocTemplate_SetDefaultExtension(self_: *mut c_void, ext: *const c_void);
-    pub fn wxDocTemplate_SetDescription(self_: *mut c_void, descr: *const c_void);
-    pub fn wxDocTemplate_SetDirectory(self_: *mut c_void, dir: *const c_void);
-    pub fn wxDocTemplate_SetDocumentManager(self_: *mut c_void, manager: *mut c_void);
-    pub fn wxDocTemplate_SetFileFilter(self_: *mut c_void, filter: *const c_void);
-    pub fn wxDocTemplate_SetFlags(self_: *mut c_void, flags: c_long);
-
-    // wxDocument
-    pub fn wxDocument_CLASSINFO() -> *mut c_void;
-    pub fn wxDocument_new(parent: *mut c_void) -> *mut c_void;
-    // DTOR: pub fn wxDocument_~wxDocument(self_: *mut c_void);
-    pub fn wxDocument_AddView(self_: *mut c_void, view: *mut c_void) -> bool;
-    pub fn wxDocument_AlreadySaved(self_: *const c_void) -> bool;
-    pub fn wxDocument_Activate(self_: *const c_void);
-    pub fn wxDocument_Close(self_: *mut c_void) -> bool;
-    pub fn wxDocument_DeleteAllViews(self_: *mut c_void) -> bool;
-    pub fn wxDocument_DeleteContents(self_: *mut c_void) -> bool;
-    pub fn wxDocument_GetCommandProcessor(self_: *const c_void) -> *mut c_void;
-    pub fn wxDocument_GetDocumentManager(self_: *const c_void) -> *mut c_void;
-    pub fn wxDocument_GetDocumentName(self_: *const c_void) -> *mut c_void;
-    pub fn wxDocument_GetDocumentSaved(self_: *const c_void) -> bool;
-    pub fn wxDocument_GetDocumentTemplate(self_: *const c_void) -> *mut c_void;
-    pub fn wxDocument_GetDocumentWindow(self_: *const c_void) -> *mut c_void;
-    pub fn wxDocument_GetFilename(self_: *const c_void) -> *mut c_void;
-    pub fn wxDocument_GetFirstView(self_: *const c_void) -> *mut c_void;
-    pub fn wxDocument_GetTitle(self_: *const c_void) -> *mut c_void;
-    pub fn wxDocument_GetUserReadableName(self_: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDocument_GetViewsVector(self_: *const c_void) -> wxViewVector;
-    pub fn wxDocument_GetViews(self_: *mut c_void) -> *mut c_void;
-    pub fn wxDocument_GetViews1(self_: *const c_void) -> *const c_void;
-    pub fn wxDocument_IsChildDocument(self_: *const c_void) -> bool;
-    pub fn wxDocument_IsModified(self_: *const c_void) -> bool;
-    pub fn wxDocument_LoadObject(self_: *mut c_void, stream: *mut c_void) -> *mut c_void;
-    pub fn wxDocument_LoadObject1(self_: *mut c_void, stream: *mut c_void) -> *mut c_void;
-    pub fn wxDocument_Modify(self_: *mut c_void, modify: bool);
-    pub fn wxDocument_OnChangedViewList(self_: *mut c_void);
-    pub fn wxDocument_OnCloseDocument(self_: *mut c_void) -> bool;
-    pub fn wxDocument_OnCreate(self_: *mut c_void, path: *const c_void, flags: c_long) -> bool;
-    pub fn wxDocument_OnCreateCommandProcessor(self_: *mut c_void) -> *mut c_void;
-    pub fn wxDocument_OnNewDocument(self_: *mut c_void) -> bool;
-    pub fn wxDocument_OnOpenDocument(self_: *mut c_void, filename: *const c_void) -> bool;
-    pub fn wxDocument_OnSaveDocument(self_: *mut c_void, filename: *const c_void) -> bool;
-    pub fn wxDocument_OnSaveModified(self_: *mut c_void) -> bool;
-    pub fn wxDocument_RemoveView(self_: *mut c_void, view: *mut c_void) -> bool;
-    pub fn wxDocument_Save(self_: *mut c_void) -> bool;
-    pub fn wxDocument_SaveAs(self_: *mut c_void) -> bool;
-    pub fn wxDocument_Revert(self_: *mut c_void) -> bool;
-    pub fn wxDocument_SaveObject(self_: *mut c_void, stream: *mut c_void) -> *mut c_void;
-    pub fn wxDocument_SaveObject1(self_: *mut c_void, stream: *mut c_void) -> *mut c_void;
-    pub fn wxDocument_SetCommandProcessor(self_: *mut c_void, processor: *mut c_void);
-    pub fn wxDocument_SetDocumentName(self_: *mut c_void, name: *const c_void);
-    pub fn wxDocument_SetDocumentTemplate(self_: *mut c_void, templ: *mut c_void);
-    pub fn wxDocument_SetDocumentSaved(self_: *mut c_void, saved: bool);
-    pub fn wxDocument_SetFilename(self_: *mut c_void, filename: *const c_void, notify_views: bool);
-    pub fn wxDocument_OnChangeFilename(self_: *mut c_void, notify_views: bool);
-    pub fn wxDocument_SetTitle(self_: *mut c_void, title: *const c_void);
-    pub fn wxDocument_UpdateAllViews(self_: *mut c_void, sender: *mut c_void, hint: *mut c_void);
-    // Mix-in(s) to wxDocument
-    pub fn wxDocument_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxDragImage
     pub fn wxDragImage_CLASSINFO() -> *mut c_void;
@@ -3562,48 +2325,6 @@ extern "C" {
         source_rect: *const c_void,
         dest_rect: *const c_void,
     ) -> bool;
-
-    // wxDropFilesEvent
-    pub fn wxDropFilesEvent_CLASSINFO() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDropFilesEvent_new(id: wxEventType, no_files: c_int, files: *mut c_void) -> *mut c_void;
-    pub fn wxDropFilesEvent_GetFiles(self_: *const c_void) -> *mut c_void;
-    pub fn wxDropFilesEvent_GetNumberOfFiles(self_: *const c_void) -> c_int;
-    pub fn wxDropFilesEvent_GetPosition(self_: *const c_void) -> *mut c_void;
-
-    // wxDropSource
-    pub fn wxDropSource_delete(self_: *mut c_void);
-    pub fn wxDropSource_new(
-        win: *mut c_void,
-        icon_copy: *const c_void,
-        icon_move: *const c_void,
-        icon_none: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxDropSource_new1(
-        data: *mut c_void,
-        win: *mut c_void,
-        icon_copy: *const c_void,
-        icon_move: *const c_void,
-        icon_none: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxDropSource_new2(
-        win: *mut c_void,
-        icon_copy: *const c_void,
-        icon_move: *const c_void,
-        icon_none: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxDropSource_new3(
-        data: *mut c_void,
-        win: *mut c_void,
-        icon_copy: *const c_void,
-        icon_move: *const c_void,
-        icon_none: *const c_void,
-    ) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDropSource_DoDragDrop(self_: *mut c_void, flags: c_int) -> wxDragResult;
-    pub fn wxDropSource_GetDataObject(self_: *mut c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDropSource_GiveFeedback(self_: *mut c_void, effect: wxDragResult) -> bool;
-    // NOT_SUPPORTED: pub fn wxDropSource_SetCursor(self_: *mut c_void, res: wxDragResult, cursor: *const c_void);
-    // NOT_SUPPORTED: pub fn wxDropSource_SetIcon(self_: *mut c_void, res: wxDragResult, icon: *const c_void);
-    pub fn wxDropSource_SetData(self_: *mut c_void, data: *mut c_void);
 
     // wxDropTarget
     pub fn wxDropTarget_delete(self_: *mut c_void);
@@ -3661,13 +2382,6 @@ extern "C" {
     // Mix-in(s) to wxEventBlocker
     pub fn wxEventBlocker_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
-    // wxExtHelpController
-    pub fn wxExtHelpController_CLASSINFO() -> *mut c_void;
-    pub fn wxExtHelpController_new(parent_window: *mut c_void) -> *mut c_void;
-    // DTOR: pub fn wxExtHelpController_~wxExtHelpController(self_: *mut c_void);
-    pub fn wxExtHelpController_DisplayHelp(self_: *mut c_void, relative_url: *const c_void)
-        -> bool;
-
     // wxFileCtrl
     pub fn wxFileCtrl_CLASSINFO() -> *mut c_void;
     pub fn wxFileCtrl_new() -> *mut c_void;
@@ -3721,48 +2435,6 @@ extern "C" {
     pub fn wxFileCtrlEvent_SetDirectory(self_: *mut c_void, directory: *const c_void);
     pub fn wxFileCtrlEvent_SetFilterIndex(self_: *mut c_void, index: c_int);
 
-    // wxFileDataObject
-    pub fn wxFileDataObject_delete(self_: *mut c_void);
-    pub fn wxFileDataObject_new() -> *mut c_void;
-    pub fn wxFileDataObject_AddFile(self_: *mut c_void, file: *const c_void);
-    pub fn wxFileDataObject_GetFilenames(self_: *const c_void) -> *mut c_void;
-
-    // wxFileDialog
-    pub fn wxFileDialog_CLASSINFO() -> *mut c_void;
-    pub fn wxFileDialog_new(
-        parent: *mut c_void,
-        message: *const c_void,
-        default_dir: *const c_void,
-        default_file: *const c_void,
-        wildcard: *const c_void,
-        style: c_long,
-        pos: *const c_void,
-        size: *const c_void,
-        name: *const c_void,
-    ) -> *mut c_void;
-    // DTOR: pub fn wxFileDialog_~wxFileDialog(self_: *mut c_void);
-    pub fn wxFileDialog_GetCurrentlySelectedFilename(self_: *const c_void) -> *mut c_void;
-    pub fn wxFileDialog_GetCurrentlySelectedFilterIndex(self_: *const c_void) -> c_int;
-    pub fn wxFileDialog_GetDirectory(self_: *const c_void) -> *mut c_void;
-    pub fn wxFileDialog_GetExtraControl(self_: *const c_void) -> *mut c_void;
-    pub fn wxFileDialog_GetFilename(self_: *const c_void) -> *mut c_void;
-    pub fn wxFileDialog_GetFilenames(self_: *const c_void, filenames: *mut c_void);
-    pub fn wxFileDialog_GetFilterIndex(self_: *const c_void) -> c_int;
-    pub fn wxFileDialog_GetMessage(self_: *const c_void) -> *mut c_void;
-    pub fn wxFileDialog_GetPath(self_: *const c_void) -> *mut c_void;
-    pub fn wxFileDialog_GetPaths(self_: *const c_void, paths: *mut c_void);
-    pub fn wxFileDialog_GetWildcard(self_: *const c_void) -> *mut c_void;
-    pub fn wxFileDialog_SetCustomizeHook(self_: *mut c_void, customize_hook: *mut c_void) -> bool;
-    pub fn wxFileDialog_SetDirectory(self_: *mut c_void, directory: *const c_void);
-    // NOT_SUPPORTED: pub fn wxFileDialog_SetExtraControlCreator(self_: *mut c_void, creator: ExtraControlCreatorFunction) -> bool;
-    pub fn wxFileDialog_SetFilename(self_: *mut c_void, setfilename: *const c_void);
-    pub fn wxFileDialog_SetFilterIndex(self_: *mut c_void, filter_index: c_int);
-    pub fn wxFileDialog_SetMessage(self_: *mut c_void, message: *const c_void);
-    pub fn wxFileDialog_SetPath(self_: *mut c_void, path: *const c_void);
-    pub fn wxFileDialog_SetWildcard(self_: *mut c_void, wild_card: *const c_void);
-    // Mix-in(s) to wxFileDialog
-    pub fn wxFileDialog_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
     // wxFileDialogCustomize
     pub fn wxFileDialogCustomize_delete(self_: *mut c_void);
     pub fn wxFileDialogCustomize_AddButton(self_: *mut c_void, label: *const c_void)
@@ -3801,37 +2473,6 @@ extern "C" {
     // NOT_SUPPORTED: pub fn wxFileDirPickerEvent_new1(type_: wxEventType, generator: *mut c_void, id: c_int, path: *const c_void) -> *mut c_void;
     pub fn wxFileDirPickerEvent_GetPath(self_: *const c_void) -> *mut c_void;
     pub fn wxFileDirPickerEvent_SetPath(self_: *mut c_void, path: *const c_void);
-
-    // wxFileDropTarget
-    pub fn wxFileDropTarget_delete(self_: *mut c_void);
-    pub fn wxFileDropTarget_new() -> *mut c_void;
-    pub fn wxFileDropTarget_OnDropFiles(
-        self_: *mut c_void,
-        x: c_int,
-        y: c_int,
-        filenames: *const c_void,
-    ) -> bool;
-
-    // wxFileHistory
-    pub fn wxFileHistory_CLASSINFO() -> *mut c_void;
-    pub fn wxFileHistory_new(max_files: usize, id_base: c_int) -> *mut c_void;
-    // DTOR: pub fn wxFileHistory_~wxFileHistory(self_: *mut c_void);
-    pub fn wxFileHistory_AddFileToHistory(self_: *mut c_void, filename: *const c_void);
-    pub fn wxFileHistory_AddFilesToMenu(self_: *mut c_void);
-    pub fn wxFileHistory_AddFilesToMenu1(self_: *mut c_void, menu: *mut c_void);
-    pub fn wxFileHistory_GetBaseId(self_: *const c_void) -> c_int;
-    pub fn wxFileHistory_GetCount(self_: *const c_void) -> usize;
-    pub fn wxFileHistory_GetHistoryFile(self_: *const c_void, index: usize) -> *mut c_void;
-    pub fn wxFileHistory_GetMaxFiles(self_: *const c_void) -> c_int;
-    pub fn wxFileHistory_GetMenus(self_: *const c_void) -> *const c_void;
-    pub fn wxFileHistory_Load(self_: *mut c_void, config: *const c_void);
-    pub fn wxFileHistory_RemoveFileFromHistory(self_: *mut c_void, i: usize);
-    pub fn wxFileHistory_RemoveMenu(self_: *mut c_void, menu: *mut c_void);
-    pub fn wxFileHistory_Save(self_: *mut c_void, config: *mut c_void);
-    pub fn wxFileHistory_SetBaseId(self_: *mut c_void, base_id: c_int);
-    pub fn wxFileHistory_UseMenu(self_: *mut c_void, menu: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxFileHistory_SetMenuPathStyle(self_: *mut c_void, style: wxFileHistoryMenuPathStyle);
-    // NOT_SUPPORTED: pub fn wxFileHistory_GetMenuPathStyle(self_: *const c_void) -> wxFileHistoryMenuPathStyle;
 
     // wxFilePickerCtrl
     pub fn wxFilePickerCtrl_CLASSINFO() -> *mut c_void;
@@ -3886,27 +2527,6 @@ extern "C" {
     pub fn wxFindReplaceData_SetFindString(self_: *mut c_void, str: *const c_void);
     // NOT_SUPPORTED: pub fn wxFindReplaceData_SetFlags(self_: *mut c_void, flags: wxUint32);
     pub fn wxFindReplaceData_SetReplaceString(self_: *mut c_void, str: *const c_void);
-
-    // wxFindReplaceDialog
-    pub fn wxFindReplaceDialog_CLASSINFO() -> *mut c_void;
-    pub fn wxFindReplaceDialog_new() -> *mut c_void;
-    pub fn wxFindReplaceDialog_new1(
-        parent: *mut c_void,
-        data: *mut c_void,
-        title: *const c_void,
-        style: c_int,
-    ) -> *mut c_void;
-    // DTOR: pub fn wxFindReplaceDialog_~wxFindReplaceDialog(self_: *mut c_void);
-    pub fn wxFindReplaceDialog_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        data: *mut c_void,
-        title: *const c_void,
-        style: c_int,
-    ) -> bool;
-    pub fn wxFindReplaceDialog_GetData(self_: *const c_void) -> *mut c_void;
-    // Mix-in(s) to wxFindReplaceDialog
-    pub fn wxFindReplaceDialog_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxFlexGridSizer
     pub fn wxFlexGridSizer_CLASSINFO() -> *mut c_void;
@@ -4023,22 +2643,6 @@ extern "C" {
     pub fn wxFontData_SetRange(self_: *mut c_void, min: c_int, max: c_int);
     pub fn wxFontData_SetShowHelp(self_: *mut c_void, show_help: bool);
     // BLOCKED: pub fn wxFontData_operator=(self_: *mut c_void, data: *const c_void) -> *mut c_void;
-
-    // wxFontDialog
-    pub fn wxFontDialog_CLASSINFO() -> *mut c_void;
-    pub fn wxFontDialog_new() -> *mut c_void;
-    pub fn wxFontDialog_new1(parent: *mut c_void) -> *mut c_void;
-    pub fn wxFontDialog_new2(parent: *mut c_void, data: *const c_void) -> *mut c_void;
-    pub fn wxFontDialog_Create(self_: *mut c_void, parent: *mut c_void) -> bool;
-    pub fn wxFontDialog_Create1(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        data: *const c_void,
-    ) -> bool;
-    pub fn wxFontDialog_GetFontData(self_: *const c_void) -> *mut c_void;
-    pub fn wxFontDialog_GetFontData1(self_: *mut c_void) -> *mut c_void;
-    // Mix-in(s) to wxFontDialog
-    pub fn wxFontDialog_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxFontEnumerator
     pub fn wxFontEnumerator_delete(self_: *mut c_void);
@@ -4215,49 +2819,6 @@ extern "C" {
     // BLOCKED: pub fn wxGBPosition_operator!=(self_: *const c_void, p: *const c_void) -> bool;
     // BLOCKED: pub fn wxGBPosition_operator==(self_: *const c_void, p: *const c_void) -> bool;
 
-    // wxGBSizerItem
-    pub fn wxGBSizerItem_CLASSINFO() -> *mut c_void;
-    pub fn wxGBSizerItem_new(
-        width: c_int,
-        height: c_int,
-        pos: *const c_void,
-        span: *const c_void,
-        flag: c_int,
-        border: c_int,
-        user_data: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxGBSizerItem_new1(
-        window: *mut c_void,
-        pos: *const c_void,
-        span: *const c_void,
-        flag: c_int,
-        border: c_int,
-        user_data: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxGBSizerItem_new2(
-        sizer: *mut c_void,
-        pos: *const c_void,
-        span: *const c_void,
-        flag: c_int,
-        border: c_int,
-        user_data: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxGBSizerItem_GetEndPos(self_: *mut c_void, row: *mut c_void, col: *mut c_void);
-    pub fn wxGBSizerItem_GetPos(self_: *const c_void) -> *mut c_void;
-    pub fn wxGBSizerItem_GetPos1(self_: *const c_void, row: *mut c_void, col: *mut c_void);
-    pub fn wxGBSizerItem_GetSpan(self_: *const c_void) -> *mut c_void;
-    pub fn wxGBSizerItem_GetSpan1(self_: *const c_void, rowspan: *mut c_void, colspan: *mut c_void);
-    pub fn wxGBSizerItem_Intersects(self_: *mut c_void, other: *const c_void) -> bool;
-    pub fn wxGBSizerItem_Intersects1(
-        self_: *mut c_void,
-        pos: *const c_void,
-        span: *const c_void,
-    ) -> bool;
-    pub fn wxGBSizerItem_SetPos(self_: *mut c_void, pos: *const c_void) -> bool;
-    pub fn wxGBSizerItem_SetSpan(self_: *mut c_void, span: *const c_void) -> bool;
-    pub fn wxGBSizerItem_GetGBSizer(self_: *const c_void) -> *mut c_void;
-    pub fn wxGBSizerItem_SetGBSizer(self_: *mut c_void, sizer: *mut c_void);
-
     // wxGBSpan
     pub fn wxGBSpan_delete(self_: *mut c_void);
     pub fn wxGBSpan_new() -> *mut c_void;
@@ -4269,30 +2830,9 @@ extern "C" {
     // BLOCKED: pub fn wxGBSpan_operator!=(self_: *const c_void, o: *const c_void) -> bool;
     // BLOCKED: pub fn wxGBSpan_operator==(self_: *const c_void, o: *const c_void) -> bool;
 
-    // wxGCDC
-    pub fn wxGCDC_CLASSINFO() -> *mut c_void;
-    pub fn wxGCDC_new(window_dc: *const c_void) -> *mut c_void;
-    pub fn wxGCDC_new1(memory_dc: *const c_void) -> *mut c_void;
-    pub fn wxGCDC_new2(printer_dc: *const c_void) -> *mut c_void;
-    pub fn wxGCDC_new3(context: *mut c_void) -> *mut c_void;
-    pub fn wxGCDC_new4(emf_dc: *const c_void) -> *mut c_void;
-    pub fn wxGCDC_new5() -> *mut c_void;
-    // DTOR: pub fn wxGCDC_~wxGCDC(self_: *mut c_void);
-
     // wxGDIObject
     pub fn wxGDIObject_CLASSINFO() -> *mut c_void;
     // BLOCKED: pub fn wxGDIObject_new() -> *mut c_void;
-
-    // wxGIFHandler
-    pub fn wxGIFHandler_CLASSINFO() -> *mut c_void;
-    pub fn wxGIFHandler_new() -> *mut c_void;
-    pub fn wxGIFHandler_SaveAnimation(
-        self_: *mut c_void,
-        images: *const c_void,
-        stream: *mut c_void,
-        verbose: bool,
-        delay_milli_secs: c_int,
-    ) -> bool;
 
     // wxGauge
     pub fn wxGauge_CLASSINFO() -> *mut c_void;
@@ -4424,37 +2964,6 @@ extern "C" {
     // Mix-in(s) to wxGenericDirCtrl
     pub fn wxGenericDirCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
-    // wxGenericProgressDialog
-    pub fn wxGenericProgressDialog_CLASSINFO() -> *mut c_void;
-    pub fn wxGenericProgressDialog_new(
-        title: *const c_void,
-        message: *const c_void,
-        maximum: c_int,
-        parent: *mut c_void,
-        style: c_int,
-    ) -> *mut c_void;
-    // DTOR: pub fn wxGenericProgressDialog_~wxGenericProgressDialog(self_: *mut c_void);
-    pub fn wxGenericProgressDialog_GetValue(self_: *const c_void) -> c_int;
-    pub fn wxGenericProgressDialog_GetRange(self_: *const c_void) -> c_int;
-    pub fn wxGenericProgressDialog_GetMessage(self_: *const c_void) -> *mut c_void;
-    pub fn wxGenericProgressDialog_Pulse(
-        self_: *mut c_void,
-        newmsg: *const c_void,
-        skip: *mut c_void,
-    ) -> bool;
-    pub fn wxGenericProgressDialog_Resume(self_: *mut c_void);
-    pub fn wxGenericProgressDialog_SetRange(self_: *mut c_void, maximum: c_int);
-    pub fn wxGenericProgressDialog_WasCancelled(self_: *const c_void) -> bool;
-    pub fn wxGenericProgressDialog_WasSkipped(self_: *const c_void) -> bool;
-    pub fn wxGenericProgressDialog_Update(
-        self_: *mut c_void,
-        value: c_int,
-        newmsg: *const c_void,
-        skip: *mut c_void,
-    ) -> bool;
-    // Mix-in(s) to wxGenericProgressDialog
-    pub fn wxGenericProgressDialog_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
     // wxGenericValidator
     pub fn wxGenericValidator_CLASSINFO() -> *mut c_void;
     pub fn wxGenericValidator_new(validator: *const c_void) -> *mut c_void;
@@ -4482,141 +2991,6 @@ extern "C" {
 
     // wxGraphicsBrush
     pub fn wxGraphicsBrush_CLASSINFO() -> *mut c_void;
-
-    // wxGraphicsContext
-    pub fn wxGraphicsContext_CLASSINFO() -> *mut c_void;
-    pub fn wxGraphicsContext_Create(window: *mut c_void) -> *mut c_void;
-    pub fn wxGraphicsContext_Create1(window_dc: *const c_void) -> *mut c_void;
-    pub fn wxGraphicsContext_Create2(memory_dc: *const c_void) -> *mut c_void;
-    pub fn wxGraphicsContext_Create3(printer_dc: *const c_void) -> *mut c_void;
-    pub fn wxGraphicsContext_Create4(meta_file_dc: *const c_void) -> *mut c_void;
-    pub fn wxGraphicsContext_CreateFromUnknownDC(dc: *mut c_void) -> *mut c_void;
-    pub fn wxGraphicsContext_Create5(image: *mut c_void) -> *mut c_void;
-    pub fn wxGraphicsContext_CreateFromNative(context: *mut c_void) -> *mut c_void;
-    pub fn wxGraphicsContext_CreateFromNativeWindow(window: *mut c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_CreateFromNativeHDC(dc: WXHDC) -> *mut c_void;
-    pub fn wxGraphicsContext_Create6() -> *mut c_void;
-    pub fn wxGraphicsContext_ResetClip(self_: *mut c_void);
-    pub fn wxGraphicsContext_Clip(self_: *mut c_void, region: *const c_void);
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_Clip1(self_: *mut c_void, x: wxDouble, y: wxDouble, w: wxDouble, h: wxDouble);
-    pub fn wxGraphicsContext_GetClipBox(
-        self_: *mut c_void,
-        x: *mut c_void,
-        y: *mut c_void,
-        w: *mut c_void,
-        h: *mut c_void,
-    );
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_CreateMatrix(self_: *const c_void, a: wxDouble, b: wxDouble, c: wxDouble, d: wxDouble, tx: wxDouble, ty: wxDouble) -> *mut c_void;
-    pub fn wxGraphicsContext_CreateMatrix1(self_: *const c_void, mat: *const c_void)
-        -> *mut c_void;
-    pub fn wxGraphicsContext_ConcatTransform(self_: *mut c_void, matrix: *const c_void);
-    pub fn wxGraphicsContext_GetTransform(self_: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_Rotate(self_: *mut c_void, angle: wxDouble);
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_Scale(self_: *mut c_void, x_scale: wxDouble, y_scale: wxDouble);
-    pub fn wxGraphicsContext_SetTransform(self_: *mut c_void, matrix: *const c_void);
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_Translate(self_: *mut c_void, dx: wxDouble, dy: wxDouble);
-    pub fn wxGraphicsContext_CreateBrush(self_: *const c_void, brush: *const c_void)
-        -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_CreateLinearGradientBrush(self_: *const c_void, x1: wxDouble, y1: wxDouble, x2: wxDouble, y2: wxDouble, c1: *const c_void, c2: *const c_void, matrix: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_CreateLinearGradientBrush1(self_: *const c_void, x1: wxDouble, y1: wxDouble, x2: wxDouble, y2: wxDouble, stops: *const c_void, matrix: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_CreateRadialGradientBrush(self_: *const c_void, start_x: wxDouble, start_y: wxDouble, end_x: wxDouble, end_y: wxDouble, radius: wxDouble, o_color: *const c_void, c_color: *const c_void, matrix: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_CreateRadialGradientBrush1(self_: *mut c_void, start_x: wxDouble, start_y: wxDouble, end_x: wxDouble, end_y: wxDouble, radius: wxDouble, stops: *const c_void, matrix: *const c_void) -> *mut c_void;
-    pub fn wxGraphicsContext_SetBrush(self_: *mut c_void, brush: *const c_void);
-    pub fn wxGraphicsContext_SetBrush1(self_: *mut c_void, brush: *const c_void);
-    pub fn wxGraphicsContext_CreatePen(self_: *const c_void, pen: *const c_void) -> *mut c_void;
-    pub fn wxGraphicsContext_CreatePen1(self_: *const c_void, info: *const c_void) -> *mut c_void;
-    pub fn wxGraphicsContext_SetPen(self_: *mut c_void, pen: *const c_void);
-    pub fn wxGraphicsContext_SetPen1(self_: *mut c_void, pen: *const c_void);
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawBitmap(self_: *mut c_void, bmp: *const c_void, x: wxDouble, y: wxDouble, w: wxDouble, h: wxDouble);
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawBitmap1(self_: *mut c_void, bmp: *const c_void, x: wxDouble, y: wxDouble, w: wxDouble, h: wxDouble);
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawEllipse(self_: *mut c_void, x: wxDouble, y: wxDouble, w: wxDouble, h: wxDouble);
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawIcon(self_: *mut c_void, icon: *const c_void, x: wxDouble, y: wxDouble, w: wxDouble, h: wxDouble);
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawLines(self_: *mut c_void, n: usize, points: *const c_void, fill_style: wxPolygonFillMode);
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawPath(self_: *mut c_void, path: *const c_void, fill_style: wxPolygonFillMode);
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawRectangle(self_: *mut c_void, x: wxDouble, y: wxDouble, w: wxDouble, h: wxDouble);
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawRoundedRectangle(self_: *mut c_void, x: wxDouble, y: wxDouble, w: wxDouble, h: wxDouble, radius: wxDouble);
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawText(self_: *mut c_void, str: *const c_void, x: wxDouble, y: wxDouble);
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawText1(self_: *mut c_void, str: *const c_void, x: wxDouble, y: wxDouble, angle: wxDouble);
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawText2(self_: *mut c_void, str: *const c_void, x: wxDouble, y: wxDouble, background_brush: *const c_void);
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawText3(self_: *mut c_void, str: *const c_void, x: wxDouble, y: wxDouble, angle: wxDouble, background_brush: *const c_void);
-    pub fn wxGraphicsContext_CreatePath(self_: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_FillPath(self_: *mut c_void, path: *const c_void, fill_style: wxPolygonFillMode);
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_StrokeLine(self_: *mut c_void, x1: wxDouble, y1: wxDouble, x2: wxDouble, y2: wxDouble);
-    pub fn wxGraphicsContext_StrokeLines(
-        self_: *mut c_void,
-        n: usize,
-        begin_points: *const c_void,
-        end_points: *const c_void,
-    );
-    pub fn wxGraphicsContext_StrokeLines1(self_: *mut c_void, n: usize, points: *const c_void);
-    pub fn wxGraphicsContext_StrokePath(self_: *mut c_void, path: *const c_void);
-    pub fn wxGraphicsContext_CreateFont(
-        self_: *const c_void,
-        font: *const c_void,
-        col: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxGraphicsContext_CreateFont1(
-        self_: *const c_void,
-        size_in_pixels: c_double,
-        facename: *const c_void,
-        flags: c_int,
-        col: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxGraphicsContext_SetFont(
-        self_: *mut c_void,
-        font: *const c_void,
-        colour: *const c_void,
-    );
-    pub fn wxGraphicsContext_SetFont1(self_: *mut c_void, font: *const c_void);
-    pub fn wxGraphicsContext_GetPartialTextExtents(
-        self_: *const c_void,
-        text: *const c_void,
-        widths: *mut c_void,
-    );
-    pub fn wxGraphicsContext_GetTextExtent(
-        self_: *const c_void,
-        text: *const c_void,
-        width: *mut c_void,
-        height: *mut c_void,
-        descent: *mut c_void,
-        external_leading: *mut c_void,
-    );
-    pub fn wxGraphicsContext_StartDoc(self_: *mut c_void, message: *const c_void) -> bool;
-    pub fn wxGraphicsContext_EndDoc(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_StartPage(self_: *mut c_void, width: wxDouble, height: wxDouble);
-    pub fn wxGraphicsContext_EndPage(self_: *mut c_void);
-    pub fn wxGraphicsContext_CreateBitmap(self_: *mut c_void, bitmap: *const c_void)
-        -> *mut c_void;
-    pub fn wxGraphicsContext_CreateBitmapFromImage(
-        self_: *mut c_void,
-        image: *const c_void,
-    ) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_CreateSubBitmap(self_: *mut c_void, bitmap: *const c_void, x: wxDouble, y: wxDouble, w: wxDouble, h: wxDouble) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_BeginLayer(self_: *mut c_void, opacity: wxDouble);
-    pub fn wxGraphicsContext_EndLayer(self_: *mut c_void);
-    pub fn wxGraphicsContext_PushState(self_: *mut c_void);
-    pub fn wxGraphicsContext_PopState(self_: *mut c_void);
-    pub fn wxGraphicsContext_Flush(self_: *mut c_void);
-    pub fn wxGraphicsContext_GetNativeContext(self_: *mut c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_SetAntialiasMode(self_: *mut c_void, antialias: wxAntialiasMode) -> bool;
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_GetAntialiasMode(self_: *const c_void) -> wxAntialiasMode;
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_SetInterpolationQuality(self_: *mut c_void, interpolation: wxInterpolationQuality) -> bool;
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_GetInterpolationQuality(self_: *const c_void) -> wxInterpolationQuality;
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_SetCompositionMode(self_: *mut c_void, op: wxCompositionMode) -> bool;
-    // NOT_SUPPORTED: pub fn wxGraphicsContext_GetCompositionMode(self_: *const c_void) -> wxCompositionMode;
-    pub fn wxGraphicsContext_GetSize(self_: *const c_void, width: *mut c_void, height: *mut c_void);
-    pub fn wxGraphicsContext_GetDPI(self_: *const c_void, dpi_x: *mut c_void, dpi_y: *mut c_void);
-    pub fn wxGraphicsContext_GetWindow(self_: *const c_void) -> *mut c_void;
-    pub fn wxGraphicsContext_ShouldOffset(self_: *const c_void) -> bool;
-    pub fn wxGraphicsContext_EnableOffset(self_: *mut c_void, enable: bool);
-    pub fn wxGraphicsContext_DisableOffset(self_: *mut c_void);
-    pub fn wxGraphicsContext_OffsetEnabled(self_: *const c_void) -> bool;
-    pub fn wxGraphicsContext_FromDIP(self_: *const c_void, sz: *const c_void) -> *mut c_void;
-    pub fn wxGraphicsContext_FromDIP1(self_: *const c_void, pt: *const c_void) -> *mut c_void;
-    pub fn wxGraphicsContext_FromDIP2(self_: *const c_void, d: c_int) -> c_int;
-    pub fn wxGraphicsContext_ToDIP(self_: *const c_void, sz: *const c_void) -> *mut c_void;
-    pub fn wxGraphicsContext_ToDIP1(self_: *const c_void, pt: *const c_void) -> *mut c_void;
-    pub fn wxGraphicsContext_ToDIP2(self_: *const c_void, d: c_int) -> c_int;
 
     // wxGraphicsFont
     pub fn wxGraphicsFont_CLASSINFO() -> *mut c_void;
@@ -4717,97 +3091,6 @@ extern "C" {
     // wxGraphicsPen
     pub fn wxGraphicsPen_CLASSINFO() -> *mut c_void;
 
-    // wxGraphicsRenderer
-    pub fn wxGraphicsRenderer_CLASSINFO() -> *mut c_void;
-    pub fn wxGraphicsRenderer_CreateBitmap(
-        self_: *mut c_void,
-        bitmap: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxGraphicsRenderer_CreateBitmapFromImage(
-        self_: *mut c_void,
-        image: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxGraphicsRenderer_CreateImageFromBitmap(
-        self_: *mut c_void,
-        bmp: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxGraphicsRenderer_CreateBitmapFromNativeBitmap(
-        self_: *mut c_void,
-        bitmap: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxGraphicsRenderer_CreateContext(self_: *mut c_void, window: *mut c_void)
-        -> *mut c_void;
-    pub fn wxGraphicsRenderer_CreateContext1(
-        self_: *mut c_void,
-        window_dc: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxGraphicsRenderer_CreateContext2(
-        self_: *mut c_void,
-        memory_dc: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxGraphicsRenderer_CreateContext3(
-        self_: *mut c_void,
-        printer_dc: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxGraphicsRenderer_CreateContext4(
-        self_: *mut c_void,
-        meta_file_dc: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxGraphicsRenderer_CreateContextFromUnknownDC(
-        self_: *mut c_void,
-        dc: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxGraphicsRenderer_CreateContextFromImage(
-        self_: *mut c_void,
-        image: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxGraphicsRenderer_CreateBrush(self_: *mut c_void, brush: *const c_void) -> *mut c_void;
-    pub fn wxGraphicsRenderer_CreateContextFromNativeContext(
-        self_: *mut c_void,
-        context: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxGraphicsRenderer_CreateContextFromNativeWindow(
-        self_: *mut c_void,
-        window: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxGraphicsRenderer_CreateMeasuringContext(self_: *mut c_void) -> *mut c_void;
-    pub fn wxGraphicsRenderer_CreateFont(
-        self_: *mut c_void,
-        font: *const c_void,
-        col: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxGraphicsRenderer_CreateFont1(
-        self_: *mut c_void,
-        size_in_pixels: c_double,
-        facename: *const c_void,
-        flags: c_int,
-        col: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxGraphicsRenderer_CreateFontAtDPI(
-        self_: *mut c_void,
-        font: *const c_void,
-        dpi: *const c_void,
-        col: *const c_void,
-    ) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxGraphicsRenderer_CreateLinearGradientBrush(self_: *mut c_void, x1: wxDouble, y1: wxDouble, x2: wxDouble, y2: wxDouble, stops: *const c_void, matrix: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxGraphicsRenderer_CreateMatrix(self_: *mut c_void, a: wxDouble, b: wxDouble, c: wxDouble, d: wxDouble, tx: wxDouble, ty: wxDouble) -> *mut c_void;
-    pub fn wxGraphicsRenderer_CreatePath(self_: *mut c_void) -> *mut c_void;
-    pub fn wxGraphicsRenderer_CreatePen(self_: *mut c_void, info: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxGraphicsRenderer_CreateRadialGradientBrush(self_: *mut c_void, start_x: wxDouble, start_y: wxDouble, end_x: wxDouble, end_y: wxDouble, radius: wxDouble, stops: *const c_void, matrix: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxGraphicsRenderer_CreateSubBitmap(self_: *mut c_void, bitmap: *const c_void, x: wxDouble, y: wxDouble, w: wxDouble, h: wxDouble) -> *mut c_void;
-    pub fn wxGraphicsRenderer_GetName(self_: *const c_void) -> *mut c_void;
-    pub fn wxGraphicsRenderer_GetVersion(
-        self_: *const c_void,
-        major: *mut c_void,
-        minor: *mut c_void,
-        micro: *mut c_void,
-    );
-    // NOT_SUPPORTED: pub fn wxGraphicsRenderer_CreateContextFromNativeHDC(dc: WXHDC) -> *mut c_void;
-    pub fn wxGraphicsRenderer_GetDefaultRenderer() -> *mut c_void;
-    pub fn wxGraphicsRenderer_GetCairoRenderer() -> *mut c_void;
-    pub fn wxGraphicsRenderer_GetGDIPlusRenderer() -> *mut c_void;
-    pub fn wxGraphicsRenderer_GetDirect2DRenderer() -> *mut c_void;
-
     // wxGridBagSizer
     pub fn wxGridBagSizer_CLASSINFO() -> *mut c_void;
     pub fn wxGridBagSizer_new(vgap: c_int, hgap: c_int) -> *mut c_void;
@@ -4900,317 +3183,6 @@ extern "C" {
         span: *const c_void,
     ) -> bool;
 
-    // wxGridCellAttr
-    pub fn wxGridCellAttr_delete(self_: *mut c_void);
-    pub fn wxGridCellAttr_new(attr_default: *mut c_void) -> *mut c_void;
-    pub fn wxGridCellAttr_new1(
-        col_text: *const c_void,
-        col_back: *const c_void,
-        font: *const c_void,
-        h_align: c_int,
-        v_align: c_int,
-    ) -> *mut c_void;
-    pub fn wxGridCellAttr_Clone(self_: *const c_void) -> *mut c_void;
-    pub fn wxGridCellAttr_DecRef(self_: *mut c_void);
-    pub fn wxGridCellAttr_GetAlignment(
-        self_: *const c_void,
-        h_align: *mut c_void,
-        v_align: *mut c_void,
-    );
-    pub fn wxGridCellAttr_GetBackgroundColour(self_: *const c_void) -> *mut c_void;
-    pub fn wxGridCellAttr_GetEditor(
-        self_: *const c_void,
-        grid: *const c_void,
-        row: c_int,
-        col: c_int,
-    ) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxGridCellAttr_GetEditorPtr(self_: *const c_void, grid: *const c_void, row: c_int, col: c_int) -> wxGridCellEditorPtr;
-    pub fn wxGridCellAttr_GetFont(self_: *const c_void) -> *mut c_void;
-    pub fn wxGridCellAttr_GetNonDefaultAlignment(
-        self_: *const c_void,
-        h_align: *mut c_void,
-        v_align: *mut c_void,
-    );
-    pub fn wxGridCellAttr_GetRenderer(
-        self_: *const c_void,
-        grid: *const c_void,
-        row: c_int,
-        col: c_int,
-    ) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxGridCellAttr_GetRendererPtr(self_: *const c_void, grid: *const c_void, row: c_int, col: c_int) -> wxGridCellRendererPtr;
-    pub fn wxGridCellAttr_GetTextColour(self_: *const c_void) -> *mut c_void;
-    pub fn wxGridCellAttr_HasAlignment(self_: *const c_void) -> bool;
-    pub fn wxGridCellAttr_HasBackgroundColour(self_: *const c_void) -> bool;
-    pub fn wxGridCellAttr_HasEditor(self_: *const c_void) -> bool;
-    pub fn wxGridCellAttr_HasFont(self_: *const c_void) -> bool;
-    pub fn wxGridCellAttr_HasRenderer(self_: *const c_void) -> bool;
-    pub fn wxGridCellAttr_HasTextColour(self_: *const c_void) -> bool;
-    pub fn wxGridCellAttr_IncRef(self_: *mut c_void);
-    pub fn wxGridCellAttr_IsReadOnly(self_: *const c_void) -> bool;
-    pub fn wxGridCellAttr_SetAlignment(self_: *mut c_void, h_align: c_int, v_align: c_int);
-    pub fn wxGridCellAttr_SetBackgroundColour(self_: *mut c_void, col_back: *const c_void);
-    pub fn wxGridCellAttr_SetDefAttr(self_: *mut c_void, def_attr: *mut c_void);
-    pub fn wxGridCellAttr_SetEditor(self_: *mut c_void, editor: *mut c_void);
-    pub fn wxGridCellAttr_SetFont(self_: *mut c_void, font: *const c_void);
-    pub fn wxGridCellAttr_SetReadOnly(self_: *mut c_void, is_read_only: bool);
-    pub fn wxGridCellAttr_SetRenderer(self_: *mut c_void, renderer: *mut c_void);
-    pub fn wxGridCellAttr_SetTextColour(self_: *mut c_void, col_text: *const c_void);
-    pub fn wxGridCellAttr_MergeWith(self_: *mut c_void, mergefrom: *mut c_void);
-    pub fn wxGridCellAttr_SetSize(self_: *mut c_void, num_rows: c_int, num_cols: c_int);
-    pub fn wxGridCellAttr_SetFitMode(self_: *mut c_void, fit_mode: wxGridFitMode);
-    pub fn wxGridCellAttr_SetOverflow(self_: *mut c_void, allow: bool);
-    // NOT_SUPPORTED: pub fn wxGridCellAttr_SetKind(self_: *mut c_void, kind: wxAttrKind);
-    pub fn wxGridCellAttr_HasReadWriteMode(self_: *const c_void) -> bool;
-    pub fn wxGridCellAttr_HasOverflowMode(self_: *const c_void) -> bool;
-    pub fn wxGridCellAttr_HasSize(self_: *const c_void) -> bool;
-    pub fn wxGridCellAttr_GetSize(
-        self_: *const c_void,
-        num_rows: *mut c_void,
-        num_cols: *mut c_void,
-    );
-    pub fn wxGridCellAttr_GetFitMode(self_: *const c_void) -> *mut c_void;
-    pub fn wxGridCellAttr_GetOverflow(self_: *const c_void) -> bool;
-    pub fn wxGridCellAttr_CanOverflow(self_: *const c_void) -> bool;
-    // NOT_SUPPORTED: pub fn wxGridCellAttr_GetKind(self_: *mut c_void) -> wxAttrKind;
-    // Mix-in(s) to wxGridCellAttr
-    pub fn wxGridCellAttr_AsRefCounter(obj: *mut c_void) -> *mut c_void;
-
-    // wxGridCellAutoWrapStringEditor
-    pub fn wxGridCellAutoWrapStringEditor_delete(self_: *mut c_void);
-    pub fn wxGridCellAutoWrapStringEditor_new() -> *mut c_void;
-    // Mix-in(s) to wxGridCellAutoWrapStringEditor
-    pub fn wxGridCellAutoWrapStringEditor_AsRefCounter(obj: *mut c_void) -> *mut c_void;
-
-    // wxGridCellAutoWrapStringRenderer
-    pub fn wxGridCellAutoWrapStringRenderer_delete(self_: *mut c_void);
-    pub fn wxGridCellAutoWrapStringRenderer_new() -> *mut c_void;
-    // Mix-in(s) to wxGridCellAutoWrapStringRenderer
-    pub fn wxGridCellAutoWrapStringRenderer_AsRefCounter(obj: *mut c_void) -> *mut c_void;
-
-    // wxGridCellBoolEditor
-    pub fn wxGridCellBoolEditor_delete(self_: *mut c_void);
-    pub fn wxGridCellBoolEditor_new() -> *mut c_void;
-    pub fn wxGridCellBoolEditor_IsTrueValue(value: *const c_void) -> bool;
-    pub fn wxGridCellBoolEditor_UseStringValues(
-        value_true: *const c_void,
-        value_false: *const c_void,
-    );
-    // Mix-in(s) to wxGridCellBoolEditor
-    pub fn wxGridCellBoolEditor_AsRefCounter(obj: *mut c_void) -> *mut c_void;
-
-    // wxGridCellBoolRenderer
-    pub fn wxGridCellBoolRenderer_delete(self_: *mut c_void);
-    pub fn wxGridCellBoolRenderer_new() -> *mut c_void;
-    // Mix-in(s) to wxGridCellBoolRenderer
-    pub fn wxGridCellBoolRenderer_AsRefCounter(obj: *mut c_void) -> *mut c_void;
-
-    // wxGridCellChoiceEditor
-    pub fn wxGridCellChoiceEditor_delete(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxGridCellChoiceEditor_new(count: usize, choices: wxString, allow_others: bool) -> *mut c_void;
-    pub fn wxGridCellChoiceEditor_new1(choices: *const c_void, allow_others: bool) -> *mut c_void;
-    pub fn wxGridCellChoiceEditor_SetParameters(self_: *mut c_void, params: *const c_void);
-    // Mix-in(s) to wxGridCellChoiceEditor
-    pub fn wxGridCellChoiceEditor_AsRefCounter(obj: *mut c_void) -> *mut c_void;
-
-    // wxGridCellDateEditor
-    pub fn wxGridCellDateEditor_delete(self_: *mut c_void);
-    pub fn wxGridCellDateEditor_new(format: *const c_void) -> *mut c_void;
-    // Mix-in(s) to wxGridCellDateEditor
-    pub fn wxGridCellDateEditor_AsRefCounter(obj: *mut c_void) -> *mut c_void;
-
-    // wxGridCellDateRenderer
-    pub fn wxGridCellDateRenderer_delete(self_: *mut c_void);
-    pub fn wxGridCellDateRenderer_new(outformat: *const c_void) -> *mut c_void;
-    pub fn wxGridCellDateRenderer_SetParameters(self_: *mut c_void, params: *const c_void);
-    // Mix-in(s) to wxGridCellDateRenderer
-    pub fn wxGridCellDateRenderer_AsRefCounter(obj: *mut c_void) -> *mut c_void;
-
-    // wxGridCellDateTimeRenderer
-    pub fn wxGridCellDateTimeRenderer_delete(self_: *mut c_void);
-    pub fn wxGridCellDateTimeRenderer_new(
-        outformat: *const c_void,
-        informat: *const c_void,
-    ) -> *mut c_void;
-    // Mix-in(s) to wxGridCellDateTimeRenderer
-    pub fn wxGridCellDateTimeRenderer_AsRefCounter(obj: *mut c_void) -> *mut c_void;
-
-    // wxGridCellEditor
-    pub fn wxGridCellEditor_delete(self_: *mut c_void);
-    pub fn wxGridCellEditor_new() -> *mut c_void;
-    pub fn wxGridCellEditor_BeginEdit(
-        self_: *mut c_void,
-        row: c_int,
-        col: c_int,
-        grid: *mut c_void,
-    );
-    pub fn wxGridCellEditor_Clone(self_: *const c_void) -> *mut c_void;
-    pub fn wxGridCellEditor_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        id: c_int,
-        evt_handler: *mut c_void,
-    );
-    pub fn wxGridCellEditor_Destroy(self_: *mut c_void);
-    pub fn wxGridCellEditor_EndEdit(
-        self_: *mut c_void,
-        row: c_int,
-        col: c_int,
-        grid: *const c_void,
-        oldval: *const c_void,
-        newval: *mut c_void,
-    ) -> bool;
-    pub fn wxGridCellEditor_ApplyEdit(
-        self_: *mut c_void,
-        row: c_int,
-        col: c_int,
-        grid: *mut c_void,
-    );
-    pub fn wxGridCellEditor_HandleReturn(self_: *mut c_void, event: *mut c_void);
-    pub fn wxGridCellEditor_IsCreated(self_: *mut c_void) -> bool;
-    pub fn wxGridCellEditor_PaintBackground(
-        self_: *mut c_void,
-        dc: *mut c_void,
-        rect_cell: *const c_void,
-        attr: *const c_void,
-    );
-    pub fn wxGridCellEditor_Reset(self_: *mut c_void);
-    pub fn wxGridCellEditor_SetSize(self_: *mut c_void, rect: *const c_void);
-    pub fn wxGridCellEditor_Show(self_: *mut c_void, show: bool, attr: *mut c_void);
-    pub fn wxGridCellEditor_StartingClick(self_: *mut c_void);
-    pub fn wxGridCellEditor_StartingKey(self_: *mut c_void, event: *mut c_void);
-    pub fn wxGridCellEditor_IsAcceptedKey(self_: *mut c_void, event: *mut c_void) -> bool;
-    pub fn wxGridCellEditor_GetValue(self_: *const c_void) -> *mut c_void;
-    pub fn wxGridCellEditor_GetWindow(self_: *const c_void) -> *mut c_void;
-    pub fn wxGridCellEditor_SetWindow(self_: *mut c_void, window: *mut c_void);
-    pub fn wxGridCellEditor_GetControl(self_: *mut c_void) -> *mut c_void;
-    pub fn wxGridCellEditor_SetControl(self_: *mut c_void, control: *mut c_void);
-    pub fn wxGridCellEditor_TryActivate(
-        self_: *mut c_void,
-        row: c_int,
-        col: c_int,
-        grid: *mut c_void,
-        act_source: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxGridCellEditor_DoActivate(
-        self_: *mut c_void,
-        row: c_int,
-        col: c_int,
-        grid: *mut c_void,
-    );
-    // Mix-in(s) to wxGridCellEditor
-    pub fn wxGridCellEditor_AsRefCounter(obj: *mut c_void) -> *mut c_void;
-
-    // wxGridCellEnumEditor
-    pub fn wxGridCellEnumEditor_delete(self_: *mut c_void);
-    pub fn wxGridCellEnumEditor_new(choices: *const c_void) -> *mut c_void;
-    // Mix-in(s) to wxGridCellEnumEditor
-    pub fn wxGridCellEnumEditor_AsRefCounter(obj: *mut c_void) -> *mut c_void;
-
-    // wxGridCellEnumRenderer
-    pub fn wxGridCellEnumRenderer_delete(self_: *mut c_void);
-    pub fn wxGridCellEnumRenderer_new(choices: *const c_void) -> *mut c_void;
-    pub fn wxGridCellEnumRenderer_SetParameters(self_: *mut c_void, params: *const c_void);
-    // Mix-in(s) to wxGridCellEnumRenderer
-    pub fn wxGridCellEnumRenderer_AsRefCounter(obj: *mut c_void) -> *mut c_void;
-
-    // wxGridCellFloatEditor
-    pub fn wxGridCellFloatEditor_delete(self_: *mut c_void);
-    pub fn wxGridCellFloatEditor_new(width: c_int, precision: c_int, format: c_int) -> *mut c_void;
-    // Mix-in(s) to wxGridCellFloatEditor
-    pub fn wxGridCellFloatEditor_AsRefCounter(obj: *mut c_void) -> *mut c_void;
-
-    // wxGridCellFloatRenderer
-    pub fn wxGridCellFloatRenderer_delete(self_: *mut c_void);
-    pub fn wxGridCellFloatRenderer_new(
-        width: c_int,
-        precision: c_int,
-        format: c_int,
-    ) -> *mut c_void;
-    pub fn wxGridCellFloatRenderer_GetFormat(self_: *const c_void) -> c_int;
-    pub fn wxGridCellFloatRenderer_GetPrecision(self_: *const c_void) -> c_int;
-    pub fn wxGridCellFloatRenderer_GetWidth(self_: *const c_void) -> c_int;
-    pub fn wxGridCellFloatRenderer_SetFormat(self_: *mut c_void, format: c_int);
-    pub fn wxGridCellFloatRenderer_SetParameters(self_: *mut c_void, params: *const c_void);
-    pub fn wxGridCellFloatRenderer_SetPrecision(self_: *mut c_void, precision: c_int);
-    pub fn wxGridCellFloatRenderer_SetWidth(self_: *mut c_void, width: c_int);
-    // Mix-in(s) to wxGridCellFloatRenderer
-    pub fn wxGridCellFloatRenderer_AsRefCounter(obj: *mut c_void) -> *mut c_void;
-
-    // wxGridCellNumberEditor
-    pub fn wxGridCellNumberEditor_delete(self_: *mut c_void);
-    pub fn wxGridCellNumberEditor_new(min: c_int, max: c_int) -> *mut c_void;
-    // Mix-in(s) to wxGridCellNumberEditor
-    pub fn wxGridCellNumberEditor_AsRefCounter(obj: *mut c_void) -> *mut c_void;
-
-    // wxGridCellNumberRenderer
-    pub fn wxGridCellNumberRenderer_delete(self_: *mut c_void);
-    pub fn wxGridCellNumberRenderer_new() -> *mut c_void;
-    // Mix-in(s) to wxGridCellNumberRenderer
-    pub fn wxGridCellNumberRenderer_AsRefCounter(obj: *mut c_void) -> *mut c_void;
-
-    // wxGridCellRenderer
-    pub fn wxGridCellRenderer_delete(self_: *mut c_void);
-    pub fn wxGridCellRenderer_new() -> *mut c_void;
-    pub fn wxGridCellRenderer_Clone(self_: *const c_void) -> *mut c_void;
-    pub fn wxGridCellRenderer_Draw(
-        self_: *mut c_void,
-        grid: *mut c_void,
-        attr: *mut c_void,
-        dc: *mut c_void,
-        rect: *const c_void,
-        row: c_int,
-        col: c_int,
-        is_selected: bool,
-    );
-    pub fn wxGridCellRenderer_GetBestSize(
-        self_: *mut c_void,
-        grid: *mut c_void,
-        attr: *mut c_void,
-        dc: *mut c_void,
-        row: c_int,
-        col: c_int,
-    ) -> *mut c_void;
-    pub fn wxGridCellRenderer_GetBestHeight(
-        self_: *mut c_void,
-        grid: *mut c_void,
-        attr: *mut c_void,
-        dc: *mut c_void,
-        row: c_int,
-        col: c_int,
-        width: c_int,
-    ) -> c_int;
-    pub fn wxGridCellRenderer_GetBestWidth(
-        self_: *mut c_void,
-        grid: *mut c_void,
-        attr: *mut c_void,
-        dc: *mut c_void,
-        row: c_int,
-        col: c_int,
-        height: c_int,
-    ) -> c_int;
-    pub fn wxGridCellRenderer_GetMaxBestSize(
-        self_: *mut c_void,
-        grid: *mut c_void,
-        attr: *mut c_void,
-        dc: *mut c_void,
-    ) -> *mut c_void;
-    // Mix-in(s) to wxGridCellRenderer
-    pub fn wxGridCellRenderer_AsRefCounter(obj: *mut c_void) -> *mut c_void;
-
-    // wxGridCellStringRenderer
-    pub fn wxGridCellStringRenderer_delete(self_: *mut c_void);
-    pub fn wxGridCellStringRenderer_new() -> *mut c_void;
-    // Mix-in(s) to wxGridCellStringRenderer
-    pub fn wxGridCellStringRenderer_AsRefCounter(obj: *mut c_void) -> *mut c_void;
-
-    // wxGridCellTextEditor
-    pub fn wxGridCellTextEditor_delete(self_: *mut c_void);
-    pub fn wxGridCellTextEditor_new(max_chars: usize) -> *mut c_void;
-    pub fn wxGridCellTextEditor_SetParameters(self_: *mut c_void, params: *const c_void);
-    pub fn wxGridCellTextEditor_SetValidator(self_: *mut c_void, validator: *const c_void);
-    // Mix-in(s) to wxGridCellTextEditor
-    pub fn wxGridCellTextEditor_AsRefCounter(obj: *mut c_void) -> *mut c_void;
-
     // wxGridEditorCreatedEvent
     pub fn wxGridEditorCreatedEvent_CLASSINFO() -> *mut c_void;
     pub fn wxGridEditorCreatedEvent_new() -> *mut c_void;
@@ -5292,150 +3264,11 @@ extern "C" {
     pub fn wxGridSizer_SetRows(self_: *mut c_void, rows: c_int);
     pub fn wxGridSizer_SetVGap(self_: *mut c_void, gap: c_int);
 
-    // wxGridTableBase
-    pub fn wxGridTableBase_CLASSINFO() -> *mut c_void;
-    pub fn wxGridTableBase_IsEmptyCell(self_: *mut c_void, row: c_int, col: c_int) -> bool;
-    pub fn wxGridTableBase_IsEmpty(self_: *mut c_void, coords: *const c_void) -> bool;
-    pub fn wxGridTableBase_GetValue(self_: *mut c_void, row: c_int, col: c_int) -> *mut c_void;
-    pub fn wxGridTableBase_SetValue(
-        self_: *mut c_void,
-        row: c_int,
-        col: c_int,
-        value: *const c_void,
-    );
-    pub fn wxGridTableBase_GetTypeName(self_: *mut c_void, row: c_int, col: c_int) -> *mut c_void;
-    pub fn wxGridTableBase_CanGetValueAs(
-        self_: *mut c_void,
-        row: c_int,
-        col: c_int,
-        type_name: *const c_void,
-    ) -> bool;
-    pub fn wxGridTableBase_CanSetValueAs(
-        self_: *mut c_void,
-        row: c_int,
-        col: c_int,
-        type_name: *const c_void,
-    ) -> bool;
-    pub fn wxGridTableBase_GetValueAsLong(self_: *mut c_void, row: c_int, col: c_int) -> c_long;
-    pub fn wxGridTableBase_GetValueAsDouble(self_: *mut c_void, row: c_int, col: c_int)
-        -> c_double;
-    pub fn wxGridTableBase_GetValueAsBool(self_: *mut c_void, row: c_int, col: c_int) -> bool;
-    pub fn wxGridTableBase_GetValueAsCustom(
-        self_: *mut c_void,
-        row: c_int,
-        col: c_int,
-        type_name: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxGridTableBase_SetValueAsLong(
-        self_: *mut c_void,
-        row: c_int,
-        col: c_int,
-        value: c_long,
-    );
-    pub fn wxGridTableBase_SetValueAsDouble(
-        self_: *mut c_void,
-        row: c_int,
-        col: c_int,
-        value: c_double,
-    );
-    pub fn wxGridTableBase_SetValueAsBool(self_: *mut c_void, row: c_int, col: c_int, value: bool);
-    pub fn wxGridTableBase_SetValueAsCustom(
-        self_: *mut c_void,
-        row: c_int,
-        col: c_int,
-        type_name: *const c_void,
-        value: *mut c_void,
-    );
-    pub fn wxGridTableBase_SetView(self_: *mut c_void, grid: *mut c_void);
-    pub fn wxGridTableBase_GetView(self_: *const c_void) -> *mut c_void;
-    pub fn wxGridTableBase_Clear(self_: *mut c_void);
-    pub fn wxGridTableBase_InsertRows(self_: *mut c_void, pos: usize, num_rows: usize) -> bool;
-    pub fn wxGridTableBase_AppendRows(self_: *mut c_void, num_rows: usize) -> bool;
-    pub fn wxGridTableBase_DeleteRows(self_: *mut c_void, pos: usize, num_rows: usize) -> bool;
-    pub fn wxGridTableBase_InsertCols(self_: *mut c_void, pos: usize, num_cols: usize) -> bool;
-    pub fn wxGridTableBase_AppendCols(self_: *mut c_void, num_cols: usize) -> bool;
-    pub fn wxGridTableBase_DeleteCols(self_: *mut c_void, pos: usize, num_cols: usize) -> bool;
-    pub fn wxGridTableBase_GetRowLabelValue(self_: *mut c_void, row: c_int) -> *mut c_void;
-    pub fn wxGridTableBase_GetColLabelValue(self_: *mut c_void, col: c_int) -> *mut c_void;
-    pub fn wxGridTableBase_GetCornerLabelValue(self_: *const c_void) -> *mut c_void;
-    pub fn wxGridTableBase_SetRowLabelValue(self_: *mut c_void, row: c_int, label: *const c_void);
-    pub fn wxGridTableBase_SetColLabelValue(self_: *mut c_void, col: c_int, label: *const c_void);
-    // BLOCKED: pub fn wxGridTableBase_SetCornerLabelValue(self_: *mut c_void, None: *const c_void);
-    pub fn wxGridTableBase_SetAttrProvider(self_: *mut c_void, attr_provider: *mut c_void);
-    pub fn wxGridTableBase_GetAttrProvider(self_: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxGridTableBase_GetAttr(self_: *mut c_void, row: c_int, col: c_int, kind: wxGridCellAttr::wxAttrKind) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxGridTableBase_GetAttrPtr(self_: *mut c_void, row: c_int, col: c_int, kind: wxGridCellAttr::wxAttrKind) -> wxGridCellAttrPtr;
-    pub fn wxGridTableBase_SetAttr(self_: *mut c_void, attr: *mut c_void, row: c_int, col: c_int);
-    pub fn wxGridTableBase_SetRowAttr(self_: *mut c_void, attr: *mut c_void, row: c_int);
-    pub fn wxGridTableBase_SetColAttr(self_: *mut c_void, attr: *mut c_void, col: c_int);
-    pub fn wxGridTableBase_CanHaveAttributes(self_: *mut c_void) -> bool;
-    pub fn wxGridTableBase_CanMeasureColUsingSameAttr(self_: *const c_void, col: c_int) -> bool;
-    pub fn wxGridTableBase_new() -> *mut c_void;
-    // DTOR: pub fn wxGridTableBase_~wxGridTableBase(self_: *mut c_void);
-    pub fn wxGridTableBase_GetNumberRows(self_: *mut c_void) -> c_int;
-    pub fn wxGridTableBase_GetNumberCols(self_: *mut c_void) -> c_int;
-    pub fn wxGridTableBase_GetRowsCount(self_: *const c_void) -> c_int;
-    pub fn wxGridTableBase_GetColsCount(self_: *const c_void) -> c_int;
-
     // wxGridUpdateLocker
     pub fn wxGridUpdateLocker_delete(self_: *mut c_void);
     pub fn wxGridUpdateLocker_new(grid: *mut c_void) -> *mut c_void;
     // DTOR: pub fn wxGridUpdateLocker_~wxGridUpdateLocker(self_: *mut c_void);
     pub fn wxGridUpdateLocker_Create(self_: *mut c_void, grid: *mut c_void);
-
-    // wxHScrolledWindow
-    pub fn wxHScrolledWindow_CLASSINFO() -> *mut c_void;
-    pub fn wxHScrolledWindow_new() -> *mut c_void;
-    pub fn wxHScrolledWindow_new1(
-        parent: *mut c_void,
-        id: c_int,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxHScrolledWindow_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        id: c_int,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> bool;
-    // Mix-in(s) to wxHScrolledWindow
-    pub fn wxHScrolledWindow_AsVarHScrollHelper(obj: *mut c_void) -> *mut c_void;
-    pub fn wxHScrolledWindow_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
-    // wxHTMLDataObject
-    pub fn wxHTMLDataObject_delete(self_: *mut c_void);
-    pub fn wxHTMLDataObject_new(html: *const c_void) -> *mut c_void;
-    pub fn wxHTMLDataObject_GetHTML(self_: *const c_void) -> *mut c_void;
-    pub fn wxHTMLDataObject_SetHTML(self_: *mut c_void, html: *const c_void);
-
-    // wxHVScrolledWindow
-    pub fn wxHVScrolledWindow_CLASSINFO() -> *mut c_void;
-    pub fn wxHVScrolledWindow_new() -> *mut c_void;
-    pub fn wxHVScrolledWindow_new1(
-        parent: *mut c_void,
-        id: c_int,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxHVScrolledWindow_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        id: c_int,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> bool;
-    // Mix-in(s) to wxHVScrolledWindow
-    pub fn wxHVScrolledWindow_AsVarHVScrollHelper(obj: *mut c_void) -> *mut c_void;
-    pub fn wxHVScrolledWindow_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxHeaderColumn
     pub fn wxHeaderColumn_delete(self_: *mut c_void);
@@ -5541,46 +3374,6 @@ extern "C" {
     // Mix-in(s) to wxHeaderCtrlSimple
     pub fn wxHeaderCtrlSimple_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
-    // wxHelpController
-    pub fn wxHelpController_CLASSINFO() -> *mut c_void;
-    pub fn wxHelpController_new(parent_window: *mut c_void) -> *mut c_void;
-
-    // wxHelpControllerBase
-    pub fn wxHelpControllerBase_CLASSINFO() -> *mut c_void;
-    pub fn wxHelpControllerBase_new(parent_window: *mut c_void) -> *mut c_void;
-    // DTOR: pub fn wxHelpControllerBase_~wxHelpControllerBase(self_: *mut c_void);
-    pub fn wxHelpControllerBase_DisplayBlock(self_: *mut c_void, block_no: c_long) -> bool;
-    pub fn wxHelpControllerBase_DisplayContents(self_: *mut c_void) -> bool;
-    pub fn wxHelpControllerBase_DisplayContextPopup(self_: *mut c_void, context_id: c_int) -> bool;
-    pub fn wxHelpControllerBase_DisplaySection(self_: *mut c_void, section: *const c_void) -> bool;
-    pub fn wxHelpControllerBase_DisplaySection1(self_: *mut c_void, section_no: c_int) -> bool;
-    pub fn wxHelpControllerBase_DisplayTextPopup(
-        self_: *mut c_void,
-        text: *const c_void,
-        pos: *const c_void,
-    ) -> bool;
-    pub fn wxHelpControllerBase_GetFrameParameters(
-        self_: *mut c_void,
-        size: *mut c_void,
-        pos: *mut c_void,
-        new_frame_each_time: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxHelpControllerBase_GetParentWindow(self_: *const c_void) -> *mut c_void;
-    pub fn wxHelpControllerBase_Initialize(self_: *mut c_void, file: *const c_void) -> bool;
-    // NOT_SUPPORTED: pub fn wxHelpControllerBase_KeywordSearch(self_: *mut c_void, key_word: *const c_void, mode: wxHelpSearchMode) -> bool;
-    pub fn wxHelpControllerBase_LoadFile(self_: *mut c_void, file: *const c_void) -> bool;
-    pub fn wxHelpControllerBase_OnQuit(self_: *mut c_void);
-    pub fn wxHelpControllerBase_Quit(self_: *mut c_void) -> bool;
-    pub fn wxHelpControllerBase_SetFrameParameters(
-        self_: *mut c_void,
-        title_format: *const c_void,
-        size: *const c_void,
-        pos: *const c_void,
-        new_frame_each_time: bool,
-    );
-    pub fn wxHelpControllerBase_SetParentWindow(self_: *mut c_void, parent_window: *mut c_void);
-    pub fn wxHelpControllerBase_SetViewer(self_: *mut c_void, viewer: *const c_void, flags: c_long);
-
     // wxHelpControllerHelpProvider
     pub fn wxHelpControllerHelpProvider_delete(self_: *mut c_void);
     pub fn wxHelpControllerHelpProvider_new(hc: *mut c_void) -> *mut c_void;
@@ -5654,10 +3447,6 @@ extern "C" {
     pub fn wxHyperlinkEvent_GetURL(self_: *const c_void) -> *mut c_void;
     pub fn wxHyperlinkEvent_SetURL(self_: *mut c_void, url: *const c_void);
 
-    // wxIFFHandler
-    pub fn wxIFFHandler_CLASSINFO() -> *mut c_void;
-    pub fn wxIFFHandler_new() -> *mut c_void;
-
     // wxIcon
     pub fn wxIcon_CLASSINFO() -> *mut c_void;
     pub fn wxIcon_new() -> *mut c_void;
@@ -5713,274 +3502,10 @@ extern "C" {
     pub fn wxIconBundle_IsEmpty(self_: *const c_void) -> bool;
     // BLOCKED: pub fn wxIconBundle_operator=(self_: *mut c_void, ic: *const c_void) -> *mut c_void;
 
-    // wxIconizeEvent
-    pub fn wxIconizeEvent_CLASSINFO() -> *mut c_void;
-    pub fn wxIconizeEvent_new(id: c_int, iconized: bool) -> *mut c_void;
-    pub fn wxIconizeEvent_IsIconized(self_: *const c_void) -> bool;
-    pub fn wxIconizeEvent_Iconized(self_: *const c_void) -> bool;
-
     // wxIdManager
     pub fn wxIdManager_delete(self_: *mut c_void);
     pub fn wxIdManager_ReserveId(count: c_int) -> c_int;
     pub fn wxIdManager_UnreserveId(id: c_int, count: c_int);
-
-    // wxImage
-    pub fn wxImage_CLASSINFO() -> *mut c_void;
-    pub fn wxImage_Copy(self_: *const c_void) -> *mut c_void;
-    pub fn wxImage_Create(self_: *mut c_void, width: c_int, height: c_int, clear: bool) -> bool;
-    pub fn wxImage_Create1(self_: *mut c_void, sz: *const c_void, clear: bool) -> bool;
-    pub fn wxImage_Create2(
-        self_: *mut c_void,
-        width: c_int,
-        height: c_int,
-        data: *mut c_void,
-        static_data: bool,
-    ) -> bool;
-    pub fn wxImage_Create3(
-        self_: *mut c_void,
-        sz: *const c_void,
-        data: *mut c_void,
-        static_data: bool,
-    ) -> bool;
-    pub fn wxImage_Create4(
-        self_: *mut c_void,
-        width: c_int,
-        height: c_int,
-        data: *mut c_void,
-        alpha: *mut c_void,
-        static_data: bool,
-    ) -> bool;
-    pub fn wxImage_Create5(
-        self_: *mut c_void,
-        sz: *const c_void,
-        data: *mut c_void,
-        alpha: *mut c_void,
-        static_data: bool,
-    ) -> bool;
-    // NOT_SUPPORTED: pub fn wxImage_Clear(self_: *mut c_void, value: unsigned char);
-    pub fn wxImage_Destroy(self_: *mut c_void);
-    pub fn wxImage_InitAlpha(self_: *mut c_void);
-    pub fn wxImage_Blur(self_: *const c_void, blur_radius: c_int) -> *mut c_void;
-    pub fn wxImage_BlurHorizontal(self_: *const c_void, blur_radius: c_int) -> *mut c_void;
-    pub fn wxImage_BlurVertical(self_: *const c_void, blur_radius: c_int) -> *mut c_void;
-    pub fn wxImage_Mirror(self_: *const c_void, horizontally: bool) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxImage_Paste(self_: *mut c_void, image: *const c_void, x: c_int, y: c_int, alpha_blend: wxImageAlphaBlendMode);
-    // NOT_SUPPORTED: pub fn wxImage_Replace(self_: *mut c_void, r1: unsigned char, g1: unsigned char, b1: unsigned char, r2: unsigned char, g2: unsigned char, b2: unsigned char);
-    // NOT_SUPPORTED: pub fn wxImage_Rescale(self_: *mut c_void, width: c_int, height: c_int, quality: wxImageResizeQuality) -> *mut c_void;
-    pub fn wxImage_Resize(
-        self_: *mut c_void,
-        size: *const c_void,
-        pos: *const c_void,
-        red: c_int,
-        green: c_int,
-        blue: c_int,
-    ) -> *mut c_void;
-    pub fn wxImage_Rotate(
-        self_: *const c_void,
-        angle: c_double,
-        rotation_centre: *const c_void,
-        interpolating: bool,
-        offset_after_rotation: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxImage_Rotate90(self_: *const c_void, clockwise: bool) -> *mut c_void;
-    pub fn wxImage_Rotate180(self_: *const c_void) -> *mut c_void;
-    pub fn wxImage_RotateHue(self_: *mut c_void, angle: c_double);
-    pub fn wxImage_ChangeSaturation(self_: *mut c_void, factor: c_double);
-    pub fn wxImage_ChangeBrightness(self_: *mut c_void, factor: c_double);
-    pub fn wxImage_ChangeHSV(
-        self_: *mut c_void,
-        angle_h: c_double,
-        factor_s: c_double,
-        factor_v: c_double,
-    );
-    // NOT_SUPPORTED: pub fn wxImage_Scale(self_: *const c_void, width: c_int, height: c_int, quality: wxImageResizeQuality) -> *mut c_void;
-    pub fn wxImage_Size(
-        self_: *const c_void,
-        size: *const c_void,
-        pos: *const c_void,
-        red: c_int,
-        green: c_int,
-        blue: c_int,
-    ) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxImage_ConvertAlphaToMask(self_: *mut c_void, threshold: unsigned char) -> bool;
-    // NOT_SUPPORTED: pub fn wxImage_ConvertAlphaToMask1(self_: *mut c_void, mr: unsigned char, mg: unsigned char, mb: unsigned char, threshold: unsigned char) -> bool;
-    pub fn wxImage_ConvertToGreyscale(
-        self_: *const c_void,
-        weight_r: c_double,
-        weight_g: c_double,
-        weight_b: c_double,
-    ) -> *mut c_void;
-    pub fn wxImage_ConvertToGreyscale1(self_: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxImage_ConvertToMono(self_: *const c_void, r: unsigned char, g: unsigned char, b: unsigned char) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxImage_ConvertToDisabled(self_: *const c_void, brightness: unsigned char) -> *mut c_void;
-    pub fn wxImage_ChangeLightness(self_: *const c_void, alpha: c_int) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxImage_ComputeHistogram(self_: *const c_void, histogram: *mut c_void) -> unsigned long;
-    // NOT_SUPPORTED: pub fn wxImage_FindFirstUnusedColour(self_: *const c_void, r: *mut c_void, g: *mut c_void, b: *mut c_void, start_r: unsigned char, start_g: unsigned char, start_b: unsigned char) -> bool;
-    // BLOCKED: pub fn wxImage_operator=(self_: *mut c_void, image: *const c_void) -> *mut c_void;
-    pub fn wxImage_GetAlpha(self_: *const c_void) -> *mut c_void;
-    pub fn wxImage_GetData(self_: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxImage_GetAlpha1(self_: *const c_void, x: c_int, y: c_int) -> unsigned char;
-    // NOT_SUPPORTED: pub fn wxImage_GetRed(self_: *const c_void, x: c_int, y: c_int) -> unsigned char;
-    // NOT_SUPPORTED: pub fn wxImage_GetGreen(self_: *const c_void, x: c_int, y: c_int) -> unsigned char;
-    // NOT_SUPPORTED: pub fn wxImage_GetBlue(self_: *const c_void, x: c_int, y: c_int) -> unsigned char;
-    // NOT_SUPPORTED: pub fn wxImage_GetMaskRed(self_: *const c_void) -> unsigned char;
-    // NOT_SUPPORTED: pub fn wxImage_GetMaskGreen(self_: *const c_void) -> unsigned char;
-    // NOT_SUPPORTED: pub fn wxImage_GetMaskBlue(self_: *const c_void) -> unsigned char;
-    pub fn wxImage_GetWidth(self_: *const c_void) -> c_int;
-    pub fn wxImage_GetHeight(self_: *const c_void) -> c_int;
-    pub fn wxImage_GetSize(self_: *const c_void) -> *mut c_void;
-    pub fn wxImage_GetOption(self_: *const c_void, name: *const c_void) -> *mut c_void;
-    pub fn wxImage_GetOptionInt(self_: *const c_void, name: *const c_void) -> c_int;
-    pub fn wxImage_GetOrFindMaskColour(
-        self_: *const c_void,
-        r: *mut c_void,
-        g: *mut c_void,
-        b: *mut c_void,
-    ) -> bool;
-    pub fn wxImage_GetPalette(self_: *const c_void) -> *mut c_void;
-    pub fn wxImage_GetSubImage(self_: *const c_void, rect: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxImage_GetType(self_: *const c_void) -> wxBitmapType;
-    pub fn wxImage_HasAlpha(self_: *const c_void) -> bool;
-    pub fn wxImage_HasMask(self_: *const c_void) -> bool;
-    pub fn wxImage_HasOption(self_: *const c_void, name: *const c_void) -> bool;
-    pub fn wxImage_IsOk(self_: *const c_void) -> bool;
-    // NOT_SUPPORTED: pub fn wxImage_IsTransparent(self_: *const c_void, x: c_int, y: c_int, threshold: unsigned char) -> bool;
-    // NOT_SUPPORTED: pub fn wxImage_LoadFile(self_: *mut c_void, stream: *mut c_void, type_: wxBitmapType, index: c_int) -> bool;
-    // NOT_SUPPORTED: pub fn wxImage_LoadFile1(self_: *mut c_void, name: *const c_void, type_: wxBitmapType, index: c_int) -> bool;
-    pub fn wxImage_LoadFile2(
-        self_: *mut c_void,
-        name: *const c_void,
-        mimetype: *const c_void,
-        index: c_int,
-    ) -> bool;
-    pub fn wxImage_LoadFile3(
-        self_: *mut c_void,
-        stream: *mut c_void,
-        mimetype: *const c_void,
-        index: c_int,
-    ) -> bool;
-    pub fn wxImage_SaveFile(
-        self_: *const c_void,
-        stream: *mut c_void,
-        mimetype: *const c_void,
-    ) -> bool;
-    // NOT_SUPPORTED: pub fn wxImage_SaveFile1(self_: *const c_void, name: *const c_void, type_: wxBitmapType) -> bool;
-    pub fn wxImage_SaveFile2(
-        self_: *const c_void,
-        name: *const c_void,
-        mimetype: *const c_void,
-    ) -> bool;
-    pub fn wxImage_SaveFile3(self_: *const c_void, name: *const c_void) -> bool;
-    // NOT_SUPPORTED: pub fn wxImage_SaveFile4(self_: *const c_void, stream: *mut c_void, type_: wxBitmapType) -> bool;
-    pub fn wxImage_SetAlpha(self_: *mut c_void, alpha: *mut c_void, static_data: bool);
-    // NOT_SUPPORTED: pub fn wxImage_SetAlpha1(self_: *mut c_void, x: c_int, y: c_int, alpha: unsigned char);
-    pub fn wxImage_ClearAlpha(self_: *mut c_void);
-    pub fn wxImage_SetData(self_: *mut c_void, data: *mut c_void, static_data: bool);
-    pub fn wxImage_SetData1(
-        self_: *mut c_void,
-        data: *mut c_void,
-        new_width: c_int,
-        new_height: c_int,
-        static_data: bool,
-    );
-    pub fn wxImage_SetLoadFlags(self_: *mut c_void, flags: c_int);
-    pub fn wxImage_SetMask(self_: *mut c_void, has_mask: bool);
-    // NOT_SUPPORTED: pub fn wxImage_SetMaskColour(self_: *mut c_void, red: unsigned char, green: unsigned char, blue: unsigned char);
-    // NOT_SUPPORTED: pub fn wxImage_SetMaskFromImage(self_: *mut c_void, mask: *const c_void, mr: unsigned char, mg: unsigned char, mb: unsigned char) -> bool;
-    pub fn wxImage_SetOption(self_: *mut c_void, name: *const c_void, value: *const c_void);
-    pub fn wxImage_SetOption1(self_: *mut c_void, name: *const c_void, value: c_int);
-    pub fn wxImage_SetPalette(self_: *mut c_void, palette: *const c_void);
-    // NOT_SUPPORTED: pub fn wxImage_SetRGB(self_: *mut c_void, x: c_int, y: c_int, r: unsigned char, g: unsigned char, b: unsigned char);
-    // NOT_SUPPORTED: pub fn wxImage_SetRGB1(self_: *mut c_void, rect: *const c_void, red: unsigned char, green: unsigned char, blue: unsigned char);
-    // NOT_SUPPORTED: pub fn wxImage_SetType(self_: *mut c_void, type_: wxBitmapType);
-    pub fn wxImage_SetDefaultLoadFlags(flags: c_int);
-    pub fn wxImage_GetLoadFlags(self_: *const c_void) -> c_int;
-    pub fn wxImage_AddHandler(handler: *mut c_void);
-    pub fn wxImage_CleanUpHandlers();
-    pub fn wxImage_FindHandler(name: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxImage_FindHandler1(extension: *const c_void, image_type: wxBitmapType) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxImage_FindHandler2(image_type: wxBitmapType) -> *mut c_void;
-    pub fn wxImage_FindHandlerMime(mimetype: *const c_void) -> *mut c_void;
-    pub fn wxImage_GetHandlers() -> *mut c_void;
-    pub fn wxImage_InitStandardHandlers();
-    pub fn wxImage_InsertHandler(handler: *mut c_void);
-    pub fn wxImage_RemoveHandler(name: *const c_void) -> bool;
-    pub fn wxImage_CanRead(filename: *const c_void) -> bool;
-    pub fn wxImage_CanRead1(stream: *mut c_void) -> bool;
-    pub fn wxImage_GetDefaultLoadFlags() -> c_int;
-    // NOT_SUPPORTED: pub fn wxImage_GetImageCount(filename: *const c_void, type_: wxBitmapType) -> c_int;
-    // NOT_SUPPORTED: pub fn wxImage_GetImageCount1(stream: *mut c_void, type_: wxBitmapType) -> c_int;
-    pub fn wxImage_GetImageExtWildcard() -> *mut c_void;
-    pub fn wxImage_RGBtoHSV(rgb: *const c_void) -> *mut c_void;
-    pub fn wxImage_HSVtoRGB(hsv: *const c_void) -> *mut c_void;
-    pub fn wxImage_new() -> *mut c_void;
-    pub fn wxImage_new1(width: c_int, height: c_int, clear: bool) -> *mut c_void;
-    pub fn wxImage_new2(sz: *const c_void, clear: bool) -> *mut c_void;
-    pub fn wxImage_new3(
-        width: c_int,
-        height: c_int,
-        data: *mut c_void,
-        static_data: bool,
-    ) -> *mut c_void;
-    pub fn wxImage_new4(sz: *const c_void, data: *mut c_void, static_data: bool) -> *mut c_void;
-    pub fn wxImage_new5(
-        width: c_int,
-        height: c_int,
-        data: *mut c_void,
-        alpha: *mut c_void,
-        static_data: bool,
-    ) -> *mut c_void;
-    pub fn wxImage_new6(
-        sz: *const c_void,
-        data: *mut c_void,
-        alpha: *mut c_void,
-        static_data: bool,
-    ) -> *mut c_void;
-    pub fn wxImage_new7(xpm_data: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxImage_new8(name: *const c_void, type_: wxBitmapType, index: c_int) -> *mut c_void;
-    pub fn wxImage_new9(name: *const c_void, mimetype: *const c_void, index: c_int) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxImage_new10(stream: *mut c_void, type_: wxBitmapType, index: c_int) -> *mut c_void;
-    pub fn wxImage_new11(stream: *mut c_void, mimetype: *const c_void, index: c_int)
-        -> *mut c_void;
-    // DTOR: pub fn wxImage_~wxImage(self_: *mut c_void);
-
-    // wxImageDataObject
-    pub fn wxImageDataObject_delete(self_: *mut c_void);
-    pub fn wxImageDataObject_new(image: *const c_void) -> *mut c_void;
-    pub fn wxImageDataObject_GetImage(self_: *const c_void) -> *mut c_void;
-    pub fn wxImageDataObject_SetImage(self_: *mut c_void, image: *const c_void);
-
-    // wxImageHandler
-    pub fn wxImageHandler_CLASSINFO() -> *mut c_void;
-    pub fn wxImageHandler_new() -> *mut c_void;
-    // DTOR: pub fn wxImageHandler_~wxImageHandler(self_: *mut c_void);
-    pub fn wxImageHandler_CanRead(self_: *mut c_void, stream: *mut c_void) -> bool;
-    pub fn wxImageHandler_CanRead1(self_: *mut c_void, filename: *const c_void) -> bool;
-    pub fn wxImageHandler_GetExtension(self_: *const c_void) -> *mut c_void;
-    pub fn wxImageHandler_GetAltExtensions(self_: *const c_void) -> *mut c_void;
-    pub fn wxImageHandler_GetImageCount(self_: *mut c_void, stream: *mut c_void) -> c_int;
-    pub fn wxImageHandler_GetMimeType(self_: *const c_void) -> *mut c_void;
-    pub fn wxImageHandler_GetName(self_: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxImageHandler_GetType(self_: *const c_void) -> wxBitmapType;
-    pub fn wxImageHandler_LoadFile(
-        self_: *mut c_void,
-        image: *mut c_void,
-        stream: *mut c_void,
-        verbose: bool,
-        index: c_int,
-    ) -> bool;
-    pub fn wxImageHandler_SaveFile(
-        self_: *mut c_void,
-        image: *mut c_void,
-        stream: *mut c_void,
-        verbose: bool,
-    ) -> bool;
-    pub fn wxImageHandler_SetExtension(self_: *mut c_void, extension: *const c_void);
-    pub fn wxImageHandler_SetAltExtensions(self_: *mut c_void, extensions: *const c_void);
-    pub fn wxImageHandler_SetMimeType(self_: *mut c_void, mimetype: *const c_void);
-    pub fn wxImageHandler_SetName(self_: *mut c_void, name: *const c_void);
-    // NOT_SUPPORTED: pub fn wxImageHandler_SetType(self_: *mut c_void, type_: wxBitmapType);
-    pub fn wxImageHandler_GetLibraryVersionInfo() -> *mut c_void;
 
     // wxImageList
     pub fn wxImageList_CLASSINFO() -> *mut c_void;
@@ -6216,11 +3741,6 @@ extern "C" {
         string: *const c_void,
         case_sensitive: bool,
     ) -> c_int;
-
-    // wxJPEGHandler
-    pub fn wxJPEGHandler_CLASSINFO() -> *mut c_void;
-    pub fn wxJPEGHandler_new() -> *mut c_void;
-    pub fn wxJPEGHandler_GetLibraryVersionInfo() -> *mut c_void;
 
     // wxJoystick
     pub fn wxJoystick_CLASSINFO() -> *mut c_void;
@@ -7058,49 +4578,6 @@ extern "C" {
     // BLOCKED: pub fn wxMenuItem_GetLabelFromText(text: *const c_void) -> wxString;
     pub fn wxMenuItem_GetLabelText(text: *const c_void) -> *mut c_void;
 
-    // wxMessageDialog
-    pub fn wxMessageDialog_CLASSINFO() -> *mut c_void;
-    pub fn wxMessageDialog_new(
-        parent: *mut c_void,
-        message: *const c_void,
-        caption: *const c_void,
-        style: c_long,
-        pos: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxMessageDialog_SetExtendedMessage(self_: *mut c_void, extended_message: *const c_void);
-    pub fn wxMessageDialog_SetHelpLabel(self_: *mut c_void, help: *const c_void) -> bool;
-    pub fn wxMessageDialog_SetMessage(self_: *mut c_void, message: *const c_void);
-    pub fn wxMessageDialog_SetOKCancelLabels(
-        self_: *mut c_void,
-        ok: *const c_void,
-        cancel: *const c_void,
-    ) -> bool;
-    pub fn wxMessageDialog_SetOKLabel(self_: *mut c_void, ok: *const c_void) -> bool;
-    pub fn wxMessageDialog_SetYesNoCancelLabels(
-        self_: *mut c_void,
-        yes: *const c_void,
-        no: *const c_void,
-        cancel: *const c_void,
-    ) -> bool;
-    pub fn wxMessageDialog_SetYesNoLabels(
-        self_: *mut c_void,
-        yes: *const c_void,
-        no: *const c_void,
-    ) -> bool;
-    pub fn wxMessageDialog_GetCaption(self_: *const c_void) -> *mut c_void;
-    pub fn wxMessageDialog_GetMessage(self_: *const c_void) -> *mut c_void;
-    pub fn wxMessageDialog_GetExtendedMessage(self_: *const c_void) -> *mut c_void;
-    pub fn wxMessageDialog_GetMessageDialogStyle(self_: *const c_void) -> c_long;
-    pub fn wxMessageDialog_HasCustomLabels(self_: *const c_void) -> bool;
-    pub fn wxMessageDialog_GetYesLabel(self_: *const c_void) -> *mut c_void;
-    pub fn wxMessageDialog_GetNoLabel(self_: *const c_void) -> *mut c_void;
-    pub fn wxMessageDialog_GetOKLabel(self_: *const c_void) -> *mut c_void;
-    pub fn wxMessageDialog_GetCancelLabel(self_: *const c_void) -> *mut c_void;
-    pub fn wxMessageDialog_GetHelpLabel(self_: *const c_void) -> *mut c_void;
-    pub fn wxMessageDialog_GetEffectiveIcon(self_: *const c_void) -> c_long;
-    // Mix-in(s) to wxMessageDialog
-    pub fn wxMessageDialog_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
     // wxMessageOutputMessageBox
     pub fn wxMessageOutputMessageBox_delete(self_: *mut c_void);
     pub fn wxMessageOutputMessageBox_new() -> *mut c_void;
@@ -7112,12 +4589,6 @@ extern "C" {
     pub fn wxMetafile_IsOk(self_: *mut c_void) -> bool;
     pub fn wxMetafile_Play(self_: *mut c_void, dc: *mut c_void) -> bool;
     pub fn wxMetafile_SetClipboard(self_: *mut c_void, width: c_int, height: c_int) -> bool;
-
-    // wxMetafileDC
-    pub fn wxMetafileDC_CLASSINFO() -> *mut c_void;
-    pub fn wxMetafileDC_new(filename: *const c_void) -> *mut c_void;
-    // DTOR: pub fn wxMetafileDC_~wxMetafileDC(self_: *mut c_void);
-    pub fn wxMetafileDC_Close(self_: *mut c_void) -> *mut c_void;
 
     // wxMiniFrame
     pub fn wxMiniFrame_CLASSINFO() -> *mut c_void;
@@ -7203,14 +4674,6 @@ extern "C" {
     pub fn wxMouseEvent_RightUp(self_: *const c_void) -> bool;
     // Mix-in(s) to wxMouseEvent
     pub fn wxMouseEvent_AsMouseState(obj: *mut c_void) -> *mut c_void;
-
-    // wxMouseEventsManager
-    pub fn wxMouseEventsManager_CLASSINFO() -> *mut c_void;
-    pub fn wxMouseEventsManager_new() -> *mut c_void;
-    pub fn wxMouseEventsManager_new1(win: *mut c_void) -> *mut c_void;
-    pub fn wxMouseEventsManager_Create(self_: *mut c_void, win: *mut c_void) -> bool;
-    // Mix-in(s) to wxMouseEventsManager
-    pub fn wxMouseEventsManager_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxMoveEvent
     pub fn wxMoveEvent_CLASSINFO() -> *mut c_void;
@@ -7305,36 +4768,6 @@ extern "C" {
     pub fn wxNotebook_AsWithImages(obj: *mut c_void) -> *mut c_void;
     pub fn wxNotebook_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
-    // wxNotificationMessage
-    pub fn wxNotificationMessage_CLASSINFO() -> *mut c_void;
-    pub fn wxNotificationMessage_new() -> *mut c_void;
-    pub fn wxNotificationMessage_new1(
-        title: *const c_void,
-        message: *const c_void,
-        parent: *mut c_void,
-        flags: c_int,
-    ) -> *mut c_void;
-    // DTOR: pub fn wxNotificationMessage_~wxNotificationMessage(self_: *mut c_void);
-    pub fn wxNotificationMessage_AddAction(
-        self_: *mut c_void,
-        actionid: c_int,
-        label: *const c_void,
-    ) -> bool;
-    pub fn wxNotificationMessage_Close(self_: *mut c_void) -> bool;
-    pub fn wxNotificationMessage_SetFlags(self_: *mut c_void, flags: c_int);
-    pub fn wxNotificationMessage_SetIcon(self_: *mut c_void, icon: *const c_void);
-    pub fn wxNotificationMessage_SetMessage(self_: *mut c_void, message: *const c_void);
-    pub fn wxNotificationMessage_SetParent(self_: *mut c_void, parent: *mut c_void);
-    pub fn wxNotificationMessage_SetTitle(self_: *mut c_void, title: *const c_void);
-    pub fn wxNotificationMessage_Show(self_: *mut c_void, timeout: c_int) -> bool;
-    pub fn wxNotificationMessage_UseTaskBarIcon(icon: *mut c_void) -> *mut c_void;
-    pub fn wxNotificationMessage_MSWUseToasts(
-        shortcut_path: *const c_void,
-        app_id: *const c_void,
-    ) -> bool;
-    // Mix-in(s) to wxNotificationMessage
-    pub fn wxNotificationMessage_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
     // wxNotifyEvent
     pub fn wxNotifyEvent_CLASSINFO() -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxNotifyEvent_new(event_type: wxEventType, id: c_int) -> *mut c_void;
@@ -7342,100 +4775,11 @@ extern "C" {
     pub fn wxNotifyEvent_IsAllowed(self_: *const c_void) -> bool;
     pub fn wxNotifyEvent_Veto(self_: *mut c_void);
 
-    // wxNumberEntryDialog
-    pub fn wxNumberEntryDialog_CLASSINFO() -> *mut c_void;
-    pub fn wxNumberEntryDialog_new() -> *mut c_void;
-    pub fn wxNumberEntryDialog_new1(
-        parent: *mut c_void,
-        message: *const c_void,
-        prompt: *const c_void,
-        caption: *const c_void,
-        value: c_long,
-        min: c_long,
-        max: c_long,
-        pos: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxNumberEntryDialog_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        message: *const c_void,
-        prompt: *const c_void,
-        caption: *const c_void,
-        value: c_long,
-        min: c_long,
-        max: c_long,
-        pos: *const c_void,
-    ) -> bool;
-    pub fn wxNumberEntryDialog_GetValue(self_: *const c_void) -> c_long;
-    // Mix-in(s) to wxNumberEntryDialog
-    pub fn wxNumberEntryDialog_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
     // wxOverlay
     pub fn wxOverlay_delete(self_: *mut c_void);
     pub fn wxOverlay_new() -> *mut c_void;
     // DTOR: pub fn wxOverlay_~wxOverlay(self_: *mut c_void);
     pub fn wxOverlay_Reset(self_: *mut c_void);
-
-    // wxOwnerDrawnComboBox
-    pub fn wxOwnerDrawnComboBox_CLASSINFO() -> *mut c_void;
-    pub fn wxOwnerDrawnComboBox_new() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxOwnerDrawnComboBox_new1(parent: *mut c_void, id: c_int, value: *const c_void, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
-    pub fn wxOwnerDrawnComboBox_new2(
-        parent: *mut c_void,
-        id: c_int,
-        value: *const c_void,
-        pos: *const c_void,
-        size: *const c_void,
-        choices: *const c_void,
-        style: c_long,
-        validator: *const c_void,
-        name: *const c_void,
-    ) -> *mut c_void;
-    // DTOR: pub fn wxOwnerDrawnComboBox_~wxOwnerDrawnComboBox(self_: *mut c_void);
-    pub fn wxOwnerDrawnComboBox_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        id: c_int,
-        value: *const c_void,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        validator: *const c_void,
-        name: *const c_void,
-    ) -> bool;
-    // NOT_SUPPORTED: pub fn wxOwnerDrawnComboBox_Create1(self_: *mut c_void, parent: *mut c_void, id: c_int, value: *const c_void, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> bool;
-    pub fn wxOwnerDrawnComboBox_Create2(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        id: c_int,
-        value: *const c_void,
-        pos: *const c_void,
-        size: *const c_void,
-        choices: *const c_void,
-        style: c_long,
-        validator: *const c_void,
-        name: *const c_void,
-    ) -> bool;
-    pub fn wxOwnerDrawnComboBox_IsListEmpty(self_: *const c_void) -> bool;
-    pub fn wxOwnerDrawnComboBox_IsTextEmpty(self_: *const c_void) -> bool;
-    pub fn wxOwnerDrawnComboBox_GetWidestItem(self_: *mut c_void) -> c_int;
-    pub fn wxOwnerDrawnComboBox_GetWidestItemWidth(self_: *mut c_void) -> c_int;
-    // Mix-in(s) to wxOwnerDrawnComboBox
-    pub fn wxOwnerDrawnComboBox_AsItemContainer(obj: *mut c_void) -> *mut c_void;
-    pub fn wxOwnerDrawnComboBox_AsTextEntry(obj: *mut c_void) -> *mut c_void;
-    pub fn wxOwnerDrawnComboBox_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
-    // wxPCXHandler
-    pub fn wxPCXHandler_CLASSINFO() -> *mut c_void;
-    pub fn wxPCXHandler_new() -> *mut c_void;
-
-    // wxPNGHandler
-    pub fn wxPNGHandler_CLASSINFO() -> *mut c_void;
-    pub fn wxPNGHandler_new() -> *mut c_void;
-
-    // wxPNMHandler
-    pub fn wxPNMHandler_CLASSINFO() -> *mut c_void;
-    pub fn wxPNMHandler_new() -> *mut c_void;
 
     // wxPageSetupDialog
     pub fn wxPageSetupDialog_CLASSINFO() -> *mut c_void;
@@ -7486,10 +4830,6 @@ extern "C" {
     // wxPaintDC
     pub fn wxPaintDC_CLASSINFO() -> *mut c_void;
     pub fn wxPaintDC_new(window: *mut c_void) -> *mut c_void;
-
-    // wxPaintEvent
-    pub fn wxPaintEvent_CLASSINFO() -> *mut c_void;
-    pub fn wxPaintEvent_new(window: *mut c_void) -> *mut c_void;
 
     // wxPalette
     pub fn wxPalette_CLASSINFO() -> *mut c_void;
@@ -7553,19 +4893,6 @@ extern "C" {
     // Mix-in(s) to wxPanel
     pub fn wxPanel_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
-    // wxPasswordEntryDialog
-    pub fn wxPasswordEntryDialog_CLASSINFO() -> *mut c_void;
-    pub fn wxPasswordEntryDialog_new(
-        parent: *mut c_void,
-        message: *const c_void,
-        caption: *const c_void,
-        default_value: *const c_void,
-        style: c_long,
-        pos: *const c_void,
-    ) -> *mut c_void;
-    // Mix-in(s) to wxPasswordEntryDialog
-    pub fn wxPasswordEntryDialog_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
     // wxPen
     pub fn wxPen_CLASSINFO() -> *mut c_void;
     pub fn wxPen_new() -> *mut c_void;
@@ -7602,30 +4929,6 @@ extern "C" {
     pub fn wxPenList_delete(self_: *mut c_void);
     pub fn wxPenList_new() -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxPenList_FindOrCreatePen(self_: *mut c_void, colour: *const c_void, width: c_int, style: wxPenStyle) -> *mut c_void;
-
-    // wxPersistenceManager
-    pub fn wxPersistenceManager_delete(self_: *mut c_void);
-    pub fn wxPersistenceManager_Set(manager: *mut c_void);
-    pub fn wxPersistenceManager_Get() -> *mut c_void;
-    pub fn wxPersistenceManager_DisableSaving(self_: *mut c_void);
-    pub fn wxPersistenceManager_DisableRestoring(self_: *mut c_void);
-    pub fn wxPersistenceManager_Register(self_: *mut c_void, obj: *mut c_void) -> *mut c_void;
-    pub fn wxPersistenceManager_Register1(
-        self_: *mut c_void,
-        obj: *mut c_void,
-        po: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxPersistenceManager_Find(self_: *const c_void, obj: *mut c_void) -> *mut c_void;
-    pub fn wxPersistenceManager_Unregister(self_: *mut c_void, obj: *mut c_void);
-    pub fn wxPersistenceManager_Save(self_: *mut c_void, obj: *mut c_void);
-    pub fn wxPersistenceManager_Restore(self_: *mut c_void, obj: *mut c_void) -> bool;
-    pub fn wxPersistenceManager_SaveAndUnregister(self_: *mut c_void, obj: *mut c_void);
-    pub fn wxPersistenceManager_RegisterAndRestore(self_: *mut c_void, obj: *mut c_void) -> bool;
-    pub fn wxPersistenceManager_RegisterAndRestore1(
-        self_: *mut c_void,
-        obj: *mut c_void,
-        po: *mut c_void,
-    ) -> bool;
 
     // wxPickerBase
     pub fn wxPickerBase_CLASSINFO() -> *mut c_void;
@@ -7721,15 +5024,6 @@ extern "C" {
     pub fn wxPreferencesEditor_ShouldApplyChangesImmediately() -> bool;
     pub fn wxPreferencesEditor_ShownModally() -> bool;
 
-    // wxPreferencesPage
-    pub fn wxPreferencesPage_delete(self_: *mut c_void);
-    pub fn wxPreferencesPage_new() -> *mut c_void;
-    // DTOR: pub fn wxPreferencesPage_~wxPreferencesPage(self_: *mut c_void);
-    pub fn wxPreferencesPage_GetName(self_: *const c_void) -> *mut c_void;
-    pub fn wxPreferencesPage_GetIcon(self_: *const c_void) -> *mut c_void;
-    pub fn wxPreferencesPage_GetLargeIcon(self_: *const c_void) -> *mut c_void;
-    pub fn wxPreferencesPage_CreateWindow(self_: *mut c_void, parent: *mut c_void) -> *mut c_void;
-
     // wxPressAndTapEvent
     pub fn wxPressAndTapEvent_CLASSINFO() -> *mut c_void;
     pub fn wxPressAndTapEvent_new(windid: c_int) -> *mut c_void;
@@ -7804,50 +5098,6 @@ extern "C" {
     // NOT_SUPPORTED: pub fn wxPrintData_GetPrintMode(self_: *const c_void) -> wxPrintMode;
     // NOT_SUPPORTED: pub fn wxPrintData_SetPrintMode(self_: *mut c_void, print_mode: wxPrintMode);
 
-    // wxPrintDialog
-    pub fn wxPrintDialog_CLASSINFO() -> *mut c_void;
-    pub fn wxPrintDialog_new(parent: *mut c_void, data: *mut c_void) -> *mut c_void;
-    pub fn wxPrintDialog_new1(parent: *mut c_void, data: *mut c_void) -> *mut c_void;
-    // DTOR: pub fn wxPrintDialog_~wxPrintDialog(self_: *mut c_void);
-    pub fn wxPrintDialog_GetPrintDC(self_: *mut c_void) -> *mut c_void;
-    pub fn wxPrintDialog_GetPrintDialogData(self_: *mut c_void) -> *mut c_void;
-    pub fn wxPrintDialog_GetPrintData(self_: *mut c_void) -> *mut c_void;
-    pub fn wxPrintDialog_ShowModal(self_: *mut c_void) -> c_int;
-
-    // wxPrintDialogData
-    pub fn wxPrintDialogData_CLASSINFO() -> *mut c_void;
-    pub fn wxPrintDialogData_new() -> *mut c_void;
-    pub fn wxPrintDialogData_new1(dialog_data: *const c_void) -> *mut c_void;
-    pub fn wxPrintDialogData_new2(print_data: *const c_void) -> *mut c_void;
-    // DTOR: pub fn wxPrintDialogData_~wxPrintDialogData(self_: *mut c_void);
-    pub fn wxPrintDialogData_EnableHelp(self_: *mut c_void, flag: bool);
-    pub fn wxPrintDialogData_EnablePageNumbers(self_: *mut c_void, flag: bool);
-    pub fn wxPrintDialogData_EnablePrintToFile(self_: *mut c_void, flag: bool);
-    pub fn wxPrintDialogData_EnableSelection(self_: *mut c_void, flag: bool);
-    pub fn wxPrintDialogData_GetAllPages(self_: *const c_void) -> bool;
-    pub fn wxPrintDialogData_GetCollate(self_: *const c_void) -> bool;
-    pub fn wxPrintDialogData_GetFromPage(self_: *const c_void) -> c_int;
-    pub fn wxPrintDialogData_GetMaxPage(self_: *const c_void) -> c_int;
-    pub fn wxPrintDialogData_GetMinPage(self_: *const c_void) -> c_int;
-    pub fn wxPrintDialogData_GetNoCopies(self_: *const c_void) -> c_int;
-    pub fn wxPrintDialogData_GetPrintData(self_: *mut c_void) -> *mut c_void;
-    pub fn wxPrintDialogData_GetPrintToFile(self_: *const c_void) -> bool;
-    pub fn wxPrintDialogData_GetSelection(self_: *const c_void) -> bool;
-    pub fn wxPrintDialogData_GetToPage(self_: *const c_void) -> c_int;
-    pub fn wxPrintDialogData_IsOk(self_: *const c_void) -> bool;
-    pub fn wxPrintDialogData_SetCollate(self_: *mut c_void, flag: bool);
-    pub fn wxPrintDialogData_SetFromPage(self_: *mut c_void, page: c_int);
-    pub fn wxPrintDialogData_SetMaxPage(self_: *mut c_void, page: c_int);
-    pub fn wxPrintDialogData_SetMinPage(self_: *mut c_void, page: c_int);
-    pub fn wxPrintDialogData_SetNoCopies(self_: *mut c_void, n: c_int);
-    pub fn wxPrintDialogData_SetPrintData(self_: *mut c_void, print_data: *const c_void);
-    pub fn wxPrintDialogData_SetPrintToFile(self_: *mut c_void, flag: bool);
-    pub fn wxPrintDialogData_SetSelection(self_: *mut c_void, flag: bool);
-    pub fn wxPrintDialogData_SetSetupDialog(self_: *mut c_void, flag: bool);
-    pub fn wxPrintDialogData_SetToPage(self_: *mut c_void, page: c_int);
-    // BLOCKED: pub fn wxPrintDialogData_operator=(self_: *mut c_void, data: *const c_void);
-    // BLOCKED: pub fn wxPrintDialogData_operator=1(self_: *mut c_void, data: *const c_void);
-
     // wxPrintPreview
     pub fn wxPrintPreview_CLASSINFO() -> *mut c_void;
     pub fn wxPrintPreview_new(
@@ -7882,129 +5132,10 @@ extern "C" {
     pub fn wxPrintPreview_SetPrintout(self_: *mut c_void, printout: *mut c_void);
     pub fn wxPrintPreview_SetZoom(self_: *mut c_void, percent: c_int);
 
-    // wxPrinter
-    pub fn wxPrinter_CLASSINFO() -> *mut c_void;
-    pub fn wxPrinter_new(data: *mut c_void) -> *mut c_void;
-    pub fn wxPrinter_CreateAbortWindow(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        printout: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxPrinter_GetAbort(self_: *const c_void) -> bool;
-    pub fn wxPrinter_GetPrintDialogData(self_: *const c_void) -> *mut c_void;
-    pub fn wxPrinter_Print(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        printout: *mut c_void,
-        prompt: bool,
-    ) -> bool;
-    pub fn wxPrinter_PrintDialog(self_: *mut c_void, parent: *mut c_void) -> *mut c_void;
-    pub fn wxPrinter_ReportError(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        printout: *mut c_void,
-        message: *const c_void,
-    );
-    pub fn wxPrinter_Setup(self_: *mut c_void, parent: *mut c_void) -> bool;
-    // NOT_SUPPORTED: pub fn wxPrinter_GetLastError() -> wxPrinterError;
-
     // wxPrinterDC
     pub fn wxPrinterDC_CLASSINFO() -> *mut c_void;
     pub fn wxPrinterDC_new(print_data: *const c_void) -> *mut c_void;
     pub fn wxPrinterDC_GetPaperRect(self_: *const c_void) -> *mut c_void;
-
-    // wxPrintout
-    pub fn wxPrintout_CLASSINFO() -> *mut c_void;
-    pub fn wxPrintout_new(title: *const c_void) -> *mut c_void;
-    // DTOR: pub fn wxPrintout_~wxPrintout(self_: *mut c_void);
-    pub fn wxPrintout_FitThisSizeToPage(self_: *mut c_void, image_size: *const c_void);
-    pub fn wxPrintout_FitThisSizeToPageMargins(
-        self_: *mut c_void,
-        image_size: *const c_void,
-        page_setup_data: *const c_void,
-    );
-    pub fn wxPrintout_FitThisSizeToPaper(self_: *mut c_void, image_size: *const c_void);
-    pub fn wxPrintout_GetDC(self_: *const c_void) -> *mut c_void;
-    pub fn wxPrintout_GetLogicalPageMarginsRect(
-        self_: *const c_void,
-        page_setup_data: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxPrintout_GetLogicalPageRect(self_: *const c_void) -> *mut c_void;
-    pub fn wxPrintout_GetLogicalPaperRect(self_: *const c_void) -> *mut c_void;
-    pub fn wxPrintout_GetPPIPrinter(self_: *const c_void, w: *mut c_void, h: *mut c_void);
-    pub fn wxPrintout_GetPPIScreen(self_: *const c_void, w: *mut c_void, h: *mut c_void);
-    pub fn wxPrintout_GetPageInfo(
-        self_: *mut c_void,
-        min_page: *mut c_void,
-        max_page: *mut c_void,
-        page_from: *mut c_void,
-        page_to: *mut c_void,
-    );
-    pub fn wxPrintout_GetPageSizeMM(self_: *const c_void, w: *mut c_void, h: *mut c_void);
-    pub fn wxPrintout_GetPageSizePixels(self_: *const c_void, w: *mut c_void, h: *mut c_void);
-    pub fn wxPrintout_GetPaperRectPixels(self_: *const c_void) -> *mut c_void;
-    pub fn wxPrintout_GetTitle(self_: *const c_void) -> *mut c_void;
-    pub fn wxPrintout_HasPage(self_: *mut c_void, page_num: c_int) -> bool;
-    pub fn wxPrintout_IsPreview(self_: *const c_void) -> bool;
-    pub fn wxPrintout_GetPreview(self_: *const c_void) -> *mut c_void;
-    pub fn wxPrintout_MapScreenSizeToDevice(self_: *mut c_void);
-    pub fn wxPrintout_MapScreenSizeToPage(self_: *mut c_void);
-    pub fn wxPrintout_MapScreenSizeToPageMargins(
-        self_: *mut c_void,
-        page_setup_data: *const c_void,
-    );
-    pub fn wxPrintout_MapScreenSizeToPaper(self_: *mut c_void);
-    pub fn wxPrintout_OffsetLogicalOrigin(self_: *mut c_void, xoff: c_int, yoff: c_int);
-    pub fn wxPrintout_OnBeginDocument(
-        self_: *mut c_void,
-        start_page: c_int,
-        end_page: c_int,
-    ) -> bool;
-    pub fn wxPrintout_OnBeginPrinting(self_: *mut c_void);
-    pub fn wxPrintout_OnEndDocument(self_: *mut c_void);
-    pub fn wxPrintout_OnEndPrinting(self_: *mut c_void);
-    pub fn wxPrintout_OnPreparePrinting(self_: *mut c_void);
-    pub fn wxPrintout_OnPrintPage(self_: *mut c_void, page_num: c_int) -> bool;
-    pub fn wxPrintout_SetLogicalOrigin(self_: *mut c_void, x: c_int, y: c_int);
-
-    // wxPropertySheetDialog
-    pub fn wxPropertySheetDialog_CLASSINFO() -> *mut c_void;
-    pub fn wxPropertySheetDialog_new() -> *mut c_void;
-    pub fn wxPropertySheetDialog_new1(
-        parent: *mut c_void,
-        id: c_int,
-        title: *const c_void,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxPropertySheetDialog_AddBookCtrl(self_: *mut c_void, sizer: *mut c_void);
-    pub fn wxPropertySheetDialog_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        id: c_int,
-        title: *const c_void,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> bool;
-    pub fn wxPropertySheetDialog_CreateBookCtrl(self_: *mut c_void) -> *mut c_void;
-    pub fn wxPropertySheetDialog_CreateButtons(self_: *mut c_void, flags: c_int);
-    pub fn wxPropertySheetDialog_GetBookCtrl(self_: *const c_void) -> *mut c_void;
-    pub fn wxPropertySheetDialog_GetInnerSizer(self_: *const c_void) -> *mut c_void;
-    pub fn wxPropertySheetDialog_SetInnerSizer(self_: *mut c_void, sizer: *mut c_void);
-    pub fn wxPropertySheetDialog_GetSheetStyle(self_: *const c_void) -> c_long;
-    pub fn wxPropertySheetDialog_LayoutDialog(self_: *mut c_void, centre_flags: c_int);
-    pub fn wxPropertySheetDialog_SetBookCtrl(self_: *mut c_void, book_ctrl: *mut c_void);
-    pub fn wxPropertySheetDialog_SetSheetStyle(self_: *mut c_void, style: c_long);
-    pub fn wxPropertySheetDialog_SetSheetOuterBorder(self_: *mut c_void, border: c_int);
-    pub fn wxPropertySheetDialog_GetSheetOuterBorder(self_: *const c_void) -> c_int;
-    pub fn wxPropertySheetDialog_SetSheetInnerBorder(self_: *mut c_void, border: c_int);
-    pub fn wxPropertySheetDialog_GetSheetInnerBorder(self_: *const c_void) -> c_int;
-    // Mix-in(s) to wxPropertySheetDialog
-    pub fn wxPropertySheetDialog_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxQuantize
     pub fn wxQuantize_CLASSINFO() -> *mut c_void;
@@ -8181,34 +5312,6 @@ extern "C" {
     // Mix-in(s) to wxRearrangeCtrl
     pub fn wxRearrangeCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
-    // wxRearrangeDialog
-    pub fn wxRearrangeDialog_CLASSINFO() -> *mut c_void;
-    pub fn wxRearrangeDialog_new() -> *mut c_void;
-    pub fn wxRearrangeDialog_new1(
-        parent: *mut c_void,
-        message: *const c_void,
-        title: *const c_void,
-        order: *const c_void,
-        items: *const c_void,
-        pos: *const c_void,
-        name: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxRearrangeDialog_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        message: *const c_void,
-        title: *const c_void,
-        order: *const c_void,
-        items: *const c_void,
-        pos: *const c_void,
-        name: *const c_void,
-    ) -> bool;
-    pub fn wxRearrangeDialog_AddExtraControls(self_: *mut c_void, win: *mut c_void);
-    pub fn wxRearrangeDialog_GetList(self_: *const c_void) -> *mut c_void;
-    pub fn wxRearrangeDialog_GetOrder(self_: *const c_void) -> *mut c_void;
-    // Mix-in(s) to wxRearrangeDialog
-    pub fn wxRearrangeDialog_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
     // wxRearrangeList
     pub fn wxRearrangeList_CLASSINFO() -> *mut c_void;
     pub fn wxRearrangeList_new() -> *mut c_void;
@@ -8307,77 +5410,6 @@ extern "C" {
     // BLOCKED: pub fn wxRect_operator*=(self_: *mut c_void, r: *const c_void) -> *mut c_void;
     // BLOCKED: pub fn wxRect_operator=(self_: *mut c_void, rect: *const c_void) -> *mut c_void;
     // BLOCKED: pub fn wxRect_operator==(self_: *mut c_void, r1: *const c_void, r2: *const c_void) -> bool;
-
-    // wxRegion
-    pub fn wxRegion_CLASSINFO() -> *mut c_void;
-    pub fn wxRegion_new() -> *mut c_void;
-    pub fn wxRegion_new1(x: c_int, y: c_int, width: c_int, height: c_int) -> *mut c_void;
-    pub fn wxRegion_new2(top_left: *const c_void, bottom_right: *const c_void) -> *mut c_void;
-    pub fn wxRegion_new3(rect: *const c_void) -> *mut c_void;
-    pub fn wxRegion_new4(region: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxRegion_new5(n: usize, points: *const c_void, fill_style: wxPolygonFillMode) -> *mut c_void;
-    pub fn wxRegion_new6(bmp: *const c_void) -> *mut c_void;
-    pub fn wxRegion_new7(
-        bmp: *const c_void,
-        trans_colour: *const c_void,
-        tolerance: c_int,
-    ) -> *mut c_void;
-    // DTOR: pub fn wxRegion_~wxRegion(self_: *mut c_void);
-    pub fn wxRegion_Clear(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxRegion_Contains(self_: *const c_void, x: c_int, y: c_int) -> wxRegionContain;
-    // NOT_SUPPORTED: pub fn wxRegion_Contains1(self_: *const c_void, pt: *const c_void) -> wxRegionContain;
-    // NOT_SUPPORTED: pub fn wxRegion_Contains2(self_: *const c_void, x: c_int, y: c_int, width: c_int, height: c_int) -> wxRegionContain;
-    // NOT_SUPPORTED: pub fn wxRegion_Contains3(self_: *const c_void, rect: *const c_void) -> wxRegionContain;
-    pub fn wxRegion_ConvertToBitmap(self_: *const c_void) -> *mut c_void;
-    pub fn wxRegion_GetBox(
-        self_: *const c_void,
-        x: *mut c_void,
-        y: *mut c_void,
-        width: *mut c_void,
-        height: *mut c_void,
-    );
-    pub fn wxRegion_GetBox1(self_: *const c_void) -> *mut c_void;
-    pub fn wxRegion_Intersect(
-        self_: *mut c_void,
-        x: c_int,
-        y: c_int,
-        width: c_int,
-        height: c_int,
-    ) -> bool;
-    pub fn wxRegion_Intersect1(self_: *mut c_void, rect: *const c_void) -> bool;
-    pub fn wxRegion_Intersect2(self_: *mut c_void, region: *const c_void) -> bool;
-    pub fn wxRegion_IsEmpty(self_: *const c_void) -> bool;
-    pub fn wxRegion_IsEqual(self_: *const c_void, region: *const c_void) -> bool;
-    pub fn wxRegion_Offset(self_: *mut c_void, x: c_int, y: c_int) -> bool;
-    pub fn wxRegion_Offset1(self_: *mut c_void, pt: *const c_void) -> bool;
-    pub fn wxRegion_Subtract(self_: *mut c_void, rect: *const c_void) -> bool;
-    pub fn wxRegion_Subtract1(self_: *mut c_void, region: *const c_void) -> bool;
-    pub fn wxRegion_Union(
-        self_: *mut c_void,
-        x: c_int,
-        y: c_int,
-        width: c_int,
-        height: c_int,
-    ) -> bool;
-    pub fn wxRegion_Union1(self_: *mut c_void, rect: *const c_void) -> bool;
-    pub fn wxRegion_Union2(self_: *mut c_void, region: *const c_void) -> bool;
-    pub fn wxRegion_Union3(self_: *mut c_void, bmp: *const c_void) -> bool;
-    pub fn wxRegion_Union4(
-        self_: *mut c_void,
-        bmp: *const c_void,
-        trans_colour: *const c_void,
-        tolerance: c_int,
-    ) -> bool;
-    pub fn wxRegion_Xor(
-        self_: *mut c_void,
-        x: c_int,
-        y: c_int,
-        width: c_int,
-        height: c_int,
-    ) -> bool;
-    pub fn wxRegion_Xor1(self_: *mut c_void, rect: *const c_void) -> bool;
-    pub fn wxRegion_Xor2(self_: *mut c_void, region: *const c_void) -> bool;
-    // BLOCKED: pub fn wxRegion_operator=(self_: *mut c_void, region: *const c_void) -> *mut c_void;
 
     // wxRegionIterator
     pub fn wxRegionIterator_CLASSINFO() -> *mut c_void;
@@ -8804,13 +5836,6 @@ extern "C" {
     pub fn wxSettableHeaderColumn_SetSortOrder(self_: *mut c_void, ascending: bool);
     pub fn wxSettableHeaderColumn_ToggleSortOrder(self_: *mut c_void);
 
-    // wxShowEvent
-    pub fn wxShowEvent_CLASSINFO() -> *mut c_void;
-    pub fn wxShowEvent_new(winid: c_int, show: bool) -> *mut c_void;
-    pub fn wxShowEvent_SetShow(self_: *mut c_void, show: bool);
-    pub fn wxShowEvent_IsShown(self_: *const c_void) -> bool;
-    pub fn wxShowEvent_GetShow(self_: *const c_void) -> bool;
-
     // wxSimpleHelpProvider
     pub fn wxSimpleHelpProvider_delete(self_: *mut c_void);
 
@@ -9181,74 +6206,6 @@ extern "C" {
     pub fn wxSizerFlags_DisableConsistencyChecks();
     pub fn wxSizerFlags_GetDefaultBorder() -> c_int;
     // NOT_SUPPORTED: pub fn wxSizerFlags_GetDefaultBorderFractional() -> float;
-
-    // wxSizerItem
-    pub fn wxSizerItem_CLASSINFO() -> *mut c_void;
-    pub fn wxSizerItem_new(
-        width: c_int,
-        height: c_int,
-        proportion: c_int,
-        flag: c_int,
-        border: c_int,
-        user_data: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxSizerItem_new1(window: *mut c_void, flags: *const c_void) -> *mut c_void;
-    pub fn wxSizerItem_new2(
-        window: *mut c_void,
-        proportion: c_int,
-        flag: c_int,
-        border: c_int,
-        user_data: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxSizerItem_new3(sizer: *mut c_void, flags: *const c_void) -> *mut c_void;
-    pub fn wxSizerItem_new4(
-        sizer: *mut c_void,
-        proportion: c_int,
-        flag: c_int,
-        border: c_int,
-        user_data: *mut c_void,
-    ) -> *mut c_void;
-    // DTOR: pub fn wxSizerItem_~wxSizerItem(self_: *mut c_void);
-    pub fn wxSizerItem_AssignWindow(self_: *mut c_void, window: *mut c_void);
-    pub fn wxSizerItem_AssignSizer(self_: *mut c_void, sizer: *mut c_void);
-    pub fn wxSizerItem_AssignSpacer(self_: *mut c_void, size: *const c_void);
-    pub fn wxSizerItem_AssignSpacer1(self_: *mut c_void, w: c_int, h: c_int);
-    pub fn wxSizerItem_CalcMin(self_: *mut c_void) -> *mut c_void;
-    pub fn wxSizerItem_DeleteWindows(self_: *mut c_void);
-    pub fn wxSizerItem_DetachSizer(self_: *mut c_void);
-    pub fn wxSizerItem_GetBorder(self_: *const c_void) -> c_int;
-    pub fn wxSizerItem_GetFlag(self_: *const c_void) -> c_int;
-    pub fn wxSizerItem_GetId(self_: *const c_void) -> c_int;
-    pub fn wxSizerItem_GetMinSize(self_: *const c_void) -> *mut c_void;
-    pub fn wxSizerItem_SetMinSize(self_: *mut c_void, size: *const c_void);
-    pub fn wxSizerItem_SetMinSize1(self_: *mut c_void, x: c_int, y: c_int);
-    pub fn wxSizerItem_GetPosition(self_: *const c_void) -> *mut c_void;
-    pub fn wxSizerItem_GetProportion(self_: *const c_void) -> c_int;
-    // NOT_SUPPORTED: pub fn wxSizerItem_GetRatio(self_: *const c_void) -> float;
-    pub fn wxSizerItem_GetRect(self_: *mut c_void) -> *mut c_void;
-    pub fn wxSizerItem_GetSize(self_: *const c_void) -> *mut c_void;
-    pub fn wxSizerItem_GetSizer(self_: *const c_void) -> *mut c_void;
-    pub fn wxSizerItem_GetSpacer(self_: *const c_void) -> *mut c_void;
-    pub fn wxSizerItem_GetUserData(self_: *const c_void) -> *mut c_void;
-    pub fn wxSizerItem_GetWindow(self_: *const c_void) -> *mut c_void;
-    pub fn wxSizerItem_IsShown(self_: *const c_void) -> bool;
-    pub fn wxSizerItem_IsSizer(self_: *const c_void) -> bool;
-    pub fn wxSizerItem_IsSpacer(self_: *const c_void) -> bool;
-    pub fn wxSizerItem_IsWindow(self_: *const c_void) -> bool;
-    pub fn wxSizerItem_SetBorder(self_: *mut c_void, border: c_int);
-    pub fn wxSizerItem_SetDimension(self_: *mut c_void, pos: *const c_void, size: *const c_void);
-    pub fn wxSizerItem_SetFlag(self_: *mut c_void, flag: c_int);
-    pub fn wxSizerItem_SetId(self_: *mut c_void, id: c_int);
-    pub fn wxSizerItem_SetInitSize(self_: *mut c_void, x: c_int, y: c_int);
-    pub fn wxSizerItem_SetProportion(self_: *mut c_void, proportion: c_int);
-    pub fn wxSizerItem_SetRatio(self_: *mut c_void, width: c_int, height: c_int);
-    pub fn wxSizerItem_SetRatio1(self_: *mut c_void, size: wxSize);
-    // NOT_SUPPORTED: pub fn wxSizerItem_SetRatio2(self_: *mut c_void, ratio: float);
-    pub fn wxSizerItem_SetSizer(self_: *mut c_void, sizer: *mut c_void);
-    pub fn wxSizerItem_SetSpacer(self_: *mut c_void, size: *const c_void);
-    pub fn wxSizerItem_SetUserData(self_: *mut c_void, user_data: *mut c_void);
-    pub fn wxSizerItem_SetWindow(self_: *mut c_void, window: *mut c_void);
-    pub fn wxSizerItem_Show(self_: *mut c_void, show: bool);
 
     // wxSlider
     pub fn wxSlider_CLASSINFO() -> *mut c_void;
@@ -9715,16 +6672,6 @@ extern "C" {
     pub fn wxStdDialogButtonSizer_SetCancelButton(self_: *mut c_void, button: *mut c_void);
     pub fn wxStdDialogButtonSizer_SetNegativeButton(self_: *mut c_void, button: *mut c_void);
 
-    // wxStockPreferencesPage
-    pub fn wxStockPreferencesPage_delete(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxStockPreferencesPage_new(kind: Kind) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxStockPreferencesPage_GetKind(self_: *const c_void) -> Kind;
-
-    // wxStreamToTextRedirector
-    pub fn wxStreamToTextRedirector_delete(self_: *mut c_void);
-    pub fn wxStreamToTextRedirector_new(text: *mut c_void, ostr: *mut c_void) -> *mut c_void;
-    // DTOR: pub fn wxStreamToTextRedirector_~wxStreamToTextRedirector(self_: *mut c_void);
-
     // wxSysColourChangedEvent
     pub fn wxSysColourChangedEvent_CLASSINFO() -> *mut c_void;
     pub fn wxSysColourChangedEvent_new() -> *mut c_void;
@@ -9738,44 +6685,6 @@ extern "C" {
     // NOT_SUPPORTED: pub fn wxSystemSettings_GetScreenType() -> wxSystemScreenType;
     pub fn wxSystemSettings_GetAppearance() -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxSystemSettings_HasFeature(index: wxSystemFeature) -> bool;
-
-    // wxTGAHandler
-    pub fn wxTGAHandler_CLASSINFO() -> *mut c_void;
-    pub fn wxTGAHandler_new() -> *mut c_void;
-
-    // wxTIFFHandler
-    pub fn wxTIFFHandler_CLASSINFO() -> *mut c_void;
-    pub fn wxTIFFHandler_new() -> *mut c_void;
-    pub fn wxTIFFHandler_GetLibraryVersionInfo() -> *mut c_void;
-
-    // wxTaskBarButton
-    pub fn wxTaskBarButton_delete(self_: *mut c_void);
-    pub fn wxTaskBarButton_SetProgressRange(self_: *mut c_void, range: c_int);
-    pub fn wxTaskBarButton_SetProgressValue(self_: *mut c_void, value: c_int);
-    pub fn wxTaskBarButton_PulseProgress(self_: *mut c_void);
-    pub fn wxTaskBarButton_Show(self_: *mut c_void, show: bool);
-    pub fn wxTaskBarButton_Hide(self_: *mut c_void);
-    pub fn wxTaskBarButton_SetThumbnailTooltip(self_: *mut c_void, tooltip: *const c_void);
-    // NOT_SUPPORTED: pub fn wxTaskBarButton_SetProgressState(self_: *mut c_void, state: wxTaskBarButtonState);
-    pub fn wxTaskBarButton_SetOverlayIcon(
-        self_: *mut c_void,
-        icon: *const c_void,
-        description: *const c_void,
-    );
-    pub fn wxTaskBarButton_SetThumbnailClip(self_: *mut c_void, rect: *const c_void);
-    pub fn wxTaskBarButton_SetThumbnailContents(self_: *mut c_void, child: *const c_void);
-    pub fn wxTaskBarButton_InsertThumbBarButton(
-        self_: *mut c_void,
-        pos: usize,
-        button: *mut c_void,
-    ) -> bool;
-    pub fn wxTaskBarButton_AppendThumbBarButton(self_: *mut c_void, button: *mut c_void) -> bool;
-    pub fn wxTaskBarButton_AppendSeparatorInThumbBar(self_: *mut c_void) -> bool;
-    pub fn wxTaskBarButton_RemoveThumbBarButton(
-        self_: *mut c_void,
-        button: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxTaskBarButton_RemoveThumbBarButton1(self_: *mut c_void, id: c_int) -> *mut c_void;
 
     // wxTaskBarIcon
     pub fn wxTaskBarIcon_CLASSINFO() -> *mut c_void;
@@ -9798,66 +6707,6 @@ extern "C" {
     // wxTaskBarIconEvent
     pub fn wxTaskBarIconEvent_CLASSINFO() -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxTaskBarIconEvent_new(evt_type: wxEventType, tb_icon: *mut c_void) -> *mut c_void;
-
-    // wxTaskBarJumpList
-    pub fn wxTaskBarJumpList_delete(self_: *mut c_void);
-    pub fn wxTaskBarJumpList_new(app_id: *const c_void) -> *mut c_void;
-    // DTOR: pub fn wxTaskBarJumpList_~wxTaskBarJumpList(self_: *mut c_void);
-    pub fn wxTaskBarJumpList_ShowRecentCategory(self_: *mut c_void, shown: bool);
-    pub fn wxTaskBarJumpList_HideRecentCategory(self_: *mut c_void);
-    pub fn wxTaskBarJumpList_ShowFrequentCategory(self_: *mut c_void, shown: bool);
-    pub fn wxTaskBarJumpList_HideFrequentCategory(self_: *mut c_void);
-    pub fn wxTaskBarJumpList_GetTasks(self_: *const c_void) -> *mut c_void;
-    pub fn wxTaskBarJumpList_GetFrequentCategory(self_: *const c_void) -> *mut c_void;
-    pub fn wxTaskBarJumpList_GetRecentCategory(self_: *const c_void) -> *mut c_void;
-    pub fn wxTaskBarJumpList_GetCustomCategories(self_: *const c_void) -> *const c_void;
-    pub fn wxTaskBarJumpList_AddCustomCategory(self_: *mut c_void, category: *mut c_void);
-    pub fn wxTaskBarJumpList_RemoveCustomCategory(
-        self_: *mut c_void,
-        title: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxTaskBarJumpList_DeleteCustomCategory(self_: *mut c_void, title: *const c_void);
-
-    // wxTaskBarJumpListCategory
-    pub fn wxTaskBarJumpListCategory_delete(self_: *mut c_void);
-    pub fn wxTaskBarJumpListCategory_new(parent: *mut c_void, title: *const c_void) -> *mut c_void;
-    // DTOR: pub fn wxTaskBarJumpListCategory_~wxTaskBarJumpListCategory(self_: *mut c_void);
-    pub fn wxTaskBarJumpListCategory_Append(self_: *mut c_void, item: *mut c_void) -> *mut c_void;
-    pub fn wxTaskBarJumpListCategory_Delete(self_: *mut c_void, item: *mut c_void);
-    pub fn wxTaskBarJumpListCategory_Remove(self_: *mut c_void, item: *mut c_void) -> *mut c_void;
-    pub fn wxTaskBarJumpListCategory_FindItemByPosition(
-        self_: *const c_void,
-        pos: usize,
-    ) -> *mut c_void;
-    pub fn wxTaskBarJumpListCategory_Insert(
-        self_: *mut c_void,
-        pos: usize,
-        item: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxTaskBarJumpListCategory_Prepend(self_: *mut c_void, item: *mut c_void) -> *mut c_void;
-    pub fn wxTaskBarJumpListCategory_SetTitle(self_: *mut c_void, title: *const c_void);
-    pub fn wxTaskBarJumpListCategory_GetTitle(self_: *const c_void) -> *mut c_void;
-    pub fn wxTaskBarJumpListCategory_GetItems(self_: *const c_void) -> *const c_void;
-
-    // wxTaskBarJumpListItem
-    pub fn wxTaskBarJumpListItem_delete(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxTaskBarJumpListItem_new(parent_category: *mut c_void, type_: wxTaskBarJumpListItemType, title: *const c_void, file_path: *const c_void, arguments: *const c_void, tooltip: *const c_void, icon_path: *const c_void, icon_index: c_int) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxTaskBarJumpListItem_GetType(self_: *const c_void) -> wxTaskBarJumpListItemType;
-    // NOT_SUPPORTED: pub fn wxTaskBarJumpListItem_SetType(self_: *mut c_void, type_: wxTaskBarJumpListItemType);
-    pub fn wxTaskBarJumpListItem_GetTitle(self_: *const c_void) -> *mut c_void;
-    pub fn wxTaskBarJumpListItem_SetTitle(self_: *mut c_void, title: *const c_void);
-    pub fn wxTaskBarJumpListItem_GetFilePath(self_: *const c_void) -> *mut c_void;
-    pub fn wxTaskBarJumpListItem_SetFilePath(self_: *mut c_void, file_path: *const c_void);
-    pub fn wxTaskBarJumpListItem_GetArguments(self_: *const c_void) -> *mut c_void;
-    pub fn wxTaskBarJumpListItem_SetArguments(self_: *mut c_void, arguments: *const c_void);
-    pub fn wxTaskBarJumpListItem_GetTooltip(self_: *const c_void) -> *mut c_void;
-    pub fn wxTaskBarJumpListItem_SetTooltip(self_: *mut c_void, tooltip: *const c_void);
-    pub fn wxTaskBarJumpListItem_GetIconPath(self_: *const c_void) -> *mut c_void;
-    pub fn wxTaskBarJumpListItem_SetIconPath(self_: *mut c_void, icon_path: *const c_void);
-    pub fn wxTaskBarJumpListItem_GetIconIndex(self_: *const c_void) -> c_int;
-    pub fn wxTaskBarJumpListItem_SetIconIndex(self_: *mut c_void, icon_index: c_int);
-    pub fn wxTaskBarJumpListItem_GetCategory(self_: *const c_void) -> *mut c_void;
-    pub fn wxTaskBarJumpListItem_SetCategory(self_: *mut c_void, category: *mut c_void);
 
     // wxTextAttr
     pub fn wxTextAttr_delete(self_: *mut c_void);
@@ -10070,24 +6919,6 @@ extern "C" {
     pub fn wxTextCtrl_AsTextEntry(obj: *mut c_void) -> *mut c_void;
     pub fn wxTextCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
-    // wxTextDataObject
-    pub fn wxTextDataObject_delete(self_: *mut c_void);
-    pub fn wxTextDataObject_new(text: *const c_void) -> *mut c_void;
-    pub fn wxTextDataObject_GetText(self_: *const c_void) -> *mut c_void;
-    pub fn wxTextDataObject_GetTextLength(self_: *const c_void) -> usize;
-    pub fn wxTextDataObject_GetFormat(self_: *const c_void) -> *const c_void;
-    pub fn wxTextDataObject_SetText(self_: *mut c_void, str_text: *const c_void);
-
-    // wxTextDropTarget
-    pub fn wxTextDropTarget_delete(self_: *mut c_void);
-    pub fn wxTextDropTarget_new() -> *mut c_void;
-    pub fn wxTextDropTarget_OnDropText(
-        self_: *mut c_void,
-        x: c_int,
-        y: c_int,
-        data: *const c_void,
-    ) -> bool;
-
     // wxTextEntry
     pub fn wxTextEntry_delete(self_: *mut c_void);
     pub fn wxTextEntry_AppendText(self_: *mut c_void, text: *const c_void);
@@ -10133,36 +6964,6 @@ extern "C" {
     pub fn wxTextEntry_Undo(self_: *mut c_void);
     pub fn wxTextEntry_WriteText(self_: *mut c_void, text: *const c_void);
 
-    // wxTextEntryDialog
-    pub fn wxTextEntryDialog_CLASSINFO() -> *mut c_void;
-    pub fn wxTextEntryDialog_new() -> *mut c_void;
-    pub fn wxTextEntryDialog_new1(
-        parent: *mut c_void,
-        message: *const c_void,
-        caption: *const c_void,
-        value: *const c_void,
-        style: c_long,
-        pos: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxTextEntryDialog_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        message: *const c_void,
-        caption: *const c_void,
-        value: *const c_void,
-        style: c_long,
-        pos: *const c_void,
-    ) -> bool;
-    // DTOR: pub fn wxTextEntryDialog_~wxTextEntryDialog(self_: *mut c_void);
-    pub fn wxTextEntryDialog_GetValue(self_: *const c_void) -> *mut c_void;
-    pub fn wxTextEntryDialog_SetTextValidator(self_: *mut c_void, validator: *const c_void);
-    // NOT_SUPPORTED: pub fn wxTextEntryDialog_SetTextValidator1(self_: *mut c_void, style: wxTextValidatorStyle);
-    // NOT_SUPPORTED: pub fn wxTextEntryDialog_SetMaxLength(self_: *mut c_void, len: unsigned long);
-    pub fn wxTextEntryDialog_SetValue(self_: *mut c_void, value: *const c_void);
-    pub fn wxTextEntryDialog_ForceUpper(self_: *mut c_void);
-    // Mix-in(s) to wxTextEntryDialog
-    pub fn wxTextEntryDialog_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
     // wxTextValidator
     pub fn wxTextValidator_CLASSINFO() -> *mut c_void;
     pub fn wxTextValidator_new(validator: *const c_void) -> *mut c_void;
@@ -10186,60 +6987,6 @@ extern "C" {
     pub fn wxTextValidator_IsValid(self_: *const c_void, val: *const c_void) -> *mut c_void;
     // Mix-in(s) to wxTextValidator
     pub fn wxTextValidator_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
-    // wxThreadEvent
-    pub fn wxThreadEvent_CLASSINFO() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxThreadEvent_new(event_type: wxEventType, id: c_int) -> *mut c_void;
-    pub fn wxThreadEvent_SetPayload(self_: *mut c_void, payload: *const c_void);
-    // NOT_SUPPORTED: pub fn wxThreadEvent_GetPayload(self_: *const c_void) -> T;
-    pub fn wxThreadEvent_GetExtraLong(self_: *const c_void) -> c_long;
-    pub fn wxThreadEvent_GetInt(self_: *const c_void) -> c_int;
-    pub fn wxThreadEvent_GetString(self_: *const c_void) -> *mut c_void;
-    pub fn wxThreadEvent_SetExtraLong(self_: *mut c_void, extra_long: c_long);
-    pub fn wxThreadEvent_SetInt(self_: *mut c_void, int_command: c_int);
-    pub fn wxThreadEvent_SetString(self_: *mut c_void, string: *const c_void);
-
-    // wxThumbBarButton
-    pub fn wxThumbBarButton_delete(self_: *mut c_void);
-    pub fn wxThumbBarButton_new() -> *mut c_void;
-    pub fn wxThumbBarButton_new1(
-        id: c_int,
-        icon: *const c_void,
-        tooltip: *const c_void,
-        enable: bool,
-        dismiss_on_click: bool,
-        has_background: bool,
-        shown: bool,
-        interactive: bool,
-    ) -> *mut c_void;
-    pub fn wxThumbBarButton_Create(
-        self_: *mut c_void,
-        id: c_int,
-        icon: *const c_void,
-        tooltip: *const c_void,
-        enable: bool,
-        dismiss_on_click: bool,
-        has_background: bool,
-        shown: bool,
-        interactive: bool,
-    ) -> bool;
-    // DTOR: pub fn wxThumbBarButton_~wxThumbBarButton(self_: *mut c_void);
-    pub fn wxThumbBarButton_GetID(self_: *const c_void) -> c_int;
-    pub fn wxThumbBarButton_GetIcon(self_: *const c_void) -> *mut c_void;
-    pub fn wxThumbBarButton_GetTooltip(self_: *const c_void) -> *mut c_void;
-    pub fn wxThumbBarButton_IsEnable(self_: *const c_void) -> bool;
-    pub fn wxThumbBarButton_Enable(self_: *mut c_void, enable: bool);
-    pub fn wxThumbBarButton_Disable(self_: *mut c_void);
-    pub fn wxThumbBarButton_IsDismissOnClick(self_: *const c_void) -> bool;
-    pub fn wxThumbBarButton_EnableDismissOnClick(self_: *mut c_void, enable: bool);
-    pub fn wxThumbBarButton_DisableDimissOnClick(self_: *mut c_void);
-    pub fn wxThumbBarButton_HasBackground(self_: *const c_void) -> bool;
-    pub fn wxThumbBarButton_SetHasBackground(self_: *mut c_void, has: bool);
-    pub fn wxThumbBarButton_IsShown(self_: *const c_void) -> bool;
-    pub fn wxThumbBarButton_Show(self_: *mut c_void, shown: bool);
-    pub fn wxThumbBarButton_Hide(self_: *mut c_void);
-    pub fn wxThumbBarButton_IsInteractive(self_: *const c_void) -> bool;
-    pub fn wxThumbBarButton_SetInteractive(self_: *mut c_void, interactive: bool);
 
     // wxTimePickerCtrl
     pub fn wxTimePickerCtrl_CLASSINFO() -> *mut c_void;
@@ -10281,13 +7028,6 @@ extern "C" {
     pub fn wxTimePickerCtrl_SetValue(self_: *mut c_void, dt: *const c_void);
     // Mix-in(s) to wxTimePickerCtrl
     pub fn wxTimePickerCtrl_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
-    // wxTipProvider
-    pub fn wxTipProvider_delete(self_: *mut c_void);
-    pub fn wxTipProvider_new(current_tip: usize) -> *mut c_void;
-    // DTOR: pub fn wxTipProvider_~wxTipProvider(self_: *mut c_void);
-    pub fn wxTipProvider_GetCurrentTip(self_: *const c_void) -> usize;
-    pub fn wxTipProvider_GetTip(self_: *mut c_void) -> *mut c_void;
 
     // wxTipWindow
     pub fn wxTipWindow_CLASSINFO() -> *mut c_void;
@@ -10478,18 +7218,6 @@ extern "C" {
     pub fn wxToolBar_CreateSeparator(self_: *mut c_void) -> *mut c_void;
     // Mix-in(s) to wxToolBar
     pub fn wxToolBar_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
-    // wxToolTip
-    pub fn wxToolTip_CLASSINFO() -> *mut c_void;
-    pub fn wxToolTip_new(tip: *const c_void) -> *mut c_void;
-    pub fn wxToolTip_GetTip(self_: *const c_void) -> *mut c_void;
-    pub fn wxToolTip_GetWindow(self_: *const c_void) -> *mut c_void;
-    pub fn wxToolTip_SetTip(self_: *mut c_void, tip: *const c_void);
-    pub fn wxToolTip_Enable(flag: bool);
-    pub fn wxToolTip_SetAutoPop(msecs: c_long);
-    pub fn wxToolTip_SetDelay(msecs: c_long);
-    pub fn wxToolTip_SetMaxWidth(width: c_int);
-    pub fn wxToolTip_SetReshow(msecs: c_long);
 
     // wxToolbook
     pub fn wxToolbook_CLASSINFO() -> *mut c_void;
@@ -10939,12 +7667,6 @@ extern "C" {
     pub fn wxTreeListItem_new() -> *mut c_void;
     pub fn wxTreeListItem_IsOk(self_: *const c_void) -> bool;
 
-    // wxTreeListItemComparator
-    pub fn wxTreeListItemComparator_delete(self_: *mut c_void);
-    pub fn wxTreeListItemComparator_new() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxTreeListItemComparator_Compare(self_: *mut c_void, treelist: *mut c_void, column: unsigned, first: wxTreeListItem, second: wxTreeListItem) -> c_int;
-    // DTOR: pub fn wxTreeListItemComparator_~wxTreeListItemComparator(self_: *mut c_void);
-
     // wxTreebook
     pub fn wxTreebook_CLASSINFO() -> *mut c_void;
     pub fn wxTreebook_new() -> *mut c_void;
@@ -11020,12 +7742,6 @@ extern "C" {
     pub fn wxUIActionSimulator_Select(self_: *mut c_void, text: *const c_void) -> bool;
     pub fn wxUIActionSimulator_Text(self_: *mut c_void, text: *const c_void) -> bool;
 
-    // wxURLDataObject
-    pub fn wxURLDataObject_delete(self_: *mut c_void);
-    pub fn wxURLDataObject_new(url: *const c_void) -> *mut c_void;
-    pub fn wxURLDataObject_GetURL(self_: *const c_void) -> *mut c_void;
-    pub fn wxURLDataObject_SetURL(self_: *mut c_void, url: *const c_void);
-
     // wxUpdateUIEvent
     pub fn wxUpdateUIEvent_CLASSINFO() -> *mut c_void;
     pub fn wxUpdateUIEvent_new(command_id: c_int) -> *mut c_void;
@@ -11049,77 +7765,6 @@ extern "C" {
     // NOT_SUPPORTED: pub fn wxUpdateUIEvent_SetMode(mode: wxUpdateUIMode);
     pub fn wxUpdateUIEvent_SetUpdateInterval(update_interval: c_long);
 
-    // wxVListBox
-    pub fn wxVListBox_CLASSINFO() -> *mut c_void;
-    pub fn wxVListBox_new() -> *mut c_void;
-    pub fn wxVListBox_new1(
-        parent: *mut c_void,
-        id: c_int,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> *mut c_void;
-    // DTOR: pub fn wxVListBox_~wxVListBox(self_: *mut c_void);
-    pub fn wxVListBox_Clear(self_: *mut c_void);
-    pub fn wxVListBox_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        id: c_int,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> bool;
-    pub fn wxVListBox_DeselectAll(self_: *mut c_void) -> bool;
-    pub fn wxVListBox_GetFirstSelected(self_: *const c_void, cookie: *mut c_void) -> c_int;
-    pub fn wxVListBox_GetItemCount(self_: *const c_void) -> usize;
-    pub fn wxVListBox_GetMargins(self_: *const c_void) -> *mut c_void;
-    pub fn wxVListBox_GetItemRect(self_: *const c_void, item: usize) -> *mut c_void;
-    pub fn wxVListBox_GetNextSelected(self_: *const c_void, cookie: *mut c_void) -> c_int;
-    pub fn wxVListBox_GetSelectedCount(self_: *const c_void) -> usize;
-    pub fn wxVListBox_GetSelection(self_: *const c_void) -> c_int;
-    pub fn wxVListBox_GetSelectionBackground(self_: *const c_void) -> *mut c_void;
-    pub fn wxVListBox_HasMultipleSelection(self_: *const c_void) -> bool;
-    pub fn wxVListBox_IsCurrent(self_: *const c_void, item: usize) -> bool;
-    pub fn wxVListBox_IsSelected(self_: *const c_void, item: usize) -> bool;
-    pub fn wxVListBox_Select(self_: *mut c_void, item: usize, select: bool) -> bool;
-    pub fn wxVListBox_SelectAll(self_: *mut c_void) -> bool;
-    pub fn wxVListBox_SelectRange(self_: *mut c_void, from: usize, to: usize) -> bool;
-    pub fn wxVListBox_SetItemCount(self_: *mut c_void, count: usize);
-    pub fn wxVListBox_SetMargins(self_: *mut c_void, pt: *const c_void);
-    pub fn wxVListBox_SetMargins1(self_: *mut c_void, x: c_int, y: c_int);
-    pub fn wxVListBox_SetSelection(self_: *mut c_void, selection: c_int);
-    pub fn wxVListBox_SetSelectionBackground(self_: *mut c_void, col: *const c_void);
-    pub fn wxVListBox_Toggle(self_: *mut c_void, item: usize);
-    // Mix-in(s) to wxVListBox
-    pub fn wxVListBox_AsVarVScrollHelper(obj: *mut c_void) -> *mut c_void;
-    pub fn wxVListBox_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
-    // wxVScrolledWindow
-    pub fn wxVScrolledWindow_CLASSINFO() -> *mut c_void;
-    pub fn wxVScrolledWindow_new() -> *mut c_void;
-    pub fn wxVScrolledWindow_new1(
-        parent: *mut c_void,
-        id: c_int,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxVScrolledWindow_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        id: c_int,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> bool;
-    // Mix-in(s) to wxVScrolledWindow
-    pub fn wxVScrolledWindow_AsVarVScrollHelper(obj: *mut c_void) -> *mut c_void;
-    pub fn wxVScrolledWindow_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
     // wxValidator
     pub fn wxValidator_CLASSINFO() -> *mut c_void;
     pub fn wxValidator_new() -> *mut c_void;
@@ -11134,157 +7779,6 @@ extern "C" {
     pub fn wxValidator_IsSilent() -> bool;
     // Mix-in(s) to wxValidator
     pub fn wxValidator_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
-    // wxVarHScrollHelper
-    pub fn wxVarHScrollHelper_delete(self_: *mut c_void);
-    pub fn wxVarHScrollHelper_new(win_to_scroll: *mut c_void) -> *mut c_void;
-    pub fn wxVarHScrollHelper_GetColumnCount(self_: *const c_void) -> usize;
-    pub fn wxVarHScrollHelper_GetVisibleColumnsBegin(self_: *const c_void) -> usize;
-    pub fn wxVarHScrollHelper_GetVisibleColumnsEnd(self_: *const c_void) -> usize;
-    pub fn wxVarHScrollHelper_IsColumnVisible(self_: *const c_void, column: usize) -> bool;
-    pub fn wxVarHScrollHelper_RefreshColumn(self_: *mut c_void, column: usize);
-    pub fn wxVarHScrollHelper_RefreshColumns(self_: *mut c_void, from: usize, to: usize);
-    pub fn wxVarHScrollHelper_ScrollColumnPages(self_: *mut c_void, pages: c_int) -> bool;
-    pub fn wxVarHScrollHelper_ScrollColumns(self_: *mut c_void, columns: c_int) -> bool;
-    pub fn wxVarHScrollHelper_ScrollToColumn(self_: *mut c_void, column: usize) -> bool;
-    pub fn wxVarHScrollHelper_SetColumnCount(self_: *mut c_void, column_count: usize);
-
-    // wxVarHVScrollHelper
-    pub fn wxVarHVScrollHelper_delete(self_: *mut c_void);
-    pub fn wxVarHVScrollHelper_new(win_to_scroll: *mut c_void) -> *mut c_void;
-    pub fn wxVarHVScrollHelper_EnablePhysicalScrolling(
-        self_: *mut c_void,
-        vscrolling: bool,
-        hscrolling: bool,
-    );
-    pub fn wxVarHVScrollHelper_GetRowColumnCount(self_: *const c_void) -> *mut c_void;
-    pub fn wxVarHVScrollHelper_GetVisibleBegin(self_: *const c_void) -> *mut c_void;
-    pub fn wxVarHVScrollHelper_GetVisibleEnd(self_: *const c_void) -> *mut c_void;
-    pub fn wxVarHVScrollHelper_IsVisible(self_: *const c_void, row: usize, column: usize) -> bool;
-    pub fn wxVarHVScrollHelper_IsVisible1(self_: *const c_void, pos: *const c_void) -> bool;
-    pub fn wxVarHVScrollHelper_RefreshRowColumn(self_: *mut c_void, row: usize, column: usize);
-    pub fn wxVarHVScrollHelper_RefreshRowColumn1(self_: *mut c_void, pos: *const c_void);
-    pub fn wxVarHVScrollHelper_RefreshRowsColumns(
-        self_: *mut c_void,
-        from_row: usize,
-        to_row: usize,
-        from_column: usize,
-        to_column: usize,
-    );
-    pub fn wxVarHVScrollHelper_RefreshRowsColumns1(
-        self_: *mut c_void,
-        from: *const c_void,
-        to: *const c_void,
-    );
-    pub fn wxVarHVScrollHelper_ScrollToRowColumn(
-        self_: *mut c_void,
-        row: usize,
-        column: usize,
-    ) -> bool;
-    pub fn wxVarHVScrollHelper_ScrollToRowColumn1(self_: *mut c_void, pos: *const c_void) -> bool;
-    pub fn wxVarHVScrollHelper_SetRowColumnCount(
-        self_: *mut c_void,
-        row_count: usize,
-        column_count: usize,
-    );
-    pub fn wxVarHVScrollHelper_VirtualHitTest(
-        self_: *const c_void,
-        x: c_int,
-        y: c_int,
-    ) -> *mut c_void;
-    pub fn wxVarHVScrollHelper_VirtualHitTest1(
-        self_: *const c_void,
-        pos: *const c_void,
-    ) -> *mut c_void;
-    // Mix-in(s) to wxVarHVScrollHelper
-    pub fn wxVarHVScrollHelper_AsVarHScrollHelper(obj: *mut c_void) -> *mut c_void;
-
-    // wxVarScrollHelperBase
-    pub fn wxVarScrollHelperBase_delete(self_: *mut c_void);
-    pub fn wxVarScrollHelperBase_new(win_to_scroll: *mut c_void) -> *mut c_void;
-    // DTOR: pub fn wxVarScrollHelperBase_~wxVarScrollHelperBase(self_: *mut c_void);
-    pub fn wxVarScrollHelperBase_CalcScrolledPosition(self_: *const c_void, coord: c_int) -> c_int;
-    pub fn wxVarScrollHelperBase_CalcUnscrolledPosition(
-        self_: *const c_void,
-        coord: c_int,
-    ) -> c_int;
-    pub fn wxVarScrollHelperBase_EnablePhysicalScrolling(self_: *mut c_void, scrolling: bool);
-    pub fn wxVarScrollHelperBase_GetNonOrientationTargetSize(self_: *const c_void) -> c_int;
-    // NOT_SUPPORTED: pub fn wxVarScrollHelperBase_GetOrientation(self_: *const c_void) -> wxOrientation;
-    pub fn wxVarScrollHelperBase_GetOrientationTargetSize(self_: *const c_void) -> c_int;
-    pub fn wxVarScrollHelperBase_GetTargetWindow(self_: *const c_void) -> *mut c_void;
-    pub fn wxVarScrollHelperBase_GetVisibleBegin(self_: *const c_void) -> usize;
-    pub fn wxVarScrollHelperBase_GetVisibleEnd(self_: *const c_void) -> usize;
-    pub fn wxVarScrollHelperBase_IsVisible(self_: *const c_void, unit: usize) -> bool;
-    pub fn wxVarScrollHelperBase_RefreshAll(self_: *mut c_void);
-    pub fn wxVarScrollHelperBase_SetTargetWindow(self_: *mut c_void, target: *mut c_void);
-    pub fn wxVarScrollHelperBase_UpdateScrollbar(self_: *mut c_void);
-    pub fn wxVarScrollHelperBase_VirtualHitTest(self_: *const c_void, coord: c_int) -> c_int;
-
-    // wxVarVScrollHelper
-    pub fn wxVarVScrollHelper_delete(self_: *mut c_void);
-    pub fn wxVarVScrollHelper_new(win_to_scroll: *mut c_void) -> *mut c_void;
-    pub fn wxVarVScrollHelper_GetRowCount(self_: *const c_void) -> usize;
-    pub fn wxVarVScrollHelper_GetVisibleRowsBegin(self_: *const c_void) -> usize;
-    pub fn wxVarVScrollHelper_GetVisibleRowsEnd(self_: *const c_void) -> usize;
-    pub fn wxVarVScrollHelper_IsRowVisible(self_: *const c_void, row: usize) -> bool;
-    pub fn wxVarVScrollHelper_RefreshRow(self_: *mut c_void, row: usize);
-    pub fn wxVarVScrollHelper_RefreshRows(self_: *mut c_void, from: usize, to: usize);
-    pub fn wxVarVScrollHelper_ScrollRowPages(self_: *mut c_void, pages: c_int) -> bool;
-    pub fn wxVarVScrollHelper_ScrollRows(self_: *mut c_void, rows: c_int) -> bool;
-    pub fn wxVarVScrollHelper_ScrollToRow(self_: *mut c_void, row: usize) -> bool;
-    pub fn wxVarVScrollHelper_SetRowCount(self_: *mut c_void, row_count: usize);
-
-    // wxVariantDataCurrency
-    pub fn wxVariantDataCurrency_delete(self_: *mut c_void);
-    pub fn wxVariantDataCurrency_new() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxVariantDataCurrency_new1(value: CURRENCY) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxVariantDataCurrency_GetValue(self_: *const c_void) -> CURRENCY;
-    // NOT_SUPPORTED: pub fn wxVariantDataCurrency_SetValue(self_: *mut c_void, value: CURRENCY);
-    pub fn wxVariantDataCurrency_GetAsAny(self_: *const c_void, any: *mut c_void) -> bool;
-
-    // wxVariantDataErrorCode
-    pub fn wxVariantDataErrorCode_delete(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxVariantDataErrorCode_new(value: SCODE) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxVariantDataErrorCode_GetValue(self_: *const c_void) -> SCODE;
-    // NOT_SUPPORTED: pub fn wxVariantDataErrorCode_SetValue(self_: *mut c_void, value: SCODE);
-    pub fn wxVariantDataErrorCode_GetAsAny(self_: *const c_void, any: *mut c_void) -> bool;
-
-    // wxVariantDataSafeArray
-    pub fn wxVariantDataSafeArray_delete(self_: *mut c_void);
-    pub fn wxVariantDataSafeArray_new(value: *mut c_void) -> *mut c_void;
-    pub fn wxVariantDataSafeArray_GetValue(self_: *const c_void) -> *mut c_void;
-    pub fn wxVariantDataSafeArray_SetValue(self_: *mut c_void, value: *mut c_void);
-    pub fn wxVariantDataSafeArray_GetAsAny(self_: *const c_void, any: *mut c_void) -> bool;
-
-    // wxView
-    pub fn wxView_CLASSINFO() -> *mut c_void;
-    pub fn wxView_new() -> *mut c_void;
-    // DTOR: pub fn wxView_~wxView(self_: *mut c_void);
-    pub fn wxView_Activate(self_: *mut c_void, activate: bool);
-    pub fn wxView_Close(self_: *mut c_void, delete_window: bool) -> bool;
-    pub fn wxView_GetDocument(self_: *const c_void) -> *mut c_void;
-    pub fn wxView_GetDocumentManager(self_: *const c_void) -> *mut c_void;
-    pub fn wxView_GetFrame(self_: *const c_void) -> *mut c_void;
-    pub fn wxView_GetViewName(self_: *const c_void) -> *mut c_void;
-    pub fn wxView_OnActivateView(
-        self_: *mut c_void,
-        activate: bool,
-        active_view: *mut c_void,
-        deactive_view: *mut c_void,
-    );
-    pub fn wxView_OnChangeFilename(self_: *mut c_void);
-    pub fn wxView_OnClose(self_: *mut c_void, delete_window: bool) -> bool;
-    pub fn wxView_OnClosingDocument(self_: *mut c_void);
-    pub fn wxView_OnCreate(self_: *mut c_void, doc: *mut c_void, flags: c_long) -> bool;
-    pub fn wxView_OnCreatePrintout(self_: *mut c_void) -> *mut c_void;
-    pub fn wxView_OnDraw(self_: *mut c_void, dc: *mut c_void);
-    pub fn wxView_OnUpdate(self_: *mut c_void, sender: *mut c_void, hint: *mut c_void);
-    pub fn wxView_SetDocument(self_: *mut c_void, doc: *mut c_void);
-    pub fn wxView_SetFrame(self_: *mut c_void, frame: *mut c_void);
-    pub fn wxView_SetViewName(self_: *mut c_void, name: *const c_void);
-    // Mix-in(s) to wxView
-    pub fn wxView_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxWindow
     pub fn wxWindow_CLASSINFO() -> *mut c_void;
@@ -11482,7 +7976,7 @@ extern "C" {
         font: *const c_void,
     );
     pub fn wxWindow_GetTextExtent1(self_: *const c_void, string: *const c_void) -> *mut c_void;
-    // BLOCKED: pub fn wxWindow_GetUpdateRegion(self_: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxWindow_GetUpdateRegion(self_: *const c_void) -> *const c_void;
     pub fn wxWindow_GetUpdateClientRect(self_: *const c_void) -> *mut c_void;
     pub fn wxWindow_HasTransparentBackground(self_: *mut c_void) -> bool;
     pub fn wxWindow_Refresh(self_: *mut c_void, erase_background: bool, rect: *const c_void);
@@ -11700,97 +8194,15 @@ extern "C" {
     ) -> *mut c_void;
     // DTOR: pub fn wxWindowDisabler_~wxWindowDisabler(self_: *mut c_void);
 
-    // wxWizard
-    pub fn wxWizard_CLASSINFO() -> *mut c_void;
-    pub fn wxWizard_new() -> *mut c_void;
-    pub fn wxWizard_new1(
-        parent: *mut c_void,
-        id: c_int,
-        title: *const c_void,
-        bitmap: *const c_void,
-        pos: *const c_void,
-        style: c_long,
-    ) -> *mut c_void;
-    pub fn wxWizard_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        id: c_int,
-        title: *const c_void,
-        bitmap: *const c_void,
-        pos: *const c_void,
-        style: c_long,
-    ) -> bool;
-    pub fn wxWizard_FitToPage(self_: *mut c_void, first_page: *const c_void);
-    pub fn wxWizard_GetBitmap(self_: *const c_void) -> *mut c_void;
-    pub fn wxWizard_GetBitmapBackgroundColour(self_: *const c_void) -> *mut c_void;
-    pub fn wxWizard_GetBitmapPlacement(self_: *const c_void) -> c_int;
-    pub fn wxWizard_GetCurrentPage(self_: *const c_void) -> *mut c_void;
-    pub fn wxWizard_GetMinimumBitmapWidth(self_: *const c_void) -> c_int;
-    pub fn wxWizard_GetPageAreaSizer(self_: *const c_void) -> *mut c_void;
-    pub fn wxWizard_GetPageSize(self_: *const c_void) -> *mut c_void;
-    pub fn wxWizard_HasNextPage(self_: *mut c_void, page: *mut c_void) -> bool;
-    pub fn wxWizard_HasPrevPage(self_: *mut c_void, page: *mut c_void) -> bool;
-    pub fn wxWizard_RunWizard(self_: *mut c_void, first_page: *mut c_void) -> bool;
-    pub fn wxWizard_SetBitmap(self_: *mut c_void, bitmap: *const c_void);
-    pub fn wxWizard_SetBitmapBackgroundColour(self_: *mut c_void, colour: *const c_void);
-    pub fn wxWizard_SetBitmapPlacement(self_: *mut c_void, placement: c_int);
-    pub fn wxWizard_SetBorder(self_: *mut c_void, border: c_int);
-    pub fn wxWizard_SetMinimumBitmapWidth(self_: *mut c_void, width: c_int);
-    pub fn wxWizard_SetPageSize(self_: *mut c_void, size_page: *const c_void);
-    // Mix-in(s) to wxWizard
-    pub fn wxWizard_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
     // wxWizardEvent
     pub fn wxWizardEvent_CLASSINFO() -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxWizardEvent_new(type_: wxEventType, id: c_int, direction: bool, page: *mut c_void) -> *mut c_void;
     pub fn wxWizardEvent_GetDirection(self_: *const c_void) -> bool;
     pub fn wxWizardEvent_GetPage(self_: *const c_void) -> *mut c_void;
 
-    // wxWizardPage
-    pub fn wxWizardPage_CLASSINFO() -> *mut c_void;
-    pub fn wxWizardPage_new() -> *mut c_void;
-    pub fn wxWizardPage_new1(parent: *mut c_void, bitmap: *const c_void) -> *mut c_void;
-    pub fn wxWizardPage_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        bitmap: *const c_void,
-    ) -> bool;
-    pub fn wxWizardPage_GetBitmap(self_: *const c_void) -> *mut c_void;
-    pub fn wxWizardPage_GetNext(self_: *const c_void) -> *mut c_void;
-    pub fn wxWizardPage_GetPrev(self_: *const c_void) -> *mut c_void;
-    // Mix-in(s) to wxWizardPage
-    pub fn wxWizardPage_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
-    // wxWizardPageSimple
-    pub fn wxWizardPageSimple_CLASSINFO() -> *mut c_void;
-    pub fn wxWizardPageSimple_new() -> *mut c_void;
-    pub fn wxWizardPageSimple_new1(
-        parent: *mut c_void,
-        prev: *mut c_void,
-        next: *mut c_void,
-        bitmap: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxWizardPageSimple_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        prev: *mut c_void,
-        next: *mut c_void,
-        bitmap: *const c_void,
-    ) -> bool;
-    pub fn wxWizardPageSimple_Chain(self_: *mut c_void, next: *mut c_void) -> *mut c_void;
-    pub fn wxWizardPageSimple_SetNext(self_: *mut c_void, next: *mut c_void);
-    pub fn wxWizardPageSimple_SetPrev(self_: *mut c_void, prev: *mut c_void);
-    pub fn wxWizardPageSimple_Chain1(first: *mut c_void, second: *mut c_void);
-    // Mix-in(s) to wxWizardPageSimple
-    pub fn wxWizardPageSimple_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
     // wxWrapSizer
     pub fn wxWrapSizer_CLASSINFO() -> *mut c_void;
     pub fn wxWrapSizer_new(orient: c_int, flags: c_int) -> *mut c_void;
-
-    // wxXPMHandler
-    pub fn wxXPMHandler_CLASSINFO() -> *mut c_void;
-    pub fn wxXPMHandler_new() -> *mut c_void;
 
     // wxZoomGestureEvent
     pub fn wxZoomGestureEvent_CLASSINFO() -> *mut c_void;

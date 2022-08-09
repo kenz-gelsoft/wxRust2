@@ -2,11 +2,8 @@
 #include <wx/wx.h>
 #include <wx/aboutdlg.h>
 #include <wx/accel.h>
-#include <wx/access.h>
 #include <wx/activityindicator.h>
 #include <wx/addremovectrl.h>
-#include <wx/affinematrix2d.h>
-#include <wx/affinematrix2dbase.h>
 #include <wx/animate.h>
 #include <wx/anybutton.h>
 #include <wx/appprogress.h>
@@ -28,38 +25,30 @@
 #include <wx/choicebk.h>
 #include <wx/clipbrd.h>
 #include <wx/clrpicker.h>
-#include <wx/cmdproc.h>
 #include <wx/cmndata.h>
 #include <wx/collheaderctrl.h>
 #include <wx/collpane.h>
 #include <wx/colordlg.h>
 #include <wx/colour.h>
 #include <wx/colourdata.h>
-#include <wx/combo.h>
 #include <wx/combobox.h>
 #include <wx/commandlinkbutton.h>
 #include <wx/control.h>
-#include <wx/creddlg.h>
 #include <wx/cshelp.h>
 #include <wx/ctrlsub.h>
 #include <wx/cursor.h>
-#include <wx/dataobj.h>
 #include <wx/dataview.h>
 #include <wx/datectrl.h>
 #include <wx/dateevt.h>
 #include <wx/dc.h>
 #include <wx/dcbuffer.h>
 #include <wx/dcclient.h>
-#include <wx/dcgraph.h>
 #include <wx/dcmemory.h>
 #include <wx/dcmirror.h>
 #include <wx/dcprint.h>
 #include <wx/dcscreen.h>
 #include <wx/dcsvg.h>
-#include <wx/dialog.h>
-#include <wx/dialup.h>
 #include <wx/dirctrl.h>
-#include <wx/dirdlg.h>
 #include <wx/display.h>
 #include <wx/dnd.h>
 #include <wx/docmdi.h>
@@ -69,13 +58,10 @@
 #include <wx/event.h>
 #include <wx/fdrepdlg.h>
 #include <wx/filectrl.h>
-#include <wx/filedlg.h>
 #include <wx/filedlgcustomize.h>
-#include <wx/filehistory.h>
 #include <wx/filepicker.h>
 #include <wx/font.h>
 #include <wx/fontdata.h>
-#include <wx/fontdlg.h>
 #include <wx/fontenum.h>
 #include <wx/fontmap.h>
 #include <wx/fontpicker.h>
@@ -86,26 +72,14 @@
 #include <wx/gdicmn.h>
 #include <wx/gdiobj.h>
 #include <wx/generic/aboutdlgg.h>
-#include <wx/generic/helpext.h>
 #include <wx/graphics.h>
 #include <wx/grid.h>
 #include <wx/headercol.h>
 #include <wx/headerctrl.h>
-#include <wx/help.h>
 #include <wx/hyperlink.h>
 #include <wx/icon.h>
 #include <wx/iconbndl.h>
-#include <wx/image.h>
-#include <wx/imaggif.h>
-#include <wx/imagiff.h>
-#include <wx/imagjpeg.h>
 #include <wx/imaglist.h>
-#include <wx/imagpcx.h>
-#include <wx/imagpng.h>
-#include <wx/imagpnm.h>
-#include <wx/imagtga.h>
-#include <wx/imagtiff.h>
-#include <wx/imagxpm.h>
 #include <wx/infobar.h>
 #include <wx/itemattr.h>
 #include <wx/joystick.h>
@@ -119,30 +93,19 @@
 #include <wx/menuitem.h>
 #include <wx/metafile.h>
 #include <wx/minifram.h>
-#include <wx/mousemanager.h>
-#include <wx/msgdlg.h>
 #include <wx/msgout.h>
-#include <wx/msw/ole/activex.h>
-#include <wx/msw/ole/automtn.h>
-#include <wx/msw/ole/oleutils.h>
 #include <wx/nativewin.h>
 #include <wx/nonownedwnd.h>
 #include <wx/notebook.h>
-#include <wx/notifmsg.h>
-#include <wx/numdlg.h>
-#include <wx/odcombo.h>
 #include <wx/overlay.h>
 #include <wx/palette.h>
 #include <wx/panel.h>
 #include <wx/pen.h>
-#include <wx/persist.h>
 #include <wx/pickerbase.h>
 #include <wx/popupwin.h>
 #include <wx/preferences.h>
 #include <wx/print.h>
 #include <wx/printdlg.h>
-#include <wx/progdlg.h>
-#include <wx/propdlg.h>
 #include <wx/quantize.h>
 #include <wx/radiobox.h>
 #include <wx/radiobut.h>
@@ -168,18 +131,14 @@
 #include <wx/stattext.h>
 #include <wx/statusbr.h>
 #include <wx/taskbar.h>
-#include <wx/taskbarbutton.h>
 #include <wx/textcompleter.h>
 #include <wx/textctrl.h>
-#include <wx/textdlg.h>
 #include <wx/textentry.h>
 #include <wx/tglbtn.h>
 #include <wx/timectrl.h>
-#include <wx/tipdlg.h>
 #include <wx/tipwin.h>
 #include <wx/toolbar.h>
 #include <wx/toolbook.h>
-#include <wx/tooltip.h>
 #include <wx/toplevel.h>
 #include <wx/treebase.h>
 #include <wx/treebook.h>
@@ -190,12 +149,12 @@
 #include <wx/valgen.h>
 #include <wx/validate.h>
 #include <wx/valtext.h>
-#include <wx/vlbox.h>
-#include <wx/vscroll.h>
 #include <wx/window.h>
 #include <wx/windowid.h>
 #include <wx/wizard.h>
 #include <wx/wrapsizer.h>
+
+typedef wxGenericMessageDialog::ButtonLabel ButtonLabel;
 
 // wxBitmapBundle compatibility hack(for a while)
 #if !wxCHECK_VERSION(3, 1, 6)
@@ -260,33 +219,9 @@ wxString *wxAcceleratorEntry_ToString(const wxAcceleratorEntry * self);
 wxString *wxAcceleratorEntry_ToRawString(const wxAcceleratorEntry * self);
 bool wxAcceleratorEntry_FromString(wxAcceleratorEntry * self, const wxString * str);
 
-// CLASS: wxAcceleratorTable
-wxClassInfo *wxAcceleratorTable_CLASSINFO();
-wxAcceleratorTable *wxAcceleratorTable_new();
-wxAcceleratorTable *wxAcceleratorTable_new2(const wxString * resource);
-bool wxAcceleratorTable_IsOk(const wxAcceleratorTable * self);
-
-// CLASS: wxAccessible
-wxClassInfo *wxAccessible_CLASSINFO();
-wxAccessible *wxAccessible_new(wxWindow * win);
-wxWindow * wxAccessible_GetWindow(wxAccessible * self);
-void wxAccessible_SetWindow(wxAccessible * self, wxWindow * window);
-
 // CLASS: wxActivateEvent
 wxClassInfo *wxActivateEvent_CLASSINFO();
 bool wxActivateEvent_GetActive(const wxActivateEvent * self);
-
-// CLASS: wxActiveXContainer
-wxClassInfo *wxActiveXContainer_CLASSINFO();
-// Mix-in(s) to wxActiveXContainer
-wxTrackable *wxActiveXContainer_AsTrackable(wxActiveXContainer* obj);
-
-// CLASS: wxActiveXEvent
-wxClassInfo *wxActiveXEvent_CLASSINFO();
-size_t wxActiveXEvent_ParamCount(const wxActiveXEvent * self);
-wxString *wxActiveXEvent_ParamName(const wxActiveXEvent * self, size_t idx);
-wxString *wxActiveXEvent_ParamType(const wxActiveXEvent * self, size_t idx);
-wxActiveXEventNativeMSW * wxActiveXEvent_GetNativeParameters(const wxActiveXEvent * self);
 
 // CLASS: wxActivityIndicator
 wxClassInfo *wxActivityIndicator_CLASSINFO();
@@ -317,31 +252,6 @@ void wxAddRemoveCtrl_SetAdaptor(wxAddRemoveCtrl * self, wxAddRemoveAdaptor * ada
 void wxAddRemoveCtrl_SetButtonsToolTips(wxAddRemoveCtrl * self, const wxString * addtip, const wxString * removetip);
 // Mix-in(s) to wxAddRemoveCtrl
 wxTrackable *wxAddRemoveCtrl_AsTrackable(wxAddRemoveCtrl* obj);
-
-// CLASS: wxAffineMatrix2D
-void wxAffineMatrix2D_delete(wxAffineMatrix2D *self);
-wxAffineMatrix2D *wxAffineMatrix2D_new();
-void wxAffineMatrix2D_IsEqual(wxAffineMatrix2D * self, const wxAffineMatrix2DBase * t);
-void wxAffineMatrix2D_Mirror(wxAffineMatrix2D * self, int direction);
-wxPoint2DDouble *wxAffineMatrix2D_TransformPoint(const wxAffineMatrix2D * self, const wxPoint2DDouble * p);
-void wxAffineMatrix2D_TransformPoint1(const wxAffineMatrix2D * self, wxDouble * x, wxDouble * y);
-wxPoint2DDouble *wxAffineMatrix2D_TransformDistance(const wxAffineMatrix2D * self, const wxPoint2DDouble * p);
-void wxAffineMatrix2D_TransformDistance1(const wxAffineMatrix2D * self, wxDouble * dx, wxDouble * dy);
-
-// CLASS: wxAffineMatrix2DBase
-void wxAffineMatrix2DBase_delete(wxAffineMatrix2DBase *self);
-wxAffineMatrix2DBase *wxAffineMatrix2DBase_new();
-void wxAffineMatrix2DBase_Set(wxAffineMatrix2DBase * self, const wxMatrix2D * mat2_d, const wxPoint2DDouble * tr);
-void wxAffineMatrix2DBase_Get(const wxAffineMatrix2DBase * self, wxMatrix2D * mat2_d, wxPoint2DDouble * tr);
-void wxAffineMatrix2DBase_Concat(wxAffineMatrix2DBase * self, const wxAffineMatrix2DBase * t);
-bool wxAffineMatrix2DBase_Invert(wxAffineMatrix2DBase * self);
-bool wxAffineMatrix2DBase_IsIdentity(const wxAffineMatrix2DBase * self);
-bool wxAffineMatrix2DBase_IsEqual(const wxAffineMatrix2DBase * self, const wxAffineMatrix2DBase * t);
-void wxAffineMatrix2DBase_Mirror(wxAffineMatrix2DBase * self, int direction);
-wxPoint2DDouble *wxAffineMatrix2DBase_TransformPoint(const wxAffineMatrix2DBase * self, const wxPoint2DDouble * p);
-void wxAffineMatrix2DBase_TransformPoint1(const wxAffineMatrix2DBase * self, wxDouble * x, wxDouble * y);
-wxPoint2DDouble *wxAffineMatrix2DBase_TransformDistance(const wxAffineMatrix2DBase * self, const wxPoint2DDouble * p);
-void wxAffineMatrix2DBase_TransformDistance1(const wxAffineMatrix2DBase * self, wxDouble * dx, wxDouble * dy);
 
 // CLASS: wxAnimationCtrl
 wxClassInfo *wxAnimationCtrl_CLASSINFO();
@@ -418,17 +328,6 @@ wxIcon *wxArtProvider_GetMessageBoxIcon(int flags);
 wxClassInfo *wxAutoBufferedPaintDC_CLASSINFO();
 wxAutoBufferedPaintDC *wxAutoBufferedPaintDC_new(wxWindow * window);
 
-// CLASS: wxAutomationObject
-wxClassInfo *wxAutomationObject_CLASSINFO();
-wxAutomationObject *wxAutomationObject_new(WXIDISPATCH * dispatch_ptr);
-bool wxAutomationObject_CreateInstance(const wxAutomationObject * self, const wxString * prog_id);
-bool wxAutomationObject_IsOk(const wxAutomationObject * self);
-WXIDISPATCH * wxAutomationObject_GetDispatchPtr(const wxAutomationObject * self);
-bool wxAutomationObject_GetInstance(const wxAutomationObject * self, const wxString * prog_id, int flags);
-void wxAutomationObject_SetDispatchPtr(wxAutomationObject * self, WXIDISPATCH * dispatch_ptr);
-long wxAutomationObject_GetConvertVariantFlags(const wxAutomationObject * self);
-void wxAutomationObject_SetConvertVariantFlags(wxAutomationObject * self, long flags);
-
 // CLASS: wxBannerWindow
 wxClassInfo *wxBannerWindow_CLASSINFO();
 wxBannerWindow *wxBannerWindow_new();
@@ -460,7 +359,6 @@ wxBitmap *wxBitmap_new9(const wxImage * img, const wxDC * dc);
 #if wxCHECK_VERSION(3, 1, 0)
 wxBitmap *wxBitmap_new10(const wxCursor * cursor);
 #endif
-wxImage *wxBitmap_ConvertToImage(const wxBitmap * self);
 bool wxBitmap_CopyFromIcon(wxBitmap * self, const wxIcon * icon);
 bool wxBitmap_Create(wxBitmap * self, int width, int height, int depth);
 bool wxBitmap_Create1(wxBitmap * self, const wxSize * sz, int depth);
@@ -559,12 +457,6 @@ wxBitmapBundle *wxBitmapBundle_FromSVGFile(const wxString * path, const wxSize *
 wxBitmapBundle *wxBitmapBundle_FromSVGResource(const wxString * name, const wxSize * size_def);
 #endif
 
-// CLASS: wxBitmapBundleImpl
-void wxBitmapBundleImpl_delete(wxBitmapBundleImpl *self);
-wxSize *wxBitmapBundleImpl_GetDefaultSize(const wxBitmapBundleImpl * self);
-wxSize *wxBitmapBundleImpl_GetPreferredBitmapSizeAtScale(const wxBitmapBundleImpl * self, double scale);
-wxBitmap *wxBitmapBundleImpl_GetBitmap(wxBitmapBundleImpl * self, const wxSize * size);
-
 // CLASS: wxBitmapButton
 wxClassInfo *wxBitmapButton_CLASSINFO();
 wxBitmapButton *wxBitmapButton_new();
@@ -595,12 +487,6 @@ void wxBitmapComboBox_SetItemBitmap(wxBitmapComboBox * self, unsigned int n, con
 wxItemContainer *wxBitmapComboBox_AsItemContainer(wxBitmapComboBox* obj);
 wxTextEntryBase *wxBitmapComboBox_AsTextEntry(wxBitmapComboBox* obj);
 wxTrackable *wxBitmapComboBox_AsTrackable(wxBitmapComboBox* obj);
-
-// CLASS: wxBitmapDataObject
-void wxBitmapDataObject_delete(wxBitmapDataObject *self);
-wxBitmapDataObject *wxBitmapDataObject_new(const wxBitmap * bitmap);
-wxBitmap *wxBitmapDataObject_GetBitmap(const wxBitmapDataObject * self);
-void wxBitmapDataObject_SetBitmap(wxBitmapDataObject * self, const wxBitmap * bitmap);
 
 // CLASS: wxBitmapHandler
 wxClassInfo *wxBitmapHandler_CLASSINFO();
@@ -961,14 +847,6 @@ void wxColourDatabase_AddColour(wxColourDatabase * self, const wxString * colour
 wxColour *wxColourDatabase_Find(const wxColourDatabase * self, const wxString * colour_name);
 wxString *wxColourDatabase_FindName(const wxColourDatabase * self, const wxColour * colour);
 
-// CLASS: wxColourDialog
-wxClassInfo *wxColourDialog_CLASSINFO();
-wxColourDialog *wxColourDialog_new(wxWindow * parent, const wxColourData * data);
-bool wxColourDialog_Create(wxColourDialog * self, wxWindow * parent, const wxColourData * data);
-wxColourData * wxColourDialog_GetColourData(wxColourDialog * self);
-// Mix-in(s) to wxColourDialog
-wxTrackable *wxColourDialog_AsTrackable(wxColourDialog* obj);
-
 // CLASS: wxColourDialogEvent
 wxClassInfo *wxColourDialogEvent_CLASSINFO();
 wxColourDialogEvent *wxColourDialogEvent_new();
@@ -1007,84 +885,6 @@ wxItemContainer *wxComboBox_AsItemContainer(wxComboBox* obj);
 wxTextEntryBase *wxComboBox_AsTextEntry(wxComboBox* obj);
 wxTrackable *wxComboBox_AsTrackable(wxComboBox* obj);
 
-// CLASS: wxComboCtrl
-wxClassInfo *wxComboCtrl_CLASSINFO();
-wxComboCtrl *wxComboCtrl_new();
-wxComboCtrl *wxComboCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
-bool wxComboCtrl_Create(wxComboCtrl * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
-void wxComboCtrl_Dismiss(wxComboCtrl * self);
-void wxComboCtrl_EnablePopupAnimation(wxComboCtrl * self, bool enable);
-bool wxComboCtrl_IsKeyPopupToggle(const wxComboCtrl * self, const wxKeyEvent * event);
-void wxComboCtrl_PrepareBackground(const wxComboCtrl * self, wxDC * dc, const wxRect * rect, int flags);
-bool wxComboCtrl_ShouldDrawFocus(const wxComboCtrl * self);
-wxBitmap *wxComboCtrl_GetBitmapDisabled(const wxComboCtrl * self);
-wxBitmap *wxComboCtrl_GetBitmapHover(const wxComboCtrl * self);
-wxBitmap *wxComboCtrl_GetBitmapNormal(const wxComboCtrl * self);
-wxBitmap *wxComboCtrl_GetBitmapPressed(const wxComboCtrl * self);
-wxSize *wxComboCtrl_GetButtonSize(wxComboCtrl * self);
-int wxComboCtrl_GetCustomPaintWidth(const wxComboCtrl * self);
-wxPoint *wxComboCtrl_GetMargins(const wxComboCtrl * self);
-wxComboPopup * wxComboCtrl_GetPopupControl(wxComboCtrl * self);
-wxWindow * wxComboCtrl_GetPopupWindow(const wxComboCtrl * self);
-wxTextCtrl * wxComboCtrl_GetTextCtrl(const wxComboCtrl * self);
-wxCoord wxComboCtrl_GetTextIndent(const wxComboCtrl * self);
-wxRect *wxComboCtrl_GetTextRect(const wxComboCtrl * self);
-void wxComboCtrl_HidePopup(wxComboCtrl * self, bool generate_event);
-bool wxComboCtrl_IsPopupShown(const wxComboCtrl * self);
-bool wxComboCtrl_IsPopupWindowState(const wxComboCtrl * self, int state);
-void wxComboCtrl_OnButtonClick(wxComboCtrl * self);
-void wxComboCtrl_Popup(wxComboCtrl * self);
-void wxComboCtrl_SetButtonBitmaps(wxComboCtrl * self, const wxBitmapBundle * bmp_normal, bool push_button_bg, const wxBitmapBundle * bmp_pressed, const wxBitmapBundle * bmp_hover, const wxBitmapBundle * bmp_disabled);
-void wxComboCtrl_SetButtonPosition(wxComboCtrl * self, int width, int height, int side, int spacing_x);
-void wxComboCtrl_SetCustomPaintWidth(wxComboCtrl * self, int width);
-void wxComboCtrl_SetMainControl(wxComboCtrl * self, wxWindow * win);
-bool wxComboCtrl_SetMargins(wxComboCtrl * self, const wxPoint * pt);
-bool wxComboCtrl_SetMargins1(wxComboCtrl * self, wxCoord left, wxCoord top);
-void wxComboCtrl_SetPopupAnchor(wxComboCtrl * self, int anchor_side);
-void wxComboCtrl_SetPopupControl(wxComboCtrl * self, wxComboPopup * popup);
-void wxComboCtrl_SetPopupExtents(wxComboCtrl * self, int ext_left, int ext_right);
-void wxComboCtrl_SetPopupMaxHeight(wxComboCtrl * self, int height);
-void wxComboCtrl_SetPopupMinWidth(wxComboCtrl * self, int width);
-void wxComboCtrl_SetText(wxComboCtrl * self, const wxString * value);
-void wxComboCtrl_SetTextCtrlStyle(wxComboCtrl * self, int style);
-void wxComboCtrl_SetTextIndent(wxComboCtrl * self, int indent);
-void wxComboCtrl_SetValueByUser(wxComboCtrl * self, const wxString * value);
-void wxComboCtrl_ShowPopup(wxComboCtrl * self);
-void wxComboCtrl_UseAltPopupWindow(wxComboCtrl * self, bool enable);
-int wxComboCtrl_GetFeatures();
-// Mix-in(s) to wxComboCtrl
-wxTextEntryBase *wxComboCtrl_AsTextEntry(wxComboCtrl* obj);
-wxTrackable *wxComboCtrl_AsTrackable(wxComboCtrl* obj);
-
-// CLASS: wxComboPopup
-void wxComboPopup_delete(wxComboPopup *self);
-wxComboPopup *wxComboPopup_new();
-bool wxComboPopup_Create(wxComboPopup * self, wxWindow * parent);
-void wxComboPopup_DestroyPopup(wxComboPopup * self);
-void wxComboPopup_Dismiss(wxComboPopup * self);
-bool wxComboPopup_FindItem(wxComboPopup * self, const wxString * item, wxString * true_item);
-wxSize *wxComboPopup_GetAdjustedSize(wxComboPopup * self, int min_width, int pref_height, int max_height);
-wxComboCtrl * wxComboPopup_GetComboCtrl(const wxComboPopup * self);
-wxWindow * wxComboPopup_GetControl(wxComboPopup * self);
-wxString *wxComboPopup_GetStringValue(const wxComboPopup * self);
-void wxComboPopup_Init(wxComboPopup * self);
-bool wxComboPopup_IsCreated(const wxComboPopup * self);
-bool wxComboPopup_LazyCreate(wxComboPopup * self);
-void wxComboPopup_OnComboDoubleClick(wxComboPopup * self);
-void wxComboPopup_OnComboKeyEvent(wxComboPopup * self, wxKeyEvent * event);
-void wxComboPopup_OnDismiss(wxComboPopup * self);
-void wxComboPopup_OnPopup(wxComboPopup * self);
-void wxComboPopup_PaintComboControl(wxComboPopup * self, wxDC * dc, const wxRect * rect);
-void wxComboPopup_SetStringValue(wxComboPopup * self, const wxString * value);
-
-// CLASS: wxCommand
-wxClassInfo *wxCommand_CLASSINFO();
-wxCommand *wxCommand_new(bool can_undo, const wxString * name);
-bool wxCommand_CanUndo(const wxCommand * self);
-bool wxCommand_Do(wxCommand * self);
-wxString *wxCommand_GetName(const wxCommand * self);
-bool wxCommand_Undo(wxCommand * self);
-
 // CLASS: wxCommandEvent
 wxClassInfo *wxCommandEvent_CLASSINFO();
 void * wxCommandEvent_GetClientData(const wxCommandEvent * self);
@@ -1113,32 +913,6 @@ wxString *wxCommandLinkButton_GetMainLabel(const wxCommandLinkButton * self);
 wxString *wxCommandLinkButton_GetNote(const wxCommandLinkButton * self);
 // Mix-in(s) to wxCommandLinkButton
 wxTrackable *wxCommandLinkButton_AsTrackable(wxCommandLinkButton* obj);
-
-// CLASS: wxCommandProcessor
-wxClassInfo *wxCommandProcessor_CLASSINFO();
-wxCommandProcessor *wxCommandProcessor_new(int max_commands);
-bool wxCommandProcessor_CanUndo(const wxCommandProcessor * self);
-bool wxCommandProcessor_CanRedo(const wxCommandProcessor * self);
-void wxCommandProcessor_ClearCommands(wxCommandProcessor * self);
-wxList * wxCommandProcessor_GetCommands(wxCommandProcessor * self);
-wxCommand * wxCommandProcessor_GetCurrentCommand(const wxCommandProcessor * self);
-wxMenu * wxCommandProcessor_GetEditMenu(const wxCommandProcessor * self);
-int wxCommandProcessor_GetMaxCommands(const wxCommandProcessor * self);
-wxString *wxCommandProcessor_GetRedoAccelerator(const wxCommandProcessor * self);
-wxString *wxCommandProcessor_GetRedoMenuLabel(const wxCommandProcessor * self);
-wxString *wxCommandProcessor_GetUndoAccelerator(const wxCommandProcessor * self);
-wxString *wxCommandProcessor_GetUndoMenuLabel(const wxCommandProcessor * self);
-void wxCommandProcessor_Initialize(wxCommandProcessor * self);
-bool wxCommandProcessor_IsDirty(const wxCommandProcessor * self);
-void wxCommandProcessor_MarkAsSaved(wxCommandProcessor * self);
-bool wxCommandProcessor_Redo(wxCommandProcessor * self);
-void wxCommandProcessor_SetEditMenu(wxCommandProcessor * self, wxMenu * menu);
-void wxCommandProcessor_SetMenuStrings(wxCommandProcessor * self);
-void wxCommandProcessor_SetRedoAccelerator(wxCommandProcessor * self, const wxString * accel);
-void wxCommandProcessor_SetUndoAccelerator(wxCommandProcessor * self, const wxString * accel);
-bool wxCommandProcessor_Submit(wxCommandProcessor * self, wxCommand * command, bool store_it);
-void wxCommandProcessor_Store(wxCommandProcessor * self, wxCommand * command);
-bool wxCommandProcessor_Undo(wxCommandProcessor * self);
 
 // CLASS: wxContextHelp
 wxClassInfo *wxContextHelp_CLASSINFO();
@@ -1184,17 +958,6 @@ wxClassInfo *wxControlWithItems_CLASSINFO();
 wxItemContainer *wxControlWithItems_AsItemContainer(wxControlWithItems* obj);
 wxTrackable *wxControlWithItems_AsTrackable(wxControlWithItems* obj);
 
-// CLASS: wxCredentialEntryDialog
-wxClassInfo *wxCredentialEntryDialog_CLASSINFO();
-wxCredentialEntryDialog *wxCredentialEntryDialog_new();
-wxCredentialEntryDialog *wxCredentialEntryDialog_new1(wxWindow * parent, const wxString * message, const wxString * title, const wxWebCredentials * cred);
-bool wxCredentialEntryDialog_Create(wxCredentialEntryDialog * self, wxWindow * parent, const wxString * message, const wxString * title, const wxWebCredentials * cred);
-wxWebCredentials *wxCredentialEntryDialog_GetCredentials(const wxCredentialEntryDialog * self);
-void wxCredentialEntryDialog_SetUser(wxCredentialEntryDialog * self, const wxString * user);
-void wxCredentialEntryDialog_SetPassword(wxCredentialEntryDialog * self, const wxString * password);
-// Mix-in(s) to wxCredentialEntryDialog
-wxTrackable *wxCredentialEntryDialog_AsTrackable(wxCredentialEntryDialog* obj);
-
 // CLASS: wxCursor
 wxClassInfo *wxCursor_CLASSINFO();
 wxCursor *wxCursor_new();
@@ -1203,15 +966,6 @@ wxCursor *wxCursor_new5(const char *const * xpm_data);
 wxCursor *wxCursor_new6(const wxCursor * cursor);
 bool wxCursor_IsOk(const wxCursor * self);
 wxPoint *wxCursor_GetHotSpot(const wxCursor * self);
-
-// CLASS: wxCustomDataObject
-void wxCustomDataObject_delete(wxCustomDataObject *self);
-wxCustomDataObject *wxCustomDataObject_new(const wxDataFormat * format);
-void * wxCustomDataObject_Alloc(wxCustomDataObject * self, size_t size);
-void wxCustomDataObject_Free(wxCustomDataObject * self);
-void * wxCustomDataObject_GetData(const wxCustomDataObject * self);
-size_t wxCustomDataObject_GetSize(const wxCustomDataObject * self);
-void wxCustomDataObject_TakeData(wxCustomDataObject * self, size_t size, void * data);
 
 // CLASS: wxDC
 wxClassInfo *wxDC_CLASSINFO();
@@ -1335,7 +1089,6 @@ void wxDC_SetPalette(wxDC * self, const wxPalette * palette);
 void wxDC_SetUserScale(wxDC * self, double x_scale, double y_scale);
 bool wxDC_CanUseTransformMatrix(const wxDC * self);
 bool wxDC_SetTransformMatrix(wxDC * self, const wxAffineMatrix2D * matrix);
-wxAffineMatrix2D *wxDC_GetTransformMatrix(const wxDC * self);
 void wxDC_ResetTransformMatrix(wxDC * self);
 bool wxDC_CanDrawBitmap(const wxDC * self);
 bool wxDC_CanGetTextExtent(const wxDC * self);
@@ -1397,44 +1150,6 @@ wxSize *wxDPIChangedEvent_GetNewDPI(const wxDPIChangedEvent * self);
 wxSize *wxDPIChangedEvent_Scale(const wxDPIChangedEvent * self, wxSize sz);
 int wxDPIChangedEvent_ScaleX(const wxDPIChangedEvent * self, int x);
 int wxDPIChangedEvent_ScaleY(const wxDPIChangedEvent * self, int y);
-
-// CLASS: wxDataObject
-void wxDataObject_delete(wxDataObject *self);
-wxDataObject *wxDataObject_new();
-bool wxDataObject_GetDataHere(const wxDataObject * self, const wxDataFormat * format, void * buf);
-size_t wxDataObject_GetDataSize(const wxDataObject * self, const wxDataFormat * format);
-bool wxDataObject_SetData(wxDataObject * self, const wxDataFormat * format, size_t len, const void * buf);
-
-// CLASS: wxDataObjectComposite
-void wxDataObjectComposite_delete(wxDataObjectComposite *self);
-wxDataObjectComposite *wxDataObjectComposite_new();
-void wxDataObjectComposite_Add(wxDataObjectComposite * self, wxDataObjectSimple * data_object, bool preferred);
-
-// CLASS: wxDataObjectSimple
-void wxDataObjectSimple_delete(wxDataObjectSimple *self);
-wxDataObjectSimple *wxDataObjectSimple_new(const wxDataFormat * format);
-bool wxDataObjectSimple_GetDataHere(const wxDataObjectSimple * self, void * buf);
-size_t wxDataObjectSimple_GetDataSize(const wxDataObjectSimple * self);
-const wxDataFormat * wxDataObjectSimple_GetFormat(const wxDataObjectSimple * self);
-bool wxDataObjectSimple_SetData(wxDataObjectSimple * self, size_t len, const void * buf);
-void wxDataObjectSimple_SetFormat(wxDataObjectSimple * self, const wxDataFormat * format);
-
-// CLASS: wxDataViewBitmapRenderer
-wxClassInfo *wxDataViewBitmapRenderer_CLASSINFO();
-wxString *wxDataViewBitmapRenderer_GetDefaultType();
-
-// CLASS: wxDataViewCheckIconTextRenderer
-wxClassInfo *wxDataViewCheckIconTextRenderer_CLASSINFO();
-wxString *wxDataViewCheckIconTextRenderer_GetDefaultType();
-void wxDataViewCheckIconTextRenderer_Allow3rdStateForUser(wxDataViewCheckIconTextRenderer * self, bool allow);
-
-// CLASS: wxDataViewChoiceByIndexRenderer
-wxClassInfo *wxDataViewChoiceByIndexRenderer_CLASSINFO();
-
-// CLASS: wxDataViewChoiceRenderer
-wxClassInfo *wxDataViewChoiceRenderer_CLASSINFO();
-wxString *wxDataViewChoiceRenderer_GetChoice(const wxDataViewChoiceRenderer * self, size_t index);
-wxArrayString *wxDataViewChoiceRenderer_GetChoices(const wxDataViewChoiceRenderer * self);
 
 // CLASS: wxDataViewColumn
 void wxDataViewColumn_delete(wxDataViewColumn *self);
@@ -1502,53 +1217,6 @@ wxDataViewItem *wxDataViewCtrl_GetTopItem(const wxDataViewCtrl * self);
 // Mix-in(s) to wxDataViewCtrl
 wxTrackable *wxDataViewCtrl_AsTrackable(wxDataViewCtrl* obj);
 
-// CLASS: wxDataViewCustomRenderer
-wxClassInfo *wxDataViewCustomRenderer_CLASSINFO();
-wxString *wxDataViewCustomRenderer_GetDefaultType();
-bool wxDataViewCustomRenderer_ActivateCell(wxDataViewCustomRenderer * self, const wxRect * cell, wxDataViewModel * model, const wxDataViewItem * item, unsigned int col, const wxMouseEvent * mouse_event);
-wxDataViewItemAttr *wxDataViewCustomRenderer_GetAttr(const wxDataViewCustomRenderer * self);
-wxSize *wxDataViewCustomRenderer_GetSize(const wxDataViewCustomRenderer * self);
-bool wxDataViewCustomRenderer_LeftClick(wxDataViewCustomRenderer * self, wxPoint cursor, wxRect cell, wxDataViewModel * model, const wxDataViewItem * item, unsigned int col);
-bool wxDataViewCustomRenderer_Activate(wxDataViewCustomRenderer * self, wxRect cell, wxDataViewModel * model, const wxDataViewItem * item, unsigned int col);
-bool wxDataViewCustomRenderer_Render(wxDataViewCustomRenderer * self, wxRect cell, wxDC * dc, int state);
-void wxDataViewCustomRenderer_RenderText(wxDataViewCustomRenderer * self, const wxString * text, int xoffset, wxRect cell, wxDC * dc, int state);
-bool wxDataViewCustomRenderer_StartDrag(wxDataViewCustomRenderer * self, const wxPoint * cursor, const wxRect * cell, wxDataViewModel * model, const wxDataViewItem * item, unsigned int col);
-
-// CLASS: wxDataViewDateRenderer
-wxClassInfo *wxDataViewDateRenderer_CLASSINFO();
-wxString *wxDataViewDateRenderer_GetDefaultType();
-
-// CLASS: wxDataViewEvent
-wxClassInfo *wxDataViewEvent_CLASSINFO();
-wxDataViewEvent *wxDataViewEvent_new();
-wxDataViewEvent *wxDataViewEvent_new3(const wxDataViewEvent * event);
-int wxDataViewEvent_GetColumn(const wxDataViewEvent * self);
-wxDataViewColumn * wxDataViewEvent_GetDataViewColumn(const wxDataViewEvent * self);
-wxDataViewModel * wxDataViewEvent_GetModel(const wxDataViewEvent * self);
-wxPoint *wxDataViewEvent_GetPosition(const wxDataViewEvent * self);
-const wxVariant * wxDataViewEvent_GetValue(const wxDataViewEvent * self);
-bool wxDataViewEvent_IsEditCancelled(const wxDataViewEvent * self);
-void wxDataViewEvent_SetColumn(wxDataViewEvent * self, int col);
-void wxDataViewEvent_SetDataViewColumn(wxDataViewEvent * self, wxDataViewColumn * col);
-void wxDataViewEvent_SetModel(wxDataViewEvent * self, wxDataViewModel * model);
-void wxDataViewEvent_SetValue(wxDataViewEvent * self, const wxVariant * value);
-void wxDataViewEvent_SetDataObject(wxDataViewEvent * self, wxDataObject * obj);
-size_t wxDataViewEvent_GetDataSize(const wxDataViewEvent * self);
-void * wxDataViewEvent_GetDataBuffer(const wxDataViewEvent * self);
-void wxDataViewEvent_SetDragFlags(wxDataViewEvent * self, int flags);
-int wxDataViewEvent_GetCacheFrom(const wxDataViewEvent * self);
-int wxDataViewEvent_GetCacheTo(const wxDataViewEvent * self);
-int wxDataViewEvent_GetProposedDropIndex(const wxDataViewEvent * self);
-wxDataViewItem *wxDataViewEvent_GetItem(const wxDataViewEvent * self);
-void wxDataViewEvent_SetItem(wxDataViewEvent * self, const wxDataViewItem * item);
-void wxDataViewEvent_SetPosition(wxDataViewEvent * self, int x, int y);
-void wxDataViewEvent_SetCache(wxDataViewEvent * self, int from, int to);
-wxDataObject * wxDataViewEvent_GetDataObject(const wxDataViewEvent * self);
-void wxDataViewEvent_SetDataFormat(wxDataViewEvent * self, const wxDataFormat * format);
-void wxDataViewEvent_SetDataSize(wxDataViewEvent * self, size_t size);
-void wxDataViewEvent_SetDataBuffer(wxDataViewEvent * self, void * buf);
-int wxDataViewEvent_GetDragFlags(const wxDataViewEvent * self);
-
 // CLASS: wxDataViewIconText
 wxClassInfo *wxDataViewIconText_CLASSINFO();
 wxDataViewIconText *wxDataViewIconText_new(const wxString * text, const wxBitmapBundle * bitmap);
@@ -1559,23 +1227,6 @@ wxString *wxDataViewIconText_GetText(const wxDataViewIconText * self);
 void wxDataViewIconText_SetBitmapBundle(wxDataViewIconText * self, const wxBitmapBundle * bitmap);
 void wxDataViewIconText_SetIcon(wxDataViewIconText * self, const wxIcon * icon);
 void wxDataViewIconText_SetText(wxDataViewIconText * self, const wxString * text);
-
-// CLASS: wxDataViewIconTextRenderer
-wxClassInfo *wxDataViewIconTextRenderer_CLASSINFO();
-wxString *wxDataViewIconTextRenderer_GetDefaultType();
-
-// CLASS: wxDataViewIndexListModel
-void wxDataViewIndexListModel_delete(wxDataViewIndexListModel *self);
-wxDataViewIndexListModel *wxDataViewIndexListModel_new(unsigned int initial_size);
-wxDataViewItem *wxDataViewIndexListModel_GetItem(const wxDataViewIndexListModel * self, unsigned int row);
-void wxDataViewIndexListModel_Reset(wxDataViewIndexListModel * self, unsigned int new_size);
-void wxDataViewIndexListModel_RowAppended(wxDataViewIndexListModel * self);
-void wxDataViewIndexListModel_RowChanged(wxDataViewIndexListModel * self, unsigned int row);
-void wxDataViewIndexListModel_RowDeleted(wxDataViewIndexListModel * self, unsigned int row);
-void wxDataViewIndexListModel_RowInserted(wxDataViewIndexListModel * self, unsigned int before);
-void wxDataViewIndexListModel_RowPrepended(wxDataViewIndexListModel * self);
-void wxDataViewIndexListModel_RowValueChanged(wxDataViewIndexListModel * self, unsigned int row, unsigned int col);
-void wxDataViewIndexListModel_RowsDeleted(wxDataViewIndexListModel * self, const wxArrayInt * rows);
 
 // CLASS: wxDataViewItem
 void wxDataViewItem_delete(wxDataViewItem *self);
@@ -1602,132 +1253,6 @@ bool wxDataViewItemAttr_HasBackgroundColour(const wxDataViewItemAttr * self);
 wxColour *wxDataViewItemAttr_GetBackgroundColour(const wxDataViewItemAttr * self);
 bool wxDataViewItemAttr_IsDefault(const wxDataViewItemAttr * self);
 wxFont *wxDataViewItemAttr_GetEffectiveFont(const wxDataViewItemAttr * self, const wxFont * font);
-
-// CLASS: wxDataViewListCtrl
-wxClassInfo *wxDataViewListCtrl_CLASSINFO();
-int wxDataViewListCtrl_GetSelectedRow(const wxDataViewListCtrl * self);
-void wxDataViewListCtrl_AppendColumn(wxDataViewListCtrl * self, wxDataViewColumn * column, const wxString * varianttype);
-void wxDataViewListCtrl_InsertColumn(wxDataViewListCtrl * self, unsigned int pos, wxDataViewColumn * column, const wxString * varianttype);
-void wxDataViewListCtrl_PrependColumn(wxDataViewListCtrl * self, wxDataViewColumn * column, const wxString * varianttype);
-void wxDataViewListCtrl_DeleteAllItems(wxDataViewListCtrl * self);
-unsigned int wxDataViewListCtrl_GetItemCount(const wxDataViewListCtrl * self);
-void wxDataViewListCtrl_SetValue(wxDataViewListCtrl * self, const wxVariant * value, unsigned int row, unsigned int col);
-void wxDataViewListCtrl_GetValue(wxDataViewListCtrl * self, wxVariant * value, unsigned int row, unsigned int col);
-void wxDataViewListCtrl_SetTextValue(wxDataViewListCtrl * self, const wxString * value, unsigned int row, unsigned int col);
-wxString *wxDataViewListCtrl_GetTextValue(const wxDataViewListCtrl * self, unsigned int row, unsigned int col);
-void wxDataViewListCtrl_SetToggleValue(wxDataViewListCtrl * self, bool value, unsigned int row, unsigned int col);
-bool wxDataViewListCtrl_GetToggleValue(const wxDataViewListCtrl * self, unsigned int row, unsigned int col);
-wxDataViewListCtrl *wxDataViewListCtrl_new();
-wxDataViewListCtrl *wxDataViewListCtrl_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator);
-bool wxDataViewListCtrl_Create(wxDataViewListCtrl * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator);
-wxDataViewListStore * wxDataViewListCtrl_GetStore(wxDataViewListCtrl * self);
-const wxDataViewListStore * wxDataViewListCtrl_GetStore1(const wxDataViewListCtrl * self);
-int wxDataViewListCtrl_ItemToRow(const wxDataViewListCtrl * self, const wxDataViewItem * item);
-wxDataViewItem *wxDataViewListCtrl_RowToItem(const wxDataViewListCtrl * self, int row);
-// Mix-in(s) to wxDataViewListCtrl
-wxTrackable *wxDataViewListCtrl_AsTrackable(wxDataViewListCtrl* obj);
-
-// CLASS: wxDataViewListModel
-void wxDataViewListModel_delete(wxDataViewListModel *self);
-bool wxDataViewListModel_GetAttrByRow(const wxDataViewListModel * self, unsigned int row, unsigned int col, wxDataViewItemAttr * attr);
-bool wxDataViewListModel_IsEnabledByRow(const wxDataViewListModel * self, unsigned int row, unsigned int col);
-unsigned int wxDataViewListModel_GetCount(const wxDataViewListModel * self);
-unsigned int wxDataViewListModel_GetRow(const wxDataViewListModel * self, const wxDataViewItem * item);
-void wxDataViewListModel_GetValueByRow(const wxDataViewListModel * self, wxVariant * variant, unsigned int row, unsigned int col);
-bool wxDataViewListModel_SetValueByRow(wxDataViewListModel * self, const wxVariant * variant, unsigned int row, unsigned int col);
-
-// CLASS: wxDataViewListStore
-void wxDataViewListStore_delete(wxDataViewListStore *self);
-wxDataViewListStore *wxDataViewListStore_new();
-void wxDataViewListStore_PrependColumn(wxDataViewListStore * self, const wxString * varianttype);
-void wxDataViewListStore_InsertColumn(wxDataViewListStore * self, unsigned int pos, const wxString * varianttype);
-void wxDataViewListStore_AppendColumn(wxDataViewListStore * self, const wxString * varianttype);
-void wxDataViewListStore_DeleteAllItems(wxDataViewListStore * self);
-unsigned int wxDataViewListStore_GetItemCount(const wxDataViewListStore * self);
-
-// CLASS: wxDataViewModel
-void wxDataViewModel_delete(wxDataViewModel *self);
-wxDataViewModel *wxDataViewModel_new();
-void wxDataViewModel_AddNotifier(wxDataViewModel * self, wxDataViewModelNotifier * notifier);
-bool wxDataViewModel_ChangeValue(wxDataViewModel * self, const wxVariant * variant, const wxDataViewItem * item, unsigned int col);
-bool wxDataViewModel_Cleared(wxDataViewModel * self);
-int wxDataViewModel_Compare(const wxDataViewModel * self, const wxDataViewItem * item1, const wxDataViewItem * item2, unsigned int column, bool ascending);
-bool wxDataViewModel_GetAttr(const wxDataViewModel * self, const wxDataViewItem * item, unsigned int col, wxDataViewItemAttr * attr);
-bool wxDataViewModel_IsEnabled(const wxDataViewModel * self, const wxDataViewItem * item, unsigned int col);
-unsigned int wxDataViewModel_GetChildren(const wxDataViewModel * self, const wxDataViewItem * item, wxDataViewItemArray * children);
-wxDataViewItem *wxDataViewModel_GetParent(const wxDataViewModel * self, const wxDataViewItem * item);
-void wxDataViewModel_GetValue(const wxDataViewModel * self, wxVariant * variant, const wxDataViewItem * item, unsigned int col);
-bool wxDataViewModel_HasContainerColumns(const wxDataViewModel * self, const wxDataViewItem * item);
-bool wxDataViewModel_HasDefaultCompare(const wxDataViewModel * self);
-bool wxDataViewModel_IsContainer(const wxDataViewModel * self, const wxDataViewItem * item);
-bool wxDataViewModel_ItemAdded(wxDataViewModel * self, const wxDataViewItem * parent, const wxDataViewItem * item);
-bool wxDataViewModel_ItemChanged(wxDataViewModel * self, const wxDataViewItem * item);
-bool wxDataViewModel_ItemDeleted(wxDataViewModel * self, const wxDataViewItem * parent, const wxDataViewItem * item);
-bool wxDataViewModel_ItemsAdded(wxDataViewModel * self, const wxDataViewItem * parent, const wxDataViewItemArray * items);
-bool wxDataViewModel_ItemsChanged(wxDataViewModel * self, const wxDataViewItemArray * items);
-bool wxDataViewModel_ItemsDeleted(wxDataViewModel * self, const wxDataViewItem * parent, const wxDataViewItemArray * items);
-void wxDataViewModel_RemoveNotifier(wxDataViewModel * self, wxDataViewModelNotifier * notifier);
-void wxDataViewModel_Resort(wxDataViewModel * self);
-bool wxDataViewModel_SetValue(wxDataViewModel * self, const wxVariant * variant, const wxDataViewItem * item, unsigned int col);
-bool wxDataViewModel_ValueChanged(wxDataViewModel * self, const wxDataViewItem * item, unsigned int col);
-bool wxDataViewModel_IsListModel(const wxDataViewModel * self);
-bool wxDataViewModel_IsVirtualListModel(const wxDataViewModel * self);
-
-// CLASS: wxDataViewModelNotifier
-void wxDataViewModelNotifier_delete(wxDataViewModelNotifier *self);
-wxDataViewModelNotifier *wxDataViewModelNotifier_new();
-bool wxDataViewModelNotifier_Cleared(wxDataViewModelNotifier * self);
-wxDataViewModel * wxDataViewModelNotifier_GetOwner(const wxDataViewModelNotifier * self);
-bool wxDataViewModelNotifier_ItemAdded(wxDataViewModelNotifier * self, const wxDataViewItem * parent, const wxDataViewItem * item);
-bool wxDataViewModelNotifier_ItemChanged(wxDataViewModelNotifier * self, const wxDataViewItem * item);
-bool wxDataViewModelNotifier_ItemDeleted(wxDataViewModelNotifier * self, const wxDataViewItem * parent, const wxDataViewItem * item);
-bool wxDataViewModelNotifier_ItemsAdded(wxDataViewModelNotifier * self, const wxDataViewItem * parent, const wxDataViewItemArray * items);
-bool wxDataViewModelNotifier_ItemsChanged(wxDataViewModelNotifier * self, const wxDataViewItemArray * items);
-bool wxDataViewModelNotifier_ItemsDeleted(wxDataViewModelNotifier * self, const wxDataViewItem * parent, const wxDataViewItemArray * items);
-void wxDataViewModelNotifier_Resort(wxDataViewModelNotifier * self);
-void wxDataViewModelNotifier_SetOwner(wxDataViewModelNotifier * self, wxDataViewModel * owner);
-bool wxDataViewModelNotifier_ValueChanged(wxDataViewModelNotifier * self, const wxDataViewItem * item, unsigned int col);
-
-// CLASS: wxDataViewProgressRenderer
-wxClassInfo *wxDataViewProgressRenderer_CLASSINFO();
-wxString *wxDataViewProgressRenderer_GetDefaultType();
-
-// CLASS: wxDataViewRenderer
-wxClassInfo *wxDataViewRenderer_CLASSINFO();
-void wxDataViewRenderer_EnableEllipsize(wxDataViewRenderer * self, wxEllipsizeMode mode);
-void wxDataViewRenderer_DisableEllipsize(wxDataViewRenderer * self);
-wxString *wxDataViewRenderer_GetAccessibleDescription(const wxDataViewRenderer * self);
-int wxDataViewRenderer_GetAlignment(const wxDataViewRenderer * self);
-wxEllipsizeMode wxDataViewRenderer_GetEllipsizeMode(const wxDataViewRenderer * self);
-wxDataViewColumn * wxDataViewRenderer_GetOwner(const wxDataViewRenderer * self);
-bool wxDataViewRenderer_GetValue(const wxDataViewRenderer * self, wxVariant * value);
-wxString *wxDataViewRenderer_GetVariantType(const wxDataViewRenderer * self);
-bool wxDataViewRenderer_IsCompatibleVariantType(const wxDataViewRenderer * self, const wxString * variant_type);
-void wxDataViewRenderer_SetAlignment(wxDataViewRenderer * self, int align);
-void wxDataViewRenderer_SetOwner(wxDataViewRenderer * self, wxDataViewColumn * owner);
-bool wxDataViewRenderer_SetValue(wxDataViewRenderer * self, const wxVariant * value);
-void wxDataViewRenderer_SetValueAdjuster(wxDataViewRenderer * self, wxDataViewValueAdjuster * transformer);
-bool wxDataViewRenderer_Validate(wxDataViewRenderer * self, wxVariant * value);
-bool wxDataViewRenderer_HasEditorCtrl(const wxDataViewRenderer * self);
-wxWindow * wxDataViewRenderer_CreateEditorCtrl(wxDataViewRenderer * self, wxWindow * parent, wxRect label_rect, const wxVariant * value);
-bool wxDataViewRenderer_GetValueFromEditorCtrl(wxDataViewRenderer * self, wxWindow * editor, wxVariant * value);
-bool wxDataViewRenderer_StartEditing(wxDataViewRenderer * self, const wxDataViewItem * item, wxRect label_rect);
-void wxDataViewRenderer_CancelEditing(wxDataViewRenderer * self);
-bool wxDataViewRenderer_FinishEditing(wxDataViewRenderer * self);
-wxWindow * wxDataViewRenderer_GetEditorCtrl(wxDataViewRenderer * self);
-
-// CLASS: wxDataViewSpinRenderer
-wxClassInfo *wxDataViewSpinRenderer_CLASSINFO();
-
-// CLASS: wxDataViewTextRenderer
-wxClassInfo *wxDataViewTextRenderer_CLASSINFO();
-wxString *wxDataViewTextRenderer_GetDefaultType();
-void wxDataViewTextRenderer_EnableMarkup(wxDataViewTextRenderer * self, bool enable);
-
-// CLASS: wxDataViewToggleRenderer
-wxClassInfo *wxDataViewToggleRenderer_CLASSINFO();
-wxString *wxDataViewToggleRenderer_GetDefaultType();
-void wxDataViewToggleRenderer_ShowAsRadio(wxDataViewToggleRenderer * self);
 
 // CLASS: wxDataViewTreeCtrl
 wxClassInfo *wxDataViewTreeCtrl_CLASSINFO();
@@ -1762,43 +1287,8 @@ void wxDataViewTreeCtrl_SetItemText(wxDataViewTreeCtrl * self, const wxDataViewI
 // Mix-in(s) to wxDataViewTreeCtrl
 wxTrackable *wxDataViewTreeCtrl_AsTrackable(wxDataViewTreeCtrl* obj);
 
-// CLASS: wxDataViewTreeStore
-void wxDataViewTreeStore_delete(wxDataViewTreeStore *self);
-wxDataViewTreeStore *wxDataViewTreeStore_new();
-wxDataViewItem *wxDataViewTreeStore_AppendContainer(wxDataViewTreeStore * self, const wxDataViewItem * parent, const wxString * text, const wxBitmapBundle * icon, const wxBitmapBundle * expanded, wxClientData * data);
-wxDataViewItem *wxDataViewTreeStore_AppendItem(wxDataViewTreeStore * self, const wxDataViewItem * parent, const wxString * text, const wxBitmapBundle * icon, wxClientData * data);
-void wxDataViewTreeStore_DeleteAllItems(wxDataViewTreeStore * self);
-void wxDataViewTreeStore_DeleteChildren(wxDataViewTreeStore * self, const wxDataViewItem * item);
-void wxDataViewTreeStore_DeleteItem(wxDataViewTreeStore * self, const wxDataViewItem * item);
-int wxDataViewTreeStore_GetChildCount(const wxDataViewTreeStore * self, const wxDataViewItem * parent);
-wxClientData * wxDataViewTreeStore_GetItemData(const wxDataViewTreeStore * self, const wxDataViewItem * item);
-wxIcon *wxDataViewTreeStore_GetItemExpandedIcon(const wxDataViewTreeStore * self, const wxDataViewItem * item);
-wxIcon *wxDataViewTreeStore_GetItemIcon(const wxDataViewTreeStore * self, const wxDataViewItem * item);
-wxString *wxDataViewTreeStore_GetItemText(const wxDataViewTreeStore * self, const wxDataViewItem * item);
-wxDataViewItem *wxDataViewTreeStore_GetNthChild(const wxDataViewTreeStore * self, const wxDataViewItem * parent, unsigned int pos);
-wxDataViewItem *wxDataViewTreeStore_InsertContainer(wxDataViewTreeStore * self, const wxDataViewItem * parent, const wxDataViewItem * previous, const wxString * text, const wxBitmapBundle * icon, const wxBitmapBundle * expanded, wxClientData * data);
-wxDataViewItem *wxDataViewTreeStore_InsertItem(wxDataViewTreeStore * self, const wxDataViewItem * parent, const wxDataViewItem * previous, const wxString * text, const wxBitmapBundle * icon, wxClientData * data);
-wxDataViewItem *wxDataViewTreeStore_PrependContainer(wxDataViewTreeStore * self, const wxDataViewItem * parent, const wxString * text, const wxBitmapBundle * icon, const wxBitmapBundle * expanded, wxClientData * data);
-wxDataViewItem *wxDataViewTreeStore_PrependItem(wxDataViewTreeStore * self, const wxDataViewItem * parent, const wxString * text, const wxBitmapBundle * icon, wxClientData * data);
-void wxDataViewTreeStore_SetItemData(wxDataViewTreeStore * self, const wxDataViewItem * item, wxClientData * data);
-void wxDataViewTreeStore_SetItemExpandedIcon(wxDataViewTreeStore * self, const wxDataViewItem * item, const wxBitmapBundle * icon);
-void wxDataViewTreeStore_SetItemIcon(wxDataViewTreeStore * self, const wxDataViewItem * item, const wxBitmapBundle * icon);
-
 // CLASS: wxDataViewValueAdjuster
 void wxDataViewValueAdjuster_delete(wxDataViewValueAdjuster *self);
-
-// CLASS: wxDataViewVirtualListModel
-void wxDataViewVirtualListModel_delete(wxDataViewVirtualListModel *self);
-wxDataViewVirtualListModel *wxDataViewVirtualListModel_new(unsigned int initial_size);
-wxDataViewItem *wxDataViewVirtualListModel_GetItem(const wxDataViewVirtualListModel * self, unsigned int row);
-void wxDataViewVirtualListModel_Reset(wxDataViewVirtualListModel * self, unsigned int new_size);
-void wxDataViewVirtualListModel_RowAppended(wxDataViewVirtualListModel * self);
-void wxDataViewVirtualListModel_RowChanged(wxDataViewVirtualListModel * self, unsigned int row);
-void wxDataViewVirtualListModel_RowDeleted(wxDataViewVirtualListModel * self, unsigned int row);
-void wxDataViewVirtualListModel_RowInserted(wxDataViewVirtualListModel * self, unsigned int before);
-void wxDataViewVirtualListModel_RowPrepended(wxDataViewVirtualListModel * self);
-void wxDataViewVirtualListModel_RowValueChanged(wxDataViewVirtualListModel * self, unsigned int row, unsigned int col);
-void wxDataViewVirtualListModel_RowsDeleted(wxDataViewVirtualListModel * self, const wxArrayInt * rows);
 
 // CLASS: wxDateEvent
 wxClassInfo *wxDateEvent_CLASSINFO();
@@ -1825,70 +1315,6 @@ wxTrackable *wxDatePickerCtrl_AsTrackable(wxDatePickerCtrl* obj);
 void wxDelegateRendererNative_delete(wxDelegateRendererNative *self);
 wxDelegateRendererNative *wxDelegateRendererNative_new();
 wxDelegateRendererNative *wxDelegateRendererNative_new1(wxRendererNative * renderer_native);
-
-// CLASS: wxDialUpEvent
-wxClassInfo *wxDialUpEvent_CLASSINFO();
-wxDialUpEvent *wxDialUpEvent_new(bool is_connected, bool is_own_event);
-bool wxDialUpEvent_IsConnectedEvent(const wxDialUpEvent * self);
-bool wxDialUpEvent_IsOwnEvent(const wxDialUpEvent * self);
-
-// CLASS: wxDialog
-wxClassInfo *wxDialog_CLASSINFO();
-wxDialog *wxDialog_new();
-wxDialog *wxDialog_new1(wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-void wxDialog_AddMainButtonId(wxDialog * self, wxWindowID id);
-bool wxDialog_CanDoLayoutAdaptation(wxDialog * self);
-void wxDialog_Centre(wxDialog * self, int direction);
-bool wxDialog_Create(wxDialog * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-wxSizer * wxDialog_CreateButtonSizer(wxDialog * self, long flags);
-wxSizer * wxDialog_CreateSeparatedButtonSizer(wxDialog * self, long flags);
-wxSizer * wxDialog_CreateSeparatedSizer(wxDialog * self, wxSizer * sizer);
-wxStdDialogButtonSizer * wxDialog_CreateStdDialogButtonSizer(wxDialog * self, long flags);
-wxSizer * wxDialog_CreateTextSizer(wxDialog * self, const wxString * message, int width_max);
-bool wxDialog_DoLayoutAdaptation(wxDialog * self);
-void wxDialog_EndModal(wxDialog * self, int ret_code);
-int wxDialog_GetAffirmativeId(const wxDialog * self);
-wxWindow * wxDialog_GetContentWindow(const wxDialog * self);
-int wxDialog_GetEscapeId(const wxDialog * self);
-bool wxDialog_GetLayoutAdaptationDone(const wxDialog * self);
-int wxDialog_GetLayoutAdaptationLevel(const wxDialog * self);
-wxArrayInt * wxDialog_GetMainButtonIds(wxDialog * self);
-int wxDialog_GetReturnCode(const wxDialog * self);
-wxToolBar * wxDialog_GetToolBar(const wxDialog * self);
-bool wxDialog_IsMainButtonId(const wxDialog * self, wxWindowID id);
-bool wxDialog_IsModal(const wxDialog * self);
-void wxDialog_SetAffirmativeId(wxDialog * self, int id);
-void wxDialog_SetEscapeId(wxDialog * self, int id);
-void wxDialog_SetIcon(wxDialog * self, const wxIcon * icon);
-void wxDialog_SetLayoutAdaptationDone(wxDialog * self, bool done);
-void wxDialog_SetLayoutAdaptationLevel(wxDialog * self, int level);
-void wxDialog_SetReturnCode(wxDialog * self, int ret_code);
-int wxDialog_ShowModal(wxDialog * self);
-void wxDialog_ShowWindowModal(wxDialog * self);
-void wxDialog_ShowWindowModalThenDo(wxDialog * self, const Functor * on_end_modal);
-void wxDialog_EnableLayoutAdaptation(bool enable);
-wxDialogLayoutAdapter * wxDialog_GetLayoutAdapter();
-bool wxDialog_IsLayoutAdaptationEnabled();
-wxDialogLayoutAdapter * wxDialog_SetLayoutAdapter(wxDialogLayoutAdapter * adapter);
-// Mix-in(s) to wxDialog
-wxTrackable *wxDialog_AsTrackable(wxDialog* obj);
-
-// CLASS: wxDialogLayoutAdapter
-void wxDialogLayoutAdapter_delete(wxDialogLayoutAdapter *self);
-wxDialogLayoutAdapter *wxDialogLayoutAdapter_new();
-bool wxDialogLayoutAdapter_CanDoLayoutAdaptation(wxDialogLayoutAdapter * self, wxDialog * dialog);
-bool wxDialogLayoutAdapter_DoLayoutAdaptation(wxDialogLayoutAdapter * self, wxDialog * dialog);
-
-// CLASS: wxDirDialog
-wxClassInfo *wxDirDialog_CLASSINFO();
-wxDirDialog *wxDirDialog_new(wxWindow * parent, const wxString * message, const wxString * default_path, long style, const wxPoint * pos, const wxSize * size, const wxString * name);
-wxString *wxDirDialog_GetMessage(const wxDirDialog * self);
-wxString *wxDirDialog_GetPath(const wxDirDialog * self);
-void wxDirDialog_GetPaths(const wxDirDialog * self, wxArrayString * paths);
-void wxDirDialog_SetMessage(wxDirDialog * self, const wxString * message);
-void wxDirDialog_SetPath(wxDirDialog * self, const wxString * path);
-// Mix-in(s) to wxDirDialog
-wxTrackable *wxDirDialog_AsTrackable(wxDirDialog* obj);
 
 // CLASS: wxDirPickerCtrl
 wxClassInfo *wxDirPickerCtrl_CLASSINFO();
@@ -1953,56 +1379,6 @@ bool wxDocMDIParentFrame_Create(wxDocMDIParentFrame * self, wxDocManager * manag
 // Mix-in(s) to wxDocMDIParentFrame
 wxTrackable *wxDocMDIParentFrame_AsTrackable(wxDocMDIParentFrame* obj);
 
-// CLASS: wxDocManager
-wxClassInfo *wxDocManager_CLASSINFO();
-wxDocManager *wxDocManager_new(long flags, bool initialize);
-void wxDocManager_ActivateView(wxDocManager * self, wxView * doc, bool activate);
-void wxDocManager_AddDocument(wxDocManager * self, wxDocument * doc);
-void wxDocManager_AddFileToHistory(wxDocManager * self, const wxString * filename);
-void wxDocManager_AssociateTemplate(wxDocManager * self, wxDocTemplate * temp);
-wxDocTemplate * wxDocManager_FindTemplate(wxDocManager * self, const wxClassInfo * classinfo);
-wxDocument * wxDocManager_FindDocumentByPath(const wxDocManager * self, const wxString * path);
-bool wxDocManager_CloseDocument(wxDocManager * self, wxDocument * doc, bool force);
-bool wxDocManager_CloseDocuments(wxDocManager * self, bool force);
-wxDocument * wxDocManager_CreateDocument(wxDocManager * self, const wxString * path, long flags);
-wxDocument * wxDocManager_CreateNewDocument(wxDocManager * self);
-wxView * wxDocManager_CreateView(wxDocManager * self, wxDocument * doc, long flags);
-void wxDocManager_DisassociateTemplate(wxDocManager * self, wxDocTemplate * temp);
-void wxDocManager_FileHistoryAddFilesToMenu(wxDocManager * self);
-void wxDocManager_FileHistoryAddFilesToMenu1(wxDocManager * self, wxMenu * menu);
-void wxDocManager_FileHistoryLoad(wxDocManager * self, const wxConfigBase * config);
-void wxDocManager_FileHistoryRemoveMenu(wxDocManager * self, wxMenu * menu);
-void wxDocManager_FileHistorySave(wxDocManager * self, wxConfigBase * resource_file);
-void wxDocManager_FileHistoryUseMenu(wxDocManager * self, wxMenu * menu);
-wxDocTemplate * wxDocManager_FindTemplateForPath(wxDocManager * self, const wxString * path);
-wxView * wxDocManager_GetAnyUsableView(const wxDocManager * self);
-wxDocument * wxDocManager_GetCurrentDocument(const wxDocManager * self);
-wxView * wxDocManager_GetCurrentView(const wxDocManager * self);
-wxList * wxDocManager_GetDocuments(wxDocManager * self);
-wxFileHistory * wxDocManager_GetFileHistory(const wxDocManager * self);
-size_t wxDocManager_GetHistoryFilesCount(const wxDocManager * self);
-wxString *wxDocManager_GetLastDirectory(const wxDocManager * self);
-int wxDocManager_GetMaxDocsOpen(const wxDocManager * self);
-wxList * wxDocManager_GetTemplates(wxDocManager * self);
-bool wxDocManager_Initialize(wxDocManager * self);
-wxString *wxDocManager_MakeNewDocumentName(wxDocManager * self);
-wxFileHistory * wxDocManager_OnCreateFileHistory(wxDocManager * self);
-void wxDocManager_OnFileClose(wxDocManager * self, wxCommandEvent * event);
-void wxDocManager_OnFileCloseAll(wxDocManager * self, wxCommandEvent * event);
-void wxDocManager_OnFileNew(wxDocManager * self, wxCommandEvent * event);
-void wxDocManager_OnFileOpen(wxDocManager * self, wxCommandEvent * event);
-void wxDocManager_OnFileRevert(wxDocManager * self, wxCommandEvent * event);
-void wxDocManager_OnFileSave(wxDocManager * self, wxCommandEvent * event);
-void wxDocManager_OnFileSaveAs(wxDocManager * self, wxCommandEvent * event);
-void wxDocManager_RemoveDocument(wxDocManager * self, wxDocument * doc);
-wxDocTemplate * wxDocManager_SelectDocumentPath(wxDocManager * self, wxDocTemplate ** templates, int no_templates, wxString * path, long flags, bool save);
-wxDocTemplate * wxDocManager_SelectDocumentType(wxDocManager * self, wxDocTemplate ** templates, int no_templates, bool sort);
-wxDocTemplate * wxDocManager_SelectViewType(wxDocManager * self, wxDocTemplate ** templates, int no_templates, bool sort);
-void wxDocManager_SetLastDirectory(wxDocManager * self, const wxString * dir);
-void wxDocManager_SetMaxDocsOpen(wxDocManager * self, int n);
-// Mix-in(s) to wxDocManager
-wxTrackable *wxDocManager_AsTrackable(wxDocManager* obj);
-
 // CLASS: wxDocParentFrame
 wxClassInfo *wxDocParentFrame_CLASSINFO();
 wxDocParentFrame *wxDocParentFrame_new();
@@ -2011,84 +1387,6 @@ bool wxDocParentFrame_Create(wxDocParentFrame * self, wxDocManager * manager, wx
 wxDocManager * wxDocParentFrame_GetDocumentManager(const wxDocParentFrame * self);
 // Mix-in(s) to wxDocParentFrame
 wxTrackable *wxDocParentFrame_AsTrackable(wxDocParentFrame* obj);
-
-// CLASS: wxDocTemplate
-wxClassInfo *wxDocTemplate_CLASSINFO();
-wxDocTemplate *wxDocTemplate_new(wxDocManager * manager, const wxString * descr, const wxString * filter, const wxString * dir, const wxString * ext, const wxString * doc_type_name, const wxString * view_type_name, wxClassInfo * doc_class_info, wxClassInfo * view_class_info, long flags);
-wxDocument * wxDocTemplate_CreateDocument(wxDocTemplate * self, const wxString * path, long flags);
-wxView * wxDocTemplate_CreateView(wxDocTemplate * self, wxDocument * doc, long flags);
-bool wxDocTemplate_FileMatchesTemplate(wxDocTemplate * self, const wxString * path);
-wxString *wxDocTemplate_GetDefaultExtension(const wxDocTemplate * self);
-wxString *wxDocTemplate_GetDescription(const wxDocTemplate * self);
-wxString *wxDocTemplate_GetDirectory(const wxDocTemplate * self);
-wxClassInfo * wxDocTemplate_GetDocClassInfo(const wxDocTemplate * self);
-wxDocManager * wxDocTemplate_GetDocumentManager(const wxDocTemplate * self);
-wxString *wxDocTemplate_GetDocumentName(const wxDocTemplate * self);
-wxString *wxDocTemplate_GetFileFilter(const wxDocTemplate * self);
-long wxDocTemplate_GetFlags(const wxDocTemplate * self);
-wxPageSetupDialogData * wxDocTemplate_GetPageSetupDialogData(wxDocTemplate * self);
-wxPageSetupDialogData *wxDocTemplate_GetPageSetupDialogData1(const wxDocTemplate * self);
-wxClassInfo * wxDocTemplate_GetViewClassInfo(const wxDocTemplate * self);
-wxString *wxDocTemplate_GetViewName(const wxDocTemplate * self);
-bool wxDocTemplate_InitDocument(wxDocTemplate * self, wxDocument * doc, const wxString * path, long flags);
-bool wxDocTemplate_IsVisible(const wxDocTemplate * self);
-void wxDocTemplate_SetDefaultExtension(wxDocTemplate * self, const wxString * ext);
-void wxDocTemplate_SetDescription(wxDocTemplate * self, const wxString * descr);
-void wxDocTemplate_SetDirectory(wxDocTemplate * self, const wxString * dir);
-void wxDocTemplate_SetDocumentManager(wxDocTemplate * self, wxDocManager * manager);
-void wxDocTemplate_SetFileFilter(wxDocTemplate * self, const wxString * filter);
-void wxDocTemplate_SetFlags(wxDocTemplate * self, long flags);
-
-// CLASS: wxDocument
-wxClassInfo *wxDocument_CLASSINFO();
-wxDocument *wxDocument_new(wxDocument * parent);
-bool wxDocument_AddView(wxDocument * self, wxView * view);
-bool wxDocument_AlreadySaved(const wxDocument * self);
-void wxDocument_Activate(const wxDocument * self);
-bool wxDocument_Close(wxDocument * self);
-bool wxDocument_DeleteAllViews(wxDocument * self);
-bool wxDocument_DeleteContents(wxDocument * self);
-wxCommandProcessor * wxDocument_GetCommandProcessor(const wxDocument * self);
-wxDocManager * wxDocument_GetDocumentManager(const wxDocument * self);
-wxString *wxDocument_GetDocumentName(const wxDocument * self);
-bool wxDocument_GetDocumentSaved(const wxDocument * self);
-wxDocTemplate * wxDocument_GetDocumentTemplate(const wxDocument * self);
-wxWindow * wxDocument_GetDocumentWindow(const wxDocument * self);
-wxString *wxDocument_GetFilename(const wxDocument * self);
-wxView * wxDocument_GetFirstView(const wxDocument * self);
-wxString *wxDocument_GetTitle(const wxDocument * self);
-wxString *wxDocument_GetUserReadableName(const wxDocument * self);
-wxList * wxDocument_GetViews(wxDocument * self);
-const wxList * wxDocument_GetViews1(const wxDocument * self);
-bool wxDocument_IsChildDocument(const wxDocument * self);
-bool wxDocument_IsModified(const wxDocument * self);
-istream * wxDocument_LoadObject(wxDocument * self, istream * stream);
-wxInputStream * wxDocument_LoadObject1(wxDocument * self, wxInputStream * stream);
-void wxDocument_Modify(wxDocument * self, bool modify);
-void wxDocument_OnChangedViewList(wxDocument * self);
-bool wxDocument_OnCloseDocument(wxDocument * self);
-bool wxDocument_OnCreate(wxDocument * self, const wxString * path, long flags);
-wxCommandProcessor * wxDocument_OnCreateCommandProcessor(wxDocument * self);
-bool wxDocument_OnNewDocument(wxDocument * self);
-bool wxDocument_OnOpenDocument(wxDocument * self, const wxString * filename);
-bool wxDocument_OnSaveDocument(wxDocument * self, const wxString * filename);
-bool wxDocument_OnSaveModified(wxDocument * self);
-bool wxDocument_RemoveView(wxDocument * self, wxView * view);
-bool wxDocument_Save(wxDocument * self);
-bool wxDocument_SaveAs(wxDocument * self);
-bool wxDocument_Revert(wxDocument * self);
-ostream * wxDocument_SaveObject(wxDocument * self, ostream * stream);
-wxOutputStream * wxDocument_SaveObject1(wxDocument * self, wxOutputStream * stream);
-void wxDocument_SetCommandProcessor(wxDocument * self, wxCommandProcessor * processor);
-void wxDocument_SetDocumentName(wxDocument * self, const wxString * name);
-void wxDocument_SetDocumentTemplate(wxDocument * self, wxDocTemplate * templ);
-void wxDocument_SetDocumentSaved(wxDocument * self, bool saved);
-void wxDocument_SetFilename(wxDocument * self, const wxString * filename, bool notify_views);
-void wxDocument_OnChangeFilename(wxDocument * self, bool notify_views);
-void wxDocument_SetTitle(wxDocument * self, const wxString * title);
-void wxDocument_UpdateAllViews(wxDocument * self, wxView * sender, wxObject * hint);
-// Mix-in(s) to wxDocument
-wxTrackable *wxDocument_AsTrackable(wxDocument* obj);
 
 // CLASS: wxDragImage
 wxClassInfo *wxDragImage_CLASSINFO();
@@ -2107,21 +1405,6 @@ bool wxDragImage_Hide(wxDragImage * self);
 bool wxDragImage_Move(wxDragImage * self, const wxPoint * pt);
 bool wxDragImage_Show(wxDragImage * self);
 bool wxDragImage_UpdateBackingFromWindow(const wxDragImage * self, wxDC * window_dc, wxMemoryDC * dest_dc, const wxRect * source_rect, const wxRect * dest_rect);
-
-// CLASS: wxDropFilesEvent
-wxClassInfo *wxDropFilesEvent_CLASSINFO();
-wxString *wxDropFilesEvent_GetFiles(const wxDropFilesEvent * self);
-int wxDropFilesEvent_GetNumberOfFiles(const wxDropFilesEvent * self);
-wxPoint *wxDropFilesEvent_GetPosition(const wxDropFilesEvent * self);
-
-// CLASS: wxDropSource
-void wxDropSource_delete(wxDropSource *self);
-wxDropSource *wxDropSource_new(wxWindow * win, const wxCursor * icon_copy, const wxCursor * icon_move, const wxCursor * icon_none);
-wxDropSource *wxDropSource_new1(wxDataObject * data, wxWindow * win, const wxCursor * icon_copy, const wxCursor * icon_move, const wxCursor * icon_none);
-wxDropSource *wxDropSource_new2(wxWindow * win, const wxIcon * icon_copy, const wxIcon * icon_move, const wxIcon * icon_none);
-wxDropSource *wxDropSource_new3(wxDataObject * data, wxWindow * win, const wxIcon * icon_copy, const wxIcon * icon_move, const wxIcon * icon_none);
-wxDataObject * wxDropSource_GetDataObject(wxDropSource * self);
-void wxDropSource_SetData(wxDropSource * self, wxDataObject * data);
 
 // CLASS: wxDropTarget
 void wxDropTarget_delete(wxDropTarget *self);
@@ -2151,11 +1434,6 @@ wxDC * wxEraseEvent_GetDC(const wxEraseEvent * self);
 wxClassInfo *wxEventBlocker_CLASSINFO();
 // Mix-in(s) to wxEventBlocker
 wxTrackable *wxEventBlocker_AsTrackable(wxEventBlocker* obj);
-
-// CLASS: wxExtHelpController
-wxClassInfo *wxExtHelpController_CLASSINFO();
-wxExtHelpController *wxExtHelpController_new(wxWindow * parent_window);
-bool wxExtHelpController_DisplayHelp(wxExtHelpController * self, const wxString * relative_url);
 
 // CLASS: wxFileCtrl
 wxClassInfo *wxFileCtrl_CLASSINFO();
@@ -2188,36 +1466,6 @@ void wxFileCtrlEvent_SetFiles(wxFileCtrlEvent * self, const wxArrayString * file
 void wxFileCtrlEvent_SetDirectory(wxFileCtrlEvent * self, const wxString * directory);
 void wxFileCtrlEvent_SetFilterIndex(wxFileCtrlEvent * self, int index);
 
-// CLASS: wxFileDataObject
-void wxFileDataObject_delete(wxFileDataObject *self);
-wxFileDataObject *wxFileDataObject_new();
-void wxFileDataObject_AddFile(wxFileDataObject * self, const wxString * file);
-wxArrayString *wxFileDataObject_GetFilenames(const wxFileDataObject * self);
-
-// CLASS: wxFileDialog
-wxClassInfo *wxFileDialog_CLASSINFO();
-wxFileDialog *wxFileDialog_new(wxWindow * parent, const wxString * message, const wxString * default_dir, const wxString * default_file, const wxString * wildcard, long style, const wxPoint * pos, const wxSize * size, const wxString * name);
-wxString *wxFileDialog_GetCurrentlySelectedFilename(const wxFileDialog * self);
-int wxFileDialog_GetCurrentlySelectedFilterIndex(const wxFileDialog * self);
-wxString *wxFileDialog_GetDirectory(const wxFileDialog * self);
-wxWindow * wxFileDialog_GetExtraControl(const wxFileDialog * self);
-wxString *wxFileDialog_GetFilename(const wxFileDialog * self);
-void wxFileDialog_GetFilenames(const wxFileDialog * self, wxArrayString * filenames);
-int wxFileDialog_GetFilterIndex(const wxFileDialog * self);
-wxString *wxFileDialog_GetMessage(const wxFileDialog * self);
-wxString *wxFileDialog_GetPath(const wxFileDialog * self);
-void wxFileDialog_GetPaths(const wxFileDialog * self, wxArrayString * paths);
-wxString *wxFileDialog_GetWildcard(const wxFileDialog * self);
-bool wxFileDialog_SetCustomizeHook(wxFileDialog * self, wxFileDialogCustomizeHook * customize_hook);
-void wxFileDialog_SetDirectory(wxFileDialog * self, const wxString * directory);
-void wxFileDialog_SetFilename(wxFileDialog * self, const wxString * setfilename);
-void wxFileDialog_SetFilterIndex(wxFileDialog * self, int filter_index);
-void wxFileDialog_SetMessage(wxFileDialog * self, const wxString * message);
-void wxFileDialog_SetPath(wxFileDialog * self, const wxString * path);
-void wxFileDialog_SetWildcard(wxFileDialog * self, const wxString * wild_card);
-// Mix-in(s) to wxFileDialog
-wxTrackable *wxFileDialog_AsTrackable(wxFileDialog* obj);
-
 // CLASS: wxFileDialogCustomize
 void wxFileDialogCustomize_delete(wxFileDialogCustomize *self);
 wxFileDialogButton * wxFileDialogCustomize_AddButton(wxFileDialogCustomize * self, const wxString * label);
@@ -2238,29 +1486,6 @@ wxClassInfo *wxFileDirPickerEvent_CLASSINFO();
 wxFileDirPickerEvent *wxFileDirPickerEvent_new();
 wxString *wxFileDirPickerEvent_GetPath(const wxFileDirPickerEvent * self);
 void wxFileDirPickerEvent_SetPath(wxFileDirPickerEvent * self, const wxString * path);
-
-// CLASS: wxFileDropTarget
-void wxFileDropTarget_delete(wxFileDropTarget *self);
-wxFileDropTarget *wxFileDropTarget_new();
-bool wxFileDropTarget_OnDropFiles(wxFileDropTarget * self, wxCoord x, wxCoord y, const wxArrayString * filenames);
-
-// CLASS: wxFileHistory
-wxClassInfo *wxFileHistory_CLASSINFO();
-wxFileHistory *wxFileHistory_new(size_t max_files, wxWindowID id_base);
-void wxFileHistory_AddFileToHistory(wxFileHistory * self, const wxString * filename);
-void wxFileHistory_AddFilesToMenu(wxFileHistory * self);
-void wxFileHistory_AddFilesToMenu1(wxFileHistory * self, wxMenu * menu);
-wxWindowID wxFileHistory_GetBaseId(const wxFileHistory * self);
-size_t wxFileHistory_GetCount(const wxFileHistory * self);
-wxString *wxFileHistory_GetHistoryFile(const wxFileHistory * self, size_t index);
-int wxFileHistory_GetMaxFiles(const wxFileHistory * self);
-const wxList * wxFileHistory_GetMenus(const wxFileHistory * self);
-void wxFileHistory_Load(wxFileHistory * self, const wxConfigBase * config);
-void wxFileHistory_RemoveFileFromHistory(wxFileHistory * self, size_t i);
-void wxFileHistory_RemoveMenu(wxFileHistory * self, wxMenu * menu);
-void wxFileHistory_Save(wxFileHistory * self, wxConfigBase * config);
-void wxFileHistory_SetBaseId(wxFileHistory * self, wxWindowID base_id);
-void wxFileHistory_UseMenu(wxFileHistory * self, wxMenu * menu);
 
 // CLASS: wxFilePickerCtrl
 wxClassInfo *wxFilePickerCtrl_CLASSINFO();
@@ -2289,15 +1514,6 @@ int wxFindReplaceData_GetFlags(const wxFindReplaceData * self);
 wxString *wxFindReplaceData_GetReplaceString(const wxFindReplaceData * self);
 void wxFindReplaceData_SetFindString(wxFindReplaceData * self, const wxString * str);
 void wxFindReplaceData_SetReplaceString(wxFindReplaceData * self, const wxString * str);
-
-// CLASS: wxFindReplaceDialog
-wxClassInfo *wxFindReplaceDialog_CLASSINFO();
-wxFindReplaceDialog *wxFindReplaceDialog_new();
-wxFindReplaceDialog *wxFindReplaceDialog_new1(wxWindow * parent, wxFindReplaceData * data, const wxString * title, int style);
-bool wxFindReplaceDialog_Create(wxFindReplaceDialog * self, wxWindow * parent, wxFindReplaceData * data, const wxString * title, int style);
-const wxFindReplaceData * wxFindReplaceDialog_GetData(const wxFindReplaceDialog * self);
-// Mix-in(s) to wxFindReplaceDialog
-wxTrackable *wxFindReplaceDialog_AsTrackable(wxFindReplaceDialog* obj);
 
 // CLASS: wxFlexGridSizer
 wxClassInfo *wxFlexGridSizer_CLASSINFO();
@@ -2398,18 +1614,6 @@ void wxFontData_SetInitialFont(wxFontData * self, const wxFont * font);
 void wxFontData_SetRange(wxFontData * self, int min, int max);
 void wxFontData_SetShowHelp(wxFontData * self, bool show_help);
 
-// CLASS: wxFontDialog
-wxClassInfo *wxFontDialog_CLASSINFO();
-wxFontDialog *wxFontDialog_new();
-wxFontDialog *wxFontDialog_new1(wxWindow * parent);
-wxFontDialog *wxFontDialog_new2(wxWindow * parent, const wxFontData * data);
-bool wxFontDialog_Create(wxFontDialog * self, wxWindow * parent);
-bool wxFontDialog_Create1(wxFontDialog * self, wxWindow * parent, const wxFontData * data);
-wxFontData *wxFontDialog_GetFontData(const wxFontDialog * self);
-wxFontData * wxFontDialog_GetFontData1(wxFontDialog * self);
-// Mix-in(s) to wxFontDialog
-wxTrackable *wxFontDialog_AsTrackable(wxFontDialog* obj);
-
 // CLASS: wxFontEnumerator
 void wxFontEnumerator_delete(wxFontEnumerator *self);
 wxFontEnumerator *wxFontEnumerator_new();
@@ -2505,23 +1709,6 @@ int wxGBPosition_GetRow(const wxGBPosition * self);
 void wxGBPosition_SetCol(wxGBPosition * self, int col);
 void wxGBPosition_SetRow(wxGBPosition * self, int row);
 
-// CLASS: wxGBSizerItem
-wxClassInfo *wxGBSizerItem_CLASSINFO();
-wxGBSizerItem *wxGBSizerItem_new(int width, int height, const wxGBPosition * pos, const wxGBSpan * span, int flag, int border, wxObject * user_data);
-wxGBSizerItem *wxGBSizerItem_new1(wxWindow * window, const wxGBPosition * pos, const wxGBSpan * span, int flag, int border, wxObject * user_data);
-wxGBSizerItem *wxGBSizerItem_new2(wxSizer * sizer, const wxGBPosition * pos, const wxGBSpan * span, int flag, int border, wxObject * user_data);
-void wxGBSizerItem_GetEndPos(wxGBSizerItem * self, int * row, int * col);
-wxGBPosition *wxGBSizerItem_GetPos(const wxGBSizerItem * self);
-void wxGBSizerItem_GetPos1(const wxGBSizerItem * self, int * row, int * col);
-wxGBSpan *wxGBSizerItem_GetSpan(const wxGBSizerItem * self);
-void wxGBSizerItem_GetSpan1(const wxGBSizerItem * self, int * rowspan, int * colspan);
-bool wxGBSizerItem_Intersects(wxGBSizerItem * self, const wxGBSizerItem * other);
-bool wxGBSizerItem_Intersects1(wxGBSizerItem * self, const wxGBPosition * pos, const wxGBSpan * span);
-bool wxGBSizerItem_SetPos(wxGBSizerItem * self, const wxGBPosition * pos);
-bool wxGBSizerItem_SetSpan(wxGBSizerItem * self, const wxGBSpan * span);
-wxGridBagSizer * wxGBSizerItem_GetGBSizer(const wxGBSizerItem * self);
-void wxGBSizerItem_SetGBSizer(wxGBSizerItem * self, wxGridBagSizer * sizer);
-
 // CLASS: wxGBSpan
 void wxGBSpan_delete(wxGBSpan *self);
 wxGBSpan *wxGBSpan_new();
@@ -2531,22 +1718,8 @@ int wxGBSpan_GetRowspan(const wxGBSpan * self);
 void wxGBSpan_SetColspan(wxGBSpan * self, int colspan);
 void wxGBSpan_SetRowspan(wxGBSpan * self, int rowspan);
 
-// CLASS: wxGCDC
-wxClassInfo *wxGCDC_CLASSINFO();
-wxGCDC *wxGCDC_new(const wxWindowDC * window_dc);
-wxGCDC *wxGCDC_new1(const wxMemoryDC * memory_dc);
-wxGCDC *wxGCDC_new2(const wxPrinterDC * printer_dc);
-wxGCDC *wxGCDC_new3(wxGraphicsContext * context);
-wxGCDC *wxGCDC_new4(const wxEnhMetaFileDC * emf_dc);
-wxGCDC *wxGCDC_new5();
-
 // CLASS: wxGDIObject
 wxClassInfo *wxGDIObject_CLASSINFO();
-
-// CLASS: wxGIFHandler
-wxClassInfo *wxGIFHandler_CLASSINFO();
-wxGIFHandler *wxGIFHandler_new();
-bool wxGIFHandler_SaveAnimation(wxGIFHandler * self, const wxImageArray * images, wxOutputStream * stream, bool verbose, int delay_milli_secs);
 
 // CLASS: wxGauge
 wxClassInfo *wxGauge_CLASSINFO();
@@ -2612,21 +1785,6 @@ void wxGenericDirCtrl_UnselectAll(wxGenericDirCtrl * self);
 // Mix-in(s) to wxGenericDirCtrl
 wxTrackable *wxGenericDirCtrl_AsTrackable(wxGenericDirCtrl* obj);
 
-// CLASS: wxGenericProgressDialog
-wxClassInfo *wxGenericProgressDialog_CLASSINFO();
-wxGenericProgressDialog *wxGenericProgressDialog_new(const wxString * title, const wxString * message, int maximum, wxWindow * parent, int style);
-int wxGenericProgressDialog_GetValue(const wxGenericProgressDialog * self);
-int wxGenericProgressDialog_GetRange(const wxGenericProgressDialog * self);
-wxString *wxGenericProgressDialog_GetMessage(const wxGenericProgressDialog * self);
-bool wxGenericProgressDialog_Pulse(wxGenericProgressDialog * self, const wxString * newmsg, bool * skip);
-void wxGenericProgressDialog_Resume(wxGenericProgressDialog * self);
-void wxGenericProgressDialog_SetRange(wxGenericProgressDialog * self, int maximum);
-bool wxGenericProgressDialog_WasCancelled(const wxGenericProgressDialog * self);
-bool wxGenericProgressDialog_WasSkipped(const wxGenericProgressDialog * self);
-bool wxGenericProgressDialog_Update(wxGenericProgressDialog * self, int value, const wxString * newmsg, bool * skip);
-// Mix-in(s) to wxGenericProgressDialog
-wxTrackable *wxGenericProgressDialog_AsTrackable(wxGenericProgressDialog* obj);
-
 // CLASS: wxGenericValidator
 wxClassInfo *wxGenericValidator_CLASSINFO();
 wxGenericValidator *wxGenericValidator_new(const wxGenericValidator * validator);
@@ -2652,66 +1810,6 @@ void wxGestureEvent_SetGestureEnd(wxGestureEvent * self, bool is_end);
 
 // CLASS: wxGraphicsBrush
 wxClassInfo *wxGraphicsBrush_CLASSINFO();
-
-// CLASS: wxGraphicsContext
-wxClassInfo *wxGraphicsContext_CLASSINFO();
-wxGraphicsContext * wxGraphicsContext_Create(wxWindow * window);
-wxGraphicsContext * wxGraphicsContext_Create1(const wxWindowDC * window_dc);
-wxGraphicsContext * wxGraphicsContext_Create2(const wxMemoryDC * memory_dc);
-wxGraphicsContext * wxGraphicsContext_Create3(const wxPrinterDC * printer_dc);
-wxGraphicsContext * wxGraphicsContext_Create4(const wxEnhMetaFileDC * meta_file_dc);
-wxGraphicsContext * wxGraphicsContext_CreateFromUnknownDC(wxDC * dc);
-wxGraphicsContext * wxGraphicsContext_Create5(wxImage * image);
-wxGraphicsContext * wxGraphicsContext_CreateFromNative(void * context);
-wxGraphicsContext * wxGraphicsContext_CreateFromNativeWindow(void * window);
-wxGraphicsContext * wxGraphicsContext_Create6();
-void wxGraphicsContext_ResetClip(wxGraphicsContext * self);
-void wxGraphicsContext_Clip(wxGraphicsContext * self, const wxRegion * region);
-void wxGraphicsContext_GetClipBox(wxGraphicsContext * self, wxDouble * x, wxDouble * y, wxDouble * w, wxDouble * h);
-wxGraphicsMatrix *wxGraphicsContext_CreateMatrix1(const wxGraphicsContext * self, const wxAffineMatrix2DBase * mat);
-void wxGraphicsContext_ConcatTransform(wxGraphicsContext * self, const wxGraphicsMatrix * matrix);
-wxGraphicsMatrix *wxGraphicsContext_GetTransform(const wxGraphicsContext * self);
-void wxGraphicsContext_SetTransform(wxGraphicsContext * self, const wxGraphicsMatrix * matrix);
-wxGraphicsBrush *wxGraphicsContext_CreateBrush(const wxGraphicsContext * self, const wxBrush * brush);
-void wxGraphicsContext_SetBrush(wxGraphicsContext * self, const wxBrush * brush);
-void wxGraphicsContext_SetBrush1(wxGraphicsContext * self, const wxGraphicsBrush * brush);
-wxGraphicsPen *wxGraphicsContext_CreatePen(const wxGraphicsContext * self, const wxPen * pen);
-wxGraphicsPen *wxGraphicsContext_CreatePen1(const wxGraphicsContext * self, const wxGraphicsPenInfo * info);
-void wxGraphicsContext_SetPen(wxGraphicsContext * self, const wxPen * pen);
-void wxGraphicsContext_SetPen1(wxGraphicsContext * self, const wxGraphicsPen * pen);
-wxGraphicsPath *wxGraphicsContext_CreatePath(const wxGraphicsContext * self);
-void wxGraphicsContext_StrokeLines(wxGraphicsContext * self, size_t n, const wxPoint2DDouble * begin_points, const wxPoint2DDouble * end_points);
-void wxGraphicsContext_StrokeLines1(wxGraphicsContext * self, size_t n, const wxPoint2DDouble * points);
-void wxGraphicsContext_StrokePath(wxGraphicsContext * self, const wxGraphicsPath * path);
-wxGraphicsFont *wxGraphicsContext_CreateFont(const wxGraphicsContext * self, const wxFont * font, const wxColour * col);
-wxGraphicsFont *wxGraphicsContext_CreateFont1(const wxGraphicsContext * self, double size_in_pixels, const wxString * facename, int flags, const wxColour * col);
-void wxGraphicsContext_SetFont(wxGraphicsContext * self, const wxFont * font, const wxColour * colour);
-void wxGraphicsContext_SetFont1(wxGraphicsContext * self, const wxGraphicsFont * font);
-void wxGraphicsContext_GetPartialTextExtents(const wxGraphicsContext * self, const wxString * text, wxArrayDouble * widths);
-void wxGraphicsContext_GetTextExtent(const wxGraphicsContext * self, const wxString * text, wxDouble * width, wxDouble * height, wxDouble * descent, wxDouble * external_leading);
-bool wxGraphicsContext_StartDoc(wxGraphicsContext * self, const wxString * message);
-void wxGraphicsContext_EndDoc(wxGraphicsContext * self);
-void wxGraphicsContext_EndPage(wxGraphicsContext * self);
-wxGraphicsBitmap *wxGraphicsContext_CreateBitmap(wxGraphicsContext * self, const wxBitmap * bitmap);
-wxGraphicsBitmap *wxGraphicsContext_CreateBitmapFromImage(wxGraphicsContext * self, const wxImage * image);
-void wxGraphicsContext_EndLayer(wxGraphicsContext * self);
-void wxGraphicsContext_PushState(wxGraphicsContext * self);
-void wxGraphicsContext_PopState(wxGraphicsContext * self);
-void wxGraphicsContext_Flush(wxGraphicsContext * self);
-void * wxGraphicsContext_GetNativeContext(wxGraphicsContext * self);
-void wxGraphicsContext_GetSize(const wxGraphicsContext * self, wxDouble * width, wxDouble * height);
-void wxGraphicsContext_GetDPI(const wxGraphicsContext * self, wxDouble * dpi_x, wxDouble * dpi_y);
-wxWindow * wxGraphicsContext_GetWindow(const wxGraphicsContext * self);
-bool wxGraphicsContext_ShouldOffset(const wxGraphicsContext * self);
-void wxGraphicsContext_EnableOffset(wxGraphicsContext * self, bool enable);
-void wxGraphicsContext_DisableOffset(wxGraphicsContext * self);
-bool wxGraphicsContext_OffsetEnabled(const wxGraphicsContext * self);
-wxSize *wxGraphicsContext_FromDIP(const wxGraphicsContext * self, const wxSize * sz);
-wxPoint *wxGraphicsContext_FromDIP1(const wxGraphicsContext * self, const wxPoint * pt);
-int wxGraphicsContext_FromDIP2(const wxGraphicsContext * self, int d);
-wxSize *wxGraphicsContext_ToDIP(const wxGraphicsContext * self, const wxSize * sz);
-wxPoint *wxGraphicsContext_ToDIP1(const wxGraphicsContext * self, const wxPoint * pt);
-int wxGraphicsContext_ToDIP2(const wxGraphicsContext * self, int d);
 
 // CLASS: wxGraphicsFont
 wxClassInfo *wxGraphicsFont_CLASSINFO();
@@ -2767,35 +1865,6 @@ void wxGraphicsPath_UnGetNativePath(const wxGraphicsPath * self, void * p);
 // CLASS: wxGraphicsPen
 wxClassInfo *wxGraphicsPen_CLASSINFO();
 
-// CLASS: wxGraphicsRenderer
-wxClassInfo *wxGraphicsRenderer_CLASSINFO();
-wxGraphicsBitmap *wxGraphicsRenderer_CreateBitmap(wxGraphicsRenderer * self, const wxBitmap * bitmap);
-wxGraphicsBitmap *wxGraphicsRenderer_CreateBitmapFromImage(wxGraphicsRenderer * self, const wxImage * image);
-wxImage *wxGraphicsRenderer_CreateImageFromBitmap(wxGraphicsRenderer * self, const wxGraphicsBitmap * bmp);
-wxGraphicsBitmap *wxGraphicsRenderer_CreateBitmapFromNativeBitmap(wxGraphicsRenderer * self, void * bitmap);
-wxGraphicsContext * wxGraphicsRenderer_CreateContext(wxGraphicsRenderer * self, wxWindow * window);
-wxGraphicsContext * wxGraphicsRenderer_CreateContext1(wxGraphicsRenderer * self, const wxWindowDC * window_dc);
-wxGraphicsContext * wxGraphicsRenderer_CreateContext2(wxGraphicsRenderer * self, const wxMemoryDC * memory_dc);
-wxGraphicsContext * wxGraphicsRenderer_CreateContext3(wxGraphicsRenderer * self, const wxPrinterDC * printer_dc);
-wxGraphicsContext * wxGraphicsRenderer_CreateContext4(wxGraphicsRenderer * self, const wxEnhMetaFileDC * meta_file_dc);
-wxGraphicsContext * wxGraphicsRenderer_CreateContextFromUnknownDC(wxGraphicsRenderer * self, wxDC * dc);
-wxGraphicsContext * wxGraphicsRenderer_CreateContextFromImage(wxGraphicsRenderer * self, wxImage * image);
-wxGraphicsBrush *wxGraphicsRenderer_CreateBrush(wxGraphicsRenderer * self, const wxBrush * brush);
-wxGraphicsContext * wxGraphicsRenderer_CreateContextFromNativeContext(wxGraphicsRenderer * self, void * context);
-wxGraphicsContext * wxGraphicsRenderer_CreateContextFromNativeWindow(wxGraphicsRenderer * self, void * window);
-wxGraphicsContext * wxGraphicsRenderer_CreateMeasuringContext(wxGraphicsRenderer * self);
-wxGraphicsFont *wxGraphicsRenderer_CreateFont(wxGraphicsRenderer * self, const wxFont * font, const wxColour * col);
-wxGraphicsFont *wxGraphicsRenderer_CreateFont1(wxGraphicsRenderer * self, double size_in_pixels, const wxString * facename, int flags, const wxColour * col);
-wxGraphicsFont *wxGraphicsRenderer_CreateFontAtDPI(wxGraphicsRenderer * self, const wxFont * font, const wxRealPoint * dpi, const wxColour * col);
-wxGraphicsPath *wxGraphicsRenderer_CreatePath(wxGraphicsRenderer * self);
-wxGraphicsPen *wxGraphicsRenderer_CreatePen(wxGraphicsRenderer * self, const wxGraphicsPenInfo * info);
-wxString *wxGraphicsRenderer_GetName(const wxGraphicsRenderer * self);
-void wxGraphicsRenderer_GetVersion(const wxGraphicsRenderer * self, int * major, int * minor, int * micro);
-wxGraphicsRenderer * wxGraphicsRenderer_GetDefaultRenderer();
-wxGraphicsRenderer * wxGraphicsRenderer_GetCairoRenderer();
-wxGraphicsRenderer * wxGraphicsRenderer_GetGDIPlusRenderer();
-wxGraphicsRenderer * wxGraphicsRenderer_GetDirect2DRenderer();
-
 // CLASS: wxGridBagSizer
 wxClassInfo *wxGridBagSizer_CLASSINFO();
 wxGridBagSizer *wxGridBagSizer_new(int vgap, int hgap);
@@ -2825,199 +1894,6 @@ bool wxGridBagSizer_SetItemPosition2(wxGridBagSizer * self, size_t index, const 
 bool wxGridBagSizer_SetItemSpan(wxGridBagSizer * self, wxWindow * window, const wxGBSpan * span);
 bool wxGridBagSizer_SetItemSpan1(wxGridBagSizer * self, wxSizer * sizer, const wxGBSpan * span);
 bool wxGridBagSizer_SetItemSpan2(wxGridBagSizer * self, size_t index, const wxGBSpan * span);
-
-// CLASS: wxGridCellAttr
-void wxGridCellAttr_delete(wxGridCellAttr *self);
-wxGridCellAttr *wxGridCellAttr_new(wxGridCellAttr * attr_default);
-wxGridCellAttr *wxGridCellAttr_new1(const wxColour * col_text, const wxColour * col_back, const wxFont * font, int h_align, int v_align);
-wxGridCellAttr * wxGridCellAttr_Clone(const wxGridCellAttr * self);
-void wxGridCellAttr_DecRef(wxGridCellAttr * self);
-void wxGridCellAttr_GetAlignment(const wxGridCellAttr * self, int * h_align, int * v_align);
-wxColour *wxGridCellAttr_GetBackgroundColour(const wxGridCellAttr * self);
-wxGridCellEditor * wxGridCellAttr_GetEditor(const wxGridCellAttr * self, const wxGrid * grid, int row, int col);
-wxFont *wxGridCellAttr_GetFont(const wxGridCellAttr * self);
-void wxGridCellAttr_GetNonDefaultAlignment(const wxGridCellAttr * self, int * h_align, int * v_align);
-wxGridCellRenderer * wxGridCellAttr_GetRenderer(const wxGridCellAttr * self, const wxGrid * grid, int row, int col);
-wxColour *wxGridCellAttr_GetTextColour(const wxGridCellAttr * self);
-bool wxGridCellAttr_HasAlignment(const wxGridCellAttr * self);
-bool wxGridCellAttr_HasBackgroundColour(const wxGridCellAttr * self);
-bool wxGridCellAttr_HasEditor(const wxGridCellAttr * self);
-bool wxGridCellAttr_HasFont(const wxGridCellAttr * self);
-bool wxGridCellAttr_HasRenderer(const wxGridCellAttr * self);
-bool wxGridCellAttr_HasTextColour(const wxGridCellAttr * self);
-void wxGridCellAttr_IncRef(wxGridCellAttr * self);
-bool wxGridCellAttr_IsReadOnly(const wxGridCellAttr * self);
-void wxGridCellAttr_SetAlignment(wxGridCellAttr * self, int h_align, int v_align);
-void wxGridCellAttr_SetBackgroundColour(wxGridCellAttr * self, const wxColour * col_back);
-void wxGridCellAttr_SetDefAttr(wxGridCellAttr * self, wxGridCellAttr * def_attr);
-void wxGridCellAttr_SetEditor(wxGridCellAttr * self, wxGridCellEditor * editor);
-void wxGridCellAttr_SetFont(wxGridCellAttr * self, const wxFont * font);
-void wxGridCellAttr_SetReadOnly(wxGridCellAttr * self, bool is_read_only);
-void wxGridCellAttr_SetRenderer(wxGridCellAttr * self, wxGridCellRenderer * renderer);
-void wxGridCellAttr_SetTextColour(wxGridCellAttr * self, const wxColour * col_text);
-void wxGridCellAttr_MergeWith(wxGridCellAttr * self, wxGridCellAttr * mergefrom);
-void wxGridCellAttr_SetSize(wxGridCellAttr * self, int num_rows, int num_cols);
-void wxGridCellAttr_SetFitMode(wxGridCellAttr * self, wxGridFitMode fit_mode);
-void wxGridCellAttr_SetOverflow(wxGridCellAttr * self, bool allow);
-bool wxGridCellAttr_HasReadWriteMode(const wxGridCellAttr * self);
-bool wxGridCellAttr_HasOverflowMode(const wxGridCellAttr * self);
-bool wxGridCellAttr_HasSize(const wxGridCellAttr * self);
-void wxGridCellAttr_GetSize(const wxGridCellAttr * self, int * num_rows, int * num_cols);
-wxGridFitMode *wxGridCellAttr_GetFitMode(const wxGridCellAttr * self);
-bool wxGridCellAttr_GetOverflow(const wxGridCellAttr * self);
-bool wxGridCellAttr_CanOverflow(const wxGridCellAttr * self);
-// Mix-in(s) to wxGridCellAttr
-wxRefCounter *wxGridCellAttr_AsRefCounter(wxGridCellAttr* obj);
-
-// CLASS: wxGridCellAutoWrapStringEditor
-void wxGridCellAutoWrapStringEditor_delete(wxGridCellAutoWrapStringEditor *self);
-wxGridCellAutoWrapStringEditor *wxGridCellAutoWrapStringEditor_new();
-// Mix-in(s) to wxGridCellAutoWrapStringEditor
-wxRefCounter *wxGridCellAutoWrapStringEditor_AsRefCounter(wxGridCellAutoWrapStringEditor* obj);
-
-// CLASS: wxGridCellAutoWrapStringRenderer
-void wxGridCellAutoWrapStringRenderer_delete(wxGridCellAutoWrapStringRenderer *self);
-wxGridCellAutoWrapStringRenderer *wxGridCellAutoWrapStringRenderer_new();
-// Mix-in(s) to wxGridCellAutoWrapStringRenderer
-wxRefCounter *wxGridCellAutoWrapStringRenderer_AsRefCounter(wxGridCellAutoWrapStringRenderer* obj);
-
-// CLASS: wxGridCellBoolEditor
-void wxGridCellBoolEditor_delete(wxGridCellBoolEditor *self);
-wxGridCellBoolEditor *wxGridCellBoolEditor_new();
-bool wxGridCellBoolEditor_IsTrueValue(const wxString * value);
-void wxGridCellBoolEditor_UseStringValues(const wxString * value_true, const wxString * value_false);
-// Mix-in(s) to wxGridCellBoolEditor
-wxRefCounter *wxGridCellBoolEditor_AsRefCounter(wxGridCellBoolEditor* obj);
-
-// CLASS: wxGridCellBoolRenderer
-void wxGridCellBoolRenderer_delete(wxGridCellBoolRenderer *self);
-wxGridCellBoolRenderer *wxGridCellBoolRenderer_new();
-// Mix-in(s) to wxGridCellBoolRenderer
-wxRefCounter *wxGridCellBoolRenderer_AsRefCounter(wxGridCellBoolRenderer* obj);
-
-// CLASS: wxGridCellChoiceEditor
-void wxGridCellChoiceEditor_delete(wxGridCellChoiceEditor *self);
-wxGridCellChoiceEditor *wxGridCellChoiceEditor_new1(const wxArrayString * choices, bool allow_others);
-void wxGridCellChoiceEditor_SetParameters(wxGridCellChoiceEditor * self, const wxString * params);
-// Mix-in(s) to wxGridCellChoiceEditor
-wxRefCounter *wxGridCellChoiceEditor_AsRefCounter(wxGridCellChoiceEditor* obj);
-
-// CLASS: wxGridCellDateEditor
-void wxGridCellDateEditor_delete(wxGridCellDateEditor *self);
-wxGridCellDateEditor *wxGridCellDateEditor_new(const wxString * format);
-// Mix-in(s) to wxGridCellDateEditor
-wxRefCounter *wxGridCellDateEditor_AsRefCounter(wxGridCellDateEditor* obj);
-
-// CLASS: wxGridCellDateRenderer
-void wxGridCellDateRenderer_delete(wxGridCellDateRenderer *self);
-wxGridCellDateRenderer *wxGridCellDateRenderer_new(const wxString * outformat);
-void wxGridCellDateRenderer_SetParameters(wxGridCellDateRenderer * self, const wxString * params);
-// Mix-in(s) to wxGridCellDateRenderer
-wxRefCounter *wxGridCellDateRenderer_AsRefCounter(wxGridCellDateRenderer* obj);
-
-// CLASS: wxGridCellDateTimeRenderer
-void wxGridCellDateTimeRenderer_delete(wxGridCellDateTimeRenderer *self);
-wxGridCellDateTimeRenderer *wxGridCellDateTimeRenderer_new(const wxString * outformat, const wxString * informat);
-// Mix-in(s) to wxGridCellDateTimeRenderer
-wxRefCounter *wxGridCellDateTimeRenderer_AsRefCounter(wxGridCellDateTimeRenderer* obj);
-
-// CLASS: wxGridCellEditor
-void wxGridCellEditor_delete(wxGridCellEditor *self);
-wxGridCellEditor *wxGridCellEditor_new();
-void wxGridCellEditor_BeginEdit(wxGridCellEditor * self, int row, int col, wxGrid * grid);
-wxGridCellEditor * wxGridCellEditor_Clone(const wxGridCellEditor * self);
-void wxGridCellEditor_Create(wxGridCellEditor * self, wxWindow * parent, wxWindowID id, wxEvtHandler * evt_handler);
-void wxGridCellEditor_Destroy(wxGridCellEditor * self);
-bool wxGridCellEditor_EndEdit(wxGridCellEditor * self, int row, int col, const wxGrid * grid, const wxString * oldval, wxString * newval);
-void wxGridCellEditor_ApplyEdit(wxGridCellEditor * self, int row, int col, wxGrid * grid);
-void wxGridCellEditor_HandleReturn(wxGridCellEditor * self, wxKeyEvent * event);
-bool wxGridCellEditor_IsCreated(wxGridCellEditor * self);
-void wxGridCellEditor_PaintBackground(wxGridCellEditor * self, wxDC * dc, const wxRect * rect_cell, const wxGridCellAttr * attr);
-void wxGridCellEditor_Reset(wxGridCellEditor * self);
-void wxGridCellEditor_SetSize(wxGridCellEditor * self, const wxRect * rect);
-void wxGridCellEditor_Show(wxGridCellEditor * self, bool show, wxGridCellAttr * attr);
-void wxGridCellEditor_StartingClick(wxGridCellEditor * self);
-void wxGridCellEditor_StartingKey(wxGridCellEditor * self, wxKeyEvent * event);
-bool wxGridCellEditor_IsAcceptedKey(wxGridCellEditor * self, wxKeyEvent * event);
-wxString *wxGridCellEditor_GetValue(const wxGridCellEditor * self);
-wxWindow * wxGridCellEditor_GetWindow(const wxGridCellEditor * self);
-void wxGridCellEditor_SetWindow(wxGridCellEditor * self, wxWindow * window);
-wxControl * wxGridCellEditor_GetControl(wxGridCellEditor * self);
-void wxGridCellEditor_SetControl(wxGridCellEditor * self, wxControl * control);
-wxGridActivationResult *wxGridCellEditor_TryActivate(wxGridCellEditor * self, int row, int col, wxGrid * grid, const wxGridActivationSource * act_source);
-void wxGridCellEditor_DoActivate(wxGridCellEditor * self, int row, int col, wxGrid * grid);
-// Mix-in(s) to wxGridCellEditor
-wxRefCounter *wxGridCellEditor_AsRefCounter(wxGridCellEditor* obj);
-
-// CLASS: wxGridCellEnumEditor
-void wxGridCellEnumEditor_delete(wxGridCellEnumEditor *self);
-wxGridCellEnumEditor *wxGridCellEnumEditor_new(const wxString * choices);
-// Mix-in(s) to wxGridCellEnumEditor
-wxRefCounter *wxGridCellEnumEditor_AsRefCounter(wxGridCellEnumEditor* obj);
-
-// CLASS: wxGridCellEnumRenderer
-void wxGridCellEnumRenderer_delete(wxGridCellEnumRenderer *self);
-wxGridCellEnumRenderer *wxGridCellEnumRenderer_new(const wxString * choices);
-void wxGridCellEnumRenderer_SetParameters(wxGridCellEnumRenderer * self, const wxString * params);
-// Mix-in(s) to wxGridCellEnumRenderer
-wxRefCounter *wxGridCellEnumRenderer_AsRefCounter(wxGridCellEnumRenderer* obj);
-
-// CLASS: wxGridCellFloatEditor
-void wxGridCellFloatEditor_delete(wxGridCellFloatEditor *self);
-wxGridCellFloatEditor *wxGridCellFloatEditor_new(int width, int precision, int format);
-// Mix-in(s) to wxGridCellFloatEditor
-wxRefCounter *wxGridCellFloatEditor_AsRefCounter(wxGridCellFloatEditor* obj);
-
-// CLASS: wxGridCellFloatRenderer
-void wxGridCellFloatRenderer_delete(wxGridCellFloatRenderer *self);
-wxGridCellFloatRenderer *wxGridCellFloatRenderer_new(int width, int precision, int format);
-int wxGridCellFloatRenderer_GetFormat(const wxGridCellFloatRenderer * self);
-int wxGridCellFloatRenderer_GetPrecision(const wxGridCellFloatRenderer * self);
-int wxGridCellFloatRenderer_GetWidth(const wxGridCellFloatRenderer * self);
-void wxGridCellFloatRenderer_SetFormat(wxGridCellFloatRenderer * self, int format);
-void wxGridCellFloatRenderer_SetParameters(wxGridCellFloatRenderer * self, const wxString * params);
-void wxGridCellFloatRenderer_SetPrecision(wxGridCellFloatRenderer * self, int precision);
-void wxGridCellFloatRenderer_SetWidth(wxGridCellFloatRenderer * self, int width);
-// Mix-in(s) to wxGridCellFloatRenderer
-wxRefCounter *wxGridCellFloatRenderer_AsRefCounter(wxGridCellFloatRenderer* obj);
-
-// CLASS: wxGridCellNumberEditor
-void wxGridCellNumberEditor_delete(wxGridCellNumberEditor *self);
-wxGridCellNumberEditor *wxGridCellNumberEditor_new(int min, int max);
-// Mix-in(s) to wxGridCellNumberEditor
-wxRefCounter *wxGridCellNumberEditor_AsRefCounter(wxGridCellNumberEditor* obj);
-
-// CLASS: wxGridCellNumberRenderer
-void wxGridCellNumberRenderer_delete(wxGridCellNumberRenderer *self);
-wxGridCellNumberRenderer *wxGridCellNumberRenderer_new();
-// Mix-in(s) to wxGridCellNumberRenderer
-wxRefCounter *wxGridCellNumberRenderer_AsRefCounter(wxGridCellNumberRenderer* obj);
-
-// CLASS: wxGridCellRenderer
-void wxGridCellRenderer_delete(wxGridCellRenderer *self);
-wxGridCellRenderer *wxGridCellRenderer_new();
-wxGridCellRenderer * wxGridCellRenderer_Clone(const wxGridCellRenderer * self);
-void wxGridCellRenderer_Draw(wxGridCellRenderer * self, wxGrid * grid, wxGridCellAttr * attr, wxDC * dc, const wxRect * rect, int row, int col, bool is_selected);
-wxSize *wxGridCellRenderer_GetBestSize(wxGridCellRenderer * self, wxGrid * grid, wxGridCellAttr * attr, wxDC * dc, int row, int col);
-int wxGridCellRenderer_GetBestHeight(wxGridCellRenderer * self, wxGrid * grid, wxGridCellAttr * attr, wxDC * dc, int row, int col, int width);
-int wxGridCellRenderer_GetBestWidth(wxGridCellRenderer * self, wxGrid * grid, wxGridCellAttr * attr, wxDC * dc, int row, int col, int height);
-wxSize *wxGridCellRenderer_GetMaxBestSize(wxGridCellRenderer * self, wxGrid * grid, wxGridCellAttr * attr, wxDC * dc);
-// Mix-in(s) to wxGridCellRenderer
-wxRefCounter *wxGridCellRenderer_AsRefCounter(wxGridCellRenderer* obj);
-
-// CLASS: wxGridCellStringRenderer
-void wxGridCellStringRenderer_delete(wxGridCellStringRenderer *self);
-wxGridCellStringRenderer *wxGridCellStringRenderer_new();
-// Mix-in(s) to wxGridCellStringRenderer
-wxRefCounter *wxGridCellStringRenderer_AsRefCounter(wxGridCellStringRenderer* obj);
-
-// CLASS: wxGridCellTextEditor
-void wxGridCellTextEditor_delete(wxGridCellTextEditor *self);
-wxGridCellTextEditor *wxGridCellTextEditor_new(size_t max_chars);
-void wxGridCellTextEditor_SetParameters(wxGridCellTextEditor * self, const wxString * params);
-void wxGridCellTextEditor_SetValidator(wxGridCellTextEditor * self, const wxValidator * validator);
-// Mix-in(s) to wxGridCellTextEditor
-wxRefCounter *wxGridCellTextEditor_AsRefCounter(wxGridCellTextEditor* obj);
 
 // CLASS: wxGridEditorCreatedEvent
 wxClassInfo *wxGridEditorCreatedEvent_CLASSINFO();
@@ -3096,78 +1972,10 @@ void wxGridSizer_SetHGap(wxGridSizer * self, int gap);
 void wxGridSizer_SetRows(wxGridSizer * self, int rows);
 void wxGridSizer_SetVGap(wxGridSizer * self, int gap);
 
-// CLASS: wxGridTableBase
-wxClassInfo *wxGridTableBase_CLASSINFO();
-bool wxGridTableBase_IsEmptyCell(wxGridTableBase * self, int row, int col);
-bool wxGridTableBase_IsEmpty(wxGridTableBase * self, const wxGridCellCoords * coords);
-wxString *wxGridTableBase_GetValue(wxGridTableBase * self, int row, int col);
-void wxGridTableBase_SetValue(wxGridTableBase * self, int row, int col, const wxString * value);
-wxString *wxGridTableBase_GetTypeName(wxGridTableBase * self, int row, int col);
-bool wxGridTableBase_CanGetValueAs(wxGridTableBase * self, int row, int col, const wxString * type_name);
-bool wxGridTableBase_CanSetValueAs(wxGridTableBase * self, int row, int col, const wxString * type_name);
-long wxGridTableBase_GetValueAsLong(wxGridTableBase * self, int row, int col);
-double wxGridTableBase_GetValueAsDouble(wxGridTableBase * self, int row, int col);
-bool wxGridTableBase_GetValueAsBool(wxGridTableBase * self, int row, int col);
-void * wxGridTableBase_GetValueAsCustom(wxGridTableBase * self, int row, int col, const wxString * type_name);
-void wxGridTableBase_SetValueAsLong(wxGridTableBase * self, int row, int col, long value);
-void wxGridTableBase_SetValueAsDouble(wxGridTableBase * self, int row, int col, double value);
-void wxGridTableBase_SetValueAsBool(wxGridTableBase * self, int row, int col, bool value);
-void wxGridTableBase_SetValueAsCustom(wxGridTableBase * self, int row, int col, const wxString * type_name, void * value);
-void wxGridTableBase_SetView(wxGridTableBase * self, wxGrid * grid);
-wxGrid * wxGridTableBase_GetView(const wxGridTableBase * self);
-void wxGridTableBase_Clear(wxGridTableBase * self);
-bool wxGridTableBase_InsertRows(wxGridTableBase * self, size_t pos, size_t num_rows);
-bool wxGridTableBase_AppendRows(wxGridTableBase * self, size_t num_rows);
-bool wxGridTableBase_DeleteRows(wxGridTableBase * self, size_t pos, size_t num_rows);
-bool wxGridTableBase_InsertCols(wxGridTableBase * self, size_t pos, size_t num_cols);
-bool wxGridTableBase_AppendCols(wxGridTableBase * self, size_t num_cols);
-bool wxGridTableBase_DeleteCols(wxGridTableBase * self, size_t pos, size_t num_cols);
-wxString *wxGridTableBase_GetRowLabelValue(wxGridTableBase * self, int row);
-wxString *wxGridTableBase_GetColLabelValue(wxGridTableBase * self, int col);
-wxString *wxGridTableBase_GetCornerLabelValue(const wxGridTableBase * self);
-void wxGridTableBase_SetRowLabelValue(wxGridTableBase * self, int row, const wxString * label);
-void wxGridTableBase_SetColLabelValue(wxGridTableBase * self, int col, const wxString * label);
-void wxGridTableBase_SetAttrProvider(wxGridTableBase * self, wxGridCellAttrProvider * attr_provider);
-wxGridCellAttrProvider * wxGridTableBase_GetAttrProvider(const wxGridTableBase * self);
-void wxGridTableBase_SetAttr(wxGridTableBase * self, wxGridCellAttr * attr, int row, int col);
-void wxGridTableBase_SetRowAttr(wxGridTableBase * self, wxGridCellAttr * attr, int row);
-void wxGridTableBase_SetColAttr(wxGridTableBase * self, wxGridCellAttr * attr, int col);
-bool wxGridTableBase_CanHaveAttributes(wxGridTableBase * self);
-bool wxGridTableBase_CanMeasureColUsingSameAttr(const wxGridTableBase * self, int col);
-wxGridTableBase *wxGridTableBase_new();
-int wxGridTableBase_GetNumberRows(wxGridTableBase * self);
-int wxGridTableBase_GetNumberCols(wxGridTableBase * self);
-int wxGridTableBase_GetRowsCount(const wxGridTableBase * self);
-int wxGridTableBase_GetColsCount(const wxGridTableBase * self);
-
 // CLASS: wxGridUpdateLocker
 void wxGridUpdateLocker_delete(wxGridUpdateLocker *self);
 wxGridUpdateLocker *wxGridUpdateLocker_new(wxGrid * grid);
 void wxGridUpdateLocker_Create(wxGridUpdateLocker * self, wxGrid * grid);
-
-// CLASS: wxHScrolledWindow
-wxClassInfo *wxHScrolledWindow_CLASSINFO();
-wxHScrolledWindow *wxHScrolledWindow_new();
-wxHScrolledWindow *wxHScrolledWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-bool wxHScrolledWindow_Create(wxHScrolledWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-// Mix-in(s) to wxHScrolledWindow
-wxVarHScrollHelper *wxHScrolledWindow_AsVarHScrollHelper(wxHScrolledWindow* obj);
-wxTrackable *wxHScrolledWindow_AsTrackable(wxHScrolledWindow* obj);
-
-// CLASS: wxHTMLDataObject
-void wxHTMLDataObject_delete(wxHTMLDataObject *self);
-wxHTMLDataObject *wxHTMLDataObject_new(const wxString * html);
-wxString *wxHTMLDataObject_GetHTML(const wxHTMLDataObject * self);
-void wxHTMLDataObject_SetHTML(wxHTMLDataObject * self, const wxString * html);
-
-// CLASS: wxHVScrolledWindow
-wxClassInfo *wxHVScrolledWindow_CLASSINFO();
-wxHVScrolledWindow *wxHVScrolledWindow_new();
-wxHVScrolledWindow *wxHVScrolledWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-bool wxHVScrolledWindow_Create(wxHVScrolledWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-// Mix-in(s) to wxHVScrolledWindow
-wxVarHVScrollHelper *wxHVScrolledWindow_AsVarHVScrollHelper(wxHVScrolledWindow* obj);
-wxTrackable *wxHVScrolledWindow_AsTrackable(wxHVScrolledWindow* obj);
 
 // CLASS: wxHeaderColumn
 void wxHeaderColumn_delete(wxHeaderColumn *self);
@@ -3241,29 +2049,6 @@ void wxHeaderCtrlSimple_RemoveSortIndicator(wxHeaderCtrlSimple * self);
 // Mix-in(s) to wxHeaderCtrlSimple
 wxTrackable *wxHeaderCtrlSimple_AsTrackable(wxHeaderCtrlSimple* obj);
 
-// CLASS: wxHelpController
-wxClassInfo *wxHelpController_CLASSINFO();
-wxHelpController *wxHelpController_new(wxWindow * parent_window);
-
-// CLASS: wxHelpControllerBase
-wxClassInfo *wxHelpControllerBase_CLASSINFO();
-wxHelpControllerBase *wxHelpControllerBase_new(wxWindow * parent_window);
-bool wxHelpControllerBase_DisplayBlock(wxHelpControllerBase * self, long block_no);
-bool wxHelpControllerBase_DisplayContents(wxHelpControllerBase * self);
-bool wxHelpControllerBase_DisplayContextPopup(wxHelpControllerBase * self, int context_id);
-bool wxHelpControllerBase_DisplaySection(wxHelpControllerBase * self, const wxString * section);
-bool wxHelpControllerBase_DisplaySection1(wxHelpControllerBase * self, int section_no);
-bool wxHelpControllerBase_DisplayTextPopup(wxHelpControllerBase * self, const wxString * text, const wxPoint * pos);
-wxFrame * wxHelpControllerBase_GetFrameParameters(wxHelpControllerBase * self, wxSize * size, wxPoint * pos, bool * new_frame_each_time);
-wxWindow * wxHelpControllerBase_GetParentWindow(const wxHelpControllerBase * self);
-bool wxHelpControllerBase_Initialize(wxHelpControllerBase * self, const wxString * file);
-bool wxHelpControllerBase_LoadFile(wxHelpControllerBase * self, const wxString * file);
-void wxHelpControllerBase_OnQuit(wxHelpControllerBase * self);
-bool wxHelpControllerBase_Quit(wxHelpControllerBase * self);
-void wxHelpControllerBase_SetFrameParameters(wxHelpControllerBase * self, const wxString * title_format, const wxSize * size, const wxPoint * pos, bool new_frame_each_time);
-void wxHelpControllerBase_SetParentWindow(wxHelpControllerBase * self, wxWindow * parent_window);
-void wxHelpControllerBase_SetViewer(wxHelpControllerBase * self, const wxString * viewer, long flags);
-
 // CLASS: wxHelpControllerHelpProvider
 void wxHelpControllerHelpProvider_delete(wxHelpControllerHelpProvider *self);
 wxHelpControllerHelpProvider *wxHelpControllerHelpProvider_new(wxHelpControllerBase * hc);
@@ -3309,10 +2094,6 @@ wxHyperlinkEvent *wxHyperlinkEvent_new(wxObject * generator, int id, const wxStr
 wxString *wxHyperlinkEvent_GetURL(const wxHyperlinkEvent * self);
 void wxHyperlinkEvent_SetURL(wxHyperlinkEvent * self, const wxString * url);
 
-// CLASS: wxIFFHandler
-wxClassInfo *wxIFFHandler_CLASSINFO();
-wxIFFHandler *wxIFFHandler_new();
-
 // CLASS: wxIcon
 wxClassInfo *wxIcon_CLASSINFO();
 wxIcon *wxIcon_new();
@@ -3350,122 +2131,10 @@ size_t wxIconBundle_GetIconCount(const wxIconBundle * self);
 wxIcon *wxIconBundle_GetIconByIndex(const wxIconBundle * self, size_t n);
 bool wxIconBundle_IsEmpty(const wxIconBundle * self);
 
-// CLASS: wxIconizeEvent
-wxClassInfo *wxIconizeEvent_CLASSINFO();
-wxIconizeEvent *wxIconizeEvent_new(int id, bool iconized);
-bool wxIconizeEvent_IsIconized(const wxIconizeEvent * self);
-bool wxIconizeEvent_Iconized(const wxIconizeEvent * self);
-
 // CLASS: wxIdManager
 void wxIdManager_delete(wxIdManager *self);
 wxWindowID wxIdManager_ReserveId(int count);
 void wxIdManager_UnreserveId(wxWindowID id, int count);
-
-// CLASS: wxImage
-wxClassInfo *wxImage_CLASSINFO();
-wxImage *wxImage_Copy(const wxImage * self);
-bool wxImage_Create(wxImage * self, int width, int height, bool clear);
-bool wxImage_Create1(wxImage * self, const wxSize * sz, bool clear);
-bool wxImage_Create2(wxImage * self, int width, int height, unsigned char * data, bool static_data);
-bool wxImage_Create3(wxImage * self, const wxSize * sz, unsigned char * data, bool static_data);
-bool wxImage_Create4(wxImage * self, int width, int height, unsigned char * data, unsigned char * alpha, bool static_data);
-bool wxImage_Create5(wxImage * self, const wxSize * sz, unsigned char * data, unsigned char * alpha, bool static_data);
-void wxImage_Destroy(wxImage * self);
-void wxImage_InitAlpha(wxImage * self);
-wxImage *wxImage_Blur(const wxImage * self, int blur_radius);
-wxImage *wxImage_BlurHorizontal(const wxImage * self, int blur_radius);
-wxImage *wxImage_BlurVertical(const wxImage * self, int blur_radius);
-wxImage *wxImage_Mirror(const wxImage * self, bool horizontally);
-wxImage * wxImage_Resize(wxImage * self, const wxSize * size, const wxPoint * pos, int red, int green, int blue);
-wxImage *wxImage_Rotate(const wxImage * self, double angle, const wxPoint * rotation_centre, bool interpolating, wxPoint * offset_after_rotation);
-wxImage *wxImage_Rotate90(const wxImage * self, bool clockwise);
-wxImage *wxImage_Rotate180(const wxImage * self);
-void wxImage_RotateHue(wxImage * self, double angle);
-void wxImage_ChangeSaturation(wxImage * self, double factor);
-void wxImage_ChangeBrightness(wxImage * self, double factor);
-void wxImage_ChangeHSV(wxImage * self, double angle_h, double factor_s, double factor_v);
-wxImage *wxImage_Size(const wxImage * self, const wxSize * size, const wxPoint * pos, int red, int green, int blue);
-wxImage *wxImage_ConvertToGreyscale(const wxImage * self, double weight_r, double weight_g, double weight_b);
-wxImage *wxImage_ConvertToGreyscale1(const wxImage * self);
-wxImage *wxImage_ChangeLightness(const wxImage * self, int alpha);
-unsigned char * wxImage_GetAlpha(const wxImage * self);
-unsigned char * wxImage_GetData(const wxImage * self);
-int wxImage_GetWidth(const wxImage * self);
-int wxImage_GetHeight(const wxImage * self);
-wxSize *wxImage_GetSize(const wxImage * self);
-wxString *wxImage_GetOption(const wxImage * self, const wxString * name);
-int wxImage_GetOptionInt(const wxImage * self, const wxString * name);
-bool wxImage_GetOrFindMaskColour(const wxImage * self, unsigned char * r, unsigned char * g, unsigned char * b);
-wxPalette *wxImage_GetPalette(const wxImage * self);
-wxImage *wxImage_GetSubImage(const wxImage * self, const wxRect * rect);
-bool wxImage_HasAlpha(const wxImage * self);
-bool wxImage_HasMask(const wxImage * self);
-bool wxImage_HasOption(const wxImage * self, const wxString * name);
-bool wxImage_IsOk(const wxImage * self);
-bool wxImage_LoadFile2(wxImage * self, const wxString * name, const wxString * mimetype, int index);
-bool wxImage_LoadFile3(wxImage * self, wxInputStream * stream, const wxString * mimetype, int index);
-bool wxImage_SaveFile(const wxImage * self, wxOutputStream * stream, const wxString * mimetype);
-bool wxImage_SaveFile2(const wxImage * self, const wxString * name, const wxString * mimetype);
-bool wxImage_SaveFile3(const wxImage * self, const wxString * name);
-void wxImage_SetAlpha(wxImage * self, unsigned char * alpha, bool static_data);
-void wxImage_ClearAlpha(wxImage * self);
-void wxImage_SetData(wxImage * self, unsigned char * data, bool static_data);
-void wxImage_SetData1(wxImage * self, unsigned char * data, int new_width, int new_height, bool static_data);
-void wxImage_SetLoadFlags(wxImage * self, int flags);
-void wxImage_SetMask(wxImage * self, bool has_mask);
-void wxImage_SetOption(wxImage * self, const wxString * name, const wxString * value);
-void wxImage_SetOption1(wxImage * self, const wxString * name, int value);
-void wxImage_SetPalette(wxImage * self, const wxPalette * palette);
-void wxImage_SetDefaultLoadFlags(int flags);
-int wxImage_GetLoadFlags(const wxImage * self);
-void wxImage_AddHandler(wxImageHandler * handler);
-void wxImage_CleanUpHandlers();
-wxImageHandler * wxImage_FindHandler(const wxString * name);
-wxImageHandler * wxImage_FindHandlerMime(const wxString * mimetype);
-wxList * wxImage_GetHandlers();
-void wxImage_InitStandardHandlers();
-void wxImage_InsertHandler(wxImageHandler * handler);
-bool wxImage_RemoveHandler(const wxString * name);
-bool wxImage_CanRead(const wxString * filename);
-bool wxImage_CanRead1(wxInputStream * stream);
-int wxImage_GetDefaultLoadFlags();
-wxString *wxImage_GetImageExtWildcard();
-wxImage::HSVValue *wxImage_RGBtoHSV(const wxImage::RGBValue * rgb);
-wxImage::RGBValue *wxImage_HSVtoRGB(const wxImage::HSVValue * hsv);
-wxImage *wxImage_new();
-wxImage *wxImage_new1(int width, int height, bool clear);
-wxImage *wxImage_new2(const wxSize * sz, bool clear);
-wxImage *wxImage_new3(int width, int height, unsigned char * data, bool static_data);
-wxImage *wxImage_new4(const wxSize * sz, unsigned char * data, bool static_data);
-wxImage *wxImage_new5(int width, int height, unsigned char * data, unsigned char * alpha, bool static_data);
-wxImage *wxImage_new6(const wxSize * sz, unsigned char * data, unsigned char * alpha, bool static_data);
-wxImage *wxImage_new7(const char *const * xpm_data);
-wxImage *wxImage_new9(const wxString * name, const wxString * mimetype, int index);
-wxImage *wxImage_new11(wxInputStream * stream, const wxString * mimetype, int index);
-
-// CLASS: wxImageDataObject
-void wxImageDataObject_delete(wxImageDataObject *self);
-wxImageDataObject *wxImageDataObject_new(const wxImage * image);
-wxImage *wxImageDataObject_GetImage(const wxImageDataObject * self);
-void wxImageDataObject_SetImage(wxImageDataObject * self, const wxImage * image);
-
-// CLASS: wxImageHandler
-wxClassInfo *wxImageHandler_CLASSINFO();
-wxImageHandler *wxImageHandler_new();
-bool wxImageHandler_CanRead(wxImageHandler * self, wxInputStream * stream);
-bool wxImageHandler_CanRead1(wxImageHandler * self, const wxString * filename);
-wxString *wxImageHandler_GetExtension(const wxImageHandler * self);
-wxArrayString *wxImageHandler_GetAltExtensions(const wxImageHandler * self);
-int wxImageHandler_GetImageCount(wxImageHandler * self, wxInputStream * stream);
-wxString *wxImageHandler_GetMimeType(const wxImageHandler * self);
-wxString *wxImageHandler_GetName(const wxImageHandler * self);
-bool wxImageHandler_LoadFile(wxImageHandler * self, wxImage * image, wxInputStream * stream, bool verbose, int index);
-bool wxImageHandler_SaveFile(wxImageHandler * self, wxImage * image, wxOutputStream * stream, bool verbose);
-void wxImageHandler_SetExtension(wxImageHandler * self, const wxString * extension);
-void wxImageHandler_SetAltExtensions(wxImageHandler * self, const wxArrayString * extensions);
-void wxImageHandler_SetMimeType(wxImageHandler * self, const wxString * mimetype);
-void wxImageHandler_SetName(wxImageHandler * self, const wxString * name);
-wxVersionInfo *wxImageHandler_GetLibraryVersionInfo();
 
 // CLASS: wxImageList
 wxClassInfo *wxImageList_CLASSINFO();
@@ -3574,11 +2243,6 @@ wxString *wxItemContainerImmutable_GetString(const wxItemContainerImmutable * se
 wxArrayString *wxItemContainerImmutable_GetStrings(const wxItemContainerImmutable * self);
 void wxItemContainerImmutable_SetString(wxItemContainerImmutable * self, unsigned int n, const wxString * string);
 int wxItemContainerImmutable_FindString(const wxItemContainerImmutable * self, const wxString * string, bool case_sensitive);
-
-// CLASS: wxJPEGHandler
-wxClassInfo *wxJPEGHandler_CLASSINFO();
-wxJPEGHandler *wxJPEGHandler_new();
-wxVersionInfo *wxJPEGHandler_GetLibraryVersionInfo();
 
 // CLASS: wxJoystick
 wxClassInfo *wxJoystick_CLASSINFO();
@@ -4102,30 +2766,6 @@ void wxMenuItem_Check(wxMenuItem * self, bool check);
 void wxMenuItem_Enable(wxMenuItem * self, bool enable);
 wxString *wxMenuItem_GetLabelText(const wxString * text);
 
-// CLASS: wxMessageDialog
-wxClassInfo *wxMessageDialog_CLASSINFO();
-wxMessageDialog *wxMessageDialog_new(wxWindow * parent, const wxString * message, const wxString * caption, long style, const wxPoint * pos);
-void wxMessageDialog_SetExtendedMessage(wxMessageDialog * self, const wxString * extended_message);
-bool wxMessageDialog_SetHelpLabel(wxMessageDialog * self, const ButtonLabel * help);
-void wxMessageDialog_SetMessage(wxMessageDialog * self, const wxString * message);
-bool wxMessageDialog_SetOKCancelLabels(wxMessageDialog * self, const ButtonLabel * ok, const ButtonLabel * cancel);
-bool wxMessageDialog_SetOKLabel(wxMessageDialog * self, const ButtonLabel * ok);
-bool wxMessageDialog_SetYesNoCancelLabels(wxMessageDialog * self, const ButtonLabel * yes, const ButtonLabel * no, const ButtonLabel * cancel);
-bool wxMessageDialog_SetYesNoLabels(wxMessageDialog * self, const ButtonLabel * yes, const ButtonLabel * no);
-wxString *wxMessageDialog_GetCaption(const wxMessageDialog * self);
-wxString *wxMessageDialog_GetMessage(const wxMessageDialog * self);
-wxString *wxMessageDialog_GetExtendedMessage(const wxMessageDialog * self);
-long wxMessageDialog_GetMessageDialogStyle(const wxMessageDialog * self);
-bool wxMessageDialog_HasCustomLabels(const wxMessageDialog * self);
-wxString *wxMessageDialog_GetYesLabel(const wxMessageDialog * self);
-wxString *wxMessageDialog_GetNoLabel(const wxMessageDialog * self);
-wxString *wxMessageDialog_GetOKLabel(const wxMessageDialog * self);
-wxString *wxMessageDialog_GetCancelLabel(const wxMessageDialog * self);
-wxString *wxMessageDialog_GetHelpLabel(const wxMessageDialog * self);
-long wxMessageDialog_GetEffectiveIcon(const wxMessageDialog * self);
-// Mix-in(s) to wxMessageDialog
-wxTrackable *wxMessageDialog_AsTrackable(wxMessageDialog* obj);
-
 // CLASS: wxMessageOutputMessageBox
 void wxMessageOutputMessageBox_delete(wxMessageOutputMessageBox *self);
 wxMessageOutputMessageBox *wxMessageOutputMessageBox_new();
@@ -4136,11 +2776,6 @@ wxMetafile *wxMetafile_new(const wxString * filename);
 bool wxMetafile_IsOk(wxMetafile * self);
 bool wxMetafile_Play(wxMetafile * self, wxDC * dc);
 bool wxMetafile_SetClipboard(wxMetafile * self, int width, int height);
-
-// CLASS: wxMetafileDC
-wxClassInfo *wxMetafileDC_CLASSINFO();
-wxMetafileDC *wxMetafileDC_new(const wxString * filename);
-wxMetafile * wxMetafileDC_Close(wxMetafileDC * self);
 
 // CLASS: wxMiniFrame
 wxClassInfo *wxMiniFrame_CLASSINFO();
@@ -4198,14 +2833,6 @@ bool wxMouseEvent_RightDown(const wxMouseEvent * self);
 bool wxMouseEvent_RightUp(const wxMouseEvent * self);
 // Mix-in(s) to wxMouseEvent
 wxMouseState *wxMouseEvent_AsMouseState(wxMouseEvent* obj);
-
-// CLASS: wxMouseEventsManager
-wxClassInfo *wxMouseEventsManager_CLASSINFO();
-wxMouseEventsManager *wxMouseEventsManager_new();
-wxMouseEventsManager *wxMouseEventsManager_new1(wxWindow * win);
-bool wxMouseEventsManager_Create(wxMouseEventsManager * self, wxWindow * win);
-// Mix-in(s) to wxMouseEventsManager
-wxTrackable *wxMouseEventsManager_AsTrackable(wxMouseEventsManager* obj);
 
 // CLASS: wxMoveEvent
 wxClassInfo *wxMoveEvent_CLASSINFO();
@@ -4276,69 +2903,16 @@ void wxNotebook_SetPadding(wxNotebook * self, const wxSize * padding);
 wxWithImages *wxNotebook_AsWithImages(wxNotebook* obj);
 wxTrackable *wxNotebook_AsTrackable(wxNotebook* obj);
 
-// CLASS: wxNotificationMessage
-wxClassInfo *wxNotificationMessage_CLASSINFO();
-wxNotificationMessage *wxNotificationMessage_new();
-wxNotificationMessage *wxNotificationMessage_new1(const wxString * title, const wxString * message, wxWindow * parent, int flags);
-bool wxNotificationMessage_AddAction(wxNotificationMessage * self, wxWindowID actionid, const wxString * label);
-bool wxNotificationMessage_Close(wxNotificationMessage * self);
-void wxNotificationMessage_SetFlags(wxNotificationMessage * self, int flags);
-void wxNotificationMessage_SetIcon(wxNotificationMessage * self, const wxIcon * icon);
-void wxNotificationMessage_SetMessage(wxNotificationMessage * self, const wxString * message);
-void wxNotificationMessage_SetParent(wxNotificationMessage * self, wxWindow * parent);
-void wxNotificationMessage_SetTitle(wxNotificationMessage * self, const wxString * title);
-bool wxNotificationMessage_Show(wxNotificationMessage * self, int timeout);
-wxTaskBarIcon * wxNotificationMessage_UseTaskBarIcon(wxTaskBarIcon * icon);
-bool wxNotificationMessage_MSWUseToasts(const wxString * shortcut_path, const wxString * app_id);
-// Mix-in(s) to wxNotificationMessage
-wxTrackable *wxNotificationMessage_AsTrackable(wxNotificationMessage* obj);
-
 // CLASS: wxNotifyEvent
 wxClassInfo *wxNotifyEvent_CLASSINFO();
 void wxNotifyEvent_Allow(wxNotifyEvent * self);
 bool wxNotifyEvent_IsAllowed(const wxNotifyEvent * self);
 void wxNotifyEvent_Veto(wxNotifyEvent * self);
 
-// CLASS: wxNumberEntryDialog
-wxClassInfo *wxNumberEntryDialog_CLASSINFO();
-wxNumberEntryDialog *wxNumberEntryDialog_new();
-wxNumberEntryDialog *wxNumberEntryDialog_new1(wxWindow * parent, const wxString * message, const wxString * prompt, const wxString * caption, long value, long min, long max, const wxPoint * pos);
-bool wxNumberEntryDialog_Create(wxNumberEntryDialog * self, wxWindow * parent, const wxString * message, const wxString * prompt, const wxString * caption, long value, long min, long max, const wxPoint * pos);
-long wxNumberEntryDialog_GetValue(const wxNumberEntryDialog * self);
-// Mix-in(s) to wxNumberEntryDialog
-wxTrackable *wxNumberEntryDialog_AsTrackable(wxNumberEntryDialog* obj);
-
 // CLASS: wxOverlay
 void wxOverlay_delete(wxOverlay *self);
 wxOverlay *wxOverlay_new();
 void wxOverlay_Reset(wxOverlay * self);
-
-// CLASS: wxOwnerDrawnComboBox
-wxClassInfo *wxOwnerDrawnComboBox_CLASSINFO();
-wxOwnerDrawnComboBox *wxOwnerDrawnComboBox_new();
-wxOwnerDrawnComboBox *wxOwnerDrawnComboBox_new2(wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
-bool wxOwnerDrawnComboBox_Create(wxOwnerDrawnComboBox * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
-bool wxOwnerDrawnComboBox_Create2(wxOwnerDrawnComboBox * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
-bool wxOwnerDrawnComboBox_IsListEmpty(const wxOwnerDrawnComboBox * self);
-bool wxOwnerDrawnComboBox_IsTextEmpty(const wxOwnerDrawnComboBox * self);
-int wxOwnerDrawnComboBox_GetWidestItem(wxOwnerDrawnComboBox * self);
-int wxOwnerDrawnComboBox_GetWidestItemWidth(wxOwnerDrawnComboBox * self);
-// Mix-in(s) to wxOwnerDrawnComboBox
-wxItemContainer *wxOwnerDrawnComboBox_AsItemContainer(wxOwnerDrawnComboBox* obj);
-wxTextEntryBase *wxOwnerDrawnComboBox_AsTextEntry(wxOwnerDrawnComboBox* obj);
-wxTrackable *wxOwnerDrawnComboBox_AsTrackable(wxOwnerDrawnComboBox* obj);
-
-// CLASS: wxPCXHandler
-wxClassInfo *wxPCXHandler_CLASSINFO();
-wxPCXHandler *wxPCXHandler_new();
-
-// CLASS: wxPNGHandler
-wxClassInfo *wxPNGHandler_CLASSINFO();
-wxPNGHandler *wxPNGHandler_new();
-
-// CLASS: wxPNMHandler
-wxClassInfo *wxPNMHandler_CLASSINFO();
-wxPNMHandler *wxPNMHandler_new();
 
 // CLASS: wxPageSetupDialog
 wxClassInfo *wxPageSetupDialog_CLASSINFO();
@@ -4384,10 +2958,6 @@ void wxPageSetupDialogData_SetPrintData(wxPageSetupDialogData * self, const wxPr
 wxClassInfo *wxPaintDC_CLASSINFO();
 wxPaintDC *wxPaintDC_new(wxWindow * window);
 
-// CLASS: wxPaintEvent
-wxClassInfo *wxPaintEvent_CLASSINFO();
-wxPaintEvent *wxPaintEvent_new(wxWindow * window);
-
 // CLASS: wxPalette
 wxClassInfo *wxPalette_CLASSINFO();
 wxPalette *wxPalette_new();
@@ -4414,12 +2984,6 @@ void wxPanel_SetFocusIgnoringChildren(wxPanel * self);
 // Mix-in(s) to wxPanel
 wxTrackable *wxPanel_AsTrackable(wxPanel* obj);
 
-// CLASS: wxPasswordEntryDialog
-wxClassInfo *wxPasswordEntryDialog_CLASSINFO();
-wxPasswordEntryDialog *wxPasswordEntryDialog_new(wxWindow * parent, const wxString * message, const wxString * caption, const wxString * default_value, long style, const wxPoint * pos);
-// Mix-in(s) to wxPasswordEntryDialog
-wxTrackable *wxPasswordEntryDialog_AsTrackable(wxPasswordEntryDialog* obj);
-
 // CLASS: wxPen
 wxClassInfo *wxPen_CLASSINFO();
 wxPen *wxPen_new();
@@ -4441,22 +3005,6 @@ void wxPen_SetWidth(wxPen * self, int width);
 // CLASS: wxPenList
 void wxPenList_delete(wxPenList *self);
 wxPenList *wxPenList_new();
-
-// CLASS: wxPersistenceManager
-void wxPersistenceManager_delete(wxPersistenceManager *self);
-void wxPersistenceManager_Set(wxPersistenceManager * manager);
-wxPersistenceManager * wxPersistenceManager_Get();
-void wxPersistenceManager_DisableSaving(wxPersistenceManager * self);
-void wxPersistenceManager_DisableRestoring(wxPersistenceManager * self);
-wxPersistentObject * wxPersistenceManager_Register(wxPersistenceManager * self, T * obj);
-wxPersistentObject * wxPersistenceManager_Register1(wxPersistenceManager * self, void * obj, wxPersistentObject * po);
-wxPersistentObject * wxPersistenceManager_Find(const wxPersistenceManager * self, void * obj);
-void wxPersistenceManager_Unregister(wxPersistenceManager * self, void * obj);
-void wxPersistenceManager_Save(wxPersistenceManager * self, void * obj);
-bool wxPersistenceManager_Restore(wxPersistenceManager * self, void * obj);
-void wxPersistenceManager_SaveAndUnregister(wxPersistenceManager * self, void * obj);
-bool wxPersistenceManager_RegisterAndRestore(wxPersistenceManager * self, T * obj);
-bool wxPersistenceManager_RegisterAndRestore1(wxPersistenceManager * self, void * obj, wxPersistentObject * po);
 
 // CLASS: wxPickerBase
 wxClassInfo *wxPickerBase_CLASSINFO();
@@ -4517,14 +3065,6 @@ void wxPreferencesEditor_Dismiss(wxPreferencesEditor * self);
 bool wxPreferencesEditor_ShouldApplyChangesImmediately();
 bool wxPreferencesEditor_ShownModally();
 
-// CLASS: wxPreferencesPage
-void wxPreferencesPage_delete(wxPreferencesPage *self);
-wxPreferencesPage *wxPreferencesPage_new();
-wxString *wxPreferencesPage_GetName(const wxPreferencesPage * self);
-wxBitmapBundle *wxPreferencesPage_GetIcon(const wxPreferencesPage * self);
-wxBitmap *wxPreferencesPage_GetLargeIcon(const wxPreferencesPage * self);
-wxWindow * wxPreferencesPage_CreateWindow(wxPreferencesPage * self, wxWindow * parent);
-
 // CLASS: wxPressAndTapEvent
 wxClassInfo *wxPressAndTapEvent_CLASSINFO();
 wxPressAndTapEvent *wxPressAndTapEvent_new(wxWindowID windid);
@@ -4566,46 +3106,6 @@ void wxPrintData_SetPrinterName(wxPrintData * self, const wxString * printer_nam
 wxString *wxPrintData_GetFilename(const wxPrintData * self);
 void wxPrintData_SetFilename(wxPrintData * self, const wxString * filename);
 
-// CLASS: wxPrintDialog
-wxClassInfo *wxPrintDialog_CLASSINFO();
-wxPrintDialog *wxPrintDialog_new(wxWindow * parent, wxPrintDialogData * data);
-wxPrintDialog *wxPrintDialog_new1(wxWindow * parent, wxPrintData * data);
-wxDC * wxPrintDialog_GetPrintDC(wxPrintDialog * self);
-wxPrintDialogData * wxPrintDialog_GetPrintDialogData(wxPrintDialog * self);
-wxPrintData * wxPrintDialog_GetPrintData(wxPrintDialog * self);
-int wxPrintDialog_ShowModal(wxPrintDialog * self);
-
-// CLASS: wxPrintDialogData
-wxClassInfo *wxPrintDialogData_CLASSINFO();
-wxPrintDialogData *wxPrintDialogData_new();
-wxPrintDialogData *wxPrintDialogData_new1(const wxPrintDialogData * dialog_data);
-wxPrintDialogData *wxPrintDialogData_new2(const wxPrintData * print_data);
-void wxPrintDialogData_EnableHelp(wxPrintDialogData * self, bool flag);
-void wxPrintDialogData_EnablePageNumbers(wxPrintDialogData * self, bool flag);
-void wxPrintDialogData_EnablePrintToFile(wxPrintDialogData * self, bool flag);
-void wxPrintDialogData_EnableSelection(wxPrintDialogData * self, bool flag);
-bool wxPrintDialogData_GetAllPages(const wxPrintDialogData * self);
-bool wxPrintDialogData_GetCollate(const wxPrintDialogData * self);
-int wxPrintDialogData_GetFromPage(const wxPrintDialogData * self);
-int wxPrintDialogData_GetMaxPage(const wxPrintDialogData * self);
-int wxPrintDialogData_GetMinPage(const wxPrintDialogData * self);
-int wxPrintDialogData_GetNoCopies(const wxPrintDialogData * self);
-wxPrintData * wxPrintDialogData_GetPrintData(wxPrintDialogData * self);
-bool wxPrintDialogData_GetPrintToFile(const wxPrintDialogData * self);
-bool wxPrintDialogData_GetSelection(const wxPrintDialogData * self);
-int wxPrintDialogData_GetToPage(const wxPrintDialogData * self);
-bool wxPrintDialogData_IsOk(const wxPrintDialogData * self);
-void wxPrintDialogData_SetCollate(wxPrintDialogData * self, bool flag);
-void wxPrintDialogData_SetFromPage(wxPrintDialogData * self, int page);
-void wxPrintDialogData_SetMaxPage(wxPrintDialogData * self, int page);
-void wxPrintDialogData_SetMinPage(wxPrintDialogData * self, int page);
-void wxPrintDialogData_SetNoCopies(wxPrintDialogData * self, int n);
-void wxPrintDialogData_SetPrintData(wxPrintDialogData * self, const wxPrintData * print_data);
-void wxPrintDialogData_SetPrintToFile(wxPrintDialogData * self, bool flag);
-void wxPrintDialogData_SetSelection(wxPrintDialogData * self, bool flag);
-void wxPrintDialogData_SetSetupDialog(wxPrintDialogData * self, bool flag);
-void wxPrintDialogData_SetToPage(wxPrintDialogData * self, int page);
-
 // CLASS: wxPrintPreview
 wxClassInfo *wxPrintPreview_CLASSINFO();
 wxPrintPreview *wxPrintPreview_new(wxPrintout * printout, wxPrintout * printout_for_printing, wxPrintDialogData * data);
@@ -4627,76 +3127,10 @@ void wxPrintPreview_SetFrame(wxPrintPreview * self, wxFrame * frame);
 void wxPrintPreview_SetPrintout(wxPrintPreview * self, wxPrintout * printout);
 void wxPrintPreview_SetZoom(wxPrintPreview * self, int percent);
 
-// CLASS: wxPrinter
-wxClassInfo *wxPrinter_CLASSINFO();
-wxPrinter *wxPrinter_new(wxPrintDialogData * data);
-wxPrintAbortDialog * wxPrinter_CreateAbortWindow(wxPrinter * self, wxWindow * parent, wxPrintout * printout);
-bool wxPrinter_GetAbort(const wxPrinter * self);
-wxPrintDialogData * wxPrinter_GetPrintDialogData(const wxPrinter * self);
-bool wxPrinter_Print(wxPrinter * self, wxWindow * parent, wxPrintout * printout, bool prompt);
-wxDC * wxPrinter_PrintDialog(wxPrinter * self, wxWindow * parent);
-void wxPrinter_ReportError(wxPrinter * self, wxWindow * parent, wxPrintout * printout, const wxString * message);
-bool wxPrinter_Setup(wxPrinter * self, wxWindow * parent);
-
 // CLASS: wxPrinterDC
 wxClassInfo *wxPrinterDC_CLASSINFO();
 wxPrinterDC *wxPrinterDC_new(const wxPrintData * print_data);
 wxRect *wxPrinterDC_GetPaperRect(const wxPrinterDC * self);
-
-// CLASS: wxPrintout
-wxClassInfo *wxPrintout_CLASSINFO();
-wxPrintout *wxPrintout_new(const wxString * title);
-void wxPrintout_FitThisSizeToPage(wxPrintout * self, const wxSize * image_size);
-void wxPrintout_FitThisSizeToPageMargins(wxPrintout * self, const wxSize * image_size, const wxPageSetupDialogData * page_setup_data);
-void wxPrintout_FitThisSizeToPaper(wxPrintout * self, const wxSize * image_size);
-wxDC * wxPrintout_GetDC(const wxPrintout * self);
-wxRect *wxPrintout_GetLogicalPageMarginsRect(const wxPrintout * self, const wxPageSetupDialogData * page_setup_data);
-wxRect *wxPrintout_GetLogicalPageRect(const wxPrintout * self);
-wxRect *wxPrintout_GetLogicalPaperRect(const wxPrintout * self);
-void wxPrintout_GetPPIPrinter(const wxPrintout * self, int * w, int * h);
-void wxPrintout_GetPPIScreen(const wxPrintout * self, int * w, int * h);
-void wxPrintout_GetPageInfo(wxPrintout * self, int * min_page, int * max_page, int * page_from, int * page_to);
-void wxPrintout_GetPageSizeMM(const wxPrintout * self, int * w, int * h);
-void wxPrintout_GetPageSizePixels(const wxPrintout * self, int * w, int * h);
-wxRect *wxPrintout_GetPaperRectPixels(const wxPrintout * self);
-wxString *wxPrintout_GetTitle(const wxPrintout * self);
-bool wxPrintout_HasPage(wxPrintout * self, int page_num);
-bool wxPrintout_IsPreview(const wxPrintout * self);
-wxPrintPreview * wxPrintout_GetPreview(const wxPrintout * self);
-void wxPrintout_MapScreenSizeToDevice(wxPrintout * self);
-void wxPrintout_MapScreenSizeToPage(wxPrintout * self);
-void wxPrintout_MapScreenSizeToPageMargins(wxPrintout * self, const wxPageSetupDialogData * page_setup_data);
-void wxPrintout_MapScreenSizeToPaper(wxPrintout * self);
-void wxPrintout_OffsetLogicalOrigin(wxPrintout * self, wxCoord xoff, wxCoord yoff);
-bool wxPrintout_OnBeginDocument(wxPrintout * self, int start_page, int end_page);
-void wxPrintout_OnBeginPrinting(wxPrintout * self);
-void wxPrintout_OnEndDocument(wxPrintout * self);
-void wxPrintout_OnEndPrinting(wxPrintout * self);
-void wxPrintout_OnPreparePrinting(wxPrintout * self);
-bool wxPrintout_OnPrintPage(wxPrintout * self, int page_num);
-void wxPrintout_SetLogicalOrigin(wxPrintout * self, wxCoord x, wxCoord y);
-
-// CLASS: wxPropertySheetDialog
-wxClassInfo *wxPropertySheetDialog_CLASSINFO();
-wxPropertySheetDialog *wxPropertySheetDialog_new();
-wxPropertySheetDialog *wxPropertySheetDialog_new1(wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-void wxPropertySheetDialog_AddBookCtrl(wxPropertySheetDialog * self, wxSizer * sizer);
-bool wxPropertySheetDialog_Create(wxPropertySheetDialog * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-wxBookCtrlBase * wxPropertySheetDialog_CreateBookCtrl(wxPropertySheetDialog * self);
-void wxPropertySheetDialog_CreateButtons(wxPropertySheetDialog * self, int flags);
-wxBookCtrlBase * wxPropertySheetDialog_GetBookCtrl(const wxPropertySheetDialog * self);
-wxSizer * wxPropertySheetDialog_GetInnerSizer(const wxPropertySheetDialog * self);
-void wxPropertySheetDialog_SetInnerSizer(wxPropertySheetDialog * self, wxSizer * sizer);
-long wxPropertySheetDialog_GetSheetStyle(const wxPropertySheetDialog * self);
-void wxPropertySheetDialog_LayoutDialog(wxPropertySheetDialog * self, int centre_flags);
-void wxPropertySheetDialog_SetBookCtrl(wxPropertySheetDialog * self, wxBookCtrlBase * book_ctrl);
-void wxPropertySheetDialog_SetSheetStyle(wxPropertySheetDialog * self, long style);
-void wxPropertySheetDialog_SetSheetOuterBorder(wxPropertySheetDialog * self, int border);
-int wxPropertySheetDialog_GetSheetOuterBorder(const wxPropertySheetDialog * self);
-void wxPropertySheetDialog_SetSheetInnerBorder(wxPropertySheetDialog * self, int border);
-int wxPropertySheetDialog_GetSheetInnerBorder(const wxPropertySheetDialog * self);
-// Mix-in(s) to wxPropertySheetDialog
-wxTrackable *wxPropertySheetDialog_AsTrackable(wxPropertySheetDialog* obj);
 
 // CLASS: wxQuantize
 wxClassInfo *wxQuantize_CLASSINFO();
@@ -4766,17 +3200,6 @@ wxRearrangeList * wxRearrangeCtrl_GetList(const wxRearrangeCtrl * self);
 // Mix-in(s) to wxRearrangeCtrl
 wxTrackable *wxRearrangeCtrl_AsTrackable(wxRearrangeCtrl* obj);
 
-// CLASS: wxRearrangeDialog
-wxClassInfo *wxRearrangeDialog_CLASSINFO();
-wxRearrangeDialog *wxRearrangeDialog_new();
-wxRearrangeDialog *wxRearrangeDialog_new1(wxWindow * parent, const wxString * message, const wxString * title, const wxArrayInt * order, const wxArrayString * items, const wxPoint * pos, const wxString * name);
-bool wxRearrangeDialog_Create(wxRearrangeDialog * self, wxWindow * parent, const wxString * message, const wxString * title, const wxArrayInt * order, const wxArrayString * items, const wxPoint * pos, const wxString * name);
-void wxRearrangeDialog_AddExtraControls(wxRearrangeDialog * self, wxWindow * win);
-wxRearrangeList * wxRearrangeDialog_GetList(const wxRearrangeDialog * self);
-wxArrayInt *wxRearrangeDialog_GetOrder(const wxRearrangeDialog * self);
-// Mix-in(s) to wxRearrangeDialog
-wxTrackable *wxRearrangeDialog_AsTrackable(wxRearrangeDialog* obj);
-
 // CLASS: wxRearrangeList
 wxClassInfo *wxRearrangeList_CLASSINFO();
 wxRearrangeList *wxRearrangeList_new();
@@ -4839,37 +3262,6 @@ void wxRect_SetBottomRight(wxRect * self, const wxPoint * p);
 void wxRect_SetTopRight(wxRect * self, const wxPoint * p);
 void wxRect_SetBottomLeft(wxRect * self, const wxPoint * p);
 wxRect *wxRect_Union(const wxRect * self, const wxRect * rect);
-
-// CLASS: wxRegion
-wxClassInfo *wxRegion_CLASSINFO();
-wxRegion *wxRegion_new();
-wxRegion *wxRegion_new1(wxCoord x, wxCoord y, wxCoord width, wxCoord height);
-wxRegion *wxRegion_new2(const wxPoint * top_left, const wxPoint * bottom_right);
-wxRegion *wxRegion_new3(const wxRect * rect);
-wxRegion *wxRegion_new4(const wxRegion * region);
-wxRegion *wxRegion_new6(const wxBitmap * bmp);
-wxRegion *wxRegion_new7(const wxBitmap * bmp, const wxColour * trans_colour, int tolerance);
-void wxRegion_Clear(wxRegion * self);
-wxBitmap *wxRegion_ConvertToBitmap(const wxRegion * self);
-void wxRegion_GetBox(const wxRegion * self, wxCoord * x, wxCoord * y, wxCoord * width, wxCoord * height);
-wxRect *wxRegion_GetBox1(const wxRegion * self);
-bool wxRegion_Intersect(wxRegion * self, wxCoord x, wxCoord y, wxCoord width, wxCoord height);
-bool wxRegion_Intersect1(wxRegion * self, const wxRect * rect);
-bool wxRegion_Intersect2(wxRegion * self, const wxRegion * region);
-bool wxRegion_IsEmpty(const wxRegion * self);
-bool wxRegion_IsEqual(const wxRegion * self, const wxRegion * region);
-bool wxRegion_Offset(wxRegion * self, wxCoord x, wxCoord y);
-bool wxRegion_Offset1(wxRegion * self, const wxPoint * pt);
-bool wxRegion_Subtract(wxRegion * self, const wxRect * rect);
-bool wxRegion_Subtract1(wxRegion * self, const wxRegion * region);
-bool wxRegion_Union(wxRegion * self, wxCoord x, wxCoord y, wxCoord width, wxCoord height);
-bool wxRegion_Union1(wxRegion * self, const wxRect * rect);
-bool wxRegion_Union2(wxRegion * self, const wxRegion * region);
-bool wxRegion_Union3(wxRegion * self, const wxBitmap * bmp);
-bool wxRegion_Union4(wxRegion * self, const wxBitmap * bmp, const wxColour * trans_colour, int tolerance);
-bool wxRegion_Xor(wxRegion * self, wxCoord x, wxCoord y, wxCoord width, wxCoord height);
-bool wxRegion_Xor1(wxRegion * self, const wxRect * rect);
-bool wxRegion_Xor2(wxRegion * self, const wxRegion * region);
 
 // CLASS: wxRegionIterator
 wxClassInfo *wxRegionIterator_CLASSINFO();
@@ -5074,13 +3466,6 @@ void wxSettableHeaderColumn_UnsetAsSortKey(wxSettableHeaderColumn * self);
 void wxSettableHeaderColumn_SetSortOrder(wxSettableHeaderColumn * self, bool ascending);
 void wxSettableHeaderColumn_ToggleSortOrder(wxSettableHeaderColumn * self);
 
-// CLASS: wxShowEvent
-wxClassInfo *wxShowEvent_CLASSINFO();
-wxShowEvent *wxShowEvent_new(int winid, bool show);
-void wxShowEvent_SetShow(wxShowEvent * self, bool show);
-bool wxShowEvent_IsShown(const wxShowEvent * self);
-bool wxShowEvent_GetShow(const wxShowEvent * self);
-
 // CLASS: wxSimpleHelpProvider
 void wxSimpleHelpProvider_delete(wxSimpleHelpProvider *self);
 
@@ -5237,52 +3622,6 @@ wxSizerFlags * wxSizerFlags_TripleBorder(wxSizerFlags * self, int direction);
 void wxSizerFlags_DisableConsistencyChecks();
 #endif
 int wxSizerFlags_GetDefaultBorder();
-
-// CLASS: wxSizerItem
-wxClassInfo *wxSizerItem_CLASSINFO();
-wxSizerItem *wxSizerItem_new(int width, int height, int proportion, int flag, int border, wxObject * user_data);
-wxSizerItem *wxSizerItem_new1(wxWindow * window, const wxSizerFlags * flags);
-wxSizerItem *wxSizerItem_new2(wxWindow * window, int proportion, int flag, int border, wxObject * user_data);
-wxSizerItem *wxSizerItem_new3(wxSizer * sizer, const wxSizerFlags * flags);
-wxSizerItem *wxSizerItem_new4(wxSizer * sizer, int proportion, int flag, int border, wxObject * user_data);
-void wxSizerItem_AssignWindow(wxSizerItem * self, wxWindow * window);
-void wxSizerItem_AssignSizer(wxSizerItem * self, wxSizer * sizer);
-void wxSizerItem_AssignSpacer(wxSizerItem * self, const wxSize * size);
-void wxSizerItem_AssignSpacer1(wxSizerItem * self, int w, int h);
-wxSize *wxSizerItem_CalcMin(wxSizerItem * self);
-void wxSizerItem_DeleteWindows(wxSizerItem * self);
-void wxSizerItem_DetachSizer(wxSizerItem * self);
-int wxSizerItem_GetBorder(const wxSizerItem * self);
-int wxSizerItem_GetFlag(const wxSizerItem * self);
-int wxSizerItem_GetId(const wxSizerItem * self);
-wxSize *wxSizerItem_GetMinSize(const wxSizerItem * self);
-void wxSizerItem_SetMinSize(wxSizerItem * self, const wxSize * size);
-void wxSizerItem_SetMinSize1(wxSizerItem * self, int x, int y);
-wxPoint *wxSizerItem_GetPosition(const wxSizerItem * self);
-int wxSizerItem_GetProportion(const wxSizerItem * self);
-wxRect *wxSizerItem_GetRect(wxSizerItem * self);
-wxSize *wxSizerItem_GetSize(const wxSizerItem * self);
-wxSizer * wxSizerItem_GetSizer(const wxSizerItem * self);
-wxSize *wxSizerItem_GetSpacer(const wxSizerItem * self);
-wxObject * wxSizerItem_GetUserData(const wxSizerItem * self);
-wxWindow * wxSizerItem_GetWindow(const wxSizerItem * self);
-bool wxSizerItem_IsShown(const wxSizerItem * self);
-bool wxSizerItem_IsSizer(const wxSizerItem * self);
-bool wxSizerItem_IsSpacer(const wxSizerItem * self);
-bool wxSizerItem_IsWindow(const wxSizerItem * self);
-void wxSizerItem_SetBorder(wxSizerItem * self, int border);
-void wxSizerItem_SetDimension(wxSizerItem * self, const wxPoint * pos, const wxSize * size);
-void wxSizerItem_SetFlag(wxSizerItem * self, int flag);
-void wxSizerItem_SetId(wxSizerItem * self, int id);
-void wxSizerItem_SetInitSize(wxSizerItem * self, int x, int y);
-void wxSizerItem_SetProportion(wxSizerItem * self, int proportion);
-void wxSizerItem_SetRatio(wxSizerItem * self, int width, int height);
-void wxSizerItem_SetRatio1(wxSizerItem * self, wxSize size);
-void wxSizerItem_SetSizer(wxSizerItem * self, wxSizer * sizer);
-void wxSizerItem_SetSpacer(wxSizerItem * self, const wxSize * size);
-void wxSizerItem_SetUserData(wxSizerItem * self, wxObject * user_data);
-void wxSizerItem_SetWindow(wxSizerItem * self, wxWindow * window);
-void wxSizerItem_Show(wxSizerItem * self, bool show);
 
 // CLASS: wxSlider
 wxClassInfo *wxSlider_CLASSINFO();
@@ -5532,13 +3871,6 @@ void wxStdDialogButtonSizer_SetAffirmativeButton(wxStdDialogButtonSizer * self, 
 void wxStdDialogButtonSizer_SetCancelButton(wxStdDialogButtonSizer * self, wxButton * button);
 void wxStdDialogButtonSizer_SetNegativeButton(wxStdDialogButtonSizer * self, wxButton * button);
 
-// CLASS: wxStockPreferencesPage
-void wxStockPreferencesPage_delete(wxStockPreferencesPage *self);
-
-// CLASS: wxStreamToTextRedirector
-void wxStreamToTextRedirector_delete(wxStreamToTextRedirector *self);
-wxStreamToTextRedirector *wxStreamToTextRedirector_new(wxTextCtrl * text, ostream * ostr);
-
 // CLASS: wxSysColourChangedEvent
 wxClassInfo *wxSysColourChangedEvent_CLASSINFO();
 wxSysColourChangedEvent *wxSysColourChangedEvent_new();
@@ -5547,32 +3879,6 @@ wxSysColourChangedEvent *wxSysColourChangedEvent_new();
 void wxSystemSettings_delete(wxSystemSettings *self);
 wxSystemSettings *wxSystemSettings_new();
 wxSystemAppearance *wxSystemSettings_GetAppearance();
-
-// CLASS: wxTGAHandler
-wxClassInfo *wxTGAHandler_CLASSINFO();
-wxTGAHandler *wxTGAHandler_new();
-
-// CLASS: wxTIFFHandler
-wxClassInfo *wxTIFFHandler_CLASSINFO();
-wxTIFFHandler *wxTIFFHandler_new();
-wxVersionInfo *wxTIFFHandler_GetLibraryVersionInfo();
-
-// CLASS: wxTaskBarButton
-void wxTaskBarButton_delete(wxTaskBarButton *self);
-void wxTaskBarButton_SetProgressRange(wxTaskBarButton * self, int range);
-void wxTaskBarButton_SetProgressValue(wxTaskBarButton * self, int value);
-void wxTaskBarButton_PulseProgress(wxTaskBarButton * self);
-void wxTaskBarButton_Show(wxTaskBarButton * self, bool show);
-void wxTaskBarButton_Hide(wxTaskBarButton * self);
-void wxTaskBarButton_SetThumbnailTooltip(wxTaskBarButton * self, const wxString * tooltip);
-void wxTaskBarButton_SetOverlayIcon(wxTaskBarButton * self, const wxIcon * icon, const wxString * description);
-void wxTaskBarButton_SetThumbnailClip(wxTaskBarButton * self, const wxRect * rect);
-void wxTaskBarButton_SetThumbnailContents(wxTaskBarButton * self, const wxWindow * child);
-bool wxTaskBarButton_InsertThumbBarButton(wxTaskBarButton * self, size_t pos, wxThumbBarButton * button);
-bool wxTaskBarButton_AppendThumbBarButton(wxTaskBarButton * self, wxThumbBarButton * button);
-bool wxTaskBarButton_AppendSeparatorInThumbBar(wxTaskBarButton * self);
-wxThumbBarButton * wxTaskBarButton_RemoveThumbBarButton(wxTaskBarButton * self, wxThumbBarButton * button);
-wxThumbBarButton * wxTaskBarButton_RemoveThumbBarButton1(wxTaskBarButton * self, int id);
 
 // CLASS: wxTaskBarIcon
 wxClassInfo *wxTaskBarIcon_CLASSINFO();
@@ -5588,51 +3894,6 @@ wxTrackable *wxTaskBarIcon_AsTrackable(wxTaskBarIcon* obj);
 
 // CLASS: wxTaskBarIconEvent
 wxClassInfo *wxTaskBarIconEvent_CLASSINFO();
-
-// CLASS: wxTaskBarJumpList
-void wxTaskBarJumpList_delete(wxTaskBarJumpList *self);
-wxTaskBarJumpList *wxTaskBarJumpList_new(const wxString * app_id);
-void wxTaskBarJumpList_ShowRecentCategory(wxTaskBarJumpList * self, bool shown);
-void wxTaskBarJumpList_HideRecentCategory(wxTaskBarJumpList * self);
-void wxTaskBarJumpList_ShowFrequentCategory(wxTaskBarJumpList * self, bool shown);
-void wxTaskBarJumpList_HideFrequentCategory(wxTaskBarJumpList * self);
-wxTaskBarJumpListCategory * wxTaskBarJumpList_GetTasks(const wxTaskBarJumpList * self);
-wxTaskBarJumpListCategory *wxTaskBarJumpList_GetFrequentCategory(const wxTaskBarJumpList * self);
-wxTaskBarJumpListCategory *wxTaskBarJumpList_GetRecentCategory(const wxTaskBarJumpList * self);
-const wxTaskBarJumpListCategories * wxTaskBarJumpList_GetCustomCategories(const wxTaskBarJumpList * self);
-void wxTaskBarJumpList_AddCustomCategory(wxTaskBarJumpList * self, wxTaskBarJumpListCategory * category);
-wxTaskBarJumpListCategory * wxTaskBarJumpList_RemoveCustomCategory(wxTaskBarJumpList * self, const wxString * title);
-void wxTaskBarJumpList_DeleteCustomCategory(wxTaskBarJumpList * self, const wxString * title);
-
-// CLASS: wxTaskBarJumpListCategory
-void wxTaskBarJumpListCategory_delete(wxTaskBarJumpListCategory *self);
-wxTaskBarJumpListCategory *wxTaskBarJumpListCategory_new(wxTaskBarJumpList * parent, const wxString * title);
-wxTaskBarJumpListItem * wxTaskBarJumpListCategory_Append(wxTaskBarJumpListCategory * self, wxTaskBarJumpListItem * item);
-void wxTaskBarJumpListCategory_Delete(wxTaskBarJumpListCategory * self, wxTaskBarJumpListItem * item);
-wxTaskBarJumpListItem * wxTaskBarJumpListCategory_Remove(wxTaskBarJumpListCategory * self, wxTaskBarJumpListItem * item);
-wxTaskBarJumpListItem * wxTaskBarJumpListCategory_FindItemByPosition(const wxTaskBarJumpListCategory * self, size_t pos);
-wxTaskBarJumpListItem * wxTaskBarJumpListCategory_Insert(wxTaskBarJumpListCategory * self, size_t pos, wxTaskBarJumpListItem * item);
-wxTaskBarJumpListItem * wxTaskBarJumpListCategory_Prepend(wxTaskBarJumpListCategory * self, wxTaskBarJumpListItem * item);
-void wxTaskBarJumpListCategory_SetTitle(wxTaskBarJumpListCategory * self, const wxString * title);
-wxString *wxTaskBarJumpListCategory_GetTitle(const wxTaskBarJumpListCategory * self);
-const wxTaskBarJumpListItems * wxTaskBarJumpListCategory_GetItems(const wxTaskBarJumpListCategory * self);
-
-// CLASS: wxTaskBarJumpListItem
-void wxTaskBarJumpListItem_delete(wxTaskBarJumpListItem *self);
-wxString *wxTaskBarJumpListItem_GetTitle(const wxTaskBarJumpListItem * self);
-void wxTaskBarJumpListItem_SetTitle(wxTaskBarJumpListItem * self, const wxString * title);
-wxString *wxTaskBarJumpListItem_GetFilePath(const wxTaskBarJumpListItem * self);
-void wxTaskBarJumpListItem_SetFilePath(wxTaskBarJumpListItem * self, const wxString * file_path);
-wxString *wxTaskBarJumpListItem_GetArguments(const wxTaskBarJumpListItem * self);
-void wxTaskBarJumpListItem_SetArguments(wxTaskBarJumpListItem * self, const wxString * arguments);
-wxString *wxTaskBarJumpListItem_GetTooltip(const wxTaskBarJumpListItem * self);
-void wxTaskBarJumpListItem_SetTooltip(wxTaskBarJumpListItem * self, const wxString * tooltip);
-wxString *wxTaskBarJumpListItem_GetIconPath(const wxTaskBarJumpListItem * self);
-void wxTaskBarJumpListItem_SetIconPath(wxTaskBarJumpListItem * self, const wxString * icon_path);
-int wxTaskBarJumpListItem_GetIconIndex(const wxTaskBarJumpListItem * self);
-void wxTaskBarJumpListItem_SetIconIndex(wxTaskBarJumpListItem * self, int icon_index);
-wxTaskBarJumpListCategory * wxTaskBarJumpListItem_GetCategory(const wxTaskBarJumpListItem * self);
-void wxTaskBarJumpListItem_SetCategory(wxTaskBarJumpListItem * self, wxTaskBarJumpListCategory * category);
 
 // CLASS: wxTextAttr
 void wxTextAttr_delete(wxTextAttr *self);
@@ -5779,19 +4040,6 @@ long wxTextCtrl_XYToPosition(const wxTextCtrl * self, long x, long y);
 wxTextEntryBase *wxTextCtrl_AsTextEntry(wxTextCtrl* obj);
 wxTrackable *wxTextCtrl_AsTrackable(wxTextCtrl* obj);
 
-// CLASS: wxTextDataObject
-void wxTextDataObject_delete(wxTextDataObject *self);
-wxTextDataObject *wxTextDataObject_new(const wxString * text);
-wxString *wxTextDataObject_GetText(const wxTextDataObject * self);
-size_t wxTextDataObject_GetTextLength(const wxTextDataObject * self);
-const wxDataFormat * wxTextDataObject_GetFormat(const wxTextDataObject * self);
-void wxTextDataObject_SetText(wxTextDataObject * self, const wxString * str_text);
-
-// CLASS: wxTextDropTarget
-void wxTextDropTarget_delete(wxTextDropTarget *self);
-wxTextDropTarget *wxTextDropTarget_new();
-bool wxTextDropTarget_OnDropText(wxTextDropTarget * self, wxCoord x, wxCoord y, const wxString * data);
-
 // CLASS: wxTextEntry
 void wxTextEntry_delete(wxTextEntry *self);
 void wxTextEntry_AppendText(wxTextEntry * self, const wxString * text);
@@ -5837,18 +4085,6 @@ void wxTextEntry_SetValue(wxTextEntry * self, const wxString * value);
 void wxTextEntry_Undo(wxTextEntry * self);
 void wxTextEntry_WriteText(wxTextEntry * self, const wxString * text);
 
-// CLASS: wxTextEntryDialog
-wxClassInfo *wxTextEntryDialog_CLASSINFO();
-wxTextEntryDialog *wxTextEntryDialog_new();
-wxTextEntryDialog *wxTextEntryDialog_new1(wxWindow * parent, const wxString * message, const wxString * caption, const wxString * value, long style, const wxPoint * pos);
-bool wxTextEntryDialog_Create(wxTextEntryDialog * self, wxWindow * parent, const wxString * message, const wxString * caption, const wxString * value, long style, const wxPoint * pos);
-wxString *wxTextEntryDialog_GetValue(const wxTextEntryDialog * self);
-void wxTextEntryDialog_SetTextValidator(wxTextEntryDialog * self, const wxTextValidator * validator);
-void wxTextEntryDialog_SetValue(wxTextEntryDialog * self, const wxString * value);
-void wxTextEntryDialog_ForceUpper(wxTextEntryDialog * self);
-// Mix-in(s) to wxTextEntryDialog
-wxTrackable *wxTextEntryDialog_AsTrackable(wxTextEntryDialog* obj);
-
 // CLASS: wxTextValidator
 wxClassInfo *wxTextValidator_CLASSINFO();
 wxTextValidator *wxTextValidator_new(const wxTextValidator * validator);
@@ -5872,38 +4108,6 @@ wxString *wxTextValidator_IsValid(const wxTextValidator * self, const wxString *
 // Mix-in(s) to wxTextValidator
 wxTrackable *wxTextValidator_AsTrackable(wxTextValidator* obj);
 
-// CLASS: wxThreadEvent
-wxClassInfo *wxThreadEvent_CLASSINFO();
-void wxThreadEvent_SetPayload(wxThreadEvent * self, const T * payload);
-long wxThreadEvent_GetExtraLong(const wxThreadEvent * self);
-int wxThreadEvent_GetInt(const wxThreadEvent * self);
-wxString *wxThreadEvent_GetString(const wxThreadEvent * self);
-void wxThreadEvent_SetExtraLong(wxThreadEvent * self, long extra_long);
-void wxThreadEvent_SetInt(wxThreadEvent * self, int int_command);
-void wxThreadEvent_SetString(wxThreadEvent * self, const wxString * string);
-
-// CLASS: wxThumbBarButton
-void wxThumbBarButton_delete(wxThumbBarButton *self);
-wxThumbBarButton *wxThumbBarButton_new();
-wxThumbBarButton *wxThumbBarButton_new1(int id, const wxIcon * icon, const wxString * tooltip, bool enable, bool dismiss_on_click, bool has_background, bool shown, bool interactive);
-bool wxThumbBarButton_Create(wxThumbBarButton * self, int id, const wxIcon * icon, const wxString * tooltip, bool enable, bool dismiss_on_click, bool has_background, bool shown, bool interactive);
-int wxThumbBarButton_GetID(const wxThumbBarButton * self);
-wxIcon *wxThumbBarButton_GetIcon(const wxThumbBarButton * self);
-wxString *wxThumbBarButton_GetTooltip(const wxThumbBarButton * self);
-bool wxThumbBarButton_IsEnable(const wxThumbBarButton * self);
-void wxThumbBarButton_Enable(wxThumbBarButton * self, bool enable);
-void wxThumbBarButton_Disable(wxThumbBarButton * self);
-bool wxThumbBarButton_IsDismissOnClick(const wxThumbBarButton * self);
-void wxThumbBarButton_EnableDismissOnClick(wxThumbBarButton * self, bool enable);
-void wxThumbBarButton_DisableDimissOnClick(wxThumbBarButton * self);
-bool wxThumbBarButton_HasBackground(const wxThumbBarButton * self);
-void wxThumbBarButton_SetHasBackground(wxThumbBarButton * self, bool has);
-bool wxThumbBarButton_IsShown(const wxThumbBarButton * self);
-void wxThumbBarButton_Show(wxThumbBarButton * self, bool shown);
-void wxThumbBarButton_Hide(wxThumbBarButton * self);
-bool wxThumbBarButton_IsInteractive(const wxThumbBarButton * self);
-void wxThumbBarButton_SetInteractive(wxThumbBarButton * self, bool interactive);
-
 // CLASS: wxTimePickerCtrl
 wxClassInfo *wxTimePickerCtrl_CLASSINFO();
 wxTimePickerCtrl *wxTimePickerCtrl_new();
@@ -5915,12 +4119,6 @@ bool wxTimePickerCtrl_SetTime(wxTimePickerCtrl * self, int hour, int min, int se
 void wxTimePickerCtrl_SetValue(wxTimePickerCtrl * self, const wxDateTime * dt);
 // Mix-in(s) to wxTimePickerCtrl
 wxTrackable *wxTimePickerCtrl_AsTrackable(wxTimePickerCtrl* obj);
-
-// CLASS: wxTipProvider
-void wxTipProvider_delete(wxTipProvider *self);
-wxTipProvider *wxTipProvider_new(size_t current_tip);
-size_t wxTipProvider_GetCurrentTip(const wxTipProvider * self);
-wxString *wxTipProvider_GetTip(wxTipProvider * self);
 
 // CLASS: wxTipWindow
 wxClassInfo *wxTipWindow_CLASSINFO();
@@ -5999,18 +4197,6 @@ wxToolBarToolBase * wxToolBar_CreateTool1(wxToolBar * self, wxControl * control,
 wxToolBarToolBase * wxToolBar_CreateSeparator(wxToolBar * self);
 // Mix-in(s) to wxToolBar
 wxTrackable *wxToolBar_AsTrackable(wxToolBar* obj);
-
-// CLASS: wxToolTip
-wxClassInfo *wxToolTip_CLASSINFO();
-wxToolTip *wxToolTip_new(const wxString * tip);
-wxString *wxToolTip_GetTip(const wxToolTip * self);
-wxWindow * wxToolTip_GetWindow(const wxToolTip * self);
-void wxToolTip_SetTip(wxToolTip * self, const wxString * tip);
-void wxToolTip_Enable(bool flag);
-void wxToolTip_SetAutoPop(long msecs);
-void wxToolTip_SetDelay(long msecs);
-void wxToolTip_SetMaxWidth(int width);
-void wxToolTip_SetReshow(long msecs);
 
 // CLASS: wxToolbook
 wxClassInfo *wxToolbook_CLASSINFO();
@@ -6239,10 +4425,6 @@ void wxTreeListItem_delete(wxTreeListItem *self);
 wxTreeListItem *wxTreeListItem_new();
 bool wxTreeListItem_IsOk(const wxTreeListItem * self);
 
-// CLASS: wxTreeListItemComparator
-void wxTreeListItemComparator_delete(wxTreeListItemComparator *self);
-wxTreeListItemComparator *wxTreeListItemComparator_new();
-
 // CLASS: wxTreebook
 wxClassInfo *wxTreebook_CLASSINFO();
 wxTreebook *wxTreebook_new();
@@ -6278,12 +4460,6 @@ bool wxUIActionSimulator_Char(wxUIActionSimulator * self, int keycode, int modif
 bool wxUIActionSimulator_Select(wxUIActionSimulator * self, const wxString * text);
 bool wxUIActionSimulator_Text(wxUIActionSimulator * self, const char * text);
 
-// CLASS: wxURLDataObject
-void wxURLDataObject_delete(wxURLDataObject *self);
-wxURLDataObject *wxURLDataObject_new(const wxString * url);
-wxString *wxURLDataObject_GetURL(const wxURLDataObject * self);
-void wxURLDataObject_SetURL(wxURLDataObject * self, const wxString * url);
-
 // CLASS: wxUpdateUIEvent
 wxClassInfo *wxUpdateUIEvent_CLASSINFO();
 wxUpdateUIEvent *wxUpdateUIEvent_new(wxWindowID command_id);
@@ -6305,46 +4481,6 @@ long wxUpdateUIEvent_GetUpdateInterval();
 void wxUpdateUIEvent_ResetUpdateTime();
 void wxUpdateUIEvent_SetUpdateInterval(long update_interval);
 
-// CLASS: wxVListBox
-wxClassInfo *wxVListBox_CLASSINFO();
-wxVListBox *wxVListBox_new();
-wxVListBox *wxVListBox_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-void wxVListBox_Clear(wxVListBox * self);
-bool wxVListBox_Create(wxVListBox * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-bool wxVListBox_DeselectAll(wxVListBox * self);
-int wxVListBox_GetFirstSelected(const wxVListBox * self, unsigned long * cookie);
-size_t wxVListBox_GetItemCount(const wxVListBox * self);
-wxPoint *wxVListBox_GetMargins(const wxVListBox * self);
-wxRect *wxVListBox_GetItemRect(const wxVListBox * self, size_t item);
-int wxVListBox_GetNextSelected(const wxVListBox * self, unsigned long * cookie);
-size_t wxVListBox_GetSelectedCount(const wxVListBox * self);
-int wxVListBox_GetSelection(const wxVListBox * self);
-wxColour *wxVListBox_GetSelectionBackground(const wxVListBox * self);
-bool wxVListBox_HasMultipleSelection(const wxVListBox * self);
-bool wxVListBox_IsCurrent(const wxVListBox * self, size_t item);
-bool wxVListBox_IsSelected(const wxVListBox * self, size_t item);
-bool wxVListBox_Select(wxVListBox * self, size_t item, bool select);
-bool wxVListBox_SelectAll(wxVListBox * self);
-bool wxVListBox_SelectRange(wxVListBox * self, size_t from, size_t to);
-void wxVListBox_SetItemCount(wxVListBox * self, size_t count);
-void wxVListBox_SetMargins(wxVListBox * self, const wxPoint * pt);
-void wxVListBox_SetMargins1(wxVListBox * self, wxCoord x, wxCoord y);
-void wxVListBox_SetSelection(wxVListBox * self, int selection);
-void wxVListBox_SetSelectionBackground(wxVListBox * self, const wxColour * col);
-void wxVListBox_Toggle(wxVListBox * self, size_t item);
-// Mix-in(s) to wxVListBox
-wxVarVScrollHelper *wxVListBox_AsVarVScrollHelper(wxVListBox* obj);
-wxTrackable *wxVListBox_AsTrackable(wxVListBox* obj);
-
-// CLASS: wxVScrolledWindow
-wxClassInfo *wxVScrolledWindow_CLASSINFO();
-wxVScrolledWindow *wxVScrolledWindow_new();
-wxVScrolledWindow *wxVScrolledWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-bool wxVScrolledWindow_Create(wxVScrolledWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-// Mix-in(s) to wxVScrolledWindow
-wxVarVScrollHelper *wxVScrolledWindow_AsVarVScrollHelper(wxVScrolledWindow* obj);
-wxTrackable *wxVScrolledWindow_AsTrackable(wxVScrolledWindow* obj);
-
 // CLASS: wxValidator
 wxClassInfo *wxValidator_CLASSINFO();
 wxValidator *wxValidator_new();
@@ -6358,111 +4494,6 @@ void wxValidator_SuppressBellOnError(bool suppress);
 bool wxValidator_IsSilent();
 // Mix-in(s) to wxValidator
 wxTrackable *wxValidator_AsTrackable(wxValidator* obj);
-
-// CLASS: wxVarHScrollHelper
-void wxVarHScrollHelper_delete(wxVarHScrollHelper *self);
-wxVarHScrollHelper *wxVarHScrollHelper_new(wxWindow * win_to_scroll);
-size_t wxVarHScrollHelper_GetColumnCount(const wxVarHScrollHelper * self);
-size_t wxVarHScrollHelper_GetVisibleColumnsBegin(const wxVarHScrollHelper * self);
-size_t wxVarHScrollHelper_GetVisibleColumnsEnd(const wxVarHScrollHelper * self);
-bool wxVarHScrollHelper_IsColumnVisible(const wxVarHScrollHelper * self, size_t column);
-void wxVarHScrollHelper_RefreshColumn(wxVarHScrollHelper * self, size_t column);
-void wxVarHScrollHelper_RefreshColumns(wxVarHScrollHelper * self, size_t from, size_t to);
-bool wxVarHScrollHelper_ScrollColumnPages(wxVarHScrollHelper * self, int pages);
-bool wxVarHScrollHelper_ScrollColumns(wxVarHScrollHelper * self, int columns);
-bool wxVarHScrollHelper_ScrollToColumn(wxVarHScrollHelper * self, size_t column);
-void wxVarHScrollHelper_SetColumnCount(wxVarHScrollHelper * self, size_t column_count);
-
-// CLASS: wxVarHVScrollHelper
-void wxVarHVScrollHelper_delete(wxVarHVScrollHelper *self);
-wxVarHVScrollHelper *wxVarHVScrollHelper_new(wxWindow * win_to_scroll);
-void wxVarHVScrollHelper_EnablePhysicalScrolling(wxVarHVScrollHelper * self, bool vscrolling, bool hscrolling);
-wxSize *wxVarHVScrollHelper_GetRowColumnCount(const wxVarHVScrollHelper * self);
-wxPosition *wxVarHVScrollHelper_GetVisibleBegin(const wxVarHVScrollHelper * self);
-wxPosition *wxVarHVScrollHelper_GetVisibleEnd(const wxVarHVScrollHelper * self);
-bool wxVarHVScrollHelper_IsVisible(const wxVarHVScrollHelper * self, size_t row, size_t column);
-bool wxVarHVScrollHelper_IsVisible1(const wxVarHVScrollHelper * self, const wxPosition * pos);
-void wxVarHVScrollHelper_RefreshRowColumn(wxVarHVScrollHelper * self, size_t row, size_t column);
-void wxVarHVScrollHelper_RefreshRowColumn1(wxVarHVScrollHelper * self, const wxPosition * pos);
-void wxVarHVScrollHelper_RefreshRowsColumns(wxVarHVScrollHelper * self, size_t from_row, size_t to_row, size_t from_column, size_t to_column);
-void wxVarHVScrollHelper_RefreshRowsColumns1(wxVarHVScrollHelper * self, const wxPosition * from, const wxPosition * to);
-bool wxVarHVScrollHelper_ScrollToRowColumn(wxVarHVScrollHelper * self, size_t row, size_t column);
-bool wxVarHVScrollHelper_ScrollToRowColumn1(wxVarHVScrollHelper * self, const wxPosition * pos);
-void wxVarHVScrollHelper_SetRowColumnCount(wxVarHVScrollHelper * self, size_t row_count, size_t column_count);
-wxPosition *wxVarHVScrollHelper_VirtualHitTest(const wxVarHVScrollHelper * self, wxCoord x, wxCoord y);
-wxPosition *wxVarHVScrollHelper_VirtualHitTest1(const wxVarHVScrollHelper * self, const wxPoint * pos);
-// Mix-in(s) to wxVarHVScrollHelper
-wxVarHScrollHelper *wxVarHVScrollHelper_AsVarHScrollHelper(wxVarHVScrollHelper* obj);
-
-// CLASS: wxVarScrollHelperBase
-void wxVarScrollHelperBase_delete(wxVarScrollHelperBase *self);
-wxVarScrollHelperBase *wxVarScrollHelperBase_new(wxWindow * win_to_scroll);
-int wxVarScrollHelperBase_CalcScrolledPosition(const wxVarScrollHelperBase * self, int coord);
-int wxVarScrollHelperBase_CalcUnscrolledPosition(const wxVarScrollHelperBase * self, int coord);
-void wxVarScrollHelperBase_EnablePhysicalScrolling(wxVarScrollHelperBase * self, bool scrolling);
-int wxVarScrollHelperBase_GetNonOrientationTargetSize(const wxVarScrollHelperBase * self);
-int wxVarScrollHelperBase_GetOrientationTargetSize(const wxVarScrollHelperBase * self);
-wxWindow * wxVarScrollHelperBase_GetTargetWindow(const wxVarScrollHelperBase * self);
-size_t wxVarScrollHelperBase_GetVisibleBegin(const wxVarScrollHelperBase * self);
-size_t wxVarScrollHelperBase_GetVisibleEnd(const wxVarScrollHelperBase * self);
-bool wxVarScrollHelperBase_IsVisible(const wxVarScrollHelperBase * self, size_t unit);
-void wxVarScrollHelperBase_RefreshAll(wxVarScrollHelperBase * self);
-void wxVarScrollHelperBase_SetTargetWindow(wxVarScrollHelperBase * self, wxWindow * target);
-void wxVarScrollHelperBase_UpdateScrollbar(wxVarScrollHelperBase * self);
-int wxVarScrollHelperBase_VirtualHitTest(const wxVarScrollHelperBase * self, wxCoord coord);
-
-// CLASS: wxVarVScrollHelper
-void wxVarVScrollHelper_delete(wxVarVScrollHelper *self);
-wxVarVScrollHelper *wxVarVScrollHelper_new(wxWindow * win_to_scroll);
-size_t wxVarVScrollHelper_GetRowCount(const wxVarVScrollHelper * self);
-size_t wxVarVScrollHelper_GetVisibleRowsBegin(const wxVarVScrollHelper * self);
-size_t wxVarVScrollHelper_GetVisibleRowsEnd(const wxVarVScrollHelper * self);
-bool wxVarVScrollHelper_IsRowVisible(const wxVarVScrollHelper * self, size_t row);
-void wxVarVScrollHelper_RefreshRow(wxVarVScrollHelper * self, size_t row);
-void wxVarVScrollHelper_RefreshRows(wxVarVScrollHelper * self, size_t from, size_t to);
-bool wxVarVScrollHelper_ScrollRowPages(wxVarVScrollHelper * self, int pages);
-bool wxVarVScrollHelper_ScrollRows(wxVarVScrollHelper * self, int rows);
-bool wxVarVScrollHelper_ScrollToRow(wxVarVScrollHelper * self, size_t row);
-void wxVarVScrollHelper_SetRowCount(wxVarVScrollHelper * self, size_t row_count);
-
-// CLASS: wxVariantDataCurrency
-void wxVariantDataCurrency_delete(wxVariantDataCurrency *self);
-wxVariantDataCurrency *wxVariantDataCurrency_new();
-bool wxVariantDataCurrency_GetAsAny(const wxVariantDataCurrency * self, wxAny * any);
-
-// CLASS: wxVariantDataErrorCode
-void wxVariantDataErrorCode_delete(wxVariantDataErrorCode *self);
-bool wxVariantDataErrorCode_GetAsAny(const wxVariantDataErrorCode * self, wxAny * any);
-
-// CLASS: wxVariantDataSafeArray
-void wxVariantDataSafeArray_delete(wxVariantDataSafeArray *self);
-wxVariantDataSafeArray *wxVariantDataSafeArray_new(SAFEARRAY * value);
-SAFEARRAY * wxVariantDataSafeArray_GetValue(const wxVariantDataSafeArray * self);
-void wxVariantDataSafeArray_SetValue(wxVariantDataSafeArray * self, SAFEARRAY * value);
-bool wxVariantDataSafeArray_GetAsAny(const wxVariantDataSafeArray * self, wxAny * any);
-
-// CLASS: wxView
-wxClassInfo *wxView_CLASSINFO();
-wxView *wxView_new();
-void wxView_Activate(wxView * self, bool activate);
-bool wxView_Close(wxView * self, bool delete_window);
-wxDocument * wxView_GetDocument(const wxView * self);
-wxDocManager * wxView_GetDocumentManager(const wxView * self);
-wxWindow * wxView_GetFrame(const wxView * self);
-wxString *wxView_GetViewName(const wxView * self);
-void wxView_OnActivateView(wxView * self, bool activate, wxView * active_view, wxView * deactive_view);
-void wxView_OnChangeFilename(wxView * self);
-bool wxView_OnClose(wxView * self, bool delete_window);
-void wxView_OnClosingDocument(wxView * self);
-bool wxView_OnCreate(wxView * self, wxDocument * doc, long flags);
-wxPrintout * wxView_OnCreatePrintout(wxView * self);
-void wxView_OnDraw(wxView * self, wxDC * dc);
-void wxView_OnUpdate(wxView * self, wxView * sender, wxObject * hint);
-void wxView_SetDocument(wxView * self, wxDocument * doc);
-void wxView_SetFrame(wxView * self, wxWindow * frame);
-void wxView_SetViewName(wxView * self, const wxString * name);
-// Mix-in(s) to wxView
-wxTrackable *wxView_AsTrackable(wxView* obj);
 
 // CLASS: wxWindow
 wxClassInfo *wxWindow_CLASSINFO();
@@ -6793,66 +4824,14 @@ void wxWindowDisabler_delete(wxWindowDisabler *self);
 wxWindowDisabler *wxWindowDisabler_new(bool disable);
 wxWindowDisabler *wxWindowDisabler_new1(wxWindow * win_to_skip, wxWindow * win_to_skip2);
 
-// CLASS: wxWizard
-wxClassInfo *wxWizard_CLASSINFO();
-wxWizard *wxWizard_new();
-wxWizard *wxWizard_new1(wxWindow * parent, int id, const wxString * title, const wxBitmapBundle * bitmap, const wxPoint * pos, long style);
-bool wxWizard_Create(wxWizard * self, wxWindow * parent, int id, const wxString * title, const wxBitmapBundle * bitmap, const wxPoint * pos, long style);
-void wxWizard_FitToPage(wxWizard * self, const wxWizardPage * first_page);
-wxBitmap *wxWizard_GetBitmap(const wxWizard * self);
-wxColour *wxWizard_GetBitmapBackgroundColour(const wxWizard * self);
-int wxWizard_GetBitmapPlacement(const wxWizard * self);
-wxWizardPage * wxWizard_GetCurrentPage(const wxWizard * self);
-int wxWizard_GetMinimumBitmapWidth(const wxWizard * self);
-wxSizer * wxWizard_GetPageAreaSizer(const wxWizard * self);
-wxSize *wxWizard_GetPageSize(const wxWizard * self);
-bool wxWizard_HasNextPage(wxWizard * self, wxWizardPage * page);
-bool wxWizard_HasPrevPage(wxWizard * self, wxWizardPage * page);
-bool wxWizard_RunWizard(wxWizard * self, wxWizardPage * first_page);
-void wxWizard_SetBitmap(wxWizard * self, const wxBitmapBundle * bitmap);
-void wxWizard_SetBitmapBackgroundColour(wxWizard * self, const wxColour * colour);
-void wxWizard_SetBitmapPlacement(wxWizard * self, int placement);
-void wxWizard_SetBorder(wxWizard * self, int border);
-void wxWizard_SetMinimumBitmapWidth(wxWizard * self, int width);
-void wxWizard_SetPageSize(wxWizard * self, const wxSize * size_page);
-// Mix-in(s) to wxWizard
-wxTrackable *wxWizard_AsTrackable(wxWizard* obj);
-
 // CLASS: wxWizardEvent
 wxClassInfo *wxWizardEvent_CLASSINFO();
 bool wxWizardEvent_GetDirection(const wxWizardEvent * self);
 wxWizardPage * wxWizardEvent_GetPage(const wxWizardEvent * self);
 
-// CLASS: wxWizardPage
-wxClassInfo *wxWizardPage_CLASSINFO();
-wxWizardPage *wxWizardPage_new();
-wxWizardPage *wxWizardPage_new1(wxWizard * parent, const wxBitmapBundle * bitmap);
-bool wxWizardPage_Create(wxWizardPage * self, wxWizard * parent, const wxBitmapBundle * bitmap);
-wxBitmap *wxWizardPage_GetBitmap(const wxWizardPage * self);
-wxWizardPage * wxWizardPage_GetNext(const wxWizardPage * self);
-wxWizardPage * wxWizardPage_GetPrev(const wxWizardPage * self);
-// Mix-in(s) to wxWizardPage
-wxTrackable *wxWizardPage_AsTrackable(wxWizardPage* obj);
-
-// CLASS: wxWizardPageSimple
-wxClassInfo *wxWizardPageSimple_CLASSINFO();
-wxWizardPageSimple *wxWizardPageSimple_new();
-wxWizardPageSimple *wxWizardPageSimple_new1(wxWizard * parent, wxWizardPage * prev, wxWizardPage * next, const wxBitmapBundle * bitmap);
-bool wxWizardPageSimple_Create(wxWizardPageSimple * self, wxWizard * parent, wxWizardPage * prev, wxWizardPage * next, const wxBitmapBundle * bitmap);
-wxWizardPageSimple * wxWizardPageSimple_Chain(wxWizardPageSimple * self, wxWizardPageSimple * next);
-void wxWizardPageSimple_SetNext(wxWizardPageSimple * self, wxWizardPage * next);
-void wxWizardPageSimple_SetPrev(wxWizardPageSimple * self, wxWizardPage * prev);
-void wxWizardPageSimple_Chain1(wxWizardPageSimple * first, wxWizardPageSimple * second);
-// Mix-in(s) to wxWizardPageSimple
-wxTrackable *wxWizardPageSimple_AsTrackable(wxWizardPageSimple* obj);
-
 // CLASS: wxWrapSizer
 wxClassInfo *wxWrapSizer_CLASSINFO();
 wxWrapSizer *wxWrapSizer_new(int orient, int flags);
-
-// CLASS: wxXPMHandler
-wxClassInfo *wxXPMHandler_CLASSINFO();
-wxXPMHandler *wxXPMHandler_new();
 
 // CLASS: wxZoomGestureEvent
 wxClassInfo *wxZoomGestureEvent_CLASSINFO();

@@ -2323,27 +2323,6 @@ bool wxModule_OnInit(wxModule * self) {
     return self->OnInit();
 }
 
-// CLASS: wxMultiChoiceDialog
-wxClassInfo *wxMultiChoiceDialog_CLASSINFO() {
-    return wxCLASSINFO(wxMultiChoiceDialog);
-}
-wxMultiChoiceDialog *wxMultiChoiceDialog_new(wxWindow * parent, const wxString * message, const wxString * caption, int n, const wxString * choices, long style, const wxPoint * pos) {
-    return new wxMultiChoiceDialog(parent, *message, *caption, n, choices, style, *pos);
-}
-wxMultiChoiceDialog *wxMultiChoiceDialog_new1(wxWindow * parent, const wxString * message, const wxString * caption, const wxArrayString * choices, long style, const wxPoint * pos) {
-    return new wxMultiChoiceDialog(parent, *message, *caption, *choices, style, *pos);
-}
-wxArrayInt *wxMultiChoiceDialog_GetSelections(const wxMultiChoiceDialog * self) {
-    return new wxArrayInt(self->GetSelections());
-}
-void wxMultiChoiceDialog_SetSelections(wxMultiChoiceDialog * self, const wxArrayInt * selections) {
-    return self->SetSelections(*selections);
-}
-// Mix-in(s) to wxMultiChoiceDialog
-wxTrackable *wxMultiChoiceDialog_AsTrackable(wxMultiChoiceDialog* obj) {
-    return static_cast<wxTrackable*>(obj);
-}
-
 // CLASS: wxMutex
 void wxMutex_delete(wxMutex *self) {
     delete self;
@@ -2930,33 +2909,6 @@ void wxSharedClientDataContainer_SetClientData(wxSharedClientDataContainer * sel
 }
 void wxSharedClientDataContainer_SetClientObject(wxSharedClientDataContainer * self, wxClientData * data) {
     return self->SetClientObject(data);
-}
-
-// CLASS: wxSingleChoiceDialog
-wxClassInfo *wxSingleChoiceDialog_CLASSINFO() {
-    return wxCLASSINFO(wxSingleChoiceDialog);
-}
-wxSingleChoiceDialog *wxSingleChoiceDialog_new(wxWindow * parent, const wxString * message, const wxString * caption, int n, const wxString * choices, void ** client_data, long style, const wxPoint * pos) {
-    return new wxSingleChoiceDialog(parent, *message, *caption, n, choices, client_data, style, *pos);
-}
-wxSingleChoiceDialog *wxSingleChoiceDialog_new1(wxWindow * parent, const wxString * message, const wxString * caption, const wxArrayString * choices, void ** client_data, long style, const wxPoint * pos) {
-    return new wxSingleChoiceDialog(parent, *message, *caption, *choices, client_data, style, *pos);
-}
-int wxSingleChoiceDialog_GetSelection(const wxSingleChoiceDialog * self) {
-    return self->GetSelection();
-}
-void * wxSingleChoiceDialog_GetSelectionData(const wxSingleChoiceDialog * self) {
-    return self->GetSelectionData();
-}
-wxString *wxSingleChoiceDialog_GetStringSelection(const wxSingleChoiceDialog * self) {
-    return new wxString(self->GetStringSelection());
-}
-void wxSingleChoiceDialog_SetSelection(wxSingleChoiceDialog * self, int selection) {
-    return self->SetSelection(selection);
-}
-// Mix-in(s) to wxSingleChoiceDialog
-wxTrackable *wxSingleChoiceDialog_AsTrackable(wxSingleChoiceDialog* obj) {
-    return static_cast<wxTrackable*>(obj);
 }
 
 // CLASS: wxSingleInstanceChecker

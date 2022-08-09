@@ -1560,30 +1560,6 @@ extern "C" {
     pub fn wxModule_OnExit(self_: *mut c_void);
     pub fn wxModule_OnInit(self_: *mut c_void) -> bool;
 
-    // wxMultiChoiceDialog
-    pub fn wxMultiChoiceDialog_CLASSINFO() -> *mut c_void;
-    pub fn wxMultiChoiceDialog_new(
-        parent: *mut c_void,
-        message: *const c_void,
-        caption: *const c_void,
-        n: c_int,
-        choices: *const c_void,
-        style: c_long,
-        pos: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxMultiChoiceDialog_new1(
-        parent: *mut c_void,
-        message: *const c_void,
-        caption: *const c_void,
-        choices: *const c_void,
-        style: c_long,
-        pos: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxMultiChoiceDialog_GetSelections(self_: *const c_void) -> *mut c_void;
-    pub fn wxMultiChoiceDialog_SetSelections(self_: *mut c_void, selections: *const c_void);
-    // Mix-in(s) to wxMultiChoiceDialog
-    pub fn wxMultiChoiceDialog_AsTrackable(obj: *mut c_void) -> *mut c_void;
-
     // wxMutex
     pub fn wxMutex_delete(self_: *mut c_void);
     // NOT_SUPPORTED: pub fn wxMutex_new(type_: wxMutexType) -> *mut c_void;
@@ -2001,34 +1977,6 @@ extern "C" {
     pub fn wxSharedClientDataContainer_GetClientObject(self_: *const c_void) -> *mut c_void;
     pub fn wxSharedClientDataContainer_SetClientData(self_: *mut c_void, data: *mut c_void);
     pub fn wxSharedClientDataContainer_SetClientObject(self_: *mut c_void, data: *mut c_void);
-
-    // wxSingleChoiceDialog
-    pub fn wxSingleChoiceDialog_CLASSINFO() -> *mut c_void;
-    pub fn wxSingleChoiceDialog_new(
-        parent: *mut c_void,
-        message: *const c_void,
-        caption: *const c_void,
-        n: c_int,
-        choices: *const c_void,
-        client_data: *mut c_void,
-        style: c_long,
-        pos: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxSingleChoiceDialog_new1(
-        parent: *mut c_void,
-        message: *const c_void,
-        caption: *const c_void,
-        choices: *const c_void,
-        client_data: *mut c_void,
-        style: c_long,
-        pos: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxSingleChoiceDialog_GetSelection(self_: *const c_void) -> c_int;
-    pub fn wxSingleChoiceDialog_GetSelectionData(self_: *const c_void) -> *mut c_void;
-    pub fn wxSingleChoiceDialog_GetStringSelection(self_: *const c_void) -> *mut c_void;
-    pub fn wxSingleChoiceDialog_SetSelection(self_: *mut c_void, selection: c_int);
-    // Mix-in(s) to wxSingleChoiceDialog
-    pub fn wxSingleChoiceDialog_AsTrackable(obj: *mut c_void) -> *mut c_void;
 
     // wxSingleInstanceChecker
     pub fn wxSingleInstanceChecker_delete(self_: *mut c_void);

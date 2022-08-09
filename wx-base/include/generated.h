@@ -4,7 +4,6 @@
 #include <wx/apptrait.h>
 #include <wx/archive.h>
 #include <wx/buffer.h>
-#include <wx/choicdlg.h>
 #include <wx/clntdata.h>
 #include <wx/cmdline.h>
 #include <wx/config.h>
@@ -945,15 +944,6 @@ wxModule *wxModule_new();
 void wxModule_OnExit(wxModule * self);
 bool wxModule_OnInit(wxModule * self);
 
-// CLASS: wxMultiChoiceDialog
-wxClassInfo *wxMultiChoiceDialog_CLASSINFO();
-wxMultiChoiceDialog *wxMultiChoiceDialog_new(wxWindow * parent, const wxString * message, const wxString * caption, int n, const wxString * choices, long style, const wxPoint * pos);
-wxMultiChoiceDialog *wxMultiChoiceDialog_new1(wxWindow * parent, const wxString * message, const wxString * caption, const wxArrayString * choices, long style, const wxPoint * pos);
-wxArrayInt *wxMultiChoiceDialog_GetSelections(const wxMultiChoiceDialog * self);
-void wxMultiChoiceDialog_SetSelections(wxMultiChoiceDialog * self, const wxArrayInt * selections);
-// Mix-in(s) to wxMultiChoiceDialog
-wxTrackable *wxMultiChoiceDialog_AsTrackable(wxMultiChoiceDialog* obj);
-
 // CLASS: wxMutex
 void wxMutex_delete(wxMutex *self);
 
@@ -1179,17 +1169,6 @@ void * wxSharedClientDataContainer_GetClientData(const wxSharedClientDataContain
 wxClientData * wxSharedClientDataContainer_GetClientObject(const wxSharedClientDataContainer * self);
 void wxSharedClientDataContainer_SetClientData(wxSharedClientDataContainer * self, void * data);
 void wxSharedClientDataContainer_SetClientObject(wxSharedClientDataContainer * self, wxClientData * data);
-
-// CLASS: wxSingleChoiceDialog
-wxClassInfo *wxSingleChoiceDialog_CLASSINFO();
-wxSingleChoiceDialog *wxSingleChoiceDialog_new(wxWindow * parent, const wxString * message, const wxString * caption, int n, const wxString * choices, void ** client_data, long style, const wxPoint * pos);
-wxSingleChoiceDialog *wxSingleChoiceDialog_new1(wxWindow * parent, const wxString * message, const wxString * caption, const wxArrayString * choices, void ** client_data, long style, const wxPoint * pos);
-int wxSingleChoiceDialog_GetSelection(const wxSingleChoiceDialog * self);
-void * wxSingleChoiceDialog_GetSelectionData(const wxSingleChoiceDialog * self);
-wxString *wxSingleChoiceDialog_GetStringSelection(const wxSingleChoiceDialog * self);
-void wxSingleChoiceDialog_SetSelection(wxSingleChoiceDialog * self, int selection);
-// Mix-in(s) to wxSingleChoiceDialog
-wxTrackable *wxSingleChoiceDialog_AsTrackable(wxSingleChoiceDialog* obj);
 
 // CLASS: wxSingleInstanceChecker
 void wxSingleInstanceChecker_delete(wxSingleInstanceChecker *self);

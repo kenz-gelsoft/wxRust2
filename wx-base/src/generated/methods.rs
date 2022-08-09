@@ -3438,19 +3438,6 @@ pub trait ModuleMethods: ObjectMethods {
     }
 }
 
-// wxMultiChoiceDialog
-pub trait MultiChoiceDialogMethods: DialogMethods {
-    fn get_selections(&self) -> ArrayInt {
-        unsafe { ArrayInt::from_ptr(ffi::wxMultiChoiceDialog_GetSelections(self.as_ptr())) }
-    }
-    fn set_selections<A: ArrayIntMethods>(&self, selections: &A) {
-        unsafe {
-            let selections = selections.as_ptr();
-            ffi::wxMultiChoiceDialog_SetSelections(self.as_ptr(), selections)
-        }
-    }
-}
-
 // wxMutex
 pub trait MutexMethods: WxRustMethods {
     // DTOR: fn ~wxMutex()
@@ -3797,15 +3784,14 @@ pub trait RecursionGuardFlagMethods: WxRustMethods {}
 
 // wxRefCounter
 pub trait RefCounterMethods: WxRustMethods {
-    fn as_ref_counter(&self) -> *mut c_void;
     fn dec_ref(&self) {
-        unsafe { ffi::wxRefCounter_DecRef(self.as_ref_counter()) }
+        unsafe { ffi::wxRefCounter_DecRef(self.as_ptr()) }
     }
     fn get_ref_count(&self) -> c_int {
-        unsafe { ffi::wxRefCounter_GetRefCount(self.as_ref_counter()) }
+        unsafe { ffi::wxRefCounter_GetRefCount(self.as_ptr()) }
     }
     fn inc_ref(&self) {
-        unsafe { ffi::wxRefCounter_IncRef(self.as_ref_counter()) }
+        unsafe { ffi::wxRefCounter_IncRef(self.as_ptr()) }
     }
 }
 
@@ -4236,24 +4222,6 @@ pub trait SharedClientDataContainerMethods: WxRustMethods {
             };
             ffi::wxSharedClientDataContainer_SetClientObject(self.as_ptr(), data)
         }
-    }
-}
-
-// wxSingleChoiceDialog
-pub trait SingleChoiceDialogMethods: DialogMethods {
-    fn get_selection(&self) -> c_int {
-        unsafe { ffi::wxSingleChoiceDialog_GetSelection(self.as_ptr()) }
-    }
-    fn get_selection_data(&self) -> *mut c_void {
-        unsafe { ffi::wxSingleChoiceDialog_GetSelectionData(self.as_ptr()) }
-    }
-    fn get_string_selection(&self) -> String {
-        unsafe {
-            WxString::from_ptr(ffi::wxSingleChoiceDialog_GetStringSelection(self.as_ptr())).into()
-        }
-    }
-    fn set_selection(&self, selection: c_int) {
-        unsafe { ffi::wxSingleChoiceDialog_SetSelection(self.as_ptr(), selection) }
     }
 }
 
