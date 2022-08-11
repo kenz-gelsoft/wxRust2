@@ -12,6 +12,14 @@ use methods::*;
 use crate::wx_class;
 
 mod ffi;
+// TODO: auto-generate
+mod methods_c;
+mod methods_d;
+mod methods_e;
+mod methods_f;
+mod methods_o;
+mod methods_s;
+mod methods_t;
 pub mod methods;
 
 // wxClassInfo

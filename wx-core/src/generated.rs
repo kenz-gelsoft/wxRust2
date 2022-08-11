@@ -13,6 +13,25 @@ use wx_base::methods::*;
 use wx_base::*;
 
 mod ffi;
+// TODO: auto-generate
+mod methods_a;
+mod methods_b;
+mod methods_c;
+mod methods_d;
+mod methods_e;
+mod methods_f;
+mod methods_g;
+mod methods_h;
+mod methods_i;
+mod methods_l;
+mod methods_m;
+mod methods_n;
+mod methods_p;
+mod methods_r;
+mod methods_s;
+mod methods_t;
+mod methods_v;
+mod methods_w;
 pub mod methods;
 
 // wxAnyButton
