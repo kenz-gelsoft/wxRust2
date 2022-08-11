@@ -1,6 +1,7 @@
 from doxybindgen.model import Class, ClassManager
 from doxybindgen.binding import CxxClassBinding, RustClassBinding
 
+import string
 import subprocess
 import toml
 
@@ -27,28 +28,35 @@ generated = []
 def generate_library(classes, config, libname):
     generated.append(libname)
     to_be_generated = {
-        'src/generated/ffi.rs': generated_ffi_rs,
-        'src/generated/methods.rs': generated_methods_rs,
-        'src/generated.rs': generated_rs,
-        'include/generated.h': generated_h,
-        'src/generated.cpp': generated_cpp,
+        'src/generated/ffi_%s.rs': generated_ffi_rs,
+        'src/generated/methods_%s.rs': generated_methods_rs,
+        'src/generated/class_%s.rs': generated_rs,
+        'include/generated/ffi_%s.h': generated_h,
+        'src/generated/ffi_%s.cpp': generated_cpp,
     }
     rust_bindings = [RustClassBinding(cls) for cls in classes.in_lib(libname, generated)]
-    cxx_bindings = [CxxClassBinding(cls, config) for cls in classes.in_lib(libname, generated)]
-    for path, generator in to_be_generated.items():
-        is_rust = path.endswith('.rs')
-        if libname:
-            path = 'wx-%s/%s' % (libname, path)
-        with open(path, 'w', newline='\n') as f:
-            for chunk in generator(
-                rust_bindings if is_rust else cxx_bindings,
-                libname
-            ):
-                print(chunk, file=f)
-        if is_rust:
-            error = subprocess.check_output(['rustfmt', path])
-            if error:
-                print(error)
+    classes_in_lib = classes.in_lib(libname, generated)
+    cxx_bindings = [CxxClassBinding(cls, config) for cls in classes_in_lib]
+    for initial in string.ascii_lowercase:
+        rust_bindings_i = [b for b in rust_bindings if b.has_initial(initial)]
+        if len(rust_bindings_i) == 0:
+            continue
+        cxx_bindings_i = [c for c in cxx_bindings if c.has_initial(initial)]
+        for path, generator in to_be_generated.items():
+            path = path % (initial,)
+            is_rust = path.endswith('.rs')
+            if libname:
+                path = 'wx-%s/%s' % (libname, path)
+            with open(path, 'w', newline='\n') as f:
+                for chunk in generator(
+                    rust_bindings_i if is_rust else cxx_bindings_i,
+                    libname
+                ):
+                    print(chunk, file=f)
+            if is_rust:
+                error = subprocess.check_output(['rustfmt', path])
+                if error:
+                    print(error)
 
 def generated_ffi_rs(classes, libname):
     yield '''\

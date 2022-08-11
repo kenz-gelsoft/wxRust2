@@ -87,6 +87,9 @@ class Class:
                 continue
             self.methods.append(m)
     
+    def has_initial(self, i):
+        return self.unprefixed()[0].lower() == i
+    
     def primary_base(self):
         if not self.__base_classes:
             return None
