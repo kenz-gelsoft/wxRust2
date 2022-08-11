@@ -1,0 +1,70 @@
+#![allow(dead_code)]
+#![allow(non_upper_case_globals)]
+#![allow(unused_parens)]
+
+use std::mem;
+use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
+use std::ptr;
+
+use super::*;
+use methods::*;
+
+use crate::wx_class;
+
+mod ffi;
+pub mod methods;
+
+// wxEvent
+wx_class! { Event =
+    EventIsOwned<true>(wxEvent) impl
+        EventMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> EventIsOwned<OWNED> {
+    // NOT_SUPPORTED: fn wxEvent()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<EventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: EventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for EventIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxEvent_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for EventIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
+// wxEvtHandler
+wx_class! { EvtHandler =
+    EvtHandlerIsOwned<true>(wxEvtHandler) impl
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> EvtHandlerIsOwned<OWNED> {
+    pub fn new() -> EvtHandlerIsOwned<OWNED> {
+        unsafe { EvtHandlerIsOwned(ffi::wxEvtHandler_new()) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<EvtHandlerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: EvtHandlerIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for EvtHandlerIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxEvtHandler_CLASSINFO()) }
+    }
+}
