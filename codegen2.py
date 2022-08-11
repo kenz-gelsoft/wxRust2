@@ -92,23 +92,7 @@ use crate::WeakRef;
 
 def generated_rs(classes, libname):
     yield '''\
-#![allow(dead_code)]
-#![allow(non_upper_case_globals)]
-#![allow(unused_parens)]
-
-use std::mem;
-use std::os::raw::{c_double, c_int, c_long, c_uchar, c_void};
-use std::ptr;
-
-use super::methods::*;
 use super::*;
-'''
-    if libname == 'base':
-        yield 'use crate::wx_class;'
-    else:
-        yield '''\
-use wx_base::methods::*;
-use wx_base::*;\
 '''
     for cls in classes:
         for line in cls.lines():
