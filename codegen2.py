@@ -77,10 +77,6 @@ def generate_library(classes, config, libname):
                 libname
             ):
                 print(chunk, file=f)
-        if is_rust:
-            error = subprocess.check_output(['rustfmt', path])
-            if error:
-                print(error)
 
 def generated_ffi_rs(classes, libname):
     yield '''\
@@ -171,7 +167,6 @@ extern "C" {
 def aggregated_ffi_rs(initials, libname):
     yield '''\
 pub use crate::ffi::*;
-
 '''
     for i in initials:
         yield 'pub use super::ffi_%s::*;' % (i,)
@@ -213,13 +208,13 @@ use std::os::raw::{c_double, c_int, c_long, c_uchar, c_uint, c_void};
 use super::*;
 use methods::*;
 '''
+    yield 'mod ffi;'
     for i in initials:
         yield 'mod ffi_%s;' % (i,)
-    yield 'mod ffi;'
     yield ''
+    yield 'pub mod methods;'
     for i in initials:
         yield 'mod methods_%s;' % (i,)
-    yield 'pub mod methods;'
     yield ''
     for i in initials:
         yield 'mod class_%s;' % (i,)
@@ -231,13 +226,6 @@ def aggregated_ffi_h(initials, libname):
     yield '''\
 #pragma once
 
-#include "generated/ffi_c.h"
-#include "generated/ffi_d.h"
-#include "generated/ffi_e.h"
-#include "generated/ffi_f.h"
-#include "generated/ffi_o.h"
-#include "generated/ffi_s.h"
-#include "generated/ffi_t.h"
 '''
     for i in initials:
         yield '#include "generated/ffi_%s.h"' % (i,)
