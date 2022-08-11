@@ -85,6 +85,8 @@ use super::*;
 
 def generated_rs(classes, libname):
     yield '''\
+#![allow(non_upper_case_globals)]
+
 use super::*;
 '''
     for cls in classes:
