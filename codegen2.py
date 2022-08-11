@@ -35,8 +35,7 @@ def generate_library(classes, config, libname):
         'src/generated/ffi_%s.cpp': ffi_i_cpp,
     }
     rust_bindings = [RustClassBinding(cls) for cls in classes.in_lib(libname, generated)]
-    classes_in_lib = classes.in_lib(libname, generated)
-    cxx_bindings = [CxxClassBinding(cls, config) for cls in classes_in_lib]
+    cxx_bindings = [CxxClassBinding(cls, config) for cls in classes.in_lib(libname, generated)]
     initials = []
     for initial in string.ascii_lowercase:
         rust_bindings_i = [b for b in rust_bindings if b.has_initial(initial)]
