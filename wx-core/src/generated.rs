@@ -12,6 +12,25 @@ use methods::*;
 use wx_base::methods::*;
 use wx_base::*;
 
+// TODO: auto-generate
+mod ffi_a;
+mod ffi_b;
+mod ffi_c;
+mod ffi_d;
+mod ffi_e;
+mod ffi_f;
+mod ffi_g;
+mod ffi_h;
+mod ffi_i;
+mod ffi_l;
+mod ffi_m;
+mod ffi_n;
+mod ffi_p;
+mod ffi_r;
+mod ffi_s;
+mod ffi_t;
+mod ffi_v;
+mod ffi_w;
 mod ffi;
 // TODO: auto-generate
 mod methods_a;

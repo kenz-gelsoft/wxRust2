@@ -18,6 +18,7 @@ pub trait WxRustMethods {
     }
 }
 
+// TODO: auto-generate
 pub use super::methods_c::*;
 pub use super::methods_d::*;
 pub use super::methods_e::*;

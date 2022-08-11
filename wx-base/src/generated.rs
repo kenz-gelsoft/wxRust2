@@ -11,6 +11,14 @@ use methods::*;
 
 use crate::wx_class;
 
+// TODO: auto-generate
+mod ffi_c;
+mod ffi_d;
+mod ffi_e;
+mod ffi_f;
+mod ffi_o;
+mod ffi_s;
+mod ffi_t;
 mod ffi;
 // TODO: auto-generate
 mod methods_c;
