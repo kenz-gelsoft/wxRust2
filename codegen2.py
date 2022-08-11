@@ -1,4 +1,3 @@
-from mimetypes import init
 from doxybindgen.model import Class, ClassManager
 from doxybindgen.binding import CxxClassBinding, RustClassBinding
 
