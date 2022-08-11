@@ -28,12 +28,12 @@ def main():
 generated = []
 def generate_library(classes, config, libname):
     generated.append(libname)
-    to_be_generated = {
-        'src/generated/ffi_%s.rs': generated_ffi_rs,
-        'src/generated/methods_%s.rs': generated_methods_rs,
-        'src/generated/class_%s.rs': generated_class_rs,
-        'include/generated/ffi_%s.h': generated_ffi_h,
-        'src/generated/ffi_%s.cpp': generated_ffi_cpp,
+    files_per_initial = {
+        'src/generated/ffi_%s.rs': ffi_i_rs,
+        'src/generated/methods_%s.rs': methods_i_rs,
+        'src/generated/class_%s.rs': class_i_rs,
+        'include/generated/ffi_%s.h': ffi_i_h,
+        'src/generated/ffi_%s.cpp': ffi_i_cpp,
     }
     rust_bindings = [RustClassBinding(cls) for cls in classes.in_lib(libname, generated)]
     classes_in_lib = classes.in_lib(libname, generated)
@@ -45,7 +45,7 @@ def generate_library(classes, config, libname):
             continue
         initials.append(initial)
         cxx_bindings_i = [c for c in cxx_bindings if c.has_initial(initial)]
-        for path, generator in to_be_generated.items():
+        for path, generator in files_per_initial.items():
             path = path % (initial,)
             is_rust = path.endswith('.rs')
             if libname:
@@ -60,14 +60,14 @@ def generate_library(classes, config, libname):
                 error = subprocess.check_output(['rustfmt', path])
                 if error:
                     print(error)
-    to_be_aggregated = {
-        'src/generated/ffi.rs': aggregated_ffi_rs,
-        'src/generated/methods.rs': aggregated_methods_rs,
-        'src/generated.rs': aggregated_class_rs,
-        'include/generated.h': aggregated_ffi_h,
-        'src/generated.cpp': aggregated_ffi_cpp,
+    to_be_generated = {
+        'src/generated/ffi.rs': ffi_rs,
+        'src/generated/methods.rs': methods_rs,
+        'src/generated.rs': generated_rs,
+        'include/generated.h': generated_h,
+        'src/generated.cpp': generated_cpp,
     }
-    for path, generator in to_be_aggregated.items():
+    for path, generator in to_be_generated.items():
         is_rust = path.endswith('.rs')
         if libname:
             path = 'wx-%s/%s' % (libname, path)
@@ -78,7 +78,7 @@ def generate_library(classes, config, libname):
             ):
                 print(chunk, file=f)
 
-def generated_ffi_rs(classes, libname):
+def ffi_i_rs(classes, libname):
     yield '''\
 use super::*;
 
@@ -95,7 +95,7 @@ extern "C" {'''
 }\
 '''
 
-def generated_methods_rs(classes, libname):
+def methods_i_rs(classes, libname):
     yield '''\
 use super::*;
 '''
@@ -103,7 +103,7 @@ use super::*;
         for line in cls.lines(for_methods=True):
             yield line
 
-def generated_class_rs(classes, libname):
+def class_i_rs(classes, libname):
     yield '''\
 #![allow(non_upper_case_globals)]
 
@@ -114,7 +114,7 @@ use super::*;
             yield line
 
 
-def generated_ffi_h(classes, libname):
+def ffi_i_h(classes, libname):
     yield '''\
 #pragma once
 #include <wx/wx.h>\
@@ -151,7 +151,7 @@ extern "C" {
 } // extern "C"
 '''
 
-def generated_ffi_cpp(classes, libname):
+def ffi_i_cpp(classes, libname):
     yield '''\
 #include "generated.h"
 
@@ -164,14 +164,14 @@ extern "C" {
 } // extern "C"
 '''
 
-def aggregated_ffi_rs(initials, libname):
+def ffi_rs(initials, libname):
     yield '''\
 pub use crate::ffi::*;
 '''
     for i in initials:
         yield 'pub use super::ffi_%s::*;' % (i,)
 
-def aggregated_methods_rs(initials, libname):
+def methods_rs(initials, libname):
     if libname == 'base':
         yield '''\
 use std::os::raw::c_void;
@@ -201,7 +201,7 @@ pub use wx_base::methods::*;
     for i in initials:
         yield 'pub use super::methods_%s::*;' % (i,)
 
-def aggregated_class_rs(initials, libname):
+def generated_rs(initials, libname):
     yield '''\
 use std::os::raw::{c_double, c_int, c_long, c_uchar, c_uint, c_void};
 
@@ -222,7 +222,7 @@ use methods::*;
         yield 'pub use class_%s::*;' % (i,)
 
 
-def aggregated_ffi_h(initials, libname):
+def generated_h(initials, libname):
     yield '''\
 #pragma once
 
@@ -230,7 +230,7 @@ def aggregated_ffi_h(initials, libname):
     for i in initials:
         yield '#include "generated/ffi_%s.h"' % (i,)
 
-def aggregated_ffi_cpp(initials, libname):
+def generated_cpp(initials, libname):
     yield '''\
 #include "generated.h"
 
