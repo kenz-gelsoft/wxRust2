@@ -1,15 +1,9 @@
-#![allow(dead_code)]
-#![allow(non_upper_case_globals)]
-#![allow(unused_parens)]
-
 use std::os::raw::{c_double, c_int, c_long, c_uchar, c_uint, c_void};
 
 use super::*;
 use methods::*;
 
-use wx_base::*;
-
-// TODO: auto-generate
+mod ffi;
 mod ffi_a;
 mod ffi_b;
 mod ffi_c;
@@ -28,9 +22,8 @@ mod ffi_s;
 mod ffi_t;
 mod ffi_v;
 mod ffi_w;
-mod ffi;
 
-// TODO: auto-generate
+pub mod methods;
 mod methods_a;
 mod methods_b;
 mod methods_c;
@@ -49,9 +42,7 @@ mod methods_s;
 mod methods_t;
 mod methods_v;
 mod methods_w;
-pub mod methods;
 
-// TODO: auto-generate
 mod class_a;
 mod class_b;
 mod class_c;
@@ -70,7 +61,6 @@ mod class_s;
 mod class_t;
 mod class_v;
 mod class_w;
-// TODO: auto-generate
 pub use class_a::*;
 pub use class_b::*;
 pub use class_c::*;

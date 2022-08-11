@@ -1,6 +1,7 @@
 #include "generated.h"
 
 // Including splitted source files into single source file to keep build.rs simple
+
 #include "generated/ffi_a.cpp"
 #include "generated/ffi_b.cpp"
 #include "generated/ffi_c.cpp"

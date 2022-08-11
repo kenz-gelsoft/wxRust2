@@ -1,3 +1,4 @@
+from mimetypes import init
 from doxybindgen.model import Class, ClassManager
 from doxybindgen.binding import CxxClassBinding, RustClassBinding
 
@@ -30,17 +31,19 @@ def generate_library(classes, config, libname):
     to_be_generated = {
         'src/generated/ffi_%s.rs': generated_ffi_rs,
         'src/generated/methods_%s.rs': generated_methods_rs,
-        'src/generated/class_%s.rs': generated_rs,
-        'include/generated/ffi_%s.h': generated_h,
-        'src/generated/ffi_%s.cpp': generated_cpp,
+        'src/generated/class_%s.rs': generated_class_rs,
+        'include/generated/ffi_%s.h': generated_ffi_h,
+        'src/generated/ffi_%s.cpp': generated_ffi_cpp,
     }
     rust_bindings = [RustClassBinding(cls) for cls in classes.in_lib(libname, generated)]
     classes_in_lib = classes.in_lib(libname, generated)
     cxx_bindings = [CxxClassBinding(cls, config) for cls in classes_in_lib]
+    initials = []
     for initial in string.ascii_lowercase:
         rust_bindings_i = [b for b in rust_bindings if b.has_initial(initial)]
         if len(rust_bindings_i) == 0:
             continue
+        initials.append(initial)
         cxx_bindings_i = [c for c in cxx_bindings if c.has_initial(initial)]
         for path, generator in to_be_generated.items():
             path = path % (initial,)
@@ -57,6 +60,27 @@ def generate_library(classes, config, libname):
                 error = subprocess.check_output(['rustfmt', path])
                 if error:
                     print(error)
+    to_be_aggregated = {
+        'src/generated/ffi.rs': aggregated_ffi_rs,
+        'src/generated/methods.rs': aggregated_methods_rs,
+        'src/generated.rs': aggregated_class_rs,
+        'include/generated.h': aggregated_ffi_h,
+        'src/generated.cpp': aggregated_ffi_cpp,
+    }
+    for path, generator in to_be_aggregated.items():
+        is_rust = path.endswith('.rs')
+        if libname:
+            path = 'wx-%s/%s' % (libname, path)
+        with open(path, 'w', newline='\n') as f:
+            for chunk in generator(
+                initials,
+                libname
+            ):
+                print(chunk, file=f)
+        if is_rust:
+            error = subprocess.check_output(['rustfmt', path])
+            if error:
+                print(error)
 
 def generated_ffi_rs(classes, libname):
     yield '''\
@@ -83,7 +107,7 @@ use super::*;
         for line in cls.lines(for_methods=True):
             yield line
 
-def generated_rs(classes, libname):
+def generated_class_rs(classes, libname):
     yield '''\
 #![allow(non_upper_case_globals)]
 
@@ -94,7 +118,7 @@ use super::*;
             yield line
 
 
-def generated_h(classes, libname):
+def generated_ffi_h(classes, libname):
     yield '''\
 #pragma once
 #include <wx/wx.h>\
@@ -131,7 +155,7 @@ extern "C" {
 } // extern "C"
 '''
 
-def generated_cpp(classes, libname):
+def generated_ffi_cpp(classes, libname):
     yield '''\
 #include "generated.h"
 
@@ -143,6 +167,89 @@ extern "C" {
     yield '''\
 } // extern "C"
 '''
+
+def aggregated_ffi_rs(initials, libname):
+    yield '''\
+pub use crate::ffi::*;
+
+'''
+    for i in initials:
+        yield 'pub use super::ffi_%s::*;' % (i,)
+
+def aggregated_methods_rs(initials, libname):
+    if libname == 'base':
+        yield '''\
+use std::os::raw::c_void;
+
+pub trait WxRustMethods {
+    type Unowned;
+    unsafe fn as_ptr(&self) -> *mut c_void;
+    unsafe fn from_ptr(ptr: *mut c_void) -> Self;
+    unsafe fn from_unowned_ptr(ptr: *mut c_void) -> Self::Unowned;
+    unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F);
+    unsafe fn option_from(ptr: *mut c_void) -> Option<Self::Unowned>
+    where
+        Self: Sized,
+    {
+        if ptr.is_null() {
+            None
+        } else {
+            Some(Self::from_unowned_ptr(ptr))
+        }
+    }
+}
+'''
+    else:
+        yield '''\
+pub use wx_base::methods::*;
+'''
+    for i in initials:
+        yield 'pub use super::methods_%s::*;' % (i,)
+
+def aggregated_class_rs(initials, libname):
+    yield '''\
+use std::os::raw::{c_double, c_int, c_long, c_uchar, c_uint, c_void};
+
+use super::*;
+use methods::*;
+'''
+    for i in initials:
+        yield 'mod ffi_%s;' % (i,)
+    yield 'mod ffi;'
+    yield ''
+    for i in initials:
+        yield 'mod methods_%s;' % (i,)
+    yield 'pub mod methods;'
+    yield ''
+    for i in initials:
+        yield 'mod class_%s;' % (i,)
+    for i in initials:
+        yield 'pub use class_%s::*;' % (i,)
+
+
+def aggregated_ffi_h(initials, libname):
+    yield '''\
+#pragma once
+
+#include "generated/ffi_c.h"
+#include "generated/ffi_d.h"
+#include "generated/ffi_e.h"
+#include "generated/ffi_f.h"
+#include "generated/ffi_o.h"
+#include "generated/ffi_s.h"
+#include "generated/ffi_t.h"
+'''
+    for i in initials:
+        yield '#include "generated/ffi_%s.h"' % (i,)
+
+def aggregated_ffi_cpp(initials, libname):
+    yield '''\
+#include "generated.h"
+
+// Including splitted source files into single source file to keep build.rs simple
+'''
+    for i in initials:
+        yield '#include "generated/ffi_%s.cpp"' % (i,)
 
 if __name__ == '__main__':
     main()

@@ -1,6 +1,5 @@
 pub use crate::ffi::*;
 
-// TODO: auto-generate
 pub use super::ffi_a::*;
 pub use super::ffi_b::*;
 pub use super::ffi_c::*;

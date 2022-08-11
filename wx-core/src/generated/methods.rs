@@ -1,6 +1,5 @@
 pub use wx_base::methods::*;
 
-// TODO: auto-generate
 pub use super::methods_a::*;
 pub use super::methods_b::*;
 pub use super::methods_c::*;
