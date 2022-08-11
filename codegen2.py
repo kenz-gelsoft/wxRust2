@@ -79,13 +79,8 @@ extern "C" {'''
 
 def generated_methods_rs(classes, libname):
     yield '''\
-use std::os::raw::{c_int, c_long, c_uint, c_void};
-
 use super::*;
-use crate::WeakRef;
 '''
-    if libname != 'base':
-        yield 'pub use wx_base::methods::*;'
     for cls in classes:
         for line in cls.lines(for_methods=True):
             yield line

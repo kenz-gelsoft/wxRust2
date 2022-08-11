@@ -1,7 +1,4 @@
-use std::os::raw::{c_int, c_long, c_uint, c_void};
-
 use super::*;
-use crate::WeakRef;
 
 // wxStandardPaths
 pub trait StandardPathsMethods: WxRustMethods {

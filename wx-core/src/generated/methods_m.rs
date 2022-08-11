@@ -1,9 +1,4 @@
-use std::os::raw::{c_int, c_long, c_uint, c_void};
-
 use super::*;
-use crate::WeakRef;
-
-pub use wx_base::methods::*;
 
 // wxMenu
 pub trait MenuMethods: EvtHandlerMethods {
