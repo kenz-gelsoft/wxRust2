@@ -1,5 +1,11 @@
 #pragma once
 
+#include <wx/wx.h>
+
+// wxBitmapBundle compatibility hack(for a while)
+#if !wxCHECK_VERSION(3, 1, 6)
+typedef wxBitmap wxBitmapBundle;
+#endif
 
 #include "generated/ffi_a.h"
 #include "generated/ffi_b.h"

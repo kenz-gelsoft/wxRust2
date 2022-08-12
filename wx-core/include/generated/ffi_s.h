@@ -1,5 +1,5 @@
 #pragma once
-#include <wx/wx.h>
+
 #include <wx/gdicmn.h>
 #include <wx/headercol.h>
 #include <wx/sizer.h>
@@ -10,11 +10,6 @@
 #include <wx/statbmp.h>
 #include <wx/statbox.h>
 #include <wx/stattext.h>
-
-// wxBitmapBundle compatibility hack(for a while)
-#if !wxCHECK_VERSION(3, 1, 6)
-typedef wxBitmap wxBitmapBundle;
-#endif
 
 extern "C" {
 

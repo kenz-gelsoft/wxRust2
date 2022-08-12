@@ -1,5 +1,10 @@
 #pragma once
 
+#include <wx/wx.h>
+
+typedef wxDateTime::TimeZone TimeZone;
+typedef wxDateTime::Tm       Tm;
+typedef wxDateTime::WeekDay  WeekDay;
 
 #include "generated/ffi_c.h"
 #include "generated/ffi_d.h"

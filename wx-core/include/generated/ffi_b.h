@@ -1,7 +1,7 @@
 #pragma once
-#include <wx/wx.h>
+
 #include <wx/bitmap.h>
-#if wxCHECK_VERSION(3, 1, 7)
+#if wxCHECK_VERSION(3, 1, 0)
 #include <wx/bmpbndl.h>
 #endif
 #include <wx/bmpbuttn.h>
@@ -9,11 +9,6 @@
 #include <wx/button.h>
 #include <wx/sizer.h>
 #include <wx/tglbtn.h>
-
-// wxBitmapBundle compatibility hack(for a while)
-#if !wxCHECK_VERSION(3, 1, 6)
-typedef wxBitmap wxBitmapBundle;
-#endif
 
 extern "C" {
 

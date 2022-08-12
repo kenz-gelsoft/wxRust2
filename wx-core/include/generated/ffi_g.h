@@ -1,13 +1,8 @@
 #pragma once
-#include <wx/wx.h>
+
 #include <wx/dirctrl.h>
 #include <wx/gauge.h>
 #include <wx/gdiobj.h>
-
-// wxBitmapBundle compatibility hack(for a while)
-#if !wxCHECK_VERSION(3, 1, 6)
-typedef wxBitmap wxBitmapBundle;
-#endif
 
 extern "C" {
 

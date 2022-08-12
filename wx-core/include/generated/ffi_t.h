@@ -1,16 +1,11 @@
 #pragma once
-#include <wx/wx.h>
+
 #include <wx/textctrl.h>
 #include <wx/textentry.h>
 #include <wx/tglbtn.h>
 #include <wx/timectrl.h>
 #include <wx/toolbar.h>
 #include <wx/toplevel.h>
-
-// wxBitmapBundle compatibility hack(for a while)
-#if !wxCHECK_VERSION(3, 1, 6)
-typedef wxBitmap wxBitmapBundle;
-#endif
 
 extern "C" {
 

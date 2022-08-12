@@ -1,10 +1,6 @@
 #pragma once
-#include <wx/wx.h>
-#include <wx/timer.h>
 
-typedef wxDateTime::TimeZone TimeZone;
-typedef wxDateTime::Tm       Tm;
-typedef wxDateTime::WeekDay  WeekDay;
+#include <wx/timer.h>
 
 extern "C" {
 

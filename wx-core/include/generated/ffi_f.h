@@ -1,15 +1,10 @@
 #pragma once
-#include <wx/wx.h>
+
 #include <wx/filectrl.h>
 #include <wx/filepicker.h>
 #include <wx/font.h>
 #include <wx/fontpicker.h>
 #include <wx/frame.h>
-
-// wxBitmapBundle compatibility hack(for a while)
-#if !wxCHECK_VERSION(3, 1, 6)
-typedef wxBitmap wxBitmapBundle;
-#endif
 
 extern "C" {
 

@@ -1,5 +1,5 @@
 #pragma once
-#include <wx/wx.h>
+
 #include <wx/checkbox.h>
 #include <wx/checklst.h>
 #include <wx/choice.h>
@@ -8,11 +8,6 @@
 #include <wx/combobox.h>
 #include <wx/control.h>
 #include <wx/event.h>
-
-// wxBitmapBundle compatibility hack(for a while)
-#if !wxCHECK_VERSION(3, 1, 6)
-typedef wxBitmap wxBitmapBundle;
-#endif
 
 extern "C" {
 

@@ -115,7 +115,6 @@ use super::*;
 def ffi_i_h(classes, libname):
     yield '''\
 #pragma once
-#include <wx/wx.h>\
 '''
     uniq = set()
     for cls in classes:
@@ -126,21 +125,6 @@ def ffi_i_h(classes, libname):
         yield include
         if condition:
             yield '#endif'
-    if libname == 'core':
-        yield '''\
-
-// wxBitmapBundle compatibility hack(for a while)
-#if !wxCHECK_VERSION(3, 1, 6)
-typedef wxBitmap wxBitmapBundle;
-#endif\
-'''
-    else:
-        yield '''\
-
-typedef wxDateTime::TimeZone TimeZone;
-typedef wxDateTime::Tm       Tm;
-typedef wxDateTime::WeekDay  WeekDay;\
-'''
     yield '''\
 
 extern "C" {
@@ -227,6 +211,20 @@ def generated_h(initials, libname):
     yield '''\
 #pragma once
 
+#include <wx/wx.h>
+'''
+    if libname == 'core':
+        yield '''\
+// wxBitmapBundle compatibility hack(for a while)
+#if !wxCHECK_VERSION(3, 1, 6)
+typedef wxBitmap wxBitmapBundle;
+#endif
+'''
+    else:
+        yield '''\
+typedef wxDateTime::TimeZone TimeZone;
+typedef wxDateTime::Tm       Tm;
+typedef wxDateTime::WeekDay  WeekDay;
 '''
     for i in initials:
         yield '#include "generated/ffi_%s.h"' % (i,)
