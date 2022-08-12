@@ -13,6 +13,9 @@ class RustClassBinding:
         self.overloads.print_tree()
         self.__methods = [RustMethodBinding(self, m) for m in model.methods]
     
+    def has_initial(self, i):
+        return self.__model.has_initial(i)
+    
     def is_a(self, base):
         return self.__model.manager.is_a(self.__model, base)
     
@@ -523,7 +526,20 @@ class CxxClassBinding:
         self.__model = model
         self.conditions = config.get('conditions')
         self.__methods = [CxxMethodBinding(self, m) for m in model.methods]
-    
+
+    def has_initial(self, i):
+        return self.__model.has_initial(i)
+
+    def include(self):
+        condition = None
+        cond_name = self.__model.config.get('condition')
+        if cond_name:
+            condition = self.conditions[cond_name].get('cxx')
+        return (
+            '#include <%s>' % (self.__model.include,),
+            condition,
+        )
+
     def lines(self, is_cc=False):
         yield '// CLASS: %s' % (self.__model.name,)
         for line in self._dtor_lines(is_cc):

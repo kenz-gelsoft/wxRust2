@@ -68,6 +68,7 @@ class Class:
     def __init__(self, manager, e, config):
         self.manager = manager
         self.name = e.findtext('compoundname')
+        self.include = e.findtext('includes')
         self.__base_classes = [b.text for b in e.findall('basecompoundref')]
         self.enums = []
         self.methods = []
@@ -85,6 +86,9 @@ class Class:
             if m.is_virtual_override:
                 continue
             self.methods.append(m)
+    
+    def has_initial(self, i):
+        return self.unprefixed()[0].lower() == i
     
     def primary_base(self):
         if not self.__base_classes:

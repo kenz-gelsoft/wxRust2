@@ -10,10 +10,9 @@ pub use wx_base::*;
 
 #[doc(hidden)]
 pub mod methods {
-    use std::os::raw::{c_int, c_uint};
+    use std::os::raw::c_int;
 
     pub use super::generated::methods::*;
-    use super::*;
 
     // re-export wx_base::methods
     pub use wx_base::methods::*;
@@ -51,7 +50,7 @@ pub mod methods {
 use methods::*;
 
 mod ffi {
-    use std::os::raw::{c_int, c_long, c_uint, c_void};
+    use std::os::raw::{c_int, c_void};
     extern "C" {
         pub fn wxObject_delete(self_: *mut c_void);
 
