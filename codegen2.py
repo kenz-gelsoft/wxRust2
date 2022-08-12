@@ -233,7 +233,7 @@ def generated_cpp(initials, libname):
     yield '''\
 #include "generated.h"
 
-// Including splitted source files into single source file to keep build.rs simple
+// Including splitted source files into single source file to keep build.rs simple\
 '''
     for i in initials:
         yield '#include "generated/ffi_%s.cpp"' % (i,)
