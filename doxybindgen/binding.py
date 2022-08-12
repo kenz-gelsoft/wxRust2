@@ -530,8 +530,15 @@ class CxxClassBinding:
     def has_initial(self, i):
         return self.__model.has_initial(i)
 
-    def includes(self):
-        yield '#include <%s>' % (self.__model.includes,)
+    def include(self):
+        condition = None
+        cond_name = self.__model.config.get('condition')
+        if cond_name:
+            condition = self.conditions[cond_name].get('cxx')
+        return (
+            '#include <%s>' % (self.__model.include,),
+            condition,
+        )
 
     def lines(self, is_cc=False):
         yield '// CLASS: %s' % (self.__model.name,)

@@ -1,7 +1,9 @@
 #pragma once
 #include <wx/wx.h>
 #include <wx/bitmap.h>
+#if wxCHECK_VERSION(3, 1, 7)
 #include <wx/bmpbndl.h>
+#endif
 #include <wx/bmpbuttn.h>
 #include <wx/bookctrl.h>
 #include <wx/button.h>

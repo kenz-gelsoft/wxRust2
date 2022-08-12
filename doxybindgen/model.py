@@ -68,7 +68,7 @@ class Class:
     def __init__(self, manager, e, config):
         self.manager = manager
         self.name = e.findtext('compoundname')
-        self.includes = e.findtext('includes')
+        self.include = e.findtext('includes')
         self.__base_classes = [b.text for b in e.findall('basecompoundref')]
         self.enums = []
         self.methods = []

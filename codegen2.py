@@ -119,10 +119,13 @@ def ffi_i_h(classes, libname):
 '''
     uniq = set()
     for cls in classes:
-        for include in cls.includes():
-            uniq.add(include)
-    for include in sorted(uniq):
+        uniq.add(cls.include())
+    for (include, condition) in sorted(uniq):
+        if condition:
+            yield condition
         yield include
+        if condition:
+            yield '#endif'
     if libname == 'core':
         yield '''\
 

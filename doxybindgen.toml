@@ -127,6 +127,7 @@ wx317 = [
     'GetSizeHint',
 ]
 [types.wxBitmapBundle]
+condition = 'wx317'
 blocklist = [
     'operator=',
     'FromBitmaps',
