@@ -23,6 +23,9 @@ wxNotebook *wxNotebook_new() {
 wxNotebook *wxNotebook_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return new wxNotebook(parent, id, *pos, *size, style, *name);
 }
+bool wxNotebook_Create(wxNotebook * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, id, *pos, *size, style, *name);
+}
 int wxNotebook_GetRowCount(const wxNotebook * self) {
     return self->GetRowCount();
 }

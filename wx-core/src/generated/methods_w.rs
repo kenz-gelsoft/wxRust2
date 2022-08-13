@@ -1117,12 +1117,15 @@ pub trait WindowMethods: EvtHandlerMethods {
         }
     }
     // NOT_SUPPORTED: fn SetWindowVariant()
-    fn get_accelerator_table(&self) -> *mut c_void {
-        unsafe { ffi::wxWindow_GetAcceleratorTable(self.as_ptr()) }
+    fn get_accelerator_table(&self) -> Option<AcceleratorTableIsOwned<false>> {
+        unsafe { AcceleratorTable::option_from(ffi::wxWindow_GetAcceleratorTable(self.as_ptr())) }
     }
     // NOT_SUPPORTED: fn GetAccessible()
-    fn set_accelerator_table(&self, accel: *const c_void) {
-        unsafe { ffi::wxWindow_SetAcceleratorTable(self.as_ptr(), accel) }
+    fn set_accelerator_table<A: AcceleratorTableMethods>(&self, accel: &A) {
+        unsafe {
+            let accel = accel.as_ptr();
+            ffi::wxWindow_SetAcceleratorTable(self.as_ptr(), accel)
+        }
     }
     // NOT_SUPPORTED: fn SetAccessible()
     fn close(&self, force: bool) -> bool {

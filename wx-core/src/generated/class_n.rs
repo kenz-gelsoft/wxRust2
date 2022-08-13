@@ -40,7 +40,7 @@ impl<const OWNED: bool> DynamicCast for NonOwnedWindowIsOwned<OWNED> {
 wx_class! { Notebook =
     NotebookIsOwned<true>(wxNotebook) impl
         NotebookMethods,
-        // BookCtrlBaseMethods,
+        BookCtrlBaseMethods,
         ControlMethods,
         // WindowMethods,
         EvtHandlerMethods,
@@ -104,11 +104,28 @@ impl<const OWNED: bool> DynamicCast for NotebookIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxNotebook_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> BookCtrlBaseMethods for NotebookIsOwned<OWNED> {
-    // BLOCKED: fn Create()
-}
 impl<const OWNED: bool> WindowMethods for NotebookIsOwned<OWNED> {
-    // BLOCKED: fn Create()
+    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxNotebook_Create(self.as_ptr(), parent, id, pos, size, style, name)
+        }
+    }
 }
 
 // wxNotifyEvent

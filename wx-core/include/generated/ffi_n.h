@@ -15,6 +15,7 @@ bool wxNonOwnedWindow_SetShape1(wxNonOwnedWindow * self, const wxGraphicsPath * 
 wxClassInfo *wxNotebook_CLASSINFO();
 wxNotebook *wxNotebook_new();
 wxNotebook *wxNotebook_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+bool wxNotebook_Create(wxNotebook * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 int wxNotebook_GetRowCount(const wxNotebook * self);
 wxColour *wxNotebook_GetThemeBackgroundColour(const wxNotebook * self);
 void wxNotebook_SetPadding(wxNotebook * self, const wxSize * padding);
