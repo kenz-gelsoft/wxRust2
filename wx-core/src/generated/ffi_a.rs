@@ -104,33 +104,6 @@ extern "C" {
     pub fn wxAddRemoveAdaptor_OnAdd(self_: *mut c_void);
     pub fn wxAddRemoveAdaptor_OnRemove(self_: *mut c_void);
 
-    // wxAddRemoveCtrl
-    pub fn wxAddRemoveCtrl_CLASSINFO() -> *mut c_void;
-    pub fn wxAddRemoveCtrl_new() -> *mut c_void;
-    pub fn wxAddRemoveCtrl_new1(
-        parent: *mut c_void,
-        winid: c_int,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxAddRemoveCtrl_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        winid: c_int,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> bool;
-    pub fn wxAddRemoveCtrl_SetAdaptor(self_: *mut c_void, adaptor: *mut c_void);
-    pub fn wxAddRemoveCtrl_SetButtonsToolTips(
-        self_: *mut c_void,
-        addtip: *const c_void,
-        removetip: *const c_void,
-    );
-
     // wxAffineMatrix2D
     pub fn wxAffineMatrix2D_delete(self_: *mut c_void);
     pub fn wxAffineMatrix2D_new() -> *mut c_void;

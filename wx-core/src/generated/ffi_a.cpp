@@ -201,26 +201,6 @@ void wxAddRemoveAdaptor_OnRemove(wxAddRemoveAdaptor * self) {
     return self->OnRemove();
 }
 
-// CLASS: wxAddRemoveCtrl
-wxClassInfo *wxAddRemoveCtrl_CLASSINFO() {
-    return wxCLASSINFO(wxAddRemoveCtrl);
-}
-wxAddRemoveCtrl *wxAddRemoveCtrl_new() {
-    return new wxAddRemoveCtrl();
-}
-wxAddRemoveCtrl *wxAddRemoveCtrl_new1(wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
-    return new wxAddRemoveCtrl(parent, winid, *pos, *size, style, *name);
-}
-bool wxAddRemoveCtrl_Create(wxAddRemoveCtrl * self, wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
-    return self->Create(parent, winid, *pos, *size, style, *name);
-}
-void wxAddRemoveCtrl_SetAdaptor(wxAddRemoveCtrl * self, wxAddRemoveAdaptor * adaptor) {
-    return self->SetAdaptor(adaptor);
-}
-void wxAddRemoveCtrl_SetButtonsToolTips(wxAddRemoveCtrl * self, const wxString * addtip, const wxString * removetip) {
-    return self->SetButtonsToolTips(*addtip, *removetip);
-}
-
 // CLASS: wxAffineMatrix2D
 void wxAffineMatrix2D_delete(wxAffineMatrix2D *self) {
     delete self;

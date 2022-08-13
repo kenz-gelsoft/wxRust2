@@ -265,28 +265,6 @@ pub trait AddRemoveAdaptorMethods: WxRustMethods {
     }
 }
 
-// wxAddRemoveCtrl
-pub trait AddRemoveCtrlMethods: PanelMethods {
-    fn set_adaptor<A: AddRemoveAdaptorMethods>(&self, adaptor: Option<&A>) {
-        unsafe {
-            let adaptor = match adaptor {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxAddRemoveCtrl_SetAdaptor(self.as_ptr(), adaptor)
-        }
-    }
-    fn set_buttons_tool_tips(&self, addtip: &str, removetip: &str) {
-        unsafe {
-            let addtip = WxString::from(addtip);
-            let addtip = addtip.as_ptr();
-            let removetip = WxString::from(removetip);
-            let removetip = removetip.as_ptr();
-            ffi::wxAddRemoveCtrl_SetButtonsToolTips(self.as_ptr(), addtip, removetip)
-        }
-    }
-}
-
 // wxAffineMatrix2D
 pub trait AffineMatrix2DMethods: AffineMatrix2DBaseMethods {
     // BLOCKED: fn IsEqual()

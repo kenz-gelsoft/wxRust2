@@ -86,14 +86,6 @@ bool wxAddRemoveAdaptor_CanRemove(const wxAddRemoveAdaptor * self);
 void wxAddRemoveAdaptor_OnAdd(wxAddRemoveAdaptor * self);
 void wxAddRemoveAdaptor_OnRemove(wxAddRemoveAdaptor * self);
 
-// CLASS: wxAddRemoveCtrl
-wxClassInfo *wxAddRemoveCtrl_CLASSINFO();
-wxAddRemoveCtrl *wxAddRemoveCtrl_new();
-wxAddRemoveCtrl *wxAddRemoveCtrl_new1(wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-bool wxAddRemoveCtrl_Create(wxAddRemoveCtrl * self, wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-void wxAddRemoveCtrl_SetAdaptor(wxAddRemoveCtrl * self, wxAddRemoveAdaptor * adaptor);
-void wxAddRemoveCtrl_SetButtonsToolTips(wxAddRemoveCtrl * self, const wxString * addtip, const wxString * removetip);
-
 // CLASS: wxAffineMatrix2D
 void wxAffineMatrix2D_delete(wxAffineMatrix2D *self);
 wxAffineMatrix2D *wxAffineMatrix2D_new();
