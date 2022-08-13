@@ -248,7 +248,7 @@ impl<const OWNED: bool> Drop for AddRemoveAdaptorIsOwned<OWNED> {
 wx_class! { AddRemoveCtrl =
     AddRemoveCtrlIsOwned<true>(wxAddRemoveCtrl) impl
         AddRemoveCtrlMethods,
-        // PanelMethods,
+        PanelMethods,
         // WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
@@ -306,29 +306,6 @@ impl<const OWNED: bool> From<AddRemoveCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNE
 impl<const OWNED: bool> DynamicCast for AddRemoveCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxAddRemoveCtrl_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> PanelMethods for AddRemoveCtrlIsOwned<OWNED> {
-    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
-        &self,
-        parent: Option<&W>,
-        winid: c_int,
-        pos: &P,
-        size: &S,
-        style: c_long,
-        name: &str,
-    ) -> bool {
-        unsafe {
-            let parent = match parent {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            let pos = pos.as_ptr();
-            let size = size.as_ptr();
-            let name = WxString::from(name);
-            let name = name.as_ptr();
-            ffi::wxAddRemoveCtrl_Create(self.as_ptr(), parent, winid, pos, size, style, name)
-        }
     }
 }
 impl<const OWNED: bool> WindowMethods for AddRemoveCtrlIsOwned<OWNED> {

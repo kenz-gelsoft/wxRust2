@@ -61,7 +61,8 @@ class RustClassBinding:
                 unprefixed,
                 self.__model.name,
             )
-            ancestor_methods = list(self._ancestor_methods())
+            ancestors = list(reversed(list(self._ancestors_with_overloads())))
+            ancestor_methods = list(self._ancestor_methods(ancestors))
             last_methods_if_commented_out = None
             if '//' in ancestor_methods[-1]:
                 last_methods_if_commented_out = ancestor_methods.pop(-1)
@@ -79,13 +80,23 @@ class RustClassBinding:
                 yield line
             for line in self._impl_mixin_if_needed():
                 yield line
-            for line in self._impl_non_virtual_overrides():
+            for line in self._impl_non_virtual_overrides(ancestors):
                 yield line
     
-    def _ancestor_methods(self):
-        for ancestor in self.__model.manager.ancestors_of(self.__model):
+    def _ancestors_with_overloads(self):
+        generated = []
+        for ancestor in reversed(self.__model.manager.ancestors_of(self.__model)):
+            overloads = [m for m in self.__methods if (
+                m.is_non_virtual_override(ancestor) and
+                m not in generated
+            )]
+            generated.extend(overloads)
+            yield [ancestor, overloads]
+    
+    def _ancestor_methods(self, ancestors):
+        for ancestor, overloads in ancestors:
             comment_or_not = ''
-            if any(m.is_non_virtual_override(ancestor) for m in self.__methods):
+            if overloads:
                 comment_or_not = '// '
             yield '        %s%sMethods' % (
                 comment_or_not,
@@ -184,17 +195,16 @@ class RustClassBinding:
         cm = self.__model.manager
         return (a.name for a in cm.ancestors_of(cm.by_name(name)))
 
-    def _impl_non_virtual_overrides(self):
-        for ancestor in self.__model.manager.ancestors_of(self.__model):
-            methods = [m for m in self.__methods if m.is_non_virtual_override(ancestor)]
-            if not methods:
+    def _impl_non_virtual_overrides(self, non_virtual_overrides):
+        for ancestor, overloads in non_virtual_overrides:
+            if not overloads:
                 continue
             yield 'impl<const OWNED: bool> %sMethods for %sIsOwned<OWNED> {' % (
                 ancestor.unprefixed(),
                 self.__model.unprefixed(),
             )
             ancestor_overloads = OverloadTree(ancestor)
-            for method in methods:
+            for method in overloads:
                 for line in method.lines(
                     with_overloads=ancestor_overloads,
                 ):

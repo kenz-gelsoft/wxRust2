@@ -924,7 +924,6 @@ wx32 = [
 library = 'core'
 [types.wxNotebook]
 blocklist = [
-    'Create',
     'OnSelChange',
 ]
 [types.wxObject]
