@@ -94,16 +94,6 @@ extern "C" {
     pub fn wxActivateEvent_GetActive(self_: *const c_void) -> bool;
     // NOT_SUPPORTED: pub fn wxActivateEvent_GetActivationReason(self_: *const c_void) -> Reason;
 
-    // wxAddRemoveAdaptor
-    pub fn wxAddRemoveAdaptor_delete(self_: *mut c_void);
-    // BLOCKED: pub fn wxAddRemoveAdaptor_new() -> *mut c_void;
-    // DTOR: pub fn wxAddRemoveAdaptor_~wxAddRemoveAdaptor(self_: *mut c_void);
-    pub fn wxAddRemoveAdaptor_GetItemsCtrl(self_: *const c_void) -> *mut c_void;
-    pub fn wxAddRemoveAdaptor_CanAdd(self_: *const c_void) -> bool;
-    pub fn wxAddRemoveAdaptor_CanRemove(self_: *const c_void) -> bool;
-    pub fn wxAddRemoveAdaptor_OnAdd(self_: *mut c_void);
-    pub fn wxAddRemoveAdaptor_OnRemove(self_: *mut c_void);
-
     // wxAffineMatrix2D
     pub fn wxAffineMatrix2D_delete(self_: *mut c_void);
     pub fn wxAffineMatrix2D_new() -> *mut c_void;

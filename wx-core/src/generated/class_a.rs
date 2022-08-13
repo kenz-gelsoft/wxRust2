@@ -137,25 +137,6 @@ impl<const OWNED: bool> Drop for ActivateEventIsOwned<OWNED> {
     }
 }
 
-// wxAddRemoveAdaptor
-wx_class! { AddRemoveAdaptor =
-    AddRemoveAdaptorIsOwned<true>(wxAddRemoveAdaptor) impl
-        AddRemoveAdaptorMethods
-}
-impl<const OWNED: bool> AddRemoveAdaptorIsOwned<OWNED> {
-    // BLOCKED: fn wxAddRemoveAdaptor()
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for AddRemoveAdaptorIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxAddRemoveAdaptor_delete(self.0) }
-        }
-    }
-}
-
 // wxAffineMatrix2D
 wx_class! { AffineMatrix2D =
     AffineMatrix2DIsOwned<true>(wxAffineMatrix2D) impl

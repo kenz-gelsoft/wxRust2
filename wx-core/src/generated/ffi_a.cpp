@@ -181,26 +181,6 @@ bool wxActivateEvent_GetActive(const wxActivateEvent * self) {
     return self->GetActive();
 }
 
-// CLASS: wxAddRemoveAdaptor
-void wxAddRemoveAdaptor_delete(wxAddRemoveAdaptor *self) {
-    delete self;
-}
-wxWindow * wxAddRemoveAdaptor_GetItemsCtrl(const wxAddRemoveAdaptor * self) {
-    return self->GetItemsCtrl();
-}
-bool wxAddRemoveAdaptor_CanAdd(const wxAddRemoveAdaptor * self) {
-    return self->CanAdd();
-}
-bool wxAddRemoveAdaptor_CanRemove(const wxAddRemoveAdaptor * self) {
-    return self->CanRemove();
-}
-void wxAddRemoveAdaptor_OnAdd(wxAddRemoveAdaptor * self) {
-    return self->OnAdd();
-}
-void wxAddRemoveAdaptor_OnRemove(wxAddRemoveAdaptor * self) {
-    return self->OnRemove();
-}
-
 // CLASS: wxAffineMatrix2D
 void wxAffineMatrix2D_delete(wxAffineMatrix2D *self) {
     delete self;

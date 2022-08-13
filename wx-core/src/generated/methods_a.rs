@@ -245,26 +245,6 @@ pub trait ActivateEventMethods: EventMethods {
     // NOT_SUPPORTED: fn GetActivationReason()
 }
 
-// wxAddRemoveAdaptor
-pub trait AddRemoveAdaptorMethods: WxRustMethods {
-    // DTOR: fn ~wxAddRemoveAdaptor()
-    fn get_items_ctrl(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from(ffi::wxAddRemoveAdaptor_GetItemsCtrl(self.as_ptr())) }
-    }
-    fn can_add(&self) -> bool {
-        unsafe { ffi::wxAddRemoveAdaptor_CanAdd(self.as_ptr()) }
-    }
-    fn can_remove(&self) -> bool {
-        unsafe { ffi::wxAddRemoveAdaptor_CanRemove(self.as_ptr()) }
-    }
-    fn on_add(&self) {
-        unsafe { ffi::wxAddRemoveAdaptor_OnAdd(self.as_ptr()) }
-    }
-    fn on_remove(&self) {
-        unsafe { ffi::wxAddRemoveAdaptor_OnRemove(self.as_ptr()) }
-    }
-}
-
 // wxAffineMatrix2D
 pub trait AffineMatrix2DMethods: AffineMatrix2DBaseMethods {
     // BLOCKED: fn IsEqual()

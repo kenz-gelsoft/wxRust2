@@ -2,7 +2,6 @@
 
 #include <wx/aboutdlg.h>
 #include <wx/accel.h>
-#include <wx/addremovectrl.h>
 #include <wx/affinematrix2d.h>
 #include <wx/affinematrix2dbase.h>
 #include <wx/animate.h>
@@ -77,14 +76,6 @@ bool wxAcceleratorTable_IsOk(const wxAcceleratorTable * self);
 // CLASS: wxActivateEvent
 wxClassInfo *wxActivateEvent_CLASSINFO();
 bool wxActivateEvent_GetActive(const wxActivateEvent * self);
-
-// CLASS: wxAddRemoveAdaptor
-void wxAddRemoveAdaptor_delete(wxAddRemoveAdaptor *self);
-wxWindow * wxAddRemoveAdaptor_GetItemsCtrl(const wxAddRemoveAdaptor * self);
-bool wxAddRemoveAdaptor_CanAdd(const wxAddRemoveAdaptor * self);
-bool wxAddRemoveAdaptor_CanRemove(const wxAddRemoveAdaptor * self);
-void wxAddRemoveAdaptor_OnAdd(wxAddRemoveAdaptor * self);
-void wxAddRemoveAdaptor_OnRemove(wxAddRemoveAdaptor * self);
 
 // CLASS: wxAffineMatrix2D
 void wxAffineMatrix2D_delete(wxAffineMatrix2D *self);
