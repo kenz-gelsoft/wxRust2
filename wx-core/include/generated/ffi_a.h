@@ -2,7 +2,6 @@
 
 #include <wx/aboutdlg.h>
 #include <wx/accel.h>
-#include <wx/activityindicator.h>
 #include <wx/addremovectrl.h>
 #include <wx/affinematrix2d.h>
 #include <wx/affinematrix2dbase.h>
@@ -78,15 +77,6 @@ bool wxAcceleratorTable_IsOk(const wxAcceleratorTable * self);
 // CLASS: wxActivateEvent
 wxClassInfo *wxActivateEvent_CLASSINFO();
 bool wxActivateEvent_GetActive(const wxActivateEvent * self);
-
-// CLASS: wxActivityIndicator
-wxClassInfo *wxActivityIndicator_CLASSINFO();
-wxActivityIndicator *wxActivityIndicator_new();
-wxActivityIndicator *wxActivityIndicator_new1(wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-bool wxActivityIndicator_Create(wxActivityIndicator * self, wxWindow * parent, wxWindowID winid, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-void wxActivityIndicator_Start(wxActivityIndicator * self);
-void wxActivityIndicator_Stop(wxActivityIndicator * self);
-bool wxActivityIndicator_IsRunning(const wxActivityIndicator * self);
 
 // CLASS: wxAddRemoveAdaptor
 void wxAddRemoveAdaptor_delete(wxAddRemoveAdaptor *self);

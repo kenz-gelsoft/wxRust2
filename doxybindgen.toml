@@ -445,7 +445,7 @@ wxml_files = [
     'wxml/classwx_activate_event.xml',
     # 'wxml/classwx_active_x_container.xml',
     # 'wxml/classwx_active_x_event.xml',
-    'wxml/classwx_activity_indicator.xml',
+    # 'wxml/classwx_activity_indicator.xml',
     'wxml/classwx_add_remove_adaptor.xml',
     'wxml/classwx_add_remove_ctrl.xml',
     'wxml/classwx_affine_matrix2_d.xml',

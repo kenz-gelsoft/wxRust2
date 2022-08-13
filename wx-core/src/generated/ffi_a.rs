@@ -94,30 +94,6 @@ extern "C" {
     pub fn wxActivateEvent_GetActive(self_: *const c_void) -> bool;
     // NOT_SUPPORTED: pub fn wxActivateEvent_GetActivationReason(self_: *const c_void) -> Reason;
 
-    // wxActivityIndicator
-    pub fn wxActivityIndicator_CLASSINFO() -> *mut c_void;
-    pub fn wxActivityIndicator_new() -> *mut c_void;
-    pub fn wxActivityIndicator_new1(
-        parent: *mut c_void,
-        winid: c_int,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxActivityIndicator_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        winid: c_int,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> bool;
-    pub fn wxActivityIndicator_Start(self_: *mut c_void);
-    pub fn wxActivityIndicator_Stop(self_: *mut c_void);
-    pub fn wxActivityIndicator_IsRunning(self_: *const c_void) -> bool;
-
     // wxAddRemoveAdaptor
     pub fn wxAddRemoveAdaptor_delete(self_: *mut c_void);
     // BLOCKED: pub fn wxAddRemoveAdaptor_new() -> *mut c_void;
