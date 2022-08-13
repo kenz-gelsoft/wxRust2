@@ -6,7 +6,6 @@
 #include <wx/affinematrix2dbase.h>
 #include <wx/animate.h>
 #include <wx/anybutton.h>
-#include <wx/appprogress.h>
 #include <wx/artprov.h>
 #include <wx/event.h>
 
@@ -126,13 +125,6 @@ wxSize *wxAnyButton_GetBitmapMargins(wxAnyButton * self);
 void wxAnyButton_SetBitmapMargins(wxAnyButton * self, wxCoord x, wxCoord y);
 void wxAnyButton_SetBitmapMargins1(wxAnyButton * self, const wxSize * sz);
 void wxAnyButton_SetBitmapPosition(wxAnyButton * self, wxDirection dir);
-
-// CLASS: wxAppProgressIndicator
-void wxAppProgressIndicator_delete(wxAppProgressIndicator *self);
-wxAppProgressIndicator *wxAppProgressIndicator_new(wxWindow * parent, int max_value);
-bool wxAppProgressIndicator_IsAvailable(const wxAppProgressIndicator * self);
-void wxAppProgressIndicator_SetValue(wxAppProgressIndicator * self, int value);
-void wxAppProgressIndicator_SetRange(wxAppProgressIndicator * self, int range);
 
 // CLASS: wxArtProvider
 wxClassInfo *wxArtProvider_CLASSINFO();

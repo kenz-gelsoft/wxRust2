@@ -421,21 +421,6 @@ pub trait AnyButtonMethods: ControlMethods {
     }
 }
 
-// wxAppProgressIndicator
-pub trait AppProgressIndicatorMethods: WxRustMethods {
-    // DTOR: fn ~wxAppProgressIndicator()
-    fn is_available(&self) -> bool {
-        unsafe { ffi::wxAppProgressIndicator_IsAvailable(self.as_ptr()) }
-    }
-    fn set_value(&self, value: c_int) {
-        unsafe { ffi::wxAppProgressIndicator_SetValue(self.as_ptr(), value) }
-    }
-    fn set_range(&self, range: c_int) {
-        unsafe { ffi::wxAppProgressIndicator_SetRange(self.as_ptr(), range) }
-    }
-    // BLOCKED: fn Pulse()
-}
-
 // wxArtProvider
 pub trait ArtProviderMethods: ObjectMethods {
     // DTOR: fn ~wxArtProvider()

@@ -315,23 +315,6 @@ void wxAnyButton_SetBitmapPosition(wxAnyButton * self, wxDirection dir) {
     return self->SetBitmapPosition(dir);
 }
 
-// CLASS: wxAppProgressIndicator
-void wxAppProgressIndicator_delete(wxAppProgressIndicator *self) {
-    delete self;
-}
-wxAppProgressIndicator *wxAppProgressIndicator_new(wxWindow * parent, int max_value) {
-    return new wxAppProgressIndicator(parent, max_value);
-}
-bool wxAppProgressIndicator_IsAvailable(const wxAppProgressIndicator * self) {
-    return self->IsAvailable();
-}
-void wxAppProgressIndicator_SetValue(wxAppProgressIndicator * self, int value) {
-    return self->SetValue(value);
-}
-void wxAppProgressIndicator_SetRange(wxAppProgressIndicator * self, int range) {
-    return self->SetRange(range);
-}
-
 // CLASS: wxArtProvider
 wxClassInfo *wxArtProvider_CLASSINFO() {
     return wxCLASSINFO(wxArtProvider);

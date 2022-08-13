@@ -452,7 +452,7 @@ wxml_files = [
     'wxml/classwx_affine_matrix2_d_base.xml',
     'wxml/classwx_animation_ctrl.xml',
     'wxml/classwx_any_button.xml',
-    'wxml/classwx_app_progress_indicator.xml',
+    # 'wxml/classwx_app_progress_indicator.xml', # requires 3.1
     'wxml/classwx_art_provider.xml',
     # 'wxml/classwx_auto_buffered_paint_d_c.xml', # requires not yet generated wxBufferedPaintDC
     # 'wxml/classwx_automation_object.xml',

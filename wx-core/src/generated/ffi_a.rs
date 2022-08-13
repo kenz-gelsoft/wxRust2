@@ -193,15 +193,6 @@ extern "C" {
     pub fn wxAnyButton_SetBitmapMargins1(self_: *mut c_void, sz: *const c_void);
     pub fn wxAnyButton_SetBitmapPosition(self_: *mut c_void, dir: c_int);
 
-    // wxAppProgressIndicator
-    pub fn wxAppProgressIndicator_delete(self_: *mut c_void);
-    pub fn wxAppProgressIndicator_new(parent: *mut c_void, max_value: c_int) -> *mut c_void;
-    // DTOR: pub fn wxAppProgressIndicator_~wxAppProgressIndicator(self_: *mut c_void);
-    pub fn wxAppProgressIndicator_IsAvailable(self_: *const c_void) -> bool;
-    pub fn wxAppProgressIndicator_SetValue(self_: *mut c_void, value: c_int);
-    pub fn wxAppProgressIndicator_SetRange(self_: *mut c_void, range: c_int);
-    // BLOCKED: pub fn wxAppProgressIndicator_Pulse(self_: *mut c_void) -> bool;
-
     // wxArtProvider
     pub fn wxArtProvider_CLASSINFO() -> *mut c_void;
     // DTOR: pub fn wxArtProvider_~wxArtProvider(self_: *mut c_void);

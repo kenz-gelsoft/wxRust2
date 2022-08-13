@@ -304,36 +304,6 @@ impl<const OWNED: bool> DynamicCast for AnyButtonIsOwned<OWNED> {
     }
 }
 
-// wxAppProgressIndicator
-wx_class! { AppProgressIndicator =
-    AppProgressIndicatorIsOwned<true>(wxAppProgressIndicator) impl
-        AppProgressIndicatorMethods
-}
-impl<const OWNED: bool> AppProgressIndicatorIsOwned<OWNED> {
-    pub fn new<W: WindowMethods>(
-        parent: Option<&W>,
-        max_value: c_int,
-    ) -> AppProgressIndicatorIsOwned<OWNED> {
-        unsafe {
-            let parent = match parent {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            AppProgressIndicatorIsOwned(ffi::wxAppProgressIndicator_new(parent, max_value))
-        }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for AppProgressIndicatorIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxAppProgressIndicator_delete(self.0) }
-        }
-    }
-}
-
 // wxArtProvider
 wx_class! { ArtProvider =
     ArtProviderIsOwned<true>(wxArtProvider) impl
