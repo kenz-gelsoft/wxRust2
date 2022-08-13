@@ -697,8 +697,8 @@ pub trait MenuItemMethods: ObjectMethods {
     }
     // BLOCKED: fn GetText()
     // BLOCKED: fn GetTextColour()
-    fn get_accel(&self) -> *mut c_void {
-        unsafe { ffi::wxMenuItem_GetAccel(self.as_ptr()) }
+    fn get_accel(&self) -> Option<AcceleratorEntryIsOwned<false>> {
+        unsafe { AcceleratorEntry::option_from(ffi::wxMenuItem_GetAccel(self.as_ptr())) }
     }
     // BLOCKED: fn GetAccelFromString()
     fn is_check(&self) -> bool {
@@ -805,11 +805,20 @@ pub trait MenuItemMethods: ObjectMethods {
             ffi::wxMenuItem_SetTextColour(self.as_ptr(), colour)
         }
     }
-    fn set_accel(&self, accel: *mut c_void) {
-        unsafe { ffi::wxMenuItem_SetAccel(self.as_ptr(), accel) }
+    fn set_accel<A: AcceleratorEntryMethods>(&self, accel: Option<&A>) {
+        unsafe {
+            let accel = match accel {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxMenuItem_SetAccel(self.as_ptr(), accel)
+        }
     }
-    fn add_extra_accel(&self, accel: *const c_void) {
-        unsafe { ffi::wxMenuItem_AddExtraAccel(self.as_ptr(), accel) }
+    fn add_extra_accel<A: AcceleratorEntryMethods>(&self, accel: &A) {
+        unsafe {
+            let accel = accel.as_ptr();
+            ffi::wxMenuItem_AddExtraAccel(self.as_ptr(), accel)
+        }
     }
     fn clear_extra_accels(&self) {
         unsafe { ffi::wxMenuItem_ClearExtraAccels(self.as_ptr()) }

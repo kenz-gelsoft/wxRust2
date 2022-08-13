@@ -61,7 +61,13 @@ class RustClassBinding:
                 unprefixed,
                 self.__model.name,
             )
-            yield ',\n'.join(self._ancestor_methods())
+            ancestor_methods = list(self._ancestor_methods())
+            last_methods_if_commented_out = None
+            if '//' in ancestor_methods[-1]:
+                last_methods_if_commented_out = ancestor_methods.pop(-1)
+            yield ',\n'.join(ancestor_methods)
+            if last_methods_if_commented_out:
+                yield last_methods_if_commented_out
             yield '}'
             for line in self._impl_with_ctors():
                 yield line

@@ -1,22 +1,4 @@
 core_files = [
-    'wxml/classwx_about_dialog_info.xml',
-    'wxml/classwx_accelerator_entry.xml',
-    'wxml/classwx_accelerator_table.xml',
-    'wxml/classwx_accessible.xml',
-    'wxml/classwx_activate_event.xml',
-    'wxml/classwx_active_x_container.xml',
-    'wxml/classwx_active_x_event.xml',
-    'wxml/classwx_activity_indicator.xml',
-    'wxml/classwx_add_remove_adaptor.xml',
-    'wxml/classwx_add_remove_ctrl.xml',
-    'wxml/classwx_affine_matrix2_d.xml',
-    'wxml/classwx_affine_matrix2_d_base.xml',
-    'wxml/classwx_animation_ctrl.xml',
-    'wxml/classwx_any_button.xml',
-    'wxml/classwx_app_progress_indicator.xml',
-    'wxml/classwx_art_provider.xml',
-    'wxml/classwx_auto_buffered_paint_d_c.xml',
-    'wxml/classwx_automation_object.xml',
     'wxml/classwx_banner_window.xml',
     'wxml/classwx_bitmap.xml',
     'wxml/classwx_bitmap_bundle.xml',
@@ -456,9 +438,24 @@ core_files = [
     'wxml/classwx_zoom_gesture_event.xml',
 ]
 wxml_files = [
-    #'wxml/classwx_activity_indicator.xml',
+    'wxml/classwx_about_dialog_info.xml',
+    'wxml/classwx_accelerator_entry.xml',
+    'wxml/classwx_accelerator_table.xml',
+    # 'wxml/classwx_accessible.xml',
+    'wxml/classwx_activate_event.xml',
+    # 'wxml/classwx_active_x_container.xml',
+    # 'wxml/classwx_active_x_event.xml',
+    'wxml/classwx_activity_indicator.xml',
+    'wxml/classwx_add_remove_adaptor.xml',
+    'wxml/classwx_add_remove_ctrl.xml',
+    'wxml/classwx_affine_matrix2_d.xml',
+    'wxml/classwx_affine_matrix2_d_base.xml',
+    'wxml/classwx_animation_ctrl.xml',
     'wxml/classwx_any_button.xml',
+    'wxml/classwx_app_progress_indicator.xml',
     'wxml/classwx_art_provider.xml',
+    # 'wxml/classwx_auto_buffered_paint_d_c.xml', # requires not yet generated wxBufferedPaintDC
+    # 'wxml/classwx_automation_object.xml',
     'wxml/classwx_bitmap.xml',
     'wxml/classwx_bitmap_bundle.xml',
     'wxml/classwx_bitmap_button.xml',
@@ -567,8 +564,45 @@ cxx = "#if wxCHECK_VERSION(3, 1, 7)"
 cxx = "#if wxCHECK_VERSION(3, 2, 0)"
 
 [types]
+[types.wxAcceleratorEntry]
+blocklist = [
+    'operator=',
+    'operator==',
+    'operator!=',
+]
+[types.wxAcceleratorTable]
+blocklist = [
+    'wxAcceleratorTable2',
+]
+[types.wxActiveXContainer]
+condition = 'windows'
+[types.wxActiveXEvent]
+condition = 'windows'
+[types.wxAddRemoveAdaptor]
+blocklist = [
+    'wxAddRemoveAdaptor',
+]
+[types.wxAffineMatrix2D]
+blocklist = [
+    'operator==',
+    'operator!=',
+    # maybe bug: returns value for void method
+    'IsEqual',
+]
+[types.wxAffineMatrix2DBase]
+blocklist = [
+    'operator==',
+    'operator!=',
+    # abstract
+    'wxAffineMatrix2DBase',
+]
 [types.wxAnyButton]
 library = 'core'
+[types.wxAppProgressIndicator]
+blocklist = [
+    # invalid return type
+    'Pulse',
+]
 [types.wxArtProvider]
 blocklist = [
     'Insert',
@@ -583,6 +617,8 @@ wx317 = [
     # Doc isn't up-to-date in wx3.1.6
     'GetSizeHint',
 ]
+[types.wxAutomationObject]
+condition = 'windows'
 [types.wxBitmapBundle]
 condition = 'wx31'
 blocklist = [
