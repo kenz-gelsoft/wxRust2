@@ -447,13 +447,13 @@ wxml_files = [
     'wxml/classwx_dir_picker_ctrl.xml',
     'wxml/classwx_display.xml',
     'wxml/classwx_display_changed_event.xml',
-    'wxml/classwx_doc_child_frame.xml',
-    'wxml/classwx_doc_m_d_i_child_frame.xml',
-    'wxml/classwx_doc_m_d_i_parent_frame.xml',
-    'wxml/classwx_doc_manager.xml',
-    'wxml/classwx_doc_parent_frame.xml',
-    'wxml/classwx_doc_template.xml',
-    'wxml/classwx_document.xml',
+    # 'wxml/classwx_doc_child_frame.xml',        # Our CI environment is't built with
+    # 'wxml/classwx_doc_m_d_i_child_frame.xml',  # Our CI environment is't built with
+    # 'wxml/classwx_doc_m_d_i_parent_frame.xml', # Our CI environment is't built with
+    # 'wxml/classwx_doc_manager.xml',            # Our CI environment is't built with
+    # 'wxml/classwx_doc_parent_frame.xml',       # Our CI environment is't built with
+    # 'wxml/classwx_doc_template.xml',           # Our CI environment is't built with
+    # 'wxml/classwx_document.xml',               # Our CI environment is't built with
     'wxml/classwx_drag_image.xml',
     'wxml/classwx_drop_files_event.xml',
     'wxml/classwx_drop_source.xml',
