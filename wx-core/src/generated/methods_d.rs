@@ -1356,24 +1356,8 @@ pub trait DataViewEventMethods: NotifyEventMethods {
     fn set_column(&self, col: c_int) {
         unsafe { ffi::wxDataViewEvent_SetColumn(self.as_ptr(), col) }
     }
-    fn set_data_view_column<D: DataViewColumnMethods>(&self, col: Option<&D>) {
-        unsafe {
-            let col = match col {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxDataViewEvent_SetDataViewColumn(self.as_ptr(), col)
-        }
-    }
-    fn set_model<D: DataViewModelMethods>(&self, model: Option<&D>) {
-        unsafe {
-            let model = match model {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxDataViewEvent_SetModel(self.as_ptr(), model)
-        }
-    }
+    // BLOCKED: fn SetDataViewColumn()
+    // BLOCKED: fn SetModel()
     fn set_value(&self, value: *const c_void) {
         unsafe { ffi::wxDataViewEvent_SetValue(self.as_ptr(), value) }
     }
@@ -1411,12 +1395,7 @@ pub trait DataViewEventMethods: NotifyEventMethods {
     fn get_item(&self) -> DataViewItem {
         unsafe { DataViewItem::from_ptr(ffi::wxDataViewEvent_GetItem(self.as_ptr())) }
     }
-    fn set_item<D: DataViewItemMethods>(&self, item: &D) {
-        unsafe {
-            let item = item.as_ptr();
-            ffi::wxDataViewEvent_SetItem(self.as_ptr(), item)
-        }
-    }
+    // BLOCKED: fn SetItem()
     fn set_position(&self, x: c_int, y: c_int) {
         unsafe { ffi::wxDataViewEvent_SetPosition(self.as_ptr(), x, y) }
     }

@@ -847,12 +847,6 @@ bool wxDataViewEvent_IsEditCancelled(const wxDataViewEvent * self) {
 void wxDataViewEvent_SetColumn(wxDataViewEvent * self, int col) {
     return self->SetColumn(col);
 }
-void wxDataViewEvent_SetDataViewColumn(wxDataViewEvent * self, wxDataViewColumn * col) {
-    return self->SetDataViewColumn(col);
-}
-void wxDataViewEvent_SetModel(wxDataViewEvent * self, wxDataViewModel * model) {
-    return self->SetModel(model);
-}
 void wxDataViewEvent_SetValue(wxDataViewEvent * self, const wxVariant * value) {
     return self->SetValue(*value);
 }
@@ -882,9 +876,6 @@ int wxDataViewEvent_GetProposedDropIndex(const wxDataViewEvent * self) {
 }
 wxDataViewItem *wxDataViewEvent_GetItem(const wxDataViewEvent * self) {
     return new wxDataViewItem(self->GetItem());
-}
-void wxDataViewEvent_SetItem(wxDataViewEvent * self, const wxDataViewItem * item) {
-    return self->SetItem(*item);
 }
 void wxDataViewEvent_SetPosition(wxDataViewEvent * self, int x, int y) {
     return self->SetPosition(x, y);

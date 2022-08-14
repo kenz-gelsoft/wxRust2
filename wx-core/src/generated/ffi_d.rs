@@ -603,8 +603,8 @@ extern "C" {
     // BLOCKED: pub fn wxDataViewEvent_GetValue(self_: *const c_void) -> *const c_void;
     pub fn wxDataViewEvent_IsEditCancelled(self_: *const c_void) -> bool;
     pub fn wxDataViewEvent_SetColumn(self_: *mut c_void, col: c_int);
-    pub fn wxDataViewEvent_SetDataViewColumn(self_: *mut c_void, col: *mut c_void);
-    pub fn wxDataViewEvent_SetModel(self_: *mut c_void, model: *mut c_void);
+    // BLOCKED: pub fn wxDataViewEvent_SetDataViewColumn(self_: *mut c_void, col: *mut c_void);
+    // BLOCKED: pub fn wxDataViewEvent_SetModel(self_: *mut c_void, model: *mut c_void);
     pub fn wxDataViewEvent_SetValue(self_: *mut c_void, value: *const c_void);
     pub fn wxDataViewEvent_SetDataObject(self_: *mut c_void, obj: *mut c_void);
     pub fn wxDataViewEvent_GetDataFormat(self_: *const c_void) -> *mut c_void;
@@ -616,7 +616,7 @@ extern "C" {
     pub fn wxDataViewEvent_GetCacheTo(self_: *const c_void) -> c_int;
     pub fn wxDataViewEvent_GetProposedDropIndex(self_: *const c_void) -> c_int;
     pub fn wxDataViewEvent_GetItem(self_: *const c_void) -> *mut c_void;
-    pub fn wxDataViewEvent_SetItem(self_: *mut c_void, item: *const c_void);
+    // BLOCKED: pub fn wxDataViewEvent_SetItem(self_: *mut c_void, item: *const c_void);
     pub fn wxDataViewEvent_SetPosition(self_: *mut c_void, x: c_int, y: c_int);
     pub fn wxDataViewEvent_SetCache(self_: *mut c_void, from: c_int, to: c_int);
     pub fn wxDataViewEvent_GetDataObject(self_: *const c_void) -> *mut c_void;

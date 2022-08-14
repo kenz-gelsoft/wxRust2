@@ -806,6 +806,10 @@ blocklist = [
 ]
 [types.wxDataViewEvent]
 blocklist = [
+    # (maybe) disabled on CI env
+    'SetDataViewColumn',
+    'SetItem',
+    'SetModel',
     # invalid return type
     'GetValue',
 ]
