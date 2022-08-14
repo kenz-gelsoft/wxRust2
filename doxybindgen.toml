@@ -647,6 +647,8 @@ wx317 = [
 wx32 = [
     'wxBitmapBundle4',
 ]
+[types.wxBitmapBundleImpl]
+condition = 'wx31'
 [types.wxBitmapButton]
 wx31 = [
     'CreateCloseButton',

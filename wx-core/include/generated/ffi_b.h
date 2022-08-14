@@ -2,7 +2,6 @@
 
 #include <wx/bannerwindow.h>
 #include <wx/bitmap.h>
-#include <wx/bmpbndl.h>
 #if wxCHECK_VERSION(3, 1, 0)
 #include <wx/bmpbndl.h>
 #endif
