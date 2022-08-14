@@ -166,15 +166,6 @@ extern "C" {
         size_def: *const c_void,
     ) -> *mut c_void;
 
-    // wxBitmapBundleImpl
-    pub fn wxBitmapBundleImpl_delete(self_: *mut c_void);
-    pub fn wxBitmapBundleImpl_GetDefaultSize(self_: *const c_void) -> *mut c_void;
-    pub fn wxBitmapBundleImpl_GetPreferredBitmapSizeAtScale(
-        self_: *const c_void,
-        scale: c_double,
-    ) -> *mut c_void;
-    pub fn wxBitmapBundleImpl_GetBitmap(self_: *mut c_void, size: *const c_void) -> *mut c_void;
-
     // wxBitmapButton
     pub fn wxBitmapButton_CLASSINFO() -> *mut c_void;
     pub fn wxBitmapButton_new() -> *mut c_void;

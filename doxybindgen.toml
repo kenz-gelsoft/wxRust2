@@ -440,7 +440,7 @@ wxml_files = [
     'wxml/classwx_banner_window.xml',
     'wxml/classwx_bitmap.xml',
     'wxml/classwx_bitmap_bundle.xml',
-    'wxml/classwx_bitmap_bundle_impl.xml',
+    # 'wxml/classwx_bitmap_bundle_impl.xml', # requires 3.1
     'wxml/classwx_bitmap_button.xml',
     'wxml/classwx_bitmap_combo_box.xml',
     'wxml/classwx_bitmap_data_object.xml',
@@ -647,8 +647,6 @@ wx317 = [
 wx32 = [
     'wxBitmapBundle4',
 ]
-[types.wxBitmapBundleImpl]
-condition = 'wx31'
 [types.wxBitmapButton]
 wx31 = [
     'CreateCloseButton',

@@ -144,11 +144,6 @@ wxBitmapBundle *wxBitmapBundle_FromSVGFile(const wxString * path, const wxSize *
 wxBitmapBundle *wxBitmapBundle_FromSVGResource(const wxString * name, const wxSize * size_def);
 #endif
 
-// CLASS: wxBitmapBundleImpl
-wxSize *wxBitmapBundleImpl_GetDefaultSize(const wxBitmapBundleImpl * self);
-wxSize *wxBitmapBundleImpl_GetPreferredBitmapSizeAtScale(const wxBitmapBundleImpl * self, double scale);
-wxBitmap *wxBitmapBundleImpl_GetBitmap(wxBitmapBundleImpl * self, const wxSize * size);
-
 // CLASS: wxBitmapButton
 wxClassInfo *wxBitmapButton_CLASSINFO();
 wxBitmapButton *wxBitmapButton_new();

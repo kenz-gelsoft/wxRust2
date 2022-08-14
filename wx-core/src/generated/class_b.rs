@@ -178,30 +178,6 @@ impl<const OWNED: bool> Drop for BitmapBundleIsOwned<OWNED> {
     }
 }
 
-// wxBitmapBundleImpl
-wx_class! { BitmapBundleImpl =
-    BitmapBundleImplIsOwned<true>(wxBitmapBundleImpl) impl
-        BitmapBundleImplMethods,
-        RefCounterMethods
-}
-impl<const OWNED: bool> BitmapBundleImplIsOwned<OWNED> {
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<BitmapBundleImplIsOwned<OWNED>> for RefCounterIsOwned<OWNED> {
-    fn from(o: BitmapBundleImplIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> Drop for BitmapBundleImplIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxBitmapBundleImpl_delete(self.0) }
-        }
-    }
-}
-
 // wxBitmapButton
 wx_class! { BitmapButton =
     BitmapButtonIsOwned<true>(wxBitmapButton) impl

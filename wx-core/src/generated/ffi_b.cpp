@@ -296,17 +296,6 @@ wxBitmapBundle *wxBitmapBundle_FromSVGResource(const wxString * name, const wxSi
 }
 #endif
 
-// CLASS: wxBitmapBundleImpl
-wxSize *wxBitmapBundleImpl_GetDefaultSize(const wxBitmapBundleImpl * self) {
-    return new wxSize(self->GetDefaultSize());
-}
-wxSize *wxBitmapBundleImpl_GetPreferredBitmapSizeAtScale(const wxBitmapBundleImpl * self, double scale) {
-    return new wxSize(self->GetPreferredBitmapSizeAtScale(scale));
-}
-wxBitmap *wxBitmapBundleImpl_GetBitmap(wxBitmapBundleImpl * self, const wxSize * size) {
-    return new wxBitmap(self->GetBitmap(*size));
-}
-
 // CLASS: wxBitmapButton
 wxClassInfo *wxBitmapButton_CLASSINFO() {
     return wxCLASSINFO(wxBitmapButton);

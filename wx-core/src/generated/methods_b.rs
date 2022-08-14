@@ -332,14 +332,8 @@ pub trait BitmapBundleMethods: WxRustMethods {
     fn from_image(image: *const c_void) -> BitmapBundle {
         unsafe { BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromImage(image)) }
     }
-    fn from_impl<B: BitmapBundleImplMethods>(impl_: Option<&B>) -> BitmapBundle {
-        unsafe {
-            let impl_ = match impl_ {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromImpl(impl_))
-        }
+    fn from_impl(impl_: *mut c_void) -> BitmapBundle {
+        unsafe { BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromImpl(impl_)) }
     }
     fn from_resources(name: &str) -> BitmapBundle {
         unsafe {
@@ -387,27 +381,6 @@ pub trait BitmapBundleMethods: WxRustMethods {
             let name = name.as_ptr();
             let size_def = size_def.as_ptr();
             BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromSVGResource(name, size_def))
-        }
-    }
-}
-
-// wxBitmapBundleImpl
-pub trait BitmapBundleImplMethods: RefCounterMethods {
-    fn get_default_size(&self) -> Size {
-        unsafe { Size::from_ptr(ffi::wxBitmapBundleImpl_GetDefaultSize(self.as_ptr())) }
-    }
-    fn get_preferred_bitmap_size_at_scale(&self, scale: c_double) -> Size {
-        unsafe {
-            Size::from_ptr(ffi::wxBitmapBundleImpl_GetPreferredBitmapSizeAtScale(
-                self.as_ptr(),
-                scale,
-            ))
-        }
-    }
-    fn get_bitmap<S: SizeMethods>(&self, size: &S) -> Bitmap {
-        unsafe {
-            let size = size.as_ptr();
-            Bitmap::from_ptr(ffi::wxBitmapBundleImpl_GetBitmap(self.as_ptr(), size))
         }
     }
 }
