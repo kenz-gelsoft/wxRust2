@@ -779,20 +779,6 @@ pub trait DCPenChangerMethods: WxRustMethods {
     // DTOR: fn ~wxDCPenChanger()
 }
 
-// wxDCTextBgColourChanger
-pub trait DCTextBgColourChangerMethods: WxRustMethods {
-    fn set<C: ColourMethods>(&self, col: &C) {
-        unsafe {
-            let col = col.as_ptr();
-            ffi::wxDCTextBgColourChanger_Set(self.as_ptr(), col)
-        }
-    }
-    // DTOR: fn ~wxDCTextBgColourChanger()
-}
-
-// wxDCTextBgModeChanger
-pub trait DCTextBgModeChangerMethods: WxRustMethods {}
-
 // wxDCTextColourChanger
 pub trait DCTextColourChangerMethods: WxRustMethods {
     fn set<C: ColourMethods>(&self, col: &C) {
@@ -802,23 +788,6 @@ pub trait DCTextColourChangerMethods: WxRustMethods {
         }
     }
     // DTOR: fn ~wxDCTextColourChanger()
-}
-
-// wxDPIChangedEvent
-pub trait DPIChangedEventMethods: EventMethods {
-    fn get_old_dpi(&self) -> Size {
-        unsafe { Size::from_ptr(ffi::wxDPIChangedEvent_GetOldDPI(self.as_ptr())) }
-    }
-    fn get_new_dpi(&self) -> Size {
-        unsafe { Size::from_ptr(ffi::wxDPIChangedEvent_GetNewDPI(self.as_ptr())) }
-    }
-    // BLOCKED: fn Scale()
-    fn scale_x(&self, x: c_int) -> c_int {
-        unsafe { ffi::wxDPIChangedEvent_ScaleX(self.as_ptr(), x) }
-    }
-    fn scale_y(&self, y: c_int) -> c_int {
-        unsafe { ffi::wxDPIChangedEvent_ScaleY(self.as_ptr(), y) }
-    }
 }
 
 // wxDataFormat
@@ -909,16 +878,6 @@ pub trait DataObjectSimpleMethods: DataObjectMethods {
 pub trait DataViewBitmapRendererMethods: DataViewRendererMethods {
     fn get_default_type() -> String {
         unsafe { WxString::from_ptr(ffi::wxDataViewBitmapRenderer_GetDefaultType()).into() }
-    }
-}
-
-// wxDataViewCheckIconTextRenderer
-pub trait DataViewCheckIconTextRendererMethods: DataViewRendererMethods {
-    fn get_default_type() -> String {
-        unsafe { WxString::from_ptr(ffi::wxDataViewCheckIconTextRenderer_GetDefaultType()).into() }
-    }
-    fn allow3rd_state_for_user(&self, allow: bool) {
-        unsafe { ffi::wxDataViewCheckIconTextRenderer_Allow3rdStateForUser(self.as_ptr(), allow) }
     }
 }
 
@@ -2028,14 +1987,8 @@ pub trait DataViewRendererMethods: ObjectMethods {
     fn set_value(&self, value: *const c_void) -> bool {
         unsafe { ffi::wxDataViewRenderer_SetValue(self.as_ptr(), value) }
     }
-    fn set_value_adjuster<D: DataViewValueAdjusterMethods>(&self, transformer: Option<&D>) {
-        unsafe {
-            let transformer = match transformer {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxDataViewRenderer_SetValueAdjuster(self.as_ptr(), transformer)
-        }
+    fn set_value_adjuster(&self, transformer: *mut c_void) {
+        unsafe { ffi::wxDataViewRenderer_SetValueAdjuster(self.as_ptr(), transformer) }
     }
     fn validate(&self, value: *mut c_void) -> bool {
         unsafe { ffi::wxDataViewRenderer_Validate(self.as_ptr(), value) }
@@ -2591,11 +2544,6 @@ pub trait DataViewTreeStoreMethods: DataViewModelMethods {
             ffi::wxDataViewTreeStore_SetItemIcon(self.as_ptr(), item, icon)
         }
     }
-}
-
-// wxDataViewValueAdjuster
-pub trait DataViewValueAdjusterMethods: WxRustMethods {
-    // NOT_SUPPORTED: fn MakeHighlighted()
 }
 
 // wxDataViewVirtualListModel

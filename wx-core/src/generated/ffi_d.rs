@@ -328,30 +328,12 @@ extern "C" {
     pub fn wxDCPenChanger_new(dc: *mut c_void, pen: *const c_void) -> *mut c_void;
     // DTOR: pub fn wxDCPenChanger_~wxDCPenChanger(self_: *mut c_void);
 
-    // wxDCTextBgColourChanger
-    pub fn wxDCTextBgColourChanger_delete(self_: *mut c_void);
-    pub fn wxDCTextBgColourChanger_new(dc: *mut c_void) -> *mut c_void;
-    pub fn wxDCTextBgColourChanger_new1(dc: *mut c_void, col: *const c_void) -> *mut c_void;
-    pub fn wxDCTextBgColourChanger_Set(self_: *mut c_void, col: *const c_void);
-    // DTOR: pub fn wxDCTextBgColourChanger_~wxDCTextBgColourChanger(self_: *mut c_void);
-
-    // wxDCTextBgModeChanger
-    pub fn wxDCTextBgModeChanger_delete(self_: *mut c_void);
-
     // wxDCTextColourChanger
     pub fn wxDCTextColourChanger_delete(self_: *mut c_void);
     pub fn wxDCTextColourChanger_new(dc: *mut c_void) -> *mut c_void;
     pub fn wxDCTextColourChanger_new1(dc: *mut c_void, col: *const c_void) -> *mut c_void;
     pub fn wxDCTextColourChanger_Set(self_: *mut c_void, col: *const c_void);
     // DTOR: pub fn wxDCTextColourChanger_~wxDCTextColourChanger(self_: *mut c_void);
-
-    // wxDPIChangedEvent
-    pub fn wxDPIChangedEvent_CLASSINFO() -> *mut c_void;
-    pub fn wxDPIChangedEvent_GetOldDPI(self_: *const c_void) -> *mut c_void;
-    pub fn wxDPIChangedEvent_GetNewDPI(self_: *const c_void) -> *mut c_void;
-    // BLOCKED: pub fn wxDPIChangedEvent_Scale(self_: *const c_void, sz: wxSize) -> wxSize;
-    pub fn wxDPIChangedEvent_ScaleX(self_: *const c_void, x: c_int) -> c_int;
-    pub fn wxDPIChangedEvent_ScaleY(self_: *const c_void, y: c_int) -> c_int;
 
     // wxDataFormat
     pub fn wxDataFormat_delete(self_: *mut c_void);
@@ -407,12 +389,6 @@ extern "C" {
     pub fn wxDataViewBitmapRenderer_CLASSINFO() -> *mut c_void;
     pub fn wxDataViewBitmapRenderer_GetDefaultType() -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxDataViewBitmapRenderer_new(varianttype: *const c_void, mode: wxDataViewCellMode, align: c_int) -> *mut c_void;
-
-    // wxDataViewCheckIconTextRenderer
-    pub fn wxDataViewCheckIconTextRenderer_CLASSINFO() -> *mut c_void;
-    pub fn wxDataViewCheckIconTextRenderer_GetDefaultType() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxDataViewCheckIconTextRenderer_new(mode: wxDataViewCellMode, align: c_int) -> *mut c_void;
-    pub fn wxDataViewCheckIconTextRenderer_Allow3rdStateForUser(self_: *mut c_void, allow: bool);
 
     // wxDataViewChoiceByIndexRenderer
     pub fn wxDataViewChoiceByIndexRenderer_CLASSINFO() -> *mut c_void;
@@ -1190,10 +1166,6 @@ extern "C" {
         item: *const c_void,
         icon: *const c_void,
     );
-
-    // wxDataViewValueAdjuster
-    pub fn wxDataViewValueAdjuster_delete(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxDataViewValueAdjuster_MakeHighlighted(self_: *const c_void, value: *const c_void) -> wxVariant;
 
     // wxDataViewVirtualListModel
     pub fn wxDataViewVirtualListModel_delete(self_: *mut c_void);

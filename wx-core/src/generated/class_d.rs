@@ -203,58 +203,6 @@ impl<const OWNED: bool> Drop for DCPenChangerIsOwned<OWNED> {
     }
 }
 
-// wxDCTextBgColourChanger
-wx_class! { DCTextBgColourChanger =
-    DCTextBgColourChangerIsOwned<true>(wxDCTextBgColourChanger) impl
-        DCTextBgColourChangerMethods
-}
-impl<const OWNED: bool> DCTextBgColourChangerIsOwned<OWNED> {
-    pub fn new<D: DCMethods>(dc: &D) -> DCTextBgColourChangerIsOwned<OWNED> {
-        unsafe {
-            let dc = dc.as_ptr();
-            DCTextBgColourChangerIsOwned(ffi::wxDCTextBgColourChanger_new(dc))
-        }
-    }
-    pub fn new_with_colour<D: DCMethods, C: ColourMethods>(
-        dc: &D,
-        col: &C,
-    ) -> DCTextBgColourChangerIsOwned<OWNED> {
-        unsafe {
-            let dc = dc.as_ptr();
-            let col = col.as_ptr();
-            DCTextBgColourChangerIsOwned(ffi::wxDCTextBgColourChanger_new1(dc, col))
-        }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for DCTextBgColourChangerIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxDCTextBgColourChanger_delete(self.0) }
-        }
-    }
-}
-
-// wxDCTextBgModeChanger
-wx_class! { DCTextBgModeChanger =
-    DCTextBgModeChangerIsOwned<true>(wxDCTextBgModeChanger) impl
-        DCTextBgModeChangerMethods
-}
-impl<const OWNED: bool> DCTextBgModeChangerIsOwned<OWNED> {
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for DCTextBgModeChangerIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxDCTextBgModeChanger_delete(self.0) }
-        }
-    }
-}
-
 // wxDCTextColourChanger
 wx_class! { DCTextColourChanger =
     DCTextColourChangerIsOwned<true>(wxDCTextColourChanger) impl
@@ -285,41 +233,6 @@ impl<const OWNED: bool> Drop for DCTextColourChangerIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDCTextColourChanger_delete(self.0) }
-        }
-    }
-}
-
-// wxDPIChangedEvent
-wx_class! { DPIChangedEvent =
-    DPIChangedEventIsOwned<true>(wxDPIChangedEvent) impl
-        DPIChangedEventMethods,
-        EventMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> DPIChangedEventIsOwned<OWNED> {
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<DPIChangedEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
-    fn from(o: DPIChangedEventIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<DPIChangedEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DPIChangedEventIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for DPIChangedEventIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDPIChangedEvent_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Drop for DPIChangedEventIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObject_delete(self.0) }
         }
     }
 }
@@ -462,44 +375,6 @@ impl<const OWNED: bool> DynamicCast for DataViewBitmapRendererIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> Drop for DataViewBitmapRendererIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObject_delete(self.0) }
-        }
-    }
-}
-
-// wxDataViewCheckIconTextRenderer
-wx_class! { DataViewCheckIconTextRenderer =
-    DataViewCheckIconTextRendererIsOwned<true>(wxDataViewCheckIconTextRenderer) impl
-        DataViewCheckIconTextRendererMethods,
-        DataViewRendererMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> DataViewCheckIconTextRendererIsOwned<OWNED> {
-    // NOT_SUPPORTED: fn wxDataViewCheckIconTextRenderer()
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<DataViewCheckIconTextRendererIsOwned<OWNED>>
-    for DataViewRendererIsOwned<OWNED>
-{
-    fn from(o: DataViewCheckIconTextRendererIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<DataViewCheckIconTextRendererIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DataViewCheckIconTextRendererIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for DataViewCheckIconTextRendererIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDataViewCheckIconTextRenderer_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Drop for DataViewCheckIconTextRendererIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -1554,24 +1429,6 @@ impl<const OWNED: bool> Drop for DataViewTreeStoreIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDataViewTreeStore_delete(self.0) }
-        }
-    }
-}
-
-// wxDataViewValueAdjuster
-wx_class! { DataViewValueAdjuster =
-    DataViewValueAdjusterIsOwned<true>(wxDataViewValueAdjuster) impl
-        DataViewValueAdjusterMethods
-}
-impl<const OWNED: bool> DataViewValueAdjusterIsOwned<OWNED> {
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for DataViewValueAdjusterIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxDataViewValueAdjuster_delete(self.0) }
         }
     }
 }

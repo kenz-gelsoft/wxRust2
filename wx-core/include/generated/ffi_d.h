@@ -27,6 +27,7 @@ wxCoord wxDC_LogicalToDeviceX(const wxDC * self, wxCoord x);
 wxCoord wxDC_LogicalToDeviceXRel(const wxDC * self, wxCoord x);
 wxCoord wxDC_LogicalToDeviceY(const wxDC * self, wxCoord y);
 wxCoord wxDC_LogicalToDeviceYRel(const wxDC * self, wxCoord y);
+#if wxCHECK_VERSION(3, 1, 0)
 wxPoint *wxDC_DeviceToLogical(const wxDC * self, wxCoord x, wxCoord y);
 wxPoint *wxDC_DeviceToLogical1(const wxDC * self, const wxPoint * pt);
 wxSize *wxDC_DeviceToLogicalRel(const wxDC * self, int x, int y);
@@ -35,6 +36,7 @@ wxPoint *wxDC_LogicalToDevice(const wxDC * self, wxCoord x, wxCoord y);
 wxPoint *wxDC_LogicalToDevice1(const wxDC * self, const wxPoint * pt);
 wxSize *wxDC_LogicalToDeviceRel(const wxDC * self, int x, int y);
 wxSize *wxDC_LogicalToDeviceRel1(const wxDC * self, const wxSize * dim);
+#endif
 void wxDC_Clear(wxDC * self);
 void wxDC_DrawArc(wxDC * self, wxCoord x_start, wxCoord y_start, wxCoord x_end, wxCoord y_end, wxCoord xc, wxCoord yc);
 void wxDC_DrawArc1(wxDC * self, const wxPoint * pt_start, const wxPoint * pt_end, const wxPoint * centre);
@@ -76,7 +78,9 @@ void wxDC_GradientFillLinear(wxDC * self, const wxRect * rect, const wxColour * 
 void wxDC_CrossHair(wxDC * self, wxCoord x, wxCoord y);
 void wxDC_CrossHair1(wxDC * self, const wxPoint * pt);
 void wxDC_DestroyClippingRegion(wxDC * self);
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxDC_GetClippingBox(const wxDC * self, wxCoord * x, wxCoord * y, wxCoord * width, wxCoord * height);
+#endif
 bool wxDC_GetClippingBox1(const wxDC * self, wxRect * rect);
 void wxDC_SetClippingRegion(wxDC * self, wxCoord x, wxCoord y, wxCoord width, wxCoord height);
 void wxDC_SetClippingRegion1(wxDC * self, const wxPoint * pt, const wxSize * sz);
@@ -180,27 +184,11 @@ void wxDCOverlay_Clear(wxDCOverlay * self);
 void wxDCPenChanger_delete(wxDCPenChanger *self);
 wxDCPenChanger *wxDCPenChanger_new(wxDC * dc, const wxPen * pen);
 
-// CLASS: wxDCTextBgColourChanger
-void wxDCTextBgColourChanger_delete(wxDCTextBgColourChanger *self);
-wxDCTextBgColourChanger *wxDCTextBgColourChanger_new(wxDC * dc);
-wxDCTextBgColourChanger *wxDCTextBgColourChanger_new1(wxDC * dc, const wxColour * col);
-void wxDCTextBgColourChanger_Set(wxDCTextBgColourChanger * self, const wxColour * col);
-
-// CLASS: wxDCTextBgModeChanger
-void wxDCTextBgModeChanger_delete(wxDCTextBgModeChanger *self);
-
 // CLASS: wxDCTextColourChanger
 void wxDCTextColourChanger_delete(wxDCTextColourChanger *self);
 wxDCTextColourChanger *wxDCTextColourChanger_new(wxDC * dc);
 wxDCTextColourChanger *wxDCTextColourChanger_new1(wxDC * dc, const wxColour * col);
 void wxDCTextColourChanger_Set(wxDCTextColourChanger * self, const wxColour * col);
-
-// CLASS: wxDPIChangedEvent
-wxClassInfo *wxDPIChangedEvent_CLASSINFO();
-wxSize *wxDPIChangedEvent_GetOldDPI(const wxDPIChangedEvent * self);
-wxSize *wxDPIChangedEvent_GetNewDPI(const wxDPIChangedEvent * self);
-int wxDPIChangedEvent_ScaleX(const wxDPIChangedEvent * self, int x);
-int wxDPIChangedEvent_ScaleY(const wxDPIChangedEvent * self, int y);
 
 // CLASS: wxDataFormat
 void wxDataFormat_delete(wxDataFormat *self);
@@ -232,11 +220,6 @@ void wxDataObjectSimple_SetFormat(wxDataObjectSimple * self, const wxDataFormat 
 wxClassInfo *wxDataViewBitmapRenderer_CLASSINFO();
 wxString *wxDataViewBitmapRenderer_GetDefaultType();
 
-// CLASS: wxDataViewCheckIconTextRenderer
-wxClassInfo *wxDataViewCheckIconTextRenderer_CLASSINFO();
-wxString *wxDataViewCheckIconTextRenderer_GetDefaultType();
-void wxDataViewCheckIconTextRenderer_Allow3rdStateForUser(wxDataViewCheckIconTextRenderer * self, bool allow);
-
 // CLASS: wxDataViewChoiceByIndexRenderer
 wxClassInfo *wxDataViewChoiceByIndexRenderer_CLASSINFO();
 
@@ -257,7 +240,9 @@ wxDataViewRenderer * wxDataViewColumn_GetRenderer(const wxDataViewColumn * self)
 wxClassInfo *wxDataViewCtrl_CLASSINFO();
 wxDataViewCtrl *wxDataViewCtrl_new();
 wxDataViewCtrl *wxDataViewCtrl_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxDataViewCtrl_AllowMultiColumnSort(wxDataViewCtrl * self, bool allow);
+#endif
 bool wxDataViewCtrl_Create(wxDataViewCtrl * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 bool wxDataViewCtrl_AppendColumn(wxDataViewCtrl * self, wxDataViewColumn * col);
 bool wxDataViewCtrl_PrependColumn(wxDataViewCtrl * self, wxDataViewColumn * col);
@@ -268,12 +253,16 @@ void wxDataViewCtrl_Collapse(wxDataViewCtrl * self, const wxDataViewItem * item)
 bool wxDataViewCtrl_DeleteColumn(wxDataViewCtrl * self, wxDataViewColumn * column);
 void wxDataViewCtrl_EditItem(wxDataViewCtrl * self, const wxDataViewItem * item, const wxDataViewColumn * column);
 bool wxDataViewCtrl_EnableDragSource(wxDataViewCtrl * self, const wxDataFormat * format);
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxDataViewCtrl_EnableDropTargets(wxDataViewCtrl * self, const wxVector< wxDataFormat > * formats);
+#endif
 bool wxDataViewCtrl_EnableDropTarget(wxDataViewCtrl * self, const wxDataFormat * format);
 void wxDataViewCtrl_EnsureVisible(wxDataViewCtrl * self, const wxDataViewItem * item, const wxDataViewColumn * column);
 void wxDataViewCtrl_Expand(wxDataViewCtrl * self, const wxDataViewItem * item);
 void wxDataViewCtrl_ExpandAncestors(wxDataViewCtrl * self, const wxDataViewItem * item);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxDataViewCtrl_ExpandChildren(wxDataViewCtrl * self, const wxDataViewItem * item);
+#endif
 wxDataViewColumn * wxDataViewCtrl_GetColumn(const wxDataViewCtrl * self, unsigned int pos);
 unsigned int wxDataViewCtrl_GetColumnCount(const wxDataViewCtrl * self);
 int wxDataViewCtrl_GetColumnPosition(const wxDataViewCtrl * self, const wxDataViewColumn * column);
@@ -291,22 +280,30 @@ wxDataViewColumn * wxDataViewCtrl_GetSortingColumn(const wxDataViewCtrl * self);
 bool wxDataViewCtrl_HasSelection(const wxDataViewCtrl * self);
 void wxDataViewCtrl_HitTest(const wxDataViewCtrl * self, const wxPoint * point, wxDataViewItem * item, wxDataViewColumn *& col);
 bool wxDataViewCtrl_IsExpanded(const wxDataViewCtrl * self, const wxDataViewItem * item);
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxDataViewCtrl_IsMultiColumnSortAllowed(const wxDataViewCtrl * self);
+#endif
 bool wxDataViewCtrl_IsSelected(const wxDataViewCtrl * self, const wxDataViewItem * item);
 void wxDataViewCtrl_Select(wxDataViewCtrl * self, const wxDataViewItem * item);
 void wxDataViewCtrl_SelectAll(wxDataViewCtrl * self);
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxDataViewCtrl_SetAlternateRowColour(wxDataViewCtrl * self, const wxColour * colour);
+#endif
 void wxDataViewCtrl_SetExpanderColumn(wxDataViewCtrl * self, wxDataViewColumn * col);
 void wxDataViewCtrl_SetCurrentItem(wxDataViewCtrl * self, const wxDataViewItem * item);
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxDataViewCtrl_SetHeaderAttr(wxDataViewCtrl * self, const wxItemAttr * attr);
+#endif
 void wxDataViewCtrl_SetIndent(wxDataViewCtrl * self, int indent);
 void wxDataViewCtrl_SetSelections(wxDataViewCtrl * self, const wxDataViewItemArray * sel);
 void wxDataViewCtrl_Unselect(wxDataViewCtrl * self, const wxDataViewItem * item);
 void wxDataViewCtrl_UnselectAll(wxDataViewCtrl * self);
 bool wxDataViewCtrl_SetRowHeight(wxDataViewCtrl * self, int row_height);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxDataViewCtrl_ToggleSortByColumn(wxDataViewCtrl * self, int column);
 int wxDataViewCtrl_GetCountPerPage(const wxDataViewCtrl * self);
 wxDataViewItem *wxDataViewCtrl_GetTopItem(const wxDataViewCtrl * self);
+#endif
 
 // CLASS: wxDataViewCustomRenderer
 wxClassInfo *wxDataViewCustomRenderer_CLASSINFO();
@@ -563,9 +560,6 @@ wxDataViewItem *wxDataViewTreeStore_PrependItem(wxDataViewTreeStore * self, cons
 void wxDataViewTreeStore_SetItemData(wxDataViewTreeStore * self, const wxDataViewItem * item, wxClientData * data);
 void wxDataViewTreeStore_SetItemExpandedIcon(wxDataViewTreeStore * self, const wxDataViewItem * item, const wxBitmapBundle * icon);
 void wxDataViewTreeStore_SetItemIcon(wxDataViewTreeStore * self, const wxDataViewItem * item, const wxBitmapBundle * icon);
-
-// CLASS: wxDataViewValueAdjuster
-void wxDataViewValueAdjuster_delete(wxDataViewValueAdjuster *self);
 
 // CLASS: wxDataViewVirtualListModel
 wxDataViewItem *wxDataViewVirtualListModel_GetItem(const wxDataViewVirtualListModel * self, unsigned int row);

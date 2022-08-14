@@ -399,16 +399,16 @@ wxml_files = [
     'wxml/classwx_d_c_font_changer.xml',
     'wxml/classwx_d_c_overlay.xml',
     'wxml/classwx_d_c_pen_changer.xml',
-    'wxml/classwx_d_c_text_bg_colour_changer.xml',
-    'wxml/classwx_d_c_text_bg_mode_changer.xml',
+    # 'wxml/classwx_d_c_text_bg_colour_changer.xml', # requires 3.1
+    # 'wxml/classwx_d_c_text_bg_mode_changer.xml',   # requires 3.1
     'wxml/classwx_d_c_text_colour_changer.xml',
-    'wxml/classwx_d_p_i_changed_event.xml',
+    # 'wxml/classwx_d_p_i_changed_event.xml',        # requires 3.1
     'wxml/classwx_data_format.xml',
     'wxml/classwx_data_object.xml',
     'wxml/classwx_data_object_composite.xml',
     'wxml/classwx_data_object_simple.xml',
     'wxml/classwx_data_view_bitmap_renderer.xml',
-    'wxml/classwx_data_view_check_icon_text_renderer.xml',
+    # 'wxml/classwx_data_view_check_icon_text_renderer.xml', # requires 3.1
     'wxml/classwx_data_view_choice_by_index_renderer.xml',
     'wxml/classwx_data_view_choice_renderer.xml',
     'wxml/classwx_data_view_column.xml',
@@ -433,7 +433,7 @@ wxml_files = [
     'wxml/classwx_data_view_toggle_renderer.xml',
     'wxml/classwx_data_view_tree_ctrl.xml',
     'wxml/classwx_data_view_tree_store.xml',
-    'wxml/classwx_data_view_value_adjuster.xml',
+    # 'wxml/classwx_data_view_value_adjuster.xml', # requires 3.1
     'wxml/classwx_data_view_virtual_list_model.xml',
     'wxml/classwx_date_event.xml',
     'wxml/classwx_date_picker_ctrl.xml',
@@ -796,6 +796,18 @@ blocklist = [
     # uses C++ generics
     'GetSortingColumns',
 ]
+wx31 = [
+    'AllowMultiColumnSort',
+    'EnableDropTargets',
+    'ExpandChildren',
+    'GetCountPerPage',
+    'GetSortingColumns',
+    'GetTopItem',
+    'IsMultiColumnSortAllowed',
+    'SetAlternateRowColour',
+    'SetHeaderAttr',
+    'ToggleSortByColumn',
+]
 [types.wxDataViewCustomRenderer]
 blocklist = [
     # binding type by value is not supported
@@ -898,6 +910,18 @@ wx31 = [
 blocklist = [
     # invalid return type
     'GetPen',
+]
+wx31 = [
+    'DeviceToLogical',
+    'DeviceToLogical1',
+    'DeviceToLogicalRel',
+    'DeviceToLogicalRel1',
+    'LogicalToDevice',
+    'LogicalToDevice1',
+    'LogicalToDeviceRel',
+    'LogicalToDeviceRel1',
+    # return type changed in 3.1.2
+    'GetClippingBox',
 ]
 wx317 = [
     'FromDIP',

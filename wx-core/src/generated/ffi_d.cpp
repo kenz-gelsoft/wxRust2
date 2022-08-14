@@ -30,6 +30,7 @@ wxCoord wxDC_LogicalToDeviceY(const wxDC * self, wxCoord y) {
 wxCoord wxDC_LogicalToDeviceYRel(const wxDC * self, wxCoord y) {
     return self->LogicalToDeviceYRel(y);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxPoint *wxDC_DeviceToLogical(const wxDC * self, wxCoord x, wxCoord y) {
     return new wxPoint(self->DeviceToLogical(x, y));
 }
@@ -54,6 +55,7 @@ wxSize *wxDC_LogicalToDeviceRel(const wxDC * self, int x, int y) {
 wxSize *wxDC_LogicalToDeviceRel1(const wxDC * self, const wxSize * dim) {
     return new wxSize(self->LogicalToDeviceRel(*dim));
 }
+#endif
 void wxDC_Clear(wxDC * self) {
     return self->Clear();
 }
@@ -177,9 +179,11 @@ void wxDC_CrossHair1(wxDC * self, const wxPoint * pt) {
 void wxDC_DestroyClippingRegion(wxDC * self) {
     return self->DestroyClippingRegion();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxDC_GetClippingBox(const wxDC * self, wxCoord * x, wxCoord * y, wxCoord * width, wxCoord * height) {
     return self->GetClippingBox(x, y, width, height);
 }
+#endif
 bool wxDC_GetClippingBox1(const wxDC * self, wxRect * rect) {
     return self->GetClippingBox(*rect);
 }
@@ -463,25 +467,6 @@ wxDCPenChanger *wxDCPenChanger_new(wxDC * dc, const wxPen * pen) {
     return new wxDCPenChanger(*dc, *pen);
 }
 
-// CLASS: wxDCTextBgColourChanger
-void wxDCTextBgColourChanger_delete(wxDCTextBgColourChanger *self) {
-    delete self;
-}
-wxDCTextBgColourChanger *wxDCTextBgColourChanger_new(wxDC * dc) {
-    return new wxDCTextBgColourChanger(*dc);
-}
-wxDCTextBgColourChanger *wxDCTextBgColourChanger_new1(wxDC * dc, const wxColour * col) {
-    return new wxDCTextBgColourChanger(*dc, *col);
-}
-void wxDCTextBgColourChanger_Set(wxDCTextBgColourChanger * self, const wxColour * col) {
-    return self->Set(*col);
-}
-
-// CLASS: wxDCTextBgModeChanger
-void wxDCTextBgModeChanger_delete(wxDCTextBgModeChanger *self) {
-    delete self;
-}
-
 // CLASS: wxDCTextColourChanger
 void wxDCTextColourChanger_delete(wxDCTextColourChanger *self) {
     delete self;
@@ -494,23 +479,6 @@ wxDCTextColourChanger *wxDCTextColourChanger_new1(wxDC * dc, const wxColour * co
 }
 void wxDCTextColourChanger_Set(wxDCTextColourChanger * self, const wxColour * col) {
     return self->Set(*col);
-}
-
-// CLASS: wxDPIChangedEvent
-wxClassInfo *wxDPIChangedEvent_CLASSINFO() {
-    return wxCLASSINFO(wxDPIChangedEvent);
-}
-wxSize *wxDPIChangedEvent_GetOldDPI(const wxDPIChangedEvent * self) {
-    return new wxSize(self->GetOldDPI());
-}
-wxSize *wxDPIChangedEvent_GetNewDPI(const wxDPIChangedEvent * self) {
-    return new wxSize(self->GetNewDPI());
-}
-int wxDPIChangedEvent_ScaleX(const wxDPIChangedEvent * self, int x) {
-    return self->ScaleX(x);
-}
-int wxDPIChangedEvent_ScaleY(const wxDPIChangedEvent * self, int y) {
-    return self->ScaleY(y);
 }
 
 // CLASS: wxDataFormat
@@ -583,17 +551,6 @@ wxString *wxDataViewBitmapRenderer_GetDefaultType() {
     return new wxString(wxDataViewBitmapRenderer::GetDefaultType());
 }
 
-// CLASS: wxDataViewCheckIconTextRenderer
-wxClassInfo *wxDataViewCheckIconTextRenderer_CLASSINFO() {
-    return wxCLASSINFO(wxDataViewCheckIconTextRenderer);
-}
-wxString *wxDataViewCheckIconTextRenderer_GetDefaultType() {
-    return new wxString(wxDataViewCheckIconTextRenderer::GetDefaultType());
-}
-void wxDataViewCheckIconTextRenderer_Allow3rdStateForUser(wxDataViewCheckIconTextRenderer * self, bool allow) {
-    return self->Allow3rdStateForUser(allow);
-}
-
 // CLASS: wxDataViewChoiceByIndexRenderer
 wxClassInfo *wxDataViewChoiceByIndexRenderer_CLASSINFO() {
     return wxCLASSINFO(wxDataViewChoiceByIndexRenderer);
@@ -640,9 +597,11 @@ wxDataViewCtrl *wxDataViewCtrl_new() {
 wxDataViewCtrl *wxDataViewCtrl_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
     return new wxDataViewCtrl(parent, id, *pos, *size, style, *validator, *name);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxDataViewCtrl_AllowMultiColumnSort(wxDataViewCtrl * self, bool allow) {
     return self->AllowMultiColumnSort(allow);
 }
+#endif
 bool wxDataViewCtrl_Create(wxDataViewCtrl * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
     return self->Create(parent, id, *pos, *size, style, *validator, *name);
 }
@@ -673,9 +632,11 @@ void wxDataViewCtrl_EditItem(wxDataViewCtrl * self, const wxDataViewItem * item,
 bool wxDataViewCtrl_EnableDragSource(wxDataViewCtrl * self, const wxDataFormat * format) {
     return self->EnableDragSource(*format);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxDataViewCtrl_EnableDropTargets(wxDataViewCtrl * self, const wxVector< wxDataFormat > * formats) {
     return self->EnableDropTargets(*formats);
 }
+#endif
 bool wxDataViewCtrl_EnableDropTarget(wxDataViewCtrl * self, const wxDataFormat * format) {
     return self->EnableDropTarget(*format);
 }
@@ -688,9 +649,11 @@ void wxDataViewCtrl_Expand(wxDataViewCtrl * self, const wxDataViewItem * item) {
 void wxDataViewCtrl_ExpandAncestors(wxDataViewCtrl * self, const wxDataViewItem * item) {
     return self->ExpandAncestors(*item);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxDataViewCtrl_ExpandChildren(wxDataViewCtrl * self, const wxDataViewItem * item) {
     return self->ExpandChildren(*item);
 }
+#endif
 wxDataViewColumn * wxDataViewCtrl_GetColumn(const wxDataViewCtrl * self, unsigned int pos) {
     return self->GetColumn(pos);
 }
@@ -742,9 +705,11 @@ void wxDataViewCtrl_HitTest(const wxDataViewCtrl * self, const wxPoint * point, 
 bool wxDataViewCtrl_IsExpanded(const wxDataViewCtrl * self, const wxDataViewItem * item) {
     return self->IsExpanded(*item);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxDataViewCtrl_IsMultiColumnSortAllowed(const wxDataViewCtrl * self) {
     return self->IsMultiColumnSortAllowed();
 }
+#endif
 bool wxDataViewCtrl_IsSelected(const wxDataViewCtrl * self, const wxDataViewItem * item) {
     return self->IsSelected(*item);
 }
@@ -754,18 +719,22 @@ void wxDataViewCtrl_Select(wxDataViewCtrl * self, const wxDataViewItem * item) {
 void wxDataViewCtrl_SelectAll(wxDataViewCtrl * self) {
     return self->SelectAll();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxDataViewCtrl_SetAlternateRowColour(wxDataViewCtrl * self, const wxColour * colour) {
     return self->SetAlternateRowColour(*colour);
 }
+#endif
 void wxDataViewCtrl_SetExpanderColumn(wxDataViewCtrl * self, wxDataViewColumn * col) {
     return self->SetExpanderColumn(col);
 }
 void wxDataViewCtrl_SetCurrentItem(wxDataViewCtrl * self, const wxDataViewItem * item) {
     return self->SetCurrentItem(*item);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxDataViewCtrl_SetHeaderAttr(wxDataViewCtrl * self, const wxItemAttr * attr) {
     return self->SetHeaderAttr(*attr);
 }
+#endif
 void wxDataViewCtrl_SetIndent(wxDataViewCtrl * self, int indent) {
     return self->SetIndent(indent);
 }
@@ -781,6 +750,7 @@ void wxDataViewCtrl_UnselectAll(wxDataViewCtrl * self) {
 bool wxDataViewCtrl_SetRowHeight(wxDataViewCtrl * self, int row_height) {
     return self->SetRowHeight(row_height);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxDataViewCtrl_ToggleSortByColumn(wxDataViewCtrl * self, int column) {
     return self->ToggleSortByColumn(column);
 }
@@ -790,6 +760,7 @@ int wxDataViewCtrl_GetCountPerPage(const wxDataViewCtrl * self) {
 wxDataViewItem *wxDataViewCtrl_GetTopItem(const wxDataViewCtrl * self) {
     return new wxDataViewItem(self->GetTopItem());
 }
+#endif
 
 // CLASS: wxDataViewCustomRenderer
 wxClassInfo *wxDataViewCustomRenderer_CLASSINFO() {
@@ -1473,11 +1444,6 @@ void wxDataViewTreeStore_SetItemExpandedIcon(wxDataViewTreeStore * self, const w
 }
 void wxDataViewTreeStore_SetItemIcon(wxDataViewTreeStore * self, const wxDataViewItem * item, const wxBitmapBundle * icon) {
     return self->SetItemIcon(*item, *icon);
-}
-
-// CLASS: wxDataViewValueAdjuster
-void wxDataViewValueAdjuster_delete(wxDataViewValueAdjuster *self) {
-    delete self;
 }
 
 // CLASS: wxDataViewVirtualListModel
