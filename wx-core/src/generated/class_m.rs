@@ -2,6 +2,197 @@
 
 use super::*;
 
+// wxMDIChildFrame
+wx_class! { MDIChildFrame =
+    MDIChildFrameIsOwned<true>(wxMDIChildFrame) impl
+        MDIChildFrameMethods,
+        FrameMethods,
+        // TopLevelWindowMethods,
+        NonOwnedWindowMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> MDIChildFrameIsOwned<OWNED> {
+    pub fn new_2step() -> MDIChildFrameIsOwned<OWNED> {
+        unsafe { MDIChildFrameIsOwned(ffi::wxMDIChildFrame_new()) }
+    }
+    pub fn new<M: MDIParentFrameMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&M>,
+        id: c_int,
+        title: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> MDIChildFrameIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            MDIChildFrameIsOwned(ffi::wxMDIChildFrame_new1(
+                parent, id, title, pos, size, style, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<MDIChildFrameIsOwned<OWNED>> for FrameIsOwned<OWNED> {
+    fn from(o: MDIChildFrameIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<MDIChildFrameIsOwned<OWNED>> for TopLevelWindowIsOwned<OWNED> {
+    fn from(o: MDIChildFrameIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<MDIChildFrameIsOwned<OWNED>> for NonOwnedWindowIsOwned<OWNED> {
+    fn from(o: MDIChildFrameIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<MDIChildFrameIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: MDIChildFrameIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<MDIChildFrameIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: MDIChildFrameIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<MDIChildFrameIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: MDIChildFrameIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for MDIChildFrameIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxMDIChildFrame_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> TopLevelWindowMethods for MDIChildFrameIsOwned<OWNED> {
+    fn restore(&self) {
+        unsafe { ffi::wxMDIChildFrame_Restore(self.as_ptr()) }
+    }
+}
+
+// wxMDIParentFrame
+wx_class! { MDIParentFrame =
+    MDIParentFrameIsOwned<true>(wxMDIParentFrame) impl
+        MDIParentFrameMethods,
+        FrameMethods,
+        // TopLevelWindowMethods,
+        NonOwnedWindowMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> MDIParentFrameIsOwned<OWNED> {
+    pub fn new_2step() -> MDIParentFrameIsOwned<OWNED> {
+        unsafe { MDIParentFrameIsOwned(ffi::wxMDIParentFrame_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        title: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> MDIParentFrameIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            MDIParentFrameIsOwned(ffi::wxMDIParentFrame_new1(
+                parent, id, title, pos, size, style, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<MDIParentFrameIsOwned<OWNED>> for FrameIsOwned<OWNED> {
+    fn from(o: MDIParentFrameIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<MDIParentFrameIsOwned<OWNED>> for TopLevelWindowIsOwned<OWNED> {
+    fn from(o: MDIParentFrameIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<MDIParentFrameIsOwned<OWNED>> for NonOwnedWindowIsOwned<OWNED> {
+    fn from(o: MDIParentFrameIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<MDIParentFrameIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: MDIParentFrameIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<MDIParentFrameIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: MDIParentFrameIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<MDIParentFrameIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: MDIParentFrameIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for MDIParentFrameIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxMDIParentFrame_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> TopLevelWindowMethods for MDIParentFrameIsOwned<OWNED> {
+    fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        title: &str,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxMDIParentFrame_Create(self.as_ptr(), parent, id, title, pos, size, style, name)
+        }
+    }
+}
+
 // wxMenu
 wx_class! { Menu =
     MenuIsOwned<true>(wxMenu) impl

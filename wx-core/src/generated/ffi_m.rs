@@ -2,6 +2,68 @@ use super::*;
 
 extern "C" {
 
+    // wxMDIChildFrame
+    pub fn wxMDIChildFrame_CLASSINFO() -> *mut c_void;
+    pub fn wxMDIChildFrame_new() -> *mut c_void;
+    pub fn wxMDIChildFrame_new1(
+        parent: *mut c_void,
+        id: c_int,
+        title: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> *mut c_void;
+    // DTOR: pub fn wxMDIChildFrame_~wxMDIChildFrame(self_: *mut c_void);
+    pub fn wxMDIChildFrame_Activate(self_: *mut c_void);
+    pub fn wxMDIChildFrame_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        title: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxMDIChildFrame_GetMDIParent(self_: *const c_void) -> *mut c_void;
+    pub fn wxMDIChildFrame_Restore(self_: *mut c_void);
+
+    // wxMDIParentFrame
+    pub fn wxMDIParentFrame_CLASSINFO() -> *mut c_void;
+    pub fn wxMDIParentFrame_new() -> *mut c_void;
+    pub fn wxMDIParentFrame_new1(
+        parent: *mut c_void,
+        id: c_int,
+        title: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> *mut c_void;
+    // DTOR: pub fn wxMDIParentFrame_~wxMDIParentFrame(self_: *mut c_void);
+    pub fn wxMDIParentFrame_ActivateNext(self_: *mut c_void);
+    pub fn wxMDIParentFrame_ActivatePrevious(self_: *mut c_void);
+    pub fn wxMDIParentFrame_ArrangeIcons(self_: *mut c_void);
+    pub fn wxMDIParentFrame_Cascade(self_: *mut c_void);
+    pub fn wxMDIParentFrame_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        title: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxMDIParentFrame_GetActiveChild(self_: *const c_void) -> *mut c_void;
+    pub fn wxMDIParentFrame_GetClientWindow(self_: *const c_void) -> *mut c_void;
+    pub fn wxMDIParentFrame_GetWindowMenu(self_: *const c_void) -> *mut c_void;
+    pub fn wxMDIParentFrame_OnCreateClient(self_: *mut c_void) -> *mut c_void;
+    pub fn wxMDIParentFrame_SetWindowMenu(self_: *mut c_void, menu: *mut c_void);
+    // NOT_SUPPORTED: pub fn wxMDIParentFrame_Tile(self_: *mut c_void, orient: wxOrientation);
+    pub fn wxMDIParentFrame_IsTDI() -> bool;
+
     // wxMenu
     pub fn wxMenu_CLASSINFO() -> *mut c_void;
     pub fn wxMenu_new() -> *mut c_void;

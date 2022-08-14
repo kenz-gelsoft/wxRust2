@@ -280,3 +280,394 @@ pub trait RectMethods: WxRustMethods {
     // BLOCKED: fn operator=()
     // BLOCKED: fn operator==()
 }
+
+// wxRendererNative
+pub trait RendererNativeMethods: WxRustMethods {
+    // DTOR: fn ~wxRendererNative()
+    fn draw_check_box<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawCheckBox(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn draw_combo_box_drop_button<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawComboBoxDropButton(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn draw_drop_arrow<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawDropArrow(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn draw_focus_rect<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawFocusRect(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn draw_gauge<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        value: c_int,
+        max: c_int,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawGauge(self.as_ptr(), win, dc, rect, value, max, flags)
+        }
+    }
+    // NOT_SUPPORTED: fn DrawHeaderButton()
+    // NOT_SUPPORTED: fn DrawHeaderButtonContents()
+    fn draw_item_selection_rect<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawItemSelectionRect(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn draw_item_text<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        text: &str,
+        rect: &R,
+        align: c_int,
+        flags: c_int,
+        ellipsize_mode: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawItemText(
+                self.as_ptr(),
+                win,
+                dc,
+                text,
+                rect,
+                align,
+                flags,
+                ellipsize_mode,
+            )
+        }
+    }
+    fn draw_push_button<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawPushButton(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn draw_collapse_button<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawCollapseButton(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn get_collapse_button_size<W: WindowMethods, D: DCMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+    ) -> Size {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            Size::from_ptr(ffi::wxRendererNative_GetCollapseButtonSize(
+                self.as_ptr(),
+                win,
+                dc,
+            ))
+        }
+    }
+    fn draw_splitter_border<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawSplitterBorder(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    // NOT_SUPPORTED: fn DrawSplitterSash()
+    fn draw_tree_item_button<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawTreeItemButton(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn draw_choice<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawChoice(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn draw_combo_box<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawComboBox(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn draw_text_ctrl<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawTextCtrl(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn draw_radio_bitmap<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawRadioBitmap(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    // NOT_SUPPORTED: fn DrawTitleBarBitmap()
+    fn draw_check_mark<W: WindowMethods, D: DCMethods, R: RectMethods>(
+        &self,
+        win: Option<&W>,
+        dc: &D,
+        rect: &R,
+        flags: c_int,
+    ) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let dc = dc.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxRendererNative_DrawCheckMark(self.as_ptr(), win, dc, rect, flags)
+        }
+    }
+    fn get_check_box_size<W: WindowMethods>(&self, win: Option<&W>, flags: c_int) -> Size {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            Size::from_ptr(ffi::wxRendererNative_GetCheckBoxSize(
+                self.as_ptr(),
+                win,
+                flags,
+            ))
+        }
+    }
+    fn get_check_mark_size<W: WindowMethods>(&self, win: Option<&W>) -> Size {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            Size::from_ptr(ffi::wxRendererNative_GetCheckMarkSize(self.as_ptr(), win))
+        }
+    }
+    fn get_expander_size<W: WindowMethods>(&self, win: Option<&W>) -> Size {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            Size::from_ptr(ffi::wxRendererNative_GetExpanderSize(self.as_ptr(), win))
+        }
+    }
+    fn get_header_button_height<W: WindowMethods>(&self, win: Option<&W>) -> c_int {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxRendererNative_GetHeaderButtonHeight(self.as_ptr(), win)
+        }
+    }
+    fn get_header_button_margin<W: WindowMethods>(&self, win: Option<&W>) -> c_int {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxRendererNative_GetHeaderButtonMargin(self.as_ptr(), win)
+        }
+    }
+    // NOT_SUPPORTED: fn GetSplitterParams()
+    // NOT_SUPPORTED: fn GetVersion()
+    fn get() -> RendererNativeIsOwned<false> {
+        unsafe { RendererNativeIsOwned::from_ptr(ffi::wxRendererNative_Get()) }
+    }
+    fn get_default() -> RendererNativeIsOwned<false> {
+        unsafe { RendererNativeIsOwned::from_ptr(ffi::wxRendererNative_GetDefault()) }
+    }
+    fn get_generic() -> RendererNativeIsOwned<false> {
+        unsafe { RendererNativeIsOwned::from_ptr(ffi::wxRendererNative_GetGeneric()) }
+    }
+    fn load(name: &str) -> Option<RendererNativeIsOwned<false>> {
+        unsafe {
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            RendererNative::option_from(ffi::wxRendererNative_Load(name))
+        }
+    }
+    fn set<R: RendererNativeMethods>(renderer: Option<&R>) -> Option<RendererNativeIsOwned<false>> {
+        unsafe {
+            let renderer = match renderer {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            RendererNative::option_from(ffi::wxRendererNative_Set(renderer))
+        }
+    }
+}

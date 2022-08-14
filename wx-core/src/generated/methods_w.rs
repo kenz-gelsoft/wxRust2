@@ -1137,11 +1137,17 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn is_being_deleted(&self) -> bool {
         unsafe { ffi::wxWindow_IsBeingDeleted(self.as_ptr()) }
     }
-    fn get_drop_target(&self) -> *mut c_void {
-        unsafe { ffi::wxWindow_GetDropTarget(self.as_ptr()) }
+    fn get_drop_target(&self) -> Option<DropTargetIsOwned<false>> {
+        unsafe { DropTarget::option_from(ffi::wxWindow_GetDropTarget(self.as_ptr())) }
     }
-    fn set_drop_target(&self, target: *mut c_void) {
-        unsafe { ffi::wxWindow_SetDropTarget(self.as_ptr(), target) }
+    fn set_drop_target<D: DropTargetMethods>(&self, target: Option<&D>) {
+        unsafe {
+            let target = match target {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWindow_SetDropTarget(self.as_ptr(), target)
+        }
     }
     fn drag_accept_files(&self, accept: bool) {
         unsafe { ffi::wxWindow_DragAcceptFiles(self.as_ptr(), accept) }

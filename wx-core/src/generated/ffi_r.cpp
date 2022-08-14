@@ -198,5 +198,91 @@ wxRect *wxRect_Union(const wxRect * self, const wxRect * rect) {
     return new wxRect(self->Union(*rect));
 }
 
+// CLASS: wxRendererNative
+void wxRendererNative_delete(wxRendererNative *self) {
+    delete self;
+}
+void wxRendererNative_DrawCheckBox(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags) {
+    return self->DrawCheckBox(win, *dc, *rect, flags);
+}
+void wxRendererNative_DrawComboBoxDropButton(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags) {
+    return self->DrawComboBoxDropButton(win, *dc, *rect, flags);
+}
+void wxRendererNative_DrawDropArrow(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags) {
+    return self->DrawDropArrow(win, *dc, *rect, flags);
+}
+void wxRendererNative_DrawFocusRect(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags) {
+    return self->DrawFocusRect(win, *dc, *rect, flags);
+}
+void wxRendererNative_DrawGauge(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int value, int max, int flags) {
+    return self->DrawGauge(win, *dc, *rect, value, max, flags);
+}
+void wxRendererNative_DrawItemSelectionRect(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags) {
+    return self->DrawItemSelectionRect(win, *dc, *rect, flags);
+}
+void wxRendererNative_DrawItemText(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxString * text, const wxRect * rect, int align, int flags, wxEllipsizeMode ellipsize_mode) {
+    return self->DrawItemText(win, *dc, *text, *rect, align, flags, ellipsize_mode);
+}
+void wxRendererNative_DrawPushButton(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags) {
+    return self->DrawPushButton(win, *dc, *rect, flags);
+}
+void wxRendererNative_DrawCollapseButton(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags) {
+    return self->DrawCollapseButton(win, *dc, *rect, flags);
+}
+wxSize *wxRendererNative_GetCollapseButtonSize(wxRendererNative * self, wxWindow * win, wxDC * dc) {
+    return new wxSize(self->GetCollapseButtonSize(win, *dc));
+}
+void wxRendererNative_DrawSplitterBorder(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags) {
+    return self->DrawSplitterBorder(win, *dc, *rect, flags);
+}
+void wxRendererNative_DrawTreeItemButton(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags) {
+    return self->DrawTreeItemButton(win, *dc, *rect, flags);
+}
+void wxRendererNative_DrawChoice(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags) {
+    return self->DrawChoice(win, *dc, *rect, flags);
+}
+void wxRendererNative_DrawComboBox(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags) {
+    return self->DrawComboBox(win, *dc, *rect, flags);
+}
+void wxRendererNative_DrawTextCtrl(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags) {
+    return self->DrawTextCtrl(win, *dc, *rect, flags);
+}
+void wxRendererNative_DrawRadioBitmap(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags) {
+    return self->DrawRadioBitmap(win, *dc, *rect, flags);
+}
+void wxRendererNative_DrawCheckMark(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags) {
+    return self->DrawCheckMark(win, *dc, *rect, flags);
+}
+wxSize *wxRendererNative_GetCheckBoxSize(wxRendererNative * self, wxWindow * win, int flags) {
+    return new wxSize(self->GetCheckBoxSize(win, flags));
+}
+wxSize *wxRendererNative_GetCheckMarkSize(wxRendererNative * self, wxWindow * win) {
+    return new wxSize(self->GetCheckMarkSize(win));
+}
+wxSize *wxRendererNative_GetExpanderSize(wxRendererNative * self, wxWindow * win) {
+    return new wxSize(self->GetExpanderSize(win));
+}
+int wxRendererNative_GetHeaderButtonHeight(wxRendererNative * self, wxWindow * win) {
+    return self->GetHeaderButtonHeight(win);
+}
+int wxRendererNative_GetHeaderButtonMargin(wxRendererNative * self, wxWindow * win) {
+    return self->GetHeaderButtonMargin(win);
+}
+wxRendererNative * wxRendererNative_Get() {
+    return &(wxRendererNative::Get());
+}
+wxRendererNative * wxRendererNative_GetDefault() {
+    return &(wxRendererNative::GetDefault());
+}
+wxRendererNative * wxRendererNative_GetGeneric() {
+    return &(wxRendererNative::GetGeneric());
+}
+wxRendererNative * wxRendererNative_Load(const wxString * name) {
+    return wxRendererNative::Load(*name);
+}
+wxRendererNative * wxRendererNative_Set(wxRendererNative * renderer) {
+    return wxRendererNative::Set(renderer);
+}
+
 } // extern "C"
 

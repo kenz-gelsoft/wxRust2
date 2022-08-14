@@ -48,6 +48,7 @@ MANUAL_BINDINGS = [
 ]
 # Known, and problematic
 RUST_KEYWORDS = [
+    'async',
     'box',
     'break',
     'do',

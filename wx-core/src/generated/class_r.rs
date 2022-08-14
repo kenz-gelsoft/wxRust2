@@ -146,3 +146,21 @@ impl<const OWNED: bool> Drop for RectIsOwned<OWNED> {
         }
     }
 }
+
+// wxRendererNative
+wx_class! { RendererNative =
+    RendererNativeIsOwned<true>(wxRendererNative) impl
+        RendererNativeMethods
+}
+impl<const OWNED: bool> RendererNativeIsOwned<OWNED> {
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for RendererNativeIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxRendererNative_delete(self.0) }
+        }
+    }
+}

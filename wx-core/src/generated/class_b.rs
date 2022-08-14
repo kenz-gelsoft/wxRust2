@@ -90,8 +90,15 @@ impl<const OWNED: bool> BitmapIsOwned<OWNED> {
             BitmapIsOwned(ffi::wxBitmap_new4(sz, depth))
         }
     }
-    pub fn new_with_int_dc(width: c_int, height: c_int, dc: *const c_void) -> BitmapIsOwned<OWNED> {
-        unsafe { BitmapIsOwned(ffi::wxBitmap_new5(width, height, dc)) }
+    pub fn new_with_int_dc<D: DCMethods>(
+        width: c_int,
+        height: c_int,
+        dc: &D,
+    ) -> BitmapIsOwned<OWNED> {
+        unsafe {
+            let dc = dc.as_ptr();
+            BitmapIsOwned(ffi::wxBitmap_new5(width, height, dc))
+        }
     }
     pub fn new_with_char(bits: *const c_void) -> BitmapIsOwned<OWNED> {
         unsafe { BitmapIsOwned(ffi::wxBitmap_new6(bits)) }
@@ -100,8 +107,11 @@ impl<const OWNED: bool> BitmapIsOwned<OWNED> {
     pub fn new_with_image_int(img: *const c_void, depth: c_int) -> BitmapIsOwned<OWNED> {
         unsafe { BitmapIsOwned(ffi::wxBitmap_new8(img, depth)) }
     }
-    pub fn new_with_image_dc(img: *const c_void, dc: *const c_void) -> BitmapIsOwned<OWNED> {
-        unsafe { BitmapIsOwned(ffi::wxBitmap_new9(img, dc)) }
+    pub fn new_with_image_dc<D: DCMethods>(img: *const c_void, dc: &D) -> BitmapIsOwned<OWNED> {
+        unsafe {
+            let dc = dc.as_ptr();
+            BitmapIsOwned(ffi::wxBitmap_new9(img, dc))
+        }
     }
     pub fn new_with_cursor<C: CursorMethods>(cursor: &C) -> BitmapIsOwned<OWNED> {
         unsafe {

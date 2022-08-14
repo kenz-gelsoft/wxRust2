@@ -468,8 +468,11 @@ pub trait TextCtrlMethods: ControlMethods {
     fn mark_dirty(&self) {
         unsafe { ffi::wxTextCtrl_MarkDirty(self.as_ptr()) }
     }
-    fn on_drop_files(&self, event: *mut c_void) {
-        unsafe { ffi::wxTextCtrl_OnDropFiles(self.as_ptr(), event) }
+    fn on_drop_files<D: DropFilesEventMethods>(&self, event: &D) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxTextCtrl_OnDropFiles(self.as_ptr(), event)
+        }
     }
     fn position_to_xy(&self, pos: c_long, x: *mut c_void, y: *mut c_void) -> bool {
         unsafe { ffi::wxTextCtrl_PositionToXY(self.as_ptr(), pos, x, y) }

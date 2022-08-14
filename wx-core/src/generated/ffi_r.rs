@@ -111,4 +111,150 @@ extern "C" {
     // BLOCKED: pub fn wxRect_operator=(self_: *mut c_void, rect: *const c_void) -> *mut c_void;
     // BLOCKED: pub fn wxRect_operator==(self_: *mut c_void, r1: *const c_void, r2: *const c_void) -> bool;
 
+    // wxRendererNative
+    pub fn wxRendererNative_delete(self_: *mut c_void);
+    // DTOR: pub fn wxRendererNative_~wxRendererNative(self_: *mut c_void);
+    pub fn wxRendererNative_DrawCheckBox(
+        self_: *mut c_void,
+        win: *mut c_void,
+        dc: *mut c_void,
+        rect: *const c_void,
+        flags: c_int,
+    );
+    pub fn wxRendererNative_DrawComboBoxDropButton(
+        self_: *mut c_void,
+        win: *mut c_void,
+        dc: *mut c_void,
+        rect: *const c_void,
+        flags: c_int,
+    );
+    pub fn wxRendererNative_DrawDropArrow(
+        self_: *mut c_void,
+        win: *mut c_void,
+        dc: *mut c_void,
+        rect: *const c_void,
+        flags: c_int,
+    );
+    pub fn wxRendererNative_DrawFocusRect(
+        self_: *mut c_void,
+        win: *mut c_void,
+        dc: *mut c_void,
+        rect: *const c_void,
+        flags: c_int,
+    );
+    pub fn wxRendererNative_DrawGauge(
+        self_: *mut c_void,
+        win: *mut c_void,
+        dc: *mut c_void,
+        rect: *const c_void,
+        value: c_int,
+        max: c_int,
+        flags: c_int,
+    );
+    // NOT_SUPPORTED: pub fn wxRendererNative_DrawHeaderButton(self_: *mut c_void, win: *mut c_void, dc: *mut c_void, rect: *const c_void, flags: c_int, sort_arrow: wxHeaderSortIconType, params: *mut c_void) -> c_int;
+    // NOT_SUPPORTED: pub fn wxRendererNative_DrawHeaderButtonContents(self_: *mut c_void, win: *mut c_void, dc: *mut c_void, rect: *const c_void, flags: c_int, sort_arrow: wxHeaderSortIconType, params: *mut c_void) -> c_int;
+    pub fn wxRendererNative_DrawItemSelectionRect(
+        self_: *mut c_void,
+        win: *mut c_void,
+        dc: *mut c_void,
+        rect: *const c_void,
+        flags: c_int,
+    );
+    pub fn wxRendererNative_DrawItemText(
+        self_: *mut c_void,
+        win: *mut c_void,
+        dc: *mut c_void,
+        text: *const c_void,
+        rect: *const c_void,
+        align: c_int,
+        flags: c_int,
+        ellipsize_mode: c_int,
+    );
+    pub fn wxRendererNative_DrawPushButton(
+        self_: *mut c_void,
+        win: *mut c_void,
+        dc: *mut c_void,
+        rect: *const c_void,
+        flags: c_int,
+    );
+    pub fn wxRendererNative_DrawCollapseButton(
+        self_: *mut c_void,
+        win: *mut c_void,
+        dc: *mut c_void,
+        rect: *const c_void,
+        flags: c_int,
+    );
+    pub fn wxRendererNative_GetCollapseButtonSize(
+        self_: *mut c_void,
+        win: *mut c_void,
+        dc: *mut c_void,
+    ) -> *mut c_void;
+    pub fn wxRendererNative_DrawSplitterBorder(
+        self_: *mut c_void,
+        win: *mut c_void,
+        dc: *mut c_void,
+        rect: *const c_void,
+        flags: c_int,
+    );
+    // NOT_SUPPORTED: pub fn wxRendererNative_DrawSplitterSash(self_: *mut c_void, win: *mut c_void, dc: *mut c_void, size: *const c_void, position: c_int, orient: wxOrientation, flags: c_int);
+    pub fn wxRendererNative_DrawTreeItemButton(
+        self_: *mut c_void,
+        win: *mut c_void,
+        dc: *mut c_void,
+        rect: *const c_void,
+        flags: c_int,
+    );
+    pub fn wxRendererNative_DrawChoice(
+        self_: *mut c_void,
+        win: *mut c_void,
+        dc: *mut c_void,
+        rect: *const c_void,
+        flags: c_int,
+    );
+    pub fn wxRendererNative_DrawComboBox(
+        self_: *mut c_void,
+        win: *mut c_void,
+        dc: *mut c_void,
+        rect: *const c_void,
+        flags: c_int,
+    );
+    pub fn wxRendererNative_DrawTextCtrl(
+        self_: *mut c_void,
+        win: *mut c_void,
+        dc: *mut c_void,
+        rect: *const c_void,
+        flags: c_int,
+    );
+    pub fn wxRendererNative_DrawRadioBitmap(
+        self_: *mut c_void,
+        win: *mut c_void,
+        dc: *mut c_void,
+        rect: *const c_void,
+        flags: c_int,
+    );
+    // NOT_SUPPORTED: pub fn wxRendererNative_DrawTitleBarBitmap(self_: *mut c_void, win: *mut c_void, dc: *mut c_void, rect: *const c_void, button: wxTitleBarButton, flags: c_int);
+    pub fn wxRendererNative_DrawCheckMark(
+        self_: *mut c_void,
+        win: *mut c_void,
+        dc: *mut c_void,
+        rect: *const c_void,
+        flags: c_int,
+    );
+    pub fn wxRendererNative_GetCheckBoxSize(
+        self_: *mut c_void,
+        win: *mut c_void,
+        flags: c_int,
+    ) -> *mut c_void;
+    pub fn wxRendererNative_GetCheckMarkSize(self_: *mut c_void, win: *mut c_void) -> *mut c_void;
+    pub fn wxRendererNative_GetExpanderSize(self_: *mut c_void, win: *mut c_void) -> *mut c_void;
+    pub fn wxRendererNative_GetHeaderButtonHeight(self_: *mut c_void, win: *mut c_void) -> c_int;
+    pub fn wxRendererNative_GetHeaderButtonMargin(self_: *mut c_void, win: *mut c_void) -> c_int;
+    // NOT_SUPPORTED: pub fn wxRendererNative_GetSplitterParams(self_: *mut c_void, win: *const c_void) -> wxSplitterRenderParams;
+    // NOT_SUPPORTED: pub fn wxRendererNative_GetVersion(self_: *const c_void) -> wxRendererVersion;
+    pub fn wxRendererNative_Get() -> *mut c_void;
+    pub fn wxRendererNative_GetDefault() -> *mut c_void;
+    pub fn wxRendererNative_GetGeneric() -> *mut c_void;
+    pub fn wxRendererNative_Load(name: *const c_void) -> *mut c_void;
+    pub fn wxRendererNative_Set(renderer: *mut c_void) -> *mut c_void;
+
 }

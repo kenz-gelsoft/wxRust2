@@ -2,6 +2,73 @@
 
 extern "C" {
 
+// CLASS: wxMDIChildFrame
+wxClassInfo *wxMDIChildFrame_CLASSINFO() {
+    return wxCLASSINFO(wxMDIChildFrame);
+}
+wxMDIChildFrame *wxMDIChildFrame_new() {
+    return new wxMDIChildFrame();
+}
+wxMDIChildFrame *wxMDIChildFrame_new1(wxMDIParentFrame * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxMDIChildFrame(parent, id, *title, *pos, *size, style, *name);
+}
+void wxMDIChildFrame_Activate(wxMDIChildFrame * self) {
+    return self->Activate();
+}
+bool wxMDIChildFrame_Create(wxMDIChildFrame * self, wxMDIParentFrame * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, id, *title, *pos, *size, style, *name);
+}
+wxMDIParentFrame * wxMDIChildFrame_GetMDIParent(const wxMDIChildFrame * self) {
+    return self->GetMDIParent();
+}
+void wxMDIChildFrame_Restore(wxMDIChildFrame * self) {
+    return self->Restore();
+}
+
+// CLASS: wxMDIParentFrame
+wxClassInfo *wxMDIParentFrame_CLASSINFO() {
+    return wxCLASSINFO(wxMDIParentFrame);
+}
+wxMDIParentFrame *wxMDIParentFrame_new() {
+    return new wxMDIParentFrame();
+}
+wxMDIParentFrame *wxMDIParentFrame_new1(wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxMDIParentFrame(parent, id, *title, *pos, *size, style, *name);
+}
+void wxMDIParentFrame_ActivateNext(wxMDIParentFrame * self) {
+    return self->ActivateNext();
+}
+void wxMDIParentFrame_ActivatePrevious(wxMDIParentFrame * self) {
+    return self->ActivatePrevious();
+}
+void wxMDIParentFrame_ArrangeIcons(wxMDIParentFrame * self) {
+    return self->ArrangeIcons();
+}
+void wxMDIParentFrame_Cascade(wxMDIParentFrame * self) {
+    return self->Cascade();
+}
+bool wxMDIParentFrame_Create(wxMDIParentFrame * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, id, *title, *pos, *size, style, *name);
+}
+wxMDIChildFrame * wxMDIParentFrame_GetActiveChild(const wxMDIParentFrame * self) {
+    return self->GetActiveChild();
+}
+wxMDIClientWindowBase * wxMDIParentFrame_GetClientWindow(const wxMDIParentFrame * self) {
+    return self->GetClientWindow();
+}
+wxMenu * wxMDIParentFrame_GetWindowMenu(const wxMDIParentFrame * self) {
+    return self->GetWindowMenu();
+}
+wxMDIClientWindow * wxMDIParentFrame_OnCreateClient(wxMDIParentFrame * self) {
+    return self->OnCreateClient();
+}
+void wxMDIParentFrame_SetWindowMenu(wxMDIParentFrame * self, wxMenu * menu) {
+    return self->SetWindowMenu(menu);
+}
+bool wxMDIParentFrame_IsTDI() {
+    return wxMDIParentFrame::IsTDI();
+}
+
 // CLASS: wxMenu
 wxClassInfo *wxMenu_CLASSINFO() {
     return wxCLASSINFO(wxMenu);

@@ -68,8 +68,11 @@ pub trait BitmapMethods: GDIObjectMethods {
             ffi::wxBitmap_Create1(self.as_ptr(), sz, depth)
         }
     }
-    fn create_int_dc(&self, width: c_int, height: c_int, dc: *const c_void) -> bool {
-        unsafe { ffi::wxBitmap_Create2(self.as_ptr(), width, height, dc) }
+    fn create_int_dc<D: DCMethods>(&self, width: c_int, height: c_int, dc: &D) -> bool {
+        unsafe {
+            let dc = dc.as_ptr();
+            ffi::wxBitmap_Create2(self.as_ptr(), width, height, dc)
+        }
     }
     fn create_with_dip_size_size<S: SizeMethods>(
         &self,
