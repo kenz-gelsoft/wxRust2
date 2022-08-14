@@ -1487,7 +1487,7 @@ extern "C" {
 
     // wxDropTarget
     pub fn wxDropTarget_delete(self_: *mut c_void);
-    pub fn wxDropTarget_new(data: *mut c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxDropTarget_new(data: *mut c_void) -> *mut c_void;
     // DTOR: pub fn wxDropTarget_~wxDropTarget(self_: *mut c_void);
     pub fn wxDropTarget_GetData(self_: *mut c_void) -> bool;
     // NOT_SUPPORTED: pub fn wxDropTarget_OnData(self_: *mut c_void, x: c_int, y: c_int, def_result: wxDragResult) -> wxDragResult;

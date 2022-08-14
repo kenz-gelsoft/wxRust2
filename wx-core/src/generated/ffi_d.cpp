@@ -1834,15 +1834,19 @@ bool wxDragImage_BeginDrag(wxDragImage * self, const wxPoint * hotspot, wxWindow
 bool wxDragImage_BeginDrag1(wxDragImage * self, const wxPoint * hotspot, wxWindow * window, wxWindow * bounding_window) {
     return self->BeginDrag(*hotspot, window, bounding_window);
 }
+#ifndef __WXMSW__
 bool wxDragImage_DoDrawImage(const wxDragImage * self, wxDC * dc, const wxPoint * pos) {
     return self->DoDrawImage(*dc, *pos);
 }
+#endif
 bool wxDragImage_EndDrag(wxDragImage * self) {
     return self->EndDrag();
 }
+#ifndef __WXMSW__
 wxRect *wxDragImage_GetImageRect(const wxDragImage * self, const wxPoint * pos) {
     return new wxRect(self->GetImageRect(*pos));
 }
+#endif
 bool wxDragImage_Hide(wxDragImage * self) {
     return self->Hide();
 }
@@ -1852,9 +1856,11 @@ bool wxDragImage_Move(wxDragImage * self, const wxPoint * pt) {
 bool wxDragImage_Show(wxDragImage * self) {
     return self->Show();
 }
+#ifndef __WXMSW__
 bool wxDragImage_UpdateBackingFromWindow(const wxDragImage * self, wxDC * window_dc, wxMemoryDC * dest_dc, const wxRect * source_rect, const wxRect * dest_rect) {
     return self->UpdateBackingFromWindow(*window_dc, *dest_dc, *source_rect, *dest_rect);
 }
+#endif
 
 // CLASS: wxDropFilesEvent
 wxClassInfo *wxDropFilesEvent_CLASSINFO() {
@@ -1897,9 +1903,6 @@ void wxDropSource_SetData(wxDropSource * self, wxDataObject * data) {
 // CLASS: wxDropTarget
 void wxDropTarget_delete(wxDropTarget *self) {
     delete self;
-}
-wxDropTarget *wxDropTarget_new(wxDataObject * data) {
-    return new wxDropTarget(data);
 }
 bool wxDropTarget_GetData(wxDropTarget * self) {
     return self->GetData();

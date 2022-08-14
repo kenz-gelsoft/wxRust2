@@ -944,6 +944,12 @@ blocklist = [
     # binding type by value is not supported
     'Scale',
 ]
+[types.wxDragImage]
+not_windows = [
+    'DoDrawImage',
+    'GetImageRect',
+    'UpdateBackingFromWindow',
+]
 [types.wxDropFilesEvent]
 blocklist = [
     # cannot convert Cstr to rust string yet
@@ -957,6 +963,11 @@ not_gtk = [
 gtk = [
     'wxDropSource2',
     'wxDropSource3',
+]
+[types.wxDropTarget]
+blocklist = [
+    # abstract
+    'wxDropTarget',
 ]
 [types.wxEvent]
 returns_owned = [

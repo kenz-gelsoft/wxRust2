@@ -2363,15 +2363,7 @@ wx_class! { DropTarget =
         DropTargetMethods
 }
 impl<const OWNED: bool> DropTargetIsOwned<OWNED> {
-    pub fn new<D: DataObjectMethods>(data: Option<&D>) -> DropTargetIsOwned<OWNED> {
-        unsafe {
-            let data = match data {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            DropTargetIsOwned(ffi::wxDropTarget_new(data))
-        }
-    }
+    // BLOCKED: fn wxDropTarget()
     pub fn none() -> Option<&'static Self> {
         None
     }
