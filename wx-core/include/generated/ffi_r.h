@@ -2,6 +2,7 @@
 
 #include <wx/gdicmn.h>
 #include <wx/radiobox.h>
+#include <wx/renderer.h>
 
 extern "C" {
 
@@ -74,6 +75,44 @@ void wxRect_SetBottomRight(wxRect * self, const wxPoint * p);
 void wxRect_SetTopRight(wxRect * self, const wxPoint * p);
 void wxRect_SetBottomLeft(wxRect * self, const wxPoint * p);
 wxRect *wxRect_Union(const wxRect * self, const wxRect * rect);
+
+// CLASS: wxRendererNative
+void wxRendererNative_delete(wxRendererNative *self);
+void wxRendererNative_DrawCheckBox(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags);
+void wxRendererNative_DrawComboBoxDropButton(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags);
+void wxRendererNative_DrawDropArrow(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags);
+void wxRendererNative_DrawFocusRect(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags);
+#if wxCHECK_VERSION(3, 1, 0)
+void wxRendererNative_DrawGauge(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int value, int max, int flags);
+#endif
+void wxRendererNative_DrawItemSelectionRect(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags);
+#if wxCHECK_VERSION(3, 1, 0)
+void wxRendererNative_DrawItemText(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxString * text, const wxRect * rect, int align, int flags, wxEllipsizeMode ellipsize_mode);
+#endif
+void wxRendererNative_DrawPushButton(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags);
+#if wxCHECK_VERSION(3, 1, 0)
+void wxRendererNative_DrawCollapseButton(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags);
+wxSize *wxRendererNative_GetCollapseButtonSize(wxRendererNative * self, wxWindow * win, wxDC * dc);
+#endif
+void wxRendererNative_DrawSplitterBorder(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags);
+void wxRendererNative_DrawTreeItemButton(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags);
+void wxRendererNative_DrawChoice(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags);
+void wxRendererNative_DrawComboBox(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags);
+void wxRendererNative_DrawTextCtrl(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags);
+void wxRendererNative_DrawRadioBitmap(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags);
+#if wxCHECK_VERSION(3, 1, 0)
+void wxRendererNative_DrawCheckMark(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags);
+wxSize *wxRendererNative_GetCheckBoxSize(wxRendererNative * self, wxWindow * win, int flags);
+wxSize *wxRendererNative_GetCheckMarkSize(wxRendererNative * self, wxWindow * win);
+wxSize *wxRendererNative_GetExpanderSize(wxRendererNative * self, wxWindow * win);
+#endif
+int wxRendererNative_GetHeaderButtonHeight(wxRendererNative * self, wxWindow * win);
+int wxRendererNative_GetHeaderButtonMargin(wxRendererNative * self, wxWindow * win);
+wxRendererNative * wxRendererNative_Get();
+wxRendererNative * wxRendererNative_GetDefault();
+wxRendererNative * wxRendererNative_GetGeneric();
+wxRendererNative * wxRendererNative_Load(const wxString * name);
+wxRendererNative * wxRendererNative_Set(wxRendererNative * renderer);
 
 } // extern "C"
 

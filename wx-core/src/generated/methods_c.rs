@@ -493,8 +493,11 @@ pub trait ClipboardMethods: ObjectMethods {
     fn is_opened(&self) -> bool {
         unsafe { ffi::wxClipboard_IsOpened(self.as_ptr()) }
     }
-    fn is_supported(&self, format: *const c_void) -> bool {
-        unsafe { ffi::wxClipboard_IsSupported(self.as_ptr(), format) }
+    fn is_supported<D: DataFormatMethods>(&self, format: &D) -> bool {
+        unsafe {
+            let format = format.as_ptr();
+            ffi::wxClipboard_IsSupported(self.as_ptr(), format)
+        }
     }
     fn is_using_primary_selection(&self) -> bool {
         unsafe { ffi::wxClipboard_IsUsingPrimarySelection(self.as_ptr()) }
@@ -959,8 +962,9 @@ pub trait ComboCtrlMethods: ControlMethods {
     fn is_key_popup_toggle(&self, event: *const c_void) -> bool {
         unsafe { ffi::wxComboCtrl_IsKeyPopupToggle(self.as_ptr(), event) }
     }
-    fn prepare_background<R: RectMethods>(&self, dc: *mut c_void, rect: &R, flags: c_int) {
+    fn prepare_background<D: DCMethods, R: RectMethods>(&self, dc: &D, rect: &R, flags: c_int) {
         unsafe {
+            let dc = dc.as_ptr();
             let rect = rect.as_ptr();
             ffi::wxComboCtrl_PrepareBackground(self.as_ptr(), dc, rect, flags)
         }
@@ -1183,8 +1187,9 @@ pub trait ComboPopupMethods: WxRustMethods {
     fn on_popup(&self) {
         unsafe { ffi::wxComboPopup_OnPopup(self.as_ptr()) }
     }
-    fn paint_combo_control<R: RectMethods>(&self, dc: *mut c_void, rect: &R) {
+    fn paint_combo_control<D: DCMethods, R: RectMethods>(&self, dc: &D, rect: &R) {
         unsafe {
+            let dc = dc.as_ptr();
             let rect = rect.as_ptr();
             ffi::wxComboPopup_PaintComboControl(self.as_ptr(), dc, rect)
         }
@@ -1542,9 +1547,9 @@ pub trait ControlMethods: WindowMethods {
             WxString::from_ptr(ffi::wxControl_EscapeMnemonics(text)).into()
         }
     }
-    fn ellipsize(
+    fn ellipsize<D: DCMethods>(
         label: &str,
-        dc: *const c_void,
+        dc: &D,
         mode: c_int,
         max_width: c_int,
         flags: c_int,
@@ -1552,6 +1557,7 @@ pub trait ControlMethods: WindowMethods {
         unsafe {
             let label = WxString::from(label);
             let label = label.as_ptr();
+            let dc = dc.as_ptr();
             WxString::from_ptr(ffi::wxControl_Ellipsize(label, dc, mode, max_width, flags)).into()
         }
     }

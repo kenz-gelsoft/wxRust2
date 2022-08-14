@@ -1798,8 +1798,11 @@ wx_class! { CustomDataObject =
         DataObjectMethods
 }
 impl<const OWNED: bool> CustomDataObjectIsOwned<OWNED> {
-    pub fn new(format: *const c_void) -> CustomDataObjectIsOwned<OWNED> {
-        unsafe { CustomDataObjectIsOwned(ffi::wxCustomDataObject_new(format)) }
+    pub fn new<D: DataFormatMethods>(format: &D) -> CustomDataObjectIsOwned<OWNED> {
+        unsafe {
+            let format = format.as_ptr();
+            CustomDataObjectIsOwned(ffi::wxCustomDataObject_new(format))
+        }
     }
     pub fn none() -> Option<&'static Self> {
         None

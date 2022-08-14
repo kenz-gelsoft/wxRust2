@@ -1,68 +1,4 @@
 core_files = [
-    'wxml/classwx_d_c.xml',
-    'wxml/classwx_d_c_brush_changer.xml',
-    'wxml/classwx_d_c_clipper.xml',
-    'wxml/classwx_d_c_font_changer.xml',
-    'wxml/classwx_d_c_overlay.xml',
-    'wxml/classwx_d_c_pen_changer.xml',
-    'wxml/classwx_d_c_text_bg_colour_changer.xml',
-    'wxml/classwx_d_c_text_bg_mode_changer.xml',
-    'wxml/classwx_d_c_text_colour_changer.xml',
-    'wxml/classwx_d_p_i_changed_event.xml',
-    'wxml/classwx_data_format.xml',
-    'wxml/classwx_data_object.xml',
-    'wxml/classwx_data_object_composite.xml',
-    'wxml/classwx_data_object_simple.xml',
-    'wxml/classwx_data_view_bitmap_renderer.xml',
-    'wxml/classwx_data_view_check_icon_text_renderer.xml',
-    'wxml/classwx_data_view_choice_by_index_renderer.xml',
-    'wxml/classwx_data_view_choice_renderer.xml',
-    'wxml/classwx_data_view_column.xml',
-    'wxml/classwx_data_view_ctrl.xml',
-    'wxml/classwx_data_view_custom_renderer.xml',
-    'wxml/classwx_data_view_date_renderer.xml',
-    'wxml/classwx_data_view_event.xml',
-    'wxml/classwx_data_view_icon_text.xml',
-    'wxml/classwx_data_view_icon_text_renderer.xml',
-    'wxml/classwx_data_view_index_list_model.xml',
-    'wxml/classwx_data_view_item.xml',
-    'wxml/classwx_data_view_item_attr.xml',
-    'wxml/classwx_data_view_list_ctrl.xml',
-    'wxml/classwx_data_view_list_model.xml',
-    'wxml/classwx_data_view_list_store.xml',
-    'wxml/classwx_data_view_model.xml',
-    'wxml/classwx_data_view_model_notifier.xml',
-    'wxml/classwx_data_view_progress_renderer.xml',
-    'wxml/classwx_data_view_renderer.xml',
-    'wxml/classwx_data_view_spin_renderer.xml',
-    'wxml/classwx_data_view_text_renderer.xml',
-    'wxml/classwx_data_view_toggle_renderer.xml',
-    'wxml/classwx_data_view_tree_ctrl.xml',
-    'wxml/classwx_data_view_tree_store.xml',
-    'wxml/classwx_data_view_value_adjuster.xml',
-    'wxml/classwx_data_view_virtual_list_model.xml',
-    'wxml/classwx_date_event.xml',
-    'wxml/classwx_date_picker_ctrl.xml',
-    'wxml/classwx_delegate_renderer_native.xml',
-    'wxml/classwx_dial_up_event.xml',
-    'wxml/classwx_dial_up_manager.xml',
-    'wxml/classwx_dialog.xml',
-    'wxml/classwx_dialog_layout_adapter.xml',
-    'wxml/classwx_dir_dialog.xml',
-    'wxml/classwx_dir_picker_ctrl.xml',
-    'wxml/classwx_display.xml',
-    'wxml/classwx_display_changed_event.xml',
-    'wxml/classwx_doc_child_frame.xml',
-    'wxml/classwx_doc_m_d_i_child_frame.xml',
-    'wxml/classwx_doc_m_d_i_parent_frame.xml',
-    'wxml/classwx_doc_manager.xml',
-    'wxml/classwx_doc_parent_frame.xml',
-    'wxml/classwx_doc_template.xml',
-    'wxml/classwx_document.xml',
-    'wxml/classwx_drag_image.xml',
-    'wxml/classwx_drop_files_event.xml',
-    'wxml/classwx_drop_source.xml',
-    'wxml/classwx_drop_target.xml',
     'wxml/classwx_editable_list_box.xml',
     'wxml/classwx_erase_event.xml',
     'wxml/classwx_event_blocker.xml',
@@ -457,13 +393,71 @@ wxml_files = [
     # 'wxml/classwx_credential_entry_dialog.xml', # requires 3.1
     'wxml/classwx_cursor.xml',
     'wxml/classwx_custom_data_object.xml',
+    'wxml/classwx_d_c.xml',
+    'wxml/classwx_d_c_brush_changer.xml',
+    'wxml/classwx_d_c_clipper.xml',
+    'wxml/classwx_d_c_font_changer.xml',
+    'wxml/classwx_d_c_overlay.xml',
+    'wxml/classwx_d_c_pen_changer.xml',
+    # 'wxml/classwx_d_c_text_bg_colour_changer.xml', # requires 3.1
+    # 'wxml/classwx_d_c_text_bg_mode_changer.xml',   # requires 3.1
+    'wxml/classwx_d_c_text_colour_changer.xml',
+    # 'wxml/classwx_d_p_i_changed_event.xml',        # requires 3.1
+    'wxml/classwx_data_format.xml',
     'wxml/classwx_data_object.xml',
+    'wxml/classwx_data_object_composite.xml',
     'wxml/classwx_data_object_simple.xml',
+    'wxml/classwx_data_view_bitmap_renderer.xml',
+    # 'wxml/classwx_data_view_check_icon_text_renderer.xml', # requires 3.1
+    'wxml/classwx_data_view_choice_by_index_renderer.xml',
+    'wxml/classwx_data_view_choice_renderer.xml',
+    'wxml/classwx_data_view_column.xml',
+    'wxml/classwx_data_view_ctrl.xml',
+    'wxml/classwx_data_view_custom_renderer.xml',
+    'wxml/classwx_data_view_date_renderer.xml',
+    'wxml/classwx_data_view_event.xml',
+    'wxml/classwx_data_view_icon_text.xml',
+    'wxml/classwx_data_view_icon_text_renderer.xml',
+    'wxml/classwx_data_view_index_list_model.xml',
+    'wxml/classwx_data_view_item.xml',
+    'wxml/classwx_data_view_item_attr.xml',
+    'wxml/classwx_data_view_list_ctrl.xml',
+    'wxml/classwx_data_view_list_model.xml',
+    'wxml/classwx_data_view_list_store.xml',
+    'wxml/classwx_data_view_model.xml',
+    'wxml/classwx_data_view_model_notifier.xml',
+    'wxml/classwx_data_view_progress_renderer.xml',
+    'wxml/classwx_data_view_renderer.xml',
+    'wxml/classwx_data_view_spin_renderer.xml',
+    'wxml/classwx_data_view_text_renderer.xml',
+    'wxml/classwx_data_view_toggle_renderer.xml',
+    'wxml/classwx_data_view_tree_ctrl.xml',
+    'wxml/classwx_data_view_tree_store.xml',
+    # 'wxml/classwx_data_view_value_adjuster.xml', # requires 3.1
+    'wxml/classwx_data_view_virtual_list_model.xml',
     'wxml/classwx_date_event.xml',
     'wxml/classwx_date_picker_ctrl.xml',
     'wxml/classwx_date_time.xml',
+    'wxml/classwx_delegate_renderer_native.xml',
+    # 'wxml/classwx_dial_up_event.xml',   # maybe unsupported on osx
+    # 'wxml/classwx_dial_up_manager.xml', # maybe unsupported on osx
     'wxml/classwx_dialog.xml',
+    'wxml/classwx_dialog_layout_adapter.xml',
+    'wxml/classwx_dir_dialog.xml',
     'wxml/classwx_dir_picker_ctrl.xml',
+    'wxml/classwx_display.xml',
+    'wxml/classwx_display_changed_event.xml',
+    # 'wxml/classwx_doc_child_frame.xml',        # Our CI environment is't built with
+    # 'wxml/classwx_doc_m_d_i_child_frame.xml',  # Our CI environment is't built with
+    # 'wxml/classwx_doc_m_d_i_parent_frame.xml', # Our CI environment is't built with
+    # 'wxml/classwx_doc_manager.xml',            # Our CI environment is't built with
+    # 'wxml/classwx_doc_parent_frame.xml',       # Our CI environment is't built with
+    # 'wxml/classwx_doc_template.xml',           # Our CI environment is't built with
+    # 'wxml/classwx_document.xml',               # Our CI environment is't built with
+    'wxml/classwx_drag_image.xml',
+    'wxml/classwx_drop_files_event.xml',
+    'wxml/classwx_drop_source.xml',
+    'wxml/classwx_drop_target.xml',
     'wxml/classwx_editable_list_box.xml',
     'wxml/classwx_event.xml',
     'wxml/classwx_evt_handler.xml',
@@ -485,6 +479,8 @@ wxml_files = [
     'wxml/classwx_item_container.xml',
     'wxml/classwx_item_container_immutable.xml',
     'wxml/classwx_list_box.xml',
+    # 'wxml/classwx_m_d_i_child_frame.xml',  # Our CI environment is't built with
+    # 'wxml/classwx_m_d_i_parent_frame.xml', # Our CI environment is't built with
     'wxml/classwx_menu.xml',
     'wxml/classwx_menu_bar.xml',
     'wxml/classwx_menu_item.xml',
@@ -498,6 +494,7 @@ wxml_files = [
     'wxml/classwx_radio_box.xml',
     'wxml/classwx_rect.xml',
     'wxml/classwx_ref_counter.xml',
+    'wxml/classwx_renderer_native.xml',
     'wxml/classwx_search_ctrl.xml',
     'wxml/classwx_settable_header_column.xml',
     'wxml/classwx_size.xml',
@@ -775,6 +772,11 @@ blocklist = [
 wx31 = [
     'GetHotSpot',
 ]
+[types.wxDataFormat]
+blocklist = [
+    'operator!=',
+    'operator==',
+]
 [types.wxDataObject]
 blocklist = [
     # abstract
@@ -788,6 +790,147 @@ blocklist = [
 [types.wxDatePickerCtrl]
 wx31 = [
     'SetNullText',
+]
+[types.wxDataViewBitmapRenderer]
+wx31 = [
+    'GetDefaultType',
+]
+[types.wxDataViewCtrl]
+blocklist = [
+    # uses C++ generics
+    'GetSortingColumns',
+]
+wx31 = [
+    'AllowMultiColumnSort',
+    'EnableDropTargets',
+    'ExpandChildren',
+    'GetCountPerPage',
+    'GetSortingColumns',
+    'GetTopItem',
+    'IsMultiColumnSortAllowed',
+    'SetAlternateRowColour',
+    'SetHeaderAttr',
+    'ToggleSortByColumn',
+]
+[types.wxDataViewCustomRenderer]
+blocklist = [
+    # binding type by value is not supported
+    'Activate',
+    'LeftClick',
+    'Render',
+    'RenderText',
+]
+wx31 = [
+    'GetDefaultType',
+]
+[types.wxDataViewDateRenderer]
+wx31 = [
+    'GetDefaultType',
+]
+[types.wxDataViewEvent]
+blocklist = [
+    # (maybe) disabled on CI env
+    'SetDataViewColumn',
+    'SetItem',
+    'SetModel',
+    # invalid return type
+    'GetValue',
+]
+wx31 = [
+    'GetProposedDropIndex',
+]
+[types.wxDataViewIconText]
+wx31 = [
+    # wxBitmapBundle
+    'wxDataViewIconText',
+    'GetBitmapBundle',
+    'SetBitmapBundle',
+]
+[types.wxDataViewIconTextRenderer]
+wx31 = [
+    'GetDefaultType',
+]
+[types.wxDataViewIndexListModel]
+blocklist = [
+    # abstract
+    'wxDataViewIndexListModel',
+]
+[types.wxDataViewListCtrl]
+blocklist = [
+    # binding type by value is not supported
+    'GetStore',
+    # API is void but returns some actually at least on osx
+    'AppendColumn',
+    'InsertColumn',
+    'PrependColumn',
+]
+[types.wxDataViewItemAttr]
+wx31 = [
+    'SetStrikethrough',
+]
+[types.wxDataViewModel]
+blocklist = [
+    # abstract
+    'wxDataViewModel',
+]
+[types.wxDataViewModelNotifier]
+blocklist = [
+    # abstract
+    'wxDataViewModelNotifier',
+]
+[types.wxDataViewProgressRenderer]
+wx31 = [
+    'GetDefaultType',
+]
+[types.wxDataViewRenderer]
+blocklist = [
+    # binding type by value is not supported
+    'CreateEditorCtrl',
+    'StartEditing',
+    # requires explicit enabling of accessibility
+    'GetAccessibleDescription',
+]
+wx31 = [
+    'SetValueAdjuster',
+]
+wx317 = [
+    'IsCompatibleVariantType',
+]
+[types.wxDataViewTreeCtrl]
+blocklist = [
+    # binding type by value is not supported
+    'GetItemParent',
+    'GetStore',
+]
+wx31 = [
+    'SetItemExpandedIcon',
+    'SetItemIcon',
+]
+[types.wxDataViewTreeStore]
+wx31 = [
+    'AppendContainer',
+    'AppendItem',
+    'InsertContainer',
+    'InsertItem',
+    'PrependContainer',
+    'PrependItem',
+    'SetItemExpandedIcon',
+    'SetItemIcon',
+]
+[types.wxDataViewTextRenderer]
+wx31 = [
+    'EnableMarkup',
+    'GetDefaultType',
+]
+[types.wxDataViewToggleRenderer]
+wx31 = [
+    'GetDefaultType',
+    'ShowAsRadio',
+]
+[types.wxDataViewVirtualListModel]
+blocklist = [
+    # abstract
+    'wxDataViewVirtualListModel',
 ]
 [types.wxDateTime]
 blocklist = [
@@ -824,6 +967,32 @@ wx31 = [
     'GetFirstWeekDay',
     'GetWeekBasedYear',
 ]
+[types.wxDC]
+blocklist = [
+    # invalid return type
+    'GetPen',
+]
+wx31 = [
+    'DeviceToLogical',
+    'DeviceToLogical1',
+    'DeviceToLogicalRel',
+    'DeviceToLogicalRel1',
+    'LogicalToDevice',
+    'LogicalToDevice1',
+    'LogicalToDeviceRel',
+    'LogicalToDeviceRel1',
+    # return type changed in 3.1.2
+    'GetClippingBox',
+    'GetClippingBox1',
+]
+wx317 = [
+    'FromDIP',
+    'FromDIP1',
+    'FromDIP2',
+    'ToDIP',
+    'ToDIP1',
+    'ToDIP2',
+]
 [types.wxDialog]
 blocklist = [
     # PocketPC only
@@ -834,6 +1003,78 @@ blocklist = [
 wx31 = [
     # Default argument added in 3.1
     'CreateTextSizer',
+]
+[types.wxDialogLayoutAdapter]
+blocklist = [
+    # abstract
+    'wxDialogLayoutAdapter',
+]
+[types.wxDirDialog]
+wx31 = [
+    'GetPaths',
+]
+[types.wxDisplay]
+wx31 = [
+    'wxDisplay2',
+    'GetPPI',
+    'GetScaleFactor',
+    'GetStdPPIValue',
+    'GetStdPPI',
+]
+[types.wxDocManager]
+blocklist = [
+    # invalid return type
+    'GetDocuments',
+    'GetTemplates',
+]
+[types.wxDocTemplate]
+blocklist = [
+    # maybe requires printing feature explicitly enabled
+    'GetPageSetupDialogData',
+    'GetPageSetupDialogData1',
+]
+[types.wxDocument]
+blocklist = [
+    # uses C++ iostreams
+    'LoadObject',
+    'LoadObject1',
+    'SaveObject',
+    'SaveObject1',
+    # looks like const-ness error
+    'Activate',
+    # invalid return type
+    'GetViews',
+    'GetViews1',
+]
+[types.wxDPIChangedEvent]
+blocklist = [
+    # binding type by value is not supported
+    'Scale',
+]
+[types.wxDragImage]
+not_windows = [
+    'DoDrawImage',
+    'GetImageRect',
+    'UpdateBackingFromWindow',
+]
+[types.wxDropFilesEvent]
+blocklist = [
+    # cannot convert Cstr to rust string yet
+    'GetFiles',
+]
+[types.wxDropSource]
+not_gtk = [
+    'wxDropSource',
+    'wxDropSource1',
+]
+gtk = [
+    'wxDropSource2',
+    'wxDropSource3',
+]
+[types.wxDropTarget]
+blocklist = [
+    # abstract
+    'wxDropTarget',
 ]
 [types.wxEvent]
 returns_owned = [
@@ -1049,6 +1290,17 @@ blocklist = [
     'Inflate2',
     'Intersect',
     'Union1',
+]
+[types.wxRendererNative]
+wx31 = [
+    'DrawCheckMark',
+    'DrawCollapseButton',
+    'DrawGauge',
+    'DrawItemText',
+    'GetCheckBoxSize',
+    'GetCheckMarkSize',
+    'GetCollapseButtonSize',
+    'GetExpanderSize',
 ]
 [types.wxSize]
 blocklist = [
