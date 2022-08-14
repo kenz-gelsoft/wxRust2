@@ -229,7 +229,9 @@ void wxColour_ChangeLightness1(unsigned char * r, unsigned char * g, unsigned ch
 wxClassInfo *wxColourData_CLASSINFO();
 wxColourData *wxColourData_new();
 bool wxColourData_GetChooseFull(const wxColourData * self);
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxColourData_GetChooseAlpha(const wxColourData * self);
+#endif
 wxColour * wxColourData_GetColour(wxColourData * self);
 wxColour *wxColourData_GetCustomColour(const wxColourData * self, int i);
 void wxColourData_SetChooseFull(wxColourData * self, bool flag);
@@ -248,15 +250,11 @@ wxString *wxColourDatabase_FindName(const wxColourDatabase * self, const wxColou
 
 // CLASS: wxColourDialog
 wxClassInfo *wxColourDialog_CLASSINFO();
+#if wxCHECK_VERSION(3, 1, 0)
 wxColourDialog *wxColourDialog_new(wxWindow * parent, const wxColourData * data);
+#endif
 bool wxColourDialog_Create(wxColourDialog * self, wxWindow * parent, const wxColourData * data);
 wxColourData * wxColourDialog_GetColourData(wxColourDialog * self);
-
-// CLASS: wxColourDialogEvent
-wxClassInfo *wxColourDialogEvent_CLASSINFO();
-wxColourDialogEvent *wxColourDialogEvent_new();
-wxColour *wxColourDialogEvent_GetColour(const wxColourDialogEvent * self);
-void wxColourDialogEvent_SetColour(wxColourDialogEvent * self, const wxColour * colour);
 
 // CLASS: wxColourPickerCtrl
 wxClassInfo *wxColourPickerCtrl_CLASSINFO();

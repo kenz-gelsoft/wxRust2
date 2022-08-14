@@ -420,13 +420,6 @@ extern "C" {
     ) -> bool;
     pub fn wxColourDialog_GetColourData(self_: *mut c_void) -> *mut c_void;
 
-    // wxColourDialogEvent
-    pub fn wxColourDialogEvent_CLASSINFO() -> *mut c_void;
-    pub fn wxColourDialogEvent_new() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxColourDialogEvent_new1(evt_type: wxEventType, dialog: *mut c_void, colour: *const c_void) -> *mut c_void;
-    pub fn wxColourDialogEvent_GetColour(self_: *const c_void) -> *mut c_void;
-    pub fn wxColourDialogEvent_SetColour(self_: *mut c_void, colour: *const c_void);
-
     // wxColourPickerCtrl
     pub fn wxColourPickerCtrl_CLASSINFO() -> *mut c_void;
     pub fn wxColourPickerCtrl_new() -> *mut c_void;

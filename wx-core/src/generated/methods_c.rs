@@ -777,19 +777,6 @@ pub trait ColourDialogMethods: DialogMethods {
     }
 }
 
-// wxColourDialogEvent
-pub trait ColourDialogEventMethods: CommandEventMethods {
-    fn get_colour(&self) -> Colour {
-        unsafe { Colour::from_ptr(ffi::wxColourDialogEvent_GetColour(self.as_ptr())) }
-    }
-    fn set_colour<C: ColourMethods>(&self, colour: &C) {
-        unsafe {
-            let colour = colour.as_ptr();
-            ffi::wxColourDialogEvent_SetColour(self.as_ptr(), colour)
-        }
-    }
-}
-
 // wxColourPickerCtrl
 pub trait ColourPickerCtrlMethods: PickerBaseMethods {
     fn create_colour<

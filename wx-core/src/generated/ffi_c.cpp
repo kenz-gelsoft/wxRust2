@@ -529,9 +529,11 @@ wxColourData *wxColourData_new() {
 bool wxColourData_GetChooseFull(const wxColourData * self) {
     return self->GetChooseFull();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxColourData_GetChooseAlpha(const wxColourData * self) {
     return self->GetChooseAlpha();
 }
+#endif
 wxColour * wxColourData_GetColour(wxColourData * self) {
     return &(self->GetColour());
 }
@@ -578,28 +580,16 @@ wxString *wxColourDatabase_FindName(const wxColourDatabase * self, const wxColou
 wxClassInfo *wxColourDialog_CLASSINFO() {
     return wxCLASSINFO(wxColourDialog);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxColourDialog *wxColourDialog_new(wxWindow * parent, const wxColourData * data) {
     return new wxColourDialog(parent, data);
 }
+#endif
 bool wxColourDialog_Create(wxColourDialog * self, wxWindow * parent, const wxColourData * data) {
     return self->Create(parent, data);
 }
 wxColourData * wxColourDialog_GetColourData(wxColourDialog * self) {
     return &(self->GetColourData());
-}
-
-// CLASS: wxColourDialogEvent
-wxClassInfo *wxColourDialogEvent_CLASSINFO() {
-    return wxCLASSINFO(wxColourDialogEvent);
-}
-wxColourDialogEvent *wxColourDialogEvent_new() {
-    return new wxColourDialogEvent();
-}
-wxColour *wxColourDialogEvent_GetColour(const wxColourDialogEvent * self) {
-    return new wxColour(self->GetColour());
-}
-void wxColourDialogEvent_SetColour(wxColourDialogEvent * self, const wxColour * colour) {
-    return self->SetColour(*colour);
 }
 
 // CLASS: wxColourPickerCtrl

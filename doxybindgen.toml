@@ -439,7 +439,7 @@ wxml_files = [
     'wxml/classwx_colour_data.xml',
     'wxml/classwx_colour_database.xml',
     'wxml/classwx_colour_dialog.xml',
-    'wxml/classwx_colour_dialog_event.xml',
+    # 'wxml/classwx_colour_dialog_event.xml', # requires 3.1
     'wxml/classwx_colour_picker_ctrl.xml',
     'wxml/classwx_colour_picker_event.xml',
     'wxml/classwx_combo_box.xml',
@@ -724,6 +724,15 @@ wx31 = [
 [types.wxColourData]
 blocklist = [
     'operator=',
+]
+wx31 = [
+    # Not documented, but from 3.1.1
+    'GetChooseAlpha',
+]
+[types.wxColourDialog]
+wx31 = [
+    # Changed constness in 3.1.2
+    'wxColourDialog',
 ]
 [types.wxColourPickerCtrl]
 blocklist = [

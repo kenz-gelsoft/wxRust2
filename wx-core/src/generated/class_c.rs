@@ -1066,51 +1066,6 @@ impl<const OWNED: bool> DynamicCast for ColourDialogIsOwned<OWNED> {
     }
 }
 
-// wxColourDialogEvent
-wx_class! { ColourDialogEvent =
-    ColourDialogEventIsOwned<true>(wxColourDialogEvent) impl
-        ColourDialogEventMethods,
-        CommandEventMethods,
-        EventMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> ColourDialogEventIsOwned<OWNED> {
-    pub fn new() -> ColourDialogEventIsOwned<OWNED> {
-        unsafe { ColourDialogEventIsOwned(ffi::wxColourDialogEvent_new()) }
-    }
-    // NOT_SUPPORTED: fn wxColourDialogEvent1()
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<ColourDialogEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
-    fn from(o: ColourDialogEventIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<ColourDialogEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
-    fn from(o: ColourDialogEventIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<ColourDialogEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: ColourDialogEventIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for ColourDialogEventIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxColourDialogEvent_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Drop for ColourDialogEventIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObject_delete(self.0) }
-        }
-    }
-}
-
 // wxColourPickerCtrl
 wx_class! { ColourPickerCtrl =
     ColourPickerCtrlIsOwned<true>(wxColourPickerCtrl) impl
