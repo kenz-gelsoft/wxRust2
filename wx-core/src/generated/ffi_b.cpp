@@ -2,6 +2,29 @@
 
 extern "C" {
 
+// CLASS: wxBannerWindow
+wxClassInfo *wxBannerWindow_CLASSINFO() {
+    return wxCLASSINFO(wxBannerWindow);
+}
+wxBannerWindow *wxBannerWindow_new() {
+    return new wxBannerWindow();
+}
+wxBannerWindow *wxBannerWindow_new2(wxWindow * parent, wxWindowID winid, wxDirection dir, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxBannerWindow(parent, winid, dir, *pos, *size, style, *name);
+}
+bool wxBannerWindow_Create(wxBannerWindow * self, wxWindow * parent, wxWindowID winid, wxDirection dir, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, winid, dir, *pos, *size, style, *name);
+}
+void wxBannerWindow_SetBitmap(wxBannerWindow * self, const wxBitmapBundle * bmp) {
+    return self->SetBitmap(*bmp);
+}
+void wxBannerWindow_SetText(wxBannerWindow * self, const wxString * title, const wxString * message) {
+    return self->SetText(*title, *message);
+}
+void wxBannerWindow_SetGradient(wxBannerWindow * self, const wxColour * start, const wxColour * end) {
+    return self->SetGradient(*start, *end);
+}
+
 // CLASS: wxBitmap
 wxClassInfo *wxBitmap_CLASSINFO() {
     return wxCLASSINFO(wxBitmap);
@@ -295,6 +318,88 @@ wxBitmapButton * wxBitmapButton_NewCloseButton(wxWindow * parent, wxWindowID win
 }
 #endif
 
+// CLASS: wxBitmapComboBox
+wxClassInfo *wxBitmapComboBox_CLASSINFO() {
+    return wxCLASSINFO(wxBitmapComboBox);
+}
+wxBitmapComboBox *wxBitmapComboBox_new() {
+    return new wxBitmapComboBox();
+}
+wxBitmapComboBox *wxBitmapComboBox_new2(wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name) {
+    return new wxBitmapComboBox(parent, id, *value, *pos, *size, *choices, style, *validator, *name);
+}
+int wxBitmapComboBox_Append(wxBitmapComboBox * self, const wxString * item, const wxBitmap * bitmap) {
+    return self->Append(*item, *bitmap);
+}
+int wxBitmapComboBox_Append1(wxBitmapComboBox * self, const wxString * item, const wxBitmap * bitmap, void * client_data) {
+    return self->Append(*item, *bitmap, client_data);
+}
+int wxBitmapComboBox_Append2(wxBitmapComboBox * self, const wxString * item, const wxBitmap * bitmap, wxClientData * client_data) {
+    return self->Append(*item, *bitmap, client_data);
+}
+bool wxBitmapComboBox_Create1(wxBitmapComboBox * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, *value, *pos, *size, *choices, style, *validator, *name);
+}
+wxSize *wxBitmapComboBox_GetBitmapSize(const wxBitmapComboBox * self) {
+    return new wxSize(self->GetBitmapSize());
+}
+wxBitmap *wxBitmapComboBox_GetItemBitmap(const wxBitmapComboBox * self, unsigned int n) {
+    return new wxBitmap(self->GetItemBitmap(n));
+}
+int wxBitmapComboBox_Insert(wxBitmapComboBox * self, const wxString * item, const wxBitmap * bitmap, unsigned int pos) {
+    return self->Insert(*item, *bitmap, pos);
+}
+int wxBitmapComboBox_Insert1(wxBitmapComboBox * self, const wxString * item, const wxBitmap * bitmap, unsigned int pos, void * client_data) {
+    return self->Insert(*item, *bitmap, pos, client_data);
+}
+int wxBitmapComboBox_Insert2(wxBitmapComboBox * self, const wxString * item, const wxBitmap * bitmap, unsigned int pos, wxClientData * client_data) {
+    return self->Insert(*item, *bitmap, pos, client_data);
+}
+void wxBitmapComboBox_SetItemBitmap(wxBitmapComboBox * self, unsigned int n, const wxBitmapBundle * bitmap) {
+    return self->SetItemBitmap(n, *bitmap);
+}
+// Mix-in(s) to wxBitmapComboBox
+wxItemContainer *wxBitmapComboBox_AsItemContainer(wxBitmapComboBox* obj) {
+    return static_cast<wxItemContainer*>(obj);
+}
+wxTextEntryBase *wxBitmapComboBox_AsTextEntry(wxBitmapComboBox* obj) {
+    return static_cast<wxTextEntryBase*>(obj);
+}
+
+// CLASS: wxBitmapDataObject
+void wxBitmapDataObject_delete(wxBitmapDataObject *self) {
+    delete self;
+}
+wxBitmapDataObject *wxBitmapDataObject_new(const wxBitmap * bitmap) {
+    return new wxBitmapDataObject(*bitmap);
+}
+wxBitmap *wxBitmapDataObject_GetBitmap(const wxBitmapDataObject * self) {
+    return new wxBitmap(self->GetBitmap());
+}
+void wxBitmapDataObject_SetBitmap(wxBitmapDataObject * self, const wxBitmap * bitmap) {
+    return self->SetBitmap(*bitmap);
+}
+
+// CLASS: wxBitmapHandler
+wxClassInfo *wxBitmapHandler_CLASSINFO() {
+    return wxCLASSINFO(wxBitmapHandler);
+}
+wxBitmapHandler *wxBitmapHandler_new() {
+    return new wxBitmapHandler();
+}
+wxString *wxBitmapHandler_GetExtension(const wxBitmapHandler * self) {
+    return new wxString(self->GetExtension());
+}
+wxString *wxBitmapHandler_GetName(const wxBitmapHandler * self) {
+    return new wxString(self->GetName());
+}
+void wxBitmapHandler_SetExtension(wxBitmapHandler * self, const wxString * extension) {
+    return self->SetExtension(*extension);
+}
+void wxBitmapHandler_SetName(wxBitmapHandler * self, const wxString * name) {
+    return self->SetName(*name);
+}
+
 // CLASS: wxBitmapToggleButton
 wxClassInfo *wxBitmapToggleButton_CLASSINFO() {
     return wxCLASSINFO(wxBitmapToggleButton);
@@ -404,6 +509,78 @@ int wxBoxSizer_GetOrientation(const wxBoxSizer * self) {
 void wxBoxSizer_SetOrientation(wxBoxSizer * self, int orient) {
     return self->SetOrientation(orient);
 }
+
+// CLASS: wxBrush
+wxClassInfo *wxBrush_CLASSINFO() {
+    return wxCLASSINFO(wxBrush);
+}
+wxBrush *wxBrush_new() {
+    return new wxBrush();
+}
+wxBrush *wxBrush_new2(const wxBitmap * stipple_bitmap) {
+    return new wxBrush(*stipple_bitmap);
+}
+wxBrush *wxBrush_new3(const wxBrush * brush) {
+    return new wxBrush(*brush);
+}
+wxColour *wxBrush_GetColour(const wxBrush * self) {
+    return new wxColour(self->GetColour());
+}
+wxBitmap * wxBrush_GetStipple(const wxBrush * self) {
+    return self->GetStipple();
+}
+bool wxBrush_IsHatch(const wxBrush * self) {
+    return self->IsHatch();
+}
+bool wxBrush_IsOk(const wxBrush * self) {
+    return self->IsOk();
+}
+bool wxBrush_IsNonTransparent(const wxBrush * self) {
+    return self->IsNonTransparent();
+}
+bool wxBrush_IsTransparent(const wxBrush * self) {
+    return self->IsTransparent();
+}
+void wxBrush_SetColour(wxBrush * self, const wxColour * colour) {
+    return self->SetColour(*colour);
+}
+void wxBrush_SetStipple(wxBrush * self, const wxBitmap * bitmap) {
+    return self->SetStipple(*bitmap);
+}
+
+// CLASS: wxBrushList
+void wxBrushList_delete(wxBrushList *self) {
+    delete self;
+}
+
+// CLASS: wxBusyCursor
+void wxBusyCursor_delete(wxBusyCursor *self) {
+    delete self;
+}
+wxBusyCursor *wxBusyCursor_new(const wxCursor * cursor) {
+    return new wxBusyCursor(cursor);
+}
+
+// CLASS: wxBusyInfo
+void wxBusyInfo_delete(wxBusyInfo *self) {
+    delete self;
+}
+#if wxCHECK_VERSION(3, 1, 0)
+wxBusyInfo *wxBusyInfo_new(const wxBusyInfoFlags * flags) {
+    return new wxBusyInfo(*flags);
+}
+#endif
+wxBusyInfo *wxBusyInfo_new1(const wxString * msg, wxWindow * parent) {
+    return new wxBusyInfo(*msg, parent);
+}
+#if wxCHECK_VERSION(3, 1, 0)
+void wxBusyInfo_UpdateText(wxBusyInfo * self, const wxString * str) {
+    return self->UpdateText(*str);
+}
+void wxBusyInfo_UpdateLabel(wxBusyInfo * self, const wxString * str) {
+    return self->UpdateLabel(*str);
+}
+#endif
 
 // CLASS: wxButton
 wxClassInfo *wxButton_CLASSINFO() {

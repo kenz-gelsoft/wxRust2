@@ -1,16 +1,31 @@
 #pragma once
 
+#include <wx/bannerwindow.h>
 #include <wx/bitmap.h>
 #if wxCHECK_VERSION(3, 1, 0)
 #include <wx/bmpbndl.h>
 #endif
 #include <wx/bmpbuttn.h>
+#include <wx/bmpcbox.h>
 #include <wx/bookctrl.h>
+#include <wx/brush.h>
+#include <wx/busyinfo.h>
 #include <wx/button.h>
+#include <wx/dataobj.h>
 #include <wx/sizer.h>
 #include <wx/tglbtn.h>
+#include <wx/utils.h>
 
 extern "C" {
+
+// CLASS: wxBannerWindow
+wxClassInfo *wxBannerWindow_CLASSINFO();
+wxBannerWindow *wxBannerWindow_new();
+wxBannerWindow *wxBannerWindow_new2(wxWindow * parent, wxWindowID winid, wxDirection dir, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+bool wxBannerWindow_Create(wxBannerWindow * self, wxWindow * parent, wxWindowID winid, wxDirection dir, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+void wxBannerWindow_SetBitmap(wxBannerWindow * self, const wxBitmapBundle * bmp);
+void wxBannerWindow_SetText(wxBannerWindow * self, const wxString * title, const wxString * message);
+void wxBannerWindow_SetGradient(wxBannerWindow * self, const wxColour * start, const wxColour * end);
 
 // CLASS: wxBitmap
 wxClassInfo *wxBitmap_CLASSINFO();
@@ -139,6 +154,38 @@ bool wxBitmapButton_CreateCloseButton(wxBitmapButton * self, wxWindow * parent, 
 wxBitmapButton * wxBitmapButton_NewCloseButton(wxWindow * parent, wxWindowID winid, const wxString * name);
 #endif
 
+// CLASS: wxBitmapComboBox
+wxClassInfo *wxBitmapComboBox_CLASSINFO();
+wxBitmapComboBox *wxBitmapComboBox_new();
+wxBitmapComboBox *wxBitmapComboBox_new2(wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
+int wxBitmapComboBox_Append(wxBitmapComboBox * self, const wxString * item, const wxBitmap * bitmap);
+int wxBitmapComboBox_Append1(wxBitmapComboBox * self, const wxString * item, const wxBitmap * bitmap, void * client_data);
+int wxBitmapComboBox_Append2(wxBitmapComboBox * self, const wxString * item, const wxBitmap * bitmap, wxClientData * client_data);
+bool wxBitmapComboBox_Create1(wxBitmapComboBox * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
+wxSize *wxBitmapComboBox_GetBitmapSize(const wxBitmapComboBox * self);
+wxBitmap *wxBitmapComboBox_GetItemBitmap(const wxBitmapComboBox * self, unsigned int n);
+int wxBitmapComboBox_Insert(wxBitmapComboBox * self, const wxString * item, const wxBitmap * bitmap, unsigned int pos);
+int wxBitmapComboBox_Insert1(wxBitmapComboBox * self, const wxString * item, const wxBitmap * bitmap, unsigned int pos, void * client_data);
+int wxBitmapComboBox_Insert2(wxBitmapComboBox * self, const wxString * item, const wxBitmap * bitmap, unsigned int pos, wxClientData * client_data);
+void wxBitmapComboBox_SetItemBitmap(wxBitmapComboBox * self, unsigned int n, const wxBitmapBundle * bitmap);
+// Mix-in(s) to wxBitmapComboBox
+wxItemContainer *wxBitmapComboBox_AsItemContainer(wxBitmapComboBox* obj);
+wxTextEntryBase *wxBitmapComboBox_AsTextEntry(wxBitmapComboBox* obj);
+
+// CLASS: wxBitmapDataObject
+void wxBitmapDataObject_delete(wxBitmapDataObject *self);
+wxBitmapDataObject *wxBitmapDataObject_new(const wxBitmap * bitmap);
+wxBitmap *wxBitmapDataObject_GetBitmap(const wxBitmapDataObject * self);
+void wxBitmapDataObject_SetBitmap(wxBitmapDataObject * self, const wxBitmap * bitmap);
+
+// CLASS: wxBitmapHandler
+wxClassInfo *wxBitmapHandler_CLASSINFO();
+wxBitmapHandler *wxBitmapHandler_new();
+wxString *wxBitmapHandler_GetExtension(const wxBitmapHandler * self);
+wxString *wxBitmapHandler_GetName(const wxBitmapHandler * self);
+void wxBitmapHandler_SetExtension(wxBitmapHandler * self, const wxString * extension);
+void wxBitmapHandler_SetName(wxBitmapHandler * self, const wxString * name);
+
 // CLASS: wxBitmapToggleButton
 wxClassInfo *wxBitmapToggleButton_CLASSINFO();
 wxBitmapToggleButton *wxBitmapToggleButton_new();
@@ -180,6 +227,38 @@ wxClassInfo *wxBoxSizer_CLASSINFO();
 wxBoxSizer *wxBoxSizer_new(int orient);
 int wxBoxSizer_GetOrientation(const wxBoxSizer * self);
 void wxBoxSizer_SetOrientation(wxBoxSizer * self, int orient);
+
+// CLASS: wxBrush
+wxClassInfo *wxBrush_CLASSINFO();
+wxBrush *wxBrush_new();
+wxBrush *wxBrush_new2(const wxBitmap * stipple_bitmap);
+wxBrush *wxBrush_new3(const wxBrush * brush);
+wxColour *wxBrush_GetColour(const wxBrush * self);
+wxBitmap * wxBrush_GetStipple(const wxBrush * self);
+bool wxBrush_IsHatch(const wxBrush * self);
+bool wxBrush_IsOk(const wxBrush * self);
+bool wxBrush_IsNonTransparent(const wxBrush * self);
+bool wxBrush_IsTransparent(const wxBrush * self);
+void wxBrush_SetColour(wxBrush * self, const wxColour * colour);
+void wxBrush_SetStipple(wxBrush * self, const wxBitmap * bitmap);
+
+// CLASS: wxBrushList
+void wxBrushList_delete(wxBrushList *self);
+
+// CLASS: wxBusyCursor
+void wxBusyCursor_delete(wxBusyCursor *self);
+wxBusyCursor *wxBusyCursor_new(const wxCursor * cursor);
+
+// CLASS: wxBusyInfo
+void wxBusyInfo_delete(wxBusyInfo *self);
+#if wxCHECK_VERSION(3, 1, 0)
+wxBusyInfo *wxBusyInfo_new(const wxBusyInfoFlags * flags);
+#endif
+wxBusyInfo *wxBusyInfo_new1(const wxString * msg, wxWindow * parent);
+#if wxCHECK_VERSION(3, 1, 0)
+void wxBusyInfo_UpdateText(wxBusyInfo * self, const wxString * str);
+void wxBusyInfo_UpdateLabel(wxBusyInfo * self, const wxString * str);
+#endif
 
 // CLASS: wxButton
 wxClassInfo *wxButton_CLASSINFO();

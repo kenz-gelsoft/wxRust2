@@ -1,5 +1,40 @@
 use super::*;
 
+// wxDataObject
+pub trait DataObjectMethods: WxRustMethods {
+    // DTOR: fn ~wxDataObject()
+    // NOT_SUPPORTED: fn GetAllFormats()
+    fn get_data_here(&self, format: *const c_void, buf: *mut c_void) -> bool {
+        unsafe { ffi::wxDataObject_GetDataHere(self.as_ptr(), format, buf) }
+    }
+    fn get_data_size(&self, format: *const c_void) -> usize {
+        unsafe { ffi::wxDataObject_GetDataSize(self.as_ptr(), format) }
+    }
+    // NOT_SUPPORTED: fn GetFormatCount()
+    // NOT_SUPPORTED: fn GetPreferredFormat()
+    fn set_data(&self, format: *const c_void, len: usize, buf: *const c_void) -> bool {
+        unsafe { ffi::wxDataObject_SetData(self.as_ptr(), format, len, buf) }
+    }
+    // NOT_SUPPORTED: fn IsSupported()
+}
+
+// wxDataObjectSimple
+pub trait DataObjectSimpleMethods: DataObjectMethods {
+    fn get_data_here_void(&self, buf: *mut c_void) -> bool {
+        unsafe { ffi::wxDataObjectSimple_GetDataHere(self.as_ptr(), buf) }
+    }
+    fn get_data_size(&self) -> usize {
+        unsafe { ffi::wxDataObjectSimple_GetDataSize(self.as_ptr()) }
+    }
+    // BLOCKED: fn GetFormat()
+    fn set_data_sz(&self, len: usize, buf: *const c_void) -> bool {
+        unsafe { ffi::wxDataObjectSimple_SetData(self.as_ptr(), len, buf) }
+    }
+    fn set_format(&self, format: *const c_void) {
+        unsafe { ffi::wxDataObjectSimple_SetFormat(self.as_ptr(), format) }
+    }
+}
+
 // wxDatePickerCtrl
 pub trait DatePickerCtrlMethods: ControlMethods {
     fn create_datetime<

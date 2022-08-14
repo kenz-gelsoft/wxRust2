@@ -2,6 +2,67 @@
 
 use super::*;
 
+// wxBannerWindow
+wx_class! { BannerWindow =
+    BannerWindowIsOwned<true>(wxBannerWindow) impl
+        BannerWindowMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> BannerWindowIsOwned<OWNED> {
+    pub fn new_2step() -> BannerWindowIsOwned<OWNED> {
+        unsafe { BannerWindowIsOwned(ffi::wxBannerWindow_new()) }
+    }
+    // BLOCKED: fn wxBannerWindow1()
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&W>,
+        winid: c_int,
+        dir: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> BannerWindowIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            BannerWindowIsOwned(ffi::wxBannerWindow_new2(
+                parent, winid, dir, pos, size, style, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<BannerWindowIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: BannerWindowIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BannerWindowIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: BannerWindowIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BannerWindowIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: BannerWindowIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for BannerWindowIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxBannerWindow_CLASSINFO()) }
+    }
+}
+
 // wxBitmap
 wx_class! { Bitmap =
     BitmapIsOwned<true>(wxBitmap) impl
@@ -201,6 +262,223 @@ impl<const OWNED: bool> From<BitmapButtonIsOwned<OWNED>> for ObjectIsOwned<OWNED
 impl<const OWNED: bool> DynamicCast for BitmapButtonIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxBitmapButton_CLASSINFO()) }
+    }
+}
+
+// wxBitmapComboBox
+wx_class! { BitmapComboBox =
+    BitmapComboBoxIsOwned<true>(wxBitmapComboBox) impl
+        BitmapComboBoxMethods,
+        // ComboBoxMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> BitmapComboBoxIsOwned<OWNED> {
+    pub fn new_2step() -> BitmapComboBoxIsOwned<OWNED> {
+        unsafe { BitmapComboBoxIsOwned(ffi::wxBitmapComboBox_new()) }
+    }
+    // NOT_SUPPORTED: fn wxBitmapComboBox1()
+    pub fn new<
+        W: WindowMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        A: ArrayStringMethods,
+        V: ValidatorMethods,
+    >(
+        parent: Option<&W>,
+        id: c_int,
+        value: &str,
+        pos: &P,
+        size: &S,
+        choices: &A,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> BitmapComboBoxIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let value = WxString::from(value);
+            let value = value.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let choices = choices.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            BitmapComboBoxIsOwned(ffi::wxBitmapComboBox_new2(
+                parent, id, value, pos, size, choices, style, validator, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<BitmapComboBoxIsOwned<OWNED>> for ComboBoxIsOwned<OWNED> {
+    fn from(o: BitmapComboBoxIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BitmapComboBoxIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: BitmapComboBoxIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BitmapComboBoxIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: BitmapComboBoxIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BitmapComboBoxIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: BitmapComboBoxIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BitmapComboBoxIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: BitmapComboBoxIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for BitmapComboBoxIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxBitmapComboBox_CLASSINFO()) }
+    }
+}
+// Mix-in(s) to wxBitmapComboBox
+impl<const OWNED: bool> ItemContainerMethods for BitmapComboBoxIsOwned<OWNED> {
+    fn as_item_container(&self) -> *mut c_void {
+        unsafe { ffi::wxBitmapComboBox_AsItemContainer(self.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> ItemContainerImmutableMethods for BitmapComboBoxIsOwned<OWNED> {
+    fn as_item_container_immutable(&self) -> *mut c_void {
+        unsafe { ffi::wxBitmapComboBox_AsItemContainer(self.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> TextEntryMethods for BitmapComboBoxIsOwned<OWNED> {
+    fn as_text_entry(&self) -> *mut c_void {
+        unsafe { ffi::wxBitmapComboBox_AsTextEntry(self.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> ComboBoxMethods for BitmapComboBoxIsOwned<OWNED> {
+    // NOT_SUPPORTED: fn Create()
+    fn create_str<
+        W: WindowMethods,
+        P: PointMethods,
+        S: SizeMethods,
+        A: ArrayStringMethods,
+        V: ValidatorMethods,
+    >(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        value: &str,
+        pos: &P,
+        size: &S,
+        choices: &A,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let value = WxString::from(value);
+            let value = value.as_ptr();
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let choices = choices.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxBitmapComboBox_Create1(
+                self.as_ptr(),
+                parent,
+                id,
+                value,
+                pos,
+                size,
+                choices,
+                style,
+                validator,
+                name,
+            )
+        }
+    }
+}
+
+// wxBitmapDataObject
+wx_class! { BitmapDataObject =
+    BitmapDataObjectIsOwned<true>(wxBitmapDataObject) impl
+        BitmapDataObjectMethods,
+        DataObjectSimpleMethods,
+        DataObjectMethods
+}
+impl<const OWNED: bool> BitmapDataObjectIsOwned<OWNED> {
+    pub fn new<B: BitmapMethods>(bitmap: &B) -> BitmapDataObjectIsOwned<OWNED> {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            BitmapDataObjectIsOwned(ffi::wxBitmapDataObject_new(bitmap))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<BitmapDataObjectIsOwned<OWNED>> for DataObjectSimpleIsOwned<OWNED> {
+    fn from(o: BitmapDataObjectIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BitmapDataObjectIsOwned<OWNED>> for DataObjectIsOwned<OWNED> {
+    fn from(o: BitmapDataObjectIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> Drop for BitmapDataObjectIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxBitmapDataObject_delete(self.0) }
+        }
+    }
+}
+
+// wxBitmapHandler
+wx_class! { BitmapHandler =
+    BitmapHandlerIsOwned<true>(wxBitmapHandler) impl
+        BitmapHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> BitmapHandlerIsOwned<OWNED> {
+    pub fn new() -> BitmapHandlerIsOwned<OWNED> {
+        unsafe { BitmapHandlerIsOwned(ffi::wxBitmapHandler_new()) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<BitmapHandlerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: BitmapHandlerIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for BitmapHandlerIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxBitmapHandler_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for BitmapHandlerIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
     }
 }
 
@@ -440,6 +718,128 @@ impl<const OWNED: bool> From<BoxSizerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for BoxSizerIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxBoxSizer_CLASSINFO()) }
+    }
+}
+
+// wxBrush
+wx_class! { Brush =
+    BrushIsOwned<true>(wxBrush) impl
+        BrushMethods,
+        GDIObjectMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> BrushIsOwned<OWNED> {
+    pub fn new() -> BrushIsOwned<OWNED> {
+        unsafe { BrushIsOwned(ffi::wxBrush_new()) }
+    }
+    // NOT_SUPPORTED: fn wxBrush1()
+    pub fn new_with_bitmap<B: BitmapMethods>(stipple_bitmap: &B) -> BrushIsOwned<OWNED> {
+        unsafe {
+            let stipple_bitmap = stipple_bitmap.as_ptr();
+            BrushIsOwned(ffi::wxBrush_new2(stipple_bitmap))
+        }
+    }
+    pub fn new_with_brush<B: BrushMethods>(brush: &B) -> BrushIsOwned<OWNED> {
+        unsafe {
+            let brush = brush.as_ptr();
+            BrushIsOwned(ffi::wxBrush_new3(brush))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<BrushIsOwned<OWNED>> for GDIObjectIsOwned<OWNED> {
+    fn from(o: BrushIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<BrushIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: BrushIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for BrushIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxBrush_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for BrushIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
+// wxBrushList
+wx_class! { BrushList =
+    BrushListIsOwned<true>(wxBrushList) impl
+        BrushListMethods
+}
+impl<const OWNED: bool> BrushListIsOwned<OWNED> {
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for BrushListIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxBrushList_delete(self.0) }
+        }
+    }
+}
+
+// wxBusyCursor
+wx_class! { BusyCursor =
+    BusyCursorIsOwned<true>(wxBusyCursor) impl
+        BusyCursorMethods
+}
+impl<const OWNED: bool> BusyCursorIsOwned<OWNED> {
+    pub fn new(cursor: *const c_void) -> BusyCursorIsOwned<OWNED> {
+        unsafe { BusyCursorIsOwned(ffi::wxBusyCursor_new(cursor)) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for BusyCursorIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxBusyCursor_delete(self.0) }
+        }
+    }
+}
+
+// wxBusyInfo
+wx_class! { BusyInfo =
+    BusyInfoIsOwned<true>(wxBusyInfo) impl
+        BusyInfoMethods
+}
+impl<const OWNED: bool> BusyInfoIsOwned<OWNED> {
+    pub fn new_with_busyinfoflags(flags: *const c_void) -> BusyInfoIsOwned<OWNED> {
+        unsafe { BusyInfoIsOwned(ffi::wxBusyInfo_new(flags)) }
+    }
+    pub fn new_with_str<W: WindowMethods>(msg: &str, parent: Option<&W>) -> BusyInfoIsOwned<OWNED> {
+        unsafe {
+            let msg = WxString::from(msg);
+            let msg = msg.as_ptr();
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            BusyInfoIsOwned(ffi::wxBusyInfo_new1(msg, parent))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for BusyInfoIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxBusyInfo_delete(self.0) }
+        }
     }
 }
 

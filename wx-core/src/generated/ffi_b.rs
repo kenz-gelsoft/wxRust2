@@ -2,6 +2,33 @@ use super::*;
 
 extern "C" {
 
+    // wxBannerWindow
+    pub fn wxBannerWindow_CLASSINFO() -> *mut c_void;
+    pub fn wxBannerWindow_new() -> *mut c_void;
+    // BLOCKED: pub fn wxBannerWindow_new1(parent: *mut c_void, dir: c_int) -> *mut c_void;
+    pub fn wxBannerWindow_new2(
+        parent: *mut c_void,
+        winid: c_int,
+        dir: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxBannerWindow_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        winid: c_int,
+        dir: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxBannerWindow_SetBitmap(self_: *mut c_void, bmp: *const c_void);
+    pub fn wxBannerWindow_SetText(self_: *mut c_void, title: *const c_void, message: *const c_void);
+    pub fn wxBannerWindow_SetGradient(self_: *mut c_void, start: *const c_void, end: *const c_void);
+
     // wxBitmap
     pub fn wxBitmap_CLASSINFO() -> *mut c_void;
     pub fn wxBitmap_new() -> *mut c_void;
@@ -175,6 +202,99 @@ extern "C" {
         name: *const c_void,
     ) -> *mut c_void;
 
+    // wxBitmapComboBox
+    pub fn wxBitmapComboBox_CLASSINFO() -> *mut c_void;
+    pub fn wxBitmapComboBox_new() -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxBitmapComboBox_new1(parent: *mut c_void, id: c_int, value: *const c_void, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> *mut c_void;
+    pub fn wxBitmapComboBox_new2(
+        parent: *mut c_void,
+        id: c_int,
+        value: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        choices: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    // DTOR: pub fn wxBitmapComboBox_~wxBitmapComboBox(self_: *mut c_void);
+    pub fn wxBitmapComboBox_Append(
+        self_: *mut c_void,
+        item: *const c_void,
+        bitmap: *const c_void,
+    ) -> c_int;
+    pub fn wxBitmapComboBox_Append1(
+        self_: *mut c_void,
+        item: *const c_void,
+        bitmap: *const c_void,
+        client_data: *mut c_void,
+    ) -> c_int;
+    pub fn wxBitmapComboBox_Append2(
+        self_: *mut c_void,
+        item: *const c_void,
+        bitmap: *const c_void,
+        client_data: *mut c_void,
+    ) -> c_int;
+    // NOT_SUPPORTED: pub fn wxBitmapComboBox_Create(self_: *mut c_void, parent: *mut c_void, id: c_int, value: *const c_void, pos: *const c_void, size: *const c_void, n: c_int, choices: wxString, style: c_long, validator: *const c_void, name: *const c_void) -> bool;
+    pub fn wxBitmapComboBox_Create1(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        value: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        choices: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxBitmapComboBox_GetBitmapSize(self_: *const c_void) -> *mut c_void;
+    pub fn wxBitmapComboBox_GetItemBitmap(self_: *const c_void, n: c_uint) -> *mut c_void;
+    pub fn wxBitmapComboBox_Insert(
+        self_: *mut c_void,
+        item: *const c_void,
+        bitmap: *const c_void,
+        pos: c_uint,
+    ) -> c_int;
+    pub fn wxBitmapComboBox_Insert1(
+        self_: *mut c_void,
+        item: *const c_void,
+        bitmap: *const c_void,
+        pos: c_uint,
+        client_data: *mut c_void,
+    ) -> c_int;
+    pub fn wxBitmapComboBox_Insert2(
+        self_: *mut c_void,
+        item: *const c_void,
+        bitmap: *const c_void,
+        pos: c_uint,
+        client_data: *mut c_void,
+    ) -> c_int;
+    pub fn wxBitmapComboBox_SetItemBitmap(self_: *mut c_void, n: c_uint, bitmap: *const c_void);
+    // Mix-in(s) to wxBitmapComboBox
+    pub fn wxBitmapComboBox_AsItemContainer(obj: *mut c_void) -> *mut c_void;
+    pub fn wxBitmapComboBox_AsTextEntry(obj: *mut c_void) -> *mut c_void;
+
+    // wxBitmapDataObject
+    pub fn wxBitmapDataObject_delete(self_: *mut c_void);
+    pub fn wxBitmapDataObject_new(bitmap: *const c_void) -> *mut c_void;
+    pub fn wxBitmapDataObject_GetBitmap(self_: *const c_void) -> *mut c_void;
+    pub fn wxBitmapDataObject_SetBitmap(self_: *mut c_void, bitmap: *const c_void);
+
+    // wxBitmapHandler
+    pub fn wxBitmapHandler_CLASSINFO() -> *mut c_void;
+    pub fn wxBitmapHandler_new() -> *mut c_void;
+    // DTOR: pub fn wxBitmapHandler_~wxBitmapHandler(self_: *mut c_void);
+    // NOT_SUPPORTED: pub fn wxBitmapHandler_Create(self_: *mut c_void, bitmap: *mut c_void, data: *const c_void, type_: wxBitmapType, width: c_int, height: c_int, depth: c_int) -> bool;
+    pub fn wxBitmapHandler_GetExtension(self_: *const c_void) -> *mut c_void;
+    pub fn wxBitmapHandler_GetName(self_: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxBitmapHandler_GetType(self_: *const c_void) -> wxBitmapType;
+    // NOT_SUPPORTED: pub fn wxBitmapHandler_LoadFile(self_: *mut c_void, bitmap: *mut c_void, name: *const c_void, type_: wxBitmapType, desired_width: c_int, desired_height: c_int) -> bool;
+    // NOT_SUPPORTED: pub fn wxBitmapHandler_SaveFile(self_: *const c_void, bitmap: *const c_void, name: *const c_void, type_: wxBitmapType, palette: *const c_void) -> bool;
+    pub fn wxBitmapHandler_SetExtension(self_: *mut c_void, extension: *const c_void);
+    pub fn wxBitmapHandler_SetName(self_: *mut c_void, name: *const c_void);
+    // NOT_SUPPORTED: pub fn wxBitmapHandler_SetType(self_: *mut c_void, type_: wxBitmapType);
+
     // wxBitmapToggleButton
     pub fn wxBitmapToggleButton_CLASSINFO() -> *mut c_void;
     pub fn wxBitmapToggleButton_new() -> *mut c_void;
@@ -264,6 +384,44 @@ extern "C" {
     pub fn wxBoxSizer_new(orient: c_int) -> *mut c_void;
     pub fn wxBoxSizer_GetOrientation(self_: *const c_void) -> c_int;
     pub fn wxBoxSizer_SetOrientation(self_: *mut c_void, orient: c_int);
+
+    // wxBrush
+    pub fn wxBrush_CLASSINFO() -> *mut c_void;
+    pub fn wxBrush_new() -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxBrush_new1(colour: *const c_void, style: wxBrushStyle) -> *mut c_void;
+    pub fn wxBrush_new2(stipple_bitmap: *const c_void) -> *mut c_void;
+    pub fn wxBrush_new3(brush: *const c_void) -> *mut c_void;
+    // DTOR: pub fn wxBrush_~wxBrush(self_: *mut c_void);
+    pub fn wxBrush_GetColour(self_: *const c_void) -> *mut c_void;
+    pub fn wxBrush_GetStipple(self_: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxBrush_GetStyle(self_: *const c_void) -> wxBrushStyle;
+    pub fn wxBrush_IsHatch(self_: *const c_void) -> bool;
+    pub fn wxBrush_IsOk(self_: *const c_void) -> bool;
+    pub fn wxBrush_IsNonTransparent(self_: *const c_void) -> bool;
+    pub fn wxBrush_IsTransparent(self_: *const c_void) -> bool;
+    pub fn wxBrush_SetColour(self_: *mut c_void, colour: *const c_void);
+    // NOT_SUPPORTED: pub fn wxBrush_SetColour1(self_: *mut c_void, red: unsigned char, green: unsigned char, blue: unsigned char);
+    pub fn wxBrush_SetStipple(self_: *mut c_void, bitmap: *const c_void);
+    // NOT_SUPPORTED: pub fn wxBrush_SetStyle(self_: *mut c_void, style: wxBrushStyle);
+    // BLOCKED: pub fn wxBrush_operator!=(self_: *const c_void, brush: *const c_void) -> bool;
+    // BLOCKED: pub fn wxBrush_operator==(self_: *const c_void, brush: *const c_void) -> bool;
+
+    // wxBrushList
+    pub fn wxBrushList_delete(self_: *mut c_void);
+    // NOT_SUPPORTED: pub fn wxBrushList_FindOrCreateBrush(self_: *mut c_void, colour: *const c_void, style: wxBrushStyle) -> *mut c_void;
+
+    // wxBusyCursor
+    pub fn wxBusyCursor_delete(self_: *mut c_void);
+    pub fn wxBusyCursor_new(cursor: *const c_void) -> *mut c_void;
+    // DTOR: pub fn wxBusyCursor_~wxBusyCursor(self_: *mut c_void);
+
+    // wxBusyInfo
+    pub fn wxBusyInfo_delete(self_: *mut c_void);
+    pub fn wxBusyInfo_new(flags: *const c_void) -> *mut c_void;
+    pub fn wxBusyInfo_new1(msg: *const c_void, parent: *mut c_void) -> *mut c_void;
+    pub fn wxBusyInfo_UpdateText(self_: *mut c_void, str: *const c_void);
+    pub fn wxBusyInfo_UpdateLabel(self_: *mut c_void, str: *const c_void);
+    // DTOR: pub fn wxBusyInfo_~wxBusyInfo(self_: *mut c_void);
 
     // wxButton
     pub fn wxButton_CLASSINFO() -> *mut c_void;

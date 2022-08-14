@@ -1,9 +1,24 @@
 #pragma once
 
+#include <wx/dataobj.h>
 #include <wx/datectrl.h>
 #include <wx/filepicker.h>
 
 extern "C" {
+
+// CLASS: wxDataObject
+void wxDataObject_delete(wxDataObject *self);
+bool wxDataObject_GetDataHere(const wxDataObject * self, const wxDataFormat * format, void * buf);
+size_t wxDataObject_GetDataSize(const wxDataObject * self, const wxDataFormat * format);
+bool wxDataObject_SetData(wxDataObject * self, const wxDataFormat * format, size_t len, const void * buf);
+
+// CLASS: wxDataObjectSimple
+void wxDataObjectSimple_delete(wxDataObjectSimple *self);
+wxDataObjectSimple *wxDataObjectSimple_new(const wxDataFormat * format);
+bool wxDataObjectSimple_GetDataHere(const wxDataObjectSimple * self, void * buf);
+size_t wxDataObjectSimple_GetDataSize(const wxDataObjectSimple * self);
+bool wxDataObjectSimple_SetData(wxDataObjectSimple * self, size_t len, const void * buf);
+void wxDataObjectSimple_SetFormat(wxDataObjectSimple * self, const wxDataFormat * format);
 
 // CLASS: wxDatePickerCtrl
 wxClassInfo *wxDatePickerCtrl_CLASSINFO();

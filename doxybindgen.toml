@@ -1,23 +1,4 @@
 core_files = [
-    'wxml/classwx_banner_window.xml',
-    'wxml/classwx_bitmap.xml',
-    'wxml/classwx_bitmap_bundle.xml',
-    'wxml/classwx_bitmap_bundle_impl.xml',
-    'wxml/classwx_bitmap_button.xml',
-    'wxml/classwx_bitmap_combo_box.xml',
-    'wxml/classwx_bitmap_data_object.xml',
-    'wxml/classwx_bitmap_handler.xml',
-    'wxml/classwx_bitmap_toggle_button.xml',
-    'wxml/classwx_book_ctrl_base.xml',
-    'wxml/classwx_book_ctrl_event.xml',
-    'wxml/classwx_box_sizer.xml',
-    'wxml/classwx_brush.xml',
-    'wxml/classwx_brush_list.xml',
-    'wxml/classwx_buffered_d_c.xml',
-    'wxml/classwx_buffered_paint_d_c.xml',
-    'wxml/classwx_busy_cursor.xml',
-    'wxml/classwx_busy_info.xml',
-    'wxml/classwx_button.xml',
     'wxml/classwx_calculate_layout_event.xml',
     'wxml/classwx_calendar_ctrl.xml',
     'wxml/classwx_calendar_date_attr.xml',
@@ -456,13 +437,24 @@ wxml_files = [
     'wxml/classwx_art_provider.xml',
     # 'wxml/classwx_auto_buffered_paint_d_c.xml', # requires not yet generated wxBufferedPaintDC
     # 'wxml/classwx_automation_object.xml',
+    'wxml/classwx_banner_window.xml',
     'wxml/classwx_bitmap.xml',
     'wxml/classwx_bitmap_bundle.xml',
+    # 'wxml/classwx_bitmap_bundle_impl.xml', # requires 3.1
     'wxml/classwx_bitmap_button.xml',
+    'wxml/classwx_bitmap_combo_box.xml',
+    'wxml/classwx_bitmap_data_object.xml',
+    'wxml/classwx_bitmap_handler.xml',
     'wxml/classwx_bitmap_toggle_button.xml',
     'wxml/classwx_book_ctrl_base.xml',
     'wxml/classwx_book_ctrl_event.xml',
     'wxml/classwx_box_sizer.xml',
+    'wxml/classwx_brush.xml',
+    'wxml/classwx_brush_list.xml',
+    # 'wxml/classwx_buffered_d_c.xml',       # requires not yet generated wxDC-related classes
+    # 'wxml/classwx_buffered_paint_d_c.xml', # requires not yet generated wxDC-related classes
+    'wxml/classwx_busy_cursor.xml',
+    'wxml/classwx_busy_info.xml',
     'wxml/classwx_button.xml',
     'wxml/classwx_check_box.xml',
     'wxml/classwx_check_list_box.xml',
@@ -473,6 +465,8 @@ wxml_files = [
     'wxml/classwx_combo_box.xml',
     'wxml/classwx_command_event.xml',
     'wxml/classwx_control.xml',
+    'wxml/classwx_data_object.xml',
+    'wxml/classwx_data_object_simple.xml',
     'wxml/classwx_date_picker_ctrl.xml',
     'wxml/classwx_date_time.xml',
     'wxml/classwx_dir_picker_ctrl.xml',
@@ -509,6 +503,7 @@ wxml_files = [
     'wxml/classwx_point.xml',
     'wxml/classwx_radio_box.xml',
     'wxml/classwx_rect.xml',
+    'wxml/classwx_ref_counter.xml',
     'wxml/classwx_search_ctrl.xml',
     'wxml/classwx_settable_header_column.xml',
     'wxml/classwx_size.xml',
@@ -613,6 +608,10 @@ wx317 = [
     # Doc isn't up-to-date in wx3.1.6
     'GetSizeHint',
 ]
+[types.wxBannerWindow]
+blocklist = [
+    'wxBannerWindow1',
+]
 [types.wxBitmapBundle]
 condition = 'wx31'
 blocklist = [
@@ -693,6 +692,17 @@ blocklist = [
     'wxBookCtrlBase',
     'wxBookCtrlBase1',
 ]
+[types.wxBrush]
+blocklist = [
+    'operator!=',
+    'operator==',
+]
+[types.wxBusyInfo]
+wx31 = [
+    'wxBusyInfo',
+    'UpdateLabel',
+    'UpdateText',
+]
 [types.wxButton]
 wx31 = [
     'GetDefaultSize',
@@ -719,6 +729,16 @@ blocklist = [
 [types.wxControl]
 wx31 = [
     'GetSizeFromText',
+]
+[types.wxDataObject]
+blocklist = [
+    # abstract
+    'wxDataObject',
+]
+[types.wxDataObjectSimple]
+blocklist = [
+    # return type docced as ref but returns value
+    'GetFormat',
 ]
 [types.wxDatePickerCtrl]
 wx31 = [

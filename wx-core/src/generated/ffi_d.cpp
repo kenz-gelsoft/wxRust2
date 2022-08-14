@@ -2,6 +2,40 @@
 
 extern "C" {
 
+// CLASS: wxDataObject
+void wxDataObject_delete(wxDataObject *self) {
+    delete self;
+}
+bool wxDataObject_GetDataHere(const wxDataObject * self, const wxDataFormat * format, void * buf) {
+    return self->GetDataHere(*format, buf);
+}
+size_t wxDataObject_GetDataSize(const wxDataObject * self, const wxDataFormat * format) {
+    return self->GetDataSize(*format);
+}
+bool wxDataObject_SetData(wxDataObject * self, const wxDataFormat * format, size_t len, const void * buf) {
+    return self->SetData(*format, len, buf);
+}
+
+// CLASS: wxDataObjectSimple
+void wxDataObjectSimple_delete(wxDataObjectSimple *self) {
+    delete self;
+}
+wxDataObjectSimple *wxDataObjectSimple_new(const wxDataFormat * format) {
+    return new wxDataObjectSimple(*format);
+}
+bool wxDataObjectSimple_GetDataHere(const wxDataObjectSimple * self, void * buf) {
+    return self->GetDataHere(buf);
+}
+size_t wxDataObjectSimple_GetDataSize(const wxDataObjectSimple * self) {
+    return self->GetDataSize();
+}
+bool wxDataObjectSimple_SetData(wxDataObjectSimple * self, size_t len, const void * buf) {
+    return self->SetData(len, buf);
+}
+void wxDataObjectSimple_SetFormat(wxDataObjectSimple * self, const wxDataFormat * format) {
+    return self->SetFormat(*format);
+}
+
 // CLASS: wxDatePickerCtrl
 wxClassInfo *wxDatePickerCtrl_CLASSINFO() {
     return wxCLASSINFO(wxDatePickerCtrl);

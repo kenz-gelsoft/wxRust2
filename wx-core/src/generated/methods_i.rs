@@ -146,21 +146,26 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     fn set_client_object_uint(&self, n: c_uint, data: *mut c_void) {
         unsafe { ffi::wxItemContainer_SetClientObject(self.as_item_container(), n, data) }
     }
-    fn insert_str(&self, item: &str, pos: c_uint) -> c_int {
+    fn insert_str_uint(&self, item: &str, pos: c_uint) -> c_int {
         unsafe {
             let item = WxString::from(item);
             let item = item.as_ptr();
             ffi::wxItemContainer_Insert(self.as_item_container(), item, pos)
         }
     }
-    fn insert_str_void(&self, item: &str, pos: c_uint, client_data: *mut c_void) -> c_int {
+    fn insert_str_uint_void(&self, item: &str, pos: c_uint, client_data: *mut c_void) -> c_int {
         unsafe {
             let item = WxString::from(item);
             let item = item.as_ptr();
             ffi::wxItemContainer_Insert1(self.as_item_container(), item, pos, client_data)
         }
     }
-    fn insert_str_clientdata(&self, item: &str, pos: c_uint, client_data: *mut c_void) -> c_int {
+    fn insert_str_uint_clientdata(
+        &self,
+        item: &str,
+        pos: c_uint,
+        client_data: *mut c_void,
+    ) -> c_int {
         unsafe {
             let item = WxString::from(item);
             let item = item.as_ptr();

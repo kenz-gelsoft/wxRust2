@@ -607,7 +607,7 @@ impl ComboboxWidgetsPage {
         if let Some(combobox) = self.combobox.borrow().as_ref() {
             let sel = combobox.get_selection();
             if sel >= 0 {
-                combobox.insert_str(&s, sel.try_into().unwrap());
+                combobox.insert_str_uint(&s, sel.try_into().unwrap());
             }
         }
     }
