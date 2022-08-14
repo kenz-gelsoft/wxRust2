@@ -309,24 +309,30 @@ bool wxDC_GetPixel(const wxDC * self, wxCoord x, wxCoord y, wxColour * colour) {
 wxSize *wxDC_GetPPI(const wxDC * self) {
     return new wxSize(self->GetPPI());
 }
+#if wxCHECK_VERSION(3, 1, 7)
 wxSize *wxDC_FromDIP(const wxDC * self, const wxSize * sz) {
     return new wxSize(self->FromDIP(*sz));
 }
+#endif
 wxPoint *wxDC_FromDIP1(const wxDC * self, const wxPoint * pt) {
     return new wxPoint(self->FromDIP(*pt));
 }
+#if wxCHECK_VERSION(3, 1, 7)
 int wxDC_FromDIP2(const wxDC * self, int d) {
     return self->FromDIP(d);
 }
 wxSize *wxDC_ToDIP(const wxDC * self, const wxSize * sz) {
     return new wxSize(self->ToDIP(*sz));
 }
+#endif
 wxPoint *wxDC_ToDIP1(const wxDC * self, const wxPoint * pt) {
     return new wxPoint(self->ToDIP(*pt));
 }
+#if wxCHECK_VERSION(3, 1, 7)
 int wxDC_ToDIP2(const wxDC * self, int d) {
     return self->ToDIP(d);
 }
+#endif
 void wxDC_GetSize(const wxDC * self, wxCoord * width, wxCoord * height) {
     return self->GetSize(width, height);
 }

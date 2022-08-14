@@ -120,12 +120,18 @@ int wxDC_GetDepth(const wxDC * self);
 wxPoint *wxDC_GetDeviceOrigin(const wxDC * self);
 bool wxDC_GetPixel(const wxDC * self, wxCoord x, wxCoord y, wxColour * colour);
 wxSize *wxDC_GetPPI(const wxDC * self);
+#if wxCHECK_VERSION(3, 1, 7)
 wxSize *wxDC_FromDIP(const wxDC * self, const wxSize * sz);
+#endif
 wxPoint *wxDC_FromDIP1(const wxDC * self, const wxPoint * pt);
+#if wxCHECK_VERSION(3, 1, 7)
 int wxDC_FromDIP2(const wxDC * self, int d);
 wxSize *wxDC_ToDIP(const wxDC * self, const wxSize * sz);
+#endif
 wxPoint *wxDC_ToDIP1(const wxDC * self, const wxPoint * pt);
+#if wxCHECK_VERSION(3, 1, 7)
 int wxDC_ToDIP2(const wxDC * self, int d);
+#endif
 void wxDC_GetSize(const wxDC * self, wxCoord * width, wxCoord * height);
 wxSize *wxDC_GetSize1(const wxDC * self);
 void wxDC_GetSizeMM(const wxDC * self, wxCoord * width, wxCoord * height);

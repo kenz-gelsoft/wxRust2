@@ -1,35 +1,9 @@
 #pragma once
 
-#include <wx/mdi.h>
 #include <wx/menu.h>
 #include <wx/menuitem.h>
 
 extern "C" {
-
-// CLASS: wxMDIChildFrame
-wxClassInfo *wxMDIChildFrame_CLASSINFO();
-wxMDIChildFrame *wxMDIChildFrame_new();
-wxMDIChildFrame *wxMDIChildFrame_new1(wxMDIParentFrame * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-void wxMDIChildFrame_Activate(wxMDIChildFrame * self);
-bool wxMDIChildFrame_Create(wxMDIChildFrame * self, wxMDIParentFrame * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-wxMDIParentFrame * wxMDIChildFrame_GetMDIParent(const wxMDIChildFrame * self);
-void wxMDIChildFrame_Restore(wxMDIChildFrame * self);
-
-// CLASS: wxMDIParentFrame
-wxClassInfo *wxMDIParentFrame_CLASSINFO();
-wxMDIParentFrame *wxMDIParentFrame_new();
-wxMDIParentFrame *wxMDIParentFrame_new1(wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-void wxMDIParentFrame_ActivateNext(wxMDIParentFrame * self);
-void wxMDIParentFrame_ActivatePrevious(wxMDIParentFrame * self);
-void wxMDIParentFrame_ArrangeIcons(wxMDIParentFrame * self);
-void wxMDIParentFrame_Cascade(wxMDIParentFrame * self);
-bool wxMDIParentFrame_Create(wxMDIParentFrame * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-wxMDIChildFrame * wxMDIParentFrame_GetActiveChild(const wxMDIParentFrame * self);
-wxMDIClientWindowBase * wxMDIParentFrame_GetClientWindow(const wxMDIParentFrame * self);
-wxMenu * wxMDIParentFrame_GetWindowMenu(const wxMDIParentFrame * self);
-wxMDIClientWindow * wxMDIParentFrame_OnCreateClient(wxMDIParentFrame * self);
-void wxMDIParentFrame_SetWindowMenu(wxMDIParentFrame * self, wxMenu * menu);
-bool wxMDIParentFrame_IsTDI();
 
 // CLASS: wxMenu
 wxClassInfo *wxMenu_CLASSINFO();

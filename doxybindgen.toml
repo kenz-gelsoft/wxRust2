@@ -479,8 +479,8 @@ wxml_files = [
     'wxml/classwx_item_container.xml',
     'wxml/classwx_item_container_immutable.xml',
     'wxml/classwx_list_box.xml',
-    'wxml/classwx_m_d_i_child_frame.xml',
-    'wxml/classwx_m_d_i_parent_frame.xml',
+    # 'wxml/classwx_m_d_i_child_frame.xml',  # Our CI environment is't built with
+    # 'wxml/classwx_m_d_i_parent_frame.xml', # Our CI environment is't built with
     'wxml/classwx_menu.xml',
     'wxml/classwx_menu_bar.xml',
     'wxml/classwx_menu_item.xml',
@@ -891,6 +891,12 @@ wx31 = [
 blocklist = [
     # invalid return type
     'GetPen',
+]
+wx317 = [
+    'FromDIP',
+    'FromDIP2',
+    'ToDIP',
+    'ToDIP2',
 ]
 [types.wxDialog]
 blocklist = [
