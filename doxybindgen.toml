@@ -841,6 +841,9 @@ blocklist = [
     # requires explicit enabling of accessibility
     'GetAccessibleDescription',
 ]
+wx317 = [
+    'IsCompatibleVariantType',
+]
 [types.wxDataViewTreeCtrl]
 blocklist = [
     # binding type by value is not supported
@@ -894,8 +897,10 @@ blocklist = [
 ]
 wx317 = [
     'FromDIP',
+    'FromDIP1',
     'FromDIP2',
     'ToDIP',
+    'ToDIP1',
     'ToDIP2',
 ]
 [types.wxDialog]

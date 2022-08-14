@@ -122,14 +122,10 @@ bool wxDC_GetPixel(const wxDC * self, wxCoord x, wxCoord y, wxColour * colour);
 wxSize *wxDC_GetPPI(const wxDC * self);
 #if wxCHECK_VERSION(3, 1, 7)
 wxSize *wxDC_FromDIP(const wxDC * self, const wxSize * sz);
-#endif
 wxPoint *wxDC_FromDIP1(const wxDC * self, const wxPoint * pt);
-#if wxCHECK_VERSION(3, 1, 7)
 int wxDC_FromDIP2(const wxDC * self, int d);
 wxSize *wxDC_ToDIP(const wxDC * self, const wxSize * sz);
-#endif
 wxPoint *wxDC_ToDIP1(const wxDC * self, const wxPoint * pt);
-#if wxCHECK_VERSION(3, 1, 7)
 int wxDC_ToDIP2(const wxDC * self, int d);
 #endif
 void wxDC_GetSize(const wxDC * self, wxCoord * width, wxCoord * height);
@@ -494,7 +490,9 @@ wxEllipsizeMode wxDataViewRenderer_GetEllipsizeMode(const wxDataViewRenderer * s
 wxDataViewColumn * wxDataViewRenderer_GetOwner(const wxDataViewRenderer * self);
 bool wxDataViewRenderer_GetValue(const wxDataViewRenderer * self, wxVariant * value);
 wxString *wxDataViewRenderer_GetVariantType(const wxDataViewRenderer * self);
+#if wxCHECK_VERSION(3, 1, 7)
 bool wxDataViewRenderer_IsCompatibleVariantType(const wxDataViewRenderer * self, const wxString * variant_type);
+#endif
 void wxDataViewRenderer_SetAlignment(wxDataViewRenderer * self, int align);
 void wxDataViewRenderer_SetOwner(wxDataViewRenderer * self, wxDataViewColumn * owner);
 bool wxDataViewRenderer_SetValue(wxDataViewRenderer * self, const wxVariant * value);

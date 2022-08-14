@@ -313,22 +313,18 @@ wxSize *wxDC_GetPPI(const wxDC * self) {
 wxSize *wxDC_FromDIP(const wxDC * self, const wxSize * sz) {
     return new wxSize(self->FromDIP(*sz));
 }
-#endif
 wxPoint *wxDC_FromDIP1(const wxDC * self, const wxPoint * pt) {
     return new wxPoint(self->FromDIP(*pt));
 }
-#if wxCHECK_VERSION(3, 1, 7)
 int wxDC_FromDIP2(const wxDC * self, int d) {
     return self->FromDIP(d);
 }
 wxSize *wxDC_ToDIP(const wxDC * self, const wxSize * sz) {
     return new wxSize(self->ToDIP(*sz));
 }
-#endif
 wxPoint *wxDC_ToDIP1(const wxDC * self, const wxPoint * pt) {
     return new wxPoint(self->ToDIP(*pt));
 }
-#if wxCHECK_VERSION(3, 1, 7)
 int wxDC_ToDIP2(const wxDC * self, int d) {
     return self->ToDIP(d);
 }
@@ -1283,9 +1279,11 @@ bool wxDataViewRenderer_GetValue(const wxDataViewRenderer * self, wxVariant * va
 wxString *wxDataViewRenderer_GetVariantType(const wxDataViewRenderer * self) {
     return new wxString(self->GetVariantType());
 }
+#if wxCHECK_VERSION(3, 1, 7)
 bool wxDataViewRenderer_IsCompatibleVariantType(const wxDataViewRenderer * self, const wxString * variant_type) {
     return self->IsCompatibleVariantType(*variant_type);
 }
+#endif
 void wxDataViewRenderer_SetAlignment(wxDataViewRenderer * self, int align) {
     return self->SetAlignment(align);
 }
