@@ -547,7 +547,7 @@ class CxxClassBinding:
         return self.__model.has_initial(i)
 
     def include(self):
-        condition = None
+        condition = ''
         cond_name = self.__model.config.get('condition')
         if cond_name:
             condition = self.conditions[cond_name].get('cxx')
@@ -597,7 +597,8 @@ class CxxClassBinding:
         return (m for m in self.__methods if m.is_ctor)
     
     def _dtor_lines(self, is_cc):
-        if self.__model.manager.is_a(self.__model, 'wxObject'):
+        if (self.__model.manager.is_a(self.__model, 'wxObject') or
+            self.__model.manager.is_a(self.__model, 'wxRefCounter')):
             return
         signature = 'void %s_delete(%s *self)' % (
             self.__model.name,

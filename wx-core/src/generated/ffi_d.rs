@@ -2,6 +2,36 @@ use super::*;
 
 extern "C" {
 
+    // wxDataObject
+    pub fn wxDataObject_delete(self_: *mut c_void);
+    // BLOCKED: pub fn wxDataObject_new() -> *mut c_void;
+    // DTOR: pub fn wxDataObject_~wxDataObject(self_: *mut c_void);
+    // NOT_SUPPORTED: pub fn wxDataObject_GetAllFormats(self_: *const c_void, formats: *mut c_void, dir: Direction);
+    pub fn wxDataObject_GetDataHere(
+        self_: *const c_void,
+        format: *const c_void,
+        buf: *mut c_void,
+    ) -> bool;
+    pub fn wxDataObject_GetDataSize(self_: *const c_void, format: *const c_void) -> usize;
+    // NOT_SUPPORTED: pub fn wxDataObject_GetFormatCount(self_: *const c_void, dir: Direction) -> usize;
+    // NOT_SUPPORTED: pub fn wxDataObject_GetPreferredFormat(self_: *const c_void, dir: Direction) -> wxDataFormat;
+    pub fn wxDataObject_SetData(
+        self_: *mut c_void,
+        format: *const c_void,
+        len: usize,
+        buf: *const c_void,
+    ) -> bool;
+    // NOT_SUPPORTED: pub fn wxDataObject_IsSupported(self_: *const c_void, format: *const c_void, dir: Direction) -> bool;
+
+    // wxDataObjectSimple
+    pub fn wxDataObjectSimple_delete(self_: *mut c_void);
+    pub fn wxDataObjectSimple_new(format: *const c_void) -> *mut c_void;
+    pub fn wxDataObjectSimple_GetDataHere(self_: *const c_void, buf: *mut c_void) -> bool;
+    pub fn wxDataObjectSimple_GetDataSize(self_: *const c_void) -> usize;
+    // BLOCKED: pub fn wxDataObjectSimple_GetFormat(self_: *const c_void) -> *const c_void;
+    pub fn wxDataObjectSimple_SetData(self_: *mut c_void, len: usize, buf: *const c_void) -> bool;
+    pub fn wxDataObjectSimple_SetFormat(self_: *mut c_void, format: *const c_void);
+
     // wxDatePickerCtrl
     pub fn wxDatePickerCtrl_CLASSINFO() -> *mut c_void;
     pub fn wxDatePickerCtrl_new() -> *mut c_void;

@@ -1,5 +1,53 @@
 use super::*;
 
+// wxBannerWindow
+pub trait BannerWindowMethods: WindowMethods {
+    fn create_direction<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        parent: Option<&W>,
+        winid: c_int,
+        dir: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxBannerWindow_Create(self.as_ptr(), parent, winid, dir, pos, size, style, name)
+        }
+    }
+    fn set_bitmap<B: BitmapBundleMethods>(&self, bmp: &B) {
+        unsafe {
+            let bmp = bmp.as_ptr();
+            ffi::wxBannerWindow_SetBitmap(self.as_ptr(), bmp)
+        }
+    }
+    fn set_text(&self, title: &str, message: &str) {
+        unsafe {
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            let message = WxString::from(message);
+            let message = message.as_ptr();
+            ffi::wxBannerWindow_SetText(self.as_ptr(), title, message)
+        }
+    }
+    fn set_gradient<C: ColourMethods, C2: ColourMethods>(&self, start: &C, end: &C2) {
+        unsafe {
+            let start = start.as_ptr();
+            let end = end.as_ptr();
+            ffi::wxBannerWindow_SetGradient(self.as_ptr(), start, end)
+        }
+    }
+}
+
 // wxBitmap
 pub trait BitmapMethods: GDIObjectMethods {
     // DTOR: fn ~wxBitmap()
@@ -128,17 +176,23 @@ pub trait BitmapMethods: GDIObjectMethods {
         unsafe { ffi::wxBitmap_SetWidth(self.as_ptr(), width) }
     }
     // BLOCKED: fn UseAlpha()
-    fn add_handler(handler: *mut c_void) {
-        unsafe { ffi::wxBitmap_AddHandler(handler) }
+    fn add_handler<B: BitmapHandlerMethods>(handler: Option<&B>) {
+        unsafe {
+            let handler = match handler {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxBitmap_AddHandler(handler)
+        }
     }
     fn clean_up_handlers() {
         unsafe { ffi::wxBitmap_CleanUpHandlers() }
     }
-    fn find_handler(name: &str) -> *mut c_void {
+    fn find_handler(name: &str) -> Option<BitmapHandlerIsOwned<false>> {
         unsafe {
             let name = WxString::from(name);
             let name = name.as_ptr();
-            ffi::wxBitmap_FindHandler(name)
+            BitmapHandler::option_from(ffi::wxBitmap_FindHandler(name))
         }
     }
     // NOT_SUPPORTED: fn FindHandler1()
@@ -147,8 +201,14 @@ pub trait BitmapMethods: GDIObjectMethods {
     fn init_standard_handlers() {
         unsafe { ffi::wxBitmap_InitStandardHandlers() }
     }
-    fn insert_handler(handler: *mut c_void) {
-        unsafe { ffi::wxBitmap_InsertHandler(handler) }
+    fn insert_handler<B: BitmapHandlerMethods>(handler: Option<&B>) {
+        unsafe {
+            let handler = match handler {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxBitmap_InsertHandler(handler)
+        }
     }
     fn new_from_png_data(data: *const c_void, size: usize) -> Bitmap {
         unsafe { Bitmap::from_ptr(ffi::wxBitmap_NewFromPNGData(data, size)) }
@@ -272,8 +332,14 @@ pub trait BitmapBundleMethods: WxRustMethods {
     fn from_image(image: *const c_void) -> BitmapBundle {
         unsafe { BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromImage(image)) }
     }
-    fn from_impl(impl_: *mut c_void) -> BitmapBundle {
-        unsafe { BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromImpl(impl_)) }
+    fn from_impl<B: BitmapBundleImplMethods>(impl_: Option<&B>) -> BitmapBundle {
+        unsafe {
+            let impl_ = match impl_ {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromImpl(impl_))
+        }
     }
     fn from_resources(name: &str) -> BitmapBundle {
         unsafe {
@@ -321,6 +387,27 @@ pub trait BitmapBundleMethods: WxRustMethods {
             let name = name.as_ptr();
             let size_def = size_def.as_ptr();
             BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromSVGResource(name, size_def))
+        }
+    }
+}
+
+// wxBitmapBundleImpl
+pub trait BitmapBundleImplMethods: RefCounterMethods {
+    fn get_default_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxBitmapBundleImpl_GetDefaultSize(self.as_ptr())) }
+    }
+    fn get_preferred_bitmap_size_at_scale(&self, scale: c_double) -> Size {
+        unsafe {
+            Size::from_ptr(ffi::wxBitmapBundleImpl_GetPreferredBitmapSizeAtScale(
+                self.as_ptr(),
+                scale,
+            ))
+        }
+    }
+    fn get_bitmap<S: SizeMethods>(&self, size: &S) -> Bitmap {
+        unsafe {
+            let size = size.as_ptr();
+            Bitmap::from_ptr(ffi::wxBitmapBundleImpl_GetBitmap(self.as_ptr(), size))
         }
     }
 }
@@ -399,6 +486,136 @@ pub trait BitmapButtonMethods: ButtonMethods {
             WeakRef::<BitmapButton>::from(ffi::wxBitmapButton_NewCloseButton(parent, winid, name))
         }
     }
+}
+
+// wxBitmapComboBox
+pub trait BitmapComboBoxMethods: ComboBoxMethods {
+    // DTOR: fn ~wxBitmapComboBox()
+    fn append<B: BitmapMethods>(&self, item: &str, bitmap: &B) -> c_int {
+        unsafe {
+            let item = WxString::from(item);
+            let item = item.as_ptr();
+            let bitmap = bitmap.as_ptr();
+            ffi::wxBitmapComboBox_Append(self.as_ptr(), item, bitmap)
+        }
+    }
+    fn append_void<B: BitmapMethods>(
+        &self,
+        item: &str,
+        bitmap: &B,
+        client_data: *mut c_void,
+    ) -> c_int {
+        unsafe {
+            let item = WxString::from(item);
+            let item = item.as_ptr();
+            let bitmap = bitmap.as_ptr();
+            ffi::wxBitmapComboBox_Append1(self.as_ptr(), item, bitmap, client_data)
+        }
+    }
+    fn append_clientdata<B: BitmapMethods>(
+        &self,
+        item: &str,
+        bitmap: &B,
+        client_data: *mut c_void,
+    ) -> c_int {
+        unsafe {
+            let item = WxString::from(item);
+            let item = item.as_ptr();
+            let bitmap = bitmap.as_ptr();
+            ffi::wxBitmapComboBox_Append2(self.as_ptr(), item, bitmap, client_data)
+        }
+    }
+    fn get_bitmap_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxBitmapComboBox_GetBitmapSize(self.as_ptr())) }
+    }
+    fn get_item_bitmap(&self, n: c_uint) -> Bitmap {
+        unsafe { Bitmap::from_ptr(ffi::wxBitmapComboBox_GetItemBitmap(self.as_ptr(), n)) }
+    }
+    fn insert<B: BitmapMethods>(&self, item: &str, bitmap: &B, pos: c_uint) -> c_int {
+        unsafe {
+            let item = WxString::from(item);
+            let item = item.as_ptr();
+            let bitmap = bitmap.as_ptr();
+            ffi::wxBitmapComboBox_Insert(self.as_ptr(), item, bitmap, pos)
+        }
+    }
+    fn insert_void<B: BitmapMethods>(
+        &self,
+        item: &str,
+        bitmap: &B,
+        pos: c_uint,
+        client_data: *mut c_void,
+    ) -> c_int {
+        unsafe {
+            let item = WxString::from(item);
+            let item = item.as_ptr();
+            let bitmap = bitmap.as_ptr();
+            ffi::wxBitmapComboBox_Insert1(self.as_ptr(), item, bitmap, pos, client_data)
+        }
+    }
+    fn insert_clientdata<B: BitmapMethods>(
+        &self,
+        item: &str,
+        bitmap: &B,
+        pos: c_uint,
+        client_data: *mut c_void,
+    ) -> c_int {
+        unsafe {
+            let item = WxString::from(item);
+            let item = item.as_ptr();
+            let bitmap = bitmap.as_ptr();
+            ffi::wxBitmapComboBox_Insert2(self.as_ptr(), item, bitmap, pos, client_data)
+        }
+    }
+    fn set_item_bitmap<B: BitmapBundleMethods>(&self, n: c_uint, bitmap: &B) {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            ffi::wxBitmapComboBox_SetItemBitmap(self.as_ptr(), n, bitmap)
+        }
+    }
+}
+
+// wxBitmapDataObject
+pub trait BitmapDataObjectMethods: DataObjectSimpleMethods {
+    fn get_bitmap(&self) -> Bitmap {
+        unsafe { Bitmap::from_ptr(ffi::wxBitmapDataObject_GetBitmap(self.as_ptr())) }
+    }
+    fn set_bitmap<B: BitmapMethods>(&self, bitmap: &B) {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            ffi::wxBitmapDataObject_SetBitmap(self.as_ptr(), bitmap)
+        }
+    }
+}
+
+// wxBitmapHandler
+pub trait BitmapHandlerMethods: ObjectMethods {
+    // DTOR: fn ~wxBitmapHandler()
+    // NOT_SUPPORTED: fn Create()
+    fn get_extension(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxBitmapHandler_GetExtension(self.as_ptr())).into() }
+    }
+    fn get_name(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxBitmapHandler_GetName(self.as_ptr())).into() }
+    }
+    // NOT_SUPPORTED: fn GetType()
+    // NOT_SUPPORTED: fn LoadFile()
+    // NOT_SUPPORTED: fn SaveFile()
+    fn set_extension(&self, extension: &str) {
+        unsafe {
+            let extension = WxString::from(extension);
+            let extension = extension.as_ptr();
+            ffi::wxBitmapHandler_SetExtension(self.as_ptr(), extension)
+        }
+    }
+    fn set_name(&self, name: &str) {
+        unsafe {
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxBitmapHandler_SetName(self.as_ptr(), name)
+        }
+    }
+    // NOT_SUPPORTED: fn SetType()
 }
 
 // wxBitmapToggleButton
@@ -573,6 +790,75 @@ pub trait BoxSizerMethods: SizerMethods {
     fn set_orientation(&self, orient: c_int) {
         unsafe { ffi::wxBoxSizer_SetOrientation(self.as_ptr(), orient) }
     }
+}
+
+// wxBrush
+pub trait BrushMethods: GDIObjectMethods {
+    // DTOR: fn ~wxBrush()
+    fn get_colour(&self) -> Colour {
+        unsafe { Colour::from_ptr(ffi::wxBrush_GetColour(self.as_ptr())) }
+    }
+    fn get_stipple(&self) -> Option<BitmapIsOwned<false>> {
+        unsafe { Bitmap::option_from(ffi::wxBrush_GetStipple(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn GetStyle()
+    fn is_hatch(&self) -> bool {
+        unsafe { ffi::wxBrush_IsHatch(self.as_ptr()) }
+    }
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxBrush_IsOk(self.as_ptr()) }
+    }
+    fn is_non_transparent(&self) -> bool {
+        unsafe { ffi::wxBrush_IsNonTransparent(self.as_ptr()) }
+    }
+    fn is_transparent(&self) -> bool {
+        unsafe { ffi::wxBrush_IsTransparent(self.as_ptr()) }
+    }
+    fn set_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxBrush_SetColour(self.as_ptr(), colour)
+        }
+    }
+    // NOT_SUPPORTED: fn SetColour1()
+    fn set_stipple<B: BitmapMethods>(&self, bitmap: &B) {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            ffi::wxBrush_SetStipple(self.as_ptr(), bitmap)
+        }
+    }
+    // NOT_SUPPORTED: fn SetStyle()
+    // BLOCKED: fn operator!=()
+    // BLOCKED: fn operator==()
+}
+
+// wxBrushList
+pub trait BrushListMethods: WxRustMethods {
+    // NOT_SUPPORTED: fn FindOrCreateBrush()
+}
+
+// wxBusyCursor
+pub trait BusyCursorMethods: WxRustMethods {
+    // DTOR: fn ~wxBusyCursor()
+}
+
+// wxBusyInfo
+pub trait BusyInfoMethods: WxRustMethods {
+    fn update_text(&self, str: &str) {
+        unsafe {
+            let str = WxString::from(str);
+            let str = str.as_ptr();
+            ffi::wxBusyInfo_UpdateText(self.as_ptr(), str)
+        }
+    }
+    fn update_label(&self, str: &str) {
+        unsafe {
+            let str = WxString::from(str);
+            let str = str.as_ptr();
+            ffi::wxBusyInfo_UpdateLabel(self.as_ptr(), str)
+        }
+    }
+    // DTOR: fn ~wxBusyInfo()
 }
 
 // wxButton

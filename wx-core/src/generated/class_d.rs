@@ -2,6 +2,57 @@
 
 use super::*;
 
+// wxDataObject
+wx_class! { DataObject =
+    DataObjectIsOwned<true>(wxDataObject) impl
+        DataObjectMethods
+}
+impl<const OWNED: bool> DataObjectIsOwned<OWNED> {
+    //  ENUM: Direction
+    pub const Get: c_int = 0x01;
+    pub const Set: c_int = 0x02;
+    pub const Both: c_int = 0x03;
+
+    // BLOCKED: fn wxDataObject()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for DataObjectIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxDataObject_delete(self.0) }
+        }
+    }
+}
+
+// wxDataObjectSimple
+wx_class! { DataObjectSimple =
+    DataObjectSimpleIsOwned<true>(wxDataObjectSimple) impl
+        DataObjectSimpleMethods,
+        DataObjectMethods
+}
+impl<const OWNED: bool> DataObjectSimpleIsOwned<OWNED> {
+    pub fn new(format: *const c_void) -> DataObjectSimpleIsOwned<OWNED> {
+        unsafe { DataObjectSimpleIsOwned(ffi::wxDataObjectSimple_new(format)) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<DataObjectSimpleIsOwned<OWNED>> for DataObjectIsOwned<OWNED> {
+    fn from(o: DataObjectSimpleIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> Drop for DataObjectSimpleIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxDataObjectSimple_delete(self.0) }
+        }
+    }
+}
+
 // wxDatePickerCtrl
 wx_class! { DatePickerCtrl =
     DatePickerCtrlIsOwned<true>(wxDatePickerCtrl) impl
