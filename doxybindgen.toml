@@ -697,6 +697,10 @@ blocklist = [
     'operator!=',
     'operator==',
 ]
+[types.wxBusyInfo]
+wx31 = [
+    'wxBusyInfo',
+]
 [types.wxButton]
 wx31 = [
     'GetDefaultSize',

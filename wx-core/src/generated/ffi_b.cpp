@@ -565,9 +565,11 @@ wxBusyCursor *wxBusyCursor_new(const wxCursor * cursor) {
 void wxBusyInfo_delete(wxBusyInfo *self) {
     delete self;
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxBusyInfo *wxBusyInfo_new(const wxBusyInfoFlags * flags) {
     return new wxBusyInfo(*flags);
 }
+#endif
 wxBusyInfo *wxBusyInfo_new1(const wxString * msg, wxWindow * parent) {
     return new wxBusyInfo(*msg, parent);
 }

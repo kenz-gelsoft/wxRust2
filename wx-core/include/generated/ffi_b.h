@@ -251,7 +251,9 @@ wxBusyCursor *wxBusyCursor_new(const wxCursor * cursor);
 
 // CLASS: wxBusyInfo
 void wxBusyInfo_delete(wxBusyInfo *self);
+#if wxCHECK_VERSION(3, 1, 0)
 wxBusyInfo *wxBusyInfo_new(const wxBusyInfoFlags * flags);
+#endif
 wxBusyInfo *wxBusyInfo_new1(const wxString * msg, wxWindow * parent);
 void wxBusyInfo_UpdateText(wxBusyInfo * self, const wxString * str);
 void wxBusyInfo_UpdateLabel(wxBusyInfo * self, const wxString * str);
