@@ -103,8 +103,11 @@ impl<const OWNED: bool> BitmapIsOwned<OWNED> {
     pub fn new_with_image_dc(img: *const c_void, dc: *const c_void) -> BitmapIsOwned<OWNED> {
         unsafe { BitmapIsOwned(ffi::wxBitmap_new9(img, dc)) }
     }
-    pub fn new_with_cursor(cursor: *const c_void) -> BitmapIsOwned<OWNED> {
-        unsafe { BitmapIsOwned(ffi::wxBitmap_new10(cursor)) }
+    pub fn new_with_cursor<C: CursorMethods>(cursor: &C) -> BitmapIsOwned<OWNED> {
+        unsafe {
+            let cursor = cursor.as_ptr();
+            BitmapIsOwned(ffi::wxBitmap_new10(cursor))
+        }
     }
     pub fn none() -> Option<&'static Self> {
         None
@@ -796,8 +799,14 @@ wx_class! { BusyCursor =
         BusyCursorMethods
 }
 impl<const OWNED: bool> BusyCursorIsOwned<OWNED> {
-    pub fn new(cursor: *const c_void) -> BusyCursorIsOwned<OWNED> {
-        unsafe { BusyCursorIsOwned(ffi::wxBusyCursor_new(cursor)) }
+    pub fn new<C: CursorMethods>(cursor: Option<&C>) -> BusyCursorIsOwned<OWNED> {
+        unsafe {
+            let cursor = match cursor {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            BusyCursorIsOwned(ffi::wxBusyCursor_new(cursor))
+        }
     }
     pub fn none() -> Option<&'static Self> {
         None
