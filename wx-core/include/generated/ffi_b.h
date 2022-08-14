@@ -255,8 +255,10 @@ void wxBusyInfo_delete(wxBusyInfo *self);
 wxBusyInfo *wxBusyInfo_new(const wxBusyInfoFlags * flags);
 #endif
 wxBusyInfo *wxBusyInfo_new1(const wxString * msg, wxWindow * parent);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxBusyInfo_UpdateText(wxBusyInfo * self, const wxString * str);
 void wxBusyInfo_UpdateLabel(wxBusyInfo * self, const wxString * str);
+#endif
 
 // CLASS: wxButton
 wxClassInfo *wxButton_CLASSINFO();

@@ -700,6 +700,8 @@ blocklist = [
 [types.wxBusyInfo]
 wx31 = [
     'wxBusyInfo',
+    'UpdateLabel',
+    'UpdateText',
 ]
 [types.wxButton]
 wx31 = [

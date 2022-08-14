@@ -573,12 +573,14 @@ wxBusyInfo *wxBusyInfo_new(const wxBusyInfoFlags * flags) {
 wxBusyInfo *wxBusyInfo_new1(const wxString * msg, wxWindow * parent) {
     return new wxBusyInfo(*msg, parent);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxBusyInfo_UpdateText(wxBusyInfo * self, const wxString * str) {
     return self->UpdateText(*str);
 }
 void wxBusyInfo_UpdateLabel(wxBusyInfo * self, const wxString * str) {
     return self->UpdateLabel(*str);
 }
+#endif
 
 // CLASS: wxButton
 wxClassInfo *wxButton_CLASSINFO() {
