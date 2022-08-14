@@ -2743,7 +2743,7 @@ wx_class! { DropSource =
         DropSourceMethods
 }
 impl<const OWNED: bool> DropSourceIsOwned<OWNED> {
-    pub fn new_with_window<
+    pub fn new_with_window_cursor<
         W: WindowMethods,
         C: CursorMethods,
         C2: CursorMethods,
@@ -2765,7 +2765,7 @@ impl<const OWNED: bool> DropSourceIsOwned<OWNED> {
             DropSourceIsOwned(ffi::wxDropSource_new(win, icon_copy, icon_move, icon_none))
         }
     }
-    pub fn new_with_dataobject<
+    pub fn new_with_dataobject_cursor<
         D: DataObjectMethods,
         W: WindowMethods,
         C: CursorMethods,
@@ -2792,8 +2792,55 @@ impl<const OWNED: bool> DropSourceIsOwned<OWNED> {
             ))
         }
     }
-    // BLOCKED: fn wxDropSource2()
-    // BLOCKED: fn wxDropSource3()
+    pub fn new_with_window_icon<
+        W: WindowMethods,
+        I: IconMethods,
+        I2: IconMethods,
+        I3: IconMethods,
+    >(
+        win: Option<&W>,
+        icon_copy: &I,
+        icon_move: &I2,
+        icon_none: &I3,
+    ) -> DropSourceIsOwned<OWNED> {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let icon_copy = icon_copy.as_ptr();
+            let icon_move = icon_move.as_ptr();
+            let icon_none = icon_none.as_ptr();
+            DropSourceIsOwned(ffi::wxDropSource_new2(win, icon_copy, icon_move, icon_none))
+        }
+    }
+    pub fn new_with_dataobject_icon<
+        D: DataObjectMethods,
+        W: WindowMethods,
+        I: IconMethods,
+        I2: IconMethods,
+        I3: IconMethods,
+    >(
+        data: &D,
+        win: Option<&W>,
+        icon_copy: &I,
+        icon_move: &I2,
+        icon_none: &I3,
+    ) -> DropSourceIsOwned<OWNED> {
+        unsafe {
+            let data = data.as_ptr();
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let icon_copy = icon_copy.as_ptr();
+            let icon_move = icon_move.as_ptr();
+            let icon_none = icon_none.as_ptr();
+            DropSourceIsOwned(ffi::wxDropSource_new3(
+                data, win, icon_copy, icon_move, icon_none,
+            ))
+        }
+    }
     pub fn none() -> Option<&'static Self> {
         None
     }

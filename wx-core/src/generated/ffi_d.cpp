@@ -2263,12 +2263,22 @@ wxPoint *wxDropFilesEvent_GetPosition(const wxDropFilesEvent * self) {
 void wxDropSource_delete(wxDropSource *self) {
     delete self;
 }
+#ifndef __WXGTK__
 wxDropSource *wxDropSource_new(wxWindow * win, const wxCursor * icon_copy, const wxCursor * icon_move, const wxCursor * icon_none) {
     return new wxDropSource(win, *icon_copy, *icon_move, *icon_none);
 }
 wxDropSource *wxDropSource_new1(wxDataObject * data, wxWindow * win, const wxCursor * icon_copy, const wxCursor * icon_move, const wxCursor * icon_none) {
     return new wxDropSource(*data, win, *icon_copy, *icon_move, *icon_none);
 }
+#endif
+#ifdef __WXGTK__
+wxDropSource *wxDropSource_new2(wxWindow * win, const wxIcon * icon_copy, const wxIcon * icon_move, const wxIcon * icon_none) {
+    return new wxDropSource(win, *icon_copy, *icon_move, *icon_none);
+}
+wxDropSource *wxDropSource_new3(wxDataObject * data, wxWindow * win, const wxIcon * icon_copy, const wxIcon * icon_move, const wxIcon * icon_none) {
+    return new wxDropSource(*data, win, *icon_copy, *icon_move, *icon_none);
+}
+#endif
 wxDataObject * wxDropSource_GetDataObject(wxDropSource * self) {
     return self->GetDataObject();
 }

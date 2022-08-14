@@ -944,8 +944,11 @@ blocklist = [
     'GetFiles',
 ]
 [types.wxDropSource]
-blocklist = [
-    # maybe constness error
+not_gtk = [
+    'wxDropSource',
+    'wxDropSource1',
+]
+gtk = [
     'wxDropSource2',
     'wxDropSource3',
 ]

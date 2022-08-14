@@ -1739,8 +1739,19 @@ extern "C" {
         icon_move: *const c_void,
         icon_none: *const c_void,
     ) -> *mut c_void;
-    // BLOCKED: pub fn wxDropSource_new2(win: *mut c_void, icon_copy: *const c_void, icon_move: *const c_void, icon_none: *const c_void) -> *mut c_void;
-    // BLOCKED: pub fn wxDropSource_new3(data: *mut c_void, win: *mut c_void, icon_copy: *const c_void, icon_move: *const c_void, icon_none: *const c_void) -> *mut c_void;
+    pub fn wxDropSource_new2(
+        win: *mut c_void,
+        icon_copy: *const c_void,
+        icon_move: *const c_void,
+        icon_none: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxDropSource_new3(
+        data: *mut c_void,
+        win: *mut c_void,
+        icon_copy: *const c_void,
+        icon_move: *const c_void,
+        icon_none: *const c_void,
+    ) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxDropSource_DoDragDrop(self_: *mut c_void, flags: c_int) -> wxDragResult;
     pub fn wxDropSource_GetDataObject(self_: *mut c_void) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxDropSource_GiveFeedback(self_: *mut c_void, effect: wxDragResult) -> bool;

@@ -856,8 +856,14 @@ wxPoint *wxDropFilesEvent_GetPosition(const wxDropFilesEvent * self);
 
 // CLASS: wxDropSource
 void wxDropSource_delete(wxDropSource *self);
+#ifndef __WXGTK__
 wxDropSource *wxDropSource_new(wxWindow * win, const wxCursor * icon_copy, const wxCursor * icon_move, const wxCursor * icon_none);
 wxDropSource *wxDropSource_new1(wxDataObject * data, wxWindow * win, const wxCursor * icon_copy, const wxCursor * icon_move, const wxCursor * icon_none);
+#endif
+#ifdef __WXGTK__
+wxDropSource *wxDropSource_new2(wxWindow * win, const wxIcon * icon_copy, const wxIcon * icon_move, const wxIcon * icon_none);
+wxDropSource *wxDropSource_new3(wxDataObject * data, wxWindow * win, const wxIcon * icon_copy, const wxIcon * icon_move, const wxIcon * icon_none);
+#endif
 wxDataObject * wxDropSource_GetDataObject(wxDropSource * self);
 void wxDropSource_SetData(wxDropSource * self, wxDataObject * data);
 
