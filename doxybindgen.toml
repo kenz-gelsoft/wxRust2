@@ -734,6 +734,7 @@ wx31 = [
 wx31 = [
     # Changed constness in 3.1.2
     'wxColourDialog',
+    'Create',
 ]
 [types.wxColourPickerCtrl]
 blocklist = [

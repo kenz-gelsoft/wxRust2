@@ -254,8 +254,8 @@ wxString *wxColourDatabase_FindName(const wxColourDatabase * self, const wxColou
 wxClassInfo *wxColourDialog_CLASSINFO();
 #if wxCHECK_VERSION(3, 1, 0)
 wxColourDialog *wxColourDialog_new(wxWindow * parent, const wxColourData * data);
-#endif
 bool wxColourDialog_Create(wxColourDialog * self, wxWindow * parent, const wxColourData * data);
+#endif
 wxColourData * wxColourDialog_GetColourData(wxColourDialog * self);
 
 // CLASS: wxColourPickerCtrl

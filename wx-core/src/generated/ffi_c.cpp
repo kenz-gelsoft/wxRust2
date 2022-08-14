@@ -586,10 +586,10 @@ wxClassInfo *wxColourDialog_CLASSINFO() {
 wxColourDialog *wxColourDialog_new(wxWindow * parent, const wxColourData * data) {
     return new wxColourDialog(parent, data);
 }
-#endif
 bool wxColourDialog_Create(wxColourDialog * self, wxWindow * parent, const wxColourData * data) {
     return self->Create(parent, data);
 }
+#endif
 wxColourData * wxColourDialog_GetColourData(wxColourDialog * self) {
     return &(self->GetColourData());
 }
