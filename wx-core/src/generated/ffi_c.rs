@@ -296,33 +296,6 @@ extern "C" {
     pub fn wxCloseEvent_Veto(self_: *mut c_void, veto: bool);
     pub fn wxCloseEvent_GetVeto(self_: *const c_void) -> bool;
 
-    // wxCollapsibleHeaderCtrl
-    pub fn wxCollapsibleHeaderCtrl_CLASSINFO() -> *mut c_void;
-    pub fn wxCollapsibleHeaderCtrl_new() -> *mut c_void;
-    pub fn wxCollapsibleHeaderCtrl_new1(
-        parent: *mut c_void,
-        id: c_int,
-        label: *const c_void,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        validator: *const c_void,
-        name: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxCollapsibleHeaderCtrl_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        id: c_int,
-        label: *const c_void,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        validator: *const c_void,
-        name: *const c_void,
-    ) -> bool;
-    pub fn wxCollapsibleHeaderCtrl_SetCollapsed(self_: *mut c_void, collapsed: bool);
-    pub fn wxCollapsibleHeaderCtrl_IsCollapsed(self_: *const c_void) -> bool;
-
     // wxCollapsiblePane
     pub fn wxCollapsiblePane_CLASSINFO() -> *mut c_void;
     pub fn wxCollapsiblePane_new() -> *mut c_void;
@@ -739,16 +712,6 @@ extern "C" {
     ) -> bool;
     pub fn wxCommandProcessor_Store(self_: *mut c_void, command: *mut c_void);
     pub fn wxCommandProcessor_Undo(self_: *mut c_void) -> bool;
-
-    // wxContextHelpButton
-    pub fn wxContextHelpButton_CLASSINFO() -> *mut c_void;
-    pub fn wxContextHelpButton_new(
-        parent: *mut c_void,
-        id: c_int,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-    ) -> *mut c_void;
 
     // wxContextMenuEvent
     pub fn wxContextMenuEvent_CLASSINFO() -> *mut c_void;

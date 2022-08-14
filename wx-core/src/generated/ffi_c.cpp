@@ -417,26 +417,6 @@ bool wxCloseEvent_GetVeto(const wxCloseEvent * self) {
     return self->GetVeto();
 }
 
-// CLASS: wxCollapsibleHeaderCtrl
-wxClassInfo *wxCollapsibleHeaderCtrl_CLASSINFO() {
-    return wxCLASSINFO(wxCollapsibleHeaderCtrl);
-}
-wxCollapsibleHeaderCtrl *wxCollapsibleHeaderCtrl_new() {
-    return new wxCollapsibleHeaderCtrl();
-}
-wxCollapsibleHeaderCtrl *wxCollapsibleHeaderCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
-    return new wxCollapsibleHeaderCtrl(parent, id, *label, *pos, *size, style, *validator, *name);
-}
-bool wxCollapsibleHeaderCtrl_Create(wxCollapsibleHeaderCtrl * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
-    return self->Create(parent, id, *label, *pos, *size, style, *validator, *name);
-}
-void wxCollapsibleHeaderCtrl_SetCollapsed(wxCollapsibleHeaderCtrl * self, bool collapsed) {
-    return self->SetCollapsed(collapsed);
-}
-bool wxCollapsibleHeaderCtrl_IsCollapsed(const wxCollapsibleHeaderCtrl * self) {
-    return self->IsCollapsed();
-}
-
 // CLASS: wxCollapsiblePane
 wxClassInfo *wxCollapsiblePane_CLASSINFO() {
     return wxCLASSINFO(wxCollapsiblePane);
@@ -1042,14 +1022,6 @@ void wxCommandProcessor_Store(wxCommandProcessor * self, wxCommand * command) {
 }
 bool wxCommandProcessor_Undo(wxCommandProcessor * self) {
     return self->Undo();
-}
-
-// CLASS: wxContextHelpButton
-wxClassInfo *wxContextHelpButton_CLASSINFO() {
-    return wxCLASSINFO(wxContextHelpButton);
-}
-wxContextHelpButton *wxContextHelpButton_new(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style) {
-    return new wxContextHelpButton(parent, id, *pos, *size, style);
 }
 
 // CLASS: wxContextMenuEvent

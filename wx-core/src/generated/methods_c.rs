@@ -544,52 +544,6 @@ pub trait CloseEventMethods: EventMethods {
     }
 }
 
-// wxCollapsibleHeaderCtrl
-pub trait CollapsibleHeaderCtrlMethods: ControlMethods {
-    fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
-        &self,
-        parent: Option<&W>,
-        id: c_int,
-        label: &str,
-        pos: &P,
-        size: &S,
-        style: c_long,
-        validator: &V,
-        name: &str,
-    ) -> bool {
-        unsafe {
-            let parent = match parent {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            let label = WxString::from(label);
-            let label = label.as_ptr();
-            let pos = pos.as_ptr();
-            let size = size.as_ptr();
-            let validator = validator.as_ptr();
-            let name = WxString::from(name);
-            let name = name.as_ptr();
-            ffi::wxCollapsibleHeaderCtrl_Create(
-                self.as_ptr(),
-                parent,
-                id,
-                label,
-                pos,
-                size,
-                style,
-                validator,
-                name,
-            )
-        }
-    }
-    fn set_collapsed(&self, collapsed: bool) {
-        unsafe { ffi::wxCollapsibleHeaderCtrl_SetCollapsed(self.as_ptr(), collapsed) }
-    }
-    fn is_collapsed(&self) -> bool {
-        unsafe { ffi::wxCollapsibleHeaderCtrl_IsCollapsed(self.as_ptr()) }
-    }
-}
-
 // wxCollapsiblePane
 pub trait CollapsiblePaneMethods: ControlMethods {
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
@@ -1496,9 +1450,6 @@ pub trait CommandProcessorMethods: ObjectMethods {
         unsafe { ffi::wxCommandProcessor_Undo(self.as_ptr()) }
     }
 }
-
-// wxContextHelpButton
-pub trait ContextHelpButtonMethods: BitmapButtonMethods {}
 
 // wxContextMenuEvent
 pub trait ContextMenuEventMethods: CommandEventMethods {

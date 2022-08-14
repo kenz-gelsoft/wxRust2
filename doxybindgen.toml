@@ -432,7 +432,7 @@ wxml_files = [
     'wxml/classwx_clipboard.xml',
     'wxml/classwx_clipboard_text_event.xml',
     'wxml/classwx_close_event.xml',
-    'wxml/classwx_collapsible_header_ctrl.xml',
+    # 'wxml/classwx_collapsible_header_ctrl.xml', # requires 3.1
     'wxml/classwx_collapsible_pane.xml',
     'wxml/classwx_collapsible_pane_event.xml',
     'wxml/classwx_colour.xml',
@@ -449,8 +449,8 @@ wxml_files = [
     'wxml/classwx_command_event.xml',
     'wxml/classwx_command_link_button.xml',
     'wxml/classwx_command_processor.xml',
-    # 'wxml/classwx_context_help.xml', # Our CI environment doesn't built with
-    'wxml/classwx_context_help_button.xml',
+    # 'wxml/classwx_context_help.xml',        # Our CI environment is't built with
+    # 'wxml/classwx_context_help_button.xml', # Our CI environment is't built with
     'wxml/classwx_context_menu_event.xml',
     'wxml/classwx_control.xml',
     'wxml/classwx_control_with_items.xml',

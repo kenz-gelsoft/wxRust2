@@ -9,7 +9,6 @@
 #include <wx/clipbrd.h>
 #include <wx/clrpicker.h>
 #include <wx/cmdproc.h>
-#include <wx/collheaderctrl.h>
 #include <wx/collpane.h>
 #include <wx/colordlg.h>
 #include <wx/colour.h>
@@ -19,7 +18,6 @@
 #include <wx/commandlinkbutton.h>
 #include <wx/control.h>
 #include <wx/creddlg.h>
-#include <wx/cshelp.h>
 #include <wx/ctrlsub.h>
 #include <wx/cursor.h>
 #include <wx/dataobj.h>
@@ -185,14 +183,6 @@ void wxCloseEvent_SetCanVeto(wxCloseEvent * self, bool can_veto);
 void wxCloseEvent_SetLoggingOff(wxCloseEvent * self, bool logging_off);
 void wxCloseEvent_Veto(wxCloseEvent * self, bool veto);
 bool wxCloseEvent_GetVeto(const wxCloseEvent * self);
-
-// CLASS: wxCollapsibleHeaderCtrl
-wxClassInfo *wxCollapsibleHeaderCtrl_CLASSINFO();
-wxCollapsibleHeaderCtrl *wxCollapsibleHeaderCtrl_new();
-wxCollapsibleHeaderCtrl *wxCollapsibleHeaderCtrl_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
-bool wxCollapsibleHeaderCtrl_Create(wxCollapsibleHeaderCtrl * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
-void wxCollapsibleHeaderCtrl_SetCollapsed(wxCollapsibleHeaderCtrl * self, bool collapsed);
-bool wxCollapsibleHeaderCtrl_IsCollapsed(const wxCollapsibleHeaderCtrl * self);
 
 // CLASS: wxCollapsiblePane
 wxClassInfo *wxCollapsiblePane_CLASSINFO();
@@ -422,10 +412,6 @@ void wxCommandProcessor_SetUndoAccelerator(wxCommandProcessor * self, const wxSt
 bool wxCommandProcessor_Submit(wxCommandProcessor * self, wxCommand * command, bool store_it);
 void wxCommandProcessor_Store(wxCommandProcessor * self, wxCommand * command);
 bool wxCommandProcessor_Undo(wxCommandProcessor * self);
-
-// CLASS: wxContextHelpButton
-wxClassInfo *wxContextHelpButton_CLASSINFO();
-wxContextHelpButton *wxContextHelpButton_new(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style);
 
 // CLASS: wxContextMenuEvent
 wxClassInfo *wxContextMenuEvent_CLASSINFO();
