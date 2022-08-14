@@ -17,7 +17,6 @@
 #include <wx/combobox.h>
 #include <wx/commandlinkbutton.h>
 #include <wx/control.h>
-#include <wx/creddlg.h>
 #include <wx/ctrlsub.h>
 #include <wx/cursor.h>
 #include <wx/dataobj.h>
@@ -441,14 +440,6 @@ wxString *wxControl_Ellipsize(const wxString * label, const wxDC * dc, wxEllipsi
 wxClassInfo *wxControlWithItems_CLASSINFO();
 // Mix-in(s) to wxControlWithItems
 wxItemContainer *wxControlWithItems_AsItemContainer(wxControlWithItems* obj);
-
-// CLASS: wxCredentialEntryDialog
-wxClassInfo *wxCredentialEntryDialog_CLASSINFO();
-wxCredentialEntryDialog *wxCredentialEntryDialog_new();
-wxCredentialEntryDialog *wxCredentialEntryDialog_new1(wxWindow * parent, const wxString * message, const wxString * title, const wxWebCredentials * cred);
-bool wxCredentialEntryDialog_Create(wxCredentialEntryDialog * self, wxWindow * parent, const wxString * message, const wxString * title, const wxWebCredentials * cred);
-void wxCredentialEntryDialog_SetUser(wxCredentialEntryDialog * self, const wxString * user);
-void wxCredentialEntryDialog_SetPassword(wxCredentialEntryDialog * self, const wxString * password);
 
 // CLASS: wxCursor
 wxClassInfo *wxCursor_CLASSINFO();

@@ -1573,44 +1573,6 @@ pub trait ControlMethods: WindowMethods {
 // wxControlWithItems
 pub trait ControlWithItemsMethods: ControlMethods {}
 
-// wxCredentialEntryDialog
-pub trait CredentialEntryDialogMethods: DialogMethods {
-    fn create_str<W: WindowMethods>(
-        &self,
-        parent: Option<&W>,
-        message: &str,
-        title: &str,
-        cred: *const c_void,
-    ) -> bool {
-        unsafe {
-            let parent = match parent {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            let message = WxString::from(message);
-            let message = message.as_ptr();
-            let title = WxString::from(title);
-            let title = title.as_ptr();
-            ffi::wxCredentialEntryDialog_Create(self.as_ptr(), parent, message, title, cred)
-        }
-    }
-    // NOT_SUPPORTED: fn GetCredentials()
-    fn set_user(&self, user: &str) {
-        unsafe {
-            let user = WxString::from(user);
-            let user = user.as_ptr();
-            ffi::wxCredentialEntryDialog_SetUser(self.as_ptr(), user)
-        }
-    }
-    fn set_password(&self, password: &str) {
-        unsafe {
-            let password = WxString::from(password);
-            let password = password.as_ptr();
-            ffi::wxCredentialEntryDialog_SetPassword(self.as_ptr(), password)
-        }
-    }
-}
-
 // wxCursor
 pub trait CursorMethods: GDIObjectMethods {
     // DTOR: fn ~wxCursor()

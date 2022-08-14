@@ -454,7 +454,7 @@ wxml_files = [
     'wxml/classwx_context_menu_event.xml',
     'wxml/classwx_control.xml',
     'wxml/classwx_control_with_items.xml',
-    'wxml/classwx_credential_entry_dialog.xml',
+    # 'wxml/classwx_credential_entry_dialog.xml', # requires 3.1
     'wxml/classwx_cursor.xml',
     'wxml/classwx_custom_data_object.xml',
     'wxml/classwx_data_object.xml',

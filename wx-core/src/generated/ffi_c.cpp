@@ -1093,26 +1093,6 @@ wxItemContainer *wxControlWithItems_AsItemContainer(wxControlWithItems* obj) {
     return static_cast<wxItemContainer*>(obj);
 }
 
-// CLASS: wxCredentialEntryDialog
-wxClassInfo *wxCredentialEntryDialog_CLASSINFO() {
-    return wxCLASSINFO(wxCredentialEntryDialog);
-}
-wxCredentialEntryDialog *wxCredentialEntryDialog_new() {
-    return new wxCredentialEntryDialog();
-}
-wxCredentialEntryDialog *wxCredentialEntryDialog_new1(wxWindow * parent, const wxString * message, const wxString * title, const wxWebCredentials * cred) {
-    return new wxCredentialEntryDialog(parent, *message, *title, *cred);
-}
-bool wxCredentialEntryDialog_Create(wxCredentialEntryDialog * self, wxWindow * parent, const wxString * message, const wxString * title, const wxWebCredentials * cred) {
-    return self->Create(parent, *message, *title, *cred);
-}
-void wxCredentialEntryDialog_SetUser(wxCredentialEntryDialog * self, const wxString * user) {
-    return self->SetUser(*user);
-}
-void wxCredentialEntryDialog_SetPassword(wxCredentialEntryDialog * self, const wxString * password) {
-    return self->SetPassword(*password);
-}
-
 // CLASS: wxCursor
 wxClassInfo *wxCursor_CLASSINFO() {
     return wxCLASSINFO(wxCursor);

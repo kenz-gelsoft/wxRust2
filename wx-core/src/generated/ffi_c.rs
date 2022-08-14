@@ -771,26 +771,6 @@ extern "C" {
     // Mix-in(s) to wxControlWithItems
     pub fn wxControlWithItems_AsItemContainer(obj: *mut c_void) -> *mut c_void;
 
-    // wxCredentialEntryDialog
-    pub fn wxCredentialEntryDialog_CLASSINFO() -> *mut c_void;
-    pub fn wxCredentialEntryDialog_new() -> *mut c_void;
-    pub fn wxCredentialEntryDialog_new1(
-        parent: *mut c_void,
-        message: *const c_void,
-        title: *const c_void,
-        cred: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxCredentialEntryDialog_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        message: *const c_void,
-        title: *const c_void,
-        cred: *const c_void,
-    ) -> bool;
-    // NOT_SUPPORTED: pub fn wxCredentialEntryDialog_GetCredentials(self_: *const c_void) -> wxWebCredentials;
-    pub fn wxCredentialEntryDialog_SetUser(self_: *mut c_void, user: *const c_void);
-    pub fn wxCredentialEntryDialog_SetPassword(self_: *mut c_void, password: *const c_void);
-
     // wxCursor
     pub fn wxCursor_CLASSINFO() -> *mut c_void;
     pub fn wxCursor_new() -> *mut c_void;
