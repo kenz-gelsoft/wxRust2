@@ -728,6 +728,7 @@ blocklist = [
 wx31 = [
     # Not documented, but from 3.1.1
     'GetChooseAlpha',
+    'SetChooseAlpha',
 ]
 [types.wxColourDialog]
 wx31 = [
@@ -743,6 +744,9 @@ blocklist = [
     # deprecated
     'GetTextIndent',
     'SetTextIndent',
+]
+wx31 = [
+    'SetMainControl',
 ]
 [types.wxComboPopup]
 blocklist = [
@@ -766,6 +770,9 @@ wx31 = [
 [types.wxCursor]
 blocklist = [
     'operator=',
+]
+wx31 = [
+    'GetHotSpot',
 ]
 [types.wxDataObject]
 blocklist = [
@@ -822,6 +829,10 @@ blocklist = [
     'GetToolBar',
     # Didn't support Functor
     'ShowWindowModalThenDo',
+]
+wx31 = [
+    # Default argument added in 3.1
+    'CreateTextSizer',
 ]
 [types.wxEvent]
 returns_owned = [

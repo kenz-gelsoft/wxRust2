@@ -235,7 +235,9 @@ bool wxColourData_GetChooseAlpha(const wxColourData * self);
 wxColour * wxColourData_GetColour(wxColourData * self);
 wxColour *wxColourData_GetCustomColour(const wxColourData * self, int i);
 void wxColourData_SetChooseFull(wxColourData * self, bool flag);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxColourData_SetChooseAlpha(wxColourData * self, bool flag);
+#endif
 void wxColourData_SetColour(wxColourData * self, const wxColour * colour);
 void wxColourData_SetCustomColour(wxColourData * self, int i, const wxColour * colour);
 wxString *wxColourData_ToString(const wxColourData * self);
@@ -314,7 +316,9 @@ void wxComboCtrl_Popup(wxComboCtrl * self);
 void wxComboCtrl_SetButtonBitmaps(wxComboCtrl * self, const wxBitmapBundle * bmp_normal, bool push_button_bg, const wxBitmapBundle * bmp_pressed, const wxBitmapBundle * bmp_hover, const wxBitmapBundle * bmp_disabled);
 void wxComboCtrl_SetButtonPosition(wxComboCtrl * self, int width, int height, int side, int spacing_x);
 void wxComboCtrl_SetCustomPaintWidth(wxComboCtrl * self, int width);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxComboCtrl_SetMainControl(wxComboCtrl * self, wxWindow * win);
+#endif
 bool wxComboCtrl_SetMargins(wxComboCtrl * self, const wxPoint * pt);
 bool wxComboCtrl_SetMargins1(wxComboCtrl * self, wxCoord left, wxCoord top);
 void wxComboCtrl_SetPopupAnchor(wxComboCtrl * self, int anchor_side);
@@ -446,7 +450,9 @@ wxCursor *wxCursor_new4(const wxImage * image);
 wxCursor *wxCursor_new5(const char *const * xpm_data);
 wxCursor *wxCursor_new6(const wxCursor * cursor);
 bool wxCursor_IsOk(const wxCursor * self);
+#if wxCHECK_VERSION(3, 1, 0)
 wxPoint *wxCursor_GetHotSpot(const wxCursor * self);
+#endif
 
 // CLASS: wxCustomDataObject
 void wxCustomDataObject_delete(wxCustomDataObject *self);

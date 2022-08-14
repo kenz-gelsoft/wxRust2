@@ -543,9 +543,11 @@ wxColour *wxColourData_GetCustomColour(const wxColourData * self, int i) {
 void wxColourData_SetChooseFull(wxColourData * self, bool flag) {
     return self->SetChooseFull(flag);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxColourData_SetChooseAlpha(wxColourData * self, bool flag) {
     return self->SetChooseAlpha(flag);
 }
+#endif
 void wxColourData_SetColour(wxColourData * self, const wxColour * colour) {
     return self->SetColour(*colour);
 }
@@ -750,9 +752,11 @@ void wxComboCtrl_SetButtonPosition(wxComboCtrl * self, int width, int height, in
 void wxComboCtrl_SetCustomPaintWidth(wxComboCtrl * self, int width) {
     return self->SetCustomPaintWidth(width);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxComboCtrl_SetMainControl(wxComboCtrl * self, wxWindow * win) {
     return self->SetMainControl(win);
 }
+#endif
 bool wxComboCtrl_SetMargins(wxComboCtrl * self, const wxPoint * pt) {
     return self->SetMargins(*pt);
 }
@@ -1102,9 +1106,11 @@ wxCursor *wxCursor_new6(const wxCursor * cursor) {
 bool wxCursor_IsOk(const wxCursor * self) {
     return self->IsOk();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxPoint *wxCursor_GetHotSpot(const wxCursor * self) {
     return new wxPoint(self->GetHotSpot());
 }
+#endif
 
 // CLASS: wxCustomDataObject
 void wxCustomDataObject_delete(wxCustomDataObject *self) {

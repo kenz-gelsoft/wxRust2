@@ -115,9 +115,11 @@ wxSizer * wxDialog_CreateSeparatedSizer(wxDialog * self, wxSizer * sizer) {
 wxStdDialogButtonSizer * wxDialog_CreateStdDialogButtonSizer(wxDialog * self, long flags) {
     return self->CreateStdDialogButtonSizer(flags);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxSizer * wxDialog_CreateTextSizer(wxDialog * self, const wxString * message, int width_max) {
     return self->CreateTextSizer(*message, width_max);
 }
+#endif
 bool wxDialog_DoLayoutAdaptation(wxDialog * self) {
     return self->DoLayoutAdaptation();
 }

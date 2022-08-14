@@ -53,7 +53,9 @@ wxSizer * wxDialog_CreateButtonSizer(wxDialog * self, long flags);
 wxSizer * wxDialog_CreateSeparatedButtonSizer(wxDialog * self, long flags);
 wxSizer * wxDialog_CreateSeparatedSizer(wxDialog * self, wxSizer * sizer);
 wxStdDialogButtonSizer * wxDialog_CreateStdDialogButtonSizer(wxDialog * self, long flags);
+#if wxCHECK_VERSION(3, 1, 0)
 wxSizer * wxDialog_CreateTextSizer(wxDialog * self, const wxString * message, int width_max);
+#endif
 bool wxDialog_DoLayoutAdaptation(wxDialog * self);
 void wxDialog_EndModal(wxDialog * self, int ret_code);
 int wxDialog_GetAffirmativeId(const wxDialog * self);
