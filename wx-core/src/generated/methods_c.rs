@@ -79,9 +79,7 @@ pub trait CalendarCtrlMethods: ControlMethods {
     fn enable_month_change(&self, enable: bool) -> bool {
         unsafe { ffi::wxCalendarCtrl_EnableMonthChange(self.as_ptr(), enable) }
     }
-    fn enable_year_change(&self, enable: bool) {
-        unsafe { ffi::wxCalendarCtrl_EnableYearChange(self.as_ptr(), enable) }
-    }
+    // BLOCKED: fn EnableYearChange()
     fn get_attr(&self, day: usize) -> Option<CalendarDateAttrIsOwned<false>> {
         unsafe { CalendarDateAttr::option_from(ffi::wxCalendarCtrl_GetAttr(self.as_ptr(), day)) }
     }
@@ -1496,23 +1494,6 @@ pub trait CommandProcessorMethods: ObjectMethods {
     }
     fn undo(&self) -> bool {
         unsafe { ffi::wxCommandProcessor_Undo(self.as_ptr()) }
-    }
-}
-
-// wxContextHelp
-pub trait ContextHelpMethods: ObjectMethods {
-    // DTOR: fn ~wxContextHelp()
-    fn begin_context_help<W: WindowMethods>(&self, window: Option<&W>) -> bool {
-        unsafe {
-            let window = match window {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxContextHelp_BeginContextHelp(self.as_ptr(), window)
-        }
-    }
-    fn end_context_help(&self) -> bool {
-        unsafe { ffi::wxContextHelp_EndContextHelp(self.as_ptr()) }
     }
 }
 

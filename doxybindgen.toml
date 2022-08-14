@@ -449,7 +449,7 @@ wxml_files = [
     'wxml/classwx_command_event.xml',
     'wxml/classwx_command_link_button.xml',
     'wxml/classwx_command_processor.xml',
-    'wxml/classwx_context_help.xml',
+    # 'wxml/classwx_context_help.xml', # Our CI environment doesn't built with
     'wxml/classwx_context_help_button.xml',
     'wxml/classwx_context_menu_event.xml',
     'wxml/classwx_control.xml',
@@ -701,6 +701,11 @@ wx31 = [
 wx31 = [
     'GetDefaultSize',
 ]
+[types.wxCalendarCtrl]
+blocklist = [
+    # deprecated
+    'EnableYearChange',
+]
 [types.wxColour]
 blocklist = [
     'operator=',
@@ -804,10 +809,10 @@ wx31 = [
 ]
 [types.wxDialog]
 blocklist = [
-    'ShowWindowModalThenDo',
-]
-windows = [
+    # PocketPC only
     'GetToolBar',
+    # Didn't support Functor
+    'ShowWindowModalThenDo',
 ]
 [types.wxEvent]
 returns_owned = [

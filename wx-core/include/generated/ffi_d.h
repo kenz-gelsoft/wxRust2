@@ -63,9 +63,6 @@ bool wxDialog_GetLayoutAdaptationDone(const wxDialog * self);
 int wxDialog_GetLayoutAdaptationLevel(const wxDialog * self);
 wxArrayInt * wxDialog_GetMainButtonIds(wxDialog * self);
 int wxDialog_GetReturnCode(const wxDialog * self);
-#ifdef __WXMSW__
-wxToolBar * wxDialog_GetToolBar(const wxDialog * self);
-#endif
 bool wxDialog_IsMainButtonId(const wxDialog * self, wxWindowID id);
 bool wxDialog_IsModal(const wxDialog * self);
 void wxDialog_SetAffirmativeId(wxDialog * self, int id);

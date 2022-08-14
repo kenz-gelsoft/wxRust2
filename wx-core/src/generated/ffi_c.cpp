@@ -47,9 +47,6 @@ void wxCalendarCtrl_EnableHolidayDisplay(wxCalendarCtrl * self, bool display) {
 bool wxCalendarCtrl_EnableMonthChange(wxCalendarCtrl * self, bool enable) {
     return self->EnableMonthChange(enable);
 }
-void wxCalendarCtrl_EnableYearChange(wxCalendarCtrl * self, bool enable) {
-    return self->EnableYearChange(enable);
-}
 wxCalendarDateAttr * wxCalendarCtrl_GetAttr(const wxCalendarCtrl * self, size_t day) {
     return self->GetAttr(day);
 }
@@ -1045,20 +1042,6 @@ void wxCommandProcessor_Store(wxCommandProcessor * self, wxCommand * command) {
 }
 bool wxCommandProcessor_Undo(wxCommandProcessor * self) {
     return self->Undo();
-}
-
-// CLASS: wxContextHelp
-wxClassInfo *wxContextHelp_CLASSINFO() {
-    return wxCLASSINFO(wxContextHelp);
-}
-wxContextHelp *wxContextHelp_new(wxWindow * window, bool do_now) {
-    return new wxContextHelp(window, do_now);
-}
-bool wxContextHelp_BeginContextHelp(wxContextHelp * self, wxWindow * window) {
-    return self->BeginContextHelp(window);
-}
-bool wxContextHelp_EndContextHelp(wxContextHelp * self) {
-    return self->EndContextHelp();
 }
 
 // CLASS: wxContextHelpButton

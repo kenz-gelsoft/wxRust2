@@ -145,11 +145,6 @@ wxArrayInt * wxDialog_GetMainButtonIds(wxDialog * self) {
 int wxDialog_GetReturnCode(const wxDialog * self) {
     return self->GetReturnCode();
 }
-#ifdef __WXMSW__
-wxToolBar * wxDialog_GetToolBar(const wxDialog * self) {
-    return self->GetToolBar();
-}
-#endif
 bool wxDialog_IsMainButtonId(const wxDialog * self, wxWindowID id) {
     return self->IsMainButtonId(id);
 }

@@ -46,7 +46,6 @@ wxCalendarCtrl *wxCalendarCtrl_new1(wxWindow * parent, wxWindowID id, const wxDa
 bool wxCalendarCtrl_Create(wxCalendarCtrl * self, wxWindow * parent, wxWindowID id, const wxDateTime * date, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 void wxCalendarCtrl_EnableHolidayDisplay(wxCalendarCtrl * self, bool display);
 bool wxCalendarCtrl_EnableMonthChange(wxCalendarCtrl * self, bool enable);
-void wxCalendarCtrl_EnableYearChange(wxCalendarCtrl * self, bool enable);
 wxCalendarDateAttr * wxCalendarCtrl_GetAttr(const wxCalendarCtrl * self, size_t day);
 wxDateTime *wxCalendarCtrl_GetDate(const wxCalendarCtrl * self);
 wxColour *wxCalendarCtrl_GetHeaderColourBg(const wxCalendarCtrl * self);
@@ -423,12 +422,6 @@ void wxCommandProcessor_SetUndoAccelerator(wxCommandProcessor * self, const wxSt
 bool wxCommandProcessor_Submit(wxCommandProcessor * self, wxCommand * command, bool store_it);
 void wxCommandProcessor_Store(wxCommandProcessor * self, wxCommand * command);
 bool wxCommandProcessor_Undo(wxCommandProcessor * self);
-
-// CLASS: wxContextHelp
-wxClassInfo *wxContextHelp_CLASSINFO();
-wxContextHelp *wxContextHelp_new(wxWindow * window, bool do_now);
-bool wxContextHelp_BeginContextHelp(wxContextHelp * self, wxWindow * window);
-bool wxContextHelp_EndContextHelp(wxContextHelp * self);
 
 // CLASS: wxContextHelpButton
 wxClassInfo *wxContextHelpButton_CLASSINFO();

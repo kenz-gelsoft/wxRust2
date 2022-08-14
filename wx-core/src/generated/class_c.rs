@@ -1698,44 +1698,6 @@ impl<const OWNED: bool> Drop for CommandProcessorIsOwned<OWNED> {
     }
 }
 
-// wxContextHelp
-wx_class! { ContextHelp =
-    ContextHelpIsOwned<true>(wxContextHelp) impl
-        ContextHelpMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> ContextHelpIsOwned<OWNED> {
-    pub fn new<W: WindowMethods>(window: Option<&W>, do_now: bool) -> ContextHelpIsOwned<OWNED> {
-        unsafe {
-            let window = match window {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ContextHelpIsOwned(ffi::wxContextHelp_new(window, do_now))
-        }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<ContextHelpIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: ContextHelpIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for ContextHelpIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxContextHelp_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Drop for ContextHelpIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObject_delete(self.0) }
-        }
-    }
-}
-
 // wxContextHelpButton
 wx_class! { ContextHelpButton =
     ContextHelpButtonIsOwned<true>(wxContextHelpButton) impl

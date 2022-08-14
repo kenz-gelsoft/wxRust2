@@ -118,7 +118,7 @@ extern "C" {
     // NOT_SUPPORTED: pub fn wxDialog_GetLayoutAdaptationMode(self_: *const c_void) -> wxDialogLayoutAdaptationMode;
     pub fn wxDialog_GetMainButtonIds(self_: *mut c_void) -> *mut c_void;
     pub fn wxDialog_GetReturnCode(self_: *const c_void) -> c_int;
-    pub fn wxDialog_GetToolBar(self_: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxDialog_GetToolBar(self_: *const c_void) -> *mut c_void;
     pub fn wxDialog_IsMainButtonId(self_: *const c_void, id: c_int) -> bool;
     pub fn wxDialog_IsModal(self_: *const c_void) -> bool;
     pub fn wxDialog_SetAffirmativeId(self_: *mut c_void, id: c_int);

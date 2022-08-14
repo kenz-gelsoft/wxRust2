@@ -45,7 +45,7 @@ extern "C" {
     ) -> bool;
     pub fn wxCalendarCtrl_EnableHolidayDisplay(self_: *mut c_void, display: bool);
     pub fn wxCalendarCtrl_EnableMonthChange(self_: *mut c_void, enable: bool) -> bool;
-    pub fn wxCalendarCtrl_EnableYearChange(self_: *mut c_void, enable: bool);
+    // BLOCKED: pub fn wxCalendarCtrl_EnableYearChange(self_: *mut c_void, enable: bool);
     pub fn wxCalendarCtrl_GetAttr(self_: *const c_void, day: usize) -> *mut c_void;
     pub fn wxCalendarCtrl_GetDate(self_: *const c_void) -> *mut c_void;
     pub fn wxCalendarCtrl_GetHeaderColourBg(self_: *const c_void) -> *mut c_void;
@@ -739,13 +739,6 @@ extern "C" {
     ) -> bool;
     pub fn wxCommandProcessor_Store(self_: *mut c_void, command: *mut c_void);
     pub fn wxCommandProcessor_Undo(self_: *mut c_void) -> bool;
-
-    // wxContextHelp
-    pub fn wxContextHelp_CLASSINFO() -> *mut c_void;
-    pub fn wxContextHelp_new(window: *mut c_void, do_now: bool) -> *mut c_void;
-    // DTOR: pub fn wxContextHelp_~wxContextHelp(self_: *mut c_void);
-    pub fn wxContextHelp_BeginContextHelp(self_: *mut c_void, window: *mut c_void) -> bool;
-    pub fn wxContextHelp_EndContextHelp(self_: *mut c_void) -> bool;
 
     // wxContextHelpButton
     pub fn wxContextHelpButton_CLASSINFO() -> *mut c_void;

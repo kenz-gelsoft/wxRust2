@@ -207,9 +207,7 @@ pub trait DialogMethods: TopLevelWindowMethods {
     fn get_return_code(&self) -> c_int {
         unsafe { ffi::wxDialog_GetReturnCode(self.as_ptr()) }
     }
-    fn get_tool_bar(&self) -> WeakRef<ToolBar> {
-        unsafe { WeakRef::<ToolBar>::from(ffi::wxDialog_GetToolBar(self.as_ptr())) }
-    }
+    // BLOCKED: fn GetToolBar()
     fn is_main_button_id(&self, id: c_int) -> bool {
         unsafe { ffi::wxDialog_IsMainButtonId(self.as_ptr(), id) }
     }
