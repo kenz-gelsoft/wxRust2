@@ -791,6 +791,10 @@ blocklist = [
 wx31 = [
     'SetNullText',
 ]
+[types.wxDataViewBitmapRenderer]
+wx31 = [
+    'GetDefaultType',
+]
 [types.wxDataViewCtrl]
 blocklist = [
     # uses C++ generics
@@ -816,6 +820,13 @@ blocklist = [
     'Render',
     'RenderText',
 ]
+wx31 = [
+    'GetDefaultType',
+]
+[types.wxDataViewDateRenderer]
+wx31 = [
+    'GetDefaultType',
+]
 [types.wxDataViewEvent]
 blocklist = [
     # (maybe) disabled on CI env
@@ -824,6 +835,20 @@ blocklist = [
     'SetModel',
     # invalid return type
     'GetValue',
+]
+wx31 = [
+    'GetProposedDropIndex',
+]
+[types.wxDataViewIconText]
+wx31 = [
+    # wxBitmapBundle
+    'wxDataViewIconText',
+    'GetBitmapBundle',
+    'SetBitmapBundle',
+]
+[types.wxDataViewIconTextRenderer]
+wx31 = [
+    'GetDefaultType',
 ]
 [types.wxDataViewIndexListModel]
 blocklist = [
@@ -839,6 +864,10 @@ blocklist = [
     'InsertColumn',
     'PrependColumn',
 ]
+[types.wxDataViewItemAttr]
+wx31 = [
+    'SetStrikethrough',
+]
 [types.wxDataViewModel]
 blocklist = [
     # abstract
@@ -849,6 +878,10 @@ blocklist = [
     # abstract
     'wxDataViewModelNotifier',
 ]
+[types.wxDataViewProgressRenderer]
+wx31 = [
+    'GetDefaultType',
+]
 [types.wxDataViewRenderer]
 blocklist = [
     # binding type by value is not supported
@@ -856,6 +889,9 @@ blocklist = [
     'StartEditing',
     # requires explicit enabling of accessibility
     'GetAccessibleDescription',
+]
+wx31 = [
+    'SetValueAdjuster',
 ]
 wx317 = [
     'IsCompatibleVariantType',
@@ -865,6 +901,31 @@ blocklist = [
     # binding type by value is not supported
     'GetItemParent',
     'GetStore',
+]
+wx31 = [
+    'SetItemExpandedIcon',
+    'SetItemIcon',
+]
+[types.wxDataViewTreeStore]
+wx31 = [
+    'AppendContainer',
+    'AppendItem',
+    'InsertContainer',
+    'InsertItem',
+    'PrependContainer',
+    'PrependItem',
+    'SetItemExpandedIcon',
+    'SetItemIcon',
+]
+[types.wxDataViewTextRenderer]
+wx31 = [
+    'EnableMarkup',
+    'GetDefaultType',
+]
+[types.wxDataViewToggleRenderer]
+wx31 = [
+    'GetDefaultType',
+    'ShowAsRadio',
 ]
 [types.wxDataViewVirtualListModel]
 blocklist = [
@@ -922,6 +983,7 @@ wx31 = [
     'LogicalToDeviceRel1',
     # return type changed in 3.1.2
     'GetClippingBox',
+    'GetClippingBox1',
 ]
 wx317 = [
     'FromDIP',
@@ -946,6 +1008,18 @@ wx31 = [
 blocklist = [
     # abstract
     'wxDialogLayoutAdapter',
+]
+[types.wxDirDialog]
+wx31 = [
+    'GetPaths',
+]
+[types.wxDisplay]
+wx31 = [
+    'wxDisplay2',
+    'GetPPI',
+    'GetScaleFactor',
+    'GetStdPPIValue',
+    'GetStdPPI',
 ]
 [types.wxDocManager]
 blocklist = [
@@ -1216,6 +1290,17 @@ blocklist = [
     'Inflate2',
     'Intersect',
     'Union1',
+]
+[types.wxRendererNative]
+wx31 = [
+    'DrawCheckMark',
+    'DrawCollapseButton',
+    'DrawGauge',
+    'DrawItemText',
+    'GetCheckBoxSize',
+    'GetCheckMarkSize',
+    'GetCollapseButtonSize',
+    'GetExpanderSize',
 ]
 [types.wxSize]
 blocklist = [

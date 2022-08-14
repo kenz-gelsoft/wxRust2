@@ -183,10 +183,10 @@ void wxDC_DestroyClippingRegion(wxDC * self) {
 bool wxDC_GetClippingBox(const wxDC * self, wxCoord * x, wxCoord * y, wxCoord * width, wxCoord * height) {
     return self->GetClippingBox(x, y, width, height);
 }
-#endif
 bool wxDC_GetClippingBox1(const wxDC * self, wxRect * rect) {
     return self->GetClippingBox(*rect);
 }
+#endif
 void wxDC_SetClippingRegion(wxDC * self, wxCoord x, wxCoord y, wxCoord width, wxCoord height) {
     return self->SetClippingRegion(x, y, width, height);
 }
@@ -547,9 +547,11 @@ void wxDataObjectSimple_SetFormat(wxDataObjectSimple * self, const wxDataFormat 
 wxClassInfo *wxDataViewBitmapRenderer_CLASSINFO() {
     return wxCLASSINFO(wxDataViewBitmapRenderer);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxDataViewBitmapRenderer_GetDefaultType() {
     return new wxString(wxDataViewBitmapRenderer::GetDefaultType());
 }
+#endif
 
 // CLASS: wxDataViewChoiceByIndexRenderer
 wxClassInfo *wxDataViewChoiceByIndexRenderer_CLASSINFO() {
@@ -766,9 +768,11 @@ wxDataViewItem *wxDataViewCtrl_GetTopItem(const wxDataViewCtrl * self) {
 wxClassInfo *wxDataViewCustomRenderer_CLASSINFO() {
     return wxCLASSINFO(wxDataViewCustomRenderer);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxDataViewCustomRenderer_GetDefaultType() {
     return new wxString(wxDataViewCustomRenderer::GetDefaultType());
 }
+#endif
 bool wxDataViewCustomRenderer_ActivateCell(wxDataViewCustomRenderer * self, const wxRect * cell, wxDataViewModel * model, const wxDataViewItem * item, unsigned int col, const wxMouseEvent * mouse_event) {
     return self->ActivateCell(*cell, model, *item, col, mouse_event);
 }
@@ -786,9 +790,11 @@ bool wxDataViewCustomRenderer_StartDrag(wxDataViewCustomRenderer * self, const w
 wxClassInfo *wxDataViewDateRenderer_CLASSINFO() {
     return wxCLASSINFO(wxDataViewDateRenderer);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxDataViewDateRenderer_GetDefaultType() {
     return new wxString(wxDataViewDateRenderer::GetDefaultType());
 }
+#endif
 
 // CLASS: wxDataViewEvent
 wxClassInfo *wxDataViewEvent_CLASSINFO() {
@@ -842,9 +848,11 @@ int wxDataViewEvent_GetCacheFrom(const wxDataViewEvent * self) {
 int wxDataViewEvent_GetCacheTo(const wxDataViewEvent * self) {
     return self->GetCacheTo();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 int wxDataViewEvent_GetProposedDropIndex(const wxDataViewEvent * self) {
     return self->GetProposedDropIndex();
 }
+#endif
 wxDataViewItem *wxDataViewEvent_GetItem(const wxDataViewEvent * self) {
     return new wxDataViewItem(self->GetItem());
 }
@@ -874,24 +882,30 @@ int wxDataViewEvent_GetDragFlags(const wxDataViewEvent * self) {
 wxClassInfo *wxDataViewIconText_CLASSINFO() {
     return wxCLASSINFO(wxDataViewIconText);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxDataViewIconText *wxDataViewIconText_new(const wxString * text, const wxBitmapBundle * bitmap) {
     return new wxDataViewIconText(*text, *bitmap);
 }
+#endif
 wxDataViewIconText *wxDataViewIconText_new1(const wxDataViewIconText * other) {
     return new wxDataViewIconText(*other);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxBitmapBundle *wxDataViewIconText_GetBitmapBundle(const wxDataViewIconText * self) {
     return new wxBitmapBundle(self->GetBitmapBundle());
 }
+#endif
 wxIcon *wxDataViewIconText_GetIcon(const wxDataViewIconText * self) {
     return new wxIcon(self->GetIcon());
 }
 wxString *wxDataViewIconText_GetText(const wxDataViewIconText * self) {
     return new wxString(self->GetText());
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxDataViewIconText_SetBitmapBundle(wxDataViewIconText * self, const wxBitmapBundle * bitmap) {
     return self->SetBitmapBundle(*bitmap);
 }
+#endif
 void wxDataViewIconText_SetIcon(wxDataViewIconText * self, const wxIcon * icon) {
     return self->SetIcon(*icon);
 }
@@ -903,9 +917,11 @@ void wxDataViewIconText_SetText(wxDataViewIconText * self, const wxString * text
 wxClassInfo *wxDataViewIconTextRenderer_CLASSINFO() {
     return wxCLASSINFO(wxDataViewIconTextRenderer);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxDataViewIconTextRenderer_GetDefaultType() {
     return new wxString(wxDataViewIconTextRenderer::GetDefaultType());
 }
+#endif
 
 // CLASS: wxDataViewIndexListModel
 wxDataViewItem *wxDataViewIndexListModel_GetItem(const wxDataViewIndexListModel * self, unsigned int row) {
@@ -975,9 +991,11 @@ void wxDataViewItemAttr_SetBackgroundColour(wxDataViewItemAttr * self, const wxC
 void wxDataViewItemAttr_SetItalic(wxDataViewItemAttr * self, bool set) {
     return self->SetItalic(set);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxDataViewItemAttr_SetStrikethrough(wxDataViewItemAttr * self, bool set) {
     return self->SetStrikethrough(set);
 }
+#endif
 bool wxDataViewItemAttr_HasColour(const wxDataViewItemAttr * self) {
     return self->HasColour();
 }
@@ -1212,9 +1230,11 @@ bool wxDataViewModelNotifier_ValueChanged(wxDataViewModelNotifier * self, const 
 wxClassInfo *wxDataViewProgressRenderer_CLASSINFO() {
     return wxCLASSINFO(wxDataViewProgressRenderer);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxDataViewProgressRenderer_GetDefaultType() {
     return new wxString(wxDataViewProgressRenderer::GetDefaultType());
 }
+#endif
 
 // CLASS: wxDataViewRenderer
 wxClassInfo *wxDataViewRenderer_CLASSINFO() {
@@ -1255,9 +1275,11 @@ void wxDataViewRenderer_SetOwner(wxDataViewRenderer * self, wxDataViewColumn * o
 bool wxDataViewRenderer_SetValue(wxDataViewRenderer * self, const wxVariant * value) {
     return self->SetValue(*value);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxDataViewRenderer_SetValueAdjuster(wxDataViewRenderer * self, wxDataViewValueAdjuster * transformer) {
     return self->SetValueAdjuster(transformer);
 }
+#endif
 bool wxDataViewRenderer_Validate(wxDataViewRenderer * self, wxVariant * value) {
     return self->Validate(*value);
 }
@@ -1286,23 +1308,27 @@ wxClassInfo *wxDataViewSpinRenderer_CLASSINFO() {
 wxClassInfo *wxDataViewTextRenderer_CLASSINFO() {
     return wxCLASSINFO(wxDataViewTextRenderer);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxDataViewTextRenderer_GetDefaultType() {
     return new wxString(wxDataViewTextRenderer::GetDefaultType());
 }
 void wxDataViewTextRenderer_EnableMarkup(wxDataViewTextRenderer * self, bool enable) {
     return self->EnableMarkup(enable);
 }
+#endif
 
 // CLASS: wxDataViewToggleRenderer
 wxClassInfo *wxDataViewToggleRenderer_CLASSINFO() {
     return wxCLASSINFO(wxDataViewToggleRenderer);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxDataViewToggleRenderer_GetDefaultType() {
     return new wxString(wxDataViewToggleRenderer::GetDefaultType());
 }
 void wxDataViewToggleRenderer_ShowAsRadio(wxDataViewToggleRenderer * self) {
     return self->ShowAsRadio();
 }
+#endif
 
 // CLASS: wxDataViewTreeCtrl
 wxClassInfo *wxDataViewTreeCtrl_CLASSINFO() {
@@ -1377,12 +1403,14 @@ void wxDataViewTreeCtrl_SetImageList(wxDataViewTreeCtrl * self, wxImageList * im
 void wxDataViewTreeCtrl_SetItemData(wxDataViewTreeCtrl * self, const wxDataViewItem * item, wxClientData * data) {
     return self->SetItemData(*item, data);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxDataViewTreeCtrl_SetItemExpandedIcon(wxDataViewTreeCtrl * self, const wxDataViewItem * item, const wxBitmapBundle * icon) {
     return self->SetItemExpandedIcon(*item, *icon);
 }
 void wxDataViewTreeCtrl_SetItemIcon(wxDataViewTreeCtrl * self, const wxDataViewItem * item, const wxBitmapBundle * icon) {
     return self->SetItemIcon(*item, *icon);
 }
+#endif
 void wxDataViewTreeCtrl_SetItemText(wxDataViewTreeCtrl * self, const wxDataViewItem * item, const wxString * text) {
     return self->SetItemText(*item, *text);
 }
@@ -1391,12 +1419,14 @@ void wxDataViewTreeCtrl_SetItemText(wxDataViewTreeCtrl * self, const wxDataViewI
 wxDataViewTreeStore *wxDataViewTreeStore_new() {
     return new wxDataViewTreeStore();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxDataViewItem *wxDataViewTreeStore_AppendContainer(wxDataViewTreeStore * self, const wxDataViewItem * parent, const wxString * text, const wxBitmapBundle * icon, const wxBitmapBundle * expanded, wxClientData * data) {
     return new wxDataViewItem(self->AppendContainer(*parent, *text, *icon, *expanded, data));
 }
 wxDataViewItem *wxDataViewTreeStore_AppendItem(wxDataViewTreeStore * self, const wxDataViewItem * parent, const wxString * text, const wxBitmapBundle * icon, wxClientData * data) {
     return new wxDataViewItem(self->AppendItem(*parent, *text, *icon, data));
 }
+#endif
 void wxDataViewTreeStore_DeleteAllItems(wxDataViewTreeStore * self) {
     return self->DeleteAllItems();
 }
@@ -1424,6 +1454,7 @@ wxString *wxDataViewTreeStore_GetItemText(const wxDataViewTreeStore * self, cons
 wxDataViewItem *wxDataViewTreeStore_GetNthChild(const wxDataViewTreeStore * self, const wxDataViewItem * parent, unsigned int pos) {
     return new wxDataViewItem(self->GetNthChild(*parent, pos));
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxDataViewItem *wxDataViewTreeStore_InsertContainer(wxDataViewTreeStore * self, const wxDataViewItem * parent, const wxDataViewItem * previous, const wxString * text, const wxBitmapBundle * icon, const wxBitmapBundle * expanded, wxClientData * data) {
     return new wxDataViewItem(self->InsertContainer(*parent, *previous, *text, *icon, *expanded, data));
 }
@@ -1436,15 +1467,18 @@ wxDataViewItem *wxDataViewTreeStore_PrependContainer(wxDataViewTreeStore * self,
 wxDataViewItem *wxDataViewTreeStore_PrependItem(wxDataViewTreeStore * self, const wxDataViewItem * parent, const wxString * text, const wxBitmapBundle * icon, wxClientData * data) {
     return new wxDataViewItem(self->PrependItem(*parent, *text, *icon, data));
 }
+#endif
 void wxDataViewTreeStore_SetItemData(wxDataViewTreeStore * self, const wxDataViewItem * item, wxClientData * data) {
     return self->SetItemData(*item, data);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxDataViewTreeStore_SetItemExpandedIcon(wxDataViewTreeStore * self, const wxDataViewItem * item, const wxBitmapBundle * icon) {
     return self->SetItemExpandedIcon(*item, *icon);
 }
 void wxDataViewTreeStore_SetItemIcon(wxDataViewTreeStore * self, const wxDataViewItem * item, const wxBitmapBundle * icon) {
     return self->SetItemIcon(*item, *icon);
 }
+#endif
 
 // CLASS: wxDataViewVirtualListModel
 wxDataViewItem *wxDataViewVirtualListModel_GetItem(const wxDataViewVirtualListModel * self, unsigned int row) {
@@ -1664,9 +1698,11 @@ wxString *wxDirDialog_GetMessage(const wxDirDialog * self) {
 wxString *wxDirDialog_GetPath(const wxDirDialog * self) {
     return new wxString(self->GetPath());
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxDirDialog_GetPaths(const wxDirDialog * self, wxArrayString * paths) {
     return self->GetPaths(*paths);
 }
+#endif
 void wxDirDialog_SetMessage(wxDirDialog * self, const wxString * message) {
     return self->SetMessage(*message);
 }
@@ -1713,9 +1749,11 @@ wxDisplay *wxDisplay_new() {
 wxDisplay *wxDisplay_new1(unsigned int index) {
     return new wxDisplay(index);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxDisplay *wxDisplay_new2(const wxWindow * window) {
     return new wxDisplay(window);
 }
+#endif
 bool wxDisplay_ChangeMode(wxDisplay * self, const wxVideoMode * mode) {
     return self->ChangeMode(*mode);
 }
@@ -1728,12 +1766,14 @@ wxRect *wxDisplay_GetGeometry(const wxDisplay * self) {
 wxString *wxDisplay_GetName(const wxDisplay * self) {
     return new wxString(self->GetName());
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxSize *wxDisplay_GetPPI(const wxDisplay * self) {
     return new wxSize(self->GetPPI());
 }
 double wxDisplay_GetScaleFactor(const wxDisplay * self) {
     return self->GetScaleFactor();
 }
+#endif
 bool wxDisplay_IsPrimary(const wxDisplay * self) {
     return self->IsPrimary();
 }
@@ -1746,12 +1786,14 @@ int wxDisplay_GetFromPoint(const wxPoint * pt) {
 int wxDisplay_GetFromWindow(const wxWindow * win) {
     return wxDisplay::GetFromWindow(win);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 int wxDisplay_GetStdPPIValue() {
     return wxDisplay::GetStdPPIValue();
 }
 wxSize *wxDisplay_GetStdPPI() {
     return new wxSize(wxDisplay::GetStdPPI());
 }
+#endif
 
 // CLASS: wxDisplayChangedEvent
 wxClassInfo *wxDisplayChangedEvent_CLASSINFO() {

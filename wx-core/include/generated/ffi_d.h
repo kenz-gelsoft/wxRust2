@@ -80,8 +80,8 @@ void wxDC_CrossHair1(wxDC * self, const wxPoint * pt);
 void wxDC_DestroyClippingRegion(wxDC * self);
 #if wxCHECK_VERSION(3, 1, 0)
 bool wxDC_GetClippingBox(const wxDC * self, wxCoord * x, wxCoord * y, wxCoord * width, wxCoord * height);
-#endif
 bool wxDC_GetClippingBox1(const wxDC * self, wxRect * rect);
+#endif
 void wxDC_SetClippingRegion(wxDC * self, wxCoord x, wxCoord y, wxCoord width, wxCoord height);
 void wxDC_SetClippingRegion1(wxDC * self, const wxPoint * pt, const wxSize * sz);
 void wxDC_SetClippingRegion2(wxDC * self, const wxRect * rect);
@@ -218,7 +218,9 @@ void wxDataObjectSimple_SetFormat(wxDataObjectSimple * self, const wxDataFormat 
 
 // CLASS: wxDataViewBitmapRenderer
 wxClassInfo *wxDataViewBitmapRenderer_CLASSINFO();
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxDataViewBitmapRenderer_GetDefaultType();
+#endif
 
 // CLASS: wxDataViewChoiceByIndexRenderer
 wxClassInfo *wxDataViewChoiceByIndexRenderer_CLASSINFO();
@@ -307,7 +309,9 @@ wxDataViewItem *wxDataViewCtrl_GetTopItem(const wxDataViewCtrl * self);
 
 // CLASS: wxDataViewCustomRenderer
 wxClassInfo *wxDataViewCustomRenderer_CLASSINFO();
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxDataViewCustomRenderer_GetDefaultType();
+#endif
 bool wxDataViewCustomRenderer_ActivateCell(wxDataViewCustomRenderer * self, const wxRect * cell, wxDataViewModel * model, const wxDataViewItem * item, unsigned int col, const wxMouseEvent * mouse_event);
 wxDataViewItemAttr *wxDataViewCustomRenderer_GetAttr(const wxDataViewCustomRenderer * self);
 wxSize *wxDataViewCustomRenderer_GetSize(const wxDataViewCustomRenderer * self);
@@ -315,7 +319,9 @@ bool wxDataViewCustomRenderer_StartDrag(wxDataViewCustomRenderer * self, const w
 
 // CLASS: wxDataViewDateRenderer
 wxClassInfo *wxDataViewDateRenderer_CLASSINFO();
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxDataViewDateRenderer_GetDefaultType();
+#endif
 
 // CLASS: wxDataViewEvent
 wxClassInfo *wxDataViewEvent_CLASSINFO();
@@ -335,7 +341,9 @@ void * wxDataViewEvent_GetDataBuffer(const wxDataViewEvent * self);
 void wxDataViewEvent_SetDragFlags(wxDataViewEvent * self, int flags);
 int wxDataViewEvent_GetCacheFrom(const wxDataViewEvent * self);
 int wxDataViewEvent_GetCacheTo(const wxDataViewEvent * self);
+#if wxCHECK_VERSION(3, 1, 0)
 int wxDataViewEvent_GetProposedDropIndex(const wxDataViewEvent * self);
+#endif
 wxDataViewItem *wxDataViewEvent_GetItem(const wxDataViewEvent * self);
 void wxDataViewEvent_SetPosition(wxDataViewEvent * self, int x, int y);
 void wxDataViewEvent_SetCache(wxDataViewEvent * self, int from, int to);
@@ -347,18 +355,26 @@ int wxDataViewEvent_GetDragFlags(const wxDataViewEvent * self);
 
 // CLASS: wxDataViewIconText
 wxClassInfo *wxDataViewIconText_CLASSINFO();
+#if wxCHECK_VERSION(3, 1, 0)
 wxDataViewIconText *wxDataViewIconText_new(const wxString * text, const wxBitmapBundle * bitmap);
+#endif
 wxDataViewIconText *wxDataViewIconText_new1(const wxDataViewIconText * other);
+#if wxCHECK_VERSION(3, 1, 0)
 wxBitmapBundle *wxDataViewIconText_GetBitmapBundle(const wxDataViewIconText * self);
+#endif
 wxIcon *wxDataViewIconText_GetIcon(const wxDataViewIconText * self);
 wxString *wxDataViewIconText_GetText(const wxDataViewIconText * self);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxDataViewIconText_SetBitmapBundle(wxDataViewIconText * self, const wxBitmapBundle * bitmap);
+#endif
 void wxDataViewIconText_SetIcon(wxDataViewIconText * self, const wxIcon * icon);
 void wxDataViewIconText_SetText(wxDataViewIconText * self, const wxString * text);
 
 // CLASS: wxDataViewIconTextRenderer
 wxClassInfo *wxDataViewIconTextRenderer_CLASSINFO();
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxDataViewIconTextRenderer_GetDefaultType();
+#endif
 
 // CLASS: wxDataViewIndexListModel
 wxDataViewItem *wxDataViewIndexListModel_GetItem(const wxDataViewIndexListModel * self, unsigned int row);
@@ -386,7 +402,9 @@ void wxDataViewItemAttr_SetBold(wxDataViewItemAttr * self, bool set);
 void wxDataViewItemAttr_SetColour(wxDataViewItemAttr * self, const wxColour * colour);
 void wxDataViewItemAttr_SetBackgroundColour(wxDataViewItemAttr * self, const wxColour * colour);
 void wxDataViewItemAttr_SetItalic(wxDataViewItemAttr * self, bool set);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxDataViewItemAttr_SetStrikethrough(wxDataViewItemAttr * self, bool set);
+#endif
 bool wxDataViewItemAttr_HasColour(const wxDataViewItemAttr * self);
 wxColour *wxDataViewItemAttr_GetColour(const wxDataViewItemAttr * self);
 bool wxDataViewItemAttr_HasFont(const wxDataViewItemAttr * self);
@@ -473,7 +491,9 @@ bool wxDataViewModelNotifier_ValueChanged(wxDataViewModelNotifier * self, const 
 
 // CLASS: wxDataViewProgressRenderer
 wxClassInfo *wxDataViewProgressRenderer_CLASSINFO();
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxDataViewProgressRenderer_GetDefaultType();
+#endif
 
 // CLASS: wxDataViewRenderer
 wxClassInfo *wxDataViewRenderer_CLASSINFO();
@@ -490,7 +510,9 @@ bool wxDataViewRenderer_IsCompatibleVariantType(const wxDataViewRenderer * self,
 void wxDataViewRenderer_SetAlignment(wxDataViewRenderer * self, int align);
 void wxDataViewRenderer_SetOwner(wxDataViewRenderer * self, wxDataViewColumn * owner);
 bool wxDataViewRenderer_SetValue(wxDataViewRenderer * self, const wxVariant * value);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxDataViewRenderer_SetValueAdjuster(wxDataViewRenderer * self, wxDataViewValueAdjuster * transformer);
+#endif
 bool wxDataViewRenderer_Validate(wxDataViewRenderer * self, wxVariant * value);
 bool wxDataViewRenderer_HasEditorCtrl(const wxDataViewRenderer * self);
 bool wxDataViewRenderer_GetValueFromEditorCtrl(wxDataViewRenderer * self, wxWindow * editor, wxVariant * value);
@@ -503,13 +525,17 @@ wxClassInfo *wxDataViewSpinRenderer_CLASSINFO();
 
 // CLASS: wxDataViewTextRenderer
 wxClassInfo *wxDataViewTextRenderer_CLASSINFO();
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxDataViewTextRenderer_GetDefaultType();
 void wxDataViewTextRenderer_EnableMarkup(wxDataViewTextRenderer * self, bool enable);
+#endif
 
 // CLASS: wxDataViewToggleRenderer
 wxClassInfo *wxDataViewToggleRenderer_CLASSINFO();
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxDataViewToggleRenderer_GetDefaultType();
 void wxDataViewToggleRenderer_ShowAsRadio(wxDataViewToggleRenderer * self);
+#endif
 
 // CLASS: wxDataViewTreeCtrl
 wxClassInfo *wxDataViewTreeCtrl_CLASSINFO();
@@ -536,14 +562,18 @@ wxDataViewItem *wxDataViewTreeCtrl_PrependContainer(wxDataViewTreeCtrl * self, c
 wxDataViewItem *wxDataViewTreeCtrl_PrependItem(wxDataViewTreeCtrl * self, const wxDataViewItem * parent, const wxString * text, int icon, wxClientData * data);
 void wxDataViewTreeCtrl_SetImageList(wxDataViewTreeCtrl * self, wxImageList * imagelist);
 void wxDataViewTreeCtrl_SetItemData(wxDataViewTreeCtrl * self, const wxDataViewItem * item, wxClientData * data);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxDataViewTreeCtrl_SetItemExpandedIcon(wxDataViewTreeCtrl * self, const wxDataViewItem * item, const wxBitmapBundle * icon);
 void wxDataViewTreeCtrl_SetItemIcon(wxDataViewTreeCtrl * self, const wxDataViewItem * item, const wxBitmapBundle * icon);
+#endif
 void wxDataViewTreeCtrl_SetItemText(wxDataViewTreeCtrl * self, const wxDataViewItem * item, const wxString * text);
 
 // CLASS: wxDataViewTreeStore
 wxDataViewTreeStore *wxDataViewTreeStore_new();
+#if wxCHECK_VERSION(3, 1, 0)
 wxDataViewItem *wxDataViewTreeStore_AppendContainer(wxDataViewTreeStore * self, const wxDataViewItem * parent, const wxString * text, const wxBitmapBundle * icon, const wxBitmapBundle * expanded, wxClientData * data);
 wxDataViewItem *wxDataViewTreeStore_AppendItem(wxDataViewTreeStore * self, const wxDataViewItem * parent, const wxString * text, const wxBitmapBundle * icon, wxClientData * data);
+#endif
 void wxDataViewTreeStore_DeleteAllItems(wxDataViewTreeStore * self);
 void wxDataViewTreeStore_DeleteChildren(wxDataViewTreeStore * self, const wxDataViewItem * item);
 void wxDataViewTreeStore_DeleteItem(wxDataViewTreeStore * self, const wxDataViewItem * item);
@@ -553,13 +583,17 @@ wxIcon *wxDataViewTreeStore_GetItemExpandedIcon(const wxDataViewTreeStore * self
 wxIcon *wxDataViewTreeStore_GetItemIcon(const wxDataViewTreeStore * self, const wxDataViewItem * item);
 wxString *wxDataViewTreeStore_GetItemText(const wxDataViewTreeStore * self, const wxDataViewItem * item);
 wxDataViewItem *wxDataViewTreeStore_GetNthChild(const wxDataViewTreeStore * self, const wxDataViewItem * parent, unsigned int pos);
+#if wxCHECK_VERSION(3, 1, 0)
 wxDataViewItem *wxDataViewTreeStore_InsertContainer(wxDataViewTreeStore * self, const wxDataViewItem * parent, const wxDataViewItem * previous, const wxString * text, const wxBitmapBundle * icon, const wxBitmapBundle * expanded, wxClientData * data);
 wxDataViewItem *wxDataViewTreeStore_InsertItem(wxDataViewTreeStore * self, const wxDataViewItem * parent, const wxDataViewItem * previous, const wxString * text, const wxBitmapBundle * icon, wxClientData * data);
 wxDataViewItem *wxDataViewTreeStore_PrependContainer(wxDataViewTreeStore * self, const wxDataViewItem * parent, const wxString * text, const wxBitmapBundle * icon, const wxBitmapBundle * expanded, wxClientData * data);
 wxDataViewItem *wxDataViewTreeStore_PrependItem(wxDataViewTreeStore * self, const wxDataViewItem * parent, const wxString * text, const wxBitmapBundle * icon, wxClientData * data);
+#endif
 void wxDataViewTreeStore_SetItemData(wxDataViewTreeStore * self, const wxDataViewItem * item, wxClientData * data);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxDataViewTreeStore_SetItemExpandedIcon(wxDataViewTreeStore * self, const wxDataViewItem * item, const wxBitmapBundle * icon);
 void wxDataViewTreeStore_SetItemIcon(wxDataViewTreeStore * self, const wxDataViewItem * item, const wxBitmapBundle * icon);
+#endif
 
 // CLASS: wxDataViewVirtualListModel
 wxDataViewItem *wxDataViewVirtualListModel_GetItem(const wxDataViewVirtualListModel * self, unsigned int row);
@@ -645,7 +679,9 @@ wxClassInfo *wxDirDialog_CLASSINFO();
 wxDirDialog *wxDirDialog_new(wxWindow * parent, const wxString * message, const wxString * default_path, long style, const wxPoint * pos, const wxSize * size, const wxString * name);
 wxString *wxDirDialog_GetMessage(const wxDirDialog * self);
 wxString *wxDirDialog_GetPath(const wxDirDialog * self);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxDirDialog_GetPaths(const wxDirDialog * self, wxArrayString * paths);
+#endif
 void wxDirDialog_SetMessage(wxDirDialog * self, const wxString * message);
 void wxDirDialog_SetPath(wxDirDialog * self, const wxString * path);
 
@@ -664,19 +700,25 @@ void wxDirPickerCtrl_SetPath(wxDirPickerCtrl * self, const wxString * dirname);
 void wxDisplay_delete(wxDisplay *self);
 wxDisplay *wxDisplay_new();
 wxDisplay *wxDisplay_new1(unsigned int index);
+#if wxCHECK_VERSION(3, 1, 0)
 wxDisplay *wxDisplay_new2(const wxWindow * window);
+#endif
 bool wxDisplay_ChangeMode(wxDisplay * self, const wxVideoMode * mode);
 wxRect *wxDisplay_GetClientArea(const wxDisplay * self);
 wxRect *wxDisplay_GetGeometry(const wxDisplay * self);
 wxString *wxDisplay_GetName(const wxDisplay * self);
+#if wxCHECK_VERSION(3, 1, 0)
 wxSize *wxDisplay_GetPPI(const wxDisplay * self);
 double wxDisplay_GetScaleFactor(const wxDisplay * self);
+#endif
 bool wxDisplay_IsPrimary(const wxDisplay * self);
 unsigned int wxDisplay_GetCount();
 int wxDisplay_GetFromPoint(const wxPoint * pt);
 int wxDisplay_GetFromWindow(const wxWindow * win);
+#if wxCHECK_VERSION(3, 1, 0)
 int wxDisplay_GetStdPPIValue();
 wxSize *wxDisplay_GetStdPPI();
+#endif
 
 // CLASS: wxDisplayChangedEvent
 wxClassInfo *wxDisplayChangedEvent_CLASSINFO();

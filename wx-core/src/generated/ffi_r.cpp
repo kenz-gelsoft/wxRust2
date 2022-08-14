@@ -214,24 +214,30 @@ void wxRendererNative_DrawDropArrow(wxRendererNative * self, wxWindow * win, wxD
 void wxRendererNative_DrawFocusRect(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags) {
     return self->DrawFocusRect(win, *dc, *rect, flags);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxRendererNative_DrawGauge(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int value, int max, int flags) {
     return self->DrawGauge(win, *dc, *rect, value, max, flags);
 }
+#endif
 void wxRendererNative_DrawItemSelectionRect(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags) {
     return self->DrawItemSelectionRect(win, *dc, *rect, flags);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxRendererNative_DrawItemText(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxString * text, const wxRect * rect, int align, int flags, wxEllipsizeMode ellipsize_mode) {
     return self->DrawItemText(win, *dc, *text, *rect, align, flags, ellipsize_mode);
 }
+#endif
 void wxRendererNative_DrawPushButton(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags) {
     return self->DrawPushButton(win, *dc, *rect, flags);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxRendererNative_DrawCollapseButton(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags) {
     return self->DrawCollapseButton(win, *dc, *rect, flags);
 }
 wxSize *wxRendererNative_GetCollapseButtonSize(wxRendererNative * self, wxWindow * win, wxDC * dc) {
     return new wxSize(self->GetCollapseButtonSize(win, *dc));
 }
+#endif
 void wxRendererNative_DrawSplitterBorder(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags) {
     return self->DrawSplitterBorder(win, *dc, *rect, flags);
 }
@@ -250,6 +256,7 @@ void wxRendererNative_DrawTextCtrl(wxRendererNative * self, wxWindow * win, wxDC
 void wxRendererNative_DrawRadioBitmap(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags) {
     return self->DrawRadioBitmap(win, *dc, *rect, flags);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxRendererNative_DrawCheckMark(wxRendererNative * self, wxWindow * win, wxDC * dc, const wxRect * rect, int flags) {
     return self->DrawCheckMark(win, *dc, *rect, flags);
 }
@@ -262,6 +269,7 @@ wxSize *wxRendererNative_GetCheckMarkSize(wxRendererNative * self, wxWindow * wi
 wxSize *wxRendererNative_GetExpanderSize(wxRendererNative * self, wxWindow * win) {
     return new wxSize(self->GetExpanderSize(win));
 }
+#endif
 int wxRendererNative_GetHeaderButtonHeight(wxRendererNative * self, wxWindow * win) {
     return self->GetHeaderButtonHeight(win);
 }
