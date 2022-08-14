@@ -812,9 +812,7 @@ pub trait DPIChangedEventMethods: EventMethods {
     fn get_new_dpi(&self) -> Size {
         unsafe { Size::from_ptr(ffi::wxDPIChangedEvent_GetNewDPI(self.as_ptr())) }
     }
-    fn scale(&self, sz: ffi::wxSize) -> Size {
-        unsafe { Size::from_ptr(ffi::wxDPIChangedEvent_Scale(self.as_ptr(), sz)) }
-    }
+    // BLOCKED: fn Scale()
     fn scale_x(&self, x: c_int) -> c_int {
         unsafe { ffi::wxDPIChangedEvent_ScaleX(self.as_ptr(), x) }
     }
@@ -1298,66 +1296,10 @@ pub trait DataViewCustomRendererMethods: DataViewRendererMethods {
     fn get_size(&self) -> Size {
         unsafe { Size::from_ptr(ffi::wxDataViewCustomRenderer_GetSize(self.as_ptr())) }
     }
-    fn left_click<D: DataViewModelMethods, D2: DataViewItemMethods>(
-        &self,
-        cursor: ffi::wxPoint,
-        cell: ffi::wxRect,
-        model: Option<&D>,
-        item: &D2,
-        col: c_uint,
-    ) -> bool {
-        unsafe {
-            let model = match model {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            let item = item.as_ptr();
-            ffi::wxDataViewCustomRenderer_LeftClick(self.as_ptr(), cursor, cell, model, item, col)
-        }
-    }
-    fn activate<D: DataViewModelMethods, D2: DataViewItemMethods>(
-        &self,
-        cell: ffi::wxRect,
-        model: Option<&D>,
-        item: &D2,
-        col: c_uint,
-    ) -> bool {
-        unsafe {
-            let model = match model {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            let item = item.as_ptr();
-            ffi::wxDataViewCustomRenderer_Activate(self.as_ptr(), cell, model, item, col)
-        }
-    }
-    fn render<D: DCMethods>(&self, cell: ffi::wxRect, dc: Option<&D>, state: c_int) -> bool {
-        unsafe {
-            let dc = match dc {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxDataViewCustomRenderer_Render(self.as_ptr(), cell, dc, state)
-        }
-    }
-    fn render_text<D: DCMethods>(
-        &self,
-        text: &str,
-        xoffset: c_int,
-        cell: ffi::wxRect,
-        dc: Option<&D>,
-        state: c_int,
-    ) {
-        unsafe {
-            let text = WxString::from(text);
-            let text = text.as_ptr();
-            let dc = match dc {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxDataViewCustomRenderer_RenderText(self.as_ptr(), text, xoffset, cell, dc, state)
-        }
-    }
+    // BLOCKED: fn LeftClick()
+    // BLOCKED: fn Activate()
+    // BLOCKED: fn Render()
+    // BLOCKED: fn RenderText()
     fn start_drag<
         P: PointMethods,
         R: RectMethods,
@@ -1724,9 +1666,7 @@ pub trait DataViewListCtrlMethods: DataViewCtrlMethods {
             ffi::wxDataViewListCtrl_Create(self.as_ptr(), parent, id, pos, size, style, validator)
         }
     }
-    fn get_store(&self) -> Option<DataViewListStoreIsOwned<false>> {
-        unsafe { DataViewListStore::option_from(ffi::wxDataViewListCtrl_GetStore(self.as_ptr())) }
-    }
+    // BLOCKED: fn GetStore()
     fn get_store(&self) -> Option<DataViewListStoreIsOwned<false>> {
         unsafe { DataViewListStore::option_from(ffi::wxDataViewListCtrl_GetStore1(self.as_ptr())) }
     }
@@ -2124,25 +2064,7 @@ pub trait DataViewRendererMethods: ObjectMethods {
     fn has_editor_ctrl(&self) -> bool {
         unsafe { ffi::wxDataViewRenderer_HasEditorCtrl(self.as_ptr()) }
     }
-    fn create_editor_ctrl<W: WindowMethods>(
-        &self,
-        parent: Option<&W>,
-        label_rect: ffi::wxRect,
-        value: *const c_void,
-    ) -> WeakRef<Window> {
-        unsafe {
-            let parent = match parent {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            WeakRef::<Window>::from(ffi::wxDataViewRenderer_CreateEditorCtrl(
-                self.as_ptr(),
-                parent,
-                label_rect,
-                value,
-            ))
-        }
-    }
+    // BLOCKED: fn CreateEditorCtrl()
     fn get_value_from_editor_ctrl<W: WindowMethods>(
         &self,
         editor: Option<&W>,
@@ -2156,12 +2078,7 @@ pub trait DataViewRendererMethods: ObjectMethods {
             ffi::wxDataViewRenderer_GetValueFromEditorCtrl(self.as_ptr(), editor, value)
         }
     }
-    fn start_editing<D: DataViewItemMethods>(&self, item: &D, label_rect: ffi::wxRect) -> bool {
-        unsafe {
-            let item = item.as_ptr();
-            ffi::wxDataViewRenderer_StartEditing(self.as_ptr(), item, label_rect)
-        }
-    }
+    // BLOCKED: fn StartEditing()
     fn cancel_editing(&self) {
         unsafe { ffi::wxDataViewRenderer_CancelEditing(self.as_ptr()) }
     }
@@ -2306,11 +2223,7 @@ pub trait DataViewTreeCtrlMethods: DataViewCtrlMethods {
             Icon::from_ptr(ffi::wxDataViewTreeCtrl_GetItemIcon(self.as_ptr(), item))
         }
     }
-    fn get_item_parent(&self, item: ffi::wxDataViewItem) -> DataViewItem {
-        unsafe {
-            DataViewItem::from_ptr(ffi::wxDataViewTreeCtrl_GetItemParent(self.as_ptr(), item))
-        }
-    }
+    // BLOCKED: fn GetItemParent()
     fn get_item_text<D: DataViewItemMethods>(&self, item: &D) -> String {
         unsafe {
             let item = item.as_ptr();
@@ -2327,9 +2240,7 @@ pub trait DataViewTreeCtrlMethods: DataViewCtrlMethods {
             ))
         }
     }
-    fn get_store(&self) -> Option<DataViewTreeStoreIsOwned<false>> {
-        unsafe { DataViewTreeStore::option_from(ffi::wxDataViewTreeCtrl_GetStore(self.as_ptr())) }
-    }
+    // BLOCKED: fn GetStore()
     fn get_store(&self) -> Option<DataViewTreeStoreIsOwned<false>> {
         unsafe { DataViewTreeStore::option_from(ffi::wxDataViewTreeCtrl_GetStore1(self.as_ptr())) }
     }

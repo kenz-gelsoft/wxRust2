@@ -349,7 +349,7 @@ extern "C" {
     pub fn wxDPIChangedEvent_CLASSINFO() -> *mut c_void;
     pub fn wxDPIChangedEvent_GetOldDPI(self_: *const c_void) -> *mut c_void;
     pub fn wxDPIChangedEvent_GetNewDPI(self_: *const c_void) -> *mut c_void;
-    pub fn wxDPIChangedEvent_Scale(self_: *const c_void, sz: wxSize) -> *mut c_void;
+    // BLOCKED: pub fn wxDPIChangedEvent_Scale(self_: *const c_void, sz: wxSize) -> wxSize;
     pub fn wxDPIChangedEvent_ScaleX(self_: *const c_void, x: c_int) -> c_int;
     pub fn wxDPIChangedEvent_ScaleY(self_: *const c_void, y: c_int) -> c_int;
 
@@ -572,35 +572,10 @@ extern "C" {
     ) -> bool;
     pub fn wxDataViewCustomRenderer_GetAttr(self_: *const c_void) -> *mut c_void;
     pub fn wxDataViewCustomRenderer_GetSize(self_: *const c_void) -> *mut c_void;
-    pub fn wxDataViewCustomRenderer_LeftClick(
-        self_: *mut c_void,
-        cursor: wxPoint,
-        cell: wxRect,
-        model: *mut c_void,
-        item: *const c_void,
-        col: c_uint,
-    ) -> bool;
-    pub fn wxDataViewCustomRenderer_Activate(
-        self_: *mut c_void,
-        cell: wxRect,
-        model: *mut c_void,
-        item: *const c_void,
-        col: c_uint,
-    ) -> bool;
-    pub fn wxDataViewCustomRenderer_Render(
-        self_: *mut c_void,
-        cell: wxRect,
-        dc: *mut c_void,
-        state: c_int,
-    ) -> bool;
-    pub fn wxDataViewCustomRenderer_RenderText(
-        self_: *mut c_void,
-        text: *const c_void,
-        xoffset: c_int,
-        cell: wxRect,
-        dc: *mut c_void,
-        state: c_int,
-    );
+    // BLOCKED: pub fn wxDataViewCustomRenderer_LeftClick(self_: *mut c_void, cursor: wxPoint, cell: wxRect, model: *mut c_void, item: *const c_void, col: c_uint) -> bool;
+    // BLOCKED: pub fn wxDataViewCustomRenderer_Activate(self_: *mut c_void, cell: wxRect, model: *mut c_void, item: *const c_void, col: c_uint) -> bool;
+    // BLOCKED: pub fn wxDataViewCustomRenderer_Render(self_: *mut c_void, cell: wxRect, dc: *mut c_void, state: c_int) -> bool;
+    // BLOCKED: pub fn wxDataViewCustomRenderer_RenderText(self_: *mut c_void, text: *const c_void, xoffset: c_int, cell: wxRect, dc: *mut c_void, state: c_int);
     pub fn wxDataViewCustomRenderer_StartDrag(
         self_: *mut c_void,
         cursor: *const c_void,
@@ -783,7 +758,7 @@ extern "C" {
         style: c_long,
         validator: *const c_void,
     ) -> bool;
-    pub fn wxDataViewListCtrl_GetStore(self_: *mut c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxDataViewListCtrl_GetStore(self_: *mut c_void) -> *mut c_void;
     pub fn wxDataViewListCtrl_GetStore1(self_: *const c_void) -> *mut c_void;
     pub fn wxDataViewListCtrl_ItemToRow(self_: *const c_void, item: *const c_void) -> c_int;
     pub fn wxDataViewListCtrl_RowToItem(self_: *const c_void, row: c_int) -> *mut c_void;
@@ -983,22 +958,13 @@ extern "C" {
     pub fn wxDataViewRenderer_SetValueAdjuster(self_: *mut c_void, transformer: *mut c_void);
     pub fn wxDataViewRenderer_Validate(self_: *mut c_void, value: *mut c_void) -> bool;
     pub fn wxDataViewRenderer_HasEditorCtrl(self_: *const c_void) -> bool;
-    pub fn wxDataViewRenderer_CreateEditorCtrl(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        label_rect: wxRect,
-        value: *const c_void,
-    ) -> *mut c_void;
+    // BLOCKED: pub fn wxDataViewRenderer_CreateEditorCtrl(self_: *mut c_void, parent: *mut c_void, label_rect: wxRect, value: *const c_void) -> *mut c_void;
     pub fn wxDataViewRenderer_GetValueFromEditorCtrl(
         self_: *mut c_void,
         editor: *mut c_void,
         value: *mut c_void,
     ) -> bool;
-    pub fn wxDataViewRenderer_StartEditing(
-        self_: *mut c_void,
-        item: *const c_void,
-        label_rect: wxRect,
-    ) -> bool;
+    // BLOCKED: pub fn wxDataViewRenderer_StartEditing(self_: *mut c_void, item: *const c_void, label_rect: wxRect) -> bool;
     pub fn wxDataViewRenderer_CancelEditing(self_: *mut c_void);
     pub fn wxDataViewRenderer_FinishEditing(self_: *mut c_void) -> bool;
     pub fn wxDataViewRenderer_GetEditorCtrl(self_: *mut c_void) -> *mut c_void;
@@ -1068,10 +1034,7 @@ extern "C" {
     ) -> *mut c_void;
     pub fn wxDataViewTreeCtrl_GetItemIcon(self_: *const c_void, item: *const c_void)
         -> *mut c_void;
-    pub fn wxDataViewTreeCtrl_GetItemParent(
-        self_: *const c_void,
-        item: wxDataViewItem,
-    ) -> *mut c_void;
+    // BLOCKED: pub fn wxDataViewTreeCtrl_GetItemParent(self_: *const c_void, item: wxDataViewItem) -> wxDataViewItem;
     pub fn wxDataViewTreeCtrl_GetItemText(self_: *const c_void, item: *const c_void)
         -> *mut c_void;
     pub fn wxDataViewTreeCtrl_GetNthChild(
@@ -1079,7 +1042,7 @@ extern "C" {
         parent: *const c_void,
         pos: c_uint,
     ) -> *mut c_void;
-    pub fn wxDataViewTreeCtrl_GetStore(self_: *mut c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxDataViewTreeCtrl_GetStore(self_: *mut c_void) -> *mut c_void;
     pub fn wxDataViewTreeCtrl_GetStore1(self_: *const c_void) -> *mut c_void;
     pub fn wxDataViewTreeCtrl_InsertContainer(
         self_: *mut c_void,

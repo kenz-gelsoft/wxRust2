@@ -796,6 +796,14 @@ blocklist = [
     # uses C++ generics
     'GetSortingColumns',
 ]
+[types.wxDataViewCustomRenderer]
+blocklist = [
+    # binding type by value is not supported
+    'Activate',
+    'LeftClick',
+    'Render',
+    'RenderText',
+]
 [types.wxDataViewEvent]
 blocklist = [
     # invalid return type
@@ -808,6 +816,8 @@ blocklist = [
 ]
 [types.wxDataViewListCtrl]
 blocklist = [
+    # binding type by value is not supported
+    'GetStore',
     # API is void but returns some actually at least on osx
     'AppendColumn',
     'InsertColumn',
@@ -825,8 +835,17 @@ blocklist = [
 ]
 [types.wxDataViewRenderer]
 blocklist = [
+    # binding type by value is not supported
+    'CreateEditorCtrl',
+    'StartEditing',
     # requires explicit enabling of accessibility
     'GetAccessibleDescription',
+]
+[types.wxDataViewTreeCtrl]
+blocklist = [
+    # binding type by value is not supported
+    'GetItemParent',
+    'GetStore',
 ]
 [types.wxDataViewVirtualListModel]
 blocklist = [
@@ -913,6 +932,11 @@ blocklist = [
     # invalid return type
     'GetViews',
     'GetViews1',
+]
+[types.wxDPIChangedEvent]
+blocklist = [
+    # binding type by value is not supported
+    'Scale',
 ]
 [types.wxDropFilesEvent]
 blocklist = [

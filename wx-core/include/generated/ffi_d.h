@@ -199,7 +199,6 @@ void wxDCTextColourChanger_Set(wxDCTextColourChanger * self, const wxColour * co
 wxClassInfo *wxDPIChangedEvent_CLASSINFO();
 wxSize *wxDPIChangedEvent_GetOldDPI(const wxDPIChangedEvent * self);
 wxSize *wxDPIChangedEvent_GetNewDPI(const wxDPIChangedEvent * self);
-wxSize *wxDPIChangedEvent_Scale(const wxDPIChangedEvent * self, wxSize sz);
 int wxDPIChangedEvent_ScaleX(const wxDPIChangedEvent * self, int x);
 int wxDPIChangedEvent_ScaleY(const wxDPIChangedEvent * self, int y);
 
@@ -315,10 +314,6 @@ wxString *wxDataViewCustomRenderer_GetDefaultType();
 bool wxDataViewCustomRenderer_ActivateCell(wxDataViewCustomRenderer * self, const wxRect * cell, wxDataViewModel * model, const wxDataViewItem * item, unsigned int col, const wxMouseEvent * mouse_event);
 wxDataViewItemAttr *wxDataViewCustomRenderer_GetAttr(const wxDataViewCustomRenderer * self);
 wxSize *wxDataViewCustomRenderer_GetSize(const wxDataViewCustomRenderer * self);
-bool wxDataViewCustomRenderer_LeftClick(wxDataViewCustomRenderer * self, wxPoint cursor, wxRect cell, wxDataViewModel * model, const wxDataViewItem * item, unsigned int col);
-bool wxDataViewCustomRenderer_Activate(wxDataViewCustomRenderer * self, wxRect cell, wxDataViewModel * model, const wxDataViewItem * item, unsigned int col);
-bool wxDataViewCustomRenderer_Render(wxDataViewCustomRenderer * self, wxRect cell, wxDC * dc, int state);
-void wxDataViewCustomRenderer_RenderText(wxDataViewCustomRenderer * self, const wxString * text, int xoffset, wxRect cell, wxDC * dc, int state);
 bool wxDataViewCustomRenderer_StartDrag(wxDataViewCustomRenderer * self, const wxPoint * cursor, const wxRect * cell, wxDataViewModel * model, const wxDataViewItem * item, unsigned int col);
 
 // CLASS: wxDataViewDateRenderer
@@ -422,7 +417,6 @@ bool wxDataViewListCtrl_GetToggleValue(const wxDataViewListCtrl * self, unsigned
 wxDataViewListCtrl *wxDataViewListCtrl_new();
 wxDataViewListCtrl *wxDataViewListCtrl_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator);
 bool wxDataViewListCtrl_Create(wxDataViewListCtrl * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator);
-wxDataViewListStore * wxDataViewListCtrl_GetStore(wxDataViewListCtrl * self);
 const wxDataViewListStore * wxDataViewListCtrl_GetStore1(const wxDataViewListCtrl * self);
 int wxDataViewListCtrl_ItemToRow(const wxDataViewListCtrl * self, const wxDataViewItem * item);
 wxDataViewItem *wxDataViewListCtrl_RowToItem(const wxDataViewListCtrl * self, int row);
@@ -503,9 +497,7 @@ bool wxDataViewRenderer_SetValue(wxDataViewRenderer * self, const wxVariant * va
 void wxDataViewRenderer_SetValueAdjuster(wxDataViewRenderer * self, wxDataViewValueAdjuster * transformer);
 bool wxDataViewRenderer_Validate(wxDataViewRenderer * self, wxVariant * value);
 bool wxDataViewRenderer_HasEditorCtrl(const wxDataViewRenderer * self);
-wxWindow * wxDataViewRenderer_CreateEditorCtrl(wxDataViewRenderer * self, wxWindow * parent, wxRect label_rect, const wxVariant * value);
 bool wxDataViewRenderer_GetValueFromEditorCtrl(wxDataViewRenderer * self, wxWindow * editor, wxVariant * value);
-bool wxDataViewRenderer_StartEditing(wxDataViewRenderer * self, const wxDataViewItem * item, wxRect label_rect);
 void wxDataViewRenderer_CancelEditing(wxDataViewRenderer * self);
 bool wxDataViewRenderer_FinishEditing(wxDataViewRenderer * self);
 wxWindow * wxDataViewRenderer_GetEditorCtrl(wxDataViewRenderer * self);
@@ -538,10 +530,8 @@ wxImageList * wxDataViewTreeCtrl_GetImageList(wxDataViewTreeCtrl * self);
 wxClientData * wxDataViewTreeCtrl_GetItemData(const wxDataViewTreeCtrl * self, const wxDataViewItem * item);
 wxIcon *wxDataViewTreeCtrl_GetItemExpandedIcon(const wxDataViewTreeCtrl * self, const wxDataViewItem * item);
 wxIcon *wxDataViewTreeCtrl_GetItemIcon(const wxDataViewTreeCtrl * self, const wxDataViewItem * item);
-wxDataViewItem *wxDataViewTreeCtrl_GetItemParent(const wxDataViewTreeCtrl * self, wxDataViewItem item);
 wxString *wxDataViewTreeCtrl_GetItemText(const wxDataViewTreeCtrl * self, const wxDataViewItem * item);
 wxDataViewItem *wxDataViewTreeCtrl_GetNthChild(const wxDataViewTreeCtrl * self, const wxDataViewItem * parent, unsigned int pos);
-wxDataViewTreeStore * wxDataViewTreeCtrl_GetStore(wxDataViewTreeCtrl * self);
 const wxDataViewTreeStore * wxDataViewTreeCtrl_GetStore1(const wxDataViewTreeCtrl * self);
 wxDataViewItem *wxDataViewTreeCtrl_InsertContainer(wxDataViewTreeCtrl * self, const wxDataViewItem * parent, const wxDataViewItem * previous, const wxString * text, int icon, int expanded, wxClientData * data);
 wxDataViewItem *wxDataViewTreeCtrl_InsertItem(wxDataViewTreeCtrl * self, const wxDataViewItem * parent, const wxDataViewItem * previous, const wxString * text, int icon, wxClientData * data);

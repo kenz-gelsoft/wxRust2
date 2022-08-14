@@ -504,9 +504,6 @@ wxSize *wxDPIChangedEvent_GetOldDPI(const wxDPIChangedEvent * self) {
 wxSize *wxDPIChangedEvent_GetNewDPI(const wxDPIChangedEvent * self) {
     return new wxSize(self->GetNewDPI());
 }
-wxSize *wxDPIChangedEvent_Scale(const wxDPIChangedEvent * self, wxSize sz) {
-    return new wxSize(self->Scale(sz));
-}
 int wxDPIChangedEvent_ScaleX(const wxDPIChangedEvent * self, int x) {
     return self->ScaleX(x);
 }
@@ -808,18 +805,6 @@ wxDataViewItemAttr *wxDataViewCustomRenderer_GetAttr(const wxDataViewCustomRende
 wxSize *wxDataViewCustomRenderer_GetSize(const wxDataViewCustomRenderer * self) {
     return new wxSize(self->GetSize());
 }
-bool wxDataViewCustomRenderer_LeftClick(wxDataViewCustomRenderer * self, wxPoint cursor, wxRect cell, wxDataViewModel * model, const wxDataViewItem * item, unsigned int col) {
-    return self->LeftClick(cursor, cell, model, *item, col);
-}
-bool wxDataViewCustomRenderer_Activate(wxDataViewCustomRenderer * self, wxRect cell, wxDataViewModel * model, const wxDataViewItem * item, unsigned int col) {
-    return self->Activate(cell, model, *item, col);
-}
-bool wxDataViewCustomRenderer_Render(wxDataViewCustomRenderer * self, wxRect cell, wxDC * dc, int state) {
-    return self->Render(cell, dc, state);
-}
-void wxDataViewCustomRenderer_RenderText(wxDataViewCustomRenderer * self, const wxString * text, int xoffset, wxRect cell, wxDC * dc, int state) {
-    return self->RenderText(*text, xoffset, cell, dc, state);
-}
 bool wxDataViewCustomRenderer_StartDrag(wxDataViewCustomRenderer * self, const wxPoint * cursor, const wxRect * cell, wxDataViewModel * model, const wxDataViewItem * item, unsigned int col) {
     return self->StartDrag(*cursor, *cell, model, *item, col);
 }
@@ -1097,9 +1082,6 @@ wxDataViewListCtrl *wxDataViewListCtrl_new1(wxWindow * parent, wxWindowID id, co
 bool wxDataViewListCtrl_Create(wxDataViewListCtrl * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator) {
     return self->Create(parent, id, *pos, *size, style, *validator);
 }
-wxDataViewListStore * wxDataViewListCtrl_GetStore(wxDataViewListCtrl * self) {
-    return self->GetStore();
-}
 const wxDataViewListStore * wxDataViewListCtrl_GetStore1(const wxDataViewListCtrl * self) {
     return self->GetStore();
 }
@@ -1316,14 +1298,8 @@ bool wxDataViewRenderer_Validate(wxDataViewRenderer * self, wxVariant * value) {
 bool wxDataViewRenderer_HasEditorCtrl(const wxDataViewRenderer * self) {
     return self->HasEditorCtrl();
 }
-wxWindow * wxDataViewRenderer_CreateEditorCtrl(wxDataViewRenderer * self, wxWindow * parent, wxRect label_rect, const wxVariant * value) {
-    return self->CreateEditorCtrl(parent, label_rect, *value);
-}
 bool wxDataViewRenderer_GetValueFromEditorCtrl(wxDataViewRenderer * self, wxWindow * editor, wxVariant * value) {
     return self->GetValueFromEditorCtrl(editor, *value);
-}
-bool wxDataViewRenderer_StartEditing(wxDataViewRenderer * self, const wxDataViewItem * item, wxRect label_rect) {
-    return self->StartEditing(*item, label_rect);
 }
 void wxDataViewRenderer_CancelEditing(wxDataViewRenderer * self) {
     return self->CancelEditing();
@@ -1405,17 +1381,11 @@ wxIcon *wxDataViewTreeCtrl_GetItemExpandedIcon(const wxDataViewTreeCtrl * self, 
 wxIcon *wxDataViewTreeCtrl_GetItemIcon(const wxDataViewTreeCtrl * self, const wxDataViewItem * item) {
     return new wxIcon(self->GetItemIcon(*item));
 }
-wxDataViewItem *wxDataViewTreeCtrl_GetItemParent(const wxDataViewTreeCtrl * self, wxDataViewItem item) {
-    return new wxDataViewItem(self->GetItemParent(item));
-}
 wxString *wxDataViewTreeCtrl_GetItemText(const wxDataViewTreeCtrl * self, const wxDataViewItem * item) {
     return new wxString(self->GetItemText(*item));
 }
 wxDataViewItem *wxDataViewTreeCtrl_GetNthChild(const wxDataViewTreeCtrl * self, const wxDataViewItem * parent, unsigned int pos) {
     return new wxDataViewItem(self->GetNthChild(*parent, pos));
-}
-wxDataViewTreeStore * wxDataViewTreeCtrl_GetStore(wxDataViewTreeCtrl * self) {
-    return self->GetStore();
 }
 const wxDataViewTreeStore * wxDataViewTreeCtrl_GetStore1(const wxDataViewTreeCtrl * self) {
     return self->GetStore();
