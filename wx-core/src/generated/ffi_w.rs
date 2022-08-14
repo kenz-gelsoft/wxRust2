@@ -332,7 +332,7 @@ extern "C" {
     pub fn wxWindow_GetAutoLayout(self_: *const c_void) -> bool;
     pub fn wxWindow_CaptureMouse(self_: *mut c_void);
     pub fn wxWindow_GetCaret(self_: *const c_void) -> *mut c_void;
-    // BLOCKED: pub fn wxWindow_GetCursor(self_: *const c_void) -> *const c_void;
+    // BLOCKED: pub fn wxWindow_GetCursor(self_: *const c_void) -> *mut c_void;
     pub fn wxWindow_HasCapture(self_: *const c_void) -> bool;
     pub fn wxWindow_ReleaseMouse(self_: *mut c_void);
     pub fn wxWindow_SetCaret(self_: *mut c_void, caret: *mut c_void);

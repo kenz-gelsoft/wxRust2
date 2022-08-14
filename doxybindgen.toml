@@ -1,43 +1,4 @@
 core_files = [
-    'wxml/classwx_calculate_layout_event.xml',
-    'wxml/classwx_calendar_ctrl.xml',
-    'wxml/classwx_calendar_date_attr.xml',
-    'wxml/classwx_calendar_event.xml',
-    'wxml/classwx_caret.xml',
-    'wxml/classwx_check_box.xml',
-    'wxml/classwx_check_list_box.xml',
-    'wxml/classwx_child_focus_event.xml',
-    'wxml/classwx_choice.xml',
-    'wxml/classwx_choicebook.xml',
-    'wxml/classwx_client_d_c.xml',
-    'wxml/classwx_clipboard.xml',
-    'wxml/classwx_clipboard_text_event.xml',
-    'wxml/classwx_close_event.xml',
-    'wxml/classwx_collapsible_header_ctrl.xml',
-    'wxml/classwx_collapsible_pane.xml',
-    'wxml/classwx_collapsible_pane_event.xml',
-    'wxml/classwx_colour.xml',
-    'wxml/classwx_colour_data.xml',
-    'wxml/classwx_colour_database.xml',
-    'wxml/classwx_colour_dialog.xml',
-    'wxml/classwx_colour_dialog_event.xml',
-    'wxml/classwx_colour_picker_ctrl.xml',
-    'wxml/classwx_colour_picker_event.xml',
-    'wxml/classwx_combo_box.xml',
-    'wxml/classwx_combo_ctrl.xml',
-    'wxml/classwx_combo_popup.xml',
-    'wxml/classwx_command.xml',
-    'wxml/classwx_command_event.xml',
-    'wxml/classwx_command_link_button.xml',
-    'wxml/classwx_command_processor.xml',
-    'wxml/classwx_context_help.xml',
-    'wxml/classwx_context_help_button.xml',
-    'wxml/classwx_context_menu_event.xml',
-    'wxml/classwx_control.xml',
-    'wxml/classwx_control_with_items.xml',
-    'wxml/classwx_credential_entry_dialog.xml',
-    'wxml/classwx_cursor.xml',
-    'wxml/classwx_custom_data_object.xml',
     'wxml/classwx_d_c.xml',
     'wxml/classwx_d_c_brush_changer.xml',
     'wxml/classwx_d_c_clipper.xml',
@@ -456,19 +417,52 @@ wxml_files = [
     'wxml/classwx_busy_cursor.xml',
     'wxml/classwx_busy_info.xml',
     'wxml/classwx_button.xml',
+    'wxml/classwx_calculate_layout_event.xml',
+    'wxml/classwx_calendar_ctrl.xml',
+    'wxml/classwx_calendar_date_attr.xml',
+    'wxml/classwx_calendar_event.xml',
+    'wxml/classwx_caret.xml',
     'wxml/classwx_check_box.xml',
     'wxml/classwx_check_list_box.xml',
+    'wxml/classwx_child_focus_event.xml',
     'wxml/classwx_choice.xml',
+    'wxml/classwx_choicebook.xml',
     'wxml/classwx_class_info.xml',
+    # 'wxml/classwx_client_d_c.xml', # requires not yet generated wxDC-related classes
+    'wxml/classwx_clipboard.xml',
+    'wxml/classwx_clipboard_text_event.xml',
+    'wxml/classwx_close_event.xml',
+    'wxml/classwx_collapsible_header_ctrl.xml',
+    'wxml/classwx_collapsible_pane.xml',
+    'wxml/classwx_collapsible_pane_event.xml',
     'wxml/classwx_colour.xml',
+    'wxml/classwx_colour_data.xml',
+    'wxml/classwx_colour_database.xml',
+    'wxml/classwx_colour_dialog.xml',
+    'wxml/classwx_colour_dialog_event.xml',
     'wxml/classwx_colour_picker_ctrl.xml',
+    'wxml/classwx_colour_picker_event.xml',
     'wxml/classwx_combo_box.xml',
+    'wxml/classwx_combo_ctrl.xml',
+    'wxml/classwx_combo_popup.xml',
+    'wxml/classwx_command.xml',
     'wxml/classwx_command_event.xml',
+    'wxml/classwx_command_link_button.xml',
+    'wxml/classwx_command_processor.xml',
+    'wxml/classwx_context_help.xml',
+    'wxml/classwx_context_help_button.xml',
+    'wxml/classwx_context_menu_event.xml',
     'wxml/classwx_control.xml',
+    'wxml/classwx_control_with_items.xml',
+    'wxml/classwx_credential_entry_dialog.xml',
+    'wxml/classwx_cursor.xml',
+    'wxml/classwx_custom_data_object.xml',
     'wxml/classwx_data_object.xml',
     'wxml/classwx_data_object_simple.xml',
+    'wxml/classwx_date_event.xml',
     'wxml/classwx_date_picker_ctrl.xml',
     'wxml/classwx_date_time.xml',
+    'wxml/classwx_dialog.xml',
     'wxml/classwx_dir_picker_ctrl.xml',
     'wxml/classwx_editable_list_box.xml',
     'wxml/classwx_event.xml',
@@ -722,13 +716,42 @@ wx31 = [
     'GetRed',
     'IsSolid',
 ]
+[types.wxColourData]
+blocklist = [
+    'operator=',
+]
 [types.wxColourPickerCtrl]
 blocklist = [
     'SetColour1',
 ]
+[types.wxComboCtrl]
+blocklist = [
+    # deprecated
+    'GetTextIndent',
+    'SetTextIndent',
+]
+[types.wxComboPopup]
+blocklist = [
+    # abstract
+    'wxComboPopup',
+]
+[types.wxCommand]
+blocklist = [
+    # abstract
+    'wxCommand',
+]
+[types.wxCommandProcessor]
+blocklist = [
+    # invalid return type
+    'GetCommands',
+]
 [types.wxControl]
 wx31 = [
     'GetSizeFromText',
+]
+[types.wxCursor]
+blocklist = [
+    'operator=',
 ]
 [types.wxDataObject]
 blocklist = [
@@ -778,6 +801,13 @@ windows = [
 wx31 = [
     'GetFirstWeekDay',
     'GetWeekBasedYear',
+]
+[types.wxDialog]
+blocklist = [
+    'ShowWindowModalThenDo',
+]
+windows = [
+    'GetToolBar',
 ]
 [types.wxEvent]
 returns_owned = [

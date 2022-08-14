@@ -35,6 +35,19 @@ pub trait DataObjectSimpleMethods: DataObjectMethods {
     }
 }
 
+// wxDateEvent
+pub trait DateEventMethods: CommandEventMethods {
+    fn get_date(&self) -> DateTimeIsOwned<false> {
+        unsafe { DateTimeIsOwned::from_ptr(ffi::wxDateEvent_GetDate(self.as_ptr())) }
+    }
+    fn set_date<D: DateTimeMethods>(&self, date: &D) {
+        unsafe {
+            let date = date.as_ptr();
+            ffi::wxDateEvent_SetDate(self.as_ptr(), date)
+        }
+    }
+}
+
 // wxDatePickerCtrl
 pub trait DatePickerCtrlMethods: ControlMethods {
     fn create_datetime<
@@ -117,6 +130,126 @@ pub trait DatePickerCtrlMethods: ControlMethods {
             let dt = dt.as_ptr();
             ffi::wxDatePickerCtrl_SetValue(self.as_ptr(), dt)
         }
+    }
+}
+
+// wxDialog
+pub trait DialogMethods: TopLevelWindowMethods {
+    // DTOR: fn ~wxDialog()
+    fn add_main_button_id(&self, id: c_int) {
+        unsafe { ffi::wxDialog_AddMainButtonId(self.as_ptr(), id) }
+    }
+    fn can_do_layout_adaptation(&self) -> bool {
+        unsafe { ffi::wxDialog_CanDoLayoutAdaptation(self.as_ptr()) }
+    }
+    fn create_button_sizer(&self, flags: c_long) -> Option<SizerIsOwned<false>> {
+        unsafe { Sizer::option_from(ffi::wxDialog_CreateButtonSizer(self.as_ptr(), flags)) }
+    }
+    fn create_separated_button_sizer(&self, flags: c_long) -> Option<SizerIsOwned<false>> {
+        unsafe {
+            Sizer::option_from(ffi::wxDialog_CreateSeparatedButtonSizer(
+                self.as_ptr(),
+                flags,
+            ))
+        }
+    }
+    fn create_separated_sizer<S: SizerMethods>(
+        &self,
+        sizer: Option<&S>,
+    ) -> Option<SizerIsOwned<false>> {
+        unsafe {
+            let sizer = match sizer {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            Sizer::option_from(ffi::wxDialog_CreateSeparatedSizer(self.as_ptr(), sizer))
+        }
+    }
+    fn create_std_dialog_button_sizer(&self, flags: c_long) -> *mut c_void {
+        unsafe { ffi::wxDialog_CreateStdDialogButtonSizer(self.as_ptr(), flags) }
+    }
+    fn create_text_sizer(&self, message: &str, width_max: c_int) -> Option<SizerIsOwned<false>> {
+        unsafe {
+            let message = WxString::from(message);
+            let message = message.as_ptr();
+            Sizer::option_from(ffi::wxDialog_CreateTextSizer(
+                self.as_ptr(),
+                message,
+                width_max,
+            ))
+        }
+    }
+    fn do_layout_adaptation(&self) -> bool {
+        unsafe { ffi::wxDialog_DoLayoutAdaptation(self.as_ptr()) }
+    }
+    fn end_modal(&self, ret_code: c_int) {
+        unsafe { ffi::wxDialog_EndModal(self.as_ptr(), ret_code) }
+    }
+    fn get_affirmative_id(&self) -> c_int {
+        unsafe { ffi::wxDialog_GetAffirmativeId(self.as_ptr()) }
+    }
+    fn get_content_window(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxDialog_GetContentWindow(self.as_ptr())) }
+    }
+    fn get_escape_id(&self) -> c_int {
+        unsafe { ffi::wxDialog_GetEscapeId(self.as_ptr()) }
+    }
+    fn get_layout_adaptation_done(&self) -> bool {
+        unsafe { ffi::wxDialog_GetLayoutAdaptationDone(self.as_ptr()) }
+    }
+    fn get_layout_adaptation_level(&self) -> c_int {
+        unsafe { ffi::wxDialog_GetLayoutAdaptationLevel(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetLayoutAdaptationMode()
+    fn get_main_button_ids(&self) -> ArrayIntIsOwned<false> {
+        unsafe { ArrayIntIsOwned::from_ptr(ffi::wxDialog_GetMainButtonIds(self.as_ptr())) }
+    }
+    fn get_return_code(&self) -> c_int {
+        unsafe { ffi::wxDialog_GetReturnCode(self.as_ptr()) }
+    }
+    fn get_tool_bar(&self) -> WeakRef<ToolBar> {
+        unsafe { WeakRef::<ToolBar>::from(ffi::wxDialog_GetToolBar(self.as_ptr())) }
+    }
+    fn is_main_button_id(&self, id: c_int) -> bool {
+        unsafe { ffi::wxDialog_IsMainButtonId(self.as_ptr(), id) }
+    }
+    fn is_modal(&self) -> bool {
+        unsafe { ffi::wxDialog_IsModal(self.as_ptr()) }
+    }
+    fn set_affirmative_id(&self, id: c_int) {
+        unsafe { ffi::wxDialog_SetAffirmativeId(self.as_ptr(), id) }
+    }
+    fn set_escape_id(&self, id: c_int) {
+        unsafe { ffi::wxDialog_SetEscapeId(self.as_ptr(), id) }
+    }
+    fn set_layout_adaptation_done(&self, done: bool) {
+        unsafe { ffi::wxDialog_SetLayoutAdaptationDone(self.as_ptr(), done) }
+    }
+    fn set_layout_adaptation_level(&self, level: c_int) {
+        unsafe { ffi::wxDialog_SetLayoutAdaptationLevel(self.as_ptr(), level) }
+    }
+    // NOT_SUPPORTED: fn SetLayoutAdaptationMode()
+    fn set_return_code(&self, ret_code: c_int) {
+        unsafe { ffi::wxDialog_SetReturnCode(self.as_ptr(), ret_code) }
+    }
+    fn show_modal(&self) -> c_int {
+        unsafe { ffi::wxDialog_ShowModal(self.as_ptr()) }
+    }
+    fn show_window_modal(&self) {
+        unsafe { ffi::wxDialog_ShowWindowModal(self.as_ptr()) }
+    }
+    // BLOCKED: fn ShowWindowModalThenDo()
+    fn enable_layout_adaptation(enable: bool) {
+        unsafe { ffi::wxDialog_EnableLayoutAdaptation(enable) }
+    }
+    fn get_layout_adapter() -> *mut c_void {
+        unsafe { ffi::wxDialog_GetLayoutAdapter() }
+    }
+    fn is_layout_adaptation_enabled() -> bool {
+        unsafe { ffi::wxDialog_IsLayoutAdaptationEnabled() }
+    }
+    fn set_layout_adapter(adapter: *mut c_void) -> *mut c_void {
+        unsafe { ffi::wxDialog_SetLayoutAdapter(adapter) }
     }
 }
 

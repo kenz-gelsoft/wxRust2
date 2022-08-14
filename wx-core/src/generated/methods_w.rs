@@ -1188,8 +1188,8 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn capture_mouse(&self) {
         unsafe { ffi::wxWindow_CaptureMouse(self.as_ptr()) }
     }
-    fn get_caret(&self) -> *mut c_void {
-        unsafe { ffi::wxWindow_GetCaret(self.as_ptr()) }
+    fn get_caret(&self) -> Option<CaretIsOwned<false>> {
+        unsafe { Caret::option_from(ffi::wxWindow_GetCaret(self.as_ptr())) }
     }
     // BLOCKED: fn GetCursor()
     fn has_capture(&self) -> bool {
@@ -1198,11 +1198,20 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn release_mouse(&self) {
         unsafe { ffi::wxWindow_ReleaseMouse(self.as_ptr()) }
     }
-    fn set_caret(&self, caret: *mut c_void) {
-        unsafe { ffi::wxWindow_SetCaret(self.as_ptr(), caret) }
+    fn set_caret<C: CaretMethods>(&self, caret: Option<&C>) {
+        unsafe {
+            let caret = match caret {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWindow_SetCaret(self.as_ptr(), caret)
+        }
     }
-    fn set_cursor(&self, cursor: *const c_void) -> bool {
-        unsafe { ffi::wxWindow_SetCursor(self.as_ptr(), cursor) }
+    fn set_cursor<C: CursorMethods>(&self, cursor: &C) -> bool {
+        unsafe {
+            let cursor = cursor.as_ptr();
+            ffi::wxWindow_SetCursor(self.as_ptr(), cursor)
+        }
     }
     fn warp_pointer(&self, x: c_int, y: c_int) {
         unsafe { ffi::wxWindow_WarpPointer(self.as_ptr(), x, y) }
