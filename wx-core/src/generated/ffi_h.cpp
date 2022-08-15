@@ -152,56 +152,6 @@ void wxHeaderCtrlSimple_RemoveSortIndicator(wxHeaderCtrlSimple * self) {
     return self->RemoveSortIndicator();
 }
 
-// CLASS: wxHelpControllerBase
-wxClassInfo *wxHelpControllerBase_CLASSINFO() {
-    return wxCLASSINFO(wxHelpControllerBase);
-}
-bool wxHelpControllerBase_DisplayBlock(wxHelpControllerBase * self, long block_no) {
-    return self->DisplayBlock(block_no);
-}
-bool wxHelpControllerBase_DisplayContents(wxHelpControllerBase * self) {
-    return self->DisplayContents();
-}
-bool wxHelpControllerBase_DisplayContextPopup(wxHelpControllerBase * self, int context_id) {
-    return self->DisplayContextPopup(context_id);
-}
-bool wxHelpControllerBase_DisplaySection(wxHelpControllerBase * self, const wxString * section) {
-    return self->DisplaySection(*section);
-}
-bool wxHelpControllerBase_DisplaySection1(wxHelpControllerBase * self, int section_no) {
-    return self->DisplaySection(section_no);
-}
-bool wxHelpControllerBase_DisplayTextPopup(wxHelpControllerBase * self, const wxString * text, const wxPoint * pos) {
-    return self->DisplayTextPopup(*text, *pos);
-}
-wxFrame * wxHelpControllerBase_GetFrameParameters(wxHelpControllerBase * self, wxSize * size, wxPoint * pos, bool * new_frame_each_time) {
-    return self->GetFrameParameters(size, pos, new_frame_each_time);
-}
-wxWindow * wxHelpControllerBase_GetParentWindow(const wxHelpControllerBase * self) {
-    return self->GetParentWindow();
-}
-bool wxHelpControllerBase_Initialize(wxHelpControllerBase * self, const wxString * file) {
-    return self->Initialize(*file);
-}
-bool wxHelpControllerBase_LoadFile(wxHelpControllerBase * self, const wxString * file) {
-    return self->LoadFile(*file);
-}
-void wxHelpControllerBase_OnQuit(wxHelpControllerBase * self) {
-    return self->OnQuit();
-}
-bool wxHelpControllerBase_Quit(wxHelpControllerBase * self) {
-    return self->Quit();
-}
-void wxHelpControllerBase_SetFrameParameters(wxHelpControllerBase * self, const wxString * title_format, const wxSize * size, const wxPoint * pos, bool new_frame_each_time) {
-    return self->SetFrameParameters(*title_format, *size, *pos, new_frame_each_time);
-}
-void wxHelpControllerBase_SetParentWindow(wxHelpControllerBase * self, wxWindow * parent_window) {
-    return self->SetParentWindow(parent_window);
-}
-void wxHelpControllerBase_SetViewer(wxHelpControllerBase * self, const wxString * viewer, long flags) {
-    return self->SetViewer(*viewer, flags);
-}
-
 // CLASS: wxHyperlinkCtrl
 wxClassInfo *wxHyperlinkCtrl_CLASSINFO() {
     return wxCLASSINFO(wxHyperlinkCtrl);

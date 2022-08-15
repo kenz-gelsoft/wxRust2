@@ -459,7 +459,7 @@ wxml_files = [
     'wxml/classwx_event.xml',
     'wxml/classwx_event_blocker.xml',
     'wxml/classwx_evt_handler.xml',
-    'wxml/classwx_ext_help_controller.xml',
+    # 'wxml/classwx_ext_help_controller.xml', # Our CI environment is't built with
     'wxml/classwx_file_ctrl.xml',
     'wxml/classwx_file_name.xml',
     'wxml/classwx_file_picker_ctrl.xml',
@@ -473,7 +473,7 @@ wxml_files = [
     'wxml/classwx_header_column_simple.xml',
     'wxml/classwx_header_ctrl.xml',
     'wxml/classwx_header_ctrl_simple.xml',
-    'wxml/classwx_help_controller_base.xml',
+    # 'wxml/classwx_help_controller_base.xml', # Our CI environment is't built with
     'wxml/classwx_hyperlink_ctrl.xml',
     'wxml/classwx_icon.xml',
     'wxml/classwx_item_container.xml',
@@ -1143,10 +1143,6 @@ wx31 = [
 blocklist = [
     # abstract class
     'wxGDIObject',
-]
-[types.wxHelpControllerBase]
-blocklist = [
-    'wxHelpControllerBase',
 ]
 [types.wxIcon]
 blocklist = [

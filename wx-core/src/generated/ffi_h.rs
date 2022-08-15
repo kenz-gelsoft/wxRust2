@@ -91,42 +91,6 @@ extern "C" {
     pub fn wxHeaderCtrlSimple_ShowSortIndicator(self_: *mut c_void, idx: c_uint, sort_order: bool);
     pub fn wxHeaderCtrlSimple_RemoveSortIndicator(self_: *mut c_void);
 
-    // wxHelpControllerBase
-    pub fn wxHelpControllerBase_CLASSINFO() -> *mut c_void;
-    // BLOCKED: pub fn wxHelpControllerBase_new(parent_window: *mut c_void) -> *mut c_void;
-    // DTOR: pub fn wxHelpControllerBase_~wxHelpControllerBase(self_: *mut c_void);
-    pub fn wxHelpControllerBase_DisplayBlock(self_: *mut c_void, block_no: c_long) -> bool;
-    pub fn wxHelpControllerBase_DisplayContents(self_: *mut c_void) -> bool;
-    pub fn wxHelpControllerBase_DisplayContextPopup(self_: *mut c_void, context_id: c_int) -> bool;
-    pub fn wxHelpControllerBase_DisplaySection(self_: *mut c_void, section: *const c_void) -> bool;
-    pub fn wxHelpControllerBase_DisplaySection1(self_: *mut c_void, section_no: c_int) -> bool;
-    pub fn wxHelpControllerBase_DisplayTextPopup(
-        self_: *mut c_void,
-        text: *const c_void,
-        pos: *const c_void,
-    ) -> bool;
-    pub fn wxHelpControllerBase_GetFrameParameters(
-        self_: *mut c_void,
-        size: *mut c_void,
-        pos: *mut c_void,
-        new_frame_each_time: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxHelpControllerBase_GetParentWindow(self_: *const c_void) -> *mut c_void;
-    pub fn wxHelpControllerBase_Initialize(self_: *mut c_void, file: *const c_void) -> bool;
-    // NOT_SUPPORTED: pub fn wxHelpControllerBase_KeywordSearch(self_: *mut c_void, key_word: *const c_void, mode: wxHelpSearchMode) -> bool;
-    pub fn wxHelpControllerBase_LoadFile(self_: *mut c_void, file: *const c_void) -> bool;
-    pub fn wxHelpControllerBase_OnQuit(self_: *mut c_void);
-    pub fn wxHelpControllerBase_Quit(self_: *mut c_void) -> bool;
-    pub fn wxHelpControllerBase_SetFrameParameters(
-        self_: *mut c_void,
-        title_format: *const c_void,
-        size: *const c_void,
-        pos: *const c_void,
-        new_frame_each_time: bool,
-    );
-    pub fn wxHelpControllerBase_SetParentWindow(self_: *mut c_void, parent_window: *mut c_void);
-    pub fn wxHelpControllerBase_SetViewer(self_: *mut c_void, viewer: *const c_void, flags: c_long);
-
     // wxHyperlinkCtrl
     pub fn wxHyperlinkCtrl_CLASSINFO() -> *mut c_void;
     pub fn wxHyperlinkCtrl_new() -> *mut c_void;

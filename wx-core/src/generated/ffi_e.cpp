@@ -38,16 +38,5 @@ wxClassInfo *wxEventBlocker_CLASSINFO() {
     return wxCLASSINFO(wxEventBlocker);
 }
 
-// CLASS: wxExtHelpController
-wxClassInfo *wxExtHelpController_CLASSINFO() {
-    return wxCLASSINFO(wxExtHelpController);
-}
-wxExtHelpController *wxExtHelpController_new(wxWindow * parent_window) {
-    return new wxExtHelpController(parent_window);
-}
-bool wxExtHelpController_DisplayHelp(wxExtHelpController * self, const wxString * relative_url) {
-    return self->DisplayHelp(*relative_url);
-}
-
 } // extern "C"
 

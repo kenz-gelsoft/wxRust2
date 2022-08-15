@@ -53,15 +53,3 @@ pub trait EventBlockerMethods: EvtHandlerMethods {
     // DTOR: fn ~wxEventBlocker()
     // NOT_SUPPORTED: fn Block()
 }
-
-// wxExtHelpController
-pub trait ExtHelpControllerMethods: HelpControllerBaseMethods {
-    // DTOR: fn ~wxExtHelpController()
-    fn display_help(&self, relative_url: &str) -> bool {
-        unsafe {
-            let relative_url = WxString::from(relative_url);
-            let relative_url = relative_url.as_ptr();
-            ffi::wxExtHelpController_DisplayHelp(self.as_ptr(), relative_url)
-        }
-    }
-}

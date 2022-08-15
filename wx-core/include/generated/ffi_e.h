@@ -2,7 +2,6 @@
 
 #include <wx/editlbox.h>
 #include <wx/event.h>
-#include <wx/generic/helpext.h>
 
 extern "C" {
 
@@ -21,11 +20,6 @@ wxDC * wxEraseEvent_GetDC(const wxEraseEvent * self);
 
 // CLASS: wxEventBlocker
 wxClassInfo *wxEventBlocker_CLASSINFO();
-
-// CLASS: wxExtHelpController
-wxClassInfo *wxExtHelpController_CLASSINFO();
-wxExtHelpController *wxExtHelpController_new(wxWindow * parent_window);
-bool wxExtHelpController_DisplayHelp(wxExtHelpController * self, const wxString * relative_url);
 
 } // extern "C"
 

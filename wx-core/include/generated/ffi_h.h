@@ -2,7 +2,6 @@
 
 #include <wx/headercol.h>
 #include <wx/headerctrl.h>
-#include <wx/help.h>
 #include <wx/hyperlink.h>
 
 extern "C" {
@@ -64,24 +63,6 @@ void wxHeaderCtrlSimple_ShowColumn(wxHeaderCtrlSimple * self, unsigned int idx, 
 void wxHeaderCtrlSimple_HideColumn(wxHeaderCtrlSimple * self, unsigned int idx);
 void wxHeaderCtrlSimple_ShowSortIndicator(wxHeaderCtrlSimple * self, unsigned int idx, bool sort_order);
 void wxHeaderCtrlSimple_RemoveSortIndicator(wxHeaderCtrlSimple * self);
-
-// CLASS: wxHelpControllerBase
-wxClassInfo *wxHelpControllerBase_CLASSINFO();
-bool wxHelpControllerBase_DisplayBlock(wxHelpControllerBase * self, long block_no);
-bool wxHelpControllerBase_DisplayContents(wxHelpControllerBase * self);
-bool wxHelpControllerBase_DisplayContextPopup(wxHelpControllerBase * self, int context_id);
-bool wxHelpControllerBase_DisplaySection(wxHelpControllerBase * self, const wxString * section);
-bool wxHelpControllerBase_DisplaySection1(wxHelpControllerBase * self, int section_no);
-bool wxHelpControllerBase_DisplayTextPopup(wxHelpControllerBase * self, const wxString * text, const wxPoint * pos);
-wxFrame * wxHelpControllerBase_GetFrameParameters(wxHelpControllerBase * self, wxSize * size, wxPoint * pos, bool * new_frame_each_time);
-wxWindow * wxHelpControllerBase_GetParentWindow(const wxHelpControllerBase * self);
-bool wxHelpControllerBase_Initialize(wxHelpControllerBase * self, const wxString * file);
-bool wxHelpControllerBase_LoadFile(wxHelpControllerBase * self, const wxString * file);
-void wxHelpControllerBase_OnQuit(wxHelpControllerBase * self);
-bool wxHelpControllerBase_Quit(wxHelpControllerBase * self);
-void wxHelpControllerBase_SetFrameParameters(wxHelpControllerBase * self, const wxString * title_format, const wxSize * size, const wxPoint * pos, bool new_frame_each_time);
-void wxHelpControllerBase_SetParentWindow(wxHelpControllerBase * self, wxWindow * parent_window);
-void wxHelpControllerBase_SetViewer(wxHelpControllerBase * self, const wxString * viewer, long flags);
 
 // CLASS: wxHyperlinkCtrl
 wxClassInfo *wxHyperlinkCtrl_CLASSINFO();
