@@ -157,43 +157,6 @@ void wxFileDialog_SetWildcard(wxFileDialog * self, const wxString * wild_card) {
     return self->SetWildcard(*wild_card);
 }
 
-// CLASS: wxFileDialogCustomize
-void wxFileDialogCustomize_delete(wxFileDialogCustomize *self) {
-    delete self;
-}
-wxFileDialogButton * wxFileDialogCustomize_AddButton(wxFileDialogCustomize * self, const wxString * label) {
-    return self->AddButton(*label);
-}
-wxFileDialogCheckBox * wxFileDialogCustomize_AddCheckBox(wxFileDialogCustomize * self, const wxString * label) {
-    return self->AddCheckBox(*label);
-}
-wxFileDialogRadioButton * wxFileDialogCustomize_AddRadioButton(wxFileDialogCustomize * self, const wxString * label) {
-    return self->AddRadioButton(*label);
-}
-wxFileDialogChoice * wxFileDialogCustomize_AddChoice(wxFileDialogCustomize * self, size_t n, const wxString * strings) {
-    return self->AddChoice(n, strings);
-}
-wxFileDialogTextCtrl * wxFileDialogCustomize_AddTextCtrl(wxFileDialogCustomize * self, const wxString * label) {
-    return self->AddTextCtrl(*label);
-}
-wxFileDialogStaticText * wxFileDialogCustomize_AddStaticText(wxFileDialogCustomize * self, const wxString * label) {
-    return self->AddStaticText(*label);
-}
-
-// CLASS: wxFileDialogCustomizeHook
-void wxFileDialogCustomizeHook_delete(wxFileDialogCustomizeHook *self) {
-    delete self;
-}
-void wxFileDialogCustomizeHook_AddCustomControls(wxFileDialogCustomizeHook * self, wxFileDialogCustomize * customizer) {
-    return self->AddCustomControls(*customizer);
-}
-void wxFileDialogCustomizeHook_UpdateCustomControls(wxFileDialogCustomizeHook * self) {
-    return self->UpdateCustomControls();
-}
-void wxFileDialogCustomizeHook_TransferDataFromCustomControls(wxFileDialogCustomizeHook * self) {
-    return self->TransferDataFromCustomControls();
-}
-
 // CLASS: wxFileDirPickerEvent
 wxClassInfo *wxFileDirPickerEvent_CLASSINFO() {
     return wxCLASSINFO(wxFileDirPickerEvent);

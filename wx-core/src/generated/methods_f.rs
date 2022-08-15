@@ -199,11 +199,8 @@ pub trait FileDialogMethods: DialogMethods {
     fn get_wildcard(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxFileDialog_GetWildcard(self.as_ptr())).into() }
     }
-    fn set_customize_hook<F: FileDialogCustomizeHookMethods>(&self, customize_hook: &F) -> bool {
-        unsafe {
-            let customize_hook = customize_hook.as_ptr();
-            ffi::wxFileDialog_SetCustomizeHook(self.as_ptr(), customize_hook)
-        }
+    fn set_customize_hook(&self, customize_hook: *mut c_void) -> bool {
+        unsafe { ffi::wxFileDialog_SetCustomizeHook(self.as_ptr(), customize_hook) }
     }
     fn set_directory(&self, directory: &str) {
         unsafe {
@@ -243,64 +240,6 @@ pub trait FileDialogMethods: DialogMethods {
             let wild_card = wild_card.as_ptr();
             ffi::wxFileDialog_SetWildcard(self.as_ptr(), wild_card)
         }
-    }
-}
-
-// wxFileDialogCustomize
-pub trait FileDialogCustomizeMethods: WxRustMethods {
-    fn add_button(&self, label: &str) -> *mut c_void {
-        unsafe {
-            let label = WxString::from(label);
-            let label = label.as_ptr();
-            ffi::wxFileDialogCustomize_AddButton(self.as_ptr(), label)
-        }
-    }
-    fn add_check_box(&self, label: &str) -> *mut c_void {
-        unsafe {
-            let label = WxString::from(label);
-            let label = label.as_ptr();
-            ffi::wxFileDialogCustomize_AddCheckBox(self.as_ptr(), label)
-        }
-    }
-    fn add_radio_button(&self, label: &str) -> *mut c_void {
-        unsafe {
-            let label = WxString::from(label);
-            let label = label.as_ptr();
-            ffi::wxFileDialogCustomize_AddRadioButton(self.as_ptr(), label)
-        }
-    }
-    fn add_choice(&self, n: usize, strings: *const c_void) -> *mut c_void {
-        unsafe { ffi::wxFileDialogCustomize_AddChoice(self.as_ptr(), n, strings) }
-    }
-    fn add_text_ctrl(&self, label: &str) -> *mut c_void {
-        unsafe {
-            let label = WxString::from(label);
-            let label = label.as_ptr();
-            ffi::wxFileDialogCustomize_AddTextCtrl(self.as_ptr(), label)
-        }
-    }
-    fn add_static_text(&self, label: &str) -> *mut c_void {
-        unsafe {
-            let label = WxString::from(label);
-            let label = label.as_ptr();
-            ffi::wxFileDialogCustomize_AddStaticText(self.as_ptr(), label)
-        }
-    }
-}
-
-// wxFileDialogCustomizeHook
-pub trait FileDialogCustomizeHookMethods: WxRustMethods {
-    fn add_custom_controls<F: FileDialogCustomizeMethods>(&self, customizer: &F) {
-        unsafe {
-            let customizer = customizer.as_ptr();
-            ffi::wxFileDialogCustomizeHook_AddCustomControls(self.as_ptr(), customizer)
-        }
-    }
-    fn update_custom_controls(&self) {
-        unsafe { ffi::wxFileDialogCustomizeHook_UpdateCustomControls(self.as_ptr()) }
-    }
-    fn transfer_data_from_custom_controls(&self) {
-        unsafe { ffi::wxFileDialogCustomizeHook_TransferDataFromCustomControls(self.as_ptr()) }
     }
 }
 

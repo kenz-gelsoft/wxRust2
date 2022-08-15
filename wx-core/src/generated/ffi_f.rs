@@ -93,38 +93,6 @@ extern "C" {
     pub fn wxFileDialog_SetPath(self_: *mut c_void, path: *const c_void);
     pub fn wxFileDialog_SetWildcard(self_: *mut c_void, wild_card: *const c_void);
 
-    // wxFileDialogCustomize
-    pub fn wxFileDialogCustomize_delete(self_: *mut c_void);
-    pub fn wxFileDialogCustomize_AddButton(self_: *mut c_void, label: *const c_void)
-        -> *mut c_void;
-    pub fn wxFileDialogCustomize_AddCheckBox(
-        self_: *mut c_void,
-        label: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxFileDialogCustomize_AddRadioButton(
-        self_: *mut c_void,
-        label: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxFileDialogCustomize_AddChoice(
-        self_: *mut c_void,
-        n: usize,
-        strings: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxFileDialogCustomize_AddTextCtrl(
-        self_: *mut c_void,
-        label: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxFileDialogCustomize_AddStaticText(
-        self_: *mut c_void,
-        label: *const c_void,
-    ) -> *mut c_void;
-
-    // wxFileDialogCustomizeHook
-    pub fn wxFileDialogCustomizeHook_delete(self_: *mut c_void);
-    pub fn wxFileDialogCustomizeHook_AddCustomControls(self_: *mut c_void, customizer: *mut c_void);
-    pub fn wxFileDialogCustomizeHook_UpdateCustomControls(self_: *mut c_void);
-    pub fn wxFileDialogCustomizeHook_TransferDataFromCustomControls(self_: *mut c_void);
-
     // wxFileDirPickerEvent
     pub fn wxFileDirPickerEvent_CLASSINFO() -> *mut c_void;
     pub fn wxFileDirPickerEvent_new() -> *mut c_void;

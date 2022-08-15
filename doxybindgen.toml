@@ -438,8 +438,8 @@ wxml_files = [
     'wxml/classwx_file_ctrl_event.xml',
     'wxml/classwx_file_data_object.xml',
     'wxml/classwx_file_dialog.xml',
-    'wxml/classwx_file_dialog_customize.xml',
-    'wxml/classwx_file_dialog_customize_hook.xml',
+    # 'wxml/classwx_file_dialog_customize.xml',      # requires 3.1.7
+    # 'wxml/classwx_file_dialog_customize_hook.xml', # requires 3.1.7
     'wxml/classwx_file_dir_picker_event.xml',
     'wxml/classwx_file_drop_target.xml',
     'wxml/classwx_file_history.xml',

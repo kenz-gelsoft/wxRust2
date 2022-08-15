@@ -252,42 +252,6 @@ impl<const OWNED: bool> DynamicCast for FileDialogIsOwned<OWNED> {
     }
 }
 
-// wxFileDialogCustomize
-wx_class! { FileDialogCustomize =
-    FileDialogCustomizeIsOwned<true>(wxFileDialogCustomize) impl
-        FileDialogCustomizeMethods
-}
-impl<const OWNED: bool> FileDialogCustomizeIsOwned<OWNED> {
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for FileDialogCustomizeIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxFileDialogCustomize_delete(self.0) }
-        }
-    }
-}
-
-// wxFileDialogCustomizeHook
-wx_class! { FileDialogCustomizeHook =
-    FileDialogCustomizeHookIsOwned<true>(wxFileDialogCustomizeHook) impl
-        FileDialogCustomizeHookMethods
-}
-impl<const OWNED: bool> FileDialogCustomizeHookIsOwned<OWNED> {
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for FileDialogCustomizeHookIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxFileDialogCustomizeHook_delete(self.0) }
-        }
-    }
-}
-
 // wxFileDirPickerEvent
 wx_class! { FileDirPickerEvent =
     FileDirPickerEventIsOwned<true>(wxFileDirPickerEvent) impl

@@ -6,7 +6,6 @@
 #include <wx/fdrepdlg.h>
 #include <wx/filectrl.h>
 #include <wx/filedlg.h>
-#include <wx/filedlgcustomize.h>
 #include <wx/filehistory.h>
 #include <wx/filepicker.h>
 #include <wx/font.h>
@@ -76,21 +75,6 @@ void wxFileDialog_SetFilterIndex(wxFileDialog * self, int filter_index);
 void wxFileDialog_SetMessage(wxFileDialog * self, const wxString * message);
 void wxFileDialog_SetPath(wxFileDialog * self, const wxString * path);
 void wxFileDialog_SetWildcard(wxFileDialog * self, const wxString * wild_card);
-
-// CLASS: wxFileDialogCustomize
-void wxFileDialogCustomize_delete(wxFileDialogCustomize *self);
-wxFileDialogButton * wxFileDialogCustomize_AddButton(wxFileDialogCustomize * self, const wxString * label);
-wxFileDialogCheckBox * wxFileDialogCustomize_AddCheckBox(wxFileDialogCustomize * self, const wxString * label);
-wxFileDialogRadioButton * wxFileDialogCustomize_AddRadioButton(wxFileDialogCustomize * self, const wxString * label);
-wxFileDialogChoice * wxFileDialogCustomize_AddChoice(wxFileDialogCustomize * self, size_t n, const wxString * strings);
-wxFileDialogTextCtrl * wxFileDialogCustomize_AddTextCtrl(wxFileDialogCustomize * self, const wxString * label);
-wxFileDialogStaticText * wxFileDialogCustomize_AddStaticText(wxFileDialogCustomize * self, const wxString * label);
-
-// CLASS: wxFileDialogCustomizeHook
-void wxFileDialogCustomizeHook_delete(wxFileDialogCustomizeHook *self);
-void wxFileDialogCustomizeHook_AddCustomControls(wxFileDialogCustomizeHook * self, wxFileDialogCustomize * customizer);
-void wxFileDialogCustomizeHook_UpdateCustomControls(wxFileDialogCustomizeHook * self);
-void wxFileDialogCustomizeHook_TransferDataFromCustomControls(wxFileDialogCustomizeHook * self);
 
 // CLASS: wxFileDirPickerEvent
 wxClassInfo *wxFileDirPickerEvent_CLASSINFO();
