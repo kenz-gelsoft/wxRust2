@@ -204,3 +204,37 @@ pub trait GenericDirCtrlMethods: ControlMethods {
         unsafe { ffi::wxGenericDirCtrl_UnselectAll(self.as_ptr()) }
     }
 }
+
+// wxGridSizer
+pub trait GridSizerMethods: SizerMethods {
+    fn get_cols(&self) -> c_int {
+        unsafe { ffi::wxGridSizer_GetCols(self.as_ptr()) }
+    }
+    fn get_rows(&self) -> c_int {
+        unsafe { ffi::wxGridSizer_GetRows(self.as_ptr()) }
+    }
+    fn get_effective_cols_count(&self) -> c_int {
+        unsafe { ffi::wxGridSizer_GetEffectiveColsCount(self.as_ptr()) }
+    }
+    fn get_effective_rows_count(&self) -> c_int {
+        unsafe { ffi::wxGridSizer_GetEffectiveRowsCount(self.as_ptr()) }
+    }
+    fn get_h_gap(&self) -> c_int {
+        unsafe { ffi::wxGridSizer_GetHGap(self.as_ptr()) }
+    }
+    fn get_v_gap(&self) -> c_int {
+        unsafe { ffi::wxGridSizer_GetVGap(self.as_ptr()) }
+    }
+    fn set_cols(&self, cols: c_int) {
+        unsafe { ffi::wxGridSizer_SetCols(self.as_ptr(), cols) }
+    }
+    fn set_h_gap(&self, gap: c_int) {
+        unsafe { ffi::wxGridSizer_SetHGap(self.as_ptr(), gap) }
+    }
+    fn set_rows(&self, rows: c_int) {
+        unsafe { ffi::wxGridSizer_SetRows(self.as_ptr(), rows) }
+    }
+    fn set_v_gap(&self, gap: c_int) {
+        unsafe { ffi::wxGridSizer_SetVGap(self.as_ptr(), gap) }
+    }
+}

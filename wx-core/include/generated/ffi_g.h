@@ -3,6 +3,7 @@
 #include <wx/dirctrl.h>
 #include <wx/gauge.h>
 #include <wx/gdiobj.h>
+#include <wx/sizer.h>
 
 extern "C" {
 
@@ -48,6 +49,23 @@ void wxGenericDirCtrl_ShowHidden(wxGenericDirCtrl * self, bool show);
 void wxGenericDirCtrl_SelectPath(wxGenericDirCtrl * self, const wxString * path, bool select);
 void wxGenericDirCtrl_SelectPaths(wxGenericDirCtrl * self, const wxArrayString * paths);
 void wxGenericDirCtrl_UnselectAll(wxGenericDirCtrl * self);
+
+// CLASS: wxGridSizer
+wxClassInfo *wxGridSizer_CLASSINFO();
+wxGridSizer *wxGridSizer_new(int cols, int vgap, int hgap);
+wxGridSizer *wxGridSizer_new1(int cols, const wxSize * gap);
+wxGridSizer *wxGridSizer_new2(int rows, int cols, int vgap, int hgap);
+wxGridSizer *wxGridSizer_new3(int rows, int cols, const wxSize * gap);
+int wxGridSizer_GetCols(const wxGridSizer * self);
+int wxGridSizer_GetRows(const wxGridSizer * self);
+int wxGridSizer_GetEffectiveColsCount(const wxGridSizer * self);
+int wxGridSizer_GetEffectiveRowsCount(const wxGridSizer * self);
+int wxGridSizer_GetHGap(const wxGridSizer * self);
+int wxGridSizer_GetVGap(const wxGridSizer * self);
+void wxGridSizer_SetCols(wxGridSizer * self, int cols);
+void wxGridSizer_SetHGap(wxGridSizer * self, int gap);
+void wxGridSizer_SetRows(wxGridSizer * self, int rows);
+void wxGridSizer_SetVGap(wxGridSizer * self, int gap);
 
 } // extern "C"
 

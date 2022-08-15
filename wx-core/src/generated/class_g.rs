@@ -179,3 +179,58 @@ impl<const OWNED: bool> DynamicCast for GenericDirCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxGenericDirCtrl_CLASSINFO()) }
     }
 }
+
+// wxGridSizer
+wx_class! { GridSizer =
+    GridSizerIsOwned<true>(wxGridSizer) impl
+        GridSizerMethods,
+        SizerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> GridSizerIsOwned<OWNED> {
+    pub fn new_with_int_int(cols: c_int, vgap: c_int, hgap: c_int) -> GridSizerIsOwned<OWNED> {
+        unsafe { GridSizerIsOwned(ffi::wxGridSizer_new(cols, vgap, hgap)) }
+    }
+    pub fn new_with_size<S: SizeMethods>(cols: c_int, gap: &S) -> GridSizerIsOwned<OWNED> {
+        unsafe {
+            let gap = gap.as_ptr();
+            GridSizerIsOwned(ffi::wxGridSizer_new1(cols, gap))
+        }
+    }
+    pub fn new_with_int_int_int(
+        rows: c_int,
+        cols: c_int,
+        vgap: c_int,
+        hgap: c_int,
+    ) -> GridSizerIsOwned<OWNED> {
+        unsafe { GridSizerIsOwned(ffi::wxGridSizer_new2(rows, cols, vgap, hgap)) }
+    }
+    pub fn new_with_int_size<S: SizeMethods>(
+        rows: c_int,
+        cols: c_int,
+        gap: &S,
+    ) -> GridSizerIsOwned<OWNED> {
+        unsafe {
+            let gap = gap.as_ptr();
+            GridSizerIsOwned(ffi::wxGridSizer_new3(rows, cols, gap))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<GridSizerIsOwned<OWNED>> for SizerIsOwned<OWNED> {
+    fn from(o: GridSizerIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<GridSizerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: GridSizerIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for GridSizerIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxGridSizer_CLASSINFO()) }
+    }
+}

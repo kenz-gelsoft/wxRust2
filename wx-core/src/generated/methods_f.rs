@@ -106,6 +106,299 @@ pub trait FileCtrlMethods: ControlMethods {
     }
 }
 
+// wxFileCtrlEvent
+pub trait FileCtrlEventMethods: CommandEventMethods {
+    fn get_directory(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFileCtrlEvent_GetDirectory(self.as_ptr())).into() }
+    }
+    fn get_file(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFileCtrlEvent_GetFile(self.as_ptr())).into() }
+    }
+    fn get_files(&self) -> ArrayString {
+        unsafe { ArrayString::from_ptr(ffi::wxFileCtrlEvent_GetFiles(self.as_ptr())) }
+    }
+    fn get_filter_index(&self) -> c_int {
+        unsafe { ffi::wxFileCtrlEvent_GetFilterIndex(self.as_ptr()) }
+    }
+    fn set_files<A: ArrayStringMethods>(&self, files: &A) {
+        unsafe {
+            let files = files.as_ptr();
+            ffi::wxFileCtrlEvent_SetFiles(self.as_ptr(), files)
+        }
+    }
+    fn set_directory(&self, directory: &str) {
+        unsafe {
+            let directory = WxString::from(directory);
+            let directory = directory.as_ptr();
+            ffi::wxFileCtrlEvent_SetDirectory(self.as_ptr(), directory)
+        }
+    }
+    fn set_filter_index(&self, index: c_int) {
+        unsafe { ffi::wxFileCtrlEvent_SetFilterIndex(self.as_ptr(), index) }
+    }
+}
+
+// wxFileDataObject
+pub trait FileDataObjectMethods: DataObjectSimpleMethods {
+    fn add_file(&self, file: &str) {
+        unsafe {
+            let file = WxString::from(file);
+            let file = file.as_ptr();
+            ffi::wxFileDataObject_AddFile(self.as_ptr(), file)
+        }
+    }
+    fn get_filenames(&self) -> ArrayStringIsOwned<false> {
+        unsafe { ArrayStringIsOwned::from_ptr(ffi::wxFileDataObject_GetFilenames(self.as_ptr())) }
+    }
+}
+
+// wxFileDialog
+pub trait FileDialogMethods: DialogMethods {
+    // DTOR: fn ~wxFileDialog()
+    fn get_currently_selected_filename(&self) -> String {
+        unsafe {
+            WxString::from_ptr(ffi::wxFileDialog_GetCurrentlySelectedFilename(
+                self.as_ptr(),
+            ))
+            .into()
+        }
+    }
+    fn get_currently_selected_filter_index(&self) -> c_int {
+        unsafe { ffi::wxFileDialog_GetCurrentlySelectedFilterIndex(self.as_ptr()) }
+    }
+    fn get_directory(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFileDialog_GetDirectory(self.as_ptr())).into() }
+    }
+    fn get_extra_control(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxFileDialog_GetExtraControl(self.as_ptr())) }
+    }
+    fn get_filename(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFileDialog_GetFilename(self.as_ptr())).into() }
+    }
+    fn get_filenames<A: ArrayStringMethods>(&self, filenames: &A) {
+        unsafe {
+            let filenames = filenames.as_ptr();
+            ffi::wxFileDialog_GetFilenames(self.as_ptr(), filenames)
+        }
+    }
+    fn get_filter_index(&self) -> c_int {
+        unsafe { ffi::wxFileDialog_GetFilterIndex(self.as_ptr()) }
+    }
+    fn get_message(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFileDialog_GetMessage(self.as_ptr())).into() }
+    }
+    fn get_path(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFileDialog_GetPath(self.as_ptr())).into() }
+    }
+    fn get_paths<A: ArrayStringMethods>(&self, paths: &A) {
+        unsafe {
+            let paths = paths.as_ptr();
+            ffi::wxFileDialog_GetPaths(self.as_ptr(), paths)
+        }
+    }
+    fn get_wildcard(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFileDialog_GetWildcard(self.as_ptr())).into() }
+    }
+    fn set_customize_hook<F: FileDialogCustomizeHookMethods>(&self, customize_hook: &F) -> bool {
+        unsafe {
+            let customize_hook = customize_hook.as_ptr();
+            ffi::wxFileDialog_SetCustomizeHook(self.as_ptr(), customize_hook)
+        }
+    }
+    fn set_directory(&self, directory: &str) {
+        unsafe {
+            let directory = WxString::from(directory);
+            let directory = directory.as_ptr();
+            ffi::wxFileDialog_SetDirectory(self.as_ptr(), directory)
+        }
+    }
+    // NOT_SUPPORTED: fn SetExtraControlCreator()
+    fn set_filename(&self, setfilename: &str) {
+        unsafe {
+            let setfilename = WxString::from(setfilename);
+            let setfilename = setfilename.as_ptr();
+            ffi::wxFileDialog_SetFilename(self.as_ptr(), setfilename)
+        }
+    }
+    fn set_filter_index(&self, filter_index: c_int) {
+        unsafe { ffi::wxFileDialog_SetFilterIndex(self.as_ptr(), filter_index) }
+    }
+    fn set_message(&self, message: &str) {
+        unsafe {
+            let message = WxString::from(message);
+            let message = message.as_ptr();
+            ffi::wxFileDialog_SetMessage(self.as_ptr(), message)
+        }
+    }
+    fn set_path(&self, path: &str) {
+        unsafe {
+            let path = WxString::from(path);
+            let path = path.as_ptr();
+            ffi::wxFileDialog_SetPath(self.as_ptr(), path)
+        }
+    }
+    fn set_wildcard(&self, wild_card: &str) {
+        unsafe {
+            let wild_card = WxString::from(wild_card);
+            let wild_card = wild_card.as_ptr();
+            ffi::wxFileDialog_SetWildcard(self.as_ptr(), wild_card)
+        }
+    }
+}
+
+// wxFileDialogCustomize
+pub trait FileDialogCustomizeMethods: WxRustMethods {
+    fn add_button(&self, label: &str) -> *mut c_void {
+        unsafe {
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            ffi::wxFileDialogCustomize_AddButton(self.as_ptr(), label)
+        }
+    }
+    fn add_check_box(&self, label: &str) -> *mut c_void {
+        unsafe {
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            ffi::wxFileDialogCustomize_AddCheckBox(self.as_ptr(), label)
+        }
+    }
+    fn add_radio_button(&self, label: &str) -> *mut c_void {
+        unsafe {
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            ffi::wxFileDialogCustomize_AddRadioButton(self.as_ptr(), label)
+        }
+    }
+    fn add_choice(&self, n: usize, strings: *const c_void) -> *mut c_void {
+        unsafe { ffi::wxFileDialogCustomize_AddChoice(self.as_ptr(), n, strings) }
+    }
+    fn add_text_ctrl(&self, label: &str) -> *mut c_void {
+        unsafe {
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            ffi::wxFileDialogCustomize_AddTextCtrl(self.as_ptr(), label)
+        }
+    }
+    fn add_static_text(&self, label: &str) -> *mut c_void {
+        unsafe {
+            let label = WxString::from(label);
+            let label = label.as_ptr();
+            ffi::wxFileDialogCustomize_AddStaticText(self.as_ptr(), label)
+        }
+    }
+}
+
+// wxFileDialogCustomizeHook
+pub trait FileDialogCustomizeHookMethods: WxRustMethods {
+    fn add_custom_controls<F: FileDialogCustomizeMethods>(&self, customizer: &F) {
+        unsafe {
+            let customizer = customizer.as_ptr();
+            ffi::wxFileDialogCustomizeHook_AddCustomControls(self.as_ptr(), customizer)
+        }
+    }
+    fn update_custom_controls(&self) {
+        unsafe { ffi::wxFileDialogCustomizeHook_UpdateCustomControls(self.as_ptr()) }
+    }
+    fn transfer_data_from_custom_controls(&self) {
+        unsafe { ffi::wxFileDialogCustomizeHook_TransferDataFromCustomControls(self.as_ptr()) }
+    }
+}
+
+// wxFileDirPickerEvent
+pub trait FileDirPickerEventMethods: CommandEventMethods {
+    fn get_path(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFileDirPickerEvent_GetPath(self.as_ptr())).into() }
+    }
+    fn set_path(&self, path: &str) {
+        unsafe {
+            let path = WxString::from(path);
+            let path = path.as_ptr();
+            ffi::wxFileDirPickerEvent_SetPath(self.as_ptr(), path)
+        }
+    }
+}
+
+// wxFileDropTarget
+pub trait FileDropTargetMethods: DropTargetMethods {
+    fn on_drop_files<A: ArrayStringMethods>(&self, x: c_int, y: c_int, filenames: &A) -> bool {
+        unsafe {
+            let filenames = filenames.as_ptr();
+            ffi::wxFileDropTarget_OnDropFiles(self.as_ptr(), x, y, filenames)
+        }
+    }
+}
+
+// wxFileHistory
+pub trait FileHistoryMethods: ObjectMethods {
+    // DTOR: fn ~wxFileHistory()
+    fn add_file_to_history(&self, filename: &str) {
+        unsafe {
+            let filename = WxString::from(filename);
+            let filename = filename.as_ptr();
+            ffi::wxFileHistory_AddFileToHistory(self.as_ptr(), filename)
+        }
+    }
+    fn add_files_to_menu(&self) {
+        unsafe { ffi::wxFileHistory_AddFilesToMenu(self.as_ptr()) }
+    }
+    fn add_files_to_menu_menu<M: MenuMethods>(&self, menu: Option<&M>) {
+        unsafe {
+            let menu = match menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxFileHistory_AddFilesToMenu1(self.as_ptr(), menu)
+        }
+    }
+    fn get_base_id(&self) -> c_int {
+        unsafe { ffi::wxFileHistory_GetBaseId(self.as_ptr()) }
+    }
+    fn get_count(&self) -> usize {
+        unsafe { ffi::wxFileHistory_GetCount(self.as_ptr()) }
+    }
+    fn get_history_file(&self, index: usize) -> String {
+        unsafe {
+            WxString::from_ptr(ffi::wxFileHistory_GetHistoryFile(self.as_ptr(), index)).into()
+        }
+    }
+    fn get_max_files(&self) -> c_int {
+        unsafe { ffi::wxFileHistory_GetMaxFiles(self.as_ptr()) }
+    }
+    // BLOCKED: fn GetMenus()
+    fn load(&self, config: *const c_void) {
+        unsafe { ffi::wxFileHistory_Load(self.as_ptr(), config) }
+    }
+    fn remove_file_from_history(&self, i: usize) {
+        unsafe { ffi::wxFileHistory_RemoveFileFromHistory(self.as_ptr(), i) }
+    }
+    fn remove_menu<M: MenuMethods>(&self, menu: Option<&M>) {
+        unsafe {
+            let menu = match menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxFileHistory_RemoveMenu(self.as_ptr(), menu)
+        }
+    }
+    fn save(&self, config: *mut c_void) {
+        unsafe { ffi::wxFileHistory_Save(self.as_ptr(), config) }
+    }
+    fn set_base_id(&self, base_id: c_int) {
+        unsafe { ffi::wxFileHistory_SetBaseId(self.as_ptr(), base_id) }
+    }
+    fn use_menu<M: MenuMethods>(&self, menu: Option<&M>) {
+        unsafe {
+            let menu = match menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxFileHistory_UseMenu(self.as_ptr(), menu)
+        }
+    }
+    // NOT_SUPPORTED: fn SetMenuPathStyle()
+    // NOT_SUPPORTED: fn GetMenuPathStyle()
+}
+
 // wxFilePickerCtrl
 pub trait FilePickerCtrlMethods: PickerBaseMethods {
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
@@ -176,6 +469,133 @@ pub trait FilePickerCtrlMethods: PickerBaseMethods {
             let filename = WxString::from(filename);
             let filename = filename.as_ptr();
             ffi::wxFilePickerCtrl_SetPath(self.as_ptr(), filename)
+        }
+    }
+}
+
+// wxFindDialogEvent
+pub trait FindDialogEventMethods: CommandEventMethods {
+    fn get_dialog(&self) -> WeakRef<FindReplaceDialog> {
+        unsafe {
+            WeakRef::<FindReplaceDialog>::from(ffi::wxFindDialogEvent_GetDialog(self.as_ptr()))
+        }
+    }
+    fn get_find_string(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFindDialogEvent_GetFindString(self.as_ptr())).into() }
+    }
+    fn get_flags(&self) -> c_int {
+        unsafe { ffi::wxFindDialogEvent_GetFlags(self.as_ptr()) }
+    }
+    fn get_replace_string(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFindDialogEvent_GetReplaceString(self.as_ptr())).into() }
+    }
+}
+
+// wxFindReplaceData
+pub trait FindReplaceDataMethods: ObjectMethods {
+    fn get_find_string(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFindReplaceData_GetFindString(self.as_ptr())).into() }
+    }
+    fn get_flags(&self) -> c_int {
+        unsafe { ffi::wxFindReplaceData_GetFlags(self.as_ptr()) }
+    }
+    fn get_replace_string(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxFindReplaceData_GetReplaceString(self.as_ptr())).into() }
+    }
+    fn set_find_string(&self, str: &str) {
+        unsafe {
+            let str = WxString::from(str);
+            let str = str.as_ptr();
+            ffi::wxFindReplaceData_SetFindString(self.as_ptr(), str)
+        }
+    }
+    // NOT_SUPPORTED: fn SetFlags()
+    fn set_replace_string(&self, str: &str) {
+        unsafe {
+            let str = WxString::from(str);
+            let str = str.as_ptr();
+            ffi::wxFindReplaceData_SetReplaceString(self.as_ptr(), str)
+        }
+    }
+}
+
+// wxFindReplaceDialog
+pub trait FindReplaceDialogMethods: DialogMethods {
+    // DTOR: fn ~wxFindReplaceDialog()
+    fn create_findreplacedata<W: WindowMethods, F: FindReplaceDataMethods>(
+        &self,
+        parent: Option<&W>,
+        data: Option<&F>,
+        title: &str,
+        style: c_int,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            ffi::wxFindReplaceDialog_Create(self.as_ptr(), parent, data, title, style)
+        }
+    }
+    fn get_data(&self) -> Option<FindReplaceDataIsOwned<false>> {
+        unsafe { FindReplaceData::option_from(ffi::wxFindReplaceDialog_GetData(self.as_ptr())) }
+    }
+}
+
+// wxFlexGridSizer
+pub trait FlexGridSizerMethods: GridSizerMethods {
+    fn add_growable_col(&self, idx: usize, proportion: c_int) {
+        unsafe { ffi::wxFlexGridSizer_AddGrowableCol(self.as_ptr(), idx, proportion) }
+    }
+    fn add_growable_row(&self, idx: usize, proportion: c_int) {
+        unsafe { ffi::wxFlexGridSizer_AddGrowableRow(self.as_ptr(), idx, proportion) }
+    }
+    fn get_flexible_direction(&self) -> c_int {
+        unsafe { ffi::wxFlexGridSizer_GetFlexibleDirection(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetNonFlexibleGrowMode()
+    fn is_col_growable(&self, idx: usize) -> bool {
+        unsafe { ffi::wxFlexGridSizer_IsColGrowable(self.as_ptr(), idx) }
+    }
+    fn is_row_growable(&self, idx: usize) -> bool {
+        unsafe { ffi::wxFlexGridSizer_IsRowGrowable(self.as_ptr(), idx) }
+    }
+    fn remove_growable_col(&self, idx: usize) {
+        unsafe { ffi::wxFlexGridSizer_RemoveGrowableCol(self.as_ptr(), idx) }
+    }
+    fn remove_growable_row(&self, idx: usize) {
+        unsafe { ffi::wxFlexGridSizer_RemoveGrowableRow(self.as_ptr(), idx) }
+    }
+    fn set_flexible_direction(&self, direction: c_int) {
+        unsafe { ffi::wxFlexGridSizer_SetFlexibleDirection(self.as_ptr(), direction) }
+    }
+    // NOT_SUPPORTED: fn SetNonFlexibleGrowMode()
+    fn get_row_heights(&self) -> ArrayIntIsOwned<false> {
+        unsafe { ArrayIntIsOwned::from_ptr(ffi::wxFlexGridSizer_GetRowHeights(self.as_ptr())) }
+    }
+    fn get_col_widths(&self) -> ArrayIntIsOwned<false> {
+        unsafe { ArrayIntIsOwned::from_ptr(ffi::wxFlexGridSizer_GetColWidths(self.as_ptr())) }
+    }
+}
+
+// wxFocusEvent
+pub trait FocusEventMethods: EventMethods {
+    fn get_window(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxFocusEvent_GetWindow(self.as_ptr())) }
+    }
+    fn set_window<W: WindowMethods>(&self, win: Option<&W>) {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxFocusEvent_SetWindow(self.as_ptr(), win)
         }
     }
 }
@@ -362,6 +782,203 @@ pub trait FontMethods: GDIObjectMethods {
     // DTOR: fn ~wxFont()
 }
 
+// wxFontData
+pub trait FontDataMethods: ObjectMethods {
+    fn enable_effects(&self, enable: bool) {
+        unsafe { ffi::wxFontData_EnableEffects(self.as_ptr(), enable) }
+    }
+    fn get_allow_symbols(&self) -> bool {
+        unsafe { ffi::wxFontData_GetAllowSymbols(self.as_ptr()) }
+    }
+    fn get_chosen_font(&self) -> Font {
+        unsafe { Font::from_ptr(ffi::wxFontData_GetChosenFont(self.as_ptr())) }
+    }
+    fn get_colour(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxFontData_GetColour(self.as_ptr())) }
+    }
+    fn get_enable_effects(&self) -> bool {
+        unsafe { ffi::wxFontData_GetEnableEffects(self.as_ptr()) }
+    }
+    fn get_restrict_selection(&self) -> c_int {
+        unsafe { ffi::wxFontData_GetRestrictSelection(self.as_ptr()) }
+    }
+    fn get_initial_font(&self) -> Font {
+        unsafe { Font::from_ptr(ffi::wxFontData_GetInitialFont(self.as_ptr())) }
+    }
+    fn get_show_help(&self) -> bool {
+        unsafe { ffi::wxFontData_GetShowHelp(self.as_ptr()) }
+    }
+    fn restrict_selection(&self, flags: c_int) {
+        unsafe { ffi::wxFontData_RestrictSelection(self.as_ptr(), flags) }
+    }
+    fn set_allow_symbols(&self, allow_symbols: bool) {
+        unsafe { ffi::wxFontData_SetAllowSymbols(self.as_ptr(), allow_symbols) }
+    }
+    fn set_chosen_font<F: FontMethods>(&self, font: &F) {
+        unsafe {
+            let font = font.as_ptr();
+            ffi::wxFontData_SetChosenFont(self.as_ptr(), font)
+        }
+    }
+    fn set_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxFontData_SetColour(self.as_ptr(), colour)
+        }
+    }
+    fn set_initial_font<F: FontMethods>(&self, font: &F) {
+        unsafe {
+            let font = font.as_ptr();
+            ffi::wxFontData_SetInitialFont(self.as_ptr(), font)
+        }
+    }
+    fn set_range(&self, min: c_int, max: c_int) {
+        unsafe { ffi::wxFontData_SetRange(self.as_ptr(), min, max) }
+    }
+    fn set_show_help(&self, show_help: bool) {
+        unsafe { ffi::wxFontData_SetShowHelp(self.as_ptr(), show_help) }
+    }
+    // BLOCKED: fn operator=()
+}
+
+// wxFontDialog
+pub trait FontDialogMethods: DialogMethods {
+    fn create<W: WindowMethods>(&self, parent: Option<&W>) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxFontDialog_Create(self.as_ptr(), parent)
+        }
+    }
+    fn create_fontdata<W: WindowMethods, F: FontDataMethods>(
+        &self,
+        parent: Option<&W>,
+        data: &F,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let data = data.as_ptr();
+            ffi::wxFontDialog_Create1(self.as_ptr(), parent, data)
+        }
+    }
+    // BLOCKED: fn GetFontData()
+    fn get_font_data(&self) -> FontDataIsOwned<false> {
+        unsafe { FontDataIsOwned::from_ptr(ffi::wxFontDialog_GetFontData1(self.as_ptr())) }
+    }
+}
+
+// wxFontEnumerator
+pub trait FontEnumeratorMethods: WxRustMethods {
+    // DTOR: fn ~wxFontEnumerator()
+    fn enumerate_encodings(&self, font: &str) -> bool {
+        unsafe {
+            let font = WxString::from(font);
+            let font = font.as_ptr();
+            ffi::wxFontEnumerator_EnumerateEncodings(self.as_ptr(), font)
+        }
+    }
+    // NOT_SUPPORTED: fn EnumerateFacenames()
+    fn on_facename(&self, font: &str) -> bool {
+        unsafe {
+            let font = WxString::from(font);
+            let font = font.as_ptr();
+            ffi::wxFontEnumerator_OnFacename(self.as_ptr(), font)
+        }
+    }
+    fn on_font_encoding(&self, font: &str, encoding: &str) -> bool {
+        unsafe {
+            let font = WxString::from(font);
+            let font = font.as_ptr();
+            let encoding = WxString::from(encoding);
+            let encoding = encoding.as_ptr();
+            ffi::wxFontEnumerator_OnFontEncoding(self.as_ptr(), font, encoding)
+        }
+    }
+    fn get_encodings(facename: &str) -> ArrayString {
+        unsafe {
+            let facename = WxString::from(facename);
+            let facename = facename.as_ptr();
+            ArrayString::from_ptr(ffi::wxFontEnumerator_GetEncodings(facename))
+        }
+    }
+    // NOT_SUPPORTED: fn GetFacenames()
+    fn is_valid_facename(facename: &str) -> bool {
+        unsafe {
+            let facename = WxString::from(facename);
+            let facename = facename.as_ptr();
+            ffi::wxFontEnumerator_IsValidFacename(facename)
+        }
+    }
+    fn invalidate_cache() {
+        unsafe { ffi::wxFontEnumerator_InvalidateCache() }
+    }
+}
+
+// wxFontList
+pub trait FontListMethods: WxRustMethods {
+    // NOT_SUPPORTED: fn FindOrCreateFont()
+    fn find_or_create_font(&self, font_info: *const c_void) -> Option<FontIsOwned<false>> {
+        unsafe { Font::option_from(ffi::wxFontList_FindOrCreateFont1(self.as_ptr(), font_info)) }
+    }
+}
+
+// wxFontMapper
+pub trait FontMapperMethods: WxRustMethods {
+    // DTOR: fn ~wxFontMapper()
+    // NOT_SUPPORTED: fn CharsetToEncoding()
+    // NOT_SUPPORTED: fn GetAltForEncoding()
+    // NOT_SUPPORTED: fn GetAltForEncoding1()
+    // NOT_SUPPORTED: fn IsEncodingAvailable()
+    fn set_config_path(&self, prefix: &str) {
+        unsafe {
+            let prefix = WxString::from(prefix);
+            let prefix = prefix.as_ptr();
+            ffi::wxFontMapper_SetConfigPath(self.as_ptr(), prefix)
+        }
+    }
+    fn set_dialog_parent<W: WindowMethods>(&self, parent: Option<&W>) {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxFontMapper_SetDialogParent(self.as_ptr(), parent)
+        }
+    }
+    fn set_dialog_title(&self, title: &str) {
+        unsafe {
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            ffi::wxFontMapper_SetDialogTitle(self.as_ptr(), title)
+        }
+    }
+    fn get() -> Option<FontMapperIsOwned<false>> {
+        unsafe { FontMapper::option_from(ffi::wxFontMapper_Get()) }
+    }
+    // NOT_SUPPORTED: fn GetAllEncodingNames()
+    // NOT_SUPPORTED: fn GetEncoding()
+    // NOT_SUPPORTED: fn GetEncodingDescription()
+    // NOT_SUPPORTED: fn GetEncodingFromName()
+    // NOT_SUPPORTED: fn GetEncodingName()
+    fn get_supported_encodings_count() -> usize {
+        unsafe { ffi::wxFontMapper_GetSupportedEncodingsCount() }
+    }
+    fn set<F: FontMapperMethods>(mapper: Option<&F>) -> Option<FontMapperIsOwned<false>> {
+        unsafe {
+            let mapper = match mapper {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            FontMapper::option_from(ffi::wxFontMapper_Set(mapper))
+        }
+    }
+}
+
 // wxFontPickerCtrl
 pub trait FontPickerCtrlMethods: PickerBaseMethods {
     fn create_font<
@@ -433,6 +1050,19 @@ pub trait FontPickerCtrlMethods: PickerBaseMethods {
         unsafe {
             let font = font.as_ptr();
             ffi::wxFontPickerCtrl_SetSelectedFont(self.as_ptr(), font)
+        }
+    }
+}
+
+// wxFontPickerEvent
+pub trait FontPickerEventMethods: CommandEventMethods {
+    fn get_font(&self) -> Font {
+        unsafe { Font::from_ptr(ffi::wxFontPickerEvent_GetFont(self.as_ptr())) }
+    }
+    fn set_font<F: FontMethods>(&self, f: &F) {
+        unsafe {
+            let f = f.as_ptr();
+            ffi::wxFontPickerEvent_SetFont(self.as_ptr(), f)
         }
     }
 }
@@ -548,5 +1178,12 @@ pub trait FrameMethods: TopLevelWindowMethods {
     }
     fn pop_status_text(&self, number: c_int) {
         unsafe { ffi::wxFrame_PopStatusText(self.as_ptr(), number) }
+    }
+}
+
+// wxFullScreenEvent
+pub trait FullScreenEventMethods: EventMethods {
+    fn is_full_screen(&self) -> bool {
+        unsafe { ffi::wxFullScreenEvent_IsFullScreen(self.as_ptr()) }
     }
 }
