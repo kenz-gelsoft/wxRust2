@@ -69,3 +69,76 @@ impl<const OWNED: bool> DynamicCast for EditableListBoxIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxEditableListBox_CLASSINFO()) }
     }
 }
+
+// wxEraseEvent
+wx_class! { EraseEvent =
+    EraseEventIsOwned<true>(wxEraseEvent) impl
+        EraseEventMethods,
+        EventMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> EraseEventIsOwned<OWNED> {
+    pub fn new<D: DCMethods>(id: c_int, dc: Option<&D>) -> EraseEventIsOwned<OWNED> {
+        unsafe {
+            let dc = match dc {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            EraseEventIsOwned(ffi::wxEraseEvent_new(id, dc))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<EraseEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
+    fn from(o: EraseEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<EraseEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: EraseEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for EraseEventIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxEraseEvent_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for EraseEventIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
+// wxEventBlocker
+wx_class! { EventBlocker =
+    EventBlockerIsOwned<true>(wxEventBlocker) impl
+        EventBlockerMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> EventBlockerIsOwned<OWNED> {
+    // NOT_SUPPORTED: fn wxEventBlocker()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<EventBlockerIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: EventBlockerIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<EventBlockerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: EventBlockerIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for EventBlockerIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxEventBlocker_CLASSINFO()) }
+    }
+}

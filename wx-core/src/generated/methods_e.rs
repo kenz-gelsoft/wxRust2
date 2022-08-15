@@ -40,3 +40,16 @@ pub trait EditableListBoxMethods: PanelMethods {
         }
     }
 }
+
+// wxEraseEvent
+pub trait EraseEventMethods: EventMethods {
+    fn get_dc(&self) -> Option<DCIsOwned<false>> {
+        unsafe { DC::option_from(ffi::wxEraseEvent_GetDC(self.as_ptr())) }
+    }
+}
+
+// wxEventBlocker
+pub trait EventBlockerMethods: EvtHandlerMethods {
+    // DTOR: fn ~wxEventBlocker()
+    // NOT_SUPPORTED: fn Block()
+}
