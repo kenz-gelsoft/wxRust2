@@ -119,5 +119,52 @@ void wxGenericDirCtrl_UnselectAll(wxGenericDirCtrl * self) {
     return self->UnselectAll();
 }
 
+// CLASS: wxGridSizer
+wxClassInfo *wxGridSizer_CLASSINFO() {
+    return wxCLASSINFO(wxGridSizer);
+}
+wxGridSizer *wxGridSizer_new(int cols, int vgap, int hgap) {
+    return new wxGridSizer(cols, vgap, hgap);
+}
+wxGridSizer *wxGridSizer_new1(int cols, const wxSize * gap) {
+    return new wxGridSizer(cols, *gap);
+}
+wxGridSizer *wxGridSizer_new2(int rows, int cols, int vgap, int hgap) {
+    return new wxGridSizer(rows, cols, vgap, hgap);
+}
+wxGridSizer *wxGridSizer_new3(int rows, int cols, const wxSize * gap) {
+    return new wxGridSizer(rows, cols, *gap);
+}
+int wxGridSizer_GetCols(const wxGridSizer * self) {
+    return self->GetCols();
+}
+int wxGridSizer_GetRows(const wxGridSizer * self) {
+    return self->GetRows();
+}
+int wxGridSizer_GetEffectiveColsCount(const wxGridSizer * self) {
+    return self->GetEffectiveColsCount();
+}
+int wxGridSizer_GetEffectiveRowsCount(const wxGridSizer * self) {
+    return self->GetEffectiveRowsCount();
+}
+int wxGridSizer_GetHGap(const wxGridSizer * self) {
+    return self->GetHGap();
+}
+int wxGridSizer_GetVGap(const wxGridSizer * self) {
+    return self->GetVGap();
+}
+void wxGridSizer_SetCols(wxGridSizer * self, int cols) {
+    return self->SetCols(cols);
+}
+void wxGridSizer_SetHGap(wxGridSizer * self, int gap) {
+    return self->SetHGap(gap);
+}
+void wxGridSizer_SetRows(wxGridSizer * self, int rows) {
+    return self->SetRows(rows);
+}
+void wxGridSizer_SetVGap(wxGridSizer * self, int gap) {
+    return self->SetVGap(gap);
+}
+
 } // extern "C"
 

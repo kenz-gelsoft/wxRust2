@@ -1,10 +1,21 @@
 #pragma once
 
+#include <wx/dataobj.h>
+#include <wx/dnd.h>
+#include <wx/event.h>
+#include <wx/fdrepdlg.h>
 #include <wx/filectrl.h>
+#include <wx/filedlg.h>
+#include <wx/filehistory.h>
 #include <wx/filepicker.h>
 #include <wx/font.h>
+#include <wx/fontdata.h>
+#include <wx/fontdlg.h>
+#include <wx/fontenum.h>
+#include <wx/fontmap.h>
 #include <wx/fontpicker.h>
 #include <wx/frame.h>
+#include <wx/sizer.h>
 
 extern "C" {
 
@@ -27,6 +38,75 @@ void wxFileCtrl_SetFilterIndex(wxFileCtrl * self, int filter_index);
 void wxFileCtrl_SetWildcard(wxFileCtrl * self, const wxString * wild_card);
 void wxFileCtrl_ShowHidden(wxFileCtrl * self, bool show);
 
+// CLASS: wxFileCtrlEvent
+wxClassInfo *wxFileCtrlEvent_CLASSINFO();
+wxString *wxFileCtrlEvent_GetDirectory(const wxFileCtrlEvent * self);
+wxString *wxFileCtrlEvent_GetFile(const wxFileCtrlEvent * self);
+wxArrayString *wxFileCtrlEvent_GetFiles(const wxFileCtrlEvent * self);
+int wxFileCtrlEvent_GetFilterIndex(const wxFileCtrlEvent * self);
+void wxFileCtrlEvent_SetFiles(wxFileCtrlEvent * self, const wxArrayString * files);
+void wxFileCtrlEvent_SetDirectory(wxFileCtrlEvent * self, const wxString * directory);
+void wxFileCtrlEvent_SetFilterIndex(wxFileCtrlEvent * self, int index);
+
+// CLASS: wxFileDataObject
+void wxFileDataObject_delete(wxFileDataObject *self);
+wxFileDataObject *wxFileDataObject_new();
+void wxFileDataObject_AddFile(wxFileDataObject * self, const wxString * file);
+wxArrayString *wxFileDataObject_GetFilenames(const wxFileDataObject * self);
+
+// CLASS: wxFileDialog
+wxClassInfo *wxFileDialog_CLASSINFO();
+wxFileDialog *wxFileDialog_new(wxWindow * parent, const wxString * message, const wxString * default_dir, const wxString * default_file, const wxString * wildcard, long style, const wxPoint * pos, const wxSize * size, const wxString * name);
+wxString *wxFileDialog_GetCurrentlySelectedFilename(const wxFileDialog * self);
+#if wxCHECK_VERSION(3, 1, 0)
+int wxFileDialog_GetCurrentlySelectedFilterIndex(const wxFileDialog * self);
+#endif
+wxString *wxFileDialog_GetDirectory(const wxFileDialog * self);
+wxWindow * wxFileDialog_GetExtraControl(const wxFileDialog * self);
+wxString *wxFileDialog_GetFilename(const wxFileDialog * self);
+void wxFileDialog_GetFilenames(const wxFileDialog * self, wxArrayString * filenames);
+int wxFileDialog_GetFilterIndex(const wxFileDialog * self);
+wxString *wxFileDialog_GetMessage(const wxFileDialog * self);
+wxString *wxFileDialog_GetPath(const wxFileDialog * self);
+void wxFileDialog_GetPaths(const wxFileDialog * self, wxArrayString * paths);
+wxString *wxFileDialog_GetWildcard(const wxFileDialog * self);
+#if wxCHECK_VERSION(3, 1, 7)
+bool wxFileDialog_SetCustomizeHook(wxFileDialog * self, wxFileDialogCustomizeHook * customize_hook);
+#endif
+void wxFileDialog_SetDirectory(wxFileDialog * self, const wxString * directory);
+void wxFileDialog_SetFilename(wxFileDialog * self, const wxString * setfilename);
+void wxFileDialog_SetFilterIndex(wxFileDialog * self, int filter_index);
+void wxFileDialog_SetMessage(wxFileDialog * self, const wxString * message);
+void wxFileDialog_SetPath(wxFileDialog * self, const wxString * path);
+void wxFileDialog_SetWildcard(wxFileDialog * self, const wxString * wild_card);
+
+// CLASS: wxFileDirPickerEvent
+wxClassInfo *wxFileDirPickerEvent_CLASSINFO();
+wxFileDirPickerEvent *wxFileDirPickerEvent_new();
+wxString *wxFileDirPickerEvent_GetPath(const wxFileDirPickerEvent * self);
+void wxFileDirPickerEvent_SetPath(wxFileDirPickerEvent * self, const wxString * path);
+
+// CLASS: wxFileDropTarget
+void wxFileDropTarget_delete(wxFileDropTarget *self);
+bool wxFileDropTarget_OnDropFiles(wxFileDropTarget * self, wxCoord x, wxCoord y, const wxArrayString * filenames);
+
+// CLASS: wxFileHistory
+wxClassInfo *wxFileHistory_CLASSINFO();
+wxFileHistory *wxFileHistory_new(size_t max_files, wxWindowID id_base);
+void wxFileHistory_AddFileToHistory(wxFileHistory * self, const wxString * filename);
+void wxFileHistory_AddFilesToMenu(wxFileHistory * self);
+void wxFileHistory_AddFilesToMenu1(wxFileHistory * self, wxMenu * menu);
+wxWindowID wxFileHistory_GetBaseId(const wxFileHistory * self);
+size_t wxFileHistory_GetCount(const wxFileHistory * self);
+wxString *wxFileHistory_GetHistoryFile(const wxFileHistory * self, size_t index);
+int wxFileHistory_GetMaxFiles(const wxFileHistory * self);
+void wxFileHistory_Load(wxFileHistory * self, const wxConfigBase * config);
+void wxFileHistory_RemoveFileFromHistory(wxFileHistory * self, size_t i);
+void wxFileHistory_RemoveMenu(wxFileHistory * self, wxMenu * menu);
+void wxFileHistory_Save(wxFileHistory * self, wxConfigBase * config);
+void wxFileHistory_SetBaseId(wxFileHistory * self, wxWindowID base_id);
+void wxFileHistory_UseMenu(wxFileHistory * self, wxMenu * menu);
+
 // CLASS: wxFilePickerCtrl
 wxClassInfo *wxFilePickerCtrl_CLASSINFO();
 wxFilePickerCtrl *wxFilePickerCtrl_new();
@@ -37,6 +117,50 @@ wxString *wxFilePickerCtrl_GetPath(const wxFilePickerCtrl * self);
 void wxFilePickerCtrl_SetFileName(wxFilePickerCtrl * self, const wxFileName * filename);
 void wxFilePickerCtrl_SetInitialDirectory(wxFilePickerCtrl * self, const wxString * dir);
 void wxFilePickerCtrl_SetPath(wxFilePickerCtrl * self, const wxString * filename);
+
+// CLASS: wxFindDialogEvent
+wxClassInfo *wxFindDialogEvent_CLASSINFO();
+wxFindReplaceDialog * wxFindDialogEvent_GetDialog(const wxFindDialogEvent * self);
+wxString *wxFindDialogEvent_GetFindString(const wxFindDialogEvent * self);
+int wxFindDialogEvent_GetFlags(const wxFindDialogEvent * self);
+wxString *wxFindDialogEvent_GetReplaceString(const wxFindDialogEvent * self);
+
+// CLASS: wxFindReplaceData
+wxClassInfo *wxFindReplaceData_CLASSINFO();
+wxString *wxFindReplaceData_GetFindString(const wxFindReplaceData * self);
+int wxFindReplaceData_GetFlags(const wxFindReplaceData * self);
+wxString *wxFindReplaceData_GetReplaceString(const wxFindReplaceData * self);
+void wxFindReplaceData_SetFindString(wxFindReplaceData * self, const wxString * str);
+void wxFindReplaceData_SetReplaceString(wxFindReplaceData * self, const wxString * str);
+
+// CLASS: wxFindReplaceDialog
+wxClassInfo *wxFindReplaceDialog_CLASSINFO();
+wxFindReplaceDialog *wxFindReplaceDialog_new();
+wxFindReplaceDialog *wxFindReplaceDialog_new1(wxWindow * parent, wxFindReplaceData * data, const wxString * title, int style);
+bool wxFindReplaceDialog_Create(wxFindReplaceDialog * self, wxWindow * parent, wxFindReplaceData * data, const wxString * title, int style);
+const wxFindReplaceData * wxFindReplaceDialog_GetData(const wxFindReplaceDialog * self);
+
+// CLASS: wxFlexGridSizer
+wxClassInfo *wxFlexGridSizer_CLASSINFO();
+wxFlexGridSizer *wxFlexGridSizer_new(int cols, int vgap, int hgap);
+wxFlexGridSizer *wxFlexGridSizer_new1(int cols, const wxSize * gap);
+wxFlexGridSizer *wxFlexGridSizer_new2(int rows, int cols, int vgap, int hgap);
+wxFlexGridSizer *wxFlexGridSizer_new3(int rows, int cols, const wxSize * gap);
+void wxFlexGridSizer_AddGrowableCol(wxFlexGridSizer * self, size_t idx, int proportion);
+void wxFlexGridSizer_AddGrowableRow(wxFlexGridSizer * self, size_t idx, int proportion);
+int wxFlexGridSizer_GetFlexibleDirection(const wxFlexGridSizer * self);
+bool wxFlexGridSizer_IsColGrowable(wxFlexGridSizer * self, size_t idx);
+bool wxFlexGridSizer_IsRowGrowable(wxFlexGridSizer * self, size_t idx);
+void wxFlexGridSizer_RemoveGrowableCol(wxFlexGridSizer * self, size_t idx);
+void wxFlexGridSizer_RemoveGrowableRow(wxFlexGridSizer * self, size_t idx);
+void wxFlexGridSizer_SetFlexibleDirection(wxFlexGridSizer * self, int direction);
+wxArrayInt *wxFlexGridSizer_GetRowHeights(const wxFlexGridSizer * self);
+wxArrayInt *wxFlexGridSizer_GetColWidths(const wxFlexGridSizer * self);
+
+// CLASS: wxFocusEvent
+wxClassInfo *wxFocusEvent_CLASSINFO();
+wxWindow * wxFocusEvent_GetWindow(const wxFocusEvent * self);
+void wxFocusEvent_SetWindow(wxFocusEvent * self, wxWindow * win);
 
 // CLASS: wxFont
 wxClassInfo *wxFont_CLASSINFO();
@@ -96,6 +220,66 @@ wxFont *wxFont_new2(const wxFontInfo * font_info);
 wxFont *wxFont_new5(const wxString * native_info_string);
 wxFont *wxFont_new6(const wxNativeFontInfo * native_info);
 
+// CLASS: wxFontData
+wxClassInfo *wxFontData_CLASSINFO();
+wxFontData *wxFontData_new();
+void wxFontData_EnableEffects(wxFontData * self, bool enable);
+bool wxFontData_GetAllowSymbols(const wxFontData * self);
+wxFont *wxFontData_GetChosenFont(const wxFontData * self);
+wxColour *wxFontData_GetColour(const wxFontData * self);
+bool wxFontData_GetEnableEffects(const wxFontData * self);
+#if wxCHECK_VERSION(3, 1, 0)
+int wxFontData_GetRestrictSelection(const wxFontData * self);
+#endif
+wxFont *wxFontData_GetInitialFont(const wxFontData * self);
+bool wxFontData_GetShowHelp(const wxFontData * self);
+#if wxCHECK_VERSION(3, 1, 0)
+void wxFontData_RestrictSelection(wxFontData * self, int flags);
+#endif
+void wxFontData_SetAllowSymbols(wxFontData * self, bool allow_symbols);
+void wxFontData_SetChosenFont(wxFontData * self, const wxFont * font);
+void wxFontData_SetColour(wxFontData * self, const wxColour * colour);
+void wxFontData_SetInitialFont(wxFontData * self, const wxFont * font);
+void wxFontData_SetRange(wxFontData * self, int min, int max);
+void wxFontData_SetShowHelp(wxFontData * self, bool show_help);
+
+// CLASS: wxFontDialog
+wxClassInfo *wxFontDialog_CLASSINFO();
+wxFontDialog *wxFontDialog_new();
+wxFontDialog *wxFontDialog_new2(wxWindow * parent, const wxFontData * data);
+bool wxFontDialog_Create(wxFontDialog * self, wxWindow * parent);
+bool wxFontDialog_Create1(wxFontDialog * self, wxWindow * parent, const wxFontData * data);
+wxFontData * wxFontDialog_GetFontData1(wxFontDialog * self);
+
+// CLASS: wxFontEnumerator
+void wxFontEnumerator_delete(wxFontEnumerator *self);
+wxFontEnumerator *wxFontEnumerator_new();
+bool wxFontEnumerator_EnumerateEncodings(wxFontEnumerator * self, const wxString * font);
+bool wxFontEnumerator_OnFacename(wxFontEnumerator * self, const wxString * font);
+bool wxFontEnumerator_OnFontEncoding(wxFontEnumerator * self, const wxString * font, const wxString * encoding);
+wxArrayString *wxFontEnumerator_GetEncodings(const wxString * facename);
+bool wxFontEnumerator_IsValidFacename(const wxString * facename);
+#if wxCHECK_VERSION(3, 1, 0)
+void wxFontEnumerator_InvalidateCache();
+#endif
+
+// CLASS: wxFontList
+void wxFontList_delete(wxFontList *self);
+wxFontList *wxFontList_new();
+#if wxCHECK_VERSION(3, 1, 0)
+wxFont * wxFontList_FindOrCreateFont1(wxFontList * self, const wxFontInfo * font_info);
+#endif
+
+// CLASS: wxFontMapper
+void wxFontMapper_delete(wxFontMapper *self);
+wxFontMapper *wxFontMapper_new();
+void wxFontMapper_SetConfigPath(wxFontMapper * self, const wxString * prefix);
+void wxFontMapper_SetDialogParent(wxFontMapper * self, wxWindow * parent);
+void wxFontMapper_SetDialogTitle(wxFontMapper * self, const wxString * title);
+wxFontMapper * wxFontMapper_Get();
+size_t wxFontMapper_GetSupportedEncodingsCount();
+wxFontMapper * wxFontMapper_Set(wxFontMapper * mapper);
+
 // CLASS: wxFontPickerCtrl
 wxClassInfo *wxFontPickerCtrl_CLASSINFO();
 wxFontPickerCtrl *wxFontPickerCtrl_new();
@@ -113,6 +297,12 @@ void wxFontPickerCtrl_SetMinPointSize(wxFontPickerCtrl * self, unsigned int min)
 void wxFontPickerCtrl_SetSelectedColour(wxFontPickerCtrl * self, const wxColour * colour);
 #endif
 void wxFontPickerCtrl_SetSelectedFont(wxFontPickerCtrl * self, const wxFont * font);
+
+// CLASS: wxFontPickerEvent
+wxClassInfo *wxFontPickerEvent_CLASSINFO();
+wxFontPickerEvent *wxFontPickerEvent_new(wxObject * generator, int id, const wxFont * font);
+wxFont *wxFontPickerEvent_GetFont(const wxFontPickerEvent * self);
+void wxFontPickerEvent_SetFont(wxFontPickerEvent * self, const wxFont * f);
 
 // CLASS: wxFrame
 wxClassInfo *wxFrame_CLASSINFO();

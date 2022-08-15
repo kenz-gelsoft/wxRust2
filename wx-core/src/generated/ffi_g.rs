@@ -90,4 +90,21 @@ extern "C" {
     pub fn wxGenericDirCtrl_SelectPaths(self_: *mut c_void, paths: *const c_void);
     pub fn wxGenericDirCtrl_UnselectAll(self_: *mut c_void);
 
+    // wxGridSizer
+    pub fn wxGridSizer_CLASSINFO() -> *mut c_void;
+    pub fn wxGridSizer_new(cols: c_int, vgap: c_int, hgap: c_int) -> *mut c_void;
+    pub fn wxGridSizer_new1(cols: c_int, gap: *const c_void) -> *mut c_void;
+    pub fn wxGridSizer_new2(rows: c_int, cols: c_int, vgap: c_int, hgap: c_int) -> *mut c_void;
+    pub fn wxGridSizer_new3(rows: c_int, cols: c_int, gap: *const c_void) -> *mut c_void;
+    pub fn wxGridSizer_GetCols(self_: *const c_void) -> c_int;
+    pub fn wxGridSizer_GetRows(self_: *const c_void) -> c_int;
+    pub fn wxGridSizer_GetEffectiveColsCount(self_: *const c_void) -> c_int;
+    pub fn wxGridSizer_GetEffectiveRowsCount(self_: *const c_void) -> c_int;
+    pub fn wxGridSizer_GetHGap(self_: *const c_void) -> c_int;
+    pub fn wxGridSizer_GetVGap(self_: *const c_void) -> c_int;
+    pub fn wxGridSizer_SetCols(self_: *mut c_void, cols: c_int);
+    pub fn wxGridSizer_SetHGap(self_: *mut c_void, gap: c_int);
+    pub fn wxGridSizer_SetRows(self_: *mut c_void, rows: c_int);
+    pub fn wxGridSizer_SetVGap(self_: *mut c_void, gap: c_int);
+
 }

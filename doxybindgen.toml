@@ -1,30 +1,4 @@
 core_files = [
-    'wxml/classwx_file_ctrl.xml',
-    'wxml/classwx_file_ctrl_event.xml',
-    'wxml/classwx_file_data_object.xml',
-    'wxml/classwx_file_dialog.xml',
-    'wxml/classwx_file_dialog_customize.xml',
-    'wxml/classwx_file_dialog_customize_hook.xml',
-    'wxml/classwx_file_dir_picker_event.xml',
-    'wxml/classwx_file_drop_target.xml',
-    'wxml/classwx_file_history.xml',
-    'wxml/classwx_file_picker_ctrl.xml',
-    'wxml/classwx_find_dialog_event.xml',
-    'wxml/classwx_find_replace_data.xml',
-    'wxml/classwx_find_replace_dialog.xml',
-    'wxml/classwx_flex_grid_sizer.xml',
-    'wxml/classwx_floating_point_validator.xml',
-    'wxml/classwx_focus_event.xml',
-    'wxml/classwx_font.xml',
-    'wxml/classwx_font_data.xml',
-    'wxml/classwx_font_dialog.xml',
-    'wxml/classwx_font_enumerator.xml',
-    'wxml/classwx_font_list.xml',
-    'wxml/classwx_font_mapper.xml',
-    'wxml/classwx_font_picker_ctrl.xml',
-    'wxml/classwx_font_picker_event.xml',
-    'wxml/classwx_frame.xml',
-    'wxml/classwx_full_screen_event.xml',
     'wxml/classwx_g_b_position.xml',
     'wxml/classwx_g_b_sizer_item.xml',
     'wxml/classwx_g_b_span.xml',
@@ -461,14 +435,36 @@ wxml_files = [
     'wxml/classwx_evt_handler.xml',
     # 'wxml/classwx_ext_help_controller.xml', # Our CI environment is't built with
     'wxml/classwx_file_ctrl.xml',
+    'wxml/classwx_file_ctrl_event.xml',
+    'wxml/classwx_file_data_object.xml',
+    'wxml/classwx_file_dialog.xml',
+    # 'wxml/classwx_file_dialog_customize.xml',      # requires 3.1.7
+    # 'wxml/classwx_file_dialog_customize_hook.xml', # requires 3.1.7
+    'wxml/classwx_file_dir_picker_event.xml',
+    'wxml/classwx_file_drop_target.xml',
+    'wxml/classwx_file_history.xml',
     'wxml/classwx_file_name.xml',
     'wxml/classwx_file_picker_ctrl.xml',
+    'wxml/classwx_find_dialog_event.xml',
+    'wxml/classwx_find_replace_data.xml',
+    'wxml/classwx_find_replace_dialog.xml',
+    'wxml/classwx_flex_grid_sizer.xml',
+    # 'wxml/classwx_floating_point_validator.xml',
+    'wxml/classwx_focus_event.xml',
     'wxml/classwx_font.xml',
+    'wxml/classwx_font_data.xml',
+    'wxml/classwx_font_dialog.xml',
+    'wxml/classwx_font_enumerator.xml',
+    'wxml/classwx_font_list.xml',
+    'wxml/classwx_font_mapper.xml',
     'wxml/classwx_font_picker_ctrl.xml',
+    'wxml/classwx_font_picker_event.xml',
     'wxml/classwx_frame.xml',
+    # 'wxml/classwx_full_screen_event.xml', # requires 3.1
     'wxml/classwx_g_d_i_object.xml',
     'wxml/classwx_gauge.xml',
     'wxml/classwx_generic_dir_ctrl.xml',
+    'wxml/classwx_grid_sizer.xml',
     'wxml/classwx_header_column.xml',
     'wxml/classwx_header_column_simple.xml',
     'wxml/classwx_header_ctrl.xml',
@@ -1088,6 +1084,21 @@ blocklist = [
     'SetClientData',
     'Unbind1',
 ]
+[types.wxFileDialog]
+wx31 = [
+    'GetCurrentlySelectedFilterIndex',
+]
+wx317 = [
+    'SetCustomizeHook',
+]
+[types.wxFileDropTarget]
+blocklist = [
+    'wxFileDropTarget',
+]
+[types.wxFileHistory]
+blocklist = [
+    'GetMenus',
+]
 [types.wxFileName]
 blocklist = [
     'operator!=',
@@ -1115,6 +1126,28 @@ wx31 = [
     'GetNumericWeight',
     'SetFractionalPointSize',
     'SetNumericWeight',
+]
+[types.wxFontData]
+blocklist = [
+    'operator=',
+]
+wx31 = [
+    'GetRestrictSelection',
+    'RestrictSelection',
+]
+[types.wxFontDialog]
+blocklist = [
+    'wxFontDialog1',
+    'GetFontData',
+    # 'GetFontData1',
+]
+[types.wxFontEnumerator]
+wx31 = [
+    'InvalidateCache',
+]
+[types.wxFontList]
+wx31 = [
+    'FindOrCreateFont1',
 ]
 [types.wxFontPickerCtrl]
 wx31 = [
