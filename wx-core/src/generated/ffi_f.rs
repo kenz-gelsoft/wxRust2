@@ -487,9 +487,4 @@ extern "C" {
     pub fn wxFrame_PushStatusText(self_: *mut c_void, text: *const c_void, number: c_int);
     pub fn wxFrame_PopStatusText(self_: *mut c_void, number: c_int);
 
-    // wxFullScreenEvent
-    pub fn wxFullScreenEvent_CLASSINFO() -> *mut c_void;
-    pub fn wxFullScreenEvent_new(id: c_int, fullscreen: bool) -> *mut c_void;
-    pub fn wxFullScreenEvent_IsFullScreen(self_: *const c_void) -> bool;
-
 }

@@ -58,7 +58,9 @@ wxArrayString *wxFileDataObject_GetFilenames(const wxFileDataObject * self);
 wxClassInfo *wxFileDialog_CLASSINFO();
 wxFileDialog *wxFileDialog_new(wxWindow * parent, const wxString * message, const wxString * default_dir, const wxString * default_file, const wxString * wildcard, long style, const wxPoint * pos, const wxSize * size, const wxString * name);
 wxString *wxFileDialog_GetCurrentlySelectedFilename(const wxFileDialog * self);
+#if wxCHECK_VERSION(3, 1, 0)
 int wxFileDialog_GetCurrentlySelectedFilterIndex(const wxFileDialog * self);
+#endif
 wxString *wxFileDialog_GetDirectory(const wxFileDialog * self);
 wxWindow * wxFileDialog_GetExtraControl(const wxFileDialog * self);
 wxString *wxFileDialog_GetFilename(const wxFileDialog * self);
@@ -226,10 +228,14 @@ bool wxFontData_GetAllowSymbols(const wxFontData * self);
 wxFont *wxFontData_GetChosenFont(const wxFontData * self);
 wxColour *wxFontData_GetColour(const wxFontData * self);
 bool wxFontData_GetEnableEffects(const wxFontData * self);
+#if wxCHECK_VERSION(3, 1, 0)
 int wxFontData_GetRestrictSelection(const wxFontData * self);
+#endif
 wxFont *wxFontData_GetInitialFont(const wxFontData * self);
 bool wxFontData_GetShowHelp(const wxFontData * self);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxFontData_RestrictSelection(wxFontData * self, int flags);
+#endif
 void wxFontData_SetAllowSymbols(wxFontData * self, bool allow_symbols);
 void wxFontData_SetChosenFont(wxFontData * self, const wxFont * font);
 void wxFontData_SetColour(wxFontData * self, const wxColour * colour);
@@ -253,12 +259,16 @@ bool wxFontEnumerator_OnFacename(wxFontEnumerator * self, const wxString * font)
 bool wxFontEnumerator_OnFontEncoding(wxFontEnumerator * self, const wxString * font, const wxString * encoding);
 wxArrayString *wxFontEnumerator_GetEncodings(const wxString * facename);
 bool wxFontEnumerator_IsValidFacename(const wxString * facename);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxFontEnumerator_InvalidateCache();
+#endif
 
 // CLASS: wxFontList
 void wxFontList_delete(wxFontList *self);
 wxFontList *wxFontList_new();
+#if wxCHECK_VERSION(3, 1, 0)
 wxFont * wxFontList_FindOrCreateFont1(wxFontList * self, const wxFontInfo * font_info);
+#endif
 
 // CLASS: wxFontMapper
 void wxFontMapper_delete(wxFontMapper *self);
@@ -321,11 +331,6 @@ wxTaskBarButton * wxFrame_MSWGetTaskBarButton(wxFrame * self);
 #endif
 void wxFrame_PushStatusText(wxFrame * self, const wxString * text, int number);
 void wxFrame_PopStatusText(wxFrame * self, int number);
-
-// CLASS: wxFullScreenEvent
-wxClassInfo *wxFullScreenEvent_CLASSINFO();
-wxFullScreenEvent *wxFullScreenEvent_new(int id, bool fullscreen);
-bool wxFullScreenEvent_IsFullScreen(const wxFullScreenEvent * self);
 
 } // extern "C"
 

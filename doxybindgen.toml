@@ -460,7 +460,7 @@ wxml_files = [
     'wxml/classwx_font_picker_ctrl.xml',
     'wxml/classwx_font_picker_event.xml',
     'wxml/classwx_frame.xml',
-    'wxml/classwx_full_screen_event.xml',
+    # 'wxml/classwx_full_screen_event.xml', # requires 3.1
     'wxml/classwx_g_d_i_object.xml',
     'wxml/classwx_gauge.xml',
     'wxml/classwx_generic_dir_ctrl.xml',
@@ -1085,6 +1085,9 @@ blocklist = [
     'Unbind1',
 ]
 [types.wxFileDialog]
+wx31 = [
+    'GetCurrentlySelectedFilterIndex',
+]
 wx317 = [
     'SetCustomizeHook',
 ]
@@ -1128,11 +1131,23 @@ wx31 = [
 blocklist = [
     'operator=',
 ]
+wx31 = [
+    'GetRestrictSelection',
+    'RestrictSelection',
+]
 [types.wxFontDialog]
 blocklist = [
     'wxFontDialog1',
     'GetFontData',
     # 'GetFontData1',
+]
+[types.wxFontEnumerator]
+wx31 = [
+    'InvalidateCache',
+]
+[types.wxFontList]
+wx31 = [
+    'FindOrCreateFont1',
 ]
 [types.wxFontPickerCtrl]
 wx31 = [

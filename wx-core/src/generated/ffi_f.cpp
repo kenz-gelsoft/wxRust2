@@ -105,9 +105,11 @@ wxFileDialog *wxFileDialog_new(wxWindow * parent, const wxString * message, cons
 wxString *wxFileDialog_GetCurrentlySelectedFilename(const wxFileDialog * self) {
     return new wxString(self->GetCurrentlySelectedFilename());
 }
+#if wxCHECK_VERSION(3, 1, 0)
 int wxFileDialog_GetCurrentlySelectedFilterIndex(const wxFileDialog * self) {
     return self->GetCurrentlySelectedFilterIndex();
 }
+#endif
 wxString *wxFileDialog_GetDirectory(const wxFileDialog * self) {
     return new wxString(self->GetDirectory());
 }
@@ -537,18 +539,22 @@ wxColour *wxFontData_GetColour(const wxFontData * self) {
 bool wxFontData_GetEnableEffects(const wxFontData * self) {
     return self->GetEnableEffects();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 int wxFontData_GetRestrictSelection(const wxFontData * self) {
     return self->GetRestrictSelection();
 }
+#endif
 wxFont *wxFontData_GetInitialFont(const wxFontData * self) {
     return new wxFont(self->GetInitialFont());
 }
 bool wxFontData_GetShowHelp(const wxFontData * self) {
     return self->GetShowHelp();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxFontData_RestrictSelection(wxFontData * self, int flags) {
     return self->RestrictSelection(flags);
 }
+#endif
 void wxFontData_SetAllowSymbols(wxFontData * self, bool allow_symbols) {
     return self->SetAllowSymbols(allow_symbols);
 }
@@ -610,9 +616,11 @@ wxArrayString *wxFontEnumerator_GetEncodings(const wxString * facename) {
 bool wxFontEnumerator_IsValidFacename(const wxString * facename) {
     return wxFontEnumerator::IsValidFacename(*facename);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxFontEnumerator_InvalidateCache() {
     return wxFontEnumerator::InvalidateCache();
 }
+#endif
 
 // CLASS: wxFontList
 void wxFontList_delete(wxFontList *self) {
@@ -621,9 +629,11 @@ void wxFontList_delete(wxFontList *self) {
 wxFontList *wxFontList_new() {
     return new wxFontList();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxFont * wxFontList_FindOrCreateFont1(wxFontList * self, const wxFontInfo * font_info) {
     return self->FindOrCreateFont(*font_info);
 }
+#endif
 
 // CLASS: wxFontMapper
 void wxFontMapper_delete(wxFontMapper *self) {
@@ -781,17 +791,6 @@ void wxFrame_PushStatusText(wxFrame * self, const wxString * text, int number) {
 }
 void wxFrame_PopStatusText(wxFrame * self, int number) {
     return self->PopStatusText(number);
-}
-
-// CLASS: wxFullScreenEvent
-wxClassInfo *wxFullScreenEvent_CLASSINFO() {
-    return wxCLASSINFO(wxFullScreenEvent);
-}
-wxFullScreenEvent *wxFullScreenEvent_new(int id, bool fullscreen) {
-    return new wxFullScreenEvent(id, fullscreen);
-}
-bool wxFullScreenEvent_IsFullScreen(const wxFullScreenEvent * self) {
-    return self->IsFullScreen();
 }
 
 } // extern "C"

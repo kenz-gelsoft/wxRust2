@@ -1119,10 +1119,3 @@ pub trait FrameMethods: TopLevelWindowMethods {
         unsafe { ffi::wxFrame_PopStatusText(self.as_ptr(), number) }
     }
 }
-
-// wxFullScreenEvent
-pub trait FullScreenEventMethods: EventMethods {
-    fn is_full_screen(&self) -> bool {
-        unsafe { ffi::wxFullScreenEvent_IsFullScreen(self.as_ptr()) }
-    }
-}
