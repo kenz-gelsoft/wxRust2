@@ -68,7 +68,9 @@ wxString *wxFileDialog_GetMessage(const wxFileDialog * self);
 wxString *wxFileDialog_GetPath(const wxFileDialog * self);
 void wxFileDialog_GetPaths(const wxFileDialog * self, wxArrayString * paths);
 wxString *wxFileDialog_GetWildcard(const wxFileDialog * self);
+#if wxCHECK_VERSION(3, 1, 7)
 bool wxFileDialog_SetCustomizeHook(wxFileDialog * self, wxFileDialogCustomizeHook * customize_hook);
+#endif
 void wxFileDialog_SetDirectory(wxFileDialog * self, const wxString * directory);
 void wxFileDialog_SetFilename(wxFileDialog * self, const wxString * setfilename);
 void wxFileDialog_SetFilterIndex(wxFileDialog * self, int filter_index);

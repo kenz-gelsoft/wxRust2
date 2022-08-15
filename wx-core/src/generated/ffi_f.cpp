@@ -135,9 +135,11 @@ void wxFileDialog_GetPaths(const wxFileDialog * self, wxArrayString * paths) {
 wxString *wxFileDialog_GetWildcard(const wxFileDialog * self) {
     return new wxString(self->GetWildcard());
 }
+#if wxCHECK_VERSION(3, 1, 7)
 bool wxFileDialog_SetCustomizeHook(wxFileDialog * self, wxFileDialogCustomizeHook * customize_hook) {
     return self->SetCustomizeHook(*customize_hook);
 }
+#endif
 void wxFileDialog_SetDirectory(wxFileDialog * self, const wxString * directory) {
     return self->SetDirectory(*directory);
 }

@@ -1084,6 +1084,10 @@ blocklist = [
     'SetClientData',
     'Unbind1',
 ]
+[types.wxFileDialog]
+wx317 = [
+    'SetCustomizeHook',
+]
 [types.wxFileDropTarget]
 blocklist = [
     'wxFileDropTarget',
