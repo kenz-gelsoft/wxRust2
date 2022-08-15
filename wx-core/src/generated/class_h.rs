@@ -211,6 +211,36 @@ impl<const OWNED: bool> DynamicCast for HeaderCtrlSimpleIsOwned<OWNED> {
     }
 }
 
+// wxHelpControllerBase
+wx_class! { HelpControllerBase =
+    HelpControllerBaseIsOwned<true>(wxHelpControllerBase) impl
+        HelpControllerBaseMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> HelpControllerBaseIsOwned<OWNED> {
+    // BLOCKED: fn wxHelpControllerBase()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<HelpControllerBaseIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: HelpControllerBaseIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for HelpControllerBaseIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxHelpControllerBase_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for HelpControllerBaseIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
 // wxHyperlinkCtrl
 wx_class! { HyperlinkCtrl =
     HyperlinkCtrlIsOwned<true>(wxHyperlinkCtrl) impl

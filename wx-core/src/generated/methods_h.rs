@@ -149,6 +149,122 @@ pub trait HeaderCtrlSimpleMethods: HeaderCtrlMethods {
     }
 }
 
+// wxHelpControllerBase
+pub trait HelpControllerBaseMethods: ObjectMethods {
+    // DTOR: fn ~wxHelpControllerBase()
+    fn display_block(&self, block_no: c_long) -> bool {
+        unsafe { ffi::wxHelpControllerBase_DisplayBlock(self.as_ptr(), block_no) }
+    }
+    fn display_contents(&self) -> bool {
+        unsafe { ffi::wxHelpControllerBase_DisplayContents(self.as_ptr()) }
+    }
+    fn display_context_popup(&self, context_id: c_int) -> bool {
+        unsafe { ffi::wxHelpControllerBase_DisplayContextPopup(self.as_ptr(), context_id) }
+    }
+    fn display_section_str(&self, section: &str) -> bool {
+        unsafe {
+            let section = WxString::from(section);
+            let section = section.as_ptr();
+            ffi::wxHelpControllerBase_DisplaySection(self.as_ptr(), section)
+        }
+    }
+    fn display_section_int(&self, section_no: c_int) -> bool {
+        unsafe { ffi::wxHelpControllerBase_DisplaySection1(self.as_ptr(), section_no) }
+    }
+    fn display_text_popup<P: PointMethods>(&self, text: &str, pos: &P) -> bool {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let pos = pos.as_ptr();
+            ffi::wxHelpControllerBase_DisplayTextPopup(self.as_ptr(), text, pos)
+        }
+    }
+    fn get_frame_parameters<S: SizeMethods, P: PointMethods>(
+        &self,
+        size: Option<&S>,
+        pos: Option<&P>,
+        new_frame_each_time: *mut c_void,
+    ) -> WeakRef<Frame> {
+        unsafe {
+            let size = match size {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = match pos {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            WeakRef::<Frame>::from(ffi::wxHelpControllerBase_GetFrameParameters(
+                self.as_ptr(),
+                size,
+                pos,
+                new_frame_each_time,
+            ))
+        }
+    }
+    fn get_parent_window(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxHelpControllerBase_GetParentWindow(self.as_ptr())) }
+    }
+    fn initialize(&self, file: &str) -> bool {
+        unsafe {
+            let file = WxString::from(file);
+            let file = file.as_ptr();
+            ffi::wxHelpControllerBase_Initialize(self.as_ptr(), file)
+        }
+    }
+    // NOT_SUPPORTED: fn KeywordSearch()
+    fn load_file(&self, file: &str) -> bool {
+        unsafe {
+            let file = WxString::from(file);
+            let file = file.as_ptr();
+            ffi::wxHelpControllerBase_LoadFile(self.as_ptr(), file)
+        }
+    }
+    fn on_quit(&self) {
+        unsafe { ffi::wxHelpControllerBase_OnQuit(self.as_ptr()) }
+    }
+    fn quit(&self) -> bool {
+        unsafe { ffi::wxHelpControllerBase_Quit(self.as_ptr()) }
+    }
+    fn set_frame_parameters<S: SizeMethods, P: PointMethods>(
+        &self,
+        title_format: &str,
+        size: &S,
+        pos: &P,
+        new_frame_each_time: bool,
+    ) {
+        unsafe {
+            let title_format = WxString::from(title_format);
+            let title_format = title_format.as_ptr();
+            let size = size.as_ptr();
+            let pos = pos.as_ptr();
+            ffi::wxHelpControllerBase_SetFrameParameters(
+                self.as_ptr(),
+                title_format,
+                size,
+                pos,
+                new_frame_each_time,
+            )
+        }
+    }
+    fn set_parent_window<W: WindowMethods>(&self, parent_window: Option<&W>) {
+        unsafe {
+            let parent_window = match parent_window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxHelpControllerBase_SetParentWindow(self.as_ptr(), parent_window)
+        }
+    }
+    fn set_viewer(&self, viewer: &str, flags: c_long) {
+        unsafe {
+            let viewer = WxString::from(viewer);
+            let viewer = viewer.as_ptr();
+            ffi::wxHelpControllerBase_SetViewer(self.as_ptr(), viewer, flags)
+        }
+    }
+}
+
 // wxHyperlinkCtrl
 pub trait HyperlinkCtrlMethods: ControlMethods {
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods>(
