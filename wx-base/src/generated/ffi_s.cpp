@@ -2,6 +2,20 @@
 
 extern "C" {
 
+// CLASS: wxSharedClientDataContainer
+void * wxSharedClientDataContainer_GetClientData(const wxSharedClientDataContainer * self) {
+    return self->GetClientData();
+}
+wxClientData * wxSharedClientDataContainer_GetClientObject(const wxSharedClientDataContainer * self) {
+    return self->GetClientObject();
+}
+void wxSharedClientDataContainer_SetClientData(wxSharedClientDataContainer * self, void * data) {
+    return self->SetClientData(data);
+}
+void wxSharedClientDataContainer_SetClientObject(wxSharedClientDataContainer * self, wxClientData * data) {
+    return self->SetClientObject(data);
+}
+
 // CLASS: wxStandardPaths
 void wxStandardPaths_delete(wxStandardPaths *self) {
     delete self;

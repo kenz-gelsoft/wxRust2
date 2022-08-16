@@ -2,9 +2,85 @@ use super::*;
 
 extern "C" {
 
+    // wxGBPosition
+    pub fn wxGBPosition_delete(self_: *mut c_void);
+    pub fn wxGBPosition_new() -> *mut c_void;
+    pub fn wxGBPosition_new1(row: c_int, col: c_int) -> *mut c_void;
+    pub fn wxGBPosition_GetCol(self_: *const c_void) -> c_int;
+    pub fn wxGBPosition_GetRow(self_: *const c_void) -> c_int;
+    pub fn wxGBPosition_SetCol(self_: *mut c_void, col: c_int);
+    pub fn wxGBPosition_SetRow(self_: *mut c_void, row: c_int);
+    // BLOCKED: pub fn wxGBPosition_operator!=(self_: *const c_void, p: *const c_void) -> bool;
+    // BLOCKED: pub fn wxGBPosition_operator==(self_: *const c_void, p: *const c_void) -> bool;
+
+    // wxGBSizerItem
+    pub fn wxGBSizerItem_CLASSINFO() -> *mut c_void;
+    pub fn wxGBSizerItem_new(
+        width: c_int,
+        height: c_int,
+        pos: *const c_void,
+        span: *const c_void,
+        flag: c_int,
+        border: c_int,
+        user_data: *mut c_void,
+    ) -> *mut c_void;
+    pub fn wxGBSizerItem_new1(
+        window: *mut c_void,
+        pos: *const c_void,
+        span: *const c_void,
+        flag: c_int,
+        border: c_int,
+        user_data: *mut c_void,
+    ) -> *mut c_void;
+    pub fn wxGBSizerItem_new2(
+        sizer: *mut c_void,
+        pos: *const c_void,
+        span: *const c_void,
+        flag: c_int,
+        border: c_int,
+        user_data: *mut c_void,
+    ) -> *mut c_void;
+    pub fn wxGBSizerItem_GetEndPos(self_: *mut c_void, row: *mut c_void, col: *mut c_void);
+    pub fn wxGBSizerItem_GetPos(self_: *const c_void) -> *mut c_void;
+    pub fn wxGBSizerItem_GetPos1(self_: *const c_void, row: *mut c_void, col: *mut c_void);
+    pub fn wxGBSizerItem_GetSpan(self_: *const c_void) -> *mut c_void;
+    pub fn wxGBSizerItem_GetSpan1(self_: *const c_void, rowspan: *mut c_void, colspan: *mut c_void);
+    pub fn wxGBSizerItem_Intersects(self_: *mut c_void, other: *const c_void) -> bool;
+    pub fn wxGBSizerItem_Intersects1(
+        self_: *mut c_void,
+        pos: *const c_void,
+        span: *const c_void,
+    ) -> bool;
+    pub fn wxGBSizerItem_SetPos(self_: *mut c_void, pos: *const c_void) -> bool;
+    pub fn wxGBSizerItem_SetSpan(self_: *mut c_void, span: *const c_void) -> bool;
+    pub fn wxGBSizerItem_GetGBSizer(self_: *const c_void) -> *mut c_void;
+    pub fn wxGBSizerItem_SetGBSizer(self_: *mut c_void, sizer: *mut c_void);
+
+    // wxGBSpan
+    pub fn wxGBSpan_delete(self_: *mut c_void);
+    pub fn wxGBSpan_new() -> *mut c_void;
+    pub fn wxGBSpan_new1(rowspan: c_int, colspan: c_int) -> *mut c_void;
+    pub fn wxGBSpan_GetColspan(self_: *const c_void) -> c_int;
+    pub fn wxGBSpan_GetRowspan(self_: *const c_void) -> c_int;
+    pub fn wxGBSpan_SetColspan(self_: *mut c_void, colspan: c_int);
+    pub fn wxGBSpan_SetRowspan(self_: *mut c_void, rowspan: c_int);
+    // BLOCKED: pub fn wxGBSpan_operator!=(self_: *const c_void, o: *const c_void) -> bool;
+    // BLOCKED: pub fn wxGBSpan_operator==(self_: *const c_void, o: *const c_void) -> bool;
+
     // wxGDIObject
     pub fn wxGDIObject_CLASSINFO() -> *mut c_void;
     // BLOCKED: pub fn wxGDIObject_new() -> *mut c_void;
+
+    // wxGIFHandler
+    pub fn wxGIFHandler_CLASSINFO() -> *mut c_void;
+    pub fn wxGIFHandler_new() -> *mut c_void;
+    pub fn wxGIFHandler_SaveAnimation(
+        self_: *mut c_void,
+        images: *const c_void,
+        stream: *mut c_void,
+        verbose: bool,
+        delay_milli_secs: c_int,
+    ) -> bool;
 
     // wxGauge
     pub fn wxGauge_CLASSINFO() -> *mut c_void;
@@ -37,6 +113,46 @@ extern "C" {
     pub fn wxGauge_Pulse(self_: *mut c_void);
     pub fn wxGauge_SetRange(self_: *mut c_void, range: c_int);
     pub fn wxGauge_SetValue(self_: *mut c_void, pos: c_int);
+
+    // wxGenericAboutDialog
+    pub fn wxGenericAboutDialog_delete(self_: *mut c_void);
+    pub fn wxGenericAboutDialog_new() -> *mut c_void;
+    pub fn wxGenericAboutDialog_new1(info: *const c_void, parent: *mut c_void) -> *mut c_void;
+    pub fn wxGenericAboutDialog_Create(
+        self_: *mut c_void,
+        info: *const c_void,
+        parent: *mut c_void,
+    ) -> bool;
+
+    // wxGenericAnimationCtrl
+    pub fn wxGenericAnimationCtrl_CLASSINFO() -> *mut c_void;
+    pub fn wxGenericAnimationCtrl_new(
+        parent: *mut c_void,
+        id: c_int,
+        anim: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxGenericAnimationCtrl_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        anim: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxGenericAnimationCtrl_DrawCurrentFrame(self_: *mut c_void, dc: *mut c_void);
+    pub fn wxGenericAnimationCtrl_GetBackingStore(self_: *mut c_void) -> *mut c_void;
+    pub fn wxGenericAnimationCtrl_Play(self_: *mut c_void, looped: bool) -> bool;
+    pub fn wxGenericAnimationCtrl_SetUseWindowBackgroundColour(
+        self_: *mut c_void,
+        use_win_background: bool,
+    );
+    pub fn wxGenericAnimationCtrl_IsUsingWindowBackgroundColour(self_: *const c_void) -> bool;
 
     // wxGenericDirCtrl
     pub fn wxGenericDirCtrl_CLASSINFO() -> *mut c_void;
@@ -90,6 +206,831 @@ extern "C" {
     pub fn wxGenericDirCtrl_SelectPaths(self_: *mut c_void, paths: *const c_void);
     pub fn wxGenericDirCtrl_UnselectAll(self_: *mut c_void);
 
+    // wxGenericProgressDialog
+    pub fn wxGenericProgressDialog_CLASSINFO() -> *mut c_void;
+    pub fn wxGenericProgressDialog_new(
+        title: *const c_void,
+        message: *const c_void,
+        maximum: c_int,
+        parent: *mut c_void,
+        style: c_int,
+    ) -> *mut c_void;
+    // DTOR: pub fn wxGenericProgressDialog_~wxGenericProgressDialog(self_: *mut c_void);
+    pub fn wxGenericProgressDialog_GetValue(self_: *const c_void) -> c_int;
+    pub fn wxGenericProgressDialog_GetRange(self_: *const c_void) -> c_int;
+    pub fn wxGenericProgressDialog_GetMessage(self_: *const c_void) -> *mut c_void;
+    pub fn wxGenericProgressDialog_Pulse(
+        self_: *mut c_void,
+        newmsg: *const c_void,
+        skip: *mut c_void,
+    ) -> bool;
+    pub fn wxGenericProgressDialog_Resume(self_: *mut c_void);
+    pub fn wxGenericProgressDialog_SetRange(self_: *mut c_void, maximum: c_int);
+    pub fn wxGenericProgressDialog_WasCancelled(self_: *const c_void) -> bool;
+    pub fn wxGenericProgressDialog_WasSkipped(self_: *const c_void) -> bool;
+    pub fn wxGenericProgressDialog_Update(
+        self_: *mut c_void,
+        value: c_int,
+        newmsg: *const c_void,
+        skip: *mut c_void,
+    ) -> bool;
+
+    // wxGenericValidator
+    pub fn wxGenericValidator_CLASSINFO() -> *mut c_void;
+    pub fn wxGenericValidator_new(validator: *const c_void) -> *mut c_void;
+    pub fn wxGenericValidator_new1(val_ptr: *mut c_void) -> *mut c_void;
+    pub fn wxGenericValidator_new2(val_ptr: *mut c_void) -> *mut c_void;
+    pub fn wxGenericValidator_new3(val_ptr: *mut c_void) -> *mut c_void;
+    pub fn wxGenericValidator_new4(val_ptr: *mut c_void) -> *mut c_void;
+    pub fn wxGenericValidator_new5(val_ptr: *mut c_void) -> *mut c_void;
+    pub fn wxGenericValidator_new6(val_ptr: *mut c_void) -> *mut c_void;
+    pub fn wxGenericValidator_new7(val_ptr: *mut c_void) -> *mut c_void;
+    pub fn wxGenericValidator_new8(val_ptr: *mut c_void) -> *mut c_void;
+    // DTOR: pub fn wxGenericValidator_~wxGenericValidator(self_: *mut c_void);
+
+    // wxGestureEvent
+    pub fn wxGestureEvent_CLASSINFO() -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGestureEvent_new(winid: c_int, type_: wxEventType) -> *mut c_void;
+    pub fn wxGestureEvent_GetPosition(self_: *const c_void) -> *mut c_void;
+    pub fn wxGestureEvent_IsGestureStart(self_: *const c_void) -> bool;
+    pub fn wxGestureEvent_IsGestureEnd(self_: *const c_void) -> bool;
+    pub fn wxGestureEvent_SetPosition(self_: *mut c_void, pos: *const c_void);
+    pub fn wxGestureEvent_SetGestureStart(self_: *mut c_void, is_start: bool);
+    pub fn wxGestureEvent_SetGestureEnd(self_: *mut c_void, is_end: bool);
+
+    // wxGraphicsBrush
+    pub fn wxGraphicsBrush_CLASSINFO() -> *mut c_void;
+
+    // wxGraphicsContext
+    pub fn wxGraphicsContext_CLASSINFO() -> *mut c_void;
+    pub fn wxGraphicsContext_Create(window: *mut c_void) -> *mut c_void;
+    pub fn wxGraphicsContext_Create1(window_dc: *const c_void) -> *mut c_void;
+    pub fn wxGraphicsContext_Create2(memory_dc: *const c_void) -> *mut c_void;
+    pub fn wxGraphicsContext_Create3(printer_dc: *const c_void) -> *mut c_void;
+    pub fn wxGraphicsContext_Create4(meta_file_dc: *const c_void) -> *mut c_void;
+    pub fn wxGraphicsContext_CreateFromUnknownDC(dc: *mut c_void) -> *mut c_void;
+    pub fn wxGraphicsContext_Create5(image: *mut c_void) -> *mut c_void;
+    pub fn wxGraphicsContext_CreateFromNative(context: *mut c_void) -> *mut c_void;
+    pub fn wxGraphicsContext_CreateFromNativeWindow(window: *mut c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_CreateFromNativeHDC(dc: WXHDC) -> *mut c_void;
+    pub fn wxGraphicsContext_Create6() -> *mut c_void;
+    pub fn wxGraphicsContext_ResetClip(self_: *mut c_void);
+    pub fn wxGraphicsContext_Clip(self_: *mut c_void, region: *const c_void);
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_Clip1(self_: *mut c_void, x: wxDouble, y: wxDouble, w: wxDouble, h: wxDouble);
+    pub fn wxGraphicsContext_GetClipBox(
+        self_: *mut c_void,
+        x: *mut c_void,
+        y: *mut c_void,
+        w: *mut c_void,
+        h: *mut c_void,
+    );
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_CreateMatrix(self_: *const c_void, a: wxDouble, b: wxDouble, c: wxDouble, d: wxDouble, tx: wxDouble, ty: wxDouble) -> *mut c_void;
+    pub fn wxGraphicsContext_CreateMatrix1(self_: *const c_void, mat: *const c_void)
+        -> *mut c_void;
+    pub fn wxGraphicsContext_ConcatTransform(self_: *mut c_void, matrix: *const c_void);
+    pub fn wxGraphicsContext_GetTransform(self_: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_Rotate(self_: *mut c_void, angle: wxDouble);
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_Scale(self_: *mut c_void, x_scale: wxDouble, y_scale: wxDouble);
+    pub fn wxGraphicsContext_SetTransform(self_: *mut c_void, matrix: *const c_void);
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_Translate(self_: *mut c_void, dx: wxDouble, dy: wxDouble);
+    pub fn wxGraphicsContext_CreateBrush(self_: *const c_void, brush: *const c_void)
+        -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_CreateLinearGradientBrush(self_: *const c_void, x1: wxDouble, y1: wxDouble, x2: wxDouble, y2: wxDouble, c1: *const c_void, c2: *const c_void, matrix: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_CreateLinearGradientBrush1(self_: *const c_void, x1: wxDouble, y1: wxDouble, x2: wxDouble, y2: wxDouble, stops: *const c_void, matrix: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_CreateRadialGradientBrush(self_: *const c_void, start_x: wxDouble, start_y: wxDouble, end_x: wxDouble, end_y: wxDouble, radius: wxDouble, o_color: *const c_void, c_color: *const c_void, matrix: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_CreateRadialGradientBrush1(self_: *mut c_void, start_x: wxDouble, start_y: wxDouble, end_x: wxDouble, end_y: wxDouble, radius: wxDouble, stops: *const c_void, matrix: *const c_void) -> *mut c_void;
+    pub fn wxGraphicsContext_SetBrush(self_: *mut c_void, brush: *const c_void);
+    pub fn wxGraphicsContext_SetBrush1(self_: *mut c_void, brush: *const c_void);
+    pub fn wxGraphicsContext_CreatePen(self_: *const c_void, pen: *const c_void) -> *mut c_void;
+    pub fn wxGraphicsContext_CreatePen1(self_: *const c_void, info: *const c_void) -> *mut c_void;
+    pub fn wxGraphicsContext_SetPen(self_: *mut c_void, pen: *const c_void);
+    pub fn wxGraphicsContext_SetPen1(self_: *mut c_void, pen: *const c_void);
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawBitmap(self_: *mut c_void, bmp: *const c_void, x: wxDouble, y: wxDouble, w: wxDouble, h: wxDouble);
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawBitmap1(self_: *mut c_void, bmp: *const c_void, x: wxDouble, y: wxDouble, w: wxDouble, h: wxDouble);
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawEllipse(self_: *mut c_void, x: wxDouble, y: wxDouble, w: wxDouble, h: wxDouble);
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawIcon(self_: *mut c_void, icon: *const c_void, x: wxDouble, y: wxDouble, w: wxDouble, h: wxDouble);
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawLines(self_: *mut c_void, n: usize, points: *const c_void, fill_style: wxPolygonFillMode);
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawPath(self_: *mut c_void, path: *const c_void, fill_style: wxPolygonFillMode);
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawRectangle(self_: *mut c_void, x: wxDouble, y: wxDouble, w: wxDouble, h: wxDouble);
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawRoundedRectangle(self_: *mut c_void, x: wxDouble, y: wxDouble, w: wxDouble, h: wxDouble, radius: wxDouble);
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawText(self_: *mut c_void, str: *const c_void, x: wxDouble, y: wxDouble);
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawText1(self_: *mut c_void, str: *const c_void, x: wxDouble, y: wxDouble, angle: wxDouble);
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawText2(self_: *mut c_void, str: *const c_void, x: wxDouble, y: wxDouble, background_brush: *const c_void);
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_DrawText3(self_: *mut c_void, str: *const c_void, x: wxDouble, y: wxDouble, angle: wxDouble, background_brush: *const c_void);
+    pub fn wxGraphicsContext_CreatePath(self_: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_FillPath(self_: *mut c_void, path: *const c_void, fill_style: wxPolygonFillMode);
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_StrokeLine(self_: *mut c_void, x1: wxDouble, y1: wxDouble, x2: wxDouble, y2: wxDouble);
+    pub fn wxGraphicsContext_StrokeLines(
+        self_: *mut c_void,
+        n: usize,
+        begin_points: *const c_void,
+        end_points: *const c_void,
+    );
+    pub fn wxGraphicsContext_StrokeLines1(self_: *mut c_void, n: usize, points: *const c_void);
+    pub fn wxGraphicsContext_StrokePath(self_: *mut c_void, path: *const c_void);
+    pub fn wxGraphicsContext_CreateFont(
+        self_: *const c_void,
+        font: *const c_void,
+        col: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxGraphicsContext_CreateFont1(
+        self_: *const c_void,
+        size_in_pixels: c_double,
+        facename: *const c_void,
+        flags: c_int,
+        col: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxGraphicsContext_SetFont(
+        self_: *mut c_void,
+        font: *const c_void,
+        colour: *const c_void,
+    );
+    pub fn wxGraphicsContext_SetFont1(self_: *mut c_void, font: *const c_void);
+    pub fn wxGraphicsContext_GetPartialTextExtents(
+        self_: *const c_void,
+        text: *const c_void,
+        widths: *mut c_void,
+    );
+    pub fn wxGraphicsContext_GetTextExtent(
+        self_: *const c_void,
+        text: *const c_void,
+        width: *mut c_void,
+        height: *mut c_void,
+        descent: *mut c_void,
+        external_leading: *mut c_void,
+    );
+    pub fn wxGraphicsContext_StartDoc(self_: *mut c_void, message: *const c_void) -> bool;
+    pub fn wxGraphicsContext_EndDoc(self_: *mut c_void);
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_StartPage(self_: *mut c_void, width: wxDouble, height: wxDouble);
+    pub fn wxGraphicsContext_EndPage(self_: *mut c_void);
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_CreateBitmap(self_: *mut c_void, bitmap: *const c_void) -> wxGraphicsBitmap;
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_CreateBitmapFromImage(self_: *mut c_void, image: *const c_void) -> wxGraphicsBitmap;
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_CreateSubBitmap(self_: *mut c_void, bitmap: *const c_void, x: wxDouble, y: wxDouble, w: wxDouble, h: wxDouble) -> wxGraphicsBitmap;
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_BeginLayer(self_: *mut c_void, opacity: wxDouble);
+    pub fn wxGraphicsContext_EndLayer(self_: *mut c_void);
+    pub fn wxGraphicsContext_PushState(self_: *mut c_void);
+    pub fn wxGraphicsContext_PopState(self_: *mut c_void);
+    pub fn wxGraphicsContext_Flush(self_: *mut c_void);
+    pub fn wxGraphicsContext_GetNativeContext(self_: *mut c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_SetAntialiasMode(self_: *mut c_void, antialias: wxAntialiasMode) -> bool;
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_GetAntialiasMode(self_: *const c_void) -> wxAntialiasMode;
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_SetInterpolationQuality(self_: *mut c_void, interpolation: wxInterpolationQuality) -> bool;
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_GetInterpolationQuality(self_: *const c_void) -> wxInterpolationQuality;
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_SetCompositionMode(self_: *mut c_void, op: wxCompositionMode) -> bool;
+    // NOT_SUPPORTED: pub fn wxGraphicsContext_GetCompositionMode(self_: *const c_void) -> wxCompositionMode;
+    pub fn wxGraphicsContext_GetSize(self_: *const c_void, width: *mut c_void, height: *mut c_void);
+    pub fn wxGraphicsContext_GetDPI(self_: *const c_void, dpi_x: *mut c_void, dpi_y: *mut c_void);
+    pub fn wxGraphicsContext_GetWindow(self_: *const c_void) -> *mut c_void;
+    pub fn wxGraphicsContext_ShouldOffset(self_: *const c_void) -> bool;
+    pub fn wxGraphicsContext_EnableOffset(self_: *mut c_void, enable: bool);
+    pub fn wxGraphicsContext_DisableOffset(self_: *mut c_void);
+    pub fn wxGraphicsContext_OffsetEnabled(self_: *const c_void) -> bool;
+    pub fn wxGraphicsContext_FromDIP(self_: *const c_void, sz: *const c_void) -> *mut c_void;
+    pub fn wxGraphicsContext_FromDIP1(self_: *const c_void, pt: *const c_void) -> *mut c_void;
+    pub fn wxGraphicsContext_FromDIP2(self_: *const c_void, d: c_int) -> c_int;
+    pub fn wxGraphicsContext_ToDIP(self_: *const c_void, sz: *const c_void) -> *mut c_void;
+    pub fn wxGraphicsContext_ToDIP1(self_: *const c_void, pt: *const c_void) -> *mut c_void;
+    pub fn wxGraphicsContext_ToDIP2(self_: *const c_void, d: c_int) -> c_int;
+
+    // wxGraphicsFont
+    pub fn wxGraphicsFont_CLASSINFO() -> *mut c_void;
+
+    // wxGraphicsGradientStop
+    pub fn wxGraphicsGradientStop_delete(self_: *mut c_void);
+    // NOT_SUPPORTED: pub fn wxGraphicsGradientStop_new(col: wxColour, pos: float) -> *mut c_void;
+    pub fn wxGraphicsGradientStop_GetColour(self_: *const c_void) -> *mut c_void;
+    pub fn wxGraphicsGradientStop_SetColour(self_: *mut c_void, col: *const c_void);
+    // NOT_SUPPORTED: pub fn wxGraphicsGradientStop_GetPosition(self_: *const c_void) -> float;
+    // NOT_SUPPORTED: pub fn wxGraphicsGradientStop_SetPosition(self_: *mut c_void, pos: float);
+
+    // wxGraphicsGradientStops
+    pub fn wxGraphicsGradientStops_delete(self_: *mut c_void);
+    pub fn wxGraphicsGradientStops_new(start_col: wxColour, end_col: wxColour) -> *mut c_void;
+    pub fn wxGraphicsGradientStops_Add(self_: *mut c_void, stop: *const c_void);
+    // NOT_SUPPORTED: pub fn wxGraphicsGradientStops_Add1(self_: *mut c_void, col: wxColour, pos: float);
+    // NOT_SUPPORTED: pub fn wxGraphicsGradientStops_Item(self_: *const c_void, n: unsigned) -> *mut c_void;
+    pub fn wxGraphicsGradientStops_GetCount(self_: *const c_void) -> usize;
+    pub fn wxGraphicsGradientStops_SetStartColour(self_: *mut c_void, col: wxColour);
+    pub fn wxGraphicsGradientStops_GetStartColour(self_: *const c_void) -> *mut c_void;
+    pub fn wxGraphicsGradientStops_SetEndColour(self_: *mut c_void, col: wxColour);
+    pub fn wxGraphicsGradientStops_GetEndColour(self_: *const c_void) -> *mut c_void;
+
+    // wxGraphicsMatrix
+    pub fn wxGraphicsMatrix_CLASSINFO() -> *mut c_void;
+    pub fn wxGraphicsMatrix_Concat(self_: *mut c_void, t: *const c_void);
+    pub fn wxGraphicsMatrix_Concat1(self_: *mut c_void, t: *const c_void);
+    pub fn wxGraphicsMatrix_Get(
+        self_: *const c_void,
+        a: *mut c_void,
+        b: *mut c_void,
+        c: *mut c_void,
+        d: *mut c_void,
+        tx: *mut c_void,
+        ty: *mut c_void,
+    );
+    pub fn wxGraphicsMatrix_GetNativeMatrix(self_: *const c_void) -> *mut c_void;
+    pub fn wxGraphicsMatrix_Invert(self_: *mut c_void);
+    pub fn wxGraphicsMatrix_IsEqual(self_: *const c_void, t: *const c_void) -> bool;
+    pub fn wxGraphicsMatrix_IsEqual1(self_: *const c_void, t: *const c_void) -> bool;
+    pub fn wxGraphicsMatrix_IsIdentity(self_: *const c_void) -> bool;
+    // NOT_SUPPORTED: pub fn wxGraphicsMatrix_Rotate(self_: *mut c_void, angle: wxDouble);
+    // NOT_SUPPORTED: pub fn wxGraphicsMatrix_Scale(self_: *mut c_void, x_scale: wxDouble, y_scale: wxDouble);
+    // NOT_SUPPORTED: pub fn wxGraphicsMatrix_Set(self_: *mut c_void, a: wxDouble, b: wxDouble, c: wxDouble, d: wxDouble, tx: wxDouble, ty: wxDouble);
+    pub fn wxGraphicsMatrix_TransformDistance(
+        self_: *const c_void,
+        dx: *mut c_void,
+        dy: *mut c_void,
+    );
+    pub fn wxGraphicsMatrix_TransformPoint(self_: *const c_void, x: *mut c_void, y: *mut c_void);
+    // NOT_SUPPORTED: pub fn wxGraphicsMatrix_Translate(self_: *mut c_void, dx: wxDouble, dy: wxDouble);
+
+    // wxGraphicsObject
+    pub fn wxGraphicsObject_CLASSINFO() -> *mut c_void;
+    pub fn wxGraphicsObject_GetRenderer(self_: *const c_void) -> *mut c_void;
+    pub fn wxGraphicsObject_IsNull(self_: *const c_void) -> bool;
+
+    // wxGraphicsPath
+    pub fn wxGraphicsPath_CLASSINFO() -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGraphicsPath_AddArc(self_: *mut c_void, x: wxDouble, y: wxDouble, r: wxDouble, start_angle: wxDouble, end_angle: wxDouble, clockwise: bool);
+    // NOT_SUPPORTED: pub fn wxGraphicsPath_AddArc1(self_: *mut c_void, c: *const c_void, r: wxDouble, start_angle: wxDouble, end_angle: wxDouble, clockwise: bool);
+    // NOT_SUPPORTED: pub fn wxGraphicsPath_AddArcToPoint(self_: *mut c_void, x1: wxDouble, y1: wxDouble, x2: wxDouble, y2: wxDouble, r: wxDouble);
+    // NOT_SUPPORTED: pub fn wxGraphicsPath_AddCircle(self_: *mut c_void, x: wxDouble, y: wxDouble, r: wxDouble);
+    // NOT_SUPPORTED: pub fn wxGraphicsPath_AddCurveToPoint(self_: *mut c_void, cx1: wxDouble, cy1: wxDouble, cx2: wxDouble, cy2: wxDouble, x: wxDouble, y: wxDouble);
+    pub fn wxGraphicsPath_AddCurveToPoint1(
+        self_: *mut c_void,
+        c1: *const c_void,
+        c2: *const c_void,
+        e: *const c_void,
+    );
+    // NOT_SUPPORTED: pub fn wxGraphicsPath_AddEllipse(self_: *mut c_void, x: wxDouble, y: wxDouble, w: wxDouble, h: wxDouble);
+    // NOT_SUPPORTED: pub fn wxGraphicsPath_AddLineToPoint(self_: *mut c_void, x: wxDouble, y: wxDouble);
+    pub fn wxGraphicsPath_AddLineToPoint1(self_: *mut c_void, p: *const c_void);
+    pub fn wxGraphicsPath_AddPath(self_: *mut c_void, path: *const c_void);
+    // NOT_SUPPORTED: pub fn wxGraphicsPath_AddQuadCurveToPoint(self_: *mut c_void, cx: wxDouble, cy: wxDouble, x: wxDouble, y: wxDouble);
+    // NOT_SUPPORTED: pub fn wxGraphicsPath_AddRectangle(self_: *mut c_void, x: wxDouble, y: wxDouble, w: wxDouble, h: wxDouble);
+    // NOT_SUPPORTED: pub fn wxGraphicsPath_AddRoundedRectangle(self_: *mut c_void, x: wxDouble, y: wxDouble, w: wxDouble, h: wxDouble, radius: wxDouble);
+    pub fn wxGraphicsPath_CloseSubpath(self_: *mut c_void);
+    // NOT_SUPPORTED: pub fn wxGraphicsPath_Contains(self_: *const c_void, c: *const c_void, fill_style: wxPolygonFillMode) -> bool;
+    // NOT_SUPPORTED: pub fn wxGraphicsPath_Contains1(self_: *const c_void, x: wxDouble, y: wxDouble, fill_style: wxPolygonFillMode) -> bool;
+    // NOT_SUPPORTED: pub fn wxGraphicsPath_GetBox(self_: *const c_void) -> wxRect2DDouble;
+    pub fn wxGraphicsPath_GetBox1(
+        self_: *const c_void,
+        x: *mut c_void,
+        y: *mut c_void,
+        w: *mut c_void,
+        h: *mut c_void,
+    );
+    pub fn wxGraphicsPath_GetCurrentPoint(self_: *const c_void, x: *mut c_void, y: *mut c_void);
+    // NOT_SUPPORTED: pub fn wxGraphicsPath_GetCurrentPoint1(self_: *const c_void) -> wxPoint2DDouble;
+    pub fn wxGraphicsPath_GetNativePath(self_: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGraphicsPath_MoveToPoint(self_: *mut c_void, x: wxDouble, y: wxDouble);
+    pub fn wxGraphicsPath_MoveToPoint1(self_: *mut c_void, p: *const c_void);
+    pub fn wxGraphicsPath_Transform(self_: *mut c_void, matrix: *const c_void);
+    pub fn wxGraphicsPath_UnGetNativePath(self_: *const c_void, p: *mut c_void);
+
+    // wxGraphicsPen
+    pub fn wxGraphicsPen_CLASSINFO() -> *mut c_void;
+
+    // wxGraphicsRenderer
+    pub fn wxGraphicsRenderer_CLASSINFO() -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGraphicsRenderer_CreateBitmap(self_: *mut c_void, bitmap: *const c_void) -> wxGraphicsBitmap;
+    // NOT_SUPPORTED: pub fn wxGraphicsRenderer_CreateBitmapFromImage(self_: *mut c_void, image: *const c_void) -> wxGraphicsBitmap;
+    // NOT_SUPPORTED: pub fn wxGraphicsRenderer_CreateImageFromBitmap(self_: *mut c_void, bmp: *const c_void) -> wxImage;
+    // NOT_SUPPORTED: pub fn wxGraphicsRenderer_CreateBitmapFromNativeBitmap(self_: *mut c_void, bitmap: *mut c_void) -> wxGraphicsBitmap;
+    pub fn wxGraphicsRenderer_CreateContext(self_: *mut c_void, window: *mut c_void)
+        -> *mut c_void;
+    pub fn wxGraphicsRenderer_CreateContext1(
+        self_: *mut c_void,
+        window_dc: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxGraphicsRenderer_CreateContext2(
+        self_: *mut c_void,
+        memory_dc: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxGraphicsRenderer_CreateContext3(
+        self_: *mut c_void,
+        printer_dc: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxGraphicsRenderer_CreateContext4(
+        self_: *mut c_void,
+        meta_file_dc: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxGraphicsRenderer_CreateContextFromUnknownDC(
+        self_: *mut c_void,
+        dc: *mut c_void,
+    ) -> *mut c_void;
+    pub fn wxGraphicsRenderer_CreateContextFromImage(
+        self_: *mut c_void,
+        image: *mut c_void,
+    ) -> *mut c_void;
+    pub fn wxGraphicsRenderer_CreateBrush(self_: *mut c_void, brush: *const c_void) -> *mut c_void;
+    pub fn wxGraphicsRenderer_CreateContextFromNativeContext(
+        self_: *mut c_void,
+        context: *mut c_void,
+    ) -> *mut c_void;
+    pub fn wxGraphicsRenderer_CreateContextFromNativeWindow(
+        self_: *mut c_void,
+        window: *mut c_void,
+    ) -> *mut c_void;
+    pub fn wxGraphicsRenderer_CreateMeasuringContext(self_: *mut c_void) -> *mut c_void;
+    pub fn wxGraphicsRenderer_CreateFont(
+        self_: *mut c_void,
+        font: *const c_void,
+        col: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxGraphicsRenderer_CreateFont1(
+        self_: *mut c_void,
+        size_in_pixels: c_double,
+        facename: *const c_void,
+        flags: c_int,
+        col: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxGraphicsRenderer_CreateFontAtDPI(
+        self_: *mut c_void,
+        font: *const c_void,
+        dpi: *const c_void,
+        col: *const c_void,
+    ) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGraphicsRenderer_CreateLinearGradientBrush(self_: *mut c_void, x1: wxDouble, y1: wxDouble, x2: wxDouble, y2: wxDouble, stops: *const c_void, matrix: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGraphicsRenderer_CreateMatrix(self_: *mut c_void, a: wxDouble, b: wxDouble, c: wxDouble, d: wxDouble, tx: wxDouble, ty: wxDouble) -> *mut c_void;
+    pub fn wxGraphicsRenderer_CreatePath(self_: *mut c_void) -> *mut c_void;
+    pub fn wxGraphicsRenderer_CreatePen(self_: *mut c_void, info: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGraphicsRenderer_CreateRadialGradientBrush(self_: *mut c_void, start_x: wxDouble, start_y: wxDouble, end_x: wxDouble, end_y: wxDouble, radius: wxDouble, stops: *const c_void, matrix: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGraphicsRenderer_CreateSubBitmap(self_: *mut c_void, bitmap: *const c_void, x: wxDouble, y: wxDouble, w: wxDouble, h: wxDouble) -> wxGraphicsBitmap;
+    pub fn wxGraphicsRenderer_GetName(self_: *const c_void) -> *mut c_void;
+    pub fn wxGraphicsRenderer_GetVersion(
+        self_: *const c_void,
+        major: *mut c_void,
+        minor: *mut c_void,
+        micro: *mut c_void,
+    );
+    // NOT_SUPPORTED: pub fn wxGraphicsRenderer_CreateContextFromNativeHDC(dc: WXHDC) -> *mut c_void;
+    pub fn wxGraphicsRenderer_GetDefaultRenderer() -> *mut c_void;
+    pub fn wxGraphicsRenderer_GetCairoRenderer() -> *mut c_void;
+    pub fn wxGraphicsRenderer_GetGDIPlusRenderer() -> *mut c_void;
+    pub fn wxGraphicsRenderer_GetDirect2DRenderer() -> *mut c_void;
+
+    // wxGridBagSizer
+    pub fn wxGridBagSizer_CLASSINFO() -> *mut c_void;
+    pub fn wxGridBagSizer_new(vgap: c_int, hgap: c_int) -> *mut c_void;
+    pub fn wxGridBagSizer_Add(
+        self_: *mut c_void,
+        window: *mut c_void,
+        pos: *const c_void,
+        span: *const c_void,
+        flag: c_int,
+        border: c_int,
+        user_data: *mut c_void,
+    ) -> *mut c_void;
+    pub fn wxGridBagSizer_Add1(
+        self_: *mut c_void,
+        sizer: *mut c_void,
+        pos: *const c_void,
+        span: *const c_void,
+        flag: c_int,
+        border: c_int,
+        user_data: *mut c_void,
+    ) -> *mut c_void;
+    pub fn wxGridBagSizer_Add2(self_: *mut c_void, item: *mut c_void) -> *mut c_void;
+    pub fn wxGridBagSizer_Add3(
+        self_: *mut c_void,
+        width: c_int,
+        height: c_int,
+        pos: *const c_void,
+        span: *const c_void,
+        flag: c_int,
+        border: c_int,
+        user_data: *mut c_void,
+    ) -> *mut c_void;
+    pub fn wxGridBagSizer_CheckForIntersection(
+        self_: *mut c_void,
+        item: *mut c_void,
+        exclude_item: *mut c_void,
+    ) -> bool;
+    pub fn wxGridBagSizer_CheckForIntersection1(
+        self_: *mut c_void,
+        pos: *const c_void,
+        span: *const c_void,
+        exclude_item: *mut c_void,
+    ) -> bool;
+    pub fn wxGridBagSizer_FindItem(self_: *mut c_void, window: *mut c_void) -> *mut c_void;
+    pub fn wxGridBagSizer_FindItem1(self_: *mut c_void, sizer: *mut c_void) -> *mut c_void;
+    pub fn wxGridBagSizer_FindItemAtPoint(self_: *mut c_void, pt: *const c_void) -> *mut c_void;
+    pub fn wxGridBagSizer_FindItemAtPosition(self_: *mut c_void, pos: *const c_void)
+        -> *mut c_void;
+    pub fn wxGridBagSizer_FindItemWithData(
+        self_: *mut c_void,
+        user_data: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxGridBagSizer_GetCellSize(self_: *const c_void, row: c_int, col: c_int) -> *mut c_void;
+    pub fn wxGridBagSizer_GetEmptyCellSize(self_: *const c_void) -> *mut c_void;
+    pub fn wxGridBagSizer_GetItemPosition(self_: *mut c_void, window: *mut c_void) -> *mut c_void;
+    pub fn wxGridBagSizer_GetItemPosition1(self_: *mut c_void, sizer: *mut c_void) -> *mut c_void;
+    pub fn wxGridBagSizer_GetItemPosition2(self_: *mut c_void, index: usize) -> *mut c_void;
+    pub fn wxGridBagSizer_GetItemSpan(self_: *mut c_void, window: *mut c_void) -> *mut c_void;
+    pub fn wxGridBagSizer_GetItemSpan1(self_: *mut c_void, sizer: *mut c_void) -> *mut c_void;
+    pub fn wxGridBagSizer_GetItemSpan2(self_: *mut c_void, index: usize) -> *mut c_void;
+    pub fn wxGridBagSizer_SetEmptyCellSize(self_: *mut c_void, sz: *const c_void);
+    pub fn wxGridBagSizer_SetItemPosition(
+        self_: *mut c_void,
+        window: *mut c_void,
+        pos: *const c_void,
+    ) -> bool;
+    pub fn wxGridBagSizer_SetItemPosition1(
+        self_: *mut c_void,
+        sizer: *mut c_void,
+        pos: *const c_void,
+    ) -> bool;
+    pub fn wxGridBagSizer_SetItemPosition2(
+        self_: *mut c_void,
+        index: usize,
+        pos: *const c_void,
+    ) -> bool;
+    pub fn wxGridBagSizer_SetItemSpan(
+        self_: *mut c_void,
+        window: *mut c_void,
+        span: *const c_void,
+    ) -> bool;
+    pub fn wxGridBagSizer_SetItemSpan1(
+        self_: *mut c_void,
+        sizer: *mut c_void,
+        span: *const c_void,
+    ) -> bool;
+    pub fn wxGridBagSizer_SetItemSpan2(
+        self_: *mut c_void,
+        index: usize,
+        span: *const c_void,
+    ) -> bool;
+
+    // wxGridCellAttr
+    pub fn wxGridCellAttr_delete(self_: *mut c_void);
+    pub fn wxGridCellAttr_new(attr_default: *mut c_void) -> *mut c_void;
+    pub fn wxGridCellAttr_new1(
+        col_text: *const c_void,
+        col_back: *const c_void,
+        font: *const c_void,
+        h_align: c_int,
+        v_align: c_int,
+    ) -> *mut c_void;
+    pub fn wxGridCellAttr_Clone(self_: *const c_void) -> *mut c_void;
+    pub fn wxGridCellAttr_DecRef(self_: *mut c_void);
+    pub fn wxGridCellAttr_GetAlignment(
+        self_: *const c_void,
+        h_align: *mut c_void,
+        v_align: *mut c_void,
+    );
+    pub fn wxGridCellAttr_GetBackgroundColour(self_: *const c_void) -> *mut c_void;
+    pub fn wxGridCellAttr_GetEditor(
+        self_: *const c_void,
+        grid: *const c_void,
+        row: c_int,
+        col: c_int,
+    ) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGridCellAttr_GetEditorPtr(self_: *const c_void, grid: *const c_void, row: c_int, col: c_int) -> wxGridCellEditorPtr;
+    pub fn wxGridCellAttr_GetFont(self_: *const c_void) -> *mut c_void;
+    pub fn wxGridCellAttr_GetNonDefaultAlignment(
+        self_: *const c_void,
+        h_align: *mut c_void,
+        v_align: *mut c_void,
+    );
+    pub fn wxGridCellAttr_GetRenderer(
+        self_: *const c_void,
+        grid: *const c_void,
+        row: c_int,
+        col: c_int,
+    ) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGridCellAttr_GetRendererPtr(self_: *const c_void, grid: *const c_void, row: c_int, col: c_int) -> wxGridCellRendererPtr;
+    pub fn wxGridCellAttr_GetTextColour(self_: *const c_void) -> *mut c_void;
+    pub fn wxGridCellAttr_HasAlignment(self_: *const c_void) -> bool;
+    pub fn wxGridCellAttr_HasBackgroundColour(self_: *const c_void) -> bool;
+    pub fn wxGridCellAttr_HasEditor(self_: *const c_void) -> bool;
+    pub fn wxGridCellAttr_HasFont(self_: *const c_void) -> bool;
+    pub fn wxGridCellAttr_HasRenderer(self_: *const c_void) -> bool;
+    pub fn wxGridCellAttr_HasTextColour(self_: *const c_void) -> bool;
+    pub fn wxGridCellAttr_IncRef(self_: *mut c_void);
+    pub fn wxGridCellAttr_IsReadOnly(self_: *const c_void) -> bool;
+    pub fn wxGridCellAttr_SetAlignment(self_: *mut c_void, h_align: c_int, v_align: c_int);
+    pub fn wxGridCellAttr_SetBackgroundColour(self_: *mut c_void, col_back: *const c_void);
+    pub fn wxGridCellAttr_SetDefAttr(self_: *mut c_void, def_attr: *mut c_void);
+    pub fn wxGridCellAttr_SetEditor(self_: *mut c_void, editor: *mut c_void);
+    pub fn wxGridCellAttr_SetFont(self_: *mut c_void, font: *const c_void);
+    pub fn wxGridCellAttr_SetReadOnly(self_: *mut c_void, is_read_only: bool);
+    pub fn wxGridCellAttr_SetRenderer(self_: *mut c_void, renderer: *mut c_void);
+    pub fn wxGridCellAttr_SetTextColour(self_: *mut c_void, col_text: *const c_void);
+    pub fn wxGridCellAttr_MergeWith(self_: *mut c_void, mergefrom: *mut c_void);
+    pub fn wxGridCellAttr_SetSize(self_: *mut c_void, num_rows: c_int, num_cols: c_int);
+    pub fn wxGridCellAttr_SetFitMode(self_: *mut c_void, fit_mode: wxGridFitMode);
+    pub fn wxGridCellAttr_SetOverflow(self_: *mut c_void, allow: bool);
+    // NOT_SUPPORTED: pub fn wxGridCellAttr_SetKind(self_: *mut c_void, kind: wxAttrKind);
+    pub fn wxGridCellAttr_HasReadWriteMode(self_: *const c_void) -> bool;
+    pub fn wxGridCellAttr_HasOverflowMode(self_: *const c_void) -> bool;
+    pub fn wxGridCellAttr_HasSize(self_: *const c_void) -> bool;
+    pub fn wxGridCellAttr_GetSize(
+        self_: *const c_void,
+        num_rows: *mut c_void,
+        num_cols: *mut c_void,
+    );
+    pub fn wxGridCellAttr_GetFitMode(self_: *const c_void) -> *mut c_void;
+    pub fn wxGridCellAttr_GetOverflow(self_: *const c_void) -> bool;
+    pub fn wxGridCellAttr_CanOverflow(self_: *const c_void) -> bool;
+    // NOT_SUPPORTED: pub fn wxGridCellAttr_GetKind(self_: *mut c_void) -> wxAttrKind;
+    // Mix-in(s) to wxGridCellAttr
+    pub fn wxGridCellAttr_AsRefCounter(obj: *mut c_void) -> *mut c_void;
+
+    // wxGridCellAutoWrapStringEditor
+    pub fn wxGridCellAutoWrapStringEditor_delete(self_: *mut c_void);
+    pub fn wxGridCellAutoWrapStringEditor_new() -> *mut c_void;
+    // Mix-in(s) to wxGridCellAutoWrapStringEditor
+    pub fn wxGridCellAutoWrapStringEditor_AsRefCounter(obj: *mut c_void) -> *mut c_void;
+
+    // wxGridCellAutoWrapStringRenderer
+    pub fn wxGridCellAutoWrapStringRenderer_delete(self_: *mut c_void);
+    pub fn wxGridCellAutoWrapStringRenderer_new() -> *mut c_void;
+    // Mix-in(s) to wxGridCellAutoWrapStringRenderer
+    pub fn wxGridCellAutoWrapStringRenderer_AsRefCounter(obj: *mut c_void) -> *mut c_void;
+
+    // wxGridCellBoolEditor
+    pub fn wxGridCellBoolEditor_delete(self_: *mut c_void);
+    pub fn wxGridCellBoolEditor_new() -> *mut c_void;
+    pub fn wxGridCellBoolEditor_IsTrueValue(value: *const c_void) -> bool;
+    pub fn wxGridCellBoolEditor_UseStringValues(
+        value_true: *const c_void,
+        value_false: *const c_void,
+    );
+    // Mix-in(s) to wxGridCellBoolEditor
+    pub fn wxGridCellBoolEditor_AsRefCounter(obj: *mut c_void) -> *mut c_void;
+
+    // wxGridCellBoolRenderer
+    pub fn wxGridCellBoolRenderer_delete(self_: *mut c_void);
+    pub fn wxGridCellBoolRenderer_new() -> *mut c_void;
+    // Mix-in(s) to wxGridCellBoolRenderer
+    pub fn wxGridCellBoolRenderer_AsRefCounter(obj: *mut c_void) -> *mut c_void;
+
+    // wxGridCellChoiceEditor
+    pub fn wxGridCellChoiceEditor_delete(self_: *mut c_void);
+    // NOT_SUPPORTED: pub fn wxGridCellChoiceEditor_new(count: usize, choices: wxString, allow_others: bool) -> *mut c_void;
+    pub fn wxGridCellChoiceEditor_new1(choices: *const c_void, allow_others: bool) -> *mut c_void;
+    pub fn wxGridCellChoiceEditor_SetParameters(self_: *mut c_void, params: *const c_void);
+    // Mix-in(s) to wxGridCellChoiceEditor
+    pub fn wxGridCellChoiceEditor_AsRefCounter(obj: *mut c_void) -> *mut c_void;
+
+    // wxGridCellDateEditor
+    pub fn wxGridCellDateEditor_delete(self_: *mut c_void);
+    pub fn wxGridCellDateEditor_new(format: *const c_void) -> *mut c_void;
+    // Mix-in(s) to wxGridCellDateEditor
+    pub fn wxGridCellDateEditor_AsRefCounter(obj: *mut c_void) -> *mut c_void;
+
+    // wxGridCellDateRenderer
+    pub fn wxGridCellDateRenderer_delete(self_: *mut c_void);
+    pub fn wxGridCellDateRenderer_new(outformat: *const c_void) -> *mut c_void;
+    pub fn wxGridCellDateRenderer_SetParameters(self_: *mut c_void, params: *const c_void);
+    // Mix-in(s) to wxGridCellDateRenderer
+    pub fn wxGridCellDateRenderer_AsRefCounter(obj: *mut c_void) -> *mut c_void;
+
+    // wxGridCellDateTimeRenderer
+    pub fn wxGridCellDateTimeRenderer_delete(self_: *mut c_void);
+    pub fn wxGridCellDateTimeRenderer_new(
+        outformat: *const c_void,
+        informat: *const c_void,
+    ) -> *mut c_void;
+    // Mix-in(s) to wxGridCellDateTimeRenderer
+    pub fn wxGridCellDateTimeRenderer_AsRefCounter(obj: *mut c_void) -> *mut c_void;
+
+    // wxGridCellEditor
+    pub fn wxGridCellEditor_delete(self_: *mut c_void);
+    // BLOCKED: pub fn wxGridCellEditor_new() -> *mut c_void;
+    pub fn wxGridCellEditor_BeginEdit(
+        self_: *mut c_void,
+        row: c_int,
+        col: c_int,
+        grid: *mut c_void,
+    );
+    pub fn wxGridCellEditor_Clone(self_: *const c_void) -> *mut c_void;
+    pub fn wxGridCellEditor_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        evt_handler: *mut c_void,
+    );
+    pub fn wxGridCellEditor_Destroy(self_: *mut c_void);
+    pub fn wxGridCellEditor_EndEdit(
+        self_: *mut c_void,
+        row: c_int,
+        col: c_int,
+        grid: *const c_void,
+        oldval: *const c_void,
+        newval: *mut c_void,
+    ) -> bool;
+    pub fn wxGridCellEditor_ApplyEdit(
+        self_: *mut c_void,
+        row: c_int,
+        col: c_int,
+        grid: *mut c_void,
+    );
+    pub fn wxGridCellEditor_HandleReturn(self_: *mut c_void, event: *mut c_void);
+    pub fn wxGridCellEditor_IsCreated(self_: *mut c_void) -> bool;
+    pub fn wxGridCellEditor_PaintBackground(
+        self_: *mut c_void,
+        dc: *mut c_void,
+        rect_cell: *const c_void,
+        attr: *const c_void,
+    );
+    pub fn wxGridCellEditor_Reset(self_: *mut c_void);
+    pub fn wxGridCellEditor_SetSize(self_: *mut c_void, rect: *const c_void);
+    pub fn wxGridCellEditor_Show(self_: *mut c_void, show: bool, attr: *mut c_void);
+    pub fn wxGridCellEditor_StartingClick(self_: *mut c_void);
+    pub fn wxGridCellEditor_StartingKey(self_: *mut c_void, event: *mut c_void);
+    pub fn wxGridCellEditor_IsAcceptedKey(self_: *mut c_void, event: *mut c_void) -> bool;
+    pub fn wxGridCellEditor_GetValue(self_: *const c_void) -> *mut c_void;
+    pub fn wxGridCellEditor_GetWindow(self_: *const c_void) -> *mut c_void;
+    pub fn wxGridCellEditor_SetWindow(self_: *mut c_void, window: *mut c_void);
+    pub fn wxGridCellEditor_GetControl(self_: *mut c_void) -> *mut c_void;
+    pub fn wxGridCellEditor_SetControl(self_: *mut c_void, control: *mut c_void);
+    // NOT_SUPPORTED: pub fn wxGridCellEditor_TryActivate(self_: *mut c_void, row: c_int, col: c_int, grid: *mut c_void, act_source: *const c_void) -> wxGridActivationResult;
+    pub fn wxGridCellEditor_DoActivate(
+        self_: *mut c_void,
+        row: c_int,
+        col: c_int,
+        grid: *mut c_void,
+    );
+    // Mix-in(s) to wxGridCellEditor
+    pub fn wxGridCellEditor_AsRefCounter(obj: *mut c_void) -> *mut c_void;
+
+    // wxGridCellEnumEditor
+    pub fn wxGridCellEnumEditor_delete(self_: *mut c_void);
+    pub fn wxGridCellEnumEditor_new(choices: *const c_void) -> *mut c_void;
+    // Mix-in(s) to wxGridCellEnumEditor
+    pub fn wxGridCellEnumEditor_AsRefCounter(obj: *mut c_void) -> *mut c_void;
+
+    // wxGridCellEnumRenderer
+    pub fn wxGridCellEnumRenderer_delete(self_: *mut c_void);
+    pub fn wxGridCellEnumRenderer_new(choices: *const c_void) -> *mut c_void;
+    pub fn wxGridCellEnumRenderer_SetParameters(self_: *mut c_void, params: *const c_void);
+    // Mix-in(s) to wxGridCellEnumRenderer
+    pub fn wxGridCellEnumRenderer_AsRefCounter(obj: *mut c_void) -> *mut c_void;
+
+    // wxGridCellFloatEditor
+    pub fn wxGridCellFloatEditor_delete(self_: *mut c_void);
+    pub fn wxGridCellFloatEditor_new(width: c_int, precision: c_int, format: c_int) -> *mut c_void;
+    // Mix-in(s) to wxGridCellFloatEditor
+    pub fn wxGridCellFloatEditor_AsRefCounter(obj: *mut c_void) -> *mut c_void;
+
+    // wxGridCellFloatRenderer
+    pub fn wxGridCellFloatRenderer_delete(self_: *mut c_void);
+    pub fn wxGridCellFloatRenderer_new(
+        width: c_int,
+        precision: c_int,
+        format: c_int,
+    ) -> *mut c_void;
+    pub fn wxGridCellFloatRenderer_GetFormat(self_: *const c_void) -> c_int;
+    pub fn wxGridCellFloatRenderer_GetPrecision(self_: *const c_void) -> c_int;
+    pub fn wxGridCellFloatRenderer_GetWidth(self_: *const c_void) -> c_int;
+    pub fn wxGridCellFloatRenderer_SetFormat(self_: *mut c_void, format: c_int);
+    pub fn wxGridCellFloatRenderer_SetParameters(self_: *mut c_void, params: *const c_void);
+    pub fn wxGridCellFloatRenderer_SetPrecision(self_: *mut c_void, precision: c_int);
+    pub fn wxGridCellFloatRenderer_SetWidth(self_: *mut c_void, width: c_int);
+    // Mix-in(s) to wxGridCellFloatRenderer
+    pub fn wxGridCellFloatRenderer_AsRefCounter(obj: *mut c_void) -> *mut c_void;
+
+    // wxGridCellNumberEditor
+    pub fn wxGridCellNumberEditor_delete(self_: *mut c_void);
+    pub fn wxGridCellNumberEditor_new(min: c_int, max: c_int) -> *mut c_void;
+    // Mix-in(s) to wxGridCellNumberEditor
+    pub fn wxGridCellNumberEditor_AsRefCounter(obj: *mut c_void) -> *mut c_void;
+
+    // wxGridCellNumberRenderer
+    pub fn wxGridCellNumberRenderer_delete(self_: *mut c_void);
+    pub fn wxGridCellNumberRenderer_new() -> *mut c_void;
+    // Mix-in(s) to wxGridCellNumberRenderer
+    pub fn wxGridCellNumberRenderer_AsRefCounter(obj: *mut c_void) -> *mut c_void;
+
+    // wxGridCellRenderer
+    pub fn wxGridCellRenderer_delete(self_: *mut c_void);
+    // BLOCKED: pub fn wxGridCellRenderer_new() -> *mut c_void;
+    pub fn wxGridCellRenderer_Clone(self_: *const c_void) -> *mut c_void;
+    pub fn wxGridCellRenderer_Draw(
+        self_: *mut c_void,
+        grid: *mut c_void,
+        attr: *mut c_void,
+        dc: *mut c_void,
+        rect: *const c_void,
+        row: c_int,
+        col: c_int,
+        is_selected: bool,
+    );
+    pub fn wxGridCellRenderer_GetBestSize(
+        self_: *mut c_void,
+        grid: *mut c_void,
+        attr: *mut c_void,
+        dc: *mut c_void,
+        row: c_int,
+        col: c_int,
+    ) -> *mut c_void;
+    pub fn wxGridCellRenderer_GetBestHeight(
+        self_: *mut c_void,
+        grid: *mut c_void,
+        attr: *mut c_void,
+        dc: *mut c_void,
+        row: c_int,
+        col: c_int,
+        width: c_int,
+    ) -> c_int;
+    pub fn wxGridCellRenderer_GetBestWidth(
+        self_: *mut c_void,
+        grid: *mut c_void,
+        attr: *mut c_void,
+        dc: *mut c_void,
+        row: c_int,
+        col: c_int,
+        height: c_int,
+    ) -> c_int;
+    pub fn wxGridCellRenderer_GetMaxBestSize(
+        self_: *mut c_void,
+        grid: *mut c_void,
+        attr: *mut c_void,
+        dc: *mut c_void,
+    ) -> *mut c_void;
+    // Mix-in(s) to wxGridCellRenderer
+    pub fn wxGridCellRenderer_AsRefCounter(obj: *mut c_void) -> *mut c_void;
+
+    // wxGridCellStringRenderer
+    pub fn wxGridCellStringRenderer_delete(self_: *mut c_void);
+    pub fn wxGridCellStringRenderer_new() -> *mut c_void;
+    // Mix-in(s) to wxGridCellStringRenderer
+    pub fn wxGridCellStringRenderer_AsRefCounter(obj: *mut c_void) -> *mut c_void;
+
+    // wxGridCellTextEditor
+    pub fn wxGridCellTextEditor_delete(self_: *mut c_void);
+    pub fn wxGridCellTextEditor_new(max_chars: usize) -> *mut c_void;
+    pub fn wxGridCellTextEditor_SetParameters(self_: *mut c_void, params: *const c_void);
+    pub fn wxGridCellTextEditor_SetValidator(self_: *mut c_void, validator: *const c_void);
+    // Mix-in(s) to wxGridCellTextEditor
+    pub fn wxGridCellTextEditor_AsRefCounter(obj: *mut c_void) -> *mut c_void;
+
+    // wxGridEditorCreatedEvent
+    pub fn wxGridEditorCreatedEvent_CLASSINFO() -> *mut c_void;
+    pub fn wxGridEditorCreatedEvent_new() -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGridEditorCreatedEvent_new1(id: c_int, type_: wxEventType, obj: *mut c_void, row: c_int, col: c_int, ctrl: *mut c_void) -> *mut c_void;
+    pub fn wxGridEditorCreatedEvent_GetCol(self_: *const c_void) -> c_int;
+    pub fn wxGridEditorCreatedEvent_GetControl(self_: *mut c_void) -> *mut c_void;
+    pub fn wxGridEditorCreatedEvent_GetRow(self_: *const c_void) -> c_int;
+    pub fn wxGridEditorCreatedEvent_GetWindow(self_: *const c_void) -> *mut c_void;
+    pub fn wxGridEditorCreatedEvent_SetCol(self_: *mut c_void, col: c_int);
+    pub fn wxGridEditorCreatedEvent_SetControl(self_: *mut c_void, ctrl: *mut c_void);
+    pub fn wxGridEditorCreatedEvent_SetRow(self_: *mut c_void, row: c_int);
+    pub fn wxGridEditorCreatedEvent_SetWindow(self_: *mut c_void, window: *mut c_void);
+
+    // wxGridEvent
+    pub fn wxGridEvent_CLASSINFO() -> *mut c_void;
+    pub fn wxGridEvent_new() -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGridEvent_new1(id: c_int, type_: wxEventType, obj: *mut c_void, row: c_int, col: c_int, x: c_int, y: c_int, sel: bool, kbd: *const c_void) -> *mut c_void;
+    pub fn wxGridEvent_AltDown(self_: *const c_void) -> bool;
+    pub fn wxGridEvent_ControlDown(self_: *const c_void) -> bool;
+    pub fn wxGridEvent_GetCol(self_: *const c_void) -> c_int;
+    pub fn wxGridEvent_GetPosition(self_: *const c_void) -> *mut c_void;
+    pub fn wxGridEvent_GetRow(self_: *const c_void) -> c_int;
+    pub fn wxGridEvent_MetaDown(self_: *const c_void) -> bool;
+    pub fn wxGridEvent_Selecting(self_: *const c_void) -> bool;
+    pub fn wxGridEvent_ShiftDown(self_: *const c_void) -> bool;
+
+    // wxGridFitMode
+    pub fn wxGridFitMode_delete(self_: *mut c_void);
+    pub fn wxGridFitMode_new() -> *mut c_void;
+    pub fn wxGridFitMode_IsSpecified(self_: *const c_void) -> bool;
+    pub fn wxGridFitMode_IsClip(self_: *const c_void) -> bool;
+    pub fn wxGridFitMode_IsOverflow(self_: *const c_void) -> bool;
+    pub fn wxGridFitMode_GetEllipsizeMode(self_: *const c_void) -> c_int;
+    pub fn wxGridFitMode_Clip() -> *mut c_void;
+    pub fn wxGridFitMode_Overflow() -> *mut c_void;
+    pub fn wxGridFitMode_Ellipsize(ellipsize: c_int) -> *mut c_void;
+
+    // wxGridRangeSelectEvent
+    pub fn wxGridRangeSelectEvent_CLASSINFO() -> *mut c_void;
+    pub fn wxGridRangeSelectEvent_new() -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGridRangeSelectEvent_new1(id: c_int, type_: wxEventType, obj: *mut c_void, top_left: *const c_void, bottom_right: *const c_void, sel: bool, kbd: *const c_void) -> *mut c_void;
+    pub fn wxGridRangeSelectEvent_AltDown(self_: *const c_void) -> bool;
+    pub fn wxGridRangeSelectEvent_ControlDown(self_: *const c_void) -> bool;
+    // NOT_SUPPORTED: pub fn wxGridRangeSelectEvent_GetBottomRightCoords(self_: *const c_void) -> wxGridCellCoords;
+    pub fn wxGridRangeSelectEvent_GetBottomRow(self_: *const c_void) -> c_int;
+    pub fn wxGridRangeSelectEvent_GetLeftCol(self_: *const c_void) -> c_int;
+    pub fn wxGridRangeSelectEvent_GetRightCol(self_: *const c_void) -> c_int;
+    // NOT_SUPPORTED: pub fn wxGridRangeSelectEvent_GetTopLeftCoords(self_: *const c_void) -> wxGridCellCoords;
+    pub fn wxGridRangeSelectEvent_GetTopRow(self_: *const c_void) -> c_int;
+    pub fn wxGridRangeSelectEvent_MetaDown(self_: *const c_void) -> bool;
+    pub fn wxGridRangeSelectEvent_Selecting(self_: *const c_void) -> bool;
+    pub fn wxGridRangeSelectEvent_ShiftDown(self_: *const c_void) -> bool;
+
+    // wxGridSizeEvent
+    pub fn wxGridSizeEvent_CLASSINFO() -> *mut c_void;
+    pub fn wxGridSizeEvent_new() -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGridSizeEvent_new1(id: c_int, type_: wxEventType, obj: *mut c_void, row_or_col: c_int, x: c_int, y: c_int, kbd: *const c_void) -> *mut c_void;
+    pub fn wxGridSizeEvent_AltDown(self_: *const c_void) -> bool;
+    pub fn wxGridSizeEvent_ControlDown(self_: *const c_void) -> bool;
+    pub fn wxGridSizeEvent_GetPosition(self_: *const c_void) -> *mut c_void;
+    pub fn wxGridSizeEvent_GetRowOrCol(self_: *const c_void) -> c_int;
+    pub fn wxGridSizeEvent_MetaDown(self_: *const c_void) -> bool;
+    pub fn wxGridSizeEvent_ShiftDown(self_: *const c_void) -> bool;
+
     // wxGridSizer
     pub fn wxGridSizer_CLASSINFO() -> *mut c_void;
     pub fn wxGridSizer_new(cols: c_int, vgap: c_int, hgap: c_int) -> *mut c_void;
@@ -106,5 +1047,96 @@ extern "C" {
     pub fn wxGridSizer_SetHGap(self_: *mut c_void, gap: c_int);
     pub fn wxGridSizer_SetRows(self_: *mut c_void, rows: c_int);
     pub fn wxGridSizer_SetVGap(self_: *mut c_void, gap: c_int);
+
+    // wxGridTableBase
+    pub fn wxGridTableBase_CLASSINFO() -> *mut c_void;
+    pub fn wxGridTableBase_IsEmptyCell(self_: *mut c_void, row: c_int, col: c_int) -> bool;
+    pub fn wxGridTableBase_IsEmpty(self_: *mut c_void, coords: *const c_void) -> bool;
+    pub fn wxGridTableBase_GetValue(self_: *mut c_void, row: c_int, col: c_int) -> *mut c_void;
+    pub fn wxGridTableBase_SetValue(
+        self_: *mut c_void,
+        row: c_int,
+        col: c_int,
+        value: *const c_void,
+    );
+    pub fn wxGridTableBase_GetTypeName(self_: *mut c_void, row: c_int, col: c_int) -> *mut c_void;
+    pub fn wxGridTableBase_CanGetValueAs(
+        self_: *mut c_void,
+        row: c_int,
+        col: c_int,
+        type_name: *const c_void,
+    ) -> bool;
+    pub fn wxGridTableBase_CanSetValueAs(
+        self_: *mut c_void,
+        row: c_int,
+        col: c_int,
+        type_name: *const c_void,
+    ) -> bool;
+    pub fn wxGridTableBase_GetValueAsLong(self_: *mut c_void, row: c_int, col: c_int) -> c_long;
+    pub fn wxGridTableBase_GetValueAsDouble(self_: *mut c_void, row: c_int, col: c_int)
+        -> c_double;
+    pub fn wxGridTableBase_GetValueAsBool(self_: *mut c_void, row: c_int, col: c_int) -> bool;
+    pub fn wxGridTableBase_GetValueAsCustom(
+        self_: *mut c_void,
+        row: c_int,
+        col: c_int,
+        type_name: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxGridTableBase_SetValueAsLong(
+        self_: *mut c_void,
+        row: c_int,
+        col: c_int,
+        value: c_long,
+    );
+    pub fn wxGridTableBase_SetValueAsDouble(
+        self_: *mut c_void,
+        row: c_int,
+        col: c_int,
+        value: c_double,
+    );
+    pub fn wxGridTableBase_SetValueAsBool(self_: *mut c_void, row: c_int, col: c_int, value: bool);
+    pub fn wxGridTableBase_SetValueAsCustom(
+        self_: *mut c_void,
+        row: c_int,
+        col: c_int,
+        type_name: *const c_void,
+        value: *mut c_void,
+    );
+    pub fn wxGridTableBase_SetView(self_: *mut c_void, grid: *mut c_void);
+    pub fn wxGridTableBase_GetView(self_: *const c_void) -> *mut c_void;
+    pub fn wxGridTableBase_Clear(self_: *mut c_void);
+    pub fn wxGridTableBase_InsertRows(self_: *mut c_void, pos: usize, num_rows: usize) -> bool;
+    pub fn wxGridTableBase_AppendRows(self_: *mut c_void, num_rows: usize) -> bool;
+    pub fn wxGridTableBase_DeleteRows(self_: *mut c_void, pos: usize, num_rows: usize) -> bool;
+    pub fn wxGridTableBase_InsertCols(self_: *mut c_void, pos: usize, num_cols: usize) -> bool;
+    pub fn wxGridTableBase_AppendCols(self_: *mut c_void, num_cols: usize) -> bool;
+    pub fn wxGridTableBase_DeleteCols(self_: *mut c_void, pos: usize, num_cols: usize) -> bool;
+    pub fn wxGridTableBase_GetRowLabelValue(self_: *mut c_void, row: c_int) -> *mut c_void;
+    pub fn wxGridTableBase_GetColLabelValue(self_: *mut c_void, col: c_int) -> *mut c_void;
+    pub fn wxGridTableBase_GetCornerLabelValue(self_: *const c_void) -> *mut c_void;
+    pub fn wxGridTableBase_SetRowLabelValue(self_: *mut c_void, row: c_int, label: *const c_void);
+    pub fn wxGridTableBase_SetColLabelValue(self_: *mut c_void, col: c_int, label: *const c_void);
+    // BLOCKED: pub fn wxGridTableBase_SetCornerLabelValue(self_: *mut c_void, None: *const c_void);
+    pub fn wxGridTableBase_SetAttrProvider(self_: *mut c_void, attr_provider: *mut c_void);
+    pub fn wxGridTableBase_GetAttrProvider(self_: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGridTableBase_GetAttr(self_: *mut c_void, row: c_int, col: c_int, kind: wxGridCellAttr::wxAttrKind) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxGridTableBase_GetAttrPtr(self_: *mut c_void, row: c_int, col: c_int, kind: wxGridCellAttr::wxAttrKind) -> wxGridCellAttrPtr;
+    pub fn wxGridTableBase_SetAttr(self_: *mut c_void, attr: *mut c_void, row: c_int, col: c_int);
+    pub fn wxGridTableBase_SetRowAttr(self_: *mut c_void, attr: *mut c_void, row: c_int);
+    pub fn wxGridTableBase_SetColAttr(self_: *mut c_void, attr: *mut c_void, col: c_int);
+    pub fn wxGridTableBase_CanHaveAttributes(self_: *mut c_void) -> bool;
+    pub fn wxGridTableBase_CanMeasureColUsingSameAttr(self_: *const c_void, col: c_int) -> bool;
+    // BLOCKED: pub fn wxGridTableBase_new() -> *mut c_void;
+    // DTOR: pub fn wxGridTableBase_~wxGridTableBase(self_: *mut c_void);
+    pub fn wxGridTableBase_GetNumberRows(self_: *mut c_void) -> c_int;
+    pub fn wxGridTableBase_GetNumberCols(self_: *mut c_void) -> c_int;
+    pub fn wxGridTableBase_GetRowsCount(self_: *const c_void) -> c_int;
+    pub fn wxGridTableBase_GetColsCount(self_: *const c_void) -> c_int;
+
+    // wxGridUpdateLocker
+    pub fn wxGridUpdateLocker_delete(self_: *mut c_void);
+    pub fn wxGridUpdateLocker_new(grid: *mut c_void) -> *mut c_void;
+    // DTOR: pub fn wxGridUpdateLocker_~wxGridUpdateLocker(self_: *mut c_void);
+    pub fn wxGridUpdateLocker_Create(self_: *mut c_void, grid: *mut c_void);
 
 }

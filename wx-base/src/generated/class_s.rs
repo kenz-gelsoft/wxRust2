@@ -2,6 +2,24 @@
 
 use super::*;
 
+// wxSharedClientDataContainer
+wx_class! { SharedClientDataContainer =
+    SharedClientDataContainerIsOwned<true>(wxSharedClientDataContainer) impl
+        SharedClientDataContainerMethods
+}
+impl<const OWNED: bool> SharedClientDataContainerIsOwned<OWNED> {
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for SharedClientDataContainerIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxSharedClientDataContainer_delete(self.0) }
+        }
+    }
+}
+
 // wxStandardPaths
 wx_class! { StandardPaths =
     StandardPathsIsOwned<true>(wxStandardPaths) impl

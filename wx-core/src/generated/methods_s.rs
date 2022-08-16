@@ -208,14 +208,14 @@ pub trait SizerMethods: ObjectMethods {
         &self,
         window: Option<&W>,
         flags: &S,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
             let flags = flags.as_ptr();
-            ffi::wxSizer_Add(self.as_ptr(), window, flags)
+            SizerItem::option_from(ffi::wxSizer_Add(self.as_ptr(), window, flags))
         }
     }
     fn add_window_int<W: WindowMethods, O: ObjectMethods>(
@@ -225,7 +225,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -235,21 +235,28 @@ pub trait SizerMethods: ObjectMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxSizer_Add1(self.as_ptr(), window, proportion, flag, border, user_data)
+            SizerItem::option_from(ffi::wxSizer_Add1(
+                self.as_ptr(),
+                window,
+                proportion,
+                flag,
+                border,
+                user_data,
+            ))
         }
     }
     fn add_sizer_sizerflags<S: SizerMethods, S2: SizerFlagsMethods>(
         &self,
         sizer: Option<&S>,
         flags: &S2,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
             let flags = flags.as_ptr();
-            ffi::wxSizer_Add2(self.as_ptr(), sizer, flags)
+            SizerItem::option_from(ffi::wxSizer_Add2(self.as_ptr(), sizer, flags))
         }
     }
     fn add_sizer_int<S: SizerMethods, O: ObjectMethods>(
@@ -259,7 +266,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -269,7 +276,14 @@ pub trait SizerMethods: ObjectMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxSizer_Add3(self.as_ptr(), sizer, proportion, flag, border, user_data)
+            SizerItem::option_from(ffi::wxSizer_Add3(
+                self.as_ptr(),
+                sizer,
+                proportion,
+                flag,
+                border,
+                user_data,
+            ))
         }
     }
     fn add_int_int<O: ObjectMethods>(
@@ -280,13 +294,13 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let user_data = match user_data {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxSizer_Add4(
+            SizerItem::option_from(ffi::wxSizer_Add4(
                 self.as_ptr(),
                 width,
                 height,
@@ -294,7 +308,7 @@ pub trait SizerMethods: ObjectMethods {
                 flag,
                 border,
                 user_data,
-            )
+            ))
         }
     }
     fn add_int_sizerflags<S: SizerFlagsMethods>(
@@ -302,20 +316,29 @@ pub trait SizerMethods: ObjectMethods {
         width: c_int,
         height: c_int,
         flags: &S,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let flags = flags.as_ptr();
-            ffi::wxSizer_Add5(self.as_ptr(), width, height, flags)
+            SizerItem::option_from(ffi::wxSizer_Add5(self.as_ptr(), width, height, flags))
         }
     }
-    fn add_sizeritem(&self, item: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxSizer_Add6(self.as_ptr(), item) }
+    fn add_sizeritem<S: SizerItemMethods>(
+        &self,
+        item: Option<&S>,
+    ) -> Option<SizerItemIsOwned<false>> {
+        unsafe {
+            let item = match item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            SizerItem::option_from(ffi::wxSizer_Add6(self.as_ptr(), item))
+        }
     }
-    fn add_spacer(&self, size: c_int) -> *mut c_void {
-        unsafe { ffi::wxSizer_AddSpacer(self.as_ptr(), size) }
+    fn add_spacer(&self, size: c_int) -> Option<SizerItemIsOwned<false>> {
+        unsafe { SizerItem::option_from(ffi::wxSizer_AddSpacer(self.as_ptr(), size)) }
     }
-    fn add_stretch_spacer(&self, prop: c_int) -> *mut c_void {
-        unsafe { ffi::wxSizer_AddStretchSpacer(self.as_ptr(), prop) }
+    fn add_stretch_spacer(&self, prop: c_int) -> Option<SizerItemIsOwned<false>> {
+        unsafe { SizerItem::option_from(ffi::wxSizer_AddStretchSpacer(self.as_ptr(), prop)) }
     }
     fn calc_min(&self) -> Size {
         unsafe { Size::from_ptr(ffi::wxSizer_CalcMin(self.as_ptr())) }
@@ -413,29 +436,33 @@ pub trait SizerMethods: ObjectMethods {
         &self,
         window: Option<&W>,
         recursive: bool,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxSizer_GetItem(self.as_ptr(), window, recursive)
+            SizerItem::option_from(ffi::wxSizer_GetItem(self.as_ptr(), window, recursive))
         }
     }
-    fn get_item_sizer<S: SizerMethods>(&self, sizer: Option<&S>, recursive: bool) -> *mut c_void {
+    fn get_item_sizer<S: SizerMethods>(
+        &self,
+        sizer: Option<&S>,
+        recursive: bool,
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxSizer_GetItem1(self.as_ptr(), sizer, recursive)
+            SizerItem::option_from(ffi::wxSizer_GetItem1(self.as_ptr(), sizer, recursive))
         }
     }
-    fn get_item_sz(&self, index: usize) -> *mut c_void {
-        unsafe { ffi::wxSizer_GetItem2(self.as_ptr(), index) }
+    fn get_item_sz(&self, index: usize) -> Option<SizerItemIsOwned<false>> {
+        unsafe { SizerItem::option_from(ffi::wxSizer_GetItem2(self.as_ptr(), index)) }
     }
-    fn get_item_by_id(&self, id: c_int, recursive: bool) -> *mut c_void {
-        unsafe { ffi::wxSizer_GetItemById(self.as_ptr(), id, recursive) }
+    fn get_item_by_id(&self, id: c_int, recursive: bool) -> Option<SizerItemIsOwned<false>> {
+        unsafe { SizerItem::option_from(ffi::wxSizer_GetItemById(self.as_ptr(), id, recursive)) }
     }
     fn get_min_size(&self) -> Size {
         unsafe { Size::from_ptr(ffi::wxSizer_GetMinSize(self.as_ptr())) }
@@ -472,14 +499,14 @@ pub trait SizerMethods: ObjectMethods {
         index: usize,
         window: Option<&W>,
         flags: &S,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
             let flags = flags.as_ptr();
-            ffi::wxSizer_Insert(self.as_ptr(), index, window, flags)
+            SizerItem::option_from(ffi::wxSizer_Insert(self.as_ptr(), index, window, flags))
         }
     }
     fn insert_window_int<W: WindowMethods, O: ObjectMethods>(
@@ -490,7 +517,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -500,7 +527,7 @@ pub trait SizerMethods: ObjectMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxSizer_Insert1(
+            SizerItem::option_from(ffi::wxSizer_Insert1(
                 self.as_ptr(),
                 index,
                 window,
@@ -508,7 +535,7 @@ pub trait SizerMethods: ObjectMethods {
                 flag,
                 border,
                 user_data,
-            )
+            ))
         }
     }
     fn insert_sizer_sizerflags<S: SizerMethods, S2: SizerFlagsMethods>(
@@ -516,14 +543,14 @@ pub trait SizerMethods: ObjectMethods {
         index: usize,
         sizer: Option<&S>,
         flags: &S2,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
             let flags = flags.as_ptr();
-            ffi::wxSizer_Insert2(self.as_ptr(), index, sizer, flags)
+            SizerItem::option_from(ffi::wxSizer_Insert2(self.as_ptr(), index, sizer, flags))
         }
     }
     fn insert_sizer_int<S: SizerMethods, O: ObjectMethods>(
@@ -534,7 +561,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -544,7 +571,7 @@ pub trait SizerMethods: ObjectMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxSizer_Insert3(
+            SizerItem::option_from(ffi::wxSizer_Insert3(
                 self.as_ptr(),
                 index,
                 sizer,
@@ -552,7 +579,7 @@ pub trait SizerMethods: ObjectMethods {
                 flag,
                 border,
                 user_data,
-            )
+            ))
         }
     }
     fn insert_int_int<O: ObjectMethods>(
@@ -564,13 +591,13 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let user_data = match user_data {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxSizer_Insert4(
+            SizerItem::option_from(ffi::wxSizer_Insert4(
                 self.as_ptr(),
                 index,
                 width,
@@ -579,7 +606,7 @@ pub trait SizerMethods: ObjectMethods {
                 flag,
                 border,
                 user_data,
-            )
+            ))
         }
     }
     fn insert_int_sizerflags<S: SizerFlagsMethods>(
@@ -588,20 +615,38 @@ pub trait SizerMethods: ObjectMethods {
         width: c_int,
         height: c_int,
         flags: &S,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let flags = flags.as_ptr();
-            ffi::wxSizer_Insert5(self.as_ptr(), index, width, height, flags)
+            SizerItem::option_from(ffi::wxSizer_Insert5(
+                self.as_ptr(),
+                index,
+                width,
+                height,
+                flags,
+            ))
         }
     }
-    fn insert_sizeritem(&self, index: usize, item: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxSizer_Insert6(self.as_ptr(), index, item) }
+    fn insert_sizeritem<S: SizerItemMethods>(
+        &self,
+        index: usize,
+        item: Option<&S>,
+    ) -> Option<SizerItemIsOwned<false>> {
+        unsafe {
+            let item = match item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            SizerItem::option_from(ffi::wxSizer_Insert6(self.as_ptr(), index, item))
+        }
     }
-    fn insert_spacer(&self, index: usize, size: c_int) -> *mut c_void {
-        unsafe { ffi::wxSizer_InsertSpacer(self.as_ptr(), index, size) }
+    fn insert_spacer(&self, index: usize, size: c_int) -> Option<SizerItemIsOwned<false>> {
+        unsafe { SizerItem::option_from(ffi::wxSizer_InsertSpacer(self.as_ptr(), index, size)) }
     }
-    fn insert_stretch_spacer(&self, index: usize, prop: c_int) -> *mut c_void {
-        unsafe { ffi::wxSizer_InsertStretchSpacer(self.as_ptr(), index, prop) }
+    fn insert_stretch_spacer(&self, index: usize, prop: c_int) -> Option<SizerItemIsOwned<false>> {
+        unsafe {
+            SizerItem::option_from(ffi::wxSizer_InsertStretchSpacer(self.as_ptr(), index, prop))
+        }
     }
     fn is_empty(&self) -> bool {
         unsafe { ffi::wxSizer_IsEmpty(self.as_ptr()) }
@@ -634,14 +679,14 @@ pub trait SizerMethods: ObjectMethods {
         &self,
         window: Option<&W>,
         flags: &S,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
             let flags = flags.as_ptr();
-            ffi::wxSizer_Prepend(self.as_ptr(), window, flags)
+            SizerItem::option_from(ffi::wxSizer_Prepend(self.as_ptr(), window, flags))
         }
     }
     fn prepend_window_int<W: WindowMethods, O: ObjectMethods>(
@@ -651,7 +696,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -661,21 +706,28 @@ pub trait SizerMethods: ObjectMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxSizer_Prepend1(self.as_ptr(), window, proportion, flag, border, user_data)
+            SizerItem::option_from(ffi::wxSizer_Prepend1(
+                self.as_ptr(),
+                window,
+                proportion,
+                flag,
+                border,
+                user_data,
+            ))
         }
     }
     fn prepend_sizer_sizerflags<S: SizerMethods, S2: SizerFlagsMethods>(
         &self,
         sizer: Option<&S>,
         flags: &S2,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
             let flags = flags.as_ptr();
-            ffi::wxSizer_Prepend2(self.as_ptr(), sizer, flags)
+            SizerItem::option_from(ffi::wxSizer_Prepend2(self.as_ptr(), sizer, flags))
         }
     }
     fn prepend_sizer_int<S: SizerMethods, O: ObjectMethods>(
@@ -685,7 +737,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -695,7 +747,14 @@ pub trait SizerMethods: ObjectMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxSizer_Prepend3(self.as_ptr(), sizer, proportion, flag, border, user_data)
+            SizerItem::option_from(ffi::wxSizer_Prepend3(
+                self.as_ptr(),
+                sizer,
+                proportion,
+                flag,
+                border,
+                user_data,
+            ))
         }
     }
     fn prepend_int_int<O: ObjectMethods>(
@@ -706,13 +765,13 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let user_data = match user_data {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ffi::wxSizer_Prepend4(
+            SizerItem::option_from(ffi::wxSizer_Prepend4(
                 self.as_ptr(),
                 width,
                 height,
@@ -720,7 +779,7 @@ pub trait SizerMethods: ObjectMethods {
                 flag,
                 border,
                 user_data,
-            )
+            ))
         }
     }
     fn prepend_int_sizerflags<S: SizerFlagsMethods>(
@@ -728,20 +787,29 @@ pub trait SizerMethods: ObjectMethods {
         width: c_int,
         height: c_int,
         flags: &S,
-    ) -> *mut c_void {
+    ) -> Option<SizerItemIsOwned<false>> {
         unsafe {
             let flags = flags.as_ptr();
-            ffi::wxSizer_Prepend5(self.as_ptr(), width, height, flags)
+            SizerItem::option_from(ffi::wxSizer_Prepend5(self.as_ptr(), width, height, flags))
         }
     }
-    fn prepend_sizeritem(&self, item: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxSizer_Prepend6(self.as_ptr(), item) }
+    fn prepend_sizeritem<S: SizerItemMethods>(
+        &self,
+        item: Option<&S>,
+    ) -> Option<SizerItemIsOwned<false>> {
+        unsafe {
+            let item = match item {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            SizerItem::option_from(ffi::wxSizer_Prepend6(self.as_ptr(), item))
+        }
     }
-    fn prepend_spacer(&self, size: c_int) -> *mut c_void {
-        unsafe { ffi::wxSizer_PrependSpacer(self.as_ptr(), size) }
+    fn prepend_spacer(&self, size: c_int) -> Option<SizerItemIsOwned<false>> {
+        unsafe { SizerItem::option_from(ffi::wxSizer_PrependSpacer(self.as_ptr(), size)) }
     }
-    fn prepend_stretch_spacer(&self, prop: c_int) -> *mut c_void {
-        unsafe { ffi::wxSizer_PrependStretchSpacer(self.as_ptr(), prop) }
+    fn prepend_stretch_spacer(&self, prop: c_int) -> Option<SizerItemIsOwned<false>> {
+        unsafe { SizerItem::option_from(ffi::wxSizer_PrependStretchSpacer(self.as_ptr(), prop)) }
     }
     fn reposition_children<S: SizeMethods>(&self, min_size: &S) {
         unsafe {
@@ -798,8 +866,14 @@ pub trait SizerMethods: ObjectMethods {
             ffi::wxSizer_Replace1(self.as_ptr(), oldsz, newsz, recursive)
         }
     }
-    fn replace_sz(&self, index: usize, newitem: *mut c_void) -> bool {
-        unsafe { ffi::wxSizer_Replace2(self.as_ptr(), index, newitem) }
+    fn replace_sz<S: SizerItemMethods>(&self, index: usize, newitem: Option<&S>) -> bool {
+        unsafe {
+            let newitem = match newitem {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxSizer_Replace2(self.as_ptr(), index, newitem)
+        }
     }
     fn set_dimension_int(&self, x: c_int, y: c_int, width: c_int, height: c_int) {
         unsafe { ffi::wxSizer_SetDimension(self.as_ptr(), x, y, width, height) }
@@ -1061,6 +1135,149 @@ pub trait SizerFlagsMethods: WxRustMethods {
         unsafe { ffi::wxSizerFlags_GetDefaultBorder() }
     }
     // NOT_SUPPORTED: fn GetDefaultBorderFractional()
+}
+
+// wxSizerItem
+pub trait SizerItemMethods: ObjectMethods {
+    // DTOR: fn ~wxSizerItem()
+    fn assign_window<W: WindowMethods>(&self, window: Option<&W>) {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxSizerItem_AssignWindow(self.as_ptr(), window)
+        }
+    }
+    fn assign_sizer<S: SizerMethods>(&self, sizer: Option<&S>) {
+        unsafe {
+            let sizer = match sizer {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxSizerItem_AssignSizer(self.as_ptr(), sizer)
+        }
+    }
+    fn assign_spacer_size<S: SizeMethods>(&self, size: &S) {
+        unsafe {
+            let size = size.as_ptr();
+            ffi::wxSizerItem_AssignSpacer(self.as_ptr(), size)
+        }
+    }
+    fn assign_spacer_int(&self, w: c_int, h: c_int) {
+        unsafe { ffi::wxSizerItem_AssignSpacer1(self.as_ptr(), w, h) }
+    }
+    fn calc_min(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxSizerItem_CalcMin(self.as_ptr())) }
+    }
+    fn delete_windows(&self) {
+        unsafe { ffi::wxSizerItem_DeleteWindows(self.as_ptr()) }
+    }
+    fn detach_sizer(&self) {
+        unsafe { ffi::wxSizerItem_DetachSizer(self.as_ptr()) }
+    }
+    fn get_border(&self) -> c_int {
+        unsafe { ffi::wxSizerItem_GetBorder(self.as_ptr()) }
+    }
+    fn get_flag(&self) -> c_int {
+        unsafe { ffi::wxSizerItem_GetFlag(self.as_ptr()) }
+    }
+    fn get_id(&self) -> c_int {
+        unsafe { ffi::wxSizerItem_GetId(self.as_ptr()) }
+    }
+    fn get_min_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxSizerItem_GetMinSize(self.as_ptr())) }
+    }
+    fn set_min_size_size<S: SizeMethods>(&self, size: &S) {
+        unsafe {
+            let size = size.as_ptr();
+            ffi::wxSizerItem_SetMinSize(self.as_ptr(), size)
+        }
+    }
+    fn set_min_size_int(&self, x: c_int, y: c_int) {
+        unsafe { ffi::wxSizerItem_SetMinSize1(self.as_ptr(), x, y) }
+    }
+    fn get_position(&self) -> Point {
+        unsafe { Point::from_ptr(ffi::wxSizerItem_GetPosition(self.as_ptr())) }
+    }
+    fn get_proportion(&self) -> c_int {
+        unsafe { ffi::wxSizerItem_GetProportion(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetRatio()
+    fn get_rect(&self) -> Rect {
+        unsafe { Rect::from_ptr(ffi::wxSizerItem_GetRect(self.as_ptr())) }
+    }
+    fn get_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxSizerItem_GetSize(self.as_ptr())) }
+    }
+    fn get_sizer(&self) -> Option<SizerIsOwned<false>> {
+        unsafe { Sizer::option_from(ffi::wxSizerItem_GetSizer(self.as_ptr())) }
+    }
+    fn get_spacer(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxSizerItem_GetSpacer(self.as_ptr())) }
+    }
+    fn get_user_data(&self) -> Option<ObjectIsOwned<false>> {
+        unsafe { Object::option_from(ffi::wxSizerItem_GetUserData(self.as_ptr())) }
+    }
+    fn get_window(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxSizerItem_GetWindow(self.as_ptr())) }
+    }
+    fn is_shown(&self) -> bool {
+        unsafe { ffi::wxSizerItem_IsShown(self.as_ptr()) }
+    }
+    fn is_sizer(&self) -> bool {
+        unsafe { ffi::wxSizerItem_IsSizer(self.as_ptr()) }
+    }
+    fn is_spacer(&self) -> bool {
+        unsafe { ffi::wxSizerItem_IsSpacer(self.as_ptr()) }
+    }
+    fn is_window(&self) -> bool {
+        unsafe { ffi::wxSizerItem_IsWindow(self.as_ptr()) }
+    }
+    fn set_border(&self, border: c_int) {
+        unsafe { ffi::wxSizerItem_SetBorder(self.as_ptr(), border) }
+    }
+    fn set_dimension<P: PointMethods, S: SizeMethods>(&self, pos: &P, size: &S) {
+        unsafe {
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            ffi::wxSizerItem_SetDimension(self.as_ptr(), pos, size)
+        }
+    }
+    fn set_flag(&self, flag: c_int) {
+        unsafe { ffi::wxSizerItem_SetFlag(self.as_ptr(), flag) }
+    }
+    fn set_id(&self, id: c_int) {
+        unsafe { ffi::wxSizerItem_SetId(self.as_ptr(), id) }
+    }
+    fn set_init_size(&self, x: c_int, y: c_int) {
+        unsafe { ffi::wxSizerItem_SetInitSize(self.as_ptr(), x, y) }
+    }
+    fn set_proportion(&self, proportion: c_int) {
+        unsafe { ffi::wxSizerItem_SetProportion(self.as_ptr(), proportion) }
+    }
+    fn set_ratio_int(&self, width: c_int, height: c_int) {
+        unsafe { ffi::wxSizerItem_SetRatio(self.as_ptr(), width, height) }
+    }
+    fn set_ratio_size(&self, size: ffi::wxSize) {
+        unsafe { ffi::wxSizerItem_SetRatio1(self.as_ptr(), size) }
+    }
+    // NOT_SUPPORTED: fn SetRatio2()
+    // BLOCKED: fn SetSizer()
+    // BLOCKED: fn SetSpacer()
+    fn set_user_data<O: ObjectMethods>(&self, user_data: Option<&O>) {
+        unsafe {
+            let user_data = match user_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxSizerItem_SetUserData(self.as_ptr(), user_data)
+        }
+    }
+    // BLOCKED: fn SetWindow()
+    fn show(&self, show: bool) {
+        unsafe { ffi::wxSizerItem_Show(self.as_ptr(), show) }
+    }
 }
 
 // wxSlider

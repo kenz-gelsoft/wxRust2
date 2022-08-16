@@ -185,6 +185,49 @@ void wxSizerFlags_DisableConsistencyChecks();
 #endif
 int wxSizerFlags_GetDefaultBorder();
 
+// CLASS: wxSizerItem
+wxClassInfo *wxSizerItem_CLASSINFO();
+wxSizerItem *wxSizerItem_new(int width, int height, int proportion, int flag, int border, wxObject * user_data);
+wxSizerItem *wxSizerItem_new1(wxWindow * window, const wxSizerFlags * flags);
+wxSizerItem *wxSizerItem_new2(wxWindow * window, int proportion, int flag, int border, wxObject * user_data);
+wxSizerItem *wxSizerItem_new3(wxSizer * sizer, const wxSizerFlags * flags);
+wxSizerItem *wxSizerItem_new4(wxSizer * sizer, int proportion, int flag, int border, wxObject * user_data);
+void wxSizerItem_AssignWindow(wxSizerItem * self, wxWindow * window);
+void wxSizerItem_AssignSizer(wxSizerItem * self, wxSizer * sizer);
+void wxSizerItem_AssignSpacer(wxSizerItem * self, const wxSize * size);
+void wxSizerItem_AssignSpacer1(wxSizerItem * self, int w, int h);
+wxSize *wxSizerItem_CalcMin(wxSizerItem * self);
+void wxSizerItem_DeleteWindows(wxSizerItem * self);
+void wxSizerItem_DetachSizer(wxSizerItem * self);
+int wxSizerItem_GetBorder(const wxSizerItem * self);
+int wxSizerItem_GetFlag(const wxSizerItem * self);
+int wxSizerItem_GetId(const wxSizerItem * self);
+wxSize *wxSizerItem_GetMinSize(const wxSizerItem * self);
+void wxSizerItem_SetMinSize(wxSizerItem * self, const wxSize * size);
+void wxSizerItem_SetMinSize1(wxSizerItem * self, int x, int y);
+wxPoint *wxSizerItem_GetPosition(const wxSizerItem * self);
+int wxSizerItem_GetProportion(const wxSizerItem * self);
+wxRect *wxSizerItem_GetRect(wxSizerItem * self);
+wxSize *wxSizerItem_GetSize(const wxSizerItem * self);
+wxSizer * wxSizerItem_GetSizer(const wxSizerItem * self);
+wxSize *wxSizerItem_GetSpacer(const wxSizerItem * self);
+wxObject * wxSizerItem_GetUserData(const wxSizerItem * self);
+wxWindow * wxSizerItem_GetWindow(const wxSizerItem * self);
+bool wxSizerItem_IsShown(const wxSizerItem * self);
+bool wxSizerItem_IsSizer(const wxSizerItem * self);
+bool wxSizerItem_IsSpacer(const wxSizerItem * self);
+bool wxSizerItem_IsWindow(const wxSizerItem * self);
+void wxSizerItem_SetBorder(wxSizerItem * self, int border);
+void wxSizerItem_SetDimension(wxSizerItem * self, const wxPoint * pos, const wxSize * size);
+void wxSizerItem_SetFlag(wxSizerItem * self, int flag);
+void wxSizerItem_SetId(wxSizerItem * self, int id);
+void wxSizerItem_SetInitSize(wxSizerItem * self, int x, int y);
+void wxSizerItem_SetProportion(wxSizerItem * self, int proportion);
+void wxSizerItem_SetRatio(wxSizerItem * self, int width, int height);
+void wxSizerItem_SetRatio1(wxSizerItem * self, wxSize size);
+void wxSizerItem_SetUserData(wxSizerItem * self, wxObject * user_data);
+void wxSizerItem_Show(wxSizerItem * self, bool show);
+
 // CLASS: wxSlider
 wxClassInfo *wxSlider_CLASSINFO();
 wxSlider *wxSlider_new();

@@ -5,8 +5,11 @@ pub trait NonOwnedWindowMethods: WindowMethods {
     fn set_shape_region(&self, region: *const c_void) -> bool {
         unsafe { ffi::wxNonOwnedWindow_SetShape(self.as_ptr(), region) }
     }
-    fn set_shape_graphicspath(&self, path: *const c_void) -> bool {
-        unsafe { ffi::wxNonOwnedWindow_SetShape1(self.as_ptr(), path) }
+    fn set_shape_graphicspath<G: GraphicsPathMethods>(&self, path: &G) -> bool {
+        unsafe {
+            let path = path.as_ptr();
+            ffi::wxNonOwnedWindow_SetShape1(self.as_ptr(), path)
+        }
     }
 }
 

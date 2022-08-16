@@ -1,5 +1,21 @@
 use super::*;
 
+// wxSharedClientDataContainer
+pub trait SharedClientDataContainerMethods: WxRustMethods {
+    fn get_client_data(&self) -> *mut c_void {
+        unsafe { ffi::wxSharedClientDataContainer_GetClientData(self.as_ptr()) }
+    }
+    fn get_client_object(&self) -> *mut c_void {
+        unsafe { ffi::wxSharedClientDataContainer_GetClientObject(self.as_ptr()) }
+    }
+    fn set_client_data(&self, data: *mut c_void) {
+        unsafe { ffi::wxSharedClientDataContainer_SetClientData(self.as_ptr(), data) }
+    }
+    fn set_client_object(&self, data: *mut c_void) {
+        unsafe { ffi::wxSharedClientDataContainer_SetClientObject(self.as_ptr(), data) }
+    }
+}
+
 // wxStandardPaths
 pub trait StandardPathsMethods: WxRustMethods {
     fn dont_ignore_app_sub_dir(&self) {

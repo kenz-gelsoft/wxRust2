@@ -389,6 +389,74 @@ extern "C" {
     pub fn wxSizerFlags_GetDefaultBorder() -> c_int;
     // NOT_SUPPORTED: pub fn wxSizerFlags_GetDefaultBorderFractional() -> float;
 
+    // wxSizerItem
+    pub fn wxSizerItem_CLASSINFO() -> *mut c_void;
+    pub fn wxSizerItem_new(
+        width: c_int,
+        height: c_int,
+        proportion: c_int,
+        flag: c_int,
+        border: c_int,
+        user_data: *mut c_void,
+    ) -> *mut c_void;
+    pub fn wxSizerItem_new1(window: *mut c_void, flags: *const c_void) -> *mut c_void;
+    pub fn wxSizerItem_new2(
+        window: *mut c_void,
+        proportion: c_int,
+        flag: c_int,
+        border: c_int,
+        user_data: *mut c_void,
+    ) -> *mut c_void;
+    pub fn wxSizerItem_new3(sizer: *mut c_void, flags: *const c_void) -> *mut c_void;
+    pub fn wxSizerItem_new4(
+        sizer: *mut c_void,
+        proportion: c_int,
+        flag: c_int,
+        border: c_int,
+        user_data: *mut c_void,
+    ) -> *mut c_void;
+    // DTOR: pub fn wxSizerItem_~wxSizerItem(self_: *mut c_void);
+    pub fn wxSizerItem_AssignWindow(self_: *mut c_void, window: *mut c_void);
+    pub fn wxSizerItem_AssignSizer(self_: *mut c_void, sizer: *mut c_void);
+    pub fn wxSizerItem_AssignSpacer(self_: *mut c_void, size: *const c_void);
+    pub fn wxSizerItem_AssignSpacer1(self_: *mut c_void, w: c_int, h: c_int);
+    pub fn wxSizerItem_CalcMin(self_: *mut c_void) -> *mut c_void;
+    pub fn wxSizerItem_DeleteWindows(self_: *mut c_void);
+    pub fn wxSizerItem_DetachSizer(self_: *mut c_void);
+    pub fn wxSizerItem_GetBorder(self_: *const c_void) -> c_int;
+    pub fn wxSizerItem_GetFlag(self_: *const c_void) -> c_int;
+    pub fn wxSizerItem_GetId(self_: *const c_void) -> c_int;
+    pub fn wxSizerItem_GetMinSize(self_: *const c_void) -> *mut c_void;
+    pub fn wxSizerItem_SetMinSize(self_: *mut c_void, size: *const c_void);
+    pub fn wxSizerItem_SetMinSize1(self_: *mut c_void, x: c_int, y: c_int);
+    pub fn wxSizerItem_GetPosition(self_: *const c_void) -> *mut c_void;
+    pub fn wxSizerItem_GetProportion(self_: *const c_void) -> c_int;
+    // NOT_SUPPORTED: pub fn wxSizerItem_GetRatio(self_: *const c_void) -> float;
+    pub fn wxSizerItem_GetRect(self_: *mut c_void) -> *mut c_void;
+    pub fn wxSizerItem_GetSize(self_: *const c_void) -> *mut c_void;
+    pub fn wxSizerItem_GetSizer(self_: *const c_void) -> *mut c_void;
+    pub fn wxSizerItem_GetSpacer(self_: *const c_void) -> *mut c_void;
+    pub fn wxSizerItem_GetUserData(self_: *const c_void) -> *mut c_void;
+    pub fn wxSizerItem_GetWindow(self_: *const c_void) -> *mut c_void;
+    pub fn wxSizerItem_IsShown(self_: *const c_void) -> bool;
+    pub fn wxSizerItem_IsSizer(self_: *const c_void) -> bool;
+    pub fn wxSizerItem_IsSpacer(self_: *const c_void) -> bool;
+    pub fn wxSizerItem_IsWindow(self_: *const c_void) -> bool;
+    pub fn wxSizerItem_SetBorder(self_: *mut c_void, border: c_int);
+    pub fn wxSizerItem_SetDimension(self_: *mut c_void, pos: *const c_void, size: *const c_void);
+    pub fn wxSizerItem_SetFlag(self_: *mut c_void, flag: c_int);
+    pub fn wxSizerItem_SetId(self_: *mut c_void, id: c_int);
+    pub fn wxSizerItem_SetInitSize(self_: *mut c_void, x: c_int, y: c_int);
+    pub fn wxSizerItem_SetProportion(self_: *mut c_void, proportion: c_int);
+    pub fn wxSizerItem_SetRatio(self_: *mut c_void, width: c_int, height: c_int);
+    pub fn wxSizerItem_SetRatio1(self_: *mut c_void, size: wxSize);
+    // NOT_SUPPORTED: pub fn wxSizerItem_SetRatio2(self_: *mut c_void, ratio: float);
+    // BLOCKED: pub fn wxSizerItem_SetSizer(self_: *mut c_void, sizer: *mut c_void);
+    // BLOCKED: pub fn wxSizerItem_SetSpacer(self_: *mut c_void, size: *const c_void);
+    pub fn wxSizerItem_SetUserData(self_: *mut c_void, user_data: *mut c_void);
+    // BLOCKED: pub fn wxSizerItem_SetWindow(self_: *mut c_void, window: *mut c_void);
+    pub fn wxSizerItem_Show(self_: *mut c_void, show: bool);
+
     // wxSlider
     pub fn wxSlider_CLASSINFO() -> *mut c_void;
     pub fn wxSlider_new() -> *mut c_void;

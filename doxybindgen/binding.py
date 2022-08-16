@@ -436,6 +436,7 @@ class RustMethodBinding:
         params = [p.name for p in params]
         if self_to_insert:
             params.insert(0, self_to_insert)
+        # print(self.__model.name(), params)
         return ', '.join(params)
 
     def _rust_method_name(self, with_overloads):
@@ -598,7 +599,8 @@ class CxxClassBinding:
     
     def _dtor_lines(self, is_cc):
         if (self.__model.manager.is_a(self.__model, 'wxObject') or
-            self.__model.manager.is_a(self.__model, 'wxRefCounter')):
+            self.__model.manager.is_a(self.__model, 'wxRefCounter') or
+            self.__model.manager.is_a(self.__model, 'wxSharedClientDataContainer')):
             return
         signature = 'void %s_delete(%s *self)' % (
             self.__model.name,

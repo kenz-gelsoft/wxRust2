@@ -51,6 +51,78 @@ pub trait IconMethods: GDIObjectMethods {
     // BLOCKED: fn operator=()
 }
 
+// wxImageHandler
+pub trait ImageHandlerMethods: ObjectMethods {
+    // DTOR: fn ~wxImageHandler()
+    fn can_read_inputstream(&self, stream: *mut c_void) -> bool {
+        unsafe { ffi::wxImageHandler_CanRead(self.as_ptr(), stream) }
+    }
+    fn can_read_str(&self, filename: &str) -> bool {
+        unsafe {
+            let filename = WxString::from(filename);
+            let filename = filename.as_ptr();
+            ffi::wxImageHandler_CanRead1(self.as_ptr(), filename)
+        }
+    }
+    fn get_extension(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxImageHandler_GetExtension(self.as_ptr())).into() }
+    }
+    fn get_alt_extensions(&self) -> ArrayStringIsOwned<false> {
+        unsafe { ArrayStringIsOwned::from_ptr(ffi::wxImageHandler_GetAltExtensions(self.as_ptr())) }
+    }
+    fn get_image_count(&self, stream: *mut c_void) -> c_int {
+        unsafe { ffi::wxImageHandler_GetImageCount(self.as_ptr(), stream) }
+    }
+    fn get_mime_type(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxImageHandler_GetMimeType(self.as_ptr())).into() }
+    }
+    fn get_name(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxImageHandler_GetName(self.as_ptr())).into() }
+    }
+    // NOT_SUPPORTED: fn GetType()
+    fn load_file(
+        &self,
+        image: *mut c_void,
+        stream: *mut c_void,
+        verbose: bool,
+        index: c_int,
+    ) -> bool {
+        unsafe { ffi::wxImageHandler_LoadFile(self.as_ptr(), image, stream, verbose, index) }
+    }
+    fn save_file(&self, image: *mut c_void, stream: *mut c_void, verbose: bool) -> bool {
+        unsafe { ffi::wxImageHandler_SaveFile(self.as_ptr(), image, stream, verbose) }
+    }
+    fn set_extension(&self, extension: &str) {
+        unsafe {
+            let extension = WxString::from(extension);
+            let extension = extension.as_ptr();
+            ffi::wxImageHandler_SetExtension(self.as_ptr(), extension)
+        }
+    }
+    fn set_alt_extensions<A: ArrayStringMethods>(&self, extensions: &A) {
+        unsafe {
+            let extensions = extensions.as_ptr();
+            ffi::wxImageHandler_SetAltExtensions(self.as_ptr(), extensions)
+        }
+    }
+    fn set_mime_type(&self, mimetype: &str) {
+        unsafe {
+            let mimetype = WxString::from(mimetype);
+            let mimetype = mimetype.as_ptr();
+            ffi::wxImageHandler_SetMimeType(self.as_ptr(), mimetype)
+        }
+    }
+    fn set_name(&self, name: &str) {
+        unsafe {
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxImageHandler_SetName(self.as_ptr(), name)
+        }
+    }
+    // NOT_SUPPORTED: fn SetType()
+    // NOT_SUPPORTED: fn GetLibraryVersionInfo()
+}
+
 // wxItemContainer
 pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     fn as_item_container(&self) -> *mut c_void;
