@@ -107,6 +107,22 @@ impl<const OWNED: bool> TextEntryMethods for TextCtrlIsOwned<OWNED> {
 }
 
 // wxTextEntry
+wx_class! { TextEntry =
+    TextEntryIsOwned<true>(wxTextEntry) impl
+        TextEntryMethods
+}
+impl<const OWNED: bool> TextEntryIsOwned<OWNED> {
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for TextEntryIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxTextEntry_delete(self.0) }
+        }
+    }
+}
 
 // wxTimePickerCtrl
 wx_class! { TimePickerCtrl =

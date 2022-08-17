@@ -512,7 +512,9 @@ pub trait TextCtrlMethods: ControlMethods {
 
 // wxTextEntry
 pub trait TextEntryMethods: WxRustMethods {
-    fn as_text_entry(&self) -> *mut c_void;
+    fn as_text_entry(&self) -> *mut c_void {
+        unsafe { self.as_ptr() }
+    }
     fn append_text(&self, text: &str) {
         unsafe {
             let text = WxString::from(text);

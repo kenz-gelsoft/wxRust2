@@ -125,7 +125,9 @@ pub trait ImageHandlerMethods: ObjectMethods {
 
 // wxItemContainer
 pub trait ItemContainerMethods: ItemContainerImmutableMethods {
-    fn as_item_container(&self) -> *mut c_void;
+    fn as_item_container(&self) -> *mut c_void {
+        unsafe { self.as_ptr() }
+    }
     fn append_str(&self, item: &str) -> c_int {
         unsafe {
             let item = WxString::from(item);
@@ -334,7 +336,9 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
 
 // wxItemContainerImmutable
 pub trait ItemContainerImmutableMethods: WxRustMethods {
-    fn as_item_container_immutable(&self) -> *mut c_void;
+    fn as_item_container_immutable(&self) -> *mut c_void {
+        unsafe { self.as_ptr() }
+    }
     fn set_selection(&self, n: c_int) {
         unsafe { ffi::wxItemContainerImmutable_SetSelection(self.as_item_container_immutable(), n) }
     }
