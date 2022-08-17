@@ -805,7 +805,7 @@ pub trait GraphicsGradientStopsMethods: WxRustMethods {
 
 // wxGraphicsMatrix
 pub trait GraphicsMatrixMethods: GraphicsObjectMethods {
-    fn concat_graphicsmatrix<G: GraphicsMatrixMethods>(&self, t: Option<&G>) {
+    fn concat<G: GraphicsMatrixMethods>(&self, t: Option<&G>) {
         unsafe {
             let t = match t {
                 Some(r) => r.as_ptr(),
@@ -814,12 +814,7 @@ pub trait GraphicsMatrixMethods: GraphicsObjectMethods {
             ffi::wxGraphicsMatrix_Concat(self.as_ptr(), t)
         }
     }
-    fn concat_graphicsmatrix<G: GraphicsMatrixMethods>(&self, t: &G) {
-        unsafe {
-            let t = t.as_ptr();
-            ffi::wxGraphicsMatrix_Concat1(self.as_ptr(), t)
-        }
-    }
+    // BLOCKED: fn Concat1()
     fn get(
         &self,
         a: *mut c_void,
@@ -837,16 +832,8 @@ pub trait GraphicsMatrixMethods: GraphicsObjectMethods {
     fn invert(&self) {
         unsafe { ffi::wxGraphicsMatrix_Invert(self.as_ptr()) }
     }
-    fn is_equal_graphicsmatrix<G: GraphicsMatrixMethods>(&self, t: Option<&G>) -> bool {
-        unsafe {
-            let t = match t {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxGraphicsMatrix_IsEqual(self.as_ptr(), t)
-        }
-    }
-    fn is_equal_graphicsmatrix<G: GraphicsMatrixMethods>(&self, t: &G) -> bool {
+    // BLOCKED: fn IsEqual()
+    fn is_equal<G: GraphicsMatrixMethods>(&self, t: &G) -> bool {
         unsafe {
             let t = t.as_ptr();
             ffi::wxGraphicsMatrix_IsEqual1(self.as_ptr(), t)

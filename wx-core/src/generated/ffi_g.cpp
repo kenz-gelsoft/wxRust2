@@ -579,9 +579,6 @@ wxClassInfo *wxGraphicsMatrix_CLASSINFO() {
 void wxGraphicsMatrix_Concat(wxGraphicsMatrix * self, const wxGraphicsMatrix * t) {
     return self->Concat(t);
 }
-void wxGraphicsMatrix_Concat1(wxGraphicsMatrix * self, const wxGraphicsMatrix * t) {
-    return self->Concat(*t);
-}
 void wxGraphicsMatrix_Get(const wxGraphicsMatrix * self, wxDouble * a, wxDouble * b, wxDouble * c, wxDouble * d, wxDouble * tx, wxDouble * ty) {
     return self->Get(a, b, c, d, tx, ty);
 }
@@ -590,9 +587,6 @@ void * wxGraphicsMatrix_GetNativeMatrix(const wxGraphicsMatrix * self) {
 }
 void wxGraphicsMatrix_Invert(wxGraphicsMatrix * self) {
     return self->Invert();
-}
-bool wxGraphicsMatrix_IsEqual(const wxGraphicsMatrix * self, const wxGraphicsMatrix * t) {
-    return self->IsEqual(t);
 }
 bool wxGraphicsMatrix_IsEqual1(const wxGraphicsMatrix * self, const wxGraphicsMatrix * t) {
     return self->IsEqual(*t);

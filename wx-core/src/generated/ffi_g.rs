@@ -418,7 +418,7 @@ extern "C" {
     // wxGraphicsMatrix
     pub fn wxGraphicsMatrix_CLASSINFO() -> *mut c_void;
     pub fn wxGraphicsMatrix_Concat(self_: *mut c_void, t: *const c_void);
-    pub fn wxGraphicsMatrix_Concat1(self_: *mut c_void, t: *const c_void);
+    // BLOCKED: pub fn wxGraphicsMatrix_Concat1(self_: *mut c_void, t: *const c_void);
     pub fn wxGraphicsMatrix_Get(
         self_: *const c_void,
         a: *mut c_void,
@@ -430,7 +430,7 @@ extern "C" {
     );
     pub fn wxGraphicsMatrix_GetNativeMatrix(self_: *const c_void) -> *mut c_void;
     pub fn wxGraphicsMatrix_Invert(self_: *mut c_void);
-    pub fn wxGraphicsMatrix_IsEqual(self_: *const c_void, t: *const c_void) -> bool;
+    // BLOCKED: pub fn wxGraphicsMatrix_IsEqual(self_: *const c_void, t: *const c_void) -> bool;
     pub fn wxGraphicsMatrix_IsEqual1(self_: *const c_void, t: *const c_void) -> bool;
     pub fn wxGraphicsMatrix_IsIdentity(self_: *const c_void) -> bool;
     // NOT_SUPPORTED: pub fn wxGraphicsMatrix_Rotate(self_: *mut c_void, angle: wxDouble);

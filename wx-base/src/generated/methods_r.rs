@@ -2,7 +2,9 @@ use super::*;
 
 // wxRefCounter
 pub trait RefCounterMethods: WxRustMethods {
-    fn as_ref_counter(&self) -> *mut c_void;
+    fn as_ref_counter(&self) -> *mut c_void {
+        unsafe { self.as_ptr() }
+    }
     fn dec_ref(&self) {
         unsafe { ffi::wxRefCounter_DecRef(self.as_ref_counter()) }
     }

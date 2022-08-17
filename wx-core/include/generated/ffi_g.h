@@ -233,11 +233,9 @@ wxColour *wxGraphicsGradientStops_GetEndColour(const wxGraphicsGradientStops * s
 // CLASS: wxGraphicsMatrix
 wxClassInfo *wxGraphicsMatrix_CLASSINFO();
 void wxGraphicsMatrix_Concat(wxGraphicsMatrix * self, const wxGraphicsMatrix * t);
-void wxGraphicsMatrix_Concat1(wxGraphicsMatrix * self, const wxGraphicsMatrix * t);
 void wxGraphicsMatrix_Get(const wxGraphicsMatrix * self, wxDouble * a, wxDouble * b, wxDouble * c, wxDouble * d, wxDouble * tx, wxDouble * ty);
 void * wxGraphicsMatrix_GetNativeMatrix(const wxGraphicsMatrix * self);
 void wxGraphicsMatrix_Invert(wxGraphicsMatrix * self);
-bool wxGraphicsMatrix_IsEqual(const wxGraphicsMatrix * self, const wxGraphicsMatrix * t);
 bool wxGraphicsMatrix_IsEqual1(const wxGraphicsMatrix * self, const wxGraphicsMatrix * t);
 bool wxGraphicsMatrix_IsIdentity(const wxGraphicsMatrix * self);
 void wxGraphicsMatrix_TransformDistance(const wxGraphicsMatrix * self, wxDouble * dx, wxDouble * dy);

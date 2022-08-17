@@ -1173,6 +1173,11 @@ blocklist = [
 windows = [
     'Create4',
 ]
+[types.wxGraphicsMatrix]
+blocklist = [
+    'Concat1',
+    'IsEqual',
+]
 [types.wxGraphicsRenderer]
 windows = [
     'CreateContext4',
