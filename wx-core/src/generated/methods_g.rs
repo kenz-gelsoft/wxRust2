@@ -789,15 +789,11 @@ pub trait GraphicsGradientStopsMethods: WxRustMethods {
     fn get_count(&self) -> usize {
         unsafe { ffi::wxGraphicsGradientStops_GetCount(self.as_ptr()) }
     }
-    fn set_start_colour(&self, col: ffi::wxColour) {
-        unsafe { ffi::wxGraphicsGradientStops_SetStartColour(self.as_ptr(), col) }
-    }
+    // BLOCKED: fn SetStartColour()
     fn get_start_colour(&self) -> Colour {
         unsafe { Colour::from_ptr(ffi::wxGraphicsGradientStops_GetStartColour(self.as_ptr())) }
     }
-    fn set_end_colour(&self, col: ffi::wxColour) {
-        unsafe { ffi::wxGraphicsGradientStops_SetEndColour(self.as_ptr(), col) }
-    }
+    // BLOCKED: fn SetEndColour()
     fn get_end_colour(&self) -> Colour {
         unsafe { Colour::from_ptr(ffi::wxGraphicsGradientStops_GetEndColour(self.as_ptr())) }
     }
@@ -1596,9 +1592,7 @@ pub trait GridCellAttrMethods: SharedClientDataContainerMethods {
     fn set_size(&self, num_rows: c_int, num_cols: c_int) {
         unsafe { ffi::wxGridCellAttr_SetSize(self.as_ptr(), num_rows, num_cols) }
     }
-    fn set_fit_mode(&self, fit_mode: ffi::wxGridFitMode) {
-        unsafe { ffi::wxGridCellAttr_SetFitMode(self.as_ptr(), fit_mode) }
-    }
+    // BLOCKED: fn SetFitMode()
     fn set_overflow(&self, allow: bool) {
         unsafe { ffi::wxGridCellAttr_SetOverflow(self.as_ptr(), allow) }
     }

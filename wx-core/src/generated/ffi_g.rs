@@ -405,14 +405,14 @@ extern "C" {
 
     // wxGraphicsGradientStops
     pub fn wxGraphicsGradientStops_delete(self_: *mut c_void);
-    pub fn wxGraphicsGradientStops_new(start_col: wxColour, end_col: wxColour) -> *mut c_void;
+    // BLOCKED: pub fn wxGraphicsGradientStops_new(start_col: wxColour, end_col: wxColour) -> *mut c_void;
     pub fn wxGraphicsGradientStops_Add(self_: *mut c_void, stop: *const c_void);
     // NOT_SUPPORTED: pub fn wxGraphicsGradientStops_Add1(self_: *mut c_void, col: wxColour, pos: float);
     // NOT_SUPPORTED: pub fn wxGraphicsGradientStops_Item(self_: *const c_void, n: unsigned) -> *mut c_void;
     pub fn wxGraphicsGradientStops_GetCount(self_: *const c_void) -> usize;
-    pub fn wxGraphicsGradientStops_SetStartColour(self_: *mut c_void, col: wxColour);
+    // BLOCKED: pub fn wxGraphicsGradientStops_SetStartColour(self_: *mut c_void, col: wxColour);
     pub fn wxGraphicsGradientStops_GetStartColour(self_: *const c_void) -> *mut c_void;
-    pub fn wxGraphicsGradientStops_SetEndColour(self_: *mut c_void, col: wxColour);
+    // BLOCKED: pub fn wxGraphicsGradientStops_SetEndColour(self_: *mut c_void, col: wxColour);
     pub fn wxGraphicsGradientStops_GetEndColour(self_: *const c_void) -> *mut c_void;
 
     // wxGraphicsMatrix
@@ -719,7 +719,7 @@ extern "C" {
     pub fn wxGridCellAttr_SetTextColour(self_: *mut c_void, col_text: *const c_void);
     pub fn wxGridCellAttr_MergeWith(self_: *mut c_void, mergefrom: *mut c_void);
     pub fn wxGridCellAttr_SetSize(self_: *mut c_void, num_rows: c_int, num_cols: c_int);
-    pub fn wxGridCellAttr_SetFitMode(self_: *mut c_void, fit_mode: wxGridFitMode);
+    // BLOCKED: pub fn wxGridCellAttr_SetFitMode(self_: *mut c_void, fit_mode: wxGridFitMode);
     pub fn wxGridCellAttr_SetOverflow(self_: *mut c_void, allow: bool);
     // NOT_SUPPORTED: pub fn wxGridCellAttr_SetKind(self_: *mut c_void, kind: wxAttrKind);
     pub fn wxGridCellAttr_HasReadWriteMode(self_: *const c_void) -> bool;

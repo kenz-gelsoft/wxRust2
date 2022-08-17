@@ -222,12 +222,9 @@ void wxGraphicsGradientStop_SetColour(wxGraphicsGradientStop * self, const wxCol
 
 // CLASS: wxGraphicsGradientStops
 void wxGraphicsGradientStops_delete(wxGraphicsGradientStops *self);
-wxGraphicsGradientStops *wxGraphicsGradientStops_new(wxColour start_col, wxColour end_col);
 void wxGraphicsGradientStops_Add(wxGraphicsGradientStops * self, const wxGraphicsGradientStop * stop);
 size_t wxGraphicsGradientStops_GetCount(const wxGraphicsGradientStops * self);
-void wxGraphicsGradientStops_SetStartColour(wxGraphicsGradientStops * self, wxColour col);
 wxColour *wxGraphicsGradientStops_GetStartColour(const wxGraphicsGradientStops * self);
-void wxGraphicsGradientStops_SetEndColour(wxGraphicsGradientStops * self, wxColour col);
 wxColour *wxGraphicsGradientStops_GetEndColour(const wxGraphicsGradientStops * self);
 
 // CLASS: wxGraphicsMatrix
@@ -351,7 +348,6 @@ void wxGridCellAttr_SetRenderer(wxGridCellAttr * self, wxGridCellRenderer * rend
 void wxGridCellAttr_SetTextColour(wxGridCellAttr * self, const wxColour * col_text);
 void wxGridCellAttr_MergeWith(wxGridCellAttr * self, wxGridCellAttr * mergefrom);
 void wxGridCellAttr_SetSize(wxGridCellAttr * self, int num_rows, int num_cols);
-void wxGridCellAttr_SetFitMode(wxGridCellAttr * self, wxGridFitMode fit_mode);
 void wxGridCellAttr_SetOverflow(wxGridCellAttr * self, bool allow);
 bool wxGridCellAttr_HasReadWriteMode(const wxGridCellAttr * self);
 bool wxGridCellAttr_HasOverflowMode(const wxGridCellAttr * self);

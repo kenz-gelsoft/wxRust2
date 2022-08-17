@@ -599,9 +599,6 @@ void wxSizerItem_SetProportion(wxSizerItem * self, int proportion) {
 void wxSizerItem_SetRatio(wxSizerItem * self, int width, int height) {
     return self->SetRatio(width, height);
 }
-void wxSizerItem_SetRatio1(wxSizerItem * self, wxSize size) {
-    return self->SetRatio(size);
-}
 void wxSizerItem_SetUserData(wxSizerItem * self, wxObject * user_data) {
     return self->SetUserData(user_data);
 }

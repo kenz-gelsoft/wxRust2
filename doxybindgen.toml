@@ -1173,6 +1173,13 @@ blocklist = [
 windows = [
     'Create4',
 ]
+[types.wxGraphicsGradientStops]
+blocklist = [
+    # wx-value type not supported
+    'wxGraphicsGradientStops',
+    'SetEndColour',
+    'SetStartColour',
+]
 [types.wxGraphicsMatrix]
 blocklist = [
     'Concat1',
@@ -1183,6 +1190,11 @@ windows = [
     'CreateContext4',
     'GetDirect2DRenderer',
     'GetGDIPlusRenderer',
+]
+[types.wxGridCellAttr]
+blocklist = [
+    # wx-value type not supported
+    'SetFitMode',
 ]
 [types.wxGridCellEditor]
 blocklist = [
@@ -1427,6 +1439,8 @@ wx31 = [
 ]
 [types.wxSizerItem]
 blocklist = [
+    # wx-value type not supported
+    'SetRatio1',
     # deprecated
     'SetSizer',
     'SetSpacer',

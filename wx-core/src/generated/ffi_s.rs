@@ -449,7 +449,7 @@ extern "C" {
     pub fn wxSizerItem_SetInitSize(self_: *mut c_void, x: c_int, y: c_int);
     pub fn wxSizerItem_SetProportion(self_: *mut c_void, proportion: c_int);
     pub fn wxSizerItem_SetRatio(self_: *mut c_void, width: c_int, height: c_int);
-    pub fn wxSizerItem_SetRatio1(self_: *mut c_void, size: wxSize);
+    // BLOCKED: pub fn wxSizerItem_SetRatio1(self_: *mut c_void, size: wxSize);
     // NOT_SUPPORTED: pub fn wxSizerItem_SetRatio2(self_: *mut c_void, ratio: float);
     // BLOCKED: pub fn wxSizerItem_SetSizer(self_: *mut c_void, sizer: *mut c_void);
     // BLOCKED: pub fn wxSizerItem_SetSpacer(self_: *mut c_void, size: *const c_void);

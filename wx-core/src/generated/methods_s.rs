@@ -1256,12 +1256,10 @@ pub trait SizerItemMethods: ObjectMethods {
     fn set_proportion(&self, proportion: c_int) {
         unsafe { ffi::wxSizerItem_SetProportion(self.as_ptr(), proportion) }
     }
-    fn set_ratio_int(&self, width: c_int, height: c_int) {
+    fn set_ratio(&self, width: c_int, height: c_int) {
         unsafe { ffi::wxSizerItem_SetRatio(self.as_ptr(), width, height) }
     }
-    fn set_ratio_size(&self, size: ffi::wxSize) {
-        unsafe { ffi::wxSizerItem_SetRatio1(self.as_ptr(), size) }
-    }
+    // BLOCKED: fn SetRatio1()
     // NOT_SUPPORTED: fn SetRatio2()
     // BLOCKED: fn SetSizer()
     // BLOCKED: fn SetSpacer()

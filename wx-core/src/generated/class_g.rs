@@ -845,14 +845,7 @@ wx_class! { GraphicsGradientStops =
         GraphicsGradientStopsMethods
 }
 impl<const OWNED: bool> GraphicsGradientStopsIsOwned<OWNED> {
-    pub fn new(
-        start_col: ffi::wxColour,
-        end_col: ffi::wxColour,
-    ) -> GraphicsGradientStopsIsOwned<OWNED> {
-        unsafe {
-            GraphicsGradientStopsIsOwned(ffi::wxGraphicsGradientStops_new(start_col, end_col))
-        }
-    }
+    // BLOCKED: fn wxGraphicsGradientStops()
     pub fn none() -> Option<&'static Self> {
         None
     }

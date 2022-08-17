@@ -224,7 +224,6 @@ void wxSizerItem_SetId(wxSizerItem * self, int id);
 void wxSizerItem_SetInitSize(wxSizerItem * self, int x, int y);
 void wxSizerItem_SetProportion(wxSizerItem * self, int proportion);
 void wxSizerItem_SetRatio(wxSizerItem * self, int width, int height);
-void wxSizerItem_SetRatio1(wxSizerItem * self, wxSize size);
 void wxSizerItem_SetUserData(wxSizerItem * self, wxObject * user_data);
 void wxSizerItem_Show(wxSizerItem * self, bool show);
 
