@@ -157,32 +157,6 @@ bool wxGenericAboutDialog_Create(wxGenericAboutDialog * self, const wxAboutDialo
     return self->Create(*info, parent);
 }
 
-// CLASS: wxGenericAnimationCtrl
-wxClassInfo *wxGenericAnimationCtrl_CLASSINFO() {
-    return wxCLASSINFO(wxGenericAnimationCtrl);
-}
-wxGenericAnimationCtrl *wxGenericAnimationCtrl_new(wxWindow * parent, wxWindowID id, const wxAnimation * anim, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
-    return new wxGenericAnimationCtrl(parent, id, *anim, *pos, *size, style, *name);
-}
-bool wxGenericAnimationCtrl_Create(wxGenericAnimationCtrl * self, wxWindow * parent, wxWindowID id, const wxAnimation * anim, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
-    return self->Create(parent, id, *anim, *pos, *size, style, *name);
-}
-void wxGenericAnimationCtrl_DrawCurrentFrame(wxGenericAnimationCtrl * self, wxDC * dc) {
-    return self->DrawCurrentFrame(*dc);
-}
-wxBitmap * wxGenericAnimationCtrl_GetBackingStore(wxGenericAnimationCtrl * self) {
-    return &(self->GetBackingStore());
-}
-bool wxGenericAnimationCtrl_Play(wxGenericAnimationCtrl * self, bool looped) {
-    return self->Play(looped);
-}
-void wxGenericAnimationCtrl_SetUseWindowBackgroundColour(wxGenericAnimationCtrl * self, bool use_win_background) {
-    return self->SetUseWindowBackgroundColour(use_win_background);
-}
-bool wxGenericAnimationCtrl_IsUsingWindowBackgroundColour(const wxGenericAnimationCtrl * self) {
-    return self->IsUsingWindowBackgroundColour();
-}
-
 // CLASS: wxGenericDirCtrl
 wxClassInfo *wxGenericDirCtrl_CLASSINFO() {
     return wxCLASSINFO(wxGenericDirCtrl);

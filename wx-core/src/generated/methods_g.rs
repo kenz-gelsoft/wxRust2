@@ -195,35 +195,6 @@ pub trait GenericAboutDialogMethods: WxRustMethods {
     }
 }
 
-// wxGenericAnimationCtrl
-pub trait GenericAnimationCtrlMethods: AnimationCtrlMethods {
-    fn draw_current_frame<D: DCMethods>(&self, dc: &D) {
-        unsafe {
-            let dc = dc.as_ptr();
-            ffi::wxGenericAnimationCtrl_DrawCurrentFrame(self.as_ptr(), dc)
-        }
-    }
-    fn get_backing_store(&self) -> BitmapIsOwned<false> {
-        unsafe {
-            BitmapIsOwned::from_ptr(ffi::wxGenericAnimationCtrl_GetBackingStore(self.as_ptr()))
-        }
-    }
-    fn play_bool(&self, looped: bool) -> bool {
-        unsafe { ffi::wxGenericAnimationCtrl_Play(self.as_ptr(), looped) }
-    }
-    fn set_use_window_background_colour(&self, use_win_background: bool) {
-        unsafe {
-            ffi::wxGenericAnimationCtrl_SetUseWindowBackgroundColour(
-                self.as_ptr(),
-                use_win_background,
-            )
-        }
-    }
-    fn is_using_window_background_colour(&self) -> bool {
-        unsafe { ffi::wxGenericAnimationCtrl_IsUsingWindowBackgroundColour(self.as_ptr()) }
-    }
-}
-
 // wxGenericDirCtrl
 pub trait GenericDirCtrlMethods: ControlMethods {
     // DTOR: fn ~wxGenericDirCtrl()

@@ -124,36 +124,6 @@ extern "C" {
         parent: *mut c_void,
     ) -> bool;
 
-    // wxGenericAnimationCtrl
-    pub fn wxGenericAnimationCtrl_CLASSINFO() -> *mut c_void;
-    pub fn wxGenericAnimationCtrl_new(
-        parent: *mut c_void,
-        id: c_int,
-        anim: *const c_void,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> *mut c_void;
-    pub fn wxGenericAnimationCtrl_Create(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        id: c_int,
-        anim: *const c_void,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> bool;
-    pub fn wxGenericAnimationCtrl_DrawCurrentFrame(self_: *mut c_void, dc: *mut c_void);
-    pub fn wxGenericAnimationCtrl_GetBackingStore(self_: *mut c_void) -> *mut c_void;
-    pub fn wxGenericAnimationCtrl_Play(self_: *mut c_void, looped: bool) -> bool;
-    pub fn wxGenericAnimationCtrl_SetUseWindowBackgroundColour(
-        self_: *mut c_void,
-        use_win_background: bool,
-    );
-    pub fn wxGenericAnimationCtrl_IsUsingWindowBackgroundColour(self_: *const c_void) -> bool;
-
     // wxGenericDirCtrl
     pub fn wxGenericDirCtrl_CLASSINFO() -> *mut c_void;
     pub fn wxGenericDirCtrl_new() -> *mut c_void;

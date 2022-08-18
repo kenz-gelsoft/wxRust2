@@ -417,7 +417,7 @@ wxml_files = [
     'wxml/classwx_g_i_f_handler.xml',
     'wxml/classwx_gauge.xml',
     'wxml/classwx_generic_about_dialog.xml',
-    'wxml/classwx_generic_animation_ctrl.xml',
+    # 'wxml/classwx_generic_animation_ctrl.xml', # wxUSE_ANIMATIONCTRL=1 is required
     'wxml/classwx_generic_dir_ctrl.xml',
     'wxml/classwx_generic_progress_dialog.xml',
     'wxml/classwx_generic_validator.xml',

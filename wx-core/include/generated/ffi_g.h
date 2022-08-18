@@ -1,6 +1,5 @@
 #pragma once
 
-#include <wx/animate.h>
 #include <wx/dirctrl.h>
 #include <wx/event.h>
 #include <wx/gauge.h>
@@ -76,16 +75,6 @@ void wxGenericAboutDialog_delete(wxGenericAboutDialog *self);
 wxGenericAboutDialog *wxGenericAboutDialog_new();
 wxGenericAboutDialog *wxGenericAboutDialog_new1(const wxAboutDialogInfo * info, wxWindow * parent);
 bool wxGenericAboutDialog_Create(wxGenericAboutDialog * self, const wxAboutDialogInfo * info, wxWindow * parent);
-
-// CLASS: wxGenericAnimationCtrl
-wxClassInfo *wxGenericAnimationCtrl_CLASSINFO();
-wxGenericAnimationCtrl *wxGenericAnimationCtrl_new(wxWindow * parent, wxWindowID id, const wxAnimation * anim, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-bool wxGenericAnimationCtrl_Create(wxGenericAnimationCtrl * self, wxWindow * parent, wxWindowID id, const wxAnimation * anim, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
-void wxGenericAnimationCtrl_DrawCurrentFrame(wxGenericAnimationCtrl * self, wxDC * dc);
-wxBitmap * wxGenericAnimationCtrl_GetBackingStore(wxGenericAnimationCtrl * self);
-bool wxGenericAnimationCtrl_Play(wxGenericAnimationCtrl * self, bool looped);
-void wxGenericAnimationCtrl_SetUseWindowBackgroundColour(wxGenericAnimationCtrl * self, bool use_win_background);
-bool wxGenericAnimationCtrl_IsUsingWindowBackgroundColour(const wxGenericAnimationCtrl * self);
 
 // CLASS: wxGenericDirCtrl
 wxClassInfo *wxGenericDirCtrl_CLASSINFO();
