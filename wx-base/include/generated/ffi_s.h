@@ -1,15 +1,8 @@
 #pragma once
 
-#include <wx/clntdata.h>
 #include <wx/stdpaths.h>
 
 extern "C" {
-
-// CLASS: wxSharedClientDataContainer
-void * wxSharedClientDataContainer_GetClientData(const wxSharedClientDataContainer * self);
-wxClientData * wxSharedClientDataContainer_GetClientObject(const wxSharedClientDataContainer * self);
-void wxSharedClientDataContainer_SetClientData(wxSharedClientDataContainer * self, void * data);
-void wxSharedClientDataContainer_SetClientObject(wxSharedClientDataContainer * self, wxClientData * data);
 
 // CLASS: wxStandardPaths
 void wxStandardPaths_delete(wxStandardPaths *self);

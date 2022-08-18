@@ -434,25 +434,25 @@ wxml_files = [
     'wxml/classwx_graphics_renderer.xml',
     # 'wxml/classwx_grid.xml', # base class depends template, need special treatment
     'wxml/classwx_grid_bag_sizer.xml',
-    'wxml/classwx_grid_cell_attr.xml',
-    'wxml/classwx_grid_cell_auto_wrap_string_editor.xml',
-    'wxml/classwx_grid_cell_auto_wrap_string_renderer.xml',
-    'wxml/classwx_grid_cell_bool_editor.xml',
-    'wxml/classwx_grid_cell_bool_renderer.xml',
-    'wxml/classwx_grid_cell_choice_editor.xml',
-    'wxml/classwx_grid_cell_date_editor.xml',
-    'wxml/classwx_grid_cell_date_renderer.xml',
-    'wxml/classwx_grid_cell_date_time_renderer.xml',
-    'wxml/classwx_grid_cell_editor.xml',
-    'wxml/classwx_grid_cell_enum_editor.xml',
-    'wxml/classwx_grid_cell_enum_renderer.xml',
-    'wxml/classwx_grid_cell_float_editor.xml',
-    'wxml/classwx_grid_cell_float_renderer.xml',
-    'wxml/classwx_grid_cell_number_editor.xml',
-    'wxml/classwx_grid_cell_number_renderer.xml',
-    'wxml/classwx_grid_cell_renderer.xml',
-    'wxml/classwx_grid_cell_string_renderer.xml',
-    'wxml/classwx_grid_cell_text_editor.xml',
+    # 'wxml/classwx_grid_cell_attr.xml',                      # requires 3.1.7
+    # 'wxml/classwx_grid_cell_auto_wrap_string_editor.xml',   # requires 3.1.7
+    # 'wxml/classwx_grid_cell_auto_wrap_string_renderer.xml', # requires 3.1.7
+    # 'wxml/classwx_grid_cell_bool_editor.xml',               # requires 3.1.7
+    # 'wxml/classwx_grid_cell_bool_renderer.xml',             # requires 3.1.7
+    # 'wxml/classwx_grid_cell_choice_editor.xml',             # requires 3.1.7
+    # 'wxml/classwx_grid_cell_date_editor.xml',               # requires 3.1.7
+    # 'wxml/classwx_grid_cell_date_renderer.xml',             # requires 3.1.7
+    # 'wxml/classwx_grid_cell_date_time_renderer.xml',        # requires 3.1.7
+    # 'wxml/classwx_grid_cell_editor.xml',                    # requires 3.1.7
+    # 'wxml/classwx_grid_cell_enum_editor.xml',               # requires 3.1.7
+    # 'wxml/classwx_grid_cell_enum_renderer.xml',             # requires 3.1.7
+    # 'wxml/classwx_grid_cell_float_editor.xml',              # requires 3.1.7
+    # 'wxml/classwx_grid_cell_float_renderer.xml',            # requires 3.1.7
+    # 'wxml/classwx_grid_cell_number_editor.xml',             # requires 3.1.7
+    # 'wxml/classwx_grid_cell_number_renderer.xml',           # requires 3.1.7
+    # 'wxml/classwx_grid_cell_renderer.xml',                  # requires 3.1.7
+    # 'wxml/classwx_grid_cell_string_renderer.xml',           # requires 3.1.7
+    # 'wxml/classwx_grid_cell_text_editor.xml',               # requires 3.1.7
     'wxml/classwx_grid_editor_created_event.xml',
     'wxml/classwx_grid_event.xml',
     'wxml/classwx_grid_fit_mode.xml',
@@ -490,7 +490,7 @@ wxml_files = [
     'wxml/classwx_renderer_native.xml',
     'wxml/classwx_search_ctrl.xml',
     'wxml/classwx_settable_header_column.xml',
-    'wxml/classwx_shared_client_data_container.xml',
+    # 'wxml/classwx_shared_client_data_container.xml', # requires 3.1.7
     'wxml/classwx_size.xml',
     'wxml/classwx_sizer.xml',
     'wxml/classwx_sizer_flags.xml',

@@ -2,13 +2,6 @@ use super::*;
 
 extern "C" {
 
-    // wxSharedClientDataContainer
-    pub fn wxSharedClientDataContainer_delete(self_: *mut c_void);
-    pub fn wxSharedClientDataContainer_GetClientData(self_: *const c_void) -> *mut c_void;
-    pub fn wxSharedClientDataContainer_GetClientObject(self_: *const c_void) -> *mut c_void;
-    pub fn wxSharedClientDataContainer_SetClientData(self_: *mut c_void, data: *mut c_void);
-    pub fn wxSharedClientDataContainer_SetClientObject(self_: *mut c_void, data: *mut c_void);
-
     // wxStandardPaths
     pub fn wxStandardPaths_delete(self_: *mut c_void);
     pub fn wxStandardPaths_DontIgnoreAppSubDir(self_: *mut c_void);
