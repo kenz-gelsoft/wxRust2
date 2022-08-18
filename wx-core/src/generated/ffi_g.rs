@@ -218,16 +218,6 @@ extern "C" {
     pub fn wxGenericValidator_new8(val_ptr: *mut c_void) -> *mut c_void;
     // DTOR: pub fn wxGenericValidator_~wxGenericValidator(self_: *mut c_void);
 
-    // wxGestureEvent
-    pub fn wxGestureEvent_CLASSINFO() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxGestureEvent_new(winid: c_int, type_: wxEventType) -> *mut c_void;
-    pub fn wxGestureEvent_GetPosition(self_: *const c_void) -> *mut c_void;
-    pub fn wxGestureEvent_IsGestureStart(self_: *const c_void) -> bool;
-    pub fn wxGestureEvent_IsGestureEnd(self_: *const c_void) -> bool;
-    pub fn wxGestureEvent_SetPosition(self_: *mut c_void, pos: *const c_void);
-    pub fn wxGestureEvent_SetGestureStart(self_: *mut c_void, is_start: bool);
-    pub fn wxGestureEvent_SetGestureEnd(self_: *mut c_void, is_end: bool);
-
     // wxGraphicsBrush
     pub fn wxGraphicsBrush_CLASSINFO() -> *mut c_void;
 
@@ -657,17 +647,6 @@ extern "C" {
     pub fn wxGridEvent_MetaDown(self_: *const c_void) -> bool;
     pub fn wxGridEvent_Selecting(self_: *const c_void) -> bool;
     pub fn wxGridEvent_ShiftDown(self_: *const c_void) -> bool;
-
-    // wxGridFitMode
-    pub fn wxGridFitMode_delete(self_: *mut c_void);
-    pub fn wxGridFitMode_new() -> *mut c_void;
-    pub fn wxGridFitMode_IsSpecified(self_: *const c_void) -> bool;
-    pub fn wxGridFitMode_IsClip(self_: *const c_void) -> bool;
-    pub fn wxGridFitMode_IsOverflow(self_: *const c_void) -> bool;
-    pub fn wxGridFitMode_GetEllipsizeMode(self_: *const c_void) -> c_int;
-    pub fn wxGridFitMode_Clip() -> *mut c_void;
-    pub fn wxGridFitMode_Overflow() -> *mut c_void;
-    pub fn wxGridFitMode_Ellipsize(ellipsize: c_int) -> *mut c_void;
 
     // wxGridRangeSelectEvent
     pub fn wxGridRangeSelectEvent_CLASSINFO() -> *mut c_void;

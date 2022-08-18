@@ -1,7 +1,6 @@
 #pragma once
 
 #include <wx/dirctrl.h>
-#include <wx/event.h>
 #include <wx/gauge.h>
 #include <wx/gbsizer.h>
 #include <wx/gdiobj.h>
@@ -129,15 +128,6 @@ wxGenericValidator *wxGenericValidator_new6(wxFileName * val_ptr);
 wxGenericValidator *wxGenericValidator_new7(float * val_ptr);
 wxGenericValidator *wxGenericValidator_new8(double * val_ptr);
 
-// CLASS: wxGestureEvent
-wxClassInfo *wxGestureEvent_CLASSINFO();
-wxPoint *wxGestureEvent_GetPosition(const wxGestureEvent * self);
-bool wxGestureEvent_IsGestureStart(const wxGestureEvent * self);
-bool wxGestureEvent_IsGestureEnd(const wxGestureEvent * self);
-void wxGestureEvent_SetPosition(wxGestureEvent * self, const wxPoint * pos);
-void wxGestureEvent_SetGestureStart(wxGestureEvent * self, bool is_start);
-void wxGestureEvent_SetGestureEnd(wxGestureEvent * self, bool is_end);
-
 // CLASS: wxGraphicsBrush
 wxClassInfo *wxGraphicsBrush_CLASSINFO();
 
@@ -150,14 +140,18 @@ wxGraphicsContext * wxGraphicsContext_Create3(const wxPrinterDC * printer_dc);
 #ifdef __WXMSW__
 wxGraphicsContext * wxGraphicsContext_Create4(const wxEnhMetaFileDC * meta_file_dc);
 #endif
+#if wxCHECK_VERSION(3, 1, 0)
 wxGraphicsContext * wxGraphicsContext_CreateFromUnknownDC(wxDC * dc);
+#endif
 wxGraphicsContext * wxGraphicsContext_Create5(wxImage * image);
 wxGraphicsContext * wxGraphicsContext_CreateFromNative(void * context);
 wxGraphicsContext * wxGraphicsContext_CreateFromNativeWindow(void * window);
 wxGraphicsContext * wxGraphicsContext_Create6();
 void wxGraphicsContext_ResetClip(wxGraphicsContext * self);
 void wxGraphicsContext_Clip(wxGraphicsContext * self, const wxRegion * region);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxGraphicsContext_GetClipBox(wxGraphicsContext * self, wxDouble * x, wxDouble * y, wxDouble * w, wxDouble * h);
+#endif
 wxGraphicsMatrix *wxGraphicsContext_CreateMatrix1(const wxGraphicsContext * self, const wxAffineMatrix2DBase * mat);
 void wxGraphicsContext_ConcatTransform(wxGraphicsContext * self, const wxGraphicsMatrix * matrix);
 wxGraphicsMatrix *wxGraphicsContext_GetTransform(const wxGraphicsContext * self);
@@ -166,7 +160,9 @@ wxGraphicsBrush *wxGraphicsContext_CreateBrush(const wxGraphicsContext * self, c
 void wxGraphicsContext_SetBrush(wxGraphicsContext * self, const wxBrush * brush);
 void wxGraphicsContext_SetBrush1(wxGraphicsContext * self, const wxGraphicsBrush * brush);
 wxGraphicsPen *wxGraphicsContext_CreatePen(const wxGraphicsContext * self, const wxPen * pen);
+#if wxCHECK_VERSION(3, 1, 0)
 wxGraphicsPen *wxGraphicsContext_CreatePen1(const wxGraphicsContext * self, const wxGraphicsPenInfo * info);
+#endif
 void wxGraphicsContext_SetPen(wxGraphicsContext * self, const wxPen * pen);
 void wxGraphicsContext_SetPen1(wxGraphicsContext * self, const wxGraphicsPen * pen);
 wxGraphicsPath *wxGraphicsContext_CreatePath(const wxGraphicsContext * self);
@@ -188,18 +184,24 @@ void wxGraphicsContext_PopState(wxGraphicsContext * self);
 void wxGraphicsContext_Flush(wxGraphicsContext * self);
 void * wxGraphicsContext_GetNativeContext(wxGraphicsContext * self);
 void wxGraphicsContext_GetSize(const wxGraphicsContext * self, wxDouble * width, wxDouble * height);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxGraphicsContext_GetDPI(const wxGraphicsContext * self, wxDouble * dpi_x, wxDouble * dpi_y);
 wxWindow * wxGraphicsContext_GetWindow(const wxGraphicsContext * self);
+#endif
 bool wxGraphicsContext_ShouldOffset(const wxGraphicsContext * self);
 void wxGraphicsContext_EnableOffset(wxGraphicsContext * self, bool enable);
 void wxGraphicsContext_DisableOffset(wxGraphicsContext * self);
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxGraphicsContext_OffsetEnabled(const wxGraphicsContext * self);
+#endif
+#if wxCHECK_VERSION(3, 1, 7)
 wxSize *wxGraphicsContext_FromDIP(const wxGraphicsContext * self, const wxSize * sz);
 wxPoint *wxGraphicsContext_FromDIP1(const wxGraphicsContext * self, const wxPoint * pt);
 int wxGraphicsContext_FromDIP2(const wxGraphicsContext * self, int d);
 wxSize *wxGraphicsContext_ToDIP(const wxGraphicsContext * self, const wxSize * sz);
 wxPoint *wxGraphicsContext_ToDIP1(const wxGraphicsContext * self, const wxPoint * pt);
 int wxGraphicsContext_ToDIP2(const wxGraphicsContext * self, int d);
+#endif
 
 // CLASS: wxGraphicsFont
 wxClassInfo *wxGraphicsFont_CLASSINFO();
@@ -267,9 +269,11 @@ wxGraphicsFont *wxGraphicsRenderer_CreateFont(wxGraphicsRenderer * self, const w
 wxGraphicsFont *wxGraphicsRenderer_CreateFont1(wxGraphicsRenderer * self, double size_in_pixels, const wxString * facename, int flags, const wxColour * col);
 wxGraphicsFont *wxGraphicsRenderer_CreateFontAtDPI(wxGraphicsRenderer * self, const wxFont * font, const wxRealPoint * dpi, const wxColour * col);
 wxGraphicsPath *wxGraphicsRenderer_CreatePath(wxGraphicsRenderer * self);
+#if wxCHECK_VERSION(3, 1, 0)
 wxGraphicsPen *wxGraphicsRenderer_CreatePen(wxGraphicsRenderer * self, const wxGraphicsPenInfo * info);
 wxString *wxGraphicsRenderer_GetName(const wxGraphicsRenderer * self);
 void wxGraphicsRenderer_GetVersion(const wxGraphicsRenderer * self, int * major, int * minor, int * micro);
+#endif
 wxGraphicsRenderer * wxGraphicsRenderer_GetDefaultRenderer();
 wxGraphicsRenderer * wxGraphicsRenderer_GetCairoRenderer();
 #ifdef __WXMSW__
@@ -310,49 +314,52 @@ bool wxGridBagSizer_SetItemSpan2(wxGridBagSizer * self, size_t index, const wxGB
 // CLASS: wxGridEditorCreatedEvent
 wxClassInfo *wxGridEditorCreatedEvent_CLASSINFO();
 wxGridEditorCreatedEvent *wxGridEditorCreatedEvent_new();
+#if wxCHECK_VERSION(3, 1, 0)
 int wxGridEditorCreatedEvent_GetCol(const wxGridEditorCreatedEvent * self);
+#endif
 wxControl * wxGridEditorCreatedEvent_GetControl(wxGridEditorCreatedEvent * self);
+#if wxCHECK_VERSION(3, 1, 0)
 int wxGridEditorCreatedEvent_GetRow(const wxGridEditorCreatedEvent * self);
 wxWindow * wxGridEditorCreatedEvent_GetWindow(const wxGridEditorCreatedEvent * self);
+#endif
 void wxGridEditorCreatedEvent_SetCol(wxGridEditorCreatedEvent * self, int col);
 void wxGridEditorCreatedEvent_SetControl(wxGridEditorCreatedEvent * self, wxControl * ctrl);
 void wxGridEditorCreatedEvent_SetRow(wxGridEditorCreatedEvent * self, int row);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxGridEditorCreatedEvent_SetWindow(wxGridEditorCreatedEvent * self, wxWindow * window);
+#endif
 
 // CLASS: wxGridEvent
 wxClassInfo *wxGridEvent_CLASSINFO();
 wxGridEvent *wxGridEvent_new();
 bool wxGridEvent_AltDown(const wxGridEvent * self);
 bool wxGridEvent_ControlDown(const wxGridEvent * self);
+#if wxCHECK_VERSION(3, 1, 0)
 int wxGridEvent_GetCol(const wxGridEvent * self);
 wxPoint *wxGridEvent_GetPosition(const wxGridEvent * self);
 int wxGridEvent_GetRow(const wxGridEvent * self);
+#endif
 bool wxGridEvent_MetaDown(const wxGridEvent * self);
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxGridEvent_Selecting(const wxGridEvent * self);
+#endif
 bool wxGridEvent_ShiftDown(const wxGridEvent * self);
-
-// CLASS: wxGridFitMode
-void wxGridFitMode_delete(wxGridFitMode *self);
-wxGridFitMode *wxGridFitMode_new();
-bool wxGridFitMode_IsSpecified(const wxGridFitMode * self);
-bool wxGridFitMode_IsClip(const wxGridFitMode * self);
-bool wxGridFitMode_IsOverflow(const wxGridFitMode * self);
-wxEllipsizeMode wxGridFitMode_GetEllipsizeMode(const wxGridFitMode * self);
-wxGridFitMode *wxGridFitMode_Clip();
-wxGridFitMode *wxGridFitMode_Overflow();
-wxGridFitMode *wxGridFitMode_Ellipsize(wxEllipsizeMode ellipsize);
 
 // CLASS: wxGridRangeSelectEvent
 wxClassInfo *wxGridRangeSelectEvent_CLASSINFO();
 wxGridRangeSelectEvent *wxGridRangeSelectEvent_new();
 bool wxGridRangeSelectEvent_AltDown(const wxGridRangeSelectEvent * self);
 bool wxGridRangeSelectEvent_ControlDown(const wxGridRangeSelectEvent * self);
+#if wxCHECK_VERSION(3, 1, 0)
 int wxGridRangeSelectEvent_GetBottomRow(const wxGridRangeSelectEvent * self);
 int wxGridRangeSelectEvent_GetLeftCol(const wxGridRangeSelectEvent * self);
 int wxGridRangeSelectEvent_GetRightCol(const wxGridRangeSelectEvent * self);
 int wxGridRangeSelectEvent_GetTopRow(const wxGridRangeSelectEvent * self);
+#endif
 bool wxGridRangeSelectEvent_MetaDown(const wxGridRangeSelectEvent * self);
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxGridRangeSelectEvent_Selecting(const wxGridRangeSelectEvent * self);
+#endif
 bool wxGridRangeSelectEvent_ShiftDown(const wxGridRangeSelectEvent * self);
 
 // CLASS: wxGridSizeEvent
@@ -360,8 +367,10 @@ wxClassInfo *wxGridSizeEvent_CLASSINFO();
 wxGridSizeEvent *wxGridSizeEvent_new();
 bool wxGridSizeEvent_AltDown(const wxGridSizeEvent * self);
 bool wxGridSizeEvent_ControlDown(const wxGridSizeEvent * self);
+#if wxCHECK_VERSION(3, 1, 0)
 wxPoint *wxGridSizeEvent_GetPosition(const wxGridSizeEvent * self);
 int wxGridSizeEvent_GetRowOrCol(const wxGridSizeEvent * self);
+#endif
 bool wxGridSizeEvent_MetaDown(const wxGridSizeEvent * self);
 bool wxGridSizeEvent_ShiftDown(const wxGridSizeEvent * self);
 
@@ -410,7 +419,9 @@ bool wxGridTableBase_AppendCols(wxGridTableBase * self, size_t num_cols);
 bool wxGridTableBase_DeleteCols(wxGridTableBase * self, size_t pos, size_t num_cols);
 wxString *wxGridTableBase_GetRowLabelValue(wxGridTableBase * self, int row);
 wxString *wxGridTableBase_GetColLabelValue(wxGridTableBase * self, int col);
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxGridTableBase_GetCornerLabelValue(const wxGridTableBase * self);
+#endif
 void wxGridTableBase_SetRowLabelValue(wxGridTableBase * self, int row, const wxString * label);
 void wxGridTableBase_SetColLabelValue(wxGridTableBase * self, int col, const wxString * label);
 void wxGridTableBase_SetAttrProvider(wxGridTableBase * self, wxGridCellAttrProvider * attr_provider);
@@ -419,7 +430,9 @@ void wxGridTableBase_SetAttr(wxGridTableBase * self, wxGridCellAttr * attr, int 
 void wxGridTableBase_SetRowAttr(wxGridTableBase * self, wxGridCellAttr * attr, int row);
 void wxGridTableBase_SetColAttr(wxGridTableBase * self, wxGridCellAttr * attr, int col);
 bool wxGridTableBase_CanHaveAttributes(wxGridTableBase * self);
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxGridTableBase_CanMeasureColUsingSameAttr(const wxGridTableBase * self, int col);
+#endif
 int wxGridTableBase_GetNumberRows(wxGridTableBase * self);
 int wxGridTableBase_GetNumberCols(wxGridTableBase * self);
 int wxGridTableBase_GetRowsCount(const wxGridTableBase * self);

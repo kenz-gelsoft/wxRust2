@@ -421,7 +421,7 @@ wxml_files = [
     'wxml/classwx_generic_dir_ctrl.xml',
     'wxml/classwx_generic_progress_dialog.xml',
     'wxml/classwx_generic_validator.xml',
-    'wxml/classwx_gesture_event.xml',
+    # 'wxml/classwx_gesture_event.xml', # requires 3.1
     'wxml/classwx_graphics_brush.xml',
     'wxml/classwx_graphics_context.xml',
     'wxml/classwx_graphics_font.xml',
@@ -455,7 +455,7 @@ wxml_files = [
     # 'wxml/classwx_grid_cell_text_editor.xml',               # requires 3.1.7
     'wxml/classwx_grid_editor_created_event.xml',
     'wxml/classwx_grid_event.xml',
-    'wxml/classwx_grid_fit_mode.xml',
+    # 'wxml/classwx_grid_fit_mode.xml', # requires 3.1
     'wxml/classwx_grid_range_select_event.xml',
     'wxml/classwx_grid_size_event.xml',
     'wxml/classwx_grid_sizer.xml',
@@ -1173,6 +1173,24 @@ blocklist = [
 windows = [
     'Create4',
 ]
+wx31 = [
+    'CreatePen1',
+    'CreateFontAtDPI',
+    'CreateFromUnknownDC',
+    'GetClipBox',
+    'GetWindow',
+    # const-ness changed
+    'GetDPI',
+    'OffsetEnabled',
+]
+wx317 = [
+    'FromDIP',
+    'FromDIP1',
+    'FromDIP2',
+    'ToDIP',
+    'ToDIP1',
+    'ToDIP2',
+]
 [types.wxGraphicsGradientStops]
 blocklist = [
     # wx-value type not supported
@@ -1191,6 +1209,11 @@ windows = [
     'GetDirect2DRenderer',
     'GetGDIPlusRenderer',
 ]
+wx31 = [
+    'CreatePen',
+    'GetName',
+    'GetVersion',
+]
 [types.wxGridCellAttr]
 blocklist = [
     # wx-value type not supported
@@ -1206,12 +1229,47 @@ blocklist = [
     # abstract
     'wxGridCellRenderer',
 ]
+[types.wxGridEditorCreatedEvent]
+wx31 = [
+    'GetWindow',
+    'SetWindow',
+    # const-ness change
+    'GetCol',
+    'GetRow',
+]
+[types.wxGridEvent]
+wx31 = [
+    # const-ness change
+    'GetCol',
+    'GetPosition',
+    'GetRow',
+    'Selecting',
+]
+[types.wxGridRangeSelectEvent]
+wx31 = [
+    # const-ness change
+    'GetBottomRow',
+    'GetLeftCol',
+    'GetRightCol',
+    'GetTopRow',
+    'Selecting',
+]
+[types.wxGridSizeEvent]
+wx31 = [
+    # const-ness change
+    'GetPosition',
+    'GetRowOrCol',
+]
 [types.wxGridTableBase]
 blocklist = [
     # abstract
     'wxGridTableBase',
     # No argument label
     'SetCornerLabelValue',
+]
+wx31 = [
+    'CanMeasureColUsingSameAttr',
+    'GetCornerLabelValue',
 ]
 [types.wxHeaderColumn]
 wx31 = [

@@ -304,29 +304,6 @@ wxGenericValidator *wxGenericValidator_new8(double * val_ptr) {
     return new wxGenericValidator(val_ptr);
 }
 
-// CLASS: wxGestureEvent
-wxClassInfo *wxGestureEvent_CLASSINFO() {
-    return wxCLASSINFO(wxGestureEvent);
-}
-wxPoint *wxGestureEvent_GetPosition(const wxGestureEvent * self) {
-    return new wxPoint(self->GetPosition());
-}
-bool wxGestureEvent_IsGestureStart(const wxGestureEvent * self) {
-    return self->IsGestureStart();
-}
-bool wxGestureEvent_IsGestureEnd(const wxGestureEvent * self) {
-    return self->IsGestureEnd();
-}
-void wxGestureEvent_SetPosition(wxGestureEvent * self, const wxPoint * pos) {
-    return self->SetPosition(*pos);
-}
-void wxGestureEvent_SetGestureStart(wxGestureEvent * self, bool is_start) {
-    return self->SetGestureStart(is_start);
-}
-void wxGestureEvent_SetGestureEnd(wxGestureEvent * self, bool is_end) {
-    return self->SetGestureEnd(is_end);
-}
-
 // CLASS: wxGraphicsBrush
 wxClassInfo *wxGraphicsBrush_CLASSINFO() {
     return wxCLASSINFO(wxGraphicsBrush);
@@ -353,9 +330,11 @@ wxGraphicsContext * wxGraphicsContext_Create4(const wxEnhMetaFileDC * meta_file_
     return wxGraphicsContext::Create(*meta_file_dc);
 }
 #endif
+#if wxCHECK_VERSION(3, 1, 0)
 wxGraphicsContext * wxGraphicsContext_CreateFromUnknownDC(wxDC * dc) {
     return wxGraphicsContext::CreateFromUnknownDC(*dc);
 }
+#endif
 wxGraphicsContext * wxGraphicsContext_Create5(wxImage * image) {
     return wxGraphicsContext::Create(*image);
 }
@@ -374,9 +353,11 @@ void wxGraphicsContext_ResetClip(wxGraphicsContext * self) {
 void wxGraphicsContext_Clip(wxGraphicsContext * self, const wxRegion * region) {
     return self->Clip(*region);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxGraphicsContext_GetClipBox(wxGraphicsContext * self, wxDouble * x, wxDouble * y, wxDouble * w, wxDouble * h) {
     return self->GetClipBox(x, y, w, h);
 }
+#endif
 wxGraphicsMatrix *wxGraphicsContext_CreateMatrix1(const wxGraphicsContext * self, const wxAffineMatrix2DBase * mat) {
     return new wxGraphicsMatrix(self->CreateMatrix(*mat));
 }
@@ -401,9 +382,11 @@ void wxGraphicsContext_SetBrush1(wxGraphicsContext * self, const wxGraphicsBrush
 wxGraphicsPen *wxGraphicsContext_CreatePen(const wxGraphicsContext * self, const wxPen * pen) {
     return new wxGraphicsPen(self->CreatePen(*pen));
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxGraphicsPen *wxGraphicsContext_CreatePen1(const wxGraphicsContext * self, const wxGraphicsPenInfo * info) {
     return new wxGraphicsPen(self->CreatePen(*info));
 }
+#endif
 void wxGraphicsContext_SetPen(wxGraphicsContext * self, const wxPen * pen) {
     return self->SetPen(*pen);
 }
@@ -467,12 +450,14 @@ void * wxGraphicsContext_GetNativeContext(wxGraphicsContext * self) {
 void wxGraphicsContext_GetSize(const wxGraphicsContext * self, wxDouble * width, wxDouble * height) {
     return self->GetSize(width, height);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxGraphicsContext_GetDPI(const wxGraphicsContext * self, wxDouble * dpi_x, wxDouble * dpi_y) {
     return self->GetDPI(dpi_x, dpi_y);
 }
 wxWindow * wxGraphicsContext_GetWindow(const wxGraphicsContext * self) {
     return self->GetWindow();
 }
+#endif
 bool wxGraphicsContext_ShouldOffset(const wxGraphicsContext * self) {
     return self->ShouldOffset();
 }
@@ -482,9 +467,12 @@ void wxGraphicsContext_EnableOffset(wxGraphicsContext * self, bool enable) {
 void wxGraphicsContext_DisableOffset(wxGraphicsContext * self) {
     return self->DisableOffset();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxGraphicsContext_OffsetEnabled(const wxGraphicsContext * self) {
     return self->OffsetEnabled();
 }
+#endif
+#if wxCHECK_VERSION(3, 1, 7)
 wxSize *wxGraphicsContext_FromDIP(const wxGraphicsContext * self, const wxSize * sz) {
     return new wxSize(self->FromDIP(*sz));
 }
@@ -503,6 +491,7 @@ wxPoint *wxGraphicsContext_ToDIP1(const wxGraphicsContext * self, const wxPoint 
 int wxGraphicsContext_ToDIP2(const wxGraphicsContext * self, int d) {
     return self->ToDIP(d);
 }
+#endif
 
 // CLASS: wxGraphicsFont
 wxClassInfo *wxGraphicsFont_CLASSINFO() {
@@ -668,6 +657,7 @@ wxGraphicsFont *wxGraphicsRenderer_CreateFontAtDPI(wxGraphicsRenderer * self, co
 wxGraphicsPath *wxGraphicsRenderer_CreatePath(wxGraphicsRenderer * self) {
     return new wxGraphicsPath(self->CreatePath());
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxGraphicsPen *wxGraphicsRenderer_CreatePen(wxGraphicsRenderer * self, const wxGraphicsPenInfo * info) {
     return new wxGraphicsPen(self->CreatePen(*info));
 }
@@ -677,6 +667,7 @@ wxString *wxGraphicsRenderer_GetName(const wxGraphicsRenderer * self) {
 void wxGraphicsRenderer_GetVersion(const wxGraphicsRenderer * self, int * major, int * minor, int * micro) {
     return self->GetVersion(major, minor, micro);
 }
+#endif
 wxGraphicsRenderer * wxGraphicsRenderer_GetDefaultRenderer() {
     return wxGraphicsRenderer::GetDefaultRenderer();
 }
@@ -785,18 +776,22 @@ wxClassInfo *wxGridEditorCreatedEvent_CLASSINFO() {
 wxGridEditorCreatedEvent *wxGridEditorCreatedEvent_new() {
     return new wxGridEditorCreatedEvent();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 int wxGridEditorCreatedEvent_GetCol(const wxGridEditorCreatedEvent * self) {
     return self->GetCol();
 }
+#endif
 wxControl * wxGridEditorCreatedEvent_GetControl(wxGridEditorCreatedEvent * self) {
     return self->GetControl();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 int wxGridEditorCreatedEvent_GetRow(const wxGridEditorCreatedEvent * self) {
     return self->GetRow();
 }
 wxWindow * wxGridEditorCreatedEvent_GetWindow(const wxGridEditorCreatedEvent * self) {
     return self->GetWindow();
 }
+#endif
 void wxGridEditorCreatedEvent_SetCol(wxGridEditorCreatedEvent * self, int col) {
     return self->SetCol(col);
 }
@@ -806,9 +801,11 @@ void wxGridEditorCreatedEvent_SetControl(wxGridEditorCreatedEvent * self, wxCont
 void wxGridEditorCreatedEvent_SetRow(wxGridEditorCreatedEvent * self, int row) {
     return self->SetRow(row);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxGridEditorCreatedEvent_SetWindow(wxGridEditorCreatedEvent * self, wxWindow * window) {
     return self->SetWindow(window);
 }
+#endif
 
 // CLASS: wxGridEvent
 wxClassInfo *wxGridEvent_CLASSINFO() {
@@ -823,6 +820,7 @@ bool wxGridEvent_AltDown(const wxGridEvent * self) {
 bool wxGridEvent_ControlDown(const wxGridEvent * self) {
     return self->ControlDown();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 int wxGridEvent_GetCol(const wxGridEvent * self) {
     return self->GetCol();
 }
@@ -832,43 +830,17 @@ wxPoint *wxGridEvent_GetPosition(const wxGridEvent * self) {
 int wxGridEvent_GetRow(const wxGridEvent * self) {
     return self->GetRow();
 }
+#endif
 bool wxGridEvent_MetaDown(const wxGridEvent * self) {
     return self->MetaDown();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxGridEvent_Selecting(const wxGridEvent * self) {
     return self->Selecting();
 }
+#endif
 bool wxGridEvent_ShiftDown(const wxGridEvent * self) {
     return self->ShiftDown();
-}
-
-// CLASS: wxGridFitMode
-void wxGridFitMode_delete(wxGridFitMode *self) {
-    delete self;
-}
-wxGridFitMode *wxGridFitMode_new() {
-    return new wxGridFitMode();
-}
-bool wxGridFitMode_IsSpecified(const wxGridFitMode * self) {
-    return self->IsSpecified();
-}
-bool wxGridFitMode_IsClip(const wxGridFitMode * self) {
-    return self->IsClip();
-}
-bool wxGridFitMode_IsOverflow(const wxGridFitMode * self) {
-    return self->IsOverflow();
-}
-wxEllipsizeMode wxGridFitMode_GetEllipsizeMode(const wxGridFitMode * self) {
-    return self->GetEllipsizeMode();
-}
-wxGridFitMode *wxGridFitMode_Clip() {
-    return new wxGridFitMode(wxGridFitMode::Clip());
-}
-wxGridFitMode *wxGridFitMode_Overflow() {
-    return new wxGridFitMode(wxGridFitMode::Overflow());
-}
-wxGridFitMode *wxGridFitMode_Ellipsize(wxEllipsizeMode ellipsize) {
-    return new wxGridFitMode(wxGridFitMode::Ellipsize(ellipsize));
 }
 
 // CLASS: wxGridRangeSelectEvent
@@ -884,6 +856,7 @@ bool wxGridRangeSelectEvent_AltDown(const wxGridRangeSelectEvent * self) {
 bool wxGridRangeSelectEvent_ControlDown(const wxGridRangeSelectEvent * self) {
     return self->ControlDown();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 int wxGridRangeSelectEvent_GetBottomRow(const wxGridRangeSelectEvent * self) {
     return self->GetBottomRow();
 }
@@ -896,12 +869,15 @@ int wxGridRangeSelectEvent_GetRightCol(const wxGridRangeSelectEvent * self) {
 int wxGridRangeSelectEvent_GetTopRow(const wxGridRangeSelectEvent * self) {
     return self->GetTopRow();
 }
+#endif
 bool wxGridRangeSelectEvent_MetaDown(const wxGridRangeSelectEvent * self) {
     return self->MetaDown();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxGridRangeSelectEvent_Selecting(const wxGridRangeSelectEvent * self) {
     return self->Selecting();
 }
+#endif
 bool wxGridRangeSelectEvent_ShiftDown(const wxGridRangeSelectEvent * self) {
     return self->ShiftDown();
 }
@@ -919,12 +895,14 @@ bool wxGridSizeEvent_AltDown(const wxGridSizeEvent * self) {
 bool wxGridSizeEvent_ControlDown(const wxGridSizeEvent * self) {
     return self->ControlDown();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxPoint *wxGridSizeEvent_GetPosition(const wxGridSizeEvent * self) {
     return new wxPoint(self->GetPosition());
 }
 int wxGridSizeEvent_GetRowOrCol(const wxGridSizeEvent * self) {
     return self->GetRowOrCol();
 }
+#endif
 bool wxGridSizeEvent_MetaDown(const wxGridSizeEvent * self) {
     return self->MetaDown();
 }
@@ -1061,9 +1039,11 @@ wxString *wxGridTableBase_GetRowLabelValue(wxGridTableBase * self, int row) {
 wxString *wxGridTableBase_GetColLabelValue(wxGridTableBase * self, int col) {
     return new wxString(self->GetColLabelValue(col));
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxGridTableBase_GetCornerLabelValue(const wxGridTableBase * self) {
     return new wxString(self->GetCornerLabelValue());
 }
+#endif
 void wxGridTableBase_SetRowLabelValue(wxGridTableBase * self, int row, const wxString * label) {
     return self->SetRowLabelValue(row, *label);
 }
@@ -1088,9 +1068,11 @@ void wxGridTableBase_SetColAttr(wxGridTableBase * self, wxGridCellAttr * attr, i
 bool wxGridTableBase_CanHaveAttributes(wxGridTableBase * self) {
     return self->CanHaveAttributes();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxGridTableBase_CanMeasureColUsingSameAttr(const wxGridTableBase * self, int col) {
     return self->CanMeasureColUsingSameAttr(col);
 }
+#endif
 int wxGridTableBase_GetNumberRows(wxGridTableBase * self) {
     return self->GetNumberRows();
 }

@@ -577,42 +577,6 @@ impl<const OWNED: bool> DynamicCast for GenericValidatorIsOwned<OWNED> {
     }
 }
 
-// wxGestureEvent
-wx_class! { GestureEvent =
-    GestureEventIsOwned<true>(wxGestureEvent) impl
-        GestureEventMethods,
-        EventMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> GestureEventIsOwned<OWNED> {
-    // NOT_SUPPORTED: fn wxGestureEvent()
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<GestureEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
-    fn from(o: GestureEventIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<GestureEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: GestureEventIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for GestureEventIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxGestureEvent_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Drop for GestureEventIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObject_delete(self.0) }
-        }
-    }
-}
-
 // wxGraphicsBrush
 wx_class! { GraphicsBrush =
     GraphicsBrushIsOwned<true>(wxGraphicsBrush) impl
@@ -1054,27 +1018,6 @@ impl<const OWNED: bool> Drop for GridEventIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
-        }
-    }
-}
-
-// wxGridFitMode
-wx_class! { GridFitMode =
-    GridFitModeIsOwned<true>(wxGridFitMode) impl
-        GridFitModeMethods
-}
-impl<const OWNED: bool> GridFitModeIsOwned<OWNED> {
-    pub fn new() -> GridFitModeIsOwned<OWNED> {
-        unsafe { GridFitModeIsOwned(ffi::wxGridFitMode_new()) }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for GridFitModeIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxGridFitMode_delete(self.0) }
         }
     }
 }

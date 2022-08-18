@@ -385,31 +385,6 @@ pub trait GenericValidatorMethods: ValidatorMethods {
     // DTOR: fn ~wxGenericValidator()
 }
 
-// wxGestureEvent
-pub trait GestureEventMethods: EventMethods {
-    fn get_position(&self) -> PointIsOwned<false> {
-        unsafe { PointIsOwned::from_ptr(ffi::wxGestureEvent_GetPosition(self.as_ptr())) }
-    }
-    fn is_gesture_start(&self) -> bool {
-        unsafe { ffi::wxGestureEvent_IsGestureStart(self.as_ptr()) }
-    }
-    fn is_gesture_end(&self) -> bool {
-        unsafe { ffi::wxGestureEvent_IsGestureEnd(self.as_ptr()) }
-    }
-    fn set_position<P: PointMethods>(&self, pos: &P) {
-        unsafe {
-            let pos = pos.as_ptr();
-            ffi::wxGestureEvent_SetPosition(self.as_ptr(), pos)
-        }
-    }
-    fn set_gesture_start(&self, is_start: bool) {
-        unsafe { ffi::wxGestureEvent_SetGestureStart(self.as_ptr(), is_start) }
-    }
-    fn set_gesture_end(&self, is_end: bool) {
-        unsafe { ffi::wxGestureEvent_SetGestureEnd(self.as_ptr(), is_end) }
-    }
-}
-
 // wxGraphicsBrush
 pub trait GraphicsBrushMethods: GraphicsObjectMethods {}
 
@@ -1486,31 +1461,6 @@ pub trait GridEventMethods: NotifyEventMethods {
     }
     fn shift_down(&self) -> bool {
         unsafe { ffi::wxGridEvent_ShiftDown(self.as_ptr()) }
-    }
-}
-
-// wxGridFitMode
-pub trait GridFitModeMethods: WxRustMethods {
-    fn is_specified(&self) -> bool {
-        unsafe { ffi::wxGridFitMode_IsSpecified(self.as_ptr()) }
-    }
-    fn is_clip(&self) -> bool {
-        unsafe { ffi::wxGridFitMode_IsClip(self.as_ptr()) }
-    }
-    fn is_overflow(&self) -> bool {
-        unsafe { ffi::wxGridFitMode_IsOverflow(self.as_ptr()) }
-    }
-    fn get_ellipsize_mode(&self) -> c_int {
-        unsafe { ffi::wxGridFitMode_GetEllipsizeMode(self.as_ptr()) }
-    }
-    fn clip() -> GridFitMode {
-        unsafe { GridFitMode::from_ptr(ffi::wxGridFitMode_Clip()) }
-    }
-    fn overflow() -> GridFitMode {
-        unsafe { GridFitMode::from_ptr(ffi::wxGridFitMode_Overflow()) }
-    }
-    fn ellipsize(ellipsize: c_int) -> GridFitMode {
-        unsafe { GridFitMode::from_ptr(ffi::wxGridFitMode_Ellipsize(ellipsize)) }
     }
 }
 
