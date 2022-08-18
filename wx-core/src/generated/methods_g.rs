@@ -407,9 +407,7 @@ pub trait GraphicsContextMethods: GraphicsObjectMethods {
     fn create_memorydc(memory_dc: *const c_void) -> Option<GraphicsContextIsOwned<false>> {
         unsafe { GraphicsContext::option_from(ffi::wxGraphicsContext_Create2(memory_dc)) }
     }
-    fn create_printerdc(printer_dc: *const c_void) -> Option<GraphicsContextIsOwned<false>> {
-        unsafe { GraphicsContext::option_from(ffi::wxGraphicsContext_Create3(printer_dc)) }
-    }
+    // BLOCKED: fn Create3()
     fn create_enhmetafiledc(meta_file_dc: *const c_void) -> Option<GraphicsContextIsOwned<false>> {
         unsafe { GraphicsContext::option_from(ffi::wxGraphicsContext_Create4(meta_file_dc)) }
     }

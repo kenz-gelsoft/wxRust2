@@ -1170,6 +1170,10 @@ blocklist = [
     'operator==',
 ]
 [types.wxGraphicsContext]
+blocklist = [
+    # some of our CI env built without printing
+    'Create3',
+]
 windows = [
     'Create4',
 ]

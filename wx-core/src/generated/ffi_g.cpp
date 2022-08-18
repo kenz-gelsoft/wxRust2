@@ -322,9 +322,6 @@ wxGraphicsContext * wxGraphicsContext_Create1(const wxWindowDC * window_dc) {
 wxGraphicsContext * wxGraphicsContext_Create2(const wxMemoryDC * memory_dc) {
     return wxGraphicsContext::Create(*memory_dc);
 }
-wxGraphicsContext * wxGraphicsContext_Create3(const wxPrinterDC * printer_dc) {
-    return wxGraphicsContext::Create(*printer_dc);
-}
 #ifdef __WXMSW__
 wxGraphicsContext * wxGraphicsContext_Create4(const wxEnhMetaFileDC * meta_file_dc) {
     return wxGraphicsContext::Create(*meta_file_dc);

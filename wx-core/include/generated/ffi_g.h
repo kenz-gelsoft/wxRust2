@@ -136,7 +136,6 @@ wxClassInfo *wxGraphicsContext_CLASSINFO();
 wxGraphicsContext * wxGraphicsContext_Create(wxWindow * window);
 wxGraphicsContext * wxGraphicsContext_Create1(const wxWindowDC * window_dc);
 wxGraphicsContext * wxGraphicsContext_Create2(const wxMemoryDC * memory_dc);
-wxGraphicsContext * wxGraphicsContext_Create3(const wxPrinterDC * printer_dc);
 #ifdef __WXMSW__
 wxGraphicsContext * wxGraphicsContext_Create4(const wxEnhMetaFileDC * meta_file_dc);
 #endif

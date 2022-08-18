@@ -226,7 +226,7 @@ extern "C" {
     pub fn wxGraphicsContext_Create(window: *mut c_void) -> *mut c_void;
     pub fn wxGraphicsContext_Create1(window_dc: *const c_void) -> *mut c_void;
     pub fn wxGraphicsContext_Create2(memory_dc: *const c_void) -> *mut c_void;
-    pub fn wxGraphicsContext_Create3(printer_dc: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxGraphicsContext_Create3(printer_dc: *const c_void) -> *mut c_void;
     pub fn wxGraphicsContext_Create4(meta_file_dc: *const c_void) -> *mut c_void;
     pub fn wxGraphicsContext_CreateFromUnknownDC(dc: *mut c_void) -> *mut c_void;
     pub fn wxGraphicsContext_Create5(image: *mut c_void) -> *mut c_void;
