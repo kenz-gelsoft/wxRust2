@@ -2,6 +2,48 @@
 
 extern "C" {
 
+// CLASS: wxHScrolledWindow
+wxClassInfo *wxHScrolledWindow_CLASSINFO() {
+    return wxCLASSINFO(wxHScrolledWindow);
+}
+wxHScrolledWindow *wxHScrolledWindow_new() {
+    return new wxHScrolledWindow();
+}
+wxHScrolledWindow *wxHScrolledWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxHScrolledWindow(parent, id, *pos, *size, style, *name);
+}
+bool wxHScrolledWindow_Create(wxHScrolledWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, id, *pos, *size, style, *name);
+}
+
+// CLASS: wxHTMLDataObject
+void wxHTMLDataObject_delete(wxHTMLDataObject *self) {
+    delete self;
+}
+wxHTMLDataObject *wxHTMLDataObject_new(const wxString * html) {
+    return new wxHTMLDataObject(*html);
+}
+wxString *wxHTMLDataObject_GetHTML(const wxHTMLDataObject * self) {
+    return new wxString(self->GetHTML());
+}
+void wxHTMLDataObject_SetHTML(wxHTMLDataObject * self, const wxString * html) {
+    return self->SetHTML(*html);
+}
+
+// CLASS: wxHVScrolledWindow
+wxClassInfo *wxHVScrolledWindow_CLASSINFO() {
+    return wxCLASSINFO(wxHVScrolledWindow);
+}
+wxHVScrolledWindow *wxHVScrolledWindow_new() {
+    return new wxHVScrolledWindow();
+}
+wxHVScrolledWindow *wxHVScrolledWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxHVScrolledWindow(parent, id, *pos, *size, style, *name);
+}
+bool wxHVScrolledWindow_Create(wxHVScrolledWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, id, *pos, *size, style, *name);
+}
+
 // CLASS: wxHeaderColumn
 void wxHeaderColumn_delete(wxHeaderColumn *self) {
     delete self;
@@ -120,6 +162,32 @@ void wxHeaderCtrl_MoveColumnInOrderArray(wxArrayInt * order, unsigned int idx, u
     return wxHeaderCtrl::MoveColumnInOrderArray(*order, idx, pos);
 }
 
+// CLASS: wxHeaderCtrlEvent
+wxClassInfo *wxHeaderCtrlEvent_CLASSINFO() {
+    return wxCLASSINFO(wxHeaderCtrlEvent);
+}
+wxHeaderCtrlEvent *wxHeaderCtrlEvent_new1(const wxHeaderCtrlEvent * event) {
+    return new wxHeaderCtrlEvent(*event);
+}
+int wxHeaderCtrlEvent_GetColumn(const wxHeaderCtrlEvent * self) {
+    return self->GetColumn();
+}
+void wxHeaderCtrlEvent_SetColumn(wxHeaderCtrlEvent * self, int col) {
+    return self->SetColumn(col);
+}
+int wxHeaderCtrlEvent_GetWidth(const wxHeaderCtrlEvent * self) {
+    return self->GetWidth();
+}
+void wxHeaderCtrlEvent_SetWidth(wxHeaderCtrlEvent * self, int width) {
+    return self->SetWidth(width);
+}
+unsigned int wxHeaderCtrlEvent_GetNewOrder(const wxHeaderCtrlEvent * self) {
+    return self->GetNewOrder();
+}
+void wxHeaderCtrlEvent_SetNewOrder(wxHeaderCtrlEvent * self, unsigned int order) {
+    return self->SetNewOrder(order);
+}
+
 // CLASS: wxHeaderCtrlSimple
 wxClassInfo *wxHeaderCtrlSimple_CLASSINFO() {
     return wxCLASSINFO(wxHeaderCtrlSimple);
@@ -150,6 +218,43 @@ void wxHeaderCtrlSimple_ShowSortIndicator(wxHeaderCtrlSimple * self, unsigned in
 }
 void wxHeaderCtrlSimple_RemoveSortIndicator(wxHeaderCtrlSimple * self) {
     return self->RemoveSortIndicator();
+}
+
+// CLASS: wxHelpEvent
+wxClassInfo *wxHelpEvent_CLASSINFO() {
+    return wxCLASSINFO(wxHelpEvent);
+}
+wxPoint *wxHelpEvent_GetPosition(const wxHelpEvent * self) {
+    return new wxPoint(self->GetPosition());
+}
+void wxHelpEvent_SetPosition(wxHelpEvent * self, const wxPoint * pt) {
+    return self->SetPosition(*pt);
+}
+
+// CLASS: wxHelpProvider
+void wxHelpProvider_delete(wxHelpProvider *self) {
+    delete self;
+}
+void wxHelpProvider_AddHelp(wxHelpProvider * self, wxWindow * window, const wxString * text) {
+    return self->AddHelp(window, *text);
+}
+void wxHelpProvider_AddHelp1(wxHelpProvider * self, wxWindowID id, const wxString * text) {
+    return self->AddHelp(id, *text);
+}
+wxString *wxHelpProvider_GetHelp(wxHelpProvider * self, const wxWindow * window) {
+    return new wxString(self->GetHelp(window));
+}
+void wxHelpProvider_RemoveHelp(wxHelpProvider * self, wxWindow * window) {
+    return self->RemoveHelp(window);
+}
+bool wxHelpProvider_ShowHelp(wxHelpProvider * self, wxWindow * window) {
+    return self->ShowHelp(window);
+}
+wxHelpProvider * wxHelpProvider_Get() {
+    return wxHelpProvider::Get();
+}
+wxHelpProvider * wxHelpProvider_Set(wxHelpProvider * help_provider) {
+    return wxHelpProvider::Set(help_provider);
 }
 
 // CLASS: wxHyperlinkCtrl
@@ -194,6 +299,20 @@ void wxHyperlinkCtrl_SetVisited(wxHyperlinkCtrl * self, bool visited) {
 }
 void wxHyperlinkCtrl_SetVisitedColour(wxHyperlinkCtrl * self, const wxColour * colour) {
     return self->SetVisitedColour(*colour);
+}
+
+// CLASS: wxHyperlinkEvent
+wxClassInfo *wxHyperlinkEvent_CLASSINFO() {
+    return wxCLASSINFO(wxHyperlinkEvent);
+}
+wxHyperlinkEvent *wxHyperlinkEvent_new(wxObject * generator, int id, const wxString * url) {
+    return new wxHyperlinkEvent(generator, id, *url);
+}
+wxString *wxHyperlinkEvent_GetURL(const wxHyperlinkEvent * self) {
+    return new wxString(self->GetURL());
+}
+void wxHyperlinkEvent_SetURL(wxHyperlinkEvent * self, const wxString * url) {
+    return self->SetURL(*url);
 }
 
 } // extern "C"

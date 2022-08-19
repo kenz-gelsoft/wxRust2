@@ -1,5 +1,25 @@
 use super::*;
 
+// wxHScrolledWindow
+pub trait HScrolledWindowMethods: PanelMethods {}
+
+// wxHTMLDataObject
+pub trait HTMLDataObjectMethods: DataObjectSimpleMethods {
+    fn get_html(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxHTMLDataObject_GetHTML(self.as_ptr())).into() }
+    }
+    fn set_html(&self, html: &str) {
+        unsafe {
+            let html = WxString::from(html);
+            let html = html.as_ptr();
+            ffi::wxHTMLDataObject_SetHTML(self.as_ptr(), html)
+        }
+    }
+}
+
+// wxHVScrolledWindow
+pub trait HVScrolledWindowMethods: PanelMethods {}
+
 // wxHeaderColumn
 pub trait HeaderColumnMethods: WxRustMethods {
     fn get_title(&self) -> String {
@@ -118,6 +138,28 @@ pub trait HeaderCtrlMethods: ControlMethods {
     }
 }
 
+// wxHeaderCtrlEvent
+pub trait HeaderCtrlEventMethods: NotifyEventMethods {
+    fn get_column(&self) -> c_int {
+        unsafe { ffi::wxHeaderCtrlEvent_GetColumn(self.as_ptr()) }
+    }
+    fn set_column(&self, col: c_int) {
+        unsafe { ffi::wxHeaderCtrlEvent_SetColumn(self.as_ptr(), col) }
+    }
+    fn get_width(&self) -> c_int {
+        unsafe { ffi::wxHeaderCtrlEvent_GetWidth(self.as_ptr()) }
+    }
+    fn set_width(&self, width: c_int) {
+        unsafe { ffi::wxHeaderCtrlEvent_SetWidth(self.as_ptr(), width) }
+    }
+    fn get_new_order(&self) -> c_uint {
+        unsafe { ffi::wxHeaderCtrlEvent_GetNewOrder(self.as_ptr()) }
+    }
+    fn set_new_order(&self, order: c_uint) {
+        unsafe { ffi::wxHeaderCtrlEvent_SetNewOrder(self.as_ptr(), order) }
+    }
+}
+
 // wxHeaderCtrlSimple
 pub trait HeaderCtrlSimpleMethods: HeaderCtrlMethods {
     fn insert_column<H: HeaderColumnSimpleMethods>(&self, col: &H, idx: c_uint) {
@@ -146,6 +188,86 @@ pub trait HeaderCtrlSimpleMethods: HeaderCtrlMethods {
     }
     fn remove_sort_indicator(&self) {
         unsafe { ffi::wxHeaderCtrlSimple_RemoveSortIndicator(self.as_ptr()) }
+    }
+}
+
+// wxHelpEvent
+pub trait HelpEventMethods: CommandEventMethods {
+    // NOT_SUPPORTED: fn GetOrigin()
+    fn get_position(&self) -> PointIsOwned<false> {
+        unsafe { PointIsOwned::from_ptr(ffi::wxHelpEvent_GetPosition(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn SetOrigin()
+    fn set_position<P: PointMethods>(&self, pt: &P) {
+        unsafe {
+            let pt = pt.as_ptr();
+            ffi::wxHelpEvent_SetPosition(self.as_ptr(), pt)
+        }
+    }
+}
+
+// wxHelpProvider
+pub trait HelpProviderMethods: WxRustMethods {
+    // DTOR: fn ~wxHelpProvider()
+    fn add_help_window<W: WindowMethods>(&self, window: Option<&W>, text: &str) {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxHelpProvider_AddHelp(self.as_ptr(), window, text)
+        }
+    }
+    fn add_help_windowid(&self, id: c_int, text: &str) {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxHelpProvider_AddHelp1(self.as_ptr(), id, text)
+        }
+    }
+    fn get_help<W: WindowMethods>(&self, window: Option<&W>) -> String {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            WxString::from_ptr(ffi::wxHelpProvider_GetHelp(self.as_ptr(), window)).into()
+        }
+    }
+    fn remove_help<W: WindowMethods>(&self, window: Option<&W>) {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxHelpProvider_RemoveHelp(self.as_ptr(), window)
+        }
+    }
+    fn show_help<W: WindowMethods>(&self, window: Option<&W>) -> bool {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxHelpProvider_ShowHelp(self.as_ptr(), window)
+        }
+    }
+    // NOT_SUPPORTED: fn ShowHelpAtPoint()
+    fn get() -> Option<HelpProviderIsOwned<false>> {
+        unsafe { HelpProvider::option_from(ffi::wxHelpProvider_Get()) }
+    }
+    fn set<H: HelpProviderMethods>(
+        help_provider: Option<&H>,
+    ) -> Option<HelpProviderIsOwned<false>> {
+        unsafe {
+            let help_provider = match help_provider {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            HelpProvider::option_from(ffi::wxHelpProvider_Set(help_provider))
+        }
     }
 }
 
@@ -229,6 +351,20 @@ pub trait HyperlinkCtrlMethods: ControlMethods {
         unsafe {
             let colour = colour.as_ptr();
             ffi::wxHyperlinkCtrl_SetVisitedColour(self.as_ptr(), colour)
+        }
+    }
+}
+
+// wxHyperlinkEvent
+pub trait HyperlinkEventMethods: CommandEventMethods {
+    fn get_url(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxHyperlinkEvent_GetURL(self.as_ptr())).into() }
+    }
+    fn set_url(&self, url: &str) {
+        unsafe {
+            let url = WxString::from(url);
+            let url = url.as_ptr();
+            ffi::wxHyperlinkEvent_SetURL(self.as_ptr(), url)
         }
     }
 }
