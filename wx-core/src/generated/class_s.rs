@@ -214,6 +214,121 @@ impl<const OWNED: bool> Drop for SizerFlagsIsOwned<OWNED> {
     }
 }
 
+// wxSizerItem
+wx_class! { SizerItem =
+    SizerItemIsOwned<true>(wxSizerItem) impl
+        SizerItemMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> SizerItemIsOwned<OWNED> {
+    pub fn new_with_int<O: ObjectMethods>(
+        width: c_int,
+        height: c_int,
+        proportion: c_int,
+        flag: c_int,
+        border: c_int,
+        user_data: Option<&O>,
+    ) -> SizerItemIsOwned<OWNED> {
+        unsafe {
+            let user_data = match user_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            SizerItemIsOwned(ffi::wxSizerItem_new(
+                width, height, proportion, flag, border, user_data,
+            ))
+        }
+    }
+    pub fn new_with_window_sizerflags<W: WindowMethods, S: SizerFlagsMethods>(
+        window: Option<&W>,
+        flags: &S,
+    ) -> SizerItemIsOwned<OWNED> {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let flags = flags.as_ptr();
+            SizerItemIsOwned(ffi::wxSizerItem_new1(window, flags))
+        }
+    }
+    pub fn new_with_window_int<W: WindowMethods, O: ObjectMethods>(
+        window: Option<&W>,
+        proportion: c_int,
+        flag: c_int,
+        border: c_int,
+        user_data: Option<&O>,
+    ) -> SizerItemIsOwned<OWNED> {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let user_data = match user_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            SizerItemIsOwned(ffi::wxSizerItem_new2(
+                window, proportion, flag, border, user_data,
+            ))
+        }
+    }
+    pub fn new_with_sizer_sizerflags<S: SizerMethods, S2: SizerFlagsMethods>(
+        sizer: Option<&S>,
+        flags: &S2,
+    ) -> SizerItemIsOwned<OWNED> {
+        unsafe {
+            let sizer = match sizer {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let flags = flags.as_ptr();
+            SizerItemIsOwned(ffi::wxSizerItem_new3(sizer, flags))
+        }
+    }
+    pub fn new_with_sizer_int<S: SizerMethods, O: ObjectMethods>(
+        sizer: Option<&S>,
+        proportion: c_int,
+        flag: c_int,
+        border: c_int,
+        user_data: Option<&O>,
+    ) -> SizerItemIsOwned<OWNED> {
+        unsafe {
+            let sizer = match sizer {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let user_data = match user_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            SizerItemIsOwned(ffi::wxSizerItem_new4(
+                sizer, proportion, flag, border, user_data,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<SizerItemIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: SizerItemIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for SizerItemIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSizerItem_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for SizerItemIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
 // wxSlider
 wx_class! { Slider =
     SliderIsOwned<true>(wxSlider) impl

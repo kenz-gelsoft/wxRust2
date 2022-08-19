@@ -29,6 +29,38 @@ extern "C" {
     pub fn wxIcon_SetWidth(self_: *mut c_void, width: c_int);
     // BLOCKED: pub fn wxIcon_operator=(self_: *mut c_void, icon: *const c_void) -> *mut c_void;
 
+    // wxImageHandler
+    pub fn wxImageHandler_CLASSINFO() -> *mut c_void;
+    // BLOCKED: pub fn wxImageHandler_new() -> *mut c_void;
+    // DTOR: pub fn wxImageHandler_~wxImageHandler(self_: *mut c_void);
+    pub fn wxImageHandler_CanRead(self_: *mut c_void, stream: *mut c_void) -> bool;
+    pub fn wxImageHandler_CanRead1(self_: *mut c_void, filename: *const c_void) -> bool;
+    pub fn wxImageHandler_GetExtension(self_: *const c_void) -> *mut c_void;
+    pub fn wxImageHandler_GetAltExtensions(self_: *const c_void) -> *mut c_void;
+    pub fn wxImageHandler_GetImageCount(self_: *mut c_void, stream: *mut c_void) -> c_int;
+    pub fn wxImageHandler_GetMimeType(self_: *const c_void) -> *mut c_void;
+    pub fn wxImageHandler_GetName(self_: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxImageHandler_GetType(self_: *const c_void) -> wxBitmapType;
+    pub fn wxImageHandler_LoadFile(
+        self_: *mut c_void,
+        image: *mut c_void,
+        stream: *mut c_void,
+        verbose: bool,
+        index: c_int,
+    ) -> bool;
+    pub fn wxImageHandler_SaveFile(
+        self_: *mut c_void,
+        image: *mut c_void,
+        stream: *mut c_void,
+        verbose: bool,
+    ) -> bool;
+    pub fn wxImageHandler_SetExtension(self_: *mut c_void, extension: *const c_void);
+    pub fn wxImageHandler_SetAltExtensions(self_: *mut c_void, extensions: *const c_void);
+    pub fn wxImageHandler_SetMimeType(self_: *mut c_void, mimetype: *const c_void);
+    pub fn wxImageHandler_SetName(self_: *mut c_void, name: *const c_void);
+    // NOT_SUPPORTED: pub fn wxImageHandler_SetType(self_: *mut c_void, type_: wxBitmapType);
+    // NOT_SUPPORTED: pub fn wxImageHandler_GetLibraryVersionInfo() -> wxVersionInfo;
+
     // wxItemContainer
     pub fn wxItemContainer_delete(self_: *mut c_void);
     pub fn wxItemContainer_Append(self_: *mut c_void, item: *const c_void) -> c_int;

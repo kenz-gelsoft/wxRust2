@@ -737,11 +737,17 @@ pub trait DCMethods: ObjectMethods {
     fn get_logical_origin(&self) -> Point {
         unsafe { Point::from_ptr(ffi::wxDC_GetLogicalOrigin1(self.as_ptr())) }
     }
-    fn get_graphics_context(&self) -> *mut c_void {
-        unsafe { ffi::wxDC_GetGraphicsContext(self.as_ptr()) }
+    fn get_graphics_context(&self) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe { GraphicsContext::option_from(ffi::wxDC_GetGraphicsContext(self.as_ptr())) }
     }
-    fn set_graphics_context(&self, ctx: *mut c_void) {
-        unsafe { ffi::wxDC_SetGraphicsContext(self.as_ptr(), ctx) }
+    fn set_graphics_context<G: GraphicsContextMethods>(&self, ctx: Option<&G>) {
+        unsafe {
+            let ctx = match ctx {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDC_SetGraphicsContext(self.as_ptr(), ctx)
+        }
     }
 }
 

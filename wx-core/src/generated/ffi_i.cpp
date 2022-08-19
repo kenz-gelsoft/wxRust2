@@ -62,6 +62,50 @@ void wxIcon_SetWidth(wxIcon * self, int width) {
 }
 #endif
 
+// CLASS: wxImageHandler
+wxClassInfo *wxImageHandler_CLASSINFO() {
+    return wxCLASSINFO(wxImageHandler);
+}
+bool wxImageHandler_CanRead(wxImageHandler * self, wxInputStream * stream) {
+    return self->CanRead(*stream);
+}
+bool wxImageHandler_CanRead1(wxImageHandler * self, const wxString * filename) {
+    return self->CanRead(*filename);
+}
+wxString *wxImageHandler_GetExtension(const wxImageHandler * self) {
+    return new wxString(self->GetExtension());
+}
+wxArrayString *wxImageHandler_GetAltExtensions(const wxImageHandler * self) {
+    return new wxArrayString(self->GetAltExtensions());
+}
+int wxImageHandler_GetImageCount(wxImageHandler * self, wxInputStream * stream) {
+    return self->GetImageCount(*stream);
+}
+wxString *wxImageHandler_GetMimeType(const wxImageHandler * self) {
+    return new wxString(self->GetMimeType());
+}
+wxString *wxImageHandler_GetName(const wxImageHandler * self) {
+    return new wxString(self->GetName());
+}
+bool wxImageHandler_LoadFile(wxImageHandler * self, wxImage * image, wxInputStream * stream, bool verbose, int index) {
+    return self->LoadFile(image, *stream, verbose, index);
+}
+bool wxImageHandler_SaveFile(wxImageHandler * self, wxImage * image, wxOutputStream * stream, bool verbose) {
+    return self->SaveFile(image, *stream, verbose);
+}
+void wxImageHandler_SetExtension(wxImageHandler * self, const wxString * extension) {
+    return self->SetExtension(*extension);
+}
+void wxImageHandler_SetAltExtensions(wxImageHandler * self, const wxArrayString * extensions) {
+    return self->SetAltExtensions(*extensions);
+}
+void wxImageHandler_SetMimeType(wxImageHandler * self, const wxString * mimetype) {
+    return self->SetMimeType(*mimetype);
+}
+void wxImageHandler_SetName(wxImageHandler * self, const wxString * name) {
+    return self->SetName(*name);
+}
+
 // CLASS: wxItemContainer
 void wxItemContainer_delete(wxItemContainer *self) {
     delete self;

@@ -52,9 +52,6 @@ class RustClassBinding:
             for line in self._trait_with_methods():
                 yield line
         else:
-            if self.mixed_into():
-                # Don't generate impl if mixin class
-                return
             unprefixed = self.__model.unprefixed()
             yield 'wx_class! { %s = ' % (unprefixed,)
             yield '    %sIsOwned<true>(%s) impl' % (
@@ -224,9 +221,11 @@ class RustClassBinding:
             base[2:],
         )
         if self.mixed_into():
-            yield '    fn %s(&self) -> *mut c_void;' % (
+            yield '    fn %s(&self) -> *mut c_void {' % (
                 self.as_mixin(),
             )
+            yield '        unsafe { self.as_ptr() }'
+            yield '    }'
         ancestors = self.__model.manager.ancestors_of(self.__model)
         for method in self.__methods:
             if method.is_ctor:
@@ -436,6 +435,7 @@ class RustMethodBinding:
         params = [p.name for p in params]
         if self_to_insert:
             params.insert(0, self_to_insert)
+        # print(self.__model.name(), params)
         return ', '.join(params)
 
     def _rust_method_name(self, with_overloads):
@@ -598,7 +598,8 @@ class CxxClassBinding:
     
     def _dtor_lines(self, is_cc):
         if (self.__model.manager.is_a(self.__model, 'wxObject') or
-            self.__model.manager.is_a(self.__model, 'wxRefCounter')):
+            self.__model.manager.is_a(self.__model, 'wxRefCounter') or
+            self.__model.manager.is_a(self.__model, 'wxSharedClientDataContainer')):
             return
         signature = 'void %s_delete(%s *self)' % (
             self.__model.name,

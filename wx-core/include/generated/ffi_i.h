@@ -2,6 +2,7 @@
 
 #include <wx/ctrlsub.h>
 #include <wx/icon.h>
+#include <wx/image.h>
 
 extern "C" {
 
@@ -28,6 +29,22 @@ void wxIcon_SetDepth(wxIcon * self, int depth);
 void wxIcon_SetHeight(wxIcon * self, int height);
 void wxIcon_SetWidth(wxIcon * self, int width);
 #endif
+
+// CLASS: wxImageHandler
+wxClassInfo *wxImageHandler_CLASSINFO();
+bool wxImageHandler_CanRead(wxImageHandler * self, wxInputStream * stream);
+bool wxImageHandler_CanRead1(wxImageHandler * self, const wxString * filename);
+wxString *wxImageHandler_GetExtension(const wxImageHandler * self);
+wxArrayString *wxImageHandler_GetAltExtensions(const wxImageHandler * self);
+int wxImageHandler_GetImageCount(wxImageHandler * self, wxInputStream * stream);
+wxString *wxImageHandler_GetMimeType(const wxImageHandler * self);
+wxString *wxImageHandler_GetName(const wxImageHandler * self);
+bool wxImageHandler_LoadFile(wxImageHandler * self, wxImage * image, wxInputStream * stream, bool verbose, int index);
+bool wxImageHandler_SaveFile(wxImageHandler * self, wxImage * image, wxOutputStream * stream, bool verbose);
+void wxImageHandler_SetExtension(wxImageHandler * self, const wxString * extension);
+void wxImageHandler_SetAltExtensions(wxImageHandler * self, const wxArrayString * extensions);
+void wxImageHandler_SetMimeType(wxImageHandler * self, const wxString * mimetype);
+void wxImageHandler_SetName(wxImageHandler * self, const wxString * name);
 
 // CLASS: wxItemContainer
 void wxItemContainer_delete(wxItemContainer *self);

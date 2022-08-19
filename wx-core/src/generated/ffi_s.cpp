@@ -484,6 +484,128 @@ int wxSizerFlags_GetDefaultBorder() {
     return wxSizerFlags::GetDefaultBorder();
 }
 
+// CLASS: wxSizerItem
+wxClassInfo *wxSizerItem_CLASSINFO() {
+    return wxCLASSINFO(wxSizerItem);
+}
+wxSizerItem *wxSizerItem_new(int width, int height, int proportion, int flag, int border, wxObject * user_data) {
+    return new wxSizerItem(width, height, proportion, flag, border, user_data);
+}
+wxSizerItem *wxSizerItem_new1(wxWindow * window, const wxSizerFlags * flags) {
+    return new wxSizerItem(window, *flags);
+}
+wxSizerItem *wxSizerItem_new2(wxWindow * window, int proportion, int flag, int border, wxObject * user_data) {
+    return new wxSizerItem(window, proportion, flag, border, user_data);
+}
+wxSizerItem *wxSizerItem_new3(wxSizer * sizer, const wxSizerFlags * flags) {
+    return new wxSizerItem(sizer, *flags);
+}
+wxSizerItem *wxSizerItem_new4(wxSizer * sizer, int proportion, int flag, int border, wxObject * user_data) {
+    return new wxSizerItem(sizer, proportion, flag, border, user_data);
+}
+void wxSizerItem_AssignWindow(wxSizerItem * self, wxWindow * window) {
+    return self->AssignWindow(window);
+}
+void wxSizerItem_AssignSizer(wxSizerItem * self, wxSizer * sizer) {
+    return self->AssignSizer(sizer);
+}
+void wxSizerItem_AssignSpacer(wxSizerItem * self, const wxSize * size) {
+    return self->AssignSpacer(*size);
+}
+void wxSizerItem_AssignSpacer1(wxSizerItem * self, int w, int h) {
+    return self->AssignSpacer(w, h);
+}
+wxSize *wxSizerItem_CalcMin(wxSizerItem * self) {
+    return new wxSize(self->CalcMin());
+}
+void wxSizerItem_DeleteWindows(wxSizerItem * self) {
+    return self->DeleteWindows();
+}
+void wxSizerItem_DetachSizer(wxSizerItem * self) {
+    return self->DetachSizer();
+}
+int wxSizerItem_GetBorder(const wxSizerItem * self) {
+    return self->GetBorder();
+}
+int wxSizerItem_GetFlag(const wxSizerItem * self) {
+    return self->GetFlag();
+}
+int wxSizerItem_GetId(const wxSizerItem * self) {
+    return self->GetId();
+}
+wxSize *wxSizerItem_GetMinSize(const wxSizerItem * self) {
+    return new wxSize(self->GetMinSize());
+}
+void wxSizerItem_SetMinSize(wxSizerItem * self, const wxSize * size) {
+    return self->SetMinSize(*size);
+}
+void wxSizerItem_SetMinSize1(wxSizerItem * self, int x, int y) {
+    return self->SetMinSize(x, y);
+}
+wxPoint *wxSizerItem_GetPosition(const wxSizerItem * self) {
+    return new wxPoint(self->GetPosition());
+}
+int wxSizerItem_GetProportion(const wxSizerItem * self) {
+    return self->GetProportion();
+}
+wxRect *wxSizerItem_GetRect(wxSizerItem * self) {
+    return new wxRect(self->GetRect());
+}
+wxSize *wxSizerItem_GetSize(const wxSizerItem * self) {
+    return new wxSize(self->GetSize());
+}
+wxSizer * wxSizerItem_GetSizer(const wxSizerItem * self) {
+    return self->GetSizer();
+}
+wxSize *wxSizerItem_GetSpacer(const wxSizerItem * self) {
+    return new wxSize(self->GetSpacer());
+}
+wxObject * wxSizerItem_GetUserData(const wxSizerItem * self) {
+    return self->GetUserData();
+}
+wxWindow * wxSizerItem_GetWindow(const wxSizerItem * self) {
+    return self->GetWindow();
+}
+bool wxSizerItem_IsShown(const wxSizerItem * self) {
+    return self->IsShown();
+}
+bool wxSizerItem_IsSizer(const wxSizerItem * self) {
+    return self->IsSizer();
+}
+bool wxSizerItem_IsSpacer(const wxSizerItem * self) {
+    return self->IsSpacer();
+}
+bool wxSizerItem_IsWindow(const wxSizerItem * self) {
+    return self->IsWindow();
+}
+void wxSizerItem_SetBorder(wxSizerItem * self, int border) {
+    return self->SetBorder(border);
+}
+void wxSizerItem_SetDimension(wxSizerItem * self, const wxPoint * pos, const wxSize * size) {
+    return self->SetDimension(*pos, *size);
+}
+void wxSizerItem_SetFlag(wxSizerItem * self, int flag) {
+    return self->SetFlag(flag);
+}
+void wxSizerItem_SetId(wxSizerItem * self, int id) {
+    return self->SetId(id);
+}
+void wxSizerItem_SetInitSize(wxSizerItem * self, int x, int y) {
+    return self->SetInitSize(x, y);
+}
+void wxSizerItem_SetProportion(wxSizerItem * self, int proportion) {
+    return self->SetProportion(proportion);
+}
+void wxSizerItem_SetRatio(wxSizerItem * self, int width, int height) {
+    return self->SetRatio(width, height);
+}
+void wxSizerItem_SetUserData(wxSizerItem * self, wxObject * user_data) {
+    return self->SetUserData(user_data);
+}
+void wxSizerItem_Show(wxSizerItem * self, bool show) {
+    return self->Show(show);
+}
+
 // CLASS: wxSlider
 wxClassInfo *wxSlider_CLASSINFO() {
     return wxCLASSINFO(wxSlider);

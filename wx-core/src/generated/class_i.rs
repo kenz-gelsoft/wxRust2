@@ -54,6 +54,75 @@ impl<const OWNED: bool> Drop for IconIsOwned<OWNED> {
     }
 }
 
+// wxImageHandler
+wx_class! { ImageHandler =
+    ImageHandlerIsOwned<true>(wxImageHandler) impl
+        ImageHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> ImageHandlerIsOwned<OWNED> {
+    // BLOCKED: fn wxImageHandler()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<ImageHandlerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: ImageHandlerIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for ImageHandlerIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxImageHandler_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for ImageHandlerIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
 // wxItemContainer
+wx_class! { ItemContainer =
+    ItemContainerIsOwned<true>(wxItemContainer) impl
+        ItemContainerMethods,
+        ItemContainerImmutableMethods
+}
+impl<const OWNED: bool> ItemContainerIsOwned<OWNED> {
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<ItemContainerIsOwned<OWNED>> for ItemContainerImmutableIsOwned<OWNED> {
+    fn from(o: ItemContainerIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> Drop for ItemContainerIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxItemContainer_delete(self.0) }
+        }
+    }
+}
 
 // wxItemContainerImmutable
+wx_class! { ItemContainerImmutable =
+    ItemContainerImmutableIsOwned<true>(wxItemContainerImmutable) impl
+        ItemContainerImmutableMethods
+}
+impl<const OWNED: bool> ItemContainerImmutableIsOwned<OWNED> {
+    // BLOCKED: fn wxItemContainerImmutable()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for ItemContainerImmutableIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxItemContainerImmutable_delete(self.0) }
+        }
+    }
+}

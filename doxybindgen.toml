@@ -1,56 +1,4 @@
 core_files = [
-    'wxml/classwx_g_b_position.xml',
-    'wxml/classwx_g_b_sizer_item.xml',
-    'wxml/classwx_g_b_span.xml',
-    'wxml/classwx_g_c_d_c.xml',
-    'wxml/classwx_g_d_i_object.xml',
-    'wxml/classwx_g_i_f_handler.xml',
-    'wxml/classwx_gauge.xml',
-    'wxml/classwx_generic_about_dialog.xml',
-    'wxml/classwx_generic_animation_ctrl.xml',
-    'wxml/classwx_generic_dir_ctrl.xml',
-    'wxml/classwx_generic_progress_dialog.xml',
-    'wxml/classwx_generic_validator.xml',
-    'wxml/classwx_gesture_event.xml',
-    'wxml/classwx_graphics_brush.xml',
-    'wxml/classwx_graphics_context.xml',
-    'wxml/classwx_graphics_font.xml',
-    'wxml/classwx_graphics_gradient_stop.xml',
-    'wxml/classwx_graphics_gradient_stops.xml',
-    'wxml/classwx_graphics_matrix.xml',
-    'wxml/classwx_graphics_object.xml',
-    'wxml/classwx_graphics_path.xml',
-    'wxml/classwx_graphics_pen.xml',
-    'wxml/classwx_graphics_renderer.xml',
-    'wxml/classwx_grid.xml',
-    'wxml/classwx_grid_bag_sizer.xml',
-    'wxml/classwx_grid_cell_attr.xml',
-    'wxml/classwx_grid_cell_auto_wrap_string_editor.xml',
-    'wxml/classwx_grid_cell_auto_wrap_string_renderer.xml',
-    'wxml/classwx_grid_cell_bool_editor.xml',
-    'wxml/classwx_grid_cell_bool_renderer.xml',
-    'wxml/classwx_grid_cell_choice_editor.xml',
-    'wxml/classwx_grid_cell_date_editor.xml',
-    'wxml/classwx_grid_cell_date_renderer.xml',
-    'wxml/classwx_grid_cell_date_time_renderer.xml',
-    'wxml/classwx_grid_cell_editor.xml',
-    'wxml/classwx_grid_cell_enum_editor.xml',
-    'wxml/classwx_grid_cell_enum_renderer.xml',
-    'wxml/classwx_grid_cell_float_editor.xml',
-    'wxml/classwx_grid_cell_float_renderer.xml',
-    'wxml/classwx_grid_cell_number_editor.xml',
-    'wxml/classwx_grid_cell_number_renderer.xml',
-    'wxml/classwx_grid_cell_renderer.xml',
-    'wxml/classwx_grid_cell_string_renderer.xml',
-    'wxml/classwx_grid_cell_text_editor.xml',
-    'wxml/classwx_grid_editor_created_event.xml',
-    'wxml/classwx_grid_event.xml',
-    'wxml/classwx_grid_fit_mode.xml',
-    'wxml/classwx_grid_range_select_event.xml',
-    'wxml/classwx_grid_size_event.xml',
-    'wxml/classwx_grid_sizer.xml',
-    'wxml/classwx_grid_table_base.xml',
-    'wxml/classwx_grid_update_locker.xml',
     'wxml/classwx_h_scrolled_window.xml',
     'wxml/classwx_h_t_m_l_data_object.xml',
     'wxml/classwx_h_v_scrolled_window.xml',
@@ -461,10 +409,58 @@ wxml_files = [
     'wxml/classwx_font_picker_event.xml',
     'wxml/classwx_frame.xml',
     # 'wxml/classwx_full_screen_event.xml', # requires 3.1
+    'wxml/classwx_g_b_position.xml',
+    'wxml/classwx_g_b_sizer_item.xml',
+    'wxml/classwx_g_b_span.xml',
+    # 'wxml/classwx_g_c_d_c.xml', # requires not yet generated wxDC-related classes
     'wxml/classwx_g_d_i_object.xml',
+    'wxml/classwx_g_i_f_handler.xml',
     'wxml/classwx_gauge.xml',
+    'wxml/classwx_generic_about_dialog.xml',
+    # 'wxml/classwx_generic_animation_ctrl.xml', # wxUSE_ANIMATIONCTRL=1 is required
     'wxml/classwx_generic_dir_ctrl.xml',
+    'wxml/classwx_generic_progress_dialog.xml',
+    'wxml/classwx_generic_validator.xml',
+    # 'wxml/classwx_gesture_event.xml', # requires 3.1
+    'wxml/classwx_graphics_brush.xml',
+    'wxml/classwx_graphics_context.xml',
+    'wxml/classwx_graphics_font.xml',
+    'wxml/classwx_graphics_gradient_stop.xml',
+    'wxml/classwx_graphics_gradient_stops.xml',
+    'wxml/classwx_graphics_matrix.xml',
+    'wxml/classwx_graphics_object.xml',
+    'wxml/classwx_graphics_path.xml',
+    'wxml/classwx_graphics_pen.xml',
+    'wxml/classwx_graphics_renderer.xml',
+    # 'wxml/classwx_grid.xml', # base class depends template, need special treatment
+    'wxml/classwx_grid_bag_sizer.xml',
+    # 'wxml/classwx_grid_cell_attr.xml',                      # requires 3.1.7
+    # 'wxml/classwx_grid_cell_auto_wrap_string_editor.xml',   # requires 3.1.7
+    # 'wxml/classwx_grid_cell_auto_wrap_string_renderer.xml', # requires 3.1.7
+    # 'wxml/classwx_grid_cell_bool_editor.xml',               # requires 3.1.7
+    # 'wxml/classwx_grid_cell_bool_renderer.xml',             # requires 3.1.7
+    # 'wxml/classwx_grid_cell_choice_editor.xml',             # requires 3.1.7
+    # 'wxml/classwx_grid_cell_date_editor.xml',               # requires 3.1.7
+    # 'wxml/classwx_grid_cell_date_renderer.xml',             # requires 3.1.7
+    # 'wxml/classwx_grid_cell_date_time_renderer.xml',        # requires 3.1.7
+    # 'wxml/classwx_grid_cell_editor.xml',                    # requires 3.1.7
+    # 'wxml/classwx_grid_cell_enum_editor.xml',               # requires 3.1.7
+    # 'wxml/classwx_grid_cell_enum_renderer.xml',             # requires 3.1.7
+    # 'wxml/classwx_grid_cell_float_editor.xml',              # requires 3.1.7
+    # 'wxml/classwx_grid_cell_float_renderer.xml',            # requires 3.1.7
+    # 'wxml/classwx_grid_cell_number_editor.xml',             # requires 3.1.7
+    # 'wxml/classwx_grid_cell_number_renderer.xml',           # requires 3.1.7
+    # 'wxml/classwx_grid_cell_renderer.xml',                  # requires 3.1.7
+    # 'wxml/classwx_grid_cell_string_renderer.xml',           # requires 3.1.7
+    # 'wxml/classwx_grid_cell_text_editor.xml',               # requires 3.1.7
+    'wxml/classwx_grid_editor_created_event.xml',
+    'wxml/classwx_grid_event.xml',
+    # 'wxml/classwx_grid_fit_mode.xml', # requires 3.1
+    'wxml/classwx_grid_range_select_event.xml',
+    'wxml/classwx_grid_size_event.xml',
     'wxml/classwx_grid_sizer.xml',
+    'wxml/classwx_grid_table_base.xml',
+    'wxml/classwx_grid_update_locker.xml',
     'wxml/classwx_header_column.xml',
     'wxml/classwx_header_column_simple.xml',
     'wxml/classwx_header_ctrl.xml',
@@ -472,6 +468,7 @@ wxml_files = [
     # 'wxml/classwx_help_controller_base.xml', # Our CI environment is't built with
     'wxml/classwx_hyperlink_ctrl.xml',
     'wxml/classwx_icon.xml',
+    'wxml/classwx_image_handler.xml',
     'wxml/classwx_item_container.xml',
     'wxml/classwx_item_container_immutable.xml',
     'wxml/classwx_list_box.xml',
@@ -493,9 +490,11 @@ wxml_files = [
     'wxml/classwx_renderer_native.xml',
     'wxml/classwx_search_ctrl.xml',
     'wxml/classwx_settable_header_column.xml',
+    # 'wxml/classwx_shared_client_data_container.xml', # requires 3.1.7
     'wxml/classwx_size.xml',
     'wxml/classwx_sizer.xml',
     'wxml/classwx_sizer_flags.xml',
+    'wxml/classwx_sizer_item.xml',
     'wxml/classwx_slider.xml',
     'wxml/classwx_spin_button.xml',
     'wxml/classwx_spin_ctrl.xml',
@@ -1160,6 +1159,128 @@ wx31 = [
 windows = [
     'MSWGetTaskBarButton',
 ]
+[types.wxGBPosition]
+blocklist = [
+    'operator!=',
+    'operator==',
+]
+[types.wxGBSpan]
+blocklist = [
+    'operator!=',
+    'operator==',
+]
+[types.wxGraphicsContext]
+blocklist = [
+    # some of our CI env built without printing
+    'Create3',
+]
+windows = [
+    'Create4',
+]
+wx31 = [
+    'CreatePen1',
+    'CreateFontAtDPI',
+    'CreateFromUnknownDC',
+    'GetClipBox',
+    'GetWindow',
+    # const-ness changed
+    'GetDPI',
+    'OffsetEnabled',
+]
+wx317 = [
+    'FromDIP',
+    'FromDIP1',
+    'FromDIP2',
+    'ToDIP',
+    'ToDIP1',
+    'ToDIP2',
+]
+[types.wxGraphicsGradientStops]
+blocklist = [
+    # wx-value type not supported
+    'wxGraphicsGradientStops',
+    'SetEndColour',
+    'SetStartColour',
+]
+[types.wxGraphicsMatrix]
+blocklist = [
+    'Concat1',
+    'IsEqual',
+]
+[types.wxGraphicsRenderer]
+blocklist = [
+    # some of our CI env built without printing
+    'CreateContext3',
+]
+windows = [
+    'CreateContext4',
+    'GetDirect2DRenderer',
+    'GetGDIPlusRenderer',
+]
+wx31 = [
+    'CreateContextFromUnknownDC',
+    'CreateFontAtDPI',
+    'CreatePen',
+    'GetName',
+    'GetVersion',
+]
+[types.wxGridCellAttr]
+blocklist = [
+    # wx-value type not supported
+    'SetFitMode',
+]
+[types.wxGridCellEditor]
+blocklist = [
+    # abstract
+    'wxGridCellEditor',
+]
+[types.wxGridCellRenderer]
+blocklist = [
+    # abstract
+    'wxGridCellRenderer',
+]
+[types.wxGridEditorCreatedEvent]
+wx31 = [
+    'GetWindow',
+    'SetWindow',
+    # const-ness change
+    'GetCol',
+    'GetRow',
+]
+[types.wxGridEvent]
+wx31 = [
+    # const-ness change
+    'GetCol',
+    'GetPosition',
+    'GetRow',
+    'Selecting',
+]
+[types.wxGridRangeSelectEvent]
+wx31 = [
+    # const-ness change
+    'GetBottomRow',
+    'GetLeftCol',
+    'GetRightCol',
+    'GetTopRow',
+    'Selecting',
+]
+[types.wxGridSizeEvent]
+wx31 = [
+    # const-ness change
+    'GetPosition',
+    'GetRowOrCol',
+]
+[types.wxGridTableBase]
+blocklist = [
+    # abstract
+    'wxGridTableBase',
+    # No argument label
+    'SetCornerLabelValue',
+]
+wx31 = [
+    'CanMeasureColUsingSameAttr',
+    'GetCornerLabelValue',
+]
 [types.wxHeaderColumn]
 wx31 = [
     'GetBitmapBundle',
@@ -1191,6 +1312,11 @@ wx317 = [
     'SetDepth',
     'SetHeight',
     'SetWidth',
+]
+[types.wxImageHandler]
+blocklist = [
+    # abstract
+    'wxImageHandler',
 ]
 [types.wxItemContainer]
 blocklist = [
@@ -1378,6 +1504,15 @@ wx31 = [
     'CentreHorizontal',
     'CentreVertical',
     'DisableConsistencyChecks',
+]
+[types.wxSizerItem]
+blocklist = [
+    # wx-value type not supported
+    'SetRatio1',
+    # deprecated
+    'SetSizer',
+    'SetSpacer',
+    'SetWindow',
 ]
 [types.wxStandardPaths]
 windows = [
