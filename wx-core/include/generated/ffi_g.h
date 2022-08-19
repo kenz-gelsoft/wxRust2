@@ -257,7 +257,9 @@ wxGraphicsContext * wxGraphicsRenderer_CreateContext2(wxGraphicsRenderer * self,
 #ifdef __WXMSW__
 wxGraphicsContext * wxGraphicsRenderer_CreateContext4(wxGraphicsRenderer * self, const wxEnhMetaFileDC * meta_file_dc);
 #endif
+#if wxCHECK_VERSION(3, 1, 0)
 wxGraphicsContext * wxGraphicsRenderer_CreateContextFromUnknownDC(wxGraphicsRenderer * self, wxDC * dc);
+#endif
 wxGraphicsContext * wxGraphicsRenderer_CreateContextFromImage(wxGraphicsRenderer * self, wxImage * image);
 wxGraphicsBrush *wxGraphicsRenderer_CreateBrush(wxGraphicsRenderer * self, const wxBrush * brush);
 wxGraphicsContext * wxGraphicsRenderer_CreateContextFromNativeContext(wxGraphicsRenderer * self, void * context);
@@ -265,7 +267,9 @@ wxGraphicsContext * wxGraphicsRenderer_CreateContextFromNativeWindow(wxGraphicsR
 wxGraphicsContext * wxGraphicsRenderer_CreateMeasuringContext(wxGraphicsRenderer * self);
 wxGraphicsFont *wxGraphicsRenderer_CreateFont(wxGraphicsRenderer * self, const wxFont * font, const wxColour * col);
 wxGraphicsFont *wxGraphicsRenderer_CreateFont1(wxGraphicsRenderer * self, double size_in_pixels, const wxString * facename, int flags, const wxColour * col);
+#if wxCHECK_VERSION(3, 1, 0)
 wxGraphicsFont *wxGraphicsRenderer_CreateFontAtDPI(wxGraphicsRenderer * self, const wxFont * font, const wxRealPoint * dpi, const wxColour * col);
+#endif
 wxGraphicsPath *wxGraphicsRenderer_CreatePath(wxGraphicsRenderer * self);
 #if wxCHECK_VERSION(3, 1, 0)
 wxGraphicsPen *wxGraphicsRenderer_CreatePen(wxGraphicsRenderer * self, const wxGraphicsPenInfo * info);

@@ -621,9 +621,11 @@ wxGraphicsContext * wxGraphicsRenderer_CreateContext4(wxGraphicsRenderer * self,
     return self->CreateContext(*meta_file_dc);
 }
 #endif
+#if wxCHECK_VERSION(3, 1, 0)
 wxGraphicsContext * wxGraphicsRenderer_CreateContextFromUnknownDC(wxGraphicsRenderer * self, wxDC * dc) {
     return self->CreateContextFromUnknownDC(*dc);
 }
+#endif
 wxGraphicsContext * wxGraphicsRenderer_CreateContextFromImage(wxGraphicsRenderer * self, wxImage * image) {
     return self->CreateContextFromImage(*image);
 }
@@ -645,9 +647,11 @@ wxGraphicsFont *wxGraphicsRenderer_CreateFont(wxGraphicsRenderer * self, const w
 wxGraphicsFont *wxGraphicsRenderer_CreateFont1(wxGraphicsRenderer * self, double size_in_pixels, const wxString * facename, int flags, const wxColour * col) {
     return new wxGraphicsFont(self->CreateFont(size_in_pixels, *facename, flags, *col));
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxGraphicsFont *wxGraphicsRenderer_CreateFontAtDPI(wxGraphicsRenderer * self, const wxFont * font, const wxRealPoint * dpi, const wxColour * col) {
     return new wxGraphicsFont(self->CreateFontAtDPI(*font, *dpi, *col));
 }
+#endif
 wxGraphicsPath *wxGraphicsRenderer_CreatePath(wxGraphicsRenderer * self) {
     return new wxGraphicsPath(self->CreatePath());
 }

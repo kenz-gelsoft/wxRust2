@@ -1218,6 +1218,8 @@ windows = [
     'GetGDIPlusRenderer',
 ]
 wx31 = [
+    'CreateContextFromUnknownDC',
+    'CreateFontAtDPI',
     'CreatePen',
     'GetName',
     'GetVersion',
