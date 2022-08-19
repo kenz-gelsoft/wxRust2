@@ -1,10 +1,27 @@
 #pragma once
 
+#include <wx/dataobj.h>
+#include <wx/event.h>
 #include <wx/headercol.h>
 #include <wx/headerctrl.h>
 #include <wx/hyperlink.h>
+#include <wx/vscroll.h>
 
 extern "C" {
+
+// CLASS: wxHScrolledWindow
+wxClassInfo *wxHScrolledWindow_CLASSINFO();
+bool wxHScrolledWindow_Create(wxHScrolledWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+
+// CLASS: wxHTMLDataObject
+void wxHTMLDataObject_delete(wxHTMLDataObject *self);
+wxHTMLDataObject *wxHTMLDataObject_new(const wxString * html);
+wxString *wxHTMLDataObject_GetHTML(const wxHTMLDataObject * self);
+void wxHTMLDataObject_SetHTML(wxHTMLDataObject * self, const wxString * html);
+
+// CLASS: wxHVScrolledWindow
+wxClassInfo *wxHVScrolledWindow_CLASSINFO();
+bool wxHVScrolledWindow_Create(wxHVScrolledWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 
 // CLASS: wxHeaderColumn
 void wxHeaderColumn_delete(wxHeaderColumn *self);
@@ -52,6 +69,16 @@ int wxHeaderCtrl_GetColumnTitleWidth1(wxHeaderCtrl * self, unsigned int idx);
 #endif
 void wxHeaderCtrl_MoveColumnInOrderArray(wxArrayInt * order, unsigned int idx, unsigned int pos);
 
+// CLASS: wxHeaderCtrlEvent
+wxClassInfo *wxHeaderCtrlEvent_CLASSINFO();
+wxHeaderCtrlEvent *wxHeaderCtrlEvent_new1(const wxHeaderCtrlEvent * event);
+int wxHeaderCtrlEvent_GetColumn(const wxHeaderCtrlEvent * self);
+void wxHeaderCtrlEvent_SetColumn(wxHeaderCtrlEvent * self, int col);
+int wxHeaderCtrlEvent_GetWidth(const wxHeaderCtrlEvent * self);
+void wxHeaderCtrlEvent_SetWidth(wxHeaderCtrlEvent * self, int width);
+unsigned int wxHeaderCtrlEvent_GetNewOrder(const wxHeaderCtrlEvent * self);
+void wxHeaderCtrlEvent_SetNewOrder(wxHeaderCtrlEvent * self, unsigned int order);
+
 // CLASS: wxHeaderCtrlSimple
 wxClassInfo *wxHeaderCtrlSimple_CLASSINFO();
 wxHeaderCtrlSimple *wxHeaderCtrlSimple_new();
@@ -63,6 +90,11 @@ void wxHeaderCtrlSimple_ShowColumn(wxHeaderCtrlSimple * self, unsigned int idx, 
 void wxHeaderCtrlSimple_HideColumn(wxHeaderCtrlSimple * self, unsigned int idx);
 void wxHeaderCtrlSimple_ShowSortIndicator(wxHeaderCtrlSimple * self, unsigned int idx, bool sort_order);
 void wxHeaderCtrlSimple_RemoveSortIndicator(wxHeaderCtrlSimple * self);
+
+// CLASS: wxHelpEvent
+wxClassInfo *wxHelpEvent_CLASSINFO();
+wxPoint *wxHelpEvent_GetPosition(const wxHelpEvent * self);
+void wxHelpEvent_SetPosition(wxHelpEvent * self, const wxPoint * pt);
 
 // CLASS: wxHyperlinkCtrl
 wxClassInfo *wxHyperlinkCtrl_CLASSINFO();
@@ -79,6 +111,12 @@ void wxHyperlinkCtrl_SetNormalColour(wxHyperlinkCtrl * self, const wxColour * co
 void wxHyperlinkCtrl_SetURL(wxHyperlinkCtrl * self, const wxString * url);
 void wxHyperlinkCtrl_SetVisited(wxHyperlinkCtrl * self, bool visited);
 void wxHyperlinkCtrl_SetVisitedColour(wxHyperlinkCtrl * self, const wxColour * colour);
+
+// CLASS: wxHyperlinkEvent
+wxClassInfo *wxHyperlinkEvent_CLASSINFO();
+wxHyperlinkEvent *wxHyperlinkEvent_new(wxObject * generator, int id, const wxString * url);
+wxString *wxHyperlinkEvent_GetURL(const wxHyperlinkEvent * self);
+void wxHyperlinkEvent_SetURL(wxHyperlinkEvent * self, const wxString * url);
 
 } // extern "C"
 

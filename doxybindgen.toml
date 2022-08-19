@@ -1,19 +1,4 @@
 core_files = [
-    'wxml/classwx_h_scrolled_window.xml',
-    'wxml/classwx_h_t_m_l_data_object.xml',
-    'wxml/classwx_h_v_scrolled_window.xml',
-    'wxml/classwx_header_column.xml',
-    'wxml/classwx_header_column_simple.xml',
-    'wxml/classwx_header_ctrl.xml',
-    'wxml/classwx_header_ctrl_event.xml',
-    'wxml/classwx_header_ctrl_simple.xml',
-    'wxml/classwx_help_controller.xml',
-    'wxml/classwx_help_controller_base.xml',
-    'wxml/classwx_help_controller_help_provider.xml',
-    'wxml/classwx_help_event.xml',
-    'wxml/classwx_help_provider.xml',
-    'wxml/classwx_hyperlink_ctrl.xml',
-    'wxml/classwx_hyperlink_event.xml',
     'wxml/classwx_i_f_f_handler.xml',
     'wxml/classwx_icon.xml',
     'wxml/classwx_icon_bundle.xml',
@@ -461,12 +446,21 @@ wxml_files = [
     'wxml/classwx_grid_sizer.xml',
     'wxml/classwx_grid_table_base.xml',
     'wxml/classwx_grid_update_locker.xml',
+    'wxml/classwx_h_scrolled_window.xml',
+    'wxml/classwx_h_t_m_l_data_object.xml',
+    'wxml/classwx_h_v_scrolled_window.xml',
     'wxml/classwx_header_column.xml',
     'wxml/classwx_header_column_simple.xml',
     'wxml/classwx_header_ctrl.xml',
+    'wxml/classwx_header_ctrl_event.xml',
     'wxml/classwx_header_ctrl_simple.xml',
-    # 'wxml/classwx_help_controller_base.xml', # Our CI environment is't built with
+    # 'wxml/classwx_help_controller.xml',               # Our CI environment is't built with
+    # 'wxml/classwx_help_controller_base.xml',          # Our CI environment is't built with
+    # 'wxml/classwx_help_controller_help_provider.xml', # Our CI environment is't built with
+    'wxml/classwx_help_event.xml',
+    # 'wxml/classwx_help_provider.xml', # Our CI environment is't built with
     'wxml/classwx_hyperlink_ctrl.xml',
+    'wxml/classwx_hyperlink_event.xml',
     'wxml/classwx_icon.xml',
     'wxml/classwx_image_handler.xml',
     'wxml/classwx_item_container.xml',
@@ -1292,6 +1286,16 @@ blocklist = [
 ]
 wx31 = [
     'GetColumnTitleWidth1',
+]
+[types.wxHScrolledWindow]
+blocklist = [
+    'wxHScrolledWindow',
+    'wxHScrolledWindow1',
+]
+[types.wxHVScrolledWindow]
+blocklist = [
+    'wxHVScrolledWindow',
+    'wxHVScrolledWindow1',
 ]
 [types.wxGDIObject]
 blocklist = [
