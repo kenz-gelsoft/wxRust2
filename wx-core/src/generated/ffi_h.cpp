@@ -6,12 +6,6 @@ extern "C" {
 wxClassInfo *wxHScrolledWindow_CLASSINFO() {
     return wxCLASSINFO(wxHScrolledWindow);
 }
-wxHScrolledWindow *wxHScrolledWindow_new() {
-    return new wxHScrolledWindow();
-}
-wxHScrolledWindow *wxHScrolledWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
-    return new wxHScrolledWindow(parent, id, *pos, *size, style, *name);
-}
 bool wxHScrolledWindow_Create(wxHScrolledWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return self->Create(parent, id, *pos, *size, style, *name);
 }
@@ -33,12 +27,6 @@ void wxHTMLDataObject_SetHTML(wxHTMLDataObject * self, const wxString * html) {
 // CLASS: wxHVScrolledWindow
 wxClassInfo *wxHVScrolledWindow_CLASSINFO() {
     return wxCLASSINFO(wxHVScrolledWindow);
-}
-wxHVScrolledWindow *wxHVScrolledWindow_new() {
-    return new wxHVScrolledWindow();
-}
-wxHVScrolledWindow *wxHVScrolledWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
-    return new wxHVScrolledWindow(parent, id, *pos, *size, style, *name);
 }
 bool wxHVScrolledWindow_Create(wxHVScrolledWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
     return self->Create(parent, id, *pos, *size, style, *name);

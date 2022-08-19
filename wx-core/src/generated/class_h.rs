@@ -12,31 +12,8 @@ wx_class! { HScrolledWindow =
         ObjectMethods
 }
 impl<const OWNED: bool> HScrolledWindowIsOwned<OWNED> {
-    pub fn new_2step() -> HScrolledWindowIsOwned<OWNED> {
-        unsafe { HScrolledWindowIsOwned(ffi::wxHScrolledWindow_new()) }
-    }
-    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
-        parent: Option<&W>,
-        id: c_int,
-        pos: &P,
-        size: &S,
-        style: c_long,
-        name: &str,
-    ) -> HScrolledWindowIsOwned<OWNED> {
-        unsafe {
-            let parent = match parent {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            let pos = pos.as_ptr();
-            let size = size.as_ptr();
-            let name = WxString::from(name);
-            let name = name.as_ptr();
-            HScrolledWindowIsOwned(ffi::wxHScrolledWindow_new1(
-                parent, id, pos, size, style, name,
-            ))
-        }
-    }
+    // BLOCKED: fn wxHScrolledWindow()
+    // BLOCKED: fn wxHScrolledWindow1()
     pub fn none() -> Option<&'static Self> {
         None
     }
@@ -137,31 +114,8 @@ wx_class! { HVScrolledWindow =
         ObjectMethods
 }
 impl<const OWNED: bool> HVScrolledWindowIsOwned<OWNED> {
-    pub fn new_2step() -> HVScrolledWindowIsOwned<OWNED> {
-        unsafe { HVScrolledWindowIsOwned(ffi::wxHVScrolledWindow_new()) }
-    }
-    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
-        parent: Option<&W>,
-        id: c_int,
-        pos: &P,
-        size: &S,
-        style: c_long,
-        name: &str,
-    ) -> HVScrolledWindowIsOwned<OWNED> {
-        unsafe {
-            let parent = match parent {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            let pos = pos.as_ptr();
-            let size = size.as_ptr();
-            let name = WxString::from(name);
-            let name = name.as_ptr();
-            HVScrolledWindowIsOwned(ffi::wxHVScrolledWindow_new1(
-                parent, id, pos, size, style, name,
-            ))
-        }
-    }
+    // BLOCKED: fn wxHVScrolledWindow()
+    // BLOCKED: fn wxHVScrolledWindow1()
     pub fn none() -> Option<&'static Self> {
         None
     }

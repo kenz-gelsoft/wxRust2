@@ -12,8 +12,6 @@ extern "C" {
 
 // CLASS: wxHScrolledWindow
 wxClassInfo *wxHScrolledWindow_CLASSINFO();
-wxHScrolledWindow *wxHScrolledWindow_new();
-wxHScrolledWindow *wxHScrolledWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxHScrolledWindow_Create(wxHScrolledWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 
 // CLASS: wxHTMLDataObject
@@ -24,8 +22,6 @@ void wxHTMLDataObject_SetHTML(wxHTMLDataObject * self, const wxString * html);
 
 // CLASS: wxHVScrolledWindow
 wxClassInfo *wxHVScrolledWindow_CLASSINFO();
-wxHVScrolledWindow *wxHVScrolledWindow_new();
-wxHVScrolledWindow *wxHVScrolledWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxHVScrolledWindow_Create(wxHVScrolledWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 
 // CLASS: wxHeaderColumn

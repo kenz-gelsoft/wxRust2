@@ -1287,6 +1287,16 @@ blocklist = [
 wx31 = [
     'GetColumnTitleWidth1',
 ]
+[types.wxHScrolledWindow]
+blocklist = [
+    'wxHScrolledWindow',
+    'wxHScrolledWindow1',
+]
+[types.wxHVScrolledWindow]
+blocklist = [
+    'wxHVScrolledWindow',
+    'wxHVScrolledWindow1',
+]
 [types.wxGDIObject]
 blocklist = [
     # abstract class

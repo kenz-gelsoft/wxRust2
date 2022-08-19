@@ -4,15 +4,8 @@ extern "C" {
 
     // wxHScrolledWindow
     pub fn wxHScrolledWindow_CLASSINFO() -> *mut c_void;
-    pub fn wxHScrolledWindow_new() -> *mut c_void;
-    pub fn wxHScrolledWindow_new1(
-        parent: *mut c_void,
-        id: c_int,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> *mut c_void;
+    // BLOCKED: pub fn wxHScrolledWindow_new() -> *mut c_void;
+    // BLOCKED: pub fn wxHScrolledWindow_new1(parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> *mut c_void;
     pub fn wxHScrolledWindow_Create(
         self_: *mut c_void,
         parent: *mut c_void,
@@ -31,15 +24,8 @@ extern "C" {
 
     // wxHVScrolledWindow
     pub fn wxHVScrolledWindow_CLASSINFO() -> *mut c_void;
-    pub fn wxHVScrolledWindow_new() -> *mut c_void;
-    pub fn wxHVScrolledWindow_new1(
-        parent: *mut c_void,
-        id: c_int,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> *mut c_void;
+    // BLOCKED: pub fn wxHVScrolledWindow_new() -> *mut c_void;
+    // BLOCKED: pub fn wxHVScrolledWindow_new1(parent: *mut c_void, id: c_int, pos: *const c_void, size: *const c_void, style: c_long, name: *const c_void) -> *mut c_void;
     pub fn wxHVScrolledWindow_Create(
         self_: *mut c_void,
         parent: *mut c_void,
