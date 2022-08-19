@@ -144,18 +144,6 @@ extern "C" {
     // NOT_SUPPORTED: pub fn wxHelpEvent_SetOrigin(self_: *mut c_void, origin: wxHelpEvent::Origin);
     pub fn wxHelpEvent_SetPosition(self_: *mut c_void, pt: *const c_void);
 
-    // wxHelpProvider
-    pub fn wxHelpProvider_delete(self_: *mut c_void);
-    // DTOR: pub fn wxHelpProvider_~wxHelpProvider(self_: *mut c_void);
-    pub fn wxHelpProvider_AddHelp(self_: *mut c_void, window: *mut c_void, text: *const c_void);
-    pub fn wxHelpProvider_AddHelp1(self_: *mut c_void, id: c_int, text: *const c_void);
-    pub fn wxHelpProvider_GetHelp(self_: *mut c_void, window: *const c_void) -> *mut c_void;
-    pub fn wxHelpProvider_RemoveHelp(self_: *mut c_void, window: *mut c_void);
-    pub fn wxHelpProvider_ShowHelp(self_: *mut c_void, window: *mut c_void) -> bool;
-    // NOT_SUPPORTED: pub fn wxHelpProvider_ShowHelpAtPoint(self_: *mut c_void, window: *mut c_void, point: *const c_void, origin: wxHelpEvent::Origin) -> bool;
-    pub fn wxHelpProvider_Get() -> *mut c_void;
-    pub fn wxHelpProvider_Set(help_provider: *mut c_void) -> *mut c_void;
-
     // wxHyperlinkCtrl
     pub fn wxHyperlinkCtrl_CLASSINFO() -> *mut c_void;
     pub fn wxHyperlinkCtrl_new() -> *mut c_void;

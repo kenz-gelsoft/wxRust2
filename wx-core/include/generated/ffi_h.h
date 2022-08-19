@@ -1,6 +1,5 @@
 #pragma once
 
-#include <wx/cshelp.h>
 #include <wx/dataobj.h>
 #include <wx/event.h>
 #include <wx/headercol.h>
@@ -96,16 +95,6 @@ void wxHeaderCtrlSimple_RemoveSortIndicator(wxHeaderCtrlSimple * self);
 wxClassInfo *wxHelpEvent_CLASSINFO();
 wxPoint *wxHelpEvent_GetPosition(const wxHelpEvent * self);
 void wxHelpEvent_SetPosition(wxHelpEvent * self, const wxPoint * pt);
-
-// CLASS: wxHelpProvider
-void wxHelpProvider_delete(wxHelpProvider *self);
-void wxHelpProvider_AddHelp(wxHelpProvider * self, wxWindow * window, const wxString * text);
-void wxHelpProvider_AddHelp1(wxHelpProvider * self, wxWindowID id, const wxString * text);
-wxString *wxHelpProvider_GetHelp(wxHelpProvider * self, const wxWindow * window);
-void wxHelpProvider_RemoveHelp(wxHelpProvider * self, wxWindow * window);
-bool wxHelpProvider_ShowHelp(wxHelpProvider * self, wxWindow * window);
-wxHelpProvider * wxHelpProvider_Get();
-wxHelpProvider * wxHelpProvider_Set(wxHelpProvider * help_provider);
 
 // CLASS: wxHyperlinkCtrl
 wxClassInfo *wxHyperlinkCtrl_CLASSINFO();

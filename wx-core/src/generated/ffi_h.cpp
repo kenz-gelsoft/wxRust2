@@ -219,32 +219,6 @@ void wxHelpEvent_SetPosition(wxHelpEvent * self, const wxPoint * pt) {
     return self->SetPosition(*pt);
 }
 
-// CLASS: wxHelpProvider
-void wxHelpProvider_delete(wxHelpProvider *self) {
-    delete self;
-}
-void wxHelpProvider_AddHelp(wxHelpProvider * self, wxWindow * window, const wxString * text) {
-    return self->AddHelp(window, *text);
-}
-void wxHelpProvider_AddHelp1(wxHelpProvider * self, wxWindowID id, const wxString * text) {
-    return self->AddHelp(id, *text);
-}
-wxString *wxHelpProvider_GetHelp(wxHelpProvider * self, const wxWindow * window) {
-    return new wxString(self->GetHelp(window));
-}
-void wxHelpProvider_RemoveHelp(wxHelpProvider * self, wxWindow * window) {
-    return self->RemoveHelp(window);
-}
-bool wxHelpProvider_ShowHelp(wxHelpProvider * self, wxWindow * window) {
-    return self->ShowHelp(window);
-}
-wxHelpProvider * wxHelpProvider_Get() {
-    return wxHelpProvider::Get();
-}
-wxHelpProvider * wxHelpProvider_Set(wxHelpProvider * help_provider) {
-    return wxHelpProvider::Set(help_provider);
-}
-
 // CLASS: wxHyperlinkCtrl
 wxClassInfo *wxHyperlinkCtrl_CLASSINFO() {
     return wxCLASSINFO(wxHyperlinkCtrl);

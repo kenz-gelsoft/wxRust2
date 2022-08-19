@@ -458,7 +458,7 @@ wxml_files = [
     # 'wxml/classwx_help_controller_base.xml',          # Our CI environment is't built with
     # 'wxml/classwx_help_controller_help_provider.xml', # Our CI environment is't built with
     'wxml/classwx_help_event.xml',
-    'wxml/classwx_help_provider.xml',
+    # 'wxml/classwx_help_provider.xml', # Our CI environment is't built with
     'wxml/classwx_hyperlink_ctrl.xml',
     'wxml/classwx_hyperlink_event.xml',
     'wxml/classwx_icon.xml',

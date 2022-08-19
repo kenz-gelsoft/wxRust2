@@ -479,24 +479,6 @@ impl<const OWNED: bool> Drop for HelpEventIsOwned<OWNED> {
     }
 }
 
-// wxHelpProvider
-wx_class! { HelpProvider =
-    HelpProviderIsOwned<true>(wxHelpProvider) impl
-        HelpProviderMethods
-}
-impl<const OWNED: bool> HelpProviderIsOwned<OWNED> {
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for HelpProviderIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxHelpProvider_delete(self.0) }
-        }
-    }
-}
-
 // wxHyperlinkCtrl
 wx_class! { HyperlinkCtrl =
     HyperlinkCtrlIsOwned<true>(wxHyperlinkCtrl) impl
