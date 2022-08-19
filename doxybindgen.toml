@@ -1208,6 +1208,10 @@ blocklist = [
     'IsEqual',
 ]
 [types.wxGraphicsRenderer]
+blocklist = [
+    # some of our CI env built without printing
+    'CreateContext3',
+]
 windows = [
     'CreateContext4',
     'GetDirect2DRenderer',

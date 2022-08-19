@@ -905,17 +905,7 @@ pub trait GraphicsRendererMethods: ObjectMethods {
             ))
         }
     }
-    fn create_context_printerdc(
-        &self,
-        printer_dc: *const c_void,
-    ) -> Option<GraphicsContextIsOwned<false>> {
-        unsafe {
-            GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContext3(
-                self.as_ptr(),
-                printer_dc,
-            ))
-        }
-    }
+    // BLOCKED: fn CreateContext3()
     fn create_context_enhmetafiledc(
         &self,
         meta_file_dc: *const c_void,

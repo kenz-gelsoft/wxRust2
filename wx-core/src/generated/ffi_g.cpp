@@ -616,9 +616,6 @@ wxGraphicsContext * wxGraphicsRenderer_CreateContext1(wxGraphicsRenderer * self,
 wxGraphicsContext * wxGraphicsRenderer_CreateContext2(wxGraphicsRenderer * self, const wxMemoryDC * memory_dc) {
     return self->CreateContext(*memory_dc);
 }
-wxGraphicsContext * wxGraphicsRenderer_CreateContext3(wxGraphicsRenderer * self, const wxPrinterDC * printer_dc) {
-    return self->CreateContext(*printer_dc);
-}
 #ifdef __WXMSW__
 wxGraphicsContext * wxGraphicsRenderer_CreateContext4(wxGraphicsRenderer * self, const wxEnhMetaFileDC * meta_file_dc) {
     return self->CreateContext(*meta_file_dc);

@@ -467,10 +467,7 @@ extern "C" {
         self_: *mut c_void,
         memory_dc: *const c_void,
     ) -> *mut c_void;
-    pub fn wxGraphicsRenderer_CreateContext3(
-        self_: *mut c_void,
-        printer_dc: *const c_void,
-    ) -> *mut c_void;
+    // BLOCKED: pub fn wxGraphicsRenderer_CreateContext3(self_: *mut c_void, printer_dc: *const c_void) -> *mut c_void;
     pub fn wxGraphicsRenderer_CreateContext4(
         self_: *mut c_void,
         meta_file_dc: *const c_void,
