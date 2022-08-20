@@ -43,38 +43,6 @@ impl<const OWNED: bool> ImageHandlerMethods for JPEGHandlerIsOwned<OWNED> {
     // NOT_SUPPORTED: fn GetLibraryVersionInfo()
 }
 
-// wxJoystick
-wx_class! { Joystick =
-    JoystickIsOwned<true>(wxJoystick) impl
-        JoystickMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> JoystickIsOwned<OWNED> {
-    pub fn new(joystick: c_int) -> JoystickIsOwned<OWNED> {
-        unsafe { JoystickIsOwned(ffi::wxJoystick_new(joystick)) }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<JoystickIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: JoystickIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for JoystickIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxJoystick_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Drop for JoystickIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObject_delete(self.0) }
-        }
-    }
-}
-
 // wxJoystickEvent
 wx_class! { JoystickEvent =
     JoystickEventIsOwned<true>(wxJoystickEvent) impl
