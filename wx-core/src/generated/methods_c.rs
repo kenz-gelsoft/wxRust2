@@ -959,8 +959,11 @@ pub trait ComboCtrlMethods: ControlMethods {
     fn enable_popup_animation(&self, enable: bool) {
         unsafe { ffi::wxComboCtrl_EnablePopupAnimation(self.as_ptr(), enable) }
     }
-    fn is_key_popup_toggle(&self, event: *const c_void) -> bool {
-        unsafe { ffi::wxComboCtrl_IsKeyPopupToggle(self.as_ptr(), event) }
+    fn is_key_popup_toggle<K: KeyEventMethods>(&self, event: &K) -> bool {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxComboCtrl_IsKeyPopupToggle(self.as_ptr(), event)
+        }
     }
     fn prepare_background<D: DCMethods, R: RectMethods>(&self, dc: &D, rect: &R, flags: c_int) {
         unsafe {
@@ -1178,8 +1181,11 @@ pub trait ComboPopupMethods: WxRustMethods {
     fn on_combo_double_click(&self) {
         unsafe { ffi::wxComboPopup_OnComboDoubleClick(self.as_ptr()) }
     }
-    fn on_combo_key_event(&self, event: *mut c_void) {
-        unsafe { ffi::wxComboPopup_OnComboKeyEvent(self.as_ptr(), event) }
+    fn on_combo_key_event<K: KeyEventMethods>(&self, event: &K) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxComboPopup_OnComboKeyEvent(self.as_ptr(), event)
+        }
     }
     fn on_dismiss(&self) {
         unsafe { ffi::wxComboPopup_OnDismiss(self.as_ptr()) }

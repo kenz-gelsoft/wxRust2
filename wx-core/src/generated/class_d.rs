@@ -2037,8 +2037,14 @@ impl<const OWNED: bool> DragImageIsOwned<OWNED> {
     pub fn new_with_treectrl(tree_ctrl: *const c_void, id: *mut c_void) -> DragImageIsOwned<OWNED> {
         unsafe { DragImageIsOwned(ffi::wxDragImage_new4(tree_ctrl, id)) }
     }
-    pub fn new_with_listctrl(list_ctrl: *const c_void, id: c_long) -> DragImageIsOwned<OWNED> {
-        unsafe { DragImageIsOwned(ffi::wxDragImage_new5(list_ctrl, id)) }
+    pub fn new_with_listctrl<L: ListCtrlMethods>(
+        list_ctrl: &L,
+        id: c_long,
+    ) -> DragImageIsOwned<OWNED> {
+        unsafe {
+            let list_ctrl = list_ctrl.as_ptr();
+            DragImageIsOwned(ffi::wxDragImage_new5(list_ctrl, id))
+        }
     }
     pub fn none() -> Option<&'static Self> {
         None

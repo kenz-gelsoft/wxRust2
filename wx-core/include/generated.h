@@ -17,6 +17,7 @@ typedef wxBitmap wxBitmapBundle;
 #include "generated/ffi_h.h"
 #include "generated/ffi_i.h"
 #include "generated/ffi_j.h"
+#include "generated/ffi_k.h"
 #include "generated/ffi_l.h"
 #include "generated/ffi_m.h"
 #include "generated/ffi_n.h"

@@ -1,16 +1,4 @@
 core_files = [
-    'wxml/classwx_key_event.xml',
-    'wxml/classwx_layout_algorithm.xml',
-    'wxml/classwx_list_box.xml',
-    'wxml/classwx_list_ctrl.xml',
-    'wxml/classwx_list_event.xml',
-    'wxml/classwx_list_item.xml',
-    'wxml/classwx_list_view.xml',
-    'wxml/classwx_listbook.xml',
-    'wxml/classwx_log_gui.xml',
-    'wxml/classwx_log_text_ctrl.xml',
-    'wxml/classwx_log_window.xml',
-    'wxml/classwx_long_press_event.xml',
     'wxml/classwx_m_d_i_child_frame.xml',
     'wxml/classwx_m_d_i_client_window.xml',
     'wxml/classwx_m_d_i_parent_frame.xml',
@@ -461,7 +449,21 @@ wxml_files = [
     'wxml/classwx_j_p_e_g_handler.xml',
     # 'wxml/classwx_joystick.xml', # Our CI environment is't built with
     'wxml/classwx_joystick_event.xml',
+    'wxml/classwx_key_event.xml',
+    'wxml/classwx_layout_algorithm.xml',
     'wxml/classwx_list_box.xml',
+    'wxml/classwx_list_ctrl.xml',
+    'wxml/classwx_list_event.xml',
+    'wxml/classwx_list_item.xml',
+    'wxml/classwx_list_view.xml',
+    'wxml/classwx_listbook.xml',
+    # 'wxml/classwx_log.xml',                # Our CI environment is't built with
+    # 'wxml/classwx_log_chain.xml',          # Our CI environment is't built with
+    # 'wxml/classwx_log_gui.xml',            # Our CI environment is't built with
+    # 'wxml/classwx_log_interposer.xml',     # Our CI environment is't built with
+    # 'wxml/classwx_log_text_ctrl.xml',      # Our CI environment is't built with
+    # 'wxml/classwx_log_window.xml',         # Our CI environment is't built with
+    # 'wxml/classwx_long_press_event.xml',   # requires 3.1
     # 'wxml/classwx_m_d_i_child_frame.xml',  # Our CI environment is't built with
     # 'wxml/classwx_m_d_i_parent_frame.xml', # Our CI environment is't built with
     'wxml/classwx_menu.xml',
@@ -1375,6 +1377,15 @@ blocklist = [
 wx31 = [
     'GetButtonOrdinal',
 ]
+[types.wxKeyEvent]
+wx31 = [
+    'IsAutoRepeat',
+]
+[types.wxLayoutAlgorithm]
+blocklist = [
+    # some of our CI env built without printing
+    'LayoutMDIFrame',
+]
 [types.wxListBox]
 blocklist = [
     # C++ array not supported
@@ -1385,6 +1396,29 @@ blocklist = [
 wx31 = [
     'GetCountPerPage',
     'GetTopItem',
+]
+[types.wxListCtrl]
+wx31 = [
+    'CheckItem',
+    'EnableCheckBoxes',
+    'ExtendRulesAndAlternateColour',
+    'GetAlternateRowColour',
+    'GetColumnOrder',
+    'GetColumnsOrder',
+    'GetColumnIndexFromOrder',
+    'GetSortIndicator',
+    'GetUpdatedAscendingSortIndicator',
+    'HasCheckBoxes',
+    'IsAscendingSortIndicator',
+    'IsEmpty',
+    'IsItemChecked',
+    'IsVisible',
+    'RemoveSortIndicator',
+    'SetColumnsOrder',
+    'SetHeaderAttr',
+    'SetNormalImages',
+    'SetSmallImages',
+    'ShowSortIndicator',
 ]
 [types.wxMenu]
 blocklist = [
