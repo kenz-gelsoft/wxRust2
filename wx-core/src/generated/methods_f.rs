@@ -555,8 +555,8 @@ pub trait FontMethods: GDIObjectMethods {
     fn get_native_font_info_user_desc(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxFont_GetNativeFontInfoUserDesc(self.as_ptr())).into() }
     }
-    fn get_native_font_info(&self) -> *const c_void {
-        unsafe { ffi::wxFont_GetNativeFontInfo(self.as_ptr()) }
+    fn get_native_font_info(&self) -> Option<NativeFontInfoIsOwned<false>> {
+        unsafe { NativeFontInfo::option_from(ffi::wxFont_GetNativeFontInfo(self.as_ptr())) }
     }
     fn get_point_size(&self) -> c_int {
         unsafe { ffi::wxFont_GetPointSize(self.as_ptr()) }
@@ -670,8 +670,11 @@ pub trait FontMethods: GDIObjectMethods {
             ffi::wxFont_SetNativeFontInfoUserDesc(self.as_ptr(), info)
         }
     }
-    fn set_native_font_info_nativefontinfo(&self, info: *const c_void) {
-        unsafe { ffi::wxFont_SetNativeFontInfo1(self.as_ptr(), info) }
+    fn set_native_font_info_nativefontinfo<N: NativeFontInfoMethods>(&self, info: &N) {
+        unsafe {
+            let info = info.as_ptr();
+            ffi::wxFont_SetNativeFontInfo1(self.as_ptr(), info)
+        }
     }
     fn set_point_size(&self, point_size: c_int) {
         unsafe { ffi::wxFont_SetPointSize(self.as_ptr(), point_size) }
@@ -708,8 +711,11 @@ pub trait FontMethods: GDIObjectMethods {
     // NOT_SUPPORTED: fn New1()
     // NOT_SUPPORTED: fn New2()
     // NOT_SUPPORTED: fn New3()
-    fn new_nativefontinfo(native_info: *const c_void) -> Option<FontIsOwned<false>> {
-        unsafe { Font::option_from(ffi::wxFont_New4(native_info)) }
+    fn new_nativefontinfo<N: NativeFontInfoMethods>(native_info: &N) -> Option<FontIsOwned<false>> {
+        unsafe {
+            let native_info = native_info.as_ptr();
+            Font::option_from(ffi::wxFont_New4(native_info))
+        }
     }
     fn new_str(native_info_string: &str) -> Option<FontIsOwned<false>> {
         unsafe {

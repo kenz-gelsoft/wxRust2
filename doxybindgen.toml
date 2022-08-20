@@ -1,13 +1,4 @@
 core_files = [
-    'wxml/classwx_native_font_info.xml',
-    'wxml/classwx_native_window.xml',
-    'wxml/classwx_navigation_enabled.xml',
-    'wxml/classwx_navigation_key_event.xml',
-    'wxml/classwx_non_owned_window.xml',
-    'wxml/classwx_notebook.xml',
-    'wxml/classwx_notification_message.xml',
-    'wxml/classwx_notify_event.xml',
-    'wxml/classwx_number_entry_dialog.xml',
     'wxml/classwx_overlay.xml',
     'wxml/classwx_owner_drawn_combo_box.xml',
     'wxml/classwx_p_c_x_handler.xml',
@@ -426,7 +417,7 @@ wxml_files = [
     'wxml/classwx_item_container.xml',
     'wxml/classwx_item_container_immutable.xml',
     'wxml/classwx_j_p_e_g_handler.xml',
-    # 'wxml/classwx_joystick.xml', # Our CI environment is't built with
+    # 'wxml/classwx_joystick.xml',          # Our CI environment is't built with
     'wxml/classwx_joystick_event.xml',
     'wxml/classwx_key_event.xml',
     'wxml/classwx_layout_algorithm.xml',
@@ -465,9 +456,15 @@ wxml_files = [
     'wxml/classwx_mouse_event.xml',
     'wxml/classwx_mouse_events_manager.xml',
     'wxml/classwx_move_event.xml',
+    'wxml/classwx_native_font_info.xml',
+    # 'wxml/classwx_native_window.xml',      # requires 3.1
+    # 'wxml/classwx_navigation_enabled.xml', # base class depends template, need special treatment
+    'wxml/classwx_navigation_key_event.xml',
     'wxml/classwx_non_owned_window.xml',
     'wxml/classwx_notebook.xml',
+    'wxml/classwx_notification_message.xml',
     'wxml/classwx_notify_event.xml',
+    'wxml/classwx_number_entry_dialog.xml',
     'wxml/classwx_object.xml',
     'wxml/classwx_panel.xml',
     'wxml/classwx_picker_base.xml',
@@ -1483,11 +1480,33 @@ blocklist = [
     'wxMouseEventsManager',
     'wxMouseEventsManager1',
 ]
+[types.wxNativeFontInfo]
+blocklist = [
+    'operator=',
+]
+wx31 = [
+    'GetNumericWeight',
+    'SetNumericWeight',
+]
 [types.wxNonOwnedWindow]
 library = 'core'
 [types.wxNotebook]
 blocklist = [
     'OnSelChange',
+]
+[types.wxNotificationMessage]
+windows = [
+    'MSWUseToasts',
+    'UseTaskBarIcon',
+]
+wx31 = [
+    'AddAction',
+    'SetIcon',
+]
+[types.wxNumberEntryDialog]
+wx31 = [
+    'wxNumberEntryDialog',
+    'Create',
 ]
 [types.wxObject]
 blocklist = [
