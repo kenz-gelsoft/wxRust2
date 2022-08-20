@@ -542,9 +542,11 @@ void wxTextEntryDialog_SetTextValidator(wxTextEntryDialog * self, const wxTextVa
 void wxTextEntryDialog_SetValue(wxTextEntryDialog * self, const wxString * value) {
     return self->SetValue(*value);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxTextEntryDialog_ForceUpper(wxTextEntryDialog * self) {
     return self->ForceUpper();
 }
+#endif
 
 // CLASS: wxTimePickerCtrl
 wxClassInfo *wxTimePickerCtrl_CLASSINFO() {

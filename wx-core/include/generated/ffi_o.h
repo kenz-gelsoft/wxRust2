@@ -16,8 +16,10 @@ wxOwnerDrawnComboBox *wxOwnerDrawnComboBox_new();
 wxOwnerDrawnComboBox *wxOwnerDrawnComboBox_new2(wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
 bool wxOwnerDrawnComboBox_Create(wxOwnerDrawnComboBox * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 bool wxOwnerDrawnComboBox_Create2(wxOwnerDrawnComboBox * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name);
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxOwnerDrawnComboBox_IsListEmpty(const wxOwnerDrawnComboBox * self);
 bool wxOwnerDrawnComboBox_IsTextEmpty(const wxOwnerDrawnComboBox * self);
+#endif
 int wxOwnerDrawnComboBox_GetWidestItem(wxOwnerDrawnComboBox * self);
 int wxOwnerDrawnComboBox_GetWidestItemWidth(wxOwnerDrawnComboBox * self);
 // Mix-in(s) to wxOwnerDrawnComboBox

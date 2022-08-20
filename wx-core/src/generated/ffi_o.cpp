@@ -29,12 +29,14 @@ bool wxOwnerDrawnComboBox_Create(wxOwnerDrawnComboBox * self, wxWindow * parent,
 bool wxOwnerDrawnComboBox_Create2(wxOwnerDrawnComboBox * self, wxWindow * parent, wxWindowID id, const wxString * value, const wxPoint * pos, const wxSize * size, const wxArrayString * choices, long style, const wxValidator * validator, const wxString * name) {
     return self->Create(parent, id, *value, *pos, *size, *choices, style, *validator, *name);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxOwnerDrawnComboBox_IsListEmpty(const wxOwnerDrawnComboBox * self) {
     return self->IsListEmpty();
 }
 bool wxOwnerDrawnComboBox_IsTextEmpty(const wxOwnerDrawnComboBox * self) {
     return self->IsTextEmpty();
 }
+#endif
 int wxOwnerDrawnComboBox_GetWidestItem(wxOwnerDrawnComboBox * self) {
     return self->GetWidestItem();
 }

@@ -100,9 +100,11 @@ wxClassInfo *wxPen_CLASSINFO() {
 wxPen *wxPen_new() {
     return new wxPen();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxPen *wxPen_new1(const wxPenInfo * info) {
     return new wxPen(*info);
 }
+#endif
 #ifndef __WXGTK__
 wxPen *wxPen_new3(const wxBitmap * stipple, int width) {
     return new wxPen(*stipple, width);
@@ -337,9 +339,11 @@ void wxPreferencesPage_delete(wxPreferencesPage *self) {
 wxString *wxPreferencesPage_GetName(const wxPreferencesPage * self) {
     return new wxString(self->GetName());
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxBitmapBundle *wxPreferencesPage_GetIcon(const wxPreferencesPage * self) {
     return new wxBitmapBundle(self->GetIcon());
 }
+#endif
 wxBitmap *wxPreferencesPage_GetLargeIcon(const wxPreferencesPage * self) {
     return new wxBitmap(self->GetLargeIcon());
 }

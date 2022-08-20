@@ -66,7 +66,9 @@ wxPasswordEntryDialog *wxPasswordEntryDialog_new(wxWindow * parent, const wxStri
 // CLASS: wxPen
 wxClassInfo *wxPen_CLASSINFO();
 wxPen *wxPen_new();
+#if wxCHECK_VERSION(3, 1, 0)
 wxPen *wxPen_new1(const wxPenInfo * info);
+#endif
 #ifndef __WXGTK__
 wxPen *wxPen_new3(const wxBitmap * stipple, int width);
 #endif
@@ -157,7 +159,9 @@ bool wxPreferencesEditor_ShownModally();
 // CLASS: wxPreferencesPage
 void wxPreferencesPage_delete(wxPreferencesPage *self);
 wxString *wxPreferencesPage_GetName(const wxPreferencesPage * self);
+#if wxCHECK_VERSION(3, 1, 0)
 wxBitmapBundle *wxPreferencesPage_GetIcon(const wxPreferencesPage * self);
+#endif
 wxBitmap *wxPreferencesPage_GetLargeIcon(const wxPreferencesPage * self);
 wxWindow * wxPreferencesPage_CreateWindow(wxPreferencesPage * self, wxWindow * parent);
 

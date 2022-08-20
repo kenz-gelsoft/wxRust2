@@ -1512,6 +1512,11 @@ blocklist = [
     'operator new',
     'operator delete',
 ]
+[types.wxOwnerDrawnComboBox]
+wx31 = [
+    'IsListEmpty',
+    'IsTextEmpty',
+]
 [types.wxPageSetupDialogData]
 blocklist = [
     'operator=',
@@ -1532,6 +1537,9 @@ blocklist = [
     'operator=',
     'operator==',
     'operator!=',
+]
+wx31 = [
+    'wxPen1',
 ]
 not_gtk = [
     'wxPen3',
@@ -1571,6 +1579,9 @@ blocklist = [
 blocklist = [
     # abstract
     'wxPreferencesPage',
+]
+wx31 = [
+    'GetIcon',
 ]
 [types.wxPrintData]
 blocklist = [
@@ -1730,6 +1741,10 @@ wx31 = [
     'EmptyUndoBuffer',
 ]
 [types.wxTextEntry]
+wx31 = [
+    'ForceUpper',
+]
+[types.wxTextEntryDialog]
 wx31 = [
     'ForceUpper',
 ]

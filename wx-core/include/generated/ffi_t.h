@@ -202,7 +202,9 @@ bool wxTextEntryDialog_Create(wxTextEntryDialog * self, wxWindow * parent, const
 wxString *wxTextEntryDialog_GetValue(const wxTextEntryDialog * self);
 void wxTextEntryDialog_SetTextValidator(wxTextEntryDialog * self, const wxTextValidator * validator);
 void wxTextEntryDialog_SetValue(wxTextEntryDialog * self, const wxString * value);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxTextEntryDialog_ForceUpper(wxTextEntryDialog * self);
+#endif
 
 // CLASS: wxTimePickerCtrl
 wxClassInfo *wxTimePickerCtrl_CLASSINFO();
