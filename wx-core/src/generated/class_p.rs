@@ -784,38 +784,6 @@ impl<const OWNED: bool> Drop for PrintDataIsOwned<OWNED> {
     }
 }
 
-// wxPrinter
-wx_class! { Printer =
-    PrinterIsOwned<true>(wxPrinter) impl
-        PrinterMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> PrinterIsOwned<OWNED> {
-    pub fn new(data: *mut c_void) -> PrinterIsOwned<OWNED> {
-        unsafe { PrinterIsOwned(ffi::wxPrinter_new(data)) }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<PrinterIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: PrinterIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for PrinterIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxPrinter_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Drop for PrinterIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObject_delete(self.0) }
-        }
-    }
-}
-
 // wxPrinterDC
 wx_class! { PrinterDC =
     PrinterDCIsOwned<true>(wxPrinterDC) impl

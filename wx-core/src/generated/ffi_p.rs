@@ -276,32 +276,6 @@ extern "C" {
     // NOT_SUPPORTED: pub fn wxPrintData_GetPrintMode(self_: *const c_void) -> wxPrintMode;
     // NOT_SUPPORTED: pub fn wxPrintData_SetPrintMode(self_: *mut c_void, print_mode: wxPrintMode);
 
-    // wxPrinter
-    pub fn wxPrinter_CLASSINFO() -> *mut c_void;
-    pub fn wxPrinter_new(data: *mut c_void) -> *mut c_void;
-    pub fn wxPrinter_CreateAbortWindow(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        printout: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxPrinter_GetAbort(self_: *const c_void) -> bool;
-    // BLOCKED: pub fn wxPrinter_GetPrintDialogData(self_: *const c_void) -> *mut c_void;
-    pub fn wxPrinter_Print(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        printout: *mut c_void,
-        prompt: bool,
-    ) -> bool;
-    pub fn wxPrinter_PrintDialog(self_: *mut c_void, parent: *mut c_void) -> *mut c_void;
-    pub fn wxPrinter_ReportError(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        printout: *mut c_void,
-        message: *const c_void,
-    );
-    pub fn wxPrinter_Setup(self_: *mut c_void, parent: *mut c_void) -> bool;
-    // NOT_SUPPORTED: pub fn wxPrinter_GetLastError() -> wxPrinterError;
-
     // wxPrinterDC
     pub fn wxPrinterDC_CLASSINFO() -> *mut c_void;
     pub fn wxPrinterDC_new(print_data: *const c_void) -> *mut c_void;

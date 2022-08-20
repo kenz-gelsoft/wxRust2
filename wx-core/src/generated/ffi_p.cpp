@@ -398,32 +398,6 @@ void wxPrintData_SetFilename(wxPrintData * self, const wxString * filename) {
     return self->SetFilename(*filename);
 }
 
-// CLASS: wxPrinter
-wxClassInfo *wxPrinter_CLASSINFO() {
-    return wxCLASSINFO(wxPrinter);
-}
-wxPrinter *wxPrinter_new(wxPrintDialogData * data) {
-    return new wxPrinter(data);
-}
-wxPrintAbortDialog * wxPrinter_CreateAbortWindow(wxPrinter * self, wxWindow * parent, wxPrintout * printout) {
-    return self->CreateAbortWindow(parent, printout);
-}
-bool wxPrinter_GetAbort(const wxPrinter * self) {
-    return self->GetAbort();
-}
-bool wxPrinter_Print(wxPrinter * self, wxWindow * parent, wxPrintout * printout, bool prompt) {
-    return self->Print(parent, printout, prompt);
-}
-wxDC * wxPrinter_PrintDialog(wxPrinter * self, wxWindow * parent) {
-    return self->PrintDialog(parent);
-}
-void wxPrinter_ReportError(wxPrinter * self, wxWindow * parent, wxPrintout * printout, const wxString * message) {
-    return self->ReportError(parent, printout, *message);
-}
-bool wxPrinter_Setup(wxPrinter * self, wxWindow * parent) {
-    return self->Setup(parent);
-}
-
 // CLASS: wxPrinterDC
 wxClassInfo *wxPrinterDC_CLASSINFO() {
     return wxCLASSINFO(wxPrinterDC);
