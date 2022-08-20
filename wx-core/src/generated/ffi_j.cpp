@@ -160,9 +160,11 @@ bool wxJoystickEvent_ButtonUp(const wxJoystickEvent * self, int button) {
 int wxJoystickEvent_GetButtonChange(const wxJoystickEvent * self) {
     return self->GetButtonChange();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 int wxJoystickEvent_GetButtonOrdinal(const wxJoystickEvent * self) {
     return self->GetButtonOrdinal();
 }
+#endif
 int wxJoystickEvent_GetButtonState(const wxJoystickEvent * self) {
     return self->GetButtonState();
 }

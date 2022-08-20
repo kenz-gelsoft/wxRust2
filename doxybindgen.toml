@@ -1371,6 +1371,10 @@ blocklist = [
 blocklist = [
     'wxItemContainerImmutable',
 ]
+[types.wxJoystickEvent]
+wx31 = [
+    'GetButtonOrdinal',
+]
 [types.wxListBox]
 blocklist = [
     # C++ array not supported
