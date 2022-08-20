@@ -422,8 +422,11 @@ pub trait TextCtrlMethods: ControlMethods {
     fn empty_undo_buffer(&self) {
         unsafe { ffi::wxTextCtrl_EmptyUndoBuffer(self.as_ptr()) }
     }
-    fn emulate_key_press(&self, event: *const c_void) -> bool {
-        unsafe { ffi::wxTextCtrl_EmulateKeyPress(self.as_ptr(), event) }
+    fn emulate_key_press<K: KeyEventMethods>(&self, event: &K) -> bool {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxTextCtrl_EmulateKeyPress(self.as_ptr(), event)
+        }
     }
     fn enable_proof_check(&self, options: *const c_void) -> bool {
         unsafe { ffi::wxTextCtrl_EnableProofCheck(self.as_ptr(), options) }

@@ -10,6 +10,7 @@ pub use super::methods_g::*;
 pub use super::methods_h::*;
 pub use super::methods_i::*;
 pub use super::methods_j::*;
+pub use super::methods_k::*;
 pub use super::methods_l::*;
 pub use super::methods_m::*;
 pub use super::methods_n::*;

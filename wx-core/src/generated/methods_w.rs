@@ -837,8 +837,11 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn get_event_handler(&self) -> WeakRef<EvtHandler> {
         unsafe { WeakRef::<EvtHandler>::from(ffi::wxWindow_GetEventHandler(self.as_ptr())) }
     }
-    fn handle_as_navigation_key(&self, event: *const c_void) -> bool {
-        unsafe { ffi::wxWindow_HandleAsNavigationKey(self.as_ptr(), event) }
+    fn handle_as_navigation_key<K: KeyEventMethods>(&self, event: &K) -> bool {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxWindow_HandleAsNavigationKey(self.as_ptr(), event)
+        }
     }
     fn handle_window_event<E: EventMethods>(&self, event: &E) -> bool {
         unsafe {
