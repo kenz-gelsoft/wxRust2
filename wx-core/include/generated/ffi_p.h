@@ -62,7 +62,6 @@ wxPoint *wxPageSetupDialogData_GetMarginTopLeft(const wxPageSetupDialogData * se
 wxPoint *wxPageSetupDialogData_GetMinMarginBottomRight(const wxPageSetupDialogData * self);
 wxPoint *wxPageSetupDialogData_GetMinMarginTopLeft(const wxPageSetupDialogData * self);
 wxSize *wxPageSetupDialogData_GetPaperSize(const wxPageSetupDialogData * self);
-wxPrintData * wxPageSetupDialogData_GetPrintData(wxPageSetupDialogData * self);
 wxPrintData *wxPageSetupDialogData_GetPrintData1(const wxPageSetupDialogData * self);
 bool wxPageSetupDialogData_IsOk(const wxPageSetupDialogData * self);
 void wxPageSetupDialogData_SetDefaultInfo(wxPageSetupDialogData * self, bool flag);
@@ -80,7 +79,6 @@ wxPaintDC *wxPaintDC_new(wxWindow * window);
 
 // CLASS: wxPaintEvent
 wxClassInfo *wxPaintEvent_CLASSINFO();
-wxPaintEvent *wxPaintEvent_new(wxWindow * window);
 
 // CLASS: wxPalette
 wxClassInfo *wxPalette_CLASSINFO();
@@ -132,14 +130,12 @@ void wxPersistenceManager_Set(wxPersistenceManager * manager);
 wxPersistenceManager * wxPersistenceManager_Get();
 void wxPersistenceManager_DisableSaving(wxPersistenceManager * self);
 void wxPersistenceManager_DisableRestoring(wxPersistenceManager * self);
-wxPersistentObject * wxPersistenceManager_Register(wxPersistenceManager * self, T * obj);
 wxPersistentObject * wxPersistenceManager_Register1(wxPersistenceManager * self, void * obj, wxPersistentObject * po);
 wxPersistentObject * wxPersistenceManager_Find(const wxPersistenceManager * self, void * obj);
 void wxPersistenceManager_Unregister(wxPersistenceManager * self, void * obj);
 void wxPersistenceManager_Save(wxPersistenceManager * self, void * obj);
 bool wxPersistenceManager_Restore(wxPersistenceManager * self, void * obj);
 void wxPersistenceManager_SaveAndUnregister(wxPersistenceManager * self, void * obj);
-bool wxPersistenceManager_RegisterAndRestore(wxPersistenceManager * self, T * obj);
 bool wxPersistenceManager_RegisterAndRestore1(wxPersistenceManager * self, void * obj, wxPersistentObject * po);
 
 // CLASS: wxPickerBase
@@ -197,7 +193,6 @@ bool wxPreferencesEditor_ShownModally();
 
 // CLASS: wxPreferencesPage
 void wxPreferencesPage_delete(wxPreferencesPage *self);
-wxPreferencesPage *wxPreferencesPage_new();
 wxString *wxPreferencesPage_GetName(const wxPreferencesPage * self);
 wxBitmapBundle *wxPreferencesPage_GetIcon(const wxPreferencesPage * self);
 wxBitmap *wxPreferencesPage_GetLargeIcon(const wxPreferencesPage * self);
@@ -273,7 +268,6 @@ void wxPrintDialogData_SetNoCopies(wxPrintDialogData * self, int n);
 void wxPrintDialogData_SetPrintData(wxPrintDialogData * self, const wxPrintData * print_data);
 void wxPrintDialogData_SetPrintToFile(wxPrintDialogData * self, bool flag);
 void wxPrintDialogData_SetSelection(wxPrintDialogData * self, bool flag);
-void wxPrintDialogData_SetSetupDialog(wxPrintDialogData * self, bool flag);
 void wxPrintDialogData_SetToPage(wxPrintDialogData * self, int page);
 
 // CLASS: wxPrintPreview
@@ -315,7 +309,6 @@ wxRect *wxPrinterDC_GetPaperRect(const wxPrinterDC * self);
 
 // CLASS: wxPrintout
 wxClassInfo *wxPrintout_CLASSINFO();
-wxPrintout *wxPrintout_new(const wxString * title);
 void wxPrintout_FitThisSizeToPage(wxPrintout * self, const wxSize * image_size);
 void wxPrintout_FitThisSizeToPageMargins(wxPrintout * self, const wxSize * image_size, const wxPageSetupDialogData * page_setup_data);
 void wxPrintout_FitThisSizeToPaper(wxPrintout * self, const wxSize * image_size);

@@ -45,7 +45,7 @@ extern "C" {
     pub fn wxPageSetupDialogData_GetMinMarginTopLeft(self_: *const c_void) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxPageSetupDialogData_GetPaperId(self_: *const c_void) -> wxPaperSize;
     pub fn wxPageSetupDialogData_GetPaperSize(self_: *const c_void) -> *mut c_void;
-    pub fn wxPageSetupDialogData_GetPrintData(self_: *mut c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxPageSetupDialogData_GetPrintData(self_: *mut c_void) -> *mut c_void;
     pub fn wxPageSetupDialogData_GetPrintData1(self_: *const c_void) -> *mut c_void;
     pub fn wxPageSetupDialogData_IsOk(self_: *const c_void) -> bool;
     pub fn wxPageSetupDialogData_SetDefaultInfo(self_: *mut c_void, flag: bool);
@@ -66,7 +66,7 @@ extern "C" {
 
     // wxPaintEvent
     pub fn wxPaintEvent_CLASSINFO() -> *mut c_void;
-    pub fn wxPaintEvent_new(window: *mut c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxPaintEvent_new(window: *mut c_void) -> *mut c_void;
 
     // wxPalette
     pub fn wxPalette_CLASSINFO() -> *mut c_void;
@@ -176,7 +176,7 @@ extern "C" {
     pub fn wxPersistenceManager_Get() -> *mut c_void;
     pub fn wxPersistenceManager_DisableSaving(self_: *mut c_void);
     pub fn wxPersistenceManager_DisableRestoring(self_: *mut c_void);
-    pub fn wxPersistenceManager_Register(self_: *mut c_void, obj: *mut c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxPersistenceManager_Register(self_: *mut c_void, obj: *mut c_void) -> *mut c_void;
     pub fn wxPersistenceManager_Register1(
         self_: *mut c_void,
         obj: *mut c_void,
@@ -187,7 +187,7 @@ extern "C" {
     pub fn wxPersistenceManager_Save(self_: *mut c_void, obj: *mut c_void);
     pub fn wxPersistenceManager_Restore(self_: *mut c_void, obj: *mut c_void) -> bool;
     pub fn wxPersistenceManager_SaveAndUnregister(self_: *mut c_void, obj: *mut c_void);
-    pub fn wxPersistenceManager_RegisterAndRestore(self_: *mut c_void, obj: *mut c_void) -> bool;
+    // BLOCKED: pub fn wxPersistenceManager_RegisterAndRestore(self_: *mut c_void, obj: *mut c_void) -> bool;
     pub fn wxPersistenceManager_RegisterAndRestore1(
         self_: *mut c_void,
         obj: *mut c_void,
@@ -284,7 +284,7 @@ extern "C" {
 
     // wxPreferencesPage
     pub fn wxPreferencesPage_delete(self_: *mut c_void);
-    pub fn wxPreferencesPage_new() -> *mut c_void;
+    // BLOCKED: pub fn wxPreferencesPage_new() -> *mut c_void;
     // DTOR: pub fn wxPreferencesPage_~wxPreferencesPage(self_: *mut c_void);
     pub fn wxPreferencesPage_GetName(self_: *const c_void) -> *mut c_void;
     pub fn wxPreferencesPage_GetIcon(self_: *const c_void) -> *mut c_void;
@@ -396,7 +396,7 @@ extern "C" {
     pub fn wxPrintDialogData_SetPrintData(self_: *mut c_void, print_data: *const c_void);
     pub fn wxPrintDialogData_SetPrintToFile(self_: *mut c_void, flag: bool);
     pub fn wxPrintDialogData_SetSelection(self_: *mut c_void, flag: bool);
-    pub fn wxPrintDialogData_SetSetupDialog(self_: *mut c_void, flag: bool);
+    // BLOCKED: pub fn wxPrintDialogData_SetSetupDialog(self_: *mut c_void, flag: bool);
     pub fn wxPrintDialogData_SetToPage(self_: *mut c_void, page: c_int);
     // BLOCKED: pub fn wxPrintDialogData_operator=(self_: *mut c_void, data: *const c_void);
     // BLOCKED: pub fn wxPrintDialogData_operator=1(self_: *mut c_void, data: *const c_void);
@@ -468,7 +468,7 @@ extern "C" {
 
     // wxPrintout
     pub fn wxPrintout_CLASSINFO() -> *mut c_void;
-    pub fn wxPrintout_new(title: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxPrintout_new(title: *const c_void) -> *mut c_void;
     // DTOR: pub fn wxPrintout_~wxPrintout(self_: *mut c_void);
     pub fn wxPrintout_FitThisSizeToPage(self_: *mut c_void, image_size: *const c_void);
     pub fn wxPrintout_FitThisSizeToPageMargins(

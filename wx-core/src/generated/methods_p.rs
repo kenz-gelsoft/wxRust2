@@ -91,11 +91,7 @@ pub trait PageSetupDialogDataMethods: ObjectMethods {
     fn get_paper_size(&self) -> Size {
         unsafe { Size::from_ptr(ffi::wxPageSetupDialogData_GetPaperSize(self.as_ptr())) }
     }
-    fn get_print_data(&self) -> PrintDataIsOwned<false> {
-        unsafe {
-            PrintDataIsOwned::from_ptr(ffi::wxPageSetupDialogData_GetPrintData(self.as_ptr()))
-        }
-    }
+    // BLOCKED: fn GetPrintData()
     fn get_print_data(&self) -> PrintDataIsOwned<false> {
         unsafe {
             PrintDataIsOwned::from_ptr(ffi::wxPageSetupDialogData_GetPrintData1(self.as_ptr()))
@@ -280,10 +276,8 @@ pub trait PersistenceManagerMethods: WxRustMethods {
     fn disable_restoring(&self) {
         unsafe { ffi::wxPersistenceManager_DisableRestoring(self.as_ptr()) }
     }
-    fn register_t(&self, obj: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxPersistenceManager_Register(self.as_ptr(), obj) }
-    }
-    fn register_void(&self, obj: *mut c_void, po: *mut c_void) -> *mut c_void {
+    // BLOCKED: fn Register()
+    fn register(&self, obj: *mut c_void, po: *mut c_void) -> *mut c_void {
         unsafe { ffi::wxPersistenceManager_Register1(self.as_ptr(), obj, po) }
     }
     fn find(&self, obj: *mut c_void) -> *mut c_void {
@@ -301,10 +295,8 @@ pub trait PersistenceManagerMethods: WxRustMethods {
     fn save_and_unregister(&self, obj: *mut c_void) {
         unsafe { ffi::wxPersistenceManager_SaveAndUnregister(self.as_ptr(), obj) }
     }
-    fn register_and_restore_t(&self, obj: *mut c_void) -> bool {
-        unsafe { ffi::wxPersistenceManager_RegisterAndRestore(self.as_ptr(), obj) }
-    }
-    fn register_and_restore_void(&self, obj: *mut c_void, po: *mut c_void) -> bool {
+    // BLOCKED: fn RegisterAndRestore()
+    fn register_and_restore(&self, obj: *mut c_void, po: *mut c_void) -> bool {
         unsafe { ffi::wxPersistenceManager_RegisterAndRestore1(self.as_ptr(), obj, po) }
     }
 }
@@ -738,9 +730,7 @@ pub trait PrintDialogDataMethods: ObjectMethods {
     fn set_selection(&self, flag: bool) {
         unsafe { ffi::wxPrintDialogData_SetSelection(self.as_ptr(), flag) }
     }
-    fn set_setup_dialog(&self, flag: bool) {
-        unsafe { ffi::wxPrintDialogData_SetSetupDialog(self.as_ptr(), flag) }
-    }
+    // BLOCKED: fn SetSetupDialog()
     fn set_to_page(&self, page: c_int) {
         unsafe { ffi::wxPrintDialogData_SetToPage(self.as_ptr(), page) }
     }

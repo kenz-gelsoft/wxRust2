@@ -273,15 +273,7 @@ wx_class! { PaintEvent =
         ObjectMethods
 }
 impl<const OWNED: bool> PaintEventIsOwned<OWNED> {
-    pub fn new<W: WindowMethods>(window: Option<&W>) -> PaintEventIsOwned<OWNED> {
-        unsafe {
-            let window = match window {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            PaintEventIsOwned(ffi::wxPaintEvent_new(window))
-        }
-    }
+    // BLOCKED: fn wxPaintEvent()
     pub fn none() -> Option<&'static Self> {
         None
     }
@@ -834,9 +826,7 @@ wx_class! { PreferencesPage =
         PreferencesPageMethods
 }
 impl<const OWNED: bool> PreferencesPageIsOwned<OWNED> {
-    pub fn new() -> PreferencesPageIsOwned<OWNED> {
-        unsafe { PreferencesPageIsOwned(ffi::wxPreferencesPage_new()) }
-    }
+    // BLOCKED: fn wxPreferencesPage()
     pub fn none() -> Option<&'static Self> {
         None
     }
@@ -1309,13 +1299,7 @@ wx_class! { Printout =
         ObjectMethods
 }
 impl<const OWNED: bool> PrintoutIsOwned<OWNED> {
-    pub fn new(title: &str) -> PrintoutIsOwned<OWNED> {
-        unsafe {
-            let title = WxString::from(title);
-            let title = title.as_ptr();
-            PrintoutIsOwned(ffi::wxPrintout_new(title))
-        }
-    }
+    // BLOCKED: fn wxPrintout()
     pub fn none() -> Option<&'static Self> {
         None
     }

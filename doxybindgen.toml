@@ -1516,6 +1516,12 @@ blocklist = [
 blocklist = [
     'operator=',
     'operator=1',
+    # const vs non-const
+    'GetPrintData',
+]
+[types.wxPaintEvent]
+blocklist = [
+    'wxPaintEvent',
 ]
 [types.wxPalette]
 blocklist = [
@@ -1526,6 +1532,12 @@ blocklist = [
     'operator=',
     'operator==',
     'operator!=',
+]
+[types.wxPersistenceManager]
+blocklist = [
+    # has template parameter
+    'Register',
+    'RegisterAndRestore',
 ]
 [types.wxPickerBase]
 blocklist = [
@@ -1552,6 +1564,11 @@ blocklist = [
     'operator/=',
     'operator*=',
 ]
+[types.wxPreferencesPage]
+blocklist = [
+    # abstract
+    'wxPreferencesPage',
+]
 [types.wxPrintData]
 blocklist = [
     'operator=',
@@ -1560,6 +1577,13 @@ blocklist = [
 blocklist = [
     'operator=',
     'operator=1',
+    # deprecated
+    'SetSetupDialog',
+]
+[types.wxPrintout]
+blocklist = [
+    # abstract
+    'wxPrintout',
 ]
 [types.wxRadioBox]
 wx317 = [

@@ -104,9 +104,6 @@ wxPoint *wxPageSetupDialogData_GetMinMarginTopLeft(const wxPageSetupDialogData *
 wxSize *wxPageSetupDialogData_GetPaperSize(const wxPageSetupDialogData * self) {
     return new wxSize(self->GetPaperSize());
 }
-wxPrintData * wxPageSetupDialogData_GetPrintData(wxPageSetupDialogData * self) {
-    return &(self->GetPrintData());
-}
 wxPrintData *wxPageSetupDialogData_GetPrintData1(const wxPageSetupDialogData * self) {
     return new wxPrintData(self->GetPrintData());
 }
@@ -149,9 +146,6 @@ wxPaintDC *wxPaintDC_new(wxWindow * window) {
 // CLASS: wxPaintEvent
 wxClassInfo *wxPaintEvent_CLASSINFO() {
     return wxCLASSINFO(wxPaintEvent);
-}
-wxPaintEvent *wxPaintEvent_new(wxWindow * window) {
-    return new wxPaintEvent(window);
 }
 
 // CLASS: wxPalette
@@ -282,9 +276,6 @@ void wxPersistenceManager_DisableSaving(wxPersistenceManager * self) {
 void wxPersistenceManager_DisableRestoring(wxPersistenceManager * self) {
     return self->DisableRestoring();
 }
-wxPersistentObject * wxPersistenceManager_Register(wxPersistenceManager * self, T * obj) {
-    return self->Register(obj);
-}
 wxPersistentObject * wxPersistenceManager_Register1(wxPersistenceManager * self, void * obj, wxPersistentObject * po) {
     return self->Register(obj, po);
 }
@@ -302,9 +293,6 @@ bool wxPersistenceManager_Restore(wxPersistenceManager * self, void * obj) {
 }
 void wxPersistenceManager_SaveAndUnregister(wxPersistenceManager * self, void * obj) {
     return self->SaveAndUnregister(obj);
-}
-bool wxPersistenceManager_RegisterAndRestore(wxPersistenceManager * self, T * obj) {
-    return self->RegisterAndRestore(obj);
 }
 bool wxPersistenceManager_RegisterAndRestore1(wxPersistenceManager * self, void * obj, wxPersistentObject * po) {
     return self->RegisterAndRestore(obj, po);
@@ -452,9 +440,6 @@ bool wxPreferencesEditor_ShownModally() {
 // CLASS: wxPreferencesPage
 void wxPreferencesPage_delete(wxPreferencesPage *self) {
     delete self;
-}
-wxPreferencesPage *wxPreferencesPage_new() {
-    return new wxPreferencesPage();
 }
 wxString *wxPreferencesPage_GetName(const wxPreferencesPage * self) {
     return new wxString(self->GetName());
@@ -661,9 +646,6 @@ void wxPrintDialogData_SetPrintToFile(wxPrintDialogData * self, bool flag) {
 void wxPrintDialogData_SetSelection(wxPrintDialogData * self, bool flag) {
     return self->SetSelection(flag);
 }
-void wxPrintDialogData_SetSetupDialog(wxPrintDialogData * self, bool flag) {
-    return self->SetSetupDialog(flag);
-}
 void wxPrintDialogData_SetToPage(wxPrintDialogData * self, int page) {
     return self->SetToPage(page);
 }
@@ -770,9 +752,6 @@ wxRect *wxPrinterDC_GetPaperRect(const wxPrinterDC * self) {
 // CLASS: wxPrintout
 wxClassInfo *wxPrintout_CLASSINFO() {
     return wxCLASSINFO(wxPrintout);
-}
-wxPrintout *wxPrintout_new(const wxString * title) {
-    return new wxPrintout(*title);
 }
 void wxPrintout_FitThisSizeToPage(wxPrintout * self, const wxSize * image_size) {
     return self->FitThisSizeToPage(*image_size);
