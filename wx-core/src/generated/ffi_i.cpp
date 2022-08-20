@@ -115,9 +115,6 @@ wxIconizeEvent *wxIconizeEvent_new(int id, bool iconized) {
 bool wxIconizeEvent_IsIconized(const wxIconizeEvent * self) {
     return self->IsIconized();
 }
-bool wxIconizeEvent_Iconized(const wxIconizeEvent * self) {
-    return self->Iconized();
-}
 
 // CLASS: wxIdManager
 void wxIdManager_delete(wxIdManager *self) {
@@ -233,9 +230,6 @@ int wxImage_GetOptionInt(const wxImage * self, const wxString * name) {
 bool wxImage_GetOrFindMaskColour(const wxImage * self, unsigned char * r, unsigned char * g, unsigned char * b) {
     return self->GetOrFindMaskColour(r, g, b);
 }
-const wxPalette * wxImage_GetPalette(const wxImage * self) {
-    return self->GetPalette();
-}
 wxImage *wxImage_GetSubImage(const wxImage * self, const wxRect * rect) {
     return new wxImage(self->GetSubImage(*rect));
 }
@@ -310,9 +304,6 @@ wxImageHandler * wxImage_FindHandler(const wxString * name) {
 }
 wxImageHandler * wxImage_FindHandlerMime(const wxString * mimetype) {
     return wxImage::FindHandlerMime(*mimetype);
-}
-wxList * wxImage_GetHandlers() {
-    return wxImage::GetHandlers();
 }
 void wxImage_InitStandardHandlers() {
     return wxImage::InitStandardHandlers();

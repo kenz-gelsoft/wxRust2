@@ -65,7 +65,7 @@ extern "C" {
     pub fn wxIconizeEvent_CLASSINFO() -> *mut c_void;
     pub fn wxIconizeEvent_new(id: c_int, iconized: bool) -> *mut c_void;
     pub fn wxIconizeEvent_IsIconized(self_: *const c_void) -> bool;
-    pub fn wxIconizeEvent_Iconized(self_: *const c_void) -> bool;
+    // BLOCKED: pub fn wxIconizeEvent_Iconized(self_: *const c_void) -> bool;
 
     // wxIdManager
     pub fn wxIdManager_delete(self_: *mut c_void);
@@ -185,7 +185,7 @@ extern "C" {
         g: *mut c_void,
         b: *mut c_void,
     ) -> bool;
-    pub fn wxImage_GetPalette(self_: *const c_void) -> *const c_void;
+    // BLOCKED: pub fn wxImage_GetPalette(self_: *const c_void) -> *const c_void;
     pub fn wxImage_GetSubImage(self_: *const c_void, rect: *const c_void) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxImage_GetType(self_: *const c_void) -> wxBitmapType;
     pub fn wxImage_HasAlpha(self_: *const c_void) -> bool;
@@ -249,7 +249,7 @@ extern "C" {
     // NOT_SUPPORTED: pub fn wxImage_FindHandler1(extension: *const c_void, image_type: wxBitmapType) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxImage_FindHandler2(image_type: wxBitmapType) -> *mut c_void;
     pub fn wxImage_FindHandlerMime(mimetype: *const c_void) -> *mut c_void;
-    pub fn wxImage_GetHandlers() -> *mut c_void;
+    // BLOCKED: pub fn wxImage_GetHandlers() -> *mut c_void;
     pub fn wxImage_InitStandardHandlers();
     pub fn wxImage_InsertHandler(handler: *mut c_void);
     pub fn wxImage_RemoveHandler(name: *const c_void) -> bool;

@@ -59,7 +59,6 @@ bool wxIconBundle_IsEmpty(const wxIconBundle * self);
 wxClassInfo *wxIconizeEvent_CLASSINFO();
 wxIconizeEvent *wxIconizeEvent_new(int id, bool iconized);
 bool wxIconizeEvent_IsIconized(const wxIconizeEvent * self);
-bool wxIconizeEvent_Iconized(const wxIconizeEvent * self);
 
 // CLASS: wxIdManager
 void wxIdManager_delete(wxIdManager *self);
@@ -101,7 +100,6 @@ wxSize *wxImage_GetSize(const wxImage * self);
 wxString *wxImage_GetOption(const wxImage * self, const wxString * name);
 int wxImage_GetOptionInt(const wxImage * self, const wxString * name);
 bool wxImage_GetOrFindMaskColour(const wxImage * self, unsigned char * r, unsigned char * g, unsigned char * b);
-const wxPalette * wxImage_GetPalette(const wxImage * self);
 wxImage *wxImage_GetSubImage(const wxImage * self, const wxRect * rect);
 bool wxImage_HasAlpha(const wxImage * self);
 bool wxImage_HasMask(const wxImage * self);
@@ -127,7 +125,6 @@ void wxImage_AddHandler(wxImageHandler * handler);
 void wxImage_CleanUpHandlers();
 wxImageHandler * wxImage_FindHandler(const wxString * name);
 wxImageHandler * wxImage_FindHandlerMime(const wxString * mimetype);
-wxList * wxImage_GetHandlers();
 void wxImage_InitStandardHandlers();
 void wxImage_InsertHandler(wxImageHandler * handler);
 bool wxImage_RemoveHandler(const wxString * name);

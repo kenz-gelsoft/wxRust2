@@ -1317,9 +1317,17 @@ wx317 = [
 blocklist = [
     'operator=',
 ]
+[types.wxIconizeEvent]
+blocklist = [
+    # deprecated
+    'Iconized',
+]
 [types.wxImage]
 blocklist = [
     'operator=',
+    # binding type by value is not supported
+    'GetPalette',
+    'GetHandlers',
 ]
 [types.wxImageHandler]
 blocklist = [

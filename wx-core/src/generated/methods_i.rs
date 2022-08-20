@@ -98,9 +98,7 @@ pub trait IconizeEventMethods: EventMethods {
     fn is_iconized(&self) -> bool {
         unsafe { ffi::wxIconizeEvent_IsIconized(self.as_ptr()) }
     }
-    fn iconized(&self) -> bool {
-        unsafe { ffi::wxIconizeEvent_Iconized(self.as_ptr()) }
-    }
+    // BLOCKED: fn Iconized()
 }
 
 // wxIdManager
@@ -335,9 +333,7 @@ pub trait ImageMethods: ObjectMethods {
     fn get_or_find_mask_colour(&self, r: *mut c_void, g: *mut c_void, b: *mut c_void) -> bool {
         unsafe { ffi::wxImage_GetOrFindMaskColour(self.as_ptr(), r, g, b) }
     }
-    fn get_palette(&self) -> *const c_void {
-        unsafe { ffi::wxImage_GetPalette(self.as_ptr()) }
-    }
+    // BLOCKED: fn GetPalette()
     fn get_sub_image<R: RectMethods>(&self, rect: &R) -> Image {
         unsafe {
             let rect = rect.as_ptr();
@@ -488,9 +484,7 @@ pub trait ImageMethods: ObjectMethods {
             ImageHandler::option_from(ffi::wxImage_FindHandlerMime(mimetype))
         }
     }
-    fn get_handlers() -> *mut c_void {
-        unsafe { ffi::wxImage_GetHandlers() }
-    }
+    // BLOCKED: fn GetHandlers()
     fn init_standard_handlers() {
         unsafe { ffi::wxImage_InitStandardHandlers() }
     }
