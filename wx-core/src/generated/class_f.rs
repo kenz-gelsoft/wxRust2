@@ -709,8 +709,13 @@ impl<const OWNED: bool> FontIsOwned<OWNED> {
             FontIsOwned(ffi::wxFont_new5(native_info_string))
         }
     }
-    pub fn new_with_nativefontinfo(native_info: *const c_void) -> FontIsOwned<OWNED> {
-        unsafe { FontIsOwned(ffi::wxFont_new6(native_info)) }
+    pub fn new_with_nativefontinfo<N: NativeFontInfoMethods>(
+        native_info: &N,
+    ) -> FontIsOwned<OWNED> {
+        unsafe {
+            let native_info = native_info.as_ptr();
+            FontIsOwned(ffi::wxFont_new6(native_info))
+        }
     }
     pub fn none() -> Option<&'static Self> {
         None

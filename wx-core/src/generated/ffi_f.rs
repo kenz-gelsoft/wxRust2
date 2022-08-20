@@ -235,7 +235,7 @@ extern "C" {
     // NOT_SUPPORTED: pub fn wxFont_GetFamily(self_: *const c_void) -> wxFontFamily;
     pub fn wxFont_GetNativeFontInfoDesc(self_: *const c_void) -> *mut c_void;
     pub fn wxFont_GetNativeFontInfoUserDesc(self_: *const c_void) -> *mut c_void;
-    pub fn wxFont_GetNativeFontInfo(self_: *const c_void) -> *const c_void;
+    pub fn wxFont_GetNativeFontInfo(self_: *const c_void) -> *mut c_void;
     pub fn wxFont_GetPointSize(self_: *const c_void) -> c_int;
     pub fn wxFont_GetFractionalPointSize(self_: *const c_void) -> c_double;
     pub fn wxFont_GetPixelSize(self_: *const c_void) -> *mut c_void;
