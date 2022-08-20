@@ -738,37 +738,3 @@ pub trait ListbookMethods: BookCtrlBaseMethods {
         unsafe { WeakRef::<ListView>::from(ffi::wxListbook_GetListView(self.as_ptr())) }
     }
 }
-
-// wxLogGui
-pub trait LogGuiMethods: LogMethods {}
-
-// wxLogTextCtrl
-pub trait LogTextCtrlMethods: LogMethods {}
-
-// wxLogWindow
-pub trait LogWindowMethods: LogInterposerMethods {
-    fn get_frame(&self) -> WeakRef<Frame> {
-        unsafe { WeakRef::<Frame>::from(ffi::wxLogWindow_GetFrame(self.as_ptr())) }
-    }
-    fn on_frame_close<F: FrameMethods>(&self, frame: Option<&F>) -> bool {
-        unsafe {
-            let frame = match frame {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxLogWindow_OnFrameClose(self.as_ptr(), frame)
-        }
-    }
-    fn on_frame_delete<F: FrameMethods>(&self, frame: Option<&F>) {
-        unsafe {
-            let frame = match frame {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxLogWindow_OnFrameDelete(self.as_ptr(), frame)
-        }
-    }
-    fn show(&self, show: bool) {
-        unsafe { ffi::wxLogWindow_Show(self.as_ptr(), show) }
-    }
-}

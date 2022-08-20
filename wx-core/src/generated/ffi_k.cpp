@@ -12,9 +12,11 @@ int wxKeyEvent_GetKeyCode(const wxKeyEvent * self) {
 bool wxKeyEvent_IsKeyInCategory(const wxKeyEvent * self, int category) {
     return self->IsKeyInCategory(category);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxKeyEvent_IsAutoRepeat(const wxKeyEvent * self) {
     return self->IsAutoRepeat();
 }
+#endif
 wxPoint *wxKeyEvent_GetPosition(const wxKeyEvent * self) {
     return new wxPoint(self->GetPosition());
 }

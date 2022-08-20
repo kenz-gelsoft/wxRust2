@@ -4,7 +4,6 @@
 #include <wx/listbook.h>
 #include <wx/listbox.h>
 #include <wx/listctrl.h>
-#include <wx/log.h>
 
 extern "C" {
 
@@ -101,7 +100,9 @@ bool wxListCtrl_ScrollList(wxListCtrl * self, int dx, int dy);
 bool wxListCtrl_SetColumn(wxListCtrl * self, int col, wxListItem * item);
 bool wxListCtrl_SetColumnWidth(wxListCtrl * self, int col, int width);
 bool wxListCtrl_SetColumnsOrder(wxListCtrl * self, const wxArrayInt * orders);
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxListCtrl_SetHeaderAttr(wxListCtrl * self, const wxItemAttr * attr);
+#endif
 void wxListCtrl_SetImageList(wxListCtrl * self, wxImageList * image_list, int which);
 void wxListCtrl_SetNormalImages(wxListCtrl * self, const wxVector< wxBitmapBundle > * images);
 void wxListCtrl_SetSmallImages(wxListCtrl * self, const wxVector< wxBitmapBundle > * images);
@@ -200,22 +201,6 @@ wxListbook *wxListbook_new();
 wxListbook *wxListbook_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxListbook_Create(wxListbook * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 wxListView * wxListbook_GetListView(const wxListbook * self);
-
-// CLASS: wxLogGui
-void wxLogGui_delete(wxLogGui *self);
-wxLogGui *wxLogGui_new();
-
-// CLASS: wxLogTextCtrl
-void wxLogTextCtrl_delete(wxLogTextCtrl *self);
-wxLogTextCtrl *wxLogTextCtrl_new(wxTextCtrl * p_text_ctrl);
-
-// CLASS: wxLogWindow
-void wxLogWindow_delete(wxLogWindow *self);
-wxLogWindow *wxLogWindow_new(wxWindow * p_parent, const wxString * sz_title, bool show, bool pass_to_old);
-wxFrame * wxLogWindow_GetFrame(const wxLogWindow * self);
-bool wxLogWindow_OnFrameClose(wxLogWindow * self, wxFrame * frame);
-void wxLogWindow_OnFrameDelete(wxLogWindow * self, wxFrame * frame);
-void wxLogWindow_Show(wxLogWindow * self, bool show);
 
 } // extern "C"
 

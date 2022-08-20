@@ -265,9 +265,11 @@ bool wxListCtrl_SetColumnWidth(wxListCtrl * self, int col, int width) {
 bool wxListCtrl_SetColumnsOrder(wxListCtrl * self, const wxArrayInt * orders) {
     return self->SetColumnsOrder(*orders);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxListCtrl_SetHeaderAttr(wxListCtrl * self, const wxItemAttr * attr) {
     return self->SetHeaderAttr(*attr);
 }
+#endif
 void wxListCtrl_SetImageList(wxListCtrl * self, wxImageList * image_list, int which) {
     return self->SetImageList(image_list, which);
 }
@@ -545,42 +547,6 @@ bool wxListbook_Create(wxListbook * self, wxWindow * parent, wxWindowID id, cons
 }
 wxListView * wxListbook_GetListView(const wxListbook * self) {
     return self->GetListView();
-}
-
-// CLASS: wxLogGui
-void wxLogGui_delete(wxLogGui *self) {
-    delete self;
-}
-wxLogGui *wxLogGui_new() {
-    return new wxLogGui();
-}
-
-// CLASS: wxLogTextCtrl
-void wxLogTextCtrl_delete(wxLogTextCtrl *self) {
-    delete self;
-}
-wxLogTextCtrl *wxLogTextCtrl_new(wxTextCtrl * p_text_ctrl) {
-    return new wxLogTextCtrl(p_text_ctrl);
-}
-
-// CLASS: wxLogWindow
-void wxLogWindow_delete(wxLogWindow *self) {
-    delete self;
-}
-wxLogWindow *wxLogWindow_new(wxWindow * p_parent, const wxString * sz_title, bool show, bool pass_to_old) {
-    return new wxLogWindow(p_parent, *sz_title, show, pass_to_old);
-}
-wxFrame * wxLogWindow_GetFrame(const wxLogWindow * self) {
-    return self->GetFrame();
-}
-bool wxLogWindow_OnFrameClose(wxLogWindow * self, wxFrame * frame) {
-    return self->OnFrameClose(frame);
-}
-void wxLogWindow_OnFrameDelete(wxLogWindow * self, wxFrame * frame) {
-    return self->OnFrameDelete(frame);
-}
-void wxLogWindow_Show(wxLogWindow * self, bool show) {
-    return self->Show(show);
 }
 
 } // extern "C"

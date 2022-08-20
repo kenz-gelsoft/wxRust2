@@ -357,25 +357,4 @@ extern "C" {
     ) -> bool;
     pub fn wxListbook_GetListView(self_: *const c_void) -> *mut c_void;
 
-    // wxLogGui
-    pub fn wxLogGui_delete(self_: *mut c_void);
-    pub fn wxLogGui_new() -> *mut c_void;
-
-    // wxLogTextCtrl
-    pub fn wxLogTextCtrl_delete(self_: *mut c_void);
-    pub fn wxLogTextCtrl_new(p_text_ctrl: *mut c_void) -> *mut c_void;
-
-    // wxLogWindow
-    pub fn wxLogWindow_delete(self_: *mut c_void);
-    pub fn wxLogWindow_new(
-        p_parent: *mut c_void,
-        sz_title: *const c_void,
-        show: bool,
-        pass_to_old: bool,
-    ) -> *mut c_void;
-    pub fn wxLogWindow_GetFrame(self_: *const c_void) -> *mut c_void;
-    pub fn wxLogWindow_OnFrameClose(self_: *mut c_void, frame: *mut c_void) -> bool;
-    pub fn wxLogWindow_OnFrameDelete(self_: *mut c_void, frame: *mut c_void);
-    pub fn wxLogWindow_Show(self_: *mut c_void, show: bool);
-
 }

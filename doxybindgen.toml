@@ -457,12 +457,12 @@ wxml_files = [
     'wxml/classwx_list_item.xml',
     'wxml/classwx_list_view.xml',
     'wxml/classwx_listbook.xml',
-    'wxml/classwx_log.xml',
-    'wxml/classwx_log_chain.xml',
-    'wxml/classwx_log_gui.xml',
-    'wxml/classwx_log_interposer.xml',
-    'wxml/classwx_log_text_ctrl.xml',
-    'wxml/classwx_log_window.xml',
+    # 'wxml/classwx_log.xml',                # Our CI environment is't built with
+    # 'wxml/classwx_log_chain.xml',          # Our CI environment is't built with
+    # 'wxml/classwx_log_gui.xml',            # Our CI environment is't built with
+    # 'wxml/classwx_log_interposer.xml',     # Our CI environment is't built with
+    # 'wxml/classwx_log_text_ctrl.xml',      # Our CI environment is't built with
+    # 'wxml/classwx_log_window.xml',         # Our CI environment is't built with
     # 'wxml/classwx_long_press_event.xml',   # requires 3.1
     # 'wxml/classwx_m_d_i_child_frame.xml',  # Our CI environment is't built with
     # 'wxml/classwx_m_d_i_parent_frame.xml', # Our CI environment is't built with
@@ -1377,6 +1377,10 @@ blocklist = [
 wx31 = [
     'GetButtonOrdinal',
 ]
+[types.wxKeyEvent]
+wx31 = [
+    'IsAutoRepeat',
+]
 [types.wxListBox]
 blocklist = [
     # C++ array not supported
@@ -1387,6 +1391,10 @@ blocklist = [
 wx31 = [
     'GetCountPerPage',
     'GetTopItem',
+]
+[types.wxListCtrl]
+wx31 = [
+    'SetHeaderAttr',
 ]
 [types.wxMenu]
 blocklist = [
