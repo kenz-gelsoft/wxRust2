@@ -433,9 +433,11 @@ int wxImageList_Add2(wxImageList * self, const wxIcon * icon) {
 bool wxImageList_Create(wxImageList * self, int width, int height, bool mask, int initial_count) {
     return self->Create(width, height, mask, initial_count);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxImageList_Destroy(wxImageList * self) {
     return self->Destroy();
 }
+#endif
 bool wxImageList_Draw(wxImageList * self, int index, wxDC * dc, int x, int y, int flags, bool solid_background) {
     return self->Draw(index, *dc, x, y, flags, solid_background);
 }
@@ -451,9 +453,11 @@ int wxImageList_GetImageCount(const wxImageList * self) {
 bool wxImageList_GetSize(const wxImageList * self, int index, int * width, int * height) {
     return self->GetSize(index, *width, *height);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxSize *wxImageList_GetSize1(const wxImageList * self) {
     return new wxSize(self->GetSize());
 }
+#endif
 bool wxImageList_Remove(wxImageList * self, int index) {
     return self->Remove(index);
 }
@@ -498,6 +502,7 @@ void wxInfoBar_RemoveButton(wxInfoBar * self, wxWindowID btnid) {
 void wxInfoBar_ShowMessage(wxInfoBar * self, const wxString * msg, int flags) {
     return self->ShowMessage(*msg, flags);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 size_t wxInfoBar_GetButtonCount(const wxInfoBar * self) {
     return self->GetButtonCount();
 }
@@ -507,6 +512,7 @@ wxWindowID wxInfoBar_GetButtonId(const wxInfoBar * self, size_t idx) {
 bool wxInfoBar_HasButtonId(const wxInfoBar * self, wxWindowID btnid) {
     return self->HasButtonId(btnid);
 }
+#endif
 
 // CLASS: wxInitDialogEvent
 wxClassInfo *wxInitDialogEvent_CLASSINFO() {

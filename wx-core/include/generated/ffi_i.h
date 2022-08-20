@@ -175,13 +175,17 @@ int wxImageList_Add(wxImageList * self, const wxBitmap * bitmap, const wxBitmap 
 int wxImageList_Add1(wxImageList * self, const wxBitmap * bitmap, const wxColour * mask_colour);
 int wxImageList_Add2(wxImageList * self, const wxIcon * icon);
 bool wxImageList_Create(wxImageList * self, int width, int height, bool mask, int initial_count);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxImageList_Destroy(wxImageList * self);
+#endif
 bool wxImageList_Draw(wxImageList * self, int index, wxDC * dc, int x, int y, int flags, bool solid_background);
 wxBitmap *wxImageList_GetBitmap(const wxImageList * self, int index);
 wxIcon *wxImageList_GetIcon(const wxImageList * self, int index);
 int wxImageList_GetImageCount(const wxImageList * self);
 bool wxImageList_GetSize(const wxImageList * self, int index, int * width, int * height);
+#if wxCHECK_VERSION(3, 1, 0)
 wxSize *wxImageList_GetSize1(const wxImageList * self);
+#endif
 bool wxImageList_Remove(wxImageList * self, int index);
 bool wxImageList_RemoveAll(wxImageList * self);
 bool wxImageList_Replace(wxImageList * self, int index, const wxBitmap * bitmap, const wxBitmap * mask);
@@ -198,9 +202,11 @@ void wxInfoBar_AddButton(wxInfoBar * self, wxWindowID btnid, const wxString * la
 void wxInfoBar_Dismiss(wxInfoBar * self);
 void wxInfoBar_RemoveButton(wxInfoBar * self, wxWindowID btnid);
 void wxInfoBar_ShowMessage(wxInfoBar * self, const wxString * msg, int flags);
+#if wxCHECK_VERSION(3, 1, 0)
 size_t wxInfoBar_GetButtonCount(const wxInfoBar * self);
 wxWindowID wxInfoBar_GetButtonId(const wxInfoBar * self, size_t idx);
 bool wxInfoBar_HasButtonId(const wxInfoBar * self, wxWindowID btnid);
+#endif
 
 // CLASS: wxInitDialogEvent
 wxClassInfo *wxInitDialogEvent_CLASSINFO();

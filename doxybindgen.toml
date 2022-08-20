@@ -1344,6 +1344,17 @@ blocklist = [
     # abstract
     'wxImageHandler',
 ]
+[types.wxImageList]
+wx31 = [
+    'Destroy',
+    'GetSize1',
+]
+[types.wxInfoBar]
+wx31 = [
+    'GetButtonCount',
+    'GetButtonId',
+    'HasButtonId',
+]
 [types.wxItemAttr]
 blocklist = [
     'operator==',
