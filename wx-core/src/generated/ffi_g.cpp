@@ -607,6 +607,9 @@ wxClassInfo *wxGraphicsPen_CLASSINFO() {
 wxClassInfo *wxGraphicsRenderer_CLASSINFO() {
     return wxCLASSINFO(wxGraphicsRenderer);
 }
+wxImage *wxGraphicsRenderer_CreateImageFromBitmap(wxGraphicsRenderer * self, const wxGraphicsBitmap * bmp) {
+    return new wxImage(self->CreateImageFromBitmap(*bmp));
+}
 wxGraphicsContext * wxGraphicsRenderer_CreateContext(wxGraphicsRenderer * self, wxWindow * window) {
     return self->CreateContext(window);
 }

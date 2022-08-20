@@ -499,7 +499,15 @@ pub trait ArtProviderMethods: ObjectMethods {
             Size::from_ptr(ffi::wxArtProvider_GetSizeHint(client, win))
         }
     }
-    // NOT_SUPPORTED: fn GetIconBundle()
+    fn get_icon_bundle(id: &str, client: &str) -> IconBundle {
+        unsafe {
+            let id = WxString::from(id);
+            let id = id.as_ptr();
+            let client = WxString::from(client);
+            let client = client.as_ptr();
+            IconBundle::from_ptr(ffi::wxArtProvider_GetIconBundle(id, client))
+        }
+    }
     fn has_native_provider() -> bool {
         unsafe { ffi::wxArtProvider_HasNativeProvider() }
     }

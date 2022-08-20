@@ -251,6 +251,7 @@ wxClassInfo *wxGraphicsPen_CLASSINFO();
 
 // CLASS: wxGraphicsRenderer
 wxClassInfo *wxGraphicsRenderer_CLASSINFO();
+wxImage *wxGraphicsRenderer_CreateImageFromBitmap(wxGraphicsRenderer * self, const wxGraphicsBitmap * bmp);
 wxGraphicsContext * wxGraphicsRenderer_CreateContext(wxGraphicsRenderer * self, wxWindow * window);
 wxGraphicsContext * wxGraphicsRenderer_CreateContext1(wxGraphicsRenderer * self, const wxWindowDC * window_dc);
 wxGraphicsContext * wxGraphicsRenderer_CreateContext2(wxGraphicsRenderer * self, const wxMemoryDC * memory_dc);

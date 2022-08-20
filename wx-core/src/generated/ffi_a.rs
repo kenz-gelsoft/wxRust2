@@ -216,7 +216,7 @@ extern "C" {
     pub fn wxArtProvider_GetNativeSizeHint(client: *const c_void, win: *mut c_void) -> *mut c_void;
     pub fn wxArtProvider_GetDIPSizeHint(client: *const c_void) -> *mut c_void;
     pub fn wxArtProvider_GetSizeHint(client: *const c_void, win: *mut c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxArtProvider_GetIconBundle(id: *const c_void, client: *const c_void) -> wxIconBundle;
+    pub fn wxArtProvider_GetIconBundle(id: *const c_void, client: *const c_void) -> *mut c_void;
     pub fn wxArtProvider_HasNativeProvider() -> bool;
     // BLOCKED: pub fn wxArtProvider_Insert(provider: *mut c_void);
     pub fn wxArtProvider_Pop() -> bool;

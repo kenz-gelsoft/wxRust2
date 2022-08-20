@@ -142,6 +142,7 @@ wxSize *wxArtProvider_GetDIPSizeHint(const wxArtClient * client);
 #if wxCHECK_VERSION(3, 1, 7)
 wxSize *wxArtProvider_GetSizeHint(const wxArtClient * client, wxWindow * win);
 #endif
+wxIconBundle *wxArtProvider_GetIconBundle(const wxArtID * id, const wxArtClient * client);
 bool wxArtProvider_HasNativeProvider();
 bool wxArtProvider_Pop();
 void wxArtProvider_Push(wxArtProvider * provider);

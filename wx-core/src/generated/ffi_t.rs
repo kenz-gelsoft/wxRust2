@@ -490,7 +490,7 @@ extern "C" {
     pub fn wxTopLevelWindow_EnableMinimizeButton(self_: *mut c_void, enable: bool) -> bool;
     pub fn wxTopLevelWindow_GetDefaultItem(self_: *const c_void) -> *mut c_void;
     pub fn wxTopLevelWindow_GetIcon(self_: *const c_void) -> *mut c_void;
-    // BLOCKED: pub fn wxTopLevelWindow_GetIcons(self_: *const c_void) -> *const c_void;
+    // BLOCKED: pub fn wxTopLevelWindow_GetIcons(self_: *const c_void) -> *mut c_void;
     pub fn wxTopLevelWindow_GetTitle(self_: *const c_void) -> *mut c_void;
     pub fn wxTopLevelWindow_Iconize(self_: *mut c_void, iconize: bool);
     pub fn wxTopLevelWindow_IsActive(self_: *mut c_void) -> bool;

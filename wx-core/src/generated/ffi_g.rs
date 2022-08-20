@@ -455,7 +455,10 @@ extern "C" {
     pub fn wxGraphicsRenderer_CLASSINFO() -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxGraphicsRenderer_CreateBitmap(self_: *mut c_void, bitmap: *const c_void) -> wxGraphicsBitmap;
     // NOT_SUPPORTED: pub fn wxGraphicsRenderer_CreateBitmapFromImage(self_: *mut c_void, image: *const c_void) -> wxGraphicsBitmap;
-    // NOT_SUPPORTED: pub fn wxGraphicsRenderer_CreateImageFromBitmap(self_: *mut c_void, bmp: *const c_void) -> wxImage;
+    pub fn wxGraphicsRenderer_CreateImageFromBitmap(
+        self_: *mut c_void,
+        bmp: *const c_void,
+    ) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxGraphicsRenderer_CreateBitmapFromNativeBitmap(self_: *mut c_void, bitmap: *mut c_void) -> wxGraphicsBitmap;
     pub fn wxGraphicsRenderer_CreateContext(self_: *mut c_void, window: *mut c_void)
         -> *mut c_void;

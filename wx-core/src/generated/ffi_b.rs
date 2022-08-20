@@ -44,7 +44,7 @@ extern "C" {
     pub fn wxBitmap_new10(cursor: *const c_void) -> *mut c_void;
     // DTOR: pub fn wxBitmap_~wxBitmap(self_: *mut c_void);
     // NOT_SUPPORTED: pub fn wxBitmap_ConvertToDisabled(self_: *const c_void, brightness: unsigned char) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxBitmap_ConvertToImage(self_: *const c_void) -> wxImage;
+    pub fn wxBitmap_ConvertToImage(self_: *const c_void) -> *mut c_void;
     pub fn wxBitmap_CopyFromIcon(self_: *mut c_void, icon: *const c_void) -> bool;
     pub fn wxBitmap_Create(self_: *mut c_void, width: c_int, height: c_int, depth: c_int) -> bool;
     pub fn wxBitmap_Create1(self_: *mut c_void, sz: *const c_void, depth: c_int) -> bool;

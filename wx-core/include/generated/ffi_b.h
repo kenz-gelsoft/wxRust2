@@ -46,6 +46,7 @@ wxBitmap *wxBitmap_new9(const wxImage * img, const wxDC * dc);
 #if wxCHECK_VERSION(3, 1, 0)
 wxBitmap *wxBitmap_new10(const wxCursor * cursor);
 #endif
+wxImage *wxBitmap_ConvertToImage(const wxBitmap * self);
 bool wxBitmap_CopyFromIcon(wxBitmap * self, const wxIcon * icon);
 bool wxBitmap_Create(wxBitmap * self, int width, int height, int depth);
 bool wxBitmap_Create1(wxBitmap * self, const wxSize * sz, int depth);

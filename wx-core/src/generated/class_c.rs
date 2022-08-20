@@ -1751,8 +1751,11 @@ impl<const OWNED: bool> CursorIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxCursor1()
     // NOT_SUPPORTED: fn wxCursor2()
     // NOT_SUPPORTED: fn wxCursor3()
-    pub fn new_with_image(image: *const c_void) -> CursorIsOwned<OWNED> {
-        unsafe { CursorIsOwned(ffi::wxCursor_new4(image)) }
+    pub fn new_with_image<I: ImageMethods>(image: &I) -> CursorIsOwned<OWNED> {
+        unsafe {
+            let image = image.as_ptr();
+            CursorIsOwned(ffi::wxCursor_new4(image))
+        }
     }
     pub fn new_with_char(xpm_data: *const c_void) -> CursorIsOwned<OWNED> {
         unsafe { CursorIsOwned(ffi::wxCursor_new5(xpm_data)) }
