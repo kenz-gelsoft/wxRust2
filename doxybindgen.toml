@@ -1,7 +1,4 @@
 core_files = [
-    'wxml/classwx_j_p_e_g_handler.xml',
-    'wxml/classwx_joystick.xml',
-    'wxml/classwx_joystick_event.xml',
     'wxml/classwx_key_event.xml',
     'wxml/classwx_layout_algorithm.xml',
     'wxml/classwx_list_box.xml',
@@ -461,6 +458,9 @@ wxml_files = [
     # 'wxml/classwx_item_attr.xml',         # requires 3.1
     'wxml/classwx_item_container.xml',
     'wxml/classwx_item_container_immutable.xml',
+    'wxml/classwx_j_p_e_g_handler.xml',
+    # 'wxml/classwx_joystick.xml', # Our CI environment is't built with
+    'wxml/classwx_joystick_event.xml',
     'wxml/classwx_list_box.xml',
     # 'wxml/classwx_m_d_i_child_frame.xml',  # Our CI environment is't built with
     # 'wxml/classwx_m_d_i_parent_frame.xml', # Our CI environment is't built with
@@ -1370,6 +1370,10 @@ blocklist = [
 [types.wxItemContainerImmutable]
 blocklist = [
     'wxItemContainerImmutable',
+]
+[types.wxJoystickEvent]
+wx31 = [
+    'GetButtonOrdinal',
 ]
 [types.wxListBox]
 blocklist = [
