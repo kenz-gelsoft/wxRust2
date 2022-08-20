@@ -1,8 +1,6 @@
 #pragma once
 
-#include <wx/cmndata.h>
 #include <wx/dcclient.h>
-#include <wx/dcprint.h>
 #include <wx/event.h>
 #include <wx/gdicmn.h>
 #include <wx/imagpcx.h>
@@ -15,7 +13,6 @@
 #include <wx/pickerbase.h>
 #include <wx/popupwin.h>
 #include <wx/preferences.h>
-#include <wx/print.h>
 #include <wx/propdlg.h>
 #include <wx/textdlg.h>
 
@@ -163,60 +160,6 @@ wxBitmapBundle *wxPreferencesPage_GetIcon(const wxPreferencesPage * self);
 #endif
 wxBitmap *wxPreferencesPage_GetLargeIcon(const wxPreferencesPage * self);
 wxWindow * wxPreferencesPage_CreateWindow(wxPreferencesPage * self, wxWindow * parent);
-
-// CLASS: wxPrintData
-wxClassInfo *wxPrintData_CLASSINFO();
-wxPrintData *wxPrintData_new();
-wxPrintData *wxPrintData_new1(const wxPrintData * data);
-bool wxPrintData_GetCollate(const wxPrintData * self);
-bool wxPrintData_GetColour(const wxPrintData * self);
-int wxPrintData_GetNoCopies(const wxPrintData * self);
-wxString *wxPrintData_GetPrinterName(const wxPrintData * self);
-bool wxPrintData_IsOk(const wxPrintData * self);
-void wxPrintData_SetCollate(wxPrintData * self, bool flag);
-void wxPrintData_SetColour(wxPrintData * self, bool flag);
-void wxPrintData_SetNoCopies(wxPrintData * self, int n);
-void wxPrintData_SetPaperSize(wxPrintData * self, const wxSize * size);
-void wxPrintData_SetPrinterName(wxPrintData * self, const wxString * printer_name);
-wxString *wxPrintData_GetFilename(const wxPrintData * self);
-void wxPrintData_SetFilename(wxPrintData * self, const wxString * filename);
-
-// CLASS: wxPrinterDC
-wxClassInfo *wxPrinterDC_CLASSINFO();
-wxPrinterDC *wxPrinterDC_new(const wxPrintData * print_data);
-wxRect *wxPrinterDC_GetPaperRect(const wxPrinterDC * self);
-
-// CLASS: wxPrintout
-wxClassInfo *wxPrintout_CLASSINFO();
-void wxPrintout_FitThisSizeToPage(wxPrintout * self, const wxSize * image_size);
-void wxPrintout_FitThisSizeToPageMargins(wxPrintout * self, const wxSize * image_size, const wxPageSetupDialogData * page_setup_data);
-void wxPrintout_FitThisSizeToPaper(wxPrintout * self, const wxSize * image_size);
-wxDC * wxPrintout_GetDC(const wxPrintout * self);
-wxRect *wxPrintout_GetLogicalPageMarginsRect(const wxPrintout * self, const wxPageSetupDialogData * page_setup_data);
-wxRect *wxPrintout_GetLogicalPageRect(const wxPrintout * self);
-wxRect *wxPrintout_GetLogicalPaperRect(const wxPrintout * self);
-void wxPrintout_GetPPIPrinter(const wxPrintout * self, int * w, int * h);
-void wxPrintout_GetPPIScreen(const wxPrintout * self, int * w, int * h);
-void wxPrintout_GetPageInfo(wxPrintout * self, int * min_page, int * max_page, int * page_from, int * page_to);
-void wxPrintout_GetPageSizeMM(const wxPrintout * self, int * w, int * h);
-void wxPrintout_GetPageSizePixels(const wxPrintout * self, int * w, int * h);
-wxRect *wxPrintout_GetPaperRectPixels(const wxPrintout * self);
-wxString *wxPrintout_GetTitle(const wxPrintout * self);
-bool wxPrintout_HasPage(wxPrintout * self, int page_num);
-bool wxPrintout_IsPreview(const wxPrintout * self);
-wxPrintPreview * wxPrintout_GetPreview(const wxPrintout * self);
-void wxPrintout_MapScreenSizeToDevice(wxPrintout * self);
-void wxPrintout_MapScreenSizeToPage(wxPrintout * self);
-void wxPrintout_MapScreenSizeToPageMargins(wxPrintout * self, const wxPageSetupDialogData * page_setup_data);
-void wxPrintout_MapScreenSizeToPaper(wxPrintout * self);
-void wxPrintout_OffsetLogicalOrigin(wxPrintout * self, wxCoord xoff, wxCoord yoff);
-bool wxPrintout_OnBeginDocument(wxPrintout * self, int start_page, int end_page);
-void wxPrintout_OnBeginPrinting(wxPrintout * self);
-void wxPrintout_OnEndDocument(wxPrintout * self);
-void wxPrintout_OnEndPrinting(wxPrintout * self);
-void wxPrintout_OnPreparePrinting(wxPrintout * self);
-bool wxPrintout_OnPrintPage(wxPrintout * self, int page_num);
-void wxPrintout_SetLogicalOrigin(wxPrintout * self, wxCoord x, wxCoord y);
 
 // CLASS: wxPropertySheetDialog
 wxClassInfo *wxPropertySheetDialog_CLASSINFO();

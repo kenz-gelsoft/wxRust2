@@ -458,13 +458,13 @@ wxml_files = [
     # 'wxml/classwx_preview_canvas.xml',      # base class depends template, need special treatment
     # 'wxml/classwx_preview_control_bar.xml', # Our CI environment is't built with
     # 'wxml/classwx_preview_frame.xml',       # Our CI environment is't built with
-    'wxml/classwx_print_data.xml',
+    # 'wxml/classwx_print_data.xml',          # Our CI environment is't built with
     # 'wxml/classwx_print_dialog.xml',        # Our CI environment is't built with
     # 'wxml/classwx_print_dialog_data.xml',   # Our CI environment is't built with
     # 'wxml/classwx_print_preview.xml',       # Our CI environment is't built with
     # 'wxml/classwx_printer.xml',             # Our CI environment is't built with
-    'wxml/classwx_printer_d_c.xml',
-    'wxml/classwx_printout.xml',
+    # 'wxml/classwx_printer_d_c.xml',         # Our CI environment is't built with
+    # 'wxml/classwx_printout.xml',            # Our CI environment is't built with
     'wxml/classwx_property_sheet_dialog.xml',
     'wxml/classwx_radio_box.xml',
     'wxml/classwx_rect.xml',
