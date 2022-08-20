@@ -14,52 +14,6 @@ extern "C" {
     pub fn wxPNMHandler_CLASSINFO() -> *mut c_void;
     pub fn wxPNMHandler_new() -> *mut c_void;
 
-    // wxPageSetupDialog
-    pub fn wxPageSetupDialog_CLASSINFO() -> *mut c_void;
-    pub fn wxPageSetupDialog_new(parent: *mut c_void, data: *mut c_void) -> *mut c_void;
-    // DTOR: pub fn wxPageSetupDialog_~wxPageSetupDialog(self_: *mut c_void);
-    pub fn wxPageSetupDialog_GetPageSetupData(self_: *mut c_void) -> *mut c_void;
-    pub fn wxPageSetupDialog_ShowModal(self_: *mut c_void) -> c_int;
-
-    // wxPageSetupDialogData
-    pub fn wxPageSetupDialogData_CLASSINFO() -> *mut c_void;
-    pub fn wxPageSetupDialogData_new() -> *mut c_void;
-    pub fn wxPageSetupDialogData_new1(data: *const c_void) -> *mut c_void;
-    pub fn wxPageSetupDialogData_new2(print_data: *const c_void) -> *mut c_void;
-    // DTOR: pub fn wxPageSetupDialogData_~wxPageSetupDialogData(self_: *mut c_void);
-    pub fn wxPageSetupDialogData_EnableHelp(self_: *mut c_void, flag: bool);
-    pub fn wxPageSetupDialogData_EnableMargins(self_: *mut c_void, flag: bool);
-    pub fn wxPageSetupDialogData_EnableOrientation(self_: *mut c_void, flag: bool);
-    pub fn wxPageSetupDialogData_EnablePaper(self_: *mut c_void, flag: bool);
-    pub fn wxPageSetupDialogData_EnablePrinter(self_: *mut c_void, flag: bool);
-    pub fn wxPageSetupDialogData_GetDefaultInfo(self_: *const c_void) -> bool;
-    pub fn wxPageSetupDialogData_GetDefaultMinMargins(self_: *const c_void) -> bool;
-    pub fn wxPageSetupDialogData_GetEnableHelp(self_: *const c_void) -> bool;
-    pub fn wxPageSetupDialogData_GetEnableMargins(self_: *const c_void) -> bool;
-    pub fn wxPageSetupDialogData_GetEnableOrientation(self_: *const c_void) -> bool;
-    pub fn wxPageSetupDialogData_GetEnablePaper(self_: *const c_void) -> bool;
-    pub fn wxPageSetupDialogData_GetEnablePrinter(self_: *const c_void) -> bool;
-    pub fn wxPageSetupDialogData_GetMarginBottomRight(self_: *const c_void) -> *mut c_void;
-    pub fn wxPageSetupDialogData_GetMarginTopLeft(self_: *const c_void) -> *mut c_void;
-    pub fn wxPageSetupDialogData_GetMinMarginBottomRight(self_: *const c_void) -> *mut c_void;
-    pub fn wxPageSetupDialogData_GetMinMarginTopLeft(self_: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxPageSetupDialogData_GetPaperId(self_: *const c_void) -> wxPaperSize;
-    pub fn wxPageSetupDialogData_GetPaperSize(self_: *const c_void) -> *mut c_void;
-    // BLOCKED: pub fn wxPageSetupDialogData_GetPrintData(self_: *mut c_void) -> *mut c_void;
-    pub fn wxPageSetupDialogData_GetPrintData1(self_: *const c_void) -> *mut c_void;
-    pub fn wxPageSetupDialogData_IsOk(self_: *const c_void) -> bool;
-    pub fn wxPageSetupDialogData_SetDefaultInfo(self_: *mut c_void, flag: bool);
-    pub fn wxPageSetupDialogData_SetDefaultMinMargins(self_: *mut c_void, flag: bool);
-    pub fn wxPageSetupDialogData_SetMarginBottomRight(self_: *mut c_void, pt: *const c_void);
-    pub fn wxPageSetupDialogData_SetMarginTopLeft(self_: *mut c_void, pt: *const c_void);
-    pub fn wxPageSetupDialogData_SetMinMarginBottomRight(self_: *mut c_void, pt: *const c_void);
-    pub fn wxPageSetupDialogData_SetMinMarginTopLeft(self_: *mut c_void, pt: *const c_void);
-    // NOT_SUPPORTED: pub fn wxPageSetupDialogData_SetPaperId(self_: *mut c_void, id: wxPaperSize);
-    pub fn wxPageSetupDialogData_SetPaperSize(self_: *mut c_void, size: *const c_void);
-    pub fn wxPageSetupDialogData_SetPrintData(self_: *mut c_void, print_data: *const c_void);
-    // BLOCKED: pub fn wxPageSetupDialogData_operator=(self_: *mut c_void, data: *const c_void) -> *mut c_void;
-    // BLOCKED: pub fn wxPageSetupDialogData_operator=1(self_: *mut c_void, data: *const c_void) -> *mut c_void;
-
     // wxPaintDC
     pub fn wxPaintDC_CLASSINFO() -> *mut c_void;
     pub fn wxPaintDC_new(window: *mut c_void) -> *mut c_void;

@@ -9,144 +9,6 @@ pub trait PNGHandlerMethods: ImageHandlerMethods {}
 // wxPNMHandler
 pub trait PNMHandlerMethods: ImageHandlerMethods {}
 
-// wxPageSetupDialog
-pub trait PageSetupDialogMethods: ObjectMethods {
-    // DTOR: fn ~wxPageSetupDialog()
-    fn get_page_setup_data(&self) -> PageSetupDialogDataIsOwned<false> {
-        unsafe {
-            PageSetupDialogDataIsOwned::from_ptr(ffi::wxPageSetupDialog_GetPageSetupData(
-                self.as_ptr(),
-            ))
-        }
-    }
-    fn show_modal(&self) -> c_int {
-        unsafe { ffi::wxPageSetupDialog_ShowModal(self.as_ptr()) }
-    }
-}
-
-// wxPageSetupDialogData
-pub trait PageSetupDialogDataMethods: ObjectMethods {
-    // DTOR: fn ~wxPageSetupDialogData()
-    fn enable_help(&self, flag: bool) {
-        unsafe { ffi::wxPageSetupDialogData_EnableHelp(self.as_ptr(), flag) }
-    }
-    fn enable_margins(&self, flag: bool) {
-        unsafe { ffi::wxPageSetupDialogData_EnableMargins(self.as_ptr(), flag) }
-    }
-    fn enable_orientation(&self, flag: bool) {
-        unsafe { ffi::wxPageSetupDialogData_EnableOrientation(self.as_ptr(), flag) }
-    }
-    fn enable_paper(&self, flag: bool) {
-        unsafe { ffi::wxPageSetupDialogData_EnablePaper(self.as_ptr(), flag) }
-    }
-    fn enable_printer(&self, flag: bool) {
-        unsafe { ffi::wxPageSetupDialogData_EnablePrinter(self.as_ptr(), flag) }
-    }
-    fn get_default_info(&self) -> bool {
-        unsafe { ffi::wxPageSetupDialogData_GetDefaultInfo(self.as_ptr()) }
-    }
-    fn get_default_min_margins(&self) -> bool {
-        unsafe { ffi::wxPageSetupDialogData_GetDefaultMinMargins(self.as_ptr()) }
-    }
-    fn get_enable_help(&self) -> bool {
-        unsafe { ffi::wxPageSetupDialogData_GetEnableHelp(self.as_ptr()) }
-    }
-    fn get_enable_margins(&self) -> bool {
-        unsafe { ffi::wxPageSetupDialogData_GetEnableMargins(self.as_ptr()) }
-    }
-    fn get_enable_orientation(&self) -> bool {
-        unsafe { ffi::wxPageSetupDialogData_GetEnableOrientation(self.as_ptr()) }
-    }
-    fn get_enable_paper(&self) -> bool {
-        unsafe { ffi::wxPageSetupDialogData_GetEnablePaper(self.as_ptr()) }
-    }
-    fn get_enable_printer(&self) -> bool {
-        unsafe { ffi::wxPageSetupDialogData_GetEnablePrinter(self.as_ptr()) }
-    }
-    fn get_margin_bottom_right(&self) -> Point {
-        unsafe {
-            Point::from_ptr(ffi::wxPageSetupDialogData_GetMarginBottomRight(
-                self.as_ptr(),
-            ))
-        }
-    }
-    fn get_margin_top_left(&self) -> Point {
-        unsafe { Point::from_ptr(ffi::wxPageSetupDialogData_GetMarginTopLeft(self.as_ptr())) }
-    }
-    fn get_min_margin_bottom_right(&self) -> Point {
-        unsafe {
-            Point::from_ptr(ffi::wxPageSetupDialogData_GetMinMarginBottomRight(
-                self.as_ptr(),
-            ))
-        }
-    }
-    fn get_min_margin_top_left(&self) -> Point {
-        unsafe {
-            Point::from_ptr(ffi::wxPageSetupDialogData_GetMinMarginTopLeft(
-                self.as_ptr(),
-            ))
-        }
-    }
-    // NOT_SUPPORTED: fn GetPaperId()
-    fn get_paper_size(&self) -> Size {
-        unsafe { Size::from_ptr(ffi::wxPageSetupDialogData_GetPaperSize(self.as_ptr())) }
-    }
-    // BLOCKED: fn GetPrintData()
-    fn get_print_data(&self) -> PrintDataIsOwned<false> {
-        unsafe {
-            PrintDataIsOwned::from_ptr(ffi::wxPageSetupDialogData_GetPrintData1(self.as_ptr()))
-        }
-    }
-    fn is_ok(&self) -> bool {
-        unsafe { ffi::wxPageSetupDialogData_IsOk(self.as_ptr()) }
-    }
-    fn set_default_info(&self, flag: bool) {
-        unsafe { ffi::wxPageSetupDialogData_SetDefaultInfo(self.as_ptr(), flag) }
-    }
-    fn set_default_min_margins(&self, flag: bool) {
-        unsafe { ffi::wxPageSetupDialogData_SetDefaultMinMargins(self.as_ptr(), flag) }
-    }
-    fn set_margin_bottom_right<P: PointMethods>(&self, pt: &P) {
-        unsafe {
-            let pt = pt.as_ptr();
-            ffi::wxPageSetupDialogData_SetMarginBottomRight(self.as_ptr(), pt)
-        }
-    }
-    fn set_margin_top_left<P: PointMethods>(&self, pt: &P) {
-        unsafe {
-            let pt = pt.as_ptr();
-            ffi::wxPageSetupDialogData_SetMarginTopLeft(self.as_ptr(), pt)
-        }
-    }
-    fn set_min_margin_bottom_right<P: PointMethods>(&self, pt: &P) {
-        unsafe {
-            let pt = pt.as_ptr();
-            ffi::wxPageSetupDialogData_SetMinMarginBottomRight(self.as_ptr(), pt)
-        }
-    }
-    fn set_min_margin_top_left<P: PointMethods>(&self, pt: &P) {
-        unsafe {
-            let pt = pt.as_ptr();
-            ffi::wxPageSetupDialogData_SetMinMarginTopLeft(self.as_ptr(), pt)
-        }
-    }
-    // NOT_SUPPORTED: fn SetPaperId()
-    fn set_paper_size<S: SizeMethods>(&self, size: &S) {
-        unsafe {
-            let size = size.as_ptr();
-            ffi::wxPageSetupDialogData_SetPaperSize(self.as_ptr(), size)
-        }
-    }
-    fn set_print_data<P: PrintDataMethods>(&self, print_data: &P) {
-        unsafe {
-            let print_data = print_data.as_ptr();
-            ffi::wxPageSetupDialogData_SetPrintData(self.as_ptr(), print_data)
-        }
-    }
-    // BLOCKED: fn operator=()
-    // BLOCKED: fn operator=1()
-}
-
 // wxPaintDC
 pub trait PaintDCMethods: ClientDCMethods {}
 
@@ -908,14 +770,13 @@ pub trait PrintoutMethods: ObjectMethods {
             ffi::wxPrintout_FitThisSizeToPage(self.as_ptr(), image_size)
         }
     }
-    fn fit_this_size_to_page_margins<S: SizeMethods, P: PageSetupDialogDataMethods>(
+    fn fit_this_size_to_page_margins<S: SizeMethods>(
         &self,
         image_size: &S,
-        page_setup_data: &P,
+        page_setup_data: *const c_void,
     ) {
         unsafe {
             let image_size = image_size.as_ptr();
-            let page_setup_data = page_setup_data.as_ptr();
             ffi::wxPrintout_FitThisSizeToPageMargins(self.as_ptr(), image_size, page_setup_data)
         }
     }
@@ -928,12 +789,8 @@ pub trait PrintoutMethods: ObjectMethods {
     fn get_dc(&self) -> Option<DCIsOwned<false>> {
         unsafe { DC::option_from(ffi::wxPrintout_GetDC(self.as_ptr())) }
     }
-    fn get_logical_page_margins_rect<P: PageSetupDialogDataMethods>(
-        &self,
-        page_setup_data: &P,
-    ) -> Rect {
+    fn get_logical_page_margins_rect(&self, page_setup_data: *const c_void) -> Rect {
         unsafe {
-            let page_setup_data = page_setup_data.as_ptr();
             Rect::from_ptr(ffi::wxPrintout_GetLogicalPageMarginsRect(
                 self.as_ptr(),
                 page_setup_data,
@@ -990,11 +847,8 @@ pub trait PrintoutMethods: ObjectMethods {
     fn map_screen_size_to_page(&self) {
         unsafe { ffi::wxPrintout_MapScreenSizeToPage(self.as_ptr()) }
     }
-    fn map_screen_size_to_page_margins<P: PageSetupDialogDataMethods>(&self, page_setup_data: &P) {
-        unsafe {
-            let page_setup_data = page_setup_data.as_ptr();
-            ffi::wxPrintout_MapScreenSizeToPageMargins(self.as_ptr(), page_setup_data)
-        }
+    fn map_screen_size_to_page_margins(&self, page_setup_data: *const c_void) {
+        unsafe { ffi::wxPrintout_MapScreenSizeToPageMargins(self.as_ptr(), page_setup_data) }
     }
     fn map_screen_size_to_paper(&self) {
         unsafe { ffi::wxPrintout_MapScreenSizeToPaper(self.as_ptr()) }

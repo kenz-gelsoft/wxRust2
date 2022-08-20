@@ -436,8 +436,8 @@ wxml_files = [
     'wxml/classwx_p_c_x_handler.xml',
     'wxml/classwx_p_n_g_handler.xml',
     'wxml/classwx_p_n_m_handler.xml',
-    'wxml/classwx_page_setup_dialog.xml',
-    'wxml/classwx_page_setup_dialog_data.xml',
+    # 'wxml/classwx_page_setup_dialog.xml',      # Our CI environment is't built with
+    # 'wxml/classwx_page_setup_dialog_data.xml', # Our CI environment is't built with
     'wxml/classwx_paint_d_c.xml',
     'wxml/classwx_paint_event.xml',
     'wxml/classwx_palette.xml',

@@ -34,45 +34,6 @@ wxPNGHandler *wxPNGHandler_new();
 wxClassInfo *wxPNMHandler_CLASSINFO();
 wxPNMHandler *wxPNMHandler_new();
 
-// CLASS: wxPageSetupDialog
-wxClassInfo *wxPageSetupDialog_CLASSINFO();
-wxPageSetupDialog *wxPageSetupDialog_new(wxWindow * parent, wxPageSetupDialogData * data);
-wxPageSetupDialogData * wxPageSetupDialog_GetPageSetupData(wxPageSetupDialog * self);
-int wxPageSetupDialog_ShowModal(wxPageSetupDialog * self);
-
-// CLASS: wxPageSetupDialogData
-wxClassInfo *wxPageSetupDialogData_CLASSINFO();
-wxPageSetupDialogData *wxPageSetupDialogData_new();
-wxPageSetupDialogData *wxPageSetupDialogData_new1(const wxPageSetupDialogData * data);
-wxPageSetupDialogData *wxPageSetupDialogData_new2(const wxPrintData * print_data);
-void wxPageSetupDialogData_EnableHelp(wxPageSetupDialogData * self, bool flag);
-void wxPageSetupDialogData_EnableMargins(wxPageSetupDialogData * self, bool flag);
-void wxPageSetupDialogData_EnableOrientation(wxPageSetupDialogData * self, bool flag);
-void wxPageSetupDialogData_EnablePaper(wxPageSetupDialogData * self, bool flag);
-void wxPageSetupDialogData_EnablePrinter(wxPageSetupDialogData * self, bool flag);
-bool wxPageSetupDialogData_GetDefaultInfo(const wxPageSetupDialogData * self);
-bool wxPageSetupDialogData_GetDefaultMinMargins(const wxPageSetupDialogData * self);
-bool wxPageSetupDialogData_GetEnableHelp(const wxPageSetupDialogData * self);
-bool wxPageSetupDialogData_GetEnableMargins(const wxPageSetupDialogData * self);
-bool wxPageSetupDialogData_GetEnableOrientation(const wxPageSetupDialogData * self);
-bool wxPageSetupDialogData_GetEnablePaper(const wxPageSetupDialogData * self);
-bool wxPageSetupDialogData_GetEnablePrinter(const wxPageSetupDialogData * self);
-wxPoint *wxPageSetupDialogData_GetMarginBottomRight(const wxPageSetupDialogData * self);
-wxPoint *wxPageSetupDialogData_GetMarginTopLeft(const wxPageSetupDialogData * self);
-wxPoint *wxPageSetupDialogData_GetMinMarginBottomRight(const wxPageSetupDialogData * self);
-wxPoint *wxPageSetupDialogData_GetMinMarginTopLeft(const wxPageSetupDialogData * self);
-wxSize *wxPageSetupDialogData_GetPaperSize(const wxPageSetupDialogData * self);
-wxPrintData *wxPageSetupDialogData_GetPrintData1(const wxPageSetupDialogData * self);
-bool wxPageSetupDialogData_IsOk(const wxPageSetupDialogData * self);
-void wxPageSetupDialogData_SetDefaultInfo(wxPageSetupDialogData * self, bool flag);
-void wxPageSetupDialogData_SetDefaultMinMargins(wxPageSetupDialogData * self, bool flag);
-void wxPageSetupDialogData_SetMarginBottomRight(wxPageSetupDialogData * self, const wxPoint * pt);
-void wxPageSetupDialogData_SetMarginTopLeft(wxPageSetupDialogData * self, const wxPoint * pt);
-void wxPageSetupDialogData_SetMinMarginBottomRight(wxPageSetupDialogData * self, const wxPoint * pt);
-void wxPageSetupDialogData_SetMinMarginTopLeft(wxPageSetupDialogData * self, const wxPoint * pt);
-void wxPageSetupDialogData_SetPaperSize(wxPageSetupDialogData * self, const wxSize * size);
-void wxPageSetupDialogData_SetPrintData(wxPageSetupDialogData * self, const wxPrintData * print_data);
-
 // CLASS: wxPaintDC
 wxClassInfo *wxPaintDC_CLASSINFO();
 wxPaintDC *wxPaintDC_new(wxWindow * window);
