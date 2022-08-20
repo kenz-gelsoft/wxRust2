@@ -245,41 +245,6 @@ extern "C" {
     pub fn wxPreferencesPage_GetLargeIcon(self_: *const c_void) -> *mut c_void;
     pub fn wxPreferencesPage_CreateWindow(self_: *mut c_void, parent: *mut c_void) -> *mut c_void;
 
-    // wxPreviewControlBar
-    pub fn wxPreviewControlBar_CLASSINFO() -> *mut c_void;
-    pub fn wxPreviewControlBar_new(
-        preview: *mut c_void,
-        buttons: c_long,
-        parent: *mut c_void,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> *mut c_void;
-    // DTOR: pub fn wxPreviewControlBar_~wxPreviewControlBar(self_: *mut c_void);
-    pub fn wxPreviewControlBar_CreateButtons(self_: *mut c_void);
-    pub fn wxPreviewControlBar_GetPrintPreview(self_: *const c_void) -> *mut c_void;
-    pub fn wxPreviewControlBar_GetZoomControl(self_: *mut c_void) -> c_int;
-    pub fn wxPreviewControlBar_SetZoomControl(self_: *mut c_void, percent: c_int);
-
-    // wxPreviewFrame
-    pub fn wxPreviewFrame_CLASSINFO() -> *mut c_void;
-    pub fn wxPreviewFrame_new(
-        preview: *mut c_void,
-        parent: *mut c_void,
-        title: *const c_void,
-        pos: *const c_void,
-        size: *const c_void,
-        style: c_long,
-        name: *const c_void,
-    ) -> *mut c_void;
-    // DTOR: pub fn wxPreviewFrame_~wxPreviewFrame(self_: *mut c_void);
-    pub fn wxPreviewFrame_CreateCanvas(self_: *mut c_void);
-    pub fn wxPreviewFrame_CreateControlBar(self_: *mut c_void);
-    pub fn wxPreviewFrame_Initialize(self_: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxPreviewFrame_InitializeWithModality(self_: *mut c_void, kind: wxPreviewFrameModalityKind);
-    pub fn wxPreviewFrame_OnCloseWindow(self_: *mut c_void, event: *mut c_void);
-
     // wxPrintData
     pub fn wxPrintData_CLASSINFO() -> *mut c_void;
     pub fn wxPrintData_new() -> *mut c_void;
@@ -354,40 +319,6 @@ extern "C" {
     pub fn wxPrintDialogData_SetToPage(self_: *mut c_void, page: c_int);
     // BLOCKED: pub fn wxPrintDialogData_operator=(self_: *mut c_void, data: *const c_void);
     // BLOCKED: pub fn wxPrintDialogData_operator=1(self_: *mut c_void, data: *const c_void);
-
-    // wxPrintPreview
-    pub fn wxPrintPreview_CLASSINFO() -> *mut c_void;
-    pub fn wxPrintPreview_new(
-        printout: *mut c_void,
-        printout_for_printing: *mut c_void,
-        data: *mut c_void,
-    ) -> *mut c_void;
-    pub fn wxPrintPreview_new1(
-        printout: *mut c_void,
-        printout_for_printing: *mut c_void,
-        data: *mut c_void,
-    ) -> *mut c_void;
-    // DTOR: pub fn wxPrintPreview_~wxPrintPreview(self_: *mut c_void);
-    pub fn wxPrintPreview_GetCanvas(self_: *const c_void) -> *mut c_void;
-    pub fn wxPrintPreview_GetCurrentPage(self_: *const c_void) -> c_int;
-    pub fn wxPrintPreview_GetFrame(self_: *const c_void) -> *mut c_void;
-    pub fn wxPrintPreview_GetMaxPage(self_: *const c_void) -> c_int;
-    pub fn wxPrintPreview_GetMinPage(self_: *const c_void) -> c_int;
-    pub fn wxPrintPreview_GetPrintout(self_: *const c_void) -> *mut c_void;
-    pub fn wxPrintPreview_GetPrintoutForPrinting(self_: *const c_void) -> *mut c_void;
-    pub fn wxPrintPreview_IsOk(self_: *const c_void) -> bool;
-    pub fn wxPrintPreview_PaintPage(
-        self_: *mut c_void,
-        canvas: *mut c_void,
-        dc: *mut c_void,
-    ) -> bool;
-    pub fn wxPrintPreview_Print(self_: *mut c_void, prompt: bool) -> bool;
-    pub fn wxPrintPreview_RenderPage(self_: *mut c_void, page_num: c_int) -> bool;
-    pub fn wxPrintPreview_SetCanvas(self_: *mut c_void, window: *mut c_void);
-    pub fn wxPrintPreview_SetCurrentPage(self_: *mut c_void, page_num: c_int) -> bool;
-    pub fn wxPrintPreview_SetFrame(self_: *mut c_void, frame: *mut c_void);
-    pub fn wxPrintPreview_SetPrintout(self_: *mut c_void, printout: *mut c_void);
-    pub fn wxPrintPreview_SetZoom(self_: *mut c_void, percent: c_int);
 
     // wxPrinter
     pub fn wxPrinter_CLASSINFO() -> *mut c_void;

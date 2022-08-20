@@ -351,46 +351,6 @@ wxWindow * wxPreferencesPage_CreateWindow(wxPreferencesPage * self, wxWindow * p
     return self->CreateWindow(parent);
 }
 
-// CLASS: wxPreviewControlBar
-wxClassInfo *wxPreviewControlBar_CLASSINFO() {
-    return wxCLASSINFO(wxPreviewControlBar);
-}
-wxPreviewControlBar *wxPreviewControlBar_new(wxPrintPreview * preview, long buttons, wxWindow * parent, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
-    return new wxPreviewControlBar(preview, buttons, parent, *pos, *size, style, *name);
-}
-void wxPreviewControlBar_CreateButtons(wxPreviewControlBar * self) {
-    return self->CreateButtons();
-}
-wxPrintPreviewBase * wxPreviewControlBar_GetPrintPreview(const wxPreviewControlBar * self) {
-    return self->GetPrintPreview();
-}
-int wxPreviewControlBar_GetZoomControl(wxPreviewControlBar * self) {
-    return self->GetZoomControl();
-}
-void wxPreviewControlBar_SetZoomControl(wxPreviewControlBar * self, int percent) {
-    return self->SetZoomControl(percent);
-}
-
-// CLASS: wxPreviewFrame
-wxClassInfo *wxPreviewFrame_CLASSINFO() {
-    return wxCLASSINFO(wxPreviewFrame);
-}
-wxPreviewFrame *wxPreviewFrame_new(wxPrintPreviewBase * preview, wxWindow * parent, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
-    return new wxPreviewFrame(preview, parent, *title, *pos, *size, style, *name);
-}
-void wxPreviewFrame_CreateCanvas(wxPreviewFrame * self) {
-    return self->CreateCanvas();
-}
-void wxPreviewFrame_CreateControlBar(wxPreviewFrame * self) {
-    return self->CreateControlBar();
-}
-void wxPreviewFrame_Initialize(wxPreviewFrame * self) {
-    return self->Initialize();
-}
-void wxPreviewFrame_OnCloseWindow(wxPreviewFrame * self, wxCloseEvent * event) {
-    return self->OnCloseWindow(*event);
-}
-
 // CLASS: wxPrintData
 wxClassInfo *wxPrintData_CLASSINFO() {
     return wxCLASSINFO(wxPrintData);
@@ -545,65 +505,6 @@ void wxPrintDialogData_SetSelection(wxPrintDialogData * self, bool flag) {
 }
 void wxPrintDialogData_SetToPage(wxPrintDialogData * self, int page) {
     return self->SetToPage(page);
-}
-
-// CLASS: wxPrintPreview
-wxClassInfo *wxPrintPreview_CLASSINFO() {
-    return wxCLASSINFO(wxPrintPreview);
-}
-wxPrintPreview *wxPrintPreview_new(wxPrintout * printout, wxPrintout * printout_for_printing, wxPrintDialogData * data) {
-    return new wxPrintPreview(printout, printout_for_printing, data);
-}
-wxPrintPreview *wxPrintPreview_new1(wxPrintout * printout, wxPrintout * printout_for_printing, wxPrintData * data) {
-    return new wxPrintPreview(printout, printout_for_printing, data);
-}
-wxPreviewCanvas * wxPrintPreview_GetCanvas(const wxPrintPreview * self) {
-    return self->GetCanvas();
-}
-int wxPrintPreview_GetCurrentPage(const wxPrintPreview * self) {
-    return self->GetCurrentPage();
-}
-wxFrame * wxPrintPreview_GetFrame(const wxPrintPreview * self) {
-    return self->GetFrame();
-}
-int wxPrintPreview_GetMaxPage(const wxPrintPreview * self) {
-    return self->GetMaxPage();
-}
-int wxPrintPreview_GetMinPage(const wxPrintPreview * self) {
-    return self->GetMinPage();
-}
-wxPrintout * wxPrintPreview_GetPrintout(const wxPrintPreview * self) {
-    return self->GetPrintout();
-}
-wxPrintout * wxPrintPreview_GetPrintoutForPrinting(const wxPrintPreview * self) {
-    return self->GetPrintoutForPrinting();
-}
-bool wxPrintPreview_IsOk(const wxPrintPreview * self) {
-    return self->IsOk();
-}
-bool wxPrintPreview_PaintPage(wxPrintPreview * self, wxPreviewCanvas * canvas, wxDC * dc) {
-    return self->PaintPage(canvas, *dc);
-}
-bool wxPrintPreview_Print(wxPrintPreview * self, bool prompt) {
-    return self->Print(prompt);
-}
-bool wxPrintPreview_RenderPage(wxPrintPreview * self, int page_num) {
-    return self->RenderPage(page_num);
-}
-void wxPrintPreview_SetCanvas(wxPrintPreview * self, wxPreviewCanvas * window) {
-    return self->SetCanvas(window);
-}
-bool wxPrintPreview_SetCurrentPage(wxPrintPreview * self, int page_num) {
-    return self->SetCurrentPage(page_num);
-}
-void wxPrintPreview_SetFrame(wxPrintPreview * self, wxFrame * frame) {
-    return self->SetFrame(frame);
-}
-void wxPrintPreview_SetPrintout(wxPrintPreview * self, wxPrintout * printout) {
-    return self->SetPrintout(printout);
-}
-void wxPrintPreview_SetZoom(wxPrintPreview * self, int percent) {
-    return self->SetZoom(percent);
 }
 
 // CLASS: wxPrinter

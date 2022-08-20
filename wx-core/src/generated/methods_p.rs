@@ -395,44 +395,6 @@ pub trait PreferencesPageMethods: WxRustMethods {
     }
 }
 
-// wxPreviewControlBar
-pub trait PreviewControlBarMethods: PanelMethods {
-    // DTOR: fn ~wxPreviewControlBar()
-    fn create_buttons(&self) {
-        unsafe { ffi::wxPreviewControlBar_CreateButtons(self.as_ptr()) }
-    }
-    fn get_print_preview(&self) -> *mut c_void {
-        unsafe { ffi::wxPreviewControlBar_GetPrintPreview(self.as_ptr()) }
-    }
-    fn get_zoom_control(&self) -> c_int {
-        unsafe { ffi::wxPreviewControlBar_GetZoomControl(self.as_ptr()) }
-    }
-    fn set_zoom_control(&self, percent: c_int) {
-        unsafe { ffi::wxPreviewControlBar_SetZoomControl(self.as_ptr(), percent) }
-    }
-}
-
-// wxPreviewFrame
-pub trait PreviewFrameMethods: FrameMethods {
-    // DTOR: fn ~wxPreviewFrame()
-    fn create_canvas(&self) {
-        unsafe { ffi::wxPreviewFrame_CreateCanvas(self.as_ptr()) }
-    }
-    fn create_control_bar(&self) {
-        unsafe { ffi::wxPreviewFrame_CreateControlBar(self.as_ptr()) }
-    }
-    fn initialize(&self) {
-        unsafe { ffi::wxPreviewFrame_Initialize(self.as_ptr()) }
-    }
-    // NOT_SUPPORTED: fn InitializeWithModality()
-    fn on_close_window<C: CloseEventMethods>(&self, event: &C) {
-        unsafe {
-            let event = event.as_ptr();
-            ffi::wxPreviewFrame_OnCloseWindow(self.as_ptr(), event)
-        }
-    }
-}
-
 // wxPrintData
 pub trait PrintDataMethods: ObjectMethods {
     // DTOR: fn ~wxPrintData()
@@ -598,74 +560,6 @@ pub trait PrintDialogDataMethods: ObjectMethods {
     }
     // BLOCKED: fn operator=()
     // BLOCKED: fn operator=1()
-}
-
-// wxPrintPreview
-pub trait PrintPreviewMethods: ObjectMethods {
-    // DTOR: fn ~wxPrintPreview()
-    fn get_canvas(&self) -> *mut c_void {
-        unsafe { ffi::wxPrintPreview_GetCanvas(self.as_ptr()) }
-    }
-    fn get_current_page(&self) -> c_int {
-        unsafe { ffi::wxPrintPreview_GetCurrentPage(self.as_ptr()) }
-    }
-    fn get_frame(&self) -> WeakRef<Frame> {
-        unsafe { WeakRef::<Frame>::from(ffi::wxPrintPreview_GetFrame(self.as_ptr())) }
-    }
-    fn get_max_page(&self) -> c_int {
-        unsafe { ffi::wxPrintPreview_GetMaxPage(self.as_ptr()) }
-    }
-    fn get_min_page(&self) -> c_int {
-        unsafe { ffi::wxPrintPreview_GetMinPage(self.as_ptr()) }
-    }
-    fn get_printout(&self) -> Option<PrintoutIsOwned<false>> {
-        unsafe { Printout::option_from(ffi::wxPrintPreview_GetPrintout(self.as_ptr())) }
-    }
-    fn get_printout_for_printing(&self) -> Option<PrintoutIsOwned<false>> {
-        unsafe { Printout::option_from(ffi::wxPrintPreview_GetPrintoutForPrinting(self.as_ptr())) }
-    }
-    fn is_ok(&self) -> bool {
-        unsafe { ffi::wxPrintPreview_IsOk(self.as_ptr()) }
-    }
-    fn paint_page<D: DCMethods>(&self, canvas: *mut c_void, dc: &D) -> bool {
-        unsafe {
-            let dc = dc.as_ptr();
-            ffi::wxPrintPreview_PaintPage(self.as_ptr(), canvas, dc)
-        }
-    }
-    fn print(&self, prompt: bool) -> bool {
-        unsafe { ffi::wxPrintPreview_Print(self.as_ptr(), prompt) }
-    }
-    fn render_page(&self, page_num: c_int) -> bool {
-        unsafe { ffi::wxPrintPreview_RenderPage(self.as_ptr(), page_num) }
-    }
-    fn set_canvas(&self, window: *mut c_void) {
-        unsafe { ffi::wxPrintPreview_SetCanvas(self.as_ptr(), window) }
-    }
-    fn set_current_page(&self, page_num: c_int) -> bool {
-        unsafe { ffi::wxPrintPreview_SetCurrentPage(self.as_ptr(), page_num) }
-    }
-    fn set_frame<F: FrameMethods>(&self, frame: Option<&F>) {
-        unsafe {
-            let frame = match frame {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxPrintPreview_SetFrame(self.as_ptr(), frame)
-        }
-    }
-    fn set_printout<P: PrintoutMethods>(&self, printout: Option<&P>) {
-        unsafe {
-            let printout = match printout {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxPrintPreview_SetPrintout(self.as_ptr(), printout)
-        }
-    }
-    fn set_zoom(&self, percent: c_int) {
-        unsafe { ffi::wxPrintPreview_SetZoom(self.as_ptr(), percent) }
-    }
 }
 
 // wxPrinter
@@ -838,8 +732,8 @@ pub trait PrintoutMethods: ObjectMethods {
     fn is_preview(&self) -> bool {
         unsafe { ffi::wxPrintout_IsPreview(self.as_ptr()) }
     }
-    fn get_preview(&self) -> Option<PrintPreviewIsOwned<false>> {
-        unsafe { PrintPreview::option_from(ffi::wxPrintout_GetPreview(self.as_ptr())) }
+    fn get_preview(&self) -> *mut c_void {
+        unsafe { ffi::wxPrintout_GetPreview(self.as_ptr()) }
     }
     fn map_screen_size_to_device(&self) {
         unsafe { ffi::wxPrintout_MapScreenSizeToDevice(self.as_ptr()) }
