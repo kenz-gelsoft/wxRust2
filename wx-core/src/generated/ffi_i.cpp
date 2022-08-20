@@ -520,50 +520,6 @@ wxInitDialogEvent *wxInitDialogEvent_new(int id) {
     return new wxInitDialogEvent(id);
 }
 
-// CLASS: wxItemAttr
-void wxItemAttr_delete(wxItemAttr *self) {
-    delete self;
-}
-wxItemAttr *wxItemAttr_new() {
-    return new wxItemAttr();
-}
-wxItemAttr *wxItemAttr_new1(const wxColour * col_text, const wxColour * col_back, const wxFont * font) {
-    return new wxItemAttr(*col_text, *col_back, *font);
-}
-wxColour *wxItemAttr_GetBackgroundColour(const wxItemAttr * self) {
-    return new wxColour(self->GetBackgroundColour());
-}
-wxFont *wxItemAttr_GetFont(const wxItemAttr * self) {
-    return new wxFont(self->GetFont());
-}
-wxColour *wxItemAttr_GetTextColour(const wxItemAttr * self) {
-    return new wxColour(self->GetTextColour());
-}
-bool wxItemAttr_HasBackgroundColour(const wxItemAttr * self) {
-    return self->HasBackgroundColour();
-}
-bool wxItemAttr_HasColours(const wxItemAttr * self) {
-    return self->HasColours();
-}
-bool wxItemAttr_HasFont(const wxItemAttr * self) {
-    return self->HasFont();
-}
-bool wxItemAttr_HasTextColour(const wxItemAttr * self) {
-    return self->HasTextColour();
-}
-bool wxItemAttr_IsDefault(const wxItemAttr * self) {
-    return self->IsDefault();
-}
-void wxItemAttr_SetBackgroundColour(wxItemAttr * self, const wxColour * colour) {
-    return self->SetBackgroundColour(*colour);
-}
-void wxItemAttr_SetFont(wxItemAttr * self, const wxFont * font) {
-    return self->SetFont(*font);
-}
-void wxItemAttr_SetTextColour(wxItemAttr * self, const wxColour * colour) {
-    return self->SetTextColour(*colour);
-}
-
 // CLASS: wxItemContainer
 void wxItemContainer_delete(wxItemContainer *self) {
     delete self;

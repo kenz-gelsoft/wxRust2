@@ -512,39 +512,6 @@ impl<const OWNED: bool> Drop for InitDialogEventIsOwned<OWNED> {
     }
 }
 
-// wxItemAttr
-wx_class! { ItemAttr =
-    ItemAttrIsOwned<true>(wxItemAttr) impl
-        ItemAttrMethods
-}
-impl<const OWNED: bool> ItemAttrIsOwned<OWNED> {
-    pub fn new() -> ItemAttrIsOwned<OWNED> {
-        unsafe { ItemAttrIsOwned(ffi::wxItemAttr_new()) }
-    }
-    pub fn new_with_colour<C: ColourMethods, C2: ColourMethods, F: FontMethods>(
-        col_text: &C,
-        col_back: &C2,
-        font: &F,
-    ) -> ItemAttrIsOwned<OWNED> {
-        unsafe {
-            let col_text = col_text.as_ptr();
-            let col_back = col_back.as_ptr();
-            let font = font.as_ptr();
-            ItemAttrIsOwned(ffi::wxItemAttr_new1(col_text, col_back, font))
-        }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> Drop for ItemAttrIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxItemAttr_delete(self.0) }
-        }
-    }
-}
-
 // wxItemContainer
 wx_class! { ItemContainer =
     ItemContainerIsOwned<true>(wxItemContainer) impl

@@ -774,54 +774,6 @@ pub trait InfoBarMethods: ControlMethods {
 // wxInitDialogEvent
 pub trait InitDialogEventMethods: EventMethods {}
 
-// wxItemAttr
-pub trait ItemAttrMethods: WxRustMethods {
-    // BLOCKED: fn operator==()
-    // BLOCKED: fn operator!=()
-    fn get_background_colour(&self) -> ColourIsOwned<false> {
-        unsafe { ColourIsOwned::from_ptr(ffi::wxItemAttr_GetBackgroundColour(self.as_ptr())) }
-    }
-    fn get_font(&self) -> FontIsOwned<false> {
-        unsafe { FontIsOwned::from_ptr(ffi::wxItemAttr_GetFont(self.as_ptr())) }
-    }
-    fn get_text_colour(&self) -> ColourIsOwned<false> {
-        unsafe { ColourIsOwned::from_ptr(ffi::wxItemAttr_GetTextColour(self.as_ptr())) }
-    }
-    fn has_background_colour(&self) -> bool {
-        unsafe { ffi::wxItemAttr_HasBackgroundColour(self.as_ptr()) }
-    }
-    fn has_colours(&self) -> bool {
-        unsafe { ffi::wxItemAttr_HasColours(self.as_ptr()) }
-    }
-    fn has_font(&self) -> bool {
-        unsafe { ffi::wxItemAttr_HasFont(self.as_ptr()) }
-    }
-    fn has_text_colour(&self) -> bool {
-        unsafe { ffi::wxItemAttr_HasTextColour(self.as_ptr()) }
-    }
-    fn is_default(&self) -> bool {
-        unsafe { ffi::wxItemAttr_IsDefault(self.as_ptr()) }
-    }
-    fn set_background_colour<C: ColourMethods>(&self, colour: &C) {
-        unsafe {
-            let colour = colour.as_ptr();
-            ffi::wxItemAttr_SetBackgroundColour(self.as_ptr(), colour)
-        }
-    }
-    fn set_font<F: FontMethods>(&self, font: &F) {
-        unsafe {
-            let font = font.as_ptr();
-            ffi::wxItemAttr_SetFont(self.as_ptr(), font)
-        }
-    }
-    fn set_text_colour<C: ColourMethods>(&self, colour: &C) {
-        unsafe {
-            let colour = colour.as_ptr();
-            ffi::wxItemAttr_SetTextColour(self.as_ptr(), colour)
-        }
-    }
-}
-
 // wxItemContainer
 pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     fn as_item_container(&self) -> *mut c_void {

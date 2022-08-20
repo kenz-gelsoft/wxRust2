@@ -9,7 +9,6 @@
 #include <wx/imagiff.h>
 #include <wx/imaglist.h>
 #include <wx/infobar.h>
-#include <wx/itemattr.h>
 #include <wx/windowid.h>
 
 extern "C" {
@@ -203,22 +202,6 @@ bool wxInfoBar_HasButtonId(const wxInfoBar * self, wxWindowID btnid);
 // CLASS: wxInitDialogEvent
 wxClassInfo *wxInitDialogEvent_CLASSINFO();
 wxInitDialogEvent *wxInitDialogEvent_new(int id);
-
-// CLASS: wxItemAttr
-void wxItemAttr_delete(wxItemAttr *self);
-wxItemAttr *wxItemAttr_new();
-wxItemAttr *wxItemAttr_new1(const wxColour * col_text, const wxColour * col_back, const wxFont * font);
-wxColour *wxItemAttr_GetBackgroundColour(const wxItemAttr * self);
-wxFont *wxItemAttr_GetFont(const wxItemAttr * self);
-wxColour *wxItemAttr_GetTextColour(const wxItemAttr * self);
-bool wxItemAttr_HasBackgroundColour(const wxItemAttr * self);
-bool wxItemAttr_HasColours(const wxItemAttr * self);
-bool wxItemAttr_HasFont(const wxItemAttr * self);
-bool wxItemAttr_HasTextColour(const wxItemAttr * self);
-bool wxItemAttr_IsDefault(const wxItemAttr * self);
-void wxItemAttr_SetBackgroundColour(wxItemAttr * self, const wxColour * colour);
-void wxItemAttr_SetFont(wxItemAttr * self, const wxFont * font);
-void wxItemAttr_SetTextColour(wxItemAttr * self, const wxColour * colour);
 
 // CLASS: wxItemContainer
 void wxItemContainer_delete(wxItemContainer *self);

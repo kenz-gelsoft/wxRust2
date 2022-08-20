@@ -458,7 +458,7 @@ wxml_files = [
     'wxml/classwx_info_bar.xml',
     'wxml/classwx_init_dialog_event.xml',
     # 'wxml/classwx_integer_validator.xml', # base class depends template, need special treatment
-    'wxml/classwx_item_attr.xml',
+    # 'wxml/classwx_item_attr.xml',         # requires 3.1
     'wxml/classwx_item_container.xml',
     'wxml/classwx_item_container_immutable.xml',
     'wxml/classwx_list_box.xml',

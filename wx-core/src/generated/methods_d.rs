@@ -1190,11 +1190,8 @@ pub trait DataViewCtrlMethods: ControlMethods {
             ffi::wxDataViewCtrl_SetCurrentItem(self.as_ptr(), item)
         }
     }
-    fn set_header_attr<I: ItemAttrMethods>(&self, attr: &I) -> bool {
-        unsafe {
-            let attr = attr.as_ptr();
-            ffi::wxDataViewCtrl_SetHeaderAttr(self.as_ptr(), attr)
-        }
+    fn set_header_attr(&self, attr: *const c_void) -> bool {
+        unsafe { ffi::wxDataViewCtrl_SetHeaderAttr(self.as_ptr(), attr) }
     }
     fn set_indent(&self, indent: c_int) {
         unsafe { ffi::wxDataViewCtrl_SetIndent(self.as_ptr(), indent) }

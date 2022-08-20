@@ -406,28 +406,6 @@ extern "C" {
     pub fn wxInitDialogEvent_CLASSINFO() -> *mut c_void;
     pub fn wxInitDialogEvent_new(id: c_int) -> *mut c_void;
 
-    // wxItemAttr
-    pub fn wxItemAttr_delete(self_: *mut c_void);
-    pub fn wxItemAttr_new() -> *mut c_void;
-    pub fn wxItemAttr_new1(
-        col_text: *const c_void,
-        col_back: *const c_void,
-        font: *const c_void,
-    ) -> *mut c_void;
-    // BLOCKED: pub fn wxItemAttr_operator==(self_: *const c_void, other: *const c_void) -> bool;
-    // BLOCKED: pub fn wxItemAttr_operator!=(self_: *const c_void, other: *const c_void) -> bool;
-    pub fn wxItemAttr_GetBackgroundColour(self_: *const c_void) -> *mut c_void;
-    pub fn wxItemAttr_GetFont(self_: *const c_void) -> *mut c_void;
-    pub fn wxItemAttr_GetTextColour(self_: *const c_void) -> *mut c_void;
-    pub fn wxItemAttr_HasBackgroundColour(self_: *const c_void) -> bool;
-    pub fn wxItemAttr_HasColours(self_: *const c_void) -> bool;
-    pub fn wxItemAttr_HasFont(self_: *const c_void) -> bool;
-    pub fn wxItemAttr_HasTextColour(self_: *const c_void) -> bool;
-    pub fn wxItemAttr_IsDefault(self_: *const c_void) -> bool;
-    pub fn wxItemAttr_SetBackgroundColour(self_: *mut c_void, colour: *const c_void);
-    pub fn wxItemAttr_SetFont(self_: *mut c_void, font: *const c_void);
-    pub fn wxItemAttr_SetTextColour(self_: *mut c_void, colour: *const c_void);
-
     // wxItemContainer
     pub fn wxItemContainer_delete(self_: *mut c_void);
     pub fn wxItemContainer_Append(self_: *mut c_void, item: *const c_void) -> c_int;
