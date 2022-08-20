@@ -391,6 +391,10 @@ extern "C" {
         name: *const c_void,
     ) -> bool;
 
+    // wxWindowDC
+    pub fn wxWindowDC_CLASSINFO() -> *mut c_void;
+    pub fn wxWindowDC_new(window: *mut c_void) -> *mut c_void;
+
     // wxWrapSizer
     pub fn wxWrapSizer_CLASSINFO() -> *mut c_void;
     pub fn wxWrapSizer_new(orient: c_int, flags: c_int) -> *mut c_void;

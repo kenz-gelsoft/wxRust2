@@ -20,6 +20,7 @@
 #include <wx/ctrlsub.h>
 #include <wx/cursor.h>
 #include <wx/dataobj.h>
+#include <wx/dcclient.h>
 #include <wx/event.h>
 #include <wx/gdicmn.h>
 #include <wx/laywin.h>
@@ -154,6 +155,10 @@ wxChoicebook *wxChoicebook_new();
 wxChoicebook *wxChoicebook_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxChoicebook_Create(wxChoicebook * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 wxChoice * wxChoicebook_GetChoiceCtrl(const wxChoicebook * self);
+
+// CLASS: wxClientDC
+wxClassInfo *wxClientDC_CLASSINFO();
+wxClientDC *wxClientDC_new(wxWindow * window);
 
 // CLASS: wxClipboard
 wxClassInfo *wxClipboard_CLASSINFO();

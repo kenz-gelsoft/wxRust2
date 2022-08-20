@@ -53,6 +53,50 @@ impl<const OWNED: bool> DynamicCast for WindowIsOwned<OWNED> {
     }
 }
 
+// wxWindowDC
+wx_class! { WindowDC =
+    WindowDCIsOwned<true>(wxWindowDC) impl
+        WindowDCMethods,
+        DCMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> WindowDCIsOwned<OWNED> {
+    pub fn new<W: WindowMethods>(window: Option<&W>) -> WindowDCIsOwned<OWNED> {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            WindowDCIsOwned(ffi::wxWindowDC_new(window))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<WindowDCIsOwned<OWNED>> for DCIsOwned<OWNED> {
+    fn from(o: WindowDCIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<WindowDCIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: WindowDCIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for WindowDCIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxWindowDC_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for WindowDCIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
 // wxWrapSizer
 wx_class! { WrapSizer =
     WrapSizerIsOwned<true>(wxWrapSizer) impl

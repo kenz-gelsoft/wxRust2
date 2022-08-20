@@ -463,6 +463,9 @@ pub trait ChoicebookMethods: BookCtrlBaseMethods {
     }
 }
 
+// wxClientDC
+pub trait ClientDCMethods: WindowDCMethods {}
+
 // wxClipboard
 pub trait ClipboardMethods: ObjectMethods {
     // DTOR: fn ~wxClipboard()

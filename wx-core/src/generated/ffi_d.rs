@@ -243,7 +243,7 @@ extern "C" {
     // NOT_SUPPORTED: pub fn wxDC_StretchBlit(self_: *mut c_void, xdest: c_int, ydest: c_int, dst_width: c_int, dst_height: c_int, source: *mut c_void, xsrc: c_int, ysrc: c_int, src_width: c_int, src_height: c_int, logical_func: wxRasterOperationMode, use_mask: bool, xsrc_mask: c_int, ysrc_mask: c_int) -> bool;
     pub fn wxDC_GetBackground(self_: *const c_void) -> *mut c_void;
     pub fn wxDC_GetBrush(self_: *const c_void) -> *mut c_void;
-    // BLOCKED: pub fn wxDC_GetPen(self_: *const c_void) -> *const c_void;
+    // BLOCKED: pub fn wxDC_GetPen(self_: *const c_void) -> *mut c_void;
     pub fn wxDC_SetBackground(self_: *mut c_void, brush: *const c_void);
     pub fn wxDC_SetBrush(self_: *mut c_void, brush: *const c_void);
     pub fn wxDC_SetPen(self_: *mut c_void, pen: *const c_void);

@@ -878,6 +878,14 @@ bool wxWindow_Create(wxWindow * self, wxWindow * parent, wxWindowID id, const wx
     return self->Create(parent, id, *pos, *size, style, *name);
 }
 
+// CLASS: wxWindowDC
+wxClassInfo *wxWindowDC_CLASSINFO() {
+    return wxCLASSINFO(wxWindowDC);
+}
+wxWindowDC *wxWindowDC_new(wxWindow * window) {
+    return new wxWindowDC(window);
+}
+
 // CLASS: wxWrapSizer
 wxClassInfo *wxWrapSizer_CLASSINFO() {
     return wxCLASSINFO(wxWrapSizer);

@@ -15,6 +15,7 @@
 #include "generated/ffi_l.cpp"
 #include "generated/ffi_m.cpp"
 #include "generated/ffi_n.cpp"
+#include "generated/ffi_o.cpp"
 #include "generated/ffi_p.cpp"
 #include "generated/ffi_r.cpp"
 #include "generated/ffi_s.cpp"

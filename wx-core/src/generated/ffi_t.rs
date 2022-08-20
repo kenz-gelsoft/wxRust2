@@ -249,6 +249,34 @@ extern "C" {
     pub fn wxTextEntry_Undo(self_: *mut c_void);
     pub fn wxTextEntry_WriteText(self_: *mut c_void, text: *const c_void);
 
+    // wxTextEntryDialog
+    pub fn wxTextEntryDialog_CLASSINFO() -> *mut c_void;
+    pub fn wxTextEntryDialog_new() -> *mut c_void;
+    pub fn wxTextEntryDialog_new1(
+        parent: *mut c_void,
+        message: *const c_void,
+        caption: *const c_void,
+        value: *const c_void,
+        style: c_long,
+        pos: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxTextEntryDialog_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        message: *const c_void,
+        caption: *const c_void,
+        value: *const c_void,
+        style: c_long,
+        pos: *const c_void,
+    ) -> bool;
+    // DTOR: pub fn wxTextEntryDialog_~wxTextEntryDialog(self_: *mut c_void);
+    pub fn wxTextEntryDialog_GetValue(self_: *const c_void) -> *mut c_void;
+    pub fn wxTextEntryDialog_SetTextValidator(self_: *mut c_void, validator: *const c_void);
+    // NOT_SUPPORTED: pub fn wxTextEntryDialog_SetTextValidator1(self_: *mut c_void, style: wxTextValidatorStyle);
+    // NOT_SUPPORTED: pub fn wxTextEntryDialog_SetMaxLength(self_: *mut c_void, len: unsigned long);
+    pub fn wxTextEntryDialog_SetValue(self_: *mut c_void, value: *const c_void);
+    pub fn wxTextEntryDialog_ForceUpper(self_: *mut c_void);
+
     // wxTimePickerCtrl
     pub fn wxTimePickerCtrl_CLASSINFO() -> *mut c_void;
     pub fn wxTimePickerCtrl_new() -> *mut c_void;

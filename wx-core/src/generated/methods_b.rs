@@ -126,8 +126,8 @@ pub trait BitmapMethods: GDIObjectMethods {
     fn get_mask(&self) -> Option<MaskIsOwned<false>> {
         unsafe { Mask::option_from(ffi::wxBitmap_GetMask(self.as_ptr())) }
     }
-    fn get_palette(&self) -> *mut c_void {
-        unsafe { ffi::wxBitmap_GetPalette(self.as_ptr()) }
+    fn get_palette(&self) -> Option<PaletteIsOwned<false>> {
+        unsafe { Palette::option_from(ffi::wxBitmap_GetPalette(self.as_ptr())) }
     }
     fn get_sub_bitmap<R: RectMethods>(&self, rect: &R) -> Bitmap {
         unsafe {
@@ -180,8 +180,11 @@ pub trait BitmapMethods: GDIObjectMethods {
             ffi::wxBitmap_SetMask(self.as_ptr(), mask)
         }
     }
-    fn set_palette(&self, palette: *const c_void) {
-        unsafe { ffi::wxBitmap_SetPalette(self.as_ptr(), palette) }
+    fn set_palette<P: PaletteMethods>(&self, palette: &P) {
+        unsafe {
+            let palette = palette.as_ptr();
+            ffi::wxBitmap_SetPalette(self.as_ptr(), palette)
+        }
     }
     fn set_width(&self, width: c_int) {
         unsafe { ffi::wxBitmap_SetWidth(self.as_ptr(), width) }

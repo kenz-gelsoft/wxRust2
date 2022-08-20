@@ -1,6 +1,7 @@
 #pragma once
 
 #include <wx/textctrl.h>
+#include <wx/textdlg.h>
 #include <wx/textentry.h>
 #include <wx/tglbtn.h>
 #include <wx/timectrl.h>
@@ -192,6 +193,16 @@ wxPoint *wxTextEntry_GetMargins(const wxTextEntry * self);
 void wxTextEntry_SetValue(wxTextEntry * self, const wxString * value);
 void wxTextEntry_Undo(wxTextEntry * self);
 void wxTextEntry_WriteText(wxTextEntry * self, const wxString * text);
+
+// CLASS: wxTextEntryDialog
+wxClassInfo *wxTextEntryDialog_CLASSINFO();
+wxTextEntryDialog *wxTextEntryDialog_new();
+wxTextEntryDialog *wxTextEntryDialog_new1(wxWindow * parent, const wxString * message, const wxString * caption, const wxString * value, long style, const wxPoint * pos);
+bool wxTextEntryDialog_Create(wxTextEntryDialog * self, wxWindow * parent, const wxString * message, const wxString * caption, const wxString * value, long style, const wxPoint * pos);
+wxString *wxTextEntryDialog_GetValue(const wxTextEntryDialog * self);
+void wxTextEntryDialog_SetTextValidator(wxTextEntryDialog * self, const wxTextValidator * validator);
+void wxTextEntryDialog_SetValue(wxTextEntryDialog * self, const wxString * value);
+void wxTextEntryDialog_ForceUpper(wxTextEntryDialog * self);
 
 // CLASS: wxTimePickerCtrl
 wxClassInfo *wxTimePickerCtrl_CLASSINFO();

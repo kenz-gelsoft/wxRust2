@@ -345,6 +345,14 @@ wxChoice * wxChoicebook_GetChoiceCtrl(const wxChoicebook * self) {
     return self->GetChoiceCtrl();
 }
 
+// CLASS: wxClientDC
+wxClassInfo *wxClientDC_CLASSINFO() {
+    return wxCLASSINFO(wxClientDC);
+}
+wxClientDC *wxClientDC_new(wxWindow * window) {
+    return new wxClientDC(window);
+}
+
 // CLASS: wxClipboard
 wxClassInfo *wxClipboard_CLASSINFO() {
     return wxCLASSINFO(wxClipboard);

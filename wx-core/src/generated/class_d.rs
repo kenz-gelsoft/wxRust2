@@ -142,8 +142,8 @@ wx_class! { DCOverlay =
         DCOverlayMethods
 }
 impl<const OWNED: bool> DCOverlayIsOwned<OWNED> {
-    pub fn new_with_int<D: DCMethods>(
-        overlay: *mut c_void,
+    pub fn new_with_int<O: OverlayMethods, D: DCMethods>(
+        overlay: &O,
         dc: Option<&D>,
         x: c_int,
         y: c_int,
@@ -151,6 +151,7 @@ impl<const OWNED: bool> DCOverlayIsOwned<OWNED> {
         height: c_int,
     ) -> DCOverlayIsOwned<OWNED> {
         unsafe {
+            let overlay = overlay.as_ptr();
             let dc = match dc {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
@@ -158,8 +159,12 @@ impl<const OWNED: bool> DCOverlayIsOwned<OWNED> {
             DCOverlayIsOwned(ffi::wxDCOverlay_new(overlay, dc, x, y, width, height))
         }
     }
-    pub fn new<D: DCMethods>(overlay: *mut c_void, dc: Option<&D>) -> DCOverlayIsOwned<OWNED> {
+    pub fn new<O: OverlayMethods, D: DCMethods>(
+        overlay: &O,
+        dc: Option<&D>,
+    ) -> DCOverlayIsOwned<OWNED> {
         unsafe {
+            let overlay = overlay.as_ptr();
             let dc = match dc {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
@@ -185,9 +190,10 @@ wx_class! { DCPenChanger =
         DCPenChangerMethods
 }
 impl<const OWNED: bool> DCPenChangerIsOwned<OWNED> {
-    pub fn new<D: DCMethods>(dc: &D, pen: *const c_void) -> DCPenChangerIsOwned<OWNED> {
+    pub fn new<D: DCMethods, P: PenMethods>(dc: &D, pen: &P) -> DCPenChangerIsOwned<OWNED> {
         unsafe {
             let dc = dc.as_ptr();
+            let pen = pen.as_ptr();
             DCPenChangerIsOwned(ffi::wxDCPenChanger_new(dc, pen))
         }
     }

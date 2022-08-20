@@ -401,8 +401,11 @@ pub trait GraphicsContextMethods: GraphicsObjectMethods {
             GraphicsContext::option_from(ffi::wxGraphicsContext_Create(window))
         }
     }
-    fn create_windowdc(window_dc: *const c_void) -> Option<GraphicsContextIsOwned<false>> {
-        unsafe { GraphicsContext::option_from(ffi::wxGraphicsContext_Create1(window_dc)) }
+    fn create_windowdc<W: WindowDCMethods>(window_dc: &W) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe {
+            let window_dc = window_dc.as_ptr();
+            GraphicsContext::option_from(ffi::wxGraphicsContext_Create1(window_dc))
+        }
     }
     fn create_memorydc<M: MemoryDCMethods>(memory_dc: &M) -> Option<GraphicsContextIsOwned<false>> {
         unsafe {
@@ -495,14 +498,20 @@ pub trait GraphicsContextMethods: GraphicsObjectMethods {
             ffi::wxGraphicsContext_SetBrush1(self.as_ptr(), brush)
         }
     }
-    fn create_pen_pen(&self, pen: *const c_void) -> GraphicsPen {
-        unsafe { GraphicsPen::from_ptr(ffi::wxGraphicsContext_CreatePen(self.as_ptr(), pen)) }
+    fn create_pen_pen<P: PenMethods>(&self, pen: &P) -> GraphicsPen {
+        unsafe {
+            let pen = pen.as_ptr();
+            GraphicsPen::from_ptr(ffi::wxGraphicsContext_CreatePen(self.as_ptr(), pen))
+        }
     }
     fn create_pen_graphicspeninfo(&self, info: *const c_void) -> GraphicsPen {
         unsafe { GraphicsPen::from_ptr(ffi::wxGraphicsContext_CreatePen1(self.as_ptr(), info)) }
     }
-    fn set_pen_pen(&self, pen: *const c_void) {
-        unsafe { ffi::wxGraphicsContext_SetPen(self.as_ptr(), pen) }
+    fn set_pen_pen<P: PenMethods>(&self, pen: &P) {
+        unsafe {
+            let pen = pen.as_ptr();
+            ffi::wxGraphicsContext_SetPen(self.as_ptr(), pen)
+        }
     }
     fn set_pen_graphicspen<G: GraphicsPenMethods>(&self, pen: &G) {
         unsafe {
@@ -896,11 +905,12 @@ pub trait GraphicsRendererMethods: ObjectMethods {
             ))
         }
     }
-    fn create_context_windowdc(
+    fn create_context_windowdc<W: WindowDCMethods>(
         &self,
-        window_dc: *const c_void,
+        window_dc: &W,
     ) -> Option<GraphicsContextIsOwned<false>> {
         unsafe {
+            let window_dc = window_dc.as_ptr();
             GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContext1(
                 self.as_ptr(),
                 window_dc,
