@@ -7,6 +7,8 @@
 typedef wxBitmap wxBitmapBundle;
 #endif
 
+typedef wxMessageDialog::ButtonLabel ButtonLabel;
+
 #include "generated/ffi_a.h"
 #include "generated/ffi_b.h"
 #include "generated/ffi_c.h"

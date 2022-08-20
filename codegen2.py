@@ -219,6 +219,8 @@ def generated_h(initials, libname):
 #if !wxCHECK_VERSION(3, 1, 6)
 typedef wxBitmap wxBitmapBundle;
 #endif
+
+typedef wxMessageDialog::ButtonLabel ButtonLabel;
 '''
     else:
         yield '''\

@@ -2,6 +2,66 @@
 
 extern "C" {
 
+// CLASS: wxMask
+wxClassInfo *wxMask_CLASSINFO() {
+    return wxCLASSINFO(wxMask);
+}
+wxMask *wxMask_new() {
+    return new wxMask();
+}
+wxMask *wxMask_new1(const wxBitmap * bitmap, int index) {
+    return new wxMask(*bitmap, index);
+}
+wxMask *wxMask_new2(const wxBitmap * bitmap) {
+    return new wxMask(*bitmap);
+}
+wxMask *wxMask_new3(const wxBitmap * bitmap, const wxColour * colour) {
+    return new wxMask(*bitmap, *colour);
+}
+bool wxMask_Create(wxMask * self, const wxBitmap * bitmap, int index) {
+    return self->Create(*bitmap, index);
+}
+bool wxMask_Create1(wxMask * self, const wxBitmap * bitmap) {
+    return self->Create(*bitmap);
+}
+bool wxMask_Create2(wxMask * self, const wxBitmap * bitmap, const wxColour * colour) {
+    return self->Create(*bitmap, *colour);
+}
+wxBitmap *wxMask_GetBitmap(const wxMask * self) {
+    return new wxBitmap(self->GetBitmap());
+}
+
+// CLASS: wxMaximizeEvent
+wxClassInfo *wxMaximizeEvent_CLASSINFO() {
+    return wxCLASSINFO(wxMaximizeEvent);
+}
+wxMaximizeEvent *wxMaximizeEvent_new(int id) {
+    return new wxMaximizeEvent(id);
+}
+
+// CLASS: wxMemoryDC
+wxClassInfo *wxMemoryDC_CLASSINFO() {
+    return wxCLASSINFO(wxMemoryDC);
+}
+wxMemoryDC *wxMemoryDC_new() {
+    return new wxMemoryDC();
+}
+wxMemoryDC *wxMemoryDC_new1(wxDC * dc) {
+    return new wxMemoryDC(dc);
+}
+wxMemoryDC *wxMemoryDC_new2(wxBitmap * bitmap) {
+    return new wxMemoryDC(*bitmap);
+}
+void wxMemoryDC_SelectObject(wxMemoryDC * self, wxBitmap * bitmap) {
+    return self->SelectObject(*bitmap);
+}
+void wxMemoryDC_SelectObjectAsSource(wxMemoryDC * self, const wxBitmap * bitmap) {
+    return self->SelectObjectAsSource(*bitmap);
+}
+wxBitmap *wxMemoryDC_GetSelectedBitmap(const wxMemoryDC * self) {
+    return new wxBitmap(self->GetSelectedBitmap());
+}
+
 // CLASS: wxMenu
 wxClassInfo *wxMenu_CLASSINFO() {
     return wxCLASSINFO(wxMenu);
@@ -271,6 +331,20 @@ wxMenuBar * wxMenuBar_MacGetCommonMenuBar() {
 }
 #endif
 
+// CLASS: wxMenuEvent
+wxClassInfo *wxMenuEvent_CLASSINFO() {
+    return wxCLASSINFO(wxMenuEvent);
+}
+wxMenu * wxMenuEvent_GetMenu(const wxMenuEvent * self) {
+    return self->GetMenu();
+}
+int wxMenuEvent_GetMenuId(const wxMenuEvent * self) {
+    return self->GetMenuId();
+}
+bool wxMenuEvent_IsPopup(const wxMenuEvent * self) {
+    return self->IsPopup();
+}
+
 // CLASS: wxMenuItem
 wxClassInfo *wxMenuItem_CLASSINFO() {
     return wxCLASSINFO(wxMenuItem);
@@ -409,6 +483,247 @@ void wxMenuItem_Enable(wxMenuItem * self, bool enable) {
 }
 wxString *wxMenuItem_GetLabelText(const wxString * text) {
     return new wxString(wxMenuItem::GetLabelText(*text));
+}
+
+// CLASS: wxMessageDialog
+wxClassInfo *wxMessageDialog_CLASSINFO() {
+    return wxCLASSINFO(wxMessageDialog);
+}
+wxMessageDialog *wxMessageDialog_new(wxWindow * parent, const wxString * message, const wxString * caption, long style, const wxPoint * pos) {
+    return new wxMessageDialog(parent, *message, *caption, style, *pos);
+}
+void wxMessageDialog_SetExtendedMessage(wxMessageDialog * self, const wxString * extended_message) {
+    return self->SetExtendedMessage(*extended_message);
+}
+bool wxMessageDialog_SetHelpLabel(wxMessageDialog * self, const ButtonLabel * help) {
+    return self->SetHelpLabel(*help);
+}
+void wxMessageDialog_SetMessage(wxMessageDialog * self, const wxString * message) {
+    return self->SetMessage(*message);
+}
+bool wxMessageDialog_SetOKCancelLabels(wxMessageDialog * self, const ButtonLabel * ok, const ButtonLabel * cancel) {
+    return self->SetOKCancelLabels(*ok, *cancel);
+}
+bool wxMessageDialog_SetOKLabel(wxMessageDialog * self, const ButtonLabel * ok) {
+    return self->SetOKLabel(*ok);
+}
+bool wxMessageDialog_SetYesNoCancelLabels(wxMessageDialog * self, const ButtonLabel * yes, const ButtonLabel * no, const ButtonLabel * cancel) {
+    return self->SetYesNoCancelLabels(*yes, *no, *cancel);
+}
+bool wxMessageDialog_SetYesNoLabels(wxMessageDialog * self, const ButtonLabel * yes, const ButtonLabel * no) {
+    return self->SetYesNoLabels(*yes, *no);
+}
+wxString *wxMessageDialog_GetCaption(const wxMessageDialog * self) {
+    return new wxString(self->GetCaption());
+}
+wxString *wxMessageDialog_GetMessage(const wxMessageDialog * self) {
+    return new wxString(self->GetMessage());
+}
+wxString *wxMessageDialog_GetExtendedMessage(const wxMessageDialog * self) {
+    return new wxString(self->GetExtendedMessage());
+}
+long wxMessageDialog_GetMessageDialogStyle(const wxMessageDialog * self) {
+    return self->GetMessageDialogStyle();
+}
+bool wxMessageDialog_HasCustomLabels(const wxMessageDialog * self) {
+    return self->HasCustomLabels();
+}
+wxString *wxMessageDialog_GetYesLabel(const wxMessageDialog * self) {
+    return new wxString(self->GetYesLabel());
+}
+wxString *wxMessageDialog_GetNoLabel(const wxMessageDialog * self) {
+    return new wxString(self->GetNoLabel());
+}
+wxString *wxMessageDialog_GetOKLabel(const wxMessageDialog * self) {
+    return new wxString(self->GetOKLabel());
+}
+wxString *wxMessageDialog_GetCancelLabel(const wxMessageDialog * self) {
+    return new wxString(self->GetCancelLabel());
+}
+wxString *wxMessageDialog_GetHelpLabel(const wxMessageDialog * self) {
+    return new wxString(self->GetHelpLabel());
+}
+long wxMessageDialog_GetEffectiveIcon(const wxMessageDialog * self) {
+    return self->GetEffectiveIcon();
+}
+
+// CLASS: wxMessageOutputMessageBox
+void wxMessageOutputMessageBox_delete(wxMessageOutputMessageBox *self) {
+    delete self;
+}
+wxMessageOutputMessageBox *wxMessageOutputMessageBox_new() {
+    return new wxMessageOutputMessageBox();
+}
+
+// CLASS: wxMiniFrame
+wxClassInfo *wxMiniFrame_CLASSINFO() {
+    return wxCLASSINFO(wxMiniFrame);
+}
+wxMiniFrame *wxMiniFrame_new() {
+    return new wxMiniFrame();
+}
+wxMiniFrame *wxMiniFrame_new1(wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxMiniFrame(parent, id, *title, *pos, *size, style, *name);
+}
+bool wxMiniFrame_Create(wxMiniFrame * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, id, *title, *pos, *size, style, *name);
+}
+
+// CLASS: wxMirrorDC
+wxClassInfo *wxMirrorDC_CLASSINFO() {
+    return wxCLASSINFO(wxMirrorDC);
+}
+wxMirrorDC *wxMirrorDC_new(wxDC * dc, bool mirror) {
+    return new wxMirrorDC(*dc, mirror);
+}
+
+// CLASS: wxMouseCaptureChangedEvent
+wxClassInfo *wxMouseCaptureChangedEvent_CLASSINFO() {
+    return wxCLASSINFO(wxMouseCaptureChangedEvent);
+}
+wxMouseCaptureChangedEvent *wxMouseCaptureChangedEvent_new(wxWindowID window_id, wxWindow * gained_capture) {
+    return new wxMouseCaptureChangedEvent(window_id, gained_capture);
+}
+wxWindow * wxMouseCaptureChangedEvent_GetCapturedWindow(const wxMouseCaptureChangedEvent * self) {
+    return self->GetCapturedWindow();
+}
+
+// CLASS: wxMouseCaptureLostEvent
+wxClassInfo *wxMouseCaptureLostEvent_CLASSINFO() {
+    return wxCLASSINFO(wxMouseCaptureLostEvent);
+}
+wxMouseCaptureLostEvent *wxMouseCaptureLostEvent_new(wxWindowID window_id) {
+    return new wxMouseCaptureLostEvent(window_id);
+}
+
+// CLASS: wxMouseEvent
+wxClassInfo *wxMouseEvent_CLASSINFO() {
+    return wxCLASSINFO(wxMouseEvent);
+}
+bool wxMouseEvent_Aux1DClick(const wxMouseEvent * self) {
+    return self->Aux1DClick();
+}
+bool wxMouseEvent_Aux1Down(const wxMouseEvent * self) {
+    return self->Aux1Down();
+}
+bool wxMouseEvent_Aux1Up(const wxMouseEvent * self) {
+    return self->Aux1Up();
+}
+bool wxMouseEvent_Aux2DClick(const wxMouseEvent * self) {
+    return self->Aux2DClick();
+}
+bool wxMouseEvent_Aux2Down(const wxMouseEvent * self) {
+    return self->Aux2Down();
+}
+bool wxMouseEvent_Aux2Up(const wxMouseEvent * self) {
+    return self->Aux2Up();
+}
+bool wxMouseEvent_Dragging(const wxMouseEvent * self) {
+    return self->Dragging();
+}
+bool wxMouseEvent_Entering(const wxMouseEvent * self) {
+    return self->Entering();
+}
+int wxMouseEvent_GetButton(const wxMouseEvent * self) {
+    return self->GetButton();
+}
+int wxMouseEvent_GetClickCount(const wxMouseEvent * self) {
+    return self->GetClickCount();
+}
+int wxMouseEvent_GetLinesPerAction(const wxMouseEvent * self) {
+    return self->GetLinesPerAction();
+}
+int wxMouseEvent_GetColumnsPerAction(const wxMouseEvent * self) {
+    return self->GetColumnsPerAction();
+}
+wxPoint *wxMouseEvent_GetLogicalPosition(const wxMouseEvent * self, const wxDC * dc) {
+    return new wxPoint(self->GetLogicalPosition(*dc));
+}
+int wxMouseEvent_GetWheelDelta(const wxMouseEvent * self) {
+    return self->GetWheelDelta();
+}
+#if wxCHECK_VERSION(3, 1, 0)
+bool wxMouseEvent_IsWheelInverted(const wxMouseEvent * self) {
+    return self->IsWheelInverted();
+}
+#endif
+int wxMouseEvent_GetWheelRotation(const wxMouseEvent * self) {
+    return self->GetWheelRotation();
+}
+bool wxMouseEvent_IsButton(const wxMouseEvent * self) {
+    return self->IsButton();
+}
+bool wxMouseEvent_IsPageScroll(const wxMouseEvent * self) {
+    return self->IsPageScroll();
+}
+bool wxMouseEvent_Leaving(const wxMouseEvent * self) {
+    return self->Leaving();
+}
+bool wxMouseEvent_LeftDClick(const wxMouseEvent * self) {
+    return self->LeftDClick();
+}
+bool wxMouseEvent_LeftDown(const wxMouseEvent * self) {
+    return self->LeftDown();
+}
+bool wxMouseEvent_LeftUp(const wxMouseEvent * self) {
+    return self->LeftUp();
+}
+#if wxCHECK_VERSION(3, 1, 0)
+bool wxMouseEvent_Magnify(const wxMouseEvent * self) {
+    return self->Magnify();
+}
+#endif
+bool wxMouseEvent_MetaDown(const wxMouseEvent * self) {
+    return self->MetaDown();
+}
+bool wxMouseEvent_MiddleDClick(const wxMouseEvent * self) {
+    return self->MiddleDClick();
+}
+bool wxMouseEvent_MiddleDown(const wxMouseEvent * self) {
+    return self->MiddleDown();
+}
+bool wxMouseEvent_MiddleUp(const wxMouseEvent * self) {
+    return self->MiddleUp();
+}
+bool wxMouseEvent_Moving(const wxMouseEvent * self) {
+    return self->Moving();
+}
+bool wxMouseEvent_RightDClick(const wxMouseEvent * self) {
+    return self->RightDClick();
+}
+bool wxMouseEvent_RightDown(const wxMouseEvent * self) {
+    return self->RightDown();
+}
+bool wxMouseEvent_RightUp(const wxMouseEvent * self) {
+    return self->RightUp();
+}
+
+// CLASS: wxMouseEventsManager
+wxClassInfo *wxMouseEventsManager_CLASSINFO() {
+    return wxCLASSINFO(wxMouseEventsManager);
+}
+bool wxMouseEventsManager_Create(wxMouseEventsManager * self, wxWindow * win) {
+    return self->Create(win);
+}
+
+// CLASS: wxMoveEvent
+wxClassInfo *wxMoveEvent_CLASSINFO() {
+    return wxCLASSINFO(wxMoveEvent);
+}
+wxMoveEvent *wxMoveEvent_new(const wxPoint * pt, int id) {
+    return new wxMoveEvent(*pt, id);
+}
+wxPoint *wxMoveEvent_GetPosition(const wxMoveEvent * self) {
+    return new wxPoint(self->GetPosition());
+}
+wxRect *wxMoveEvent_GetRect(const wxMoveEvent * self) {
+    return new wxRect(self->GetRect());
+}
+void wxMoveEvent_SetRect(wxMoveEvent * self, const wxRect * rect) {
+    return self->SetRect(*rect);
+}
+void wxMoveEvent_SetPosition(wxMoveEvent * self, const wxPoint * pos) {
+    return self->SetPosition(*pos);
 }
 
 } // extern "C"

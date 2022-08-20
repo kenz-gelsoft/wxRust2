@@ -1228,13 +1228,18 @@ pub trait DataViewCustomRendererMethods: DataViewRendererMethods {
         unsafe { WxString::from_ptr(ffi::wxDataViewCustomRenderer_GetDefaultType()).into() }
     }
     // DTOR: fn ~wxDataViewCustomRenderer()
-    fn activate_cell<R: RectMethods, D: DataViewModelMethods, D2: DataViewItemMethods>(
+    fn activate_cell<
+        R: RectMethods,
+        D: DataViewModelMethods,
+        D2: DataViewItemMethods,
+        M: MouseEventMethods,
+    >(
         &self,
         cell: &R,
         model: Option<&D>,
         item: &D2,
         col: c_uint,
-        mouse_event: *const c_void,
+        mouse_event: Option<&M>,
     ) -> bool {
         unsafe {
             let cell = cell.as_ptr();
@@ -1243,6 +1248,10 @@ pub trait DataViewCustomRendererMethods: DataViewRendererMethods {
                 None => ptr::null_mut(),
             };
             let item = item.as_ptr();
+            let mouse_event = match mouse_event {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             ffi::wxDataViewCustomRenderer_ActivateCell(
                 self.as_ptr(),
                 cell,
@@ -3068,15 +3077,21 @@ pub trait DragImageMethods: ObjectMethods {
     fn show(&self) -> bool {
         unsafe { ffi::wxDragImage_Show(self.as_ptr()) }
     }
-    fn update_backing_from_window<D: DCMethods, R: RectMethods, R2: RectMethods>(
+    fn update_backing_from_window<
+        D: DCMethods,
+        M: MemoryDCMethods,
+        R: RectMethods,
+        R2: RectMethods,
+    >(
         &self,
         window_dc: &D,
-        dest_dc: *mut c_void,
+        dest_dc: &M,
         source_rect: &R,
         dest_rect: &R2,
     ) -> bool {
         unsafe {
             let window_dc = window_dc.as_ptr();
+            let dest_dc = dest_dc.as_ptr();
             let source_rect = source_rect.as_ptr();
             let dest_rect = dest_rect.as_ptr();
             ffi::wxDragImage_UpdateBackingFromWindow(

@@ -104,7 +104,7 @@ class Class:
             for mixin in self.__base_classes[1:]:
                 if self.manager.is_binding_type(mixin):
                     yield mixin
-        # print(self.name)
+        # print(self.name, self.__base_classes)
         for mixin in self.manager.by_name(self.__base_classes[0]).mixins():
             yield mixin
 

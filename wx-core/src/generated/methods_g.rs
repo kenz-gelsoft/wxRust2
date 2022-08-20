@@ -404,8 +404,11 @@ pub trait GraphicsContextMethods: GraphicsObjectMethods {
     fn create_windowdc(window_dc: *const c_void) -> Option<GraphicsContextIsOwned<false>> {
         unsafe { GraphicsContext::option_from(ffi::wxGraphicsContext_Create1(window_dc)) }
     }
-    fn create_memorydc(memory_dc: *const c_void) -> Option<GraphicsContextIsOwned<false>> {
-        unsafe { GraphicsContext::option_from(ffi::wxGraphicsContext_Create2(memory_dc)) }
+    fn create_memorydc<M: MemoryDCMethods>(memory_dc: &M) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe {
+            let memory_dc = memory_dc.as_ptr();
+            GraphicsContext::option_from(ffi::wxGraphicsContext_Create2(memory_dc))
+        }
     }
     // BLOCKED: fn Create3()
     fn create_enhmetafiledc(meta_file_dc: *const c_void) -> Option<GraphicsContextIsOwned<false>> {
@@ -904,11 +907,12 @@ pub trait GraphicsRendererMethods: ObjectMethods {
             ))
         }
     }
-    fn create_context_memorydc(
+    fn create_context_memorydc<M: MemoryDCMethods>(
         &self,
-        memory_dc: *const c_void,
+        memory_dc: &M,
     ) -> Option<GraphicsContextIsOwned<false>> {
         unsafe {
+            let memory_dc = memory_dc.as_ptr();
             GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContext2(
                 self.as_ptr(),
                 memory_dc,
