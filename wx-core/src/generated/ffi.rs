@@ -9,6 +9,7 @@ pub use super::ffi_f::*;
 pub use super::ffi_g::*;
 pub use super::ffi_h::*;
 pub use super::ffi_i::*;
+pub use super::ffi_j::*;
 pub use super::ffi_l::*;
 pub use super::ffi_m::*;
 pub use super::ffi_n::*;
