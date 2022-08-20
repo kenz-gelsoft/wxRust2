@@ -1329,6 +1329,16 @@ blocklist = [
     'GetPalette',
     'GetHandlers',
 ]
+wx31 = [
+    'ChangeBrightness',
+    'ChangeHSV',
+    'ChangeLightness',
+    'ChangeSaturation',
+    'GetDefaultLoadFlags',
+    'GetLoadFlags',
+    'SetDefaultLoadFlags',
+    'SetLoadFlags',
+]
 [types.wxImageHandler]
 blocklist = [
     # abstract

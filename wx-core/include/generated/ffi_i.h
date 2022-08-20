@@ -83,13 +83,17 @@ wxImage *wxImage_Rotate(const wxImage * self, double angle, const wxPoint * rota
 wxImage *wxImage_Rotate90(const wxImage * self, bool clockwise);
 wxImage *wxImage_Rotate180(const wxImage * self);
 void wxImage_RotateHue(wxImage * self, double angle);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxImage_ChangeSaturation(wxImage * self, double factor);
 void wxImage_ChangeBrightness(wxImage * self, double factor);
 void wxImage_ChangeHSV(wxImage * self, double angle_h, double factor_s, double factor_v);
+#endif
 wxImage *wxImage_Size(const wxImage * self, const wxSize * size, const wxPoint * pos, int red, int green, int blue);
 wxImage *wxImage_ConvertToGreyscale(const wxImage * self, double weight_r, double weight_g, double weight_b);
 wxImage *wxImage_ConvertToGreyscale1(const wxImage * self);
+#if wxCHECK_VERSION(3, 1, 0)
 wxImage *wxImage_ChangeLightness(const wxImage * self, int alpha);
+#endif
 unsigned char * wxImage_GetAlpha(const wxImage * self);
 unsigned char * wxImage_GetData(const wxImage * self);
 int wxImage_GetWidth(const wxImage * self);
@@ -112,13 +116,17 @@ void wxImage_SetAlpha(wxImage * self, unsigned char * alpha, bool static_data);
 void wxImage_ClearAlpha(wxImage * self);
 void wxImage_SetData(wxImage * self, unsigned char * data, bool static_data);
 void wxImage_SetData1(wxImage * self, unsigned char * data, int new_width, int new_height, bool static_data);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxImage_SetLoadFlags(wxImage * self, int flags);
+#endif
 void wxImage_SetMask(wxImage * self, bool has_mask);
 void wxImage_SetOption(wxImage * self, const wxString * name, const wxString * value);
 void wxImage_SetOption1(wxImage * self, const wxString * name, int value);
 void wxImage_SetPalette(wxImage * self, const wxPalette * palette);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxImage_SetDefaultLoadFlags(int flags);
 int wxImage_GetLoadFlags(const wxImage * self);
+#endif
 void wxImage_AddHandler(wxImageHandler * handler);
 void wxImage_CleanUpHandlers();
 wxImageHandler * wxImage_FindHandler(const wxString * name);
@@ -128,7 +136,9 @@ void wxImage_InsertHandler(wxImageHandler * handler);
 bool wxImage_RemoveHandler(const wxString * name);
 bool wxImage_CanRead(const wxString * filename);
 bool wxImage_CanRead1(wxInputStream * stream);
+#if wxCHECK_VERSION(3, 1, 0)
 int wxImage_GetDefaultLoadFlags();
+#endif
 wxString *wxImage_GetImageExtWildcard();
 wxImage *wxImage_new();
 wxImage *wxImage_new1(int width, int height, bool clear);

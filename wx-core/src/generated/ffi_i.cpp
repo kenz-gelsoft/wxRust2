@@ -185,6 +185,7 @@ wxImage *wxImage_Rotate180(const wxImage * self) {
 void wxImage_RotateHue(wxImage * self, double angle) {
     return self->RotateHue(angle);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxImage_ChangeSaturation(wxImage * self, double factor) {
     return self->ChangeSaturation(factor);
 }
@@ -194,6 +195,7 @@ void wxImage_ChangeBrightness(wxImage * self, double factor) {
 void wxImage_ChangeHSV(wxImage * self, double angle_h, double factor_s, double factor_v) {
     return self->ChangeHSV(angle_h, factor_s, factor_v);
 }
+#endif
 wxImage *wxImage_Size(const wxImage * self, const wxSize * size, const wxPoint * pos, int red, int green, int blue) {
     return new wxImage(self->Size(*size, *pos, red, green, blue));
 }
@@ -203,9 +205,11 @@ wxImage *wxImage_ConvertToGreyscale(const wxImage * self, double weight_r, doubl
 wxImage *wxImage_ConvertToGreyscale1(const wxImage * self) {
     return new wxImage(self->ConvertToGreyscale());
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxImage *wxImage_ChangeLightness(const wxImage * self, int alpha) {
     return new wxImage(self->ChangeLightness(alpha));
 }
+#endif
 unsigned char * wxImage_GetAlpha(const wxImage * self) {
     return self->GetAlpha();
 }
@@ -272,9 +276,11 @@ void wxImage_SetData(wxImage * self, unsigned char * data, bool static_data) {
 void wxImage_SetData1(wxImage * self, unsigned char * data, int new_width, int new_height, bool static_data) {
     return self->SetData(data, new_width, new_height, static_data);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxImage_SetLoadFlags(wxImage * self, int flags) {
     return self->SetLoadFlags(flags);
 }
+#endif
 void wxImage_SetMask(wxImage * self, bool has_mask) {
     return self->SetMask(has_mask);
 }
@@ -287,12 +293,14 @@ void wxImage_SetOption1(wxImage * self, const wxString * name, int value) {
 void wxImage_SetPalette(wxImage * self, const wxPalette * palette) {
     return self->SetPalette(*palette);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxImage_SetDefaultLoadFlags(int flags) {
     return wxImage::SetDefaultLoadFlags(flags);
 }
 int wxImage_GetLoadFlags(const wxImage * self) {
     return self->GetLoadFlags();
 }
+#endif
 void wxImage_AddHandler(wxImageHandler * handler) {
     return wxImage::AddHandler(handler);
 }
@@ -320,9 +328,11 @@ bool wxImage_CanRead(const wxString * filename) {
 bool wxImage_CanRead1(wxInputStream * stream) {
     return wxImage::CanRead(*stream);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 int wxImage_GetDefaultLoadFlags() {
     return wxImage::GetDefaultLoadFlags();
 }
+#endif
 wxString *wxImage_GetImageExtWildcard() {
     return new wxString(wxImage::GetImageExtWildcard());
 }
