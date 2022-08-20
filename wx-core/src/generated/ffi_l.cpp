@@ -12,9 +12,6 @@ wxLayoutAlgorithm *wxLayoutAlgorithm_new() {
 bool wxLayoutAlgorithm_LayoutFrame(wxLayoutAlgorithm * self, wxFrame * frame, wxWindow * main_window) {
     return self->LayoutFrame(frame, main_window);
 }
-bool wxLayoutAlgorithm_LayoutMDIFrame(wxLayoutAlgorithm * self, wxMDIParentFrame * frame, wxRect * rect) {
-    return self->LayoutMDIFrame(frame, rect);
-}
 bool wxLayoutAlgorithm_LayoutWindow(wxLayoutAlgorithm * self, wxWindow * parent, wxWindow * main_window) {
     return self->LayoutWindow(parent, main_window);
 }

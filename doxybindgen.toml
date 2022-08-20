@@ -1381,6 +1381,11 @@ wx31 = [
 wx31 = [
     'IsAutoRepeat',
 ]
+[types.wxLayoutAlgorithm]
+blocklist = [
+    # some of our CI env built without printing
+    'LayoutMDIFrame',
+]
 [types.wxListBox]
 blocklist = [
     # C++ array not supported

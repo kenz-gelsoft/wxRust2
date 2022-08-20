@@ -11,7 +11,6 @@ extern "C" {
 wxClassInfo *wxLayoutAlgorithm_CLASSINFO();
 wxLayoutAlgorithm *wxLayoutAlgorithm_new();
 bool wxLayoutAlgorithm_LayoutFrame(wxLayoutAlgorithm * self, wxFrame * frame, wxWindow * main_window);
-bool wxLayoutAlgorithm_LayoutMDIFrame(wxLayoutAlgorithm * self, wxMDIParentFrame * frame, wxRect * rect);
 bool wxLayoutAlgorithm_LayoutWindow(wxLayoutAlgorithm * self, wxWindow * parent, wxWindow * main_window);
 
 // CLASS: wxListBox

@@ -11,11 +11,7 @@ extern "C" {
         frame: *mut c_void,
         main_window: *mut c_void,
     ) -> bool;
-    pub fn wxLayoutAlgorithm_LayoutMDIFrame(
-        self_: *mut c_void,
-        frame: *mut c_void,
-        rect: *mut c_void,
-    ) -> bool;
+    // BLOCKED: pub fn wxLayoutAlgorithm_LayoutMDIFrame(self_: *mut c_void, frame: *mut c_void, rect: *mut c_void) -> bool;
     pub fn wxLayoutAlgorithm_LayoutWindow(
         self_: *mut c_void,
         parent: *mut c_void,

@@ -20,15 +20,7 @@ pub trait LayoutAlgorithmMethods: ObjectMethods {
             ffi::wxLayoutAlgorithm_LayoutFrame(self.as_ptr(), frame, main_window)
         }
     }
-    fn layout_mdi_frame<R: RectMethods>(&self, frame: *mut c_void, rect: Option<&R>) -> bool {
-        unsafe {
-            let rect = match rect {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxLayoutAlgorithm_LayoutMDIFrame(self.as_ptr(), frame, rect)
-        }
-    }
+    // BLOCKED: fn LayoutMDIFrame()
     fn layout_window<W: WindowMethods, W2: WindowMethods>(
         &self,
         parent: Option<&W>,
