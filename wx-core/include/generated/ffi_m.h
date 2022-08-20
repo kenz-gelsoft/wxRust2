@@ -4,7 +4,6 @@
 #include <wx/dcmemory.h>
 #include <wx/dcmirror.h>
 #include <wx/event.h>
-#include <wx/mdi.h>
 #include <wx/menu.h>
 #include <wx/menuitem.h>
 #include <wx/minifram.h>
@@ -13,11 +12,6 @@
 #include <wx/msgout.h>
 
 extern "C" {
-
-// CLASS: wxMDIClientWindow
-wxClassInfo *wxMDIClientWindow_CLASSINFO();
-wxMDIClientWindow *wxMDIClientWindow_new();
-bool wxMDIClientWindow_CreateClient(wxMDIClientWindow * self, wxMDIParentFrame * parent, long style);
 
 // CLASS: wxMask
 wxClassInfo *wxMask_CLASSINFO();

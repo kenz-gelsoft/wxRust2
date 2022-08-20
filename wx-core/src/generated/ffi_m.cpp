@@ -2,17 +2,6 @@
 
 extern "C" {
 
-// CLASS: wxMDIClientWindow
-wxClassInfo *wxMDIClientWindow_CLASSINFO() {
-    return wxCLASSINFO(wxMDIClientWindow);
-}
-wxMDIClientWindow *wxMDIClientWindow_new() {
-    return new wxMDIClientWindow();
-}
-bool wxMDIClientWindow_CreateClient(wxMDIClientWindow * self, wxMDIParentFrame * parent, long style) {
-    return self->CreateClient(parent, style);
-}
-
 // CLASS: wxMask
 wxClassInfo *wxMask_CLASSINFO() {
     return wxCLASSINFO(wxMask);

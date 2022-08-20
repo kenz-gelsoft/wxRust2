@@ -2,15 +2,6 @@ use super::*;
 
 extern "C" {
 
-    // wxMDIClientWindow
-    pub fn wxMDIClientWindow_CLASSINFO() -> *mut c_void;
-    pub fn wxMDIClientWindow_new() -> *mut c_void;
-    pub fn wxMDIClientWindow_CreateClient(
-        self_: *mut c_void,
-        parent: *mut c_void,
-        style: c_long,
-    ) -> bool;
-
     // wxMask
     pub fn wxMask_CLASSINFO() -> *mut c_void;
     pub fn wxMask_new() -> *mut c_void;

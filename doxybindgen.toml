@@ -436,16 +436,16 @@ wxml_files = [
     'wxml/classwx_list_item.xml',
     'wxml/classwx_list_view.xml',
     'wxml/classwx_listbook.xml',
-    # 'wxml/classwx_log.xml',                # Our CI environment is't built with
-    # 'wxml/classwx_log_chain.xml',          # Our CI environment is't built with
-    # 'wxml/classwx_log_gui.xml',            # Our CI environment is't built with
-    # 'wxml/classwx_log_interposer.xml',     # Our CI environment is't built with
-    # 'wxml/classwx_log_text_ctrl.xml',      # Our CI environment is't built with
-    # 'wxml/classwx_log_window.xml',         # Our CI environment is't built with
-    # 'wxml/classwx_long_press_event.xml',   # requires 3.1
-    # 'wxml/classwx_m_d_i_child_frame.xml',  # Our CI environment is't built with
-    'wxml/classwx_m_d_i_client_window.xml', 
-    # 'wxml/classwx_m_d_i_parent_frame.xml', # Our CI environment is't built with
+    # 'wxml/classwx_log.xml',                 # Our CI environment is't built with
+    # 'wxml/classwx_log_chain.xml',           # Our CI environment is't built with
+    # 'wxml/classwx_log_gui.xml',             # Our CI environment is't built with
+    # 'wxml/classwx_log_interposer.xml',      # Our CI environment is't built with
+    # 'wxml/classwx_log_text_ctrl.xml',       # Our CI environment is't built with
+    # 'wxml/classwx_log_window.xml',          # Our CI environment is't built with
+    # 'wxml/classwx_long_press_event.xml',    # requires 3.1
+    # 'wxml/classwx_m_d_i_child_frame.xml',   # Our CI environment is't built with
+    # 'wxml/classwx_m_d_i_client_window.xml', # Our CI environment is't built with
+    # 'wxml/classwx_m_d_i_parent_frame.xml',  # Our CI environment is't built with
     'wxml/classwx_mask.xml',
     'wxml/classwx_maximize_event.xml',
     'wxml/classwx_memory_d_c.xml',

@@ -2,43 +2,6 @@
 
 use super::*;
 
-// wxMDIClientWindow
-wx_class! { MDIClientWindow =
-    MDIClientWindowIsOwned<true>(wxMDIClientWindow) impl
-        MDIClientWindowMethods,
-        WindowMethods,
-        EvtHandlerMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> MDIClientWindowIsOwned<OWNED> {
-    pub fn new() -> MDIClientWindowIsOwned<OWNED> {
-        unsafe { MDIClientWindowIsOwned(ffi::wxMDIClientWindow_new()) }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<MDIClientWindowIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: MDIClientWindowIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<MDIClientWindowIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: MDIClientWindowIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<MDIClientWindowIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: MDIClientWindowIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for MDIClientWindowIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxMDIClientWindow_CLASSINFO()) }
-    }
-}
-
 // wxMask
 wx_class! { Mask =
     MaskIsOwned<true>(wxMask) impl

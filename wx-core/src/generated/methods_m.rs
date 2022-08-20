@@ -1,12 +1,5 @@
 use super::*;
 
-// wxMDIClientWindow
-pub trait MDIClientWindowMethods: WindowMethods {
-    fn create_client(&self, parent: *mut c_void, style: c_long) -> bool {
-        unsafe { ffi::wxMDIClientWindow_CreateClient(self.as_ptr(), parent, style) }
-    }
-}
-
 // wxMask
 pub trait MaskMethods: ObjectMethods {
     // DTOR: fn ~wxMask()
