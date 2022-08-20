@@ -446,7 +446,7 @@ wxml_files = [
     # 'wxml/classwx_help_provider.xml', # Our CI environment is't built with
     'wxml/classwx_hyperlink_ctrl.xml',
     'wxml/classwx_hyperlink_event.xml',
-    'wxml/classwx_i_f_f_handler.xml',
+    # 'wxml/classwx_i_f_f_handler.xml', # Not supported MSW(VC)
     'wxml/classwx_icon.xml',
     'wxml/classwx_icon_bundle.xml',
     'wxml/classwx_iconize_event.xml',

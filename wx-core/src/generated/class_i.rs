@@ -2,44 +2,6 @@
 
 use super::*;
 
-// wxIFFHandler
-wx_class! { IFFHandler =
-    IFFHandlerIsOwned<true>(wxIFFHandler) impl
-        IFFHandlerMethods,
-        ImageHandlerMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> IFFHandlerIsOwned<OWNED> {
-    pub fn new() -> IFFHandlerIsOwned<OWNED> {
-        unsafe { IFFHandlerIsOwned(ffi::wxIFFHandler_new()) }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<IFFHandlerIsOwned<OWNED>> for ImageHandlerIsOwned<OWNED> {
-    fn from(o: IFFHandlerIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<IFFHandlerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: IFFHandlerIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for IFFHandlerIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxIFFHandler_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Drop for IFFHandlerIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObject_delete(self.0) }
-        }
-    }
-}
-
 // wxIcon
 wx_class! { Icon =
     IconIsOwned<true>(wxIcon) impl

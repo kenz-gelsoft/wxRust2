@@ -2,10 +2,6 @@ use super::*;
 
 extern "C" {
 
-    // wxIFFHandler
-    pub fn wxIFFHandler_CLASSINFO() -> *mut c_void;
-    pub fn wxIFFHandler_new() -> *mut c_void;
-
     // wxIcon
     pub fn wxIcon_CLASSINFO() -> *mut c_void;
     pub fn wxIcon_new() -> *mut c_void;

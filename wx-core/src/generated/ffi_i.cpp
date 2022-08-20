@@ -2,14 +2,6 @@
 
 extern "C" {
 
-// CLASS: wxIFFHandler
-wxClassInfo *wxIFFHandler_CLASSINFO() {
-    return wxCLASSINFO(wxIFFHandler);
-}
-wxIFFHandler *wxIFFHandler_new() {
-    return new wxIFFHandler();
-}
-
 // CLASS: wxIcon
 wxClassInfo *wxIcon_CLASSINFO() {
     return wxCLASSINFO(wxIcon);

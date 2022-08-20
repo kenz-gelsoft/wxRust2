@@ -5,16 +5,11 @@
 #include <wx/icon.h>
 #include <wx/iconbndl.h>
 #include <wx/image.h>
-#include <wx/imagiff.h>
 #include <wx/imaglist.h>
 #include <wx/infobar.h>
 #include <wx/windowid.h>
 
 extern "C" {
-
-// CLASS: wxIFFHandler
-wxClassInfo *wxIFFHandler_CLASSINFO();
-wxIFFHandler *wxIFFHandler_new();
 
 // CLASS: wxIcon
 wxClassInfo *wxIcon_CLASSINFO();

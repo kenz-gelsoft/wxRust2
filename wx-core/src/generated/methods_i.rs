@@ -1,8 +1,5 @@
 use super::*;
 
-// wxIFFHandler
-pub trait IFFHandlerMethods: ImageHandlerMethods {}
-
 // wxIcon
 pub trait IconMethods: GDIObjectMethods {
     // DTOR: fn ~wxIcon()
