@@ -417,7 +417,7 @@ wxml_files = [
     'wxml/classwx_item_container.xml',
     'wxml/classwx_item_container_immutable.xml',
     'wxml/classwx_j_p_e_g_handler.xml',
-    # 'wxml/classwx_joystick.xml', # Our CI environment is't built with
+    # 'wxml/classwx_joystick.xml',          # Our CI environment is't built with
     'wxml/classwx_joystick_event.xml',
     'wxml/classwx_key_event.xml',
     'wxml/classwx_layout_algorithm.xml',
