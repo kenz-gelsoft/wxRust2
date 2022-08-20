@@ -1,5 +1,62 @@
 use super::*;
 
+// wxMDIClientWindow
+pub trait MDIClientWindowMethods: WindowMethods {
+    fn create_client(&self, parent: *mut c_void, style: c_long) -> bool {
+        unsafe { ffi::wxMDIClientWindow_CreateClient(self.as_ptr(), parent, style) }
+    }
+}
+
+// wxMask
+pub trait MaskMethods: ObjectMethods {
+    // DTOR: fn ~wxMask()
+    fn create_int<B: BitmapMethods>(&self, bitmap: &B, index: c_int) -> bool {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            ffi::wxMask_Create(self.as_ptr(), bitmap, index)
+        }
+    }
+    fn create<B: BitmapMethods>(&self, bitmap: &B) -> bool {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            ffi::wxMask_Create1(self.as_ptr(), bitmap)
+        }
+    }
+    fn create_colour<B: BitmapMethods, C: ColourMethods>(&self, bitmap: &B, colour: &C) -> bool {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            let colour = colour.as_ptr();
+            ffi::wxMask_Create2(self.as_ptr(), bitmap, colour)
+        }
+    }
+    fn get_bitmap(&self) -> Bitmap {
+        unsafe { Bitmap::from_ptr(ffi::wxMask_GetBitmap(self.as_ptr())) }
+    }
+}
+
+// wxMaximizeEvent
+pub trait MaximizeEventMethods: EventMethods {}
+
+// wxMemoryDC
+pub trait MemoryDCMethods: DCMethods {
+    fn select_object<B: BitmapMethods>(&self, bitmap: &B) {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            ffi::wxMemoryDC_SelectObject(self.as_ptr(), bitmap)
+        }
+    }
+    fn select_object_as_source<B: BitmapMethods>(&self, bitmap: &B) {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            ffi::wxMemoryDC_SelectObjectAsSource(self.as_ptr(), bitmap)
+        }
+    }
+    fn get_selected_bitmap(&self) -> BitmapIsOwned<false> {
+        unsafe { BitmapIsOwned::from_ptr(ffi::wxMemoryDC_GetSelectedBitmap(self.as_ptr())) }
+    }
+    // BLOCKED: fn GetSelectedBitmap1()
+}
+
 // wxMenu
 pub trait MenuMethods: EvtHandlerMethods {
     // DTOR: fn ~wxMenu()
@@ -653,6 +710,19 @@ pub trait MenuBarMethods: WindowMethods {
     }
 }
 
+// wxMenuEvent
+pub trait MenuEventMethods: EventMethods {
+    fn get_menu(&self) -> WeakRef<Menu> {
+        unsafe { WeakRef::<Menu>::from(ffi::wxMenuEvent_GetMenu(self.as_ptr())) }
+    }
+    fn get_menu_id(&self) -> c_int {
+        unsafe { ffi::wxMenuEvent_GetMenuId(self.as_ptr()) }
+    }
+    fn is_popup(&self) -> bool {
+        unsafe { ffi::wxMenuEvent_IsPopup(self.as_ptr()) }
+    }
+}
+
 // wxMenuItem
 pub trait MenuItemMethods: ObjectMethods {
     // BLOCKED: fn GetBackgroundColour()
@@ -836,6 +906,271 @@ pub trait MenuItemMethods: ObjectMethods {
             let text = WxString::from(text);
             let text = text.as_ptr();
             WxString::from_ptr(ffi::wxMenuItem_GetLabelText(text)).into()
+        }
+    }
+}
+
+// wxMessageDialog
+pub trait MessageDialogMethods: DialogMethods {
+    fn set_extended_message(&self, extended_message: &str) {
+        unsafe {
+            let extended_message = WxString::from(extended_message);
+            let extended_message = extended_message.as_ptr();
+            ffi::wxMessageDialog_SetExtendedMessage(self.as_ptr(), extended_message)
+        }
+    }
+    fn set_help_label(&self, help: *const c_void) -> bool {
+        unsafe { ffi::wxMessageDialog_SetHelpLabel(self.as_ptr(), help) }
+    }
+    fn set_message(&self, message: &str) {
+        unsafe {
+            let message = WxString::from(message);
+            let message = message.as_ptr();
+            ffi::wxMessageDialog_SetMessage(self.as_ptr(), message)
+        }
+    }
+    fn set_ok_cancel_labels(&self, ok: *const c_void, cancel: *const c_void) -> bool {
+        unsafe { ffi::wxMessageDialog_SetOKCancelLabels(self.as_ptr(), ok, cancel) }
+    }
+    fn set_ok_label(&self, ok: *const c_void) -> bool {
+        unsafe { ffi::wxMessageDialog_SetOKLabel(self.as_ptr(), ok) }
+    }
+    fn set_yes_no_cancel_labels(
+        &self,
+        yes: *const c_void,
+        no: *const c_void,
+        cancel: *const c_void,
+    ) -> bool {
+        unsafe { ffi::wxMessageDialog_SetYesNoCancelLabels(self.as_ptr(), yes, no, cancel) }
+    }
+    fn set_yes_no_labels(&self, yes: *const c_void, no: *const c_void) -> bool {
+        unsafe { ffi::wxMessageDialog_SetYesNoLabels(self.as_ptr(), yes, no) }
+    }
+    fn get_caption(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxMessageDialog_GetCaption(self.as_ptr())).into() }
+    }
+    fn get_message(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxMessageDialog_GetMessage(self.as_ptr())).into() }
+    }
+    fn get_extended_message(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxMessageDialog_GetExtendedMessage(self.as_ptr())).into() }
+    }
+    fn get_message_dialog_style(&self) -> c_long {
+        unsafe { ffi::wxMessageDialog_GetMessageDialogStyle(self.as_ptr()) }
+    }
+    fn has_custom_labels(&self) -> bool {
+        unsafe { ffi::wxMessageDialog_HasCustomLabels(self.as_ptr()) }
+    }
+    fn get_yes_label(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxMessageDialog_GetYesLabel(self.as_ptr())).into() }
+    }
+    fn get_no_label(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxMessageDialog_GetNoLabel(self.as_ptr())).into() }
+    }
+    fn get_ok_label(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxMessageDialog_GetOKLabel(self.as_ptr())).into() }
+    }
+    fn get_cancel_label(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxMessageDialog_GetCancelLabel(self.as_ptr())).into() }
+    }
+    fn get_help_label(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxMessageDialog_GetHelpLabel(self.as_ptr())).into() }
+    }
+    fn get_effective_icon(&self) -> c_long {
+        unsafe { ffi::wxMessageDialog_GetEffectiveIcon(self.as_ptr()) }
+    }
+}
+
+// wxMessageOutputMessageBox
+pub trait MessageOutputMessageBoxMethods: MessageOutputMethods {}
+
+// wxMetafile
+pub trait MetafileMethods: ObjectMethods {
+    // DTOR: fn ~wxMetafile()
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxMetafile_IsOk(self.as_ptr()) }
+    }
+    fn play<D: DCMethods>(&self, dc: Option<&D>) -> bool {
+        unsafe {
+            let dc = match dc {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxMetafile_Play(self.as_ptr(), dc)
+        }
+    }
+    fn set_clipboard(&self, width: c_int, height: c_int) -> bool {
+        unsafe { ffi::wxMetafile_SetClipboard(self.as_ptr(), width, height) }
+    }
+}
+
+// wxMetafileDC
+pub trait MetafileDCMethods: DCMethods {
+    // DTOR: fn ~wxMetafileDC()
+    fn close(&self) -> Option<MetafileIsOwned<false>> {
+        unsafe { Metafile::option_from(ffi::wxMetafileDC_Close(self.as_ptr())) }
+    }
+}
+
+// wxMiniFrame
+pub trait MiniFrameMethods: FrameMethods {
+    // DTOR: fn ~wxMiniFrame()
+}
+
+// wxMirrorDC
+pub trait MirrorDCMethods: DCMethods {}
+
+// wxMouseCaptureChangedEvent
+pub trait MouseCaptureChangedEventMethods: EventMethods {
+    fn get_captured_window(&self) -> WeakRef<Window> {
+        unsafe {
+            WeakRef::<Window>::from(ffi::wxMouseCaptureChangedEvent_GetCapturedWindow(
+                self.as_ptr(),
+            ))
+        }
+    }
+}
+
+// wxMouseCaptureLostEvent
+pub trait MouseCaptureLostEventMethods: EventMethods {}
+
+// wxMouseEvent
+pub trait MouseEventMethods: EventMethods {
+    fn aux1_d_click(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_Aux1DClick(self.as_ptr()) }
+    }
+    fn aux1_down(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_Aux1Down(self.as_ptr()) }
+    }
+    fn aux1_up(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_Aux1Up(self.as_ptr()) }
+    }
+    fn aux2_d_click(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_Aux2DClick(self.as_ptr()) }
+    }
+    fn aux2_down(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_Aux2Down(self.as_ptr()) }
+    }
+    fn aux2_up(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_Aux2Up(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn Button()
+    // NOT_SUPPORTED: fn ButtonDClick()
+    // NOT_SUPPORTED: fn ButtonDown()
+    // NOT_SUPPORTED: fn ButtonUp()
+    fn dragging(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_Dragging(self.as_ptr()) }
+    }
+    fn entering(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_Entering(self.as_ptr()) }
+    }
+    fn get_button(&self) -> c_int {
+        unsafe { ffi::wxMouseEvent_GetButton(self.as_ptr()) }
+    }
+    fn get_click_count(&self) -> c_int {
+        unsafe { ffi::wxMouseEvent_GetClickCount(self.as_ptr()) }
+    }
+    fn get_lines_per_action(&self) -> c_int {
+        unsafe { ffi::wxMouseEvent_GetLinesPerAction(self.as_ptr()) }
+    }
+    fn get_columns_per_action(&self) -> c_int {
+        unsafe { ffi::wxMouseEvent_GetColumnsPerAction(self.as_ptr()) }
+    }
+    fn get_logical_position<D: DCMethods>(&self, dc: &D) -> Point {
+        unsafe {
+            let dc = dc.as_ptr();
+            Point::from_ptr(ffi::wxMouseEvent_GetLogicalPosition(self.as_ptr(), dc))
+        }
+    }
+    // NOT_SUPPORTED: fn GetMagnification()
+    fn get_wheel_delta(&self) -> c_int {
+        unsafe { ffi::wxMouseEvent_GetWheelDelta(self.as_ptr()) }
+    }
+    fn is_wheel_inverted(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_IsWheelInverted(self.as_ptr()) }
+    }
+    fn get_wheel_rotation(&self) -> c_int {
+        unsafe { ffi::wxMouseEvent_GetWheelRotation(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn GetWheelAxis()
+    fn is_button(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_IsButton(self.as_ptr()) }
+    }
+    fn is_page_scroll(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_IsPageScroll(self.as_ptr()) }
+    }
+    fn leaving(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_Leaving(self.as_ptr()) }
+    }
+    fn left_d_click(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_LeftDClick(self.as_ptr()) }
+    }
+    fn left_down(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_LeftDown(self.as_ptr()) }
+    }
+    fn left_up(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_LeftUp(self.as_ptr()) }
+    }
+    fn magnify(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_Magnify(self.as_ptr()) }
+    }
+    fn meta_down(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_MetaDown(self.as_ptr()) }
+    }
+    fn middle_d_click(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_MiddleDClick(self.as_ptr()) }
+    }
+    fn middle_down(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_MiddleDown(self.as_ptr()) }
+    }
+    fn middle_up(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_MiddleUp(self.as_ptr()) }
+    }
+    fn moving(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_Moving(self.as_ptr()) }
+    }
+    fn right_d_click(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_RightDClick(self.as_ptr()) }
+    }
+    fn right_down(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_RightDown(self.as_ptr()) }
+    }
+    fn right_up(&self) -> bool {
+        unsafe { ffi::wxMouseEvent_RightUp(self.as_ptr()) }
+    }
+}
+
+// wxMouseEventsManager
+pub trait MouseEventsManagerMethods: EvtHandlerMethods {
+    fn create<W: WindowMethods>(&self, win: Option<&W>) -> bool {
+        unsafe {
+            let win = match win {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxMouseEventsManager_Create(self.as_ptr(), win)
+        }
+    }
+}
+
+// wxMoveEvent
+pub trait MoveEventMethods: EventMethods {
+    fn get_position(&self) -> Point {
+        unsafe { Point::from_ptr(ffi::wxMoveEvent_GetPosition(self.as_ptr())) }
+    }
+    fn get_rect(&self) -> Rect {
+        unsafe { Rect::from_ptr(ffi::wxMoveEvent_GetRect(self.as_ptr())) }
+    }
+    fn set_rect<R: RectMethods>(&self, rect: &R) {
+        unsafe {
+            let rect = rect.as_ptr();
+            ffi::wxMoveEvent_SetRect(self.as_ptr(), rect)
+        }
+    }
+    fn set_position<P: PointMethods>(&self, pos: &P) {
+        unsafe {
+            let pos = pos.as_ptr();
+            ffi::wxMoveEvent_SetPosition(self.as_ptr(), pos)
         }
     }
 }

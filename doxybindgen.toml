@@ -1,25 +1,4 @@
 core_files = [
-    'wxml/classwx_m_d_i_child_frame.xml',
-    'wxml/classwx_m_d_i_client_window.xml',
-    'wxml/classwx_m_d_i_parent_frame.xml',
-    'wxml/classwx_mask.xml',
-    'wxml/classwx_maximize_event.xml',
-    'wxml/classwx_memory_d_c.xml',
-    'wxml/classwx_menu.xml',
-    'wxml/classwx_menu_bar.xml',
-    'wxml/classwx_menu_event.xml',
-    'wxml/classwx_menu_item.xml',
-    'wxml/classwx_message_dialog.xml',
-    'wxml/classwx_message_output_message_box.xml',
-    'wxml/classwx_metafile.xml',
-    'wxml/classwx_metafile_d_c.xml',
-    'wxml/classwx_mini_frame.xml',
-    'wxml/classwx_mirror_d_c.xml',
-    'wxml/classwx_mouse_capture_changed_event.xml',
-    'wxml/classwx_mouse_capture_lost_event.xml',
-    'wxml/classwx_mouse_event.xml',
-    'wxml/classwx_mouse_events_manager.xml',
-    'wxml/classwx_move_event.xml',
     'wxml/classwx_native_font_info.xml',
     'wxml/classwx_native_window.xml',
     'wxml/classwx_navigation_enabled.xml',
@@ -465,10 +444,27 @@ wxml_files = [
     # 'wxml/classwx_log_window.xml',         # Our CI environment is't built with
     # 'wxml/classwx_long_press_event.xml',   # requires 3.1
     # 'wxml/classwx_m_d_i_child_frame.xml',  # Our CI environment is't built with
+    'wxml/classwx_m_d_i_client_window.xml', 
     # 'wxml/classwx_m_d_i_parent_frame.xml', # Our CI environment is't built with
+    'wxml/classwx_mask.xml',
+    'wxml/classwx_maximize_event.xml',
+    'wxml/classwx_memory_d_c.xml',
     'wxml/classwx_menu.xml',
     'wxml/classwx_menu_bar.xml',
+    'wxml/classwx_menu_event.xml',
     'wxml/classwx_menu_item.xml',
+    'wxml/classwx_message_dialog.xml',
+    'wxml/classwx_message_output.xml',
+    'wxml/classwx_message_output_message_box.xml',
+    'wxml/classwx_metafile.xml',
+    'wxml/classwx_metafile_d_c.xml',
+    'wxml/classwx_mini_frame.xml',
+    'wxml/classwx_mirror_d_c.xml',
+    'wxml/classwx_mouse_capture_changed_event.xml',
+    'wxml/classwx_mouse_capture_lost_event.xml',
+    'wxml/classwx_mouse_event.xml',
+    'wxml/classwx_mouse_events_manager.xml',
+    'wxml/classwx_move_event.xml',
     'wxml/classwx_non_owned_window.xml',
     'wxml/classwx_notebook.xml',
     'wxml/classwx_notify_event.xml',
@@ -1420,6 +1416,11 @@ wx31 = [
     'SetSmallImages',
     'ShowSortIndicator',
 ]
+[types.wxMemoryDC]
+blocklist = [
+    # const vs non-const
+    'GetSelectedBitmap1',
+]
 [types.wxMenu]
 blocklist = [
     # returns refs
@@ -1469,6 +1470,12 @@ wx31 = [
 ]
 wx32 = [
     'GetBitmapBundle',
+]
+[types.wxMouseEventsManager]
+blocklist = [
+    # abstract
+    'wxMouseEventsManager',
+    'wxMouseEventsManager1',
 ]
 [types.wxNonOwnedWindow]
 library = 'core'

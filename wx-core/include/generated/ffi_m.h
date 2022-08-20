@@ -1,9 +1,48 @@
 #pragma once
 
+#include <wx/bitmap.h>
+#include <wx/dcmemory.h>
+#include <wx/dcmirror.h>
+#include <wx/event.h>
+#include <wx/mdi.h>
 #include <wx/menu.h>
 #include <wx/menuitem.h>
+#include <wx/metafile.h>
+#include <wx/minifram.h>
+#include <wx/mousemanager.h>
+#include <wx/msgdlg.h>
+#include <wx/msgout.h>
 
 extern "C" {
+
+// CLASS: wxMDIClientWindow
+wxClassInfo *wxMDIClientWindow_CLASSINFO();
+wxMDIClientWindow *wxMDIClientWindow_new();
+bool wxMDIClientWindow_CreateClient(wxMDIClientWindow * self, wxMDIParentFrame * parent, long style);
+
+// CLASS: wxMask
+wxClassInfo *wxMask_CLASSINFO();
+wxMask *wxMask_new();
+wxMask *wxMask_new1(const wxBitmap * bitmap, int index);
+wxMask *wxMask_new2(const wxBitmap * bitmap);
+wxMask *wxMask_new3(const wxBitmap * bitmap, const wxColour * colour);
+bool wxMask_Create(wxMask * self, const wxBitmap * bitmap, int index);
+bool wxMask_Create1(wxMask * self, const wxBitmap * bitmap);
+bool wxMask_Create2(wxMask * self, const wxBitmap * bitmap, const wxColour * colour);
+wxBitmap *wxMask_GetBitmap(const wxMask * self);
+
+// CLASS: wxMaximizeEvent
+wxClassInfo *wxMaximizeEvent_CLASSINFO();
+wxMaximizeEvent *wxMaximizeEvent_new(int id);
+
+// CLASS: wxMemoryDC
+wxClassInfo *wxMemoryDC_CLASSINFO();
+wxMemoryDC *wxMemoryDC_new();
+wxMemoryDC *wxMemoryDC_new1(wxDC * dc);
+wxMemoryDC *wxMemoryDC_new2(wxBitmap * bitmap);
+void wxMemoryDC_SelectObject(wxMemoryDC * self, wxBitmap * bitmap);
+void wxMemoryDC_SelectObjectAsSource(wxMemoryDC * self, const wxBitmap * bitmap);
+wxBitmap *wxMemoryDC_GetSelectedBitmap(const wxMemoryDC * self);
 
 // CLASS: wxMenu
 wxClassInfo *wxMenu_CLASSINFO();
@@ -100,6 +139,12 @@ void wxMenuBar_MacSetCommonMenuBar(wxMenuBar * menubar);
 wxMenuBar * wxMenuBar_MacGetCommonMenuBar();
 #endif
 
+// CLASS: wxMenuEvent
+wxClassInfo *wxMenuEvent_CLASSINFO();
+wxMenu * wxMenuEvent_GetMenu(const wxMenuEvent * self);
+int wxMenuEvent_GetMenuId(const wxMenuEvent * self);
+bool wxMenuEvent_IsPopup(const wxMenuEvent * self);
+
 // CLASS: wxMenuItem
 wxClassInfo *wxMenuItem_CLASSINFO();
 wxBitmap *wxMenuItem_GetBitmap(const wxMenuItem * self);
@@ -159,6 +204,109 @@ wxMenuItem *wxMenuItem_new(wxMenu * parent_menu, int id, const wxString * text, 
 void wxMenuItem_Check(wxMenuItem * self, bool check);
 void wxMenuItem_Enable(wxMenuItem * self, bool enable);
 wxString *wxMenuItem_GetLabelText(const wxString * text);
+
+// CLASS: wxMessageDialog
+wxClassInfo *wxMessageDialog_CLASSINFO();
+wxMessageDialog *wxMessageDialog_new(wxWindow * parent, const wxString * message, const wxString * caption, long style, const wxPoint * pos);
+void wxMessageDialog_SetExtendedMessage(wxMessageDialog * self, const wxString * extended_message);
+bool wxMessageDialog_SetHelpLabel(wxMessageDialog * self, const ButtonLabel * help);
+void wxMessageDialog_SetMessage(wxMessageDialog * self, const wxString * message);
+bool wxMessageDialog_SetOKCancelLabels(wxMessageDialog * self, const ButtonLabel * ok, const ButtonLabel * cancel);
+bool wxMessageDialog_SetOKLabel(wxMessageDialog * self, const ButtonLabel * ok);
+bool wxMessageDialog_SetYesNoCancelLabels(wxMessageDialog * self, const ButtonLabel * yes, const ButtonLabel * no, const ButtonLabel * cancel);
+bool wxMessageDialog_SetYesNoLabels(wxMessageDialog * self, const ButtonLabel * yes, const ButtonLabel * no);
+wxString *wxMessageDialog_GetCaption(const wxMessageDialog * self);
+wxString *wxMessageDialog_GetMessage(const wxMessageDialog * self);
+wxString *wxMessageDialog_GetExtendedMessage(const wxMessageDialog * self);
+long wxMessageDialog_GetMessageDialogStyle(const wxMessageDialog * self);
+bool wxMessageDialog_HasCustomLabels(const wxMessageDialog * self);
+wxString *wxMessageDialog_GetYesLabel(const wxMessageDialog * self);
+wxString *wxMessageDialog_GetNoLabel(const wxMessageDialog * self);
+wxString *wxMessageDialog_GetOKLabel(const wxMessageDialog * self);
+wxString *wxMessageDialog_GetCancelLabel(const wxMessageDialog * self);
+wxString *wxMessageDialog_GetHelpLabel(const wxMessageDialog * self);
+long wxMessageDialog_GetEffectiveIcon(const wxMessageDialog * self);
+
+// CLASS: wxMessageOutputMessageBox
+void wxMessageOutputMessageBox_delete(wxMessageOutputMessageBox *self);
+wxMessageOutputMessageBox *wxMessageOutputMessageBox_new();
+
+// CLASS: wxMetafile
+wxClassInfo *wxMetafile_CLASSINFO();
+wxMetafile *wxMetafile_new(const wxString * filename);
+bool wxMetafile_IsOk(wxMetafile * self);
+bool wxMetafile_Play(wxMetafile * self, wxDC * dc);
+bool wxMetafile_SetClipboard(wxMetafile * self, int width, int height);
+
+// CLASS: wxMetafileDC
+wxClassInfo *wxMetafileDC_CLASSINFO();
+wxMetafileDC *wxMetafileDC_new(const wxString * filename);
+wxMetafile * wxMetafileDC_Close(wxMetafileDC * self);
+
+// CLASS: wxMiniFrame
+wxClassInfo *wxMiniFrame_CLASSINFO();
+wxMiniFrame *wxMiniFrame_new();
+wxMiniFrame *wxMiniFrame_new1(wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+bool wxMiniFrame_Create(wxMiniFrame * self, wxWindow * parent, wxWindowID id, const wxString * title, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+
+// CLASS: wxMirrorDC
+wxClassInfo *wxMirrorDC_CLASSINFO();
+wxMirrorDC *wxMirrorDC_new(wxDC * dc, bool mirror);
+
+// CLASS: wxMouseCaptureChangedEvent
+wxClassInfo *wxMouseCaptureChangedEvent_CLASSINFO();
+wxMouseCaptureChangedEvent *wxMouseCaptureChangedEvent_new(wxWindowID window_id, wxWindow * gained_capture);
+wxWindow * wxMouseCaptureChangedEvent_GetCapturedWindow(const wxMouseCaptureChangedEvent * self);
+
+// CLASS: wxMouseCaptureLostEvent
+wxClassInfo *wxMouseCaptureLostEvent_CLASSINFO();
+wxMouseCaptureLostEvent *wxMouseCaptureLostEvent_new(wxWindowID window_id);
+
+// CLASS: wxMouseEvent
+wxClassInfo *wxMouseEvent_CLASSINFO();
+bool wxMouseEvent_Aux1DClick(const wxMouseEvent * self);
+bool wxMouseEvent_Aux1Down(const wxMouseEvent * self);
+bool wxMouseEvent_Aux1Up(const wxMouseEvent * self);
+bool wxMouseEvent_Aux2DClick(const wxMouseEvent * self);
+bool wxMouseEvent_Aux2Down(const wxMouseEvent * self);
+bool wxMouseEvent_Aux2Up(const wxMouseEvent * self);
+bool wxMouseEvent_Dragging(const wxMouseEvent * self);
+bool wxMouseEvent_Entering(const wxMouseEvent * self);
+int wxMouseEvent_GetButton(const wxMouseEvent * self);
+int wxMouseEvent_GetClickCount(const wxMouseEvent * self);
+int wxMouseEvent_GetLinesPerAction(const wxMouseEvent * self);
+int wxMouseEvent_GetColumnsPerAction(const wxMouseEvent * self);
+wxPoint *wxMouseEvent_GetLogicalPosition(const wxMouseEvent * self, const wxDC * dc);
+int wxMouseEvent_GetWheelDelta(const wxMouseEvent * self);
+bool wxMouseEvent_IsWheelInverted(const wxMouseEvent * self);
+int wxMouseEvent_GetWheelRotation(const wxMouseEvent * self);
+bool wxMouseEvent_IsButton(const wxMouseEvent * self);
+bool wxMouseEvent_IsPageScroll(const wxMouseEvent * self);
+bool wxMouseEvent_Leaving(const wxMouseEvent * self);
+bool wxMouseEvent_LeftDClick(const wxMouseEvent * self);
+bool wxMouseEvent_LeftDown(const wxMouseEvent * self);
+bool wxMouseEvent_LeftUp(const wxMouseEvent * self);
+bool wxMouseEvent_Magnify(const wxMouseEvent * self);
+bool wxMouseEvent_MetaDown(const wxMouseEvent * self);
+bool wxMouseEvent_MiddleDClick(const wxMouseEvent * self);
+bool wxMouseEvent_MiddleDown(const wxMouseEvent * self);
+bool wxMouseEvent_MiddleUp(const wxMouseEvent * self);
+bool wxMouseEvent_Moving(const wxMouseEvent * self);
+bool wxMouseEvent_RightDClick(const wxMouseEvent * self);
+bool wxMouseEvent_RightDown(const wxMouseEvent * self);
+bool wxMouseEvent_RightUp(const wxMouseEvent * self);
+
+// CLASS: wxMouseEventsManager
+wxClassInfo *wxMouseEventsManager_CLASSINFO();
+bool wxMouseEventsManager_Create(wxMouseEventsManager * self, wxWindow * win);
+
+// CLASS: wxMoveEvent
+wxClassInfo *wxMoveEvent_CLASSINFO();
+wxMoveEvent *wxMoveEvent_new(const wxPoint * pt, int id);
+wxPoint *wxMoveEvent_GetPosition(const wxMoveEvent * self);
+wxRect *wxMoveEvent_GetRect(const wxMoveEvent * self);
+void wxMoveEvent_SetRect(wxMoveEvent * self, const wxRect * rect);
+void wxMoveEvent_SetPosition(wxMoveEvent * self, const wxPoint * pos);
 
 } // extern "C"
 

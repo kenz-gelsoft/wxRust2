@@ -123,8 +123,8 @@ pub trait BitmapMethods: GDIObjectMethods {
     fn get_logical_width(&self) -> c_double {
         unsafe { ffi::wxBitmap_GetLogicalWidth(self.as_ptr()) }
     }
-    fn get_mask(&self) -> *mut c_void {
-        unsafe { ffi::wxBitmap_GetMask(self.as_ptr()) }
+    fn get_mask(&self) -> Option<MaskIsOwned<false>> {
+        unsafe { Mask::option_from(ffi::wxBitmap_GetMask(self.as_ptr())) }
     }
     fn get_palette(&self) -> *mut c_void {
         unsafe { ffi::wxBitmap_GetPalette(self.as_ptr()) }
@@ -171,8 +171,14 @@ pub trait BitmapMethods: GDIObjectMethods {
     fn set_scale_factor(&self, scale: c_double) {
         unsafe { ffi::wxBitmap_SetScaleFactor(self.as_ptr(), scale) }
     }
-    fn set_mask(&self, mask: *mut c_void) {
-        unsafe { ffi::wxBitmap_SetMask(self.as_ptr(), mask) }
+    fn set_mask<M: MaskMethods>(&self, mask: Option<&M>) {
+        unsafe {
+            let mask = match mask {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxBitmap_SetMask(self.as_ptr(), mask)
+        }
     }
     fn set_palette(&self, palette: *const c_void) {
         unsafe { ffi::wxBitmap_SetPalette(self.as_ptr(), palette) }
