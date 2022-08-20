@@ -1,19 +1,4 @@
 core_files = [
-    'wxml/classwx_i_f_f_handler.xml',
-    'wxml/classwx_icon.xml',
-    'wxml/classwx_icon_bundle.xml',
-    'wxml/classwx_iconize_event.xml',
-    'wxml/classwx_id_manager.xml',
-    'wxml/classwx_image.xml',
-    'wxml/classwx_image_data_object.xml',
-    'wxml/classwx_image_handler.xml',
-    'wxml/classwx_image_list.xml',
-    'wxml/classwx_info_bar.xml',
-    'wxml/classwx_init_dialog_event.xml',
-    'wxml/classwx_integer_validator.xml',
-    'wxml/classwx_item_attr.xml',
-    'wxml/classwx_item_container.xml',
-    'wxml/classwx_item_container_immutable.xml',
     'wxml/classwx_j_p_e_g_handler.xml',
     'wxml/classwx_joystick.xml',
     'wxml/classwx_joystick_event.xml',
@@ -461,8 +446,19 @@ wxml_files = [
     # 'wxml/classwx_help_provider.xml', # Our CI environment is't built with
     'wxml/classwx_hyperlink_ctrl.xml',
     'wxml/classwx_hyperlink_event.xml',
+    # 'wxml/classwx_i_f_f_handler.xml', # Not supported MSW(VC)
     'wxml/classwx_icon.xml',
+    'wxml/classwx_icon_bundle.xml',
+    'wxml/classwx_iconize_event.xml',
+    'wxml/classwx_id_manager.xml',
+    'wxml/classwx_image.xml',
+    # 'wxml/classwx_image_data_object.xml', # requires 3.1
     'wxml/classwx_image_handler.xml',
+    'wxml/classwx_image_list.xml',
+    'wxml/classwx_info_bar.xml',
+    'wxml/classwx_init_dialog_event.xml',
+    # 'wxml/classwx_integer_validator.xml', # base class depends template, need special treatment
+    # 'wxml/classwx_item_attr.xml',         # requires 3.1
     'wxml/classwx_item_container.xml',
     'wxml/classwx_item_container_immutable.xml',
     'wxml/classwx_list_box.xml',
@@ -1317,10 +1313,52 @@ wx317 = [
     'SetHeight',
     'SetWidth',
 ]
+[types.wxIconBundle]
+blocklist = [
+    'operator=',
+]
+[types.wxIconizeEvent]
+blocklist = [
+    # deprecated
+    'Iconized',
+]
+[types.wxImage]
+blocklist = [
+    'operator=',
+    # binding type by value is not supported
+    'GetPalette',
+    'GetHandlers',
+]
+wx31 = [
+    'ChangeBrightness',
+    'ChangeHSV',
+    'ChangeLightness',
+    'ChangeSaturation',
+    'GetDefaultLoadFlags',
+    'GetLoadFlags',
+    'SetDefaultLoadFlags',
+    'SetLoadFlags',
+]
 [types.wxImageHandler]
 blocklist = [
     # abstract
     'wxImageHandler',
+]
+[types.wxImageList]
+wx31 = [
+    'Destroy',
+    'GetSize1',
+]
+[types.wxInfoBar]
+wx31 = [
+    'GetButtonCount',
+    'GetButtonId',
+    'HasButtonId',
+]
+[types.wxItemAttr]
+blocklist = [
+    'operator==',
+    'operator!=',
 ]
 [types.wxItemContainer]
 blocklist = [

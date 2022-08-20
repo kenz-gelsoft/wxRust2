@@ -52,7 +52,9 @@ pub trait BannerWindowMethods: WindowMethods {
 pub trait BitmapMethods: GDIObjectMethods {
     // DTOR: fn ~wxBitmap()
     // NOT_SUPPORTED: fn ConvertToDisabled()
-    // NOT_SUPPORTED: fn ConvertToImage()
+    fn convert_to_image(&self) -> Image {
+        unsafe { Image::from_ptr(ffi::wxBitmap_ConvertToImage(self.as_ptr())) }
+    }
     fn copy_from_icon<I: IconMethods>(&self, icon: &I) -> bool {
         unsafe {
             let icon = icon.as_ptr();
@@ -329,11 +331,17 @@ pub trait BitmapBundleMethods: WxRustMethods {
             BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromBitmap(bitmap))
         }
     }
-    fn from_icon_bundle(icon_bundle: *const c_void) -> BitmapBundle {
-        unsafe { BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromIconBundle(icon_bundle)) }
+    fn from_icon_bundle<I: IconBundleMethods>(icon_bundle: &I) -> BitmapBundle {
+        unsafe {
+            let icon_bundle = icon_bundle.as_ptr();
+            BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromIconBundle(icon_bundle))
+        }
     }
-    fn from_image(image: *const c_void) -> BitmapBundle {
-        unsafe { BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromImage(image)) }
+    fn from_image<I: ImageMethods>(image: &I) -> BitmapBundle {
+        unsafe {
+            let image = image.as_ptr();
+            BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromImage(image))
+        }
     }
     fn from_impl(impl_: *mut c_void) -> BitmapBundle {
         unsafe { BitmapBundle::from_ptr(ffi::wxBitmapBundle_FromImpl(impl_)) }

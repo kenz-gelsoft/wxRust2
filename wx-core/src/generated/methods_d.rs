@@ -2137,8 +2137,8 @@ pub trait DataViewTreeCtrlMethods: DataViewCtrlMethods {
             ffi::wxDataViewTreeCtrl_GetChildCount(self.as_ptr(), parent)
         }
     }
-    fn get_image_list(&self) -> *mut c_void {
-        unsafe { ffi::wxDataViewTreeCtrl_GetImageList(self.as_ptr()) }
+    fn get_image_list(&self) -> Option<ImageListIsOwned<false>> {
+        unsafe { ImageList::option_from(ffi::wxDataViewTreeCtrl_GetImageList(self.as_ptr())) }
     }
     fn get_item_data<D: DataViewItemMethods>(&self, item: &D) -> *mut c_void {
         unsafe {
@@ -2278,8 +2278,14 @@ pub trait DataViewTreeCtrlMethods: DataViewCtrlMethods {
             ))
         }
     }
-    fn set_image_list(&self, imagelist: *mut c_void) {
-        unsafe { ffi::wxDataViewTreeCtrl_SetImageList(self.as_ptr(), imagelist) }
+    fn set_image_list<I: ImageListMethods>(&self, imagelist: Option<&I>) {
+        unsafe {
+            let imagelist = match imagelist {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxDataViewTreeCtrl_SetImageList(self.as_ptr(), imagelist)
+        }
     }
     fn set_item_data<D: DataViewItemMethods>(&self, item: &D, data: *mut c_void) {
         unsafe {

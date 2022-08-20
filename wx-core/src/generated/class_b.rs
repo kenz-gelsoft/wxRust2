@@ -104,11 +104,18 @@ impl<const OWNED: bool> BitmapIsOwned<OWNED> {
         unsafe { BitmapIsOwned(ffi::wxBitmap_new6(bits)) }
     }
     // NOT_SUPPORTED: fn wxBitmap7()
-    pub fn new_with_image_int(img: *const c_void, depth: c_int) -> BitmapIsOwned<OWNED> {
-        unsafe { BitmapIsOwned(ffi::wxBitmap_new8(img, depth)) }
-    }
-    pub fn new_with_image_dc<D: DCMethods>(img: *const c_void, dc: &D) -> BitmapIsOwned<OWNED> {
+    pub fn new_with_image_int<I: ImageMethods>(img: &I, depth: c_int) -> BitmapIsOwned<OWNED> {
         unsafe {
+            let img = img.as_ptr();
+            BitmapIsOwned(ffi::wxBitmap_new8(img, depth))
+        }
+    }
+    pub fn new_with_image_dc<I: ImageMethods, D: DCMethods>(
+        img: &I,
+        dc: &D,
+    ) -> BitmapIsOwned<OWNED> {
+        unsafe {
+            let img = img.as_ptr();
             let dc = dc.as_ptr();
             BitmapIsOwned(ffi::wxBitmap_new9(img, dc))
         }
@@ -167,8 +174,11 @@ impl<const OWNED: bool> BitmapBundleIsOwned<OWNED> {
             BitmapBundleIsOwned(ffi::wxBitmapBundle_new2(icon))
         }
     }
-    pub fn new_with_image(image: *const c_void) -> BitmapBundleIsOwned<OWNED> {
-        unsafe { BitmapBundleIsOwned(ffi::wxBitmapBundle_new3(image)) }
+    pub fn new_with_image<I: ImageMethods>(image: &I) -> BitmapBundleIsOwned<OWNED> {
+        unsafe {
+            let image = image.as_ptr();
+            BitmapBundleIsOwned(ffi::wxBitmapBundle_new3(image))
+        }
     }
     pub fn new_with_char(xpm: *const c_void) -> BitmapBundleIsOwned<OWNED> {
         unsafe { BitmapBundleIsOwned(ffi::wxBitmapBundle_new4(xpm)) }

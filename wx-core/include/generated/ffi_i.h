@@ -1,8 +1,13 @@
 #pragma once
 
 #include <wx/ctrlsub.h>
+#include <wx/event.h>
 #include <wx/icon.h>
+#include <wx/iconbndl.h>
 #include <wx/image.h>
+#include <wx/imaglist.h>
+#include <wx/infobar.h>
+#include <wx/windowid.h>
 
 extern "C" {
 
@@ -30,6 +35,117 @@ void wxIcon_SetHeight(wxIcon * self, int height);
 void wxIcon_SetWidth(wxIcon * self, int width);
 #endif
 
+// CLASS: wxIconBundle
+wxClassInfo *wxIconBundle_CLASSINFO();
+wxIconBundle *wxIconBundle_new();
+wxIconBundle *wxIconBundle_new3(const wxIcon * icon);
+wxIconBundle *wxIconBundle_new5(const wxIconBundle * ic);
+void wxIconBundle_AddIcon3(wxIconBundle * self, const wxIcon * icon);
+wxIcon *wxIconBundle_GetIcon(const wxIconBundle * self, const wxSize * size, int flags);
+wxIcon *wxIconBundle_GetIcon1(const wxIconBundle * self, wxCoord size, int flags);
+wxIcon *wxIconBundle_GetIconOfExactSize(const wxIconBundle * self, const wxSize * size);
+size_t wxIconBundle_GetIconCount(const wxIconBundle * self);
+wxIcon *wxIconBundle_GetIconByIndex(const wxIconBundle * self, size_t n);
+bool wxIconBundle_IsEmpty(const wxIconBundle * self);
+
+// CLASS: wxIconizeEvent
+wxClassInfo *wxIconizeEvent_CLASSINFO();
+wxIconizeEvent *wxIconizeEvent_new(int id, bool iconized);
+bool wxIconizeEvent_IsIconized(const wxIconizeEvent * self);
+
+// CLASS: wxIdManager
+void wxIdManager_delete(wxIdManager *self);
+wxWindowID wxIdManager_ReserveId(int count);
+void wxIdManager_UnreserveId(wxWindowID id, int count);
+
+// CLASS: wxImage
+wxClassInfo *wxImage_CLASSINFO();
+wxImage *wxImage_Copy(const wxImage * self);
+bool wxImage_Create(wxImage * self, int width, int height, bool clear);
+bool wxImage_Create1(wxImage * self, const wxSize * sz, bool clear);
+bool wxImage_Create2(wxImage * self, int width, int height, unsigned char * data, bool static_data);
+bool wxImage_Create3(wxImage * self, const wxSize * sz, unsigned char * data, bool static_data);
+bool wxImage_Create4(wxImage * self, int width, int height, unsigned char * data, unsigned char * alpha, bool static_data);
+bool wxImage_Create5(wxImage * self, const wxSize * sz, unsigned char * data, unsigned char * alpha, bool static_data);
+void wxImage_Destroy(wxImage * self);
+void wxImage_InitAlpha(wxImage * self);
+wxImage *wxImage_Blur(const wxImage * self, int blur_radius);
+wxImage *wxImage_BlurHorizontal(const wxImage * self, int blur_radius);
+wxImage *wxImage_BlurVertical(const wxImage * self, int blur_radius);
+wxImage *wxImage_Mirror(const wxImage * self, bool horizontally);
+wxImage * wxImage_Resize(wxImage * self, const wxSize * size, const wxPoint * pos, int red, int green, int blue);
+wxImage *wxImage_Rotate(const wxImage * self, double angle, const wxPoint * rotation_centre, bool interpolating, wxPoint * offset_after_rotation);
+wxImage *wxImage_Rotate90(const wxImage * self, bool clockwise);
+wxImage *wxImage_Rotate180(const wxImage * self);
+void wxImage_RotateHue(wxImage * self, double angle);
+#if wxCHECK_VERSION(3, 1, 0)
+void wxImage_ChangeSaturation(wxImage * self, double factor);
+void wxImage_ChangeBrightness(wxImage * self, double factor);
+void wxImage_ChangeHSV(wxImage * self, double angle_h, double factor_s, double factor_v);
+#endif
+wxImage *wxImage_Size(const wxImage * self, const wxSize * size, const wxPoint * pos, int red, int green, int blue);
+wxImage *wxImage_ConvertToGreyscale(const wxImage * self, double weight_r, double weight_g, double weight_b);
+wxImage *wxImage_ConvertToGreyscale1(const wxImage * self);
+#if wxCHECK_VERSION(3, 1, 0)
+wxImage *wxImage_ChangeLightness(const wxImage * self, int alpha);
+#endif
+unsigned char * wxImage_GetAlpha(const wxImage * self);
+unsigned char * wxImage_GetData(const wxImage * self);
+int wxImage_GetWidth(const wxImage * self);
+int wxImage_GetHeight(const wxImage * self);
+wxSize *wxImage_GetSize(const wxImage * self);
+wxString *wxImage_GetOption(const wxImage * self, const wxString * name);
+int wxImage_GetOptionInt(const wxImage * self, const wxString * name);
+bool wxImage_GetOrFindMaskColour(const wxImage * self, unsigned char * r, unsigned char * g, unsigned char * b);
+wxImage *wxImage_GetSubImage(const wxImage * self, const wxRect * rect);
+bool wxImage_HasAlpha(const wxImage * self);
+bool wxImage_HasMask(const wxImage * self);
+bool wxImage_HasOption(const wxImage * self, const wxString * name);
+bool wxImage_IsOk(const wxImage * self);
+bool wxImage_LoadFile2(wxImage * self, const wxString * name, const wxString * mimetype, int index);
+bool wxImage_LoadFile3(wxImage * self, wxInputStream * stream, const wxString * mimetype, int index);
+bool wxImage_SaveFile(const wxImage * self, wxOutputStream * stream, const wxString * mimetype);
+bool wxImage_SaveFile2(const wxImage * self, const wxString * name, const wxString * mimetype);
+bool wxImage_SaveFile3(const wxImage * self, const wxString * name);
+void wxImage_SetAlpha(wxImage * self, unsigned char * alpha, bool static_data);
+void wxImage_ClearAlpha(wxImage * self);
+void wxImage_SetData(wxImage * self, unsigned char * data, bool static_data);
+void wxImage_SetData1(wxImage * self, unsigned char * data, int new_width, int new_height, bool static_data);
+#if wxCHECK_VERSION(3, 1, 0)
+void wxImage_SetLoadFlags(wxImage * self, int flags);
+#endif
+void wxImage_SetMask(wxImage * self, bool has_mask);
+void wxImage_SetOption(wxImage * self, const wxString * name, const wxString * value);
+void wxImage_SetOption1(wxImage * self, const wxString * name, int value);
+void wxImage_SetPalette(wxImage * self, const wxPalette * palette);
+#if wxCHECK_VERSION(3, 1, 0)
+void wxImage_SetDefaultLoadFlags(int flags);
+int wxImage_GetLoadFlags(const wxImage * self);
+#endif
+void wxImage_AddHandler(wxImageHandler * handler);
+void wxImage_CleanUpHandlers();
+wxImageHandler * wxImage_FindHandler(const wxString * name);
+wxImageHandler * wxImage_FindHandlerMime(const wxString * mimetype);
+void wxImage_InitStandardHandlers();
+void wxImage_InsertHandler(wxImageHandler * handler);
+bool wxImage_RemoveHandler(const wxString * name);
+bool wxImage_CanRead(const wxString * filename);
+bool wxImage_CanRead1(wxInputStream * stream);
+#if wxCHECK_VERSION(3, 1, 0)
+int wxImage_GetDefaultLoadFlags();
+#endif
+wxString *wxImage_GetImageExtWildcard();
+wxImage *wxImage_new();
+wxImage *wxImage_new1(int width, int height, bool clear);
+wxImage *wxImage_new2(const wxSize * sz, bool clear);
+wxImage *wxImage_new3(int width, int height, unsigned char * data, bool static_data);
+wxImage *wxImage_new4(const wxSize * sz, unsigned char * data, bool static_data);
+wxImage *wxImage_new5(int width, int height, unsigned char * data, unsigned char * alpha, bool static_data);
+wxImage *wxImage_new6(const wxSize * sz, unsigned char * data, unsigned char * alpha, bool static_data);
+wxImage *wxImage_new7(const char *const * xpm_data);
+wxImage *wxImage_new9(const wxString * name, const wxString * mimetype, int index);
+wxImage *wxImage_new11(wxInputStream * stream, const wxString * mimetype, int index);
+
 // CLASS: wxImageHandler
 wxClassInfo *wxImageHandler_CLASSINFO();
 bool wxImageHandler_CanRead(wxImageHandler * self, wxInputStream * stream);
@@ -45,6 +161,51 @@ void wxImageHandler_SetExtension(wxImageHandler * self, const wxString * extensi
 void wxImageHandler_SetAltExtensions(wxImageHandler * self, const wxArrayString * extensions);
 void wxImageHandler_SetMimeType(wxImageHandler * self, const wxString * mimetype);
 void wxImageHandler_SetName(wxImageHandler * self, const wxString * name);
+
+// CLASS: wxImageList
+wxClassInfo *wxImageList_CLASSINFO();
+wxImageList *wxImageList_new();
+wxImageList *wxImageList_new1(int width, int height, bool mask, int initial_count);
+int wxImageList_Add(wxImageList * self, const wxBitmap * bitmap, const wxBitmap * mask);
+int wxImageList_Add1(wxImageList * self, const wxBitmap * bitmap, const wxColour * mask_colour);
+int wxImageList_Add2(wxImageList * self, const wxIcon * icon);
+bool wxImageList_Create(wxImageList * self, int width, int height, bool mask, int initial_count);
+#if wxCHECK_VERSION(3, 1, 0)
+void wxImageList_Destroy(wxImageList * self);
+#endif
+bool wxImageList_Draw(wxImageList * self, int index, wxDC * dc, int x, int y, int flags, bool solid_background);
+wxBitmap *wxImageList_GetBitmap(const wxImageList * self, int index);
+wxIcon *wxImageList_GetIcon(const wxImageList * self, int index);
+int wxImageList_GetImageCount(const wxImageList * self);
+bool wxImageList_GetSize(const wxImageList * self, int index, int * width, int * height);
+#if wxCHECK_VERSION(3, 1, 0)
+wxSize *wxImageList_GetSize1(const wxImageList * self);
+#endif
+bool wxImageList_Remove(wxImageList * self, int index);
+bool wxImageList_RemoveAll(wxImageList * self);
+bool wxImageList_Replace(wxImageList * self, int index, const wxBitmap * bitmap, const wxBitmap * mask);
+bool wxImageList_Replace1(wxImageList * self, int index, const wxIcon * icon);
+
+// CLASS: wxInfoBar
+wxClassInfo *wxInfoBar_CLASSINFO();
+void wxInfoBar_SetEffectDuration(wxInfoBar * self, int duration);
+int wxInfoBar_GetEffectDuration(const wxInfoBar * self);
+wxInfoBar *wxInfoBar_new();
+wxInfoBar *wxInfoBar_new1(wxWindow * parent, wxWindowID winid);
+bool wxInfoBar_Create(wxInfoBar * self, wxWindow * parent, wxWindowID winid);
+void wxInfoBar_AddButton(wxInfoBar * self, wxWindowID btnid, const wxString * label);
+void wxInfoBar_Dismiss(wxInfoBar * self);
+void wxInfoBar_RemoveButton(wxInfoBar * self, wxWindowID btnid);
+void wxInfoBar_ShowMessage(wxInfoBar * self, const wxString * msg, int flags);
+#if wxCHECK_VERSION(3, 1, 0)
+size_t wxInfoBar_GetButtonCount(const wxInfoBar * self);
+wxWindowID wxInfoBar_GetButtonId(const wxInfoBar * self, size_t idx);
+bool wxInfoBar_HasButtonId(const wxInfoBar * self, wxWindowID btnid);
+#endif
+
+// CLASS: wxInitDialogEvent
+wxClassInfo *wxInitDialogEvent_CLASSINFO();
+wxInitDialogEvent *wxInitDialogEvent_new(int id);
 
 // CLASS: wxItemContainer
 void wxItemContainer_delete(wxItemContainer *self);

@@ -64,6 +64,9 @@ wxBitmap *wxBitmap_new10(const wxCursor * cursor) {
     return new wxBitmap(*cursor);
 }
 #endif
+wxImage *wxBitmap_ConvertToImage(const wxBitmap * self) {
+    return new wxImage(self->ConvertToImage());
+}
 bool wxBitmap_CopyFromIcon(wxBitmap * self, const wxIcon * icon) {
     return self->CopyFromIcon(*icon);
 }

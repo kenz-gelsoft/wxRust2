@@ -1310,8 +1310,11 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
             ffi::wxTopLevelWindow_SetIcon(self.as_ptr(), icon)
         }
     }
-    fn set_icons(&self, icons: *const c_void) {
-        unsafe { ffi::wxTopLevelWindow_SetIcons(self.as_ptr(), icons) }
+    fn set_icons<I: IconBundleMethods>(&self, icons: &I) {
+        unsafe {
+            let icons = icons.as_ptr();
+            ffi::wxTopLevelWindow_SetIcons(self.as_ptr(), icons)
+        }
     }
     fn set_title(&self, title: &str) {
         unsafe {

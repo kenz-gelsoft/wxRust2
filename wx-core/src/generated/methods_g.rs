@@ -417,8 +417,11 @@ pub trait GraphicsContextMethods: GraphicsObjectMethods {
             GraphicsContext::option_from(ffi::wxGraphicsContext_CreateFromUnknownDC(dc))
         }
     }
-    fn create_image(image: *mut c_void) -> Option<GraphicsContextIsOwned<false>> {
-        unsafe { GraphicsContext::option_from(ffi::wxGraphicsContext_Create5(image)) }
+    fn create_image<I: ImageMethods>(image: &I) -> Option<GraphicsContextIsOwned<false>> {
+        unsafe {
+            let image = image.as_ptr();
+            GraphicsContext::option_from(ffi::wxGraphicsContext_Create5(image))
+        }
     }
     fn create_from_native(context: *mut c_void) -> Option<GraphicsContextIsOwned<false>> {
         unsafe { GraphicsContext::option_from(ffi::wxGraphicsContext_CreateFromNative(context)) }
@@ -866,7 +869,14 @@ pub trait GraphicsPenMethods: GraphicsObjectMethods {}
 pub trait GraphicsRendererMethods: ObjectMethods {
     // NOT_SUPPORTED: fn CreateBitmap()
     // NOT_SUPPORTED: fn CreateBitmapFromImage()
-    // NOT_SUPPORTED: fn CreateImageFromBitmap()
+    fn create_image_from_bitmap(&self, bmp: *const c_void) -> Image {
+        unsafe {
+            Image::from_ptr(ffi::wxGraphicsRenderer_CreateImageFromBitmap(
+                self.as_ptr(),
+                bmp,
+            ))
+        }
+    }
     // NOT_SUPPORTED: fn CreateBitmapFromNativeBitmap()
     fn create_context_window<W: WindowMethods>(
         &self,
@@ -929,11 +939,12 @@ pub trait GraphicsRendererMethods: ObjectMethods {
             ))
         }
     }
-    fn create_context_from_image(
+    fn create_context_from_image<I: ImageMethods>(
         &self,
-        image: *mut c_void,
+        image: &I,
     ) -> Option<GraphicsContextIsOwned<false>> {
         unsafe {
+            let image = image.as_ptr();
             GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContextFromImage(
                 self.as_ptr(),
                 image,

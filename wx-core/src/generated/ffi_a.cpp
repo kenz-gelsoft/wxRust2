@@ -349,6 +349,9 @@ wxSize *wxArtProvider_GetSizeHint(const wxArtClient * client, wxWindow * win) {
     return new wxSize(wxArtProvider::GetSizeHint(*client, win));
 }
 #endif
+wxIconBundle *wxArtProvider_GetIconBundle(const wxArtID * id, const wxArtClient * client) {
+    return new wxIconBundle(wxArtProvider::GetIconBundle(*id, *client));
+}
 bool wxArtProvider_HasNativeProvider() {
     return wxArtProvider::HasNativeProvider();
 }
