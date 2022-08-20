@@ -7,7 +7,6 @@
 #include <wx/mdi.h>
 #include <wx/menu.h>
 #include <wx/menuitem.h>
-#include <wx/metafile.h>
 #include <wx/minifram.h>
 #include <wx/mousemanager.h>
 #include <wx/msgdlg.h>
@@ -231,18 +230,6 @@ long wxMessageDialog_GetEffectiveIcon(const wxMessageDialog * self);
 void wxMessageOutputMessageBox_delete(wxMessageOutputMessageBox *self);
 wxMessageOutputMessageBox *wxMessageOutputMessageBox_new();
 
-// CLASS: wxMetafile
-wxClassInfo *wxMetafile_CLASSINFO();
-wxMetafile *wxMetafile_new(const wxString * filename);
-bool wxMetafile_IsOk(wxMetafile * self);
-bool wxMetafile_Play(wxMetafile * self, wxDC * dc);
-bool wxMetafile_SetClipboard(wxMetafile * self, int width, int height);
-
-// CLASS: wxMetafileDC
-wxClassInfo *wxMetafileDC_CLASSINFO();
-wxMetafileDC *wxMetafileDC_new(const wxString * filename);
-wxMetafile * wxMetafileDC_Close(wxMetafileDC * self);
-
 // CLASS: wxMiniFrame
 wxClassInfo *wxMiniFrame_CLASSINFO();
 wxMiniFrame *wxMiniFrame_new();
@@ -278,7 +265,9 @@ int wxMouseEvent_GetLinesPerAction(const wxMouseEvent * self);
 int wxMouseEvent_GetColumnsPerAction(const wxMouseEvent * self);
 wxPoint *wxMouseEvent_GetLogicalPosition(const wxMouseEvent * self, const wxDC * dc);
 int wxMouseEvent_GetWheelDelta(const wxMouseEvent * self);
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxMouseEvent_IsWheelInverted(const wxMouseEvent * self);
+#endif
 int wxMouseEvent_GetWheelRotation(const wxMouseEvent * self);
 bool wxMouseEvent_IsButton(const wxMouseEvent * self);
 bool wxMouseEvent_IsPageScroll(const wxMouseEvent * self);
@@ -286,7 +275,9 @@ bool wxMouseEvent_Leaving(const wxMouseEvent * self);
 bool wxMouseEvent_LeftDClick(const wxMouseEvent * self);
 bool wxMouseEvent_LeftDown(const wxMouseEvent * self);
 bool wxMouseEvent_LeftUp(const wxMouseEvent * self);
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxMouseEvent_Magnify(const wxMouseEvent * self);
+#endif
 bool wxMouseEvent_MetaDown(const wxMouseEvent * self);
 bool wxMouseEvent_MiddleDClick(const wxMouseEvent * self);
 bool wxMouseEvent_MiddleDown(const wxMouseEvent * self);

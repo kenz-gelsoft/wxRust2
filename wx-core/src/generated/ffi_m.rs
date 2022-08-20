@@ -341,20 +341,6 @@ extern "C" {
     pub fn wxMessageOutputMessageBox_delete(self_: *mut c_void);
     pub fn wxMessageOutputMessageBox_new() -> *mut c_void;
 
-    // wxMetafile
-    pub fn wxMetafile_CLASSINFO() -> *mut c_void;
-    pub fn wxMetafile_new(filename: *const c_void) -> *mut c_void;
-    // DTOR: pub fn wxMetafile_~wxMetafile(self_: *mut c_void);
-    pub fn wxMetafile_IsOk(self_: *mut c_void) -> bool;
-    pub fn wxMetafile_Play(self_: *mut c_void, dc: *mut c_void) -> bool;
-    pub fn wxMetafile_SetClipboard(self_: *mut c_void, width: c_int, height: c_int) -> bool;
-
-    // wxMetafileDC
-    pub fn wxMetafileDC_CLASSINFO() -> *mut c_void;
-    pub fn wxMetafileDC_new(filename: *const c_void) -> *mut c_void;
-    // DTOR: pub fn wxMetafileDC_~wxMetafileDC(self_: *mut c_void);
-    pub fn wxMetafileDC_Close(self_: *mut c_void) -> *mut c_void;
-
     // wxMiniFrame
     pub fn wxMiniFrame_CLASSINFO() -> *mut c_void;
     pub fn wxMiniFrame_new() -> *mut c_void;

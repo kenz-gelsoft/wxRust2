@@ -984,34 +984,6 @@ pub trait MessageDialogMethods: DialogMethods {
 // wxMessageOutputMessageBox
 pub trait MessageOutputMessageBoxMethods: MessageOutputMethods {}
 
-// wxMetafile
-pub trait MetafileMethods: ObjectMethods {
-    // DTOR: fn ~wxMetafile()
-    fn is_ok(&self) -> bool {
-        unsafe { ffi::wxMetafile_IsOk(self.as_ptr()) }
-    }
-    fn play<D: DCMethods>(&self, dc: Option<&D>) -> bool {
-        unsafe {
-            let dc = match dc {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxMetafile_Play(self.as_ptr(), dc)
-        }
-    }
-    fn set_clipboard(&self, width: c_int, height: c_int) -> bool {
-        unsafe { ffi::wxMetafile_SetClipboard(self.as_ptr(), width, height) }
-    }
-}
-
-// wxMetafileDC
-pub trait MetafileDCMethods: DCMethods {
-    // DTOR: fn ~wxMetafileDC()
-    fn close(&self) -> Option<MetafileIsOwned<false>> {
-        unsafe { Metafile::option_from(ffi::wxMetafileDC_Close(self.as_ptr())) }
-    }
-}
-
 // wxMiniFrame
 pub trait MiniFrameMethods: FrameMethods {
     // DTOR: fn ~wxMiniFrame()

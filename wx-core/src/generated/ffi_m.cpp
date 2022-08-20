@@ -566,34 +566,6 @@ wxMessageOutputMessageBox *wxMessageOutputMessageBox_new() {
     return new wxMessageOutputMessageBox();
 }
 
-// CLASS: wxMetafile
-wxClassInfo *wxMetafile_CLASSINFO() {
-    return wxCLASSINFO(wxMetafile);
-}
-wxMetafile *wxMetafile_new(const wxString * filename) {
-    return new wxMetafile(*filename);
-}
-bool wxMetafile_IsOk(wxMetafile * self) {
-    return self->IsOk();
-}
-bool wxMetafile_Play(wxMetafile * self, wxDC * dc) {
-    return self->Play(dc);
-}
-bool wxMetafile_SetClipboard(wxMetafile * self, int width, int height) {
-    return self->SetClipboard(width, height);
-}
-
-// CLASS: wxMetafileDC
-wxClassInfo *wxMetafileDC_CLASSINFO() {
-    return wxCLASSINFO(wxMetafileDC);
-}
-wxMetafileDC *wxMetafileDC_new(const wxString * filename) {
-    return new wxMetafileDC(*filename);
-}
-wxMetafile * wxMetafileDC_Close(wxMetafileDC * self) {
-    return self->Close();
-}
-
 // CLASS: wxMiniFrame
 wxClassInfo *wxMiniFrame_CLASSINFO() {
     return wxCLASSINFO(wxMiniFrame);
@@ -681,9 +653,11 @@ wxPoint *wxMouseEvent_GetLogicalPosition(const wxMouseEvent * self, const wxDC *
 int wxMouseEvent_GetWheelDelta(const wxMouseEvent * self) {
     return self->GetWheelDelta();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxMouseEvent_IsWheelInverted(const wxMouseEvent * self) {
     return self->IsWheelInverted();
 }
+#endif
 int wxMouseEvent_GetWheelRotation(const wxMouseEvent * self) {
     return self->GetWheelRotation();
 }
@@ -705,9 +679,11 @@ bool wxMouseEvent_LeftDown(const wxMouseEvent * self) {
 bool wxMouseEvent_LeftUp(const wxMouseEvent * self) {
     return self->LeftUp();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxMouseEvent_Magnify(const wxMouseEvent * self) {
     return self->Magnify();
 }
+#endif
 bool wxMouseEvent_MetaDown(const wxMouseEvent * self) {
     return self->MetaDown();
 }

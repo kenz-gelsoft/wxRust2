@@ -456,8 +456,8 @@ wxml_files = [
     'wxml/classwx_message_dialog.xml',
     'wxml/classwx_message_output.xml',
     'wxml/classwx_message_output_message_box.xml',
-    'wxml/classwx_metafile.xml',
-    'wxml/classwx_metafile_d_c.xml',
+    # 'wxml/classwx_metafile.xml',     # MSW only
+    # 'wxml/classwx_metafile_d_c.xml', # MSW only
     'wxml/classwx_mini_frame.xml',
     'wxml/classwx_mirror_d_c.xml',
     'wxml/classwx_mouse_capture_changed_event.xml',
@@ -1470,6 +1470,12 @@ wx31 = [
 ]
 wx32 = [
     'GetBitmapBundle',
+]
+[types.wxMouseEvent]
+wx31 = [
+    'GetMagnification',
+    'IsWheelInverted',
+    'Magnify',
 ]
 [types.wxMouseEventsManager]
 blocklist = [
