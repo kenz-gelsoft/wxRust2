@@ -398,115 +398,6 @@ void wxPrintData_SetFilename(wxPrintData * self, const wxString * filename) {
     return self->SetFilename(*filename);
 }
 
-// CLASS: wxPrintDialog
-wxClassInfo *wxPrintDialog_CLASSINFO() {
-    return wxCLASSINFO(wxPrintDialog);
-}
-wxPrintDialog *wxPrintDialog_new(wxWindow * parent, wxPrintDialogData * data) {
-    return new wxPrintDialog(parent, data);
-}
-wxPrintDialog *wxPrintDialog_new1(wxWindow * parent, wxPrintData * data) {
-    return new wxPrintDialog(parent, data);
-}
-wxDC * wxPrintDialog_GetPrintDC(wxPrintDialog * self) {
-    return self->GetPrintDC();
-}
-wxPrintDialogData * wxPrintDialog_GetPrintDialogData(wxPrintDialog * self) {
-    return &(self->GetPrintDialogData());
-}
-wxPrintData * wxPrintDialog_GetPrintData(wxPrintDialog * self) {
-    return &(self->GetPrintData());
-}
-int wxPrintDialog_ShowModal(wxPrintDialog * self) {
-    return self->ShowModal();
-}
-
-// CLASS: wxPrintDialogData
-wxClassInfo *wxPrintDialogData_CLASSINFO() {
-    return wxCLASSINFO(wxPrintDialogData);
-}
-wxPrintDialogData *wxPrintDialogData_new() {
-    return new wxPrintDialogData();
-}
-wxPrintDialogData *wxPrintDialogData_new1(const wxPrintDialogData * dialog_data) {
-    return new wxPrintDialogData(*dialog_data);
-}
-wxPrintDialogData *wxPrintDialogData_new2(const wxPrintData * print_data) {
-    return new wxPrintDialogData(*print_data);
-}
-void wxPrintDialogData_EnableHelp(wxPrintDialogData * self, bool flag) {
-    return self->EnableHelp(flag);
-}
-void wxPrintDialogData_EnablePageNumbers(wxPrintDialogData * self, bool flag) {
-    return self->EnablePageNumbers(flag);
-}
-void wxPrintDialogData_EnablePrintToFile(wxPrintDialogData * self, bool flag) {
-    return self->EnablePrintToFile(flag);
-}
-void wxPrintDialogData_EnableSelection(wxPrintDialogData * self, bool flag) {
-    return self->EnableSelection(flag);
-}
-bool wxPrintDialogData_GetAllPages(const wxPrintDialogData * self) {
-    return self->GetAllPages();
-}
-bool wxPrintDialogData_GetCollate(const wxPrintDialogData * self) {
-    return self->GetCollate();
-}
-int wxPrintDialogData_GetFromPage(const wxPrintDialogData * self) {
-    return self->GetFromPage();
-}
-int wxPrintDialogData_GetMaxPage(const wxPrintDialogData * self) {
-    return self->GetMaxPage();
-}
-int wxPrintDialogData_GetMinPage(const wxPrintDialogData * self) {
-    return self->GetMinPage();
-}
-int wxPrintDialogData_GetNoCopies(const wxPrintDialogData * self) {
-    return self->GetNoCopies();
-}
-wxPrintData * wxPrintDialogData_GetPrintData(wxPrintDialogData * self) {
-    return &(self->GetPrintData());
-}
-bool wxPrintDialogData_GetPrintToFile(const wxPrintDialogData * self) {
-    return self->GetPrintToFile();
-}
-bool wxPrintDialogData_GetSelection(const wxPrintDialogData * self) {
-    return self->GetSelection();
-}
-int wxPrintDialogData_GetToPage(const wxPrintDialogData * self) {
-    return self->GetToPage();
-}
-bool wxPrintDialogData_IsOk(const wxPrintDialogData * self) {
-    return self->IsOk();
-}
-void wxPrintDialogData_SetCollate(wxPrintDialogData * self, bool flag) {
-    return self->SetCollate(flag);
-}
-void wxPrintDialogData_SetFromPage(wxPrintDialogData * self, int page) {
-    return self->SetFromPage(page);
-}
-void wxPrintDialogData_SetMaxPage(wxPrintDialogData * self, int page) {
-    return self->SetMaxPage(page);
-}
-void wxPrintDialogData_SetMinPage(wxPrintDialogData * self, int page) {
-    return self->SetMinPage(page);
-}
-void wxPrintDialogData_SetNoCopies(wxPrintDialogData * self, int n) {
-    return self->SetNoCopies(n);
-}
-void wxPrintDialogData_SetPrintData(wxPrintDialogData * self, const wxPrintData * print_data) {
-    return self->SetPrintData(*print_data);
-}
-void wxPrintDialogData_SetPrintToFile(wxPrintDialogData * self, bool flag) {
-    return self->SetPrintToFile(flag);
-}
-void wxPrintDialogData_SetSelection(wxPrintDialogData * self, bool flag) {
-    return self->SetSelection(flag);
-}
-void wxPrintDialogData_SetToPage(wxPrintDialogData * self, int page) {
-    return self->SetToPage(page);
-}
-
 // CLASS: wxPrinter
 wxClassInfo *wxPrinter_CLASSINFO() {
     return wxCLASSINFO(wxPrinter);
@@ -519,9 +410,6 @@ wxPrintAbortDialog * wxPrinter_CreateAbortWindow(wxPrinter * self, wxWindow * pa
 }
 bool wxPrinter_GetAbort(const wxPrinter * self) {
     return self->GetAbort();
-}
-wxPrintDialogData * wxPrinter_GetPrintDialogData(const wxPrinter * self) {
-    return &(self->GetPrintDialogData());
 }
 bool wxPrinter_Print(wxPrinter * self, wxWindow * parent, wxPrintout * printout, bool prompt) {
     return self->Print(parent, printout, prompt);

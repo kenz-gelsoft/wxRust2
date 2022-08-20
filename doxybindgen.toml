@@ -459,9 +459,9 @@ wxml_files = [
     # 'wxml/classwx_preview_control_bar.xml', # Our CI environment is't built with
     # 'wxml/classwx_preview_frame.xml',       # Our CI environment is't built with
     'wxml/classwx_print_data.xml',
-    'wxml/classwx_print_dialog.xml',
-    'wxml/classwx_print_dialog_data.xml',
-    # 'wxml/classwx_print_preview.xml', # Our CI environment is't built with
+    # 'wxml/classwx_print_dialog.xml',        # Our CI environment is't built with
+    # 'wxml/classwx_print_dialog_data.xml',   # Our CI environment is't built with
+    # 'wxml/classwx_print_preview.xml',       # Our CI environment is't built with
     'wxml/classwx_printer.xml',
     'wxml/classwx_printer_d_c.xml',
     'wxml/classwx_printout.xml',
@@ -1593,6 +1593,11 @@ blocklist = [
     'operator=1',
     # deprecated
     'SetSetupDialog',
+]
+[types.wxPrinter]
+blocklist = [
+    # returns refs
+    'GetPrintDialogData',
 ]
 [types.wxPrintout]
 blocklist = [

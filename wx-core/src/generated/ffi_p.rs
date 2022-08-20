@@ -276,50 +276,6 @@ extern "C" {
     // NOT_SUPPORTED: pub fn wxPrintData_GetPrintMode(self_: *const c_void) -> wxPrintMode;
     // NOT_SUPPORTED: pub fn wxPrintData_SetPrintMode(self_: *mut c_void, print_mode: wxPrintMode);
 
-    // wxPrintDialog
-    pub fn wxPrintDialog_CLASSINFO() -> *mut c_void;
-    pub fn wxPrintDialog_new(parent: *mut c_void, data: *mut c_void) -> *mut c_void;
-    pub fn wxPrintDialog_new1(parent: *mut c_void, data: *mut c_void) -> *mut c_void;
-    // DTOR: pub fn wxPrintDialog_~wxPrintDialog(self_: *mut c_void);
-    pub fn wxPrintDialog_GetPrintDC(self_: *mut c_void) -> *mut c_void;
-    pub fn wxPrintDialog_GetPrintDialogData(self_: *mut c_void) -> *mut c_void;
-    pub fn wxPrintDialog_GetPrintData(self_: *mut c_void) -> *mut c_void;
-    pub fn wxPrintDialog_ShowModal(self_: *mut c_void) -> c_int;
-
-    // wxPrintDialogData
-    pub fn wxPrintDialogData_CLASSINFO() -> *mut c_void;
-    pub fn wxPrintDialogData_new() -> *mut c_void;
-    pub fn wxPrintDialogData_new1(dialog_data: *const c_void) -> *mut c_void;
-    pub fn wxPrintDialogData_new2(print_data: *const c_void) -> *mut c_void;
-    // DTOR: pub fn wxPrintDialogData_~wxPrintDialogData(self_: *mut c_void);
-    pub fn wxPrintDialogData_EnableHelp(self_: *mut c_void, flag: bool);
-    pub fn wxPrintDialogData_EnablePageNumbers(self_: *mut c_void, flag: bool);
-    pub fn wxPrintDialogData_EnablePrintToFile(self_: *mut c_void, flag: bool);
-    pub fn wxPrintDialogData_EnableSelection(self_: *mut c_void, flag: bool);
-    pub fn wxPrintDialogData_GetAllPages(self_: *const c_void) -> bool;
-    pub fn wxPrintDialogData_GetCollate(self_: *const c_void) -> bool;
-    pub fn wxPrintDialogData_GetFromPage(self_: *const c_void) -> c_int;
-    pub fn wxPrintDialogData_GetMaxPage(self_: *const c_void) -> c_int;
-    pub fn wxPrintDialogData_GetMinPage(self_: *const c_void) -> c_int;
-    pub fn wxPrintDialogData_GetNoCopies(self_: *const c_void) -> c_int;
-    pub fn wxPrintDialogData_GetPrintData(self_: *mut c_void) -> *mut c_void;
-    pub fn wxPrintDialogData_GetPrintToFile(self_: *const c_void) -> bool;
-    pub fn wxPrintDialogData_GetSelection(self_: *const c_void) -> bool;
-    pub fn wxPrintDialogData_GetToPage(self_: *const c_void) -> c_int;
-    pub fn wxPrintDialogData_IsOk(self_: *const c_void) -> bool;
-    pub fn wxPrintDialogData_SetCollate(self_: *mut c_void, flag: bool);
-    pub fn wxPrintDialogData_SetFromPage(self_: *mut c_void, page: c_int);
-    pub fn wxPrintDialogData_SetMaxPage(self_: *mut c_void, page: c_int);
-    pub fn wxPrintDialogData_SetMinPage(self_: *mut c_void, page: c_int);
-    pub fn wxPrintDialogData_SetNoCopies(self_: *mut c_void, n: c_int);
-    pub fn wxPrintDialogData_SetPrintData(self_: *mut c_void, print_data: *const c_void);
-    pub fn wxPrintDialogData_SetPrintToFile(self_: *mut c_void, flag: bool);
-    pub fn wxPrintDialogData_SetSelection(self_: *mut c_void, flag: bool);
-    // BLOCKED: pub fn wxPrintDialogData_SetSetupDialog(self_: *mut c_void, flag: bool);
-    pub fn wxPrintDialogData_SetToPage(self_: *mut c_void, page: c_int);
-    // BLOCKED: pub fn wxPrintDialogData_operator=(self_: *mut c_void, data: *const c_void);
-    // BLOCKED: pub fn wxPrintDialogData_operator=1(self_: *mut c_void, data: *const c_void);
-
     // wxPrinter
     pub fn wxPrinter_CLASSINFO() -> *mut c_void;
     pub fn wxPrinter_new(data: *mut c_void) -> *mut c_void;
@@ -329,7 +285,7 @@ extern "C" {
         printout: *mut c_void,
     ) -> *mut c_void;
     pub fn wxPrinter_GetAbort(self_: *const c_void) -> bool;
-    pub fn wxPrinter_GetPrintDialogData(self_: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxPrinter_GetPrintDialogData(self_: *const c_void) -> *mut c_void;
     pub fn wxPrinter_Print(
         self_: *mut c_void,
         parent: *mut c_void,

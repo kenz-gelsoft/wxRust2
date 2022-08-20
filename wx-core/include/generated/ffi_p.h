@@ -16,7 +16,6 @@
 #include <wx/popupwin.h>
 #include <wx/preferences.h>
 #include <wx/print.h>
-#include <wx/printdlg.h>
 #include <wx/propdlg.h>
 #include <wx/textdlg.h>
 
@@ -182,51 +181,11 @@ void wxPrintData_SetPrinterName(wxPrintData * self, const wxString * printer_nam
 wxString *wxPrintData_GetFilename(const wxPrintData * self);
 void wxPrintData_SetFilename(wxPrintData * self, const wxString * filename);
 
-// CLASS: wxPrintDialog
-wxClassInfo *wxPrintDialog_CLASSINFO();
-wxPrintDialog *wxPrintDialog_new(wxWindow * parent, wxPrintDialogData * data);
-wxPrintDialog *wxPrintDialog_new1(wxWindow * parent, wxPrintData * data);
-wxDC * wxPrintDialog_GetPrintDC(wxPrintDialog * self);
-wxPrintDialogData * wxPrintDialog_GetPrintDialogData(wxPrintDialog * self);
-wxPrintData * wxPrintDialog_GetPrintData(wxPrintDialog * self);
-int wxPrintDialog_ShowModal(wxPrintDialog * self);
-
-// CLASS: wxPrintDialogData
-wxClassInfo *wxPrintDialogData_CLASSINFO();
-wxPrintDialogData *wxPrintDialogData_new();
-wxPrintDialogData *wxPrintDialogData_new1(const wxPrintDialogData * dialog_data);
-wxPrintDialogData *wxPrintDialogData_new2(const wxPrintData * print_data);
-void wxPrintDialogData_EnableHelp(wxPrintDialogData * self, bool flag);
-void wxPrintDialogData_EnablePageNumbers(wxPrintDialogData * self, bool flag);
-void wxPrintDialogData_EnablePrintToFile(wxPrintDialogData * self, bool flag);
-void wxPrintDialogData_EnableSelection(wxPrintDialogData * self, bool flag);
-bool wxPrintDialogData_GetAllPages(const wxPrintDialogData * self);
-bool wxPrintDialogData_GetCollate(const wxPrintDialogData * self);
-int wxPrintDialogData_GetFromPage(const wxPrintDialogData * self);
-int wxPrintDialogData_GetMaxPage(const wxPrintDialogData * self);
-int wxPrintDialogData_GetMinPage(const wxPrintDialogData * self);
-int wxPrintDialogData_GetNoCopies(const wxPrintDialogData * self);
-wxPrintData * wxPrintDialogData_GetPrintData(wxPrintDialogData * self);
-bool wxPrintDialogData_GetPrintToFile(const wxPrintDialogData * self);
-bool wxPrintDialogData_GetSelection(const wxPrintDialogData * self);
-int wxPrintDialogData_GetToPage(const wxPrintDialogData * self);
-bool wxPrintDialogData_IsOk(const wxPrintDialogData * self);
-void wxPrintDialogData_SetCollate(wxPrintDialogData * self, bool flag);
-void wxPrintDialogData_SetFromPage(wxPrintDialogData * self, int page);
-void wxPrintDialogData_SetMaxPage(wxPrintDialogData * self, int page);
-void wxPrintDialogData_SetMinPage(wxPrintDialogData * self, int page);
-void wxPrintDialogData_SetNoCopies(wxPrintDialogData * self, int n);
-void wxPrintDialogData_SetPrintData(wxPrintDialogData * self, const wxPrintData * print_data);
-void wxPrintDialogData_SetPrintToFile(wxPrintDialogData * self, bool flag);
-void wxPrintDialogData_SetSelection(wxPrintDialogData * self, bool flag);
-void wxPrintDialogData_SetToPage(wxPrintDialogData * self, int page);
-
 // CLASS: wxPrinter
 wxClassInfo *wxPrinter_CLASSINFO();
 wxPrinter *wxPrinter_new(wxPrintDialogData * data);
 wxPrintAbortDialog * wxPrinter_CreateAbortWindow(wxPrinter * self, wxWindow * parent, wxPrintout * printout);
 bool wxPrinter_GetAbort(const wxPrinter * self);
-wxPrintDialogData * wxPrinter_GetPrintDialogData(const wxPrinter * self);
 bool wxPrinter_Print(wxPrinter * self, wxWindow * parent, wxPrintout * printout, bool prompt);
 wxDC * wxPrinter_PrintDialog(wxPrinter * self, wxWindow * parent);
 void wxPrinter_ReportError(wxPrinter * self, wxWindow * parent, wxPrintout * printout, const wxString * message);

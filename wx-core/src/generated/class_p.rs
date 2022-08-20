@@ -784,115 +784,6 @@ impl<const OWNED: bool> Drop for PrintDataIsOwned<OWNED> {
     }
 }
 
-// wxPrintDialog
-wx_class! { PrintDialog =
-    PrintDialogIsOwned<true>(wxPrintDialog) impl
-        PrintDialogMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> PrintDialogIsOwned<OWNED> {
-    pub fn new_with_printdialogdata<W: WindowMethods, P: PrintDialogDataMethods>(
-        parent: Option<&W>,
-        data: Option<&P>,
-    ) -> PrintDialogIsOwned<OWNED> {
-        unsafe {
-            let parent = match parent {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            let data = match data {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            PrintDialogIsOwned(ffi::wxPrintDialog_new(parent, data))
-        }
-    }
-    pub fn new_with_printdata<W: WindowMethods, P: PrintDataMethods>(
-        parent: Option<&W>,
-        data: Option<&P>,
-    ) -> PrintDialogIsOwned<OWNED> {
-        unsafe {
-            let parent = match parent {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            let data = match data {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            PrintDialogIsOwned(ffi::wxPrintDialog_new1(parent, data))
-        }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<PrintDialogIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: PrintDialogIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for PrintDialogIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxPrintDialog_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Drop for PrintDialogIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObject_delete(self.0) }
-        }
-    }
-}
-
-// wxPrintDialogData
-wx_class! { PrintDialogData =
-    PrintDialogDataIsOwned<true>(wxPrintDialogData) impl
-        PrintDialogDataMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> PrintDialogDataIsOwned<OWNED> {
-    pub fn new() -> PrintDialogDataIsOwned<OWNED> {
-        unsafe { PrintDialogDataIsOwned(ffi::wxPrintDialogData_new()) }
-    }
-    pub fn new_with_printdialogdata<P: PrintDialogDataMethods>(
-        dialog_data: &P,
-    ) -> PrintDialogDataIsOwned<OWNED> {
-        unsafe {
-            let dialog_data = dialog_data.as_ptr();
-            PrintDialogDataIsOwned(ffi::wxPrintDialogData_new1(dialog_data))
-        }
-    }
-    pub fn new_with_printdata<P: PrintDataMethods>(
-        print_data: &P,
-    ) -> PrintDialogDataIsOwned<OWNED> {
-        unsafe {
-            let print_data = print_data.as_ptr();
-            PrintDialogDataIsOwned(ffi::wxPrintDialogData_new2(print_data))
-        }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<PrintDialogDataIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: PrintDialogDataIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for PrintDialogDataIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxPrintDialogData_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Drop for PrintDialogDataIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObject_delete(self.0) }
-        }
-    }
-}
-
 // wxPrinter
 wx_class! { Printer =
     PrinterIsOwned<true>(wxPrinter) impl
@@ -900,14 +791,8 @@ wx_class! { Printer =
         ObjectMethods
 }
 impl<const OWNED: bool> PrinterIsOwned<OWNED> {
-    pub fn new<P: PrintDialogDataMethods>(data: Option<&P>) -> PrinterIsOwned<OWNED> {
-        unsafe {
-            let data = match data {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            PrinterIsOwned(ffi::wxPrinter_new(data))
-        }
+    pub fn new(data: *mut c_void) -> PrinterIsOwned<OWNED> {
+        unsafe { PrinterIsOwned(ffi::wxPrinter_new(data)) }
     }
     pub fn none() -> Option<&'static Self> {
         None

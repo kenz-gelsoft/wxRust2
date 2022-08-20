@@ -460,108 +460,6 @@ pub trait PrintDataMethods: ObjectMethods {
     // NOT_SUPPORTED: fn SetPrintMode()
 }
 
-// wxPrintDialog
-pub trait PrintDialogMethods: ObjectMethods {
-    // DTOR: fn ~wxPrintDialog()
-    fn get_print_dc(&self) -> Option<DCIsOwned<false>> {
-        unsafe { DC::option_from(ffi::wxPrintDialog_GetPrintDC(self.as_ptr())) }
-    }
-    fn get_print_dialog_data(&self) -> PrintDialogDataIsOwned<false> {
-        unsafe {
-            PrintDialogDataIsOwned::from_ptr(ffi::wxPrintDialog_GetPrintDialogData(self.as_ptr()))
-        }
-    }
-    fn get_print_data(&self) -> PrintDataIsOwned<false> {
-        unsafe { PrintDataIsOwned::from_ptr(ffi::wxPrintDialog_GetPrintData(self.as_ptr())) }
-    }
-    fn show_modal(&self) -> c_int {
-        unsafe { ffi::wxPrintDialog_ShowModal(self.as_ptr()) }
-    }
-}
-
-// wxPrintDialogData
-pub trait PrintDialogDataMethods: ObjectMethods {
-    // DTOR: fn ~wxPrintDialogData()
-    fn enable_help(&self, flag: bool) {
-        unsafe { ffi::wxPrintDialogData_EnableHelp(self.as_ptr(), flag) }
-    }
-    fn enable_page_numbers(&self, flag: bool) {
-        unsafe { ffi::wxPrintDialogData_EnablePageNumbers(self.as_ptr(), flag) }
-    }
-    fn enable_print_to_file(&self, flag: bool) {
-        unsafe { ffi::wxPrintDialogData_EnablePrintToFile(self.as_ptr(), flag) }
-    }
-    fn enable_selection(&self, flag: bool) {
-        unsafe { ffi::wxPrintDialogData_EnableSelection(self.as_ptr(), flag) }
-    }
-    fn get_all_pages(&self) -> bool {
-        unsafe { ffi::wxPrintDialogData_GetAllPages(self.as_ptr()) }
-    }
-    fn get_collate(&self) -> bool {
-        unsafe { ffi::wxPrintDialogData_GetCollate(self.as_ptr()) }
-    }
-    fn get_from_page(&self) -> c_int {
-        unsafe { ffi::wxPrintDialogData_GetFromPage(self.as_ptr()) }
-    }
-    fn get_max_page(&self) -> c_int {
-        unsafe { ffi::wxPrintDialogData_GetMaxPage(self.as_ptr()) }
-    }
-    fn get_min_page(&self) -> c_int {
-        unsafe { ffi::wxPrintDialogData_GetMinPage(self.as_ptr()) }
-    }
-    fn get_no_copies(&self) -> c_int {
-        unsafe { ffi::wxPrintDialogData_GetNoCopies(self.as_ptr()) }
-    }
-    fn get_print_data(&self) -> PrintDataIsOwned<false> {
-        unsafe { PrintDataIsOwned::from_ptr(ffi::wxPrintDialogData_GetPrintData(self.as_ptr())) }
-    }
-    fn get_print_to_file(&self) -> bool {
-        unsafe { ffi::wxPrintDialogData_GetPrintToFile(self.as_ptr()) }
-    }
-    fn get_selection(&self) -> bool {
-        unsafe { ffi::wxPrintDialogData_GetSelection(self.as_ptr()) }
-    }
-    fn get_to_page(&self) -> c_int {
-        unsafe { ffi::wxPrintDialogData_GetToPage(self.as_ptr()) }
-    }
-    fn is_ok(&self) -> bool {
-        unsafe { ffi::wxPrintDialogData_IsOk(self.as_ptr()) }
-    }
-    fn set_collate(&self, flag: bool) {
-        unsafe { ffi::wxPrintDialogData_SetCollate(self.as_ptr(), flag) }
-    }
-    fn set_from_page(&self, page: c_int) {
-        unsafe { ffi::wxPrintDialogData_SetFromPage(self.as_ptr(), page) }
-    }
-    fn set_max_page(&self, page: c_int) {
-        unsafe { ffi::wxPrintDialogData_SetMaxPage(self.as_ptr(), page) }
-    }
-    fn set_min_page(&self, page: c_int) {
-        unsafe { ffi::wxPrintDialogData_SetMinPage(self.as_ptr(), page) }
-    }
-    fn set_no_copies(&self, n: c_int) {
-        unsafe { ffi::wxPrintDialogData_SetNoCopies(self.as_ptr(), n) }
-    }
-    fn set_print_data<P: PrintDataMethods>(&self, print_data: &P) {
-        unsafe {
-            let print_data = print_data.as_ptr();
-            ffi::wxPrintDialogData_SetPrintData(self.as_ptr(), print_data)
-        }
-    }
-    fn set_print_to_file(&self, flag: bool) {
-        unsafe { ffi::wxPrintDialogData_SetPrintToFile(self.as_ptr(), flag) }
-    }
-    fn set_selection(&self, flag: bool) {
-        unsafe { ffi::wxPrintDialogData_SetSelection(self.as_ptr(), flag) }
-    }
-    // BLOCKED: fn SetSetupDialog()
-    fn set_to_page(&self, page: c_int) {
-        unsafe { ffi::wxPrintDialogData_SetToPage(self.as_ptr(), page) }
-    }
-    // BLOCKED: fn operator=()
-    // BLOCKED: fn operator=1()
-}
-
 // wxPrinter
 pub trait PrinterMethods: ObjectMethods {
     fn create_abort_window<W: WindowMethods, P: PrintoutMethods>(
@@ -584,11 +482,7 @@ pub trait PrinterMethods: ObjectMethods {
     fn get_abort(&self) -> bool {
         unsafe { ffi::wxPrinter_GetAbort(self.as_ptr()) }
     }
-    fn get_print_dialog_data(&self) -> PrintDialogDataIsOwned<false> {
-        unsafe {
-            PrintDialogDataIsOwned::from_ptr(ffi::wxPrinter_GetPrintDialogData(self.as_ptr()))
-        }
-    }
+    // BLOCKED: fn GetPrintDialogData()
     fn print<W: WindowMethods, P: PrintoutMethods>(
         &self,
         parent: Option<&W>,
