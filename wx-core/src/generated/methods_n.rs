@@ -88,14 +88,6 @@ pub trait NativeFontInfoMethods: WxRustMethods {
     }
 }
 
-// wxNativeWindow
-pub trait NativeWindowMethods: WindowMethods {
-    // NOT_SUPPORTED: fn Create()
-    fn disown(&self) {
-        unsafe { ffi::wxNativeWindow_Disown(self.as_ptr()) }
-    }
-}
-
 // wxNavigationKeyEvent
 pub trait NavigationKeyEventMethods: EventMethods {
     fn get_current_focus(&self) -> WeakRef<Window> {

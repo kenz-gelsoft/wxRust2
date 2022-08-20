@@ -31,44 +31,6 @@ impl<const OWNED: bool> Drop for NativeFontInfoIsOwned<OWNED> {
     }
 }
 
-// wxNativeWindow
-wx_class! { NativeWindow =
-    NativeWindowIsOwned<true>(wxNativeWindow) impl
-        NativeWindowMethods,
-        WindowMethods,
-        EvtHandlerMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> NativeWindowIsOwned<OWNED> {
-    pub fn new() -> NativeWindowIsOwned<OWNED> {
-        unsafe { NativeWindowIsOwned(ffi::wxNativeWindow_new()) }
-    }
-    // NOT_SUPPORTED: fn wxNativeWindow1()
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<NativeWindowIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: NativeWindowIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<NativeWindowIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: NativeWindowIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<NativeWindowIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: NativeWindowIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for NativeWindowIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxNativeWindow_CLASSINFO()) }
-    }
-}
-
 // wxNavigationKeyEvent
 wx_class! { NavigationKeyEvent =
     NavigationKeyEventIsOwned<true>(wxNavigationKeyEvent) impl

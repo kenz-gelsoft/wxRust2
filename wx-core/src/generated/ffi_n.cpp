@@ -24,9 +24,11 @@ int wxNativeFontInfo_GetPointSize(const wxNativeFontInfo * self) {
 wxSize *wxNativeFontInfo_GetPixelSize(const wxNativeFontInfo * self) {
     return new wxSize(self->GetPixelSize());
 }
+#if wxCHECK_VERSION(3, 1, 0)
 int wxNativeFontInfo_GetNumericWeight(const wxNativeFontInfo * self) {
     return self->GetNumericWeight();
 }
+#endif
 bool wxNativeFontInfo_GetUnderlined(const wxNativeFontInfo * self) {
     return self->GetUnderlined();
 }
@@ -39,9 +41,11 @@ void wxNativeFontInfo_SetPointSize(wxNativeFontInfo * self, int pointsize) {
 void wxNativeFontInfo_SetPixelSize(wxNativeFontInfo * self, const wxSize * pixel_size) {
     return self->SetPixelSize(*pixel_size);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxNativeFontInfo_SetNumericWeight(wxNativeFontInfo * self, int weight) {
     return self->SetNumericWeight(weight);
 }
+#endif
 void wxNativeFontInfo_SetUnderlined(wxNativeFontInfo * self, bool underlined) {
     return self->SetUnderlined(underlined);
 }
@@ -62,17 +66,6 @@ bool wxNativeFontInfo_FromUserString(wxNativeFontInfo * self, const wxString * s
 }
 wxString *wxNativeFontInfo_ToUserString(const wxNativeFontInfo * self) {
     return new wxString(self->ToUserString());
-}
-
-// CLASS: wxNativeWindow
-wxClassInfo *wxNativeWindow_CLASSINFO() {
-    return wxCLASSINFO(wxNativeWindow);
-}
-wxNativeWindow *wxNativeWindow_new() {
-    return new wxNativeWindow();
-}
-void wxNativeWindow_Disown(wxNativeWindow * self) {
-    return self->Disown();
 }
 
 // CLASS: wxNavigationKeyEvent
@@ -157,18 +150,22 @@ wxNotificationMessage *wxNotificationMessage_new() {
 wxNotificationMessage *wxNotificationMessage_new1(const wxString * title, const wxString * message, wxWindow * parent, int flags) {
     return new wxNotificationMessage(*title, *message, parent, flags);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxNotificationMessage_AddAction(wxNotificationMessage * self, wxWindowID actionid, const wxString * label) {
     return self->AddAction(actionid, *label);
 }
+#endif
 bool wxNotificationMessage_Close(wxNotificationMessage * self) {
     return self->Close();
 }
 void wxNotificationMessage_SetFlags(wxNotificationMessage * self, int flags) {
     return self->SetFlags(flags);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxNotificationMessage_SetIcon(wxNotificationMessage * self, const wxIcon * icon) {
     return self->SetIcon(*icon);
 }
+#endif
 void wxNotificationMessage_SetMessage(wxNotificationMessage * self, const wxString * message) {
     return self->SetMessage(*message);
 }
@@ -208,15 +205,19 @@ void wxNotifyEvent_Veto(wxNotifyEvent * self) {
 wxClassInfo *wxNumberEntryDialog_CLASSINFO() {
     return wxCLASSINFO(wxNumberEntryDialog);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxNumberEntryDialog *wxNumberEntryDialog_new() {
     return new wxNumberEntryDialog();
 }
+#endif
 wxNumberEntryDialog *wxNumberEntryDialog_new1(wxWindow * parent, const wxString * message, const wxString * prompt, const wxString * caption, long value, long min, long max, const wxPoint * pos) {
     return new wxNumberEntryDialog(parent, *message, *prompt, *caption, value, min, max, *pos);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxNumberEntryDialog_Create(wxNumberEntryDialog * self, wxWindow * parent, const wxString * message, const wxString * prompt, const wxString * caption, long value, long min, long max, const wxPoint * pos) {
     return self->Create(parent, *message, *prompt, *caption, value, min, max, *pos);
 }
+#endif
 long wxNumberEntryDialog_GetValue(const wxNumberEntryDialog * self) {
     return self->GetValue();
 }

@@ -36,13 +36,6 @@ extern "C" {
     pub fn wxNativeFontInfo_FromUserString(self_: *mut c_void, s: *const c_void) -> bool;
     pub fn wxNativeFontInfo_ToUserString(self_: *const c_void) -> *mut c_void;
 
-    // wxNativeWindow
-    pub fn wxNativeWindow_CLASSINFO() -> *mut c_void;
-    pub fn wxNativeWindow_new() -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxNativeWindow_new1(parent: *mut c_void, winid: c_int, handle: wxNativeWindowHandle) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxNativeWindow_Create(self_: *mut c_void, parent: *mut c_void, winid: c_int, handle: wxNativeWindowHandle) -> bool;
-    pub fn wxNativeWindow_Disown(self_: *mut c_void);
-
     // wxNavigationKeyEvent
     pub fn wxNavigationKeyEvent_CLASSINFO() -> *mut c_void;
     pub fn wxNavigationKeyEvent_new() -> *mut c_void;

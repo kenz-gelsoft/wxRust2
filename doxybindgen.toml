@@ -457,7 +457,7 @@ wxml_files = [
     'wxml/classwx_mouse_events_manager.xml',
     'wxml/classwx_move_event.xml',
     'wxml/classwx_native_font_info.xml',
-    'wxml/classwx_native_window.xml',
+    # 'wxml/classwx_native_window.xml',      # requires 3.1
     # 'wxml/classwx_navigation_enabled.xml', # base class depends template, need special treatment
     'wxml/classwx_navigation_key_event.xml',
     'wxml/classwx_non_owned_window.xml',
@@ -1484,6 +1484,10 @@ blocklist = [
 blocklist = [
     'operator=',
 ]
+wx31 = [
+    'GetNumericWeight',
+    'SetNumericWeight',
+]
 [types.wxNonOwnedWindow]
 library = 'core'
 [types.wxNotebook]
@@ -1494,6 +1498,15 @@ blocklist = [
 windows = [
     'MSWUseToasts',
     'UseTaskBarIcon',
+]
+wx31 = [
+    'AddAction',
+    'SetIcon',
+]
+[types.wxNumberEntryDialog]
+wx31 = [
+    'wxNumberEntryDialog',
+    'Create',
 ]
 [types.wxObject]
 blocklist = [

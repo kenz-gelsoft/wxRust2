@@ -2,7 +2,6 @@
 
 #include <wx/event.h>
 #include <wx/fontutil.h>
-#include <wx/nativewin.h>
 #include <wx/nonownedwnd.h>
 #include <wx/notebook.h>
 #include <wx/notifmsg.h>
@@ -18,12 +17,16 @@ void wxNativeFontInfo_Init(wxNativeFontInfo * self);
 void wxNativeFontInfo_InitFromFont(wxNativeFontInfo * self, const wxFont * font);
 int wxNativeFontInfo_GetPointSize(const wxNativeFontInfo * self);
 wxSize *wxNativeFontInfo_GetPixelSize(const wxNativeFontInfo * self);
+#if wxCHECK_VERSION(3, 1, 0)
 int wxNativeFontInfo_GetNumericWeight(const wxNativeFontInfo * self);
+#endif
 bool wxNativeFontInfo_GetUnderlined(const wxNativeFontInfo * self);
 wxString *wxNativeFontInfo_GetFaceName(const wxNativeFontInfo * self);
 void wxNativeFontInfo_SetPointSize(wxNativeFontInfo * self, int pointsize);
 void wxNativeFontInfo_SetPixelSize(wxNativeFontInfo * self, const wxSize * pixel_size);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxNativeFontInfo_SetNumericWeight(wxNativeFontInfo * self, int weight);
+#endif
 void wxNativeFontInfo_SetUnderlined(wxNativeFontInfo * self, bool underlined);
 bool wxNativeFontInfo_SetFaceName(wxNativeFontInfo * self, const wxString * facename);
 void wxNativeFontInfo_SetFaceName1(wxNativeFontInfo * self, const wxArrayString * facenames);
@@ -31,11 +34,6 @@ bool wxNativeFontInfo_FromString(wxNativeFontInfo * self, const wxString * s);
 wxString *wxNativeFontInfo_ToString(const wxNativeFontInfo * self);
 bool wxNativeFontInfo_FromUserString(wxNativeFontInfo * self, const wxString * s);
 wxString *wxNativeFontInfo_ToUserString(const wxNativeFontInfo * self);
-
-// CLASS: wxNativeWindow
-wxClassInfo *wxNativeWindow_CLASSINFO();
-wxNativeWindow *wxNativeWindow_new();
-void wxNativeWindow_Disown(wxNativeWindow * self);
 
 // CLASS: wxNavigationKeyEvent
 wxClassInfo *wxNavigationKeyEvent_CLASSINFO();
@@ -69,10 +67,14 @@ void wxNotebook_SetPadding(wxNotebook * self, const wxSize * padding);
 wxClassInfo *wxNotificationMessage_CLASSINFO();
 wxNotificationMessage *wxNotificationMessage_new();
 wxNotificationMessage *wxNotificationMessage_new1(const wxString * title, const wxString * message, wxWindow * parent, int flags);
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxNotificationMessage_AddAction(wxNotificationMessage * self, wxWindowID actionid, const wxString * label);
+#endif
 bool wxNotificationMessage_Close(wxNotificationMessage * self);
 void wxNotificationMessage_SetFlags(wxNotificationMessage * self, int flags);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxNotificationMessage_SetIcon(wxNotificationMessage * self, const wxIcon * icon);
+#endif
 void wxNotificationMessage_SetMessage(wxNotificationMessage * self, const wxString * message);
 void wxNotificationMessage_SetParent(wxNotificationMessage * self, wxWindow * parent);
 void wxNotificationMessage_SetTitle(wxNotificationMessage * self, const wxString * title);
@@ -90,9 +92,13 @@ void wxNotifyEvent_Veto(wxNotifyEvent * self);
 
 // CLASS: wxNumberEntryDialog
 wxClassInfo *wxNumberEntryDialog_CLASSINFO();
+#if wxCHECK_VERSION(3, 1, 0)
 wxNumberEntryDialog *wxNumberEntryDialog_new();
+#endif
 wxNumberEntryDialog *wxNumberEntryDialog_new1(wxWindow * parent, const wxString * message, const wxString * prompt, const wxString * caption, long value, long min, long max, const wxPoint * pos);
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxNumberEntryDialog_Create(wxNumberEntryDialog * self, wxWindow * parent, const wxString * message, const wxString * prompt, const wxString * caption, long value, long min, long max, const wxPoint * pos);
+#endif
 long wxNumberEntryDialog_GetValue(const wxNumberEntryDialog * self);
 
 } // extern "C"
