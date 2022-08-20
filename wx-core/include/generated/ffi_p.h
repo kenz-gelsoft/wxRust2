@@ -106,7 +106,9 @@ wxPasswordEntryDialog *wxPasswordEntryDialog_new(wxWindow * parent, const wxStri
 wxClassInfo *wxPen_CLASSINFO();
 wxPen *wxPen_new();
 wxPen *wxPen_new1(const wxPenInfo * info);
+#ifndef __WXGTK__
 wxPen *wxPen_new3(const wxBitmap * stipple, int width);
+#endif
 wxPen *wxPen_new4(const wxPen * pen);
 wxColour *wxPen_GetColour(const wxPen * self);
 int wxPen_GetDashes(const wxPen * self, wxDash ** dashes);

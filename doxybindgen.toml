@@ -1533,6 +1533,9 @@ blocklist = [
     'operator==',
     'operator!=',
 ]
+not_gtk = [
+    'wxPen3',
+]
 [types.wxPersistenceManager]
 blocklist = [
     # has template parameter

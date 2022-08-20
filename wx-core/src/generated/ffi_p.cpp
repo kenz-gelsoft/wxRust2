@@ -212,9 +212,11 @@ wxPen *wxPen_new() {
 wxPen *wxPen_new1(const wxPenInfo * info) {
     return new wxPen(*info);
 }
+#ifndef __WXGTK__
 wxPen *wxPen_new3(const wxBitmap * stipple, int width) {
     return new wxPen(*stipple, width);
 }
+#endif
 wxPen *wxPen_new4(const wxPen * pen) {
     return new wxPen(*pen);
 }
