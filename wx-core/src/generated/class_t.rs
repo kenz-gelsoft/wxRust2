@@ -124,6 +124,86 @@ impl<const OWNED: bool> Drop for TextEntryIsOwned<OWNED> {
     }
 }
 
+// wxTextEntryDialog
+wx_class! { TextEntryDialog =
+    TextEntryDialogIsOwned<true>(wxTextEntryDialog) impl
+        TextEntryDialogMethods,
+        DialogMethods,
+        TopLevelWindowMethods,
+        NonOwnedWindowMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> TextEntryDialogIsOwned<OWNED> {
+    pub fn new_2step() -> TextEntryDialogIsOwned<OWNED> {
+        unsafe { TextEntryDialogIsOwned(ffi::wxTextEntryDialog_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods>(
+        parent: Option<&W>,
+        message: &str,
+        caption: &str,
+        value: &str,
+        style: c_long,
+        pos: &P,
+    ) -> TextEntryDialogIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let message = WxString::from(message);
+            let message = message.as_ptr();
+            let caption = WxString::from(caption);
+            let caption = caption.as_ptr();
+            let value = WxString::from(value);
+            let value = value.as_ptr();
+            let pos = pos.as_ptr();
+            TextEntryDialogIsOwned(ffi::wxTextEntryDialog_new1(
+                parent, message, caption, value, style, pos,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<TextEntryDialogIsOwned<OWNED>> for DialogIsOwned<OWNED> {
+    fn from(o: TextEntryDialogIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<TextEntryDialogIsOwned<OWNED>> for TopLevelWindowIsOwned<OWNED> {
+    fn from(o: TextEntryDialogIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<TextEntryDialogIsOwned<OWNED>> for NonOwnedWindowIsOwned<OWNED> {
+    fn from(o: TextEntryDialogIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<TextEntryDialogIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: TextEntryDialogIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<TextEntryDialogIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: TextEntryDialogIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<TextEntryDialogIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: TextEntryDialogIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for TextEntryDialogIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTextEntryDialog_CLASSINFO()) }
+    }
+}
+
 // wxTimePickerCtrl
 wx_class! { TimePickerCtrl =
     TimePickerCtrlIsOwned<true>(wxTimePickerCtrl) impl

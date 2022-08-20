@@ -181,7 +181,7 @@ extern "C" {
         g: *mut c_void,
         b: *mut c_void,
     ) -> bool;
-    // BLOCKED: pub fn wxImage_GetPalette(self_: *const c_void) -> *const c_void;
+    // BLOCKED: pub fn wxImage_GetPalette(self_: *const c_void) -> *mut c_void;
     pub fn wxImage_GetSubImage(self_: *const c_void, rect: *const c_void) -> *mut c_void;
     // NOT_SUPPORTED: pub fn wxImage_GetType(self_: *const c_void) -> wxBitmapType;
     pub fn wxImage_HasAlpha(self_: *const c_void) -> bool;

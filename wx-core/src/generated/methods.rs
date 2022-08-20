@@ -14,6 +14,7 @@ pub use super::methods_k::*;
 pub use super::methods_l::*;
 pub use super::methods_m::*;
 pub use super::methods_n::*;
+pub use super::methods_o::*;
 pub use super::methods_p::*;
 pub use super::methods_r::*;
 pub use super::methods_s::*;

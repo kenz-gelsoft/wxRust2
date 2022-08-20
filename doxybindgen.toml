@@ -1,39 +1,4 @@
 core_files = [
-    'wxml/classwx_overlay.xml',
-    'wxml/classwx_owner_drawn_combo_box.xml',
-    'wxml/classwx_p_c_x_handler.xml',
-    'wxml/classwx_p_n_g_handler.xml',
-    'wxml/classwx_p_n_m_handler.xml',
-    'wxml/classwx_page_setup_dialog.xml',
-    'wxml/classwx_page_setup_dialog_data.xml',
-    'wxml/classwx_paint_d_c.xml',
-    'wxml/classwx_paint_event.xml',
-    'wxml/classwx_palette.xml',
-    'wxml/classwx_pan_gesture_event.xml',
-    'wxml/classwx_panel.xml',
-    'wxml/classwx_password_entry_dialog.xml',
-    'wxml/classwx_pen.xml',
-    'wxml/classwx_pen_list.xml',
-    'wxml/classwx_persistence_manager.xml',
-    'wxml/classwx_picker_base.xml',
-    'wxml/classwx_pixel_data.xml',
-    'wxml/classwx_point.xml',
-    'wxml/classwx_popup_transient_window.xml',
-    'wxml/classwx_popup_window.xml',
-    'wxml/classwx_preferences_editor.xml',
-    'wxml/classwx_preferences_page.xml',
-    'wxml/classwx_press_and_tap_event.xml',
-    'wxml/classwx_preview_canvas.xml',
-    'wxml/classwx_preview_control_bar.xml',
-    'wxml/classwx_preview_frame.xml',
-    'wxml/classwx_print_data.xml',
-    'wxml/classwx_print_dialog.xml',
-    'wxml/classwx_print_dialog_data.xml',
-    'wxml/classwx_print_preview.xml',
-    'wxml/classwx_printer.xml',
-    'wxml/classwx_printer_d_c.xml',
-    'wxml/classwx_printout.xml',
-    'wxml/classwx_property_sheet_dialog.xml',
     'wxml/classwx_quantize.xml',
     'wxml/classwx_query_layout_info_event.xml',
     'wxml/classwx_radio_box.xml',
@@ -207,7 +172,7 @@ wxml_files = [
     'wxml/classwx_choice.xml',
     'wxml/classwx_choicebook.xml',
     'wxml/classwx_class_info.xml',
-    # 'wxml/classwx_client_d_c.xml', # requires not yet generated wxDC-related classes
+    'wxml/classwx_client_d_c.xml',
     'wxml/classwx_clipboard.xml',
     'wxml/classwx_clipboard_text_event.xml',
     'wxml/classwx_close_event.xml',
@@ -466,9 +431,41 @@ wxml_files = [
     'wxml/classwx_notify_event.xml',
     'wxml/classwx_number_entry_dialog.xml',
     'wxml/classwx_object.xml',
+    'wxml/classwx_overlay.xml',
+    'wxml/classwx_owner_drawn_combo_box.xml',
+    'wxml/classwx_p_c_x_handler.xml',
+    'wxml/classwx_p_n_g_handler.xml',
+    'wxml/classwx_p_n_m_handler.xml',
+    # 'wxml/classwx_page_setup_dialog.xml',      # Our CI environment is't built with
+    # 'wxml/classwx_page_setup_dialog_data.xml', # Our CI environment is't built with
+    'wxml/classwx_paint_d_c.xml',
+    'wxml/classwx_paint_event.xml',
+    'wxml/classwx_palette.xml',
+    # 'wxml/classwx_pan_gesture_event.xml', # requires 3.1
     'wxml/classwx_panel.xml',
+    'wxml/classwx_password_entry_dialog.xml',
+    'wxml/classwx_pen.xml',
+    'wxml/classwx_pen_list.xml',
+    'wxml/classwx_persistence_manager.xml',
     'wxml/classwx_picker_base.xml',
+    # 'wxml/classwx_pixel_data.xml', # base class depends template, need special treatment
     'wxml/classwx_point.xml',
+    'wxml/classwx_popup_transient_window.xml',
+    'wxml/classwx_popup_window.xml',
+    'wxml/classwx_preferences_editor.xml',
+    'wxml/classwx_preferences_page.xml',
+    # 'wxml/classwx_press_and_tap_event.xml', # requires 3.1
+    # 'wxml/classwx_preview_canvas.xml',      # base class depends template, need special treatment
+    # 'wxml/classwx_preview_control_bar.xml', # Our CI environment is't built with
+    # 'wxml/classwx_preview_frame.xml',       # Our CI environment is't built with
+    # 'wxml/classwx_print_data.xml',          # Our CI environment is't built with
+    # 'wxml/classwx_print_dialog.xml',        # Our CI environment is't built with
+    # 'wxml/classwx_print_dialog_data.xml',   # Our CI environment is't built with
+    # 'wxml/classwx_print_preview.xml',       # Our CI environment is't built with
+    # 'wxml/classwx_printer.xml',             # Our CI environment is't built with
+    # 'wxml/classwx_printer_d_c.xml',         # Our CI environment is't built with
+    # 'wxml/classwx_printout.xml',            # Our CI environment is't built with
+    'wxml/classwx_property_sheet_dialog.xml',
     'wxml/classwx_radio_box.xml',
     'wxml/classwx_rect.xml',
     'wxml/classwx_ref_counter.xml',
@@ -492,6 +489,7 @@ wxml_files = [
     'wxml/classwx_text_attr.xml',
     'wxml/classwx_text_ctrl.xml',
     'wxml/classwx_text_entry.xml',
+    'wxml/classwx_text_entry_dialog.xml',
     'wxml/classwx_time_picker_ctrl.xml',
     'wxml/classwx_timer.xml',
     'wxml/classwx_timer_event.xml',
@@ -500,6 +498,7 @@ wxml_files = [
     'wxml/classwx_top_level_window.xml',
     'wxml/classwx_validator.xml',
     'wxml/classwx_window.xml',
+    'wxml/classwx_window_d_c.xml',
     'wxml/classwx_wrap_sizer.xml',
 ]
 
@@ -1513,6 +1512,44 @@ blocklist = [
     'operator new',
     'operator delete',
 ]
+[types.wxOwnerDrawnComboBox]
+wx31 = [
+    'IsListEmpty',
+    'IsTextEmpty',
+]
+[types.wxPageSetupDialogData]
+blocklist = [
+    'operator=',
+    'operator=1',
+    # const vs non-const
+    'GetPrintData',
+]
+[types.wxPaintEvent]
+blocklist = [
+    'wxPaintEvent',
+]
+[types.wxPalette]
+blocklist = [
+    'operator=',
+]
+[types.wxPen]
+blocklist = [
+    'operator=',
+    'operator==',
+    'operator!=',
+]
+wx31 = [
+    'wxPen1',
+]
+not_gtk = [
+    'wxPen3',
+]
+[types.wxPersistenceManager]
+blocklist = [
+    # has template parameter
+    'Register',
+    'RegisterAndRestore',
+]
 [types.wxPickerBase]
 blocklist = [
     'wxPickerBase',
@@ -1537,6 +1574,35 @@ blocklist = [
     'operator-=1',
     'operator/=',
     'operator*=',
+]
+[types.wxPreferencesPage]
+blocklist = [
+    # abstract
+    'wxPreferencesPage',
+]
+wx31 = [
+    'GetIcon',
+]
+[types.wxPrintData]
+blocklist = [
+    'operator=',
+]
+[types.wxPrintDialogData]
+blocklist = [
+    'operator=',
+    'operator=1',
+    # deprecated
+    'SetSetupDialog',
+]
+[types.wxPrinter]
+blocklist = [
+    # returns refs
+    'GetPrintDialogData',
+]
+[types.wxPrintout]
+blocklist = [
+    # abstract
+    'wxPrintout',
 ]
 [types.wxRadioBox]
 wx317 = [
@@ -1680,6 +1746,10 @@ wx31 = [
     'EmptyUndoBuffer',
 ]
 [types.wxTextEntry]
+wx31 = [
+    'ForceUpper',
+]
+[types.wxTextEntryDialog]
 wx31 = [
     'ForceUpper',
 ]

@@ -265,6 +265,10 @@ extern "C" {
     ) -> bool;
     pub fn wxChoicebook_GetChoiceCtrl(self_: *const c_void) -> *mut c_void;
 
+    // wxClientDC
+    pub fn wxClientDC_CLASSINFO() -> *mut c_void;
+    pub fn wxClientDC_new(window: *mut c_void) -> *mut c_void;
+
     // wxClipboard
     pub fn wxClipboard_CLASSINFO() -> *mut c_void;
     pub fn wxClipboard_new() -> *mut c_void;

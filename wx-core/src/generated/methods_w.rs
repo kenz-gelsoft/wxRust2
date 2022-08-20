@@ -816,8 +816,11 @@ pub trait WindowMethods: EvtHandlerMethods {
     fn inherits_foreground_colour(&self) -> bool {
         unsafe { ffi::wxWindow_InheritsForegroundColour(self.as_ptr()) }
     }
-    fn set_palette(&self, pal: *const c_void) {
-        unsafe { ffi::wxWindow_SetPalette(self.as_ptr(), pal) }
+    fn set_palette<P: PaletteMethods>(&self, pal: &P) {
+        unsafe {
+            let pal = pal.as_ptr();
+            ffi::wxWindow_SetPalette(self.as_ptr(), pal)
+        }
     }
     fn should_inherit_colours(&self) -> bool {
         unsafe { ffi::wxWindow_ShouldInheritColours(self.as_ptr()) }
@@ -1349,6 +1352,9 @@ pub trait WindowMethods: EvtHandlerMethods {
         }
     }
 }
+
+// wxWindowDC
+pub trait WindowDCMethods: DCMethods {}
 
 // wxWrapSizer
 pub trait WrapSizerMethods: BoxSizerMethods {}

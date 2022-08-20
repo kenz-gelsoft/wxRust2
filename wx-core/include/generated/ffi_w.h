@@ -1,5 +1,6 @@
 #pragma once
 
+#include <wx/dcclient.h>
 #include <wx/window.h>
 #include <wx/wrapsizer.h>
 
@@ -312,6 +313,10 @@ void wxWindow_UnreserveControlId(wxWindowID id, int count);
 wxWindow *wxWindow_new();
 wxWindow *wxWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxWindow_Create(wxWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+
+// CLASS: wxWindowDC
+wxClassInfo *wxWindowDC_CLASSINFO();
+wxWindowDC *wxWindowDC_new(wxWindow * window);
 
 // CLASS: wxWrapSizer
 wxClassInfo *wxWrapSizer_CLASSINFO();

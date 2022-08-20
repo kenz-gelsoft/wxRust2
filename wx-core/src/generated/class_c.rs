@@ -661,6 +661,56 @@ impl<const OWNED: bool> WindowMethods for ChoicebookIsOwned<OWNED> {
     }
 }
 
+// wxClientDC
+wx_class! { ClientDC =
+    ClientDCIsOwned<true>(wxClientDC) impl
+        ClientDCMethods,
+        WindowDCMethods,
+        DCMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> ClientDCIsOwned<OWNED> {
+    pub fn new<W: WindowMethods>(window: Option<&W>) -> ClientDCIsOwned<OWNED> {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ClientDCIsOwned(ffi::wxClientDC_new(window))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<ClientDCIsOwned<OWNED>> for WindowDCIsOwned<OWNED> {
+    fn from(o: ClientDCIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ClientDCIsOwned<OWNED>> for DCIsOwned<OWNED> {
+    fn from(o: ClientDCIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ClientDCIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: ClientDCIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for ClientDCIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxClientDC_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for ClientDCIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
 // wxClipboard
 wx_class! { Clipboard =
     ClipboardIsOwned<true>(wxClipboard) impl

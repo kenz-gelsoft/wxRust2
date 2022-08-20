@@ -595,8 +595,11 @@ pub trait DCMethods: ObjectMethods {
             ffi::wxDC_SetBrush(self.as_ptr(), brush)
         }
     }
-    fn set_pen(&self, pen: *const c_void) {
-        unsafe { ffi::wxDC_SetPen(self.as_ptr(), pen) }
+    fn set_pen<P: PenMethods>(&self, pen: &P) {
+        unsafe {
+            let pen = pen.as_ptr();
+            ffi::wxDC_SetPen(self.as_ptr(), pen)
+        }
     }
     fn copy_attributes<D: DCMethods>(&self, dc: &D) {
         unsafe {
@@ -683,8 +686,11 @@ pub trait DCMethods: ObjectMethods {
     }
     // NOT_SUPPORTED: fn SetLogicalFunction()
     // NOT_SUPPORTED: fn SetMapMode()
-    fn set_palette(&self, palette: *const c_void) {
-        unsafe { ffi::wxDC_SetPalette(self.as_ptr(), palette) }
+    fn set_palette<P: PaletteMethods>(&self, palette: &P) {
+        unsafe {
+            let palette = palette.as_ptr();
+            ffi::wxDC_SetPalette(self.as_ptr(), palette)
+        }
     }
     fn set_user_scale(&self, x_scale: c_double, y_scale: c_double) {
         unsafe { ffi::wxDC_SetUserScale(self.as_ptr(), x_scale, y_scale) }

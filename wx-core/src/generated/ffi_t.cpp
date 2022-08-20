@@ -520,6 +520,34 @@ void wxTextEntry_WriteText(wxTextEntry * self, const wxString * text) {
     return self->WriteText(*text);
 }
 
+// CLASS: wxTextEntryDialog
+wxClassInfo *wxTextEntryDialog_CLASSINFO() {
+    return wxCLASSINFO(wxTextEntryDialog);
+}
+wxTextEntryDialog *wxTextEntryDialog_new() {
+    return new wxTextEntryDialog();
+}
+wxTextEntryDialog *wxTextEntryDialog_new1(wxWindow * parent, const wxString * message, const wxString * caption, const wxString * value, long style, const wxPoint * pos) {
+    return new wxTextEntryDialog(parent, *message, *caption, *value, style, *pos);
+}
+bool wxTextEntryDialog_Create(wxTextEntryDialog * self, wxWindow * parent, const wxString * message, const wxString * caption, const wxString * value, long style, const wxPoint * pos) {
+    return self->Create(parent, *message, *caption, *value, style, *pos);
+}
+wxString *wxTextEntryDialog_GetValue(const wxTextEntryDialog * self) {
+    return new wxString(self->GetValue());
+}
+void wxTextEntryDialog_SetTextValidator(wxTextEntryDialog * self, const wxTextValidator * validator) {
+    return self->SetTextValidator(*validator);
+}
+void wxTextEntryDialog_SetValue(wxTextEntryDialog * self, const wxString * value) {
+    return self->SetValue(*value);
+}
+#if wxCHECK_VERSION(3, 1, 0)
+void wxTextEntryDialog_ForceUpper(wxTextEntryDialog * self) {
+    return self->ForceUpper();
+}
+#endif
+
 // CLASS: wxTimePickerCtrl
 wxClassInfo *wxTimePickerCtrl_CLASSINFO() {
     return wxCLASSINFO(wxTimePickerCtrl);

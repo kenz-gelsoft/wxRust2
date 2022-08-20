@@ -441,8 +441,11 @@ pub trait ImageMethods: ObjectMethods {
             ffi::wxImage_SetOption1(self.as_ptr(), name, value)
         }
     }
-    fn set_palette(&self, palette: *const c_void) {
-        unsafe { ffi::wxImage_SetPalette(self.as_ptr(), palette) }
+    fn set_palette<P: PaletteMethods>(&self, palette: &P) {
+        unsafe {
+            let palette = palette.as_ptr();
+            ffi::wxImage_SetPalette(self.as_ptr(), palette)
+        }
     }
     // NOT_SUPPORTED: fn SetRGB()
     // NOT_SUPPORTED: fn SetRGB1()

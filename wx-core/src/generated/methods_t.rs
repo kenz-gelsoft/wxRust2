@@ -676,6 +676,61 @@ pub trait TextEntryMethods: WxRustMethods {
     }
 }
 
+// wxTextEntryDialog
+pub trait TextEntryDialogMethods: DialogMethods {
+    fn create_str<W: WindowMethods, P: PointMethods>(
+        &self,
+        parent: Option<&W>,
+        message: &str,
+        caption: &str,
+        value: &str,
+        style: c_long,
+        pos: &P,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let message = WxString::from(message);
+            let message = message.as_ptr();
+            let caption = WxString::from(caption);
+            let caption = caption.as_ptr();
+            let value = WxString::from(value);
+            let value = value.as_ptr();
+            let pos = pos.as_ptr();
+            ffi::wxTextEntryDialog_Create(
+                self.as_ptr(),
+                parent,
+                message,
+                caption,
+                value,
+                style,
+                pos,
+            )
+        }
+    }
+    // DTOR: fn ~wxTextEntryDialog()
+    fn get_value(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxTextEntryDialog_GetValue(self.as_ptr())).into() }
+    }
+    fn set_text_validator(&self, validator: *const c_void) {
+        unsafe { ffi::wxTextEntryDialog_SetTextValidator(self.as_ptr(), validator) }
+    }
+    // NOT_SUPPORTED: fn SetTextValidator1()
+    // NOT_SUPPORTED: fn SetMaxLength()
+    fn set_value(&self, value: &str) {
+        unsafe {
+            let value = WxString::from(value);
+            let value = value.as_ptr();
+            ffi::wxTextEntryDialog_SetValue(self.as_ptr(), value)
+        }
+    }
+    fn force_upper(&self) {
+        unsafe { ffi::wxTextEntryDialog_ForceUpper(self.as_ptr()) }
+    }
+}
+
 // wxTimePickerCtrl
 pub trait TimePickerCtrlMethods: ControlMethods {
     fn create_datetime<
