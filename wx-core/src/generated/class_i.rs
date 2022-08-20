@@ -310,48 +310,6 @@ impl<const OWNED: bool> Drop for ImageIsOwned<OWNED> {
     }
 }
 
-// wxImageDataObject
-wx_class! { ImageDataObject =
-    ImageDataObjectIsOwned<true>(wxImageDataObject) impl
-        ImageDataObjectMethods,
-        CustomDataObjectMethods,
-        DataObjectSimpleMethods,
-        DataObjectMethods
-}
-impl<const OWNED: bool> ImageDataObjectIsOwned<OWNED> {
-    pub fn new<I: ImageMethods>(image: &I) -> ImageDataObjectIsOwned<OWNED> {
-        unsafe {
-            let image = image.as_ptr();
-            ImageDataObjectIsOwned(ffi::wxImageDataObject_new(image))
-        }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<ImageDataObjectIsOwned<OWNED>> for CustomDataObjectIsOwned<OWNED> {
-    fn from(o: ImageDataObjectIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<ImageDataObjectIsOwned<OWNED>> for DataObjectSimpleIsOwned<OWNED> {
-    fn from(o: ImageDataObjectIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> From<ImageDataObjectIsOwned<OWNED>> for DataObjectIsOwned<OWNED> {
-    fn from(o: ImageDataObjectIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> Drop for ImageDataObjectIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxImageDataObject_delete(self.0) }
-        }
-    }
-}
-
 // wxImageHandler
 wx_class! { ImageHandler =
     ImageHandlerIsOwned<true>(wxImageHandler) impl

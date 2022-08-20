@@ -292,12 +292,6 @@ extern "C" {
         -> *mut c_void;
     // DTOR: pub fn wxImage_~wxImage(self_: *mut c_void);
 
-    // wxImageDataObject
-    pub fn wxImageDataObject_delete(self_: *mut c_void);
-    pub fn wxImageDataObject_new(image: *const c_void) -> *mut c_void;
-    pub fn wxImageDataObject_GetImage(self_: *const c_void) -> *mut c_void;
-    pub fn wxImageDataObject_SetImage(self_: *mut c_void, image: *const c_void);
-
     // wxImageHandler
     pub fn wxImageHandler_CLASSINFO() -> *mut c_void;
     // BLOCKED: pub fn wxImageHandler_new() -> *mut c_void;

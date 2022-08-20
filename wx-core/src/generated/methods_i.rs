@@ -527,19 +527,6 @@ pub trait ImageMethods: ObjectMethods {
     // DTOR: fn ~wxImage()
 }
 
-// wxImageDataObject
-pub trait ImageDataObjectMethods: CustomDataObjectMethods {
-    fn get_image(&self) -> Image {
-        unsafe { Image::from_ptr(ffi::wxImageDataObject_GetImage(self.as_ptr())) }
-    }
-    fn set_image<I: ImageMethods>(&self, image: &I) {
-        unsafe {
-            let image = image.as_ptr();
-            ffi::wxImageDataObject_SetImage(self.as_ptr(), image)
-        }
-    }
-}
-
 // wxImageHandler
 pub trait ImageHandlerMethods: ObjectMethods {
     // DTOR: fn ~wxImageHandler()

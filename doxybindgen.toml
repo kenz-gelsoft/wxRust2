@@ -452,7 +452,7 @@ wxml_files = [
     'wxml/classwx_iconize_event.xml',
     'wxml/classwx_id_manager.xml',
     'wxml/classwx_image.xml',
-    'wxml/classwx_image_data_object.xml',
+    # 'wxml/classwx_image_data_object.xml', # requires 3.1
     'wxml/classwx_image_handler.xml',
     'wxml/classwx_image_list.xml',
     'wxml/classwx_info_bar.xml',

@@ -357,20 +357,6 @@ wxImage *wxImage_new11(wxInputStream * stream, const wxString * mimetype, int in
     return new wxImage(*stream, *mimetype, index);
 }
 
-// CLASS: wxImageDataObject
-void wxImageDataObject_delete(wxImageDataObject *self) {
-    delete self;
-}
-wxImageDataObject *wxImageDataObject_new(const wxImage * image) {
-    return new wxImageDataObject(*image);
-}
-wxImage *wxImageDataObject_GetImage(const wxImageDataObject * self) {
-    return new wxImage(self->GetImage());
-}
-void wxImageDataObject_SetImage(wxImageDataObject * self, const wxImage * image) {
-    return self->SetImage(*image);
-}
-
 // CLASS: wxImageHandler
 wxClassInfo *wxImageHandler_CLASSINFO() {
     return wxCLASSINFO(wxImageHandler);

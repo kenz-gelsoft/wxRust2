@@ -1,7 +1,6 @@
 #pragma once
 
 #include <wx/ctrlsub.h>
-#include <wx/dataobj.h>
 #include <wx/event.h>
 #include <wx/icon.h>
 #include <wx/iconbndl.h>
@@ -141,12 +140,6 @@ wxImage *wxImage_new6(const wxSize * sz, unsigned char * data, unsigned char * a
 wxImage *wxImage_new7(const char *const * xpm_data);
 wxImage *wxImage_new9(const wxString * name, const wxString * mimetype, int index);
 wxImage *wxImage_new11(wxInputStream * stream, const wxString * mimetype, int index);
-
-// CLASS: wxImageDataObject
-void wxImageDataObject_delete(wxImageDataObject *self);
-wxImageDataObject *wxImageDataObject_new(const wxImage * image);
-wxImage *wxImageDataObject_GetImage(const wxImageDataObject * self);
-void wxImageDataObject_SetImage(wxImageDataObject * self, const wxImage * image);
 
 // CLASS: wxImageHandler
 wxClassInfo *wxImageHandler_CLASSINFO();
