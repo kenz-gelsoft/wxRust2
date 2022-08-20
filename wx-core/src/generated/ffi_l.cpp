@@ -142,18 +142,22 @@ bool wxListCtrl_GetColumn(const wxListCtrl * self, int col, wxListItem * item) {
 int wxListCtrl_GetColumnCount(const wxListCtrl * self) {
     return self->GetColumnCount();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 int wxListCtrl_GetColumnIndexFromOrder(const wxListCtrl * self, int pos) {
     return self->GetColumnIndexFromOrder(pos);
 }
 int wxListCtrl_GetColumnOrder(const wxListCtrl * self, int col) {
     return self->GetColumnOrder(col);
 }
+#endif
 int wxListCtrl_GetColumnWidth(const wxListCtrl * self, int col) {
     return self->GetColumnWidth(col);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxArrayInt *wxListCtrl_GetColumnsOrder(const wxListCtrl * self) {
     return new wxArrayInt(self->GetColumnsOrder());
 }
+#endif
 int wxListCtrl_GetCountPerPage(const wxListCtrl * self) {
     return self->GetCountPerPage();
 }
@@ -214,9 +218,11 @@ wxRect *wxListCtrl_GetViewRect(const wxListCtrl * self) {
 void wxListCtrl_SetAlternateRowColour(wxListCtrl * self, const wxColour * colour) {
     return self->SetAlternateRowColour(*colour);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxColour *wxListCtrl_GetAlternateRowColour(const wxListCtrl * self) {
     return new wxColour(self->GetAlternateRowColour());
 }
+#endif
 long wxListCtrl_HitTest(const wxListCtrl * self, const wxPoint * point, int * flags, long * ptr_sub_item) {
     return self->HitTest(*point, *flags, ptr_sub_item);
 }
@@ -241,9 +247,11 @@ long wxListCtrl_InsertItem2(wxListCtrl * self, long index, int image_index) {
 long wxListCtrl_InsertItem3(wxListCtrl * self, long index, const wxString * label, int image_index) {
     return self->InsertItem(index, *label, image_index);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxListCtrl_IsEmpty(const wxListCtrl * self) {
     return self->IsEmpty();
 }
+#endif
 bool wxListCtrl_IsVirtual(const wxListCtrl * self) {
     return self->IsVirtual();
 }
@@ -262,10 +270,10 @@ bool wxListCtrl_SetColumn(wxListCtrl * self, int col, wxListItem * item) {
 bool wxListCtrl_SetColumnWidth(wxListCtrl * self, int col, int width) {
     return self->SetColumnWidth(col, width);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxListCtrl_SetColumnsOrder(wxListCtrl * self, const wxArrayInt * orders) {
     return self->SetColumnsOrder(*orders);
 }
-#if wxCHECK_VERSION(3, 1, 0)
 bool wxListCtrl_SetHeaderAttr(wxListCtrl * self, const wxItemAttr * attr) {
     return self->SetHeaderAttr(*attr);
 }
@@ -273,6 +281,7 @@ bool wxListCtrl_SetHeaderAttr(wxListCtrl * self, const wxItemAttr * attr) {
 void wxListCtrl_SetImageList(wxListCtrl * self, wxImageList * image_list, int which) {
     return self->SetImageList(image_list, which);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxListCtrl_SetNormalImages(wxListCtrl * self, const wxVector< wxBitmapBundle > * images) {
     return self->SetNormalImages(*images);
 }
@@ -282,6 +291,7 @@ void wxListCtrl_SetSmallImages(wxListCtrl * self, const wxVector< wxBitmapBundle
 bool wxListCtrl_IsVisible(const wxListCtrl * self, long item) {
     return self->IsVisible(item);
 }
+#endif
 bool wxListCtrl_SetItem(wxListCtrl * self, wxListItem * info) {
     return self->SetItem(*info);
 }
@@ -324,6 +334,7 @@ void wxListCtrl_SetSingleStyle(wxListCtrl * self, long style, bool add) {
 void wxListCtrl_SetTextColour(wxListCtrl * self, const wxColour * col) {
     return self->SetTextColour(*col);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxListCtrl_HasCheckBoxes(const wxListCtrl * self) {
     return self->HasCheckBoxes();
 }
@@ -354,6 +365,7 @@ bool wxListCtrl_GetUpdatedAscendingSortIndicator(const wxListCtrl * self, int co
 bool wxListCtrl_IsAscendingSortIndicator(const wxListCtrl * self) {
     return self->IsAscendingSortIndicator();
 }
+#endif
 
 // CLASS: wxListEvent
 wxClassInfo *wxListEvent_CLASSINFO() {

@@ -1394,7 +1394,26 @@ wx31 = [
 ]
 [types.wxListCtrl]
 wx31 = [
+    'CheckItem',
+    'EnableCheckBoxes',
+    'ExtendRulesAndAlternateColour',
+    'GetAlternateRowColour',
+    'GetColumnOrder',
+    'GetColumnsOrder',
+    'GetColumnIndexFromOrder',
+    'GetSortIndicator',
+    'GetUpdatedAscendingSortIndicator',
+    'HasCheckBoxes',
+    'IsAscendingSortIndicator',
+    'IsEmpty',
+    'IsItemChecked',
+    'IsVisible',
+    'RemoveSortIndicator',
+    'SetColumnsOrder',
     'SetHeaderAttr',
+    'SetNormalImages',
+    'SetSmallImages',
+    'ShowSortIndicator',
 ]
 [types.wxMenu]
 blocklist = [
