@@ -33,3 +33,21 @@ impl<const OWNED: bool> Drop for ObjectIsOwned<OWNED> {
         }
     }
 }
+
+// wxObjectRefData
+wx_class! { ObjectRefData =
+    ObjectRefDataIsOwned<true>(wxObjectRefData) impl
+        ObjectRefDataMethods
+}
+impl<const OWNED: bool> ObjectRefDataIsOwned<OWNED> {
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for ObjectRefDataIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObjectRefData_delete(self.0) }
+        }
+    }
+}

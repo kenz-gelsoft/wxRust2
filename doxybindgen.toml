@@ -1,18 +1,4 @@
 core_files = [
-    'wxml/classwx_u_i_action_simulator.xml',
-    'wxml/classwx_u_r_l_data_object.xml',
-    'wxml/classwx_update_u_i_event.xml',
-    'wxml/classwx_v_list_box.xml',
-    'wxml/classwx_v_scrolled_window.xml',
-    'wxml/classwx_validator.xml',
-    'wxml/classwx_var_h_scroll_helper.xml',
-    'wxml/classwx_var_h_v_scroll_helper.xml',
-    'wxml/classwx_var_scroll_helper_base.xml',
-    'wxml/classwx_var_v_scroll_helper.xml',
-    'wxml/classwx_variant_data_currency.xml',
-    'wxml/classwx_variant_data_error_code.xml',
-    'wxml/classwx_variant_data_safe_array.xml',
-    'wxml/classwx_view.xml',
     'wxml/classwx_window.xml',
     'wxml/classwx_window_create_event.xml',
     'wxml/classwx_window_d_c.xml',
@@ -336,6 +322,7 @@ wxml_files = [
     'wxml/classwx_notify_event.xml',
     'wxml/classwx_number_entry_dialog.xml',
     'wxml/classwx_object.xml',
+    'wxml/classwx_object_ref_data.xml',
     'wxml/classwx_overlay.xml',
     'wxml/classwx_owner_drawn_combo_box.xml',
     'wxml/classwx_p_c_x_handler.xml',
@@ -432,7 +419,7 @@ wxml_files = [
     'wxml/classwx_status_bar_pane.xml',
     'wxml/classwx_std_dialog_button_sizer.xml',
     'wxml/classwx_stock_preferences_page.xml',
-    # 'wxml/classwx_stream_to_text_redirector.xml', # depends on C++ stdio
+    # 'wxml/classwx_stream_to_text_redirector.xml',   # depends on C++ iostream
     'wxml/classwx_sys_colour_changed_event.xml',
     'wxml/classwx_system_settings.xml',
     'wxml/classwx_t_g_a_handler.xml',
@@ -473,7 +460,21 @@ wxml_files = [
     'wxml/classwx_tree_list_item_comparator.xml',
     'wxml/classwx_treebook.xml',
     # 'wxml/classwx_two_finger_tap_event.xml', # requires 3.1
+    'wxml/classwx_u_i_action_simulator.xml',
+    'wxml/classwx_u_r_l_data_object.xml',
+    'wxml/classwx_update_u_i_event.xml',
+    'wxml/classwx_v_list_box.xml',
+    'wxml/classwx_v_scrolled_window.xml',
     'wxml/classwx_validator.xml',
+    # 'wxml/classwx_var_h_scroll_helper.xml',     # base class not generated correctly
+    # 'wxml/classwx_var_h_v_scroll_helper.xml',   # base class not generated correctly
+    # 'wxml/classwx_var_scroll_helper_base.xml',  # non-leaf mix-in class doesn't work well yet
+    # 'wxml/classwx_var_v_scroll_helper.xml',     # base class not generated correctly
+    'wxml/classwx_variant_data.xml',
+    # 'wxml/classwx_variant_data_currency.xml',   # MSW only
+    # 'wxml/classwx_variant_data_error_code.xml', # MSW only
+    # 'wxml/classwx_variant_data_safe_array.xml', # MSW only
+    # 'wxml/classwx_view.xml',                    # Our CI environment is't built with (mingw64)
     'wxml/classwx_window.xml',
     'wxml/classwx_window_d_c.xml',
     'wxml/classwx_wrap_sizer.xml',
@@ -1916,9 +1917,64 @@ blocklist = [
     # abstract
     'wxTreeListItemComparator',
 ]
+[types.wxUIActionSimulator]
+wx31 = [
+    'Select',
+]
+[types.wxUpdateUIEvent]
+wx31 = [
+    'IsCheckable',
+]
 [types.wxValidator]
 returns_owned = [
     'Clone',
+]
+[types.wxVarHScrollHelper]
+blocklist = [
+    # abstract
+    'wxVarHScrollHelper',
+]
+[types.wxVarHVScrollHelper]
+blocklist = [
+    # abstract
+    'wxVarHVScrollHelper',
+]
+[types.wxVariantData]
+blocklist = [
+    # abstract
+    'wxVariantData',
+    # maybe doc or API mistake (GetAsAny)
+    'GetAny',
+    # uses C++ iostream
+    'Read',
+    'Write',
+]
+[types.wxVarVScrollHelper]
+blocklist = [
+    # abstract
+    'wxVarVScrollHelper',
+]
+[types.wxVarScrollHelperBase]
+blocklist = [
+    # abstract
+    'wxVarScrollHelperBase',
+]
+[types.wxView]
+blocklist = [
+    # abstract
+    'wxView',
+]
+[types.wxVListBox]
+blocklist = [
+    # abstract
+    'wxVListBox',
+    'wxVListBox1',
+]
+[types.wxVScrolledWindow]
+blocklist = [
+    # abstract
+    'wxVScrolledWindow',
+    'wxVScrolledWindow1',
 ]
 [types.wxWindow]
 blocklist = [

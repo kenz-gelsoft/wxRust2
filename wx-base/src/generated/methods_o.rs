@@ -6,8 +6,8 @@ pub trait ObjectMethods: WxRustMethods {
     fn get_class_info(&self) -> Option<ClassInfoIsOwned<false>> {
         unsafe { ClassInfo::option_from(ffi::wxObject_GetClassInfo(self.as_ptr())) }
     }
-    fn get_ref_data(&self) -> *mut c_void {
-        unsafe { ffi::wxObject_GetRefData(self.as_ptr()) }
+    fn get_ref_data(&self) -> Option<ObjectRefDataIsOwned<false>> {
+        unsafe { ObjectRefData::option_from(ffi::wxObject_GetRefData(self.as_ptr())) }
     }
     fn is_kind_of<C: ClassInfoMethods>(&self, info: Option<&C>) -> bool {
         unsafe {
@@ -30,8 +30,14 @@ pub trait ObjectMethods: WxRustMethods {
             ffi::wxObject_Ref(self.as_ptr(), clone)
         }
     }
-    fn set_ref_data(&self, data: *mut c_void) {
-        unsafe { ffi::wxObject_SetRefData(self.as_ptr(), data) }
+    fn set_ref_data<O: ObjectRefDataMethods>(&self, data: Option<&O>) {
+        unsafe {
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxObject_SetRefData(self.as_ptr(), data)
+        }
     }
     fn un_ref(&self) {
         unsafe { ffi::wxObject_UnRef(self.as_ptr()) }
@@ -42,3 +48,6 @@ pub trait ObjectMethods: WxRustMethods {
     // BLOCKED: fn operator delete()
     // BLOCKED: fn operator new()
 }
+
+// wxObjectRefData
+pub trait ObjectRefDataMethods: WxRustMethods {}

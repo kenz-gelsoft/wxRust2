@@ -29,5 +29,6 @@ typedef wxMessageDialog::ButtonLabel ButtonLabel;
 #include "generated/ffi_r.h"
 #include "generated/ffi_s.h"
 #include "generated/ffi_t.h"
+#include "generated/ffi_u.h"
 #include "generated/ffi_v.h"
 #include "generated/ffi_w.h"

@@ -15,3 +15,4 @@ typedef wxDateTime::WeekDay  WeekDay;
 #include "generated/ffi_r.h"
 #include "generated/ffi_s.h"
 #include "generated/ffi_t.h"
+#include "generated/ffi_v.h"
