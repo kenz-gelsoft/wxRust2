@@ -198,7 +198,7 @@ extern "C" {
         font: *const c_void,
     );
     pub fn wxWindow_GetTextExtent1(self_: *const c_void, string: *const c_void) -> *mut c_void;
-    // BLOCKED: pub fn wxWindow_GetUpdateRegion(self_: *const c_void) -> *const c_void;
+    // BLOCKED: pub fn wxWindow_GetUpdateRegion(self_: *const c_void) -> *mut c_void;
     pub fn wxWindow_GetUpdateClientRect(self_: *const c_void) -> *mut c_void;
     pub fn wxWindow_HasTransparentBackground(self_: *mut c_void) -> bool;
     pub fn wxWindow_Refresh(self_: *mut c_void, erase_background: bool, rect: *const c_void);

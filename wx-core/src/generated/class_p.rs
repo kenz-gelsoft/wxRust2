@@ -574,8 +574,11 @@ impl<const OWNED: bool> PointIsOwned<OWNED> {
     pub fn new_with_int(x: c_int, y: c_int) -> PointIsOwned<OWNED> {
         unsafe { PointIsOwned(ffi::wxPoint_new1(x, y)) }
     }
-    pub fn new_with_realpoint(pt: *const c_void) -> PointIsOwned<OWNED> {
-        unsafe { PointIsOwned(ffi::wxPoint_new2(pt)) }
+    pub fn new_with_realpoint<R: RealPointMethods>(pt: &R) -> PointIsOwned<OWNED> {
+        unsafe {
+            let pt = pt.as_ptr();
+            PointIsOwned(ffi::wxPoint_new2(pt))
+        }
     }
     pub fn none() -> Option<&'static Self> {
         None

@@ -47,6 +47,150 @@ extern "C" {
     // Mix-in(s) to wxRadioBox
     pub fn wxRadioBox_AsItemContainerImmutable(obj: *mut c_void) -> *mut c_void;
 
+    // wxRadioButton
+    pub fn wxRadioButton_CLASSINFO() -> *mut c_void;
+    pub fn wxRadioButton_new() -> *mut c_void;
+    pub fn wxRadioButton_new1(
+        parent: *mut c_void,
+        id: c_int,
+        label: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    // DTOR: pub fn wxRadioButton_~wxRadioButton(self_: *mut c_void);
+    pub fn wxRadioButton_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        label: *const c_void,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxRadioButton_GetValue(self_: *const c_void) -> bool;
+    pub fn wxRadioButton_SetValue(self_: *mut c_void, value: bool);
+    pub fn wxRadioButton_GetFirstInGroup(self_: *const c_void) -> *mut c_void;
+    pub fn wxRadioButton_GetLastInGroup(self_: *const c_void) -> *mut c_void;
+    pub fn wxRadioButton_GetPreviousInGroup(self_: *const c_void) -> *mut c_void;
+    pub fn wxRadioButton_GetNextInGroup(self_: *const c_void) -> *mut c_void;
+
+    // wxRealPoint
+    pub fn wxRealPoint_delete(self_: *mut c_void);
+    // BLOCKED: pub fn wxRealPoint_operator=(self_: *mut c_void, pt: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxRealPoint_operator==(self_: *mut c_void, p1: *const c_void, p2: *const c_void) -> bool;
+    // BLOCKED: pub fn wxRealPoint_operator!=(self_: *mut c_void, p1: *const c_void, p2: *const c_void) -> bool;
+    // BLOCKED: pub fn wxRealPoint_operator+(self_: *mut c_void, p1: *const c_void, p2: *const c_void) -> wxRealPoint;
+    // BLOCKED: pub fn wxRealPoint_operator-(self_: *mut c_void, p1: *const c_void, p2: *const c_void) -> wxRealPoint;
+    // BLOCKED: pub fn wxRealPoint_operator+=(self_: *mut c_void, pt: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxRealPoint_operator-=(self_: *mut c_void, pt: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxRealPoint_operator+1(self_: *mut c_void, pt: *const c_void, sz: *const c_void) -> wxRealPoint;
+    // BLOCKED: pub fn wxRealPoint_operator-1(self_: *mut c_void, pt: *const c_void, sz: *const c_void) -> wxRealPoint;
+    // BLOCKED: pub fn wxRealPoint_operator+2(self_: *mut c_void, sz: *const c_void, pt: *const c_void) -> wxRealPoint;
+    // BLOCKED: pub fn wxRealPoint_operator-2(self_: *mut c_void, sz: *const c_void, pt: *const c_void) -> wxRealPoint;
+    // BLOCKED: pub fn wxRealPoint_operator+=1(self_: *mut c_void, sz: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxRealPoint_operator-=1(self_: *mut c_void, sz: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxRealPoint_operator/(self_: *mut c_void, sz: *const c_void, factor: c_int) -> wxSize;
+    // BLOCKED: pub fn wxRealPoint_operator*(self_: *mut c_void, sz: *const c_void, factor: c_int) -> wxSize;
+    // BLOCKED: pub fn wxRealPoint_operator*1(self_: *mut c_void, factor: c_int, sz: *const c_void) -> wxSize;
+    // BLOCKED: pub fn wxRealPoint_operator/=(self_: *mut c_void, factor: c_int) -> *mut c_void;
+    // BLOCKED: pub fn wxRealPoint_operator*=(self_: *mut c_void, factor: c_int) -> *mut c_void;
+    pub fn wxRealPoint_new() -> *mut c_void;
+    pub fn wxRealPoint_new1(x: c_double, y: c_double) -> *mut c_void;
+    pub fn wxRealPoint_new2(pt: *const c_void) -> *mut c_void;
+
+    // wxRearrangeCtrl
+    pub fn wxRearrangeCtrl_CLASSINFO() -> *mut c_void;
+    pub fn wxRearrangeCtrl_new() -> *mut c_void;
+    pub fn wxRearrangeCtrl_new1(
+        parent: *mut c_void,
+        id: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        order: *const c_void,
+        items: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxRearrangeCtrl_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        order: *const c_void,
+        items: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxRearrangeCtrl_GetList(self_: *const c_void) -> *mut c_void;
+
+    // wxRearrangeDialog
+    pub fn wxRearrangeDialog_CLASSINFO() -> *mut c_void;
+    pub fn wxRearrangeDialog_new() -> *mut c_void;
+    pub fn wxRearrangeDialog_new1(
+        parent: *mut c_void,
+        message: *const c_void,
+        title: *const c_void,
+        order: *const c_void,
+        items: *const c_void,
+        pos: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxRearrangeDialog_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        message: *const c_void,
+        title: *const c_void,
+        order: *const c_void,
+        items: *const c_void,
+        pos: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxRearrangeDialog_AddExtraControls(self_: *mut c_void, win: *mut c_void);
+    pub fn wxRearrangeDialog_GetList(self_: *const c_void) -> *mut c_void;
+    pub fn wxRearrangeDialog_GetOrder(self_: *const c_void) -> *mut c_void;
+
+    // wxRearrangeList
+    pub fn wxRearrangeList_CLASSINFO() -> *mut c_void;
+    pub fn wxRearrangeList_new() -> *mut c_void;
+    pub fn wxRearrangeList_new1(
+        parent: *mut c_void,
+        id: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        order: *const c_void,
+        items: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxRearrangeList_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        order: *const c_void,
+        items: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxRearrangeList_GetCurrentOrder(self_: *const c_void) -> *mut c_void;
+    pub fn wxRearrangeList_CanMoveCurrentUp(self_: *const c_void) -> bool;
+    pub fn wxRearrangeList_CanMoveCurrentDown(self_: *const c_void) -> bool;
+    pub fn wxRearrangeList_MoveCurrentUp(self_: *mut c_void) -> bool;
+    pub fn wxRearrangeList_MoveCurrentDown(self_: *mut c_void) -> bool;
+    // Mix-in(s) to wxRearrangeList
+    pub fn wxRearrangeList_AsItemContainer(obj: *mut c_void) -> *mut c_void;
+
     // wxRect
     pub fn wxRect_delete(self_: *mut c_void);
     pub fn wxRect_new() -> *mut c_void;
@@ -110,6 +254,88 @@ extern "C" {
     // BLOCKED: pub fn wxRect_operator*=(self_: *mut c_void, r: *const c_void) -> *mut c_void;
     // BLOCKED: pub fn wxRect_operator=(self_: *mut c_void, rect: *const c_void) -> *mut c_void;
     // BLOCKED: pub fn wxRect_operator==(self_: *mut c_void, r1: *const c_void, r2: *const c_void) -> bool;
+
+    // wxRegion
+    pub fn wxRegion_CLASSINFO() -> *mut c_void;
+    pub fn wxRegion_new() -> *mut c_void;
+    pub fn wxRegion_new1(x: c_int, y: c_int, width: c_int, height: c_int) -> *mut c_void;
+    pub fn wxRegion_new2(top_left: *const c_void, bottom_right: *const c_void) -> *mut c_void;
+    pub fn wxRegion_new3(rect: *const c_void) -> *mut c_void;
+    pub fn wxRegion_new4(region: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxRegion_new5(n: usize, points: *const c_void, fill_style: wxPolygonFillMode) -> *mut c_void;
+    pub fn wxRegion_new6(bmp: *const c_void) -> *mut c_void;
+    pub fn wxRegion_new7(
+        bmp: *const c_void,
+        trans_colour: *const c_void,
+        tolerance: c_int,
+    ) -> *mut c_void;
+    // DTOR: pub fn wxRegion_~wxRegion(self_: *mut c_void);
+    pub fn wxRegion_Clear(self_: *mut c_void);
+    // NOT_SUPPORTED: pub fn wxRegion_Contains(self_: *const c_void, x: c_int, y: c_int) -> wxRegionContain;
+    // NOT_SUPPORTED: pub fn wxRegion_Contains1(self_: *const c_void, pt: *const c_void) -> wxRegionContain;
+    // NOT_SUPPORTED: pub fn wxRegion_Contains2(self_: *const c_void, x: c_int, y: c_int, width: c_int, height: c_int) -> wxRegionContain;
+    // NOT_SUPPORTED: pub fn wxRegion_Contains3(self_: *const c_void, rect: *const c_void) -> wxRegionContain;
+    pub fn wxRegion_ConvertToBitmap(self_: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxRegion_GetBox(self_: *const c_void, x: *mut c_void, y: *mut c_void, width: *mut c_void, height: *mut c_void);
+    pub fn wxRegion_GetBox1(self_: *const c_void) -> *mut c_void;
+    pub fn wxRegion_Intersect(
+        self_: *mut c_void,
+        x: c_int,
+        y: c_int,
+        width: c_int,
+        height: c_int,
+    ) -> bool;
+    pub fn wxRegion_Intersect1(self_: *mut c_void, rect: *const c_void) -> bool;
+    pub fn wxRegion_Intersect2(self_: *mut c_void, region: *const c_void) -> bool;
+    pub fn wxRegion_IsEmpty(self_: *const c_void) -> bool;
+    pub fn wxRegion_IsEqual(self_: *const c_void, region: *const c_void) -> bool;
+    pub fn wxRegion_Offset(self_: *mut c_void, x: c_int, y: c_int) -> bool;
+    pub fn wxRegion_Offset1(self_: *mut c_void, pt: *const c_void) -> bool;
+    pub fn wxRegion_Subtract(self_: *mut c_void, rect: *const c_void) -> bool;
+    pub fn wxRegion_Subtract1(self_: *mut c_void, region: *const c_void) -> bool;
+    pub fn wxRegion_Union(
+        self_: *mut c_void,
+        x: c_int,
+        y: c_int,
+        width: c_int,
+        height: c_int,
+    ) -> bool;
+    pub fn wxRegion_Union1(self_: *mut c_void, rect: *const c_void) -> bool;
+    pub fn wxRegion_Union2(self_: *mut c_void, region: *const c_void) -> bool;
+    pub fn wxRegion_Union3(self_: *mut c_void, bmp: *const c_void) -> bool;
+    pub fn wxRegion_Union4(
+        self_: *mut c_void,
+        bmp: *const c_void,
+        trans_colour: *const c_void,
+        tolerance: c_int,
+    ) -> bool;
+    pub fn wxRegion_Xor(
+        self_: *mut c_void,
+        x: c_int,
+        y: c_int,
+        width: c_int,
+        height: c_int,
+    ) -> bool;
+    pub fn wxRegion_Xor1(self_: *mut c_void, rect: *const c_void) -> bool;
+    pub fn wxRegion_Xor2(self_: *mut c_void, region: *const c_void) -> bool;
+    // BLOCKED: pub fn wxRegion_operator=(self_: *mut c_void, region: *const c_void) -> *mut c_void;
+
+    // wxRegionIterator
+    pub fn wxRegionIterator_CLASSINFO() -> *mut c_void;
+    pub fn wxRegionIterator_new() -> *mut c_void;
+    pub fn wxRegionIterator_new1(region: *const c_void) -> *mut c_void;
+    pub fn wxRegionIterator_GetH(self_: *const c_void) -> c_int;
+    pub fn wxRegionIterator_GetHeight(self_: *const c_void) -> c_int;
+    pub fn wxRegionIterator_GetRect(self_: *const c_void) -> *mut c_void;
+    pub fn wxRegionIterator_GetW(self_: *const c_void) -> c_int;
+    pub fn wxRegionIterator_GetWidth(self_: *const c_void) -> c_int;
+    pub fn wxRegionIterator_GetX(self_: *const c_void) -> c_int;
+    pub fn wxRegionIterator_GetY(self_: *const c_void) -> c_int;
+    pub fn wxRegionIterator_HaveRects(self_: *const c_void) -> bool;
+    pub fn wxRegionIterator_Reset(self_: *mut c_void);
+    pub fn wxRegionIterator_Reset1(self_: *mut c_void, region: *const c_void);
+    // BLOCKED: pub fn wxRegionIterator_operator++(self_: *mut c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxRegionIterator_operator bool(self_: *const c_void);
 
     // wxRendererNative
     pub fn wxRendererNative_delete(self_: *mut c_void);
@@ -256,5 +482,21 @@ extern "C" {
     pub fn wxRendererNative_GetGeneric() -> *mut c_void;
     pub fn wxRendererNative_Load(name: *const c_void) -> *mut c_void;
     pub fn wxRendererNative_Set(renderer: *mut c_void) -> *mut c_void;
+
+    // wxRichToolTip
+    pub fn wxRichToolTip_delete(self_: *mut c_void);
+    pub fn wxRichToolTip_new(title: *const c_void, message: *const c_void) -> *mut c_void;
+    pub fn wxRichToolTip_SetBackgroundColour(
+        self_: *mut c_void,
+        col: *const c_void,
+        col_end: *const c_void,
+    );
+    pub fn wxRichToolTip_SetIcon(self_: *mut c_void, icon: c_int);
+    pub fn wxRichToolTip_SetIcon1(self_: *mut c_void, icon: *const c_void);
+    // NOT_SUPPORTED: pub fn wxRichToolTip_SetTimeout(self_: *mut c_void, milliseconds_timeout: unsigned, milliseconds_delay: unsigned);
+    // NOT_SUPPORTED: pub fn wxRichToolTip_SetTipKind(self_: *mut c_void, tip_kind: wxTipKind);
+    pub fn wxRichToolTip_SetTitleFont(self_: *mut c_void, font: *const c_void);
+    pub fn wxRichToolTip_ShowFor(self_: *mut c_void, win: *mut c_void, rect: *const c_void);
+    // DTOR: pub fn wxRichToolTip_~wxRichToolTip(self_: *mut c_void);
 
 }

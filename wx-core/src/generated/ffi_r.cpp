@@ -55,6 +55,127 @@ wxItemContainerImmutable *wxRadioBox_AsItemContainerImmutable(wxRadioBox* obj) {
     return static_cast<wxItemContainerImmutable*>(obj);
 }
 
+// CLASS: wxRadioButton
+wxClassInfo *wxRadioButton_CLASSINFO() {
+    return wxCLASSINFO(wxRadioButton);
+}
+wxRadioButton *wxRadioButton_new() {
+    return new wxRadioButton();
+}
+wxRadioButton *wxRadioButton_new1(wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return new wxRadioButton(parent, id, *label, *pos, *size, style, *validator, *name);
+}
+bool wxRadioButton_Create(wxRadioButton * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, *label, *pos, *size, style, *validator, *name);
+}
+bool wxRadioButton_GetValue(const wxRadioButton * self) {
+    return self->GetValue();
+}
+void wxRadioButton_SetValue(wxRadioButton * self, bool value) {
+    return self->SetValue(value);
+}
+#if wxCHECK_VERSION(3, 1, 0)
+wxRadioButton * wxRadioButton_GetFirstInGroup(const wxRadioButton * self) {
+    return self->GetFirstInGroup();
+}
+wxRadioButton * wxRadioButton_GetLastInGroup(const wxRadioButton * self) {
+    return self->GetLastInGroup();
+}
+wxRadioButton * wxRadioButton_GetPreviousInGroup(const wxRadioButton * self) {
+    return self->GetPreviousInGroup();
+}
+wxRadioButton * wxRadioButton_GetNextInGroup(const wxRadioButton * self) {
+    return self->GetNextInGroup();
+}
+#endif
+
+// CLASS: wxRealPoint
+void wxRealPoint_delete(wxRealPoint *self) {
+    delete self;
+}
+wxRealPoint *wxRealPoint_new() {
+    return new wxRealPoint();
+}
+wxRealPoint *wxRealPoint_new1(double x, double y) {
+    return new wxRealPoint(x, y);
+}
+wxRealPoint *wxRealPoint_new2(const wxPoint * pt) {
+    return new wxRealPoint(*pt);
+}
+
+// CLASS: wxRearrangeCtrl
+wxClassInfo *wxRearrangeCtrl_CLASSINFO() {
+    return wxCLASSINFO(wxRearrangeCtrl);
+}
+wxRearrangeCtrl *wxRearrangeCtrl_new() {
+    return new wxRearrangeCtrl();
+}
+wxRearrangeCtrl *wxRearrangeCtrl_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayInt * order, const wxArrayString * items, long style, const wxValidator * validator, const wxString * name) {
+    return new wxRearrangeCtrl(parent, id, *pos, *size, *order, *items, style, *validator, *name);
+}
+bool wxRearrangeCtrl_Create(wxRearrangeCtrl * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayInt * order, const wxArrayString * items, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, *pos, *size, *order, *items, style, *validator, *name);
+}
+wxRearrangeList * wxRearrangeCtrl_GetList(const wxRearrangeCtrl * self) {
+    return self->GetList();
+}
+
+// CLASS: wxRearrangeDialog
+wxClassInfo *wxRearrangeDialog_CLASSINFO() {
+    return wxCLASSINFO(wxRearrangeDialog);
+}
+wxRearrangeDialog *wxRearrangeDialog_new() {
+    return new wxRearrangeDialog();
+}
+wxRearrangeDialog *wxRearrangeDialog_new1(wxWindow * parent, const wxString * message, const wxString * title, const wxArrayInt * order, const wxArrayString * items, const wxPoint * pos, const wxString * name) {
+    return new wxRearrangeDialog(parent, *message, *title, *order, *items, *pos, *name);
+}
+bool wxRearrangeDialog_Create(wxRearrangeDialog * self, wxWindow * parent, const wxString * message, const wxString * title, const wxArrayInt * order, const wxArrayString * items, const wxPoint * pos, const wxString * name) {
+    return self->Create(parent, *message, *title, *order, *items, *pos, *name);
+}
+void wxRearrangeDialog_AddExtraControls(wxRearrangeDialog * self, wxWindow * win) {
+    return self->AddExtraControls(win);
+}
+wxRearrangeList * wxRearrangeDialog_GetList(const wxRearrangeDialog * self) {
+    return self->GetList();
+}
+wxArrayInt *wxRearrangeDialog_GetOrder(const wxRearrangeDialog * self) {
+    return new wxArrayInt(self->GetOrder());
+}
+
+// CLASS: wxRearrangeList
+wxClassInfo *wxRearrangeList_CLASSINFO() {
+    return wxCLASSINFO(wxRearrangeList);
+}
+wxRearrangeList *wxRearrangeList_new() {
+    return new wxRearrangeList();
+}
+wxRearrangeList *wxRearrangeList_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayInt * order, const wxArrayString * items, long style, const wxValidator * validator, const wxString * name) {
+    return new wxRearrangeList(parent, id, *pos, *size, *order, *items, style, *validator, *name);
+}
+bool wxRearrangeList_Create(wxRearrangeList * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, const wxArrayInt * order, const wxArrayString * items, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, *pos, *size, *order, *items, style, *validator, *name);
+}
+wxArrayInt *wxRearrangeList_GetCurrentOrder(const wxRearrangeList * self) {
+    return new wxArrayInt(self->GetCurrentOrder());
+}
+bool wxRearrangeList_CanMoveCurrentUp(const wxRearrangeList * self) {
+    return self->CanMoveCurrentUp();
+}
+bool wxRearrangeList_CanMoveCurrentDown(const wxRearrangeList * self) {
+    return self->CanMoveCurrentDown();
+}
+bool wxRearrangeList_MoveCurrentUp(wxRearrangeList * self) {
+    return self->MoveCurrentUp();
+}
+bool wxRearrangeList_MoveCurrentDown(wxRearrangeList * self) {
+    return self->MoveCurrentDown();
+}
+// Mix-in(s) to wxRearrangeList
+wxItemContainer *wxRearrangeList_AsItemContainer(wxRearrangeList* obj) {
+    return static_cast<wxItemContainer*>(obj);
+}
+
 // CLASS: wxRect
 void wxRect_delete(wxRect *self) {
     delete self;
@@ -198,6 +319,133 @@ wxRect *wxRect_Union(const wxRect * self, const wxRect * rect) {
     return new wxRect(self->Union(*rect));
 }
 
+// CLASS: wxRegion
+wxClassInfo *wxRegion_CLASSINFO() {
+    return wxCLASSINFO(wxRegion);
+}
+wxRegion *wxRegion_new() {
+    return new wxRegion();
+}
+wxRegion *wxRegion_new1(wxCoord x, wxCoord y, wxCoord width, wxCoord height) {
+    return new wxRegion(x, y, width, height);
+}
+wxRegion *wxRegion_new2(const wxPoint * top_left, const wxPoint * bottom_right) {
+    return new wxRegion(*top_left, *bottom_right);
+}
+wxRegion *wxRegion_new3(const wxRect * rect) {
+    return new wxRegion(*rect);
+}
+wxRegion *wxRegion_new4(const wxRegion * region) {
+    return new wxRegion(*region);
+}
+wxRegion *wxRegion_new6(const wxBitmap * bmp) {
+    return new wxRegion(*bmp);
+}
+wxRegion *wxRegion_new7(const wxBitmap * bmp, const wxColour * trans_colour, int tolerance) {
+    return new wxRegion(*bmp, *trans_colour, tolerance);
+}
+void wxRegion_Clear(wxRegion * self) {
+    return self->Clear();
+}
+wxBitmap *wxRegion_ConvertToBitmap(const wxRegion * self) {
+    return new wxBitmap(self->ConvertToBitmap());
+}
+wxRect *wxRegion_GetBox1(const wxRegion * self) {
+    return new wxRect(self->GetBox());
+}
+bool wxRegion_Intersect(wxRegion * self, wxCoord x, wxCoord y, wxCoord width, wxCoord height) {
+    return self->Intersect(x, y, width, height);
+}
+bool wxRegion_Intersect1(wxRegion * self, const wxRect * rect) {
+    return self->Intersect(*rect);
+}
+bool wxRegion_Intersect2(wxRegion * self, const wxRegion * region) {
+    return self->Intersect(*region);
+}
+bool wxRegion_IsEmpty(const wxRegion * self) {
+    return self->IsEmpty();
+}
+bool wxRegion_IsEqual(const wxRegion * self, const wxRegion * region) {
+    return self->IsEqual(*region);
+}
+bool wxRegion_Offset(wxRegion * self, wxCoord x, wxCoord y) {
+    return self->Offset(x, y);
+}
+bool wxRegion_Offset1(wxRegion * self, const wxPoint * pt) {
+    return self->Offset(*pt);
+}
+bool wxRegion_Subtract(wxRegion * self, const wxRect * rect) {
+    return self->Subtract(*rect);
+}
+bool wxRegion_Subtract1(wxRegion * self, const wxRegion * region) {
+    return self->Subtract(*region);
+}
+bool wxRegion_Union(wxRegion * self, wxCoord x, wxCoord y, wxCoord width, wxCoord height) {
+    return self->Union(x, y, width, height);
+}
+bool wxRegion_Union1(wxRegion * self, const wxRect * rect) {
+    return self->Union(*rect);
+}
+bool wxRegion_Union2(wxRegion * self, const wxRegion * region) {
+    return self->Union(*region);
+}
+bool wxRegion_Union3(wxRegion * self, const wxBitmap * bmp) {
+    return self->Union(*bmp);
+}
+bool wxRegion_Union4(wxRegion * self, const wxBitmap * bmp, const wxColour * trans_colour, int tolerance) {
+    return self->Union(*bmp, *trans_colour, tolerance);
+}
+bool wxRegion_Xor(wxRegion * self, wxCoord x, wxCoord y, wxCoord width, wxCoord height) {
+    return self->Xor(x, y, width, height);
+}
+bool wxRegion_Xor1(wxRegion * self, const wxRect * rect) {
+    return self->Xor(*rect);
+}
+bool wxRegion_Xor2(wxRegion * self, const wxRegion * region) {
+    return self->Xor(*region);
+}
+
+// CLASS: wxRegionIterator
+wxClassInfo *wxRegionIterator_CLASSINFO() {
+    return wxCLASSINFO(wxRegionIterator);
+}
+wxRegionIterator *wxRegionIterator_new() {
+    return new wxRegionIterator();
+}
+wxRegionIterator *wxRegionIterator_new1(const wxRegion * region) {
+    return new wxRegionIterator(*region);
+}
+wxCoord wxRegionIterator_GetH(const wxRegionIterator * self) {
+    return self->GetH();
+}
+wxCoord wxRegionIterator_GetHeight(const wxRegionIterator * self) {
+    return self->GetHeight();
+}
+wxRect *wxRegionIterator_GetRect(const wxRegionIterator * self) {
+    return new wxRect(self->GetRect());
+}
+wxCoord wxRegionIterator_GetW(const wxRegionIterator * self) {
+    return self->GetW();
+}
+wxCoord wxRegionIterator_GetWidth(const wxRegionIterator * self) {
+    return self->GetWidth();
+}
+wxCoord wxRegionIterator_GetX(const wxRegionIterator * self) {
+    return self->GetX();
+}
+wxCoord wxRegionIterator_GetY(const wxRegionIterator * self) {
+    return self->GetY();
+}
+bool wxRegionIterator_HaveRects(const wxRegionIterator * self) {
+    return self->HaveRects();
+}
+void wxRegionIterator_Reset(wxRegionIterator * self) {
+    return self->Reset();
+}
+void wxRegionIterator_Reset1(wxRegionIterator * self, const wxRegion * region) {
+    return self->Reset(*region);
+}
+
 // CLASS: wxRendererNative
 void wxRendererNative_delete(wxRendererNative *self) {
     delete self;
@@ -290,6 +538,31 @@ wxRendererNative * wxRendererNative_Load(const wxString * name) {
 }
 wxRendererNative * wxRendererNative_Set(wxRendererNative * renderer) {
     return wxRendererNative::Set(renderer);
+}
+
+// CLASS: wxRichToolTip
+void wxRichToolTip_delete(wxRichToolTip *self) {
+    delete self;
+}
+wxRichToolTip *wxRichToolTip_new(const wxString * title, const wxString * message) {
+    return new wxRichToolTip(*title, *message);
+}
+void wxRichToolTip_SetBackgroundColour(wxRichToolTip * self, const wxColour * col, const wxColour * col_end) {
+    return self->SetBackgroundColour(*col, *col_end);
+}
+void wxRichToolTip_SetIcon(wxRichToolTip * self, int icon) {
+    return self->SetIcon(icon);
+}
+#if wxCHECK_VERSION(3, 2, 0)
+void wxRichToolTip_SetIcon1(wxRichToolTip * self, const wxBitmapBundle * icon) {
+    return self->SetIcon(*icon);
+}
+#endif
+void wxRichToolTip_SetTitleFont(wxRichToolTip * self, const wxFont * font) {
+    return self->SetTitleFont(*font);
+}
+void wxRichToolTip_ShowFor(wxRichToolTip * self, wxWindow * win, const wxRect * rect) {
+    return self->ShowFor(win, rect);
 }
 
 } // extern "C"

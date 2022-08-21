@@ -444,8 +444,11 @@ pub trait GraphicsContextMethods: GraphicsObjectMethods {
     fn reset_clip(&self) {
         unsafe { ffi::wxGraphicsContext_ResetClip(self.as_ptr()) }
     }
-    fn clip(&self, region: *const c_void) {
-        unsafe { ffi::wxGraphicsContext_Clip(self.as_ptr(), region) }
+    fn clip<R: RegionMethods>(&self, region: &R) {
+        unsafe {
+            let region = region.as_ptr();
+            ffi::wxGraphicsContext_Clip(self.as_ptr(), region)
+        }
     }
     // NOT_SUPPORTED: fn Clip1()
     fn get_clip_box(&self, x: *mut c_void, y: *mut c_void, w: *mut c_void, h: *mut c_void) {
@@ -1031,14 +1034,15 @@ pub trait GraphicsRendererMethods: ObjectMethods {
             ))
         }
     }
-    fn create_font_at_dpi<F: FontMethods, C: ColourMethods>(
+    fn create_font_at_dpi<F: FontMethods, R: RealPointMethods, C: ColourMethods>(
         &self,
         font: &F,
-        dpi: *const c_void,
+        dpi: &R,
         col: &C,
     ) -> GraphicsFont {
         unsafe {
             let font = font.as_ptr();
+            let dpi = dpi.as_ptr();
             let col = col.as_ptr();
             GraphicsFont::from_ptr(ffi::wxGraphicsRenderer_CreateFontAtDPI(
                 self.as_ptr(),
