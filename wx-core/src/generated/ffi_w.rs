@@ -391,9 +391,106 @@ extern "C" {
         name: *const c_void,
     ) -> bool;
 
+    // wxWindowCreateEvent
+    pub fn wxWindowCreateEvent_CLASSINFO() -> *mut c_void;
+    pub fn wxWindowCreateEvent_new(win: *mut c_void) -> *mut c_void;
+    pub fn wxWindowCreateEvent_GetWindow(self_: *const c_void) -> *mut c_void;
+
     // wxWindowDC
     pub fn wxWindowDC_CLASSINFO() -> *mut c_void;
     pub fn wxWindowDC_new(window: *mut c_void) -> *mut c_void;
+
+    // wxWindowDestroyEvent
+    pub fn wxWindowDestroyEvent_CLASSINFO() -> *mut c_void;
+    pub fn wxWindowDestroyEvent_new(win: *mut c_void) -> *mut c_void;
+    pub fn wxWindowDestroyEvent_GetWindow(self_: *const c_void) -> *mut c_void;
+
+    // wxWindowDisabler
+    pub fn wxWindowDisabler_delete(self_: *mut c_void);
+    pub fn wxWindowDisabler_new(disable: bool) -> *mut c_void;
+    pub fn wxWindowDisabler_new1(
+        win_to_skip: *mut c_void,
+        win_to_skip2: *mut c_void,
+    ) -> *mut c_void;
+    // DTOR: pub fn wxWindowDisabler_~wxWindowDisabler(self_: *mut c_void);
+
+    // wxWizard
+    pub fn wxWizard_CLASSINFO() -> *mut c_void;
+    pub fn wxWizard_new() -> *mut c_void;
+    pub fn wxWizard_new1(
+        parent: *mut c_void,
+        id: c_int,
+        title: *const c_void,
+        bitmap: *const c_void,
+        pos: *const c_void,
+        style: c_long,
+    ) -> *mut c_void;
+    pub fn wxWizard_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        title: *const c_void,
+        bitmap: *const c_void,
+        pos: *const c_void,
+        style: c_long,
+    ) -> bool;
+    pub fn wxWizard_FitToPage(self_: *mut c_void, first_page: *const c_void);
+    pub fn wxWizard_GetBitmap(self_: *const c_void) -> *mut c_void;
+    pub fn wxWizard_GetBitmapBackgroundColour(self_: *const c_void) -> *mut c_void;
+    pub fn wxWizard_GetBitmapPlacement(self_: *const c_void) -> c_int;
+    pub fn wxWizard_GetCurrentPage(self_: *const c_void) -> *mut c_void;
+    pub fn wxWizard_GetMinimumBitmapWidth(self_: *const c_void) -> c_int;
+    pub fn wxWizard_GetPageAreaSizer(self_: *const c_void) -> *mut c_void;
+    pub fn wxWizard_GetPageSize(self_: *const c_void) -> *mut c_void;
+    pub fn wxWizard_HasNextPage(self_: *mut c_void, page: *mut c_void) -> bool;
+    pub fn wxWizard_HasPrevPage(self_: *mut c_void, page: *mut c_void) -> bool;
+    pub fn wxWizard_RunWizard(self_: *mut c_void, first_page: *mut c_void) -> bool;
+    pub fn wxWizard_SetBitmap(self_: *mut c_void, bitmap: *const c_void);
+    pub fn wxWizard_SetBitmapBackgroundColour(self_: *mut c_void, colour: *const c_void);
+    pub fn wxWizard_SetBitmapPlacement(self_: *mut c_void, placement: c_int);
+    pub fn wxWizard_SetBorder(self_: *mut c_void, border: c_int);
+    pub fn wxWizard_SetMinimumBitmapWidth(self_: *mut c_void, width: c_int);
+    pub fn wxWizard_SetPageSize(self_: *mut c_void, size_page: *const c_void);
+
+    // wxWizardEvent
+    pub fn wxWizardEvent_CLASSINFO() -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxWizardEvent_new(type_: wxEventType, id: c_int, direction: bool, page: *mut c_void) -> *mut c_void;
+    pub fn wxWizardEvent_GetDirection(self_: *const c_void) -> bool;
+    pub fn wxWizardEvent_GetPage(self_: *const c_void) -> *mut c_void;
+
+    // wxWizardPage
+    pub fn wxWizardPage_CLASSINFO() -> *mut c_void;
+    // BLOCKED: pub fn wxWizardPage_new() -> *mut c_void;
+    // BLOCKED: pub fn wxWizardPage_new1(parent: *mut c_void, bitmap: *const c_void) -> *mut c_void;
+    pub fn wxWizardPage_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        bitmap: *const c_void,
+    ) -> bool;
+    pub fn wxWizardPage_GetBitmap(self_: *const c_void) -> *mut c_void;
+    pub fn wxWizardPage_GetNext(self_: *const c_void) -> *mut c_void;
+    pub fn wxWizardPage_GetPrev(self_: *const c_void) -> *mut c_void;
+
+    // wxWizardPageSimple
+    pub fn wxWizardPageSimple_CLASSINFO() -> *mut c_void;
+    pub fn wxWizardPageSimple_new() -> *mut c_void;
+    pub fn wxWizardPageSimple_new1(
+        parent: *mut c_void,
+        prev: *mut c_void,
+        next: *mut c_void,
+        bitmap: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxWizardPageSimple_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        prev: *mut c_void,
+        next: *mut c_void,
+        bitmap: *const c_void,
+    ) -> bool;
+    pub fn wxWizardPageSimple_Chain(self_: *mut c_void, next: *mut c_void) -> *mut c_void;
+    pub fn wxWizardPageSimple_SetNext(self_: *mut c_void, next: *mut c_void);
+    pub fn wxWizardPageSimple_SetPrev(self_: *mut c_void, prev: *mut c_void);
+    pub fn wxWizardPageSimple_Chain1(first: *mut c_void, second: *mut c_void);
 
     // wxWrapSizer
     pub fn wxWrapSizer_CLASSINFO() -> *mut c_void;

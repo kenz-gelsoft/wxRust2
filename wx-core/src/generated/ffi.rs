@@ -23,3 +23,4 @@ pub use super::ffi_t::*;
 pub use super::ffi_u::*;
 pub use super::ffi_v::*;
 pub use super::ffi_w::*;
+pub use super::ffi_x::*;

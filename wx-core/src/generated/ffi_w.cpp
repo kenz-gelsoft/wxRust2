@@ -878,12 +878,164 @@ bool wxWindow_Create(wxWindow * self, wxWindow * parent, wxWindowID id, const wx
     return self->Create(parent, id, *pos, *size, style, *name);
 }
 
+// CLASS: wxWindowCreateEvent
+wxClassInfo *wxWindowCreateEvent_CLASSINFO() {
+    return wxCLASSINFO(wxWindowCreateEvent);
+}
+wxWindowCreateEvent *wxWindowCreateEvent_new(wxWindow * win) {
+    return new wxWindowCreateEvent(win);
+}
+wxWindow * wxWindowCreateEvent_GetWindow(const wxWindowCreateEvent * self) {
+    return self->GetWindow();
+}
+
 // CLASS: wxWindowDC
 wxClassInfo *wxWindowDC_CLASSINFO() {
     return wxCLASSINFO(wxWindowDC);
 }
 wxWindowDC *wxWindowDC_new(wxWindow * window) {
     return new wxWindowDC(window);
+}
+
+// CLASS: wxWindowDestroyEvent
+wxClassInfo *wxWindowDestroyEvent_CLASSINFO() {
+    return wxCLASSINFO(wxWindowDestroyEvent);
+}
+wxWindowDestroyEvent *wxWindowDestroyEvent_new(wxWindow * win) {
+    return new wxWindowDestroyEvent(win);
+}
+wxWindow * wxWindowDestroyEvent_GetWindow(const wxWindowDestroyEvent * self) {
+    return self->GetWindow();
+}
+
+// CLASS: wxWindowDisabler
+void wxWindowDisabler_delete(wxWindowDisabler *self) {
+    delete self;
+}
+wxWindowDisabler *wxWindowDisabler_new(bool disable) {
+    return new wxWindowDisabler(disable);
+}
+wxWindowDisabler *wxWindowDisabler_new1(wxWindow * win_to_skip, wxWindow * win_to_skip2) {
+    return new wxWindowDisabler(win_to_skip, win_to_skip2);
+}
+
+// CLASS: wxWizard
+wxClassInfo *wxWizard_CLASSINFO() {
+    return wxCLASSINFO(wxWizard);
+}
+wxWizard *wxWizard_new() {
+    return new wxWizard();
+}
+wxWizard *wxWizard_new1(wxWindow * parent, int id, const wxString * title, const wxBitmapBundle * bitmap, const wxPoint * pos, long style) {
+    return new wxWizard(parent, id, *title, *bitmap, *pos, style);
+}
+bool wxWizard_Create(wxWizard * self, wxWindow * parent, int id, const wxString * title, const wxBitmapBundle * bitmap, const wxPoint * pos, long style) {
+    return self->Create(parent, id, *title, *bitmap, *pos, style);
+}
+void wxWizard_FitToPage(wxWizard * self, const wxWizardPage * first_page) {
+    return self->FitToPage(first_page);
+}
+wxBitmap *wxWizard_GetBitmap(const wxWizard * self) {
+    return new wxBitmap(self->GetBitmap());
+}
+wxColour *wxWizard_GetBitmapBackgroundColour(const wxWizard * self) {
+    return new wxColour(self->GetBitmapBackgroundColour());
+}
+int wxWizard_GetBitmapPlacement(const wxWizard * self) {
+    return self->GetBitmapPlacement();
+}
+wxWizardPage * wxWizard_GetCurrentPage(const wxWizard * self) {
+    return self->GetCurrentPage();
+}
+int wxWizard_GetMinimumBitmapWidth(const wxWizard * self) {
+    return self->GetMinimumBitmapWidth();
+}
+wxSizer * wxWizard_GetPageAreaSizer(const wxWizard * self) {
+    return self->GetPageAreaSizer();
+}
+wxSize *wxWizard_GetPageSize(const wxWizard * self) {
+    return new wxSize(self->GetPageSize());
+}
+bool wxWizard_HasNextPage(wxWizard * self, wxWizardPage * page) {
+    return self->HasNextPage(page);
+}
+bool wxWizard_HasPrevPage(wxWizard * self, wxWizardPage * page) {
+    return self->HasPrevPage(page);
+}
+bool wxWizard_RunWizard(wxWizard * self, wxWizardPage * first_page) {
+    return self->RunWizard(first_page);
+}
+void wxWizard_SetBitmap(wxWizard * self, const wxBitmapBundle * bitmap) {
+    return self->SetBitmap(*bitmap);
+}
+void wxWizard_SetBitmapBackgroundColour(wxWizard * self, const wxColour * colour) {
+    return self->SetBitmapBackgroundColour(*colour);
+}
+void wxWizard_SetBitmapPlacement(wxWizard * self, int placement) {
+    return self->SetBitmapPlacement(placement);
+}
+void wxWizard_SetBorder(wxWizard * self, int border) {
+    return self->SetBorder(border);
+}
+void wxWizard_SetMinimumBitmapWidth(wxWizard * self, int width) {
+    return self->SetMinimumBitmapWidth(width);
+}
+void wxWizard_SetPageSize(wxWizard * self, const wxSize * size_page) {
+    return self->SetPageSize(*size_page);
+}
+
+// CLASS: wxWizardEvent
+wxClassInfo *wxWizardEvent_CLASSINFO() {
+    return wxCLASSINFO(wxWizardEvent);
+}
+bool wxWizardEvent_GetDirection(const wxWizardEvent * self) {
+    return self->GetDirection();
+}
+wxWizardPage * wxWizardEvent_GetPage(const wxWizardEvent * self) {
+    return self->GetPage();
+}
+
+// CLASS: wxWizardPage
+wxClassInfo *wxWizardPage_CLASSINFO() {
+    return wxCLASSINFO(wxWizardPage);
+}
+bool wxWizardPage_Create(wxWizardPage * self, wxWizard * parent, const wxBitmapBundle * bitmap) {
+    return self->Create(parent, *bitmap);
+}
+wxBitmap *wxWizardPage_GetBitmap(const wxWizardPage * self) {
+    return new wxBitmap(self->GetBitmap());
+}
+wxWizardPage * wxWizardPage_GetNext(const wxWizardPage * self) {
+    return self->GetNext();
+}
+wxWizardPage * wxWizardPage_GetPrev(const wxWizardPage * self) {
+    return self->GetPrev();
+}
+
+// CLASS: wxWizardPageSimple
+wxClassInfo *wxWizardPageSimple_CLASSINFO() {
+    return wxCLASSINFO(wxWizardPageSimple);
+}
+wxWizardPageSimple *wxWizardPageSimple_new() {
+    return new wxWizardPageSimple();
+}
+wxWizardPageSimple *wxWizardPageSimple_new1(wxWizard * parent, wxWizardPage * prev, wxWizardPage * next, const wxBitmapBundle * bitmap) {
+    return new wxWizardPageSimple(parent, prev, next, *bitmap);
+}
+bool wxWizardPageSimple_Create(wxWizardPageSimple * self, wxWizard * parent, wxWizardPage * prev, wxWizardPage * next, const wxBitmapBundle * bitmap) {
+    return self->Create(parent, prev, next, *bitmap);
+}
+wxWizardPageSimple * wxWizardPageSimple_Chain(wxWizardPageSimple * self, wxWizardPageSimple * next) {
+    return &(self->Chain(next));
+}
+void wxWizardPageSimple_SetNext(wxWizardPageSimple * self, wxWizardPage * next) {
+    return self->SetNext(next);
+}
+void wxWizardPageSimple_SetPrev(wxWizardPageSimple * self, wxWizardPage * prev) {
+    return self->SetPrev(prev);
+}
+void wxWizardPageSimple_Chain1(wxWizardPageSimple * first, wxWizardPageSimple * second) {
+    return wxWizardPageSimple::Chain(first, second);
 }
 
 // CLASS: wxWrapSizer
