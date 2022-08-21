@@ -1740,6 +1740,10 @@ gtk = [
     'GetInstallPrefix',
     'SetInstallPrefix',
 ]
+[types.wxSound]
+not_windows = [
+    'IsPlaying',
+]
 [types.wxSpinButton]
 wx31 = [
     'GetIncrement',

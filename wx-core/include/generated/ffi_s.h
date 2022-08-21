@@ -384,7 +384,9 @@ wxSound *wxSound_new2(size_t size, const void * data);
 bool wxSound_Create(wxSound * self, const wxString * file_name, bool is_resource);
 bool wxSound_Create1(wxSound * self, size_t size, const void * data);
 bool wxSound_IsOk(const wxSound * self);
+#ifndef __WXMSW__
 bool wxSound_IsPlaying();
+#endif
 void wxSound_Stop();
 
 // CLASS: wxSpinButton
