@@ -105,9 +105,6 @@ wxGCDC *wxGCDC_new(const wxWindowDC * window_dc) {
 wxGCDC *wxGCDC_new1(const wxMemoryDC * memory_dc) {
     return new wxGCDC(*memory_dc);
 }
-wxGCDC *wxGCDC_new2(const wxPrinterDC * printer_dc) {
-    return new wxGCDC(*printer_dc);
-}
 wxGCDC *wxGCDC_new3(wxGraphicsContext * context) {
     return new wxGCDC(context);
 }

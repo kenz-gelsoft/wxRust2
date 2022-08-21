@@ -184,9 +184,7 @@ impl<const OWNED: bool> GCDCIsOwned<OWNED> {
             GCDCIsOwned(ffi::wxGCDC_new1(memory_dc))
         }
     }
-    pub fn new_with_printerdc(printer_dc: *const c_void) -> GCDCIsOwned<OWNED> {
-        unsafe { GCDCIsOwned(ffi::wxGCDC_new2(printer_dc)) }
-    }
+    // BLOCKED: fn wxGCDC2()
     pub fn new_with_graphicscontext<G: GraphicsContextMethods>(
         context: Option<&G>,
     ) -> GCDCIsOwned<OWNED> {

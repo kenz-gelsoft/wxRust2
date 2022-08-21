@@ -1127,6 +1127,10 @@ blocklist = [
     'operator==',
 ]
 [types.wxGCDC]
+blocklist = [
+    # some of our CI env built without printing
+    'wxGCDC2',
+]
 windows = [
     'wxGCDC4',
 ]

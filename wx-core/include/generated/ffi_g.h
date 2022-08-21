@@ -54,7 +54,6 @@ void wxGBSpan_SetRowspan(wxGBSpan * self, int rowspan);
 wxClassInfo *wxGCDC_CLASSINFO();
 wxGCDC *wxGCDC_new(const wxWindowDC * window_dc);
 wxGCDC *wxGCDC_new1(const wxMemoryDC * memory_dc);
-wxGCDC *wxGCDC_new2(const wxPrinterDC * printer_dc);
 wxGCDC *wxGCDC_new3(wxGraphicsContext * context);
 #ifdef __WXMSW__
 wxGCDC *wxGCDC_new4(const wxEnhMetaFileDC * emf_dc);

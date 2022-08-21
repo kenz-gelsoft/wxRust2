@@ -71,7 +71,7 @@ extern "C" {
     pub fn wxGCDC_CLASSINFO() -> *mut c_void;
     pub fn wxGCDC_new(window_dc: *const c_void) -> *mut c_void;
     pub fn wxGCDC_new1(memory_dc: *const c_void) -> *mut c_void;
-    pub fn wxGCDC_new2(printer_dc: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxGCDC_new2(printer_dc: *const c_void) -> *mut c_void;
     pub fn wxGCDC_new3(context: *mut c_void) -> *mut c_void;
     pub fn wxGCDC_new4(emf_dc: *const c_void) -> *mut c_void;
     pub fn wxGCDC_new5() -> *mut c_void;
