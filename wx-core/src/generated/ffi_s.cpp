@@ -2,6 +2,218 @@
 
 extern "C" {
 
+// CLASS: wxSVGFileDC
+wxClassInfo *wxSVGFileDC_CLASSINFO() {
+    return wxCLASSINFO(wxSVGFileDC);
+}
+#if wxCHECK_VERSION(3, 1, 0)
+wxSVGFileDC *wxSVGFileDC_new(const wxString * filename, int width, int height, double dpi, const wxString * title) {
+    return new wxSVGFileDC(*filename, width, height, dpi, *title);
+}
+#endif
+void wxSVGFileDC_Clear(wxSVGFileDC * self) {
+    return self->Clear();
+}
+#if wxCHECK_VERSION(3, 1, 0)
+void wxSVGFileDC_SetBitmapHandler(wxSVGFileDC * self, wxSVGBitmapHandler * handler) {
+    return self->SetBitmapHandler(handler);
+}
+#endif
+void wxSVGFileDC_DestroyClippingRegion(wxSVGFileDC * self) {
+    return self->DestroyClippingRegion();
+}
+void wxSVGFileDC_CrossHair(wxSVGFileDC * self, wxCoord x, wxCoord y) {
+    return self->CrossHair(x, y);
+}
+bool wxSVGFileDC_GetPixel(const wxSVGFileDC * self, wxCoord x, wxCoord y, wxColour * colour) {
+    return self->GetPixel(x, y, colour);
+}
+void wxSVGFileDC_SetPalette(wxSVGFileDC * self, const wxPalette * palette) {
+    return self->SetPalette(*palette);
+}
+int wxSVGFileDC_GetDepth(const wxSVGFileDC * self) {
+    return self->GetDepth();
+}
+bool wxSVGFileDC_StartDoc(wxSVGFileDC * self, const wxString * message) {
+    return self->StartDoc(*message);
+}
+void wxSVGFileDC_EndDoc(wxSVGFileDC * self) {
+    return self->EndDoc();
+}
+void wxSVGFileDC_StartPage(wxSVGFileDC * self) {
+    return self->StartPage();
+}
+void wxSVGFileDC_EndPage(wxSVGFileDC * self) {
+    return self->EndPage();
+}
+
+// CLASS: wxSashEvent
+wxClassInfo *wxSashEvent_CLASSINFO() {
+    return wxCLASSINFO(wxSashEvent);
+}
+wxRect *wxSashEvent_GetDragRect(const wxSashEvent * self) {
+    return new wxRect(self->GetDragRect());
+}
+void wxSashEvent_SetDragRect(wxSashEvent * self, const wxRect * rect) {
+    return self->SetDragRect(*rect);
+}
+
+// CLASS: wxSashLayoutWindow
+wxClassInfo *wxSashLayoutWindow_CLASSINFO() {
+    return wxCLASSINFO(wxSashLayoutWindow);
+}
+wxSashLayoutWindow *wxSashLayoutWindow_new() {
+    return new wxSashLayoutWindow();
+}
+wxSashLayoutWindow *wxSashLayoutWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxSashLayoutWindow(parent, id, *pos, *size, style, *name);
+}
+bool wxSashLayoutWindow_Create(wxSashLayoutWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, id, *pos, *size, style, *name);
+}
+void wxSashLayoutWindow_OnCalculateLayout(wxSashLayoutWindow * self, wxCalculateLayoutEvent * event) {
+    return self->OnCalculateLayout(*event);
+}
+void wxSashLayoutWindow_OnQueryLayoutInfo(wxSashLayoutWindow * self, wxQueryLayoutInfoEvent * event) {
+    return self->OnQueryLayoutInfo(*event);
+}
+void wxSashLayoutWindow_SetDefaultSize(wxSashLayoutWindow * self, const wxSize * size) {
+    return self->SetDefaultSize(*size);
+}
+
+// CLASS: wxSashWindow
+wxClassInfo *wxSashWindow_CLASSINFO() {
+    return wxCLASSINFO(wxSashWindow);
+}
+wxSashWindow *wxSashWindow_new() {
+    return new wxSashWindow();
+}
+wxSashWindow *wxSashWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxSashWindow(parent, id, *pos, *size, style, *name);
+}
+int wxSashWindow_GetMaximumSizeX(const wxSashWindow * self) {
+    return self->GetMaximumSizeX();
+}
+int wxSashWindow_GetMaximumSizeY(const wxSashWindow * self) {
+    return self->GetMaximumSizeY();
+}
+int wxSashWindow_GetMinimumSizeX(const wxSashWindow * self) {
+    return self->GetMinimumSizeX();
+}
+int wxSashWindow_GetMinimumSizeY(const wxSashWindow * self) {
+    return self->GetMinimumSizeY();
+}
+void wxSashWindow_SetMaximumSizeX(wxSashWindow * self, int min) {
+    return self->SetMaximumSizeX(min);
+}
+void wxSashWindow_SetMaximumSizeY(wxSashWindow * self, int min) {
+    return self->SetMaximumSizeY(min);
+}
+void wxSashWindow_SetMinimumSizeX(wxSashWindow * self, int min) {
+    return self->SetMinimumSizeX(min);
+}
+void wxSashWindow_SetMinimumSizeY(wxSashWindow * self, int min) {
+    return self->SetMinimumSizeY(min);
+}
+void wxSashWindow_SetDefaultBorderSize(wxSashWindow * self, int width) {
+    return self->SetDefaultBorderSize(width);
+}
+int wxSashWindow_GetDefaultBorderSize(const wxSashWindow * self) {
+    return self->GetDefaultBorderSize();
+}
+void wxSashWindow_SetExtraBorderSize(wxSashWindow * self, int width) {
+    return self->SetExtraBorderSize(width);
+}
+int wxSashWindow_GetExtraBorderSize(const wxSashWindow * self) {
+    return self->GetExtraBorderSize();
+}
+void wxSashWindow_SizeWindows(wxSashWindow * self) {
+    return self->SizeWindows();
+}
+
+// CLASS: wxScreenDC
+wxClassInfo *wxScreenDC_CLASSINFO() {
+    return wxCLASSINFO(wxScreenDC);
+}
+wxScreenDC *wxScreenDC_new() {
+    return new wxScreenDC();
+}
+bool wxScreenDC_EndDrawingOnTop() {
+    return wxScreenDC::EndDrawingOnTop();
+}
+bool wxScreenDC_StartDrawingOnTop(wxWindow * window) {
+    return wxScreenDC::StartDrawingOnTop(window);
+}
+bool wxScreenDC_StartDrawingOnTop1(wxRect * rect) {
+    return wxScreenDC::StartDrawingOnTop(rect);
+}
+
+// CLASS: wxScrollBar
+wxClassInfo *wxScrollBar_CLASSINFO() {
+    return wxCLASSINFO(wxScrollBar);
+}
+wxScrollBar *wxScrollBar_new() {
+    return new wxScrollBar();
+}
+wxScrollBar *wxScrollBar_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return new wxScrollBar(parent, id, *pos, *size, style, *validator, *name);
+}
+bool wxScrollBar_Create(wxScrollBar * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, *pos, *size, style, *validator, *name);
+}
+int wxScrollBar_GetPageSize(const wxScrollBar * self) {
+    return self->GetPageSize();
+}
+int wxScrollBar_GetRange(const wxScrollBar * self) {
+    return self->GetRange();
+}
+int wxScrollBar_GetThumbPosition(const wxScrollBar * self) {
+    return self->GetThumbPosition();
+}
+int wxScrollBar_GetThumbSize(const wxScrollBar * self) {
+    return self->GetThumbSize();
+}
+void wxScrollBar_SetThumbPosition(wxScrollBar * self, int view_start) {
+    return self->SetThumbPosition(view_start);
+}
+bool wxScrollBar_IsVertical(const wxScrollBar * self) {
+    return self->IsVertical();
+}
+
+// CLASS: wxScrollEvent
+wxClassInfo *wxScrollEvent_CLASSINFO() {
+    return wxCLASSINFO(wxScrollEvent);
+}
+int wxScrollEvent_GetOrientation(const wxScrollEvent * self) {
+    return self->GetOrientation();
+}
+int wxScrollEvent_GetPosition(const wxScrollEvent * self) {
+    return self->GetPosition();
+}
+void wxScrollEvent_SetOrientation(wxScrollEvent * self, int orient) {
+    return self->SetOrientation(orient);
+}
+void wxScrollEvent_SetPosition(wxScrollEvent * self, int pos) {
+    return self->SetPosition(pos);
+}
+
+// CLASS: wxScrollWinEvent
+wxClassInfo *wxScrollWinEvent_CLASSINFO() {
+    return wxCLASSINFO(wxScrollWinEvent);
+}
+int wxScrollWinEvent_GetOrientation(const wxScrollWinEvent * self) {
+    return self->GetOrientation();
+}
+int wxScrollWinEvent_GetPosition(const wxScrollWinEvent * self) {
+    return self->GetPosition();
+}
+void wxScrollWinEvent_SetOrientation(wxScrollWinEvent * self, int orient) {
+    return self->SetOrientation(orient);
+}
+void wxScrollWinEvent_SetPosition(wxScrollWinEvent * self, int pos) {
+    return self->SetPosition(pos);
+}
+
 // CLASS: wxSearchCtrl
 wxClassInfo *wxSearchCtrl_CLASSINFO() {
     return wxCLASSINFO(wxSearchCtrl);
@@ -42,6 +254,29 @@ wxString *wxSearchCtrl_GetDescriptiveText(const wxSearchCtrl * self) {
 // Mix-in(s) to wxSearchCtrl
 wxTextEntryBase *wxSearchCtrl_AsTextEntry(wxSearchCtrl* obj) {
     return static_cast<wxTextEntryBase*>(obj);
+}
+
+// CLASS: wxSetCursorEvent
+wxClassInfo *wxSetCursorEvent_CLASSINFO() {
+    return wxCLASSINFO(wxSetCursorEvent);
+}
+wxSetCursorEvent *wxSetCursorEvent_new(wxCoord x, wxCoord y) {
+    return new wxSetCursorEvent(x, y);
+}
+wxCursor *wxSetCursorEvent_GetCursor(const wxSetCursorEvent * self) {
+    return new wxCursor(self->GetCursor());
+}
+wxCoord wxSetCursorEvent_GetX(const wxSetCursorEvent * self) {
+    return self->GetX();
+}
+wxCoord wxSetCursorEvent_GetY(const wxSetCursorEvent * self) {
+    return self->GetY();
+}
+bool wxSetCursorEvent_HasCursor(const wxSetCursorEvent * self) {
+    return self->HasCursor();
+}
+void wxSetCursorEvent_SetCursor(wxSetCursorEvent * self, const wxCursor * cursor) {
+    return self->SetCursor(*cursor);
 }
 
 // CLASS: wxSettableHeaderColumn
@@ -98,6 +333,37 @@ void wxSettableHeaderColumn_SetSortOrder(wxSettableHeaderColumn * self, bool asc
 }
 void wxSettableHeaderColumn_ToggleSortOrder(wxSettableHeaderColumn * self) {
     return self->ToggleSortOrder();
+}
+
+// CLASS: wxShowEvent
+wxClassInfo *wxShowEvent_CLASSINFO() {
+    return wxCLASSINFO(wxShowEvent);
+}
+wxShowEvent *wxShowEvent_new(int winid, bool show) {
+    return new wxShowEvent(winid, show);
+}
+void wxShowEvent_SetShow(wxShowEvent * self, bool show) {
+    return self->SetShow(show);
+}
+bool wxShowEvent_IsShown(const wxShowEvent * self) {
+    return self->IsShown();
+}
+
+// CLASS: wxSimplebook
+wxClassInfo *wxSimplebook_CLASSINFO() {
+    return wxCLASSINFO(wxSimplebook);
+}
+wxSimplebook *wxSimplebook_new() {
+    return new wxSimplebook();
+}
+wxSimplebook *wxSimplebook_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxSimplebook(parent, id, *pos, *size, style, *name);
+}
+bool wxSimplebook_Create(wxSimplebook * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, id, *pos, *size, style, *name);
+}
+bool wxSimplebook_ShowNewPage(wxSimplebook * self, wxWindow * page) {
+    return self->ShowNewPage(page);
 }
 
 // CLASS: wxSize
@@ -163,6 +429,20 @@ void wxSize_SetHeight(wxSize * self, int height) {
 }
 void wxSize_SetWidth(wxSize * self, int width) {
     return self->SetWidth(width);
+}
+
+// CLASS: wxSizeEvent
+wxClassInfo *wxSizeEvent_CLASSINFO() {
+    return wxCLASSINFO(wxSizeEvent);
+}
+wxSizeEvent *wxSizeEvent_new(const wxSize * sz, int id) {
+    return new wxSizeEvent(*sz, id);
+}
+wxSize *wxSizeEvent_GetSize(const wxSizeEvent * self) {
+    return new wxSize(self->GetSize());
+}
+wxRect *wxSizeEvent_GetRect(const wxSizeEvent * self) {
+    return new wxRect(self->GetRect());
 }
 
 // CLASS: wxSizer
@@ -823,6 +1103,162 @@ void wxSpinCtrlDouble_SetValue1(wxSpinCtrlDouble * self, double value) {
     return self->SetValue(value);
 }
 
+// CLASS: wxSpinDoubleEvent
+wxClassInfo *wxSpinDoubleEvent_CLASSINFO() {
+    return wxCLASSINFO(wxSpinDoubleEvent);
+}
+wxSpinDoubleEvent *wxSpinDoubleEvent_new1(const wxSpinDoubleEvent * event) {
+    return new wxSpinDoubleEvent(*event);
+}
+double wxSpinDoubleEvent_GetValue(const wxSpinDoubleEvent * self) {
+    return self->GetValue();
+}
+void wxSpinDoubleEvent_SetValue(wxSpinDoubleEvent * self, double value) {
+    return self->SetValue(value);
+}
+
+// CLASS: wxSpinEvent
+wxClassInfo *wxSpinEvent_CLASSINFO() {
+    return wxCLASSINFO(wxSpinEvent);
+}
+int wxSpinEvent_GetPosition(const wxSpinEvent * self) {
+    return self->GetPosition();
+}
+void wxSpinEvent_SetPosition(wxSpinEvent * self, int pos) {
+    return self->SetPosition(pos);
+}
+
+// CLASS: wxSplashScreen
+wxClassInfo *wxSplashScreen_CLASSINFO() {
+    return wxCLASSINFO(wxSplashScreen);
+}
+wxSplashScreen *wxSplashScreen_new(const wxBitmap * bitmap, long splash_style, int milliseconds, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style) {
+    return new wxSplashScreen(*bitmap, splash_style, milliseconds, parent, id, *pos, *size, style);
+}
+long wxSplashScreen_GetSplashStyle(const wxSplashScreen * self) {
+    return self->GetSplashStyle();
+}
+wxSplashScreenWindow * wxSplashScreen_GetSplashWindow(const wxSplashScreen * self) {
+    return self->GetSplashWindow();
+}
+int wxSplashScreen_GetTimeout(const wxSplashScreen * self) {
+    return self->GetTimeout();
+}
+void wxSplashScreen_OnCloseWindow(wxSplashScreen * self, wxCloseEvent * event) {
+    return self->OnCloseWindow(*event);
+}
+
+// CLASS: wxSplitterEvent
+wxClassInfo *wxSplitterEvent_CLASSINFO() {
+    return wxCLASSINFO(wxSplitterEvent);
+}
+int wxSplitterEvent_GetSashPosition(const wxSplitterEvent * self) {
+    return self->GetSashPosition();
+}
+wxWindow * wxSplitterEvent_GetWindowBeingRemoved(const wxSplitterEvent * self) {
+    return self->GetWindowBeingRemoved();
+}
+int wxSplitterEvent_GetX(const wxSplitterEvent * self) {
+    return self->GetX();
+}
+int wxSplitterEvent_GetY(const wxSplitterEvent * self) {
+    return self->GetY();
+}
+void wxSplitterEvent_SetSashPosition(wxSplitterEvent * self, int pos) {
+    return self->SetSashPosition(pos);
+}
+#if wxCHECK_VERSION(3, 1, 0)
+void wxSplitterEvent_SetSize(wxSplitterEvent * self, int old_size, int new_size) {
+    return self->SetSize(old_size, new_size);
+}
+int wxSplitterEvent_GetOldSize(const wxSplitterEvent * self) {
+    return self->GetOldSize();
+}
+#endif
+
+// CLASS: wxSplitterWindow
+wxClassInfo *wxSplitterWindow_CLASSINFO() {
+    return wxCLASSINFO(wxSplitterWindow);
+}
+wxSplitterWindow *wxSplitterWindow_new() {
+    return new wxSplitterWindow();
+}
+wxSplitterWindow *wxSplitterWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxSplitterWindow(parent, id, *pos, *size, style, *name);
+}
+bool wxSplitterWindow_Create(wxSplitterWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * point, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, id, *point, *size, style, *name);
+}
+int wxSplitterWindow_GetMinimumPaneSize(const wxSplitterWindow * self) {
+    return self->GetMinimumPaneSize();
+}
+double wxSplitterWindow_GetSashGravity(const wxSplitterWindow * self) {
+    return self->GetSashGravity();
+}
+int wxSplitterWindow_GetSashPosition(const wxSplitterWindow * self) {
+    return self->GetSashPosition();
+}
+int wxSplitterWindow_GetSashSize(const wxSplitterWindow * self) {
+    return self->GetSashSize();
+}
+int wxSplitterWindow_GetDefaultSashSize(const wxSplitterWindow * self) {
+    return self->GetDefaultSashSize();
+}
+wxWindow * wxSplitterWindow_GetWindow1(const wxSplitterWindow * self) {
+    return self->GetWindow1();
+}
+wxWindow * wxSplitterWindow_GetWindow2(const wxSplitterWindow * self) {
+    return self->GetWindow2();
+}
+void wxSplitterWindow_Initialize(wxSplitterWindow * self, wxWindow * window) {
+    return self->Initialize(window);
+}
+bool wxSplitterWindow_IsSashInvisible(const wxSplitterWindow * self) {
+    return self->IsSashInvisible();
+}
+bool wxSplitterWindow_IsSplit(const wxSplitterWindow * self) {
+    return self->IsSplit();
+}
+void wxSplitterWindow_OnDoubleClickSash(wxSplitterWindow * self, int x, int y) {
+    return self->OnDoubleClickSash(x, y);
+}
+bool wxSplitterWindow_OnSashPositionChange(wxSplitterWindow * self, int new_sash_position) {
+    return self->OnSashPositionChange(new_sash_position);
+}
+void wxSplitterWindow_OnUnsplit(wxSplitterWindow * self, wxWindow * removed) {
+    return self->OnUnsplit(removed);
+}
+bool wxSplitterWindow_ReplaceWindow(wxSplitterWindow * self, wxWindow * win_old, wxWindow * win_new) {
+    return self->ReplaceWindow(win_old, win_new);
+}
+void wxSplitterWindow_SetMinimumPaneSize(wxSplitterWindow * self, int pane_size) {
+    return self->SetMinimumPaneSize(pane_size);
+}
+void wxSplitterWindow_SetSashGravity(wxSplitterWindow * self, double gravity) {
+    return self->SetSashGravity(gravity);
+}
+void wxSplitterWindow_SetSashPosition(wxSplitterWindow * self, int position, bool redraw) {
+    return self->SetSashPosition(position, redraw);
+}
+void wxSplitterWindow_SetSplitMode(wxSplitterWindow * self, int mode) {
+    return self->SetSplitMode(mode);
+}
+void wxSplitterWindow_SetSashInvisible(wxSplitterWindow * self, bool invisible) {
+    return self->SetSashInvisible(invisible);
+}
+bool wxSplitterWindow_SplitHorizontally(wxSplitterWindow * self, wxWindow * window1, wxWindow * window2, int sash_position) {
+    return self->SplitHorizontally(window1, window2, sash_position);
+}
+bool wxSplitterWindow_SplitVertically(wxSplitterWindow * self, wxWindow * window1, wxWindow * window2, int sash_position) {
+    return self->SplitVertically(window1, window2, sash_position);
+}
+bool wxSplitterWindow_Unsplit(wxSplitterWindow * self, wxWindow * to_remove) {
+    return self->Unsplit(to_remove);
+}
+void wxSplitterWindow_UpdateSize(wxSplitterWindow * self) {
+    return self->UpdateSize();
+}
+
 // CLASS: wxStaticBitmap
 wxClassInfo *wxStaticBitmap_CLASSINFO() {
     return wxCLASSINFO(wxStaticBitmap);
@@ -877,6 +1313,26 @@ wxStaticBox * wxStaticBoxSizer_GetStaticBox(const wxStaticBoxSizer * self) {
     return self->GetStaticBox();
 }
 
+// CLASS: wxStaticLine
+wxClassInfo *wxStaticLine_CLASSINFO() {
+    return wxCLASSINFO(wxStaticLine);
+}
+wxStaticLine *wxStaticLine_new() {
+    return new wxStaticLine();
+}
+wxStaticLine *wxStaticLine_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxStaticLine(parent, id, *pos, *size, style, *name);
+}
+bool wxStaticLine_Create(wxStaticLine * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, id, *pos, *size, style, *name);
+}
+bool wxStaticLine_IsVertical(const wxStaticLine * self) {
+    return self->IsVertical();
+}
+int wxStaticLine_GetDefaultSize() {
+    return wxStaticLine::GetDefaultSize();
+}
+
 // CLASS: wxStaticText
 wxClassInfo *wxStaticText_CLASSINFO() {
     return wxCLASSINFO(wxStaticText);
@@ -895,6 +1351,123 @@ bool wxStaticText_IsEllipsized(const wxStaticText * self) {
 }
 void wxStaticText_Wrap(wxStaticText * self, int width) {
     return self->Wrap(width);
+}
+
+// CLASS: wxStatusBar
+wxClassInfo *wxStatusBar_CLASSINFO() {
+    return wxCLASSINFO(wxStatusBar);
+}
+wxStatusBar *wxStatusBar_new() {
+    return new wxStatusBar();
+}
+wxStatusBar *wxStatusBar_new1(wxWindow * parent, wxWindowID id, long style, const wxString * name) {
+    return new wxStatusBar(parent, id, style, *name);
+}
+bool wxStatusBar_Create(wxStatusBar * self, wxWindow * parent, wxWindowID id, long style, const wxString * name) {
+    return self->Create(parent, id, style, *name);
+}
+bool wxStatusBar_GetFieldRect(const wxStatusBar * self, int i, wxRect * rect) {
+    return self->GetFieldRect(i, *rect);
+}
+int wxStatusBar_GetFieldsCount(const wxStatusBar * self) {
+    return self->GetFieldsCount();
+}
+wxStatusBarPane *wxStatusBar_GetField(const wxStatusBar * self, int n) {
+    return new wxStatusBarPane(self->GetField(n));
+}
+wxSize *wxStatusBar_GetBorders(const wxStatusBar * self) {
+    return new wxSize(self->GetBorders());
+}
+wxString *wxStatusBar_GetStatusText(const wxStatusBar * self, int i) {
+    return new wxString(self->GetStatusText(i));
+}
+int wxStatusBar_GetStatusWidth(const wxStatusBar * self, int n) {
+    return self->GetStatusWidth(n);
+}
+int wxStatusBar_GetStatusStyle(const wxStatusBar * self, int n) {
+    return self->GetStatusStyle(n);
+}
+void wxStatusBar_PopStatusText(wxStatusBar * self, int field) {
+    return self->PopStatusText(field);
+}
+void wxStatusBar_PushStatusText(wxStatusBar * self, const wxString * string, int field) {
+    return self->PushStatusText(*string, field);
+}
+void wxStatusBar_SetFieldsCount(wxStatusBar * self, int number, const int * widths) {
+    return self->SetFieldsCount(number, widths);
+}
+void wxStatusBar_SetMinHeight(wxStatusBar * self, int height) {
+    return self->SetMinHeight(height);
+}
+void wxStatusBar_SetStatusStyles(wxStatusBar * self, int n, const int * styles) {
+    return self->SetStatusStyles(n, styles);
+}
+void wxStatusBar_SetStatusText(wxStatusBar * self, const wxString * text, int i) {
+    return self->SetStatusText(*text, i);
+}
+void wxStatusBar_SetStatusWidths(wxStatusBar * self, int n, const int * widths_field) {
+    return self->SetStatusWidths(n, widths_field);
+}
+
+// CLASS: wxStatusBarPane
+void wxStatusBarPane_delete(wxStatusBarPane *self) {
+    delete self;
+}
+wxStatusBarPane *wxStatusBarPane_new(int style, int width) {
+    return new wxStatusBarPane(style, width);
+}
+int wxStatusBarPane_GetWidth(const wxStatusBarPane * self) {
+    return self->GetWidth();
+}
+int wxStatusBarPane_GetStyle(const wxStatusBarPane * self) {
+    return self->GetStyle();
+}
+wxString *wxStatusBarPane_GetText(const wxStatusBarPane * self) {
+    return new wxString(self->GetText());
+}
+
+// CLASS: wxStdDialogButtonSizer
+wxClassInfo *wxStdDialogButtonSizer_CLASSINFO() {
+    return wxCLASSINFO(wxStdDialogButtonSizer);
+}
+wxStdDialogButtonSizer *wxStdDialogButtonSizer_new() {
+    return new wxStdDialogButtonSizer();
+}
+void wxStdDialogButtonSizer_AddButton(wxStdDialogButtonSizer * self, wxButton * button) {
+    return self->AddButton(button);
+}
+void wxStdDialogButtonSizer_Realize(wxStdDialogButtonSizer * self) {
+    return self->Realize();
+}
+void wxStdDialogButtonSizer_SetAffirmativeButton(wxStdDialogButtonSizer * self, wxButton * button) {
+    return self->SetAffirmativeButton(button);
+}
+void wxStdDialogButtonSizer_SetCancelButton(wxStdDialogButtonSizer * self, wxButton * button) {
+    return self->SetCancelButton(button);
+}
+void wxStdDialogButtonSizer_SetNegativeButton(wxStdDialogButtonSizer * self, wxButton * button) {
+    return self->SetNegativeButton(button);
+}
+
+// CLASS: wxStockPreferencesPage
+void wxStockPreferencesPage_delete(wxStockPreferencesPage *self) {
+    delete self;
+}
+
+// CLASS: wxSysColourChangedEvent
+wxClassInfo *wxSysColourChangedEvent_CLASSINFO() {
+    return wxCLASSINFO(wxSysColourChangedEvent);
+}
+wxSysColourChangedEvent *wxSysColourChangedEvent_new() {
+    return new wxSysColourChangedEvent();
+}
+
+// CLASS: wxSystemSettings
+void wxSystemSettings_delete(wxSystemSettings *self) {
+    delete self;
+}
+wxSystemSettings *wxSystemSettings_new() {
+    return new wxSystemSettings();
 }
 
 } // extern "C"

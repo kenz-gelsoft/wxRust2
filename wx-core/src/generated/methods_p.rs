@@ -49,8 +49,11 @@ pub trait PaletteMethods: GDIObjectMethods {
 // wxPanel
 pub trait PanelMethods: WindowMethods {
     // DTOR: fn ~wxPanel()
-    fn on_sys_colour_changed(&self, event: *mut c_void) {
-        unsafe { ffi::wxPanel_OnSysColourChanged(self.as_ptr(), event) }
+    fn on_sys_colour_changed<S: SysColourChangedEventMethods>(&self, event: &S) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxPanel_OnSysColourChanged(self.as_ptr(), event)
+        }
     }
     fn set_focus_ignoring_children(&self) {
         unsafe { ffi::wxPanel_SetFocusIgnoringChildren(self.as_ptr()) }

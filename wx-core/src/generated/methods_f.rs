@@ -1021,11 +1021,17 @@ pub trait FrameMethods: TopLevelWindowMethods {
         style: c_long,
         id: c_int,
         name: &str,
-    ) -> *mut c_void {
+    ) -> WeakRef<StatusBar> {
         unsafe {
             let name = WxString::from(name);
             let name = name.as_ptr();
-            ffi::wxFrame_CreateStatusBar(self.as_ptr(), number, style, id, name)
+            WeakRef::<StatusBar>::from(ffi::wxFrame_CreateStatusBar(
+                self.as_ptr(),
+                number,
+                style,
+                id,
+                name,
+            ))
         }
     }
     fn create_tool_bar(&self, style: c_long, id: c_int, name: &str) -> WeakRef<ToolBar> {
@@ -1045,8 +1051,8 @@ pub trait FrameMethods: TopLevelWindowMethods {
     fn get_menu_bar(&self) -> WeakRef<MenuBar> {
         unsafe { WeakRef::<MenuBar>::from(ffi::wxFrame_GetMenuBar(self.as_ptr())) }
     }
-    fn get_status_bar(&self) -> *mut c_void {
-        unsafe { ffi::wxFrame_GetStatusBar(self.as_ptr()) }
+    fn get_status_bar(&self) -> WeakRef<StatusBar> {
+        unsafe { WeakRef::<StatusBar>::from(ffi::wxFrame_GetStatusBar(self.as_ptr())) }
     }
     fn get_status_bar_pane(&self) -> c_int {
         unsafe { ffi::wxFrame_GetStatusBarPane(self.as_ptr()) }
@@ -1060,11 +1066,17 @@ pub trait FrameMethods: TopLevelWindowMethods {
         style: c_long,
         id: c_int,
         name: &str,
-    ) -> *mut c_void {
+    ) -> WeakRef<StatusBar> {
         unsafe {
             let name = WxString::from(name);
             let name = name.as_ptr();
-            ffi::wxFrame_OnCreateStatusBar(self.as_ptr(), number, style, id, name)
+            WeakRef::<StatusBar>::from(ffi::wxFrame_OnCreateStatusBar(
+                self.as_ptr(),
+                number,
+                style,
+                id,
+                name,
+            ))
         }
     }
     fn on_create_tool_bar(&self, style: c_long, id: c_int, name: &str) -> WeakRef<ToolBar> {
@@ -1086,8 +1098,14 @@ pub trait FrameMethods: TopLevelWindowMethods {
             ffi::wxFrame_SetMenuBar(self.as_ptr(), menu_bar)
         }
     }
-    fn set_status_bar(&self, status_bar: *mut c_void) {
-        unsafe { ffi::wxFrame_SetStatusBar(self.as_ptr(), status_bar) }
+    fn set_status_bar<S: StatusBarMethods>(&self, status_bar: Option<&S>) {
+        unsafe {
+            let status_bar = match status_bar {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxFrame_SetStatusBar(self.as_ptr(), status_bar)
+        }
     }
     fn set_status_bar_pane(&self, n: c_int) {
         unsafe { ffi::wxFrame_SetStatusBarPane(self.as_ptr(), n) }

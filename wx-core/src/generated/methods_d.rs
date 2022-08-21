@@ -2745,8 +2745,16 @@ pub trait DialogMethods: TopLevelWindowMethods {
             Sizer::option_from(ffi::wxDialog_CreateSeparatedSizer(self.as_ptr(), sizer))
         }
     }
-    fn create_std_dialog_button_sizer(&self, flags: c_long) -> *mut c_void {
-        unsafe { ffi::wxDialog_CreateStdDialogButtonSizer(self.as_ptr(), flags) }
+    fn create_std_dialog_button_sizer(
+        &self,
+        flags: c_long,
+    ) -> Option<StdDialogButtonSizerIsOwned<false>> {
+        unsafe {
+            StdDialogButtonSizer::option_from(ffi::wxDialog_CreateStdDialogButtonSizer(
+                self.as_ptr(),
+                flags,
+            ))
+        }
     }
     fn create_text_sizer(&self, message: &str, width_max: c_int) -> Option<SizerIsOwned<false>> {
         unsafe {

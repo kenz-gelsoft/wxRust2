@@ -1,50 +1,4 @@
 core_files = [
-    'wxml/classwx_s_v_g_bitmap_embed_handler.xml',
-    'wxml/classwx_s_v_g_bitmap_file_handler.xml',
-    'wxml/classwx_s_v_g_bitmap_handler.xml',
-    'wxml/classwx_s_v_g_file_d_c.xml',
-    'wxml/classwx_safe_array_3_01var_type_01_4.xml',
-    'wxml/classwx_sash_event.xml',
-    'wxml/classwx_sash_layout_window.xml',
-    'wxml/classwx_sash_window.xml',
-    'wxml/classwx_screen_d_c.xml',
-    'wxml/classwx_scroll_bar.xml',
-    'wxml/classwx_scroll_event.xml',
-    'wxml/classwx_scroll_win_event.xml',
-    'wxml/classwx_scrolled.xml',
-    'wxml/classwx_search_ctrl.xml',
-    'wxml/classwx_set_cursor_event.xml',
-    'wxml/classwx_settable_header_column.xml',
-    'wxml/classwx_show_event.xml',
-    'wxml/classwx_simple_help_provider.xml',
-    'wxml/classwx_simplebook.xml',
-    'wxml/classwx_size.xml',
-    'wxml/classwx_size_event.xml',
-    'wxml/classwx_sizer.xml',
-    'wxml/classwx_sizer_flags.xml',
-    'wxml/classwx_sizer_item.xml',
-    'wxml/classwx_slider.xml',
-    'wxml/classwx_sound.xml',
-    'wxml/classwx_spin_button.xml',
-    'wxml/classwx_spin_ctrl.xml',
-    'wxml/classwx_spin_ctrl_double.xml',
-    'wxml/classwx_spin_double_event.xml',
-    'wxml/classwx_spin_event.xml',
-    'wxml/classwx_splash_screen.xml',
-    'wxml/classwx_splitter_event.xml',
-    'wxml/classwx_splitter_window.xml',
-    'wxml/classwx_static_bitmap.xml',
-    'wxml/classwx_static_box.xml',
-    'wxml/classwx_static_box_sizer.xml',
-    'wxml/classwx_static_line.xml',
-    'wxml/classwx_static_text.xml',
-    'wxml/classwx_status_bar.xml',
-    'wxml/classwx_status_bar_pane.xml',
-    'wxml/classwx_std_dialog_button_sizer.xml',
-    'wxml/classwx_stock_preferences_page.xml',
-    'wxml/classwx_stream_to_text_redirector.xml',
-    'wxml/classwx_sys_colour_changed_event.xml',
-    'wxml/classwx_system_settings.xml',
     'wxml/classwx_t_g_a_handler.xml',
     'wxml/classwx_t_i_f_f_handler.xml',
     'wxml/classwx_task_bar_button.xml',
@@ -464,25 +418,57 @@ wxml_files = [
     'wxml/classwx_region.xml',
     'wxml/classwx_region_iterator.xml',
     'wxml/classwx_renderer_native.xml',
-    # 'wxml/classwx_rich_message_dialog.xml', # base class not documented
+    # 'wxml/classwx_rich_message_dialog.xml',          # base class not documented
     'wxml/classwx_rich_tool_tip.xml',
-    # 'wxml/classwx_rotate_gesture_event.xml', # requires 3.1
+    # 'wxml/classwx_rotate_gesture_event.xml',         # requires 3.1
+    # 'wxml/classwx_s_v_g_bitmap_embed_handler.xml',   # requires 3.1
+    # 'wxml/classwx_s_v_g_bitmap_file_handler.xml',    # requires 3.1
+    # 'wxml/classwx_s_v_g_bitmap_handler.xml',         # requires 3.1
+    'wxml/classwx_s_v_g_file_d_c.xml',
+    # 'wxml/classwx_safe_array_3_01var_type_01_4.xml', # heavily depends on template
+    'wxml/classwx_sash_event.xml',
+    'wxml/classwx_sash_layout_window.xml',
+    'wxml/classwx_sash_window.xml',
+    'wxml/classwx_screen_d_c.xml',
+    'wxml/classwx_scroll_bar.xml',
+    'wxml/classwx_scroll_event.xml',
+    'wxml/classwx_scroll_win_event.xml',
+    # 'wxml/classwx_scrolled.xml', # base class depends template, need special treatment
     'wxml/classwx_search_ctrl.xml',
+    'wxml/classwx_set_cursor_event.xml',
     'wxml/classwx_settable_header_column.xml',
     # 'wxml/classwx_shared_client_data_container.xml', # requires 3.1.7
+    'wxml/classwx_show_event.xml',
+    # 'wxml/classwx_simple_help_provider.xml', # Our CI environment is't built with
+    'wxml/classwx_simplebook.xml',
     'wxml/classwx_size.xml',
+    'wxml/classwx_size_event.xml',
     'wxml/classwx_sizer.xml',
     'wxml/classwx_sizer_flags.xml',
     'wxml/classwx_sizer_item.xml',
     'wxml/classwx_slider.xml',
+    # 'wxml/classwx_sound.xml', # Our CI environment is't built with (mingw64)
     'wxml/classwx_spin_button.xml',
     'wxml/classwx_spin_ctrl.xml',
     'wxml/classwx_spin_ctrl_double.xml',
+    'wxml/classwx_spin_double_event.xml',
+    'wxml/classwx_spin_event.xml',
+    'wxml/classwx_splash_screen.xml',
+    'wxml/classwx_splitter_event.xml',
+    'wxml/classwx_splitter_window.xml',
     'wxml/classwx_standard_paths.xml',
     'wxml/classwx_static_bitmap.xml',
     'wxml/classwx_static_box.xml',
     'wxml/classwx_static_box_sizer.xml',
+    'wxml/classwx_static_line.xml',
     'wxml/classwx_static_text.xml',
+    'wxml/classwx_status_bar.xml',
+    'wxml/classwx_status_bar_pane.xml',
+    'wxml/classwx_std_dialog_button_sizer.xml',
+    'wxml/classwx_stock_preferences_page.xml',
+    # 'wxml/classwx_stream_to_text_redirector.xml', # depends on C++ stdio
+    'wxml/classwx_sys_colour_changed_event.xml',
+    'wxml/classwx_system_settings.xml',
     'wxml/classwx_text_attr.xml',
     'wxml/classwx_text_ctrl.xml',
     'wxml/classwx_text_entry.xml',
@@ -1679,6 +1665,11 @@ wx31 = [
     'GetCollapseButtonSize',
     'GetExpanderSize',
 ]
+[types.wxShowEvent]
+blocklist = [
+    # deprecated
+    'GetShow',
+]
 [types.wxSize]
 blocklist = [
     'operator+',
@@ -1700,6 +1691,12 @@ blocklist = [
     'operator*=1',
     # Didn't support
     'Scale',
+]
+[types.wxSizeEvent]
+blocklist = [
+    # binding type by value is not supported
+    'SetSize',
+    'SetRect',
 ]
 [types.wxSizer]
 blocklist = [
@@ -1743,6 +1740,10 @@ gtk = [
     'GetInstallPrefix',
     'SetInstallPrefix',
 ]
+[types.wxSound]
+not_windows = [
+    'IsPlaying',
+]
 [types.wxSpinButton]
 wx31 = [
     'GetIncrement',
@@ -1756,10 +1757,21 @@ wx31 = [
 wx31 = [
     'GetTextValue',
 ]
+[types.wxSplitterEvent]
+wx31 = [
+    'GetOldSize',
+    'SetSize',
+]
 [types.wxStaticBox]
 blocklist = [
     'wxStaticBox2',
     'Create1',
+]
+[types.wxSVGFileDC]
+wx31 = [
+    'SetBitmapHandler',
+    # Additional args in wx3.1
+    'wxSVGFileDC',
 ]
 [types.wxTextAttr]
 blocklist = [
