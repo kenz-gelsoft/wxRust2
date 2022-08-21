@@ -556,6 +556,46 @@ void wxBrushList_delete(wxBrushList *self) {
     delete self;
 }
 
+// CLASS: wxBufferedDC
+wxClassInfo *wxBufferedDC_CLASSINFO() {
+    return wxCLASSINFO(wxBufferedDC);
+}
+wxBufferedDC *wxBufferedDC_new() {
+    return new wxBufferedDC();
+}
+wxBufferedDC *wxBufferedDC_new1(wxDC * dc, const wxSize * area, int style) {
+    return new wxBufferedDC(dc, *area, style);
+}
+wxBufferedDC *wxBufferedDC_new2(wxDC * dc, wxBitmap * buffer, int style) {
+    return new wxBufferedDC(dc, *buffer, style);
+}
+void wxBufferedDC_Init(wxBufferedDC * self, wxDC * dc, const wxSize * area, int style) {
+    return self->Init(dc, *area, style);
+}
+void wxBufferedDC_Init1(wxBufferedDC * self, wxDC * dc, wxBitmap * buffer, int style) {
+    return self->Init(dc, *buffer, style);
+}
+void wxBufferedDC_UnMask(wxBufferedDC * self) {
+    return self->UnMask();
+}
+void wxBufferedDC_SetStyle(wxBufferedDC * self, int style) {
+    return self->SetStyle(style);
+}
+int wxBufferedDC_GetStyle(const wxBufferedDC * self) {
+    return self->GetStyle();
+}
+
+// CLASS: wxBufferedPaintDC
+wxClassInfo *wxBufferedPaintDC_CLASSINFO() {
+    return wxCLASSINFO(wxBufferedPaintDC);
+}
+wxBufferedPaintDC *wxBufferedPaintDC_new(wxWindow * window, wxBitmap * buffer, int style) {
+    return new wxBufferedPaintDC(window, *buffer, style);
+}
+wxBufferedPaintDC *wxBufferedPaintDC_new1(wxWindow * window, int style) {
+    return new wxBufferedPaintDC(window, style);
+}
+
 // CLASS: wxBusyCursor
 void wxBusyCursor_delete(wxBusyCursor *self) {
     delete self;

@@ -67,6 +67,16 @@ extern "C" {
     // BLOCKED: pub fn wxGBSpan_operator!=(self_: *const c_void, o: *const c_void) -> bool;
     // BLOCKED: pub fn wxGBSpan_operator==(self_: *const c_void, o: *const c_void) -> bool;
 
+    // wxGCDC
+    pub fn wxGCDC_CLASSINFO() -> *mut c_void;
+    pub fn wxGCDC_new(window_dc: *const c_void) -> *mut c_void;
+    pub fn wxGCDC_new1(memory_dc: *const c_void) -> *mut c_void;
+    pub fn wxGCDC_new2(printer_dc: *const c_void) -> *mut c_void;
+    pub fn wxGCDC_new3(context: *mut c_void) -> *mut c_void;
+    pub fn wxGCDC_new4(emf_dc: *const c_void) -> *mut c_void;
+    pub fn wxGCDC_new5() -> *mut c_void;
+    // DTOR: pub fn wxGCDC_~wxGCDC(self_: *mut c_void);
+
     // wxGDIObject
     pub fn wxGDIObject_CLASSINFO() -> *mut c_void;
     // BLOCKED: pub fn wxGDIObject_new() -> *mut c_void;

@@ -410,6 +410,38 @@ extern "C" {
     pub fn wxBrushList_delete(self_: *mut c_void);
     // NOT_SUPPORTED: pub fn wxBrushList_FindOrCreateBrush(self_: *mut c_void, colour: *const c_void, style: wxBrushStyle) -> *mut c_void;
 
+    // wxBufferedDC
+    pub fn wxBufferedDC_CLASSINFO() -> *mut c_void;
+    pub fn wxBufferedDC_new() -> *mut c_void;
+    pub fn wxBufferedDC_new1(dc: *mut c_void, area: *const c_void, style: c_int) -> *mut c_void;
+    pub fn wxBufferedDC_new2(dc: *mut c_void, buffer: *mut c_void, style: c_int) -> *mut c_void;
+    // DTOR: pub fn wxBufferedDC_~wxBufferedDC(self_: *mut c_void);
+    pub fn wxBufferedDC_Init(
+        self_: *mut c_void,
+        dc: *mut c_void,
+        area: *const c_void,
+        style: c_int,
+    );
+    pub fn wxBufferedDC_Init1(
+        self_: *mut c_void,
+        dc: *mut c_void,
+        buffer: *mut c_void,
+        style: c_int,
+    );
+    pub fn wxBufferedDC_UnMask(self_: *mut c_void);
+    pub fn wxBufferedDC_SetStyle(self_: *mut c_void, style: c_int);
+    pub fn wxBufferedDC_GetStyle(self_: *const c_void) -> c_int;
+
+    // wxBufferedPaintDC
+    pub fn wxBufferedPaintDC_CLASSINFO() -> *mut c_void;
+    pub fn wxBufferedPaintDC_new(
+        window: *mut c_void,
+        buffer: *mut c_void,
+        style: c_int,
+    ) -> *mut c_void;
+    pub fn wxBufferedPaintDC_new1(window: *mut c_void, style: c_int) -> *mut c_void;
+    // DTOR: pub fn wxBufferedPaintDC_~wxBufferedPaintDC(self_: *mut c_void);
+
     // wxBusyCursor
     pub fn wxBusyCursor_delete(self_: *mut c_void);
     pub fn wxBusyCursor_new(cursor: *const c_void) -> *mut c_void;

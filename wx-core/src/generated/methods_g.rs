@@ -96,6 +96,11 @@ pub trait GBSpanMethods: WxRustMethods {
     // BLOCKED: fn operator==()
 }
 
+// wxGCDC
+pub trait GCDCMethods: DCMethods {
+    // DTOR: fn ~wxGCDC()
+}
+
 // wxGDIObject
 pub trait GDIObjectMethods: ObjectMethods {}
 

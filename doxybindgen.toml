@@ -15,7 +15,7 @@ wxml_files = [
     'wxml/classwx_any_button.xml',
     # 'wxml/classwx_app_progress_indicator.xml', # requires 3.1
     'wxml/classwx_art_provider.xml',
-    # 'wxml/classwx_auto_buffered_paint_d_c.xml', # requires not yet generated wxBufferedPaintDC
+    'wxml/classwx_auto_buffered_paint_d_c.xml',
     # 'wxml/classwx_automation_object.xml',
     'wxml/classwx_banner_window.xml',
     'wxml/classwx_bitmap.xml',
@@ -31,8 +31,8 @@ wxml_files = [
     'wxml/classwx_box_sizer.xml',
     'wxml/classwx_brush.xml',
     'wxml/classwx_brush_list.xml',
-    # 'wxml/classwx_buffered_d_c.xml',       # requires not yet generated wxDC-related classes
-    # 'wxml/classwx_buffered_paint_d_c.xml', # requires not yet generated wxDC-related classes
+    'wxml/classwx_buffered_d_c.xml',
+    'wxml/classwx_buffered_paint_d_c.xml',
     'wxml/classwx_busy_cursor.xml',
     'wxml/classwx_busy_info.xml',
     'wxml/classwx_button.xml',
@@ -178,7 +178,7 @@ wxml_files = [
     'wxml/classwx_g_b_position.xml',
     'wxml/classwx_g_b_sizer_item.xml',
     'wxml/classwx_g_b_span.xml',
-    # 'wxml/classwx_g_c_d_c.xml', # requires not yet generated wxDC-related classes
+    'wxml/classwx_g_c_d_c.xml',
     'wxml/classwx_g_d_i_object.xml',
     'wxml/classwx_g_i_f_handler.xml',
     'wxml/classwx_gauge.xml',
@@ -1125,6 +1125,10 @@ blocklist = [
 blocklist = [
     'operator!=',
     'operator==',
+]
+[types.wxGCDC]
+windows = [
+    'wxGCDC4',
 ]
 [types.wxGenericDirCtrl]
 blocklist = [
