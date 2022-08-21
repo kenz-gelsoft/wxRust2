@@ -18,4 +18,7 @@ extern "C" {
     // BLOCKED: pub fn wxObject_operator delete(self_: *mut c_void, buf: *mut c_void);
     // BLOCKED: pub fn wxObject_operator new(self_: *mut c_void, size: usize, filename: *const c_void, line_num: c_int) -> *mut c_void;
 
+    // wxObjectRefData
+    pub fn wxObjectRefData_delete(self_: *mut c_void);
+
 }

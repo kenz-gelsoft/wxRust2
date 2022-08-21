@@ -17,5 +17,7 @@ void wxObject_SetRefData(wxObject * self, wxObjectRefData * data);
 void wxObject_UnRef(wxObject * self);
 void wxObject_UnShare(wxObject * self);
 
+// CLASS: wxObjectRefData
+
 } // extern "C"
 

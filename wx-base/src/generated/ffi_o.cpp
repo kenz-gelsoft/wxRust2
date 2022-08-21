@@ -37,5 +37,7 @@ void wxObject_UnShare(wxObject * self) {
     return self->UnShare();
 }
 
+// CLASS: wxObjectRefData
+
 } // extern "C"
 

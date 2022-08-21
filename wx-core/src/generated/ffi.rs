@@ -20,5 +20,6 @@ pub use super::ffi_q::*;
 pub use super::ffi_r::*;
 pub use super::ffi_s::*;
 pub use super::ffi_t::*;
+pub use super::ffi_u::*;
 pub use super::ffi_v::*;
 pub use super::ffi_w::*;

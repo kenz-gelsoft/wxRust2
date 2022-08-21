@@ -21,5 +21,6 @@
 #include "generated/ffi_r.cpp"
 #include "generated/ffi_s.cpp"
 #include "generated/ffi_t.cpp"
+#include "generated/ffi_u.cpp"
 #include "generated/ffi_v.cpp"
 #include "generated/ffi_w.cpp"

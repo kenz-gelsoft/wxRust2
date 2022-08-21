@@ -1241,8 +1241,11 @@ pub trait WindowMethods: EvtHandlerMethods {
     // NOT_SUPPORTED: fn HitTest1()
     // NOT_SUPPORTED: fn GetBorder()
     // NOT_SUPPORTED: fn GetBorder1()
-    fn do_update_window_ui(&self, event: *mut c_void) {
-        unsafe { ffi::wxWindow_DoUpdateWindowUI(self.as_ptr(), event) }
+    fn do_update_window_ui<U: UpdateUIEventMethods>(&self, event: &U) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxWindow_DoUpdateWindowUI(self.as_ptr(), event)
+        }
     }
     // NOT_SUPPORTED: fn GetHandle()
     fn has_multiple_pages(&self) -> bool {

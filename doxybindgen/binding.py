@@ -600,6 +600,8 @@ class CxxClassBinding:
     def _dtor_lines(self, is_cc):
         if (self.__model.manager.is_a(self.__model, 'wxObject') or
             self.__model.manager.is_a(self.__model, 'wxRefCounter') or
+            # FIXME: wxObjectRefData is a typedef of wxRefCounter
+            self.__model.manager.is_a(self.__model, 'wxObjectRefData') or
             self.__model.manager.is_a(self.__model, 'wxSharedClientDataContainer')):
             return
         signature = 'void %s_delete(%s *self)' % (

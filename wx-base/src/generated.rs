@@ -13,6 +13,7 @@ mod ffi_o;
 mod ffi_r;
 mod ffi_s;
 mod ffi_t;
+mod ffi_v;
 
 pub mod methods;
 mod methods_c;
@@ -24,6 +25,7 @@ mod methods_o;
 mod methods_r;
 mod methods_s;
 mod methods_t;
+mod methods_v;
 
 mod class_c;
 mod class_d;
@@ -34,6 +36,7 @@ mod class_o;
 mod class_r;
 mod class_s;
 mod class_t;
+mod class_v;
 pub use class_c::*;
 pub use class_d::*;
 pub use class_e::*;
@@ -43,3 +46,4 @@ pub use class_o::*;
 pub use class_r::*;
 pub use class_s::*;
 pub use class_t::*;
+pub use class_v::*;
