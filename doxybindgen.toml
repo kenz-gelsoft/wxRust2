@@ -1876,6 +1876,12 @@ wx31 = [
 windows = [
     'SetMaxWidth',
 ]
+[types.wxTreeCtrl]
+not_windows = [
+    'AssignButtonsImageList',
+    'GetButtonsImageList',
+    'SetButtonsImageList',
+]
 [types.wxTreeListCtrl]
 blocklist = [
     # wx-value type not supported

@@ -1142,9 +1142,11 @@ wxTreeItemId *wxTreeCtrl_AddRoot(wxTreeCtrl * self, const wxString * text, int i
 wxTreeItemId *wxTreeCtrl_AppendItem(wxTreeCtrl * self, const wxTreeItemId * parent, const wxString * text, int image, int sel_image, wxTreeItemData * data) {
     return new wxTreeItemId(self->AppendItem(*parent, *text, image, sel_image, data));
 }
+#ifndef __WXMSW__
 void wxTreeCtrl_AssignButtonsImageList(wxTreeCtrl * self, wxImageList * image_list) {
     return self->AssignButtonsImageList(image_list);
 }
+#endif
 void wxTreeCtrl_AssignStateImageList(wxTreeCtrl * self, wxImageList * image_list) {
     return self->AssignStateImageList(image_list);
 }
@@ -1196,9 +1198,11 @@ void wxTreeCtrl_ExpandAllChildren(wxTreeCtrl * self, const wxTreeItemId * item) 
 bool wxTreeCtrl_GetBoundingRect(const wxTreeCtrl * self, const wxTreeItemId * item, wxRect * rect, bool text_only) {
     return self->GetBoundingRect(*item, *rect, text_only);
 }
+#ifndef __WXMSW__
 wxImageList * wxTreeCtrl_GetButtonsImageList(const wxTreeCtrl * self) {
     return self->GetButtonsImageList();
 }
+#endif
 size_t wxTreeCtrl_GetChildrenCount(const wxTreeCtrl * self, const wxTreeItemId * item, bool recursively) {
     return self->GetChildrenCount(*item, recursively);
 }
@@ -1322,9 +1326,11 @@ void wxTreeCtrl_ScrollTo(wxTreeCtrl * self, const wxTreeItemId * item) {
 void wxTreeCtrl_SelectItem(wxTreeCtrl * self, const wxTreeItemId * item, bool select) {
     return self->SelectItem(*item, select);
 }
+#ifndef __WXMSW__
 void wxTreeCtrl_SetButtonsImageList(wxTreeCtrl * self, wxImageList * image_list) {
     return self->SetButtonsImageList(image_list);
 }
+#endif
 void wxTreeCtrl_SetIndent(wxTreeCtrl * self, unsigned int indent) {
     return self->SetIndent(indent);
 }

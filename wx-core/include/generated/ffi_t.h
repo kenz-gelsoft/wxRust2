@@ -453,7 +453,9 @@ wxTreeCtrl *wxTreeCtrl_new();
 wxTreeCtrl *wxTreeCtrl_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 wxTreeItemId *wxTreeCtrl_AddRoot(wxTreeCtrl * self, const wxString * text, int image, int sel_image, wxTreeItemData * data);
 wxTreeItemId *wxTreeCtrl_AppendItem(wxTreeCtrl * self, const wxTreeItemId * parent, const wxString * text, int image, int sel_image, wxTreeItemData * data);
+#ifndef __WXMSW__
 void wxTreeCtrl_AssignButtonsImageList(wxTreeCtrl * self, wxImageList * image_list);
+#endif
 void wxTreeCtrl_AssignStateImageList(wxTreeCtrl * self, wxImageList * image_list);
 void wxTreeCtrl_Collapse(wxTreeCtrl * self, const wxTreeItemId * item);
 void wxTreeCtrl_CollapseAll(wxTreeCtrl * self);
@@ -471,7 +473,9 @@ void wxTreeCtrl_Expand(wxTreeCtrl * self, const wxTreeItemId * item);
 void wxTreeCtrl_ExpandAll(wxTreeCtrl * self);
 void wxTreeCtrl_ExpandAllChildren(wxTreeCtrl * self, const wxTreeItemId * item);
 bool wxTreeCtrl_GetBoundingRect(const wxTreeCtrl * self, const wxTreeItemId * item, wxRect * rect, bool text_only);
+#ifndef __WXMSW__
 wxImageList * wxTreeCtrl_GetButtonsImageList(const wxTreeCtrl * self);
+#endif
 size_t wxTreeCtrl_GetChildrenCount(const wxTreeCtrl * self, const wxTreeItemId * item, bool recursively);
 unsigned int wxTreeCtrl_GetCount(const wxTreeCtrl * self);
 wxTextCtrl * wxTreeCtrl_GetEditControl(const wxTreeCtrl * self);
@@ -513,7 +517,9 @@ int wxTreeCtrl_OnCompareItems(wxTreeCtrl * self, const wxTreeItemId * item1, con
 wxTreeItemId *wxTreeCtrl_PrependItem(wxTreeCtrl * self, const wxTreeItemId * parent, const wxString * text, int image, int sel_image, wxTreeItemData * data);
 void wxTreeCtrl_ScrollTo(wxTreeCtrl * self, const wxTreeItemId * item);
 void wxTreeCtrl_SelectItem(wxTreeCtrl * self, const wxTreeItemId * item, bool select);
+#ifndef __WXMSW__
 void wxTreeCtrl_SetButtonsImageList(wxTreeCtrl * self, wxImageList * image_list);
+#endif
 void wxTreeCtrl_SetIndent(wxTreeCtrl * self, unsigned int indent);
 void wxTreeCtrl_SetSpacing(wxTreeCtrl * self, unsigned int spacing);
 void wxTreeCtrl_SetItemBackgroundColour(wxTreeCtrl * self, const wxTreeItemId * item, const wxColour * col);
