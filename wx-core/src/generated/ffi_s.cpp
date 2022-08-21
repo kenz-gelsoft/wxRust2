@@ -963,37 +963,6 @@ void wxSlider_SetValue(wxSlider * self, int value) {
     return self->SetValue(value);
 }
 
-// CLASS: wxSound
-wxClassInfo *wxSound_CLASSINFO() {
-    return wxCLASSINFO(wxSound);
-}
-wxSound *wxSound_new() {
-    return new wxSound();
-}
-wxSound *wxSound_new1(const wxString * file_name, bool is_resource) {
-    return new wxSound(*file_name, is_resource);
-}
-wxSound *wxSound_new2(size_t size, const void * data) {
-    return new wxSound(size, data);
-}
-bool wxSound_Create(wxSound * self, const wxString * file_name, bool is_resource) {
-    return self->Create(*file_name, is_resource);
-}
-bool wxSound_Create1(wxSound * self, size_t size, const void * data) {
-    return self->Create(size, data);
-}
-bool wxSound_IsOk(const wxSound * self) {
-    return self->IsOk();
-}
-#ifndef __WXMSW__
-bool wxSound_IsPlaying() {
-    return wxSound::IsPlaying();
-}
-#endif
-void wxSound_Stop() {
-    return wxSound::Stop();
-}
-
 // CLASS: wxSpinButton
 wxClassInfo *wxSpinButton_CLASSINFO() {
     return wxCLASSINFO(wxSpinButton);

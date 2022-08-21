@@ -447,7 +447,7 @@ wxml_files = [
     'wxml/classwx_sizer_flags.xml',
     'wxml/classwx_sizer_item.xml',
     'wxml/classwx_slider.xml',
-    'wxml/classwx_sound.xml',
+    # 'wxml/classwx_sound.xml', # Our CI environment is't built with (mingw64)
     'wxml/classwx_spin_button.xml',
     'wxml/classwx_spin_ctrl.xml',
     'wxml/classwx_spin_ctrl_double.xml',

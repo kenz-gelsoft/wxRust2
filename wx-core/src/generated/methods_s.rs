@@ -1625,32 +1625,6 @@ pub trait SliderMethods: ControlMethods {
     }
 }
 
-// wxSound
-pub trait SoundMethods: ObjectMethods {
-    // DTOR: fn ~wxSound()
-    fn create_str(&self, file_name: &str, is_resource: bool) -> bool {
-        unsafe {
-            let file_name = WxString::from(file_name);
-            let file_name = file_name.as_ptr();
-            ffi::wxSound_Create(self.as_ptr(), file_name, is_resource)
-        }
-    }
-    fn create_sz(&self, size: usize, data: *const c_void) -> bool {
-        unsafe { ffi::wxSound_Create1(self.as_ptr(), size, data) }
-    }
-    fn is_ok(&self) -> bool {
-        unsafe { ffi::wxSound_IsOk(self.as_ptr()) }
-    }
-    // NOT_SUPPORTED: fn Play()
-    fn is_playing() -> bool {
-        unsafe { ffi::wxSound_IsPlaying() }
-    }
-    // NOT_SUPPORTED: fn Play1()
-    fn stop() {
-        unsafe { ffi::wxSound_Stop() }
-    }
-}
-
 // wxSpinButton
 pub trait SpinButtonMethods: ControlMethods {
     // DTOR: fn ~wxSpinButton()

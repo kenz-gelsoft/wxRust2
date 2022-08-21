@@ -1101,48 +1101,6 @@ impl<const OWNED: bool> DynamicCast for SliderIsOwned<OWNED> {
     }
 }
 
-// wxSound
-wx_class! { Sound =
-    SoundIsOwned<true>(wxSound) impl
-        SoundMethods,
-        ObjectMethods
-}
-impl<const OWNED: bool> SoundIsOwned<OWNED> {
-    pub fn new() -> SoundIsOwned<OWNED> {
-        unsafe { SoundIsOwned(ffi::wxSound_new()) }
-    }
-    pub fn new_with_str(file_name: &str, is_resource: bool) -> SoundIsOwned<OWNED> {
-        unsafe {
-            let file_name = WxString::from(file_name);
-            let file_name = file_name.as_ptr();
-            SoundIsOwned(ffi::wxSound_new1(file_name, is_resource))
-        }
-    }
-    pub fn new_with_sz(size: usize, data: *const c_void) -> SoundIsOwned<OWNED> {
-        unsafe { SoundIsOwned(ffi::wxSound_new2(size, data)) }
-    }
-    pub fn none() -> Option<&'static Self> {
-        None
-    }
-}
-impl<const OWNED: bool> From<SoundIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: SoundIsOwned<OWNED>) -> Self {
-        unsafe { Self::from_ptr(o.as_ptr()) }
-    }
-}
-impl<const OWNED: bool> DynamicCast for SoundIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSound_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Drop for SoundIsOwned<OWNED> {
-    fn drop(&mut self) {
-        if OWNED {
-            unsafe { ffi::wxObject_delete(self.0) }
-        }
-    }
-}
-
 // wxSpinButton
 wx_class! { SpinButton =
     SpinButtonIsOwned<true>(wxSpinButton) impl

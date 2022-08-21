@@ -709,20 +709,6 @@ extern "C" {
     pub fn wxSlider_SetTickFreq(self_: *mut c_void, freq: c_int);
     pub fn wxSlider_SetValue(self_: *mut c_void, value: c_int);
 
-    // wxSound
-    pub fn wxSound_CLASSINFO() -> *mut c_void;
-    pub fn wxSound_new() -> *mut c_void;
-    pub fn wxSound_new1(file_name: *const c_void, is_resource: bool) -> *mut c_void;
-    pub fn wxSound_new2(size: usize, data: *const c_void) -> *mut c_void;
-    // DTOR: pub fn wxSound_~wxSound(self_: *mut c_void);
-    pub fn wxSound_Create(self_: *mut c_void, file_name: *const c_void, is_resource: bool) -> bool;
-    pub fn wxSound_Create1(self_: *mut c_void, size: usize, data: *const c_void) -> bool;
-    pub fn wxSound_IsOk(self_: *const c_void) -> bool;
-    // NOT_SUPPORTED: pub fn wxSound_Play(self_: *const c_void, flags: unsigned) -> bool;
-    pub fn wxSound_IsPlaying() -> bool;
-    // NOT_SUPPORTED: pub fn wxSound_Play1(filename: *const c_void, flags: unsigned) -> bool;
-    pub fn wxSound_Stop();
-
     // wxSpinButton
     pub fn wxSpinButton_CLASSINFO() -> *mut c_void;
     pub fn wxSpinButton_new() -> *mut c_void;

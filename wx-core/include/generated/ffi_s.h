@@ -13,7 +13,6 @@
 #include <wx/simplebook.h>
 #include <wx/sizer.h>
 #include <wx/slider.h>
-#include <wx/sound.h>
 #include <wx/spinbutt.h>
 #include <wx/spinctrl.h>
 #include <wx/splash.h>
@@ -379,19 +378,6 @@ void wxSlider_SetThumbLength(wxSlider * self, int len);
 void wxSlider_SetTick(wxSlider * self, int tick_pos);
 void wxSlider_SetTickFreq(wxSlider * self, int freq);
 void wxSlider_SetValue(wxSlider * self, int value);
-
-// CLASS: wxSound
-wxClassInfo *wxSound_CLASSINFO();
-wxSound *wxSound_new();
-wxSound *wxSound_new1(const wxString * file_name, bool is_resource);
-wxSound *wxSound_new2(size_t size, const void * data);
-bool wxSound_Create(wxSound * self, const wxString * file_name, bool is_resource);
-bool wxSound_Create1(wxSound * self, size_t size, const void * data);
-bool wxSound_IsOk(const wxSound * self);
-#ifndef __WXMSW__
-bool wxSound_IsPlaying();
-#endif
-void wxSound_Stop();
 
 // CLASS: wxSpinButton
 wxClassInfo *wxSpinButton_CLASSINFO();
