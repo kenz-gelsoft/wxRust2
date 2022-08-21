@@ -1,19 +1,4 @@
 core_files = [
-    'wxml/classwx_quantize.xml',
-    'wxml/classwx_query_layout_info_event.xml',
-    'wxml/classwx_radio_box.xml',
-    'wxml/classwx_radio_button.xml',
-    'wxml/classwx_real_point.xml',
-    'wxml/classwx_rearrange_ctrl.xml',
-    'wxml/classwx_rearrange_dialog.xml',
-    'wxml/classwx_rearrange_list.xml',
-    'wxml/classwx_rect.xml',
-    'wxml/classwx_region.xml',
-    'wxml/classwx_region_iterator.xml',
-    'wxml/classwx_renderer_native.xml',
-    'wxml/classwx_rich_message_dialog.xml',
-    'wxml/classwx_rich_tool_tip.xml',
-    'wxml/classwx_rotate_gesture_event.xml',
     'wxml/classwx_s_v_g_bitmap_embed_handler.xml',
     'wxml/classwx_s_v_g_bitmap_file_handler.xml',
     'wxml/classwx_s_v_g_bitmap_handler.xml',
@@ -466,10 +451,23 @@ wxml_files = [
     # 'wxml/classwx_printer_d_c.xml',         # Our CI environment is't built with
     # 'wxml/classwx_printout.xml',            # Our CI environment is't built with
     'wxml/classwx_property_sheet_dialog.xml',
+    'wxml/classwx_quantize.xml',
+    'wxml/classwx_query_layout_info_event.xml',
     'wxml/classwx_radio_box.xml',
+    'wxml/classwx_radio_button.xml',
+    'wxml/classwx_real_point.xml',
+    'wxml/classwx_rearrange_ctrl.xml',
+    'wxml/classwx_rearrange_dialog.xml',
+    'wxml/classwx_rearrange_list.xml',
     'wxml/classwx_rect.xml',
     'wxml/classwx_ref_counter.xml',
+    'wxml/classwx_rect.xml',
+    'wxml/classwx_region.xml',
+    'wxml/classwx_region_iterator.xml',
     'wxml/classwx_renderer_native.xml',
+    # 'wxml/classwx_rich_message_dialog.xml', # base class not documented
+    'wxml/classwx_rich_tool_tip.xml',
+    # 'wxml/classwx_rotate_gesture_event.xml', # requires 3.1
     'wxml/classwx_search_ctrl.xml',
     'wxml/classwx_settable_header_column.xml',
     # 'wxml/classwx_shared_client_data_container.xml', # requires 3.1.7
@@ -1608,6 +1606,35 @@ blocklist = [
 wx317 = [
     # Doc isn't up-to-date in wx3.1.6
     'GetItemHelpText',
+]
+[types.wxRealPoint]
+blocklist = [
+    'operator=',
+    'operator==',
+    'operator!=',
+    'operator+',
+    'operator+1',
+    'operator+2',
+    'operator+=',
+    'operator+=1',
+    'operator-',
+    'operator-1',
+    'operator-2',
+    'operator-=',
+    'operator-=1',
+    'operator/',
+    'operator/=',
+    'operator*',
+    'operator*1',
+    'operator*=',
+]
+[types.wxRegion]
+blocklist = [
+    'operator=',
+]
+[types.wxRegionIterator]
+blocklist = [
+    'operator++',
 ]
 [types.wxRect]
 blocklist = [

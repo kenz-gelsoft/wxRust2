@@ -62,9 +62,13 @@ wx_class! { DCClipper =
         DCClipperMethods
 }
 impl<const OWNED: bool> DCClipperIsOwned<OWNED> {
-    pub fn new_with_region<D: DCMethods>(dc: &D, region: *const c_void) -> DCClipperIsOwned<OWNED> {
+    pub fn new_with_region<D: DCMethods, R: RegionMethods>(
+        dc: &D,
+        region: &R,
+    ) -> DCClipperIsOwned<OWNED> {
         unsafe {
             let dc = dc.as_ptr();
+            let region = region.as_ptr();
             DCClipperIsOwned(ffi::wxDCClipper_new(dc, region))
         }
     }

@@ -432,8 +432,11 @@ pub trait DCMethods: ObjectMethods {
             ffi::wxDC_SetClippingRegion2(self.as_ptr(), rect)
         }
     }
-    fn set_device_clipping_region(&self, region: *const c_void) {
-        unsafe { ffi::wxDC_SetDeviceClippingRegion(self.as_ptr(), region) }
+    fn set_device_clipping_region<R: RegionMethods>(&self, region: &R) {
+        unsafe {
+            let region = region.as_ptr();
+            ffi::wxDC_SetDeviceClippingRegion(self.as_ptr(), region)
+        }
     }
     fn get_char_height(&self) -> c_int {
         unsafe { ffi::wxDC_GetCharHeight(self.as_ptr()) }

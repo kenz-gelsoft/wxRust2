@@ -127,8 +127,11 @@ pub trait NavigationKeyEventMethods: EventMethods {
 
 // wxNonOwnedWindow
 pub trait NonOwnedWindowMethods: WindowMethods {
-    fn set_shape_region(&self, region: *const c_void) -> bool {
-        unsafe { ffi::wxNonOwnedWindow_SetShape(self.as_ptr(), region) }
+    fn set_shape_region<R: RegionMethods>(&self, region: &R) -> bool {
+        unsafe {
+            let region = region.as_ptr();
+            ffi::wxNonOwnedWindow_SetShape(self.as_ptr(), region)
+        }
     }
     fn set_shape_graphicspath<G: GraphicsPathMethods>(&self, path: &G) -> bool {
         unsafe {
