@@ -37,3 +37,8 @@ pub trait ClassInfoMethods: WxRustMethods {
         }
     }
 }
+
+// wxClientData
+pub trait ClientDataMethods: WxRustMethods {
+    // DTOR: fn ~wxClientData()
+}

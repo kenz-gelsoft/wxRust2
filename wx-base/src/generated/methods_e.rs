@@ -109,12 +109,18 @@ pub trait EvtHandlerMethods: ObjectMethods {
     // NOT_SUPPORTED: fn Unbind()
     // BLOCKED: fn Unbind1()
     // BLOCKED: fn GetClientData()
-    fn get_client_object(&self) -> *mut c_void {
-        unsafe { ffi::wxEvtHandler_GetClientObject(self.as_ptr()) }
+    fn get_client_object(&self) -> Option<ClientDataIsOwned<false>> {
+        unsafe { ClientData::option_from(ffi::wxEvtHandler_GetClientObject(self.as_ptr())) }
     }
     // BLOCKED: fn SetClientData()
-    fn set_client_object(&self, data: *mut c_void) {
-        unsafe { ffi::wxEvtHandler_SetClientObject(self.as_ptr(), data) }
+    fn set_client_object<C: ClientDataMethods>(&self, data: Option<&C>) {
+        unsafe {
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxEvtHandler_SetClientObject(self.as_ptr(), data)
+        }
     }
     fn get_evt_handler_enabled(&self) -> bool {
         unsafe { ffi::wxEvtHandler_GetEvtHandlerEnabled(self.as_ptr()) }

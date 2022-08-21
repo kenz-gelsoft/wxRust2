@@ -1,39 +1,4 @@
 core_files = [
-    'wxml/classwx_t_g_a_handler.xml',
-    'wxml/classwx_t_i_f_f_handler.xml',
-    'wxml/classwx_task_bar_button.xml',
-    'wxml/classwx_task_bar_icon.xml',
-    'wxml/classwx_task_bar_icon_event.xml',
-    'wxml/classwx_task_bar_jump_list.xml',
-    'wxml/classwx_task_bar_jump_list_category.xml',
-    'wxml/classwx_task_bar_jump_list_item.xml',
-    'wxml/classwx_text_attr.xml',
-    'wxml/classwx_text_completer_simple.xml',
-    'wxml/classwx_text_ctrl.xml',
-    'wxml/classwx_text_data_object.xml',
-    'wxml/classwx_text_drop_target.xml',
-    'wxml/classwx_text_entry.xml',
-    'wxml/classwx_text_entry_dialog.xml',
-    'wxml/classwx_text_validator.xml',
-    'wxml/classwx_thread_event.xml',
-    'wxml/classwx_thumb_bar_button.xml',
-    'wxml/classwx_time_picker_ctrl.xml',
-    'wxml/classwx_tip_provider.xml',
-    'wxml/classwx_tip_window.xml',
-    'wxml/classwx_toggle_button.xml',
-    'wxml/classwx_tool_bar.xml',
-    'wxml/classwx_tool_tip.xml',
-    'wxml/classwx_toolbook.xml',
-    'wxml/classwx_top_level_window.xml',
-    'wxml/classwx_tree_ctrl.xml',
-    'wxml/classwx_tree_event.xml',
-    'wxml/classwx_tree_item_data.xml',
-    'wxml/classwx_tree_item_id.xml',
-    'wxml/classwx_tree_list_ctrl.xml',
-    'wxml/classwx_tree_list_item.xml',
-    'wxml/classwx_tree_list_item_comparator.xml',
-    'wxml/classwx_treebook.xml',
-    'wxml/classwx_two_finger_tap_event.xml',
     'wxml/classwx_u_i_action_simulator.xml',
     'wxml/classwx_u_r_l_data_object.xml',
     'wxml/classwx_update_u_i_event.xml',
@@ -112,6 +77,7 @@ wxml_files = [
     'wxml/classwx_choicebook.xml',
     'wxml/classwx_class_info.xml',
     'wxml/classwx_client_d_c.xml',
+    'wxml/classwx_client_data.xml',
     'wxml/classwx_clipboard.xml',
     'wxml/classwx_clipboard_text_event.xml',
     'wxml/classwx_close_event.xml',
@@ -469,16 +435,44 @@ wxml_files = [
     # 'wxml/classwx_stream_to_text_redirector.xml', # depends on C++ stdio
     'wxml/classwx_sys_colour_changed_event.xml',
     'wxml/classwx_system_settings.xml',
+    'wxml/classwx_t_g_a_handler.xml',
+    'wxml/classwx_t_i_f_f_handler.xml',
+    # 'wxml/classwx_task_bar_button.xml',             # MSW only
+    'wxml/classwx_task_bar_icon.xml',
+    'wxml/classwx_task_bar_icon_event.xml',
+    # 'wxml/classwx_task_bar_jump_list.xml',          # MSW only
+    # 'wxml/classwx_task_bar_jump_list_category.xml', # MSW only
+    # 'wxml/classwx_task_bar_jump_list_item.xml',     # MSW only
     'wxml/classwx_text_attr.xml',
+    # 'wxml/classwx_text_completer.xml',              # binding not generated when explicit ctor not docced
+    # 'wxml/classwx_text_completer_simple.xml',       # binding not generated when explicit ctor not docced
     'wxml/classwx_text_ctrl.xml',
+    'wxml/classwx_text_data_object.xml',
+    'wxml/classwx_text_drop_target.xml',
     'wxml/classwx_text_entry.xml',
     'wxml/classwx_text_entry_dialog.xml',
+    'wxml/classwx_text_validator.xml',
+    'wxml/classwx_thread_event.xml',
+    # 'wxml/classwx_thumb_bar_button.xml', # MSW only
     'wxml/classwx_time_picker_ctrl.xml',
     'wxml/classwx_timer.xml',
     'wxml/classwx_timer_event.xml',
+    'wxml/classwx_tip_provider.xml',
+    'wxml/classwx_tip_window.xml',
     'wxml/classwx_toggle_button.xml',
     'wxml/classwx_tool_bar.xml',
+    'wxml/classwx_tool_tip.xml',
+    'wxml/classwx_toolbook.xml',
     'wxml/classwx_top_level_window.xml',
+    'wxml/classwx_tree_ctrl.xml',
+    'wxml/classwx_tree_event.xml',
+    'wxml/classwx_tree_item_data.xml',
+    'wxml/classwx_tree_item_id.xml',
+    'wxml/classwx_tree_list_ctrl.xml',
+    'wxml/classwx_tree_list_item.xml',
+    'wxml/classwx_tree_list_item_comparator.xml',
+    'wxml/classwx_treebook.xml',
+    # 'wxml/classwx_two_finger_tap_event.xml', # requires 3.1
     'wxml/classwx_validator.xml',
     'wxml/classwx_window.xml',
     'wxml/classwx_window_d_c.xml',
@@ -1135,6 +1129,11 @@ blocklist = [
 blocklist = [
     'operator!=',
     'operator==',
+]
+[types.wxGenericDirCtrl]
+blocklist = [
+    # wx-value type not supported
+    'GetPath1',
 ]
 [types.wxGraphicsContext]
 blocklist = [
@@ -1797,6 +1796,16 @@ not_gtk = [
 wx31 = [
     'EmptyUndoBuffer',
 ]
+[types.wxTextDataObject]
+blocklist = [
+    # method of base wxDataObjectSimple is blocked
+    'GetFormat',
+]
+[types.wxTextDropTarget]
+blocklist = [
+    # abstract
+    'wxTextDropTarget',
+]
 [types.wxTextEntry]
 wx31 = [
     'ForceUpper',
@@ -1804,6 +1813,16 @@ wx31 = [
 [types.wxTextEntryDialog]
 wx31 = [
     'ForceUpper',
+]
+[types.wxThreadEvent]
+blocklist = [
+    # has template parameter
+    'SetPayload',
+]
+[types.wxTipProvider]
+blocklist = [
+    # abstract
+    'wxTipProvider',
 ]
 [types.wxToolBar]
 blocklist = [
@@ -1829,6 +1848,44 @@ wx31 = [
     'EnableFullScreenView',
     'EnableMaximizeButton',
     'EnableMinimizeButton',
+]
+[types.wxToolTip]
+windows = [
+    'SetMaxWidth',
+]
+[types.wxTreeListCtrl]
+blocklist = [
+    # wx-value type not supported
+    'AppendItem',
+    'AreAllChildrenInState',
+    'CheckItem',
+    'CheckItemRecursively',
+    'Collapse',
+    'DeleteItem',
+    'EnsureVisible',
+    'Expand',
+    'GetCheckedState',
+    'GetFirstChild',
+    'GetItemData',
+    'GetItemParent',
+    'GetNextItem',
+    'GetNextSibling',
+    'InsertItem',
+    'IsExpanded',
+    'IsSelected',
+    'PrependItem',
+    'Select',
+    'SetItemData',
+    'SetItemImage',
+    'SetItemText1',
+    'UncheckItem',
+    'Unselect',
+    'UpdateItemParentStateRecursively',
+]
+[types.wxTreeListItemComparator]
+blocklist = [
+    # abstract
+    'wxTreeListItemComparator',
 ]
 [types.wxValidator]
 returns_owned = [

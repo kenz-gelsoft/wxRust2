@@ -505,16 +505,20 @@ pub trait BitmapComboBoxMethods: ComboBoxMethods {
             ffi::wxBitmapComboBox_Append1(self.as_ptr(), item, bitmap, client_data)
         }
     }
-    fn append_clientdata<B: BitmapMethods>(
+    fn append_clientdata<B: BitmapMethods, C: ClientDataMethods>(
         &self,
         item: &str,
         bitmap: &B,
-        client_data: *mut c_void,
+        client_data: Option<&C>,
     ) -> c_int {
         unsafe {
             let item = WxString::from(item);
             let item = item.as_ptr();
             let bitmap = bitmap.as_ptr();
+            let client_data = match client_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             ffi::wxBitmapComboBox_Append2(self.as_ptr(), item, bitmap, client_data)
         }
     }
@@ -546,17 +550,21 @@ pub trait BitmapComboBoxMethods: ComboBoxMethods {
             ffi::wxBitmapComboBox_Insert1(self.as_ptr(), item, bitmap, pos, client_data)
         }
     }
-    fn insert_clientdata<B: BitmapMethods>(
+    fn insert_clientdata<B: BitmapMethods, C: ClientDataMethods>(
         &self,
         item: &str,
         bitmap: &B,
         pos: c_uint,
-        client_data: *mut c_void,
+        client_data: Option<&C>,
     ) -> c_int {
         unsafe {
             let item = WxString::from(item);
             let item = item.as_ptr();
             let bitmap = bitmap.as_ptr();
+            let client_data = match client_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             ffi::wxBitmapComboBox_Insert2(self.as_ptr(), item, bitmap, pos, client_data)
         }
     }

@@ -20,3 +20,24 @@ impl<const OWNED: bool> Drop for ClassInfoIsOwned<OWNED> {
         }
     }
 }
+
+// wxClientData
+wx_class! { ClientData =
+    ClientDataIsOwned<true>(wxClientData) impl
+        ClientDataMethods
+}
+impl<const OWNED: bool> ClientDataIsOwned<OWNED> {
+    pub fn new() -> ClientDataIsOwned<OWNED> {
+        unsafe { ClientDataIsOwned(ffi::wxClientData_new()) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for ClientDataIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxClientData_delete(self.0) }
+        }
+    }
+}

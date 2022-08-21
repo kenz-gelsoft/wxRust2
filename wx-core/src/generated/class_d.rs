@@ -2044,8 +2044,15 @@ impl<const OWNED: bool> DragImageIsOwned<OWNED> {
             DragImageIsOwned(ffi::wxDragImage_new3(text, cursor))
         }
     }
-    pub fn new_with_treectrl(tree_ctrl: *const c_void, id: *mut c_void) -> DragImageIsOwned<OWNED> {
-        unsafe { DragImageIsOwned(ffi::wxDragImage_new4(tree_ctrl, id)) }
+    pub fn new_with_treectrl<T: TreeCtrlMethods, T2: TreeItemIdMethods>(
+        tree_ctrl: &T,
+        id: &T2,
+    ) -> DragImageIsOwned<OWNED> {
+        unsafe {
+            let tree_ctrl = tree_ctrl.as_ptr();
+            let id = id.as_ptr();
+            DragImageIsOwned(ffi::wxDragImage_new4(tree_ctrl, id))
+        }
     }
     pub fn new_with_listctrl<L: ListCtrlMethods>(
         list_ctrl: &L,

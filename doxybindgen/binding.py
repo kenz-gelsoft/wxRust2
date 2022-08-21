@@ -294,6 +294,7 @@ class OverloadTree:
         if method.suppressed_reason():
             return False
         by_name = self._path(method)[0]
+        # print(method.cls.name)
         node = self.__root.items[by_name]
         return self._count_in_subtree(node) > 1
     

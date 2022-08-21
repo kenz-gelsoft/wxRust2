@@ -278,16 +278,18 @@ pub trait GenericDirCtrlMethods: ControlMethods {
     fn get_path(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxGenericDirCtrl_GetPath(self.as_ptr())).into() }
     }
-    // NOT_SUPPORTED: fn GetPath1()
+    // BLOCKED: fn GetPath1()
     fn get_paths<A: ArrayStringMethods>(&self, paths: &A) {
         unsafe {
             let paths = paths.as_ptr();
             ffi::wxGenericDirCtrl_GetPaths(self.as_ptr(), paths)
         }
     }
-    // NOT_SUPPORTED: fn GetRootId()
-    fn get_tree_ctrl(&self) -> *mut c_void {
-        unsafe { ffi::wxGenericDirCtrl_GetTreeCtrl(self.as_ptr()) }
+    fn get_root_id(&self) -> TreeItemId {
+        unsafe { TreeItemId::from_ptr(ffi::wxGenericDirCtrl_GetRootId(self.as_ptr())) }
+    }
+    fn get_tree_ctrl(&self) -> WeakRef<TreeCtrl> {
+        unsafe { WeakRef::<TreeCtrl>::from(ffi::wxGenericDirCtrl_GetTreeCtrl(self.as_ptr())) }
     }
     fn init(&self) {
         unsafe { ffi::wxGenericDirCtrl_Init(self.as_ptr()) }

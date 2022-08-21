@@ -780,10 +780,18 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
             ffi::wxItemContainer_Append1(self.as_item_container(), item, client_data)
         }
     }
-    fn append_str_clientdata(&self, item: &str, client_data: *mut c_void) -> c_int {
+    fn append_str_clientdata<C: ClientDataMethods>(
+        &self,
+        item: &str,
+        client_data: Option<&C>,
+    ) -> c_int {
         unsafe {
             let item = WxString::from(item);
             let item = item.as_ptr();
+            let client_data = match client_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             ffi::wxItemContainer_Append2(self.as_item_container(), item, client_data)
         }
     }
@@ -804,13 +812,17 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
             ffi::wxItemContainer_Append5(self.as_item_container(), items, client_data)
         }
     }
-    fn append_arraystring_clientdata<A: ArrayStringMethods>(
+    fn append_arraystring_clientdata<A: ArrayStringMethods, C: ClientDataMethods>(
         &self,
         items: &A,
-        client_data: *mut c_void,
+        client_data: Option<&C>,
     ) -> c_int {
         unsafe {
             let items = items.as_ptr();
+            let client_data = match client_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             ffi::wxItemContainer_Append6(self.as_item_container(), items, client_data)
         }
     }
@@ -820,13 +832,19 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     fn append_uint_void(&self, n: c_uint, items: *const c_void, client_data: *mut c_void) -> c_int {
         unsafe { ffi::wxItemContainer_Append8(self.as_item_container(), n, items, client_data) }
     }
-    fn append_uint_clientdata(
+    fn append_uint_clientdata<C: ClientDataMethods>(
         &self,
         n: c_uint,
         items: *const c_void,
-        client_data: *mut c_void,
+        client_data: Option<&C>,
     ) -> c_int {
-        unsafe { ffi::wxItemContainer_Append9(self.as_item_container(), n, items, client_data) }
+        unsafe {
+            let client_data = match client_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxItemContainer_Append9(self.as_item_container(), n, items, client_data)
+        }
     }
     fn clear(&self) {
         unsafe { ffi::wxItemContainer_Clear(self.as_item_container()) }
@@ -834,8 +852,13 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     fn delete(&self, n: c_uint) {
         unsafe { ffi::wxItemContainer_Delete(self.as_item_container(), n) }
     }
-    fn detach_client_object(&self, n: c_uint) -> *mut c_void {
-        unsafe { ffi::wxItemContainer_DetachClientObject(self.as_item_container(), n) }
+    fn detach_client_object(&self, n: c_uint) -> Option<ClientDataIsOwned<false>> {
+        unsafe {
+            ClientData::option_from(ffi::wxItemContainer_DetachClientObject(
+                self.as_item_container(),
+                n,
+            ))
+        }
     }
     fn has_client_data(&self) -> bool {
         unsafe { ffi::wxItemContainer_HasClientData(self.as_item_container()) }
@@ -849,14 +872,25 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     fn get_client_data(&self, n: c_uint) -> *mut c_void {
         unsafe { ffi::wxItemContainer_GetClientData(self.as_item_container(), n) }
     }
-    fn get_client_object_uint(&self, n: c_uint) -> *mut c_void {
-        unsafe { ffi::wxItemContainer_GetClientObject(self.as_item_container(), n) }
+    fn get_client_object_uint(&self, n: c_uint) -> Option<ClientDataIsOwned<false>> {
+        unsafe {
+            ClientData::option_from(ffi::wxItemContainer_GetClientObject(
+                self.as_item_container(),
+                n,
+            ))
+        }
     }
     fn set_client_data(&self, n: c_uint, data: *mut c_void) {
         unsafe { ffi::wxItemContainer_SetClientData(self.as_item_container(), n, data) }
     }
-    fn set_client_object_uint(&self, n: c_uint, data: *mut c_void) {
-        unsafe { ffi::wxItemContainer_SetClientObject(self.as_item_container(), n, data) }
+    fn set_client_object_uint<C: ClientDataMethods>(&self, n: c_uint, data: Option<&C>) {
+        unsafe {
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxItemContainer_SetClientObject(self.as_item_container(), n, data)
+        }
     }
     fn insert_str_uint(&self, item: &str, pos: c_uint) -> c_int {
         unsafe {
@@ -872,15 +906,19 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
             ffi::wxItemContainer_Insert1(self.as_item_container(), item, pos, client_data)
         }
     }
-    fn insert_str_uint_clientdata(
+    fn insert_str_uint_clientdata<C: ClientDataMethods>(
         &self,
         item: &str,
         pos: c_uint,
-        client_data: *mut c_void,
+        client_data: Option<&C>,
     ) -> c_int {
         unsafe {
             let item = WxString::from(item);
             let item = item.as_ptr();
+            let client_data = match client_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             ffi::wxItemContainer_Insert2(self.as_item_container(), item, pos, client_data)
         }
     }
@@ -902,14 +940,18 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
             ffi::wxItemContainer_Insert5(self.as_item_container(), items, pos, client_data)
         }
     }
-    fn insert_arraystring_clientdata<A: ArrayStringMethods>(
+    fn insert_arraystring_clientdata<A: ArrayStringMethods, C: ClientDataMethods>(
         &self,
         items: &A,
         pos: c_uint,
-        client_data: *mut c_void,
+        client_data: Option<&C>,
     ) -> c_int {
         unsafe {
             let items = items.as_ptr();
+            let client_data = match client_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             ffi::wxItemContainer_Insert6(self.as_item_container(), items, pos, client_data)
         }
     }
@@ -927,14 +969,18 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
             ffi::wxItemContainer_Insert8(self.as_item_container(), n, items, pos, client_data)
         }
     }
-    fn insert_uint_clientdata(
+    fn insert_uint_clientdata<C: ClientDataMethods>(
         &self,
         n: c_uint,
         items: *const c_void,
         pos: c_uint,
-        client_data: *mut c_void,
+        client_data: Option<&C>,
     ) -> c_int {
         unsafe {
+            let client_data = match client_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             ffi::wxItemContainer_Insert9(self.as_item_container(), n, items, pos, client_data)
         }
     }
@@ -951,13 +997,17 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
             ffi::wxItemContainer_Set2(self.as_item_container(), items, client_data)
         }
     }
-    fn set_arraystring_clientdata<A: ArrayStringMethods>(
+    fn set_arraystring_clientdata<A: ArrayStringMethods, C: ClientDataMethods>(
         &self,
         items: &A,
-        client_data: *mut c_void,
+        client_data: Option<&C>,
     ) {
         unsafe {
             let items = items.as_ptr();
+            let client_data = match client_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             ffi::wxItemContainer_Set3(self.as_item_container(), items, client_data)
         }
     }
@@ -967,8 +1017,19 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     fn set_uint_void(&self, n: c_uint, items: *const c_void, client_data: *mut c_void) {
         unsafe { ffi::wxItemContainer_Set5(self.as_item_container(), n, items, client_data) }
     }
-    fn set_uint_clientdata(&self, n: c_uint, items: *const c_void, client_data: *mut c_void) {
-        unsafe { ffi::wxItemContainer_Set6(self.as_item_container(), n, items, client_data) }
+    fn set_uint_clientdata<C: ClientDataMethods>(
+        &self,
+        n: c_uint,
+        items: *const c_void,
+        client_data: Option<&C>,
+    ) {
+        unsafe {
+            let client_data = match client_data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxItemContainer_Set6(self.as_item_container(), n, items, client_data)
+        }
     }
 }
 

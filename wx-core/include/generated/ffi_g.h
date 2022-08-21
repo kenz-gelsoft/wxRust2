@@ -91,6 +91,7 @@ int wxGenericDirCtrl_GetFilterIndex(const wxGenericDirCtrl * self);
 wxDirFilterListCtrl * wxGenericDirCtrl_GetFilterListCtrl(const wxGenericDirCtrl * self);
 wxString *wxGenericDirCtrl_GetPath(const wxGenericDirCtrl * self);
 void wxGenericDirCtrl_GetPaths(const wxGenericDirCtrl * self, wxArrayString * paths);
+wxTreeItemId *wxGenericDirCtrl_GetRootId(wxGenericDirCtrl * self);
 wxTreeCtrl * wxGenericDirCtrl_GetTreeCtrl(const wxGenericDirCtrl * self);
 void wxGenericDirCtrl_Init(wxGenericDirCtrl * self);
 void wxGenericDirCtrl_ReCreateTree(wxGenericDirCtrl * self);

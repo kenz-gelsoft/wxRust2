@@ -161,9 +161,9 @@ extern "C" {
     pub fn wxGenericDirCtrl_GetFilterIndex(self_: *const c_void) -> c_int;
     pub fn wxGenericDirCtrl_GetFilterListCtrl(self_: *const c_void) -> *mut c_void;
     pub fn wxGenericDirCtrl_GetPath(self_: *const c_void) -> *mut c_void;
-    // NOT_SUPPORTED: pub fn wxGenericDirCtrl_GetPath1(self_: *const c_void, item_id: wxTreeItemId) -> *mut c_void;
+    // BLOCKED: pub fn wxGenericDirCtrl_GetPath1(self_: *const c_void, item_id: wxTreeItemId) -> wxString;
     pub fn wxGenericDirCtrl_GetPaths(self_: *const c_void, paths: *mut c_void);
-    // NOT_SUPPORTED: pub fn wxGenericDirCtrl_GetRootId(self_: *mut c_void) -> wxTreeItemId;
+    pub fn wxGenericDirCtrl_GetRootId(self_: *mut c_void) -> *mut c_void;
     pub fn wxGenericDirCtrl_GetTreeCtrl(self_: *const c_void) -> *mut c_void;
     pub fn wxGenericDirCtrl_Init(self_: *mut c_void);
     pub fn wxGenericDirCtrl_ReCreateTree(self_: *mut c_void);

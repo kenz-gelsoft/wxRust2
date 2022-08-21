@@ -1,5 +1,51 @@
 use super::*;
 
+// wxTGAHandler
+pub trait TGAHandlerMethods: ImageHandlerMethods {}
+
+// wxTIFFHandler
+pub trait TIFFHandlerMethods: ImageHandlerMethods {}
+
+// wxTaskBarIcon
+pub trait TaskBarIconMethods: EvtHandlerMethods {
+    // DTOR: fn ~wxTaskBarIcon()
+    fn destroy(&self) {
+        unsafe { ffi::wxTaskBarIcon_Destroy(self.as_ptr()) }
+    }
+    fn is_icon_installed(&self) -> bool {
+        unsafe { ffi::wxTaskBarIcon_IsIconInstalled(self.as_ptr()) }
+    }
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxTaskBarIcon_IsOk(self.as_ptr()) }
+    }
+    fn popup_menu<M: MenuMethods>(&self, menu: Option<&M>) -> bool {
+        unsafe {
+            let menu = match menu {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTaskBarIcon_PopupMenu(self.as_ptr(), menu)
+        }
+    }
+    fn remove_icon(&self) -> bool {
+        unsafe { ffi::wxTaskBarIcon_RemoveIcon(self.as_ptr()) }
+    }
+    fn set_icon<B: BitmapBundleMethods>(&self, icon: &B, tooltip: &str) -> bool {
+        unsafe {
+            let icon = icon.as_ptr();
+            let tooltip = WxString::from(tooltip);
+            let tooltip = tooltip.as_ptr();
+            ffi::wxTaskBarIcon_SetIcon(self.as_ptr(), icon, tooltip)
+        }
+    }
+    fn is_available() -> bool {
+        unsafe { ffi::wxTaskBarIcon_IsAvailable() }
+    }
+}
+
+// wxTaskBarIconEvent
+pub trait TaskBarIconEventMethods: EventMethods {}
+
 // wxTextAttr
 pub trait TextAttrMethods: WxRustMethods {
     // NOT_SUPPORTED: fn GetAlignment()
@@ -513,6 +559,34 @@ pub trait TextCtrlMethods: ControlMethods {
     }
 }
 
+// wxTextDataObject
+pub trait TextDataObjectMethods: DataObjectSimpleMethods {
+    fn get_text(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxTextDataObject_GetText(self.as_ptr())).into() }
+    }
+    fn get_text_length(&self) -> usize {
+        unsafe { ffi::wxTextDataObject_GetTextLength(self.as_ptr()) }
+    }
+    fn set_text(&self, str_text: &str) {
+        unsafe {
+            let str_text = WxString::from(str_text);
+            let str_text = str_text.as_ptr();
+            ffi::wxTextDataObject_SetText(self.as_ptr(), str_text)
+        }
+    }
+}
+
+// wxTextDropTarget
+pub trait TextDropTargetMethods: DropTargetMethods {
+    fn on_drop_text(&self, x: c_int, y: c_int, data: &str) -> bool {
+        unsafe {
+            let data = WxString::from(data);
+            let data = data.as_ptr();
+            ffi::wxTextDropTarget_OnDropText(self.as_ptr(), x, y, data)
+        }
+    }
+}
+
 // wxTextEntry
 pub trait TextEntryMethods: WxRustMethods {
     fn as_text_entry(&self) -> *mut c_void {
@@ -714,8 +788,11 @@ pub trait TextEntryDialogMethods: DialogMethods {
     fn get_value(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxTextEntryDialog_GetValue(self.as_ptr())).into() }
     }
-    fn set_text_validator(&self, validator: *const c_void) {
-        unsafe { ffi::wxTextEntryDialog_SetTextValidator(self.as_ptr(), validator) }
+    fn set_text_validator<T: TextValidatorMethods>(&self, validator: &T) {
+        unsafe {
+            let validator = validator.as_ptr();
+            ffi::wxTextEntryDialog_SetTextValidator(self.as_ptr(), validator)
+        }
     }
     // NOT_SUPPORTED: fn SetTextValidator1()
     // NOT_SUPPORTED: fn SetMaxLength()
@@ -728,6 +805,124 @@ pub trait TextEntryDialogMethods: DialogMethods {
     }
     fn force_upper(&self) {
         unsafe { ffi::wxTextEntryDialog_ForceUpper(self.as_ptr()) }
+    }
+}
+
+// wxTextValidator
+pub trait TextValidatorMethods: ValidatorMethods {
+    fn get_char_excludes(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxTextValidator_GetCharExcludes(self.as_ptr())).into() }
+    }
+    fn get_char_includes(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxTextValidator_GetCharIncludes(self.as_ptr())).into() }
+    }
+    fn get_excludes(&self) -> ArrayStringIsOwned<false> {
+        unsafe { ArrayStringIsOwned::from_ptr(ffi::wxTextValidator_GetExcludes(self.as_ptr())) }
+    }
+    fn get_includes(&self) -> ArrayStringIsOwned<false> {
+        unsafe { ArrayStringIsOwned::from_ptr(ffi::wxTextValidator_GetIncludes(self.as_ptr())) }
+    }
+    fn get_style(&self) -> c_long {
+        unsafe { ffi::wxTextValidator_GetStyle(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn HasFlag()
+    fn on_char<K: KeyEventMethods>(&self, event: &K) {
+        unsafe {
+            let event = event.as_ptr();
+            ffi::wxTextValidator_OnChar(self.as_ptr(), event)
+        }
+    }
+    fn set_excludes<A: ArrayStringMethods>(&self, string_list: &A) {
+        unsafe {
+            let string_list = string_list.as_ptr();
+            ffi::wxTextValidator_SetExcludes(self.as_ptr(), string_list)
+        }
+    }
+    fn set_char_excludes(&self, chars: &str) {
+        unsafe {
+            let chars = WxString::from(chars);
+            let chars = chars.as_ptr();
+            ffi::wxTextValidator_SetCharExcludes(self.as_ptr(), chars)
+        }
+    }
+    fn set_includes<A: ArrayStringMethods>(&self, string_list: &A) {
+        unsafe {
+            let string_list = string_list.as_ptr();
+            ffi::wxTextValidator_SetIncludes(self.as_ptr(), string_list)
+        }
+    }
+    fn set_char_includes(&self, chars: &str) {
+        unsafe {
+            let chars = WxString::from(chars);
+            let chars = chars.as_ptr();
+            ffi::wxTextValidator_SetCharIncludes(self.as_ptr(), chars)
+        }
+    }
+    fn add_exclude(&self, exclude: &str) {
+        unsafe {
+            let exclude = WxString::from(exclude);
+            let exclude = exclude.as_ptr();
+            ffi::wxTextValidator_AddExclude(self.as_ptr(), exclude)
+        }
+    }
+    fn add_include(&self, include: &str) {
+        unsafe {
+            let include = WxString::from(include);
+            let include = include.as_ptr();
+            ffi::wxTextValidator_AddInclude(self.as_ptr(), include)
+        }
+    }
+    fn add_char_excludes(&self, chars: &str) {
+        unsafe {
+            let chars = WxString::from(chars);
+            let chars = chars.as_ptr();
+            ffi::wxTextValidator_AddCharExcludes(self.as_ptr(), chars)
+        }
+    }
+    fn add_char_includes(&self, chars: &str) {
+        unsafe {
+            let chars = WxString::from(chars);
+            let chars = chars.as_ptr();
+            ffi::wxTextValidator_AddCharIncludes(self.as_ptr(), chars)
+        }
+    }
+    fn set_style(&self, style: c_long) {
+        unsafe { ffi::wxTextValidator_SetStyle(self.as_ptr(), style) }
+    }
+    fn is_valid(&self, val: &str) -> String {
+        unsafe {
+            let val = WxString::from(val);
+            let val = val.as_ptr();
+            WxString::from_ptr(ffi::wxTextValidator_IsValid(self.as_ptr(), val)).into()
+        }
+    }
+}
+
+// wxThreadEvent
+pub trait ThreadEventMethods: EventMethods {
+    // BLOCKED: fn SetPayload()
+    // NOT_SUPPORTED: fn GetPayload()
+    fn get_extra_long(&self) -> c_long {
+        unsafe { ffi::wxThreadEvent_GetExtraLong(self.as_ptr()) }
+    }
+    fn get_int(&self) -> c_int {
+        unsafe { ffi::wxThreadEvent_GetInt(self.as_ptr()) }
+    }
+    fn get_string(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxThreadEvent_GetString(self.as_ptr())).into() }
+    }
+    fn set_extra_long(&self, extra_long: c_long) {
+        unsafe { ffi::wxThreadEvent_SetExtraLong(self.as_ptr(), extra_long) }
+    }
+    fn set_int(&self, int_command: c_int) {
+        unsafe { ffi::wxThreadEvent_SetInt(self.as_ptr(), int_command) }
+    }
+    fn set_string(&self, string: &str) {
+        unsafe {
+            let string = WxString::from(string);
+            let string = string.as_ptr();
+            ffi::wxThreadEvent_SetString(self.as_ptr(), string)
+        }
     }
 }
 
@@ -787,6 +982,36 @@ pub trait TimePickerCtrlMethods: ControlMethods {
         unsafe {
             let dt = dt.as_ptr();
             ffi::wxTimePickerCtrl_SetValue(self.as_ptr(), dt)
+        }
+    }
+}
+
+// wxTipProvider
+pub trait TipProviderMethods: WxRustMethods {
+    // DTOR: fn ~wxTipProvider()
+    fn get_current_tip(&self) -> usize {
+        unsafe { ffi::wxTipProvider_GetCurrentTip(self.as_ptr()) }
+    }
+    fn get_tip(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxTipProvider_GetTip(self.as_ptr())).into() }
+    }
+}
+
+// wxTipWindow
+pub trait TipWindowMethods: WindowMethods {
+    fn set_bounding_rect<R: RectMethods>(&self, rect_bound: &R) {
+        unsafe {
+            let rect_bound = rect_bound.as_ptr();
+            ffi::wxTipWindow_SetBoundingRect(self.as_ptr(), rect_bound)
+        }
+    }
+    fn set_tip_window_ptr<T: TipWindowMethods>(&self, window_ptr: Option<&T>) {
+        unsafe {
+            let window_ptr = match window_ptr {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTipWindow_SetTipWindowPtr(self.as_ptr(), window_ptr)
         }
     }
 }
@@ -1256,6 +1481,57 @@ pub trait ToolBarMethods: ControlMethods {
     }
 }
 
+// wxToolTip
+pub trait ToolTipMethods: ObjectMethods {
+    fn get_tip(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxToolTip_GetTip(self.as_ptr())).into() }
+    }
+    fn get_window(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxToolTip_GetWindow(self.as_ptr())) }
+    }
+    fn set_tip(&self, tip: &str) {
+        unsafe {
+            let tip = WxString::from(tip);
+            let tip = tip.as_ptr();
+            ffi::wxToolTip_SetTip(self.as_ptr(), tip)
+        }
+    }
+    fn enable(flag: bool) {
+        unsafe { ffi::wxToolTip_Enable(flag) }
+    }
+    fn set_auto_pop(msecs: c_long) {
+        unsafe { ffi::wxToolTip_SetAutoPop(msecs) }
+    }
+    fn set_delay(msecs: c_long) {
+        unsafe { ffi::wxToolTip_SetDelay(msecs) }
+    }
+    fn set_max_width(width: c_int) {
+        unsafe { ffi::wxToolTip_SetMaxWidth(width) }
+    }
+    fn set_reshow(msecs: c_long) {
+        unsafe { ffi::wxToolTip_SetReshow(msecs) }
+    }
+}
+
+// wxToolbook
+pub trait ToolbookMethods: BookCtrlBaseMethods {
+    fn get_tool_bar(&self) -> *mut c_void {
+        unsafe { ffi::wxToolbook_GetToolBar(self.as_ptr()) }
+    }
+    fn enable_page_sz(&self, page: usize, enable: bool) -> bool {
+        unsafe { ffi::wxToolbook_EnablePage(self.as_ptr(), page, enable) }
+    }
+    fn enable_page_window<W: WindowMethods>(&self, page: Option<&W>, enable: bool) -> bool {
+        unsafe {
+            let page = match page {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxToolbook_EnablePage1(self.as_ptr(), page, enable)
+        }
+    }
+}
+
 // wxTopLevelWindow
 pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     // DTOR: fn ~wxTopLevelWindow()
@@ -1412,5 +1688,825 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     // BLOCKED: fn UseNativeDecorationsByDefault()
     fn get_default_size() -> Size {
         unsafe { Size::from_ptr(ffi::wxTopLevelWindow_GetDefaultSize()) }
+    }
+}
+
+// wxTreeCtrl
+pub trait TreeCtrlMethods: ControlMethods {
+    // DTOR: fn ~wxTreeCtrl()
+    fn add_root<T: TreeItemDataMethods>(
+        &self,
+        text: &str,
+        image: c_int,
+        sel_image: c_int,
+        data: Option<&T>,
+    ) -> TreeItemId {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_AddRoot(
+                self.as_ptr(),
+                text,
+                image,
+                sel_image,
+                data,
+            ))
+        }
+    }
+    fn append_item<T: TreeItemIdMethods, T2: TreeItemDataMethods>(
+        &self,
+        parent: &T,
+        text: &str,
+        image: c_int,
+        sel_image: c_int,
+        data: Option<&T2>,
+    ) -> TreeItemId {
+        unsafe {
+            let parent = parent.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_AppendItem(
+                self.as_ptr(),
+                parent,
+                text,
+                image,
+                sel_image,
+                data,
+            ))
+        }
+    }
+    fn assign_buttons_image_list<I: ImageListMethods>(&self, image_list: Option<&I>) {
+        unsafe {
+            let image_list = match image_list {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTreeCtrl_AssignButtonsImageList(self.as_ptr(), image_list)
+        }
+    }
+    fn assign_state_image_list<I: ImageListMethods>(&self, image_list: Option<&I>) {
+        unsafe {
+            let image_list = match image_list {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTreeCtrl_AssignStateImageList(self.as_ptr(), image_list)
+        }
+    }
+    fn collapse<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_Collapse(self.as_ptr(), item)
+        }
+    }
+    fn collapse_all(&self) {
+        unsafe { ffi::wxTreeCtrl_CollapseAll(self.as_ptr()) }
+    }
+    fn collapse_all_children<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_CollapseAllChildren(self.as_ptr(), item)
+        }
+    }
+    fn collapse_and_reset<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_CollapseAndReset(self.as_ptr(), item)
+        }
+    }
+    fn delete<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_Delete(self.as_ptr(), item)
+        }
+    }
+    fn delete_all_items(&self) {
+        unsafe { ffi::wxTreeCtrl_DeleteAllItems(self.as_ptr()) }
+    }
+    fn delete_children<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_DeleteChildren(self.as_ptr(), item)
+        }
+    }
+    fn edit_label<T: TreeItemIdMethods, C: ClassInfoMethods>(
+        &self,
+        item: &T,
+        text_ctrl_class: Option<&C>,
+    ) -> WeakRef<TextCtrl> {
+        unsafe {
+            let item = item.as_ptr();
+            let text_ctrl_class = match text_ctrl_class {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            WeakRef::<TextCtrl>::from(ffi::wxTreeCtrl_EditLabel(
+                self.as_ptr(),
+                item,
+                text_ctrl_class,
+            ))
+        }
+    }
+    fn enable_bell_on_no_match(&self, on: bool) {
+        unsafe { ffi::wxTreeCtrl_EnableBellOnNoMatch(self.as_ptr(), on) }
+    }
+    fn end_edit_label<T: TreeItemIdMethods>(&self, item: &T, discard_changes: bool) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_EndEditLabel(self.as_ptr(), item, discard_changes)
+        }
+    }
+    fn ensure_visible<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_EnsureVisible(self.as_ptr(), item)
+        }
+    }
+    fn expand<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_Expand(self.as_ptr(), item)
+        }
+    }
+    fn expand_all(&self) {
+        unsafe { ffi::wxTreeCtrl_ExpandAll(self.as_ptr()) }
+    }
+    fn expand_all_children<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_ExpandAllChildren(self.as_ptr(), item)
+        }
+    }
+    fn get_bounding_rect<T: TreeItemIdMethods, R: RectMethods>(
+        &self,
+        item: &T,
+        rect: &R,
+        text_only: bool,
+    ) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            let rect = rect.as_ptr();
+            ffi::wxTreeCtrl_GetBoundingRect(self.as_ptr(), item, rect, text_only)
+        }
+    }
+    fn get_buttons_image_list(&self) -> Option<ImageListIsOwned<false>> {
+        unsafe { ImageList::option_from(ffi::wxTreeCtrl_GetButtonsImageList(self.as_ptr())) }
+    }
+    fn get_children_count<T: TreeItemIdMethods>(&self, item: &T, recursively: bool) -> usize {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_GetChildrenCount(self.as_ptr(), item, recursively)
+        }
+    }
+    fn get_count(&self) -> c_uint {
+        unsafe { ffi::wxTreeCtrl_GetCount(self.as_ptr()) }
+    }
+    fn get_edit_control(&self) -> WeakRef<TextCtrl> {
+        unsafe { WeakRef::<TextCtrl>::from(ffi::wxTreeCtrl_GetEditControl(self.as_ptr())) }
+    }
+    fn get_first_child<T: TreeItemIdMethods>(&self, item: &T, cookie: *mut c_void) -> TreeItemId {
+        unsafe {
+            let item = item.as_ptr();
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_GetFirstChild(self.as_ptr(), item, cookie))
+        }
+    }
+    fn get_first_visible_item(&self) -> TreeItemId {
+        unsafe { TreeItemId::from_ptr(ffi::wxTreeCtrl_GetFirstVisibleItem(self.as_ptr())) }
+    }
+    fn get_focused_item(&self) -> TreeItemId {
+        unsafe { TreeItemId::from_ptr(ffi::wxTreeCtrl_GetFocusedItem(self.as_ptr())) }
+    }
+    fn clear_focused_item(&self) {
+        unsafe { ffi::wxTreeCtrl_ClearFocusedItem(self.as_ptr()) }
+    }
+    fn set_focused_item<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_SetFocusedItem(self.as_ptr(), item)
+        }
+    }
+    fn get_indent(&self) -> c_uint {
+        unsafe { ffi::wxTreeCtrl_GetIndent(self.as_ptr()) }
+    }
+    fn get_spacing(&self) -> c_uint {
+        unsafe { ffi::wxTreeCtrl_GetSpacing(self.as_ptr()) }
+    }
+    fn get_item_background_colour<T: TreeItemIdMethods>(&self, item: &T) -> Colour {
+        unsafe {
+            let item = item.as_ptr();
+            Colour::from_ptr(ffi::wxTreeCtrl_GetItemBackgroundColour(self.as_ptr(), item))
+        }
+    }
+    fn get_item_data<T: TreeItemIdMethods>(&self, item: &T) -> Option<TreeItemDataIsOwned<false>> {
+        unsafe {
+            let item = item.as_ptr();
+            TreeItemData::option_from(ffi::wxTreeCtrl_GetItemData(self.as_ptr(), item))
+        }
+    }
+    fn get_item_font<T: TreeItemIdMethods>(&self, item: &T) -> Font {
+        unsafe {
+            let item = item.as_ptr();
+            Font::from_ptr(ffi::wxTreeCtrl_GetItemFont(self.as_ptr(), item))
+        }
+    }
+    // NOT_SUPPORTED: fn GetItemImage()
+    fn get_item_parent<T: TreeItemIdMethods>(&self, item: &T) -> TreeItemId {
+        unsafe {
+            let item = item.as_ptr();
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_GetItemParent(self.as_ptr(), item))
+        }
+    }
+    fn get_item_state<T: TreeItemIdMethods>(&self, item: &T) -> c_int {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_GetItemState(self.as_ptr(), item)
+        }
+    }
+    fn get_item_text<T: TreeItemIdMethods>(&self, item: &T) -> String {
+        unsafe {
+            let item = item.as_ptr();
+            WxString::from_ptr(ffi::wxTreeCtrl_GetItemText(self.as_ptr(), item)).into()
+        }
+    }
+    fn get_item_text_colour<T: TreeItemIdMethods>(&self, item: &T) -> Colour {
+        unsafe {
+            let item = item.as_ptr();
+            Colour::from_ptr(ffi::wxTreeCtrl_GetItemTextColour(self.as_ptr(), item))
+        }
+    }
+    fn get_last_child<T: TreeItemIdMethods>(&self, item: &T) -> TreeItemId {
+        unsafe {
+            let item = item.as_ptr();
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_GetLastChild(self.as_ptr(), item))
+        }
+    }
+    fn get_next_child<T: TreeItemIdMethods>(&self, item: &T, cookie: *mut c_void) -> TreeItemId {
+        unsafe {
+            let item = item.as_ptr();
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_GetNextChild(self.as_ptr(), item, cookie))
+        }
+    }
+    fn get_next_sibling_treeitemid<T: TreeItemIdMethods>(&self, item: &T) -> TreeItemId {
+        unsafe {
+            let item = item.as_ptr();
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_GetNextSibling(self.as_ptr(), item))
+        }
+    }
+    fn get_next_visible<T: TreeItemIdMethods>(&self, item: &T) -> TreeItemId {
+        unsafe {
+            let item = item.as_ptr();
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_GetNextVisible(self.as_ptr(), item))
+        }
+    }
+    fn get_prev_sibling_treeitemid<T: TreeItemIdMethods>(&self, item: &T) -> TreeItemId {
+        unsafe {
+            let item = item.as_ptr();
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_GetPrevSibling(self.as_ptr(), item))
+        }
+    }
+    fn get_prev_visible<T: TreeItemIdMethods>(&self, item: &T) -> TreeItemId {
+        unsafe {
+            let item = item.as_ptr();
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_GetPrevVisible(self.as_ptr(), item))
+        }
+    }
+    fn get_quick_best_size(&self) -> bool {
+        unsafe { ffi::wxTreeCtrl_GetQuickBestSize(self.as_ptr()) }
+    }
+    fn get_root_item(&self) -> TreeItemId {
+        unsafe { TreeItemId::from_ptr(ffi::wxTreeCtrl_GetRootItem(self.as_ptr())) }
+    }
+    fn get_selection(&self) -> TreeItemId {
+        unsafe { TreeItemId::from_ptr(ffi::wxTreeCtrl_GetSelection(self.as_ptr())) }
+    }
+    fn get_selections(&self, selection: *mut c_void) -> usize {
+        unsafe { ffi::wxTreeCtrl_GetSelections(self.as_ptr(), selection) }
+    }
+    fn get_state_image_list(&self) -> Option<ImageListIsOwned<false>> {
+        unsafe { ImageList::option_from(ffi::wxTreeCtrl_GetStateImageList(self.as_ptr())) }
+    }
+    fn hit_test<P: PointMethods>(&self, point: &P, flags: *mut c_void) -> TreeItemId {
+        unsafe {
+            let point = point.as_ptr();
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_HitTest(self.as_ptr(), point, flags))
+        }
+    }
+    fn insert_item_treeitemid<
+        T: TreeItemIdMethods,
+        T2: TreeItemIdMethods,
+        T3: TreeItemDataMethods,
+    >(
+        &self,
+        parent: &T,
+        previous: &T2,
+        text: &str,
+        image: c_int,
+        sel_image: c_int,
+        data: Option<&T3>,
+    ) -> TreeItemId {
+        unsafe {
+            let parent = parent.as_ptr();
+            let previous = previous.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_InsertItem(
+                self.as_ptr(),
+                parent,
+                previous,
+                text,
+                image,
+                sel_image,
+                data,
+            ))
+        }
+    }
+    fn insert_item_sz<T: TreeItemIdMethods, T2: TreeItemDataMethods>(
+        &self,
+        parent: &T,
+        pos: usize,
+        text: &str,
+        image: c_int,
+        sel_image: c_int,
+        data: Option<&T2>,
+    ) -> TreeItemId {
+        unsafe {
+            let parent = parent.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_InsertItem1(
+                self.as_ptr(),
+                parent,
+                pos,
+                text,
+                image,
+                sel_image,
+                data,
+            ))
+        }
+    }
+    fn is_bold<T: TreeItemIdMethods>(&self, item: &T) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_IsBold(self.as_ptr(), item)
+        }
+    }
+    fn is_empty(&self) -> bool {
+        unsafe { ffi::wxTreeCtrl_IsEmpty(self.as_ptr()) }
+    }
+    fn is_expanded<T: TreeItemIdMethods>(&self, item: &T) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_IsExpanded(self.as_ptr(), item)
+        }
+    }
+    fn is_selected<T: TreeItemIdMethods>(&self, item: &T) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_IsSelected(self.as_ptr(), item)
+        }
+    }
+    fn is_visible<T: TreeItemIdMethods>(&self, item: &T) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_IsVisible(self.as_ptr(), item)
+        }
+    }
+    fn item_has_children<T: TreeItemIdMethods>(&self, item: &T) -> bool {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_ItemHasChildren(self.as_ptr(), item)
+        }
+    }
+    fn on_compare_items<T: TreeItemIdMethods, T2: TreeItemIdMethods>(
+        &self,
+        item1: &T,
+        item2: &T2,
+    ) -> c_int {
+        unsafe {
+            let item1 = item1.as_ptr();
+            let item2 = item2.as_ptr();
+            ffi::wxTreeCtrl_OnCompareItems(self.as_ptr(), item1, item2)
+        }
+    }
+    fn prepend_item<T: TreeItemIdMethods, T2: TreeItemDataMethods>(
+        &self,
+        parent: &T,
+        text: &str,
+        image: c_int,
+        sel_image: c_int,
+        data: Option<&T2>,
+    ) -> TreeItemId {
+        unsafe {
+            let parent = parent.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            TreeItemId::from_ptr(ffi::wxTreeCtrl_PrependItem(
+                self.as_ptr(),
+                parent,
+                text,
+                image,
+                sel_image,
+                data,
+            ))
+        }
+    }
+    fn scroll_to<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_ScrollTo(self.as_ptr(), item)
+        }
+    }
+    fn select_item<T: TreeItemIdMethods>(&self, item: &T, select: bool) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_SelectItem(self.as_ptr(), item, select)
+        }
+    }
+    fn set_buttons_image_list<I: ImageListMethods>(&self, image_list: Option<&I>) {
+        unsafe {
+            let image_list = match image_list {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTreeCtrl_SetButtonsImageList(self.as_ptr(), image_list)
+        }
+    }
+    fn set_indent(&self, indent: c_uint) {
+        unsafe { ffi::wxTreeCtrl_SetIndent(self.as_ptr(), indent) }
+    }
+    fn set_spacing(&self, spacing: c_uint) {
+        unsafe { ffi::wxTreeCtrl_SetSpacing(self.as_ptr(), spacing) }
+    }
+    fn set_item_background_colour<T: TreeItemIdMethods, C: ColourMethods>(
+        &self,
+        item: &T,
+        col: &C,
+    ) {
+        unsafe {
+            let item = item.as_ptr();
+            let col = col.as_ptr();
+            ffi::wxTreeCtrl_SetItemBackgroundColour(self.as_ptr(), item, col)
+        }
+    }
+    fn set_item_bold<T: TreeItemIdMethods>(&self, item: &T, bold: bool) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_SetItemBold(self.as_ptr(), item, bold)
+        }
+    }
+    fn set_item_data<T: TreeItemIdMethods, T2: TreeItemDataMethods>(
+        &self,
+        item: &T,
+        data: Option<&T2>,
+    ) {
+        unsafe {
+            let item = item.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTreeCtrl_SetItemData(self.as_ptr(), item, data)
+        }
+    }
+    fn set_item_drop_highlight<T: TreeItemIdMethods>(&self, item: &T, highlight: bool) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_SetItemDropHighlight(self.as_ptr(), item, highlight)
+        }
+    }
+    fn set_item_font<T: TreeItemIdMethods, F: FontMethods>(&self, item: &T, font: &F) {
+        unsafe {
+            let item = item.as_ptr();
+            let font = font.as_ptr();
+            ffi::wxTreeCtrl_SetItemFont(self.as_ptr(), item, font)
+        }
+    }
+    fn set_item_has_children<T: TreeItemIdMethods>(&self, item: &T, has_children: bool) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_SetItemHasChildren(self.as_ptr(), item, has_children)
+        }
+    }
+    // NOT_SUPPORTED: fn SetItemImage()
+    fn set_item_state<T: TreeItemIdMethods>(&self, item: &T, state: c_int) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_SetItemState(self.as_ptr(), item, state)
+        }
+    }
+    fn set_item_text<T: TreeItemIdMethods>(&self, item: &T, text: &str) {
+        unsafe {
+            let item = item.as_ptr();
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxTreeCtrl_SetItemText(self.as_ptr(), item, text)
+        }
+    }
+    fn set_item_text_colour<T: TreeItemIdMethods, C: ColourMethods>(&self, item: &T, col: &C) {
+        unsafe {
+            let item = item.as_ptr();
+            let col = col.as_ptr();
+            ffi::wxTreeCtrl_SetItemTextColour(self.as_ptr(), item, col)
+        }
+    }
+    fn set_quick_best_size(&self, quick_best_size: bool) {
+        unsafe { ffi::wxTreeCtrl_SetQuickBestSize(self.as_ptr(), quick_best_size) }
+    }
+    fn set_state_image_list<I: ImageListMethods>(&self, image_list: Option<&I>) {
+        unsafe {
+            let image_list = match image_list {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTreeCtrl_SetStateImageList(self.as_ptr(), image_list)
+        }
+    }
+    fn sort_children<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_SortChildren(self.as_ptr(), item)
+        }
+    }
+    fn toggle<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_Toggle(self.as_ptr(), item)
+        }
+    }
+    fn toggle_item_selection<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_ToggleItemSelection(self.as_ptr(), item)
+        }
+    }
+    fn unselect(&self) {
+        unsafe { ffi::wxTreeCtrl_Unselect(self.as_ptr()) }
+    }
+    fn unselect_all(&self) {
+        unsafe { ffi::wxTreeCtrl_UnselectAll(self.as_ptr()) }
+    }
+    fn unselect_item<T: TreeItemIdMethods>(&self, item: &T) {
+        unsafe {
+            let item = item.as_ptr();
+            ffi::wxTreeCtrl_UnselectItem(self.as_ptr(), item)
+        }
+    }
+    fn select_children<T: TreeItemIdMethods>(&self, parent: &T) {
+        unsafe {
+            let parent = parent.as_ptr();
+            ffi::wxTreeCtrl_SelectChildren(self.as_ptr(), parent)
+        }
+    }
+}
+
+// wxTreeEvent
+pub trait TreeEventMethods: NotifyEventMethods {
+    fn get_item(&self) -> TreeItemId {
+        unsafe { TreeItemId::from_ptr(ffi::wxTreeEvent_GetItem(self.as_ptr())) }
+    }
+    fn get_key_code(&self) -> c_int {
+        unsafe { ffi::wxTreeEvent_GetKeyCode(self.as_ptr()) }
+    }
+    fn get_key_event(&self) -> KeyEventIsOwned<false> {
+        unsafe { KeyEventIsOwned::from_ptr(ffi::wxTreeEvent_GetKeyEvent(self.as_ptr())) }
+    }
+    fn get_label(&self) -> String {
+        unsafe { WxString::from_ptr(ffi::wxTreeEvent_GetLabel(self.as_ptr())).into() }
+    }
+    fn get_old_item(&self) -> TreeItemId {
+        unsafe { TreeItemId::from_ptr(ffi::wxTreeEvent_GetOldItem(self.as_ptr())) }
+    }
+    fn get_point(&self) -> Point {
+        unsafe { Point::from_ptr(ffi::wxTreeEvent_GetPoint(self.as_ptr())) }
+    }
+    fn is_edit_cancelled(&self) -> bool {
+        unsafe { ffi::wxTreeEvent_IsEditCancelled(self.as_ptr()) }
+    }
+    fn set_tool_tip(&self, tooltip: &str) {
+        unsafe {
+            let tooltip = WxString::from(tooltip);
+            let tooltip = tooltip.as_ptr();
+            ffi::wxTreeEvent_SetToolTip(self.as_ptr(), tooltip)
+        }
+    }
+}
+
+// wxTreeItemData
+pub trait TreeItemDataMethods: ClientDataMethods {
+    // DTOR: fn ~wxTreeItemData()
+    fn get_id(&self) -> TreeItemIdIsOwned<false> {
+        unsafe { TreeItemIdIsOwned::from_ptr(ffi::wxTreeItemData_GetId(self.as_ptr())) }
+    }
+    fn set_id<T: TreeItemIdMethods>(&self, id: &T) {
+        unsafe {
+            let id = id.as_ptr();
+            ffi::wxTreeItemData_SetId(self.as_ptr(), id)
+        }
+    }
+}
+
+// wxTreeItemId
+pub trait TreeItemIdMethods: WxRustMethods {
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxTreeItemId_IsOk(self.as_ptr()) }
+    }
+    fn get_id(&self) -> *mut c_void {
+        unsafe { ffi::wxTreeItemId_GetID(self.as_ptr()) }
+    }
+    fn unset(&self) {
+        unsafe { ffi::wxTreeItemId_Unset(self.as_ptr()) }
+    }
+}
+
+// wxTreeListCtrl
+pub trait TreeListCtrlMethods: WindowMethods {
+    fn assign_image_list<I: ImageListMethods>(&self, image_list: Option<&I>) {
+        unsafe {
+            let image_list = match image_list {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTreeListCtrl_AssignImageList(self.as_ptr(), image_list)
+        }
+    }
+    fn set_image_list<I: ImageListMethods>(&self, image_list: Option<&I>) {
+        unsafe {
+            let image_list = match image_list {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTreeListCtrl_SetImageList(self.as_ptr(), image_list)
+        }
+    }
+    fn append_column(&self, title: &str, width: c_int, align: c_int, flags: c_int) -> c_int {
+        unsafe {
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            ffi::wxTreeListCtrl_AppendColumn(self.as_ptr(), title, width, align, flags)
+        }
+    }
+    // NOT_SUPPORTED: fn GetColumnCount()
+    // NOT_SUPPORTED: fn DeleteColumn()
+    fn clear_columns(&self) {
+        unsafe { ffi::wxTreeListCtrl_ClearColumns(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn SetColumnWidth()
+    // NOT_SUPPORTED: fn GetColumnWidth()
+    fn width_for(&self, text: &str) -> c_int {
+        unsafe {
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxTreeListCtrl_WidthFor(self.as_ptr(), text)
+        }
+    }
+    // BLOCKED: fn AppendItem()
+    // BLOCKED: fn InsertItem()
+    // BLOCKED: fn PrependItem()
+    // BLOCKED: fn DeleteItem()
+    fn delete_all_items(&self) {
+        unsafe { ffi::wxTreeListCtrl_DeleteAllItems(self.as_ptr()) }
+    }
+    fn get_root_item(&self) -> TreeListItem {
+        unsafe { TreeListItem::from_ptr(ffi::wxTreeListCtrl_GetRootItem(self.as_ptr())) }
+    }
+    // BLOCKED: fn GetItemParent()
+    // BLOCKED: fn GetFirstChild()
+    // BLOCKED: fn GetNextSibling()
+    fn get_first_item(&self) -> TreeListItem {
+        unsafe { TreeListItem::from_ptr(ffi::wxTreeListCtrl_GetFirstItem(self.as_ptr())) }
+    }
+    // BLOCKED: fn GetNextItem()
+    // NOT_SUPPORTED: fn GetItemText()
+    // NOT_SUPPORTED: fn SetItemText()
+    // BLOCKED: fn SetItemText1()
+    // BLOCKED: fn SetItemImage()
+    // BLOCKED: fn GetItemData()
+    // BLOCKED: fn SetItemData()
+    // BLOCKED: fn Expand()
+    // BLOCKED: fn Collapse()
+    // BLOCKED: fn IsExpanded()
+    fn get_selection(&self) -> TreeListItem {
+        unsafe { TreeListItem::from_ptr(ffi::wxTreeListCtrl_GetSelection(self.as_ptr())) }
+    }
+    // NOT_SUPPORTED: fn GetSelections()
+    // BLOCKED: fn Select()
+    // BLOCKED: fn Unselect()
+    // BLOCKED: fn IsSelected()
+    fn select_all(&self) {
+        unsafe { ffi::wxTreeListCtrl_SelectAll(self.as_ptr()) }
+    }
+    fn unselect_all(&self) {
+        unsafe { ffi::wxTreeListCtrl_UnselectAll(self.as_ptr()) }
+    }
+    // BLOCKED: fn EnsureVisible()
+    // BLOCKED: fn CheckItem()
+    // BLOCKED: fn CheckItemRecursively()
+    // BLOCKED: fn UncheckItem()
+    // BLOCKED: fn UpdateItemParentStateRecursively()
+    // BLOCKED: fn GetCheckedState()
+    // BLOCKED: fn AreAllChildrenInState()
+    // NOT_SUPPORTED: fn SetSortColumn()
+    fn get_sort_column(&self, col: *mut c_void, ascending_order: *mut c_void) -> bool {
+        unsafe { ffi::wxTreeListCtrl_GetSortColumn(self.as_ptr(), col, ascending_order) }
+    }
+    fn set_item_comparator<T: TreeListItemComparatorMethods>(&self, comparator: Option<&T>) {
+        unsafe {
+            let comparator = match comparator {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxTreeListCtrl_SetItemComparator(self.as_ptr(), comparator)
+        }
+    }
+    fn get_view(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxTreeListCtrl_GetView(self.as_ptr())) }
+    }
+    fn get_data_view(&self) -> WeakRef<DataViewCtrl> {
+        unsafe { WeakRef::<DataViewCtrl>::from(ffi::wxTreeListCtrl_GetDataView(self.as_ptr())) }
+    }
+}
+
+// wxTreeListItem
+pub trait TreeListItemMethods: WxRustMethods {
+    fn is_ok(&self) -> bool {
+        unsafe { ffi::wxTreeListItem_IsOk(self.as_ptr()) }
+    }
+}
+
+// wxTreeListItemComparator
+pub trait TreeListItemComparatorMethods: WxRustMethods {
+    // NOT_SUPPORTED: fn Compare()
+    // DTOR: fn ~wxTreeListItemComparator()
+}
+
+// wxTreebook
+pub trait TreebookMethods: BookCtrlBaseMethods {
+    // DTOR: fn ~wxTreebook()
+    fn add_sub_page<W: WindowMethods>(
+        &self,
+        page: Option<&W>,
+        text: &str,
+        b_select: bool,
+        image_id: c_int,
+    ) -> bool {
+        unsafe {
+            let page = match page {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxTreebook_AddSubPage(self.as_ptr(), page, text, b_select, image_id)
+        }
+    }
+    fn collapse_node(&self, page_id: usize) -> bool {
+        unsafe { ffi::wxTreebook_CollapseNode(self.as_ptr(), page_id) }
+    }
+    fn expand_node(&self, page_id: usize, expand: bool) -> bool {
+        unsafe { ffi::wxTreebook_ExpandNode(self.as_ptr(), page_id, expand) }
+    }
+    fn get_page_parent(&self, page: usize) -> c_int {
+        unsafe { ffi::wxTreebook_GetPageParent(self.as_ptr(), page) }
+    }
+    fn insert_sub_page<W: WindowMethods>(
+        &self,
+        page_pos: usize,
+        page: Option<&W>,
+        text: &str,
+        b_select: bool,
+        image_id: c_int,
+    ) -> bool {
+        unsafe {
+            let page = match page {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let text = WxString::from(text);
+            let text = text.as_ptr();
+            ffi::wxTreebook_InsertSubPage(self.as_ptr(), page_pos, page, text, b_select, image_id)
+        }
+    }
+    fn is_node_expanded(&self, page_id: usize) -> bool {
+        unsafe { ffi::wxTreebook_IsNodeExpanded(self.as_ptr(), page_id) }
     }
 }

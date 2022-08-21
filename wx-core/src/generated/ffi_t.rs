@@ -2,6 +2,35 @@ use super::*;
 
 extern "C" {
 
+    // wxTGAHandler
+    pub fn wxTGAHandler_CLASSINFO() -> *mut c_void;
+    pub fn wxTGAHandler_new() -> *mut c_void;
+
+    // wxTIFFHandler
+    pub fn wxTIFFHandler_CLASSINFO() -> *mut c_void;
+    pub fn wxTIFFHandler_new() -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxTIFFHandler_GetLibraryVersionInfo() -> wxVersionInfo;
+
+    // wxTaskBarIcon
+    pub fn wxTaskBarIcon_CLASSINFO() -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxTaskBarIcon_new(icon_type: wxTaskBarIconType) -> *mut c_void;
+    // DTOR: pub fn wxTaskBarIcon_~wxTaskBarIcon(self_: *mut c_void);
+    pub fn wxTaskBarIcon_Destroy(self_: *mut c_void);
+    pub fn wxTaskBarIcon_IsIconInstalled(self_: *const c_void) -> bool;
+    pub fn wxTaskBarIcon_IsOk(self_: *const c_void) -> bool;
+    pub fn wxTaskBarIcon_PopupMenu(self_: *mut c_void, menu: *mut c_void) -> bool;
+    pub fn wxTaskBarIcon_RemoveIcon(self_: *mut c_void) -> bool;
+    pub fn wxTaskBarIcon_SetIcon(
+        self_: *mut c_void,
+        icon: *const c_void,
+        tooltip: *const c_void,
+    ) -> bool;
+    pub fn wxTaskBarIcon_IsAvailable() -> bool;
+
+    // wxTaskBarIconEvent
+    pub fn wxTaskBarIconEvent_CLASSINFO() -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxTaskBarIconEvent_new(evt_type: wxEventType, tb_icon: *mut c_void) -> *mut c_void;
+
     // wxTextAttr
     pub fn wxTextAttr_delete(self_: *mut c_void);
     // NOT_SUPPORTED: pub fn wxTextAttr_GetAlignment(self_: *const c_void) -> wxTextAttrAlignment;
@@ -204,6 +233,24 @@ extern "C" {
     // Mix-in(s) to wxTextCtrl
     pub fn wxTextCtrl_AsTextEntry(obj: *mut c_void) -> *mut c_void;
 
+    // wxTextDataObject
+    pub fn wxTextDataObject_delete(self_: *mut c_void);
+    pub fn wxTextDataObject_new(text: *const c_void) -> *mut c_void;
+    pub fn wxTextDataObject_GetText(self_: *const c_void) -> *mut c_void;
+    pub fn wxTextDataObject_GetTextLength(self_: *const c_void) -> usize;
+    // BLOCKED: pub fn wxTextDataObject_GetFormat(self_: *const c_void) -> *mut c_void;
+    pub fn wxTextDataObject_SetText(self_: *mut c_void, str_text: *const c_void);
+
+    // wxTextDropTarget
+    pub fn wxTextDropTarget_delete(self_: *mut c_void);
+    // BLOCKED: pub fn wxTextDropTarget_new() -> *mut c_void;
+    pub fn wxTextDropTarget_OnDropText(
+        self_: *mut c_void,
+        x: c_int,
+        y: c_int,
+        data: *const c_void,
+    ) -> bool;
+
     // wxTextEntry
     pub fn wxTextEntry_delete(self_: *mut c_void);
     pub fn wxTextEntry_AppendText(self_: *mut c_void, text: *const c_void);
@@ -277,6 +324,40 @@ extern "C" {
     pub fn wxTextEntryDialog_SetValue(self_: *mut c_void, value: *const c_void);
     pub fn wxTextEntryDialog_ForceUpper(self_: *mut c_void);
 
+    // wxTextValidator
+    pub fn wxTextValidator_CLASSINFO() -> *mut c_void;
+    pub fn wxTextValidator_new(validator: *const c_void) -> *mut c_void;
+    pub fn wxTextValidator_new1(style: c_long, val_ptr: *mut c_void) -> *mut c_void;
+    pub fn wxTextValidator_GetCharExcludes(self_: *const c_void) -> *mut c_void;
+    pub fn wxTextValidator_GetCharIncludes(self_: *const c_void) -> *mut c_void;
+    pub fn wxTextValidator_GetExcludes(self_: *const c_void) -> *mut c_void;
+    pub fn wxTextValidator_GetIncludes(self_: *const c_void) -> *mut c_void;
+    pub fn wxTextValidator_GetStyle(self_: *const c_void) -> c_long;
+    // NOT_SUPPORTED: pub fn wxTextValidator_HasFlag(self_: *const c_void, style: wxTextValidatorStyle) -> bool;
+    pub fn wxTextValidator_OnChar(self_: *mut c_void, event: *mut c_void);
+    pub fn wxTextValidator_SetExcludes(self_: *mut c_void, string_list: *const c_void);
+    pub fn wxTextValidator_SetCharExcludes(self_: *mut c_void, chars: *const c_void);
+    pub fn wxTextValidator_SetIncludes(self_: *mut c_void, string_list: *const c_void);
+    pub fn wxTextValidator_SetCharIncludes(self_: *mut c_void, chars: *const c_void);
+    pub fn wxTextValidator_AddExclude(self_: *mut c_void, exclude: *const c_void);
+    pub fn wxTextValidator_AddInclude(self_: *mut c_void, include: *const c_void);
+    pub fn wxTextValidator_AddCharExcludes(self_: *mut c_void, chars: *const c_void);
+    pub fn wxTextValidator_AddCharIncludes(self_: *mut c_void, chars: *const c_void);
+    pub fn wxTextValidator_SetStyle(self_: *mut c_void, style: c_long);
+    pub fn wxTextValidator_IsValid(self_: *const c_void, val: *const c_void) -> *mut c_void;
+
+    // wxThreadEvent
+    pub fn wxThreadEvent_CLASSINFO() -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxThreadEvent_new(event_type: wxEventType, id: c_int) -> *mut c_void;
+    // BLOCKED: pub fn wxThreadEvent_SetPayload(self_: *mut c_void, payload: *const c_void);
+    // NOT_SUPPORTED: pub fn wxThreadEvent_GetPayload(self_: *const c_void) -> T;
+    pub fn wxThreadEvent_GetExtraLong(self_: *const c_void) -> c_long;
+    pub fn wxThreadEvent_GetInt(self_: *const c_void) -> c_int;
+    pub fn wxThreadEvent_GetString(self_: *const c_void) -> *mut c_void;
+    pub fn wxThreadEvent_SetExtraLong(self_: *mut c_void, extra_long: c_long);
+    pub fn wxThreadEvent_SetInt(self_: *mut c_void, int_command: c_int);
+    pub fn wxThreadEvent_SetString(self_: *mut c_void, string: *const c_void);
+
     // wxTimePickerCtrl
     pub fn wxTimePickerCtrl_CLASSINFO() -> *mut c_void;
     pub fn wxTimePickerCtrl_new() -> *mut c_void;
@@ -315,6 +396,25 @@ extern "C" {
         sec: c_int,
     ) -> bool;
     pub fn wxTimePickerCtrl_SetValue(self_: *mut c_void, dt: *const c_void);
+
+    // wxTipProvider
+    pub fn wxTipProvider_delete(self_: *mut c_void);
+    // BLOCKED: pub fn wxTipProvider_new(current_tip: usize) -> *mut c_void;
+    // DTOR: pub fn wxTipProvider_~wxTipProvider(self_: *mut c_void);
+    pub fn wxTipProvider_GetCurrentTip(self_: *const c_void) -> usize;
+    pub fn wxTipProvider_GetTip(self_: *mut c_void) -> *mut c_void;
+
+    // wxTipWindow
+    pub fn wxTipWindow_CLASSINFO() -> *mut c_void;
+    pub fn wxTipWindow_new(
+        parent: *mut c_void,
+        text: *const c_void,
+        max_length: c_int,
+        window_ptr: *mut c_void,
+        rect_bounds: *mut c_void,
+    ) -> *mut c_void;
+    pub fn wxTipWindow_SetBoundingRect(self_: *mut c_void, rect_bound: *const c_void);
+    pub fn wxTipWindow_SetTipWindowPtr(self_: *mut c_void, window_ptr: *mut c_void);
 
     // wxToggleButton
     pub fn wxToggleButton_CLASSINFO() -> *mut c_void;
@@ -488,6 +588,42 @@ extern "C" {
     ) -> *mut c_void;
     pub fn wxToolBar_CreateSeparator(self_: *mut c_void) -> *mut c_void;
 
+    // wxToolTip
+    pub fn wxToolTip_CLASSINFO() -> *mut c_void;
+    pub fn wxToolTip_new(tip: *const c_void) -> *mut c_void;
+    pub fn wxToolTip_GetTip(self_: *const c_void) -> *mut c_void;
+    pub fn wxToolTip_GetWindow(self_: *const c_void) -> *mut c_void;
+    pub fn wxToolTip_SetTip(self_: *mut c_void, tip: *const c_void);
+    pub fn wxToolTip_Enable(flag: bool);
+    pub fn wxToolTip_SetAutoPop(msecs: c_long);
+    pub fn wxToolTip_SetDelay(msecs: c_long);
+    pub fn wxToolTip_SetMaxWidth(width: c_int);
+    pub fn wxToolTip_SetReshow(msecs: c_long);
+
+    // wxToolbook
+    pub fn wxToolbook_CLASSINFO() -> *mut c_void;
+    pub fn wxToolbook_new() -> *mut c_void;
+    pub fn wxToolbook_new1(
+        parent: *mut c_void,
+        id: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxToolbook_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxToolbook_GetToolBar(self_: *const c_void) -> *mut c_void;
+    pub fn wxToolbook_EnablePage(self_: *mut c_void, page: usize, enable: bool) -> bool;
+    pub fn wxToolbook_EnablePage1(self_: *mut c_void, page: *mut c_void, enable: bool) -> bool;
+
     // wxTopLevelWindow
     pub fn wxTopLevelWindow_CLASSINFO() -> *mut c_void;
     pub fn wxTopLevelWindow_new() -> *mut c_void;
@@ -555,5 +691,355 @@ extern "C" {
     // BLOCKED: pub fn wxTopLevelWindow_UseNativeDecorations(self_: *mut c_void, native: bool);
     // BLOCKED: pub fn wxTopLevelWindow_UseNativeDecorationsByDefault(self_: *mut c_void, native: bool);
     pub fn wxTopLevelWindow_GetDefaultSize() -> *mut c_void;
+
+    // wxTreeCtrl
+    pub fn wxTreeCtrl_CLASSINFO() -> *mut c_void;
+    pub fn wxTreeCtrl_new() -> *mut c_void;
+    pub fn wxTreeCtrl_new1(
+        parent: *mut c_void,
+        id: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> *mut c_void;
+    // DTOR: pub fn wxTreeCtrl_~wxTreeCtrl(self_: *mut c_void);
+    pub fn wxTreeCtrl_AddRoot(
+        self_: *mut c_void,
+        text: *const c_void,
+        image: c_int,
+        sel_image: c_int,
+        data: *mut c_void,
+    ) -> *mut c_void;
+    pub fn wxTreeCtrl_AppendItem(
+        self_: *mut c_void,
+        parent: *const c_void,
+        text: *const c_void,
+        image: c_int,
+        sel_image: c_int,
+        data: *mut c_void,
+    ) -> *mut c_void;
+    pub fn wxTreeCtrl_AssignButtonsImageList(self_: *mut c_void, image_list: *mut c_void);
+    pub fn wxTreeCtrl_AssignStateImageList(self_: *mut c_void, image_list: *mut c_void);
+    pub fn wxTreeCtrl_Collapse(self_: *mut c_void, item: *const c_void);
+    pub fn wxTreeCtrl_CollapseAll(self_: *mut c_void);
+    pub fn wxTreeCtrl_CollapseAllChildren(self_: *mut c_void, item: *const c_void);
+    pub fn wxTreeCtrl_CollapseAndReset(self_: *mut c_void, item: *const c_void);
+    pub fn wxTreeCtrl_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        validator: *const c_void,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxTreeCtrl_Delete(self_: *mut c_void, item: *const c_void);
+    pub fn wxTreeCtrl_DeleteAllItems(self_: *mut c_void);
+    pub fn wxTreeCtrl_DeleteChildren(self_: *mut c_void, item: *const c_void);
+    pub fn wxTreeCtrl_EditLabel(
+        self_: *mut c_void,
+        item: *const c_void,
+        text_ctrl_class: *mut c_void,
+    ) -> *mut c_void;
+    pub fn wxTreeCtrl_EnableBellOnNoMatch(self_: *mut c_void, on: bool);
+    pub fn wxTreeCtrl_EndEditLabel(self_: *mut c_void, item: *const c_void, discard_changes: bool);
+    pub fn wxTreeCtrl_EnsureVisible(self_: *mut c_void, item: *const c_void);
+    pub fn wxTreeCtrl_Expand(self_: *mut c_void, item: *const c_void);
+    pub fn wxTreeCtrl_ExpandAll(self_: *mut c_void);
+    pub fn wxTreeCtrl_ExpandAllChildren(self_: *mut c_void, item: *const c_void);
+    pub fn wxTreeCtrl_GetBoundingRect(
+        self_: *const c_void,
+        item: *const c_void,
+        rect: *mut c_void,
+        text_only: bool,
+    ) -> bool;
+    pub fn wxTreeCtrl_GetButtonsImageList(self_: *const c_void) -> *mut c_void;
+    pub fn wxTreeCtrl_GetChildrenCount(
+        self_: *const c_void,
+        item: *const c_void,
+        recursively: bool,
+    ) -> usize;
+    pub fn wxTreeCtrl_GetCount(self_: *const c_void) -> c_uint;
+    pub fn wxTreeCtrl_GetEditControl(self_: *const c_void) -> *mut c_void;
+    pub fn wxTreeCtrl_GetFirstChild(
+        self_: *const c_void,
+        item: *const c_void,
+        cookie: *mut c_void,
+    ) -> *mut c_void;
+    pub fn wxTreeCtrl_GetFirstVisibleItem(self_: *const c_void) -> *mut c_void;
+    pub fn wxTreeCtrl_GetFocusedItem(self_: *const c_void) -> *mut c_void;
+    pub fn wxTreeCtrl_ClearFocusedItem(self_: *mut c_void);
+    pub fn wxTreeCtrl_SetFocusedItem(self_: *mut c_void, item: *const c_void);
+    pub fn wxTreeCtrl_GetIndent(self_: *const c_void) -> c_uint;
+    pub fn wxTreeCtrl_GetSpacing(self_: *const c_void) -> c_uint;
+    pub fn wxTreeCtrl_GetItemBackgroundColour(
+        self_: *const c_void,
+        item: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxTreeCtrl_GetItemData(self_: *const c_void, item: *const c_void) -> *mut c_void;
+    pub fn wxTreeCtrl_GetItemFont(self_: *const c_void, item: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxTreeCtrl_GetItemImage(self_: *const c_void, item: *const c_void, which: wxTreeItemIcon) -> c_int;
+    pub fn wxTreeCtrl_GetItemParent(self_: *const c_void, item: *const c_void) -> *mut c_void;
+    pub fn wxTreeCtrl_GetItemState(self_: *const c_void, item: *const c_void) -> c_int;
+    pub fn wxTreeCtrl_GetItemText(self_: *const c_void, item: *const c_void) -> *mut c_void;
+    pub fn wxTreeCtrl_GetItemTextColour(self_: *const c_void, item: *const c_void) -> *mut c_void;
+    pub fn wxTreeCtrl_GetLastChild(self_: *const c_void, item: *const c_void) -> *mut c_void;
+    pub fn wxTreeCtrl_GetNextChild(
+        self_: *const c_void,
+        item: *const c_void,
+        cookie: *mut c_void,
+    ) -> *mut c_void;
+    pub fn wxTreeCtrl_GetNextSibling(self_: *const c_void, item: *const c_void) -> *mut c_void;
+    pub fn wxTreeCtrl_GetNextVisible(self_: *const c_void, item: *const c_void) -> *mut c_void;
+    pub fn wxTreeCtrl_GetPrevSibling(self_: *const c_void, item: *const c_void) -> *mut c_void;
+    pub fn wxTreeCtrl_GetPrevVisible(self_: *const c_void, item: *const c_void) -> *mut c_void;
+    pub fn wxTreeCtrl_GetQuickBestSize(self_: *const c_void) -> bool;
+    pub fn wxTreeCtrl_GetRootItem(self_: *const c_void) -> *mut c_void;
+    pub fn wxTreeCtrl_GetSelection(self_: *const c_void) -> *mut c_void;
+    pub fn wxTreeCtrl_GetSelections(self_: *const c_void, selection: *mut c_void) -> usize;
+    pub fn wxTreeCtrl_GetStateImageList(self_: *const c_void) -> *mut c_void;
+    pub fn wxTreeCtrl_HitTest(
+        self_: *const c_void,
+        point: *const c_void,
+        flags: *mut c_void,
+    ) -> *mut c_void;
+    pub fn wxTreeCtrl_InsertItem(
+        self_: *mut c_void,
+        parent: *const c_void,
+        previous: *const c_void,
+        text: *const c_void,
+        image: c_int,
+        sel_image: c_int,
+        data: *mut c_void,
+    ) -> *mut c_void;
+    pub fn wxTreeCtrl_InsertItem1(
+        self_: *mut c_void,
+        parent: *const c_void,
+        pos: usize,
+        text: *const c_void,
+        image: c_int,
+        sel_image: c_int,
+        data: *mut c_void,
+    ) -> *mut c_void;
+    pub fn wxTreeCtrl_IsBold(self_: *const c_void, item: *const c_void) -> bool;
+    pub fn wxTreeCtrl_IsEmpty(self_: *const c_void) -> bool;
+    pub fn wxTreeCtrl_IsExpanded(self_: *const c_void, item: *const c_void) -> bool;
+    pub fn wxTreeCtrl_IsSelected(self_: *const c_void, item: *const c_void) -> bool;
+    pub fn wxTreeCtrl_IsVisible(self_: *const c_void, item: *const c_void) -> bool;
+    pub fn wxTreeCtrl_ItemHasChildren(self_: *const c_void, item: *const c_void) -> bool;
+    pub fn wxTreeCtrl_OnCompareItems(
+        self_: *mut c_void,
+        item1: *const c_void,
+        item2: *const c_void,
+    ) -> c_int;
+    pub fn wxTreeCtrl_PrependItem(
+        self_: *mut c_void,
+        parent: *const c_void,
+        text: *const c_void,
+        image: c_int,
+        sel_image: c_int,
+        data: *mut c_void,
+    ) -> *mut c_void;
+    pub fn wxTreeCtrl_ScrollTo(self_: *mut c_void, item: *const c_void);
+    pub fn wxTreeCtrl_SelectItem(self_: *mut c_void, item: *const c_void, select: bool);
+    pub fn wxTreeCtrl_SetButtonsImageList(self_: *mut c_void, image_list: *mut c_void);
+    pub fn wxTreeCtrl_SetIndent(self_: *mut c_void, indent: c_uint);
+    pub fn wxTreeCtrl_SetSpacing(self_: *mut c_void, spacing: c_uint);
+    pub fn wxTreeCtrl_SetItemBackgroundColour(
+        self_: *mut c_void,
+        item: *const c_void,
+        col: *const c_void,
+    );
+    pub fn wxTreeCtrl_SetItemBold(self_: *mut c_void, item: *const c_void, bold: bool);
+    pub fn wxTreeCtrl_SetItemData(self_: *mut c_void, item: *const c_void, data: *mut c_void);
+    pub fn wxTreeCtrl_SetItemDropHighlight(
+        self_: *mut c_void,
+        item: *const c_void,
+        highlight: bool,
+    );
+    pub fn wxTreeCtrl_SetItemFont(self_: *mut c_void, item: *const c_void, font: *const c_void);
+    pub fn wxTreeCtrl_SetItemHasChildren(
+        self_: *mut c_void,
+        item: *const c_void,
+        has_children: bool,
+    );
+    // NOT_SUPPORTED: pub fn wxTreeCtrl_SetItemImage(self_: *mut c_void, item: *const c_void, image: c_int, which: wxTreeItemIcon);
+    pub fn wxTreeCtrl_SetItemState(self_: *mut c_void, item: *const c_void, state: c_int);
+    pub fn wxTreeCtrl_SetItemText(self_: *mut c_void, item: *const c_void, text: *const c_void);
+    pub fn wxTreeCtrl_SetItemTextColour(
+        self_: *mut c_void,
+        item: *const c_void,
+        col: *const c_void,
+    );
+    pub fn wxTreeCtrl_SetQuickBestSize(self_: *mut c_void, quick_best_size: bool);
+    pub fn wxTreeCtrl_SetStateImageList(self_: *mut c_void, image_list: *mut c_void);
+    pub fn wxTreeCtrl_SetWindowStyle(self_: *mut c_void, styles: c_long);
+    pub fn wxTreeCtrl_SortChildren(self_: *mut c_void, item: *const c_void);
+    pub fn wxTreeCtrl_Toggle(self_: *mut c_void, item: *const c_void);
+    pub fn wxTreeCtrl_ToggleItemSelection(self_: *mut c_void, item: *const c_void);
+    pub fn wxTreeCtrl_Unselect(self_: *mut c_void);
+    pub fn wxTreeCtrl_UnselectAll(self_: *mut c_void);
+    pub fn wxTreeCtrl_UnselectItem(self_: *mut c_void, item: *const c_void);
+    pub fn wxTreeCtrl_SelectChildren(self_: *mut c_void, parent: *const c_void);
+
+    // wxTreeEvent
+    pub fn wxTreeEvent_CLASSINFO() -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxTreeEvent_new(command_type: wxEventType, tree: *mut c_void, item: *const c_void) -> *mut c_void;
+    pub fn wxTreeEvent_GetItem(self_: *const c_void) -> *mut c_void;
+    pub fn wxTreeEvent_GetKeyCode(self_: *const c_void) -> c_int;
+    pub fn wxTreeEvent_GetKeyEvent(self_: *const c_void) -> *mut c_void;
+    pub fn wxTreeEvent_GetLabel(self_: *const c_void) -> *mut c_void;
+    pub fn wxTreeEvent_GetOldItem(self_: *const c_void) -> *mut c_void;
+    pub fn wxTreeEvent_GetPoint(self_: *const c_void) -> *mut c_void;
+    pub fn wxTreeEvent_IsEditCancelled(self_: *const c_void) -> bool;
+    pub fn wxTreeEvent_SetToolTip(self_: *mut c_void, tooltip: *const c_void);
+
+    // wxTreeItemData
+    pub fn wxTreeItemData_delete(self_: *mut c_void);
+    pub fn wxTreeItemData_new() -> *mut c_void;
+    // DTOR: pub fn wxTreeItemData_~wxTreeItemData(self_: *mut c_void);
+    pub fn wxTreeItemData_GetId(self_: *const c_void) -> *mut c_void;
+    pub fn wxTreeItemData_SetId(self_: *mut c_void, id: *const c_void);
+
+    // wxTreeItemId
+    pub fn wxTreeItemId_delete(self_: *mut c_void);
+    pub fn wxTreeItemId_new() -> *mut c_void;
+    pub fn wxTreeItemId_IsOk(self_: *const c_void) -> bool;
+    pub fn wxTreeItemId_GetID(self_: *const c_void) -> *mut c_void;
+    pub fn wxTreeItemId_Unset(self_: *mut c_void);
+
+    // wxTreeListCtrl
+    pub fn wxTreeListCtrl_CLASSINFO() -> *mut c_void;
+    pub fn wxTreeListCtrl_AssignImageList(self_: *mut c_void, image_list: *mut c_void);
+    pub fn wxTreeListCtrl_SetImageList(self_: *mut c_void, image_list: *mut c_void);
+    pub fn wxTreeListCtrl_AppendColumn(
+        self_: *mut c_void,
+        title: *const c_void,
+        width: c_int,
+        align: c_int,
+        flags: c_int,
+    ) -> c_int;
+    // NOT_SUPPORTED: pub fn wxTreeListCtrl_GetColumnCount(self_: *const c_void) -> unsigned;
+    // NOT_SUPPORTED: pub fn wxTreeListCtrl_DeleteColumn(self_: *mut c_void, col: unsigned) -> bool;
+    pub fn wxTreeListCtrl_ClearColumns(self_: *mut c_void);
+    // NOT_SUPPORTED: pub fn wxTreeListCtrl_SetColumnWidth(self_: *mut c_void, col: unsigned, width: c_int);
+    // NOT_SUPPORTED: pub fn wxTreeListCtrl_GetColumnWidth(self_: *const c_void, col: unsigned) -> c_int;
+    pub fn wxTreeListCtrl_WidthFor(self_: *const c_void, text: *const c_void) -> c_int;
+    // BLOCKED: pub fn wxTreeListCtrl_AppendItem(self_: *mut c_void, parent: wxTreeListItem, text: *const c_void, image_closed: c_int, image_opened: c_int, data: *mut c_void) -> wxTreeListItem;
+    // BLOCKED: pub fn wxTreeListCtrl_InsertItem(self_: *mut c_void, parent: wxTreeListItem, previous: wxTreeListItem, text: *const c_void, image_closed: c_int, image_opened: c_int, data: *mut c_void) -> wxTreeListItem;
+    // BLOCKED: pub fn wxTreeListCtrl_PrependItem(self_: *mut c_void, parent: wxTreeListItem, text: *const c_void, image_closed: c_int, image_opened: c_int, data: *mut c_void) -> wxTreeListItem;
+    // BLOCKED: pub fn wxTreeListCtrl_DeleteItem(self_: *mut c_void, item: wxTreeListItem);
+    pub fn wxTreeListCtrl_DeleteAllItems(self_: *mut c_void);
+    pub fn wxTreeListCtrl_GetRootItem(self_: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxTreeListCtrl_GetItemParent(self_: *const c_void, item: wxTreeListItem) -> wxTreeListItem;
+    // BLOCKED: pub fn wxTreeListCtrl_GetFirstChild(self_: *const c_void, item: wxTreeListItem) -> wxTreeListItem;
+    // BLOCKED: pub fn wxTreeListCtrl_GetNextSibling(self_: *const c_void, item: wxTreeListItem) -> wxTreeListItem;
+    pub fn wxTreeListCtrl_GetFirstItem(self_: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxTreeListCtrl_GetNextItem(self_: *const c_void, item: wxTreeListItem) -> wxTreeListItem;
+    // NOT_SUPPORTED: pub fn wxTreeListCtrl_GetItemText(self_: *const c_void, item: wxTreeListItem, col: unsigned) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxTreeListCtrl_SetItemText(self_: *mut c_void, item: wxTreeListItem, col: unsigned, text: *const c_void);
+    // BLOCKED: pub fn wxTreeListCtrl_SetItemText1(self_: *mut c_void, item: wxTreeListItem, text: *const c_void);
+    // BLOCKED: pub fn wxTreeListCtrl_SetItemImage(self_: *mut c_void, item: wxTreeListItem, closed: c_int, opened: c_int);
+    // BLOCKED: pub fn wxTreeListCtrl_GetItemData(self_: *const c_void, item: wxTreeListItem) -> *mut c_void;
+    // BLOCKED: pub fn wxTreeListCtrl_SetItemData(self_: *mut c_void, item: wxTreeListItem, data: *mut c_void);
+    // BLOCKED: pub fn wxTreeListCtrl_Expand(self_: *mut c_void, item: wxTreeListItem);
+    // BLOCKED: pub fn wxTreeListCtrl_Collapse(self_: *mut c_void, item: wxTreeListItem);
+    // BLOCKED: pub fn wxTreeListCtrl_IsExpanded(self_: *const c_void, item: wxTreeListItem) -> bool;
+    pub fn wxTreeListCtrl_GetSelection(self_: *const c_void) -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxTreeListCtrl_GetSelections(self_: *const c_void, selections: *mut c_void) -> unsigned;
+    // BLOCKED: pub fn wxTreeListCtrl_Select(self_: *mut c_void, item: wxTreeListItem);
+    // BLOCKED: pub fn wxTreeListCtrl_Unselect(self_: *mut c_void, item: wxTreeListItem);
+    // BLOCKED: pub fn wxTreeListCtrl_IsSelected(self_: *const c_void, item: wxTreeListItem) -> bool;
+    pub fn wxTreeListCtrl_SelectAll(self_: *mut c_void);
+    pub fn wxTreeListCtrl_UnselectAll(self_: *mut c_void);
+    // BLOCKED: pub fn wxTreeListCtrl_EnsureVisible(self_: *mut c_void, item: wxTreeListItem);
+    // BLOCKED: pub fn wxTreeListCtrl_CheckItem(self_: *mut c_void, item: wxTreeListItem, state: c_int);
+    // BLOCKED: pub fn wxTreeListCtrl_CheckItemRecursively(self_: *mut c_void, item: wxTreeListItem, state: c_int);
+    // BLOCKED: pub fn wxTreeListCtrl_UncheckItem(self_: *mut c_void, item: wxTreeListItem);
+    // BLOCKED: pub fn wxTreeListCtrl_UpdateItemParentStateRecursively(self_: *mut c_void, item: wxTreeListItem);
+    // BLOCKED: pub fn wxTreeListCtrl_GetCheckedState(self_: *const c_void, item: wxTreeListItem) -> c_int;
+    // BLOCKED: pub fn wxTreeListCtrl_AreAllChildrenInState(self_: *const c_void, item: wxTreeListItem, state: c_int) -> bool;
+    // NOT_SUPPORTED: pub fn wxTreeListCtrl_SetSortColumn(self_: *mut c_void, col: unsigned, ascending_order: bool);
+    pub fn wxTreeListCtrl_GetSortColumn(
+        self_: *mut c_void,
+        col: *mut c_void,
+        ascending_order: *mut c_void,
+    ) -> bool;
+    pub fn wxTreeListCtrl_SetItemComparator(self_: *mut c_void, comparator: *mut c_void);
+    pub fn wxTreeListCtrl_GetView(self_: *const c_void) -> *mut c_void;
+    pub fn wxTreeListCtrl_GetDataView(self_: *const c_void) -> *mut c_void;
+    pub fn wxTreeListCtrl_new() -> *mut c_void;
+    pub fn wxTreeListCtrl_new1(
+        parent: *mut c_void,
+        id: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> *mut c_void;
+    pub fn wxTreeListCtrl_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> bool;
+
+    // wxTreeListItem
+    pub fn wxTreeListItem_delete(self_: *mut c_void);
+    pub fn wxTreeListItem_new() -> *mut c_void;
+    pub fn wxTreeListItem_IsOk(self_: *const c_void) -> bool;
+
+    // wxTreeListItemComparator
+    pub fn wxTreeListItemComparator_delete(self_: *mut c_void);
+    // BLOCKED: pub fn wxTreeListItemComparator_new() -> *mut c_void;
+    // NOT_SUPPORTED: pub fn wxTreeListItemComparator_Compare(self_: *mut c_void, treelist: *mut c_void, column: unsigned, first: wxTreeListItem, second: wxTreeListItem) -> c_int;
+    // DTOR: pub fn wxTreeListItemComparator_~wxTreeListItemComparator(self_: *mut c_void);
+
+    // wxTreebook
+    pub fn wxTreebook_CLASSINFO() -> *mut c_void;
+    pub fn wxTreebook_new() -> *mut c_void;
+    pub fn wxTreebook_new1(
+        parent: *mut c_void,
+        id: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> *mut c_void;
+    // DTOR: pub fn wxTreebook_~wxTreebook(self_: *mut c_void);
+    pub fn wxTreebook_AddSubPage(
+        self_: *mut c_void,
+        page: *mut c_void,
+        text: *const c_void,
+        b_select: bool,
+        image_id: c_int,
+    ) -> bool;
+    pub fn wxTreebook_CollapseNode(self_: *mut c_void, page_id: usize) -> bool;
+    pub fn wxTreebook_Create(
+        self_: *mut c_void,
+        parent: *mut c_void,
+        id: c_int,
+        pos: *const c_void,
+        size: *const c_void,
+        style: c_long,
+        name: *const c_void,
+    ) -> bool;
+    pub fn wxTreebook_ExpandNode(self_: *mut c_void, page_id: usize, expand: bool) -> bool;
+    pub fn wxTreebook_GetPageParent(self_: *const c_void, page: usize) -> c_int;
+    pub fn wxTreebook_InsertSubPage(
+        self_: *mut c_void,
+        page_pos: usize,
+        page: *mut c_void,
+        text: *const c_void,
+        b_select: bool,
+        image_id: c_int,
+    ) -> bool;
+    pub fn wxTreebook_IsNodeExpanded(self_: *const c_void, page_id: usize) -> bool;
 
 }

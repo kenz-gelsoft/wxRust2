@@ -1,14 +1,50 @@
 #pragma once
 
+#include <wx/dataobj.h>
+#include <wx/dnd.h>
+#include <wx/event.h>
+#include <wx/imagtga.h>
+#include <wx/imagtiff.h>
+#include <wx/taskbar.h>
 #include <wx/textctrl.h>
 #include <wx/textdlg.h>
 #include <wx/textentry.h>
 #include <wx/tglbtn.h>
 #include <wx/timectrl.h>
+#include <wx/tipdlg.h>
+#include <wx/tipwin.h>
 #include <wx/toolbar.h>
+#include <wx/toolbook.h>
+#include <wx/tooltip.h>
 #include <wx/toplevel.h>
+#include <wx/treebase.h>
+#include <wx/treebook.h>
+#include <wx/treectrl.h>
+#include <wx/treelist.h>
+#include <wx/valtext.h>
 
 extern "C" {
+
+// CLASS: wxTGAHandler
+wxClassInfo *wxTGAHandler_CLASSINFO();
+wxTGAHandler *wxTGAHandler_new();
+
+// CLASS: wxTIFFHandler
+wxClassInfo *wxTIFFHandler_CLASSINFO();
+wxTIFFHandler *wxTIFFHandler_new();
+
+// CLASS: wxTaskBarIcon
+wxClassInfo *wxTaskBarIcon_CLASSINFO();
+void wxTaskBarIcon_Destroy(wxTaskBarIcon * self);
+bool wxTaskBarIcon_IsIconInstalled(const wxTaskBarIcon * self);
+bool wxTaskBarIcon_IsOk(const wxTaskBarIcon * self);
+bool wxTaskBarIcon_PopupMenu(wxTaskBarIcon * self, wxMenu * menu);
+bool wxTaskBarIcon_RemoveIcon(wxTaskBarIcon * self);
+bool wxTaskBarIcon_SetIcon(wxTaskBarIcon * self, const wxBitmapBundle * icon, const wxString * tooltip);
+bool wxTaskBarIcon_IsAvailable();
+
+// CLASS: wxTaskBarIconEvent
+wxClassInfo *wxTaskBarIconEvent_CLASSINFO();
 
 // CLASS: wxTextAttr
 void wxTextAttr_delete(wxTextAttr *self);
@@ -149,6 +185,17 @@ long wxTextCtrl_XYToPosition(const wxTextCtrl * self, long x, long y);
 // Mix-in(s) to wxTextCtrl
 wxTextEntryBase *wxTextCtrl_AsTextEntry(wxTextCtrl* obj);
 
+// CLASS: wxTextDataObject
+void wxTextDataObject_delete(wxTextDataObject *self);
+wxTextDataObject *wxTextDataObject_new(const wxString * text);
+wxString *wxTextDataObject_GetText(const wxTextDataObject * self);
+size_t wxTextDataObject_GetTextLength(const wxTextDataObject * self);
+void wxTextDataObject_SetText(wxTextDataObject * self, const wxString * str_text);
+
+// CLASS: wxTextDropTarget
+void wxTextDropTarget_delete(wxTextDropTarget *self);
+bool wxTextDropTarget_OnDropText(wxTextDropTarget * self, wxCoord x, wxCoord y, const wxString * data);
+
 // CLASS: wxTextEntry
 void wxTextEntry_delete(wxTextEntry *self);
 void wxTextEntry_AppendText(wxTextEntry * self, const wxString * text);
@@ -206,6 +253,36 @@ void wxTextEntryDialog_SetValue(wxTextEntryDialog * self, const wxString * value
 void wxTextEntryDialog_ForceUpper(wxTextEntryDialog * self);
 #endif
 
+// CLASS: wxTextValidator
+wxClassInfo *wxTextValidator_CLASSINFO();
+wxTextValidator *wxTextValidator_new(const wxTextValidator * validator);
+wxTextValidator *wxTextValidator_new1(long style, wxString * val_ptr);
+wxString *wxTextValidator_GetCharExcludes(const wxTextValidator * self);
+wxString *wxTextValidator_GetCharIncludes(const wxTextValidator * self);
+wxArrayString *wxTextValidator_GetExcludes(const wxTextValidator * self);
+wxArrayString *wxTextValidator_GetIncludes(const wxTextValidator * self);
+long wxTextValidator_GetStyle(const wxTextValidator * self);
+void wxTextValidator_OnChar(wxTextValidator * self, wxKeyEvent * event);
+void wxTextValidator_SetExcludes(wxTextValidator * self, const wxArrayString * string_list);
+void wxTextValidator_SetCharExcludes(wxTextValidator * self, const wxString * chars);
+void wxTextValidator_SetIncludes(wxTextValidator * self, const wxArrayString * string_list);
+void wxTextValidator_SetCharIncludes(wxTextValidator * self, const wxString * chars);
+void wxTextValidator_AddExclude(wxTextValidator * self, const wxString * exclude);
+void wxTextValidator_AddInclude(wxTextValidator * self, const wxString * include);
+void wxTextValidator_AddCharExcludes(wxTextValidator * self, const wxString * chars);
+void wxTextValidator_AddCharIncludes(wxTextValidator * self, const wxString * chars);
+void wxTextValidator_SetStyle(wxTextValidator * self, long style);
+wxString *wxTextValidator_IsValid(const wxTextValidator * self, const wxString * val);
+
+// CLASS: wxThreadEvent
+wxClassInfo *wxThreadEvent_CLASSINFO();
+long wxThreadEvent_GetExtraLong(const wxThreadEvent * self);
+int wxThreadEvent_GetInt(const wxThreadEvent * self);
+wxString *wxThreadEvent_GetString(const wxThreadEvent * self);
+void wxThreadEvent_SetExtraLong(wxThreadEvent * self, long extra_long);
+void wxThreadEvent_SetInt(wxThreadEvent * self, int int_command);
+void wxThreadEvent_SetString(wxThreadEvent * self, const wxString * string);
+
 // CLASS: wxTimePickerCtrl
 wxClassInfo *wxTimePickerCtrl_CLASSINFO();
 wxTimePickerCtrl *wxTimePickerCtrl_new();
@@ -215,6 +292,17 @@ bool wxTimePickerCtrl_GetTime(const wxTimePickerCtrl * self, int * hour, int * m
 wxDateTime *wxTimePickerCtrl_GetValue(const wxTimePickerCtrl * self);
 bool wxTimePickerCtrl_SetTime(wxTimePickerCtrl * self, int hour, int min, int sec);
 void wxTimePickerCtrl_SetValue(wxTimePickerCtrl * self, const wxDateTime * dt);
+
+// CLASS: wxTipProvider
+void wxTipProvider_delete(wxTipProvider *self);
+size_t wxTipProvider_GetCurrentTip(const wxTipProvider * self);
+wxString *wxTipProvider_GetTip(wxTipProvider * self);
+
+// CLASS: wxTipWindow
+wxClassInfo *wxTipWindow_CLASSINFO();
+wxTipWindow *wxTipWindow_new(wxWindow * parent, const wxString * text, wxCoord max_length, wxTipWindow ** window_ptr, wxRect * rect_bounds);
+void wxTipWindow_SetBoundingRect(wxTipWindow * self, const wxRect * rect_bound);
+void wxTipWindow_SetTipWindowPtr(wxTipWindow * self, wxTipWindow ** window_ptr);
 
 // CLASS: wxToggleButton
 wxClassInfo *wxToggleButton_CLASSINFO();
@@ -282,6 +370,29 @@ wxToolBarToolBase * wxToolBar_CreateTool(wxToolBar * self, int tool_id, const wx
 wxToolBarToolBase * wxToolBar_CreateTool1(wxToolBar * self, wxControl * control, const wxString * label);
 wxToolBarToolBase * wxToolBar_CreateSeparator(wxToolBar * self);
 
+// CLASS: wxToolTip
+wxClassInfo *wxToolTip_CLASSINFO();
+wxToolTip *wxToolTip_new(const wxString * tip);
+wxString *wxToolTip_GetTip(const wxToolTip * self);
+wxWindow * wxToolTip_GetWindow(const wxToolTip * self);
+void wxToolTip_SetTip(wxToolTip * self, const wxString * tip);
+void wxToolTip_Enable(bool flag);
+void wxToolTip_SetAutoPop(long msecs);
+void wxToolTip_SetDelay(long msecs);
+#ifdef __WXMSW__
+void wxToolTip_SetMaxWidth(int width);
+#endif
+void wxToolTip_SetReshow(long msecs);
+
+// CLASS: wxToolbook
+wxClassInfo *wxToolbook_CLASSINFO();
+wxToolbook *wxToolbook_new();
+wxToolbook *wxToolbook_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+bool wxToolbook_Create(wxToolbook * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+wxToolBarBase * wxToolbook_GetToolBar(const wxToolbook * self);
+bool wxToolbook_EnablePage(wxToolbook * self, size_t page, bool enable);
+bool wxToolbook_EnablePage1(wxToolbook * self, wxWindow * page, bool enable);
+
 // CLASS: wxTopLevelWindow
 wxClassInfo *wxTopLevelWindow_CLASSINFO();
 wxTopLevelWindow *wxTopLevelWindow_new();
@@ -325,6 +436,160 @@ bool wxTopLevelWindow_EnableFullScreenView(wxTopLevelWindow * self, bool enable,
 #endif
 bool wxTopLevelWindow_ShowFullScreen(wxTopLevelWindow * self, bool show, long style);
 wxSize *wxTopLevelWindow_GetDefaultSize();
+
+// CLASS: wxTreeCtrl
+wxClassInfo *wxTreeCtrl_CLASSINFO();
+wxTreeCtrl *wxTreeCtrl_new();
+wxTreeCtrl *wxTreeCtrl_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+wxTreeItemId *wxTreeCtrl_AddRoot(wxTreeCtrl * self, const wxString * text, int image, int sel_image, wxTreeItemData * data);
+wxTreeItemId *wxTreeCtrl_AppendItem(wxTreeCtrl * self, const wxTreeItemId * parent, const wxString * text, int image, int sel_image, wxTreeItemData * data);
+void wxTreeCtrl_AssignButtonsImageList(wxTreeCtrl * self, wxImageList * image_list);
+void wxTreeCtrl_AssignStateImageList(wxTreeCtrl * self, wxImageList * image_list);
+void wxTreeCtrl_Collapse(wxTreeCtrl * self, const wxTreeItemId * item);
+void wxTreeCtrl_CollapseAll(wxTreeCtrl * self);
+void wxTreeCtrl_CollapseAllChildren(wxTreeCtrl * self, const wxTreeItemId * item);
+void wxTreeCtrl_CollapseAndReset(wxTreeCtrl * self, const wxTreeItemId * item);
+bool wxTreeCtrl_Create(wxTreeCtrl * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+void wxTreeCtrl_Delete(wxTreeCtrl * self, const wxTreeItemId * item);
+void wxTreeCtrl_DeleteAllItems(wxTreeCtrl * self);
+void wxTreeCtrl_DeleteChildren(wxTreeCtrl * self, const wxTreeItemId * item);
+wxTextCtrl * wxTreeCtrl_EditLabel(wxTreeCtrl * self, const wxTreeItemId * item, wxClassInfo * text_ctrl_class);
+void wxTreeCtrl_EnableBellOnNoMatch(wxTreeCtrl * self, bool on);
+void wxTreeCtrl_EndEditLabel(wxTreeCtrl * self, const wxTreeItemId * item, bool discard_changes);
+void wxTreeCtrl_EnsureVisible(wxTreeCtrl * self, const wxTreeItemId * item);
+void wxTreeCtrl_Expand(wxTreeCtrl * self, const wxTreeItemId * item);
+void wxTreeCtrl_ExpandAll(wxTreeCtrl * self);
+void wxTreeCtrl_ExpandAllChildren(wxTreeCtrl * self, const wxTreeItemId * item);
+bool wxTreeCtrl_GetBoundingRect(const wxTreeCtrl * self, const wxTreeItemId * item, wxRect * rect, bool text_only);
+wxImageList * wxTreeCtrl_GetButtonsImageList(const wxTreeCtrl * self);
+size_t wxTreeCtrl_GetChildrenCount(const wxTreeCtrl * self, const wxTreeItemId * item, bool recursively);
+unsigned int wxTreeCtrl_GetCount(const wxTreeCtrl * self);
+wxTextCtrl * wxTreeCtrl_GetEditControl(const wxTreeCtrl * self);
+wxTreeItemId *wxTreeCtrl_GetFirstChild(const wxTreeCtrl * self, const wxTreeItemId * item, wxTreeItemIdValue * cookie);
+wxTreeItemId *wxTreeCtrl_GetFirstVisibleItem(const wxTreeCtrl * self);
+wxTreeItemId *wxTreeCtrl_GetFocusedItem(const wxTreeCtrl * self);
+void wxTreeCtrl_ClearFocusedItem(wxTreeCtrl * self);
+void wxTreeCtrl_SetFocusedItem(wxTreeCtrl * self, const wxTreeItemId * item);
+unsigned int wxTreeCtrl_GetIndent(const wxTreeCtrl * self);
+unsigned int wxTreeCtrl_GetSpacing(const wxTreeCtrl * self);
+wxColour *wxTreeCtrl_GetItemBackgroundColour(const wxTreeCtrl * self, const wxTreeItemId * item);
+wxTreeItemData * wxTreeCtrl_GetItemData(const wxTreeCtrl * self, const wxTreeItemId * item);
+wxFont *wxTreeCtrl_GetItemFont(const wxTreeCtrl * self, const wxTreeItemId * item);
+wxTreeItemId *wxTreeCtrl_GetItemParent(const wxTreeCtrl * self, const wxTreeItemId * item);
+int wxTreeCtrl_GetItemState(const wxTreeCtrl * self, const wxTreeItemId * item);
+wxString *wxTreeCtrl_GetItemText(const wxTreeCtrl * self, const wxTreeItemId * item);
+wxColour *wxTreeCtrl_GetItemTextColour(const wxTreeCtrl * self, const wxTreeItemId * item);
+wxTreeItemId *wxTreeCtrl_GetLastChild(const wxTreeCtrl * self, const wxTreeItemId * item);
+wxTreeItemId *wxTreeCtrl_GetNextChild(const wxTreeCtrl * self, const wxTreeItemId * item, wxTreeItemIdValue * cookie);
+wxTreeItemId *wxTreeCtrl_GetNextSibling(const wxTreeCtrl * self, const wxTreeItemId * item);
+wxTreeItemId *wxTreeCtrl_GetNextVisible(const wxTreeCtrl * self, const wxTreeItemId * item);
+wxTreeItemId *wxTreeCtrl_GetPrevSibling(const wxTreeCtrl * self, const wxTreeItemId * item);
+wxTreeItemId *wxTreeCtrl_GetPrevVisible(const wxTreeCtrl * self, const wxTreeItemId * item);
+bool wxTreeCtrl_GetQuickBestSize(const wxTreeCtrl * self);
+wxTreeItemId *wxTreeCtrl_GetRootItem(const wxTreeCtrl * self);
+wxTreeItemId *wxTreeCtrl_GetSelection(const wxTreeCtrl * self);
+size_t wxTreeCtrl_GetSelections(const wxTreeCtrl * self, wxArrayTreeItemIds * selection);
+wxImageList * wxTreeCtrl_GetStateImageList(const wxTreeCtrl * self);
+wxTreeItemId *wxTreeCtrl_HitTest(const wxTreeCtrl * self, const wxPoint * point, int * flags);
+wxTreeItemId *wxTreeCtrl_InsertItem(wxTreeCtrl * self, const wxTreeItemId * parent, const wxTreeItemId * previous, const wxString * text, int image, int sel_image, wxTreeItemData * data);
+wxTreeItemId *wxTreeCtrl_InsertItem1(wxTreeCtrl * self, const wxTreeItemId * parent, size_t pos, const wxString * text, int image, int sel_image, wxTreeItemData * data);
+bool wxTreeCtrl_IsBold(const wxTreeCtrl * self, const wxTreeItemId * item);
+bool wxTreeCtrl_IsEmpty(const wxTreeCtrl * self);
+bool wxTreeCtrl_IsExpanded(const wxTreeCtrl * self, const wxTreeItemId * item);
+bool wxTreeCtrl_IsSelected(const wxTreeCtrl * self, const wxTreeItemId * item);
+bool wxTreeCtrl_IsVisible(const wxTreeCtrl * self, const wxTreeItemId * item);
+bool wxTreeCtrl_ItemHasChildren(const wxTreeCtrl * self, const wxTreeItemId * item);
+int wxTreeCtrl_OnCompareItems(wxTreeCtrl * self, const wxTreeItemId * item1, const wxTreeItemId * item2);
+wxTreeItemId *wxTreeCtrl_PrependItem(wxTreeCtrl * self, const wxTreeItemId * parent, const wxString * text, int image, int sel_image, wxTreeItemData * data);
+void wxTreeCtrl_ScrollTo(wxTreeCtrl * self, const wxTreeItemId * item);
+void wxTreeCtrl_SelectItem(wxTreeCtrl * self, const wxTreeItemId * item, bool select);
+void wxTreeCtrl_SetButtonsImageList(wxTreeCtrl * self, wxImageList * image_list);
+void wxTreeCtrl_SetIndent(wxTreeCtrl * self, unsigned int indent);
+void wxTreeCtrl_SetSpacing(wxTreeCtrl * self, unsigned int spacing);
+void wxTreeCtrl_SetItemBackgroundColour(wxTreeCtrl * self, const wxTreeItemId * item, const wxColour * col);
+void wxTreeCtrl_SetItemBold(wxTreeCtrl * self, const wxTreeItemId * item, bool bold);
+void wxTreeCtrl_SetItemData(wxTreeCtrl * self, const wxTreeItemId * item, wxTreeItemData * data);
+void wxTreeCtrl_SetItemDropHighlight(wxTreeCtrl * self, const wxTreeItemId * item, bool highlight);
+void wxTreeCtrl_SetItemFont(wxTreeCtrl * self, const wxTreeItemId * item, const wxFont * font);
+void wxTreeCtrl_SetItemHasChildren(wxTreeCtrl * self, const wxTreeItemId * item, bool has_children);
+void wxTreeCtrl_SetItemState(wxTreeCtrl * self, const wxTreeItemId * item, int state);
+void wxTreeCtrl_SetItemText(wxTreeCtrl * self, const wxTreeItemId * item, const wxString * text);
+void wxTreeCtrl_SetItemTextColour(wxTreeCtrl * self, const wxTreeItemId * item, const wxColour * col);
+void wxTreeCtrl_SetQuickBestSize(wxTreeCtrl * self, bool quick_best_size);
+void wxTreeCtrl_SetStateImageList(wxTreeCtrl * self, wxImageList * image_list);
+void wxTreeCtrl_SetWindowStyle(wxTreeCtrl * self, long styles);
+void wxTreeCtrl_SortChildren(wxTreeCtrl * self, const wxTreeItemId * item);
+void wxTreeCtrl_Toggle(wxTreeCtrl * self, const wxTreeItemId * item);
+void wxTreeCtrl_ToggleItemSelection(wxTreeCtrl * self, const wxTreeItemId * item);
+void wxTreeCtrl_Unselect(wxTreeCtrl * self);
+void wxTreeCtrl_UnselectAll(wxTreeCtrl * self);
+void wxTreeCtrl_UnselectItem(wxTreeCtrl * self, const wxTreeItemId * item);
+void wxTreeCtrl_SelectChildren(wxTreeCtrl * self, const wxTreeItemId * parent);
+
+// CLASS: wxTreeEvent
+wxClassInfo *wxTreeEvent_CLASSINFO();
+wxTreeItemId *wxTreeEvent_GetItem(const wxTreeEvent * self);
+int wxTreeEvent_GetKeyCode(const wxTreeEvent * self);
+wxKeyEvent *wxTreeEvent_GetKeyEvent(const wxTreeEvent * self);
+wxString *wxTreeEvent_GetLabel(const wxTreeEvent * self);
+wxTreeItemId *wxTreeEvent_GetOldItem(const wxTreeEvent * self);
+wxPoint *wxTreeEvent_GetPoint(const wxTreeEvent * self);
+bool wxTreeEvent_IsEditCancelled(const wxTreeEvent * self);
+void wxTreeEvent_SetToolTip(wxTreeEvent * self, const wxString * tooltip);
+
+// CLASS: wxTreeItemData
+void wxTreeItemData_delete(wxTreeItemData *self);
+wxTreeItemData *wxTreeItemData_new();
+wxTreeItemId *wxTreeItemData_GetId(const wxTreeItemData * self);
+void wxTreeItemData_SetId(wxTreeItemData * self, const wxTreeItemId * id);
+
+// CLASS: wxTreeItemId
+void wxTreeItemId_delete(wxTreeItemId *self);
+wxTreeItemId *wxTreeItemId_new();
+bool wxTreeItemId_IsOk(const wxTreeItemId * self);
+void * wxTreeItemId_GetID(const wxTreeItemId * self);
+void wxTreeItemId_Unset(wxTreeItemId * self);
+
+// CLASS: wxTreeListCtrl
+wxClassInfo *wxTreeListCtrl_CLASSINFO();
+void wxTreeListCtrl_AssignImageList(wxTreeListCtrl * self, wxImageList * image_list);
+void wxTreeListCtrl_SetImageList(wxTreeListCtrl * self, wxImageList * image_list);
+int wxTreeListCtrl_AppendColumn(wxTreeListCtrl * self, const wxString * title, int width, wxAlignment align, int flags);
+void wxTreeListCtrl_ClearColumns(wxTreeListCtrl * self);
+int wxTreeListCtrl_WidthFor(const wxTreeListCtrl * self, const wxString * text);
+void wxTreeListCtrl_DeleteAllItems(wxTreeListCtrl * self);
+wxTreeListItem *wxTreeListCtrl_GetRootItem(const wxTreeListCtrl * self);
+wxTreeListItem *wxTreeListCtrl_GetFirstItem(const wxTreeListCtrl * self);
+wxTreeListItem *wxTreeListCtrl_GetSelection(const wxTreeListCtrl * self);
+void wxTreeListCtrl_SelectAll(wxTreeListCtrl * self);
+void wxTreeListCtrl_UnselectAll(wxTreeListCtrl * self);
+bool wxTreeListCtrl_GetSortColumn(wxTreeListCtrl * self, unsigned * col, bool * ascending_order);
+void wxTreeListCtrl_SetItemComparator(wxTreeListCtrl * self, wxTreeListItemComparator * comparator);
+wxWindow * wxTreeListCtrl_GetView(const wxTreeListCtrl * self);
+wxDataViewCtrl * wxTreeListCtrl_GetDataView(const wxTreeListCtrl * self);
+wxTreeListCtrl *wxTreeListCtrl_new();
+wxTreeListCtrl *wxTreeListCtrl_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+bool wxTreeListCtrl_Create(wxTreeListCtrl * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+
+// CLASS: wxTreeListItem
+void wxTreeListItem_delete(wxTreeListItem *self);
+wxTreeListItem *wxTreeListItem_new();
+bool wxTreeListItem_IsOk(const wxTreeListItem * self);
+
+// CLASS: wxTreeListItemComparator
+void wxTreeListItemComparator_delete(wxTreeListItemComparator *self);
+
+// CLASS: wxTreebook
+wxClassInfo *wxTreebook_CLASSINFO();
+wxTreebook *wxTreebook_new();
+wxTreebook *wxTreebook_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+bool wxTreebook_AddSubPage(wxTreebook * self, wxWindow * page, const wxString * text, bool b_select, int image_id);
+bool wxTreebook_CollapseNode(wxTreebook * self, size_t page_id);
+bool wxTreebook_Create(wxTreebook * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+bool wxTreebook_ExpandNode(wxTreebook * self, size_t page_id, bool expand);
+int wxTreebook_GetPageParent(const wxTreebook * self, size_t page);
+bool wxTreebook_InsertSubPage(wxTreebook * self, size_t page_pos, wxWindow * page, const wxString * text, bool b_select, int image_id);
+bool wxTreebook_IsNodeExpanded(const wxTreebook * self, size_t page_id);
 
 } // extern "C"
 

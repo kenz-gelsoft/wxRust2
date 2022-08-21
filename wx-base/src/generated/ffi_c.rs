@@ -14,4 +14,9 @@ extern "C" {
     pub fn wxClassInfo_IsKindOf(self_: *const c_void, info: *const c_void) -> bool;
     pub fn wxClassInfo_FindClass(class_name: *const c_void) -> *mut c_void;
 
+    // wxClientData
+    pub fn wxClientData_delete(self_: *mut c_void);
+    pub fn wxClientData_new() -> *mut c_void;
+    // DTOR: pub fn wxClientData_~wxClientData(self_: *mut c_void);
+
 }
