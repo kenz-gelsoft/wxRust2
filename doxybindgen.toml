@@ -1627,6 +1627,11 @@ blocklist = [
     'operator*1',
     'operator*=',
 ]
+[types.wxRichToolTip]
+wx32 = [
+    # arg type changed: wxIcon => wxBitmapBundle
+    'SetIcon1',
+]
 [types.wxRegion]
 blocklist = [
     'operator=',

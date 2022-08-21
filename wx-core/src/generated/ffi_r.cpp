@@ -551,9 +551,11 @@ void wxRichToolTip_SetBackgroundColour(wxRichToolTip * self, const wxColour * co
 void wxRichToolTip_SetIcon(wxRichToolTip * self, int icon) {
     return self->SetIcon(icon);
 }
+#if wxCHECK_VERSION(3, 2, 0)
 void wxRichToolTip_SetIcon1(wxRichToolTip * self, const wxBitmapBundle * icon) {
     return self->SetIcon(*icon);
 }
+#endif
 void wxRichToolTip_SetTitleFont(wxRichToolTip * self, const wxFont * font) {
     return self->SetTitleFont(*font);
 }

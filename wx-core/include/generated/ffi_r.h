@@ -215,7 +215,9 @@ void wxRichToolTip_delete(wxRichToolTip *self);
 wxRichToolTip *wxRichToolTip_new(const wxString * title, const wxString * message);
 void wxRichToolTip_SetBackgroundColour(wxRichToolTip * self, const wxColour * col, const wxColour * col_end);
 void wxRichToolTip_SetIcon(wxRichToolTip * self, int icon);
+#if wxCHECK_VERSION(3, 2, 0)
 void wxRichToolTip_SetIcon1(wxRichToolTip * self, const wxBitmapBundle * icon);
+#endif
 void wxRichToolTip_SetTitleFont(wxRichToolTip * self, const wxFont * font);
 void wxRichToolTip_ShowFor(wxRichToolTip * self, wxWindow * win, const wxRect * rect);
 
