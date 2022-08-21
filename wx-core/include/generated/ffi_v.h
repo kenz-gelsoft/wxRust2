@@ -1,6 +1,5 @@
 #pragma once
 
-#include <wx/docview.h>
 #include <wx/validate.h>
 #include <wx/vlbox.h>
 #include <wx/vscroll.h>
@@ -48,26 +47,6 @@ bool wxValidator_TransferToWindow(wxValidator * self);
 bool wxValidator_Validate(wxValidator * self, wxWindow * parent);
 void wxValidator_SuppressBellOnError(bool suppress);
 bool wxValidator_IsSilent();
-
-// CLASS: wxView
-wxClassInfo *wxView_CLASSINFO();
-void wxView_Activate(wxView * self, bool activate);
-bool wxView_Close(wxView * self, bool delete_window);
-wxDocument * wxView_GetDocument(const wxView * self);
-wxDocManager * wxView_GetDocumentManager(const wxView * self);
-wxWindow * wxView_GetFrame(const wxView * self);
-wxString *wxView_GetViewName(const wxView * self);
-void wxView_OnActivateView(wxView * self, bool activate, wxView * active_view, wxView * deactive_view);
-void wxView_OnChangeFilename(wxView * self);
-bool wxView_OnClose(wxView * self, bool delete_window);
-void wxView_OnClosingDocument(wxView * self);
-bool wxView_OnCreate(wxView * self, wxDocument * doc, long flags);
-wxPrintout * wxView_OnCreatePrintout(wxView * self);
-void wxView_OnDraw(wxView * self, wxDC * dc);
-void wxView_OnUpdate(wxView * self, wxView * sender, wxObject * hint);
-void wxView_SetDocument(wxView * self, wxDocument * doc);
-void wxView_SetFrame(wxView * self, wxWindow * frame);
-void wxView_SetViewName(wxView * self, const wxString * name);
 
 } // extern "C"
 

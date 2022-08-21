@@ -419,7 +419,7 @@ wxml_files = [
     'wxml/classwx_status_bar_pane.xml',
     'wxml/classwx_std_dialog_button_sizer.xml',
     'wxml/classwx_stock_preferences_page.xml',
-    # 'wxml/classwx_stream_to_text_redirector.xml', # depends on C++ iostream
+    # 'wxml/classwx_stream_to_text_redirector.xml',   # depends on C++ iostream
     'wxml/classwx_sys_colour_changed_event.xml',
     'wxml/classwx_system_settings.xml',
     'wxml/classwx_t_g_a_handler.xml',
@@ -474,7 +474,7 @@ wxml_files = [
     # 'wxml/classwx_variant_data_currency.xml',   # MSW only
     # 'wxml/classwx_variant_data_error_code.xml', # MSW only
     # 'wxml/classwx_variant_data_safe_array.xml', # MSW only
-    'wxml/classwx_view.xml',
+    # 'wxml/classwx_view.xml',                    # Our CI environment is't built with (mingw64)
     'wxml/classwx_window.xml',
     'wxml/classwx_window_d_c.xml',
     'wxml/classwx_wrap_sizer.xml',

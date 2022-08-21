@@ -66,31 +66,4 @@ extern "C" {
     pub fn wxValidator_SuppressBellOnError(suppress: bool);
     pub fn wxValidator_IsSilent() -> bool;
 
-    // wxView
-    pub fn wxView_CLASSINFO() -> *mut c_void;
-    // BLOCKED: pub fn wxView_new() -> *mut c_void;
-    // DTOR: pub fn wxView_~wxView(self_: *mut c_void);
-    pub fn wxView_Activate(self_: *mut c_void, activate: bool);
-    pub fn wxView_Close(self_: *mut c_void, delete_window: bool) -> bool;
-    pub fn wxView_GetDocument(self_: *const c_void) -> *mut c_void;
-    pub fn wxView_GetDocumentManager(self_: *const c_void) -> *mut c_void;
-    pub fn wxView_GetFrame(self_: *const c_void) -> *mut c_void;
-    pub fn wxView_GetViewName(self_: *const c_void) -> *mut c_void;
-    pub fn wxView_OnActivateView(
-        self_: *mut c_void,
-        activate: bool,
-        active_view: *mut c_void,
-        deactive_view: *mut c_void,
-    );
-    pub fn wxView_OnChangeFilename(self_: *mut c_void);
-    pub fn wxView_OnClose(self_: *mut c_void, delete_window: bool) -> bool;
-    pub fn wxView_OnClosingDocument(self_: *mut c_void);
-    pub fn wxView_OnCreate(self_: *mut c_void, doc: *mut c_void, flags: c_long) -> bool;
-    pub fn wxView_OnCreatePrintout(self_: *mut c_void) -> *mut c_void;
-    pub fn wxView_OnDraw(self_: *mut c_void, dc: *mut c_void);
-    pub fn wxView_OnUpdate(self_: *mut c_void, sender: *mut c_void, hint: *mut c_void);
-    pub fn wxView_SetDocument(self_: *mut c_void, doc: *mut c_void);
-    pub fn wxView_SetFrame(self_: *mut c_void, frame: *mut c_void);
-    pub fn wxView_SetViewName(self_: *mut c_void, name: *const c_void);
-
 }
