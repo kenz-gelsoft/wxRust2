@@ -19,7 +19,9 @@ bool wxUIActionSimulator_MouseDragDrop(wxUIActionSimulator * self, long x1, long
 bool wxUIActionSimulator_KeyDown(wxUIActionSimulator * self, int keycode, int modifiers);
 bool wxUIActionSimulator_KeyUp(wxUIActionSimulator * self, int keycode, int modifiers);
 bool wxUIActionSimulator_Char(wxUIActionSimulator * self, int keycode, int modifiers);
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxUIActionSimulator_Select(wxUIActionSimulator * self, const wxString * text);
+#endif
 bool wxUIActionSimulator_Text(wxUIActionSimulator * self, const char * text);
 
 // CLASS: wxURLDataObject
@@ -35,7 +37,9 @@ void wxUpdateUIEvent_Check(wxUpdateUIEvent * self, bool check);
 void wxUpdateUIEvent_Enable(wxUpdateUIEvent * self, bool enable);
 bool wxUpdateUIEvent_GetChecked(const wxUpdateUIEvent * self);
 bool wxUpdateUIEvent_GetEnabled(const wxUpdateUIEvent * self);
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxUpdateUIEvent_IsCheckable(const wxUpdateUIEvent * self);
+#endif
 bool wxUpdateUIEvent_GetSetChecked(const wxUpdateUIEvent * self);
 bool wxUpdateUIEvent_GetSetEnabled(const wxUpdateUIEvent * self);
 bool wxUpdateUIEvent_GetSetShown(const wxUpdateUIEvent * self);

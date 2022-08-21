@@ -39,9 +39,11 @@ bool wxUIActionSimulator_KeyUp(wxUIActionSimulator * self, int keycode, int modi
 bool wxUIActionSimulator_Char(wxUIActionSimulator * self, int keycode, int modifiers) {
     return self->Char(keycode, modifiers);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxUIActionSimulator_Select(wxUIActionSimulator * self, const wxString * text) {
     return self->Select(*text);
 }
+#endif
 bool wxUIActionSimulator_Text(wxUIActionSimulator * self, const char * text) {
     return self->Text(text);
 }
@@ -79,9 +81,11 @@ bool wxUpdateUIEvent_GetChecked(const wxUpdateUIEvent * self) {
 bool wxUpdateUIEvent_GetEnabled(const wxUpdateUIEvent * self) {
     return self->GetEnabled();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxUpdateUIEvent_IsCheckable(const wxUpdateUIEvent * self) {
     return self->IsCheckable();
 }
+#endif
 bool wxUpdateUIEvent_GetSetChecked(const wxUpdateUIEvent * self) {
     return self->GetSetChecked();
 }

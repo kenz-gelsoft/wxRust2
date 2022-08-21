@@ -1917,6 +1917,14 @@ blocklist = [
     # abstract
     'wxTreeListItemComparator',
 ]
+[types.wxUIActionSimulator]
+wx31 = [
+    'Select',
+]
+[types.wxUpdateUIEvent]
+wx31 = [
+    'IsCheckable',
+]
 [types.wxValidator]
 returns_owned = [
     'Clone',
