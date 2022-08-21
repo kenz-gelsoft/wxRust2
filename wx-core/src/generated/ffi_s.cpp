@@ -2,27 +2,6 @@
 
 extern "C" {
 
-// CLASS: wxSVGBitmapEmbedHandler
-void wxSVGBitmapEmbedHandler_delete(wxSVGBitmapEmbedHandler *self) {
-    delete self;
-}
-
-// CLASS: wxSVGBitmapFileHandler
-void wxSVGBitmapFileHandler_delete(wxSVGBitmapFileHandler *self) {
-    delete self;
-}
-wxSVGBitmapFileHandler *wxSVGBitmapFileHandler_new(const wxFileName * path) {
-    return new wxSVGBitmapFileHandler(*path);
-}
-
-// CLASS: wxSVGBitmapHandler
-void wxSVGBitmapHandler_delete(wxSVGBitmapHandler *self) {
-    delete self;
-}
-bool wxSVGBitmapHandler_ProcessBitmap(const wxSVGBitmapHandler * self, const wxBitmap * bitmap, wxCoord x, wxCoord y, wxOutputStream * stream) {
-    return self->ProcessBitmap(*bitmap, x, y, *stream);
-}
-
 // CLASS: wxSVGFileDC
 wxClassInfo *wxSVGFileDC_CLASSINFO() {
     return wxCLASSINFO(wxSVGFileDC);
@@ -1213,12 +1192,14 @@ int wxSplitterEvent_GetY(const wxSplitterEvent * self) {
 void wxSplitterEvent_SetSashPosition(wxSplitterEvent * self, int pos) {
     return self->SetSashPosition(pos);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxSplitterEvent_SetSize(wxSplitterEvent * self, int old_size, int new_size) {
     return self->SetSize(old_size, new_size);
 }
 int wxSplitterEvent_GetOldSize(const wxSplitterEvent * self) {
     return self->GetOldSize();
 }
+#endif
 
 // CLASS: wxSplitterWindow
 wxClassInfo *wxSplitterWindow_CLASSINFO() {

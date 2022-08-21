@@ -1,37 +1,9 @@
 use super::*;
 
-// wxSVGBitmapEmbedHandler
-pub trait SVGBitmapEmbedHandlerMethods: SVGBitmapHandlerMethods {}
-
-// wxSVGBitmapFileHandler
-pub trait SVGBitmapFileHandlerMethods: SVGBitmapHandlerMethods {}
-
-// wxSVGBitmapHandler
-pub trait SVGBitmapHandlerMethods: WxRustMethods {
-    fn process_bitmap<B: BitmapMethods>(
-        &self,
-        bitmap: &B,
-        x: c_int,
-        y: c_int,
-        stream: *mut c_void,
-    ) -> bool {
-        unsafe {
-            let bitmap = bitmap.as_ptr();
-            ffi::wxSVGBitmapHandler_ProcessBitmap(self.as_ptr(), bitmap, x, y, stream)
-        }
-    }
-}
-
 // wxSVGFileDC
 pub trait SVGFileDCMethods: DCMethods {
-    fn set_bitmap_handler<S: SVGBitmapHandlerMethods>(&self, handler: Option<&S>) {
-        unsafe {
-            let handler = match handler {
-                Some(r) => r.as_ptr(),
-                None => ptr::null_mut(),
-            };
-            ffi::wxSVGFileDC_SetBitmapHandler(self.as_ptr(), handler)
-        }
+    fn set_bitmap_handler(&self, handler: *mut c_void) {
+        unsafe { ffi::wxSVGFileDC_SetBitmapHandler(self.as_ptr(), handler) }
     }
     // NOT_SUPPORTED: fn SetShapeRenderingMode()
 }

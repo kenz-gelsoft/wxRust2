@@ -418,12 +418,12 @@ wxml_files = [
     'wxml/classwx_region.xml',
     'wxml/classwx_region_iterator.xml',
     'wxml/classwx_renderer_native.xml',
-    # 'wxml/classwx_rich_message_dialog.xml', # base class not documented
+    # 'wxml/classwx_rich_message_dialog.xml',          # base class not documented
     'wxml/classwx_rich_tool_tip.xml',
-    # 'wxml/classwx_rotate_gesture_event.xml', # requires 3.1
-    'wxml/classwx_s_v_g_bitmap_embed_handler.xml',
-    'wxml/classwx_s_v_g_bitmap_file_handler.xml',
-    'wxml/classwx_s_v_g_bitmap_handler.xml',
+    # 'wxml/classwx_rotate_gesture_event.xml',         # requires 3.1
+    # 'wxml/classwx_s_v_g_bitmap_embed_handler.xml',   # requires 3.1
+    # 'wxml/classwx_s_v_g_bitmap_file_handler.xml',    # requires 3.1
+    # 'wxml/classwx_s_v_g_bitmap_handler.xml',         # requires 3.1
     'wxml/classwx_s_v_g_file_d_c.xml',
     # 'wxml/classwx_safe_array_3_01var_type_01_4.xml', # heavily depends on template
     'wxml/classwx_sash_event.xml',
@@ -1753,10 +1753,20 @@ wx31 = [
 wx31 = [
     'GetTextValue',
 ]
+[types.wxSplitterEvent]
+wx31 = [
+    'GetOldSize',
+    'SetSize',
+]
 [types.wxStaticBox]
 blocklist = [
     'wxStaticBox2',
     'Create1',
+]
+[types.wxSVGFileDC]
+wx30 = [
+    # Additional args in wx3.1
+    'wxSVGFileDC',
 ]
 [types.wxTextAttr]
 blocklist = [

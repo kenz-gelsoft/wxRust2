@@ -2,23 +2,6 @@ use super::*;
 
 extern "C" {
 
-    // wxSVGBitmapEmbedHandler
-    pub fn wxSVGBitmapEmbedHandler_delete(self_: *mut c_void);
-
-    // wxSVGBitmapFileHandler
-    pub fn wxSVGBitmapFileHandler_delete(self_: *mut c_void);
-    pub fn wxSVGBitmapFileHandler_new(path: *const c_void) -> *mut c_void;
-
-    // wxSVGBitmapHandler
-    pub fn wxSVGBitmapHandler_delete(self_: *mut c_void);
-    pub fn wxSVGBitmapHandler_ProcessBitmap(
-        self_: *const c_void,
-        bitmap: *const c_void,
-        x: c_int,
-        y: c_int,
-        stream: *mut c_void,
-    ) -> bool;
-
     // wxSVGFileDC
     pub fn wxSVGFileDC_CLASSINFO() -> *mut c_void;
     pub fn wxSVGFileDC_new(
