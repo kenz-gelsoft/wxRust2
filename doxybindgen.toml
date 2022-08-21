@@ -2020,6 +2020,11 @@ wx31 = [
     'UseBackgroundColour',
     'UseForegroundColour',
 ]
+[types.wxWindowDisabler]
+wx317 = [
+    # default argument added
+    'wxWindowDisabler1',
+]
 [types.wxWizardPage]
 blocklist = [
     # abstract

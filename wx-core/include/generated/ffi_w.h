@@ -334,7 +334,9 @@ wxWindow * wxWindowDestroyEvent_GetWindow(const wxWindowDestroyEvent * self);
 // CLASS: wxWindowDisabler
 void wxWindowDisabler_delete(wxWindowDisabler *self);
 wxWindowDisabler *wxWindowDisabler_new(bool disable);
+#if wxCHECK_VERSION(3, 1, 7)
 wxWindowDisabler *wxWindowDisabler_new1(wxWindow * win_to_skip, wxWindow * win_to_skip2);
+#endif
 
 // CLASS: wxWizard
 wxClassInfo *wxWizard_CLASSINFO();

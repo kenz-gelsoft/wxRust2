@@ -915,9 +915,11 @@ void wxWindowDisabler_delete(wxWindowDisabler *self) {
 wxWindowDisabler *wxWindowDisabler_new(bool disable) {
     return new wxWindowDisabler(disable);
 }
+#if wxCHECK_VERSION(3, 1, 7)
 wxWindowDisabler *wxWindowDisabler_new1(wxWindow * win_to_skip, wxWindow * win_to_skip2) {
     return new wxWindowDisabler(win_to_skip, win_to_skip2);
 }
+#endif
 
 // CLASS: wxWizard
 wxClassInfo *wxWizard_CLASSINFO() {
