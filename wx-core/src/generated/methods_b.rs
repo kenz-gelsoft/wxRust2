@@ -838,6 +838,50 @@ pub trait BrushListMethods: WxRustMethods {
     // NOT_SUPPORTED: fn FindOrCreateBrush()
 }
 
+// wxBufferedDC
+pub trait BufferedDCMethods: MemoryDCMethods {
+    // DTOR: fn ~wxBufferedDC()
+    fn init_size<D: DCMethods, S: SizeMethods>(&self, dc: Option<&D>, area: &S, style: c_int) {
+        unsafe {
+            let dc = match dc {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let area = area.as_ptr();
+            ffi::wxBufferedDC_Init(self.as_ptr(), dc, area, style)
+        }
+    }
+    fn init_bitmap<D: DCMethods, B: BitmapMethods>(
+        &self,
+        dc: Option<&D>,
+        buffer: &B,
+        style: c_int,
+    ) {
+        unsafe {
+            let dc = match dc {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let buffer = buffer.as_ptr();
+            ffi::wxBufferedDC_Init1(self.as_ptr(), dc, buffer, style)
+        }
+    }
+    fn un_mask(&self) {
+        unsafe { ffi::wxBufferedDC_UnMask(self.as_ptr()) }
+    }
+    fn set_style(&self, style: c_int) {
+        unsafe { ffi::wxBufferedDC_SetStyle(self.as_ptr(), style) }
+    }
+    fn get_style(&self) -> c_int {
+        unsafe { ffi::wxBufferedDC_GetStyle(self.as_ptr()) }
+    }
+}
+
+// wxBufferedPaintDC
+pub trait BufferedPaintDCMethods: BufferedDCMethods {
+    // DTOR: fn ~wxBufferedPaintDC()
+}
+
 // wxBusyCursor
 pub trait BusyCursorMethods: WxRustMethods {
     // DTOR: fn ~wxBusyCursor()

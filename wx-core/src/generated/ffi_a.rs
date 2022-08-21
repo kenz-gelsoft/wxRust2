@@ -226,4 +226,8 @@ extern "C" {
     pub fn wxArtProvider_GetMessageBoxIconId(flags: c_int) -> *mut c_void;
     pub fn wxArtProvider_GetMessageBoxIcon(flags: c_int) -> *mut c_void;
 
+    // wxAutoBufferedPaintDC
+    pub fn wxAutoBufferedPaintDC_CLASSINFO() -> *mut c_void;
+    pub fn wxAutoBufferedPaintDC_new(window: *mut c_void) -> *mut c_void;
+
 }

@@ -95,6 +95,28 @@ void wxGBSpan_SetRowspan(wxGBSpan * self, int rowspan) {
     return self->SetRowspan(rowspan);
 }
 
+// CLASS: wxGCDC
+wxClassInfo *wxGCDC_CLASSINFO() {
+    return wxCLASSINFO(wxGCDC);
+}
+wxGCDC *wxGCDC_new(const wxWindowDC * window_dc) {
+    return new wxGCDC(*window_dc);
+}
+wxGCDC *wxGCDC_new1(const wxMemoryDC * memory_dc) {
+    return new wxGCDC(*memory_dc);
+}
+wxGCDC *wxGCDC_new3(wxGraphicsContext * context) {
+    return new wxGCDC(context);
+}
+#ifdef __WXMSW__
+wxGCDC *wxGCDC_new4(const wxEnhMetaFileDC * emf_dc) {
+    return new wxGCDC(*emf_dc);
+}
+#endif
+wxGCDC *wxGCDC_new5() {
+    return new wxGCDC();
+}
+
 // CLASS: wxGDIObject
 wxClassInfo *wxGDIObject_CLASSINFO() {
     return wxCLASSINFO(wxGDIObject);

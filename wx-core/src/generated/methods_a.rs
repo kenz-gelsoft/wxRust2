@@ -549,3 +549,6 @@ pub trait ArtProviderMethods: ObjectMethods {
         unsafe { Icon::from_ptr(ffi::wxArtProvider_GetMessageBoxIcon(flags)) }
     }
 }
+
+// wxAutoBufferedPaintDC
+pub trait AutoBufferedPaintDCMethods: BufferedPaintDCMethods {}

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <wx/dcgraph.h>
 #include <wx/dirctrl.h>
 #include <wx/gauge.h>
 #include <wx/gbsizer.h>
@@ -48,6 +49,16 @@ int wxGBSpan_GetColspan(const wxGBSpan * self);
 int wxGBSpan_GetRowspan(const wxGBSpan * self);
 void wxGBSpan_SetColspan(wxGBSpan * self, int colspan);
 void wxGBSpan_SetRowspan(wxGBSpan * self, int rowspan);
+
+// CLASS: wxGCDC
+wxClassInfo *wxGCDC_CLASSINFO();
+wxGCDC *wxGCDC_new(const wxWindowDC * window_dc);
+wxGCDC *wxGCDC_new1(const wxMemoryDC * memory_dc);
+wxGCDC *wxGCDC_new3(wxGraphicsContext * context);
+#ifdef __WXMSW__
+wxGCDC *wxGCDC_new4(const wxEnhMetaFileDC * emf_dc);
+#endif
+wxGCDC *wxGCDC_new5();
 
 // CLASS: wxGDIObject
 wxClassInfo *wxGDIObject_CLASSINFO();

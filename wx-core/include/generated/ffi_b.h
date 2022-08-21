@@ -12,6 +12,7 @@
 #include <wx/busyinfo.h>
 #include <wx/button.h>
 #include <wx/dataobj.h>
+#include <wx/dcbuffer.h>
 #include <wx/sizer.h>
 #include <wx/tglbtn.h>
 #include <wx/utils.h>
@@ -245,6 +246,22 @@ void wxBrush_SetStipple(wxBrush * self, const wxBitmap * bitmap);
 
 // CLASS: wxBrushList
 void wxBrushList_delete(wxBrushList *self);
+
+// CLASS: wxBufferedDC
+wxClassInfo *wxBufferedDC_CLASSINFO();
+wxBufferedDC *wxBufferedDC_new();
+wxBufferedDC *wxBufferedDC_new1(wxDC * dc, const wxSize * area, int style);
+wxBufferedDC *wxBufferedDC_new2(wxDC * dc, wxBitmap * buffer, int style);
+void wxBufferedDC_Init(wxBufferedDC * self, wxDC * dc, const wxSize * area, int style);
+void wxBufferedDC_Init1(wxBufferedDC * self, wxDC * dc, wxBitmap * buffer, int style);
+void wxBufferedDC_UnMask(wxBufferedDC * self);
+void wxBufferedDC_SetStyle(wxBufferedDC * self, int style);
+int wxBufferedDC_GetStyle(const wxBufferedDC * self);
+
+// CLASS: wxBufferedPaintDC
+wxClassInfo *wxBufferedPaintDC_CLASSINFO();
+wxBufferedPaintDC *wxBufferedPaintDC_new(wxWindow * window, wxBitmap * buffer, int style);
+wxBufferedPaintDC *wxBufferedPaintDC_new1(wxWindow * window, int style);
 
 // CLASS: wxBusyCursor
 void wxBusyCursor_delete(wxBusyCursor *self);

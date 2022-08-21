@@ -332,3 +332,65 @@ impl<const OWNED: bool> Drop for ArtProviderIsOwned<OWNED> {
         }
     }
 }
+
+// wxAutoBufferedPaintDC
+wx_class! { AutoBufferedPaintDC =
+    AutoBufferedPaintDCIsOwned<true>(wxAutoBufferedPaintDC) impl
+        AutoBufferedPaintDCMethods,
+        BufferedPaintDCMethods,
+        BufferedDCMethods,
+        MemoryDCMethods,
+        DCMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> AutoBufferedPaintDCIsOwned<OWNED> {
+    pub fn new<W: WindowMethods>(window: Option<&W>) -> AutoBufferedPaintDCIsOwned<OWNED> {
+        unsafe {
+            let window = match window {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            AutoBufferedPaintDCIsOwned(ffi::wxAutoBufferedPaintDC_new(window))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<AutoBufferedPaintDCIsOwned<OWNED>> for BufferedPaintDCIsOwned<OWNED> {
+    fn from(o: AutoBufferedPaintDCIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<AutoBufferedPaintDCIsOwned<OWNED>> for BufferedDCIsOwned<OWNED> {
+    fn from(o: AutoBufferedPaintDCIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<AutoBufferedPaintDCIsOwned<OWNED>> for MemoryDCIsOwned<OWNED> {
+    fn from(o: AutoBufferedPaintDCIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<AutoBufferedPaintDCIsOwned<OWNED>> for DCIsOwned<OWNED> {
+    fn from(o: AutoBufferedPaintDCIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<AutoBufferedPaintDCIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: AutoBufferedPaintDCIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for AutoBufferedPaintDCIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxAutoBufferedPaintDC_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for AutoBufferedPaintDCIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}

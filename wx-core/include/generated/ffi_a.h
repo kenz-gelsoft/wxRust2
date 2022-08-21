@@ -7,6 +7,7 @@
 #include <wx/animate.h>
 #include <wx/anybutton.h>
 #include <wx/artprov.h>
+#include <wx/dcbuffer.h>
 #include <wx/event.h>
 
 extern "C" {
@@ -150,6 +151,10 @@ void wxArtProvider_PushBack(wxArtProvider * provider);
 bool wxArtProvider_Remove(wxArtProvider * provider);
 wxArtID *wxArtProvider_GetMessageBoxIconId(int flags);
 wxIcon *wxArtProvider_GetMessageBoxIcon(int flags);
+
+// CLASS: wxAutoBufferedPaintDC
+wxClassInfo *wxAutoBufferedPaintDC_CLASSINFO();
+wxAutoBufferedPaintDC *wxAutoBufferedPaintDC_new(wxWindow * window);
 
 } // extern "C"
 

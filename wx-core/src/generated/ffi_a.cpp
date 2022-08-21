@@ -374,5 +374,13 @@ wxIcon *wxArtProvider_GetMessageBoxIcon(int flags) {
     return new wxIcon(wxArtProvider::GetMessageBoxIcon(flags));
 }
 
+// CLASS: wxAutoBufferedPaintDC
+wxClassInfo *wxAutoBufferedPaintDC_CLASSINFO() {
+    return wxCLASSINFO(wxAutoBufferedPaintDC);
+}
+wxAutoBufferedPaintDC *wxAutoBufferedPaintDC_new(wxWindow * window) {
+    return new wxAutoBufferedPaintDC(window);
+}
+
 } // extern "C"
 

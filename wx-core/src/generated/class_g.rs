@@ -164,6 +164,71 @@ impl<const OWNED: bool> Drop for GBSpanIsOwned<OWNED> {
     }
 }
 
+// wxGCDC
+wx_class! { GCDC =
+    GCDCIsOwned<true>(wxGCDC) impl
+        GCDCMethods,
+        DCMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> GCDCIsOwned<OWNED> {
+    pub fn new_with_windowdc<W: WindowDCMethods>(window_dc: &W) -> GCDCIsOwned<OWNED> {
+        unsafe {
+            let window_dc = window_dc.as_ptr();
+            GCDCIsOwned(ffi::wxGCDC_new(window_dc))
+        }
+    }
+    pub fn new_with_memorydc<M: MemoryDCMethods>(memory_dc: &M) -> GCDCIsOwned<OWNED> {
+        unsafe {
+            let memory_dc = memory_dc.as_ptr();
+            GCDCIsOwned(ffi::wxGCDC_new1(memory_dc))
+        }
+    }
+    // BLOCKED: fn wxGCDC2()
+    pub fn new_with_graphicscontext<G: GraphicsContextMethods>(
+        context: Option<&G>,
+    ) -> GCDCIsOwned<OWNED> {
+        unsafe {
+            let context = match context {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            GCDCIsOwned(ffi::wxGCDC_new3(context))
+        }
+    }
+    pub fn new_with_enhmetafiledc(emf_dc: *const c_void) -> GCDCIsOwned<OWNED> {
+        unsafe { GCDCIsOwned(ffi::wxGCDC_new4(emf_dc)) }
+    }
+    pub fn new() -> GCDCIsOwned<OWNED> {
+        unsafe { GCDCIsOwned(ffi::wxGCDC_new5()) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<GCDCIsOwned<OWNED>> for DCIsOwned<OWNED> {
+    fn from(o: GCDCIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<GCDCIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: GCDCIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for GCDCIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxGCDC_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for GCDCIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
 // wxGDIObject
 wx_class! { GDIObject =
     GDIObjectIsOwned<true>(wxGDIObject) impl
