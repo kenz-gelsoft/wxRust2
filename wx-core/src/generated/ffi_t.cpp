@@ -37,9 +37,11 @@ bool wxTaskBarIcon_PopupMenu(wxTaskBarIcon * self, wxMenu * menu) {
 bool wxTaskBarIcon_RemoveIcon(wxTaskBarIcon * self) {
     return self->RemoveIcon();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxTaskBarIcon_SetIcon(wxTaskBarIcon * self, const wxBitmapBundle * icon, const wxString * tooltip) {
     return self->SetIcon(*icon, *tooltip);
 }
+#endif
 bool wxTaskBarIcon_IsAvailable() {
     return wxTaskBarIcon::IsAvailable();
 }
@@ -630,6 +632,7 @@ wxTextValidator *wxTextValidator_new(const wxTextValidator * validator) {
 wxTextValidator *wxTextValidator_new1(long style, wxString * val_ptr) {
     return new wxTextValidator(style, val_ptr);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxTextValidator_GetCharExcludes(const wxTextValidator * self) {
     return new wxString(self->GetCharExcludes());
 }
@@ -642,6 +645,7 @@ wxArrayString *wxTextValidator_GetExcludes(const wxTextValidator * self) {
 wxArrayString *wxTextValidator_GetIncludes(const wxTextValidator * self) {
     return new wxArrayString(self->GetIncludes());
 }
+#endif
 long wxTextValidator_GetStyle(const wxTextValidator * self) {
     return self->GetStyle();
 }
@@ -660,6 +664,7 @@ void wxTextValidator_SetIncludes(wxTextValidator * self, const wxArrayString * s
 void wxTextValidator_SetCharIncludes(wxTextValidator * self, const wxString * chars) {
     return self->SetCharIncludes(*chars);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxTextValidator_AddExclude(wxTextValidator * self, const wxString * exclude) {
     return self->AddExclude(*exclude);
 }
@@ -672,12 +677,15 @@ void wxTextValidator_AddCharExcludes(wxTextValidator * self, const wxString * ch
 void wxTextValidator_AddCharIncludes(wxTextValidator * self, const wxString * chars) {
     return self->AddCharIncludes(*chars);
 }
+#endif
 void wxTextValidator_SetStyle(wxTextValidator * self, long style) {
     return self->SetStyle(style);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxTextValidator_IsValid(const wxTextValidator * self, const wxString * val) {
     return new wxString(self->IsValid(*val));
 }
+#endif
 
 // CLASS: wxThreadEvent
 wxClassInfo *wxThreadEvent_CLASSINFO() {
@@ -993,12 +1001,14 @@ bool wxToolbook_Create(wxToolbook * self, wxWindow * parent, wxWindowID id, cons
 wxToolBarBase * wxToolbook_GetToolBar(const wxToolbook * self) {
     return self->GetToolBar();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxToolbook_EnablePage(wxToolbook * self, size_t page, bool enable) {
     return self->EnablePage(page, enable);
 }
 bool wxToolbook_EnablePage1(wxToolbook * self, wxWindow * page, bool enable) {
     return self->EnablePage(page, enable);
 }
+#endif
 
 // CLASS: wxTopLevelWindow
 wxClassInfo *wxTopLevelWindow_CLASSINFO() {

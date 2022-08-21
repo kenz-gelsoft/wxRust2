@@ -1772,6 +1772,10 @@ wx31 = [
     # Additional args in wx3.1
     'wxSVGFileDC',
 ]
+[types.wxTaskBarIcon]
+wx31 = [
+    'SetIcon',
+]
 [types.wxTextAttr]
 blocklist = [
     'operator=',
@@ -1814,6 +1818,20 @@ wx31 = [
 wx31 = [
     'ForceUpper',
 ]
+[types.wxTextValidator]
+wx31 = [
+    'AddCharExcludes',
+    'AddCharIncludes',
+    'AddExclude',
+    'AddInclude',
+    'GetCharExcludes',
+    'GetCharIncludes',
+    # const-ness changed
+    'GetExcludes',
+    'GetIncludes',
+    # access level changed
+    'IsValid',
+]
 [types.wxThreadEvent]
 blocklist = [
     # has template parameter
@@ -1828,6 +1846,11 @@ blocklist = [
 blocklist = [
     # const getter
     'GetToolByPos',
+]
+[types.wxToolbook]
+wx31 = [
+    'EnablePage',
+    'EnablePage1',
 ]
 [types.wxTopLevelWindow]
 windows = [

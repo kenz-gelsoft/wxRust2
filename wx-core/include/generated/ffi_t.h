@@ -40,7 +40,9 @@ bool wxTaskBarIcon_IsIconInstalled(const wxTaskBarIcon * self);
 bool wxTaskBarIcon_IsOk(const wxTaskBarIcon * self);
 bool wxTaskBarIcon_PopupMenu(wxTaskBarIcon * self, wxMenu * menu);
 bool wxTaskBarIcon_RemoveIcon(wxTaskBarIcon * self);
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxTaskBarIcon_SetIcon(wxTaskBarIcon * self, const wxBitmapBundle * icon, const wxString * tooltip);
+#endif
 bool wxTaskBarIcon_IsAvailable();
 
 // CLASS: wxTaskBarIconEvent
@@ -257,22 +259,28 @@ void wxTextEntryDialog_ForceUpper(wxTextEntryDialog * self);
 wxClassInfo *wxTextValidator_CLASSINFO();
 wxTextValidator *wxTextValidator_new(const wxTextValidator * validator);
 wxTextValidator *wxTextValidator_new1(long style, wxString * val_ptr);
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxTextValidator_GetCharExcludes(const wxTextValidator * self);
 wxString *wxTextValidator_GetCharIncludes(const wxTextValidator * self);
 wxArrayString *wxTextValidator_GetExcludes(const wxTextValidator * self);
 wxArrayString *wxTextValidator_GetIncludes(const wxTextValidator * self);
+#endif
 long wxTextValidator_GetStyle(const wxTextValidator * self);
 void wxTextValidator_OnChar(wxTextValidator * self, wxKeyEvent * event);
 void wxTextValidator_SetExcludes(wxTextValidator * self, const wxArrayString * string_list);
 void wxTextValidator_SetCharExcludes(wxTextValidator * self, const wxString * chars);
 void wxTextValidator_SetIncludes(wxTextValidator * self, const wxArrayString * string_list);
 void wxTextValidator_SetCharIncludes(wxTextValidator * self, const wxString * chars);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxTextValidator_AddExclude(wxTextValidator * self, const wxString * exclude);
 void wxTextValidator_AddInclude(wxTextValidator * self, const wxString * include);
 void wxTextValidator_AddCharExcludes(wxTextValidator * self, const wxString * chars);
 void wxTextValidator_AddCharIncludes(wxTextValidator * self, const wxString * chars);
+#endif
 void wxTextValidator_SetStyle(wxTextValidator * self, long style);
+#if wxCHECK_VERSION(3, 1, 0)
 wxString *wxTextValidator_IsValid(const wxTextValidator * self, const wxString * val);
+#endif
 
 // CLASS: wxThreadEvent
 wxClassInfo *wxThreadEvent_CLASSINFO();
@@ -390,8 +398,10 @@ wxToolbook *wxToolbook_new();
 wxToolbook *wxToolbook_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxToolbook_Create(wxToolbook * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 wxToolBarBase * wxToolbook_GetToolBar(const wxToolbook * self);
+#if wxCHECK_VERSION(3, 1, 0)
 bool wxToolbook_EnablePage(wxToolbook * self, size_t page, bool enable);
 bool wxToolbook_EnablePage1(wxToolbook * self, wxWindow * page, bool enable);
+#endif
 
 // CLASS: wxTopLevelWindow
 wxClassInfo *wxTopLevelWindow_CLASSINFO();
