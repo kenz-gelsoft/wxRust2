@@ -1,17 +1,122 @@
 #pragma once
 
+#include <wx/dcscreen.h>
+#include <wx/dcsvg.h>
+#include <wx/event.h>
 #include <wx/gdicmn.h>
 #include <wx/headercol.h>
+#include <wx/laywin.h>
+#include <wx/preferences.h>
+#include <wx/sashwin.h>
+#include <wx/scrolbar.h>
+#include <wx/settings.h>
+#include <wx/simplebook.h>
 #include <wx/sizer.h>
 #include <wx/slider.h>
+#include <wx/sound.h>
 #include <wx/spinbutt.h>
 #include <wx/spinctrl.h>
+#include <wx/splash.h>
+#include <wx/splitter.h>
 #include <wx/srchctrl.h>
 #include <wx/statbmp.h>
 #include <wx/statbox.h>
+#include <wx/statline.h>
 #include <wx/stattext.h>
+#include <wx/statusbr.h>
 
 extern "C" {
+
+// CLASS: wxSVGBitmapEmbedHandler
+void wxSVGBitmapEmbedHandler_delete(wxSVGBitmapEmbedHandler *self);
+
+// CLASS: wxSVGBitmapFileHandler
+void wxSVGBitmapFileHandler_delete(wxSVGBitmapFileHandler *self);
+wxSVGBitmapFileHandler *wxSVGBitmapFileHandler_new(const wxFileName * path);
+
+// CLASS: wxSVGBitmapHandler
+void wxSVGBitmapHandler_delete(wxSVGBitmapHandler *self);
+bool wxSVGBitmapHandler_ProcessBitmap(const wxSVGBitmapHandler * self, const wxBitmap * bitmap, wxCoord x, wxCoord y, wxOutputStream * stream);
+
+// CLASS: wxSVGFileDC
+wxClassInfo *wxSVGFileDC_CLASSINFO();
+wxSVGFileDC *wxSVGFileDC_new(const wxString * filename, int width, int height, double dpi, const wxString * title);
+void wxSVGFileDC_Clear(wxSVGFileDC * self);
+void wxSVGFileDC_SetBitmapHandler(wxSVGFileDC * self, wxSVGBitmapHandler * handler);
+void wxSVGFileDC_DestroyClippingRegion(wxSVGFileDC * self);
+void wxSVGFileDC_CrossHair(wxSVGFileDC * self, wxCoord x, wxCoord y);
+bool wxSVGFileDC_GetPixel(const wxSVGFileDC * self, wxCoord x, wxCoord y, wxColour * colour);
+void wxSVGFileDC_SetPalette(wxSVGFileDC * self, const wxPalette * palette);
+int wxSVGFileDC_GetDepth(const wxSVGFileDC * self);
+bool wxSVGFileDC_StartDoc(wxSVGFileDC * self, const wxString * message);
+void wxSVGFileDC_EndDoc(wxSVGFileDC * self);
+void wxSVGFileDC_StartPage(wxSVGFileDC * self);
+void wxSVGFileDC_EndPage(wxSVGFileDC * self);
+
+// CLASS: wxSashEvent
+wxClassInfo *wxSashEvent_CLASSINFO();
+wxRect *wxSashEvent_GetDragRect(const wxSashEvent * self);
+void wxSashEvent_SetDragRect(wxSashEvent * self, const wxRect * rect);
+
+// CLASS: wxSashLayoutWindow
+wxClassInfo *wxSashLayoutWindow_CLASSINFO();
+wxSashLayoutWindow *wxSashLayoutWindow_new();
+wxSashLayoutWindow *wxSashLayoutWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+bool wxSashLayoutWindow_Create(wxSashLayoutWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+void wxSashLayoutWindow_OnCalculateLayout(wxSashLayoutWindow * self, wxCalculateLayoutEvent * event);
+void wxSashLayoutWindow_OnQueryLayoutInfo(wxSashLayoutWindow * self, wxQueryLayoutInfoEvent * event);
+void wxSashLayoutWindow_SetDefaultSize(wxSashLayoutWindow * self, const wxSize * size);
+
+// CLASS: wxSashWindow
+wxClassInfo *wxSashWindow_CLASSINFO();
+wxSashWindow *wxSashWindow_new();
+wxSashWindow *wxSashWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+int wxSashWindow_GetMaximumSizeX(const wxSashWindow * self);
+int wxSashWindow_GetMaximumSizeY(const wxSashWindow * self);
+int wxSashWindow_GetMinimumSizeX(const wxSashWindow * self);
+int wxSashWindow_GetMinimumSizeY(const wxSashWindow * self);
+void wxSashWindow_SetMaximumSizeX(wxSashWindow * self, int min);
+void wxSashWindow_SetMaximumSizeY(wxSashWindow * self, int min);
+void wxSashWindow_SetMinimumSizeX(wxSashWindow * self, int min);
+void wxSashWindow_SetMinimumSizeY(wxSashWindow * self, int min);
+void wxSashWindow_SetDefaultBorderSize(wxSashWindow * self, int width);
+int wxSashWindow_GetDefaultBorderSize(const wxSashWindow * self);
+void wxSashWindow_SetExtraBorderSize(wxSashWindow * self, int width);
+int wxSashWindow_GetExtraBorderSize(const wxSashWindow * self);
+void wxSashWindow_SizeWindows(wxSashWindow * self);
+
+// CLASS: wxScreenDC
+wxClassInfo *wxScreenDC_CLASSINFO();
+wxScreenDC *wxScreenDC_new();
+bool wxScreenDC_EndDrawingOnTop();
+bool wxScreenDC_StartDrawingOnTop(wxWindow * window);
+bool wxScreenDC_StartDrawingOnTop1(wxRect * rect);
+
+// CLASS: wxScrollBar
+wxClassInfo *wxScrollBar_CLASSINFO();
+wxScrollBar *wxScrollBar_new();
+wxScrollBar *wxScrollBar_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+bool wxScrollBar_Create(wxScrollBar * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
+int wxScrollBar_GetPageSize(const wxScrollBar * self);
+int wxScrollBar_GetRange(const wxScrollBar * self);
+int wxScrollBar_GetThumbPosition(const wxScrollBar * self);
+int wxScrollBar_GetThumbSize(const wxScrollBar * self);
+void wxScrollBar_SetThumbPosition(wxScrollBar * self, int view_start);
+bool wxScrollBar_IsVertical(const wxScrollBar * self);
+
+// CLASS: wxScrollEvent
+wxClassInfo *wxScrollEvent_CLASSINFO();
+int wxScrollEvent_GetOrientation(const wxScrollEvent * self);
+int wxScrollEvent_GetPosition(const wxScrollEvent * self);
+void wxScrollEvent_SetOrientation(wxScrollEvent * self, int orient);
+void wxScrollEvent_SetPosition(wxScrollEvent * self, int pos);
+
+// CLASS: wxScrollWinEvent
+wxClassInfo *wxScrollWinEvent_CLASSINFO();
+int wxScrollWinEvent_GetOrientation(const wxScrollWinEvent * self);
+int wxScrollWinEvent_GetPosition(const wxScrollWinEvent * self);
+void wxScrollWinEvent_SetOrientation(wxScrollWinEvent * self, int orient);
+void wxScrollWinEvent_SetPosition(wxScrollWinEvent * self, int pos);
 
 // CLASS: wxSearchCtrl
 wxClassInfo *wxSearchCtrl_CLASSINFO();
@@ -28,6 +133,15 @@ void wxSearchCtrl_SetDescriptiveText(wxSearchCtrl * self, const wxString * text)
 wxString *wxSearchCtrl_GetDescriptiveText(const wxSearchCtrl * self);
 // Mix-in(s) to wxSearchCtrl
 wxTextEntryBase *wxSearchCtrl_AsTextEntry(wxSearchCtrl* obj);
+
+// CLASS: wxSetCursorEvent
+wxClassInfo *wxSetCursorEvent_CLASSINFO();
+wxSetCursorEvent *wxSetCursorEvent_new(wxCoord x, wxCoord y);
+wxCursor *wxSetCursorEvent_GetCursor(const wxSetCursorEvent * self);
+wxCoord wxSetCursorEvent_GetX(const wxSetCursorEvent * self);
+wxCoord wxSetCursorEvent_GetY(const wxSetCursorEvent * self);
+bool wxSetCursorEvent_HasCursor(const wxSetCursorEvent * self);
+void wxSetCursorEvent_SetCursor(wxSetCursorEvent * self, const wxCursor * cursor);
 
 // CLASS: wxSettableHeaderColumn
 void wxSettableHeaderColumn_delete(wxSettableHeaderColumn *self);
@@ -48,6 +162,19 @@ void wxSettableHeaderColumn_SetHidden(wxSettableHeaderColumn * self, bool hidden
 void wxSettableHeaderColumn_UnsetAsSortKey(wxSettableHeaderColumn * self);
 void wxSettableHeaderColumn_SetSortOrder(wxSettableHeaderColumn * self, bool ascending);
 void wxSettableHeaderColumn_ToggleSortOrder(wxSettableHeaderColumn * self);
+
+// CLASS: wxShowEvent
+wxClassInfo *wxShowEvent_CLASSINFO();
+wxShowEvent *wxShowEvent_new(int winid, bool show);
+void wxShowEvent_SetShow(wxShowEvent * self, bool show);
+bool wxShowEvent_IsShown(const wxShowEvent * self);
+
+// CLASS: wxSimplebook
+wxClassInfo *wxSimplebook_CLASSINFO();
+wxSimplebook *wxSimplebook_new();
+wxSimplebook *wxSimplebook_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+bool wxSimplebook_Create(wxSimplebook * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+bool wxSimplebook_ShowNewPage(wxSimplebook * self, wxWindow * page);
 
 // CLASS: wxSize
 void wxSize_delete(wxSize *self);
@@ -71,6 +198,12 @@ void wxSize_Set(wxSize * self, int width, int height);
 void wxSize_SetDefaults(wxSize * self, const wxSize * size_default);
 void wxSize_SetHeight(wxSize * self, int height);
 void wxSize_SetWidth(wxSize * self, int width);
+
+// CLASS: wxSizeEvent
+wxClassInfo *wxSizeEvent_CLASSINFO();
+wxSizeEvent *wxSizeEvent_new(const wxSize * sz, int id);
+wxSize *wxSizeEvent_GetSize(const wxSizeEvent * self);
+wxRect *wxSizeEvent_GetRect(const wxSizeEvent * self);
 
 // CLASS: wxSizer
 wxClassInfo *wxSizer_CLASSINFO();
@@ -254,6 +387,17 @@ void wxSlider_SetTick(wxSlider * self, int tick_pos);
 void wxSlider_SetTickFreq(wxSlider * self, int freq);
 void wxSlider_SetValue(wxSlider * self, int value);
 
+// CLASS: wxSound
+wxClassInfo *wxSound_CLASSINFO();
+wxSound *wxSound_new();
+wxSound *wxSound_new1(const wxString * file_name, bool is_resource);
+wxSound *wxSound_new2(size_t size, const void * data);
+bool wxSound_Create(wxSound * self, const wxString * file_name, bool is_resource);
+bool wxSound_Create1(wxSound * self, size_t size, const void * data);
+bool wxSound_IsOk(const wxSound * self);
+bool wxSound_IsPlaying();
+void wxSound_Stop();
+
 // CLASS: wxSpinButton
 wxClassInfo *wxSpinButton_CLASSINFO();
 wxSpinButton *wxSpinButton_new();
@@ -310,6 +454,64 @@ void wxSpinCtrlDouble_SetRange(wxSpinCtrlDouble * self, double min_val, double m
 void wxSpinCtrlDouble_SetValue(wxSpinCtrlDouble * self, const wxString * text);
 void wxSpinCtrlDouble_SetValue1(wxSpinCtrlDouble * self, double value);
 
+// CLASS: wxSpinDoubleEvent
+wxClassInfo *wxSpinDoubleEvent_CLASSINFO();
+wxSpinDoubleEvent *wxSpinDoubleEvent_new1(const wxSpinDoubleEvent * event);
+double wxSpinDoubleEvent_GetValue(const wxSpinDoubleEvent * self);
+void wxSpinDoubleEvent_SetValue(wxSpinDoubleEvent * self, double value);
+
+// CLASS: wxSpinEvent
+wxClassInfo *wxSpinEvent_CLASSINFO();
+int wxSpinEvent_GetPosition(const wxSpinEvent * self);
+void wxSpinEvent_SetPosition(wxSpinEvent * self, int pos);
+
+// CLASS: wxSplashScreen
+wxClassInfo *wxSplashScreen_CLASSINFO();
+wxSplashScreen *wxSplashScreen_new(const wxBitmap * bitmap, long splash_style, int milliseconds, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style);
+long wxSplashScreen_GetSplashStyle(const wxSplashScreen * self);
+wxSplashScreenWindow * wxSplashScreen_GetSplashWindow(const wxSplashScreen * self);
+int wxSplashScreen_GetTimeout(const wxSplashScreen * self);
+void wxSplashScreen_OnCloseWindow(wxSplashScreen * self, wxCloseEvent * event);
+
+// CLASS: wxSplitterEvent
+wxClassInfo *wxSplitterEvent_CLASSINFO();
+int wxSplitterEvent_GetSashPosition(const wxSplitterEvent * self);
+wxWindow * wxSplitterEvent_GetWindowBeingRemoved(const wxSplitterEvent * self);
+int wxSplitterEvent_GetX(const wxSplitterEvent * self);
+int wxSplitterEvent_GetY(const wxSplitterEvent * self);
+void wxSplitterEvent_SetSashPosition(wxSplitterEvent * self, int pos);
+void wxSplitterEvent_SetSize(wxSplitterEvent * self, int old_size, int new_size);
+int wxSplitterEvent_GetOldSize(const wxSplitterEvent * self);
+
+// CLASS: wxSplitterWindow
+wxClassInfo *wxSplitterWindow_CLASSINFO();
+wxSplitterWindow *wxSplitterWindow_new();
+wxSplitterWindow *wxSplitterWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+bool wxSplitterWindow_Create(wxSplitterWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * point, const wxSize * size, long style, const wxString * name);
+int wxSplitterWindow_GetMinimumPaneSize(const wxSplitterWindow * self);
+double wxSplitterWindow_GetSashGravity(const wxSplitterWindow * self);
+int wxSplitterWindow_GetSashPosition(const wxSplitterWindow * self);
+int wxSplitterWindow_GetSashSize(const wxSplitterWindow * self);
+int wxSplitterWindow_GetDefaultSashSize(const wxSplitterWindow * self);
+wxWindow * wxSplitterWindow_GetWindow1(const wxSplitterWindow * self);
+wxWindow * wxSplitterWindow_GetWindow2(const wxSplitterWindow * self);
+void wxSplitterWindow_Initialize(wxSplitterWindow * self, wxWindow * window);
+bool wxSplitterWindow_IsSashInvisible(const wxSplitterWindow * self);
+bool wxSplitterWindow_IsSplit(const wxSplitterWindow * self);
+void wxSplitterWindow_OnDoubleClickSash(wxSplitterWindow * self, int x, int y);
+bool wxSplitterWindow_OnSashPositionChange(wxSplitterWindow * self, int new_sash_position);
+void wxSplitterWindow_OnUnsplit(wxSplitterWindow * self, wxWindow * removed);
+bool wxSplitterWindow_ReplaceWindow(wxSplitterWindow * self, wxWindow * win_old, wxWindow * win_new);
+void wxSplitterWindow_SetMinimumPaneSize(wxSplitterWindow * self, int pane_size);
+void wxSplitterWindow_SetSashGravity(wxSplitterWindow * self, double gravity);
+void wxSplitterWindow_SetSashPosition(wxSplitterWindow * self, int position, bool redraw);
+void wxSplitterWindow_SetSplitMode(wxSplitterWindow * self, int mode);
+void wxSplitterWindow_SetSashInvisible(wxSplitterWindow * self, bool invisible);
+bool wxSplitterWindow_SplitHorizontally(wxSplitterWindow * self, wxWindow * window1, wxWindow * window2, int sash_position);
+bool wxSplitterWindow_SplitVertically(wxSplitterWindow * self, wxWindow * window1, wxWindow * window2, int sash_position);
+bool wxSplitterWindow_Unsplit(wxSplitterWindow * self, wxWindow * to_remove);
+void wxSplitterWindow_UpdateSize(wxSplitterWindow * self);
+
 // CLASS: wxStaticBitmap
 wxClassInfo *wxStaticBitmap_CLASSINFO();
 wxStaticBitmap *wxStaticBitmap_new();
@@ -332,6 +534,14 @@ wxStaticBoxSizer *wxStaticBoxSizer_new(wxStaticBox * box_, int orient);
 wxStaticBoxSizer *wxStaticBoxSizer_new1(int orient, wxWindow * parent, const wxString * label);
 wxStaticBox * wxStaticBoxSizer_GetStaticBox(const wxStaticBoxSizer * self);
 
+// CLASS: wxStaticLine
+wxClassInfo *wxStaticLine_CLASSINFO();
+wxStaticLine *wxStaticLine_new();
+wxStaticLine *wxStaticLine_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+bool wxStaticLine_Create(wxStaticLine * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
+bool wxStaticLine_IsVertical(const wxStaticLine * self);
+int wxStaticLine_GetDefaultSize();
+
 // CLASS: wxStaticText
 wxClassInfo *wxStaticText_CLASSINFO();
 wxStaticText *wxStaticText_new();
@@ -339,6 +549,53 @@ wxStaticText *wxStaticText_new1(wxWindow * parent, wxWindowID id, const wxString
 bool wxStaticText_Create(wxStaticText * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxStaticText_IsEllipsized(const wxStaticText * self);
 void wxStaticText_Wrap(wxStaticText * self, int width);
+
+// CLASS: wxStatusBar
+wxClassInfo *wxStatusBar_CLASSINFO();
+wxStatusBar *wxStatusBar_new();
+wxStatusBar *wxStatusBar_new1(wxWindow * parent, wxWindowID id, long style, const wxString * name);
+bool wxStatusBar_Create(wxStatusBar * self, wxWindow * parent, wxWindowID id, long style, const wxString * name);
+bool wxStatusBar_GetFieldRect(const wxStatusBar * self, int i, wxRect * rect);
+int wxStatusBar_GetFieldsCount(const wxStatusBar * self);
+wxStatusBarPane *wxStatusBar_GetField(const wxStatusBar * self, int n);
+wxSize *wxStatusBar_GetBorders(const wxStatusBar * self);
+wxString *wxStatusBar_GetStatusText(const wxStatusBar * self, int i);
+int wxStatusBar_GetStatusWidth(const wxStatusBar * self, int n);
+int wxStatusBar_GetStatusStyle(const wxStatusBar * self, int n);
+void wxStatusBar_PopStatusText(wxStatusBar * self, int field);
+void wxStatusBar_PushStatusText(wxStatusBar * self, const wxString * string, int field);
+void wxStatusBar_SetFieldsCount(wxStatusBar * self, int number, const int * widths);
+void wxStatusBar_SetMinHeight(wxStatusBar * self, int height);
+void wxStatusBar_SetStatusStyles(wxStatusBar * self, int n, const int * styles);
+void wxStatusBar_SetStatusText(wxStatusBar * self, const wxString * text, int i);
+void wxStatusBar_SetStatusWidths(wxStatusBar * self, int n, const int * widths_field);
+
+// CLASS: wxStatusBarPane
+void wxStatusBarPane_delete(wxStatusBarPane *self);
+wxStatusBarPane *wxStatusBarPane_new(int style, int width);
+int wxStatusBarPane_GetWidth(const wxStatusBarPane * self);
+int wxStatusBarPane_GetStyle(const wxStatusBarPane * self);
+wxString *wxStatusBarPane_GetText(const wxStatusBarPane * self);
+
+// CLASS: wxStdDialogButtonSizer
+wxClassInfo *wxStdDialogButtonSizer_CLASSINFO();
+wxStdDialogButtonSizer *wxStdDialogButtonSizer_new();
+void wxStdDialogButtonSizer_AddButton(wxStdDialogButtonSizer * self, wxButton * button);
+void wxStdDialogButtonSizer_Realize(wxStdDialogButtonSizer * self);
+void wxStdDialogButtonSizer_SetAffirmativeButton(wxStdDialogButtonSizer * self, wxButton * button);
+void wxStdDialogButtonSizer_SetCancelButton(wxStdDialogButtonSizer * self, wxButton * button);
+void wxStdDialogButtonSizer_SetNegativeButton(wxStdDialogButtonSizer * self, wxButton * button);
+
+// CLASS: wxStockPreferencesPage
+void wxStockPreferencesPage_delete(wxStockPreferencesPage *self);
+
+// CLASS: wxSysColourChangedEvent
+wxClassInfo *wxSysColourChangedEvent_CLASSINFO();
+wxSysColourChangedEvent *wxSysColourChangedEvent_new();
+
+// CLASS: wxSystemSettings
+void wxSystemSettings_delete(wxSystemSettings *self);
+wxSystemSettings *wxSystemSettings_new();
 
 } // extern "C"
 

@@ -2,6 +2,575 @@
 
 use super::*;
 
+// wxSVGBitmapEmbedHandler
+wx_class! { SVGBitmapEmbedHandler =
+    SVGBitmapEmbedHandlerIsOwned<true>(wxSVGBitmapEmbedHandler) impl
+        SVGBitmapEmbedHandlerMethods,
+        SVGBitmapHandlerMethods
+}
+impl<const OWNED: bool> SVGBitmapEmbedHandlerIsOwned<OWNED> {
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<SVGBitmapEmbedHandlerIsOwned<OWNED>>
+    for SVGBitmapHandlerIsOwned<OWNED>
+{
+    fn from(o: SVGBitmapEmbedHandlerIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> Drop for SVGBitmapEmbedHandlerIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxSVGBitmapEmbedHandler_delete(self.0) }
+        }
+    }
+}
+
+// wxSVGBitmapFileHandler
+wx_class! { SVGBitmapFileHandler =
+    SVGBitmapFileHandlerIsOwned<true>(wxSVGBitmapFileHandler) impl
+        SVGBitmapFileHandlerMethods,
+        SVGBitmapHandlerMethods
+}
+impl<const OWNED: bool> SVGBitmapFileHandlerIsOwned<OWNED> {
+    pub fn new<F: FileNameMethods>(path: &F) -> SVGBitmapFileHandlerIsOwned<OWNED> {
+        unsafe {
+            let path = path.as_ptr();
+            SVGBitmapFileHandlerIsOwned(ffi::wxSVGBitmapFileHandler_new(path))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<SVGBitmapFileHandlerIsOwned<OWNED>>
+    for SVGBitmapHandlerIsOwned<OWNED>
+{
+    fn from(o: SVGBitmapFileHandlerIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> Drop for SVGBitmapFileHandlerIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxSVGBitmapFileHandler_delete(self.0) }
+        }
+    }
+}
+
+// wxSVGBitmapHandler
+wx_class! { SVGBitmapHandler =
+    SVGBitmapHandlerIsOwned<true>(wxSVGBitmapHandler) impl
+        SVGBitmapHandlerMethods
+}
+impl<const OWNED: bool> SVGBitmapHandlerIsOwned<OWNED> {
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for SVGBitmapHandlerIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxSVGBitmapHandler_delete(self.0) }
+        }
+    }
+}
+
+// wxSVGFileDC
+wx_class! { SVGFileDC =
+    SVGFileDCIsOwned<true>(wxSVGFileDC) impl
+        SVGFileDCMethods,
+        // DCMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> SVGFileDCIsOwned<OWNED> {
+    pub fn new(
+        filename: &str,
+        width: c_int,
+        height: c_int,
+        dpi: c_double,
+        title: &str,
+    ) -> SVGFileDCIsOwned<OWNED> {
+        unsafe {
+            let filename = WxString::from(filename);
+            let filename = filename.as_ptr();
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            SVGFileDCIsOwned(ffi::wxSVGFileDC_new(filename, width, height, dpi, title))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<SVGFileDCIsOwned<OWNED>> for DCIsOwned<OWNED> {
+    fn from(o: SVGFileDCIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SVGFileDCIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: SVGFileDCIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for SVGFileDCIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSVGFileDC_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for SVGFileDCIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+impl<const OWNED: bool> DCMethods for SVGFileDCIsOwned<OWNED> {
+    fn clear(&self) {
+        unsafe { ffi::wxSVGFileDC_Clear(self.as_ptr()) }
+    }
+    fn destroy_clipping_region(&self) {
+        unsafe { ffi::wxSVGFileDC_DestroyClippingRegion(self.as_ptr()) }
+    }
+    fn cross_hair_coord(&self, x: c_int, y: c_int) {
+        unsafe { ffi::wxSVGFileDC_CrossHair(self.as_ptr(), x, y) }
+    }
+    // NOT_SUPPORTED: fn FloodFill()
+    fn get_pixel<C: ColourMethods>(&self, x: c_int, y: c_int, colour: Option<&C>) -> bool {
+        unsafe {
+            let colour = match colour {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxSVGFileDC_GetPixel(self.as_ptr(), x, y, colour)
+        }
+    }
+    fn set_palette<P: PaletteMethods>(&self, palette: &P) {
+        unsafe {
+            let palette = palette.as_ptr();
+            ffi::wxSVGFileDC_SetPalette(self.as_ptr(), palette)
+        }
+    }
+    fn get_depth(&self) -> c_int {
+        unsafe { ffi::wxSVGFileDC_GetDepth(self.as_ptr()) }
+    }
+    // NOT_SUPPORTED: fn SetLogicalFunction()
+    // NOT_SUPPORTED: fn GetLogicalFunction()
+    fn start_doc(&self, message: &str) -> bool {
+        unsafe {
+            let message = WxString::from(message);
+            let message = message.as_ptr();
+            ffi::wxSVGFileDC_StartDoc(self.as_ptr(), message)
+        }
+    }
+    fn end_doc(&self) {
+        unsafe { ffi::wxSVGFileDC_EndDoc(self.as_ptr()) }
+    }
+    fn start_page(&self) {
+        unsafe { ffi::wxSVGFileDC_StartPage(self.as_ptr()) }
+    }
+    fn end_page(&self) {
+        unsafe { ffi::wxSVGFileDC_EndPage(self.as_ptr()) }
+    }
+}
+
+// wxSashEvent
+wx_class! { SashEvent =
+    SashEventIsOwned<true>(wxSashEvent) impl
+        SashEventMethods,
+        CommandEventMethods,
+        EventMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> SashEventIsOwned<OWNED> {
+    // NOT_SUPPORTED: fn wxSashEvent()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<SashEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
+    fn from(o: SashEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SashEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
+    fn from(o: SashEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SashEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: SashEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for SashEventIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSashEvent_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for SashEventIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
+// wxSashLayoutWindow
+wx_class! { SashLayoutWindow =
+    SashLayoutWindowIsOwned<true>(wxSashLayoutWindow) impl
+        SashLayoutWindowMethods,
+        SashWindowMethods,
+        // WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> SashLayoutWindowIsOwned<OWNED> {
+    pub fn new_2step() -> SashLayoutWindowIsOwned<OWNED> {
+        unsafe { SashLayoutWindowIsOwned(ffi::wxSashLayoutWindow_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> SashLayoutWindowIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            SashLayoutWindowIsOwned(ffi::wxSashLayoutWindow_new1(
+                parent, id, pos, size, style, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<SashLayoutWindowIsOwned<OWNED>> for SashWindowIsOwned<OWNED> {
+    fn from(o: SashLayoutWindowIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SashLayoutWindowIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: SashLayoutWindowIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SashLayoutWindowIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: SashLayoutWindowIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SashLayoutWindowIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: SashLayoutWindowIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for SashLayoutWindowIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSashLayoutWindow_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> WindowMethods for SashLayoutWindowIsOwned<OWNED> {
+    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxSashLayoutWindow_Create(self.as_ptr(), parent, id, pos, size, style, name)
+        }
+    }
+}
+
+// wxSashWindow
+wx_class! { SashWindow =
+    SashWindowIsOwned<true>(wxSashWindow) impl
+        SashWindowMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> SashWindowIsOwned<OWNED> {
+    pub fn new_2step() -> SashWindowIsOwned<OWNED> {
+        unsafe { SashWindowIsOwned(ffi::wxSashWindow_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> SashWindowIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            SashWindowIsOwned(ffi::wxSashWindow_new1(parent, id, pos, size, style, name))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<SashWindowIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: SashWindowIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SashWindowIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: SashWindowIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SashWindowIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: SashWindowIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for SashWindowIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSashWindow_CLASSINFO()) }
+    }
+}
+
+// wxScreenDC
+wx_class! { ScreenDC =
+    ScreenDCIsOwned<true>(wxScreenDC) impl
+        ScreenDCMethods,
+        DCMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> ScreenDCIsOwned<OWNED> {
+    pub fn new() -> ScreenDCIsOwned<OWNED> {
+        unsafe { ScreenDCIsOwned(ffi::wxScreenDC_new()) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<ScreenDCIsOwned<OWNED>> for DCIsOwned<OWNED> {
+    fn from(o: ScreenDCIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ScreenDCIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: ScreenDCIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for ScreenDCIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxScreenDC_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for ScreenDCIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
+// wxScrollBar
+wx_class! { ScrollBar =
+    ScrollBarIsOwned<true>(wxScrollBar) impl
+        ScrollBarMethods,
+        // ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> ScrollBarIsOwned<OWNED> {
+    pub fn new_2step() -> ScrollBarIsOwned<OWNED> {
+        unsafe { ScrollBarIsOwned(ffi::wxScrollBar_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> ScrollBarIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ScrollBarIsOwned(ffi::wxScrollBar_new1(
+                parent, id, pos, size, style, validator, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<ScrollBarIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: ScrollBarIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ScrollBarIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: ScrollBarIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ScrollBarIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: ScrollBarIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ScrollBarIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: ScrollBarIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for ScrollBarIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxScrollBar_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> ControlMethods for ScrollBarIsOwned<OWNED> {
+    fn create_validator<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        validator: &V,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let validator = validator.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxScrollBar_Create(self.as_ptr(), parent, id, pos, size, style, validator, name)
+        }
+    }
+}
+
+// wxScrollEvent
+wx_class! { ScrollEvent =
+    ScrollEventIsOwned<true>(wxScrollEvent) impl
+        ScrollEventMethods,
+        CommandEventMethods,
+        EventMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> ScrollEventIsOwned<OWNED> {
+    // NOT_SUPPORTED: fn wxScrollEvent()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<ScrollEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
+    fn from(o: ScrollEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ScrollEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
+    fn from(o: ScrollEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ScrollEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: ScrollEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for ScrollEventIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxScrollEvent_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for ScrollEventIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
+// wxScrollWinEvent
+wx_class! { ScrollWinEvent =
+    ScrollWinEventIsOwned<true>(wxScrollWinEvent) impl
+        ScrollWinEventMethods,
+        EventMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> ScrollWinEventIsOwned<OWNED> {
+    // NOT_SUPPORTED: fn wxScrollWinEvent()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<ScrollWinEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
+    fn from(o: ScrollWinEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ScrollWinEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: ScrollWinEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for ScrollWinEventIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxScrollWinEvent_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for ScrollWinEventIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
 // wxSearchCtrl
 wx_class! { SearchCtrl =
     SearchCtrlIsOwned<true>(wxSearchCtrl) impl
@@ -122,6 +691,44 @@ impl<const OWNED: bool> TextCtrlMethods for SearchCtrlIsOwned<OWNED> {
     }
 }
 
+// wxSetCursorEvent
+wx_class! { SetCursorEvent =
+    SetCursorEventIsOwned<true>(wxSetCursorEvent) impl
+        SetCursorEventMethods,
+        EventMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> SetCursorEventIsOwned<OWNED> {
+    pub fn new(x: c_int, y: c_int) -> SetCursorEventIsOwned<OWNED> {
+        unsafe { SetCursorEventIsOwned(ffi::wxSetCursorEvent_new(x, y)) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<SetCursorEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
+    fn from(o: SetCursorEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SetCursorEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: SetCursorEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for SetCursorEventIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSetCursorEvent_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for SetCursorEventIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
 // wxSettableHeaderColumn
 wx_class! { SettableHeaderColumn =
     SettableHeaderColumnIsOwned<true>(wxSettableHeaderColumn) impl
@@ -146,6 +753,136 @@ impl<const OWNED: bool> Drop for SettableHeaderColumnIsOwned<OWNED> {
     }
 }
 
+// wxShowEvent
+wx_class! { ShowEvent =
+    ShowEventIsOwned<true>(wxShowEvent) impl
+        ShowEventMethods,
+        EventMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> ShowEventIsOwned<OWNED> {
+    pub fn new(winid: c_int, show: bool) -> ShowEventIsOwned<OWNED> {
+        unsafe { ShowEventIsOwned(ffi::wxShowEvent_new(winid, show)) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<ShowEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
+    fn from(o: ShowEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<ShowEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: ShowEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for ShowEventIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxShowEvent_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for ShowEventIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
+// wxSimplebook
+wx_class! { Simplebook =
+    SimplebookIsOwned<true>(wxSimplebook) impl
+        SimplebookMethods,
+        BookCtrlBaseMethods,
+        ControlMethods,
+        // WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> SimplebookIsOwned<OWNED> {
+    pub fn new_2step() -> SimplebookIsOwned<OWNED> {
+        unsafe { SimplebookIsOwned(ffi::wxSimplebook_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> SimplebookIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            SimplebookIsOwned(ffi::wxSimplebook_new1(parent, id, pos, size, style, name))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<SimplebookIsOwned<OWNED>> for BookCtrlBaseIsOwned<OWNED> {
+    fn from(o: SimplebookIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SimplebookIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: SimplebookIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SimplebookIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: SimplebookIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SimplebookIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: SimplebookIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SimplebookIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: SimplebookIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for SimplebookIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSimplebook_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> WindowMethods for SimplebookIsOwned<OWNED> {
+    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxSimplebook_Create(self.as_ptr(), parent, id, pos, size, style, name)
+        }
+    }
+}
+
 // wxSize
 wx_class! { Size =
     SizeIsOwned<true>(wxSize) impl
@@ -166,6 +903,47 @@ impl<const OWNED: bool> Drop for SizeIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxSize_delete(self.0) }
+        }
+    }
+}
+
+// wxSizeEvent
+wx_class! { SizeEvent =
+    SizeEventIsOwned<true>(wxSizeEvent) impl
+        SizeEventMethods,
+        EventMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> SizeEventIsOwned<OWNED> {
+    pub fn new<S: SizeMethods>(sz: &S, id: c_int) -> SizeEventIsOwned<OWNED> {
+        unsafe {
+            let sz = sz.as_ptr();
+            SizeEventIsOwned(ffi::wxSizeEvent_new(sz, id))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<SizeEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
+    fn from(o: SizeEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SizeEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: SizeEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for SizeEventIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSizeEvent_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for SizeEventIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
         }
     }
 }
@@ -399,6 +1177,48 @@ impl<const OWNED: bool> DynamicCast for SliderIsOwned<OWNED> {
     }
 }
 
+// wxSound
+wx_class! { Sound =
+    SoundIsOwned<true>(wxSound) impl
+        SoundMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> SoundIsOwned<OWNED> {
+    pub fn new() -> SoundIsOwned<OWNED> {
+        unsafe { SoundIsOwned(ffi::wxSound_new()) }
+    }
+    pub fn new_with_str(file_name: &str, is_resource: bool) -> SoundIsOwned<OWNED> {
+        unsafe {
+            let file_name = WxString::from(file_name);
+            let file_name = file_name.as_ptr();
+            SoundIsOwned(ffi::wxSound_new1(file_name, is_resource))
+        }
+    }
+    pub fn new_with_sz(size: usize, data: *const c_void) -> SoundIsOwned<OWNED> {
+        unsafe { SoundIsOwned(ffi::wxSound_new2(size, data)) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<SoundIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: SoundIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for SoundIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSound_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for SoundIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
 // wxSpinButton
 wx_class! { SpinButton =
     SpinButtonIsOwned<true>(wxSpinButton) impl
@@ -628,6 +1448,320 @@ impl<const OWNED: bool> DynamicCast for SpinCtrlDoubleIsOwned<OWNED> {
     }
 }
 
+// wxSpinDoubleEvent
+wx_class! { SpinDoubleEvent =
+    SpinDoubleEventIsOwned<true>(wxSpinDoubleEvent) impl
+        SpinDoubleEventMethods,
+        NotifyEventMethods,
+        CommandEventMethods,
+        EventMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> SpinDoubleEventIsOwned<OWNED> {
+    // NOT_SUPPORTED: fn wxSpinDoubleEvent()
+    pub fn new<S: SpinDoubleEventMethods>(event: &S) -> SpinDoubleEventIsOwned<OWNED> {
+        unsafe {
+            let event = event.as_ptr();
+            SpinDoubleEventIsOwned(ffi::wxSpinDoubleEvent_new1(event))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<SpinDoubleEventIsOwned<OWNED>> for NotifyEventIsOwned<OWNED> {
+    fn from(o: SpinDoubleEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SpinDoubleEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
+    fn from(o: SpinDoubleEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SpinDoubleEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
+    fn from(o: SpinDoubleEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SpinDoubleEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: SpinDoubleEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for SpinDoubleEventIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSpinDoubleEvent_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for SpinDoubleEventIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
+// wxSpinEvent
+wx_class! { SpinEvent =
+    SpinEventIsOwned<true>(wxSpinEvent) impl
+        SpinEventMethods,
+        NotifyEventMethods,
+        CommandEventMethods,
+        EventMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> SpinEventIsOwned<OWNED> {
+    // NOT_SUPPORTED: fn wxSpinEvent()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<SpinEventIsOwned<OWNED>> for NotifyEventIsOwned<OWNED> {
+    fn from(o: SpinEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SpinEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
+    fn from(o: SpinEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SpinEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
+    fn from(o: SpinEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SpinEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: SpinEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for SpinEventIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSpinEvent_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for SpinEventIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
+// wxSplashScreen
+wx_class! { SplashScreen =
+    SplashScreenIsOwned<true>(wxSplashScreen) impl
+        SplashScreenMethods,
+        FrameMethods,
+        TopLevelWindowMethods,
+        NonOwnedWindowMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> SplashScreenIsOwned<OWNED> {
+    pub fn new<B: BitmapMethods, W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        bitmap: &B,
+        splash_style: c_long,
+        milliseconds: c_int,
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+    ) -> SplashScreenIsOwned<OWNED> {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            SplashScreenIsOwned(ffi::wxSplashScreen_new(
+                bitmap,
+                splash_style,
+                milliseconds,
+                parent,
+                id,
+                pos,
+                size,
+                style,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<SplashScreenIsOwned<OWNED>> for FrameIsOwned<OWNED> {
+    fn from(o: SplashScreenIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SplashScreenIsOwned<OWNED>> for TopLevelWindowIsOwned<OWNED> {
+    fn from(o: SplashScreenIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SplashScreenIsOwned<OWNED>> for NonOwnedWindowIsOwned<OWNED> {
+    fn from(o: SplashScreenIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SplashScreenIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: SplashScreenIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SplashScreenIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: SplashScreenIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SplashScreenIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: SplashScreenIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for SplashScreenIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSplashScreen_CLASSINFO()) }
+    }
+}
+
+// wxSplitterEvent
+wx_class! { SplitterEvent =
+    SplitterEventIsOwned<true>(wxSplitterEvent) impl
+        SplitterEventMethods,
+        NotifyEventMethods,
+        CommandEventMethods,
+        EventMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> SplitterEventIsOwned<OWNED> {
+    // NOT_SUPPORTED: fn wxSplitterEvent()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<SplitterEventIsOwned<OWNED>> for NotifyEventIsOwned<OWNED> {
+    fn from(o: SplitterEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SplitterEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
+    fn from(o: SplitterEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SplitterEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
+    fn from(o: SplitterEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SplitterEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: SplitterEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for SplitterEventIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSplitterEvent_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for SplitterEventIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
+// wxSplitterWindow
+wx_class! { SplitterWindow =
+    SplitterWindowIsOwned<true>(wxSplitterWindow) impl
+        SplitterWindowMethods,
+        // WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> SplitterWindowIsOwned<OWNED> {
+    pub fn new_2step() -> SplitterWindowIsOwned<OWNED> {
+        unsafe { SplitterWindowIsOwned(ffi::wxSplitterWindow_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> SplitterWindowIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            SplitterWindowIsOwned(ffi::wxSplitterWindow_new1(
+                parent, id, pos, size, style, name,
+            ))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<SplitterWindowIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: SplitterWindowIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SplitterWindowIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: SplitterWindowIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SplitterWindowIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: SplitterWindowIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for SplitterWindowIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSplitterWindow_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> WindowMethods for SplitterWindowIsOwned<OWNED> {
+    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        point: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let point = point.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxSplitterWindow_Create(self.as_ptr(), parent, id, point, size, style, name)
+        }
+    }
+}
+
 // wxStaticBitmap
 wx_class! { StaticBitmap =
     StaticBitmapIsOwned<true>(wxStaticBitmap) impl
@@ -831,6 +1965,92 @@ impl<const OWNED: bool> DynamicCast for StaticBoxSizerIsOwned<OWNED> {
     }
 }
 
+// wxStaticLine
+wx_class! { StaticLine =
+    StaticLineIsOwned<true>(wxStaticLine) impl
+        StaticLineMethods,
+        ControlMethods,
+        // WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> StaticLineIsOwned<OWNED> {
+    pub fn new_2step() -> StaticLineIsOwned<OWNED> {
+        unsafe { StaticLineIsOwned(ffi::wxStaticLine_new()) }
+    }
+    pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> StaticLineIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            StaticLineIsOwned(ffi::wxStaticLine_new1(parent, id, pos, size, style, name))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<StaticLineIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: StaticLineIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<StaticLineIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: StaticLineIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<StaticLineIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: StaticLineIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<StaticLineIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: StaticLineIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for StaticLineIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStaticLine_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> WindowMethods for StaticLineIsOwned<OWNED> {
+    fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        pos: &P,
+        size: &S,
+        style: c_long,
+        name: &str,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let pos = pos.as_ptr();
+            let size = size.as_ptr();
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            ffi::wxStaticLine_Create(self.as_ptr(), parent, id, pos, size, style, name)
+        }
+    }
+}
+
 // wxStaticText
 wx_class! { StaticText =
     StaticTextIsOwned<true>(wxStaticText) impl
@@ -896,5 +2116,210 @@ impl<const OWNED: bool> From<StaticTextIsOwned<OWNED>> for ObjectIsOwned<OWNED> 
 impl<const OWNED: bool> DynamicCast for StaticTextIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStaticText_CLASSINFO()) }
+    }
+}
+
+// wxStatusBar
+wx_class! { StatusBar =
+    StatusBarIsOwned<true>(wxStatusBar) impl
+        StatusBarMethods,
+        ControlMethods,
+        WindowMethods,
+        EvtHandlerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> StatusBarIsOwned<OWNED> {
+    pub fn new_2step() -> StatusBarIsOwned<OWNED> {
+        unsafe { StatusBarIsOwned(ffi::wxStatusBar_new()) }
+    }
+    pub fn new<W: WindowMethods>(
+        parent: Option<&W>,
+        id: c_int,
+        style: c_long,
+        name: &str,
+    ) -> StatusBarIsOwned<OWNED> {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let name = WxString::from(name);
+            let name = name.as_ptr();
+            StatusBarIsOwned(ffi::wxStatusBar_new1(parent, id, style, name))
+        }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<StatusBarIsOwned<OWNED>> for ControlIsOwned<OWNED> {
+    fn from(o: StatusBarIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<StatusBarIsOwned<OWNED>> for WindowIsOwned<OWNED> {
+    fn from(o: StatusBarIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<StatusBarIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
+    fn from(o: StatusBarIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<StatusBarIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: StatusBarIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for StatusBarIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStatusBar_CLASSINFO()) }
+    }
+}
+
+// wxStatusBarPane
+wx_class! { StatusBarPane =
+    StatusBarPaneIsOwned<true>(wxStatusBarPane) impl
+        StatusBarPaneMethods
+}
+impl<const OWNED: bool> StatusBarPaneIsOwned<OWNED> {
+    pub fn new(style: c_int, width: c_int) -> StatusBarPaneIsOwned<OWNED> {
+        unsafe { StatusBarPaneIsOwned(ffi::wxStatusBarPane_new(style, width)) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for StatusBarPaneIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxStatusBarPane_delete(self.0) }
+        }
+    }
+}
+
+// wxStdDialogButtonSizer
+wx_class! { StdDialogButtonSizer =
+    StdDialogButtonSizerIsOwned<true>(wxStdDialogButtonSizer) impl
+        StdDialogButtonSizerMethods,
+        BoxSizerMethods,
+        SizerMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> StdDialogButtonSizerIsOwned<OWNED> {
+    pub fn new() -> StdDialogButtonSizerIsOwned<OWNED> {
+        unsafe { StdDialogButtonSizerIsOwned(ffi::wxStdDialogButtonSizer_new()) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<StdDialogButtonSizerIsOwned<OWNED>> for BoxSizerIsOwned<OWNED> {
+    fn from(o: StdDialogButtonSizerIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<StdDialogButtonSizerIsOwned<OWNED>> for SizerIsOwned<OWNED> {
+    fn from(o: StdDialogButtonSizerIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<StdDialogButtonSizerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: StdDialogButtonSizerIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for StdDialogButtonSizerIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStdDialogButtonSizer_CLASSINFO()) }
+    }
+}
+
+// wxStockPreferencesPage
+wx_class! { StockPreferencesPage =
+    StockPreferencesPageIsOwned<true>(wxStockPreferencesPage) impl
+        StockPreferencesPageMethods,
+        PreferencesPageMethods
+}
+impl<const OWNED: bool> StockPreferencesPageIsOwned<OWNED> {
+    //  ENUM: Kind
+    pub const Kind_General: c_int = 0;
+    pub const Kind_Advanced: c_int = 0 + 1;
+
+    // NOT_SUPPORTED: fn wxStockPreferencesPage()
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<StockPreferencesPageIsOwned<OWNED>> for PreferencesPageIsOwned<OWNED> {
+    fn from(o: StockPreferencesPageIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> Drop for StockPreferencesPageIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxStockPreferencesPage_delete(self.0) }
+        }
+    }
+}
+
+// wxSysColourChangedEvent
+wx_class! { SysColourChangedEvent =
+    SysColourChangedEventIsOwned<true>(wxSysColourChangedEvent) impl
+        SysColourChangedEventMethods,
+        EventMethods,
+        ObjectMethods
+}
+impl<const OWNED: bool> SysColourChangedEventIsOwned<OWNED> {
+    pub fn new() -> SysColourChangedEventIsOwned<OWNED> {
+        unsafe { SysColourChangedEventIsOwned(ffi::wxSysColourChangedEvent_new()) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> From<SysColourChangedEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
+    fn from(o: SysColourChangedEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> From<SysColourChangedEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
+    fn from(o: SysColourChangedEventIsOwned<OWNED>) -> Self {
+        unsafe { Self::from_ptr(o.as_ptr()) }
+    }
+}
+impl<const OWNED: bool> DynamicCast for SysColourChangedEventIsOwned<OWNED> {
+    fn class_info() -> ClassInfoIsOwned<false> {
+        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSysColourChangedEvent_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Drop for SysColourChangedEventIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxObject_delete(self.0) }
+        }
+    }
+}
+
+// wxSystemSettings
+wx_class! { SystemSettings =
+    SystemSettingsIsOwned<true>(wxSystemSettings) impl
+        SystemSettingsMethods
+}
+impl<const OWNED: bool> SystemSettingsIsOwned<OWNED> {
+    pub fn new() -> SystemSettingsIsOwned<OWNED> {
+        unsafe { SystemSettingsIsOwned(ffi::wxSystemSettings_new()) }
+    }
+    pub fn none() -> Option<&'static Self> {
+        None
+    }
+}
+impl<const OWNED: bool> Drop for SystemSettingsIsOwned<OWNED> {
+    fn drop(&mut self) {
+        if OWNED {
+            unsafe { ffi::wxSystemSettings_delete(self.0) }
+        }
     }
 }
