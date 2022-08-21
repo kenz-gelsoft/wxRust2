@@ -276,13 +276,7 @@ extern "C" {
     // NOT_SUPPORTED: pub fn wxRegion_Contains2(self_: *const c_void, x: c_int, y: c_int, width: c_int, height: c_int) -> wxRegionContain;
     // NOT_SUPPORTED: pub fn wxRegion_Contains3(self_: *const c_void, rect: *const c_void) -> wxRegionContain;
     pub fn wxRegion_ConvertToBitmap(self_: *const c_void) -> *mut c_void;
-    pub fn wxRegion_GetBox(
-        self_: *const c_void,
-        x: *mut c_void,
-        y: *mut c_void,
-        width: *mut c_void,
-        height: *mut c_void,
-    );
+    // BLOCKED: pub fn wxRegion_GetBox(self_: *const c_void, x: *mut c_void, y: *mut c_void, width: *mut c_void, height: *mut c_void);
     pub fn wxRegion_GetBox1(self_: *const c_void) -> *mut c_void;
     pub fn wxRegion_Intersect(
         self_: *mut c_void,

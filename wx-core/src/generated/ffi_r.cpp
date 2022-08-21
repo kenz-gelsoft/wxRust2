@@ -348,9 +348,6 @@ void wxRegion_Clear(wxRegion * self) {
 wxBitmap *wxRegion_ConvertToBitmap(const wxRegion * self) {
     return new wxBitmap(self->ConvertToBitmap());
 }
-void wxRegion_GetBox(const wxRegion * self, wxCoord * x, wxCoord * y, wxCoord * width, wxCoord * height) {
-    return self->GetBox(*x, *y, *width, *height);
-}
 wxRect *wxRegion_GetBox1(const wxRegion * self) {
     return new wxRect(self->GetBox());
 }

@@ -1630,6 +1630,8 @@ blocklist = [
 [types.wxRegion]
 blocklist = [
     'operator=',
+    # doc bug: docced returns void but actually returns value
+    'GetBox',
 ]
 [types.wxRegionIterator]
 blocklist = [

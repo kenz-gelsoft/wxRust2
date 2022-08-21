@@ -138,7 +138,6 @@ wxRegion *wxRegion_new6(const wxBitmap * bmp);
 wxRegion *wxRegion_new7(const wxBitmap * bmp, const wxColour * trans_colour, int tolerance);
 void wxRegion_Clear(wxRegion * self);
 wxBitmap *wxRegion_ConvertToBitmap(const wxRegion * self);
-void wxRegion_GetBox(const wxRegion * self, wxCoord * x, wxCoord * y, wxCoord * width, wxCoord * height);
 wxRect *wxRegion_GetBox1(const wxRegion * self);
 bool wxRegion_Intersect(wxRegion * self, wxCoord x, wxCoord y, wxCoord width, wxCoord height);
 bool wxRegion_Intersect1(wxRegion * self, const wxRect * rect);

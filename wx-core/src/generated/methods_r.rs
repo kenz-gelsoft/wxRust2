@@ -548,15 +548,7 @@ pub trait RegionMethods: GDIObjectMethods {
     fn convert_to_bitmap(&self) -> Bitmap {
         unsafe { Bitmap::from_ptr(ffi::wxRegion_ConvertToBitmap(self.as_ptr())) }
     }
-    fn get_box_coord(
-        &self,
-        x: *mut c_void,
-        y: *mut c_void,
-        width: *mut c_void,
-        height: *mut c_void,
-    ) {
-        unsafe { ffi::wxRegion_GetBox(self.as_ptr(), x, y, width, height) }
-    }
+    // BLOCKED: fn GetBox()
     fn get_box(&self) -> Rect {
         unsafe { Rect::from_ptr(ffi::wxRegion_GetBox1(self.as_ptr())) }
     }
