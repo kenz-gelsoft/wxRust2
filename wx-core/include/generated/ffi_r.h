@@ -38,10 +38,12 @@ wxRadioButton *wxRadioButton_new1(wxWindow * parent, wxWindowID id, const wxStri
 bool wxRadioButton_Create(wxRadioButton * self, wxWindow * parent, wxWindowID id, const wxString * label, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name);
 bool wxRadioButton_GetValue(const wxRadioButton * self);
 void wxRadioButton_SetValue(wxRadioButton * self, bool value);
+#if wxCHECK_VERSION(3, 1, 0)
 wxRadioButton * wxRadioButton_GetFirstInGroup(const wxRadioButton * self);
 wxRadioButton * wxRadioButton_GetLastInGroup(const wxRadioButton * self);
 wxRadioButton * wxRadioButton_GetPreviousInGroup(const wxRadioButton * self);
 wxRadioButton * wxRadioButton_GetNextInGroup(const wxRadioButton * self);
+#endif
 
 // CLASS: wxRealPoint
 void wxRealPoint_delete(wxRealPoint *self);

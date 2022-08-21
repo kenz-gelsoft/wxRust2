@@ -74,6 +74,7 @@ bool wxRadioButton_GetValue(const wxRadioButton * self) {
 void wxRadioButton_SetValue(wxRadioButton * self, bool value) {
     return self->SetValue(value);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxRadioButton * wxRadioButton_GetFirstInGroup(const wxRadioButton * self) {
     return self->GetFirstInGroup();
 }
@@ -86,6 +87,7 @@ wxRadioButton * wxRadioButton_GetPreviousInGroup(const wxRadioButton * self) {
 wxRadioButton * wxRadioButton_GetNextInGroup(const wxRadioButton * self) {
     return self->GetNextInGroup();
 }
+#endif
 
 // CLASS: wxRealPoint
 void wxRealPoint_delete(wxRealPoint *self) {
