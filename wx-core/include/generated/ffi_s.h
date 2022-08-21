@@ -29,9 +29,13 @@ extern "C" {
 
 // CLASS: wxSVGFileDC
 wxClassInfo *wxSVGFileDC_CLASSINFO();
+#if wxCHECK_VERSION(3, 1, 0)
 wxSVGFileDC *wxSVGFileDC_new(const wxString * filename, int width, int height, double dpi, const wxString * title);
+#endif
 void wxSVGFileDC_Clear(wxSVGFileDC * self);
+#if wxCHECK_VERSION(3, 1, 0)
 void wxSVGFileDC_SetBitmapHandler(wxSVGFileDC * self, wxSVGBitmapHandler * handler);
+#endif
 void wxSVGFileDC_DestroyClippingRegion(wxSVGFileDC * self);
 void wxSVGFileDC_CrossHair(wxSVGFileDC * self, wxCoord x, wxCoord y);
 bool wxSVGFileDC_GetPixel(const wxSVGFileDC * self, wxCoord x, wxCoord y, wxColour * colour);

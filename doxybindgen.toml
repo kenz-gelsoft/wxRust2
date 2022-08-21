@@ -1768,7 +1768,8 @@ blocklist = [
     'Create1',
 ]
 [types.wxSVGFileDC]
-wx30 = [
+wx31 = [
+    'SetBitmapHandler',
     # Additional args in wx3.1
     'wxSVGFileDC',
 ]

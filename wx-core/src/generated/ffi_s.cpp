@@ -6,15 +6,19 @@ extern "C" {
 wxClassInfo *wxSVGFileDC_CLASSINFO() {
     return wxCLASSINFO(wxSVGFileDC);
 }
+#if wxCHECK_VERSION(3, 1, 0)
 wxSVGFileDC *wxSVGFileDC_new(const wxString * filename, int width, int height, double dpi, const wxString * title) {
     return new wxSVGFileDC(*filename, width, height, dpi, *title);
 }
+#endif
 void wxSVGFileDC_Clear(wxSVGFileDC * self) {
     return self->Clear();
 }
+#if wxCHECK_VERSION(3, 1, 0)
 void wxSVGFileDC_SetBitmapHandler(wxSVGFileDC * self, wxSVGBitmapHandler * handler) {
     return self->SetBitmapHandler(handler);
 }
+#endif
 void wxSVGFileDC_DestroyClippingRegion(wxSVGFileDC * self) {
     return self->DestroyClippingRegion();
 }
