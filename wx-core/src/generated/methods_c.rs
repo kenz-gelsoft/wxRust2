@@ -1234,8 +1234,8 @@ pub trait CommandEventMethods: EventMethods {
     fn get_client_data(&self) -> *mut c_void {
         unsafe { ffi::wxCommandEvent_GetClientData(self.as_ptr()) }
     }
-    fn get_client_object(&self) -> *mut c_void {
-        unsafe { ffi::wxCommandEvent_GetClientObject(self.as_ptr()) }
+    fn get_client_object(&self) -> Option<ClientDataIsOwned<false>> {
+        unsafe { ClientData::option_from(ffi::wxCommandEvent_GetClientObject(self.as_ptr())) }
     }
     fn get_extra_long(&self) -> c_long {
         unsafe { ffi::wxCommandEvent_GetExtraLong(self.as_ptr()) }
@@ -1258,8 +1258,14 @@ pub trait CommandEventMethods: EventMethods {
     fn set_client_data(&self, client_data: *mut c_void) {
         unsafe { ffi::wxCommandEvent_SetClientData(self.as_ptr(), client_data) }
     }
-    fn set_client_object(&self, client_object: *mut c_void) {
-        unsafe { ffi::wxCommandEvent_SetClientObject(self.as_ptr(), client_object) }
+    fn set_client_object<C: ClientDataMethods>(&self, client_object: Option<&C>) {
+        unsafe {
+            let client_object = match client_object {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxCommandEvent_SetClientObject(self.as_ptr(), client_object)
+        }
     }
     fn set_extra_long(&self, extra_long: c_long) {
         unsafe { ffi::wxCommandEvent_SetExtraLong(self.as_ptr(), extra_long) }

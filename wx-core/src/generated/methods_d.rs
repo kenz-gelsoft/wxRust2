@@ -2072,18 +2072,22 @@ pub trait DataViewToggleRendererMethods: DataViewRendererMethods {
 // wxDataViewTreeCtrl
 pub trait DataViewTreeCtrlMethods: DataViewCtrlMethods {
     // DTOR: fn ~wxDataViewTreeCtrl()
-    fn append_container<D: DataViewItemMethods>(
+    fn append_container<D: DataViewItemMethods, C: ClientDataMethods>(
         &self,
         parent: &D,
         text: &str,
         icon: c_int,
         expanded: c_int,
-        data: *mut c_void,
+        data: Option<&C>,
     ) -> DataViewItem {
         unsafe {
             let parent = parent.as_ptr();
             let text = WxString::from(text);
             let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             DataViewItem::from_ptr(ffi::wxDataViewTreeCtrl_AppendContainer(
                 self.as_ptr(),
                 parent,
@@ -2094,17 +2098,21 @@ pub trait DataViewTreeCtrlMethods: DataViewCtrlMethods {
             ))
         }
     }
-    fn append_item<D: DataViewItemMethods>(
+    fn append_item<D: DataViewItemMethods, C: ClientDataMethods>(
         &self,
         parent: &D,
         text: &str,
         icon: c_int,
-        data: *mut c_void,
+        data: Option<&C>,
     ) -> DataViewItem {
         unsafe {
             let parent = parent.as_ptr();
             let text = WxString::from(text);
             let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             DataViewItem::from_ptr(ffi::wxDataViewTreeCtrl_AppendItem(
                 self.as_ptr(),
                 parent,
@@ -2158,10 +2166,10 @@ pub trait DataViewTreeCtrlMethods: DataViewCtrlMethods {
     fn get_image_list(&self) -> Option<ImageListIsOwned<false>> {
         unsafe { ImageList::option_from(ffi::wxDataViewTreeCtrl_GetImageList(self.as_ptr())) }
     }
-    fn get_item_data<D: DataViewItemMethods>(&self, item: &D) -> *mut c_void {
+    fn get_item_data<D: DataViewItemMethods>(&self, item: &D) -> Option<ClientDataIsOwned<false>> {
         unsafe {
             let item = item.as_ptr();
-            ffi::wxDataViewTreeCtrl_GetItemData(self.as_ptr(), item)
+            ClientData::option_from(ffi::wxDataViewTreeCtrl_GetItemData(self.as_ptr(), item))
         }
     }
     fn get_item_expanded_icon<D: DataViewItemMethods>(&self, item: &D) -> Icon {
@@ -2200,20 +2208,24 @@ pub trait DataViewTreeCtrlMethods: DataViewCtrlMethods {
     fn get_store(&self) -> Option<DataViewTreeStoreIsOwned<false>> {
         unsafe { DataViewTreeStore::option_from(ffi::wxDataViewTreeCtrl_GetStore1(self.as_ptr())) }
     }
-    fn insert_container<D: DataViewItemMethods, D2: DataViewItemMethods>(
+    fn insert_container<D: DataViewItemMethods, D2: DataViewItemMethods, C: ClientDataMethods>(
         &self,
         parent: &D,
         previous: &D2,
         text: &str,
         icon: c_int,
         expanded: c_int,
-        data: *mut c_void,
+        data: Option<&C>,
     ) -> DataViewItem {
         unsafe {
             let parent = parent.as_ptr();
             let previous = previous.as_ptr();
             let text = WxString::from(text);
             let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             DataViewItem::from_ptr(ffi::wxDataViewTreeCtrl_InsertContainer(
                 self.as_ptr(),
                 parent,
@@ -2225,19 +2237,23 @@ pub trait DataViewTreeCtrlMethods: DataViewCtrlMethods {
             ))
         }
     }
-    fn insert_item<D: DataViewItemMethods, D2: DataViewItemMethods>(
+    fn insert_item<D: DataViewItemMethods, D2: DataViewItemMethods, C: ClientDataMethods>(
         &self,
         parent: &D,
         previous: &D2,
         text: &str,
         icon: c_int,
-        data: *mut c_void,
+        data: Option<&C>,
     ) -> DataViewItem {
         unsafe {
             let parent = parent.as_ptr();
             let previous = previous.as_ptr();
             let text = WxString::from(text);
             let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             DataViewItem::from_ptr(ffi::wxDataViewTreeCtrl_InsertItem(
                 self.as_ptr(),
                 parent,
@@ -2254,18 +2270,22 @@ pub trait DataViewTreeCtrlMethods: DataViewCtrlMethods {
             ffi::wxDataViewTreeCtrl_IsContainer(self.as_ptr(), item)
         }
     }
-    fn prepend_container<D: DataViewItemMethods>(
+    fn prepend_container<D: DataViewItemMethods, C: ClientDataMethods>(
         &self,
         parent: &D,
         text: &str,
         icon: c_int,
         expanded: c_int,
-        data: *mut c_void,
+        data: Option<&C>,
     ) -> DataViewItem {
         unsafe {
             let parent = parent.as_ptr();
             let text = WxString::from(text);
             let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             DataViewItem::from_ptr(ffi::wxDataViewTreeCtrl_PrependContainer(
                 self.as_ptr(),
                 parent,
@@ -2276,17 +2296,21 @@ pub trait DataViewTreeCtrlMethods: DataViewCtrlMethods {
             ))
         }
     }
-    fn prepend_item<D: DataViewItemMethods>(
+    fn prepend_item<D: DataViewItemMethods, C: ClientDataMethods>(
         &self,
         parent: &D,
         text: &str,
         icon: c_int,
-        data: *mut c_void,
+        data: Option<&C>,
     ) -> DataViewItem {
         unsafe {
             let parent = parent.as_ptr();
             let text = WxString::from(text);
             let text = text.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             DataViewItem::from_ptr(ffi::wxDataViewTreeCtrl_PrependItem(
                 self.as_ptr(),
                 parent,
@@ -2305,9 +2329,17 @@ pub trait DataViewTreeCtrlMethods: DataViewCtrlMethods {
             ffi::wxDataViewTreeCtrl_SetImageList(self.as_ptr(), imagelist)
         }
     }
-    fn set_item_data<D: DataViewItemMethods>(&self, item: &D, data: *mut c_void) {
+    fn set_item_data<D: DataViewItemMethods, C: ClientDataMethods>(
+        &self,
+        item: &D,
+        data: Option<&C>,
+    ) {
         unsafe {
             let item = item.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             ffi::wxDataViewTreeCtrl_SetItemData(self.as_ptr(), item, data)
         }
     }
@@ -2342,13 +2374,18 @@ pub trait DataViewTreeCtrlMethods: DataViewCtrlMethods {
 // wxDataViewTreeStore
 pub trait DataViewTreeStoreMethods: DataViewModelMethods {
     // DTOR: fn ~wxDataViewTreeStore()
-    fn append_container<D: DataViewItemMethods, B: BitmapBundleMethods, B2: BitmapBundleMethods>(
+    fn append_container<
+        D: DataViewItemMethods,
+        B: BitmapBundleMethods,
+        B2: BitmapBundleMethods,
+        C: ClientDataMethods,
+    >(
         &self,
         parent: &D,
         text: &str,
         icon: &B,
         expanded: &B2,
-        data: *mut c_void,
+        data: Option<&C>,
     ) -> DataViewItem {
         unsafe {
             let parent = parent.as_ptr();
@@ -2356,6 +2393,10 @@ pub trait DataViewTreeStoreMethods: DataViewModelMethods {
             let text = text.as_ptr();
             let icon = icon.as_ptr();
             let expanded = expanded.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             DataViewItem::from_ptr(ffi::wxDataViewTreeStore_AppendContainer(
                 self.as_ptr(),
                 parent,
@@ -2366,18 +2407,22 @@ pub trait DataViewTreeStoreMethods: DataViewModelMethods {
             ))
         }
     }
-    fn append_item<D: DataViewItemMethods, B: BitmapBundleMethods>(
+    fn append_item<D: DataViewItemMethods, B: BitmapBundleMethods, C: ClientDataMethods>(
         &self,
         parent: &D,
         text: &str,
         icon: &B,
-        data: *mut c_void,
+        data: Option<&C>,
     ) -> DataViewItem {
         unsafe {
             let parent = parent.as_ptr();
             let text = WxString::from(text);
             let text = text.as_ptr();
             let icon = icon.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             DataViewItem::from_ptr(ffi::wxDataViewTreeStore_AppendItem(
                 self.as_ptr(),
                 parent,
@@ -2408,10 +2453,10 @@ pub trait DataViewTreeStoreMethods: DataViewModelMethods {
             ffi::wxDataViewTreeStore_GetChildCount(self.as_ptr(), parent)
         }
     }
-    fn get_item_data<D: DataViewItemMethods>(&self, item: &D) -> *mut c_void {
+    fn get_item_data<D: DataViewItemMethods>(&self, item: &D) -> Option<ClientDataIsOwned<false>> {
         unsafe {
             let item = item.as_ptr();
-            ffi::wxDataViewTreeStore_GetItemData(self.as_ptr(), item)
+            ClientData::option_from(ffi::wxDataViewTreeStore_GetItemData(self.as_ptr(), item))
         }
     }
     fn get_item_expanded_icon<D: DataViewItemMethods>(&self, item: &D) -> Icon {
@@ -2450,6 +2495,7 @@ pub trait DataViewTreeStoreMethods: DataViewModelMethods {
         D2: DataViewItemMethods,
         B: BitmapBundleMethods,
         B2: BitmapBundleMethods,
+        C: ClientDataMethods,
     >(
         &self,
         parent: &D,
@@ -2457,7 +2503,7 @@ pub trait DataViewTreeStoreMethods: DataViewModelMethods {
         text: &str,
         icon: &B,
         expanded: &B2,
-        data: *mut c_void,
+        data: Option<&C>,
     ) -> DataViewItem {
         unsafe {
             let parent = parent.as_ptr();
@@ -2466,6 +2512,10 @@ pub trait DataViewTreeStoreMethods: DataViewModelMethods {
             let text = text.as_ptr();
             let icon = icon.as_ptr();
             let expanded = expanded.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             DataViewItem::from_ptr(ffi::wxDataViewTreeStore_InsertContainer(
                 self.as_ptr(),
                 parent,
@@ -2477,13 +2527,18 @@ pub trait DataViewTreeStoreMethods: DataViewModelMethods {
             ))
         }
     }
-    fn insert_item<D: DataViewItemMethods, D2: DataViewItemMethods, B: BitmapBundleMethods>(
+    fn insert_item<
+        D: DataViewItemMethods,
+        D2: DataViewItemMethods,
+        B: BitmapBundleMethods,
+        C: ClientDataMethods,
+    >(
         &self,
         parent: &D,
         previous: &D2,
         text: &str,
         icon: &B,
-        data: *mut c_void,
+        data: Option<&C>,
     ) -> DataViewItem {
         unsafe {
             let parent = parent.as_ptr();
@@ -2491,6 +2546,10 @@ pub trait DataViewTreeStoreMethods: DataViewModelMethods {
             let text = WxString::from(text);
             let text = text.as_ptr();
             let icon = icon.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             DataViewItem::from_ptr(ffi::wxDataViewTreeStore_InsertItem(
                 self.as_ptr(),
                 parent,
@@ -2505,13 +2564,14 @@ pub trait DataViewTreeStoreMethods: DataViewModelMethods {
         D: DataViewItemMethods,
         B: BitmapBundleMethods,
         B2: BitmapBundleMethods,
+        C: ClientDataMethods,
     >(
         &self,
         parent: &D,
         text: &str,
         icon: &B,
         expanded: &B2,
-        data: *mut c_void,
+        data: Option<&C>,
     ) -> DataViewItem {
         unsafe {
             let parent = parent.as_ptr();
@@ -2519,6 +2579,10 @@ pub trait DataViewTreeStoreMethods: DataViewModelMethods {
             let text = text.as_ptr();
             let icon = icon.as_ptr();
             let expanded = expanded.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             DataViewItem::from_ptr(ffi::wxDataViewTreeStore_PrependContainer(
                 self.as_ptr(),
                 parent,
@@ -2529,18 +2593,22 @@ pub trait DataViewTreeStoreMethods: DataViewModelMethods {
             ))
         }
     }
-    fn prepend_item<D: DataViewItemMethods, B: BitmapBundleMethods>(
+    fn prepend_item<D: DataViewItemMethods, B: BitmapBundleMethods, C: ClientDataMethods>(
         &self,
         parent: &D,
         text: &str,
         icon: &B,
-        data: *mut c_void,
+        data: Option<&C>,
     ) -> DataViewItem {
         unsafe {
             let parent = parent.as_ptr();
             let text = WxString::from(text);
             let text = text.as_ptr();
             let icon = icon.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             DataViewItem::from_ptr(ffi::wxDataViewTreeStore_PrependItem(
                 self.as_ptr(),
                 parent,
@@ -2550,9 +2618,17 @@ pub trait DataViewTreeStoreMethods: DataViewModelMethods {
             ))
         }
     }
-    fn set_item_data<D: DataViewItemMethods>(&self, item: &D, data: *mut c_void) {
+    fn set_item_data<D: DataViewItemMethods, C: ClientDataMethods>(
+        &self,
+        item: &D,
+        data: Option<&C>,
+    ) {
         unsafe {
             let item = item.as_ptr();
+            let data = match data {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
             ffi::wxDataViewTreeStore_SetItemData(self.as_ptr(), item, data)
         }
     }

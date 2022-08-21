@@ -1008,8 +1008,8 @@ pub trait WindowMethods: EvtHandlerMethods {
         }
     }
     // NOT_SUPPORTED: fn GetHelpTextAtPoint()
-    fn get_tool_tip(&self) -> *mut c_void {
-        unsafe { ffi::wxWindow_GetToolTip(self.as_ptr()) }
+    fn get_tool_tip(&self) -> Option<ToolTipIsOwned<false>> {
+        unsafe { ToolTip::option_from(ffi::wxWindow_GetToolTip(self.as_ptr())) }
     }
     fn get_tool_tip_text(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxWindow_GetToolTipText(self.as_ptr())).into() }
@@ -1021,8 +1021,14 @@ pub trait WindowMethods: EvtHandlerMethods {
             ffi::wxWindow_SetToolTip(self.as_ptr(), tip_string)
         }
     }
-    fn set_tool_tip_tooltip(&self, tip: *mut c_void) {
-        unsafe { ffi::wxWindow_SetToolTip1(self.as_ptr(), tip) }
+    fn set_tool_tip_tooltip<T: ToolTipMethods>(&self, tip: Option<&T>) {
+        unsafe {
+            let tip = match tip {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWindow_SetToolTip1(self.as_ptr(), tip)
+        }
     }
     fn unset_tool_tip(&self) {
         unsafe { ffi::wxWindow_UnsetToolTip(self.as_ptr()) }

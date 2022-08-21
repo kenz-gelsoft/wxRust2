@@ -2,6 +2,55 @@
 
 extern "C" {
 
+// CLASS: wxTGAHandler
+wxClassInfo *wxTGAHandler_CLASSINFO() {
+    return wxCLASSINFO(wxTGAHandler);
+}
+wxTGAHandler *wxTGAHandler_new() {
+    return new wxTGAHandler();
+}
+
+// CLASS: wxTIFFHandler
+wxClassInfo *wxTIFFHandler_CLASSINFO() {
+    return wxCLASSINFO(wxTIFFHandler);
+}
+wxTIFFHandler *wxTIFFHandler_new() {
+    return new wxTIFFHandler();
+}
+
+// CLASS: wxTaskBarIcon
+wxClassInfo *wxTaskBarIcon_CLASSINFO() {
+    return wxCLASSINFO(wxTaskBarIcon);
+}
+void wxTaskBarIcon_Destroy(wxTaskBarIcon * self) {
+    return self->Destroy();
+}
+bool wxTaskBarIcon_IsIconInstalled(const wxTaskBarIcon * self) {
+    return self->IsIconInstalled();
+}
+bool wxTaskBarIcon_IsOk(const wxTaskBarIcon * self) {
+    return self->IsOk();
+}
+bool wxTaskBarIcon_PopupMenu(wxTaskBarIcon * self, wxMenu * menu) {
+    return self->PopupMenu(menu);
+}
+bool wxTaskBarIcon_RemoveIcon(wxTaskBarIcon * self) {
+    return self->RemoveIcon();
+}
+#if wxCHECK_VERSION(3, 1, 0)
+bool wxTaskBarIcon_SetIcon(wxTaskBarIcon * self, const wxBitmapBundle * icon, const wxString * tooltip) {
+    return self->SetIcon(*icon, *tooltip);
+}
+#endif
+bool wxTaskBarIcon_IsAvailable() {
+    return wxTaskBarIcon::IsAvailable();
+}
+
+// CLASS: wxTaskBarIconEvent
+wxClassInfo *wxTaskBarIconEvent_CLASSINFO() {
+    return wxCLASSINFO(wxTaskBarIconEvent);
+}
+
 // CLASS: wxTextAttr
 void wxTextAttr_delete(wxTextAttr *self) {
     delete self;
@@ -393,6 +442,31 @@ wxTextEntryBase *wxTextCtrl_AsTextEntry(wxTextCtrl* obj) {
     return static_cast<wxTextEntryBase*>(obj);
 }
 
+// CLASS: wxTextDataObject
+void wxTextDataObject_delete(wxTextDataObject *self) {
+    delete self;
+}
+wxTextDataObject *wxTextDataObject_new(const wxString * text) {
+    return new wxTextDataObject(*text);
+}
+wxString *wxTextDataObject_GetText(const wxTextDataObject * self) {
+    return new wxString(self->GetText());
+}
+size_t wxTextDataObject_GetTextLength(const wxTextDataObject * self) {
+    return self->GetTextLength();
+}
+void wxTextDataObject_SetText(wxTextDataObject * self, const wxString * str_text) {
+    return self->SetText(*str_text);
+}
+
+// CLASS: wxTextDropTarget
+void wxTextDropTarget_delete(wxTextDropTarget *self) {
+    delete self;
+}
+bool wxTextDropTarget_OnDropText(wxTextDropTarget * self, wxCoord x, wxCoord y, const wxString * data) {
+    return self->OnDropText(x, y, *data);
+}
+
 // CLASS: wxTextEntry
 void wxTextEntry_delete(wxTextEntry *self) {
     delete self;
@@ -548,6 +622,94 @@ void wxTextEntryDialog_ForceUpper(wxTextEntryDialog * self) {
 }
 #endif
 
+// CLASS: wxTextValidator
+wxClassInfo *wxTextValidator_CLASSINFO() {
+    return wxCLASSINFO(wxTextValidator);
+}
+wxTextValidator *wxTextValidator_new(const wxTextValidator * validator) {
+    return new wxTextValidator(*validator);
+}
+wxTextValidator *wxTextValidator_new1(long style, wxString * val_ptr) {
+    return new wxTextValidator(style, val_ptr);
+}
+#if wxCHECK_VERSION(3, 1, 0)
+wxString *wxTextValidator_GetCharExcludes(const wxTextValidator * self) {
+    return new wxString(self->GetCharExcludes());
+}
+wxString *wxTextValidator_GetCharIncludes(const wxTextValidator * self) {
+    return new wxString(self->GetCharIncludes());
+}
+wxArrayString *wxTextValidator_GetExcludes(const wxTextValidator * self) {
+    return new wxArrayString(self->GetExcludes());
+}
+wxArrayString *wxTextValidator_GetIncludes(const wxTextValidator * self) {
+    return new wxArrayString(self->GetIncludes());
+}
+#endif
+long wxTextValidator_GetStyle(const wxTextValidator * self) {
+    return self->GetStyle();
+}
+void wxTextValidator_OnChar(wxTextValidator * self, wxKeyEvent * event) {
+    return self->OnChar(*event);
+}
+void wxTextValidator_SetExcludes(wxTextValidator * self, const wxArrayString * string_list) {
+    return self->SetExcludes(*string_list);
+}
+void wxTextValidator_SetCharExcludes(wxTextValidator * self, const wxString * chars) {
+    return self->SetCharExcludes(*chars);
+}
+void wxTextValidator_SetIncludes(wxTextValidator * self, const wxArrayString * string_list) {
+    return self->SetIncludes(*string_list);
+}
+void wxTextValidator_SetCharIncludes(wxTextValidator * self, const wxString * chars) {
+    return self->SetCharIncludes(*chars);
+}
+#if wxCHECK_VERSION(3, 1, 0)
+void wxTextValidator_AddExclude(wxTextValidator * self, const wxString * exclude) {
+    return self->AddExclude(*exclude);
+}
+void wxTextValidator_AddInclude(wxTextValidator * self, const wxString * include) {
+    return self->AddInclude(*include);
+}
+void wxTextValidator_AddCharExcludes(wxTextValidator * self, const wxString * chars) {
+    return self->AddCharExcludes(*chars);
+}
+void wxTextValidator_AddCharIncludes(wxTextValidator * self, const wxString * chars) {
+    return self->AddCharIncludes(*chars);
+}
+#endif
+void wxTextValidator_SetStyle(wxTextValidator * self, long style) {
+    return self->SetStyle(style);
+}
+#if wxCHECK_VERSION(3, 1, 0)
+wxString *wxTextValidator_IsValid(const wxTextValidator * self, const wxString * val) {
+    return new wxString(self->IsValid(*val));
+}
+#endif
+
+// CLASS: wxThreadEvent
+wxClassInfo *wxThreadEvent_CLASSINFO() {
+    return wxCLASSINFO(wxThreadEvent);
+}
+long wxThreadEvent_GetExtraLong(const wxThreadEvent * self) {
+    return self->GetExtraLong();
+}
+int wxThreadEvent_GetInt(const wxThreadEvent * self) {
+    return self->GetInt();
+}
+wxString *wxThreadEvent_GetString(const wxThreadEvent * self) {
+    return new wxString(self->GetString());
+}
+void wxThreadEvent_SetExtraLong(wxThreadEvent * self, long extra_long) {
+    return self->SetExtraLong(extra_long);
+}
+void wxThreadEvent_SetInt(wxThreadEvent * self, int int_command) {
+    return self->SetInt(int_command);
+}
+void wxThreadEvent_SetString(wxThreadEvent * self, const wxString * string) {
+    return self->SetString(*string);
+}
+
 // CLASS: wxTimePickerCtrl
 wxClassInfo *wxTimePickerCtrl_CLASSINFO() {
     return wxCLASSINFO(wxTimePickerCtrl);
@@ -572,6 +734,31 @@ bool wxTimePickerCtrl_SetTime(wxTimePickerCtrl * self, int hour, int min, int se
 }
 void wxTimePickerCtrl_SetValue(wxTimePickerCtrl * self, const wxDateTime * dt) {
     return self->SetValue(*dt);
+}
+
+// CLASS: wxTipProvider
+void wxTipProvider_delete(wxTipProvider *self) {
+    delete self;
+}
+size_t wxTipProvider_GetCurrentTip(const wxTipProvider * self) {
+    return self->GetCurrentTip();
+}
+wxString *wxTipProvider_GetTip(wxTipProvider * self) {
+    return new wxString(self->GetTip());
+}
+
+// CLASS: wxTipWindow
+wxClassInfo *wxTipWindow_CLASSINFO() {
+    return wxCLASSINFO(wxTipWindow);
+}
+wxTipWindow *wxTipWindow_new(wxWindow * parent, const wxString * text, wxCoord max_length, wxTipWindow ** window_ptr, wxRect * rect_bounds) {
+    return new wxTipWindow(parent, *text, max_length, window_ptr, rect_bounds);
+}
+void wxTipWindow_SetBoundingRect(wxTipWindow * self, const wxRect * rect_bound) {
+    return self->SetBoundingRect(*rect_bound);
+}
+void wxTipWindow_SetTipWindowPtr(wxTipWindow * self, wxTipWindow ** window_ptr) {
+    return self->SetTipWindowPtr(window_ptr);
 }
 
 // CLASS: wxToggleButton
@@ -764,6 +951,65 @@ wxToolBarToolBase * wxToolBar_CreateSeparator(wxToolBar * self) {
     return self->CreateSeparator();
 }
 
+// CLASS: wxToolTip
+wxClassInfo *wxToolTip_CLASSINFO() {
+    return wxCLASSINFO(wxToolTip);
+}
+wxToolTip *wxToolTip_new(const wxString * tip) {
+    return new wxToolTip(*tip);
+}
+wxString *wxToolTip_GetTip(const wxToolTip * self) {
+    return new wxString(self->GetTip());
+}
+wxWindow * wxToolTip_GetWindow(const wxToolTip * self) {
+    return self->GetWindow();
+}
+void wxToolTip_SetTip(wxToolTip * self, const wxString * tip) {
+    return self->SetTip(*tip);
+}
+void wxToolTip_Enable(bool flag) {
+    return wxToolTip::Enable(flag);
+}
+void wxToolTip_SetAutoPop(long msecs) {
+    return wxToolTip::SetAutoPop(msecs);
+}
+void wxToolTip_SetDelay(long msecs) {
+    return wxToolTip::SetDelay(msecs);
+}
+#ifdef __WXMSW__
+void wxToolTip_SetMaxWidth(int width) {
+    return wxToolTip::SetMaxWidth(width);
+}
+#endif
+void wxToolTip_SetReshow(long msecs) {
+    return wxToolTip::SetReshow(msecs);
+}
+
+// CLASS: wxToolbook
+wxClassInfo *wxToolbook_CLASSINFO() {
+    return wxCLASSINFO(wxToolbook);
+}
+wxToolbook *wxToolbook_new() {
+    return new wxToolbook();
+}
+wxToolbook *wxToolbook_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxToolbook(parent, id, *pos, *size, style, *name);
+}
+bool wxToolbook_Create(wxToolbook * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, id, *pos, *size, style, *name);
+}
+wxToolBarBase * wxToolbook_GetToolBar(const wxToolbook * self) {
+    return self->GetToolBar();
+}
+#if wxCHECK_VERSION(3, 1, 0)
+bool wxToolbook_EnablePage(wxToolbook * self, size_t page, bool enable) {
+    return self->EnablePage(page, enable);
+}
+bool wxToolbook_EnablePage1(wxToolbook * self, wxWindow * page, bool enable) {
+    return self->EnablePage(page, enable);
+}
+#endif
+
 // CLASS: wxTopLevelWindow
 wxClassInfo *wxTopLevelWindow_CLASSINFO() {
     return wxCLASSINFO(wxTopLevelWindow);
@@ -878,6 +1124,442 @@ bool wxTopLevelWindow_ShowFullScreen(wxTopLevelWindow * self, bool show, long st
 }
 wxSize *wxTopLevelWindow_GetDefaultSize() {
     return new wxSize(wxTopLevelWindow::GetDefaultSize());
+}
+
+// CLASS: wxTreeCtrl
+wxClassInfo *wxTreeCtrl_CLASSINFO() {
+    return wxCLASSINFO(wxTreeCtrl);
+}
+wxTreeCtrl *wxTreeCtrl_new() {
+    return new wxTreeCtrl();
+}
+wxTreeCtrl *wxTreeCtrl_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return new wxTreeCtrl(parent, id, *pos, *size, style, *validator, *name);
+}
+wxTreeItemId *wxTreeCtrl_AddRoot(wxTreeCtrl * self, const wxString * text, int image, int sel_image, wxTreeItemData * data) {
+    return new wxTreeItemId(self->AddRoot(*text, image, sel_image, data));
+}
+wxTreeItemId *wxTreeCtrl_AppendItem(wxTreeCtrl * self, const wxTreeItemId * parent, const wxString * text, int image, int sel_image, wxTreeItemData * data) {
+    return new wxTreeItemId(self->AppendItem(*parent, *text, image, sel_image, data));
+}
+#ifndef __WXMSW__
+void wxTreeCtrl_AssignButtonsImageList(wxTreeCtrl * self, wxImageList * image_list) {
+    return self->AssignButtonsImageList(image_list);
+}
+#endif
+void wxTreeCtrl_AssignStateImageList(wxTreeCtrl * self, wxImageList * image_list) {
+    return self->AssignStateImageList(image_list);
+}
+void wxTreeCtrl_Collapse(wxTreeCtrl * self, const wxTreeItemId * item) {
+    return self->Collapse(*item);
+}
+void wxTreeCtrl_CollapseAll(wxTreeCtrl * self) {
+    return self->CollapseAll();
+}
+void wxTreeCtrl_CollapseAllChildren(wxTreeCtrl * self, const wxTreeItemId * item) {
+    return self->CollapseAllChildren(*item);
+}
+void wxTreeCtrl_CollapseAndReset(wxTreeCtrl * self, const wxTreeItemId * item) {
+    return self->CollapseAndReset(*item);
+}
+bool wxTreeCtrl_Create(wxTreeCtrl * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxValidator * validator, const wxString * name) {
+    return self->Create(parent, id, *pos, *size, style, *validator, *name);
+}
+void wxTreeCtrl_Delete(wxTreeCtrl * self, const wxTreeItemId * item) {
+    return self->Delete(*item);
+}
+void wxTreeCtrl_DeleteAllItems(wxTreeCtrl * self) {
+    return self->DeleteAllItems();
+}
+void wxTreeCtrl_DeleteChildren(wxTreeCtrl * self, const wxTreeItemId * item) {
+    return self->DeleteChildren(*item);
+}
+wxTextCtrl * wxTreeCtrl_EditLabel(wxTreeCtrl * self, const wxTreeItemId * item, wxClassInfo * text_ctrl_class) {
+    return self->EditLabel(*item, text_ctrl_class);
+}
+void wxTreeCtrl_EnableBellOnNoMatch(wxTreeCtrl * self, bool on) {
+    return self->EnableBellOnNoMatch(on);
+}
+void wxTreeCtrl_EndEditLabel(wxTreeCtrl * self, const wxTreeItemId * item, bool discard_changes) {
+    return self->EndEditLabel(*item, discard_changes);
+}
+void wxTreeCtrl_EnsureVisible(wxTreeCtrl * self, const wxTreeItemId * item) {
+    return self->EnsureVisible(*item);
+}
+void wxTreeCtrl_Expand(wxTreeCtrl * self, const wxTreeItemId * item) {
+    return self->Expand(*item);
+}
+void wxTreeCtrl_ExpandAll(wxTreeCtrl * self) {
+    return self->ExpandAll();
+}
+void wxTreeCtrl_ExpandAllChildren(wxTreeCtrl * self, const wxTreeItemId * item) {
+    return self->ExpandAllChildren(*item);
+}
+bool wxTreeCtrl_GetBoundingRect(const wxTreeCtrl * self, const wxTreeItemId * item, wxRect * rect, bool text_only) {
+    return self->GetBoundingRect(*item, *rect, text_only);
+}
+#ifndef __WXMSW__
+wxImageList * wxTreeCtrl_GetButtonsImageList(const wxTreeCtrl * self) {
+    return self->GetButtonsImageList();
+}
+#endif
+size_t wxTreeCtrl_GetChildrenCount(const wxTreeCtrl * self, const wxTreeItemId * item, bool recursively) {
+    return self->GetChildrenCount(*item, recursively);
+}
+unsigned int wxTreeCtrl_GetCount(const wxTreeCtrl * self) {
+    return self->GetCount();
+}
+wxTextCtrl * wxTreeCtrl_GetEditControl(const wxTreeCtrl * self) {
+    return self->GetEditControl();
+}
+wxTreeItemId *wxTreeCtrl_GetFirstChild(const wxTreeCtrl * self, const wxTreeItemId * item, wxTreeItemIdValue * cookie) {
+    return new wxTreeItemId(self->GetFirstChild(*item, *cookie));
+}
+wxTreeItemId *wxTreeCtrl_GetFirstVisibleItem(const wxTreeCtrl * self) {
+    return new wxTreeItemId(self->GetFirstVisibleItem());
+}
+wxTreeItemId *wxTreeCtrl_GetFocusedItem(const wxTreeCtrl * self) {
+    return new wxTreeItemId(self->GetFocusedItem());
+}
+void wxTreeCtrl_ClearFocusedItem(wxTreeCtrl * self) {
+    return self->ClearFocusedItem();
+}
+void wxTreeCtrl_SetFocusedItem(wxTreeCtrl * self, const wxTreeItemId * item) {
+    return self->SetFocusedItem(*item);
+}
+unsigned int wxTreeCtrl_GetIndent(const wxTreeCtrl * self) {
+    return self->GetIndent();
+}
+unsigned int wxTreeCtrl_GetSpacing(const wxTreeCtrl * self) {
+    return self->GetSpacing();
+}
+wxColour *wxTreeCtrl_GetItemBackgroundColour(const wxTreeCtrl * self, const wxTreeItemId * item) {
+    return new wxColour(self->GetItemBackgroundColour(*item));
+}
+wxTreeItemData * wxTreeCtrl_GetItemData(const wxTreeCtrl * self, const wxTreeItemId * item) {
+    return self->GetItemData(*item);
+}
+wxFont *wxTreeCtrl_GetItemFont(const wxTreeCtrl * self, const wxTreeItemId * item) {
+    return new wxFont(self->GetItemFont(*item));
+}
+wxTreeItemId *wxTreeCtrl_GetItemParent(const wxTreeCtrl * self, const wxTreeItemId * item) {
+    return new wxTreeItemId(self->GetItemParent(*item));
+}
+int wxTreeCtrl_GetItemState(const wxTreeCtrl * self, const wxTreeItemId * item) {
+    return self->GetItemState(*item);
+}
+wxString *wxTreeCtrl_GetItemText(const wxTreeCtrl * self, const wxTreeItemId * item) {
+    return new wxString(self->GetItemText(*item));
+}
+wxColour *wxTreeCtrl_GetItemTextColour(const wxTreeCtrl * self, const wxTreeItemId * item) {
+    return new wxColour(self->GetItemTextColour(*item));
+}
+wxTreeItemId *wxTreeCtrl_GetLastChild(const wxTreeCtrl * self, const wxTreeItemId * item) {
+    return new wxTreeItemId(self->GetLastChild(*item));
+}
+wxTreeItemId *wxTreeCtrl_GetNextChild(const wxTreeCtrl * self, const wxTreeItemId * item, wxTreeItemIdValue * cookie) {
+    return new wxTreeItemId(self->GetNextChild(*item, *cookie));
+}
+wxTreeItemId *wxTreeCtrl_GetNextSibling(const wxTreeCtrl * self, const wxTreeItemId * item) {
+    return new wxTreeItemId(self->GetNextSibling(*item));
+}
+wxTreeItemId *wxTreeCtrl_GetNextVisible(const wxTreeCtrl * self, const wxTreeItemId * item) {
+    return new wxTreeItemId(self->GetNextVisible(*item));
+}
+wxTreeItemId *wxTreeCtrl_GetPrevSibling(const wxTreeCtrl * self, const wxTreeItemId * item) {
+    return new wxTreeItemId(self->GetPrevSibling(*item));
+}
+wxTreeItemId *wxTreeCtrl_GetPrevVisible(const wxTreeCtrl * self, const wxTreeItemId * item) {
+    return new wxTreeItemId(self->GetPrevVisible(*item));
+}
+bool wxTreeCtrl_GetQuickBestSize(const wxTreeCtrl * self) {
+    return self->GetQuickBestSize();
+}
+wxTreeItemId *wxTreeCtrl_GetRootItem(const wxTreeCtrl * self) {
+    return new wxTreeItemId(self->GetRootItem());
+}
+wxTreeItemId *wxTreeCtrl_GetSelection(const wxTreeCtrl * self) {
+    return new wxTreeItemId(self->GetSelection());
+}
+size_t wxTreeCtrl_GetSelections(const wxTreeCtrl * self, wxArrayTreeItemIds * selection) {
+    return self->GetSelections(*selection);
+}
+wxImageList * wxTreeCtrl_GetStateImageList(const wxTreeCtrl * self) {
+    return self->GetStateImageList();
+}
+wxTreeItemId *wxTreeCtrl_HitTest(const wxTreeCtrl * self, const wxPoint * point, int * flags) {
+    return new wxTreeItemId(self->HitTest(*point, *flags));
+}
+wxTreeItemId *wxTreeCtrl_InsertItem(wxTreeCtrl * self, const wxTreeItemId * parent, const wxTreeItemId * previous, const wxString * text, int image, int sel_image, wxTreeItemData * data) {
+    return new wxTreeItemId(self->InsertItem(*parent, *previous, *text, image, sel_image, data));
+}
+wxTreeItemId *wxTreeCtrl_InsertItem1(wxTreeCtrl * self, const wxTreeItemId * parent, size_t pos, const wxString * text, int image, int sel_image, wxTreeItemData * data) {
+    return new wxTreeItemId(self->InsertItem(*parent, pos, *text, image, sel_image, data));
+}
+bool wxTreeCtrl_IsBold(const wxTreeCtrl * self, const wxTreeItemId * item) {
+    return self->IsBold(*item);
+}
+bool wxTreeCtrl_IsEmpty(const wxTreeCtrl * self) {
+    return self->IsEmpty();
+}
+bool wxTreeCtrl_IsExpanded(const wxTreeCtrl * self, const wxTreeItemId * item) {
+    return self->IsExpanded(*item);
+}
+bool wxTreeCtrl_IsSelected(const wxTreeCtrl * self, const wxTreeItemId * item) {
+    return self->IsSelected(*item);
+}
+bool wxTreeCtrl_IsVisible(const wxTreeCtrl * self, const wxTreeItemId * item) {
+    return self->IsVisible(*item);
+}
+bool wxTreeCtrl_ItemHasChildren(const wxTreeCtrl * self, const wxTreeItemId * item) {
+    return self->ItemHasChildren(*item);
+}
+int wxTreeCtrl_OnCompareItems(wxTreeCtrl * self, const wxTreeItemId * item1, const wxTreeItemId * item2) {
+    return self->OnCompareItems(*item1, *item2);
+}
+wxTreeItemId *wxTreeCtrl_PrependItem(wxTreeCtrl * self, const wxTreeItemId * parent, const wxString * text, int image, int sel_image, wxTreeItemData * data) {
+    return new wxTreeItemId(self->PrependItem(*parent, *text, image, sel_image, data));
+}
+void wxTreeCtrl_ScrollTo(wxTreeCtrl * self, const wxTreeItemId * item) {
+    return self->ScrollTo(*item);
+}
+void wxTreeCtrl_SelectItem(wxTreeCtrl * self, const wxTreeItemId * item, bool select) {
+    return self->SelectItem(*item, select);
+}
+#ifndef __WXMSW__
+void wxTreeCtrl_SetButtonsImageList(wxTreeCtrl * self, wxImageList * image_list) {
+    return self->SetButtonsImageList(image_list);
+}
+#endif
+void wxTreeCtrl_SetIndent(wxTreeCtrl * self, unsigned int indent) {
+    return self->SetIndent(indent);
+}
+void wxTreeCtrl_SetSpacing(wxTreeCtrl * self, unsigned int spacing) {
+    return self->SetSpacing(spacing);
+}
+void wxTreeCtrl_SetItemBackgroundColour(wxTreeCtrl * self, const wxTreeItemId * item, const wxColour * col) {
+    return self->SetItemBackgroundColour(*item, *col);
+}
+void wxTreeCtrl_SetItemBold(wxTreeCtrl * self, const wxTreeItemId * item, bool bold) {
+    return self->SetItemBold(*item, bold);
+}
+void wxTreeCtrl_SetItemData(wxTreeCtrl * self, const wxTreeItemId * item, wxTreeItemData * data) {
+    return self->SetItemData(*item, data);
+}
+void wxTreeCtrl_SetItemDropHighlight(wxTreeCtrl * self, const wxTreeItemId * item, bool highlight) {
+    return self->SetItemDropHighlight(*item, highlight);
+}
+void wxTreeCtrl_SetItemFont(wxTreeCtrl * self, const wxTreeItemId * item, const wxFont * font) {
+    return self->SetItemFont(*item, *font);
+}
+void wxTreeCtrl_SetItemHasChildren(wxTreeCtrl * self, const wxTreeItemId * item, bool has_children) {
+    return self->SetItemHasChildren(*item, has_children);
+}
+void wxTreeCtrl_SetItemState(wxTreeCtrl * self, const wxTreeItemId * item, int state) {
+    return self->SetItemState(*item, state);
+}
+void wxTreeCtrl_SetItemText(wxTreeCtrl * self, const wxTreeItemId * item, const wxString * text) {
+    return self->SetItemText(*item, *text);
+}
+void wxTreeCtrl_SetItemTextColour(wxTreeCtrl * self, const wxTreeItemId * item, const wxColour * col) {
+    return self->SetItemTextColour(*item, *col);
+}
+void wxTreeCtrl_SetQuickBestSize(wxTreeCtrl * self, bool quick_best_size) {
+    return self->SetQuickBestSize(quick_best_size);
+}
+void wxTreeCtrl_SetStateImageList(wxTreeCtrl * self, wxImageList * image_list) {
+    return self->SetStateImageList(image_list);
+}
+void wxTreeCtrl_SetWindowStyle(wxTreeCtrl * self, long styles) {
+    return self->SetWindowStyle(styles);
+}
+void wxTreeCtrl_SortChildren(wxTreeCtrl * self, const wxTreeItemId * item) {
+    return self->SortChildren(*item);
+}
+void wxTreeCtrl_Toggle(wxTreeCtrl * self, const wxTreeItemId * item) {
+    return self->Toggle(*item);
+}
+void wxTreeCtrl_ToggleItemSelection(wxTreeCtrl * self, const wxTreeItemId * item) {
+    return self->ToggleItemSelection(*item);
+}
+void wxTreeCtrl_Unselect(wxTreeCtrl * self) {
+    return self->Unselect();
+}
+void wxTreeCtrl_UnselectAll(wxTreeCtrl * self) {
+    return self->UnselectAll();
+}
+void wxTreeCtrl_UnselectItem(wxTreeCtrl * self, const wxTreeItemId * item) {
+    return self->UnselectItem(*item);
+}
+void wxTreeCtrl_SelectChildren(wxTreeCtrl * self, const wxTreeItemId * parent) {
+    return self->SelectChildren(*parent);
+}
+
+// CLASS: wxTreeEvent
+wxClassInfo *wxTreeEvent_CLASSINFO() {
+    return wxCLASSINFO(wxTreeEvent);
+}
+wxTreeItemId *wxTreeEvent_GetItem(const wxTreeEvent * self) {
+    return new wxTreeItemId(self->GetItem());
+}
+int wxTreeEvent_GetKeyCode(const wxTreeEvent * self) {
+    return self->GetKeyCode();
+}
+wxKeyEvent *wxTreeEvent_GetKeyEvent(const wxTreeEvent * self) {
+    return new wxKeyEvent(self->GetKeyEvent());
+}
+wxString *wxTreeEvent_GetLabel(const wxTreeEvent * self) {
+    return new wxString(self->GetLabel());
+}
+wxTreeItemId *wxTreeEvent_GetOldItem(const wxTreeEvent * self) {
+    return new wxTreeItemId(self->GetOldItem());
+}
+wxPoint *wxTreeEvent_GetPoint(const wxTreeEvent * self) {
+    return new wxPoint(self->GetPoint());
+}
+bool wxTreeEvent_IsEditCancelled(const wxTreeEvent * self) {
+    return self->IsEditCancelled();
+}
+void wxTreeEvent_SetToolTip(wxTreeEvent * self, const wxString * tooltip) {
+    return self->SetToolTip(*tooltip);
+}
+
+// CLASS: wxTreeItemData
+void wxTreeItemData_delete(wxTreeItemData *self) {
+    delete self;
+}
+wxTreeItemData *wxTreeItemData_new() {
+    return new wxTreeItemData();
+}
+wxTreeItemId *wxTreeItemData_GetId(const wxTreeItemData * self) {
+    return new wxTreeItemId(self->GetId());
+}
+void wxTreeItemData_SetId(wxTreeItemData * self, const wxTreeItemId * id) {
+    return self->SetId(*id);
+}
+
+// CLASS: wxTreeItemId
+void wxTreeItemId_delete(wxTreeItemId *self) {
+    delete self;
+}
+wxTreeItemId *wxTreeItemId_new() {
+    return new wxTreeItemId();
+}
+bool wxTreeItemId_IsOk(const wxTreeItemId * self) {
+    return self->IsOk();
+}
+void * wxTreeItemId_GetID(const wxTreeItemId * self) {
+    return self->GetID();
+}
+void wxTreeItemId_Unset(wxTreeItemId * self) {
+    return self->Unset();
+}
+
+// CLASS: wxTreeListCtrl
+wxClassInfo *wxTreeListCtrl_CLASSINFO() {
+    return wxCLASSINFO(wxTreeListCtrl);
+}
+void wxTreeListCtrl_AssignImageList(wxTreeListCtrl * self, wxImageList * image_list) {
+    return self->AssignImageList(image_list);
+}
+void wxTreeListCtrl_SetImageList(wxTreeListCtrl * self, wxImageList * image_list) {
+    return self->SetImageList(image_list);
+}
+int wxTreeListCtrl_AppendColumn(wxTreeListCtrl * self, const wxString * title, int width, wxAlignment align, int flags) {
+    return self->AppendColumn(*title, width, align, flags);
+}
+void wxTreeListCtrl_ClearColumns(wxTreeListCtrl * self) {
+    return self->ClearColumns();
+}
+int wxTreeListCtrl_WidthFor(const wxTreeListCtrl * self, const wxString * text) {
+    return self->WidthFor(*text);
+}
+void wxTreeListCtrl_DeleteAllItems(wxTreeListCtrl * self) {
+    return self->DeleteAllItems();
+}
+wxTreeListItem *wxTreeListCtrl_GetRootItem(const wxTreeListCtrl * self) {
+    return new wxTreeListItem(self->GetRootItem());
+}
+wxTreeListItem *wxTreeListCtrl_GetFirstItem(const wxTreeListCtrl * self) {
+    return new wxTreeListItem(self->GetFirstItem());
+}
+wxTreeListItem *wxTreeListCtrl_GetSelection(const wxTreeListCtrl * self) {
+    return new wxTreeListItem(self->GetSelection());
+}
+void wxTreeListCtrl_SelectAll(wxTreeListCtrl * self) {
+    return self->SelectAll();
+}
+void wxTreeListCtrl_UnselectAll(wxTreeListCtrl * self) {
+    return self->UnselectAll();
+}
+bool wxTreeListCtrl_GetSortColumn(wxTreeListCtrl * self, unsigned * col, bool * ascending_order) {
+    return self->GetSortColumn(col, ascending_order);
+}
+void wxTreeListCtrl_SetItemComparator(wxTreeListCtrl * self, wxTreeListItemComparator * comparator) {
+    return self->SetItemComparator(comparator);
+}
+wxWindow * wxTreeListCtrl_GetView(const wxTreeListCtrl * self) {
+    return self->GetView();
+}
+wxDataViewCtrl * wxTreeListCtrl_GetDataView(const wxTreeListCtrl * self) {
+    return self->GetDataView();
+}
+wxTreeListCtrl *wxTreeListCtrl_new() {
+    return new wxTreeListCtrl();
+}
+wxTreeListCtrl *wxTreeListCtrl_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxTreeListCtrl(parent, id, *pos, *size, style, *name);
+}
+bool wxTreeListCtrl_Create(wxTreeListCtrl * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, id, *pos, *size, style, *name);
+}
+
+// CLASS: wxTreeListItem
+void wxTreeListItem_delete(wxTreeListItem *self) {
+    delete self;
+}
+wxTreeListItem *wxTreeListItem_new() {
+    return new wxTreeListItem();
+}
+bool wxTreeListItem_IsOk(const wxTreeListItem * self) {
+    return self->IsOk();
+}
+
+// CLASS: wxTreeListItemComparator
+void wxTreeListItemComparator_delete(wxTreeListItemComparator *self) {
+    delete self;
+}
+
+// CLASS: wxTreebook
+wxClassInfo *wxTreebook_CLASSINFO() {
+    return wxCLASSINFO(wxTreebook);
+}
+wxTreebook *wxTreebook_new() {
+    return new wxTreebook();
+}
+wxTreebook *wxTreebook_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return new wxTreebook(parent, id, *pos, *size, style, *name);
+}
+bool wxTreebook_AddSubPage(wxTreebook * self, wxWindow * page, const wxString * text, bool b_select, int image_id) {
+    return self->AddSubPage(page, *text, b_select, image_id);
+}
+bool wxTreebook_CollapseNode(wxTreebook * self, size_t page_id) {
+    return self->CollapseNode(page_id);
+}
+bool wxTreebook_Create(wxTreebook * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name) {
+    return self->Create(parent, id, *pos, *size, style, *name);
+}
+bool wxTreebook_ExpandNode(wxTreebook * self, size_t page_id, bool expand) {
+    return self->ExpandNode(page_id, expand);
+}
+int wxTreebook_GetPageParent(const wxTreebook * self, size_t page) {
+    return self->GetPageParent(page);
+}
+bool wxTreebook_InsertSubPage(wxTreebook * self, size_t page_pos, wxWindow * page, const wxString * text, bool b_select, int image_id) {
+    return self->InsertSubPage(page_pos, page, *text, b_select, image_id);
+}
+bool wxTreebook_IsNodeExpanded(const wxTreebook * self, size_t page_id) {
+    return self->IsNodeExpanded(page_id);
 }
 
 } // extern "C"

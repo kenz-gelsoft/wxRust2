@@ -207,8 +207,14 @@ pub trait NotificationMessageMethods: EvtHandlerMethods {
     fn show(&self, timeout: c_int) -> bool {
         unsafe { ffi::wxNotificationMessage_Show(self.as_ptr(), timeout) }
     }
-    fn use_task_bar_icon(icon: *mut c_void) -> *mut c_void {
-        unsafe { ffi::wxNotificationMessage_UseTaskBarIcon(icon) }
+    fn use_task_bar_icon<T: TaskBarIconMethods>(icon: Option<&T>) -> WeakRef<TaskBarIcon> {
+        unsafe {
+            let icon = match icon {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            WeakRef::<TaskBarIcon>::from(ffi::wxNotificationMessage_UseTaskBarIcon(icon))
+        }
     }
     fn msw_use_toasts(shortcut_path: &str, app_id: &str) -> bool {
         unsafe {

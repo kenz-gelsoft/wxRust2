@@ -31,5 +31,13 @@ wxClassInfo * wxClassInfo_FindClass(const wxString * class_name) {
     return wxClassInfo::FindClass(*class_name);
 }
 
+// CLASS: wxClientData
+void wxClientData_delete(wxClientData *self) {
+    delete self;
+}
+wxClientData *wxClientData_new() {
+    return new wxClientData();
+}
+
 } // extern "C"
 

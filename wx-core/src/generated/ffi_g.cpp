@@ -203,6 +203,9 @@ wxString *wxGenericDirCtrl_GetPath(const wxGenericDirCtrl * self) {
 void wxGenericDirCtrl_GetPaths(const wxGenericDirCtrl * self, wxArrayString * paths) {
     return self->GetPaths(*paths);
 }
+wxTreeItemId *wxGenericDirCtrl_GetRootId(wxGenericDirCtrl * self) {
+    return new wxTreeItemId(self->GetRootId());
+}
 wxTreeCtrl * wxGenericDirCtrl_GetTreeCtrl(const wxGenericDirCtrl * self) {
     return self->GetTreeCtrl();
 }

@@ -66,8 +66,8 @@ pub trait RadioBoxMethods: ControlMethods {
     fn get_item_help_text(&self, item: c_uint) -> String {
         unsafe { WxString::from_ptr(ffi::wxRadioBox_GetItemHelpText(self.as_ptr(), item)).into() }
     }
-    fn get_item_tool_tip(&self, item: c_uint) -> *mut c_void {
-        unsafe { ffi::wxRadioBox_GetItemToolTip(self.as_ptr(), item) }
+    fn get_item_tool_tip(&self, item: c_uint) -> Option<ToolTipIsOwned<false>> {
+        unsafe { ToolTip::option_from(ffi::wxRadioBox_GetItemToolTip(self.as_ptr(), item)) }
     }
     fn get_row_count(&self) -> c_uint {
         unsafe { ffi::wxRadioBox_GetRowCount(self.as_ptr()) }
