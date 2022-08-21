@@ -535,9 +535,6 @@ pub trait RectMethods: WxRustMethods {
     // BLOCKED: fn operator==()
 }
 
-// wxRect
-pub trait RectMethods: WxRustMethods {}
-
 // wxRegion
 pub trait RegionMethods: GDIObjectMethods {
     // DTOR: fn ~wxRegion()

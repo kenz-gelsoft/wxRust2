@@ -461,7 +461,6 @@ wxml_files = [
     'wxml/classwx_rearrange_list.xml',
     'wxml/classwx_rect.xml',
     'wxml/classwx_ref_counter.xml',
-    'wxml/classwx_rect.xml',
     'wxml/classwx_region.xml',
     'wxml/classwx_region_iterator.xml',
     'wxml/classwx_renderer_native.xml',
