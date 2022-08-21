@@ -1,7 +1,10 @@
 #pragma once
 
 #include <wx/dcclient.h>
+#include <wx/event.h>
+#include <wx/utils.h>
 #include <wx/window.h>
+#include <wx/wizard.h>
 #include <wx/wrapsizer.h>
 
 extern "C" {
@@ -314,9 +317,71 @@ wxWindow *wxWindow_new();
 wxWindow *wxWindow_new1(wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 bool wxWindow_Create(wxWindow * self, wxWindow * parent, wxWindowID id, const wxPoint * pos, const wxSize * size, long style, const wxString * name);
 
+// CLASS: wxWindowCreateEvent
+wxClassInfo *wxWindowCreateEvent_CLASSINFO();
+wxWindowCreateEvent *wxWindowCreateEvent_new(wxWindow * win);
+wxWindow * wxWindowCreateEvent_GetWindow(const wxWindowCreateEvent * self);
+
 // CLASS: wxWindowDC
 wxClassInfo *wxWindowDC_CLASSINFO();
 wxWindowDC *wxWindowDC_new(wxWindow * window);
+
+// CLASS: wxWindowDestroyEvent
+wxClassInfo *wxWindowDestroyEvent_CLASSINFO();
+wxWindowDestroyEvent *wxWindowDestroyEvent_new(wxWindow * win);
+wxWindow * wxWindowDestroyEvent_GetWindow(const wxWindowDestroyEvent * self);
+
+// CLASS: wxWindowDisabler
+void wxWindowDisabler_delete(wxWindowDisabler *self);
+wxWindowDisabler *wxWindowDisabler_new(bool disable);
+#if wxCHECK_VERSION(3, 1, 7)
+wxWindowDisabler *wxWindowDisabler_new1(wxWindow * win_to_skip, wxWindow * win_to_skip2);
+#endif
+
+// CLASS: wxWizard
+wxClassInfo *wxWizard_CLASSINFO();
+wxWizard *wxWizard_new();
+wxWizard *wxWizard_new1(wxWindow * parent, int id, const wxString * title, const wxBitmapBundle * bitmap, const wxPoint * pos, long style);
+bool wxWizard_Create(wxWizard * self, wxWindow * parent, int id, const wxString * title, const wxBitmapBundle * bitmap, const wxPoint * pos, long style);
+void wxWizard_FitToPage(wxWizard * self, const wxWizardPage * first_page);
+wxBitmap *wxWizard_GetBitmap(const wxWizard * self);
+wxColour *wxWizard_GetBitmapBackgroundColour(const wxWizard * self);
+int wxWizard_GetBitmapPlacement(const wxWizard * self);
+wxWizardPage * wxWizard_GetCurrentPage(const wxWizard * self);
+int wxWizard_GetMinimumBitmapWidth(const wxWizard * self);
+wxSizer * wxWizard_GetPageAreaSizer(const wxWizard * self);
+wxSize *wxWizard_GetPageSize(const wxWizard * self);
+bool wxWizard_HasNextPage(wxWizard * self, wxWizardPage * page);
+bool wxWizard_HasPrevPage(wxWizard * self, wxWizardPage * page);
+bool wxWizard_RunWizard(wxWizard * self, wxWizardPage * first_page);
+void wxWizard_SetBitmap(wxWizard * self, const wxBitmapBundle * bitmap);
+void wxWizard_SetBitmapBackgroundColour(wxWizard * self, const wxColour * colour);
+void wxWizard_SetBitmapPlacement(wxWizard * self, int placement);
+void wxWizard_SetBorder(wxWizard * self, int border);
+void wxWizard_SetMinimumBitmapWidth(wxWizard * self, int width);
+void wxWizard_SetPageSize(wxWizard * self, const wxSize * size_page);
+
+// CLASS: wxWizardEvent
+wxClassInfo *wxWizardEvent_CLASSINFO();
+bool wxWizardEvent_GetDirection(const wxWizardEvent * self);
+wxWizardPage * wxWizardEvent_GetPage(const wxWizardEvent * self);
+
+// CLASS: wxWizardPage
+wxClassInfo *wxWizardPage_CLASSINFO();
+bool wxWizardPage_Create(wxWizardPage * self, wxWizard * parent, const wxBitmapBundle * bitmap);
+wxBitmap *wxWizardPage_GetBitmap(const wxWizardPage * self);
+wxWizardPage * wxWizardPage_GetNext(const wxWizardPage * self);
+wxWizardPage * wxWizardPage_GetPrev(const wxWizardPage * self);
+
+// CLASS: wxWizardPageSimple
+wxClassInfo *wxWizardPageSimple_CLASSINFO();
+wxWizardPageSimple *wxWizardPageSimple_new();
+wxWizardPageSimple *wxWizardPageSimple_new1(wxWizard * parent, wxWizardPage * prev, wxWizardPage * next, const wxBitmapBundle * bitmap);
+bool wxWizardPageSimple_Create(wxWizardPageSimple * self, wxWizard * parent, wxWizardPage * prev, wxWizardPage * next, const wxBitmapBundle * bitmap);
+wxWizardPageSimple * wxWizardPageSimple_Chain(wxWizardPageSimple * self, wxWizardPageSimple * next);
+void wxWizardPageSimple_SetNext(wxWizardPageSimple * self, wxWizardPage * next);
+void wxWizardPageSimple_SetPrev(wxWizardPageSimple * self, wxWizardPage * prev);
+void wxWizardPageSimple_Chain1(wxWizardPageSimple * first, wxWizardPageSimple * second);
 
 // CLASS: wxWrapSizer
 wxClassInfo *wxWrapSizer_CLASSINFO();

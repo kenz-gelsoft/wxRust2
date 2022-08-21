@@ -1362,8 +1362,250 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
 }
 
+// wxWindowCreateEvent
+pub trait WindowCreateEventMethods: CommandEventMethods {
+    fn get_window(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxWindowCreateEvent_GetWindow(self.as_ptr())) }
+    }
+}
+
 // wxWindowDC
 pub trait WindowDCMethods: DCMethods {}
+
+// wxWindowDestroyEvent
+pub trait WindowDestroyEventMethods: CommandEventMethods {
+    fn get_window(&self) -> WeakRef<Window> {
+        unsafe { WeakRef::<Window>::from(ffi::wxWindowDestroyEvent_GetWindow(self.as_ptr())) }
+    }
+}
+
+// wxWindowDisabler
+pub trait WindowDisablerMethods: WxRustMethods {
+    // DTOR: fn ~wxWindowDisabler()
+}
+
+// wxWizard
+pub trait WizardMethods: DialogMethods {
+    fn create_int<W: WindowMethods, B: BitmapBundleMethods, P: PointMethods>(
+        &self,
+        parent: Option<&W>,
+        id: c_int,
+        title: &str,
+        bitmap: &B,
+        pos: &P,
+        style: c_long,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let title = WxString::from(title);
+            let title = title.as_ptr();
+            let bitmap = bitmap.as_ptr();
+            let pos = pos.as_ptr();
+            ffi::wxWizard_Create(self.as_ptr(), parent, id, title, bitmap, pos, style)
+        }
+    }
+    fn fit_to_page<W: WizardPageMethods>(&self, first_page: Option<&W>) {
+        unsafe {
+            let first_page = match first_page {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWizard_FitToPage(self.as_ptr(), first_page)
+        }
+    }
+    fn get_bitmap(&self) -> BitmapIsOwned<false> {
+        unsafe { BitmapIsOwned::from_ptr(ffi::wxWizard_GetBitmap(self.as_ptr())) }
+    }
+    fn get_bitmap_background_colour(&self) -> ColourIsOwned<false> {
+        unsafe { ColourIsOwned::from_ptr(ffi::wxWizard_GetBitmapBackgroundColour(self.as_ptr())) }
+    }
+    fn get_bitmap_placement(&self) -> c_int {
+        unsafe { ffi::wxWizard_GetBitmapPlacement(self.as_ptr()) }
+    }
+    fn get_current_page(&self) -> WeakRef<WizardPage> {
+        unsafe { WeakRef::<WizardPage>::from(ffi::wxWizard_GetCurrentPage(self.as_ptr())) }
+    }
+    fn get_minimum_bitmap_width(&self) -> c_int {
+        unsafe { ffi::wxWizard_GetMinimumBitmapWidth(self.as_ptr()) }
+    }
+    fn get_page_area_sizer(&self) -> Option<SizerIsOwned<false>> {
+        unsafe { Sizer::option_from(ffi::wxWizard_GetPageAreaSizer(self.as_ptr())) }
+    }
+    fn get_page_size(&self) -> Size {
+        unsafe { Size::from_ptr(ffi::wxWizard_GetPageSize(self.as_ptr())) }
+    }
+    fn has_next_page<W: WizardPageMethods>(&self, page: Option<&W>) -> bool {
+        unsafe {
+            let page = match page {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWizard_HasNextPage(self.as_ptr(), page)
+        }
+    }
+    fn has_prev_page<W: WizardPageMethods>(&self, page: Option<&W>) -> bool {
+        unsafe {
+            let page = match page {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWizard_HasPrevPage(self.as_ptr(), page)
+        }
+    }
+    fn run_wizard<W: WizardPageMethods>(&self, first_page: Option<&W>) -> bool {
+        unsafe {
+            let first_page = match first_page {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWizard_RunWizard(self.as_ptr(), first_page)
+        }
+    }
+    fn set_bitmap<B: BitmapBundleMethods>(&self, bitmap: &B) {
+        unsafe {
+            let bitmap = bitmap.as_ptr();
+            ffi::wxWizard_SetBitmap(self.as_ptr(), bitmap)
+        }
+    }
+    fn set_bitmap_background_colour<C: ColourMethods>(&self, colour: &C) {
+        unsafe {
+            let colour = colour.as_ptr();
+            ffi::wxWizard_SetBitmapBackgroundColour(self.as_ptr(), colour)
+        }
+    }
+    fn set_bitmap_placement(&self, placement: c_int) {
+        unsafe { ffi::wxWizard_SetBitmapPlacement(self.as_ptr(), placement) }
+    }
+    fn set_border(&self, border: c_int) {
+        unsafe { ffi::wxWizard_SetBorder(self.as_ptr(), border) }
+    }
+    fn set_minimum_bitmap_width(&self, width: c_int) {
+        unsafe { ffi::wxWizard_SetMinimumBitmapWidth(self.as_ptr(), width) }
+    }
+    fn set_page_size<S: SizeMethods>(&self, size_page: &S) {
+        unsafe {
+            let size_page = size_page.as_ptr();
+            ffi::wxWizard_SetPageSize(self.as_ptr(), size_page)
+        }
+    }
+}
+
+// wxWizardEvent
+pub trait WizardEventMethods: NotifyEventMethods {
+    fn get_direction(&self) -> bool {
+        unsafe { ffi::wxWizardEvent_GetDirection(self.as_ptr()) }
+    }
+    fn get_page(&self) -> WeakRef<WizardPage> {
+        unsafe { WeakRef::<WizardPage>::from(ffi::wxWizardEvent_GetPage(self.as_ptr())) }
+    }
+}
+
+// wxWizardPage
+pub trait WizardPageMethods: PanelMethods {
+    fn create_wizard<W: WizardMethods, B: BitmapBundleMethods>(
+        &self,
+        parent: Option<&W>,
+        bitmap: &B,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let bitmap = bitmap.as_ptr();
+            ffi::wxWizardPage_Create(self.as_ptr(), parent, bitmap)
+        }
+    }
+    fn get_bitmap(&self) -> Bitmap {
+        unsafe { Bitmap::from_ptr(ffi::wxWizardPage_GetBitmap(self.as_ptr())) }
+    }
+    fn get_next(&self) -> WeakRef<WizardPage> {
+        unsafe { WeakRef::<WizardPage>::from(ffi::wxWizardPage_GetNext(self.as_ptr())) }
+    }
+    fn get_prev(&self) -> WeakRef<WizardPage> {
+        unsafe { WeakRef::<WizardPage>::from(ffi::wxWizardPage_GetPrev(self.as_ptr())) }
+    }
+}
+
+// wxWizardPageSimple
+pub trait WizardPageSimpleMethods: WizardPageMethods {
+    fn create_wizard_wizardpage<
+        W: WizardMethods,
+        W2: WizardPageMethods,
+        W3: WizardPageMethods,
+        B: BitmapBundleMethods,
+    >(
+        &self,
+        parent: Option<&W>,
+        prev: Option<&W2>,
+        next: Option<&W3>,
+        bitmap: &B,
+    ) -> bool {
+        unsafe {
+            let parent = match parent {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let prev = match prev {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let next = match next {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let bitmap = bitmap.as_ptr();
+            ffi::wxWizardPageSimple_Create(self.as_ptr(), parent, prev, next, bitmap)
+        }
+    }
+    fn chain<W: WizardPageSimpleMethods>(&self, next: Option<&W>) -> &Self {
+        unsafe {
+            let next = match next {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWizardPageSimple_Chain(self.as_ptr(), next);
+            &self
+        }
+    }
+    fn set_next<W: WizardPageMethods>(&self, next: Option<&W>) {
+        unsafe {
+            let next = match next {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWizardPageSimple_SetNext(self.as_ptr(), next)
+        }
+    }
+    fn set_prev<W: WizardPageMethods>(&self, prev: Option<&W>) {
+        unsafe {
+            let prev = match prev {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWizardPageSimple_SetPrev(self.as_ptr(), prev)
+        }
+    }
+    fn chain_wizardpagesimple<W: WizardPageSimpleMethods, W2: WizardPageSimpleMethods>(
+        first: Option<&W>,
+        second: Option<&W2>,
+    ) {
+        unsafe {
+            let first = match first {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            let second = match second {
+                Some(r) => r.as_ptr(),
+                None => ptr::null_mut(),
+            };
+            ffi::wxWizardPageSimple_Chain1(first, second)
+        }
+    }
+}
 
 // wxWrapSizer
 pub trait WrapSizerMethods: BoxSizerMethods {}

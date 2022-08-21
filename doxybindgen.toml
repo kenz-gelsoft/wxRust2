@@ -1,18 +1,3 @@
-core_files = [
-    'wxml/classwx_window.xml',
-    'wxml/classwx_window_create_event.xml',
-    'wxml/classwx_window_d_c.xml',
-    'wxml/classwx_window_destroy_event.xml',
-    'wxml/classwx_window_disabler.xml',
-    'wxml/classwx_window_ptr_3_01_t_01_4.xml',
-    'wxml/classwx_wizard.xml',
-    'wxml/classwx_wizard_event.xml',
-    'wxml/classwx_wizard_page.xml',
-    'wxml/classwx_wizard_page_simple.xml',
-    'wxml/classwx_wrap_sizer.xml',
-    'wxml/classwx_x_p_m_handler.xml',
-    'wxml/classwx_zoom_gesture_event.xml',
-]
 wxml_files = [
     'wxml/classwx_about_dialog_info.xml',
     'wxml/classwx_accelerator_entry.xml',
@@ -459,7 +444,7 @@ wxml_files = [
     'wxml/classwx_tree_list_item.xml',
     'wxml/classwx_tree_list_item_comparator.xml',
     'wxml/classwx_treebook.xml',
-    # 'wxml/classwx_two_finger_tap_event.xml', # requires 3.1
+    # 'wxml/classwx_two_finger_tap_event.xml',    # requires 3.1
     'wxml/classwx_u_i_action_simulator.xml',
     'wxml/classwx_u_r_l_data_object.xml',
     'wxml/classwx_update_u_i_event.xml',
@@ -476,8 +461,18 @@ wxml_files = [
     # 'wxml/classwx_variant_data_safe_array.xml', # MSW only
     # 'wxml/classwx_view.xml',                    # Our CI environment is't built with (mingw64)
     'wxml/classwx_window.xml',
+    'wxml/classwx_window_create_event.xml',
     'wxml/classwx_window_d_c.xml',
+    'wxml/classwx_window_destroy_event.xml',
+    'wxml/classwx_window_disabler.xml',
+    # 'wxml/classwx_window_ptr_3_01_t_01_4.xml',  # heavily depends on template
+    'wxml/classwx_wizard.xml',
+    'wxml/classwx_wizard_event.xml',
+    'wxml/classwx_wizard_page.xml',
+    'wxml/classwx_wizard_page_simple.xml',
     'wxml/classwx_wrap_sizer.xml',
+    'wxml/classwx_x_p_m_handler.xml',
+    # 'wxml/classwx_zoom_gesture_event.xml',      # requires 3.1
 ]
 
 [conditions]
@@ -2024,4 +2019,15 @@ wx31 = [
     'ToPhys5',
     'UseBackgroundColour',
     'UseForegroundColour',
+]
+[types.wxWindowDisabler]
+wx317 = [
+    # default argument added
+    'wxWindowDisabler1',
+]
+[types.wxWizardPage]
+blocklist = [
+    # abstract
+    'wxWizardPage',
+    'wxWizardPage1',
 ]
