@@ -17,7 +17,7 @@ extern crate regex;
 use crate::WidgetsPage;
 use regex::Regex;
 use std::cell::RefCell;
-use std::os::raw::{c_int, c_long};
+use std::os::raw::c_int;
 use std::rc::Rc;
 use wx::methods::*;
 
@@ -200,14 +200,14 @@ impl TimePickerWidgetsPage {
             value = Some(time_picker.get_value());
 
             let count = config_ui.sizer_time_picker.get_children().get_count();
-            for n in 0..count {
+            for _n in 0..count {
                 config_ui.sizer_time_picker.remove_int(0);
             }
 
             time_picker.destroy();
         }
 
-        let mut style = wx::BORDER_DEFAULT;
+        let style = wx::BORDER_DEFAULT;
 
         let time_picker = wx::TimePickerCtrl::builder(Some(&self.base))
             .id(TimePickerPage::Picker.into())

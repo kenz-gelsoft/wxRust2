@@ -349,7 +349,7 @@ impl WidgetsPage for SliderWidgetsPage {
             Some(&sizer_left),
             wx::SizerFlags::new(0)
                 .expand()
-                .border_int((wx::ALL & !wx::LEFT), 10),
+                .border_int(wx::ALL & !wx::LEFT, 10),
         );
         sizer_top.add_sizer_sizerflags(
             Some(&sizer_middle),
@@ -359,7 +359,7 @@ impl WidgetsPage for SliderWidgetsPage {
             Some(&sizer_right),
             wx::SizerFlags::new(1)
                 .expand()
-                .border_int((wx::ALL & !wx::RIGHT), 10),
+                .border_int(wx::ALL & !wx::RIGHT, 10),
         );
         let config_ui = ConfigUI {
             chk_min_max_labels,
