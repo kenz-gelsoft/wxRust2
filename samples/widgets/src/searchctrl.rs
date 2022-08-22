@@ -21,17 +21,17 @@ use wx::methods::*;
 // control ids
 #[derive(Clone, Copy)]
 enum ID {
-    SEARCH_CB = wx::ID_HIGHEST as isize,
-    CANCEL_CB,
-    MENU_CB,
+    SearchCB = wx::ID_HIGHEST as isize,
+    CancelCB,
+    MenuCB,
 
-    SEARCHMENU,
-    SEARCHMENU_LAST = ID::SEARCHMENU as isize + 5,
+    SearchMenu,
+    SearchMenuLast = ID::SearchMenu as isize + 5,
 }
 impl ID {
     fn from(v: c_int) -> Option<Self> {
         use ID::*;
-        for e in [SEARCH_CB, CANCEL_CB, MENU_CB, SEARCHMENU, SEARCHMENU_LAST] {
+        for e in [SearchCB, CancelCB, MenuCB, SearchMenu, SearchMenuLast] {
             if v == e.into() {
                 return Some(e);
             }
@@ -78,15 +78,15 @@ impl WidgetsPage for SearchCtrlWidgetsPage {
         );
 
         let search_btn_check = wx::CheckBox::builder(Some(&self.base))
-            .id(ID::SEARCH_CB.into())
+            .id(ID::SearchCB.into())
             .label("Search button")
             .build();
         let cancel_btn_check = wx::CheckBox::builder(Some(&self.base))
-            .id(ID::CANCEL_CB.into())
+            .id(ID::CancelCB.into())
             .label("Cancel button")
             .build();
         let menu_btn_check = wx::CheckBox::builder(Some(&self.base))
-            .id(ID::MENU_CB.into())
+            .id(ID::MenuCB.into())
             .label("Search menu")
             .build();
 
@@ -134,9 +134,9 @@ impl WidgetsPage for SearchCtrlWidgetsPage {
             (ID::from(event.get_id()), self.config_ui.borrow().as_ref())
         {
             match m {
-                ID::SEARCH_CB => self.on_toggle_search_button(config_ui),
-                ID::CANCEL_CB => self.on_toggle_cancel_button(config_ui),
-                ID::MENU_CB => self.on_toggle_search_menu(config_ui),
+                ID::SearchCB => self.on_toggle_search_button(config_ui),
+                ID::CancelCB => self.on_toggle_cancel_button(config_ui),
+                ID::MenuCB => self.on_toggle_search_menu(config_ui),
                 _ => (),
             };
         }
@@ -180,11 +180,11 @@ impl SearchCtrlWidgetsPage {
             menu.append_int_str(wx::ID_ANY, "Recent Searches", "", wx::ITEM_NORMAL)
         {
             menu_item.enable(false);
-            for i in 0..(ID::SEARCHMENU_LAST as c_int - ID::SEARCHMENU as c_int) {
+            for i in 0..(ID::SearchMenuLast as c_int - ID::SearchMenu as c_int) {
                 let item_text = format!("item {}", i);
                 let tip_text = format!("tip {}", i);
                 menu.append_int_str(
-                    (ID::SEARCHMENU as c_int) + i,
+                    (ID::SearchMenu as c_int) + i,
                     &item_text,
                     &tip_text,
                     wx::ITEM_CHECK,

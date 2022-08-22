@@ -103,8 +103,6 @@ use super::*;
 
 def class_i_rs(classes, libname):
     yield '''\
-#![allow(non_upper_case_globals)]
-
 use super::*;
 '''
     for cls in classes:
@@ -188,6 +186,9 @@ pub use wx_base::methods::*;
 
 def generated_rs(initials, libname):
     yield '''\
+#![allow(non_upper_case_globals)]
+#![allow(unused_imports)]
+
 use std::os::raw::{c_double, c_int, c_long, c_uchar, c_uint, c_void};
 
 use super::*;

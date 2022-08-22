@@ -636,7 +636,7 @@ impl ListboxWidgetsPage {
         }
     }
 
-    fn on_button_delete_sel(&self, config_ui: &ConfigUI) {
+    fn on_button_delete_sel(&self, _: &ConfigUI) {
         if let Some(lbox) = self.lbox.borrow().as_ref() {
             let selections = wx::ArrayInt::new();
             let mut n = lbox.get_selections(&selections) - 1;
