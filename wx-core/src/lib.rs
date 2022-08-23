@@ -47,7 +47,7 @@ pub mod methods {
         fn separator(self) -> Self;
     }
 }
-use methods::*;
+pub use methods::*;
 
 mod ffi {
     use std::os::raw::{c_int, c_void};
