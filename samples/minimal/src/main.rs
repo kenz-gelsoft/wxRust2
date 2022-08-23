@@ -24,19 +24,19 @@ const MINIMAL_ABOUT: c_int = wx::ID_ABOUT;
 fn main() {
     wx::App::run(|_| {
         let frame = MyFrame::new("Minimal wxRust App");
-        let frame_copy = frame.clone();
-        frame
-            .base
-            .bind(wx::RustEvent::Menu, move |event: &wx::CommandEvent| {
-                frame_copy.handle_menu(event)
+        let weak_frame = frame.clone();
+        if let Some(frame) = frame.base.get() {
+            frame.bind(wx::RustEvent::Menu, move |event: &wx::CommandEvent| {
+                weak_frame.handle_menu(event)
             });
-        frame.base.show(true);
+            frame.show(true);
+        }
     });
 }
 
 #[derive(Clone)]
 struct MyFrame {
-    base: wx::Frame,
+    base: wx::WeakRef<wx::FrameIsOwned<false>>,
 }
 impl MyFrame {
     fn new(title: &str) -> Self {
@@ -52,30 +52,34 @@ impl MyFrame {
 
         frame.create_status_bar(2, wx::STB_DEFAULT_STYLE, 0, "statusBar");
         frame.set_status_text("Welcome to wxRust!", 0);
-        MyFrame { base: frame }
+        MyFrame {
+            base: wx::WeakRef::from(&frame),
+        }
     }
 
     fn handle_menu(&self, event: &wx::CommandEvent) {
         println!("event={}", event.get_id());
-        match event.get_id() {
-            MINIMAL_QUIT => self.on_quit(),
-            MINIMAL_ABOUT => self.on_about(),
-            _ => (),
-        };
+        if let Some(frame) = self.base.get() {
+            match event.get_id() {
+                MINIMAL_QUIT => self.on_quit(&frame),
+                MINIMAL_ABOUT => self.on_about(&frame),
+                _ => (),
+            };
+        }
     }
 
-    fn on_quit(&self) {
-        self.base.close(true);
+    fn on_quit<F: FrameMethods>(&self, frame: &F) {
+        frame.close(true);
     }
 
-    fn on_about(&self) {
+    fn on_about<F: FrameMethods>(&self, frame: &F) {
         wx::message_box(
             "Message",
             "About wxRust minimal sample",
             (wx::OK | wx::ICON_INFORMATION as c_long)
                 .try_into()
                 .unwrap(),
-            Some(&self.base),
+            Some(frame),
         )
     }
 }

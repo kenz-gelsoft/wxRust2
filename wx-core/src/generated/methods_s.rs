@@ -183,7 +183,7 @@ pub trait ScrollWinEventMethods: EventMethods {
 pub trait SearchCtrlMethods: TextCtrlMethods {
     // DTOR: fn ~wxSearchCtrl()
     fn get_menu(&self) -> WeakRef<Menu> {
-        unsafe { WeakRef::<Menu>::from(ffi::wxSearchCtrl_GetMenu(self.as_ptr())) }
+        unsafe { WeakRef::<Menu>::from_ptr(ffi::wxSearchCtrl_GetMenu(self.as_ptr())) }
     }
     fn is_search_button_visible(&self) -> bool {
         unsafe { ffi::wxSearchCtrl_IsSearchButtonVisible(self.as_ptr()) }
@@ -659,7 +659,7 @@ pub trait SizerMethods: ObjectMethods {
     }
     // BLOCKED: fn GetChildren1()
     fn get_containing_window(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from(ffi::wxSizer_GetContainingWindow(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from_ptr(ffi::wxSizer_GetContainingWindow(self.as_ptr())) }
     }
     fn set_containing_window<W: WindowMethods>(&self, window: Option<&W>) {
         unsafe {
@@ -1461,7 +1461,7 @@ pub trait SizerItemMethods: ObjectMethods {
         unsafe { Object::option_from(ffi::wxSizerItem_GetUserData(self.as_ptr())) }
     }
     fn get_window(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from(ffi::wxSizerItem_GetWindow(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from_ptr(ffi::wxSizerItem_GetWindow(self.as_ptr())) }
     }
     fn is_shown(&self) -> bool {
         unsafe { ffi::wxSizerItem_IsShown(self.as_ptr()) }
@@ -1863,7 +1863,7 @@ pub trait SplitterEventMethods: NotifyEventMethods {
     }
     fn get_window_being_removed(&self) -> WeakRef<Window> {
         unsafe {
-            WeakRef::<Window>::from(ffi::wxSplitterEvent_GetWindowBeingRemoved(self.as_ptr()))
+            WeakRef::<Window>::from_ptr(ffi::wxSplitterEvent_GetWindowBeingRemoved(self.as_ptr()))
         }
     }
     fn get_x(&self) -> c_int {
@@ -1903,10 +1903,10 @@ pub trait SplitterWindowMethods: WindowMethods {
     }
     // NOT_SUPPORTED: fn GetSplitMode()
     fn get_window1(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from(ffi::wxSplitterWindow_GetWindow1(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from_ptr(ffi::wxSplitterWindow_GetWindow1(self.as_ptr())) }
     }
     fn get_window2(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from(ffi::wxSplitterWindow_GetWindow2(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from_ptr(ffi::wxSplitterWindow_GetWindow2(self.as_ptr())) }
     }
     fn initialize<W: WindowMethods>(&self, window: Option<&W>) {
         unsafe {
@@ -2105,7 +2105,7 @@ pub trait StaticBoxMethods: ControlMethods {
 // wxStaticBoxSizer
 pub trait StaticBoxSizerMethods: BoxSizerMethods {
     fn get_static_box(&self) -> WeakRef<StaticBox> {
-        unsafe { WeakRef::<StaticBox>::from(ffi::wxStaticBoxSizer_GetStaticBox(self.as_ptr())) }
+        unsafe { WeakRef::<StaticBox>::from_ptr(ffi::wxStaticBoxSizer_GetStaticBox(self.as_ptr())) }
     }
 }
 

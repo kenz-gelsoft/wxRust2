@@ -212,10 +212,10 @@ pub trait PickerBaseMethods: ControlMethods {
         unsafe { ffi::wxPickerBase_GetPickerCtrlProportion(self.as_ptr()) }
     }
     fn get_text_ctrl(&self) -> WeakRef<TextCtrl> {
-        unsafe { WeakRef::<TextCtrl>::from(ffi::wxPickerBase_GetTextCtrl(self.as_ptr())) }
+        unsafe { WeakRef::<TextCtrl>::from_ptr(ffi::wxPickerBase_GetTextCtrl(self.as_ptr())) }
     }
     fn get_picker_ctrl(&self) -> WeakRef<Control> {
-        unsafe { WeakRef::<Control>::from(ffi::wxPickerBase_GetPickerCtrl(self.as_ptr())) }
+        unsafe { WeakRef::<Control>::from_ptr(ffi::wxPickerBase_GetPickerCtrl(self.as_ptr())) }
     }
     fn get_text_ctrl_proportion(&self) -> c_int {
         unsafe { ffi::wxPickerBase_GetTextCtrlProportion(self.as_ptr()) }
@@ -393,7 +393,7 @@ pub trait PreferencesPageMethods: WxRustMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            WeakRef::<Window>::from(ffi::wxPreferencesPage_CreateWindow(self.as_ptr(), parent))
+            WeakRef::<Window>::from_ptr(ffi::wxPreferencesPage_CreateWindow(self.as_ptr(), parent))
         }
     }
 }
@@ -411,7 +411,9 @@ pub trait PropertySheetDialogMethods: DialogMethods {
     }
     fn create_book_ctrl(&self) -> WeakRef<BookCtrlBase> {
         unsafe {
-            WeakRef::<BookCtrlBase>::from(ffi::wxPropertySheetDialog_CreateBookCtrl(self.as_ptr()))
+            WeakRef::<BookCtrlBase>::from_ptr(ffi::wxPropertySheetDialog_CreateBookCtrl(
+                self.as_ptr(),
+            ))
         }
     }
     fn create_buttons(&self, flags: c_int) {
@@ -419,7 +421,7 @@ pub trait PropertySheetDialogMethods: DialogMethods {
     }
     fn get_book_ctrl(&self) -> WeakRef<BookCtrlBase> {
         unsafe {
-            WeakRef::<BookCtrlBase>::from(ffi::wxPropertySheetDialog_GetBookCtrl(self.as_ptr()))
+            WeakRef::<BookCtrlBase>::from_ptr(ffi::wxPropertySheetDialog_GetBookCtrl(self.as_ptr()))
         }
     }
     fn get_inner_sizer(&self) -> Option<SizerIsOwned<false>> {

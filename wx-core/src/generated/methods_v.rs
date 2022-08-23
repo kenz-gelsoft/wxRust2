@@ -87,7 +87,7 @@ pub trait ValidatorMethods: EvtHandlerMethods {
         unsafe { Object::from_ptr(ffi::wxValidator_Clone(self.as_ptr())) }
     }
     fn get_window(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from(ffi::wxValidator_GetWindow(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from_ptr(ffi::wxValidator_GetWindow(self.as_ptr())) }
     }
     fn set_window<W: WindowMethods>(&self, window: Option<&W>) {
         unsafe {

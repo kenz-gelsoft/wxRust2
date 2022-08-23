@@ -170,7 +170,7 @@ pub trait FileDialogMethods: DialogMethods {
         unsafe { WxString::from_ptr(ffi::wxFileDialog_GetDirectory(self.as_ptr())).into() }
     }
     fn get_extra_control(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from(ffi::wxFileDialog_GetExtraControl(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from_ptr(ffi::wxFileDialog_GetExtraControl(self.as_ptr())) }
     }
     fn get_filename(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxFileDialog_GetFilename(self.as_ptr())).into() }
@@ -416,7 +416,7 @@ pub trait FilePickerCtrlMethods: PickerBaseMethods {
 pub trait FindDialogEventMethods: CommandEventMethods {
     fn get_dialog(&self) -> WeakRef<FindReplaceDialog> {
         unsafe {
-            WeakRef::<FindReplaceDialog>::from(ffi::wxFindDialogEvent_GetDialog(self.as_ptr()))
+            WeakRef::<FindReplaceDialog>::from_ptr(ffi::wxFindDialogEvent_GetDialog(self.as_ptr()))
         }
     }
     fn get_find_string(&self) -> String {
@@ -526,7 +526,7 @@ pub trait FlexGridSizerMethods: GridSizerMethods {
 // wxFocusEvent
 pub trait FocusEventMethods: EventMethods {
     fn get_window(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from(ffi::wxFocusEvent_GetWindow(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from_ptr(ffi::wxFocusEvent_GetWindow(self.as_ptr())) }
     }
     fn set_window<W: WindowMethods>(&self, win: Option<&W>) {
         unsafe {
@@ -1025,7 +1025,7 @@ pub trait FrameMethods: TopLevelWindowMethods {
         unsafe {
             let name = WxString::from(name);
             let name = name.as_ptr();
-            WeakRef::<StatusBar>::from(ffi::wxFrame_CreateStatusBar(
+            WeakRef::<StatusBar>::from_ptr(ffi::wxFrame_CreateStatusBar(
                 self.as_ptr(),
                 number,
                 style,
@@ -1038,7 +1038,7 @@ pub trait FrameMethods: TopLevelWindowMethods {
         unsafe {
             let name = WxString::from(name);
             let name = name.as_ptr();
-            WeakRef::<ToolBar>::from(ffi::wxFrame_CreateToolBar(self.as_ptr(), style, id, name))
+            WeakRef::<ToolBar>::from_ptr(ffi::wxFrame_CreateToolBar(self.as_ptr(), style, id, name))
         }
     }
     fn do_give_help(&self, text: &str, show: bool) {
@@ -1049,16 +1049,16 @@ pub trait FrameMethods: TopLevelWindowMethods {
         }
     }
     fn get_menu_bar(&self) -> WeakRef<MenuBar> {
-        unsafe { WeakRef::<MenuBar>::from(ffi::wxFrame_GetMenuBar(self.as_ptr())) }
+        unsafe { WeakRef::<MenuBar>::from_ptr(ffi::wxFrame_GetMenuBar(self.as_ptr())) }
     }
     fn get_status_bar(&self) -> WeakRef<StatusBar> {
-        unsafe { WeakRef::<StatusBar>::from(ffi::wxFrame_GetStatusBar(self.as_ptr())) }
+        unsafe { WeakRef::<StatusBar>::from_ptr(ffi::wxFrame_GetStatusBar(self.as_ptr())) }
     }
     fn get_status_bar_pane(&self) -> c_int {
         unsafe { ffi::wxFrame_GetStatusBarPane(self.as_ptr()) }
     }
     fn get_tool_bar(&self) -> WeakRef<ToolBar> {
-        unsafe { WeakRef::<ToolBar>::from(ffi::wxFrame_GetToolBar(self.as_ptr())) }
+        unsafe { WeakRef::<ToolBar>::from_ptr(ffi::wxFrame_GetToolBar(self.as_ptr())) }
     }
     fn on_create_status_bar(
         &self,
@@ -1070,7 +1070,7 @@ pub trait FrameMethods: TopLevelWindowMethods {
         unsafe {
             let name = WxString::from(name);
             let name = name.as_ptr();
-            WeakRef::<StatusBar>::from(ffi::wxFrame_OnCreateStatusBar(
+            WeakRef::<StatusBar>::from_ptr(ffi::wxFrame_OnCreateStatusBar(
                 self.as_ptr(),
                 number,
                 style,
@@ -1083,7 +1083,12 @@ pub trait FrameMethods: TopLevelWindowMethods {
         unsafe {
             let name = WxString::from(name);
             let name = name.as_ptr();
-            WeakRef::<ToolBar>::from(ffi::wxFrame_OnCreateToolBar(self.as_ptr(), style, id, name))
+            WeakRef::<ToolBar>::from_ptr(ffi::wxFrame_OnCreateToolBar(
+                self.as_ptr(),
+                style,
+                id,
+                name,
+            ))
         }
     }
     fn process_command(&self, id: c_int) -> bool {

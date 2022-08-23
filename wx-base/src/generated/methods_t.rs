@@ -10,7 +10,7 @@ pub trait TimerMethods: EvtHandlerMethods {
         unsafe { ffi::wxTimer_GetInterval(self.as_ptr()) }
     }
     fn get_owner(&self) -> WeakRef<EvtHandler> {
-        unsafe { WeakRef::<EvtHandler>::from(ffi::wxTimer_GetOwner(self.as_ptr())) }
+        unsafe { WeakRef::<EvtHandler>::from_ptr(ffi::wxTimer_GetOwner(self.as_ptr())) }
     }
     fn is_one_shot(&self) -> bool {
         unsafe { ffi::wxTimer_IsOneShot(self.as_ptr()) }

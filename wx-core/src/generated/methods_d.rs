@@ -923,7 +923,7 @@ pub trait DataViewColumnMethods: SettableHeaderColumnMethods {
         unsafe { ffi::wxDataViewColumn_GetModelColumn(self.as_ptr()) }
     }
     fn get_owner(&self) -> WeakRef<DataViewCtrl> {
-        unsafe { WeakRef::<DataViewCtrl>::from(ffi::wxDataViewColumn_GetOwner(self.as_ptr())) }
+        unsafe { WeakRef::<DataViewCtrl>::from_ptr(ffi::wxDataViewColumn_GetOwner(self.as_ptr())) }
     }
     fn get_renderer(&self) -> Option<DataViewRendererIsOwned<false>> {
         unsafe { DataViewRenderer::option_from(ffi::wxDataViewColumn_GetRenderer(self.as_ptr())) }
@@ -1117,7 +1117,7 @@ pub trait DataViewCtrlMethods: ControlMethods {
         }
     }
     fn get_main_window(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from(ffi::wxDataViewCtrl_GetMainWindow(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from_ptr(ffi::wxDataViewCtrl_GetMainWindow(self.as_ptr())) }
     }
     fn get_model(&self) -> Option<DataViewModelIsOwned<false>> {
         unsafe { DataViewModel::option_from(ffi::wxDataViewCtrl_GetModel(self.as_ptr())) }
@@ -2042,7 +2042,7 @@ pub trait DataViewRendererMethods: ObjectMethods {
         unsafe { ffi::wxDataViewRenderer_FinishEditing(self.as_ptr()) }
     }
     fn get_editor_ctrl(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from(ffi::wxDataViewRenderer_GetEditorCtrl(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from_ptr(ffi::wxDataViewRenderer_GetEditorCtrl(self.as_ptr())) }
     }
 }
 
@@ -2853,7 +2853,7 @@ pub trait DialogMethods: TopLevelWindowMethods {
         unsafe { ffi::wxDialog_GetAffirmativeId(self.as_ptr()) }
     }
     fn get_content_window(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from(ffi::wxDialog_GetContentWindow(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from_ptr(ffi::wxDialog_GetContentWindow(self.as_ptr())) }
     }
     fn get_escape_id(&self) -> c_int {
         unsafe { ffi::wxDialog_GetEscapeId(self.as_ptr()) }

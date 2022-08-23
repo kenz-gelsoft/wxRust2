@@ -271,7 +271,7 @@ pub trait CaretMethods: WxRustMethods {
         unsafe { Size::from_ptr(ffi::wxCaret_GetSize1(self.as_ptr())) }
     }
     fn get_window(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from(ffi::wxCaret_GetWindow(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from_ptr(ffi::wxCaret_GetWindow(self.as_ptr())) }
     }
     fn hide(&self) {
         unsafe { ffi::wxCaret_Hide(self.as_ptr()) }
@@ -393,7 +393,7 @@ pub trait CheckListBoxMethods: ListBoxMethods {
 // wxChildFocusEvent
 pub trait ChildFocusEventMethods: CommandEventMethods {
     fn get_window(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from(ffi::wxChildFocusEvent_GetWindow(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from_ptr(ffi::wxChildFocusEvent_GetWindow(self.as_ptr())) }
     }
 }
 
@@ -459,7 +459,7 @@ pub trait ChoiceMethods: ControlMethods {
 // wxChoicebook
 pub trait ChoicebookMethods: BookCtrlBaseMethods {
     fn get_choice_ctrl(&self) -> WeakRef<Choice> {
-        unsafe { WeakRef::<Choice>::from(ffi::wxChoicebook_GetChoiceCtrl(self.as_ptr())) }
+        unsafe { WeakRef::<Choice>::from_ptr(ffi::wxChoicebook_GetChoiceCtrl(self.as_ptr())) }
     }
 }
 
@@ -595,7 +595,7 @@ pub trait CollapsiblePaneMethods: ControlMethods {
         unsafe { ffi::wxCollapsiblePane_Expand(self.as_ptr()) }
     }
     fn get_pane(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from(ffi::wxCollapsiblePane_GetPane(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from_ptr(ffi::wxCollapsiblePane_GetPane(self.as_ptr())) }
     }
     fn is_collapsed(&self) -> bool {
         unsafe { ffi::wxCollapsiblePane_IsCollapsed(self.as_ptr()) }
@@ -1003,10 +1003,10 @@ pub trait ComboCtrlMethods: ControlMethods {
         unsafe { ComboPopup::option_from(ffi::wxComboCtrl_GetPopupControl(self.as_ptr())) }
     }
     fn get_popup_window(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from(ffi::wxComboCtrl_GetPopupWindow(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from_ptr(ffi::wxComboCtrl_GetPopupWindow(self.as_ptr())) }
     }
     fn get_text_ctrl(&self) -> WeakRef<TextCtrl> {
-        unsafe { WeakRef::<TextCtrl>::from(ffi::wxComboCtrl_GetTextCtrl(self.as_ptr())) }
+        unsafe { WeakRef::<TextCtrl>::from_ptr(ffi::wxComboCtrl_GetTextCtrl(self.as_ptr())) }
     }
     // BLOCKED: fn GetTextIndent()
     fn get_text_rect(&self) -> RectIsOwned<false> {
@@ -1164,10 +1164,10 @@ pub trait ComboPopupMethods: WxRustMethods {
         }
     }
     fn get_combo_ctrl(&self) -> WeakRef<ComboCtrl> {
-        unsafe { WeakRef::<ComboCtrl>::from(ffi::wxComboPopup_GetComboCtrl(self.as_ptr())) }
+        unsafe { WeakRef::<ComboCtrl>::from_ptr(ffi::wxComboPopup_GetComboCtrl(self.as_ptr())) }
     }
     fn get_control(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from(ffi::wxComboPopup_GetControl(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from_ptr(ffi::wxComboPopup_GetControl(self.as_ptr())) }
     }
     fn get_string_value(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxComboPopup_GetStringValue(self.as_ptr())).into() }
@@ -1372,7 +1372,7 @@ pub trait CommandProcessorMethods: ObjectMethods {
         unsafe { Command::option_from(ffi::wxCommandProcessor_GetCurrentCommand(self.as_ptr())) }
     }
     fn get_edit_menu(&self) -> WeakRef<Menu> {
-        unsafe { WeakRef::<Menu>::from(ffi::wxCommandProcessor_GetEditMenu(self.as_ptr())) }
+        unsafe { WeakRef::<Menu>::from_ptr(ffi::wxCommandProcessor_GetEditMenu(self.as_ptr())) }
     }
     fn get_max_commands(&self) -> c_int {
         unsafe { ffi::wxCommandProcessor_GetMaxCommands(self.as_ptr()) }

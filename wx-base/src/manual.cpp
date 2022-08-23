@@ -165,6 +165,9 @@ private:
 void *OpaqueWeakRef_new(void *obj) {
     return new OpaqueWeakRef(obj);
 }
+void *OpaqueWeakRef_copy(void *obj) {
+    return new OpaqueWeakRef(OpaqueWeakRef_Get(obj));
+}
 void OpaqueWeakRef_delete(void *self) {
     OpaqueWeakRef *weakRef = reinterpret_cast<OpaqueWeakRef *>(self);
     delete weakRef;

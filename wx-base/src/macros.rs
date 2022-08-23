@@ -3,7 +3,6 @@ macro_rules! wx_class {
     (
         $type:ident = $typeIsOwned:ident<true>($wxType:ident) impl $($methods:ident),*
     ) => {
-        #[derive(Clone)]
         pub struct $typeIsOwned<const OWNED: bool>(*mut c_void);
         pub type $type = $typeIsOwned<true>;
         $(
@@ -22,6 +21,11 @@ macro_rules! wx_class {
                 let tmp = Self(ptr);
                 closure(&tmp);
                 mem::forget(tmp);
+            }
+        }
+        impl From<&$typeIsOwned<true>> for WeakRef<$typeIsOwned<false>> {
+            fn from(o: &$typeIsOwned<true>) -> Self {
+                unsafe { WeakRef::from_ptr(o.as_ptr()) }
             }
         }
     };

@@ -193,7 +193,7 @@ pub trait ListCtrlMethods: ControlMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            WeakRef::<TextCtrl>::from(ffi::wxListCtrl_EditLabel(
+            WeakRef::<TextCtrl>::from_ptr(ffi::wxListCtrl_EditLabel(
                 self.as_ptr(),
                 item,
                 text_control_class,
@@ -251,7 +251,7 @@ pub trait ListCtrlMethods: ControlMethods {
         unsafe { ffi::wxListCtrl_GetCountPerPage(self.as_ptr()) }
     }
     fn get_edit_control(&self) -> WeakRef<TextCtrl> {
-        unsafe { WeakRef::<TextCtrl>::from(ffi::wxListCtrl_GetEditControl(self.as_ptr())) }
+        unsafe { WeakRef::<TextCtrl>::from_ptr(ffi::wxListCtrl_GetEditControl(self.as_ptr())) }
     }
     fn get_image_list(&self, which: c_int) -> Option<ImageListIsOwned<false>> {
         unsafe { ImageList::option_from(ffi::wxListCtrl_GetImageList(self.as_ptr(), which)) }
@@ -727,6 +727,6 @@ pub trait ListViewMethods: ListCtrlMethods {
 // wxListbook
 pub trait ListbookMethods: BookCtrlBaseMethods {
     fn get_list_view(&self) -> WeakRef<ListView> {
-        unsafe { WeakRef::<ListView>::from(ffi::wxListbook_GetListView(self.as_ptr())) }
+        unsafe { WeakRef::<ListView>::from_ptr(ffi::wxListbook_GetListView(self.as_ptr())) }
     }
 }

@@ -1230,7 +1230,7 @@ pub trait ToolBarMethods: ControlMethods {
         unsafe { ffi::wxToolBar_FindById(self.as_ptr(), id) }
     }
     fn find_control(&self, id: c_int) -> WeakRef<Control> {
-        unsafe { WeakRef::<Control>::from(ffi::wxToolBar_FindControl(self.as_ptr(), id)) }
+        unsafe { WeakRef::<Control>::from_ptr(ffi::wxToolBar_FindControl(self.as_ptr(), id)) }
     }
     fn find_tool_for_position(&self, x: c_int, y: c_int) -> *mut c_void {
         unsafe { ffi::wxToolBar_FindToolForPosition(self.as_ptr(), x, y) }
@@ -1487,7 +1487,7 @@ pub trait ToolTipMethods: ObjectMethods {
         unsafe { WxString::from_ptr(ffi::wxToolTip_GetTip(self.as_ptr())).into() }
     }
     fn get_window(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from(ffi::wxToolTip_GetWindow(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from_ptr(ffi::wxToolTip_GetWindow(self.as_ptr())) }
     }
     fn set_tip(&self, tip: &str) {
         unsafe {
@@ -1575,7 +1575,7 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
         unsafe { ffi::wxTopLevelWindow_EnableMinimizeButton(self.as_ptr(), enable) }
     }
     fn get_default_item(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from(ffi::wxTopLevelWindow_GetDefaultItem(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from_ptr(ffi::wxTopLevelWindow_GetDefaultItem(self.as_ptr())) }
     }
     fn get_icon(&self) -> Icon {
         unsafe { Icon::from_ptr(ffi::wxTopLevelWindow_GetIcon(self.as_ptr())) }
@@ -1607,7 +1607,7 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
         unsafe { ffi::wxTopLevelWindow_Maximize(self.as_ptr(), maximize) }
     }
     fn msw_get_system_menu(&self) -> WeakRef<Menu> {
-        unsafe { WeakRef::<Menu>::from(ffi::wxTopLevelWindow_MSWGetSystemMenu(self.as_ptr())) }
+        unsafe { WeakRef::<Menu>::from_ptr(ffi::wxTopLevelWindow_MSWGetSystemMenu(self.as_ptr())) }
     }
     fn request_user_attention(&self, flags: c_int) {
         unsafe { ffi::wxTopLevelWindow_RequestUserAttention(self.as_ptr(), flags) }
@@ -1623,7 +1623,7 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            WeakRef::<Window>::from(ffi::wxTopLevelWindow_SetDefaultItem(self.as_ptr(), win))
+            WeakRef::<Window>::from_ptr(ffi::wxTopLevelWindow_SetDefaultItem(self.as_ptr(), win))
         }
     }
     fn set_tmp_default_item<W: WindowMethods>(&self, win: Option<&W>) -> WeakRef<Window> {
@@ -1632,11 +1632,13 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            WeakRef::<Window>::from(ffi::wxTopLevelWindow_SetTmpDefaultItem(self.as_ptr(), win))
+            WeakRef::<Window>::from_ptr(ffi::wxTopLevelWindow_SetTmpDefaultItem(self.as_ptr(), win))
         }
     }
     fn get_tmp_default_item(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from(ffi::wxTopLevelWindow_GetTmpDefaultItem(self.as_ptr())) }
+        unsafe {
+            WeakRef::<Window>::from_ptr(ffi::wxTopLevelWindow_GetTmpDefaultItem(self.as_ptr()))
+        }
     }
     fn set_icon<I: IconMethods>(&self, icon: &I) {
         unsafe {
@@ -1808,7 +1810,7 @@ pub trait TreeCtrlMethods: ControlMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            WeakRef::<TextCtrl>::from(ffi::wxTreeCtrl_EditLabel(
+            WeakRef::<TextCtrl>::from_ptr(ffi::wxTreeCtrl_EditLabel(
                 self.as_ptr(),
                 item,
                 text_ctrl_class,
@@ -1870,7 +1872,7 @@ pub trait TreeCtrlMethods: ControlMethods {
         unsafe { ffi::wxTreeCtrl_GetCount(self.as_ptr()) }
     }
     fn get_edit_control(&self) -> WeakRef<TextCtrl> {
-        unsafe { WeakRef::<TextCtrl>::from(ffi::wxTreeCtrl_GetEditControl(self.as_ptr())) }
+        unsafe { WeakRef::<TextCtrl>::from_ptr(ffi::wxTreeCtrl_GetEditControl(self.as_ptr())) }
     }
     fn get_first_child<T: TreeItemIdMethods>(&self, item: &T, cookie: *mut c_void) -> TreeItemId {
         unsafe {
@@ -2439,10 +2441,10 @@ pub trait TreeListCtrlMethods: WindowMethods {
         }
     }
     fn get_view(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from(ffi::wxTreeListCtrl_GetView(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from_ptr(ffi::wxTreeListCtrl_GetView(self.as_ptr())) }
     }
     fn get_data_view(&self) -> WeakRef<DataViewCtrl> {
-        unsafe { WeakRef::<DataViewCtrl>::from(ffi::wxTreeListCtrl_GetDataView(self.as_ptr())) }
+        unsafe { WeakRef::<DataViewCtrl>::from_ptr(ffi::wxTreeListCtrl_GetDataView(self.as_ptr())) }
     }
 }
 

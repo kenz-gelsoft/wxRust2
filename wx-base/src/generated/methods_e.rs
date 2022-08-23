@@ -126,10 +126,12 @@ pub trait EvtHandlerMethods: ObjectMethods {
         unsafe { ffi::wxEvtHandler_GetEvtHandlerEnabled(self.as_ptr()) }
     }
     fn get_next_handler(&self) -> WeakRef<EvtHandler> {
-        unsafe { WeakRef::<EvtHandler>::from(ffi::wxEvtHandler_GetNextHandler(self.as_ptr())) }
+        unsafe { WeakRef::<EvtHandler>::from_ptr(ffi::wxEvtHandler_GetNextHandler(self.as_ptr())) }
     }
     fn get_previous_handler(&self) -> WeakRef<EvtHandler> {
-        unsafe { WeakRef::<EvtHandler>::from(ffi::wxEvtHandler_GetPreviousHandler(self.as_ptr())) }
+        unsafe {
+            WeakRef::<EvtHandler>::from_ptr(ffi::wxEvtHandler_GetPreviousHandler(self.as_ptr()))
+        }
     }
     fn set_evt_handler_enabled(&self, enabled: bool) {
         unsafe { ffi::wxEvtHandler_SetEvtHandlerEnabled(self.as_ptr(), enabled) }

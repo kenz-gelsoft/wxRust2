@@ -143,18 +143,24 @@ pub trait RadioButtonMethods: ControlMethods {
         unsafe { ffi::wxRadioButton_SetValue(self.as_ptr(), value) }
     }
     fn get_first_in_group(&self) -> WeakRef<RadioButton> {
-        unsafe { WeakRef::<RadioButton>::from(ffi::wxRadioButton_GetFirstInGroup(self.as_ptr())) }
+        unsafe {
+            WeakRef::<RadioButton>::from_ptr(ffi::wxRadioButton_GetFirstInGroup(self.as_ptr()))
+        }
     }
     fn get_last_in_group(&self) -> WeakRef<RadioButton> {
-        unsafe { WeakRef::<RadioButton>::from(ffi::wxRadioButton_GetLastInGroup(self.as_ptr())) }
+        unsafe {
+            WeakRef::<RadioButton>::from_ptr(ffi::wxRadioButton_GetLastInGroup(self.as_ptr()))
+        }
     }
     fn get_previous_in_group(&self) -> WeakRef<RadioButton> {
         unsafe {
-            WeakRef::<RadioButton>::from(ffi::wxRadioButton_GetPreviousInGroup(self.as_ptr()))
+            WeakRef::<RadioButton>::from_ptr(ffi::wxRadioButton_GetPreviousInGroup(self.as_ptr()))
         }
     }
     fn get_next_in_group(&self) -> WeakRef<RadioButton> {
-        unsafe { WeakRef::<RadioButton>::from(ffi::wxRadioButton_GetNextInGroup(self.as_ptr())) }
+        unsafe {
+            WeakRef::<RadioButton>::from_ptr(ffi::wxRadioButton_GetNextInGroup(self.as_ptr()))
+        }
     }
 }
 
@@ -228,7 +234,7 @@ pub trait RearrangeCtrlMethods: PanelMethods {
         }
     }
     fn get_list(&self) -> WeakRef<RearrangeList> {
-        unsafe { WeakRef::<RearrangeList>::from(ffi::wxRearrangeCtrl_GetList(self.as_ptr())) }
+        unsafe { WeakRef::<RearrangeList>::from_ptr(ffi::wxRearrangeCtrl_GetList(self.as_ptr())) }
     }
 }
 
@@ -280,7 +286,7 @@ pub trait RearrangeDialogMethods: DialogMethods {
         }
     }
     fn get_list(&self) -> WeakRef<RearrangeList> {
-        unsafe { WeakRef::<RearrangeList>::from(ffi::wxRearrangeDialog_GetList(self.as_ptr())) }
+        unsafe { WeakRef::<RearrangeList>::from_ptr(ffi::wxRearrangeDialog_GetList(self.as_ptr())) }
     }
     fn get_order(&self) -> ArrayInt {
         unsafe { ArrayInt::from_ptr(ffi::wxRearrangeDialog_GetOrder(self.as_ptr())) }
