@@ -88,6 +88,11 @@ impl<const OWNED: bool> DynamicCast for RadioBoxIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxRadioBox_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<RadioBoxIsOwned<false>> for RadioBoxIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<RadioBoxIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 // Mix-in(s) to wxRadioBox
 impl<const OWNED: bool> ItemContainerImmutableMethods for RadioBoxIsOwned<OWNED> {
     fn as_item_container_immutable(&self) -> *mut c_void {
@@ -162,6 +167,11 @@ impl<const OWNED: bool> From<RadioButtonIsOwned<OWNED>> for ObjectIsOwned<OWNED>
 impl<const OWNED: bool> DynamicCast for RadioButtonIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxRadioButton_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Trackable<RadioButtonIsOwned<false>> for RadioButtonIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<RadioButtonIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
     }
 }
 
@@ -272,6 +282,11 @@ impl<const OWNED: bool> DynamicCast for RearrangeCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxRearrangeCtrl_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<RearrangeCtrlIsOwned<false>> for RearrangeCtrlIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<RearrangeCtrlIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 
 // wxRearrangeDialog
 wx_class! { RearrangeDialog =
@@ -353,6 +368,11 @@ impl<const OWNED: bool> From<RearrangeDialogIsOwned<OWNED>> for ObjectIsOwned<OW
 impl<const OWNED: bool> DynamicCast for RearrangeDialogIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxRearrangeDialog_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Trackable<RearrangeDialogIsOwned<false>> for RearrangeDialogIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<RearrangeDialogIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
     }
 }
 
@@ -443,6 +463,11 @@ impl<const OWNED: bool> From<RearrangeListIsOwned<OWNED>> for ObjectIsOwned<OWNE
 impl<const OWNED: bool> DynamicCast for RearrangeListIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxRearrangeList_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Trackable<RearrangeListIsOwned<false>> for RearrangeListIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<RearrangeListIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
     }
 }
 // Mix-in(s) to wxRearrangeList

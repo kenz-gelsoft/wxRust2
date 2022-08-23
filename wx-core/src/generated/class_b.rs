@@ -60,6 +60,11 @@ impl<const OWNED: bool> DynamicCast for BannerWindowIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxBannerWindow_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<BannerWindowIsOwned<false>> for BannerWindowIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<BannerWindowIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 
 // wxBitmap
 wx_class! { Bitmap =
@@ -285,6 +290,11 @@ impl<const OWNED: bool> DynamicCast for BitmapButtonIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxBitmapButton_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<BitmapButtonIsOwned<false>> for BitmapButtonIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<BitmapButtonIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 
 // wxBitmapComboBox
 wx_class! { BitmapComboBox =
@@ -368,6 +378,11 @@ impl<const OWNED: bool> From<BitmapComboBoxIsOwned<OWNED>> for ObjectIsOwned<OWN
 impl<const OWNED: bool> DynamicCast for BitmapComboBoxIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxBitmapComboBox_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Trackable<BitmapComboBoxIsOwned<false>> for BitmapComboBoxIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<BitmapComboBoxIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
     }
 }
 // Mix-in(s) to wxBitmapComboBox
@@ -589,6 +604,13 @@ impl<const OWNED: bool> DynamicCast for BitmapToggleButtonIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxBitmapToggleButton_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<BitmapToggleButtonIsOwned<false>>
+    for BitmapToggleButtonIsOwned<OWNED>
+{
+    fn to_weak_ref(&self) -> WeakRef<BitmapToggleButtonIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 
 // wxBookCtrlBase
 wx_class! { BookCtrlBase =
@@ -632,6 +654,11 @@ impl<const OWNED: bool> From<BookCtrlBaseIsOwned<OWNED>> for ObjectIsOwned<OWNED
 impl<const OWNED: bool> DynamicCast for BookCtrlBaseIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxBookCtrlBase_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Trackable<BookCtrlBaseIsOwned<false>> for BookCtrlBaseIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<BookCtrlBaseIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for BookCtrlBaseIsOwned<OWNED> {
@@ -1088,5 +1115,10 @@ impl<const OWNED: bool> From<ButtonIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for ButtonIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxButton_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Trackable<ButtonIsOwned<false>> for ButtonIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<ButtonIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
     }
 }

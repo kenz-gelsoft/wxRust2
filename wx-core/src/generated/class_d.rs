@@ -619,6 +619,11 @@ impl<const OWNED: bool> DynamicCast for DataViewCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDataViewCtrl_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<DataViewCtrlIsOwned<false>> for DataViewCtrlIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<DataViewCtrlIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> ControlMethods for DataViewCtrlIsOwned<OWNED> {
     fn create_validator<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
@@ -1026,6 +1031,13 @@ impl<const OWNED: bool> DynamicCast for DataViewListCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDataViewListCtrl_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<DataViewListCtrlIsOwned<false>>
+    for DataViewListCtrlIsOwned<OWNED>
+{
+    fn to_weak_ref(&self) -> WeakRef<DataViewListCtrlIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 
 // wxDataViewListModel
 wx_class! { DataViewListModel =
@@ -1407,6 +1419,13 @@ impl<const OWNED: bool> DynamicCast for DataViewTreeCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDataViewTreeCtrl_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<DataViewTreeCtrlIsOwned<false>>
+    for DataViewTreeCtrlIsOwned<OWNED>
+{
+    fn to_weak_ref(&self) -> WeakRef<DataViewTreeCtrlIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 
 // wxDataViewTreeStore
 wx_class! { DataViewTreeStore =
@@ -1601,6 +1620,11 @@ impl<const OWNED: bool> DynamicCast for DatePickerCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDatePickerCtrl_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<DatePickerCtrlIsOwned<false>> for DatePickerCtrlIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<DatePickerCtrlIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 
 // wxDelegateRendererNative
 wx_class! { DelegateRendererNative =
@@ -1710,6 +1734,11 @@ impl<const OWNED: bool> From<DialogIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for DialogIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDialog_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Trackable<DialogIsOwned<false>> for DialogIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<DialogIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> TopLevelWindowMethods for DialogIsOwned<OWNED> {
@@ -1853,6 +1882,11 @@ impl<const OWNED: bool> DynamicCast for DirDialogIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDirDialog_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<DirDialogIsOwned<false>> for DirDialogIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<DirDialogIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 
 // wxDirPickerCtrl
 wx_class! { DirPickerCtrl =
@@ -1930,6 +1964,11 @@ impl<const OWNED: bool> From<DirPickerCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNE
 impl<const OWNED: bool> DynamicCast for DirPickerCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDirPickerCtrl_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Trackable<DirPickerCtrlIsOwned<false>> for DirPickerCtrlIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<DirPickerCtrlIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
     }
 }
 

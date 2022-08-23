@@ -53,7 +53,7 @@ impl MyFrame {
         frame.create_status_bar(2, wx::STB_DEFAULT_STYLE, 0, "statusBar");
         frame.set_status_text("Welcome to wxRust!", 0);
         MyFrame {
-            base: wx::WeakRef::from(&frame),
+            base: frame.to_weak_ref(),
         }
     }
 

@@ -73,6 +73,8 @@ class RustClassBinding:
                 yield line
             for line in self._impl_dynamic_cast_if_needed():
                 yield line
+            for line in self._impl_trackable_if_needed():
+                yield line
             for line in self._impl_drop_if_needed():
                 yield line
             for line in self._impl_mixin_if_needed():
@@ -136,6 +138,19 @@ class RustClassBinding:
         yield 'impl<const OWNED: bool> DynamicCast for %sIsOwned<OWNED> {' % (self.__model.unprefixed(),)
         yield '    fn class_info() -> ClassInfoIsOwned<false> {'
         yield '        unsafe { ClassInfoIsOwned::from_ptr(ffi::%s_CLASSINFO()) }' % (self.__model.name)
+        yield '    }'
+        yield '}'
+    
+    def _impl_trackable_if_needed(self):
+        if not self.is_a('wxEvtHandler'):
+            return
+        is_owned = '%sIsOwned' % (self.__model.unprefixed(),)
+        yield 'impl<const OWNED: bool> Trackable<%s<false>> for %s<OWNED> {' % (
+            is_owned,
+            is_owned,
+        )
+        yield '    fn to_weak_ref(&self) -> WeakRef<%s<false>> {' % (is_owned,)
+        yield '        unsafe { WeakRef::from_ptr(self.as_ptr()) }'
         yield '    }'
         yield '}'
     

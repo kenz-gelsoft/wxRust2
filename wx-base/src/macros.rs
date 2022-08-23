@@ -23,10 +23,5 @@ macro_rules! wx_class {
                 mem::forget(tmp);
             }
         }
-        impl From<&$typeIsOwned<true>> for WeakRef<$typeIsOwned<false>> {
-            fn from(o: &$typeIsOwned<true>) -> Self {
-                unsafe { WeakRef::from_ptr(o.as_ptr()) }
-            }
-        }
     };
 }

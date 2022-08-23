@@ -391,6 +391,11 @@ impl<const OWNED: bool> DynamicCast for InfoBarIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxInfoBar_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<InfoBarIsOwned<false>> for InfoBarIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<InfoBarIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 
 // wxInitDialogEvent
 wx_class! { InitDialogEvent =

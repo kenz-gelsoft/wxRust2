@@ -16,7 +16,7 @@ fn main() {
         let button = wx::Button::builder(Some(&frame)).label("Greet").build();
         let i = 3;
         println!("i={}", i);
-        let weak_button = wx::WeakRef::from(&button);
+        let weak_button = button.to_weak_ref();
         button.bind(wx::RustEvent::Button, move |_: &wx::CommandEvent| {
             println!("i={}", i);
             if let Some(button) = weak_button.get() {

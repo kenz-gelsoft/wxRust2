@@ -136,6 +136,10 @@ pub mod methods {
             }
         }
     }
+
+    pub trait Trackable<T>: EvtHandlerMethods {
+        fn to_weak_ref(&self) -> WeakRef<T>;
+    }
 }
 
 // wxString

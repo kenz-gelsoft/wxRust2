@@ -185,6 +185,11 @@ impl<const OWNED: bool> DynamicCast for MenuIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxMenu_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<MenuIsOwned<false>> for MenuIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<MenuIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 
 // wxMenuBar
 wx_class! { MenuBar =
@@ -221,6 +226,11 @@ impl<const OWNED: bool> From<MenuBarIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for MenuBarIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxMenuBar_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Trackable<MenuBarIsOwned<false>> for MenuBarIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<MenuBarIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
     }
 }
 
@@ -393,6 +403,11 @@ impl<const OWNED: bool> DynamicCast for MessageDialogIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxMessageDialog_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<MessageDialogIsOwned<false>> for MessageDialogIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<MessageDialogIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 
 // wxMessageOutputMessageBox
 wx_class! { MessageOutputMessageBox =
@@ -500,6 +515,11 @@ impl<const OWNED: bool> From<MiniFrameIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for MiniFrameIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxMiniFrame_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Trackable<MiniFrameIsOwned<false>> for MiniFrameIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<MiniFrameIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> TopLevelWindowMethods for MiniFrameIsOwned<OWNED> {
@@ -721,6 +741,13 @@ impl<const OWNED: bool> From<MouseEventsManagerIsOwned<OWNED>> for ObjectIsOwned
 impl<const OWNED: bool> DynamicCast for MouseEventsManagerIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxMouseEventsManager_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Trackable<MouseEventsManagerIsOwned<false>>
+    for MouseEventsManagerIsOwned<OWNED>
+{
+    fn to_weak_ref(&self) -> WeakRef<MouseEventsManagerIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
     }
 }
 
