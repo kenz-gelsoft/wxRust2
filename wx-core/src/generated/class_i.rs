@@ -393,7 +393,7 @@ impl<const OWNED: bool> DynamicCast for InfoBarIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<InfoBarIsOwned<false>> for InfoBarIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<InfoBarIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 

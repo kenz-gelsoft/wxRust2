@@ -294,7 +294,7 @@ pub trait GenericDirCtrlMethods: ControlMethods {
         unsafe { TreeItemId::from_ptr(ffi::wxGenericDirCtrl_GetRootId(self.as_ptr())) }
     }
     fn get_tree_ctrl(&self) -> WeakRef<TreeCtrl> {
-        unsafe { WeakRef::<TreeCtrl>::from_ptr(ffi::wxGenericDirCtrl_GetTreeCtrl(self.as_ptr())) }
+        unsafe { WeakRef::<TreeCtrl>::from(ffi::wxGenericDirCtrl_GetTreeCtrl(self.as_ptr())) }
     }
     fn init(&self) {
         unsafe { ffi::wxGenericDirCtrl_Init(self.as_ptr()) }
@@ -681,7 +681,7 @@ pub trait GraphicsContextMethods: GraphicsObjectMethods {
         unsafe { ffi::wxGraphicsContext_GetDPI(self.as_ptr(), dpi_x, dpi_y) }
     }
     fn get_window(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from_ptr(ffi::wxGraphicsContext_GetWindow(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from(ffi::wxGraphicsContext_GetWindow(self.as_ptr())) }
     }
     fn should_offset(&self) -> bool {
         unsafe { ffi::wxGraphicsContext_ShouldOffset(self.as_ptr()) }
@@ -1426,17 +1426,13 @@ pub trait GridEditorCreatedEventMethods: CommandEventMethods {
         unsafe { ffi::wxGridEditorCreatedEvent_GetCol(self.as_ptr()) }
     }
     fn get_control(&self) -> WeakRef<Control> {
-        unsafe {
-            WeakRef::<Control>::from_ptr(ffi::wxGridEditorCreatedEvent_GetControl(self.as_ptr()))
-        }
+        unsafe { WeakRef::<Control>::from(ffi::wxGridEditorCreatedEvent_GetControl(self.as_ptr())) }
     }
     fn get_row(&self) -> c_int {
         unsafe { ffi::wxGridEditorCreatedEvent_GetRow(self.as_ptr()) }
     }
     fn get_window(&self) -> WeakRef<Window> {
-        unsafe {
-            WeakRef::<Window>::from_ptr(ffi::wxGridEditorCreatedEvent_GetWindow(self.as_ptr()))
-        }
+        unsafe { WeakRef::<Window>::from(ffi::wxGridEditorCreatedEvent_GetWindow(self.as_ptr())) }
     }
     fn set_col(&self, col: c_int) {
         unsafe { ffi::wxGridEditorCreatedEvent_SetCol(self.as_ptr(), col) }

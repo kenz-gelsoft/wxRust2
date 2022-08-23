@@ -52,7 +52,7 @@ impl<const OWNED: bool> DynamicCast for WindowIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<WindowIsOwned<false>> for WindowIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<WindowIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -313,7 +313,7 @@ impl<const OWNED: bool> DynamicCast for WizardIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<WizardIsOwned<false>> for WizardIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<WizardIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -408,7 +408,7 @@ impl<const OWNED: bool> DynamicCast for WizardPageIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<WizardPageIsOwned<false>> for WizardPageIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<WizardPageIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -492,7 +492,7 @@ impl<const OWNED: bool> Trackable<WizardPageSimpleIsOwned<false>>
     for WizardPageSimpleIsOwned<OWNED>
 {
     fn to_weak_ref(&self) -> WeakRef<WizardPageSimpleIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 

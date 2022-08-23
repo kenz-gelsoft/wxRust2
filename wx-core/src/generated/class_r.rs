@@ -90,7 +90,7 @@ impl<const OWNED: bool> DynamicCast for RadioBoxIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<RadioBoxIsOwned<false>> for RadioBoxIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<RadioBoxIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 // Mix-in(s) to wxRadioBox
@@ -171,7 +171,7 @@ impl<const OWNED: bool> DynamicCast for RadioButtonIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<RadioButtonIsOwned<false>> for RadioButtonIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<RadioButtonIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -284,7 +284,7 @@ impl<const OWNED: bool> DynamicCast for RearrangeCtrlIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<RearrangeCtrlIsOwned<false>> for RearrangeCtrlIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<RearrangeCtrlIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -372,7 +372,7 @@ impl<const OWNED: bool> DynamicCast for RearrangeDialogIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<RearrangeDialogIsOwned<false>> for RearrangeDialogIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<RearrangeDialogIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -467,7 +467,7 @@ impl<const OWNED: bool> DynamicCast for RearrangeListIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<RearrangeListIsOwned<false>> for RearrangeListIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<RearrangeListIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 // Mix-in(s) to wxRearrangeList

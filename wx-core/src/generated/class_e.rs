@@ -69,7 +69,7 @@ impl<const OWNED: bool> DynamicCast for EditableListBoxIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<EditableListBoxIsOwned<false>> for EditableListBoxIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<EditableListBoxIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -147,6 +147,6 @@ impl<const OWNED: bool> DynamicCast for EventBlockerIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<EventBlockerIsOwned<false>> for EventBlockerIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<EventBlockerIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }

@@ -51,13 +51,13 @@ pub trait WindowMethods: EvtHandlerMethods {
         unsafe { ffi::wxWindow_DestroyChildren(self.as_ptr()) }
     }
     fn find_window_long(&self, id: c_long) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from_ptr(ffi::wxWindow_FindWindow(self.as_ptr(), id)) }
+        unsafe { WeakRef::<Window>::from(ffi::wxWindow_FindWindow(self.as_ptr(), id)) }
     }
     fn find_window_str(&self, name: &str) -> WeakRef<Window> {
         unsafe {
             let name = WxString::from(name);
             let name = name.as_ptr();
-            WeakRef::<Window>::from_ptr(ffi::wxWindow_FindWindow1(self.as_ptr(), name))
+            WeakRef::<Window>::from(ffi::wxWindow_FindWindow1(self.as_ptr(), name))
         }
     }
     // BLOCKED: fn GetChildren()
@@ -74,16 +74,16 @@ pub trait WindowMethods: EvtHandlerMethods {
         }
     }
     fn get_grand_parent(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from_ptr(ffi::wxWindow_GetGrandParent(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from(ffi::wxWindow_GetGrandParent(self.as_ptr())) }
     }
     fn get_next_sibling(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from_ptr(ffi::wxWindow_GetNextSibling(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from(ffi::wxWindow_GetNextSibling(self.as_ptr())) }
     }
     fn get_parent(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from_ptr(ffi::wxWindow_GetParent(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from(ffi::wxWindow_GetParent(self.as_ptr())) }
     }
     fn get_prev_sibling(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from_ptr(ffi::wxWindow_GetPrevSibling(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from(ffi::wxWindow_GetPrevSibling(self.as_ptr())) }
     }
     fn is_descendant<W: WindowMethods>(&self, win: Option<&W>) -> bool {
         unsafe {
@@ -838,7 +838,7 @@ pub trait WindowMethods: EvtHandlerMethods {
         unsafe { ffi::wxWindow_SetTransparent(self.as_ptr(), alpha) }
     }
     fn get_event_handler(&self) -> WeakRef<EvtHandler> {
-        unsafe { WeakRef::<EvtHandler>::from_ptr(ffi::wxWindow_GetEventHandler(self.as_ptr())) }
+        unsafe { WeakRef::<EvtHandler>::from(ffi::wxWindow_GetEventHandler(self.as_ptr())) }
     }
     fn handle_as_navigation_key<K: KeyEventMethods>(&self, event: &K) -> bool {
         unsafe {
@@ -866,7 +866,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     fn pop_event_handler(&self, delete_handler: bool) -> WeakRef<EvtHandler> {
         unsafe {
-            WeakRef::<EvtHandler>::from_ptr(ffi::wxWindow_PopEventHandler(
+            WeakRef::<EvtHandler>::from(ffi::wxWindow_PopEventHandler(
                 self.as_ptr(),
                 delete_handler,
             ))
@@ -1075,7 +1075,7 @@ pub trait WindowMethods: EvtHandlerMethods {
         }
     }
     fn get_validator(&self) -> WeakRef<Validator> {
-        unsafe { WeakRef::<Validator>::from_ptr(ffi::wxWindow_GetValidator(self.as_ptr())) }
+        unsafe { WeakRef::<Validator>::from(ffi::wxWindow_GetValidator(self.as_ptr())) }
     }
     fn set_validator<V: ValidatorMethods>(&self, validator: &V) {
         unsafe {
@@ -1296,7 +1296,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     }
     // NOT_SUPPORTED: fn GetClassDefaultAttributes()
     fn find_focus() -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from_ptr(ffi::wxWindow_FindFocus()) }
+        unsafe { WeakRef::<Window>::from(ffi::wxWindow_FindFocus()) }
     }
     fn find_window_by_id<W: WindowMethods>(id: c_long, parent: Option<&W>) -> WeakRef<Window> {
         unsafe {
@@ -1304,7 +1304,7 @@ pub trait WindowMethods: EvtHandlerMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            WeakRef::<Window>::from_ptr(ffi::wxWindow_FindWindowById(id, parent))
+            WeakRef::<Window>::from(ffi::wxWindow_FindWindowById(id, parent))
         }
     }
     fn find_window_by_label<W: WindowMethods>(label: &str, parent: Option<&W>) -> WeakRef<Window> {
@@ -1315,7 +1315,7 @@ pub trait WindowMethods: EvtHandlerMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            WeakRef::<Window>::from_ptr(ffi::wxWindow_FindWindowByLabel(label, parent))
+            WeakRef::<Window>::from(ffi::wxWindow_FindWindowByLabel(label, parent))
         }
     }
     fn find_window_by_name<W: WindowMethods>(name: &str, parent: Option<&W>) -> WeakRef<Window> {
@@ -1326,11 +1326,11 @@ pub trait WindowMethods: EvtHandlerMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            WeakRef::<Window>::from_ptr(ffi::wxWindow_FindWindowByName(name, parent))
+            WeakRef::<Window>::from(ffi::wxWindow_FindWindowByName(name, parent))
         }
     }
     fn get_capture() -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from_ptr(ffi::wxWindow_GetCapture()) }
+        unsafe { WeakRef::<Window>::from(ffi::wxWindow_GetCapture()) }
     }
     fn new_control_id(count: c_int) -> c_int {
         unsafe { ffi::wxWindow_NewControlId(count) }
@@ -1365,7 +1365,7 @@ pub trait WindowMethods: EvtHandlerMethods {
 // wxWindowCreateEvent
 pub trait WindowCreateEventMethods: CommandEventMethods {
     fn get_window(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from_ptr(ffi::wxWindowCreateEvent_GetWindow(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from(ffi::wxWindowCreateEvent_GetWindow(self.as_ptr())) }
     }
 }
 
@@ -1375,7 +1375,7 @@ pub trait WindowDCMethods: DCMethods {}
 // wxWindowDestroyEvent
 pub trait WindowDestroyEventMethods: CommandEventMethods {
     fn get_window(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from_ptr(ffi::wxWindowDestroyEvent_GetWindow(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from(ffi::wxWindowDestroyEvent_GetWindow(self.as_ptr())) }
     }
 }
 
@@ -1426,7 +1426,7 @@ pub trait WizardMethods: DialogMethods {
         unsafe { ffi::wxWizard_GetBitmapPlacement(self.as_ptr()) }
     }
     fn get_current_page(&self) -> WeakRef<WizardPage> {
-        unsafe { WeakRef::<WizardPage>::from_ptr(ffi::wxWizard_GetCurrentPage(self.as_ptr())) }
+        unsafe { WeakRef::<WizardPage>::from(ffi::wxWizard_GetCurrentPage(self.as_ptr())) }
     }
     fn get_minimum_bitmap_width(&self) -> c_int {
         unsafe { ffi::wxWizard_GetMinimumBitmapWidth(self.as_ptr()) }
@@ -1499,7 +1499,7 @@ pub trait WizardEventMethods: NotifyEventMethods {
         unsafe { ffi::wxWizardEvent_GetDirection(self.as_ptr()) }
     }
     fn get_page(&self) -> WeakRef<WizardPage> {
-        unsafe { WeakRef::<WizardPage>::from_ptr(ffi::wxWizardEvent_GetPage(self.as_ptr())) }
+        unsafe { WeakRef::<WizardPage>::from(ffi::wxWizardEvent_GetPage(self.as_ptr())) }
     }
 }
 
@@ -1523,10 +1523,10 @@ pub trait WizardPageMethods: PanelMethods {
         unsafe { Bitmap::from_ptr(ffi::wxWizardPage_GetBitmap(self.as_ptr())) }
     }
     fn get_next(&self) -> WeakRef<WizardPage> {
-        unsafe { WeakRef::<WizardPage>::from_ptr(ffi::wxWizardPage_GetNext(self.as_ptr())) }
+        unsafe { WeakRef::<WizardPage>::from(ffi::wxWizardPage_GetNext(self.as_ptr())) }
     }
     fn get_prev(&self) -> WeakRef<WizardPage> {
-        unsafe { WeakRef::<WizardPage>::from_ptr(ffi::wxWizardPage_GetPrev(self.as_ptr())) }
+        unsafe { WeakRef::<WizardPage>::from(ffi::wxWizardPage_GetPrev(self.as_ptr())) }
     }
 }
 

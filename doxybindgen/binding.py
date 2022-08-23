@@ -150,7 +150,7 @@ class RustClassBinding:
             is_owned,
         )
         yield '    fn to_weak_ref(&self) -> WeakRef<%s<false>> {' % (is_owned,)
-        yield '        unsafe { WeakRef::from_ptr(self.as_ptr()) }'
+        yield '        unsafe { WeakRef::from(self.as_ptr()) }'
         yield '    }'
         yield '}'
     

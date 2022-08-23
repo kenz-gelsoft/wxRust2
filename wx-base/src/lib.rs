@@ -293,7 +293,7 @@ pub fn entry() {
 // wxWeakRef
 pub struct WeakRef<T>(*mut c_void, PhantomData<T>);
 impl<T: WxRustMethods> WeakRef<T> {
-    pub unsafe fn from_ptr(ptr: *mut c_void) -> Self {
+    pub unsafe fn from(ptr: *mut c_void) -> Self {
         let ptr = if ptr.is_null() {
             ptr
         } else {

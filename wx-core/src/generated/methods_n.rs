@@ -91,9 +91,7 @@ pub trait NativeFontInfoMethods: WxRustMethods {
 // wxNavigationKeyEvent
 pub trait NavigationKeyEventMethods: EventMethods {
     fn get_current_focus(&self) -> WeakRef<Window> {
-        unsafe {
-            WeakRef::<Window>::from_ptr(ffi::wxNavigationKeyEvent_GetCurrentFocus(self.as_ptr()))
-        }
+        unsafe { WeakRef::<Window>::from(ffi::wxNavigationKeyEvent_GetCurrentFocus(self.as_ptr())) }
     }
     fn get_direction(&self) -> bool {
         unsafe { ffi::wxNavigationKeyEvent_GetDirection(self.as_ptr()) }
@@ -215,7 +213,7 @@ pub trait NotificationMessageMethods: EvtHandlerMethods {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            WeakRef::<TaskBarIcon>::from_ptr(ffi::wxNotificationMessage_UseTaskBarIcon(icon))
+            WeakRef::<TaskBarIcon>::from(ffi::wxNotificationMessage_UseTaskBarIcon(icon))
         }
     }
     fn msw_use_toasts(shortcut_path: &str, app_id: &str) -> bool {

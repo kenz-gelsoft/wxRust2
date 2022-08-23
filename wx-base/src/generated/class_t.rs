@@ -44,7 +44,7 @@ impl<const OWNED: bool> DynamicCast for TimerIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<TimerIsOwned<false>> for TimerIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<TimerIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 

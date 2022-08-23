@@ -116,7 +116,7 @@ impl<const OWNED: bool> DynamicCast for NonOwnedWindowIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<NonOwnedWindowIsOwned<false>> for NonOwnedWindowIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<NonOwnedWindowIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -190,7 +190,7 @@ impl<const OWNED: bool> DynamicCast for NotebookIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<NotebookIsOwned<false>> for NotebookIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<NotebookIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for NotebookIsOwned<OWNED> {
@@ -275,7 +275,7 @@ impl<const OWNED: bool> Trackable<NotificationMessageIsOwned<false>>
     for NotificationMessageIsOwned<OWNED>
 {
     fn to_weak_ref(&self) -> WeakRef<NotificationMessageIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -406,6 +406,6 @@ impl<const OWNED: bool> Trackable<NumberEntryDialogIsOwned<false>>
     for NumberEntryDialogIsOwned<OWNED>
 {
     fn to_weak_ref(&self) -> WeakRef<NumberEntryDialogIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }

@@ -504,10 +504,10 @@ pub trait MenuMethods: EvtHandlerMethods {
         }
     }
     fn get_invoking_window(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from_ptr(ffi::wxMenu_GetInvokingWindow(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from(ffi::wxMenu_GetInvokingWindow(self.as_ptr())) }
     }
     fn get_window(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from_ptr(ffi::wxMenu_GetWindow(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from(ffi::wxMenu_GetWindow(self.as_ptr())) }
     }
     fn get_style(&self) -> c_long {
         unsafe { ffi::wxMenu_GetStyle(self.as_ptr()) }
@@ -522,7 +522,7 @@ pub trait MenuMethods: EvtHandlerMethods {
         }
     }
     fn get_parent(&self) -> WeakRef<Menu> {
-        unsafe { WeakRef::<Menu>::from_ptr(ffi::wxMenu_GetParent(self.as_ptr())) }
+        unsafe { WeakRef::<Menu>::from(ffi::wxMenu_GetParent(self.as_ptr())) }
     }
     fn attach<M: MenuBarMethods>(&self, menubar: Option<&M>) {
         unsafe {
@@ -604,7 +604,7 @@ pub trait MenuBarMethods: WindowMethods {
     }
     // BLOCKED: fn GetLabelTop()
     fn get_menu(&self, menu_index: usize) -> WeakRef<Menu> {
-        unsafe { WeakRef::<Menu>::from_ptr(ffi::wxMenuBar_GetMenu(self.as_ptr(), menu_index)) }
+        unsafe { WeakRef::<Menu>::from(ffi::wxMenuBar_GetMenu(self.as_ptr(), menu_index)) }
     }
     fn get_menu_count(&self) -> usize {
         unsafe { ffi::wxMenuBar_GetMenuCount(self.as_ptr()) }
@@ -633,7 +633,7 @@ pub trait MenuBarMethods: WindowMethods {
         unsafe { ffi::wxMenuBar_IsEnabled(self.as_ptr(), id) }
     }
     fn remove(&self, pos: usize) -> WeakRef<Menu> {
-        unsafe { WeakRef::<Menu>::from_ptr(ffi::wxMenuBar_Remove(self.as_ptr(), pos)) }
+        unsafe { WeakRef::<Menu>::from(ffi::wxMenuBar_Remove(self.as_ptr(), pos)) }
     }
     fn replace<M: MenuMethods>(&self, pos: usize, menu: Option<&M>, title: &str) -> WeakRef<Menu> {
         unsafe {
@@ -643,7 +643,7 @@ pub trait MenuBarMethods: WindowMethods {
             };
             let title = WxString::from(title);
             let title = title.as_ptr();
-            WeakRef::<Menu>::from_ptr(ffi::wxMenuBar_Replace(self.as_ptr(), pos, menu, title))
+            WeakRef::<Menu>::from(ffi::wxMenuBar_Replace(self.as_ptr(), pos, menu, title))
         }
     }
     fn set_help_string(&self, id: c_int, help_string: &str) {
@@ -669,10 +669,10 @@ pub trait MenuBarMethods: WindowMethods {
         }
     }
     fn osx_get_apple_menu(&self) -> WeakRef<Menu> {
-        unsafe { WeakRef::<Menu>::from_ptr(ffi::wxMenuBar_OSXGetAppleMenu(self.as_ptr())) }
+        unsafe { WeakRef::<Menu>::from(ffi::wxMenuBar_OSXGetAppleMenu(self.as_ptr())) }
     }
     fn get_frame(&self) -> WeakRef<Frame> {
-        unsafe { WeakRef::<Frame>::from_ptr(ffi::wxMenuBar_GetFrame(self.as_ptr())) }
+        unsafe { WeakRef::<Frame>::from(ffi::wxMenuBar_GetFrame(self.as_ptr())) }
     }
     fn is_attached(&self) -> bool {
         unsafe { ffi::wxMenuBar_IsAttached(self.as_ptr()) }
@@ -699,14 +699,14 @@ pub trait MenuBarMethods: WindowMethods {
         }
     }
     fn mac_get_common_menu_bar() -> WeakRef<MenuBar> {
-        unsafe { WeakRef::<MenuBar>::from_ptr(ffi::wxMenuBar_MacGetCommonMenuBar()) }
+        unsafe { WeakRef::<MenuBar>::from(ffi::wxMenuBar_MacGetCommonMenuBar()) }
     }
 }
 
 // wxMenuEvent
 pub trait MenuEventMethods: EventMethods {
     fn get_menu(&self) -> WeakRef<Menu> {
-        unsafe { WeakRef::<Menu>::from_ptr(ffi::wxMenuEvent_GetMenu(self.as_ptr())) }
+        unsafe { WeakRef::<Menu>::from(ffi::wxMenuEvent_GetMenu(self.as_ptr())) }
     }
     fn get_menu_id(&self) -> c_int {
         unsafe { ffi::wxMenuEvent_GetMenuId(self.as_ptr()) }
@@ -752,11 +752,11 @@ pub trait MenuItemMethods: ObjectMethods {
         unsafe { ffi::wxMenuItem_GetMarginWidth(self.as_ptr()) }
     }
     fn get_menu(&self) -> WeakRef<Menu> {
-        unsafe { WeakRef::<Menu>::from_ptr(ffi::wxMenuItem_GetMenu(self.as_ptr())) }
+        unsafe { WeakRef::<Menu>::from(ffi::wxMenuItem_GetMenu(self.as_ptr())) }
     }
     // BLOCKED: fn GetName()
     fn get_sub_menu(&self) -> WeakRef<Menu> {
-        unsafe { WeakRef::<Menu>::from_ptr(ffi::wxMenuItem_GetSubMenu(self.as_ptr())) }
+        unsafe { WeakRef::<Menu>::from(ffi::wxMenuItem_GetSubMenu(self.as_ptr())) }
     }
     // BLOCKED: fn GetText()
     // BLOCKED: fn GetTextColour()
@@ -989,7 +989,7 @@ pub trait MirrorDCMethods: DCMethods {}
 pub trait MouseCaptureChangedEventMethods: EventMethods {
     fn get_captured_window(&self) -> WeakRef<Window> {
         unsafe {
-            WeakRef::<Window>::from_ptr(ffi::wxMouseCaptureChangedEvent_GetCapturedWindow(
+            WeakRef::<Window>::from(ffi::wxMouseCaptureChangedEvent_GetCapturedWindow(
                 self.as_ptr(),
             ))
         }

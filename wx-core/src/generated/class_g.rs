@@ -364,7 +364,7 @@ impl<const OWNED: bool> DynamicCast for GaugeIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<GaugeIsOwned<false>> for GaugeIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<GaugeIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -483,7 +483,7 @@ impl<const OWNED: bool> DynamicCast for GenericDirCtrlIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<GenericDirCtrlIsOwned<false>> for GenericDirCtrlIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<GenericDirCtrlIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -563,7 +563,7 @@ impl<const OWNED: bool> Trackable<GenericProgressDialogIsOwned<false>>
     for GenericProgressDialogIsOwned<OWNED>
 {
     fn to_weak_ref(&self) -> WeakRef<GenericProgressDialogIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -660,7 +660,7 @@ impl<const OWNED: bool> Trackable<GenericValidatorIsOwned<false>>
     for GenericValidatorIsOwned<OWNED>
 {
     fn to_weak_ref(&self) -> WeakRef<GenericValidatorIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 

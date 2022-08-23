@@ -476,9 +476,7 @@ pub trait BitmapButtonMethods: ButtonMethods {
             };
             let name = WxString::from(name);
             let name = name.as_ptr();
-            WeakRef::<BitmapButton>::from_ptr(ffi::wxBitmapButton_NewCloseButton(
-                parent, winid, name,
-            ))
+            WeakRef::<BitmapButton>::from(ffi::wxBitmapButton_NewCloseButton(parent, winid, name))
         }
     }
 }
@@ -688,7 +686,7 @@ pub trait BookCtrlBaseMethods: ControlMethods {
         unsafe { ffi::wxBookCtrlBase_GetSelection(self.as_ptr()) }
     }
     fn get_current_page(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from_ptr(ffi::wxBookCtrlBase_GetCurrentPage(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from(ffi::wxBookCtrlBase_GetCurrentPage(self.as_ptr())) }
     }
     fn set_selection(&self, page: usize) -> c_int {
         unsafe { ffi::wxBookCtrlBase_SetSelection(self.as_ptr(), page) }
@@ -768,7 +766,7 @@ pub trait BookCtrlBaseMethods: ControlMethods {
         unsafe { ffi::wxBookCtrlBase_GetPageCount(self.as_ptr()) }
     }
     fn get_page(&self, page: usize) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from_ptr(ffi::wxBookCtrlBase_GetPage(self.as_ptr(), page)) }
+        unsafe { WeakRef::<Window>::from(ffi::wxBookCtrlBase_GetPage(self.as_ptr(), page)) }
     }
 }
 
@@ -953,7 +951,7 @@ pub trait ButtonMethods: AnyButtonMethods {
         unsafe { ffi::wxButton_SetAuthNeeded(self.as_ptr(), needed) }
     }
     fn set_default(&self) -> WeakRef<Window> {
-        unsafe { WeakRef::<Window>::from_ptr(ffi::wxButton_SetDefault(self.as_ptr())) }
+        unsafe { WeakRef::<Window>::from(ffi::wxButton_SetDefault(self.as_ptr())) }
     }
     fn get_default_size<W: WindowMethods>(win: Option<&W>) -> Size {
         unsafe {

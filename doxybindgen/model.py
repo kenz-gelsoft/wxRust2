@@ -278,7 +278,7 @@ class ReturnTypeWrapper:
             if not self.is_owned:
                 if self.is_trackable:
                     return ['WeakRef<%s>' % (returns,),
-                            'WeakRef::<%s>::from_ptr(%s)' % (returns, call)]
+                            'WeakRef::<%s>::from(%s)' % (returns, call)]
                 else:
                     return ['Option<%sIsOwned<false>>' % (returns,),
                             '%s::option_from(%s)' % (returns, call)]
