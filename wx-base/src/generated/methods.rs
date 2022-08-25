@@ -6,6 +6,9 @@ pub trait WxRustMethods {
     unsafe fn from_ptr(ptr: *mut c_void) -> Self;
     unsafe fn from_unowned_ptr(ptr: *mut c_void) -> Self::Unowned;
     unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F);
+    fn to_unowned(&self) -> Self::Unowned {
+        unsafe { Self::from_unowned_ptr(self.as_ptr()) }
+    }
     unsafe fn option_from(ptr: *mut c_void) -> Option<Self::Unowned>
     where
         Self: Sized,
