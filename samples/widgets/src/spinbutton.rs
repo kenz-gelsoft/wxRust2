@@ -96,26 +96,26 @@ impl From<Align> for c_int {
 #[derive(Clone)]
 pub struct ConfigUI {
     // the check/radio boxes for styles
-    chk_vert: wx::CheckBox,
-    chk_arrow_keys: wx::CheckBox,
-    chk_wrap: wx::CheckBox,
-    chk_process_enter: wx::CheckBox,
+    chk_vert: wx::CheckBoxIsOwned<false>,
+    chk_arrow_keys: wx::CheckBoxIsOwned<false>,
+    chk_wrap: wx::CheckBoxIsOwned<false>,
+    chk_process_enter: wx::CheckBoxIsOwned<false>,
 
-    radio_align: wx::RadioBox,
+    radio_align: wx::RadioBoxIsOwned<false>,
 
     // the text entries for set value/range
-    text_value: wx::TextCtrl,
-    text_min: wx::TextCtrl,
-    text_max: wx::TextCtrl,
-    text_base: wx::TextCtrl,
-    text_increment: wx::TextCtrl,
+    text_value: wx::TextCtrlIsOwned<false>,
+    text_min: wx::TextCtrlIsOwned<false>,
+    text_max: wx::TextCtrlIsOwned<false>,
+    text_base: wx::TextCtrlIsOwned<false>,
+    text_increment: wx::TextCtrlIsOwned<false>,
 
-    sizer_spin: wx::BoxSizer,
+    sizer_spin: wx::BoxSizerIsOwned<false>,
 }
 
 #[derive(Clone)]
 pub struct SpinButtonWidgetsPage {
-    pub base: wx::Panel,
+    pub base: wx::PanelIsOwned<false>,
     config_ui: RefCell<Option<ConfigUI>>,
 
     // the spinbtn and the spinctrl
@@ -134,7 +134,7 @@ pub struct SpinButtonWidgetsPage {
     increment: RefCell<c_int>,
 }
 impl WidgetsPage for SpinButtonWidgetsPage {
-    fn base(&self) -> &wx::Panel {
+    fn base(&self) -> &wx::PanelIsOwned<false> {
         return &self.base;
     }
     fn label(&self) -> &str {
@@ -302,20 +302,20 @@ impl WidgetsPage for SpinButtonWidgetsPage {
         );
 
         let config_ui = ConfigUI {
-            chk_vert,
-            chk_arrow_keys,
-            chk_wrap,
-            chk_process_enter,
+            chk_vert: chk_vert.to_unowned(),
+            chk_arrow_keys: chk_arrow_keys.to_unowned(),
+            chk_wrap: chk_wrap.to_unowned(),
+            chk_process_enter: chk_process_enter.to_unowned(),
 
-            radio_align,
+            radio_align: radio_align.to_unowned(),
 
-            text_value,
-            text_min,
-            text_max,
-            text_base,
-            text_increment,
+            text_value: text_value.to_unowned(),
+            text_min: text_min.to_unowned(),
+            text_max: text_max.to_unowned(),
+            text_base: text_base.to_unowned(),
+            text_increment: text_increment.to_unowned(),
 
-            sizer_spin: sizer_right, // save it to modify it later
+            sizer_spin: sizer_right.to_unowned(), // save it to modify it later
         };
         self.reset(&config_ui);
         self.create_spin(&config_ui);
@@ -356,7 +356,7 @@ impl SpinButtonWidgetsPage {
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
         SpinButtonWidgetsPage {
-            base: panel,
+            base: panel.to_unowned(),
             config_ui: RefCell::new(None),
             spinbtn: Rc::new(RefCell::new(None)),
             spinctrl: Rc::new(RefCell::new(None)),

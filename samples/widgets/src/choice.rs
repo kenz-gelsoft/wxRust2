@@ -69,20 +69,20 @@ pub struct ConfigUI {
     // the controls
     // ------------
     // the checkboxes
-    chk_sort: wx::CheckBox,
+    chk_sort: wx::CheckBoxIsOwned<false>,
 
     // sizer
-    sizer_choice: wx::BoxSizer,
+    sizer_choice: wx::BoxSizerIsOwned<false>,
 
     // the text entries for "Add/change string" and "Delete" buttons
-    text_add: wx::TextCtrl,
-    text_change: wx::TextCtrl,
-    text_delete: wx::TextCtrl,
+    text_add: wx::TextCtrlIsOwned<false>,
+    text_change: wx::TextCtrlIsOwned<false>,
+    text_delete: wx::TextCtrlIsOwned<false>,
 }
 
 #[derive(Clone)]
 pub struct ChoiceWidgetsPage {
-    pub base: wx::Panel,
+    pub base: wx::PanelIsOwned<false>,
     config_ui: RefCell<Option<ConfigUI>>,
     // the choice itself
     choice: Rc<RefCell<Option<wx::Choice>>>,
@@ -90,7 +90,7 @@ pub struct ChoiceWidgetsPage {
     s_item: RefCell<c_int>,
 }
 impl WidgetsPage for ChoiceWidgetsPage {
-    fn base(&self) -> &wx::Panel {
+    fn base(&self) -> &wx::PanelIsOwned<false> {
         return &self.base;
     }
     fn label(&self) -> &str {
@@ -245,13 +245,13 @@ impl WidgetsPage for ChoiceWidgetsPage {
                 .double_border(wx::ALL & !wx::RIGHT),
         );
         *self.config_ui.borrow_mut() = Some(ConfigUI {
-            chk_sort,
+            chk_sort: chk_sort.to_unowned(),
 
-            sizer_choice: sizer_right, // save it to modify it later
+            sizer_choice: sizer_right.to_unowned(), // save it to modify it later
 
-            text_add,
-            text_change,
-            text_delete,
+            text_add: text_add.to_unowned(),
+            text_change: text_change.to_unowned(),
+            text_delete: text_delete.to_unowned(),
         });
 
         // do create the main control
@@ -294,7 +294,7 @@ impl ChoiceWidgetsPage {
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
         ChoiceWidgetsPage {
-            base: panel,
+            base: panel.to_unowned(),
             config_ui: RefCell::new(None),
             choice: Rc::new(RefCell::new(None)),
             s_item: RefCell::new(1),

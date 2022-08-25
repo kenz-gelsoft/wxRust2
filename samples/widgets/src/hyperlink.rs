@@ -69,23 +69,23 @@ impl From<Align> for c_int {
 
 #[derive(Clone)]
 pub struct ConfigUI {
-    label: wx::TextCtrl,
-    url: wx::TextCtrl,
-    radio_align_mode: wx::RadioBox,
+    label: wx::TextCtrlIsOwned<false>,
+    url: wx::TextCtrlIsOwned<false>,
+    radio_align_mode: wx::RadioBoxIsOwned<false>,
 
-    sizer: wx::BoxSizer,
+    sizer: wx::BoxSizerIsOwned<false>,
 }
 
 #[derive(Clone)]
 pub struct HyperlinkWidgetsPage {
-    pub base: wx::Panel,
+    pub base: wx::PanelIsOwned<false>,
     config_ui: RefCell<Option<ConfigUI>>,
     // the control itself
     hyperlink: Rc<RefCell<Option<wx::HyperlinkCtrl>>>,
     hyperlink_long: Rc<RefCell<Option<wx::HyperlinkCtrl>>>,
 }
 impl WidgetsPage for HyperlinkWidgetsPage {
-    fn base(&self) -> &wx::Panel {
+    fn base(&self) -> &wx::PanelIsOwned<false> {
         return &self.base;
     }
     fn label(&self) -> &str {
@@ -222,11 +222,11 @@ impl WidgetsPage for HyperlinkWidgetsPage {
 
         // final initializations
         let config_ui = ConfigUI {
-            label,
-            url,
-            radio_align_mode,
+            label: label.to_unowned(),
+            url: url.to_unowned(),
+            radio_align_mode: radio_align_mode.to_unowned(),
 
-            sizer: sizer_top,
+            sizer: sizer_top.to_unowned(),
         };
         self.reset(&config_ui);
         *self.config_ui.borrow_mut() = Some(config_ui);
@@ -262,7 +262,7 @@ impl HyperlinkWidgetsPage {
             .build();
 
         HyperlinkWidgetsPage {
-            base: panel,
+            base: panel.to_unowned(),
             config_ui: RefCell::new(None),
             hyperlink: Rc::new(RefCell::new(None)),
             hyperlink_long: Rc::new(RefCell::new(None)),

@@ -46,24 +46,24 @@ impl From<PickerPage> for c_int {
 pub struct ConfigUI {
     // other controls
     // --------------
-    chk_dir_text_ctrl: wx::CheckBox,
-    chk_dir_change_dir: wx::CheckBox,
-    chk_dir_must_exist: wx::CheckBox,
-    chk_small: wx::CheckBox,
-    text_initial_dir: wx::TextCtrl,
+    chk_dir_text_ctrl: wx::CheckBoxIsOwned<false>,
+    chk_dir_change_dir: wx::CheckBoxIsOwned<false>,
+    chk_dir_must_exist: wx::CheckBoxIsOwned<false>,
+    chk_small: wx::CheckBoxIsOwned<false>,
+    text_initial_dir: wx::TextCtrlIsOwned<false>,
 
-    sizer: wx::BoxSizer,
+    sizer: wx::BoxSizerIsOwned<false>,
 }
 
 #[derive(Clone)]
 pub struct DirPickerWidgetsPage {
-    pub base: wx::Panel,
+    pub base: wx::PanelIsOwned<false>,
     config_ui: RefCell<Option<ConfigUI>>,
     // the picker
     dir_picker: Rc<RefCell<Option<wx::DirPickerCtrl>>>,
 }
 impl WidgetsPage for DirPickerWidgetsPage {
-    fn base(&self) -> &wx::Panel {
+    fn base(&self) -> &wx::PanelIsOwned<false> {
         return &self.base;
     }
     fn label(&self) -> &str {
@@ -112,13 +112,13 @@ impl WidgetsPage for DirPickerWidgetsPage {
 
         let sizer = wx::BoxSizer::new(wx::VERTICAL);
         let config_ui = ConfigUI {
-            chk_dir_text_ctrl,
-            chk_dir_change_dir,
-            chk_dir_must_exist,
-            chk_small,
-            text_initial_dir,
+            chk_dir_text_ctrl: chk_dir_text_ctrl.to_unowned(),
+            chk_dir_change_dir: chk_dir_change_dir.to_unowned(),
+            chk_dir_must_exist: chk_dir_must_exist.to_unowned(),
+            chk_small: chk_small.to_unowned(),
+            text_initial_dir: text_initial_dir.to_unowned(),
 
-            sizer,
+            sizer: sizer.to_unowned(),
         };
         self.reset(&config_ui); // set checkboxes state
 
@@ -184,7 +184,7 @@ impl DirPickerWidgetsPage {
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
         DirPickerWidgetsPage {
-            base: panel,
+            base: panel.to_unowned(),
             config_ui: RefCell::new(None),
             dir_picker: Rc::new(RefCell::new(None)),
         }

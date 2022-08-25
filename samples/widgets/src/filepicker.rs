@@ -69,26 +69,26 @@ impl From<PickerPage> for c_int {
 pub struct ConfigUI {
     // other controls
     // --------------
-    chk_file_text_ctrl: wx::CheckBox,
-    chk_file_overwrite_prompt: wx::CheckBox,
-    chk_file_must_exist: wx::CheckBox,
-    chk_file_change_dir: wx::CheckBox,
-    chk_small: wx::CheckBox,
-    radio_file_picker_mode: wx::RadioBox,
-    text_initial_dir: wx::TextCtrl,
+    chk_file_text_ctrl: wx::CheckBoxIsOwned<false>,
+    chk_file_overwrite_prompt: wx::CheckBoxIsOwned<false>,
+    chk_file_must_exist: wx::CheckBoxIsOwned<false>,
+    chk_file_change_dir: wx::CheckBoxIsOwned<false>,
+    chk_small: wx::CheckBoxIsOwned<false>,
+    radio_file_picker_mode: wx::RadioBoxIsOwned<false>,
+    text_initial_dir: wx::TextCtrlIsOwned<false>,
 
-    sizer: wx::BoxSizer,
+    sizer: wx::BoxSizerIsOwned<false>,
 }
 
 #[derive(Clone)]
 pub struct FilePickerWidgetsPage {
-    pub base: wx::Panel,
+    pub base: wx::PanelIsOwned<false>,
     config_ui: RefCell<Option<ConfigUI>>,
     // the picker
     file_picker: Rc<RefCell<Option<wx::FilePickerCtrl>>>,
 }
 impl WidgetsPage for FilePickerWidgetsPage {
-    fn base(&self) -> &wx::Panel {
+    fn base(&self) -> &wx::PanelIsOwned<false> {
         return &self.base;
     }
     fn label(&self) -> &str {
@@ -155,15 +155,15 @@ impl WidgetsPage for FilePickerWidgetsPage {
 
         let sizer = wx::BoxSizer::new(wx::VERTICAL);
         let config_ui = ConfigUI {
-            chk_file_text_ctrl,
-            chk_file_overwrite_prompt,
-            chk_file_must_exist,
-            chk_file_change_dir,
-            chk_small,
-            radio_file_picker_mode,
-            text_initial_dir,
+            chk_file_text_ctrl: chk_file_text_ctrl.to_unowned(),
+            chk_file_overwrite_prompt: chk_file_overwrite_prompt.to_unowned(),
+            chk_file_must_exist: chk_file_must_exist.to_unowned(),
+            chk_file_change_dir: chk_file_change_dir.to_unowned(),
+            chk_small: chk_small.to_unowned(),
+            radio_file_picker_mode: radio_file_picker_mode.to_unowned(),
+            text_initial_dir: text_initial_dir.to_unowned(),
 
-            sizer,
+            sizer: sizer.to_unowned(),
         };
         self.reset(&config_ui); // set checkboxes state
 
@@ -226,7 +226,7 @@ impl FilePickerWidgetsPage {
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
         FilePickerWidgetsPage {
-            base: panel,
+            base: panel.to_unowned(),
             config_ui: RefCell::new(None),
             file_picker: Rc::new(RefCell::new(None)),
         }

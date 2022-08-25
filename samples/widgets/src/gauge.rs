@@ -67,20 +67,20 @@ impl From<GaugePage> for c_int {
 #[derive(Clone)]
 pub struct ConfigUI {
     // the checkboxes for styles
-    chk_vert: wx::CheckBox,
-    chk_smooth: wx::CheckBox,
-    chk_progress: wx::CheckBox,
+    chk_vert: wx::CheckBoxIsOwned<false>,
+    chk_smooth: wx::CheckBoxIsOwned<false>,
+    chk_progress: wx::CheckBoxIsOwned<false>,
 
     // the text entries for set value/range
-    text_value: wx::TextCtrl,
-    text_range: wx::TextCtrl,
+    text_value: wx::TextCtrlIsOwned<false>,
+    text_range: wx::TextCtrlIsOwned<false>,
 
-    sizer_gauge: wx::BoxSizer,
+    sizer_gauge: wx::BoxSizerIsOwned<false>,
 }
 
 #[derive(Clone)]
 pub struct GaugeWidgetsPage {
-    pub base: wx::Panel,
+    pub base: wx::PanelIsOwned<false>,
     config_ui: RefCell<Option<ConfigUI>>,
     // the control itself
     gauge: Rc<RefCell<Option<wx::Gauge>>>,
@@ -90,7 +90,7 @@ pub struct GaugeWidgetsPage {
     timer: Rc<RefCell<Option<wx::Timer>>>,
 }
 impl WidgetsPage for GaugeWidgetsPage {
-    fn base(&self) -> &wx::Panel {
+    fn base(&self) -> &wx::PanelIsOwned<false> {
         return &self.base;
     }
     fn label(&self) -> &str {
@@ -232,14 +232,14 @@ impl WidgetsPage for GaugeWidgetsPage {
 
         // final initializations
         let config_ui = ConfigUI {
-            chk_vert,
-            chk_smooth,
-            chk_progress,
+            chk_vert: chk_vert.to_unowned(),
+            chk_smooth: chk_smooth.to_unowned(),
+            chk_progress: chk_progress.to_unowned(),
 
-            text_value,
-            text_range,
+            text_value: text_value.to_unowned(),
+            text_range: text_range.to_unowned(),
 
-            sizer_gauge: sizer_right, // save it to modify it later
+            sizer_gauge: sizer_right.to_unowned(), // save it to modify it later
         };
         self.reset(&config_ui);
         *self.config_ui.borrow_mut() = Some(config_ui);
@@ -282,7 +282,7 @@ impl GaugeWidgetsPage {
             .build();
 
         let page = GaugeWidgetsPage {
-            base: panel,
+            base: panel.to_unowned(),
             config_ui: RefCell::new(None),
             gauge: Rc::new(RefCell::new(None)),
             range: Rc::new(RefCell::new(100)),

@@ -33,35 +33,35 @@ const COL_ALIGNMENT_INDEX_DEFAULT: c_int = 0;
 
 #[derive(Clone)]
 struct ColSetting {
-    chk_allow_resize: wx::CheckBox,
-    chk_allow_reorder: wx::CheckBox,
-    chk_allow_sort: wx::CheckBox,
-    chk_allow_hide: wx::CheckBox,
-    chk_with_bitmap: wx::CheckBox,
-    rb_alignments: wx::RadioBox,
+    chk_allow_resize: wx::CheckBoxIsOwned<false>,
+    chk_allow_reorder: wx::CheckBoxIsOwned<false>,
+    chk_allow_sort: wx::CheckBoxIsOwned<false>,
+    chk_allow_hide: wx::CheckBoxIsOwned<false>,
+    chk_with_bitmap: wx::CheckBoxIsOwned<false>,
+    rb_alignments: wx::RadioBoxIsOwned<false>,
 }
 
 #[derive(Clone)]
 pub struct ConfigUI {
     // the checkboxes for styles
-    chk_allow_reorder: wx::CheckBox,
-    chk_allow_hide: wx::CheckBox,
-    chk_bitmap_on_right: wx::CheckBox,
+    chk_allow_reorder: wx::CheckBoxIsOwned<false>,
+    chk_allow_hide: wx::CheckBoxIsOwned<false>,
+    chk_bitmap_on_right: wx::CheckBoxIsOwned<false>,
 
     col_settings: [ColSetting; NUMBER_OF_COLUMNS],
 
-    sizer_header: wx::StaticBoxSizer,
+    sizer_header: wx::StaticBoxSizerIsOwned<false>,
 }
 
 #[derive(Clone)]
 pub struct HeaderCtrlWidgetsPage {
-    pub base: wx::Panel,
+    pub base: wx::PanelIsOwned<false>,
     config_ui: RefCell<Option<ConfigUI>>,
     // the control itself
     header: Rc<RefCell<Option<wx::HeaderCtrlSimple>>>,
 }
 impl WidgetsPage for HeaderCtrlWidgetsPage {
-    fn base(&self) -> &wx::Panel {
+    fn base(&self) -> &wx::PanelIsOwned<false> {
         return &self.base;
     }
     fn label(&self) -> &str {
@@ -107,37 +107,28 @@ impl WidgetsPage for HeaderCtrlWidgetsPage {
                 &format!("Column {} style", i + 1),
             );
             let col_setting = ColSetting {
-                chk_allow_resize: self.create_check_box_and_add_to_sizer(
-                    &sizer_col,
-                    "Allow resize",
-                    wx::ID_ANY,
-                ),
-                chk_allow_reorder: self.create_check_box_and_add_to_sizer(
-                    &sizer_col,
-                    "Allow reorder",
-                    wx::ID_ANY,
-                ),
-                chk_allow_sort: self.create_check_box_and_add_to_sizer(
-                    &sizer_col,
-                    "Allow sort",
-                    wx::ID_ANY,
-                ),
-                chk_allow_hide: self.create_check_box_and_add_to_sizer(
-                    &sizer_col,
-                    "Hidden",
-                    wx::ID_ANY,
-                ),
-                chk_with_bitmap: self.create_check_box_and_add_to_sizer(
-                    &sizer_col,
-                    "With bitmap",
-                    wx::ID_ANY,
-                ),
+                chk_allow_resize: self
+                    .create_check_box_and_add_to_sizer(&sizer_col, "Allow resize", wx::ID_ANY)
+                    .to_unowned(),
+                chk_allow_reorder: self
+                    .create_check_box_and_add_to_sizer(&sizer_col, "Allow reorder", wx::ID_ANY)
+                    .to_unowned(),
+                chk_allow_sort: self
+                    .create_check_box_and_add_to_sizer(&sizer_col, "Allow sort", wx::ID_ANY)
+                    .to_unowned(),
+                chk_allow_hide: self
+                    .create_check_box_and_add_to_sizer(&sizer_col, "Hidden", wx::ID_ANY)
+                    .to_unowned(),
+                chk_with_bitmap: self
+                    .create_check_box_and_add_to_sizer(&sizer_col, "With bitmap", wx::ID_ANY)
+                    .to_unowned(),
                 rb_alignments: wx::RadioBox::builder(Some(&self.base))
                     .label("Alignment")
                     .choices(col_alignments)
                     .major_dimension(2)
                     .style(wx::RA_SPECIFY_COLS.into())
-                    .build(),
+                    .build()
+                    .to_unowned(),
             };
             sizer_col.add_window_sizerflags(
                 Some(&col_setting.rb_alignments),
@@ -169,13 +160,13 @@ impl WidgetsPage for HeaderCtrlWidgetsPage {
         // final initializations
         let col_settings: [ColSetting; NUMBER_OF_COLUMNS] = col_settings.try_into().ok().unwrap();
         let config_ui = ConfigUI {
-            chk_allow_reorder,
-            chk_allow_hide,
-            chk_bitmap_on_right,
+            chk_allow_reorder: chk_allow_reorder.to_unowned(),
+            chk_allow_hide: chk_allow_hide.to_unowned(),
+            chk_bitmap_on_right: chk_bitmap_on_right.to_unowned(),
 
             col_settings: col_settings.try_into().unwrap(),
 
-            sizer_header, // save it to modify it later
+            sizer_header: sizer_header.to_unowned(), // save it to modify it later
         };
         self.recreate_widget(&config_ui);
         self.reset_header_style(&config_ui);
@@ -205,7 +196,7 @@ impl HeaderCtrlWidgetsPage {
             .build();
 
         HeaderCtrlWidgetsPage {
-            base: panel,
+            base: panel.to_unowned(),
             config_ui: RefCell::new(None),
             header: Rc::new(RefCell::new(None)),
         }

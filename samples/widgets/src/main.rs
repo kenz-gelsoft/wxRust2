@@ -165,9 +165,9 @@ fn main() {
 
 #[derive(Clone)]
 struct WidgetsFrame {
-    base: wx::Frame,
-    panel: wx::Panel,
-    book: wx::Notebook,
+    base: wx::FrameIsOwned<false>,
+    panel: wx::PanelIsOwned<false>,
+    book: wx::NotebookIsOwned<false>,
     pages: Vec<Rc<dyn WidgetsPage>>,
 }
 impl WidgetsFrame {
@@ -203,9 +203,9 @@ impl WidgetsFrame {
         let timepicker_page = Rc::new(TimePickerWidgetsPage::new(&book));
         let toggle_page = Rc::new(ToggleWidgetsPage::new(&book));
         let mut frame = WidgetsFrame {
-            base,
-            panel,
-            book,
+            base: base.to_unowned(),
+            panel: panel.to_unowned(),
+            book: book.to_unowned(),
             pages: vec![
                 button_page,
                 check_box_page,
@@ -421,7 +421,7 @@ impl WidgetsFrame {
 }
 
 trait WidgetsPage {
-    fn base(&self) -> &wx::Panel;
+    fn base(&self) -> &wx::PanelIsOwned<false>;
     fn label(&self) -> &str;
     fn handle_button(&self, event: &wx::CommandEvent);
     fn handle_checkbox(&self, event: &wx::CommandEvent);

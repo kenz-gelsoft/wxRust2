@@ -61,25 +61,25 @@ const CHECKBOX_KIND_3STATE_USER: c_int = 2;
 #[derive(Clone)]
 pub struct ConfigUI {
     // the controls to choose the checkbox style
-    chk_right: wx::CheckBox,
-    radio_kind: wx::RadioBox,
+    chk_right: wx::CheckBoxIsOwned<false>,
+    radio_kind: wx::RadioBoxIsOwned<false>,
 
     // the text entries for command parameters
-    text_label: wx::TextCtrl,
+    text_label: wx::TextCtrlIsOwned<false>,
 
     // sizer
-    sizer_checkbox: wx::BoxSizer,
+    sizer_checkbox: wx::BoxSizerIsOwned<false>,
 }
 
 #[derive(Clone)]
 pub struct CheckBoxWidgetsPage {
-    pub base: wx::Panel,
+    pub base: wx::PanelIsOwned<false>,
     config_ui: RefCell<Option<ConfigUI>>,
     // the checkbox itself
     checkbox: Rc<RefCell<Option<wx::CheckBox>>>,
 }
 impl WidgetsPage for CheckBoxWidgetsPage {
-    fn base(&self) -> &wx::Panel {
+    fn base(&self) -> &wx::PanelIsOwned<false> {
         return &self.base;
     }
     fn label(&self) -> &str {
@@ -219,10 +219,10 @@ impl WidgetsPage for CheckBoxWidgetsPage {
                 .double_border(wx::ALL & !wx::RIGHT),
         );
         *self.config_ui.borrow_mut() = Some(ConfigUI {
-            chk_right,
-            radio_kind,
-            text_label,
-            sizer_checkbox: sizer_right, // save it to modify it later
+            chk_right: chk_right.to_unowned(),
+            radio_kind: radio_kind.to_unowned(),
+            text_label: text_label.to_unowned(),
+            sizer_checkbox: sizer_right.to_unowned(), // save it to modify it later
         });
 
         // do create the main control
@@ -264,7 +264,7 @@ impl CheckBoxWidgetsPage {
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
         CheckBoxWidgetsPage {
-            base: panel,
+            base: panel.to_unowned(),
             config_ui: RefCell::new(None),
             checkbox: Rc::new(RefCell::new(None)),
         }

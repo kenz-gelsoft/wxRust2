@@ -47,19 +47,19 @@ impl From<ID> for c_int {
 
 #[derive(Clone)]
 pub struct ConfigUI {
-    search_btn_check: wx::CheckBox,
-    cancel_btn_check: wx::CheckBox,
-    menu_btn_check: wx::CheckBox,
+    search_btn_check: wx::CheckBoxIsOwned<false>,
+    cancel_btn_check: wx::CheckBoxIsOwned<false>,
+    menu_btn_check: wx::CheckBoxIsOwned<false>,
 }
 
 #[derive(Clone)]
 pub struct SearchCtrlWidgetsPage {
-    pub base: wx::Panel,
+    pub base: wx::PanelIsOwned<false>,
     config_ui: RefCell<Option<ConfigUI>>,
     srch_ctrl: Rc<RefCell<Option<wx::SearchCtrl>>>,
 }
 impl WidgetsPage for SearchCtrlWidgetsPage {
-    fn base(&self) -> &wx::Panel {
+    fn base(&self) -> &wx::PanelIsOwned<false> {
         return &self.base;
     }
     fn label(&self) -> &str {
@@ -119,9 +119,9 @@ impl WidgetsPage for SearchCtrlWidgetsPage {
 
         self.base.set_sizer(Some(&sizer), true);
         let config_ui = ConfigUI {
-            search_btn_check,
-            cancel_btn_check,
-            menu_btn_check,
+            search_btn_check: search_btn_check.to_unowned(),
+            cancel_btn_check: cancel_btn_check.to_unowned(),
+            menu_btn_check: menu_btn_check.to_unowned(),
         };
         *self.config_ui.borrow_mut() = Some(config_ui);
     }
@@ -151,7 +151,7 @@ impl SearchCtrlWidgetsPage {
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
         SearchCtrlWidgetsPage {
-            base: panel,
+            base: panel.to_unowned(),
             config_ui: RefCell::new(None),
             srch_ctrl: Rc::new(RefCell::new(None)),
         }

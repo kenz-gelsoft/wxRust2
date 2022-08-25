@@ -88,34 +88,34 @@ impl From<StdPath> for c_int {
 #[derive(Clone)]
 pub struct ConfigUI {
     // the text entries for command parameters
-    path: wx::TextCtrl,
+    path: wx::TextCtrlIsOwned<false>,
 
-    radio_std_path: wx::RadioBox,
+    radio_std_path: wx::RadioBoxIsOwned<false>,
 
     // flags
-    chk_dir_only: wx::CheckBox,
-    chk_3d: wx::CheckBox,
-    chk_first: wx::CheckBox,
-    chk_filters: wx::CheckBox,
-    chk_labels: wx::CheckBox,
-    chk_multi: wx::CheckBox,
+    chk_dir_only: wx::CheckBoxIsOwned<false>,
+    chk_3d: wx::CheckBoxIsOwned<false>,
+    chk_first: wx::CheckBoxIsOwned<false>,
+    chk_filters: wx::CheckBoxIsOwned<false>,
+    chk_labels: wx::CheckBoxIsOwned<false>,
+    chk_multi: wx::CheckBoxIsOwned<false>,
 
     // filters
-    fltr: [wx::CheckBox; 3],
+    fltr: [wx::CheckBoxIsOwned<false>; 3],
 
     // sizer
-    sizer: wx::BoxSizer,
+    sizer: wx::BoxSizerIsOwned<false>,
 }
 
 #[derive(Clone)]
 pub struct DirCtrlWidgetsPage {
-    pub base: wx::Panel,
+    pub base: wx::PanelIsOwned<false>,
     config_ui: RefCell<Option<ConfigUI>>,
     // the control itself
     dir_ctrl: Rc<RefCell<Option<wx::GenericDirCtrl>>>,
 }
 impl WidgetsPage for DirCtrlWidgetsPage {
-    fn base(&self) -> &wx::Panel {
+    fn base(&self) -> &wx::PanelIsOwned<false> {
         return &self.base;
     }
     fn label(&self) -> &str {
@@ -192,17 +192,20 @@ impl WidgetsPage for DirCtrlWidgetsPage {
                     wx::FILE_SELECTOR_DEFAULT_WILDCARD_STR
                 ),
                 wx::ID_ANY,
-            ),
+            )
+            .to_unowned(),
             self.create_check_box_and_add_to_sizer(
                 &sizer_filters,
                 "C++ files (*.cpp; *.h)|*.cpp;*.h",
                 wx::ID_ANY,
-            ),
+            )
+            .to_unowned(),
             self.create_check_box_and_add_to_sizer(
                 &sizer_filters,
                 "PNG images (*.png)|*.png",
                 wx::ID_ANY,
-            ),
+            )
+            .to_unowned(),
         ];
         sizer_left.add_sizer_sizerflags(
             Some(&sizer_filters),
@@ -280,16 +283,16 @@ impl WidgetsPage for DirCtrlWidgetsPage {
 
         // final initializations
         let config_ui = ConfigUI {
-            path,
-            radio_std_path,
-            chk_dir_only,
-            chk_3d,
-            chk_first,
-            chk_filters,
-            chk_labels,
-            chk_multi,
+            path: path.to_unowned(),
+            radio_std_path: radio_std_path.to_unowned(),
+            chk_dir_only: chk_dir_only.to_unowned(),
+            chk_3d: chk_3d.to_unowned(),
+            chk_first: chk_first.to_unowned(),
+            chk_filters: chk_filters.to_unowned(),
+            chk_labels: chk_labels.to_unowned(),
+            chk_multi: chk_multi.to_unowned(),
             fltr,
-            sizer: sizer_top,
+            sizer: sizer_top.to_unowned(),
         };
         self.reset(&config_ui);
         *self.config_ui.borrow_mut() = Some(config_ui);
@@ -323,7 +326,7 @@ impl DirCtrlWidgetsPage {
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
         DirCtrlWidgetsPage {
-            base: panel,
+            base: panel.to_unowned(),
             config_ui: RefCell::new(None),
             dir_ctrl: Rc::new(RefCell::new(None)),
         }

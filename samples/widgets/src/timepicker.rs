@@ -47,21 +47,21 @@ impl From<TimePickerPage> for c_int {
 
 #[derive(Clone)]
 pub struct ConfigUI {
-    text_cur: wx::TextCtrl,
+    text_cur: wx::TextCtrlIsOwned<false>,
 
-    sizer_time_picker: wx::BoxSizer,
+    sizer_time_picker: wx::BoxSizerIsOwned<false>,
 }
 
 #[derive(Clone)]
 pub struct TimePickerWidgetsPage {
-    pub base: wx::Panel,
+    pub base: wx::PanelIsOwned<false>,
     config_ui: RefCell<Option<ConfigUI>>,
 
     // the time_picker
     time_picker: Rc<RefCell<Option<wx::TimePickerCtrl>>>,
 }
 impl WidgetsPage for TimePickerWidgetsPage {
-    fn base(&self) -> &wx::Panel {
+    fn base(&self) -> &wx::PanelIsOwned<false> {
         return &self.base;
     }
     fn label(&self) -> &str {
@@ -140,9 +140,9 @@ impl WidgetsPage for TimePickerWidgetsPage {
         );
 
         let config_ui = ConfigUI {
-            text_cur,
+            text_cur: text_cur.to_unowned(),
 
-            sizer_time_picker: sizer_right, // save it to modify it later
+            sizer_time_picker: sizer_right.to_unowned(), // save it to modify it later
         };
 
         // final initializations
@@ -178,7 +178,7 @@ impl TimePickerWidgetsPage {
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
         TimePickerWidgetsPage {
-            base: panel,
+            base: panel.to_unowned(),
             config_ui: RefCell::new(None),
             time_picker: Rc::new(RefCell::new(None)),
         }

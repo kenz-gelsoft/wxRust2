@@ -34,21 +34,21 @@ impl From<PickerPage> for c_int {
 pub struct ConfigUI {
     // other controls
     // --------------
-    chk_colour_text_ctrl: wx::CheckBox,
-    chk_colour_show_label: wx::CheckBox,
-    chk_colour_show_alpha: wx::CheckBox,
-    sizer: wx::BoxSizer,
+    chk_colour_text_ctrl: wx::CheckBoxIsOwned<false>,
+    chk_colour_show_label: wx::CheckBoxIsOwned<false>,
+    chk_colour_show_alpha: wx::CheckBoxIsOwned<false>,
+    sizer: wx::BoxSizerIsOwned<false>,
 }
 
 #[derive(Clone)]
 pub struct ColourPickerWidgetsPage {
-    pub base: wx::Panel,
+    pub base: wx::PanelIsOwned<false>,
     config_ui: RefCell<Option<ConfigUI>>,
     // the picker
     clr_picker: Rc<RefCell<Option<wx::ColourPickerCtrl>>>,
 }
 impl WidgetsPage for ColourPickerWidgetsPage {
-    fn base(&self) -> &wx::Panel {
+    fn base(&self) -> &wx::PanelIsOwned<false> {
         return &self.base;
     }
     fn label(&self) -> &str {
@@ -106,11 +106,11 @@ impl WidgetsPage for ColourPickerWidgetsPage {
         sz.add_sizer_int(Some(&sizer), 1, wx::GROW | wx::ALL, 5, wx::Object::none());
 
         *self.config_ui.borrow_mut() = Some(ConfigUI {
-            chk_colour_text_ctrl,
-            chk_colour_show_label,
-            chk_colour_show_alpha,
+            chk_colour_text_ctrl: chk_colour_text_ctrl.to_unowned(),
+            chk_colour_show_label: chk_colour_show_label.to_unowned(),
+            chk_colour_show_alpha: chk_colour_show_alpha.to_unowned(),
 
-            sizer,
+            sizer: sizer.to_unowned(),
         });
 
         self.base.set_sizer(Some(&sz), true);
@@ -132,7 +132,7 @@ impl ColourPickerWidgetsPage {
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
         ColourPickerWidgetsPage {
-            base: panel,
+            base: panel.to_unowned(),
             config_ui: RefCell::new(None),
             clr_picker: Rc::new(RefCell::new(None)),
         }

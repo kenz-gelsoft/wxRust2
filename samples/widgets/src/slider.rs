@@ -118,33 +118,33 @@ pub struct ConfigUI {
     // ------------
 
     // the check/radio boxes for styles
-    chk_min_max_labels: wx::CheckBox,
-    chk_value_label: wx::CheckBox,
-    chk_inverse: wx::CheckBox,
-    chk_ticks: wx::CheckBox,
-    chk_both_sides: wx::CheckBox,
-    chk_select_range: wx::CheckBox,
+    chk_min_max_labels: wx::CheckBoxIsOwned<false>,
+    chk_value_label: wx::CheckBoxIsOwned<false>,
+    chk_inverse: wx::CheckBoxIsOwned<false>,
+    chk_ticks: wx::CheckBoxIsOwned<false>,
+    chk_both_sides: wx::CheckBoxIsOwned<false>,
+    chk_select_range: wx::CheckBoxIsOwned<false>,
 
-    radio_sides: wx::RadioBox,
+    radio_sides: wx::RadioBoxIsOwned<false>,
 
     // sizer
-    sizer_slider: wx::BoxSizer,
+    sizer_slider: wx::BoxSizerIsOwned<false>,
 
     // the text entries for set value/range
-    text_value: wx::TextCtrl,
-    text_min: wx::TextCtrl,
-    text_max: wx::TextCtrl,
-    text_range_min: wx::TextCtrl,
-    text_range_max: wx::TextCtrl,
-    text_line_size: wx::TextCtrl,
-    text_page_size: wx::TextCtrl,
-    text_tick_freq: wx::TextCtrl,
-    text_thumb_len: wx::TextCtrl,
+    text_value: wx::TextCtrlIsOwned<false>,
+    text_min: wx::TextCtrlIsOwned<false>,
+    text_max: wx::TextCtrlIsOwned<false>,
+    text_range_min: wx::TextCtrlIsOwned<false>,
+    text_range_max: wx::TextCtrlIsOwned<false>,
+    text_line_size: wx::TextCtrlIsOwned<false>,
+    text_page_size: wx::TextCtrlIsOwned<false>,
+    text_tick_freq: wx::TextCtrlIsOwned<false>,
+    text_thumb_len: wx::TextCtrlIsOwned<false>,
 }
 
 #[derive(Clone)]
 pub struct SliderWidgetsPage {
-    pub base: wx::Panel,
+    pub base: wx::PanelIsOwned<false>,
     config_ui: RefCell<Option<ConfigUI>>,
     // the slider itself
     slider: Rc<RefCell<Option<wx::Slider>>>,
@@ -158,7 +158,7 @@ pub struct SliderWidgetsPage {
     range_max: RefCell<c_int>,
 }
 impl WidgetsPage for SliderWidgetsPage {
-    fn base(&self) -> &wx::Panel {
+    fn base(&self) -> &wx::PanelIsOwned<false> {
         return &self.base;
     }
     fn label(&self) -> &str {
@@ -362,26 +362,26 @@ impl WidgetsPage for SliderWidgetsPage {
                 .border_int(wx::ALL & !wx::RIGHT, 10),
         );
         let config_ui = ConfigUI {
-            chk_min_max_labels,
-            chk_value_label,
-            chk_inverse,
-            chk_ticks,
-            chk_both_sides,
-            chk_select_range,
+            chk_min_max_labels: chk_min_max_labels.to_unowned(),
+            chk_value_label: chk_value_label.to_unowned(),
+            chk_inverse: chk_inverse.to_unowned(),
+            chk_ticks: chk_ticks.to_unowned(),
+            chk_both_sides: chk_both_sides.to_unowned(),
+            chk_select_range: chk_select_range.to_unowned(),
 
-            radio_sides,
+            radio_sides: radio_sides.to_unowned(),
 
-            sizer_slider: sizer_right,
+            sizer_slider: sizer_right.to_unowned(),
 
-            text_value,
-            text_min,
-            text_max,
-            text_range_min,
-            text_range_max,
-            text_line_size,
-            text_page_size,
-            text_tick_freq,
-            text_thumb_len,
+            text_value: text_value.to_unowned(),
+            text_min: text_min.to_unowned(),
+            text_max: text_max.to_unowned(),
+            text_range_min: text_range_min.to_unowned(),
+            text_range_max: text_range_max.to_unowned(),
+            text_line_size: text_line_size.to_unowned(),
+            text_page_size: text_page_size.to_unowned(),
+            text_tick_freq: text_tick_freq.to_unowned(),
+            text_thumb_len: text_thumb_len.to_unowned(),
         };
 
         self.reset(&config_ui);
@@ -425,7 +425,7 @@ impl SliderWidgetsPage {
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
         SliderWidgetsPage {
-            base: panel,
+            base: panel.to_unowned(),
             config_ui: RefCell::new(None),
             slider: Rc::new(RefCell::new(None)),
             min: RefCell::new(0),

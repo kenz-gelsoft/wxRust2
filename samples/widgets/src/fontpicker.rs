@@ -34,21 +34,21 @@ impl From<PickerPage> for c_int {
 pub struct ConfigUI {
     // other controls
     // --------------
-    chk_font_text_ctrl: wx::CheckBox,
-    chk_font_desc_as_label: wx::CheckBox,
-    chk_font_use_font_for_label: wx::CheckBox,
-    sizer: wx::BoxSizer,
+    chk_font_text_ctrl: wx::CheckBoxIsOwned<false>,
+    chk_font_desc_as_label: wx::CheckBoxIsOwned<false>,
+    chk_font_use_font_for_label: wx::CheckBoxIsOwned<false>,
+    sizer: wx::BoxSizerIsOwned<false>,
 }
 
 #[derive(Clone)]
 pub struct FontPickerWidgetsPage {
-    pub base: wx::Panel,
+    pub base: wx::PanelIsOwned<false>,
     config_ui: RefCell<Option<ConfigUI>>,
     // the picker
     font_picker: Rc<RefCell<Option<wx::FontPickerCtrl>>>,
 }
 impl WidgetsPage for FontPickerWidgetsPage {
-    fn base(&self) -> &wx::Panel {
+    fn base(&self) -> &wx::PanelIsOwned<false> {
         return &self.base;
     }
     fn label(&self) -> &str {
@@ -104,11 +104,11 @@ impl WidgetsPage for FontPickerWidgetsPage {
         sz.add_sizer_int(Some(&sizer), 1, wx::GROW | wx::ALL, 5, wx::Object::none());
 
         let config_ui = ConfigUI {
-            chk_font_text_ctrl,
-            chk_font_desc_as_label,
-            chk_font_use_font_for_label,
+            chk_font_text_ctrl: chk_font_text_ctrl.to_unowned(),
+            chk_font_desc_as_label: chk_font_desc_as_label.to_unowned(),
+            chk_font_use_font_for_label: chk_font_use_font_for_label.to_unowned(),
 
-            sizer,
+            sizer: sizer.to_unowned(),
         };
         self.reset(&config_ui); // set checkboxes state
         *self.config_ui.borrow_mut() = Some(config_ui);
@@ -132,7 +132,7 @@ impl FontPickerWidgetsPage {
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
         FontPickerWidgetsPage {
-            base: panel,
+            base: panel.to_unowned(),
             config_ui: RefCell::new(None),
             font_picker: Rc::new(RefCell::new(None)),
         }

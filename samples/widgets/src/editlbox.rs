@@ -45,23 +45,23 @@ impl From<EditableListboxPage> for c_int {
 #[derive(Clone)]
 pub struct ConfigUI {
     // the checkboxes
-    chk_allow_new: wx::CheckBox,
-    chk_allow_edit: wx::CheckBox,
-    chk_allow_delete: wx::CheckBox,
-    chk_allow_no_reorder: wx::CheckBox,
+    chk_allow_new: wx::CheckBoxIsOwned<false>,
+    chk_allow_edit: wx::CheckBoxIsOwned<false>,
+    chk_allow_delete: wx::CheckBoxIsOwned<false>,
+    chk_allow_no_reorder: wx::CheckBoxIsOwned<false>,
 
-    sizer_lbox: wx::BoxSizer,
+    sizer_lbox: wx::BoxSizerIsOwned<false>,
 }
 
 #[derive(Clone)]
 pub struct EditableListboxWidgetsPage {
-    pub base: wx::Panel,
+    pub base: wx::PanelIsOwned<false>,
     config_ui: RefCell<Option<ConfigUI>>,
     // the control itself
     lbox: Rc<RefCell<Option<wx::EditableListBox>>>,
 }
 impl WidgetsPage for EditableListboxWidgetsPage {
-    fn base(&self) -> &wx::Panel {
+    fn base(&self) -> &wx::PanelIsOwned<false> {
         return &self.base;
     }
     fn label(&self) -> &str {
@@ -132,12 +132,12 @@ impl WidgetsPage for EditableListboxWidgetsPage {
 
         // final initializations
         let config_ui = ConfigUI {
-            chk_allow_new,
-            chk_allow_edit,
-            chk_allow_delete,
-            chk_allow_no_reorder,
+            chk_allow_new: chk_allow_new.to_unowned(),
+            chk_allow_edit: chk_allow_edit.to_unowned(),
+            chk_allow_delete: chk_allow_delete.to_unowned(),
+            chk_allow_no_reorder: chk_allow_no_reorder.to_unowned(),
 
-            sizer_lbox: sizer_right, // save it to modify it later
+            sizer_lbox: sizer_right.to_unowned(), // save it to modify it later
         };
         self.reset(&config_ui);
         *self.config_ui.borrow_mut() = Some(config_ui);
@@ -172,7 +172,7 @@ impl EditableListboxWidgetsPage {
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
         EditableListboxWidgetsPage {
-            base: panel,
+            base: panel.to_unowned(),
             config_ui: RefCell::new(None),
             lbox: Rc::new(RefCell::new(None)),
         }

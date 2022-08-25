@@ -69,32 +69,32 @@ impl From<FileCtrlMode> for c_int {
 #[derive(Clone)]
 pub struct ConfigUI {
     // the text entries for command parameters
-    dir: wx::TextCtrl,
-    path: wx::TextCtrl,
-    filename: wx::TextCtrl,
+    dir: wx::TextCtrlIsOwned<false>,
+    path: wx::TextCtrlIsOwned<false>,
+    filename: wx::TextCtrlIsOwned<false>,
 
     // flags
-    chk_multiple: wx::CheckBox,
-    chk_no_show_hidden: wx::CheckBox,
+    chk_multiple: wx::CheckBoxIsOwned<false>,
+    chk_no_show_hidden: wx::CheckBoxIsOwned<false>,
 
-    radio_file_ctrl_mode: wx::RadioBox,
+    radio_file_ctrl_mode: wx::RadioBoxIsOwned<false>,
 
     // filters
-    fltr: [wx::CheckBox; 3],
+    fltr: [wx::CheckBoxIsOwned<false>; 3],
 
     // sizer
-    sizer: wx::BoxSizer,
+    sizer: wx::BoxSizerIsOwned<false>,
 }
 
 #[derive(Clone)]
 pub struct FileCtrlWidgetsPage {
-    pub base: wx::Panel,
+    pub base: wx::PanelIsOwned<false>,
     config_ui: RefCell<Option<ConfigUI>>,
     // the control itself
     file_ctrl: Rc<RefCell<Option<wx::FileCtrl>>>,
 }
 impl WidgetsPage for FileCtrlWidgetsPage {
-    fn base(&self) -> &wx::Panel {
+    fn base(&self) -> &wx::PanelIsOwned<false> {
         return &self.base;
     }
     fn label(&self) -> &str {
@@ -167,17 +167,20 @@ impl WidgetsPage for FileCtrlWidgetsPage {
                     wx::FILE_SELECTOR_DEFAULT_WILDCARD_STR
                 ),
                 wx::ID_ANY,
-            ),
+            )
+            .to_unowned(),
             self.create_check_box_and_add_to_sizer(
                 &sizer_filters,
                 "C++ files (*.cpp; *.h)|*.cpp;*.h",
                 wx::ID_ANY,
-            ),
+            )
+            .to_unowned(),
             self.create_check_box_and_add_to_sizer(
                 &sizer_filters,
                 "PNG images (*.png)|*.png",
                 wx::ID_ANY,
-            ),
+            )
+            .to_unowned(),
         ];
         sizer_left.add_sizer_sizerflags(
             Some(&sizer_filters),
@@ -223,14 +226,14 @@ impl WidgetsPage for FileCtrlWidgetsPage {
 
         // final initializations
         let config_ui = ConfigUI {
-            dir,
-            path,
-            filename,
-            chk_multiple,
-            chk_no_show_hidden,
-            radio_file_ctrl_mode,
+            dir: dir.to_unowned(),
+            path: path.to_unowned(),
+            filename: filename.to_unowned(),
+            chk_multiple: chk_multiple.to_unowned(),
+            chk_no_show_hidden: chk_no_show_hidden.to_unowned(),
+            radio_file_ctrl_mode: radio_file_ctrl_mode.to_unowned(),
             fltr,
-            sizer: sizer_top,
+            sizer: sizer_top.to_unowned(),
         };
         self.reset(&config_ui);
         *self.config_ui.borrow_mut() = Some(config_ui);
@@ -268,7 +271,7 @@ impl FileCtrlWidgetsPage {
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
         FileCtrlWidgetsPage {
-            base: panel,
+            base: panel.to_unowned(),
             config_ui: RefCell::new(None),
             file_ctrl: Rc::new(RefCell::new(None)),
         }

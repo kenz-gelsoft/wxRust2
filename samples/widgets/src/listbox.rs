@@ -131,30 +131,30 @@ pub struct ConfigUI {
     // the controls
     // ------------
     // the sel mode radiobox
-    radio_sel_mode: wx::RadioBox,
+    radio_sel_mode: wx::RadioBoxIsOwned<false>,
 
     // List type selection radiobox
-    radio_list_type: wx::RadioBox,
+    radio_list_type: wx::RadioBoxIsOwned<false>,
 
     // the checkboxes
-    chk_v_scroll: wx::CheckBox,
-    chk_h_scroll: wx::CheckBox,
-    chk_sort: wx::CheckBox,
-    chk_owner_draw: wx::CheckBox,
+    chk_v_scroll: wx::CheckBoxIsOwned<false>,
+    chk_h_scroll: wx::CheckBoxIsOwned<false>,
+    chk_sort: wx::CheckBoxIsOwned<false>,
+    chk_owner_draw: wx::CheckBoxIsOwned<false>,
 
     // sizer
-    sizer_lbox: wx::BoxSizer,
+    sizer_lbox: wx::BoxSizerIsOwned<false>,
 
     // the text entries for "Add/change string" and "Delete" buttons
-    text_add: wx::TextCtrl,
-    text_change: wx::TextCtrl,
-    text_ensure_visible: wx::TextCtrl,
-    text_delete: wx::TextCtrl,
+    text_add: wx::TextCtrlIsOwned<false>,
+    text_change: wx::TextCtrlIsOwned<false>,
+    text_ensure_visible: wx::TextCtrlIsOwned<false>,
+    text_delete: wx::TextCtrlIsOwned<false>,
 }
 
 #[derive(Clone)]
 pub struct ListboxWidgetsPage {
-    pub base: wx::Panel,
+    pub base: wx::PanelIsOwned<false>,
     config_ui: RefCell<Option<ConfigUI>>,
     // the lbox itself
     lbox: Rc<RefCell<Option<wx::ListBox>>>,
@@ -162,7 +162,7 @@ pub struct ListboxWidgetsPage {
     s_item: RefCell<c_int>,
 }
 impl WidgetsPage for ListboxWidgetsPage {
-    fn base(&self) -> &wx::Panel {
+    fn base(&self) -> &wx::PanelIsOwned<false> {
         return &self.base;
     }
     fn label(&self) -> &str {
@@ -425,23 +425,23 @@ impl WidgetsPage for ListboxWidgetsPage {
             wx::Object::none(),
         );
         let config_ui = ConfigUI {
-            radio_sel_mode,
+            radio_sel_mode: radio_sel_mode.to_unowned(),
 
             // List type selection radiobox
-            radio_list_type,
+            radio_list_type: radio_list_type.to_unowned(),
 
             // the checkboxes
-            chk_v_scroll,
-            chk_h_scroll,
-            chk_sort,
-            chk_owner_draw,
+            chk_v_scroll: chk_v_scroll.to_unowned(),
+            chk_h_scroll: chk_h_scroll.to_unowned(),
+            chk_sort: chk_sort.to_unowned(),
+            chk_owner_draw: chk_owner_draw.to_unowned(),
 
-            sizer_lbox: sizer_right, // save it to modify it later
+            sizer_lbox: sizer_right.to_unowned(), // save it to modify it later
 
-            text_add,
-            text_change,
-            text_ensure_visible,
-            text_delete,
+            text_add: text_add.to_unowned(),
+            text_change: text_change.to_unowned(),
+            text_ensure_visible: text_ensure_visible.to_unowned(),
+            text_delete: text_delete.to_unowned(),
         };
 
         // do create the main control
@@ -490,7 +490,7 @@ impl ListboxWidgetsPage {
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
         ListboxWidgetsPage {
-            base: panel,
+            base: panel.to_unowned(),
             config_ui: RefCell::new(None),
             lbox: Rc::new(RefCell::new(None)),
             s_item: RefCell::new(1),
@@ -591,7 +591,7 @@ impl ListboxWidgetsPage {
         }
     }
 
-    fn get_valid_index_from_text(&self, text: &wx::TextCtrl) -> Option<u32> {
+    fn get_valid_index_from_text<T: wx::TextEntryMethods>(&self, text: &T) -> Option<u32> {
         let idx = text.get_value();
         if let (Ok(idx), Some(lbox)) = (idx.parse(), self.lbox.borrow().as_ref()) {
             if idx < lbox.get_count() {
@@ -620,7 +620,7 @@ impl ListboxWidgetsPage {
 
     fn on_button_ensure_visible(&self, config_ui: &ConfigUI) {
         if let (Some(n), Some(lbox)) = (
-            self.get_valid_index_from_text(&config_ui.text_ensure_visible),
+            self.get_valid_index_from_text(&config_ui.text_ensure_visible.to_unowned()),
             self.lbox.borrow().as_ref(),
         ) {
             lbox.ensure_visible(n.try_into().unwrap());

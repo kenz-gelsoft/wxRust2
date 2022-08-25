@@ -64,30 +64,30 @@ const BUTTON_VALIGN_BOTTOM: c_int = 2;
 #[derive(Clone)]
 pub struct ConfigUI {
     // the check/radio boxes for styles
-    chk_bitmap_only: wx::CheckBox,
-    chk_text_and_bitmap: wx::CheckBox,
-    chk_fit: wx::CheckBox,
-    chk_auth_needed: wx::CheckBox,
-    chk_default: wx::CheckBox,
-    chk_use_bitmap_class: wx::CheckBox,
-    chk_disable: wx::CheckBox,
+    chk_bitmap_only: wx::CheckBoxIsOwned<false>,
+    chk_text_and_bitmap: wx::CheckBoxIsOwned<false>,
+    chk_fit: wx::CheckBoxIsOwned<false>,
+    chk_auth_needed: wx::CheckBoxIsOwned<false>,
+    chk_default: wx::CheckBoxIsOwned<false>,
+    chk_use_bitmap_class: wx::CheckBoxIsOwned<false>,
+    chk_disable: wx::CheckBoxIsOwned<false>,
 
     // more checkboxes for wxBitmapButton only
-    chk_use_pressed: wx::CheckBox,
-    chk_use_focused: wx::CheckBox,
-    chk_use_current: wx::CheckBox,
-    chk_use_disabled: wx::CheckBox,
+    chk_use_pressed: wx::CheckBoxIsOwned<false>,
+    chk_use_focused: wx::CheckBoxIsOwned<false>,
+    chk_use_current: wx::CheckBoxIsOwned<false>,
+    chk_use_disabled: wx::CheckBoxIsOwned<false>,
 
     // and an image position choice used if m_chkTextAndBitmap is on
-    radio_image_pos: wx::RadioBox,
-    radio_halign: wx::RadioBox,
-    radio_valign: wx::RadioBox,
+    radio_image_pos: wx::RadioBoxIsOwned<false>,
+    radio_halign: wx::RadioBoxIsOwned<false>,
+    radio_valign: wx::RadioBoxIsOwned<false>,
 
     // sizer
-    sizer_button: wx::BoxSizer,
+    sizer_button: wx::BoxSizerIsOwned<false>,
 
     // the text entries for command parameters
-    text_label: wx::TextCtrl,
+    text_label: wx::TextCtrlIsOwned<false>,
 }
 impl ConfigUI {
     fn reset(&self) {
@@ -112,13 +112,13 @@ impl ConfigUI {
 
 #[derive(Clone)]
 pub struct ButtonWidgetsPage {
-    pub base: wx::Panel,
+    pub base: wx::PanelIsOwned<false>,
     config_ui: RefCell<Option<ConfigUI>>,
     // the button itself
     button: Rc<RefCell<Option<wx::Button>>>,
 }
 impl WidgetsPage for ButtonWidgetsPage {
-    fn base(&self) -> &wx::Panel {
+    fn base(&self) -> &wx::PanelIsOwned<false> {
         return &self.base;
     }
     fn label(&self) -> &str {
@@ -281,26 +281,26 @@ impl WidgetsPage for ButtonWidgetsPage {
                 .double_border(wx::ALL & !wx::RIGHT),
         );
         *self.config_ui.borrow_mut() = Some(ConfigUI {
-            chk_bitmap_only,
-            chk_text_and_bitmap,
-            chk_fit,
-            chk_auth_needed,
-            chk_default,
-            chk_use_bitmap_class,
-            chk_disable,
+            chk_bitmap_only: chk_bitmap_only.to_unowned(),
+            chk_text_and_bitmap: chk_text_and_bitmap.to_unowned(),
+            chk_fit: chk_fit.to_unowned(),
+            chk_auth_needed: chk_auth_needed.to_unowned(),
+            chk_default: chk_default.to_unowned(),
+            chk_use_bitmap_class: chk_use_bitmap_class.to_unowned(),
+            chk_disable: chk_disable.to_unowned(),
 
-            chk_use_pressed,
-            chk_use_focused,
-            chk_use_current,
-            chk_use_disabled,
+            chk_use_pressed: chk_use_pressed.to_unowned(),
+            chk_use_focused: chk_use_focused.to_unowned(),
+            chk_use_current: chk_use_current.to_unowned(),
+            chk_use_disabled: chk_use_disabled.to_unowned(),
 
-            radio_image_pos,
-            radio_halign,
-            radio_valign,
+            radio_image_pos: radio_image_pos.to_unowned(),
+            radio_halign: radio_halign.to_unowned(),
+            radio_valign: radio_valign.to_unowned(),
 
-            sizer_button,
+            sizer_button: sizer_button.to_unowned(),
 
-            text_label,
+            text_label: text_label.to_unowned(),
         });
 
         // do create the main control
@@ -333,7 +333,7 @@ impl ButtonWidgetsPage {
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
         ButtonWidgetsPage {
-            base: panel,
+            base: panel.to_unowned(),
             config_ui: RefCell::new(None),
             button: Rc::new(RefCell::new(None)),
         }

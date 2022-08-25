@@ -51,26 +51,26 @@ impl From<DatePickerPage> for c_int {
 pub struct ConfigUI {
     // other controls
     // --------------
-    sizer_date_picker: wx::BoxSizer,
+    sizer_date_picker: wx::BoxSizerIsOwned<false>,
 
-    text_cur: wx::TextCtrl,
-    text_min: wx::TextCtrl,
-    text_max: wx::TextCtrl,
+    text_cur: wx::TextCtrlIsOwned<false>,
+    text_min: wx::TextCtrlIsOwned<false>,
+    text_max: wx::TextCtrlIsOwned<false>,
     // text_null: wx::TextCtrl,
-    radio_kind: wx::RadioBox,
-    chk_style_century: wx::CheckBox,
-    chk_style_allow_none: wx::CheckBox,
+    radio_kind: wx::RadioBoxIsOwned<false>,
+    chk_style_century: wx::CheckBoxIsOwned<false>,
+    chk_style_allow_none: wx::CheckBoxIsOwned<false>,
 }
 
 #[derive(Clone)]
 pub struct DatePickerWidgetsPage {
-    pub base: wx::Panel,
+    pub base: wx::PanelIsOwned<false>,
     config_ui: RefCell<Option<ConfigUI>>,
     // the picker
     date_picker: Rc<RefCell<Option<wx::DatePickerCtrl>>>,
 }
 impl WidgetsPage for DatePickerWidgetsPage {
-    fn base(&self) -> &wx::Panel {
+    fn base(&self) -> &wx::PanelIsOwned<false> {
         return &self.base;
     }
     fn label(&self) -> &str {
@@ -216,15 +216,15 @@ impl WidgetsPage for DatePickerWidgetsPage {
         chk_style_century.set_value(true);
 
         let config_ui = ConfigUI {
-            sizer_date_picker: sizer_right, // save it to modify it later
+            sizer_date_picker: sizer_right.to_unowned(), // save it to modify it later
 
-            text_cur,
-            text_min,
-            text_max,
+            text_cur: text_cur.to_unowned(),
+            text_min: text_min.to_unowned(),
+            text_max: text_max.to_unowned(),
             // text_null,
-            radio_kind,
-            chk_style_century,
-            chk_style_allow_none,
+            radio_kind: radio_kind.to_unowned(),
+            chk_style_century: chk_style_century.to_unowned(),
+            chk_style_allow_none: chk_style_allow_none.to_unowned(),
         };
         self.reset(&config_ui);
         *self.config_ui.borrow_mut() = Some(config_ui);
@@ -260,7 +260,7 @@ impl DatePickerWidgetsPage {
             .style(wx::CLIP_CHILDREN | wx::TAB_TRAVERSAL)
             .build();
         DatePickerWidgetsPage {
-            base: panel,
+            base: panel.to_unowned(),
             config_ui: RefCell::new(None),
             date_picker: Rc::new(RefCell::new(None)),
         }
@@ -332,7 +332,10 @@ impl DatePickerWidgetsPage {
         self.create_date_picker(config_ui);
     }
 
-    fn get_date_from_text_control(&self, text: &wx::TextCtrl) -> Option<wx::DateTime> {
+    fn get_date_from_text_control<T: wx::TextEntryMethods>(
+        &self,
+        text: &T,
+    ) -> Option<wx::DateTime> {
         let value = text.get_value();
         if !value.is_empty() {
             let dt = wx::DateTime::new();
