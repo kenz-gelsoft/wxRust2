@@ -314,6 +314,11 @@ impl<const OWNED: bool> DynamicCast for PanelIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxPanel_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<PanelIsOwned<false>> for PanelIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<PanelIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 impl<const OWNED: bool> WindowMethods for PanelIsOwned<OWNED> {
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
@@ -423,6 +428,13 @@ impl<const OWNED: bool> From<PasswordEntryDialogIsOwned<OWNED>> for ObjectIsOwne
 impl<const OWNED: bool> DynamicCast for PasswordEntryDialogIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxPasswordEntryDialog_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Trackable<PasswordEntryDialogIsOwned<false>>
+    for PasswordEntryDialogIsOwned<OWNED>
+{
+    fn to_weak_ref(&self) -> WeakRef<PasswordEntryDialogIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
     }
 }
 
@@ -559,6 +571,11 @@ impl<const OWNED: bool> DynamicCast for PickerBaseIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxPickerBase_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<PickerBaseIsOwned<false>> for PickerBaseIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<PickerBaseIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 
 // wxPoint
 wx_class! { Point =
@@ -650,6 +667,13 @@ impl<const OWNED: bool> DynamicCast for PopupTransientWindowIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxPopupTransientWindow_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<PopupTransientWindowIsOwned<false>>
+    for PopupTransientWindowIsOwned<OWNED>
+{
+    fn to_weak_ref(&self) -> WeakRef<PopupTransientWindowIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 
 // wxPopupWindow
 wx_class! { PopupWindow =
@@ -700,6 +724,11 @@ impl<const OWNED: bool> From<PopupWindowIsOwned<OWNED>> for ObjectIsOwned<OWNED>
 impl<const OWNED: bool> DynamicCast for PopupWindowIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxPopupWindow_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Trackable<PopupWindowIsOwned<false>> for PopupWindowIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<PopupWindowIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
     }
 }
 
@@ -824,6 +853,13 @@ impl<const OWNED: bool> From<PropertySheetDialogIsOwned<OWNED>> for ObjectIsOwne
 impl<const OWNED: bool> DynamicCast for PropertySheetDialogIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxPropertySheetDialog_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Trackable<PropertySheetDialogIsOwned<false>>
+    for PropertySheetDialogIsOwned<OWNED>
+{
+    fn to_weak_ref(&self) -> WeakRef<PropertySheetDialogIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> TopLevelWindowMethods for PropertySheetDialogIsOwned<OWNED> {

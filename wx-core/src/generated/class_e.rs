@@ -67,6 +67,11 @@ impl<const OWNED: bool> DynamicCast for EditableListBoxIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxEditableListBox_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<EditableListBoxIsOwned<false>> for EditableListBoxIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<EditableListBoxIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 
 // wxEraseEvent
 wx_class! { EraseEvent =
@@ -138,5 +143,10 @@ impl<const OWNED: bool> From<EventBlockerIsOwned<OWNED>> for ObjectIsOwned<OWNED
 impl<const OWNED: bool> DynamicCast for EventBlockerIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxEventBlocker_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Trackable<EventBlockerIsOwned<false>> for EventBlockerIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<EventBlockerIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
     }
 }

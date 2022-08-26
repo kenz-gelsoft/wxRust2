@@ -50,6 +50,11 @@ impl<const OWNED: bool> DynamicCast for WindowIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxWindow_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<WindowIsOwned<false>> for WindowIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<WindowIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 
 // wxWindowCreateEvent
 wx_class! { WindowCreateEvent =
@@ -306,6 +311,11 @@ impl<const OWNED: bool> DynamicCast for WizardIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxWizard_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<WizardIsOwned<false>> for WizardIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<WizardIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 
 // wxWizardEvent
 wx_class! { WizardEvent =
@@ -396,6 +406,11 @@ impl<const OWNED: bool> DynamicCast for WizardPageIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxWizardPage_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<WizardPageIsOwned<false>> for WizardPageIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<WizardPageIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 
 // wxWizardPageSimple
 wx_class! { WizardPageSimple =
@@ -471,6 +486,13 @@ impl<const OWNED: bool> From<WizardPageSimpleIsOwned<OWNED>> for ObjectIsOwned<O
 impl<const OWNED: bool> DynamicCast for WizardPageSimpleIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxWizardPageSimple_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Trackable<WizardPageSimpleIsOwned<false>>
+    for WizardPageSimpleIsOwned<OWNED>
+{
+    fn to_weak_ref(&self) -> WeakRef<WizardPageSimpleIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
     }
 }
 

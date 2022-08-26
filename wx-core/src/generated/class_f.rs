@@ -81,6 +81,11 @@ impl<const OWNED: bool> DynamicCast for FileCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxFileCtrl_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<FileCtrlIsOwned<false>> for FileCtrlIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<FileCtrlIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 
 // wxFileCtrlEvent
 wx_class! { FileCtrlEvent =
@@ -247,6 +252,11 @@ impl<const OWNED: bool> From<FileDialogIsOwned<OWNED>> for ObjectIsOwned<OWNED> 
 impl<const OWNED: bool> DynamicCast for FileDialogIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxFileDialog_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Trackable<FileDialogIsOwned<false>> for FileDialogIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<FileDialogIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
     }
 }
 
@@ -433,6 +443,11 @@ impl<const OWNED: bool> DynamicCast for FilePickerCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxFilePickerCtrl_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<FilePickerCtrlIsOwned<false>> for FilePickerCtrlIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<FilePickerCtrlIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 
 // wxFindDialogEvent
 wx_class! { FindDialogEvent =
@@ -578,6 +593,13 @@ impl<const OWNED: bool> From<FindReplaceDialogIsOwned<OWNED>> for ObjectIsOwned<
 impl<const OWNED: bool> DynamicCast for FindReplaceDialogIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxFindReplaceDialog_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Trackable<FindReplaceDialogIsOwned<false>>
+    for FindReplaceDialogIsOwned<OWNED>
+{
+    fn to_weak_ref(&self) -> WeakRef<FindReplaceDialogIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
     }
 }
 
@@ -842,6 +864,11 @@ impl<const OWNED: bool> DynamicCast for FontDialogIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxFontDialog_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<FontDialogIsOwned<false>> for FontDialogIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<FontDialogIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 
 // wxFontEnumerator
 wx_class! { FontEnumerator =
@@ -986,6 +1013,11 @@ impl<const OWNED: bool> DynamicCast for FontPickerCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxFontPickerCtrl_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<FontPickerCtrlIsOwned<false>> for FontPickerCtrlIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<FontPickerCtrlIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 
 // wxFontPickerEvent
 wx_class! { FontPickerEvent =
@@ -1111,6 +1143,11 @@ impl<const OWNED: bool> From<FrameIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for FrameIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxFrame_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Trackable<FrameIsOwned<false>> for FrameIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<FrameIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> TopLevelWindowMethods for FrameIsOwned<OWNED> {

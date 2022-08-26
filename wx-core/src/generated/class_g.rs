@@ -362,6 +362,11 @@ impl<const OWNED: bool> DynamicCast for GaugeIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxGauge_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<GaugeIsOwned<false>> for GaugeIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<GaugeIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 
 // wxGenericAboutDialog
 wx_class! { GenericAboutDialog =
@@ -476,6 +481,11 @@ impl<const OWNED: bool> DynamicCast for GenericDirCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxGenericDirCtrl_CLASSINFO()) }
     }
 }
+impl<const OWNED: bool> Trackable<GenericDirCtrlIsOwned<false>> for GenericDirCtrlIsOwned<OWNED> {
+    fn to_weak_ref(&self) -> WeakRef<GenericDirCtrlIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+    }
+}
 
 // wxGenericProgressDialog
 wx_class! { GenericProgressDialog =
@@ -547,6 +557,13 @@ impl<const OWNED: bool> From<GenericProgressDialogIsOwned<OWNED>> for ObjectIsOw
 impl<const OWNED: bool> DynamicCast for GenericProgressDialogIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxGenericProgressDialog_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Trackable<GenericProgressDialogIsOwned<false>>
+    for GenericProgressDialogIsOwned<OWNED>
+{
+    fn to_weak_ref(&self) -> WeakRef<GenericProgressDialogIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
     }
 }
 
@@ -637,6 +654,13 @@ impl<const OWNED: bool> From<GenericValidatorIsOwned<OWNED>> for ObjectIsOwned<O
 impl<const OWNED: bool> DynamicCast for GenericValidatorIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxGenericValidator_CLASSINFO()) }
+    }
+}
+impl<const OWNED: bool> Trackable<GenericValidatorIsOwned<false>>
+    for GenericValidatorIsOwned<OWNED>
+{
+    fn to_weak_ref(&self) -> WeakRef<GenericValidatorIsOwned<false>> {
+        unsafe { WeakRef::from_ptr(self.as_ptr()) }
     }
 }
 
