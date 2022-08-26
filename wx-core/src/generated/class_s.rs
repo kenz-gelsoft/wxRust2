@@ -204,13 +204,6 @@ impl<const OWNED: bool> DynamicCast for SashLayoutWindowIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSashLayoutWindow_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<SashLayoutWindowIsOwned<false>>
-    for SashLayoutWindowIsOwned<OWNED>
-{
-    fn to_weak_ref(&self) -> WeakRef<SashLayoutWindowIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 impl<const OWNED: bool> WindowMethods for SashLayoutWindowIsOwned<OWNED> {
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
@@ -289,11 +282,6 @@ impl<const OWNED: bool> From<SashWindowIsOwned<OWNED>> for ObjectIsOwned<OWNED> 
 impl<const OWNED: bool> DynamicCast for SashWindowIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSashWindow_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<SashWindowIsOwned<false>> for SashWindowIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<SashWindowIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -399,11 +387,6 @@ impl<const OWNED: bool> From<ScrollBarIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for ScrollBarIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxScrollBar_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<ScrollBarIsOwned<false>> for ScrollBarIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<ScrollBarIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> ControlMethods for ScrollBarIsOwned<OWNED> {
@@ -583,11 +566,6 @@ impl<const OWNED: bool> From<SearchCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> 
 impl<const OWNED: bool> DynamicCast for SearchCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSearchCtrl_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<SearchCtrlIsOwned<false>> for SearchCtrlIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<SearchCtrlIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 // Mix-in(s) to wxSearchCtrl
@@ -801,11 +779,6 @@ impl<const OWNED: bool> From<SimplebookIsOwned<OWNED>> for ObjectIsOwned<OWNED> 
 impl<const OWNED: bool> DynamicCast for SimplebookIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSimplebook_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<SimplebookIsOwned<false>> for SimplebookIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<SimplebookIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for SimplebookIsOwned<OWNED> {
@@ -1125,11 +1098,6 @@ impl<const OWNED: bool> DynamicCast for SliderIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSlider_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<SliderIsOwned<false>> for SliderIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<SliderIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 
 // wxSpinButton
 wx_class! { SpinButton =
@@ -1191,11 +1159,6 @@ impl<const OWNED: bool> From<SpinButtonIsOwned<OWNED>> for ObjectIsOwned<OWNED> 
 impl<const OWNED: bool> DynamicCast for SpinButtonIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSpinButton_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<SpinButtonIsOwned<false>> for SpinButtonIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<SpinButtonIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for SpinButtonIsOwned<OWNED> {
@@ -1292,11 +1255,6 @@ impl<const OWNED: bool> DynamicCast for SpinCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSpinCtrl_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<SpinCtrlIsOwned<false>> for SpinCtrlIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<SpinCtrlIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 
 // wxSpinCtrlDouble
 wx_class! { SpinCtrlDouble =
@@ -1367,11 +1325,6 @@ impl<const OWNED: bool> From<SpinCtrlDoubleIsOwned<OWNED>> for ObjectIsOwned<OWN
 impl<const OWNED: bool> DynamicCast for SpinCtrlDoubleIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSpinCtrlDouble_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<SpinCtrlDoubleIsOwned<false>> for SpinCtrlDoubleIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<SpinCtrlDoubleIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -1558,11 +1511,6 @@ impl<const OWNED: bool> DynamicCast for SplashScreenIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSplashScreen_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<SplashScreenIsOwned<false>> for SplashScreenIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<SplashScreenIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 
 // wxSplitterEvent
 wx_class! { SplitterEvent =
@@ -1670,11 +1618,6 @@ impl<const OWNED: bool> DynamicCast for SplitterWindowIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSplitterWindow_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<SplitterWindowIsOwned<false>> for SplitterWindowIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<SplitterWindowIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 impl<const OWNED: bool> WindowMethods for SplitterWindowIsOwned<OWNED> {
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
@@ -1771,11 +1714,6 @@ impl<const OWNED: bool> DynamicCast for StaticBitmapIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStaticBitmap_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<StaticBitmapIsOwned<false>> for StaticBitmapIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<StaticBitmapIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 
 // wxStaticBox
 wx_class! { StaticBox =
@@ -1843,11 +1781,6 @@ impl<const OWNED: bool> From<StaticBoxIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for StaticBoxIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStaticBox_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<StaticBoxIsOwned<false>> for StaticBoxIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<StaticBoxIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -1974,11 +1907,6 @@ impl<const OWNED: bool> DynamicCast for StaticLineIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStaticLine_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<StaticLineIsOwned<false>> for StaticLineIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<StaticLineIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 impl<const OWNED: bool> WindowMethods for StaticLineIsOwned<OWNED> {
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
@@ -2070,11 +1998,6 @@ impl<const OWNED: bool> DynamicCast for StaticTextIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStaticText_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<StaticTextIsOwned<false>> for StaticTextIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<StaticTextIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 
 // wxStatusBar
 wx_class! { StatusBar =
@@ -2132,11 +2055,6 @@ impl<const OWNED: bool> From<StatusBarIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for StatusBarIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStatusBar_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<StatusBarIsOwned<false>> for StatusBarIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<StatusBarIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 

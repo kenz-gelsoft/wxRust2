@@ -208,6 +208,13 @@ impl<T: EvtHandlerMethods> Bindable for T {
     }
 }
 
+// Effectively all wxEvtHandlers are wxTrackable.
+impl<T: EvtHandlerMethods> Trackable<T> for T {
+    fn to_weak_ref(&self) -> WeakRef<T> {
+        unsafe { WeakRef::from(self.as_ptr()) }
+    }
+}
+
 // wxApp
 pub enum App {}
 impl App {

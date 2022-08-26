@@ -42,11 +42,6 @@ impl<const OWNED: bool> DynamicCast for TimerIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTimer_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<TimerIsOwned<false>> for TimerIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<TimerIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 
 // wxTimerEvent
 wx_class! { TimerEvent =

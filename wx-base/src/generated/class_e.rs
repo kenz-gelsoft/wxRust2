@@ -54,8 +54,3 @@ impl<const OWNED: bool> DynamicCast for EvtHandlerIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxEvtHandler_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<EvtHandlerIsOwned<false>> for EvtHandlerIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<EvtHandlerIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}

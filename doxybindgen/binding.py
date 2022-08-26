@@ -73,8 +73,6 @@ class RustClassBinding:
                 yield line
             for line in self._impl_dynamic_cast_if_needed():
                 yield line
-            for line in self._impl_trackable_if_needed():
-                yield line                
             for line in self._impl_drop_if_needed():
                 yield line
             for line in self._impl_mixin_if_needed():
@@ -141,19 +139,6 @@ class RustClassBinding:
         yield '    }'
         yield '}'
     
-    def _impl_trackable_if_needed(self):
-        if not self.is_a('wxEvtHandler'):
-            return
-        is_owned = '%sIsOwned' % (self.__model.unprefixed(),)
-        yield 'impl<const OWNED: bool> Trackable<%s<false>> for %s<OWNED> {' % (
-            is_owned,
-            is_owned,
-        )
-        yield '    fn to_weak_ref(&self) -> WeakRef<%s<false>> {' % (is_owned,)
-        yield '        unsafe { WeakRef::from(self.as_ptr()) }'
-        yield '    }'
-        yield '}'
-
     def _impl_drop_if_needed(self):
         if (self.is_a('wxEvtHandler') or
             self.is_a('wxSizer')):
