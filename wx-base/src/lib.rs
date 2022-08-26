@@ -61,6 +61,7 @@ mod ffi {
 
         // WeakRef
         pub fn OpaqueWeakRef_new(obj: *mut c_void) -> *mut c_void;
+        pub fn OpaqueWeakRef_copy(obj: *mut c_void) -> *mut c_void;
         pub fn OpaqueWeakRef_delete(self_: *mut c_void);
         pub fn OpaqueWeakRef_Get(self_: *mut c_void) -> *mut c_void;
 
@@ -320,6 +321,14 @@ impl<T: WxRustMethods> WeakRef<T> {
             } else {
                 Some(T::from_unowned_ptr(ptr))
             }
+        }
+    }
+}
+impl<T: WxRustMethods> Clone for WeakRef<T> {
+    fn clone(&self) -> Self {
+        unsafe {
+            let ptr = ffi::OpaqueWeakRef_copy(self.0);
+            WeakRef(ptr, PhantomData)
         }
     }
 }
