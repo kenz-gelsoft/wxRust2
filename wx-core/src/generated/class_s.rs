@@ -208,7 +208,7 @@ impl<const OWNED: bool> Trackable<SashLayoutWindowIsOwned<false>>
     for SashLayoutWindowIsOwned<OWNED>
 {
     fn to_weak_ref(&self) -> WeakRef<SashLayoutWindowIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for SashLayoutWindowIsOwned<OWNED> {
@@ -293,7 +293,7 @@ impl<const OWNED: bool> DynamicCast for SashWindowIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<SashWindowIsOwned<false>> for SashWindowIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<SashWindowIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -403,7 +403,7 @@ impl<const OWNED: bool> DynamicCast for ScrollBarIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<ScrollBarIsOwned<false>> for ScrollBarIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<ScrollBarIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> ControlMethods for ScrollBarIsOwned<OWNED> {
@@ -587,7 +587,7 @@ impl<const OWNED: bool> DynamicCast for SearchCtrlIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<SearchCtrlIsOwned<false>> for SearchCtrlIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<SearchCtrlIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 // Mix-in(s) to wxSearchCtrl
@@ -805,7 +805,7 @@ impl<const OWNED: bool> DynamicCast for SimplebookIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<SimplebookIsOwned<false>> for SimplebookIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<SimplebookIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for SimplebookIsOwned<OWNED> {
@@ -1127,7 +1127,7 @@ impl<const OWNED: bool> DynamicCast for SliderIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<SliderIsOwned<false>> for SliderIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<SliderIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -1195,7 +1195,7 @@ impl<const OWNED: bool> DynamicCast for SpinButtonIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<SpinButtonIsOwned<false>> for SpinButtonIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<SpinButtonIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for SpinButtonIsOwned<OWNED> {
@@ -1294,7 +1294,7 @@ impl<const OWNED: bool> DynamicCast for SpinCtrlIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<SpinCtrlIsOwned<false>> for SpinCtrlIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<SpinCtrlIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -1371,7 +1371,7 @@ impl<const OWNED: bool> DynamicCast for SpinCtrlDoubleIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<SpinCtrlDoubleIsOwned<false>> for SpinCtrlDoubleIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<SpinCtrlDoubleIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -1560,7 +1560,7 @@ impl<const OWNED: bool> DynamicCast for SplashScreenIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<SplashScreenIsOwned<false>> for SplashScreenIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<SplashScreenIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -1672,7 +1672,7 @@ impl<const OWNED: bool> DynamicCast for SplitterWindowIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<SplitterWindowIsOwned<false>> for SplitterWindowIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<SplitterWindowIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for SplitterWindowIsOwned<OWNED> {
@@ -1773,7 +1773,7 @@ impl<const OWNED: bool> DynamicCast for StaticBitmapIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<StaticBitmapIsOwned<false>> for StaticBitmapIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<StaticBitmapIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -1847,7 +1847,7 @@ impl<const OWNED: bool> DynamicCast for StaticBoxIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<StaticBoxIsOwned<false>> for StaticBoxIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<StaticBoxIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -1976,7 +1976,7 @@ impl<const OWNED: bool> DynamicCast for StaticLineIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<StaticLineIsOwned<false>> for StaticLineIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<StaticLineIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for StaticLineIsOwned<OWNED> {
@@ -2072,7 +2072,7 @@ impl<const OWNED: bool> DynamicCast for StaticTextIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<StaticTextIsOwned<false>> for StaticTextIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<StaticTextIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -2136,7 +2136,7 @@ impl<const OWNED: bool> DynamicCast for StatusBarIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<StatusBarIsOwned<false>> for StatusBarIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<StatusBarIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 

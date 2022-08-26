@@ -83,7 +83,7 @@ impl<const OWNED: bool> DynamicCast for FileCtrlIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<FileCtrlIsOwned<false>> for FileCtrlIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<FileCtrlIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -256,7 +256,7 @@ impl<const OWNED: bool> DynamicCast for FileDialogIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<FileDialogIsOwned<false>> for FileDialogIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<FileDialogIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -445,7 +445,7 @@ impl<const OWNED: bool> DynamicCast for FilePickerCtrlIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<FilePickerCtrlIsOwned<false>> for FilePickerCtrlIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<FilePickerCtrlIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -599,7 +599,7 @@ impl<const OWNED: bool> Trackable<FindReplaceDialogIsOwned<false>>
     for FindReplaceDialogIsOwned<OWNED>
 {
     fn to_weak_ref(&self) -> WeakRef<FindReplaceDialogIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -866,7 +866,7 @@ impl<const OWNED: bool> DynamicCast for FontDialogIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<FontDialogIsOwned<false>> for FontDialogIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<FontDialogIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -1015,7 +1015,7 @@ impl<const OWNED: bool> DynamicCast for FontPickerCtrlIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<FontPickerCtrlIsOwned<false>> for FontPickerCtrlIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<FontPickerCtrlIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -1147,7 +1147,7 @@ impl<const OWNED: bool> DynamicCast for FrameIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<FrameIsOwned<false>> for FrameIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<FrameIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> TopLevelWindowMethods for FrameIsOwned<OWNED> {

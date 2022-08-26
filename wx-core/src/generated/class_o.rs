@@ -109,7 +109,7 @@ impl<const OWNED: bool> Trackable<OwnerDrawnComboBoxIsOwned<false>>
     for OwnerDrawnComboBoxIsOwned<OWNED>
 {
     fn to_weak_ref(&self) -> WeakRef<OwnerDrawnComboBoxIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 // Mix-in(s) to wxOwnerDrawnComboBox

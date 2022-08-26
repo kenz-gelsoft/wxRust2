@@ -260,7 +260,7 @@ impl<const OWNED: bool> DynamicCast for AnimationCtrlIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<AnimationCtrlIsOwned<false>> for AnimationCtrlIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<AnimationCtrlIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -308,7 +308,7 @@ impl<const OWNED: bool> DynamicCast for AnyButtonIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<AnyButtonIsOwned<false>> for AnyButtonIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<AnyButtonIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 

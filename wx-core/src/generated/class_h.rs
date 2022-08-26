@@ -43,7 +43,7 @@ impl<const OWNED: bool> DynamicCast for HScrolledWindowIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<HScrolledWindowIsOwned<false>> for HScrolledWindowIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<HScrolledWindowIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for HScrolledWindowIsOwned<OWNED> {
@@ -152,7 +152,7 @@ impl<const OWNED: bool> Trackable<HVScrolledWindowIsOwned<false>>
     for HVScrolledWindowIsOwned<OWNED>
 {
     fn to_weak_ref(&self) -> WeakRef<HVScrolledWindowIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for HVScrolledWindowIsOwned<OWNED> {
@@ -295,7 +295,7 @@ impl<const OWNED: bool> DynamicCast for HeaderCtrlIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<HeaderCtrlIsOwned<false>> for HeaderCtrlIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<HeaderCtrlIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for HeaderCtrlIsOwned<OWNED> {
@@ -450,7 +450,7 @@ impl<const OWNED: bool> Trackable<HeaderCtrlSimpleIsOwned<false>>
     for HeaderCtrlSimpleIsOwned<OWNED>
 {
     fn to_weak_ref(&self) -> WeakRef<HeaderCtrlSimpleIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -573,7 +573,7 @@ impl<const OWNED: bool> DynamicCast for HyperlinkCtrlIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<HyperlinkCtrlIsOwned<false>> for HyperlinkCtrlIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<HyperlinkCtrlIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 

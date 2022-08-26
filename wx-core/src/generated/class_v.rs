@@ -49,7 +49,7 @@ impl<const OWNED: bool> DynamicCast for VListBoxIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<VListBoxIsOwned<false>> for VListBoxIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<VListBoxIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for VListBoxIsOwned<OWNED> {
@@ -119,7 +119,7 @@ impl<const OWNED: bool> DynamicCast for VScrolledWindowIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<VScrolledWindowIsOwned<false>> for VScrolledWindowIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<VScrolledWindowIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for VScrolledWindowIsOwned<OWNED> {
@@ -178,6 +178,6 @@ impl<const OWNED: bool> DynamicCast for ValidatorIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<ValidatorIsOwned<false>> for ValidatorIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<ValidatorIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }

@@ -109,7 +109,7 @@ impl<const OWNED: bool> DynamicCast for TaskBarIconIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<TaskBarIconIsOwned<false>> for TaskBarIconIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<TaskBarIconIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -248,7 +248,7 @@ impl<const OWNED: bool> DynamicCast for TextCtrlIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<TextCtrlIsOwned<false>> for TextCtrlIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<TextCtrlIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 // Mix-in(s) to wxTextCtrl
@@ -422,7 +422,7 @@ impl<const OWNED: bool> DynamicCast for TextEntryDialogIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<TextEntryDialogIsOwned<false>> for TextEntryDialogIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<TextEntryDialogIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -472,7 +472,7 @@ impl<const OWNED: bool> DynamicCast for TextValidatorIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<TextValidatorIsOwned<false>> for TextValidatorIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<TextValidatorIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -588,7 +588,7 @@ impl<const OWNED: bool> DynamicCast for TimePickerCtrlIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<TimePickerCtrlIsOwned<false>> for TimePickerCtrlIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<TimePickerCtrlIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -677,7 +677,7 @@ impl<const OWNED: bool> DynamicCast for TipWindowIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<TipWindowIsOwned<false>> for TipWindowIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<TipWindowIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -758,7 +758,7 @@ impl<const OWNED: bool> DynamicCast for ToggleButtonIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<ToggleButtonIsOwned<false>> for ToggleButtonIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<ToggleButtonIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -826,7 +826,7 @@ impl<const OWNED: bool> DynamicCast for ToolBarIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<ToolBarIsOwned<false>> for ToolBarIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<ToolBarIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -936,7 +936,7 @@ impl<const OWNED: bool> DynamicCast for ToolbookIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<ToolbookIsOwned<false>> for ToolbookIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<ToolbookIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for ToolbookIsOwned<OWNED> {
@@ -1032,7 +1032,7 @@ impl<const OWNED: bool> DynamicCast for TopLevelWindowIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<TopLevelWindowIsOwned<false>> for TopLevelWindowIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<TopLevelWindowIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -1104,7 +1104,7 @@ impl<const OWNED: bool> DynamicCast for TreeCtrlIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<TreeCtrlIsOwned<false>> for TreeCtrlIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<TreeCtrlIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> ControlMethods for TreeCtrlIsOwned<OWNED> {
@@ -1292,7 +1292,7 @@ impl<const OWNED: bool> DynamicCast for TreeListCtrlIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<TreeListCtrlIsOwned<false>> for TreeListCtrlIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<TreeListCtrlIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for TreeListCtrlIsOwned<OWNED> {
@@ -1429,7 +1429,7 @@ impl<const OWNED: bool> DynamicCast for TreebookIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<TreebookIsOwned<false>> for TreebookIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<TreebookIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for TreebookIsOwned<OWNED> {

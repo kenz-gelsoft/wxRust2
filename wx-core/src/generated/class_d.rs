@@ -621,7 +621,7 @@ impl<const OWNED: bool> DynamicCast for DataViewCtrlIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<DataViewCtrlIsOwned<false>> for DataViewCtrlIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<DataViewCtrlIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> ControlMethods for DataViewCtrlIsOwned<OWNED> {
@@ -1035,7 +1035,7 @@ impl<const OWNED: bool> Trackable<DataViewListCtrlIsOwned<false>>
     for DataViewListCtrlIsOwned<OWNED>
 {
     fn to_weak_ref(&self) -> WeakRef<DataViewListCtrlIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -1423,7 +1423,7 @@ impl<const OWNED: bool> Trackable<DataViewTreeCtrlIsOwned<false>>
     for DataViewTreeCtrlIsOwned<OWNED>
 {
     fn to_weak_ref(&self) -> WeakRef<DataViewTreeCtrlIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -1622,7 +1622,7 @@ impl<const OWNED: bool> DynamicCast for DatePickerCtrlIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<DatePickerCtrlIsOwned<false>> for DatePickerCtrlIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<DatePickerCtrlIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -1738,7 +1738,7 @@ impl<const OWNED: bool> DynamicCast for DialogIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<DialogIsOwned<false>> for DialogIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<DialogIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> TopLevelWindowMethods for DialogIsOwned<OWNED> {
@@ -1884,7 +1884,7 @@ impl<const OWNED: bool> DynamicCast for DirDialogIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<DirDialogIsOwned<false>> for DirDialogIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<DirDialogIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -1968,7 +1968,7 @@ impl<const OWNED: bool> DynamicCast for DirPickerCtrlIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<DirPickerCtrlIsOwned<false>> for DirPickerCtrlIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<DirPickerCtrlIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 

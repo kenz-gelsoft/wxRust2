@@ -316,7 +316,7 @@ impl<const OWNED: bool> DynamicCast for PanelIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<PanelIsOwned<false>> for PanelIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<PanelIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for PanelIsOwned<OWNED> {
@@ -434,7 +434,7 @@ impl<const OWNED: bool> Trackable<PasswordEntryDialogIsOwned<false>>
     for PasswordEntryDialogIsOwned<OWNED>
 {
     fn to_weak_ref(&self) -> WeakRef<PasswordEntryDialogIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -573,7 +573,7 @@ impl<const OWNED: bool> DynamicCast for PickerBaseIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<PickerBaseIsOwned<false>> for PickerBaseIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<PickerBaseIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -671,7 +671,7 @@ impl<const OWNED: bool> Trackable<PopupTransientWindowIsOwned<false>>
     for PopupTransientWindowIsOwned<OWNED>
 {
     fn to_weak_ref(&self) -> WeakRef<PopupTransientWindowIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -728,7 +728,7 @@ impl<const OWNED: bool> DynamicCast for PopupWindowIsOwned<OWNED> {
 }
 impl<const OWNED: bool> Trackable<PopupWindowIsOwned<false>> for PopupWindowIsOwned<OWNED> {
     fn to_weak_ref(&self) -> WeakRef<PopupWindowIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -859,7 +859,7 @@ impl<const OWNED: bool> Trackable<PropertySheetDialogIsOwned<false>>
     for PropertySheetDialogIsOwned<OWNED>
 {
     fn to_weak_ref(&self) -> WeakRef<PropertySheetDialogIsOwned<false>> {
-        unsafe { WeakRef::from_ptr(self.as_ptr()) }
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> TopLevelWindowMethods for PropertySheetDialogIsOwned<OWNED> {
