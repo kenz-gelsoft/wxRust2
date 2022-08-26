@@ -16,18 +16,15 @@ fn main() {
         let button = wx::Button::builder(Some(&frame)).label("Greet").build();
         let i = 3;
         println!("i={}", i);
-        let button_copy = button.clone();
+        let weak_button = button.to_weak_ref();
         button.bind(wx::RustEvent::Button, move |_: &wx::CommandEvent| {
-            println!("i={}", i);
-            button_copy.set_label("clicked");
-            println!("s={}", button_copy.get_label())
+            if let Some(button) = weak_button.get() {
+                println!("i={}", i);
+                button.set_label("clicked");
+                println!("s={}", button.get_label())
+            }
         });
-        // frame.centre(wx::BOTH);
-        // frame.show(true);
-        let weak_frame = frame.to_weak_ref();
-        if let Some(f) = weak_frame.get() {
-            f.centre(wx::BOTH);
-            f.show(true);
-        }
+        frame.centre(wx::BOTH);
+        frame.show(true);
     });
 }
