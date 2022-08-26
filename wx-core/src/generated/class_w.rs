@@ -35,6 +35,11 @@ impl<const OWNED: bool> WindowIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for WindowIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<WindowIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
     fn from(o: WindowIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -76,6 +81,11 @@ impl<const OWNED: bool> WindowCreateEventIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for WindowCreateEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<WindowCreateEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
@@ -127,6 +137,11 @@ impl<const OWNED: bool> WindowDCIsOwned<OWNED> {
         None
     }
 }
+impl Clone for WindowDCIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<WindowDCIsOwned<OWNED>> for DCIsOwned<OWNED> {
     fn from(o: WindowDCIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -170,6 +185,11 @@ impl<const OWNED: bool> WindowDestroyEventIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for WindowDestroyEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<WindowDestroyEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
@@ -229,6 +249,11 @@ impl<const OWNED: bool> WindowDisablerIsOwned<OWNED> {
         None
     }
 }
+impl Clone for WindowDisablerIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for WindowDisablerIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -274,6 +299,11 @@ impl<const OWNED: bool> WizardIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for WizardIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<WizardIsOwned<OWNED>> for DialogIsOwned<OWNED> {
@@ -332,6 +362,11 @@ impl<const OWNED: bool> WizardEventIsOwned<OWNED> {
         None
     }
 }
+impl Clone for WizardEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<WizardEventIsOwned<OWNED>> for NotifyEventIsOwned<OWNED> {
     fn from(o: WizardEventIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -379,6 +414,11 @@ impl<const OWNED: bool> WizardPageIsOwned<OWNED> {
     // BLOCKED: fn wxWizardPage1()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for WizardPageIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<WizardPageIsOwned<OWNED>> for PanelIsOwned<OWNED> {
@@ -458,6 +498,11 @@ impl<const OWNED: bool> WizardPageSimpleIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for WizardPageSimpleIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<WizardPageSimpleIsOwned<OWNED>> for WizardPageIsOwned<OWNED> {
     fn from(o: WizardPageSimpleIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -510,6 +555,11 @@ impl<const OWNED: bool> WrapSizerIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for WrapSizerIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<WrapSizerIsOwned<OWNED>> for BoxSizerIsOwned<OWNED> {

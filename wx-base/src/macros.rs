@@ -23,10 +23,5 @@ macro_rules! wx_class {
                 mem::forget(tmp);
             }
         }
-        impl Clone for $typeIsOwned<false> {
-            fn clone(&self) -> Self {
-                Self(self.0)
-            }            
-        }
     };
 }

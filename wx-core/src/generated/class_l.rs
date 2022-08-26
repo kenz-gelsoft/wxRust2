@@ -14,6 +14,11 @@ impl<const OWNED: bool> LayoutAlgorithmIsOwned<OWNED> {
         None
     }
 }
+impl Clone for LayoutAlgorithmIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<LayoutAlgorithmIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
     fn from(o: LayoutAlgorithmIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -80,6 +85,11 @@ impl<const OWNED: bool> ListBoxIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for ListBoxIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<ListBoxIsOwned<OWNED>> for ControlIsOwned<OWNED> {
@@ -165,6 +175,11 @@ impl<const OWNED: bool> ListCtrlIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for ListCtrlIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<ListCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
     fn from(o: ListCtrlIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -236,6 +251,11 @@ impl<const OWNED: bool> ListEventIsOwned<OWNED> {
         None
     }
 }
+impl Clone for ListEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<ListEventIsOwned<OWNED>> for NotifyEventIsOwned<OWNED> {
     fn from(o: ListEventIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -281,6 +301,11 @@ impl<const OWNED: bool> ListItemIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for ListItemIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<ListItemIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
@@ -341,6 +366,11 @@ impl<const OWNED: bool> ListViewIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for ListViewIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<ListViewIsOwned<OWNED>> for ListCtrlIsOwned<OWNED> {
@@ -415,6 +445,11 @@ impl<const OWNED: bool> ListbookIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for ListbookIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<ListbookIsOwned<OWNED>> for BookCtrlBaseIsOwned<OWNED> {

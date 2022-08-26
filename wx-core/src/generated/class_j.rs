@@ -15,6 +15,11 @@ impl<const OWNED: bool> JPEGHandlerIsOwned<OWNED> {
         None
     }
 }
+impl Clone for JPEGHandlerIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<JPEGHandlerIsOwned<OWNED>> for ImageHandlerIsOwned<OWNED> {
     fn from(o: JPEGHandlerIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -52,6 +57,11 @@ impl<const OWNED: bool> JoystickEventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxJoystickEvent()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for JoystickEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<JoystickEventIsOwned<OWNED>> for EventIsOwned<OWNED> {

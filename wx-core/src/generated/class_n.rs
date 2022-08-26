@@ -21,6 +21,11 @@ impl<const OWNED: bool> NativeFontInfoIsOwned<OWNED> {
         None
     }
 }
+impl Clone for NativeFontInfoIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for NativeFontInfoIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -58,6 +63,11 @@ impl<const OWNED: bool> NavigationKeyEventIsOwned<OWNED> {
         None
     }
 }
+impl Clone for NavigationKeyEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<NavigationKeyEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
     fn from(o: NavigationKeyEventIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -92,6 +102,11 @@ wx_class! { NonOwnedWindow =
 impl<const OWNED: bool> NonOwnedWindowIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for NonOwnedWindowIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<NonOwnedWindowIsOwned<OWNED>> for WindowIsOwned<OWNED> {
@@ -156,6 +171,11 @@ impl<const OWNED: bool> NotebookIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for NotebookIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<NotebookIsOwned<OWNED>> for BookCtrlBaseIsOwned<OWNED> {
@@ -256,6 +276,11 @@ impl<const OWNED: bool> NotificationMessageIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for NotificationMessageIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<NotificationMessageIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
     fn from(o: NotificationMessageIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -291,6 +316,11 @@ impl<const OWNED: bool> NotifyEventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxNotifyEvent()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for NotifyEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<NotifyEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
@@ -365,6 +395,11 @@ impl<const OWNED: bool> NumberEntryDialogIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for NumberEntryDialogIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<NumberEntryDialogIsOwned<OWNED>> for DialogIsOwned<OWNED> {

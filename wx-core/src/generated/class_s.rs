@@ -27,6 +27,11 @@ impl<const OWNED: bool> SVGFileDCIsOwned<OWNED> {
         None
     }
 }
+impl Clone for SVGFileDCIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<SVGFileDCIsOwned<OWNED>> for DCIsOwned<OWNED> {
     fn from(o: SVGFileDCIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -112,6 +117,11 @@ impl<const OWNED: bool> SashEventIsOwned<OWNED> {
         None
     }
 }
+impl Clone for SashEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<SashEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
     fn from(o: SashEventIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -177,6 +187,11 @@ impl<const OWNED: bool> SashLayoutWindowIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for SashLayoutWindowIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<SashLayoutWindowIsOwned<OWNED>> for SashWindowIsOwned<OWNED> {
@@ -271,6 +286,11 @@ impl<const OWNED: bool> SashWindowIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for SashWindowIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<SashWindowIsOwned<OWNED>> for WindowIsOwned<OWNED> {
     fn from(o: SashWindowIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -310,6 +330,11 @@ impl<const OWNED: bool> ScreenDCIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for ScreenDCIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<ScreenDCIsOwned<OWNED>> for DCIsOwned<OWNED> {
@@ -374,6 +399,11 @@ impl<const OWNED: bool> ScrollBarIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for ScrollBarIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<ScrollBarIsOwned<OWNED>> for ControlIsOwned<OWNED> {
@@ -446,6 +476,11 @@ impl<const OWNED: bool> ScrollEventIsOwned<OWNED> {
         None
     }
 }
+impl Clone for ScrollEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<ScrollEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
     fn from(o: ScrollEventIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -485,6 +520,11 @@ impl<const OWNED: bool> ScrollWinEventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxScrollWinEvent()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for ScrollWinEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<ScrollWinEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
@@ -553,6 +593,11 @@ impl<const OWNED: bool> SearchCtrlIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for SearchCtrlIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<SearchCtrlIsOwned<OWNED>> for TextCtrlIsOwned<OWNED> {
@@ -650,6 +695,11 @@ impl<const OWNED: bool> SetCursorEventIsOwned<OWNED> {
         None
     }
 }
+impl Clone for SetCursorEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<SetCursorEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
     fn from(o: SetCursorEventIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -684,6 +734,11 @@ impl<const OWNED: bool> SettableHeaderColumnIsOwned<OWNED> {
         None
     }
 }
+impl Clone for SettableHeaderColumnIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<SettableHeaderColumnIsOwned<OWNED>> for HeaderColumnIsOwned<OWNED> {
     fn from(o: SettableHeaderColumnIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -710,6 +765,11 @@ impl<const OWNED: bool> ShowEventIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for ShowEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<ShowEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
@@ -771,6 +831,11 @@ impl<const OWNED: bool> SimplebookIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for SimplebookIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<SimplebookIsOwned<OWNED>> for BookCtrlBaseIsOwned<OWNED> {
@@ -848,6 +913,11 @@ impl<const OWNED: bool> SizeIsOwned<OWNED> {
         None
     }
 }
+impl Clone for SizeIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for SizeIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -872,6 +942,11 @@ impl<const OWNED: bool> SizeEventIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for SizeEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<SizeEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
@@ -909,6 +984,11 @@ impl<const OWNED: bool> SizerIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for SizerIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<SizerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
     fn from(o: SizerIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -931,6 +1011,11 @@ impl<const OWNED: bool> SizerFlagsIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for SizerFlagsIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for SizerFlagsIsOwned<OWNED> {
@@ -1038,6 +1123,11 @@ impl<const OWNED: bool> SizerItemIsOwned<OWNED> {
         None
     }
 }
+impl Clone for SizerItemIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<SizerItemIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
     fn from(o: SizerItemIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -1098,6 +1188,11 @@ impl<const OWNED: bool> SliderIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for SliderIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<SliderIsOwned<OWNED>> for ControlIsOwned<OWNED> {
@@ -1166,6 +1261,11 @@ impl<const OWNED: bool> SpinButtonIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for SpinButtonIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<SpinButtonIsOwned<OWNED>> for ControlIsOwned<OWNED> {
@@ -1267,6 +1367,11 @@ impl<const OWNED: bool> SpinCtrlIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for SpinCtrlIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<SpinCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
     fn from(o: SpinCtrlIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -1344,6 +1449,11 @@ impl<const OWNED: bool> SpinCtrlDoubleIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for SpinCtrlDoubleIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<SpinCtrlDoubleIsOwned<OWNED>> for ControlIsOwned<OWNED> {
     fn from(o: SpinCtrlDoubleIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -1396,6 +1506,11 @@ impl<const OWNED: bool> SpinDoubleEventIsOwned<OWNED> {
         None
     }
 }
+impl Clone for SpinDoubleEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<SpinDoubleEventIsOwned<OWNED>> for NotifyEventIsOwned<OWNED> {
     fn from(o: SpinDoubleEventIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -1442,6 +1557,11 @@ impl<const OWNED: bool> SpinEventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxSpinEvent()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for SpinEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<SpinEventIsOwned<OWNED>> for NotifyEventIsOwned<OWNED> {
@@ -1523,6 +1643,11 @@ impl<const OWNED: bool> SplashScreenIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for SplashScreenIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<SplashScreenIsOwned<OWNED>> for FrameIsOwned<OWNED> {
     fn from(o: SplashScreenIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -1577,6 +1702,11 @@ impl<const OWNED: bool> SplitterEventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxSplitterEvent()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for SplitterEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<SplitterEventIsOwned<OWNED>> for NotifyEventIsOwned<OWNED> {
@@ -1648,6 +1778,11 @@ impl<const OWNED: bool> SplitterWindowIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for SplitterWindowIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<SplitterWindowIsOwned<OWNED>> for WindowIsOwned<OWNED> {
@@ -1746,6 +1881,11 @@ impl<const OWNED: bool> StaticBitmapIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for StaticBitmapIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<StaticBitmapIsOwned<OWNED>> for ControlIsOwned<OWNED> {
     fn from(o: StaticBitmapIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -1820,6 +1960,11 @@ impl<const OWNED: bool> StaticBoxIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for StaticBoxIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<StaticBoxIsOwned<OWNED>> for ControlIsOwned<OWNED> {
     fn from(o: StaticBoxIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -1891,6 +2036,11 @@ impl<const OWNED: bool> StaticBoxSizerIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for StaticBoxSizerIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<StaticBoxSizerIsOwned<OWNED>> for BoxSizerIsOwned<OWNED> {
     fn from(o: StaticBoxSizerIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -1947,6 +2097,11 @@ impl<const OWNED: bool> StaticLineIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for StaticLineIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<StaticLineIsOwned<OWNED>> for ControlIsOwned<OWNED> {
@@ -2045,6 +2200,11 @@ impl<const OWNED: bool> StaticTextIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for StaticTextIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<StaticTextIsOwned<OWNED>> for ControlIsOwned<OWNED> {
     fn from(o: StaticTextIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -2109,6 +2269,11 @@ impl<const OWNED: bool> StatusBarIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for StatusBarIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<StatusBarIsOwned<OWNED>> for ControlIsOwned<OWNED> {
     fn from(o: StatusBarIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -2153,6 +2318,11 @@ impl<const OWNED: bool> StatusBarPaneIsOwned<OWNED> {
         None
     }
 }
+impl Clone for StatusBarPaneIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for StatusBarPaneIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -2175,6 +2345,11 @@ impl<const OWNED: bool> StdDialogButtonSizerIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for StdDialogButtonSizerIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<StdDialogButtonSizerIsOwned<OWNED>> for BoxSizerIsOwned<OWNED> {
@@ -2214,6 +2389,11 @@ impl<const OWNED: bool> StockPreferencesPageIsOwned<OWNED> {
         None
     }
 }
+impl Clone for StockPreferencesPageIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<StockPreferencesPageIsOwned<OWNED>> for PreferencesPageIsOwned<OWNED> {
     fn from(o: StockPreferencesPageIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -2240,6 +2420,11 @@ impl<const OWNED: bool> SysColourChangedEventIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for SysColourChangedEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<SysColourChangedEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
@@ -2276,6 +2461,11 @@ impl<const OWNED: bool> SystemSettingsIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for SystemSettingsIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for SystemSettingsIsOwned<OWNED> {

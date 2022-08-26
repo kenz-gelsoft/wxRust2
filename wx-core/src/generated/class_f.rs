@@ -56,6 +56,11 @@ impl<const OWNED: bool> FileCtrlIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for FileCtrlIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<FileCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
     fn from(o: FileCtrlIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -101,6 +106,11 @@ impl<const OWNED: bool> FileCtrlEventIsOwned<OWNED> {
         None
     }
 }
+impl Clone for FileCtrlEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<FileCtrlEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
     fn from(o: FileCtrlEventIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -142,6 +152,11 @@ impl<const OWNED: bool> FileDataObjectIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for FileDataObjectIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<FileDataObjectIsOwned<OWNED>> for DataObjectSimpleIsOwned<OWNED> {
@@ -219,6 +234,11 @@ impl<const OWNED: bool> FileDialogIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for FileDialogIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<FileDialogIsOwned<OWNED>> for DialogIsOwned<OWNED> {
     fn from(o: FileDialogIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -277,6 +297,11 @@ impl<const OWNED: bool> FileDirPickerEventIsOwned<OWNED> {
         None
     }
 }
+impl Clone for FileDirPickerEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<FileDirPickerEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
     fn from(o: FileDirPickerEventIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -317,6 +342,11 @@ impl<const OWNED: bool> FileDropTargetIsOwned<OWNED> {
         None
     }
 }
+impl Clone for FileDropTargetIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<FileDropTargetIsOwned<OWNED>> for DropTargetIsOwned<OWNED> {
     fn from(o: FileDropTargetIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -342,6 +372,11 @@ impl<const OWNED: bool> FileHistoryIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for FileHistoryIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<FileHistoryIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
@@ -413,6 +448,11 @@ impl<const OWNED: bool> FilePickerCtrlIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for FilePickerCtrlIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<FilePickerCtrlIsOwned<OWNED>> for PickerBaseIsOwned<OWNED> {
     fn from(o: FilePickerCtrlIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -463,6 +503,11 @@ impl<const OWNED: bool> FindDialogEventIsOwned<OWNED> {
         None
     }
 }
+impl Clone for FindDialogEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<FindDialogEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
     fn from(o: FindDialogEventIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -501,6 +546,11 @@ impl<const OWNED: bool> FindReplaceDataIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxFindReplaceData()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for FindReplaceDataIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<FindReplaceDataIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
@@ -558,6 +608,11 @@ impl<const OWNED: bool> FindReplaceDialogIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for FindReplaceDialogIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<FindReplaceDialogIsOwned<OWNED>> for DialogIsOwned<OWNED> {
@@ -643,6 +698,11 @@ impl<const OWNED: bool> FlexGridSizerIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for FlexGridSizerIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<FlexGridSizerIsOwned<OWNED>> for GridSizerIsOwned<OWNED> {
     fn from(o: FlexGridSizerIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -675,6 +735,11 @@ impl<const OWNED: bool> FocusEventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxFocusEvent()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for FocusEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<FocusEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
@@ -741,6 +806,11 @@ impl<const OWNED: bool> FontIsOwned<OWNED> {
         None
     }
 }
+impl Clone for FontIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<FontIsOwned<OWNED>> for GDIObjectIsOwned<OWNED> {
     fn from(o: FontIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -776,6 +846,11 @@ impl<const OWNED: bool> FontDataIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for FontDataIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<FontDataIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
@@ -827,6 +902,11 @@ impl<const OWNED: bool> FontDialogIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for FontDialogIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<FontDialogIsOwned<OWNED>> for DialogIsOwned<OWNED> {
@@ -883,6 +963,11 @@ impl<const OWNED: bool> FontEnumeratorIsOwned<OWNED> {
         None
     }
 }
+impl Clone for FontEnumeratorIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for FontEnumeratorIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -904,6 +989,11 @@ impl<const OWNED: bool> FontListIsOwned<OWNED> {
         None
     }
 }
+impl Clone for FontListIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for FontListIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -923,6 +1013,11 @@ impl<const OWNED: bool> FontMapperIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for FontMapperIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for FontMapperIsOwned<OWNED> {
@@ -981,6 +1076,11 @@ impl<const OWNED: bool> FontPickerCtrlIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for FontPickerCtrlIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<FontPickerCtrlIsOwned<OWNED>> for PickerBaseIsOwned<OWNED> {
@@ -1044,6 +1144,11 @@ impl<const OWNED: bool> FontPickerEventIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for FontPickerEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<FontPickerEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
@@ -1113,6 +1218,11 @@ impl<const OWNED: bool> FrameIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for FrameIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<FrameIsOwned<OWNED>> for TopLevelWindowIsOwned<OWNED> {

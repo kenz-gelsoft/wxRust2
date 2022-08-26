@@ -15,6 +15,11 @@ impl<const OWNED: bool> XPMHandlerIsOwned<OWNED> {
         None
     }
 }
+impl Clone for XPMHandlerIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<XPMHandlerIsOwned<OWNED>> for ImageHandlerIsOwned<OWNED> {
     fn from(o: XPMHandlerIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }

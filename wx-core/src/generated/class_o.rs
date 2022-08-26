@@ -13,6 +13,11 @@ impl<const OWNED: bool> OverlayIsOwned<OWNED> {
         None
     }
 }
+impl Clone for OverlayIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for OverlayIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -73,6 +78,11 @@ impl<const OWNED: bool> OwnerDrawnComboBoxIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for OwnerDrawnComboBoxIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<OwnerDrawnComboBoxIsOwned<OWNED>> for ComboCtrlIsOwned<OWNED> {

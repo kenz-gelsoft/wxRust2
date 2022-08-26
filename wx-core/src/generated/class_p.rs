@@ -15,6 +15,11 @@ impl<const OWNED: bool> PCXHandlerIsOwned<OWNED> {
         None
     }
 }
+impl Clone for PCXHandlerIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<PCXHandlerIsOwned<OWNED>> for ImageHandlerIsOwned<OWNED> {
     fn from(o: PCXHandlerIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -53,6 +58,11 @@ impl<const OWNED: bool> PNGHandlerIsOwned<OWNED> {
         None
     }
 }
+impl Clone for PNGHandlerIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<PNGHandlerIsOwned<OWNED>> for ImageHandlerIsOwned<OWNED> {
     fn from(o: PNGHandlerIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -89,6 +99,11 @@ impl<const OWNED: bool> PNMHandlerIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for PNMHandlerIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<PNMHandlerIsOwned<OWNED>> for ImageHandlerIsOwned<OWNED> {
@@ -137,6 +152,11 @@ impl<const OWNED: bool> PaintDCIsOwned<OWNED> {
         None
     }
 }
+impl Clone for PaintDCIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<PaintDCIsOwned<OWNED>> for ClientDCIsOwned<OWNED> {
     fn from(o: PaintDCIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -181,6 +201,11 @@ impl<const OWNED: bool> PaintEventIsOwned<OWNED> {
     // BLOCKED: fn wxPaintEvent()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for PaintEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<PaintEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
@@ -233,6 +258,11 @@ impl<const OWNED: bool> PaletteIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for PaletteIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<PaletteIsOwned<OWNED>> for GDIObjectIsOwned<OWNED> {
@@ -292,6 +322,11 @@ impl<const OWNED: bool> PanelIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for PanelIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<PanelIsOwned<OWNED>> for WindowIsOwned<OWNED> {
@@ -390,6 +425,11 @@ impl<const OWNED: bool> PasswordEntryDialogIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for PasswordEntryDialogIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<PasswordEntryDialogIsOwned<OWNED>> for TextEntryDialogIsOwned<OWNED> {
     fn from(o: PasswordEntryDialogIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -469,6 +509,11 @@ impl<const OWNED: bool> PenIsOwned<OWNED> {
         None
     }
 }
+impl Clone for PenIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<PenIsOwned<OWNED>> for GDIObjectIsOwned<OWNED> {
     fn from(o: PenIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -505,6 +550,11 @@ impl<const OWNED: bool> PenListIsOwned<OWNED> {
         None
     }
 }
+impl Clone for PenListIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for PenListIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -521,6 +571,11 @@ wx_class! { PersistenceManager =
 impl<const OWNED: bool> PersistenceManagerIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for PersistenceManagerIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for PersistenceManagerIsOwned<OWNED> {
@@ -544,6 +599,11 @@ impl<const OWNED: bool> PickerBaseIsOwned<OWNED> {
     // BLOCKED: fn wxPickerBase()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for PickerBaseIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<PickerBaseIsOwned<OWNED>> for ControlIsOwned<OWNED> {
@@ -599,6 +659,11 @@ impl<const OWNED: bool> PointIsOwned<OWNED> {
         None
     }
 }
+impl Clone for PointIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for PointIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -635,6 +700,11 @@ impl<const OWNED: bool> PopupTransientWindowIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for PopupTransientWindowIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<PopupTransientWindowIsOwned<OWNED>> for PopupWindowIsOwned<OWNED> {
@@ -701,6 +771,11 @@ impl<const OWNED: bool> PopupWindowIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for PopupWindowIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<PopupWindowIsOwned<OWNED>> for NonOwnedWindowIsOwned<OWNED> {
     fn from(o: PopupWindowIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -749,6 +824,11 @@ impl<const OWNED: bool> PreferencesEditorIsOwned<OWNED> {
         None
     }
 }
+impl Clone for PreferencesEditorIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for PreferencesEditorIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -766,6 +846,11 @@ impl<const OWNED: bool> PreferencesPageIsOwned<OWNED> {
     // BLOCKED: fn wxPreferencesPage()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for PreferencesPageIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for PreferencesPageIsOwned<OWNED> {
@@ -818,6 +903,11 @@ impl<const OWNED: bool> PropertySheetDialogIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for PropertySheetDialogIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<PropertySheetDialogIsOwned<OWNED>> for DialogIsOwned<OWNED> {

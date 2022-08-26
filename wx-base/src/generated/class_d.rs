@@ -137,6 +137,11 @@ impl<const OWNED: bool> DateTimeIsOwned<OWNED> {
         None
     }
 }
+impl Clone for DateTimeIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for DateTimeIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {

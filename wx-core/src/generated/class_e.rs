@@ -42,6 +42,11 @@ impl<const OWNED: bool> EditableListBoxIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for EditableListBoxIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<EditableListBoxIsOwned<OWNED>> for PanelIsOwned<OWNED> {
     fn from(o: EditableListBoxIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -94,6 +99,11 @@ impl<const OWNED: bool> EraseEventIsOwned<OWNED> {
         None
     }
 }
+impl Clone for EraseEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<EraseEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
     fn from(o: EraseEventIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -128,6 +138,11 @@ impl<const OWNED: bool> EventBlockerIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxEventBlocker()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for EventBlockerIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<EventBlockerIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {

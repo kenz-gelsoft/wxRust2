@@ -63,6 +63,11 @@ impl<const OWNED: bool> RadioBoxIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for RadioBoxIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<RadioBoxIsOwned<OWNED>> for ControlIsOwned<OWNED> {
     fn from(o: RadioBoxIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -144,6 +149,11 @@ impl<const OWNED: bool> RadioButtonIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for RadioButtonIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<RadioButtonIsOwned<OWNED>> for ControlIsOwned<OWNED> {
     fn from(o: RadioButtonIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -195,6 +205,11 @@ impl<const OWNED: bool> RealPointIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for RealPointIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for RealPointIsOwned<OWNED> {
@@ -255,6 +270,11 @@ impl<const OWNED: bool> RearrangeCtrlIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for RearrangeCtrlIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<RearrangeCtrlIsOwned<OWNED>> for PanelIsOwned<OWNED> {
@@ -333,6 +353,11 @@ impl<const OWNED: bool> RearrangeDialogIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for RearrangeDialogIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<RearrangeDialogIsOwned<OWNED>> for DialogIsOwned<OWNED> {
@@ -430,6 +455,11 @@ impl<const OWNED: bool> RearrangeListIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for RearrangeListIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<RearrangeListIsOwned<OWNED>> for CheckListBoxIsOwned<OWNED> {
     fn from(o: RearrangeListIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -524,6 +554,11 @@ impl<const OWNED: bool> RectIsOwned<OWNED> {
         None
     }
 }
+impl Clone for RectIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for RectIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -590,6 +625,11 @@ impl<const OWNED: bool> RegionIsOwned<OWNED> {
         None
     }
 }
+impl Clone for RegionIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<RegionIsOwned<OWNED>> for GDIObjectIsOwned<OWNED> {
     fn from(o: RegionIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -633,6 +673,11 @@ impl<const OWNED: bool> RegionIteratorIsOwned<OWNED> {
         None
     }
 }
+impl Clone for RegionIteratorIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<RegionIteratorIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
     fn from(o: RegionIteratorIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -661,6 +706,11 @@ impl<const OWNED: bool> RendererNativeIsOwned<OWNED> {
         None
     }
 }
+impl Clone for RendererNativeIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for RendererNativeIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -686,6 +736,11 @@ impl<const OWNED: bool> RichToolTipIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for RichToolTipIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for RichToolTipIsOwned<OWNED> {

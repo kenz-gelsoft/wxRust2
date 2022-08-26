@@ -16,6 +16,11 @@ impl<const OWNED: bool> GBPositionIsOwned<OWNED> {
         None
     }
 }
+impl Clone for GBPositionIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for GBPositionIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -115,6 +120,11 @@ impl<const OWNED: bool> GBSizerItemIsOwned<OWNED> {
         None
     }
 }
+impl Clone for GBSizerItemIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<GBSizerItemIsOwned<OWNED>> for SizerItemIsOwned<OWNED> {
     fn from(o: GBSizerItemIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -152,6 +162,11 @@ impl<const OWNED: bool> GBSpanIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for GBSpanIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for GBSpanIsOwned<OWNED> {
@@ -204,6 +219,11 @@ impl<const OWNED: bool> GCDCIsOwned<OWNED> {
         None
     }
 }
+impl Clone for GCDCIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<GCDCIsOwned<OWNED>> for DCIsOwned<OWNED> {
     fn from(o: GCDCIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -239,6 +259,11 @@ impl<const OWNED: bool> GDIObjectIsOwned<OWNED> {
         None
     }
 }
+impl Clone for GDIObjectIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<GDIObjectIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
     fn from(o: GDIObjectIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -270,6 +295,11 @@ impl<const OWNED: bool> GIFHandlerIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for GIFHandlerIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<GIFHandlerIsOwned<OWNED>> for ImageHandlerIsOwned<OWNED> {
@@ -337,6 +367,11 @@ impl<const OWNED: bool> GaugeIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for GaugeIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<GaugeIsOwned<OWNED>> for ControlIsOwned<OWNED> {
     fn from(o: GaugeIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -392,6 +427,11 @@ impl<const OWNED: bool> GenericAboutDialogIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for GenericAboutDialogIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for GenericAboutDialogIsOwned<OWNED> {
@@ -454,6 +494,11 @@ impl<const OWNED: bool> GenericDirCtrlIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for GenericDirCtrlIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<GenericDirCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
@@ -522,6 +567,11 @@ impl<const OWNED: bool> GenericProgressDialogIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for GenericProgressDialogIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<GenericProgressDialogIsOwned<OWNED>> for DialogIsOwned<OWNED> {
@@ -636,6 +686,11 @@ impl<const OWNED: bool> GenericValidatorIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for GenericValidatorIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<GenericValidatorIsOwned<OWNED>> for ValidatorIsOwned<OWNED> {
     fn from(o: GenericValidatorIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -676,6 +731,11 @@ impl<const OWNED: bool> GraphicsBrushIsOwned<OWNED> {
         None
     }
 }
+impl Clone for GraphicsBrushIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<GraphicsBrushIsOwned<OWNED>> for GraphicsObjectIsOwned<OWNED> {
     fn from(o: GraphicsBrushIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -709,6 +769,11 @@ wx_class! { GraphicsContext =
 impl<const OWNED: bool> GraphicsContextIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for GraphicsContextIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<GraphicsContextIsOwned<OWNED>> for GraphicsObjectIsOwned<OWNED> {
@@ -746,6 +811,11 @@ impl<const OWNED: bool> GraphicsFontIsOwned<OWNED> {
         None
     }
 }
+impl Clone for GraphicsFontIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<GraphicsFontIsOwned<OWNED>> for GraphicsObjectIsOwned<OWNED> {
     fn from(o: GraphicsFontIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -780,6 +850,11 @@ impl<const OWNED: bool> GraphicsGradientStopIsOwned<OWNED> {
         None
     }
 }
+impl Clone for GraphicsGradientStopIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for GraphicsGradientStopIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -797,6 +872,11 @@ impl<const OWNED: bool> GraphicsGradientStopsIsOwned<OWNED> {
     // BLOCKED: fn wxGraphicsGradientStops()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for GraphicsGradientStopsIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for GraphicsGradientStopsIsOwned<OWNED> {
@@ -817,6 +897,11 @@ wx_class! { GraphicsMatrix =
 impl<const OWNED: bool> GraphicsMatrixIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for GraphicsMatrixIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<GraphicsMatrixIsOwned<OWNED>> for GraphicsObjectIsOwned<OWNED> {
@@ -853,6 +938,11 @@ impl<const OWNED: bool> GraphicsObjectIsOwned<OWNED> {
         None
     }
 }
+impl Clone for GraphicsObjectIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<GraphicsObjectIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
     fn from(o: GraphicsObjectIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -881,6 +971,11 @@ wx_class! { GraphicsPath =
 impl<const OWNED: bool> GraphicsPathIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for GraphicsPathIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<GraphicsPathIsOwned<OWNED>> for GraphicsObjectIsOwned<OWNED> {
@@ -918,6 +1013,11 @@ impl<const OWNED: bool> GraphicsPenIsOwned<OWNED> {
         None
     }
 }
+impl Clone for GraphicsPenIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<GraphicsPenIsOwned<OWNED>> for GraphicsObjectIsOwned<OWNED> {
     fn from(o: GraphicsPenIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -950,6 +1050,11 @@ wx_class! { GraphicsRenderer =
 impl<const OWNED: bool> GraphicsRendererIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for GraphicsRendererIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<GraphicsRendererIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
@@ -985,6 +1090,11 @@ impl<const OWNED: bool> GridBagSizerIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for GridBagSizerIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<GridBagSizerIsOwned<OWNED>> for FlexGridSizerIsOwned<OWNED> {
@@ -1028,6 +1138,11 @@ impl<const OWNED: bool> GridEditorCreatedEventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxGridEditorCreatedEvent1()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for GridEditorCreatedEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<GridEditorCreatedEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
@@ -1074,6 +1189,11 @@ impl<const OWNED: bool> GridEventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxGridEvent1()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for GridEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<GridEventIsOwned<OWNED>> for NotifyEventIsOwned<OWNED> {
@@ -1127,6 +1247,11 @@ impl<const OWNED: bool> GridRangeSelectEventIsOwned<OWNED> {
         None
     }
 }
+impl Clone for GridRangeSelectEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<GridRangeSelectEventIsOwned<OWNED>> for NotifyEventIsOwned<OWNED> {
     fn from(o: GridRangeSelectEventIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -1176,6 +1301,11 @@ impl<const OWNED: bool> GridSizeEventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxGridSizeEvent1()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for GridSizeEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<GridSizeEventIsOwned<OWNED>> for NotifyEventIsOwned<OWNED> {
@@ -1250,6 +1380,11 @@ impl<const OWNED: bool> GridSizerIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for GridSizerIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<GridSizerIsOwned<OWNED>> for SizerIsOwned<OWNED> {
     fn from(o: GridSizerIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -1276,6 +1411,11 @@ impl<const OWNED: bool> GridTableBaseIsOwned<OWNED> {
     // BLOCKED: fn wxGridTableBase()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for GridTableBaseIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<GridTableBaseIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
@@ -1307,6 +1447,11 @@ impl<const OWNED: bool> GridUpdateLockerIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for GridUpdateLockerIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for GridUpdateLockerIsOwned<OWNED> {

@@ -13,6 +13,11 @@ impl<const OWNED: bool> AboutDialogInfoIsOwned<OWNED> {
         None
     }
 }
+impl Clone for AboutDialogInfoIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for AboutDialogInfoIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -53,6 +58,11 @@ impl<const OWNED: bool> AcceleratorEntryIsOwned<OWNED> {
         None
     }
 }
+impl Clone for AcceleratorEntryIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for AcceleratorEntryIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -75,6 +85,11 @@ impl<const OWNED: bool> AcceleratorTableIsOwned<OWNED> {
     // BLOCKED: fn wxAcceleratorTable2()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for AcceleratorTableIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<AcceleratorTableIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
@@ -110,6 +125,11 @@ impl<const OWNED: bool> ActivateEventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxActivateEvent()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for ActivateEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<ActivateEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
@@ -149,6 +169,11 @@ impl<const OWNED: bool> AffineMatrix2DIsOwned<OWNED> {
         None
     }
 }
+impl Clone for AffineMatrix2DIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<AffineMatrix2DIsOwned<OWNED>> for AffineMatrix2DBaseIsOwned<OWNED> {
     fn from(o: AffineMatrix2DIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -186,6 +211,11 @@ impl<const OWNED: bool> AffineMatrix2DBaseIsOwned<OWNED> {
     // BLOCKED: fn wxAffineMatrix2DBase()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for AffineMatrix2DBaseIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for AffineMatrix2DBaseIsOwned<OWNED> {
@@ -231,6 +261,11 @@ impl<const OWNED: bool> AnimationCtrlIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for AnimationCtrlIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<AnimationCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
@@ -281,6 +316,11 @@ impl<const OWNED: bool> AnyButtonIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for AnyButtonIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<AnyButtonIsOwned<OWNED>> for ControlIsOwned<OWNED> {
     fn from(o: AnyButtonIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -323,6 +363,11 @@ impl<const OWNED: bool> ArtProviderIsOwned<OWNED> {
         None
     }
 }
+impl Clone for ArtProviderIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<ArtProviderIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
     fn from(o: ArtProviderIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -363,6 +408,11 @@ impl<const OWNED: bool> AutoBufferedPaintDCIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for AutoBufferedPaintDCIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<AutoBufferedPaintDCIsOwned<OWNED>> for BufferedPaintDCIsOwned<OWNED> {
