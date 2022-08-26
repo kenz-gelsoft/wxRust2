@@ -24,9 +24,9 @@ fn main() {
 
 #[derive(Clone)]
 struct WrapSizerFrame {
-    base: wx::WeakRef<wx::FrameIsOwned<false>>,
-    m_panel: wx::WeakRef<wx::PanelIsOwned<false>>,
-    m_ok_button: wx::WeakRef<wx::ButtonIsOwned<false>>,
+    base: wx::WeakRef<wx::Frame>,
+    m_panel: wx::WeakRef<wx::Panel>,
+    m_ok_button: wx::WeakRef<wx::Button>,
 }
 impl WrapSizerFrame {
     fn new() -> Self {

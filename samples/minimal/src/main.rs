@@ -36,7 +36,7 @@ fn main() {
 
 #[derive(Clone)]
 struct MyFrame {
-    base: wx::WeakRef<wx::FrameIsOwned<false>>,
+    base: wx::WeakRef<wx::Frame>,
 }
 impl MyFrame {
     fn new(title: &str) -> Self {
