@@ -66,6 +66,7 @@ bool wxDateTime_ParseDate(wxDateTime * self, const wxString * date, wxString::co
 
 // WeakRef
 void *OpaqueWeakRef_new(void *obj);
+void *OpaqueWeakRef_copy(void *obj);
 void OpaqueWeakRef_delete(void *self);
 void *OpaqueWeakRef_Get(void *self);
 

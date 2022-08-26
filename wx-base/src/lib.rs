@@ -61,6 +61,7 @@ mod ffi {
 
         // WeakRef
         pub fn OpaqueWeakRef_new(obj: *mut c_void) -> *mut c_void;
+        pub fn OpaqueWeakRef_copy(obj: *mut c_void) -> *mut c_void;
         pub fn OpaqueWeakRef_delete(self_: *mut c_void);
         pub fn OpaqueWeakRef_Get(self_: *mut c_void) -> *mut c_void;
 
@@ -135,6 +136,10 @@ pub mod methods {
             }
         }
     }
+
+    pub trait Trackable<T>: EvtHandlerMethods {
+        fn to_weak_ref(&self) -> WeakRef<T>;
+    }
 }
 
 // wxString
@@ -201,6 +206,13 @@ impl<T: EvtHandlerMethods> Bindable for T {
             });
             ffi::wxEvtHandler_Bind(self.as_ptr(), event_type as c_int, f, param);
         }
+    }
+}
+
+// Effectively all wxEvtHandlers are wxTrackable.
+impl<T: EvtHandlerMethods> Trackable<T> for T {
+    fn to_weak_ref(&self) -> WeakRef<T> {
+        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -309,6 +321,14 @@ impl<T: WxRustMethods> WeakRef<T> {
             } else {
                 Some(T::from_unowned_ptr(ptr))
             }
+        }
+    }
+}
+impl<T: WxRustMethods> Clone for WeakRef<T> {
+    fn clone(&self) -> Self {
+        unsafe {
+            let ptr = ffi::OpaqueWeakRef_copy(self.0);
+            WeakRef(ptr, PhantomData)
         }
     }
 }
