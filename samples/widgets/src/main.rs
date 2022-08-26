@@ -468,10 +468,7 @@ trait WidgetsPage {
         let static_text = wx::StaticText::builder(Some(self.base()))
             .label(label)
             .build();
-        let as_control = unsafe {
-            // FIXME: Support this safe upcast as safecall
-            wx::Control::from_ptr(static_text.as_ptr())
-        };
+        let as_control = wx::Control::from(static_text);
         self.create_sizer_with_text(&as_control, id)
     }
 
@@ -486,10 +483,7 @@ trait WidgetsPage {
             .id(id_btn)
             .label(label)
             .build();
-        let as_control = unsafe {
-            // FIXME: Support this safe upcast as safecall
-            wx::Control::from_ptr(btn.as_ptr())
-        };
+        let as_control = wx::Control::from(btn);
         self.create_sizer_with_text(&as_control, id)
     }
 
