@@ -11,6 +11,11 @@ impl<const OWNED: bool> DCIsOwned<OWNED> {
         None
     }
 }
+impl Clone for DCIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<DCIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
     fn from(o: DCIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -44,6 +49,11 @@ impl<const OWNED: bool> DCBrushChangerIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for DCBrushChangerIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for DCBrushChangerIsOwned<OWNED> {
@@ -96,6 +106,11 @@ impl<const OWNED: bool> DCClipperIsOwned<OWNED> {
         None
     }
 }
+impl Clone for DCClipperIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for DCClipperIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -128,6 +143,11 @@ impl<const OWNED: bool> DCFontChangerIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for DCFontChangerIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for DCFontChangerIsOwned<OWNED> {
@@ -178,6 +198,11 @@ impl<const OWNED: bool> DCOverlayIsOwned<OWNED> {
         None
     }
 }
+impl Clone for DCOverlayIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for DCOverlayIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -201,6 +226,11 @@ impl<const OWNED: bool> DCPenChangerIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for DCPenChangerIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for DCPenChangerIsOwned<OWNED> {
@@ -237,6 +267,11 @@ impl<const OWNED: bool> DCTextColourChangerIsOwned<OWNED> {
         None
     }
 }
+impl Clone for DCTextColourChangerIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for DCTextColourChangerIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -263,6 +298,11 @@ impl<const OWNED: bool> DataFormatIsOwned<OWNED> {
         None
     }
 }
+impl Clone for DataFormatIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for DataFormatIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -287,6 +327,11 @@ impl<const OWNED: bool> DataObjectIsOwned<OWNED> {
         None
     }
 }
+impl Clone for DataObjectIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for DataObjectIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -307,6 +352,11 @@ impl<const OWNED: bool> DataObjectCompositeIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for DataObjectCompositeIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<DataObjectCompositeIsOwned<OWNED>> for DataObjectIsOwned<OWNED> {
@@ -339,6 +389,11 @@ impl<const OWNED: bool> DataObjectSimpleIsOwned<OWNED> {
         None
     }
 }
+impl Clone for DataObjectSimpleIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<DataObjectSimpleIsOwned<OWNED>> for DataObjectIsOwned<OWNED> {
     fn from(o: DataObjectSimpleIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -363,6 +418,11 @@ impl<const OWNED: bool> DataViewBitmapRendererIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxDataViewBitmapRenderer()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for DataViewBitmapRendererIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<DataViewBitmapRendererIsOwned<OWNED>>
@@ -402,6 +462,11 @@ impl<const OWNED: bool> DataViewChoiceByIndexRendererIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxDataViewChoiceByIndexRenderer()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for DataViewChoiceByIndexRendererIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<DataViewChoiceByIndexRendererIsOwned<OWNED>>
@@ -447,6 +512,11 @@ impl<const OWNED: bool> DataViewChoiceRendererIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxDataViewChoiceRenderer()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for DataViewChoiceRendererIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<DataViewChoiceRendererIsOwned<OWNED>>
@@ -535,6 +605,11 @@ impl<const OWNED: bool> DataViewColumnIsOwned<OWNED> {
         None
     }
 }
+impl Clone for DataViewColumnIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<DataViewColumnIsOwned<OWNED>> for SettableHeaderColumnIsOwned<OWNED> {
     fn from(o: DataViewColumnIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -592,6 +667,11 @@ impl<const OWNED: bool> DataViewCtrlIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for DataViewCtrlIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<DataViewCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
@@ -658,6 +738,11 @@ impl<const OWNED: bool> DataViewCustomRendererIsOwned<OWNED> {
         None
     }
 }
+impl Clone for DataViewCustomRendererIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<DataViewCustomRendererIsOwned<OWNED>>
     for DataViewRendererIsOwned<OWNED>
 {
@@ -694,6 +779,11 @@ impl<const OWNED: bool> DataViewDateRendererIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxDataViewDateRenderer()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for DataViewDateRendererIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<DataViewDateRendererIsOwned<OWNED>>
@@ -746,6 +836,11 @@ impl<const OWNED: bool> DataViewEventIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for DataViewEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<DataViewEventIsOwned<OWNED>> for NotifyEventIsOwned<OWNED> {
@@ -811,6 +906,11 @@ impl<const OWNED: bool> DataViewIconTextIsOwned<OWNED> {
         None
     }
 }
+impl Clone for DataViewIconTextIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<DataViewIconTextIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
     fn from(o: DataViewIconTextIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -840,6 +940,11 @@ impl<const OWNED: bool> DataViewIconTextRendererIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxDataViewIconTextRenderer()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for DataViewIconTextRendererIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<DataViewIconTextRendererIsOwned<OWNED>>
@@ -879,6 +984,11 @@ impl<const OWNED: bool> DataViewIndexListModelIsOwned<OWNED> {
     // BLOCKED: fn wxDataViewIndexListModel()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for DataViewIndexListModelIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<DataViewIndexListModelIsOwned<OWNED>>
@@ -928,6 +1038,11 @@ impl<const OWNED: bool> DataViewItemIsOwned<OWNED> {
         None
     }
 }
+impl Clone for DataViewItemIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for DataViewItemIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -947,6 +1062,11 @@ impl<const OWNED: bool> DataViewItemAttrIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for DataViewItemAttrIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for DataViewItemAttrIsOwned<OWNED> {
@@ -996,6 +1116,11 @@ impl<const OWNED: bool> DataViewListCtrlIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for DataViewListCtrlIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<DataViewListCtrlIsOwned<OWNED>> for DataViewCtrlIsOwned<OWNED> {
     fn from(o: DataViewListCtrlIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -1039,6 +1164,11 @@ impl<const OWNED: bool> DataViewListModelIsOwned<OWNED> {
         None
     }
 }
+impl Clone for DataViewListModelIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<DataViewListModelIsOwned<OWNED>> for DataViewModelIsOwned<OWNED> {
     fn from(o: DataViewListModelIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -1072,6 +1202,11 @@ impl<const OWNED: bool> DataViewListStoreIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for DataViewListStoreIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<DataViewListStoreIsOwned<OWNED>>
@@ -1116,6 +1251,11 @@ impl<const OWNED: bool> DataViewModelIsOwned<OWNED> {
         None
     }
 }
+impl Clone for DataViewModelIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<DataViewModelIsOwned<OWNED>> for RefCounterIsOwned<OWNED> {
     fn from(o: DataViewModelIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -1140,6 +1280,11 @@ impl<const OWNED: bool> DataViewModelNotifierIsOwned<OWNED> {
         None
     }
 }
+impl Clone for DataViewModelNotifierIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for DataViewModelNotifierIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -1159,6 +1304,11 @@ impl<const OWNED: bool> DataViewProgressRendererIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxDataViewProgressRenderer()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for DataViewProgressRendererIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<DataViewProgressRendererIsOwned<OWNED>>
@@ -1198,6 +1348,11 @@ impl<const OWNED: bool> DataViewRendererIsOwned<OWNED> {
         None
     }
 }
+impl Clone for DataViewRendererIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<DataViewRendererIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
     fn from(o: DataViewRendererIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -1228,6 +1383,11 @@ impl<const OWNED: bool> DataViewSpinRendererIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxDataViewSpinRenderer()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for DataViewSpinRendererIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<DataViewSpinRendererIsOwned<OWNED>>
@@ -1275,6 +1435,11 @@ impl<const OWNED: bool> DataViewTextRendererIsOwned<OWNED> {
         None
     }
 }
+impl Clone for DataViewTextRendererIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<DataViewTextRendererIsOwned<OWNED>>
     for DataViewRendererIsOwned<OWNED>
 {
@@ -1311,6 +1476,11 @@ impl<const OWNED: bool> DataViewToggleRendererIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxDataViewToggleRenderer()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for DataViewToggleRendererIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<DataViewToggleRendererIsOwned<OWNED>>
@@ -1377,6 +1547,11 @@ impl<const OWNED: bool> DataViewTreeCtrlIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for DataViewTreeCtrlIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<DataViewTreeCtrlIsOwned<OWNED>> for DataViewCtrlIsOwned<OWNED> {
     fn from(o: DataViewTreeCtrlIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -1423,6 +1598,11 @@ impl<const OWNED: bool> DataViewTreeStoreIsOwned<OWNED> {
         None
     }
 }
+impl Clone for DataViewTreeStoreIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<DataViewTreeStoreIsOwned<OWNED>> for DataViewModelIsOwned<OWNED> {
     fn from(o: DataViewTreeStoreIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -1453,6 +1633,11 @@ impl<const OWNED: bool> DataViewVirtualListModelIsOwned<OWNED> {
     // BLOCKED: fn wxDataViewVirtualListModel()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for DataViewVirtualListModelIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<DataViewVirtualListModelIsOwned<OWNED>>
@@ -1497,6 +1682,11 @@ impl<const OWNED: bool> DateEventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxDateEvent1()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for DateEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<DateEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
@@ -1576,6 +1766,11 @@ impl<const OWNED: bool> DatePickerCtrlIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for DatePickerCtrlIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<DatePickerCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
     fn from(o: DatePickerCtrlIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -1622,6 +1817,11 @@ impl<const OWNED: bool> DelegateRendererNativeIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for DelegateRendererNativeIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<DelegateRendererNativeIsOwned<OWNED>>
@@ -1680,6 +1880,11 @@ impl<const OWNED: bool> DialogIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for DialogIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<DialogIsOwned<OWNED>> for TopLevelWindowIsOwned<OWNED> {
@@ -1761,6 +1966,11 @@ impl<const OWNED: bool> DialogLayoutAdapterIsOwned<OWNED> {
         None
     }
 }
+impl Clone for DialogLayoutAdapterIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for DialogLayoutAdapterIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -1816,6 +2026,11 @@ impl<const OWNED: bool> DirDialogIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for DirDialogIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<DirDialogIsOwned<OWNED>> for DialogIsOwned<OWNED> {
@@ -1902,6 +2117,11 @@ impl<const OWNED: bool> DirPickerCtrlIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for DirPickerCtrlIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<DirPickerCtrlIsOwned<OWNED>> for PickerBaseIsOwned<OWNED> {
     fn from(o: DirPickerCtrlIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -1958,6 +2178,11 @@ impl<const OWNED: bool> DisplayIsOwned<OWNED> {
         None
     }
 }
+impl Clone for DisplayIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for DisplayIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -1979,6 +2204,11 @@ impl<const OWNED: bool> DisplayChangedEventIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for DisplayChangedEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<DisplayChangedEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
@@ -2065,6 +2295,11 @@ impl<const OWNED: bool> DragImageIsOwned<OWNED> {
         None
     }
 }
+impl Clone for DragImageIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<DragImageIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
     fn from(o: DragImageIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -2094,6 +2329,11 @@ impl<const OWNED: bool> DropFilesEventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxDropFilesEvent()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for DropFilesEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<DropFilesEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
@@ -2227,6 +2467,11 @@ impl<const OWNED: bool> DropSourceIsOwned<OWNED> {
         None
     }
 }
+impl Clone for DropSourceIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for DropSourceIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -2244,6 +2489,11 @@ impl<const OWNED: bool> DropTargetIsOwned<OWNED> {
     // BLOCKED: fn wxDropTarget()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for DropTargetIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for DropTargetIsOwned<OWNED> {

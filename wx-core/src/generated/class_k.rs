@@ -13,6 +13,11 @@ impl<const OWNED: bool> KeyEventIsOwned<OWNED> {
         None
     }
 }
+impl Clone for KeyEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<KeyEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
     fn from(o: KeyEventIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }

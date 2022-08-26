@@ -17,6 +17,11 @@ impl<const OWNED: bool> VListBoxIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for VListBoxIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<VListBoxIsOwned<OWNED>> for VScrolledWindowIsOwned<OWNED> {
     fn from(o: VListBoxIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -87,6 +92,11 @@ impl<const OWNED: bool> VScrolledWindowIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for VScrolledWindowIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<VScrolledWindowIsOwned<OWNED>> for PanelIsOwned<OWNED> {
     fn from(o: VScrolledWindowIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -149,6 +159,11 @@ impl<const OWNED: bool> ValidatorIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for ValidatorIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<ValidatorIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {

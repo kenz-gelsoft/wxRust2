@@ -3,7 +3,6 @@ macro_rules! wx_class {
     (
         $type:ident = $typeIsOwned:ident<true>($wxType:ident) impl $($methods:ident),*
     ) => {
-        #[derive(Clone)]
         pub struct $typeIsOwned<const OWNED: bool>(*mut c_void);
         pub type $type = $typeIsOwned<true>;
         $(

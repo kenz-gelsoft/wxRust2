@@ -13,6 +13,11 @@ impl<const OWNED: bool> RefCounterIsOwned<OWNED> {
         None
     }
 }
+impl Clone for RefCounterIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for RefCounterIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {

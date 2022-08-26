@@ -29,6 +29,11 @@ impl<const OWNED: bool> IconIsOwned<OWNED> {
         None
     }
 }
+impl Clone for IconIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<IconIsOwned<OWNED>> for GDIObjectIsOwned<OWNED> {
     fn from(o: IconIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -87,6 +92,11 @@ impl<const OWNED: bool> IconBundleIsOwned<OWNED> {
         None
     }
 }
+impl Clone for IconBundleIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<IconBundleIsOwned<OWNED>> for GDIObjectIsOwned<OWNED> {
     fn from(o: IconBundleIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -125,6 +135,11 @@ impl<const OWNED: bool> IconizeEventIsOwned<OWNED> {
         None
     }
 }
+impl Clone for IconizeEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<IconizeEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
     fn from(o: IconizeEventIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -156,6 +171,11 @@ wx_class! { IdManager =
 impl<const OWNED: bool> IdManagerIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for IdManagerIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for IdManagerIsOwned<OWNED> {
@@ -252,6 +272,11 @@ impl<const OWNED: bool> ImageIsOwned<OWNED> {
         None
     }
 }
+impl Clone for ImageIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<ImageIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
     fn from(o: ImageIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -280,6 +305,11 @@ impl<const OWNED: bool> ImageHandlerIsOwned<OWNED> {
     // BLOCKED: fn wxImageHandler()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for ImageHandlerIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<ImageHandlerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
@@ -320,6 +350,11 @@ impl<const OWNED: bool> ImageListIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for ImageListIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<ImageListIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
@@ -366,6 +401,11 @@ impl<const OWNED: bool> InfoBarIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for InfoBarIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<InfoBarIsOwned<OWNED>> for ControlIsOwned<OWNED> {
     fn from(o: InfoBarIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -407,6 +447,11 @@ impl<const OWNED: bool> InitDialogEventIsOwned<OWNED> {
         None
     }
 }
+impl Clone for InitDialogEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<InitDialogEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
     fn from(o: InitDialogEventIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -441,6 +486,11 @@ impl<const OWNED: bool> ItemContainerIsOwned<OWNED> {
         None
     }
 }
+impl Clone for ItemContainerIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<ItemContainerIsOwned<OWNED>> for ItemContainerImmutableIsOwned<OWNED> {
     fn from(o: ItemContainerIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -463,6 +513,11 @@ impl<const OWNED: bool> ItemContainerImmutableIsOwned<OWNED> {
     // BLOCKED: fn wxItemContainerImmutable()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for ItemContainerImmutableIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for ItemContainerImmutableIsOwned<OWNED> {

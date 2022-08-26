@@ -69,6 +69,8 @@ class RustClassBinding:
             yield '}'
             for line in self._impl_with_ctors():
                 yield line
+            for line in self._impl_clone():
+                yield line                
             for line in self._impl_from_ancestors():
                 yield line
             for line in self._impl_dynamic_cast_if_needed():
@@ -114,7 +116,24 @@ class RustClassBinding:
         yield '        None'
         yield '    }'
         yield '}'
-    
+
+    def _has_drop(self):
+        if (self.is_a('wxEvtHandler') or
+            self.is_a('wxSizer')):
+            return False
+        return True
+
+    def _impl_clone(self):
+        is_owned = '%sIsOwned' % (self.__model.unprefixed(),)
+        if self._has_drop():
+            yield 'impl Clone for %s<false> {' % (is_owned,)
+        else:
+            yield 'impl<const OWNED: bool> Clone for %s<OWNED> {' % (is_owned,)
+        yield '    fn clone(&self) -> Self {'
+        yield '        Self(self.0)'
+        yield '    }'
+        yield '}'
+
     def _impl_from_ancestors(self):
         unprefixed = self.__model.unprefixed()
         for ancestor in self.__model.manager.ancestors_of(self.__model):

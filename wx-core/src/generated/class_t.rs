@@ -15,6 +15,11 @@ impl<const OWNED: bool> TGAHandlerIsOwned<OWNED> {
         None
     }
 }
+impl Clone for TGAHandlerIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<TGAHandlerIsOwned<OWNED>> for ImageHandlerIsOwned<OWNED> {
     fn from(o: TGAHandlerIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -51,6 +56,11 @@ impl<const OWNED: bool> TIFFHandlerIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for TIFFHandlerIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<TIFFHandlerIsOwned<OWNED>> for ImageHandlerIsOwned<OWNED> {
@@ -92,6 +102,11 @@ impl<const OWNED: bool> TaskBarIconIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for TaskBarIconIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<TaskBarIconIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
     fn from(o: TaskBarIconIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -119,6 +134,11 @@ impl<const OWNED: bool> TaskBarIconEventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxTaskBarIconEvent()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for TaskBarIconEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<TaskBarIconEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
@@ -162,6 +182,11 @@ impl<const OWNED: bool> TextAttrIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for TextAttrIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for TextAttrIsOwned<OWNED> {
@@ -216,6 +241,11 @@ impl<const OWNED: bool> TextCtrlIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for TextCtrlIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<TextCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
     fn from(o: TextCtrlIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -267,6 +297,11 @@ impl<const OWNED: bool> TextDataObjectIsOwned<OWNED> {
         None
     }
 }
+impl Clone for TextDataObjectIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<TextDataObjectIsOwned<OWNED>> for DataObjectSimpleIsOwned<OWNED> {
     fn from(o: TextDataObjectIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -300,6 +335,11 @@ impl<const OWNED: bool> TextDropTargetIsOwned<OWNED> {
         None
     }
 }
+impl Clone for TextDropTargetIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<TextDropTargetIsOwned<OWNED>> for DropTargetIsOwned<OWNED> {
     fn from(o: TextDropTargetIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -321,6 +361,11 @@ wx_class! { TextEntry =
 impl<const OWNED: bool> TextEntryIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for TextEntryIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for TextEntryIsOwned<OWNED> {
@@ -373,6 +418,11 @@ impl<const OWNED: bool> TextEntryDialogIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for TextEntryDialogIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<TextEntryDialogIsOwned<OWNED>> for DialogIsOwned<OWNED> {
@@ -435,6 +485,11 @@ impl<const OWNED: bool> TextValidatorIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for TextValidatorIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<TextValidatorIsOwned<OWNED>> for ValidatorIsOwned<OWNED> {
     fn from(o: TextValidatorIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -467,6 +522,11 @@ impl<const OWNED: bool> ThreadEventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxThreadEvent()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for ThreadEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<ThreadEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
@@ -541,6 +601,11 @@ impl<const OWNED: bool> TimePickerCtrlIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for TimePickerCtrlIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<TimePickerCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
     fn from(o: TimePickerCtrlIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -576,6 +641,11 @@ impl<const OWNED: bool> TipProviderIsOwned<OWNED> {
     // BLOCKED: fn wxTipProvider()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for TipProviderIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for TipProviderIsOwned<OWNED> {
@@ -628,6 +698,11 @@ impl<const OWNED: bool> TipWindowIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for TipWindowIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<TipWindowIsOwned<OWNED>> for WindowIsOwned<OWNED> {
@@ -694,6 +769,11 @@ impl<const OWNED: bool> ToggleButtonIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for ToggleButtonIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<ToggleButtonIsOwned<OWNED>> for AnyButtonIsOwned<OWNED> {
@@ -764,6 +844,11 @@ impl<const OWNED: bool> ToolBarIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for ToolBarIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<ToolBarIsOwned<OWNED>> for ControlIsOwned<OWNED> {
     fn from(o: ToolBarIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -806,6 +891,11 @@ impl<const OWNED: bool> ToolTipIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for ToolTipIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<ToolTipIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
@@ -862,6 +952,11 @@ impl<const OWNED: bool> ToolbookIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for ToolbookIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<ToolbookIsOwned<OWNED>> for BookCtrlBaseIsOwned<OWNED> {
@@ -960,6 +1055,11 @@ impl<const OWNED: bool> TopLevelWindowIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for TopLevelWindowIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<TopLevelWindowIsOwned<OWNED>> for NonOwnedWindowIsOwned<OWNED> {
     fn from(o: TopLevelWindowIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -1025,6 +1125,11 @@ impl<const OWNED: bool> TreeCtrlIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for TreeCtrlIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<TreeCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
@@ -1098,6 +1203,11 @@ impl<const OWNED: bool> TreeEventIsOwned<OWNED> {
         None
     }
 }
+impl Clone for TreeEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<TreeEventIsOwned<OWNED>> for NotifyEventIsOwned<OWNED> {
     fn from(o: TreeEventIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -1145,6 +1255,11 @@ impl<const OWNED: bool> TreeItemDataIsOwned<OWNED> {
         None
     }
 }
+impl Clone for TreeItemDataIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<TreeItemDataIsOwned<OWNED>> for ClientDataIsOwned<OWNED> {
     fn from(o: TreeItemDataIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -1169,6 +1284,11 @@ impl<const OWNED: bool> TreeItemIdIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for TreeItemIdIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for TreeItemIdIsOwned<OWNED> {
@@ -1213,6 +1333,11 @@ impl<const OWNED: bool> TreeListCtrlIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for TreeListCtrlIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<TreeListCtrlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
@@ -1272,6 +1397,11 @@ impl<const OWNED: bool> TreeListItemIsOwned<OWNED> {
         None
     }
 }
+impl Clone for TreeListItemIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for TreeListItemIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -1289,6 +1419,11 @@ impl<const OWNED: bool> TreeListItemComparatorIsOwned<OWNED> {
     // BLOCKED: fn wxTreeListItemComparator()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for TreeListItemComparatorIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for TreeListItemComparatorIsOwned<OWNED> {
@@ -1335,6 +1470,11 @@ impl<const OWNED: bool> TreebookIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for TreebookIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<TreebookIsOwned<OWNED>> for BookCtrlBaseIsOwned<OWNED> {
