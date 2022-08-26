@@ -46,11 +46,6 @@ impl<const OWNED: bool> DynamicCast for HScrolledWindowIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxHScrolledWindow_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<HScrolledWindowIsOwned<false>> for HScrolledWindowIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<HScrolledWindowIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 impl<const OWNED: bool> WindowMethods for HScrolledWindowIsOwned<OWNED> {
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
@@ -161,13 +156,6 @@ impl<const OWNED: bool> From<HVScrolledWindowIsOwned<OWNED>> for ObjectIsOwned<O
 impl<const OWNED: bool> DynamicCast for HVScrolledWindowIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxHVScrolledWindow_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<HVScrolledWindowIsOwned<false>>
-    for HVScrolledWindowIsOwned<OWNED>
-{
-    fn to_weak_ref(&self) -> WeakRef<HVScrolledWindowIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for HVScrolledWindowIsOwned<OWNED> {
@@ -321,11 +309,6 @@ impl<const OWNED: bool> From<HeaderCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> 
 impl<const OWNED: bool> DynamicCast for HeaderCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxHeaderCtrl_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<HeaderCtrlIsOwned<false>> for HeaderCtrlIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<HeaderCtrlIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for HeaderCtrlIsOwned<OWNED> {
@@ -486,13 +469,6 @@ impl<const OWNED: bool> DynamicCast for HeaderCtrlSimpleIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxHeaderCtrlSimple_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<HeaderCtrlSimpleIsOwned<false>>
-    for HeaderCtrlSimpleIsOwned<OWNED>
-{
-    fn to_weak_ref(&self) -> WeakRef<HeaderCtrlSimpleIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 
 // wxHelpEvent
 wx_class! { HelpEvent =
@@ -619,11 +595,6 @@ impl<const OWNED: bool> From<HyperlinkCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNE
 impl<const OWNED: bool> DynamicCast for HyperlinkCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxHyperlinkCtrl_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<HyperlinkCtrlIsOwned<false>> for HyperlinkCtrlIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<HyperlinkCtrlIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 

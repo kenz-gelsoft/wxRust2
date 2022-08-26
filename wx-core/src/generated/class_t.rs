@@ -122,11 +122,6 @@ impl<const OWNED: bool> DynamicCast for TaskBarIconIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTaskBarIcon_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<TaskBarIconIsOwned<false>> for TaskBarIconIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<TaskBarIconIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 
 // wxTaskBarIconEvent
 wx_class! { TaskBarIconEvent =
@@ -274,11 +269,6 @@ impl<const OWNED: bool> From<TextCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for TextCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTextCtrl_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<TextCtrlIsOwned<false>> for TextCtrlIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<TextCtrlIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 // Mix-in(s) to wxTextCtrl
@@ -470,11 +460,6 @@ impl<const OWNED: bool> DynamicCast for TextEntryDialogIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTextEntryDialog_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<TextEntryDialogIsOwned<false>> for TextEntryDialogIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<TextEntryDialogIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 
 // wxTextValidator
 wx_class! { TextValidator =
@@ -523,11 +508,6 @@ impl<const OWNED: bool> From<TextValidatorIsOwned<OWNED>> for ObjectIsOwned<OWNE
 impl<const OWNED: bool> DynamicCast for TextValidatorIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTextValidator_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<TextValidatorIsOwned<false>> for TextValidatorIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<TextValidatorIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -651,11 +631,6 @@ impl<const OWNED: bool> DynamicCast for TimePickerCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTimePickerCtrl_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<TimePickerCtrlIsOwned<false>> for TimePickerCtrlIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<TimePickerCtrlIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 
 // wxTipProvider
 wx_class! { TipProvider =
@@ -750,11 +725,6 @@ impl<const OWNED: bool> DynamicCast for TipWindowIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTipWindow_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<TipWindowIsOwned<false>> for TipWindowIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<TipWindowIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 
 // wxToggleButton
 wx_class! { ToggleButton =
@@ -836,11 +806,6 @@ impl<const OWNED: bool> DynamicCast for ToggleButtonIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxToggleButton_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<ToggleButtonIsOwned<false>> for ToggleButtonIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<ToggleButtonIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 
 // wxToolBar
 wx_class! { ToolBar =
@@ -907,11 +872,6 @@ impl<const OWNED: bool> From<ToolBarIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for ToolBarIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxToolBar_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<ToolBarIsOwned<false>> for ToolBarIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<ToolBarIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -1029,11 +989,6 @@ impl<const OWNED: bool> DynamicCast for ToolbookIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxToolbook_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<ToolbookIsOwned<false>> for ToolbookIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<ToolbookIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 impl<const OWNED: bool> WindowMethods for ToolbookIsOwned<OWNED> {
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
@@ -1130,11 +1085,6 @@ impl<const OWNED: bool> DynamicCast for TopLevelWindowIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTopLevelWindow_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<TopLevelWindowIsOwned<false>> for TopLevelWindowIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<TopLevelWindowIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 
 // wxTreeCtrl
 wx_class! { TreeCtrl =
@@ -1205,11 +1155,6 @@ impl<const OWNED: bool> From<TreeCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for TreeCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTreeCtrl_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<TreeCtrlIsOwned<false>> for TreeCtrlIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<TreeCtrlIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> ControlMethods for TreeCtrlIsOwned<OWNED> {
@@ -1415,11 +1360,6 @@ impl<const OWNED: bool> DynamicCast for TreeListCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTreeListCtrl_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<TreeListCtrlIsOwned<false>> for TreeListCtrlIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<TreeListCtrlIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 impl<const OWNED: bool> WindowMethods for TreeListCtrlIsOwned<OWNED> {
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
@@ -1565,11 +1505,6 @@ impl<const OWNED: bool> From<TreebookIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for TreebookIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxTreebook_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<TreebookIsOwned<false>> for TreebookIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<TreebookIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for TreebookIsOwned<OWNED> {

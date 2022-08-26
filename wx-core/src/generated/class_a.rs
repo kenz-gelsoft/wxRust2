@@ -293,11 +293,6 @@ impl<const OWNED: bool> DynamicCast for AnimationCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxAnimationCtrl_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<AnimationCtrlIsOwned<false>> for AnimationCtrlIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<AnimationCtrlIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 
 // wxAnyButton
 wx_class! { AnyButton =
@@ -344,11 +339,6 @@ impl<const OWNED: bool> From<AnyButtonIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for AnyButtonIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxAnyButton_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<AnyButtonIsOwned<false>> for AnyButtonIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<AnyButtonIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 

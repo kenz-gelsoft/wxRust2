@@ -115,13 +115,6 @@ impl<const OWNED: bool> DynamicCast for OwnerDrawnComboBoxIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxOwnerDrawnComboBox_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<OwnerDrawnComboBoxIsOwned<false>>
-    for OwnerDrawnComboBoxIsOwned<OWNED>
-{
-    fn to_weak_ref(&self) -> WeakRef<OwnerDrawnComboBoxIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 // Mix-in(s) to wxOwnerDrawnComboBox
 impl<const OWNED: bool> ItemContainerMethods for OwnerDrawnComboBoxIsOwned<OWNED> {
     fn as_item_container(&self) -> *mut c_void {

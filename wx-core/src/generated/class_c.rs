@@ -114,11 +114,6 @@ impl<const OWNED: bool> DynamicCast for CalendarCtrlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxCalendarCtrl_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<CalendarCtrlIsOwned<false>> for CalendarCtrlIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<CalendarCtrlIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 
 // wxCalendarDateAttr
 wx_class! { CalendarDateAttr =
@@ -327,11 +322,6 @@ impl<const OWNED: bool> DynamicCast for CheckBoxIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxCheckBox_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<CheckBoxIsOwned<false>> for CheckBoxIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<CheckBoxIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 
 // wxCheckListBox
 wx_class! { CheckListBox =
@@ -417,11 +407,6 @@ impl<const OWNED: bool> From<CheckListBoxIsOwned<OWNED>> for ObjectIsOwned<OWNED
 impl<const OWNED: bool> DynamicCast for CheckListBoxIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxCheckListBox_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<CheckListBoxIsOwned<false>> for CheckListBoxIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<CheckListBoxIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 // Mix-in(s) to wxCheckListBox
@@ -615,11 +600,6 @@ impl<const OWNED: bool> DynamicCast for ChoiceIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxChoice_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<ChoiceIsOwned<false>> for ChoiceIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<ChoiceIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 // Mix-in(s) to wxChoice
 impl<const OWNED: bool> ItemContainerMethods for ChoiceIsOwned<OWNED> {
     fn as_item_container(&self) -> *mut c_void {
@@ -703,11 +683,6 @@ impl<const OWNED: bool> From<ChoicebookIsOwned<OWNED>> for ObjectIsOwned<OWNED> 
 impl<const OWNED: bool> DynamicCast for ChoicebookIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxChoicebook_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<ChoicebookIsOwned<false>> for ChoicebookIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<ChoicebookIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for ChoicebookIsOwned<OWNED> {
@@ -988,11 +963,6 @@ impl<const OWNED: bool> DynamicCast for CollapsiblePaneIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxCollapsiblePane_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<CollapsiblePaneIsOwned<false>> for CollapsiblePaneIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<CollapsiblePaneIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 
 // wxCollapsiblePaneEvent
 wx_class! { CollapsiblePaneEvent =
@@ -1243,11 +1213,6 @@ impl<const OWNED: bool> DynamicCast for ColourDialogIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxColourDialog_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<ColourDialogIsOwned<false>> for ColourDialogIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<ColourDialogIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 
 // wxColourPickerCtrl
 wx_class! { ColourPickerCtrl =
@@ -1332,13 +1297,6 @@ impl<const OWNED: bool> From<ColourPickerCtrlIsOwned<OWNED>> for ObjectIsOwned<O
 impl<const OWNED: bool> DynamicCast for ColourPickerCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxColourPickerCtrl_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<ColourPickerCtrlIsOwned<false>>
-    for ColourPickerCtrlIsOwned<OWNED>
-{
-    fn to_weak_ref(&self) -> WeakRef<ColourPickerCtrlIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 
@@ -1488,11 +1446,6 @@ impl<const OWNED: bool> DynamicCast for ComboBoxIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxComboBox_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<ComboBoxIsOwned<false>> for ComboBoxIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<ComboBoxIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 // Mix-in(s) to wxComboBox
 impl<const OWNED: bool> ItemContainerMethods for ComboBoxIsOwned<OWNED> {
     fn as_item_container(&self) -> *mut c_void {
@@ -1587,11 +1540,6 @@ impl<const OWNED: bool> From<ComboCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for ComboCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxComboCtrl_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<ComboCtrlIsOwned<false>> for ComboCtrlIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<ComboCtrlIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 // Mix-in(s) to wxComboCtrl
@@ -1790,13 +1738,6 @@ impl<const OWNED: bool> DynamicCast for CommandLinkButtonIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxCommandLinkButton_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<CommandLinkButtonIsOwned<false>>
-    for CommandLinkButtonIsOwned<OWNED>
-{
-    fn to_weak_ref(&self) -> WeakRef<CommandLinkButtonIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 
 // wxCommandProcessor
 wx_class! { CommandProcessor =
@@ -1947,11 +1888,6 @@ impl<const OWNED: bool> DynamicCast for ControlIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxControl_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<ControlIsOwned<false>> for ControlIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<ControlIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 
 // wxControlWithItems
 wx_class! { ControlWithItems =
@@ -1995,13 +1931,6 @@ impl<const OWNED: bool> From<ControlWithItemsIsOwned<OWNED>> for ObjectIsOwned<O
 impl<const OWNED: bool> DynamicCast for ControlWithItemsIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxControlWithItems_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<ControlWithItemsIsOwned<false>>
-    for ControlWithItemsIsOwned<OWNED>
-{
-    fn to_weak_ref(&self) -> WeakRef<ControlWithItemsIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 // Mix-in(s) to wxControlWithItems

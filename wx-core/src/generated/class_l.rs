@@ -117,11 +117,6 @@ impl<const OWNED: bool> DynamicCast for ListBoxIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxListBox_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<ListBoxIsOwned<false>> for ListBoxIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<ListBoxIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 // Mix-in(s) to wxListBox
 impl<const OWNED: bool> ItemContainerMethods for ListBoxIsOwned<OWNED> {
     fn as_item_container(&self) -> *mut c_void {
@@ -203,11 +198,6 @@ impl<const OWNED: bool> From<ListCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for ListCtrlIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxListCtrl_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<ListCtrlIsOwned<false>> for ListCtrlIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<ListCtrlIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> ControlMethods for ListCtrlIsOwned<OWNED> {
@@ -403,11 +393,6 @@ impl<const OWNED: bool> DynamicCast for ListViewIsOwned<OWNED> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxListView_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Trackable<ListViewIsOwned<false>> for ListViewIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<ListViewIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
-    }
-}
 
 // wxListbook
 wx_class! { Listbook =
@@ -480,11 +465,6 @@ impl<const OWNED: bool> From<ListbookIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
 impl<const OWNED: bool> DynamicCast for ListbookIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxListbook_CLASSINFO()) }
-    }
-}
-impl<const OWNED: bool> Trackable<ListbookIsOwned<false>> for ListbookIsOwned<OWNED> {
-    fn to_weak_ref(&self) -> WeakRef<ListbookIsOwned<false>> {
-        unsafe { WeakRef::from(self.as_ptr()) }
     }
 }
 impl<const OWNED: bool> WindowMethods for ListbookIsOwned<OWNED> {
