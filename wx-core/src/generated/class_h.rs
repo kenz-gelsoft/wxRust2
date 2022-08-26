@@ -16,6 +16,11 @@ impl<const OWNED: bool> HScrolledWindowIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for HScrolledWindowIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<HScrolledWindowIsOwned<OWNED>> for PanelIsOwned<OWNED> {
     fn from(o: HScrolledWindowIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -84,6 +89,11 @@ impl<const OWNED: bool> HTMLDataObjectIsOwned<OWNED> {
         None
     }
 }
+impl Clone for HTMLDataObjectIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<HTMLDataObjectIsOwned<OWNED>> for DataObjectSimpleIsOwned<OWNED> {
     fn from(o: HTMLDataObjectIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -116,6 +126,11 @@ impl<const OWNED: bool> HVScrolledWindowIsOwned<OWNED> {
     // BLOCKED: fn wxHVScrolledWindow1()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for HVScrolledWindowIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<HVScrolledWindowIsOwned<OWNED>> for PanelIsOwned<OWNED> {
@@ -177,6 +192,11 @@ impl<const OWNED: bool> HeaderColumnIsOwned<OWNED> {
         None
     }
 }
+impl Clone for HeaderColumnIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for HeaderColumnIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -220,6 +240,11 @@ impl<const OWNED: bool> HeaderColumnSimpleIsOwned<OWNED> {
         None
     }
 }
+impl Clone for HeaderColumnSimpleIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<HeaderColumnSimpleIsOwned<OWNED>>
     for SettableHeaderColumnIsOwned<OWNED>
 {
@@ -254,6 +279,11 @@ impl<const OWNED: bool> HeaderCtrlIsOwned<OWNED> {
     // BLOCKED: fn wxHeaderCtrl1()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for HeaderCtrlIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<HeaderCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
@@ -324,6 +354,11 @@ impl<const OWNED: bool> HeaderCtrlEventIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for HeaderCtrlEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<HeaderCtrlEventIsOwned<OWNED>> for NotifyEventIsOwned<OWNED> {
@@ -399,6 +434,11 @@ impl<const OWNED: bool> HeaderCtrlSimpleIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for HeaderCtrlSimpleIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<HeaderCtrlSimpleIsOwned<OWNED>> for HeaderCtrlIsOwned<OWNED> {
     fn from(o: HeaderCtrlSimpleIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -447,6 +487,11 @@ impl<const OWNED: bool> HelpEventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxHelpEvent()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for HelpEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<HelpEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
@@ -522,6 +567,11 @@ impl<const OWNED: bool> HyperlinkCtrlIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for HyperlinkCtrlIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<HyperlinkCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
     fn from(o: HyperlinkCtrlIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -574,6 +624,11 @@ impl<const OWNED: bool> HyperlinkEventIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for HyperlinkEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<HyperlinkEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {

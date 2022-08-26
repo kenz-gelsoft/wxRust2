@@ -36,6 +36,11 @@ impl<const OWNED: bool> MaskIsOwned<OWNED> {
         None
     }
 }
+impl Clone for MaskIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<MaskIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
     fn from(o: MaskIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -67,6 +72,11 @@ impl<const OWNED: bool> MaximizeEventIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for MaximizeEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<MaximizeEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
@@ -122,6 +132,11 @@ impl<const OWNED: bool> MemoryDCIsOwned<OWNED> {
         None
     }
 }
+impl Clone for MemoryDCIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<MemoryDCIsOwned<OWNED>> for DCIsOwned<OWNED> {
     fn from(o: MemoryDCIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -170,6 +185,11 @@ impl<const OWNED: bool> MenuIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for MenuIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<MenuIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
     fn from(o: MenuIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -201,6 +221,11 @@ impl<const OWNED: bool> MenuBarIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxMenuBar1()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for MenuBarIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<MenuBarIsOwned<OWNED>> for WindowIsOwned<OWNED> {
@@ -235,6 +260,11 @@ impl<const OWNED: bool> MenuEventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxMenuEvent()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for MenuEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<MenuEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
@@ -302,6 +332,11 @@ impl<const OWNED: bool> MenuItemIsOwned<OWNED> {
         None
     }
 }
+impl Clone for MenuItemIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<MenuItemIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
     fn from(o: MenuItemIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -358,6 +393,11 @@ impl<const OWNED: bool> MessageDialogIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for MessageDialogIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<MessageDialogIsOwned<OWNED>> for DialogIsOwned<OWNED> {
     fn from(o: MessageDialogIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -406,6 +446,11 @@ impl<const OWNED: bool> MessageOutputMessageBoxIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for MessageOutputMessageBoxIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<MessageOutputMessageBoxIsOwned<OWNED>>
@@ -465,6 +510,11 @@ impl<const OWNED: bool> MiniFrameIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for MiniFrameIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<MiniFrameIsOwned<OWNED>> for FrameIsOwned<OWNED> {
@@ -547,6 +597,11 @@ impl<const OWNED: bool> MirrorDCIsOwned<OWNED> {
         None
     }
 }
+impl Clone for MirrorDCIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<MirrorDCIsOwned<OWNED>> for DCIsOwned<OWNED> {
     fn from(o: MirrorDCIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -597,6 +652,11 @@ impl<const OWNED: bool> MouseCaptureChangedEventIsOwned<OWNED> {
         None
     }
 }
+impl Clone for MouseCaptureChangedEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<MouseCaptureChangedEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
     fn from(o: MouseCaptureChangedEventIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -635,6 +695,11 @@ impl<const OWNED: bool> MouseCaptureLostEventIsOwned<OWNED> {
         None
     }
 }
+impl Clone for MouseCaptureLostEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<MouseCaptureLostEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
     fn from(o: MouseCaptureLostEventIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -669,6 +734,11 @@ impl<const OWNED: bool> MouseEventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxMouseEvent()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for MouseEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<MouseEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
@@ -708,6 +778,11 @@ impl<const OWNED: bool> MouseEventsManagerIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for MouseEventsManagerIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<MouseEventsManagerIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
     fn from(o: MouseEventsManagerIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -740,6 +815,11 @@ impl<const OWNED: bool> MoveEventIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for MoveEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<MoveEventIsOwned<OWNED>> for EventIsOwned<OWNED> {

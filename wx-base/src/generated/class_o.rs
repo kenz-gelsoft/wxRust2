@@ -19,6 +19,11 @@ impl<const OWNED: bool> ObjectIsOwned<OWNED> {
         None
     }
 }
+impl Clone for ObjectIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> DynamicCast for ObjectIsOwned<OWNED> {
     fn class_info() -> ClassInfoIsOwned<false> {
         unsafe { ClassInfoIsOwned::from_ptr(ffi::wxObject_CLASSINFO()) }
@@ -40,6 +45,11 @@ wx_class! { ObjectRefData =
 impl<const OWNED: bool> ObjectRefDataIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for ObjectRefDataIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for ObjectRefDataIsOwned<OWNED> {

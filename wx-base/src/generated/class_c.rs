@@ -11,6 +11,11 @@ impl<const OWNED: bool> ClassInfoIsOwned<OWNED> {
         None
     }
 }
+impl Clone for ClassInfoIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for ClassInfoIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -30,6 +35,11 @@ impl<const OWNED: bool> ClientDataIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for ClientDataIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for ClientDataIsOwned<OWNED> {

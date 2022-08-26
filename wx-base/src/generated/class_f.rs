@@ -23,6 +23,11 @@ impl<const OWNED: bool> FileNameIsOwned<OWNED> {
         None
     }
 }
+impl Clone for FileNameIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for FileNameIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {

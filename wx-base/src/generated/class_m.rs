@@ -10,6 +10,11 @@ impl<const OWNED: bool> MessageOutputIsOwned<OWNED> {
         None
     }
 }
+impl Clone for MessageOutputIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for MessageOutputIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {

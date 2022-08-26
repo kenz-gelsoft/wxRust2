@@ -13,6 +13,11 @@ impl<const OWNED: bool> UIActionSimulatorIsOwned<OWNED> {
         None
     }
 }
+impl Clone for UIActionSimulatorIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for UIActionSimulatorIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -37,6 +42,11 @@ impl<const OWNED: bool> URLDataObjectIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for URLDataObjectIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<URLDataObjectIsOwned<OWNED>> for DataObjectIsOwned<OWNED> {
@@ -66,6 +76,11 @@ impl<const OWNED: bool> UpdateUIEventIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for UpdateUIEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<UpdateUIEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {

@@ -40,6 +40,11 @@ impl<const OWNED: bool> BannerWindowIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for BannerWindowIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<BannerWindowIsOwned<OWNED>> for WindowIsOwned<OWNED> {
     fn from(o: BannerWindowIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -128,6 +133,11 @@ impl<const OWNED: bool> BitmapIsOwned<OWNED> {
         None
     }
 }
+impl Clone for BitmapIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<BitmapIsOwned<OWNED>> for GDIObjectIsOwned<OWNED> {
     fn from(o: BitmapIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -191,6 +201,11 @@ impl<const OWNED: bool> BitmapBundleIsOwned<OWNED> {
         None
     }
 }
+impl Clone for BitmapBundleIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for BitmapBundleIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -248,6 +263,11 @@ impl<const OWNED: bool> BitmapButtonIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for BitmapButtonIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<BitmapButtonIsOwned<OWNED>> for ButtonIsOwned<OWNED> {
@@ -338,6 +358,11 @@ impl<const OWNED: bool> BitmapComboBoxIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for BitmapComboBoxIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<BitmapComboBoxIsOwned<OWNED>> for ComboBoxIsOwned<OWNED> {
@@ -453,6 +478,11 @@ impl<const OWNED: bool> BitmapDataObjectIsOwned<OWNED> {
         None
     }
 }
+impl Clone for BitmapDataObjectIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<BitmapDataObjectIsOwned<OWNED>> for DataObjectSimpleIsOwned<OWNED> {
     fn from(o: BitmapDataObjectIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -483,6 +513,11 @@ impl<const OWNED: bool> BitmapHandlerIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for BitmapHandlerIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<BitmapHandlerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
@@ -554,6 +589,11 @@ impl<const OWNED: bool> BitmapToggleButtonIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for BitmapToggleButtonIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<BitmapToggleButtonIsOwned<OWNED>> for ToggleButtonIsOwned<OWNED> {
     fn from(o: BitmapToggleButtonIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -607,6 +647,11 @@ impl<const OWNED: bool> BookCtrlBaseIsOwned<OWNED> {
     // BLOCKED: fn wxBookCtrlBase1()
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for BookCtrlBaseIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<BookCtrlBaseIsOwned<OWNED>> for ControlIsOwned<OWNED> {
@@ -673,6 +718,11 @@ impl<const OWNED: bool> BookCtrlEventIsOwned<OWNED> {
         None
     }
 }
+impl Clone for BookCtrlEventIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<BookCtrlEventIsOwned<OWNED>> for NotifyEventIsOwned<OWNED> {
     fn from(o: BookCtrlEventIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -726,6 +776,11 @@ impl<const OWNED: bool> BoxSizerIsOwned<OWNED> {
         None
     }
 }
+impl<const OWNED: bool> Clone for BoxSizerIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<BoxSizerIsOwned<OWNED>> for SizerIsOwned<OWNED> {
     fn from(o: BoxSizerIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -770,6 +825,11 @@ impl<const OWNED: bool> BrushIsOwned<OWNED> {
         None
     }
 }
+impl Clone for BrushIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<BrushIsOwned<OWNED>> for GDIObjectIsOwned<OWNED> {
     fn from(o: BrushIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -801,6 +861,11 @@ wx_class! { BrushList =
 impl<const OWNED: bool> BrushListIsOwned<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for BrushListIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for BrushListIsOwned<OWNED> {
@@ -853,6 +918,11 @@ impl<const OWNED: bool> BufferedDCIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for BufferedDCIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<BufferedDCIsOwned<OWNED>> for MemoryDCIsOwned<OWNED> {
@@ -923,6 +993,11 @@ impl<const OWNED: bool> BufferedPaintDCIsOwned<OWNED> {
         None
     }
 }
+impl Clone for BufferedPaintDCIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> From<BufferedPaintDCIsOwned<OWNED>> for BufferedDCIsOwned<OWNED> {
     fn from(o: BufferedPaintDCIsOwned<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
@@ -975,6 +1050,11 @@ impl<const OWNED: bool> BusyCursorIsOwned<OWNED> {
         None
     }
 }
+impl Clone for BusyCursorIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
+    }
+}
 impl<const OWNED: bool> Drop for BusyCursorIsOwned<OWNED> {
     fn drop(&mut self) {
         if OWNED {
@@ -1005,6 +1085,11 @@ impl<const OWNED: bool> BusyInfoIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl Clone for BusyInfoIsOwned<false> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> Drop for BusyInfoIsOwned<OWNED> {
@@ -1058,6 +1143,11 @@ impl<const OWNED: bool> ButtonIsOwned<OWNED> {
     }
     pub fn none() -> Option<&'static Self> {
         None
+    }
+}
+impl<const OWNED: bool> Clone for ButtonIsOwned<OWNED> {
+    fn clone(&self) -> Self {
+        Self(self.0)
     }
 }
 impl<const OWNED: bool> From<ButtonIsOwned<OWNED>> for AnyButtonIsOwned<OWNED> {
