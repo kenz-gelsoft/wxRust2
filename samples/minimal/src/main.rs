@@ -24,10 +24,10 @@ const MINIMAL_ABOUT: c_int = wx::ID_ABOUT;
 fn main() {
     wx::App::run(|_| {
         let frame = MyFrame::new("Minimal wxRust App");
-        let weak_frame = frame.clone();
+        let frame_copy = frame.clone();
         if let Some(frame) = frame.base.get() {
             frame.bind(wx::RustEvent::Menu, move |event: &wx::CommandEvent| {
-                weak_frame.handle_menu(event)
+                frame_copy.handle_menu(event)
             });
             frame.show(true);
         }
