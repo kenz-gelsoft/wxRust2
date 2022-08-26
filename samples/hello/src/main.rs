@@ -24,12 +24,10 @@ fn main() {
         });
         // frame.centre(wx::BOTH);
         // frame.show(true);
-        unsafe {
-            let weak_frame = wx::WeakRef::<wx::Frame>::from(frame.as_ptr());
-            if let Some(f) = weak_frame.get() {
-                f.centre(wx::BOTH);
-                f.show(true);
-            }
+        let weak_frame = frame.to_weak_ref();
+        if let Some(f) = weak_frame.get() {
+            f.centre(wx::BOTH);
+            f.show(true);
         }
     });
 }
