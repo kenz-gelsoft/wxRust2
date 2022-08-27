@@ -4,7 +4,8 @@ use super::*;
 wxwidgets! {
     #[doc(alias = "wxKeyEvent")]
     #[doc(alias = "KeyEvent")]
-    class KeyEvent = KeyEventIsOwned<true>(wxKeyEvent) impl
+    class KeyEvent
+        = KeyEventIsOwned<true>(wxKeyEvent) impl
         KeyEventMethods,
         EventMethods,
         ObjectMethods

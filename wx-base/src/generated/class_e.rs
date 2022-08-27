@@ -4,7 +4,8 @@ use super::*;
 wxwidgets! {
     #[doc(alias = "wxEvent")]
     #[doc(alias = "Event")]
-    class Event = EventIsOwned<true>(wxEvent) impl
+    class Event
+        = EventIsOwned<true>(wxEvent) impl
         EventMethods,
         ObjectMethods
 }
@@ -41,7 +42,8 @@ impl<const OWNED: bool> Drop for EventIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxEvtHandler")]
     #[doc(alias = "EvtHandler")]
-    class EvtHandler = EvtHandlerIsOwned<true>(wxEvtHandler) impl
+    class EvtHandler
+        = EvtHandlerIsOwned<true>(wxEvtHandler) impl
         EvtHandlerMethods,
         ObjectMethods
 }

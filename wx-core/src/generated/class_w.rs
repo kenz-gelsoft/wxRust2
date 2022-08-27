@@ -4,7 +4,8 @@ use super::*;
 wxwidgets! {
     #[doc(alias = "wxWindow")]
     #[doc(alias = "Window")]
-    class Window = WindowIsOwned<true>(wxWindow) impl
+    class Window
+        = WindowIsOwned<true>(wxWindow) impl
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
@@ -62,7 +63,8 @@ impl<const OWNED: bool> DynamicCast for WindowIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxWindowCreateEvent")]
     #[doc(alias = "WindowCreateEvent")]
-    class WindowCreateEvent = WindowCreateEventIsOwned<true>(wxWindowCreateEvent) impl
+    class WindowCreateEvent
+        = WindowCreateEventIsOwned<true>(wxWindowCreateEvent) impl
         WindowCreateEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -119,7 +121,8 @@ impl<const OWNED: bool> Drop for WindowCreateEventIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxWindowDC")]
     #[doc(alias = "WindowDC")]
-    class WindowDC = WindowDCIsOwned<true>(wxWindowDC) impl
+    class WindowDC
+        = WindowDCIsOwned<true>(wxWindowDC) impl
         WindowDCMethods,
         DCMethods,
         ObjectMethods
@@ -170,7 +173,8 @@ impl<const OWNED: bool> Drop for WindowDCIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxWindowDestroyEvent")]
     #[doc(alias = "WindowDestroyEvent")]
-    class WindowDestroyEvent = WindowDestroyEventIsOwned<true>(wxWindowDestroyEvent) impl
+    class WindowDestroyEvent
+        = WindowDestroyEventIsOwned<true>(wxWindowDestroyEvent) impl
         WindowDestroyEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -227,7 +231,8 @@ impl<const OWNED: bool> Drop for WindowDestroyEventIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxWindowDisabler")]
     #[doc(alias = "WindowDisabler")]
-    class WindowDisabler = WindowDisablerIsOwned<true>(wxWindowDisabler) impl
+    class WindowDisabler
+        = WindowDisablerIsOwned<true>(wxWindowDisabler) impl
         WindowDisablerMethods
 }
 impl<const OWNED: bool> WindowDisablerIsOwned<OWNED> {
@@ -271,7 +276,8 @@ impl<const OWNED: bool> Drop for WindowDisablerIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxWizard")]
     #[doc(alias = "Wizard")]
-    class Wizard = WizardIsOwned<true>(wxWizard) impl
+    class Wizard
+        = WizardIsOwned<true>(wxWizard) impl
         WizardMethods,
         DialogMethods,
         TopLevelWindowMethods,
@@ -353,7 +359,8 @@ impl<const OWNED: bool> DynamicCast for WizardIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxWizardEvent")]
     #[doc(alias = "WizardEvent")]
-    class WizardEvent = WizardEventIsOwned<true>(wxWizardEvent) impl
+    class WizardEvent
+        = WizardEventIsOwned<true>(wxWizardEvent) impl
         WizardEventMethods,
         NotifyEventMethods,
         CommandEventMethods,
@@ -408,7 +415,8 @@ impl<const OWNED: bool> Drop for WizardEventIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxWizardPage")]
     #[doc(alias = "WizardPage")]
-    class WizardPage = WizardPageIsOwned<true>(wxWizardPage) impl
+    class WizardPage
+        = WizardPageIsOwned<true>(wxWizardPage) impl
         WizardPageMethods,
         PanelMethods,
         WindowMethods,
@@ -457,7 +465,8 @@ impl<const OWNED: bool> DynamicCast for WizardPageIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxWizardPageSimple")]
     #[doc(alias = "WizardPageSimple")]
-    class WizardPageSimple = WizardPageSimpleIsOwned<true>(wxWizardPageSimple) impl
+    class WizardPageSimple
+        = WizardPageSimpleIsOwned<true>(wxWizardPageSimple) impl
         WizardPageSimpleMethods,
         WizardPageMethods,
         PanelMethods,
@@ -541,7 +550,8 @@ impl<const OWNED: bool> DynamicCast for WizardPageSimpleIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxWrapSizer")]
     #[doc(alias = "WrapSizer")]
-    class WrapSizer = WrapSizerIsOwned<true>(wxWrapSizer) impl
+    class WrapSizer
+        = WrapSizerIsOwned<true>(wxWrapSizer) impl
         WrapSizerMethods,
         BoxSizerMethods,
         SizerMethods,

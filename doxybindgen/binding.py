@@ -56,8 +56,8 @@ class RustClassBinding:
             yield 'wxwidgets! {'
             for alias in (self.__model.name, unprefixed):
                 yield '    #[doc(alias = "%s")]' % (alias,)
-            yield '    class %s = %sIsOwned<true>(%s) impl' % (
-                unprefixed,
+            yield '    class %s' % (unprefixed,)
+            yield '        = %sIsOwned<true>(%s) impl' % (
                 unprefixed,
                 self.__model.name,
             )

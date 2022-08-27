@@ -4,7 +4,8 @@ use super::*;
 wxwidgets! {
     #[doc(alias = "wxStandardPaths")]
     #[doc(alias = "StandardPaths")]
-    class StandardPaths = StandardPathsIsOwned<true>(wxStandardPaths) impl
+    class StandardPaths
+        = StandardPathsIsOwned<true>(wxStandardPaths) impl
         StandardPathsMethods
 }
 impl<const OWNED: bool> StandardPathsIsOwned<OWNED> {

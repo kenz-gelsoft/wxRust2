@@ -4,7 +4,8 @@ use super::*;
 wxwidgets! {
     #[doc(alias = "wxMessageOutput")]
     #[doc(alias = "MessageOutput")]
-    class MessageOutput = MessageOutputIsOwned<true>(wxMessageOutput) impl
+    class MessageOutput
+        = MessageOutputIsOwned<true>(wxMessageOutput) impl
         MessageOutputMethods
 }
 impl<const OWNED: bool> MessageOutputIsOwned<OWNED> {

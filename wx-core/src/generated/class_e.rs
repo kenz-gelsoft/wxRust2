@@ -4,7 +4,8 @@ use super::*;
 wxwidgets! {
     #[doc(alias = "wxEditableListBox")]
     #[doc(alias = "EditableListBox")]
-    class EditableListBox = EditableListBoxIsOwned<true>(wxEditableListBox) impl
+    class EditableListBox
+        = EditableListBoxIsOwned<true>(wxEditableListBox) impl
         EditableListBoxMethods,
         PanelMethods,
         WindowMethods,
@@ -79,7 +80,8 @@ impl<const OWNED: bool> DynamicCast for EditableListBoxIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxEraseEvent")]
     #[doc(alias = "EraseEvent")]
-    class EraseEvent = EraseEventIsOwned<true>(wxEraseEvent) impl
+    class EraseEvent
+        = EraseEventIsOwned<true>(wxEraseEvent) impl
         EraseEventMethods,
         EventMethods,
         ObjectMethods
@@ -130,7 +132,8 @@ impl<const OWNED: bool> Drop for EraseEventIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxEventBlocker")]
     #[doc(alias = "EventBlocker")]
-    class EventBlocker = EventBlockerIsOwned<true>(wxEventBlocker) impl
+    class EventBlocker
+        = EventBlockerIsOwned<true>(wxEventBlocker) impl
         EventBlockerMethods,
         EvtHandlerMethods,
         ObjectMethods

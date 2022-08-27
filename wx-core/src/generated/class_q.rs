@@ -4,7 +4,8 @@ use super::*;
 wxwidgets! {
     #[doc(alias = "wxQuantize")]
     #[doc(alias = "Quantize")]
-    class Quantize = QuantizeIsOwned<true>(wxQuantize) impl
+    class Quantize
+        = QuantizeIsOwned<true>(wxQuantize) impl
         QuantizeMethods,
         ObjectMethods
 }
@@ -43,7 +44,8 @@ impl<const OWNED: bool> Drop for QuantizeIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxQueryLayoutInfoEvent")]
     #[doc(alias = "QueryLayoutInfoEvent")]
-    class QueryLayoutInfoEvent = QueryLayoutInfoEventIsOwned<true>(wxQueryLayoutInfoEvent) impl
+    class QueryLayoutInfoEvent
+        = QueryLayoutInfoEventIsOwned<true>(wxQueryLayoutInfoEvent) impl
         QueryLayoutInfoEventMethods,
         EventMethods,
         ObjectMethods

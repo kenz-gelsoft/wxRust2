@@ -4,7 +4,8 @@ use super::*;
 wxwidgets! {
     #[doc(alias = "wxAboutDialogInfo")]
     #[doc(alias = "AboutDialogInfo")]
-    class AboutDialogInfo = AboutDialogInfoIsOwned<true>(wxAboutDialogInfo) impl
+    class AboutDialogInfo
+        = AboutDialogInfoIsOwned<true>(wxAboutDialogInfo) impl
         AboutDialogInfoMethods
 }
 impl<const OWNED: bool> AboutDialogInfoIsOwned<OWNED> {
@@ -32,7 +33,8 @@ impl<const OWNED: bool> Drop for AboutDialogInfoIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxAcceleratorEntry")]
     #[doc(alias = "AcceleratorEntry")]
-    class AcceleratorEntry = AcceleratorEntryIsOwned<true>(wxAcceleratorEntry) impl
+    class AcceleratorEntry
+        = AcceleratorEntryIsOwned<true>(wxAcceleratorEntry) impl
         AcceleratorEntryMethods
 }
 impl<const OWNED: bool> AcceleratorEntryIsOwned<OWNED> {
@@ -79,7 +81,8 @@ impl<const OWNED: bool> Drop for AcceleratorEntryIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxAcceleratorTable")]
     #[doc(alias = "AcceleratorTable")]
-    class AcceleratorTable = AcceleratorTableIsOwned<true>(wxAcceleratorTable) impl
+    class AcceleratorTable
+        = AcceleratorTableIsOwned<true>(wxAcceleratorTable) impl
         AcceleratorTableMethods,
         ObjectMethods
 }
@@ -120,7 +123,8 @@ impl<const OWNED: bool> Drop for AcceleratorTableIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxActivateEvent")]
     #[doc(alias = "ActivateEvent")]
-    class ActivateEvent = ActivateEventIsOwned<true>(wxActivateEvent) impl
+    class ActivateEvent
+        = ActivateEventIsOwned<true>(wxActivateEvent) impl
         ActivateEventMethods,
         EventMethods,
         ObjectMethods
@@ -167,7 +171,8 @@ impl<const OWNED: bool> Drop for ActivateEventIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxAffineMatrix2D")]
     #[doc(alias = "AffineMatrix2D")]
-    class AffineMatrix2D = AffineMatrix2DIsOwned<true>(wxAffineMatrix2D) impl
+    class AffineMatrix2D
+        = AffineMatrix2DIsOwned<true>(wxAffineMatrix2D) impl
         AffineMatrix2DMethods
         // AffineMatrix2DBaseMethods
 }
@@ -216,7 +221,8 @@ impl<const OWNED: bool> AffineMatrix2DBaseMethods for AffineMatrix2DIsOwned<OWNE
 wxwidgets! {
     #[doc(alias = "wxAffineMatrix2DBase")]
     #[doc(alias = "AffineMatrix2DBase")]
-    class AffineMatrix2DBase = AffineMatrix2DBaseIsOwned<true>(wxAffineMatrix2DBase) impl
+    class AffineMatrix2DBase
+        = AffineMatrix2DBaseIsOwned<true>(wxAffineMatrix2DBase) impl
         AffineMatrix2DBaseMethods
 }
 impl<const OWNED: bool> AffineMatrix2DBaseIsOwned<OWNED> {
@@ -242,7 +248,8 @@ impl<const OWNED: bool> Drop for AffineMatrix2DBaseIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxAnimationCtrl")]
     #[doc(alias = "AnimationCtrl")]
-    class AnimationCtrl = AnimationCtrlIsOwned<true>(wxAnimationCtrl) impl
+    class AnimationCtrl
+        = AnimationCtrlIsOwned<true>(wxAnimationCtrl) impl
         AnimationCtrlMethods,
         ControlMethods,
         WindowMethods,
@@ -312,7 +319,8 @@ impl<const OWNED: bool> DynamicCast for AnimationCtrlIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxAnyButton")]
     #[doc(alias = "AnyButton")]
-    class AnyButton = AnyButtonIsOwned<true>(wxAnyButton) impl
+    class AnyButton
+        = AnyButtonIsOwned<true>(wxAnyButton) impl
         AnyButtonMethods,
         ControlMethods,
         WindowMethods,
@@ -362,7 +370,8 @@ impl<const OWNED: bool> DynamicCast for AnyButtonIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxArtProvider")]
     #[doc(alias = "ArtProvider")]
-    class ArtProvider = ArtProviderIsOwned<true>(wxArtProvider) impl
+    class ArtProvider
+        = ArtProviderIsOwned<true>(wxArtProvider) impl
         ArtProviderMethods,
         ObjectMethods
 }
@@ -398,7 +407,8 @@ impl<const OWNED: bool> Drop for ArtProviderIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxAutoBufferedPaintDC")]
     #[doc(alias = "AutoBufferedPaintDC")]
-    class AutoBufferedPaintDC = AutoBufferedPaintDCIsOwned<true>(wxAutoBufferedPaintDC) impl
+    class AutoBufferedPaintDC
+        = AutoBufferedPaintDCIsOwned<true>(wxAutoBufferedPaintDC) impl
         AutoBufferedPaintDCMethods,
         BufferedPaintDCMethods,
         BufferedDCMethods,
