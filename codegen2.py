@@ -179,6 +179,7 @@ pub trait WxRustMethods {
 '''
     else:
         yield '''\
+#[doc(no_inline)]
 pub use wx_base::methods::*;
 '''
     for i in initials:

@@ -1,3 +1,4 @@
+#[doc(no_inline)]
 pub use wx_base::methods::*;
 
 pub use super::methods_a::*;
