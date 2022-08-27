@@ -1,7 +1,7 @@
 use super::*;
 
 // wxClassInfo
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxClassInfo")]
     #[doc(alias = "ClassInfo")]
     type ClassInfo = ClassInfoIsOwned<true>(wxClassInfo) impl
@@ -27,7 +27,7 @@ impl<const OWNED: bool> Drop for ClassInfoIsOwned<OWNED> {
 }
 
 // wxClientData
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxClientData")]
     #[doc(alias = "ClientData")]
     type ClientData = ClientDataIsOwned<true>(wxClientData) impl

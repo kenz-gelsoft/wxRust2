@@ -1,7 +1,7 @@
 use super::*;
 
 // wxAboutDialogInfo
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxAboutDialogInfo")]
     #[doc(alias = "AboutDialogInfo")]
     type AboutDialogInfo = AboutDialogInfoIsOwned<true>(wxAboutDialogInfo) impl
@@ -29,7 +29,7 @@ impl<const OWNED: bool> Drop for AboutDialogInfoIsOwned<OWNED> {
 }
 
 // wxAcceleratorEntry
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxAcceleratorEntry")]
     #[doc(alias = "AcceleratorEntry")]
     type AcceleratorEntry = AcceleratorEntryIsOwned<true>(wxAcceleratorEntry) impl
@@ -76,7 +76,7 @@ impl<const OWNED: bool> Drop for AcceleratorEntryIsOwned<OWNED> {
 }
 
 // wxAcceleratorTable
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxAcceleratorTable")]
     #[doc(alias = "AcceleratorTable")]
     type AcceleratorTable = AcceleratorTableIsOwned<true>(wxAcceleratorTable) impl
@@ -117,7 +117,7 @@ impl<const OWNED: bool> Drop for AcceleratorTableIsOwned<OWNED> {
 }
 
 // wxActivateEvent
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxActivateEvent")]
     #[doc(alias = "ActivateEvent")]
     type ActivateEvent = ActivateEventIsOwned<true>(wxActivateEvent) impl
@@ -164,7 +164,7 @@ impl<const OWNED: bool> Drop for ActivateEventIsOwned<OWNED> {
 }
 
 // wxAffineMatrix2D
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxAffineMatrix2D")]
     #[doc(alias = "AffineMatrix2D")]
     type AffineMatrix2D = AffineMatrix2DIsOwned<true>(wxAffineMatrix2D) impl
@@ -213,7 +213,7 @@ impl<const OWNED: bool> AffineMatrix2DBaseMethods for AffineMatrix2DIsOwned<OWNE
 }
 
 // wxAffineMatrix2DBase
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxAffineMatrix2DBase")]
     #[doc(alias = "AffineMatrix2DBase")]
     type AffineMatrix2DBase = AffineMatrix2DBaseIsOwned<true>(wxAffineMatrix2DBase) impl
@@ -239,7 +239,7 @@ impl<const OWNED: bool> Drop for AffineMatrix2DBaseIsOwned<OWNED> {
 }
 
 // wxAnimationCtrl
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxAnimationCtrl")]
     #[doc(alias = "AnimationCtrl")]
     type AnimationCtrl = AnimationCtrlIsOwned<true>(wxAnimationCtrl) impl
@@ -309,7 +309,7 @@ impl<const OWNED: bool> DynamicCast for AnimationCtrlIsOwned<OWNED> {
 }
 
 // wxAnyButton
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxAnyButton")]
     #[doc(alias = "AnyButton")]
     type AnyButton = AnyButtonIsOwned<true>(wxAnyButton) impl
@@ -359,7 +359,7 @@ impl<const OWNED: bool> DynamicCast for AnyButtonIsOwned<OWNED> {
 }
 
 // wxArtProvider
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxArtProvider")]
     #[doc(alias = "ArtProvider")]
     type ArtProvider = ArtProviderIsOwned<true>(wxArtProvider) impl
@@ -395,7 +395,7 @@ impl<const OWNED: bool> Drop for ArtProviderIsOwned<OWNED> {
 }
 
 // wxAutoBufferedPaintDC
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxAutoBufferedPaintDC")]
     #[doc(alias = "AutoBufferedPaintDC")]
     type AutoBufferedPaintDC = AutoBufferedPaintDCIsOwned<true>(wxAutoBufferedPaintDC) impl

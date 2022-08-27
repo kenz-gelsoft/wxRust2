@@ -1,7 +1,7 @@
 use super::*;
 
 // wxRefCounter
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxRefCounter")]
     #[doc(alias = "RefCounter")]
     type RefCounter = RefCounterIsOwned<true>(wxRefCounter) impl

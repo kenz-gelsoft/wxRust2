@@ -232,7 +232,7 @@ impl App {
     }
 }
 
-wx_class! {
+wxwidgets! {
     type ArrayInt = ArrayIntIsOwned<true>(wxArrayInt) impl
         ArrayIntMethods
 }
@@ -249,7 +249,7 @@ impl<const OWNED: bool> Drop for ArrayIntIsOwned<OWNED> {
     }
 }
 
-wx_class! {
+wxwidgets! {
     type ArrayString = ArrayStringIsOwned<true>(wxArrayString) impl
         ArrayStringMethods
 }
@@ -267,7 +267,7 @@ impl<const OWNED: bool> Drop for ArrayStringIsOwned<OWNED> {
 }
 
 // (wx)String::const_iterator
-wx_class! {
+wxwidgets! {
     type StringConstIterator = StringConstIteratorIsOwned<true>(wxStringConstIterator) impl
         StringConstIteratorMethods
 }

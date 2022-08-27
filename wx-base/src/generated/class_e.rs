@@ -1,7 +1,7 @@
 use super::*;
 
 // wxEvent
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxEvent")]
     #[doc(alias = "Event")]
     type Event = EventIsOwned<true>(wxEvent) impl
@@ -38,7 +38,7 @@ impl<const OWNED: bool> Drop for EventIsOwned<OWNED> {
 }
 
 // wxEvtHandler
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxEvtHandler")]
     #[doc(alias = "EvtHandler")]
     type EvtHandler = EvtHandlerIsOwned<true>(wxEvtHandler) impl

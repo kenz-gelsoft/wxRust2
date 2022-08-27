@@ -1,7 +1,7 @@
 use super::*;
 
 // wxFileName
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxFileName")]
     #[doc(alias = "FileName")]
     type FileName = FileNameIsOwned<true>(wxFileName) impl

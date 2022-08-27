@@ -1,7 +1,7 @@
 use super::*;
 
 // wxDateTime
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxDateTime")]
     #[doc(alias = "DateTime")]
     type DateTime = DateTimeIsOwned<true>(wxDateTime) impl

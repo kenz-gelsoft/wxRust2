@@ -1,5 +1,5 @@
 #[macro_export]
-macro_rules! wx_class {
+macro_rules! wxwidgets {
     (
         $(#[doc(alias = $typeName:expr)])*
         type $type:ident = $typeIsOwned:ident<true>($wxType:ident) impl $($methods:ident),*

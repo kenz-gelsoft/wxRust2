@@ -1,7 +1,7 @@
 use super::*;
 
 // wxGBPosition
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGBPosition")]
     #[doc(alias = "GBPosition")]
     type GBPosition = GBPositionIsOwned<true>(wxGBPosition) impl
@@ -32,7 +32,7 @@ impl<const OWNED: bool> Drop for GBPositionIsOwned<OWNED> {
 }
 
 // wxGBSizerItem
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGBSizerItem")]
     #[doc(alias = "GBSizerItem")]
     type GBSizerItem = GBSizerItemIsOwned<true>(wxGBSizerItem) impl
@@ -153,7 +153,7 @@ impl<const OWNED: bool> Drop for GBSizerItemIsOwned<OWNED> {
 }
 
 // wxGBSpan
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGBSpan")]
     #[doc(alias = "GBSpan")]
     type GBSpan = GBSpanIsOwned<true>(wxGBSpan) impl
@@ -184,7 +184,7 @@ impl<const OWNED: bool> Drop for GBSpanIsOwned<OWNED> {
 }
 
 // wxGCDC
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGCDC")]
     #[doc(alias = "GCDC")]
     type GCDC = GCDCIsOwned<true>(wxGCDC) impl
@@ -256,7 +256,7 @@ impl<const OWNED: bool> Drop for GCDCIsOwned<OWNED> {
 }
 
 // wxGDIObject
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGDIObject")]
     #[doc(alias = "GDIObject")]
     type GDIObject = GDIObjectIsOwned<true>(wxGDIObject) impl
@@ -293,7 +293,7 @@ impl<const OWNED: bool> Drop for GDIObjectIsOwned<OWNED> {
 }
 
 // wxGIFHandler
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGIFHandler")]
     #[doc(alias = "GIFHandler")]
     type GIFHandler = GIFHandlerIsOwned<true>(wxGIFHandler) impl
@@ -338,7 +338,7 @@ impl<const OWNED: bool> Drop for GIFHandlerIsOwned<OWNED> {
 }
 
 // wxGauge
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGauge")]
     #[doc(alias = "Gauge")]
     type Gauge = GaugeIsOwned<true>(wxGauge) impl
@@ -413,7 +413,7 @@ impl<const OWNED: bool> DynamicCast for GaugeIsOwned<OWNED> {
 }
 
 // wxGenericAboutDialog
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGenericAboutDialog")]
     #[doc(alias = "GenericAboutDialog")]
     type GenericAboutDialog = GenericAboutDialogIsOwned<true>(wxGenericAboutDialog) impl
@@ -454,7 +454,7 @@ impl<const OWNED: bool> Drop for GenericAboutDialogIsOwned<OWNED> {
 }
 
 // wxGenericDirCtrl
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGenericDirCtrl")]
     #[doc(alias = "GenericDirCtrl")]
     type GenericDirCtrl = GenericDirCtrlIsOwned<true>(wxGenericDirCtrl) impl
@@ -541,7 +541,7 @@ impl<const OWNED: bool> DynamicCast for GenericDirCtrlIsOwned<OWNED> {
 }
 
 // wxGenericProgressDialog
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGenericProgressDialog")]
     #[doc(alias = "GenericProgressDialog")]
     type GenericProgressDialog = GenericProgressDialogIsOwned<true>(wxGenericProgressDialog) impl
@@ -621,7 +621,7 @@ impl<const OWNED: bool> DynamicCast for GenericProgressDialogIsOwned<OWNED> {
 }
 
 // wxGenericValidator
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGenericValidator")]
     #[doc(alias = "GenericValidator")]
     type GenericValidator = GenericValidatorIsOwned<true>(wxGenericValidator) impl
@@ -718,7 +718,7 @@ impl<const OWNED: bool> DynamicCast for GenericValidatorIsOwned<OWNED> {
 }
 
 // wxGraphicsBrush
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGraphicsBrush")]
     #[doc(alias = "GraphicsBrush")]
     type GraphicsBrush = GraphicsBrushIsOwned<true>(wxGraphicsBrush) impl
@@ -760,7 +760,7 @@ impl<const OWNED: bool> Drop for GraphicsBrushIsOwned<OWNED> {
 }
 
 // wxGraphicsContext
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGraphicsContext")]
     #[doc(alias = "GraphicsContext")]
     type GraphicsContext = GraphicsContextIsOwned<true>(wxGraphicsContext) impl
@@ -802,7 +802,7 @@ impl<const OWNED: bool> Drop for GraphicsContextIsOwned<OWNED> {
 }
 
 // wxGraphicsFont
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGraphicsFont")]
     #[doc(alias = "GraphicsFont")]
     type GraphicsFont = GraphicsFontIsOwned<true>(wxGraphicsFont) impl
@@ -844,7 +844,7 @@ impl<const OWNED: bool> Drop for GraphicsFontIsOwned<OWNED> {
 }
 
 // wxGraphicsGradientStop
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGraphicsGradientStop")]
     #[doc(alias = "GraphicsGradientStop")]
     type GraphicsGradientStop = GraphicsGradientStopIsOwned<true>(wxGraphicsGradientStop) impl
@@ -870,7 +870,7 @@ impl<const OWNED: bool> Drop for GraphicsGradientStopIsOwned<OWNED> {
 }
 
 // wxGraphicsGradientStops
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGraphicsGradientStops")]
     #[doc(alias = "GraphicsGradientStops")]
     type GraphicsGradientStops = GraphicsGradientStopsIsOwned<true>(wxGraphicsGradientStops) impl
@@ -896,7 +896,7 @@ impl<const OWNED: bool> Drop for GraphicsGradientStopsIsOwned<OWNED> {
 }
 
 // wxGraphicsMatrix
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGraphicsMatrix")]
     #[doc(alias = "GraphicsMatrix")]
     type GraphicsMatrix = GraphicsMatrixIsOwned<true>(wxGraphicsMatrix) impl
@@ -938,7 +938,7 @@ impl<const OWNED: bool> Drop for GraphicsMatrixIsOwned<OWNED> {
 }
 
 // wxGraphicsObject
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGraphicsObject")]
     #[doc(alias = "GraphicsObject")]
     type GraphicsObject = GraphicsObjectIsOwned<true>(wxGraphicsObject) impl
@@ -974,7 +974,7 @@ impl<const OWNED: bool> Drop for GraphicsObjectIsOwned<OWNED> {
 }
 
 // wxGraphicsPath
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGraphicsPath")]
     #[doc(alias = "GraphicsPath")]
     type GraphicsPath = GraphicsPathIsOwned<true>(wxGraphicsPath) impl
@@ -1016,7 +1016,7 @@ impl<const OWNED: bool> Drop for GraphicsPathIsOwned<OWNED> {
 }
 
 // wxGraphicsPen
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGraphicsPen")]
     #[doc(alias = "GraphicsPen")]
     type GraphicsPen = GraphicsPenIsOwned<true>(wxGraphicsPen) impl
@@ -1058,7 +1058,7 @@ impl<const OWNED: bool> Drop for GraphicsPenIsOwned<OWNED> {
 }
 
 // wxGraphicsRenderer
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGraphicsRenderer")]
     #[doc(alias = "GraphicsRenderer")]
     type GraphicsRenderer = GraphicsRendererIsOwned<true>(wxGraphicsRenderer) impl
@@ -1094,7 +1094,7 @@ impl<const OWNED: bool> Drop for GraphicsRendererIsOwned<OWNED> {
 }
 
 // wxGridBagSizer
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGridBagSizer")]
     #[doc(alias = "GridBagSizer")]
     type GridBagSizer = GridBagSizerIsOwned<true>(wxGridBagSizer) impl
@@ -1144,7 +1144,7 @@ impl<const OWNED: bool> DynamicCast for GridBagSizerIsOwned<OWNED> {
 }
 
 // wxGridEditorCreatedEvent
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGridEditorCreatedEvent")]
     #[doc(alias = "GridEditorCreatedEvent")]
     type GridEditorCreatedEvent = GridEditorCreatedEventIsOwned<true>(wxGridEditorCreatedEvent) impl
@@ -1196,7 +1196,7 @@ impl<const OWNED: bool> Drop for GridEditorCreatedEventIsOwned<OWNED> {
 }
 
 // wxGridEvent
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGridEvent")]
     #[doc(alias = "GridEvent")]
     type GridEvent = GridEventIsOwned<true>(wxGridEvent) impl
@@ -1254,7 +1254,7 @@ impl<const OWNED: bool> Drop for GridEventIsOwned<OWNED> {
 }
 
 // wxGridRangeSelectEvent
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGridRangeSelectEvent")]
     #[doc(alias = "GridRangeSelectEvent")]
     type GridRangeSelectEvent = GridRangeSelectEventIsOwned<true>(wxGridRangeSelectEvent) impl
@@ -1312,7 +1312,7 @@ impl<const OWNED: bool> Drop for GridRangeSelectEventIsOwned<OWNED> {
 }
 
 // wxGridSizeEvent
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGridSizeEvent")]
     #[doc(alias = "GridSizeEvent")]
     type GridSizeEvent = GridSizeEventIsOwned<true>(wxGridSizeEvent) impl
@@ -1370,7 +1370,7 @@ impl<const OWNED: bool> Drop for GridSizeEventIsOwned<OWNED> {
 }
 
 // wxGridSizer
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGridSizer")]
     #[doc(alias = "GridSizer")]
     type GridSizer = GridSizerIsOwned<true>(wxGridSizer) impl
@@ -1432,7 +1432,7 @@ impl<const OWNED: bool> DynamicCast for GridSizerIsOwned<OWNED> {
 }
 
 // wxGridTableBase
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGridTableBase")]
     #[doc(alias = "GridTableBase")]
     type GridTableBase = GridTableBaseIsOwned<true>(wxGridTableBase) impl
@@ -1469,7 +1469,7 @@ impl<const OWNED: bool> Drop for GridTableBaseIsOwned<OWNED> {
 }
 
 // wxGridUpdateLocker
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxGridUpdateLocker")]
     #[doc(alias = "GridUpdateLocker")]
     type GridUpdateLocker = GridUpdateLockerIsOwned<true>(wxGridUpdateLocker) impl

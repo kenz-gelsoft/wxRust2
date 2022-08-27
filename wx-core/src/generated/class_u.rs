@@ -1,7 +1,7 @@
 use super::*;
 
 // wxUIActionSimulator
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxUIActionSimulator")]
     #[doc(alias = "UIActionSimulator")]
     type UIActionSimulator = UIActionSimulatorIsOwned<true>(wxUIActionSimulator) impl
@@ -29,7 +29,7 @@ impl<const OWNED: bool> Drop for UIActionSimulatorIsOwned<OWNED> {
 }
 
 // wxURLDataObject
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxURLDataObject")]
     #[doc(alias = "URLDataObject")]
     type URLDataObject = URLDataObjectIsOwned<true>(wxURLDataObject) impl
@@ -67,7 +67,7 @@ impl<const OWNED: bool> Drop for URLDataObjectIsOwned<OWNED> {
 }
 
 // wxUpdateUIEvent
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxUpdateUIEvent")]
     #[doc(alias = "UpdateUIEvent")]
     type UpdateUIEvent = UpdateUIEventIsOwned<true>(wxUpdateUIEvent) impl

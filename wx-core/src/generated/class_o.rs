@@ -1,7 +1,7 @@
 use super::*;
 
 // wxOverlay
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxOverlay")]
     #[doc(alias = "Overlay")]
     type Overlay = OverlayIsOwned<true>(wxOverlay) impl
@@ -29,7 +29,7 @@ impl<const OWNED: bool> Drop for OverlayIsOwned<OWNED> {
 }
 
 // wxOwnerDrawnComboBox
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxOwnerDrawnComboBox")]
     #[doc(alias = "OwnerDrawnComboBox")]
     type OwnerDrawnComboBox = OwnerDrawnComboBoxIsOwned<true>(wxOwnerDrawnComboBox) impl

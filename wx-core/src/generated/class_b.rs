@@ -1,7 +1,7 @@
 use super::*;
 
 // wxBannerWindow
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxBannerWindow")]
     #[doc(alias = "BannerWindow")]
     type BannerWindow = BannerWindowIsOwned<true>(wxBannerWindow) impl
@@ -69,7 +69,7 @@ impl<const OWNED: bool> DynamicCast for BannerWindowIsOwned<OWNED> {
 }
 
 // wxBitmap
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxBitmap")]
     #[doc(alias = "Bitmap")]
     type Bitmap = BitmapIsOwned<true>(wxBitmap) impl
@@ -166,7 +166,7 @@ impl<const OWNED: bool> Drop for BitmapIsOwned<OWNED> {
 }
 
 // wxBitmapBundle
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxBitmapBundle")]
     #[doc(alias = "BitmapBundle")]
     type BitmapBundle = BitmapBundleIsOwned<true>(wxBitmapBundle) impl
@@ -221,7 +221,7 @@ impl<const OWNED: bool> Drop for BitmapBundleIsOwned<OWNED> {
 }
 
 // wxBitmapButton
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxBitmapButton")]
     #[doc(alias = "BitmapButton")]
     type BitmapButton = BitmapButtonIsOwned<true>(wxBitmapButton) impl
@@ -315,7 +315,7 @@ impl<const OWNED: bool> DynamicCast for BitmapButtonIsOwned<OWNED> {
 }
 
 // wxBitmapComboBox
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxBitmapComboBox")]
     #[doc(alias = "BitmapComboBox")]
     type BitmapComboBox = BitmapComboBoxIsOwned<true>(wxBitmapComboBox) impl
@@ -471,7 +471,7 @@ impl<const OWNED: bool> ComboBoxMethods for BitmapComboBoxIsOwned<OWNED> {
 }
 
 // wxBitmapDataObject
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxBitmapDataObject")]
     #[doc(alias = "BitmapDataObject")]
     type BitmapDataObject = BitmapDataObjectIsOwned<true>(wxBitmapDataObject) impl
@@ -514,7 +514,7 @@ impl<const OWNED: bool> Drop for BitmapDataObjectIsOwned<OWNED> {
 }
 
 // wxBitmapHandler
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxBitmapHandler")]
     #[doc(alias = "BitmapHandler")]
     type BitmapHandler = BitmapHandlerIsOwned<true>(wxBitmapHandler) impl
@@ -553,7 +553,7 @@ impl<const OWNED: bool> Drop for BitmapHandlerIsOwned<OWNED> {
 }
 
 // wxBitmapToggleButton
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxBitmapToggleButton")]
     #[doc(alias = "BitmapToggleButton")]
     type BitmapToggleButton = BitmapToggleButtonIsOwned<true>(wxBitmapToggleButton) impl
@@ -647,7 +647,7 @@ impl<const OWNED: bool> DynamicCast for BitmapToggleButtonIsOwned<OWNED> {
 }
 
 // wxBookCtrlBase
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxBookCtrlBase")]
     #[doc(alias = "BookCtrlBase")]
     type BookCtrlBase = BookCtrlBaseIsOwned<true>(wxBookCtrlBase) impl
@@ -722,7 +722,7 @@ impl<const OWNED: bool> WindowMethods for BookCtrlBaseIsOwned<OWNED> {
 }
 
 // wxBookCtrlEvent
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxBookCtrlEvent")]
     #[doc(alias = "BookCtrlEvent")]
     type BookCtrlEvent = BookCtrlEventIsOwned<true>(wxBookCtrlEvent) impl
@@ -782,7 +782,7 @@ impl<const OWNED: bool> CommandEventMethods for BookCtrlEventIsOwned<OWNED> {
 }
 
 // wxBoxSizer
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxBoxSizer")]
     #[doc(alias = "BoxSizer")]
     type BoxSizer = BoxSizerIsOwned<true>(wxBoxSizer) impl
@@ -820,7 +820,7 @@ impl<const OWNED: bool> DynamicCast for BoxSizerIsOwned<OWNED> {
 }
 
 // wxBrush
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxBrush")]
     #[doc(alias = "Brush")]
     type Brush = BrushIsOwned<true>(wxBrush) impl
@@ -878,7 +878,7 @@ impl<const OWNED: bool> Drop for BrushIsOwned<OWNED> {
 }
 
 // wxBrushList
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxBrushList")]
     #[doc(alias = "BrushList")]
     type BrushList = BrushListIsOwned<true>(wxBrushList) impl
@@ -903,7 +903,7 @@ impl<const OWNED: bool> Drop for BrushListIsOwned<OWNED> {
 }
 
 // wxBufferedDC
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxBufferedDC")]
     #[doc(alias = "BufferedDC")]
     type BufferedDC = BufferedDCIsOwned<true>(wxBufferedDC) impl
@@ -982,7 +982,7 @@ impl<const OWNED: bool> Drop for BufferedDCIsOwned<OWNED> {
 }
 
 // wxBufferedPaintDC
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxBufferedPaintDC")]
     #[doc(alias = "BufferedPaintDC")]
     type BufferedPaintDC = BufferedPaintDCIsOwned<true>(wxBufferedPaintDC) impl
@@ -1062,7 +1062,7 @@ impl<const OWNED: bool> Drop for BufferedPaintDCIsOwned<OWNED> {
 }
 
 // wxBusyCursor
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxBusyCursor")]
     #[doc(alias = "BusyCursor")]
     type BusyCursor = BusyCursorIsOwned<true>(wxBusyCursor) impl
@@ -1096,7 +1096,7 @@ impl<const OWNED: bool> Drop for BusyCursorIsOwned<OWNED> {
 }
 
 // wxBusyInfo
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxBusyInfo")]
     #[doc(alias = "BusyInfo")]
     type BusyInfo = BusyInfoIsOwned<true>(wxBusyInfo) impl
@@ -1135,7 +1135,7 @@ impl<const OWNED: bool> Drop for BusyInfoIsOwned<OWNED> {
 }
 
 // wxButton
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxButton")]
     #[doc(alias = "Button")]
     type Button = ButtonIsOwned<true>(wxButton) impl

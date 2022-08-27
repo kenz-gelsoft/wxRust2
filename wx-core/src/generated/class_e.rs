@@ -1,7 +1,7 @@
 use super::*;
 
 // wxEditableListBox
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxEditableListBox")]
     #[doc(alias = "EditableListBox")]
     type EditableListBox = EditableListBoxIsOwned<true>(wxEditableListBox) impl
@@ -76,7 +76,7 @@ impl<const OWNED: bool> DynamicCast for EditableListBoxIsOwned<OWNED> {
 }
 
 // wxEraseEvent
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxEraseEvent")]
     #[doc(alias = "EraseEvent")]
     type EraseEvent = EraseEventIsOwned<true>(wxEraseEvent) impl
@@ -127,7 +127,7 @@ impl<const OWNED: bool> Drop for EraseEventIsOwned<OWNED> {
 }
 
 // wxEventBlocker
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxEventBlocker")]
     #[doc(alias = "EventBlocker")]
     type EventBlocker = EventBlockerIsOwned<true>(wxEventBlocker) impl

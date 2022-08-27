@@ -1,7 +1,7 @@
 use super::*;
 
 // wxWindow
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxWindow")]
     #[doc(alias = "Window")]
     type Window = WindowIsOwned<true>(wxWindow) impl
@@ -59,7 +59,7 @@ impl<const OWNED: bool> DynamicCast for WindowIsOwned<OWNED> {
 }
 
 // wxWindowCreateEvent
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxWindowCreateEvent")]
     #[doc(alias = "WindowCreateEvent")]
     type WindowCreateEvent = WindowCreateEventIsOwned<true>(wxWindowCreateEvent) impl
@@ -116,7 +116,7 @@ impl<const OWNED: bool> Drop for WindowCreateEventIsOwned<OWNED> {
 }
 
 // wxWindowDC
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxWindowDC")]
     #[doc(alias = "WindowDC")]
     type WindowDC = WindowDCIsOwned<true>(wxWindowDC) impl
@@ -167,7 +167,7 @@ impl<const OWNED: bool> Drop for WindowDCIsOwned<OWNED> {
 }
 
 // wxWindowDestroyEvent
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxWindowDestroyEvent")]
     #[doc(alias = "WindowDestroyEvent")]
     type WindowDestroyEvent = WindowDestroyEventIsOwned<true>(wxWindowDestroyEvent) impl
@@ -224,7 +224,7 @@ impl<const OWNED: bool> Drop for WindowDestroyEventIsOwned<OWNED> {
 }
 
 // wxWindowDisabler
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxWindowDisabler")]
     #[doc(alias = "WindowDisabler")]
     type WindowDisabler = WindowDisablerIsOwned<true>(wxWindowDisabler) impl
@@ -268,7 +268,7 @@ impl<const OWNED: bool> Drop for WindowDisablerIsOwned<OWNED> {
 }
 
 // wxWizard
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxWizard")]
     #[doc(alias = "Wizard")]
     type Wizard = WizardIsOwned<true>(wxWizard) impl
@@ -350,7 +350,7 @@ impl<const OWNED: bool> DynamicCast for WizardIsOwned<OWNED> {
 }
 
 // wxWizardEvent
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxWizardEvent")]
     #[doc(alias = "WizardEvent")]
     type WizardEvent = WizardEventIsOwned<true>(wxWizardEvent) impl
@@ -405,7 +405,7 @@ impl<const OWNED: bool> Drop for WizardEventIsOwned<OWNED> {
 }
 
 // wxWizardPage
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxWizardPage")]
     #[doc(alias = "WizardPage")]
     type WizardPage = WizardPageIsOwned<true>(wxWizardPage) impl
@@ -454,7 +454,7 @@ impl<const OWNED: bool> DynamicCast for WizardPageIsOwned<OWNED> {
 }
 
 // wxWizardPageSimple
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxWizardPageSimple")]
     #[doc(alias = "WizardPageSimple")]
     type WizardPageSimple = WizardPageSimpleIsOwned<true>(wxWizardPageSimple) impl
@@ -538,7 +538,7 @@ impl<const OWNED: bool> DynamicCast for WizardPageSimpleIsOwned<OWNED> {
 }
 
 // wxWrapSizer
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxWrapSizer")]
     #[doc(alias = "WrapSizer")]
     type WrapSizer = WrapSizerIsOwned<true>(wxWrapSizer) impl

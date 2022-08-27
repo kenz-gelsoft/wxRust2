@@ -1,7 +1,7 @@
 use super::*;
 
 // wxStandardPaths
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxStandardPaths")]
     #[doc(alias = "StandardPaths")]
     type StandardPaths = StandardPathsIsOwned<true>(wxStandardPaths) impl

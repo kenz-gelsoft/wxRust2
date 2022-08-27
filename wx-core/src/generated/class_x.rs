@@ -1,7 +1,7 @@
 use super::*;
 
 // wxXPMHandler
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxXPMHandler")]
     #[doc(alias = "XPMHandler")]
     type XPMHandler = XPMHandlerIsOwned<true>(wxXPMHandler) impl

@@ -1,7 +1,7 @@
 use super::*;
 
 // wxMessageOutput
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxMessageOutput")]
     #[doc(alias = "MessageOutput")]
     type MessageOutput = MessageOutputIsOwned<true>(wxMessageOutput) impl

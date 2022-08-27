@@ -53,7 +53,7 @@ class RustClassBinding:
                 yield line
         else:
             unprefixed = self.__model.unprefixed()
-            yield 'wx_class! {'
+            yield 'wxwidgets! {'
             for alias in (self.__model.name, unprefixed):
                 yield '    #[doc(alias = "%s")]' % (alias,)
             yield '    type %s = %sIsOwned<true>(%s) impl' % (

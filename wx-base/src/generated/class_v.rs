@@ -1,7 +1,7 @@
 use super::*;
 
 // wxVariantData
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxVariantData")]
     #[doc(alias = "VariantData")]
     type VariantData = VariantDataIsOwned<true>(wxVariantData) impl

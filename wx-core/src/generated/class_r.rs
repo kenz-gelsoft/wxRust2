@@ -1,7 +1,7 @@
 use super::*;
 
 // wxRadioBox
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxRadioBox")]
     #[doc(alias = "RadioBox")]
     type RadioBox = RadioBoxIsOwned<true>(wxRadioBox) impl
@@ -103,7 +103,7 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for RadioBoxIsOwned<OWNED>
 }
 
 // wxRadioButton
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxRadioButton")]
     #[doc(alias = "RadioButton")]
     type RadioButton = RadioButtonIsOwned<true>(wxRadioButton) impl
@@ -180,7 +180,7 @@ impl<const OWNED: bool> DynamicCast for RadioButtonIsOwned<OWNED> {
 }
 
 // wxRealPoint
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxRealPoint")]
     #[doc(alias = "RealPoint")]
     type RealPoint = RealPointIsOwned<true>(wxRealPoint) impl
@@ -217,7 +217,7 @@ impl<const OWNED: bool> Drop for RealPointIsOwned<OWNED> {
 }
 
 // wxRearrangeCtrl
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxRearrangeCtrl")]
     #[doc(alias = "RearrangeCtrl")]
     type RearrangeCtrl = RearrangeCtrlIsOwned<true>(wxRearrangeCtrl) impl
@@ -302,7 +302,7 @@ impl<const OWNED: bool> DynamicCast for RearrangeCtrlIsOwned<OWNED> {
 }
 
 // wxRearrangeDialog
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxRearrangeDialog")]
     #[doc(alias = "RearrangeDialog")]
     type RearrangeDialog = RearrangeDialogIsOwned<true>(wxRearrangeDialog) impl
@@ -392,7 +392,7 @@ impl<const OWNED: bool> DynamicCast for RearrangeDialogIsOwned<OWNED> {
 }
 
 // wxRearrangeList
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxRearrangeList")]
     #[doc(alias = "RearrangeList")]
     type RearrangeList = RearrangeListIsOwned<true>(wxRearrangeList) impl
@@ -500,7 +500,7 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for RearrangeListIsOwned<O
 }
 
 // wxRect
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxRect")]
     #[doc(alias = "Rect")]
     type Rect = RectIsOwned<true>(wxRect) impl
@@ -557,7 +557,7 @@ impl<const OWNED: bool> Drop for RectIsOwned<OWNED> {
 }
 
 // wxRegion
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxRegion")]
     #[doc(alias = "Region")]
     type Region = RegionIsOwned<true>(wxRegion) impl
@@ -645,7 +645,7 @@ impl<const OWNED: bool> Drop for RegionIsOwned<OWNED> {
 }
 
 // wxRegionIterator
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxRegionIterator")]
     #[doc(alias = "RegionIterator")]
     type RegionIterator = RegionIteratorIsOwned<true>(wxRegionIterator) impl
@@ -690,7 +690,7 @@ impl<const OWNED: bool> Drop for RegionIteratorIsOwned<OWNED> {
 }
 
 // wxRendererNative
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxRendererNative")]
     #[doc(alias = "RendererNative")]
     type RendererNative = RendererNativeIsOwned<true>(wxRendererNative) impl
@@ -715,7 +715,7 @@ impl<const OWNED: bool> Drop for RendererNativeIsOwned<OWNED> {
 }
 
 // wxRichToolTip
-wx_class! {
+wxwidgets! {
     #[doc(alias = "wxRichToolTip")]
     #[doc(alias = "RichToolTip")]
     type RichToolTip = RichToolTipIsOwned<true>(wxRichToolTip) impl
