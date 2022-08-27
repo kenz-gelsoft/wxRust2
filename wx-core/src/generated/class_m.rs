@@ -1,8 +1,10 @@
 use super::*;
 
 // wxMask
-wx_class! { Mask =
-    MaskIsOwned<true>(wxMask) impl
+wx_class! {
+    #[doc(alias = "wxMask")]
+    #[doc(alias = "Mask")]
+    type Mask = MaskIsOwned<true>(wxMask) impl
         MaskMethods,
         ObjectMethods
 }
@@ -60,8 +62,10 @@ impl<const OWNED: bool> Drop for MaskIsOwned<OWNED> {
 }
 
 // wxMaximizeEvent
-wx_class! { MaximizeEvent =
-    MaximizeEventIsOwned<true>(wxMaximizeEvent) impl
+wx_class! {
+    #[doc(alias = "wxMaximizeEvent")]
+    #[doc(alias = "MaximizeEvent")]
+    type MaximizeEvent = MaximizeEventIsOwned<true>(wxMaximizeEvent) impl
         MaximizeEventMethods,
         EventMethods,
         ObjectMethods
@@ -103,8 +107,10 @@ impl<const OWNED: bool> Drop for MaximizeEventIsOwned<OWNED> {
 }
 
 // wxMemoryDC
-wx_class! { MemoryDC =
-    MemoryDCIsOwned<true>(wxMemoryDC) impl
+wx_class! {
+    #[doc(alias = "wxMemoryDC")]
+    #[doc(alias = "MemoryDC")]
+    type MemoryDC = MemoryDCIsOwned<true>(wxMemoryDC) impl
         MemoryDCMethods,
         DCMethods,
         ObjectMethods
@@ -161,8 +167,10 @@ impl<const OWNED: bool> Drop for MemoryDCIsOwned<OWNED> {
 }
 
 // wxMenu
-wx_class! { Menu =
-    MenuIsOwned<true>(wxMenu) impl
+wx_class! {
+    #[doc(alias = "wxMenu")]
+    #[doc(alias = "Menu")]
+    type Menu = MenuIsOwned<true>(wxMenu) impl
         MenuMethods,
         EvtHandlerMethods,
         ObjectMethods
@@ -207,8 +215,10 @@ impl<const OWNED: bool> DynamicCast for MenuIsOwned<OWNED> {
 }
 
 // wxMenuBar
-wx_class! { MenuBar =
-    MenuBarIsOwned<true>(wxMenuBar) impl
+wx_class! {
+    #[doc(alias = "wxMenuBar")]
+    #[doc(alias = "MenuBar")]
+    type MenuBar = MenuBarIsOwned<true>(wxMenuBar) impl
         MenuBarMethods,
         WindowMethods,
         EvtHandlerMethods,
@@ -250,8 +260,10 @@ impl<const OWNED: bool> DynamicCast for MenuBarIsOwned<OWNED> {
 }
 
 // wxMenuEvent
-wx_class! { MenuEvent =
-    MenuEventIsOwned<true>(wxMenuEvent) impl
+wx_class! {
+    #[doc(alias = "wxMenuEvent")]
+    #[doc(alias = "MenuEvent")]
+    type MenuEvent = MenuEventIsOwned<true>(wxMenuEvent) impl
         MenuEventMethods,
         EventMethods,
         ObjectMethods
@@ -291,8 +303,10 @@ impl<const OWNED: bool> Drop for MenuEventIsOwned<OWNED> {
 }
 
 // wxMenuItem
-wx_class! { MenuItem =
-    MenuItemIsOwned<true>(wxMenuItem) impl
+wx_class! {
+    #[doc(alias = "wxMenuItem")]
+    #[doc(alias = "MenuItem")]
+    type MenuItem = MenuItemIsOwned<true>(wxMenuItem) impl
         MenuItemMethods,
         ObjectMethods
 }
@@ -356,8 +370,10 @@ impl<const OWNED: bool> Drop for MenuItemIsOwned<OWNED> {
 }
 
 // wxMessageDialog
-wx_class! { MessageDialog =
-    MessageDialogIsOwned<true>(wxMessageDialog) impl
+wx_class! {
+    #[doc(alias = "wxMessageDialog")]
+    #[doc(alias = "MessageDialog")]
+    type MessageDialog = MessageDialogIsOwned<true>(wxMessageDialog) impl
         MessageDialogMethods,
         DialogMethods,
         TopLevelWindowMethods,
@@ -435,8 +451,10 @@ impl<const OWNED: bool> DynamicCast for MessageDialogIsOwned<OWNED> {
 }
 
 // wxMessageOutputMessageBox
-wx_class! { MessageOutputMessageBox =
-    MessageOutputMessageBoxIsOwned<true>(wxMessageOutputMessageBox) impl
+wx_class! {
+    #[doc(alias = "wxMessageOutputMessageBox")]
+    #[doc(alias = "MessageOutputMessageBox")]
+    type MessageOutputMessageBox = MessageOutputMessageBoxIsOwned<true>(wxMessageOutputMessageBox) impl
         MessageOutputMessageBoxMethods,
         MessageOutputMethods
 }
@@ -469,8 +487,10 @@ impl<const OWNED: bool> Drop for MessageOutputMessageBoxIsOwned<OWNED> {
 }
 
 // wxMiniFrame
-wx_class! { MiniFrame =
-    MiniFrameIsOwned<true>(wxMiniFrame) impl
+wx_class! {
+    #[doc(alias = "wxMiniFrame")]
+    #[doc(alias = "MiniFrame")]
+    type MiniFrame = MiniFrameIsOwned<true>(wxMiniFrame) impl
         MiniFrameMethods,
         FrameMethods,
         // TopLevelWindowMethods,
@@ -580,8 +600,10 @@ impl<const OWNED: bool> TopLevelWindowMethods for MiniFrameIsOwned<OWNED> {
 }
 
 // wxMirrorDC
-wx_class! { MirrorDC =
-    MirrorDCIsOwned<true>(wxMirrorDC) impl
+wx_class! {
+    #[doc(alias = "wxMirrorDC")]
+    #[doc(alias = "MirrorDC")]
+    type MirrorDC = MirrorDCIsOwned<true>(wxMirrorDC) impl
         MirrorDCMethods,
         DCMethods,
         ObjectMethods
@@ -626,8 +648,10 @@ impl<const OWNED: bool> Drop for MirrorDCIsOwned<OWNED> {
 }
 
 // wxMouseCaptureChangedEvent
-wx_class! { MouseCaptureChangedEvent =
-    MouseCaptureChangedEventIsOwned<true>(wxMouseCaptureChangedEvent) impl
+wx_class! {
+    #[doc(alias = "wxMouseCaptureChangedEvent")]
+    #[doc(alias = "MouseCaptureChangedEvent")]
+    type MouseCaptureChangedEvent = MouseCaptureChangedEventIsOwned<true>(wxMouseCaptureChangedEvent) impl
         MouseCaptureChangedEventMethods,
         EventMethods,
         ObjectMethods
@@ -681,8 +705,10 @@ impl<const OWNED: bool> Drop for MouseCaptureChangedEventIsOwned<OWNED> {
 }
 
 // wxMouseCaptureLostEvent
-wx_class! { MouseCaptureLostEvent =
-    MouseCaptureLostEventIsOwned<true>(wxMouseCaptureLostEvent) impl
+wx_class! {
+    #[doc(alias = "wxMouseCaptureLostEvent")]
+    #[doc(alias = "MouseCaptureLostEvent")]
+    type MouseCaptureLostEvent = MouseCaptureLostEventIsOwned<true>(wxMouseCaptureLostEvent) impl
         MouseCaptureLostEventMethods,
         EventMethods,
         ObjectMethods
@@ -724,8 +750,10 @@ impl<const OWNED: bool> Drop for MouseCaptureLostEventIsOwned<OWNED> {
 }
 
 // wxMouseEvent
-wx_class! { MouseEvent =
-    MouseEventIsOwned<true>(wxMouseEvent) impl
+wx_class! {
+    #[doc(alias = "wxMouseEvent")]
+    #[doc(alias = "MouseEvent")]
+    type MouseEvent = MouseEventIsOwned<true>(wxMouseEvent) impl
         MouseEventMethods,
         EventMethods,
         ObjectMethods
@@ -765,8 +793,10 @@ impl<const OWNED: bool> Drop for MouseEventIsOwned<OWNED> {
 }
 
 // wxMouseEventsManager
-wx_class! { MouseEventsManager =
-    MouseEventsManagerIsOwned<true>(wxMouseEventsManager) impl
+wx_class! {
+    #[doc(alias = "wxMouseEventsManager")]
+    #[doc(alias = "MouseEventsManager")]
+    type MouseEventsManager = MouseEventsManagerIsOwned<true>(wxMouseEventsManager) impl
         MouseEventsManagerMethods,
         EvtHandlerMethods,
         ObjectMethods
@@ -800,8 +830,10 @@ impl<const OWNED: bool> DynamicCast for MouseEventsManagerIsOwned<OWNED> {
 }
 
 // wxMoveEvent
-wx_class! { MoveEvent =
-    MoveEventIsOwned<true>(wxMoveEvent) impl
+wx_class! {
+    #[doc(alias = "wxMoveEvent")]
+    #[doc(alias = "MoveEvent")]
+    type MoveEvent = MoveEventIsOwned<true>(wxMoveEvent) impl
         MoveEventMethods,
         EventMethods,
         ObjectMethods

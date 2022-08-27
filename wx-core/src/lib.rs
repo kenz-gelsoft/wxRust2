@@ -2360,9 +2360,9 @@ impl<const OWNED: bool> Default for ValidatorIsOwned<OWNED> {
     }
 }
 
-wx_class! { SizerItemList =
-    SizerItemListIsOwned<true>(wxSizerItemList) impl
-    SizerItemListMethods
+wx_class! {
+    type SizerItemList = SizerItemListIsOwned<true>(wxSizerItemList) impl
+        SizerItemListMethods
 }
 impl<const OWNED: bool> SizerItemListIsOwned<OWNED> {
     pub fn new() -> Self {
@@ -2377,8 +2377,8 @@ impl<const OWNED: bool> Drop for SizerItemListIsOwned<OWNED> {
     }
 }
 
-wx_class! { WindowList =
-    WindowListIsOwned<true>(wxWindowList) impl
+wx_class! {
+    type WindowList = WindowListIsOwned<true>(wxWindowList) impl
         WindowListMethods
 }
 impl<const OWNED: bool> WindowListIsOwned<OWNED> {

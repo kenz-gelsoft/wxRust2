@@ -1,8 +1,10 @@
 use super::*;
 
 // wxJPEGHandler
-wx_class! { JPEGHandler =
-    JPEGHandlerIsOwned<true>(wxJPEGHandler) impl
+wx_class! {
+    #[doc(alias = "wxJPEGHandler")]
+    #[doc(alias = "JPEGHandler")]
+    type JPEGHandler = JPEGHandlerIsOwned<true>(wxJPEGHandler) impl
         JPEGHandlerMethods,
         // ImageHandlerMethods,
         ObjectMethods
@@ -47,8 +49,10 @@ impl<const OWNED: bool> ImageHandlerMethods for JPEGHandlerIsOwned<OWNED> {
 }
 
 // wxJoystickEvent
-wx_class! { JoystickEvent =
-    JoystickEventIsOwned<true>(wxJoystickEvent) impl
+wx_class! {
+    #[doc(alias = "wxJoystickEvent")]
+    #[doc(alias = "JoystickEvent")]
+    type JoystickEvent = JoystickEventIsOwned<true>(wxJoystickEvent) impl
         JoystickEventMethods,
         EventMethods,
         ObjectMethods

@@ -1,8 +1,10 @@
 use super::*;
 
 // wxStandardPaths
-wx_class! { StandardPaths =
-    StandardPathsIsOwned<true>(wxStandardPaths) impl
+wx_class! {
+    #[doc(alias = "wxStandardPaths")]
+    #[doc(alias = "StandardPaths")]
+    type StandardPaths = StandardPathsIsOwned<true>(wxStandardPaths) impl
         StandardPathsMethods
 }
 impl<const OWNED: bool> StandardPathsIsOwned<OWNED> {

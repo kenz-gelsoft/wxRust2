@@ -1,8 +1,10 @@
 use super::*;
 
 // wxObject
-wx_class! { Object =
-    ObjectIsOwned<true>(wxObject) impl
+wx_class! {
+    #[doc(alias = "wxObject")]
+    #[doc(alias = "Object")]
+    type Object = ObjectIsOwned<true>(wxObject) impl
         ObjectMethods
 }
 impl<const OWNED: bool> ObjectIsOwned<OWNED> {
@@ -38,8 +40,10 @@ impl<const OWNED: bool> Drop for ObjectIsOwned<OWNED> {
 }
 
 // wxObjectRefData
-wx_class! { ObjectRefData =
-    ObjectRefDataIsOwned<true>(wxObjectRefData) impl
+wx_class! {
+    #[doc(alias = "wxObjectRefData")]
+    #[doc(alias = "ObjectRefData")]
+    type ObjectRefData = ObjectRefDataIsOwned<true>(wxObjectRefData) impl
         ObjectRefDataMethods
 }
 impl<const OWNED: bool> ObjectRefDataIsOwned<OWNED> {

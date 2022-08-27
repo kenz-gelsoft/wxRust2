@@ -1,8 +1,10 @@
 use super::*;
 
 // wxQuantize
-wx_class! { Quantize =
-    QuantizeIsOwned<true>(wxQuantize) impl
+wx_class! {
+    #[doc(alias = "wxQuantize")]
+    #[doc(alias = "Quantize")]
+    type Quantize = QuantizeIsOwned<true>(wxQuantize) impl
         QuantizeMethods,
         ObjectMethods
 }
@@ -38,8 +40,10 @@ impl<const OWNED: bool> Drop for QuantizeIsOwned<OWNED> {
 }
 
 // wxQueryLayoutInfoEvent
-wx_class! { QueryLayoutInfoEvent =
-    QueryLayoutInfoEventIsOwned<true>(wxQueryLayoutInfoEvent) impl
+wx_class! {
+    #[doc(alias = "wxQueryLayoutInfoEvent")]
+    #[doc(alias = "QueryLayoutInfoEvent")]
+    type QueryLayoutInfoEvent = QueryLayoutInfoEventIsOwned<true>(wxQueryLayoutInfoEvent) impl
         QueryLayoutInfoEventMethods,
         EventMethods,
         ObjectMethods

@@ -1,8 +1,10 @@
 use super::*;
 
 // wxVListBox
-wx_class! { VListBox =
-    VListBoxIsOwned<true>(wxVListBox) impl
+wx_class! {
+    #[doc(alias = "wxVListBox")]
+    #[doc(alias = "VListBox")]
+    type VListBox = VListBoxIsOwned<true>(wxVListBox) impl
         VListBoxMethods,
         VScrolledWindowMethods,
         PanelMethods,
@@ -77,8 +79,10 @@ impl<const OWNED: bool> WindowMethods for VListBoxIsOwned<OWNED> {
 }
 
 // wxVScrolledWindow
-wx_class! { VScrolledWindow =
-    VScrolledWindowIsOwned<true>(wxVScrolledWindow) impl
+wx_class! {
+    #[doc(alias = "wxVScrolledWindow")]
+    #[doc(alias = "VScrolledWindow")]
+    type VScrolledWindow = VScrolledWindowIsOwned<true>(wxVScrolledWindow) impl
         VScrolledWindowMethods,
         PanelMethods,
         // WindowMethods,
@@ -147,8 +151,10 @@ impl<const OWNED: bool> WindowMethods for VScrolledWindowIsOwned<OWNED> {
 }
 
 // wxValidator
-wx_class! { Validator =
-    ValidatorIsOwned<true>(wxValidator) impl
+wx_class! {
+    #[doc(alias = "wxValidator")]
+    #[doc(alias = "Validator")]
+    type Validator = ValidatorIsOwned<true>(wxValidator) impl
         ValidatorMethods,
         EvtHandlerMethods,
         ObjectMethods

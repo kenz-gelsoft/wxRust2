@@ -1,8 +1,10 @@
 use super::*;
 
 // wxCalculateLayoutEvent
-wx_class! { CalculateLayoutEvent =
-    CalculateLayoutEventIsOwned<true>(wxCalculateLayoutEvent) impl
+wx_class! {
+    #[doc(alias = "wxCalculateLayoutEvent")]
+    #[doc(alias = "CalculateLayoutEvent")]
+    type CalculateLayoutEvent = CalculateLayoutEventIsOwned<true>(wxCalculateLayoutEvent) impl
         CalculateLayoutEventMethods,
         EventMethods,
         ObjectMethods
@@ -44,8 +46,10 @@ impl<const OWNED: bool> Drop for CalculateLayoutEventIsOwned<OWNED> {
 }
 
 // wxCalendarCtrl
-wx_class! { CalendarCtrl =
-    CalendarCtrlIsOwned<true>(wxCalendarCtrl) impl
+wx_class! {
+    #[doc(alias = "wxCalendarCtrl")]
+    #[doc(alias = "CalendarCtrl")]
+    type CalendarCtrl = CalendarCtrlIsOwned<true>(wxCalendarCtrl) impl
         CalendarCtrlMethods,
         ControlMethods,
         WindowMethods,
@@ -116,8 +120,10 @@ impl<const OWNED: bool> DynamicCast for CalendarCtrlIsOwned<OWNED> {
 }
 
 // wxCalendarDateAttr
-wx_class! { CalendarDateAttr =
-    CalendarDateAttrIsOwned<true>(wxCalendarDateAttr) impl
+wx_class! {
+    #[doc(alias = "wxCalendarDateAttr")]
+    #[doc(alias = "CalendarDateAttr")]
+    type CalendarDateAttr = CalendarDateAttrIsOwned<true>(wxCalendarDateAttr) impl
         CalendarDateAttrMethods
 }
 impl<const OWNED: bool> CalendarDateAttrIsOwned<OWNED> {
@@ -141,8 +147,10 @@ impl<const OWNED: bool> Drop for CalendarDateAttrIsOwned<OWNED> {
 }
 
 // wxCalendarEvent
-wx_class! { CalendarEvent =
-    CalendarEventIsOwned<true>(wxCalendarEvent) impl
+wx_class! {
+    #[doc(alias = "wxCalendarEvent")]
+    #[doc(alias = "CalendarEvent")]
+    type CalendarEvent = CalendarEventIsOwned<true>(wxCalendarEvent) impl
         CalendarEventMethods,
         DateEventMethods,
         CommandEventMethods,
@@ -197,8 +205,10 @@ impl<const OWNED: bool> Drop for CalendarEventIsOwned<OWNED> {
 }
 
 // wxCaret
-wx_class! { Caret =
-    CaretIsOwned<true>(wxCaret) impl
+wx_class! {
+    #[doc(alias = "wxCaret")]
+    #[doc(alias = "Caret")]
+    type Caret = CaretIsOwned<true>(wxCaret) impl
         CaretMethods
 }
 impl<const OWNED: bool> CaretIsOwned<OWNED> {
@@ -249,8 +259,10 @@ impl<const OWNED: bool> Drop for CaretIsOwned<OWNED> {
 }
 
 // wxCheckBox
-wx_class! { CheckBox =
-    CheckBoxIsOwned<true>(wxCheckBox) impl
+wx_class! {
+    #[doc(alias = "wxCheckBox")]
+    #[doc(alias = "CheckBox")]
+    type CheckBox = CheckBoxIsOwned<true>(wxCheckBox) impl
         CheckBoxMethods,
         ControlMethods,
         WindowMethods,
@@ -324,8 +336,10 @@ impl<const OWNED: bool> DynamicCast for CheckBoxIsOwned<OWNED> {
 }
 
 // wxCheckListBox
-wx_class! { CheckListBox =
-    CheckListBoxIsOwned<true>(wxCheckListBox) impl
+wx_class! {
+    #[doc(alias = "wxCheckListBox")]
+    #[doc(alias = "CheckListBox")]
+    type CheckListBox = CheckListBoxIsOwned<true>(wxCheckListBox) impl
         CheckListBoxMethods,
         // ListBoxMethods,
         ControlMethods,
@@ -466,8 +480,10 @@ impl<const OWNED: bool> ListBoxMethods for CheckListBoxIsOwned<OWNED> {
 }
 
 // wxChildFocusEvent
-wx_class! { ChildFocusEvent =
-    ChildFocusEventIsOwned<true>(wxChildFocusEvent) impl
+wx_class! {
+    #[doc(alias = "wxChildFocusEvent")]
+    #[doc(alias = "ChildFocusEvent")]
+    type ChildFocusEvent = ChildFocusEventIsOwned<true>(wxChildFocusEvent) impl
         ChildFocusEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -521,8 +537,10 @@ impl<const OWNED: bool> Drop for ChildFocusEventIsOwned<OWNED> {
 }
 
 // wxChoice
-wx_class! { Choice =
-    ChoiceIsOwned<true>(wxChoice) impl
+wx_class! {
+    #[doc(alias = "wxChoice")]
+    #[doc(alias = "Choice")]
+    type Choice = ChoiceIsOwned<true>(wxChoice) impl
         ChoiceMethods,
         ControlMethods,
         WindowMethods,
@@ -613,8 +631,10 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for ChoiceIsOwned<OWNED> {
 }
 
 // wxChoicebook
-wx_class! { Choicebook =
-    ChoicebookIsOwned<true>(wxChoicebook) impl
+wx_class! {
+    #[doc(alias = "wxChoicebook")]
+    #[doc(alias = "Choicebook")]
+    type Choicebook = ChoicebookIsOwned<true>(wxChoicebook) impl
         ChoicebookMethods,
         BookCtrlBaseMethods,
         ControlMethods,
@@ -710,8 +730,10 @@ impl<const OWNED: bool> WindowMethods for ChoicebookIsOwned<OWNED> {
 }
 
 // wxClientDC
-wx_class! { ClientDC =
-    ClientDCIsOwned<true>(wxClientDC) impl
+wx_class! {
+    #[doc(alias = "wxClientDC")]
+    #[doc(alias = "ClientDC")]
+    type ClientDC = ClientDCIsOwned<true>(wxClientDC) impl
         ClientDCMethods,
         WindowDCMethods,
         DCMethods,
@@ -765,8 +787,10 @@ impl<const OWNED: bool> Drop for ClientDCIsOwned<OWNED> {
 }
 
 // wxClipboard
-wx_class! { Clipboard =
-    ClipboardIsOwned<true>(wxClipboard) impl
+wx_class! {
+    #[doc(alias = "wxClipboard")]
+    #[doc(alias = "Clipboard")]
+    type Clipboard = ClipboardIsOwned<true>(wxClipboard) impl
         ClipboardMethods,
         ObjectMethods
 }
@@ -802,8 +826,10 @@ impl<const OWNED: bool> Drop for ClipboardIsOwned<OWNED> {
 }
 
 // wxClipboardTextEvent
-wx_class! { ClipboardTextEvent =
-    ClipboardTextEventIsOwned<true>(wxClipboardTextEvent) impl
+wx_class! {
+    #[doc(alias = "wxClipboardTextEvent")]
+    #[doc(alias = "ClipboardTextEvent")]
+    type ClipboardTextEvent = ClipboardTextEventIsOwned<true>(wxClipboardTextEvent) impl
         ClipboardTextEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -849,8 +875,10 @@ impl<const OWNED: bool> Drop for ClipboardTextEventIsOwned<OWNED> {
 }
 
 // wxCloseEvent
-wx_class! { CloseEvent =
-    CloseEventIsOwned<true>(wxCloseEvent) impl
+wx_class! {
+    #[doc(alias = "wxCloseEvent")]
+    #[doc(alias = "CloseEvent")]
+    type CloseEvent = CloseEventIsOwned<true>(wxCloseEvent) impl
         CloseEventMethods,
         EventMethods,
         ObjectMethods
@@ -890,8 +918,10 @@ impl<const OWNED: bool> Drop for CloseEventIsOwned<OWNED> {
 }
 
 // wxCollapsiblePane
-wx_class! { CollapsiblePane =
-    CollapsiblePaneIsOwned<true>(wxCollapsiblePane) impl
+wx_class! {
+    #[doc(alias = "wxCollapsiblePane")]
+    #[doc(alias = "CollapsiblePane")]
+    type CollapsiblePane = CollapsiblePaneIsOwned<true>(wxCollapsiblePane) impl
         CollapsiblePaneMethods,
         ControlMethods,
         WindowMethods,
@@ -965,8 +995,10 @@ impl<const OWNED: bool> DynamicCast for CollapsiblePaneIsOwned<OWNED> {
 }
 
 // wxCollapsiblePaneEvent
-wx_class! { CollapsiblePaneEvent =
-    CollapsiblePaneEventIsOwned<true>(wxCollapsiblePaneEvent) impl
+wx_class! {
+    #[doc(alias = "wxCollapsiblePaneEvent")]
+    #[doc(alias = "CollapsiblePaneEvent")]
+    type CollapsiblePaneEvent = CollapsiblePaneEventIsOwned<true>(wxCollapsiblePaneEvent) impl
         CollapsiblePaneEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -1024,8 +1056,10 @@ impl<const OWNED: bool> Drop for CollapsiblePaneEventIsOwned<OWNED> {
 }
 
 // wxColour
-wx_class! { Colour =
-    ColourIsOwned<true>(wxColour) impl
+wx_class! {
+    #[doc(alias = "wxColour")]
+    #[doc(alias = "Colour")]
+    type Colour = ColourIsOwned<true>(wxColour) impl
         ColourMethods,
         ObjectMethods
 }
@@ -1076,8 +1110,10 @@ impl<const OWNED: bool> Drop for ColourIsOwned<OWNED> {
 }
 
 // wxColourData
-wx_class! { ColourData =
-    ColourDataIsOwned<true>(wxColourData) impl
+wx_class! {
+    #[doc(alias = "wxColourData")]
+    #[doc(alias = "ColourData")]
+    type ColourData = ColourDataIsOwned<true>(wxColourData) impl
         ColourDataMethods,
         ObjectMethods
 }
@@ -1116,8 +1152,10 @@ impl<const OWNED: bool> Drop for ColourDataIsOwned<OWNED> {
 }
 
 // wxColourDatabase
-wx_class! { ColourDatabase =
-    ColourDatabaseIsOwned<true>(wxColourDatabase) impl
+wx_class! {
+    #[doc(alias = "wxColourDatabase")]
+    #[doc(alias = "ColourDatabase")]
+    type ColourDatabase = ColourDatabaseIsOwned<true>(wxColourDatabase) impl
         ColourDatabaseMethods
 }
 impl<const OWNED: bool> ColourDatabaseIsOwned<OWNED> {
@@ -1142,8 +1180,10 @@ impl<const OWNED: bool> Drop for ColourDatabaseIsOwned<OWNED> {
 }
 
 // wxColourDialog
-wx_class! { ColourDialog =
-    ColourDialogIsOwned<true>(wxColourDialog) impl
+wx_class! {
+    #[doc(alias = "wxColourDialog")]
+    #[doc(alias = "ColourDialog")]
+    type ColourDialog = ColourDialogIsOwned<true>(wxColourDialog) impl
         ColourDialogMethods,
         DialogMethods,
         TopLevelWindowMethods,
@@ -1215,8 +1255,10 @@ impl<const OWNED: bool> DynamicCast for ColourDialogIsOwned<OWNED> {
 }
 
 // wxColourPickerCtrl
-wx_class! { ColourPickerCtrl =
-    ColourPickerCtrlIsOwned<true>(wxColourPickerCtrl) impl
+wx_class! {
+    #[doc(alias = "wxColourPickerCtrl")]
+    #[doc(alias = "ColourPickerCtrl")]
+    type ColourPickerCtrl = ColourPickerCtrlIsOwned<true>(wxColourPickerCtrl) impl
         ColourPickerCtrlMethods,
         PickerBaseMethods,
         ControlMethods,
@@ -1301,8 +1343,10 @@ impl<const OWNED: bool> DynamicCast for ColourPickerCtrlIsOwned<OWNED> {
 }
 
 // wxColourPickerEvent
-wx_class! { ColourPickerEvent =
-    ColourPickerEventIsOwned<true>(wxColourPickerEvent) impl
+wx_class! {
+    #[doc(alias = "wxColourPickerEvent")]
+    #[doc(alias = "ColourPickerEvent")]
+    type ColourPickerEvent = ColourPickerEventIsOwned<true>(wxColourPickerEvent) impl
         ColourPickerEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -1364,8 +1408,10 @@ impl<const OWNED: bool> Drop for ColourPickerEventIsOwned<OWNED> {
 }
 
 // wxComboBox
-wx_class! { ComboBox =
-    ComboBoxIsOwned<true>(wxComboBox) impl
+wx_class! {
+    #[doc(alias = "wxComboBox")]
+    #[doc(alias = "ComboBox")]
+    type ComboBox = ComboBoxIsOwned<true>(wxComboBox) impl
         ComboBoxMethods,
         ControlMethods,
         WindowMethods,
@@ -1464,8 +1510,10 @@ impl<const OWNED: bool> TextEntryMethods for ComboBoxIsOwned<OWNED> {
 }
 
 // wxComboCtrl
-wx_class! { ComboCtrl =
-    ComboCtrlIsOwned<true>(wxComboCtrl) impl
+wx_class! {
+    #[doc(alias = "wxComboCtrl")]
+    #[doc(alias = "ComboCtrl")]
+    type ComboCtrl = ComboCtrlIsOwned<true>(wxComboCtrl) impl
         ComboCtrlMethods,
         ControlMethods,
         WindowMethods,
@@ -1550,8 +1598,10 @@ impl<const OWNED: bool> TextEntryMethods for ComboCtrlIsOwned<OWNED> {
 }
 
 // wxComboPopup
-wx_class! { ComboPopup =
-    ComboPopupIsOwned<true>(wxComboPopup) impl
+wx_class! {
+    #[doc(alias = "wxComboPopup")]
+    #[doc(alias = "ComboPopup")]
+    type ComboPopup = ComboPopupIsOwned<true>(wxComboPopup) impl
         ComboPopupMethods
 }
 impl<const OWNED: bool> ComboPopupIsOwned<OWNED> {
@@ -1574,8 +1624,10 @@ impl<const OWNED: bool> Drop for ComboPopupIsOwned<OWNED> {
 }
 
 // wxCommand
-wx_class! { Command =
-    CommandIsOwned<true>(wxCommand) impl
+wx_class! {
+    #[doc(alias = "wxCommand")]
+    #[doc(alias = "Command")]
+    type Command = CommandIsOwned<true>(wxCommand) impl
         CommandMethods,
         ObjectMethods
 }
@@ -1609,8 +1661,10 @@ impl<const OWNED: bool> Drop for CommandIsOwned<OWNED> {
 }
 
 // wxCommandEvent
-wx_class! { CommandEvent =
-    CommandEventIsOwned<true>(wxCommandEvent) impl
+wx_class! {
+    #[doc(alias = "wxCommandEvent")]
+    #[doc(alias = "CommandEvent")]
+    type CommandEvent = CommandEventIsOwned<true>(wxCommandEvent) impl
         CommandEventMethods,
         EventMethods,
         ObjectMethods
@@ -1650,8 +1704,10 @@ impl<const OWNED: bool> Drop for CommandEventIsOwned<OWNED> {
 }
 
 // wxCommandLinkButton
-wx_class! { CommandLinkButton =
-    CommandLinkButtonIsOwned<true>(wxCommandLinkButton) impl
+wx_class! {
+    #[doc(alias = "wxCommandLinkButton")]
+    #[doc(alias = "CommandLinkButton")]
+    type CommandLinkButton = CommandLinkButtonIsOwned<true>(wxCommandLinkButton) impl
         CommandLinkButtonMethods,
         ButtonMethods,
         AnyButtonMethods,
@@ -1740,8 +1796,10 @@ impl<const OWNED: bool> DynamicCast for CommandLinkButtonIsOwned<OWNED> {
 }
 
 // wxCommandProcessor
-wx_class! { CommandProcessor =
-    CommandProcessorIsOwned<true>(wxCommandProcessor) impl
+wx_class! {
+    #[doc(alias = "wxCommandProcessor")]
+    #[doc(alias = "CommandProcessor")]
+    type CommandProcessor = CommandProcessorIsOwned<true>(wxCommandProcessor) impl
         CommandProcessorMethods,
         ObjectMethods
 }
@@ -1777,8 +1835,10 @@ impl<const OWNED: bool> Drop for CommandProcessorIsOwned<OWNED> {
 }
 
 // wxContextMenuEvent
-wx_class! { ContextMenuEvent =
-    ContextMenuEventIsOwned<true>(wxContextMenuEvent) impl
+wx_class! {
+    #[doc(alias = "wxContextMenuEvent")]
+    #[doc(alias = "ContextMenuEvent")]
+    type ContextMenuEvent = ContextMenuEventIsOwned<true>(wxContextMenuEvent) impl
         ContextMenuEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -1824,8 +1884,10 @@ impl<const OWNED: bool> Drop for ContextMenuEventIsOwned<OWNED> {
 }
 
 // wxControl
-wx_class! { Control =
-    ControlIsOwned<true>(wxControl) impl
+wx_class! {
+    #[doc(alias = "wxControl")]
+    #[doc(alias = "Control")]
+    type Control = ControlIsOwned<true>(wxControl) impl
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
@@ -1890,8 +1952,10 @@ impl<const OWNED: bool> DynamicCast for ControlIsOwned<OWNED> {
 }
 
 // wxControlWithItems
-wx_class! { ControlWithItems =
-    ControlWithItemsIsOwned<true>(wxControlWithItems) impl
+wx_class! {
+    #[doc(alias = "wxControlWithItems")]
+    #[doc(alias = "ControlWithItems")]
+    type ControlWithItems = ControlWithItemsIsOwned<true>(wxControlWithItems) impl
         ControlWithItemsMethods,
         ControlMethods,
         WindowMethods,
@@ -1946,8 +2010,10 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for ControlWithItemsIsOwne
 }
 
 // wxCursor
-wx_class! { Cursor =
-    CursorIsOwned<true>(wxCursor) impl
+wx_class! {
+    #[doc(alias = "wxCursor")]
+    #[doc(alias = "Cursor")]
+    type Cursor = CursorIsOwned<true>(wxCursor) impl
         CursorMethods,
         GDIObjectMethods,
         ObjectMethods
@@ -2007,8 +2073,10 @@ impl<const OWNED: bool> Drop for CursorIsOwned<OWNED> {
 }
 
 // wxCustomDataObject
-wx_class! { CustomDataObject =
-    CustomDataObjectIsOwned<true>(wxCustomDataObject) impl
+wx_class! {
+    #[doc(alias = "wxCustomDataObject")]
+    #[doc(alias = "CustomDataObject")]
+    type CustomDataObject = CustomDataObjectIsOwned<true>(wxCustomDataObject) impl
         CustomDataObjectMethods,
         DataObjectSimpleMethods,
         DataObjectMethods

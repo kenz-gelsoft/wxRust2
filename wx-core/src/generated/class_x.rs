@@ -1,8 +1,10 @@
 use super::*;
 
 // wxXPMHandler
-wx_class! { XPMHandler =
-    XPMHandlerIsOwned<true>(wxXPMHandler) impl
+wx_class! {
+    #[doc(alias = "wxXPMHandler")]
+    #[doc(alias = "XPMHandler")]
+    type XPMHandler = XPMHandlerIsOwned<true>(wxXPMHandler) impl
         XPMHandlerMethods,
         ImageHandlerMethods,
         ObjectMethods

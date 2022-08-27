@@ -1,8 +1,10 @@
 use super::*;
 
 // wxEvent
-wx_class! { Event =
-    EventIsOwned<true>(wxEvent) impl
+wx_class! {
+    #[doc(alias = "wxEvent")]
+    #[doc(alias = "Event")]
+    type Event = EventIsOwned<true>(wxEvent) impl
         EventMethods,
         ObjectMethods
 }
@@ -36,8 +38,10 @@ impl<const OWNED: bool> Drop for EventIsOwned<OWNED> {
 }
 
 // wxEvtHandler
-wx_class! { EvtHandler =
-    EvtHandlerIsOwned<true>(wxEvtHandler) impl
+wx_class! {
+    #[doc(alias = "wxEvtHandler")]
+    #[doc(alias = "EvtHandler")]
+    type EvtHandler = EvtHandlerIsOwned<true>(wxEvtHandler) impl
         EvtHandlerMethods,
         ObjectMethods
 }

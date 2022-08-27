@@ -1,8 +1,10 @@
 use super::*;
 
 // wxPCXHandler
-wx_class! { PCXHandler =
-    PCXHandlerIsOwned<true>(wxPCXHandler) impl
+wx_class! {
+    #[doc(alias = "wxPCXHandler")]
+    #[doc(alias = "PCXHandler")]
+    type PCXHandler = PCXHandlerIsOwned<true>(wxPCXHandler) impl
         PCXHandlerMethods,
         ImageHandlerMethods,
         ObjectMethods
@@ -44,8 +46,10 @@ impl<const OWNED: bool> Drop for PCXHandlerIsOwned<OWNED> {
 }
 
 // wxPNGHandler
-wx_class! { PNGHandler =
-    PNGHandlerIsOwned<true>(wxPNGHandler) impl
+wx_class! {
+    #[doc(alias = "wxPNGHandler")]
+    #[doc(alias = "PNGHandler")]
+    type PNGHandler = PNGHandlerIsOwned<true>(wxPNGHandler) impl
         PNGHandlerMethods,
         ImageHandlerMethods,
         ObjectMethods
@@ -87,8 +91,10 @@ impl<const OWNED: bool> Drop for PNGHandlerIsOwned<OWNED> {
 }
 
 // wxPNMHandler
-wx_class! { PNMHandler =
-    PNMHandlerIsOwned<true>(wxPNMHandler) impl
+wx_class! {
+    #[doc(alias = "wxPNMHandler")]
+    #[doc(alias = "PNMHandler")]
+    type PNMHandler = PNMHandlerIsOwned<true>(wxPNMHandler) impl
         PNMHandlerMethods,
         ImageHandlerMethods,
         ObjectMethods
@@ -130,8 +136,10 @@ impl<const OWNED: bool> Drop for PNMHandlerIsOwned<OWNED> {
 }
 
 // wxPaintDC
-wx_class! { PaintDC =
-    PaintDCIsOwned<true>(wxPaintDC) impl
+wx_class! {
+    #[doc(alias = "wxPaintDC")]
+    #[doc(alias = "PaintDC")]
+    type PaintDC = PaintDCIsOwned<true>(wxPaintDC) impl
         PaintDCMethods,
         ClientDCMethods,
         WindowDCMethods,
@@ -191,8 +199,10 @@ impl<const OWNED: bool> Drop for PaintDCIsOwned<OWNED> {
 }
 
 // wxPaintEvent
-wx_class! { PaintEvent =
-    PaintEventIsOwned<true>(wxPaintEvent) impl
+wx_class! {
+    #[doc(alias = "wxPaintEvent")]
+    #[doc(alias = "PaintEvent")]
+    type PaintEvent = PaintEventIsOwned<true>(wxPaintEvent) impl
         PaintEventMethods,
         EventMethods,
         ObjectMethods
@@ -232,8 +242,10 @@ impl<const OWNED: bool> Drop for PaintEventIsOwned<OWNED> {
 }
 
 // wxPalette
-wx_class! { Palette =
-    PaletteIsOwned<true>(wxPalette) impl
+wx_class! {
+    #[doc(alias = "wxPalette")]
+    #[doc(alias = "Palette")]
+    type Palette = PaletteIsOwned<true>(wxPalette) impl
         PaletteMethods,
         GDIObjectMethods,
         ObjectMethods
@@ -289,8 +301,10 @@ impl<const OWNED: bool> Drop for PaletteIsOwned<OWNED> {
 }
 
 // wxPanel
-wx_class! { Panel =
-    PanelIsOwned<true>(wxPanel) impl
+wx_class! {
+    #[doc(alias = "wxPanel")]
+    #[doc(alias = "Panel")]
+    type Panel = PanelIsOwned<true>(wxPanel) impl
         PanelMethods,
         // WindowMethods,
         EvtHandlerMethods,
@@ -374,8 +388,10 @@ impl<const OWNED: bool> WindowMethods for PanelIsOwned<OWNED> {
 }
 
 // wxPasswordEntryDialog
-wx_class! { PasswordEntryDialog =
-    PasswordEntryDialogIsOwned<true>(wxPasswordEntryDialog) impl
+wx_class! {
+    #[doc(alias = "wxPasswordEntryDialog")]
+    #[doc(alias = "PasswordEntryDialog")]
+    type PasswordEntryDialog = PasswordEntryDialogIsOwned<true>(wxPasswordEntryDialog) impl
         PasswordEntryDialogMethods,
         TextEntryDialogMethods,
         DialogMethods,
@@ -467,8 +483,10 @@ impl<const OWNED: bool> DynamicCast for PasswordEntryDialogIsOwned<OWNED> {
 }
 
 // wxPen
-wx_class! { Pen =
-    PenIsOwned<true>(wxPen) impl
+wx_class! {
+    #[doc(alias = "wxPen")]
+    #[doc(alias = "Pen")]
+    type Pen = PenIsOwned<true>(wxPen) impl
         PenMethods,
         GDIObjectMethods,
         ObjectMethods
@@ -526,8 +544,10 @@ impl<const OWNED: bool> Drop for PenIsOwned<OWNED> {
 }
 
 // wxPenList
-wx_class! { PenList =
-    PenListIsOwned<true>(wxPenList) impl
+wx_class! {
+    #[doc(alias = "wxPenList")]
+    #[doc(alias = "PenList")]
+    type PenList = PenListIsOwned<true>(wxPenList) impl
         PenListMethods
 }
 impl<const OWNED: bool> PenListIsOwned<OWNED> {
@@ -552,8 +572,10 @@ impl<const OWNED: bool> Drop for PenListIsOwned<OWNED> {
 }
 
 // wxPersistenceManager
-wx_class! { PersistenceManager =
-    PersistenceManagerIsOwned<true>(wxPersistenceManager) impl
+wx_class! {
+    #[doc(alias = "wxPersistenceManager")]
+    #[doc(alias = "PersistenceManager")]
+    type PersistenceManager = PersistenceManagerIsOwned<true>(wxPersistenceManager) impl
         PersistenceManagerMethods
 }
 impl<const OWNED: bool> PersistenceManagerIsOwned<OWNED> {
@@ -575,8 +597,10 @@ impl<const OWNED: bool> Drop for PersistenceManagerIsOwned<OWNED> {
 }
 
 // wxPickerBase
-wx_class! { PickerBase =
-    PickerBaseIsOwned<true>(wxPickerBase) impl
+wx_class! {
+    #[doc(alias = "wxPickerBase")]
+    #[doc(alias = "PickerBase")]
+    type PickerBase = PickerBaseIsOwned<true>(wxPickerBase) impl
         PickerBaseMethods,
         ControlMethods,
         WindowMethods,
@@ -621,8 +645,10 @@ impl<const OWNED: bool> DynamicCast for PickerBaseIsOwned<OWNED> {
 }
 
 // wxPoint
-wx_class! { Point =
-    PointIsOwned<true>(wxPoint) impl
+wx_class! {
+    #[doc(alias = "wxPoint")]
+    #[doc(alias = "Point")]
+    type Point = PointIsOwned<true>(wxPoint) impl
         PointMethods
 }
 impl<const OWNED: bool> PointIsOwned<OWNED> {
@@ -656,8 +682,10 @@ impl<const OWNED: bool> Drop for PointIsOwned<OWNED> {
 }
 
 // wxPopupTransientWindow
-wx_class! { PopupTransientWindow =
-    PopupTransientWindowIsOwned<true>(wxPopupTransientWindow) impl
+wx_class! {
+    #[doc(alias = "wxPopupTransientWindow")]
+    #[doc(alias = "PopupTransientWindow")]
+    type PopupTransientWindow = PopupTransientWindowIsOwned<true>(wxPopupTransientWindow) impl
         PopupTransientWindowMethods,
         PopupWindowMethods,
         NonOwnedWindowMethods,
@@ -722,8 +750,10 @@ impl<const OWNED: bool> DynamicCast for PopupTransientWindowIsOwned<OWNED> {
 }
 
 // wxPopupWindow
-wx_class! { PopupWindow =
-    PopupWindowIsOwned<true>(wxPopupWindow) impl
+wx_class! {
+    #[doc(alias = "wxPopupWindow")]
+    #[doc(alias = "PopupWindow")]
+    type PopupWindow = PopupWindowIsOwned<true>(wxPopupWindow) impl
         PopupWindowMethods,
         NonOwnedWindowMethods,
         WindowMethods,
@@ -779,8 +809,10 @@ impl<const OWNED: bool> DynamicCast for PopupWindowIsOwned<OWNED> {
 }
 
 // wxPreferencesEditor
-wx_class! { PreferencesEditor =
-    PreferencesEditorIsOwned<true>(wxPreferencesEditor) impl
+wx_class! {
+    #[doc(alias = "wxPreferencesEditor")]
+    #[doc(alias = "PreferencesEditor")]
+    type PreferencesEditor = PreferencesEditorIsOwned<true>(wxPreferencesEditor) impl
         PreferencesEditorMethods
 }
 impl<const OWNED: bool> PreferencesEditorIsOwned<OWNED> {
@@ -809,8 +841,10 @@ impl<const OWNED: bool> Drop for PreferencesEditorIsOwned<OWNED> {
 }
 
 // wxPreferencesPage
-wx_class! { PreferencesPage =
-    PreferencesPageIsOwned<true>(wxPreferencesPage) impl
+wx_class! {
+    #[doc(alias = "wxPreferencesPage")]
+    #[doc(alias = "PreferencesPage")]
+    type PreferencesPage = PreferencesPageIsOwned<true>(wxPreferencesPage) impl
         PreferencesPageMethods
 }
 impl<const OWNED: bool> PreferencesPageIsOwned<OWNED> {
@@ -833,8 +867,10 @@ impl<const OWNED: bool> Drop for PreferencesPageIsOwned<OWNED> {
 }
 
 // wxPropertySheetDialog
-wx_class! { PropertySheetDialog =
-    PropertySheetDialogIsOwned<true>(wxPropertySheetDialog) impl
+wx_class! {
+    #[doc(alias = "wxPropertySheetDialog")]
+    #[doc(alias = "PropertySheetDialog")]
+    type PropertySheetDialog = PropertySheetDialogIsOwned<true>(wxPropertySheetDialog) impl
         PropertySheetDialogMethods,
         DialogMethods,
         // TopLevelWindowMethods,

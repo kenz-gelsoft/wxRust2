@@ -1,8 +1,10 @@
 use super::*;
 
 // wxDateTime
-wx_class! { DateTime =
-    DateTimeIsOwned<true>(wxDateTime) impl
+wx_class! {
+    #[doc(alias = "wxDateTime")]
+    #[doc(alias = "DateTime")]
+    type DateTime = DateTimeIsOwned<true>(wxDateTime) impl
         DateTimeMethods
 }
 impl<const OWNED: bool> DateTimeIsOwned<OWNED> {

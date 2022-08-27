@@ -1,8 +1,10 @@
 use super::*;
 
 // wxRadioBox
-wx_class! { RadioBox =
-    RadioBoxIsOwned<true>(wxRadioBox) impl
+wx_class! {
+    #[doc(alias = "wxRadioBox")]
+    #[doc(alias = "RadioBox")]
+    type RadioBox = RadioBoxIsOwned<true>(wxRadioBox) impl
         RadioBoxMethods,
         ControlMethods,
         WindowMethods,
@@ -101,8 +103,10 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for RadioBoxIsOwned<OWNED>
 }
 
 // wxRadioButton
-wx_class! { RadioButton =
-    RadioButtonIsOwned<true>(wxRadioButton) impl
+wx_class! {
+    #[doc(alias = "wxRadioButton")]
+    #[doc(alias = "RadioButton")]
+    type RadioButton = RadioButtonIsOwned<true>(wxRadioButton) impl
         RadioButtonMethods,
         ControlMethods,
         WindowMethods,
@@ -176,8 +180,10 @@ impl<const OWNED: bool> DynamicCast for RadioButtonIsOwned<OWNED> {
 }
 
 // wxRealPoint
-wx_class! { RealPoint =
-    RealPointIsOwned<true>(wxRealPoint) impl
+wx_class! {
+    #[doc(alias = "wxRealPoint")]
+    #[doc(alias = "RealPoint")]
+    type RealPoint = RealPointIsOwned<true>(wxRealPoint) impl
         RealPointMethods
 }
 impl<const OWNED: bool> RealPointIsOwned<OWNED> {
@@ -211,8 +217,10 @@ impl<const OWNED: bool> Drop for RealPointIsOwned<OWNED> {
 }
 
 // wxRearrangeCtrl
-wx_class! { RearrangeCtrl =
-    RearrangeCtrlIsOwned<true>(wxRearrangeCtrl) impl
+wx_class! {
+    #[doc(alias = "wxRearrangeCtrl")]
+    #[doc(alias = "RearrangeCtrl")]
+    type RearrangeCtrl = RearrangeCtrlIsOwned<true>(wxRearrangeCtrl) impl
         RearrangeCtrlMethods,
         PanelMethods,
         WindowMethods,
@@ -294,8 +302,10 @@ impl<const OWNED: bool> DynamicCast for RearrangeCtrlIsOwned<OWNED> {
 }
 
 // wxRearrangeDialog
-wx_class! { RearrangeDialog =
-    RearrangeDialogIsOwned<true>(wxRearrangeDialog) impl
+wx_class! {
+    #[doc(alias = "wxRearrangeDialog")]
+    #[doc(alias = "RearrangeDialog")]
+    type RearrangeDialog = RearrangeDialogIsOwned<true>(wxRearrangeDialog) impl
         RearrangeDialogMethods,
         DialogMethods,
         TopLevelWindowMethods,
@@ -382,8 +392,10 @@ impl<const OWNED: bool> DynamicCast for RearrangeDialogIsOwned<OWNED> {
 }
 
 // wxRearrangeList
-wx_class! { RearrangeList =
-    RearrangeListIsOwned<true>(wxRearrangeList) impl
+wx_class! {
+    #[doc(alias = "wxRearrangeList")]
+    #[doc(alias = "RearrangeList")]
+    type RearrangeList = RearrangeListIsOwned<true>(wxRearrangeList) impl
         RearrangeListMethods,
         CheckListBoxMethods,
         ListBoxMethods,
@@ -488,8 +500,10 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for RearrangeListIsOwned<O
 }
 
 // wxRect
-wx_class! { Rect =
-    RectIsOwned<true>(wxRect) impl
+wx_class! {
+    #[doc(alias = "wxRect")]
+    #[doc(alias = "Rect")]
+    type Rect = RectIsOwned<true>(wxRect) impl
         RectMethods
 }
 impl<const OWNED: bool> RectIsOwned<OWNED> {
@@ -543,8 +557,10 @@ impl<const OWNED: bool> Drop for RectIsOwned<OWNED> {
 }
 
 // wxRegion
-wx_class! { Region =
-    RegionIsOwned<true>(wxRegion) impl
+wx_class! {
+    #[doc(alias = "wxRegion")]
+    #[doc(alias = "Region")]
+    type Region = RegionIsOwned<true>(wxRegion) impl
         RegionMethods,
         GDIObjectMethods,
         ObjectMethods
@@ -629,8 +645,10 @@ impl<const OWNED: bool> Drop for RegionIsOwned<OWNED> {
 }
 
 // wxRegionIterator
-wx_class! { RegionIterator =
-    RegionIteratorIsOwned<true>(wxRegionIterator) impl
+wx_class! {
+    #[doc(alias = "wxRegionIterator")]
+    #[doc(alias = "RegionIterator")]
+    type RegionIterator = RegionIteratorIsOwned<true>(wxRegionIterator) impl
         RegionIteratorMethods,
         ObjectMethods
 }
@@ -672,8 +690,10 @@ impl<const OWNED: bool> Drop for RegionIteratorIsOwned<OWNED> {
 }
 
 // wxRendererNative
-wx_class! { RendererNative =
-    RendererNativeIsOwned<true>(wxRendererNative) impl
+wx_class! {
+    #[doc(alias = "wxRendererNative")]
+    #[doc(alias = "RendererNative")]
+    type RendererNative = RendererNativeIsOwned<true>(wxRendererNative) impl
         RendererNativeMethods
 }
 impl<const OWNED: bool> RendererNativeIsOwned<OWNED> {
@@ -695,8 +715,10 @@ impl<const OWNED: bool> Drop for RendererNativeIsOwned<OWNED> {
 }
 
 // wxRichToolTip
-wx_class! { RichToolTip =
-    RichToolTipIsOwned<true>(wxRichToolTip) impl
+wx_class! {
+    #[doc(alias = "wxRichToolTip")]
+    #[doc(alias = "RichToolTip")]
+    type RichToolTip = RichToolTipIsOwned<true>(wxRichToolTip) impl
         RichToolTipMethods
 }
 impl<const OWNED: bool> RichToolTipIsOwned<OWNED> {

@@ -1,8 +1,10 @@
 use super::*;
 
 // wxNativeFontInfo
-wx_class! { NativeFontInfo =
-    NativeFontInfoIsOwned<true>(wxNativeFontInfo) impl
+wx_class! {
+    #[doc(alias = "wxNativeFontInfo")]
+    #[doc(alias = "NativeFontInfo")]
+    type NativeFontInfo = NativeFontInfoIsOwned<true>(wxNativeFontInfo) impl
         NativeFontInfoMethods
 }
 impl<const OWNED: bool> NativeFontInfoIsOwned<OWNED> {
@@ -35,8 +37,10 @@ impl<const OWNED: bool> Drop for NativeFontInfoIsOwned<OWNED> {
 }
 
 // wxNavigationKeyEvent
-wx_class! { NavigationKeyEvent =
-    NavigationKeyEventIsOwned<true>(wxNavigationKeyEvent) impl
+wx_class! {
+    #[doc(alias = "wxNavigationKeyEvent")]
+    #[doc(alias = "NavigationKeyEvent")]
+    type NavigationKeyEvent = NavigationKeyEventIsOwned<true>(wxNavigationKeyEvent) impl
         NavigationKeyEventMethods,
         EventMethods,
         ObjectMethods
@@ -92,8 +96,10 @@ impl<const OWNED: bool> Drop for NavigationKeyEventIsOwned<OWNED> {
 }
 
 // wxNonOwnedWindow
-wx_class! { NonOwnedWindow =
-    NonOwnedWindowIsOwned<true>(wxNonOwnedWindow) impl
+wx_class! {
+    #[doc(alias = "wxNonOwnedWindow")]
+    #[doc(alias = "NonOwnedWindow")]
+    type NonOwnedWindow = NonOwnedWindowIsOwned<true>(wxNonOwnedWindow) impl
         NonOwnedWindowMethods,
         WindowMethods,
         EvtHandlerMethods,
@@ -131,8 +137,10 @@ impl<const OWNED: bool> DynamicCast for NonOwnedWindowIsOwned<OWNED> {
 }
 
 // wxNotebook
-wx_class! { Notebook =
-    NotebookIsOwned<true>(wxNotebook) impl
+wx_class! {
+    #[doc(alias = "wxNotebook")]
+    #[doc(alias = "Notebook")]
+    type Notebook = NotebookIsOwned<true>(wxNotebook) impl
         NotebookMethods,
         BookCtrlBaseMethods,
         ControlMethods,
@@ -228,8 +236,10 @@ impl<const OWNED: bool> WindowMethods for NotebookIsOwned<OWNED> {
 }
 
 // wxNotificationMessage
-wx_class! { NotificationMessage =
-    NotificationMessageIsOwned<true>(wxNotificationMessage) impl
+wx_class! {
+    #[doc(alias = "wxNotificationMessage")]
+    #[doc(alias = "NotificationMessage")]
+    type NotificationMessage = NotificationMessageIsOwned<true>(wxNotificationMessage) impl
         NotificationMessageMethods,
         EvtHandlerMethods,
         ObjectMethods
@@ -288,8 +298,10 @@ impl<const OWNED: bool> DynamicCast for NotificationMessageIsOwned<OWNED> {
 }
 
 // wxNotifyEvent
-wx_class! { NotifyEvent =
-    NotifyEventIsOwned<true>(wxNotifyEvent) impl
+wx_class! {
+    #[doc(alias = "wxNotifyEvent")]
+    #[doc(alias = "NotifyEvent")]
+    type NotifyEvent = NotifyEventIsOwned<true>(wxNotifyEvent) impl
         NotifyEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -335,8 +347,10 @@ impl<const OWNED: bool> Drop for NotifyEventIsOwned<OWNED> {
 }
 
 // wxNumberEntryDialog
-wx_class! { NumberEntryDialog =
-    NumberEntryDialogIsOwned<true>(wxNumberEntryDialog) impl
+wx_class! {
+    #[doc(alias = "wxNumberEntryDialog")]
+    #[doc(alias = "NumberEntryDialog")]
+    type NumberEntryDialog = NumberEntryDialogIsOwned<true>(wxNumberEntryDialog) impl
         NumberEntryDialogMethods,
         DialogMethods,
         TopLevelWindowMethods,
