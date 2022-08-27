@@ -1,12 +1,10 @@
 #[macro_export]
 macro_rules! wxwidgets {
     (
-        $(#[doc(alias = $typeName:expr)])*
+        $(#[doc($attrKey:ident = $attrValue:tt)])*
         class $type:ident = $typeIsOwned:ident<true>($wxType:ident) impl $($methods:ident),*
     ) => {
-        $(
-            #[doc(alias = $typeName)]
-        )*
+        $(#[doc($attrKey = $attrValue)])*
         pub struct $typeIsOwned<const OWNED: bool>(*mut c_void);
         pub type $type = $typeIsOwned<true>;
         $(
