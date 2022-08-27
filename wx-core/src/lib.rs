@@ -3,19 +3,19 @@ use std::os::raw::{c_double, c_int, c_long, c_void};
 use std::ptr;
 
 mod generated;
-pub use generated::*;
+pub use generated::class::*;
 
 // re-export wx_base
 #[doc(no_inline)]
-pub use wx_base::*;
+pub use wx_base::class::*;
 
-#[doc(hidden)]
 pub mod methods {
     use std::os::raw::c_int;
 
     pub use super::generated::methods::*;
 
     // re-export wx_base::methods
+    #[doc(no_inline)]
     pub use wx_base::methods::*;
 
     pub trait Buildable<'a, P, B> {

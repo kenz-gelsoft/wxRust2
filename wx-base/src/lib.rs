@@ -15,7 +15,7 @@ mod manual;
 pub use manual::*;
 
 mod generated;
-pub use generated::*;
+pub use generated::class::*;
 
 use methods::*;
 
@@ -76,7 +76,6 @@ mod ffi {
     }
 }
 
-#[doc(hidden)]
 pub mod methods {
     pub use super::generated::methods::*;
     use super::*;

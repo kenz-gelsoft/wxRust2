@@ -59,6 +59,7 @@ def generate_library(classes, config, libname):
                 if error:
                     print(error)
     to_be_generated = {
+        'src/generated/class.rs': class_rs,
         'src/generated/ffi.rs': ffi_rs,
         'src/generated/methods.rs': methods_rs,
         'src/generated.rs': generated_rs,
@@ -147,6 +148,19 @@ extern "C" {
 } // extern "C"
 '''
 
+def class_rs(initials, libname):
+    yield '''\
+#![allow(non_upper_case_globals)]
+#![allow(unused_imports)]
+
+use std::os::raw::{c_double, c_int, c_long, c_uchar, c_uint, c_void};
+
+use super::*;
+use methods::*;
+'''
+    for i in initials:
+        yield 'pub use class_%s::*;' % (i,)
+
 def ffi_rs(initials, libname):
     yield '''\
 pub use crate::ffi::*;
@@ -203,10 +217,9 @@ use methods::*;
     for i in initials:
         yield 'mod methods_%s;' % (i,)
     yield ''
+    yield 'pub mod class;'
     for i in initials:
         yield 'mod class_%s;' % (i,)
-    for i in initials:
-        yield 'pub use class_%s::*;' % (i,)
 
 
 def generated_h(initials, libname):
