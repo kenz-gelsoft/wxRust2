@@ -7,7 +7,7 @@ pub use generated::class::*;
 
 // re-export wx_base
 #[doc(no_inline)]
-pub use wx_base::class::*;
+pub use wx_base::*;
 
 pub mod methods {
     use std::os::raw::c_int;
@@ -15,8 +15,8 @@ pub mod methods {
     pub use super::generated::methods::*;
 
     // re-export wx_base::methods
-    #[doc(no_inline)]
-    pub use wx_base::methods::*;
+    #[doc(hidden)]
+    pub use wx_base::*;
 
     pub trait Buildable<'a, P, B> {
         fn builder(parent: Option<&'a P>) -> B;
