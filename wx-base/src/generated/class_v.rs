@@ -1,8 +1,11 @@
 use super::*;
 
 // wxVariantData
-wx_class! { VariantData =
-    VariantDataIsOwned<true>(wxVariantData) impl
+wxwidgets! {
+    #[doc(alias = "wxVariantData")]
+    #[doc(alias = "VariantData")]
+    class VariantData
+        = VariantDataIsOwned<true>(wxVariantData) impl
         VariantDataMethods,
         ObjectRefDataMethods
 }

@@ -1,8 +1,12 @@
 #[macro_export]
-macro_rules! wx_class {
+macro_rules! wxwidgets {
     (
-        $type:ident = $typeIsOwned:ident<true>($wxType:ident) impl $($methods:ident),*
+        $(#[doc($attrKey:ident = $attrValue:tt)])*
+        class $type:ident
+            = $typeIsOwned:ident<true>($wxType:ident) impl
+            $($methods:ident),*
     ) => {
+        $(#[doc($attrKey = $attrValue)])*
         pub struct $typeIsOwned<const OWNED: bool>(*mut c_void);
         pub type $type = $typeIsOwned<true>;
         $(

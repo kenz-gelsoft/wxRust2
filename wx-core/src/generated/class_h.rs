@@ -1,8 +1,11 @@
 use super::*;
 
 // wxHScrolledWindow
-wx_class! { HScrolledWindow =
-    HScrolledWindowIsOwned<true>(wxHScrolledWindow) impl
+wxwidgets! {
+    #[doc(alias = "wxHScrolledWindow")]
+    #[doc(alias = "HScrolledWindow")]
+    class HScrolledWindow
+        = HScrolledWindowIsOwned<true>(wxHScrolledWindow) impl
         HScrolledWindowMethods,
         PanelMethods,
         // WindowMethods,
@@ -71,8 +74,11 @@ impl<const OWNED: bool> WindowMethods for HScrolledWindowIsOwned<OWNED> {
 }
 
 // wxHTMLDataObject
-wx_class! { HTMLDataObject =
-    HTMLDataObjectIsOwned<true>(wxHTMLDataObject) impl
+wxwidgets! {
+    #[doc(alias = "wxHTMLDataObject")]
+    #[doc(alias = "HTMLDataObject")]
+    class HTMLDataObject
+        = HTMLDataObjectIsOwned<true>(wxHTMLDataObject) impl
         HTMLDataObjectMethods,
         DataObjectSimpleMethods,
         DataObjectMethods
@@ -113,8 +119,11 @@ impl<const OWNED: bool> Drop for HTMLDataObjectIsOwned<OWNED> {
 }
 
 // wxHVScrolledWindow
-wx_class! { HVScrolledWindow =
-    HVScrolledWindowIsOwned<true>(wxHVScrolledWindow) impl
+wxwidgets! {
+    #[doc(alias = "wxHVScrolledWindow")]
+    #[doc(alias = "HVScrolledWindow")]
+    class HVScrolledWindow
+        = HVScrolledWindowIsOwned<true>(wxHVScrolledWindow) impl
         HVScrolledWindowMethods,
         PanelMethods,
         // WindowMethods,
@@ -183,8 +192,11 @@ impl<const OWNED: bool> WindowMethods for HVScrolledWindowIsOwned<OWNED> {
 }
 
 // wxHeaderColumn
-wx_class! { HeaderColumn =
-    HeaderColumnIsOwned<true>(wxHeaderColumn) impl
+wxwidgets! {
+    #[doc(alias = "wxHeaderColumn")]
+    #[doc(alias = "HeaderColumn")]
+    class HeaderColumn
+        = HeaderColumnIsOwned<true>(wxHeaderColumn) impl
         HeaderColumnMethods
 }
 impl<const OWNED: bool> HeaderColumnIsOwned<OWNED> {
@@ -206,8 +218,11 @@ impl<const OWNED: bool> Drop for HeaderColumnIsOwned<OWNED> {
 }
 
 // wxHeaderColumnSimple
-wx_class! { HeaderColumnSimple =
-    HeaderColumnSimpleIsOwned<true>(wxHeaderColumnSimple) impl
+wxwidgets! {
+    #[doc(alias = "wxHeaderColumnSimple")]
+    #[doc(alias = "HeaderColumnSimple")]
+    class HeaderColumnSimple
+        = HeaderColumnSimpleIsOwned<true>(wxHeaderColumnSimple) impl
         HeaderColumnSimpleMethods,
         SettableHeaderColumnMethods,
         HeaderColumnMethods
@@ -266,8 +281,11 @@ impl<const OWNED: bool> Drop for HeaderColumnSimpleIsOwned<OWNED> {
 }
 
 // wxHeaderCtrl
-wx_class! { HeaderCtrl =
-    HeaderCtrlIsOwned<true>(wxHeaderCtrl) impl
+wxwidgets! {
+    #[doc(alias = "wxHeaderCtrl")]
+    #[doc(alias = "HeaderCtrl")]
+    class HeaderCtrl
+        = HeaderCtrlIsOwned<true>(wxHeaderCtrl) impl
         HeaderCtrlMethods,
         ControlMethods,
         // WindowMethods,
@@ -336,8 +354,11 @@ impl<const OWNED: bool> WindowMethods for HeaderCtrlIsOwned<OWNED> {
 }
 
 // wxHeaderCtrlEvent
-wx_class! { HeaderCtrlEvent =
-    HeaderCtrlEventIsOwned<true>(wxHeaderCtrlEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxHeaderCtrlEvent")]
+    #[doc(alias = "HeaderCtrlEvent")]
+    class HeaderCtrlEvent
+        = HeaderCtrlEventIsOwned<true>(wxHeaderCtrlEvent) impl
         HeaderCtrlEventMethods,
         NotifyEventMethods,
         CommandEventMethods,
@@ -395,8 +416,11 @@ impl<const OWNED: bool> Drop for HeaderCtrlEventIsOwned<OWNED> {
 }
 
 // wxHeaderCtrlSimple
-wx_class! { HeaderCtrlSimple =
-    HeaderCtrlSimpleIsOwned<true>(wxHeaderCtrlSimple) impl
+wxwidgets! {
+    #[doc(alias = "wxHeaderCtrlSimple")]
+    #[doc(alias = "HeaderCtrlSimple")]
+    class HeaderCtrlSimple
+        = HeaderCtrlSimpleIsOwned<true>(wxHeaderCtrlSimple) impl
         HeaderCtrlSimpleMethods,
         HeaderCtrlMethods,
         ControlMethods,
@@ -471,8 +495,11 @@ impl<const OWNED: bool> DynamicCast for HeaderCtrlSimpleIsOwned<OWNED> {
 }
 
 // wxHelpEvent
-wx_class! { HelpEvent =
-    HelpEventIsOwned<true>(wxHelpEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxHelpEvent")]
+    #[doc(alias = "HelpEvent")]
+    class HelpEvent
+        = HelpEventIsOwned<true>(wxHelpEvent) impl
         HelpEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -523,8 +550,11 @@ impl<const OWNED: bool> Drop for HelpEventIsOwned<OWNED> {
 }
 
 // wxHyperlinkCtrl
-wx_class! { HyperlinkCtrl =
-    HyperlinkCtrlIsOwned<true>(wxHyperlinkCtrl) impl
+wxwidgets! {
+    #[doc(alias = "wxHyperlinkCtrl")]
+    #[doc(alias = "HyperlinkCtrl")]
+    class HyperlinkCtrl
+        = HyperlinkCtrlIsOwned<true>(wxHyperlinkCtrl) impl
         HyperlinkCtrlMethods,
         ControlMethods,
         WindowMethods,
@@ -599,8 +629,11 @@ impl<const OWNED: bool> DynamicCast for HyperlinkCtrlIsOwned<OWNED> {
 }
 
 // wxHyperlinkEvent
-wx_class! { HyperlinkEvent =
-    HyperlinkEventIsOwned<true>(wxHyperlinkEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxHyperlinkEvent")]
+    #[doc(alias = "HyperlinkEvent")]
+    class HyperlinkEvent
+        = HyperlinkEventIsOwned<true>(wxHyperlinkEvent) impl
         HyperlinkEventMethods,
         CommandEventMethods,
         EventMethods,

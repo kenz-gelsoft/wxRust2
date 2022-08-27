@@ -1,8 +1,11 @@
 use super::*;
 
 // wxTGAHandler
-wx_class! { TGAHandler =
-    TGAHandlerIsOwned<true>(wxTGAHandler) impl
+wxwidgets! {
+    #[doc(alias = "wxTGAHandler")]
+    #[doc(alias = "TGAHandler")]
+    class TGAHandler
+        = TGAHandlerIsOwned<true>(wxTGAHandler) impl
         TGAHandlerMethods,
         ImageHandlerMethods,
         ObjectMethods
@@ -44,8 +47,11 @@ impl<const OWNED: bool> Drop for TGAHandlerIsOwned<OWNED> {
 }
 
 // wxTIFFHandler
-wx_class! { TIFFHandler =
-    TIFFHandlerIsOwned<true>(wxTIFFHandler) impl
+wxwidgets! {
+    #[doc(alias = "wxTIFFHandler")]
+    #[doc(alias = "TIFFHandler")]
+    class TIFFHandler
+        = TIFFHandlerIsOwned<true>(wxTIFFHandler) impl
         TIFFHandlerMethods,
         // ImageHandlerMethods,
         ObjectMethods
@@ -90,8 +96,11 @@ impl<const OWNED: bool> ImageHandlerMethods for TIFFHandlerIsOwned<OWNED> {
 }
 
 // wxTaskBarIcon
-wx_class! { TaskBarIcon =
-    TaskBarIconIsOwned<true>(wxTaskBarIcon) impl
+wxwidgets! {
+    #[doc(alias = "wxTaskBarIcon")]
+    #[doc(alias = "TaskBarIcon")]
+    class TaskBarIcon
+        = TaskBarIconIsOwned<true>(wxTaskBarIcon) impl
         TaskBarIconMethods,
         EvtHandlerMethods,
         ObjectMethods
@@ -124,8 +133,11 @@ impl<const OWNED: bool> DynamicCast for TaskBarIconIsOwned<OWNED> {
 }
 
 // wxTaskBarIconEvent
-wx_class! { TaskBarIconEvent =
-    TaskBarIconEventIsOwned<true>(wxTaskBarIconEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxTaskBarIconEvent")]
+    #[doc(alias = "TaskBarIconEvent")]
+    class TaskBarIconEvent
+        = TaskBarIconEventIsOwned<true>(wxTaskBarIconEvent) impl
         TaskBarIconEventMethods,
         EventMethods,
         ObjectMethods
@@ -165,8 +177,11 @@ impl<const OWNED: bool> Drop for TaskBarIconEventIsOwned<OWNED> {
 }
 
 // wxTextAttr
-wx_class! { TextAttr =
-    TextAttrIsOwned<true>(wxTextAttr) impl
+wxwidgets! {
+    #[doc(alias = "wxTextAttr")]
+    #[doc(alias = "TextAttr")]
+    class TextAttr
+        = TextAttrIsOwned<true>(wxTextAttr) impl
         TextAttrMethods
 }
 impl<const OWNED: bool> TextAttrIsOwned<OWNED> {
@@ -198,8 +213,11 @@ impl<const OWNED: bool> Drop for TextAttrIsOwned<OWNED> {
 }
 
 // wxTextCtrl
-wx_class! { TextCtrl =
-    TextCtrlIsOwned<true>(wxTextCtrl) impl
+wxwidgets! {
+    #[doc(alias = "wxTextCtrl")]
+    #[doc(alias = "TextCtrl")]
+    class TextCtrl
+        = TextCtrlIsOwned<true>(wxTextCtrl) impl
         TextCtrlMethods,
         ControlMethods,
         WindowMethods,
@@ -279,8 +297,11 @@ impl<const OWNED: bool> TextEntryMethods for TextCtrlIsOwned<OWNED> {
 }
 
 // wxTextDataObject
-wx_class! { TextDataObject =
-    TextDataObjectIsOwned<true>(wxTextDataObject) impl
+wxwidgets! {
+    #[doc(alias = "wxTextDataObject")]
+    #[doc(alias = "TextDataObject")]
+    class TextDataObject
+        = TextDataObjectIsOwned<true>(wxTextDataObject) impl
         TextDataObjectMethods,
         // DataObjectSimpleMethods,
         DataObjectMethods
@@ -324,8 +345,11 @@ impl<const OWNED: bool> DataObjectSimpleMethods for TextDataObjectIsOwned<OWNED>
 }
 
 // wxTextDropTarget
-wx_class! { TextDropTarget =
-    TextDropTargetIsOwned<true>(wxTextDropTarget) impl
+wxwidgets! {
+    #[doc(alias = "wxTextDropTarget")]
+    #[doc(alias = "TextDropTarget")]
+    class TextDropTarget
+        = TextDropTargetIsOwned<true>(wxTextDropTarget) impl
         TextDropTargetMethods,
         DropTargetMethods
 }
@@ -354,8 +378,11 @@ impl<const OWNED: bool> Drop for TextDropTargetIsOwned<OWNED> {
 }
 
 // wxTextEntry
-wx_class! { TextEntry =
-    TextEntryIsOwned<true>(wxTextEntry) impl
+wxwidgets! {
+    #[doc(alias = "wxTextEntry")]
+    #[doc(alias = "TextEntry")]
+    class TextEntry
+        = TextEntryIsOwned<true>(wxTextEntry) impl
         TextEntryMethods
 }
 impl<const OWNED: bool> TextEntryIsOwned<OWNED> {
@@ -377,8 +404,11 @@ impl<const OWNED: bool> Drop for TextEntryIsOwned<OWNED> {
 }
 
 // wxTextEntryDialog
-wx_class! { TextEntryDialog =
-    TextEntryDialogIsOwned<true>(wxTextEntryDialog) impl
+wxwidgets! {
+    #[doc(alias = "wxTextEntryDialog")]
+    #[doc(alias = "TextEntryDialog")]
+    class TextEntryDialog
+        = TextEntryDialogIsOwned<true>(wxTextEntryDialog) impl
         TextEntryDialogMethods,
         DialogMethods,
         TopLevelWindowMethods,
@@ -462,8 +492,11 @@ impl<const OWNED: bool> DynamicCast for TextEntryDialogIsOwned<OWNED> {
 }
 
 // wxTextValidator
-wx_class! { TextValidator =
-    TextValidatorIsOwned<true>(wxTextValidator) impl
+wxwidgets! {
+    #[doc(alias = "wxTextValidator")]
+    #[doc(alias = "TextValidator")]
+    class TextValidator
+        = TextValidatorIsOwned<true>(wxTextValidator) impl
         TextValidatorMethods,
         ValidatorMethods,
         EvtHandlerMethods,
@@ -512,8 +545,11 @@ impl<const OWNED: bool> DynamicCast for TextValidatorIsOwned<OWNED> {
 }
 
 // wxThreadEvent
-wx_class! { ThreadEvent =
-    ThreadEventIsOwned<true>(wxThreadEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxThreadEvent")]
+    #[doc(alias = "ThreadEvent")]
+    class ThreadEvent
+        = ThreadEventIsOwned<true>(wxThreadEvent) impl
         ThreadEventMethods,
         EventMethods,
         ObjectMethods
@@ -553,8 +589,11 @@ impl<const OWNED: bool> Drop for ThreadEventIsOwned<OWNED> {
 }
 
 // wxTimePickerCtrl
-wx_class! { TimePickerCtrl =
-    TimePickerCtrlIsOwned<true>(wxTimePickerCtrl) impl
+wxwidgets! {
+    #[doc(alias = "wxTimePickerCtrl")]
+    #[doc(alias = "TimePickerCtrl")]
+    class TimePickerCtrl
+        = TimePickerCtrlIsOwned<true>(wxTimePickerCtrl) impl
         TimePickerCtrlMethods,
         ControlMethods,
         WindowMethods,
@@ -633,8 +672,11 @@ impl<const OWNED: bool> DynamicCast for TimePickerCtrlIsOwned<OWNED> {
 }
 
 // wxTipProvider
-wx_class! { TipProvider =
-    TipProviderIsOwned<true>(wxTipProvider) impl
+wxwidgets! {
+    #[doc(alias = "wxTipProvider")]
+    #[doc(alias = "TipProvider")]
+    class TipProvider
+        = TipProviderIsOwned<true>(wxTipProvider) impl
         TipProviderMethods
 }
 impl<const OWNED: bool> TipProviderIsOwned<OWNED> {
@@ -657,8 +699,11 @@ impl<const OWNED: bool> Drop for TipProviderIsOwned<OWNED> {
 }
 
 // wxTipWindow
-wx_class! { TipWindow =
-    TipWindowIsOwned<true>(wxTipWindow) impl
+wxwidgets! {
+    #[doc(alias = "wxTipWindow")]
+    #[doc(alias = "TipWindow")]
+    class TipWindow
+        = TipWindowIsOwned<true>(wxTipWindow) impl
         TipWindowMethods,
         WindowMethods,
         EvtHandlerMethods,
@@ -727,8 +772,11 @@ impl<const OWNED: bool> DynamicCast for TipWindowIsOwned<OWNED> {
 }
 
 // wxToggleButton
-wx_class! { ToggleButton =
-    ToggleButtonIsOwned<true>(wxToggleButton) impl
+wxwidgets! {
+    #[doc(alias = "wxToggleButton")]
+    #[doc(alias = "ToggleButton")]
+    class ToggleButton
+        = ToggleButtonIsOwned<true>(wxToggleButton) impl
         ToggleButtonMethods,
         AnyButtonMethods,
         ControlMethods,
@@ -808,8 +856,11 @@ impl<const OWNED: bool> DynamicCast for ToggleButtonIsOwned<OWNED> {
 }
 
 // wxToolBar
-wx_class! { ToolBar =
-    ToolBarIsOwned<true>(wxToolBar) impl
+wxwidgets! {
+    #[doc(alias = "wxToolBar")]
+    #[doc(alias = "ToolBar")]
+    class ToolBar
+        = ToolBarIsOwned<true>(wxToolBar) impl
         ToolBarMethods,
         ControlMethods,
         WindowMethods,
@@ -876,8 +927,11 @@ impl<const OWNED: bool> DynamicCast for ToolBarIsOwned<OWNED> {
 }
 
 // wxToolTip
-wx_class! { ToolTip =
-    ToolTipIsOwned<true>(wxToolTip) impl
+wxwidgets! {
+    #[doc(alias = "wxToolTip")]
+    #[doc(alias = "ToolTip")]
+    class ToolTip
+        = ToolTipIsOwned<true>(wxToolTip) impl
         ToolTipMethods,
         ObjectMethods
 }
@@ -917,8 +971,11 @@ impl<const OWNED: bool> Drop for ToolTipIsOwned<OWNED> {
 }
 
 // wxToolbook
-wx_class! { Toolbook =
-    ToolbookIsOwned<true>(wxToolbook) impl
+wxwidgets! {
+    #[doc(alias = "wxToolbook")]
+    #[doc(alias = "Toolbook")]
+    class Toolbook
+        = ToolbookIsOwned<true>(wxToolbook) impl
         ToolbookMethods,
         BookCtrlBaseMethods,
         ControlMethods,
@@ -1014,8 +1071,11 @@ impl<const OWNED: bool> WindowMethods for ToolbookIsOwned<OWNED> {
 }
 
 // wxTopLevelWindow
-wx_class! { TopLevelWindow =
-    TopLevelWindowIsOwned<true>(wxTopLevelWindow) impl
+wxwidgets! {
+    #[doc(alias = "wxTopLevelWindow")]
+    #[doc(alias = "TopLevelWindow")]
+    class TopLevelWindow
+        = TopLevelWindowIsOwned<true>(wxTopLevelWindow) impl
         TopLevelWindowMethods,
         NonOwnedWindowMethods,
         WindowMethods,
@@ -1087,8 +1147,11 @@ impl<const OWNED: bool> DynamicCast for TopLevelWindowIsOwned<OWNED> {
 }
 
 // wxTreeCtrl
-wx_class! { TreeCtrl =
-    TreeCtrlIsOwned<true>(wxTreeCtrl) impl
+wxwidgets! {
+    #[doc(alias = "wxTreeCtrl")]
+    #[doc(alias = "TreeCtrl")]
+    class TreeCtrl
+        = TreeCtrlIsOwned<true>(wxTreeCtrl) impl
         TreeCtrlMethods,
         // ControlMethods,
         // WindowMethods,
@@ -1189,8 +1252,11 @@ impl<const OWNED: bool> WindowMethods for TreeCtrlIsOwned<OWNED> {
 }
 
 // wxTreeEvent
-wx_class! { TreeEvent =
-    TreeEventIsOwned<true>(wxTreeEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxTreeEvent")]
+    #[doc(alias = "TreeEvent")]
+    class TreeEvent
+        = TreeEventIsOwned<true>(wxTreeEvent) impl
         TreeEventMethods,
         NotifyEventMethods,
         CommandEventMethods,
@@ -1242,8 +1308,11 @@ impl<const OWNED: bool> Drop for TreeEventIsOwned<OWNED> {
 }
 
 // wxTreeItemData
-wx_class! { TreeItemData =
-    TreeItemDataIsOwned<true>(wxTreeItemData) impl
+wxwidgets! {
+    #[doc(alias = "wxTreeItemData")]
+    #[doc(alias = "TreeItemData")]
+    class TreeItemData
+        = TreeItemDataIsOwned<true>(wxTreeItemData) impl
         TreeItemDataMethods,
         ClientDataMethods
 }
@@ -1274,8 +1343,11 @@ impl<const OWNED: bool> Drop for TreeItemDataIsOwned<OWNED> {
 }
 
 // wxTreeItemId
-wx_class! { TreeItemId =
-    TreeItemIdIsOwned<true>(wxTreeItemId) impl
+wxwidgets! {
+    #[doc(alias = "wxTreeItemId")]
+    #[doc(alias = "TreeItemId")]
+    class TreeItemId
+        = TreeItemIdIsOwned<true>(wxTreeItemId) impl
         TreeItemIdMethods
 }
 impl<const OWNED: bool> TreeItemIdIsOwned<OWNED> {
@@ -1300,8 +1372,11 @@ impl<const OWNED: bool> Drop for TreeItemIdIsOwned<OWNED> {
 }
 
 // wxTreeListCtrl
-wx_class! { TreeListCtrl =
-    TreeListCtrlIsOwned<true>(wxTreeListCtrl) impl
+wxwidgets! {
+    #[doc(alias = "wxTreeListCtrl")]
+    #[doc(alias = "TreeListCtrl")]
+    class TreeListCtrl
+        = TreeListCtrlIsOwned<true>(wxTreeListCtrl) impl
         TreeListCtrlMethods,
         // WindowMethods,
         EvtHandlerMethods,
@@ -1385,8 +1460,11 @@ impl<const OWNED: bool> WindowMethods for TreeListCtrlIsOwned<OWNED> {
 }
 
 // wxTreeListItem
-wx_class! { TreeListItem =
-    TreeListItemIsOwned<true>(wxTreeListItem) impl
+wxwidgets! {
+    #[doc(alias = "wxTreeListItem")]
+    #[doc(alias = "TreeListItem")]
+    class TreeListItem
+        = TreeListItemIsOwned<true>(wxTreeListItem) impl
         TreeListItemMethods
 }
 impl<const OWNED: bool> TreeListItemIsOwned<OWNED> {
@@ -1411,8 +1489,11 @@ impl<const OWNED: bool> Drop for TreeListItemIsOwned<OWNED> {
 }
 
 // wxTreeListItemComparator
-wx_class! { TreeListItemComparator =
-    TreeListItemComparatorIsOwned<true>(wxTreeListItemComparator) impl
+wxwidgets! {
+    #[doc(alias = "wxTreeListItemComparator")]
+    #[doc(alias = "TreeListItemComparator")]
+    class TreeListItemComparator
+        = TreeListItemComparatorIsOwned<true>(wxTreeListItemComparator) impl
         TreeListItemComparatorMethods
 }
 impl<const OWNED: bool> TreeListItemComparatorIsOwned<OWNED> {
@@ -1435,8 +1516,11 @@ impl<const OWNED: bool> Drop for TreeListItemComparatorIsOwned<OWNED> {
 }
 
 // wxTreebook
-wx_class! { Treebook =
-    TreebookIsOwned<true>(wxTreebook) impl
+wxwidgets! {
+    #[doc(alias = "wxTreebook")]
+    #[doc(alias = "Treebook")]
+    class Treebook
+        = TreebookIsOwned<true>(wxTreebook) impl
         TreebookMethods,
         BookCtrlBaseMethods,
         ControlMethods,

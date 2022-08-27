@@ -3,19 +3,20 @@ use std::os::raw::{c_double, c_int, c_long, c_void};
 use std::ptr;
 
 mod generated;
-pub use generated::*;
+pub use generated::class::*;
 
 // re-export wx_base
+#[doc(no_inline)]
 pub use wx_base::*;
 
-#[doc(hidden)]
 pub mod methods {
     use std::os::raw::c_int;
 
     pub use super::generated::methods::*;
 
     // re-export wx_base::methods
-    pub use wx_base::methods::*;
+    #[doc(hidden)]
+    pub use wx_base::*;
 
     pub trait Buildable<'a, P, B> {
         fn builder(parent: Option<&'a P>) -> B;
@@ -2359,9 +2360,10 @@ impl<const OWNED: bool> Default for ValidatorIsOwned<OWNED> {
     }
 }
 
-wx_class! { SizerItemList =
-    SizerItemListIsOwned<true>(wxSizerItemList) impl
-    SizerItemListMethods
+wxwidgets! {
+    class SizerItemList
+        = SizerItemListIsOwned<true>(wxSizerItemList) impl
+        SizerItemListMethods
 }
 impl<const OWNED: bool> SizerItemListIsOwned<OWNED> {
     pub fn new() -> Self {
@@ -2376,8 +2378,9 @@ impl<const OWNED: bool> Drop for SizerItemListIsOwned<OWNED> {
     }
 }
 
-wx_class! { WindowList =
-    WindowListIsOwned<true>(wxWindowList) impl
+wxwidgets! {
+    class WindowList
+        = WindowListIsOwned<true>(wxWindowList) impl
         WindowListMethods
 }
 impl<const OWNED: bool> WindowListIsOwned<OWNED> {

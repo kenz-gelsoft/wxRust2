@@ -1,8 +1,11 @@
 use super::*;
 
 // wxTimer
-wx_class! { Timer =
-    TimerIsOwned<true>(wxTimer) impl
+wxwidgets! {
+    #[doc(alias = "wxTimer")]
+    #[doc(alias = "Timer")]
+    class Timer
+        = TimerIsOwned<true>(wxTimer) impl
         TimerMethods,
         EvtHandlerMethods,
         ObjectMethods
@@ -49,8 +52,11 @@ impl<const OWNED: bool> DynamicCast for TimerIsOwned<OWNED> {
 }
 
 // wxTimerEvent
-wx_class! { TimerEvent =
-    TimerEventIsOwned<true>(wxTimerEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxTimerEvent")]
+    #[doc(alias = "TimerEvent")]
+    class TimerEvent
+        = TimerEventIsOwned<true>(wxTimerEvent) impl
         TimerEventMethods,
         EventMethods,
         ObjectMethods

@@ -1,8 +1,11 @@
 use super::*;
 
 // wxLayoutAlgorithm
-wx_class! { LayoutAlgorithm =
-    LayoutAlgorithmIsOwned<true>(wxLayoutAlgorithm) impl
+wxwidgets! {
+    #[doc(alias = "wxLayoutAlgorithm")]
+    #[doc(alias = "LayoutAlgorithm")]
+    class LayoutAlgorithm
+        = LayoutAlgorithmIsOwned<true>(wxLayoutAlgorithm) impl
         LayoutAlgorithmMethods,
         ObjectMethods
 }
@@ -38,8 +41,11 @@ impl<const OWNED: bool> Drop for LayoutAlgorithmIsOwned<OWNED> {
 }
 
 // wxListBox
-wx_class! { ListBox =
-    ListBoxIsOwned<true>(wxListBox) impl
+wxwidgets! {
+    #[doc(alias = "wxListBox")]
+    #[doc(alias = "ListBox")]
+    class ListBox
+        = ListBoxIsOwned<true>(wxListBox) impl
         ListBoxMethods,
         ControlMethods,
         WindowMethods,
@@ -130,8 +136,11 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for ListBoxIsOwned<OWNED> 
 }
 
 // wxListCtrl
-wx_class! { ListCtrl =
-    ListCtrlIsOwned<true>(wxListCtrl) impl
+wxwidgets! {
+    #[doc(alias = "wxListCtrl")]
+    #[doc(alias = "ListCtrl")]
+    class ListCtrl
+        = ListCtrlIsOwned<true>(wxListCtrl) impl
         ListCtrlMethods,
         // ControlMethods,
         WindowMethods,
@@ -227,8 +236,11 @@ impl<const OWNED: bool> ControlMethods for ListCtrlIsOwned<OWNED> {
 }
 
 // wxListEvent
-wx_class! { ListEvent =
-    ListEventIsOwned<true>(wxListEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxListEvent")]
+    #[doc(alias = "ListEvent")]
+    class ListEvent
+        = ListEventIsOwned<true>(wxListEvent) impl
         ListEventMethods,
         NotifyEventMethods,
         CommandEventMethods,
@@ -280,8 +292,11 @@ impl<const OWNED: bool> Drop for ListEventIsOwned<OWNED> {
 }
 
 // wxListItem
-wx_class! { ListItem =
-    ListItemIsOwned<true>(wxListItem) impl
+wxwidgets! {
+    #[doc(alias = "wxListItem")]
+    #[doc(alias = "ListItem")]
+    class ListItem
+        = ListItemIsOwned<true>(wxListItem) impl
         ListItemMethods,
         ObjectMethods
 }
@@ -317,8 +332,11 @@ impl<const OWNED: bool> Drop for ListItemIsOwned<OWNED> {
 }
 
 // wxListView
-wx_class! { ListView =
-    ListViewIsOwned<true>(wxListView) impl
+wxwidgets! {
+    #[doc(alias = "wxListView")]
+    #[doc(alias = "ListView")]
+    class ListView
+        = ListViewIsOwned<true>(wxListView) impl
         ListViewMethods,
         ListCtrlMethods,
         ControlMethods,
@@ -395,8 +413,11 @@ impl<const OWNED: bool> DynamicCast for ListViewIsOwned<OWNED> {
 }
 
 // wxListbook
-wx_class! { Listbook =
-    ListbookIsOwned<true>(wxListbook) impl
+wxwidgets! {
+    #[doc(alias = "wxListbook")]
+    #[doc(alias = "Listbook")]
+    class Listbook
+        = ListbookIsOwned<true>(wxListbook) impl
         ListbookMethods,
         BookCtrlBaseMethods,
         ControlMethods,

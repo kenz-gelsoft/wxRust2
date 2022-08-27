@@ -1,8 +1,11 @@
 use super::*;
 
 // wxIcon
-wx_class! { Icon =
-    IconIsOwned<true>(wxIcon) impl
+wxwidgets! {
+    #[doc(alias = "wxIcon")]
+    #[doc(alias = "Icon")]
+    class Icon
+        = IconIsOwned<true>(wxIcon) impl
         IconMethods,
         GDIObjectMethods,
         ObjectMethods
@@ -58,8 +61,11 @@ impl<const OWNED: bool> Drop for IconIsOwned<OWNED> {
 }
 
 // wxIconBundle
-wx_class! { IconBundle =
-    IconBundleIsOwned<true>(wxIconBundle) impl
+wxwidgets! {
+    #[doc(alias = "wxIconBundle")]
+    #[doc(alias = "IconBundle")]
+    class IconBundle
+        = IconBundleIsOwned<true>(wxIconBundle) impl
         IconBundleMethods,
         GDIObjectMethods,
         ObjectMethods
@@ -121,8 +127,11 @@ impl<const OWNED: bool> Drop for IconBundleIsOwned<OWNED> {
 }
 
 // wxIconizeEvent
-wx_class! { IconizeEvent =
-    IconizeEventIsOwned<true>(wxIconizeEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxIconizeEvent")]
+    #[doc(alias = "IconizeEvent")]
+    class IconizeEvent
+        = IconizeEventIsOwned<true>(wxIconizeEvent) impl
         IconizeEventMethods,
         EventMethods,
         ObjectMethods
@@ -164,8 +173,11 @@ impl<const OWNED: bool> Drop for IconizeEventIsOwned<OWNED> {
 }
 
 // wxIdManager
-wx_class! { IdManager =
-    IdManagerIsOwned<true>(wxIdManager) impl
+wxwidgets! {
+    #[doc(alias = "wxIdManager")]
+    #[doc(alias = "IdManager")]
+    class IdManager
+        = IdManagerIsOwned<true>(wxIdManager) impl
         IdManagerMethods
 }
 impl<const OWNED: bool> IdManagerIsOwned<OWNED> {
@@ -187,8 +199,11 @@ impl<const OWNED: bool> Drop for IdManagerIsOwned<OWNED> {
 }
 
 // wxImage
-wx_class! { Image =
-    ImageIsOwned<true>(wxImage) impl
+wxwidgets! {
+    #[doc(alias = "wxImage")]
+    #[doc(alias = "Image")]
+    class Image
+        = ImageIsOwned<true>(wxImage) impl
         ImageMethods,
         ObjectMethods
 }
@@ -296,8 +311,11 @@ impl<const OWNED: bool> Drop for ImageIsOwned<OWNED> {
 }
 
 // wxImageHandler
-wx_class! { ImageHandler =
-    ImageHandlerIsOwned<true>(wxImageHandler) impl
+wxwidgets! {
+    #[doc(alias = "wxImageHandler")]
+    #[doc(alias = "ImageHandler")]
+    class ImageHandler
+        = ImageHandlerIsOwned<true>(wxImageHandler) impl
         ImageHandlerMethods,
         ObjectMethods
 }
@@ -331,8 +349,11 @@ impl<const OWNED: bool> Drop for ImageHandlerIsOwned<OWNED> {
 }
 
 // wxImageList
-wx_class! { ImageList =
-    ImageListIsOwned<true>(wxImageList) impl
+wxwidgets! {
+    #[doc(alias = "wxImageList")]
+    #[doc(alias = "ImageList")]
+    class ImageList
+        = ImageListIsOwned<true>(wxImageList) impl
         ImageListMethods,
         ObjectMethods
 }
@@ -376,8 +397,11 @@ impl<const OWNED: bool> Drop for ImageListIsOwned<OWNED> {
 }
 
 // wxInfoBar
-wx_class! { InfoBar =
-    InfoBarIsOwned<true>(wxInfoBar) impl
+wxwidgets! {
+    #[doc(alias = "wxInfoBar")]
+    #[doc(alias = "InfoBar")]
+    class InfoBar
+        = InfoBarIsOwned<true>(wxInfoBar) impl
         InfoBarMethods,
         ControlMethods,
         WindowMethods,
@@ -433,8 +457,11 @@ impl<const OWNED: bool> DynamicCast for InfoBarIsOwned<OWNED> {
 }
 
 // wxInitDialogEvent
-wx_class! { InitDialogEvent =
-    InitDialogEventIsOwned<true>(wxInitDialogEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxInitDialogEvent")]
+    #[doc(alias = "InitDialogEvent")]
+    class InitDialogEvent
+        = InitDialogEventIsOwned<true>(wxInitDialogEvent) impl
         InitDialogEventMethods,
         EventMethods,
         ObjectMethods
@@ -476,8 +503,11 @@ impl<const OWNED: bool> Drop for InitDialogEventIsOwned<OWNED> {
 }
 
 // wxItemContainer
-wx_class! { ItemContainer =
-    ItemContainerIsOwned<true>(wxItemContainer) impl
+wxwidgets! {
+    #[doc(alias = "wxItemContainer")]
+    #[doc(alias = "ItemContainer")]
+    class ItemContainer
+        = ItemContainerIsOwned<true>(wxItemContainer) impl
         ItemContainerMethods,
         ItemContainerImmutableMethods
 }
@@ -505,8 +535,11 @@ impl<const OWNED: bool> Drop for ItemContainerIsOwned<OWNED> {
 }
 
 // wxItemContainerImmutable
-wx_class! { ItemContainerImmutable =
-    ItemContainerImmutableIsOwned<true>(wxItemContainerImmutable) impl
+wxwidgets! {
+    #[doc(alias = "wxItemContainerImmutable")]
+    #[doc(alias = "ItemContainerImmutable")]
+    class ItemContainerImmutable
+        = ItemContainerImmutableIsOwned<true>(wxItemContainerImmutable) impl
         ItemContainerImmutableMethods
 }
 impl<const OWNED: bool> ItemContainerImmutableIsOwned<OWNED> {

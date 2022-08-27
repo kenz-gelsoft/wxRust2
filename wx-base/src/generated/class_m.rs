@@ -1,8 +1,11 @@
 use super::*;
 
 // wxMessageOutput
-wx_class! { MessageOutput =
-    MessageOutputIsOwned<true>(wxMessageOutput) impl
+wxwidgets! {
+    #[doc(alias = "wxMessageOutput")]
+    #[doc(alias = "MessageOutput")]
+    class MessageOutput
+        = MessageOutputIsOwned<true>(wxMessageOutput) impl
         MessageOutputMethods
 }
 impl<const OWNED: bool> MessageOutputIsOwned<OWNED> {

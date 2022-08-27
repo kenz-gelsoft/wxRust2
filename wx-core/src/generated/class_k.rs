@@ -1,8 +1,11 @@
 use super::*;
 
 // wxKeyEvent
-wx_class! { KeyEvent =
-    KeyEventIsOwned<true>(wxKeyEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxKeyEvent")]
+    #[doc(alias = "KeyEvent")]
+    class KeyEvent
+        = KeyEventIsOwned<true>(wxKeyEvent) impl
         KeyEventMethods,
         EventMethods,
         ObjectMethods

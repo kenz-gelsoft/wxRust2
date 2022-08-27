@@ -1,8 +1,11 @@
 use super::*;
 
 // wxFileName
-wx_class! { FileName =
-    FileNameIsOwned<true>(wxFileName) impl
+wxwidgets! {
+    #[doc(alias = "wxFileName")]
+    #[doc(alias = "FileName")]
+    class FileName
+        = FileNameIsOwned<true>(wxFileName) impl
         FileNameMethods
 }
 impl<const OWNED: bool> FileNameIsOwned<OWNED> {

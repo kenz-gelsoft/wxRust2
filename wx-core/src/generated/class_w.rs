@@ -1,8 +1,11 @@
 use super::*;
 
 // wxWindow
-wx_class! { Window =
-    WindowIsOwned<true>(wxWindow) impl
+wxwidgets! {
+    #[doc(alias = "wxWindow")]
+    #[doc(alias = "Window")]
+    class Window
+        = WindowIsOwned<true>(wxWindow) impl
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
@@ -57,8 +60,11 @@ impl<const OWNED: bool> DynamicCast for WindowIsOwned<OWNED> {
 }
 
 // wxWindowCreateEvent
-wx_class! { WindowCreateEvent =
-    WindowCreateEventIsOwned<true>(wxWindowCreateEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxWindowCreateEvent")]
+    #[doc(alias = "WindowCreateEvent")]
+    class WindowCreateEvent
+        = WindowCreateEventIsOwned<true>(wxWindowCreateEvent) impl
         WindowCreateEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -112,8 +118,11 @@ impl<const OWNED: bool> Drop for WindowCreateEventIsOwned<OWNED> {
 }
 
 // wxWindowDC
-wx_class! { WindowDC =
-    WindowDCIsOwned<true>(wxWindowDC) impl
+wxwidgets! {
+    #[doc(alias = "wxWindowDC")]
+    #[doc(alias = "WindowDC")]
+    class WindowDC
+        = WindowDCIsOwned<true>(wxWindowDC) impl
         WindowDCMethods,
         DCMethods,
         ObjectMethods
@@ -161,8 +170,11 @@ impl<const OWNED: bool> Drop for WindowDCIsOwned<OWNED> {
 }
 
 // wxWindowDestroyEvent
-wx_class! { WindowDestroyEvent =
-    WindowDestroyEventIsOwned<true>(wxWindowDestroyEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxWindowDestroyEvent")]
+    #[doc(alias = "WindowDestroyEvent")]
+    class WindowDestroyEvent
+        = WindowDestroyEventIsOwned<true>(wxWindowDestroyEvent) impl
         WindowDestroyEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -216,8 +228,11 @@ impl<const OWNED: bool> Drop for WindowDestroyEventIsOwned<OWNED> {
 }
 
 // wxWindowDisabler
-wx_class! { WindowDisabler =
-    WindowDisablerIsOwned<true>(wxWindowDisabler) impl
+wxwidgets! {
+    #[doc(alias = "wxWindowDisabler")]
+    #[doc(alias = "WindowDisabler")]
+    class WindowDisabler
+        = WindowDisablerIsOwned<true>(wxWindowDisabler) impl
         WindowDisablerMethods
 }
 impl<const OWNED: bool> WindowDisablerIsOwned<OWNED> {
@@ -258,8 +273,11 @@ impl<const OWNED: bool> Drop for WindowDisablerIsOwned<OWNED> {
 }
 
 // wxWizard
-wx_class! { Wizard =
-    WizardIsOwned<true>(wxWizard) impl
+wxwidgets! {
+    #[doc(alias = "wxWizard")]
+    #[doc(alias = "Wizard")]
+    class Wizard
+        = WizardIsOwned<true>(wxWizard) impl
         WizardMethods,
         DialogMethods,
         TopLevelWindowMethods,
@@ -338,8 +356,11 @@ impl<const OWNED: bool> DynamicCast for WizardIsOwned<OWNED> {
 }
 
 // wxWizardEvent
-wx_class! { WizardEvent =
-    WizardEventIsOwned<true>(wxWizardEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxWizardEvent")]
+    #[doc(alias = "WizardEvent")]
+    class WizardEvent
+        = WizardEventIsOwned<true>(wxWizardEvent) impl
         WizardEventMethods,
         NotifyEventMethods,
         CommandEventMethods,
@@ -391,8 +412,11 @@ impl<const OWNED: bool> Drop for WizardEventIsOwned<OWNED> {
 }
 
 // wxWizardPage
-wx_class! { WizardPage =
-    WizardPageIsOwned<true>(wxWizardPage) impl
+wxwidgets! {
+    #[doc(alias = "wxWizardPage")]
+    #[doc(alias = "WizardPage")]
+    class WizardPage
+        = WizardPageIsOwned<true>(wxWizardPage) impl
         WizardPageMethods,
         PanelMethods,
         WindowMethods,
@@ -438,8 +462,11 @@ impl<const OWNED: bool> DynamicCast for WizardPageIsOwned<OWNED> {
 }
 
 // wxWizardPageSimple
-wx_class! { WizardPageSimple =
-    WizardPageSimpleIsOwned<true>(wxWizardPageSimple) impl
+wxwidgets! {
+    #[doc(alias = "wxWizardPageSimple")]
+    #[doc(alias = "WizardPageSimple")]
+    class WizardPageSimple
+        = WizardPageSimpleIsOwned<true>(wxWizardPageSimple) impl
         WizardPageSimpleMethods,
         WizardPageMethods,
         PanelMethods,
@@ -520,8 +547,11 @@ impl<const OWNED: bool> DynamicCast for WizardPageSimpleIsOwned<OWNED> {
 }
 
 // wxWrapSizer
-wx_class! { WrapSizer =
-    WrapSizerIsOwned<true>(wxWrapSizer) impl
+wxwidgets! {
+    #[doc(alias = "wxWrapSizer")]
+    #[doc(alias = "WrapSizer")]
+    class WrapSizer
+        = WrapSizerIsOwned<true>(wxWrapSizer) impl
         WrapSizerMethods,
         BoxSizerMethods,
         SizerMethods,

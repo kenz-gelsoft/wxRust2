@@ -1,8 +1,11 @@
 use super::*;
 
 // wxDC
-wx_class! { DC =
-    DCIsOwned<true>(wxDC) impl
+wxwidgets! {
+    #[doc(alias = "wxDC")]
+    #[doc(alias = "DC")]
+    class DC
+        = DCIsOwned<true>(wxDC) impl
         DCMethods,
         ObjectMethods
 }
@@ -35,8 +38,11 @@ impl<const OWNED: bool> Drop for DCIsOwned<OWNED> {
 }
 
 // wxDCBrushChanger
-wx_class! { DCBrushChanger =
-    DCBrushChangerIsOwned<true>(wxDCBrushChanger) impl
+wxwidgets! {
+    #[doc(alias = "wxDCBrushChanger")]
+    #[doc(alias = "DCBrushChanger")]
+    class DCBrushChanger
+        = DCBrushChangerIsOwned<true>(wxDCBrushChanger) impl
         DCBrushChangerMethods
 }
 impl<const OWNED: bool> DCBrushChangerIsOwned<OWNED> {
@@ -65,8 +71,11 @@ impl<const OWNED: bool> Drop for DCBrushChangerIsOwned<OWNED> {
 }
 
 // wxDCClipper
-wx_class! { DCClipper =
-    DCClipperIsOwned<true>(wxDCClipper) impl
+wxwidgets! {
+    #[doc(alias = "wxDCClipper")]
+    #[doc(alias = "DCClipper")]
+    class DCClipper
+        = DCClipperIsOwned<true>(wxDCClipper) impl
         DCClipperMethods
 }
 impl<const OWNED: bool> DCClipperIsOwned<OWNED> {
@@ -120,8 +129,11 @@ impl<const OWNED: bool> Drop for DCClipperIsOwned<OWNED> {
 }
 
 // wxDCFontChanger
-wx_class! { DCFontChanger =
-    DCFontChangerIsOwned<true>(wxDCFontChanger) impl
+wxwidgets! {
+    #[doc(alias = "wxDCFontChanger")]
+    #[doc(alias = "DCFontChanger")]
+    class DCFontChanger
+        = DCFontChangerIsOwned<true>(wxDCFontChanger) impl
         DCFontChangerMethods
 }
 impl<const OWNED: bool> DCFontChangerIsOwned<OWNED> {
@@ -159,8 +171,11 @@ impl<const OWNED: bool> Drop for DCFontChangerIsOwned<OWNED> {
 }
 
 // wxDCOverlay
-wx_class! { DCOverlay =
-    DCOverlayIsOwned<true>(wxDCOverlay) impl
+wxwidgets! {
+    #[doc(alias = "wxDCOverlay")]
+    #[doc(alias = "DCOverlay")]
+    class DCOverlay
+        = DCOverlayIsOwned<true>(wxDCOverlay) impl
         DCOverlayMethods
 }
 impl<const OWNED: bool> DCOverlayIsOwned<OWNED> {
@@ -212,8 +227,11 @@ impl<const OWNED: bool> Drop for DCOverlayIsOwned<OWNED> {
 }
 
 // wxDCPenChanger
-wx_class! { DCPenChanger =
-    DCPenChangerIsOwned<true>(wxDCPenChanger) impl
+wxwidgets! {
+    #[doc(alias = "wxDCPenChanger")]
+    #[doc(alias = "DCPenChanger")]
+    class DCPenChanger
+        = DCPenChangerIsOwned<true>(wxDCPenChanger) impl
         DCPenChangerMethods
 }
 impl<const OWNED: bool> DCPenChangerIsOwned<OWNED> {
@@ -242,8 +260,11 @@ impl<const OWNED: bool> Drop for DCPenChangerIsOwned<OWNED> {
 }
 
 // wxDCTextColourChanger
-wx_class! { DCTextColourChanger =
-    DCTextColourChangerIsOwned<true>(wxDCTextColourChanger) impl
+wxwidgets! {
+    #[doc(alias = "wxDCTextColourChanger")]
+    #[doc(alias = "DCTextColourChanger")]
+    class DCTextColourChanger
+        = DCTextColourChangerIsOwned<true>(wxDCTextColourChanger) impl
         DCTextColourChangerMethods
 }
 impl<const OWNED: bool> DCTextColourChangerIsOwned<OWNED> {
@@ -281,8 +302,11 @@ impl<const OWNED: bool> Drop for DCTextColourChangerIsOwned<OWNED> {
 }
 
 // wxDataFormat
-wx_class! { DataFormat =
-    DataFormatIsOwned<true>(wxDataFormat) impl
+wxwidgets! {
+    #[doc(alias = "wxDataFormat")]
+    #[doc(alias = "DataFormat")]
+    class DataFormat
+        = DataFormatIsOwned<true>(wxDataFormat) impl
         DataFormatMethods
 }
 impl<const OWNED: bool> DataFormatIsOwned<OWNED> {
@@ -312,8 +336,11 @@ impl<const OWNED: bool> Drop for DataFormatIsOwned<OWNED> {
 }
 
 // wxDataObject
-wx_class! { DataObject =
-    DataObjectIsOwned<true>(wxDataObject) impl
+wxwidgets! {
+    #[doc(alias = "wxDataObject")]
+    #[doc(alias = "DataObject")]
+    class DataObject
+        = DataObjectIsOwned<true>(wxDataObject) impl
         DataObjectMethods
 }
 impl<const OWNED: bool> DataObjectIsOwned<OWNED> {
@@ -341,8 +368,11 @@ impl<const OWNED: bool> Drop for DataObjectIsOwned<OWNED> {
 }
 
 // wxDataObjectComposite
-wx_class! { DataObjectComposite =
-    DataObjectCompositeIsOwned<true>(wxDataObjectComposite) impl
+wxwidgets! {
+    #[doc(alias = "wxDataObjectComposite")]
+    #[doc(alias = "DataObjectComposite")]
+    class DataObjectComposite
+        = DataObjectCompositeIsOwned<true>(wxDataObjectComposite) impl
         DataObjectCompositeMethods,
         DataObjectMethods
 }
@@ -373,8 +403,11 @@ impl<const OWNED: bool> Drop for DataObjectCompositeIsOwned<OWNED> {
 }
 
 // wxDataObjectSimple
-wx_class! { DataObjectSimple =
-    DataObjectSimpleIsOwned<true>(wxDataObjectSimple) impl
+wxwidgets! {
+    #[doc(alias = "wxDataObjectSimple")]
+    #[doc(alias = "DataObjectSimple")]
+    class DataObjectSimple
+        = DataObjectSimpleIsOwned<true>(wxDataObjectSimple) impl
         DataObjectSimpleMethods,
         DataObjectMethods
 }
@@ -408,8 +441,11 @@ impl<const OWNED: bool> Drop for DataObjectSimpleIsOwned<OWNED> {
 }
 
 // wxDataViewBitmapRenderer
-wx_class! { DataViewBitmapRenderer =
-    DataViewBitmapRendererIsOwned<true>(wxDataViewBitmapRenderer) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewBitmapRenderer")]
+    #[doc(alias = "DataViewBitmapRenderer")]
+    class DataViewBitmapRenderer
+        = DataViewBitmapRendererIsOwned<true>(wxDataViewBitmapRenderer) impl
         DataViewBitmapRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
@@ -451,8 +487,11 @@ impl<const OWNED: bool> Drop for DataViewBitmapRendererIsOwned<OWNED> {
 }
 
 // wxDataViewChoiceByIndexRenderer
-wx_class! { DataViewChoiceByIndexRenderer =
-    DataViewChoiceByIndexRendererIsOwned<true>(wxDataViewChoiceByIndexRenderer) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewChoiceByIndexRenderer")]
+    #[doc(alias = "DataViewChoiceByIndexRenderer")]
+    class DataViewChoiceByIndexRenderer
+        = DataViewChoiceByIndexRendererIsOwned<true>(wxDataViewChoiceByIndexRenderer) impl
         DataViewChoiceByIndexRendererMethods,
         DataViewChoiceRendererMethods,
         DataViewRendererMethods,
@@ -502,8 +541,11 @@ impl<const OWNED: bool> Drop for DataViewChoiceByIndexRendererIsOwned<OWNED> {
 }
 
 // wxDataViewChoiceRenderer
-wx_class! { DataViewChoiceRenderer =
-    DataViewChoiceRendererIsOwned<true>(wxDataViewChoiceRenderer) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewChoiceRenderer")]
+    #[doc(alias = "DataViewChoiceRenderer")]
+    class DataViewChoiceRenderer
+        = DataViewChoiceRendererIsOwned<true>(wxDataViewChoiceRenderer) impl
         DataViewChoiceRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
@@ -545,8 +587,11 @@ impl<const OWNED: bool> Drop for DataViewChoiceRendererIsOwned<OWNED> {
 }
 
 // wxDataViewColumn
-wx_class! { DataViewColumn =
-    DataViewColumnIsOwned<true>(wxDataViewColumn) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewColumn")]
+    #[doc(alias = "DataViewColumn")]
+    class DataViewColumn
+        = DataViewColumnIsOwned<true>(wxDataViewColumn) impl
         DataViewColumnMethods,
         SettableHeaderColumnMethods,
         HeaderColumnMethods
@@ -629,8 +674,11 @@ impl<const OWNED: bool> Drop for DataViewColumnIsOwned<OWNED> {
 }
 
 // wxDataViewCtrl
-wx_class! { DataViewCtrl =
-    DataViewCtrlIsOwned<true>(wxDataViewCtrl) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewCtrl")]
+    #[doc(alias = "DataViewCtrl")]
+    class DataViewCtrl
+        = DataViewCtrlIsOwned<true>(wxDataViewCtrl) impl
         DataViewCtrlMethods,
         // ControlMethods,
         WindowMethods,
@@ -726,8 +774,11 @@ impl<const OWNED: bool> ControlMethods for DataViewCtrlIsOwned<OWNED> {
 }
 
 // wxDataViewCustomRenderer
-wx_class! { DataViewCustomRenderer =
-    DataViewCustomRendererIsOwned<true>(wxDataViewCustomRenderer) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewCustomRenderer")]
+    #[doc(alias = "DataViewCustomRenderer")]
+    class DataViewCustomRenderer
+        = DataViewCustomRendererIsOwned<true>(wxDataViewCustomRenderer) impl
         DataViewCustomRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
@@ -769,8 +820,11 @@ impl<const OWNED: bool> Drop for DataViewCustomRendererIsOwned<OWNED> {
 }
 
 // wxDataViewDateRenderer
-wx_class! { DataViewDateRenderer =
-    DataViewDateRendererIsOwned<true>(wxDataViewDateRenderer) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewDateRenderer")]
+    #[doc(alias = "DataViewDateRenderer")]
+    class DataViewDateRenderer
+        = DataViewDateRendererIsOwned<true>(wxDataViewDateRenderer) impl
         DataViewDateRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
@@ -812,8 +866,11 @@ impl<const OWNED: bool> Drop for DataViewDateRendererIsOwned<OWNED> {
 }
 
 // wxDataViewEvent
-wx_class! { DataViewEvent =
-    DataViewEventIsOwned<true>(wxDataViewEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewEvent")]
+    #[doc(alias = "DataViewEvent")]
+    class DataViewEvent
+        = DataViewEventIsOwned<true>(wxDataViewEvent) impl
         DataViewEventMethods,
         NotifyEventMethods,
         CommandEventMethods,
@@ -877,8 +934,11 @@ impl<const OWNED: bool> Drop for DataViewEventIsOwned<OWNED> {
 }
 
 // wxDataViewIconText
-wx_class! { DataViewIconText =
-    DataViewIconTextIsOwned<true>(wxDataViewIconText) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewIconText")]
+    #[doc(alias = "DataViewIconText")]
+    class DataViewIconText
+        = DataViewIconTextIsOwned<true>(wxDataViewIconText) impl
         DataViewIconTextMethods,
         ObjectMethods
 }
@@ -930,8 +990,11 @@ impl<const OWNED: bool> Drop for DataViewIconTextIsOwned<OWNED> {
 }
 
 // wxDataViewIconTextRenderer
-wx_class! { DataViewIconTextRenderer =
-    DataViewIconTextRendererIsOwned<true>(wxDataViewIconTextRenderer) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewIconTextRenderer")]
+    #[doc(alias = "DataViewIconTextRenderer")]
+    class DataViewIconTextRenderer
+        = DataViewIconTextRendererIsOwned<true>(wxDataViewIconTextRenderer) impl
         DataViewIconTextRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
@@ -973,8 +1036,11 @@ impl<const OWNED: bool> Drop for DataViewIconTextRendererIsOwned<OWNED> {
 }
 
 // wxDataViewIndexListModel
-wx_class! { DataViewIndexListModel =
-    DataViewIndexListModelIsOwned<true>(wxDataViewIndexListModel) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewIndexListModel")]
+    #[doc(alias = "DataViewIndexListModel")]
+    class DataViewIndexListModel
+        = DataViewIndexListModelIsOwned<true>(wxDataViewIndexListModel) impl
         DataViewIndexListModelMethods,
         DataViewListModelMethods,
         DataViewModelMethods,
@@ -1017,8 +1083,11 @@ impl<const OWNED: bool> Drop for DataViewIndexListModelIsOwned<OWNED> {
 }
 
 // wxDataViewItem
-wx_class! { DataViewItem =
-    DataViewItemIsOwned<true>(wxDataViewItem) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewItem")]
+    #[doc(alias = "DataViewItem")]
+    class DataViewItem
+        = DataViewItemIsOwned<true>(wxDataViewItem) impl
         DataViewItemMethods
 }
 impl<const OWNED: bool> DataViewItemIsOwned<OWNED> {
@@ -1052,8 +1121,11 @@ impl<const OWNED: bool> Drop for DataViewItemIsOwned<OWNED> {
 }
 
 // wxDataViewItemAttr
-wx_class! { DataViewItemAttr =
-    DataViewItemAttrIsOwned<true>(wxDataViewItemAttr) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewItemAttr")]
+    #[doc(alias = "DataViewItemAttr")]
+    class DataViewItemAttr
+        = DataViewItemAttrIsOwned<true>(wxDataViewItemAttr) impl
         DataViewItemAttrMethods
 }
 impl<const OWNED: bool> DataViewItemAttrIsOwned<OWNED> {
@@ -1078,8 +1150,11 @@ impl<const OWNED: bool> Drop for DataViewItemAttrIsOwned<OWNED> {
 }
 
 // wxDataViewListCtrl
-wx_class! { DataViewListCtrl =
-    DataViewListCtrlIsOwned<true>(wxDataViewListCtrl) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewListCtrl")]
+    #[doc(alias = "DataViewListCtrl")]
+    class DataViewListCtrl
+        = DataViewListCtrlIsOwned<true>(wxDataViewListCtrl) impl
         DataViewListCtrlMethods,
         DataViewCtrlMethods,
         ControlMethods,
@@ -1153,8 +1228,11 @@ impl<const OWNED: bool> DynamicCast for DataViewListCtrlIsOwned<OWNED> {
 }
 
 // wxDataViewListModel
-wx_class! { DataViewListModel =
-    DataViewListModelIsOwned<true>(wxDataViewListModel) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewListModel")]
+    #[doc(alias = "DataViewListModel")]
+    class DataViewListModel
+        = DataViewListModelIsOwned<true>(wxDataViewListModel) impl
         DataViewListModelMethods,
         DataViewModelMethods,
         RefCounterMethods
@@ -1188,8 +1266,11 @@ impl<const OWNED: bool> Drop for DataViewListModelIsOwned<OWNED> {
 }
 
 // wxDataViewListStore
-wx_class! { DataViewListStore =
-    DataViewListStoreIsOwned<true>(wxDataViewListStore) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewListStore")]
+    #[doc(alias = "DataViewListStore")]
+    class DataViewListStore
+        = DataViewListStoreIsOwned<true>(wxDataViewListStore) impl
         DataViewListStoreMethods,
         DataViewIndexListModelMethods,
         DataViewListModelMethods,
@@ -1240,8 +1321,11 @@ impl<const OWNED: bool> Drop for DataViewListStoreIsOwned<OWNED> {
 }
 
 // wxDataViewModel
-wx_class! { DataViewModel =
-    DataViewModelIsOwned<true>(wxDataViewModel) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewModel")]
+    #[doc(alias = "DataViewModel")]
+    class DataViewModel
+        = DataViewModelIsOwned<true>(wxDataViewModel) impl
         DataViewModelMethods,
         RefCounterMethods
 }
@@ -1270,8 +1354,11 @@ impl<const OWNED: bool> Drop for DataViewModelIsOwned<OWNED> {
 }
 
 // wxDataViewModelNotifier
-wx_class! { DataViewModelNotifier =
-    DataViewModelNotifierIsOwned<true>(wxDataViewModelNotifier) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewModelNotifier")]
+    #[doc(alias = "DataViewModelNotifier")]
+    class DataViewModelNotifier
+        = DataViewModelNotifierIsOwned<true>(wxDataViewModelNotifier) impl
         DataViewModelNotifierMethods
 }
 impl<const OWNED: bool> DataViewModelNotifierIsOwned<OWNED> {
@@ -1294,8 +1381,11 @@ impl<const OWNED: bool> Drop for DataViewModelNotifierIsOwned<OWNED> {
 }
 
 // wxDataViewProgressRenderer
-wx_class! { DataViewProgressRenderer =
-    DataViewProgressRendererIsOwned<true>(wxDataViewProgressRenderer) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewProgressRenderer")]
+    #[doc(alias = "DataViewProgressRenderer")]
+    class DataViewProgressRenderer
+        = DataViewProgressRendererIsOwned<true>(wxDataViewProgressRenderer) impl
         DataViewProgressRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
@@ -1337,8 +1427,11 @@ impl<const OWNED: bool> Drop for DataViewProgressRendererIsOwned<OWNED> {
 }
 
 // wxDataViewRenderer
-wx_class! { DataViewRenderer =
-    DataViewRendererIsOwned<true>(wxDataViewRenderer) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewRenderer")]
+    #[doc(alias = "DataViewRenderer")]
+    class DataViewRenderer
+        = DataViewRendererIsOwned<true>(wxDataViewRenderer) impl
         DataViewRendererMethods,
         ObjectMethods
 }
@@ -1372,8 +1465,11 @@ impl<const OWNED: bool> Drop for DataViewRendererIsOwned<OWNED> {
 }
 
 // wxDataViewSpinRenderer
-wx_class! { DataViewSpinRenderer =
-    DataViewSpinRendererIsOwned<true>(wxDataViewSpinRenderer) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewSpinRenderer")]
+    #[doc(alias = "DataViewSpinRenderer")]
+    class DataViewSpinRenderer
+        = DataViewSpinRendererIsOwned<true>(wxDataViewSpinRenderer) impl
         DataViewSpinRendererMethods,
         DataViewCustomRendererMethods,
         DataViewRendererMethods,
@@ -1423,8 +1519,11 @@ impl<const OWNED: bool> Drop for DataViewSpinRendererIsOwned<OWNED> {
 }
 
 // wxDataViewTextRenderer
-wx_class! { DataViewTextRenderer =
-    DataViewTextRendererIsOwned<true>(wxDataViewTextRenderer) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewTextRenderer")]
+    #[doc(alias = "DataViewTextRenderer")]
+    class DataViewTextRenderer
+        = DataViewTextRendererIsOwned<true>(wxDataViewTextRenderer) impl
         DataViewTextRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
@@ -1466,8 +1565,11 @@ impl<const OWNED: bool> Drop for DataViewTextRendererIsOwned<OWNED> {
 }
 
 // wxDataViewToggleRenderer
-wx_class! { DataViewToggleRenderer =
-    DataViewToggleRendererIsOwned<true>(wxDataViewToggleRenderer) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewToggleRenderer")]
+    #[doc(alias = "DataViewToggleRenderer")]
+    class DataViewToggleRenderer
+        = DataViewToggleRendererIsOwned<true>(wxDataViewToggleRenderer) impl
         DataViewToggleRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
@@ -1509,8 +1611,11 @@ impl<const OWNED: bool> Drop for DataViewToggleRendererIsOwned<OWNED> {
 }
 
 // wxDataViewTreeCtrl
-wx_class! { DataViewTreeCtrl =
-    DataViewTreeCtrlIsOwned<true>(wxDataViewTreeCtrl) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewTreeCtrl")]
+    #[doc(alias = "DataViewTreeCtrl")]
+    class DataViewTreeCtrl
+        = DataViewTreeCtrlIsOwned<true>(wxDataViewTreeCtrl) impl
         DataViewTreeCtrlMethods,
         DataViewCtrlMethods,
         ControlMethods,
@@ -1584,8 +1689,11 @@ impl<const OWNED: bool> DynamicCast for DataViewTreeCtrlIsOwned<OWNED> {
 }
 
 // wxDataViewTreeStore
-wx_class! { DataViewTreeStore =
-    DataViewTreeStoreIsOwned<true>(wxDataViewTreeStore) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewTreeStore")]
+    #[doc(alias = "DataViewTreeStore")]
+    class DataViewTreeStore
+        = DataViewTreeStoreIsOwned<true>(wxDataViewTreeStore) impl
         DataViewTreeStoreMethods,
         DataViewModelMethods,
         RefCounterMethods
@@ -1622,8 +1730,11 @@ impl<const OWNED: bool> Drop for DataViewTreeStoreIsOwned<OWNED> {
 }
 
 // wxDataViewVirtualListModel
-wx_class! { DataViewVirtualListModel =
-    DataViewVirtualListModelIsOwned<true>(wxDataViewVirtualListModel) impl
+wxwidgets! {
+    #[doc(alias = "wxDataViewVirtualListModel")]
+    #[doc(alias = "DataViewVirtualListModel")]
+    class DataViewVirtualListModel
+        = DataViewVirtualListModelIsOwned<true>(wxDataViewVirtualListModel) impl
         DataViewVirtualListModelMethods,
         DataViewListModelMethods,
         DataViewModelMethods,
@@ -1668,8 +1779,11 @@ impl<const OWNED: bool> Drop for DataViewVirtualListModelIsOwned<OWNED> {
 }
 
 // wxDateEvent
-wx_class! { DateEvent =
-    DateEventIsOwned<true>(wxDateEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxDateEvent")]
+    #[doc(alias = "DateEvent")]
+    class DateEvent
+        = DateEventIsOwned<true>(wxDateEvent) impl
         DateEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -1718,8 +1832,11 @@ impl<const OWNED: bool> Drop for DateEventIsOwned<OWNED> {
 }
 
 // wxDatePickerCtrl
-wx_class! { DatePickerCtrl =
-    DatePickerCtrlIsOwned<true>(wxDatePickerCtrl) impl
+wxwidgets! {
+    #[doc(alias = "wxDatePickerCtrl")]
+    #[doc(alias = "DatePickerCtrl")]
+    class DatePickerCtrl
+        = DatePickerCtrlIsOwned<true>(wxDatePickerCtrl) impl
         DatePickerCtrlMethods,
         ControlMethods,
         WindowMethods,
@@ -1798,8 +1915,11 @@ impl<const OWNED: bool> DynamicCast for DatePickerCtrlIsOwned<OWNED> {
 }
 
 // wxDelegateRendererNative
-wx_class! { DelegateRendererNative =
-    DelegateRendererNativeIsOwned<true>(wxDelegateRendererNative) impl
+wxwidgets! {
+    #[doc(alias = "wxDelegateRendererNative")]
+    #[doc(alias = "DelegateRendererNative")]
+    class DelegateRendererNative
+        = DelegateRendererNativeIsOwned<true>(wxDelegateRendererNative) impl
         DelegateRendererNativeMethods,
         RendererNativeMethods
 }
@@ -1840,8 +1960,11 @@ impl<const OWNED: bool> Drop for DelegateRendererNativeIsOwned<OWNED> {
 }
 
 // wxDialog
-wx_class! { Dialog =
-    DialogIsOwned<true>(wxDialog) impl
+wxwidgets! {
+    #[doc(alias = "wxDialog")]
+    #[doc(alias = "Dialog")]
+    class Dialog
+        = DialogIsOwned<true>(wxDialog) impl
         DialogMethods,
         // TopLevelWindowMethods,
         NonOwnedWindowMethods,
@@ -1956,8 +2079,11 @@ impl<const OWNED: bool> WindowMethods for DialogIsOwned<OWNED> {
 }
 
 // wxDialogLayoutAdapter
-wx_class! { DialogLayoutAdapter =
-    DialogLayoutAdapterIsOwned<true>(wxDialogLayoutAdapter) impl
+wxwidgets! {
+    #[doc(alias = "wxDialogLayoutAdapter")]
+    #[doc(alias = "DialogLayoutAdapter")]
+    class DialogLayoutAdapter
+        = DialogLayoutAdapterIsOwned<true>(wxDialogLayoutAdapter) impl
         DialogLayoutAdapterMethods
 }
 impl<const OWNED: bool> DialogLayoutAdapterIsOwned<OWNED> {
@@ -1980,8 +2106,11 @@ impl<const OWNED: bool> Drop for DialogLayoutAdapterIsOwned<OWNED> {
 }
 
 // wxDirDialog
-wx_class! { DirDialog =
-    DirDialogIsOwned<true>(wxDirDialog) impl
+wxwidgets! {
+    #[doc(alias = "wxDirDialog")]
+    #[doc(alias = "DirDialog")]
+    class DirDialog
+        = DirDialogIsOwned<true>(wxDirDialog) impl
         DirDialogMethods,
         DialogMethods,
         TopLevelWindowMethods,
@@ -2070,8 +2199,11 @@ impl<const OWNED: bool> DynamicCast for DirDialogIsOwned<OWNED> {
 }
 
 // wxDirPickerCtrl
-wx_class! { DirPickerCtrl =
-    DirPickerCtrlIsOwned<true>(wxDirPickerCtrl) impl
+wxwidgets! {
+    #[doc(alias = "wxDirPickerCtrl")]
+    #[doc(alias = "DirPickerCtrl")]
+    class DirPickerCtrl
+        = DirPickerCtrlIsOwned<true>(wxDirPickerCtrl) impl
         DirPickerCtrlMethods,
         PickerBaseMethods,
         ControlMethods,
@@ -2154,8 +2286,11 @@ impl<const OWNED: bool> DynamicCast for DirPickerCtrlIsOwned<OWNED> {
 }
 
 // wxDisplay
-wx_class! { Display =
-    DisplayIsOwned<true>(wxDisplay) impl
+wxwidgets! {
+    #[doc(alias = "wxDisplay")]
+    #[doc(alias = "Display")]
+    class Display
+        = DisplayIsOwned<true>(wxDisplay) impl
         DisplayMethods
 }
 impl<const OWNED: bool> DisplayIsOwned<OWNED> {
@@ -2192,8 +2327,11 @@ impl<const OWNED: bool> Drop for DisplayIsOwned<OWNED> {
 }
 
 // wxDisplayChangedEvent
-wx_class! { DisplayChangedEvent =
-    DisplayChangedEventIsOwned<true>(wxDisplayChangedEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxDisplayChangedEvent")]
+    #[doc(alias = "DisplayChangedEvent")]
+    class DisplayChangedEvent
+        = DisplayChangedEventIsOwned<true>(wxDisplayChangedEvent) impl
         DisplayChangedEventMethods,
         EventMethods,
         ObjectMethods
@@ -2235,8 +2373,11 @@ impl<const OWNED: bool> Drop for DisplayChangedEventIsOwned<OWNED> {
 }
 
 // wxDragImage
-wx_class! { DragImage =
-    DragImageIsOwned<true>(wxDragImage) impl
+wxwidgets! {
+    #[doc(alias = "wxDragImage")]
+    #[doc(alias = "DragImage")]
+    class DragImage
+        = DragImageIsOwned<true>(wxDragImage) impl
         DragImageMethods,
         ObjectMethods
 }
@@ -2319,8 +2460,11 @@ impl<const OWNED: bool> Drop for DragImageIsOwned<OWNED> {
 }
 
 // wxDropFilesEvent
-wx_class! { DropFilesEvent =
-    DropFilesEventIsOwned<true>(wxDropFilesEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxDropFilesEvent")]
+    #[doc(alias = "DropFilesEvent")]
+    class DropFilesEvent
+        = DropFilesEventIsOwned<true>(wxDropFilesEvent) impl
         DropFilesEventMethods,
         EventMethods,
         ObjectMethods
@@ -2360,8 +2504,11 @@ impl<const OWNED: bool> Drop for DropFilesEventIsOwned<OWNED> {
 }
 
 // wxDropSource
-wx_class! { DropSource =
-    DropSourceIsOwned<true>(wxDropSource) impl
+wxwidgets! {
+    #[doc(alias = "wxDropSource")]
+    #[doc(alias = "DropSource")]
+    class DropSource
+        = DropSourceIsOwned<true>(wxDropSource) impl
         DropSourceMethods
 }
 impl<const OWNED: bool> DropSourceIsOwned<OWNED> {
@@ -2481,8 +2628,11 @@ impl<const OWNED: bool> Drop for DropSourceIsOwned<OWNED> {
 }
 
 // wxDropTarget
-wx_class! { DropTarget =
-    DropTargetIsOwned<true>(wxDropTarget) impl
+wxwidgets! {
+    #[doc(alias = "wxDropTarget")]
+    #[doc(alias = "DropTarget")]
+    class DropTarget
+        = DropTargetIsOwned<true>(wxDropTarget) impl
         DropTargetMethods
 }
 impl<const OWNED: bool> DropTargetIsOwned<OWNED> {

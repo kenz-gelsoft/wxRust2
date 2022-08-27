@@ -8,12 +8,14 @@ use std::str;
 mod macros;
 
 mod constants;
+#[doc(hidden)]
 pub use constants::*;
 mod manual;
+#[doc(hidden)]
 pub use manual::*;
 
 mod generated;
-pub use generated::*;
+pub use generated::class::*;
 
 use methods::*;
 
@@ -74,7 +76,6 @@ mod ffi {
     }
 }
 
-#[doc(hidden)]
 pub mod methods {
     pub use super::generated::methods::*;
     use super::*;
@@ -231,8 +232,9 @@ impl App {
     }
 }
 
-wx_class! { ArrayInt =
-    ArrayIntIsOwned<true>(wxArrayInt) impl
+wxwidgets! {
+    class ArrayInt
+        = ArrayIntIsOwned<true>(wxArrayInt) impl
         ArrayIntMethods
 }
 impl<const OWNED: bool> ArrayIntIsOwned<OWNED> {
@@ -248,8 +250,9 @@ impl<const OWNED: bool> Drop for ArrayIntIsOwned<OWNED> {
     }
 }
 
-wx_class! { ArrayString =
-    ArrayStringIsOwned<true>(wxArrayString) impl
+wxwidgets! {
+    class ArrayString
+        = ArrayStringIsOwned<true>(wxArrayString) impl
         ArrayStringMethods
 }
 impl<const OWNED: bool> ArrayStringIsOwned<OWNED> {
@@ -266,8 +269,9 @@ impl<const OWNED: bool> Drop for ArrayStringIsOwned<OWNED> {
 }
 
 // (wx)String::const_iterator
-wx_class! { StringConstIterator =
-    StringConstIteratorIsOwned<true>(wxStringConstIterator) impl
+wxwidgets! {
+    class StringConstIterator
+        = StringConstIteratorIsOwned<true>(wxStringConstIterator) impl
         StringConstIteratorMethods
 }
 impl<const OWNED: bool> StringConstIteratorIsOwned<OWNED> {

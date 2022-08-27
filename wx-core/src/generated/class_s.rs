@@ -1,8 +1,11 @@
 use super::*;
 
 // wxSVGFileDC
-wx_class! { SVGFileDC =
-    SVGFileDCIsOwned<true>(wxSVGFileDC) impl
+wxwidgets! {
+    #[doc(alias = "wxSVGFileDC")]
+    #[doc(alias = "SVGFileDC")]
+    class SVGFileDC
+        = SVGFileDCIsOwned<true>(wxSVGFileDC) impl
         SVGFileDCMethods,
         // DCMethods,
         ObjectMethods
@@ -104,8 +107,11 @@ impl<const OWNED: bool> DCMethods for SVGFileDCIsOwned<OWNED> {
 }
 
 // wxSashEvent
-wx_class! { SashEvent =
-    SashEventIsOwned<true>(wxSashEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxSashEvent")]
+    #[doc(alias = "SashEvent")]
+    class SashEvent
+        = SashEventIsOwned<true>(wxSashEvent) impl
         SashEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -151,8 +157,11 @@ impl<const OWNED: bool> Drop for SashEventIsOwned<OWNED> {
 }
 
 // wxSashLayoutWindow
-wx_class! { SashLayoutWindow =
-    SashLayoutWindowIsOwned<true>(wxSashLayoutWindow) impl
+wxwidgets! {
+    #[doc(alias = "wxSashLayoutWindow")]
+    #[doc(alias = "SashLayoutWindow")]
+    class SashLayoutWindow
+        = SashLayoutWindowIsOwned<true>(wxSashLayoutWindow) impl
         SashLayoutWindowMethods,
         SashWindowMethods,
         // WindowMethods,
@@ -244,8 +253,11 @@ impl<const OWNED: bool> WindowMethods for SashLayoutWindowIsOwned<OWNED> {
 }
 
 // wxSashWindow
-wx_class! { SashWindow =
-    SashWindowIsOwned<true>(wxSashWindow) impl
+wxwidgets! {
+    #[doc(alias = "wxSashWindow")]
+    #[doc(alias = "SashWindow")]
+    class SashWindow
+        = SashWindowIsOwned<true>(wxSashWindow) impl
         SashWindowMethods,
         WindowMethods,
         EvtHandlerMethods,
@@ -306,8 +318,11 @@ impl<const OWNED: bool> DynamicCast for SashWindowIsOwned<OWNED> {
 }
 
 // wxScreenDC
-wx_class! { ScreenDC =
-    ScreenDCIsOwned<true>(wxScreenDC) impl
+wxwidgets! {
+    #[doc(alias = "wxScreenDC")]
+    #[doc(alias = "ScreenDC")]
+    class ScreenDC
+        = ScreenDCIsOwned<true>(wxScreenDC) impl
         ScreenDCMethods,
         DCMethods,
         ObjectMethods
@@ -349,8 +364,11 @@ impl<const OWNED: bool> Drop for ScreenDCIsOwned<OWNED> {
 }
 
 // wxScrollBar
-wx_class! { ScrollBar =
-    ScrollBarIsOwned<true>(wxScrollBar) impl
+wxwidgets! {
+    #[doc(alias = "wxScrollBar")]
+    #[doc(alias = "ScrollBar")]
+    class ScrollBar
+        = ScrollBarIsOwned<true>(wxScrollBar) impl
         ScrollBarMethods,
         // ControlMethods,
         WindowMethods,
@@ -446,8 +464,11 @@ impl<const OWNED: bool> ControlMethods for ScrollBarIsOwned<OWNED> {
 }
 
 // wxScrollEvent
-wx_class! { ScrollEvent =
-    ScrollEventIsOwned<true>(wxScrollEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxScrollEvent")]
+    #[doc(alias = "ScrollEvent")]
+    class ScrollEvent
+        = ScrollEventIsOwned<true>(wxScrollEvent) impl
         ScrollEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -493,8 +514,11 @@ impl<const OWNED: bool> Drop for ScrollEventIsOwned<OWNED> {
 }
 
 // wxScrollWinEvent
-wx_class! { ScrollWinEvent =
-    ScrollWinEventIsOwned<true>(wxScrollWinEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxScrollWinEvent")]
+    #[doc(alias = "ScrollWinEvent")]
+    class ScrollWinEvent
+        = ScrollWinEventIsOwned<true>(wxScrollWinEvent) impl
         ScrollWinEventMethods,
         EventMethods,
         ObjectMethods
@@ -534,8 +558,11 @@ impl<const OWNED: bool> Drop for ScrollWinEventIsOwned<OWNED> {
 }
 
 // wxSearchCtrl
-wx_class! { SearchCtrl =
-    SearchCtrlIsOwned<true>(wxSearchCtrl) impl
+wxwidgets! {
+    #[doc(alias = "wxSearchCtrl")]
+    #[doc(alias = "SearchCtrl")]
+    class SearchCtrl
+        = SearchCtrlIsOwned<true>(wxSearchCtrl) impl
         SearchCtrlMethods,
         // TextCtrlMethods,
         ControlMethods,
@@ -659,8 +686,11 @@ impl<const OWNED: bool> TextCtrlMethods for SearchCtrlIsOwned<OWNED> {
 }
 
 // wxSetCursorEvent
-wx_class! { SetCursorEvent =
-    SetCursorEventIsOwned<true>(wxSetCursorEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxSetCursorEvent")]
+    #[doc(alias = "SetCursorEvent")]
+    class SetCursorEvent
+        = SetCursorEventIsOwned<true>(wxSetCursorEvent) impl
         SetCursorEventMethods,
         EventMethods,
         ObjectMethods
@@ -702,8 +732,11 @@ impl<const OWNED: bool> Drop for SetCursorEventIsOwned<OWNED> {
 }
 
 // wxSettableHeaderColumn
-wx_class! { SettableHeaderColumn =
-    SettableHeaderColumnIsOwned<true>(wxSettableHeaderColumn) impl
+wxwidgets! {
+    #[doc(alias = "wxSettableHeaderColumn")]
+    #[doc(alias = "SettableHeaderColumn")]
+    class SettableHeaderColumn
+        = SettableHeaderColumnIsOwned<true>(wxSettableHeaderColumn) impl
         SettableHeaderColumnMethods,
         HeaderColumnMethods
 }
@@ -731,8 +764,11 @@ impl<const OWNED: bool> Drop for SettableHeaderColumnIsOwned<OWNED> {
 }
 
 // wxShowEvent
-wx_class! { ShowEvent =
-    ShowEventIsOwned<true>(wxShowEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxShowEvent")]
+    #[doc(alias = "ShowEvent")]
+    class ShowEvent
+        = ShowEventIsOwned<true>(wxShowEvent) impl
         ShowEventMethods,
         EventMethods,
         ObjectMethods
@@ -774,8 +810,11 @@ impl<const OWNED: bool> Drop for ShowEventIsOwned<OWNED> {
 }
 
 // wxSimplebook
-wx_class! { Simplebook =
-    SimplebookIsOwned<true>(wxSimplebook) impl
+wxwidgets! {
+    #[doc(alias = "wxSimplebook")]
+    #[doc(alias = "Simplebook")]
+    class Simplebook
+        = SimplebookIsOwned<true>(wxSimplebook) impl
         SimplebookMethods,
         BookCtrlBaseMethods,
         ControlMethods,
@@ -871,8 +910,11 @@ impl<const OWNED: bool> WindowMethods for SimplebookIsOwned<OWNED> {
 }
 
 // wxSize
-wx_class! { Size =
-    SizeIsOwned<true>(wxSize) impl
+wxwidgets! {
+    #[doc(alias = "wxSize")]
+    #[doc(alias = "Size")]
+    class Size
+        = SizeIsOwned<true>(wxSize) impl
         SizeMethods
 }
 impl<const OWNED: bool> SizeIsOwned<OWNED> {
@@ -900,8 +942,11 @@ impl<const OWNED: bool> Drop for SizeIsOwned<OWNED> {
 }
 
 // wxSizeEvent
-wx_class! { SizeEvent =
-    SizeEventIsOwned<true>(wxSizeEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxSizeEvent")]
+    #[doc(alias = "SizeEvent")]
+    class SizeEvent
+        = SizeEventIsOwned<true>(wxSizeEvent) impl
         SizeEventMethods,
         EventMethods,
         ObjectMethods
@@ -946,8 +991,11 @@ impl<const OWNED: bool> Drop for SizeEventIsOwned<OWNED> {
 }
 
 // wxSizer
-wx_class! { Sizer =
-    SizerIsOwned<true>(wxSizer) impl
+wxwidgets! {
+    #[doc(alias = "wxSizer")]
+    #[doc(alias = "Sizer")]
+    class Sizer
+        = SizerIsOwned<true>(wxSizer) impl
         SizerMethods,
         ObjectMethods
 }
@@ -974,8 +1022,11 @@ impl<const OWNED: bool> DynamicCast for SizerIsOwned<OWNED> {
 }
 
 // wxSizerFlags
-wx_class! { SizerFlags =
-    SizerFlagsIsOwned<true>(wxSizerFlags) impl
+wxwidgets! {
+    #[doc(alias = "wxSizerFlags")]
+    #[doc(alias = "SizerFlags")]
+    class SizerFlags
+        = SizerFlagsIsOwned<true>(wxSizerFlags) impl
         SizerFlagsMethods
 }
 impl<const OWNED: bool> SizerFlagsIsOwned<OWNED> {
@@ -1000,8 +1051,11 @@ impl<const OWNED: bool> Drop for SizerFlagsIsOwned<OWNED> {
 }
 
 // wxSizerItem
-wx_class! { SizerItem =
-    SizerItemIsOwned<true>(wxSizerItem) impl
+wxwidgets! {
+    #[doc(alias = "wxSizerItem")]
+    #[doc(alias = "SizerItem")]
+    class SizerItem
+        = SizerItemIsOwned<true>(wxSizerItem) impl
         SizerItemMethods,
         ObjectMethods
 }
@@ -1120,8 +1174,11 @@ impl<const OWNED: bool> Drop for SizerItemIsOwned<OWNED> {
 }
 
 // wxSlider
-wx_class! { Slider =
-    SliderIsOwned<true>(wxSlider) impl
+wxwidgets! {
+    #[doc(alias = "wxSlider")]
+    #[doc(alias = "Slider")]
+    class Slider
+        = SliderIsOwned<true>(wxSlider) impl
         SliderMethods,
         ControlMethods,
         WindowMethods,
@@ -1195,8 +1252,11 @@ impl<const OWNED: bool> DynamicCast for SliderIsOwned<OWNED> {
 }
 
 // wxSpinButton
-wx_class! { SpinButton =
-    SpinButtonIsOwned<true>(wxSpinButton) impl
+wxwidgets! {
+    #[doc(alias = "wxSpinButton")]
+    #[doc(alias = "SpinButton")]
+    class SpinButton
+        = SpinButtonIsOwned<true>(wxSpinButton) impl
         SpinButtonMethods,
         ControlMethods,
         // WindowMethods,
@@ -1286,8 +1346,11 @@ impl<const OWNED: bool> WindowMethods for SpinButtonIsOwned<OWNED> {
 }
 
 // wxSpinCtrl
-wx_class! { SpinCtrl =
-    SpinCtrlIsOwned<true>(wxSpinCtrl) impl
+wxwidgets! {
+    #[doc(alias = "wxSpinCtrl")]
+    #[doc(alias = "SpinCtrl")]
+    class SpinCtrl
+        = SpinCtrlIsOwned<true>(wxSpinCtrl) impl
         SpinCtrlMethods,
         ControlMethods,
         WindowMethods,
@@ -1362,8 +1425,11 @@ impl<const OWNED: bool> DynamicCast for SpinCtrlIsOwned<OWNED> {
 }
 
 // wxSpinCtrlDouble
-wx_class! { SpinCtrlDouble =
-    SpinCtrlDoubleIsOwned<true>(wxSpinCtrlDouble) impl
+wxwidgets! {
+    #[doc(alias = "wxSpinCtrlDouble")]
+    #[doc(alias = "SpinCtrlDouble")]
+    class SpinCtrlDouble
+        = SpinCtrlDoubleIsOwned<true>(wxSpinCtrlDouble) impl
         SpinCtrlDoubleMethods,
         ControlMethods,
         WindowMethods,
@@ -1439,8 +1505,11 @@ impl<const OWNED: bool> DynamicCast for SpinCtrlDoubleIsOwned<OWNED> {
 }
 
 // wxSpinDoubleEvent
-wx_class! { SpinDoubleEvent =
-    SpinDoubleEventIsOwned<true>(wxSpinDoubleEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxSpinDoubleEvent")]
+    #[doc(alias = "SpinDoubleEvent")]
+    class SpinDoubleEvent
+        = SpinDoubleEventIsOwned<true>(wxSpinDoubleEvent) impl
         SpinDoubleEventMethods,
         NotifyEventMethods,
         CommandEventMethods,
@@ -1498,8 +1567,11 @@ impl<const OWNED: bool> Drop for SpinDoubleEventIsOwned<OWNED> {
 }
 
 // wxSpinEvent
-wx_class! { SpinEvent =
-    SpinEventIsOwned<true>(wxSpinEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxSpinEvent")]
+    #[doc(alias = "SpinEvent")]
+    class SpinEvent
+        = SpinEventIsOwned<true>(wxSpinEvent) impl
         SpinEventMethods,
         NotifyEventMethods,
         CommandEventMethods,
@@ -1551,8 +1623,11 @@ impl<const OWNED: bool> Drop for SpinEventIsOwned<OWNED> {
 }
 
 // wxSplashScreen
-wx_class! { SplashScreen =
-    SplashScreenIsOwned<true>(wxSplashScreen) impl
+wxwidgets! {
+    #[doc(alias = "wxSplashScreen")]
+    #[doc(alias = "SplashScreen")]
+    class SplashScreen
+        = SplashScreenIsOwned<true>(wxSplashScreen) impl
         SplashScreenMethods,
         FrameMethods,
         TopLevelWindowMethods,
@@ -1638,8 +1713,11 @@ impl<const OWNED: bool> DynamicCast for SplashScreenIsOwned<OWNED> {
 }
 
 // wxSplitterEvent
-wx_class! { SplitterEvent =
-    SplitterEventIsOwned<true>(wxSplitterEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxSplitterEvent")]
+    #[doc(alias = "SplitterEvent")]
+    class SplitterEvent
+        = SplitterEventIsOwned<true>(wxSplitterEvent) impl
         SplitterEventMethods,
         NotifyEventMethods,
         CommandEventMethods,
@@ -1691,8 +1769,11 @@ impl<const OWNED: bool> Drop for SplitterEventIsOwned<OWNED> {
 }
 
 // wxSplitterWindow
-wx_class! { SplitterWindow =
-    SplitterWindowIsOwned<true>(wxSplitterWindow) impl
+wxwidgets! {
+    #[doc(alias = "wxSplitterWindow")]
+    #[doc(alias = "SplitterWindow")]
+    class SplitterWindow
+        = SplitterWindowIsOwned<true>(wxSplitterWindow) impl
         SplitterWindowMethods,
         // WindowMethods,
         EvtHandlerMethods,
@@ -1778,8 +1859,11 @@ impl<const OWNED: bool> WindowMethods for SplitterWindowIsOwned<OWNED> {
 }
 
 // wxStaticBitmap
-wx_class! { StaticBitmap =
-    StaticBitmapIsOwned<true>(wxStaticBitmap) impl
+wxwidgets! {
+    #[doc(alias = "wxStaticBitmap")]
+    #[doc(alias = "StaticBitmap")]
+    class StaticBitmap
+        = StaticBitmapIsOwned<true>(wxStaticBitmap) impl
         StaticBitmapMethods,
         ControlMethods,
         WindowMethods,
@@ -1856,8 +1940,11 @@ impl<const OWNED: bool> DynamicCast for StaticBitmapIsOwned<OWNED> {
 }
 
 // wxStaticBox
-wx_class! { StaticBox =
-    StaticBoxIsOwned<true>(wxStaticBox) impl
+wxwidgets! {
+    #[doc(alias = "wxStaticBox")]
+    #[doc(alias = "StaticBox")]
+    class StaticBox
+        = StaticBoxIsOwned<true>(wxStaticBox) impl
         StaticBoxMethods,
         ControlMethods,
         WindowMethods,
@@ -1930,8 +2017,11 @@ impl<const OWNED: bool> DynamicCast for StaticBoxIsOwned<OWNED> {
 }
 
 // wxStaticBoxSizer
-wx_class! { StaticBoxSizer =
-    StaticBoxSizerIsOwned<true>(wxStaticBoxSizer) impl
+wxwidgets! {
+    #[doc(alias = "wxStaticBoxSizer")]
+    #[doc(alias = "StaticBoxSizer")]
+    class StaticBoxSizer
+        = StaticBoxSizerIsOwned<true>(wxStaticBoxSizer) impl
         StaticBoxSizerMethods,
         BoxSizerMethods,
         SizerMethods,
@@ -1996,8 +2086,11 @@ impl<const OWNED: bool> DynamicCast for StaticBoxSizerIsOwned<OWNED> {
 }
 
 // wxStaticLine
-wx_class! { StaticLine =
-    StaticLineIsOwned<true>(wxStaticLine) impl
+wxwidgets! {
+    #[doc(alias = "wxStaticLine")]
+    #[doc(alias = "StaticLine")]
+    class StaticLine
+        = StaticLineIsOwned<true>(wxStaticLine) impl
         StaticLineMethods,
         ControlMethods,
         // WindowMethods,
@@ -2087,8 +2180,11 @@ impl<const OWNED: bool> WindowMethods for StaticLineIsOwned<OWNED> {
 }
 
 // wxStaticText
-wx_class! { StaticText =
-    StaticTextIsOwned<true>(wxStaticText) impl
+wxwidgets! {
+    #[doc(alias = "wxStaticText")]
+    #[doc(alias = "StaticText")]
+    class StaticText
+        = StaticTextIsOwned<true>(wxStaticText) impl
         StaticTextMethods,
         ControlMethods,
         WindowMethods,
@@ -2160,8 +2256,11 @@ impl<const OWNED: bool> DynamicCast for StaticTextIsOwned<OWNED> {
 }
 
 // wxStatusBar
-wx_class! { StatusBar =
-    StatusBarIsOwned<true>(wxStatusBar) impl
+wxwidgets! {
+    #[doc(alias = "wxStatusBar")]
+    #[doc(alias = "StatusBar")]
+    class StatusBar
+        = StatusBarIsOwned<true>(wxStatusBar) impl
         StatusBarMethods,
         ControlMethods,
         WindowMethods,
@@ -2224,8 +2323,11 @@ impl<const OWNED: bool> DynamicCast for StatusBarIsOwned<OWNED> {
 }
 
 // wxStatusBarPane
-wx_class! { StatusBarPane =
-    StatusBarPaneIsOwned<true>(wxStatusBarPane) impl
+wxwidgets! {
+    #[doc(alias = "wxStatusBarPane")]
+    #[doc(alias = "StatusBarPane")]
+    class StatusBarPane
+        = StatusBarPaneIsOwned<true>(wxStatusBarPane) impl
         StatusBarPaneMethods
 }
 impl<const OWNED: bool> StatusBarPaneIsOwned<OWNED> {
@@ -2250,8 +2352,11 @@ impl<const OWNED: bool> Drop for StatusBarPaneIsOwned<OWNED> {
 }
 
 // wxStdDialogButtonSizer
-wx_class! { StdDialogButtonSizer =
-    StdDialogButtonSizerIsOwned<true>(wxStdDialogButtonSizer) impl
+wxwidgets! {
+    #[doc(alias = "wxStdDialogButtonSizer")]
+    #[doc(alias = "StdDialogButtonSizer")]
+    class StdDialogButtonSizer
+        = StdDialogButtonSizerIsOwned<true>(wxStdDialogButtonSizer) impl
         StdDialogButtonSizerMethods,
         BoxSizerMethods,
         SizerMethods,
@@ -2292,8 +2397,11 @@ impl<const OWNED: bool> DynamicCast for StdDialogButtonSizerIsOwned<OWNED> {
 }
 
 // wxStockPreferencesPage
-wx_class! { StockPreferencesPage =
-    StockPreferencesPageIsOwned<true>(wxStockPreferencesPage) impl
+wxwidgets! {
+    #[doc(alias = "wxStockPreferencesPage")]
+    #[doc(alias = "StockPreferencesPage")]
+    class StockPreferencesPage
+        = StockPreferencesPageIsOwned<true>(wxStockPreferencesPage) impl
         StockPreferencesPageMethods,
         PreferencesPageMethods
 }
@@ -2326,8 +2434,11 @@ impl<const OWNED: bool> Drop for StockPreferencesPageIsOwned<OWNED> {
 }
 
 // wxSysColourChangedEvent
-wx_class! { SysColourChangedEvent =
-    SysColourChangedEventIsOwned<true>(wxSysColourChangedEvent) impl
+wxwidgets! {
+    #[doc(alias = "wxSysColourChangedEvent")]
+    #[doc(alias = "SysColourChangedEvent")]
+    class SysColourChangedEvent
+        = SysColourChangedEventIsOwned<true>(wxSysColourChangedEvent) impl
         SysColourChangedEventMethods,
         EventMethods,
         ObjectMethods
@@ -2369,8 +2480,11 @@ impl<const OWNED: bool> Drop for SysColourChangedEventIsOwned<OWNED> {
 }
 
 // wxSystemSettings
-wx_class! { SystemSettings =
-    SystemSettingsIsOwned<true>(wxSystemSettings) impl
+wxwidgets! {
+    #[doc(alias = "wxSystemSettings")]
+    #[doc(alias = "SystemSettings")]
+    class SystemSettings
+        = SystemSettingsIsOwned<true>(wxSystemSettings) impl
         SystemSettingsMethods
 }
 impl<const OWNED: bool> SystemSettingsIsOwned<OWNED> {

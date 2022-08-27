@@ -1,8 +1,11 @@
 use super::*;
 
 // wxRefCounter
-wx_class! { RefCounter =
-    RefCounterIsOwned<true>(wxRefCounter) impl
+wxwidgets! {
+    #[doc(alias = "wxRefCounter")]
+    #[doc(alias = "RefCounter")]
+    class RefCounter
+        = RefCounterIsOwned<true>(wxRefCounter) impl
         RefCounterMethods
 }
 impl<const OWNED: bool> RefCounterIsOwned<OWNED> {

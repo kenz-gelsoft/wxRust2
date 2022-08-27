@@ -135,6 +135,9 @@ blocklist = [
     'wxAUI_TBART_OVERFLOW_SIZE',
     'wxFILE_EXISTS_NO_FOLLOW',
     'wxPG_PROP_BEING_DELETED',
+
+    # special macro
+    'wxDEPRECATED_ATTR',
 ]
 generated = set()
 class Define:
