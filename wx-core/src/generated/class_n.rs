@@ -4,7 +4,7 @@ use super::*;
 wxwidgets! {
     #[doc(alias = "wxNativeFontInfo")]
     #[doc(alias = "NativeFontInfo")]
-    type NativeFontInfo = NativeFontInfoIsOwned<true>(wxNativeFontInfo) impl
+    class NativeFontInfo = NativeFontInfoIsOwned<true>(wxNativeFontInfo) impl
         NativeFontInfoMethods
 }
 impl<const OWNED: bool> NativeFontInfoIsOwned<OWNED> {
@@ -40,7 +40,7 @@ impl<const OWNED: bool> Drop for NativeFontInfoIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxNavigationKeyEvent")]
     #[doc(alias = "NavigationKeyEvent")]
-    type NavigationKeyEvent = NavigationKeyEventIsOwned<true>(wxNavigationKeyEvent) impl
+    class NavigationKeyEvent = NavigationKeyEventIsOwned<true>(wxNavigationKeyEvent) impl
         NavigationKeyEventMethods,
         EventMethods,
         ObjectMethods
@@ -99,7 +99,7 @@ impl<const OWNED: bool> Drop for NavigationKeyEventIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxNonOwnedWindow")]
     #[doc(alias = "NonOwnedWindow")]
-    type NonOwnedWindow = NonOwnedWindowIsOwned<true>(wxNonOwnedWindow) impl
+    class NonOwnedWindow = NonOwnedWindowIsOwned<true>(wxNonOwnedWindow) impl
         NonOwnedWindowMethods,
         WindowMethods,
         EvtHandlerMethods,
@@ -140,7 +140,7 @@ impl<const OWNED: bool> DynamicCast for NonOwnedWindowIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxNotebook")]
     #[doc(alias = "Notebook")]
-    type Notebook = NotebookIsOwned<true>(wxNotebook) impl
+    class Notebook = NotebookIsOwned<true>(wxNotebook) impl
         NotebookMethods,
         BookCtrlBaseMethods,
         ControlMethods,
@@ -239,7 +239,7 @@ impl<const OWNED: bool> WindowMethods for NotebookIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxNotificationMessage")]
     #[doc(alias = "NotificationMessage")]
-    type NotificationMessage = NotificationMessageIsOwned<true>(wxNotificationMessage) impl
+    class NotificationMessage = NotificationMessageIsOwned<true>(wxNotificationMessage) impl
         NotificationMessageMethods,
         EvtHandlerMethods,
         ObjectMethods
@@ -301,7 +301,7 @@ impl<const OWNED: bool> DynamicCast for NotificationMessageIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxNotifyEvent")]
     #[doc(alias = "NotifyEvent")]
-    type NotifyEvent = NotifyEventIsOwned<true>(wxNotifyEvent) impl
+    class NotifyEvent = NotifyEventIsOwned<true>(wxNotifyEvent) impl
         NotifyEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -350,7 +350,7 @@ impl<const OWNED: bool> Drop for NotifyEventIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxNumberEntryDialog")]
     #[doc(alias = "NumberEntryDialog")]
-    type NumberEntryDialog = NumberEntryDialogIsOwned<true>(wxNumberEntryDialog) impl
+    class NumberEntryDialog = NumberEntryDialogIsOwned<true>(wxNumberEntryDialog) impl
         NumberEntryDialogMethods,
         DialogMethods,
         TopLevelWindowMethods,

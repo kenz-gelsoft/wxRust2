@@ -4,7 +4,7 @@ use super::*;
 wxwidgets! {
     #[doc(alias = "wxObject")]
     #[doc(alias = "Object")]
-    type Object = ObjectIsOwned<true>(wxObject) impl
+    class Object = ObjectIsOwned<true>(wxObject) impl
         ObjectMethods
 }
 impl<const OWNED: bool> ObjectIsOwned<OWNED> {
@@ -43,7 +43,7 @@ impl<const OWNED: bool> Drop for ObjectIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxObjectRefData")]
     #[doc(alias = "ObjectRefData")]
-    type ObjectRefData = ObjectRefDataIsOwned<true>(wxObjectRefData) impl
+    class ObjectRefData = ObjectRefDataIsOwned<true>(wxObjectRefData) impl
         ObjectRefDataMethods
 }
 impl<const OWNED: bool> ObjectRefDataIsOwned<OWNED> {

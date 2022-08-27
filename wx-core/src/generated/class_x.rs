@@ -4,7 +4,7 @@ use super::*;
 wxwidgets! {
     #[doc(alias = "wxXPMHandler")]
     #[doc(alias = "XPMHandler")]
-    type XPMHandler = XPMHandlerIsOwned<true>(wxXPMHandler) impl
+    class XPMHandler = XPMHandlerIsOwned<true>(wxXPMHandler) impl
         XPMHandlerMethods,
         ImageHandlerMethods,
         ObjectMethods

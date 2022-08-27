@@ -4,7 +4,7 @@ use super::*;
 wxwidgets! {
     #[doc(alias = "wxOverlay")]
     #[doc(alias = "Overlay")]
-    type Overlay = OverlayIsOwned<true>(wxOverlay) impl
+    class Overlay = OverlayIsOwned<true>(wxOverlay) impl
         OverlayMethods
 }
 impl<const OWNED: bool> OverlayIsOwned<OWNED> {
@@ -32,7 +32,7 @@ impl<const OWNED: bool> Drop for OverlayIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxOwnerDrawnComboBox")]
     #[doc(alias = "OwnerDrawnComboBox")]
-    type OwnerDrawnComboBox = OwnerDrawnComboBoxIsOwned<true>(wxOwnerDrawnComboBox) impl
+    class OwnerDrawnComboBox = OwnerDrawnComboBoxIsOwned<true>(wxOwnerDrawnComboBox) impl
         OwnerDrawnComboBoxMethods,
         // ComboCtrlMethods,
         ControlMethods,

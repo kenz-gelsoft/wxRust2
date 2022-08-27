@@ -4,7 +4,7 @@ use super::*;
 wxwidgets! {
     #[doc(alias = "wxClassInfo")]
     #[doc(alias = "ClassInfo")]
-    type ClassInfo = ClassInfoIsOwned<true>(wxClassInfo) impl
+    class ClassInfo = ClassInfoIsOwned<true>(wxClassInfo) impl
         ClassInfoMethods
 }
 impl<const OWNED: bool> ClassInfoIsOwned<OWNED> {
@@ -30,7 +30,7 @@ impl<const OWNED: bool> Drop for ClassInfoIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxClientData")]
     #[doc(alias = "ClientData")]
-    type ClientData = ClientDataIsOwned<true>(wxClientData) impl
+    class ClientData = ClientDataIsOwned<true>(wxClientData) impl
         ClientDataMethods
 }
 impl<const OWNED: bool> ClientDataIsOwned<OWNED> {

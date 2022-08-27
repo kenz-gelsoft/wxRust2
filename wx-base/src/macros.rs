@@ -2,7 +2,7 @@
 macro_rules! wxwidgets {
     (
         $(#[doc(alias = $typeName:expr)])*
-        type $type:ident = $typeIsOwned:ident<true>($wxType:ident) impl $($methods:ident),*
+        class $type:ident = $typeIsOwned:ident<true>($wxType:ident) impl $($methods:ident),*
     ) => {
         $(
             #[doc(alias = $typeName)]

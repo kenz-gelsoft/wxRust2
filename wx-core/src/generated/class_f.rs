@@ -4,7 +4,7 @@ use super::*;
 wxwidgets! {
     #[doc(alias = "wxFileCtrl")]
     #[doc(alias = "FileCtrl")]
-    type FileCtrl = FileCtrlIsOwned<true>(wxFileCtrl) impl
+    class FileCtrl = FileCtrlIsOwned<true>(wxFileCtrl) impl
         FileCtrlMethods,
         ControlMethods,
         WindowMethods,
@@ -93,7 +93,7 @@ impl<const OWNED: bool> DynamicCast for FileCtrlIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxFileCtrlEvent")]
     #[doc(alias = "FileCtrlEvent")]
-    type FileCtrlEvent = FileCtrlEventIsOwned<true>(wxFileCtrlEvent) impl
+    class FileCtrlEvent = FileCtrlEventIsOwned<true>(wxFileCtrlEvent) impl
         FileCtrlEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -142,7 +142,7 @@ impl<const OWNED: bool> Drop for FileCtrlEventIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxFileDataObject")]
     #[doc(alias = "FileDataObject")]
-    type FileDataObject = FileDataObjectIsOwned<true>(wxFileDataObject) impl
+    class FileDataObject = FileDataObjectIsOwned<true>(wxFileDataObject) impl
         FileDataObjectMethods,
         DataObjectSimpleMethods,
         DataObjectMethods
@@ -182,7 +182,7 @@ impl<const OWNED: bool> Drop for FileDataObjectIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxFileDialog")]
     #[doc(alias = "FileDialog")]
-    type FileDialog = FileDialogIsOwned<true>(wxFileDialog) impl
+    class FileDialog = FileDialogIsOwned<true>(wxFileDialog) impl
         FileDialogMethods,
         DialogMethods,
         TopLevelWindowMethods,
@@ -282,7 +282,7 @@ impl<const OWNED: bool> DynamicCast for FileDialogIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxFileDirPickerEvent")]
     #[doc(alias = "FileDirPickerEvent")]
-    type FileDirPickerEvent = FileDirPickerEventIsOwned<true>(wxFileDirPickerEvent) impl
+    class FileDirPickerEvent = FileDirPickerEventIsOwned<true>(wxFileDirPickerEvent) impl
         FileDirPickerEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -334,7 +334,7 @@ impl<const OWNED: bool> Drop for FileDirPickerEventIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxFileDropTarget")]
     #[doc(alias = "FileDropTarget")]
-    type FileDropTarget = FileDropTargetIsOwned<true>(wxFileDropTarget) impl
+    class FileDropTarget = FileDropTargetIsOwned<true>(wxFileDropTarget) impl
         FileDropTargetMethods,
         DropTargetMethods
 }
@@ -366,7 +366,7 @@ impl<const OWNED: bool> Drop for FileDropTargetIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxFileHistory")]
     #[doc(alias = "FileHistory")]
-    type FileHistory = FileHistoryIsOwned<true>(wxFileHistory) impl
+    class FileHistory = FileHistoryIsOwned<true>(wxFileHistory) impl
         FileHistoryMethods,
         ObjectMethods
 }
@@ -405,7 +405,7 @@ impl<const OWNED: bool> Drop for FileHistoryIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxFilePickerCtrl")]
     #[doc(alias = "FilePickerCtrl")]
-    type FilePickerCtrl = FilePickerCtrlIsOwned<true>(wxFilePickerCtrl) impl
+    class FilePickerCtrl = FilePickerCtrlIsOwned<true>(wxFilePickerCtrl) impl
         FilePickerCtrlMethods,
         PickerBaseMethods,
         ControlMethods,
@@ -494,7 +494,7 @@ impl<const OWNED: bool> DynamicCast for FilePickerCtrlIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxFindDialogEvent")]
     #[doc(alias = "FindDialogEvent")]
-    type FindDialogEvent = FindDialogEventIsOwned<true>(wxFindDialogEvent) impl
+    class FindDialogEvent = FindDialogEventIsOwned<true>(wxFindDialogEvent) impl
         FindDialogEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -543,7 +543,7 @@ impl<const OWNED: bool> Drop for FindDialogEventIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxFindReplaceData")]
     #[doc(alias = "FindReplaceData")]
-    type FindReplaceData = FindReplaceDataIsOwned<true>(wxFindReplaceData) impl
+    class FindReplaceData = FindReplaceDataIsOwned<true>(wxFindReplaceData) impl
         FindReplaceDataMethods,
         ObjectMethods
 }
@@ -580,7 +580,7 @@ impl<const OWNED: bool> Drop for FindReplaceDataIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxFindReplaceDialog")]
     #[doc(alias = "FindReplaceDialog")]
-    type FindReplaceDialog = FindReplaceDialogIsOwned<true>(wxFindReplaceDialog) impl
+    class FindReplaceDialog = FindReplaceDialogIsOwned<true>(wxFindReplaceDialog) impl
         FindReplaceDialogMethods,
         DialogMethods,
         TopLevelWindowMethods,
@@ -662,7 +662,7 @@ impl<const OWNED: bool> DynamicCast for FindReplaceDialogIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxFlexGridSizer")]
     #[doc(alias = "FlexGridSizer")]
-    type FlexGridSizer = FlexGridSizerIsOwned<true>(wxFlexGridSizer) impl
+    class FlexGridSizer = FlexGridSizerIsOwned<true>(wxFlexGridSizer) impl
         FlexGridSizerMethods,
         GridSizerMethods,
         SizerMethods,
@@ -730,7 +730,7 @@ impl<const OWNED: bool> DynamicCast for FlexGridSizerIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxFocusEvent")]
     #[doc(alias = "FocusEvent")]
-    type FocusEvent = FocusEventIsOwned<true>(wxFocusEvent) impl
+    class FocusEvent = FocusEventIsOwned<true>(wxFocusEvent) impl
         FocusEventMethods,
         EventMethods,
         ObjectMethods
@@ -773,7 +773,7 @@ impl<const OWNED: bool> Drop for FocusEventIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxFont")]
     #[doc(alias = "Font")]
-    type Font = FontIsOwned<true>(wxFont) impl
+    class Font = FontIsOwned<true>(wxFont) impl
         FontMethods,
         GDIObjectMethods,
         ObjectMethods
@@ -844,7 +844,7 @@ impl<const OWNED: bool> Drop for FontIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxFontData")]
     #[doc(alias = "FontData")]
-    type FontData = FontDataIsOwned<true>(wxFontData) impl
+    class FontData = FontDataIsOwned<true>(wxFontData) impl
         FontDataMethods,
         ObjectMethods
 }
@@ -883,7 +883,7 @@ impl<const OWNED: bool> Drop for FontDataIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxFontDialog")]
     #[doc(alias = "FontDialog")]
-    type FontDialog = FontDialogIsOwned<true>(wxFontDialog) impl
+    class FontDialog = FontDialogIsOwned<true>(wxFontDialog) impl
         FontDialogMethods,
         DialogMethods,
         TopLevelWindowMethods,
@@ -959,7 +959,7 @@ impl<const OWNED: bool> DynamicCast for FontDialogIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxFontEnumerator")]
     #[doc(alias = "FontEnumerator")]
-    type FontEnumerator = FontEnumeratorIsOwned<true>(wxFontEnumerator) impl
+    class FontEnumerator = FontEnumeratorIsOwned<true>(wxFontEnumerator) impl
         FontEnumeratorMethods
 }
 impl<const OWNED: bool> FontEnumeratorIsOwned<OWNED> {
@@ -987,7 +987,7 @@ impl<const OWNED: bool> Drop for FontEnumeratorIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxFontList")]
     #[doc(alias = "FontList")]
-    type FontList = FontListIsOwned<true>(wxFontList) impl
+    class FontList = FontListIsOwned<true>(wxFontList) impl
         FontListMethods
 }
 impl<const OWNED: bool> FontListIsOwned<OWNED> {
@@ -1015,7 +1015,7 @@ impl<const OWNED: bool> Drop for FontListIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxFontMapper")]
     #[doc(alias = "FontMapper")]
-    type FontMapper = FontMapperIsOwned<true>(wxFontMapper) impl
+    class FontMapper = FontMapperIsOwned<true>(wxFontMapper) impl
         FontMapperMethods
 }
 impl<const OWNED: bool> FontMapperIsOwned<OWNED> {
@@ -1043,7 +1043,7 @@ impl<const OWNED: bool> Drop for FontMapperIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxFontPickerCtrl")]
     #[doc(alias = "FontPickerCtrl")]
-    type FontPickerCtrl = FontPickerCtrlIsOwned<true>(wxFontPickerCtrl) impl
+    class FontPickerCtrl = FontPickerCtrlIsOwned<true>(wxFontPickerCtrl) impl
         FontPickerCtrlMethods,
         PickerBaseMethods,
         ControlMethods,
@@ -1131,7 +1131,7 @@ impl<const OWNED: bool> DynamicCast for FontPickerCtrlIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxFontPickerEvent")]
     #[doc(alias = "FontPickerEvent")]
-    type FontPickerEvent = FontPickerEventIsOwned<true>(wxFontPickerEvent) impl
+    class FontPickerEvent = FontPickerEventIsOwned<true>(wxFontPickerEvent) impl
         FontPickerEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -1193,7 +1193,7 @@ impl<const OWNED: bool> Drop for FontPickerEventIsOwned<OWNED> {
 wxwidgets! {
     #[doc(alias = "wxFrame")]
     #[doc(alias = "Frame")]
-    type Frame = FrameIsOwned<true>(wxFrame) impl
+    class Frame = FrameIsOwned<true>(wxFrame) impl
         FrameMethods,
         // TopLevelWindowMethods,
         NonOwnedWindowMethods,

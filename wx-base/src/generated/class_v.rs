@@ -4,7 +4,7 @@ use super::*;
 wxwidgets! {
     #[doc(alias = "wxVariantData")]
     #[doc(alias = "VariantData")]
-    type VariantData = VariantDataIsOwned<true>(wxVariantData) impl
+    class VariantData = VariantDataIsOwned<true>(wxVariantData) impl
         VariantDataMethods,
         ObjectRefDataMethods
 }
