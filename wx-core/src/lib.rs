@@ -2361,7 +2361,8 @@ impl<const OWNED: bool> Default for ValidatorIsOwned<OWNED> {
 }
 
 wxwidgets! {
-    class SizerItemList = SizerItemListIsOwned<true>(wxSizerItemList) impl
+    class SizerItemList
+        = SizerItemListIsOwned<true>(wxSizerItemList) impl
         SizerItemListMethods
 }
 impl<const OWNED: bool> SizerItemListIsOwned<OWNED> {
@@ -2378,7 +2379,8 @@ impl<const OWNED: bool> Drop for SizerItemListIsOwned<OWNED> {
 }
 
 wxwidgets! {
-    class WindowList = WindowListIsOwned<true>(wxWindowList) impl
+    class WindowList
+        = WindowListIsOwned<true>(wxWindowList) impl
         WindowListMethods
 }
 impl<const OWNED: bool> WindowListIsOwned<OWNED> {
