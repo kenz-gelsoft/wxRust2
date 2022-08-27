@@ -1,10 +1,5 @@
 [workspace]
 
-default-members = [
-    "wx-base",
-    "wx-core",
-]
-
 members = [
     "samples/hello",
     "samples/minimal",
