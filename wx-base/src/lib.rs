@@ -8,8 +8,10 @@ use std::str;
 mod macros;
 
 mod constants;
+#[doc(hidden)]
 pub use constants::*;
 mod manual;
+#[doc(hidden)]
 pub use manual::*;
 
 mod generated;

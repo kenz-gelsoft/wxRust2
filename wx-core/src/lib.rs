@@ -6,6 +6,7 @@ mod generated;
 pub use generated::*;
 
 // re-export wx_base
+#[doc(no_inline)]
 pub use wx_base::*;
 
 #[doc(hidden)]
