@@ -77,6 +77,7 @@ class Class:
         config = config.get(self.name) or {}
         self.__blocklist = config.get('blocklist') or []
         self.config = config
+        self.doc = ''.join(e.find('./briefdescription').itertext()).strip()
         self.library = self._find_libname(e)
         for enum in e.findall(".//memberdef[@kind='enum']"):
             enum = Enum(enum)

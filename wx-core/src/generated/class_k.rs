@@ -2,6 +2,7 @@ use super::*;
 
 // wxKeyEvent
 wxwidgets! {
+    /// This event class contains information about key press and release events.
     #[doc(alias = "wxKeyEvent")]
     #[doc(alias = "KeyEvent")]
     class KeyEvent

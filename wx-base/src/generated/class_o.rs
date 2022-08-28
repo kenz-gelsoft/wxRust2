@@ -2,6 +2,7 @@ use super::*;
 
 // wxObject
 wxwidgets! {
+    /// This is the root class of many of the wxWidgets classes.
     #[doc(alias = "wxObject")]
     #[doc(alias = "Object")]
     class Object
@@ -42,6 +43,7 @@ impl<const OWNED: bool> Drop for ObjectIsOwned<OWNED> {
 
 // wxObjectRefData
 wxwidgets! {
+    /// This class is just a typedef to wxRefCounter and is used by wxObject.
     #[doc(alias = "wxObjectRefData")]
     #[doc(alias = "ObjectRefData")]
     class ObjectRefData

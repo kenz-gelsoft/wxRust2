@@ -2,6 +2,7 @@ use super::*;
 
 // wxQuantize
 wxwidgets! {
+    /// Performs quantization, or colour reduction, on a wxImage.
     #[doc(alias = "wxQuantize")]
     #[doc(alias = "Quantize")]
     class Quantize
@@ -42,6 +43,7 @@ impl<const OWNED: bool> Drop for QuantizeIsOwned<OWNED> {
 
 // wxQueryLayoutInfoEvent
 wxwidgets! {
+    /// This event is sent when wxLayoutAlgorithm wishes to get the size, orientation and alignment of a window.
     #[doc(alias = "wxQueryLayoutInfoEvent")]
     #[doc(alias = "QueryLayoutInfoEvent")]
     class QueryLayoutInfoEvent

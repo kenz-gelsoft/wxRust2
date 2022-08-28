@@ -54,6 +54,7 @@ class RustClassBinding:
         else:
             unprefixed = self.__model.unprefixed()
             yield 'wxwidgets! {'
+            yield '    /// %s' % (self.__model.doc,)
             for alias in (self.__model.name, unprefixed):
                 yield '    #[doc(alias = "%s")]' % (alias,)
             yield '    class %s' % (unprefixed,)

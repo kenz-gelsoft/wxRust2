@@ -2,6 +2,7 @@ use super::*;
 
 // wxDateTime
 wxwidgets! {
+    /// wxDateTime class represents an absolute moment in time.
     #[doc(alias = "wxDateTime")]
     #[doc(alias = "DateTime")]
     class DateTime

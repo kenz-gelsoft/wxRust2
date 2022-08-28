@@ -2,6 +2,7 @@ use super::*;
 
 // wxClassInfo
 wxwidgets! {
+    /// This class stores meta-information about classes.
     #[doc(alias = "wxClassInfo")]
     #[doc(alias = "ClassInfo")]
     class ClassInfo
@@ -29,6 +30,7 @@ impl<const OWNED: bool> Drop for ClassInfoIsOwned<OWNED> {
 
 // wxClientData
 wxwidgets! {
+    /// All classes deriving from wxEvtHandler (such as all controls and wxApp) can hold arbitrary data which is here referred to as "client data".
     #[doc(alias = "wxClientData")]
     #[doc(alias = "ClientData")]
     class ClientData

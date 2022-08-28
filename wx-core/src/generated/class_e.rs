@@ -2,6 +2,7 @@ use super::*;
 
 // wxEditableListBox
 wxwidgets! {
+    /// An editable listbox is composite control that lets the user easily enter, delete and reorder a list of strings.
     #[doc(alias = "wxEditableListBox")]
     #[doc(alias = "EditableListBox")]
     class EditableListBox
@@ -78,6 +79,7 @@ impl<const OWNED: bool> DynamicCast for EditableListBoxIsOwned<OWNED> {
 
 // wxEraseEvent
 wxwidgets! {
+    /// An erase event is sent when a window's background needs to be repainted.
     #[doc(alias = "wxEraseEvent")]
     #[doc(alias = "EraseEvent")]
     class EraseEvent
@@ -130,6 +132,7 @@ impl<const OWNED: bool> Drop for EraseEventIsOwned<OWNED> {
 
 // wxEventBlocker
 wxwidgets! {
+    /// This class is a special event handler which allows discarding any event (or a set of event types) directed to a specific window.
     #[doc(alias = "wxEventBlocker")]
     #[doc(alias = "EventBlocker")]
     class EventBlocker

@@ -2,6 +2,7 @@ use super::*;
 
 // wxJPEGHandler
 wxwidgets! {
+    /// This is the image handler for the JPEG format.
     #[doc(alias = "wxJPEGHandler")]
     #[doc(alias = "JPEGHandler")]
     class JPEGHandler
@@ -51,6 +52,7 @@ impl<const OWNED: bool> ImageHandlerMethods for JPEGHandlerIsOwned<OWNED> {
 
 // wxJoystickEvent
 wxwidgets! {
+    /// This event class contains information about joystick events, particularly events received by windows.
     #[doc(alias = "wxJoystickEvent")]
     #[doc(alias = "JoystickEvent")]
     class JoystickEvent

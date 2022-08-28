@@ -2,6 +2,7 @@ use super::*;
 
 // wxEvent
 wxwidgets! {
+    /// An event is a structure holding information about an event passed to a callback or member function.
     #[doc(alias = "wxEvent")]
     #[doc(alias = "Event")]
     class Event
@@ -40,6 +41,7 @@ impl<const OWNED: bool> Drop for EventIsOwned<OWNED> {
 
 // wxEvtHandler
 wxwidgets! {
+    /// A class that can handle events from the windowing system.
     #[doc(alias = "wxEvtHandler")]
     #[doc(alias = "EvtHandler")]
     class EvtHandler

@@ -2,6 +2,7 @@ use super::*;
 
 // wxAboutDialogInfo
 wxwidgets! {
+    /// wxAboutDialogInfo contains information shown in the standard About dialog displayed by the wxAboutBox() function.
     #[doc(alias = "wxAboutDialogInfo")]
     #[doc(alias = "AboutDialogInfo")]
     class AboutDialogInfo
@@ -31,6 +32,7 @@ impl<const OWNED: bool> Drop for AboutDialogInfoIsOwned<OWNED> {
 
 // wxAcceleratorEntry
 wxwidgets! {
+    /// An object used by an application wishing to create an accelerator table (see wxAcceleratorTable).
     #[doc(alias = "wxAcceleratorEntry")]
     #[doc(alias = "AcceleratorEntry")]
     class AcceleratorEntry
@@ -79,6 +81,7 @@ impl<const OWNED: bool> Drop for AcceleratorEntryIsOwned<OWNED> {
 
 // wxAcceleratorTable
 wxwidgets! {
+    /// An accelerator table allows the application to specify a table of keyboard shortcuts for menu or button commands.
     #[doc(alias = "wxAcceleratorTable")]
     #[doc(alias = "AcceleratorTable")]
     class AcceleratorTable
@@ -121,6 +124,7 @@ impl<const OWNED: bool> Drop for AcceleratorTableIsOwned<OWNED> {
 
 // wxActivateEvent
 wxwidgets! {
+    /// An activate event is sent when a window or application is being activated or deactivated.
     #[doc(alias = "wxActivateEvent")]
     #[doc(alias = "ActivateEvent")]
     class ActivateEvent
@@ -169,6 +173,7 @@ impl<const OWNED: bool> Drop for ActivateEventIsOwned<OWNED> {
 
 // wxAffineMatrix2D
 wxwidgets! {
+    /// A 3x2 matrix representing an affine 2D transformation.
     #[doc(alias = "wxAffineMatrix2D")]
     #[doc(alias = "AffineMatrix2D")]
     class AffineMatrix2D
@@ -219,6 +224,7 @@ impl<const OWNED: bool> AffineMatrix2DBaseMethods for AffineMatrix2DIsOwned<OWNE
 
 // wxAffineMatrix2DBase
 wxwidgets! {
+    /// A 2x3 matrix representing an affine 2D transformation.
     #[doc(alias = "wxAffineMatrix2DBase")]
     #[doc(alias = "AffineMatrix2DBase")]
     class AffineMatrix2DBase
@@ -246,6 +252,7 @@ impl<const OWNED: bool> Drop for AffineMatrix2DBaseIsOwned<OWNED> {
 
 // wxAnimationCtrl
 wxwidgets! {
+    /// This is a static control which displays an animation.
     #[doc(alias = "wxAnimationCtrl")]
     #[doc(alias = "AnimationCtrl")]
     class AnimationCtrl
@@ -317,6 +324,7 @@ impl<const OWNED: bool> DynamicCast for AnimationCtrlIsOwned<OWNED> {
 
 // wxAnyButton
 wxwidgets! {
+    /// A class for common button functionality used as the base for the various button classes.
     #[doc(alias = "wxAnyButton")]
     #[doc(alias = "AnyButton")]
     class AnyButton
@@ -368,6 +376,7 @@ impl<const OWNED: bool> DynamicCast for AnyButtonIsOwned<OWNED> {
 
 // wxArtProvider
 wxwidgets! {
+    /// wxArtProvider class is used to customize the look of wxWidgets application.
     #[doc(alias = "wxArtProvider")]
     #[doc(alias = "ArtProvider")]
     class ArtProvider
@@ -405,6 +414,7 @@ impl<const OWNED: bool> Drop for ArtProviderIsOwned<OWNED> {
 
 // wxAutoBufferedPaintDC
 wxwidgets! {
+    /// This wxDC derivative can be used inside of an EVT_PAINT() event handler to achieve double-buffered drawing.
     #[doc(alias = "wxAutoBufferedPaintDC")]
     #[doc(alias = "AutoBufferedPaintDC")]
     class AutoBufferedPaintDC

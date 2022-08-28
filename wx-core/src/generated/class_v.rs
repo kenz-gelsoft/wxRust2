@@ -2,6 +2,7 @@ use super::*;
 
 // wxVListBox
 wxwidgets! {
+    /// wxVListBox is a wxListBox-like control with the following two main differences from a regular wxListBox: it can have an arbitrarily huge number of items because it doesn't store them itself but uses the OnDrawItem() callback to draw them (so it is a virtual listbox) and its items can have variable height as determined by OnMeasureItem() (so it is also a listbox with the lines of variable height).
     #[doc(alias = "wxVListBox")]
     #[doc(alias = "VListBox")]
     class VListBox
@@ -81,6 +82,7 @@ impl<const OWNED: bool> WindowMethods for VListBoxIsOwned<OWNED> {
 
 // wxVScrolledWindow
 wxwidgets! {
+    /// In the name of this class, "V" may stand for "variable" because it can be used for scrolling rows of variable heights; "virtual", because it is not necessary to know the heights of all rows in advance  only those which are shown on the screen need to be measured; or even "vertical", because this class only supports scrolling vertically.
     #[doc(alias = "wxVScrolledWindow")]
     #[doc(alias = "VScrolledWindow")]
     class VScrolledWindow
@@ -154,6 +156,7 @@ impl<const OWNED: bool> WindowMethods for VScrolledWindowIsOwned<OWNED> {
 
 // wxValidator
 wxwidgets! {
+    /// wxValidator is the base class for a family of validator classes that mediate between a class of control, and application data.
     #[doc(alias = "wxValidator")]
     #[doc(alias = "Validator")]
     class Validator

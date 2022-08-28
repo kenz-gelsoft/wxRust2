@@ -2,6 +2,7 @@ use super::*;
 
 // wxRefCounter
 wxwidgets! {
+    /// This class is used to manage reference-counting providing a simple interface and a counter.
     #[doc(alias = "wxRefCounter")]
     #[doc(alias = "RefCounter")]
     class RefCounter

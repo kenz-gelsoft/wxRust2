@@ -2,6 +2,7 @@ use super::*;
 
 // wxVariantData
 wxwidgets! {
+    /// The wxVariantData class is used to implement a new type for wxVariant.
     #[doc(alias = "wxVariantData")]
     #[doc(alias = "VariantData")]
     class VariantData

@@ -48,7 +48,7 @@ def generate_library(classes, config, libname):
             is_rust = path.endswith('.rs')
             if libname:
                 path = 'wx-%s/%s' % (libname, path)
-            with open(path, 'w', newline='\n') as f:
+            with open(path, 'w', newline='\n', encoding='utf-8') as f:
                 for chunk in generator(
                     rust_bindings_i if is_rust else cxx_bindings_i,
                     libname
@@ -70,7 +70,7 @@ def generate_library(classes, config, libname):
         is_rust = path.endswith('.rs')
         if libname:
             path = 'wx-%s/%s' % (libname, path)
-        with open(path, 'w', newline='\n') as f:
+        with open(path, 'w', newline='\n', encoding='utf-8') as f:
             for chunk in generator(
                 initials,
                 libname

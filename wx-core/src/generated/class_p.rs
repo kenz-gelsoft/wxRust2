@@ -2,6 +2,7 @@ use super::*;
 
 // wxPCXHandler
 wxwidgets! {
+    /// This is the image handler for the PCX format.
     #[doc(alias = "wxPCXHandler")]
     #[doc(alias = "PCXHandler")]
     class PCXHandler
@@ -48,6 +49,7 @@ impl<const OWNED: bool> Drop for PCXHandlerIsOwned<OWNED> {
 
 // wxPNGHandler
 wxwidgets! {
+    /// This is the image handler for the PNG format.
     #[doc(alias = "wxPNGHandler")]
     #[doc(alias = "PNGHandler")]
     class PNGHandler
@@ -94,6 +96,7 @@ impl<const OWNED: bool> Drop for PNGHandlerIsOwned<OWNED> {
 
 // wxPNMHandler
 wxwidgets! {
+    /// This is the image handler for the PNM format.
     #[doc(alias = "wxPNMHandler")]
     #[doc(alias = "PNMHandler")]
     class PNMHandler
@@ -140,6 +143,7 @@ impl<const OWNED: bool> Drop for PNMHandlerIsOwned<OWNED> {
 
 // wxPaintDC
 wxwidgets! {
+    /// A wxPaintDC must be constructed if an application wishes to paint on the client area of a window from within an EVT_PAINT() event handler.
     #[doc(alias = "wxPaintDC")]
     #[doc(alias = "PaintDC")]
     class PaintDC
@@ -204,6 +208,7 @@ impl<const OWNED: bool> Drop for PaintDCIsOwned<OWNED> {
 
 // wxPaintEvent
 wxwidgets! {
+    /// A paint event is sent when a window's contents needs to be repainted.
     #[doc(alias = "wxPaintEvent")]
     #[doc(alias = "PaintEvent")]
     class PaintEvent
@@ -248,6 +253,7 @@ impl<const OWNED: bool> Drop for PaintEventIsOwned<OWNED> {
 
 // wxPalette
 wxwidgets! {
+    /// A palette is a table that maps pixel values to RGB colours.
     #[doc(alias = "wxPalette")]
     #[doc(alias = "Palette")]
     class Palette
@@ -308,6 +314,7 @@ impl<const OWNED: bool> Drop for PaletteIsOwned<OWNED> {
 
 // wxPanel
 wxwidgets! {
+    /// A panel is a window on which controls are placed.
     #[doc(alias = "wxPanel")]
     #[doc(alias = "Panel")]
     class Panel
@@ -396,6 +403,7 @@ impl<const OWNED: bool> WindowMethods for PanelIsOwned<OWNED> {
 
 // wxPasswordEntryDialog
 wxwidgets! {
+    /// This class represents a dialog that requests a one-line password string from the user.
     #[doc(alias = "wxPasswordEntryDialog")]
     #[doc(alias = "PasswordEntryDialog")]
     class PasswordEntryDialog
@@ -492,6 +500,7 @@ impl<const OWNED: bool> DynamicCast for PasswordEntryDialogIsOwned<OWNED> {
 
 // wxPen
 wxwidgets! {
+    /// A pen is a drawing tool for drawing outlines.
     #[doc(alias = "wxPen")]
     #[doc(alias = "Pen")]
     class Pen
@@ -554,6 +563,7 @@ impl<const OWNED: bool> Drop for PenIsOwned<OWNED> {
 
 // wxPenList
 wxwidgets! {
+    /// There is only one instance of this class: wxThePenList.
     #[doc(alias = "wxPenList")]
     #[doc(alias = "PenList")]
     class PenList
@@ -583,6 +593,7 @@ impl<const OWNED: bool> Drop for PenListIsOwned<OWNED> {
 
 // wxPersistenceManager
 wxwidgets! {
+    /// Provides support for automatically saving and restoring object properties to persistent storage.
     #[doc(alias = "wxPersistenceManager")]
     #[doc(alias = "PersistenceManager")]
     class PersistenceManager
@@ -609,6 +620,7 @@ impl<const OWNED: bool> Drop for PersistenceManagerIsOwned<OWNED> {
 
 // wxPickerBase
 wxwidgets! {
+    /// Base abstract class for all pickers which support an auxiliary text control.
     #[doc(alias = "wxPickerBase")]
     #[doc(alias = "PickerBase")]
     class PickerBase
@@ -658,6 +670,7 @@ impl<const OWNED: bool> DynamicCast for PickerBaseIsOwned<OWNED> {
 
 // wxPoint
 wxwidgets! {
+    /// A wxPoint is a useful data structure for graphics operations.
     #[doc(alias = "wxPoint")]
     #[doc(alias = "Point")]
     class Point
@@ -696,6 +709,7 @@ impl<const OWNED: bool> Drop for PointIsOwned<OWNED> {
 
 // wxPopupTransientWindow
 wxwidgets! {
+    /// A wxPopupWindow which disappears automatically when the user clicks mouse outside it or if it loses focus in any other way.
     #[doc(alias = "wxPopupTransientWindow")]
     #[doc(alias = "PopupTransientWindow")]
     class PopupTransientWindow
@@ -765,6 +779,7 @@ impl<const OWNED: bool> DynamicCast for PopupTransientWindowIsOwned<OWNED> {
 
 // wxPopupWindow
 wxwidgets! {
+    /// A special kind of top level window used for popup menus, combobox popups and such.
     #[doc(alias = "wxPopupWindow")]
     #[doc(alias = "PopupWindow")]
     class PopupWindow
@@ -825,6 +840,7 @@ impl<const OWNED: bool> DynamicCast for PopupWindowIsOwned<OWNED> {
 
 // wxPreferencesEditor
 wxwidgets! {
+    /// Manage preferences dialog.
     #[doc(alias = "wxPreferencesEditor")]
     #[doc(alias = "PreferencesEditor")]
     class PreferencesEditor
@@ -858,6 +874,7 @@ impl<const OWNED: bool> Drop for PreferencesEditorIsOwned<OWNED> {
 
 // wxPreferencesPage
 wxwidgets! {
+    /// One page of preferences dialog.
     #[doc(alias = "wxPreferencesPage")]
     #[doc(alias = "PreferencesPage")]
     class PreferencesPage
@@ -885,6 +902,7 @@ impl<const OWNED: bool> Drop for PreferencesPageIsOwned<OWNED> {
 
 // wxPropertySheetDialog
 wxwidgets! {
+    /// This class represents a property sheet dialog: a tabbed dialog for showing settings.
     #[doc(alias = "wxPropertySheetDialog")]
     #[doc(alias = "PropertySheetDialog")]
     class PropertySheetDialog

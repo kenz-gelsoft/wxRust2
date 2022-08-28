@@ -2,6 +2,7 @@ use super::*;
 
 // wxTGAHandler
 wxwidgets! {
+    /// This is the image handler for the TGA format.
     #[doc(alias = "wxTGAHandler")]
     #[doc(alias = "TGAHandler")]
     class TGAHandler
@@ -48,6 +49,7 @@ impl<const OWNED: bool> Drop for TGAHandlerIsOwned<OWNED> {
 
 // wxTIFFHandler
 wxwidgets! {
+    /// This is the image handler for the TIFF format.
     #[doc(alias = "wxTIFFHandler")]
     #[doc(alias = "TIFFHandler")]
     class TIFFHandler
@@ -97,6 +99,7 @@ impl<const OWNED: bool> ImageHandlerMethods for TIFFHandlerIsOwned<OWNED> {
 
 // wxTaskBarIcon
 wxwidgets! {
+    /// This class represents a taskbar icon.
     #[doc(alias = "wxTaskBarIcon")]
     #[doc(alias = "TaskBarIcon")]
     class TaskBarIcon
@@ -134,6 +137,7 @@ impl<const OWNED: bool> DynamicCast for TaskBarIconIsOwned<OWNED> {
 
 // wxTaskBarIconEvent
 wxwidgets! {
+    /// The event class used by wxTaskBarIcon.
     #[doc(alias = "wxTaskBarIconEvent")]
     #[doc(alias = "TaskBarIconEvent")]
     class TaskBarIconEvent
@@ -178,6 +182,7 @@ impl<const OWNED: bool> Drop for TaskBarIconEventIsOwned<OWNED> {
 
 // wxTextAttr
 wxwidgets! {
+    /// wxTextAttr represents the character and paragraph attributes, or style, for a range of text in a wxTextCtrl or wxRichTextCtrl.
     #[doc(alias = "wxTextAttr")]
     #[doc(alias = "TextAttr")]
     class TextAttr
@@ -214,6 +219,7 @@ impl<const OWNED: bool> Drop for TextAttrIsOwned<OWNED> {
 
 // wxTextCtrl
 wxwidgets! {
+    /// A text control allows text to be displayed and edited.
     #[doc(alias = "wxTextCtrl")]
     #[doc(alias = "TextCtrl")]
     class TextCtrl
@@ -298,6 +304,7 @@ impl<const OWNED: bool> TextEntryMethods for TextCtrlIsOwned<OWNED> {
 
 // wxTextDataObject
 wxwidgets! {
+    /// wxTextDataObject is a specialization of wxDataObjectSimple for text data.
     #[doc(alias = "wxTextDataObject")]
     #[doc(alias = "TextDataObject")]
     class TextDataObject
@@ -346,6 +353,7 @@ impl<const OWNED: bool> DataObjectSimpleMethods for TextDataObjectIsOwned<OWNED>
 
 // wxTextDropTarget
 wxwidgets! {
+    /// A predefined drop target for dealing with text data.
     #[doc(alias = "wxTextDropTarget")]
     #[doc(alias = "TextDropTarget")]
     class TextDropTarget
@@ -379,6 +387,7 @@ impl<const OWNED: bool> Drop for TextDropTargetIsOwned<OWNED> {
 
 // wxTextEntry
 wxwidgets! {
+    /// Common base class for single line text entry fields.
     #[doc(alias = "wxTextEntry")]
     #[doc(alias = "TextEntry")]
     class TextEntry
@@ -405,6 +414,7 @@ impl<const OWNED: bool> Drop for TextEntryIsOwned<OWNED> {
 
 // wxTextEntryDialog
 wxwidgets! {
+    /// This class represents a dialog that requests a one-line text string from the user.
     #[doc(alias = "wxTextEntryDialog")]
     #[doc(alias = "TextEntryDialog")]
     class TextEntryDialog
@@ -493,6 +503,7 @@ impl<const OWNED: bool> DynamicCast for TextEntryDialogIsOwned<OWNED> {
 
 // wxTextValidator
 wxwidgets! {
+    /// wxTextValidator validates text controls, providing a variety of filtering behaviours.
     #[doc(alias = "wxTextValidator")]
     #[doc(alias = "TextValidator")]
     class TextValidator
@@ -546,6 +557,7 @@ impl<const OWNED: bool> DynamicCast for TextValidatorIsOwned<OWNED> {
 
 // wxThreadEvent
 wxwidgets! {
+    /// This class adds some simple functionality to wxEvent to facilitate inter-thread communication.
     #[doc(alias = "wxThreadEvent")]
     #[doc(alias = "ThreadEvent")]
     class ThreadEvent
@@ -590,6 +602,7 @@ impl<const OWNED: bool> Drop for ThreadEventIsOwned<OWNED> {
 
 // wxTimePickerCtrl
 wxwidgets! {
+    /// This control allows the user to enter time.
     #[doc(alias = "wxTimePickerCtrl")]
     #[doc(alias = "TimePickerCtrl")]
     class TimePickerCtrl
@@ -673,6 +686,7 @@ impl<const OWNED: bool> DynamicCast for TimePickerCtrlIsOwned<OWNED> {
 
 // wxTipProvider
 wxwidgets! {
+    /// This is the class used together with wxShowTip() function.
     #[doc(alias = "wxTipProvider")]
     #[doc(alias = "TipProvider")]
     class TipProvider
@@ -700,6 +714,7 @@ impl<const OWNED: bool> Drop for TipProviderIsOwned<OWNED> {
 
 // wxTipWindow
 wxwidgets! {
+    /// Shows simple text in a popup tip window on creation.
     #[doc(alias = "wxTipWindow")]
     #[doc(alias = "TipWindow")]
     class TipWindow
@@ -773,6 +788,7 @@ impl<const OWNED: bool> DynamicCast for TipWindowIsOwned<OWNED> {
 
 // wxToggleButton
 wxwidgets! {
+    /// wxToggleButton is a button that stays pressed when clicked by the user.
     #[doc(alias = "wxToggleButton")]
     #[doc(alias = "ToggleButton")]
     class ToggleButton
@@ -857,6 +873,7 @@ impl<const OWNED: bool> DynamicCast for ToggleButtonIsOwned<OWNED> {
 
 // wxToolBar
 wxwidgets! {
+    /// A toolbar is a bar of buttons and/or other controls usually placed below the menu bar in a wxFrame.
     #[doc(alias = "wxToolBar")]
     #[doc(alias = "ToolBar")]
     class ToolBar
@@ -928,6 +945,7 @@ impl<const OWNED: bool> DynamicCast for ToolBarIsOwned<OWNED> {
 
 // wxToolTip
 wxwidgets! {
+    /// This class holds information about a tooltip associated with a window (see wxWindow::SetToolTip()).
     #[doc(alias = "wxToolTip")]
     #[doc(alias = "ToolTip")]
     class ToolTip
@@ -972,6 +990,7 @@ impl<const OWNED: bool> Drop for ToolTipIsOwned<OWNED> {
 
 // wxToolbook
 wxwidgets! {
+    /// wxToolbook is a class similar to wxNotebook but which uses a wxToolBar to show the labels instead of the tabs.
     #[doc(alias = "wxToolbook")]
     #[doc(alias = "Toolbook")]
     class Toolbook
@@ -1072,6 +1091,7 @@ impl<const OWNED: bool> WindowMethods for ToolbookIsOwned<OWNED> {
 
 // wxTopLevelWindow
 wxwidgets! {
+    /// wxTopLevelWindow is a common base class for wxDialog and wxFrame.
     #[doc(alias = "wxTopLevelWindow")]
     #[doc(alias = "TopLevelWindow")]
     class TopLevelWindow
@@ -1148,6 +1168,7 @@ impl<const OWNED: bool> DynamicCast for TopLevelWindowIsOwned<OWNED> {
 
 // wxTreeCtrl
 wxwidgets! {
+    /// A tree control presents information as a hierarchy, with items that may be expanded to show further items.
     #[doc(alias = "wxTreeCtrl")]
     #[doc(alias = "TreeCtrl")]
     class TreeCtrl
@@ -1253,6 +1274,7 @@ impl<const OWNED: bool> WindowMethods for TreeCtrlIsOwned<OWNED> {
 
 // wxTreeEvent
 wxwidgets! {
+    /// A tree event holds information about events associated with wxTreeCtrl objects.
     #[doc(alias = "wxTreeEvent")]
     #[doc(alias = "TreeEvent")]
     class TreeEvent
@@ -1309,6 +1331,7 @@ impl<const OWNED: bool> Drop for TreeEventIsOwned<OWNED> {
 
 // wxTreeItemData
 wxwidgets! {
+    /// wxTreeItemData is some (arbitrary) user class associated with some item.
     #[doc(alias = "wxTreeItemData")]
     #[doc(alias = "TreeItemData")]
     class TreeItemData
@@ -1344,6 +1367,7 @@ impl<const OWNED: bool> Drop for TreeItemDataIsOwned<OWNED> {
 
 // wxTreeItemId
 wxwidgets! {
+    /// An opaque reference to a tree item.
     #[doc(alias = "wxTreeItemId")]
     #[doc(alias = "TreeItemId")]
     class TreeItemId
@@ -1373,6 +1397,7 @@ impl<const OWNED: bool> Drop for TreeItemIdIsOwned<OWNED> {
 
 // wxTreeListCtrl
 wxwidgets! {
+    /// A control combining wxTreeCtrl and wxListCtrl features.
     #[doc(alias = "wxTreeListCtrl")]
     #[doc(alias = "TreeListCtrl")]
     class TreeListCtrl
@@ -1461,6 +1486,7 @@ impl<const OWNED: bool> WindowMethods for TreeListCtrlIsOwned<OWNED> {
 
 // wxTreeListItem
 wxwidgets! {
+    /// Unique identifier of an item in wxTreeListCtrl.
     #[doc(alias = "wxTreeListItem")]
     #[doc(alias = "TreeListItem")]
     class TreeListItem
@@ -1490,6 +1516,7 @@ impl<const OWNED: bool> Drop for TreeListItemIsOwned<OWNED> {
 
 // wxTreeListItemComparator
 wxwidgets! {
+    /// Class defining sort order for the items in wxTreeListCtrl.
     #[doc(alias = "wxTreeListItemComparator")]
     #[doc(alias = "TreeListItemComparator")]
     class TreeListItemComparator
@@ -1517,6 +1544,7 @@ impl<const OWNED: bool> Drop for TreeListItemComparatorIsOwned<OWNED> {
 
 // wxTreebook
 wxwidgets! {
+    /// This class is an extension of the wxNotebook class that allows a tree structured set of pages to be shown in a control.
     #[doc(alias = "wxTreebook")]
     #[doc(alias = "Treebook")]
     class Treebook

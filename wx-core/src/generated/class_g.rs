@@ -2,6 +2,7 @@ use super::*;
 
 // wxGBPosition
 wxwidgets! {
+    /// This class represents the position of an item in a virtual grid of rows and columns managed by a wxGridBagSizer.
     #[doc(alias = "wxGBPosition")]
     #[doc(alias = "GBPosition")]
     class GBPosition
@@ -34,6 +35,7 @@ impl<const OWNED: bool> Drop for GBPositionIsOwned<OWNED> {
 
 // wxGBSizerItem
 wxwidgets! {
+    /// The wxGBSizerItem class is used by the wxGridBagSizer for tracking the items in the sizer.
     #[doc(alias = "wxGBSizerItem")]
     #[doc(alias = "GBSizerItem")]
     class GBSizerItem
@@ -156,6 +158,7 @@ impl<const OWNED: bool> Drop for GBSizerItemIsOwned<OWNED> {
 
 // wxGBSpan
 wxwidgets! {
+    /// This class is used to hold the row and column spanning attributes of items in a wxGridBagSizer.
     #[doc(alias = "wxGBSpan")]
     #[doc(alias = "GBSpan")]
     class GBSpan
@@ -188,6 +191,7 @@ impl<const OWNED: bool> Drop for GBSpanIsOwned<OWNED> {
 
 // wxGCDC
 wxwidgets! {
+    /// wxGCDC is a device context that draws on a wxGraphicsContext.
     #[doc(alias = "wxGCDC")]
     #[doc(alias = "GCDC")]
     class GCDC
@@ -261,6 +265,7 @@ impl<const OWNED: bool> Drop for GCDCIsOwned<OWNED> {
 
 // wxGDIObject
 wxwidgets! {
+    /// This class allows platforms to implement functionality to optimise GDI objects, such as wxPen, wxBrush and wxFont.
     #[doc(alias = "wxGDIObject")]
     #[doc(alias = "GDIObject")]
     class GDIObject
@@ -299,6 +304,7 @@ impl<const OWNED: bool> Drop for GDIObjectIsOwned<OWNED> {
 
 // wxGIFHandler
 wxwidgets! {
+    /// This is the image handler for the GIF format.
     #[doc(alias = "wxGIFHandler")]
     #[doc(alias = "GIFHandler")]
     class GIFHandler
@@ -345,6 +351,7 @@ impl<const OWNED: bool> Drop for GIFHandlerIsOwned<OWNED> {
 
 // wxGauge
 wxwidgets! {
+    /// A gauge is a horizontal or vertical bar which shows a quantity (often time).
     #[doc(alias = "wxGauge")]
     #[doc(alias = "Gauge")]
     class Gauge
@@ -421,6 +428,7 @@ impl<const OWNED: bool> DynamicCast for GaugeIsOwned<OWNED> {
 
 // wxGenericAboutDialog
 wxwidgets! {
+    /// This class defines a customizable About dialog.
     #[doc(alias = "wxGenericAboutDialog")]
     #[doc(alias = "GenericAboutDialog")]
     class GenericAboutDialog
@@ -463,6 +471,7 @@ impl<const OWNED: bool> Drop for GenericAboutDialogIsOwned<OWNED> {
 
 // wxGenericDirCtrl
 wxwidgets! {
+    /// This control can be used to place a directory listing (with optional files) on an arbitrary window.
     #[doc(alias = "wxGenericDirCtrl")]
     #[doc(alias = "GenericDirCtrl")]
     class GenericDirCtrl
@@ -551,6 +560,7 @@ impl<const OWNED: bool> DynamicCast for GenericDirCtrlIsOwned<OWNED> {
 
 // wxGenericProgressDialog
 wxwidgets! {
+    /// This class represents a dialog that shows a short message and a progress bar.
     #[doc(alias = "wxGenericProgressDialog")]
     #[doc(alias = "GenericProgressDialog")]
     class GenericProgressDialog
@@ -632,6 +642,7 @@ impl<const OWNED: bool> DynamicCast for GenericProgressDialogIsOwned<OWNED> {
 
 // wxGenericValidator
 wxwidgets! {
+    /// wxGenericValidator performs data transfer (but not validation or filtering) for many type of controls.
     #[doc(alias = "wxGenericValidator")]
     #[doc(alias = "GenericValidator")]
     class GenericValidator
@@ -730,6 +741,7 @@ impl<const OWNED: bool> DynamicCast for GenericValidatorIsOwned<OWNED> {
 
 // wxGraphicsBrush
 wxwidgets! {
+    /// A wxGraphicsBrush is a native representation of a brush.
     #[doc(alias = "wxGraphicsBrush")]
     #[doc(alias = "GraphicsBrush")]
     class GraphicsBrush
@@ -773,6 +785,7 @@ impl<const OWNED: bool> Drop for GraphicsBrushIsOwned<OWNED> {
 
 // wxGraphicsContext
 wxwidgets! {
+    /// A wxGraphicsContext instance is the object that is drawn upon.
     #[doc(alias = "wxGraphicsContext")]
     #[doc(alias = "GraphicsContext")]
     class GraphicsContext
@@ -816,6 +829,7 @@ impl<const OWNED: bool> Drop for GraphicsContextIsOwned<OWNED> {
 
 // wxGraphicsFont
 wxwidgets! {
+    /// A wxGraphicsFont is a native representation of a font.
     #[doc(alias = "wxGraphicsFont")]
     #[doc(alias = "GraphicsFont")]
     class GraphicsFont
@@ -859,6 +873,7 @@ impl<const OWNED: bool> Drop for GraphicsFontIsOwned<OWNED> {
 
 // wxGraphicsGradientStop
 wxwidgets! {
+    /// Represents a single gradient stop in a collection of gradient stops as represented by wxGraphicsGradientStops.
     #[doc(alias = "wxGraphicsGradientStop")]
     #[doc(alias = "GraphicsGradientStop")]
     class GraphicsGradientStop
@@ -886,6 +901,7 @@ impl<const OWNED: bool> Drop for GraphicsGradientStopIsOwned<OWNED> {
 
 // wxGraphicsGradientStops
 wxwidgets! {
+    /// Represents a collection of wxGraphicGradientStop values for use with CreateLinearGradientBrush and CreateRadialGradientBrush.
     #[doc(alias = "wxGraphicsGradientStops")]
     #[doc(alias = "GraphicsGradientStops")]
     class GraphicsGradientStops
@@ -913,6 +929,7 @@ impl<const OWNED: bool> Drop for GraphicsGradientStopsIsOwned<OWNED> {
 
 // wxGraphicsMatrix
 wxwidgets! {
+    /// A wxGraphicsMatrix is a native representation of an affine matrix.
     #[doc(alias = "wxGraphicsMatrix")]
     #[doc(alias = "GraphicsMatrix")]
     class GraphicsMatrix
@@ -956,6 +973,7 @@ impl<const OWNED: bool> Drop for GraphicsMatrixIsOwned<OWNED> {
 
 // wxGraphicsObject
 wxwidgets! {
+    /// This class is the superclass of native graphics objects like pens etc.
     #[doc(alias = "wxGraphicsObject")]
     #[doc(alias = "GraphicsObject")]
     class GraphicsObject
@@ -993,6 +1011,7 @@ impl<const OWNED: bool> Drop for GraphicsObjectIsOwned<OWNED> {
 
 // wxGraphicsPath
 wxwidgets! {
+    /// A wxGraphicsPath is a native representation of a geometric path.
     #[doc(alias = "wxGraphicsPath")]
     #[doc(alias = "GraphicsPath")]
     class GraphicsPath
@@ -1036,6 +1055,7 @@ impl<const OWNED: bool> Drop for GraphicsPathIsOwned<OWNED> {
 
 // wxGraphicsPen
 wxwidgets! {
+    /// A wxGraphicsPen is a native representation of a pen.
     #[doc(alias = "wxGraphicsPen")]
     #[doc(alias = "GraphicsPen")]
     class GraphicsPen
@@ -1079,6 +1099,7 @@ impl<const OWNED: bool> Drop for GraphicsPenIsOwned<OWNED> {
 
 // wxGraphicsRenderer
 wxwidgets! {
+    /// A wxGraphicsRenderer is the instance corresponding to the rendering engine used.
     #[doc(alias = "wxGraphicsRenderer")]
     #[doc(alias = "GraphicsRenderer")]
     class GraphicsRenderer
@@ -1116,6 +1137,7 @@ impl<const OWNED: bool> Drop for GraphicsRendererIsOwned<OWNED> {
 
 // wxGridBagSizer
 wxwidgets! {
+    /// A wxSizer that can lay out items in a virtual grid like a wxFlexGridSizer but in this case explicit positioning of the items is allowed using wxGBPosition, and items can optionally span more than one row and/or column using wxGBSpan.
     #[doc(alias = "wxGridBagSizer")]
     #[doc(alias = "GridBagSizer")]
     class GridBagSizer
@@ -1167,6 +1189,7 @@ impl<const OWNED: bool> DynamicCast for GridBagSizerIsOwned<OWNED> {
 
 // wxGridEditorCreatedEvent
 wxwidgets! {
+    ///
     #[doc(alias = "wxGridEditorCreatedEvent")]
     #[doc(alias = "GridEditorCreatedEvent")]
     class GridEditorCreatedEvent
@@ -1220,6 +1243,7 @@ impl<const OWNED: bool> Drop for GridEditorCreatedEventIsOwned<OWNED> {
 
 // wxGridEvent
 wxwidgets! {
+    /// This event class contains information about various grid events.
     #[doc(alias = "wxGridEvent")]
     #[doc(alias = "GridEvent")]
     class GridEvent
@@ -1279,6 +1303,7 @@ impl<const OWNED: bool> Drop for GridEventIsOwned<OWNED> {
 
 // wxGridRangeSelectEvent
 wxwidgets! {
+    /// Events of this class notify about a range of cells being selected.
     #[doc(alias = "wxGridRangeSelectEvent")]
     #[doc(alias = "GridRangeSelectEvent")]
     class GridRangeSelectEvent
@@ -1338,6 +1363,7 @@ impl<const OWNED: bool> Drop for GridRangeSelectEventIsOwned<OWNED> {
 
 // wxGridSizeEvent
 wxwidgets! {
+    /// This event class contains information about a row/column resize event.
     #[doc(alias = "wxGridSizeEvent")]
     #[doc(alias = "GridSizeEvent")]
     class GridSizeEvent
@@ -1397,6 +1423,7 @@ impl<const OWNED: bool> Drop for GridSizeEventIsOwned<OWNED> {
 
 // wxGridSizer
 wxwidgets! {
+    /// A grid sizer is a sizer which lays out its children in a two-dimensional table with all table fields having the same size, i.e.
     #[doc(alias = "wxGridSizer")]
     #[doc(alias = "GridSizer")]
     class GridSizer
@@ -1460,6 +1487,7 @@ impl<const OWNED: bool> DynamicCast for GridSizerIsOwned<OWNED> {
 
 // wxGridTableBase
 wxwidgets! {
+    /// The almost abstract base class for grid tables.
     #[doc(alias = "wxGridTableBase")]
     #[doc(alias = "GridTableBase")]
     class GridTableBase
@@ -1498,6 +1526,7 @@ impl<const OWNED: bool> Drop for GridTableBaseIsOwned<OWNED> {
 
 // wxGridUpdateLocker
 wxwidgets! {
+    /// This small class can be used to prevent wxGrid from redrawing during its lifetime by calling wxGrid::BeginBatch() in its constructor and wxGrid::EndBatch() in its destructor.
     #[doc(alias = "wxGridUpdateLocker")]
     #[doc(alias = "GridUpdateLocker")]
     class GridUpdateLocker

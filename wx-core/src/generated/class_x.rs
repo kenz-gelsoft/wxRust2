@@ -2,6 +2,7 @@ use super::*;
 
 // wxXPMHandler
 wxwidgets! {
+    /// This is the image handler for the XPM format.
     #[doc(alias = "wxXPMHandler")]
     #[doc(alias = "XPMHandler")]
     class XPMHandler

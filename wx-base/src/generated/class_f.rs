@@ -2,6 +2,7 @@ use super::*;
 
 // wxFileName
 wxwidgets! {
+    /// wxFileName encapsulates a file name.
     #[doc(alias = "wxFileName")]
     #[doc(alias = "FileName")]
     class FileName

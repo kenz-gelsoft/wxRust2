@@ -2,6 +2,7 @@ use super::*;
 
 // wxMessageOutput
 wxwidgets! {
+    /// Simple class allowing to write strings to various output channels.
     #[doc(alias = "wxMessageOutput")]
     #[doc(alias = "MessageOutput")]
     class MessageOutput

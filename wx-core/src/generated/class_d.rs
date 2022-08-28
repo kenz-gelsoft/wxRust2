@@ -2,6 +2,7 @@ use super::*;
 
 // wxDC
 wxwidgets! {
+    /// A wxDC is a "device context" onto which graphics and text can be drawn.
     #[doc(alias = "wxDC")]
     #[doc(alias = "DC")]
     class DC
@@ -39,6 +40,7 @@ impl<const OWNED: bool> Drop for DCIsOwned<OWNED> {
 
 // wxDCBrushChanger
 wxwidgets! {
+    /// wxDCBrushChanger is a small helper class for setting a brush on a wxDC and unsetting it automatically in the destructor, restoring the previous one.
     #[doc(alias = "wxDCBrushChanger")]
     #[doc(alias = "DCBrushChanger")]
     class DCBrushChanger
@@ -72,6 +74,7 @@ impl<const OWNED: bool> Drop for DCBrushChangerIsOwned<OWNED> {
 
 // wxDCClipper
 wxwidgets! {
+    /// wxDCClipper is a helper class for setting a clipping region on a wxDC during its lifetime.
     #[doc(alias = "wxDCClipper")]
     #[doc(alias = "DCClipper")]
     class DCClipper
@@ -130,6 +133,7 @@ impl<const OWNED: bool> Drop for DCClipperIsOwned<OWNED> {
 
 // wxDCFontChanger
 wxwidgets! {
+    /// wxDCFontChanger is a small helper class for setting a font on a wxDC and unsetting it automatically in the destructor, restoring the previous one.
     #[doc(alias = "wxDCFontChanger")]
     #[doc(alias = "DCFontChanger")]
     class DCFontChanger
@@ -172,6 +176,7 @@ impl<const OWNED: bool> Drop for DCFontChangerIsOwned<OWNED> {
 
 // wxDCOverlay
 wxwidgets! {
+    /// Connects an overlay with a drawing DC.
     #[doc(alias = "wxDCOverlay")]
     #[doc(alias = "DCOverlay")]
     class DCOverlay
@@ -228,6 +233,7 @@ impl<const OWNED: bool> Drop for DCOverlayIsOwned<OWNED> {
 
 // wxDCPenChanger
 wxwidgets! {
+    /// wxDCPenChanger is a small helper class for setting a pen on a wxDC and unsetting it automatically in the destructor, restoring the previous one.
     #[doc(alias = "wxDCPenChanger")]
     #[doc(alias = "DCPenChanger")]
     class DCPenChanger
@@ -261,6 +267,7 @@ impl<const OWNED: bool> Drop for DCPenChangerIsOwned<OWNED> {
 
 // wxDCTextColourChanger
 wxwidgets! {
+    /// wxDCTextColourChanger is a small helper class for setting a foreground text colour on a wxDC and unsetting it automatically in the destructor, restoring the previous one.
     #[doc(alias = "wxDCTextColourChanger")]
     #[doc(alias = "DCTextColourChanger")]
     class DCTextColourChanger
@@ -303,6 +310,7 @@ impl<const OWNED: bool> Drop for DCTextColourChangerIsOwned<OWNED> {
 
 // wxDataFormat
 wxwidgets! {
+    /// A wxDataFormat is an encapsulation of a platform-specific format handle which is used by the system for the clipboard and drag and drop operations.
     #[doc(alias = "wxDataFormat")]
     #[doc(alias = "DataFormat")]
     class DataFormat
@@ -337,6 +345,7 @@ impl<const OWNED: bool> Drop for DataFormatIsOwned<OWNED> {
 
 // wxDataObject
 wxwidgets! {
+    /// A wxDataObject represents data that can be copied to or from the clipboard, or dragged and dropped.
     #[doc(alias = "wxDataObject")]
     #[doc(alias = "DataObject")]
     class DataObject
@@ -369,6 +378,7 @@ impl<const OWNED: bool> Drop for DataObjectIsOwned<OWNED> {
 
 // wxDataObjectComposite
 wxwidgets! {
+    /// wxDataObjectComposite is the simplest wxDataObject derivation which may be used to support multiple formats.
     #[doc(alias = "wxDataObjectComposite")]
     #[doc(alias = "DataObjectComposite")]
     class DataObjectComposite
@@ -404,6 +414,7 @@ impl<const OWNED: bool> Drop for DataObjectCompositeIsOwned<OWNED> {
 
 // wxDataObjectSimple
 wxwidgets! {
+    /// This is the simplest possible implementation of the wxDataObject class.
     #[doc(alias = "wxDataObjectSimple")]
     #[doc(alias = "DataObjectSimple")]
     class DataObjectSimple
@@ -442,6 +453,7 @@ impl<const OWNED: bool> Drop for DataObjectSimpleIsOwned<OWNED> {
 
 // wxDataViewBitmapRenderer
 wxwidgets! {
+    /// This class is used by wxDataViewCtrl to render bitmaps.
     #[doc(alias = "wxDataViewBitmapRenderer")]
     #[doc(alias = "DataViewBitmapRenderer")]
     class DataViewBitmapRenderer
@@ -488,6 +500,7 @@ impl<const OWNED: bool> Drop for DataViewBitmapRendererIsOwned<OWNED> {
 
 // wxDataViewChoiceByIndexRenderer
 wxwidgets! {
+    /// A wxDataViewCtrl renderer using wxChoice control and indexes into it.
     #[doc(alias = "wxDataViewChoiceByIndexRenderer")]
     #[doc(alias = "DataViewChoiceByIndexRenderer")]
     class DataViewChoiceByIndexRenderer
@@ -542,6 +555,7 @@ impl<const OWNED: bool> Drop for DataViewChoiceByIndexRendererIsOwned<OWNED> {
 
 // wxDataViewChoiceRenderer
 wxwidgets! {
+    /// A wxDataViewCtrl renderer using wxChoice control and values of strings in it.
     #[doc(alias = "wxDataViewChoiceRenderer")]
     #[doc(alias = "DataViewChoiceRenderer")]
     class DataViewChoiceRenderer
@@ -588,6 +602,7 @@ impl<const OWNED: bool> Drop for DataViewChoiceRendererIsOwned<OWNED> {
 
 // wxDataViewColumn
 wxwidgets! {
+    /// This class represents a column in a wxDataViewCtrl.
     #[doc(alias = "wxDataViewColumn")]
     #[doc(alias = "DataViewColumn")]
     class DataViewColumn
@@ -675,6 +690,7 @@ impl<const OWNED: bool> Drop for DataViewColumnIsOwned<OWNED> {
 
 // wxDataViewCtrl
 wxwidgets! {
+    /// wxDataViewCtrl is a control to display data either in a tree like fashion or in a tabular form or both.
     #[doc(alias = "wxDataViewCtrl")]
     #[doc(alias = "DataViewCtrl")]
     class DataViewCtrl
@@ -775,6 +791,7 @@ impl<const OWNED: bool> ControlMethods for DataViewCtrlIsOwned<OWNED> {
 
 // wxDataViewCustomRenderer
 wxwidgets! {
+    /// You need to derive a new class from wxDataViewCustomRenderer in order to write a new renderer.
     #[doc(alias = "wxDataViewCustomRenderer")]
     #[doc(alias = "DataViewCustomRenderer")]
     class DataViewCustomRenderer
@@ -821,6 +838,7 @@ impl<const OWNED: bool> Drop for DataViewCustomRendererIsOwned<OWNED> {
 
 // wxDataViewDateRenderer
 wxwidgets! {
+    /// This class is used by wxDataViewCtrl to render calendar controls.
     #[doc(alias = "wxDataViewDateRenderer")]
     #[doc(alias = "DataViewDateRenderer")]
     class DataViewDateRenderer
@@ -867,6 +885,7 @@ impl<const OWNED: bool> Drop for DataViewDateRendererIsOwned<OWNED> {
 
 // wxDataViewEvent
 wxwidgets! {
+    /// This is the event class for the wxDataViewCtrl notifications.
     #[doc(alias = "wxDataViewEvent")]
     #[doc(alias = "DataViewEvent")]
     class DataViewEvent
@@ -935,6 +954,7 @@ impl<const OWNED: bool> Drop for DataViewEventIsOwned<OWNED> {
 
 // wxDataViewIconText
 wxwidgets! {
+    /// wxDataViewIconText is used by wxDataViewIconTextRenderer for data transfer.
     #[doc(alias = "wxDataViewIconText")]
     #[doc(alias = "DataViewIconText")]
     class DataViewIconText
@@ -991,6 +1011,7 @@ impl<const OWNED: bool> Drop for DataViewIconTextIsOwned<OWNED> {
 
 // wxDataViewIconTextRenderer
 wxwidgets! {
+    /// The wxDataViewIconTextRenderer class is used to display text with a small icon next to it as it is typically done in a file manager.
     #[doc(alias = "wxDataViewIconTextRenderer")]
     #[doc(alias = "DataViewIconTextRenderer")]
     class DataViewIconTextRenderer
@@ -1037,6 +1058,7 @@ impl<const OWNED: bool> Drop for DataViewIconTextRendererIsOwned<OWNED> {
 
 // wxDataViewIndexListModel
 wxwidgets! {
+    /// wxDataViewIndexListModel is a specialized data model which lets you address an item by its position (row) rather than its wxDataViewItem (which you can obtain from this class).
     #[doc(alias = "wxDataViewIndexListModel")]
     #[doc(alias = "DataViewIndexListModel")]
     class DataViewIndexListModel
@@ -1084,6 +1106,7 @@ impl<const OWNED: bool> Drop for DataViewIndexListModelIsOwned<OWNED> {
 
 // wxDataViewItem
 wxwidgets! {
+    /// wxDataViewItem is a small opaque class that represents an item in a wxDataViewCtrl in a persistent way, i.e.
     #[doc(alias = "wxDataViewItem")]
     #[doc(alias = "DataViewItem")]
     class DataViewItem
@@ -1122,6 +1145,7 @@ impl<const OWNED: bool> Drop for DataViewItemIsOwned<OWNED> {
 
 // wxDataViewItemAttr
 wxwidgets! {
+    /// This class is used to indicate to a wxDataViewCtrl that a certain item (see wxDataViewItem) has extra font attributes for its renderer.
     #[doc(alias = "wxDataViewItemAttr")]
     #[doc(alias = "DataViewItemAttr")]
     class DataViewItemAttr
@@ -1151,6 +1175,7 @@ impl<const OWNED: bool> Drop for DataViewItemAttrIsOwned<OWNED> {
 
 // wxDataViewListCtrl
 wxwidgets! {
+    /// This class is a wxDataViewCtrl which internally uses a wxDataViewListStore and forwards most of its API to that class.
     #[doc(alias = "wxDataViewListCtrl")]
     #[doc(alias = "DataViewListCtrl")]
     class DataViewListCtrl
@@ -1229,6 +1254,7 @@ impl<const OWNED: bool> DynamicCast for DataViewListCtrlIsOwned<OWNED> {
 
 // wxDataViewListModel
 wxwidgets! {
+    /// Base class with abstract API for wxDataViewIndexListModel and wxDataViewVirtualListModel.
     #[doc(alias = "wxDataViewListModel")]
     #[doc(alias = "DataViewListModel")]
     class DataViewListModel
@@ -1267,6 +1293,7 @@ impl<const OWNED: bool> Drop for DataViewListModelIsOwned<OWNED> {
 
 // wxDataViewListStore
 wxwidgets! {
+    /// wxDataViewListStore is a specialised wxDataViewModel for storing a simple table of data.
     #[doc(alias = "wxDataViewListStore")]
     #[doc(alias = "DataViewListStore")]
     class DataViewListStore
@@ -1322,6 +1349,7 @@ impl<const OWNED: bool> Drop for DataViewListStoreIsOwned<OWNED> {
 
 // wxDataViewModel
 wxwidgets! {
+    /// wxDataViewModel is the base class for all data model to be displayed by a wxDataViewCtrl.
     #[doc(alias = "wxDataViewModel")]
     #[doc(alias = "DataViewModel")]
     class DataViewModel
@@ -1355,6 +1383,7 @@ impl<const OWNED: bool> Drop for DataViewModelIsOwned<OWNED> {
 
 // wxDataViewModelNotifier
 wxwidgets! {
+    /// A wxDataViewModelNotifier instance is owned by a wxDataViewModel and mirrors its notification interface.
     #[doc(alias = "wxDataViewModelNotifier")]
     #[doc(alias = "DataViewModelNotifier")]
     class DataViewModelNotifier
@@ -1382,6 +1411,7 @@ impl<const OWNED: bool> Drop for DataViewModelNotifierIsOwned<OWNED> {
 
 // wxDataViewProgressRenderer
 wxwidgets! {
+    /// This class is used by wxDataViewCtrl to render progress bars.
     #[doc(alias = "wxDataViewProgressRenderer")]
     #[doc(alias = "DataViewProgressRenderer")]
     class DataViewProgressRenderer
@@ -1428,6 +1458,7 @@ impl<const OWNED: bool> Drop for DataViewProgressRendererIsOwned<OWNED> {
 
 // wxDataViewRenderer
 wxwidgets! {
+    /// This class is used by wxDataViewCtrl to render the individual cells.
     #[doc(alias = "wxDataViewRenderer")]
     #[doc(alias = "DataViewRenderer")]
     class DataViewRenderer
@@ -1466,6 +1497,7 @@ impl<const OWNED: bool> Drop for DataViewRendererIsOwned<OWNED> {
 
 // wxDataViewSpinRenderer
 wxwidgets! {
+    /// This is a specialized renderer for rendering integer values.
     #[doc(alias = "wxDataViewSpinRenderer")]
     #[doc(alias = "DataViewSpinRenderer")]
     class DataViewSpinRenderer
@@ -1520,6 +1552,7 @@ impl<const OWNED: bool> Drop for DataViewSpinRendererIsOwned<OWNED> {
 
 // wxDataViewTextRenderer
 wxwidgets! {
+    /// wxDataViewTextRenderer is used for rendering text.
     #[doc(alias = "wxDataViewTextRenderer")]
     #[doc(alias = "DataViewTextRenderer")]
     class DataViewTextRenderer
@@ -1566,6 +1599,7 @@ impl<const OWNED: bool> Drop for DataViewTextRendererIsOwned<OWNED> {
 
 // wxDataViewToggleRenderer
 wxwidgets! {
+    /// This class is used by wxDataViewCtrl to render toggle controls.
     #[doc(alias = "wxDataViewToggleRenderer")]
     #[doc(alias = "DataViewToggleRenderer")]
     class DataViewToggleRenderer
@@ -1612,6 +1646,7 @@ impl<const OWNED: bool> Drop for DataViewToggleRendererIsOwned<OWNED> {
 
 // wxDataViewTreeCtrl
 wxwidgets! {
+    /// This class is a wxDataViewCtrl which internally uses a wxDataViewTreeStore and forwards most of its API to that class.
     #[doc(alias = "wxDataViewTreeCtrl")]
     #[doc(alias = "DataViewTreeCtrl")]
     class DataViewTreeCtrl
@@ -1690,6 +1725,7 @@ impl<const OWNED: bool> DynamicCast for DataViewTreeCtrlIsOwned<OWNED> {
 
 // wxDataViewTreeStore
 wxwidgets! {
+    /// wxDataViewTreeStore is a specialised wxDataViewModel for storing simple trees very much like wxTreeCtrl does and it offers a similar API.
     #[doc(alias = "wxDataViewTreeStore")]
     #[doc(alias = "DataViewTreeStore")]
     class DataViewTreeStore
@@ -1731,6 +1767,7 @@ impl<const OWNED: bool> Drop for DataViewTreeStoreIsOwned<OWNED> {
 
 // wxDataViewVirtualListModel
 wxwidgets! {
+    /// wxDataViewVirtualListModel is a specialized data model which lets you address an item by its position (row) rather than its wxDataViewItem and as such offers the exact same interface as wxDataViewIndexListModel.
     #[doc(alias = "wxDataViewVirtualListModel")]
     #[doc(alias = "DataViewVirtualListModel")]
     class DataViewVirtualListModel
@@ -1780,6 +1817,7 @@ impl<const OWNED: bool> Drop for DataViewVirtualListModelIsOwned<OWNED> {
 
 // wxDateEvent
 wxwidgets! {
+    /// This event class holds information about a date change and is used together with wxDatePickerCtrl.
     #[doc(alias = "wxDateEvent")]
     #[doc(alias = "DateEvent")]
     class DateEvent
@@ -1833,6 +1871,7 @@ impl<const OWNED: bool> Drop for DateEventIsOwned<OWNED> {
 
 // wxDatePickerCtrl
 wxwidgets! {
+    /// This control allows the user to select a date.
     #[doc(alias = "wxDatePickerCtrl")]
     #[doc(alias = "DatePickerCtrl")]
     class DatePickerCtrl
@@ -1916,6 +1955,7 @@ impl<const OWNED: bool> DynamicCast for DatePickerCtrlIsOwned<OWNED> {
 
 // wxDelegateRendererNative
 wxwidgets! {
+    /// wxDelegateRendererNative allows reuse of renderers code by forwarding all the wxRendererNative methods to the given object and thus allowing you to only modify some of its methods  without having to reimplement all of them.
     #[doc(alias = "wxDelegateRendererNative")]
     #[doc(alias = "DelegateRendererNative")]
     class DelegateRendererNative
@@ -1961,6 +2001,7 @@ impl<const OWNED: bool> Drop for DelegateRendererNativeIsOwned<OWNED> {
 
 // wxDialog
 wxwidgets! {
+    /// A dialog box is a window with a title bar and sometimes a system menu, which can be moved around the screen.
     #[doc(alias = "wxDialog")]
     #[doc(alias = "Dialog")]
     class Dialog
@@ -2080,6 +2121,7 @@ impl<const OWNED: bool> WindowMethods for DialogIsOwned<OWNED> {
 
 // wxDialogLayoutAdapter
 wxwidgets! {
+    /// This abstract class is the base for classes that help wxWidgets perform run-time layout adaptation of dialogs.
     #[doc(alias = "wxDialogLayoutAdapter")]
     #[doc(alias = "DialogLayoutAdapter")]
     class DialogLayoutAdapter
@@ -2107,6 +2149,7 @@ impl<const OWNED: bool> Drop for DialogLayoutAdapterIsOwned<OWNED> {
 
 // wxDirDialog
 wxwidgets! {
+    /// This class represents the directory chooser dialog.
     #[doc(alias = "wxDirDialog")]
     #[doc(alias = "DirDialog")]
     class DirDialog
@@ -2200,6 +2243,7 @@ impl<const OWNED: bool> DynamicCast for DirDialogIsOwned<OWNED> {
 
 // wxDirPickerCtrl
 wxwidgets! {
+    /// This control allows the user to select a directory.
     #[doc(alias = "wxDirPickerCtrl")]
     #[doc(alias = "DirPickerCtrl")]
     class DirPickerCtrl
@@ -2287,6 +2331,7 @@ impl<const OWNED: bool> DynamicCast for DirPickerCtrlIsOwned<OWNED> {
 
 // wxDisplay
 wxwidgets! {
+    /// Determines the sizes and locations of displays connected to the system.
     #[doc(alias = "wxDisplay")]
     #[doc(alias = "Display")]
     class Display
@@ -2328,6 +2373,7 @@ impl<const OWNED: bool> Drop for DisplayIsOwned<OWNED> {
 
 // wxDisplayChangedEvent
 wxwidgets! {
+    /// A display changed event is sent to top-level windows when the display resolution has changed.
     #[doc(alias = "wxDisplayChangedEvent")]
     #[doc(alias = "DisplayChangedEvent")]
     class DisplayChangedEvent
@@ -2374,6 +2420,7 @@ impl<const OWNED: bool> Drop for DisplayChangedEventIsOwned<OWNED> {
 
 // wxDragImage
 wxwidgets! {
+    /// This class is used when you wish to drag an object on the screen, and a simple cursor is not enough.
     #[doc(alias = "wxDragImage")]
     #[doc(alias = "DragImage")]
     class DragImage
@@ -2461,6 +2508,7 @@ impl<const OWNED: bool> Drop for DragImageIsOwned<OWNED> {
 
 // wxDropFilesEvent
 wxwidgets! {
+    /// This class is used for drop files events, that is, when files have been dropped onto the window.
     #[doc(alias = "wxDropFilesEvent")]
     #[doc(alias = "DropFilesEvent")]
     class DropFilesEvent
@@ -2505,6 +2553,7 @@ impl<const OWNED: bool> Drop for DropFilesEventIsOwned<OWNED> {
 
 // wxDropSource
 wxwidgets! {
+    /// This class represents a source for a drag and drop operation.
     #[doc(alias = "wxDropSource")]
     #[doc(alias = "DropSource")]
     class DropSource
@@ -2629,6 +2678,7 @@ impl<const OWNED: bool> Drop for DropSourceIsOwned<OWNED> {
 
 // wxDropTarget
 wxwidgets! {
+    /// This class represents a target for a drag and drop operation.
     #[doc(alias = "wxDropTarget")]
     #[doc(alias = "DropTarget")]
     class DropTarget
