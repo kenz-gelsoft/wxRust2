@@ -3,6 +3,8 @@ use super::*;
 // wxOverlay
 wxwidgets! {
     /// Creates an overlay over an existing window, allowing for manipulations like rubberbanding, etc.
+    ///
+    /// [See `wxOverlay`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_overlay.html)
     #[doc(alias = "wxOverlay")]
     #[doc(alias = "Overlay")]
     class Overlay
@@ -33,6 +35,8 @@ impl<const OWNED: bool> Drop for OverlayIsOwned<OWNED> {
 // wxOwnerDrawnComboBox
 wxwidgets! {
     /// wxOwnerDrawnComboBox is a combobox with owner-drawn list items.
+    ///
+    /// [See `wxOwnerDrawnComboBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_owner_drawn_combo_box.html)
     #[doc(alias = "wxOwnerDrawnComboBox")]
     #[doc(alias = "OwnerDrawnComboBox")]
     class OwnerDrawnComboBox

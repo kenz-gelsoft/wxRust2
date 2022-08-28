@@ -3,6 +3,8 @@ use super::*;
 // wxTimer
 wxwidgets! {
     /// The wxTimer class allows you to execute code at specified intervals.
+    ///
+    /// [See `wxTimer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_timer.html)
     #[doc(alias = "wxTimer")]
     #[doc(alias = "Timer")]
     class Timer
@@ -57,6 +59,8 @@ impl<const OWNED: bool> DynamicCast for TimerIsOwned<OWNED> {
 // wxTimerEvent
 wxwidgets! {
     /// wxTimerEvent object is passed to the event handler of timer events (see wxTimer::SetOwner).
+    ///
+    /// [See `wxTimerEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_timer_event.html)
     #[doc(alias = "wxTimerEvent")]
     #[doc(alias = "TimerEvent")]
     class TimerEvent

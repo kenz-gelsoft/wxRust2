@@ -3,6 +3,8 @@ use super::*;
 // wxIcon
 wxwidgets! {
     /// An icon is a small rectangular bitmap usually used for denoting a minimized application.
+    ///
+    /// [See `wxIcon`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon.html)
     #[doc(alias = "wxIcon")]
     #[doc(alias = "Icon")]
     class Icon
@@ -68,6 +70,8 @@ impl<const OWNED: bool> Drop for IconIsOwned<OWNED> {
 // wxIconBundle
 wxwidgets! {
     /// This class contains multiple copies of an icon in different sizes.
+    ///
+    /// [See `wxIconBundle`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html)
     #[doc(alias = "wxIconBundle")]
     #[doc(alias = "IconBundle")]
     class IconBundle
@@ -138,6 +142,8 @@ impl<const OWNED: bool> Drop for IconBundleIsOwned<OWNED> {
 // wxIconizeEvent
 wxwidgets! {
     /// An event being sent when the frame is iconized (minimized) or restored.
+    ///
+    /// [See `wxIconizeEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_iconize_event.html)
     #[doc(alias = "wxIconizeEvent")]
     #[doc(alias = "IconizeEvent")]
     class IconizeEvent
@@ -186,6 +192,8 @@ impl<const OWNED: bool> Drop for IconizeEventIsOwned<OWNED> {
 // wxIdManager
 wxwidgets! {
     /// wxIdManager is responsible for allocating and releasing window IDs.
+    ///
+    /// [See `wxIdManager`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_id_manager.html)
     #[doc(alias = "wxIdManager")]
     #[doc(alias = "IdManager")]
     class IdManager
@@ -213,6 +221,8 @@ impl<const OWNED: bool> Drop for IdManagerIsOwned<OWNED> {
 // wxImage
 wxwidgets! {
     /// This class encapsulates a platform-independent image.
+    ///
+    /// [See `wxImage`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html)
     #[doc(alias = "wxImage")]
     #[doc(alias = "Image")]
     class Image
@@ -336,6 +346,8 @@ impl<const OWNED: bool> Drop for ImageIsOwned<OWNED> {
 // wxImageHandler
 wxwidgets! {
     /// This is the base class for implementing image file loading/saving, and image creation from data.
+    ///
+    /// [See `wxImageHandler`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_handler.html)
     #[doc(alias = "wxImageHandler")]
     #[doc(alias = "ImageHandler")]
     class ImageHandler
@@ -375,6 +387,8 @@ impl<const OWNED: bool> Drop for ImageHandlerIsOwned<OWNED> {
 // wxImageList
 wxwidgets! {
     /// A wxImageList contains a list of images, which are stored in an unspecified form.
+    ///
+    /// [See `wxImageList`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_list.html)
     #[doc(alias = "wxImageList")]
     #[doc(alias = "ImageList")]
     class ImageList
@@ -426,6 +440,8 @@ impl<const OWNED: bool> Drop for ImageListIsOwned<OWNED> {
 // wxInfoBar
 wxwidgets! {
     /// An info bar is a transient window shown at top or bottom of its parent window to display non-critical information to the user.
+    ///
+    /// [See `wxInfoBar`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_info_bar.html)
     #[doc(alias = "wxInfoBar")]
     #[doc(alias = "InfoBar")]
     class InfoBar
@@ -489,6 +505,8 @@ impl<const OWNED: bool> DynamicCast for InfoBarIsOwned<OWNED> {
 // wxInitDialogEvent
 wxwidgets! {
     /// A wxInitDialogEvent is sent as a dialog or panel is being initialised.
+    ///
+    /// [See `wxInitDialogEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_init_dialog_event.html)
     #[doc(alias = "wxInitDialogEvent")]
     #[doc(alias = "InitDialogEvent")]
     class InitDialogEvent
@@ -537,6 +555,8 @@ impl<const OWNED: bool> Drop for InitDialogEventIsOwned<OWNED> {
 // wxItemContainer
 wxwidgets! {
     /// This class is an abstract base class for some wxWidgets controls which contain several items such as wxListBox, wxCheckListBox, wxComboBox or wxChoice.
+    ///
+    /// [See `wxItemContainer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html)
     #[doc(alias = "wxItemContainer")]
     #[doc(alias = "ItemContainer")]
     class ItemContainer
@@ -570,6 +590,8 @@ impl<const OWNED: bool> Drop for ItemContainerIsOwned<OWNED> {
 // wxItemContainerImmutable
 wxwidgets! {
     /// wxItemContainer defines an interface which is implemented by all controls which have string subitems each of which may be selected.
+    ///
+    /// [See `wxItemContainerImmutable`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html)
     #[doc(alias = "wxItemContainerImmutable")]
     #[doc(alias = "ItemContainerImmutable")]
     class ItemContainerImmutable

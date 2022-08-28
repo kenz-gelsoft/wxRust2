@@ -3,6 +3,8 @@ use super::*;
 // wxDateTime
 wxwidgets! {
     /// wxDateTime class represents an absolute moment in time.
+    ///
+    /// [See `wxDateTime`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_date_time.html)
     #[doc(alias = "wxDateTime")]
     #[doc(alias = "DateTime")]
     class DateTime

@@ -3,6 +3,8 @@ use super::*;
 // wxFileName
 wxwidgets! {
     /// wxFileName encapsulates a file name.
+    ///
+    /// [See `wxFileName`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_file_name.html)
     #[doc(alias = "wxFileName")]
     #[doc(alias = "FileName")]
     class FileName

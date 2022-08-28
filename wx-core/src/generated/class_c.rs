@@ -3,6 +3,8 @@ use super::*;
 // wxCalculateLayoutEvent
 wxwidgets! {
     /// This event is sent by wxLayoutAlgorithm to calculate the amount of the remaining client area that the window should occupy.
+    ///
+    /// [See `wxCalculateLayoutEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calculate_layout_event.html)
     #[doc(alias = "wxCalculateLayoutEvent")]
     #[doc(alias = "CalculateLayoutEvent")]
     class CalculateLayoutEvent
@@ -51,6 +53,8 @@ impl<const OWNED: bool> Drop for CalculateLayoutEventIsOwned<OWNED> {
 // wxCalendarCtrl
 wxwidgets! {
     /// The calendar control allows the user to pick a date.
+    ///
+    /// [See `wxCalendarCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html)
     #[doc(alias = "wxCalendarCtrl")]
     #[doc(alias = "CalendarCtrl")]
     class CalendarCtrl
@@ -129,6 +133,8 @@ impl<const OWNED: bool> DynamicCast for CalendarCtrlIsOwned<OWNED> {
 // wxCalendarDateAttr
 wxwidgets! {
     /// wxCalendarDateAttr is a custom attributes for a calendar date.
+    ///
+    /// [See `wxCalendarDateAttr`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html)
     #[doc(alias = "wxCalendarDateAttr")]
     #[doc(alias = "CalendarDateAttr")]
     class CalendarDateAttr
@@ -158,6 +164,8 @@ impl<const OWNED: bool> Drop for CalendarDateAttrIsOwned<OWNED> {
 // wxCalendarEvent
 wxwidgets! {
     /// The wxCalendarEvent class is used together with wxCalendarCtrl.
+    ///
+    /// [See `wxCalendarEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_event.html)
     #[doc(alias = "wxCalendarEvent")]
     #[doc(alias = "CalendarEvent")]
     class CalendarEvent
@@ -218,6 +226,8 @@ impl<const OWNED: bool> Drop for CalendarEventIsOwned<OWNED> {
 // wxCaret
 wxwidgets! {
     /// A caret is a blinking cursor showing the position where the typed text will appear.
+    ///
+    /// [See `wxCaret`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_caret.html)
     #[doc(alias = "wxCaret")]
     #[doc(alias = "Caret")]
     class Caret
@@ -276,6 +286,8 @@ impl<const OWNED: bool> Drop for CaretIsOwned<OWNED> {
 // wxCheckBox
 wxwidgets! {
     /// A checkbox is a labelled box which by default is either on (checkmark is visible) or off (no checkmark).
+    ///
+    /// [See `wxCheckBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_check_box.html)
     #[doc(alias = "wxCheckBox")]
     #[doc(alias = "CheckBox")]
     class CheckBox
@@ -357,6 +369,8 @@ impl<const OWNED: bool> DynamicCast for CheckBoxIsOwned<OWNED> {
 // wxCheckListBox
 wxwidgets! {
     /// A wxCheckListBox is like a wxListBox, but allows items to be checked or unchecked.
+    ///
+    /// [See `wxCheckListBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_check_list_box.html)
     #[doc(alias = "wxCheckListBox")]
     #[doc(alias = "CheckListBox")]
     class CheckListBox
@@ -505,6 +519,8 @@ impl<const OWNED: bool> ListBoxMethods for CheckListBoxIsOwned<OWNED> {
 // wxChildFocusEvent
 wxwidgets! {
     /// A child focus event is sent to a (parent-)window when one of its child windows gains focus, so that the window could restore the focus back to its corresponding child if it loses it now and regains later.
+    ///
+    /// [See `wxChildFocusEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_child_focus_event.html)
     #[doc(alias = "wxChildFocusEvent")]
     #[doc(alias = "ChildFocusEvent")]
     class ChildFocusEvent
@@ -565,6 +581,8 @@ impl<const OWNED: bool> Drop for ChildFocusEventIsOwned<OWNED> {
 // wxChoice
 wxwidgets! {
     /// A choice item is used to select one of a list of strings.
+    ///
+    /// [See `wxChoice`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_choice.html)
     #[doc(alias = "wxChoice")]
     #[doc(alias = "Choice")]
     class Choice
@@ -663,6 +681,8 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for ChoiceIsOwned<OWNED> {
 // wxChoicebook
 wxwidgets! {
     /// wxChoicebook is a class similar to wxNotebook, but uses a wxChoice control to show the labels instead of the tabs.
+    ///
+    /// [See `wxChoicebook`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_choicebook.html)
     #[doc(alias = "wxChoicebook")]
     #[doc(alias = "Choicebook")]
     class Choicebook
@@ -766,6 +786,8 @@ impl<const OWNED: bool> WindowMethods for ChoicebookIsOwned<OWNED> {
 // wxClientDC
 wxwidgets! {
     /// wxClientDC is primarily useful for obtaining information about the window from outside EVT_PAINT() handler.
+    ///
+    /// [See `wxClientDC`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_client_d_c.html)
     #[doc(alias = "wxClientDC")]
     #[doc(alias = "ClientDC")]
     class ClientDC
@@ -826,6 +848,8 @@ impl<const OWNED: bool> Drop for ClientDCIsOwned<OWNED> {
 // wxClipboard
 wxwidgets! {
     /// A class for manipulating the clipboard.
+    ///
+    /// [See `wxClipboard`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_clipboard.html)
     #[doc(alias = "wxClipboard")]
     #[doc(alias = "Clipboard")]
     class Clipboard
@@ -868,6 +892,8 @@ impl<const OWNED: bool> Drop for ClipboardIsOwned<OWNED> {
 // wxClipboardTextEvent
 wxwidgets! {
     /// This class represents the events generated by a control (typically a wxTextCtrl but other windows can generate these events as well) when its content gets copied or cut to, or pasted from the clipboard.
+    ///
+    /// [See `wxClipboardTextEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_clipboard_text_event.html)
     #[doc(alias = "wxClipboardTextEvent")]
     #[doc(alias = "ClipboardTextEvent")]
     class ClipboardTextEvent
@@ -919,6 +945,8 @@ impl<const OWNED: bool> Drop for ClipboardTextEventIsOwned<OWNED> {
 // wxCloseEvent
 wxwidgets! {
     /// This event class contains information about window and session close events.
+    ///
+    /// [See `wxCloseEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_close_event.html)
     #[doc(alias = "wxCloseEvent")]
     #[doc(alias = "CloseEvent")]
     class CloseEvent
@@ -964,6 +992,8 @@ impl<const OWNED: bool> Drop for CloseEventIsOwned<OWNED> {
 // wxCollapsiblePane
 wxwidgets! {
     /// A collapsible pane is a container with an embedded button-like control which can be used by the user to collapse or expand the pane's contents.
+    ///
+    /// [See `wxCollapsiblePane`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane.html)
     #[doc(alias = "wxCollapsiblePane")]
     #[doc(alias = "CollapsiblePane")]
     class CollapsiblePane
@@ -1045,6 +1075,8 @@ impl<const OWNED: bool> DynamicCast for CollapsiblePaneIsOwned<OWNED> {
 // wxCollapsiblePaneEvent
 wxwidgets! {
     /// This event class is used for the events generated by wxCollapsiblePane.
+    ///
+    /// [See `wxCollapsiblePaneEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane_event.html)
     #[doc(alias = "wxCollapsiblePaneEvent")]
     #[doc(alias = "CollapsiblePaneEvent")]
     class CollapsiblePaneEvent
@@ -1109,6 +1141,8 @@ impl<const OWNED: bool> Drop for CollapsiblePaneEventIsOwned<OWNED> {
 // wxColour
 wxwidgets! {
     /// A colour is an object representing a combination of Red, Green, and Blue (RGB) intensity values and an Alpha value, and is used to determine drawing colours.
+    ///
+    /// [See `wxColour`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour.html)
     #[doc(alias = "wxColour")]
     #[doc(alias = "Colour")]
     class Colour
@@ -1167,6 +1201,8 @@ impl<const OWNED: bool> Drop for ColourIsOwned<OWNED> {
 // wxColourData
 wxwidgets! {
     /// This class holds a variety of information related to colour dialogs.
+    ///
+    /// [See `wxColourData`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_data.html)
     #[doc(alias = "wxColourData")]
     #[doc(alias = "ColourData")]
     class ColourData
@@ -1212,6 +1248,8 @@ impl<const OWNED: bool> Drop for ColourDataIsOwned<OWNED> {
 // wxColourDatabase
 wxwidgets! {
     /// wxWidgets maintains a database of standard RGB colours for a predefined set of named colours.
+    ///
+    /// [See `wxColourDatabase`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_database.html)
     #[doc(alias = "wxColourDatabase")]
     #[doc(alias = "ColourDatabase")]
     class ColourDatabase
@@ -1243,6 +1281,8 @@ impl<const OWNED: bool> Drop for ColourDatabaseIsOwned<OWNED> {
 // wxColourDialog
 wxwidgets! {
     /// This class represents the colour chooser dialog.
+    ///
+    /// [See `wxColourDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_dialog.html)
     #[doc(alias = "wxColourDialog")]
     #[doc(alias = "ColourDialog")]
     class ColourDialog
@@ -1321,6 +1361,8 @@ impl<const OWNED: bool> DynamicCast for ColourDialogIsOwned<OWNED> {
 // wxColourPickerCtrl
 wxwidgets! {
     /// This control allows the user to select a colour.
+    ///
+    /// [See `wxColourPickerCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_picker_ctrl.html)
     #[doc(alias = "wxColourPickerCtrl")]
     #[doc(alias = "ColourPickerCtrl")]
     class ColourPickerCtrl
@@ -1412,6 +1454,8 @@ impl<const OWNED: bool> DynamicCast for ColourPickerCtrlIsOwned<OWNED> {
 // wxColourPickerEvent
 wxwidgets! {
     /// This event class is used for the events generated by wxColourPickerCtrl.
+    ///
+    /// [See `wxColourPickerEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_picker_event.html)
     #[doc(alias = "wxColourPickerEvent")]
     #[doc(alias = "ColourPickerEvent")]
     class ColourPickerEvent
@@ -1480,6 +1524,8 @@ impl<const OWNED: bool> Drop for ColourPickerEventIsOwned<OWNED> {
 // wxComboBox
 wxwidgets! {
     /// A combobox is like a combination of an edit control and a listbox.
+    ///
+    /// [See `wxComboBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_box.html)
     #[doc(alias = "wxComboBox")]
     #[doc(alias = "ComboBox")]
     class ComboBox
@@ -1586,6 +1632,8 @@ impl<const OWNED: bool> TextEntryMethods for ComboBoxIsOwned<OWNED> {
 // wxComboCtrl
 wxwidgets! {
     /// A combo control is a generic combobox that allows totally custom popup.
+    ///
+    /// [See `wxComboCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html)
     #[doc(alias = "wxComboCtrl")]
     #[doc(alias = "ComboCtrl")]
     class ComboCtrl
@@ -1678,6 +1726,8 @@ impl<const OWNED: bool> TextEntryMethods for ComboCtrlIsOwned<OWNED> {
 // wxComboPopup
 wxwidgets! {
     /// In order to use a custom popup with wxComboCtrl, an interface class must be derived from wxComboPopup.
+    ///
+    /// [See `wxComboPopup`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_popup.html)
     #[doc(alias = "wxComboPopup")]
     #[doc(alias = "ComboPopup")]
     class ComboPopup
@@ -1706,6 +1756,8 @@ impl<const OWNED: bool> Drop for ComboPopupIsOwned<OWNED> {
 // wxCommand
 wxwidgets! {
     /// wxCommand is a base class for modelling an application command, which is an action usually performed by selecting a menu item, pressing a toolbar button or any other means provided by the application to change the data or view.
+    ///
+    /// [See `wxCommand`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command.html)
     #[doc(alias = "wxCommand")]
     #[doc(alias = "Command")]
     class Command
@@ -1745,6 +1797,8 @@ impl<const OWNED: bool> Drop for CommandIsOwned<OWNED> {
 // wxCommandEvent
 wxwidgets! {
     /// This event class contains information about command events, which originate from a variety of simple controls.
+    ///
+    /// [See `wxCommandEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_event.html)
     #[doc(alias = "wxCommandEvent")]
     #[doc(alias = "CommandEvent")]
     class CommandEvent
@@ -1790,6 +1844,8 @@ impl<const OWNED: bool> Drop for CommandEventIsOwned<OWNED> {
 // wxCommandLinkButton
 wxwidgets! {
     /// Objects of this class are similar in appearance to the normal wxButtons but are similar to the links in a web page in functionality.
+    ///
+    /// [See `wxCommandLinkButton`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_link_button.html)
     #[doc(alias = "wxCommandLinkButton")]
     #[doc(alias = "CommandLinkButton")]
     class CommandLinkButton
@@ -1886,6 +1942,8 @@ impl<const OWNED: bool> DynamicCast for CommandLinkButtonIsOwned<OWNED> {
 // wxCommandProcessor
 wxwidgets! {
     /// wxCommandProcessor is a class that maintains a history of wxCommands, with undo/redo functionality built-in.
+    ///
+    /// [See `wxCommandProcessor`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html)
     #[doc(alias = "wxCommandProcessor")]
     #[doc(alias = "CommandProcessor")]
     class CommandProcessor
@@ -1928,6 +1986,8 @@ impl<const OWNED: bool> Drop for CommandProcessorIsOwned<OWNED> {
 // wxContextMenuEvent
 wxwidgets! {
     /// This class is used for context menu events, sent to give the application a chance to show a context (popup) menu for a wxWindow.
+    ///
+    /// [See `wxContextMenuEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_context_menu_event.html)
     #[doc(alias = "wxContextMenuEvent")]
     #[doc(alias = "ContextMenuEvent")]
     class ContextMenuEvent
@@ -1979,6 +2039,8 @@ impl<const OWNED: bool> Drop for ContextMenuEventIsOwned<OWNED> {
 // wxControl
 wxwidgets! {
     /// This is the base class for a control or "widget".
+    ///
+    /// [See `wxControl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_control.html)
     #[doc(alias = "wxControl")]
     #[doc(alias = "Control")]
     class Control
@@ -2051,6 +2113,8 @@ impl<const OWNED: bool> DynamicCast for ControlIsOwned<OWNED> {
 // wxControlWithItems
 wxwidgets! {
     /// This is convenience class that derives from both wxControl and wxItemContainer.
+    ///
+    /// [See `wxControlWithItems`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_control_with_items.html)
     #[doc(alias = "wxControlWithItems")]
     #[doc(alias = "ControlWithItems")]
     class ControlWithItems
@@ -2111,6 +2175,8 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for ControlWithItemsIsOwne
 // wxCursor
 wxwidgets! {
     /// A cursor is a small bitmap usually used for denoting where the mouse pointer is, with a picture that might indicate the interpretation of a mouse click.
+    ///
+    /// [See `wxCursor`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_cursor.html)
     #[doc(alias = "wxCursor")]
     #[doc(alias = "Cursor")]
     class Cursor
@@ -2180,6 +2246,8 @@ impl<const OWNED: bool> Drop for CursorIsOwned<OWNED> {
 // wxCustomDataObject
 wxwidgets! {
     /// wxCustomDataObject is a specialization of wxDataObjectSimple for some application-specific data in arbitrary (either custom or one of the standard ones).
+    ///
+    /// [See `wxCustomDataObject`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_custom_data_object.html)
     #[doc(alias = "wxCustomDataObject")]
     #[doc(alias = "CustomDataObject")]
     class CustomDataObject

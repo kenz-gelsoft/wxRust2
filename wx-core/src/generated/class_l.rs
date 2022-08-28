@@ -3,6 +3,8 @@ use super::*;
 // wxLayoutAlgorithm
 wxwidgets! {
     /// wxLayoutAlgorithm implements layout of subwindows in MDI or SDI frames.
+    ///
+    /// [See `wxLayoutAlgorithm`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_layout_algorithm.html)
     #[doc(alias = "wxLayoutAlgorithm")]
     #[doc(alias = "LayoutAlgorithm")]
     class LayoutAlgorithm
@@ -45,6 +47,8 @@ impl<const OWNED: bool> Drop for LayoutAlgorithmIsOwned<OWNED> {
 // wxListBox
 wxwidgets! {
     /// A listbox is used to select one or more of a list of strings.
+    ///
+    /// [See `wxListBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_box.html)
     #[doc(alias = "wxListBox")]
     #[doc(alias = "ListBox")]
     class ListBox
@@ -143,6 +147,8 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for ListBoxIsOwned<OWNED> 
 // wxListCtrl
 wxwidgets! {
     /// A list control presents lists in a number of formats: list view, report view, icon view and small icon view.
+    ///
+    /// [See `wxListCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_ctrl.html)
     #[doc(alias = "wxListCtrl")]
     #[doc(alias = "ListCtrl")]
     class ListCtrl
@@ -247,6 +253,8 @@ impl<const OWNED: bool> ControlMethods for ListCtrlIsOwned<OWNED> {
 // wxListEvent
 wxwidgets! {
     /// A list event holds information about events associated with wxListCtrl objects.
+    ///
+    /// [See `wxListEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_event.html)
     #[doc(alias = "wxListEvent")]
     #[doc(alias = "ListEvent")]
     class ListEvent
@@ -304,6 +312,8 @@ impl<const OWNED: bool> Drop for ListEventIsOwned<OWNED> {
 // wxListItem
 wxwidgets! {
     /// This class stores information about a wxListCtrl item or column.
+    ///
+    /// [See `wxListItem`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_item.html)
     #[doc(alias = "wxListItem")]
     #[doc(alias = "ListItem")]
     class ListItem
@@ -346,6 +356,8 @@ impl<const OWNED: bool> Drop for ListItemIsOwned<OWNED> {
 // wxListView
 wxwidgets! {
     /// This class currently simply presents a simpler to use interface for the wxListCtrl  it can be thought of as a façade for that complicated class.
+    ///
+    /// [See `wxListView`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_view.html)
     #[doc(alias = "wxListView")]
     #[doc(alias = "ListView")]
     class ListView
@@ -430,6 +442,8 @@ impl<const OWNED: bool> DynamicCast for ListViewIsOwned<OWNED> {
 // wxListbook
 wxwidgets! {
     /// wxListbook is a class similar to wxNotebook but which uses a wxListCtrl to show the labels instead of the tabs.
+    ///
+    /// [See `wxListbook`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_listbook.html)
     #[doc(alias = "wxListbook")]
     #[doc(alias = "Listbook")]
     class Listbook

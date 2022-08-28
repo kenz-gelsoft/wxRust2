@@ -3,6 +3,8 @@ use super::*;
 // wxMask
 wxwidgets! {
     /// This class encapsulates a monochrome mask bitmap, where the masked area is black and the unmasked area is white.
+    ///
+    /// [See `wxMask`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_mask.html)
     #[doc(alias = "wxMask")]
     #[doc(alias = "Mask")]
     class Mask
@@ -70,6 +72,8 @@ impl<const OWNED: bool> Drop for MaskIsOwned<OWNED> {
 // wxMaximizeEvent
 wxwidgets! {
     /// An event being sent when a top level window is maximized.
+    ///
+    /// [See `wxMaximizeEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_maximize_event.html)
     #[doc(alias = "wxMaximizeEvent")]
     #[doc(alias = "MaximizeEvent")]
     class MaximizeEvent
@@ -118,6 +122,8 @@ impl<const OWNED: bool> Drop for MaximizeEventIsOwned<OWNED> {
 // wxMemoryDC
 wxwidgets! {
     /// A memory device context provides a means to draw graphics onto a bitmap.
+    ///
+    /// [See `wxMemoryDC`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_memory_d_c.html)
     #[doc(alias = "wxMemoryDC")]
     #[doc(alias = "MemoryDC")]
     class MemoryDC
@@ -183,6 +189,8 @@ impl<const OWNED: bool> Drop for MemoryDCIsOwned<OWNED> {
 // wxMenu
 wxwidgets! {
     /// A menu is a popup (or pull down) list of items, one of which may be selected before the menu goes away (clicking elsewhere dismisses the menu).
+    ///
+    /// [See `wxMenu`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_menu.html)
     #[doc(alias = "wxMenu")]
     #[doc(alias = "Menu")]
     class Menu
@@ -236,6 +244,8 @@ impl<const OWNED: bool> DynamicCast for MenuIsOwned<OWNED> {
 // wxMenuBar
 wxwidgets! {
     /// A menu bar is a series of menus accessible from the top of a frame.
+    ///
+    /// [See `wxMenuBar`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_menu_bar.html)
     #[doc(alias = "wxMenuBar")]
     #[doc(alias = "MenuBar")]
     class MenuBar
@@ -284,6 +294,8 @@ impl<const OWNED: bool> DynamicCast for MenuBarIsOwned<OWNED> {
 // wxMenuEvent
 wxwidgets! {
     /// This class is used for a variety of menu-related events.
+    ///
+    /// [See `wxMenuEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_menu_event.html)
     #[doc(alias = "wxMenuEvent")]
     #[doc(alias = "MenuEvent")]
     class MenuEvent
@@ -329,6 +341,8 @@ impl<const OWNED: bool> Drop for MenuEventIsOwned<OWNED> {
 // wxMenuItem
 wxwidgets! {
     /// A menu item represents an item in a menu.
+    ///
+    /// [See `wxMenuItem`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_menu_item.html)
     #[doc(alias = "wxMenuItem")]
     #[doc(alias = "MenuItem")]
     class MenuItem
@@ -399,6 +413,8 @@ impl<const OWNED: bool> Drop for MenuItemIsOwned<OWNED> {
 // wxMessageDialog
 wxwidgets! {
     /// This class represents a dialog that shows a single or multi-line message, with a choice of OK, Yes, No and Cancel buttons.
+    ///
+    /// [See `wxMessageDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_message_dialog.html)
     #[doc(alias = "wxMessageDialog")]
     #[doc(alias = "MessageDialog")]
     class MessageDialog
@@ -483,6 +499,8 @@ impl<const OWNED: bool> DynamicCast for MessageDialogIsOwned<OWNED> {
 // wxMessageOutputMessageBox
 wxwidgets! {
     /// Output messages by showing them in a message box.
+    ///
+    /// [See `wxMessageOutputMessageBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_message_output_message_box.html)
     #[doc(alias = "wxMessageOutputMessageBox")]
     #[doc(alias = "MessageOutputMessageBox")]
     class MessageOutputMessageBox
@@ -522,6 +540,8 @@ impl<const OWNED: bool> Drop for MessageOutputMessageBoxIsOwned<OWNED> {
 // wxMiniFrame
 wxwidgets! {
     /// A miniframe is a frame with a small title bar.
+    ///
+    /// [See `wxMiniFrame`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_mini_frame.html)
     #[doc(alias = "wxMiniFrame")]
     #[doc(alias = "MiniFrame")]
     class MiniFrame
@@ -640,6 +660,8 @@ impl<const OWNED: bool> TopLevelWindowMethods for MiniFrameIsOwned<OWNED> {
 // wxMirrorDC
 wxwidgets! {
     /// wxMirrorDC is a simple wrapper class which is always associated with a real wxDC object and either forwards all of its operations to it without changes (no mirroring takes place) or exchanges x and y coordinates which makes it possible to reuse the same code to draw a figure and its mirror  i.e.
+    ///
+    /// [See `wxMirrorDC`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_mirror_d_c.html)
     #[doc(alias = "wxMirrorDC")]
     #[doc(alias = "MirrorDC")]
     class MirrorDC
@@ -691,6 +713,8 @@ impl<const OWNED: bool> Drop for MirrorDCIsOwned<OWNED> {
 // wxMouseCaptureChangedEvent
 wxwidgets! {
     /// A mouse capture changed event is sent to a window that loses its mouse capture.
+    ///
+    /// [See `wxMouseCaptureChangedEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_mouse_capture_changed_event.html)
     #[doc(alias = "wxMouseCaptureChangedEvent")]
     #[doc(alias = "MouseCaptureChangedEvent")]
     class MouseCaptureChangedEvent
@@ -751,6 +775,8 @@ impl<const OWNED: bool> Drop for MouseCaptureChangedEventIsOwned<OWNED> {
 // wxMouseCaptureLostEvent
 wxwidgets! {
     /// A mouse capture lost event is sent to a window that had obtained mouse capture, which was subsequently lost due to an "external" event (for example, when a dialog box is shown or if another application captures the mouse).
+    ///
+    /// [See `wxMouseCaptureLostEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_mouse_capture_lost_event.html)
     #[doc(alias = "wxMouseCaptureLostEvent")]
     #[doc(alias = "MouseCaptureLostEvent")]
     class MouseCaptureLostEvent
@@ -799,6 +825,8 @@ impl<const OWNED: bool> Drop for MouseCaptureLostEventIsOwned<OWNED> {
 // wxMouseEvent
 wxwidgets! {
     /// This event class contains information about the events generated by the mouse: they include mouse buttons press and release events and mouse move events.
+    ///
+    /// [See `wxMouseEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_mouse_event.html)
     #[doc(alias = "wxMouseEvent")]
     #[doc(alias = "MouseEvent")]
     class MouseEvent
@@ -844,6 +872,8 @@ impl<const OWNED: bool> Drop for MouseEventIsOwned<OWNED> {
 // wxMouseEventsManager
 wxwidgets! {
     /// Helper for handling mouse input events in windows containing multiple items.
+    ///
+    /// [See `wxMouseEventsManager`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_mouse_events_manager.html)
     #[doc(alias = "wxMouseEventsManager")]
     #[doc(alias = "MouseEventsManager")]
     class MouseEventsManager
@@ -883,6 +913,8 @@ impl<const OWNED: bool> DynamicCast for MouseEventsManagerIsOwned<OWNED> {
 // wxMoveEvent
 wxwidgets! {
     /// A move event holds information about window position change.
+    ///
+    /// [See `wxMoveEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_move_event.html)
     #[doc(alias = "wxMoveEvent")]
     #[doc(alias = "MoveEvent")]
     class MoveEvent

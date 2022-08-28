@@ -3,6 +3,8 @@ use super::*;
 // wxRefCounter
 wxwidgets! {
     /// This class is used to manage reference-counting providing a simple interface and a counter.
+    ///
+    /// [See `wxRefCounter`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_ref_counter.html)
     #[doc(alias = "wxRefCounter")]
     #[doc(alias = "RefCounter")]
     class RefCounter

@@ -3,6 +3,8 @@ use super::*;
 // wxTGAHandler
 wxwidgets! {
     /// This is the image handler for the TGA format.
+    ///
+    /// [See `wxTGAHandler`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_t_g_a_handler.html)
     #[doc(alias = "wxTGAHandler")]
     #[doc(alias = "TGAHandler")]
     class TGAHandler
@@ -51,6 +53,8 @@ impl<const OWNED: bool> Drop for TGAHandlerIsOwned<OWNED> {
 // wxTIFFHandler
 wxwidgets! {
     /// This is the image handler for the TIFF format.
+    ///
+    /// [See `wxTIFFHandler`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_t_i_f_f_handler.html)
     #[doc(alias = "wxTIFFHandler")]
     #[doc(alias = "TIFFHandler")]
     class TIFFHandler
@@ -102,6 +106,8 @@ impl<const OWNED: bool> ImageHandlerMethods for TIFFHandlerIsOwned<OWNED> {
 // wxTaskBarIcon
 wxwidgets! {
     /// This class represents a taskbar icon.
+    ///
+    /// [See `wxTaskBarIcon`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_task_bar_icon.html)
     #[doc(alias = "wxTaskBarIcon")]
     #[doc(alias = "TaskBarIcon")]
     class TaskBarIcon
@@ -140,6 +146,8 @@ impl<const OWNED: bool> DynamicCast for TaskBarIconIsOwned<OWNED> {
 // wxTaskBarIconEvent
 wxwidgets! {
     /// The event class used by wxTaskBarIcon.
+    ///
+    /// [See `wxTaskBarIconEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_task_bar_icon_event.html)
     #[doc(alias = "wxTaskBarIconEvent")]
     #[doc(alias = "TaskBarIconEvent")]
     class TaskBarIconEvent
@@ -185,6 +193,8 @@ impl<const OWNED: bool> Drop for TaskBarIconEventIsOwned<OWNED> {
 // wxTextAttr
 wxwidgets! {
     /// wxTextAttr represents the character and paragraph attributes, or style, for a range of text in a wxTextCtrl or wxRichTextCtrl.
+    ///
+    /// [See `wxTextAttr`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_text_attr.html)
     #[doc(alias = "wxTextAttr")]
     #[doc(alias = "TextAttr")]
     class TextAttr
@@ -223,6 +233,8 @@ impl<const OWNED: bool> Drop for TextAttrIsOwned<OWNED> {
 // wxTextCtrl
 wxwidgets! {
     /// A text control allows text to be displayed and edited.
+    ///
+    /// [See `wxTextCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_text_ctrl.html)
     #[doc(alias = "wxTextCtrl")]
     #[doc(alias = "TextCtrl")]
     class TextCtrl
@@ -310,6 +322,8 @@ impl<const OWNED: bool> TextEntryMethods for TextCtrlIsOwned<OWNED> {
 // wxTextDataObject
 wxwidgets! {
     /// wxTextDataObject is a specialization of wxDataObjectSimple for text data.
+    ///
+    /// [See `wxTextDataObject`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_text_data_object.html)
     #[doc(alias = "wxTextDataObject")]
     #[doc(alias = "TextDataObject")]
     class TextDataObject
@@ -360,6 +374,8 @@ impl<const OWNED: bool> DataObjectSimpleMethods for TextDataObjectIsOwned<OWNED>
 // wxTextDropTarget
 wxwidgets! {
     /// A predefined drop target for dealing with text data.
+    ///
+    /// [See `wxTextDropTarget`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_text_drop_target.html)
     #[doc(alias = "wxTextDropTarget")]
     #[doc(alias = "TextDropTarget")]
     class TextDropTarget
@@ -394,6 +410,8 @@ impl<const OWNED: bool> Drop for TextDropTargetIsOwned<OWNED> {
 // wxTextEntry
 wxwidgets! {
     /// Common base class for single line text entry fields.
+    ///
+    /// [See `wxTextEntry`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_text_entry.html)
     #[doc(alias = "wxTextEntry")]
     #[doc(alias = "TextEntry")]
     class TextEntry
@@ -421,6 +439,8 @@ impl<const OWNED: bool> Drop for TextEntryIsOwned<OWNED> {
 // wxTextEntryDialog
 wxwidgets! {
     /// This class represents a dialog that requests a one-line text string from the user.
+    ///
+    /// [See `wxTextEntryDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_text_entry_dialog.html)
     #[doc(alias = "wxTextEntryDialog")]
     #[doc(alias = "TextEntryDialog")]
     class TextEntryDialog
@@ -512,6 +532,8 @@ impl<const OWNED: bool> DynamicCast for TextEntryDialogIsOwned<OWNED> {
 // wxTextValidator
 wxwidgets! {
     /// wxTextValidator validates text controls, providing a variety of filtering behaviours.
+    ///
+    /// [See `wxTextValidator`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_text_validator.html)
     #[doc(alias = "wxTextValidator")]
     #[doc(alias = "TextValidator")]
     class TextValidator
@@ -568,6 +590,8 @@ impl<const OWNED: bool> DynamicCast for TextValidatorIsOwned<OWNED> {
 // wxThreadEvent
 wxwidgets! {
     /// This class adds some simple functionality to wxEvent to facilitate inter-thread communication.
+    ///
+    /// [See `wxThreadEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_thread_event.html)
     #[doc(alias = "wxThreadEvent")]
     #[doc(alias = "ThreadEvent")]
     class ThreadEvent
@@ -613,6 +637,8 @@ impl<const OWNED: bool> Drop for ThreadEventIsOwned<OWNED> {
 // wxTimePickerCtrl
 wxwidgets! {
     /// This control allows the user to enter time.
+    ///
+    /// [See `wxTimePickerCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_time_picker_ctrl.html)
     #[doc(alias = "wxTimePickerCtrl")]
     #[doc(alias = "TimePickerCtrl")]
     class TimePickerCtrl
@@ -699,6 +725,8 @@ impl<const OWNED: bool> DynamicCast for TimePickerCtrlIsOwned<OWNED> {
 // wxTipProvider
 wxwidgets! {
     /// This is the class used together with wxShowTip() function.
+    ///
+    /// [See `wxTipProvider`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_tip_provider.html)
     #[doc(alias = "wxTipProvider")]
     #[doc(alias = "TipProvider")]
     class TipProvider
@@ -727,6 +755,8 @@ impl<const OWNED: bool> Drop for TipProviderIsOwned<OWNED> {
 // wxTipWindow
 wxwidgets! {
     /// Shows simple text in a popup tip window on creation.
+    ///
+    /// [See `wxTipWindow`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_tip_window.html)
     #[doc(alias = "wxTipWindow")]
     #[doc(alias = "TipWindow")]
     class TipWindow
@@ -802,6 +832,8 @@ impl<const OWNED: bool> DynamicCast for TipWindowIsOwned<OWNED> {
 // wxToggleButton
 wxwidgets! {
     /// wxToggleButton is a button that stays pressed when clicked by the user.
+    ///
+    /// [See `wxToggleButton`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_toggle_button.html)
     #[doc(alias = "wxToggleButton")]
     #[doc(alias = "ToggleButton")]
     class ToggleButton
@@ -889,6 +921,8 @@ impl<const OWNED: bool> DynamicCast for ToggleButtonIsOwned<OWNED> {
 // wxToolBar
 wxwidgets! {
     /// A toolbar is a bar of buttons and/or other controls usually placed below the menu bar in a wxFrame.
+    ///
+    /// [See `wxToolBar`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_tool_bar.html)
     #[doc(alias = "wxToolBar")]
     #[doc(alias = "ToolBar")]
     class ToolBar
@@ -963,6 +997,8 @@ impl<const OWNED: bool> DynamicCast for ToolBarIsOwned<OWNED> {
 // wxToolTip
 wxwidgets! {
     /// This class holds information about a tooltip associated with a window (see wxWindow::SetToolTip()).
+    ///
+    /// [See `wxToolTip`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_tool_tip.html)
     #[doc(alias = "wxToolTip")]
     #[doc(alias = "ToolTip")]
     class ToolTip
@@ -1009,6 +1045,8 @@ impl<const OWNED: bool> Drop for ToolTipIsOwned<OWNED> {
 // wxToolbook
 wxwidgets! {
     /// wxToolbook is a class similar to wxNotebook but which uses a wxToolBar to show the labels instead of the tabs.
+    ///
+    /// [See `wxToolbook`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_toolbook.html)
     #[doc(alias = "wxToolbook")]
     #[doc(alias = "Toolbook")]
     class Toolbook
@@ -1112,6 +1150,8 @@ impl<const OWNED: bool> WindowMethods for ToolbookIsOwned<OWNED> {
 // wxTopLevelWindow
 wxwidgets! {
     /// wxTopLevelWindow is a common base class for wxDialog and wxFrame.
+    ///
+    /// [See `wxTopLevelWindow`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_top_level_window.html)
     #[doc(alias = "wxTopLevelWindow")]
     #[doc(alias = "TopLevelWindow")]
     class TopLevelWindow
@@ -1191,6 +1231,8 @@ impl<const OWNED: bool> DynamicCast for TopLevelWindowIsOwned<OWNED> {
 // wxTreeCtrl
 wxwidgets! {
     /// A tree control presents information as a hierarchy, with items that may be expanded to show further items.
+    ///
+    /// [See `wxTreeCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_tree_ctrl.html)
     #[doc(alias = "wxTreeCtrl")]
     #[doc(alias = "TreeCtrl")]
     class TreeCtrl
@@ -1301,6 +1343,8 @@ impl<const OWNED: bool> WindowMethods for TreeCtrlIsOwned<OWNED> {
 // wxTreeEvent
 wxwidgets! {
     /// A tree event holds information about events associated with wxTreeCtrl objects.
+    ///
+    /// [See `wxTreeEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_tree_event.html)
     #[doc(alias = "wxTreeEvent")]
     #[doc(alias = "TreeEvent")]
     class TreeEvent
@@ -1358,6 +1402,8 @@ impl<const OWNED: bool> Drop for TreeEventIsOwned<OWNED> {
 // wxTreeItemData
 wxwidgets! {
     /// wxTreeItemData is some (arbitrary) user class associated with some item.
+    ///
+    /// [See `wxTreeItemData`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_tree_item_data.html)
     #[doc(alias = "wxTreeItemData")]
     #[doc(alias = "TreeItemData")]
     class TreeItemData
@@ -1395,6 +1441,8 @@ impl<const OWNED: bool> Drop for TreeItemDataIsOwned<OWNED> {
 // wxTreeItemId
 wxwidgets! {
     /// An opaque reference to a tree item.
+    ///
+    /// [See `wxTreeItemId`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_tree_item_id.html)
     #[doc(alias = "wxTreeItemId")]
     #[doc(alias = "TreeItemId")]
     class TreeItemId
@@ -1426,6 +1474,8 @@ impl<const OWNED: bool> Drop for TreeItemIdIsOwned<OWNED> {
 // wxTreeListCtrl
 wxwidgets! {
     /// A control combining wxTreeCtrl and wxListCtrl features.
+    ///
+    /// [See `wxTreeListCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_tree_list_ctrl.html)
     #[doc(alias = "wxTreeListCtrl")]
     #[doc(alias = "TreeListCtrl")]
     class TreeListCtrl
@@ -1518,6 +1568,8 @@ impl<const OWNED: bool> WindowMethods for TreeListCtrlIsOwned<OWNED> {
 // wxTreeListItem
 wxwidgets! {
     /// Unique identifier of an item in wxTreeListCtrl.
+    ///
+    /// [See `wxTreeListItem`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_tree_list_item.html)
     #[doc(alias = "wxTreeListItem")]
     #[doc(alias = "TreeListItem")]
     class TreeListItem
@@ -1549,6 +1601,8 @@ impl<const OWNED: bool> Drop for TreeListItemIsOwned<OWNED> {
 // wxTreeListItemComparator
 wxwidgets! {
     /// Class defining sort order for the items in wxTreeListCtrl.
+    ///
+    /// [See `wxTreeListItemComparator`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_tree_list_item_comparator.html)
     #[doc(alias = "wxTreeListItemComparator")]
     #[doc(alias = "TreeListItemComparator")]
     class TreeListItemComparator
@@ -1577,6 +1631,8 @@ impl<const OWNED: bool> Drop for TreeListItemComparatorIsOwned<OWNED> {
 // wxTreebook
 wxwidgets! {
     /// This class is an extension of the wxNotebook class that allows a tree structured set of pages to be shown in a control.
+    ///
+    /// [See `wxTreebook`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_treebook.html)
     #[doc(alias = "wxTreebook")]
     #[doc(alias = "Treebook")]
     class Treebook

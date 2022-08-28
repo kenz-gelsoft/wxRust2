@@ -3,6 +3,8 @@ use super::*;
 // wxVariantData
 wxwidgets! {
     /// The wxVariantData class is used to implement a new type for wxVariant.
+    ///
+    /// [See `wxVariantData`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_variant_data.html)
     #[doc(alias = "wxVariantData")]
     #[doc(alias = "VariantData")]
     class VariantData

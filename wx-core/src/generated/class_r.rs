@@ -3,6 +3,8 @@ use super::*;
 // wxRadioBox
 wxwidgets! {
     /// A radio box item is used to select one of number of mutually exclusive choices.
+    ///
+    /// [See `wxRadioBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_radio_box.html)
     #[doc(alias = "wxRadioBox")]
     #[doc(alias = "RadioBox")]
     class RadioBox
@@ -109,6 +111,8 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for RadioBoxIsOwned<OWNED>
 // wxRadioButton
 wxwidgets! {
     /// A radio button item is a button which usually denotes one of several mutually exclusive options.
+    ///
+    /// [See `wxRadioButton`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_radio_button.html)
     #[doc(alias = "wxRadioButton")]
     #[doc(alias = "RadioButton")]
     class RadioButton
@@ -190,6 +194,8 @@ impl<const OWNED: bool> DynamicCast for RadioButtonIsOwned<OWNED> {
 // wxRealPoint
 wxwidgets! {
     /// A wxRealPoint is a useful data structure for graphics operations.
+    ///
+    /// [See `wxRealPoint`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_real_point.html)
     #[doc(alias = "wxRealPoint")]
     #[doc(alias = "RealPoint")]
     class RealPoint
@@ -232,6 +238,8 @@ impl<const OWNED: bool> Drop for RealPointIsOwned<OWNED> {
 // wxRearrangeCtrl
 wxwidgets! {
     /// A composite control containing a wxRearrangeList and the buttons allowing to move the items in it.
+    ///
+    /// [See `wxRearrangeCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rearrange_ctrl.html)
     #[doc(alias = "wxRearrangeCtrl")]
     #[doc(alias = "RearrangeCtrl")]
     class RearrangeCtrl
@@ -321,6 +329,8 @@ impl<const OWNED: bool> DynamicCast for RearrangeCtrlIsOwned<OWNED> {
 // wxRearrangeDialog
 wxwidgets! {
     /// A dialog allowing the user to rearrange the specified items.
+    ///
+    /// [See `wxRearrangeDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rearrange_dialog.html)
     #[doc(alias = "wxRearrangeDialog")]
     #[doc(alias = "RearrangeDialog")]
     class RearrangeDialog
@@ -415,6 +425,8 @@ impl<const OWNED: bool> DynamicCast for RearrangeDialogIsOwned<OWNED> {
 // wxRearrangeList
 wxwidgets! {
     /// A listbox-like control allowing the user to rearrange the items and to enable or disable them.
+    ///
+    /// [See `wxRearrangeList`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rearrange_list.html)
     #[doc(alias = "wxRearrangeList")]
     #[doc(alias = "RearrangeList")]
     class RearrangeList
@@ -527,6 +539,8 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for RearrangeListIsOwned<O
 // wxRect
 wxwidgets! {
     /// Represents a rectangle with integer coordinates.
+    ///
+    /// [See `wxRect`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rect.html)
     #[doc(alias = "wxRect")]
     #[doc(alias = "Rect")]
     class Rect
@@ -591,6 +605,8 @@ impl<const OWNED: bool> Drop for RectIsOwned<OWNED> {
 // wxRegion
 wxwidgets! {
     /// A wxRegion represents a simple or complex region on a device context or window.
+    ///
+    /// [See `wxRegion`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_region.html)
     #[doc(alias = "wxRegion")]
     #[doc(alias = "Region")]
     class Region
@@ -688,6 +704,8 @@ impl<const OWNED: bool> Drop for RegionIsOwned<OWNED> {
 // wxRegionIterator
 wxwidgets! {
     /// This class is used to iterate through the rectangles in a region, typically when examining the damaged regions of a window within an OnPaint call.
+    ///
+    /// [See `wxRegionIterator`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_region_iterator.html)
     #[doc(alias = "wxRegionIterator")]
     #[doc(alias = "RegionIterator")]
     class RegionIterator
@@ -737,6 +755,8 @@ impl<const OWNED: bool> Drop for RegionIteratorIsOwned<OWNED> {
 // wxRendererNative
 wxwidgets! {
     /// First, a brief introduction to wxRendererNative and why it is needed.
+    ///
+    /// [See `wxRendererNative`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_renderer_native.html)
     #[doc(alias = "wxRendererNative")]
     #[doc(alias = "RendererNative")]
     class RendererNative
@@ -764,6 +784,8 @@ impl<const OWNED: bool> Drop for RendererNativeIsOwned<OWNED> {
 // wxRichToolTip
 wxwidgets! {
     /// Allows showing a tool tip with more customizations than wxToolTip.
+    ///
+    /// [See `wxRichToolTip`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rich_tool_tip.html)
     #[doc(alias = "wxRichToolTip")]
     #[doc(alias = "RichToolTip")]
     class RichToolTip

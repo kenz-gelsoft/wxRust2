@@ -3,6 +3,8 @@ use super::*;
 // wxUIActionSimulator
 wxwidgets! {
     /// wxUIActionSimulator is a class used to simulate user interface actions such as a mouse click or a key press.
+    ///
+    /// [See `wxUIActionSimulator`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_u_i_action_simulator.html)
     #[doc(alias = "wxUIActionSimulator")]
     #[doc(alias = "UIActionSimulator")]
     class UIActionSimulator
@@ -34,6 +36,8 @@ impl<const OWNED: bool> Drop for UIActionSimulatorIsOwned<OWNED> {
 // wxURLDataObject
 wxwidgets! {
     /// wxURLDataObject is a wxDataObject containing an URL and can be used e.g.
+    ///
+    /// [See `wxURLDataObject`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_u_r_l_data_object.html)
     #[doc(alias = "wxURLDataObject")]
     #[doc(alias = "URLDataObject")]
     class URLDataObject
@@ -75,6 +79,8 @@ impl<const OWNED: bool> Drop for URLDataObjectIsOwned<OWNED> {
 // wxUpdateUIEvent
 wxwidgets! {
     /// This class is used for pseudo-events which are called by wxWidgets to give an application the chance to update various user interface elements.
+    ///
+    /// [See `wxUpdateUIEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_update_u_i_event.html)
     #[doc(alias = "wxUpdateUIEvent")]
     #[doc(alias = "UpdateUIEvent")]
     class UpdateUIEvent
