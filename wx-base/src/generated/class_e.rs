@@ -50,6 +50,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> EvtHandlerIsOwned<OWNED> {
+    /// Constructor.
     pub fn new() -> EvtHandlerIsOwned<OWNED> {
         unsafe { EvtHandlerIsOwned(ffi::wxEvtHandler_new()) }
     }

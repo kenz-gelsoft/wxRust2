@@ -120,9 +120,11 @@ impl<const OWNED: bool> DateTimeIsOwned<OWNED> {
     pub const Monday_First: c_int = 0 + 1;
     pub const Sunday_First: c_int = 0 + 2;
 
+    /// Default constructor.
     pub fn new() -> DateTimeIsOwned<OWNED> {
         unsafe { DateTimeIsOwned(ffi::wxDateTime_new()) }
     }
+    /// Copy constructor.
     pub fn new_with_datetime<D: DateTimeMethods>(date: &D) -> DateTimeIsOwned<OWNED> {
         unsafe {
             let date = date.as_ptr();
@@ -131,6 +133,7 @@ impl<const OWNED: bool> DateTimeIsOwned<OWNED> {
     }
     // NOT_SUPPORTED: fn wxDateTime2()
     // BLOCKED: fn wxDateTime3()
+    /// Same as Set().
     pub fn new_with_double(jdn: c_double) -> DateTimeIsOwned<OWNED> {
         unsafe { DateTimeIsOwned(ffi::wxDateTime_new4(jdn)) }
     }

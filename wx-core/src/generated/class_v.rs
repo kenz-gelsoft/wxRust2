@@ -57,6 +57,7 @@ impl<const OWNED: bool> DynamicCast for VListBoxIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> WindowMethods for VListBoxIsOwned<OWNED> {
+    /// Creates the control.
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -131,6 +132,7 @@ impl<const OWNED: bool> DynamicCast for VScrolledWindowIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> WindowMethods for VScrolledWindowIsOwned<OWNED> {
+    /// Same as the non-default constructor, but returns a status code: true if ok, false if the window couldn't be created.
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -166,6 +168,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ValidatorIsOwned<OWNED> {
+    /// Constructor.
     pub fn new() -> ValidatorIsOwned<OWNED> {
         unsafe { ValidatorIsOwned(ffi::wxValidator_new()) }
     }

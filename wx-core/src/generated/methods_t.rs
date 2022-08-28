@@ -9,15 +9,19 @@ pub trait TIFFHandlerMethods: ImageHandlerMethods {}
 // wxTaskBarIcon
 pub trait TaskBarIconMethods: EvtHandlerMethods {
     // DTOR: fn ~wxTaskBarIcon()
+    /// This method is similar to wxWindow::Destroy and can be used to schedule the task bar icon object for the delayed destruction: it will be deleted during the next event loop iteration, which allows the task bar icon to process any pending events for it before being destroyed.
     fn destroy(&self) {
         unsafe { ffi::wxTaskBarIcon_Destroy(self.as_ptr()) }
     }
+    /// Returns true if SetIcon() was called with no subsequent RemoveIcon().
     fn is_icon_installed(&self) -> bool {
         unsafe { ffi::wxTaskBarIcon_IsIconInstalled(self.as_ptr()) }
     }
+    /// Returns true if the object initialized successfully.
     fn is_ok(&self) -> bool {
         unsafe { ffi::wxTaskBarIcon_IsOk(self.as_ptr()) }
     }
+    /// Pops up a menu at the current mouse position.
     fn popup_menu<M: MenuMethods>(&self, menu: Option<&M>) -> bool {
         unsafe {
             let menu = match menu {
@@ -27,9 +31,11 @@ pub trait TaskBarIconMethods: EvtHandlerMethods {
             ffi::wxTaskBarIcon_PopupMenu(self.as_ptr(), menu)
         }
     }
+    /// Removes the icon previously set with SetIcon().
     fn remove_icon(&self) -> bool {
         unsafe { ffi::wxTaskBarIcon_RemoveIcon(self.as_ptr()) }
     }
+    /// Sets the icon, and optional tooltip text.
     fn set_icon<B: BitmapBundleMethods>(&self, icon: &B, tooltip: &str) -> bool {
         unsafe {
             let icon = icon.as_ptr();
@@ -38,6 +44,7 @@ pub trait TaskBarIconMethods: EvtHandlerMethods {
             ffi::wxTaskBarIcon_SetIcon(self.as_ptr(), icon, tooltip)
         }
     }
+    /// Returns true if system tray is available in the desktop environment the app runs under.
     fn is_available() -> bool {
         unsafe { ffi::wxTaskBarIcon_IsAvailable() }
     }
@@ -49,33 +56,43 @@ pub trait TaskBarIconEventMethods: EventMethods {}
 // wxTextAttr
 pub trait TextAttrMethods: WxRustMethods {
     // NOT_SUPPORTED: fn GetAlignment()
+    /// Returns the background colour.
     fn get_background_colour(&self) -> ColourIsOwned<false> {
         unsafe { ColourIsOwned::from_ptr(ffi::wxTextAttr_GetBackgroundColour(self.as_ptr())) }
     }
+    /// Returns a string containing the name of the font associated with the bullet symbol.
     fn get_bullet_font(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxTextAttr_GetBulletFont(self.as_ptr())).into() }
     }
+    /// Returns the standard bullet name, applicable if the bullet style is wxTEXT_ATTR_BULLET_STYLE_STANDARD.
     fn get_bullet_name(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxTextAttr_GetBulletName(self.as_ptr())).into() }
     }
+    /// Returns the bullet number.
     fn get_bullet_number(&self) -> c_int {
         unsafe { ffi::wxTextAttr_GetBulletNumber(self.as_ptr()) }
     }
+    /// Returns the bullet style.
     fn get_bullet_style(&self) -> c_int {
         unsafe { ffi::wxTextAttr_GetBulletStyle(self.as_ptr()) }
     }
+    /// Returns the bullet text, which could be a symbol, or (for example) cached outline text.
     fn get_bullet_text(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxTextAttr_GetBulletText(self.as_ptr())).into() }
     }
+    /// Returns the name of the character style.
     fn get_character_style_name(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxTextAttr_GetCharacterStyleName(self.as_ptr())).into() }
     }
+    /// Returns flags indicating which attributes are applicable.
     fn get_flags(&self) -> c_long {
         unsafe { ffi::wxTextAttr_GetFlags(self.as_ptr()) }
     }
+    /// Creates and returns a font specified by the font attributes in the wxTextAttr object.
     fn get_font(&self) -> Font {
         unsafe { Font::from_ptr(ffi::wxTextAttr_GetFont(self.as_ptr())) }
     }
+    /// Gets the font attributes from the given font, using only the attributes specified by flags.
     fn get_font_attributes<F: FontMethods>(&self, font: &F, flags: c_int) -> bool {
         unsafe {
             let font = font.as_ptr();
@@ -83,173 +100,227 @@ pub trait TextAttrMethods: WxRustMethods {
         }
     }
     // NOT_SUPPORTED: fn GetFontEncoding()
+    /// Returns the font face name.
     fn get_font_face_name(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxTextAttr_GetFontFaceName(self.as_ptr())).into() }
     }
     // NOT_SUPPORTED: fn GetFontFamily()
+    /// Returns the font size in points.
     fn get_font_size(&self) -> c_int {
         unsafe { ffi::wxTextAttr_GetFontSize(self.as_ptr()) }
     }
     // NOT_SUPPORTED: fn GetFontStyle()
+    /// Returns true if the font is underlined.
     fn get_font_underlined(&self) -> bool {
         unsafe { ffi::wxTextAttr_GetFontUnderlined(self.as_ptr()) }
     }
     // NOT_SUPPORTED: fn GetUnderlineType()
+    /// Returns the underline color used.
     fn get_underline_colour(&self) -> ColourIsOwned<false> {
         unsafe { ColourIsOwned::from_ptr(ffi::wxTextAttr_GetUnderlineColour(self.as_ptr())) }
     }
     // NOT_SUPPORTED: fn GetFontWeight()
+    /// Returns the left indent in tenths of a millimetre.
     fn get_left_indent(&self) -> c_long {
         unsafe { ffi::wxTextAttr_GetLeftIndent(self.as_ptr()) }
     }
+    /// Returns the left sub-indent in tenths of a millimetre.
     fn get_left_sub_indent(&self) -> c_long {
         unsafe { ffi::wxTextAttr_GetLeftSubIndent(self.as_ptr()) }
     }
+    /// Returns the line spacing value, one of wxTextAttrLineSpacing values.
     fn get_line_spacing(&self) -> c_int {
         unsafe { ffi::wxTextAttr_GetLineSpacing(self.as_ptr()) }
     }
+    /// Returns the name of the list style.
     fn get_list_style_name(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxTextAttr_GetListStyleName(self.as_ptr())).into() }
     }
+    /// Returns the outline level.
     fn get_outline_level(&self) -> c_int {
         unsafe { ffi::wxTextAttr_GetOutlineLevel(self.as_ptr()) }
     }
+    /// Returns the space in tenths of a millimeter after the paragraph.
     fn get_paragraph_spacing_after(&self) -> c_int {
         unsafe { ffi::wxTextAttr_GetParagraphSpacingAfter(self.as_ptr()) }
     }
+    /// Returns the space in tenths of a millimeter before the paragraph.
     fn get_paragraph_spacing_before(&self) -> c_int {
         unsafe { ffi::wxTextAttr_GetParagraphSpacingBefore(self.as_ptr()) }
     }
+    /// Returns the name of the paragraph style.
     fn get_paragraph_style_name(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxTextAttr_GetParagraphStyleName(self.as_ptr())).into() }
     }
+    /// Returns the right indent in tenths of a millimeter.
     fn get_right_indent(&self) -> c_long {
         unsafe { ffi::wxTextAttr_GetRightIndent(self.as_ptr()) }
     }
+    /// Returns an array of tab stops, each expressed in tenths of a millimeter.
     fn get_tabs(&self) -> ArrayIntIsOwned<false> {
         unsafe { ArrayIntIsOwned::from_ptr(ffi::wxTextAttr_GetTabs(self.as_ptr())) }
     }
+    /// Returns the text foreground colour.
     fn get_text_colour(&self) -> ColourIsOwned<false> {
         unsafe { ColourIsOwned::from_ptr(ffi::wxTextAttr_GetTextColour(self.as_ptr())) }
     }
+    /// Returns the text effect bits of interest.
     fn get_text_effect_flags(&self) -> c_int {
         unsafe { ffi::wxTextAttr_GetTextEffectFlags(self.as_ptr()) }
     }
+    /// Returns the text effects, a bit list of styles.
     fn get_text_effects(&self) -> c_int {
         unsafe { ffi::wxTextAttr_GetTextEffects(self.as_ptr()) }
     }
+    /// Returns the URL for the content.
     fn get_url(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxTextAttr_GetURL(self.as_ptr())).into() }
     }
+    /// Returns true if the attribute object specifies alignment.
     fn has_alignment(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasAlignment(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies a background colour.
     fn has_background_colour(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasBackgroundColour(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies a standard bullet name.
     fn has_bullet_name(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasBulletName(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies a bullet number.
     fn has_bullet_number(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasBulletNumber(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies a bullet style.
     fn has_bullet_style(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasBulletStyle(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies bullet text (usually specifying a symbol).
     fn has_bullet_text(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasBulletText(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies a character style name.
     fn has_character_style_name(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasCharacterStyleName(self.as_ptr()) }
     }
+    /// Returns true if the flag is present in the attribute object's flag bitlist.
     fn has_flag(&self, flag: c_long) -> bool {
         unsafe { ffi::wxTextAttr_HasFlag(self.as_ptr(), flag) }
     }
+    /// Returns true if the attribute object specifies any font attributes.
     fn has_font(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasFont(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies an encoding.
     fn has_font_encoding(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasFontEncoding(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies a font face name.
     fn has_font_face_name(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasFontFaceName(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies a font family.
     fn has_font_family(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasFontFamily(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies italic style.
     fn has_font_italic(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasFontItalic(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies a font point or pixel size.
     fn has_font_size(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasFontSize(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies a font point size.
     fn has_font_point_size(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasFontPointSize(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies a font pixel size.
     fn has_font_pixel_size(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasFontPixelSize(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies either underlining or no underlining.
     fn has_font_underlined(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasFontUnderlined(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies font weight (bold, light or normal).
     fn has_font_weight(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasFontWeight(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies a left indent.
     fn has_left_indent(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasLeftIndent(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies line spacing.
     fn has_line_spacing(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasLineSpacing(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies a list style name.
     fn has_list_style_name(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasListStyleName(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies an outline level.
     fn has_outline_level(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasOutlineLevel(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies a page break before this paragraph.
     fn has_page_break(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasPageBreak(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies spacing after a paragraph.
     fn has_paragraph_spacing_after(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasParagraphSpacingAfter(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies spacing before a paragraph.
     fn has_paragraph_spacing_before(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasParagraphSpacingBefore(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies a paragraph style name.
     fn has_paragraph_style_name(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasParagraphStyleName(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies a right indent.
     fn has_right_indent(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasRightIndent(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies tab stops.
     fn has_tabs(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasTabs(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies a text foreground colour.
     fn has_text_colour(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasTextColour(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies text effects.
     fn has_text_effects(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasTextEffects(self.as_ptr()) }
     }
+    /// Returns true if the attribute object specifies a URL.
     fn has_url(&self) -> bool {
         unsafe { ffi::wxTextAttr_HasURL(self.as_ptr()) }
     }
+    /// Returns true if the object represents a character style, that is, the flags specify a font or a text background or foreground colour.
     fn is_character_style(&self) -> bool {
         unsafe { ffi::wxTextAttr_IsCharacterStyle(self.as_ptr()) }
     }
+    /// Returns false if we have any attributes set, true otherwise.
     fn is_default(&self) -> bool {
         unsafe { ffi::wxTextAttr_IsDefault(self.as_ptr()) }
     }
+    /// Returns true if the object represents a paragraph style, that is, the flags specify alignment, indentation, tabs, paragraph spacing, or bullet style.
     fn is_paragraph_style(&self) -> bool {
         unsafe { ffi::wxTextAttr_IsParagraphStyle(self.as_ptr()) }
     }
     // NOT_SUPPORTED: fn SetAlignment()
+    /// Sets the background colour.
     fn set_background_colour<C: ColourMethods>(&self, col_back: &C) {
         unsafe {
             let col_back = col_back.as_ptr();
             ffi::wxTextAttr_SetBackgroundColour(self.as_ptr(), col_back)
         }
     }
+    /// Sets the name of the font associated with the bullet symbol.
     fn set_bullet_font(&self, font: &str) {
         unsafe {
             let font = WxString::from(font);
@@ -257,6 +328,7 @@ pub trait TextAttrMethods: WxRustMethods {
             ffi::wxTextAttr_SetBulletFont(self.as_ptr(), font)
         }
     }
+    /// Sets the standard bullet name, applicable if the bullet style is wxTEXT_ATTR_BULLET_STYLE_STANDARD.
     fn set_bullet_name(&self, name: &str) {
         unsafe {
             let name = WxString::from(name);
@@ -264,12 +336,15 @@ pub trait TextAttrMethods: WxRustMethods {
             ffi::wxTextAttr_SetBulletName(self.as_ptr(), name)
         }
     }
+    /// Sets the bullet number.
     fn set_bullet_number(&self, n: c_int) {
         unsafe { ffi::wxTextAttr_SetBulletNumber(self.as_ptr(), n) }
     }
+    /// Sets the bullet style.
     fn set_bullet_style(&self, style: c_int) {
         unsafe { ffi::wxTextAttr_SetBulletStyle(self.as_ptr(), style) }
     }
+    /// Sets the bullet text, which could be a symbol, or (for example) cached outline text.
     fn set_bullet_text(&self, text: &str) {
         unsafe {
             let text = WxString::from(text);
@@ -277,6 +352,7 @@ pub trait TextAttrMethods: WxRustMethods {
             ffi::wxTextAttr_SetBulletText(self.as_ptr(), text)
         }
     }
+    /// Sets the character style name.
     fn set_character_style_name(&self, name: &str) {
         unsafe {
             let name = WxString::from(name);
@@ -284,9 +360,11 @@ pub trait TextAttrMethods: WxRustMethods {
             ffi::wxTextAttr_SetCharacterStyleName(self.as_ptr(), name)
         }
     }
+    /// Sets the flags determining which styles are being specified.
     fn set_flags(&self, flags: c_long) {
         unsafe { ffi::wxTextAttr_SetFlags(self.as_ptr(), flags) }
     }
+    /// Sets the attributes for the given font.
     fn set_font<F: FontMethods>(&self, font: &F, flags: c_int) {
         unsafe {
             let font = font.as_ptr();
@@ -294,6 +372,7 @@ pub trait TextAttrMethods: WxRustMethods {
         }
     }
     // NOT_SUPPORTED: fn SetFontEncoding()
+    /// Sets the font face name.
     fn set_font_face_name(&self, face_name: &str) {
         unsafe {
             let face_name = WxString::from(face_name);
@@ -302,27 +381,34 @@ pub trait TextAttrMethods: WxRustMethods {
         }
     }
     // NOT_SUPPORTED: fn SetFontFamily()
+    /// Sets the font size in points.
     fn set_font_size(&self, point_size: c_int) {
         unsafe { ffi::wxTextAttr_SetFontSize(self.as_ptr(), point_size) }
     }
+    /// Sets the font size in points.
     fn set_font_point_size(&self, point_size: c_int) {
         unsafe { ffi::wxTextAttr_SetFontPointSize(self.as_ptr(), point_size) }
     }
+    /// Sets the font size in pixels.
     fn set_font_pixel_size(&self, pixel_size: c_int) {
         unsafe { ffi::wxTextAttr_SetFontPixelSize(self.as_ptr(), pixel_size) }
     }
     // NOT_SUPPORTED: fn SetFontStyle()
+    /// Sets the font underlining (solid line, text colour).
     fn set_font_underlined(&self, underlined: bool) {
         unsafe { ffi::wxTextAttr_SetFontUnderlined(self.as_ptr(), underlined) }
     }
     // NOT_SUPPORTED: fn SetFontUnderlined1()
     // NOT_SUPPORTED: fn SetFontWeight()
+    /// Sets the left indent and left subindent in tenths of a millimetre.
     fn set_left_indent(&self, indent: c_int, sub_indent: c_int) {
         unsafe { ffi::wxTextAttr_SetLeftIndent(self.as_ptr(), indent, sub_indent) }
     }
+    /// Sets the line spacing.
     fn set_line_spacing(&self, spacing: c_int) {
         unsafe { ffi::wxTextAttr_SetLineSpacing(self.as_ptr(), spacing) }
     }
+    /// Sets the list style name.
     fn set_list_style_name(&self, name: &str) {
         unsafe {
             let name = WxString::from(name);
@@ -330,18 +416,23 @@ pub trait TextAttrMethods: WxRustMethods {
             ffi::wxTextAttr_SetListStyleName(self.as_ptr(), name)
         }
     }
+    /// Specifies the outline level.
     fn set_outline_level(&self, level: c_int) {
         unsafe { ffi::wxTextAttr_SetOutlineLevel(self.as_ptr(), level) }
     }
+    /// Specifies a page break before this paragraph.
     fn set_page_break(&self, page_break: bool) {
         unsafe { ffi::wxTextAttr_SetPageBreak(self.as_ptr(), page_break) }
     }
+    /// Sets the spacing after a paragraph, in tenths of a millimetre.
     fn set_paragraph_spacing_after(&self, spacing: c_int) {
         unsafe { ffi::wxTextAttr_SetParagraphSpacingAfter(self.as_ptr(), spacing) }
     }
+    /// Sets the spacing before a paragraph, in tenths of a millimetre.
     fn set_paragraph_spacing_before(&self, spacing: c_int) {
         unsafe { ffi::wxTextAttr_SetParagraphSpacingBefore(self.as_ptr(), spacing) }
     }
+    /// Sets the name of the paragraph style.
     fn set_paragraph_style_name(&self, name: &str) {
         unsafe {
             let name = WxString::from(name);
@@ -349,27 +440,33 @@ pub trait TextAttrMethods: WxRustMethods {
             ffi::wxTextAttr_SetParagraphStyleName(self.as_ptr(), name)
         }
     }
+    /// Sets the right indent in tenths of a millimetre.
     fn set_right_indent(&self, indent: c_int) {
         unsafe { ffi::wxTextAttr_SetRightIndent(self.as_ptr(), indent) }
     }
+    /// Sets the tab stops, expressed in tenths of a millimetre.
     fn set_tabs<A: ArrayIntMethods>(&self, tabs: &A) {
         unsafe {
             let tabs = tabs.as_ptr();
             ffi::wxTextAttr_SetTabs(self.as_ptr(), tabs)
         }
     }
+    /// Sets the text foreground colour.
     fn set_text_colour<C: ColourMethods>(&self, col_text: &C) {
         unsafe {
             let col_text = col_text.as_ptr();
             ffi::wxTextAttr_SetTextColour(self.as_ptr(), col_text)
         }
     }
+    /// Sets the text effect bits of interest.
     fn set_text_effect_flags(&self, flags: c_int) {
         unsafe { ffi::wxTextAttr_SetTextEffectFlags(self.as_ptr(), flags) }
     }
+    /// Sets the text effects, a bit list of styles.
     fn set_text_effects(&self, effects: c_int) {
         unsafe { ffi::wxTextAttr_SetTextEffects(self.as_ptr(), effects) }
     }
+    /// Sets the URL for the content.
     fn set_url(&self, url: &str) {
         unsafe {
             let url = WxString::from(url);
@@ -378,6 +475,7 @@ pub trait TextAttrMethods: WxRustMethods {
         }
     }
     // BLOCKED: fn operator=()
+    /// Applies the attributes in style to the original object, but not those attributes from style that are the same as those in compareWith (if passed).
     fn apply<T: TextAttrMethods, T2: TextAttrMethods>(
         &self,
         style: &T,
@@ -392,18 +490,21 @@ pub trait TextAttrMethods: WxRustMethods {
             ffi::wxTextAttr_Apply(self.as_ptr(), style, compare_with)
         }
     }
+    /// Copies all defined/valid properties from overlay to current object.
     fn merge<T: TextAttrMethods>(&self, overlay: &T) {
         unsafe {
             let overlay = overlay.as_ptr();
             ffi::wxTextAttr_Merge(self.as_ptr(), overlay)
         }
     }
+    /// Partial equality test.
     fn eq_partial<T: TextAttrMethods>(&self, attr: &T, weak_test: bool) -> bool {
         unsafe {
             let attr = attr.as_ptr();
             ffi::wxTextAttr_EqPartial(self.as_ptr(), attr, weak_test)
         }
     }
+    /// Creates a new wxTextAttr which is a merge of base and overlay.
     fn merge_textattr<T: TextAttrMethods, T2: TextAttrMethods>(base: &T, overlay: &T2) -> TextAttr {
         unsafe {
             let base = base.as_ptr();
@@ -415,6 +516,7 @@ pub trait TextAttrMethods: WxRustMethods {
 
 // wxTextCtrl
 pub trait TextCtrlMethods: ControlMethods {
+    /// Enable the automatic replacement of new lines characters in a single-line text field with spaces under macOS.
     fn osx_enable_new_line_replacement(&self, enable: bool) {
         unsafe { ffi::wxTextCtrl_OSXEnableNewLineReplacement(self.as_ptr(), enable) }
     }
@@ -426,6 +528,7 @@ pub trait TextCtrlMethods: ControlMethods {
     // NOT_SUPPORTED: fn operator<<5()
     // NOT_SUPPORTED: fn operator<<6()
     // DTOR: fn ~wxTextCtrl()
+    /// Creates the text control for two-step construction.
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
         parent: Option<&W>,
@@ -462,33 +565,42 @@ pub trait TextCtrlMethods: ControlMethods {
             )
         }
     }
+    /// Resets the internal modified flag as if the current changes had been saved.
     fn discard_edits(&self) {
         unsafe { ffi::wxTextCtrl_DiscardEdits(self.as_ptr()) }
     }
+    /// Delete the undo history.
     fn empty_undo_buffer(&self) {
         unsafe { ffi::wxTextCtrl_EmptyUndoBuffer(self.as_ptr()) }
     }
+    /// This function inserts into the control the character which would have been inserted if the given key event had occurred in the text control.
     fn emulate_key_press<K: KeyEventMethods>(&self, event: &K) -> bool {
         unsafe {
             let event = event.as_ptr();
             ffi::wxTextCtrl_EmulateKeyPress(self.as_ptr(), event)
         }
     }
+    /// Enable or disable native spell checking on this text control if it is available on the current platform.
     fn enable_proof_check(&self, options: *const c_void) -> bool {
         unsafe { ffi::wxTextCtrl_EnableProofCheck(self.as_ptr(), options) }
     }
+    /// Returns the style currently used for the new text.
     fn get_default_style(&self) -> TextAttrIsOwned<false> {
         unsafe { TextAttrIsOwned::from_ptr(ffi::wxTextCtrl_GetDefaultStyle(self.as_ptr())) }
     }
+    /// Gets the length of the specified line, not including any trailing newline character(s).
     fn get_line_length(&self, line_no: c_long) -> c_int {
         unsafe { ffi::wxTextCtrl_GetLineLength(self.as_ptr(), line_no) }
     }
+    /// Returns the contents of a given line in the text control, not including any trailing newline character(s).
     fn get_line_text(&self, line_no: c_long) -> String {
         unsafe { WxString::from_ptr(ffi::wxTextCtrl_GetLineText(self.as_ptr(), line_no)).into() }
     }
+    /// Returns the number of lines in the text control buffer.
     fn get_number_of_lines(&self) -> c_int {
         unsafe { ffi::wxTextCtrl_GetNumberOfLines(self.as_ptr()) }
     }
+    /// Returns the style at this position in the text control.
     fn get_style<T: TextAttrMethods>(&self, position: c_long, style: &T) -> bool {
         unsafe {
             let style = style.as_ptr();
@@ -497,16 +609,20 @@ pub trait TextCtrlMethods: ControlMethods {
     }
     // NOT_SUPPORTED: fn HitTest()
     // NOT_SUPPORTED: fn HitTest1()
+    /// Returns true if the text has been modified by user.
     fn is_modified(&self) -> bool {
         unsafe { ffi::wxTextCtrl_IsModified(self.as_ptr()) }
     }
+    /// Returns true if this is a multi line edit control and false otherwise.
     fn is_multi_line(&self) -> bool {
         unsafe { ffi::wxTextCtrl_IsMultiLine(self.as_ptr()) }
     }
+    /// Returns true if this is a single line edit control and false otherwise.
     fn is_single_line(&self) -> bool {
         unsafe { ffi::wxTextCtrl_IsSingleLine(self.as_ptr()) }
     }
     // NOT_SUPPORTED: fn GetProofCheckOptions()
+    /// Loads and displays the named file, if it exists.
     fn load_file(&self, filename: &str, file_type: c_int) -> bool {
         unsafe {
             let filename = WxString::from(filename);
@@ -514,21 +630,26 @@ pub trait TextCtrlMethods: ControlMethods {
             ffi::wxTextCtrl_LoadFile(self.as_ptr(), filename, file_type)
         }
     }
+    /// Mark text as modified (dirty).
     fn mark_dirty(&self) {
         unsafe { ffi::wxTextCtrl_MarkDirty(self.as_ptr()) }
     }
+    /// This event handler function implements default drag and drop behaviour, which is to load the first dropped file into the control.
     fn on_drop_files<D: DropFilesEventMethods>(&self, event: &D) {
         unsafe {
             let event = event.as_ptr();
             ffi::wxTextCtrl_OnDropFiles(self.as_ptr(), event)
         }
     }
+    /// Converts given position to a zero-based column, line number pair.
     fn position_to_xy(&self, pos: c_long, x: *mut c_void, y: *mut c_void) -> bool {
         unsafe { ffi::wxTextCtrl_PositionToXY(self.as_ptr(), pos, x, y) }
     }
+    /// Converts given text position to client coordinates in pixels.
     fn position_to_coords(&self, pos: c_long) -> Point {
         unsafe { Point::from_ptr(ffi::wxTextCtrl_PositionToCoords(self.as_ptr(), pos)) }
     }
+    /// Saves the contents of the control in a text file.
     fn save_file(&self, filename: &str, file_type: c_int) -> bool {
         unsafe {
             let filename = WxString::from(filename);
@@ -536,24 +657,29 @@ pub trait TextCtrlMethods: ControlMethods {
             ffi::wxTextCtrl_SaveFile(self.as_ptr(), filename, file_type)
         }
     }
+    /// Changes the default style to use for the new text which is going to be added to the control.
     fn set_default_style<T: TextAttrMethods>(&self, style: &T) -> bool {
         unsafe {
             let style = style.as_ptr();
             ffi::wxTextCtrl_SetDefaultStyle(self.as_ptr(), style)
         }
     }
+    /// Marks the control as being modified by the user or not.
     fn set_modified(&self, modified: bool) {
         unsafe { ffi::wxTextCtrl_SetModified(self.as_ptr(), modified) }
     }
+    /// Changes the style of the given range.
     fn set_style<T: TextAttrMethods>(&self, start: c_long, end: c_long, style: &T) -> bool {
         unsafe {
             let style = style.as_ptr();
             ffi::wxTextCtrl_SetStyle(self.as_ptr(), start, end, style)
         }
     }
+    /// Makes the line containing the given position visible.
     fn show_position(&self, pos: c_long) {
         unsafe { ffi::wxTextCtrl_ShowPosition(self.as_ptr(), pos) }
     }
+    /// Converts the given zero based column and line number to a position.
     fn xy_to_position(&self, x: c_long, y: c_long) -> c_long {
         unsafe { ffi::wxTextCtrl_XYToPosition(self.as_ptr(), x, y) }
     }
@@ -561,12 +687,15 @@ pub trait TextCtrlMethods: ControlMethods {
 
 // wxTextDataObject
 pub trait TextDataObjectMethods: DataObjectSimpleMethods {
+    /// Returns the text associated with the data object.
     fn get_text(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxTextDataObject_GetText(self.as_ptr())).into() }
     }
+    /// Returns the data size.
     fn get_text_length(&self) -> usize {
         unsafe { ffi::wxTextDataObject_GetTextLength(self.as_ptr()) }
     }
+    /// Sets the text associated with the data object.
     fn set_text(&self, str_text: &str) {
         unsafe {
             let str_text = WxString::from(str_text);
@@ -578,6 +707,7 @@ pub trait TextDataObjectMethods: DataObjectSimpleMethods {
 
 // wxTextDropTarget
 pub trait TextDropTargetMethods: DropTargetMethods {
+    /// Override this function to receive dropped text.
     fn on_drop_text(&self, x: c_int, y: c_int, data: &str) -> bool {
         unsafe {
             let data = WxString::from(data);
@@ -592,6 +722,7 @@ pub trait TextEntryMethods: WxRustMethods {
     fn as_text_entry(&self) -> *mut c_void {
         unsafe { self.as_ptr() }
     }
+    /// Appends the text to the end of the text control.
     fn append_text(&self, text: &str) {
         unsafe {
             let text = WxString::from(text);
@@ -599,36 +730,46 @@ pub trait TextEntryMethods: WxRustMethods {
             ffi::wxTextEntry_AppendText(self.as_text_entry(), text)
         }
     }
+    /// Call this function to enable auto-completion of the text typed in a single-line text control using the given choices.
     fn auto_complete_arraystring<A: ArrayStringMethods>(&self, choices: &A) -> bool {
         unsafe {
             let choices = choices.as_ptr();
             ffi::wxTextEntry_AutoComplete(self.as_text_entry(), choices)
         }
     }
+    /// Enable auto-completion using the provided completer object.
     fn auto_complete_textcompleter(&self, completer: *mut c_void) -> bool {
         unsafe { ffi::wxTextEntry_AutoComplete1(self.as_text_entry(), completer) }
     }
+    /// Call this function to enable auto-completion of the text typed in a single-line text control using all valid file system paths.
     fn auto_complete_file_names(&self) -> bool {
         unsafe { ffi::wxTextEntry_AutoCompleteFileNames(self.as_text_entry()) }
     }
+    /// Call this function to enable auto-completion of the text using the file system directories.
     fn auto_complete_directories(&self) -> bool {
         unsafe { ffi::wxTextEntry_AutoCompleteDirectories(self.as_text_entry()) }
     }
+    /// Returns true if the selection can be copied to the clipboard.
     fn can_copy(&self) -> bool {
         unsafe { ffi::wxTextEntry_CanCopy(self.as_text_entry()) }
     }
+    /// Returns true if the selection can be cut to the clipboard.
     fn can_cut(&self) -> bool {
         unsafe { ffi::wxTextEntry_CanCut(self.as_text_entry()) }
     }
+    /// Returns true if the contents of the clipboard can be pasted into the text control.
     fn can_paste(&self) -> bool {
         unsafe { ffi::wxTextEntry_CanPaste(self.as_text_entry()) }
     }
+    /// Returns true if there is a redo facility available and the last operation can be redone.
     fn can_redo(&self) -> bool {
         unsafe { ffi::wxTextEntry_CanRedo(self.as_text_entry()) }
     }
+    /// Returns true if there is an undo facility available and the last operation can be undone.
     fn can_undo(&self) -> bool {
         unsafe { ffi::wxTextEntry_CanUndo(self.as_text_entry()) }
     }
+    /// Sets the new text control value.
     fn change_value(&self, value: &str) {
         unsafe {
             let value = WxString::from(value);
@@ -636,53 +777,68 @@ pub trait TextEntryMethods: WxRustMethods {
             ffi::wxTextEntry_ChangeValue(self.as_text_entry(), value)
         }
     }
+    /// Clears the text in the control.
     fn clear(&self) {
         unsafe { ffi::wxTextEntry_Clear(self.as_text_entry()) }
     }
+    /// Copies the selected text to the clipboard.
     fn copy(&self) {
         unsafe { ffi::wxTextEntry_Copy(self.as_text_entry()) }
     }
+    /// Copies the selected text to the clipboard and removes it from the control.
     fn cut(&self) {
         unsafe { ffi::wxTextEntry_Cut(self.as_text_entry()) }
     }
+    /// Convert all text entered into the control to upper case.
     fn force_upper(&self) {
         unsafe { ffi::wxTextEntry_ForceUpper(self.as_text_entry()) }
     }
+    /// Returns the insertion point, or cursor, position.
     fn get_insertion_point(&self) -> c_long {
         unsafe { ffi::wxTextEntry_GetInsertionPoint(self.as_text_entry()) }
     }
     // NOT_SUPPORTED: fn GetLastPosition()
+    /// Returns the string containing the text starting in the positions from and up to to in the control.
     fn get_range(&self, from: c_long, to: c_long) -> String {
         unsafe {
             WxString::from_ptr(ffi::wxTextEntry_GetRange(self.as_text_entry(), from, to)).into()
         }
     }
+    /// Gets the current selection span.
     fn get_selection_long(&self, from: *mut c_void, to: *mut c_void) {
         unsafe { ffi::wxTextEntry_GetSelection(self.as_text_entry(), from, to) }
     }
+    /// Gets the text currently selected in the control.
     fn get_string_selection(&self) -> String {
         unsafe {
             WxString::from_ptr(ffi::wxTextEntry_GetStringSelection(self.as_text_entry())).into()
         }
     }
+    /// Gets the contents of the control.
     fn get_value(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxTextEntry_GetValue(self.as_text_entry())).into() }
     }
+    /// Returns true if the controls contents may be edited by user (note that it always can be changed by the program).
     fn is_editable(&self) -> bool {
         unsafe { ffi::wxTextEntry_IsEditable(self.as_text_entry()) }
     }
+    /// Returns true if the control is currently empty.
     fn is_empty(&self) -> bool {
         unsafe { ffi::wxTextEntry_IsEmpty(self.as_text_entry()) }
     }
+    /// Pastes text from the clipboard to the text item.
     fn paste(&self) {
         unsafe { ffi::wxTextEntry_Paste(self.as_text_entry()) }
     }
+    /// If there is a redo facility and the last operation can be redone, redoes the last operation.
     fn redo(&self) {
         unsafe { ffi::wxTextEntry_Redo(self.as_text_entry()) }
     }
+    /// Removes the text starting at the first given position up to (but not including) the character at the last position.
     fn remove(&self, from: c_long, to: c_long) {
         unsafe { ffi::wxTextEntry_Remove(self.as_text_entry(), from, to) }
     }
+    /// Replaces the text starting at the first position up to (but not including) the character at the last position with the given text.
     fn replace(&self, from: c_long, to: c_long, value: &str) {
         unsafe {
             let value = WxString::from(value);
@@ -690,25 +846,32 @@ pub trait TextEntryMethods: WxRustMethods {
             ffi::wxTextEntry_Replace(self.as_text_entry(), from, to, value)
         }
     }
+    /// Makes the text item editable or read-only, overriding the wxTE_READONLY flag.
     fn set_editable(&self, editable: bool) {
         unsafe { ffi::wxTextEntry_SetEditable(self.as_text_entry(), editable) }
     }
+    /// Sets the insertion point at the given position.
     fn set_insertion_point(&self, pos: c_long) {
         unsafe { ffi::wxTextEntry_SetInsertionPoint(self.as_text_entry(), pos) }
     }
+    /// Sets the insertion point at the end of the text control.
     fn set_insertion_point_end(&self) {
         unsafe { ffi::wxTextEntry_SetInsertionPointEnd(self.as_text_entry()) }
     }
     // NOT_SUPPORTED: fn SetMaxLength()
+    /// Selects the text starting at the first position up to (but not including) the character at the last position.
     fn set_selection_long(&self, from: c_long, to: c_long) {
         unsafe { ffi::wxTextEntry_SetSelection(self.as_text_entry(), from, to) }
     }
+    /// Selects all text in the control.
     fn select_all(&self) {
         unsafe { ffi::wxTextEntry_SelectAll(self.as_text_entry()) }
     }
+    /// Deselects selected text in the control.
     fn select_none(&self) {
         unsafe { ffi::wxTextEntry_SelectNone(self.as_text_entry()) }
     }
+    /// Sets a hint shown in an empty unfocused text control.
     fn set_hint(&self, hint: &str) -> bool {
         unsafe {
             let hint = WxString::from(hint);
@@ -716,9 +879,11 @@ pub trait TextEntryMethods: WxRustMethods {
             ffi::wxTextEntry_SetHint(self.as_text_entry(), hint)
         }
     }
+    /// Returns the current hint string.
     fn get_hint(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxTextEntry_GetHint(self.as_text_entry())).into() }
     }
+    /// Attempts to set the control margins.
     fn set_margins_point<P: PointMethods>(&self, pt: &P) -> bool {
         unsafe {
             let pt = pt.as_ptr();
@@ -728,9 +893,11 @@ pub trait TextEntryMethods: WxRustMethods {
     fn set_margins_coord(&self, left: c_int, top: c_int) -> bool {
         unsafe { ffi::wxTextEntry_SetMargins1(self.as_text_entry(), left, top) }
     }
+    /// Returns the margins used by the control.
     fn get_margins(&self) -> Point {
         unsafe { Point::from_ptr(ffi::wxTextEntry_GetMargins(self.as_text_entry())) }
     }
+    /// Sets the new text control value.
     fn set_value(&self, value: &str) {
         unsafe {
             let value = WxString::from(value);
@@ -738,9 +905,11 @@ pub trait TextEntryMethods: WxRustMethods {
             ffi::wxTextEntry_SetValue(self.as_text_entry(), value)
         }
     }
+    /// If there is an undo facility and the last operation can be undone, undoes the last operation.
     fn undo(&self) {
         unsafe { ffi::wxTextEntry_Undo(self.as_text_entry()) }
     }
+    /// Writes the text into the text control at the current insertion position.
     fn write_text(&self, text: &str) {
         unsafe {
             let text = WxString::from(text);
@@ -785,9 +954,11 @@ pub trait TextEntryDialogMethods: DialogMethods {
         }
     }
     // DTOR: fn ~wxTextEntryDialog()
+    /// Returns the text that the user has entered if the user has pressed OK, or the original value if the user has pressed Cancel.
     fn get_value(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxTextEntryDialog_GetValue(self.as_ptr())).into() }
     }
+    /// Associate a validator with the text control used by the dialog.
     fn set_text_validator<T: TextValidatorMethods>(&self, validator: &T) {
         unsafe {
             let validator = validator.as_ptr();
@@ -796,6 +967,7 @@ pub trait TextEntryDialogMethods: DialogMethods {
     }
     // NOT_SUPPORTED: fn SetTextValidator1()
     // NOT_SUPPORTED: fn SetMaxLength()
+    /// Sets the default text value.
     fn set_value(&self, value: &str) {
         unsafe {
             let value = WxString::from(value);
@@ -803,6 +975,7 @@ pub trait TextEntryDialogMethods: DialogMethods {
             ffi::wxTextEntryDialog_SetValue(self.as_ptr(), value)
         }
     }
+    /// Convert all text entered into the text control used by the dialog to upper case.
     fn force_upper(&self) {
         unsafe { ffi::wxTextEntryDialog_ForceUpper(self.as_ptr()) }
     }
@@ -810,34 +983,42 @@ pub trait TextEntryDialogMethods: DialogMethods {
 
 // wxTextValidator
 pub trait TextValidatorMethods: ValidatorMethods {
+    /// Returns a copy of the exclude char list (the list of invalid characters).
     fn get_char_excludes(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxTextValidator_GetCharExcludes(self.as_ptr())).into() }
     }
+    /// Returns a copy of the include char list (the list of additional valid characters).
     fn get_char_includes(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxTextValidator_GetCharIncludes(self.as_ptr())).into() }
     }
+    /// Returns a const reference to the exclude list (the list of invalid values).
     fn get_excludes(&self) -> ArrayStringIsOwned<false> {
         unsafe { ArrayStringIsOwned::from_ptr(ffi::wxTextValidator_GetExcludes(self.as_ptr())) }
     }
+    /// Returns a const reference to the include list (the list of valid values).
     fn get_includes(&self) -> ArrayStringIsOwned<false> {
         unsafe { ArrayStringIsOwned::from_ptr(ffi::wxTextValidator_GetIncludes(self.as_ptr())) }
     }
+    /// Returns the validator style.
     fn get_style(&self) -> c_long {
         unsafe { ffi::wxTextValidator_GetStyle(self.as_ptr()) }
     }
     // NOT_SUPPORTED: fn HasFlag()
+    /// Receives character input from the window and filters it according to the current validator style.
     fn on_char<K: KeyEventMethods>(&self, event: &K) {
         unsafe {
             let event = event.as_ptr();
             ffi::wxTextValidator_OnChar(self.as_ptr(), event)
         }
     }
+    /// Sets the exclude list (invalid values for the user input).
     fn set_excludes<A: ArrayStringMethods>(&self, string_list: &A) {
         unsafe {
             let string_list = string_list.as_ptr();
             ffi::wxTextValidator_SetExcludes(self.as_ptr(), string_list)
         }
     }
+    /// Sets the exclude char list (invalid characters for the user input).
     fn set_char_excludes(&self, chars: &str) {
         unsafe {
             let chars = WxString::from(chars);
@@ -845,12 +1026,14 @@ pub trait TextValidatorMethods: ValidatorMethods {
             ffi::wxTextValidator_SetCharExcludes(self.as_ptr(), chars)
         }
     }
+    /// Sets the include list (valid values for the user input).
     fn set_includes<A: ArrayStringMethods>(&self, string_list: &A) {
         unsafe {
             let string_list = string_list.as_ptr();
             ffi::wxTextValidator_SetIncludes(self.as_ptr(), string_list)
         }
     }
+    /// Sets the include char list (additional valid values for the user input).
     fn set_char_includes(&self, chars: &str) {
         unsafe {
             let chars = WxString::from(chars);
@@ -858,6 +1041,7 @@ pub trait TextValidatorMethods: ValidatorMethods {
             ffi::wxTextValidator_SetCharIncludes(self.as_ptr(), chars)
         }
     }
+    /// Adds exclude to the list of excluded values.
     fn add_exclude(&self, exclude: &str) {
         unsafe {
             let exclude = WxString::from(exclude);
@@ -865,6 +1049,7 @@ pub trait TextValidatorMethods: ValidatorMethods {
             ffi::wxTextValidator_AddExclude(self.as_ptr(), exclude)
         }
     }
+    /// Adds include to the list of included values.
     fn add_include(&self, include: &str) {
         unsafe {
             let include = WxString::from(include);
@@ -872,6 +1057,7 @@ pub trait TextValidatorMethods: ValidatorMethods {
             ffi::wxTextValidator_AddInclude(self.as_ptr(), include)
         }
     }
+    /// Adds chars to the list of excluded characters.
     fn add_char_excludes(&self, chars: &str) {
         unsafe {
             let chars = WxString::from(chars);
@@ -879,6 +1065,7 @@ pub trait TextValidatorMethods: ValidatorMethods {
             ffi::wxTextValidator_AddCharExcludes(self.as_ptr(), chars)
         }
     }
+    /// Adds chars to the list of included characters.
     fn add_char_includes(&self, chars: &str) {
         unsafe {
             let chars = WxString::from(chars);
@@ -886,9 +1073,11 @@ pub trait TextValidatorMethods: ValidatorMethods {
             ffi::wxTextValidator_AddCharIncludes(self.as_ptr(), chars)
         }
     }
+    /// Sets the validator style which must be a combination of one or more of the wxTextValidatorStyle values.
     fn set_style(&self, style: c_long) {
         unsafe { ffi::wxTextValidator_SetStyle(self.as_ptr(), style) }
     }
+    /// Returns the error message if the contents of val are invalid or the empty string if val is valid.
     fn is_valid(&self, val: &str) -> String {
         unsafe {
             let val = WxString::from(val);
@@ -902,21 +1091,27 @@ pub trait TextValidatorMethods: ValidatorMethods {
 pub trait ThreadEventMethods: EventMethods {
     // BLOCKED: fn SetPayload()
     // NOT_SUPPORTED: fn GetPayload()
+    /// Returns extra information integer value.
     fn get_extra_long(&self) -> c_long {
         unsafe { ffi::wxThreadEvent_GetExtraLong(self.as_ptr()) }
     }
+    /// Returns stored integer value.
     fn get_int(&self) -> c_int {
         unsafe { ffi::wxThreadEvent_GetInt(self.as_ptr()) }
     }
+    /// Returns stored string value.
     fn get_string(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxThreadEvent_GetString(self.as_ptr())).into() }
     }
+    /// Sets the extra information value.
     fn set_extra_long(&self, extra_long: c_long) {
         unsafe { ffi::wxThreadEvent_SetExtraLong(self.as_ptr(), extra_long) }
     }
+    /// Sets the integer value.
     fn set_int(&self, int_command: c_int) {
         unsafe { ffi::wxThreadEvent_SetInt(self.as_ptr(), int_command) }
     }
+    /// Sets the string value.
     fn set_string(&self, string: &str) {
         unsafe {
             let string = WxString::from(string);
@@ -928,6 +1123,7 @@ pub trait ThreadEventMethods: EventMethods {
 
 // wxTimePickerCtrl
 pub trait TimePickerCtrlMethods: ControlMethods {
+    /// Create the control window.
     fn create_datetime<
         W: WindowMethods,
         D: DateTimeMethods,
@@ -969,15 +1165,19 @@ pub trait TimePickerCtrlMethods: ControlMethods {
             )
         }
     }
+    /// Returns the currently entered time as hours, minutes and seconds.
     fn get_time(&self, hour: *mut c_void, min: *mut c_void, sec: *mut c_void) -> bool {
         unsafe { ffi::wxTimePickerCtrl_GetTime(self.as_ptr(), hour, min, sec) }
     }
+    /// Returns the currently entered time.
     fn get_value(&self) -> DateTime {
         unsafe { DateTime::from_ptr(ffi::wxTimePickerCtrl_GetValue(self.as_ptr())) }
     }
+    /// Changes the current time of the control.
     fn set_time(&self, hour: c_int, min: c_int, sec: c_int) -> bool {
         unsafe { ffi::wxTimePickerCtrl_SetTime(self.as_ptr(), hour, min, sec) }
     }
+    /// Changes the current value of the control.
     fn set_value<D: DateTimeMethods>(&self, dt: &D) {
         unsafe {
             let dt = dt.as_ptr();
@@ -989,9 +1189,11 @@ pub trait TimePickerCtrlMethods: ControlMethods {
 // wxTipProvider
 pub trait TipProviderMethods: WxRustMethods {
     // DTOR: fn ~wxTipProvider()
+    /// Returns the index of the current tip (i.e. the one which would be returned by GetTip()).
     fn get_current_tip(&self) -> usize {
         unsafe { ffi::wxTipProvider_GetCurrentTip(self.as_ptr()) }
     }
+    /// Return the text of the current tip and pass to the next one.
     fn get_tip(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxTipProvider_GetTip(self.as_ptr())).into() }
     }
@@ -999,12 +1201,14 @@ pub trait TipProviderMethods: WxRustMethods {
 
 // wxTipWindow
 pub trait TipWindowMethods: WindowMethods {
+    /// By default, the tip window disappears when the user clicks the mouse or presses a keyboard key or if it loses focus in any other way - for example because the user switched to another application window.
     fn set_bounding_rect<R: RectMethods>(&self, rect_bound: &R) {
         unsafe {
             let rect_bound = rect_bound.as_ptr();
             ffi::wxTipWindow_SetBoundingRect(self.as_ptr(), rect_bound)
         }
     }
+    /// When the tip window closes itself (which may happen at any moment and unexpectedly to the caller) it may NULL out the pointer pointed to by windowPtr.
     fn set_tip_window_ptr<T: TipWindowMethods>(&self, window_ptr: Option<&T>) {
         unsafe {
             let window_ptr = match window_ptr {
@@ -1019,6 +1223,7 @@ pub trait TipWindowMethods: WindowMethods {
 // wxToggleButton
 pub trait ToggleButtonMethods: AnyButtonMethods {
     // DTOR: fn ~wxToggleButton()
+    /// Creates the toggle button for two-step construction.
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
         parent: Option<&W>,
@@ -1055,9 +1260,11 @@ pub trait ToggleButtonMethods: AnyButtonMethods {
             )
         }
     }
+    /// Gets the state of the toggle button.
     fn get_value(&self) -> bool {
         unsafe { ffi::wxToggleButton_GetValue(self.as_ptr()) }
     }
+    /// Sets the toggle button to the given state.
     fn set_value(&self, state: bool) {
         unsafe { ffi::wxToggleButton_SetValue(self.as_ptr(), state) }
     }
@@ -1066,6 +1273,7 @@ pub trait ToggleButtonMethods: AnyButtonMethods {
 // wxToolBar
 pub trait ToolBarMethods: ControlMethods {
     // DTOR: fn ~wxToolBar()
+    /// Adds a new check (or toggle) tool to the toolbar.
     fn add_check_tool<B: BitmapBundleMethods, B2: BitmapBundleMethods, O: ObjectMethods>(
         &self,
         tool_id: c_int,
@@ -1101,6 +1309,7 @@ pub trait ToolBarMethods: ControlMethods {
             )
         }
     }
+    /// Adds any control to the toolbar, typically e.g. a wxComboBox.
     fn add_control<C: ControlMethods>(&self, control: Option<&C>, label: &str) -> *mut c_void {
         unsafe {
             let control = match control {
@@ -1112,6 +1321,7 @@ pub trait ToolBarMethods: ControlMethods {
             ffi::wxToolBar_AddControl(self.as_ptr(), control, label)
         }
     }
+    /// Adds a new radio tool to the toolbar.
     fn add_radio_tool<B: BitmapBundleMethods, B2: BitmapBundleMethods, O: ObjectMethods>(
         &self,
         tool_id: c_int,
@@ -1147,15 +1357,19 @@ pub trait ToolBarMethods: ControlMethods {
             )
         }
     }
+    /// Adds a separator for spacing groups of tools.
     fn add_separator(&self) -> *mut c_void {
         unsafe { ffi::wxToolBar_AddSeparator(self.as_ptr()) }
     }
+    /// Adds a stretchable space to the toolbar.
     fn add_stretchable_space(&self) -> *mut c_void {
         unsafe { ffi::wxToolBar_AddStretchableSpace(self.as_ptr()) }
     }
+    /// Adds a tool to the toolbar.
     fn add_tool_toolbartoolbase(&self, tool: *mut c_void) -> *mut c_void {
         unsafe { ffi::wxToolBar_AddTool(self.as_ptr(), tool) }
     }
+    /// Adds a tool to the toolbar.
     fn add_tool_int_str<B: BitmapBundleMethods>(
         &self,
         tool_id: c_int,
@@ -1173,6 +1387,7 @@ pub trait ToolBarMethods: ControlMethods {
             ffi::wxToolBar_AddTool1(self.as_ptr(), tool_id, label, bitmap, short_help, kind)
         }
     }
+    /// Adds a tool to the toolbar.
     fn add_tool_int_bitmapbundle<
         B: BitmapBundleMethods,
         B2: BitmapBundleMethods,
@@ -1214,30 +1429,39 @@ pub trait ToolBarMethods: ControlMethods {
             )
         }
     }
+    /// Deletes all the tools in the toolbar.
     fn clear_tools(&self) {
         unsafe { ffi::wxToolBar_ClearTools(self.as_ptr()) }
     }
+    /// Removes the specified tool from the toolbar and deletes it.
     fn delete_tool(&self, tool_id: c_int) -> bool {
         unsafe { ffi::wxToolBar_DeleteTool(self.as_ptr(), tool_id) }
     }
+    /// This function behaves like DeleteTool() but it deletes the tool at the specified position and not the one with the given id.
     fn delete_tool_by_pos(&self, pos: usize) -> bool {
         unsafe { ffi::wxToolBar_DeleteToolByPos(self.as_ptr(), pos) }
     }
+    /// Enables or disables the tool.
     fn enable_tool(&self, tool_id: c_int, enable: bool) {
         unsafe { ffi::wxToolBar_EnableTool(self.as_ptr(), tool_id, enable) }
     }
+    /// Returns a pointer to the tool identified by id or NULL if no corresponding tool is found.
     fn find_by_id(&self, id: c_int) -> *mut c_void {
         unsafe { ffi::wxToolBar_FindById(self.as_ptr(), id) }
     }
+    /// Returns a pointer to the control identified by id or NULL if no corresponding control is found.
     fn find_control(&self, id: c_int) -> WeakRef<Control> {
         unsafe { WeakRef::<Control>::from(ffi::wxToolBar_FindControl(self.as_ptr(), id)) }
     }
+    /// Finds a tool for the given mouse position.
     fn find_tool_for_position(&self, x: c_int, y: c_int) -> *mut c_void {
         unsafe { ffi::wxToolBar_FindToolForPosition(self.as_ptr(), x, y) }
     }
+    /// Returns the left/right and top/bottom margins, which are also used for inter-toolspacing.
     fn get_margins(&self) -> Size {
         unsafe { Size::from_ptr(ffi::wxToolBar_GetMargins(self.as_ptr())) }
     }
+    /// Returns the size of bitmap that the toolbar expects to have.
     fn get_tool_bitmap_size(&self) -> Size {
         unsafe { Size::from_ptr(ffi::wxToolBar_GetToolBitmapSize(self.as_ptr())) }
     }
@@ -1245,38 +1469,49 @@ pub trait ToolBarMethods: ControlMethods {
     fn get_tool_by_pos(&self, pos: c_int) -> *const c_void {
         unsafe { ffi::wxToolBar_GetToolByPos1(self.as_ptr(), pos) }
     }
+    /// Get any client data associated with the tool.
     fn get_tool_client_data(&self, tool_id: c_int) -> Option<ObjectIsOwned<false>> {
         unsafe { Object::option_from(ffi::wxToolBar_GetToolClientData(self.as_ptr(), tool_id)) }
     }
+    /// Called to determine whether a tool is enabled (responds to user input).
     fn get_tool_enabled(&self, tool_id: c_int) -> bool {
         unsafe { ffi::wxToolBar_GetToolEnabled(self.as_ptr(), tool_id) }
     }
+    /// Returns the long help for the given tool.
     fn get_tool_long_help(&self, tool_id: c_int) -> String {
         unsafe { WxString::from_ptr(ffi::wxToolBar_GetToolLongHelp(self.as_ptr(), tool_id)).into() }
     }
+    /// Returns the value used for packing tools.
     fn get_tool_packing(&self) -> c_int {
         unsafe { ffi::wxToolBar_GetToolPacking(self.as_ptr()) }
     }
+    /// Returns the tool position in the toolbar, or wxNOT_FOUND if the tool is not found.
     fn get_tool_pos(&self, tool_id: c_int) -> c_int {
         unsafe { ffi::wxToolBar_GetToolPos(self.as_ptr(), tool_id) }
     }
+    /// Returns the default separator size.
     fn get_tool_separation(&self) -> c_int {
         unsafe { ffi::wxToolBar_GetToolSeparation(self.as_ptr()) }
     }
+    /// Returns the short help for the given tool.
     fn get_tool_short_help(&self, tool_id: c_int) -> String {
         unsafe {
             WxString::from_ptr(ffi::wxToolBar_GetToolShortHelp(self.as_ptr(), tool_id)).into()
         }
     }
+    /// Returns the size of a whole button, which is usually larger than a tool bitmap because of added 3D effects.
     fn get_tool_size(&self) -> Size {
         unsafe { Size::from_ptr(ffi::wxToolBar_GetToolSize(self.as_ptr())) }
     }
+    /// Gets the on/off state of a toggle tool.
     fn get_tool_state(&self, tool_id: c_int) -> bool {
         unsafe { ffi::wxToolBar_GetToolState(self.as_ptr(), tool_id) }
     }
+    /// Returns the number of tools in the toolbar.
     fn get_tools_count(&self) -> usize {
         unsafe { ffi::wxToolBar_GetToolsCount(self.as_ptr()) }
     }
+    /// Inserts the control into the toolbar at the given position.
     fn insert_control<C: ControlMethods>(
         &self,
         pos: usize,
@@ -1293,12 +1528,15 @@ pub trait ToolBarMethods: ControlMethods {
             ffi::wxToolBar_InsertControl(self.as_ptr(), pos, control, label)
         }
     }
+    /// Inserts the separator into the toolbar at the given position.
     fn insert_separator(&self, pos: usize) -> *mut c_void {
         unsafe { ffi::wxToolBar_InsertSeparator(self.as_ptr(), pos) }
     }
+    /// Inserts a stretchable space at the given position.
     fn insert_stretchable_space(&self, pos: usize) -> *mut c_void {
         unsafe { ffi::wxToolBar_InsertStretchableSpace(self.as_ptr(), pos) }
     }
+    /// Inserts the tool with the specified attributes into the toolbar at the given position.
     fn insert_tool_int<B: BitmapBundleMethods, B2: BitmapBundleMethods, O: ObjectMethods>(
         &self,
         pos: usize,
@@ -1341,21 +1579,26 @@ pub trait ToolBarMethods: ControlMethods {
     fn insert_tool_toolbartoolbase(&self, pos: usize, tool: *mut c_void) -> *mut c_void {
         unsafe { ffi::wxToolBar_InsertTool1(self.as_ptr(), pos, tool) }
     }
+    /// Called when the user clicks on a tool with the left mouse button.
     fn on_left_click(&self, tool_id: c_int, toggle_down: bool) -> bool {
         unsafe { ffi::wxToolBar_OnLeftClick(self.as_ptr(), tool_id, toggle_down) }
     }
+    /// This is called when the mouse cursor moves into a tool or out of the toolbar.
     fn on_mouse_enter(&self, tool_id: c_int) {
         unsafe { ffi::wxToolBar_OnMouseEnter(self.as_ptr(), tool_id) }
     }
     fn on_right_click(&self, tool_id: c_int, x: c_long, y: c_long) {
         unsafe { ffi::wxToolBar_OnRightClick(self.as_ptr(), tool_id, x, y) }
     }
+    /// This function should be called after you have added tools.
     fn realize(&self) -> bool {
         unsafe { ffi::wxToolBar_Realize(self.as_ptr()) }
     }
+    /// Removes the given tool from the toolbar but doesn't delete it.
     fn remove_tool(&self, id: c_int) -> *mut c_void {
         unsafe { ffi::wxToolBar_RemoveTool(self.as_ptr(), id) }
     }
+    /// Sets the dropdown menu for the tool given by its id.
     fn set_dropdown_menu<M: MenuMethods>(&self, id: c_int, menu: Option<&M>) -> bool {
         unsafe {
             let menu = match menu {
@@ -1365,21 +1608,25 @@ pub trait ToolBarMethods: ControlMethods {
             ffi::wxToolBar_SetDropdownMenu(self.as_ptr(), id, menu)
         }
     }
+    /// Set the values to be used as margins for the toolbar.
     fn set_margins_int(&self, x: c_int, y: c_int) {
         unsafe { ffi::wxToolBar_SetMargins(self.as_ptr(), x, y) }
     }
+    /// Set the margins for the toolbar.
     fn set_margins_size<S: SizeMethods>(&self, size: &S) {
         unsafe {
             let size = size.as_ptr();
             ffi::wxToolBar_SetMargins1(self.as_ptr(), size)
         }
     }
+    /// Sets the default size of each tool bitmap.
     fn set_tool_bitmap_size<S: SizeMethods>(&self, size: &S) {
         unsafe {
             let size = size.as_ptr();
             ffi::wxToolBar_SetToolBitmapSize(self.as_ptr(), size)
         }
     }
+    /// Sets the client data associated with the tool.
     fn set_tool_client_data<O: ObjectMethods>(&self, id: c_int, client_data: Option<&O>) {
         unsafe {
             let client_data = match client_data {
@@ -1389,12 +1636,14 @@ pub trait ToolBarMethods: ControlMethods {
             ffi::wxToolBar_SetToolClientData(self.as_ptr(), id, client_data)
         }
     }
+    /// Sets the bitmap to be used by the tool with the given ID when the tool is in a disabled state.
     fn set_tool_disabled_bitmap<B: BitmapBundleMethods>(&self, id: c_int, bitmap: &B) {
         unsafe {
             let bitmap = bitmap.as_ptr();
             ffi::wxToolBar_SetToolDisabledBitmap(self.as_ptr(), id, bitmap)
         }
     }
+    /// Sets the long help for the given tool.
     fn set_tool_long_help(&self, tool_id: c_int, help_string: &str) {
         unsafe {
             let help_string = WxString::from(help_string);
@@ -1402,18 +1651,22 @@ pub trait ToolBarMethods: ControlMethods {
             ffi::wxToolBar_SetToolLongHelp(self.as_ptr(), tool_id, help_string)
         }
     }
+    /// Sets the bitmap to be used by the tool with the given ID.
     fn set_tool_normal_bitmap<B: BitmapBundleMethods>(&self, id: c_int, bitmap: &B) {
         unsafe {
             let bitmap = bitmap.as_ptr();
             ffi::wxToolBar_SetToolNormalBitmap(self.as_ptr(), id, bitmap)
         }
     }
+    /// Sets the value used for spacing tools.
     fn set_tool_packing(&self, packing: c_int) {
         unsafe { ffi::wxToolBar_SetToolPacking(self.as_ptr(), packing) }
     }
+    /// Sets the default separator size.
     fn set_tool_separation(&self, separation: c_int) {
         unsafe { ffi::wxToolBar_SetToolSeparation(self.as_ptr(), separation) }
     }
+    /// Sets the short help for the given tool.
     fn set_tool_short_help(&self, tool_id: c_int, help_string: &str) {
         unsafe {
             let help_string = WxString::from(help_string);
@@ -1421,9 +1674,11 @@ pub trait ToolBarMethods: ControlMethods {
             ffi::wxToolBar_SetToolShortHelp(self.as_ptr(), tool_id, help_string)
         }
     }
+    /// Toggles a tool on or off.
     fn toggle_tool(&self, tool_id: c_int, toggle: bool) {
         unsafe { ffi::wxToolBar_ToggleTool(self.as_ptr(), tool_id, toggle) }
     }
+    /// Factory function to create a new toolbar tool.
     fn create_tool_int<B: BitmapBundleMethods, B2: BitmapBundleMethods, O: ObjectMethods>(
         &self,
         tool_id: c_int,
@@ -1461,6 +1716,7 @@ pub trait ToolBarMethods: ControlMethods {
             )
         }
     }
+    /// Factory function to create a new control toolbar tool.
     fn create_tool_control<C: ControlMethods>(
         &self,
         control: Option<&C>,
@@ -1476,6 +1732,7 @@ pub trait ToolBarMethods: ControlMethods {
             ffi::wxToolBar_CreateTool1(self.as_ptr(), control, label)
         }
     }
+    /// Factory function to create a new separator toolbar tool.
     fn create_separator(&self) -> *mut c_void {
         unsafe { ffi::wxToolBar_CreateSeparator(self.as_ptr()) }
     }
@@ -1483,12 +1740,15 @@ pub trait ToolBarMethods: ControlMethods {
 
 // wxToolTip
 pub trait ToolTipMethods: ObjectMethods {
+    /// Get the tooltip text.
     fn get_tip(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxToolTip_GetTip(self.as_ptr())).into() }
     }
+    /// Get the associated window.
     fn get_window(&self) -> WeakRef<Window> {
         unsafe { WeakRef::<Window>::from(ffi::wxToolTip_GetWindow(self.as_ptr())) }
     }
+    /// Set the tooltip text.
     fn set_tip(&self, tip: &str) {
         unsafe {
             let tip = WxString::from(tip);
@@ -1496,18 +1756,23 @@ pub trait ToolTipMethods: ObjectMethods {
             ffi::wxToolTip_SetTip(self.as_ptr(), tip)
         }
     }
+    /// Enable or disable tooltips globally.
     fn enable(flag: bool) {
         unsafe { ffi::wxToolTip_Enable(flag) }
     }
+    /// Set the delay after which the tooltip disappears or how long a tooltip remains visible.
     fn set_auto_pop(msecs: c_long) {
         unsafe { ffi::wxToolTip_SetAutoPop(msecs) }
     }
+    /// Set the delay after which the tooltip appears.
     fn set_delay(msecs: c_long) {
         unsafe { ffi::wxToolTip_SetDelay(msecs) }
     }
+    /// Set tooltip maximal width in pixels.
     fn set_max_width(width: c_int) {
         unsafe { ffi::wxToolTip_SetMaxWidth(width) }
     }
+    /// Set the delay between subsequent tooltips to appear.
     fn set_reshow(msecs: c_long) {
         unsafe { ffi::wxToolTip_SetReshow(msecs) }
     }
@@ -1515,12 +1780,15 @@ pub trait ToolTipMethods: ObjectMethods {
 
 // wxToolbook
 pub trait ToolbookMethods: BookCtrlBaseMethods {
+    /// Returns the wxToolBarBase associated with the control.
     fn get_tool_bar(&self) -> *mut c_void {
         unsafe { ffi::wxToolbook_GetToolBar(self.as_ptr()) }
     }
+    /// Enables or disables the specified page.
     fn enable_page_sz(&self, page: usize, enable: bool) -> bool {
         unsafe { ffi::wxToolbook_EnablePage(self.as_ptr(), page, enable) }
     }
+    /// Enables or disables the specified page.
     fn enable_page_window<W: WindowMethods>(&self, page: Option<&W>, enable: bool) -> bool {
         unsafe {
             let page = match page {
@@ -1535,6 +1803,7 @@ pub trait ToolbookMethods: BookCtrlBaseMethods {
 // wxTopLevelWindow
 pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     // DTOR: fn ~wxTopLevelWindow()
+    /// Creates the top level window.
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -1559,64 +1828,83 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
             ffi::wxTopLevelWindow_Create(self.as_ptr(), parent, id, title, pos, size, style, name)
         }
     }
+    /// A synonym for CentreOnScreen().
     fn center_on_screen(&self, direction: c_int) {
         unsafe { ffi::wxTopLevelWindow_CenterOnScreen(self.as_ptr(), direction) }
     }
+    /// Centres the window on screen.
     fn centre_on_screen(&self, direction: c_int) {
         unsafe { ffi::wxTopLevelWindow_CentreOnScreen(self.as_ptr(), direction) }
     }
+    /// Enables or disables the Close button (most often in the right upper corner of a dialog) and the Close entry of the system menu (most often in the left upper corner of the dialog).
     fn enable_close_button(&self, enable: bool) -> bool {
         unsafe { ffi::wxTopLevelWindow_EnableCloseButton(self.as_ptr(), enable) }
     }
+    /// Enables or disables the Maximize button (in the right or left upper corner of a frame or dialog).
     fn enable_maximize_button(&self, enable: bool) -> bool {
         unsafe { ffi::wxTopLevelWindow_EnableMaximizeButton(self.as_ptr(), enable) }
     }
+    /// Enables or disables the Minimize button (in the right or left upper corner of a frame or dialog).
     fn enable_minimize_button(&self, enable: bool) -> bool {
         unsafe { ffi::wxTopLevelWindow_EnableMinimizeButton(self.as_ptr(), enable) }
     }
+    /// Returns a pointer to the button which is the default for this window, or  NULL.
     fn get_default_item(&self) -> WeakRef<Window> {
         unsafe { WeakRef::<Window>::from(ffi::wxTopLevelWindow_GetDefaultItem(self.as_ptr())) }
     }
+    /// Returns the standard icon of the window.
     fn get_icon(&self) -> Icon {
         unsafe { Icon::from_ptr(ffi::wxTopLevelWindow_GetIcon(self.as_ptr())) }
     }
     // BLOCKED: fn GetIcons()
+    /// Gets a string containing the window title.
     fn get_title(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxTopLevelWindow_GetTitle(self.as_ptr())).into() }
     }
+    /// Iconizes or restores the window.
     fn iconize(&self, iconize: bool) {
         unsafe { ffi::wxTopLevelWindow_Iconize(self.as_ptr(), iconize) }
     }
+    /// Returns true if this window is currently active, i.e. if the user is currently working with it.
     fn is_active(&self) -> bool {
         unsafe { ffi::wxTopLevelWindow_IsActive(self.as_ptr()) }
     }
+    /// Returns true if this window is expected to be always maximized, either due to platform policy or due to local policy regarding particular class.
     fn is_always_maximized(&self) -> bool {
         unsafe { ffi::wxTopLevelWindow_IsAlwaysMaximized(self.as_ptr()) }
     }
+    /// Returns true if the window is in fullscreen mode.
     fn is_full_screen(&self) -> bool {
         unsafe { ffi::wxTopLevelWindow_IsFullScreen(self.as_ptr()) }
     }
+    /// Returns true if the window is iconized.
     fn is_iconized(&self) -> bool {
         unsafe { ffi::wxTopLevelWindow_IsIconized(self.as_ptr()) }
     }
+    /// Returns true if the window is maximized.
     fn is_maximized(&self) -> bool {
         unsafe { ffi::wxTopLevelWindow_IsMaximized(self.as_ptr()) }
     }
     // BLOCKED: fn IsUsingNativeDecorations()
+    /// Maximizes or restores the window.
     fn maximize(&self, maximize: bool) {
         unsafe { ffi::wxTopLevelWindow_Maximize(self.as_ptr(), maximize) }
     }
+    /// MSW-specific function for accessing the system menu.
     fn msw_get_system_menu(&self) -> WeakRef<Menu> {
         unsafe { WeakRef::<Menu>::from(ffi::wxTopLevelWindow_MSWGetSystemMenu(self.as_ptr())) }
     }
+    /// Use a system-dependent way to attract users attention to the window when it is in background.
     fn request_user_attention(&self, flags: c_int) {
         unsafe { ffi::wxTopLevelWindow_RequestUserAttention(self.as_ptr(), flags) }
     }
+    /// Restore a previously iconized or maximized window to its normal state.
     fn restore(&self) {
         unsafe { ffi::wxTopLevelWindow_Restore(self.as_ptr()) }
     }
     // BLOCKED: fn RestoreToGeometry()
     // BLOCKED: fn SaveGeometry()
+    /// Changes the default item for the panel, usually win is a button.
     fn set_default_item<W: WindowMethods>(&self, win: Option<&W>) -> WeakRef<Window> {
         unsafe {
             let win = match win {
@@ -1638,18 +1926,21 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     fn get_tmp_default_item(&self) -> WeakRef<Window> {
         unsafe { WeakRef::<Window>::from(ffi::wxTopLevelWindow_GetTmpDefaultItem(self.as_ptr())) }
     }
+    /// Sets the icon for this window.
     fn set_icon<I: IconMethods>(&self, icon: &I) {
         unsafe {
             let icon = icon.as_ptr();
             ffi::wxTopLevelWindow_SetIcon(self.as_ptr(), icon)
         }
     }
+    /// Sets several icons of different sizes for this window: this allows using different icons for different situations (e.g.
     fn set_icons<I: IconBundleMethods>(&self, icons: &I) {
         unsafe {
             let icons = icons.as_ptr();
             ffi::wxTopLevelWindow_SetIcons(self.as_ptr(), icons)
         }
     }
+    /// Sets the window title.
     fn set_title(&self, title: &str) {
         unsafe {
             let title = WxString::from(title);
@@ -1657,15 +1948,19 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
             ffi::wxTopLevelWindow_SetTitle(self.as_ptr(), title)
         }
     }
+    /// This virtual function is not meant to be called directly but can be overridden to return false (it returns true by default) to allow the application to close even if this, presumably not very important, window is still opened.
     fn should_prevent_app_exit(&self) -> bool {
         unsafe { ffi::wxTopLevelWindow_ShouldPreventAppExit(self.as_ptr()) }
     }
+    /// This function sets the wxTopLevelWindow's modified state on macOS, which currently draws a black dot in the wxTopLevelWindow's close button.
     fn osx_set_modified(&self, modified: bool) {
         unsafe { ffi::wxTopLevelWindow_OSXSetModified(self.as_ptr(), modified) }
     }
+    /// Returns the current modified state of the wxTopLevelWindow on macOS.
     fn osx_is_modified(&self) -> bool {
         unsafe { ffi::wxTopLevelWindow_OSXIsModified(self.as_ptr()) }
     }
+    /// Sets the file name represented by this wxTopLevelWindow.
     fn set_represented_filename(&self, filename: &str) {
         unsafe {
             let filename = WxString::from(filename);
@@ -1673,12 +1968,15 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
             ffi::wxTopLevelWindow_SetRepresentedFilename(self.as_ptr(), filename)
         }
     }
+    /// Show the wxTopLevelWindow, but do not give it keyboard focus.
     fn show_without_activating(&self) {
         unsafe { ffi::wxTopLevelWindow_ShowWithoutActivating(self.as_ptr()) }
     }
+    /// Enables the zoom button to toggle full screen mode.
     fn enable_full_screen_view(&self, enable: bool, style: c_long) -> bool {
         unsafe { ffi::wxTopLevelWindow_EnableFullScreenView(self.as_ptr(), enable, style) }
     }
+    /// Depending on the value of show parameter the window is either shown full screen or restored to its normal state.
     fn show_full_screen(&self, show: bool, style: c_long) -> bool {
         unsafe { ffi::wxTopLevelWindow_ShowFullScreen(self.as_ptr(), show, style) }
     }
@@ -1686,6 +1984,7 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     // NOT_SUPPORTED: fn SetContentProtection()
     // BLOCKED: fn UseNativeDecorations()
     // BLOCKED: fn UseNativeDecorationsByDefault()
+    /// Get the default size for a new top level window.
     fn get_default_size() -> Size {
         unsafe { Size::from_ptr(ffi::wxTopLevelWindow_GetDefaultSize()) }
     }
@@ -1694,6 +1993,7 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
 // wxTreeCtrl
 pub trait TreeCtrlMethods: ControlMethods {
     // DTOR: fn ~wxTreeCtrl()
+    /// Adds the root node to the tree, returning the new item.
     fn add_root<T: TreeItemDataMethods>(
         &self,
         text: &str,
@@ -1717,6 +2017,7 @@ pub trait TreeCtrlMethods: ControlMethods {
             ))
         }
     }
+    /// Appends an item to the end of the branch identified by parent, return a new item id.
     fn append_item<T: TreeItemIdMethods, T2: TreeItemDataMethods>(
         &self,
         parent: &T,
@@ -1743,6 +2044,7 @@ pub trait TreeCtrlMethods: ControlMethods {
             ))
         }
     }
+    /// Sets the buttons image list.
     fn assign_buttons_image_list<I: ImageListMethods>(&self, image_list: Option<&I>) {
         unsafe {
             let image_list = match image_list {
@@ -1752,6 +2054,7 @@ pub trait TreeCtrlMethods: ControlMethods {
             ffi::wxTreeCtrl_AssignButtonsImageList(self.as_ptr(), image_list)
         }
     }
+    /// Sets the state image list.
     fn assign_state_image_list<I: ImageListMethods>(&self, image_list: Option<&I>) {
         unsafe {
             let image_list = match image_list {
@@ -1761,42 +2064,50 @@ pub trait TreeCtrlMethods: ControlMethods {
             ffi::wxTreeCtrl_AssignStateImageList(self.as_ptr(), image_list)
         }
     }
+    /// Collapses the given item.
     fn collapse<T: TreeItemIdMethods>(&self, item: &T) {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_Collapse(self.as_ptr(), item)
         }
     }
+    /// Collapses the root item.
     fn collapse_all(&self) {
         unsafe { ffi::wxTreeCtrl_CollapseAll(self.as_ptr()) }
     }
+    /// Collapses this item and all of its children, recursively.
     fn collapse_all_children<T: TreeItemIdMethods>(&self, item: &T) {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_CollapseAllChildren(self.as_ptr(), item)
         }
     }
+    /// Collapses the given item and removes all children.
     fn collapse_and_reset<T: TreeItemIdMethods>(&self, item: &T) {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_CollapseAndReset(self.as_ptr(), item)
         }
     }
+    /// Deletes the specified item.
     fn delete<T: TreeItemIdMethods>(&self, item: &T) {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_Delete(self.as_ptr(), item)
         }
     }
+    /// Deletes all items in the control.
     fn delete_all_items(&self) {
         unsafe { ffi::wxTreeCtrl_DeleteAllItems(self.as_ptr()) }
     }
+    /// Deletes all children of the given item (but not the item itself).
     fn delete_children<T: TreeItemIdMethods>(&self, item: &T) {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_DeleteChildren(self.as_ptr(), item)
         }
     }
+    /// Starts editing the label of the given item.
     fn edit_label<T: TreeItemIdMethods, C: ClassInfoMethods>(
         &self,
         item: &T,
@@ -1815,36 +2126,43 @@ pub trait TreeCtrlMethods: ControlMethods {
             ))
         }
     }
+    /// Enable or disable a beep if there is no match for the currently entered text when searching for the item from keyboard.
     fn enable_bell_on_no_match(&self, on: bool) {
         unsafe { ffi::wxTreeCtrl_EnableBellOnNoMatch(self.as_ptr(), on) }
     }
+    /// Ends label editing.
     fn end_edit_label<T: TreeItemIdMethods>(&self, item: &T, discard_changes: bool) {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_EndEditLabel(self.as_ptr(), item, discard_changes)
         }
     }
+    /// Scrolls and/or expands items to ensure that the given item is visible.
     fn ensure_visible<T: TreeItemIdMethods>(&self, item: &T) {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_EnsureVisible(self.as_ptr(), item)
         }
     }
+    /// Expands the given item.
     fn expand<T: TreeItemIdMethods>(&self, item: &T) {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_Expand(self.as_ptr(), item)
         }
     }
+    /// Expands all items in the tree.
     fn expand_all(&self) {
         unsafe { ffi::wxTreeCtrl_ExpandAll(self.as_ptr()) }
     }
+    /// Expands the given item and all its children recursively.
     fn expand_all_children<T: TreeItemIdMethods>(&self, item: &T) {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_ExpandAllChildren(self.as_ptr(), item)
         }
     }
+    /// Retrieves the rectangle bounding the item.
     fn get_bounding_rect<T: TreeItemIdMethods, R: RectMethods>(
         &self,
         item: &T,
@@ -1857,60 +2175,74 @@ pub trait TreeCtrlMethods: ControlMethods {
             ffi::wxTreeCtrl_GetBoundingRect(self.as_ptr(), item, rect, text_only)
         }
     }
+    /// Returns the buttons image list (from which application-defined button images are taken).
     fn get_buttons_image_list(&self) -> Option<ImageListIsOwned<false>> {
         unsafe { ImageList::option_from(ffi::wxTreeCtrl_GetButtonsImageList(self.as_ptr())) }
     }
+    /// Returns the number of items in the branch.
     fn get_children_count<T: TreeItemIdMethods>(&self, item: &T, recursively: bool) -> usize {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_GetChildrenCount(self.as_ptr(), item, recursively)
         }
     }
+    /// Returns the number of items in the control.
     fn get_count(&self) -> c_uint {
         unsafe { ffi::wxTreeCtrl_GetCount(self.as_ptr()) }
     }
+    /// Returns the edit control being currently used to edit a label.
     fn get_edit_control(&self) -> WeakRef<TextCtrl> {
         unsafe { WeakRef::<TextCtrl>::from(ffi::wxTreeCtrl_GetEditControl(self.as_ptr())) }
     }
+    /// Returns the first child; call GetNextChild() for the next child.
     fn get_first_child<T: TreeItemIdMethods>(&self, item: &T, cookie: *mut c_void) -> TreeItemId {
         unsafe {
             let item = item.as_ptr();
             TreeItemId::from_ptr(ffi::wxTreeCtrl_GetFirstChild(self.as_ptr(), item, cookie))
         }
     }
+    /// Returns the first visible item.
     fn get_first_visible_item(&self) -> TreeItemId {
         unsafe { TreeItemId::from_ptr(ffi::wxTreeCtrl_GetFirstVisibleItem(self.as_ptr())) }
     }
+    /// Returns the item last clicked or otherwise selected.
     fn get_focused_item(&self) -> TreeItemId {
         unsafe { TreeItemId::from_ptr(ffi::wxTreeCtrl_GetFocusedItem(self.as_ptr())) }
     }
+    /// Clears the currently focused item.
     fn clear_focused_item(&self) {
         unsafe { ffi::wxTreeCtrl_ClearFocusedItem(self.as_ptr()) }
     }
+    /// Sets the currently focused item.
     fn set_focused_item<T: TreeItemIdMethods>(&self, item: &T) {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_SetFocusedItem(self.as_ptr(), item)
         }
     }
+    /// Returns the current tree control indentation.
     fn get_indent(&self) -> c_uint {
         unsafe { ffi::wxTreeCtrl_GetIndent(self.as_ptr()) }
     }
+    /// Returns the current tree control spacing.
     fn get_spacing(&self) -> c_uint {
         unsafe { ffi::wxTreeCtrl_GetSpacing(self.as_ptr()) }
     }
+    /// Returns the background colour of the item.
     fn get_item_background_colour<T: TreeItemIdMethods>(&self, item: &T) -> Colour {
         unsafe {
             let item = item.as_ptr();
             Colour::from_ptr(ffi::wxTreeCtrl_GetItemBackgroundColour(self.as_ptr(), item))
         }
     }
+    /// Returns the tree item data associated with the item.
     fn get_item_data<T: TreeItemIdMethods>(&self, item: &T) -> Option<TreeItemDataIsOwned<false>> {
         unsafe {
             let item = item.as_ptr();
             TreeItemData::option_from(ffi::wxTreeCtrl_GetItemData(self.as_ptr(), item))
         }
     }
+    /// Returns the font of the item label.
     fn get_item_font<T: TreeItemIdMethods>(&self, item: &T) -> Font {
         unsafe {
             let item = item.as_ptr();
@@ -1918,87 +2250,104 @@ pub trait TreeCtrlMethods: ControlMethods {
         }
     }
     // NOT_SUPPORTED: fn GetItemImage()
+    /// Returns the item's parent.
     fn get_item_parent<T: TreeItemIdMethods>(&self, item: &T) -> TreeItemId {
         unsafe {
             let item = item.as_ptr();
             TreeItemId::from_ptr(ffi::wxTreeCtrl_GetItemParent(self.as_ptr(), item))
         }
     }
+    /// Gets the specified item state.
     fn get_item_state<T: TreeItemIdMethods>(&self, item: &T) -> c_int {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_GetItemState(self.as_ptr(), item)
         }
     }
+    /// Returns the item label.
     fn get_item_text<T: TreeItemIdMethods>(&self, item: &T) -> String {
         unsafe {
             let item = item.as_ptr();
             WxString::from_ptr(ffi::wxTreeCtrl_GetItemText(self.as_ptr(), item)).into()
         }
     }
+    /// Returns the colour of the item label.
     fn get_item_text_colour<T: TreeItemIdMethods>(&self, item: &T) -> Colour {
         unsafe {
             let item = item.as_ptr();
             Colour::from_ptr(ffi::wxTreeCtrl_GetItemTextColour(self.as_ptr(), item))
         }
     }
+    /// Returns the last child of the item (or an invalid tree item if this item has no children).
     fn get_last_child<T: TreeItemIdMethods>(&self, item: &T) -> TreeItemId {
         unsafe {
             let item = item.as_ptr();
             TreeItemId::from_ptr(ffi::wxTreeCtrl_GetLastChild(self.as_ptr(), item))
         }
     }
+    /// Returns the next child; call GetFirstChild() for the first child.
     fn get_next_child<T: TreeItemIdMethods>(&self, item: &T, cookie: *mut c_void) -> TreeItemId {
         unsafe {
             let item = item.as_ptr();
             TreeItemId::from_ptr(ffi::wxTreeCtrl_GetNextChild(self.as_ptr(), item, cookie))
         }
     }
+    /// Returns the next sibling of the specified item; call GetPrevSibling() for the previous sibling.
     fn get_next_sibling_treeitemid<T: TreeItemIdMethods>(&self, item: &T) -> TreeItemId {
         unsafe {
             let item = item.as_ptr();
             TreeItemId::from_ptr(ffi::wxTreeCtrl_GetNextSibling(self.as_ptr(), item))
         }
     }
+    /// Returns the next visible item or an invalid item if this item is the last visible one.
     fn get_next_visible<T: TreeItemIdMethods>(&self, item: &T) -> TreeItemId {
         unsafe {
             let item = item.as_ptr();
             TreeItemId::from_ptr(ffi::wxTreeCtrl_GetNextVisible(self.as_ptr(), item))
         }
     }
+    /// Returns the previous sibling of the specified item; call GetNextSibling() for the next sibling.
     fn get_prev_sibling_treeitemid<T: TreeItemIdMethods>(&self, item: &T) -> TreeItemId {
         unsafe {
             let item = item.as_ptr();
             TreeItemId::from_ptr(ffi::wxTreeCtrl_GetPrevSibling(self.as_ptr(), item))
         }
     }
+    /// Returns the previous visible item or an invalid item if this item is the first visible one.
     fn get_prev_visible<T: TreeItemIdMethods>(&self, item: &T) -> TreeItemId {
         unsafe {
             let item = item.as_ptr();
             TreeItemId::from_ptr(ffi::wxTreeCtrl_GetPrevVisible(self.as_ptr(), item))
         }
     }
+    /// Returns true if the control will use a quick calculation for the best size, looking only at the first and last items.
     fn get_quick_best_size(&self) -> bool {
         unsafe { ffi::wxTreeCtrl_GetQuickBestSize(self.as_ptr()) }
     }
+    /// Returns the root item for the tree control.
     fn get_root_item(&self) -> TreeItemId {
         unsafe { TreeItemId::from_ptr(ffi::wxTreeCtrl_GetRootItem(self.as_ptr())) }
     }
+    /// Returns the selection, or an invalid item if there is no selection.
     fn get_selection(&self) -> TreeItemId {
         unsafe { TreeItemId::from_ptr(ffi::wxTreeCtrl_GetSelection(self.as_ptr())) }
     }
+    /// Fills the array of tree items passed in with the currently selected items.
     fn get_selections(&self, selection: *mut c_void) -> usize {
         unsafe { ffi::wxTreeCtrl_GetSelections(self.as_ptr(), selection) }
     }
+    /// Returns the state image list (from which application-defined state images are taken).
     fn get_state_image_list(&self) -> Option<ImageListIsOwned<false>> {
         unsafe { ImageList::option_from(ffi::wxTreeCtrl_GetStateImageList(self.as_ptr())) }
     }
+    /// Calculates which (if any) item is under the given point, returning the tree item id at this point plus extra information flags.
     fn hit_test<P: PointMethods>(&self, point: &P, flags: *mut c_void) -> TreeItemId {
         unsafe {
             let point = point.as_ptr();
             TreeItemId::from_ptr(ffi::wxTreeCtrl_HitTest(self.as_ptr(), point, flags))
         }
     }
+    /// Inserts an item after a given one (previous).
     fn insert_item_treeitemid<
         T: TreeItemIdMethods,
         T2: TreeItemIdMethods,
@@ -2032,6 +2381,7 @@ pub trait TreeCtrlMethods: ControlMethods {
             ))
         }
     }
+    /// Inserts an item before one identified by its position (pos).
     fn insert_item_sz<T: TreeItemIdMethods, T2: TreeItemDataMethods>(
         &self,
         parent: &T,
@@ -2060,39 +2410,46 @@ pub trait TreeCtrlMethods: ControlMethods {
             ))
         }
     }
+    /// Returns true if the given item is in bold state.
     fn is_bold<T: TreeItemIdMethods>(&self, item: &T) -> bool {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_IsBold(self.as_ptr(), item)
         }
     }
+    /// Returns true if the control is empty (i.e. has no items, even no root one).
     fn is_empty(&self) -> bool {
         unsafe { ffi::wxTreeCtrl_IsEmpty(self.as_ptr()) }
     }
+    /// Returns true if the item is expanded (only makes sense if it has children).
     fn is_expanded<T: TreeItemIdMethods>(&self, item: &T) -> bool {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_IsExpanded(self.as_ptr(), item)
         }
     }
+    /// Returns true if the item is selected.
     fn is_selected<T: TreeItemIdMethods>(&self, item: &T) -> bool {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_IsSelected(self.as_ptr(), item)
         }
     }
+    /// Returns true if the item is visible on the screen.
     fn is_visible<T: TreeItemIdMethods>(&self, item: &T) -> bool {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_IsVisible(self.as_ptr(), item)
         }
     }
+    /// Returns true if the item has children.
     fn item_has_children<T: TreeItemIdMethods>(&self, item: &T) -> bool {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_ItemHasChildren(self.as_ptr(), item)
         }
     }
+    /// Override this function in the derived class to change the sort order of the items in the tree control.
     fn on_compare_items<T: TreeItemIdMethods, T2: TreeItemIdMethods>(
         &self,
         item1: &T,
@@ -2104,6 +2461,7 @@ pub trait TreeCtrlMethods: ControlMethods {
             ffi::wxTreeCtrl_OnCompareItems(self.as_ptr(), item1, item2)
         }
     }
+    /// Appends an item as the first child of parent, return a new item id.
     fn prepend_item<T: TreeItemIdMethods, T2: TreeItemDataMethods>(
         &self,
         parent: &T,
@@ -2130,18 +2488,21 @@ pub trait TreeCtrlMethods: ControlMethods {
             ))
         }
     }
+    /// Scrolls the specified item into view.
     fn scroll_to<T: TreeItemIdMethods>(&self, item: &T) {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_ScrollTo(self.as_ptr(), item)
         }
     }
+    /// Selects the given item.
     fn select_item<T: TreeItemIdMethods>(&self, item: &T, select: bool) {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_SelectItem(self.as_ptr(), item, select)
         }
     }
+    /// Sets the buttons image list (from which application-defined button images are taken).
     fn set_buttons_image_list<I: ImageListMethods>(&self, image_list: Option<&I>) {
         unsafe {
             let image_list = match image_list {
@@ -2151,12 +2512,15 @@ pub trait TreeCtrlMethods: ControlMethods {
             ffi::wxTreeCtrl_SetButtonsImageList(self.as_ptr(), image_list)
         }
     }
+    /// Sets the indentation for the tree control.
     fn set_indent(&self, indent: c_uint) {
         unsafe { ffi::wxTreeCtrl_SetIndent(self.as_ptr(), indent) }
     }
+    /// Sets the spacing for the tree control.
     fn set_spacing(&self, spacing: c_uint) {
         unsafe { ffi::wxTreeCtrl_SetSpacing(self.as_ptr(), spacing) }
     }
+    /// Sets the colour of the item's background.
     fn set_item_background_colour<T: TreeItemIdMethods, C: ColourMethods>(
         &self,
         item: &T,
@@ -2168,12 +2532,14 @@ pub trait TreeCtrlMethods: ControlMethods {
             ffi::wxTreeCtrl_SetItemBackgroundColour(self.as_ptr(), item, col)
         }
     }
+    /// Makes item appear in bold font if bold parameter is true or resets it to the normal state.
     fn set_item_bold<T: TreeItemIdMethods>(&self, item: &T, bold: bool) {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_SetItemBold(self.as_ptr(), item, bold)
         }
     }
+    /// Sets the item client data.
     fn set_item_data<T: TreeItemIdMethods, T2: TreeItemDataMethods>(
         &self,
         item: &T,
@@ -2188,12 +2554,14 @@ pub trait TreeCtrlMethods: ControlMethods {
             ffi::wxTreeCtrl_SetItemData(self.as_ptr(), item, data)
         }
     }
+    /// Gives the item the visual feedback for Drag'n'Drop actions, which is useful if something is dragged from the outside onto the tree control (as opposed to a DnD operation within the tree control, which already is implemented internally).
     fn set_item_drop_highlight<T: TreeItemIdMethods>(&self, item: &T, highlight: bool) {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_SetItemDropHighlight(self.as_ptr(), item, highlight)
         }
     }
+    /// Sets the item's font.
     fn set_item_font<T: TreeItemIdMethods, F: FontMethods>(&self, item: &T, font: &F) {
         unsafe {
             let item = item.as_ptr();
@@ -2201,6 +2569,7 @@ pub trait TreeCtrlMethods: ControlMethods {
             ffi::wxTreeCtrl_SetItemFont(self.as_ptr(), item, font)
         }
     }
+    /// Force appearance of the button next to the item.
     fn set_item_has_children<T: TreeItemIdMethods>(&self, item: &T, has_children: bool) {
         unsafe {
             let item = item.as_ptr();
@@ -2208,12 +2577,14 @@ pub trait TreeCtrlMethods: ControlMethods {
         }
     }
     // NOT_SUPPORTED: fn SetItemImage()
+    /// Sets the specified item state.
     fn set_item_state<T: TreeItemIdMethods>(&self, item: &T, state: c_int) {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_SetItemState(self.as_ptr(), item, state)
         }
     }
+    /// Sets the item label.
     fn set_item_text<T: TreeItemIdMethods>(&self, item: &T, text: &str) {
         unsafe {
             let item = item.as_ptr();
@@ -2222,6 +2593,7 @@ pub trait TreeCtrlMethods: ControlMethods {
             ffi::wxTreeCtrl_SetItemText(self.as_ptr(), item, text)
         }
     }
+    /// Sets the colour of the item's text.
     fn set_item_text_colour<T: TreeItemIdMethods, C: ColourMethods>(&self, item: &T, col: &C) {
         unsafe {
             let item = item.as_ptr();
@@ -2229,9 +2601,11 @@ pub trait TreeCtrlMethods: ControlMethods {
             ffi::wxTreeCtrl_SetItemTextColour(self.as_ptr(), item, col)
         }
     }
+    /// If true is passed, specifies that the control will use a quick calculation for the best size, looking only at the first and last items.
     fn set_quick_best_size(&self, quick_best_size: bool) {
         unsafe { ffi::wxTreeCtrl_SetQuickBestSize(self.as_ptr(), quick_best_size) }
     }
+    /// Sets the state image list (from which application-defined state images are taken).
     fn set_state_image_list<I: ImageListMethods>(&self, image_list: Option<&I>) {
         unsafe {
             let image_list = match image_list {
@@ -2241,36 +2615,43 @@ pub trait TreeCtrlMethods: ControlMethods {
             ffi::wxTreeCtrl_SetStateImageList(self.as_ptr(), image_list)
         }
     }
+    /// Sorts the children of the given item using OnCompareItems().
     fn sort_children<T: TreeItemIdMethods>(&self, item: &T) {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_SortChildren(self.as_ptr(), item)
         }
     }
+    /// Toggles the given item between collapsed and expanded states.
     fn toggle<T: TreeItemIdMethods>(&self, item: &T) {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_Toggle(self.as_ptr(), item)
         }
     }
+    /// Toggles the given item between selected and unselected states.
     fn toggle_item_selection<T: TreeItemIdMethods>(&self, item: &T) {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_ToggleItemSelection(self.as_ptr(), item)
         }
     }
+    /// Removes the selection from the currently selected item (if any).
     fn unselect(&self) {
         unsafe { ffi::wxTreeCtrl_Unselect(self.as_ptr()) }
     }
+    /// This function either behaves the same as Unselect() if the control doesn't have wxTR_MULTIPLE style, or removes the selection from all items if it does have this style.
     fn unselect_all(&self) {
         unsafe { ffi::wxTreeCtrl_UnselectAll(self.as_ptr()) }
     }
+    /// Unselects the given item.
     fn unselect_item<T: TreeItemIdMethods>(&self, item: &T) {
         unsafe {
             let item = item.as_ptr();
             ffi::wxTreeCtrl_UnselectItem(self.as_ptr(), item)
         }
     }
+    /// Select all the immediate children of the given parent.
     fn select_children<T: TreeItemIdMethods>(&self, parent: &T) {
         unsafe {
             let parent = parent.as_ptr();
@@ -2281,27 +2662,35 @@ pub trait TreeCtrlMethods: ControlMethods {
 
 // wxTreeEvent
 pub trait TreeEventMethods: NotifyEventMethods {
+    /// Returns the item.
     fn get_item(&self) -> TreeItemId {
         unsafe { TreeItemId::from_ptr(ffi::wxTreeEvent_GetItem(self.as_ptr())) }
     }
+    /// Returns the key code if the event is a key event.
     fn get_key_code(&self) -> c_int {
         unsafe { ffi::wxTreeEvent_GetKeyCode(self.as_ptr()) }
     }
+    /// Returns the key event for EVT_TREE_KEY_DOWN events.
     fn get_key_event(&self) -> KeyEventIsOwned<false> {
         unsafe { KeyEventIsOwned::from_ptr(ffi::wxTreeEvent_GetKeyEvent(self.as_ptr())) }
     }
+    /// Returns the label if the event is a begin or end edit label event.
     fn get_label(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxTreeEvent_GetLabel(self.as_ptr())).into() }
     }
+    /// Returns the old item index (valid for EVT_TREE_SEL_CHANGING and EVT_TREE_SEL_CHANGED events).
     fn get_old_item(&self) -> TreeItemId {
         unsafe { TreeItemId::from_ptr(ffi::wxTreeEvent_GetOldItem(self.as_ptr())) }
     }
+    /// Returns the position of the mouse pointer if the event is a drag or menu-context event.
     fn get_point(&self) -> Point {
         unsafe { Point::from_ptr(ffi::wxTreeEvent_GetPoint(self.as_ptr())) }
     }
+    /// Returns true if the label edit was cancelled.
     fn is_edit_cancelled(&self) -> bool {
         unsafe { ffi::wxTreeEvent_IsEditCancelled(self.as_ptr()) }
     }
+    /// Set the tooltip for the item (valid for EVT_TREE_ITEM_GETTOOLTIP events).
     fn set_tool_tip(&self, tooltip: &str) {
         unsafe {
             let tooltip = WxString::from(tooltip);
@@ -2314,9 +2703,11 @@ pub trait TreeEventMethods: NotifyEventMethods {
 // wxTreeItemData
 pub trait TreeItemDataMethods: ClientDataMethods {
     // DTOR: fn ~wxTreeItemData()
+    /// Returns the item associated with this node.
     fn get_id(&self) -> TreeItemIdIsOwned<false> {
         unsafe { TreeItemIdIsOwned::from_ptr(ffi::wxTreeItemData_GetId(self.as_ptr())) }
     }
+    /// Sets the item associated with this node.
     fn set_id<T: TreeItemIdMethods>(&self, id: &T) {
         unsafe {
             let id = id.as_ptr();
@@ -2327,6 +2718,7 @@ pub trait TreeItemDataMethods: ClientDataMethods {
 
 // wxTreeItemId
 pub trait TreeItemIdMethods: WxRustMethods {
+    /// Returns true if this instance is referencing a valid tree item.
     fn is_ok(&self) -> bool {
         unsafe { ffi::wxTreeItemId_IsOk(self.as_ptr()) }
     }
@@ -2340,6 +2732,7 @@ pub trait TreeItemIdMethods: WxRustMethods {
 
 // wxTreeListCtrl
 pub trait TreeListCtrlMethods: WindowMethods {
+    /// Sets the image list and gives its ownership to the control.
     fn assign_image_list<I: ImageListMethods>(&self, image_list: Option<&I>) {
         unsafe {
             let image_list = match image_list {
@@ -2349,6 +2742,7 @@ pub trait TreeListCtrlMethods: WindowMethods {
             ffi::wxTreeListCtrl_AssignImageList(self.as_ptr(), image_list)
         }
     }
+    /// Sets the image list.
     fn set_image_list<I: ImageListMethods>(&self, image_list: Option<&I>) {
         unsafe {
             let image_list = match image_list {
@@ -2358,6 +2752,7 @@ pub trait TreeListCtrlMethods: WindowMethods {
             ffi::wxTreeListCtrl_SetImageList(self.as_ptr(), image_list)
         }
     }
+    /// Add a column with the given title and attributes.
     fn append_column(&self, title: &str, width: c_int, align: c_int, flags: c_int) -> c_int {
         unsafe {
             let title = WxString::from(title);
@@ -2367,11 +2762,13 @@ pub trait TreeListCtrlMethods: WindowMethods {
     }
     // NOT_SUPPORTED: fn GetColumnCount()
     // NOT_SUPPORTED: fn DeleteColumn()
+    /// Delete all columns.
     fn clear_columns(&self) {
         unsafe { ffi::wxTreeListCtrl_ClearColumns(self.as_ptr()) }
     }
     // NOT_SUPPORTED: fn SetColumnWidth()
     // NOT_SUPPORTED: fn GetColumnWidth()
+    /// Get the width appropriate for showing the given text.
     fn width_for(&self, text: &str) -> c_int {
         unsafe {
             let text = WxString::from(text);
@@ -2383,15 +2780,18 @@ pub trait TreeListCtrlMethods: WindowMethods {
     // BLOCKED: fn InsertItem()
     // BLOCKED: fn PrependItem()
     // BLOCKED: fn DeleteItem()
+    /// Delete all tree items.
     fn delete_all_items(&self) {
         unsafe { ffi::wxTreeListCtrl_DeleteAllItems(self.as_ptr()) }
     }
+    /// Return the (never shown) root item.
     fn get_root_item(&self) -> TreeListItem {
         unsafe { TreeListItem::from_ptr(ffi::wxTreeListCtrl_GetRootItem(self.as_ptr())) }
     }
     // BLOCKED: fn GetItemParent()
     // BLOCKED: fn GetFirstChild()
     // BLOCKED: fn GetNextSibling()
+    /// Return the first item in the tree.
     fn get_first_item(&self) -> TreeListItem {
         unsafe { TreeListItem::from_ptr(ffi::wxTreeListCtrl_GetFirstItem(self.as_ptr())) }
     }
@@ -2405,6 +2805,7 @@ pub trait TreeListCtrlMethods: WindowMethods {
     // BLOCKED: fn Expand()
     // BLOCKED: fn Collapse()
     // BLOCKED: fn IsExpanded()
+    /// Return the currently selected item.
     fn get_selection(&self) -> TreeListItem {
         unsafe { TreeListItem::from_ptr(ffi::wxTreeListCtrl_GetSelection(self.as_ptr())) }
     }
@@ -2412,9 +2813,11 @@ pub trait TreeListCtrlMethods: WindowMethods {
     // BLOCKED: fn Select()
     // BLOCKED: fn Unselect()
     // BLOCKED: fn IsSelected()
+    /// Select all the control items.
     fn select_all(&self) {
         unsafe { ffi::wxTreeListCtrl_SelectAll(self.as_ptr()) }
     }
+    /// Deselect all the control items.
     fn unselect_all(&self) {
         unsafe { ffi::wxTreeListCtrl_UnselectAll(self.as_ptr()) }
     }
@@ -2426,9 +2829,11 @@ pub trait TreeListCtrlMethods: WindowMethods {
     // BLOCKED: fn GetCheckedState()
     // BLOCKED: fn AreAllChildrenInState()
     // NOT_SUPPORTED: fn SetSortColumn()
+    /// Return the column currently used for sorting, if any.
     fn get_sort_column(&self, col: *mut c_void, ascending_order: *mut c_void) -> bool {
         unsafe { ffi::wxTreeListCtrl_GetSortColumn(self.as_ptr(), col, ascending_order) }
     }
+    /// Set the object to use for comparing the items.
     fn set_item_comparator<T: TreeListItemComparatorMethods>(&self, comparator: Option<&T>) {
         unsafe {
             let comparator = match comparator {
@@ -2438,9 +2843,11 @@ pub trait TreeListCtrlMethods: WindowMethods {
             ffi::wxTreeListCtrl_SetItemComparator(self.as_ptr(), comparator)
         }
     }
+    /// Return the view part of this control as a wxWindow.
     fn get_view(&self) -> WeakRef<Window> {
         unsafe { WeakRef::<Window>::from(ffi::wxTreeListCtrl_GetView(self.as_ptr())) }
     }
+    /// Return the view part of this control as wxDataViewCtrl.
     fn get_data_view(&self) -> WeakRef<DataViewCtrl> {
         unsafe { WeakRef::<DataViewCtrl>::from(ffi::wxTreeListCtrl_GetDataView(self.as_ptr())) }
     }
@@ -2448,6 +2855,7 @@ pub trait TreeListCtrlMethods: WindowMethods {
 
 // wxTreeListItem
 pub trait TreeListItemMethods: WxRustMethods {
+    /// Return true if the item is valid.
     fn is_ok(&self) -> bool {
         unsafe { ffi::wxTreeListItem_IsOk(self.as_ptr()) }
     }
@@ -2462,6 +2870,7 @@ pub trait TreeListItemComparatorMethods: WxRustMethods {
 // wxTreebook
 pub trait TreebookMethods: BookCtrlBaseMethods {
     // DTOR: fn ~wxTreebook()
+    /// Adds a new child-page to the last top-level page.
     fn add_sub_page<W: WindowMethods>(
         &self,
         page: Option<&W>,
@@ -2479,15 +2888,19 @@ pub trait TreebookMethods: BookCtrlBaseMethods {
             ffi::wxTreebook_AddSubPage(self.as_ptr(), page, text, b_select, image_id)
         }
     }
+    /// Shortcut for ExpandNode( pageId, false ).
     fn collapse_node(&self, page_id: usize) -> bool {
         unsafe { ffi::wxTreebook_CollapseNode(self.as_ptr(), page_id) }
     }
+    /// Expands (collapses) the pageId node.
     fn expand_node(&self, page_id: usize, expand: bool) -> bool {
         unsafe { ffi::wxTreebook_ExpandNode(self.as_ptr(), page_id, expand) }
     }
+    /// Returns the parent page of the given one or wxNOT_FOUND if this is a top-level page.
     fn get_page_parent(&self, page: usize) -> c_int {
         unsafe { ffi::wxTreebook_GetPageParent(self.as_ptr(), page) }
     }
+    /// Inserts a sub page under the specified page.
     fn insert_sub_page<W: WindowMethods>(
         &self,
         page_pos: usize,
@@ -2506,6 +2919,7 @@ pub trait TreebookMethods: BookCtrlBaseMethods {
             ffi::wxTreebook_InsertSubPage(self.as_ptr(), page_pos, page, text, b_select, image_id)
         }
     }
+    /// Returns true if the page represented by pageId is expanded.
     fn is_node_expanded(&self, page_id: usize) -> bool {
         unsafe { ffi::wxTreebook_IsNodeExpanded(self.as_ptr(), page_id) }
     }

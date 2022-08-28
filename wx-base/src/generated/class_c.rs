@@ -38,6 +38,7 @@ wxwidgets! {
         ClientDataMethods
 }
 impl<const OWNED: bool> ClientDataIsOwned<OWNED> {
+    /// Constructor.
     pub fn new() -> ClientDataIsOwned<OWNED> {
         unsafe { ClientDataIsOwned(ffi::wxClientData_new()) }
     }

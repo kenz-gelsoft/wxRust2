@@ -10,9 +10,11 @@ wxwidgets! {
         FileNameMethods
 }
 impl<const OWNED: bool> FileNameIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new() -> FileNameIsOwned<OWNED> {
         unsafe { FileNameIsOwned(ffi::wxFileName_new()) }
     }
+    /// Copy constructor.
     pub fn new_with_filename<F: FileNameMethods>(filename: &F) -> FileNameIsOwned<OWNED> {
         unsafe {
             let filename = filename.as_ptr();

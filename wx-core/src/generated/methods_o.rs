@@ -3,6 +3,7 @@ use super::*;
 // wxOverlay
 pub trait OverlayMethods: WxRustMethods {
     // DTOR: fn ~wxOverlay()
+    /// Clears the overlay without restoring the former state.
     fn reset(&self) {
         unsafe { ffi::wxOverlay_Reset(self.as_ptr()) }
     }
@@ -57,15 +58,19 @@ pub trait OwnerDrawnComboBoxMethods: ComboCtrlMethods {
             )
         }
     }
+    /// Returns true if the list of combobox choices is empty.
     fn is_list_empty(&self) -> bool {
         unsafe { ffi::wxOwnerDrawnComboBox_IsListEmpty(self.as_ptr()) }
     }
+    /// Returns true if the text of the combobox is empty.
     fn is_text_empty(&self) -> bool {
         unsafe { ffi::wxOwnerDrawnComboBox_IsTextEmpty(self.as_ptr()) }
     }
+    /// Returns index to the widest item in the list.
     fn get_widest_item(&self) -> c_int {
         unsafe { ffi::wxOwnerDrawnComboBox_GetWidestItem(self.as_ptr()) }
     }
+    /// Returns width of the widest item in the list.
     fn get_widest_item_width(&self) -> c_int {
         unsafe { ffi::wxOwnerDrawnComboBox_GetWidestItemWidth(self.as_ptr()) }
     }

@@ -429,6 +429,9 @@ class RustMethodBinding:
         if for_ffi:
             yield '%s;' % (signature,)
         else:
+            doc = self.__model.doc
+            if doc:
+                yield '/// %s' % (doc,)
             yield '%s {' % (signature,)
             body_lines = list(self._binding_body())
             for line in self._wrap_unsafe(body_lines):

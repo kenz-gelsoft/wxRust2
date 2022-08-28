@@ -12,6 +12,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> TGAHandlerIsOwned<OWNED> {
+    /// Default constructor for wxTGAHandler.
     pub fn new() -> TGAHandlerIsOwned<OWNED> {
         unsafe { TGAHandlerIsOwned(ffi::wxTGAHandler_new()) }
     }
@@ -59,6 +60,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> TIFFHandlerIsOwned<OWNED> {
+    /// Default constructor for wxTIFFHandler.
     pub fn new() -> TIFFHandlerIsOwned<OWNED> {
         unsafe { TIFFHandlerIsOwned(ffi::wxTIFFHandler_new()) }
     }
@@ -190,6 +192,7 @@ wxwidgets! {
         TextAttrMethods
 }
 impl<const OWNED: bool> TextAttrIsOwned<OWNED> {
+    /// Constructors.
     pub fn new() -> TextAttrIsOwned<OWNED> {
         unsafe { TextAttrIsOwned(ffi::wxTextAttr_new()) }
     }
@@ -231,9 +234,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> TextCtrlIsOwned<OWNED> {
+    /// Default ctor.
     pub fn new_2step() -> TextCtrlIsOwned<OWNED> {
         unsafe { TextCtrlIsOwned(ffi::wxTextCtrl_new()) }
     }
+    /// Constructor, creating and showing a text control.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -314,6 +319,7 @@ wxwidgets! {
         DataObjectMethods
 }
 impl<const OWNED: bool> TextDataObjectIsOwned<OWNED> {
+    /// Constructor, may be used to initialise the text (otherwise SetText() should be used later).
     pub fn new(text: &str) -> TextDataObjectIsOwned<OWNED> {
         unsafe {
             let text = WxString::from(text);
@@ -428,9 +434,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> TextEntryDialogIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> TextEntryDialogIsOwned<OWNED> {
         unsafe { TextEntryDialogIsOwned(ffi::wxTextEntryDialog_new()) }
     }
+    /// Constructor.
     pub fn new<W: WindowMethods, P: PointMethods>(
         parent: Option<&W>,
         message: &str,
@@ -514,6 +522,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> TextValidatorIsOwned<OWNED> {
+    /// Copy constructor.
     pub fn new_with_textvalidator<T: TextValidatorMethods>(
         validator: &T,
     ) -> TextValidatorIsOwned<OWNED> {
@@ -522,6 +531,7 @@ impl<const OWNED: bool> TextValidatorIsOwned<OWNED> {
             TextValidatorIsOwned(ffi::wxTextValidator_new(validator))
         }
     }
+    /// Constructor taking a style and optional pointer to a wxString variable.
     pub fn new_with_long(style: c_long, val_ptr: *mut c_void) -> TextValidatorIsOwned<OWNED> {
         unsafe { TextValidatorIsOwned(ffi::wxTextValidator_new1(style, val_ptr)) }
     }
@@ -614,9 +624,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> TimePickerCtrlIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> TimePickerCtrlIsOwned<OWNED> {
         unsafe { TimePickerCtrlIsOwned(ffi::wxTimePickerCtrl_new()) }
     }
+    /// Initializes the object and calls Create() with all the parameters.
     pub fn new<
         W: WindowMethods,
         D: DateTimeMethods,
@@ -725,6 +737,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> TipWindowIsOwned<OWNED> {
+    /// Constructor.
     pub fn new<W: WindowMethods, T: TipWindowMethods, R: RectMethods>(
         parent: Option<&W>,
         text: &str,
@@ -801,9 +814,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ToggleButtonIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> ToggleButtonIsOwned<OWNED> {
         unsafe { ToggleButtonIsOwned(ffi::wxToggleButton_new()) }
     }
+    /// Constructor, creating and showing a toggle button.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -885,9 +900,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ToolBarIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> ToolBarIsOwned<OWNED> {
         unsafe { ToolBarIsOwned(ffi::wxToolBar_new()) }
     }
+    /// Constructs a toolbar.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -954,6 +971,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ToolTipIsOwned<OWNED> {
+    /// Constructor.
     pub fn new(tip: &str) -> ToolTipIsOwned<OWNED> {
         unsafe {
             let tip = WxString::from(tip);
@@ -1003,6 +1021,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ToolbookIsOwned<OWNED> {
+    /// Constructs a choicebook control.
     pub fn new_2step() -> ToolbookIsOwned<OWNED> {
         unsafe { ToolbookIsOwned(ffi::wxToolbook_new()) }
     }
@@ -1066,6 +1085,7 @@ impl<const OWNED: bool> DynamicCast for ToolbookIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> WindowMethods for ToolbookIsOwned<OWNED> {
+    /// Create the tool book control that has already been constructed with the default constructor.
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -1103,9 +1123,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> TopLevelWindowIsOwned<OWNED> {
+    /// Default ctor.
     pub fn new_2step() -> TopLevelWindowIsOwned<OWNED> {
         unsafe { TopLevelWindowIsOwned(ffi::wxTopLevelWindow_new()) }
     }
+    /// Constructor creating the top level window.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -1180,9 +1202,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> TreeCtrlIsOwned<OWNED> {
+    /// Default Constructor.
     pub fn new_2step() -> TreeCtrlIsOwned<OWNED> {
         unsafe { TreeCtrlIsOwned(ffi::wxTreeCtrl_new()) }
     }
+    /// Constructor, creating and showing a tree control.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -1242,6 +1266,7 @@ impl<const OWNED: bool> DynamicCast for TreeCtrlIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> ControlMethods for TreeCtrlIsOwned<OWNED> {
+    /// Creates the tree control.
     fn create_validator<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
         parent: Option<&W>,
@@ -1267,6 +1292,7 @@ impl<const OWNED: bool> ControlMethods for TreeCtrlIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> WindowMethods for TreeCtrlIsOwned<OWNED> {
+    /// Sets the mode flags associated with the display of the tree control.
     fn set_window_style(&self, styles: c_long) {
         unsafe { ffi::wxTreeCtrl_SetWindowStyle(self.as_ptr(), styles) }
     }
@@ -1340,6 +1366,7 @@ wxwidgets! {
         ClientDataMethods
 }
 impl<const OWNED: bool> TreeItemDataIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new() -> TreeItemDataIsOwned<OWNED> {
         unsafe { TreeItemDataIsOwned(ffi::wxTreeItemData_new()) }
     }
@@ -1375,6 +1402,7 @@ wxwidgets! {
         TreeItemIdMethods
 }
 impl<const OWNED: bool> TreeItemIdIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new() -> TreeItemIdIsOwned<OWNED> {
         unsafe { TreeItemIdIsOwned(ffi::wxTreeItemId_new()) }
     }
@@ -1408,9 +1436,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> TreeListCtrlIsOwned<OWNED> {
+    /// Default constructor, call Create() later.
     pub fn new_2step() -> TreeListCtrlIsOwned<OWNED> {
         unsafe { TreeListCtrlIsOwned(ffi::wxTreeListCtrl_new()) }
     }
+    /// Full constructing, creating the object and its window.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -1461,6 +1491,7 @@ impl<const OWNED: bool> DynamicCast for TreeListCtrlIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> WindowMethods for TreeListCtrlIsOwned<OWNED> {
+    /// Create the control window.
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -1494,6 +1525,7 @@ wxwidgets! {
         TreeListItemMethods
 }
 impl<const OWNED: bool> TreeListItemIsOwned<OWNED> {
+    /// Only the default constructor is publicly accessible.
     pub fn new() -> TreeListItemIsOwned<OWNED> {
         unsafe { TreeListItemIsOwned(ffi::wxTreeListItem_new()) }
     }
@@ -1557,9 +1589,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> TreebookIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> TreebookIsOwned<OWNED> {
         unsafe { TreebookIsOwned(ffi::wxTreebook_new()) }
     }
+    /// Creates an empty wxTreebook.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -1620,6 +1654,7 @@ impl<const OWNED: bool> DynamicCast for TreebookIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> WindowMethods for TreebookIsOwned<OWNED> {
+    /// Creates a treebook control.
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,

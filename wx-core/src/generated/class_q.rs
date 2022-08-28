@@ -11,6 +11,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> QuantizeIsOwned<OWNED> {
+    /// Constructor.
     pub fn new() -> QuantizeIsOwned<OWNED> {
         unsafe { QuantizeIsOwned(ffi::wxQuantize_new()) }
     }
@@ -53,6 +54,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> QueryLayoutInfoEventIsOwned<OWNED> {
+    /// Constructor.
     pub fn new(id: c_int) -> QueryLayoutInfoEventIsOwned<OWNED> {
         unsafe { QueryLayoutInfoEventIsOwned(ffi::wxQueryLayoutInfoEvent_new(id)) }
     }

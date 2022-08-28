@@ -2,9 +2,11 @@ use super::*;
 
 // wxMessageOutput
 pub trait MessageOutputMethods: WxRustMethods {
+    /// Return the global message output object.
     fn get() -> Option<MessageOutputIsOwned<false>> {
         unsafe { MessageOutput::option_from(ffi::wxMessageOutput_Get()) }
     }
+    /// Sets the global message output object.
     fn set<M: MessageOutputMethods>(msgout: Option<&M>) -> Option<MessageOutputIsOwned<false>> {
         unsafe {
             let msgout = match msgout {
@@ -15,6 +17,7 @@ pub trait MessageOutputMethods: WxRustMethods {
         }
     }
     // NOT_SUPPORTED: fn Printf()
+    /// Method called by Printf() to really output the text.
     fn output(&self, str: &str) {
         unsafe {
             let str = WxString::from(str);

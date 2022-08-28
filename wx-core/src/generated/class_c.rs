@@ -12,6 +12,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> CalculateLayoutEventIsOwned<OWNED> {
+    /// Constructor.
     pub fn new(id: c_int) -> CalculateLayoutEventIsOwned<OWNED> {
         unsafe { CalculateLayoutEventIsOwned(ffi::wxCalculateLayoutEvent_new(id)) }
     }
@@ -61,9 +62,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> CalendarCtrlIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> CalendarCtrlIsOwned<OWNED> {
         unsafe { CalendarCtrlIsOwned(ffi::wxCalendarCtrl_new()) }
     }
+    /// Does the same as Create() method.
     pub fn new<W: WindowMethods, D: DateTimeMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -222,9 +225,11 @@ wxwidgets! {
         CaretMethods
 }
 impl<const OWNED: bool> CaretIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new() -> CaretIsOwned<OWNED> {
         unsafe { CaretIsOwned(ffi::wxCaret_new()) }
     }
+    /// Creates a caret with the given size (in pixels) and associates it with the window.
     pub fn new_with_window_int<W: WindowMethods>(
         window: Option<&W>,
         width: c_int,
@@ -282,9 +287,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> CheckBoxIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> CheckBoxIsOwned<OWNED> {
         unsafe { CheckBoxIsOwned(ffi::wxCheckBox_new()) }
     }
+    /// Constructor, creating and showing a checkbox.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -362,10 +369,12 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> CheckListBoxIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> CheckListBoxIsOwned<OWNED> {
         unsafe { CheckListBoxIsOwned(ffi::wxCheckListBox_new()) }
     }
     // NOT_SUPPORTED: fn wxCheckListBox1()
+    /// Constructor, creating and showing a list box.
     pub fn new<
         W: WindowMethods,
         P: PointMethods,
@@ -506,6 +515,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ChildFocusEventIsOwned<OWNED> {
+    /// Constructor.
     pub fn new<W: WindowMethods>(win: Option<&W>) -> ChildFocusEventIsOwned<OWNED> {
         unsafe {
             let win = match win {
@@ -566,10 +576,12 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ChoiceIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> ChoiceIsOwned<OWNED> {
         unsafe { ChoiceIsOwned(ffi::wxChoice_new()) }
     }
     // NOT_SUPPORTED: fn wxChoice1()
+    /// Constructor, creating and showing a choice.
     pub fn new<
         W: WindowMethods,
         P: PointMethods,
@@ -663,6 +675,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ChoicebookIsOwned<OWNED> {
+    /// Constructs a choicebook control.
     pub fn new_2step() -> ChoicebookIsOwned<OWNED> {
         unsafe { ChoicebookIsOwned(ffi::wxChoicebook_new()) }
     }
@@ -726,6 +739,7 @@ impl<const OWNED: bool> DynamicCast for ChoicebookIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> WindowMethods for ChoicebookIsOwned<OWNED> {
+    /// Create the choicebook control that has already been constructed with the default constructor.
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -762,6 +776,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ClientDCIsOwned<OWNED> {
+    /// Constructor.
     pub fn new<W: WindowMethods>(window: Option<&W>) -> ClientDCIsOwned<OWNED> {
         unsafe {
             let window = match window {
@@ -819,6 +834,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ClipboardIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new() -> ClipboardIsOwned<OWNED> {
         unsafe { ClipboardIsOwned(ffi::wxClipboard_new()) }
     }
@@ -959,9 +975,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> CollapsiblePaneIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> CollapsiblePaneIsOwned<OWNED> {
         unsafe { CollapsiblePaneIsOwned(ffi::wxCollapsiblePane_new()) }
     }
+    /// Initializes the object and calls Create() with all the parameters.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -1037,6 +1055,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> CollapsiblePaneEventIsOwned<OWNED> {
+    /// The constructor is not normally used by the user code.
     pub fn new<O: ObjectMethods>(
         generator: Option<&O>,
         id: c_int,
@@ -1098,6 +1117,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ColourIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new() -> ColourIsOwned<OWNED> {
         unsafe { ColourIsOwned(ffi::wxColour_new()) }
     }
@@ -1110,6 +1130,7 @@ impl<const OWNED: bool> ColourIsOwned<OWNED> {
         }
     }
     // NOT_SUPPORTED: fn wxColour3()
+    /// Copy constructor.
     pub fn new_with_colour<C: ColourMethods>(colour: &C) -> ColourIsOwned<OWNED> {
         unsafe {
             let colour = colour.as_ptr();
@@ -1157,6 +1178,7 @@ impl<const OWNED: bool> ColourDataIsOwned<OWNED> {
     //  ENUM: @6
     pub const NUM_CUSTOM: c_int = 16;
 
+    /// Constructor.
     pub fn new() -> ColourDataIsOwned<OWNED> {
         unsafe { ColourDataIsOwned(ffi::wxColourData_new()) }
     }
@@ -1197,6 +1219,7 @@ wxwidgets! {
         ColourDatabaseMethods
 }
 impl<const OWNED: bool> ColourDatabaseIsOwned<OWNED> {
+    /// Constructs the colour database.
     pub fn new() -> ColourDatabaseIsOwned<OWNED> {
         unsafe { ColourDatabaseIsOwned(ffi::wxColourDatabase_new()) }
     }
@@ -1233,6 +1256,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ColourDialogIsOwned<OWNED> {
+    /// Constructor.
     pub fn new<W: WindowMethods, C: ColourDataMethods>(
         parent: Option<&W>,
         data: Option<&C>,
@@ -1312,6 +1336,7 @@ impl<const OWNED: bool> ColourPickerCtrlIsOwned<OWNED> {
     pub fn new_2step() -> ColourPickerCtrlIsOwned<OWNED> {
         unsafe { ColourPickerCtrlIsOwned(ffi::wxColourPickerCtrl_new()) }
     }
+    /// Initializes the object and calls Create() with all the parameters.
     pub fn new<
         W: WindowMethods,
         C: ColourMethods,
@@ -1400,6 +1425,7 @@ impl<const OWNED: bool> ColourPickerEventIsOwned<OWNED> {
     pub fn new() -> ColourPickerEventIsOwned<OWNED> {
         unsafe { ColourPickerEventIsOwned(ffi::wxColourPickerEvent_new()) }
     }
+    /// The constructor is not normally used by the user code.
     pub fn new_with_object<O: ObjectMethods, C: ColourMethods>(
         generator: Option<&O>,
         id: c_int,
@@ -1465,10 +1491,12 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ComboBoxIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> ComboBoxIsOwned<OWNED> {
         unsafe { ComboBoxIsOwned(ffi::wxComboBox_new()) }
     }
     // NOT_SUPPORTED: fn wxComboBox1()
+    /// Constructor, creating and showing a combobox.
     pub fn new<
         W: WindowMethods,
         P: PointMethods,
@@ -1574,9 +1602,11 @@ impl<const OWNED: bool> ComboCtrlIsOwned<OWNED> {
     pub const ShowAbove: c_int = 0x0001;
     pub const CanDeferShow: c_int = 0x0002;
 
+    /// Default constructor.
     pub fn new_2step() -> ComboCtrlIsOwned<OWNED> {
         unsafe { ComboCtrlIsOwned(ffi::wxComboCtrl_new()) }
     }
+    /// Constructor, creating and showing a combo control.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -1773,9 +1803,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> CommandLinkButtonIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> CommandLinkButtonIsOwned<OWNED> {
         unsafe { CommandLinkButtonIsOwned(ffi::wxCommandLinkButton_new()) }
     }
+    /// Constructor really creating a command Link button.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -1862,6 +1894,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> CommandProcessorIsOwned<OWNED> {
+    /// Constructor.
     pub fn new(max_commands: c_int) -> CommandProcessorIsOwned<OWNED> {
         unsafe { CommandProcessorIsOwned(ffi::wxCommandProcessor_new(max_commands)) }
     }
@@ -1956,6 +1989,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ControlIsOwned<OWNED> {
+    /// Constructs a control.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -1980,6 +2014,7 @@ impl<const OWNED: bool> ControlIsOwned<OWNED> {
             ))
         }
     }
+    /// Default constructor to allow 2-phase creation.
     pub fn new_2step() -> ControlIsOwned<OWNED> {
         unsafe { ControlIsOwned(ffi::wxControl_new1()) }
     }
@@ -2085,21 +2120,25 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> CursorIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new() -> CursorIsOwned<OWNED> {
         unsafe { CursorIsOwned(ffi::wxCursor_new()) }
     }
     // NOT_SUPPORTED: fn wxCursor1()
     // NOT_SUPPORTED: fn wxCursor2()
     // NOT_SUPPORTED: fn wxCursor3()
+    /// Constructs a cursor from a wxImage.
     pub fn new_with_image<I: ImageMethods>(image: &I) -> CursorIsOwned<OWNED> {
         unsafe {
             let image = image.as_ptr();
             CursorIsOwned(ffi::wxCursor_new4(image))
         }
     }
+    /// Constructs a cursor from XPM data.
     pub fn new_with_char(xpm_data: *const c_void) -> CursorIsOwned<OWNED> {
         unsafe { CursorIsOwned(ffi::wxCursor_new5(xpm_data)) }
     }
+    /// Copy constructor, uses reference counting.
     pub fn new_with_cursor<C: CursorMethods>(cursor: &C) -> CursorIsOwned<OWNED> {
         unsafe {
             let cursor = cursor.as_ptr();
@@ -2150,6 +2189,7 @@ wxwidgets! {
         DataObjectMethods
 }
 impl<const OWNED: bool> CustomDataObjectIsOwned<OWNED> {
+    /// The constructor accepts a format argument which specifies the (single) format supported by this object.
     pub fn new<D: DataFormatMethods>(format: &D) -> CustomDataObjectIsOwned<OWNED> {
         unsafe {
             let format = format.as_ptr();

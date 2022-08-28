@@ -12,9 +12,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> IconIsOwned<OWNED> {
+    /// Default ctor.
     pub fn new() -> IconIsOwned<OWNED> {
         unsafe { IconIsOwned(ffi::wxIcon_new()) }
     }
+    /// Copy ctor.
     pub fn new_with_icon<I: IconMethods>(icon: &I) -> IconIsOwned<OWNED> {
         unsafe {
             let icon = icon.as_ptr();
@@ -22,10 +24,12 @@ impl<const OWNED: bool> IconIsOwned<OWNED> {
         }
     }
     // NOT_SUPPORTED: fn wxIcon2()
+    /// Creates a bitmap from XPM data.
     pub fn new_with_char(bits: *const c_void) -> IconIsOwned<OWNED> {
         unsafe { IconIsOwned(ffi::wxIcon_new3(bits)) }
     }
     // NOT_SUPPORTED: fn wxIcon4()
+    /// Loads an icon from the specified location.
     pub fn new_with_iconlocation(loc: *const c_void) -> IconIsOwned<OWNED> {
         unsafe { IconIsOwned(ffi::wxIcon_new5(loc)) }
     }
@@ -78,11 +82,13 @@ impl<const OWNED: bool> IconBundleIsOwned<OWNED> {
     pub const FALLBACK_SYSTEM: c_int = 1;
     pub const FALLBACK_NEAREST_LARGER: c_int = 2;
 
+    /// Default ctor.
     pub fn new() -> IconBundleIsOwned<OWNED> {
         unsafe { IconBundleIsOwned(ffi::wxIconBundle_new()) }
     }
     // NOT_SUPPORTED: fn wxIconBundle1()
     // NOT_SUPPORTED: fn wxIconBundle2()
+    /// Initializes the bundle with a single icon.
     pub fn new_with_icon<I: IconMethods>(icon: &I) -> IconBundleIsOwned<OWNED> {
         unsafe {
             let icon = icon.as_ptr();
@@ -90,6 +96,7 @@ impl<const OWNED: bool> IconBundleIsOwned<OWNED> {
         }
     }
     // NOT_SUPPORTED: fn wxIconBundle4()
+    /// Copy constructor.
     pub fn new_with_iconbundle<I: IconBundleMethods>(ic: &I) -> IconBundleIsOwned<OWNED> {
         unsafe {
             let ic = ic.as_ptr();
@@ -140,6 +147,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> IconizeEventIsOwned<OWNED> {
+    /// Constructor.
     pub fn new(id: c_int, iconized: bool) -> IconizeEventIsOwned<OWNED> {
         unsafe { IconizeEventIsOwned(ffi::wxIconizeEvent_new(id, iconized)) }
     }
@@ -213,18 +221,22 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ImageIsOwned<OWNED> {
+    /// Creates an empty wxImage object without an alpha channel.
     pub fn new() -> ImageIsOwned<OWNED> {
         unsafe { ImageIsOwned(ffi::wxImage_new()) }
     }
+    /// Creates an image with the given size and clears it if requested.
     pub fn new_with_int_bool(width: c_int, height: c_int, clear: bool) -> ImageIsOwned<OWNED> {
         unsafe { ImageIsOwned(ffi::wxImage_new1(width, height, clear)) }
     }
+    /// This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
     pub fn new_with_size_bool<S: SizeMethods>(sz: &S, clear: bool) -> ImageIsOwned<OWNED> {
         unsafe {
             let sz = sz.as_ptr();
             ImageIsOwned(ffi::wxImage_new2(sz, clear))
         }
     }
+    /// Creates an image from data in memory.
     pub fn new_with_int_uchar_bool(
         width: c_int,
         height: c_int,
@@ -233,6 +245,7 @@ impl<const OWNED: bool> ImageIsOwned<OWNED> {
     ) -> ImageIsOwned<OWNED> {
         unsafe { ImageIsOwned(ffi::wxImage_new3(width, height, data, static_data)) }
     }
+    /// This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
     pub fn new_with_size_uchar_bool<S: SizeMethods>(
         sz: &S,
         data: *mut c_void,
@@ -243,6 +256,7 @@ impl<const OWNED: bool> ImageIsOwned<OWNED> {
             ImageIsOwned(ffi::wxImage_new4(sz, data, static_data))
         }
     }
+    /// Creates an image from data in memory.
     pub fn new_with_int_uchar_uchar(
         width: c_int,
         height: c_int,
@@ -252,6 +266,7 @@ impl<const OWNED: bool> ImageIsOwned<OWNED> {
     ) -> ImageIsOwned<OWNED> {
         unsafe { ImageIsOwned(ffi::wxImage_new5(width, height, data, alpha, static_data)) }
     }
+    /// This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
     pub fn new_with_size_uchar_uchar<S: SizeMethods>(
         sz: &S,
         data: *mut c_void,
@@ -263,10 +278,12 @@ impl<const OWNED: bool> ImageIsOwned<OWNED> {
             ImageIsOwned(ffi::wxImage_new6(sz, data, alpha, static_data))
         }
     }
+    /// Creates an image from XPM data.
     pub fn new_with_char(xpm_data: *const c_void) -> ImageIsOwned<OWNED> {
         unsafe { ImageIsOwned(ffi::wxImage_new7(xpm_data)) }
     }
     // NOT_SUPPORTED: fn wxImage8()
+    /// Creates an image from a file using MIME-types to specify the type.
     pub fn new_with_str(name: &str, mimetype: &str, index: c_int) -> ImageIsOwned<OWNED> {
         unsafe {
             let name = WxString::from(name);
@@ -277,6 +294,7 @@ impl<const OWNED: bool> ImageIsOwned<OWNED> {
         }
     }
     // NOT_SUPPORTED: fn wxImage10()
+    /// Creates an image from a stream using MIME-types to specify the type.
     pub fn new_with_inputstream(
         stream: *mut c_void,
         mimetype: &str,
@@ -365,9 +383,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ImageListIsOwned<OWNED> {
+    /// Default ctor.
     pub fn new() -> ImageListIsOwned<OWNED> {
         unsafe { ImageListIsOwned(ffi::wxImageList_new()) }
     }
+    /// Constructor specifying the image size, whether image masks should be created, and the initial size of the list.
     pub fn new_with_int(
         width: c_int,
         height: c_int,
@@ -417,9 +437,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> InfoBarIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> InfoBarIsOwned<OWNED> {
         unsafe { InfoBarIsOwned(ffi::wxInfoBar_new()) }
     }
+    /// Constructor creating the info bar window.
     pub fn new<W: WindowMethods>(parent: Option<&W>, winid: c_int) -> InfoBarIsOwned<OWNED> {
         unsafe {
             let parent = match parent {
@@ -476,6 +498,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> InitDialogEventIsOwned<OWNED> {
+    /// Constructor.
     pub fn new(id: c_int) -> InitDialogEventIsOwned<OWNED> {
         unsafe { InitDialogEventIsOwned(ffi::wxInitDialogEvent_new(id)) }
     }

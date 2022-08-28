@@ -14,9 +14,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> EditableListBoxIsOwned<OWNED> {
+    /// Default ctor.
     pub fn new_2step() -> EditableListBoxIsOwned<OWNED> {
         unsafe { EditableListBoxIsOwned(ffi::wxEditableListBox_new()) }
     }
+    /// Constructor, creating and showing a list box.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -89,6 +91,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> EraseEventIsOwned<OWNED> {
+    /// Constructor.
     pub fn new<D: DCMethods>(id: c_int, dc: Option<&D>) -> EraseEventIsOwned<OWNED> {
         unsafe {
             let dc = match dc {

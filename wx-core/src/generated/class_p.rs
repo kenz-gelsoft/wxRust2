@@ -12,6 +12,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> PCXHandlerIsOwned<OWNED> {
+    /// Default constructor for wxPCXHandler.
     pub fn new() -> PCXHandlerIsOwned<OWNED> {
         unsafe { PCXHandlerIsOwned(ffi::wxPCXHandler_new()) }
     }
@@ -59,6 +60,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> PNGHandlerIsOwned<OWNED> {
+    /// Default constructor for wxPNGHandler.
     pub fn new() -> PNGHandlerIsOwned<OWNED> {
         unsafe { PNGHandlerIsOwned(ffi::wxPNGHandler_new()) }
     }
@@ -106,6 +108,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> PNMHandlerIsOwned<OWNED> {
+    /// Default constructor for wxPNMHandler.
     pub fn new() -> PNMHandlerIsOwned<OWNED> {
         unsafe { PNMHandlerIsOwned(ffi::wxPNMHandler_new()) }
     }
@@ -155,6 +158,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> PaintDCIsOwned<OWNED> {
+    /// Constructor.
     pub fn new<W: WindowMethods>(window: Option<&W>) -> PaintDCIsOwned<OWNED> {
         unsafe {
             let window = match window {
@@ -263,15 +267,18 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> PaletteIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new() -> PaletteIsOwned<OWNED> {
         unsafe { PaletteIsOwned(ffi::wxPalette_new()) }
     }
+    /// Copy constructor, uses Reference Counting.
     pub fn new_with_palette<P: PaletteMethods>(palette: &P) -> PaletteIsOwned<OWNED> {
         unsafe {
             let palette = palette.as_ptr();
             PaletteIsOwned(ffi::wxPalette_new1(palette))
         }
     }
+    /// Creates a palette from arrays of size n, one for each red, blue or green component.
     pub fn new_with_int(
         n: c_int,
         red: *const c_void,
@@ -325,9 +332,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> PanelIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> PanelIsOwned<OWNED> {
         unsafe { PanelIsOwned(ffi::wxPanel_new()) }
     }
+    /// Constructor.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -378,6 +387,7 @@ impl<const OWNED: bool> DynamicCast for PanelIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> WindowMethods for PanelIsOwned<OWNED> {
+    /// Used for two-step panel construction.
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -418,6 +428,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> PasswordEntryDialogIsOwned<OWNED> {
+    /// Constructor.
     pub fn new<W: WindowMethods, P: PointMethods>(
         parent: Option<&W>,
         message: &str,
@@ -510,19 +521,23 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> PenIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new() -> PenIsOwned<OWNED> {
         unsafe { PenIsOwned(ffi::wxPen_new()) }
     }
+    /// Creates a pen object using the specified pen description.
     pub fn new_with_peninfo(info: *const c_void) -> PenIsOwned<OWNED> {
         unsafe { PenIsOwned(ffi::wxPen_new1(info)) }
     }
     // NOT_SUPPORTED: fn wxPen2()
+    /// Constructs a stippled pen from a stipple bitmap and a width.
     pub fn new_with_bitmap<B: BitmapMethods>(stipple: &B, width: c_int) -> PenIsOwned<OWNED> {
         unsafe {
             let stipple = stipple.as_ptr();
             PenIsOwned(ffi::wxPen_new3(stipple, width))
         }
     }
+    /// Copy constructor, uses Reference Counting.
     pub fn new_with_pen<P: PenMethods>(pen: &P) -> PenIsOwned<OWNED> {
         unsafe {
             let pen = pen.as_ptr();
@@ -571,6 +586,7 @@ wxwidgets! {
         PenListMethods
 }
 impl<const OWNED: bool> PenListIsOwned<OWNED> {
+    /// Constructor.
     pub fn new() -> PenListIsOwned<OWNED> {
         unsafe { PenListIsOwned(ffi::wxPenList_new()) }
     }
@@ -678,12 +694,15 @@ wxwidgets! {
         PointMethods
 }
 impl<const OWNED: bool> PointIsOwned<OWNED> {
+    /// Constructs a point.
     pub fn new() -> PointIsOwned<OWNED> {
         unsafe { PointIsOwned(ffi::wxPoint_new()) }
     }
+    /// Initializes the point object with the given x and y coordinates.
     pub fn new_with_int(x: c_int, y: c_int) -> PointIsOwned<OWNED> {
         unsafe { PointIsOwned(ffi::wxPoint_new1(x, y)) }
     }
+    /// Converts the given wxRealPoint (with floating point coordinates) to a wxPoint instance.
     pub fn new_with_realpoint<R: RealPointMethods>(pt: &R) -> PointIsOwned<OWNED> {
         unsafe {
             let pt = pt.as_ptr();
@@ -722,9 +741,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> PopupTransientWindowIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> PopupTransientWindowIsOwned<OWNED> {
         unsafe { PopupTransientWindowIsOwned(ffi::wxPopupTransientWindow_new()) }
     }
+    /// Constructor.
     pub fn new<W: WindowMethods>(
         parent: Option<&W>,
         flags: c_int,
@@ -791,9 +812,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> PopupWindowIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> PopupWindowIsOwned<OWNED> {
         unsafe { PopupWindowIsOwned(ffi::wxPopupWindow_new()) }
     }
+    /// Constructor.
     pub fn new<W: WindowMethods>(parent: Option<&W>, flags: c_int) -> PopupWindowIsOwned<OWNED> {
         unsafe {
             let parent = match parent {
@@ -848,6 +871,7 @@ wxwidgets! {
         PreferencesEditorMethods
 }
 impl<const OWNED: bool> PreferencesEditorIsOwned<OWNED> {
+    /// Constructor.
     pub fn new(title: &str) -> PreferencesEditorIsOwned<OWNED> {
         unsafe {
             let title = WxString::from(title);
@@ -916,9 +940,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> PropertySheetDialogIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> PropertySheetDialogIsOwned<OWNED> {
         unsafe { PropertySheetDialogIsOwned(ffi::wxPropertySheetDialog_new()) }
     }
+    /// Constructor.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -989,6 +1015,7 @@ impl<const OWNED: bool> DynamicCast for PropertySheetDialogIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> TopLevelWindowMethods for PropertySheetDialogIsOwned<OWNED> {
+    /// Call this from your own Create function, before adding buttons and pages.
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,

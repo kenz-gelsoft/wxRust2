@@ -10,9 +10,11 @@ wxwidgets! {
         GBPositionMethods
 }
 impl<const OWNED: bool> GBPositionIsOwned<OWNED> {
+    /// Default constructor, setting the row and column to (0,0).
     pub fn new() -> GBPositionIsOwned<OWNED> {
         unsafe { GBPositionIsOwned(ffi::wxGBPosition_new()) }
     }
+    /// Construct a new wxGBPosition, setting the row and column.
     pub fn new_with_int(row: c_int, col: c_int) -> GBPositionIsOwned<OWNED> {
         unsafe { GBPositionIsOwned(ffi::wxGBPosition_new1(row, col)) }
     }
@@ -45,6 +47,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> GBSizerItemIsOwned<OWNED> {
+    /// Construct a sizer item for tracking a spacer.
     pub fn new_with_int<G: GBPositionMethods, G2: GBSpanMethods, O: ObjectMethods>(
         width: c_int,
         height: c_int,
@@ -66,6 +69,7 @@ impl<const OWNED: bool> GBSizerItemIsOwned<OWNED> {
             ))
         }
     }
+    /// Construct a sizer item for tracking a window.
     pub fn new_with_window<
         W: WindowMethods,
         G: GBPositionMethods,
@@ -95,6 +99,7 @@ impl<const OWNED: bool> GBSizerItemIsOwned<OWNED> {
             ))
         }
     }
+    /// Construct a sizer item for tracking a subsizer.
     pub fn new_with_sizer<
         S: SizerMethods,
         G: GBPositionMethods,
@@ -166,9 +171,11 @@ wxwidgets! {
         GBSpanMethods
 }
 impl<const OWNED: bool> GBSpanIsOwned<OWNED> {
+    /// Default constructor, setting the rowspan and colspan to (1,1) meaning that the item occupies one cell in each direction.
     pub fn new() -> GBSpanIsOwned<OWNED> {
         unsafe { GBSpanIsOwned(ffi::wxGBSpan_new()) }
     }
+    /// Construct a new wxGBSpan, setting the rowspan and colspan.
     pub fn new_with_int(rowspan: c_int, colspan: c_int) -> GBSpanIsOwned<OWNED> {
         unsafe { GBSpanIsOwned(ffi::wxGBSpan_new1(rowspan, colspan)) }
     }
@@ -201,12 +208,14 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> GCDCIsOwned<OWNED> {
+    /// Constructs a wxGCDC from a wxWindowDC.
     pub fn new_with_windowdc<W: WindowDCMethods>(window_dc: &W) -> GCDCIsOwned<OWNED> {
         unsafe {
             let window_dc = window_dc.as_ptr();
             GCDCIsOwned(ffi::wxGCDC_new(window_dc))
         }
     }
+    /// Constructs a wxGCDC from a wxMemoryDC.
     pub fn new_with_memorydc<M: MemoryDCMethods>(memory_dc: &M) -> GCDCIsOwned<OWNED> {
         unsafe {
             let memory_dc = memory_dc.as_ptr();
@@ -214,6 +223,7 @@ impl<const OWNED: bool> GCDCIsOwned<OWNED> {
         }
     }
     // BLOCKED: fn wxGCDC2()
+    /// Construct a wxGCDC from an existing graphics context.
     pub fn new_with_graphicscontext<G: GraphicsContextMethods>(
         context: Option<&G>,
     ) -> GCDCIsOwned<OWNED> {
@@ -225,6 +235,7 @@ impl<const OWNED: bool> GCDCIsOwned<OWNED> {
             GCDCIsOwned(ffi::wxGCDC_new3(context))
         }
     }
+    /// Constructs a wxGCDC from a wxEnhMetaFileDC.
     pub fn new_with_enhmetafiledc(emf_dc: *const c_void) -> GCDCIsOwned<OWNED> {
         unsafe { GCDCIsOwned(ffi::wxGCDC_new4(emf_dc)) }
     }
@@ -314,6 +325,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> GIFHandlerIsOwned<OWNED> {
+    /// Default constructor for wxGIFHandler.
     pub fn new() -> GIFHandlerIsOwned<OWNED> {
         unsafe { GIFHandlerIsOwned(ffi::wxGIFHandler_new()) }
     }
@@ -363,9 +375,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> GaugeIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> GaugeIsOwned<OWNED> {
         unsafe { GaugeIsOwned(ffi::wxGauge_new()) }
     }
+    /// Constructor, creating and showing a gauge.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -436,9 +450,11 @@ wxwidgets! {
         GenericAboutDialogMethods
 }
 impl<const OWNED: bool> GenericAboutDialogIsOwned<OWNED> {
+    /// Default constructor, Create() must be called later.
     pub fn new() -> GenericAboutDialogIsOwned<OWNED> {
         unsafe { GenericAboutDialogIsOwned(ffi::wxGenericAboutDialog_new()) }
     }
+    /// Creates the dialog and initializes it with the given information.
     pub fn new_with_aboutdialoginfo<A: AboutDialogInfoMethods, W: WindowMethods>(
         info: &A,
         parent: Option<&W>,
@@ -483,9 +499,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> GenericDirCtrlIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> GenericDirCtrlIsOwned<OWNED> {
         unsafe { GenericDirCtrlIsOwned(ffi::wxGenericDirCtrl_new()) }
     }
+    /// Main constructor.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -574,6 +592,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> GenericProgressDialogIsOwned<OWNED> {
+    /// Constructor.
     pub fn new<W: WindowMethods>(
         title: &str,
         message: &str,
@@ -653,6 +672,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> GenericValidatorIsOwned<OWNED> {
+    /// Copy constructor.
     pub fn new_with_genericvalidator<G: GenericValidatorMethods>(
         validator: &G,
     ) -> GenericValidatorIsOwned<OWNED> {
@@ -661,15 +681,19 @@ impl<const OWNED: bool> GenericValidatorIsOwned<OWNED> {
             GenericValidatorIsOwned(ffi::wxGenericValidator_new(validator))
         }
     }
+    /// Constructor taking a bool pointer.
     pub fn new_with_bool(val_ptr: *mut c_void) -> GenericValidatorIsOwned<OWNED> {
         unsafe { GenericValidatorIsOwned(ffi::wxGenericValidator_new1(val_ptr)) }
     }
+    /// Constructor taking a wxString pointer.
     pub fn new_with_str(val_ptr: *mut c_void) -> GenericValidatorIsOwned<OWNED> {
         unsafe { GenericValidatorIsOwned(ffi::wxGenericValidator_new2(val_ptr)) }
     }
+    /// Constructor taking an integer pointer.
     pub fn new_with_int(val_ptr: *mut c_void) -> GenericValidatorIsOwned<OWNED> {
         unsafe { GenericValidatorIsOwned(ffi::wxGenericValidator_new3(val_ptr)) }
     }
+    /// Constructor taking a wxArrayInt pointer.
     pub fn new_with_arrayint<A: ArrayIntMethods>(
         val_ptr: Option<&A>,
     ) -> GenericValidatorIsOwned<OWNED> {
@@ -681,6 +705,7 @@ impl<const OWNED: bool> GenericValidatorIsOwned<OWNED> {
             GenericValidatorIsOwned(ffi::wxGenericValidator_new4(val_ptr))
         }
     }
+    /// Constructor taking a wxDateTime pointer.
     pub fn new_with_datetime<D: DateTimeMethods>(
         val_ptr: Option<&D>,
     ) -> GenericValidatorIsOwned<OWNED> {
@@ -692,6 +717,7 @@ impl<const OWNED: bool> GenericValidatorIsOwned<OWNED> {
             GenericValidatorIsOwned(ffi::wxGenericValidator_new5(val_ptr))
         }
     }
+    /// Constructor taking a wxFileName pointer.
     pub fn new_with_filename<F: FileNameMethods>(
         val_ptr: Option<&F>,
     ) -> GenericValidatorIsOwned<OWNED> {
@@ -703,9 +729,11 @@ impl<const OWNED: bool> GenericValidatorIsOwned<OWNED> {
             GenericValidatorIsOwned(ffi::wxGenericValidator_new6(val_ptr))
         }
     }
+    /// Constructor taking a float pointer.
     pub fn new_with_float(val_ptr: *mut c_void) -> GenericValidatorIsOwned<OWNED> {
         unsafe { GenericValidatorIsOwned(ffi::wxGenericValidator_new7(val_ptr)) }
     }
+    /// Constructor taking a double pointer.
     pub fn new_with_double(val_ptr: *mut c_void) -> GenericValidatorIsOwned<OWNED> {
         unsafe { GenericValidatorIsOwned(ffi::wxGenericValidator_new8(val_ptr)) }
     }
@@ -1149,6 +1177,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> GridBagSizerIsOwned<OWNED> {
+    /// Constructor, with optional parameters to specify the gap between the rows and columns.
     pub fn new(vgap: c_int, hgap: c_int) -> GridBagSizerIsOwned<OWNED> {
         unsafe { GridBagSizerIsOwned(ffi::wxGridBagSizer_new(vgap, hgap)) }
     }
@@ -1200,6 +1229,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> GridEditorCreatedEventIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new() -> GridEditorCreatedEventIsOwned<OWNED> {
         unsafe { GridEditorCreatedEventIsOwned(ffi::wxGridEditorCreatedEvent_new()) }
     }
@@ -1255,6 +1285,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> GridEventIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new() -> GridEventIsOwned<OWNED> {
         unsafe { GridEventIsOwned(ffi::wxGridEvent_new()) }
     }
@@ -1315,6 +1346,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> GridRangeSelectEventIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new() -> GridRangeSelectEventIsOwned<OWNED> {
         unsafe { GridRangeSelectEventIsOwned(ffi::wxGridRangeSelectEvent_new()) }
     }
@@ -1375,6 +1407,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> GridSizeEventIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new() -> GridSizeEventIsOwned<OWNED> {
         unsafe { GridSizeEventIsOwned(ffi::wxGridSizeEvent_new()) }
     }
@@ -1433,6 +1466,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> GridSizerIsOwned<OWNED> {
+    /// wxGridSizer constructors.
     pub fn new_with_int_int(cols: c_int, vgap: c_int, hgap: c_int) -> GridSizerIsOwned<OWNED> {
         unsafe { GridSizerIsOwned(ffi::wxGridSizer_new(cols, vgap, hgap)) }
     }
@@ -1534,6 +1568,7 @@ wxwidgets! {
         GridUpdateLockerMethods
 }
 impl<const OWNED: bool> GridUpdateLockerIsOwned<OWNED> {
+    /// Creates an object preventing the updates of the specified grid.
     pub fn new(grid: *mut c_void) -> GridUpdateLockerIsOwned<OWNED> {
         unsafe { GridUpdateLockerIsOwned(ffi::wxGridUpdateLocker_new(grid)) }
     }

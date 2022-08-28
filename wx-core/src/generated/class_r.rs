@@ -14,10 +14,12 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> RadioBoxIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> RadioBoxIsOwned<OWNED> {
         unsafe { RadioBoxIsOwned(ffi::wxRadioBox_new()) }
     }
     // NOT_SUPPORTED: fn wxRadioBox1()
+    /// Constructor, creating and showing a radiobox.
     pub fn new<
         W: WindowMethods,
         P: PointMethods,
@@ -118,9 +120,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> RadioButtonIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> RadioButtonIsOwned<OWNED> {
         unsafe { RadioButtonIsOwned(ffi::wxRadioButton_new()) }
     }
+    /// Constructor, creating and showing a radio button.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -193,12 +197,15 @@ wxwidgets! {
         RealPointMethods
 }
 impl<const OWNED: bool> RealPointIsOwned<OWNED> {
+    /// Initializes to zero the x and y members.
     pub fn new() -> RealPointIsOwned<OWNED> {
         unsafe { RealPointIsOwned(ffi::wxRealPoint_new()) }
     }
+    /// Initializes the point with the given coordinates.
     pub fn new_with_double(x: c_double, y: c_double) -> RealPointIsOwned<OWNED> {
         unsafe { RealPointIsOwned(ffi::wxRealPoint_new1(x, y)) }
     }
+    /// Converts the given wxPoint (with integer coordinates) to a wxRealPoint.
     pub fn new_with_point<P: PointMethods>(pt: &P) -> RealPointIsOwned<OWNED> {
         unsafe {
             let pt = pt.as_ptr();
@@ -236,9 +243,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> RearrangeCtrlIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> RearrangeCtrlIsOwned<OWNED> {
         unsafe { RearrangeCtrlIsOwned(ffi::wxRearrangeCtrl_new()) }
     }
+    /// Constructor really creating the control.
     pub fn new<
         W: WindowMethods,
         P: PointMethods,
@@ -325,9 +334,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> RearrangeDialogIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> RearrangeDialogIsOwned<OWNED> {
         unsafe { RearrangeDialogIsOwned(ffi::wxRearrangeDialog_new()) }
     }
+    /// Constructor creating the dialog.
     pub fn new<W: WindowMethods, A: ArrayIntMethods, A2: ArrayStringMethods, P: PointMethods>(
         parent: Option<&W>,
         message: &str,
@@ -417,9 +428,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> RearrangeListIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> RearrangeListIsOwned<OWNED> {
         unsafe { RearrangeListIsOwned(ffi::wxRearrangeList_new()) }
     }
+    /// Constructor really creating the control.
     pub fn new<
         W: WindowMethods,
         P: PointMethods,
@@ -521,12 +534,15 @@ wxwidgets! {
         RectMethods
 }
 impl<const OWNED: bool> RectIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new() -> RectIsOwned<OWNED> {
         unsafe { RectIsOwned(ffi::wxRect_new()) }
     }
+    /// Creates a wxRect object from x, y, width and height values.
     pub fn new_with_int(x: c_int, y: c_int, width: c_int, height: c_int) -> RectIsOwned<OWNED> {
         unsafe { RectIsOwned(ffi::wxRect_new1(x, y, width, height)) }
     }
+    /// Creates a wxRect object from top-left and bottom-right points.
     pub fn new_with_point_point<P: PointMethods, P2: PointMethods>(
         top_left: &P,
         bottom_right: &P2,
@@ -537,6 +553,7 @@ impl<const OWNED: bool> RectIsOwned<OWNED> {
             RectIsOwned(ffi::wxRect_new2(top_left, bottom_right))
         }
     }
+    /// Creates a wxRect object from position pos and size values.
     pub fn new_with_point_size<P: PointMethods, S: SizeMethods>(
         pos: &P,
         size: &S,
@@ -547,6 +564,7 @@ impl<const OWNED: bool> RectIsOwned<OWNED> {
             RectIsOwned(ffi::wxRect_new3(pos, size))
         }
     }
+    /// Creates a wxRect object from size values at the origin.
     pub fn new_with_size<S: SizeMethods>(size: &S) -> RectIsOwned<OWNED> {
         unsafe {
             let size = size.as_ptr();
@@ -582,12 +600,15 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> RegionIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new() -> RegionIsOwned<OWNED> {
         unsafe { RegionIsOwned(ffi::wxRegion_new()) }
     }
+    /// Constructs a rectangular region with the given position and size.
     pub fn new_with_coord(x: c_int, y: c_int, width: c_int, height: c_int) -> RegionIsOwned<OWNED> {
         unsafe { RegionIsOwned(ffi::wxRegion_new1(x, y, width, height)) }
     }
+    /// Constructs a rectangular region from the top left point and the bottom right point.
     pub fn new_with_point<P: PointMethods, P2: PointMethods>(
         top_left: &P,
         bottom_right: &P2,
@@ -598,12 +619,14 @@ impl<const OWNED: bool> RegionIsOwned<OWNED> {
             RegionIsOwned(ffi::wxRegion_new2(top_left, bottom_right))
         }
     }
+    /// Constructs a rectangular region a wxRect object.
     pub fn new_with_rect<R: RectMethods>(rect: &R) -> RegionIsOwned<OWNED> {
         unsafe {
             let rect = rect.as_ptr();
             RegionIsOwned(ffi::wxRegion_new3(rect))
         }
     }
+    /// Copy constructor, uses Reference Counting.
     pub fn new_with_region<R: RegionMethods>(region: &R) -> RegionIsOwned<OWNED> {
         unsafe {
             let region = region.as_ptr();
@@ -611,12 +634,14 @@ impl<const OWNED: bool> RegionIsOwned<OWNED> {
         }
     }
     // NOT_SUPPORTED: fn wxRegion5()
+    /// Constructs a region using a bitmap.
     pub fn new_with_bitmap<B: BitmapMethods>(bmp: &B) -> RegionIsOwned<OWNED> {
         unsafe {
             let bmp = bmp.as_ptr();
             RegionIsOwned(ffi::wxRegion_new6(bmp))
         }
     }
+    /// Constructs a region using the non-transparent pixels of a bitmap.
     pub fn new_with_bitmap_colour<B: BitmapMethods, C: ColourMethods>(
         bmp: &B,
         trans_colour: &C,
@@ -671,9 +696,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> RegionIteratorIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new() -> RegionIteratorIsOwned<OWNED> {
         unsafe { RegionIteratorIsOwned(ffi::wxRegionIterator_new()) }
     }
+    /// Creates an iterator object given a region.
     pub fn new_with_region<R: RegionMethods>(region: &R) -> RegionIteratorIsOwned<OWNED> {
         unsafe {
             let region = region.as_ptr();
@@ -744,6 +771,7 @@ wxwidgets! {
         RichToolTipMethods
 }
 impl<const OWNED: bool> RichToolTipIsOwned<OWNED> {
+    /// Constructor must specify the tooltip title and main message.
     pub fn new(title: &str, message: &str) -> RichToolTipIsOwned<OWNED> {
         unsafe {
             let title = WxString::from(title);

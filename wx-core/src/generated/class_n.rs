@@ -157,9 +157,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> NotebookIsOwned<OWNED> {
+    /// Constructs a notebook control.
     pub fn new_2step() -> NotebookIsOwned<OWNED> {
         unsafe { NotebookIsOwned(ffi::wxNotebook_new()) }
     }
+    /// Constructs a notebook control.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -220,6 +222,7 @@ impl<const OWNED: bool> DynamicCast for NotebookIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> WindowMethods for NotebookIsOwned<OWNED> {
+    /// Creates a notebook control.
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -259,9 +262,11 @@ impl<const OWNED: bool> NotificationMessageIsOwned<OWNED> {
     pub const Timeout_Auto: c_int = -1;
     pub const Timeout_Never: c_int = 0;
 
+    /// Default constructor, use SetParent(), SetTitle() and SetMessage() to initialize the object before showing it.
     pub fn new() -> NotificationMessageIsOwned<OWNED> {
         unsafe { NotificationMessageIsOwned(ffi::wxNotificationMessage_new()) }
     }
+    /// Create a notification object with the given attributes.
     pub fn new_with_str<W: WindowMethods>(
         title: &str,
         message: &str,
@@ -374,9 +379,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> NumberEntryDialogIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> NumberEntryDialogIsOwned<OWNED> {
         unsafe { NumberEntryDialogIsOwned(ffi::wxNumberEntryDialog_new()) }
     }
+    /// Constructor.
     pub fn new<W: WindowMethods, P: PointMethods>(
         parent: Option<&W>,
         message: &str,

@@ -11,6 +11,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> LayoutAlgorithmIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new() -> LayoutAlgorithmIsOwned<OWNED> {
         unsafe { LayoutAlgorithmIsOwned(ffi::wxLayoutAlgorithm_new()) }
     }
@@ -55,10 +56,12 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ListBoxIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> ListBoxIsOwned<OWNED> {
         unsafe { ListBoxIsOwned(ffi::wxListBox_new()) }
     }
     // NOT_SUPPORTED: fn wxListBox1()
+    /// Constructor, creating and showing a list box.
     pub fn new<
         W: WindowMethods,
         P: PointMethods,
@@ -151,9 +154,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ListCtrlIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> ListCtrlIsOwned<OWNED> {
         unsafe { ListCtrlIsOwned(ffi::wxListCtrl_new()) }
     }
+    /// Constructor, creating and showing a list control.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -213,6 +218,7 @@ impl<const OWNED: bool> DynamicCast for ListCtrlIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> ControlMethods for ListCtrlIsOwned<OWNED> {
+    /// Creates the list control.
     fn create_validator<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
         parent: Option<&W>,
@@ -306,6 +312,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ListItemIsOwned<OWNED> {
+    /// Constructor.
     pub fn new() -> ListItemIsOwned<OWNED> {
         unsafe { ListItemIsOwned(ffi::wxListItem_new()) }
     }
@@ -351,9 +358,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ListViewIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> ListViewIsOwned<OWNED> {
         unsafe { ListViewIsOwned(ffi::wxListView_new()) }
     }
+    /// Constructor, creating and showing a listview control.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         winid: c_int,
@@ -433,9 +442,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ListbookIsOwned<OWNED> {
+    /// Default ctor.
     pub fn new_2step() -> ListbookIsOwned<OWNED> {
         unsafe { ListbookIsOwned(ffi::wxListbook_new()) }
     }
+    /// Constructs a listbook control.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -496,6 +507,7 @@ impl<const OWNED: bool> DynamicCast for ListbookIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> WindowMethods for ListbookIsOwned<OWNED> {
+    /// Create the list book control that has already been constructed with the default constructor.
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,

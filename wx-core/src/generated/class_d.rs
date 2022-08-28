@@ -48,6 +48,7 @@ wxwidgets! {
         DCBrushChangerMethods
 }
 impl<const OWNED: bool> DCBrushChangerIsOwned<OWNED> {
+    /// Sets brush on the given dc, storing the old one.
     pub fn new<D: DCMethods, B: BrushMethods>(dc: &D, brush: &B) -> DCBrushChangerIsOwned<OWNED> {
         unsafe {
             let dc = dc.as_ptr();
@@ -82,6 +83,7 @@ wxwidgets! {
         DCClipperMethods
 }
 impl<const OWNED: bool> DCClipperIsOwned<OWNED> {
+    /// Sets the clipping region to the specified region/coordinates.
     pub fn new_with_region<D: DCMethods, R: RegionMethods>(
         dc: &D,
         region: &R,
@@ -141,12 +143,14 @@ wxwidgets! {
         DCFontChangerMethods
 }
 impl<const OWNED: bool> DCFontChangerIsOwned<OWNED> {
+    /// Trivial constructor not changing anything.
     pub fn new<D: DCMethods>(dc: &D) -> DCFontChangerIsOwned<OWNED> {
         unsafe {
             let dc = dc.as_ptr();
             DCFontChangerIsOwned(ffi::wxDCFontChanger_new(dc))
         }
     }
+    /// Sets font on the given dc, storing the old one.
     pub fn new_with_font<D: DCMethods, F: FontMethods>(
         dc: &D,
         font: &F,
@@ -184,6 +188,7 @@ wxwidgets! {
         DCOverlayMethods
 }
 impl<const OWNED: bool> DCOverlayIsOwned<OWNED> {
+    /// Connects this overlay to the corresponding drawing dc, if the overlay is not initialized yet this call will do so.
     pub fn new_with_int<O: OverlayMethods, D: DCMethods>(
         overlay: &O,
         dc: Option<&D>,
@@ -201,6 +206,7 @@ impl<const OWNED: bool> DCOverlayIsOwned<OWNED> {
             DCOverlayIsOwned(ffi::wxDCOverlay_new(overlay, dc, x, y, width, height))
         }
     }
+    /// Convenience wrapper that behaves the same using the entire area of the dc.
     pub fn new<O: OverlayMethods, D: DCMethods>(
         overlay: &O,
         dc: Option<&D>,
@@ -241,6 +247,7 @@ wxwidgets! {
         DCPenChangerMethods
 }
 impl<const OWNED: bool> DCPenChangerIsOwned<OWNED> {
+    /// Sets pen on the given dc, storing the old one.
     pub fn new<D: DCMethods, P: PenMethods>(dc: &D, pen: &P) -> DCPenChangerIsOwned<OWNED> {
         unsafe {
             let dc = dc.as_ptr();
@@ -275,12 +282,14 @@ wxwidgets! {
         DCTextColourChangerMethods
 }
 impl<const OWNED: bool> DCTextColourChangerIsOwned<OWNED> {
+    /// Trivial constructor not changing anything.
     pub fn new<D: DCMethods>(dc: &D) -> DCTextColourChangerIsOwned<OWNED> {
         unsafe {
             let dc = dc.as_ptr();
             DCTextColourChangerIsOwned(ffi::wxDCTextColourChanger_new(dc))
         }
     }
+    /// Sets col on the given dc, storing the old one.
     pub fn new_with_colour<D: DCMethods, C: ColourMethods>(
         dc: &D,
         col: &C,
@@ -319,6 +328,7 @@ wxwidgets! {
 }
 impl<const OWNED: bool> DataFormatIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxDataFormat()
+    /// Constructs a data format object for a custom format identified by its name format.
     pub fn new(format: &str) -> DataFormatIsOwned<OWNED> {
         unsafe {
             let format = WxString::from(format);
@@ -387,6 +397,7 @@ wxwidgets! {
         DataObjectMethods
 }
 impl<const OWNED: bool> DataObjectCompositeIsOwned<OWNED> {
+    /// The default constructor.
     pub fn new() -> DataObjectCompositeIsOwned<OWNED> {
         unsafe { DataObjectCompositeIsOwned(ffi::wxDataObjectComposite_new()) }
     }
@@ -423,6 +434,7 @@ wxwidgets! {
         DataObjectMethods
 }
 impl<const OWNED: bool> DataObjectSimpleIsOwned<OWNED> {
+    /// Constructor accepts the supported format (none by default) which may also be set later with SetFormat().
     pub fn new<D: DataFormatMethods>(format: &D) -> DataObjectSimpleIsOwned<OWNED> {
         unsafe {
             let format = format.as_ptr();
@@ -612,6 +624,7 @@ wxwidgets! {
         HeaderColumnMethods
 }
 impl<const OWNED: bool> DataViewColumnIsOwned<OWNED> {
+    /// Constructs a text column.
     pub fn new_with_str<D: DataViewRendererMethods>(
         title: &str,
         renderer: Option<&D>,
@@ -637,6 +650,7 @@ impl<const OWNED: bool> DataViewColumnIsOwned<OWNED> {
             ))
         }
     }
+    /// Constructs a bitmap column.
     pub fn new_with_bitmapbundle<B: BitmapBundleMethods, D: DataViewRendererMethods>(
         bitmap: &B,
         renderer: Option<&D>,
@@ -702,9 +716,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> DataViewCtrlIsOwned<OWNED> {
+    /// Default Constructor.
     pub fn new_2step() -> DataViewCtrlIsOwned<OWNED> {
         unsafe { DataViewCtrlIsOwned(ffi::wxDataViewCtrl_new()) }
     }
+    /// Constructor.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -764,6 +780,7 @@ impl<const OWNED: bool> DynamicCast for DataViewCtrlIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> ControlMethods for DataViewCtrlIsOwned<OWNED> {
+    /// Create the control.
     fn create_validator<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
         parent: Option<&W>,
@@ -897,11 +914,13 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> DataViewEventIsOwned<OWNED> {
+    /// Default ctor, normally shouldn't be used and mostly exists only for backwards compatibility.
     pub fn new() -> DataViewEventIsOwned<OWNED> {
         unsafe { DataViewEventIsOwned(ffi::wxDataViewEvent_new()) }
     }
     // NOT_SUPPORTED: fn wxDataViewEvent1()
     // NOT_SUPPORTED: fn wxDataViewEvent2()
+    /// Copy constructor.
     pub fn new_with_dataviewevent<D: DataViewEventMethods>(
         event: &D,
     ) -> DataViewEventIsOwned<OWNED> {
@@ -963,6 +982,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> DataViewIconTextIsOwned<OWNED> {
+    /// Constructor.
     pub fn new_with_str<B: BitmapBundleMethods>(
         text: &str,
         bitmap: &B,
@@ -1114,6 +1134,7 @@ wxwidgets! {
         DataViewItemMethods
 }
 impl<const OWNED: bool> DataViewItemIsOwned<OWNED> {
+    /// Constructor.
     pub fn new() -> DataViewItemIsOwned<OWNED> {
         unsafe { DataViewItemIsOwned(ffi::wxDataViewItem_new()) }
     }
@@ -1153,6 +1174,7 @@ wxwidgets! {
         DataViewItemAttrMethods
 }
 impl<const OWNED: bool> DataViewItemAttrIsOwned<OWNED> {
+    /// Constructor.
     pub fn new() -> DataViewItemAttrIsOwned<OWNED> {
         unsafe { DataViewItemAttrIsOwned(ffi::wxDataViewItemAttr_new()) }
     }
@@ -1188,9 +1210,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> DataViewListCtrlIsOwned<OWNED> {
+    /// Default ctor.
     pub fn new_2step() -> DataViewListCtrlIsOwned<OWNED> {
         unsafe { DataViewListCtrlIsOwned(ffi::wxDataViewListCtrl_new()) }
     }
+    /// Constructor.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -1305,6 +1329,7 @@ wxwidgets! {
         RefCounterMethods
 }
 impl<const OWNED: bool> DataViewListStoreIsOwned<OWNED> {
+    /// Constructor.
     pub fn new() -> DataViewListStoreIsOwned<OWNED> {
         unsafe { DataViewListStoreIsOwned(ffi::wxDataViewListStore_new()) }
     }
@@ -1659,9 +1684,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> DataViewTreeCtrlIsOwned<OWNED> {
+    /// Default ctor.
     pub fn new_2step() -> DataViewTreeCtrlIsOwned<OWNED> {
         unsafe { DataViewTreeCtrlIsOwned(ffi::wxDataViewTreeCtrl_new()) }
     }
+    /// Constructor.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -1735,6 +1762,7 @@ wxwidgets! {
         RefCounterMethods
 }
 impl<const OWNED: bool> DataViewTreeStoreIsOwned<OWNED> {
+    /// Constructor.
     pub fn new() -> DataViewTreeStoreIsOwned<OWNED> {
         unsafe { DataViewTreeStoreIsOwned(ffi::wxDataViewTreeStore_new()) }
     }
@@ -1883,9 +1911,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> DatePickerCtrlIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> DatePickerCtrlIsOwned<OWNED> {
         unsafe { DatePickerCtrlIsOwned(ffi::wxDatePickerCtrl_new()) }
     }
+    /// Initializes the object and calls Create() with all the parameters.
     pub fn new<
         W: WindowMethods,
         D: DateTimeMethods,
@@ -1964,9 +1994,11 @@ wxwidgets! {
         RendererNativeMethods
 }
 impl<const OWNED: bool> DelegateRendererNativeIsOwned<OWNED> {
+    /// The default constructor does the same thing as the other one except that it uses the generic renderer instead of the user-specified rendererNative.
     pub fn new() -> DelegateRendererNativeIsOwned<OWNED> {
         unsafe { DelegateRendererNativeIsOwned(ffi::wxDelegateRendererNative_new()) }
     }
+    /// This constructor uses the user-specified rendererNative to set up the delegate renderer object to follow all calls to the specified real renderer.
     pub fn new_with_renderernative<R: RendererNativeMethods>(
         renderer_native: &R,
     ) -> DelegateRendererNativeIsOwned<OWNED> {
@@ -2014,9 +2046,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> DialogIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> DialogIsOwned<OWNED> {
         unsafe { DialogIsOwned(ffi::wxDialog_new()) }
     }
+    /// Constructor.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -2082,6 +2116,7 @@ impl<const OWNED: bool> DynamicCast for DialogIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> TopLevelWindowMethods for DialogIsOwned<OWNED> {
+    /// Used for two-step dialog box construction.
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -2106,6 +2141,7 @@ impl<const OWNED: bool> TopLevelWindowMethods for DialogIsOwned<OWNED> {
             ffi::wxDialog_Create(self.as_ptr(), parent, id, title, pos, size, style, name)
         }
     }
+    /// Sets the icon for this dialog.
     fn set_icon<I: IconMethods>(&self, icon: &I) {
         unsafe {
             let icon = icon.as_ptr();
@@ -2114,6 +2150,7 @@ impl<const OWNED: bool> TopLevelWindowMethods for DialogIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> WindowMethods for DialogIsOwned<OWNED> {
+    /// Centres the dialog box on the display.
     fn centre(&self, direction: c_int) {
         unsafe { ffi::wxDialog_Centre(self.as_ptr(), direction) }
     }
@@ -2163,6 +2200,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> DirDialogIsOwned<OWNED> {
+    /// Constructor.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         message: &str,
@@ -2259,6 +2297,7 @@ impl<const OWNED: bool> DirPickerCtrlIsOwned<OWNED> {
     pub fn new_2step() -> DirPickerCtrlIsOwned<OWNED> {
         unsafe { DirPickerCtrlIsOwned(ffi::wxDirPickerCtrl_new()) }
     }
+    /// Initializes the object and calls Create() with all the parameters.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -2339,12 +2378,15 @@ wxwidgets! {
         DisplayMethods
 }
 impl<const OWNED: bool> DisplayIsOwned<OWNED> {
+    /// Default constructor creating wxDisplay object representing the primary display.
     pub fn new() -> DisplayIsOwned<OWNED> {
         unsafe { DisplayIsOwned(ffi::wxDisplay_new()) }
     }
+    /// Constructor, setting up a wxDisplay instance with the specified display.
     pub fn new_with_uint(index: c_uint) -> DisplayIsOwned<OWNED> {
         unsafe { DisplayIsOwned(ffi::wxDisplay_new1(index)) }
     }
+    /// Constructor creating the display object associated with the given window.
     pub fn new_with_window<W: WindowMethods>(window: Option<&W>) -> DisplayIsOwned<OWNED> {
         unsafe {
             let window = match window {
@@ -2429,9 +2471,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> DragImageIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new() -> DragImageIsOwned<OWNED> {
         unsafe { DragImageIsOwned(ffi::wxDragImage_new()) }
     }
+    /// Constructs a drag image from a bitmap and optional cursor.
     pub fn new_with_bitmap<B: BitmapMethods, C: CursorMethods>(
         image: &B,
         cursor: &C,
@@ -2442,6 +2486,7 @@ impl<const OWNED: bool> DragImageIsOwned<OWNED> {
             DragImageIsOwned(ffi::wxDragImage_new1(image, cursor))
         }
     }
+    /// Constructs a drag image from an icon and optional cursor.
     pub fn new_with_icon<I: IconMethods, C: CursorMethods>(
         image: &I,
         cursor: &C,
@@ -2452,6 +2497,7 @@ impl<const OWNED: bool> DragImageIsOwned<OWNED> {
             DragImageIsOwned(ffi::wxDragImage_new2(image, cursor))
         }
     }
+    /// Constructs a drag image from a text string and optional cursor.
     pub fn new_with_str<C: CursorMethods>(text: &str, cursor: &C) -> DragImageIsOwned<OWNED> {
         unsafe {
             let text = WxString::from(text);
@@ -2460,6 +2506,7 @@ impl<const OWNED: bool> DragImageIsOwned<OWNED> {
             DragImageIsOwned(ffi::wxDragImage_new3(text, cursor))
         }
     }
+    /// Constructs a drag image from the text in the given tree control item, and optional cursor.
     pub fn new_with_treectrl<T: TreeCtrlMethods, T2: TreeItemIdMethods>(
         tree_ctrl: &T,
         id: &T2,
@@ -2470,6 +2517,7 @@ impl<const OWNED: bool> DragImageIsOwned<OWNED> {
             DragImageIsOwned(ffi::wxDragImage_new4(tree_ctrl, id))
         }
     }
+    /// Constructs a drag image from the text in the given list control item, and optional cursor.
     pub fn new_with_listctrl<L: ListCtrlMethods>(
         list_ctrl: &L,
         id: c_long,
@@ -2561,6 +2609,7 @@ wxwidgets! {
         DropSourceMethods
 }
 impl<const OWNED: bool> DropSourceIsOwned<OWNED> {
+    /// This constructor requires that you must call SetData() later.
     pub fn new_with_window_cursor<
         W: WindowMethods,
         C: CursorMethods,
@@ -2583,6 +2632,7 @@ impl<const OWNED: bool> DropSourceIsOwned<OWNED> {
             DropSourceIsOwned(ffi::wxDropSource_new(win, icon_copy, icon_move, icon_none))
         }
     }
+    /// The constructor taking a wxDataObject.
     pub fn new_with_dataobject_cursor<
         D: DataObjectMethods,
         W: WindowMethods,
@@ -2610,6 +2660,7 @@ impl<const OWNED: bool> DropSourceIsOwned<OWNED> {
             ))
         }
     }
+    /// This constructor requires that you must call SetData() later.
     pub fn new_with_window_icon<
         W: WindowMethods,
         I: IconMethods,
@@ -2632,6 +2683,7 @@ impl<const OWNED: bool> DropSourceIsOwned<OWNED> {
             DropSourceIsOwned(ffi::wxDropSource_new2(win, icon_copy, icon_move, icon_none))
         }
     }
+    /// The constructor taking a wxDataObject.
     pub fn new_with_dataobject_icon<
         D: DataObjectMethods,
         W: WindowMethods,

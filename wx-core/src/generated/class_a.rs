@@ -10,6 +10,7 @@ wxwidgets! {
         AboutDialogInfoMethods
 }
 impl<const OWNED: bool> AboutDialogInfoIsOwned<OWNED> {
+    /// Default constructor leaves all fields are initially uninitialized, in general you should call at least SetVersion(), SetCopyright() and SetDescription().
     pub fn new() -> AboutDialogInfoIsOwned<OWNED> {
         unsafe { AboutDialogInfoIsOwned(ffi::wxAboutDialogInfo_new()) }
     }
@@ -40,6 +41,7 @@ wxwidgets! {
         AcceleratorEntryMethods
 }
 impl<const OWNED: bool> AcceleratorEntryIsOwned<OWNED> {
+    /// Constructor.
     pub fn new_with_int<M: MenuItemMethods>(
         flags: c_int,
         key_code: c_int,
@@ -54,6 +56,7 @@ impl<const OWNED: bool> AcceleratorEntryIsOwned<OWNED> {
             AcceleratorEntryIsOwned(ffi::wxAcceleratorEntry_new(flags, key_code, cmd, item))
         }
     }
+    /// Copy ctor.
     pub fn new_with_acceleratorentry<A: AcceleratorEntryMethods>(
         entry: &A,
     ) -> AcceleratorEntryIsOwned<OWNED> {
@@ -90,6 +93,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> AcceleratorTableIsOwned<OWNED> {
+    /// Default ctor.
     pub fn new() -> AcceleratorTableIsOwned<OWNED> {
         unsafe { AcceleratorTableIsOwned(ffi::wxAcceleratorTable_new()) }
     }
@@ -182,6 +186,7 @@ wxwidgets! {
         // AffineMatrix2DBaseMethods
 }
 impl<const OWNED: bool> AffineMatrix2DIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new() -> AffineMatrix2DIsOwned<OWNED> {
         unsafe { AffineMatrix2DIsOwned(ffi::wxAffineMatrix2D_new()) }
     }
@@ -209,6 +214,7 @@ impl<const OWNED: bool> Drop for AffineMatrix2DIsOwned<OWNED> {
 impl<const OWNED: bool> AffineMatrix2DBaseMethods for AffineMatrix2DIsOwned<OWNED> {
     // BLOCKED: fn operator==()
     // BLOCKED: fn operator!=()
+    /// Add mirroring to this matrix.
     fn mirror(&self, direction: c_int) {
         unsafe { ffi::wxAffineMatrix2D_Mirror(self.as_ptr(), direction) }
     }
@@ -264,6 +270,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> AnimationCtrlIsOwned<OWNED> {
+    /// Initializes the object and calls Create() with all the parameters.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -427,6 +434,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> AutoBufferedPaintDCIsOwned<OWNED> {
+    /// Constructor.
     pub fn new<W: WindowMethods>(window: Option<&W>) -> AutoBufferedPaintDCIsOwned<OWNED> {
         unsafe {
             let window = match window {

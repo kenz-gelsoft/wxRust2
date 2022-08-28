@@ -17,6 +17,7 @@ impl<const OWNED: bool> FileCtrlIsOwned<OWNED> {
     pub fn new_2step() -> FileCtrlIsOwned<OWNED> {
         unsafe { FileCtrlIsOwned(ffi::wxFileCtrl_new()) }
     }
+    /// Constructs the window.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -154,6 +155,7 @@ wxwidgets! {
         DataObjectMethods
 }
 impl<const OWNED: bool> FileDataObjectIsOwned<OWNED> {
+    /// Constructor.
     pub fn new() -> FileDataObjectIsOwned<OWNED> {
         unsafe { FileDataObjectIsOwned(ffi::wxFileDataObject_new()) }
     }
@@ -200,6 +202,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> FileDialogIsOwned<OWNED> {
+    /// Constructor.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         message: &str,
@@ -385,6 +388,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> FileHistoryIsOwned<OWNED> {
+    /// Constructor.
     pub fn new(max_files: usize, id_base: c_int) -> FileHistoryIsOwned<OWNED> {
         unsafe { FileHistoryIsOwned(ffi::wxFileHistory_new(max_files, id_base)) }
     }
@@ -433,6 +437,7 @@ impl<const OWNED: bool> FilePickerCtrlIsOwned<OWNED> {
     pub fn new_2step() -> FilePickerCtrlIsOwned<OWNED> {
         unsafe { FilePickerCtrlIsOwned(ffi::wxFilePickerCtrl_new()) }
     }
+    /// Initializes the object and calls Create() with all the parameters.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -615,6 +620,7 @@ impl<const OWNED: bool> FindReplaceDialogIsOwned<OWNED> {
     pub fn new_2step() -> FindReplaceDialogIsOwned<OWNED> {
         unsafe { FindReplaceDialogIsOwned(ffi::wxFindReplaceDialog_new()) }
     }
+    /// After using default constructor Create() must be called.
     pub fn new<W: WindowMethods, F: FindReplaceDataMethods>(
         parent: Option<&W>,
         data: Option<&F>,
@@ -693,6 +699,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> FlexGridSizerIsOwned<OWNED> {
+    /// wxFlexGridSizer constructors.
     pub fn new_with_int_int(cols: c_int, vgap: c_int, hgap: c_int) -> FlexGridSizerIsOwned<OWNED> {
         unsafe { FlexGridSizerIsOwned(ffi::wxFlexGridSizer_new(cols, vgap, hgap)) }
     }
@@ -807,20 +814,24 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> FontIsOwned<OWNED> {
+    /// Default ctor.
     pub fn new() -> FontIsOwned<OWNED> {
         unsafe { FontIsOwned(ffi::wxFont_new()) }
     }
+    /// Copy constructor, uses reference counting.
     pub fn new_with_font<F: FontMethods>(font: &F) -> FontIsOwned<OWNED> {
         unsafe {
             let font = font.as_ptr();
             FontIsOwned(ffi::wxFont_new1(font))
         }
     }
+    /// Creates a font object using the specified font description.
     pub fn new_with_fontinfo(font_info: *const c_void) -> FontIsOwned<OWNED> {
         unsafe { FontIsOwned(ffi::wxFont_new2(font_info)) }
     }
     // NOT_SUPPORTED: fn wxFont3()
     // NOT_SUPPORTED: fn wxFont4()
+    /// Constructor from font description string.
     pub fn new_with_str(native_info_string: &str) -> FontIsOwned<OWNED> {
         unsafe {
             let native_info_string = WxString::from(native_info_string);
@@ -828,6 +839,7 @@ impl<const OWNED: bool> FontIsOwned<OWNED> {
             FontIsOwned(ffi::wxFont_new5(native_info_string))
         }
     }
+    /// Construct font from a native font info structure.
     pub fn new_with_nativefontinfo<N: NativeFontInfoMethods>(
         native_info: &N,
     ) -> FontIsOwned<OWNED> {
@@ -879,6 +891,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> FontDataIsOwned<OWNED> {
+    /// Constructor.
     pub fn new() -> FontDataIsOwned<OWNED> {
         unsafe { FontDataIsOwned(ffi::wxFontData_new()) }
     }
@@ -925,10 +938,12 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> FontDialogIsOwned<OWNED> {
+    /// Default ctor.
     pub fn new_2step() -> FontDialogIsOwned<OWNED> {
         unsafe { FontDialogIsOwned(ffi::wxFontDialog_new()) }
     }
     // BLOCKED: fn wxFontDialog1()
+    /// Constructor.
     pub fn new<W: WindowMethods, F: FontDataMethods>(
         parent: Option<&W>,
         data: &F,
@@ -1027,6 +1042,7 @@ wxwidgets! {
         FontListMethods
 }
 impl<const OWNED: bool> FontListIsOwned<OWNED> {
+    /// Constructor.
     pub fn new() -> FontListIsOwned<OWNED> {
         unsafe { FontListIsOwned(ffi::wxFontList_new()) }
     }
@@ -1057,6 +1073,7 @@ wxwidgets! {
         FontMapperMethods
 }
 impl<const OWNED: bool> FontMapperIsOwned<OWNED> {
+    /// Default ctor.
     pub fn new() -> FontMapperIsOwned<OWNED> {
         unsafe { FontMapperIsOwned(ffi::wxFontMapper_new()) }
     }
@@ -1095,6 +1112,7 @@ impl<const OWNED: bool> FontPickerCtrlIsOwned<OWNED> {
     pub fn new_2step() -> FontPickerCtrlIsOwned<OWNED> {
         unsafe { FontPickerCtrlIsOwned(ffi::wxFontPickerCtrl_new()) }
     }
+    /// Initializes the object and calls Create() with all the parameters.
     pub fn new<
         W: WindowMethods,
         F: FontMethods,
@@ -1180,6 +1198,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> FontPickerEventIsOwned<OWNED> {
+    /// The constructor is not normally used by the user code.
     pub fn new<O: ObjectMethods, F: FontMethods>(
         generator: Option<&O>,
         id: c_int,
@@ -1246,9 +1265,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> FrameIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> FrameIsOwned<OWNED> {
         unsafe { FrameIsOwned(ffi::wxFrame_new()) }
     }
+    /// Constructor, creating the window.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -1312,6 +1333,7 @@ impl<const OWNED: bool> DynamicCast for FrameIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> TopLevelWindowMethods for FrameIsOwned<OWNED> {
+    /// Used in two-step frame construction.
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -1338,6 +1360,7 @@ impl<const OWNED: bool> TopLevelWindowMethods for FrameIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> WindowMethods for FrameIsOwned<OWNED> {
+    /// Centres the frame on the display.
     fn centre(&self, direction: c_int) {
         unsafe { ffi::wxFrame_Centre(self.as_ptr(), direction) }
     }

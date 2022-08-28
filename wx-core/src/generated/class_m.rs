@@ -11,21 +11,25 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> MaskIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new() -> MaskIsOwned<OWNED> {
         unsafe { MaskIsOwned(ffi::wxMask_new()) }
     }
+    /// Constructs a mask from a bitmap and a palette index that indicates the background.
     pub fn new_with_bitmap_int<B: BitmapMethods>(bitmap: &B, index: c_int) -> MaskIsOwned<OWNED> {
         unsafe {
             let bitmap = bitmap.as_ptr();
             MaskIsOwned(ffi::wxMask_new1(bitmap, index))
         }
     }
+    /// Constructs a mask from a monochrome bitmap.
     pub fn new_with_bitmap<B: BitmapMethods>(bitmap: &B) -> MaskIsOwned<OWNED> {
         unsafe {
             let bitmap = bitmap.as_ptr();
             MaskIsOwned(ffi::wxMask_new2(bitmap))
         }
     }
+    /// Constructs a mask from a bitmap and a colour that indicates the background.
     pub fn new_with_bitmap_colour<B: BitmapMethods, C: ColourMethods>(
         bitmap: &B,
         colour: &C,
@@ -75,6 +79,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> MaximizeEventIsOwned<OWNED> {
+    /// Constructor.
     pub fn new(id: c_int) -> MaximizeEventIsOwned<OWNED> {
         unsafe { MaximizeEventIsOwned(ffi::wxMaximizeEvent_new(id)) }
     }
@@ -122,9 +127,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> MemoryDCIsOwned<OWNED> {
+    /// Constructs a new memory device context.
     pub fn new() -> MemoryDCIsOwned<OWNED> {
         unsafe { MemoryDCIsOwned(ffi::wxMemoryDC_new()) }
     }
+    /// Constructs a new memory device context having the same characteristics as the given existing device context.
     pub fn new_with_dc<D: DCMethods>(dc: Option<&D>) -> MemoryDCIsOwned<OWNED> {
         unsafe {
             let dc = match dc {
@@ -134,6 +141,7 @@ impl<const OWNED: bool> MemoryDCIsOwned<OWNED> {
             MemoryDCIsOwned(ffi::wxMemoryDC_new1(dc))
         }
     }
+    /// Constructs a new memory device context and calls SelectObject() with the given bitmap.
     pub fn new_with_bitmap<B: BitmapMethods>(bitmap: &B) -> MemoryDCIsOwned<OWNED> {
         unsafe {
             let bitmap = bitmap.as_ptr();
@@ -184,12 +192,15 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> MenuIsOwned<OWNED> {
+    /// Constructs a wxMenu object.
     pub fn new() -> MenuIsOwned<OWNED> {
         unsafe { MenuIsOwned(ffi::wxMenu_new()) }
     }
+    /// Constructs a wxMenu object.
     pub fn new_with_long(style: c_long) -> MenuIsOwned<OWNED> {
         unsafe { MenuIsOwned(ffi::wxMenu_new1(style)) }
     }
+    /// Constructs a wxMenu object with a title.
     pub fn new_with_str(title: &str, style: c_long) -> MenuIsOwned<OWNED> {
         unsafe {
             let title = WxString::from(title);
@@ -235,6 +246,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> MenuBarIsOwned<OWNED> {
+    /// Construct an empty menu bar.
     pub fn new(style: c_long) -> MenuBarIsOwned<OWNED> {
         unsafe { MenuBarIsOwned(ffi::wxMenuBar_new(style)) }
     }
@@ -325,6 +337,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> MenuItemIsOwned<OWNED> {
+    /// Constructs a wxMenuItem object.
     pub fn new<M: MenuMethods, M2: MenuMethods>(
         parent_menu: Option<&M>,
         id: c_int,
@@ -399,6 +412,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> MessageDialogIsOwned<OWNED> {
+    /// Constructor specifying the message box properties.
     pub fn new<W: WindowMethods, P: PointMethods>(
         parent: Option<&W>,
         message: &str,
@@ -477,6 +491,7 @@ wxwidgets! {
         MessageOutputMethods
 }
 impl<const OWNED: bool> MessageOutputMessageBoxIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new() -> MessageOutputMessageBoxIsOwned<OWNED> {
         unsafe { MessageOutputMessageBoxIsOwned(ffi::wxMessageOutputMessageBox_new()) }
     }
@@ -520,9 +535,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> MiniFrameIsOwned<OWNED> {
+    /// Default ctor.
     pub fn new_2step() -> MiniFrameIsOwned<OWNED> {
         unsafe { MiniFrameIsOwned(ffi::wxMiniFrame_new()) }
     }
+    /// Constructor, creating the window.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -593,6 +610,7 @@ impl<const OWNED: bool> DynamicCast for MiniFrameIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> TopLevelWindowMethods for MiniFrameIsOwned<OWNED> {
+    /// Used in two-step frame construction.
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -631,6 +649,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> MirrorDCIsOwned<OWNED> {
+    /// Creates a (maybe) mirrored DC associated with the real dc.
     pub fn new<D: DCMethods>(dc: &D, mirror: bool) -> MirrorDCIsOwned<OWNED> {
         unsafe {
             let dc = dc.as_ptr();
@@ -681,6 +700,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> MouseCaptureChangedEventIsOwned<OWNED> {
+    /// Constructor.
     pub fn new<W: WindowMethods>(
         window_id: c_int,
         gained_capture: Option<&W>,
@@ -740,6 +760,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> MouseCaptureLostEventIsOwned<OWNED> {
+    /// Constructor.
     pub fn new(window_id: c_int) -> MouseCaptureLostEventIsOwned<OWNED> {
         unsafe { MouseCaptureLostEventIsOwned(ffi::wxMouseCaptureLostEvent_new(window_id)) }
     }
@@ -871,6 +892,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> MoveEventIsOwned<OWNED> {
+    /// Constructor.
     pub fn new<P: PointMethods>(pt: &P, id: c_int) -> MoveEventIsOwned<OWNED> {
         unsafe {
             let pt = pt.as_ptr();

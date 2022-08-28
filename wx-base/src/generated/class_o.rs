@@ -10,9 +10,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ObjectIsOwned<OWNED> {
+    /// Default ctor; initializes to NULL the internal reference data.
     pub fn new() -> ObjectIsOwned<OWNED> {
         unsafe { ObjectIsOwned(ffi::wxObject_new()) }
     }
+    /// Copy ctor.
     pub fn new_with_object<O: ObjectMethods>(other: &O) -> ObjectIsOwned<OWNED> {
         unsafe {
             let other = other.as_ptr();

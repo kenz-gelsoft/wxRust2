@@ -12,6 +12,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> JPEGHandlerIsOwned<OWNED> {
+    /// Default constructor for wxJPEGHandler.
     pub fn new() -> JPEGHandlerIsOwned<OWNED> {
         unsafe { JPEGHandlerIsOwned(ffi::wxJPEGHandler_new()) }
     }

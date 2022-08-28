@@ -10,6 +10,7 @@ wxwidgets! {
         RefCounterMethods
 }
 impl<const OWNED: bool> RefCounterIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new() -> RefCounterIsOwned<OWNED> {
         unsafe { RefCounterIsOwned(ffi::wxRefCounter_new()) }
     }

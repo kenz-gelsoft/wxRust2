@@ -51,6 +51,7 @@ impl<const OWNED: bool> DynamicCast for HScrolledWindowIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> WindowMethods for HScrolledWindowIsOwned<OWNED> {
+    /// Same as the non-default constructor, but returns a status code: true if ok, false if the window couldn't be created.
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -86,6 +87,7 @@ wxwidgets! {
         DataObjectMethods
 }
 impl<const OWNED: bool> HTMLDataObjectIsOwned<OWNED> {
+    /// Constructor.
     pub fn new(html: &str) -> HTMLDataObjectIsOwned<OWNED> {
         unsafe {
             let html = WxString::from(html);
@@ -171,6 +173,7 @@ impl<const OWNED: bool> DynamicCast for HVScrolledWindowIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> WindowMethods for HVScrolledWindowIsOwned<OWNED> {
+    /// Same as the non-default constructor, but returns a status code: true if ok, false if the window couldn't be created.
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -233,6 +236,7 @@ wxwidgets! {
         HeaderColumnMethods
 }
 impl<const OWNED: bool> HeaderColumnSimpleIsOwned<OWNED> {
+    /// Constructor for a column header.
     pub fn new_with_str(
         title: &str,
         width: c_int,
@@ -336,6 +340,7 @@ impl<const OWNED: bool> DynamicCast for HeaderCtrlIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> WindowMethods for HeaderCtrlIsOwned<OWNED> {
+    /// Create the header control window.
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -437,9 +442,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> HeaderCtrlSimpleIsOwned<OWNED> {
+    /// Default constructor not creating the underlying window.
     pub fn new_2step() -> HeaderCtrlSimpleIsOwned<OWNED> {
         unsafe { HeaderCtrlSimpleIsOwned(ffi::wxHeaderCtrlSimple_new()) }
     }
+    /// Constructor creating the window.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         winid: c_int,
@@ -575,6 +582,7 @@ impl<const OWNED: bool> HyperlinkCtrlIsOwned<OWNED> {
     pub fn new_2step() -> HyperlinkCtrlIsOwned<OWNED> {
         unsafe { HyperlinkCtrlIsOwned(ffi::wxHyperlinkCtrl_new()) }
     }
+    /// Constructor.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -651,6 +659,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> HyperlinkEventIsOwned<OWNED> {
+    /// The constructor is not normally used by the user code.
     pub fn new<O: ObjectMethods>(
         generator: Option<&O>,
         id: c_int,

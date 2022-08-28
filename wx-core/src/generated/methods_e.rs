@@ -3,6 +3,7 @@ use super::*;
 // wxEditableListBox
 pub trait EditableListBoxMethods: PanelMethods {
     // DTOR: fn ~wxEditableListBox()
+    /// Creates the editable listbox for two-step construction.
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -27,12 +28,14 @@ pub trait EditableListBoxMethods: PanelMethods {
             ffi::wxEditableListBox_Create(self.as_ptr(), parent, id, label, pos, size, style, name)
         }
     }
+    /// Replaces current contents with given strings.
     fn set_strings<A: ArrayStringMethods>(&self, strings: &A) {
         unsafe {
             let strings = strings.as_ptr();
             ffi::wxEditableListBox_SetStrings(self.as_ptr(), strings)
         }
     }
+    /// Returns in the given array the current contents of the control (the array will be erased before control's contents are appended).
     fn get_strings<A: ArrayStringMethods>(&self, strings: &A) {
         unsafe {
             let strings = strings.as_ptr();
@@ -43,6 +46,7 @@ pub trait EditableListBoxMethods: PanelMethods {
 
 // wxEraseEvent
 pub trait EraseEventMethods: EventMethods {
+    /// Returns the device context associated with the erase event to draw on.
     fn get_dc(&self) -> Option<DCIsOwned<false>> {
         unsafe { DC::option_from(ffi::wxEraseEvent_GetDC(self.as_ptr())) }
     }

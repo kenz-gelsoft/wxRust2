@@ -147,6 +147,7 @@ class Method:
         is_virtual = e.get('virt') == 'virtual'
         is_override = e.find('reimplements') is not None
         self.is_virtual_override = is_virtual and is_override
+        self.doc = ''.join(e.find('./briefdescription').itertext()).strip()        
 
     def suppressed_reason(self):
         if self.is_blocked():

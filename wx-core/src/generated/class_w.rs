@@ -12,9 +12,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> WindowIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> WindowIsOwned<OWNED> {
         unsafe { WindowIsOwned(ffi::wxWindow_new()) }
     }
+    /// Constructs a window, which can be a child of a frame, dialog or any other non-control window.
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -73,6 +75,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> WindowCreateEventIsOwned<OWNED> {
+    /// Constructor.
     pub fn new<W: WindowMethods>(win: Option<&W>) -> WindowCreateEventIsOwned<OWNED> {
         unsafe {
             let win = match win {
@@ -131,6 +134,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> WindowDCIsOwned<OWNED> {
+    /// Constructor.
     pub fn new<W: WindowMethods>(window: Option<&W>) -> WindowDCIsOwned<OWNED> {
         unsafe {
             let window = match window {
@@ -185,6 +189,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> WindowDestroyEventIsOwned<OWNED> {
+    /// Constructor.
     pub fn new<W: WindowMethods>(win: Option<&W>) -> WindowDestroyEventIsOwned<OWNED> {
         unsafe {
             let win = match win {
@@ -241,9 +246,11 @@ wxwidgets! {
         WindowDisablerMethods
 }
 impl<const OWNED: bool> WindowDisablerIsOwned<OWNED> {
+    /// Disables all top level windows of the applications.
     pub fn new_with_bool(disable: bool) -> WindowDisablerIsOwned<OWNED> {
         unsafe { WindowDisablerIsOwned(ffi::wxWindowDisabler_new(disable)) }
     }
+    /// Disables all top level windows of the applications with the exception of winToSkip if it is not NULL.
     pub fn new_with_window<W: WindowMethods, W2: WindowMethods>(
         win_to_skip: Option<&W>,
         win_to_skip2: Option<&W2>,
@@ -293,9 +300,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> WizardIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> WizardIsOwned<OWNED> {
         unsafe { WizardIsOwned(ffi::wxWizard_new()) }
     }
+    /// Constructor which really creates the wizard  if you use this constructor, you shouldn't call Create().
     pub fn new<W: WindowMethods, B: BitmapBundleMethods, P: PointMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -484,9 +493,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> WizardPageSimpleIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> WizardPageSimpleIsOwned<OWNED> {
         unsafe { WizardPageSimpleIsOwned(ffi::wxWizardPageSimple_new()) }
     }
+    /// Constructor takes the previous and next pages.
     pub fn new<
         W: WizardMethods,
         W2: WizardPageMethods,
@@ -568,6 +579,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> WrapSizerIsOwned<OWNED> {
+    /// Constructor for a wxWrapSizer.
     pub fn new(orient: c_int, flags: c_int) -> WrapSizerIsOwned<OWNED> {
         unsafe { WrapSizerIsOwned(ffi::wxWrapSizer_new(orient, flags)) }
     }

@@ -12,9 +12,11 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> TimerIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new() -> TimerIsOwned<OWNED> {
         unsafe { TimerIsOwned(ffi::wxTimer_new()) }
     }
+    /// Creates a timer and associates it with owner.
     pub fn new_with_evthandler<E: EvtHandlerMethods>(
         owner: Option<&E>,
         id: c_int,

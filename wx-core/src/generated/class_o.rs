@@ -45,10 +45,12 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> OwnerDrawnComboBoxIsOwned<OWNED> {
+    /// Default constructor.
     pub fn new_2step() -> OwnerDrawnComboBoxIsOwned<OWNED> {
         unsafe { OwnerDrawnComboBoxIsOwned(ffi::wxOwnerDrawnComboBox_new()) }
     }
     // NOT_SUPPORTED: fn wxOwnerDrawnComboBox1()
+    /// Constructor, creating and showing a owner-drawn combobox.
     pub fn new<
         W: WindowMethods,
         P: PointMethods,
@@ -140,6 +142,7 @@ impl<const OWNED: bool> TextEntryMethods for OwnerDrawnComboBoxIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> ComboCtrlMethods for OwnerDrawnComboBoxIsOwned<OWNED> {
+    /// Creates the combobox for two-step construction.
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
         parent: Option<&W>,

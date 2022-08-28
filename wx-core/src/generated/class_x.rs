@@ -12,6 +12,7 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> XPMHandlerIsOwned<OWNED> {
+    /// Default constructor for wxXPMHandler.
     pub fn new() -> XPMHandlerIsOwned<OWNED> {
         unsafe { XPMHandlerIsOwned(ffi::wxXPMHandler_new()) }
     }
