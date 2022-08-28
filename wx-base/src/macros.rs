@@ -10,6 +10,7 @@ macro_rules! wxwidgets {
         $(#[doc = $docComment])*
         $(#[doc($docAttrKey = $docAttrValue)])*
         pub struct $typeIsOwned<const OWNED: bool>(*mut c_void);
+        $(#[doc = $docComment])*
         pub type $type = $typeIsOwned<true>;
         $(
             impl<const OWNED: bool> $methods for $typeIsOwned<OWNED> {}
