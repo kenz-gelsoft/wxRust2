@@ -2,6 +2,9 @@ use super::*;
 
 // wxVListBox
 wxwidgets! {
+    /// wxVListBox is a wxListBox-like control with the following two main differences from a regular wxListBox: it can have an arbitrarily huge number of items because it doesn't store them itself but uses the OnDrawItem() callback to draw them (so it is a virtual listbox) and its items can have variable height as determined by OnMeasureItem() (so it is also a listbox with the lines of variable height).
+    ///
+    /// [See `wxVListBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_v_list_box.html)
     #[doc(alias = "wxVListBox")]
     #[doc(alias = "VListBox")]
     class VListBox
@@ -56,6 +59,9 @@ impl<const OWNED: bool> DynamicCast for VListBoxIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> WindowMethods for VListBoxIsOwned<OWNED> {
+    /// Creates the control.
+    ///
+    /// [See `wxVListBox::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_v_list_box.html#ab04914d5db45af7c3c032e19fa2b2615)
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -81,6 +87,9 @@ impl<const OWNED: bool> WindowMethods for VListBoxIsOwned<OWNED> {
 
 // wxVScrolledWindow
 wxwidgets! {
+    /// In the name of this class, "V" may stand for "variable" because it can be used for scrolling rows of variable heights; "virtual", because it is not necessary to know the heights of all rows in advance  only those which are shown on the screen need to be measured; or even "vertical", because this class only supports scrolling vertically.
+    ///
+    /// [See `wxVScrolledWindow`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_v_scrolled_window.html)
     #[doc(alias = "wxVScrolledWindow")]
     #[doc(alias = "VScrolledWindow")]
     class VScrolledWindow
@@ -129,6 +138,9 @@ impl<const OWNED: bool> DynamicCast for VScrolledWindowIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> WindowMethods for VScrolledWindowIsOwned<OWNED> {
+    /// Same as the non-default constructor, but returns a status code: true if ok, false if the window couldn't be created.
+    ///
+    /// [See `wxVScrolledWindow::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_v_scrolled_window.html#ac6e7a6ace37133efb091b1bf69d09a90)
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -154,6 +166,9 @@ impl<const OWNED: bool> WindowMethods for VScrolledWindowIsOwned<OWNED> {
 
 // wxValidator
 wxwidgets! {
+    /// wxValidator is the base class for a family of validator classes that mediate between a class of control, and application data.
+    ///
+    /// [See `wxValidator`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_validator.html)
     #[doc(alias = "wxValidator")]
     #[doc(alias = "Validator")]
     class Validator
@@ -163,6 +178,9 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ValidatorIsOwned<OWNED> {
+    /// Constructor.
+    ///
+    /// [See `wxValidator::wxValidator()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_validator.html#aac102bc64513a0f8bd38e9db81a3d833)
     pub fn new() -> ValidatorIsOwned<OWNED> {
         unsafe { ValidatorIsOwned(ffi::wxValidator_new()) }
     }

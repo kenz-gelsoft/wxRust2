@@ -1,13 +1,16 @@
 #[macro_export]
 macro_rules! wxwidgets {
     (
-        $(#[doc($attrKey:ident = $attrValue:tt)])*
+        $(#[doc = $docComment:tt])*
+        $(#[doc($docAttrKey:ident = $docAttrValue:tt)])*
         class $type:ident
             = $typeIsOwned:ident<true>($wxType:ident) impl
             $($methods:ident),*
     ) => {
-        $(#[doc($attrKey = $attrValue)])*
+        $(#[doc = $docComment])*
+        $(#[doc($docAttrKey = $docAttrValue)])*
         pub struct $typeIsOwned<const OWNED: bool>(*mut c_void);
+        $(#[doc = $docComment])*
         pub type $type = $typeIsOwned<true>;
         $(
             impl<const OWNED: bool> $methods for $typeIsOwned<OWNED> {}

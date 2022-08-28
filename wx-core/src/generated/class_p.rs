@@ -2,6 +2,9 @@ use super::*;
 
 // wxPCXHandler
 wxwidgets! {
+    /// This is the image handler for the PCX format.
+    ///
+    /// [See `wxPCXHandler`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_p_c_x_handler.html)
     #[doc(alias = "wxPCXHandler")]
     #[doc(alias = "PCXHandler")]
     class PCXHandler
@@ -11,6 +14,9 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> PCXHandlerIsOwned<OWNED> {
+    /// Default constructor for wxPCXHandler.
+    ///
+    /// [See `wxPCXHandler::wxPCXHandler()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_p_c_x_handler.html#a0e760d2c6f6e71285ea5ea4989a6a6ce)
     pub fn new() -> PCXHandlerIsOwned<OWNED> {
         unsafe { PCXHandlerIsOwned(ffi::wxPCXHandler_new()) }
     }
@@ -48,6 +54,9 @@ impl<const OWNED: bool> Drop for PCXHandlerIsOwned<OWNED> {
 
 // wxPNGHandler
 wxwidgets! {
+    /// This is the image handler for the PNG format.
+    ///
+    /// [See `wxPNGHandler`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_p_n_g_handler.html)
     #[doc(alias = "wxPNGHandler")]
     #[doc(alias = "PNGHandler")]
     class PNGHandler
@@ -57,6 +66,9 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> PNGHandlerIsOwned<OWNED> {
+    /// Default constructor for wxPNGHandler.
+    ///
+    /// [See `wxPNGHandler::wxPNGHandler()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_p_n_g_handler.html#ab23ae6e7eb76694201284def48b2d4f2)
     pub fn new() -> PNGHandlerIsOwned<OWNED> {
         unsafe { PNGHandlerIsOwned(ffi::wxPNGHandler_new()) }
     }
@@ -94,6 +106,9 @@ impl<const OWNED: bool> Drop for PNGHandlerIsOwned<OWNED> {
 
 // wxPNMHandler
 wxwidgets! {
+    /// This is the image handler for the PNM format.
+    ///
+    /// [See `wxPNMHandler`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_p_n_m_handler.html)
     #[doc(alias = "wxPNMHandler")]
     #[doc(alias = "PNMHandler")]
     class PNMHandler
@@ -103,6 +118,9 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> PNMHandlerIsOwned<OWNED> {
+    /// Default constructor for wxPNMHandler.
+    ///
+    /// [See `wxPNMHandler::wxPNMHandler()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_p_n_m_handler.html#ac9fc6a93ce1d2804807e8faa39acf146)
     pub fn new() -> PNMHandlerIsOwned<OWNED> {
         unsafe { PNMHandlerIsOwned(ffi::wxPNMHandler_new()) }
     }
@@ -140,6 +158,9 @@ impl<const OWNED: bool> Drop for PNMHandlerIsOwned<OWNED> {
 
 // wxPaintDC
 wxwidgets! {
+    /// A wxPaintDC must be constructed if an application wishes to paint on the client area of a window from within an EVT_PAINT() event handler.
+    ///
+    /// [See `wxPaintDC`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_paint_d_c.html)
     #[doc(alias = "wxPaintDC")]
     #[doc(alias = "PaintDC")]
     class PaintDC
@@ -151,6 +172,9 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> PaintDCIsOwned<OWNED> {
+    /// Constructor.
+    ///
+    /// [See `wxPaintDC::wxPaintDC()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_paint_d_c.html#a36fa14a64759e36a31f1100b9710e71b)
     pub fn new<W: WindowMethods>(window: Option<&W>) -> PaintDCIsOwned<OWNED> {
         unsafe {
             let window = match window {
@@ -204,6 +228,9 @@ impl<const OWNED: bool> Drop for PaintDCIsOwned<OWNED> {
 
 // wxPaintEvent
 wxwidgets! {
+    /// A paint event is sent when a window's contents needs to be repainted.
+    ///
+    /// [See `wxPaintEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_paint_event.html)
     #[doc(alias = "wxPaintEvent")]
     #[doc(alias = "PaintEvent")]
     class PaintEvent
@@ -248,6 +275,9 @@ impl<const OWNED: bool> Drop for PaintEventIsOwned<OWNED> {
 
 // wxPalette
 wxwidgets! {
+    /// A palette is a table that maps pixel values to RGB colours.
+    ///
+    /// [See `wxPalette`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_palette.html)
     #[doc(alias = "wxPalette")]
     #[doc(alias = "Palette")]
     class Palette
@@ -257,15 +287,24 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> PaletteIsOwned<OWNED> {
+    /// Default constructor.
+    ///
+    /// [See `wxPalette::wxPalette()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_palette.html#aff9ca82ce8e82b801f6f119fc8887289)
     pub fn new() -> PaletteIsOwned<OWNED> {
         unsafe { PaletteIsOwned(ffi::wxPalette_new()) }
     }
+    /// Copy constructor, uses Reference Counting.
+    ///
+    /// [See `wxPalette::wxPalette()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_palette.html#ab6e5c7d9f2fbc763120378e111dda828)
     pub fn new_with_palette<P: PaletteMethods>(palette: &P) -> PaletteIsOwned<OWNED> {
         unsafe {
             let palette = palette.as_ptr();
             PaletteIsOwned(ffi::wxPalette_new1(palette))
         }
     }
+    /// Creates a palette from arrays of size n, one for each red, blue or green component.
+    ///
+    /// [See `wxPalette::wxPalette()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_palette.html#ac98e35c82e6e2e70bad9190a51067123)
     pub fn new_with_int(
         n: c_int,
         red: *const c_void,
@@ -308,6 +347,9 @@ impl<const OWNED: bool> Drop for PaletteIsOwned<OWNED> {
 
 // wxPanel
 wxwidgets! {
+    /// A panel is a window on which controls are placed.
+    ///
+    /// [See `wxPanel`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_panel.html)
     #[doc(alias = "wxPanel")]
     #[doc(alias = "Panel")]
     class Panel
@@ -318,9 +360,15 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> PanelIsOwned<OWNED> {
+    /// Default constructor.
+    ///
+    /// [See `wxPanel::wxPanel()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_panel.html#abacb5b24465e240cfdc04e069249cbbb)
     pub fn new_2step() -> PanelIsOwned<OWNED> {
         unsafe { PanelIsOwned(ffi::wxPanel_new()) }
     }
+    /// Constructor.
+    ///
+    /// [See `wxPanel::wxPanel()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_panel.html#a5860a221ee88bd4ea6f0843112523890)
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -371,6 +419,9 @@ impl<const OWNED: bool> DynamicCast for PanelIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> WindowMethods for PanelIsOwned<OWNED> {
+    /// Used for two-step panel construction.
+    ///
+    /// [See `wxPanel::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_panel.html#a3ff58c601a52262e03abf84d3896ff2f)
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -396,6 +447,9 @@ impl<const OWNED: bool> WindowMethods for PanelIsOwned<OWNED> {
 
 // wxPasswordEntryDialog
 wxwidgets! {
+    /// This class represents a dialog that requests a one-line password string from the user.
+    ///
+    /// [See `wxPasswordEntryDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_password_entry_dialog.html)
     #[doc(alias = "wxPasswordEntryDialog")]
     #[doc(alias = "PasswordEntryDialog")]
     class PasswordEntryDialog
@@ -410,6 +464,9 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> PasswordEntryDialogIsOwned<OWNED> {
+    /// Constructor.
+    ///
+    /// [See `wxPasswordEntryDialog::wxPasswordEntryDialog()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_password_entry_dialog.html#a46055baef2b9fce8401e676c2915e743)
     pub fn new<W: WindowMethods, P: PointMethods>(
         parent: Option<&W>,
         message: &str,
@@ -492,6 +549,9 @@ impl<const OWNED: bool> DynamicCast for PasswordEntryDialogIsOwned<OWNED> {
 
 // wxPen
 wxwidgets! {
+    /// A pen is a drawing tool for drawing outlines.
+    ///
+    /// [See `wxPen`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_pen.html)
     #[doc(alias = "wxPen")]
     #[doc(alias = "Pen")]
     class Pen
@@ -501,19 +561,31 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> PenIsOwned<OWNED> {
+    /// Default constructor.
+    ///
+    /// [See `wxPen::wxPen()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_pen.html#af08e2f8db0c78f9bbca31674ab61d5eb)
     pub fn new() -> PenIsOwned<OWNED> {
         unsafe { PenIsOwned(ffi::wxPen_new()) }
     }
+    /// Creates a pen object using the specified pen description.
+    ///
+    /// [See `wxPen::wxPen()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_pen.html#abb0a620b8513b8c36e9b9dc1b8f87001)
     pub fn new_with_peninfo(info: *const c_void) -> PenIsOwned<OWNED> {
         unsafe { PenIsOwned(ffi::wxPen_new1(info)) }
     }
     // NOT_SUPPORTED: fn wxPen2()
+    /// Constructs a stippled pen from a stipple bitmap and a width.
+    ///
+    /// [See `wxPen::wxPen()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_pen.html#ae2a92286436cd980de9f9360eb9d4def)
     pub fn new_with_bitmap<B: BitmapMethods>(stipple: &B, width: c_int) -> PenIsOwned<OWNED> {
         unsafe {
             let stipple = stipple.as_ptr();
             PenIsOwned(ffi::wxPen_new3(stipple, width))
         }
     }
+    /// Copy constructor, uses Reference Counting.
+    ///
+    /// [See `wxPen::wxPen()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_pen.html#a5ba7b9a179fa2887bf77099bbe2dddce)
     pub fn new_with_pen<P: PenMethods>(pen: &P) -> PenIsOwned<OWNED> {
         unsafe {
             let pen = pen.as_ptr();
@@ -554,6 +626,9 @@ impl<const OWNED: bool> Drop for PenIsOwned<OWNED> {
 
 // wxPenList
 wxwidgets! {
+    /// There is only one instance of this class: wxThePenList.
+    ///
+    /// [See `wxPenList`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_pen_list.html)
     #[doc(alias = "wxPenList")]
     #[doc(alias = "PenList")]
     class PenList
@@ -561,6 +636,9 @@ wxwidgets! {
         PenListMethods
 }
 impl<const OWNED: bool> PenListIsOwned<OWNED> {
+    /// Constructor.
+    ///
+    /// [See `wxPenList::wxPenList()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_pen_list.html#af0244769e4e820f75e12e065b440f66d)
     pub fn new() -> PenListIsOwned<OWNED> {
         unsafe { PenListIsOwned(ffi::wxPenList_new()) }
     }
@@ -583,6 +661,9 @@ impl<const OWNED: bool> Drop for PenListIsOwned<OWNED> {
 
 // wxPersistenceManager
 wxwidgets! {
+    /// Provides support for automatically saving and restoring object properties to persistent storage.
+    ///
+    /// [See `wxPersistenceManager`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_persistence_manager.html)
     #[doc(alias = "wxPersistenceManager")]
     #[doc(alias = "PersistenceManager")]
     class PersistenceManager
@@ -609,6 +690,9 @@ impl<const OWNED: bool> Drop for PersistenceManagerIsOwned<OWNED> {
 
 // wxPickerBase
 wxwidgets! {
+    /// Base abstract class for all pickers which support an auxiliary text control.
+    ///
+    /// [See `wxPickerBase`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_picker_base.html)
     #[doc(alias = "wxPickerBase")]
     #[doc(alias = "PickerBase")]
     class PickerBase
@@ -658,6 +742,9 @@ impl<const OWNED: bool> DynamicCast for PickerBaseIsOwned<OWNED> {
 
 // wxPoint
 wxwidgets! {
+    /// A wxPoint is a useful data structure for graphics operations.
+    ///
+    /// [See `wxPoint`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_point.html)
     #[doc(alias = "wxPoint")]
     #[doc(alias = "Point")]
     class Point
@@ -665,12 +752,21 @@ wxwidgets! {
         PointMethods
 }
 impl<const OWNED: bool> PointIsOwned<OWNED> {
+    /// Constructs a point.
+    ///
+    /// [See `wxPoint::wxPoint()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_point.html#a561759249aa13713d92eaa310e746772)
     pub fn new() -> PointIsOwned<OWNED> {
         unsafe { PointIsOwned(ffi::wxPoint_new()) }
     }
+    /// Initializes the point object with the given x and y coordinates.
+    ///
+    /// [See `wxPoint::wxPoint()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_point.html#a35d450cf9a580947188a16c5dadebc34)
     pub fn new_with_int(x: c_int, y: c_int) -> PointIsOwned<OWNED> {
         unsafe { PointIsOwned(ffi::wxPoint_new1(x, y)) }
     }
+    /// Converts the given wxRealPoint (with floating point coordinates) to a wxPoint instance.
+    ///
+    /// [See `wxPoint::wxPoint()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_point.html#ad6f9c02b56357d8dcfb0bc135dcab639)
     pub fn new_with_realpoint<R: RealPointMethods>(pt: &R) -> PointIsOwned<OWNED> {
         unsafe {
             let pt = pt.as_ptr();
@@ -696,6 +792,9 @@ impl<const OWNED: bool> Drop for PointIsOwned<OWNED> {
 
 // wxPopupTransientWindow
 wxwidgets! {
+    /// A wxPopupWindow which disappears automatically when the user clicks mouse outside it or if it loses focus in any other way.
+    ///
+    /// [See `wxPopupTransientWindow`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_popup_transient_window.html)
     #[doc(alias = "wxPopupTransientWindow")]
     #[doc(alias = "PopupTransientWindow")]
     class PopupTransientWindow
@@ -708,9 +807,15 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> PopupTransientWindowIsOwned<OWNED> {
+    /// Default constructor.
+    ///
+    /// [See `wxPopupTransientWindow::wxPopupTransientWindow()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_popup_transient_window.html#a79282a961a2356c2a6fcb492767732f1)
     pub fn new_2step() -> PopupTransientWindowIsOwned<OWNED> {
         unsafe { PopupTransientWindowIsOwned(ffi::wxPopupTransientWindow_new()) }
     }
+    /// Constructor.
+    ///
+    /// [See `wxPopupTransientWindow::wxPopupTransientWindow()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_popup_transient_window.html#a1958dc2db49d85b12de4b7e249dc7ddc)
     pub fn new<W: WindowMethods>(
         parent: Option<&W>,
         flags: c_int,
@@ -765,6 +870,9 @@ impl<const OWNED: bool> DynamicCast for PopupTransientWindowIsOwned<OWNED> {
 
 // wxPopupWindow
 wxwidgets! {
+    /// A special kind of top level window used for popup menus, combobox popups and such.
+    ///
+    /// [See `wxPopupWindow`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_popup_window.html)
     #[doc(alias = "wxPopupWindow")]
     #[doc(alias = "PopupWindow")]
     class PopupWindow
@@ -776,9 +884,15 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> PopupWindowIsOwned<OWNED> {
+    /// Default constructor.
+    ///
+    /// [See `wxPopupWindow::wxPopupWindow()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_popup_window.html#a067444f3532f95541e0c445a916af9dd)
     pub fn new_2step() -> PopupWindowIsOwned<OWNED> {
         unsafe { PopupWindowIsOwned(ffi::wxPopupWindow_new()) }
     }
+    /// Constructor.
+    ///
+    /// [See `wxPopupWindow::wxPopupWindow()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_popup_window.html#ab31a3724d9682f6870bd17f71f99b95c)
     pub fn new<W: WindowMethods>(parent: Option<&W>, flags: c_int) -> PopupWindowIsOwned<OWNED> {
         unsafe {
             let parent = match parent {
@@ -825,6 +939,9 @@ impl<const OWNED: bool> DynamicCast for PopupWindowIsOwned<OWNED> {
 
 // wxPreferencesEditor
 wxwidgets! {
+    /// Manage preferences dialog.
+    ///
+    /// [See `wxPreferencesEditor`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_preferences_editor.html)
     #[doc(alias = "wxPreferencesEditor")]
     #[doc(alias = "PreferencesEditor")]
     class PreferencesEditor
@@ -832,6 +949,9 @@ wxwidgets! {
         PreferencesEditorMethods
 }
 impl<const OWNED: bool> PreferencesEditorIsOwned<OWNED> {
+    /// Constructor.
+    ///
+    /// [See `wxPreferencesEditor::wxPreferencesEditor()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_preferences_editor.html#a763bc5d60aef3ebf4ee296fb14634de3)
     pub fn new(title: &str) -> PreferencesEditorIsOwned<OWNED> {
         unsafe {
             let title = WxString::from(title);
@@ -858,6 +978,9 @@ impl<const OWNED: bool> Drop for PreferencesEditorIsOwned<OWNED> {
 
 // wxPreferencesPage
 wxwidgets! {
+    /// One page of preferences dialog.
+    ///
+    /// [See `wxPreferencesPage`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_preferences_page.html)
     #[doc(alias = "wxPreferencesPage")]
     #[doc(alias = "PreferencesPage")]
     class PreferencesPage
@@ -885,6 +1008,9 @@ impl<const OWNED: bool> Drop for PreferencesPageIsOwned<OWNED> {
 
 // wxPropertySheetDialog
 wxwidgets! {
+    /// This class represents a property sheet dialog: a tabbed dialog for showing settings.
+    ///
+    /// [See `wxPropertySheetDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_property_sheet_dialog.html)
     #[doc(alias = "wxPropertySheetDialog")]
     #[doc(alias = "PropertySheetDialog")]
     class PropertySheetDialog
@@ -898,9 +1024,15 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> PropertySheetDialogIsOwned<OWNED> {
+    /// Default constructor.
+    ///
+    /// [See `wxPropertySheetDialog::wxPropertySheetDialog()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_property_sheet_dialog.html#a124dbdcb716e3157aad47db24d127550)
     pub fn new_2step() -> PropertySheetDialogIsOwned<OWNED> {
         unsafe { PropertySheetDialogIsOwned(ffi::wxPropertySheetDialog_new()) }
     }
+    /// Constructor.
+    ///
+    /// [See `wxPropertySheetDialog::wxPropertySheetDialog()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_property_sheet_dialog.html#a3e9f920aa2df1b16761f5be1320f1268)
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -971,6 +1103,9 @@ impl<const OWNED: bool> DynamicCast for PropertySheetDialogIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> TopLevelWindowMethods for PropertySheetDialogIsOwned<OWNED> {
+    /// Call this from your own Create function, before adding buttons and pages.
+    ///
+    /// [See `wxPropertySheetDialog::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_property_sheet_dialog.html#ad96015ab13fc1e2c364660fafd4121e0)
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,

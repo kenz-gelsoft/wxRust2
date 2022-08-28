@@ -2,6 +2,9 @@ use super::*;
 
 // wxAboutDialogInfo
 wxwidgets! {
+    /// wxAboutDialogInfo contains information shown in the standard About dialog displayed by the wxAboutBox() function.
+    ///
+    /// [See `wxAboutDialogInfo`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_about_dialog_info.html)
     #[doc(alias = "wxAboutDialogInfo")]
     #[doc(alias = "AboutDialogInfo")]
     class AboutDialogInfo
@@ -9,6 +12,9 @@ wxwidgets! {
         AboutDialogInfoMethods
 }
 impl<const OWNED: bool> AboutDialogInfoIsOwned<OWNED> {
+    /// Default constructor leaves all fields are initially uninitialized, in general you should call at least SetVersion(), SetCopyright() and SetDescription().
+    ///
+    /// [See `wxAboutDialogInfo::wxAboutDialogInfo()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_about_dialog_info.html#ab58b7d0d7bb3aa40eca4531c4f8c1e6f)
     pub fn new() -> AboutDialogInfoIsOwned<OWNED> {
         unsafe { AboutDialogInfoIsOwned(ffi::wxAboutDialogInfo_new()) }
     }
@@ -31,6 +37,9 @@ impl<const OWNED: bool> Drop for AboutDialogInfoIsOwned<OWNED> {
 
 // wxAcceleratorEntry
 wxwidgets! {
+    /// An object used by an application wishing to create an accelerator table (see wxAcceleratorTable).
+    ///
+    /// [See `wxAcceleratorEntry`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_accelerator_entry.html)
     #[doc(alias = "wxAcceleratorEntry")]
     #[doc(alias = "AcceleratorEntry")]
     class AcceleratorEntry
@@ -38,6 +47,9 @@ wxwidgets! {
         AcceleratorEntryMethods
 }
 impl<const OWNED: bool> AcceleratorEntryIsOwned<OWNED> {
+    /// Constructor.
+    ///
+    /// [See `wxAcceleratorEntry::wxAcceleratorEntry()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_accelerator_entry.html#a9387fbbaed1cbfb8673308ec2b10da3e)
     pub fn new_with_int<M: MenuItemMethods>(
         flags: c_int,
         key_code: c_int,
@@ -52,6 +64,9 @@ impl<const OWNED: bool> AcceleratorEntryIsOwned<OWNED> {
             AcceleratorEntryIsOwned(ffi::wxAcceleratorEntry_new(flags, key_code, cmd, item))
         }
     }
+    /// Copy ctor.
+    ///
+    /// [See `wxAcceleratorEntry::wxAcceleratorEntry()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_accelerator_entry.html#a8853051e5706c505d15ff70e1e44c7df)
     pub fn new_with_acceleratorentry<A: AcceleratorEntryMethods>(
         entry: &A,
     ) -> AcceleratorEntryIsOwned<OWNED> {
@@ -79,6 +94,9 @@ impl<const OWNED: bool> Drop for AcceleratorEntryIsOwned<OWNED> {
 
 // wxAcceleratorTable
 wxwidgets! {
+    /// An accelerator table allows the application to specify a table of keyboard shortcuts for menu or button commands.
+    ///
+    /// [See `wxAcceleratorTable`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_accelerator_table.html)
     #[doc(alias = "wxAcceleratorTable")]
     #[doc(alias = "AcceleratorTable")]
     class AcceleratorTable
@@ -87,6 +105,9 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> AcceleratorTableIsOwned<OWNED> {
+    /// Default ctor.
+    ///
+    /// [See `wxAcceleratorTable::wxAcceleratorTable()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_accelerator_table.html#af172242a8a1487aa326f7965857df7f7)
     pub fn new() -> AcceleratorTableIsOwned<OWNED> {
         unsafe { AcceleratorTableIsOwned(ffi::wxAcceleratorTable_new()) }
     }
@@ -121,6 +142,9 @@ impl<const OWNED: bool> Drop for AcceleratorTableIsOwned<OWNED> {
 
 // wxActivateEvent
 wxwidgets! {
+    /// An activate event is sent when a window or application is being activated or deactivated.
+    ///
+    /// [See `wxActivateEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_activate_event.html)
     #[doc(alias = "wxActivateEvent")]
     #[doc(alias = "ActivateEvent")]
     class ActivateEvent
@@ -169,6 +193,9 @@ impl<const OWNED: bool> Drop for ActivateEventIsOwned<OWNED> {
 
 // wxAffineMatrix2D
 wxwidgets! {
+    /// A 3x2 matrix representing an affine 2D transformation.
+    ///
+    /// [See `wxAffineMatrix2D`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_affine_matrix2_d.html)
     #[doc(alias = "wxAffineMatrix2D")]
     #[doc(alias = "AffineMatrix2D")]
     class AffineMatrix2D
@@ -177,6 +204,9 @@ wxwidgets! {
         // AffineMatrix2DBaseMethods
 }
 impl<const OWNED: bool> AffineMatrix2DIsOwned<OWNED> {
+    /// Default constructor.
+    ///
+    /// [See `wxAffineMatrix2D::wxAffineMatrix2D()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_affine_matrix2_d.html#a00fa188b54418b476d122e4de408dc27)
     pub fn new() -> AffineMatrix2DIsOwned<OWNED> {
         unsafe { AffineMatrix2DIsOwned(ffi::wxAffineMatrix2D_new()) }
     }
@@ -204,14 +234,21 @@ impl<const OWNED: bool> Drop for AffineMatrix2DIsOwned<OWNED> {
 impl<const OWNED: bool> AffineMatrix2DBaseMethods for AffineMatrix2DIsOwned<OWNED> {
     // BLOCKED: fn operator==()
     // BLOCKED: fn operator!=()
+    /// Add mirroring to this matrix.
+    ///
+    /// [See `wxAffineMatrix2D::Mirror()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_affine_matrix2_d.html#a5bec8e0a74908b53c46dd67d8013837c)
     fn mirror(&self, direction: c_int) {
         unsafe { ffi::wxAffineMatrix2D_Mirror(self.as_ptr(), direction) }
     }
     // NOT_SUPPORTED: fn TransformPoint()
+    ///
+    /// [See `wxAffineMatrix2D::TransformPoint()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_affine_matrix2_d.html#ac7a910efff7136da8e2843db77b3f94c)
     fn transform_point(&self, x: *mut c_void, y: *mut c_void) {
         unsafe { ffi::wxAffineMatrix2D_TransformPoint1(self.as_ptr(), x, y) }
     }
     // NOT_SUPPORTED: fn TransformDistance()
+    ///
+    /// [See `wxAffineMatrix2D::TransformDistance()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_affine_matrix2_d.html#a65a659678c537c6f68042af78ef5d7a9)
     fn transform_distance(&self, dx: *mut c_void, dy: *mut c_void) {
         unsafe { ffi::wxAffineMatrix2D_TransformDistance1(self.as_ptr(), dx, dy) }
     }
@@ -219,6 +256,9 @@ impl<const OWNED: bool> AffineMatrix2DBaseMethods for AffineMatrix2DIsOwned<OWNE
 
 // wxAffineMatrix2DBase
 wxwidgets! {
+    /// A 2x3 matrix representing an affine 2D transformation.
+    ///
+    /// [See `wxAffineMatrix2DBase`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_affine_matrix2_d_base.html)
     #[doc(alias = "wxAffineMatrix2DBase")]
     #[doc(alias = "AffineMatrix2DBase")]
     class AffineMatrix2DBase
@@ -246,6 +286,9 @@ impl<const OWNED: bool> Drop for AffineMatrix2DBaseIsOwned<OWNED> {
 
 // wxAnimationCtrl
 wxwidgets! {
+    /// This is a static control which displays an animation.
+    ///
+    /// [See `wxAnimationCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_animation_ctrl.html)
     #[doc(alias = "wxAnimationCtrl")]
     #[doc(alias = "AnimationCtrl")]
     class AnimationCtrl
@@ -257,6 +300,9 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> AnimationCtrlIsOwned<OWNED> {
+    /// Initializes the object and calls Create() with all the parameters.
+    ///
+    /// [See `wxAnimationCtrl::wxAnimationCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_animation_ctrl.html#ae661663278f7e2650ba70c08817e0511)
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -317,6 +363,9 @@ impl<const OWNED: bool> DynamicCast for AnimationCtrlIsOwned<OWNED> {
 
 // wxAnyButton
 wxwidgets! {
+    /// A class for common button functionality used as the base for the various button classes.
+    ///
+    /// [See `wxAnyButton`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_any_button.html)
     #[doc(alias = "wxAnyButton")]
     #[doc(alias = "AnyButton")]
     class AnyButton
@@ -328,6 +377,8 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> AnyButtonIsOwned<OWNED> {
+    ///
+    /// [See `wxAnyButton::wxAnyButton()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_any_button.html#a89b895988e816974fa5f5971e2f3e2a4)
     pub fn new() -> AnyButtonIsOwned<OWNED> {
         unsafe { AnyButtonIsOwned(ffi::wxAnyButton_new()) }
     }
@@ -368,6 +419,9 @@ impl<const OWNED: bool> DynamicCast for AnyButtonIsOwned<OWNED> {
 
 // wxArtProvider
 wxwidgets! {
+    /// wxArtProvider class is used to customize the look of wxWidgets application.
+    ///
+    /// [See `wxArtProvider`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_art_provider.html)
     #[doc(alias = "wxArtProvider")]
     #[doc(alias = "ArtProvider")]
     class ArtProvider
@@ -405,6 +459,9 @@ impl<const OWNED: bool> Drop for ArtProviderIsOwned<OWNED> {
 
 // wxAutoBufferedPaintDC
 wxwidgets! {
+    /// This wxDC derivative can be used inside of an EVT_PAINT() event handler to achieve double-buffered drawing.
+    ///
+    /// [See `wxAutoBufferedPaintDC`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_auto_buffered_paint_d_c.html)
     #[doc(alias = "wxAutoBufferedPaintDC")]
     #[doc(alias = "AutoBufferedPaintDC")]
     class AutoBufferedPaintDC
@@ -417,6 +474,9 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> AutoBufferedPaintDCIsOwned<OWNED> {
+    /// Constructor.
+    ///
+    /// [See `wxAutoBufferedPaintDC::wxAutoBufferedPaintDC()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_auto_buffered_paint_d_c.html#a80468adfa451fbec5345ba8c32ae01b1)
     pub fn new<W: WindowMethods>(window: Option<&W>) -> AutoBufferedPaintDCIsOwned<OWNED> {
         unsafe {
             let window = match window {

@@ -54,6 +54,12 @@ class RustClassBinding:
         else:
             unprefixed = self.__model.unprefixed()
             yield 'wxwidgets! {'
+            yield '    /// %s' % (self.__model.doc,)
+            yield '    ///'
+            yield "    /// [See `%s`'s original doc.](%s)" % (
+                self.__model.name,
+                self.__model.doc_url(),
+            )
             for alias in (self.__model.name, unprefixed):
                 yield '    #[doc(alias = "%s")]' % (alias,)
             yield '    class %s' % (unprefixed,)
@@ -428,6 +434,15 @@ class RustMethodBinding:
         if for_ffi:
             yield '%s;' % (signature,)
         else:
+            doc = self.__model.doc
+            if doc:
+                yield '/// %s' % (doc,)
+            yield '///'
+            yield "/// [See `%s::%s()`'s original doc.](%s)" % (
+                self.__model.cls.name,
+                self.__model.name(without_index=True),
+                self.__model.doc_url(),
+            )
             yield '%s {' % (signature,)
             body_lines = list(self._binding_body())
             for line in self._wrap_unsafe(body_lines):

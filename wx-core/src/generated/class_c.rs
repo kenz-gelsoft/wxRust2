@@ -2,6 +2,9 @@ use super::*;
 
 // wxCalculateLayoutEvent
 wxwidgets! {
+    /// This event is sent by wxLayoutAlgorithm to calculate the amount of the remaining client area that the window should occupy.
+    ///
+    /// [See `wxCalculateLayoutEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calculate_layout_event.html)
     #[doc(alias = "wxCalculateLayoutEvent")]
     #[doc(alias = "CalculateLayoutEvent")]
     class CalculateLayoutEvent
@@ -11,6 +14,9 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> CalculateLayoutEventIsOwned<OWNED> {
+    /// Constructor.
+    ///
+    /// [See `wxCalculateLayoutEvent::wxCalculateLayoutEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calculate_layout_event.html#a132da85194408f1ee9e57929a63e4af0)
     pub fn new(id: c_int) -> CalculateLayoutEventIsOwned<OWNED> {
         unsafe { CalculateLayoutEventIsOwned(ffi::wxCalculateLayoutEvent_new(id)) }
     }
@@ -48,6 +54,9 @@ impl<const OWNED: bool> Drop for CalculateLayoutEventIsOwned<OWNED> {
 
 // wxCalendarCtrl
 wxwidgets! {
+    /// The calendar control allows the user to pick a date.
+    ///
+    /// [See `wxCalendarCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html)
     #[doc(alias = "wxCalendarCtrl")]
     #[doc(alias = "CalendarCtrl")]
     class CalendarCtrl
@@ -59,9 +68,15 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> CalendarCtrlIsOwned<OWNED> {
+    /// Default constructor.
+    ///
+    /// [See `wxCalendarCtrl::wxCalendarCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#ab25f66cdb24c24f0e21ccb4761a5aff1)
     pub fn new_2step() -> CalendarCtrlIsOwned<OWNED> {
         unsafe { CalendarCtrlIsOwned(ffi::wxCalendarCtrl_new()) }
     }
+    /// Does the same as Create() method.
+    ///
+    /// [See `wxCalendarCtrl::wxCalendarCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#aaa594799b72c7b7fbbd80346d202f582)
     pub fn new<W: WindowMethods, D: DateTimeMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -123,6 +138,9 @@ impl<const OWNED: bool> DynamicCast for CalendarCtrlIsOwned<OWNED> {
 
 // wxCalendarDateAttr
 wxwidgets! {
+    /// wxCalendarDateAttr is a custom attributes for a calendar date.
+    ///
+    /// [See `wxCalendarDateAttr`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html)
     #[doc(alias = "wxCalendarDateAttr")]
     #[doc(alias = "CalendarDateAttr")]
     class CalendarDateAttr
@@ -151,6 +169,9 @@ impl<const OWNED: bool> Drop for CalendarDateAttrIsOwned<OWNED> {
 
 // wxCalendarEvent
 wxwidgets! {
+    /// The wxCalendarEvent class is used together with wxCalendarCtrl.
+    ///
+    /// [See `wxCalendarEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_event.html)
     #[doc(alias = "wxCalendarEvent")]
     #[doc(alias = "CalendarEvent")]
     class CalendarEvent
@@ -162,6 +183,8 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> CalendarEventIsOwned<OWNED> {
+    ///
+    /// [See `wxCalendarEvent::wxCalendarEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_event.html#af4042d0201f1f5a593ec298b908187f8)
     pub fn new() -> CalendarEventIsOwned<OWNED> {
         unsafe { CalendarEventIsOwned(ffi::wxCalendarEvent_new()) }
     }
@@ -210,6 +233,9 @@ impl<const OWNED: bool> Drop for CalendarEventIsOwned<OWNED> {
 
 // wxCaret
 wxwidgets! {
+    /// A caret is a blinking cursor showing the position where the typed text will appear.
+    ///
+    /// [See `wxCaret`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_caret.html)
     #[doc(alias = "wxCaret")]
     #[doc(alias = "Caret")]
     class Caret
@@ -217,9 +243,15 @@ wxwidgets! {
         CaretMethods
 }
 impl<const OWNED: bool> CaretIsOwned<OWNED> {
+    /// Default constructor.
+    ///
+    /// [See `wxCaret::wxCaret()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_caret.html#a07b320d7d5296d378fa8d6350e2ecf22)
     pub fn new() -> CaretIsOwned<OWNED> {
         unsafe { CaretIsOwned(ffi::wxCaret_new()) }
     }
+    /// Creates a caret with the given size (in pixels) and associates it with the window.
+    ///
+    /// [See `wxCaret::wxCaret()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_caret.html#a69612cbfbe2bd14a244b9c347db5e142)
     pub fn new_with_window_int<W: WindowMethods>(
         window: Option<&W>,
         width: c_int,
@@ -233,6 +265,8 @@ impl<const OWNED: bool> CaretIsOwned<OWNED> {
             CaretIsOwned(ffi::wxCaret_new1(window, width, height))
         }
     }
+    ///
+    /// [See `wxCaret::wxCaret()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_caret.html#a60b70ae60ae73f9e3c86bfb08c628e64)
     pub fn new_with_window_size<W: WindowMethods, S: SizeMethods>(
         window: Option<&W>,
         size: &S,
@@ -265,6 +299,9 @@ impl<const OWNED: bool> Drop for CaretIsOwned<OWNED> {
 
 // wxCheckBox
 wxwidgets! {
+    /// A checkbox is a labelled box which by default is either on (checkmark is visible) or off (no checkmark).
+    ///
+    /// [See `wxCheckBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_check_box.html)
     #[doc(alias = "wxCheckBox")]
     #[doc(alias = "CheckBox")]
     class CheckBox
@@ -276,9 +313,15 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> CheckBoxIsOwned<OWNED> {
+    /// Default constructor.
+    ///
+    /// [See `wxCheckBox::wxCheckBox()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_check_box.html#a2b239bc0db88dcae8b1dfe2ac3e7f96f)
     pub fn new_2step() -> CheckBoxIsOwned<OWNED> {
         unsafe { CheckBoxIsOwned(ffi::wxCheckBox_new()) }
     }
+    /// Constructor, creating and showing a checkbox.
+    ///
+    /// [See `wxCheckBox::wxCheckBox()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_check_box.html#a5ab183aef8c69afd5ca12de0ce41dbc4)
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -343,6 +386,9 @@ impl<const OWNED: bool> DynamicCast for CheckBoxIsOwned<OWNED> {
 
 // wxCheckListBox
 wxwidgets! {
+    /// A wxCheckListBox is like a wxListBox, but allows items to be checked or unchecked.
+    ///
+    /// [See `wxCheckListBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_check_list_box.html)
     #[doc(alias = "wxCheckListBox")]
     #[doc(alias = "CheckListBox")]
     class CheckListBox
@@ -355,10 +401,16 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> CheckListBoxIsOwned<OWNED> {
+    /// Default constructor.
+    ///
+    /// [See `wxCheckListBox::wxCheckListBox()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_check_list_box.html#a7ef1af0cad44ed9b4ab99daa3469e10b)
     pub fn new_2step() -> CheckListBoxIsOwned<OWNED> {
         unsafe { CheckListBoxIsOwned(ffi::wxCheckListBox_new()) }
     }
     // NOT_SUPPORTED: fn wxCheckListBox1()
+    /// Constructor, creating and showing a list box.
+    ///
+    /// [See `wxCheckListBox::wxCheckListBox()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_check_list_box.html#abe40b7afe1da92affd48c6522f02c762)
     pub fn new<
         W: WindowMethods,
         P: PointMethods,
@@ -443,6 +495,8 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for CheckListBoxIsOwned<OW
 }
 impl<const OWNED: bool> ListBoxMethods for CheckListBoxIsOwned<OWNED> {
     // NOT_SUPPORTED: fn Create()
+    ///
+    /// [See `wxCheckListBox::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_check_list_box.html#a1ff3c075762c1be1321c5d6e9a71bd1e)
     fn create_arraystring<
         W: WindowMethods,
         P: PointMethods,
@@ -488,6 +542,9 @@ impl<const OWNED: bool> ListBoxMethods for CheckListBoxIsOwned<OWNED> {
 
 // wxChildFocusEvent
 wxwidgets! {
+    /// A child focus event is sent to a (parent-)window when one of its child windows gains focus, so that the window could restore the focus back to its corresponding child if it loses it now and regains later.
+    ///
+    /// [See `wxChildFocusEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_child_focus_event.html)
     #[doc(alias = "wxChildFocusEvent")]
     #[doc(alias = "ChildFocusEvent")]
     class ChildFocusEvent
@@ -498,6 +555,9 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ChildFocusEventIsOwned<OWNED> {
+    /// Constructor.
+    ///
+    /// [See `wxChildFocusEvent::wxChildFocusEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_child_focus_event.html#ad630ddc1fb95a86a74efdbe04e6105b6)
     pub fn new<W: WindowMethods>(win: Option<&W>) -> ChildFocusEventIsOwned<OWNED> {
         unsafe {
             let win = match win {
@@ -546,6 +606,9 @@ impl<const OWNED: bool> Drop for ChildFocusEventIsOwned<OWNED> {
 
 // wxChoice
 wxwidgets! {
+    /// A choice item is used to select one of a list of strings.
+    ///
+    /// [See `wxChoice`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_choice.html)
     #[doc(alias = "wxChoice")]
     #[doc(alias = "Choice")]
     class Choice
@@ -557,10 +620,16 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ChoiceIsOwned<OWNED> {
+    /// Default constructor.
+    ///
+    /// [See `wxChoice::wxChoice()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_choice.html#abe4fa74cf09a21608e90cd55ca96fabd)
     pub fn new_2step() -> ChoiceIsOwned<OWNED> {
         unsafe { ChoiceIsOwned(ffi::wxChoice_new()) }
     }
     // NOT_SUPPORTED: fn wxChoice1()
+    /// Constructor, creating and showing a choice.
+    ///
+    /// [See `wxChoice::wxChoice()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_choice.html#a2bb4542d8803a4c91de478831f6ed560)
     pub fn new<
         W: WindowMethods,
         P: PointMethods,
@@ -641,6 +710,9 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for ChoiceIsOwned<OWNED> {
 
 // wxChoicebook
 wxwidgets! {
+    /// wxChoicebook is a class similar to wxNotebook, but uses a wxChoice control to show the labels instead of the tabs.
+    ///
+    /// [See `wxChoicebook`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_choicebook.html)
     #[doc(alias = "wxChoicebook")]
     #[doc(alias = "Choicebook")]
     class Choicebook
@@ -653,9 +725,14 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ChoicebookIsOwned<OWNED> {
+    /// Constructs a choicebook control.
+    ///
+    /// [See `wxChoicebook::wxChoicebook()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_choicebook.html#aa06ad50928a63e7067e9e496e4fbcf08)
     pub fn new_2step() -> ChoicebookIsOwned<OWNED> {
         unsafe { ChoicebookIsOwned(ffi::wxChoicebook_new()) }
     }
+    ///
+    /// [See `wxChoicebook::wxChoicebook()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_choicebook.html#ab4054d2f57aebdc7d6991798c4a3376f)
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -716,6 +793,9 @@ impl<const OWNED: bool> DynamicCast for ChoicebookIsOwned<OWNED> {
     }
 }
 impl<const OWNED: bool> WindowMethods for ChoicebookIsOwned<OWNED> {
+    /// Create the choicebook control that has already been constructed with the default constructor.
+    ///
+    /// [See `wxChoicebook::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_choicebook.html#a101f60164662715ef3a95a9ce3709037)
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -741,6 +821,9 @@ impl<const OWNED: bool> WindowMethods for ChoicebookIsOwned<OWNED> {
 
 // wxClientDC
 wxwidgets! {
+    /// wxClientDC is primarily useful for obtaining information about the window from outside EVT_PAINT() handler.
+    ///
+    /// [See `wxClientDC`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_client_d_c.html)
     #[doc(alias = "wxClientDC")]
     #[doc(alias = "ClientDC")]
     class ClientDC
@@ -751,6 +834,9 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ClientDCIsOwned<OWNED> {
+    /// Constructor.
+    ///
+    /// [See `wxClientDC::wxClientDC()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_client_d_c.html#ac2deeb91c3d7f8dd755e6f6166159501)
     pub fn new<W: WindowMethods>(window: Option<&W>) -> ClientDCIsOwned<OWNED> {
         unsafe {
             let window = match window {
@@ -799,6 +885,9 @@ impl<const OWNED: bool> Drop for ClientDCIsOwned<OWNED> {
 
 // wxClipboard
 wxwidgets! {
+    /// A class for manipulating the clipboard.
+    ///
+    /// [See `wxClipboard`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_clipboard.html)
     #[doc(alias = "wxClipboard")]
     #[doc(alias = "Clipboard")]
     class Clipboard
@@ -807,6 +896,9 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ClipboardIsOwned<OWNED> {
+    /// Default constructor.
+    ///
+    /// [See `wxClipboard::wxClipboard()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_clipboard.html#a8d61a457ae71f52f718e0225ba3e8bb4)
     pub fn new() -> ClipboardIsOwned<OWNED> {
         unsafe { ClipboardIsOwned(ffi::wxClipboard_new()) }
     }
@@ -839,6 +931,9 @@ impl<const OWNED: bool> Drop for ClipboardIsOwned<OWNED> {
 
 // wxClipboardTextEvent
 wxwidgets! {
+    /// This class represents the events generated by a control (typically a wxTextCtrl but other windows can generate these events as well) when its content gets copied or cut to, or pasted from the clipboard.
+    ///
+    /// [See `wxClipboardTextEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_clipboard_text_event.html)
     #[doc(alias = "wxClipboardTextEvent")]
     #[doc(alias = "ClipboardTextEvent")]
     class ClipboardTextEvent
@@ -889,6 +984,9 @@ impl<const OWNED: bool> Drop for ClipboardTextEventIsOwned<OWNED> {
 
 // wxCloseEvent
 wxwidgets! {
+    /// This event class contains information about window and session close events.
+    ///
+    /// [See `wxCloseEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_close_event.html)
     #[doc(alias = "wxCloseEvent")]
     #[doc(alias = "CloseEvent")]
     class CloseEvent
@@ -933,6 +1031,9 @@ impl<const OWNED: bool> Drop for CloseEventIsOwned<OWNED> {
 
 // wxCollapsiblePane
 wxwidgets! {
+    /// A collapsible pane is a container with an embedded button-like control which can be used by the user to collapse or expand the pane's contents.
+    ///
+    /// [See `wxCollapsiblePane`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane.html)
     #[doc(alias = "wxCollapsiblePane")]
     #[doc(alias = "CollapsiblePane")]
     class CollapsiblePane
@@ -944,9 +1045,15 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> CollapsiblePaneIsOwned<OWNED> {
+    /// Default constructor.
+    ///
+    /// [See `wxCollapsiblePane::wxCollapsiblePane()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane.html#afe29ca6c7b230a05d63022c3adb7348a)
     pub fn new_2step() -> CollapsiblePaneIsOwned<OWNED> {
         unsafe { CollapsiblePaneIsOwned(ffi::wxCollapsiblePane_new()) }
     }
+    /// Initializes the object and calls Create() with all the parameters.
+    ///
+    /// [See `wxCollapsiblePane::wxCollapsiblePane()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane.html#a920561522d4b28c08b8d693047c3aa38)
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -1011,6 +1118,9 @@ impl<const OWNED: bool> DynamicCast for CollapsiblePaneIsOwned<OWNED> {
 
 // wxCollapsiblePaneEvent
 wxwidgets! {
+    /// This event class is used for the events generated by wxCollapsiblePane.
+    ///
+    /// [See `wxCollapsiblePaneEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane_event.html)
     #[doc(alias = "wxCollapsiblePaneEvent")]
     #[doc(alias = "CollapsiblePaneEvent")]
     class CollapsiblePaneEvent
@@ -1021,6 +1131,9 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> CollapsiblePaneEventIsOwned<OWNED> {
+    /// The constructor is not normally used by the user code.
+    ///
+    /// [See `wxCollapsiblePaneEvent::wxCollapsiblePaneEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane_event.html#a4b2a4c27e9908f892be38971b0ddf555)
     pub fn new<O: ObjectMethods>(
         generator: Option<&O>,
         id: c_int,
@@ -1073,6 +1186,9 @@ impl<const OWNED: bool> Drop for CollapsiblePaneEventIsOwned<OWNED> {
 
 // wxColour
 wxwidgets! {
+    /// A colour is an object representing a combination of Red, Green, and Blue (RGB) intensity values and an Alpha value, and is used to determine drawing colours.
+    ///
+    /// [See `wxColour`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour.html)
     #[doc(alias = "wxColour")]
     #[doc(alias = "Colour")]
     class Colour
@@ -1081,10 +1197,15 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ColourIsOwned<OWNED> {
+    /// Default constructor.
+    ///
+    /// [See `wxColour::wxColour()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour.html#aac96e7922132d672a1f83d59ecf07343)
     pub fn new() -> ColourIsOwned<OWNED> {
         unsafe { ColourIsOwned(ffi::wxColour_new()) }
     }
     // NOT_SUPPORTED: fn wxColour1()
+    ///
+    /// [See `wxColour::wxColour()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour.html#ae114ff88fe3a07477d111baa01c1b325)
     pub fn new_with_str(colour_name: &str) -> ColourIsOwned<OWNED> {
         unsafe {
             let colour_name = WxString::from(colour_name);
@@ -1093,6 +1214,9 @@ impl<const OWNED: bool> ColourIsOwned<OWNED> {
         }
     }
     // NOT_SUPPORTED: fn wxColour3()
+    /// Copy constructor.
+    ///
+    /// [See `wxColour::wxColour()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour.html#a0fbc51432a57424a0538d0932af6bf78)
     pub fn new_with_colour<C: ColourMethods>(colour: &C) -> ColourIsOwned<OWNED> {
         unsafe {
             let colour = colour.as_ptr();
@@ -1128,6 +1252,9 @@ impl<const OWNED: bool> Drop for ColourIsOwned<OWNED> {
 
 // wxColourData
 wxwidgets! {
+    /// This class holds a variety of information related to colour dialogs.
+    ///
+    /// [See `wxColourData`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_data.html)
     #[doc(alias = "wxColourData")]
     #[doc(alias = "ColourData")]
     class ColourData
@@ -1139,6 +1266,9 @@ impl<const OWNED: bool> ColourDataIsOwned<OWNED> {
     //  ENUM: @6
     pub const NUM_CUSTOM: c_int = 16;
 
+    /// Constructor.
+    ///
+    /// [See `wxColourData::wxColourData()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_data.html#a970e44b3f6ee89a4f4621bd76eb3738c)
     pub fn new() -> ColourDataIsOwned<OWNED> {
         unsafe { ColourDataIsOwned(ffi::wxColourData_new()) }
     }
@@ -1171,6 +1301,9 @@ impl<const OWNED: bool> Drop for ColourDataIsOwned<OWNED> {
 
 // wxColourDatabase
 wxwidgets! {
+    /// wxWidgets maintains a database of standard RGB colours for a predefined set of named colours.
+    ///
+    /// [See `wxColourDatabase`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_database.html)
     #[doc(alias = "wxColourDatabase")]
     #[doc(alias = "ColourDatabase")]
     class ColourDatabase
@@ -1178,6 +1311,9 @@ wxwidgets! {
         ColourDatabaseMethods
 }
 impl<const OWNED: bool> ColourDatabaseIsOwned<OWNED> {
+    /// Constructs the colour database.
+    ///
+    /// [See `wxColourDatabase::wxColourDatabase()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_database.html#a66269122cb725da348b3a1c396002e41)
     pub fn new() -> ColourDatabaseIsOwned<OWNED> {
         unsafe { ColourDatabaseIsOwned(ffi::wxColourDatabase_new()) }
     }
@@ -1200,6 +1336,9 @@ impl<const OWNED: bool> Drop for ColourDatabaseIsOwned<OWNED> {
 
 // wxColourDialog
 wxwidgets! {
+    /// This class represents the colour chooser dialog.
+    ///
+    /// [See `wxColourDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_dialog.html)
     #[doc(alias = "wxColourDialog")]
     #[doc(alias = "ColourDialog")]
     class ColourDialog
@@ -1213,6 +1352,9 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ColourDialogIsOwned<OWNED> {
+    /// Constructor.
+    ///
+    /// [See `wxColourDialog::wxColourDialog()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_dialog.html#a357b4f19cd3757c6f74c44cd49a1d90e)
     pub fn new<W: WindowMethods, C: ColourDataMethods>(
         parent: Option<&W>,
         data: Option<&C>,
@@ -1276,6 +1418,9 @@ impl<const OWNED: bool> DynamicCast for ColourDialogIsOwned<OWNED> {
 
 // wxColourPickerCtrl
 wxwidgets! {
+    /// This control allows the user to select a colour.
+    ///
+    /// [See `wxColourPickerCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_picker_ctrl.html)
     #[doc(alias = "wxColourPickerCtrl")]
     #[doc(alias = "ColourPickerCtrl")]
     class ColourPickerCtrl
@@ -1288,9 +1433,14 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ColourPickerCtrlIsOwned<OWNED> {
+    ///
+    /// [See `wxColourPickerCtrl::wxColourPickerCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_picker_ctrl.html#a610182eb11286c6df2fbd195b98868cd)
     pub fn new_2step() -> ColourPickerCtrlIsOwned<OWNED> {
         unsafe { ColourPickerCtrlIsOwned(ffi::wxColourPickerCtrl_new()) }
     }
+    /// Initializes the object and calls Create() with all the parameters.
+    ///
+    /// [See `wxColourPickerCtrl::wxColourPickerCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_picker_ctrl.html#a3763437a33dd948c3ae0d7a2210b7c0e)
     pub fn new<
         W: WindowMethods,
         C: ColourMethods,
@@ -1365,6 +1515,9 @@ impl<const OWNED: bool> DynamicCast for ColourPickerCtrlIsOwned<OWNED> {
 
 // wxColourPickerEvent
 wxwidgets! {
+    /// This event class is used for the events generated by wxColourPickerCtrl.
+    ///
+    /// [See `wxColourPickerEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_picker_event.html)
     #[doc(alias = "wxColourPickerEvent")]
     #[doc(alias = "ColourPickerEvent")]
     class ColourPickerEvent
@@ -1375,9 +1528,14 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ColourPickerEventIsOwned<OWNED> {
+    ///
+    /// [See `wxColourPickerEvent::wxColourPickerEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_picker_event.html#afa8edf53f69e85cbaa6a1f2e91c22f2e)
     pub fn new() -> ColourPickerEventIsOwned<OWNED> {
         unsafe { ColourPickerEventIsOwned(ffi::wxColourPickerEvent_new()) }
     }
+    /// The constructor is not normally used by the user code.
+    ///
+    /// [See `wxColourPickerEvent::wxColourPickerEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_picker_event.html#ab9d9e7ef4204c0dc7511eddf4fc4eb0c)
     pub fn new_with_object<O: ObjectMethods, C: ColourMethods>(
         generator: Option<&O>,
         id: c_int,
@@ -1431,6 +1589,9 @@ impl<const OWNED: bool> Drop for ColourPickerEventIsOwned<OWNED> {
 
 // wxComboBox
 wxwidgets! {
+    /// A combobox is like a combination of an edit control and a listbox.
+    ///
+    /// [See `wxComboBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_box.html)
     #[doc(alias = "wxComboBox")]
     #[doc(alias = "ComboBox")]
     class ComboBox
@@ -1442,10 +1603,16 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ComboBoxIsOwned<OWNED> {
+    /// Default constructor.
+    ///
+    /// [See `wxComboBox::wxComboBox()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_box.html#aac1f4d94c40a0a675dd5b2c72376057a)
     pub fn new_2step() -> ComboBoxIsOwned<OWNED> {
         unsafe { ComboBoxIsOwned(ffi::wxComboBox_new()) }
     }
     // NOT_SUPPORTED: fn wxComboBox1()
+    /// Constructor, creating and showing a combobox.
+    ///
+    /// [See `wxComboBox::wxComboBox()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_box.html#ade11ed7d2b64bd1f50cdb34f162e120f)
     pub fn new<
         W: WindowMethods,
         P: PointMethods,
@@ -1534,6 +1701,9 @@ impl<const OWNED: bool> TextEntryMethods for ComboBoxIsOwned<OWNED> {
 
 // wxComboCtrl
 wxwidgets! {
+    /// A combo control is a generic combobox that allows totally custom popup.
+    ///
+    /// [See `wxComboCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html)
     #[doc(alias = "wxComboCtrl")]
     #[doc(alias = "ComboCtrl")]
     class ComboCtrl
@@ -1550,9 +1720,15 @@ impl<const OWNED: bool> ComboCtrlIsOwned<OWNED> {
     pub const ShowAbove: c_int = 0x0001;
     pub const CanDeferShow: c_int = 0x0002;
 
+    /// Default constructor.
+    ///
+    /// [See `wxComboCtrl::wxComboCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#af31b505e73047689dc4d2948eaa13a3d)
     pub fn new_2step() -> ComboCtrlIsOwned<OWNED> {
         unsafe { ComboCtrlIsOwned(ffi::wxComboCtrl_new()) }
     }
+    /// Constructor, creating and showing a combo control.
+    ///
+    /// [See `wxComboCtrl::wxComboCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#a0f9d6b21d3728f135dbe0d01ee4bf865)
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -1623,6 +1799,9 @@ impl<const OWNED: bool> TextEntryMethods for ComboCtrlIsOwned<OWNED> {
 
 // wxComboPopup
 wxwidgets! {
+    /// In order to use a custom popup with wxComboCtrl, an interface class must be derived from wxComboPopup.
+    ///
+    /// [See `wxComboPopup`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_popup.html)
     #[doc(alias = "wxComboPopup")]
     #[doc(alias = "ComboPopup")]
     class ComboPopup
@@ -1650,6 +1829,9 @@ impl<const OWNED: bool> Drop for ComboPopupIsOwned<OWNED> {
 
 // wxCommand
 wxwidgets! {
+    /// wxCommand is a base class for modelling an application command, which is an action usually performed by selecting a menu item, pressing a toolbar button or any other means provided by the application to change the data or view.
+    ///
+    /// [See `wxCommand`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command.html)
     #[doc(alias = "wxCommand")]
     #[doc(alias = "Command")]
     class Command
@@ -1688,6 +1870,9 @@ impl<const OWNED: bool> Drop for CommandIsOwned<OWNED> {
 
 // wxCommandEvent
 wxwidgets! {
+    /// This event class contains information about command events, which originate from a variety of simple controls.
+    ///
+    /// [See `wxCommandEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_event.html)
     #[doc(alias = "wxCommandEvent")]
     #[doc(alias = "CommandEvent")]
     class CommandEvent
@@ -1732,6 +1917,9 @@ impl<const OWNED: bool> Drop for CommandEventIsOwned<OWNED> {
 
 // wxCommandLinkButton
 wxwidgets! {
+    /// Objects of this class are similar in appearance to the normal wxButtons but are similar to the links in a web page in functionality.
+    ///
+    /// [See `wxCommandLinkButton`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_link_button.html)
     #[doc(alias = "wxCommandLinkButton")]
     #[doc(alias = "CommandLinkButton")]
     class CommandLinkButton
@@ -1745,9 +1933,15 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> CommandLinkButtonIsOwned<OWNED> {
+    /// Default constructor.
+    ///
+    /// [See `wxCommandLinkButton::wxCommandLinkButton()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_link_button.html#a05be41a7e1fd702cee7662e1a6ae9293)
     pub fn new_2step() -> CommandLinkButtonIsOwned<OWNED> {
         unsafe { CommandLinkButtonIsOwned(ffi::wxCommandLinkButton_new()) }
     }
+    /// Constructor really creating a command Link button.
+    ///
+    /// [See `wxCommandLinkButton::wxCommandLinkButton()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_link_button.html#a193413ad8afa7895bdb0ef133a454234)
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -1825,6 +2019,9 @@ impl<const OWNED: bool> DynamicCast for CommandLinkButtonIsOwned<OWNED> {
 
 // wxCommandProcessor
 wxwidgets! {
+    /// wxCommandProcessor is a class that maintains a history of wxCommands, with undo/redo functionality built-in.
+    ///
+    /// [See `wxCommandProcessor`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html)
     #[doc(alias = "wxCommandProcessor")]
     #[doc(alias = "CommandProcessor")]
     class CommandProcessor
@@ -1833,6 +2030,9 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> CommandProcessorIsOwned<OWNED> {
+    /// Constructor.
+    ///
+    /// [See `wxCommandProcessor::wxCommandProcessor()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#a8f0b55885b6ea95037e81bbe76e28d74)
     pub fn new(max_commands: c_int) -> CommandProcessorIsOwned<OWNED> {
         unsafe { CommandProcessorIsOwned(ffi::wxCommandProcessor_new(max_commands)) }
     }
@@ -1865,6 +2065,9 @@ impl<const OWNED: bool> Drop for CommandProcessorIsOwned<OWNED> {
 
 // wxContextMenuEvent
 wxwidgets! {
+    /// This class is used for context menu events, sent to give the application a chance to show a context (popup) menu for a wxWindow.
+    ///
+    /// [See `wxContextMenuEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_context_menu_event.html)
     #[doc(alias = "wxContextMenuEvent")]
     #[doc(alias = "ContextMenuEvent")]
     class ContextMenuEvent
@@ -1915,6 +2118,9 @@ impl<const OWNED: bool> Drop for ContextMenuEventIsOwned<OWNED> {
 
 // wxControl
 wxwidgets! {
+    /// This is the base class for a control or "widget".
+    ///
+    /// [See `wxControl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_control.html)
     #[doc(alias = "wxControl")]
     #[doc(alias = "Control")]
     class Control
@@ -1925,6 +2131,9 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> ControlIsOwned<OWNED> {
+    /// Constructs a control.
+    ///
+    /// [See `wxControl::wxControl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_control.html#adb8f3edf807efa9159de826bf92d6a44)
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -1949,6 +2158,9 @@ impl<const OWNED: bool> ControlIsOwned<OWNED> {
             ))
         }
     }
+    /// Default constructor to allow 2-phase creation.
+    ///
+    /// [See `wxControl::wxControl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_control.html#a08428de2ba5cc988a86fe17071d49522)
     pub fn new_2step() -> ControlIsOwned<OWNED> {
         unsafe { ControlIsOwned(ffi::wxControl_new1()) }
     }
@@ -1984,6 +2196,9 @@ impl<const OWNED: bool> DynamicCast for ControlIsOwned<OWNED> {
 
 // wxControlWithItems
 wxwidgets! {
+    /// This is convenience class that derives from both wxControl and wxItemContainer.
+    ///
+    /// [See `wxControlWithItems`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_control_with_items.html)
     #[doc(alias = "wxControlWithItems")]
     #[doc(alias = "ControlWithItems")]
     class ControlWithItems
@@ -2043,6 +2258,9 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for ControlWithItemsIsOwne
 
 // wxCursor
 wxwidgets! {
+    /// A cursor is a small bitmap usually used for denoting where the mouse pointer is, with a picture that might indicate the interpretation of a mouse click.
+    ///
+    /// [See `wxCursor`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_cursor.html)
     #[doc(alias = "wxCursor")]
     #[doc(alias = "Cursor")]
     class Cursor
@@ -2052,21 +2270,33 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> CursorIsOwned<OWNED> {
+    /// Default constructor.
+    ///
+    /// [See `wxCursor::wxCursor()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_cursor.html#a21735e923430faf941c440c67f13859d)
     pub fn new() -> CursorIsOwned<OWNED> {
         unsafe { CursorIsOwned(ffi::wxCursor_new()) }
     }
     // NOT_SUPPORTED: fn wxCursor1()
     // NOT_SUPPORTED: fn wxCursor2()
     // NOT_SUPPORTED: fn wxCursor3()
+    /// Constructs a cursor from a wxImage.
+    ///
+    /// [See `wxCursor::wxCursor()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_cursor.html#adaf6e394c7306a3999bdc314d7b307a7)
     pub fn new_with_image<I: ImageMethods>(image: &I) -> CursorIsOwned<OWNED> {
         unsafe {
             let image = image.as_ptr();
             CursorIsOwned(ffi::wxCursor_new4(image))
         }
     }
+    /// Constructs a cursor from XPM data.
+    ///
+    /// [See `wxCursor::wxCursor()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_cursor.html#abb43549ff688898c79f48112ff85f7d7)
     pub fn new_with_char(xpm_data: *const c_void) -> CursorIsOwned<OWNED> {
         unsafe { CursorIsOwned(ffi::wxCursor_new5(xpm_data)) }
     }
+    /// Copy constructor, uses reference counting.
+    ///
+    /// [See `wxCursor::wxCursor()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_cursor.html#a20f3123d9d012427ae1f614e10b9cfb9)
     pub fn new_with_cursor<C: CursorMethods>(cursor: &C) -> CursorIsOwned<OWNED> {
         unsafe {
             let cursor = cursor.as_ptr();
@@ -2107,6 +2337,9 @@ impl<const OWNED: bool> Drop for CursorIsOwned<OWNED> {
 
 // wxCustomDataObject
 wxwidgets! {
+    /// wxCustomDataObject is a specialization of wxDataObjectSimple for some application-specific data in arbitrary (either custom or one of the standard ones).
+    ///
+    /// [See `wxCustomDataObject`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_custom_data_object.html)
     #[doc(alias = "wxCustomDataObject")]
     #[doc(alias = "CustomDataObject")]
     class CustomDataObject
@@ -2116,6 +2349,9 @@ wxwidgets! {
         DataObjectMethods
 }
 impl<const OWNED: bool> CustomDataObjectIsOwned<OWNED> {
+    /// The constructor accepts a format argument which specifies the (single) format supported by this object.
+    ///
+    /// [See `wxCustomDataObject::wxCustomDataObject()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_custom_data_object.html#a667ea5eae3e91095d79cb6fe9e548695)
     pub fn new<D: DataFormatMethods>(format: &D) -> CustomDataObjectIsOwned<OWNED> {
         unsafe {
             let format = format.as_ptr();

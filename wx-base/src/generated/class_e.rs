@@ -2,6 +2,9 @@ use super::*;
 
 // wxEvent
 wxwidgets! {
+    /// An event is a structure holding information about an event passed to a callback or member function.
+    ///
+    /// [See `wxEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_event.html)
     #[doc(alias = "wxEvent")]
     #[doc(alias = "Event")]
     class Event
@@ -40,6 +43,9 @@ impl<const OWNED: bool> Drop for EventIsOwned<OWNED> {
 
 // wxEvtHandler
 wxwidgets! {
+    /// A class that can handle events from the windowing system.
+    ///
+    /// [See `wxEvtHandler`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_evt_handler.html)
     #[doc(alias = "wxEvtHandler")]
     #[doc(alias = "EvtHandler")]
     class EvtHandler
@@ -48,6 +54,9 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> EvtHandlerIsOwned<OWNED> {
+    /// Constructor.
+    ///
+    /// [See `wxEvtHandler::wxEvtHandler()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_evt_handler.html#a3f0166c4154227d05575b01eb2c8d4be)
     pub fn new() -> EvtHandlerIsOwned<OWNED> {
         unsafe { EvtHandlerIsOwned(ffi::wxEvtHandler_new()) }
     }

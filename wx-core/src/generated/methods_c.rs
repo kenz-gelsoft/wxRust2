@@ -2,15 +2,27 @@ use super::*;
 
 // wxCalculateLayoutEvent
 pub trait CalculateLayoutEventMethods: EventMethods {
+    /// Returns the flags associated with this event.
+    ///
+    /// [See `wxCalculateLayoutEvent::GetFlags()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calculate_layout_event.html#a3131a5223b43cdccaa514830a6d80c1e)
     fn get_flags(&self) -> c_int {
         unsafe { ffi::wxCalculateLayoutEvent_GetFlags(self.as_ptr()) }
     }
+    /// Before the event handler is entered, returns the remaining parent client area that the window could occupy.
+    ///
+    /// [See `wxCalculateLayoutEvent::GetRect()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calculate_layout_event.html#a667b48fa98605b93d7929fe9f001f8ec)
     fn get_rect(&self) -> Rect {
         unsafe { Rect::from_ptr(ffi::wxCalculateLayoutEvent_GetRect(self.as_ptr())) }
     }
+    /// Sets the flags associated with this event.
+    ///
+    /// [See `wxCalculateLayoutEvent::SetFlags()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calculate_layout_event.html#a004b0f2a708dd3ff682d50492e7863a8)
     fn set_flags(&self, flags: c_int) {
         unsafe { ffi::wxCalculateLayoutEvent_SetFlags(self.as_ptr(), flags) }
     }
+    /// Call this to specify the new remaining parent client area, after the space occupied by the window has been subtracted.
+    ///
+    /// [See `wxCalculateLayoutEvent::SetRect()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calculate_layout_event.html#a471737747c444846393309de6e24eabc)
     fn set_rect<R: RectMethods>(&self, rect: &R) {
         unsafe {
             let rect = rect.as_ptr();
@@ -21,6 +33,9 @@ pub trait CalculateLayoutEventMethods: EventMethods {
 
 // wxCalendarCtrl
 pub trait CalendarCtrlMethods: ControlMethods {
+    /// Restrict the dates that can be selected in the control to the specified range.
+    ///
+    /// [See `wxCalendarCtrl::SetDateRange()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#a79094f14e7b500012099907dea5f3211)
     fn set_date_range<D: DateTimeMethods, D2: DateTimeMethods>(
         &self,
         lowerdate: &D,
@@ -32,6 +47,9 @@ pub trait CalendarCtrlMethods: ControlMethods {
             ffi::wxCalendarCtrl_SetDateRange(self.as_ptr(), lowerdate, upperdate)
         }
     }
+    /// Returns the limits currently being used.
+    ///
+    /// [See `wxCalendarCtrl::GetDateRange()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#ab35b63b845a16ba3861e73fe881b64d1)
     fn get_date_range<D: DateTimeMethods, D2: DateTimeMethods>(
         &self,
         lowerdate: Option<&D>,
@@ -50,6 +68,9 @@ pub trait CalendarCtrlMethods: ControlMethods {
         }
     }
     // DTOR: fn ~wxCalendarCtrl()
+    /// Creates the control.
+    ///
+    /// [See `wxCalendarCtrl::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#aad5c70c750a9f9df456fa8402f7adb7e)
     fn create_datetime<W: WindowMethods, D: DateTimeMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -73,41 +94,77 @@ pub trait CalendarCtrlMethods: ControlMethods {
             ffi::wxCalendarCtrl_Create(self.as_ptr(), parent, id, date, pos, size, style, name)
         }
     }
+    /// This function should be used instead of changing wxCAL_SHOW_HOLIDAYS style bit directly.
+    ///
+    /// [See `wxCalendarCtrl::EnableHolidayDisplay()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#ab357bcc9d60dda85a331511bb303228d)
     fn enable_holiday_display(&self, display: bool) {
         unsafe { ffi::wxCalendarCtrl_EnableHolidayDisplay(self.as_ptr(), display) }
     }
+    /// This function should be used instead of changing wxCAL_NO_MONTH_CHANGE style bit.
+    ///
+    /// [See `wxCalendarCtrl::EnableMonthChange()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#a201fb9498116d7e02f853b75d3e300e8)
     fn enable_month_change(&self, enable: bool) -> bool {
         unsafe { ffi::wxCalendarCtrl_EnableMonthChange(self.as_ptr(), enable) }
     }
     // BLOCKED: fn EnableYearChange()
+    /// Returns the attribute for the given date (should be in the range 1...31).
+    ///
+    /// [See `wxCalendarCtrl::GetAttr()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#afa23290a3f6bbec4496578801e72c159)
     fn get_attr(&self, day: usize) -> Option<CalendarDateAttrIsOwned<false>> {
         unsafe { CalendarDateAttr::option_from(ffi::wxCalendarCtrl_GetAttr(self.as_ptr(), day)) }
     }
+    /// Gets the currently selected date.
+    ///
+    /// [See `wxCalendarCtrl::GetDate()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#a419a268760a3d428659ff3efb213b8cf)
     fn get_date(&self) -> DateTime {
         unsafe { DateTime::from_ptr(ffi::wxCalendarCtrl_GetDate(self.as_ptr())) }
     }
+    /// Gets the background colour of the header part of the calendar window.
+    ///
+    /// [See `wxCalendarCtrl::GetHeaderColourBg()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#a3db6a6be0d2cec679acabd7e095779e1)
     fn get_header_colour_bg(&self) -> ColourIsOwned<false> {
         unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarCtrl_GetHeaderColourBg(self.as_ptr())) }
     }
+    /// Gets the foreground colour of the header part of the calendar window.
+    ///
+    /// [See `wxCalendarCtrl::GetHeaderColourFg()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#ace569b6138e8c37516f214b5492bfb03)
     fn get_header_colour_fg(&self) -> ColourIsOwned<false> {
         unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarCtrl_GetHeaderColourFg(self.as_ptr())) }
     }
+    /// Gets the background highlight colour.
+    ///
+    /// [See `wxCalendarCtrl::GetHighlightColourBg()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#a59a2dd56e4ffd96e1b9279cf965cf8af)
     fn get_highlight_colour_bg(&self) -> ColourIsOwned<false> {
         unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarCtrl_GetHighlightColourBg(self.as_ptr())) }
     }
+    /// Gets the foreground highlight colour.
+    ///
+    /// [See `wxCalendarCtrl::GetHighlightColourFg()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#ad69b653c2bc19eb17b95ad4e1bb8cdd2)
     fn get_highlight_colour_fg(&self) -> ColourIsOwned<false> {
         unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarCtrl_GetHighlightColourFg(self.as_ptr())) }
     }
+    /// Return the background colour currently used for holiday highlighting.
+    ///
+    /// [See `wxCalendarCtrl::GetHolidayColourBg()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#a5bfcd8b7c80b83693aec3a5584c18faa)
     fn get_holiday_colour_bg(&self) -> ColourIsOwned<false> {
         unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarCtrl_GetHolidayColourBg(self.as_ptr())) }
     }
+    /// Return the foreground colour currently used for holiday highlighting.
+    ///
+    /// [See `wxCalendarCtrl::GetHolidayColourFg()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#a24bb3a3f41f6a4e0059ea5a1cccb6eb8)
     fn get_holiday_colour_fg(&self) -> ColourIsOwned<false> {
         unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarCtrl_GetHolidayColourFg(self.as_ptr())) }
     }
     // NOT_SUPPORTED: fn HitTest()
+    /// Clears any attributes associated with the given day (in the range 1...31).
+    ///
+    /// [See `wxCalendarCtrl::ResetAttr()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#afc59e68f03a92e602822dbec608aece8)
     fn reset_attr(&self, day: usize) {
         unsafe { ffi::wxCalendarCtrl_ResetAttr(self.as_ptr(), day) }
     }
+    /// Associates the attribute with the specified date (in the range 1...31).
+    ///
+    /// [See `wxCalendarCtrl::SetAttr()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#abeded70d9cfa8d42bc7f6f6610c40a15)
     fn set_attr<C: CalendarDateAttrMethods>(&self, day: usize, attr: Option<&C>) {
         unsafe {
             let attr = match attr {
@@ -117,12 +174,18 @@ pub trait CalendarCtrlMethods: ControlMethods {
             ffi::wxCalendarCtrl_SetAttr(self.as_ptr(), day, attr)
         }
     }
+    /// Sets the current date.
+    ///
+    /// [See `wxCalendarCtrl::SetDate()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#ae10603c5b221e24665bdff196edbfb80)
     fn set_date<D: DateTimeMethods>(&self, date: &D) -> bool {
         unsafe {
             let date = date.as_ptr();
             ffi::wxCalendarCtrl_SetDate(self.as_ptr(), date)
         }
     }
+    /// Set the colours used for painting the weekdays at the top of the control.
+    ///
+    /// [See `wxCalendarCtrl::SetHeaderColours()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#a904833f654ad90958de59b61cb9e1e64)
     fn set_header_colours<C: ColourMethods, C2: ColourMethods>(&self, col_fg: &C, col_bg: &C2) {
         unsafe {
             let col_fg = col_fg.as_ptr();
@@ -130,6 +193,9 @@ pub trait CalendarCtrlMethods: ControlMethods {
             ffi::wxCalendarCtrl_SetHeaderColours(self.as_ptr(), col_fg, col_bg)
         }
     }
+    /// Set the colours to be used for highlighting the currently selected date.
+    ///
+    /// [See `wxCalendarCtrl::SetHighlightColours()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#a3f391058d675744a49cf9afaa2b786c3)
     fn set_highlight_colours<C: ColourMethods, C2: ColourMethods>(&self, col_fg: &C, col_bg: &C2) {
         unsafe {
             let col_fg = col_fg.as_ptr();
@@ -137,9 +203,15 @@ pub trait CalendarCtrlMethods: ControlMethods {
             ffi::wxCalendarCtrl_SetHighlightColours(self.as_ptr(), col_fg, col_bg)
         }
     }
+    /// Marks the specified day as being a holiday in the current month.
+    ///
+    /// [See `wxCalendarCtrl::SetHoliday()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#a801ea4e8f0bcec1c6ec5e8d75a393150)
     fn set_holiday(&self, day: usize) {
         unsafe { ffi::wxCalendarCtrl_SetHoliday(self.as_ptr(), day) }
     }
+    /// Sets the colours to be used for the holidays highlighting.
+    ///
+    /// [See `wxCalendarCtrl::SetHolidayColours()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#a3a751664b6aec52ce4252bdb099ec7eb)
     fn set_holiday_colours<C: ColourMethods, C2: ColourMethods>(&self, col_fg: &C, col_bg: &C2) {
         unsafe {
             let col_fg = col_fg.as_ptr();
@@ -147,6 +219,9 @@ pub trait CalendarCtrlMethods: ControlMethods {
             ffi::wxCalendarCtrl_SetHolidayColours(self.as_ptr(), col_fg, col_bg)
         }
     }
+    /// Mark or unmark the day.
+    ///
+    /// [See `wxCalendarCtrl::Mark()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#a7273a1c06a5a838c0a2980dececdf4f0)
     fn mark(&self, day: usize, mark: bool) {
         unsafe { ffi::wxCalendarCtrl_Mark(self.as_ptr(), day, mark) }
     }
@@ -154,39 +229,72 @@ pub trait CalendarCtrlMethods: ControlMethods {
 
 // wxCalendarDateAttr
 pub trait CalendarDateAttrMethods: WxRustMethods {
+    /// Returns the background colour set for the calendar date.
+    ///
+    /// [See `wxCalendarDateAttr::GetBackgroundColour()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#a2d01d011d63f439566338654aa94e6b7)
     fn get_background_colour(&self) -> ColourIsOwned<false> {
         unsafe {
             ColourIsOwned::from_ptr(ffi::wxCalendarDateAttr_GetBackgroundColour(self.as_ptr()))
         }
     }
     // NOT_SUPPORTED: fn GetBorder()
+    /// Returns the border colour set for the calendar date.
+    ///
+    /// [See `wxCalendarDateAttr::GetBorderColour()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#a5a6dc761f338621ef9aab76d35fbb941)
     fn get_border_colour(&self) -> ColourIsOwned<false> {
         unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarDateAttr_GetBorderColour(self.as_ptr())) }
     }
+    /// Returns the font set for the calendar date.
+    ///
+    /// [See `wxCalendarDateAttr::GetFont()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#aae0094a81cf4d134b866532bdaa48e66)
     fn get_font(&self) -> FontIsOwned<false> {
         unsafe { FontIsOwned::from_ptr(ffi::wxCalendarDateAttr_GetFont(self.as_ptr())) }
     }
+    /// Returns the text colour set for the calendar date.
+    ///
+    /// [See `wxCalendarDateAttr::GetTextColour()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#a60a1c912c70d11e17fe79cb29a424477)
     fn get_text_colour(&self) -> ColourIsOwned<false> {
         unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarDateAttr_GetTextColour(self.as_ptr())) }
     }
+    /// Returns true if a non-default text background colour is set.
+    ///
+    /// [See `wxCalendarDateAttr::HasBackgroundColour()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#a9b5be15042eb07e8e5deca3be824e613)
     fn has_background_colour(&self) -> bool {
         unsafe { ffi::wxCalendarDateAttr_HasBackgroundColour(self.as_ptr()) }
     }
+    /// Returns true if a non-default (i.e. any) border is set.
+    ///
+    /// [See `wxCalendarDateAttr::HasBorder()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#a9ff98a88950216fd97eb1dbe975fdcfc)
     fn has_border(&self) -> bool {
         unsafe { ffi::wxCalendarDateAttr_HasBorder(self.as_ptr()) }
     }
+    /// Returns true if a non-default border colour is set.
+    ///
+    /// [See `wxCalendarDateAttr::HasBorderColour()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#a0a4be19fc55c06f84e828fd1a9c0d403)
     fn has_border_colour(&self) -> bool {
         unsafe { ffi::wxCalendarDateAttr_HasBorderColour(self.as_ptr()) }
     }
+    /// Returns true if a non-default font is set.
+    ///
+    /// [See `wxCalendarDateAttr::HasFont()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#a1310e8e587988d4ebef12a666f1647f9)
     fn has_font(&self) -> bool {
         unsafe { ffi::wxCalendarDateAttr_HasFont(self.as_ptr()) }
     }
+    /// Returns true if a non-default text foreground colour is set.
+    ///
+    /// [See `wxCalendarDateAttr::HasTextColour()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#ad4e272dfff91d86619c69848c0cdc508)
     fn has_text_colour(&self) -> bool {
         unsafe { ffi::wxCalendarDateAttr_HasTextColour(self.as_ptr()) }
     }
+    /// Returns true if this calendar day is displayed as a holiday.
+    ///
+    /// [See `wxCalendarDateAttr::IsHoliday()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#a49a93b8ea20f2669c9d9fb04d38297cd)
     fn is_holiday(&self) -> bool {
         unsafe { ffi::wxCalendarDateAttr_IsHoliday(self.as_ptr()) }
     }
+    /// Sets the text background colour to use.
+    ///
+    /// [See `wxCalendarDateAttr::SetBackgroundColour()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#a2069e44cf2779b3751e9f2aac51016f4)
     fn set_background_colour<C: ColourMethods>(&self, col_back: &C) {
         unsafe {
             let col_back = col_back.as_ptr();
@@ -194,30 +302,48 @@ pub trait CalendarDateAttrMethods: WxRustMethods {
         }
     }
     // NOT_SUPPORTED: fn SetBorder()
+    /// Sets the border colour to use.
+    ///
+    /// [See `wxCalendarDateAttr::SetBorderColour()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#a4122d3da6381cad1064c782fa8f85734)
     fn set_border_colour<C: ColourMethods>(&self, col: &C) {
         unsafe {
             let col = col.as_ptr();
             ffi::wxCalendarDateAttr_SetBorderColour(self.as_ptr(), col)
         }
     }
+    /// Sets the font to use.
+    ///
+    /// [See `wxCalendarDateAttr::SetFont()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#a4109c931605578813c8ef2bdeb978c8c)
     fn set_font<F: FontMethods>(&self, font: &F) {
         unsafe {
             let font = font.as_ptr();
             ffi::wxCalendarDateAttr_SetFont(self.as_ptr(), font)
         }
     }
+    /// If holiday is true, this calendar day will be displayed as a holiday.
+    ///
+    /// [See `wxCalendarDateAttr::SetHoliday()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#a96a3d5518f288fb91456c31c4ef53147)
     fn set_holiday(&self, holiday: bool) {
         unsafe { ffi::wxCalendarDateAttr_SetHoliday(self.as_ptr(), holiday) }
     }
+    /// Sets the text (foreground) colour to use.
+    ///
+    /// [See `wxCalendarDateAttr::SetTextColour()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#a89f88fc34b15f0d466d1cdfc4e30440d)
     fn set_text_colour<C: ColourMethods>(&self, col_text: &C) {
         unsafe {
             let col_text = col_text.as_ptr();
             ffi::wxCalendarDateAttr_SetTextColour(self.as_ptr(), col_text)
         }
     }
+    /// Used (internally) by the generic wxCalendarCtrl::Mark().
+    ///
+    /// [See `wxCalendarDateAttr::GetMark()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#a49e21270d2613902f656c36113f516fd)
     fn get_mark() -> CalendarDateAttrIsOwned<false> {
         unsafe { CalendarDateAttrIsOwned::from_ptr(ffi::wxCalendarDateAttr_GetMark()) }
     }
+    /// Set the attributes that will be used to Mark() days on the generic wxCalendarCtrl.
+    ///
+    /// [See `wxCalendarDateAttr::SetMark()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#aa7aeed4f898b583e702a9fe4a56f7629)
     fn set_mark<C: CalendarDateAttrMethods>(m: &C) {
         unsafe {
             let m = m.as_ptr();
@@ -234,6 +360,9 @@ pub trait CalendarEventMethods: DateEventMethods {
 
 // wxCaret
 pub trait CaretMethods: WxRustMethods {
+    /// Creates a caret with the given size (in pixels) and associates it with the window (same as the equivalent constructors).
+    ///
+    /// [See `wxCaret::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_caret.html#a46ffb44f7380258dea2d2bf6493d0214)
     fn create_int<W: WindowMethods>(
         &self,
         window: Option<&W>,
@@ -248,6 +377,8 @@ pub trait CaretMethods: WxRustMethods {
             ffi::wxCaret_Create(self.as_ptr(), window, width, height)
         }
     }
+    ///
+    /// [See `wxCaret::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_caret.html#ae63995452133a279aa4c37befc5a9567)
     fn create_size<W: WindowMethods, S: SizeMethods>(&self, window: Option<&W>, size: &S) -> bool {
         unsafe {
             let window = match window {
@@ -258,54 +389,95 @@ pub trait CaretMethods: WxRustMethods {
             ffi::wxCaret_Create1(self.as_ptr(), window, size)
         }
     }
+    /// Get the caret position (in pixels).
+    ///
+    /// [See `wxCaret::GetPosition()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_caret.html#a9f8e3316ef96a75ae7669a4fdbbd11e0)
     fn get_position_int(&self, x: *mut c_void, y: *mut c_void) {
         unsafe { ffi::wxCaret_GetPosition(self.as_ptr(), x, y) }
     }
+    ///
+    /// [See `wxCaret::GetPosition()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_caret.html#aed175423fab541033c47d7c5af3f179a)
     fn get_position(&self) -> Point {
         unsafe { Point::from_ptr(ffi::wxCaret_GetPosition1(self.as_ptr())) }
     }
+    /// Get the caret size.
+    ///
+    /// [See `wxCaret::GetSize()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_caret.html#a9fb436c1ee5bfce27e69b2db95fd5e87)
     fn get_size_int(&self, width: *mut c_void, height: *mut c_void) {
         unsafe { ffi::wxCaret_GetSize(self.as_ptr(), width, height) }
     }
+    ///
+    /// [See `wxCaret::GetSize()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_caret.html#a820c86115f443026adaeff7529055e4c)
     fn get_size(&self) -> Size {
         unsafe { Size::from_ptr(ffi::wxCaret_GetSize1(self.as_ptr())) }
     }
+    /// Get the window the caret is associated with.
+    ///
+    /// [See `wxCaret::GetWindow()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_caret.html#a96596df1e23f92cc05f6649975c060f2)
     fn get_window(&self) -> WeakRef<Window> {
         unsafe { WeakRef::<Window>::from(ffi::wxCaret_GetWindow(self.as_ptr())) }
     }
+    /// Hides the caret, same as Show(false).
+    ///
+    /// [See `wxCaret::Hide()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_caret.html#a272c1c4887bf5b9d16213b2bd616033a)
     fn hide(&self) {
         unsafe { ffi::wxCaret_Hide(self.as_ptr()) }
     }
+    /// Returns true if the caret was created successfully.
+    ///
+    /// [See `wxCaret::IsOk()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_caret.html#afc9ee90ae1895d5cbe4bccb4e64d6da7)
     fn is_ok(&self) -> bool {
         unsafe { ffi::wxCaret_IsOk(self.as_ptr()) }
     }
+    /// Returns true if the caret is visible and false if it is permanently hidden (if it is blinking and not shown currently but will be after the next blink, this method still returns true).
+    ///
+    /// [See `wxCaret::IsVisible()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_caret.html#a90a2cf1db432b991a922ec68e7acf679)
     fn is_visible(&self) -> bool {
         unsafe { ffi::wxCaret_IsVisible(self.as_ptr()) }
     }
+    /// Move the caret to given position (in logical coordinates).
+    ///
+    /// [See `wxCaret::Move()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_caret.html#ae490dc3156c4c686bc37f601edc33388)
     fn move_int(&self, x: c_int, y: c_int) {
         unsafe { ffi::wxCaret_Move(self.as_ptr(), x, y) }
     }
+    ///
+    /// [See `wxCaret::Move()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_caret.html#a4b1e2c18b950f771b44172b752d6eb1b)
     fn move_point<P: PointMethods>(&self, pt: &P) {
         unsafe {
             let pt = pt.as_ptr();
             ffi::wxCaret_Move1(self.as_ptr(), pt)
         }
     }
+    /// Changes the size of the caret.
+    ///
+    /// [See `wxCaret::SetSize()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_caret.html#a0dd4f34b8e000a967701bb2821ed8bb2)
     fn set_size_int(&self, width: c_int, height: c_int) {
         unsafe { ffi::wxCaret_SetSize(self.as_ptr(), width, height) }
     }
+    ///
+    /// [See `wxCaret::SetSize()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_caret.html#afaed1930afff173d1a5ec005e6086509)
     fn set_size_size<S: SizeMethods>(&self, size: &S) {
         unsafe {
             let size = size.as_ptr();
             ffi::wxCaret_SetSize1(self.as_ptr(), size)
         }
     }
+    /// Shows or hides the caret.
+    ///
+    /// [See `wxCaret::Show()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_caret.html#a5112409bd3a83148f364c4b08086fe28)
     fn show(&self, show: bool) {
         unsafe { ffi::wxCaret_Show(self.as_ptr(), show) }
     }
+    /// Returns the blink time which is measured in milliseconds and is the time elapsed between 2 inversions of the caret (blink time of the caret is the same for all carets, so this functions is static).
+    ///
+    /// [See `wxCaret::GetBlinkTime()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_caret.html#ab9f9aed8b31730a8d451ce12aeffab3a)
     fn get_blink_time() -> c_int {
         unsafe { ffi::wxCaret_GetBlinkTime() }
     }
+    /// Sets the blink time for all the carets.
+    ///
+    /// [See `wxCaret::SetBlinkTime()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_caret.html#ae6018e5419476a7437940b92d10ec318)
     fn set_blink_time(milliseconds: c_int) {
         unsafe { ffi::wxCaret_SetBlinkTime(milliseconds) }
     }
@@ -314,6 +486,9 @@ pub trait CaretMethods: WxRustMethods {
 // wxCheckBox
 pub trait CheckBoxMethods: ControlMethods {
     // DTOR: fn ~wxCheckBox()
+    /// Creates the checkbox for two-step construction.
+    ///
+    /// [See `wxCheckBox::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_check_box.html#a4d9f2efaf4be717ca142fcbe854447a9)
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
         parent: Option<&W>,
@@ -350,24 +525,45 @@ pub trait CheckBoxMethods: ControlMethods {
             )
         }
     }
+    /// Gets the state of a 2-state checkbox.
+    ///
+    /// [See `wxCheckBox::GetValue()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_check_box.html#ad7e2e349016d60012d0d92f10e709758)
     fn get_value(&self) -> bool {
         unsafe { ffi::wxCheckBox_GetValue(self.as_ptr()) }
     }
+    /// Gets the state of a 3-state checkbox.
+    ///
+    /// [See `wxCheckBox::Get3StateValue()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_check_box.html#ab5551ef4c7f01a1bdb0cdbd20273b0bf)
     fn get3_state_value(&self) -> c_int {
         unsafe { ffi::wxCheckBox_Get3StateValue(self.as_ptr()) }
     }
+    /// Returns whether or not the checkbox is a 3-state checkbox.
+    ///
+    /// [See `wxCheckBox::Is3State()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_check_box.html#a1306f3deee56e14b079ae38fd4ca199f)
     fn is3_state(&self) -> bool {
         unsafe { ffi::wxCheckBox_Is3State(self.as_ptr()) }
     }
+    /// Returns whether or not the user can set the checkbox to the third state.
+    ///
+    /// [See `wxCheckBox::Is3rdStateAllowedForUser()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_check_box.html#aada3c6eb6a7a17508276880ec3414f0b)
     fn is3rd_state_allowed_for_user(&self) -> bool {
         unsafe { ffi::wxCheckBox_Is3rdStateAllowedForUser(self.as_ptr()) }
     }
+    /// This is just a maybe more readable synonym for GetValue(): just as the latter, it returns true if the checkbox is checked and false otherwise.
+    ///
+    /// [See `wxCheckBox::IsChecked()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_check_box.html#a783aefab1b1388572f2886f6bac0e7fe)
     fn is_checked(&self) -> bool {
         unsafe { ffi::wxCheckBox_IsChecked(self.as_ptr()) }
     }
+    /// Sets the checkbox to the given state.
+    ///
+    /// [See `wxCheckBox::SetValue()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_check_box.html#a6b19d59054f3f038ffaa279bf99552fe)
     fn set_value(&self, state: bool) {
         unsafe { ffi::wxCheckBox_SetValue(self.as_ptr(), state) }
     }
+    /// Sets the checkbox to the given state.
+    ///
+    /// [See `wxCheckBox::Set3StateValue()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_check_box.html#aa5c882ce796f17f5742c8f81613e8a90)
     fn set3_state_value(&self, state: c_int) {
         unsafe { ffi::wxCheckBox_Set3StateValue(self.as_ptr(), state) }
     }
@@ -376,12 +572,21 @@ pub trait CheckBoxMethods: ControlMethods {
 // wxCheckListBox
 pub trait CheckListBoxMethods: ListBoxMethods {
     // DTOR: fn ~wxCheckListBox()
+    /// Checks the given item.
+    ///
+    /// [See `wxCheckListBox::Check()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_check_list_box.html#a6843e58a97dfe738a1d2e59f5a284495)
     fn check(&self, item: c_uint, check: bool) {
         unsafe { ffi::wxCheckListBox_Check(self.as_ptr(), item, check) }
     }
+    /// Returns true if the given item is checked, false otherwise.
+    ///
+    /// [See `wxCheckListBox::IsChecked()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_check_list_box.html#ad170533dca59d6b1a2c2919777498fe1)
     fn is_checked(&self, item: c_uint) -> bool {
         unsafe { ffi::wxCheckListBox_IsChecked(self.as_ptr(), item) }
     }
+    /// Return the indices of the checked items.
+    ///
+    /// [See `wxCheckListBox::GetCheckedItems()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_check_list_box.html#aeab606997fdc192bac9670f6b614a1b2)
     fn get_checked_items<A: ArrayIntMethods>(&self, checked_items: &A) -> c_uint {
         unsafe {
             let checked_items = checked_items.as_ptr();
@@ -392,6 +597,9 @@ pub trait CheckListBoxMethods: ListBoxMethods {
 
 // wxChildFocusEvent
 pub trait ChildFocusEventMethods: CommandEventMethods {
+    /// Returns the direct child which receives the focus, or a (grand-)parent of the control receiving the focus.
+    ///
+    /// [See `wxChildFocusEvent::GetWindow()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_child_focus_event.html#aba66351df67066955a548e97f8f4213a)
     fn get_window(&self) -> WeakRef<Window> {
         unsafe { WeakRef::<Window>::from(ffi::wxChildFocusEvent_GetWindow(self.as_ptr())) }
     }
@@ -401,6 +609,8 @@ pub trait ChildFocusEventMethods: CommandEventMethods {
 pub trait ChoiceMethods: ControlMethods {
     // DTOR: fn ~wxChoice()
     // NOT_SUPPORTED: fn Create()
+    ///
+    /// [See `wxChoice::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_choice.html#a91a72be7d1296d35589b152f7d86de3c)
     fn create_arraystring<
         W: WindowMethods,
         P: PointMethods,
@@ -442,15 +652,26 @@ pub trait ChoiceMethods: ControlMethods {
             )
         }
     }
+    /// Gets the number of columns in this choice item.
+    ///
+    /// [See `wxChoice::GetColumns()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_choice.html#a7b79381bc9b407b8e4539fff2e09064a)
     fn get_columns(&self) -> c_int {
         unsafe { ffi::wxChoice_GetColumns(self.as_ptr()) }
     }
+    /// Unlike wxControlWithItems::GetSelection() which only returns the accepted selection value (the selection in the control once the user closes the dropdown list), this function returns the current selection.
+    ///
+    /// [See `wxChoice::GetCurrentSelection()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_choice.html#a6832c25f20b1191a1457ec8304d9aa6d)
     fn get_current_selection(&self) -> c_int {
         unsafe { ffi::wxChoice_GetCurrentSelection(self.as_ptr()) }
     }
+    /// Sets the number of columns in this choice item.
+    ///
+    /// [See `wxChoice::SetColumns()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_choice.html#a141ac5a6d0ee752b1e756a55ba9ee169)
     fn set_columns(&self, n: c_int) {
         unsafe { ffi::wxChoice_SetColumns(self.as_ptr(), n) }
     }
+    ///
+    /// [See `wxChoice::IsSorted()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_choice.html#af4d7f5f57deed46e444f46311314d54c)
     fn is_sorted(&self) -> bool {
         unsafe { ffi::wxChoice_IsSorted(self.as_ptr()) }
     }
@@ -458,6 +679,9 @@ pub trait ChoiceMethods: ControlMethods {
 
 // wxChoicebook
 pub trait ChoicebookMethods: BookCtrlBaseMethods {
+    /// Returns the wxChoice associated with the control.
+    ///
+    /// [See `wxChoicebook::GetChoiceCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_choicebook.html#a882185d0482d311f6b2ab0a4d106a7c2)
     fn get_choice_ctrl(&self) -> WeakRef<Choice> {
         unsafe { WeakRef::<Choice>::from(ffi::wxChoicebook_GetChoiceCtrl(self.as_ptr())) }
     }
@@ -469,6 +693,9 @@ pub trait ClientDCMethods: WindowDCMethods {}
 // wxClipboard
 pub trait ClipboardMethods: ObjectMethods {
     // DTOR: fn ~wxClipboard()
+    /// Call this function to add the data object to the clipboard.
+    ///
+    /// [See `wxClipboard::AddData()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_clipboard.html#ae226633489bee0881839e5332fca714f)
     fn add_data<D: DataObjectMethods>(&self, data: Option<&D>) -> bool {
         unsafe {
             let data = match data {
@@ -478,36 +705,63 @@ pub trait ClipboardMethods: ObjectMethods {
             ffi::wxClipboard_AddData(self.as_ptr(), data)
         }
     }
+    /// Clears the global clipboard object and the system's clipboard if possible.
+    ///
+    /// [See `wxClipboard::Clear()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_clipboard.html#adf8ae31ddd1081f79951b4a782b84db1)
     fn clear(&self) {
         unsafe { ffi::wxClipboard_Clear(self.as_ptr()) }
     }
+    /// Call this function to close the clipboard, having opened it with Open().
+    ///
+    /// [See `wxClipboard::Close()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_clipboard.html#afe9ac8bdb2af7c20cf68d36d460ac4fe)
     fn close(&self) {
         unsafe { ffi::wxClipboard_Close(self.as_ptr()) }
     }
+    /// Flushes the clipboard: this means that the data which is currently on clipboard will stay available even after the application exits (possibly eating memory), otherwise the clipboard will be emptied on exit.
+    ///
+    /// [See `wxClipboard::Flush()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_clipboard.html#a10997196ffd3b2cf8d823033f291f932)
     fn flush(&self) -> bool {
         unsafe { ffi::wxClipboard_Flush(self.as_ptr()) }
     }
+    /// Call this function to fill data with data on the clipboard, if available in the required format.
+    ///
+    /// [See `wxClipboard::GetData()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_clipboard.html#af9edcd205c3749a317bd6b1e8a5716cc)
     fn get_data<D: DataObjectMethods>(&self, data: &D) -> bool {
         unsafe {
             let data = data.as_ptr();
             ffi::wxClipboard_GetData(self.as_ptr(), data)
         }
     }
+    /// Returns true if the clipboard has been opened.
+    ///
+    /// [See `wxClipboard::IsOpened()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_clipboard.html#ab18cfdeb2e139cfb0e87811cd133b744)
     fn is_opened(&self) -> bool {
         unsafe { ffi::wxClipboard_IsOpened(self.as_ptr()) }
     }
+    /// Returns true if there is data which matches the data format of the given data object currently available on the clipboard.
+    ///
+    /// [See `wxClipboard::IsSupported()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_clipboard.html#a6c56dbf02b1807ce61cac8134a534336)
     fn is_supported<D: DataFormatMethods>(&self, format: &D) -> bool {
         unsafe {
             let format = format.as_ptr();
             ffi::wxClipboard_IsSupported(self.as_ptr(), format)
         }
     }
+    /// Returns true if we are using the primary selection, false if clipboard one.
+    ///
+    /// [See `wxClipboard::IsUsingPrimarySelection()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_clipboard.html#a6f814afdfebeba1399667ae008515b30)
     fn is_using_primary_selection(&self) -> bool {
         unsafe { ffi::wxClipboard_IsUsingPrimarySelection(self.as_ptr()) }
     }
+    /// Call this function to open the clipboard before calling SetData() and GetData().
+    ///
+    /// [See `wxClipboard::Open()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_clipboard.html#a27dd0b1a54a368c9a786c8616eac667d)
     fn open(&self) -> bool {
         unsafe { ffi::wxClipboard_Open(self.as_ptr()) }
     }
+    /// Call this function to set the data object to the clipboard.
+    ///
+    /// [See `wxClipboard::SetData()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_clipboard.html#afae7236718f30437c15709a911d4bab6)
     fn set_data<D: DataObjectMethods>(&self, data: Option<&D>) -> bool {
         unsafe {
             let data = match data {
@@ -517,9 +771,15 @@ pub trait ClipboardMethods: ObjectMethods {
             ffi::wxClipboard_SetData(self.as_ptr(), data)
         }
     }
+    /// On platforms supporting it (all X11-based ports), wxClipboard uses the CLIPBOARD X11 selection by default.
+    ///
+    /// [See `wxClipboard::UsePrimarySelection()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_clipboard.html#aec2787c528e42791547a424e647b9dc2)
     fn use_primary_selection(&self, primary: bool) {
         unsafe { ffi::wxClipboard_UsePrimarySelection(self.as_ptr(), primary) }
     }
+    /// Returns the global instance (wxTheClipboard) of the clipboard object.
+    ///
+    /// [See `wxClipboard::Get()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_clipboard.html#a6f3a1f27cd3de59bfafd538827bc89a8)
     fn get() -> Option<ClipboardIsOwned<false>> {
         unsafe { Clipboard::option_from(ffi::wxClipboard_Get()) }
     }
@@ -530,21 +790,39 @@ pub trait ClipboardTextEventMethods: CommandEventMethods {}
 
 // wxCloseEvent
 pub trait CloseEventMethods: EventMethods {
+    /// Returns true if you can veto a system shutdown or a window close event.
+    ///
+    /// [See `wxCloseEvent::CanVeto()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_close_event.html#acb23de85447edb56bf806cc382f311ec)
     fn can_veto(&self) -> bool {
         unsafe { ffi::wxCloseEvent_CanVeto(self.as_ptr()) }
     }
+    /// Returns true if the user is just logging off or false if the system is shutting down.
+    ///
+    /// [See `wxCloseEvent::GetLoggingOff()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_close_event.html#ac366162fc32083e502090a9d75c4bf16)
     fn get_logging_off(&self) -> bool {
         unsafe { ffi::wxCloseEvent_GetLoggingOff(self.as_ptr()) }
     }
+    /// Sets the 'can veto' flag.
+    ///
+    /// [See `wxCloseEvent::SetCanVeto()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_close_event.html#a25150c209983febf02b80a6f93dfc6ba)
     fn set_can_veto(&self, can_veto: bool) {
         unsafe { ffi::wxCloseEvent_SetCanVeto(self.as_ptr(), can_veto) }
     }
+    /// Sets the 'logging off' flag.
+    ///
+    /// [See `wxCloseEvent::SetLoggingOff()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_close_event.html#af8059e703d942f5962a0b2f6dedc3bd6)
     fn set_logging_off(&self, logging_off: bool) {
         unsafe { ffi::wxCloseEvent_SetLoggingOff(self.as_ptr(), logging_off) }
     }
+    /// Call this from your event handler to veto a system shutdown or to signal to the calling application that a window close did not happen.
+    ///
+    /// [See `wxCloseEvent::Veto()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_close_event.html#a0ec337c77613d5d8407831cd64e16417)
     fn veto(&self, veto: bool) {
         unsafe { ffi::wxCloseEvent_Veto(self.as_ptr(), veto) }
     }
+    /// Returns whether the Veto flag was set.
+    ///
+    /// [See `wxCloseEvent::GetVeto()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_close_event.html#a35320f500ee6c929198ef94534227a64)
     fn get_veto(&self) -> bool {
         unsafe { ffi::wxCloseEvent_GetVeto(self.as_ptr()) }
     }
@@ -552,6 +830,8 @@ pub trait CloseEventMethods: EventMethods {
 
 // wxCollapsiblePane
 pub trait CollapsiblePaneMethods: ControlMethods {
+    ///
+    /// [See `wxCollapsiblePane::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane.html#ae609270807e8655796abedfa7397b502)
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
         parent: Option<&W>,
@@ -588,18 +868,33 @@ pub trait CollapsiblePaneMethods: ControlMethods {
             )
         }
     }
+    /// Collapses or expands the pane window.
+    ///
+    /// [See `wxCollapsiblePane::Collapse()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane.html#aaeebf5484692f4e262ea3760c372ecdc)
     fn collapse(&self, collapse: bool) {
         unsafe { ffi::wxCollapsiblePane_Collapse(self.as_ptr(), collapse) }
     }
+    /// Same as calling Collapse(false).
+    ///
+    /// [See `wxCollapsiblePane::Expand()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane.html#a23700d2702ddb248e97cd80672c7becf)
     fn expand(&self) {
         unsafe { ffi::wxCollapsiblePane_Expand(self.as_ptr()) }
     }
+    /// Returns a pointer to the pane window.
+    ///
+    /// [See `wxCollapsiblePane::GetPane()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane.html#a23e7c5cc46d6bf833c376e2906e88e95)
     fn get_pane(&self) -> WeakRef<Window> {
         unsafe { WeakRef::<Window>::from(ffi::wxCollapsiblePane_GetPane(self.as_ptr())) }
     }
+    /// Returns true if the pane window is currently hidden.
+    ///
+    /// [See `wxCollapsiblePane::IsCollapsed()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane.html#a56d105d3c0f420307dd54ffde2f23e00)
     fn is_collapsed(&self) -> bool {
         unsafe { ffi::wxCollapsiblePane_IsCollapsed(self.as_ptr()) }
     }
+    /// Returns true if the pane window is currently shown.
+    ///
+    /// [See `wxCollapsiblePane::IsExpanded()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane.html#aa083432eb79edcaa28ff9d1e614a88c0)
     fn is_expanded(&self) -> bool {
         unsafe { ffi::wxCollapsiblePane_IsExpanded(self.as_ptr()) }
     }
@@ -607,9 +902,15 @@ pub trait CollapsiblePaneMethods: ControlMethods {
 
 // wxCollapsiblePaneEvent
 pub trait CollapsiblePaneEventMethods: CommandEventMethods {
+    /// Returns true if the pane has been collapsed.
+    ///
+    /// [See `wxCollapsiblePaneEvent::GetCollapsed()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane_event.html#a8277689d2875865a4aa7cb896c05ff8c)
     fn get_collapsed(&self) -> bool {
         unsafe { ffi::wxCollapsiblePaneEvent_GetCollapsed(self.as_ptr()) }
     }
+    /// Sets this as a collapsed pane event (if collapsed is true) or as an expanded pane event (if collapsed is false).
+    ///
+    /// [See `wxCollapsiblePaneEvent::SetCollapsed()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane_event.html#ad4d117a8ce01c0e3d966abd93444a9b3)
     fn set_collapsed(&self, collapsed: bool) {
         unsafe { ffi::wxCollapsiblePaneEvent_SetCollapsed(self.as_ptr(), collapsed) }
     }
@@ -619,18 +920,33 @@ pub trait CollapsiblePaneEventMethods: CommandEventMethods {
 pub trait ColourMethods: ObjectMethods {
     // NOT_SUPPORTED: fn Alpha()
     // NOT_SUPPORTED: fn Blue()
+    /// Returns the alpha value, on platforms where alpha is not yet supported, this always returns wxALPHA_OPAQUE.
+    ///
+    /// [See `wxColour::GetAlpha()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour.html#a5a10b23750b22a36e6707f6bca1717c3)
     fn get_alpha(&self) -> c_uint {
         unsafe { ffi::wxColour_GetAlpha(self.as_ptr()) }
     }
+    /// Returns the blue intensity as unsigned int.
+    ///
+    /// [See `wxColour::GetBlue()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour.html#a2e08925f421d35f6d9a658d0ce9e67ba)
     fn get_blue(&self) -> c_uint {
         unsafe { ffi::wxColour_GetBlue(self.as_ptr()) }
     }
+    /// Returns the green intensity as unsigned int.
+    ///
+    /// [See `wxColour::GetGreen()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour.html#ad65896b8495a31e02afc0714cd670e11)
     fn get_green(&self) -> c_uint {
         unsafe { ffi::wxColour_GetGreen(self.as_ptr()) }
     }
+    /// Returns the red intensity as unsigned int.
+    ///
+    /// [See `wxColour::GetRed()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour.html#a80dca84553adddc70115db25060963cf)
     fn get_red(&self) -> c_uint {
         unsafe { ffi::wxColour_GetRed(self.as_ptr()) }
     }
+    /// Converts this colour to a wxString using the given flags.
+    ///
+    /// [See `wxColour::GetAsString()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour.html#a7fb83960cea726dc4a37560b03f4bed3)
     fn get_as_string(&self, flags: c_long) -> String {
         unsafe { WxString::from_ptr(ffi::wxColour_GetAsString(self.as_ptr(), flags)).into() }
     }
@@ -638,20 +954,31 @@ pub trait ColourMethods: ObjectMethods {
     // NOT_SUPPORTED: fn SetRGBA()
     // NOT_SUPPORTED: fn GetRGB()
     // NOT_SUPPORTED: fn GetRGBA()
+    /// Return the perceived brightness of the colour.
+    ///
+    /// [See `wxColour::GetLuminance()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour.html#a2e9b5da1063e8467a0eabc14d214e729)
     fn get_luminance(&self) -> c_double {
         unsafe { ffi::wxColour_GetLuminance(self.as_ptr()) }
     }
     // NOT_SUPPORTED: fn GetPixel()
     // NOT_SUPPORTED: fn Green()
+    /// Returns true if the colour object is valid (the colour has been initialised with RGB values).
+    ///
+    /// [See `wxColour::IsOk()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour.html#a90921aeb085612b86fffb1507dbca461)
     fn is_ok(&self) -> bool {
         unsafe { ffi::wxColour_IsOk(self.as_ptr()) }
     }
     // NOT_SUPPORTED: fn Red()
+    /// Returns true if the color can be described using RGB values, i.e.
+    ///
+    /// [See `wxColour::IsSolid()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour.html#a33db79b6c89d81e0dccd240dd5e08005)
     fn is_solid(&self) -> bool {
         unsafe { ffi::wxColour_IsSolid(self.as_ptr()) }
     }
     // NOT_SUPPORTED: fn Set()
     // NOT_SUPPORTED: fn Set1()
+    ///
+    /// [See `wxColour::Set()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour.html#a08e9f56265647b8b5e1349b76eb728e3)
     fn set(&self, str: &str) -> bool {
         unsafe {
             let str = WxString::from(str);
@@ -664,13 +991,22 @@ pub trait ColourMethods: ObjectMethods {
     // BLOCKED: fn operator==()
     // NOT_SUPPORTED: fn MakeDisabled()
     // BLOCKED: fn ChangeLightness()
+    /// Assigns the same value to r, g, b: 0 if on is false, 255 otherwise.
+    ///
+    /// [See `wxColour::MakeMono()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour.html#a0ba8c496e7553e34643e53e70de57760)
     fn make_mono(r: *mut c_void, g: *mut c_void, b: *mut c_void, on: bool) {
         unsafe { ffi::wxColour_MakeMono(r, g, b, on) }
     }
     // NOT_SUPPORTED: fn MakeDisabled1()
+    /// Create a grey colour from (in/out) rgb parameters using integer arithmetic.
+    ///
+    /// [See `wxColour::MakeGrey()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour.html#a45e74c88fdab10e07164abe02c1b011a)
     fn make_grey(r: *mut c_void, g: *mut c_void, b: *mut c_void) {
         unsafe { ffi::wxColour_MakeGrey(r, g, b) }
     }
+    /// Create a grey colour from (in/out) rgb parameters using floating point arithmetic.
+    ///
+    /// [See `wxColour::MakeGrey()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour.html#a9020f882bba4f92bb68fcc7fd6d7cff4)
     fn make_grey_double(
         r: *mut c_void,
         g: *mut c_void,
@@ -682,6 +1018,9 @@ pub trait ColourMethods: ObjectMethods {
         unsafe { ffi::wxColour_MakeGrey1(r, g, b, weight_r, weight_g, weight_b) }
     }
     // NOT_SUPPORTED: fn AlphaBlend()
+    /// Utility function that simply darkens or lightens a color, based on the specified percentage ialpha.
+    ///
+    /// [See `wxColour::ChangeLightness()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour.html#af225e6fafd00001ac3612aaf26fe5501)
     fn change_lightness(r: *mut c_void, g: *mut c_void, b: *mut c_void, ialpha: c_int) {
         unsafe { ffi::wxColour_ChangeLightness1(r, g, b, ialpha) }
     }
@@ -690,39 +1029,69 @@ pub trait ColourMethods: ObjectMethods {
 // wxColourData
 pub trait ColourDataMethods: ObjectMethods {
     // DTOR: fn ~wxColourData()
+    /// Under Windows, determines whether the Windows colour dialog will display the full dialog with custom colour selection controls.
+    ///
+    /// [See `wxColourData::GetChooseFull()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_data.html#a3ab8a0182362ec82cb62f47d9ce0406c)
     fn get_choose_full(&self) -> bool {
         unsafe { ffi::wxColourData_GetChooseFull(self.as_ptr()) }
     }
+    /// Indicates whether the colour dialog will display alpha values and an opacity selector.
+    ///
+    /// [See `wxColourData::GetChooseAlpha()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_data.html#aca531e328674dac7d86912f89547f815)
     fn get_choose_alpha(&self) -> bool {
         unsafe { ffi::wxColourData_GetChooseAlpha(self.as_ptr()) }
     }
+    /// Gets the current colour associated with the colour dialog.
+    ///
+    /// [See `wxColourData::GetColour()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_data.html#a1e9b73d93d5e49627faa8ce926318606)
     fn get_colour(&self) -> ColourIsOwned<false> {
         unsafe { ColourIsOwned::from_ptr(ffi::wxColourData_GetColour(self.as_ptr())) }
     }
+    /// Returns custom colours associated with the colour dialog.
+    ///
+    /// [See `wxColourData::GetCustomColour()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_data.html#a5d2c170f3f5ba62d4bb77d08263fcf79)
     fn get_custom_colour(&self, i: c_int) -> Colour {
         unsafe { Colour::from_ptr(ffi::wxColourData_GetCustomColour(self.as_ptr(), i)) }
     }
+    /// Under Windows, tells the Windows colour dialog to display the full dialog with custom colour selection controls.
+    ///
+    /// [See `wxColourData::SetChooseFull()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_data.html#a2e5e80d982cbcb17cac113a72efef2bf)
     fn set_choose_full(&self, flag: bool) {
         unsafe { ffi::wxColourData_SetChooseFull(self.as_ptr(), flag) }
     }
+    /// Tells the colour dialog to show alpha values and an opacity selector (slider).
+    ///
+    /// [See `wxColourData::SetChooseAlpha()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_data.html#ac6593f8d1c84e343c81a7e9377ad6f7e)
     fn set_choose_alpha(&self, flag: bool) {
         unsafe { ffi::wxColourData_SetChooseAlpha(self.as_ptr(), flag) }
     }
+    /// Sets the default colour for the colour dialog.
+    ///
+    /// [See `wxColourData::SetColour()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_data.html#a66d6dd56885c84a9f83e28a75fe2132e)
     fn set_colour<C: ColourMethods>(&self, colour: &C) {
         unsafe {
             let colour = colour.as_ptr();
             ffi::wxColourData_SetColour(self.as_ptr(), colour)
         }
     }
+    /// Sets custom colours for the colour dialog.
+    ///
+    /// [See `wxColourData::SetCustomColour()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_data.html#afff3c5561456c17bcf6329a81dcfc716)
     fn set_custom_colour<C: ColourMethods>(&self, i: c_int, colour: &C) {
         unsafe {
             let colour = colour.as_ptr();
             ffi::wxColourData_SetCustomColour(self.as_ptr(), i, colour)
         }
     }
+    /// Converts the colours saved in this class in a string form, separating the various colours with a comma.
+    ///
+    /// [See `wxColourData::ToString()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_data.html#aa507012d3715813d5eefcf936335e2af)
     fn to_string(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxColourData_ToString(self.as_ptr())).into() }
     }
+    /// Decodes the given string, which should be in the same format returned by ToString(), and sets the internal colours.
+    ///
+    /// [See `wxColourData::FromString()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_data.html#a6d0b9f7cfd1d628f212bc19ef963cab8)
     fn from_string(&self, str: &str) -> bool {
         unsafe {
             let str = WxString::from(str);
@@ -735,6 +1104,9 @@ pub trait ColourDataMethods: ObjectMethods {
 
 // wxColourDatabase
 pub trait ColourDatabaseMethods: WxRustMethods {
+    /// Adds a colour to the database.
+    ///
+    /// [See `wxColourDatabase::AddColour()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_database.html#ab52ecdf5e71d9ed0229236e799fc7dea)
     fn add_colour<C: ColourMethods>(&self, colour_name: &str, colour: &C) {
         unsafe {
             let colour_name = WxString::from(colour_name);
@@ -743,6 +1115,9 @@ pub trait ColourDatabaseMethods: WxRustMethods {
             ffi::wxColourDatabase_AddColour(self.as_ptr(), colour_name, colour)
         }
     }
+    /// Finds a colour given the name.
+    ///
+    /// [See `wxColourDatabase::Find()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_database.html#acedbf1ae7fe119a7a3aebfae8b0a14e9)
     fn find(&self, colour_name: &str) -> Colour {
         unsafe {
             let colour_name = WxString::from(colour_name);
@@ -750,6 +1125,9 @@ pub trait ColourDatabaseMethods: WxRustMethods {
             Colour::from_ptr(ffi::wxColourDatabase_Find(self.as_ptr(), colour_name))
         }
     }
+    /// Finds a colour name given the colour.
+    ///
+    /// [See `wxColourDatabase::FindName()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_database.html#a03ad9407e4751d348903557a496786be)
     fn find_name<C: ColourMethods>(&self, colour: &C) -> String {
         unsafe {
             let colour = colour.as_ptr();
@@ -761,6 +1139,9 @@ pub trait ColourDatabaseMethods: WxRustMethods {
 // wxColourDialog
 pub trait ColourDialogMethods: DialogMethods {
     // DTOR: fn ~wxColourDialog()
+    /// Same as wxColourDialog().
+    ///
+    /// [See `wxColourDialog::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_dialog.html#a0ee38e7ad14c33201a810ba72b2ce54f)
     fn create_colourdata<W: WindowMethods, C: ColourDataMethods>(
         &self,
         parent: Option<&W>,
@@ -778,6 +1159,9 @@ pub trait ColourDialogMethods: DialogMethods {
             ffi::wxColourDialog_Create(self.as_ptr(), parent, data)
         }
     }
+    /// Returns the colour data associated with the colour dialog.
+    ///
+    /// [See `wxColourDialog::GetColourData()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_dialog.html#a527d63fdb2b83eb9ee80d1c4b5da5c09)
     fn get_colour_data(&self) -> ColourDataIsOwned<false> {
         unsafe { ColourDataIsOwned::from_ptr(ffi::wxColourDialog_GetColourData(self.as_ptr())) }
     }
@@ -785,6 +1169,9 @@ pub trait ColourDialogMethods: DialogMethods {
 
 // wxColourPickerCtrl
 pub trait ColourPickerCtrlMethods: PickerBaseMethods {
+    /// Creates a colour picker with the given arguments.
+    ///
+    /// [See `wxColourPickerCtrl::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_picker_ctrl.html#a40b58f3b01060f0cff332fa305e568d4)
     fn create_colour<
         W: WindowMethods,
         C: ColourMethods,
@@ -826,9 +1213,15 @@ pub trait ColourPickerCtrlMethods: PickerBaseMethods {
             )
         }
     }
+    /// Returns the currently selected colour.
+    ///
+    /// [See `wxColourPickerCtrl::GetColour()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_picker_ctrl.html#af4fd994b2c47ee7d5197769c4dd8ed5b)
     fn get_colour(&self) -> Colour {
         unsafe { Colour::from_ptr(ffi::wxColourPickerCtrl_GetColour(self.as_ptr())) }
     }
+    /// Sets the currently selected colour.
+    ///
+    /// [See `wxColourPickerCtrl::SetColour()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_picker_ctrl.html#a5dc2a4de5662ca009800551b738feb7e)
     fn set_colour<C: ColourMethods>(&self, col: &C) {
         unsafe {
             let col = col.as_ptr();
@@ -840,9 +1233,15 @@ pub trait ColourPickerCtrlMethods: PickerBaseMethods {
 
 // wxColourPickerEvent
 pub trait ColourPickerEventMethods: CommandEventMethods {
+    /// Retrieve the colour the user has just selected.
+    ///
+    /// [See `wxColourPickerEvent::GetColour()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_picker_event.html#a4d7388f7e40d69b40f2469c84b9a590d)
     fn get_colour(&self) -> Colour {
         unsafe { Colour::from_ptr(ffi::wxColourPickerEvent_GetColour(self.as_ptr())) }
     }
+    /// Set the colour associated with the event.
+    ///
+    /// [See `wxColourPickerEvent::SetColour()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_picker_event.html#a7f5ec104ad3c539ed19afd10f48ee361)
     fn set_colour<C: ColourMethods>(&self, pos: &C) {
         unsafe {
             let pos = pos.as_ptr();
@@ -855,6 +1254,8 @@ pub trait ColourPickerEventMethods: CommandEventMethods {
 pub trait ComboBoxMethods: ControlMethods {
     // DTOR: fn ~wxComboBox()
     // NOT_SUPPORTED: fn Create()
+    ///
+    /// [See `wxComboBox::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_box.html#ac14230b50e82a84f0d3b53ef08fe1c77)
     fn create_str<
         W: WindowMethods,
         P: PointMethods,
@@ -900,18 +1301,33 @@ pub trait ComboBoxMethods: ControlMethods {
             )
         }
     }
+    /// Returns the item being selected right now.
+    ///
+    /// [See `wxComboBox::GetCurrentSelection()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_box.html#a411ef01361129aab405724591bb6ed4a)
     fn get_current_selection(&self) -> c_int {
         unsafe { ffi::wxComboBox_GetCurrentSelection(self.as_ptr()) }
     }
+    /// Returns true if the list of combobox choices is empty.
+    ///
+    /// [See `wxComboBox::IsListEmpty()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_box.html#aa5049fd50f096dd39b1eb6514c48f5fc)
     fn is_list_empty(&self) -> bool {
         unsafe { ffi::wxComboBox_IsListEmpty(self.as_ptr()) }
     }
+    /// Returns true if the text of the combobox is empty.
+    ///
+    /// [See `wxComboBox::IsTextEmpty()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_box.html#a6cefa855ee03dec74c955ace0401acdb)
     fn is_text_empty(&self) -> bool {
         unsafe { ffi::wxComboBox_IsTextEmpty(self.as_ptr()) }
     }
+    /// Shows the list box portion of the combo box.
+    ///
+    /// [See `wxComboBox::Popup()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_box.html#a325d7d2afc9e1e17f7b5fb13f4186d0c)
     fn popup(&self) {
         unsafe { ffi::wxComboBox_Popup(self.as_ptr()) }
     }
+    /// Hides the list box portion of the combo box.
+    ///
+    /// [See `wxComboBox::Dismiss()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_box.html#acb37b8dfdeb57a514d87ae21a5e73853)
     fn dismiss(&self) {
         unsafe { ffi::wxComboBox_Dismiss(self.as_ptr()) }
     }
@@ -920,6 +1336,9 @@ pub trait ComboBoxMethods: ControlMethods {
 // wxComboCtrl
 pub trait ComboCtrlMethods: ControlMethods {
     // DTOR: fn ~wxComboCtrl()
+    /// Creates the combo control for two-step construction.
+    ///
+    /// [See `wxComboCtrl::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#aab2390bd7650a56e3d2c243140d28f98)
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
         parent: Option<&W>,
@@ -956,18 +1375,30 @@ pub trait ComboCtrlMethods: ControlMethods {
             )
         }
     }
+    /// Dismisses the popup window.
+    ///
+    /// [See `wxComboCtrl::Dismiss()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#a56867b1c18641c21fcd518ce43efbf99)
     fn dismiss(&self) {
         unsafe { ffi::wxComboCtrl_Dismiss(self.as_ptr()) }
     }
+    /// Enables or disables popup animation, if any, depending on the value of the argument.
+    ///
+    /// [See `wxComboCtrl::EnablePopupAnimation()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#ae90d978c054d1ce215758c6073c43d31)
     fn enable_popup_animation(&self, enable: bool) {
         unsafe { ffi::wxComboCtrl_EnablePopupAnimation(self.as_ptr(), enable) }
     }
+    /// Returns true if given key combination should toggle the popup.
+    ///
+    /// [See `wxComboCtrl::IsKeyPopupToggle()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#a523036a15ae181059d03f97969fd123b)
     fn is_key_popup_toggle<K: KeyEventMethods>(&self, event: &K) -> bool {
         unsafe {
             let event = event.as_ptr();
             ffi::wxComboCtrl_IsKeyPopupToggle(self.as_ptr(), event)
         }
     }
+    /// Prepare background of combo control or an item in a dropdown list in a way typical on platform.
+    ///
+    /// [See `wxComboCtrl::PrepareBackground()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#abd4fb20092e56779c74c7910a0c0ce9b)
     fn prepare_background<D: DCMethods, R: RectMethods>(&self, dc: &D, rect: &R, flags: c_int) {
         unsafe {
             let dc = dc.as_ptr();
@@ -975,58 +1406,112 @@ pub trait ComboCtrlMethods: ControlMethods {
             ffi::wxComboCtrl_PrepareBackground(self.as_ptr(), dc, rect, flags)
         }
     }
+    /// Returns true if focus indicator should be drawn in the control.
+    ///
+    /// [See `wxComboCtrl::ShouldDrawFocus()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#af7d1e035c5ed8d0e34baf6e483e855bb)
     fn should_draw_focus(&self) -> bool {
         unsafe { ffi::wxComboCtrl_ShouldDrawFocus(self.as_ptr()) }
     }
+    /// Returns disabled button bitmap that has been set with SetButtonBitmaps().
+    ///
+    /// [See `wxComboCtrl::GetBitmapDisabled()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#a0c6a1caeb1e10cea1785e50601dd558e)
     fn get_bitmap_disabled(&self) -> Bitmap {
         unsafe { Bitmap::from_ptr(ffi::wxComboCtrl_GetBitmapDisabled(self.as_ptr())) }
     }
+    /// Returns button mouse hover bitmap that has been set with SetButtonBitmaps().
+    ///
+    /// [See `wxComboCtrl::GetBitmapHover()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#a5b0598d42b0286bcb54289df74a504cd)
     fn get_bitmap_hover(&self) -> Bitmap {
         unsafe { Bitmap::from_ptr(ffi::wxComboCtrl_GetBitmapHover(self.as_ptr())) }
     }
+    /// Returns default button bitmap that has been set with SetButtonBitmaps().
+    ///
+    /// [See `wxComboCtrl::GetBitmapNormal()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#a6f7e4b8d9ea13906632fc3b26687dc0d)
     fn get_bitmap_normal(&self) -> Bitmap {
         unsafe { Bitmap::from_ptr(ffi::wxComboCtrl_GetBitmapNormal(self.as_ptr())) }
     }
+    /// Returns depressed button bitmap that has been set with SetButtonBitmaps().
+    ///
+    /// [See `wxComboCtrl::GetBitmapPressed()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#abf35264f5bdc70988d6d265c0543a20e)
     fn get_bitmap_pressed(&self) -> Bitmap {
         unsafe { Bitmap::from_ptr(ffi::wxComboCtrl_GetBitmapPressed(self.as_ptr())) }
     }
+    /// Returns current size of the dropdown button.
+    ///
+    /// [See `wxComboCtrl::GetButtonSize()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#ab6e1596a4b709465e0b07362a3c7dad2)
     fn get_button_size(&self) -> Size {
         unsafe { Size::from_ptr(ffi::wxComboCtrl_GetButtonSize(self.as_ptr())) }
     }
+    /// Returns custom painted area in control.
+    ///
+    /// [See `wxComboCtrl::GetCustomPaintWidth()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#ae4d95947e551ad7818b60aabf718e84c)
     fn get_custom_paint_width(&self) -> c_int {
         unsafe { ffi::wxComboCtrl_GetCustomPaintWidth(self.as_ptr()) }
     }
+    /// Returns the margins used by the control.
+    ///
+    /// [See `wxComboCtrl::GetMargins()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#a3ee7141dc6069fa9b520cd994d176eff)
     fn get_margins(&self) -> Point {
         unsafe { Point::from_ptr(ffi::wxComboCtrl_GetMargins(self.as_ptr())) }
     }
+    /// Returns current popup interface that has been set with SetPopupControl().
+    ///
+    /// [See `wxComboCtrl::GetPopupControl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#ac3d072940f2c6c2c92e6fe629bf4c4a8)
     fn get_popup_control(&self) -> Option<ComboPopupIsOwned<false>> {
         unsafe { ComboPopup::option_from(ffi::wxComboCtrl_GetPopupControl(self.as_ptr())) }
     }
+    /// Returns popup window containing the popup control.
+    ///
+    /// [See `wxComboCtrl::GetPopupWindow()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#a9db18fe1b974c97607895012ae52299c)
     fn get_popup_window(&self) -> WeakRef<Window> {
         unsafe { WeakRef::<Window>::from(ffi::wxComboCtrl_GetPopupWindow(self.as_ptr())) }
     }
+    /// Get the text control which is part of the combo control.
+    ///
+    /// [See `wxComboCtrl::GetTextCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#a404cfaf76e31db5d58c3711d6dc1ea85)
     fn get_text_ctrl(&self) -> WeakRef<TextCtrl> {
         unsafe { WeakRef::<TextCtrl>::from(ffi::wxComboCtrl_GetTextCtrl(self.as_ptr())) }
     }
     // BLOCKED: fn GetTextIndent()
+    /// Returns area covered by the text field (includes everything except borders and the dropdown button).
+    ///
+    /// [See `wxComboCtrl::GetTextRect()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#ac25a4b9b325106dd5ec285ec2b368bdf)
     fn get_text_rect(&self) -> RectIsOwned<false> {
         unsafe { RectIsOwned::from_ptr(ffi::wxComboCtrl_GetTextRect(self.as_ptr())) }
     }
+    /// Dismisses the popup window.
+    ///
+    /// [See `wxComboCtrl::HidePopup()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#a73d2d6ede7bdc0db63c08f81cd09a5e7)
     fn hide_popup(&self, generate_event: bool) {
         unsafe { ffi::wxComboCtrl_HidePopup(self.as_ptr(), generate_event) }
     }
+    /// Returns true if the popup is currently shown.
+    ///
+    /// [See `wxComboCtrl::IsPopupShown()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#afb29fcf34147d9c38694806e1afc1dde)
     fn is_popup_shown(&self) -> bool {
         unsafe { ffi::wxComboCtrl_IsPopupShown(self.as_ptr()) }
     }
+    /// Returns true if the popup window is in the given state.
+    ///
+    /// [See `wxComboCtrl::IsPopupWindowState()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#a499f87e1aa355eb69b1a61bea9165965)
     fn is_popup_window_state(&self, state: c_int) -> bool {
         unsafe { ffi::wxComboCtrl_IsPopupWindowState(self.as_ptr(), state) }
     }
+    /// Implement in a derived class to define what happens on dropdown button click.
+    ///
+    /// [See `wxComboCtrl::OnButtonClick()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#a3ce1fce108f3a84216fa9983d6b89a37)
     fn on_button_click(&self) {
         unsafe { ffi::wxComboCtrl_OnButtonClick(self.as_ptr()) }
     }
+    /// Shows the popup portion of the combo control.
+    ///
+    /// [See `wxComboCtrl::Popup()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#afda0208f5c2a31d504e230c36546fe8d)
     fn popup(&self) {
         unsafe { ffi::wxComboCtrl_Popup(self.as_ptr()) }
     }
+    /// Sets custom dropdown button graphics.
+    ///
+    /// [See `wxComboCtrl::SetButtonBitmaps()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#ab0af76f57bdea68224a5c6bf5fecdb01)
     fn set_button_bitmaps<
         B: BitmapBundleMethods,
         B2: BitmapBundleMethods,
@@ -1055,12 +1540,21 @@ pub trait ComboCtrlMethods: ControlMethods {
             )
         }
     }
+    /// Sets size and position of dropdown button.
+    ///
+    /// [See `wxComboCtrl::SetButtonPosition()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#aa0ffd3528d66f15bfd3c0da78117ebad)
     fn set_button_position(&self, width: c_int, height: c_int, side: c_int, spacing_x: c_int) {
         unsafe { ffi::wxComboCtrl_SetButtonPosition(self.as_ptr(), width, height, side, spacing_x) }
     }
+    /// Set width, in pixels, of custom painted area in control without wxCB_READONLY style.
+    ///
+    /// [See `wxComboCtrl::SetCustomPaintWidth()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#af0b54e5e4f71efc63464ceb44f1497d5)
     fn set_custom_paint_width(&self, width: c_int) {
         unsafe { ffi::wxComboCtrl_SetCustomPaintWidth(self.as_ptr(), width) }
     }
+    /// Uses the given window instead of the default text control as the main window of the combo control.
+    ///
+    /// [See `wxComboCtrl::SetMainControl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#a7e060b74078d635287080f42016ac26a)
     fn set_main_control<W: WindowMethods>(&self, win: Option<&W>) {
         unsafe {
             let win = match win {
@@ -1070,18 +1564,29 @@ pub trait ComboCtrlMethods: ControlMethods {
             ffi::wxComboCtrl_SetMainControl(self.as_ptr(), win)
         }
     }
+    /// Attempts to set the control margins.
+    ///
+    /// [See `wxComboCtrl::SetMargins()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#ae2b983f401d92ccc38f2bed47fb4d76b)
     fn set_margins_point<P: PointMethods>(&self, pt: &P) -> bool {
         unsafe {
             let pt = pt.as_ptr();
             ffi::wxComboCtrl_SetMargins(self.as_ptr(), pt)
         }
     }
+    ///
+    /// [See `wxComboCtrl::SetMargins()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#a61fb396d486c81bcb733ff0b35301904)
     fn set_margins_coord(&self, left: c_int, top: c_int) -> bool {
         unsafe { ffi::wxComboCtrl_SetMargins1(self.as_ptr(), left, top) }
     }
+    /// Set side of the control to which the popup will align itself.
+    ///
+    /// [See `wxComboCtrl::SetPopupAnchor()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#aac64729c09efde24fbc14d43aa688202)
     fn set_popup_anchor(&self, anchor_side: c_int) {
         unsafe { ffi::wxComboCtrl_SetPopupAnchor(self.as_ptr(), anchor_side) }
     }
+    /// Set popup interface class derived from wxComboPopup.
+    ///
+    /// [See `wxComboCtrl::SetPopupControl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#afb0b22cb38395040699eebcb679fd86a)
     fn set_popup_control<C: ComboPopupMethods>(&self, popup: Option<&C>) {
         unsafe {
             let popup = match popup {
@@ -1091,15 +1596,27 @@ pub trait ComboCtrlMethods: ControlMethods {
             ffi::wxComboCtrl_SetPopupControl(self.as_ptr(), popup)
         }
     }
+    /// Extends popup size horizontally, relative to the edges of the combo control.
+    ///
+    /// [See `wxComboCtrl::SetPopupExtents()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#add059c3997d6697bc98365f039da17f5)
     fn set_popup_extents(&self, ext_left: c_int, ext_right: c_int) {
         unsafe { ffi::wxComboCtrl_SetPopupExtents(self.as_ptr(), ext_left, ext_right) }
     }
+    /// Sets preferred maximum height of the popup.
+    ///
+    /// [See `wxComboCtrl::SetPopupMaxHeight()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#a24f043ce5c1287904a899c22f2dc7ce9)
     fn set_popup_max_height(&self, height: c_int) {
         unsafe { ffi::wxComboCtrl_SetPopupMaxHeight(self.as_ptr(), height) }
     }
+    /// Sets minimum width of the popup.
+    ///
+    /// [See `wxComboCtrl::SetPopupMinWidth()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#aef690d395a8ef2500d2c4ddd2d345d6d)
     fn set_popup_min_width(&self, width: c_int) {
         unsafe { ffi::wxComboCtrl_SetPopupMinWidth(self.as_ptr(), width) }
     }
+    /// Sets the text for the text field without affecting the popup.
+    ///
+    /// [See `wxComboCtrl::SetText()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#a738267959dcf2b73430bd310173ebedb)
     fn set_text(&self, value: &str) {
         unsafe {
             let value = WxString::from(value);
@@ -1107,10 +1624,16 @@ pub trait ComboCtrlMethods: ControlMethods {
             ffi::wxComboCtrl_SetText(self.as_ptr(), value)
         }
     }
+    /// Set a custom window style for the embedded wxTextCtrl.
+    ///
+    /// [See `wxComboCtrl::SetTextCtrlStyle()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#a00188332f7b6200c98f5f65966d5b151)
     fn set_text_ctrl_style(&self, style: c_int) {
         unsafe { ffi::wxComboCtrl_SetTextCtrlStyle(self.as_ptr(), style) }
     }
     // BLOCKED: fn SetTextIndent()
+    /// Changes value of the control as if user had done it by selecting an item from a combo box drop-down list.
+    ///
+    /// [See `wxComboCtrl::SetValueByUser()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#aaa42a7fdfb9061e4901086abcc7120e7)
     fn set_value_by_user(&self, value: &str) {
         unsafe {
             let value = WxString::from(value);
@@ -1118,12 +1641,21 @@ pub trait ComboCtrlMethods: ControlMethods {
             ffi::wxComboCtrl_SetValueByUser(self.as_ptr(), value)
         }
     }
+    /// Show the popup.
+    ///
+    /// [See `wxComboCtrl::ShowPopup()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#ae87a04c471bfcac5ab0d370ac9edddbc)
     fn show_popup(&self) {
         unsafe { ffi::wxComboCtrl_ShowPopup(self.as_ptr()) }
     }
+    /// Enable or disable usage of an alternative popup window, which guarantees ability to focus the popup control, and allows common native controls to function normally.
+    ///
+    /// [See `wxComboCtrl::UseAltPopupWindow()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#a5b8f90d12149fe7e3f1e38e0dd0b839a)
     fn use_alt_popup_window(&self, enable: bool) {
         unsafe { ffi::wxComboCtrl_UseAltPopupWindow(self.as_ptr(), enable) }
     }
+    /// Returns features supported by wxComboCtrl.
+    ///
+    /// [See `wxComboCtrl::GetFeatures()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#a10be4d02e6e2bb6a3708aa19ebf45b97)
     fn get_features() -> c_int {
         unsafe { ffi::wxComboCtrl_GetFeatures() }
     }
@@ -1131,6 +1663,9 @@ pub trait ComboCtrlMethods: ControlMethods {
 
 // wxComboPopup
 pub trait ComboPopupMethods: WxRustMethods {
+    /// The derived class must implement this to create the popup control.
+    ///
+    /// [See `wxComboPopup::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_popup.html#a42375d0b5b9d39c0e48d7ca00b05e310)
     fn create<W: WindowMethods>(&self, parent: Option<&W>) -> bool {
         unsafe {
             let parent = match parent {
@@ -1140,12 +1675,21 @@ pub trait ComboPopupMethods: WxRustMethods {
             ffi::wxComboPopup_Create(self.as_ptr(), parent)
         }
     }
+    /// You only need to implement this member function if you create your popup class in non-standard way.
+    ///
+    /// [See `wxComboPopup::DestroyPopup()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_popup.html#a7bab875909925651797460484ab237df)
     fn destroy_popup(&self) {
         unsafe { ffi::wxComboPopup_DestroyPopup(self.as_ptr()) }
     }
+    /// Utility function that hides the popup.
+    ///
+    /// [See `wxComboPopup::Dismiss()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_popup.html#aefa27348fb0160af43197223238396e5)
     fn dismiss(&self) {
         unsafe { ffi::wxComboPopup_Dismiss(self.as_ptr()) }
     }
+    /// Implement to customize matching of value string to an item container entry.
+    ///
+    /// [See `wxComboPopup::FindItem()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_popup.html#a2d19c49312ff3098d11e3e465afcf284)
     fn find_item(&self, item: &str, true_item: *mut c_void) -> bool {
         unsafe {
             let item = WxString::from(item);
@@ -1153,6 +1697,9 @@ pub trait ComboPopupMethods: WxRustMethods {
             ffi::wxComboPopup_FindItem(self.as_ptr(), item, true_item)
         }
     }
+    /// The derived class may implement this to return adjusted size for the popup control, according to the variables given.
+    ///
+    /// [See `wxComboPopup::GetAdjustedSize()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_popup.html#ae8ff1d6570b177c2c6b7a101035cf2ff)
     fn get_adjusted_size(&self, min_width: c_int, pref_height: c_int, max_height: c_int) -> Size {
         unsafe {
             Size::from_ptr(ffi::wxComboPopup_GetAdjustedSize(
@@ -1163,39 +1710,72 @@ pub trait ComboPopupMethods: WxRustMethods {
             ))
         }
     }
+    /// Returns pointer to the associated parent wxComboCtrl.
+    ///
+    /// [See `wxComboPopup::GetComboCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_popup.html#a00c95abb2f0e404d00499d94cb5c1a4f)
     fn get_combo_ctrl(&self) -> WeakRef<ComboCtrl> {
         unsafe { WeakRef::<ComboCtrl>::from(ffi::wxComboPopup_GetComboCtrl(self.as_ptr())) }
     }
+    /// The derived class must implement this to return pointer to the associated control created in Create().
+    ///
+    /// [See `wxComboPopup::GetControl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_popup.html#abcbe87fe988a1d0f123883404c1a4110)
     fn get_control(&self) -> WeakRef<Window> {
         unsafe { WeakRef::<Window>::from(ffi::wxComboPopup_GetControl(self.as_ptr())) }
     }
+    /// The derived class must implement this to return string representation of the value.
+    ///
+    /// [See `wxComboPopup::GetStringValue()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_popup.html#addba104e8e7944c758905e2d1540e389)
     fn get_string_value(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxComboPopup_GetStringValue(self.as_ptr())).into() }
     }
+    /// The derived class must implement this to initialize its internal variables.
+    ///
+    /// [See `wxComboPopup::Init()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_popup.html#aff98da6f4c273ba768979c94ce82508e)
     fn init(&self) {
         unsafe { ffi::wxComboPopup_Init(self.as_ptr()) }
     }
+    /// Utility method that returns true if Create has been called.
+    ///
+    /// [See `wxComboPopup::IsCreated()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_popup.html#a8386b9f1c286671344fdbb23b5a52817)
     fn is_created(&self) -> bool {
         unsafe { ffi::wxComboPopup_IsCreated(self.as_ptr()) }
     }
+    /// The derived class may implement this to return true if it wants to delay call to Create() until the popup is shown for the first time.
+    ///
+    /// [See `wxComboPopup::LazyCreate()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_popup.html#a3203d64b41c9689b0379314630324280)
     fn lazy_create(&self) -> bool {
         unsafe { ffi::wxComboPopup_LazyCreate(self.as_ptr()) }
     }
+    /// The derived class may implement this to do something when the parent wxComboCtrl gets double-clicked.
+    ///
+    /// [See `wxComboPopup::OnComboDoubleClick()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_popup.html#a26c6a69e340db96f47b88e2ecb296f2e)
     fn on_combo_double_click(&self) {
         unsafe { ffi::wxComboPopup_OnComboDoubleClick(self.as_ptr()) }
     }
+    /// The derived class may implement this to receive key events from the parent wxComboCtrl.
+    ///
+    /// [See `wxComboPopup::OnComboKeyEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_popup.html#a0cac7a0495f53119ad34583ad0591695)
     fn on_combo_key_event<K: KeyEventMethods>(&self, event: &K) {
         unsafe {
             let event = event.as_ptr();
             ffi::wxComboPopup_OnComboKeyEvent(self.as_ptr(), event)
         }
     }
+    /// The derived class may implement this to do special processing when popup is hidden.
+    ///
+    /// [See `wxComboPopup::OnDismiss()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_popup.html#a24abde370c9f0faa8dc592a395797d7a)
     fn on_dismiss(&self) {
         unsafe { ffi::wxComboPopup_OnDismiss(self.as_ptr()) }
     }
+    /// The derived class may implement this to do special processing when popup is shown.
+    ///
+    /// [See `wxComboPopup::OnPopup()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_popup.html#a1a9e2d8553b1ed3641109f45ab7bfe8d)
     fn on_popup(&self) {
         unsafe { ffi::wxComboPopup_OnPopup(self.as_ptr()) }
     }
+    /// The derived class may implement this to paint the parent wxComboCtrl.
+    ///
+    /// [See `wxComboPopup::PaintComboControl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_popup.html#ae64038e6f785d2c6b4826991f0f75b18)
     fn paint_combo_control<D: DCMethods, R: RectMethods>(&self, dc: &D, rect: &R) {
         unsafe {
             let dc = dc.as_ptr();
@@ -1203,6 +1783,9 @@ pub trait ComboPopupMethods: WxRustMethods {
             ffi::wxComboPopup_PaintComboControl(self.as_ptr(), dc, rect)
         }
     }
+    /// The derived class must implement this to receive string value changes from wxComboCtrl.
+    ///
+    /// [See `wxComboPopup::SetStringValue()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_popup.html#ad55221c409f2e1edbfcbf75719dc3864)
     fn set_string_value(&self, value: &str) {
         unsafe {
             let value = WxString::from(value);
@@ -1215,15 +1798,27 @@ pub trait ComboPopupMethods: WxRustMethods {
 // wxCommand
 pub trait CommandMethods: ObjectMethods {
     // DTOR: fn ~wxCommand()
+    /// Returns true if the command can be undone, false otherwise.
+    ///
+    /// [See `wxCommand::CanUndo()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command.html#ace7a97cc386f7908833949a4402d4eab)
     fn can_undo(&self) -> bool {
         unsafe { ffi::wxCommand_CanUndo(self.as_ptr()) }
     }
+    /// Override this member function to execute the appropriate action when called.
+    ///
+    /// [See `wxCommand::Do()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command.html#a858fb8c1b0ab1d3400b9bc2605a5e5f7)
     fn do_(&self) -> bool {
         unsafe { ffi::wxCommand_Do(self.as_ptr()) }
     }
+    /// Returns the command name.
+    ///
+    /// [See `wxCommand::GetName()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command.html#a4d2dfba5e33420ff78331f9cb364c820)
     fn get_name(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxCommand_GetName(self.as_ptr())).into() }
     }
+    /// Override this member function to un-execute a previous Do.
+    ///
+    /// [See `wxCommand::Undo()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command.html#afed9df8cfda3579429ba8353098859dc)
     fn undo(&self) -> bool {
         unsafe { ffi::wxCommand_Undo(self.as_ptr()) }
     }
@@ -1231,33 +1826,63 @@ pub trait CommandMethods: ObjectMethods {
 
 // wxCommandEvent
 pub trait CommandEventMethods: EventMethods {
+    /// Returns client data pointer for a listbox or choice selection event (not valid for a deselection).
+    ///
+    /// [See `wxCommandEvent::GetClientData()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_event.html#a3d41eef5b753ff2fd0b822bd1e0c6af9)
     fn get_client_data(&self) -> *mut c_void {
         unsafe { ffi::wxCommandEvent_GetClientData(self.as_ptr()) }
     }
+    /// Returns client object pointer for a listbox or choice selection event (not valid for a deselection).
+    ///
+    /// [See `wxCommandEvent::GetClientObject()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_event.html#a48e7b34762b82cdc9d1b5d58d1e6a17f)
     fn get_client_object(&self) -> Option<ClientDataIsOwned<false>> {
         unsafe { ClientData::option_from(ffi::wxCommandEvent_GetClientObject(self.as_ptr())) }
     }
+    /// Returns extra information dependent on the event objects type.
+    ///
+    /// [See `wxCommandEvent::GetExtraLong()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_event.html#abdba7c3e93f0dbf99f5382e60e7a461a)
     fn get_extra_long(&self) -> c_long {
         unsafe { ffi::wxCommandEvent_GetExtraLong(self.as_ptr()) }
     }
+    /// Returns the integer identifier corresponding to a listbox, choice or radiobox selection (only if the event was a selection, not a deselection), or a boolean value representing the value of a checkbox.
+    ///
+    /// [See `wxCommandEvent::GetInt()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_event.html#a24ad2aab26646c762ca3092a7ffd5ccd)
     fn get_int(&self) -> c_int {
         unsafe { ffi::wxCommandEvent_GetInt(self.as_ptr()) }
     }
+    /// Returns item index for a listbox or choice selection event (not valid for a deselection).
+    ///
+    /// [See `wxCommandEvent::GetSelection()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_event.html#a93609c04b8fd7001259efb5d65645fe6)
     fn get_selection(&self) -> c_int {
         unsafe { ffi::wxCommandEvent_GetSelection(self.as_ptr()) }
     }
+    /// Returns item string for a listbox or choice selection event.
+    ///
+    /// [See `wxCommandEvent::GetString()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_event.html#a6aef039e72e358840a7c20da6473e9ae)
     fn get_string(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxCommandEvent_GetString(self.as_ptr())).into() }
     }
+    /// This method can be used with checkbox and menu events: for the checkboxes, the method returns true for a selection event and false for a deselection one.
+    ///
+    /// [See `wxCommandEvent::IsChecked()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_event.html#a3e5510a00ebb9fb5e7bf7dc5e89f3588)
     fn is_checked(&self) -> bool {
         unsafe { ffi::wxCommandEvent_IsChecked(self.as_ptr()) }
     }
+    /// For a listbox or similar event, returns true if it is a selection, false if it is a deselection.
+    ///
+    /// [See `wxCommandEvent::IsSelection()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_event.html#a44f4144f027fcb7feadb4c23bcbfeb5f)
     fn is_selection(&self) -> bool {
         unsafe { ffi::wxCommandEvent_IsSelection(self.as_ptr()) }
     }
+    /// Sets the client data for this event.
+    ///
+    /// [See `wxCommandEvent::SetClientData()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_event.html#a1778d16766134e08cafcdb49b06855ce)
     fn set_client_data(&self, client_data: *mut c_void) {
         unsafe { ffi::wxCommandEvent_SetClientData(self.as_ptr(), client_data) }
     }
+    /// Sets the client object for this event.
+    ///
+    /// [See `wxCommandEvent::SetClientObject()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_event.html#a752e5a0fb8992b062c4dec6866171586)
     fn set_client_object<C: ClientDataMethods>(&self, client_object: Option<&C>) {
         unsafe {
             let client_object = match client_object {
@@ -1267,12 +1892,21 @@ pub trait CommandEventMethods: EventMethods {
             ffi::wxCommandEvent_SetClientObject(self.as_ptr(), client_object)
         }
     }
+    /// Sets the m_extraLong member.
+    ///
+    /// [See `wxCommandEvent::SetExtraLong()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_event.html#a13ac3c581b99d110bac2c6b74803d2df)
     fn set_extra_long(&self, extra_long: c_long) {
         unsafe { ffi::wxCommandEvent_SetExtraLong(self.as_ptr(), extra_long) }
     }
+    /// Sets the m_commandInt member.
+    ///
+    /// [See `wxCommandEvent::SetInt()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_event.html#aeaed91ffb1d02f07d7ea40f029f95a7c)
     fn set_int(&self, int_command: c_int) {
         unsafe { ffi::wxCommandEvent_SetInt(self.as_ptr(), int_command) }
     }
+    /// Sets the m_commandString member.
+    ///
+    /// [See `wxCommandEvent::SetString()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_event.html#a06ca56ac6680fe3b3178d8abd913d450)
     fn set_string(&self, string: &str) {
         unsafe {
             let string = WxString::from(string);
@@ -1284,6 +1918,9 @@ pub trait CommandEventMethods: EventMethods {
 
 // wxCommandLinkButton
 pub trait CommandLinkButtonMethods: ButtonMethods {
+    /// Button creation function for two-step creation.
+    ///
+    /// [See `wxCommandLinkButton::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_link_button.html#a7e31d9eaa8da537f9509ea5bd9df2600)
     fn create_str_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
         parent: Option<&W>,
@@ -1324,6 +1961,9 @@ pub trait CommandLinkButtonMethods: ButtonMethods {
             )
         }
     }
+    /// Sets a new main label and note for the button.
+    ///
+    /// [See `wxCommandLinkButton::SetMainLabelAndNote()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_link_button.html#a0e496ccc683c5060796415d108381597)
     fn set_main_label_and_note(&self, main_label: &str, note: &str) {
         unsafe {
             let main_label = WxString::from(main_label);
@@ -1333,6 +1973,9 @@ pub trait CommandLinkButtonMethods: ButtonMethods {
             ffi::wxCommandLinkButton_SetMainLabelAndNote(self.as_ptr(), main_label, note)
         }
     }
+    /// Changes the main label.
+    ///
+    /// [See `wxCommandLinkButton::SetMainLabel()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_link_button.html#a6cecd5ecdb7eff45519d02a6766c5b07)
     fn set_main_label(&self, main_label: &str) {
         unsafe {
             let main_label = WxString::from(main_label);
@@ -1340,6 +1983,9 @@ pub trait CommandLinkButtonMethods: ButtonMethods {
             ffi::wxCommandLinkButton_SetMainLabel(self.as_ptr(), main_label)
         }
     }
+    /// Changes the note.
+    ///
+    /// [See `wxCommandLinkButton::SetNote()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_link_button.html#a67c8e23fe483fed7ea7e9e337d880c90)
     fn set_note(&self, note: &str) {
         unsafe {
             let note = WxString::from(note);
@@ -1347,9 +1993,15 @@ pub trait CommandLinkButtonMethods: ButtonMethods {
             ffi::wxCommandLinkButton_SetNote(self.as_ptr(), note)
         }
     }
+    /// Returns the current main label.
+    ///
+    /// [See `wxCommandLinkButton::GetMainLabel()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_link_button.html#ae8ef37ce37239c678d2ad08f8074b507)
     fn get_main_label(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxCommandLinkButton_GetMainLabel(self.as_ptr())).into() }
     }
+    /// Returns the currently used note.
+    ///
+    /// [See `wxCommandLinkButton::GetNote()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_link_button.html#a85330e2fe839cf011bde99a916c6a5fd)
     fn get_note(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxCommandLinkButton_GetNote(self.as_ptr())).into() }
     }
@@ -1358,57 +2010,102 @@ pub trait CommandLinkButtonMethods: ButtonMethods {
 // wxCommandProcessor
 pub trait CommandProcessorMethods: ObjectMethods {
     // DTOR: fn ~wxCommandProcessor()
+    /// Returns true if the currently-active command can be undone, false otherwise.
+    ///
+    /// [See `wxCommandProcessor::CanUndo()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#a69e81fc811ca19833bd7b684ecf2da12)
     fn can_undo(&self) -> bool {
         unsafe { ffi::wxCommandProcessor_CanUndo(self.as_ptr()) }
     }
+    /// Returns true if the currently-active command can be redone, false otherwise.
+    ///
+    /// [See `wxCommandProcessor::CanRedo()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#aeb9ad26a1ad14936db1bb1497e58e59a)
     fn can_redo(&self) -> bool {
         unsafe { ffi::wxCommandProcessor_CanRedo(self.as_ptr()) }
     }
+    /// Deletes all commands in the list and sets the current command pointer to NULL.
+    ///
+    /// [See `wxCommandProcessor::ClearCommands()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#a9d315d50c36aa91195f7954984b4cd9d)
     fn clear_commands(&self) {
         unsafe { ffi::wxCommandProcessor_ClearCommands(self.as_ptr()) }
     }
     // BLOCKED: fn GetCommands()
+    /// Returns the current command.
+    ///
+    /// [See `wxCommandProcessor::GetCurrentCommand()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#a026a00fa665813b2ae5ffb64d8d90b0e)
     fn get_current_command(&self) -> Option<CommandIsOwned<false>> {
         unsafe { Command::option_from(ffi::wxCommandProcessor_GetCurrentCommand(self.as_ptr())) }
     }
+    /// Returns the edit menu associated with the command processor.
+    ///
+    /// [See `wxCommandProcessor::GetEditMenu()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#ab8e304fbf624ca6a4848decfd18e2d2a)
     fn get_edit_menu(&self) -> WeakRef<Menu> {
         unsafe { WeakRef::<Menu>::from(ffi::wxCommandProcessor_GetEditMenu(self.as_ptr())) }
     }
+    /// Returns the maximum number of commands that the command processor stores.
+    ///
+    /// [See `wxCommandProcessor::GetMaxCommands()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#a9f540ccdea952ee0f80301c5b179579d)
     fn get_max_commands(&self) -> c_int {
         unsafe { ffi::wxCommandProcessor_GetMaxCommands(self.as_ptr()) }
     }
+    /// Returns the string that will be appended to the Redo menu item.
+    ///
+    /// [See `wxCommandProcessor::GetRedoAccelerator()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#a977ea62bc71c6b87ed91ba80b1de9e63)
     fn get_redo_accelerator(&self) -> String {
         unsafe {
             WxString::from_ptr(ffi::wxCommandProcessor_GetRedoAccelerator(self.as_ptr())).into()
         }
     }
+    /// Returns the string that will be shown for the redo menu item.
+    ///
+    /// [See `wxCommandProcessor::GetRedoMenuLabel()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#aecf786d0eaf85b36ed83f3296dbf97b2)
     fn get_redo_menu_label(&self) -> String {
         unsafe {
             WxString::from_ptr(ffi::wxCommandProcessor_GetRedoMenuLabel(self.as_ptr())).into()
         }
     }
+    /// Returns the string that will be appended to the Undo menu item.
+    ///
+    /// [See `wxCommandProcessor::GetUndoAccelerator()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#a64e31026ba6ea99d5e58b2f7ac73cf95)
     fn get_undo_accelerator(&self) -> String {
         unsafe {
             WxString::from_ptr(ffi::wxCommandProcessor_GetUndoAccelerator(self.as_ptr())).into()
         }
     }
+    /// Returns the string that will be shown for the undo menu item.
+    ///
+    /// [See `wxCommandProcessor::GetUndoMenuLabel()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#abd868af91e716f06d46e936fdb682ff9)
     fn get_undo_menu_label(&self) -> String {
         unsafe {
             WxString::from_ptr(ffi::wxCommandProcessor_GetUndoMenuLabel(self.as_ptr())).into()
         }
     }
+    /// Initializes the command processor, setting the current command to the last in the list (if any), and updating the edit menu (if one has been specified).
+    ///
+    /// [See `wxCommandProcessor::Initialize()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#a2ca9168da9f416cfd39307f4d9686612)
     fn initialize(&self) {
         unsafe { ffi::wxCommandProcessor_Initialize(self.as_ptr()) }
     }
+    /// Returns a boolean value that indicates if changes have been made since the last save operation.
+    ///
+    /// [See `wxCommandProcessor::IsDirty()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#a5d4297924743ae662c4bda5150682215)
     fn is_dirty(&self) -> bool {
         unsafe { ffi::wxCommandProcessor_IsDirty(self.as_ptr()) }
     }
+    /// You must call this method whenever the project is saved if you plan to use IsDirty().
+    ///
+    /// [See `wxCommandProcessor::MarkAsSaved()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#a5ab022fc24cbc1ebd86a0c2edb4b4de8)
     fn mark_as_saved(&self) {
         unsafe { ffi::wxCommandProcessor_MarkAsSaved(self.as_ptr()) }
     }
+    /// Executes (redoes) the current command (the command that has just been undone if any).
+    ///
+    /// [See `wxCommandProcessor::Redo()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#a5f51b031f29220385f7e270f7d08afc4)
     fn redo(&self) -> bool {
         unsafe { ffi::wxCommandProcessor_Redo(self.as_ptr()) }
     }
+    /// Tells the command processor to update the Undo and Redo items on this menu as appropriate.
+    ///
+    /// [See `wxCommandProcessor::SetEditMenu()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#ac165f00d1d87bf0814be4156503ef954)
     fn set_edit_menu<M: MenuMethods>(&self, menu: Option<&M>) {
         unsafe {
             let menu = match menu {
@@ -1418,9 +2115,15 @@ pub trait CommandProcessorMethods: ObjectMethods {
             ffi::wxCommandProcessor_SetEditMenu(self.as_ptr(), menu)
         }
     }
+    /// Sets the menu labels according to the currently set menu and the current command state.
+    ///
+    /// [See `wxCommandProcessor::SetMenuStrings()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#a186f43c64bc8154da368504ccc83cfc7)
     fn set_menu_strings(&self) {
         unsafe { ffi::wxCommandProcessor_SetMenuStrings(self.as_ptr()) }
     }
+    /// Sets the string that will be appended to the Redo menu item.
+    ///
+    /// [See `wxCommandProcessor::SetRedoAccelerator()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#a1561f0d451067751bcd0d774213fb365)
     fn set_redo_accelerator(&self, accel: &str) {
         unsafe {
             let accel = WxString::from(accel);
@@ -1428,6 +2131,9 @@ pub trait CommandProcessorMethods: ObjectMethods {
             ffi::wxCommandProcessor_SetRedoAccelerator(self.as_ptr(), accel)
         }
     }
+    /// Sets the string that will be appended to the Undo menu item.
+    ///
+    /// [See `wxCommandProcessor::SetUndoAccelerator()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#a258a7fd2a1250220e119849eafe55934)
     fn set_undo_accelerator(&self, accel: &str) {
         unsafe {
             let accel = WxString::from(accel);
@@ -1435,6 +2141,9 @@ pub trait CommandProcessorMethods: ObjectMethods {
             ffi::wxCommandProcessor_SetUndoAccelerator(self.as_ptr(), accel)
         }
     }
+    /// Submits a new command to the command processor.
+    ///
+    /// [See `wxCommandProcessor::Submit()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#a5c4a270152e0ca5d57d4e0c0c5e9e34a)
     fn submit<C: CommandMethods>(&self, command: Option<&C>, store_it: bool) -> bool {
         unsafe {
             let command = match command {
@@ -1444,6 +2153,9 @@ pub trait CommandProcessorMethods: ObjectMethods {
             ffi::wxCommandProcessor_Submit(self.as_ptr(), command, store_it)
         }
     }
+    /// Just store the command without executing it.
+    ///
+    /// [See `wxCommandProcessor::Store()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#a3b3264402f092540ad075aba0f4d2352)
     fn store<C: CommandMethods>(&self, command: Option<&C>) {
         unsafe {
             let command = match command {
@@ -1453,6 +2165,9 @@ pub trait CommandProcessorMethods: ObjectMethods {
             ffi::wxCommandProcessor_Store(self.as_ptr(), command)
         }
     }
+    /// Undoes the last command executed.
+    ///
+    /// [See `wxCommandProcessor::Undo()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#af26a98ba5b9d0a3f9c290714aab28891)
     fn undo(&self) -> bool {
         unsafe { ffi::wxCommandProcessor_Undo(self.as_ptr()) }
     }
@@ -1460,9 +2175,15 @@ pub trait CommandProcessorMethods: ObjectMethods {
 
 // wxContextMenuEvent
 pub trait ContextMenuEventMethods: CommandEventMethods {
+    /// Returns the position in screen coordinates at which the menu should be shown.
+    ///
+    /// [See `wxContextMenuEvent::GetPosition()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_context_menu_event.html#a6017c932b59f627bc62dbc2f2347f940)
     fn get_position(&self) -> PointIsOwned<false> {
         unsafe { PointIsOwned::from_ptr(ffi::wxContextMenuEvent_GetPosition(self.as_ptr())) }
     }
+    /// Sets the position at which the menu should be shown.
+    ///
+    /// [See `wxContextMenuEvent::SetPosition()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_context_menu_event.html#a24d0fdf2c831940a85b4e80e2c5d15a8)
     fn set_position<P: PointMethods>(&self, point: &P) {
         unsafe {
             let point = point.as_ptr();
@@ -1473,6 +2194,8 @@ pub trait ContextMenuEventMethods: CommandEventMethods {
 
 // wxControl
 pub trait ControlMethods: WindowMethods {
+    ///
+    /// [See `wxControl::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_control.html#abe23789c94c86907463a0e8434be822a)
     fn create_validator<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
         parent: Option<&W>,
@@ -1496,15 +2219,24 @@ pub trait ControlMethods: WindowMethods {
             ffi::wxControl_Create(self.as_ptr(), parent, id, pos, size, style, validator, name)
         }
     }
+    /// Simulates the effect of the user issuing a command to the item.
+    ///
+    /// [See `wxControl::Command()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_control.html#a8cd7ac81debaf506d6d146528c3d9a82)
     fn command<C: CommandEventMethods>(&self, event: &C) {
         unsafe {
             let event = event.as_ptr();
             ffi::wxControl_Command(self.as_ptr(), event)
         }
     }
+    /// Returns the control's label without mnemonics.
+    ///
+    /// [See `wxControl::GetLabelText()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_control.html#a4ec6a7ee61553cd1df77d50491cee820)
     fn get_label_text(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxControl_GetLabelText(self.as_ptr())).into() }
     }
+    /// Determine the size needed by the control to leave the given area for its text.
+    ///
+    /// [See `wxControl::GetSizeFromTextSize()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_control.html#a252c7408d6dfa8d70e8dbe88cea9695d)
     fn get_size_from_text_size_int(&self, xlen: c_int, ylen: c_int) -> Size {
         unsafe {
             Size::from_ptr(ffi::wxControl_GetSizeFromTextSize(
@@ -1514,12 +2246,18 @@ pub trait ControlMethods: WindowMethods {
             ))
         }
     }
+    /// This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+    ///
+    /// [See `wxControl::GetSizeFromTextSize()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_control.html#a4d9169af074418aa3528f7b5fca61f94)
     fn get_size_from_text_size_size<S: SizeMethods>(&self, tsize: &S) -> Size {
         unsafe {
             let tsize = tsize.as_ptr();
             Size::from_ptr(ffi::wxControl_GetSizeFromTextSize1(self.as_ptr(), tsize))
         }
     }
+    /// Determine the minimum size needed by the control to display the given text.
+    ///
+    /// [See `wxControl::GetSizeFromText()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_control.html#a65e0bb72969361c14a0959f3aae57d61)
     fn get_size_from_text(&self, text: &str) -> Size {
         unsafe {
             let text = WxString::from(text);
@@ -1527,6 +2265,9 @@ pub trait ControlMethods: WindowMethods {
             Size::from_ptr(ffi::wxControl_GetSizeFromText(self.as_ptr(), text))
         }
     }
+    /// Sets the control's label to exactly the given string.
+    ///
+    /// [See `wxControl::SetLabelText()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_control.html#ae092899c3fe658831a9c796755a65eb7)
     fn set_label_text(&self, text: &str) {
         unsafe {
             let text = WxString::from(text);
@@ -1534,6 +2275,9 @@ pub trait ControlMethods: WindowMethods {
             ffi::wxControl_SetLabelText(self.as_ptr(), text)
         }
     }
+    /// Sets the controls label to a string using markup.
+    ///
+    /// [See `wxControl::SetLabelMarkup()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_control.html#afeb308dc3b54d8d735b33cb250395503)
     fn set_label_markup(&self, markup: &str) -> bool {
         unsafe {
             let markup = WxString::from(markup);
@@ -1541,6 +2285,9 @@ pub trait ControlMethods: WindowMethods {
             ffi::wxControl_SetLabelMarkup(self.as_ptr(), markup)
         }
     }
+    /// Returns the given label string without mnemonics ("&" characters).
+    ///
+    /// [See `wxControl::GetLabelText()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_control.html#ae892fefe6b88168c158e11e975633665)
     fn get_label_text_str(label: &str) -> String {
         unsafe {
             let label = WxString::from(label);
@@ -1548,6 +2295,9 @@ pub trait ControlMethods: WindowMethods {
             WxString::from_ptr(ffi::wxControl_GetLabelText1(label)).into()
         }
     }
+    /// Returns the given str string without mnemonics ("&" characters).
+    ///
+    /// [See `wxControl::RemoveMnemonics()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_control.html#ab7df4ca0dfde3a6409833cf470ee02e6)
     fn remove_mnemonics(str: &str) -> String {
         unsafe {
             let str = WxString::from(str);
@@ -1555,6 +2305,9 @@ pub trait ControlMethods: WindowMethods {
             WxString::from_ptr(ffi::wxControl_RemoveMnemonics(str)).into()
         }
     }
+    /// Escapes the special mnemonics characters ("&") in the given string.
+    ///
+    /// [See `wxControl::EscapeMnemonics()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_control.html#abdbd9c0684856546671e759dd95b23d4)
     fn escape_mnemonics(text: &str) -> String {
         unsafe {
             let text = WxString::from(text);
@@ -1562,6 +2315,9 @@ pub trait ControlMethods: WindowMethods {
             WxString::from_ptr(ffi::wxControl_EscapeMnemonics(text)).into()
         }
     }
+    /// Replaces parts of the label string with ellipsis, if needed, so that it fits into maxWidth pixels if possible.
+    ///
+    /// [See `wxControl::Ellipsize()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_control.html#a0bb834cae2a8986aceddb89f84ef4ed1)
     fn ellipsize<D: DCMethods>(
         label: &str,
         dc: &D,
@@ -1584,9 +2340,15 @@ pub trait ControlWithItemsMethods: ControlMethods {}
 // wxCursor
 pub trait CursorMethods: GDIObjectMethods {
     // DTOR: fn ~wxCursor()
+    /// Returns true if cursor data is present.
+    ///
+    /// [See `wxCursor::IsOk()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_cursor.html#a46bfc04111995a2492053c34dfb9aa23)
     fn is_ok(&self) -> bool {
         unsafe { ffi::wxCursor_IsOk(self.as_ptr()) }
     }
+    /// Returns the coordinates of the cursor hot spot.
+    ///
+    /// [See `wxCursor::GetHotSpot()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_cursor.html#aa0339e59355eeb2ef0a1fe955a25f23d)
     fn get_hot_spot(&self) -> Point {
         unsafe { Point::from_ptr(ffi::wxCursor_GetHotSpot(self.as_ptr())) }
     }
@@ -1596,18 +2358,33 @@ pub trait CursorMethods: GDIObjectMethods {
 // wxCustomDataObject
 pub trait CustomDataObjectMethods: DataObjectSimpleMethods {
     // DTOR: fn ~wxCustomDataObject()
+    /// This function is called to allocate size bytes of memory from SetData().
+    ///
+    /// [See `wxCustomDataObject::Alloc()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_custom_data_object.html#a29cee14d29cb4b82ac487b62506e5699)
     fn alloc(&self, size: usize) -> *mut c_void {
         unsafe { ffi::wxCustomDataObject_Alloc(self.as_ptr(), size) }
     }
+    /// This function is called when the data is freed, you may override it to anything you want (or may be nothing at all).
+    ///
+    /// [See `wxCustomDataObject::Free()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_custom_data_object.html#a4978a39c76eaba4fc880aea751139b1c)
     fn free(&self) {
         unsafe { ffi::wxCustomDataObject_Free(self.as_ptr()) }
     }
+    /// Returns a pointer to the data.
+    ///
+    /// [See `wxCustomDataObject::GetData()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_custom_data_object.html#a6cfcfae971116cbec934a0d9282a048a)
     fn get_data(&self) -> *mut c_void {
         unsafe { ffi::wxCustomDataObject_GetData(self.as_ptr()) }
     }
+    /// Returns the data size in bytes.
+    ///
+    /// [See `wxCustomDataObject::GetSize()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_custom_data_object.html#ac04d7b07187b5cd4abe469bab536cdac)
     fn get_size(&self) -> usize {
         unsafe { ffi::wxCustomDataObject_GetSize(self.as_ptr()) }
     }
+    /// Like SetData(), but doesn't copy the data - instead the object takes ownership of the pointer.
+    ///
+    /// [See `wxCustomDataObject::TakeData()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_custom_data_object.html#a133a6a8044d298b68b50945c422ae4a8)
     fn take_data(&self, size: usize, data: *mut c_void) {
         unsafe { ffi::wxCustomDataObject_TakeData(self.as_ptr(), size, data) }
     }

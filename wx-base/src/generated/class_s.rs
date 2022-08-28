@@ -2,6 +2,9 @@ use super::*;
 
 // wxStandardPaths
 wxwidgets! {
+    /// wxStandardPaths returns the standard locations in the file system and should be used by applications to find their data files in a portable way.
+    ///
+    /// [See `wxStandardPaths`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_standard_paths.html)
     #[doc(alias = "wxStandardPaths")]
     #[doc(alias = "StandardPaths")]
     class StandardPaths
