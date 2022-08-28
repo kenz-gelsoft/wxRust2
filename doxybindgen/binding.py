@@ -56,9 +56,9 @@ class RustClassBinding:
             yield 'wxwidgets! {'
             yield '    /// %s' % (self.__model.doc,)
             yield '    ///'
-            yield "    /// [See `%s`'s original doc.](https://docs.wxwidgets.org/3.2/%s.html)" % (
+            yield "    /// [See `%s`'s original doc.](%s)" % (
                 self.__model.name,
-                self.__model.doc_id,
+                self.__model.doc_url(),
             )
             for alias in (self.__model.name, unprefixed):
                 yield '    #[doc(alias = "%s")]' % (alias,)
@@ -437,6 +437,12 @@ class RustMethodBinding:
             doc = self.__model.doc
             if doc:
                 yield '/// %s' % (doc,)
+            yield '///'
+            yield "/// [See `%s::%s()`'s original doc.](%s)" % (
+                self.__model.cls.name,
+                self.__model.name(without_index=True),
+                self.__model.doc_url(),
+            )
             yield '%s {' % (signature,)
             body_lines = list(self._binding_body())
             for line in self._wrap_unsafe(body_lines):

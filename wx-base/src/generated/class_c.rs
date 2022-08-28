@@ -43,6 +43,8 @@ wxwidgets! {
 }
 impl<const OWNED: bool> ClientDataIsOwned<OWNED> {
     /// Constructor.
+    ///
+    /// [See `wxClientData::wxClientData()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_client_data.html#acf0e79134d5fb8abd8a4a343c616e8d7)
     pub fn new() -> ClientDataIsOwned<OWNED> {
         unsafe { ClientDataIsOwned(ffi::wxClientData_new()) }
     }

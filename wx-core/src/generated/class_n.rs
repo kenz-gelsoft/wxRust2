@@ -12,9 +12,13 @@ wxwidgets! {
         NativeFontInfoMethods
 }
 impl<const OWNED: bool> NativeFontInfoIsOwned<OWNED> {
+    ///
+    /// [See `wxNativeFontInfo::wxNativeFontInfo()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_native_font_info.html#a1925fc4457120e9a1c9dbb3b2bd69f1c)
     pub fn new() -> NativeFontInfoIsOwned<OWNED> {
         unsafe { NativeFontInfoIsOwned(ffi::wxNativeFontInfo_new()) }
     }
+    ///
+    /// [See `wxNativeFontInfo::wxNativeFontInfo()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_native_font_info.html#a1b1e2d352f84671443e652dc829d77a3)
     pub fn new_with_nativefontinfo<N: NativeFontInfoMethods>(
         info: &N,
     ) -> NativeFontInfoIsOwned<OWNED> {
@@ -60,9 +64,13 @@ impl<const OWNED: bool> NavigationKeyEventIsOwned<OWNED> {
     pub const WinChange: c_int = 0x0002;
     pub const FromTab: c_int = 0x0004;
 
+    ///
+    /// [See `wxNavigationKeyEvent::wxNavigationKeyEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_navigation_key_event.html#a87080163d24b140012f2f4ce2b48f977)
     pub fn new() -> NavigationKeyEventIsOwned<OWNED> {
         unsafe { NavigationKeyEventIsOwned(ffi::wxNavigationKeyEvent_new()) }
     }
+    ///
+    /// [See `wxNavigationKeyEvent::wxNavigationKeyEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_navigation_key_event.html#ac54bb8927f61f701a4e6a354ae4d938e)
     pub fn new_with_navigationkeyevent<N: NavigationKeyEventMethods>(
         event: &N,
     ) -> NavigationKeyEventIsOwned<OWNED> {
@@ -166,10 +174,14 @@ wxwidgets! {
 }
 impl<const OWNED: bool> NotebookIsOwned<OWNED> {
     /// Constructs a notebook control.
+    ///
+    /// [See `wxNotebook::wxNotebook()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_notebook.html#a7bd68c88ae0ac9b5bfa4d60ef3e0b067)
     pub fn new_2step() -> NotebookIsOwned<OWNED> {
         unsafe { NotebookIsOwned(ffi::wxNotebook_new()) }
     }
     /// Constructs a notebook control.
+    ///
+    /// [See `wxNotebook::wxNotebook()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_notebook.html#a3f096bce4ab17440ce49c1bf761d074e)
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -231,6 +243,8 @@ impl<const OWNED: bool> DynamicCast for NotebookIsOwned<OWNED> {
 }
 impl<const OWNED: bool> WindowMethods for NotebookIsOwned<OWNED> {
     /// Creates a notebook control.
+    ///
+    /// [See `wxNotebook::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_notebook.html#a6ba4f58ec00e3c192bcb856b1244b09f)
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -273,10 +287,14 @@ impl<const OWNED: bool> NotificationMessageIsOwned<OWNED> {
     pub const Timeout_Never: c_int = 0;
 
     /// Default constructor, use SetParent(), SetTitle() and SetMessage() to initialize the object before showing it.
+    ///
+    /// [See `wxNotificationMessage::wxNotificationMessage()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_notification_message.html#a7799f9358f0d90f8d9ebc675c2da4782)
     pub fn new() -> NotificationMessageIsOwned<OWNED> {
         unsafe { NotificationMessageIsOwned(ffi::wxNotificationMessage_new()) }
     }
     /// Create a notification object with the given attributes.
+    ///
+    /// [See `wxNotificationMessage::wxNotificationMessage()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_notification_message.html#ad7702e56ced878ea5b0b0e3f9a6a727c)
     pub fn new_with_str<W: WindowMethods>(
         title: &str,
         message: &str,
@@ -394,10 +412,14 @@ wxwidgets! {
 }
 impl<const OWNED: bool> NumberEntryDialogIsOwned<OWNED> {
     /// Default constructor.
+    ///
+    /// [See `wxNumberEntryDialog::wxNumberEntryDialog()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_number_entry_dialog.html#aebe799ab025b3b31b1d5e1de45e582a5)
     pub fn new_2step() -> NumberEntryDialogIsOwned<OWNED> {
         unsafe { NumberEntryDialogIsOwned(ffi::wxNumberEntryDialog_new()) }
     }
     /// Constructor.
+    ///
+    /// [See `wxNumberEntryDialog::wxNumberEntryDialog()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_number_entry_dialog.html#a35f2a9529c9d126dbb8196698cb93186)
     pub fn new<W: WindowMethods, P: PointMethods>(
         parent: Option<&W>,
         message: &str,

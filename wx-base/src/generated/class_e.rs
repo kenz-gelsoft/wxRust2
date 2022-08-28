@@ -55,6 +55,8 @@ wxwidgets! {
 }
 impl<const OWNED: bool> EvtHandlerIsOwned<OWNED> {
     /// Constructor.
+    ///
+    /// [See `wxEvtHandler::wxEvtHandler()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_evt_handler.html#a3f0166c4154227d05575b01eb2c8d4be)
     pub fn new() -> EvtHandlerIsOwned<OWNED> {
         unsafe { EvtHandlerIsOwned(ffi::wxEvtHandler_new()) }
     }

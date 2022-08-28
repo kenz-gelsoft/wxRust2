@@ -15,10 +15,14 @@ wxwidgets! {
 }
 impl<const OWNED: bool> TimerIsOwned<OWNED> {
     /// Default constructor.
+    ///
+    /// [See `wxTimer::wxTimer()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_timer.html#a0560894a1ab57792f52992ffbc58e735)
     pub fn new() -> TimerIsOwned<OWNED> {
         unsafe { TimerIsOwned(ffi::wxTimer_new()) }
     }
     /// Creates a timer and associates it with owner.
+    ///
+    /// [See `wxTimer::wxTimer()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_timer.html#aeba595e67731d9f8ce07e4ac69a0ca65)
     pub fn new_with_evthandler<E: EvtHandlerMethods>(
         owner: Option<&E>,
         id: c_int,
@@ -70,6 +74,8 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> TimerEventIsOwned<OWNED> {
+    ///
+    /// [See `wxTimerEvent::wxTimerEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_timer_event.html#aedca4f26719c256c2f8d9ef8486d2f86)
     pub fn new<T: TimerMethods>(timer: &T) -> TimerEventIsOwned<OWNED> {
         unsafe {
             let timer = timer.as_ptr();

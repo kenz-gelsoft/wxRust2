@@ -13,6 +13,8 @@ wxwidgets! {
 }
 impl<const OWNED: bool> UIActionSimulatorIsOwned<OWNED> {
     /// Default constructor.
+    ///
+    /// [See `wxUIActionSimulator::wxUIActionSimulator()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_u_i_action_simulator.html#aa0f66cea40a642075482e06ccf2b75cb)
     pub fn new() -> UIActionSimulatorIsOwned<OWNED> {
         unsafe { UIActionSimulatorIsOwned(ffi::wxUIActionSimulator_new()) }
     }
@@ -47,6 +49,8 @@ wxwidgets! {
 }
 impl<const OWNED: bool> URLDataObjectIsOwned<OWNED> {
     /// Constructor, may be used to initialize the URL.
+    ///
+    /// [See `wxURLDataObject::wxURLDataObject()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_u_r_l_data_object.html#a57104fc32eb66f8fa666b1f2799631d5)
     pub fn new(url: &str) -> URLDataObjectIsOwned<OWNED> {
         unsafe {
             let url = WxString::from(url);
@@ -92,6 +96,8 @@ wxwidgets! {
 }
 impl<const OWNED: bool> UpdateUIEventIsOwned<OWNED> {
     /// Constructor.
+    ///
+    /// [See `wxUpdateUIEvent::wxUpdateUIEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_update_u_i_event.html#aa25df58e7047f819f5dd0520eb2cc8ea)
     pub fn new(command_id: c_int) -> UpdateUIEventIsOwned<OWNED> {
         unsafe { UpdateUIEventIsOwned(ffi::wxUpdateUIEvent_new(command_id)) }
     }

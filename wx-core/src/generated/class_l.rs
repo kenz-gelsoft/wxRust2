@@ -14,6 +14,8 @@ wxwidgets! {
 }
 impl<const OWNED: bool> LayoutAlgorithmIsOwned<OWNED> {
     /// Default constructor.
+    ///
+    /// [See `wxLayoutAlgorithm::wxLayoutAlgorithm()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_layout_algorithm.html#af8e2301f3e97d27ee3c2e0cbb2587488)
     pub fn new() -> LayoutAlgorithmIsOwned<OWNED> {
         unsafe { LayoutAlgorithmIsOwned(ffi::wxLayoutAlgorithm_new()) }
     }
@@ -61,11 +63,15 @@ wxwidgets! {
 }
 impl<const OWNED: bool> ListBoxIsOwned<OWNED> {
     /// Default constructor.
+    ///
+    /// [See `wxListBox::wxListBox()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_box.html#a63347db33d1ae5a10c8eb54b3d556b56)
     pub fn new_2step() -> ListBoxIsOwned<OWNED> {
         unsafe { ListBoxIsOwned(ffi::wxListBox_new()) }
     }
     // NOT_SUPPORTED: fn wxListBox1()
     /// Constructor, creating and showing a list box.
+    ///
+    /// [See `wxListBox::wxListBox()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_box.html#a1dd35666935f63e013a64216f45865eb)
     pub fn new<
         W: WindowMethods,
         P: PointMethods,
@@ -161,10 +167,14 @@ wxwidgets! {
 }
 impl<const OWNED: bool> ListCtrlIsOwned<OWNED> {
     /// Default constructor.
+    ///
+    /// [See `wxListCtrl::wxListCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_ctrl.html#a6941e35348b00a288e833871fd0138e8)
     pub fn new_2step() -> ListCtrlIsOwned<OWNED> {
         unsafe { ListCtrlIsOwned(ffi::wxListCtrl_new()) }
     }
     /// Constructor, creating and showing a list control.
+    ///
+    /// [See `wxListCtrl::wxListCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_ctrl.html#aaf98aeeba06ad86fa471f9218ae91097)
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -225,6 +235,8 @@ impl<const OWNED: bool> DynamicCast for ListCtrlIsOwned<OWNED> {
 }
 impl<const OWNED: bool> ControlMethods for ListCtrlIsOwned<OWNED> {
     /// Creates the list control.
+    ///
+    /// [See `wxListCtrl::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_ctrl.html#a5b13e700b9957677468d63558d73d5df)
     fn create_validator<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
         parent: Option<&W>,
@@ -323,6 +335,8 @@ wxwidgets! {
 }
 impl<const OWNED: bool> ListItemIsOwned<OWNED> {
     /// Constructor.
+    ///
+    /// [See `wxListItem::wxListItem()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_item.html#ab133f45cd8964e254cdaa1512713c153)
     pub fn new() -> ListItemIsOwned<OWNED> {
         unsafe { ListItemIsOwned(ffi::wxListItem_new()) }
     }
@@ -371,10 +385,14 @@ wxwidgets! {
 }
 impl<const OWNED: bool> ListViewIsOwned<OWNED> {
     /// Default constructor.
+    ///
+    /// [See `wxListView::wxListView()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_view.html#a103cf973c8be268b78a0c08c419f606f)
     pub fn new_2step() -> ListViewIsOwned<OWNED> {
         unsafe { ListViewIsOwned(ffi::wxListView_new()) }
     }
     /// Constructor, creating and showing a listview control.
+    ///
+    /// [See `wxListView::wxListView()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_view.html#a6984e2ef325a4702ac7871d6a1c65119)
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         winid: c_int,
@@ -457,10 +475,14 @@ wxwidgets! {
 }
 impl<const OWNED: bool> ListbookIsOwned<OWNED> {
     /// Default ctor.
+    ///
+    /// [See `wxListbook::wxListbook()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_listbook.html#abed6de6659aaca045b6503cbf8baf622)
     pub fn new_2step() -> ListbookIsOwned<OWNED> {
         unsafe { ListbookIsOwned(ffi::wxListbook_new()) }
     }
     /// Constructs a listbook control.
+    ///
+    /// [See `wxListbook::wxListbook()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_listbook.html#a2e5a198617615b4fa83eafa5b577afb3)
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -522,6 +544,8 @@ impl<const OWNED: bool> DynamicCast for ListbookIsOwned<OWNED> {
 }
 impl<const OWNED: bool> WindowMethods for ListbookIsOwned<OWNED> {
     /// Create the list book control that has already been constructed with the default constructor.
+    ///
+    /// [See `wxListbook::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_listbook.html#a38a6aad6c1fb31fa24acb471a8a37fd2)
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,

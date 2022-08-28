@@ -13,6 +13,8 @@ wxwidgets! {
 }
 impl<const OWNED: bool> RefCounterIsOwned<OWNED> {
     /// Default constructor.
+    ///
+    /// [See `wxRefCounter::wxRefCounter()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_ref_counter.html#aebcddb8241dfea7f60f8e4df6776a0e3)
     pub fn new() -> RefCounterIsOwned<OWNED> {
         unsafe { RefCounterIsOwned(ffi::wxRefCounter_new()) }
     }

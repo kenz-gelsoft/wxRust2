@@ -16,11 +16,15 @@ wxwidgets! {
 }
 impl<const OWNED: bool> BannerWindowIsOwned<OWNED> {
     /// Default constructor, use Create() later.
+    ///
+    /// [See `wxBannerWindow::wxBannerWindow()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_banner_window.html#a29260797c824b361163f18519994c2f7)
     pub fn new_2step() -> BannerWindowIsOwned<OWNED> {
         unsafe { BannerWindowIsOwned(ffi::wxBannerWindow_new()) }
     }
     // BLOCKED: fn wxBannerWindow1()
     /// Full constructor provided for consistency with the other classes only.
+    ///
+    /// [See `wxBannerWindow::wxBannerWindow()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_banner_window.html#acbff11dfffdae9f0421d782f6adabb63)
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         winid: c_int,
@@ -89,10 +93,14 @@ wxwidgets! {
 }
 impl<const OWNED: bool> BitmapIsOwned<OWNED> {
     /// Default constructor.
+    ///
+    /// [See `wxBitmap::wxBitmap()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap.html#a5b4b1b408108b78cdbfd325b03c903b7)
     pub fn new() -> BitmapIsOwned<OWNED> {
         unsafe { BitmapIsOwned(ffi::wxBitmap_new()) }
     }
     /// Copy constructor, uses reference counting.
+    ///
+    /// [See `wxBitmap::wxBitmap()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap.html#abfaa21ec563a64ea913af918150db900)
     pub fn new_with_bitmap<B: BitmapMethods>(bitmap: &B) -> BitmapIsOwned<OWNED> {
         unsafe {
             let bitmap = bitmap.as_ptr();
@@ -101,10 +109,14 @@ impl<const OWNED: bool> BitmapIsOwned<OWNED> {
     }
     // NOT_SUPPORTED: fn wxBitmap2()
     /// Creates a new bitmap.
+    ///
+    /// [See `wxBitmap::wxBitmap()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap.html#a3bb19e8d368d6565f52a9c1294d80d7a)
     pub fn new_with_int_int(width: c_int, height: c_int, depth: c_int) -> BitmapIsOwned<OWNED> {
         unsafe { BitmapIsOwned(ffi::wxBitmap_new3(width, height, depth)) }
     }
     /// This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+    ///
+    /// [See `wxBitmap::wxBitmap()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap.html#a2a73d89860df03b474086a7db694527d)
     pub fn new_with_size<S: SizeMethods>(sz: &S, depth: c_int) -> BitmapIsOwned<OWNED> {
         unsafe {
             let sz = sz.as_ptr();
@@ -112,6 +124,8 @@ impl<const OWNED: bool> BitmapIsOwned<OWNED> {
         }
     }
     /// Create a bitmap compatible with the given DC, inheriting its magnification factor.
+    ///
+    /// [See `wxBitmap::wxBitmap()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap.html#adae885a8175635a732e76c575683efd0)
     pub fn new_with_int_dc<D: DCMethods>(
         width: c_int,
         height: c_int,
@@ -123,11 +137,15 @@ impl<const OWNED: bool> BitmapIsOwned<OWNED> {
         }
     }
     /// Creates a bitmap from XPM data.
+    ///
+    /// [See `wxBitmap::wxBitmap()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap.html#a0b750963aa91e021dfa222138d1678ed)
     pub fn new_with_char(bits: *const c_void) -> BitmapIsOwned<OWNED> {
         unsafe { BitmapIsOwned(ffi::wxBitmap_new6(bits)) }
     }
     // NOT_SUPPORTED: fn wxBitmap7()
     /// Creates this bitmap object from the given image.
+    ///
+    /// [See `wxBitmap::wxBitmap()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap.html#a9855ffc55043187e4cff075aeefbaaf8)
     pub fn new_with_image_int<I: ImageMethods>(img: &I, depth: c_int) -> BitmapIsOwned<OWNED> {
         unsafe {
             let img = img.as_ptr();
@@ -135,6 +153,8 @@ impl<const OWNED: bool> BitmapIsOwned<OWNED> {
         }
     }
     /// Creates a bitmap compatible with the given DC from the given image.
+    ///
+    /// [See `wxBitmap::wxBitmap()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap.html#ae1200406e701b6d859b14c6bc4c34b31)
     pub fn new_with_image_dc<I: ImageMethods, D: DCMethods>(
         img: &I,
         dc: &D,
@@ -146,6 +166,8 @@ impl<const OWNED: bool> BitmapIsOwned<OWNED> {
         }
     }
     /// Creates bitmap corresponding to the given cursor.
+    ///
+    /// [See `wxBitmap::wxBitmap()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap.html#a6cecda7f133bce6c6fe42394bcfd0f4a)
     pub fn new_with_cursor<C: CursorMethods>(cursor: &C) -> BitmapIsOwned<OWNED> {
         unsafe {
             let cursor = cursor.as_ptr();
@@ -197,10 +219,14 @@ wxwidgets! {
 }
 impl<const OWNED: bool> BitmapBundleIsOwned<OWNED> {
     /// Default constructor constructs an empty bundle.
+    ///
+    /// [See `wxBitmapBundle::wxBitmapBundle()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap_bundle.html#a147abda71276821e3957be38e9b9baa4)
     pub fn new() -> BitmapBundleIsOwned<OWNED> {
         unsafe { BitmapBundleIsOwned(ffi::wxBitmapBundle_new()) }
     }
     /// Conversion constructor from a single bitmap.
+    ///
+    /// [See `wxBitmapBundle::wxBitmapBundle()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap_bundle.html#a922b10aa1d1127d38a169fc2281a2e03)
     pub fn new_with_bitmap<B: BitmapMethods>(bitmap: &B) -> BitmapBundleIsOwned<OWNED> {
         unsafe {
             let bitmap = bitmap.as_ptr();
@@ -208,6 +234,8 @@ impl<const OWNED: bool> BitmapBundleIsOwned<OWNED> {
         }
     }
     /// Conversion constructor from a single icon.
+    ///
+    /// [See `wxBitmapBundle::wxBitmapBundle()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap_bundle.html#a26700eb799253754c332308ee469ad11)
     pub fn new_with_icon<I: IconMethods>(icon: &I) -> BitmapBundleIsOwned<OWNED> {
         unsafe {
             let icon = icon.as_ptr();
@@ -215,6 +243,8 @@ impl<const OWNED: bool> BitmapBundleIsOwned<OWNED> {
         }
     }
     /// Conversion constructor from a single image.
+    ///
+    /// [See `wxBitmapBundle::wxBitmapBundle()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap_bundle.html#a5e5fa07df8d5e5d60b107f5949f5d12d)
     pub fn new_with_image<I: ImageMethods>(image: &I) -> BitmapBundleIsOwned<OWNED> {
         unsafe {
             let image = image.as_ptr();
@@ -222,10 +252,14 @@ impl<const OWNED: bool> BitmapBundleIsOwned<OWNED> {
         }
     }
     /// Conversion constructor from XPM data.
+    ///
+    /// [See `wxBitmapBundle::wxBitmapBundle()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap_bundle.html#aeb9d813e1163b586497c2a86ee7eb2b0)
     pub fn new_with_char(xpm: *const c_void) -> BitmapBundleIsOwned<OWNED> {
         unsafe { BitmapBundleIsOwned(ffi::wxBitmapBundle_new4(xpm)) }
     }
     /// Copy constructor creates a copy of another bundle.
+    ///
+    /// [See `wxBitmapBundle::wxBitmapBundle()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap_bundle.html#a11d8e7869e602087cc5552b34e4b6230)
     pub fn new_with_bitmapbundle<B: BitmapBundleMethods>(other: &B) -> BitmapBundleIsOwned<OWNED> {
         unsafe {
             let other = other.as_ptr();
@@ -268,10 +302,14 @@ wxwidgets! {
 }
 impl<const OWNED: bool> BitmapButtonIsOwned<OWNED> {
     /// Default ctor.
+    ///
+    /// [See `wxBitmapButton::wxBitmapButton()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap_button.html#af262b3d84985b3724a4e80c46a2b9f5e)
     pub fn new_2step() -> BitmapButtonIsOwned<OWNED> {
         unsafe { BitmapButtonIsOwned(ffi::wxBitmapButton_new()) }
     }
     /// Constructor, creating and showing a button.
+    ///
+    /// [See `wxBitmapButton::wxBitmapButton()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap_button.html#a840e53165d8559eff2263f9908facbfc)
     pub fn new<
         W: WindowMethods,
         B: BitmapBundleMethods,
@@ -367,11 +405,15 @@ wxwidgets! {
 }
 impl<const OWNED: bool> BitmapComboBoxIsOwned<OWNED> {
     /// Default ctor.
+    ///
+    /// [See `wxBitmapComboBox::wxBitmapComboBox()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap_combo_box.html#ad1c50828cc279364613f2726a57b524b)
     pub fn new_2step() -> BitmapComboBoxIsOwned<OWNED> {
         unsafe { BitmapComboBoxIsOwned(ffi::wxBitmapComboBox_new()) }
     }
     // NOT_SUPPORTED: fn wxBitmapComboBox1()
     /// Constructor, creating and showing a combobox.
+    ///
+    /// [See `wxBitmapComboBox::wxBitmapComboBox()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap_combo_box.html#a13bdf9ae92e496b4af850ece9e466b33)
     pub fn new<
         W: WindowMethods,
         P: PointMethods,
@@ -465,6 +507,8 @@ impl<const OWNED: bool> TextEntryMethods for BitmapComboBoxIsOwned<OWNED> {
 impl<const OWNED: bool> ComboBoxMethods for BitmapComboBoxIsOwned<OWNED> {
     // NOT_SUPPORTED: fn Create()
     /// Creates the combobox for two-step construction.
+    ///
+    /// [See `wxBitmapComboBox::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap_combo_box.html#a4f269b59837fc3e312bb3e929caef6b3)
     fn create_str<
         W: WindowMethods,
         P: PointMethods,
@@ -527,6 +571,8 @@ wxwidgets! {
 }
 impl<const OWNED: bool> BitmapDataObjectIsOwned<OWNED> {
     /// Constructor, optionally passing a bitmap (otherwise use SetBitmap() later).
+    ///
+    /// [See `wxBitmapDataObject::wxBitmapDataObject()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap_data_object.html#a6b4f3a28654382a6ea75d5db261e524b)
     pub fn new<B: BitmapMethods>(bitmap: &B) -> BitmapDataObjectIsOwned<OWNED> {
         unsafe {
             let bitmap = bitmap.as_ptr();
@@ -574,6 +620,8 @@ wxwidgets! {
 }
 impl<const OWNED: bool> BitmapHandlerIsOwned<OWNED> {
     /// Default constructor.
+    ///
+    /// [See `wxBitmapHandler::wxBitmapHandler()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap_handler.html#ad8a16baff5f93057f4a96fc5fa26dfab)
     pub fn new() -> BitmapHandlerIsOwned<OWNED> {
         unsafe { BitmapHandlerIsOwned(ffi::wxBitmapHandler_new()) }
     }
@@ -623,10 +671,14 @@ wxwidgets! {
 }
 impl<const OWNED: bool> BitmapToggleButtonIsOwned<OWNED> {
     /// Default constructor.
+    ///
+    /// [See `wxBitmapToggleButton::wxBitmapToggleButton()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap_toggle_button.html#aa5c5981a61bd3458a55266bd39bf5d7a)
     pub fn new_2step() -> BitmapToggleButtonIsOwned<OWNED> {
         unsafe { BitmapToggleButtonIsOwned(ffi::wxBitmapToggleButton_new()) }
     }
     /// Constructor, creating and showing a toggle button with the bitmap label.
+    ///
+    /// [See `wxBitmapToggleButton::wxBitmapToggleButton()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap_toggle_button.html#ae243a6a04a7bf5f82b6026e6cfb1f02c)
     pub fn new<
         W: WindowMethods,
         B: BitmapBundleMethods,
@@ -761,6 +813,8 @@ impl<const OWNED: bool> DynamicCast for BookCtrlBaseIsOwned<OWNED> {
 }
 impl<const OWNED: bool> WindowMethods for BookCtrlBaseIsOwned<OWNED> {
     /// Constructs the book control with the given parameters.
+    ///
+    /// [See `wxBookCtrlBase::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_book_ctrl_base.html#ad61f7fc3c1fbccbcb119e1dea3fdc4a6)
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -844,6 +898,8 @@ impl<const OWNED: bool> Drop for BookCtrlEventIsOwned<OWNED> {
 }
 impl<const OWNED: bool> CommandEventMethods for BookCtrlEventIsOwned<OWNED> {
     /// Returns the currently selected page, or wxNOT_FOUND if none was selected.
+    ///
+    /// [See `wxBookCtrlEvent::GetSelection()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_book_ctrl_event.html#acfc78f1292a2e229650cd1a2e2aaf937)
     fn get_selection(&self) -> c_int {
         unsafe { ffi::wxBookCtrlEvent_GetSelection(self.as_ptr()) }
     }
@@ -864,6 +920,8 @@ wxwidgets! {
 }
 impl<const OWNED: bool> BoxSizerIsOwned<OWNED> {
     /// Constructor for a wxBoxSizer.
+    ///
+    /// [See `wxBoxSizer::wxBoxSizer()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_box_sizer.html#a1d8b1a1bed1af566c1f95e54dbf1d18e)
     pub fn new(orient: c_int) -> BoxSizerIsOwned<OWNED> {
         unsafe { BoxSizerIsOwned(ffi::wxBoxSizer_new(orient)) }
     }
@@ -907,11 +965,15 @@ wxwidgets! {
 }
 impl<const OWNED: bool> BrushIsOwned<OWNED> {
     /// Default constructor.
+    ///
+    /// [See `wxBrush::wxBrush()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_brush.html#a36d9d097cd95d038427907d2aa0fd2ad)
     pub fn new() -> BrushIsOwned<OWNED> {
         unsafe { BrushIsOwned(ffi::wxBrush_new()) }
     }
     // NOT_SUPPORTED: fn wxBrush1()
     /// Constructs a stippled brush using a bitmap.
+    ///
+    /// [See `wxBrush::wxBrush()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_brush.html#a0a5c0e09b4637f7749435fbe1acd6412)
     pub fn new_with_bitmap<B: BitmapMethods>(stipple_bitmap: &B) -> BrushIsOwned<OWNED> {
         unsafe {
             let stipple_bitmap = stipple_bitmap.as_ptr();
@@ -919,6 +981,8 @@ impl<const OWNED: bool> BrushIsOwned<OWNED> {
         }
     }
     /// Copy constructor, uses reference counting.
+    ///
+    /// [See `wxBrush::wxBrush()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_brush.html#a6df3fbfc890e8af31fd6bbf2ca38c5e7)
     pub fn new_with_brush<B: BrushMethods>(brush: &B) -> BrushIsOwned<OWNED> {
         unsafe {
             let brush = brush.as_ptr();
@@ -1002,10 +1066,14 @@ wxwidgets! {
 }
 impl<const OWNED: bool> BufferedDCIsOwned<OWNED> {
     /// Default constructor.
+    ///
+    /// [See `wxBufferedDC::wxBufferedDC()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_buffered_d_c.html#adf8f81fe169fb1d3f0e5c9bdbdb1cb2a)
     pub fn new() -> BufferedDCIsOwned<OWNED> {
         unsafe { BufferedDCIsOwned(ffi::wxBufferedDC_new()) }
     }
     /// Creates a buffer for the provided dc.
+    ///
+    /// [See `wxBufferedDC::wxBufferedDC()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_buffered_d_c.html#ae99271390103ee94640a34b19dd4fc05)
     pub fn new_with_dc_size<D: DCMethods, S: SizeMethods>(
         dc: Option<&D>,
         area: &S,
@@ -1021,6 +1089,8 @@ impl<const OWNED: bool> BufferedDCIsOwned<OWNED> {
         }
     }
     /// Creates a buffer for the provided dc.
+    ///
+    /// [See `wxBufferedDC::wxBufferedDC()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_buffered_d_c.html#ab48701a98774ef960b750f872fcdbdd1)
     pub fn new_with_dc_bitmap<D: DCMethods, B: BitmapMethods>(
         dc: Option<&D>,
         buffer: &B,
@@ -1089,6 +1159,8 @@ wxwidgets! {
 }
 impl<const OWNED: bool> BufferedPaintDCIsOwned<OWNED> {
     /// As with wxBufferedDC, you may either provide the bitmap to be used for buffering or let this object create one internally (in the latter case, the size of the client part of the window is used).
+    ///
+    /// [See `wxBufferedPaintDC::wxBufferedPaintDC()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_buffered_paint_d_c.html#a176c15663752a760498faec72c370943)
     pub fn new_with_bitmap<W: WindowMethods, B: BitmapMethods>(
         window: Option<&W>,
         buffer: &B,
@@ -1103,6 +1175,8 @@ impl<const OWNED: bool> BufferedPaintDCIsOwned<OWNED> {
             BufferedPaintDCIsOwned(ffi::wxBufferedPaintDC_new(window, buffer, style))
         }
     }
+    ///
+    /// [See `wxBufferedPaintDC::wxBufferedPaintDC()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_buffered_paint_d_c.html#a1fb99ae9afce963583629117a9da67b1)
     pub fn new_with_int<W: WindowMethods>(
         window: Option<&W>,
         style: c_int,
@@ -1170,6 +1244,8 @@ wxwidgets! {
 }
 impl<const OWNED: bool> BusyCursorIsOwned<OWNED> {
     /// Constructs a busy cursor object, calling wxBeginBusyCursor().
+    ///
+    /// [See `wxBusyCursor::wxBusyCursor()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_busy_cursor.html#aeaa61938f7322311eb43bfa1ef4ea205)
     pub fn new<C: CursorMethods>(cursor: Option<&C>) -> BusyCursorIsOwned<OWNED> {
         unsafe {
             let cursor = match cursor {
@@ -1209,10 +1285,14 @@ wxwidgets! {
 }
 impl<const OWNED: bool> BusyInfoIsOwned<OWNED> {
     /// General constructor.
+    ///
+    /// [See `wxBusyInfo::wxBusyInfo()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_busy_info.html#ab5e29cf81518600a855de4ad4619a2a0)
     pub fn new_with_busyinfoflags(flags: *const c_void) -> BusyInfoIsOwned<OWNED> {
         unsafe { BusyInfoIsOwned(ffi::wxBusyInfo_new(flags)) }
     }
     /// Simple constructor specifying only the message and the parent.
+    ///
+    /// [See `wxBusyInfo::wxBusyInfo()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_busy_info.html#aa53bff52ae401bab878169e7d04b86d3)
     pub fn new_with_str<W: WindowMethods>(msg: &str, parent: Option<&W>) -> BusyInfoIsOwned<OWNED> {
         unsafe {
             let msg = WxString::from(msg);
@@ -1259,10 +1339,14 @@ wxwidgets! {
 }
 impl<const OWNED: bool> ButtonIsOwned<OWNED> {
     /// Default ctor.
+    ///
+    /// [See `wxButton::wxButton()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_button.html#a61d2be397a8a673ebaf006003eb17b9e)
     pub fn new_2step() -> ButtonIsOwned<OWNED> {
         unsafe { ButtonIsOwned(ffi::wxButton_new()) }
     }
     /// Constructor, creating and showing a button.
+    ///
+    /// [See `wxButton::wxButton()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_button.html#ab30ef360a5f2f48dd3ff537f70808962)
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,

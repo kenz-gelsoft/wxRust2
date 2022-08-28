@@ -17,10 +17,14 @@ wxwidgets! {
 }
 impl<const OWNED: bool> EditableListBoxIsOwned<OWNED> {
     /// Default ctor.
+    ///
+    /// [See `wxEditableListBox::wxEditableListBox()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_editable_list_box.html#ab42098c0b81e1f027e307fad8a9ecc8a)
     pub fn new_2step() -> EditableListBoxIsOwned<OWNED> {
         unsafe { EditableListBoxIsOwned(ffi::wxEditableListBox_new()) }
     }
     /// Constructor, creating and showing a list box.
+    ///
+    /// [See `wxEditableListBox::wxEditableListBox()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_editable_list_box.html#aa00cc37cddb598967111e4ee8a35e812)
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -96,6 +100,8 @@ wxwidgets! {
 }
 impl<const OWNED: bool> EraseEventIsOwned<OWNED> {
     /// Constructor.
+    ///
+    /// [See `wxEraseEvent::wxEraseEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_erase_event.html#ae6d16ac169480be125ea4e4138fc29ef)
     pub fn new<D: DCMethods>(id: c_int, dc: Option<&D>) -> EraseEventIsOwned<OWNED> {
         unsafe {
             let dc = match dc {

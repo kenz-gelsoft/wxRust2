@@ -14,6 +14,8 @@ wxwidgets! {
 }
 impl<const OWNED: bool> QuantizeIsOwned<OWNED> {
     /// Constructor.
+    ///
+    /// [See `wxQuantize::wxQuantize()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_quantize.html#a547099d33907c05795eaba1526e14a73)
     pub fn new() -> QuantizeIsOwned<OWNED> {
         unsafe { QuantizeIsOwned(ffi::wxQuantize_new()) }
     }
@@ -59,6 +61,8 @@ wxwidgets! {
 }
 impl<const OWNED: bool> QueryLayoutInfoEventIsOwned<OWNED> {
     /// Constructor.
+    ///
+    /// [See `wxQueryLayoutInfoEvent::wxQueryLayoutInfoEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_query_layout_info_event.html#ae49fe2e9f1e59fa1bcb24380b76c5f09)
     pub fn new(id: c_int) -> QueryLayoutInfoEventIsOwned<OWNED> {
         unsafe { QueryLayoutInfoEventIsOwned(ffi::wxQueryLayoutInfoEvent_new(id)) }
     }

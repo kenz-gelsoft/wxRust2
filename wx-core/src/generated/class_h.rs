@@ -54,6 +54,8 @@ impl<const OWNED: bool> DynamicCast for HScrolledWindowIsOwned<OWNED> {
 }
 impl<const OWNED: bool> WindowMethods for HScrolledWindowIsOwned<OWNED> {
     /// Same as the non-default constructor, but returns a status code: true if ok, false if the window couldn't be created.
+    ///
+    /// [See `wxHScrolledWindow::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_h_scrolled_window.html#a5982d08464fabd3b47543d298b710224)
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -92,6 +94,8 @@ wxwidgets! {
 }
 impl<const OWNED: bool> HTMLDataObjectIsOwned<OWNED> {
     /// Constructor.
+    ///
+    /// [See `wxHTMLDataObject::wxHTMLDataObject()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_h_t_m_l_data_object.html#a3e09f114be84aef40c05809ddfe83333)
     pub fn new(html: &str) -> HTMLDataObjectIsOwned<OWNED> {
         unsafe {
             let html = WxString::from(html);
@@ -180,6 +184,8 @@ impl<const OWNED: bool> DynamicCast for HVScrolledWindowIsOwned<OWNED> {
 }
 impl<const OWNED: bool> WindowMethods for HVScrolledWindowIsOwned<OWNED> {
     /// Same as the non-default constructor, but returns a status code: true if ok, false if the window couldn't be created.
+    ///
+    /// [See `wxHVScrolledWindow::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_h_v_scrolled_window.html#ae14453b61a87766376e8c64653c90ed6)
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -247,6 +253,8 @@ wxwidgets! {
 }
 impl<const OWNED: bool> HeaderColumnSimpleIsOwned<OWNED> {
     /// Constructor for a column header.
+    ///
+    /// [See `wxHeaderColumnSimple::wxHeaderColumnSimple()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_header_column_simple.html#a219431d463c61334f8de7ac45ebb16f0)
     pub fn new_with_str(
         title: &str,
         width: c_int,
@@ -259,6 +267,8 @@ impl<const OWNED: bool> HeaderColumnSimpleIsOwned<OWNED> {
             HeaderColumnSimpleIsOwned(ffi::wxHeaderColumnSimple_new(title, width, align, flags))
         }
     }
+    ///
+    /// [See `wxHeaderColumnSimple::wxHeaderColumnSimple()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_header_column_simple.html#af5ed3aa43db1341f91b268a045e8f556)
     pub fn new_with_bitmapbundle<B: BitmapBundleMethods>(
         bitmap: &B,
         width: c_int,
@@ -353,6 +363,8 @@ impl<const OWNED: bool> DynamicCast for HeaderCtrlIsOwned<OWNED> {
 }
 impl<const OWNED: bool> WindowMethods for HeaderCtrlIsOwned<OWNED> {
     /// Create the header control window.
+    ///
+    /// [See `wxHeaderCtrl::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_header_ctrl.html#a1f8ff3be92e0fb2bd59e25642447c2d5)
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -393,6 +405,8 @@ wxwidgets! {
 }
 impl<const OWNED: bool> HeaderCtrlEventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxHeaderCtrlEvent()
+    ///
+    /// [See `wxHeaderCtrlEvent::wxHeaderCtrlEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_header_ctrl_event.html#aa9c9fdd75b48ea8dfcb976ed16dbfcd1)
     pub fn new<H: HeaderCtrlEventMethods>(event: &H) -> HeaderCtrlEventIsOwned<OWNED> {
         unsafe {
             let event = event.as_ptr();
@@ -459,10 +473,14 @@ wxwidgets! {
 }
 impl<const OWNED: bool> HeaderCtrlSimpleIsOwned<OWNED> {
     /// Default constructor not creating the underlying window.
+    ///
+    /// [See `wxHeaderCtrlSimple::wxHeaderCtrlSimple()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_header_ctrl_simple.html#a9a0288a46b35b0ebc7e8704a082dbd58)
     pub fn new_2step() -> HeaderCtrlSimpleIsOwned<OWNED> {
         unsafe { HeaderCtrlSimpleIsOwned(ffi::wxHeaderCtrlSimple_new()) }
     }
     /// Constructor creating the window.
+    ///
+    /// [See `wxHeaderCtrlSimple::wxHeaderCtrlSimple()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_header_ctrl_simple.html#aab2ae72cdb8374216da503d7747c65fa)
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         winid: c_int,
@@ -599,10 +617,14 @@ wxwidgets! {
         ObjectMethods
 }
 impl<const OWNED: bool> HyperlinkCtrlIsOwned<OWNED> {
+    ///
+    /// [See `wxHyperlinkCtrl::wxHyperlinkCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_hyperlink_ctrl.html#a9b0d333830376d2d437f35f31656405f)
     pub fn new_2step() -> HyperlinkCtrlIsOwned<OWNED> {
         unsafe { HyperlinkCtrlIsOwned(ffi::wxHyperlinkCtrl_new()) }
     }
     /// Constructor.
+    ///
+    /// [See `wxHyperlinkCtrl::wxHyperlinkCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_hyperlink_ctrl.html#a0070265321d1df4d2a25cfd032c5df58)
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -682,6 +704,8 @@ wxwidgets! {
 }
 impl<const OWNED: bool> HyperlinkEventIsOwned<OWNED> {
     /// The constructor is not normally used by the user code.
+    ///
+    /// [See `wxHyperlinkEvent::wxHyperlinkEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_hyperlink_event.html#aa80a85f87e14160f23feca68f8819740)
     pub fn new<O: ObjectMethods>(
         generator: Option<&O>,
         id: c_int,

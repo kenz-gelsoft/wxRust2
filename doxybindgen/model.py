@@ -78,7 +78,7 @@ class Class:
         self.__blocklist = config.get('blocklist') or []
         self.config = config
         self.doc = ''.join(e.find('./briefdescription').itertext()).strip()
-        self.doc_id = e.get('id')
+        self.__doc_id = e.get('id')
         self.library = self._find_libname(e)
         for enum in e.findall(".//memberdef[@kind='enum']"):
             enum = Enum(enum)
@@ -124,6 +124,9 @@ class Class:
     def is_blocked_method(self, name):
         return name in self.__blocklist
 
+    def doc_url(self):
+        return "https://docs.wxwidgets.org/3.2/%s.html" % (self.__doc_id,)
+    
 
 class Method:
     def __init__(self, cls, e):
@@ -148,7 +151,8 @@ class Method:
         is_virtual = e.get('virt') == 'virtual'
         is_override = e.find('reimplements') is not None
         self.is_virtual_override = is_virtual and is_override
-        self.doc = ''.join(e.find('./briefdescription').itertext()).strip()        
+        self.doc = ''.join(e.find('./briefdescription').itertext()).strip()
+        self.__doc_id = e.get('id')
 
     def suppressed_reason(self):
         if self.is_blocked():
@@ -248,6 +252,13 @@ class Method:
             return False
         signature = self.cxx_signature()
         return any(m.cxx_signature() == signature for m in cls.methods)
+
+    def doc_url(self):
+        return '#'.join((
+            self.cls.doc_url(),
+            self.__doc_id.split('_')[-1][1:]
+        ))
+
 
 class ReturnTypeWrapper:
     def __init__(self, method):
