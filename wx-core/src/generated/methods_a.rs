@@ -1,6 +1,9 @@
 use super::*;
 
 // wxAboutDialogInfo
+/// wxAboutDialogInfo contains information shown in the standard About dialog displayed by the wxAboutBox() function.
+///
+/// [See `wxAboutDialogInfo`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_about_dialog_info.html)
 pub trait AboutDialogInfoMethods: WxRustMethods {
     /// Adds an artist name to be shown in the program credits.
     ///
@@ -300,6 +303,9 @@ pub trait AboutDialogInfoMethods: WxRustMethods {
 }
 
 // wxAcceleratorEntry
+/// An object used by an application wishing to create an accelerator table (see wxAcceleratorTable).
+///
+/// [See `wxAcceleratorEntry`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_accelerator_entry.html)
 pub trait AcceleratorEntryMethods: WxRustMethods {
     /// Returns the command identifier for the accelerator table entry.
     ///
@@ -371,6 +377,9 @@ pub trait AcceleratorEntryMethods: WxRustMethods {
 }
 
 // wxAcceleratorTable
+/// An accelerator table allows the application to specify a table of keyboard shortcuts for menu or button commands.
+///
+/// [See `wxAcceleratorTable`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_accelerator_table.html)
 pub trait AcceleratorTableMethods: ObjectMethods {
     // DTOR: fn ~wxAcceleratorTable()
     /// Returns true if the accelerator table is valid.
@@ -382,6 +391,9 @@ pub trait AcceleratorTableMethods: ObjectMethods {
 }
 
 // wxActivateEvent
+/// An activate event is sent when a window or application is being activated or deactivated.
+///
+/// [See `wxActivateEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_activate_event.html)
 pub trait ActivateEventMethods: EventMethods {
     /// Returns true if the application or window is being activated, false otherwise.
     ///
@@ -393,11 +405,17 @@ pub trait ActivateEventMethods: EventMethods {
 }
 
 // wxAffineMatrix2D
+/// A 3x2 matrix representing an affine 2D transformation.
+///
+/// [See `wxAffineMatrix2D`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_affine_matrix2_d.html)
 pub trait AffineMatrix2DMethods: AffineMatrix2DBaseMethods {
     // BLOCKED: fn IsEqual()
 }
 
 // wxAffineMatrix2DBase
+/// A 2x3 matrix representing an affine 2D transformation.
+///
+/// [See `wxAffineMatrix2DBase`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_affine_matrix2_d_base.html)
 pub trait AffineMatrix2DBaseMethods: WxRustMethods {
     // DTOR: fn ~wxAffineMatrix2DBase()
     /// Set all elements of this matrix.
@@ -468,6 +486,9 @@ pub trait AffineMatrix2DBaseMethods: WxRustMethods {
 }
 
 // wxAnimationCtrl
+/// This is a static control which displays an animation.
+///
+/// [See `wxAnimationCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_animation_ctrl.html)
 pub trait AnimationCtrlMethods: ControlMethods {
     /// Creates the control with the given anim animation.
     ///
@@ -541,6 +562,9 @@ pub trait AnimationCtrlMethods: ControlMethods {
 }
 
 // wxAnyButton
+/// A class for common button functionality used as the base for the various button classes.
+///
+/// [See `wxAnyButton`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_any_button.html)
 pub trait AnyButtonMethods: ControlMethods {
     // DTOR: fn ~wxAnyButton()
     /// Return the bitmap shown by the button.
@@ -662,6 +686,9 @@ pub trait AnyButtonMethods: ControlMethods {
 }
 
 // wxArtProvider
+/// wxArtProvider class is used to customize the look of wxWidgets application.
+///
+/// [See `wxArtProvider`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_art_provider.html)
 pub trait ArtProviderMethods: ObjectMethods {
     // DTOR: fn ~wxArtProvider()
     /// Delete the given provider.
@@ -839,4 +866,7 @@ pub trait ArtProviderMethods: ObjectMethods {
 }
 
 // wxAutoBufferedPaintDC
+/// This wxDC derivative can be used inside of an EVT_PAINT() event handler to achieve double-buffered drawing.
+///
+/// [See `wxAutoBufferedPaintDC`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_auto_buffered_paint_d_c.html)
 pub trait AutoBufferedPaintDCMethods: BufferedPaintDCMethods {}

@@ -1,6 +1,9 @@
 use super::*;
 
 // wxDateTime
+/// wxDateTime class represents an absolute moment in time.
+///
+/// [See `wxDateTime`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_date_time.html)
 pub trait DateTimeMethods: WxRustMethods {
     /// Reset time to midnight (00:00:00) without changing the date.
     ///

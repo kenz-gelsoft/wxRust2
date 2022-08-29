@@ -1,6 +1,9 @@
 use super::*;
 
 // wxOverlay
+/// Creates an overlay over an existing window, allowing for manipulations like rubberbanding, etc.
+///
+/// [See `wxOverlay`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_overlay.html)
 pub trait OverlayMethods: WxRustMethods {
     // DTOR: fn ~wxOverlay()
     /// Clears the overlay without restoring the former state.
@@ -12,6 +15,9 @@ pub trait OverlayMethods: WxRustMethods {
 }
 
 // wxOwnerDrawnComboBox
+/// wxOwnerDrawnComboBox is a combobox with owner-drawn list items.
+///
+/// [See `wxOwnerDrawnComboBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_owner_drawn_combo_box.html)
 pub trait OwnerDrawnComboBoxMethods: ComboCtrlMethods {
     // DTOR: fn ~wxOwnerDrawnComboBox()
     // NOT_SUPPORTED: fn Create1()

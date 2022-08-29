@@ -1,6 +1,9 @@
 use super::*;
 
 // wxKeyEvent
+/// This event class contains information about key press and release events.
+///
+/// [See `wxKeyEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_key_event.html)
 pub trait KeyEventMethods: EventMethods {
     /// Returns the key code of the key that generated this event.
     ///

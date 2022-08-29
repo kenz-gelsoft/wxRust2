@@ -1,6 +1,9 @@
 use super::*;
 
 // wxUIActionSimulator
+/// wxUIActionSimulator is a class used to simulate user interface actions such as a mouse click or a key press.
+///
+/// [See `wxUIActionSimulator`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_u_i_action_simulator.html)
 pub trait UIActionSimulatorMethods: WxRustMethods {
     /// Move the mouse to the specified coordinates.
     ///
@@ -91,6 +94,9 @@ pub trait UIActionSimulatorMethods: WxRustMethods {
 }
 
 // wxURLDataObject
+/// wxURLDataObject is a wxDataObject containing an URL and can be used e.g.
+///
+/// [See `wxURLDataObject`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_u_r_l_data_object.html)
 pub trait URLDataObjectMethods: DataObjectMethods {
     /// Returns the URL stored by this object, as a string.
     ///
@@ -111,6 +117,9 @@ pub trait URLDataObjectMethods: DataObjectMethods {
 }
 
 // wxUpdateUIEvent
+/// This class is used for pseudo-events which are called by wxWidgets to give an application the chance to update various user interface elements.
+///
+/// [See `wxUpdateUIEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_update_u_i_event.html)
 pub trait UpdateUIEventMethods: CommandEventMethods {
     /// Check or uncheck the UI element.
     ///

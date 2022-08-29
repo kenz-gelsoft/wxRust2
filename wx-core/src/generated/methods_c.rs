@@ -1,6 +1,9 @@
 use super::*;
 
 // wxCalculateLayoutEvent
+/// This event is sent by wxLayoutAlgorithm to calculate the amount of the remaining client area that the window should occupy.
+///
+/// [See `wxCalculateLayoutEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calculate_layout_event.html)
 pub trait CalculateLayoutEventMethods: EventMethods {
     /// Returns the flags associated with this event.
     ///
@@ -32,6 +35,9 @@ pub trait CalculateLayoutEventMethods: EventMethods {
 }
 
 // wxCalendarCtrl
+/// The calendar control allows the user to pick a date.
+///
+/// [See `wxCalendarCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html)
 pub trait CalendarCtrlMethods: ControlMethods {
     /// Restrict the dates that can be selected in the control to the specified range.
     ///
@@ -228,6 +234,9 @@ pub trait CalendarCtrlMethods: ControlMethods {
 }
 
 // wxCalendarDateAttr
+/// wxCalendarDateAttr is a custom attributes for a calendar date.
+///
+/// [See `wxCalendarDateAttr`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html)
 pub trait CalendarDateAttrMethods: WxRustMethods {
     /// Returns the background colour set for the calendar date.
     ///
@@ -353,12 +362,18 @@ pub trait CalendarDateAttrMethods: WxRustMethods {
 }
 
 // wxCalendarEvent
+/// The wxCalendarEvent class is used together with wxCalendarCtrl.
+///
+/// [See `wxCalendarEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_calendar_event.html)
 pub trait CalendarEventMethods: DateEventMethods {
     // NOT_SUPPORTED: fn GetWeekDay()
     // NOT_SUPPORTED: fn SetWeekDay()
 }
 
 // wxCaret
+/// A caret is a blinking cursor showing the position where the typed text will appear.
+///
+/// [See `wxCaret`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_caret.html)
 pub trait CaretMethods: WxRustMethods {
     /// Creates a caret with the given size (in pixels) and associates it with the window (same as the equivalent constructors).
     ///
@@ -484,6 +499,9 @@ pub trait CaretMethods: WxRustMethods {
 }
 
 // wxCheckBox
+/// A checkbox is a labelled box which by default is either on (checkmark is visible) or off (no checkmark).
+///
+/// [See `wxCheckBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_check_box.html)
 pub trait CheckBoxMethods: ControlMethods {
     // DTOR: fn ~wxCheckBox()
     /// Creates the checkbox for two-step construction.
@@ -570,6 +588,9 @@ pub trait CheckBoxMethods: ControlMethods {
 }
 
 // wxCheckListBox
+/// A wxCheckListBox is like a wxListBox, but allows items to be checked or unchecked.
+///
+/// [See `wxCheckListBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_check_list_box.html)
 pub trait CheckListBoxMethods: ListBoxMethods {
     // DTOR: fn ~wxCheckListBox()
     /// Checks the given item.
@@ -596,6 +617,9 @@ pub trait CheckListBoxMethods: ListBoxMethods {
 }
 
 // wxChildFocusEvent
+/// A child focus event is sent to a (parent-)window when one of its child windows gains focus, so that the window could restore the focus back to its corresponding child if it loses it now and regains later.
+///
+/// [See `wxChildFocusEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_child_focus_event.html)
 pub trait ChildFocusEventMethods: CommandEventMethods {
     /// Returns the direct child which receives the focus, or a (grand-)parent of the control receiving the focus.
     ///
@@ -606,6 +630,9 @@ pub trait ChildFocusEventMethods: CommandEventMethods {
 }
 
 // wxChoice
+/// A choice item is used to select one of a list of strings.
+///
+/// [See `wxChoice`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_choice.html)
 pub trait ChoiceMethods: ControlMethods {
     // DTOR: fn ~wxChoice()
     // NOT_SUPPORTED: fn Create()
@@ -678,6 +705,9 @@ pub trait ChoiceMethods: ControlMethods {
 }
 
 // wxChoicebook
+/// wxChoicebook is a class similar to wxNotebook, but uses a wxChoice control to show the labels instead of the tabs.
+///
+/// [See `wxChoicebook`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_choicebook.html)
 pub trait ChoicebookMethods: BookCtrlBaseMethods {
     /// Returns the wxChoice associated with the control.
     ///
@@ -688,9 +718,15 @@ pub trait ChoicebookMethods: BookCtrlBaseMethods {
 }
 
 // wxClientDC
+/// wxClientDC is primarily useful for obtaining information about the window from outside EVT_PAINT() handler.
+///
+/// [See `wxClientDC`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_client_d_c.html)
 pub trait ClientDCMethods: WindowDCMethods {}
 
 // wxClipboard
+/// A class for manipulating the clipboard.
+///
+/// [See `wxClipboard`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_clipboard.html)
 pub trait ClipboardMethods: ObjectMethods {
     // DTOR: fn ~wxClipboard()
     /// Call this function to add the data object to the clipboard.
@@ -786,9 +822,15 @@ pub trait ClipboardMethods: ObjectMethods {
 }
 
 // wxClipboardTextEvent
+/// This class represents the events generated by a control (typically a wxTextCtrl but other windows can generate these events as well) when its content gets copied or cut to, or pasted from the clipboard.
+///
+/// [See `wxClipboardTextEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_clipboard_text_event.html)
 pub trait ClipboardTextEventMethods: CommandEventMethods {}
 
 // wxCloseEvent
+/// This event class contains information about window and session close events.
+///
+/// [See `wxCloseEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_close_event.html)
 pub trait CloseEventMethods: EventMethods {
     /// Returns true if you can veto a system shutdown or a window close event.
     ///
@@ -829,6 +871,9 @@ pub trait CloseEventMethods: EventMethods {
 }
 
 // wxCollapsiblePane
+/// A collapsible pane is a container with an embedded button-like control which can be used by the user to collapse or expand the pane's contents.
+///
+/// [See `wxCollapsiblePane`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane.html)
 pub trait CollapsiblePaneMethods: ControlMethods {
     ///
     /// [See `wxCollapsiblePane::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane.html#ae609270807e8655796abedfa7397b502)
@@ -901,6 +946,9 @@ pub trait CollapsiblePaneMethods: ControlMethods {
 }
 
 // wxCollapsiblePaneEvent
+/// This event class is used for the events generated by wxCollapsiblePane.
+///
+/// [See `wxCollapsiblePaneEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane_event.html)
 pub trait CollapsiblePaneEventMethods: CommandEventMethods {
     /// Returns true if the pane has been collapsed.
     ///
@@ -917,6 +965,9 @@ pub trait CollapsiblePaneEventMethods: CommandEventMethods {
 }
 
 // wxColour
+/// A colour is an object representing a combination of Red, Green, and Blue (RGB) intensity values and an Alpha value, and is used to determine drawing colours.
+///
+/// [See `wxColour`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour.html)
 pub trait ColourMethods: ObjectMethods {
     // NOT_SUPPORTED: fn Alpha()
     // NOT_SUPPORTED: fn Blue()
@@ -1027,6 +1078,9 @@ pub trait ColourMethods: ObjectMethods {
 }
 
 // wxColourData
+/// This class holds a variety of information related to colour dialogs.
+///
+/// [See `wxColourData`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_data.html)
 pub trait ColourDataMethods: ObjectMethods {
     // DTOR: fn ~wxColourData()
     /// Under Windows, determines whether the Windows colour dialog will display the full dialog with custom colour selection controls.
@@ -1103,6 +1157,9 @@ pub trait ColourDataMethods: ObjectMethods {
 }
 
 // wxColourDatabase
+/// wxWidgets maintains a database of standard RGB colours for a predefined set of named colours.
+///
+/// [See `wxColourDatabase`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_database.html)
 pub trait ColourDatabaseMethods: WxRustMethods {
     /// Adds a colour to the database.
     ///
@@ -1137,6 +1194,9 @@ pub trait ColourDatabaseMethods: WxRustMethods {
 }
 
 // wxColourDialog
+/// This class represents the colour chooser dialog.
+///
+/// [See `wxColourDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_dialog.html)
 pub trait ColourDialogMethods: DialogMethods {
     // DTOR: fn ~wxColourDialog()
     /// Same as wxColourDialog().
@@ -1168,6 +1228,9 @@ pub trait ColourDialogMethods: DialogMethods {
 }
 
 // wxColourPickerCtrl
+/// This control allows the user to select a colour.
+///
+/// [See `wxColourPickerCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_picker_ctrl.html)
 pub trait ColourPickerCtrlMethods: PickerBaseMethods {
     /// Creates a colour picker with the given arguments.
     ///
@@ -1232,6 +1295,9 @@ pub trait ColourPickerCtrlMethods: PickerBaseMethods {
 }
 
 // wxColourPickerEvent
+/// This event class is used for the events generated by wxColourPickerCtrl.
+///
+/// [See `wxColourPickerEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_colour_picker_event.html)
 pub trait ColourPickerEventMethods: CommandEventMethods {
     /// Retrieve the colour the user has just selected.
     ///
@@ -1251,6 +1317,9 @@ pub trait ColourPickerEventMethods: CommandEventMethods {
 }
 
 // wxComboBox
+/// A combobox is like a combination of an edit control and a listbox.
+///
+/// [See `wxComboBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_box.html)
 pub trait ComboBoxMethods: ControlMethods {
     // DTOR: fn ~wxComboBox()
     // NOT_SUPPORTED: fn Create()
@@ -1334,6 +1403,9 @@ pub trait ComboBoxMethods: ControlMethods {
 }
 
 // wxComboCtrl
+/// A combo control is a generic combobox that allows totally custom popup.
+///
+/// [See `wxComboCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html)
 pub trait ComboCtrlMethods: ControlMethods {
     // DTOR: fn ~wxComboCtrl()
     /// Creates the combo control for two-step construction.
@@ -1662,6 +1734,9 @@ pub trait ComboCtrlMethods: ControlMethods {
 }
 
 // wxComboPopup
+/// In order to use a custom popup with wxComboCtrl, an interface class must be derived from wxComboPopup.
+///
+/// [See `wxComboPopup`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_combo_popup.html)
 pub trait ComboPopupMethods: WxRustMethods {
     /// The derived class must implement this to create the popup control.
     ///
@@ -1796,6 +1871,9 @@ pub trait ComboPopupMethods: WxRustMethods {
 }
 
 // wxCommand
+/// wxCommand is a base class for modelling an application command, which is an action usually performed by selecting a menu item, pressing a toolbar button or any other means provided by the application to change the data or view.
+///
+/// [See `wxCommand`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command.html)
 pub trait CommandMethods: ObjectMethods {
     // DTOR: fn ~wxCommand()
     /// Returns true if the command can be undone, false otherwise.
@@ -1825,6 +1903,9 @@ pub trait CommandMethods: ObjectMethods {
 }
 
 // wxCommandEvent
+/// This event class contains information about command events, which originate from a variety of simple controls.
+///
+/// [See `wxCommandEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_event.html)
 pub trait CommandEventMethods: EventMethods {
     /// Returns client data pointer for a listbox or choice selection event (not valid for a deselection).
     ///
@@ -1917,6 +1998,9 @@ pub trait CommandEventMethods: EventMethods {
 }
 
 // wxCommandLinkButton
+/// Objects of this class are similar in appearance to the normal wxButtons but are similar to the links in a web page in functionality.
+///
+/// [See `wxCommandLinkButton`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_link_button.html)
 pub trait CommandLinkButtonMethods: ButtonMethods {
     /// Button creation function for two-step creation.
     ///
@@ -2008,6 +2092,9 @@ pub trait CommandLinkButtonMethods: ButtonMethods {
 }
 
 // wxCommandProcessor
+/// wxCommandProcessor is a class that maintains a history of wxCommands, with undo/redo functionality built-in.
+///
+/// [See `wxCommandProcessor`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_command_processor.html)
 pub trait CommandProcessorMethods: ObjectMethods {
     // DTOR: fn ~wxCommandProcessor()
     /// Returns true if the currently-active command can be undone, false otherwise.
@@ -2174,6 +2261,9 @@ pub trait CommandProcessorMethods: ObjectMethods {
 }
 
 // wxContextMenuEvent
+/// This class is used for context menu events, sent to give the application a chance to show a context (popup) menu for a wxWindow.
+///
+/// [See `wxContextMenuEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_context_menu_event.html)
 pub trait ContextMenuEventMethods: CommandEventMethods {
     /// Returns the position in screen coordinates at which the menu should be shown.
     ///
@@ -2193,6 +2283,9 @@ pub trait ContextMenuEventMethods: CommandEventMethods {
 }
 
 // wxControl
+/// This is the base class for a control or "widget".
+///
+/// [See `wxControl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_control.html)
 pub trait ControlMethods: WindowMethods {
     ///
     /// [See `wxControl::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_control.html#abe23789c94c86907463a0e8434be822a)
@@ -2335,9 +2428,15 @@ pub trait ControlMethods: WindowMethods {
 }
 
 // wxControlWithItems
+/// This is convenience class that derives from both wxControl and wxItemContainer.
+///
+/// [See `wxControlWithItems`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_control_with_items.html)
 pub trait ControlWithItemsMethods: ControlMethods {}
 
 // wxCursor
+/// A cursor is a small bitmap usually used for denoting where the mouse pointer is, with a picture that might indicate the interpretation of a mouse click.
+///
+/// [See `wxCursor`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_cursor.html)
 pub trait CursorMethods: GDIObjectMethods {
     // DTOR: fn ~wxCursor()
     /// Returns true if cursor data is present.
@@ -2356,6 +2455,9 @@ pub trait CursorMethods: GDIObjectMethods {
 }
 
 // wxCustomDataObject
+/// wxCustomDataObject is a specialization of wxDataObjectSimple for some application-specific data in arbitrary (either custom or one of the standard ones).
+///
+/// [See `wxCustomDataObject`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_custom_data_object.html)
 pub trait CustomDataObjectMethods: DataObjectSimpleMethods {
     // DTOR: fn ~wxCustomDataObject()
     /// This function is called to allocate size bytes of memory from SetData().

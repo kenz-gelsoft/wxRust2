@@ -1,6 +1,9 @@
 use super::*;
 
 // wxRadioBox
+/// A radio box item is used to select one of number of mutually exclusive choices.
+///
+/// [See `wxRadioBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_radio_box.html)
 pub trait RadioBoxMethods: ControlMethods {
     // DTOR: fn ~wxRadioBox()
     // NOT_SUPPORTED: fn Create()
@@ -134,6 +137,9 @@ pub trait RadioBoxMethods: ControlMethods {
 }
 
 // wxRadioButton
+/// A radio button item is a button which usually denotes one of several mutually exclusive options.
+///
+/// [See `wxRadioButton`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_radio_button.html)
 pub trait RadioButtonMethods: ControlMethods {
     // DTOR: fn ~wxRadioButton()
     /// Creates the choice for two-step construction.
@@ -216,6 +222,9 @@ pub trait RadioButtonMethods: ControlMethods {
 }
 
 // wxRealPoint
+/// A wxRealPoint is a useful data structure for graphics operations.
+///
+/// [See `wxRealPoint`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_real_point.html)
 pub trait RealPointMethods: WxRustMethods {
     // BLOCKED: fn operator=()
     // BLOCKED: fn operator==()
@@ -238,6 +247,9 @@ pub trait RealPointMethods: WxRustMethods {
 }
 
 // wxRearrangeCtrl
+/// A composite control containing a wxRearrangeList and the buttons allowing to move the items in it.
+///
+/// [See `wxRearrangeCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rearrange_ctrl.html)
 pub trait RearrangeCtrlMethods: PanelMethods {
     /// Effectively creates the window for an object created using the default constructor.
     ///
@@ -296,6 +308,9 @@ pub trait RearrangeCtrlMethods: PanelMethods {
 }
 
 // wxRearrangeDialog
+/// A dialog allowing the user to rearrange the specified items.
+///
+/// [See `wxRearrangeDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rearrange_dialog.html)
 pub trait RearrangeDialogMethods: DialogMethods {
     /// Effectively creates the dialog for an object created using the default constructor.
     ///
@@ -363,6 +378,9 @@ pub trait RearrangeDialogMethods: DialogMethods {
 }
 
 // wxRearrangeList
+/// A listbox-like control allowing the user to rearrange the items and to enable or disable them.
+///
+/// [See `wxRearrangeList`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rearrange_list.html)
 pub trait RearrangeListMethods: CheckListBoxMethods {
     /// Effectively creates the window for an object created using the default constructor.
     ///
@@ -445,6 +463,9 @@ pub trait RearrangeListMethods: CheckListBoxMethods {
 }
 
 // wxRect
+/// Represents a rectangle with integer coordinates.
+///
+/// [See `wxRect`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rect.html)
 pub trait RectMethods: WxRustMethods {
     /// Returns the rectangle having the same size as this one but centered relatively to the given rectangle r.
     ///
@@ -748,6 +769,9 @@ pub trait RectMethods: WxRustMethods {
 }
 
 // wxRegion
+/// A wxRegion represents a simple or complex region on a device context or window.
+///
+/// [See `wxRegion`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_region.html)
 pub trait RegionMethods: GDIObjectMethods {
     // DTOR: fn ~wxRegion()
     /// Clears the current region.
@@ -919,6 +943,9 @@ pub trait RegionMethods: GDIObjectMethods {
 }
 
 // wxRegionIterator
+/// This class is used to iterate through the rectangles in a region, typically when examining the damaged regions of a window within an OnPaint call.
+///
+/// [See `wxRegionIterator`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_region_iterator.html)
 pub trait RegionIteratorMethods: ObjectMethods {
     /// An alias for GetHeight().
     ///
@@ -988,6 +1015,9 @@ pub trait RegionIteratorMethods: ObjectMethods {
 }
 
 // wxRendererNative
+/// First, a brief introduction to wxRendererNative and why it is needed.
+///
+/// [See `wxRendererNative`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_renderer_native.html)
 pub trait RendererNativeMethods: WxRustMethods {
     // DTOR: fn ~wxRendererNative()
     /// Draw a check box.
@@ -1460,6 +1490,9 @@ pub trait RendererNativeMethods: WxRustMethods {
 }
 
 // wxRichToolTip
+/// Allows showing a tool tip with more customizations than wxToolTip.
+///
+/// [See `wxRichToolTip`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rich_tool_tip.html)
 pub trait RichToolTipMethods: WxRustMethods {
     /// Set the background colour.
     ///

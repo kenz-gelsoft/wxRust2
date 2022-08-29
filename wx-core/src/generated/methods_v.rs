@@ -1,6 +1,9 @@
 use super::*;
 
 // wxVListBox
+/// wxVListBox is a wxListBox-like control with the following two main differences from a regular wxListBox: it can have an arbitrarily huge number of items because it doesn't store them itself but uses the OnDrawItem() callback to draw them (so it is a virtual listbox) and its items can have variable height as determined by OnMeasureItem() (so it is also a listbox with the lines of variable height).
+///
+/// [See `wxVListBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_v_list_box.html)
 pub trait VListBoxMethods: VScrolledWindowMethods {
     // DTOR: fn ~wxVListBox()
     /// Deletes all items from the control.
@@ -143,9 +146,15 @@ pub trait VListBoxMethods: VScrolledWindowMethods {
 }
 
 // wxVScrolledWindow
+/// In the name of this class, "V" may stand for "variable" because it can be used for scrolling rows of variable heights; "virtual", because it is not necessary to know the heights of all rows in advance  only those which are shown on the screen need to be measured; or even "vertical", because this class only supports scrolling vertically.
+///
+/// [See `wxVScrolledWindow`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_v_scrolled_window.html)
 pub trait VScrolledWindowMethods: PanelMethods {}
 
 // wxValidator
+/// wxValidator is the base class for a family of validator classes that mediate between a class of control, and application data.
+///
+/// [See `wxValidator`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_validator.html)
 pub trait ValidatorMethods: EvtHandlerMethods {
     // DTOR: fn ~wxValidator()
     /// All validator classes must implement the Clone() function, which returns an identical copy of itself.

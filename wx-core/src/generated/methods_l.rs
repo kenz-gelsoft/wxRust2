@@ -1,6 +1,9 @@
 use super::*;
 
 // wxLayoutAlgorithm
+/// wxLayoutAlgorithm implements layout of subwindows in MDI or SDI frames.
+///
+/// [See `wxLayoutAlgorithm`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_layout_algorithm.html)
 pub trait LayoutAlgorithmMethods: ObjectMethods {
     // DTOR: fn ~wxLayoutAlgorithm()
     /// Lays out the children of a normal frame.
@@ -47,6 +50,9 @@ pub trait LayoutAlgorithmMethods: ObjectMethods {
 }
 
 // wxListBox
+/// A listbox is used to select one or more of a list of strings.
+///
+/// [See `wxListBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_box.html)
 pub trait ListBoxMethods: ControlMethods {
     // DTOR: fn ~wxListBox()
     // NOT_SUPPORTED: fn Create()
@@ -201,6 +207,9 @@ pub trait ListBoxMethods: ControlMethods {
 }
 
 // wxListCtrl
+/// A list control presents lists in a number of formats: list view, report view, icon view and small icon view.
+///
+/// [See `wxListCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_ctrl.html)
 pub trait ListCtrlMethods: ControlMethods {
     // DTOR: fn ~wxListCtrl()
     // NOT_SUPPORTED: fn AppendColumn()
@@ -842,6 +851,9 @@ pub trait ListCtrlMethods: ControlMethods {
 }
 
 // wxListEvent
+/// A list event holds information about events associated with wxListCtrl objects.
+///
+/// [See `wxListEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_event.html)
 pub trait ListEventMethods: NotifyEventMethods {
     /// For EVT_LIST_CACHE_HINT event only: return the first item which the list control advises us to cache.
     ///
@@ -960,6 +972,9 @@ pub trait ListEventMethods: NotifyEventMethods {
 }
 
 // wxListItem
+/// This class stores information about a wxListCtrl item or column.
+///
+/// [See `wxListItem`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_item.html)
 pub trait ListItemMethods: ObjectMethods {
     /// Resets the item state to the default.
     ///
@@ -1123,6 +1138,9 @@ pub trait ListItemMethods: ObjectMethods {
 }
 
 // wxListView
+/// This class currently simply presents a simpler to use interface for the wxListCtrl  it can be thought of as a façade for that complicated class.
+///
+/// [See `wxListView`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_view.html)
 pub trait ListViewMethods: ListCtrlMethods {
     // DTOR: fn ~wxListView()
     /// Resets the column image  after calling this function, no image will be shown.
@@ -1176,6 +1194,9 @@ pub trait ListViewMethods: ListCtrlMethods {
 }
 
 // wxListbook
+/// wxListbook is a class similar to wxNotebook but which uses a wxListCtrl to show the labels instead of the tabs.
+///
+/// [See `wxListbook`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_listbook.html)
 pub trait ListbookMethods: BookCtrlBaseMethods {
     /// Returns the wxListView associated with the control.
     ///

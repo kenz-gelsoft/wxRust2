@@ -1,6 +1,9 @@
 use super::*;
 
 // wxRefCounter
+/// This class is used to manage reference-counting providing a simple interface and a counter.
+///
+/// [See `wxRefCounter`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_ref_counter.html)
 pub trait RefCounterMethods: WxRustMethods {
     /// Decrements the reference count associated with this shared data and, if it reaches zero, destroys this instance of wxRefCounter releasing its memory.
     ///

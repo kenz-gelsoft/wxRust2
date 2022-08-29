@@ -1,6 +1,9 @@
 use super::*;
 
 // wxFileName
+/// wxFileName encapsulates a file name.
+///
+/// [See `wxFileName`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_file_name.html)
 pub trait FileNameMethods: WxRustMethods {
     /// Appends a directory component to the path.
     ///

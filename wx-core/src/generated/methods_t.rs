@@ -1,12 +1,21 @@
 use super::*;
 
 // wxTGAHandler
+/// This is the image handler for the TGA format.
+///
+/// [See `wxTGAHandler`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_t_g_a_handler.html)
 pub trait TGAHandlerMethods: ImageHandlerMethods {}
 
 // wxTIFFHandler
+/// This is the image handler for the TIFF format.
+///
+/// [See `wxTIFFHandler`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_t_i_f_f_handler.html)
 pub trait TIFFHandlerMethods: ImageHandlerMethods {}
 
 // wxTaskBarIcon
+/// This class represents a taskbar icon.
+///
+/// [See `wxTaskBarIcon`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_task_bar_icon.html)
 pub trait TaskBarIconMethods: EvtHandlerMethods {
     // DTOR: fn ~wxTaskBarIcon()
     /// This method is similar to wxWindow::Destroy and can be used to schedule the task bar icon object for the delayed destruction: it will be deleted during the next event loop iteration, which allows the task bar icon to process any pending events for it before being destroyed.
@@ -65,9 +74,15 @@ pub trait TaskBarIconMethods: EvtHandlerMethods {
 }
 
 // wxTaskBarIconEvent
+/// The event class used by wxTaskBarIcon.
+///
+/// [See `wxTaskBarIconEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_task_bar_icon_event.html)
 pub trait TaskBarIconEventMethods: EventMethods {}
 
 // wxTextAttr
+/// wxTextAttr represents the character and paragraph attributes, or style, for a range of text in a wxTextCtrl or wxRichTextCtrl.
+///
+/// [See `wxTextAttr`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_text_attr.html)
 pub trait TextAttrMethods: WxRustMethods {
     // NOT_SUPPORTED: fn GetAlignment()
     /// Returns the background colour.
@@ -717,6 +732,9 @@ pub trait TextAttrMethods: WxRustMethods {
 }
 
 // wxTextCtrl
+/// A text control allows text to be displayed and edited.
+///
+/// [See `wxTextCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_text_ctrl.html)
 pub trait TextCtrlMethods: ControlMethods {
     /// Enable the automatic replacement of new lines characters in a single-line text field with spaces under macOS.
     ///
@@ -938,6 +956,9 @@ pub trait TextCtrlMethods: ControlMethods {
 }
 
 // wxTextDataObject
+/// wxTextDataObject is a specialization of wxDataObjectSimple for text data.
+///
+/// [See `wxTextDataObject`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_text_data_object.html)
 pub trait TextDataObjectMethods: DataObjectSimpleMethods {
     /// Returns the text associated with the data object.
     ///
@@ -964,6 +985,9 @@ pub trait TextDataObjectMethods: DataObjectSimpleMethods {
 }
 
 // wxTextDropTarget
+/// A predefined drop target for dealing with text data.
+///
+/// [See `wxTextDropTarget`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_text_drop_target.html)
 pub trait TextDropTargetMethods: DropTargetMethods {
     /// Override this function to receive dropped text.
     ///
@@ -978,6 +1002,9 @@ pub trait TextDropTargetMethods: DropTargetMethods {
 }
 
 // wxTextEntry
+/// Common base class for single line text entry fields.
+///
+/// [See `wxTextEntry`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_text_entry.html)
 pub trait TextEntryMethods: WxRustMethods {
     fn as_text_entry(&self) -> *mut c_void {
         unsafe { self.as_ptr() }
@@ -1260,6 +1287,9 @@ pub trait TextEntryMethods: WxRustMethods {
 }
 
 // wxTextEntryDialog
+/// This class represents a dialog that requests a one-line text string from the user.
+///
+/// [See `wxTextEntryDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_text_entry_dialog.html)
 pub trait TextEntryDialogMethods: DialogMethods {
     ///
     /// [See `wxTextEntryDialog::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_text_entry_dialog.html#a765b5d5cfca07be990d787a381c165f3)
@@ -1332,6 +1362,9 @@ pub trait TextEntryDialogMethods: DialogMethods {
 }
 
 // wxTextValidator
+/// wxTextValidator validates text controls, providing a variety of filtering behaviours.
+///
+/// [See `wxTextValidator`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_text_validator.html)
 pub trait TextValidatorMethods: ValidatorMethods {
     /// Returns a copy of the exclude char list (the list of invalid characters).
     ///
@@ -1470,6 +1503,9 @@ pub trait TextValidatorMethods: ValidatorMethods {
 }
 
 // wxThreadEvent
+/// This class adds some simple functionality to wxEvent to facilitate inter-thread communication.
+///
+/// [See `wxThreadEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_thread_event.html)
 pub trait ThreadEventMethods: EventMethods {
     // BLOCKED: fn SetPayload()
     // NOT_SUPPORTED: fn GetPayload()
@@ -1516,6 +1552,9 @@ pub trait ThreadEventMethods: EventMethods {
 }
 
 // wxTimePickerCtrl
+/// This control allows the user to enter time.
+///
+/// [See `wxTimePickerCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_time_picker_ctrl.html)
 pub trait TimePickerCtrlMethods: ControlMethods {
     /// Create the control window.
     ///
@@ -1591,6 +1630,9 @@ pub trait TimePickerCtrlMethods: ControlMethods {
 }
 
 // wxTipProvider
+/// This is the class used together with wxShowTip() function.
+///
+/// [See `wxTipProvider`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_tip_provider.html)
 pub trait TipProviderMethods: WxRustMethods {
     // DTOR: fn ~wxTipProvider()
     /// Returns the index of the current tip (i.e. the one which would be returned by GetTip()).
@@ -1608,6 +1650,9 @@ pub trait TipProviderMethods: WxRustMethods {
 }
 
 // wxTipWindow
+/// Shows simple text in a popup tip window on creation.
+///
+/// [See `wxTipWindow`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_tip_window.html)
 pub trait TipWindowMethods: WindowMethods {
     /// By default, the tip window disappears when the user clicks the mouse or presses a keyboard key or if it loses focus in any other way - for example because the user switched to another application window.
     ///
@@ -1633,6 +1678,9 @@ pub trait TipWindowMethods: WindowMethods {
 }
 
 // wxToggleButton
+/// wxToggleButton is a button that stays pressed when clicked by the user.
+///
+/// [See `wxToggleButton`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_toggle_button.html)
 pub trait ToggleButtonMethods: AnyButtonMethods {
     // DTOR: fn ~wxToggleButton()
     /// Creates the toggle button for two-step construction.
@@ -1689,6 +1737,9 @@ pub trait ToggleButtonMethods: AnyButtonMethods {
 }
 
 // wxToolBar
+/// A toolbar is a bar of buttons and/or other controls usually placed below the menu bar in a wxFrame.
+///
+/// [See `wxToolBar`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_tool_bar.html)
 pub trait ToolBarMethods: ControlMethods {
     // DTOR: fn ~wxToolBar()
     /// Adds a new check (or toggle) tool to the toolbar.
@@ -2263,6 +2314,9 @@ pub trait ToolBarMethods: ControlMethods {
 }
 
 // wxToolTip
+/// This class holds information about a tooltip associated with a window (see wxWindow::SetToolTip()).
+///
+/// [See `wxToolTip`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_tool_tip.html)
 pub trait ToolTipMethods: ObjectMethods {
     /// Get the tooltip text.
     ///
@@ -2319,6 +2373,9 @@ pub trait ToolTipMethods: ObjectMethods {
 }
 
 // wxToolbook
+/// wxToolbook is a class similar to wxNotebook but which uses a wxToolBar to show the labels instead of the tabs.
+///
+/// [See `wxToolbook`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_toolbook.html)
 pub trait ToolbookMethods: BookCtrlBaseMethods {
     /// Returns the wxToolBarBase associated with the control.
     ///
@@ -2347,6 +2404,9 @@ pub trait ToolbookMethods: BookCtrlBaseMethods {
 }
 
 // wxTopLevelWindow
+/// wxTopLevelWindow is a common base class for wxDialog and wxFrame.
+///
+/// [See `wxTopLevelWindow`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_top_level_window.html)
 pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     // DTOR: fn ~wxTopLevelWindow()
     /// Creates the top level window.
@@ -2603,6 +2663,9 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
 }
 
 // wxTreeCtrl
+/// A tree control presents information as a hierarchy, with items that may be expanded to show further items.
+///
+/// [See `wxTreeCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_tree_ctrl.html)
 pub trait TreeCtrlMethods: ControlMethods {
     // DTOR: fn ~wxTreeCtrl()
     /// Adds the root node to the tree, returning the new item.
@@ -3437,6 +3500,9 @@ pub trait TreeCtrlMethods: ControlMethods {
 }
 
 // wxTreeEvent
+/// A tree event holds information about events associated with wxTreeCtrl objects.
+///
+/// [See `wxTreeEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_tree_event.html)
 pub trait TreeEventMethods: NotifyEventMethods {
     /// Returns the item.
     ///
@@ -3493,6 +3559,9 @@ pub trait TreeEventMethods: NotifyEventMethods {
 }
 
 // wxTreeItemData
+/// wxTreeItemData is some (arbitrary) user class associated with some item.
+///
+/// [See `wxTreeItemData`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_tree_item_data.html)
 pub trait TreeItemDataMethods: ClientDataMethods {
     // DTOR: fn ~wxTreeItemData()
     /// Returns the item associated with this node.
@@ -3513,6 +3582,9 @@ pub trait TreeItemDataMethods: ClientDataMethods {
 }
 
 // wxTreeItemId
+/// An opaque reference to a tree item.
+///
+/// [See `wxTreeItemId`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_tree_item_id.html)
 pub trait TreeItemIdMethods: WxRustMethods {
     /// Returns true if this instance is referencing a valid tree item.
     ///
@@ -3533,6 +3605,9 @@ pub trait TreeItemIdMethods: WxRustMethods {
 }
 
 // wxTreeListCtrl
+/// A control combining wxTreeCtrl and wxListCtrl features.
+///
+/// [See `wxTreeListCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_tree_list_ctrl.html)
 pub trait TreeListCtrlMethods: WindowMethods {
     /// Sets the image list and gives its ownership to the control.
     ///
@@ -3686,6 +3761,9 @@ pub trait TreeListCtrlMethods: WindowMethods {
 }
 
 // wxTreeListItem
+/// Unique identifier of an item in wxTreeListCtrl.
+///
+/// [See `wxTreeListItem`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_tree_list_item.html)
 pub trait TreeListItemMethods: WxRustMethods {
     /// Return true if the item is valid.
     ///
@@ -3696,12 +3774,18 @@ pub trait TreeListItemMethods: WxRustMethods {
 }
 
 // wxTreeListItemComparator
+/// Class defining sort order for the items in wxTreeListCtrl.
+///
+/// [See `wxTreeListItemComparator`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_tree_list_item_comparator.html)
 pub trait TreeListItemComparatorMethods: WxRustMethods {
     // NOT_SUPPORTED: fn Compare()
     // DTOR: fn ~wxTreeListItemComparator()
 }
 
 // wxTreebook
+/// This class is an extension of the wxNotebook class that allows a tree structured set of pages to be shown in a control.
+///
+/// [See `wxTreebook`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_treebook.html)
 pub trait TreebookMethods: BookCtrlBaseMethods {
     // DTOR: fn ~wxTreebook()
     /// Adds a new child-page to the last top-level page.

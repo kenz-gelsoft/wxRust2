@@ -1,6 +1,9 @@
 use super::*;
 
 // wxVariantData
+/// The wxVariantData class is used to implement a new type for wxVariant.
+///
+/// [See `wxVariantData`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_variant_data.html)
 pub trait VariantDataMethods: ObjectRefDataMethods {
     /// This function can be overridden to clone the data.
     ///

@@ -1,6 +1,9 @@
 use super::*;
 
 // wxMask
+/// This class encapsulates a monochrome mask bitmap, where the masked area is black and the unmasked area is white.
+///
+/// [See `wxMask`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_mask.html)
 pub trait MaskMethods: ObjectMethods {
     // DTOR: fn ~wxMask()
     /// Constructs a mask from a bitmap and a palette index that indicates the background.
@@ -40,9 +43,15 @@ pub trait MaskMethods: ObjectMethods {
 }
 
 // wxMaximizeEvent
+/// An event being sent when a top level window is maximized.
+///
+/// [See `wxMaximizeEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_maximize_event.html)
 pub trait MaximizeEventMethods: EventMethods {}
 
 // wxMemoryDC
+/// A memory device context provides a means to draw graphics onto a bitmap.
+///
+/// [See `wxMemoryDC`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_memory_d_c.html)
 pub trait MemoryDCMethods: DCMethods {
     /// Allow using this device context object to modify the given bitmap contents.
     ///
@@ -72,6 +81,9 @@ pub trait MemoryDCMethods: DCMethods {
 }
 
 // wxMenu
+/// A menu is a popup (or pull down) list of items, one of which may be selected before the menu goes away (clicking elsewhere dismisses the menu).
+///
+/// [See `wxMenu`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_menu.html)
 pub trait MenuMethods: EvtHandlerMethods {
     // DTOR: fn ~wxMenu()
     /// Adds a menu item.
@@ -710,6 +722,9 @@ pub trait MenuMethods: EvtHandlerMethods {
 }
 
 // wxMenuBar
+/// A menu bar is a series of menus accessible from the top of a frame.
+///
+/// [See `wxMenuBar`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_menu_bar.html)
 pub trait MenuBarMethods: WindowMethods {
     // DTOR: fn ~wxMenuBar()
     /// Adds the item to the end of the menu bar.
@@ -955,6 +970,9 @@ pub trait MenuBarMethods: WindowMethods {
 }
 
 // wxMenuEvent
+/// This class is used for a variety of menu-related events.
+///
+/// [See `wxMenuEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_menu_event.html)
 pub trait MenuEventMethods: EventMethods {
     /// Returns the menu which is being opened or closed, or the menu containing the highlighted item.
     ///
@@ -977,6 +995,9 @@ pub trait MenuEventMethods: EventMethods {
 }
 
 // wxMenuItem
+/// A menu item represents an item in a menu.
+///
+/// [See `wxMenuItem`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_menu_item.html)
 pub trait MenuItemMethods: ObjectMethods {
     // BLOCKED: fn GetBackgroundColour()
     /// Returns the item bitmap.
@@ -1278,6 +1299,9 @@ pub trait MenuItemMethods: ObjectMethods {
 }
 
 // wxMessageDialog
+/// This class represents a dialog that shows a single or multi-line message, with a choice of OK, Yes, No and Cancel buttons.
+///
+/// [See `wxMessageDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_message_dialog.html)
 pub trait MessageDialogMethods: DialogMethods {
     /// Sets the extended message for the dialog: this message is usually an extension of the short message specified in the constructor or set with SetMessage().
     ///
@@ -1392,17 +1416,29 @@ pub trait MessageDialogMethods: DialogMethods {
 }
 
 // wxMessageOutputMessageBox
+/// Output messages by showing them in a message box.
+///
+/// [See `wxMessageOutputMessageBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_message_output_message_box.html)
 pub trait MessageOutputMessageBoxMethods: MessageOutputMethods {}
 
 // wxMiniFrame
+/// A miniframe is a frame with a small title bar.
+///
+/// [See `wxMiniFrame`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_mini_frame.html)
 pub trait MiniFrameMethods: FrameMethods {
     // DTOR: fn ~wxMiniFrame()
 }
 
 // wxMirrorDC
+/// wxMirrorDC is a simple wrapper class which is always associated with a real wxDC object and either forwards all of its operations to it without changes (no mirroring takes place) or exchanges x and y coordinates which makes it possible to reuse the same code to draw a figure and its mirror  i.e.
+///
+/// [See `wxMirrorDC`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_mirror_d_c.html)
 pub trait MirrorDCMethods: DCMethods {}
 
 // wxMouseCaptureChangedEvent
+/// A mouse capture changed event is sent to a window that loses its mouse capture.
+///
+/// [See `wxMouseCaptureChangedEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_mouse_capture_changed_event.html)
 pub trait MouseCaptureChangedEventMethods: EventMethods {
     /// Returns the window that gained the capture, or NULL if it was a non-wxWidgets window.
     ///
@@ -1417,9 +1453,15 @@ pub trait MouseCaptureChangedEventMethods: EventMethods {
 }
 
 // wxMouseCaptureLostEvent
+/// A mouse capture lost event is sent to a window that had obtained mouse capture, which was subsequently lost due to an "external" event (for example, when a dialog box is shown or if another application captures the mouse).
+///
+/// [See `wxMouseCaptureLostEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_mouse_capture_lost_event.html)
 pub trait MouseCaptureLostEventMethods: EventMethods {}
 
 // wxMouseEvent
+/// This event class contains information about the events generated by the mouse: they include mouse buttons press and release events and mouse move events.
+///
+/// [See `wxMouseEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_mouse_event.html)
 pub trait MouseEventMethods: EventMethods {
     /// Returns true if the event was a first extra button double click.
     ///
@@ -1619,6 +1661,9 @@ pub trait MouseEventMethods: EventMethods {
 }
 
 // wxMouseEventsManager
+/// Helper for handling mouse input events in windows containing multiple items.
+///
+/// [See `wxMouseEventsManager`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_mouse_events_manager.html)
 pub trait MouseEventsManagerMethods: EvtHandlerMethods {
     /// Finishes initialization of the object created using default constructor.
     ///
@@ -1635,6 +1680,9 @@ pub trait MouseEventsManagerMethods: EvtHandlerMethods {
 }
 
 // wxMoveEvent
+/// A move event holds information about window position change.
+///
+/// [See `wxMoveEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_move_event.html)
 pub trait MoveEventMethods: EventMethods {
     /// Returns the position of the window generating the move change event.
     ///

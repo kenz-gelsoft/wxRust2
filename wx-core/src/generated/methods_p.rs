@@ -1,21 +1,39 @@
 use super::*;
 
 // wxPCXHandler
+/// This is the image handler for the PCX format.
+///
+/// [See `wxPCXHandler`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_p_c_x_handler.html)
 pub trait PCXHandlerMethods: ImageHandlerMethods {}
 
 // wxPNGHandler
+/// This is the image handler for the PNG format.
+///
+/// [See `wxPNGHandler`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_p_n_g_handler.html)
 pub trait PNGHandlerMethods: ImageHandlerMethods {}
 
 // wxPNMHandler
+/// This is the image handler for the PNM format.
+///
+/// [See `wxPNMHandler`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_p_n_m_handler.html)
 pub trait PNMHandlerMethods: ImageHandlerMethods {}
 
 // wxPaintDC
+/// A wxPaintDC must be constructed if an application wishes to paint on the client area of a window from within an EVT_PAINT() event handler.
+///
+/// [See `wxPaintDC`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_paint_d_c.html)
 pub trait PaintDCMethods: ClientDCMethods {}
 
 // wxPaintEvent
+/// A paint event is sent when a window's contents needs to be repainted.
+///
+/// [See `wxPaintEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_paint_event.html)
 pub trait PaintEventMethods: EventMethods {}
 
 // wxPalette
+/// A palette is a table that maps pixel values to RGB colours.
+///
+/// [See `wxPalette`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_palette.html)
 pub trait PaletteMethods: GDIObjectMethods {
     // DTOR: fn ~wxPalette()
     /// Creates a palette from arrays of size n, one for each red, blue or green component.
@@ -59,6 +77,9 @@ pub trait PaletteMethods: GDIObjectMethods {
 }
 
 // wxPanel
+/// A panel is a window on which controls are placed.
+///
+/// [See `wxPanel`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_panel.html)
 pub trait PanelMethods: WindowMethods {
     // DTOR: fn ~wxPanel()
     /// The default handler for wxEVT_SYS_COLOUR_CHANGED.
@@ -79,9 +100,15 @@ pub trait PanelMethods: WindowMethods {
 }
 
 // wxPasswordEntryDialog
+/// This class represents a dialog that requests a one-line password string from the user.
+///
+/// [See `wxPasswordEntryDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_password_entry_dialog.html)
 pub trait PasswordEntryDialogMethods: TextEntryDialogMethods {}
 
 // wxPen
+/// A pen is a drawing tool for drawing outlines.
+///
+/// [See `wxPen`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_pen.html)
 pub trait PenMethods: GDIObjectMethods {
     // DTOR: fn ~wxPen()
     // NOT_SUPPORTED: fn GetCap()
@@ -171,11 +198,17 @@ pub trait PenMethods: GDIObjectMethods {
 }
 
 // wxPenList
+/// There is only one instance of this class: wxThePenList.
+///
+/// [See `wxPenList`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_pen_list.html)
 pub trait PenListMethods: WxRustMethods {
     // NOT_SUPPORTED: fn FindOrCreatePen()
 }
 
 // wxPersistenceManager
+/// Provides support for automatically saving and restoring object properties to persistent storage.
+///
+/// [See `wxPersistenceManager`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_persistence_manager.html)
 pub trait PersistenceManagerMethods: WxRustMethods {
     /// Set the global persistence manager to use.
     ///
@@ -250,6 +283,9 @@ pub trait PersistenceManagerMethods: WxRustMethods {
 }
 
 // wxPickerBase
+/// Base abstract class for all pickers which support an auxiliary text control.
+///
+/// [See `wxPickerBase`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_picker_base.html)
 pub trait PickerBaseMethods: ControlMethods {
     // DTOR: fn ~wxPickerBase()
     ///
@@ -403,6 +439,9 @@ pub trait PickerBaseMethods: ControlMethods {
 }
 
 // wxPoint
+/// A wxPoint is a useful data structure for graphics operations.
+///
+/// [See `wxPoint`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_point.html)
 pub trait PointMethods: WxRustMethods {
     /// Returns true if neither of the point components is equal to wxDefaultCoord.
     ///
@@ -440,6 +479,9 @@ pub trait PointMethods: WxRustMethods {
 }
 
 // wxPopupTransientWindow
+/// A wxPopupWindow which disappears automatically when the user clicks mouse outside it or if it loses focus in any other way.
+///
+/// [See `wxPopupTransientWindow`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_popup_transient_window.html)
 pub trait PopupTransientWindowMethods: PopupWindowMethods {
     /// Popup the window (this will show it too).
     ///
@@ -471,6 +513,9 @@ pub trait PopupTransientWindowMethods: PopupWindowMethods {
 }
 
 // wxPopupWindow
+/// A special kind of top level window used for popup menus, combobox popups and such.
+///
+/// [See `wxPopupWindow`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_popup_window.html)
 pub trait PopupWindowMethods: NonOwnedWindowMethods {
     /// Create method for two-step creation.
     ///
@@ -497,6 +542,9 @@ pub trait PopupWindowMethods: NonOwnedWindowMethods {
 }
 
 // wxPreferencesEditor
+/// Manage preferences dialog.
+///
+/// [See `wxPreferencesEditor`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_preferences_editor.html)
 pub trait PreferencesEditorMethods: WxRustMethods {
     // DTOR: fn ~wxPreferencesEditor()
     /// Add a new page to the editor.
@@ -544,6 +592,9 @@ pub trait PreferencesEditorMethods: WxRustMethods {
 }
 
 // wxPreferencesPage
+/// One page of preferences dialog.
+///
+/// [See `wxPreferencesPage`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_preferences_page.html)
 pub trait PreferencesPageMethods: WxRustMethods {
     // DTOR: fn ~wxPreferencesPage()
     /// Return name of the page.
@@ -578,6 +629,9 @@ pub trait PreferencesPageMethods: WxRustMethods {
 }
 
 // wxPropertySheetDialog
+/// This class represents a property sheet dialog: a tabbed dialog for showing settings.
+///
+/// [See `wxPropertySheetDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_property_sheet_dialog.html)
 pub trait PropertySheetDialogMethods: DialogMethods {
     /// Override this if you wish to add the book control in a way different from the standard way (for example, using different spacing).
     ///
