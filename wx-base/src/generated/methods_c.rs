@@ -1,9 +1,9 @@
 use super::*;
 
 // wxClassInfo
-/// This class stores meta-information about classes.
+/// This trait represents C++ [`wxClassInfo`](https://docs.wxwidgets.org/3.2/classwx_class_info.html) class's methods and inheritance.
 ///
-/// [See `wxClassInfo`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_class_info.html)
+/// See [`ClassInfoIsOwned`] documentation for the class usage.
 pub trait ClassInfoMethods: WxRustMethods {
     /// Creates an object of the appropriate kind.
     ///
@@ -66,9 +66,9 @@ pub trait ClassInfoMethods: WxRustMethods {
 }
 
 // wxClientData
-/// All classes deriving from wxEvtHandler (such as all controls and wxApp) can hold arbitrary data which is here referred to as "client data".
+/// This trait represents C++ [`wxClientData`](https://docs.wxwidgets.org/3.2/classwx_client_data.html) class's methods and inheritance.
 ///
-/// [See `wxClientData`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_client_data.html)
+/// See [`ClientDataIsOwned`] documentation for the class usage.
 pub trait ClientDataMethods: WxRustMethods {
     // DTOR: fn ~wxClientData()
 }

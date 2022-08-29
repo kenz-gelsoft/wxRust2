@@ -1,9 +1,9 @@
 use super::*;
 
 // wxStandardPaths
-/// wxStandardPaths returns the standard locations in the file system and should be used by applications to find their data files in a portable way.
+/// This trait represents C++ [`wxStandardPaths`](https://docs.wxwidgets.org/3.2/classwx_standard_paths.html) class's methods and inheritance.
 ///
-/// [See `wxStandardPaths`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_standard_paths.html)
+/// See [`StandardPathsIsOwned`] documentation for the class usage.
 pub trait StandardPathsMethods: WxRustMethods {
     /// MSW-specific function undoing the effect of IgnoreAppSubDir() calls.
     ///

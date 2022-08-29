@@ -1,9 +1,9 @@
 use super::*;
 
 // wxEvent
-/// An event is a structure holding information about an event passed to a callback or member function.
+/// This trait represents C++ [`wxEvent`](https://docs.wxwidgets.org/3.2/classwx_event.html) class's methods and inheritance.
 ///
-/// [See `wxEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_event.html)
+/// See [`EventIsOwned`] documentation for the class usage.
 pub trait EventMethods: ObjectMethods {
     /// Returns a copy of the event.
     ///
@@ -101,9 +101,9 @@ pub trait EventMethods: ObjectMethods {
 }
 
 // wxEvtHandler
-/// A class that can handle events from the windowing system.
+/// This trait represents C++ [`wxEvtHandler`](https://docs.wxwidgets.org/3.2/classwx_evt_handler.html) class's methods and inheritance.
 ///
-/// [See `wxEvtHandler`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_evt_handler.html)
+/// See [`EvtHandlerIsOwned`] documentation for the class usage.
 pub trait EvtHandlerMethods: ObjectMethods {
     /// Queue event for a later processing.
     ///

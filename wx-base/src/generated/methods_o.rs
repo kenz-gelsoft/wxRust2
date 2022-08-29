@@ -1,9 +1,9 @@
 use super::*;
 
 // wxObject
-/// This is the root class of many of the wxWidgets classes.
+/// This trait represents C++ [`wxObject`](https://docs.wxwidgets.org/3.2/classwx_object.html) class's methods and inheritance.
 ///
-/// [See `wxObject`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_object.html)
+/// See [`ObjectIsOwned`] documentation for the class usage.
 pub trait ObjectMethods: WxRustMethods {
     // DTOR: fn ~wxObject()
     /// This virtual function is redefined for every class that requires run-time type information, when using the wxDECLARE_CLASS macro (or similar).
@@ -77,7 +77,7 @@ pub trait ObjectMethods: WxRustMethods {
 }
 
 // wxObjectRefData
-/// This class is just a typedef to wxRefCounter and is used by wxObject.
+/// This trait represents C++ [`wxObjectRefData`](https://docs.wxwidgets.org/3.2/classwx_object_ref_data.html) class's methods and inheritance.
 ///
-/// [See `wxObjectRefData`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_object_ref_data.html)
+/// See [`ObjectRefDataIsOwned`] documentation for the class usage.
 pub trait ObjectRefDataMethods: WxRustMethods {}

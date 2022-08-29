@@ -1,9 +1,9 @@
 use super::*;
 
 // wxDateTime
-/// wxDateTime class represents an absolute moment in time.
+/// This trait represents C++ [`wxDateTime`](https://docs.wxwidgets.org/3.2/classwx_date_time.html) class's methods and inheritance.
 ///
-/// [See `wxDateTime`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_date_time.html)
+/// See [`DateTimeIsOwned`] documentation for the class usage.
 pub trait DateTimeMethods: WxRustMethods {
     /// Reset time to midnight (00:00:00) without changing the date.
     ///

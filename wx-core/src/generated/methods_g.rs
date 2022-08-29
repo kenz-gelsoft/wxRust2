@@ -1,9 +1,9 @@
 use super::*;
 
 // wxGBPosition
-/// This class represents the position of an item in a virtual grid of rows and columns managed by a wxGridBagSizer.
+/// This trait represents C++ [`wxGBPosition`](https://docs.wxwidgets.org/3.2/classwx_g_b_position.html) class's methods and inheritance.
 ///
-/// [See `wxGBPosition`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_g_b_position.html)
+/// See [`GBPositionIsOwned`] documentation for the class usage.
 pub trait GBPositionMethods: WxRustMethods {
     /// Get the current column value.
     ///
@@ -34,9 +34,9 @@ pub trait GBPositionMethods: WxRustMethods {
 }
 
 // wxGBSizerItem
-/// The wxGBSizerItem class is used by the wxGridBagSizer for tracking the items in the sizer.
+/// This trait represents C++ [`wxGBSizerItem`](https://docs.wxwidgets.org/3.2/classwx_g_b_sizer_item.html) class's methods and inheritance.
 ///
-/// [See `wxGBSizerItem`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_g_b_sizer_item.html)
+/// See [`GBSizerItemIsOwned`] documentation for the class usage.
 pub trait GBSizerItemMethods: SizerItemMethods {
     /// Get the row and column of the endpoint of this item.
     ///
@@ -126,9 +126,9 @@ pub trait GBSizerItemMethods: SizerItemMethods {
 }
 
 // wxGBSpan
-/// This class is used to hold the row and column spanning attributes of items in a wxGridBagSizer.
+/// This trait represents C++ [`wxGBSpan`](https://docs.wxwidgets.org/3.2/classwx_g_b_span.html) class's methods and inheritance.
 ///
-/// [See `wxGBSpan`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_g_b_span.html)
+/// See [`GBSpanIsOwned`] documentation for the class usage.
 pub trait GBSpanMethods: WxRustMethods {
     /// Get the current colspan value.
     ///
@@ -159,23 +159,23 @@ pub trait GBSpanMethods: WxRustMethods {
 }
 
 // wxGCDC
-/// wxGCDC is a device context that draws on a wxGraphicsContext.
+/// This trait represents C++ [`wxGCDC`](https://docs.wxwidgets.org/3.2/classwx_g_c_d_c.html) class's methods and inheritance.
 ///
-/// [See `wxGCDC`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_g_c_d_c.html)
+/// See [`GCDCIsOwned`] documentation for the class usage.
 pub trait GCDCMethods: DCMethods {
     // DTOR: fn ~wxGCDC()
 }
 
 // wxGDIObject
-/// This class allows platforms to implement functionality to optimise GDI objects, such as wxPen, wxBrush and wxFont.
+/// This trait represents C++ [`wxGDIObject`](https://docs.wxwidgets.org/3.2/classwx_g_d_i_object.html) class's methods and inheritance.
 ///
-/// [See `wxGDIObject`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_g_d_i_object.html)
+/// See [`GDIObjectIsOwned`] documentation for the class usage.
 pub trait GDIObjectMethods: ObjectMethods {}
 
 // wxGIFHandler
-/// This is the image handler for the GIF format.
+/// This trait represents C++ [`wxGIFHandler`](https://docs.wxwidgets.org/3.2/classwx_g_i_f_handler.html) class's methods and inheritance.
 ///
-/// [See `wxGIFHandler`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_g_i_f_handler.html)
+/// See [`GIFHandlerIsOwned`] documentation for the class usage.
 pub trait GIFHandlerMethods: ImageHandlerMethods {
     /// Save the animated gif.
     ///
@@ -200,9 +200,9 @@ pub trait GIFHandlerMethods: ImageHandlerMethods {
 }
 
 // wxGauge
-/// A gauge is a horizontal or vertical bar which shows a quantity (often time).
+/// This trait represents C++ [`wxGauge`](https://docs.wxwidgets.org/3.2/classwx_gauge.html) class's methods and inheritance.
 ///
-/// [See `wxGauge`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_gauge.html)
+/// See [`GaugeIsOwned`] documentation for the class usage.
 pub trait GaugeMethods: ControlMethods {
     // DTOR: fn ~wxGauge()
     /// Creates the gauge for two-step construction.
@@ -281,9 +281,9 @@ pub trait GaugeMethods: ControlMethods {
 }
 
 // wxGenericAboutDialog
-/// This class defines a customizable About dialog.
+/// This trait represents C++ [`wxGenericAboutDialog`](https://docs.wxwidgets.org/3.2/classwx_generic_about_dialog.html) class's methods and inheritance.
 ///
-/// [See `wxGenericAboutDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_generic_about_dialog.html)
+/// See [`GenericAboutDialogIsOwned`] documentation for the class usage.
 pub trait GenericAboutDialogMethods: WxRustMethods {
     /// Initializes the dialog created using the default constructor.
     ///
@@ -305,9 +305,9 @@ pub trait GenericAboutDialogMethods: WxRustMethods {
 }
 
 // wxGenericDirCtrl
-/// This control can be used to place a directory listing (with optional files) on an arbitrary window.
+/// This trait represents C++ [`wxGenericDirCtrl`](https://docs.wxwidgets.org/3.2/classwx_generic_dir_ctrl.html) class's methods and inheritance.
 ///
-/// [See `wxGenericDirCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_generic_dir_ctrl.html)
+/// See [`GenericDirCtrlIsOwned`] documentation for the class usage.
 pub trait GenericDirCtrlMethods: ControlMethods {
     // DTOR: fn ~wxGenericDirCtrl()
     /// Collapse the given path.
@@ -526,9 +526,9 @@ pub trait GenericDirCtrlMethods: ControlMethods {
 }
 
 // wxGenericProgressDialog
-/// This class represents a dialog that shows a short message and a progress bar.
+/// This trait represents C++ [`wxGenericProgressDialog`](https://docs.wxwidgets.org/3.2/classwx_generic_progress_dialog.html) class's methods and inheritance.
 ///
-/// [See `wxGenericProgressDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_generic_progress_dialog.html)
+/// See [`GenericProgressDialogIsOwned`] documentation for the class usage.
 pub trait GenericProgressDialogMethods: DialogMethods {
     // DTOR: fn ~wxGenericProgressDialog()
     /// Returns the last value passed to the Update() function or wxNOT_FOUND if the dialog has no progress bar.
@@ -596,23 +596,23 @@ pub trait GenericProgressDialogMethods: DialogMethods {
 }
 
 // wxGenericValidator
-/// wxGenericValidator performs data transfer (but not validation or filtering) for many type of controls.
+/// This trait represents C++ [`wxGenericValidator`](https://docs.wxwidgets.org/3.2/classwx_generic_validator.html) class's methods and inheritance.
 ///
-/// [See `wxGenericValidator`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_generic_validator.html)
+/// See [`GenericValidatorIsOwned`] documentation for the class usage.
 pub trait GenericValidatorMethods: ValidatorMethods {
     // DTOR: fn ~wxGenericValidator()
 }
 
 // wxGraphicsBrush
-/// A wxGraphicsBrush is a native representation of a brush.
+/// This trait represents C++ [`wxGraphicsBrush`](https://docs.wxwidgets.org/3.2/classwx_graphics_brush.html) class's methods and inheritance.
 ///
-/// [See `wxGraphicsBrush`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_graphics_brush.html)
+/// See [`GraphicsBrushIsOwned`] documentation for the class usage.
 pub trait GraphicsBrushMethods: GraphicsObjectMethods {}
 
 // wxGraphicsContext
-/// A wxGraphicsContext instance is the object that is drawn upon.
+/// This trait represents C++ [`wxGraphicsContext`](https://docs.wxwidgets.org/3.2/classwx_graphics_context.html) class's methods and inheritance.
 ///
-/// [See `wxGraphicsContext`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_graphics_context.html)
+/// See [`GraphicsContextIsOwned`] documentation for the class usage.
 pub trait GraphicsContextMethods: GraphicsObjectMethods {
     /// Creates a wxGraphicsContext from a wxWindow.
     ///
@@ -1107,15 +1107,15 @@ pub trait GraphicsContextMethods: GraphicsObjectMethods {
 }
 
 // wxGraphicsFont
-/// A wxGraphicsFont is a native representation of a font.
+/// This trait represents C++ [`wxGraphicsFont`](https://docs.wxwidgets.org/3.2/classwx_graphics_font.html) class's methods and inheritance.
 ///
-/// [See `wxGraphicsFont`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_graphics_font.html)
+/// See [`GraphicsFontIsOwned`] documentation for the class usage.
 pub trait GraphicsFontMethods: GraphicsObjectMethods {}
 
 // wxGraphicsGradientStop
-/// Represents a single gradient stop in a collection of gradient stops as represented by wxGraphicsGradientStops.
+/// This trait represents C++ [`wxGraphicsGradientStop`](https://docs.wxwidgets.org/3.2/classwx_graphics_gradient_stop.html) class's methods and inheritance.
 ///
-/// [See `wxGraphicsGradientStop`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_graphics_gradient_stop.html)
+/// See [`GraphicsGradientStopIsOwned`] documentation for the class usage.
 pub trait GraphicsGradientStopMethods: WxRustMethods {
     /// Return the stop colour.
     ///
@@ -1137,9 +1137,9 @@ pub trait GraphicsGradientStopMethods: WxRustMethods {
 }
 
 // wxGraphicsGradientStops
-/// Represents a collection of wxGraphicGradientStop values for use with CreateLinearGradientBrush and CreateRadialGradientBrush.
+/// This trait represents C++ [`wxGraphicsGradientStops`](https://docs.wxwidgets.org/3.2/classwx_graphics_gradient_stops.html) class's methods and inheritance.
 ///
-/// [See `wxGraphicsGradientStops`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_graphics_gradient_stops.html)
+/// See [`GraphicsGradientStopsIsOwned`] documentation for the class usage.
 pub trait GraphicsGradientStopsMethods: WxRustMethods {
     /// Add a new stop.
     ///
@@ -1175,9 +1175,9 @@ pub trait GraphicsGradientStopsMethods: WxRustMethods {
 }
 
 // wxGraphicsMatrix
-/// A wxGraphicsMatrix is a native representation of an affine matrix.
+/// This trait represents C++ [`wxGraphicsMatrix`](https://docs.wxwidgets.org/3.2/classwx_graphics_matrix.html) class's methods and inheritance.
 ///
-/// [See `wxGraphicsMatrix`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_graphics_matrix.html)
+/// See [`GraphicsMatrixIsOwned`] documentation for the class usage.
 pub trait GraphicsMatrixMethods: GraphicsObjectMethods {
     /// Concatenates the matrix passed with the current matrix.
     ///
@@ -1253,9 +1253,9 @@ pub trait GraphicsMatrixMethods: GraphicsObjectMethods {
 }
 
 // wxGraphicsObject
-/// This class is the superclass of native graphics objects like pens etc.
+/// This trait represents C++ [`wxGraphicsObject`](https://docs.wxwidgets.org/3.2/classwx_graphics_object.html) class's methods and inheritance.
 ///
-/// [See `wxGraphicsObject`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_graphics_object.html)
+/// See [`GraphicsObjectIsOwned`] documentation for the class usage.
 pub trait GraphicsObjectMethods: ObjectMethods {
     /// Returns the renderer that was used to create this instance, or NULL if it has not been initialized yet.
     ///
@@ -1271,9 +1271,9 @@ pub trait GraphicsObjectMethods: ObjectMethods {
 }
 
 // wxGraphicsPath
-/// A wxGraphicsPath is a native representation of a geometric path.
+/// This trait represents C++ [`wxGraphicsPath`](https://docs.wxwidgets.org/3.2/classwx_graphics_path.html) class's methods and inheritance.
 ///
-/// [See `wxGraphicsPath`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_graphics_path.html)
+/// See [`GraphicsPathIsOwned`] documentation for the class usage.
 pub trait GraphicsPathMethods: GraphicsObjectMethods {
     // NOT_SUPPORTED: fn AddArc()
     // NOT_SUPPORTED: fn AddArc1()
@@ -1359,15 +1359,15 @@ pub trait GraphicsPathMethods: GraphicsObjectMethods {
 }
 
 // wxGraphicsPen
-/// A wxGraphicsPen is a native representation of a pen.
+/// This trait represents C++ [`wxGraphicsPen`](https://docs.wxwidgets.org/3.2/classwx_graphics_pen.html) class's methods and inheritance.
 ///
-/// [See `wxGraphicsPen`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_graphics_pen.html)
+/// See [`GraphicsPenIsOwned`] documentation for the class usage.
 pub trait GraphicsPenMethods: GraphicsObjectMethods {}
 
 // wxGraphicsRenderer
-/// A wxGraphicsRenderer is the instance corresponding to the rendering engine used.
+/// This trait represents C++ [`wxGraphicsRenderer`](https://docs.wxwidgets.org/3.2/classwx_graphics_renderer.html) class's methods and inheritance.
 ///
-/// [See `wxGraphicsRenderer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_graphics_renderer.html)
+/// See [`GraphicsRendererIsOwned`] documentation for the class usage.
 pub trait GraphicsRendererMethods: ObjectMethods {
     // NOT_SUPPORTED: fn CreateBitmap()
     // NOT_SUPPORTED: fn CreateBitmapFromImage()
@@ -1637,9 +1637,9 @@ pub trait GraphicsRendererMethods: ObjectMethods {
 }
 
 // wxGridBagSizer
-/// A wxSizer that can lay out items in a virtual grid like a wxFlexGridSizer but in this case explicit positioning of the items is allowed using wxGBPosition, and items can optionally span more than one row and/or column using wxGBSpan.
+/// This trait represents C++ [`wxGridBagSizer`](https://docs.wxwidgets.org/3.2/classwx_grid_bag_sizer.html) class's methods and inheritance.
 ///
-/// [See `wxGridBagSizer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_grid_bag_sizer.html)
+/// See [`GridBagSizerIsOwned`] documentation for the class usage.
 pub trait GridBagSizerMethods: FlexGridSizerMethods {
     /// Adds the given item to the given position.
     ///
@@ -2036,9 +2036,9 @@ pub trait GridBagSizerMethods: FlexGridSizerMethods {
 }
 
 // wxGridEditorCreatedEvent
+/// This trait represents C++ [`wxGridEditorCreatedEvent`](https://docs.wxwidgets.org/3.2/classwx_grid_editor_created_event.html) class's methods and inheritance.
 ///
-///
-/// [See `wxGridEditorCreatedEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_grid_editor_created_event.html)
+/// See [`GridEditorCreatedEventIsOwned`] documentation for the class usage.
 pub trait GridEditorCreatedEventMethods: CommandEventMethods {
     /// Returns the column at which the event occurred.
     ///
@@ -2103,9 +2103,9 @@ pub trait GridEditorCreatedEventMethods: CommandEventMethods {
 }
 
 // wxGridEvent
-/// This event class contains information about various grid events.
+/// This trait represents C++ [`wxGridEvent`](https://docs.wxwidgets.org/3.2/classwx_grid_event.html) class's methods and inheritance.
 ///
-/// [See `wxGridEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_grid_event.html)
+/// See [`GridEventIsOwned`] documentation for the class usage.
 pub trait GridEventMethods: NotifyEventMethods {
     /// Returns true if the Alt key was down at the time of the event.
     ///
@@ -2158,9 +2158,9 @@ pub trait GridEventMethods: NotifyEventMethods {
 }
 
 // wxGridRangeSelectEvent
-/// Events of this class notify about a range of cells being selected.
+/// This trait represents C++ [`wxGridRangeSelectEvent`](https://docs.wxwidgets.org/3.2/classwx_grid_range_select_event.html) class's methods and inheritance.
 ///
-/// [See `wxGridRangeSelectEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_grid_range_select_event.html)
+/// See [`GridRangeSelectEventIsOwned`] documentation for the class usage.
 pub trait GridRangeSelectEventMethods: NotifyEventMethods {
     /// Returns true if the Alt key was down at the time of the event.
     ///
@@ -2221,9 +2221,9 @@ pub trait GridRangeSelectEventMethods: NotifyEventMethods {
 }
 
 // wxGridSizeEvent
-/// This event class contains information about a row/column resize event.
+/// This trait represents C++ [`wxGridSizeEvent`](https://docs.wxwidgets.org/3.2/classwx_grid_size_event.html) class's methods and inheritance.
 ///
-/// [See `wxGridSizeEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_grid_size_event.html)
+/// See [`GridSizeEventIsOwned`] documentation for the class usage.
 pub trait GridSizeEventMethods: NotifyEventMethods {
     /// Returns true if the Alt key was down at the time of the event.
     ///
@@ -2264,9 +2264,9 @@ pub trait GridSizeEventMethods: NotifyEventMethods {
 }
 
 // wxGridSizer
-/// A grid sizer is a sizer which lays out its children in a two-dimensional table with all table fields having the same size, i.e.
+/// This trait represents C++ [`wxGridSizer`](https://docs.wxwidgets.org/3.2/classwx_grid_sizer.html) class's methods and inheritance.
 ///
-/// [See `wxGridSizer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_grid_sizer.html)
+/// See [`GridSizerIsOwned`] documentation for the class usage.
 pub trait GridSizerMethods: SizerMethods {
     /// Returns the number of columns that has been specified for the sizer.
     ///
@@ -2331,9 +2331,9 @@ pub trait GridSizerMethods: SizerMethods {
 }
 
 // wxGridTableBase
-/// The almost abstract base class for grid tables.
+/// This trait represents C++ [`wxGridTableBase`](https://docs.wxwidgets.org/3.2/classwx_grid_table_base.html) class's methods and inheritance.
 ///
-/// [See `wxGridTableBase`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_grid_table_base.html)
+/// See [`GridTableBaseIsOwned`] documentation for the class usage.
 pub trait GridTableBaseMethods: ObjectMethods {
     /// May be overridden to implement testing for empty cells.
     ///
@@ -2618,9 +2618,9 @@ pub trait GridTableBaseMethods: ObjectMethods {
 }
 
 // wxGridUpdateLocker
-/// This small class can be used to prevent wxGrid from redrawing during its lifetime by calling wxGrid::BeginBatch() in its constructor and wxGrid::EndBatch() in its destructor.
+/// This trait represents C++ [`wxGridUpdateLocker`](https://docs.wxwidgets.org/3.2/classwx_grid_update_locker.html) class's methods and inheritance.
 ///
-/// [See `wxGridUpdateLocker`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_grid_update_locker.html)
+/// See [`GridUpdateLockerIsOwned`] documentation for the class usage.
 pub trait GridUpdateLockerMethods: WxRustMethods {
     // DTOR: fn ~wxGridUpdateLocker()
     /// This method can be called if the object had been constructed using the default constructor.

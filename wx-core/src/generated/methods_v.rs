@@ -1,9 +1,9 @@
 use super::*;
 
 // wxVListBox
-/// wxVListBox is a wxListBox-like control with the following two main differences from a regular wxListBox: it can have an arbitrarily huge number of items because it doesn't store them itself but uses the OnDrawItem() callback to draw them (so it is a virtual listbox) and its items can have variable height as determined by OnMeasureItem() (so it is also a listbox with the lines of variable height).
+/// This trait represents C++ [`wxVListBox`](https://docs.wxwidgets.org/3.2/classwx_v_list_box.html) class's methods and inheritance.
 ///
-/// [See `wxVListBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_v_list_box.html)
+/// See [`VListBoxIsOwned`] documentation for the class usage.
 pub trait VListBoxMethods: VScrolledWindowMethods {
     // DTOR: fn ~wxVListBox()
     /// Deletes all items from the control.
@@ -146,15 +146,15 @@ pub trait VListBoxMethods: VScrolledWindowMethods {
 }
 
 // wxVScrolledWindow
-/// In the name of this class, "V" may stand for "variable" because it can be used for scrolling rows of variable heights; "virtual", because it is not necessary to know the heights of all rows in advance  only those which are shown on the screen need to be measured; or even "vertical", because this class only supports scrolling vertically.
+/// This trait represents C++ [`wxVScrolledWindow`](https://docs.wxwidgets.org/3.2/classwx_v_scrolled_window.html) class's methods and inheritance.
 ///
-/// [See `wxVScrolledWindow`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_v_scrolled_window.html)
+/// See [`VScrolledWindowIsOwned`] documentation for the class usage.
 pub trait VScrolledWindowMethods: PanelMethods {}
 
 // wxValidator
-/// wxValidator is the base class for a family of validator classes that mediate between a class of control, and application data.
+/// This trait represents C++ [`wxValidator`](https://docs.wxwidgets.org/3.2/classwx_validator.html) class's methods and inheritance.
 ///
-/// [See `wxValidator`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_validator.html)
+/// See [`ValidatorIsOwned`] documentation for the class usage.
 pub trait ValidatorMethods: EvtHandlerMethods {
     // DTOR: fn ~wxValidator()
     /// All validator classes must implement the Clone() function, which returns an identical copy of itself.

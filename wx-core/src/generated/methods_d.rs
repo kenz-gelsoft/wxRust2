@@ -1,9 +1,9 @@
 use super::*;
 
 // wxDC
-/// A wxDC is a "device context" onto which graphics and text can be drawn.
+/// This trait represents C++ [`wxDC`](https://docs.wxwidgets.org/3.2/classwx_d_c.html) class's methods and inheritance.
 ///
-/// [See `wxDC`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c.html)
+/// See [`DCIsOwned`] documentation for the class usage.
 pub trait DCMethods: ObjectMethods {
     /// Convert device X coordinate to logical coordinate, using the current mapping mode, user scale factor, device origin and axis orientation.
     ///
@@ -1160,25 +1160,25 @@ pub trait DCMethods: ObjectMethods {
 }
 
 // wxDCBrushChanger
-/// wxDCBrushChanger is a small helper class for setting a brush on a wxDC and unsetting it automatically in the destructor, restoring the previous one.
+/// This trait represents C++ [`wxDCBrushChanger`](https://docs.wxwidgets.org/3.2/classwx_d_c_brush_changer.html) class's methods and inheritance.
 ///
-/// [See `wxDCBrushChanger`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c_brush_changer.html)
+/// See [`DCBrushChangerIsOwned`] documentation for the class usage.
 pub trait DCBrushChangerMethods: WxRustMethods {
     // DTOR: fn ~wxDCBrushChanger()
 }
 
 // wxDCClipper
-/// wxDCClipper is a helper class for setting a clipping region on a wxDC during its lifetime.
+/// This trait represents C++ [`wxDCClipper`](https://docs.wxwidgets.org/3.2/classwx_d_c_clipper.html) class's methods and inheritance.
 ///
-/// [See `wxDCClipper`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c_clipper.html)
+/// See [`DCClipperIsOwned`] documentation for the class usage.
 pub trait DCClipperMethods: WxRustMethods {
     // DTOR: fn ~wxDCClipper()
 }
 
 // wxDCFontChanger
-/// wxDCFontChanger is a small helper class for setting a font on a wxDC and unsetting it automatically in the destructor, restoring the previous one.
+/// This trait represents C++ [`wxDCFontChanger`](https://docs.wxwidgets.org/3.2/classwx_d_c_font_changer.html) class's methods and inheritance.
 ///
-/// [See `wxDCFontChanger`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c_font_changer.html)
+/// See [`DCFontChangerIsOwned`] documentation for the class usage.
 pub trait DCFontChangerMethods: WxRustMethods {
     /// Set the font to use.
     ///
@@ -1193,9 +1193,9 @@ pub trait DCFontChangerMethods: WxRustMethods {
 }
 
 // wxDCOverlay
-/// Connects an overlay with a drawing DC.
+/// This trait represents C++ [`wxDCOverlay`](https://docs.wxwidgets.org/3.2/classwx_d_c_overlay.html) class's methods and inheritance.
 ///
-/// [See `wxDCOverlay`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c_overlay.html)
+/// See [`DCOverlayIsOwned`] documentation for the class usage.
 pub trait DCOverlayMethods: WxRustMethods {
     // DTOR: fn ~wxDCOverlay()
     /// Clears the layer, restoring the state at the last init.
@@ -1207,17 +1207,17 @@ pub trait DCOverlayMethods: WxRustMethods {
 }
 
 // wxDCPenChanger
-/// wxDCPenChanger is a small helper class for setting a pen on a wxDC and unsetting it automatically in the destructor, restoring the previous one.
+/// This trait represents C++ [`wxDCPenChanger`](https://docs.wxwidgets.org/3.2/classwx_d_c_pen_changer.html) class's methods and inheritance.
 ///
-/// [See `wxDCPenChanger`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c_pen_changer.html)
+/// See [`DCPenChangerIsOwned`] documentation for the class usage.
 pub trait DCPenChangerMethods: WxRustMethods {
     // DTOR: fn ~wxDCPenChanger()
 }
 
 // wxDCTextColourChanger
-/// wxDCTextColourChanger is a small helper class for setting a foreground text colour on a wxDC and unsetting it automatically in the destructor, restoring the previous one.
+/// This trait represents C++ [`wxDCTextColourChanger`](https://docs.wxwidgets.org/3.2/classwx_d_c_text_colour_changer.html) class's methods and inheritance.
 ///
-/// [See `wxDCTextColourChanger`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c_text_colour_changer.html)
+/// See [`DCTextColourChangerIsOwned`] documentation for the class usage.
 pub trait DCTextColourChangerMethods: WxRustMethods {
     /// Set the colour to use.
     ///
@@ -1232,9 +1232,9 @@ pub trait DCTextColourChangerMethods: WxRustMethods {
 }
 
 // wxDataFormat
-/// A wxDataFormat is an encapsulation of a platform-specific format handle which is used by the system for the clipboard and drag and drop operations.
+/// This trait represents C++ [`wxDataFormat`](https://docs.wxwidgets.org/3.2/classwx_data_format.html) class's methods and inheritance.
 ///
-/// [See `wxDataFormat`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_format.html)
+/// See [`DataFormatIsOwned`] documentation for the class usage.
 pub trait DataFormatMethods: WxRustMethods {
     /// Returns the name of a custom format (this function will fail for a standard format).
     ///
@@ -1261,9 +1261,9 @@ pub trait DataFormatMethods: WxRustMethods {
 }
 
 // wxDataObject
-/// A wxDataObject represents data that can be copied to or from the clipboard, or dragged and dropped.
+/// This trait represents C++ [`wxDataObject`](https://docs.wxwidgets.org/3.2/classwx_data_object.html) class's methods and inheritance.
 ///
-/// [See `wxDataObject`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_object.html)
+/// See [`DataObjectIsOwned`] documentation for the class usage.
 pub trait DataObjectMethods: WxRustMethods {
     // DTOR: fn ~wxDataObject()
     // NOT_SUPPORTED: fn GetAllFormats()
@@ -1300,9 +1300,9 @@ pub trait DataObjectMethods: WxRustMethods {
 }
 
 // wxDataObjectComposite
-/// wxDataObjectComposite is the simplest wxDataObject derivation which may be used to support multiple formats.
+/// This trait represents C++ [`wxDataObjectComposite`](https://docs.wxwidgets.org/3.2/classwx_data_object_composite.html) class's methods and inheritance.
 ///
-/// [See `wxDataObjectComposite`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_object_composite.html)
+/// See [`DataObjectCompositeIsOwned`] documentation for the class usage.
 pub trait DataObjectCompositeMethods: DataObjectMethods {
     /// Adds the dataObject to the list of supported objects and it becomes the preferred object if preferred is true.
     ///
@@ -1326,9 +1326,9 @@ pub trait DataObjectCompositeMethods: DataObjectMethods {
 }
 
 // wxDataObjectSimple
-/// This is the simplest possible implementation of the wxDataObject class.
+/// This trait represents C++ [`wxDataObjectSimple`](https://docs.wxwidgets.org/3.2/classwx_data_object_simple.html) class's methods and inheritance.
 ///
-/// [See `wxDataObjectSimple`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_object_simple.html)
+/// See [`DataObjectSimpleIsOwned`] documentation for the class usage.
 pub trait DataObjectSimpleMethods: DataObjectMethods {
     /// Copy the data to the buffer, return true on success.
     ///
@@ -1361,9 +1361,9 @@ pub trait DataObjectSimpleMethods: DataObjectMethods {
 }
 
 // wxDataViewBitmapRenderer
-/// This class is used by wxDataViewCtrl to render bitmaps.
+/// This trait represents C++ [`wxDataViewBitmapRenderer`](https://docs.wxwidgets.org/3.2/classwx_data_view_bitmap_renderer.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewBitmapRenderer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_bitmap_renderer.html)
+/// See [`DataViewBitmapRendererIsOwned`] documentation for the class usage.
 pub trait DataViewBitmapRendererMethods: DataViewRendererMethods {
     /// Returns the wxVariant type used with this renderer.
     ///
@@ -1374,15 +1374,15 @@ pub trait DataViewBitmapRendererMethods: DataViewRendererMethods {
 }
 
 // wxDataViewChoiceByIndexRenderer
-/// A wxDataViewCtrl renderer using wxChoice control and indexes into it.
+/// This trait represents C++ [`wxDataViewChoiceByIndexRenderer`](https://docs.wxwidgets.org/3.2/classwx_data_view_choice_by_index_renderer.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewChoiceByIndexRenderer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_choice_by_index_renderer.html)
+/// See [`DataViewChoiceByIndexRendererIsOwned`] documentation for the class usage.
 pub trait DataViewChoiceByIndexRendererMethods: DataViewChoiceRendererMethods {}
 
 // wxDataViewChoiceRenderer
-/// A wxDataViewCtrl renderer using wxChoice control and values of strings in it.
+/// This trait represents C++ [`wxDataViewChoiceRenderer`](https://docs.wxwidgets.org/3.2/classwx_data_view_choice_renderer.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewChoiceRenderer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_choice_renderer.html)
+/// See [`DataViewChoiceRendererIsOwned`] documentation for the class usage.
 pub trait DataViewChoiceRendererMethods: DataViewRendererMethods {
     /// Returns the choice referred to by index.
     ///
@@ -1407,9 +1407,9 @@ pub trait DataViewChoiceRendererMethods: DataViewRendererMethods {
 }
 
 // wxDataViewColumn
-/// This class represents a column in a wxDataViewCtrl.
+/// This trait represents C++ [`wxDataViewColumn`](https://docs.wxwidgets.org/3.2/classwx_data_view_column.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewColumn`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_column.html)
+/// See [`DataViewColumnIsOwned`] documentation for the class usage.
 pub trait DataViewColumnMethods: SettableHeaderColumnMethods {
     /// Returns the index of the column of the model, which this wxDataViewColumn is displaying.
     ///
@@ -1432,9 +1432,9 @@ pub trait DataViewColumnMethods: SettableHeaderColumnMethods {
 }
 
 // wxDataViewCtrl
-/// wxDataViewCtrl is a control to display data either in a tree like fashion or in a tabular form or both.
+/// This trait represents C++ [`wxDataViewCtrl`](https://docs.wxwidgets.org/3.2/classwx_data_view_ctrl.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_ctrl.html)
+/// See [`DataViewCtrlIsOwned`] documentation for the class usage.
 pub trait DataViewCtrlMethods: ControlMethods {
     // DTOR: fn ~wxDataViewCtrl()
     /// Call to allow using multiple columns for sorting.
@@ -1883,9 +1883,9 @@ pub trait DataViewCtrlMethods: ControlMethods {
 }
 
 // wxDataViewCustomRenderer
-/// You need to derive a new class from wxDataViewCustomRenderer in order to write a new renderer.
+/// This trait represents C++ [`wxDataViewCustomRenderer`](https://docs.wxwidgets.org/3.2/classwx_data_view_custom_renderer.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewCustomRenderer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_custom_renderer.html)
+/// See [`DataViewCustomRendererIsOwned`] documentation for the class usage.
 pub trait DataViewCustomRendererMethods: DataViewRendererMethods {
     /// Returns the wxVariant type used with this renderer.
     ///
@@ -1979,9 +1979,9 @@ pub trait DataViewCustomRendererMethods: DataViewRendererMethods {
 }
 
 // wxDataViewDateRenderer
-/// This class is used by wxDataViewCtrl to render calendar controls.
+/// This trait represents C++ [`wxDataViewDateRenderer`](https://docs.wxwidgets.org/3.2/classwx_data_view_date_renderer.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewDateRenderer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_date_renderer.html)
+/// See [`DataViewDateRendererIsOwned`] documentation for the class usage.
 pub trait DataViewDateRendererMethods: DataViewRendererMethods {
     /// Returns the wxVariant type used with this renderer.
     ///
@@ -1992,9 +1992,9 @@ pub trait DataViewDateRendererMethods: DataViewRendererMethods {
 }
 
 // wxDataViewEvent
-/// This is the event class for the wxDataViewCtrl notifications.
+/// This trait represents C++ [`wxDataViewEvent`](https://docs.wxwidgets.org/3.2/classwx_data_view_event.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_event.html)
+/// See [`DataViewEventIsOwned`] documentation for the class usage.
 pub trait DataViewEventMethods: NotifyEventMethods {
     /// Returns the position of the column in the control or -1 if column field is unavailable for this event.
     ///
@@ -2147,9 +2147,9 @@ pub trait DataViewEventMethods: NotifyEventMethods {
 }
 
 // wxDataViewIconText
-/// wxDataViewIconText is used by wxDataViewIconTextRenderer for data transfer.
+/// This trait represents C++ [`wxDataViewIconText`](https://docs.wxwidgets.org/3.2/classwx_data_view_icon_text.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewIconText`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_icon_text.html)
+/// See [`DataViewIconTextIsOwned`] documentation for the class usage.
 pub trait DataViewIconTextMethods: ObjectMethods {
     /// Gets the associated image.
     ///
@@ -2202,9 +2202,9 @@ pub trait DataViewIconTextMethods: ObjectMethods {
 }
 
 // wxDataViewIconTextRenderer
-/// The wxDataViewIconTextRenderer class is used to display text with a small icon next to it as it is typically done in a file manager.
+/// This trait represents C++ [`wxDataViewIconTextRenderer`](https://docs.wxwidgets.org/3.2/classwx_data_view_icon_text_renderer.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewIconTextRenderer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_icon_text_renderer.html)
+/// See [`DataViewIconTextRendererIsOwned`] documentation for the class usage.
 pub trait DataViewIconTextRendererMethods: DataViewRendererMethods {
     /// Returns the wxVariant type used with this renderer.
     ///
@@ -2215,9 +2215,9 @@ pub trait DataViewIconTextRendererMethods: DataViewRendererMethods {
 }
 
 // wxDataViewIndexListModel
-/// wxDataViewIndexListModel is a specialized data model which lets you address an item by its position (row) rather than its wxDataViewItem (which you can obtain from this class).
+/// This trait represents C++ [`wxDataViewIndexListModel`](https://docs.wxwidgets.org/3.2/classwx_data_view_index_list_model.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewIndexListModel`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_index_list_model.html)
+/// See [`DataViewIndexListModelIsOwned`] documentation for the class usage.
 pub trait DataViewIndexListModelMethods: DataViewListModelMethods {
     /// Returns the wxDataViewItem at the given row.
     ///
@@ -2279,9 +2279,9 @@ pub trait DataViewIndexListModelMethods: DataViewListModelMethods {
 }
 
 // wxDataViewItem
-/// wxDataViewItem is a small opaque class that represents an item in a wxDataViewCtrl in a persistent way, i.e.
+/// This trait represents C++ [`wxDataViewItem`](https://docs.wxwidgets.org/3.2/classwx_data_view_item.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewItem`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_item.html)
+/// See [`DataViewItemIsOwned`] documentation for the class usage.
 pub trait DataViewItemMethods: WxRustMethods {
     /// Returns the ID.
     ///
@@ -2298,9 +2298,9 @@ pub trait DataViewItemMethods: WxRustMethods {
 }
 
 // wxDataViewItemAttr
-/// This class is used to indicate to a wxDataViewCtrl that a certain item (see wxDataViewItem) has extra font attributes for its renderer.
+/// This trait represents C++ [`wxDataViewItemAttr`](https://docs.wxwidgets.org/3.2/classwx_data_view_item_attr.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewItemAttr`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_item_attr.html)
+/// See [`DataViewItemAttrIsOwned`] documentation for the class usage.
 pub trait DataViewItemAttrMethods: WxRustMethods {
     /// Call this to indicate that the item shall be displayed in bold text.
     ///
@@ -2403,9 +2403,9 @@ pub trait DataViewItemAttrMethods: WxRustMethods {
 }
 
 // wxDataViewListCtrl
-/// This class is a wxDataViewCtrl which internally uses a wxDataViewListStore and forwards most of its API to that class.
+/// This trait represents C++ [`wxDataViewListCtrl`](https://docs.wxwidgets.org/3.2/classwx_data_view_list_ctrl.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewListCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_list_ctrl.html)
+/// See [`DataViewListCtrlIsOwned`] documentation for the class usage.
 pub trait DataViewListCtrlMethods: DataViewCtrlMethods {
     /// Returns index of the selected row or wxNOT_FOUND.
     ///
@@ -2536,9 +2536,9 @@ pub trait DataViewListCtrlMethods: DataViewCtrlMethods {
 }
 
 // wxDataViewListModel
-/// Base class with abstract API for wxDataViewIndexListModel and wxDataViewVirtualListModel.
+/// This trait represents C++ [`wxDataViewListModel`](https://docs.wxwidgets.org/3.2/classwx_data_view_list_model.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewListModel`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_list_model.html)
+/// See [`DataViewListModelIsOwned`] documentation for the class usage.
 pub trait DataViewListModelMethods: DataViewModelMethods {
     // DTOR: fn ~wxDataViewListModel()
     /// Override this to indicate that the row has special font attributes.
@@ -2591,9 +2591,9 @@ pub trait DataViewListModelMethods: DataViewModelMethods {
 }
 
 // wxDataViewListStore
-/// wxDataViewListStore is a specialised wxDataViewModel for storing a simple table of data.
+/// This trait represents C++ [`wxDataViewListStore`](https://docs.wxwidgets.org/3.2/classwx_data_view_list_store.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewListStore`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_list_store.html)
+/// See [`DataViewListStoreIsOwned`] documentation for the class usage.
 pub trait DataViewListStoreMethods: DataViewIndexListModelMethods {
     // DTOR: fn ~wxDataViewListStore()
     /// Prepends a data column.
@@ -2647,9 +2647,9 @@ pub trait DataViewListStoreMethods: DataViewIndexListModelMethods {
 }
 
 // wxDataViewModel
-/// wxDataViewModel is the base class for all data model to be displayed by a wxDataViewCtrl.
+/// This trait represents C++ [`wxDataViewModel`](https://docs.wxwidgets.org/3.2/classwx_data_view_model.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewModel`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_model.html)
+/// See [`DataViewModelIsOwned`] documentation for the class usage.
 pub trait DataViewModelMethods: RefCounterMethods {
     /// Adds a wxDataViewModelNotifier to the model.
     ///
@@ -2890,9 +2890,9 @@ pub trait DataViewModelMethods: RefCounterMethods {
 }
 
 // wxDataViewModelNotifier
-/// A wxDataViewModelNotifier instance is owned by a wxDataViewModel and mirrors its notification interface.
+/// This trait represents C++ [`wxDataViewModelNotifier`](https://docs.wxwidgets.org/3.2/classwx_data_view_model_notifier.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewModelNotifier`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_model_notifier.html)
+/// See [`DataViewModelNotifierIsOwned`] documentation for the class usage.
 pub trait DataViewModelNotifierMethods: WxRustMethods {
     // DTOR: fn ~wxDataViewModelNotifier()
     /// Called by owning model.
@@ -2998,9 +2998,9 @@ pub trait DataViewModelNotifierMethods: WxRustMethods {
 }
 
 // wxDataViewProgressRenderer
-/// This class is used by wxDataViewCtrl to render progress bars.
+/// This trait represents C++ [`wxDataViewProgressRenderer`](https://docs.wxwidgets.org/3.2/classwx_data_view_progress_renderer.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewProgressRenderer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_progress_renderer.html)
+/// See [`DataViewProgressRendererIsOwned`] documentation for the class usage.
 pub trait DataViewProgressRendererMethods: DataViewRendererMethods {
     /// Returns the wxVariant type used with this renderer.
     ///
@@ -3011,9 +3011,9 @@ pub trait DataViewProgressRendererMethods: DataViewRendererMethods {
 }
 
 // wxDataViewRenderer
-/// This class is used by wxDataViewCtrl to render the individual cells.
+/// This trait represents C++ [`wxDataViewRenderer`](https://docs.wxwidgets.org/3.2/classwx_data_view_renderer.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewRenderer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_renderer.html)
+/// See [`DataViewRendererIsOwned`] documentation for the class usage.
 pub trait DataViewRendererMethods: ObjectMethods {
     /// Enable or disable replacing parts of the item text with ellipsis to make it fit the column width.
     ///
@@ -3145,15 +3145,15 @@ pub trait DataViewRendererMethods: ObjectMethods {
 }
 
 // wxDataViewSpinRenderer
-/// This is a specialized renderer for rendering integer values.
+/// This trait represents C++ [`wxDataViewSpinRenderer`](https://docs.wxwidgets.org/3.2/classwx_data_view_spin_renderer.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewSpinRenderer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_spin_renderer.html)
+/// See [`DataViewSpinRendererIsOwned`] documentation for the class usage.
 pub trait DataViewSpinRendererMethods: DataViewCustomRendererMethods {}
 
 // wxDataViewTextRenderer
-/// wxDataViewTextRenderer is used for rendering text.
+/// This trait represents C++ [`wxDataViewTextRenderer`](https://docs.wxwidgets.org/3.2/classwx_data_view_text_renderer.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewTextRenderer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_text_renderer.html)
+/// See [`DataViewTextRendererIsOwned`] documentation for the class usage.
 pub trait DataViewTextRendererMethods: DataViewRendererMethods {
     /// Returns the wxVariant type used with this renderer.
     ///
@@ -3170,9 +3170,9 @@ pub trait DataViewTextRendererMethods: DataViewRendererMethods {
 }
 
 // wxDataViewToggleRenderer
-/// This class is used by wxDataViewCtrl to render toggle controls.
+/// This trait represents C++ [`wxDataViewToggleRenderer`](https://docs.wxwidgets.org/3.2/classwx_data_view_toggle_renderer.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewToggleRenderer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_toggle_renderer.html)
+/// See [`DataViewToggleRendererIsOwned`] documentation for the class usage.
 pub trait DataViewToggleRendererMethods: DataViewRendererMethods {
     /// Returns the wxVariant type used with this renderer.
     ///
@@ -3189,9 +3189,9 @@ pub trait DataViewToggleRendererMethods: DataViewRendererMethods {
 }
 
 // wxDataViewTreeCtrl
-/// This class is a wxDataViewCtrl which internally uses a wxDataViewTreeStore and forwards most of its API to that class.
+/// This trait represents C++ [`wxDataViewTreeCtrl`](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_ctrl.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewTreeCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_ctrl.html)
+/// See [`DataViewTreeCtrlIsOwned`] documentation for the class usage.
 pub trait DataViewTreeCtrlMethods: DataViewCtrlMethods {
     // DTOR: fn ~wxDataViewTreeCtrl()
     /// Appends a container to the given parent.
@@ -3565,9 +3565,9 @@ pub trait DataViewTreeCtrlMethods: DataViewCtrlMethods {
 }
 
 // wxDataViewTreeStore
-/// wxDataViewTreeStore is a specialised wxDataViewModel for storing simple trees very much like wxTreeCtrl does and it offers a similar API.
+/// This trait represents C++ [`wxDataViewTreeStore`](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_store.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewTreeStore`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_store.html)
+/// See [`DataViewTreeStoreIsOwned`] documentation for the class usage.
 pub trait DataViewTreeStoreMethods: DataViewModelMethods {
     // DTOR: fn ~wxDataViewTreeStore()
     /// Append a container.
@@ -3903,9 +3903,9 @@ pub trait DataViewTreeStoreMethods: DataViewModelMethods {
 }
 
 // wxDataViewVirtualListModel
-/// wxDataViewVirtualListModel is a specialized data model which lets you address an item by its position (row) rather than its wxDataViewItem and as such offers the exact same interface as wxDataViewIndexListModel.
+/// This trait represents C++ [`wxDataViewVirtualListModel`](https://docs.wxwidgets.org/3.2/classwx_data_view_virtual_list_model.html) class's methods and inheritance.
 ///
-/// [See `wxDataViewVirtualListModel`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_virtual_list_model.html)
+/// See [`DataViewVirtualListModelIsOwned`] documentation for the class usage.
 pub trait DataViewVirtualListModelMethods: DataViewListModelMethods {
     /// Returns the wxDataViewItem at the given row.
     ///
@@ -3969,9 +3969,9 @@ pub trait DataViewVirtualListModelMethods: DataViewListModelMethods {
 }
 
 // wxDateEvent
-/// This event class holds information about a date change and is used together with wxDatePickerCtrl.
+/// This trait represents C++ [`wxDateEvent`](https://docs.wxwidgets.org/3.2/classwx_date_event.html) class's methods and inheritance.
 ///
-/// [See `wxDateEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_date_event.html)
+/// See [`DateEventIsOwned`] documentation for the class usage.
 pub trait DateEventMethods: CommandEventMethods {
     /// Returns the date.
     ///
@@ -3991,9 +3991,9 @@ pub trait DateEventMethods: CommandEventMethods {
 }
 
 // wxDatePickerCtrl
-/// This control allows the user to select a date.
+/// This trait represents C++ [`wxDatePickerCtrl`](https://docs.wxwidgets.org/3.2/classwx_date_picker_ctrl.html) class's methods and inheritance.
 ///
-/// [See `wxDatePickerCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_date_picker_ctrl.html)
+/// See [`DatePickerCtrlIsOwned`] documentation for the class usage.
 pub trait DatePickerCtrlMethods: ControlMethods {
     /// Create the control window.
     ///
@@ -4097,15 +4097,15 @@ pub trait DatePickerCtrlMethods: ControlMethods {
 }
 
 // wxDelegateRendererNative
-/// wxDelegateRendererNative allows reuse of renderers code by forwarding all the wxRendererNative methods to the given object and thus allowing you to only modify some of its methods  without having to reimplement all of them.
+/// This trait represents C++ [`wxDelegateRendererNative`](https://docs.wxwidgets.org/3.2/classwx_delegate_renderer_native.html) class's methods and inheritance.
 ///
-/// [See `wxDelegateRendererNative`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_delegate_renderer_native.html)
+/// See [`DelegateRendererNativeIsOwned`] documentation for the class usage.
 pub trait DelegateRendererNativeMethods: RendererNativeMethods {}
 
 // wxDialog
-/// A dialog box is a window with a title bar and sometimes a system menu, which can be moved around the screen.
+/// This trait represents C++ [`wxDialog`](https://docs.wxwidgets.org/3.2/classwx_dialog.html) class's methods and inheritance.
 ///
-/// [See `wxDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_dialog.html)
+/// See [`DialogIsOwned`] documentation for the class usage.
 pub trait DialogMethods: TopLevelWindowMethods {
     // DTOR: fn ~wxDialog()
     /// Adds an identifier to be regarded as a main button for the non-scrolling area of a dialog.
@@ -4327,9 +4327,9 @@ pub trait DialogMethods: TopLevelWindowMethods {
 }
 
 // wxDialogLayoutAdapter
-/// This abstract class is the base for classes that help wxWidgets perform run-time layout adaptation of dialogs.
+/// This trait represents C++ [`wxDialogLayoutAdapter`](https://docs.wxwidgets.org/3.2/classwx_dialog_layout_adapter.html) class's methods and inheritance.
 ///
-/// [See `wxDialogLayoutAdapter`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_dialog_layout_adapter.html)
+/// See [`DialogLayoutAdapterIsOwned`] documentation for the class usage.
 pub trait DialogLayoutAdapterMethods: WxRustMethods {
     /// Override this to returns true if adaptation can and should be done.
     ///
@@ -4358,9 +4358,9 @@ pub trait DialogLayoutAdapterMethods: WxRustMethods {
 }
 
 // wxDirDialog
-/// This class represents the directory chooser dialog.
+/// This trait represents C++ [`wxDirDialog`](https://docs.wxwidgets.org/3.2/classwx_dir_dialog.html) class's methods and inheritance.
 ///
-/// [See `wxDirDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_dir_dialog.html)
+/// See [`DirDialogIsOwned`] documentation for the class usage.
 pub trait DirDialogMethods: DialogMethods {
     // DTOR: fn ~wxDirDialog()
     /// Returns the message that will be displayed on the dialog.
@@ -4407,9 +4407,9 @@ pub trait DirDialogMethods: DialogMethods {
 }
 
 // wxDirPickerCtrl
-/// This control allows the user to select a directory.
+/// This trait represents C++ [`wxDirPickerCtrl`](https://docs.wxwidgets.org/3.2/classwx_dir_picker_ctrl.html) class's methods and inheritance.
 ///
-/// [See `wxDirPickerCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_dir_picker_ctrl.html)
+/// See [`DirPickerCtrlIsOwned`] documentation for the class usage.
 pub trait DirPickerCtrlMethods: PickerBaseMethods {
     /// Creates the widgets with the given parameters.
     ///
@@ -4498,9 +4498,9 @@ pub trait DirPickerCtrlMethods: PickerBaseMethods {
 }
 
 // wxDisplay
-/// Determines the sizes and locations of displays connected to the system.
+/// This trait represents C++ [`wxDisplay`](https://docs.wxwidgets.org/3.2/classwx_display.html) class's methods and inheritance.
 ///
-/// [See `wxDisplay`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_display.html)
+/// See [`DisplayIsOwned`] documentation for the class usage.
 pub trait DisplayMethods: WxRustMethods {
     // DTOR: fn ~wxDisplay()
     /// Changes the video mode of this display to the mode specified in the mode parameter.
@@ -4589,15 +4589,15 @@ pub trait DisplayMethods: WxRustMethods {
 }
 
 // wxDisplayChangedEvent
-/// A display changed event is sent to top-level windows when the display resolution has changed.
+/// This trait represents C++ [`wxDisplayChangedEvent`](https://docs.wxwidgets.org/3.2/classwx_display_changed_event.html) class's methods and inheritance.
 ///
-/// [See `wxDisplayChangedEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_display_changed_event.html)
+/// See [`DisplayChangedEventIsOwned`] documentation for the class usage.
 pub trait DisplayChangedEventMethods: EventMethods {}
 
 // wxDragImage
-/// This class is used when you wish to drag an object on the screen, and a simple cursor is not enough.
+/// This trait represents C++ [`wxDragImage`](https://docs.wxwidgets.org/3.2/classwx_drag_image.html) class's methods and inheritance.
 ///
-/// [See `wxDragImage`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_drag_image.html)
+/// See [`DragImageIsOwned`] documentation for the class usage.
 pub trait DragImageMethods: ObjectMethods {
     /// Start dragging the image, in a window or full screen.
     ///
@@ -4722,9 +4722,9 @@ pub trait DragImageMethods: ObjectMethods {
 }
 
 // wxDropFilesEvent
-/// This class is used for drop files events, that is, when files have been dropped onto the window.
+/// This trait represents C++ [`wxDropFilesEvent`](https://docs.wxwidgets.org/3.2/classwx_drop_files_event.html) class's methods and inheritance.
 ///
-/// [See `wxDropFilesEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_drop_files_event.html)
+/// See [`DropFilesEventIsOwned`] documentation for the class usage.
 pub trait DropFilesEventMethods: EventMethods {
     // BLOCKED: fn GetFiles()
     /// Returns the number of files dropped.
@@ -4742,9 +4742,9 @@ pub trait DropFilesEventMethods: EventMethods {
 }
 
 // wxDropSource
-/// This class represents a source for a drag and drop operation.
+/// This trait represents C++ [`wxDropSource`](https://docs.wxwidgets.org/3.2/classwx_drop_source.html) class's methods and inheritance.
 ///
-/// [See `wxDropSource`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_drop_source.html)
+/// See [`DropSourceIsOwned`] documentation for the class usage.
 pub trait DropSourceMethods: WxRustMethods {
     // NOT_SUPPORTED: fn DoDragDrop()
     /// Returns the wxDataObject object that has been assigned previously.
@@ -4768,9 +4768,9 @@ pub trait DropSourceMethods: WxRustMethods {
 }
 
 // wxDropTarget
-/// This class represents a target for a drag and drop operation.
+/// This trait represents C++ [`wxDropTarget`](https://docs.wxwidgets.org/3.2/classwx_drop_target.html) class's methods and inheritance.
 ///
-/// [See `wxDropTarget`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_drop_target.html)
+/// See [`DropTargetIsOwned`] documentation for the class usage.
 pub trait DropTargetMethods: WxRustMethods {
     // DTOR: fn ~wxDropTarget()
     /// This method may only be called from within OnData().

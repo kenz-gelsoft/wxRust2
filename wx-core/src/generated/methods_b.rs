@@ -1,9 +1,9 @@
 use super::*;
 
 // wxBannerWindow
-/// A simple banner window showing either a bitmap or text.
+/// This trait represents C++ [`wxBannerWindow`](https://docs.wxwidgets.org/3.2/classwx_banner_window.html) class's methods and inheritance.
 ///
-/// [See `wxBannerWindow`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_banner_window.html)
+/// See [`BannerWindowIsOwned`] documentation for the class usage.
 pub trait BannerWindowMethods: WindowMethods {
     /// Really create the banner window for the objects created using the default constructor.
     ///
@@ -64,9 +64,9 @@ pub trait BannerWindowMethods: WindowMethods {
 }
 
 // wxBitmap
-/// This class encapsulates the concept of a platform-dependent bitmap, either monochrome or colour or colour with alpha channel support.
+/// This trait represents C++ [`wxBitmap`](https://docs.wxwidgets.org/3.2/classwx_bitmap.html) class's methods and inheritance.
 ///
-/// [See `wxBitmap`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap.html)
+/// See [`BitmapIsOwned`] documentation for the class usage.
 pub trait BitmapMethods: GDIObjectMethods {
     // DTOR: fn ~wxBitmap()
     // NOT_SUPPORTED: fn ConvertToDisabled()
@@ -376,9 +376,9 @@ pub trait BitmapMethods: GDIObjectMethods {
 }
 
 // wxBitmapBundle
-/// Contains representations of the same bitmap in different resolutions.
+/// This trait represents C++ [`wxBitmapBundle`](https://docs.wxwidgets.org/3.2/classwx_bitmap_bundle.html) class's methods and inheritance.
 ///
-/// [See `wxBitmapBundle`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap_bundle.html)
+/// See [`BitmapBundleIsOwned`] documentation for the class usage.
 pub trait BitmapBundleMethods: WxRustMethods {
     // BLOCKED: fn operator=()
     /// Clear the existing bundle contents.
@@ -607,9 +607,9 @@ pub trait BitmapBundleMethods: WxRustMethods {
 }
 
 // wxBitmapButton
-/// A bitmap button is a control that contains a bitmap.
+/// This trait represents C++ [`wxBitmapButton`](https://docs.wxwidgets.org/3.2/classwx_bitmap_button.html) class's methods and inheritance.
 ///
-/// [See `wxBitmapButton`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap_button.html)
+/// See [`BitmapButtonIsOwned`] documentation for the class usage.
 pub trait BitmapButtonMethods: ButtonMethods {
     /// Button creation function for two-step creation.
     ///
@@ -695,9 +695,9 @@ pub trait BitmapButtonMethods: ButtonMethods {
 }
 
 // wxBitmapComboBox
-/// A combobox that displays bitmap in front of the list items.
+/// This trait represents C++ [`wxBitmapComboBox`](https://docs.wxwidgets.org/3.2/classwx_bitmap_combo_box.html) class's methods and inheritance.
 ///
-/// [See `wxBitmapComboBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap_combo_box.html)
+/// See [`BitmapComboBoxIsOwned`] documentation for the class usage.
 pub trait BitmapComboBoxMethods: ComboBoxMethods {
     // DTOR: fn ~wxBitmapComboBox()
     /// Adds the item to the end of the combo box.
@@ -820,9 +820,9 @@ pub trait BitmapComboBoxMethods: ComboBoxMethods {
 }
 
 // wxBitmapDataObject
-/// wxBitmapDataObject is a specialization of wxDataObject for bitmap data.
+/// This trait represents C++ [`wxBitmapDataObject`](https://docs.wxwidgets.org/3.2/classwx_bitmap_data_object.html) class's methods and inheritance.
 ///
-/// [See `wxBitmapDataObject`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap_data_object.html)
+/// See [`BitmapDataObjectIsOwned`] documentation for the class usage.
 pub trait BitmapDataObjectMethods: DataObjectSimpleMethods {
     /// Returns the bitmap associated with the data object.
     ///
@@ -842,9 +842,9 @@ pub trait BitmapDataObjectMethods: DataObjectSimpleMethods {
 }
 
 // wxBitmapHandler
-/// This is the base class for implementing bitmap file loading/saving, and bitmap creation from data.
+/// This trait represents C++ [`wxBitmapHandler`](https://docs.wxwidgets.org/3.2/classwx_bitmap_handler.html) class's methods and inheritance.
 ///
-/// [See `wxBitmapHandler`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap_handler.html)
+/// See [`BitmapHandlerIsOwned`] documentation for the class usage.
 pub trait BitmapHandlerMethods: ObjectMethods {
     // DTOR: fn ~wxBitmapHandler()
     // NOT_SUPPORTED: fn Create()
@@ -887,9 +887,9 @@ pub trait BitmapHandlerMethods: ObjectMethods {
 }
 
 // wxBitmapToggleButton
-/// wxBitmapToggleButton is a wxToggleButton that contains a bitmap instead of text.
+/// This trait represents C++ [`wxBitmapToggleButton`](https://docs.wxwidgets.org/3.2/classwx_bitmap_toggle_button.html) class's methods and inheritance.
 ///
-/// [See `wxBitmapToggleButton`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_bitmap_toggle_button.html)
+/// See [`BitmapToggleButtonIsOwned`] documentation for the class usage.
 pub trait BitmapToggleButtonMethods: ToggleButtonMethods {
     /// Create method for two-step construction.
     ///
@@ -938,9 +938,9 @@ pub trait BitmapToggleButtonMethods: ToggleButtonMethods {
 }
 
 // wxBookCtrlBase
-/// A book control is a convenient way of displaying multiple pages of information, displayed one page at a time.
+/// This trait represents C++ [`wxBookCtrlBase`](https://docs.wxwidgets.org/3.2/classwx_book_ctrl_base.html) class's methods and inheritance.
 ///
-/// [See `wxBookCtrlBase`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_book_ctrl_base.html)
+/// See [`BookCtrlBaseIsOwned`] documentation for the class usage.
 pub trait BookCtrlBaseMethods: ControlMethods {
     /// Returns the image index for the given page.
     ///
@@ -1104,9 +1104,9 @@ pub trait BookCtrlBaseMethods: ControlMethods {
 }
 
 // wxBookCtrlEvent
-/// This class represents the events generated by book controls (wxNotebook, wxListbook, wxChoicebook, wxTreebook, wxAuiNotebook).
+/// This trait represents C++ [`wxBookCtrlEvent`](https://docs.wxwidgets.org/3.2/classwx_book_ctrl_event.html) class's methods and inheritance.
 ///
-/// [See `wxBookCtrlEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_book_ctrl_event.html)
+/// See [`BookCtrlEventIsOwned`] documentation for the class usage.
 pub trait BookCtrlEventMethods: NotifyEventMethods {
     /// Returns the page that was selected before the change, wxNOT_FOUND if none was selected.
     ///
@@ -1129,9 +1129,9 @@ pub trait BookCtrlEventMethods: NotifyEventMethods {
 }
 
 // wxBoxSizer
-/// The basic idea behind a box sizer is that windows will most often be laid out in rather simple basic geometry, typically in a row or a column or several hierarchies of either.
+/// This trait represents C++ [`wxBoxSizer`](https://docs.wxwidgets.org/3.2/classwx_box_sizer.html) class's methods and inheritance.
 ///
-/// [See `wxBoxSizer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_box_sizer.html)
+/// See [`BoxSizerIsOwned`] documentation for the class usage.
 pub trait BoxSizerMethods: SizerMethods {
     /// Returns the orientation of the box sizer, either wxVERTICAL or wxHORIZONTAL.
     ///
@@ -1148,9 +1148,9 @@ pub trait BoxSizerMethods: SizerMethods {
 }
 
 // wxBrush
-/// A brush is a drawing tool for filling in areas.
+/// This trait represents C++ [`wxBrush`](https://docs.wxwidgets.org/3.2/classwx_brush.html) class's methods and inheritance.
 ///
-/// [See `wxBrush`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_brush.html)
+/// See [`BrushIsOwned`] documentation for the class usage.
 pub trait BrushMethods: GDIObjectMethods {
     // DTOR: fn ~wxBrush()
     /// Returns a reference to the brush colour.
@@ -1215,17 +1215,17 @@ pub trait BrushMethods: GDIObjectMethods {
 }
 
 // wxBrushList
-/// A brush list is a list containing all brushes which have been created.
+/// This trait represents C++ [`wxBrushList`](https://docs.wxwidgets.org/3.2/classwx_brush_list.html) class's methods and inheritance.
 ///
-/// [See `wxBrushList`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_brush_list.html)
+/// See [`BrushListIsOwned`] documentation for the class usage.
 pub trait BrushListMethods: WxRustMethods {
     // NOT_SUPPORTED: fn FindOrCreateBrush()
 }
 
 // wxBufferedDC
-/// This class provides a simple way to avoid flicker: when drawing on it, everything is in fact first drawn on an in-memory buffer (a wxBitmap) and then copied to the screen, using the associated wxDC, only once, when this object is destroyed.
+/// This trait represents C++ [`wxBufferedDC`](https://docs.wxwidgets.org/3.2/classwx_buffered_d_c.html) class's methods and inheritance.
 ///
-/// [See `wxBufferedDC`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_buffered_d_c.html)
+/// See [`BufferedDCIsOwned`] documentation for the class usage.
 pub trait BufferedDCMethods: MemoryDCMethods {
     // DTOR: fn ~wxBufferedDC()
     /// Initializes the object created using the default constructor.
@@ -1279,25 +1279,25 @@ pub trait BufferedDCMethods: MemoryDCMethods {
 }
 
 // wxBufferedPaintDC
-/// This is a subclass of wxBufferedDC which can be used inside of an EVT_PAINT() event handler to achieve double-buffered drawing.
+/// This trait represents C++ [`wxBufferedPaintDC`](https://docs.wxwidgets.org/3.2/classwx_buffered_paint_d_c.html) class's methods and inheritance.
 ///
-/// [See `wxBufferedPaintDC`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_buffered_paint_d_c.html)
+/// See [`BufferedPaintDCIsOwned`] documentation for the class usage.
 pub trait BufferedPaintDCMethods: BufferedDCMethods {
     // DTOR: fn ~wxBufferedPaintDC()
 }
 
 // wxBusyCursor
-/// This class makes it easy to tell your user that the program is temporarily busy.
+/// This trait represents C++ [`wxBusyCursor`](https://docs.wxwidgets.org/3.2/classwx_busy_cursor.html) class's methods and inheritance.
 ///
-/// [See `wxBusyCursor`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_busy_cursor.html)
+/// See [`BusyCursorIsOwned`] documentation for the class usage.
 pub trait BusyCursorMethods: WxRustMethods {
     // DTOR: fn ~wxBusyCursor()
 }
 
 // wxBusyInfo
-/// This class makes it easy to tell your user that the program is temporarily busy.
+/// This trait represents C++ [`wxBusyInfo`](https://docs.wxwidgets.org/3.2/classwx_busy_info.html) class's methods and inheritance.
 ///
-/// [See `wxBusyInfo`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_busy_info.html)
+/// See [`BusyInfoIsOwned`] documentation for the class usage.
 pub trait BusyInfoMethods: WxRustMethods {
     /// Update the information text.
     ///
@@ -1323,9 +1323,9 @@ pub trait BusyInfoMethods: WxRustMethods {
 }
 
 // wxButton
-/// A button is a control that contains a text string, and is one of the most common elements of a GUI.
+/// This trait represents C++ [`wxButton`](https://docs.wxwidgets.org/3.2/classwx_button.html) class's methods and inheritance.
 ///
-/// [See `wxButton`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_button.html)
+/// See [`ButtonIsOwned`] documentation for the class usage.
 pub trait ButtonMethods: AnyButtonMethods {
     /// Button creation function for two-step creation.
     ///

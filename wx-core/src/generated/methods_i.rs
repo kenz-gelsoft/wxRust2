@@ -1,9 +1,9 @@
 use super::*;
 
 // wxIcon
-/// An icon is a small rectangular bitmap usually used for denoting a minimized application.
+/// This trait represents C++ [`wxIcon`](https://docs.wxwidgets.org/3.2/classwx_icon.html) class's methods and inheritance.
 ///
-/// [See `wxIcon`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon.html)
+/// See [`IconIsOwned`] documentation for the class usage.
 pub trait IconMethods: GDIObjectMethods {
     // DTOR: fn ~wxIcon()
     // NOT_SUPPORTED: fn CreateFromHICON()
@@ -91,9 +91,9 @@ pub trait IconMethods: GDIObjectMethods {
 }
 
 // wxIconBundle
-/// This class contains multiple copies of an icon in different sizes.
+/// This trait represents C++ [`wxIconBundle`](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html) class's methods and inheritance.
 ///
-/// [See `wxIconBundle`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html)
+/// See [`IconBundleIsOwned`] documentation for the class usage.
 pub trait IconBundleMethods: GDIObjectMethods {
     // DTOR: fn ~wxIconBundle()
     // NOT_SUPPORTED: fn AddIcon()
@@ -154,9 +154,9 @@ pub trait IconBundleMethods: GDIObjectMethods {
 }
 
 // wxIconizeEvent
-/// An event being sent when the frame is iconized (minimized) or restored.
+/// This trait represents C++ [`wxIconizeEvent`](https://docs.wxwidgets.org/3.2/classwx_iconize_event.html) class's methods and inheritance.
 ///
-/// [See `wxIconizeEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_iconize_event.html)
+/// See [`IconizeEventIsOwned`] documentation for the class usage.
 pub trait IconizeEventMethods: EventMethods {
     /// Returns true if the frame has been iconized, false if it has been restored.
     ///
@@ -168,9 +168,9 @@ pub trait IconizeEventMethods: EventMethods {
 }
 
 // wxIdManager
-/// wxIdManager is responsible for allocating and releasing window IDs.
+/// This trait represents C++ [`wxIdManager`](https://docs.wxwidgets.org/3.2/classwx_id_manager.html) class's methods and inheritance.
 ///
-/// [See `wxIdManager`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_id_manager.html)
+/// See [`IdManagerIsOwned`] documentation for the class usage.
 pub trait IdManagerMethods: WxRustMethods {
     /// Called directly by wxWindow::NewControlId(), this function will create a new ID or range of IDs.
     ///
@@ -187,9 +187,9 @@ pub trait IdManagerMethods: WxRustMethods {
 }
 
 // wxImage
-/// This class encapsulates a platform-independent image.
+/// This trait represents C++ [`wxImage`](https://docs.wxwidgets.org/3.2/classwx_image.html) class's methods and inheritance.
 ///
-/// [See `wxImage`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html)
+/// See [`ImageIsOwned`] documentation for the class usage.
 pub trait ImageMethods: ObjectMethods {
     /// Returns an identical copy of this image.
     ///
@@ -804,9 +804,9 @@ pub trait ImageMethods: ObjectMethods {
 }
 
 // wxImageHandler
-/// This is the base class for implementing image file loading/saving, and image creation from data.
+/// This trait represents C++ [`wxImageHandler`](https://docs.wxwidgets.org/3.2/classwx_image_handler.html) class's methods and inheritance.
 ///
-/// [See `wxImageHandler`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_handler.html)
+/// See [`ImageHandlerIsOwned`] documentation for the class usage.
 pub trait ImageHandlerMethods: ObjectMethods {
     // DTOR: fn ~wxImageHandler()
     /// Returns true if this handler supports the image format contained in the given stream.
@@ -935,9 +935,9 @@ pub trait ImageHandlerMethods: ObjectMethods {
 }
 
 // wxImageList
-/// A wxImageList contains a list of images, which are stored in an unspecified form.
+/// This trait represents C++ [`wxImageList`](https://docs.wxwidgets.org/3.2/classwx_image_list.html) class's methods and inheritance.
 ///
-/// [See `wxImageList`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_list.html)
+/// See [`ImageListIsOwned`] documentation for the class usage.
 pub trait ImageListMethods: ObjectMethods {
     /// Adds a new image or images using a bitmap and optional mask bitmap.
     ///
@@ -1074,9 +1074,9 @@ pub trait ImageListMethods: ObjectMethods {
 }
 
 // wxInfoBar
-/// An info bar is a transient window shown at top or bottom of its parent window to display non-critical information to the user.
+/// This trait represents C++ [`wxInfoBar`](https://docs.wxwidgets.org/3.2/classwx_info_bar.html) class's methods and inheritance.
 ///
-/// [See `wxInfoBar`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_info_bar.html)
+/// See [`InfoBarIsOwned`] documentation for the class usage.
 pub trait InfoBarMethods: ControlMethods {
     // NOT_SUPPORTED: fn SetShowHideEffects()
     // NOT_SUPPORTED: fn GetShowEffect()
@@ -1158,15 +1158,15 @@ pub trait InfoBarMethods: ControlMethods {
 }
 
 // wxInitDialogEvent
-/// A wxInitDialogEvent is sent as a dialog or panel is being initialised.
+/// This trait represents C++ [`wxInitDialogEvent`](https://docs.wxwidgets.org/3.2/classwx_init_dialog_event.html) class's methods and inheritance.
 ///
-/// [See `wxInitDialogEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_init_dialog_event.html)
+/// See [`InitDialogEventIsOwned`] documentation for the class usage.
 pub trait InitDialogEventMethods: EventMethods {}
 
 // wxItemContainer
-/// This class is an abstract base class for some wxWidgets controls which contain several items such as wxListBox, wxCheckListBox, wxComboBox or wxChoice.
+/// This trait represents C++ [`wxItemContainer`](https://docs.wxwidgets.org/3.2/classwx_item_container.html) class's methods and inheritance.
 ///
-/// [See `wxItemContainer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html)
+/// See [`ItemContainerIsOwned`] documentation for the class usage.
 pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     fn as_item_container(&self) -> *mut c_void {
         unsafe { self.as_ptr() }
@@ -1541,9 +1541,9 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
 }
 
 // wxItemContainerImmutable
-/// wxItemContainer defines an interface which is implemented by all controls which have string subitems each of which may be selected.
+/// This trait represents C++ [`wxItemContainerImmutable`](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html) class's methods and inheritance.
 ///
-/// [See `wxItemContainerImmutable`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html)
+/// See [`ItemContainerImmutableIsOwned`] documentation for the class usage.
 pub trait ItemContainerImmutableMethods: WxRustMethods {
     fn as_item_container_immutable(&self) -> *mut c_void {
         unsafe { self.as_ptr() }

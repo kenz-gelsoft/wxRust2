@@ -1,9 +1,9 @@
 use super::*;
 
 // wxRadioBox
-/// A radio box item is used to select one of number of mutually exclusive choices.
+/// This trait represents C++ [`wxRadioBox`](https://docs.wxwidgets.org/3.2/classwx_radio_box.html) class's methods and inheritance.
 ///
-/// [See `wxRadioBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_radio_box.html)
+/// See [`RadioBoxIsOwned`] documentation for the class usage.
 pub trait RadioBoxMethods: ControlMethods {
     // DTOR: fn ~wxRadioBox()
     // NOT_SUPPORTED: fn Create()
@@ -137,9 +137,9 @@ pub trait RadioBoxMethods: ControlMethods {
 }
 
 // wxRadioButton
-/// A radio button item is a button which usually denotes one of several mutually exclusive options.
+/// This trait represents C++ [`wxRadioButton`](https://docs.wxwidgets.org/3.2/classwx_radio_button.html) class's methods and inheritance.
 ///
-/// [See `wxRadioButton`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_radio_button.html)
+/// See [`RadioButtonIsOwned`] documentation for the class usage.
 pub trait RadioButtonMethods: ControlMethods {
     // DTOR: fn ~wxRadioButton()
     /// Creates the choice for two-step construction.
@@ -222,9 +222,9 @@ pub trait RadioButtonMethods: ControlMethods {
 }
 
 // wxRealPoint
-/// A wxRealPoint is a useful data structure for graphics operations.
+/// This trait represents C++ [`wxRealPoint`](https://docs.wxwidgets.org/3.2/classwx_real_point.html) class's methods and inheritance.
 ///
-/// [See `wxRealPoint`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_real_point.html)
+/// See [`RealPointIsOwned`] documentation for the class usage.
 pub trait RealPointMethods: WxRustMethods {
     // BLOCKED: fn operator=()
     // BLOCKED: fn operator==()
@@ -247,9 +247,9 @@ pub trait RealPointMethods: WxRustMethods {
 }
 
 // wxRearrangeCtrl
-/// A composite control containing a wxRearrangeList and the buttons allowing to move the items in it.
+/// This trait represents C++ [`wxRearrangeCtrl`](https://docs.wxwidgets.org/3.2/classwx_rearrange_ctrl.html) class's methods and inheritance.
 ///
-/// [See `wxRearrangeCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rearrange_ctrl.html)
+/// See [`RearrangeCtrlIsOwned`] documentation for the class usage.
 pub trait RearrangeCtrlMethods: PanelMethods {
     /// Effectively creates the window for an object created using the default constructor.
     ///
@@ -308,9 +308,9 @@ pub trait RearrangeCtrlMethods: PanelMethods {
 }
 
 // wxRearrangeDialog
-/// A dialog allowing the user to rearrange the specified items.
+/// This trait represents C++ [`wxRearrangeDialog`](https://docs.wxwidgets.org/3.2/classwx_rearrange_dialog.html) class's methods and inheritance.
 ///
-/// [See `wxRearrangeDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rearrange_dialog.html)
+/// See [`RearrangeDialogIsOwned`] documentation for the class usage.
 pub trait RearrangeDialogMethods: DialogMethods {
     /// Effectively creates the dialog for an object created using the default constructor.
     ///
@@ -378,9 +378,9 @@ pub trait RearrangeDialogMethods: DialogMethods {
 }
 
 // wxRearrangeList
-/// A listbox-like control allowing the user to rearrange the items and to enable or disable them.
+/// This trait represents C++ [`wxRearrangeList`](https://docs.wxwidgets.org/3.2/classwx_rearrange_list.html) class's methods and inheritance.
 ///
-/// [See `wxRearrangeList`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rearrange_list.html)
+/// See [`RearrangeListIsOwned`] documentation for the class usage.
 pub trait RearrangeListMethods: CheckListBoxMethods {
     /// Effectively creates the window for an object created using the default constructor.
     ///
@@ -463,9 +463,9 @@ pub trait RearrangeListMethods: CheckListBoxMethods {
 }
 
 // wxRect
-/// Represents a rectangle with integer coordinates.
+/// This trait represents C++ [`wxRect`](https://docs.wxwidgets.org/3.2/classwx_rect.html) class's methods and inheritance.
 ///
-/// [See `wxRect`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rect.html)
+/// See [`RectIsOwned`] documentation for the class usage.
 pub trait RectMethods: WxRustMethods {
     /// Returns the rectangle having the same size as this one but centered relatively to the given rectangle r.
     ///
@@ -769,9 +769,9 @@ pub trait RectMethods: WxRustMethods {
 }
 
 // wxRegion
-/// A wxRegion represents a simple or complex region on a device context or window.
+/// This trait represents C++ [`wxRegion`](https://docs.wxwidgets.org/3.2/classwx_region.html) class's methods and inheritance.
 ///
-/// [See `wxRegion`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_region.html)
+/// See [`RegionIsOwned`] documentation for the class usage.
 pub trait RegionMethods: GDIObjectMethods {
     // DTOR: fn ~wxRegion()
     /// Clears the current region.
@@ -943,9 +943,9 @@ pub trait RegionMethods: GDIObjectMethods {
 }
 
 // wxRegionIterator
-/// This class is used to iterate through the rectangles in a region, typically when examining the damaged regions of a window within an OnPaint call.
+/// This trait represents C++ [`wxRegionIterator`](https://docs.wxwidgets.org/3.2/classwx_region_iterator.html) class's methods and inheritance.
 ///
-/// [See `wxRegionIterator`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_region_iterator.html)
+/// See [`RegionIteratorIsOwned`] documentation for the class usage.
 pub trait RegionIteratorMethods: ObjectMethods {
     /// An alias for GetHeight().
     ///
@@ -1015,9 +1015,9 @@ pub trait RegionIteratorMethods: ObjectMethods {
 }
 
 // wxRendererNative
-/// First, a brief introduction to wxRendererNative and why it is needed.
+/// This trait represents C++ [`wxRendererNative`](https://docs.wxwidgets.org/3.2/classwx_renderer_native.html) class's methods and inheritance.
 ///
-/// [See `wxRendererNative`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_renderer_native.html)
+/// See [`RendererNativeIsOwned`] documentation for the class usage.
 pub trait RendererNativeMethods: WxRustMethods {
     // DTOR: fn ~wxRendererNative()
     /// Draw a check box.
@@ -1490,9 +1490,9 @@ pub trait RendererNativeMethods: WxRustMethods {
 }
 
 // wxRichToolTip
-/// Allows showing a tool tip with more customizations than wxToolTip.
+/// This trait represents C++ [`wxRichToolTip`](https://docs.wxwidgets.org/3.2/classwx_rich_tool_tip.html) class's methods and inheritance.
 ///
-/// [See `wxRichToolTip`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rich_tool_tip.html)
+/// See [`RichToolTipIsOwned`] documentation for the class usage.
 pub trait RichToolTipMethods: WxRustMethods {
     /// Set the background colour.
     ///

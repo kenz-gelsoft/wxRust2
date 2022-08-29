@@ -1,9 +1,9 @@
 use super::*;
 
 // wxEditableListBox
-/// An editable listbox is composite control that lets the user easily enter, delete and reorder a list of strings.
+/// This trait represents C++ [`wxEditableListBox`](https://docs.wxwidgets.org/3.2/classwx_editable_list_box.html) class's methods and inheritance.
 ///
-/// [See `wxEditableListBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_editable_list_box.html)
+/// See [`EditableListBoxIsOwned`] documentation for the class usage.
 pub trait EditableListBoxMethods: PanelMethods {
     // DTOR: fn ~wxEditableListBox()
     /// Creates the editable listbox for two-step construction.
@@ -54,9 +54,9 @@ pub trait EditableListBoxMethods: PanelMethods {
 }
 
 // wxEraseEvent
-/// An erase event is sent when a window's background needs to be repainted.
+/// This trait represents C++ [`wxEraseEvent`](https://docs.wxwidgets.org/3.2/classwx_erase_event.html) class's methods and inheritance.
 ///
-/// [See `wxEraseEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_erase_event.html)
+/// See [`EraseEventIsOwned`] documentation for the class usage.
 pub trait EraseEventMethods: EventMethods {
     /// Returns the device context associated with the erase event to draw on.
     ///
@@ -67,9 +67,9 @@ pub trait EraseEventMethods: EventMethods {
 }
 
 // wxEventBlocker
-/// This class is a special event handler which allows discarding any event (or a set of event types) directed to a specific window.
+/// This trait represents C++ [`wxEventBlocker`](https://docs.wxwidgets.org/3.2/classwx_event_blocker.html) class's methods and inheritance.
 ///
-/// [See `wxEventBlocker`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_event_blocker.html)
+/// See [`EventBlockerIsOwned`] documentation for the class usage.
 pub trait EventBlockerMethods: EvtHandlerMethods {
     // DTOR: fn ~wxEventBlocker()
     // NOT_SUPPORTED: fn Block()

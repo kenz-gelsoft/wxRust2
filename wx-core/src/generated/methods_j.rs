@@ -1,15 +1,15 @@
 use super::*;
 
 // wxJPEGHandler
-/// This is the image handler for the JPEG format.
+/// This trait represents C++ [`wxJPEGHandler`](https://docs.wxwidgets.org/3.2/classwx_j_p_e_g_handler.html) class's methods and inheritance.
 ///
-/// [See `wxJPEGHandler`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_j_p_e_g_handler.html)
+/// See [`JPEGHandlerIsOwned`] documentation for the class usage.
 pub trait JPEGHandlerMethods: ImageHandlerMethods {}
 
 // wxJoystickEvent
-/// This event class contains information about joystick events, particularly events received by windows.
+/// This trait represents C++ [`wxJoystickEvent`](https://docs.wxwidgets.org/3.2/classwx_joystick_event.html) class's methods and inheritance.
 ///
-/// [See `wxJoystickEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_joystick_event.html)
+/// See [`JoystickEventIsOwned`] documentation for the class usage.
 pub trait JoystickEventMethods: EventMethods {
     /// Returns true if the event was a down event from the specified button (or any button).
     ///

@@ -1,9 +1,9 @@
 use super::*;
 
 // wxFileName
-/// wxFileName encapsulates a file name.
+/// This trait represents C++ [`wxFileName`](https://docs.wxwidgets.org/3.2/classwx_file_name.html) class's methods and inheritance.
 ///
-/// [See `wxFileName`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_file_name.html)
+/// See [`FileNameIsOwned`] documentation for the class usage.
 pub trait FileNameMethods: WxRustMethods {
     /// Appends a directory component to the path.
     ///

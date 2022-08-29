@@ -1,39 +1,39 @@
 use super::*;
 
 // wxPCXHandler
-/// This is the image handler for the PCX format.
+/// This trait represents C++ [`wxPCXHandler`](https://docs.wxwidgets.org/3.2/classwx_p_c_x_handler.html) class's methods and inheritance.
 ///
-/// [See `wxPCXHandler`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_p_c_x_handler.html)
+/// See [`PCXHandlerIsOwned`] documentation for the class usage.
 pub trait PCXHandlerMethods: ImageHandlerMethods {}
 
 // wxPNGHandler
-/// This is the image handler for the PNG format.
+/// This trait represents C++ [`wxPNGHandler`](https://docs.wxwidgets.org/3.2/classwx_p_n_g_handler.html) class's methods and inheritance.
 ///
-/// [See `wxPNGHandler`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_p_n_g_handler.html)
+/// See [`PNGHandlerIsOwned`] documentation for the class usage.
 pub trait PNGHandlerMethods: ImageHandlerMethods {}
 
 // wxPNMHandler
-/// This is the image handler for the PNM format.
+/// This trait represents C++ [`wxPNMHandler`](https://docs.wxwidgets.org/3.2/classwx_p_n_m_handler.html) class's methods and inheritance.
 ///
-/// [See `wxPNMHandler`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_p_n_m_handler.html)
+/// See [`PNMHandlerIsOwned`] documentation for the class usage.
 pub trait PNMHandlerMethods: ImageHandlerMethods {}
 
 // wxPaintDC
-/// A wxPaintDC must be constructed if an application wishes to paint on the client area of a window from within an EVT_PAINT() event handler.
+/// This trait represents C++ [`wxPaintDC`](https://docs.wxwidgets.org/3.2/classwx_paint_d_c.html) class's methods and inheritance.
 ///
-/// [See `wxPaintDC`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_paint_d_c.html)
+/// See [`PaintDCIsOwned`] documentation for the class usage.
 pub trait PaintDCMethods: ClientDCMethods {}
 
 // wxPaintEvent
-/// A paint event is sent when a window's contents needs to be repainted.
+/// This trait represents C++ [`wxPaintEvent`](https://docs.wxwidgets.org/3.2/classwx_paint_event.html) class's methods and inheritance.
 ///
-/// [See `wxPaintEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_paint_event.html)
+/// See [`PaintEventIsOwned`] documentation for the class usage.
 pub trait PaintEventMethods: EventMethods {}
 
 // wxPalette
-/// A palette is a table that maps pixel values to RGB colours.
+/// This trait represents C++ [`wxPalette`](https://docs.wxwidgets.org/3.2/classwx_palette.html) class's methods and inheritance.
 ///
-/// [See `wxPalette`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_palette.html)
+/// See [`PaletteIsOwned`] documentation for the class usage.
 pub trait PaletteMethods: GDIObjectMethods {
     // DTOR: fn ~wxPalette()
     /// Creates a palette from arrays of size n, one for each red, blue or green component.
@@ -77,9 +77,9 @@ pub trait PaletteMethods: GDIObjectMethods {
 }
 
 // wxPanel
-/// A panel is a window on which controls are placed.
+/// This trait represents C++ [`wxPanel`](https://docs.wxwidgets.org/3.2/classwx_panel.html) class's methods and inheritance.
 ///
-/// [See `wxPanel`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_panel.html)
+/// See [`PanelIsOwned`] documentation for the class usage.
 pub trait PanelMethods: WindowMethods {
     // DTOR: fn ~wxPanel()
     /// The default handler for wxEVT_SYS_COLOUR_CHANGED.
@@ -100,15 +100,15 @@ pub trait PanelMethods: WindowMethods {
 }
 
 // wxPasswordEntryDialog
-/// This class represents a dialog that requests a one-line password string from the user.
+/// This trait represents C++ [`wxPasswordEntryDialog`](https://docs.wxwidgets.org/3.2/classwx_password_entry_dialog.html) class's methods and inheritance.
 ///
-/// [See `wxPasswordEntryDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_password_entry_dialog.html)
+/// See [`PasswordEntryDialogIsOwned`] documentation for the class usage.
 pub trait PasswordEntryDialogMethods: TextEntryDialogMethods {}
 
 // wxPen
-/// A pen is a drawing tool for drawing outlines.
+/// This trait represents C++ [`wxPen`](https://docs.wxwidgets.org/3.2/classwx_pen.html) class's methods and inheritance.
 ///
-/// [See `wxPen`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_pen.html)
+/// See [`PenIsOwned`] documentation for the class usage.
 pub trait PenMethods: GDIObjectMethods {
     // DTOR: fn ~wxPen()
     // NOT_SUPPORTED: fn GetCap()
@@ -198,17 +198,17 @@ pub trait PenMethods: GDIObjectMethods {
 }
 
 // wxPenList
-/// There is only one instance of this class: wxThePenList.
+/// This trait represents C++ [`wxPenList`](https://docs.wxwidgets.org/3.2/classwx_pen_list.html) class's methods and inheritance.
 ///
-/// [See `wxPenList`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_pen_list.html)
+/// See [`PenListIsOwned`] documentation for the class usage.
 pub trait PenListMethods: WxRustMethods {
     // NOT_SUPPORTED: fn FindOrCreatePen()
 }
 
 // wxPersistenceManager
-/// Provides support for automatically saving and restoring object properties to persistent storage.
+/// This trait represents C++ [`wxPersistenceManager`](https://docs.wxwidgets.org/3.2/classwx_persistence_manager.html) class's methods and inheritance.
 ///
-/// [See `wxPersistenceManager`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_persistence_manager.html)
+/// See [`PersistenceManagerIsOwned`] documentation for the class usage.
 pub trait PersistenceManagerMethods: WxRustMethods {
     /// Set the global persistence manager to use.
     ///
@@ -283,9 +283,9 @@ pub trait PersistenceManagerMethods: WxRustMethods {
 }
 
 // wxPickerBase
-/// Base abstract class for all pickers which support an auxiliary text control.
+/// This trait represents C++ [`wxPickerBase`](https://docs.wxwidgets.org/3.2/classwx_picker_base.html) class's methods and inheritance.
 ///
-/// [See `wxPickerBase`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_picker_base.html)
+/// See [`PickerBaseIsOwned`] documentation for the class usage.
 pub trait PickerBaseMethods: ControlMethods {
     // DTOR: fn ~wxPickerBase()
     ///
@@ -439,9 +439,9 @@ pub trait PickerBaseMethods: ControlMethods {
 }
 
 // wxPoint
-/// A wxPoint is a useful data structure for graphics operations.
+/// This trait represents C++ [`wxPoint`](https://docs.wxwidgets.org/3.2/classwx_point.html) class's methods and inheritance.
 ///
-/// [See `wxPoint`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_point.html)
+/// See [`PointIsOwned`] documentation for the class usage.
 pub trait PointMethods: WxRustMethods {
     /// Returns true if neither of the point components is equal to wxDefaultCoord.
     ///
@@ -479,9 +479,9 @@ pub trait PointMethods: WxRustMethods {
 }
 
 // wxPopupTransientWindow
-/// A wxPopupWindow which disappears automatically when the user clicks mouse outside it or if it loses focus in any other way.
+/// This trait represents C++ [`wxPopupTransientWindow`](https://docs.wxwidgets.org/3.2/classwx_popup_transient_window.html) class's methods and inheritance.
 ///
-/// [See `wxPopupTransientWindow`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_popup_transient_window.html)
+/// See [`PopupTransientWindowIsOwned`] documentation for the class usage.
 pub trait PopupTransientWindowMethods: PopupWindowMethods {
     /// Popup the window (this will show it too).
     ///
@@ -513,9 +513,9 @@ pub trait PopupTransientWindowMethods: PopupWindowMethods {
 }
 
 // wxPopupWindow
-/// A special kind of top level window used for popup menus, combobox popups and such.
+/// This trait represents C++ [`wxPopupWindow`](https://docs.wxwidgets.org/3.2/classwx_popup_window.html) class's methods and inheritance.
 ///
-/// [See `wxPopupWindow`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_popup_window.html)
+/// See [`PopupWindowIsOwned`] documentation for the class usage.
 pub trait PopupWindowMethods: NonOwnedWindowMethods {
     /// Create method for two-step creation.
     ///
@@ -542,9 +542,9 @@ pub trait PopupWindowMethods: NonOwnedWindowMethods {
 }
 
 // wxPreferencesEditor
-/// Manage preferences dialog.
+/// This trait represents C++ [`wxPreferencesEditor`](https://docs.wxwidgets.org/3.2/classwx_preferences_editor.html) class's methods and inheritance.
 ///
-/// [See `wxPreferencesEditor`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_preferences_editor.html)
+/// See [`PreferencesEditorIsOwned`] documentation for the class usage.
 pub trait PreferencesEditorMethods: WxRustMethods {
     // DTOR: fn ~wxPreferencesEditor()
     /// Add a new page to the editor.
@@ -592,9 +592,9 @@ pub trait PreferencesEditorMethods: WxRustMethods {
 }
 
 // wxPreferencesPage
-/// One page of preferences dialog.
+/// This trait represents C++ [`wxPreferencesPage`](https://docs.wxwidgets.org/3.2/classwx_preferences_page.html) class's methods and inheritance.
 ///
-/// [See `wxPreferencesPage`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_preferences_page.html)
+/// See [`PreferencesPageIsOwned`] documentation for the class usage.
 pub trait PreferencesPageMethods: WxRustMethods {
     // DTOR: fn ~wxPreferencesPage()
     /// Return name of the page.
@@ -629,9 +629,9 @@ pub trait PreferencesPageMethods: WxRustMethods {
 }
 
 // wxPropertySheetDialog
-/// This class represents a property sheet dialog: a tabbed dialog for showing settings.
+/// This trait represents C++ [`wxPropertySheetDialog`](https://docs.wxwidgets.org/3.2/classwx_property_sheet_dialog.html) class's methods and inheritance.
 ///
-/// [See `wxPropertySheetDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_property_sheet_dialog.html)
+/// See [`PropertySheetDialogIsOwned`] documentation for the class usage.
 pub trait PropertySheetDialogMethods: DialogMethods {
     /// Override this if you wish to add the book control in a way different from the standard way (for example, using different spacing).
     ///

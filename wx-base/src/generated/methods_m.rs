@@ -1,9 +1,9 @@
 use super::*;
 
 // wxMessageOutput
-/// Simple class allowing to write strings to various output channels.
+/// This trait represents C++ [`wxMessageOutput`](https://docs.wxwidgets.org/3.2/classwx_message_output.html) class's methods and inheritance.
 ///
-/// [See `wxMessageOutput`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_message_output.html)
+/// See [`MessageOutputIsOwned`] documentation for the class usage.
 pub trait MessageOutputMethods: WxRustMethods {
     /// Return the global message output object.
     ///

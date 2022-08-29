@@ -244,11 +244,13 @@ class RustClassBinding:
         base = self.__model.primary_base()
         if not base:
             base = '__WxRust'
-        yield '    /// %s' % (self.__model.doc,)
-        yield '    ///'
-        yield "    /// [See `%s`'s original doc.](%s)" % (
+        yield "    /// This trait represents C++ [`%s`](%s) class's methods and inheritance." % (
             self.__model.name,
             self.__model.doc_url(),
+        )
+        yield '    ///'
+        yield '    /// See [`%sIsOwned`] documentation for the class usage.' % (
+            self.__model.unprefixed(),
         )
         yield 'pub trait %sMethods: %sMethods {' % (
             self.__model.unprefixed(),

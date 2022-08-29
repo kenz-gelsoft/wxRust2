@@ -1,9 +1,9 @@
 use super::*;
 
 // wxVariantData
-/// The wxVariantData class is used to implement a new type for wxVariant.
+/// This trait represents C++ [`wxVariantData`](https://docs.wxwidgets.org/3.2/classwx_variant_data.html) class's methods and inheritance.
 ///
-/// [See `wxVariantData`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_variant_data.html)
+/// See [`VariantDataIsOwned`] documentation for the class usage.
 pub trait VariantDataMethods: ObjectRefDataMethods {
     /// This function can be overridden to clone the data.
     ///

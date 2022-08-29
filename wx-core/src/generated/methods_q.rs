@@ -1,9 +1,9 @@
 use super::*;
 
 // wxQuantize
-/// Performs quantization, or colour reduction, on a wxImage.
+/// This trait represents C++ [`wxQuantize`](https://docs.wxwidgets.org/3.2/classwx_quantize.html) class's methods and inheritance.
 ///
-/// [See `wxQuantize`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_quantize.html)
+/// See [`QuantizeIsOwned`] documentation for the class usage.
 pub trait QuantizeMethods: ObjectMethods {
     /// Converts input bitmap(s) into 8bit representation with custom palette.
     ///
@@ -65,9 +65,9 @@ pub trait QuantizeMethods: ObjectMethods {
 }
 
 // wxQueryLayoutInfoEvent
-/// This event is sent when wxLayoutAlgorithm wishes to get the size, orientation and alignment of a window.
+/// This trait represents C++ [`wxQueryLayoutInfoEvent`](https://docs.wxwidgets.org/3.2/classwx_query_layout_info_event.html) class's methods and inheritance.
 ///
-/// [See `wxQueryLayoutInfoEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_query_layout_info_event.html)
+/// See [`QueryLayoutInfoEventIsOwned`] documentation for the class usage.
 pub trait QueryLayoutInfoEventMethods: EventMethods {
     // NOT_SUPPORTED: fn GetAlignment()
     /// Returns the flags associated with this event.

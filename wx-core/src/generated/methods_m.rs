@@ -1,9 +1,9 @@
 use super::*;
 
 // wxMask
-/// This class encapsulates a monochrome mask bitmap, where the masked area is black and the unmasked area is white.
+/// This trait represents C++ [`wxMask`](https://docs.wxwidgets.org/3.2/classwx_mask.html) class's methods and inheritance.
 ///
-/// [See `wxMask`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_mask.html)
+/// See [`MaskIsOwned`] documentation for the class usage.
 pub trait MaskMethods: ObjectMethods {
     // DTOR: fn ~wxMask()
     /// Constructs a mask from a bitmap and a palette index that indicates the background.
@@ -43,15 +43,15 @@ pub trait MaskMethods: ObjectMethods {
 }
 
 // wxMaximizeEvent
-/// An event being sent when a top level window is maximized.
+/// This trait represents C++ [`wxMaximizeEvent`](https://docs.wxwidgets.org/3.2/classwx_maximize_event.html) class's methods and inheritance.
 ///
-/// [See `wxMaximizeEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_maximize_event.html)
+/// See [`MaximizeEventIsOwned`] documentation for the class usage.
 pub trait MaximizeEventMethods: EventMethods {}
 
 // wxMemoryDC
-/// A memory device context provides a means to draw graphics onto a bitmap.
+/// This trait represents C++ [`wxMemoryDC`](https://docs.wxwidgets.org/3.2/classwx_memory_d_c.html) class's methods and inheritance.
 ///
-/// [See `wxMemoryDC`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_memory_d_c.html)
+/// See [`MemoryDCIsOwned`] documentation for the class usage.
 pub trait MemoryDCMethods: DCMethods {
     /// Allow using this device context object to modify the given bitmap contents.
     ///
@@ -81,9 +81,9 @@ pub trait MemoryDCMethods: DCMethods {
 }
 
 // wxMenu
-/// A menu is a popup (or pull down) list of items, one of which may be selected before the menu goes away (clicking elsewhere dismisses the menu).
+/// This trait represents C++ [`wxMenu`](https://docs.wxwidgets.org/3.2/classwx_menu.html) class's methods and inheritance.
 ///
-/// [See `wxMenu`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_menu.html)
+/// See [`MenuIsOwned`] documentation for the class usage.
 pub trait MenuMethods: EvtHandlerMethods {
     // DTOR: fn ~wxMenu()
     /// Adds a menu item.
@@ -722,9 +722,9 @@ pub trait MenuMethods: EvtHandlerMethods {
 }
 
 // wxMenuBar
-/// A menu bar is a series of menus accessible from the top of a frame.
+/// This trait represents C++ [`wxMenuBar`](https://docs.wxwidgets.org/3.2/classwx_menu_bar.html) class's methods and inheritance.
 ///
-/// [See `wxMenuBar`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_menu_bar.html)
+/// See [`MenuBarIsOwned`] documentation for the class usage.
 pub trait MenuBarMethods: WindowMethods {
     // DTOR: fn ~wxMenuBar()
     /// Adds the item to the end of the menu bar.
@@ -970,9 +970,9 @@ pub trait MenuBarMethods: WindowMethods {
 }
 
 // wxMenuEvent
-/// This class is used for a variety of menu-related events.
+/// This trait represents C++ [`wxMenuEvent`](https://docs.wxwidgets.org/3.2/classwx_menu_event.html) class's methods and inheritance.
 ///
-/// [See `wxMenuEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_menu_event.html)
+/// See [`MenuEventIsOwned`] documentation for the class usage.
 pub trait MenuEventMethods: EventMethods {
     /// Returns the menu which is being opened or closed, or the menu containing the highlighted item.
     ///
@@ -995,9 +995,9 @@ pub trait MenuEventMethods: EventMethods {
 }
 
 // wxMenuItem
-/// A menu item represents an item in a menu.
+/// This trait represents C++ [`wxMenuItem`](https://docs.wxwidgets.org/3.2/classwx_menu_item.html) class's methods and inheritance.
 ///
-/// [See `wxMenuItem`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_menu_item.html)
+/// See [`MenuItemIsOwned`] documentation for the class usage.
 pub trait MenuItemMethods: ObjectMethods {
     // BLOCKED: fn GetBackgroundColour()
     /// Returns the item bitmap.
@@ -1299,9 +1299,9 @@ pub trait MenuItemMethods: ObjectMethods {
 }
 
 // wxMessageDialog
-/// This class represents a dialog that shows a single or multi-line message, with a choice of OK, Yes, No and Cancel buttons.
+/// This trait represents C++ [`wxMessageDialog`](https://docs.wxwidgets.org/3.2/classwx_message_dialog.html) class's methods and inheritance.
 ///
-/// [See `wxMessageDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_message_dialog.html)
+/// See [`MessageDialogIsOwned`] documentation for the class usage.
 pub trait MessageDialogMethods: DialogMethods {
     /// Sets the extended message for the dialog: this message is usually an extension of the short message specified in the constructor or set with SetMessage().
     ///
@@ -1416,29 +1416,29 @@ pub trait MessageDialogMethods: DialogMethods {
 }
 
 // wxMessageOutputMessageBox
-/// Output messages by showing them in a message box.
+/// This trait represents C++ [`wxMessageOutputMessageBox`](https://docs.wxwidgets.org/3.2/classwx_message_output_message_box.html) class's methods and inheritance.
 ///
-/// [See `wxMessageOutputMessageBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_message_output_message_box.html)
+/// See [`MessageOutputMessageBoxIsOwned`] documentation for the class usage.
 pub trait MessageOutputMessageBoxMethods: MessageOutputMethods {}
 
 // wxMiniFrame
-/// A miniframe is a frame with a small title bar.
+/// This trait represents C++ [`wxMiniFrame`](https://docs.wxwidgets.org/3.2/classwx_mini_frame.html) class's methods and inheritance.
 ///
-/// [See `wxMiniFrame`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_mini_frame.html)
+/// See [`MiniFrameIsOwned`] documentation for the class usage.
 pub trait MiniFrameMethods: FrameMethods {
     // DTOR: fn ~wxMiniFrame()
 }
 
 // wxMirrorDC
-/// wxMirrorDC is a simple wrapper class which is always associated with a real wxDC object and either forwards all of its operations to it without changes (no mirroring takes place) or exchanges x and y coordinates which makes it possible to reuse the same code to draw a figure and its mirror  i.e.
+/// This trait represents C++ [`wxMirrorDC`](https://docs.wxwidgets.org/3.2/classwx_mirror_d_c.html) class's methods and inheritance.
 ///
-/// [See `wxMirrorDC`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_mirror_d_c.html)
+/// See [`MirrorDCIsOwned`] documentation for the class usage.
 pub trait MirrorDCMethods: DCMethods {}
 
 // wxMouseCaptureChangedEvent
-/// A mouse capture changed event is sent to a window that loses its mouse capture.
+/// This trait represents C++ [`wxMouseCaptureChangedEvent`](https://docs.wxwidgets.org/3.2/classwx_mouse_capture_changed_event.html) class's methods and inheritance.
 ///
-/// [See `wxMouseCaptureChangedEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_mouse_capture_changed_event.html)
+/// See [`MouseCaptureChangedEventIsOwned`] documentation for the class usage.
 pub trait MouseCaptureChangedEventMethods: EventMethods {
     /// Returns the window that gained the capture, or NULL if it was a non-wxWidgets window.
     ///
@@ -1453,15 +1453,15 @@ pub trait MouseCaptureChangedEventMethods: EventMethods {
 }
 
 // wxMouseCaptureLostEvent
-/// A mouse capture lost event is sent to a window that had obtained mouse capture, which was subsequently lost due to an "external" event (for example, when a dialog box is shown or if another application captures the mouse).
+/// This trait represents C++ [`wxMouseCaptureLostEvent`](https://docs.wxwidgets.org/3.2/classwx_mouse_capture_lost_event.html) class's methods and inheritance.
 ///
-/// [See `wxMouseCaptureLostEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_mouse_capture_lost_event.html)
+/// See [`MouseCaptureLostEventIsOwned`] documentation for the class usage.
 pub trait MouseCaptureLostEventMethods: EventMethods {}
 
 // wxMouseEvent
-/// This event class contains information about the events generated by the mouse: they include mouse buttons press and release events and mouse move events.
+/// This trait represents C++ [`wxMouseEvent`](https://docs.wxwidgets.org/3.2/classwx_mouse_event.html) class's methods and inheritance.
 ///
-/// [See `wxMouseEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_mouse_event.html)
+/// See [`MouseEventIsOwned`] documentation for the class usage.
 pub trait MouseEventMethods: EventMethods {
     /// Returns true if the event was a first extra button double click.
     ///
@@ -1661,9 +1661,9 @@ pub trait MouseEventMethods: EventMethods {
 }
 
 // wxMouseEventsManager
-/// Helper for handling mouse input events in windows containing multiple items.
+/// This trait represents C++ [`wxMouseEventsManager`](https://docs.wxwidgets.org/3.2/classwx_mouse_events_manager.html) class's methods and inheritance.
 ///
-/// [See `wxMouseEventsManager`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_mouse_events_manager.html)
+/// See [`MouseEventsManagerIsOwned`] documentation for the class usage.
 pub trait MouseEventsManagerMethods: EvtHandlerMethods {
     /// Finishes initialization of the object created using default constructor.
     ///
@@ -1680,9 +1680,9 @@ pub trait MouseEventsManagerMethods: EvtHandlerMethods {
 }
 
 // wxMoveEvent
-/// A move event holds information about window position change.
+/// This trait represents C++ [`wxMoveEvent`](https://docs.wxwidgets.org/3.2/classwx_move_event.html) class's methods and inheritance.
 ///
-/// [See `wxMoveEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_move_event.html)
+/// See [`MoveEventIsOwned`] documentation for the class usage.
 pub trait MoveEventMethods: EventMethods {
     /// Returns the position of the window generating the move change event.
     ///
