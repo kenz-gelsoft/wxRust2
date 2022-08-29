@@ -3,8 +3,9 @@ use super::*;
 // wxDC
 wxwidgets! {
     /// A wxDC is a "device context" onto which graphics and text can be drawn.
-    ///
-    /// [See `wxDC`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c.html)
+    /// - [`DC`] represents a C++ `wxDC` class instance which your code has ownership, [`DCIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DC`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDC` class's documentation](https://docs.wxwidgets.org/3.2/classwx_d_c.html) for more details.
     #[doc(alias = "wxDC")]
     #[doc(alias = "DC")]
     class DC
@@ -43,8 +44,9 @@ impl<const OWNED: bool> Drop for DCIsOwned<OWNED> {
 // wxDCBrushChanger
 wxwidgets! {
     /// wxDCBrushChanger is a small helper class for setting a brush on a wxDC and unsetting it automatically in the destructor, restoring the previous one.
-    ///
-    /// [See `wxDCBrushChanger`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c_brush_changer.html)
+    /// - [`DCBrushChanger`] represents a C++ `wxDCBrushChanger` class instance which your code has ownership, [`DCBrushChangerIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DCBrushChanger`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDCBrushChanger` class's documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_brush_changer.html) for more details.
     #[doc(alias = "wxDCBrushChanger")]
     #[doc(alias = "DCBrushChanger")]
     class DCBrushChanger
@@ -54,7 +56,7 @@ wxwidgets! {
 impl<const OWNED: bool> DCBrushChangerIsOwned<OWNED> {
     /// Sets brush on the given dc, storing the old one.
     ///
-    /// [See `wxDCBrushChanger::wxDCBrushChanger()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c_brush_changer.html#a047d2af137cb4e6860b3911ab46e4909)
+    /// See [C++ `wxDCBrushChanger::wxDCBrushChanger()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_brush_changer.html#a047d2af137cb4e6860b3911ab46e4909).
     pub fn new<D: DCMethods, B: BrushMethods>(dc: &D, brush: &B) -> DCBrushChangerIsOwned<OWNED> {
         unsafe {
             let dc = dc.as_ptr();
@@ -82,8 +84,9 @@ impl<const OWNED: bool> Drop for DCBrushChangerIsOwned<OWNED> {
 // wxDCClipper
 wxwidgets! {
     /// wxDCClipper is a helper class for setting a clipping region on a wxDC during its lifetime.
-    ///
-    /// [See `wxDCClipper`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c_clipper.html)
+    /// - [`DCClipper`] represents a C++ `wxDCClipper` class instance which your code has ownership, [`DCClipperIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DCClipper`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDCClipper` class's documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_clipper.html) for more details.
     #[doc(alias = "wxDCClipper")]
     #[doc(alias = "DCClipper")]
     class DCClipper
@@ -93,7 +96,7 @@ wxwidgets! {
 impl<const OWNED: bool> DCClipperIsOwned<OWNED> {
     /// Sets the clipping region to the specified region/coordinates.
     ///
-    /// [See `wxDCClipper::wxDCClipper()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c_clipper.html#aa6548fa7be5cff3a74f6a6f539b00adf)
+    /// See [C++ `wxDCClipper::wxDCClipper()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_clipper.html#aa6548fa7be5cff3a74f6a6f539b00adf).
     pub fn new_with_region<D: DCMethods, R: RegionMethods>(
         dc: &D,
         region: &R,
@@ -105,7 +108,7 @@ impl<const OWNED: bool> DCClipperIsOwned<OWNED> {
         }
     }
     ///
-    /// [See `wxDCClipper::wxDCClipper()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c_clipper.html#a995a8e0147459e1ba92cbb965fd963a4)
+    /// See [C++ `wxDCClipper::wxDCClipper()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_clipper.html#a995a8e0147459e1ba92cbb965fd963a4).
     pub fn new_with_rect<D: DCMethods, R: RectMethods>(
         dc: &D,
         rect: &R,
@@ -117,7 +120,7 @@ impl<const OWNED: bool> DCClipperIsOwned<OWNED> {
         }
     }
     ///
-    /// [See `wxDCClipper::wxDCClipper()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c_clipper.html#a2096fc82c7ab658fcca0a65650ddeb80)
+    /// See [C++ `wxDCClipper::wxDCClipper()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_clipper.html#a2096fc82c7ab658fcca0a65650ddeb80).
     pub fn new_with_coord<D: DCMethods>(
         dc: &D,
         x: c_int,
@@ -150,8 +153,9 @@ impl<const OWNED: bool> Drop for DCClipperIsOwned<OWNED> {
 // wxDCFontChanger
 wxwidgets! {
     /// wxDCFontChanger is a small helper class for setting a font on a wxDC and unsetting it automatically in the destructor, restoring the previous one.
-    ///
-    /// [See `wxDCFontChanger`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c_font_changer.html)
+    /// - [`DCFontChanger`] represents a C++ `wxDCFontChanger` class instance which your code has ownership, [`DCFontChangerIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DCFontChanger`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDCFontChanger` class's documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_font_changer.html) for more details.
     #[doc(alias = "wxDCFontChanger")]
     #[doc(alias = "DCFontChanger")]
     class DCFontChanger
@@ -161,7 +165,7 @@ wxwidgets! {
 impl<const OWNED: bool> DCFontChangerIsOwned<OWNED> {
     /// Trivial constructor not changing anything.
     ///
-    /// [See `wxDCFontChanger::wxDCFontChanger()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c_font_changer.html#aa4bd96e01e9099f10f9394ef9b69b069)
+    /// See [C++ `wxDCFontChanger::wxDCFontChanger()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_font_changer.html#aa4bd96e01e9099f10f9394ef9b69b069).
     pub fn new<D: DCMethods>(dc: &D) -> DCFontChangerIsOwned<OWNED> {
         unsafe {
             let dc = dc.as_ptr();
@@ -170,7 +174,7 @@ impl<const OWNED: bool> DCFontChangerIsOwned<OWNED> {
     }
     /// Sets font on the given dc, storing the old one.
     ///
-    /// [See `wxDCFontChanger::wxDCFontChanger()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c_font_changer.html#a3c5c5fe626322d365cbd3f90928eeaa2)
+    /// See [C++ `wxDCFontChanger::wxDCFontChanger()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_font_changer.html#a3c5c5fe626322d365cbd3f90928eeaa2).
     pub fn new_with_font<D: DCMethods, F: FontMethods>(
         dc: &D,
         font: &F,
@@ -201,8 +205,9 @@ impl<const OWNED: bool> Drop for DCFontChangerIsOwned<OWNED> {
 // wxDCOverlay
 wxwidgets! {
     /// Connects an overlay with a drawing DC.
-    ///
-    /// [See `wxDCOverlay`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c_overlay.html)
+    /// - [`DCOverlay`] represents a C++ `wxDCOverlay` class instance which your code has ownership, [`DCOverlayIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DCOverlay`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDCOverlay` class's documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_overlay.html) for more details.
     #[doc(alias = "wxDCOverlay")]
     #[doc(alias = "DCOverlay")]
     class DCOverlay
@@ -212,7 +217,7 @@ wxwidgets! {
 impl<const OWNED: bool> DCOverlayIsOwned<OWNED> {
     /// Connects this overlay to the corresponding drawing dc, if the overlay is not initialized yet this call will do so.
     ///
-    /// [See `wxDCOverlay::wxDCOverlay()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c_overlay.html#aeffcb68537d705a07c00adeb008aa64e)
+    /// See [C++ `wxDCOverlay::wxDCOverlay()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_overlay.html#aeffcb68537d705a07c00adeb008aa64e).
     pub fn new_with_int<O: OverlayMethods, D: DCMethods>(
         overlay: &O,
         dc: Option<&D>,
@@ -232,7 +237,7 @@ impl<const OWNED: bool> DCOverlayIsOwned<OWNED> {
     }
     /// Convenience wrapper that behaves the same using the entire area of the dc.
     ///
-    /// [See `wxDCOverlay::wxDCOverlay()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c_overlay.html#a45d692f25022296a11389480c651e13b)
+    /// See [C++ `wxDCOverlay::wxDCOverlay()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_overlay.html#a45d692f25022296a11389480c651e13b).
     pub fn new<O: OverlayMethods, D: DCMethods>(
         overlay: &O,
         dc: Option<&D>,
@@ -266,8 +271,9 @@ impl<const OWNED: bool> Drop for DCOverlayIsOwned<OWNED> {
 // wxDCPenChanger
 wxwidgets! {
     /// wxDCPenChanger is a small helper class for setting a pen on a wxDC and unsetting it automatically in the destructor, restoring the previous one.
-    ///
-    /// [See `wxDCPenChanger`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c_pen_changer.html)
+    /// - [`DCPenChanger`] represents a C++ `wxDCPenChanger` class instance which your code has ownership, [`DCPenChangerIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DCPenChanger`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDCPenChanger` class's documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_pen_changer.html) for more details.
     #[doc(alias = "wxDCPenChanger")]
     #[doc(alias = "DCPenChanger")]
     class DCPenChanger
@@ -277,7 +283,7 @@ wxwidgets! {
 impl<const OWNED: bool> DCPenChangerIsOwned<OWNED> {
     /// Sets pen on the given dc, storing the old one.
     ///
-    /// [See `wxDCPenChanger::wxDCPenChanger()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c_pen_changer.html#abefe06367f53d64e35aeb203537e50e3)
+    /// See [C++ `wxDCPenChanger::wxDCPenChanger()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_pen_changer.html#abefe06367f53d64e35aeb203537e50e3).
     pub fn new<D: DCMethods, P: PenMethods>(dc: &D, pen: &P) -> DCPenChangerIsOwned<OWNED> {
         unsafe {
             let dc = dc.as_ptr();
@@ -305,8 +311,9 @@ impl<const OWNED: bool> Drop for DCPenChangerIsOwned<OWNED> {
 // wxDCTextColourChanger
 wxwidgets! {
     /// wxDCTextColourChanger is a small helper class for setting a foreground text colour on a wxDC and unsetting it automatically in the destructor, restoring the previous one.
-    ///
-    /// [See `wxDCTextColourChanger`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c_text_colour_changer.html)
+    /// - [`DCTextColourChanger`] represents a C++ `wxDCTextColourChanger` class instance which your code has ownership, [`DCTextColourChangerIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DCTextColourChanger`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDCTextColourChanger` class's documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_text_colour_changer.html) for more details.
     #[doc(alias = "wxDCTextColourChanger")]
     #[doc(alias = "DCTextColourChanger")]
     class DCTextColourChanger
@@ -316,7 +323,7 @@ wxwidgets! {
 impl<const OWNED: bool> DCTextColourChangerIsOwned<OWNED> {
     /// Trivial constructor not changing anything.
     ///
-    /// [See `wxDCTextColourChanger::wxDCTextColourChanger()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c_text_colour_changer.html#ae9c21638cef0ad69be36a7359811965d)
+    /// See [C++ `wxDCTextColourChanger::wxDCTextColourChanger()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_text_colour_changer.html#ae9c21638cef0ad69be36a7359811965d).
     pub fn new<D: DCMethods>(dc: &D) -> DCTextColourChangerIsOwned<OWNED> {
         unsafe {
             let dc = dc.as_ptr();
@@ -325,7 +332,7 @@ impl<const OWNED: bool> DCTextColourChangerIsOwned<OWNED> {
     }
     /// Sets col on the given dc, storing the old one.
     ///
-    /// [See `wxDCTextColourChanger::wxDCTextColourChanger()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_d_c_text_colour_changer.html#a0c0cc00023f4edd806220ac147e40784)
+    /// See [C++ `wxDCTextColourChanger::wxDCTextColourChanger()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_text_colour_changer.html#a0c0cc00023f4edd806220ac147e40784).
     pub fn new_with_colour<D: DCMethods, C: ColourMethods>(
         dc: &D,
         col: &C,
@@ -356,8 +363,9 @@ impl<const OWNED: bool> Drop for DCTextColourChangerIsOwned<OWNED> {
 // wxDataFormat
 wxwidgets! {
     /// A wxDataFormat is an encapsulation of a platform-specific format handle which is used by the system for the clipboard and drag and drop operations.
-    ///
-    /// [See `wxDataFormat`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_format.html)
+    /// - [`DataFormat`] represents a C++ `wxDataFormat` class instance which your code has ownership, [`DataFormatIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataFormat`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataFormat` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_format.html) for more details.
     #[doc(alias = "wxDataFormat")]
     #[doc(alias = "DataFormat")]
     class DataFormat
@@ -368,7 +376,7 @@ impl<const OWNED: bool> DataFormatIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxDataFormat()
     /// Constructs a data format object for a custom format identified by its name format.
     ///
-    /// [See `wxDataFormat::wxDataFormat()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_format.html#a6c08911611be5e3a5dd35528b4d091db)
+    /// See [C++ `wxDataFormat::wxDataFormat()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_format.html#a6c08911611be5e3a5dd35528b4d091db).
     pub fn new(format: &str) -> DataFormatIsOwned<OWNED> {
         unsafe {
             let format = WxString::from(format);
@@ -396,8 +404,9 @@ impl<const OWNED: bool> Drop for DataFormatIsOwned<OWNED> {
 // wxDataObject
 wxwidgets! {
     /// A wxDataObject represents data that can be copied to or from the clipboard, or dragged and dropped.
-    ///
-    /// [See `wxDataObject`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_object.html)
+    /// - [`DataObject`] represents a C++ `wxDataObject` class instance which your code has ownership, [`DataObjectIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataObject`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataObject` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_object.html) for more details.
     #[doc(alias = "wxDataObject")]
     #[doc(alias = "DataObject")]
     class DataObject
@@ -431,8 +440,9 @@ impl<const OWNED: bool> Drop for DataObjectIsOwned<OWNED> {
 // wxDataObjectComposite
 wxwidgets! {
     /// wxDataObjectComposite is the simplest wxDataObject derivation which may be used to support multiple formats.
-    ///
-    /// [See `wxDataObjectComposite`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_object_composite.html)
+    /// - [`DataObjectComposite`] represents a C++ `wxDataObjectComposite` class instance which your code has ownership, [`DataObjectCompositeIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataObjectComposite`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataObjectComposite` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_object_composite.html) for more details.
     #[doc(alias = "wxDataObjectComposite")]
     #[doc(alias = "DataObjectComposite")]
     class DataObjectComposite
@@ -443,7 +453,7 @@ wxwidgets! {
 impl<const OWNED: bool> DataObjectCompositeIsOwned<OWNED> {
     /// The default constructor.
     ///
-    /// [See `wxDataObjectComposite::wxDataObjectComposite()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_object_composite.html#a711cfefddb7e091d56f87be3b2d0bcb8)
+    /// See [C++ `wxDataObjectComposite::wxDataObjectComposite()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_object_composite.html#a711cfefddb7e091d56f87be3b2d0bcb8).
     pub fn new() -> DataObjectCompositeIsOwned<OWNED> {
         unsafe { DataObjectCompositeIsOwned(ffi::wxDataObjectComposite_new()) }
     }
@@ -472,8 +482,9 @@ impl<const OWNED: bool> Drop for DataObjectCompositeIsOwned<OWNED> {
 // wxDataObjectSimple
 wxwidgets! {
     /// This is the simplest possible implementation of the wxDataObject class.
-    ///
-    /// [See `wxDataObjectSimple`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_object_simple.html)
+    /// - [`DataObjectSimple`] represents a C++ `wxDataObjectSimple` class instance which your code has ownership, [`DataObjectSimpleIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataObjectSimple`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataObjectSimple` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_object_simple.html) for more details.
     #[doc(alias = "wxDataObjectSimple")]
     #[doc(alias = "DataObjectSimple")]
     class DataObjectSimple
@@ -484,7 +495,7 @@ wxwidgets! {
 impl<const OWNED: bool> DataObjectSimpleIsOwned<OWNED> {
     /// Constructor accepts the supported format (none by default) which may also be set later with SetFormat().
     ///
-    /// [See `wxDataObjectSimple::wxDataObjectSimple()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_object_simple.html#ad246b285dd2f414f4b13a4d794bf602d)
+    /// See [C++ `wxDataObjectSimple::wxDataObjectSimple()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_object_simple.html#ad246b285dd2f414f4b13a4d794bf602d).
     pub fn new<D: DataFormatMethods>(format: &D) -> DataObjectSimpleIsOwned<OWNED> {
         unsafe {
             let format = format.as_ptr();
@@ -516,8 +527,9 @@ impl<const OWNED: bool> Drop for DataObjectSimpleIsOwned<OWNED> {
 // wxDataViewBitmapRenderer
 wxwidgets! {
     /// This class is used by wxDataViewCtrl to render bitmaps.
-    ///
-    /// [See `wxDataViewBitmapRenderer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_bitmap_renderer.html)
+    /// - [`DataViewBitmapRenderer`] represents a C++ `wxDataViewBitmapRenderer` class instance which your code has ownership, [`DataViewBitmapRendererIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewBitmapRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewBitmapRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_bitmap_renderer.html) for more details.
     #[doc(alias = "wxDataViewBitmapRenderer")]
     #[doc(alias = "DataViewBitmapRenderer")]
     class DataViewBitmapRenderer
@@ -565,8 +577,9 @@ impl<const OWNED: bool> Drop for DataViewBitmapRendererIsOwned<OWNED> {
 // wxDataViewChoiceByIndexRenderer
 wxwidgets! {
     /// A wxDataViewCtrl renderer using wxChoice control and indexes into it.
-    ///
-    /// [See `wxDataViewChoiceByIndexRenderer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_choice_by_index_renderer.html)
+    /// - [`DataViewChoiceByIndexRenderer`] represents a C++ `wxDataViewChoiceByIndexRenderer` class instance which your code has ownership, [`DataViewChoiceByIndexRendererIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewChoiceByIndexRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewChoiceByIndexRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_choice_by_index_renderer.html) for more details.
     #[doc(alias = "wxDataViewChoiceByIndexRenderer")]
     #[doc(alias = "DataViewChoiceByIndexRenderer")]
     class DataViewChoiceByIndexRenderer
@@ -622,8 +635,9 @@ impl<const OWNED: bool> Drop for DataViewChoiceByIndexRendererIsOwned<OWNED> {
 // wxDataViewChoiceRenderer
 wxwidgets! {
     /// A wxDataViewCtrl renderer using wxChoice control and values of strings in it.
-    ///
-    /// [See `wxDataViewChoiceRenderer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_choice_renderer.html)
+    /// - [`DataViewChoiceRenderer`] represents a C++ `wxDataViewChoiceRenderer` class instance which your code has ownership, [`DataViewChoiceRendererIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewChoiceRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewChoiceRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_choice_renderer.html) for more details.
     #[doc(alias = "wxDataViewChoiceRenderer")]
     #[doc(alias = "DataViewChoiceRenderer")]
     class DataViewChoiceRenderer
@@ -671,8 +685,9 @@ impl<const OWNED: bool> Drop for DataViewChoiceRendererIsOwned<OWNED> {
 // wxDataViewColumn
 wxwidgets! {
     /// This class represents a column in a wxDataViewCtrl.
-    ///
-    /// [See `wxDataViewColumn`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_column.html)
+    /// - [`DataViewColumn`] represents a C++ `wxDataViewColumn` class instance which your code has ownership, [`DataViewColumnIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewColumn`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewColumn` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_column.html) for more details.
     #[doc(alias = "wxDataViewColumn")]
     #[doc(alias = "DataViewColumn")]
     class DataViewColumn
@@ -684,7 +699,7 @@ wxwidgets! {
 impl<const OWNED: bool> DataViewColumnIsOwned<OWNED> {
     /// Constructs a text column.
     ///
-    /// [See `wxDataViewColumn::wxDataViewColumn()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_column.html#aa56f4df8543bf14713a2852af471c768)
+    /// See [C++ `wxDataViewColumn::wxDataViewColumn()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_column.html#aa56f4df8543bf14713a2852af471c768).
     pub fn new_with_str<D: DataViewRendererMethods>(
         title: &str,
         renderer: Option<&D>,
@@ -712,7 +727,7 @@ impl<const OWNED: bool> DataViewColumnIsOwned<OWNED> {
     }
     /// Constructs a bitmap column.
     ///
-    /// [See `wxDataViewColumn::wxDataViewColumn()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_column.html#aa3f5c1c707bd95b39a9c74d281e32f6b)
+    /// See [C++ `wxDataViewColumn::wxDataViewColumn()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_column.html#aa3f5c1c707bd95b39a9c74d281e32f6b).
     pub fn new_with_bitmapbundle<B: BitmapBundleMethods, D: DataViewRendererMethods>(
         bitmap: &B,
         renderer: Option<&D>,
@@ -767,8 +782,9 @@ impl<const OWNED: bool> Drop for DataViewColumnIsOwned<OWNED> {
 // wxDataViewCtrl
 wxwidgets! {
     /// wxDataViewCtrl is a control to display data either in a tree like fashion or in a tabular form or both.
-    ///
-    /// [See `wxDataViewCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_ctrl.html)
+    /// - [`DataViewCtrl`] represents a C++ `wxDataViewCtrl` class instance which your code has ownership, [`DataViewCtrlIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_ctrl.html) for more details.
     #[doc(alias = "wxDataViewCtrl")]
     #[doc(alias = "DataViewCtrl")]
     class DataViewCtrl
@@ -782,13 +798,13 @@ wxwidgets! {
 impl<const OWNED: bool> DataViewCtrlIsOwned<OWNED> {
     /// Default Constructor.
     ///
-    /// [See `wxDataViewCtrl::wxDataViewCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_ctrl.html#a3c912686a7c04b53445e2e1985685a3f)
+    /// See [C++ `wxDataViewCtrl::wxDataViewCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_ctrl.html#a3c912686a7c04b53445e2e1985685a3f).
     pub fn new_2step() -> DataViewCtrlIsOwned<OWNED> {
         unsafe { DataViewCtrlIsOwned(ffi::wxDataViewCtrl_new()) }
     }
     /// Constructor.
     ///
-    /// [See `wxDataViewCtrl::wxDataViewCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_ctrl.html#a5cc833d3d27d13f5dae7bd2062a55189)
+    /// See [C++ `wxDataViewCtrl::wxDataViewCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_ctrl.html#a5cc833d3d27d13f5dae7bd2062a55189).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -850,7 +866,7 @@ impl<const OWNED: bool> DynamicCast for DataViewCtrlIsOwned<OWNED> {
 impl<const OWNED: bool> ControlMethods for DataViewCtrlIsOwned<OWNED> {
     /// Create the control.
     ///
-    /// [See `wxDataViewCtrl::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_ctrl.html#a1bd86d5869de4d24de791a48e9c6926e)
+    /// See [C++ `wxDataViewCtrl::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_ctrl.html#a1bd86d5869de4d24de791a48e9c6926e).
     fn create_validator<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
         parent: Option<&W>,
@@ -879,8 +895,9 @@ impl<const OWNED: bool> ControlMethods for DataViewCtrlIsOwned<OWNED> {
 // wxDataViewCustomRenderer
 wxwidgets! {
     /// You need to derive a new class from wxDataViewCustomRenderer in order to write a new renderer.
-    ///
-    /// [See `wxDataViewCustomRenderer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_custom_renderer.html)
+    /// - [`DataViewCustomRenderer`] represents a C++ `wxDataViewCustomRenderer` class instance which your code has ownership, [`DataViewCustomRendererIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewCustomRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewCustomRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_custom_renderer.html) for more details.
     #[doc(alias = "wxDataViewCustomRenderer")]
     #[doc(alias = "DataViewCustomRenderer")]
     class DataViewCustomRenderer
@@ -928,8 +945,9 @@ impl<const OWNED: bool> Drop for DataViewCustomRendererIsOwned<OWNED> {
 // wxDataViewDateRenderer
 wxwidgets! {
     /// This class is used by wxDataViewCtrl to render calendar controls.
-    ///
-    /// [See `wxDataViewDateRenderer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_date_renderer.html)
+    /// - [`DataViewDateRenderer`] represents a C++ `wxDataViewDateRenderer` class instance which your code has ownership, [`DataViewDateRendererIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewDateRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewDateRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_date_renderer.html) for more details.
     #[doc(alias = "wxDataViewDateRenderer")]
     #[doc(alias = "DataViewDateRenderer")]
     class DataViewDateRenderer
@@ -977,8 +995,9 @@ impl<const OWNED: bool> Drop for DataViewDateRendererIsOwned<OWNED> {
 // wxDataViewEvent
 wxwidgets! {
     /// This is the event class for the wxDataViewCtrl notifications.
-    ///
-    /// [See `wxDataViewEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_event.html)
+    /// - [`DataViewEvent`] represents a C++ `wxDataViewEvent` class instance which your code has ownership, [`DataViewEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_event.html) for more details.
     #[doc(alias = "wxDataViewEvent")]
     #[doc(alias = "DataViewEvent")]
     class DataViewEvent
@@ -992,7 +1011,7 @@ wxwidgets! {
 impl<const OWNED: bool> DataViewEventIsOwned<OWNED> {
     /// Default ctor, normally shouldn't be used and mostly exists only for backwards compatibility.
     ///
-    /// [See `wxDataViewEvent::wxDataViewEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_event.html#ae6dde6781192716c6c7ee9f828a2a99d)
+    /// See [C++ `wxDataViewEvent::wxDataViewEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_event.html#ae6dde6781192716c6c7ee9f828a2a99d).
     pub fn new() -> DataViewEventIsOwned<OWNED> {
         unsafe { DataViewEventIsOwned(ffi::wxDataViewEvent_new()) }
     }
@@ -1000,7 +1019,7 @@ impl<const OWNED: bool> DataViewEventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxDataViewEvent2()
     /// Copy constructor.
     ///
-    /// [See `wxDataViewEvent::wxDataViewEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_event.html#a5960c6568e8407e54958e7492859ff68)
+    /// See [C++ `wxDataViewEvent::wxDataViewEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_event.html#a5960c6568e8407e54958e7492859ff68).
     pub fn new_with_dataviewevent<D: DataViewEventMethods>(
         event: &D,
     ) -> DataViewEventIsOwned<OWNED> {
@@ -1054,8 +1073,9 @@ impl<const OWNED: bool> Drop for DataViewEventIsOwned<OWNED> {
 // wxDataViewIconText
 wxwidgets! {
     /// wxDataViewIconText is used by wxDataViewIconTextRenderer for data transfer.
-    ///
-    /// [See `wxDataViewIconText`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_icon_text.html)
+    /// - [`DataViewIconText`] represents a C++ `wxDataViewIconText` class instance which your code has ownership, [`DataViewIconTextIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewIconText`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewIconText` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_icon_text.html) for more details.
     #[doc(alias = "wxDataViewIconText")]
     #[doc(alias = "DataViewIconText")]
     class DataViewIconText
@@ -1066,7 +1086,7 @@ wxwidgets! {
 impl<const OWNED: bool> DataViewIconTextIsOwned<OWNED> {
     /// Constructor.
     ///
-    /// [See `wxDataViewIconText::wxDataViewIconText()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_icon_text.html#a1de5295b0774784c21a4d5d694df4725)
+    /// See [C++ `wxDataViewIconText::wxDataViewIconText()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_icon_text.html#a1de5295b0774784c21a4d5d694df4725).
     pub fn new_with_str<B: BitmapBundleMethods>(
         text: &str,
         bitmap: &B,
@@ -1079,7 +1099,7 @@ impl<const OWNED: bool> DataViewIconTextIsOwned<OWNED> {
         }
     }
     ///
-    /// [See `wxDataViewIconText::wxDataViewIconText()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_icon_text.html#aa32e3db38e83550e99367f88965be72c)
+    /// See [C++ `wxDataViewIconText::wxDataViewIconText()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_icon_text.html#aa32e3db38e83550e99367f88965be72c).
     pub fn new_with_dataviewicontext<D: DataViewIconTextMethods>(
         other: &D,
     ) -> DataViewIconTextIsOwned<OWNED> {
@@ -1118,8 +1138,9 @@ impl<const OWNED: bool> Drop for DataViewIconTextIsOwned<OWNED> {
 // wxDataViewIconTextRenderer
 wxwidgets! {
     /// The wxDataViewIconTextRenderer class is used to display text with a small icon next to it as it is typically done in a file manager.
-    ///
-    /// [See `wxDataViewIconTextRenderer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_icon_text_renderer.html)
+    /// - [`DataViewIconTextRenderer`] represents a C++ `wxDataViewIconTextRenderer` class instance which your code has ownership, [`DataViewIconTextRendererIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewIconTextRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewIconTextRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_icon_text_renderer.html) for more details.
     #[doc(alias = "wxDataViewIconTextRenderer")]
     #[doc(alias = "DataViewIconTextRenderer")]
     class DataViewIconTextRenderer
@@ -1167,8 +1188,9 @@ impl<const OWNED: bool> Drop for DataViewIconTextRendererIsOwned<OWNED> {
 // wxDataViewIndexListModel
 wxwidgets! {
     /// wxDataViewIndexListModel is a specialized data model which lets you address an item by its position (row) rather than its wxDataViewItem (which you can obtain from this class).
-    ///
-    /// [See `wxDataViewIndexListModel`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_index_list_model.html)
+    /// - [`DataViewIndexListModel`] represents a C++ `wxDataViewIndexListModel` class instance which your code has ownership, [`DataViewIndexListModelIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewIndexListModel`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewIndexListModel` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_index_list_model.html) for more details.
     #[doc(alias = "wxDataViewIndexListModel")]
     #[doc(alias = "DataViewIndexListModel")]
     class DataViewIndexListModel
@@ -1217,8 +1239,9 @@ impl<const OWNED: bool> Drop for DataViewIndexListModelIsOwned<OWNED> {
 // wxDataViewItem
 wxwidgets! {
     /// wxDataViewItem is a small opaque class that represents an item in a wxDataViewCtrl in a persistent way, i.e.
-    ///
-    /// [See `wxDataViewItem`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_item.html)
+    /// - [`DataViewItem`] represents a C++ `wxDataViewItem` class instance which your code has ownership, [`DataViewItemIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewItem`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewItem` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_item.html) for more details.
     #[doc(alias = "wxDataViewItem")]
     #[doc(alias = "DataViewItem")]
     class DataViewItem
@@ -1228,12 +1251,12 @@ wxwidgets! {
 impl<const OWNED: bool> DataViewItemIsOwned<OWNED> {
     /// Constructor.
     ///
-    /// [See `wxDataViewItem::wxDataViewItem()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_item.html#a7a8b5a738467b471cd10e96357dc800e)
+    /// See [C++ `wxDataViewItem::wxDataViewItem()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_item.html#a7a8b5a738467b471cd10e96357dc800e).
     pub fn new() -> DataViewItemIsOwned<OWNED> {
         unsafe { DataViewItemIsOwned(ffi::wxDataViewItem_new()) }
     }
     ///
-    /// [See `wxDataViewItem::wxDataViewItem()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_item.html#a355faeb0fd910141a8621c34b884153c)
+    /// See [C++ `wxDataViewItem::wxDataViewItem()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_item.html#a355faeb0fd910141a8621c34b884153c).
     pub fn new_with_dataviewitem<D: DataViewItemMethods>(item: &D) -> DataViewItemIsOwned<OWNED> {
         unsafe {
             let item = item.as_ptr();
@@ -1241,7 +1264,7 @@ impl<const OWNED: bool> DataViewItemIsOwned<OWNED> {
         }
     }
     ///
-    /// [See `wxDataViewItem::wxDataViewItem()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_item.html#aa8c216134b8e17a742c070e39753be59)
+    /// See [C++ `wxDataViewItem::wxDataViewItem()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_item.html#aa8c216134b8e17a742c070e39753be59).
     pub fn new_with_void(id: *mut c_void) -> DataViewItemIsOwned<OWNED> {
         unsafe { DataViewItemIsOwned(ffi::wxDataViewItem_new2(id)) }
     }
@@ -1265,8 +1288,9 @@ impl<const OWNED: bool> Drop for DataViewItemIsOwned<OWNED> {
 // wxDataViewItemAttr
 wxwidgets! {
     /// This class is used to indicate to a wxDataViewCtrl that a certain item (see wxDataViewItem) has extra font attributes for its renderer.
-    ///
-    /// [See `wxDataViewItemAttr`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_item_attr.html)
+    /// - [`DataViewItemAttr`] represents a C++ `wxDataViewItemAttr` class instance which your code has ownership, [`DataViewItemAttrIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewItemAttr`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewItemAttr` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_item_attr.html) for more details.
     #[doc(alias = "wxDataViewItemAttr")]
     #[doc(alias = "DataViewItemAttr")]
     class DataViewItemAttr
@@ -1276,7 +1300,7 @@ wxwidgets! {
 impl<const OWNED: bool> DataViewItemAttrIsOwned<OWNED> {
     /// Constructor.
     ///
-    /// [See `wxDataViewItemAttr::wxDataViewItemAttr()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_item_attr.html#a730aee09cf5b3d45db8dcae8ffc48fde)
+    /// See [C++ `wxDataViewItemAttr::wxDataViewItemAttr()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_item_attr.html#a730aee09cf5b3d45db8dcae8ffc48fde).
     pub fn new() -> DataViewItemAttrIsOwned<OWNED> {
         unsafe { DataViewItemAttrIsOwned(ffi::wxDataViewItemAttr_new()) }
     }
@@ -1300,8 +1324,9 @@ impl<const OWNED: bool> Drop for DataViewItemAttrIsOwned<OWNED> {
 // wxDataViewListCtrl
 wxwidgets! {
     /// This class is a wxDataViewCtrl which internally uses a wxDataViewListStore and forwards most of its API to that class.
-    ///
-    /// [See `wxDataViewListCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_list_ctrl.html)
+    /// - [`DataViewListCtrl`] represents a C++ `wxDataViewListCtrl` class instance which your code has ownership, [`DataViewListCtrlIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewListCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewListCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_list_ctrl.html) for more details.
     #[doc(alias = "wxDataViewListCtrl")]
     #[doc(alias = "DataViewListCtrl")]
     class DataViewListCtrl
@@ -1316,13 +1341,13 @@ wxwidgets! {
 impl<const OWNED: bool> DataViewListCtrlIsOwned<OWNED> {
     /// Default ctor.
     ///
-    /// [See `wxDataViewListCtrl::wxDataViewListCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_list_ctrl.html#ae4ccb1d19929c49a81d3870a10d11765)
+    /// See [C++ `wxDataViewListCtrl::wxDataViewListCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_list_ctrl.html#ae4ccb1d19929c49a81d3870a10d11765).
     pub fn new_2step() -> DataViewListCtrlIsOwned<OWNED> {
         unsafe { DataViewListCtrlIsOwned(ffi::wxDataViewListCtrl_new()) }
     }
     /// Constructor.
     ///
-    /// [See `wxDataViewListCtrl::wxDataViewListCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_list_ctrl.html#af7a2515b02e8b5e4aa27cc1831c3686b)
+    /// See [C++ `wxDataViewListCtrl::wxDataViewListCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_list_ctrl.html#af7a2515b02e8b5e4aa27cc1831c3686b).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -1387,8 +1412,9 @@ impl<const OWNED: bool> DynamicCast for DataViewListCtrlIsOwned<OWNED> {
 // wxDataViewListModel
 wxwidgets! {
     /// Base class with abstract API for wxDataViewIndexListModel and wxDataViewVirtualListModel.
-    ///
-    /// [See `wxDataViewListModel`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_list_model.html)
+    /// - [`DataViewListModel`] represents a C++ `wxDataViewListModel` class instance which your code has ownership, [`DataViewListModelIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewListModel`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewListModel` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_list_model.html) for more details.
     #[doc(alias = "wxDataViewListModel")]
     #[doc(alias = "DataViewListModel")]
     class DataViewListModel
@@ -1428,8 +1454,9 @@ impl<const OWNED: bool> Drop for DataViewListModelIsOwned<OWNED> {
 // wxDataViewListStore
 wxwidgets! {
     /// wxDataViewListStore is a specialised wxDataViewModel for storing a simple table of data.
-    ///
-    /// [See `wxDataViewListStore`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_list_store.html)
+    /// - [`DataViewListStore`] represents a C++ `wxDataViewListStore` class instance which your code has ownership, [`DataViewListStoreIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewListStore`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewListStore` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_list_store.html) for more details.
     #[doc(alias = "wxDataViewListStore")]
     #[doc(alias = "DataViewListStore")]
     class DataViewListStore
@@ -1443,7 +1470,7 @@ wxwidgets! {
 impl<const OWNED: bool> DataViewListStoreIsOwned<OWNED> {
     /// Constructor.
     ///
-    /// [See `wxDataViewListStore::wxDataViewListStore()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_list_store.html#ad0ea04a252cfa338caca32b9bad11640)
+    /// See [C++ `wxDataViewListStore::wxDataViewListStore()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_list_store.html#ad0ea04a252cfa338caca32b9bad11640).
     pub fn new() -> DataViewListStoreIsOwned<OWNED> {
         unsafe { DataViewListStoreIsOwned(ffi::wxDataViewListStore_new()) }
     }
@@ -1489,8 +1516,9 @@ impl<const OWNED: bool> Drop for DataViewListStoreIsOwned<OWNED> {
 // wxDataViewModel
 wxwidgets! {
     /// wxDataViewModel is the base class for all data model to be displayed by a wxDataViewCtrl.
-    ///
-    /// [See `wxDataViewModel`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_model.html)
+    /// - [`DataViewModel`] represents a C++ `wxDataViewModel` class instance which your code has ownership, [`DataViewModelIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewModel`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewModel` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_model.html) for more details.
     #[doc(alias = "wxDataViewModel")]
     #[doc(alias = "DataViewModel")]
     class DataViewModel
@@ -1525,8 +1553,9 @@ impl<const OWNED: bool> Drop for DataViewModelIsOwned<OWNED> {
 // wxDataViewModelNotifier
 wxwidgets! {
     /// A wxDataViewModelNotifier instance is owned by a wxDataViewModel and mirrors its notification interface.
-    ///
-    /// [See `wxDataViewModelNotifier`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_model_notifier.html)
+    /// - [`DataViewModelNotifier`] represents a C++ `wxDataViewModelNotifier` class instance which your code has ownership, [`DataViewModelNotifierIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewModelNotifier`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewModelNotifier` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_model_notifier.html) for more details.
     #[doc(alias = "wxDataViewModelNotifier")]
     #[doc(alias = "DataViewModelNotifier")]
     class DataViewModelNotifier
@@ -1555,8 +1584,9 @@ impl<const OWNED: bool> Drop for DataViewModelNotifierIsOwned<OWNED> {
 // wxDataViewProgressRenderer
 wxwidgets! {
     /// This class is used by wxDataViewCtrl to render progress bars.
-    ///
-    /// [See `wxDataViewProgressRenderer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_progress_renderer.html)
+    /// - [`DataViewProgressRenderer`] represents a C++ `wxDataViewProgressRenderer` class instance which your code has ownership, [`DataViewProgressRendererIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewProgressRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewProgressRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_progress_renderer.html) for more details.
     #[doc(alias = "wxDataViewProgressRenderer")]
     #[doc(alias = "DataViewProgressRenderer")]
     class DataViewProgressRenderer
@@ -1604,8 +1634,9 @@ impl<const OWNED: bool> Drop for DataViewProgressRendererIsOwned<OWNED> {
 // wxDataViewRenderer
 wxwidgets! {
     /// This class is used by wxDataViewCtrl to render the individual cells.
-    ///
-    /// [See `wxDataViewRenderer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_renderer.html)
+    /// - [`DataViewRenderer`] represents a C++ `wxDataViewRenderer` class instance which your code has ownership, [`DataViewRendererIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_renderer.html) for more details.
     #[doc(alias = "wxDataViewRenderer")]
     #[doc(alias = "DataViewRenderer")]
     class DataViewRenderer
@@ -1645,8 +1676,9 @@ impl<const OWNED: bool> Drop for DataViewRendererIsOwned<OWNED> {
 // wxDataViewSpinRenderer
 wxwidgets! {
     /// This is a specialized renderer for rendering integer values.
-    ///
-    /// [See `wxDataViewSpinRenderer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_spin_renderer.html)
+    /// - [`DataViewSpinRenderer`] represents a C++ `wxDataViewSpinRenderer` class instance which your code has ownership, [`DataViewSpinRendererIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewSpinRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewSpinRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_spin_renderer.html) for more details.
     #[doc(alias = "wxDataViewSpinRenderer")]
     #[doc(alias = "DataViewSpinRenderer")]
     class DataViewSpinRenderer
@@ -1702,8 +1734,9 @@ impl<const OWNED: bool> Drop for DataViewSpinRendererIsOwned<OWNED> {
 // wxDataViewTextRenderer
 wxwidgets! {
     /// wxDataViewTextRenderer is used for rendering text.
-    ///
-    /// [See `wxDataViewTextRenderer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_text_renderer.html)
+    /// - [`DataViewTextRenderer`] represents a C++ `wxDataViewTextRenderer` class instance which your code has ownership, [`DataViewTextRendererIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewTextRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewTextRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_text_renderer.html) for more details.
     #[doc(alias = "wxDataViewTextRenderer")]
     #[doc(alias = "DataViewTextRenderer")]
     class DataViewTextRenderer
@@ -1751,8 +1784,9 @@ impl<const OWNED: bool> Drop for DataViewTextRendererIsOwned<OWNED> {
 // wxDataViewToggleRenderer
 wxwidgets! {
     /// This class is used by wxDataViewCtrl to render toggle controls.
-    ///
-    /// [See `wxDataViewToggleRenderer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_toggle_renderer.html)
+    /// - [`DataViewToggleRenderer`] represents a C++ `wxDataViewToggleRenderer` class instance which your code has ownership, [`DataViewToggleRendererIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewToggleRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewToggleRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_toggle_renderer.html) for more details.
     #[doc(alias = "wxDataViewToggleRenderer")]
     #[doc(alias = "DataViewToggleRenderer")]
     class DataViewToggleRenderer
@@ -1800,8 +1834,9 @@ impl<const OWNED: bool> Drop for DataViewToggleRendererIsOwned<OWNED> {
 // wxDataViewTreeCtrl
 wxwidgets! {
     /// This class is a wxDataViewCtrl which internally uses a wxDataViewTreeStore and forwards most of its API to that class.
-    ///
-    /// [See `wxDataViewTreeCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_ctrl.html)
+    /// - [`DataViewTreeCtrl`] represents a C++ `wxDataViewTreeCtrl` class instance which your code has ownership, [`DataViewTreeCtrlIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewTreeCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewTreeCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_ctrl.html) for more details.
     #[doc(alias = "wxDataViewTreeCtrl")]
     #[doc(alias = "DataViewTreeCtrl")]
     class DataViewTreeCtrl
@@ -1816,13 +1851,13 @@ wxwidgets! {
 impl<const OWNED: bool> DataViewTreeCtrlIsOwned<OWNED> {
     /// Default ctor.
     ///
-    /// [See `wxDataViewTreeCtrl::wxDataViewTreeCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_ctrl.html#a49d8a55c826b9b3bb75b8607a0d94fe8)
+    /// See [C++ `wxDataViewTreeCtrl::wxDataViewTreeCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_ctrl.html#a49d8a55c826b9b3bb75b8607a0d94fe8).
     pub fn new_2step() -> DataViewTreeCtrlIsOwned<OWNED> {
         unsafe { DataViewTreeCtrlIsOwned(ffi::wxDataViewTreeCtrl_new()) }
     }
     /// Constructor.
     ///
-    /// [See `wxDataViewTreeCtrl::wxDataViewTreeCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_ctrl.html#a263a8abb605575c5ab9db5eba259cf89)
+    /// See [C++ `wxDataViewTreeCtrl::wxDataViewTreeCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_ctrl.html#a263a8abb605575c5ab9db5eba259cf89).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -1887,8 +1922,9 @@ impl<const OWNED: bool> DynamicCast for DataViewTreeCtrlIsOwned<OWNED> {
 // wxDataViewTreeStore
 wxwidgets! {
     /// wxDataViewTreeStore is a specialised wxDataViewModel for storing simple trees very much like wxTreeCtrl does and it offers a similar API.
-    ///
-    /// [See `wxDataViewTreeStore`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_store.html)
+    /// - [`DataViewTreeStore`] represents a C++ `wxDataViewTreeStore` class instance which your code has ownership, [`DataViewTreeStoreIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewTreeStore`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewTreeStore` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_store.html) for more details.
     #[doc(alias = "wxDataViewTreeStore")]
     #[doc(alias = "DataViewTreeStore")]
     class DataViewTreeStore
@@ -1900,7 +1936,7 @@ wxwidgets! {
 impl<const OWNED: bool> DataViewTreeStoreIsOwned<OWNED> {
     /// Constructor.
     ///
-    /// [See `wxDataViewTreeStore::wxDataViewTreeStore()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_store.html#aad8493a851fbef80f8b7c3f368ca53db)
+    /// See [C++ `wxDataViewTreeStore::wxDataViewTreeStore()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_store.html#aad8493a851fbef80f8b7c3f368ca53db).
     pub fn new() -> DataViewTreeStoreIsOwned<OWNED> {
         unsafe { DataViewTreeStoreIsOwned(ffi::wxDataViewTreeStore_new()) }
     }
@@ -1934,8 +1970,9 @@ impl<const OWNED: bool> Drop for DataViewTreeStoreIsOwned<OWNED> {
 // wxDataViewVirtualListModel
 wxwidgets! {
     /// wxDataViewVirtualListModel is a specialized data model which lets you address an item by its position (row) rather than its wxDataViewItem and as such offers the exact same interface as wxDataViewIndexListModel.
-    ///
-    /// [See `wxDataViewVirtualListModel`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_data_view_virtual_list_model.html)
+    /// - [`DataViewVirtualListModel`] represents a C++ `wxDataViewVirtualListModel` class instance which your code has ownership, [`DataViewVirtualListModelIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DataViewVirtualListModel`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDataViewVirtualListModel` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_virtual_list_model.html) for more details.
     #[doc(alias = "wxDataViewVirtualListModel")]
     #[doc(alias = "DataViewVirtualListModel")]
     class DataViewVirtualListModel
@@ -1986,8 +2023,9 @@ impl<const OWNED: bool> Drop for DataViewVirtualListModelIsOwned<OWNED> {
 // wxDateEvent
 wxwidgets! {
     /// This event class holds information about a date change and is used together with wxDatePickerCtrl.
-    ///
-    /// [See `wxDateEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_date_event.html)
+    /// - [`DateEvent`] represents a C++ `wxDateEvent` class instance which your code has ownership, [`DateEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DateEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDateEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_date_event.html) for more details.
     #[doc(alias = "wxDateEvent")]
     #[doc(alias = "DateEvent")]
     class DateEvent
@@ -1999,7 +2037,7 @@ wxwidgets! {
 }
 impl<const OWNED: bool> DateEventIsOwned<OWNED> {
     ///
-    /// [See `wxDateEvent::wxDateEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_date_event.html#a54de582d97abba75950d2aa9b3ba84a2)
+    /// See [C++ `wxDateEvent::wxDateEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_date_event.html#a54de582d97abba75950d2aa9b3ba84a2).
     pub fn new() -> DateEventIsOwned<OWNED> {
         unsafe { DateEventIsOwned(ffi::wxDateEvent_new()) }
     }
@@ -2044,8 +2082,9 @@ impl<const OWNED: bool> Drop for DateEventIsOwned<OWNED> {
 // wxDatePickerCtrl
 wxwidgets! {
     /// This control allows the user to select a date.
-    ///
-    /// [See `wxDatePickerCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_date_picker_ctrl.html)
+    /// - [`DatePickerCtrl`] represents a C++ `wxDatePickerCtrl` class instance which your code has ownership, [`DatePickerCtrlIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DatePickerCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDatePickerCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_date_picker_ctrl.html) for more details.
     #[doc(alias = "wxDatePickerCtrl")]
     #[doc(alias = "DatePickerCtrl")]
     class DatePickerCtrl
@@ -2059,13 +2098,13 @@ wxwidgets! {
 impl<const OWNED: bool> DatePickerCtrlIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxDatePickerCtrl::wxDatePickerCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_date_picker_ctrl.html#ae0700b0b3a7b522e3053e0bbb4de27ec)
+    /// See [C++ `wxDatePickerCtrl::wxDatePickerCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_date_picker_ctrl.html#ae0700b0b3a7b522e3053e0bbb4de27ec).
     pub fn new_2step() -> DatePickerCtrlIsOwned<OWNED> {
         unsafe { DatePickerCtrlIsOwned(ffi::wxDatePickerCtrl_new()) }
     }
     /// Initializes the object and calls Create() with all the parameters.
     ///
-    /// [See `wxDatePickerCtrl::wxDatePickerCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_date_picker_ctrl.html#a697230c98830fca84021f14a697f156c)
+    /// See [C++ `wxDatePickerCtrl::wxDatePickerCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_date_picker_ctrl.html#a697230c98830fca84021f14a697f156c).
     pub fn new<
         W: WindowMethods,
         D: DateTimeMethods,
@@ -2136,8 +2175,9 @@ impl<const OWNED: bool> DynamicCast for DatePickerCtrlIsOwned<OWNED> {
 // wxDelegateRendererNative
 wxwidgets! {
     /// wxDelegateRendererNative allows reuse of renderers code by forwarding all the wxRendererNative methods to the given object and thus allowing you to only modify some of its methods  without having to reimplement all of them.
-    ///
-    /// [See `wxDelegateRendererNative`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_delegate_renderer_native.html)
+    /// - [`DelegateRendererNative`] represents a C++ `wxDelegateRendererNative` class instance which your code has ownership, [`DelegateRendererNativeIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DelegateRendererNative`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDelegateRendererNative` class's documentation](https://docs.wxwidgets.org/3.2/classwx_delegate_renderer_native.html) for more details.
     #[doc(alias = "wxDelegateRendererNative")]
     #[doc(alias = "DelegateRendererNative")]
     class DelegateRendererNative
@@ -2148,13 +2188,13 @@ wxwidgets! {
 impl<const OWNED: bool> DelegateRendererNativeIsOwned<OWNED> {
     /// The default constructor does the same thing as the other one except that it uses the generic renderer instead of the user-specified rendererNative.
     ///
-    /// [See `wxDelegateRendererNative::wxDelegateRendererNative()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_delegate_renderer_native.html#a184f122211b4632234a5398575305e2c)
+    /// See [C++ `wxDelegateRendererNative::wxDelegateRendererNative()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_delegate_renderer_native.html#a184f122211b4632234a5398575305e2c).
     pub fn new() -> DelegateRendererNativeIsOwned<OWNED> {
         unsafe { DelegateRendererNativeIsOwned(ffi::wxDelegateRendererNative_new()) }
     }
     /// This constructor uses the user-specified rendererNative to set up the delegate renderer object to follow all calls to the specified real renderer.
     ///
-    /// [See `wxDelegateRendererNative::wxDelegateRendererNative()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_delegate_renderer_native.html#a8d9dc80cc471a8162a4c9360790fb4cd)
+    /// See [C++ `wxDelegateRendererNative::wxDelegateRendererNative()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_delegate_renderer_native.html#a8d9dc80cc471a8162a4c9360790fb4cd).
     pub fn new_with_renderernative<R: RendererNativeMethods>(
         renderer_native: &R,
     ) -> DelegateRendererNativeIsOwned<OWNED> {
@@ -2190,8 +2230,9 @@ impl<const OWNED: bool> Drop for DelegateRendererNativeIsOwned<OWNED> {
 // wxDialog
 wxwidgets! {
     /// A dialog box is a window with a title bar and sometimes a system menu, which can be moved around the screen.
-    ///
-    /// [See `wxDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_dialog.html)
+    /// - [`Dialog`] represents a C++ `wxDialog` class instance which your code has ownership, [`DialogIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`Dialog`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDialog` class's documentation](https://docs.wxwidgets.org/3.2/classwx_dialog.html) for more details.
     #[doc(alias = "wxDialog")]
     #[doc(alias = "Dialog")]
     class Dialog
@@ -2206,13 +2247,13 @@ wxwidgets! {
 impl<const OWNED: bool> DialogIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxDialog::wxDialog()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_dialog.html#a11f9715b3975218071a4de9b29a4ed03)
+    /// See [C++ `wxDialog::wxDialog()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_dialog.html#a11f9715b3975218071a4de9b29a4ed03).
     pub fn new_2step() -> DialogIsOwned<OWNED> {
         unsafe { DialogIsOwned(ffi::wxDialog_new()) }
     }
     /// Constructor.
     ///
-    /// [See `wxDialog::wxDialog()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_dialog.html#a0bbd20a18b306aad59429b9d6783d39b)
+    /// See [C++ `wxDialog::wxDialog()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_dialog.html#a0bbd20a18b306aad59429b9d6783d39b).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -2280,7 +2321,7 @@ impl<const OWNED: bool> DynamicCast for DialogIsOwned<OWNED> {
 impl<const OWNED: bool> TopLevelWindowMethods for DialogIsOwned<OWNED> {
     /// Used for two-step dialog box construction.
     ///
-    /// [See `wxDialog::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_dialog.html#a44e42338cb8bd2a1b312ab7a6f1722a3)
+    /// See [C++ `wxDialog::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_dialog.html#a44e42338cb8bd2a1b312ab7a6f1722a3).
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -2307,7 +2348,7 @@ impl<const OWNED: bool> TopLevelWindowMethods for DialogIsOwned<OWNED> {
     }
     /// Sets the icon for this dialog.
     ///
-    /// [See `wxDialog::SetIcon()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_dialog.html#a717435f3dd9d977feaa40fb359a6da84)
+    /// See [C++ `wxDialog::SetIcon()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_dialog.html#a717435f3dd9d977feaa40fb359a6da84).
     fn set_icon<I: IconMethods>(&self, icon: &I) {
         unsafe {
             let icon = icon.as_ptr();
@@ -2318,7 +2359,7 @@ impl<const OWNED: bool> TopLevelWindowMethods for DialogIsOwned<OWNED> {
 impl<const OWNED: bool> WindowMethods for DialogIsOwned<OWNED> {
     /// Centres the dialog box on the display.
     ///
-    /// [See `wxDialog::Centre()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_dialog.html#a6af384c4a558965bfee61784f5e0b7fc)
+    /// See [C++ `wxDialog::Centre()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_dialog.html#a6af384c4a558965bfee61784f5e0b7fc).
     fn centre(&self, direction: c_int) {
         unsafe { ffi::wxDialog_Centre(self.as_ptr(), direction) }
     }
@@ -2327,8 +2368,9 @@ impl<const OWNED: bool> WindowMethods for DialogIsOwned<OWNED> {
 // wxDialogLayoutAdapter
 wxwidgets! {
     /// This abstract class is the base for classes that help wxWidgets perform run-time layout adaptation of dialogs.
-    ///
-    /// [See `wxDialogLayoutAdapter`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_dialog_layout_adapter.html)
+    /// - [`DialogLayoutAdapter`] represents a C++ `wxDialogLayoutAdapter` class instance which your code has ownership, [`DialogLayoutAdapterIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DialogLayoutAdapter`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDialogLayoutAdapter` class's documentation](https://docs.wxwidgets.org/3.2/classwx_dialog_layout_adapter.html) for more details.
     #[doc(alias = "wxDialogLayoutAdapter")]
     #[doc(alias = "DialogLayoutAdapter")]
     class DialogLayoutAdapter
@@ -2357,8 +2399,9 @@ impl<const OWNED: bool> Drop for DialogLayoutAdapterIsOwned<OWNED> {
 // wxDirDialog
 wxwidgets! {
     /// This class represents the directory chooser dialog.
-    ///
-    /// [See `wxDirDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_dir_dialog.html)
+    /// - [`DirDialog`] represents a C++ `wxDirDialog` class instance which your code has ownership, [`DirDialogIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DirDialog`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDirDialog` class's documentation](https://docs.wxwidgets.org/3.2/classwx_dir_dialog.html) for more details.
     #[doc(alias = "wxDirDialog")]
     #[doc(alias = "DirDialog")]
     class DirDialog
@@ -2374,7 +2417,7 @@ wxwidgets! {
 impl<const OWNED: bool> DirDialogIsOwned<OWNED> {
     /// Constructor.
     ///
-    /// [See `wxDirDialog::wxDirDialog()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_dir_dialog.html#a72322832d7830dd637fb4daa541c267a)
+    /// See [C++ `wxDirDialog::wxDirDialog()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_dir_dialog.html#a72322832d7830dd637fb4daa541c267a).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         message: &str,
@@ -2456,8 +2499,9 @@ impl<const OWNED: bool> DynamicCast for DirDialogIsOwned<OWNED> {
 // wxDirPickerCtrl
 wxwidgets! {
     /// This control allows the user to select a directory.
-    ///
-    /// [See `wxDirPickerCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_dir_picker_ctrl.html)
+    /// - [`DirPickerCtrl`] represents a C++ `wxDirPickerCtrl` class instance which your code has ownership, [`DirPickerCtrlIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DirPickerCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDirPickerCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_dir_picker_ctrl.html) for more details.
     #[doc(alias = "wxDirPickerCtrl")]
     #[doc(alias = "DirPickerCtrl")]
     class DirPickerCtrl
@@ -2471,13 +2515,13 @@ wxwidgets! {
 }
 impl<const OWNED: bool> DirPickerCtrlIsOwned<OWNED> {
     ///
-    /// [See `wxDirPickerCtrl::wxDirPickerCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_dir_picker_ctrl.html#a7afb789fa0326ec140f4645d49cc735b)
+    /// See [C++ `wxDirPickerCtrl::wxDirPickerCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_dir_picker_ctrl.html#a7afb789fa0326ec140f4645d49cc735b).
     pub fn new_2step() -> DirPickerCtrlIsOwned<OWNED> {
         unsafe { DirPickerCtrlIsOwned(ffi::wxDirPickerCtrl_new()) }
     }
     /// Initializes the object and calls Create() with all the parameters.
     ///
-    /// [See `wxDirPickerCtrl::wxDirPickerCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_dir_picker_ctrl.html#a6a8c66f10082401f7445c5660c3b6d79)
+    /// See [C++ `wxDirPickerCtrl::wxDirPickerCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_dir_picker_ctrl.html#a6a8c66f10082401f7445c5660c3b6d79).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -2551,8 +2595,9 @@ impl<const OWNED: bool> DynamicCast for DirPickerCtrlIsOwned<OWNED> {
 // wxDisplay
 wxwidgets! {
     /// Determines the sizes and locations of displays connected to the system.
-    ///
-    /// [See `wxDisplay`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_display.html)
+    /// - [`Display`] represents a C++ `wxDisplay` class instance which your code has ownership, [`DisplayIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`Display`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDisplay` class's documentation](https://docs.wxwidgets.org/3.2/classwx_display.html) for more details.
     #[doc(alias = "wxDisplay")]
     #[doc(alias = "Display")]
     class Display
@@ -2562,19 +2607,19 @@ wxwidgets! {
 impl<const OWNED: bool> DisplayIsOwned<OWNED> {
     /// Default constructor creating wxDisplay object representing the primary display.
     ///
-    /// [See `wxDisplay::wxDisplay()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_display.html#a8455f1450af24319a5c434d9a1984437)
+    /// See [C++ `wxDisplay::wxDisplay()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_display.html#a8455f1450af24319a5c434d9a1984437).
     pub fn new() -> DisplayIsOwned<OWNED> {
         unsafe { DisplayIsOwned(ffi::wxDisplay_new()) }
     }
     /// Constructor, setting up a wxDisplay instance with the specified display.
     ///
-    /// [See `wxDisplay::wxDisplay()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_display.html#a3ff5e051699a4f9ab6ce984d9a8a8943)
+    /// See [C++ `wxDisplay::wxDisplay()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_display.html#a3ff5e051699a4f9ab6ce984d9a8a8943).
     pub fn new_with_uint(index: c_uint) -> DisplayIsOwned<OWNED> {
         unsafe { DisplayIsOwned(ffi::wxDisplay_new1(index)) }
     }
     /// Constructor creating the display object associated with the given window.
     ///
-    /// [See `wxDisplay::wxDisplay()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_display.html#a75dc6e0f101a1126269bb0de990b8599)
+    /// See [C++ `wxDisplay::wxDisplay()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_display.html#a75dc6e0f101a1126269bb0de990b8599).
     pub fn new_with_window<W: WindowMethods>(window: Option<&W>) -> DisplayIsOwned<OWNED> {
         unsafe {
             let window = match window {
@@ -2604,8 +2649,9 @@ impl<const OWNED: bool> Drop for DisplayIsOwned<OWNED> {
 // wxDisplayChangedEvent
 wxwidgets! {
     /// A display changed event is sent to top-level windows when the display resolution has changed.
-    ///
-    /// [See `wxDisplayChangedEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_display_changed_event.html)
+    /// - [`DisplayChangedEvent`] represents a C++ `wxDisplayChangedEvent` class instance which your code has ownership, [`DisplayChangedEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DisplayChangedEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDisplayChangedEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_display_changed_event.html) for more details.
     #[doc(alias = "wxDisplayChangedEvent")]
     #[doc(alias = "DisplayChangedEvent")]
     class DisplayChangedEvent
@@ -2616,7 +2662,7 @@ wxwidgets! {
 }
 impl<const OWNED: bool> DisplayChangedEventIsOwned<OWNED> {
     ///
-    /// [See `wxDisplayChangedEvent::wxDisplayChangedEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_display_changed_event.html#aa9169eb3e0bbe259a738459f39a6eb1a)
+    /// See [C++ `wxDisplayChangedEvent::wxDisplayChangedEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_display_changed_event.html#aa9169eb3e0bbe259a738459f39a6eb1a).
     pub fn new() -> DisplayChangedEventIsOwned<OWNED> {
         unsafe { DisplayChangedEventIsOwned(ffi::wxDisplayChangedEvent_new()) }
     }
@@ -2655,8 +2701,9 @@ impl<const OWNED: bool> Drop for DisplayChangedEventIsOwned<OWNED> {
 // wxDragImage
 wxwidgets! {
     /// This class is used when you wish to drag an object on the screen, and a simple cursor is not enough.
-    ///
-    /// [See `wxDragImage`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_drag_image.html)
+    /// - [`DragImage`] represents a C++ `wxDragImage` class instance which your code has ownership, [`DragImageIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DragImage`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDragImage` class's documentation](https://docs.wxwidgets.org/3.2/classwx_drag_image.html) for more details.
     #[doc(alias = "wxDragImage")]
     #[doc(alias = "DragImage")]
     class DragImage
@@ -2667,13 +2714,13 @@ wxwidgets! {
 impl<const OWNED: bool> DragImageIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxDragImage::wxDragImage()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_drag_image.html#a1f9e5d1596679795bedb2aebe4841e6d)
+    /// See [C++ `wxDragImage::wxDragImage()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_drag_image.html#a1f9e5d1596679795bedb2aebe4841e6d).
     pub fn new() -> DragImageIsOwned<OWNED> {
         unsafe { DragImageIsOwned(ffi::wxDragImage_new()) }
     }
     /// Constructs a drag image from a bitmap and optional cursor.
     ///
-    /// [See `wxDragImage::wxDragImage()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_drag_image.html#a1aabc326eb82c6aeda17b699b1d45ecb)
+    /// See [C++ `wxDragImage::wxDragImage()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_drag_image.html#a1aabc326eb82c6aeda17b699b1d45ecb).
     pub fn new_with_bitmap<B: BitmapMethods, C: CursorMethods>(
         image: &B,
         cursor: &C,
@@ -2686,7 +2733,7 @@ impl<const OWNED: bool> DragImageIsOwned<OWNED> {
     }
     /// Constructs a drag image from an icon and optional cursor.
     ///
-    /// [See `wxDragImage::wxDragImage()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_drag_image.html#a7d1efd4e364ffe45c22aff65b52d19f3)
+    /// See [C++ `wxDragImage::wxDragImage()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_drag_image.html#a7d1efd4e364ffe45c22aff65b52d19f3).
     pub fn new_with_icon<I: IconMethods, C: CursorMethods>(
         image: &I,
         cursor: &C,
@@ -2699,7 +2746,7 @@ impl<const OWNED: bool> DragImageIsOwned<OWNED> {
     }
     /// Constructs a drag image from a text string and optional cursor.
     ///
-    /// [See `wxDragImage::wxDragImage()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_drag_image.html#a594a13372b1c37b9a853d0817c17e9c0)
+    /// See [C++ `wxDragImage::wxDragImage()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_drag_image.html#a594a13372b1c37b9a853d0817c17e9c0).
     pub fn new_with_str<C: CursorMethods>(text: &str, cursor: &C) -> DragImageIsOwned<OWNED> {
         unsafe {
             let text = WxString::from(text);
@@ -2710,7 +2757,7 @@ impl<const OWNED: bool> DragImageIsOwned<OWNED> {
     }
     /// Constructs a drag image from the text in the given tree control item, and optional cursor.
     ///
-    /// [See `wxDragImage::wxDragImage()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_drag_image.html#afe1171ec9545ff5fbb6268501ed6ff60)
+    /// See [C++ `wxDragImage::wxDragImage()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_drag_image.html#afe1171ec9545ff5fbb6268501ed6ff60).
     pub fn new_with_treectrl<T: TreeCtrlMethods, T2: TreeItemIdMethods>(
         tree_ctrl: &T,
         id: &T2,
@@ -2723,7 +2770,7 @@ impl<const OWNED: bool> DragImageIsOwned<OWNED> {
     }
     /// Constructs a drag image from the text in the given list control item, and optional cursor.
     ///
-    /// [See `wxDragImage::wxDragImage()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_drag_image.html#a24a75b4679d42593180e1e8b9d29c5a5)
+    /// See [C++ `wxDragImage::wxDragImage()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_drag_image.html#a24a75b4679d42593180e1e8b9d29c5a5).
     pub fn new_with_listctrl<L: ListCtrlMethods>(
         list_ctrl: &L,
         id: c_long,
@@ -2763,8 +2810,9 @@ impl<const OWNED: bool> Drop for DragImageIsOwned<OWNED> {
 // wxDropFilesEvent
 wxwidgets! {
     /// This class is used for drop files events, that is, when files have been dropped onto the window.
-    ///
-    /// [See `wxDropFilesEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_drop_files_event.html)
+    /// - [`DropFilesEvent`] represents a C++ `wxDropFilesEvent` class instance which your code has ownership, [`DropFilesEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DropFilesEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDropFilesEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_drop_files_event.html) for more details.
     #[doc(alias = "wxDropFilesEvent")]
     #[doc(alias = "DropFilesEvent")]
     class DropFilesEvent
@@ -2810,8 +2858,9 @@ impl<const OWNED: bool> Drop for DropFilesEventIsOwned<OWNED> {
 // wxDropSource
 wxwidgets! {
     /// This class represents a source for a drag and drop operation.
-    ///
-    /// [See `wxDropSource`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_drop_source.html)
+    /// - [`DropSource`] represents a C++ `wxDropSource` class instance which your code has ownership, [`DropSourceIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DropSource`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDropSource` class's documentation](https://docs.wxwidgets.org/3.2/classwx_drop_source.html) for more details.
     #[doc(alias = "wxDropSource")]
     #[doc(alias = "DropSource")]
     class DropSource
@@ -2821,7 +2870,7 @@ wxwidgets! {
 impl<const OWNED: bool> DropSourceIsOwned<OWNED> {
     /// This constructor requires that you must call SetData() later.
     ///
-    /// [See `wxDropSource::wxDropSource()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_drop_source.html#a0534684be549317b7a14ce27d5afc699)
+    /// See [C++ `wxDropSource::wxDropSource()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_drop_source.html#a0534684be549317b7a14ce27d5afc699).
     pub fn new_with_window_cursor<
         W: WindowMethods,
         C: CursorMethods,
@@ -2846,7 +2895,7 @@ impl<const OWNED: bool> DropSourceIsOwned<OWNED> {
     }
     /// The constructor taking a wxDataObject.
     ///
-    /// [See `wxDropSource::wxDropSource()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_drop_source.html#afd4966dacaa526f6d2e5708d91136da7)
+    /// See [C++ `wxDropSource::wxDropSource()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_drop_source.html#afd4966dacaa526f6d2e5708d91136da7).
     pub fn new_with_dataobject_cursor<
         D: DataObjectMethods,
         W: WindowMethods,
@@ -2876,7 +2925,7 @@ impl<const OWNED: bool> DropSourceIsOwned<OWNED> {
     }
     /// This constructor requires that you must call SetData() later.
     ///
-    /// [See `wxDropSource::wxDropSource()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_drop_source.html#a06dbcfe97a0615d59c97d0be7d11f6e5)
+    /// See [C++ `wxDropSource::wxDropSource()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_drop_source.html#a06dbcfe97a0615d59c97d0be7d11f6e5).
     pub fn new_with_window_icon<
         W: WindowMethods,
         I: IconMethods,
@@ -2901,7 +2950,7 @@ impl<const OWNED: bool> DropSourceIsOwned<OWNED> {
     }
     /// The constructor taking a wxDataObject.
     ///
-    /// [See `wxDropSource::wxDropSource()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_drop_source.html#a867fea285027d6625acacfcb799833b1)
+    /// See [C++ `wxDropSource::wxDropSource()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_drop_source.html#a867fea285027d6625acacfcb799833b1).
     pub fn new_with_dataobject_icon<
         D: DataObjectMethods,
         W: WindowMethods,
@@ -2949,8 +2998,9 @@ impl<const OWNED: bool> Drop for DropSourceIsOwned<OWNED> {
 // wxDropTarget
 wxwidgets! {
     /// This class represents a target for a drag and drop operation.
-    ///
-    /// [See `wxDropTarget`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_drop_target.html)
+    /// - [`DropTarget`] represents a C++ `wxDropTarget` class instance which your code has ownership, [`DropTargetIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DropTarget`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxDropTarget` class's documentation](https://docs.wxwidgets.org/3.2/classwx_drop_target.html) for more details.
     #[doc(alias = "wxDropTarget")]
     #[doc(alias = "DropTarget")]
     class DropTarget

@@ -3,8 +3,9 @@ use super::*;
 // wxOverlay
 wxwidgets! {
     /// Creates an overlay over an existing window, allowing for manipulations like rubberbanding, etc.
-    ///
-    /// [See `wxOverlay`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_overlay.html)
+    /// - [`Overlay`] represents a C++ `wxOverlay` class instance which your code has ownership, [`OverlayIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`Overlay`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxOverlay` class's documentation](https://docs.wxwidgets.org/3.2/classwx_overlay.html) for more details.
     #[doc(alias = "wxOverlay")]
     #[doc(alias = "Overlay")]
     class Overlay
@@ -13,7 +14,7 @@ wxwidgets! {
 }
 impl<const OWNED: bool> OverlayIsOwned<OWNED> {
     ///
-    /// [See `wxOverlay::wxOverlay()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_overlay.html#aa99ff227f54e8eaa85d2d7966e317a35)
+    /// See [C++ `wxOverlay::wxOverlay()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_overlay.html#aa99ff227f54e8eaa85d2d7966e317a35).
     pub fn new() -> OverlayIsOwned<OWNED> {
         unsafe { OverlayIsOwned(ffi::wxOverlay_new()) }
     }
@@ -37,8 +38,9 @@ impl<const OWNED: bool> Drop for OverlayIsOwned<OWNED> {
 // wxOwnerDrawnComboBox
 wxwidgets! {
     /// wxOwnerDrawnComboBox is a combobox with owner-drawn list items.
-    ///
-    /// [See `wxOwnerDrawnComboBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_owner_drawn_combo_box.html)
+    /// - [`OwnerDrawnComboBox`] represents a C++ `wxOwnerDrawnComboBox` class instance which your code has ownership, [`OwnerDrawnComboBoxIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`OwnerDrawnComboBox`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxOwnerDrawnComboBox` class's documentation](https://docs.wxwidgets.org/3.2/classwx_owner_drawn_combo_box.html) for more details.
     #[doc(alias = "wxOwnerDrawnComboBox")]
     #[doc(alias = "OwnerDrawnComboBox")]
     class OwnerDrawnComboBox
@@ -53,14 +55,14 @@ wxwidgets! {
 impl<const OWNED: bool> OwnerDrawnComboBoxIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxOwnerDrawnComboBox::wxOwnerDrawnComboBox()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_owner_drawn_combo_box.html#af949423a0a5e212ee125ad82ecb5941e)
+    /// See [C++ `wxOwnerDrawnComboBox::wxOwnerDrawnComboBox()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_owner_drawn_combo_box.html#af949423a0a5e212ee125ad82ecb5941e).
     pub fn new_2step() -> OwnerDrawnComboBoxIsOwned<OWNED> {
         unsafe { OwnerDrawnComboBoxIsOwned(ffi::wxOwnerDrawnComboBox_new()) }
     }
     // NOT_SUPPORTED: fn wxOwnerDrawnComboBox1()
     /// Constructor, creating and showing a owner-drawn combobox.
     ///
-    /// [See `wxOwnerDrawnComboBox::wxOwnerDrawnComboBox()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_owner_drawn_combo_box.html#a2eda25541f678c9dfa9bc4c97bcafc29)
+    /// See [C++ `wxOwnerDrawnComboBox::wxOwnerDrawnComboBox()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_owner_drawn_combo_box.html#a2eda25541f678c9dfa9bc4c97bcafc29).
     pub fn new<
         W: WindowMethods,
         P: PointMethods,
@@ -154,7 +156,7 @@ impl<const OWNED: bool> TextEntryMethods for OwnerDrawnComboBoxIsOwned<OWNED> {
 impl<const OWNED: bool> ComboCtrlMethods for OwnerDrawnComboBoxIsOwned<OWNED> {
     /// Creates the combobox for two-step construction.
     ///
-    /// [See `wxOwnerDrawnComboBox::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_owner_drawn_combo_box.html#a92bdeed6e785aecb9ee37181b2eb3a3e)
+    /// See [C++ `wxOwnerDrawnComboBox::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_owner_drawn_combo_box.html#a92bdeed6e785aecb9ee37181b2eb3a3e).
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
         parent: Option<&W>,

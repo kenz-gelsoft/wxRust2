@@ -3,8 +3,9 @@ use super::*;
 // wxEditableListBox
 wxwidgets! {
     /// An editable listbox is composite control that lets the user easily enter, delete and reorder a list of strings.
-    ///
-    /// [See `wxEditableListBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_editable_list_box.html)
+    /// - [`EditableListBox`] represents a C++ `wxEditableListBox` class instance which your code has ownership, [`EditableListBoxIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`EditableListBox`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxEditableListBox` class's documentation](https://docs.wxwidgets.org/3.2/classwx_editable_list_box.html) for more details.
     #[doc(alias = "wxEditableListBox")]
     #[doc(alias = "EditableListBox")]
     class EditableListBox
@@ -18,13 +19,13 @@ wxwidgets! {
 impl<const OWNED: bool> EditableListBoxIsOwned<OWNED> {
     /// Default ctor.
     ///
-    /// [See `wxEditableListBox::wxEditableListBox()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_editable_list_box.html#ab42098c0b81e1f027e307fad8a9ecc8a)
+    /// See [C++ `wxEditableListBox::wxEditableListBox()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_editable_list_box.html#ab42098c0b81e1f027e307fad8a9ecc8a).
     pub fn new_2step() -> EditableListBoxIsOwned<OWNED> {
         unsafe { EditableListBoxIsOwned(ffi::wxEditableListBox_new()) }
     }
     /// Constructor, creating and showing a list box.
     ///
-    /// [See `wxEditableListBox::wxEditableListBox()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_editable_list_box.html#aa00cc37cddb598967111e4ee8a35e812)
+    /// See [C++ `wxEditableListBox::wxEditableListBox()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_editable_list_box.html#aa00cc37cddb598967111e4ee8a35e812).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -88,8 +89,9 @@ impl<const OWNED: bool> DynamicCast for EditableListBoxIsOwned<OWNED> {
 // wxEraseEvent
 wxwidgets! {
     /// An erase event is sent when a window's background needs to be repainted.
-    ///
-    /// [See `wxEraseEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_erase_event.html)
+    /// - [`EraseEvent`] represents a C++ `wxEraseEvent` class instance which your code has ownership, [`EraseEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`EraseEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxEraseEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_erase_event.html) for more details.
     #[doc(alias = "wxEraseEvent")]
     #[doc(alias = "EraseEvent")]
     class EraseEvent
@@ -101,7 +103,7 @@ wxwidgets! {
 impl<const OWNED: bool> EraseEventIsOwned<OWNED> {
     /// Constructor.
     ///
-    /// [See `wxEraseEvent::wxEraseEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_erase_event.html#ae6d16ac169480be125ea4e4138fc29ef)
+    /// See [C++ `wxEraseEvent::wxEraseEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_erase_event.html#ae6d16ac169480be125ea4e4138fc29ef).
     pub fn new<D: DCMethods>(id: c_int, dc: Option<&D>) -> EraseEventIsOwned<OWNED> {
         unsafe {
             let dc = match dc {
@@ -146,8 +148,9 @@ impl<const OWNED: bool> Drop for EraseEventIsOwned<OWNED> {
 // wxEventBlocker
 wxwidgets! {
     /// This class is a special event handler which allows discarding any event (or a set of event types) directed to a specific window.
-    ///
-    /// [See `wxEventBlocker`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_event_blocker.html)
+    /// - [`EventBlocker`] represents a C++ `wxEventBlocker` class instance which your code has ownership, [`EventBlockerIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`EventBlocker`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxEventBlocker` class's documentation](https://docs.wxwidgets.org/3.2/classwx_event_blocker.html) for more details.
     #[doc(alias = "wxEventBlocker")]
     #[doc(alias = "EventBlocker")]
     class EventBlocker

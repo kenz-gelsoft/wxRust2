@@ -1,11 +1,14 @@
 use super::*;
 
 // wxEditableListBox
+/// This trait represents [C++ `wxEditableListBox` class](https://docs.wxwidgets.org/3.2/classwx_editable_list_box.html)'s methods and inheritance.
+///
+/// See [`EditableListBoxIsOwned`] documentation for the class usage.
 pub trait EditableListBoxMethods: PanelMethods {
     // DTOR: fn ~wxEditableListBox()
     /// Creates the editable listbox for two-step construction.
     ///
-    /// [See `wxEditableListBox::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_editable_list_box.html#a38b5b586e33716eb6431062ca9f685a0)
+    /// See [C++ `wxEditableListBox::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_editable_list_box.html#a38b5b586e33716eb6431062ca9f685a0).
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -32,7 +35,7 @@ pub trait EditableListBoxMethods: PanelMethods {
     }
     /// Replaces current contents with given strings.
     ///
-    /// [See `wxEditableListBox::SetStrings()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_editable_list_box.html#a6162b1d0e5c4b39896f6628de70fceee)
+    /// See [C++ `wxEditableListBox::SetStrings()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_editable_list_box.html#a6162b1d0e5c4b39896f6628de70fceee).
     fn set_strings<A: ArrayStringMethods>(&self, strings: &A) {
         unsafe {
             let strings = strings.as_ptr();
@@ -41,7 +44,7 @@ pub trait EditableListBoxMethods: PanelMethods {
     }
     /// Returns in the given array the current contents of the control (the array will be erased before control's contents are appended).
     ///
-    /// [See `wxEditableListBox::GetStrings()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_editable_list_box.html#ae6996b10e786261743eb83e8313357d3)
+    /// See [C++ `wxEditableListBox::GetStrings()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_editable_list_box.html#ae6996b10e786261743eb83e8313357d3).
     fn get_strings<A: ArrayStringMethods>(&self, strings: &A) {
         unsafe {
             let strings = strings.as_ptr();
@@ -51,16 +54,22 @@ pub trait EditableListBoxMethods: PanelMethods {
 }
 
 // wxEraseEvent
+/// This trait represents [C++ `wxEraseEvent` class](https://docs.wxwidgets.org/3.2/classwx_erase_event.html)'s methods and inheritance.
+///
+/// See [`EraseEventIsOwned`] documentation for the class usage.
 pub trait EraseEventMethods: EventMethods {
     /// Returns the device context associated with the erase event to draw on.
     ///
-    /// [See `wxEraseEvent::GetDC()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_erase_event.html#a44679163c23de75ecdbb2594add850cc)
+    /// See [C++ `wxEraseEvent::GetDC()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_erase_event.html#a44679163c23de75ecdbb2594add850cc).
     fn get_dc(&self) -> Option<DCIsOwned<false>> {
         unsafe { DC::option_from(ffi::wxEraseEvent_GetDC(self.as_ptr())) }
     }
 }
 
 // wxEventBlocker
+/// This trait represents [C++ `wxEventBlocker` class](https://docs.wxwidgets.org/3.2/classwx_event_blocker.html)'s methods and inheritance.
+///
+/// See [`EventBlockerIsOwned`] documentation for the class usage.
 pub trait EventBlockerMethods: EvtHandlerMethods {
     // DTOR: fn ~wxEventBlocker()
     // NOT_SUPPORTED: fn Block()

@@ -3,8 +3,9 @@ use super::*;
 // wxSVGFileDC
 wxwidgets! {
     /// A wxSVGFileDC is a device context onto which graphics and text can be drawn, and the output produced as a vector file, in SVG format.
-    ///
-    /// [See `wxSVGFileDC`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html)
+    /// - [`SVGFileDC`] represents a C++ `wxSVGFileDC` class instance which your code has ownership, [`SVGFileDCIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`SVGFileDC`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSVGFileDC` class's documentation](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html) for more details.
     #[doc(alias = "wxSVGFileDC")]
     #[doc(alias = "SVGFileDC")]
     class SVGFileDC
@@ -16,7 +17,7 @@ wxwidgets! {
 impl<const OWNED: bool> SVGFileDCIsOwned<OWNED> {
     /// Initializes a wxSVGFileDC with the given filename, width and height at dpi resolution, and an optional title.
     ///
-    /// [See `wxSVGFileDC::wxSVGFileDC()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#ab7b8446a6dff6f1533343f16ca4dec9e)
+    /// See [C++ `wxSVGFileDC::wxSVGFileDC()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#ab7b8446a6dff6f1533343f16ca4dec9e).
     pub fn new(
         filename: &str,
         width: c_int,
@@ -66,25 +67,25 @@ impl<const OWNED: bool> Drop for SVGFileDCIsOwned<OWNED> {
 impl<const OWNED: bool> DCMethods for SVGFileDCIsOwned<OWNED> {
     /// Draws a rectangle the size of the SVG using the wxDC::SetBackground() brush.
     ///
-    /// [See `wxSVGFileDC::Clear()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#a88eb12ff20b15f2e7d91483394a2ed16)
+    /// See [C++ `wxSVGFileDC::Clear()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#a88eb12ff20b15f2e7d91483394a2ed16).
     fn clear(&self) {
         unsafe { ffi::wxSVGFileDC_Clear(self.as_ptr()) }
     }
     /// Destroys the current clipping region so that none of the DC is clipped.
     ///
-    /// [See `wxSVGFileDC::DestroyClippingRegion()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#a83be1b0f0b66a4949268e34348af3ee8)
+    /// See [C++ `wxSVGFileDC::DestroyClippingRegion()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#a83be1b0f0b66a4949268e34348af3ee8).
     fn destroy_clipping_region(&self) {
         unsafe { ffi::wxSVGFileDC_DestroyClippingRegion(self.as_ptr()) }
     }
     /// Function not implemented in this DC class.
     ///
-    /// [See `wxSVGFileDC::CrossHair()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#ae9c7ad3de5259a461eb4fd7c56b58d90)
+    /// See [C++ `wxSVGFileDC::CrossHair()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#ae9c7ad3de5259a461eb4fd7c56b58d90).
     fn cross_hair_coord(&self, x: c_int, y: c_int) {
         unsafe { ffi::wxSVGFileDC_CrossHair(self.as_ptr(), x, y) }
     }
     // NOT_SUPPORTED: fn FloodFill()
     ///
-    /// [See `wxSVGFileDC::GetPixel()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#a0304a4081244e8e9944a357c855a713b)
+    /// See [C++ `wxSVGFileDC::GetPixel()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#a0304a4081244e8e9944a357c855a713b).
     fn get_pixel<C: ColourMethods>(&self, x: c_int, y: c_int, colour: Option<&C>) -> bool {
         unsafe {
             let colour = match colour {
@@ -95,7 +96,7 @@ impl<const OWNED: bool> DCMethods for SVGFileDCIsOwned<OWNED> {
         }
     }
     ///
-    /// [See `wxSVGFileDC::SetPalette()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#a56f9674ee5fff78f9f884586c7106bfc)
+    /// See [C++ `wxSVGFileDC::SetPalette()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#a56f9674ee5fff78f9f884586c7106bfc).
     fn set_palette<P: PaletteMethods>(&self, palette: &P) {
         unsafe {
             let palette = palette.as_ptr();
@@ -103,14 +104,14 @@ impl<const OWNED: bool> DCMethods for SVGFileDCIsOwned<OWNED> {
         }
     }
     ///
-    /// [See `wxSVGFileDC::GetDepth()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#adb3e731d36ffa571ec823d19ca639771)
+    /// See [C++ `wxSVGFileDC::GetDepth()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#adb3e731d36ffa571ec823d19ca639771).
     fn get_depth(&self) -> c_int {
         unsafe { ffi::wxSVGFileDC_GetDepth(self.as_ptr()) }
     }
     // NOT_SUPPORTED: fn SetLogicalFunction()
     // NOT_SUPPORTED: fn GetLogicalFunction()
     ///
-    /// [See `wxSVGFileDC::StartDoc()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#afc23fca3c1919a917ba4fa4ea1a47bd6)
+    /// See [C++ `wxSVGFileDC::StartDoc()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#afc23fca3c1919a917ba4fa4ea1a47bd6).
     fn start_doc(&self, message: &str) -> bool {
         unsafe {
             let message = WxString::from(message);
@@ -119,17 +120,17 @@ impl<const OWNED: bool> DCMethods for SVGFileDCIsOwned<OWNED> {
         }
     }
     ///
-    /// [See `wxSVGFileDC::EndDoc()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#a70fee3fe2c116cd5698e89c63992dfe1)
+    /// See [C++ `wxSVGFileDC::EndDoc()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#a70fee3fe2c116cd5698e89c63992dfe1).
     fn end_doc(&self) {
         unsafe { ffi::wxSVGFileDC_EndDoc(self.as_ptr()) }
     }
     ///
-    /// [See `wxSVGFileDC::StartPage()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#a02ccc9acf97f0aff154e2a1dbd6cf0f6)
+    /// See [C++ `wxSVGFileDC::StartPage()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#a02ccc9acf97f0aff154e2a1dbd6cf0f6).
     fn start_page(&self) {
         unsafe { ffi::wxSVGFileDC_StartPage(self.as_ptr()) }
     }
     ///
-    /// [See `wxSVGFileDC::EndPage()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#aabbe60d5f7816974da2ab92195de961a)
+    /// See [C++ `wxSVGFileDC::EndPage()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#aabbe60d5f7816974da2ab92195de961a).
     fn end_page(&self) {
         unsafe { ffi::wxSVGFileDC_EndPage(self.as_ptr()) }
     }
@@ -138,8 +139,9 @@ impl<const OWNED: bool> DCMethods for SVGFileDCIsOwned<OWNED> {
 // wxSashEvent
 wxwidgets! {
     /// A sash event is sent when the sash of a wxSashWindow has been dragged by the user.
-    ///
-    /// [See `wxSashEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_sash_event.html)
+    /// - [`SashEvent`] represents a C++ `wxSashEvent` class instance which your code has ownership, [`SashEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`SashEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSashEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_sash_event.html) for more details.
     #[doc(alias = "wxSashEvent")]
     #[doc(alias = "SashEvent")]
     class SashEvent
@@ -191,8 +193,9 @@ impl<const OWNED: bool> Drop for SashEventIsOwned<OWNED> {
 // wxSashLayoutWindow
 wxwidgets! {
     /// wxSashLayoutWindow responds to OnCalculateLayout events generated by wxLayoutAlgorithm.
-    ///
-    /// [See `wxSashLayoutWindow`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_sash_layout_window.html)
+    /// - [`SashLayoutWindow`] represents a C++ `wxSashLayoutWindow` class instance which your code has ownership, [`SashLayoutWindowIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`SashLayoutWindow`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSashLayoutWindow` class's documentation](https://docs.wxwidgets.org/3.2/classwx_sash_layout_window.html) for more details.
     #[doc(alias = "wxSashLayoutWindow")]
     #[doc(alias = "SashLayoutWindow")]
     class SashLayoutWindow
@@ -206,13 +209,13 @@ wxwidgets! {
 impl<const OWNED: bool> SashLayoutWindowIsOwned<OWNED> {
     /// Default ctor.
     ///
-    /// [See `wxSashLayoutWindow::wxSashLayoutWindow()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_sash_layout_window.html#a842e094abe06cbd25f645c32d24b5a3e)
+    /// See [C++ `wxSashLayoutWindow::wxSashLayoutWindow()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sash_layout_window.html#a842e094abe06cbd25f645c32d24b5a3e).
     pub fn new_2step() -> SashLayoutWindowIsOwned<OWNED> {
         unsafe { SashLayoutWindowIsOwned(ffi::wxSashLayoutWindow_new()) }
     }
     /// Constructs a sash layout window, which can be a child of a frame, dialog or any other non-control window.
     ///
-    /// [See `wxSashLayoutWindow::wxSashLayoutWindow()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_sash_layout_window.html#a1c8bff48c9191b36d0fc197eb9a1ca46)
+    /// See [C++ `wxSashLayoutWindow::wxSashLayoutWindow()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sash_layout_window.html#a1c8bff48c9191b36d0fc197eb9a1ca46).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -272,7 +275,7 @@ impl<const OWNED: bool> DynamicCast for SashLayoutWindowIsOwned<OWNED> {
 impl<const OWNED: bool> WindowMethods for SashLayoutWindowIsOwned<OWNED> {
     /// Initializes a sash layout window, which can be a child of a frame, dialog or any other non-control window.
     ///
-    /// [See `wxSashLayoutWindow::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_sash_layout_window.html#a01ab3e617deb3a4ca348b2bfcd0ab26e)
+    /// See [C++ `wxSashLayoutWindow::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sash_layout_window.html#a01ab3e617deb3a4ca348b2bfcd0ab26e).
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -299,8 +302,9 @@ impl<const OWNED: bool> WindowMethods for SashLayoutWindowIsOwned<OWNED> {
 // wxSashWindow
 wxwidgets! {
     /// wxSashWindow allows any of its edges to have a sash which can be dragged to resize the window.
-    ///
-    /// [See `wxSashWindow`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_sash_window.html)
+    /// - [`SashWindow`] represents a C++ `wxSashWindow` class instance which your code has ownership, [`SashWindowIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`SashWindow`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSashWindow` class's documentation](https://docs.wxwidgets.org/3.2/classwx_sash_window.html) for more details.
     #[doc(alias = "wxSashWindow")]
     #[doc(alias = "SashWindow")]
     class SashWindow
@@ -313,13 +317,13 @@ wxwidgets! {
 impl<const OWNED: bool> SashWindowIsOwned<OWNED> {
     /// Default ctor.
     ///
-    /// [See `wxSashWindow::wxSashWindow()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_sash_window.html#a49c7b9a829ab48237bbe479e5011f297)
+    /// See [C++ `wxSashWindow::wxSashWindow()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sash_window.html#a49c7b9a829ab48237bbe479e5011f297).
     pub fn new_2step() -> SashWindowIsOwned<OWNED> {
         unsafe { SashWindowIsOwned(ffi::wxSashWindow_new()) }
     }
     /// Constructs a sash window, which can be a child of a frame, dialog or any other non-control window.
     ///
-    /// [See `wxSashWindow::wxSashWindow()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_sash_window.html#aed974ee33685e7a209f061e39cf13451)
+    /// See [C++ `wxSashWindow::wxSashWindow()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sash_window.html#aed974ee33685e7a209f061e39cf13451).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -373,8 +377,9 @@ impl<const OWNED: bool> DynamicCast for SashWindowIsOwned<OWNED> {
 // wxScreenDC
 wxwidgets! {
     /// A wxScreenDC can be used to paint on the screen.
-    ///
-    /// [See `wxScreenDC`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_screen_d_c.html)
+    /// - [`ScreenDC`] represents a C++ `wxScreenDC` class instance which your code has ownership, [`ScreenDCIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`ScreenDC`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxScreenDC` class's documentation](https://docs.wxwidgets.org/3.2/classwx_screen_d_c.html) for more details.
     #[doc(alias = "wxScreenDC")]
     #[doc(alias = "ScreenDC")]
     class ScreenDC
@@ -386,7 +391,7 @@ wxwidgets! {
 impl<const OWNED: bool> ScreenDCIsOwned<OWNED> {
     /// Constructor.
     ///
-    /// [See `wxScreenDC::wxScreenDC()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_screen_d_c.html#a05147c9296ea7012f345f0803f52c020)
+    /// See [C++ `wxScreenDC::wxScreenDC()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_screen_d_c.html#a05147c9296ea7012f345f0803f52c020).
     pub fn new() -> ScreenDCIsOwned<OWNED> {
         unsafe { ScreenDCIsOwned(ffi::wxScreenDC_new()) }
     }
@@ -425,8 +430,9 @@ impl<const OWNED: bool> Drop for ScreenDCIsOwned<OWNED> {
 // wxScrollBar
 wxwidgets! {
     /// A wxScrollBar is a control that represents a horizontal or vertical scrollbar.
-    ///
-    /// [See `wxScrollBar`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_scroll_bar.html)
+    /// - [`ScrollBar`] represents a C++ `wxScrollBar` class instance which your code has ownership, [`ScrollBarIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`ScrollBar`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxScrollBar` class's documentation](https://docs.wxwidgets.org/3.2/classwx_scroll_bar.html) for more details.
     #[doc(alias = "wxScrollBar")]
     #[doc(alias = "ScrollBar")]
     class ScrollBar
@@ -440,13 +446,13 @@ wxwidgets! {
 impl<const OWNED: bool> ScrollBarIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxScrollBar::wxScrollBar()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_scroll_bar.html#a8c38e80a7c369efa77ed166f01d6d86c)
+    /// See [C++ `wxScrollBar::wxScrollBar()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_scroll_bar.html#a8c38e80a7c369efa77ed166f01d6d86c).
     pub fn new_2step() -> ScrollBarIsOwned<OWNED> {
         unsafe { ScrollBarIsOwned(ffi::wxScrollBar_new()) }
     }
     /// Constructor, creating and showing a scrollbar.
     ///
-    /// [See `wxScrollBar::wxScrollBar()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_scroll_bar.html#a5914fbd50ef3b1d841d72d51d73cf9f4)
+    /// See [C++ `wxScrollBar::wxScrollBar()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_scroll_bar.html#a5914fbd50ef3b1d841d72d51d73cf9f4).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -508,7 +514,7 @@ impl<const OWNED: bool> DynamicCast for ScrollBarIsOwned<OWNED> {
 impl<const OWNED: bool> ControlMethods for ScrollBarIsOwned<OWNED> {
     /// Scrollbar creation function called by the scrollbar constructor.
     ///
-    /// [See `wxScrollBar::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_scroll_bar.html#a7a677f2a9d40b7aaa5a25cf72123a56f)
+    /// See [C++ `wxScrollBar::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_scroll_bar.html#a7a677f2a9d40b7aaa5a25cf72123a56f).
     fn create_validator<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
         parent: Option<&W>,
@@ -537,8 +543,9 @@ impl<const OWNED: bool> ControlMethods for ScrollBarIsOwned<OWNED> {
 // wxScrollEvent
 wxwidgets! {
     /// A scroll event holds information about events sent from stand-alone scrollbars (see wxScrollBar) and sliders (see wxSlider).
-    ///
-    /// [See `wxScrollEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_scroll_event.html)
+    /// - [`ScrollEvent`] represents a C++ `wxScrollEvent` class instance which your code has ownership, [`ScrollEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`ScrollEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxScrollEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_scroll_event.html) for more details.
     #[doc(alias = "wxScrollEvent")]
     #[doc(alias = "ScrollEvent")]
     class ScrollEvent
@@ -590,8 +597,9 @@ impl<const OWNED: bool> Drop for ScrollEventIsOwned<OWNED> {
 // wxScrollWinEvent
 wxwidgets! {
     /// A scroll event holds information about events sent from scrolling windows.
-    ///
-    /// [See `wxScrollWinEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_scroll_win_event.html)
+    /// - [`ScrollWinEvent`] represents a C++ `wxScrollWinEvent` class instance which your code has ownership, [`ScrollWinEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`ScrollWinEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxScrollWinEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_scroll_win_event.html) for more details.
     #[doc(alias = "wxScrollWinEvent")]
     #[doc(alias = "ScrollWinEvent")]
     class ScrollWinEvent
@@ -637,8 +645,9 @@ impl<const OWNED: bool> Drop for ScrollWinEventIsOwned<OWNED> {
 // wxSearchCtrl
 wxwidgets! {
     /// A search control is a composite control with a search button, a text control, and a cancel button.
-    ///
-    /// [See `wxSearchCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_search_ctrl.html)
+    /// - [`SearchCtrl`] represents a C++ `wxSearchCtrl` class instance which your code has ownership, [`SearchCtrlIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`SearchCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSearchCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_search_ctrl.html) for more details.
     #[doc(alias = "wxSearchCtrl")]
     #[doc(alias = "SearchCtrl")]
     class SearchCtrl
@@ -653,13 +662,13 @@ wxwidgets! {
 impl<const OWNED: bool> SearchCtrlIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxSearchCtrl::wxSearchCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_search_ctrl.html#afce4a40295a3b98eee43cc191ff3a48f)
+    /// See [C++ `wxSearchCtrl::wxSearchCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_search_ctrl.html#afce4a40295a3b98eee43cc191ff3a48f).
     pub fn new_2step() -> SearchCtrlIsOwned<OWNED> {
         unsafe { SearchCtrlIsOwned(ffi::wxSearchCtrl_new()) }
     }
     /// Constructor, creating and showing a text control.
     ///
-    /// [See `wxSearchCtrl::wxSearchCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_search_ctrl.html#a6663657075e790177b0af7b274396fcd)
+    /// See [C++ `wxSearchCtrl::wxSearchCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_search_ctrl.html#a6663657075e790177b0af7b274396fcd).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -734,7 +743,7 @@ impl<const OWNED: bool> TextEntryMethods for SearchCtrlIsOwned<OWNED> {
 }
 impl<const OWNED: bool> TextCtrlMethods for SearchCtrlIsOwned<OWNED> {
     ///
-    /// [See `wxSearchCtrl::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_search_ctrl.html#a6a438d8cb2a837e62f4e60cf264c72ae)
+    /// See [C++ `wxSearchCtrl::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_search_ctrl.html#a6a438d8cb2a837e62f4e60cf264c72ae).
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
         parent: Option<&W>,
@@ -776,8 +785,9 @@ impl<const OWNED: bool> TextCtrlMethods for SearchCtrlIsOwned<OWNED> {
 // wxSetCursorEvent
 wxwidgets! {
     /// A wxSetCursorEvent is generated from wxWindow when the mouse cursor is about to be set as a result of mouse motion.
-    ///
-    /// [See `wxSetCursorEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_set_cursor_event.html)
+    /// - [`SetCursorEvent`] represents a C++ `wxSetCursorEvent` class instance which your code has ownership, [`SetCursorEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`SetCursorEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSetCursorEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_set_cursor_event.html) for more details.
     #[doc(alias = "wxSetCursorEvent")]
     #[doc(alias = "SetCursorEvent")]
     class SetCursorEvent
@@ -789,7 +799,7 @@ wxwidgets! {
 impl<const OWNED: bool> SetCursorEventIsOwned<OWNED> {
     /// Constructor, used by the library itself internally to initialize the event object.
     ///
-    /// [See `wxSetCursorEvent::wxSetCursorEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_set_cursor_event.html#a862a2635ac71d7a652100027ae85fa6a)
+    /// See [C++ `wxSetCursorEvent::wxSetCursorEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_set_cursor_event.html#a862a2635ac71d7a652100027ae85fa6a).
     pub fn new(x: c_int, y: c_int) -> SetCursorEventIsOwned<OWNED> {
         unsafe { SetCursorEventIsOwned(ffi::wxSetCursorEvent_new(x, y)) }
     }
@@ -828,8 +838,9 @@ impl<const OWNED: bool> Drop for SetCursorEventIsOwned<OWNED> {
 // wxSettableHeaderColumn
 wxwidgets! {
     /// Adds methods to set the column attributes to wxHeaderColumn.
-    ///
-    /// [See `wxSettableHeaderColumn`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_settable_header_column.html)
+    /// - [`SettableHeaderColumn`] represents a C++ `wxSettableHeaderColumn` class instance which your code has ownership, [`SettableHeaderColumnIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`SettableHeaderColumn`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSettableHeaderColumn` class's documentation](https://docs.wxwidgets.org/3.2/classwx_settable_header_column.html) for more details.
     #[doc(alias = "wxSettableHeaderColumn")]
     #[doc(alias = "SettableHeaderColumn")]
     class SettableHeaderColumn
@@ -863,8 +874,9 @@ impl<const OWNED: bool> Drop for SettableHeaderColumnIsOwned<OWNED> {
 // wxShowEvent
 wxwidgets! {
     /// An event being sent when the window is shown or hidden.
-    ///
-    /// [See `wxShowEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_show_event.html)
+    /// - [`ShowEvent`] represents a C++ `wxShowEvent` class instance which your code has ownership, [`ShowEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`ShowEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxShowEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_show_event.html) for more details.
     #[doc(alias = "wxShowEvent")]
     #[doc(alias = "ShowEvent")]
     class ShowEvent
@@ -876,7 +888,7 @@ wxwidgets! {
 impl<const OWNED: bool> ShowEventIsOwned<OWNED> {
     /// Constructor.
     ///
-    /// [See `wxShowEvent::wxShowEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_show_event.html#a67164260c2e02eb6809192fe50cc5d1c)
+    /// See [C++ `wxShowEvent::wxShowEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_show_event.html#a67164260c2e02eb6809192fe50cc5d1c).
     pub fn new(winid: c_int, show: bool) -> ShowEventIsOwned<OWNED> {
         unsafe { ShowEventIsOwned(ffi::wxShowEvent_new(winid, show)) }
     }
@@ -915,8 +927,9 @@ impl<const OWNED: bool> Drop for ShowEventIsOwned<OWNED> {
 // wxSimplebook
 wxwidgets! {
     /// wxSimplebook is a control showing exactly one of its several pages.
-    ///
-    /// [See `wxSimplebook`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_simplebook.html)
+    /// - [`Simplebook`] represents a C++ `wxSimplebook` class instance which your code has ownership, [`SimplebookIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`Simplebook`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSimplebook` class's documentation](https://docs.wxwidgets.org/3.2/classwx_simplebook.html) for more details.
     #[doc(alias = "wxSimplebook")]
     #[doc(alias = "Simplebook")]
     class Simplebook
@@ -931,13 +944,13 @@ wxwidgets! {
 impl<const OWNED: bool> SimplebookIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxSimplebook::wxSimplebook()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_simplebook.html#a7912157673b19a8ee7b9f02e4523dab9)
+    /// See [C++ `wxSimplebook::wxSimplebook()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_simplebook.html#a7912157673b19a8ee7b9f02e4523dab9).
     pub fn new_2step() -> SimplebookIsOwned<OWNED> {
         unsafe { SimplebookIsOwned(ffi::wxSimplebook_new()) }
     }
     /// Constructs a simple book control.
     ///
-    /// [See `wxSimplebook::wxSimplebook()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_simplebook.html#a819e3cd45f3ae703dc9b2d89b504fe50)
+    /// See [C++ `wxSimplebook::wxSimplebook()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_simplebook.html#a819e3cd45f3ae703dc9b2d89b504fe50).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -1000,7 +1013,7 @@ impl<const OWNED: bool> DynamicCast for SimplebookIsOwned<OWNED> {
 impl<const OWNED: bool> WindowMethods for SimplebookIsOwned<OWNED> {
     /// Really create the window of an object created using default constructor.
     ///
-    /// [See `wxSimplebook::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_simplebook.html#a7ead9e1f4612887b5eb274f6ddfb93ff)
+    /// See [C++ `wxSimplebook::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_simplebook.html#a7ead9e1f4612887b5eb274f6ddfb93ff).
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -1027,8 +1040,9 @@ impl<const OWNED: bool> WindowMethods for SimplebookIsOwned<OWNED> {
 // wxSize
 wxwidgets! {
     /// A wxSize is a useful data structure for graphics operations.
-    ///
-    /// [See `wxSize`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_size.html)
+    /// - [`Size`] represents a C++ `wxSize` class instance which your code has ownership, [`SizeIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`Size`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSize` class's documentation](https://docs.wxwidgets.org/3.2/classwx_size.html) for more details.
     #[doc(alias = "wxSize")]
     #[doc(alias = "Size")]
     class Size
@@ -1038,13 +1052,13 @@ wxwidgets! {
 impl<const OWNED: bool> SizeIsOwned<OWNED> {
     /// Initializes this size object with zero width and height.
     ///
-    /// [See `wxSize::wxSize()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_size.html#a89bbb1a42ad12573ff42809221e243a7)
+    /// See [C++ `wxSize::wxSize()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_size.html#a89bbb1a42ad12573ff42809221e243a7).
     pub fn new() -> SizeIsOwned<OWNED> {
         unsafe { SizeIsOwned(ffi::wxSize_new()) }
     }
     /// Initializes this size object with the given width and height.
     ///
-    /// [See `wxSize::wxSize()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_size.html#aaa5ee9cd2943878582267508255c5bc8)
+    /// See [C++ `wxSize::wxSize()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_size.html#aaa5ee9cd2943878582267508255c5bc8).
     pub fn new_with_int(width: c_int, height: c_int) -> SizeIsOwned<OWNED> {
         unsafe { SizeIsOwned(ffi::wxSize_new1(width, height)) }
     }
@@ -1068,8 +1082,9 @@ impl<const OWNED: bool> Drop for SizeIsOwned<OWNED> {
 // wxSizeEvent
 wxwidgets! {
     /// A size event holds information about size change events of wxWindow.
-    ///
-    /// [See `wxSizeEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_size_event.html)
+    /// - [`SizeEvent`] represents a C++ `wxSizeEvent` class instance which your code has ownership, [`SizeEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`SizeEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSizeEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_size_event.html) for more details.
     #[doc(alias = "wxSizeEvent")]
     #[doc(alias = "SizeEvent")]
     class SizeEvent
@@ -1081,7 +1096,7 @@ wxwidgets! {
 impl<const OWNED: bool> SizeEventIsOwned<OWNED> {
     /// Constructor.
     ///
-    /// [See `wxSizeEvent::wxSizeEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_size_event.html#acce432b5d8aa28bd845022fa44a868cc)
+    /// See [C++ `wxSizeEvent::wxSizeEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_size_event.html#acce432b5d8aa28bd845022fa44a868cc).
     pub fn new<S: SizeMethods>(sz: &S, id: c_int) -> SizeEventIsOwned<OWNED> {
         unsafe {
             let sz = sz.as_ptr();
@@ -1123,8 +1138,9 @@ impl<const OWNED: bool> Drop for SizeEventIsOwned<OWNED> {
 // wxSizer
 wxwidgets! {
     /// wxSizer is the abstract base class used for laying out subwindows in a window.
-    ///
-    /// [See `wxSizer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_sizer.html)
+    /// - [`Sizer`] represents a C++ `wxSizer` class instance which your code has ownership, [`SizerIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`Sizer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSizer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_sizer.html) for more details.
     #[doc(alias = "wxSizer")]
     #[doc(alias = "Sizer")]
     class Sizer
@@ -1157,8 +1173,9 @@ impl<const OWNED: bool> DynamicCast for SizerIsOwned<OWNED> {
 // wxSizerFlags
 wxwidgets! {
     /// Container for sizer items flags providing readable names for them.
-    ///
-    /// [See `wxSizerFlags`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_sizer_flags.html)
+    /// - [`SizerFlags`] represents a C++ `wxSizerFlags` class instance which your code has ownership, [`SizerFlagsIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`SizerFlags`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSizerFlags` class's documentation](https://docs.wxwidgets.org/3.2/classwx_sizer_flags.html) for more details.
     #[doc(alias = "wxSizerFlags")]
     #[doc(alias = "SizerFlags")]
     class SizerFlags
@@ -1168,7 +1185,7 @@ wxwidgets! {
 impl<const OWNED: bool> SizerFlagsIsOwned<OWNED> {
     /// Creates the wxSizer with the proportion specified by proportion.
     ///
-    /// [See `wxSizerFlags::wxSizerFlags()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_sizer_flags.html#a2fe0499abe5461a2b8b4fe5fa2c054d4)
+    /// See [C++ `wxSizerFlags::wxSizerFlags()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer_flags.html#a2fe0499abe5461a2b8b4fe5fa2c054d4).
     pub fn new(proportion: c_int) -> SizerFlagsIsOwned<OWNED> {
         unsafe { SizerFlagsIsOwned(ffi::wxSizerFlags_new(proportion)) }
     }
@@ -1192,8 +1209,9 @@ impl<const OWNED: bool> Drop for SizerFlagsIsOwned<OWNED> {
 // wxSizerItem
 wxwidgets! {
     /// The wxSizerItem class is used to track the position, size and other attributes of each item managed by a wxSizer.
-    ///
-    /// [See `wxSizerItem`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_sizer_item.html)
+    /// - [`SizerItem`] represents a C++ `wxSizerItem` class instance which your code has ownership, [`SizerItemIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`SizerItem`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSizerItem` class's documentation](https://docs.wxwidgets.org/3.2/classwx_sizer_item.html) for more details.
     #[doc(alias = "wxSizerItem")]
     #[doc(alias = "SizerItem")]
     class SizerItem
@@ -1204,7 +1222,7 @@ wxwidgets! {
 impl<const OWNED: bool> SizerItemIsOwned<OWNED> {
     /// Construct a sizer item for tracking a spacer.
     ///
-    /// [See `wxSizerItem::wxSizerItem()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_sizer_item.html#ab07c608bd56283df5847c1e9bd4ebfa9)
+    /// See [C++ `wxSizerItem::wxSizerItem()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer_item.html#ab07c608bd56283df5847c1e9bd4ebfa9).
     pub fn new_with_int<O: ObjectMethods>(
         width: c_int,
         height: c_int,
@@ -1225,7 +1243,7 @@ impl<const OWNED: bool> SizerItemIsOwned<OWNED> {
     }
     /// Construct a sizer item for tracking a window.
     ///
-    /// [See `wxSizerItem::wxSizerItem()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_sizer_item.html#a4c858f9b3ae6e1d9e96602959d5d7ff2)
+    /// See [C++ `wxSizerItem::wxSizerItem()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer_item.html#a4c858f9b3ae6e1d9e96602959d5d7ff2).
     pub fn new_with_window_sizerflags<W: WindowMethods, S: SizerFlagsMethods>(
         window: Option<&W>,
         flags: &S,
@@ -1240,7 +1258,7 @@ impl<const OWNED: bool> SizerItemIsOwned<OWNED> {
         }
     }
     ///
-    /// [See `wxSizerItem::wxSizerItem()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_sizer_item.html#aaefc97a23300b948bab559e4e89638b1)
+    /// See [C++ `wxSizerItem::wxSizerItem()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer_item.html#aaefc97a23300b948bab559e4e89638b1).
     pub fn new_with_window_int<W: WindowMethods, O: ObjectMethods>(
         window: Option<&W>,
         proportion: c_int,
@@ -1264,7 +1282,7 @@ impl<const OWNED: bool> SizerItemIsOwned<OWNED> {
     }
     /// Construct a sizer item for tracking a subsizer.
     ///
-    /// [See `wxSizerItem::wxSizerItem()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_sizer_item.html#af321a97190675a193212131d5f11523f)
+    /// See [C++ `wxSizerItem::wxSizerItem()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer_item.html#af321a97190675a193212131d5f11523f).
     pub fn new_with_sizer_sizerflags<S: SizerMethods, S2: SizerFlagsMethods>(
         sizer: Option<&S>,
         flags: &S2,
@@ -1279,7 +1297,7 @@ impl<const OWNED: bool> SizerItemIsOwned<OWNED> {
         }
     }
     ///
-    /// [See `wxSizerItem::wxSizerItem()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_sizer_item.html#a8678d88740bc5a9244338fd345502284)
+    /// See [C++ `wxSizerItem::wxSizerItem()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer_item.html#a8678d88740bc5a9244338fd345502284).
     pub fn new_with_sizer_int<S: SizerMethods, O: ObjectMethods>(
         sizer: Option<&S>,
         proportion: c_int,
@@ -1331,8 +1349,9 @@ impl<const OWNED: bool> Drop for SizerItemIsOwned<OWNED> {
 // wxSlider
 wxwidgets! {
     /// A slider is a control with a handle which can be pulled back and forth to change the value.
-    ///
-    /// [See `wxSlider`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_slider.html)
+    /// - [`Slider`] represents a C++ `wxSlider` class instance which your code has ownership, [`SliderIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`Slider`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSlider` class's documentation](https://docs.wxwidgets.org/3.2/classwx_slider.html) for more details.
     #[doc(alias = "wxSlider")]
     #[doc(alias = "Slider")]
     class Slider
@@ -1346,13 +1365,13 @@ wxwidgets! {
 impl<const OWNED: bool> SliderIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxSlider::wxSlider()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_slider.html#a2173af74dec187f971f43ff76ce5fda4)
+    /// See [C++ `wxSlider::wxSlider()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_slider.html#a2173af74dec187f971f43ff76ce5fda4).
     pub fn new_2step() -> SliderIsOwned<OWNED> {
         unsafe { SliderIsOwned(ffi::wxSlider_new()) }
     }
     /// Constructor, creating and showing a slider.
     ///
-    /// [See `wxSlider::wxSlider()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_slider.html#a891b43da8ecd9709fdac3ccadc23903f)
+    /// See [C++ `wxSlider::wxSlider()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_slider.html#a891b43da8ecd9709fdac3ccadc23903f).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -1418,8 +1437,9 @@ impl<const OWNED: bool> DynamicCast for SliderIsOwned<OWNED> {
 // wxSpinButton
 wxwidgets! {
     /// A wxSpinButton has two small up and down (or left and right) arrow buttons.
-    ///
-    /// [See `wxSpinButton`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_spin_button.html)
+    /// - [`SpinButton`] represents a C++ `wxSpinButton` class instance which your code has ownership, [`SpinButtonIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`SpinButton`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSpinButton` class's documentation](https://docs.wxwidgets.org/3.2/classwx_spin_button.html) for more details.
     #[doc(alias = "wxSpinButton")]
     #[doc(alias = "SpinButton")]
     class SpinButton
@@ -1433,13 +1453,13 @@ wxwidgets! {
 impl<const OWNED: bool> SpinButtonIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxSpinButton::wxSpinButton()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_spin_button.html#aa4eba752e564f360bcc58b3f54ccc513)
+    /// See [C++ `wxSpinButton::wxSpinButton()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_spin_button.html#aa4eba752e564f360bcc58b3f54ccc513).
     pub fn new_2step() -> SpinButtonIsOwned<OWNED> {
         unsafe { SpinButtonIsOwned(ffi::wxSpinButton_new()) }
     }
     /// Constructor, creating and showing a spin button.
     ///
-    /// [See `wxSpinButton::wxSpinButton()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_spin_button.html#a3b586bd26f28c503a5e313c85c64ec67)
+    /// See [C++ `wxSpinButton::wxSpinButton()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_spin_button.html#a3b586bd26f28c503a5e313c85c64ec67).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -1497,7 +1517,7 @@ impl<const OWNED: bool> DynamicCast for SpinButtonIsOwned<OWNED> {
 impl<const OWNED: bool> WindowMethods for SpinButtonIsOwned<OWNED> {
     /// Scrollbar creation function called by the spin button constructor.
     ///
-    /// [See `wxSpinButton::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_spin_button.html#a49a34a60952c5f9319da9379887ca10e)
+    /// See [C++ `wxSpinButton::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_spin_button.html#a49a34a60952c5f9319da9379887ca10e).
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -1524,8 +1544,9 @@ impl<const OWNED: bool> WindowMethods for SpinButtonIsOwned<OWNED> {
 // wxSpinCtrl
 wxwidgets! {
     /// wxSpinCtrl combines wxTextCtrl and wxSpinButton in one control.
-    ///
-    /// [See `wxSpinCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_spin_ctrl.html)
+    /// - [`SpinCtrl`] represents a C++ `wxSpinCtrl` class instance which your code has ownership, [`SpinCtrlIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`SpinCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSpinCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_spin_ctrl.html) for more details.
     #[doc(alias = "wxSpinCtrl")]
     #[doc(alias = "SpinCtrl")]
     class SpinCtrl
@@ -1539,13 +1560,13 @@ wxwidgets! {
 impl<const OWNED: bool> SpinCtrlIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxSpinCtrl::wxSpinCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_spin_ctrl.html#ac5defa94e938dd00380f551502c20a4e)
+    /// See [C++ `wxSpinCtrl::wxSpinCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_spin_ctrl.html#ac5defa94e938dd00380f551502c20a4e).
     pub fn new_2step() -> SpinCtrlIsOwned<OWNED> {
         unsafe { SpinCtrlIsOwned(ffi::wxSpinCtrl_new()) }
     }
     /// Constructor, creating and showing a spin control.
     ///
-    /// [See `wxSpinCtrl::wxSpinCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_spin_ctrl.html#ae14fbff54acea597904bdf583fa13c0f)
+    /// See [C++ `wxSpinCtrl::wxSpinCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_spin_ctrl.html#ae14fbff54acea597904bdf583fa13c0f).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -1612,8 +1633,9 @@ impl<const OWNED: bool> DynamicCast for SpinCtrlIsOwned<OWNED> {
 // wxSpinCtrlDouble
 wxwidgets! {
     /// wxSpinCtrlDouble combines wxTextCtrl and wxSpinButton in one control and displays a real number.
-    ///
-    /// [See `wxSpinCtrlDouble`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_spin_ctrl_double.html)
+    /// - [`SpinCtrlDouble`] represents a C++ `wxSpinCtrlDouble` class instance which your code has ownership, [`SpinCtrlDoubleIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`SpinCtrlDouble`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSpinCtrlDouble` class's documentation](https://docs.wxwidgets.org/3.2/classwx_spin_ctrl_double.html) for more details.
     #[doc(alias = "wxSpinCtrlDouble")]
     #[doc(alias = "SpinCtrlDouble")]
     class SpinCtrlDouble
@@ -1627,13 +1649,13 @@ wxwidgets! {
 impl<const OWNED: bool> SpinCtrlDoubleIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxSpinCtrlDouble::wxSpinCtrlDouble()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_spin_ctrl_double.html#a7448457351183b00b4393b38f0f992b2)
+    /// See [C++ `wxSpinCtrlDouble::wxSpinCtrlDouble()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_spin_ctrl_double.html#a7448457351183b00b4393b38f0f992b2).
     pub fn new_2step() -> SpinCtrlDoubleIsOwned<OWNED> {
         unsafe { SpinCtrlDoubleIsOwned(ffi::wxSpinCtrlDouble_new()) }
     }
     /// Constructor, creating and showing a spin control.
     ///
-    /// [See `wxSpinCtrlDouble::wxSpinCtrlDouble()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_spin_ctrl_double.html#afd85d7da42e6e994e653af5d2efce0bd)
+    /// See [C++ `wxSpinCtrlDouble::wxSpinCtrlDouble()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_spin_ctrl_double.html#afd85d7da42e6e994e653af5d2efce0bd).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -1701,8 +1723,9 @@ impl<const OWNED: bool> DynamicCast for SpinCtrlDoubleIsOwned<OWNED> {
 // wxSpinDoubleEvent
 wxwidgets! {
     /// This event class is used for the events generated by wxSpinCtrlDouble.
-    ///
-    /// [See `wxSpinDoubleEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_spin_double_event.html)
+    /// - [`SpinDoubleEvent`] represents a C++ `wxSpinDoubleEvent` class instance which your code has ownership, [`SpinDoubleEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`SpinDoubleEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSpinDoubleEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_spin_double_event.html) for more details.
     #[doc(alias = "wxSpinDoubleEvent")]
     #[doc(alias = "SpinDoubleEvent")]
     class SpinDoubleEvent
@@ -1717,7 +1740,7 @@ impl<const OWNED: bool> SpinDoubleEventIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxSpinDoubleEvent()
     /// The copy constructor.
     ///
-    /// [See `wxSpinDoubleEvent::wxSpinDoubleEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_spin_double_event.html#a53a641a6232fe880ca13fad00d136b62)
+    /// See [C++ `wxSpinDoubleEvent::wxSpinDoubleEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_spin_double_event.html#a53a641a6232fe880ca13fad00d136b62).
     pub fn new<S: SpinDoubleEventMethods>(event: &S) -> SpinDoubleEventIsOwned<OWNED> {
         unsafe {
             let event = event.as_ptr();
@@ -1769,8 +1792,9 @@ impl<const OWNED: bool> Drop for SpinDoubleEventIsOwned<OWNED> {
 // wxSpinEvent
 wxwidgets! {
     /// This event class is used for the events generated by wxSpinButton and wxSpinCtrl.
-    ///
-    /// [See `wxSpinEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_spin_event.html)
+    /// - [`SpinEvent`] represents a C++ `wxSpinEvent` class instance which your code has ownership, [`SpinEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`SpinEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSpinEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_spin_event.html) for more details.
     #[doc(alias = "wxSpinEvent")]
     #[doc(alias = "SpinEvent")]
     class SpinEvent
@@ -1828,8 +1852,9 @@ impl<const OWNED: bool> Drop for SpinEventIsOwned<OWNED> {
 // wxSplashScreen
 wxwidgets! {
     /// wxSplashScreen shows a window with a thin border, displaying a bitmap describing your application.
-    ///
-    /// [See `wxSplashScreen`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_splash_screen.html)
+    /// - [`SplashScreen`] represents a C++ `wxSplashScreen` class instance which your code has ownership, [`SplashScreenIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`SplashScreen`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSplashScreen` class's documentation](https://docs.wxwidgets.org/3.2/classwx_splash_screen.html) for more details.
     #[doc(alias = "wxSplashScreen")]
     #[doc(alias = "SplashScreen")]
     class SplashScreen
@@ -1845,7 +1870,7 @@ wxwidgets! {
 impl<const OWNED: bool> SplashScreenIsOwned<OWNED> {
     /// Construct the splash screen passing a bitmap, a style, a timeout, a window id, optional position and size, and a window style.
     ///
-    /// [See `wxSplashScreen::wxSplashScreen()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_splash_screen.html#a05a1d1af1dac400c659d41bd033d8566)
+    /// See [C++ `wxSplashScreen::wxSplashScreen()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_splash_screen.html#a05a1d1af1dac400c659d41bd033d8566).
     pub fn new<B: BitmapMethods, W: WindowMethods, P: PointMethods, S: SizeMethods>(
         bitmap: &B,
         splash_style: c_long,
@@ -1924,8 +1949,9 @@ impl<const OWNED: bool> DynamicCast for SplashScreenIsOwned<OWNED> {
 // wxSplitterEvent
 wxwidgets! {
     /// This class represents the events generated by a splitter control.
-    ///
-    /// [See `wxSplitterEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_splitter_event.html)
+    /// - [`SplitterEvent`] represents a C++ `wxSplitterEvent` class instance which your code has ownership, [`SplitterEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`SplitterEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSplitterEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_splitter_event.html) for more details.
     #[doc(alias = "wxSplitterEvent")]
     #[doc(alias = "SplitterEvent")]
     class SplitterEvent
@@ -1983,8 +2009,9 @@ impl<const OWNED: bool> Drop for SplitterEventIsOwned<OWNED> {
 // wxSplitterWindow
 wxwidgets! {
     /// This class manages up to two subwindows.
-    ///
-    /// [See `wxSplitterWindow`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_splitter_window.html)
+    /// - [`SplitterWindow`] represents a C++ `wxSplitterWindow` class instance which your code has ownership, [`SplitterWindowIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`SplitterWindow`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSplitterWindow` class's documentation](https://docs.wxwidgets.org/3.2/classwx_splitter_window.html) for more details.
     #[doc(alias = "wxSplitterWindow")]
     #[doc(alias = "SplitterWindow")]
     class SplitterWindow
@@ -1997,13 +2024,13 @@ wxwidgets! {
 impl<const OWNED: bool> SplitterWindowIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxSplitterWindow::wxSplitterWindow()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_splitter_window.html#a311c33909f1164ccdf9a11f5be45ecdc)
+    /// See [C++ `wxSplitterWindow::wxSplitterWindow()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_splitter_window.html#a311c33909f1164ccdf9a11f5be45ecdc).
     pub fn new_2step() -> SplitterWindowIsOwned<OWNED> {
         unsafe { SplitterWindowIsOwned(ffi::wxSplitterWindow_new()) }
     }
     /// Constructor for creating the window.
     ///
-    /// [See `wxSplitterWindow::wxSplitterWindow()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_splitter_window.html#aeefa297444ad5b968f3105af012c987e)
+    /// See [C++ `wxSplitterWindow::wxSplitterWindow()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_splitter_window.html#aeefa297444ad5b968f3105af012c987e).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -2058,7 +2085,7 @@ impl<const OWNED: bool> DynamicCast for SplitterWindowIsOwned<OWNED> {
 impl<const OWNED: bool> WindowMethods for SplitterWindowIsOwned<OWNED> {
     /// Creation function, for two-step construction.
     ///
-    /// [See `wxSplitterWindow::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_splitter_window.html#a40bd4e468a9c71a837e8de40b4c983db)
+    /// See [C++ `wxSplitterWindow::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_splitter_window.html#a40bd4e468a9c71a837e8de40b4c983db).
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -2085,8 +2112,9 @@ impl<const OWNED: bool> WindowMethods for SplitterWindowIsOwned<OWNED> {
 // wxStaticBitmap
 wxwidgets! {
     /// A static bitmap control displays a bitmap.
-    ///
-    /// [See `wxStaticBitmap`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_static_bitmap.html)
+    /// - [`StaticBitmap`] represents a C++ `wxStaticBitmap` class instance which your code has ownership, [`StaticBitmapIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`StaticBitmap`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxStaticBitmap` class's documentation](https://docs.wxwidgets.org/3.2/classwx_static_bitmap.html) for more details.
     #[doc(alias = "wxStaticBitmap")]
     #[doc(alias = "StaticBitmap")]
     class StaticBitmap
@@ -2106,13 +2134,13 @@ impl<const OWNED: bool> StaticBitmapIsOwned<OWNED> {
 
     /// Default constructor.
     ///
-    /// [See `wxStaticBitmap::wxStaticBitmap()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_static_bitmap.html#a291d7a90496e62b907eae9e1b55bee9a)
+    /// See [C++ `wxStaticBitmap::wxStaticBitmap()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_static_bitmap.html#a291d7a90496e62b907eae9e1b55bee9a).
     pub fn new_2step() -> StaticBitmapIsOwned<OWNED> {
         unsafe { StaticBitmapIsOwned(ffi::wxStaticBitmap_new()) }
     }
     /// Constructor, creating and showing a static bitmap control.
     ///
-    /// [See `wxStaticBitmap::wxStaticBitmap()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_static_bitmap.html#af23cde747ba13da14e80ea86bce3fa8b)
+    /// See [C++ `wxStaticBitmap::wxStaticBitmap()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_static_bitmap.html#af23cde747ba13da14e80ea86bce3fa8b).
     pub fn new<W: WindowMethods, B: BitmapBundleMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -2175,8 +2203,9 @@ impl<const OWNED: bool> DynamicCast for StaticBitmapIsOwned<OWNED> {
 // wxStaticBox
 wxwidgets! {
     /// A static box is a rectangle drawn around other windows to denote a logical grouping of items.
-    ///
-    /// [See `wxStaticBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_static_box.html)
+    /// - [`StaticBox`] represents a C++ `wxStaticBox` class instance which your code has ownership, [`StaticBoxIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`StaticBox`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxStaticBox` class's documentation](https://docs.wxwidgets.org/3.2/classwx_static_box.html) for more details.
     #[doc(alias = "wxStaticBox")]
     #[doc(alias = "StaticBox")]
     class StaticBox
@@ -2190,13 +2219,13 @@ wxwidgets! {
 impl<const OWNED: bool> StaticBoxIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxStaticBox::wxStaticBox()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_static_box.html#aa96250d5fbd5864d041ef878def4e474)
+    /// See [C++ `wxStaticBox::wxStaticBox()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_static_box.html#aa96250d5fbd5864d041ef878def4e474).
     pub fn new_2step() -> StaticBoxIsOwned<OWNED> {
         unsafe { StaticBoxIsOwned(ffi::wxStaticBox_new()) }
     }
     /// Constructor, creating and showing a static box.
     ///
-    /// [See `wxStaticBox::wxStaticBox()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_static_box.html#a840d60b3a3102858924cb06ff5e5df16)
+    /// See [C++ `wxStaticBox::wxStaticBox()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_static_box.html#a840d60b3a3102858924cb06ff5e5df16).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -2261,8 +2290,9 @@ impl<const OWNED: bool> DynamicCast for StaticBoxIsOwned<OWNED> {
 // wxStaticBoxSizer
 wxwidgets! {
     /// wxStaticBoxSizer is a sizer derived from wxBoxSizer but adds a static box around the sizer.
-    ///
-    /// [See `wxStaticBoxSizer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_static_box_sizer.html)
+    /// - [`StaticBoxSizer`] represents a C++ `wxStaticBoxSizer` class instance which your code has ownership, [`StaticBoxSizerIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`StaticBoxSizer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxStaticBoxSizer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_static_box_sizer.html) for more details.
     #[doc(alias = "wxStaticBoxSizer")]
     #[doc(alias = "StaticBoxSizer")]
     class StaticBoxSizer
@@ -2275,7 +2305,7 @@ wxwidgets! {
 impl<const OWNED: bool> StaticBoxSizerIsOwned<OWNED> {
     /// This constructor uses an already existing static box.
     ///
-    /// [See `wxStaticBoxSizer::wxStaticBoxSizer()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_static_box_sizer.html#a8c2af376122e1093b95331ec1dd17ba5)
+    /// See [C++ `wxStaticBoxSizer::wxStaticBoxSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_static_box_sizer.html#a8c2af376122e1093b95331ec1dd17ba5).
     pub fn new_with_staticbox<S: StaticBoxMethods>(
         box_: Option<&S>,
         orient: c_int,
@@ -2290,7 +2320,7 @@ impl<const OWNED: bool> StaticBoxSizerIsOwned<OWNED> {
     }
     /// This constructor creates a new static box with the given label and parent window.
     ///
-    /// [See `wxStaticBoxSizer::wxStaticBoxSizer()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_static_box_sizer.html#a9f69e687c1c78bf70295ce5a72934412)
+    /// See [C++ `wxStaticBoxSizer::wxStaticBoxSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_static_box_sizer.html#a9f69e687c1c78bf70295ce5a72934412).
     pub fn new_with_int<W: WindowMethods>(
         orient: c_int,
         parent: Option<&W>,
@@ -2339,8 +2369,9 @@ impl<const OWNED: bool> DynamicCast for StaticBoxSizerIsOwned<OWNED> {
 // wxStaticLine
 wxwidgets! {
     /// A static line is just a line which may be used in a dialog to separate the groups of controls.
-    ///
-    /// [See `wxStaticLine`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_static_line.html)
+    /// - [`StaticLine`] represents a C++ `wxStaticLine` class instance which your code has ownership, [`StaticLineIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`StaticLine`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxStaticLine` class's documentation](https://docs.wxwidgets.org/3.2/classwx_static_line.html) for more details.
     #[doc(alias = "wxStaticLine")]
     #[doc(alias = "StaticLine")]
     class StaticLine
@@ -2354,13 +2385,13 @@ wxwidgets! {
 impl<const OWNED: bool> StaticLineIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxStaticLine::wxStaticLine()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_static_line.html#a0b3436879b2193445a34bad6e2fc5086)
+    /// See [C++ `wxStaticLine::wxStaticLine()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_static_line.html#a0b3436879b2193445a34bad6e2fc5086).
     pub fn new_2step() -> StaticLineIsOwned<OWNED> {
         unsafe { StaticLineIsOwned(ffi::wxStaticLine_new()) }
     }
     /// Constructor, creating and showing a static line.
     ///
-    /// [See `wxStaticLine::wxStaticLine()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_static_line.html#a9db24738fcc9f5a83a5052e3098fc470)
+    /// See [C++ `wxStaticLine::wxStaticLine()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_static_line.html#a9db24738fcc9f5a83a5052e3098fc470).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -2418,7 +2449,7 @@ impl<const OWNED: bool> DynamicCast for StaticLineIsOwned<OWNED> {
 impl<const OWNED: bool> WindowMethods for StaticLineIsOwned<OWNED> {
     /// Creates the static line for two-step construction.
     ///
-    /// [See `wxStaticLine::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_static_line.html#ac2e6c54b896563e2ff87da22a4361161)
+    /// See [C++ `wxStaticLine::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_static_line.html#ac2e6c54b896563e2ff87da22a4361161).
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -2445,8 +2476,9 @@ impl<const OWNED: bool> WindowMethods for StaticLineIsOwned<OWNED> {
 // wxStaticText
 wxwidgets! {
     /// A static text control displays one or more lines of read-only text.
-    ///
-    /// [See `wxStaticText`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_static_text.html)
+    /// - [`StaticText`] represents a C++ `wxStaticText` class instance which your code has ownership, [`StaticTextIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`StaticText`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxStaticText` class's documentation](https://docs.wxwidgets.org/3.2/classwx_static_text.html) for more details.
     #[doc(alias = "wxStaticText")]
     #[doc(alias = "StaticText")]
     class StaticText
@@ -2460,13 +2492,13 @@ wxwidgets! {
 impl<const OWNED: bool> StaticTextIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxStaticText::wxStaticText()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_static_text.html#a9291a72fe2317f4a9e30c6eb7d02e014)
+    /// See [C++ `wxStaticText::wxStaticText()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_static_text.html#a9291a72fe2317f4a9e30c6eb7d02e014).
     pub fn new_2step() -> StaticTextIsOwned<OWNED> {
         unsafe { StaticTextIsOwned(ffi::wxStaticText_new()) }
     }
     /// Constructor, creating and showing a text control.
     ///
-    /// [See `wxStaticText::wxStaticText()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_static_text.html#a726ca095a252614428459748e18320fb)
+    /// See [C++ `wxStaticText::wxStaticText()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_static_text.html#a726ca095a252614428459748e18320fb).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -2530,8 +2562,9 @@ impl<const OWNED: bool> DynamicCast for StaticTextIsOwned<OWNED> {
 // wxStatusBar
 wxwidgets! {
     /// A status bar is a narrow window that can be placed along the bottom of a frame to give small amounts of status information.
-    ///
-    /// [See `wxStatusBar`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_status_bar.html)
+    /// - [`StatusBar`] represents a C++ `wxStatusBar` class instance which your code has ownership, [`StatusBarIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`StatusBar`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxStatusBar` class's documentation](https://docs.wxwidgets.org/3.2/classwx_status_bar.html) for more details.
     #[doc(alias = "wxStatusBar")]
     #[doc(alias = "StatusBar")]
     class StatusBar
@@ -2545,13 +2578,13 @@ wxwidgets! {
 impl<const OWNED: bool> StatusBarIsOwned<OWNED> {
     /// Default ctor.
     ///
-    /// [See `wxStatusBar::wxStatusBar()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_status_bar.html#a0518ffafb51b3e050df1a0477cd9e0c8)
+    /// See [C++ `wxStatusBar::wxStatusBar()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_status_bar.html#a0518ffafb51b3e050df1a0477cd9e0c8).
     pub fn new_2step() -> StatusBarIsOwned<OWNED> {
         unsafe { StatusBarIsOwned(ffi::wxStatusBar_new()) }
     }
     /// Constructor, creating the window.
     ///
-    /// [See `wxStatusBar::wxStatusBar()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_status_bar.html#a0d828fb14054ba93ad3579b65c995943)
+    /// See [C++ `wxStatusBar::wxStatusBar()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_status_bar.html#a0d828fb14054ba93ad3579b65c995943).
     pub fn new<W: WindowMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -2606,8 +2639,9 @@ impl<const OWNED: bool> DynamicCast for StatusBarIsOwned<OWNED> {
 // wxStatusBarPane
 wxwidgets! {
     /// A status bar pane data container used by wxStatusBar.
-    ///
-    /// [See `wxStatusBarPane`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_status_bar_pane.html)
+    /// - [`StatusBarPane`] represents a C++ `wxStatusBarPane` class instance which your code has ownership, [`StatusBarPaneIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`StatusBarPane`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxStatusBarPane` class's documentation](https://docs.wxwidgets.org/3.2/classwx_status_bar_pane.html) for more details.
     #[doc(alias = "wxStatusBarPane")]
     #[doc(alias = "StatusBarPane")]
     class StatusBarPane
@@ -2617,7 +2651,7 @@ wxwidgets! {
 impl<const OWNED: bool> StatusBarPaneIsOwned<OWNED> {
     /// Constructs the pane with the given style and width.
     ///
-    /// [See `wxStatusBarPane::wxStatusBarPane()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_status_bar_pane.html#a09de0e3d124479f91b27048845ef6761)
+    /// See [C++ `wxStatusBarPane::wxStatusBarPane()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_status_bar_pane.html#a09de0e3d124479f91b27048845ef6761).
     pub fn new(style: c_int, width: c_int) -> StatusBarPaneIsOwned<OWNED> {
         unsafe { StatusBarPaneIsOwned(ffi::wxStatusBarPane_new(style, width)) }
     }
@@ -2641,8 +2675,9 @@ impl<const OWNED: bool> Drop for StatusBarPaneIsOwned<OWNED> {
 // wxStdDialogButtonSizer
 wxwidgets! {
     /// This class creates button layouts which conform to the standard button spacing and ordering defined by the platform or toolkit's user interface guidelines (if such things exist).
-    ///
-    /// [See `wxStdDialogButtonSizer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_std_dialog_button_sizer.html)
+    /// - [`StdDialogButtonSizer`] represents a C++ `wxStdDialogButtonSizer` class instance which your code has ownership, [`StdDialogButtonSizerIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`StdDialogButtonSizer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxStdDialogButtonSizer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_std_dialog_button_sizer.html) for more details.
     #[doc(alias = "wxStdDialogButtonSizer")]
     #[doc(alias = "StdDialogButtonSizer")]
     class StdDialogButtonSizer
@@ -2655,7 +2690,7 @@ wxwidgets! {
 impl<const OWNED: bool> StdDialogButtonSizerIsOwned<OWNED> {
     /// Constructor for a wxStdDialogButtonSizer.
     ///
-    /// [See `wxStdDialogButtonSizer::wxStdDialogButtonSizer()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_std_dialog_button_sizer.html#a468d2d4e9882c13caad28e06b2ddb873)
+    /// See [C++ `wxStdDialogButtonSizer::wxStdDialogButtonSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_std_dialog_button_sizer.html#a468d2d4e9882c13caad28e06b2ddb873).
     pub fn new() -> StdDialogButtonSizerIsOwned<OWNED> {
         unsafe { StdDialogButtonSizerIsOwned(ffi::wxStdDialogButtonSizer_new()) }
     }
@@ -2692,8 +2727,9 @@ impl<const OWNED: bool> DynamicCast for StdDialogButtonSizerIsOwned<OWNED> {
 // wxStockPreferencesPage
 wxwidgets! {
     /// Specialization of wxPreferencesPage useful for certain commonly used preferences page.
-    ///
-    /// [See `wxStockPreferencesPage`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_stock_preferences_page.html)
+    /// - [`StockPreferencesPage`] represents a C++ `wxStockPreferencesPage` class instance which your code has ownership, [`StockPreferencesPageIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`StockPreferencesPage`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxStockPreferencesPage` class's documentation](https://docs.wxwidgets.org/3.2/classwx_stock_preferences_page.html) for more details.
     #[doc(alias = "wxStockPreferencesPage")]
     #[doc(alias = "StockPreferencesPage")]
     class StockPreferencesPage
@@ -2732,8 +2768,9 @@ impl<const OWNED: bool> Drop for StockPreferencesPageIsOwned<OWNED> {
 // wxSysColourChangedEvent
 wxwidgets! {
     /// This class is used for system colour change events, which are generated when the user changes the colour settings or when the system theme changes (e.g.
-    ///
-    /// [See `wxSysColourChangedEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_sys_colour_changed_event.html)
+    /// - [`SysColourChangedEvent`] represents a C++ `wxSysColourChangedEvent` class instance which your code has ownership, [`SysColourChangedEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`SysColourChangedEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSysColourChangedEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_sys_colour_changed_event.html) for more details.
     #[doc(alias = "wxSysColourChangedEvent")]
     #[doc(alias = "SysColourChangedEvent")]
     class SysColourChangedEvent
@@ -2745,7 +2782,7 @@ wxwidgets! {
 impl<const OWNED: bool> SysColourChangedEventIsOwned<OWNED> {
     /// Constructor.
     ///
-    /// [See `wxSysColourChangedEvent::wxSysColourChangedEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_sys_colour_changed_event.html#a55442699b065591bccb95d0d73868a57)
+    /// See [C++ `wxSysColourChangedEvent::wxSysColourChangedEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sys_colour_changed_event.html#a55442699b065591bccb95d0d73868a57).
     pub fn new() -> SysColourChangedEventIsOwned<OWNED> {
         unsafe { SysColourChangedEventIsOwned(ffi::wxSysColourChangedEvent_new()) }
     }
@@ -2784,8 +2821,9 @@ impl<const OWNED: bool> Drop for SysColourChangedEventIsOwned<OWNED> {
 // wxSystemSettings
 wxwidgets! {
     /// wxSystemSettings allows the application to ask for details about the system.
-    ///
-    /// [See `wxSystemSettings`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_system_settings.html)
+    /// - [`SystemSettings`] represents a C++ `wxSystemSettings` class instance which your code has ownership, [`SystemSettingsIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`SystemSettings`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxSystemSettings` class's documentation](https://docs.wxwidgets.org/3.2/classwx_system_settings.html) for more details.
     #[doc(alias = "wxSystemSettings")]
     #[doc(alias = "SystemSettings")]
     class SystemSettings
@@ -2795,7 +2833,7 @@ wxwidgets! {
 impl<const OWNED: bool> SystemSettingsIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxSystemSettings::wxSystemSettings()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_system_settings.html#a34c3d6ded6a697164682dbfb96481318)
+    /// See [C++ `wxSystemSettings::wxSystemSettings()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_system_settings.html#a34c3d6ded6a697164682dbfb96481318).
     pub fn new() -> SystemSettingsIsOwned<OWNED> {
         unsafe { SystemSettingsIsOwned(ffi::wxSystemSettings_new()) }
     }
