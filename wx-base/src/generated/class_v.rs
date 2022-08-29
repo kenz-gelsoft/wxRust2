@@ -3,8 +3,9 @@ use super::*;
 // wxVariantData
 wxwidgets! {
     /// The wxVariantData class is used to implement a new type for wxVariant.
-    ///
-    /// [See `wxVariantData`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_variant_data.html)
+    /// - [`VariantData`] represents a C++ `wxVariantData` class instance which your code has ownership, [`VariantDataIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`VariantData`]'s `new()` to create an instance of this class.
+    /// - See [C++ `wxVariantData` class's documentation](https://docs.wxwidgets.org/3.2/classwx_variant_data.html) for more details.
     #[doc(alias = "wxVariantData")]
     #[doc(alias = "VariantData")]
     class VariantData

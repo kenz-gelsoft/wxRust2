@@ -3,8 +3,9 @@ use super::*;
 // wxDateTime
 wxwidgets! {
     /// wxDateTime class represents an absolute moment in time.
-    ///
-    /// [See `wxDateTime`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_date_time.html)
+    /// - [`DateTime`] represents a C++ `wxDateTime` class instance which your code has ownership, [`DateTimeIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`DateTime`]'s `new()` to create an instance of this class.
+    /// - See [C++ `wxDateTime` class's documentation](https://docs.wxwidgets.org/3.2/classwx_date_time.html) for more details.
     #[doc(alias = "wxDateTime")]
     #[doc(alias = "DateTime")]
     class DateTime
@@ -124,13 +125,13 @@ impl<const OWNED: bool> DateTimeIsOwned<OWNED> {
 
     /// Default constructor.
     ///
-    /// [See `wxDateTime::wxDateTime()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_date_time.html#a4cc372429453a21632d64f34f635d853)
+    /// See [C++ `wxDateTime::wxDateTime()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_date_time.html#a4cc372429453a21632d64f34f635d853).
     pub fn new() -> DateTimeIsOwned<OWNED> {
         unsafe { DateTimeIsOwned(ffi::wxDateTime_new()) }
     }
     /// Copy constructor.
     ///
-    /// [See `wxDateTime::wxDateTime()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_date_time.html#aca2bc3b942d920e01e496841bd759001)
+    /// See [C++ `wxDateTime::wxDateTime()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_date_time.html#aca2bc3b942d920e01e496841bd759001).
     pub fn new_with_datetime<D: DateTimeMethods>(date: &D) -> DateTimeIsOwned<OWNED> {
         unsafe {
             let date = date.as_ptr();
@@ -141,7 +142,7 @@ impl<const OWNED: bool> DateTimeIsOwned<OWNED> {
     // BLOCKED: fn wxDateTime3()
     /// Same as Set().
     ///
-    /// [See `wxDateTime::wxDateTime()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_date_time.html#aa2c38922eafec2a94fb5ee9221c0f6b9)
+    /// See [C++ `wxDateTime::wxDateTime()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_date_time.html#aa2c38922eafec2a94fb5ee9221c0f6b9).
     pub fn new_with_double(jdn: c_double) -> DateTimeIsOwned<OWNED> {
         unsafe { DateTimeIsOwned(ffi::wxDateTime_new4(jdn)) }
     }

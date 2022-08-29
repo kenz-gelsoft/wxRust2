@@ -3,8 +3,9 @@ use super::*;
 // wxStandardPaths
 wxwidgets! {
     /// wxStandardPaths returns the standard locations in the file system and should be used by applications to find their data files in a portable way.
-    ///
-    /// [See `wxStandardPaths`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_standard_paths.html)
+    /// - [`StandardPaths`] represents a C++ `wxStandardPaths` class instance which your code has ownership, [`StandardPathsIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`StandardPaths`]'s `new()` to create an instance of this class.
+    /// - See [C++ `wxStandardPaths` class's documentation](https://docs.wxwidgets.org/3.2/classwx_standard_paths.html) for more details.
     #[doc(alias = "wxStandardPaths")]
     #[doc(alias = "StandardPaths")]
     class StandardPaths

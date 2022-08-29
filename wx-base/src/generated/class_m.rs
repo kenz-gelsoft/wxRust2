@@ -3,8 +3,9 @@ use super::*;
 // wxMessageOutput
 wxwidgets! {
     /// Simple class allowing to write strings to various output channels.
-    ///
-    /// [See `wxMessageOutput`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_message_output.html)
+    /// - [`MessageOutput`] represents a C++ `wxMessageOutput` class instance which your code has ownership, [`MessageOutputIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`MessageOutput`]'s `new()` to create an instance of this class.
+    /// - See [C++ `wxMessageOutput` class's documentation](https://docs.wxwidgets.org/3.2/classwx_message_output.html) for more details.
     #[doc(alias = "wxMessageOutput")]
     #[doc(alias = "MessageOutput")]
     class MessageOutput

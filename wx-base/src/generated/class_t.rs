@@ -3,8 +3,9 @@ use super::*;
 // wxTimer
 wxwidgets! {
     /// The wxTimer class allows you to execute code at specified intervals.
-    ///
-    /// [See `wxTimer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_timer.html)
+    /// - [`Timer`] represents a C++ `wxTimer` class instance which your code has ownership, [`TimerIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`Timer`]'s `new()` to create an instance of this class.
+    /// - See [C++ `wxTimer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_timer.html) for more details.
     #[doc(alias = "wxTimer")]
     #[doc(alias = "Timer")]
     class Timer
@@ -16,13 +17,13 @@ wxwidgets! {
 impl<const OWNED: bool> TimerIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxTimer::wxTimer()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_timer.html#a0560894a1ab57792f52992ffbc58e735)
+    /// See [C++ `wxTimer::wxTimer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_timer.html#a0560894a1ab57792f52992ffbc58e735).
     pub fn new() -> TimerIsOwned<OWNED> {
         unsafe { TimerIsOwned(ffi::wxTimer_new()) }
     }
     /// Creates a timer and associates it with owner.
     ///
-    /// [See `wxTimer::wxTimer()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_timer.html#aeba595e67731d9f8ce07e4ac69a0ca65)
+    /// See [C++ `wxTimer::wxTimer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_timer.html#aeba595e67731d9f8ce07e4ac69a0ca65).
     pub fn new_with_evthandler<E: EvtHandlerMethods>(
         owner: Option<&E>,
         id: c_int,
@@ -63,8 +64,9 @@ impl<const OWNED: bool> DynamicCast for TimerIsOwned<OWNED> {
 // wxTimerEvent
 wxwidgets! {
     /// wxTimerEvent object is passed to the event handler of timer events (see wxTimer::SetOwner).
-    ///
-    /// [See `wxTimerEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_timer_event.html)
+    /// - [`TimerEvent`] represents a C++ `wxTimerEvent` class instance which your code has ownership, [`TimerEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`TimerEvent`]'s `new()` to create an instance of this class.
+    /// - See [C++ `wxTimerEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_timer_event.html) for more details.
     #[doc(alias = "wxTimerEvent")]
     #[doc(alias = "TimerEvent")]
     class TimerEvent
@@ -75,7 +77,7 @@ wxwidgets! {
 }
 impl<const OWNED: bool> TimerEventIsOwned<OWNED> {
     ///
-    /// [See `wxTimerEvent::wxTimerEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_timer_event.html#aedca4f26719c256c2f8d9ef8486d2f86)
+    /// See [C++ `wxTimerEvent::wxTimerEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_timer_event.html#aedca4f26719c256c2f8d9ef8486d2f86).
     pub fn new<T: TimerMethods>(timer: &T) -> TimerEventIsOwned<OWNED> {
         unsafe {
             let timer = timer.as_ptr();

@@ -3,8 +3,9 @@ use super::*;
 // wxClassInfo
 wxwidgets! {
     /// This class stores meta-information about classes.
-    ///
-    /// [See `wxClassInfo`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_class_info.html)
+    /// - [`ClassInfo`] represents a C++ `wxClassInfo` class instance which your code has ownership, [`ClassInfoIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`ClassInfo`]'s `new()` to create an instance of this class.
+    /// - See [C++ `wxClassInfo` class's documentation](https://docs.wxwidgets.org/3.2/classwx_class_info.html) for more details.
     #[doc(alias = "wxClassInfo")]
     #[doc(alias = "ClassInfo")]
     class ClassInfo
@@ -33,8 +34,9 @@ impl<const OWNED: bool> Drop for ClassInfoIsOwned<OWNED> {
 // wxClientData
 wxwidgets! {
     /// All classes deriving from wxEvtHandler (such as all controls and wxApp) can hold arbitrary data which is here referred to as "client data".
-    ///
-    /// [See `wxClientData`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_client_data.html)
+    /// - [`ClientData`] represents a C++ `wxClientData` class instance which your code has ownership, [`ClientDataIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`ClientData`]'s `new()` to create an instance of this class.
+    /// - See [C++ `wxClientData` class's documentation](https://docs.wxwidgets.org/3.2/classwx_client_data.html) for more details.
     #[doc(alias = "wxClientData")]
     #[doc(alias = "ClientData")]
     class ClientData
@@ -44,7 +46,7 @@ wxwidgets! {
 impl<const OWNED: bool> ClientDataIsOwned<OWNED> {
     /// Constructor.
     ///
-    /// [See `wxClientData::wxClientData()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_client_data.html#acf0e79134d5fb8abd8a4a343c616e8d7)
+    /// See [C++ `wxClientData::wxClientData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_client_data.html#acf0e79134d5fb8abd8a4a343c616e8d7).
     pub fn new() -> ClientDataIsOwned<OWNED> {
         unsafe { ClientDataIsOwned(ffi::wxClientData_new()) }
     }

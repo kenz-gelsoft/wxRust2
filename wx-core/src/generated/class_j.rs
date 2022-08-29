@@ -3,8 +3,9 @@ use super::*;
 // wxJPEGHandler
 wxwidgets! {
     /// This is the image handler for the JPEG format.
-    ///
-    /// [See `wxJPEGHandler`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_j_p_e_g_handler.html)
+    /// - [`JPEGHandler`] represents a C++ `wxJPEGHandler` class instance which your code has ownership, [`JPEGHandlerIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`JPEGHandler`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxJPEGHandler` class's documentation](https://docs.wxwidgets.org/3.2/classwx_j_p_e_g_handler.html) for more details.
     #[doc(alias = "wxJPEGHandler")]
     #[doc(alias = "JPEGHandler")]
     class JPEGHandler
@@ -16,7 +17,7 @@ wxwidgets! {
 impl<const OWNED: bool> JPEGHandlerIsOwned<OWNED> {
     /// Default constructor for wxJPEGHandler.
     ///
-    /// [See `wxJPEGHandler::wxJPEGHandler()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_j_p_e_g_handler.html#a2935d0b968967a673b0b6cef75dcbc04)
+    /// See [C++ `wxJPEGHandler::wxJPEGHandler()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_j_p_e_g_handler.html#a2935d0b968967a673b0b6cef75dcbc04).
     pub fn new() -> JPEGHandlerIsOwned<OWNED> {
         unsafe { JPEGHandlerIsOwned(ffi::wxJPEGHandler_new()) }
     }
@@ -58,8 +59,9 @@ impl<const OWNED: bool> ImageHandlerMethods for JPEGHandlerIsOwned<OWNED> {
 // wxJoystickEvent
 wxwidgets! {
     /// This event class contains information about joystick events, particularly events received by windows.
-    ///
-    /// [See `wxJoystickEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_joystick_event.html)
+    /// - [`JoystickEvent`] represents a C++ `wxJoystickEvent` class instance which your code has ownership, [`JoystickEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`JoystickEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxJoystickEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_joystick_event.html) for more details.
     #[doc(alias = "wxJoystickEvent")]
     #[doc(alias = "JoystickEvent")]
     class JoystickEvent

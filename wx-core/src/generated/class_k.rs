@@ -3,8 +3,9 @@ use super::*;
 // wxKeyEvent
 wxwidgets! {
     /// This event class contains information about key press and release events.
-    ///
-    /// [See `wxKeyEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_key_event.html)
+    /// - [`KeyEvent`] represents a C++ `wxKeyEvent` class instance which your code has ownership, [`KeyEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`KeyEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxKeyEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_key_event.html) for more details.
     #[doc(alias = "wxKeyEvent")]
     #[doc(alias = "KeyEvent")]
     class KeyEvent

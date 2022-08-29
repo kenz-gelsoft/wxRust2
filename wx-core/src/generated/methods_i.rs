@@ -1,7 +1,7 @@
 use super::*;
 
 // wxIcon
-/// This trait represents C++ [`wxIcon`](https://docs.wxwidgets.org/3.2/classwx_icon.html) class's methods and inheritance.
+/// This trait represents [C++ `wxIcon` class](https://docs.wxwidgets.org/3.2/classwx_icon.html)'s methods and inheritance.
 ///
 /// See [`IconIsOwned`] documentation for the class usage.
 pub trait IconMethods: GDIObjectMethods {
@@ -10,7 +10,7 @@ pub trait IconMethods: GDIObjectMethods {
     // NOT_SUPPORTED: fn ConvertToDisabled()
     /// Copies bmp bitmap to this icon.
     ///
-    /// [See `wxIcon::CopyFromBitmap()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon.html#aea0254e1fcd09977999799b5744a016c)
+    /// See [C++ `wxIcon::CopyFromBitmap()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon.html#aea0254e1fcd09977999799b5744a016c).
     fn copy_from_bitmap<B: BitmapMethods>(&self, bmp: &B) {
         unsafe {
             let bmp = bmp.as_ptr();
@@ -19,71 +19,71 @@ pub trait IconMethods: GDIObjectMethods {
     }
     /// Gets the colour depth of the icon.
     ///
-    /// [See `wxIcon::GetDepth()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon.html#a5074750955267dbf807a9fa5ca6cbf67)
+    /// See [C++ `wxIcon::GetDepth()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon.html#a5074750955267dbf807a9fa5ca6cbf67).
     fn get_depth(&self) -> c_int {
         unsafe { ffi::wxIcon_GetDepth(self.as_ptr()) }
     }
     /// Gets the height of the icon in physical pixels.
     ///
-    /// [See `wxIcon::GetHeight()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon.html#a56832e71e9efb882d4cad7231d5f1ac7)
+    /// See [C++ `wxIcon::GetHeight()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon.html#a56832e71e9efb882d4cad7231d5f1ac7).
     fn get_height(&self) -> c_int {
         unsafe { ffi::wxIcon_GetHeight(self.as_ptr()) }
     }
     /// Gets the height of the icon in logical pixels.
     ///
-    /// [See `wxIcon::GetLogicalHeight()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon.html#a44861d2d93bbd6d3014d76dae210b1f1)
+    /// See [C++ `wxIcon::GetLogicalHeight()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon.html#a44861d2d93bbd6d3014d76dae210b1f1).
     fn get_logical_height(&self) -> c_double {
         unsafe { ffi::wxIcon_GetLogicalHeight(self.as_ptr()) }
     }
     /// Gets the size of the icon in logical pixels.
     ///
-    /// [See `wxIcon::GetLogicalSize()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon.html#a115b2786820abc73cf0f577a658777c9)
+    /// See [C++ `wxIcon::GetLogicalSize()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon.html#a115b2786820abc73cf0f577a658777c9).
     fn get_logical_size(&self) -> Size {
         unsafe { Size::from_ptr(ffi::wxIcon_GetLogicalSize(self.as_ptr())) }
     }
     /// Gets the width of the icon in logical pixels.
     ///
-    /// [See `wxIcon::GetLogicalWidth()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon.html#adacc07b842e992220eb7afdb7f5b790e)
+    /// See [C++ `wxIcon::GetLogicalWidth()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon.html#adacc07b842e992220eb7afdb7f5b790e).
     fn get_logical_width(&self) -> c_double {
         unsafe { ffi::wxIcon_GetLogicalWidth(self.as_ptr()) }
     }
     /// Gets the scale factor of this icon.
     ///
-    /// [See `wxIcon::GetScaleFactor()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon.html#a592d0df112570fc3f696883c8e210d7b)
+    /// See [C++ `wxIcon::GetScaleFactor()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon.html#a592d0df112570fc3f696883c8e210d7b).
     fn get_scale_factor(&self) -> c_double {
         unsafe { ffi::wxIcon_GetScaleFactor(self.as_ptr()) }
     }
     /// Gets the size of the icon in physical pixels.
     ///
-    /// [See `wxIcon::GetSize()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon.html#a5f07d442a47f9d02ec26b9543ccaea83)
+    /// See [C++ `wxIcon::GetSize()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon.html#a5f07d442a47f9d02ec26b9543ccaea83).
     fn get_size(&self) -> Size {
         unsafe { Size::from_ptr(ffi::wxIcon_GetSize(self.as_ptr())) }
     }
     /// Gets the width of the icon in physical pixels.
     ///
-    /// [See `wxIcon::GetWidth()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon.html#a84442d3fad645f79650ae53eca139a5f)
+    /// See [C++ `wxIcon::GetWidth()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon.html#a84442d3fad645f79650ae53eca139a5f).
     fn get_width(&self) -> c_int {
         unsafe { ffi::wxIcon_GetWidth(self.as_ptr()) }
     }
     /// Returns true if icon data is present.
     ///
-    /// [See `wxIcon::IsOk()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon.html#a77cb179b5a1ab9985e9c0d540562f1a9)
+    /// See [C++ `wxIcon::IsOk()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon.html#a77cb179b5a1ab9985e9c0d540562f1a9).
     fn is_ok(&self) -> bool {
         unsafe { ffi::wxIcon_IsOk(self.as_ptr()) }
     }
     // NOT_SUPPORTED: fn LoadFile()
     ///
-    /// [See `wxIcon::SetDepth()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon.html#ae2099848c41aa2031fe70649c9279816)
+    /// See [C++ `wxIcon::SetDepth()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon.html#ae2099848c41aa2031fe70649c9279816).
     fn set_depth(&self, depth: c_int) {
         unsafe { ffi::wxIcon_SetDepth(self.as_ptr(), depth) }
     }
     ///
-    /// [See `wxIcon::SetHeight()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon.html#a5c5d857cd6fda4ecc05ba4820d4aa2fe)
+    /// See [C++ `wxIcon::SetHeight()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon.html#a5c5d857cd6fda4ecc05ba4820d4aa2fe).
     fn set_height(&self, height: c_int) {
         unsafe { ffi::wxIcon_SetHeight(self.as_ptr(), height) }
     }
     ///
-    /// [See `wxIcon::SetWidth()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon.html#add437e80330ad01742421d2b1d66e2d5)
+    /// See [C++ `wxIcon::SetWidth()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon.html#add437e80330ad01742421d2b1d66e2d5).
     fn set_width(&self, width: c_int) {
         unsafe { ffi::wxIcon_SetWidth(self.as_ptr(), width) }
     }
@@ -91,7 +91,7 @@ pub trait IconMethods: GDIObjectMethods {
 }
 
 // wxIconBundle
-/// This trait represents C++ [`wxIconBundle`](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html) class's methods and inheritance.
+/// This trait represents [C++ `wxIconBundle` class](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html)'s methods and inheritance.
 ///
 /// See [`IconBundleIsOwned`] documentation for the class usage.
 pub trait IconBundleMethods: GDIObjectMethods {
@@ -101,7 +101,7 @@ pub trait IconBundleMethods: GDIObjectMethods {
     // NOT_SUPPORTED: fn AddIcon2()
     /// Adds the icon to the collection; if the collection already contains an icon with the same width and height, it is replaced by the new one.
     ///
-    /// [See `wxIconBundle::AddIcon()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html#a0a8c33284a082b901079e2c5042aa1d2)
+    /// See [C++ `wxIconBundle::AddIcon()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html#a0a8c33284a082b901079e2c5042aa1d2).
     fn add_icon<I: IconMethods>(&self, icon: &I) {
         unsafe {
             let icon = icon.as_ptr();
@@ -110,7 +110,7 @@ pub trait IconBundleMethods: GDIObjectMethods {
     }
     /// Returns the icon with the given size.
     ///
-    /// [See `wxIconBundle::GetIcon()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html#aa005cd0b46f8dc5fc66573a24ec123e7)
+    /// See [C++ `wxIconBundle::GetIcon()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html#aa005cd0b46f8dc5fc66573a24ec123e7).
     fn get_icon_size<S: SizeMethods>(&self, size: &S, flags: c_int) -> Icon {
         unsafe {
             let size = size.as_ptr();
@@ -119,13 +119,13 @@ pub trait IconBundleMethods: GDIObjectMethods {
     }
     /// Same as.
     ///
-    /// [See `wxIconBundle::GetIcon()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html#a46b7a0ef6d5bc2a011fbfb073f5b49bc)
+    /// See [C++ `wxIconBundle::GetIcon()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html#a46b7a0ef6d5bc2a011fbfb073f5b49bc).
     fn get_icon_coord(&self, size: c_int, flags: c_int) -> Icon {
         unsafe { Icon::from_ptr(ffi::wxIconBundle_GetIcon1(self.as_ptr(), size, flags)) }
     }
     /// Returns the icon with exactly the given size or wxNullIcon if this size is not available.
     ///
-    /// [See `wxIconBundle::GetIconOfExactSize()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html#a4869c3dddd6feb1de2754907527b33e2)
+    /// See [C++ `wxIconBundle::GetIconOfExactSize()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html#a4869c3dddd6feb1de2754907527b33e2).
     fn get_icon_of_exact_size<S: SizeMethods>(&self, size: &S) -> Icon {
         unsafe {
             let size = size.as_ptr();
@@ -134,19 +134,19 @@ pub trait IconBundleMethods: GDIObjectMethods {
     }
     /// return the number of available icons
     ///
-    /// [See `wxIconBundle::GetIconCount()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html#a94c13e967121bb2600bf6b4cdf37db5f)
+    /// See [C++ `wxIconBundle::GetIconCount()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html#a94c13e967121bb2600bf6b4cdf37db5f).
     fn get_icon_count(&self) -> usize {
         unsafe { ffi::wxIconBundle_GetIconCount(self.as_ptr()) }
     }
     /// return the icon at index (must be < GetIconCount())
     ///
-    /// [See `wxIconBundle::GetIconByIndex()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html#abce02205e483898f574e19be7a3f6813)
+    /// See [C++ `wxIconBundle::GetIconByIndex()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html#abce02205e483898f574e19be7a3f6813).
     fn get_icon_by_index(&self, n: usize) -> Icon {
         unsafe { Icon::from_ptr(ffi::wxIconBundle_GetIconByIndex(self.as_ptr(), n)) }
     }
     /// Returns true if the bundle doesn't contain any icons, false otherwise (in which case a call to GetIcon() with default parameter should return a valid icon).
     ///
-    /// [See `wxIconBundle::IsEmpty()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html#a386f43ef20f51856339ed676efd90273)
+    /// See [C++ `wxIconBundle::IsEmpty()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html#a386f43ef20f51856339ed676efd90273).
     fn is_empty(&self) -> bool {
         unsafe { ffi::wxIconBundle_IsEmpty(self.as_ptr()) }
     }
@@ -154,13 +154,13 @@ pub trait IconBundleMethods: GDIObjectMethods {
 }
 
 // wxIconizeEvent
-/// This trait represents C++ [`wxIconizeEvent`](https://docs.wxwidgets.org/3.2/classwx_iconize_event.html) class's methods and inheritance.
+/// This trait represents [C++ `wxIconizeEvent` class](https://docs.wxwidgets.org/3.2/classwx_iconize_event.html)'s methods and inheritance.
 ///
 /// See [`IconizeEventIsOwned`] documentation for the class usage.
 pub trait IconizeEventMethods: EventMethods {
     /// Returns true if the frame has been iconized, false if it has been restored.
     ///
-    /// [See `wxIconizeEvent::IsIconized()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_iconize_event.html#a0f6c68ec519a3af9fd22cefdd52d31a8)
+    /// See [C++ `wxIconizeEvent::IsIconized()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_iconize_event.html#a0f6c68ec519a3af9fd22cefdd52d31a8).
     fn is_iconized(&self) -> bool {
         unsafe { ffi::wxIconizeEvent_IsIconized(self.as_ptr()) }
     }
@@ -168,44 +168,44 @@ pub trait IconizeEventMethods: EventMethods {
 }
 
 // wxIdManager
-/// This trait represents C++ [`wxIdManager`](https://docs.wxwidgets.org/3.2/classwx_id_manager.html) class's methods and inheritance.
+/// This trait represents [C++ `wxIdManager` class](https://docs.wxwidgets.org/3.2/classwx_id_manager.html)'s methods and inheritance.
 ///
 /// See [`IdManagerIsOwned`] documentation for the class usage.
 pub trait IdManagerMethods: WxRustMethods {
     /// Called directly by wxWindow::NewControlId(), this function will create a new ID or range of IDs.
     ///
-    /// [See `wxIdManager::ReserveId()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_id_manager.html#a3038d645cbbb9ce1f89dcafe830275a6)
+    /// See [C++ `wxIdManager::ReserveId()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_id_manager.html#a3038d645cbbb9ce1f89dcafe830275a6).
     fn reserve_id(count: c_int) -> c_int {
         unsafe { ffi::wxIdManager_ReserveId(count) }
     }
     /// Called directly by wxWindow::UnreserveControlId(), this function will unreserve an ID or range of IDs that is currently reserved.
     ///
-    /// [See `wxIdManager::UnreserveId()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_id_manager.html#a48e2dcc02bb3998861a73de7959b377d)
+    /// See [C++ `wxIdManager::UnreserveId()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_id_manager.html#a48e2dcc02bb3998861a73de7959b377d).
     fn unreserve_id(id: c_int, count: c_int) {
         unsafe { ffi::wxIdManager_UnreserveId(id, count) }
     }
 }
 
 // wxImage
-/// This trait represents C++ [`wxImage`](https://docs.wxwidgets.org/3.2/classwx_image.html) class's methods and inheritance.
+/// This trait represents [C++ `wxImage` class](https://docs.wxwidgets.org/3.2/classwx_image.html)'s methods and inheritance.
 ///
 /// See [`ImageIsOwned`] documentation for the class usage.
 pub trait ImageMethods: ObjectMethods {
     /// Returns an identical copy of this image.
     ///
-    /// [See `wxImage::Copy()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#aa91b90641c946cbcabd5a0677cf85834)
+    /// See [C++ `wxImage::Copy()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#aa91b90641c946cbcabd5a0677cf85834).
     fn copy(&self) -> Image {
         unsafe { Image::from_ptr(ffi::wxImage_Copy(self.as_ptr())) }
     }
     /// Creates a fresh image.
     ///
-    /// [See `wxImage::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a07194d90bd6320255610a0a88a030a3e)
+    /// See [C++ `wxImage::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a07194d90bd6320255610a0a88a030a3e).
     fn create_int_bool(&self, width: c_int, height: c_int, clear: bool) -> bool {
         unsafe { ffi::wxImage_Create(self.as_ptr(), width, height, clear) }
     }
     /// This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
     ///
-    /// [See `wxImage::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a37e70a8f9c684974c9c54f43f5e60a3f)
+    /// See [C++ `wxImage::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a37e70a8f9c684974c9c54f43f5e60a3f).
     fn create_size_bool<S: SizeMethods>(&self, sz: &S, clear: bool) -> bool {
         unsafe {
             let sz = sz.as_ptr();
@@ -214,7 +214,7 @@ pub trait ImageMethods: ObjectMethods {
     }
     /// Creates a fresh image.
     ///
-    /// [See `wxImage::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a63801a380397cdcf465cab68f313c9a6)
+    /// See [C++ `wxImage::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a63801a380397cdcf465cab68f313c9a6).
     fn create_int_uchar_bool(
         &self,
         width: c_int,
@@ -226,7 +226,7 @@ pub trait ImageMethods: ObjectMethods {
     }
     /// This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
     ///
-    /// [See `wxImage::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a717414a9d74dc882359857050bb4bdc3)
+    /// See [C++ `wxImage::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a717414a9d74dc882359857050bb4bdc3).
     fn create_size_uchar_bool<S: SizeMethods>(
         &self,
         sz: &S,
@@ -240,7 +240,7 @@ pub trait ImageMethods: ObjectMethods {
     }
     /// Creates a fresh image.
     ///
-    /// [See `wxImage::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#aa395d661de4f3b98c6e92a767d97bb66)
+    /// See [C++ `wxImage::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#aa395d661de4f3b98c6e92a767d97bb66).
     fn create_int_uchar_uchar(
         &self,
         width: c_int,
@@ -253,7 +253,7 @@ pub trait ImageMethods: ObjectMethods {
     }
     /// This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
     ///
-    /// [See `wxImage::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#aae3a6d125108f6fb93188d8c3c4990b9)
+    /// See [C++ `wxImage::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#aae3a6d125108f6fb93188d8c3c4990b9).
     fn create_size_uchar_uchar<S: SizeMethods>(
         &self,
         sz: &S,
@@ -269,37 +269,37 @@ pub trait ImageMethods: ObjectMethods {
     // NOT_SUPPORTED: fn Clear()
     /// Destroys the image data.
     ///
-    /// [See `wxImage::Destroy()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#ac64c3524a054db164b811c380db65f97)
+    /// See [C++ `wxImage::Destroy()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#ac64c3524a054db164b811c380db65f97).
     fn destroy(&self) {
         unsafe { ffi::wxImage_Destroy(self.as_ptr()) }
     }
     /// Initializes the image alpha channel data.
     ///
-    /// [See `wxImage::InitAlpha()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#ac941b6b80262b968b575ab1b215e687b)
+    /// See [C++ `wxImage::InitAlpha()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#ac941b6b80262b968b575ab1b215e687b).
     fn init_alpha(&self) {
         unsafe { ffi::wxImage_InitAlpha(self.as_ptr()) }
     }
     /// Blurs the image in both horizontal and vertical directions by the specified pixel blurRadius.
     ///
-    /// [See `wxImage::Blur()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a9fd6442bc91dba50db6c29b6c6167fb8)
+    /// See [C++ `wxImage::Blur()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a9fd6442bc91dba50db6c29b6c6167fb8).
     fn blur(&self, blur_radius: c_int) -> Image {
         unsafe { Image::from_ptr(ffi::wxImage_Blur(self.as_ptr(), blur_radius)) }
     }
     /// Blurs the image in the horizontal direction only.
     ///
-    /// [See `wxImage::BlurHorizontal()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#ab30dee077c0134de25964a33c5d242c3)
+    /// See [C++ `wxImage::BlurHorizontal()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#ab30dee077c0134de25964a33c5d242c3).
     fn blur_horizontal(&self, blur_radius: c_int) -> Image {
         unsafe { Image::from_ptr(ffi::wxImage_BlurHorizontal(self.as_ptr(), blur_radius)) }
     }
     /// Blurs the image in the vertical direction only.
     ///
-    /// [See `wxImage::BlurVertical()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#ac54487ddc5d8c8a8566a2d8ddd454199)
+    /// See [C++ `wxImage::BlurVertical()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#ac54487ddc5d8c8a8566a2d8ddd454199).
     fn blur_vertical(&self, blur_radius: c_int) -> Image {
         unsafe { Image::from_ptr(ffi::wxImage_BlurVertical(self.as_ptr(), blur_radius)) }
     }
     /// Returns a mirrored copy of the image.
     ///
-    /// [See `wxImage::Mirror()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#ac033f86a6923200696ea941695cd680b)
+    /// See [C++ `wxImage::Mirror()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#ac033f86a6923200696ea941695cd680b).
     fn mirror(&self, horizontally: bool) -> Image {
         unsafe { Image::from_ptr(ffi::wxImage_Mirror(self.as_ptr(), horizontally)) }
     }
@@ -308,7 +308,7 @@ pub trait ImageMethods: ObjectMethods {
     // NOT_SUPPORTED: fn Rescale()
     /// Changes the size of the image in-place without scaling it by adding either a border with the given colour or cropping as necessary.
     ///
-    /// [See `wxImage::Resize()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#ac2f7069343541eef9ed44d088b3dc9fa)
+    /// See [C++ `wxImage::Resize()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#ac2f7069343541eef9ed44d088b3dc9fa).
     fn resize<S: SizeMethods, P: PointMethods>(
         &self,
         size: &S,
@@ -326,7 +326,7 @@ pub trait ImageMethods: ObjectMethods {
     }
     /// Rotates the image about the given point, by angle radians.
     ///
-    /// [See `wxImage::Rotate()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a3532210633dae17f21e99d111b1ef0b2)
+    /// See [C++ `wxImage::Rotate()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a3532210633dae17f21e99d111b1ef0b2).
     fn rotate<P: PointMethods, P2: PointMethods>(
         &self,
         angle: c_double,
@@ -351,44 +351,44 @@ pub trait ImageMethods: ObjectMethods {
     }
     /// Returns a copy of the image rotated 90 degrees in the direction indicated by clockwise.
     ///
-    /// [See `wxImage::Rotate90()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#abe60eccfbf41e5e4d00de2af8fd9637b)
+    /// See [C++ `wxImage::Rotate90()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#abe60eccfbf41e5e4d00de2af8fd9637b).
     fn rotate90(&self, clockwise: bool) -> Image {
         unsafe { Image::from_ptr(ffi::wxImage_Rotate90(self.as_ptr(), clockwise)) }
     }
     /// Returns a copy of the image rotated by 180 degrees.
     ///
-    /// [See `wxImage::Rotate180()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#ae3fb8e5e4518ed21eecf1174df388827)
+    /// See [C++ `wxImage::Rotate180()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#ae3fb8e5e4518ed21eecf1174df388827).
     fn rotate180(&self) -> Image {
         unsafe { Image::from_ptr(ffi::wxImage_Rotate180(self.as_ptr())) }
     }
     /// Rotates the hue of each pixel in the image by angle, which is a double in the range [-1.0..+1.0], where -1.0 corresponds to -360 degrees and +1.0 corresponds to +360 degrees.
     ///
-    /// [See `wxImage::RotateHue()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a96a43d7bbb26ed775fa10c979c6e511f)
+    /// See [C++ `wxImage::RotateHue()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a96a43d7bbb26ed775fa10c979c6e511f).
     fn rotate_hue(&self, angle: c_double) {
         unsafe { ffi::wxImage_RotateHue(self.as_ptr(), angle) }
     }
     /// Changes the saturation of each pixel in the image.
     ///
-    /// [See `wxImage::ChangeSaturation()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#ae79b3dee30b7292ae2c69f1930a39bfe)
+    /// See [C++ `wxImage::ChangeSaturation()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#ae79b3dee30b7292ae2c69f1930a39bfe).
     fn change_saturation(&self, factor: c_double) {
         unsafe { ffi::wxImage_ChangeSaturation(self.as_ptr(), factor) }
     }
     /// Changes the brightness (value) of each pixel in the image.
     ///
-    /// [See `wxImage::ChangeBrightness()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#aff38604c9b6cb54139097d0ebd2f666a)
+    /// See [C++ `wxImage::ChangeBrightness()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#aff38604c9b6cb54139097d0ebd2f666a).
     fn change_brightness(&self, factor: c_double) {
         unsafe { ffi::wxImage_ChangeBrightness(self.as_ptr(), factor) }
     }
     /// Changes the hue, the saturation and the brightness (value) of each pixel in the image.
     ///
-    /// [See `wxImage::ChangeHSV()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#add2305734a1e1cda13f3fb0f71ef6312)
+    /// See [C++ `wxImage::ChangeHSV()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#add2305734a1e1cda13f3fb0f71ef6312).
     fn change_hsv(&self, angle_h: c_double, factor_s: c_double, factor_v: c_double) {
         unsafe { ffi::wxImage_ChangeHSV(self.as_ptr(), angle_h, factor_s, factor_v) }
     }
     // NOT_SUPPORTED: fn Scale()
     /// Returns a resized version of this image without scaling it by adding either a border with the given colour or cropping as necessary.
     ///
-    /// [See `wxImage::Size()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a365621ba73e792f40c486d8a65a0cb9b)
+    /// See [C++ `wxImage::Size()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a365621ba73e792f40c486d8a65a0cb9b).
     fn size<S: SizeMethods, P: PointMethods>(
         &self,
         size: &S,
@@ -414,7 +414,7 @@ pub trait ImageMethods: ObjectMethods {
     // NOT_SUPPORTED: fn ConvertAlphaToMask1()
     /// Returns a greyscale version of the image.
     ///
-    /// [See `wxImage::ConvertToGreyscale()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a7718921e0955a0b98266f9c47546408a)
+    /// See [C++ `wxImage::ConvertToGreyscale()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a7718921e0955a0b98266f9c47546408a).
     fn convert_to_greyscale_double(
         &self,
         weight_r: c_double,
@@ -432,7 +432,7 @@ pub trait ImageMethods: ObjectMethods {
     }
     /// Returns a greyscale version of the image.
     ///
-    /// [See `wxImage::ConvertToGreyscale()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#abc9ddbe1370677981685a8416a51a4f8)
+    /// See [C++ `wxImage::ConvertToGreyscale()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#abc9ddbe1370677981685a8416a51a4f8).
     fn convert_to_greyscale(&self) -> Image {
         unsafe { Image::from_ptr(ffi::wxImage_ConvertToGreyscale1(self.as_ptr())) }
     }
@@ -440,7 +440,7 @@ pub trait ImageMethods: ObjectMethods {
     // NOT_SUPPORTED: fn ConvertToDisabled()
     /// Returns a changed version of the image based on the given lightness.
     ///
-    /// [See `wxImage::ChangeLightness()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a2bee3672842b72fcf295f20cc00b3c16)
+    /// See [C++ `wxImage::ChangeLightness()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a2bee3672842b72fcf295f20cc00b3c16).
     fn change_lightness(&self, alpha: c_int) -> Image {
         unsafe { Image::from_ptr(ffi::wxImage_ChangeLightness(self.as_ptr(), alpha)) }
     }
@@ -449,13 +449,13 @@ pub trait ImageMethods: ObjectMethods {
     // BLOCKED: fn operator=()
     /// Returns pointer to the array storing the alpha values for this image.
     ///
-    /// [See `wxImage::GetAlpha()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a6e59c7c1945c15df7e6002605864b028)
+    /// See [C++ `wxImage::GetAlpha()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a6e59c7c1945c15df7e6002605864b028).
     fn get_alpha(&self) -> *mut c_void {
         unsafe { ffi::wxImage_GetAlpha(self.as_ptr()) }
     }
     /// Returns the image data as an array.
     ///
-    /// [See `wxImage::GetData()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a2c215115d47da1e4beb1ecabc4ba53aa)
+    /// See [C++ `wxImage::GetData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a2c215115d47da1e4beb1ecabc4ba53aa).
     fn get_data(&self) -> *mut c_void {
         unsafe { ffi::wxImage_GetData(self.as_ptr()) }
     }
@@ -468,25 +468,25 @@ pub trait ImageMethods: ObjectMethods {
     // NOT_SUPPORTED: fn GetMaskBlue()
     /// Gets the width of the image in pixels.
     ///
-    /// [See `wxImage::GetWidth()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a038af12899d797dad9385b0b62aa605a)
+    /// See [C++ `wxImage::GetWidth()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a038af12899d797dad9385b0b62aa605a).
     fn get_width(&self) -> c_int {
         unsafe { ffi::wxImage_GetWidth(self.as_ptr()) }
     }
     /// Gets the height of the image in pixels.
     ///
-    /// [See `wxImage::GetHeight()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a96c60d4c78e742700a458f52661f489c)
+    /// See [C++ `wxImage::GetHeight()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a96c60d4c78e742700a458f52661f489c).
     fn get_height(&self) -> c_int {
         unsafe { ffi::wxImage_GetHeight(self.as_ptr()) }
     }
     /// Returns the size of the image in pixels.
     ///
-    /// [See `wxImage::GetSize()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a921baa8d74fff2deb66a9c47b6588f2f)
+    /// See [C++ `wxImage::GetSize()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a921baa8d74fff2deb66a9c47b6588f2f).
     fn get_size(&self) -> Size {
         unsafe { Size::from_ptr(ffi::wxImage_GetSize(self.as_ptr())) }
     }
     /// Gets a user-defined string-valued option.
     ///
-    /// [See `wxImage::GetOption()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#af223e5d8a96e081bfc80271f4dfa8fc7)
+    /// See [C++ `wxImage::GetOption()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#af223e5d8a96e081bfc80271f4dfa8fc7).
     fn get_option(&self, name: &str) -> String {
         unsafe {
             let name = WxString::from(name);
@@ -496,7 +496,7 @@ pub trait ImageMethods: ObjectMethods {
     }
     /// Gets a user-defined integer-valued option.
     ///
-    /// [See `wxImage::GetOptionInt()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#ad2ee17ab0ab8654ea14e0ebb18d55ca9)
+    /// See [C++ `wxImage::GetOptionInt()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#ad2ee17ab0ab8654ea14e0ebb18d55ca9).
     fn get_option_int(&self, name: &str) -> c_int {
         unsafe {
             let name = WxString::from(name);
@@ -506,14 +506,14 @@ pub trait ImageMethods: ObjectMethods {
     }
     /// Get the current mask colour or find a suitable unused colour that could be used as a mask colour.
     ///
-    /// [See `wxImage::GetOrFindMaskColour()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a6d1d3d87a8d0d9b46d331c19f3ce847f)
+    /// See [C++ `wxImage::GetOrFindMaskColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a6d1d3d87a8d0d9b46d331c19f3ce847f).
     fn get_or_find_mask_colour(&self, r: *mut c_void, g: *mut c_void, b: *mut c_void) -> bool {
         unsafe { ffi::wxImage_GetOrFindMaskColour(self.as_ptr(), r, g, b) }
     }
     // BLOCKED: fn GetPalette()
     /// Returns a sub image of the current one as long as the rect belongs entirely to the image.
     ///
-    /// [See `wxImage::GetSubImage()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a808d987824786d2777ec9962cb522f69)
+    /// See [C++ `wxImage::GetSubImage()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a808d987824786d2777ec9962cb522f69).
     fn get_sub_image<R: RectMethods>(&self, rect: &R) -> Image {
         unsafe {
             let rect = rect.as_ptr();
@@ -523,19 +523,19 @@ pub trait ImageMethods: ObjectMethods {
     // NOT_SUPPORTED: fn GetType()
     /// Returns true if this image has alpha channel, false otherwise.
     ///
-    /// [See `wxImage::HasAlpha()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#accd85932f27036014ca00997897e1040)
+    /// See [C++ `wxImage::HasAlpha()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#accd85932f27036014ca00997897e1040).
     fn has_alpha(&self) -> bool {
         unsafe { ffi::wxImage_HasAlpha(self.as_ptr()) }
     }
     /// Returns true if there is a mask active, false otherwise.
     ///
-    /// [See `wxImage::HasMask()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#aabe81dbe168e7cac8815cb632fd6c11e)
+    /// See [C++ `wxImage::HasMask()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#aabe81dbe168e7cac8815cb632fd6c11e).
     fn has_mask(&self) -> bool {
         unsafe { ffi::wxImage_HasMask(self.as_ptr()) }
     }
     /// Returns true if the given option is present.
     ///
-    /// [See `wxImage::HasOption()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#ab666653f2de8e8ef7de6f8fb381b0053)
+    /// See [C++ `wxImage::HasOption()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#ab666653f2de8e8ef7de6f8fb381b0053).
     fn has_option(&self, name: &str) -> bool {
         unsafe {
             let name = WxString::from(name);
@@ -545,7 +545,7 @@ pub trait ImageMethods: ObjectMethods {
     }
     /// Returns true if image data is present.
     ///
-    /// [See `wxImage::IsOk()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#ad0467837c346bbdc3e312459e4b1e596)
+    /// See [C++ `wxImage::IsOk()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#ad0467837c346bbdc3e312459e4b1e596).
     fn is_ok(&self) -> bool {
         unsafe { ffi::wxImage_IsOk(self.as_ptr()) }
     }
@@ -554,7 +554,7 @@ pub trait ImageMethods: ObjectMethods {
     // NOT_SUPPORTED: fn LoadFile1()
     /// Loads an image from a file.
     ///
-    /// [See `wxImage::LoadFile()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a5261b155bbc93ed1719462d80ce699be)
+    /// See [C++ `wxImage::LoadFile()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a5261b155bbc93ed1719462d80ce699be).
     fn load_file_str(&self, name: &str, mimetype: &str, index: c_int) -> bool {
         unsafe {
             let name = WxString::from(name);
@@ -566,7 +566,7 @@ pub trait ImageMethods: ObjectMethods {
     }
     /// Loads an image from an input stream.
     ///
-    /// [See `wxImage::LoadFile()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a318ae843ecc2e10fdc460865dff49a99)
+    /// See [C++ `wxImage::LoadFile()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a318ae843ecc2e10fdc460865dff49a99).
     fn load_file_inputstream(&self, stream: *mut c_void, mimetype: &str, index: c_int) -> bool {
         unsafe {
             let mimetype = WxString::from(mimetype);
@@ -576,7 +576,7 @@ pub trait ImageMethods: ObjectMethods {
     }
     /// Saves an image in the given stream.
     ///
-    /// [See `wxImage::SaveFile()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#adcfbb6157c79bc142811d0faf6a85b2c)
+    /// See [C++ `wxImage::SaveFile()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#adcfbb6157c79bc142811d0faf6a85b2c).
     fn save_file_outputstream(&self, stream: *mut c_void, mimetype: &str) -> bool {
         unsafe {
             let mimetype = WxString::from(mimetype);
@@ -587,7 +587,7 @@ pub trait ImageMethods: ObjectMethods {
     // NOT_SUPPORTED: fn SaveFile1()
     /// Saves an image in the named file.
     ///
-    /// [See `wxImage::SaveFile()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#ae11d5b3b139d9817bd2a781d9d114e50)
+    /// See [C++ `wxImage::SaveFile()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#ae11d5b3b139d9817bd2a781d9d114e50).
     fn save_file_str_str(&self, name: &str, mimetype: &str) -> bool {
         unsafe {
             let name = WxString::from(name);
@@ -599,7 +599,7 @@ pub trait ImageMethods: ObjectMethods {
     }
     /// Saves an image in the named file.
     ///
-    /// [See `wxImage::SaveFile()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a17d2048a0dc4f85a86839059c094afeb)
+    /// See [C++ `wxImage::SaveFile()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a17d2048a0dc4f85a86839059c094afeb).
     fn save_file_str(&self, name: &str) -> bool {
         unsafe {
             let name = WxString::from(name);
@@ -610,26 +610,26 @@ pub trait ImageMethods: ObjectMethods {
     // NOT_SUPPORTED: fn SaveFile4()
     /// This function is similar to SetData() and has similar restrictions.
     ///
-    /// [See `wxImage::SetAlpha()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#ab46f59f69221258da1397fd7c59e8671)
+    /// See [C++ `wxImage::SetAlpha()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#ab46f59f69221258da1397fd7c59e8671).
     fn set_alpha(&self, alpha: *mut c_void, static_data: bool) {
         unsafe { ffi::wxImage_SetAlpha(self.as_ptr(), alpha, static_data) }
     }
     // NOT_SUPPORTED: fn SetAlpha1()
     /// Removes the alpha channel from the image.
     ///
-    /// [See `wxImage::ClearAlpha()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a1b82ae0550626a74c3ee97d9065628b1)
+    /// See [C++ `wxImage::ClearAlpha()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a1b82ae0550626a74c3ee97d9065628b1).
     fn clear_alpha(&self) {
         unsafe { ffi::wxImage_ClearAlpha(self.as_ptr()) }
     }
     /// Sets the image data without performing checks.
     ///
-    /// [See `wxImage::SetData()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a736a8fc26d32e5eab70682b115bacacf)
+    /// See [C++ `wxImage::SetData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a736a8fc26d32e5eab70682b115bacacf).
     fn set_data_bool(&self, data: *mut c_void, static_data: bool) {
         unsafe { ffi::wxImage_SetData(self.as_ptr(), data, static_data) }
     }
     /// This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
     ///
-    /// [See `wxImage::SetData()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#afda57bc7ba823e7c060dbd7698c6ad31)
+    /// See [C++ `wxImage::SetData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#afda57bc7ba823e7c060dbd7698c6ad31).
     fn set_data_int(
         &self,
         data: *mut c_void,
@@ -641,13 +641,13 @@ pub trait ImageMethods: ObjectMethods {
     }
     /// Sets the flags used for loading image files by this object.
     ///
-    /// [See `wxImage::SetLoadFlags()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#aa32e5d3507cc0f8c3330135bc0befc6a)
+    /// See [C++ `wxImage::SetLoadFlags()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#aa32e5d3507cc0f8c3330135bc0befc6a).
     fn set_load_flags(&self, flags: c_int) {
         unsafe { ffi::wxImage_SetLoadFlags(self.as_ptr(), flags) }
     }
     /// Specifies whether there is a mask or not.
     ///
-    /// [See `wxImage::SetMask()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a62645fe559149a8ee6b27ddc07cfc220)
+    /// See [C++ `wxImage::SetMask()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a62645fe559149a8ee6b27ddc07cfc220).
     fn set_mask(&self, has_mask: bool) {
         unsafe { ffi::wxImage_SetMask(self.as_ptr(), has_mask) }
     }
@@ -655,7 +655,7 @@ pub trait ImageMethods: ObjectMethods {
     // NOT_SUPPORTED: fn SetMaskFromImage()
     /// Sets a user-defined option.
     ///
-    /// [See `wxImage::SetOption()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a952ee065b17ee07a8cbee568486e01a4)
+    /// See [C++ `wxImage::SetOption()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a952ee065b17ee07a8cbee568486e01a4).
     fn set_option_str(&self, name: &str, value: &str) {
         unsafe {
             let name = WxString::from(name);
@@ -667,7 +667,7 @@ pub trait ImageMethods: ObjectMethods {
     }
     /// This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
     ///
-    /// [See `wxImage::SetOption()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#acc3d48af8a50bff5ceca51fd649ec981)
+    /// See [C++ `wxImage::SetOption()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#acc3d48af8a50bff5ceca51fd649ec981).
     fn set_option_int(&self, name: &str, value: c_int) {
         unsafe {
             let name = WxString::from(name);
@@ -677,7 +677,7 @@ pub trait ImageMethods: ObjectMethods {
     }
     /// Associates a palette with the image.
     ///
-    /// [See `wxImage::SetPalette()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#acbf3a8b9f954b7da7d65adbb9cc9e026)
+    /// See [C++ `wxImage::SetPalette()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#acbf3a8b9f954b7da7d65adbb9cc9e026).
     fn set_palette<P: PaletteMethods>(&self, palette: &P) {
         unsafe {
             let palette = palette.as_ptr();
@@ -689,19 +689,19 @@ pub trait ImageMethods: ObjectMethods {
     // NOT_SUPPORTED: fn SetType()
     /// Sets the default value for the flags used for loading image files.
     ///
-    /// [See `wxImage::SetDefaultLoadFlags()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a31cf23299e54403d538ecbd9ea60fb25)
+    /// See [C++ `wxImage::SetDefaultLoadFlags()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a31cf23299e54403d538ecbd9ea60fb25).
     fn set_default_load_flags(flags: c_int) {
         unsafe { ffi::wxImage_SetDefaultLoadFlags(flags) }
     }
     /// Returns the file load flags used for this object.
     ///
-    /// [See `wxImage::GetLoadFlags()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a28503a506d7354584942764f775694e8)
+    /// See [C++ `wxImage::GetLoadFlags()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a28503a506d7354584942764f775694e8).
     fn get_load_flags(&self) -> c_int {
         unsafe { ffi::wxImage_GetLoadFlags(self.as_ptr()) }
     }
     /// Register an image handler.
     ///
-    /// [See `wxImage::AddHandler()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#ab39fb3747dfb8c2d444eff9fe41fa205)
+    /// See [C++ `wxImage::AddHandler()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#ab39fb3747dfb8c2d444eff9fe41fa205).
     fn add_handler<I: ImageHandlerMethods>(handler: Option<&I>) {
         unsafe {
             let handler = match handler {
@@ -713,13 +713,13 @@ pub trait ImageMethods: ObjectMethods {
     }
     /// Deletes all image handlers.
     ///
-    /// [See `wxImage::CleanUpHandlers()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#aa50b222b999e7cd690f2a5be0e0e9cef)
+    /// See [C++ `wxImage::CleanUpHandlers()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#aa50b222b999e7cd690f2a5be0e0e9cef).
     fn clean_up_handlers() {
         unsafe { ffi::wxImage_CleanUpHandlers() }
     }
     /// Finds the handler with the given name.
     ///
-    /// [See `wxImage::FindHandler()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a474c80c4f2a344d131fc9b26778f8440)
+    /// See [C++ `wxImage::FindHandler()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a474c80c4f2a344d131fc9b26778f8440).
     fn find_handler(name: &str) -> Option<ImageHandlerIsOwned<false>> {
         unsafe {
             let name = WxString::from(name);
@@ -731,7 +731,7 @@ pub trait ImageMethods: ObjectMethods {
     // NOT_SUPPORTED: fn FindHandler2()
     /// Finds the handler associated with the given MIME type.
     ///
-    /// [See `wxImage::FindHandlerMime()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a464676dac510648439549482e4ed07bd)
+    /// See [C++ `wxImage::FindHandlerMime()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a464676dac510648439549482e4ed07bd).
     fn find_handler_mime(mimetype: &str) -> Option<ImageHandlerIsOwned<false>> {
         unsafe {
             let mimetype = WxString::from(mimetype);
@@ -742,13 +742,13 @@ pub trait ImageMethods: ObjectMethods {
     // BLOCKED: fn GetHandlers()
     /// Internal use only.
     ///
-    /// [See `wxImage::InitStandardHandlers()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#ab2f032e0b7766dc69d4f092f4a55fd60)
+    /// See [C++ `wxImage::InitStandardHandlers()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#ab2f032e0b7766dc69d4f092f4a55fd60).
     fn init_standard_handlers() {
         unsafe { ffi::wxImage_InitStandardHandlers() }
     }
     /// Adds a handler at the start of the static list of format handlers.
     ///
-    /// [See `wxImage::InsertHandler()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#adcecda55890d6e9e3c827751a9ec42b0)
+    /// See [C++ `wxImage::InsertHandler()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#adcecda55890d6e9e3c827751a9ec42b0).
     fn insert_handler<I: ImageHandlerMethods>(handler: Option<&I>) {
         unsafe {
             let handler = match handler {
@@ -760,7 +760,7 @@ pub trait ImageMethods: ObjectMethods {
     }
     /// Finds the handler with the given name, and removes it.
     ///
-    /// [See `wxImage::RemoveHandler()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a70ef86ff481bc18c0a32f5467a071e42)
+    /// See [C++ `wxImage::RemoveHandler()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a70ef86ff481bc18c0a32f5467a071e42).
     fn remove_handler(name: &str) -> bool {
         unsafe {
             let name = WxString::from(name);
@@ -770,7 +770,7 @@ pub trait ImageMethods: ObjectMethods {
     }
     /// Returns true if at least one of the available image handlers can read the file with the given name.
     ///
-    /// [See `wxImage::CanRead()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a786fdfa44290867e1b1fd64bcd26aded)
+    /// See [C++ `wxImage::CanRead()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a786fdfa44290867e1b1fd64bcd26aded).
     fn can_read_str(filename: &str) -> bool {
         unsafe {
             let filename = WxString::from(filename);
@@ -780,13 +780,13 @@ pub trait ImageMethods: ObjectMethods {
     }
     /// Returns true if at least one of the available image handlers can read the data in the given stream.
     ///
-    /// [See `wxImage::CanRead()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#aac069cba7821715661e03d9b6eeee98f)
+    /// See [C++ `wxImage::CanRead()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#aac069cba7821715661e03d9b6eeee98f).
     fn can_read_inputstream(stream: *mut c_void) -> bool {
         unsafe { ffi::wxImage_CanRead1(stream) }
     }
     /// Returns the currently used default file load flags.
     ///
-    /// [See `wxImage::GetDefaultLoadFlags()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#aed3c02fb1f572fb030a201c7c1b65f33)
+    /// See [C++ `wxImage::GetDefaultLoadFlags()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#aed3c02fb1f572fb030a201c7c1b65f33).
     fn get_default_load_flags() -> c_int {
         unsafe { ffi::wxImage_GetDefaultLoadFlags() }
     }
@@ -794,7 +794,7 @@ pub trait ImageMethods: ObjectMethods {
     // NOT_SUPPORTED: fn GetImageCount1()
     /// Iterates all registered wxImageHandler objects, and returns a string containing file extension masks suitable for passing to file open/save dialog boxes.
     ///
-    /// [See `wxImage::GetImageExtWildcard()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image.html#a0ed7bd5c0eba03553b6533e2f79e0ff1)
+    /// See [C++ `wxImage::GetImageExtWildcard()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a0ed7bd5c0eba03553b6533e2f79e0ff1).
     fn get_image_ext_wildcard() -> String {
         unsafe { WxString::from_ptr(ffi::wxImage_GetImageExtWildcard()).into() }
     }
@@ -804,20 +804,20 @@ pub trait ImageMethods: ObjectMethods {
 }
 
 // wxImageHandler
-/// This trait represents C++ [`wxImageHandler`](https://docs.wxwidgets.org/3.2/classwx_image_handler.html) class's methods and inheritance.
+/// This trait represents [C++ `wxImageHandler` class](https://docs.wxwidgets.org/3.2/classwx_image_handler.html)'s methods and inheritance.
 ///
 /// See [`ImageHandlerIsOwned`] documentation for the class usage.
 pub trait ImageHandlerMethods: ObjectMethods {
     // DTOR: fn ~wxImageHandler()
     /// Returns true if this handler supports the image format contained in the given stream.
     ///
-    /// [See `wxImageHandler::CanRead()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#a7c886c9f2192699183e480066e386133)
+    /// See [C++ `wxImageHandler::CanRead()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#a7c886c9f2192699183e480066e386133).
     fn can_read_inputstream(&self, stream: *mut c_void) -> bool {
         unsafe { ffi::wxImageHandler_CanRead(self.as_ptr(), stream) }
     }
     /// Returns true if this handler supports the image format contained in the file with the given name.
     ///
-    /// [See `wxImageHandler::CanRead()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#a91fadb9ace6a42e8cf3c66061e4bbfc9)
+    /// See [C++ `wxImageHandler::CanRead()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#a91fadb9ace6a42e8cf3c66061e4bbfc9).
     fn can_read_str(&self, filename: &str) -> bool {
         unsafe {
             let filename = WxString::from(filename);
@@ -827,38 +827,38 @@ pub trait ImageHandlerMethods: ObjectMethods {
     }
     /// Gets the preferred file extension associated with this handler.
     ///
-    /// [See `wxImageHandler::GetExtension()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#a50abd57b932c049e3f48c064f2060e59)
+    /// See [C++ `wxImageHandler::GetExtension()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#a50abd57b932c049e3f48c064f2060e59).
     fn get_extension(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxImageHandler_GetExtension(self.as_ptr())).into() }
     }
     /// Returns the other file extensions associated with this handler.
     ///
-    /// [See `wxImageHandler::GetAltExtensions()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#ad7507ccdf4d120820bd7be84826e86dd)
+    /// See [C++ `wxImageHandler::GetAltExtensions()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#ad7507ccdf4d120820bd7be84826e86dd).
     fn get_alt_extensions(&self) -> ArrayStringIsOwned<false> {
         unsafe { ArrayStringIsOwned::from_ptr(ffi::wxImageHandler_GetAltExtensions(self.as_ptr())) }
     }
     /// If the image file contains more than one image and the image handler is capable of retrieving these individually, this function will return the number of available images.
     ///
-    /// [See `wxImageHandler::GetImageCount()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#a1934418d6f844d7db650926d2a4e5f18)
+    /// See [C++ `wxImageHandler::GetImageCount()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#a1934418d6f844d7db650926d2a4e5f18).
     fn get_image_count(&self, stream: *mut c_void) -> c_int {
         unsafe { ffi::wxImageHandler_GetImageCount(self.as_ptr(), stream) }
     }
     /// Gets the MIME type associated with this handler.
     ///
-    /// [See `wxImageHandler::GetMimeType()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#aface63bd833c98f470898f7952dd2062)
+    /// See [C++ `wxImageHandler::GetMimeType()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#aface63bd833c98f470898f7952dd2062).
     fn get_mime_type(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxImageHandler_GetMimeType(self.as_ptr())).into() }
     }
     /// Gets the name of this handler.
     ///
-    /// [See `wxImageHandler::GetName()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#aaa8dbc9a569147c35ffb44b628d8cac4)
+    /// See [C++ `wxImageHandler::GetName()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#aaa8dbc9a569147c35ffb44b628d8cac4).
     fn get_name(&self) -> String {
         unsafe { WxString::from_ptr(ffi::wxImageHandler_GetName(self.as_ptr())).into() }
     }
     // NOT_SUPPORTED: fn GetType()
     /// Loads an image from a stream, putting the resulting data into image.
     ///
-    /// [See `wxImageHandler::LoadFile()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#a39793e7d6c1e0138330b4c6727e26861)
+    /// See [C++ `wxImageHandler::LoadFile()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#a39793e7d6c1e0138330b4c6727e26861).
     fn load_file<I: ImageMethods>(
         &self,
         image: Option<&I>,
@@ -876,7 +876,7 @@ pub trait ImageHandlerMethods: ObjectMethods {
     }
     /// Saves an image in the output stream.
     ///
-    /// [See `wxImageHandler::SaveFile()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#a165394d021a199f207ae2910a3ba72e8)
+    /// See [C++ `wxImageHandler::SaveFile()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#a165394d021a199f207ae2910a3ba72e8).
     fn save_file<I: ImageMethods>(
         &self,
         image: Option<&I>,
@@ -893,7 +893,7 @@ pub trait ImageHandlerMethods: ObjectMethods {
     }
     /// Sets the preferred file extension associated with this handler.
     ///
-    /// [See `wxImageHandler::SetExtension()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#abe9bfbb83e7f883f3d053264e3283f61)
+    /// See [C++ `wxImageHandler::SetExtension()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#abe9bfbb83e7f883f3d053264e3283f61).
     fn set_extension(&self, extension: &str) {
         unsafe {
             let extension = WxString::from(extension);
@@ -903,7 +903,7 @@ pub trait ImageHandlerMethods: ObjectMethods {
     }
     /// Sets the alternative file extensions associated with this handler.
     ///
-    /// [See `wxImageHandler::SetAltExtensions()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#a65ba010611387392913569867ff60fc2)
+    /// See [C++ `wxImageHandler::SetAltExtensions()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#a65ba010611387392913569867ff60fc2).
     fn set_alt_extensions<A: ArrayStringMethods>(&self, extensions: &A) {
         unsafe {
             let extensions = extensions.as_ptr();
@@ -912,7 +912,7 @@ pub trait ImageHandlerMethods: ObjectMethods {
     }
     /// Sets the handler MIME type.
     ///
-    /// [See `wxImageHandler::SetMimeType()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#a0bcdad1b9948249f511f461323c8a4c9)
+    /// See [C++ `wxImageHandler::SetMimeType()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#a0bcdad1b9948249f511f461323c8a4c9).
     fn set_mime_type(&self, mimetype: &str) {
         unsafe {
             let mimetype = WxString::from(mimetype);
@@ -922,7 +922,7 @@ pub trait ImageHandlerMethods: ObjectMethods {
     }
     /// Sets the handler name.
     ///
-    /// [See `wxImageHandler::SetName()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#aec863a8d58771b3c103551cf7a41eaf2)
+    /// See [C++ `wxImageHandler::SetName()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#aec863a8d58771b3c103551cf7a41eaf2).
     fn set_name(&self, name: &str) {
         unsafe {
             let name = WxString::from(name);
@@ -935,13 +935,13 @@ pub trait ImageHandlerMethods: ObjectMethods {
 }
 
 // wxImageList
-/// This trait represents C++ [`wxImageList`](https://docs.wxwidgets.org/3.2/classwx_image_list.html) class's methods and inheritance.
+/// This trait represents [C++ `wxImageList` class](https://docs.wxwidgets.org/3.2/classwx_image_list.html)'s methods and inheritance.
 ///
 /// See [`ImageListIsOwned`] documentation for the class usage.
 pub trait ImageListMethods: ObjectMethods {
     /// Adds a new image or images using a bitmap and optional mask bitmap.
     ///
-    /// [See `wxImageList::Add()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_list.html#a697f268509e3a8d45da7506349b7533d)
+    /// See [C++ `wxImageList::Add()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_list.html#a697f268509e3a8d45da7506349b7533d).
     fn add_bitmap_bitmap<B: BitmapMethods, B2: BitmapMethods>(
         &self,
         bitmap: &B,
@@ -955,7 +955,7 @@ pub trait ImageListMethods: ObjectMethods {
     }
     /// Adds a new image or images using a bitmap and mask colour.
     ///
-    /// [See `wxImageList::Add()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_list.html#a2022beccd2564ee2be79b273246b50a8)
+    /// See [C++ `wxImageList::Add()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_list.html#a2022beccd2564ee2be79b273246b50a8).
     fn add_bitmap_colour<B: BitmapMethods, C: ColourMethods>(
         &self,
         bitmap: &B,
@@ -969,7 +969,7 @@ pub trait ImageListMethods: ObjectMethods {
     }
     /// Adds a new image using an icon.
     ///
-    /// [See `wxImageList::Add()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_list.html#a5cdf301d2c4ec6d074816a7566d6d7c2)
+    /// See [C++ `wxImageList::Add()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_list.html#a5cdf301d2c4ec6d074816a7566d6d7c2).
     fn add_icon<I: IconMethods>(&self, icon: &I) -> c_int {
         unsafe {
             let icon = icon.as_ptr();
@@ -978,19 +978,19 @@ pub trait ImageListMethods: ObjectMethods {
     }
     /// Initializes the list.
     ///
-    /// [See `wxImageList::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_list.html#a03b4ba6c8a868eff25f3d20cb3499673)
+    /// See [C++ `wxImageList::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_list.html#a03b4ba6c8a868eff25f3d20cb3499673).
     fn create(&self, width: c_int, height: c_int, mask: bool, initial_count: c_int) -> bool {
         unsafe { ffi::wxImageList_Create(self.as_ptr(), width, height, mask, initial_count) }
     }
     /// Destroys the current list.
     ///
-    /// [See `wxImageList::Destroy()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_list.html#ac2dc14b1ee81666798e2a1fa3bef206d)
+    /// See [C++ `wxImageList::Destroy()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_list.html#ac2dc14b1ee81666798e2a1fa3bef206d).
     fn destroy(&self) {
         unsafe { ffi::wxImageList_Destroy(self.as_ptr()) }
     }
     /// Draws a specified image onto a device context.
     ///
-    /// [See `wxImageList::Draw()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_list.html#aca7da30ce467d74a5e9037ad99ec3287)
+    /// See [C++ `wxImageList::Draw()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_list.html#aca7da30ce467d74a5e9037ad99ec3287).
     fn draw<D: DCMethods>(
         &self,
         index: c_int,
@@ -1007,49 +1007,49 @@ pub trait ImageListMethods: ObjectMethods {
     }
     /// Returns the bitmap corresponding to the given index.
     ///
-    /// [See `wxImageList::GetBitmap()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_list.html#a0002fd12fde3e0d1498535e2cfb09b43)
+    /// See [C++ `wxImageList::GetBitmap()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_list.html#a0002fd12fde3e0d1498535e2cfb09b43).
     fn get_bitmap(&self, index: c_int) -> Bitmap {
         unsafe { Bitmap::from_ptr(ffi::wxImageList_GetBitmap(self.as_ptr(), index)) }
     }
     /// Returns the icon corresponding to the given index.
     ///
-    /// [See `wxImageList::GetIcon()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_list.html#a8cee2c05aa962f7e45d3bd1ee38da8a6)
+    /// See [C++ `wxImageList::GetIcon()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_list.html#a8cee2c05aa962f7e45d3bd1ee38da8a6).
     fn get_icon(&self, index: c_int) -> Icon {
         unsafe { Icon::from_ptr(ffi::wxImageList_GetIcon(self.as_ptr(), index)) }
     }
     /// Returns the number of images in the list.
     ///
-    /// [See `wxImageList::GetImageCount()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_list.html#a4bc7dc442d6266194e0351e2c9baa56c)
+    /// See [C++ `wxImageList::GetImageCount()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_list.html#a4bc7dc442d6266194e0351e2c9baa56c).
     fn get_image_count(&self) -> c_int {
         unsafe { ffi::wxImageList_GetImageCount(self.as_ptr()) }
     }
     /// Retrieves the size of the images in the list.
     ///
-    /// [See `wxImageList::GetSize()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_list.html#a98be009d306295c1f24f22737ee2aebc)
+    /// See [C++ `wxImageList::GetSize()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_list.html#a98be009d306295c1f24f22737ee2aebc).
     fn get_size_int(&self, index: c_int, width: *mut c_void, height: *mut c_void) -> bool {
         unsafe { ffi::wxImageList_GetSize(self.as_ptr(), index, width, height) }
     }
     /// Retrieves the size of the image list as passed to Create().
     ///
-    /// [See `wxImageList::GetSize()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_list.html#aa291d7beda14ea5ba64ddeed20eec8d4)
+    /// See [C++ `wxImageList::GetSize()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_list.html#aa291d7beda14ea5ba64ddeed20eec8d4).
     fn get_size(&self) -> Size {
         unsafe { Size::from_ptr(ffi::wxImageList_GetSize1(self.as_ptr())) }
     }
     /// Removes the image at the given position.
     ///
-    /// [See `wxImageList::Remove()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_list.html#a70e5bc2c695d3bdd1a3a151c8774b9ee)
+    /// See [C++ `wxImageList::Remove()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_list.html#a70e5bc2c695d3bdd1a3a151c8774b9ee).
     fn remove(&self, index: c_int) -> bool {
         unsafe { ffi::wxImageList_Remove(self.as_ptr(), index) }
     }
     /// Removes all the images in the list.
     ///
-    /// [See `wxImageList::RemoveAll()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_list.html#a9de067947c75fc53798541cad5d6ebce)
+    /// See [C++ `wxImageList::RemoveAll()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_list.html#a9de067947c75fc53798541cad5d6ebce).
     fn remove_all(&self) -> bool {
         unsafe { ffi::wxImageList_RemoveAll(self.as_ptr()) }
     }
     /// Replaces the existing image with the new image.
     ///
-    /// [See `wxImageList::Replace()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_list.html#ada78532ad344127e0917d363a34783a4)
+    /// See [C++ `wxImageList::Replace()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_list.html#ada78532ad344127e0917d363a34783a4).
     fn replace_bitmap<B: BitmapMethods, B2: BitmapMethods>(
         &self,
         index: c_int,
@@ -1064,7 +1064,7 @@ pub trait ImageListMethods: ObjectMethods {
     }
     /// Replaces the existing image with the new image.
     ///
-    /// [See `wxImageList::Replace()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_image_list.html#af003aa28ad738528ef15d873e8e96756)
+    /// See [C++ `wxImageList::Replace()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_list.html#af003aa28ad738528ef15d873e8e96756).
     fn replace_icon<I: IconMethods>(&self, index: c_int, icon: &I) -> bool {
         unsafe {
             let icon = icon.as_ptr();
@@ -1074,7 +1074,7 @@ pub trait ImageListMethods: ObjectMethods {
 }
 
 // wxInfoBar
-/// This trait represents C++ [`wxInfoBar`](https://docs.wxwidgets.org/3.2/classwx_info_bar.html) class's methods and inheritance.
+/// This trait represents [C++ `wxInfoBar` class](https://docs.wxwidgets.org/3.2/classwx_info_bar.html)'s methods and inheritance.
 ///
 /// See [`InfoBarIsOwned`] documentation for the class usage.
 pub trait InfoBarMethods: ControlMethods {
@@ -1083,19 +1083,19 @@ pub trait InfoBarMethods: ControlMethods {
     // NOT_SUPPORTED: fn GetHideEffect()
     /// Set the duration of the animation used when showing or hiding the bar.
     ///
-    /// [See `wxInfoBar::SetEffectDuration()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_info_bar.html#a466a967c34d3aadc85f23de17712f605)
+    /// See [C++ `wxInfoBar::SetEffectDuration()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_info_bar.html#a466a967c34d3aadc85f23de17712f605).
     fn set_effect_duration(&self, duration: c_int) {
         unsafe { ffi::wxInfoBar_SetEffectDuration(self.as_ptr(), duration) }
     }
     /// Return the effect animation duration currently used.
     ///
-    /// [See `wxInfoBar::GetEffectDuration()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_info_bar.html#ae9a76139fe37053b91d7e4acc62218e8)
+    /// See [C++ `wxInfoBar::GetEffectDuration()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_info_bar.html#ae9a76139fe37053b91d7e4acc62218e8).
     fn get_effect_duration(&self) -> c_int {
         unsafe { ffi::wxInfoBar_GetEffectDuration(self.as_ptr()) }
     }
     /// Create the info bar window.
     ///
-    /// [See `wxInfoBar::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_info_bar.html#a67c612de758bfafba1f00c22efe36dd2)
+    /// See [C++ `wxInfoBar::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_info_bar.html#a67c612de758bfafba1f00c22efe36dd2).
     fn create<W: WindowMethods>(&self, parent: Option<&W>, winid: c_int) -> bool {
         unsafe {
             let parent = match parent {
@@ -1107,7 +1107,7 @@ pub trait InfoBarMethods: ControlMethods {
     }
     /// Add a button to be shown in the info bar.
     ///
-    /// [See `wxInfoBar::AddButton()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_info_bar.html#a6c2e88fe0c76e851948445e20f092ff1)
+    /// See [C++ `wxInfoBar::AddButton()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_info_bar.html#a6c2e88fe0c76e851948445e20f092ff1).
     fn add_button(&self, btnid: c_int, label: &str) {
         unsafe {
             let label = WxString::from(label);
@@ -1117,19 +1117,19 @@ pub trait InfoBarMethods: ControlMethods {
     }
     /// Hide the info bar window.
     ///
-    /// [See `wxInfoBar::Dismiss()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_info_bar.html#a3fd73896ffa7263985ad7b99aca3d5c9)
+    /// See [C++ `wxInfoBar::Dismiss()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_info_bar.html#a3fd73896ffa7263985ad7b99aca3d5c9).
     fn dismiss(&self) {
         unsafe { ffi::wxInfoBar_Dismiss(self.as_ptr()) }
     }
     /// Remove a button previously added by AddButton().
     ///
-    /// [See `wxInfoBar::RemoveButton()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_info_bar.html#aef66e90d5b841221c2a2f376d76b47e0)
+    /// See [C++ `wxInfoBar::RemoveButton()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_info_bar.html#aef66e90d5b841221c2a2f376d76b47e0).
     fn remove_button(&self, btnid: c_int) {
         unsafe { ffi::wxInfoBar_RemoveButton(self.as_ptr(), btnid) }
     }
     /// Show a message in the bar.
     ///
-    /// [See `wxInfoBar::ShowMessage()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_info_bar.html#ac8c134e479b19a8a99c1c4c78f266524)
+    /// See [C++ `wxInfoBar::ShowMessage()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_info_bar.html#ac8c134e479b19a8a99c1c4c78f266524).
     fn show_message(&self, msg: &str, flags: c_int) {
         unsafe {
             let msg = WxString::from(msg);
@@ -1139,32 +1139,32 @@ pub trait InfoBarMethods: ControlMethods {
     }
     /// Returns the number of currently shown buttons.
     ///
-    /// [See `wxInfoBar::GetButtonCount()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_info_bar.html#a95807182df6b8d3a60780c5363e54b6f)
+    /// See [C++ `wxInfoBar::GetButtonCount()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_info_bar.html#a95807182df6b8d3a60780c5363e54b6f).
     fn get_button_count(&self) -> usize {
         unsafe { ffi::wxInfoBar_GetButtonCount(self.as_ptr()) }
     }
     /// Returns the ID of the button at the given position.
     ///
-    /// [See `wxInfoBar::GetButtonId()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_info_bar.html#a42f2283c358128e268f61c97ee39a748)
+    /// See [C++ `wxInfoBar::GetButtonId()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_info_bar.html#a42f2283c358128e268f61c97ee39a748).
     fn get_button_id(&self, idx: usize) -> c_int {
         unsafe { ffi::wxInfoBar_GetButtonId(self.as_ptr(), idx) }
     }
     /// Returns whether a button with the given ID is currently shown.
     ///
-    /// [See `wxInfoBar::HasButtonId()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_info_bar.html#a5087ddf888919508461b278037c23098)
+    /// See [C++ `wxInfoBar::HasButtonId()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_info_bar.html#a5087ddf888919508461b278037c23098).
     fn has_button_id(&self, btnid: c_int) -> bool {
         unsafe { ffi::wxInfoBar_HasButtonId(self.as_ptr(), btnid) }
     }
 }
 
 // wxInitDialogEvent
-/// This trait represents C++ [`wxInitDialogEvent`](https://docs.wxwidgets.org/3.2/classwx_init_dialog_event.html) class's methods and inheritance.
+/// This trait represents [C++ `wxInitDialogEvent` class](https://docs.wxwidgets.org/3.2/classwx_init_dialog_event.html)'s methods and inheritance.
 ///
 /// See [`InitDialogEventIsOwned`] documentation for the class usage.
 pub trait InitDialogEventMethods: EventMethods {}
 
 // wxItemContainer
-/// This trait represents C++ [`wxItemContainer`](https://docs.wxwidgets.org/3.2/classwx_item_container.html) class's methods and inheritance.
+/// This trait represents [C++ `wxItemContainer` class](https://docs.wxwidgets.org/3.2/classwx_item_container.html)'s methods and inheritance.
 ///
 /// See [`ItemContainerIsOwned`] documentation for the class usage.
 pub trait ItemContainerMethods: ItemContainerImmutableMethods {
@@ -1173,7 +1173,7 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     }
     /// Appends item into the control.
     ///
-    /// [See `wxItemContainer::Append()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a8fdc0090e3eabc762ff0e49e925f8bc4)
+    /// See [C++ `wxItemContainer::Append()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a8fdc0090e3eabc762ff0e49e925f8bc4).
     fn append_str(&self, item: &str) -> c_int {
         unsafe {
             let item = WxString::from(item);
@@ -1183,7 +1183,7 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     }
     /// Appends item into the control.
     ///
-    /// [See `wxItemContainer::Append()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a97d16e94976e21abf796cc6e0c8c0fd0)
+    /// See [C++ `wxItemContainer::Append()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a97d16e94976e21abf796cc6e0c8c0fd0).
     fn append_str_void(&self, item: &str, client_data: *mut c_void) -> c_int {
         unsafe {
             let item = WxString::from(item);
@@ -1193,7 +1193,7 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     }
     /// Appends item into the control.
     ///
-    /// [See `wxItemContainer::Append()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a8cb993082012406873ac3ef1b91774f5)
+    /// See [C++ `wxItemContainer::Append()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a8cb993082012406873ac3ef1b91774f5).
     fn append_str_clientdata<C: ClientDataMethods>(
         &self,
         item: &str,
@@ -1211,7 +1211,7 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     }
     /// Appends several items at once into the control.
     ///
-    /// [See `wxItemContainer::Append()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a4c8560213df6b6e7467437c9cff5cc0e)
+    /// See [C++ `wxItemContainer::Append()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a4c8560213df6b6e7467437c9cff5cc0e).
     fn append_arraystring<A: ArrayStringMethods>(&self, items: &A) -> c_int {
         unsafe {
             let items = items.as_ptr();
@@ -1221,7 +1221,7 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     // BLOCKED: fn Append4()
     /// Appends several items at once into the control.
     ///
-    /// [See `wxItemContainer::Append()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a4de5b5afbf2aebe2ee29c11d009fbe75)
+    /// See [C++ `wxItemContainer::Append()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a4de5b5afbf2aebe2ee29c11d009fbe75).
     fn append_arraystring_void<A: ArrayStringMethods>(
         &self,
         items: &A,
@@ -1234,7 +1234,7 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     }
     /// Appends several items at once into the control.
     ///
-    /// [See `wxItemContainer::Append()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#ada2c60d0621a4a2d62a50345778e13f3)
+    /// See [C++ `wxItemContainer::Append()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#ada2c60d0621a4a2d62a50345778e13f3).
     fn append_arraystring_clientdata<A: ArrayStringMethods, C: ClientDataMethods>(
         &self,
         items: &A,
@@ -1251,19 +1251,19 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     }
     /// Appends several items at once into the control.
     ///
-    /// [See `wxItemContainer::Append()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#ab75a452e13a6b21e32caae829a026515)
+    /// See [C++ `wxItemContainer::Append()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#ab75a452e13a6b21e32caae829a026515).
     fn append_uint(&self, n: c_uint, items: *const c_void) -> c_int {
         unsafe { ffi::wxItemContainer_Append7(self.as_item_container(), n, items) }
     }
     /// Appends several items at once into the control.
     ///
-    /// [See `wxItemContainer::Append()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a87fe2b791693f23475b77ffb037a7766)
+    /// See [C++ `wxItemContainer::Append()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a87fe2b791693f23475b77ffb037a7766).
     fn append_uint_void(&self, n: c_uint, items: *const c_void, client_data: *mut c_void) -> c_int {
         unsafe { ffi::wxItemContainer_Append8(self.as_item_container(), n, items, client_data) }
     }
     /// Appends several items at once into the control.
     ///
-    /// [See `wxItemContainer::Append()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#ab328ab2886486b545f03daa667308a63)
+    /// See [C++ `wxItemContainer::Append()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#ab328ab2886486b545f03daa667308a63).
     fn append_uint_clientdata<C: ClientDataMethods>(
         &self,
         n: c_uint,
@@ -1280,19 +1280,19 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     }
     /// Removes all items from the control.
     ///
-    /// [See `wxItemContainer::Clear()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#aea621d4fdfbc3a06bf24dcc97304e2c1)
+    /// See [C++ `wxItemContainer::Clear()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#aea621d4fdfbc3a06bf24dcc97304e2c1).
     fn clear(&self) {
         unsafe { ffi::wxItemContainer_Clear(self.as_item_container()) }
     }
     /// Deletes an item from the control.
     ///
-    /// [See `wxItemContainer::Delete()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a0e8379f41e9d7b912564000828140a19)
+    /// See [C++ `wxItemContainer::Delete()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a0e8379f41e9d7b912564000828140a19).
     fn delete(&self, n: c_uint) {
         unsafe { ffi::wxItemContainer_Delete(self.as_item_container(), n) }
     }
     /// Returns the client object associated with the given item and transfers its ownership to the caller.
     ///
-    /// [See `wxItemContainer::DetachClientObject()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a9b4c80ee2cc91ccfe534fb56fc4e8bdf)
+    /// See [C++ `wxItemContainer::DetachClientObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a9b4c80ee2cc91ccfe534fb56fc4e8bdf).
     fn detach_client_object(&self, n: c_uint) -> Option<ClientDataIsOwned<false>> {
         unsafe {
             ClientData::option_from(ffi::wxItemContainer_DetachClientObject(
@@ -1303,31 +1303,31 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     }
     /// Returns true, if either untyped data (void*) or object data (wxClientData*) is associated with the items of the control.
     ///
-    /// [See `wxItemContainer::HasClientData()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a3d217a4c721a5cf2787672624744cac4)
+    /// See [C++ `wxItemContainer::HasClientData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a3d217a4c721a5cf2787672624744cac4).
     fn has_client_data(&self) -> bool {
         unsafe { ffi::wxItemContainer_HasClientData(self.as_item_container()) }
     }
     /// Returns true, if object data is associated with the items of the control.
     ///
-    /// [See `wxItemContainer::HasClientObjectData()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a7510107d6022ebab364a23112e21ae9f)
+    /// See [C++ `wxItemContainer::HasClientObjectData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a7510107d6022ebab364a23112e21ae9f).
     fn has_client_object_data(&self) -> bool {
         unsafe { ffi::wxItemContainer_HasClientObjectData(self.as_item_container()) }
     }
     /// Returns true, if untyped data (void*) is associated with the items of the control.
     ///
-    /// [See `wxItemContainer::HasClientUntypedData()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#ad1887e59bb72192a535c6b92d88692d2)
+    /// See [C++ `wxItemContainer::HasClientUntypedData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#ad1887e59bb72192a535c6b92d88692d2).
     fn has_client_untyped_data(&self) -> bool {
         unsafe { ffi::wxItemContainer_HasClientUntypedData(self.as_item_container()) }
     }
     /// Returns a pointer to the client data associated with the given item (if any).
     ///
-    /// [See `wxItemContainer::GetClientData()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#ab7ef8c064132041f62180e5764b3669a)
+    /// See [C++ `wxItemContainer::GetClientData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#ab7ef8c064132041f62180e5764b3669a).
     fn get_client_data(&self, n: c_uint) -> *mut c_void {
         unsafe { ffi::wxItemContainer_GetClientData(self.as_item_container(), n) }
     }
     /// Returns a pointer to the client data associated with the given item (if any).
     ///
-    /// [See `wxItemContainer::GetClientObject()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a95f1b730f3ddcf8eb2d8d8ec4e09dadd)
+    /// See [C++ `wxItemContainer::GetClientObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a95f1b730f3ddcf8eb2d8d8ec4e09dadd).
     fn get_client_object_uint(&self, n: c_uint) -> Option<ClientDataIsOwned<false>> {
         unsafe {
             ClientData::option_from(ffi::wxItemContainer_GetClientObject(
@@ -1338,13 +1338,13 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     }
     /// Associates the given untyped client data pointer with the given item.
     ///
-    /// [See `wxItemContainer::SetClientData()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a4316a72acaf30acf9d2c9c457e16a8d9)
+    /// See [C++ `wxItemContainer::SetClientData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a4316a72acaf30acf9d2c9c457e16a8d9).
     fn set_client_data(&self, n: c_uint, data: *mut c_void) {
         unsafe { ffi::wxItemContainer_SetClientData(self.as_item_container(), n, data) }
     }
     /// Associates the given typed client data pointer with the given item: the data object will be deleted when the item is deleted (either explicitly by using Delete() or implicitly when the control itself is destroyed).
     ///
-    /// [See `wxItemContainer::SetClientObject()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#ae0a26343071841e8d1139642a0081d9f)
+    /// See [C++ `wxItemContainer::SetClientObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#ae0a26343071841e8d1139642a0081d9f).
     fn set_client_object_uint<C: ClientDataMethods>(&self, n: c_uint, data: Option<&C>) {
         unsafe {
             let data = match data {
@@ -1356,7 +1356,7 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     }
     /// Inserts item into the control.
     ///
-    /// [See `wxItemContainer::Insert()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a8844cacec8509fe6e637c6f85eb8b395)
+    /// See [C++ `wxItemContainer::Insert()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a8844cacec8509fe6e637c6f85eb8b395).
     fn insert_str_uint(&self, item: &str, pos: c_uint) -> c_int {
         unsafe {
             let item = WxString::from(item);
@@ -1366,7 +1366,7 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     }
     /// Inserts item into the control.
     ///
-    /// [See `wxItemContainer::Insert()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a6540ebe5868badb8ff7ac4975c054309)
+    /// See [C++ `wxItemContainer::Insert()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a6540ebe5868badb8ff7ac4975c054309).
     fn insert_str_uint_void(&self, item: &str, pos: c_uint, client_data: *mut c_void) -> c_int {
         unsafe {
             let item = WxString::from(item);
@@ -1376,7 +1376,7 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     }
     /// Inserts item into the control.
     ///
-    /// [See `wxItemContainer::Insert()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a3ecaaa4bc63315056ff7fb4894866b9e)
+    /// See [C++ `wxItemContainer::Insert()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a3ecaaa4bc63315056ff7fb4894866b9e).
     fn insert_str_uint_clientdata<C: ClientDataMethods>(
         &self,
         item: &str,
@@ -1395,7 +1395,7 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     }
     /// Inserts several items at once into the control.
     ///
-    /// [See `wxItemContainer::Insert()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#abd876bdf2d3b5aaf577808c0520f78e4)
+    /// See [C++ `wxItemContainer::Insert()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#abd876bdf2d3b5aaf577808c0520f78e4).
     fn insert_arraystring<A: ArrayStringMethods>(&self, items: &A, pos: c_uint) -> c_int {
         unsafe {
             let items = items.as_ptr();
@@ -1405,7 +1405,7 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     // BLOCKED: fn Insert4()
     /// Inserts several items at once into the control.
     ///
-    /// [See `wxItemContainer::Insert()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#aa5b5f6059ef10221c521da9587269192)
+    /// See [C++ `wxItemContainer::Insert()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#aa5b5f6059ef10221c521da9587269192).
     fn insert_arraystring_void<A: ArrayStringMethods>(
         &self,
         items: &A,
@@ -1419,7 +1419,7 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     }
     /// Inserts several items at once into the control.
     ///
-    /// [See `wxItemContainer::Insert()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a9b15c918cc24743b9af994a48ee0cad6)
+    /// See [C++ `wxItemContainer::Insert()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a9b15c918cc24743b9af994a48ee0cad6).
     fn insert_arraystring_clientdata<A: ArrayStringMethods, C: ClientDataMethods>(
         &self,
         items: &A,
@@ -1437,13 +1437,13 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     }
     /// Inserts several items at once into the control.
     ///
-    /// [See `wxItemContainer::Insert()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a3faa9e4006d69dffd0ecb71088beb24c)
+    /// See [C++ `wxItemContainer::Insert()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a3faa9e4006d69dffd0ecb71088beb24c).
     fn insert_uint(&self, n: c_uint, items: *const c_void, pos: c_uint) -> c_int {
         unsafe { ffi::wxItemContainer_Insert7(self.as_item_container(), n, items, pos) }
     }
     /// Inserts several items at once into the control.
     ///
-    /// [See `wxItemContainer::Insert()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a109dfe5f94135d8d16445ee72834d1b9)
+    /// See [C++ `wxItemContainer::Insert()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a109dfe5f94135d8d16445ee72834d1b9).
     fn insert_uint_void(
         &self,
         n: c_uint,
@@ -1457,7 +1457,7 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     }
     /// Inserts several items at once into the control.
     ///
-    /// [See `wxItemContainer::Insert()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#ad2bc86a398c44f6ab6d3d6f64d946c70)
+    /// See [C++ `wxItemContainer::Insert()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#ad2bc86a398c44f6ab6d3d6f64d946c70).
     fn insert_uint_clientdata<C: ClientDataMethods>(
         &self,
         n: c_uint,
@@ -1475,7 +1475,7 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     }
     /// Replaces the current control contents with the given items.
     ///
-    /// [See `wxItemContainer::Set()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a0758ff813749b9dfe4d8c4975778f40d)
+    /// See [C++ `wxItemContainer::Set()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a0758ff813749b9dfe4d8c4975778f40d).
     fn set_arraystring<A: ArrayStringMethods>(&self, items: &A) {
         unsafe {
             let items = items.as_ptr();
@@ -1485,7 +1485,7 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     // BLOCKED: fn Set1()
     /// Replaces the current control contents with the given items.
     ///
-    /// [See `wxItemContainer::Set()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a913f1901456fc75a45558775f967a2ce)
+    /// See [C++ `wxItemContainer::Set()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a913f1901456fc75a45558775f967a2ce).
     fn set_arraystring_void<A: ArrayStringMethods>(&self, items: &A, client_data: *mut c_void) {
         unsafe {
             let items = items.as_ptr();
@@ -1494,7 +1494,7 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     }
     /// Replaces the current control contents with the given items.
     ///
-    /// [See `wxItemContainer::Set()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#aa49e05430329dc56a15b2f75fc7cd05c)
+    /// See [C++ `wxItemContainer::Set()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#aa49e05430329dc56a15b2f75fc7cd05c).
     fn set_arraystring_clientdata<A: ArrayStringMethods, C: ClientDataMethods>(
         &self,
         items: &A,
@@ -1511,19 +1511,19 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     }
     /// Replaces the current control contents with the given items.
     ///
-    /// [See `wxItemContainer::Set()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#af5759464c9fd1396ed9b86a9d1242d30)
+    /// See [C++ `wxItemContainer::Set()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#af5759464c9fd1396ed9b86a9d1242d30).
     fn set_uint(&self, n: c_uint, items: *const c_void) {
         unsafe { ffi::wxItemContainer_Set4(self.as_item_container(), n, items) }
     }
     /// Replaces the current control contents with the given items.
     ///
-    /// [See `wxItemContainer::Set()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#aac979e6201e45b121f226389e29fd68a)
+    /// See [C++ `wxItemContainer::Set()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#aac979e6201e45b121f226389e29fd68a).
     fn set_uint_void(&self, n: c_uint, items: *const c_void, client_data: *mut c_void) {
         unsafe { ffi::wxItemContainer_Set5(self.as_item_container(), n, items, client_data) }
     }
     /// Replaces the current control contents with the given items.
     ///
-    /// [See `wxItemContainer::Set()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a3a1dab2066917e84f46c57b27fb4f258)
+    /// See [C++ `wxItemContainer::Set()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a3a1dab2066917e84f46c57b27fb4f258).
     fn set_uint_clientdata<C: ClientDataMethods>(
         &self,
         n: c_uint,
@@ -1541,7 +1541,7 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
 }
 
 // wxItemContainerImmutable
-/// This trait represents C++ [`wxItemContainerImmutable`](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html) class's methods and inheritance.
+/// This trait represents [C++ `wxItemContainerImmutable` class](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html)'s methods and inheritance.
 ///
 /// See [`ItemContainerImmutableIsOwned`] documentation for the class usage.
 pub trait ItemContainerImmutableMethods: WxRustMethods {
@@ -1550,19 +1550,19 @@ pub trait ItemContainerImmutableMethods: WxRustMethods {
     }
     /// Sets the selection to the given item n or removes the selection entirely if n == wxNOT_FOUND.
     ///
-    /// [See `wxItemContainerImmutable::SetSelection()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html#aea97d8ee51e7af5e06befd5f8c9d793b)
+    /// See [C++ `wxItemContainerImmutable::SetSelection()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html#aea97d8ee51e7af5e06befd5f8c9d793b).
     fn set_selection(&self, n: c_int) {
         unsafe { ffi::wxItemContainerImmutable_SetSelection(self.as_item_container_immutable(), n) }
     }
     /// Returns the index of the selected item or wxNOT_FOUND if no item is selected.
     ///
-    /// [See `wxItemContainerImmutable::GetSelection()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html#a18a7cb1a652772d5cb8adc52be1efea0)
+    /// See [C++ `wxItemContainerImmutable::GetSelection()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html#a18a7cb1a652772d5cb8adc52be1efea0).
     fn get_selection(&self) -> c_int {
         unsafe { ffi::wxItemContainerImmutable_GetSelection(self.as_item_container_immutable()) }
     }
     /// Selects the item with the specified string in the control.
     ///
-    /// [See `wxItemContainerImmutable::SetStringSelection()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html#afa3800ff87f00a47211c3ce206e7bc39)
+    /// See [C++ `wxItemContainerImmutable::SetStringSelection()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html#afa3800ff87f00a47211c3ce206e7bc39).
     fn set_string_selection(&self, string: &str) -> bool {
         unsafe {
             let string = WxString::from(string);
@@ -1575,7 +1575,7 @@ pub trait ItemContainerImmutableMethods: WxRustMethods {
     }
     /// Returns the label of the selected item or an empty string if no item is selected.
     ///
-    /// [See `wxItemContainerImmutable::GetStringSelection()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html#a32b63731332d90d7107ebfd949512ae5)
+    /// See [C++ `wxItemContainerImmutable::GetStringSelection()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html#a32b63731332d90d7107ebfd949512ae5).
     fn get_string_selection(&self) -> String {
         unsafe {
             WxString::from_ptr(ffi::wxItemContainerImmutable_GetStringSelection(
@@ -1586,25 +1586,25 @@ pub trait ItemContainerImmutableMethods: WxRustMethods {
     }
     /// This is the same as SetSelection() and exists only because it is slightly more natural for controls which support multiple selection.
     ///
-    /// [See `wxItemContainerImmutable::Select()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html#abcc0d37a2a7f29d5c54cfa5252571d61)
+    /// See [C++ `wxItemContainerImmutable::Select()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html#abcc0d37a2a7f29d5c54cfa5252571d61).
     fn select(&self, n: c_int) {
         unsafe { ffi::wxItemContainerImmutable_Select(self.as_item_container_immutable(), n) }
     }
     /// Returns the number of items in the control.
     ///
-    /// [See `wxItemContainerImmutable::GetCount()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html#a173bdb9c72977d524f524fcd02521f61)
+    /// See [C++ `wxItemContainerImmutable::GetCount()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html#a173bdb9c72977d524f524fcd02521f61).
     fn get_count(&self) -> c_uint {
         unsafe { ffi::wxItemContainerImmutable_GetCount(self.as_item_container_immutable()) }
     }
     /// Returns true if the control is empty or false if it has some items.
     ///
-    /// [See `wxItemContainerImmutable::IsEmpty()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html#a8f863e568895205a1179c9dc835573d6)
+    /// See [C++ `wxItemContainerImmutable::IsEmpty()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html#a8f863e568895205a1179c9dc835573d6).
     fn is_empty(&self) -> bool {
         unsafe { ffi::wxItemContainerImmutable_IsEmpty(self.as_item_container_immutable()) }
     }
     /// Returns the label of the item with the given index.
     ///
-    /// [See `wxItemContainerImmutable::GetString()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html#a30e9fe62bd51415d9af2a9c6f19ec8f7)
+    /// See [C++ `wxItemContainerImmutable::GetString()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html#a30e9fe62bd51415d9af2a9c6f19ec8f7).
     fn get_string(&self, n: c_uint) -> String {
         unsafe {
             WxString::from_ptr(ffi::wxItemContainerImmutable_GetString(
@@ -1616,7 +1616,7 @@ pub trait ItemContainerImmutableMethods: WxRustMethods {
     }
     /// Returns the array of the labels of all items in the control.
     ///
-    /// [See `wxItemContainerImmutable::GetStrings()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html#ac6792c056bf3748f64419960d307d7c0)
+    /// See [C++ `wxItemContainerImmutable::GetStrings()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html#ac6792c056bf3748f64419960d307d7c0).
     fn get_strings(&self) -> ArrayString {
         unsafe {
             ArrayString::from_ptr(ffi::wxItemContainerImmutable_GetStrings(
@@ -1626,7 +1626,7 @@ pub trait ItemContainerImmutableMethods: WxRustMethods {
     }
     /// Sets the label for the given item.
     ///
-    /// [See `wxItemContainerImmutable::SetString()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html#a1daf356c330bac2d7a93c5b3de8fbabf)
+    /// See [C++ `wxItemContainerImmutable::SetString()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html#a1daf356c330bac2d7a93c5b3de8fbabf).
     fn set_string(&self, n: c_uint, string: &str) {
         unsafe {
             let string = WxString::from(string);
@@ -1636,7 +1636,7 @@ pub trait ItemContainerImmutableMethods: WxRustMethods {
     }
     /// Finds an item whose label matches the given string.
     ///
-    /// [See `wxItemContainerImmutable::FindString()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html#a78519e3ea6a5fb47c27b337e21c99989)
+    /// See [C++ `wxItemContainerImmutable::FindString()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html#a78519e3ea6a5fb47c27b337e21c99989).
     fn find_string(&self, string: &str, case_sensitive: bool) -> c_int {
         unsafe {
             let string = WxString::from(string);

@@ -3,8 +3,9 @@ use super::*;
 // wxLayoutAlgorithm
 wxwidgets! {
     /// wxLayoutAlgorithm implements layout of subwindows in MDI or SDI frames.
-    ///
-    /// [See `wxLayoutAlgorithm`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_layout_algorithm.html)
+    /// - [`LayoutAlgorithm`] represents a C++ `wxLayoutAlgorithm` class instance which your code has ownership, [`LayoutAlgorithmIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`LayoutAlgorithm`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxLayoutAlgorithm` class's documentation](https://docs.wxwidgets.org/3.2/classwx_layout_algorithm.html) for more details.
     #[doc(alias = "wxLayoutAlgorithm")]
     #[doc(alias = "LayoutAlgorithm")]
     class LayoutAlgorithm
@@ -15,7 +16,7 @@ wxwidgets! {
 impl<const OWNED: bool> LayoutAlgorithmIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxLayoutAlgorithm::wxLayoutAlgorithm()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_layout_algorithm.html#af8e2301f3e97d27ee3c2e0cbb2587488)
+    /// See [C++ `wxLayoutAlgorithm::wxLayoutAlgorithm()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_layout_algorithm.html#af8e2301f3e97d27ee3c2e0cbb2587488).
     pub fn new() -> LayoutAlgorithmIsOwned<OWNED> {
         unsafe { LayoutAlgorithmIsOwned(ffi::wxLayoutAlgorithm_new()) }
     }
@@ -49,8 +50,9 @@ impl<const OWNED: bool> Drop for LayoutAlgorithmIsOwned<OWNED> {
 // wxListBox
 wxwidgets! {
     /// A listbox is used to select one or more of a list of strings.
-    ///
-    /// [See `wxListBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_box.html)
+    /// - [`ListBox`] represents a C++ `wxListBox` class instance which your code has ownership, [`ListBoxIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`ListBox`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxListBox` class's documentation](https://docs.wxwidgets.org/3.2/classwx_list_box.html) for more details.
     #[doc(alias = "wxListBox")]
     #[doc(alias = "ListBox")]
     class ListBox
@@ -64,14 +66,14 @@ wxwidgets! {
 impl<const OWNED: bool> ListBoxIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxListBox::wxListBox()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_box.html#a63347db33d1ae5a10c8eb54b3d556b56)
+    /// See [C++ `wxListBox::wxListBox()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_list_box.html#a63347db33d1ae5a10c8eb54b3d556b56).
     pub fn new_2step() -> ListBoxIsOwned<OWNED> {
         unsafe { ListBoxIsOwned(ffi::wxListBox_new()) }
     }
     // NOT_SUPPORTED: fn wxListBox1()
     /// Constructor, creating and showing a list box.
     ///
-    /// [See `wxListBox::wxListBox()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_box.html#a1dd35666935f63e013a64216f45865eb)
+    /// See [C++ `wxListBox::wxListBox()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_list_box.html#a1dd35666935f63e013a64216f45865eb).
     pub fn new<
         W: WindowMethods,
         P: PointMethods,
@@ -153,8 +155,9 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for ListBoxIsOwned<OWNED> 
 // wxListCtrl
 wxwidgets! {
     /// A list control presents lists in a number of formats: list view, report view, icon view and small icon view.
-    ///
-    /// [See `wxListCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_ctrl.html)
+    /// - [`ListCtrl`] represents a C++ `wxListCtrl` class instance which your code has ownership, [`ListCtrlIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`ListCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxListCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_list_ctrl.html) for more details.
     #[doc(alias = "wxListCtrl")]
     #[doc(alias = "ListCtrl")]
     class ListCtrl
@@ -168,13 +171,13 @@ wxwidgets! {
 impl<const OWNED: bool> ListCtrlIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxListCtrl::wxListCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_ctrl.html#a6941e35348b00a288e833871fd0138e8)
+    /// See [C++ `wxListCtrl::wxListCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_list_ctrl.html#a6941e35348b00a288e833871fd0138e8).
     pub fn new_2step() -> ListCtrlIsOwned<OWNED> {
         unsafe { ListCtrlIsOwned(ffi::wxListCtrl_new()) }
     }
     /// Constructor, creating and showing a list control.
     ///
-    /// [See `wxListCtrl::wxListCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_ctrl.html#aaf98aeeba06ad86fa471f9218ae91097)
+    /// See [C++ `wxListCtrl::wxListCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_list_ctrl.html#aaf98aeeba06ad86fa471f9218ae91097).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -236,7 +239,7 @@ impl<const OWNED: bool> DynamicCast for ListCtrlIsOwned<OWNED> {
 impl<const OWNED: bool> ControlMethods for ListCtrlIsOwned<OWNED> {
     /// Creates the list control.
     ///
-    /// [See `wxListCtrl::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_ctrl.html#a5b13e700b9957677468d63558d73d5df)
+    /// See [C++ `wxListCtrl::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_list_ctrl.html#a5b13e700b9957677468d63558d73d5df).
     fn create_validator<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         &self,
         parent: Option<&W>,
@@ -265,8 +268,9 @@ impl<const OWNED: bool> ControlMethods for ListCtrlIsOwned<OWNED> {
 // wxListEvent
 wxwidgets! {
     /// A list event holds information about events associated with wxListCtrl objects.
-    ///
-    /// [See `wxListEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_event.html)
+    /// - [`ListEvent`] represents a C++ `wxListEvent` class instance which your code has ownership, [`ListEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`ListEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxListEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_list_event.html) for more details.
     #[doc(alias = "wxListEvent")]
     #[doc(alias = "ListEvent")]
     class ListEvent
@@ -324,8 +328,9 @@ impl<const OWNED: bool> Drop for ListEventIsOwned<OWNED> {
 // wxListItem
 wxwidgets! {
     /// This class stores information about a wxListCtrl item or column.
-    ///
-    /// [See `wxListItem`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_item.html)
+    /// - [`ListItem`] represents a C++ `wxListItem` class instance which your code has ownership, [`ListItemIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`ListItem`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxListItem` class's documentation](https://docs.wxwidgets.org/3.2/classwx_list_item.html) for more details.
     #[doc(alias = "wxListItem")]
     #[doc(alias = "ListItem")]
     class ListItem
@@ -336,7 +341,7 @@ wxwidgets! {
 impl<const OWNED: bool> ListItemIsOwned<OWNED> {
     /// Constructor.
     ///
-    /// [See `wxListItem::wxListItem()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_item.html#ab133f45cd8964e254cdaa1512713c153)
+    /// See [C++ `wxListItem::wxListItem()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_list_item.html#ab133f45cd8964e254cdaa1512713c153).
     pub fn new() -> ListItemIsOwned<OWNED> {
         unsafe { ListItemIsOwned(ffi::wxListItem_new()) }
     }
@@ -370,8 +375,9 @@ impl<const OWNED: bool> Drop for ListItemIsOwned<OWNED> {
 // wxListView
 wxwidgets! {
     /// This class currently simply presents a simpler to use interface for the wxListCtrl  it can be thought of as a façade for that complicated class.
-    ///
-    /// [See `wxListView`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_view.html)
+    /// - [`ListView`] represents a C++ `wxListView` class instance which your code has ownership, [`ListViewIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`ListView`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxListView` class's documentation](https://docs.wxwidgets.org/3.2/classwx_list_view.html) for more details.
     #[doc(alias = "wxListView")]
     #[doc(alias = "ListView")]
     class ListView
@@ -386,13 +392,13 @@ wxwidgets! {
 impl<const OWNED: bool> ListViewIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxListView::wxListView()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_view.html#a103cf973c8be268b78a0c08c419f606f)
+    /// See [C++ `wxListView::wxListView()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_list_view.html#a103cf973c8be268b78a0c08c419f606f).
     pub fn new_2step() -> ListViewIsOwned<OWNED> {
         unsafe { ListViewIsOwned(ffi::wxListView_new()) }
     }
     /// Constructor, creating and showing a listview control.
     ///
-    /// [See `wxListView::wxListView()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_list_view.html#a6984e2ef325a4702ac7871d6a1c65119)
+    /// See [C++ `wxListView::wxListView()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_list_view.html#a6984e2ef325a4702ac7871d6a1c65119).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         winid: c_int,
@@ -460,8 +466,9 @@ impl<const OWNED: bool> DynamicCast for ListViewIsOwned<OWNED> {
 // wxListbook
 wxwidgets! {
     /// wxListbook is a class similar to wxNotebook but which uses a wxListCtrl to show the labels instead of the tabs.
-    ///
-    /// [See `wxListbook`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_listbook.html)
+    /// - [`Listbook`] represents a C++ `wxListbook` class instance which your code has ownership, [`ListbookIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`Listbook`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxListbook` class's documentation](https://docs.wxwidgets.org/3.2/classwx_listbook.html) for more details.
     #[doc(alias = "wxListbook")]
     #[doc(alias = "Listbook")]
     class Listbook
@@ -476,13 +483,13 @@ wxwidgets! {
 impl<const OWNED: bool> ListbookIsOwned<OWNED> {
     /// Default ctor.
     ///
-    /// [See `wxListbook::wxListbook()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_listbook.html#abed6de6659aaca045b6503cbf8baf622)
+    /// See [C++ `wxListbook::wxListbook()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_listbook.html#abed6de6659aaca045b6503cbf8baf622).
     pub fn new_2step() -> ListbookIsOwned<OWNED> {
         unsafe { ListbookIsOwned(ffi::wxListbook_new()) }
     }
     /// Constructs a listbook control.
     ///
-    /// [See `wxListbook::wxListbook()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_listbook.html#a2e5a198617615b4fa83eafa5b577afb3)
+    /// See [C++ `wxListbook::wxListbook()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_listbook.html#a2e5a198617615b4fa83eafa5b577afb3).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -545,7 +552,7 @@ impl<const OWNED: bool> DynamicCast for ListbookIsOwned<OWNED> {
 impl<const OWNED: bool> WindowMethods for ListbookIsOwned<OWNED> {
     /// Create the list book control that has already been constructed with the default constructor.
     ///
-    /// [See `wxListbook::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_listbook.html#a38a6aad6c1fb31fa24acb471a8a37fd2)
+    /// See [C++ `wxListbook::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_listbook.html#a38a6aad6c1fb31fa24acb471a8a37fd2).
     fn create<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,

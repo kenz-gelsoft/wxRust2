@@ -55,8 +55,19 @@ class RustClassBinding:
             unprefixed = self.__model.unprefixed()
             yield 'wxwidgets! {'
             yield '    /// %s' % (self.__model.doc,)
-            yield '    ///'
-            yield "    /// [See `%s`'s original doc.](%s)" % (
+            yield "    /// - [`%s`] represents a C++ `%s` class instance which your code has ownership, [`%sIsOwned`]`<false>` represents one which don't own." % (
+                unprefixed,
+                self.__model.name,
+                unprefixed,
+            )
+            buildable_doc = ''
+            if self.__model.library != 'base':
+                buildable_doc = ' or [`Buildable::builder()`] (if available)'
+            yield "    /// - Use [`%s`]'s `new()`%s to create an instance of this class." % (
+                unprefixed,
+                buildable_doc,
+            )
+            yield "    /// - See [C++ `%s` class's documentation](%s) for more details." % (
                 self.__model.name,
                 self.__model.doc_url(),
             )
@@ -244,7 +255,7 @@ class RustClassBinding:
         base = self.__model.primary_base()
         if not base:
             base = '__WxRust'
-        yield "    /// This trait represents C++ [`%s`](%s) class's methods and inheritance." % (
+        yield "    /// This trait represents [C++ `%s` class](%s)'s methods and inheritance." % (
             self.__model.name,
             self.__model.doc_url(),
         )
@@ -446,7 +457,7 @@ class RustMethodBinding:
             if doc:
                 yield '/// %s' % (doc,)
             yield '///'
-            yield "/// [See `%s::%s()`'s original doc.](%s)" % (
+            yield "/// See [C++ `%s::%s()`'s documentation](%s)." % (
                 self.__model.cls.name,
                 self.__model.name(without_index=True),
                 self.__model.doc_url(),

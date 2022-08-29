@@ -3,8 +3,9 @@ use super::*;
 // wxFileCtrl
 wxwidgets! {
     /// This control allows the user to select a file.
-    ///
-    /// [See `wxFileCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_file_ctrl.html)
+    /// - [`FileCtrl`] represents a C++ `wxFileCtrl` class instance which your code has ownership, [`FileCtrlIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`FileCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxFileCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_file_ctrl.html) for more details.
     #[doc(alias = "wxFileCtrl")]
     #[doc(alias = "FileCtrl")]
     class FileCtrl
@@ -17,13 +18,13 @@ wxwidgets! {
 }
 impl<const OWNED: bool> FileCtrlIsOwned<OWNED> {
     ///
-    /// [See `wxFileCtrl::wxFileCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_file_ctrl.html#ad0f3935004f16b380571ead2d1b4c04c)
+    /// See [C++ `wxFileCtrl::wxFileCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_file_ctrl.html#ad0f3935004f16b380571ead2d1b4c04c).
     pub fn new_2step() -> FileCtrlIsOwned<OWNED> {
         unsafe { FileCtrlIsOwned(ffi::wxFileCtrl_new()) }
     }
     /// Constructs the window.
     ///
-    /// [See `wxFileCtrl::wxFileCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_file_ctrl.html#a3a4611ef0c3e9087e3768869c53ab5cc)
+    /// See [C++ `wxFileCtrl::wxFileCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_file_ctrl.html#a3a4611ef0c3e9087e3768869c53ab5cc).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -101,8 +102,9 @@ impl<const OWNED: bool> DynamicCast for FileCtrlIsOwned<OWNED> {
 // wxFileCtrlEvent
 wxwidgets! {
     /// A file control event holds information about events associated with wxFileCtrl objects.
-    ///
-    /// [See `wxFileCtrlEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_file_ctrl_event.html)
+    /// - [`FileCtrlEvent`] represents a C++ `wxFileCtrlEvent` class instance which your code has ownership, [`FileCtrlEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`FileCtrlEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxFileCtrlEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_file_ctrl_event.html) for more details.
     #[doc(alias = "wxFileCtrlEvent")]
     #[doc(alias = "FileCtrlEvent")]
     class FileCtrlEvent
@@ -154,8 +156,9 @@ impl<const OWNED: bool> Drop for FileCtrlEventIsOwned<OWNED> {
 // wxFileDataObject
 wxwidgets! {
     /// wxFileDataObject is a specialization of wxDataObject for file names.
-    ///
-    /// [See `wxFileDataObject`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_file_data_object.html)
+    /// - [`FileDataObject`] represents a C++ `wxFileDataObject` class instance which your code has ownership, [`FileDataObjectIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`FileDataObject`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxFileDataObject` class's documentation](https://docs.wxwidgets.org/3.2/classwx_file_data_object.html) for more details.
     #[doc(alias = "wxFileDataObject")]
     #[doc(alias = "FileDataObject")]
     class FileDataObject
@@ -167,7 +170,7 @@ wxwidgets! {
 impl<const OWNED: bool> FileDataObjectIsOwned<OWNED> {
     /// Constructor.
     ///
-    /// [See `wxFileDataObject::wxFileDataObject()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_file_data_object.html#a7c7cb54a6cf9114de7dec67755ac749e)
+    /// See [C++ `wxFileDataObject::wxFileDataObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_file_data_object.html#a7c7cb54a6cf9114de7dec67755ac749e).
     pub fn new() -> FileDataObjectIsOwned<OWNED> {
         unsafe { FileDataObjectIsOwned(ffi::wxFileDataObject_new()) }
     }
@@ -201,8 +204,9 @@ impl<const OWNED: bool> Drop for FileDataObjectIsOwned<OWNED> {
 // wxFileDialog
 wxwidgets! {
     /// This class represents the file chooser dialog.
-    ///
-    /// [See `wxFileDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_file_dialog.html)
+    /// - [`FileDialog`] represents a C++ `wxFileDialog` class instance which your code has ownership, [`FileDialogIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`FileDialog`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxFileDialog` class's documentation](https://docs.wxwidgets.org/3.2/classwx_file_dialog.html) for more details.
     #[doc(alias = "wxFileDialog")]
     #[doc(alias = "FileDialog")]
     class FileDialog
@@ -218,7 +222,7 @@ wxwidgets! {
 impl<const OWNED: bool> FileDialogIsOwned<OWNED> {
     /// Constructor.
     ///
-    /// [See `wxFileDialog::wxFileDialog()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_file_dialog.html#af3ff2981229bd2f892df0fa96fb9265d)
+    /// See [C++ `wxFileDialog::wxFileDialog()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_file_dialog.html#af3ff2981229bd2f892df0fa96fb9265d).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         message: &str,
@@ -308,8 +312,9 @@ impl<const OWNED: bool> DynamicCast for FileDialogIsOwned<OWNED> {
 // wxFileDirPickerEvent
 wxwidgets! {
     /// This event class is used for the events generated by wxFilePickerCtrl and by wxDirPickerCtrl.
-    ///
-    /// [See `wxFileDirPickerEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_file_dir_picker_event.html)
+    /// - [`FileDirPickerEvent`] represents a C++ `wxFileDirPickerEvent` class instance which your code has ownership, [`FileDirPickerEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`FileDirPickerEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxFileDirPickerEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_file_dir_picker_event.html) for more details.
     #[doc(alias = "wxFileDirPickerEvent")]
     #[doc(alias = "FileDirPickerEvent")]
     class FileDirPickerEvent
@@ -321,7 +326,7 @@ wxwidgets! {
 }
 impl<const OWNED: bool> FileDirPickerEventIsOwned<OWNED> {
     ///
-    /// [See `wxFileDirPickerEvent::wxFileDirPickerEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_file_dir_picker_event.html#a311f6e70d669ca9ef6f4425c7778f215)
+    /// See [C++ `wxFileDirPickerEvent::wxFileDirPickerEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_file_dir_picker_event.html#a311f6e70d669ca9ef6f4425c7778f215).
     pub fn new() -> FileDirPickerEventIsOwned<OWNED> {
         unsafe { FileDirPickerEventIsOwned(ffi::wxFileDirPickerEvent_new()) }
     }
@@ -366,8 +371,9 @@ impl<const OWNED: bool> Drop for FileDirPickerEventIsOwned<OWNED> {
 // wxFileDropTarget
 wxwidgets! {
     /// This is a drop target which accepts files (dragged from File Manager or Explorer).
-    ///
-    /// [See `wxFileDropTarget`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_file_drop_target.html)
+    /// - [`FileDropTarget`] represents a C++ `wxFileDropTarget` class instance which your code has ownership, [`FileDropTargetIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`FileDropTarget`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxFileDropTarget` class's documentation](https://docs.wxwidgets.org/3.2/classwx_file_drop_target.html) for more details.
     #[doc(alias = "wxFileDropTarget")]
     #[doc(alias = "FileDropTarget")]
     class FileDropTarget
@@ -402,8 +408,9 @@ impl<const OWNED: bool> Drop for FileDropTargetIsOwned<OWNED> {
 // wxFileHistory
 wxwidgets! {
     /// The wxFileHistory encapsulates a user interface convenience, the list of most recently visited files as shown on a menu (usually the File menu).
-    ///
-    /// [See `wxFileHistory`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_file_history.html)
+    /// - [`FileHistory`] represents a C++ `wxFileHistory` class instance which your code has ownership, [`FileHistoryIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`FileHistory`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxFileHistory` class's documentation](https://docs.wxwidgets.org/3.2/classwx_file_history.html) for more details.
     #[doc(alias = "wxFileHistory")]
     #[doc(alias = "FileHistory")]
     class FileHistory
@@ -414,7 +421,7 @@ wxwidgets! {
 impl<const OWNED: bool> FileHistoryIsOwned<OWNED> {
     /// Constructor.
     ///
-    /// [See `wxFileHistory::wxFileHistory()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_file_history.html#a30e3a3a1f92fc253cc0fc69eb6f27fd8)
+    /// See [C++ `wxFileHistory::wxFileHistory()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_file_history.html#a30e3a3a1f92fc253cc0fc69eb6f27fd8).
     pub fn new(max_files: usize, id_base: c_int) -> FileHistoryIsOwned<OWNED> {
         unsafe { FileHistoryIsOwned(ffi::wxFileHistory_new(max_files, id_base)) }
     }
@@ -448,8 +455,9 @@ impl<const OWNED: bool> Drop for FileHistoryIsOwned<OWNED> {
 // wxFilePickerCtrl
 wxwidgets! {
     /// This control allows the user to select a file.
-    ///
-    /// [See `wxFilePickerCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_file_picker_ctrl.html)
+    /// - [`FilePickerCtrl`] represents a C++ `wxFilePickerCtrl` class instance which your code has ownership, [`FilePickerCtrlIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`FilePickerCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxFilePickerCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_file_picker_ctrl.html) for more details.
     #[doc(alias = "wxFilePickerCtrl")]
     #[doc(alias = "FilePickerCtrl")]
     class FilePickerCtrl
@@ -463,13 +471,13 @@ wxwidgets! {
 }
 impl<const OWNED: bool> FilePickerCtrlIsOwned<OWNED> {
     ///
-    /// [See `wxFilePickerCtrl::wxFilePickerCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_file_picker_ctrl.html#afe16cc740765fb8ec68c9df250a07812)
+    /// See [C++ `wxFilePickerCtrl::wxFilePickerCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_file_picker_ctrl.html#afe16cc740765fb8ec68c9df250a07812).
     pub fn new_2step() -> FilePickerCtrlIsOwned<OWNED> {
         unsafe { FilePickerCtrlIsOwned(ffi::wxFilePickerCtrl_new()) }
     }
     /// Initializes the object and calls Create() with all the parameters.
     ///
-    /// [See `wxFilePickerCtrl::wxFilePickerCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_file_picker_ctrl.html#a2f9d8631a622d88cf820719a33879a4f)
+    /// See [C++ `wxFilePickerCtrl::wxFilePickerCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_file_picker_ctrl.html#a2f9d8631a622d88cf820719a33879a4f).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -546,8 +554,9 @@ impl<const OWNED: bool> DynamicCast for FilePickerCtrlIsOwned<OWNED> {
 // wxFindDialogEvent
 wxwidgets! {
     /// wxFindReplaceDialog events.
-    ///
-    /// [See `wxFindDialogEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_find_dialog_event.html)
+    /// - [`FindDialogEvent`] represents a C++ `wxFindDialogEvent` class instance which your code has ownership, [`FindDialogEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`FindDialogEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxFindDialogEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_find_dialog_event.html) for more details.
     #[doc(alias = "wxFindDialogEvent")]
     #[doc(alias = "FindDialogEvent")]
     class FindDialogEvent
@@ -599,8 +608,9 @@ impl<const OWNED: bool> Drop for FindDialogEventIsOwned<OWNED> {
 // wxFindReplaceData
 wxwidgets! {
     /// wxFindReplaceData holds the data for wxFindReplaceDialog.
-    ///
-    /// [See `wxFindReplaceData`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_find_replace_data.html)
+    /// - [`FindReplaceData`] represents a C++ `wxFindReplaceData` class instance which your code has ownership, [`FindReplaceDataIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`FindReplaceData`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxFindReplaceData` class's documentation](https://docs.wxwidgets.org/3.2/classwx_find_replace_data.html) for more details.
     #[doc(alias = "wxFindReplaceData")]
     #[doc(alias = "FindReplaceData")]
     class FindReplaceData
@@ -640,8 +650,9 @@ impl<const OWNED: bool> Drop for FindReplaceDataIsOwned<OWNED> {
 // wxFindReplaceDialog
 wxwidgets! {
     /// wxFindReplaceDialog is a standard modeless dialog which is used to allow the user to search for some text (and possibly replace it with something else).
-    ///
-    /// [See `wxFindReplaceDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_find_replace_dialog.html)
+    /// - [`FindReplaceDialog`] represents a C++ `wxFindReplaceDialog` class instance which your code has ownership, [`FindReplaceDialogIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`FindReplaceDialog`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxFindReplaceDialog` class's documentation](https://docs.wxwidgets.org/3.2/classwx_find_replace_dialog.html) for more details.
     #[doc(alias = "wxFindReplaceDialog")]
     #[doc(alias = "FindReplaceDialog")]
     class FindReplaceDialog
@@ -656,13 +667,13 @@ wxwidgets! {
 }
 impl<const OWNED: bool> FindReplaceDialogIsOwned<OWNED> {
     ///
-    /// [See `wxFindReplaceDialog::wxFindReplaceDialog()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_find_replace_dialog.html#a10601867d5793096323ce0979f7993cd)
+    /// See [C++ `wxFindReplaceDialog::wxFindReplaceDialog()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_find_replace_dialog.html#a10601867d5793096323ce0979f7993cd).
     pub fn new_2step() -> FindReplaceDialogIsOwned<OWNED> {
         unsafe { FindReplaceDialogIsOwned(ffi::wxFindReplaceDialog_new()) }
     }
     /// After using default constructor Create() must be called.
     ///
-    /// [See `wxFindReplaceDialog::wxFindReplaceDialog()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_find_replace_dialog.html#a27c6a7da82dd935ec7a9812ea6bf73c3)
+    /// See [C++ `wxFindReplaceDialog::wxFindReplaceDialog()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_find_replace_dialog.html#a27c6a7da82dd935ec7a9812ea6bf73c3).
     pub fn new<W: WindowMethods, F: FindReplaceDataMethods>(
         parent: Option<&W>,
         data: Option<&F>,
@@ -731,8 +742,9 @@ impl<const OWNED: bool> DynamicCast for FindReplaceDialogIsOwned<OWNED> {
 // wxFlexGridSizer
 wxwidgets! {
     /// A flex grid sizer is a sizer which lays out its children in a two-dimensional table with all table fields in one row having the same height and all fields in one column having the same width, but all rows or all columns are not necessarily the same height or width as in the wxGridSizer.
-    ///
-    /// [See `wxFlexGridSizer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_flex_grid_sizer.html)
+    /// - [`FlexGridSizer`] represents a C++ `wxFlexGridSizer` class instance which your code has ownership, [`FlexGridSizerIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`FlexGridSizer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxFlexGridSizer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_flex_grid_sizer.html) for more details.
     #[doc(alias = "wxFlexGridSizer")]
     #[doc(alias = "FlexGridSizer")]
     class FlexGridSizer
@@ -745,12 +757,12 @@ wxwidgets! {
 impl<const OWNED: bool> FlexGridSizerIsOwned<OWNED> {
     /// wxFlexGridSizer constructors.
     ///
-    /// [See `wxFlexGridSizer::wxFlexGridSizer()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_flex_grid_sizer.html#a1b4a8cb492c6d89e3e3755c9b8d31f03)
+    /// See [C++ `wxFlexGridSizer::wxFlexGridSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_flex_grid_sizer.html#a1b4a8cb492c6d89e3e3755c9b8d31f03).
     pub fn new_with_int_int(cols: c_int, vgap: c_int, hgap: c_int) -> FlexGridSizerIsOwned<OWNED> {
         unsafe { FlexGridSizerIsOwned(ffi::wxFlexGridSizer_new(cols, vgap, hgap)) }
     }
     ///
-    /// [See `wxFlexGridSizer::wxFlexGridSizer()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_flex_grid_sizer.html#a4c2fef6d9eca9c1d3ee3ee0ef41a4307)
+    /// See [C++ `wxFlexGridSizer::wxFlexGridSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_flex_grid_sizer.html#a4c2fef6d9eca9c1d3ee3ee0ef41a4307).
     pub fn new_with_size<S: SizeMethods>(cols: c_int, gap: &S) -> FlexGridSizerIsOwned<OWNED> {
         unsafe {
             let gap = gap.as_ptr();
@@ -758,7 +770,7 @@ impl<const OWNED: bool> FlexGridSizerIsOwned<OWNED> {
         }
     }
     ///
-    /// [See `wxFlexGridSizer::wxFlexGridSizer()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_flex_grid_sizer.html#a12b3b94cf1fe8ea687c74c84b8eb892f)
+    /// See [C++ `wxFlexGridSizer::wxFlexGridSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_flex_grid_sizer.html#a12b3b94cf1fe8ea687c74c84b8eb892f).
     pub fn new_with_int_int_int(
         rows: c_int,
         cols: c_int,
@@ -768,7 +780,7 @@ impl<const OWNED: bool> FlexGridSizerIsOwned<OWNED> {
         unsafe { FlexGridSizerIsOwned(ffi::wxFlexGridSizer_new2(rows, cols, vgap, hgap)) }
     }
     ///
-    /// [See `wxFlexGridSizer::wxFlexGridSizer()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_flex_grid_sizer.html#a49c35e0580fec338a47c5f0f348515e7)
+    /// See [C++ `wxFlexGridSizer::wxFlexGridSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_flex_grid_sizer.html#a49c35e0580fec338a47c5f0f348515e7).
     pub fn new_with_int_size<S: SizeMethods>(
         rows: c_int,
         cols: c_int,
@@ -812,8 +824,9 @@ impl<const OWNED: bool> DynamicCast for FlexGridSizerIsOwned<OWNED> {
 // wxFocusEvent
 wxwidgets! {
     /// A focus event is sent when a window's focus changes.
-    ///
-    /// [See `wxFocusEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_focus_event.html)
+    /// - [`FocusEvent`] represents a C++ `wxFocusEvent` class instance which your code has ownership, [`FocusEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`FocusEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxFocusEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_focus_event.html) for more details.
     #[doc(alias = "wxFocusEvent")]
     #[doc(alias = "FocusEvent")]
     class FocusEvent
@@ -859,8 +872,9 @@ impl<const OWNED: bool> Drop for FocusEventIsOwned<OWNED> {
 // wxFont
 wxwidgets! {
     /// A font is an object which determines the appearance of text.
-    ///
-    /// [See `wxFont`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_font.html)
+    /// - [`Font`] represents a C++ `wxFont` class instance which your code has ownership, [`FontIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`Font`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxFont` class's documentation](https://docs.wxwidgets.org/3.2/classwx_font.html) for more details.
     #[doc(alias = "wxFont")]
     #[doc(alias = "Font")]
     class Font
@@ -872,13 +886,13 @@ wxwidgets! {
 impl<const OWNED: bool> FontIsOwned<OWNED> {
     /// Default ctor.
     ///
-    /// [See `wxFont::wxFont()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_font.html#af183c2709f2b8f03e8fe88f28826612c)
+    /// See [C++ `wxFont::wxFont()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font.html#af183c2709f2b8f03e8fe88f28826612c).
     pub fn new() -> FontIsOwned<OWNED> {
         unsafe { FontIsOwned(ffi::wxFont_new()) }
     }
     /// Copy constructor, uses reference counting.
     ///
-    /// [See `wxFont::wxFont()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_font.html#ad77ff719ea7cf27f32d1de7e14dc76c1)
+    /// See [C++ `wxFont::wxFont()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font.html#ad77ff719ea7cf27f32d1de7e14dc76c1).
     pub fn new_with_font<F: FontMethods>(font: &F) -> FontIsOwned<OWNED> {
         unsafe {
             let font = font.as_ptr();
@@ -887,7 +901,7 @@ impl<const OWNED: bool> FontIsOwned<OWNED> {
     }
     /// Creates a font object using the specified font description.
     ///
-    /// [See `wxFont::wxFont()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_font.html#a019f22fdd833bf6bfc16f7b795a68a45)
+    /// See [C++ `wxFont::wxFont()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font.html#a019f22fdd833bf6bfc16f7b795a68a45).
     pub fn new_with_fontinfo(font_info: *const c_void) -> FontIsOwned<OWNED> {
         unsafe { FontIsOwned(ffi::wxFont_new2(font_info)) }
     }
@@ -895,7 +909,7 @@ impl<const OWNED: bool> FontIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxFont4()
     /// Constructor from font description string.
     ///
-    /// [See `wxFont::wxFont()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_font.html#a9d43775aaeafc628064b0e1b63730567)
+    /// See [C++ `wxFont::wxFont()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font.html#a9d43775aaeafc628064b0e1b63730567).
     pub fn new_with_str(native_info_string: &str) -> FontIsOwned<OWNED> {
         unsafe {
             let native_info_string = WxString::from(native_info_string);
@@ -905,7 +919,7 @@ impl<const OWNED: bool> FontIsOwned<OWNED> {
     }
     /// Construct font from a native font info structure.
     ///
-    /// [See `wxFont::wxFont()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_font.html#a17d85e1cac77bf812182915f3a017976)
+    /// See [C++ `wxFont::wxFont()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font.html#a17d85e1cac77bf812182915f3a017976).
     pub fn new_with_nativefontinfo<N: NativeFontInfoMethods>(
         native_info: &N,
     ) -> FontIsOwned<OWNED> {
@@ -949,8 +963,9 @@ impl<const OWNED: bool> Drop for FontIsOwned<OWNED> {
 // wxFontData
 wxwidgets! {
     /// This class holds a variety of information related to font dialogs.
-    ///
-    /// [See `wxFontData`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_font_data.html)
+    /// - [`FontData`] represents a C++ `wxFontData` class instance which your code has ownership, [`FontDataIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`FontData`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxFontData` class's documentation](https://docs.wxwidgets.org/3.2/classwx_font_data.html) for more details.
     #[doc(alias = "wxFontData")]
     #[doc(alias = "FontData")]
     class FontData
@@ -961,7 +976,7 @@ wxwidgets! {
 impl<const OWNED: bool> FontDataIsOwned<OWNED> {
     /// Constructor.
     ///
-    /// [See `wxFontData::wxFontData()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_font_data.html#a7475bad933f864387b91f41ec26efd44)
+    /// See [C++ `wxFontData::wxFontData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font_data.html#a7475bad933f864387b91f41ec26efd44).
     pub fn new() -> FontDataIsOwned<OWNED> {
         unsafe { FontDataIsOwned(ffi::wxFontData_new()) }
     }
@@ -995,8 +1010,9 @@ impl<const OWNED: bool> Drop for FontDataIsOwned<OWNED> {
 // wxFontDialog
 wxwidgets! {
     /// This class represents the font chooser dialog.
-    ///
-    /// [See `wxFontDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_font_dialog.html)
+    /// - [`FontDialog`] represents a C++ `wxFontDialog` class instance which your code has ownership, [`FontDialogIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`FontDialog`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxFontDialog` class's documentation](https://docs.wxwidgets.org/3.2/classwx_font_dialog.html) for more details.
     #[doc(alias = "wxFontDialog")]
     #[doc(alias = "FontDialog")]
     class FontDialog
@@ -1012,14 +1028,14 @@ wxwidgets! {
 impl<const OWNED: bool> FontDialogIsOwned<OWNED> {
     /// Default ctor.
     ///
-    /// [See `wxFontDialog::wxFontDialog()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_font_dialog.html#acf0f377d6df63ea86e72df3972d5c1c2)
+    /// See [C++ `wxFontDialog::wxFontDialog()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font_dialog.html#acf0f377d6df63ea86e72df3972d5c1c2).
     pub fn new_2step() -> FontDialogIsOwned<OWNED> {
         unsafe { FontDialogIsOwned(ffi::wxFontDialog_new()) }
     }
     // BLOCKED: fn wxFontDialog1()
     /// Constructor.
     ///
-    /// [See `wxFontDialog::wxFontDialog()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_font_dialog.html#a1dafd790fcdea244ceca846c6e62ab2e)
+    /// See [C++ `wxFontDialog::wxFontDialog()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font_dialog.html#a1dafd790fcdea244ceca846c6e62ab2e).
     pub fn new<W: WindowMethods, F: FontDataMethods>(
         parent: Option<&W>,
         data: &F,
@@ -1081,8 +1097,9 @@ impl<const OWNED: bool> DynamicCast for FontDialogIsOwned<OWNED> {
 // wxFontEnumerator
 wxwidgets! {
     /// wxFontEnumerator enumerates either all available fonts on the system or only the ones with given attributes - either only fixed-width (suited for use in programs such as terminal emulators and the like) or the fonts available in the given encoding).
-    ///
-    /// [See `wxFontEnumerator`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_font_enumerator.html)
+    /// - [`FontEnumerator`] represents a C++ `wxFontEnumerator` class instance which your code has ownership, [`FontEnumeratorIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`FontEnumerator`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxFontEnumerator` class's documentation](https://docs.wxwidgets.org/3.2/classwx_font_enumerator.html) for more details.
     #[doc(alias = "wxFontEnumerator")]
     #[doc(alias = "FontEnumerator")]
     class FontEnumerator
@@ -1091,7 +1108,7 @@ wxwidgets! {
 }
 impl<const OWNED: bool> FontEnumeratorIsOwned<OWNED> {
     ///
-    /// [See `wxFontEnumerator::wxFontEnumerator()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_font_enumerator.html#a4ea35d567889f590df8ea37d48b3bc98)
+    /// See [C++ `wxFontEnumerator::wxFontEnumerator()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font_enumerator.html#a4ea35d567889f590df8ea37d48b3bc98).
     pub fn new() -> FontEnumeratorIsOwned<OWNED> {
         unsafe { FontEnumeratorIsOwned(ffi::wxFontEnumerator_new()) }
     }
@@ -1115,8 +1132,9 @@ impl<const OWNED: bool> Drop for FontEnumeratorIsOwned<OWNED> {
 // wxFontList
 wxwidgets! {
     /// A font list is a list containing all fonts which have been created.
-    ///
-    /// [See `wxFontList`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_font_list.html)
+    /// - [`FontList`] represents a C++ `wxFontList` class instance which your code has ownership, [`FontListIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`FontList`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxFontList` class's documentation](https://docs.wxwidgets.org/3.2/classwx_font_list.html) for more details.
     #[doc(alias = "wxFontList")]
     #[doc(alias = "FontList")]
     class FontList
@@ -1126,7 +1144,7 @@ wxwidgets! {
 impl<const OWNED: bool> FontListIsOwned<OWNED> {
     /// Constructor.
     ///
-    /// [See `wxFontList::wxFontList()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_font_list.html#a1ca7f23958bc81f12893d1602b3a037d)
+    /// See [C++ `wxFontList::wxFontList()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font_list.html#a1ca7f23958bc81f12893d1602b3a037d).
     pub fn new() -> FontListIsOwned<OWNED> {
         unsafe { FontListIsOwned(ffi::wxFontList_new()) }
     }
@@ -1150,8 +1168,9 @@ impl<const OWNED: bool> Drop for FontListIsOwned<OWNED> {
 // wxFontMapper
 wxwidgets! {
     /// wxFontMapper manages user-definable correspondence between logical font names and the fonts present on the machine.
-    ///
-    /// [See `wxFontMapper`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_font_mapper.html)
+    /// - [`FontMapper`] represents a C++ `wxFontMapper` class instance which your code has ownership, [`FontMapperIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`FontMapper`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxFontMapper` class's documentation](https://docs.wxwidgets.org/3.2/classwx_font_mapper.html) for more details.
     #[doc(alias = "wxFontMapper")]
     #[doc(alias = "FontMapper")]
     class FontMapper
@@ -1161,7 +1180,7 @@ wxwidgets! {
 impl<const OWNED: bool> FontMapperIsOwned<OWNED> {
     /// Default ctor.
     ///
-    /// [See `wxFontMapper::wxFontMapper()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_font_mapper.html#a9eb3ae0550d0c858ba994a7d7a020441)
+    /// See [C++ `wxFontMapper::wxFontMapper()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font_mapper.html#a9eb3ae0550d0c858ba994a7d7a020441).
     pub fn new() -> FontMapperIsOwned<OWNED> {
         unsafe { FontMapperIsOwned(ffi::wxFontMapper_new()) }
     }
@@ -1185,8 +1204,9 @@ impl<const OWNED: bool> Drop for FontMapperIsOwned<OWNED> {
 // wxFontPickerCtrl
 wxwidgets! {
     /// This control allows the user to select a font.
-    ///
-    /// [See `wxFontPickerCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_font_picker_ctrl.html)
+    /// - [`FontPickerCtrl`] represents a C++ `wxFontPickerCtrl` class instance which your code has ownership, [`FontPickerCtrlIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`FontPickerCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxFontPickerCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_font_picker_ctrl.html) for more details.
     #[doc(alias = "wxFontPickerCtrl")]
     #[doc(alias = "FontPickerCtrl")]
     class FontPickerCtrl
@@ -1200,13 +1220,13 @@ wxwidgets! {
 }
 impl<const OWNED: bool> FontPickerCtrlIsOwned<OWNED> {
     ///
-    /// [See `wxFontPickerCtrl::wxFontPickerCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_font_picker_ctrl.html#a391e4a0d0935941152501cce7d492fb6)
+    /// See [C++ `wxFontPickerCtrl::wxFontPickerCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font_picker_ctrl.html#a391e4a0d0935941152501cce7d492fb6).
     pub fn new_2step() -> FontPickerCtrlIsOwned<OWNED> {
         unsafe { FontPickerCtrlIsOwned(ffi::wxFontPickerCtrl_new()) }
     }
     /// Initializes the object and calls Create() with all the parameters.
     ///
-    /// [See `wxFontPickerCtrl::wxFontPickerCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_font_picker_ctrl.html#a840bd203045d1be1249cef9348839951)
+    /// See [C++ `wxFontPickerCtrl::wxFontPickerCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font_picker_ctrl.html#a840bd203045d1be1249cef9348839951).
     pub fn new<
         W: WindowMethods,
         F: FontMethods,
@@ -1282,8 +1302,9 @@ impl<const OWNED: bool> DynamicCast for FontPickerCtrlIsOwned<OWNED> {
 // wxFontPickerEvent
 wxwidgets! {
     /// This event class is used for the events generated by wxFontPickerCtrl.
-    ///
-    /// [See `wxFontPickerEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_font_picker_event.html)
+    /// - [`FontPickerEvent`] represents a C++ `wxFontPickerEvent` class instance which your code has ownership, [`FontPickerEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`FontPickerEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxFontPickerEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_font_picker_event.html) for more details.
     #[doc(alias = "wxFontPickerEvent")]
     #[doc(alias = "FontPickerEvent")]
     class FontPickerEvent
@@ -1296,7 +1317,7 @@ wxwidgets! {
 impl<const OWNED: bool> FontPickerEventIsOwned<OWNED> {
     /// The constructor is not normally used by the user code.
     ///
-    /// [See `wxFontPickerEvent::wxFontPickerEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_font_picker_event.html#a59e707304d36f12937605e1bff5df798)
+    /// See [C++ `wxFontPickerEvent::wxFontPickerEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font_picker_event.html#a59e707304d36f12937605e1bff5df798).
     pub fn new<O: ObjectMethods, F: FontMethods>(
         generator: Option<&O>,
         id: c_int,
@@ -1351,8 +1372,9 @@ impl<const OWNED: bool> Drop for FontPickerEventIsOwned<OWNED> {
 // wxFrame
 wxwidgets! {
     /// A frame is a window whose size and position can (usually) be changed by the user.
-    ///
-    /// [See `wxFrame`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_frame.html)
+    /// - [`Frame`] represents a C++ `wxFrame` class instance which your code has ownership, [`FrameIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`Frame`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxFrame` class's documentation](https://docs.wxwidgets.org/3.2/classwx_frame.html) for more details.
     #[doc(alias = "wxFrame")]
     #[doc(alias = "Frame")]
     class Frame
@@ -1367,13 +1389,13 @@ wxwidgets! {
 impl<const OWNED: bool> FrameIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxFrame::wxFrame()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_frame.html#af80368ba23c71c5d947c3178b8fe10fc)
+    /// See [C++ `wxFrame::wxFrame()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_frame.html#af80368ba23c71c5d947c3178b8fe10fc).
     pub fn new_2step() -> FrameIsOwned<OWNED> {
         unsafe { FrameIsOwned(ffi::wxFrame_new()) }
     }
     /// Constructor, creating the window.
     ///
-    /// [See `wxFrame::wxFrame()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_frame.html#a01b53ac2d4a5e6b0773ecbcf7b5f6af8)
+    /// See [C++ `wxFrame::wxFrame()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_frame.html#a01b53ac2d4a5e6b0773ecbcf7b5f6af8).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -1439,7 +1461,7 @@ impl<const OWNED: bool> DynamicCast for FrameIsOwned<OWNED> {
 impl<const OWNED: bool> TopLevelWindowMethods for FrameIsOwned<OWNED> {
     /// Used in two-step frame construction.
     ///
-    /// [See `wxFrame::Create()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_frame.html#a6541d1aab71fc90041bfdde6e8705add)
+    /// See [C++ `wxFrame::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_frame.html#a6541d1aab71fc90041bfdde6e8705add).
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         &self,
         parent: Option<&W>,
@@ -1468,7 +1490,7 @@ impl<const OWNED: bool> TopLevelWindowMethods for FrameIsOwned<OWNED> {
 impl<const OWNED: bool> WindowMethods for FrameIsOwned<OWNED> {
     /// Centres the frame on the display.
     ///
-    /// [See `wxFrame::Centre()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_frame.html#a39b18ed552aabaf2a1bc4af7cc924a0f)
+    /// See [C++ `wxFrame::Centre()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_frame.html#a39b18ed552aabaf2a1bc4af7cc924a0f).
     fn centre(&self, direction: c_int) {
         unsafe { ffi::wxFrame_Centre(self.as_ptr(), direction) }
     }

@@ -3,8 +3,9 @@ use super::*;
 // wxWindow
 wxwidgets! {
     /// wxWindow is the base class for all windows and represents any visible object on screen.
-    ///
-    /// [See `wxWindow`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_window.html)
+    /// - [`Window`] represents a C++ `wxWindow` class instance which your code has ownership, [`WindowIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`Window`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxWindow` class's documentation](https://docs.wxwidgets.org/3.2/classwx_window.html) for more details.
     #[doc(alias = "wxWindow")]
     #[doc(alias = "Window")]
     class Window
@@ -16,13 +17,13 @@ wxwidgets! {
 impl<const OWNED: bool> WindowIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxWindow::wxWindow()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_window.html#a695200a4915b934926dcf32afa44544c)
+    /// See [C++ `wxWindow::wxWindow()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_window.html#a695200a4915b934926dcf32afa44544c).
     pub fn new_2step() -> WindowIsOwned<OWNED> {
         unsafe { WindowIsOwned(ffi::wxWindow_new()) }
     }
     /// Constructs a window, which can be a child of a frame, dialog or any other non-control window.
     ///
-    /// [See `wxWindow::wxWindow()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_window.html#a7799009b10d1765d1bbb6db4994f922e)
+    /// See [C++ `wxWindow::wxWindow()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_window.html#a7799009b10d1765d1bbb6db4994f922e).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -71,8 +72,9 @@ impl<const OWNED: bool> DynamicCast for WindowIsOwned<OWNED> {
 // wxWindowCreateEvent
 wxwidgets! {
     /// This event is sent just after the actual window associated with a wxWindow object has been created.
-    ///
-    /// [See `wxWindowCreateEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_window_create_event.html)
+    /// - [`WindowCreateEvent`] represents a C++ `wxWindowCreateEvent` class instance which your code has ownership, [`WindowCreateEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`WindowCreateEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxWindowCreateEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_window_create_event.html) for more details.
     #[doc(alias = "wxWindowCreateEvent")]
     #[doc(alias = "WindowCreateEvent")]
     class WindowCreateEvent
@@ -85,7 +87,7 @@ wxwidgets! {
 impl<const OWNED: bool> WindowCreateEventIsOwned<OWNED> {
     /// Constructor.
     ///
-    /// [See `wxWindowCreateEvent::wxWindowCreateEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_window_create_event.html#a802f4351900c901d07b9068a8cdfad89)
+    /// See [C++ `wxWindowCreateEvent::wxWindowCreateEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_window_create_event.html#a802f4351900c901d07b9068a8cdfad89).
     pub fn new<W: WindowMethods>(win: Option<&W>) -> WindowCreateEventIsOwned<OWNED> {
         unsafe {
             let win = match win {
@@ -135,8 +137,9 @@ impl<const OWNED: bool> Drop for WindowCreateEventIsOwned<OWNED> {
 // wxWindowDC
 wxwidgets! {
     /// A wxWindowDC must be constructed if an application wishes to paint on the whole area of a window (client and decorations).
-    ///
-    /// [See `wxWindowDC`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_window_d_c.html)
+    /// - [`WindowDC`] represents a C++ `wxWindowDC` class instance which your code has ownership, [`WindowDCIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`WindowDC`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxWindowDC` class's documentation](https://docs.wxwidgets.org/3.2/classwx_window_d_c.html) for more details.
     #[doc(alias = "wxWindowDC")]
     #[doc(alias = "WindowDC")]
     class WindowDC
@@ -148,7 +151,7 @@ wxwidgets! {
 impl<const OWNED: bool> WindowDCIsOwned<OWNED> {
     /// Constructor.
     ///
-    /// [See `wxWindowDC::wxWindowDC()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_window_d_c.html#afc21b6628de66136f2b223914b1998fb)
+    /// See [C++ `wxWindowDC::wxWindowDC()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_window_d_c.html#afc21b6628de66136f2b223914b1998fb).
     pub fn new<W: WindowMethods>(window: Option<&W>) -> WindowDCIsOwned<OWNED> {
         unsafe {
             let window = match window {
@@ -193,8 +196,9 @@ impl<const OWNED: bool> Drop for WindowDCIsOwned<OWNED> {
 // wxWindowDestroyEvent
 wxwidgets! {
     /// This event is sent as early as possible during the window destruction process.
-    ///
-    /// [See `wxWindowDestroyEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_window_destroy_event.html)
+    /// - [`WindowDestroyEvent`] represents a C++ `wxWindowDestroyEvent` class instance which your code has ownership, [`WindowDestroyEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`WindowDestroyEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxWindowDestroyEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_window_destroy_event.html) for more details.
     #[doc(alias = "wxWindowDestroyEvent")]
     #[doc(alias = "WindowDestroyEvent")]
     class WindowDestroyEvent
@@ -207,7 +211,7 @@ wxwidgets! {
 impl<const OWNED: bool> WindowDestroyEventIsOwned<OWNED> {
     /// Constructor.
     ///
-    /// [See `wxWindowDestroyEvent::wxWindowDestroyEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_window_destroy_event.html#a4f4750d7c673eaa251e2918665f2288d)
+    /// See [C++ `wxWindowDestroyEvent::wxWindowDestroyEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_window_destroy_event.html#a4f4750d7c673eaa251e2918665f2288d).
     pub fn new<W: WindowMethods>(win: Option<&W>) -> WindowDestroyEventIsOwned<OWNED> {
         unsafe {
             let win = match win {
@@ -257,8 +261,9 @@ impl<const OWNED: bool> Drop for WindowDestroyEventIsOwned<OWNED> {
 // wxWindowDisabler
 wxwidgets! {
     /// This class disables all top level windows of the application (maybe with the exception of one of them) in its constructor and enables them back in its destructor.
-    ///
-    /// [See `wxWindowDisabler`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_window_disabler.html)
+    /// - [`WindowDisabler`] represents a C++ `wxWindowDisabler` class instance which your code has ownership, [`WindowDisablerIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`WindowDisabler`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxWindowDisabler` class's documentation](https://docs.wxwidgets.org/3.2/classwx_window_disabler.html) for more details.
     #[doc(alias = "wxWindowDisabler")]
     #[doc(alias = "WindowDisabler")]
     class WindowDisabler
@@ -268,13 +273,13 @@ wxwidgets! {
 impl<const OWNED: bool> WindowDisablerIsOwned<OWNED> {
     /// Disables all top level windows of the applications.
     ///
-    /// [See `wxWindowDisabler::wxWindowDisabler()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_window_disabler.html#a1f7e8380ee6f7c3b709a54d68770e08b)
+    /// See [C++ `wxWindowDisabler::wxWindowDisabler()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_window_disabler.html#a1f7e8380ee6f7c3b709a54d68770e08b).
     pub fn new_with_bool(disable: bool) -> WindowDisablerIsOwned<OWNED> {
         unsafe { WindowDisablerIsOwned(ffi::wxWindowDisabler_new(disable)) }
     }
     /// Disables all top level windows of the applications with the exception of winToSkip if it is not NULL.
     ///
-    /// [See `wxWindowDisabler::wxWindowDisabler()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_window_disabler.html#a5e1fa520ab0c951c858c6f9e9aa34613)
+    /// See [C++ `wxWindowDisabler::wxWindowDisabler()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_window_disabler.html#a5e1fa520ab0c951c858c6f9e9aa34613).
     pub fn new_with_window<W: WindowMethods, W2: WindowMethods>(
         win_to_skip: Option<&W>,
         win_to_skip2: Option<&W2>,
@@ -311,8 +316,9 @@ impl<const OWNED: bool> Drop for WindowDisablerIsOwned<OWNED> {
 // wxWizard
 wxwidgets! {
     /// wxWizard is the central class for implementing 'wizard-like' dialogs.
-    ///
-    /// [See `wxWizard`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_wizard.html)
+    /// - [`Wizard`] represents a C++ `wxWizard` class instance which your code has ownership, [`WizardIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`Wizard`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxWizard` class's documentation](https://docs.wxwidgets.org/3.2/classwx_wizard.html) for more details.
     #[doc(alias = "wxWizard")]
     #[doc(alias = "Wizard")]
     class Wizard
@@ -328,13 +334,13 @@ wxwidgets! {
 impl<const OWNED: bool> WizardIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxWizard::wxWizard()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_wizard.html#ac871d30f9bcaf00718bbd5aafd2005f6)
+    /// See [C++ `wxWizard::wxWizard()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_wizard.html#ac871d30f9bcaf00718bbd5aafd2005f6).
     pub fn new_2step() -> WizardIsOwned<OWNED> {
         unsafe { WizardIsOwned(ffi::wxWizard_new()) }
     }
     /// Constructor which really creates the wizard  if you use this constructor, you shouldn't call Create().
     ///
-    /// [See `wxWizard::wxWizard()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_wizard.html#a4559db6b1490a941a8432a765462bbec)
+    /// See [C++ `wxWizard::wxWizard()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_wizard.html#a4559db6b1490a941a8432a765462bbec).
     pub fn new<W: WindowMethods, B: BitmapBundleMethods, P: PointMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -403,8 +409,9 @@ impl<const OWNED: bool> DynamicCast for WizardIsOwned<OWNED> {
 // wxWizardEvent
 wxwidgets! {
     /// wxWizardEvent class represents an event generated by the wxWizard: this event is first sent to the page itself and, if not processed there, goes up the window hierarchy as usual.
-    ///
-    /// [See `wxWizardEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_wizard_event.html)
+    /// - [`WizardEvent`] represents a C++ `wxWizardEvent` class instance which your code has ownership, [`WizardEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`WizardEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxWizardEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_wizard_event.html) for more details.
     #[doc(alias = "wxWizardEvent")]
     #[doc(alias = "WizardEvent")]
     class WizardEvent
@@ -462,8 +469,9 @@ impl<const OWNED: bool> Drop for WizardEventIsOwned<OWNED> {
 // wxWizardPage
 wxwidgets! {
     /// wxWizardPage is one of the screens in wxWizard: it must know what are the following and preceding pages (which may be NULL for the first/last page).
-    ///
-    /// [See `wxWizardPage`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_wizard_page.html)
+    /// - [`WizardPage`] represents a C++ `wxWizardPage` class instance which your code has ownership, [`WizardPageIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`WizardPage`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxWizardPage` class's documentation](https://docs.wxwidgets.org/3.2/classwx_wizard_page.html) for more details.
     #[doc(alias = "wxWizardPage")]
     #[doc(alias = "WizardPage")]
     class WizardPage
@@ -515,8 +523,9 @@ impl<const OWNED: bool> DynamicCast for WizardPageIsOwned<OWNED> {
 // wxWizardPageSimple
 wxwidgets! {
     /// wxWizardPageSimple is the simplest possible wxWizardPage implementation: it just returns the pointers given to its constructor from wxWizardPage::GetNext() and wxWizardPage::GetPrev() functions.
-    ///
-    /// [See `wxWizardPageSimple`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_wizard_page_simple.html)
+    /// - [`WizardPageSimple`] represents a C++ `wxWizardPageSimple` class instance which your code has ownership, [`WizardPageSimpleIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`WizardPageSimple`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxWizardPageSimple` class's documentation](https://docs.wxwidgets.org/3.2/classwx_wizard_page_simple.html) for more details.
     #[doc(alias = "wxWizardPageSimple")]
     #[doc(alias = "WizardPageSimple")]
     class WizardPageSimple
@@ -531,13 +540,13 @@ wxwidgets! {
 impl<const OWNED: bool> WizardPageSimpleIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxWizardPageSimple::wxWizardPageSimple()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_wizard_page_simple.html#a244829c284b07c21adc67ea739ec7f9b)
+    /// See [C++ `wxWizardPageSimple::wxWizardPageSimple()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_wizard_page_simple.html#a244829c284b07c21adc67ea739ec7f9b).
     pub fn new_2step() -> WizardPageSimpleIsOwned<OWNED> {
         unsafe { WizardPageSimpleIsOwned(ffi::wxWizardPageSimple_new()) }
     }
     /// Constructor takes the previous and next pages.
     ///
-    /// [See `wxWizardPageSimple::wxWizardPageSimple()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_wizard_page_simple.html#abb14e4b94589717dc4ad5e0a81f59e70)
+    /// See [C++ `wxWizardPageSimple::wxWizardPageSimple()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_wizard_page_simple.html#abb14e4b94589717dc4ad5e0a81f59e70).
     pub fn new<
         W: WizardMethods,
         W2: WizardPageMethods,
@@ -609,8 +618,9 @@ impl<const OWNED: bool> DynamicCast for WizardPageSimpleIsOwned<OWNED> {
 // wxWrapSizer
 wxwidgets! {
     /// A wrap sizer lays out its items in a single line, like a box sizer  as long as there is space available in that direction.
-    ///
-    /// [See `wxWrapSizer`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_wrap_sizer.html)
+    /// - [`WrapSizer`] represents a C++ `wxWrapSizer` class instance which your code has ownership, [`WrapSizerIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`WrapSizer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxWrapSizer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_wrap_sizer.html) for more details.
     #[doc(alias = "wxWrapSizer")]
     #[doc(alias = "WrapSizer")]
     class WrapSizer
@@ -623,7 +633,7 @@ wxwidgets! {
 impl<const OWNED: bool> WrapSizerIsOwned<OWNED> {
     /// Constructor for a wxWrapSizer.
     ///
-    /// [See `wxWrapSizer::wxWrapSizer()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_wrap_sizer.html#a49f0eff212b41b84b7b4eebd98dac489)
+    /// See [C++ `wxWrapSizer::wxWrapSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_wrap_sizer.html#a49f0eff212b41b84b7b4eebd98dac489).
     pub fn new(orient: c_int, flags: c_int) -> WrapSizerIsOwned<OWNED> {
         unsafe { WrapSizerIsOwned(ffi::wxWrapSizer_new(orient, flags)) }
     }

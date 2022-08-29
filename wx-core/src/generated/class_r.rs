@@ -3,8 +3,9 @@ use super::*;
 // wxRadioBox
 wxwidgets! {
     /// A radio box item is used to select one of number of mutually exclusive choices.
-    ///
-    /// [See `wxRadioBox`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_radio_box.html)
+    /// - [`RadioBox`] represents a C++ `wxRadioBox` class instance which your code has ownership, [`RadioBoxIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`RadioBox`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxRadioBox` class's documentation](https://docs.wxwidgets.org/3.2/classwx_radio_box.html) for more details.
     #[doc(alias = "wxRadioBox")]
     #[doc(alias = "RadioBox")]
     class RadioBox
@@ -18,14 +19,14 @@ wxwidgets! {
 impl<const OWNED: bool> RadioBoxIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxRadioBox::wxRadioBox()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_radio_box.html#a2821fb98e7a2b2f52b0966c784bf4864)
+    /// See [C++ `wxRadioBox::wxRadioBox()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_radio_box.html#a2821fb98e7a2b2f52b0966c784bf4864).
     pub fn new_2step() -> RadioBoxIsOwned<OWNED> {
         unsafe { RadioBoxIsOwned(ffi::wxRadioBox_new()) }
     }
     // NOT_SUPPORTED: fn wxRadioBox1()
     /// Constructor, creating and showing a radiobox.
     ///
-    /// [See `wxRadioBox::wxRadioBox()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_radio_box.html#a4bf8c8ac111aa1f4a6657458e49aa152)
+    /// See [C++ `wxRadioBox::wxRadioBox()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_radio_box.html#a4bf8c8ac111aa1f4a6657458e49aa152).
     pub fn new<
         W: WindowMethods,
         P: PointMethods,
@@ -115,8 +116,9 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for RadioBoxIsOwned<OWNED>
 // wxRadioButton
 wxwidgets! {
     /// A radio button item is a button which usually denotes one of several mutually exclusive options.
-    ///
-    /// [See `wxRadioButton`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_radio_button.html)
+    /// - [`RadioButton`] represents a C++ `wxRadioButton` class instance which your code has ownership, [`RadioButtonIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`RadioButton`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxRadioButton` class's documentation](https://docs.wxwidgets.org/3.2/classwx_radio_button.html) for more details.
     #[doc(alias = "wxRadioButton")]
     #[doc(alias = "RadioButton")]
     class RadioButton
@@ -130,13 +132,13 @@ wxwidgets! {
 impl<const OWNED: bool> RadioButtonIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxRadioButton::wxRadioButton()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_radio_button.html#a295e680547c57d9ad5bfbc835770ed2b)
+    /// See [C++ `wxRadioButton::wxRadioButton()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_radio_button.html#a295e680547c57d9ad5bfbc835770ed2b).
     pub fn new_2step() -> RadioButtonIsOwned<OWNED> {
         unsafe { RadioButtonIsOwned(ffi::wxRadioButton_new()) }
     }
     /// Constructor, creating and showing a radio button.
     ///
-    /// [See `wxRadioButton::wxRadioButton()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_radio_button.html#ab4b4b8a8b3532558204dec6b34396bb2)
+    /// See [C++ `wxRadioButton::wxRadioButton()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_radio_button.html#ab4b4b8a8b3532558204dec6b34396bb2).
     pub fn new<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
         parent: Option<&W>,
         id: c_int,
@@ -202,8 +204,9 @@ impl<const OWNED: bool> DynamicCast for RadioButtonIsOwned<OWNED> {
 // wxRealPoint
 wxwidgets! {
     /// A wxRealPoint is a useful data structure for graphics operations.
-    ///
-    /// [See `wxRealPoint`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_real_point.html)
+    /// - [`RealPoint`] represents a C++ `wxRealPoint` class instance which your code has ownership, [`RealPointIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`RealPoint`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxRealPoint` class's documentation](https://docs.wxwidgets.org/3.2/classwx_real_point.html) for more details.
     #[doc(alias = "wxRealPoint")]
     #[doc(alias = "RealPoint")]
     class RealPoint
@@ -213,19 +216,19 @@ wxwidgets! {
 impl<const OWNED: bool> RealPointIsOwned<OWNED> {
     /// Initializes to zero the x and y members.
     ///
-    /// [See `wxRealPoint::wxRealPoint()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_real_point.html#a9c4d38e144bb23d0e5ce94f7653e7887)
+    /// See [C++ `wxRealPoint::wxRealPoint()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_real_point.html#a9c4d38e144bb23d0e5ce94f7653e7887).
     pub fn new() -> RealPointIsOwned<OWNED> {
         unsafe { RealPointIsOwned(ffi::wxRealPoint_new()) }
     }
     /// Initializes the point with the given coordinates.
     ///
-    /// [See `wxRealPoint::wxRealPoint()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_real_point.html#a672ffa73a517579bfee8c32198c5d948)
+    /// See [C++ `wxRealPoint::wxRealPoint()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_real_point.html#a672ffa73a517579bfee8c32198c5d948).
     pub fn new_with_double(x: c_double, y: c_double) -> RealPointIsOwned<OWNED> {
         unsafe { RealPointIsOwned(ffi::wxRealPoint_new1(x, y)) }
     }
     /// Converts the given wxPoint (with integer coordinates) to a wxRealPoint.
     ///
-    /// [See `wxRealPoint::wxRealPoint()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_real_point.html#ae09522b031b035db4472500e48a0e2d3)
+    /// See [C++ `wxRealPoint::wxRealPoint()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_real_point.html#ae09522b031b035db4472500e48a0e2d3).
     pub fn new_with_point<P: PointMethods>(pt: &P) -> RealPointIsOwned<OWNED> {
         unsafe {
             let pt = pt.as_ptr();
@@ -252,8 +255,9 @@ impl<const OWNED: bool> Drop for RealPointIsOwned<OWNED> {
 // wxRearrangeCtrl
 wxwidgets! {
     /// A composite control containing a wxRearrangeList and the buttons allowing to move the items in it.
-    ///
-    /// [See `wxRearrangeCtrl`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rearrange_ctrl.html)
+    /// - [`RearrangeCtrl`] represents a C++ `wxRearrangeCtrl` class instance which your code has ownership, [`RearrangeCtrlIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`RearrangeCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxRearrangeCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_ctrl.html) for more details.
     #[doc(alias = "wxRearrangeCtrl")]
     #[doc(alias = "RearrangeCtrl")]
     class RearrangeCtrl
@@ -267,13 +271,13 @@ wxwidgets! {
 impl<const OWNED: bool> RearrangeCtrlIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxRearrangeCtrl::wxRearrangeCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rearrange_ctrl.html#ad47b3bbeddb36e799feb7d463376c929)
+    /// See [C++ `wxRearrangeCtrl::wxRearrangeCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_ctrl.html#ad47b3bbeddb36e799feb7d463376c929).
     pub fn new_2step() -> RearrangeCtrlIsOwned<OWNED> {
         unsafe { RearrangeCtrlIsOwned(ffi::wxRearrangeCtrl_new()) }
     }
     /// Constructor really creating the control.
     ///
-    /// [See `wxRearrangeCtrl::wxRearrangeCtrl()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rearrange_ctrl.html#a20803f2a9c123596b055fafd90ecff6a)
+    /// See [C++ `wxRearrangeCtrl::wxRearrangeCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_ctrl.html#a20803f2a9c123596b055fafd90ecff6a).
     pub fn new<
         W: WindowMethods,
         P: PointMethods,
@@ -347,8 +351,9 @@ impl<const OWNED: bool> DynamicCast for RearrangeCtrlIsOwned<OWNED> {
 // wxRearrangeDialog
 wxwidgets! {
     /// A dialog allowing the user to rearrange the specified items.
-    ///
-    /// [See `wxRearrangeDialog`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rearrange_dialog.html)
+    /// - [`RearrangeDialog`] represents a C++ `wxRearrangeDialog` class instance which your code has ownership, [`RearrangeDialogIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`RearrangeDialog`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxRearrangeDialog` class's documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_dialog.html) for more details.
     #[doc(alias = "wxRearrangeDialog")]
     #[doc(alias = "RearrangeDialog")]
     class RearrangeDialog
@@ -364,13 +369,13 @@ wxwidgets! {
 impl<const OWNED: bool> RearrangeDialogIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxRearrangeDialog::wxRearrangeDialog()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rearrange_dialog.html#ad230c6d3baf27e7d3f516a37e62e0d58)
+    /// See [C++ `wxRearrangeDialog::wxRearrangeDialog()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_dialog.html#ad230c6d3baf27e7d3f516a37e62e0d58).
     pub fn new_2step() -> RearrangeDialogIsOwned<OWNED> {
         unsafe { RearrangeDialogIsOwned(ffi::wxRearrangeDialog_new()) }
     }
     /// Constructor creating the dialog.
     ///
-    /// [See `wxRearrangeDialog::wxRearrangeDialog()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rearrange_dialog.html#ad91c63bf702f87b4727994d255743719)
+    /// See [C++ `wxRearrangeDialog::wxRearrangeDialog()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_dialog.html#ad91c63bf702f87b4727994d255743719).
     pub fn new<W: WindowMethods, A: ArrayIntMethods, A2: ArrayStringMethods, P: PointMethods>(
         parent: Option<&W>,
         message: &str,
@@ -447,8 +452,9 @@ impl<const OWNED: bool> DynamicCast for RearrangeDialogIsOwned<OWNED> {
 // wxRearrangeList
 wxwidgets! {
     /// A listbox-like control allowing the user to rearrange the items and to enable or disable them.
-    ///
-    /// [See `wxRearrangeList`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rearrange_list.html)
+    /// - [`RearrangeList`] represents a C++ `wxRearrangeList` class instance which your code has ownership, [`RearrangeListIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`RearrangeList`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxRearrangeList` class's documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_list.html) for more details.
     #[doc(alias = "wxRearrangeList")]
     #[doc(alias = "RearrangeList")]
     class RearrangeList
@@ -464,13 +470,13 @@ wxwidgets! {
 impl<const OWNED: bool> RearrangeListIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxRearrangeList::wxRearrangeList()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rearrange_list.html#ab211f32339f81867de12d14dc962d76c)
+    /// See [C++ `wxRearrangeList::wxRearrangeList()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_list.html#ab211f32339f81867de12d14dc962d76c).
     pub fn new_2step() -> RearrangeListIsOwned<OWNED> {
         unsafe { RearrangeListIsOwned(ffi::wxRearrangeList_new()) }
     }
     /// Constructor really creating the control.
     ///
-    /// [See `wxRearrangeList::wxRearrangeList()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rearrange_list.html#a3cf5cbfc0a24b5a58cd3683c80d303ba)
+    /// See [C++ `wxRearrangeList::wxRearrangeList()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_list.html#a3cf5cbfc0a24b5a58cd3683c80d303ba).
     pub fn new<
         W: WindowMethods,
         P: PointMethods,
@@ -565,8 +571,9 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for RearrangeListIsOwned<O
 // wxRect
 wxwidgets! {
     /// Represents a rectangle with integer coordinates.
-    ///
-    /// [See `wxRect`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rect.html)
+    /// - [`Rect`] represents a C++ `wxRect` class instance which your code has ownership, [`RectIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`Rect`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxRect` class's documentation](https://docs.wxwidgets.org/3.2/classwx_rect.html) for more details.
     #[doc(alias = "wxRect")]
     #[doc(alias = "Rect")]
     class Rect
@@ -576,19 +583,19 @@ wxwidgets! {
 impl<const OWNED: bool> RectIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxRect::wxRect()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rect.html#a19b68679edc9030cba102a8602febded)
+    /// See [C++ `wxRect::wxRect()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rect.html#a19b68679edc9030cba102a8602febded).
     pub fn new() -> RectIsOwned<OWNED> {
         unsafe { RectIsOwned(ffi::wxRect_new()) }
     }
     /// Creates a wxRect object from x, y, width and height values.
     ///
-    /// [See `wxRect::wxRect()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rect.html#aefb674bdc6d9d66a5c3746e5acc845d4)
+    /// See [C++ `wxRect::wxRect()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rect.html#aefb674bdc6d9d66a5c3746e5acc845d4).
     pub fn new_with_int(x: c_int, y: c_int, width: c_int, height: c_int) -> RectIsOwned<OWNED> {
         unsafe { RectIsOwned(ffi::wxRect_new1(x, y, width, height)) }
     }
     /// Creates a wxRect object from top-left and bottom-right points.
     ///
-    /// [See `wxRect::wxRect()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rect.html#a8d62df83787d4e1acdcf7a12fc97e5e6)
+    /// See [C++ `wxRect::wxRect()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rect.html#a8d62df83787d4e1acdcf7a12fc97e5e6).
     pub fn new_with_point_point<P: PointMethods, P2: PointMethods>(
         top_left: &P,
         bottom_right: &P2,
@@ -601,7 +608,7 @@ impl<const OWNED: bool> RectIsOwned<OWNED> {
     }
     /// Creates a wxRect object from position pos and size values.
     ///
-    /// [See `wxRect::wxRect()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rect.html#ae46a17423adfbb2faa21020b7cab8bc8)
+    /// See [C++ `wxRect::wxRect()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rect.html#ae46a17423adfbb2faa21020b7cab8bc8).
     pub fn new_with_point_size<P: PointMethods, S: SizeMethods>(
         pos: &P,
         size: &S,
@@ -614,7 +621,7 @@ impl<const OWNED: bool> RectIsOwned<OWNED> {
     }
     /// Creates a wxRect object from size values at the origin.
     ///
-    /// [See `wxRect::wxRect()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rect.html#a806ffe715a971157753890bab59d7d16)
+    /// See [C++ `wxRect::wxRect()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rect.html#a806ffe715a971157753890bab59d7d16).
     pub fn new_with_size<S: SizeMethods>(size: &S) -> RectIsOwned<OWNED> {
         unsafe {
             let size = size.as_ptr();
@@ -641,8 +648,9 @@ impl<const OWNED: bool> Drop for RectIsOwned<OWNED> {
 // wxRegion
 wxwidgets! {
     /// A wxRegion represents a simple or complex region on a device context or window.
-    ///
-    /// [See `wxRegion`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_region.html)
+    /// - [`Region`] represents a C++ `wxRegion` class instance which your code has ownership, [`RegionIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`Region`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxRegion` class's documentation](https://docs.wxwidgets.org/3.2/classwx_region.html) for more details.
     #[doc(alias = "wxRegion")]
     #[doc(alias = "Region")]
     class Region
@@ -654,19 +662,19 @@ wxwidgets! {
 impl<const OWNED: bool> RegionIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxRegion::wxRegion()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_region.html#a1edc6768118cf02749b46774a0ca37f9)
+    /// See [C++ `wxRegion::wxRegion()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region.html#a1edc6768118cf02749b46774a0ca37f9).
     pub fn new() -> RegionIsOwned<OWNED> {
         unsafe { RegionIsOwned(ffi::wxRegion_new()) }
     }
     /// Constructs a rectangular region with the given position and size.
     ///
-    /// [See `wxRegion::wxRegion()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_region.html#af2b51dd977107b0dd162db6e4e9e9c5c)
+    /// See [C++ `wxRegion::wxRegion()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region.html#af2b51dd977107b0dd162db6e4e9e9c5c).
     pub fn new_with_coord(x: c_int, y: c_int, width: c_int, height: c_int) -> RegionIsOwned<OWNED> {
         unsafe { RegionIsOwned(ffi::wxRegion_new1(x, y, width, height)) }
     }
     /// Constructs a rectangular region from the top left point and the bottom right point.
     ///
-    /// [See `wxRegion::wxRegion()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_region.html#a2cebf12d74122ce220f3ad48fa686e97)
+    /// See [C++ `wxRegion::wxRegion()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region.html#a2cebf12d74122ce220f3ad48fa686e97).
     pub fn new_with_point<P: PointMethods, P2: PointMethods>(
         top_left: &P,
         bottom_right: &P2,
@@ -679,7 +687,7 @@ impl<const OWNED: bool> RegionIsOwned<OWNED> {
     }
     /// Constructs a rectangular region a wxRect object.
     ///
-    /// [See `wxRegion::wxRegion()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_region.html#a66708b42c8bce4a76ada65cb312b60f9)
+    /// See [C++ `wxRegion::wxRegion()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region.html#a66708b42c8bce4a76ada65cb312b60f9).
     pub fn new_with_rect<R: RectMethods>(rect: &R) -> RegionIsOwned<OWNED> {
         unsafe {
             let rect = rect.as_ptr();
@@ -688,7 +696,7 @@ impl<const OWNED: bool> RegionIsOwned<OWNED> {
     }
     /// Copy constructor, uses Reference Counting.
     ///
-    /// [See `wxRegion::wxRegion()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_region.html#ad88c11689e65f02bb99acea6d59a6d9f)
+    /// See [C++ `wxRegion::wxRegion()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region.html#ad88c11689e65f02bb99acea6d59a6d9f).
     pub fn new_with_region<R: RegionMethods>(region: &R) -> RegionIsOwned<OWNED> {
         unsafe {
             let region = region.as_ptr();
@@ -698,7 +706,7 @@ impl<const OWNED: bool> RegionIsOwned<OWNED> {
     // NOT_SUPPORTED: fn wxRegion5()
     /// Constructs a region using a bitmap.
     ///
-    /// [See `wxRegion::wxRegion()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_region.html#ad7bfbeb79fe8dc281b91cfba43e8bd0a)
+    /// See [C++ `wxRegion::wxRegion()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region.html#ad7bfbeb79fe8dc281b91cfba43e8bd0a).
     pub fn new_with_bitmap<B: BitmapMethods>(bmp: &B) -> RegionIsOwned<OWNED> {
         unsafe {
             let bmp = bmp.as_ptr();
@@ -707,7 +715,7 @@ impl<const OWNED: bool> RegionIsOwned<OWNED> {
     }
     /// Constructs a region using the non-transparent pixels of a bitmap.
     ///
-    /// [See `wxRegion::wxRegion()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_region.html#aab62039edc53c55b833042b7c83e9068)
+    /// See [C++ `wxRegion::wxRegion()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region.html#aab62039edc53c55b833042b7c83e9068).
     pub fn new_with_bitmap_colour<B: BitmapMethods, C: ColourMethods>(
         bmp: &B,
         trans_colour: &C,
@@ -754,8 +762,9 @@ impl<const OWNED: bool> Drop for RegionIsOwned<OWNED> {
 // wxRegionIterator
 wxwidgets! {
     /// This class is used to iterate through the rectangles in a region, typically when examining the damaged regions of a window within an OnPaint call.
-    ///
-    /// [See `wxRegionIterator`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_region_iterator.html)
+    /// - [`RegionIterator`] represents a C++ `wxRegionIterator` class instance which your code has ownership, [`RegionIteratorIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`RegionIterator`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxRegionIterator` class's documentation](https://docs.wxwidgets.org/3.2/classwx_region_iterator.html) for more details.
     #[doc(alias = "wxRegionIterator")]
     #[doc(alias = "RegionIterator")]
     class RegionIterator
@@ -766,13 +775,13 @@ wxwidgets! {
 impl<const OWNED: bool> RegionIteratorIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxRegionIterator::wxRegionIterator()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_region_iterator.html#a1a2d17672c9585f86e26b8ee054e08e5)
+    /// See [C++ `wxRegionIterator::wxRegionIterator()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region_iterator.html#a1a2d17672c9585f86e26b8ee054e08e5).
     pub fn new() -> RegionIteratorIsOwned<OWNED> {
         unsafe { RegionIteratorIsOwned(ffi::wxRegionIterator_new()) }
     }
     /// Creates an iterator object given a region.
     ///
-    /// [See `wxRegionIterator::wxRegionIterator()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_region_iterator.html#a01b1845c8ecb190d244dfcc97d358f99)
+    /// See [C++ `wxRegionIterator::wxRegionIterator()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region_iterator.html#a01b1845c8ecb190d244dfcc97d358f99).
     pub fn new_with_region<R: RegionMethods>(region: &R) -> RegionIteratorIsOwned<OWNED> {
         unsafe {
             let region = region.as_ptr();
@@ -809,8 +818,9 @@ impl<const OWNED: bool> Drop for RegionIteratorIsOwned<OWNED> {
 // wxRendererNative
 wxwidgets! {
     /// First, a brief introduction to wxRendererNative and why it is needed.
-    ///
-    /// [See `wxRendererNative`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_renderer_native.html)
+    /// - [`RendererNative`] represents a C++ `wxRendererNative` class instance which your code has ownership, [`RendererNativeIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`RendererNative`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxRendererNative` class's documentation](https://docs.wxwidgets.org/3.2/classwx_renderer_native.html) for more details.
     #[doc(alias = "wxRendererNative")]
     #[doc(alias = "RendererNative")]
     class RendererNative
@@ -838,8 +848,9 @@ impl<const OWNED: bool> Drop for RendererNativeIsOwned<OWNED> {
 // wxRichToolTip
 wxwidgets! {
     /// Allows showing a tool tip with more customizations than wxToolTip.
-    ///
-    /// [See `wxRichToolTip`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rich_tool_tip.html)
+    /// - [`RichToolTip`] represents a C++ `wxRichToolTip` class instance which your code has ownership, [`RichToolTipIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`RichToolTip`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxRichToolTip` class's documentation](https://docs.wxwidgets.org/3.2/classwx_rich_tool_tip.html) for more details.
     #[doc(alias = "wxRichToolTip")]
     #[doc(alias = "RichToolTip")]
     class RichToolTip
@@ -849,7 +860,7 @@ wxwidgets! {
 impl<const OWNED: bool> RichToolTipIsOwned<OWNED> {
     /// Constructor must specify the tooltip title and main message.
     ///
-    /// [See `wxRichToolTip::wxRichToolTip()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_rich_tool_tip.html#ada22072c75eaca6de3de2e89e66a352f)
+    /// See [C++ `wxRichToolTip::wxRichToolTip()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rich_tool_tip.html#ada22072c75eaca6de3de2e89e66a352f).
     pub fn new(title: &str, message: &str) -> RichToolTipIsOwned<OWNED> {
         unsafe {
             let title = WxString::from(title);

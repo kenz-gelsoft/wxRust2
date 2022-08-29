@@ -3,8 +3,9 @@ use super::*;
 // wxUIActionSimulator
 wxwidgets! {
     /// wxUIActionSimulator is a class used to simulate user interface actions such as a mouse click or a key press.
-    ///
-    /// [See `wxUIActionSimulator`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_u_i_action_simulator.html)
+    /// - [`UIActionSimulator`] represents a C++ `wxUIActionSimulator` class instance which your code has ownership, [`UIActionSimulatorIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`UIActionSimulator`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxUIActionSimulator` class's documentation](https://docs.wxwidgets.org/3.2/classwx_u_i_action_simulator.html) for more details.
     #[doc(alias = "wxUIActionSimulator")]
     #[doc(alias = "UIActionSimulator")]
     class UIActionSimulator
@@ -14,7 +15,7 @@ wxwidgets! {
 impl<const OWNED: bool> UIActionSimulatorIsOwned<OWNED> {
     /// Default constructor.
     ///
-    /// [See `wxUIActionSimulator::wxUIActionSimulator()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_u_i_action_simulator.html#aa0f66cea40a642075482e06ccf2b75cb)
+    /// See [C++ `wxUIActionSimulator::wxUIActionSimulator()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_u_i_action_simulator.html#aa0f66cea40a642075482e06ccf2b75cb).
     pub fn new() -> UIActionSimulatorIsOwned<OWNED> {
         unsafe { UIActionSimulatorIsOwned(ffi::wxUIActionSimulator_new()) }
     }
@@ -38,8 +39,9 @@ impl<const OWNED: bool> Drop for UIActionSimulatorIsOwned<OWNED> {
 // wxURLDataObject
 wxwidgets! {
     /// wxURLDataObject is a wxDataObject containing an URL and can be used e.g.
-    ///
-    /// [See `wxURLDataObject`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_u_r_l_data_object.html)
+    /// - [`URLDataObject`] represents a C++ `wxURLDataObject` class instance which your code has ownership, [`URLDataObjectIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`URLDataObject`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxURLDataObject` class's documentation](https://docs.wxwidgets.org/3.2/classwx_u_r_l_data_object.html) for more details.
     #[doc(alias = "wxURLDataObject")]
     #[doc(alias = "URLDataObject")]
     class URLDataObject
@@ -50,7 +52,7 @@ wxwidgets! {
 impl<const OWNED: bool> URLDataObjectIsOwned<OWNED> {
     /// Constructor, may be used to initialize the URL.
     ///
-    /// [See `wxURLDataObject::wxURLDataObject()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_u_r_l_data_object.html#a57104fc32eb66f8fa666b1f2799631d5)
+    /// See [C++ `wxURLDataObject::wxURLDataObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_u_r_l_data_object.html#a57104fc32eb66f8fa666b1f2799631d5).
     pub fn new(url: &str) -> URLDataObjectIsOwned<OWNED> {
         unsafe {
             let url = WxString::from(url);
@@ -83,8 +85,9 @@ impl<const OWNED: bool> Drop for URLDataObjectIsOwned<OWNED> {
 // wxUpdateUIEvent
 wxwidgets! {
     /// This class is used for pseudo-events which are called by wxWidgets to give an application the chance to update various user interface elements.
-    ///
-    /// [See `wxUpdateUIEvent`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_update_u_i_event.html)
+    /// - [`UpdateUIEvent`] represents a C++ `wxUpdateUIEvent` class instance which your code has ownership, [`UpdateUIEventIsOwned`]`<false>` represents one which don't own.
+    /// - Use [`UpdateUIEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
+    /// - See [C++ `wxUpdateUIEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_update_u_i_event.html) for more details.
     #[doc(alias = "wxUpdateUIEvent")]
     #[doc(alias = "UpdateUIEvent")]
     class UpdateUIEvent
@@ -97,7 +100,7 @@ wxwidgets! {
 impl<const OWNED: bool> UpdateUIEventIsOwned<OWNED> {
     /// Constructor.
     ///
-    /// [See `wxUpdateUIEvent::wxUpdateUIEvent()`'s original doc.](https://docs.wxwidgets.org/3.2/classwx_update_u_i_event.html#aa25df58e7047f819f5dd0520eb2cc8ea)
+    /// See [C++ `wxUpdateUIEvent::wxUpdateUIEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_update_u_i_event.html#aa25df58e7047f819f5dd0520eb2cc8ea).
     pub fn new(command_id: c_int) -> UpdateUIEventIsOwned<OWNED> {
         unsafe { UpdateUIEventIsOwned(ffi::wxUpdateUIEvent_new(command_id)) }
     }
