@@ -7,5 +7,5 @@ edition = "2021"
 
 [dependencies]
 regex = "1.5"
-wx-base = { path = "../../wx-base" }
-wx = { path = "../../wx-core" }
+wx-base = { path = "../../wx-base", package="wxrust-base" }
+wx = { path = "../../wx-core", package="wxrust" }
