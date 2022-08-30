@@ -1,6 +1,6 @@
 # `wx-base`
 
-Thie crate is a binding to [the wxBase library of the wxWidgets toolkit](https://docs.wxwidgets.org/3.2/page_libs.html#page_libs_wxbase).
+This crate is a binding to [the wxBase library of the wxWidgets toolkit](https://docs.wxwidgets.org/3.2/page_libs.html#page_libs_wxbase).
 
 This crate supports only small part of the library which is used by the `wx`(`wxrust`) crate.
 
