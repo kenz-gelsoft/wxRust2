@@ -21,8 +21,8 @@ checksum = "22a9137b95ea06864e018375b72adfb7db6e6f68cfc8df5a04d00288050485ee"
 name = "hello"
 version = "0.1.0"
 dependencies = [
- "wx",
- "wx-base",
+ "wxrust",
+ "wxrust-base",
 ]
 
 [[package]]
@@ -35,8 +35,8 @@ checksum = "2dffe52ecf27772e601905b7522cb4ef790d2cc203488bbd0e2fe85fcb74566d"
 name = "minimal"
 version = "0.1.0"
 dependencies = [
- "wx",
- "wx-base",
+ "wxrust",
+ "wxrust-base",
 ]
 
 [[package]]
@@ -61,39 +61,16 @@ name = "widgets"
 version = "0.1.0"
 dependencies = [
  "regex",
- "wx",
- "wx-base",
+ "wxrust",
+ "wxrust-base",
 ]
 
 [[package]]
 name = "wrapsizer"
 version = "0.1.0"
 dependencies = [
- "wx",
- "wx-base",
-]
-
-[[package]]
-name = "wx"
-version = "0.1.0"
-dependencies = [
- "cc",
- "wx-base",
- "wx-universal-apple-darwin",
- "wx-x86_64-pc-windows-gnu",
- "wx-x86_64-pc-windows-msvc",
- "wxrust-config",
-]
-
-[[package]]
-name = "wx-base"
-version = "0.1.0"
-dependencies = [
- "cc",
- "wx-universal-apple-darwin",
- "wx-x86_64-pc-windows-gnu",
- "wx-x86_64-pc-windows-msvc",
- "wxrust-config",
+ "wxrust",
+ "wxrust-base",
 ]
 
 [[package]]
@@ -110,6 +87,29 @@ source = "git+https://github.com/ancwrd1/wx-x86_64-pc-windows-gnu#b41af996f76669
 name = "wx-x86_64-pc-windows-msvc"
 version = "3.2.0"
 source = "git+https://github.com/kenz-gelsoft/wx-x86_64-pc-windows-msvc#ed36771152a5c03212bce34b17d95629e1f8f8a9"
+
+[[package]]
+name = "wxrust"
+version = "0.0.1"
+dependencies = [
+ "cc",
+ "wx-universal-apple-darwin",
+ "wx-x86_64-pc-windows-gnu",
+ "wx-x86_64-pc-windows-msvc",
+ "wxrust-base",
+ "wxrust-config",
+]
+
+[[package]]
+name = "wxrust-base"
+version = "0.0.1"
+dependencies = [
+ "cc",
+ "wx-universal-apple-darwin",
+ "wx-x86_64-pc-windows-gnu",
+ "wx-x86_64-pc-windows-msvc",
+ "wxrust-config",
+]
 
 [[package]]
 name = "wxrust-config"

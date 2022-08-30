@@ -1,6 +1,6 @@
 [package]
-name = "wx"
-version = "0.1.0"
+name = "wxrust"
+version = "0.0.1"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -14,7 +14,7 @@ vendored = [
 ]
 
 [dependencies]
-wx-base = { path = "../wx-base" }
+wx-base = { path = "../wx-base", package="wxrust-base" }
 
 [target.'cfg(target_os = "macos")'.dependencies]
 wx-universal-apple-darwin = { git = "https://github.com/ancwrd1/wx-universal-apple-darwin", optional = true }
