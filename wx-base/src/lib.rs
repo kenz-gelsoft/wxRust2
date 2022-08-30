@@ -1,3 +1,5 @@
+#![doc = include_str!("../README.md")]
+
 use std::marker::PhantomData;
 use std::mem;
 use std::os::raw::{c_char, c_int, c_void};
