@@ -7,7 +7,7 @@ import toml
 
 # place wxWidgets doxygen xml files in wxml/ dir and run this.
 def main():
-    with open('doxybindgen.toml', 'r') as f:
+    with open('Doxybindgen.toml', 'r') as f:
         config = toml.load(f)
     
     classes = ClassManager()
