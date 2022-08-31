@@ -14,12 +14,15 @@ def main():
     classes = ClassManager()
     parsed = []
     xmlfiles = config['wxml_files']
+    progress('Parsing')
     for file in xmlfiles:
+        progress('.')
         for cls in Class.in_xml(classes, file, config['types']):
             parsed.append(cls)
     # Register all classes once parsing finished.
     classes.register(parsed)
-    
+
+    progress('\nGenerating')
     with open('docs/OverloadTree.md', 'w') as overload_tree_md:
         print('''\
 # Overload Method Name Decision Tree
@@ -48,6 +51,7 @@ def generate_library(classes, config, libname, overload_tree_md):
         initials.append(initial)
         cxx_bindings_i = [c for c in cxx_bindings if c.has_initial(initial)]
         for path, generator in files_per_initial.items():
+            progress('.')
             path = path % (initial,)
             is_rust = path.endswith('.rs')
             if libname:
@@ -71,6 +75,7 @@ def generate_library(classes, config, libname, overload_tree_md):
         'src/generated.cpp': generated_cpp,
     }
     for path, generator in to_be_generated.items():
+        progress('.')
         is_rust = path.endswith('.rs')
         if libname:
             path = 'wx-%s/%s' % (libname, path)
@@ -80,6 +85,9 @@ def generate_library(classes, config, libname, overload_tree_md):
                 libname
             ):
                 print(chunk, file=f)
+
+def progress(s):
+    print(s, end='', flush=True)
 
 def ffi_i_rs(classes, libname):
     yield '''\
