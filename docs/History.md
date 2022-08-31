@@ -9,12 +9,9 @@
 
 ## Current status
 
-Implementing the binding generator to be usable state with a small set of wx classes.
+The binding generator works with large part of wxCore APIs. Generated binding to large part of the wxCore library. Some samples works fine.
 
-* Working on
-    * [ ] https://github.com/kenz-gelsoft/wxRust2/issues/61 Core library coverage
-        * generate for all classes in core library
-* Next
+* Left to do
     * [ ] Other libraries
         * after that, more libraries would be generated
 * Done
@@ -34,4 +31,6 @@ Implementing the binding generator to be usable state with a small set of wx cla
     * [x] Small set of API working
         * compiles and bare simple example runs on macOS, Linux
         * working to compile on Window (fighting with linking error)
+    * [x] https://github.com/kenz-gelsoft/wxRust2/issues/61 Core library coverage
+        * generate for ~~all~~ large part of classes in core library
 
