@@ -1,4 +1,4 @@
-# `wx`
+# wx(wxrust)
 
 This crate is a binding to [the wxCore library of the wxWidgets toolkit](https://docs.wxwidgets.org/3.2/page_libs.html#page_libs_wxcore).
 
