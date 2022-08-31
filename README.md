@@ -4,6 +4,37 @@ This is my 2nd exploration of binding [the wxWidgets cross-platform toolkit](htt
 
 **This project is in the very-early stage of the development.** I'm playing with this in my very limited spare time. So don't expect this project will be usable (or useful) state in the near future.
 
+---
+
+## Prerequisite
+
+Install the wxWidgets library. Currently (not fully) supported library versions:
+
+|wx   |Windows |macOS   |Linux   |
+|-----|--------|--------|--------|
+|3.2  |Official MSVC Binary|Homebrew|Codelite|
+|3.1.6|Vendored<br>MinGW64 Static|Vendored<br>Universal Static|N/A|
+|3.0.5|N/A     |N/A     |Ubuntu Package|
+
+Following installation method are (somewhat) tested with:
+
+### Windows
+
+- Install prebuilt binary and set `%wxwin` environment variable to installed path.
+    - See official instruction: https://docs.wxwidgets.org/3.2.0/plat_msw_binaries.html
+
+### macOS
+
+- Use homebrew as `brew install wxwidgets`
+
+### Linux
+
+- Use codelite repo binary
+    - see: https://docs.codelite.org/wxWidgets/repo320/
+- Or distro package
+
+---
+
 ## How to use
 
 (T.B.D.)
@@ -19,6 +50,8 @@ Specify `--features vendored` to cargo, to use vendored prebuilt wx binary crate
 |`x86_64-pc-windows-msvc`|`wx-x86_64-pc-windows-msvc`|https://github.com/kenz-gelsoft/wx-x86_64-pc-windows-msvc|Bundled wx3.1.7 official build|
 
 [@ancwrd1](https://github.com/ancwrd1) suggested this feature and kindly helped to support this. Thank you!
+
+---
 
 ## License
 
