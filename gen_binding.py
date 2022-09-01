@@ -8,24 +8,31 @@ import toml
 
 # place wxWidgets doxygen xml files in wxml/ dir and run this.
 def main():
-    with open('doxybindgen.toml', 'r') as f:
+    with open('Doxybindgen.toml', 'r') as f:
         config = toml.load(f)
     
     classes = ClassManager()
     parsed = []
     xmlfiles = config['wxml_files']
+    progress('Parsing')
     for file in xmlfiles:
+        progress('.')
         for cls in Class.in_xml(classes, file, config['types']):
             parsed.append(cls)
     # Register all classes once parsing finished.
     classes.register(parsed)
-    
-    generate_library(classes, config, 'base')
-    generate_library(classes, config, 'core')
+
+    progress('\nGenerating')
+    with open('docs/OverloadTree.md', 'w') as overload_tree_md:
+        print('''\
+# Overload Method Name Decision Tree
+''', file=overload_tree_md)
+        generate_library(classes, config, 'base', overload_tree_md)
+        generate_library(classes, config, 'core', overload_tree_md)
 
 
 generated = []
-def generate_library(classes, config, libname):
+def generate_library(classes, config, libname, overload_tree_md):
     generated.append(libname)
     files_per_initial = {
         'src/generated/ffi_%s.rs': ffi_i_rs,
@@ -34,7 +41,7 @@ def generate_library(classes, config, libname):
         'include/generated/ffi_%s.h': ffi_i_h,
         'src/generated/ffi_%s.cpp': ffi_i_cpp,
     }
-    rust_bindings = [RustClassBinding(cls) for cls in classes.in_lib(libname, generated)]
+    rust_bindings = [RustClassBinding(cls, overload_tree_md) for cls in classes.in_lib(libname, generated)]
     cxx_bindings = [CxxClassBinding(cls, config) for cls in classes.in_lib(libname, generated)]
     initials = []
     for initial in string.ascii_lowercase:
@@ -44,6 +51,7 @@ def generate_library(classes, config, libname):
         initials.append(initial)
         cxx_bindings_i = [c for c in cxx_bindings if c.has_initial(initial)]
         for path, generator in files_per_initial.items():
+            progress('.')
             path = path % (initial,)
             is_rust = path.endswith('.rs')
             if libname:
@@ -67,6 +75,7 @@ def generate_library(classes, config, libname):
         'src/generated.cpp': generated_cpp,
     }
     for path, generator in to_be_generated.items():
+        progress('.')
         is_rust = path.endswith('.rs')
         if libname:
             path = 'wx-%s/%s' % (libname, path)
@@ -76,6 +85,9 @@ def generate_library(classes, config, libname):
                 libname
             ):
                 print(chunk, file=f)
+
+def progress(s):
+    print(s, end='', flush=True)
 
 def ffi_i_rs(classes, libname):
     yield '''\

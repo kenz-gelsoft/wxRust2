@@ -7,10 +7,10 @@ MIXIN_CXX_CLASS = {
 }
 
 class RustClassBinding:
-    def __init__(self, model):
+    def __init__(self, model, overload_tree_md):
         self.__model = model
         self.overloads = OverloadTree(model)
-        self.overloads.print_tree()
+        self.overloads.print_tree(overload_tree_md)
         self.__methods = [RustMethodBinding(self, m) for m in model.methods]
     
     def has_initial(self, i):
@@ -370,10 +370,10 @@ class OverloadTree:
             count += self._count_in_subtree(v)
         return count
     
-    def print_tree(self):
-        self.print_node(self.__root, 0)
+    def print_tree(self, tofile):
+        self.print_node(tofile, self.__root, 0)
 
-    def print_node(self, node, level):
+    def print_node(self, tofile, node, level):
         indent = '    ' * level
         for k, v in node.items.items():
             count = self._count_in_subtree(v)
@@ -386,8 +386,9 @@ class OverloadTree:
                 args = self.args_to_disambiguate(method)
                 args = '(%s)' % (', '.join(args),)
                 method = method.name()
-            print("%s- %s: %s: %s %s" % (indent, count, k, method, args))
-            self.print_node(v, level + 1)
+            print("%s- %s: %s: %s %s" % (indent, count, k, method, args),
+                  file=tofile)
+            self.print_node(tofile, v, level + 1)
 
 
 class RustMethodBinding:
