@@ -6,38 +6,41 @@ This is my 2nd exploration of binding [the wxWidgets cross-platform toolkit](htt
 
 ---
 
-## Prerequisite
+## How to use
+
+1. [Install prerequisite](#prerequisite) or [Specify feature to use vendored wx binary crate](#use-vendored-wx-binary-crate)
+2. Specify wxrust dependency
+    ```TOML
+    [dependencies]
+    wx = { version = "0.0.*", package = "wxrust" }
+    ```
+
+### Prerequisite
 
 Install the wxWidgets library. Currently (not fully) supported library versions:
 
 |wx   |Windows |macOS   |Linux   |
 |-----|--------|--------|--------|
-|3.2  |Official MSVC Binary|Homebrew|Codelite|
-|3.1.6|Vendored<br>MinGW64 Static|Vendored<br>Universal Static|N/A|
-|3.0.5|N/A     |N/A     |Ubuntu Package|
+|3.2  |[Official MSVC Binary](#windows)|[Homebrew](#macos)|[Codelite repo](#linux)|
+|3.1.6|[Vendored](#use-vendored-wx-binary-crate)<br>MinGW64 Static|[Vendored](#use-vendored-wx-binary-crate)<br>Universal Static|N/A|
+|3.0.5|N/A|N/A|[Ubuntu Package](#linux)|
 
 Following installation method are (somewhat) tested with:
 
-### Windows
+#### Windows
 
 - Install prebuilt binary and set `%wxwin` environment variable to installed path.
     - See official instruction: https://docs.wxwidgets.org/3.2.0/plat_msw_binaries.html
 
-### macOS
+#### macOS
 
-- Use homebrew as `brew install wxwidgets`
+- Install from Homebrew like `brew install wxwidgets`
 
-### Linux
+#### Linux
 
-- Use codelite repo binary
+- Use codelite repo package
     - see: https://docs.codelite.org/wxWidgets/repo320/
 - Or distro package
-
----
-
-## How to use
-
-(T.B.D.)
 
 ### Use vendored wx binary crate
 
@@ -47,7 +50,7 @@ Specify `--features vendored` to cargo, to use vendored prebuilt wx binary crate
 |------------|----------|--------------|-------------------|
 |`cfg(target_os = "macos")`|`wx-universal-apple-darwin`|https://github.com/ancwrd1/wx-universal-apple-darwin|Lean and mean config, see repo.| 
 |`x86_64-pc-windows-gnu`|`wx-x86_64-pc-windows-gnu`|https://github.com/ancwrd1/wx-x86_64-pc-windows-gnu|Lean and mean config, see repo.|
-|`x86_64-pc-windows-msvc`|`wx-x86_64-pc-windows-msvc`|https://github.com/kenz-gelsoft/wx-x86_64-pc-windows-msvc|Bundled wx3.1.7 official build|
+|`x86_64-pc-windows-msvc`|`wx-x86_64-pc-windows-msvc`|https://github.com/kenz-gelsoft/wx-x86_64-pc-windows-msvc|Bundled wx3.2.0 official build|
 
 [@ancwrd1](https://github.com/ancwrd1) suggested this feature and kindly helped to support this. Thank you!
 
