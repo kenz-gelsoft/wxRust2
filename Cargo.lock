@@ -90,7 +90,7 @@ source = "git+https://github.com/kenz-gelsoft/wx-x86_64-pc-windows-msvc#ed367711
 
 [[package]]
 name = "wxrust"
-version = "0.0.1"
+version = "0.0.1-alpha"
 dependencies = [
  "cc",
  "wx-universal-apple-darwin",
@@ -102,7 +102,7 @@ dependencies = [
 
 [[package]]
 name = "wxrust-base"
-version = "0.0.1"
+version = "0.0.1-alpha"
 dependencies = [
  "cc",
  "wx-universal-apple-darwin",
@@ -113,7 +113,7 @@ dependencies = [
 
 [[package]]
 name = "wxrust-config"
-version = "0.1.0"
+version = "0.0.1-alpha"
 dependencies = [
  "cc",
 ]
