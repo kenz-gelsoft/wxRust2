@@ -13,7 +13,7 @@ wx = { version = "0.0.*", package = "wxrust" }
 
 ## Example
 
-```rust
+```no_run
 #![windows_subsystem = "windows"]
 
 use wx;
