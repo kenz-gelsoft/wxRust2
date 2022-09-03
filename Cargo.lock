@@ -97,7 +97,7 @@ dependencies = [
  "wx-x86_64-pc-windows-gnu",
  "wx-x86_64-pc-windows-msvc",
  "wxrust-base",
- "wxrust-config 0.0.1-alpha",
+ "wxrust-config 0.0.1-alpha (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]

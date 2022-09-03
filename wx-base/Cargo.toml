@@ -26,4 +26,4 @@ wx-x86_64-pc-windows-msvc = { git = "https://github.com/kenz-gelsoft/wx-x86_64-p
 
 [build-dependencies]
 cc = "1.0.72"
-wxrust-config = "0.0.*"
+wxrust-config = "0.0.1-alpha"
