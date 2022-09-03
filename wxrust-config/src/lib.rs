@@ -7,10 +7,6 @@ pub fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
     for arg in cflags {
         cc_build.flag(&arg);
     }
-    let target_env = env::var("CARGO_CFG_TARGET_ENV").unwrap();
-    if target_env.eq("msvc") {
-        cc_build.flag("/EHsc");
-    }
     cc_build
 }
 
@@ -73,6 +69,10 @@ pub fn wx_config(args: &[&str]) -> Vec<String> {
             cflags.push("-D__NO_VC_CRTDBG__".to_string());
             cflags.push("-DwxDEBUG_LEVEL=0".to_string());
             cflags.push("-DNDEBUG".to_string());
+        }
+        let target_env = env::var("CARGO_CFG_TARGET_ENV").unwrap();
+        if target_env.eq("msvc") {
+            cflags.push("/EHsc".to_string());
         }
         cflags
     } else {
