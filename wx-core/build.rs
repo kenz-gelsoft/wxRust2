@@ -1,4 +1,4 @@
-use wxrust_config::{print_wx_config_libs_for_cargo, wx_config_cflags};
+use wxrust_config::{wx_config, wx_config_cflags};
 
 fn main() {
     wx_config_cflags(&mut cc::Build::new())
@@ -9,5 +9,7 @@ fn main() {
         .flag_if_supported("-std=c++14")
         .compile("wx");
 
-    print_wx_config_libs_for_cargo();
+    // from `wx-config --libs`
+    let libs = wx_config(&["--libs"]);
+    println!("cargo:rustc-flags={}", libs.join(" "));
 }

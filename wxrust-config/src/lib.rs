@@ -19,12 +19,6 @@ pub fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
     cc_build
 }
 
-pub fn print_wx_config_libs_for_cargo() {
-    // from `wx-config --libs`
-    let libs = wx_config(&["--libs"]);
-    println!("cargo:rustc-flags={}", libs.join(" "));
-}
-
 #[cfg(feature = "vendored")]
 fn dep_links() -> String {
     let target = env::var("TARGET").unwrap().replace('-', "_").to_uppercase();
