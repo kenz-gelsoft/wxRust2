@@ -9,3 +9,6 @@ members = [
     "wx-core",
     "wxrust-config",
 ]
+
+[patch.crates-io]
+wxrust-config = { path = 'wxrust-vendored-config' }

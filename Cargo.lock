@@ -21,6 +21,9 @@ checksum = "22a9137b95ea06864e018375b72adfb7db6e6f68cfc8df5a04d00288050485ee"
 name = "hello"
 version = "0.1.0"
 dependencies = [
+ "wx-universal-apple-darwin",
+ "wx-x86_64-pc-windows-gnu",
+ "wx-x86_64-pc-windows-msvc",
  "wxrust",
  "wxrust-base",
 ]
@@ -35,6 +38,9 @@ checksum = "2dffe52ecf27772e601905b7522cb4ef790d2cc203488bbd0e2fe85fcb74566d"
 name = "minimal"
 version = "0.1.0"
 dependencies = [
+ "wx-universal-apple-darwin",
+ "wx-x86_64-pc-windows-gnu",
+ "wx-x86_64-pc-windows-msvc",
  "wxrust",
  "wxrust-base",
 ]
@@ -61,6 +67,9 @@ name = "widgets"
 version = "0.1.0"
 dependencies = [
  "regex",
+ "wx-universal-apple-darwin",
+ "wx-x86_64-pc-windows-gnu",
+ "wx-x86_64-pc-windows-msvc",
  "wxrust",
  "wxrust-base",
 ]
@@ -69,6 +78,9 @@ dependencies = [
 name = "wrapsizer"
 version = "0.1.0"
 dependencies = [
+ "wx-universal-apple-darwin",
+ "wx-x86_64-pc-windows-gnu",
+ "wx-x86_64-pc-windows-msvc",
  "wxrust",
  "wxrust-base",
 ]
@@ -93,11 +105,8 @@ name = "wxrust"
 version = "0.0.1-alpha"
 dependencies = [
  "cc",
- "wx-universal-apple-darwin",
- "wx-x86_64-pc-windows-gnu",
- "wx-x86_64-pc-windows-msvc",
  "wxrust-base",
- "wxrust-config 0.0.1-alpha",
+ "wxrust-config 0.0.1-alpha2",
 ]
 
 [[package]]
@@ -105,10 +114,7 @@ name = "wxrust-base"
 version = "0.0.1-alpha"
 dependencies = [
  "cc",
- "wx-universal-apple-darwin",
- "wx-x86_64-pc-windows-gnu",
- "wx-x86_64-pc-windows-msvc",
- "wxrust-config 0.0.1-alpha (registry+https://github.com/rust-lang/crates.io-index)",
+ "wxrust-config 0.0.1-alpha2",
 ]
 
 [[package]]
@@ -120,9 +126,7 @@ dependencies = [
 
 [[package]]
 name = "wxrust-config"
-version = "0.0.1-alpha"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6730ab8fe7b39e6273c0c82eed6184f860766fabe273b127fa99cd0ea5cd0da7"
+version = "0.0.1-alpha2"
 dependencies = [
  "cc",
 ]

@@ -1,6 +1,6 @@
 [package]
-name = "wxrust-vendored-config"
-version = "0.0.1-alpha"
+name = "wxrust-config"
+version = "0.0.1-alpha2"
 edition = "2021"
 description = "Vendored configuration crate for wxrust packages."
 license = "MIT"
