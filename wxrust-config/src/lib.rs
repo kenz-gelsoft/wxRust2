@@ -6,11 +6,6 @@ use std::process::Command;
 pub fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
     // from `wx-config --cflags`
     let cflags = wx_config(&["--cflags"]);
-    // ignore too many warnings with wx3.0
-    cc_build
-        .flag_if_supported("-Wno-deprecated-copy")
-        .flag_if_supported("-Wno-ignored-qualifiers")
-        .flag_if_supported("-Wno-unused-parameter");
     for arg in cflags.iter() {
         cc_build.flag(arg);
     }
