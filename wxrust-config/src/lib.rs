@@ -1,4 +1,6 @@
 use std::env;
+
+#[cfg(all(not(feature = "vendored"), not(windows)))]
 use std::process::Command;
 
 pub fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
@@ -18,18 +20,8 @@ pub fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
 pub fn print_wx_config_libs_for_cargo() {
     // from `wx-config --libs`
     let libs = wx_config(&["--libs"]);
-    let mut next_is_framework_name = false;
     for arg in libs.iter() {
-        if next_is_framework_name {
-            println!("cargo:rustc-flags=-lframework={}", arg);
-            next_is_framework_name = false;
-        } else if arg == "-framework" {
-            next_is_framework_name = true;
-        } else if arg.starts_with("-pthread") {
-            // ignore
-        } else {
-            println!("cargo:rustc-flags={}", arg);
-        }
+        println!("cargo:rustc-flags={}", arg);
     }
 }
 
@@ -66,11 +58,26 @@ fn wx_config(args: &[&str]) -> Vec<String> {
         .args(args)
         .output()
         .expect("failed execute wx-config command.");
-    String::from_utf8_lossy(&output.stdout)
+    let flags = String::from_utf8_lossy(&output.stdout)
         .to_string()
         .split_whitespace()
         .map(ToOwned::to_owned)
-        .collect()
+        .collect();
+    let mut converted = Vec::new();
+    let mut next_is_framework_name = false;
+    for flag in flags.iter() {
+        if next_is_framework_name {
+            converted.push(format!("-lframework={}", flag));
+            next_is_framework_name = false;
+        } else if flag == "-framework" {
+            next_is_framework_name = true;
+        } else if flag.starts_with("-pthread") {
+            // ignore
+        } else {
+            converted.push(flag);
+        }
+    }
+    converted
 }
 
 #[cfg(all(not(feature = "vendored"), windows))]
