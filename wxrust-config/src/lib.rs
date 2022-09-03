@@ -25,7 +25,7 @@ pub fn print_wx_config_libs_for_cargo() {
     let mut next_is_framework_name = false;
     for arg in libs.iter() {
         if next_is_framework_name {
-            println!("cargo:rustc-link-lib=framework={}", arg);
+            println!("cargo:rustc-flags=-lframework={}", arg);
             next_is_framework_name = false;
         } else if arg == "-framework" {
             next_is_framework_name = true;
