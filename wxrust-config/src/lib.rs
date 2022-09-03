@@ -36,7 +36,7 @@ fn dep_links() -> String {
 }
 
 #[cfg(feature = "vendored")]
-fn wx_config(args: &[&str]) -> Vec<String> {
+pub fn wx_config(args: &[&str]) -> Vec<String> {
     let flags: Vec<_> = env::var(format!("DEP_WX_{}_CFLAGS", dep_links()))
         .unwrap()
         .split_whitespace()
@@ -53,7 +53,7 @@ fn wx_config(args: &[&str]) -> Vec<String> {
 }
 
 #[cfg(all(not(feature = "vendored"), not(windows)))]
-fn wx_config(args: &[&str]) -> Vec<String> {
+pub fn wx_config(args: &[&str]) -> Vec<String> {
     let output = Command::new("wx-config")
         .args(args)
         .output()
@@ -66,7 +66,7 @@ fn wx_config(args: &[&str]) -> Vec<String> {
 }
 
 #[cfg(all(not(feature = "vendored"), windows))]
-fn wx_config(args: &[&str]) -> Vec<String> {
+pub fn wx_config(args: &[&str]) -> Vec<String> {
     let wxwin = env::var("wxwin")
         .expect("Set 'wxwin' environment variable to point the wxMSW binaries dir.");
     // TODO: support linking with the wx debug DLL
