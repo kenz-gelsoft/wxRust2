@@ -1,6 +1,6 @@
 [package]
 name = "wxrust-config"
-version = "0.0.1-alpha"
+version = "0.0.1-alpha2"
 edition = "2021"
 description = "Build support crate for wxrust packages."
 license = "MIT"
