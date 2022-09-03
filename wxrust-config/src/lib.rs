@@ -10,16 +10,7 @@ pub fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
         .flag_if_supported("-Wno-ignored-qualifiers")
         .flag_if_supported("-Wno-unused-parameter");
     for arg in cflags.iter() {
-        if arg.starts_with("-I") {
-            cc_build.include(&arg[2..]);
-        } else if arg.starts_with("-D") {
-            let split = &mut arg[2..].split('=');
-            cc_build.define(split.next().unwrap(), split.next().unwrap_or(""));
-        } else if arg.starts_with("-pthread") {
-            cc_build.flag(arg);
-        } else {
-            panic!("unsupported argument '{}'. please file a bug.", arg)
-        }
+        cc_build.flag(arg);
     }
     let target_env = env::var("CARGO_CFG_TARGET_ENV").unwrap();
     if target_env.eq("msvc") {
