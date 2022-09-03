@@ -25,6 +25,7 @@ pub fn print_wx_config_libs_for_cargo() {
     println!("cargo:rustc-flags={}", libs.join(" "));
 }
 
+#[cfg(feature = "vendored")]
 fn dep_links() -> String {
     let target = env::var("TARGET").unwrap().replace('-', "_").to_uppercase();
     if target.contains("APPLE") {
@@ -34,39 +35,38 @@ fn dep_links() -> String {
     }
 }
 
+#[cfg(feature = "vendored")]
 fn wx_config(args: &[&str]) -> Vec<String> {
-    if cfg!(feature = "vendored") {
-        let flags: Vec<_> = env::var(format!("DEP_WX_{}_CFLAGS", dep_links()))
-            .unwrap()
-            .split_whitespace()
-            .map(ToOwned::to_owned)
-            .collect();
-        let (ldflags, cflags): (Vec<_>, Vec<_>) = flags
-            .into_iter()
-            .partition(|f| f.starts_with("-l") || f.starts_with("-L"));
-        return if args.contains(&"--cflags") {
-            cflags
-        } else {
-            ldflags
-        };
-    }
-
-    if cfg!(windows) {
-        wx_config_win(args)
+    let flags: Vec<_> = env::var(format!("DEP_WX_{}_CFLAGS", dep_links()))
+        .unwrap()
+        .split_whitespace()
+        .map(ToOwned::to_owned)
+        .collect();
+    let (ldflags, cflags): (Vec<_>, Vec<_>) = flags
+        .into_iter()
+        .partition(|f| f.starts_with("-l") || f.starts_with("-L"));
+    return if args.contains(&"--cflags") {
+        cflags
     } else {
-        let output = Command::new("wx-config")
-            .args(args)
-            .output()
-            .expect("failed execute wx-config command.");
-        String::from_utf8_lossy(&output.stdout)
-            .to_string()
-            .split_whitespace()
-            .map(ToOwned::to_owned)
-            .collect()
-    }
+        ldflags
+    };
 }
 
-fn wx_config_win(args: &[&str]) -> Vec<String> {
+#[cfg(all(not(feature = "vendored"), not(windows)))]
+fn wx_config(args: &[&str]) -> Vec<String> {
+    let output = Command::new("wx-config")
+        .args(args)
+        .output()
+        .expect("failed execute wx-config command.");
+    String::from_utf8_lossy(&output.stdout)
+        .to_string()
+        .split_whitespace()
+        .map(ToOwned::to_owned)
+        .collect()
+}
+
+#[cfg(all(not(feature = "vendored"), windows))]
+fn wx_config(args: &[&str]) -> Vec<String> {
     let wxwin = env::var("wxwin")
         .expect("Set 'wxwin' environment variable to point the wxMSW binaries dir.");
     // TODO: support linking with the wx debug DLL
