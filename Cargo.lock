@@ -86,7 +86,7 @@ source = "git+https://github.com/ancwrd1/wx-x86_64-pc-windows-gnu#b41af996f76669
 [[package]]
 name = "wx-x86_64-pc-windows-msvc"
 version = "3.2.0"
-source = "git+https://github.com/kenz-gelsoft/wx-x86_64-pc-windows-msvc#ed36771152a5c03212bce34b17d95629e1f8f8a9"
+source = "git+https://github.com/kenz-gelsoft/wx-x86_64-pc-windows-msvc?branch=runtime_api#7214a610c0ac2c9588de7dc45a936b45ae8443d9"
 
 [[package]]
 name = "wxrust"
