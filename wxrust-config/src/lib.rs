@@ -74,7 +74,7 @@ fn wx_config(args: &[&str]) -> Vec<String> {
         } else if flag.starts_with("-pthread") {
             // ignore
         } else {
-            converted.push(flag);
+            converted.push(flag.to_string());
         }
     }
     converted
