@@ -22,9 +22,7 @@ pub fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
 pub fn print_wx_config_libs_for_cargo() {
     // from `wx-config --libs`
     let libs = wx_config(&["--libs"]);
-    for arg in libs {
-        println!("cargo:rustc-flags={}", arg);
-    }
+    println!("cargo:rustc-flags={}", libs.join(" "));
 }
 
 fn dep_links() -> String {
