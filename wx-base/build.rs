@@ -1,13 +1,25 @@
-use wxrust_config::{print_wx_config_libs_for_cargo, wx_config_cflags};
+use wxrust_config::wx_config;
 
 fn main() {
-    wx_config_cflags(&mut cc::Build::new())
+    let mut cc_build = cc::Build::new();
+    // from `wx-config --cflags`
+    let cflags = wx_config(&["--cflags"]);
+    for arg in cflags.iter() {
+        cc_build.flag(arg);
+    }
+    cc_build
         .cpp(true)
         .file("src/manual.cpp")
         .file("src/generated.cpp")
         .include("include")
         .flag_if_supported("-std=c++14")
+        // ignore too many warnings with wx3.0
+        .flag_if_supported("-Wno-deprecated-copy")
+        .flag_if_supported("-Wno-ignored-qualifiers")
+        .flag_if_supported("-Wno-unused-parameter")
         .compile("wx");
 
-    print_wx_config_libs_for_cargo();
+    // from `wx-config --libs`
+    let libs = wx_config(&["--libs"]);
+    println!("cargo:rustc-flags={}", libs.join(" "));
 }
