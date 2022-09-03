@@ -29,14 +29,10 @@ pub fn print_wx_config_libs_for_cargo() {
             next_is_framework_name = false;
         } else if arg == "-framework" {
             next_is_framework_name = true;
-        } else if arg.starts_with("-L") {
-            println!("cargo:rustc-link-search=native={}", &arg[2..]);
-        } else if arg.starts_with("-l") {
-            println!("cargo:rustc-link-lib={}", &arg[2..]);
         } else if arg.starts_with("-pthread") {
             // ignore
         } else {
-            panic!("unsupported argument '{}'. please file a bug.", arg)
+            println!("cargo:rustc-flags={}", arg);
         }
     }
 }
