@@ -3,23 +3,6 @@ use std::env;
 #[cfg(all(not(feature = "vendored"), not(windows)))]
 use std::process::Command;
 
-pub fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
-    // from `wx-config --cflags`
-    let cflags = wx_config(&["--cflags"]);
-    for arg in cflags.iter() {
-        cc_build.flag(arg);
-    }
-    cc_build
-}
-
-pub fn print_wx_config_libs_for_cargo() {
-    // from `wx-config --libs`
-    let libs = wx_config(&["--libs"]);
-    for arg in libs.iter() {
-        println!("cargo:rustc-flags={}", arg);
-    }
-}
-
 #[cfg(feature = "vendored")]
 fn dep_links() -> String {
     let target = env::var("TARGET").unwrap().replace('-', "_").to_uppercase();
@@ -31,7 +14,7 @@ fn dep_links() -> String {
 }
 
 #[cfg(feature = "vendored")]
-fn wx_config(args: &[&str]) -> Vec<String> {
+pub fn wx_config(args: &[&str]) -> Vec<String> {
     let flags: Vec<_> = env::var(format!("DEP_WX_{}_CFLAGS", dep_links()))
         .unwrap()
         .split_whitespace()
@@ -48,7 +31,7 @@ fn wx_config(args: &[&str]) -> Vec<String> {
 }
 
 #[cfg(all(not(feature = "vendored"), not(windows)))]
-fn wx_config(args: &[&str]) -> Vec<String> {
+pub fn wx_config(args: &[&str]) -> Vec<String> {
     let output = Command::new("wx-config")
         .args(args)
         .output()
@@ -76,7 +59,7 @@ fn wx_config(args: &[&str]) -> Vec<String> {
 }
 
 #[cfg(all(not(feature = "vendored"), windows))]
-fn wx_config(args: &[&str]) -> Vec<String> {
+pub fn wx_config(args: &[&str]) -> Vec<String> {
     let wxwin = env::var("wxwin")
         .expect("Set 'wxwin' environment variable to point the wxMSW binaries dir.");
     // TODO: support linking with the wx debug DLL
