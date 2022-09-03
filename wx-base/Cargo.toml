@@ -1,7 +1,9 @@
 [package]
 name = "wxrust-base"
-version = "0.0.1"
+version = "0.0.1-alpha"
 edition = "2021"
+description = "Binding for the (part of) wxBase library of the wxWidgets toolkit."
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -24,4 +26,4 @@ wx-x86_64-pc-windows-msvc = { git = "https://github.com/kenz-gelsoft/wx-x86_64-p
 
 [build-dependencies]
 cc = "1.0.72"
-wxrust-config = { path = "../wxrust-config" }
+wxrust-config = "0.0.1-alpha"

@@ -90,30 +90,39 @@ source = "git+https://github.com/kenz-gelsoft/wx-x86_64-pc-windows-msvc#ed367711
 
 [[package]]
 name = "wxrust"
-version = "0.0.1"
+version = "0.0.1-alpha"
 dependencies = [
  "cc",
  "wx-universal-apple-darwin",
  "wx-x86_64-pc-windows-gnu",
  "wx-x86_64-pc-windows-msvc",
  "wxrust-base",
- "wxrust-config",
+ "wxrust-config 0.0.1-alpha (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "wxrust-base"
-version = "0.0.1"
+version = "0.0.1-alpha"
 dependencies = [
  "cc",
  "wx-universal-apple-darwin",
  "wx-x86_64-pc-windows-gnu",
  "wx-x86_64-pc-windows-msvc",
- "wxrust-config",
+ "wxrust-config 0.0.1-alpha (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "wxrust-config"
-version = "0.1.0"
+version = "0.0.1-alpha"
+dependencies = [
+ "cc",
+]
+
+[[package]]
+name = "wxrust-config"
+version = "0.0.1-alpha"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6730ab8fe7b39e6273c0c82eed6184f860766fabe273b127fa99cd0ea5cd0da7"
 dependencies = [
  "cc",
 ]
