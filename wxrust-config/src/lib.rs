@@ -9,7 +9,7 @@ pub fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
         .flag_if_supported("-Wno-deprecated-copy")
         .flag_if_supported("-Wno-ignored-qualifiers")
         .flag_if_supported("-Wno-unused-parameter");
-    for arg in cflags.split_whitespace() {
+    for arg in cflags.iter() {
         if arg.starts_with("-I") {
             cc_build.include(&arg[2..]);
         } else if arg.starts_with("-D") {
@@ -32,7 +32,7 @@ pub fn print_wx_config_libs_for_cargo() {
     // from `wx-config --libs`
     let libs = wx_config(&["--libs"]);
     let mut next_is_framework_name = false;
-    for arg in libs.split_whitespace() {
+    for arg in libs.iter() {
         if next_is_framework_name {
             println!("cargo:rustc-link-lib=framework={}", arg);
             next_is_framework_name = false;
@@ -59,7 +59,7 @@ fn dep_links() -> String {
     }
 }
 
-fn wx_config(args: &[&str]) -> String {
+fn wx_config(args: &[&str]) -> Vec<String> {
     if cfg!(feature = "vendored") {
         let flags: Vec<_> = env::var(format!("DEP_WX_{}_CFLAGS", dep_links()))
             .unwrap()
@@ -70,9 +70,9 @@ fn wx_config(args: &[&str]) -> String {
             .into_iter()
             .partition(|f| f.starts_with("-l") || f.starts_with("-L"));
         return if args.contains(&"--cflags") {
-            cflags.join(" ")
+            cflags
         } else {
-            ldflags.join(" ")
+            ldflags
         };
     }
 
@@ -83,11 +83,15 @@ fn wx_config(args: &[&str]) -> String {
             .args(args)
             .output()
             .expect("failed execute wx-config command.");
-        String::from_utf8_lossy(&output.stdout).to_string()
+        String::from_utf8_lossy(&output.stdout)
+            .to_string()
+            .split_whitespace()
+            .map(ToOwned::to_owned)
+            .collect()
     }
 }
 
-fn wx_config_win(args: &[&str]) -> String {
+fn wx_config_win(args: &[&str]) -> Vec<String> {
     let wxwin = env::var("wxwin")
         .expect("Set 'wxwin' environment variable to point the wxMSW binaries dir.");
     // TODO: support linking with the wx debug DLL
@@ -106,13 +110,13 @@ fn wx_config_win(args: &[&str]) -> String {
             cflags.push("-DwxDEBUG_LEVEL=0".to_string());
             cflags.push("-DNDEBUG".to_string());
         }
-        cflags.join(" ")
+        cflags
     } else {
         let libs = vec![
             format!("-L{}\\lib\\vc14x_x64_dll", wxwin),
             format!("-lwxbase32u{}", d_or_not),
             format!("-lwxmsw32u{}_core", d_or_not),
         ];
-        libs.join(" ")
+        libs
     }
 }
