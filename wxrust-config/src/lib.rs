@@ -1,6 +1,6 @@
 use std::env;
 
-#[cfg(feature = "vendored")]
+#[cfg(all(not(feature = "vendored"), not(windows)))]
 use std::process::Command;
 
 #[cfg(feature = "vendored")]
