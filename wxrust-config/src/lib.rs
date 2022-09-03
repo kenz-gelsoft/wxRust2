@@ -58,7 +58,7 @@ fn wx_config(args: &[&str]) -> Vec<String> {
         .args(args)
         .output()
         .expect("failed execute wx-config command.");
-    let flags = String::from_utf8_lossy(&output.stdout)
+    let flags: Vec<String> = String::from_utf8_lossy(&output.stdout)
         .to_string()
         .split_whitespace()
         .map(ToOwned::to_owned)
