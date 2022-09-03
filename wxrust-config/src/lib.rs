@@ -1,14 +1,7 @@
 use std::env;
-use std::process::Command;
 
-pub fn wx_config_cflags(cc_build: &mut cc::Build) -> &mut cc::Build {
-    // from `wx-config --cflags`
-    let cflags = wx_config(&["--cflags"]);
-    for arg in cflags {
-        cc_build.flag(&arg);
-    }
-    cc_build
-}
+#[cfg(feature = "vendored")]
+use std::process::Command;
 
 #[cfg(feature = "vendored")]
 fn dep_links() -> String {

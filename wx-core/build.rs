@@ -1,7 +1,12 @@
-use wxrust_config::{wx_config, wx_config_cflags};
+use wxrust_config::wx_config;
 
 fn main() {
-    wx_config_cflags(&mut cc::Build::new())
+    let mut cc_build = cc::Build::new();
+    // from `wx-config --cflags`
+    for arg in wx_config(&["--cflags"]).iter() {
+        cc_build.flag(arg);
+    }
+    cc_build
         .cpp(true)
         .file("src/manual.cpp")
         .file("src/generated.cpp")
