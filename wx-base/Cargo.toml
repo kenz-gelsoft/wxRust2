@@ -12,7 +12,6 @@ vendored = [
     "wxrust-config/vendored",
     "dep:wx-universal-apple-darwin",
     "dep:wx-x86_64-pc-windows-gnu",
-    "dep:wx-x86_64-pc-windows-msvc",
 ]
 
 [target.'cfg(target_os = "macos")'.dependencies]
@@ -21,9 +20,7 @@ wx-universal-apple-darwin = { git = "https://github.com/ancwrd1/wx-universal-app
 [target.x86_64-pc-windows-gnu.dependencies]
 wx-x86_64-pc-windows-gnu = { git = "https://github.com/ancwrd1/wx-x86_64-pc-windows-gnu", optional = true }
 
-[target.x86_64-pc-windows-msvc.dependencies]
-wx-x86_64-pc-windows-msvc = { git = "https://github.com/kenz-gelsoft/wx-x86_64-pc-windows-msvc", branch = "runtime_api", optional = true }
-
 [build-dependencies]
 cc = "1.0.72"
-wxrust-config = "0.0.1-alpha2"
+# wxrust-config = "0.0.1-alpha2"
+wxrust-config = { git = "https://github.com/kenz-gelsoft/wx-x86_64-pc-windows-msvc", branch = "runtime_api" }

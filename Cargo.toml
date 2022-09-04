@@ -10,5 +10,5 @@ members = [
     "wxrust-config",
 ]
 
-[patch.crates-io]
-wxrust-config = { path = "wxrust-config" }
+# [patch.crates-io]
+# wxrust-config = { path = "wxrust-config" }
