@@ -12,4 +12,4 @@ members = [
 
 [patch.crates-io]
 # wxrust-config = { path = "wxrust-config" }
-wxrust-config = { git = "https://github.com/kenz-gelsoft/wx-x86_64-pc-windows-msvc", branch = "runtime_api" }
+wxrust-config = { git = "https://github.com/kenz-gelsoft/wxrust-vendored-config" }
