@@ -25,5 +25,4 @@ wx-x86_64-pc-windows-gnu = { git = "https://github.com/ancwrd1/wx-x86_64-pc-wind
 
 [build-dependencies]
 cc = "1.0.72"
-# wxrust-config = "0.0.1-alpha2"
-wxrust-config = { git = "https://github.com/kenz-gelsoft/wx-x86_64-pc-windows-msvc", branch = "runtime_api" }
+wxrust-config = "0.0.1-alpha2"
