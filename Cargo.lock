@@ -119,7 +119,7 @@ dependencies = [
 [[package]]
 name = "wxrust-config"
 version = "0.0.1-alpha2"
-source = "git+https://github.com/kenz-gelsoft/wxrust-vendored-config#05cbea9d021800d5b8d97beb54c29fc19b81adbd"
+source = "git+https://github.com/kenz-gelsoft/wxrust-vendored-config#c64171791fb00088f0ebd530fff675299e7518d3"
 dependencies = [
  "wx-x86_64-pc-windows-msvc",
 ]
