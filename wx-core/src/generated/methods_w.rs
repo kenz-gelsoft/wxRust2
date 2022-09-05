@@ -1626,12 +1626,7 @@ pub trait WindowMethods: EvtHandlerMethods {
         unsafe { ffi::wxWindow_Show(self.as_ptr(), show) }
     }
     // NOT_SUPPORTED: fn ShowWithEffect()
-    /// Gets the help text to be used as context-sensitive help for this window.
-    ///
-    /// See [C++ `wxWindow::GetHelpText()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_window.html#acb28971fe25abd1f5c6d768e203a042a).
-    fn get_help_text(&self) -> String {
-        unsafe { WxString::from_ptr(ffi::wxWindow_GetHelpText(self.as_ptr())).into() }
-    }
+    // BLOCKED: fn GetHelpText()
     /// Sets the help text to be used as context-sensitive help for this window.
     ///
     /// See [C++ `wxWindow::SetHelpText()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_window.html#a4c1a2cbc7363237b3a7c70af4e702c72).

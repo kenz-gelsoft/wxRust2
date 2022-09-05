@@ -18,9 +18,6 @@ bool wxRadioBox_Create1(wxRadioBox * self, wxWindow * parent, wxWindowID id, con
 bool wxRadioBox_Enable(wxRadioBox * self, unsigned int n, bool enable);
 unsigned int wxRadioBox_GetColumnCount(const wxRadioBox * self);
 int wxRadioBox_GetItemFromPoint(const wxRadioBox * self, const wxPoint * pt);
-#if wxCHECK_VERSION(3, 1, 7)
-wxString *wxRadioBox_GetItemHelpText(const wxRadioBox * self, unsigned int item);
-#endif
 wxToolTip * wxRadioBox_GetItemToolTip(const wxRadioBox * self, unsigned int item);
 unsigned int wxRadioBox_GetRowCount(const wxRadioBox * self);
 bool wxRadioBox_IsItemEnabled(const wxRadioBox * self, unsigned int n);

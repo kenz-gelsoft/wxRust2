@@ -236,9 +236,6 @@ bool wxWindow_IsShownOnScreen(const wxWindow * self);
 bool wxWindow_Disable(wxWindow * self);
 bool wxWindow_Enable(wxWindow * self, bool enable);
 bool wxWindow_Show(wxWindow * self, bool show);
-#if wxCHECK_VERSION(3, 1, 7)
-wxString *wxWindow_GetHelpText(const wxWindow * self);
-#endif
 void wxWindow_SetHelpText(wxWindow * self, const wxString * help_text);
 wxToolTip * wxWindow_GetToolTip(const wxWindow * self);
 wxString *wxWindow_GetToolTipText(const wxWindow * self);

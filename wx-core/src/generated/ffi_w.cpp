@@ -649,11 +649,6 @@ bool wxWindow_Enable(wxWindow * self, bool enable) {
 bool wxWindow_Show(wxWindow * self, bool show) {
     return self->Show(show);
 }
-#if wxCHECK_VERSION(3, 1, 7)
-wxString *wxWindow_GetHelpText(const wxWindow * self) {
-    return new wxString(self->GetHelpText());
-}
-#endif
 void wxWindow_SetHelpText(wxWindow * self, const wxString * help_text) {
     return self->SetHelpText(*help_text);
 }

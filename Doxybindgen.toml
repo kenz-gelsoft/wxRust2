@@ -605,6 +605,10 @@ blocklist = [
     # - Not supported before 3.2.0
     'ResetAlpha',
     'UseAlpha',
+    # Some feature disabled in vendored create
+    'SetDepth',
+    'SetHeight',
+    'SetWidth',
 ]
 wx31 = [
     'wxBitmap5',
@@ -618,13 +622,6 @@ wx31 = [
     'GetLogicalWidth',
     'Rescale',
     'SetScaleFactor',
-]
-wx317 = [
-    # Doc isn't up-to-date in wx3.1.6
-    'wxBitmap9',
-    'SetDepth',
-    'SetHeight',
-    'SetWidth',
 ]
 not_windows = [
     # FIXME: FindHandler on MSW requires dynamic_cast in C++ generated code.
@@ -1281,17 +1278,15 @@ blocklist = [
 [types.wxIcon]
 blocklist = [
     'operator=',
+    # Some feature disabled in vendored create
+    'SetDepth',
+    'SetHeight',
+    'SetWidth',
 ]
 wx31 = [
     'GetLogicalHeight',
     'GetLogicalSize',
     'GetLogicalWidth',
-]
-wx317 = [
-    # Doc isn't up-to-date in wx3.1.6
-    'SetDepth',
-    'SetHeight',
-    'SetWidth',
 ]
 [types.wxIconBundle]
 blocklist = [
@@ -1591,8 +1586,8 @@ blocklist = [
     'wxPrintout',
 ]
 [types.wxRadioBox]
-wx317 = [
-    # Doc isn't up-to-date in wx3.1.6
+blocklist = [
+    # help disabled in vendored crate
     'GetItemHelpText',
 ]
 [types.wxRadioButton]
@@ -1985,9 +1980,7 @@ blocklist = [
     'GetChildren',
     'GetCursor',
     'GetUpdateRegion',
-]
-wx317 = [
-    # Doc isn't up-to-date in wx3.1.6
+    # help disabled in vendored crate
     'GetHelpText',
 ]
 not_gtk = [

@@ -255,16 +255,8 @@ pub trait BitmapMethods: GDIObjectMethods {
     // NOT_SUPPORTED: fn LoadFile()
     // BLOCKED: fn ResetAlpha()
     // NOT_SUPPORTED: fn SaveFile()
-    ///
-    /// See [C++ `wxBitmap::SetDepth()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap.html#ac2d3b023cf64f90fa1257eb874ed015e).
-    fn set_depth(&self, depth: c_int) {
-        unsafe { ffi::wxBitmap_SetDepth(self.as_ptr(), depth) }
-    }
-    ///
-    /// See [C++ `wxBitmap::SetHeight()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap.html#a0091921ee85f7444e846e6183ec64909).
-    fn set_height(&self, height: c_int) {
-        unsafe { ffi::wxBitmap_SetHeight(self.as_ptr(), height) }
-    }
+    // BLOCKED: fn SetDepth()
+    // BLOCKED: fn SetHeight()
     /// Sets the bitmap scale factor.
     ///
     /// See [C++ `wxBitmap::SetScaleFactor()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap.html#a096efa16cbdecd6ad9ebb65ce3b65407).
@@ -292,11 +284,7 @@ pub trait BitmapMethods: GDIObjectMethods {
             ffi::wxBitmap_SetPalette(self.as_ptr(), palette)
         }
     }
-    ///
-    /// See [C++ `wxBitmap::SetWidth()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap.html#a82c54a43db80f31c9ff70b0e18a1d972).
-    fn set_width(&self, width: c_int) {
-        unsafe { ffi::wxBitmap_SetWidth(self.as_ptr(), width) }
-    }
+    // BLOCKED: fn SetWidth()
     // BLOCKED: fn UseAlpha()
     /// Adds a handler to the end of the static list of format handlers.
     ///

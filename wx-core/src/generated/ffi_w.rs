@@ -269,7 +269,7 @@ extern "C" {
     pub fn wxWindow_Enable(self_: *mut c_void, enable: bool) -> bool;
     pub fn wxWindow_Show(self_: *mut c_void, show: bool) -> bool;
     // NOT_SUPPORTED: pub fn wxWindow_ShowWithEffect(self_: *mut c_void, effect: wxShowEffect, timeout: c_uint) -> bool;
-    pub fn wxWindow_GetHelpText(self_: *const c_void) -> *mut c_void;
+    // BLOCKED: pub fn wxWindow_GetHelpText(self_: *const c_void) -> wxString;
     pub fn wxWindow_SetHelpText(self_: *mut c_void, help_text: *const c_void);
     // NOT_SUPPORTED: pub fn wxWindow_GetHelpTextAtPoint(self_: *const c_void, point: *const c_void, origin: wxHelpEvent::Origin) -> *mut c_void;
     pub fn wxWindow_GetToolTip(self_: *const c_void) -> *mut c_void;

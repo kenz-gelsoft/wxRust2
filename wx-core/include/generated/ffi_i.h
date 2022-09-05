@@ -29,11 +29,6 @@ double wxIcon_GetScaleFactor(const wxIcon * self);
 wxSize *wxIcon_GetSize(const wxIcon * self);
 int wxIcon_GetWidth(const wxIcon * self);
 bool wxIcon_IsOk(const wxIcon * self);
-#if wxCHECK_VERSION(3, 1, 7)
-void wxIcon_SetDepth(wxIcon * self, int depth);
-void wxIcon_SetHeight(wxIcon * self, int height);
-void wxIcon_SetWidth(wxIcon * self, int width);
-#endif
 
 // CLASS: wxIconBundle
 wxClassInfo *wxIconBundle_CLASSINFO();

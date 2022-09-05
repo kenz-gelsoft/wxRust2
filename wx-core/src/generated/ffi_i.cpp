@@ -50,17 +50,6 @@ int wxIcon_GetWidth(const wxIcon * self) {
 bool wxIcon_IsOk(const wxIcon * self) {
     return self->IsOk();
 }
-#if wxCHECK_VERSION(3, 1, 7)
-void wxIcon_SetDepth(wxIcon * self, int depth) {
-    return self->SetDepth(depth);
-}
-void wxIcon_SetHeight(wxIcon * self, int height) {
-    return self->SetHeight(height);
-}
-void wxIcon_SetWidth(wxIcon * self, int width) {
-    return self->SetWidth(width);
-}
-#endif
 
 // CLASS: wxIconBundle
 wxClassInfo *wxIconBundle_CLASSINFO() {

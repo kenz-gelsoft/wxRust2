@@ -36,7 +36,7 @@ extern "C" {
     pub fn wxRadioBox_Enable(self_: *mut c_void, n: c_uint, enable: bool) -> bool;
     pub fn wxRadioBox_GetColumnCount(self_: *const c_void) -> c_uint;
     pub fn wxRadioBox_GetItemFromPoint(self_: *const c_void, pt: *const c_void) -> c_int;
-    pub fn wxRadioBox_GetItemHelpText(self_: *const c_void, item: c_uint) -> *mut c_void;
+    // BLOCKED: pub fn wxRadioBox_GetItemHelpText(self_: *const c_void, item: c_uint) -> wxString;
     pub fn wxRadioBox_GetItemToolTip(self_: *const c_void, item: c_uint) -> *mut c_void;
     pub fn wxRadioBox_GetRowCount(self_: *const c_void) -> c_uint;
     pub fn wxRadioBox_IsItemEnabled(self_: *const c_void, n: c_uint) -> bool;

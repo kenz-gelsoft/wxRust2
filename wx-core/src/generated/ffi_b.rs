@@ -94,12 +94,12 @@ extern "C" {
     // NOT_SUPPORTED: pub fn wxBitmap_LoadFile(self_: *mut c_void, name: *const c_void, type_: wxBitmapType) -> bool;
     // BLOCKED: pub fn wxBitmap_ResetAlpha(self_: *mut c_void);
     // NOT_SUPPORTED: pub fn wxBitmap_SaveFile(self_: *const c_void, name: *const c_void, type_: wxBitmapType, palette: *const c_void) -> bool;
-    pub fn wxBitmap_SetDepth(self_: *mut c_void, depth: c_int);
-    pub fn wxBitmap_SetHeight(self_: *mut c_void, height: c_int);
+    // BLOCKED: pub fn wxBitmap_SetDepth(self_: *mut c_void, depth: c_int);
+    // BLOCKED: pub fn wxBitmap_SetHeight(self_: *mut c_void, height: c_int);
     pub fn wxBitmap_SetScaleFactor(self_: *mut c_void, scale: c_double);
     pub fn wxBitmap_SetMask(self_: *mut c_void, mask: *mut c_void);
     pub fn wxBitmap_SetPalette(self_: *mut c_void, palette: *const c_void);
-    pub fn wxBitmap_SetWidth(self_: *mut c_void, width: c_int);
+    // BLOCKED: pub fn wxBitmap_SetWidth(self_: *mut c_void, width: c_int);
     // BLOCKED: pub fn wxBitmap_UseAlpha(self_: *mut c_void, use_: bool) -> bool;
     pub fn wxBitmap_AddHandler(handler: *mut c_void);
     pub fn wxBitmap_CleanUpHandlers();
