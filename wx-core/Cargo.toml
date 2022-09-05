@@ -10,15 +10,11 @@ license = "MIT"
 [features]
 vendored = [
     "wxrust-config/vendored",
-    "dep:wx-universal-apple-darwin",
     "dep:wx-x86_64-pc-windows-gnu",
 ]
 
 [dependencies]
 wx-base = { path = "../wx-base", package="wxrust-base" }
-
-[target.'cfg(target_os = "macos")'.dependencies]
-wx-universal-apple-darwin = { git = "https://github.com/ancwrd1/wx-universal-apple-darwin", optional = true }
 
 [target.x86_64-pc-windows-gnu.dependencies]
 wx-x86_64-pc-windows-gnu = { git = "https://github.com/ancwrd1/wx-x86_64-pc-windows-gnu", optional = true }
