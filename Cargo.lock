@@ -76,17 +76,17 @@ dependencies = [
 [[package]]
 name = "wx-universal-apple-darwin"
 version = "3.2.0"
-source = "git+https://github.com/kenz-gelsoft/wx-universal-apple-darwin?branch=runtime_api#b5eeda0ce803d4d2f9f3e9953339a30c8bc9e09b"
+source = "git+https://github.com/ancwrd1/wx-universal-apple-darwin#0471f55767008ca0e0d1a5c87ae91d892cdedc42"
 
 [[package]]
 name = "wx-x86_64-pc-windows-gnu"
 version = "3.2.0"
-source = "git+https://github.com/kenz-gelsoft/wx-x86_64-pc-windows-gnu?branch=runtime_api#a64384e4b5752c75cdb230d481074344213aadfb"
+source = "git+https://github.com/ancwrd1/wx-x86_64-pc-windows-gnu#00386ca3ae1337a21529af86e623f88b7ba0aae0"
 
 [[package]]
 name = "wx-x86_64-pc-windows-msvc"
 version = "3.2.0"
-source = "git+https://github.com/kenz-gelsoft/wx-x86_64-pc-windows-msvc?branch=runtime_api#d8221552bc37e725aabe10a56b9b2aa55e40ab55"
+source = "git+https://github.com/kenz-gelsoft/wx-x86_64-pc-windows-msvc#db0313072df2fc205847b81637ca1c145cf142f8"
 
 [[package]]
 name = "wxrust"
@@ -115,7 +115,7 @@ dependencies = [
 [[package]]
 name = "wxrust-config"
 version = "0.0.1-alpha2"
-source = "git+https://github.com/kenz-gelsoft/wxrust-vendored-config#a53b942318b11e5b35e8af39a9e253d379baff87"
+source = "git+https://github.com/kenz-gelsoft/wxrust-vendored-config#9872ba5061869d6cacac678e99e5b2c001ac47cd"
 dependencies = [
  "wx-universal-apple-darwin",
  "wx-x86_64-pc-windows-gnu",
