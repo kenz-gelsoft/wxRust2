@@ -76,7 +76,7 @@ dependencies = [
 [[package]]
 name = "wx-universal-apple-darwin"
 version = "3.2.0"
-source = "git+https://github.com/kenz-gelsoft/wx-universal-apple-darwin?branch=runtime_api#0cc56ca2f487fab5a52a60d3bc226d1bdd2ffcea"
+source = "git+https://github.com/kenz-gelsoft/wx-universal-apple-darwin?branch=runtime_api#b5eeda0ce803d4d2f9f3e9953339a30c8bc9e09b"
 
 [[package]]
 name = "wx-x86_64-pc-windows-gnu"
