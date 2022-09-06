@@ -1178,10 +1178,11 @@ blocklist = [
 blocklist = [
     # some of our CI env built without printing
     'CreateContext3',
+    # our vendored crate doesn't support
+    'GetDirect2DRenderer',
 ]
 windows = [
     'CreateContext4',
-    'GetDirect2DRenderer',
     'GetGDIPlusRenderer',
 ]
 wx31 = [

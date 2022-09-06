@@ -704,9 +704,6 @@ wxGraphicsRenderer * wxGraphicsRenderer_GetCairoRenderer() {
 wxGraphicsRenderer * wxGraphicsRenderer_GetGDIPlusRenderer() {
     return wxGraphicsRenderer::GetGDIPlusRenderer();
 }
-wxGraphicsRenderer * wxGraphicsRenderer_GetDirect2DRenderer() {
-    return wxGraphicsRenderer::GetDirect2DRenderer();
-}
 #endif
 
 // CLASS: wxGridBagSizer

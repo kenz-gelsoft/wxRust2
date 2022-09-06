@@ -1628,12 +1628,7 @@ pub trait GraphicsRendererMethods: ObjectMethods {
     fn get_gdi_plus_renderer() -> Option<GraphicsRendererIsOwned<false>> {
         unsafe { GraphicsRenderer::option_from(ffi::wxGraphicsRenderer_GetGDIPlusRenderer()) }
     }
-    /// Returns Direct2D renderer (MSW only).
-    ///
-    /// See [C++ `wxGraphicsRenderer::GetDirect2DRenderer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_renderer.html#afb1995eef02b02c7724dcd90443c1c2d).
-    fn get_direct2_d_renderer() -> Option<GraphicsRendererIsOwned<false>> {
-        unsafe { GraphicsRenderer::option_from(ffi::wxGraphicsRenderer_GetDirect2DRenderer()) }
-    }
+    // BLOCKED: fn GetDirect2DRenderer()
 }
 
 // wxGridBagSizer
