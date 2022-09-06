@@ -53,11 +53,9 @@ wxBitmap *wxBitmap_new6(const char *const * bits) {
 wxBitmap *wxBitmap_new8(const wxImage * img, int depth) {
     return new wxBitmap(*img, depth);
 }
-#endif
 wxBitmap *wxBitmap_new9(const wxImage * img, const wxDC * dc) {
     return new wxBitmap(*img, *dc);
 }
-#if wxCHECK_VERSION(3, 1, 0)
 wxBitmap *wxBitmap_new10(const wxCursor * cursor) {
     return new wxBitmap(*cursor);
 }

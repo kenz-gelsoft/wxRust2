@@ -40,9 +40,7 @@ wxBitmap *wxBitmap_new5(int width, int height, const wxDC * dc);
 wxBitmap *wxBitmap_new6(const char *const * bits);
 #if wxCHECK_VERSION(3, 1, 0)
 wxBitmap *wxBitmap_new8(const wxImage * img, int depth);
-#endif
 wxBitmap *wxBitmap_new9(const wxImage * img, const wxDC * dc);
-#if wxCHECK_VERSION(3, 1, 0)
 wxBitmap *wxBitmap_new10(const wxCursor * cursor);
 #endif
 wxImage *wxBitmap_ConvertToImage(const wxBitmap * self);

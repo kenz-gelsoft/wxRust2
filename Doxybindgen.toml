@@ -613,6 +613,7 @@ blocklist = [
 wx31 = [
     'wxBitmap5',
     'wxBitmap8',
+    'wxBitmap9',
     'wxBitmap10',
     'CreateWithDIPSize',
     'CreateWithDIPSize1',
