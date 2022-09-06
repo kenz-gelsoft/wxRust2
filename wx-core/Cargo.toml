@@ -10,14 +10,10 @@ license = "MIT"
 [features]
 vendored = [
     "wxrust-config/vendored",
-    "dep:wx-x86_64-pc-windows-gnu",
 ]
 
 [dependencies]
 wx-base = { path = "../wx-base", package="wxrust-base" }
-
-[target.x86_64-pc-windows-gnu.dependencies]
-wx-x86_64-pc-windows-gnu = { git = "https://github.com/ancwrd1/wx-x86_64-pc-windows-gnu", optional = true }
 
 [build-dependencies]
 cc = "1.0.72"
