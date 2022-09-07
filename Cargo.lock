@@ -115,7 +115,7 @@ dependencies = [
 [[package]]
 name = "wxrust-config"
 version = "0.0.1-alpha2"
-source = "git+https://github.com/kenz-gelsoft/wxrust-vendored-config#9872ba5061869d6cacac678e99e5b2c001ac47cd"
+source = "git+https://github.com/kenz-gelsoft/wxrust-vendored-config#245f52f79fe51997d68e61d7f03178788ca170ff"
 dependencies = [
  "wx-universal-apple-darwin",
  "wx-x86_64-pc-windows-gnu",
