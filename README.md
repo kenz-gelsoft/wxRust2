@@ -50,12 +50,11 @@ You can use prebuilt wx binaries without installing wxWidgets system-wide.
 
 1. Specify `--features vendored` to cargo.
 2. Override `wxrust-config` crate dependency with the following git respositry crate (or your fork of it):
-    ```
+    ```toml
     [patch.crates-io]
     wxrust-config = { git = "https://github.com/kenz-gelsoft/wxrust-vendored-config" }
     ```
-
-(You need to specify git or local separate repo's crate, as `crates.io` won't host crates with (large) binary crates such as this.)
+    - You need to specify git or local separate repo's crate, as `crates.io` won't host crates with (large) binary crates such as this.
 
 This configuration links to following per-build-target crates by default. You should be able to [override this by crate name](https://doc.rust-lang.org/cargo/reference/overriding-dependencies.html):
 
