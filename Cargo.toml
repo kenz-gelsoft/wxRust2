@@ -11,5 +11,5 @@ members = [
 ]
 
 [patch.crates-io]
-# wxrust-config = { path = "wxrust-config" }
-wxrust-config = { git = "https://github.com/kenz-gelsoft/wxrust-vendored-config" }
+wxrust-config = { path = "wxrust-config" }
+# wxrust-config = { git = "https://github.com/kenz-gelsoft/wxrust-vendored-config" }
