@@ -79,7 +79,7 @@ version = "0.0.1-alpha"
 dependencies = [
  "cc",
  "wxrust-base",
- "wxrust-config",
+ "wxrust-config 0.0.1-alpha2 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -87,12 +87,21 @@ name = "wxrust-base"
 version = "0.0.1-alpha"
 dependencies = [
  "cc",
- "wxrust-config",
+ "wxrust-config 0.0.1-alpha2 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "wxrust-config"
 version = "0.0.1-alpha2"
+dependencies = [
+ "cc",
+]
+
+[[package]]
+name = "wxrust-config"
+version = "0.0.1-alpha2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fc9101a2b1cdbb24f95fad6f6dbb581ca8e115de8fc363beaa2f7e7b8b6dbdd2"
 dependencies = [
  "cc",
 ]
