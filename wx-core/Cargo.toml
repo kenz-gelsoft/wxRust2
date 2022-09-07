@@ -13,7 +13,8 @@ vendored = [
 ]
 
 [dependencies]
-wx-base = { path = "../wx-base", package="wxrust-base" }
+wx-base = { version = "0.0.1-alpha", package = "wxrust-base" }
+# wx-base = { path = "../wx-base", package="wxrust-base" }
 
 [build-dependencies]
 cc = "1.0.72"
