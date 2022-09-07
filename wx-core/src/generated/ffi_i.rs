@@ -24,9 +24,9 @@ extern "C" {
     pub fn wxIcon_GetWidth(self_: *const c_void) -> c_int;
     pub fn wxIcon_IsOk(self_: *const c_void) -> bool;
     // NOT_SUPPORTED: pub fn wxIcon_LoadFile(self_: *mut c_void, name: *const c_void, type_: wxBitmapType, desired_width: c_int, desired_height: c_int) -> bool;
-    pub fn wxIcon_SetDepth(self_: *mut c_void, depth: c_int);
-    pub fn wxIcon_SetHeight(self_: *mut c_void, height: c_int);
-    pub fn wxIcon_SetWidth(self_: *mut c_void, width: c_int);
+    // BLOCKED: pub fn wxIcon_SetDepth(self_: *mut c_void, depth: c_int);
+    // BLOCKED: pub fn wxIcon_SetHeight(self_: *mut c_void, height: c_int);
+    // BLOCKED: pub fn wxIcon_SetWidth(self_: *mut c_void, width: c_int);
     // BLOCKED: pub fn wxIcon_operator=(self_: *mut c_void, icon: *const c_void) -> *mut c_void;
 
     // wxIconBundle

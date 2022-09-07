@@ -72,21 +72,9 @@ pub trait IconMethods: GDIObjectMethods {
         unsafe { ffi::wxIcon_IsOk(self.as_ptr()) }
     }
     // NOT_SUPPORTED: fn LoadFile()
-    ///
-    /// See [C++ `wxIcon::SetDepth()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon.html#ae2099848c41aa2031fe70649c9279816).
-    fn set_depth(&self, depth: c_int) {
-        unsafe { ffi::wxIcon_SetDepth(self.as_ptr(), depth) }
-    }
-    ///
-    /// See [C++ `wxIcon::SetHeight()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon.html#a5c5d857cd6fda4ecc05ba4820d4aa2fe).
-    fn set_height(&self, height: c_int) {
-        unsafe { ffi::wxIcon_SetHeight(self.as_ptr(), height) }
-    }
-    ///
-    /// See [C++ `wxIcon::SetWidth()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon.html#add437e80330ad01742421d2b1d66e2d5).
-    fn set_width(&self, width: c_int) {
-        unsafe { ffi::wxIcon_SetWidth(self.as_ptr(), width) }
-    }
+    // BLOCKED: fn SetDepth()
+    // BLOCKED: fn SetHeight()
+    // BLOCKED: fn SetWidth()
     // BLOCKED: fn operator=()
 }
 

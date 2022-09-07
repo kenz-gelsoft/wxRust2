@@ -78,12 +78,7 @@ pub trait RadioBoxMethods: ControlMethods {
             ffi::wxRadioBox_GetItemFromPoint(self.as_ptr(), pt)
         }
     }
-    /// Returns the helptext associated with the specified item if any or wxEmptyString.
-    ///
-    /// See [C++ `wxRadioBox::GetItemHelpText()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_radio_box.html#a46c5a252960ba84c10074f462bb6499f).
-    fn get_item_help_text(&self, item: c_uint) -> String {
-        unsafe { WxString::from_ptr(ffi::wxRadioBox_GetItemHelpText(self.as_ptr(), item)).into() }
-    }
+    // BLOCKED: fn GetItemHelpText()
     /// Returns the tooltip associated with the specified item if any or NULL.
     ///
     /// See [C++ `wxRadioBox::GetItemToolTip()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_radio_box.html#aae17bd6b2707de2d93ab1fba78850a41).

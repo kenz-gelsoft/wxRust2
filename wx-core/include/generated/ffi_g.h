@@ -293,7 +293,6 @@ wxGraphicsRenderer * wxGraphicsRenderer_GetDefaultRenderer();
 wxGraphicsRenderer * wxGraphicsRenderer_GetCairoRenderer();
 #ifdef __WXMSW__
 wxGraphicsRenderer * wxGraphicsRenderer_GetGDIPlusRenderer();
-wxGraphicsRenderer * wxGraphicsRenderer_GetDirect2DRenderer();
 #endif
 
 // CLASS: wxGridBagSizer

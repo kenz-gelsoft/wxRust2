@@ -538,7 +538,7 @@ extern "C" {
     pub fn wxGraphicsRenderer_GetDefaultRenderer() -> *mut c_void;
     pub fn wxGraphicsRenderer_GetCairoRenderer() -> *mut c_void;
     pub fn wxGraphicsRenderer_GetGDIPlusRenderer() -> *mut c_void;
-    pub fn wxGraphicsRenderer_GetDirect2DRenderer() -> *mut c_void;
+    // BLOCKED: pub fn wxGraphicsRenderer_GetDirect2DRenderer() -> *mut c_void;
 
     // wxGridBagSizer
     pub fn wxGridBagSizer_CLASSINFO() -> *mut c_void;

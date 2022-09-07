@@ -53,13 +53,9 @@ wxBitmap *wxBitmap_new6(const char *const * bits) {
 wxBitmap *wxBitmap_new8(const wxImage * img, int depth) {
     return new wxBitmap(*img, depth);
 }
-#endif
-#if wxCHECK_VERSION(3, 1, 7)
 wxBitmap *wxBitmap_new9(const wxImage * img, const wxDC * dc) {
     return new wxBitmap(*img, *dc);
 }
-#endif
-#if wxCHECK_VERSION(3, 1, 0)
 wxBitmap *wxBitmap_new10(const wxCursor * cursor) {
     return new wxBitmap(*cursor);
 }
@@ -145,14 +141,6 @@ bool wxBitmap_HasAlpha(const wxBitmap * self) {
 bool wxBitmap_IsOk(const wxBitmap * self) {
     return self->IsOk();
 }
-#if wxCHECK_VERSION(3, 1, 7)
-void wxBitmap_SetDepth(wxBitmap * self, int depth) {
-    return self->SetDepth(depth);
-}
-void wxBitmap_SetHeight(wxBitmap * self, int height) {
-    return self->SetHeight(height);
-}
-#endif
 #if wxCHECK_VERSION(3, 1, 0)
 void wxBitmap_SetScaleFactor(wxBitmap * self, double scale) {
     return self->SetScaleFactor(scale);
@@ -164,11 +152,6 @@ void wxBitmap_SetMask(wxBitmap * self, wxMask * mask) {
 void wxBitmap_SetPalette(wxBitmap * self, const wxPalette * palette) {
     return self->SetPalette(*palette);
 }
-#if wxCHECK_VERSION(3, 1, 7)
-void wxBitmap_SetWidth(wxBitmap * self, int width) {
-    return self->SetWidth(width);
-}
-#endif
 void wxBitmap_AddHandler(wxBitmapHandler * handler) {
     return wxBitmap::AddHandler(handler);
 }

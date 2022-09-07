@@ -24,11 +24,6 @@ unsigned int wxRadioBox_GetColumnCount(const wxRadioBox * self) {
 int wxRadioBox_GetItemFromPoint(const wxRadioBox * self, const wxPoint * pt) {
     return self->GetItemFromPoint(*pt);
 }
-#if wxCHECK_VERSION(3, 1, 7)
-wxString *wxRadioBox_GetItemHelpText(const wxRadioBox * self, unsigned int item) {
-    return new wxString(self->GetItemHelpText(item));
-}
-#endif
 wxToolTip * wxRadioBox_GetItemToolTip(const wxRadioBox * self, unsigned int item) {
     return self->GetItemToolTip(item);
 }
