@@ -74,12 +74,27 @@ dependencies = [
 ]
 
 [[package]]
+name = "wx-universal-apple-darwin"
+version = "3.2.0"
+source = "git+https://github.com/ancwrd1/wx-universal-apple-darwin#0471f55767008ca0e0d1a5c87ae91d892cdedc42"
+
+[[package]]
+name = "wx-x86_64-pc-windows-gnu"
+version = "3.2.0"
+source = "git+https://github.com/ancwrd1/wx-x86_64-pc-windows-gnu#00386ca3ae1337a21529af86e623f88b7ba0aae0"
+
+[[package]]
+name = "wx-x86_64-pc-windows-msvc"
+version = "3.2.0"
+source = "git+https://github.com/kenz-gelsoft/wx-x86_64-pc-windows-msvc#db0313072df2fc205847b81637ca1c145cf142f8"
+
+[[package]]
 name = "wxrust"
 version = "0.0.1-alpha"
 dependencies = [
  "cc",
  "wxrust-base 0.0.1-alpha (registry+https://github.com/rust-lang/crates.io-index)",
- "wxrust-config 0.0.1-alpha2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "wxrust-config 0.0.1-alpha2 (git+https://github.com/kenz-gelsoft/wxrust-vendored-config)",
 ]
 
 [[package]]
@@ -87,7 +102,7 @@ name = "wxrust-base"
 version = "0.0.1-alpha"
 dependencies = [
  "cc",
- "wxrust-config 0.0.1-alpha2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "wxrust-config 0.0.1-alpha2 (git+https://github.com/kenz-gelsoft/wxrust-vendored-config)",
 ]
 
 [[package]]
@@ -97,7 +112,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e7d411b4530d57b455a34d328b7661a67ef8a12f30daf7432c2ab321cb507faa"
 dependencies = [
  "cc",
- "wxrust-config 0.0.1-alpha2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "wxrust-config 0.0.1-alpha2 (git+https://github.com/kenz-gelsoft/wxrust-vendored-config)",
 ]
 
 [[package]]
@@ -110,8 +125,9 @@ dependencies = [
 [[package]]
 name = "wxrust-config"
 version = "0.0.1-alpha2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fc9101a2b1cdbb24f95fad6f6dbb581ca8e115de8fc363beaa2f7e7b8b6dbdd2"
+source = "git+https://github.com/kenz-gelsoft/wxrust-vendored-config#245f52f79fe51997d68e61d7f03178788ca170ff"
 dependencies = [
- "cc",
+ "wx-universal-apple-darwin",
+ "wx-x86_64-pc-windows-gnu",
+ "wx-x86_64-pc-windows-msvc",
 ]
