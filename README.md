@@ -12,7 +12,7 @@ This is my 2nd exploration of binding [the wxWidgets cross-platform toolkit](htt
 2. Specify wxrust dependency
     ```TOML
     [dependencies]
-    wx = { version = "0.0.*", package = "wxrust" }
+    wx = { version = "0.0.1-alpha", package = "wxrust" }
     ```
 
 See documentation (after crate released) or [wx-core/README.md](wx-core/README.md) for more details.
