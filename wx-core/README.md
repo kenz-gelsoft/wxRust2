@@ -8,7 +8,7 @@ It is recommended to specify dependency to this library [with renaming](https://
 
 ```TOML
 [dependencies]
-wx = { version = "0.0.*", package = "wxrust" }
+wx = { version = "0.0.1-alpha", package = "wxrust" }
 ```
 
 ## Example

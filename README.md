@@ -12,7 +12,7 @@ This is my 2nd exploration of binding [the wxWidgets cross-platform toolkit](htt
 2. Specify wxrust dependency
     ```TOML
     [dependencies]
-    wx = { version = "0.0.*", package = "wxrust" }
+    wx = { version = "0.0.1-alpha", package = "wxrust" }
     ```
 
 See documentation (after crate released) or [wx-core/README.md](wx-core/README.md) for more details.
@@ -23,8 +23,8 @@ Install the wxWidgets library. Currently (not fully) supported library versions:
 
 |wx   |Windows |macOS   |Linux   |
 |-----|--------|--------|--------|
-|3.2  |[Official MSVC Binary](#windows)|[Homebrew](#macos)|[Codelite repo](#linux)|
-|3.1.6|[Vendored](#use-vendored-wx-binary-crate)<br>MinGW64 Static|[Vendored](#use-vendored-wx-binary-crate)<br>Universal Static|N/A|
+|3.2.0 Installed|[Official MSVC DLL](#windows)|[Homebrew](#macos)|[Codelite repo](#linux)|
+|3.2.0 [Vendored](#use-vendored-wx-binary-crate)|MinGW64 Static|Universal Static|N/A|
 |3.0.5|N/A|N/A|[Ubuntu Package](#linux)|
 
 Following installation method are (somewhat) tested with:
