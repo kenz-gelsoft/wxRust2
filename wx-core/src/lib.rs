@@ -72,6 +72,7 @@ mod ffi {
         // wxBitmapBundle compatibility hack(for a while)
         pub fn wxBitmapBundle_From(bitmap: *mut c_void) -> *mut c_void;
 
+        pub fn wxRustLaunchDefaultBrowser(url: *const c_void, flags: c_int);
         pub fn wxRustMessageBox(
             message: *const c_void,
             caption: *const c_void,
@@ -1418,6 +1419,76 @@ impl<'a, P: WindowMethods> FileCtrlBuilder<'a, P> {
     }
 }
 
+pub struct FileDialogBuilder<'a, P: WindowMethods> {
+    parent: Option<&'a P>,
+    message: String,
+    default_directory: String,
+    default_filename: String,
+    wildcard: String,
+    style: c_long,
+    pos: Option<Point>,
+    size: Option<Size>,
+}
+impl<'a, P: WindowMethods> Buildable<'a, P, FileDialogBuilder<'a, P>> for FileDialog {
+    fn builder(parent: Option<&'a P>) -> FileDialogBuilder<'a, P> {
+        FileDialogBuilder {
+            parent: parent,
+            message: "".to_owned(), // TODO: wxFileSelectorPromptStr,
+            default_directory: "".to_owned(),
+            default_filename: "".to_owned(),
+            wildcard: FILE_SELECTOR_DEFAULT_WILDCARD_STR.to_owned(),
+            style: FD_DEFAULT_STYLE.into(),
+            pos: None,
+            size: None,
+        }
+    }
+}
+impl<'a, P: WindowMethods> FileDialogBuilder<'a, P> {
+    pub fn message(&mut self, message: &str) -> &mut Self {
+        self.message = message.to_owned();
+        self
+    }
+    pub fn default_directory(&mut self, default_directory: &str) -> &mut Self {
+        self.default_directory = default_directory.to_owned();
+        self
+    }
+    pub fn default_filename(&mut self, default_filename: &str) -> &mut Self {
+        self.default_filename = default_filename.to_owned();
+        self
+    }
+    pub fn wildcard(&mut self, wildcard: &str) -> &mut Self {
+        self.wildcard = wildcard.to_owned();
+        self
+    }
+    pub fn style(&mut self, style: c_long) -> &mut Self {
+        self.style = style;
+        self
+    }
+    pub fn pos(&mut self, pos: Point) -> &mut Self {
+        self.pos = Some(pos);
+        self
+    }
+    pub fn size(&mut self, size: Size) -> &mut Self {
+        self.size = Some(size);
+        self
+    }
+    pub fn build(&mut self) -> FileDialog {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
+        FileDialog::new(
+            self.parent,
+            &self.message,
+            &self.default_directory,
+            &self.default_filename,
+            &self.wildcard,
+            self.style,
+            &pos,
+            &size,
+            "",
+        )
+    }
+}
+
 pub struct ListBoxBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
@@ -2421,6 +2492,14 @@ impl<'a, T: WindowMethods> Drop for WindowUpdateLocker<'a, T> {
         if let Some(window) = self.0 {
             window.thaw();
         }
+    }
+}
+
+pub fn launch_default_browser(url: &str, flags: c_int) {
+    unsafe {
+        let url = WxString::from(url);
+        let url = url.as_ptr();
+        ffi::wxRustLaunchDefaultBrowser(url, flags)
     }
 }
 
