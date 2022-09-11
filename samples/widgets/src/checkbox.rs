@@ -257,8 +257,16 @@ impl WidgetsPage for CheckBoxWidgetsPage {
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
         self.on_style_change();
     }
-    fn handle_update_ui(&self, _: &wx::UpdateUIEvent) {
-        // Update UI
+    fn handle_update_ui(&self, event: &wx::UpdateUIEvent) {
+        if let (Some(m), Some(checkbox)) = (
+            CheckboxPage::from(event.get_id()),
+            self.checkbox.borrow().as_ref(),
+        ) {
+            match m {
+                CheckboxPage::PartCheck => event.enable(checkbox.is3_state()),
+                _ => (),
+            };
+        }
     }
 }
 impl CheckBoxWidgetsPage {
