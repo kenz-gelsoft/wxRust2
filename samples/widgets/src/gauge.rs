@@ -274,6 +274,9 @@ impl WidgetsPage for GaugeWidgetsPage {
             self.on_check_or_radio_box(config_ui);
         }
     }
+    fn handle_update_ui(&self, _: &wx::UpdateUIEvent) {
+        // Update UI
+    }
 }
 impl GaugeWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {

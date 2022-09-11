@@ -250,6 +250,12 @@ impl WidgetsFrame {
             .bind(wx::RustEvent::RadioBox, move |event: &wx::CommandEvent| {
                 frame_copy.current_page().handle_radiobox(event);
             });
+        let frame_copy = frame.clone();
+        frame
+            .base
+            .bind(wx::RustEvent::UpdateUI, move |event: &wx::UpdateUIEvent| {
+                frame_copy.current_page().handle_update_ui(event);
+            });
 
         frame
     }
@@ -426,6 +432,7 @@ trait WidgetsPage {
     fn handle_button(&self, event: &wx::CommandEvent);
     fn handle_checkbox(&self, event: &wx::CommandEvent);
     fn handle_radiobox(&self, event: &wx::CommandEvent);
+    fn handle_update_ui(&self, event: &wx::UpdateUIEvent);
     fn create_content(&self);
 
     // Utility methods

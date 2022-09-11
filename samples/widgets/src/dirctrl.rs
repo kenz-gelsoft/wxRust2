@@ -316,6 +316,9 @@ impl WidgetsPage for DirCtrlWidgetsPage {
             self.on_radio_box(config_ui);
         }
     }
+    fn handle_update_ui(&self, _: &wx::UpdateUIEvent) {
+        // Update UI
+    }
 }
 impl DirCtrlWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {

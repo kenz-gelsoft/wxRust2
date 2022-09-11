@@ -349,6 +349,9 @@ impl WidgetsPage for SpinButtonWidgetsPage {
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
         // Do nothing.
     }
+    fn handle_update_ui(&self, _: &wx::UpdateUIEvent) {
+        // Update UI
+    }
 }
 impl SpinButtonWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {

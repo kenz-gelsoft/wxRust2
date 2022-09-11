@@ -197,6 +197,9 @@ impl WidgetsPage for HeaderCtrlWidgetsPage {
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
         self.on_style_check_or_radio_box();
     }
+    fn handle_update_ui(&self, _: &wx::UpdateUIEvent) {
+        // Update UI
+    }
 }
 impl HeaderCtrlWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {

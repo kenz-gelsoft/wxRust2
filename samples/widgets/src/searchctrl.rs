@@ -144,6 +144,9 @@ impl WidgetsPage for SearchCtrlWidgetsPage {
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
         // Do nothing
     }
+    fn handle_update_ui(&self, _: &wx::UpdateUIEvent) {
+        // Update UI
+    }
 }
 impl SearchCtrlWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {

@@ -483,6 +483,9 @@ impl WidgetsPage for ListboxWidgetsPage {
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
         self.on_check_or_radio_box();
     }
+    fn handle_update_ui(&self, _: &wx::UpdateUIEvent) {
+        // Update UI
+    }
 }
 impl ListboxWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {

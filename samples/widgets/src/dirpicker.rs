@@ -177,6 +177,9 @@ impl WidgetsPage for DirPickerWidgetsPage {
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
         // Do nothing
     }
+    fn handle_update_ui(&self, _: &wx::UpdateUIEvent) {
+        // Update UI
+    }
 }
 impl DirPickerWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {

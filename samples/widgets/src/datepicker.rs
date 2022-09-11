@@ -253,6 +253,9 @@ impl WidgetsPage for DatePickerWidgetsPage {
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
         // Do nothing
     }
+    fn handle_update_ui(&self, _: &wx::UpdateUIEvent) {
+        // Update UI
+    }
 }
 impl DatePickerWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {

@@ -219,6 +219,9 @@ impl WidgetsPage for FilePickerWidgetsPage {
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
         self.on_radio_box();
     }
+    fn handle_update_ui(&self, _: &wx::UpdateUIEvent) {
+        // Update UI
+    }
 }
 impl FilePickerWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {

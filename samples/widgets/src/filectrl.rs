@@ -261,6 +261,9 @@ impl WidgetsPage for FileCtrlWidgetsPage {
             self.on_switch_mode(config_ui);
         }
     }
+    fn handle_update_ui(&self, _: &wx::UpdateUIEvent) {
+        // Update UI
+    }
 }
 impl FileCtrlWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {

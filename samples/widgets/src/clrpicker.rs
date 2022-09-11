@@ -125,6 +125,9 @@ impl WidgetsPage for ColourPickerWidgetsPage {
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
         // Do nothing
     }
+    fn handle_update_ui(&self, _: &wx::UpdateUIEvent) {
+        // Update UI
+    }
 }
 impl ColourPickerWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {

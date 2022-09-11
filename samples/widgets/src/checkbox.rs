@@ -257,6 +257,9 @@ impl WidgetsPage for CheckBoxWidgetsPage {
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
         self.on_style_change();
     }
+    fn handle_update_ui(&self, _: &wx::UpdateUIEvent) {
+        // Update UI
+    }
 }
 impl CheckBoxWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {
