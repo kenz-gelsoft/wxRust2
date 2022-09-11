@@ -15,5 +15,6 @@ extern "C" {
     // wxBitmapBundle compatibility hack(for a while)
     void *wxBitmapBundle_From(wxBitmap *bitmap);
 
+    int wxRustLaunchDefaultBrowser(const wxString *url, int flags);
     int wxRustMessageBox(const wxString *message, const wxString *caption, int style, wxWindow *parent, int x, int y);
 }

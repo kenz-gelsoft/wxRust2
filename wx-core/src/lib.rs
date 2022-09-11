@@ -72,6 +72,7 @@ mod ffi {
         // wxBitmapBundle compatibility hack(for a while)
         pub fn wxBitmapBundle_From(bitmap: *mut c_void) -> *mut c_void;
 
+        pub fn wxRustLaunchDefaultBrowser(url: *const c_void, flags: c_int);
         pub fn wxRustMessageBox(
             message: *const c_void,
             caption: *const c_void,
@@ -2491,6 +2492,14 @@ impl<'a, T: WindowMethods> Drop for WindowUpdateLocker<'a, T> {
         if let Some(window) = self.0 {
             window.thaw();
         }
+    }
+}
+
+pub fn launch_default_browser(url: &str, flags: c_int) {
+    unsafe {
+        let url = WxString::from(url);
+        let url = url.as_ptr();
+        ffi::wxRustLaunchDefaultBrowser(url, flags)
     }
 }
 
