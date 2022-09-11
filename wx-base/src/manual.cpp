@@ -38,45 +38,28 @@ enum WxRustEvent {
 template<typename T> wxEventTypeTag<T> TypeTagOf(int eventType) {
     return wxEVT_NULL;
 }
-template<> wxEventTypeTag<wxBookCtrlEvent> TypeTagOf(int eventType) {
-    switch (eventType) {
-    case RUST_EVT_BOOKCTRL_PAGE_CHANGED:
-        return wxEVT_BOOKCTRL_PAGE_CHANGED;
+#define MAP_RUST_EVT(name) case RUST_EVT_##name: return wxEVT_##name;
+#define DEFINE_TYPE_TAG_OF_EVT(name, clazz) \
+    template<> wxEventTypeTag<clazz> TypeTagOf(int eventType) { \
+        return eventType == RUST_EVT_##name ? wxEVT_##name : wxEVT_NULL; \
     }
-    return wxEVT_NULL;
-}
+DEFINE_TYPE_TAG_OF_EVT(BOOKCTRL_PAGE_CHANGED, wxBookCtrlEvent)
 template<> wxEventTypeTag<wxCommandEvent> TypeTagOf(int eventType) {
     switch (eventType) {
-    case RUST_EVT_BUTTON:
-        return wxEVT_BUTTON;
-    case RUST_EVT_CHECKBOX:
-        return wxEVT_CHECKBOX;
-    case RUST_EVT_CHECKLISTBOX:
-        return wxEVT_CHECKLISTBOX;
-    case RUST_EVT_CHOICE:
-        return wxEVT_CHOICE;
-    case RUST_EVT_LISTBOX:
-        return wxEVT_LISTBOX;
-    case RUST_EVT_LISTBOX_DCLICK:
-        return wxEVT_LISTBOX_DCLICK;
-    case RUST_EVT_MENU:
-        return wxEVT_MENU;
-    case RUST_EVT_SLIDER:
-        return wxEVT_SLIDER;
-    case RUST_EVT_RADIOBOX:
-        return wxEVT_RADIOBOX;
-    case RUST_EVT_RADIOBUTTON:
-        return wxEVT_RADIOBUTTON;
+    MAP_RUST_EVT(BUTTON)
+    MAP_RUST_EVT(CHECKBOX)
+    MAP_RUST_EVT(CHECKLISTBOX)
+    MAP_RUST_EVT(CHOICE)
+    MAP_RUST_EVT(LISTBOX)
+    MAP_RUST_EVT(LISTBOX_DCLICK)
+    MAP_RUST_EVT(MENU)
+    MAP_RUST_EVT(SLIDER)
+    MAP_RUST_EVT(RADIOBOX)
+    MAP_RUST_EVT(RADIOBUTTON)
     }
     return wxEVT_NULL;
 }
-template<> wxEventTypeTag<wxTimerEvent> TypeTagOf(int eventType) {
-    switch (eventType) {
-    case RUST_EVT_TIMER:
-        return wxEVT_TIMER;
-    }
-    return wxEVT_NULL;
-}
+DEFINE_TYPE_TAG_OF_EVT(TIMER, wxTimerEvent)
 template<typename T> void BindIfEventIs(wxEvtHandler *self, int eventType, void *aFn, void *aParam) {
     wxEventTypeTag<T> typeTag = TypeTagOf<T>(eventType);
     if (typeTag != wxEVT_NULL) {
