@@ -97,6 +97,7 @@ template<typename T> wxEventTypeTag<T> TypeTagOf(int eventType) {
     }
 DEFINE_TYPE_TAG_OF_EVT(ASYNC_METHOD_CALL, wxAsyncMethodCallEvent)
 DEFINE_TYPE_TAG_OF_EVT(BOOKCTRL_PAGE_CHANGED, wxBookCtrlEvent)
+DEFINE_TYPE_TAG_OF_EVT(CHILD_FOCUS, wxChildFocusEvent)
 template<> wxEventTypeTag<wxCommandEvent> TypeTagOf(int eventType) {
     switch (eventType) {
     MAP_RUST_EVT(BUTTON)
@@ -128,7 +129,6 @@ template<> wxEventTypeTag<wxCommandEvent> TypeTagOf(int eventType) {
     }
     return wxEVT_NULL;
 }
-DEFINE_TYPE_TAG_OF_EVT(CHILD_FOCUS, wxChildFocusEvent)
 DEFINE_TYPE_TAG_OF_EVT(CONTEXT_MENU, wxContextMenuEvent)
 DEFINE_TYPE_TAG_OF_EVT(CREATE, wxWindowCreateEvent)
 DEFINE_TYPE_TAG_OF_EVT(DESTROY, wxWindowDestroyEvent)
