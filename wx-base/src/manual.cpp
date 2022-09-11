@@ -25,8 +25,14 @@ enum WxRustEvent {
     RUST_EVT_BOOKCTRL_PAGE_CHANGED,
     RUST_EVT_BUTTON,
     RUST_EVT_CHECKBOX,
+    RUST_EVT_CHECKLISTBOX,
+    RUST_EVT_CHOICE,
+    RUST_EVT_LISTBOX,
+    RUST_EVT_LISTBOX_DCLICK,
     RUST_EVT_MENU,
+    RUST_EVT_SLIDER,
     RUST_EVT_RADIOBOX,
+    RUST_EVT_RADIOBUTTON,
     RUST_EVT_TIMER,
 };
 template<typename T> wxEventTypeTag<T> TypeTagOf(int eventType) {
@@ -45,10 +51,22 @@ template<> wxEventTypeTag<wxCommandEvent> TypeTagOf(int eventType) {
         return wxEVT_BUTTON;
     case RUST_EVT_CHECKBOX:
         return wxEVT_CHECKBOX;
+    case RUST_EVT_CHECKLISTBOX:
+        return wxEVT_CHECKLISTBOX;
+    case RUST_EVT_CHOICE:
+        return wxEVT_CHOICE;
+    case RUST_EVT_LISTBOX:
+        return wxEVT_LISTBOX;
+    case RUST_EVT_LISTBOX_DCLICK:
+        return wxEVT_LISTBOX_DCLICK;
     case RUST_EVT_MENU:
         return wxEVT_MENU;
+    case RUST_EVT_SLIDER:
+        return wxEVT_SLIDER;
     case RUST_EVT_RADIOBOX:
         return wxEVT_RADIOBOX;
+    case RUST_EVT_RADIOBUTTON:
+        return wxEVT_RADIOBUTTON;
     }
     return wxEVT_NULL;
 }
