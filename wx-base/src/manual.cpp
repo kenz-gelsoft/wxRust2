@@ -168,9 +168,41 @@ template<typename T> void BindIfEventIs(wxEvtHandler *self, int eventType, void 
     }
 }
 void wxEvtHandler_Bind(wxEvtHandler *self, int eventType, void *aFn, void *aParam) {
+    BindIfEventIs<wxAsyncMethodCallEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxBookCtrlEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxChildFocusEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxCommandEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxContextMenuEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxWindowCreateEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxWindowDestroyEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxDisplayChangedEvent>(self, eventType, aFn, aParam);
+    // BindIfEventIs<wxDPIChangedEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxDropFilesEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxEraseEvent>(self, eventType, aFn, aParam);
+    // BindIfEventIs<wxFullScreenEvent>(self, eventType, aFn, aParam);
+    // BindIfEventIs<wxPanGestureEvent>(self, eventType, aFn, aParam);
+    // BindIfEventIs<wxRotateGestureEvent>(self, eventType, aFn, aParam);
+    // BindIfEventIs<wxZoomGestureEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxIconizeEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxIdleEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxInitDialogEvent>(self, eventType, aFn, aParam);
+    // BindIfEventIs<wxLongPressEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxMaximizeEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxMouseCaptureChangedEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxMouseCaptureLostEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxNavigationKeyEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxNcPaintEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxPaintEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxPaletteChangedEvent>(self, eventType, aFn, aParam);
+    // BindIfEventIs<wxPressAndTapEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxQueryNewPaletteEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxSetCursorEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxShowEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxSysColourChangedEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxThreadEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxTimerEvent>(self, eventType, aFn, aParam);
+    // BindIfEventIs<wxTwoFingerTapEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxUpdateUIEvent>(self, eventType, aFn, aParam);
 }
 
 // String
