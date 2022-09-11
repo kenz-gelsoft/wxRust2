@@ -89,7 +89,10 @@ template<typename T> wxEventTypeTag<T> TypeTagOf(int eventType) {
 #define MAP_RUST_EVT(name) case RUST_EVT_##name: return wxEVT_##name;
 #define DEFINE_TYPE_TAG_OF_EVT(name, clazz) \
     template<> wxEventTypeTag<clazz> TypeTagOf(int eventType) { \
-        return eventType == RUST_EVT_##name ? wxEVT_##name : wxEVT_NULL; \
+        switch (eventType) { \
+        MAP_RUST_EVT(name) \
+        } \
+        return wxEVT_NULL; \
     }
 DEFINE_TYPE_TAG_OF_EVT(ASYNC_METHOD_CALL, wxAsyncMethodCallEvent)
 DEFINE_TYPE_TAG_OF_EVT(BOOKCTRL_PAGE_CHANGED, wxBookCtrlEvent)
