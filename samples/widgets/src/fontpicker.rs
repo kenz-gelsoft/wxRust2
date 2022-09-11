@@ -125,6 +125,9 @@ impl WidgetsPage for FontPickerWidgetsPage {
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
         // Do nothing
     }
+    fn handle_update_ui(&self, _: &wx::UpdateUIEvent) {
+        // Update UI
+    }
 }
 impl FontPickerWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {

@@ -171,6 +171,9 @@ impl WidgetsPage for TimePickerWidgetsPage {
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
         // Do nothing.
     }
+    fn handle_update_ui(&self, _: &wx::UpdateUIEvent) {
+        // Update UI
+    }
 }
 impl TimePickerWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {

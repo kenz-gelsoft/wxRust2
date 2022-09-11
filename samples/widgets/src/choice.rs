@@ -287,6 +287,9 @@ impl WidgetsPage for ChoiceWidgetsPage {
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
         self.on_check_or_radio_box();
     }
+    fn handle_update_ui(&self, _: &wx::UpdateUIEvent) {
+        // Update UI
+    }
 }
 impl ChoiceWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {

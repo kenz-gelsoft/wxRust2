@@ -165,6 +165,9 @@ impl WidgetsPage for EditableListboxWidgetsPage {
     fn handle_radiobox(&self, _: &wx::CommandEvent) {
         // Do nothing.
     }
+    fn handle_update_ui(&self, _: &wx::UpdateUIEvent) {
+        // Update UI
+    }
 }
 impl EditableListboxWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {

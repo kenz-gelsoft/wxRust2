@@ -254,6 +254,9 @@ impl WidgetsPage for HyperlinkWidgetsPage {
             self.on_alignment(config_ui);
         }
     }
+    fn handle_update_ui(&self, _: &wx::UpdateUIEvent) {
+        // Update UI
+    }
 }
 impl HyperlinkWidgetsPage {
     pub fn new<P: WindowMethods>(book: &P) -> Self {

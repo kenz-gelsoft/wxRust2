@@ -22,7 +22,7 @@ name = "hello"
 version = "0.1.0"
 dependencies = [
  "wxrust",
- "wxrust-base 0.0.1-alpha",
+ "wxrust-base",
 ]
 
 [[package]]
@@ -36,7 +36,7 @@ name = "minimal"
 version = "0.1.0"
 dependencies = [
  "wxrust",
- "wxrust-base 0.0.1-alpha",
+ "wxrust-base",
 ]
 
 [[package]]
@@ -62,7 +62,7 @@ version = "0.1.0"
 dependencies = [
  "regex",
  "wxrust",
- "wxrust-base 0.0.1-alpha",
+ "wxrust-base",
 ]
 
 [[package]]
@@ -70,7 +70,7 @@ name = "wrapsizer"
 version = "0.1.0"
 dependencies = [
  "wxrust",
- "wxrust-base 0.0.1-alpha",
+ "wxrust-base",
 ]
 
 [[package]]
@@ -93,23 +93,13 @@ name = "wxrust"
 version = "0.0.1-alpha"
 dependencies = [
  "cc",
- "wxrust-base 0.0.1-alpha (registry+https://github.com/rust-lang/crates.io-index)",
+ "wxrust-base",
  "wxrust-config 0.0.1-alpha2 (git+https://github.com/kenz-gelsoft/wxrust-vendored-config)",
 ]
 
 [[package]]
 name = "wxrust-base"
 version = "0.0.1-alpha"
-dependencies = [
- "cc",
- "wxrust-config 0.0.1-alpha2 (git+https://github.com/kenz-gelsoft/wxrust-vendored-config)",
-]
-
-[[package]]
-name = "wxrust-base"
-version = "0.0.1-alpha"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e7d411b4530d57b455a34d328b7661a67ef8a12f30daf7432c2ab321cb507faa"
 dependencies = [
  "cc",
  "wxrust-config 0.0.1-alpha2 (git+https://github.com/kenz-gelsoft/wxrust-vendored-config)",
