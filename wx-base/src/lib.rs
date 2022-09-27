@@ -39,6 +39,12 @@ mod ffi {
             aFn: *mut c_void,
             aParam: *mut c_void,
         );
+        
+        pub fn wxEvtHandler_CallAfter(
+            self_: *mut c_void,
+            aFn: *mut c_void,
+            aParam: *mut c_void,
+        );
 
         // String
         pub fn wxString_new(psz: *const c_uchar, nLength: usize) -> *mut c_void;
@@ -84,6 +90,7 @@ pub mod methods {
 
     pub trait Bindable {
         fn bind<E: EventMethods, F: Fn(&E) + 'static>(&self, event_type: RustEvent, closure: F);
+        fn call_after<F: Fn() + 'static>(&self, closure: F);
     }
 
     pub trait ArrayIntMethods: WxRustMethods {
@@ -263,6 +270,14 @@ impl<T: EvtHandlerMethods> Bindable for T {
                 });
             });
             ffi::wxEvtHandler_Bind(self.as_ptr(), event_type as c_int, f, param);
+        }
+    }
+    fn call_after<F: Fn() + 'static>(&self, closure: F) {
+        unsafe {
+            let (f, param) = to_wx_callable(move |_: *mut c_void| {
+                closure();
+            });
+            ffi::wxEvtHandler_CallAfter(self.as_ptr(), f, param);
         }
     }
 }
