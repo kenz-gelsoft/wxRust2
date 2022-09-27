@@ -206,8 +206,8 @@ void wxEvtHandler_Bind(wxEvtHandler *self, int eventType, void *aFn, void *aPara
 }
 
 void wxEvtHandler_CallAfter(wxEvtHandler *self, void *aFn, void *aParam) {
-    CxxClosure<int> functor(aFn, aParam);
     self->CallAfter([&]{
+        CxxClosure<int> functor(aFn, aParam);
         functor(/*unused*/0);
     });
 }
