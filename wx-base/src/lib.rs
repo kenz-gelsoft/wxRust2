@@ -39,12 +39,8 @@ mod ffi {
             aFn: *mut c_void,
             aParam: *mut c_void,
         );
-        
-        pub fn wxEvtHandler_CallAfter(
-            self_: *mut c_void,
-            aFn: *mut c_void,
-            aParam: *mut c_void,
-        );
+
+        pub fn wxEvtHandler_CallAfter(self_: *mut c_void, aFn: *mut c_void, aParam: *mut c_void);
 
         // String
         pub fn wxString_new(psz: *const c_uchar, nLength: usize) -> *mut c_void;
