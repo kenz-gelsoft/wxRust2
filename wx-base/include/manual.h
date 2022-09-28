@@ -24,6 +24,18 @@ public:
     }
 };
 
+class CxxClosureVoid {
+    CxxClosure<void*> mTyped;
+
+public:
+    CxxClosureVoid(void *f, void *param) : mTyped(f, param)
+    {}
+
+    void operator ()() const {
+        mTyped(/*unused*/0);
+    }
+};
+
 extern "C" {
 
 // wxApp
