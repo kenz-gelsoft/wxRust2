@@ -205,6 +205,11 @@ void wxEvtHandler_Bind(wxEvtHandler *self, int eventType, void *aFn, void *aPara
     BindIfEventIs<wxUpdateUIEvent>(self, eventType, aFn, aParam);
 }
 
+void wxEvtHandler_CallAfter(wxEvtHandler *self, void *aFn, void *aParam) {
+    CxxClosureVoid functor(aFn, aParam);
+    self->CallAfter(functor);
+}
+
 // String
 wxString *wxString_new(const unsigned char *psz, const size_t nLength) {
     return new wxString(psz, wxConvUTF8, nLength);

@@ -24,6 +24,18 @@ public:
     }
 };
 
+class CxxClosureVoid {
+    CxxClosure<void*> mTyped;
+
+public:
+    CxxClosureVoid(void *f, void *param) : mTyped(f, param)
+    {}
+
+    void operator ()() const {
+        mTyped(/*unused*/0);
+    }
+};
+
 extern "C" {
 
 // wxApp
@@ -35,6 +47,7 @@ class App : public wxApp {
 void wxObject_delete(wxObject *self);
 
 void wxEvtHandler_Bind(wxEvtHandler *evtHandler, int eventType, void *aFn, void *aParam);
+void wxEvtHandler_CallAfter(wxEvtHandler *evtHandler, void *aFn, void *aParam);
 
 // String
 struct UTF8Data {
