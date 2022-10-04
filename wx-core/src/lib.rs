@@ -80,7 +80,7 @@ mod ffi {
             parent: *mut c_void,
             x: c_int,
             y: c_int,
-        );
+        ) -> c_int;
     }
 }
 
@@ -2508,7 +2508,7 @@ pub fn message_box<T: WindowMethods>(
     caption: &str,
     style: c_int,
     parent: Option<&T>,
-) {
+) -> c_int {
     unsafe {
         let message = WxString::from(message);
         let message = message.as_ptr();
