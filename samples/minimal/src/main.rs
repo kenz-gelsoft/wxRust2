@@ -80,6 +80,6 @@ impl MyFrame {
                 .try_into()
                 .unwrap(),
             Some(frame),
-        )
+        );
     }
 }
