@@ -24,6 +24,12 @@ void wxObject_delete(wxObject *self) {
 enum WxRustEvent {
     // MEMO: wx32 introduced event types are commented out
     RUST_EVT_ASYNC_METHOD_CALL,
+    RUST_EVT_AUX1_DCLICK,
+    RUST_EVT_AUX1_DOWN,
+    RUST_EVT_AUX1_UP,
+    RUST_EVT_AUX2_DCLICK,
+    RUST_EVT_AUX2_DOWN,
+    RUST_EVT_AUX2_UP,
     RUST_EVT_BOOKCTRL_PAGE_CHANGED,
     RUST_EVT_BUTTON,
     RUST_EVT_CHECKBOX,
@@ -46,6 +52,7 @@ enum WxRustEvent {
     RUST_EVT_DISPLAY_CHANGED,
     // RUST_EVT_DPI_CHANGED,
     RUST_EVT_DROP_FILES,
+    RUST_EVT_ENTER_WINDOW,
     RUST_EVT_ERASE_BACKGROUND,
     // RUST_EVT_FULLSCREEN,
     // RUST_EVT_GESTURE_PAN,
@@ -54,11 +61,21 @@ enum WxRustEvent {
     RUST_EVT_ICONIZE,
     RUST_EVT_IDLE,
     RUST_EVT_INIT_DIALOG,
+    RUST_EVT_LEAVE_WINDOW,
+    RUST_EVT_LEFT_DCLICK,
+    RUST_EVT_LEFT_DOWN,
+    RUST_EVT_LEFT_UP,
     RUST_EVT_LISTBOX,
     RUST_EVT_LISTBOX_DCLICK,
     // RUST_EVT_LONG_PRESS,
     RUST_EVT_MAXIMIZE,
+    RUST_EVT_MAGNIFY,
     RUST_EVT_MENU,
+    RUST_EVT_MIDDLE_DCLICK,
+    RUST_EVT_MIDDLE_DOWN,
+    RUST_EVT_MIDDLE_UP,
+    RUST_EVT_MOTION,
+    RUST_EVT_MOUSEWHEEL,
     RUST_EVT_MOUSE_CAPTURE_CHANGED,
     RUST_EVT_MOUSE_CAPTURE_LOST,
     RUST_EVT_NAVIGATION_KEY,
@@ -69,6 +86,9 @@ enum WxRustEvent {
     RUST_EVT_QUERY_NEW_PALETTE,
     RUST_EVT_RADIOBOX,
     RUST_EVT_RADIOBUTTON,
+    RUST_EVT_RIGHT_DCLICK,
+    RUST_EVT_RIGHT_DOWN,
+    RUST_EVT_RIGHT_UP,
     RUST_EVT_SCROLLBAR,
     RUST_EVT_SET_CURSOR,
     RUST_EVT_SHOW,
@@ -98,6 +118,31 @@ template<typename T> wxEventTypeTag<T> TypeTagOf(int eventType) {
 DEFINE_TYPE_TAG_OF_EVT(ASYNC_METHOD_CALL, wxAsyncMethodCallEvent)
 DEFINE_TYPE_TAG_OF_EVT(BOOKCTRL_PAGE_CHANGED, wxBookCtrlEvent)
 DEFINE_TYPE_TAG_OF_EVT(CHILD_FOCUS, wxChildFocusEvent)
+template<> wxEventTypeTag<wxMouseEvent> TypeTagOf(int eventType) {
+    switch (eventType) {
+    MAP_RUST_EVT(AUX1_DCLICK)
+    MAP_RUST_EVT(AUX1_DOWN)
+    MAP_RUST_EVT(AUX1_UP)
+    MAP_RUST_EVT(AUX2_DCLICK)
+    MAP_RUST_EVT(AUX2_DOWN)
+    MAP_RUST_EVT(AUX2_UP)
+    MAP_RUST_EVT(ENTER_WINDOW)
+    MAP_RUST_EVT(LEAVE_WINDOW)
+    MAP_RUST_EVT(LEFT_DCLICK)
+    MAP_RUST_EVT(LEFT_DOWN)
+    MAP_RUST_EVT(LEFT_UP)
+    MAP_RUST_EVT(MAGNIFY)
+    MAP_RUST_EVT(MIDDLE_DCLICK)
+    MAP_RUST_EVT(MIDDLE_DOWN)
+    MAP_RUST_EVT(MIDDLE_UP)
+    MAP_RUST_EVT(MOTION)
+    MAP_RUST_EVT(MOUSEWHEEL)
+    MAP_RUST_EVT(RIGHT_DCLICK)
+    MAP_RUST_EVT(RIGHT_DOWN)
+    MAP_RUST_EVT(RIGHT_UP)
+    }
+    return wxEVT_NULL;
+}
 template<> wxEventTypeTag<wxCommandEvent> TypeTagOf(int eventType) {
     switch (eventType) {
     MAP_RUST_EVT(BUTTON)
@@ -188,6 +233,7 @@ void wxEvtHandler_Bind(wxEvtHandler *self, int eventType, void *aFn, void *aPara
     BindIfEventIs<wxInitDialogEvent>(self, eventType, aFn, aParam);
     // BindIfEventIs<wxLongPressEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxMaximizeEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxMenuEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxMouseCaptureChangedEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxMouseCaptureLostEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxNavigationKeyEvent>(self, eventType, aFn, aParam);
