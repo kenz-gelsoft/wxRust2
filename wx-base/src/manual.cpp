@@ -233,7 +233,7 @@ void wxEvtHandler_Bind(wxEvtHandler *self, int eventType, void *aFn, void *aPara
     BindIfEventIs<wxInitDialogEvent>(self, eventType, aFn, aParam);
     // BindIfEventIs<wxLongPressEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxMaximizeEvent>(self, eventType, aFn, aParam);
-    BindIfEventIs<wxMenuEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxMouseEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxMouseCaptureChangedEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxMouseCaptureLostEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxNavigationKeyEvent>(self, eventType, aFn, aParam);
