@@ -248,7 +248,7 @@ pub enum RustEvent {
     ListBoxDClick,
     // LongPress,
     Maximize,
-    Magnify,
+    // Magnify,
     Menu,
     MiddleDClick,
     MiddleDown,
