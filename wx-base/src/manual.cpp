@@ -23,6 +23,7 @@ void wxObject_delete(wxObject *self) {
 // TODO: auto generate
 enum WxRustEvent {
     // MEMO: wx32 introduced event types are commented out
+    RUST_EVT_AFTER_CHAR,
     RUST_EVT_ASYNC_METHOD_CALL,
     RUST_EVT_AUX1_DCLICK,
     RUST_EVT_AUX1_DOWN,
@@ -32,6 +33,8 @@ enum WxRustEvent {
     RUST_EVT_AUX2_UP,
     RUST_EVT_BOOKCTRL_PAGE_CHANGED,
     RUST_EVT_BUTTON,
+    RUST_EVT_CHAR,
+    RUST_EVT_CHAR_HOOK,
     RUST_EVT_CHECKBOX,
     RUST_EVT_CHECKLISTBOX,
     RUST_EVT_CHILD_FOCUS,
@@ -58,9 +61,12 @@ enum WxRustEvent {
     // RUST_EVT_GESTURE_PAN,
     // RUST_EVT_GESTURE_ROTATE,
     // RUST_EVT_GESTURE_ZOOM,
+    RUST_EVT_HOTKEY,
     RUST_EVT_ICONIZE,
     RUST_EVT_IDLE,
     RUST_EVT_INIT_DIALOG,
+    RUST_EVT_KEY_DOWN,
+    RUST_EVT_KEY_UP,
     RUST_EVT_LEAVE_WINDOW,
     RUST_EVT_LEFT_DCLICK,
     RUST_EVT_LEFT_DOWN,
@@ -140,6 +146,17 @@ template<> wxEventTypeTag<wxMouseEvent> TypeTagOf(int eventType) {
     MAP_RUST_EVT(RIGHT_DCLICK)
     MAP_RUST_EVT(RIGHT_DOWN)
     MAP_RUST_EVT(RIGHT_UP)
+    }
+    return wxEVT_NULL;
+}
+template<> wxEventTypeTag<wxKeyEvent> TypeTagOf(int eventType) {
+    switch (eventType) {
+    MAP_RUST_EVT(AFTER_CHAR)
+    MAP_RUST_EVT(CHAR)
+    MAP_RUST_EVT(CHAR_HOOK)
+    MAP_RUST_EVT(HOTKEY)
+    MAP_RUST_EVT(KEY_DOWN)
+    MAP_RUST_EVT(KEY_UP)
     }
     return wxEVT_NULL;
 }
@@ -231,6 +248,7 @@ void wxEvtHandler_Bind(wxEvtHandler *self, int eventType, void *aFn, void *aPara
     BindIfEventIs<wxIconizeEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxIdleEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxInitDialogEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxKeyEvent>(self, eventType, aFn, aParam);
     // BindIfEventIs<wxLongPressEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxMaximizeEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxMouseEvent>(self, eventType, aFn, aParam);

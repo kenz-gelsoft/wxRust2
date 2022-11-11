@@ -196,6 +196,7 @@ unsafe fn to_wx_callable<F: Fn(*mut c_void) + 'static>(closure: F) -> (*mut c_vo
 // TODO auto generate
 pub enum RustEvent {
     // MEMO: wx32 introduced event types are commented out
+    AfterChar,
     AsyncMethodCall,
     Aux1DClick,
     Aux1Down,
@@ -205,6 +206,8 @@ pub enum RustEvent {
     Aux2Up,
     BookctrlPageChanged,
     Button,
+    Char,
+    CharHook,
     CheckBox,
     CheckListBox,
     ChildFocus,
@@ -231,9 +234,12 @@ pub enum RustEvent {
     // GesturePan,
     // GestureRotate,
     // GestureZoom,
+    HotKey,
     Iconize,
     Idle,
     InitDialog,
+    KeyDown,
+    KeyUp,
     LeaveWindow,
     LeftDClick,
     LeftDown,
