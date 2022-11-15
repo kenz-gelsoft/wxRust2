@@ -687,6 +687,35 @@ wx31 = [
 blocklist = [
     'SetColour1',
 ]
+[types.wxCommandEvent]
+event_types = [
+    'BUTTON',
+    'CHECKBOX',
+    'CHECKLISTBOX',
+    'CHOICE',
+    'COMBOBOX',
+    'COMBOBOX_CLOSEUP',
+    'COMBOBOX_DROPDOWN',
+    'COMMAND_ENTER',
+    'COMMAND_KILL_FOCUS',
+    'COMMAND_LEFT_CLICK',
+    'COMMAND_LEFT_DCLICK',
+    'COMMAND_RIGHT_CLICK',
+    'COMMAND_RIGHT_DCLICK',
+    'COMMAND_SET_FOCUS',
+    'LISTBOX',
+    'LISTBOX_DCLICK',
+    'MENU',
+    'RADIOBOX',
+    'RADIOBUTTON',
+    'SCROLLBAR',
+    'SLIDER',
+    'TEXT',
+    'TOOL_ENTER',
+    'TOOL_DROPDOWN',
+    'TOOL_RCLICKED',
+    'VLBOX',
+]
 [types.wxComboCtrl]
 blocklist = [
     # deprecated
