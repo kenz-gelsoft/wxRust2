@@ -1008,6 +1008,9 @@ not_windows = [
     'UpdateBackingFromWindow',
 ]
 [types.wxDropFilesEvent]
+event_types = [
+    'DROP_FILES',
+]
 blocklist = [
     # cannot convert Cstr to rust string yet
     'GetFiles',
@@ -1295,6 +1298,9 @@ blocklist = [
     'operator=',
 ]
 [types.wxIconizeEvent]
+event_types = [
+    'ICONIZE',
+]
 blocklist = [
     # deprecated
     'Iconized',
@@ -1508,6 +1514,9 @@ blocklist = [
     'GetPrintData',
 ]
 [types.wxPaintEvent]
+event_types = [
+    'PAINT',
+]
 blocklist = [
     'wxPaintEvent',
 ]
@@ -1666,6 +1675,9 @@ wx31 = [
     'GetExpanderSize',
 ]
 [types.wxShowEvent]
+event_types = [
+    'SHOW',
+]
 blocklist = [
     # deprecated
     'GetShow',
@@ -1834,6 +1846,9 @@ wx31 = [
     'IsValid',
 ]
 [types.wxThreadEvent]
+event_types = [
+    'THREAD',
+]
 blocklist = [
     # has template parameter
     'SetPayload',
@@ -1922,6 +1937,9 @@ wx31 = [
     'Select',
 ]
 [types.wxUpdateUIEvent]
+event_types = [
+    'UPDATE_UI',
+]
 wx31 = [
     'IsCheckable',
 ]

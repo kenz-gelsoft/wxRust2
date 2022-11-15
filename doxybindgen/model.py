@@ -76,6 +76,7 @@ class Class:
         self.methods = []
         config = config.get(self.name) or {}
         self.__blocklist = config.get('blocklist') or []
+        self.event_types = config.get('event_types') or []
         self.config = config
         self.doc = ''.join(e.find('./briefdescription').itertext()).strip()
         self.__doc_id = e.get('id')
