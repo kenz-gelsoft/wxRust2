@@ -301,7 +301,6 @@ def events_cpp(event_classes, config):
     yield '''\
 #include "generated.h"
 
-
 enum WxRustEvent {\
 '''
     for cls in event_classes:
@@ -341,7 +340,7 @@ template<> wxEventTypeTag<%s> TypeTagOf(int eventType) {
     }
     return wxEVT_NULL;
 }'''
-    yield '''\
+    yield '''
 template<typename T> void BindIfEventIs(wxEvtHandler *self, int eventType, void *aFn, void *aParam) {
     wxEventTypeTag<T> typeTag = TypeTagOf<T>(eventType);
     if (typeTag != wxEVT_NULL) {
@@ -349,8 +348,7 @@ template<typename T> void BindIfEventIs(wxEvtHandler *self, int eventType, void 
         self->Bind(typeTag, functor);
     }
 }
-void wxEvtHandler_Bind(wxEvtHandler *self, int eventType, void *aFn, void *aParam) {
-    // BindIfEventIs<wxFooEvent>(self, eventType, aFn, aParam);\
+void wxEvtHandler_Bind(wxEvtHandler *self, int eventType, void *aFn, void *aParam) {\
 '''
     for cls in event_classes:
         if len(cls.event_types) < 1:

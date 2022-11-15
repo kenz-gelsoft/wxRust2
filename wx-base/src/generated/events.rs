@@ -1,6 +1,8 @@
 use super::*;
 
 pub enum RustEvent {
+    BookctrlPageChanged,
+    ChildFocus,
     Button,
     Checkbox,
     Checklistbox,
@@ -27,10 +29,23 @@ pub enum RustEvent {
     ToolDropdown,
     ToolRclicked,
     Vlbox,
+    ContextMenu,
+    DisplayChanged,
     DropFiles,
+    EraseBackground,
     Iconize,
+    InitDialog,
+    Maximize,
+    MouseCaptureChanged,
+    MouseCaptureLost,
+    NavigationKey,
     Paint,
+    SetCursor,
     Show,
+    SysColourChanged,
     Thread,
+    Timer,
     UpdateUi,
+    Create,
+    Destroy,
 }

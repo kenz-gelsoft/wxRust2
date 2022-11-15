@@ -1,7 +1,8 @@
 #include "generated.h"
 
-
 enum WxRustEvent {
+    RUST_EVT_BOOKCTRL_PAGE_CHANGED,
+    RUST_EVT_CHILD_FOCUS,
     RUST_EVT_BUTTON,
     RUST_EVT_CHECKBOX,
     RUST_EVT_CHECKLISTBOX,
@@ -28,12 +29,25 @@ enum WxRustEvent {
     RUST_EVT_TOOL_DROPDOWN,
     RUST_EVT_TOOL_RCLICKED,
     RUST_EVT_VLBOX,
+    RUST_EVT_CONTEXT_MENU,
+    RUST_EVT_DISPLAY_CHANGED,
     RUST_EVT_DROP_FILES,
+    RUST_EVT_ERASE_BACKGROUND,
     RUST_EVT_ICONIZE,
+    RUST_EVT_INIT_DIALOG,
+    RUST_EVT_MAXIMIZE,
+    RUST_EVT_MOUSE_CAPTURE_CHANGED,
+    RUST_EVT_MOUSE_CAPTURE_LOST,
+    RUST_EVT_NAVIGATION_KEY,
     RUST_EVT_PAINT,
+    RUST_EVT_SET_CURSOR,
     RUST_EVT_SHOW,
+    RUST_EVT_SYS_COLOUR_CHANGED,
     RUST_EVT_THREAD,
+    RUST_EVT_TIMER,
     RUST_EVT_UPDATE_UI,
+    RUST_EVT_CREATE,
+    RUST_EVT_DESTROY,
 };
 
 #define MAP_RUST_EVT(name) case RUST_EVT_##name: return wxEVT_##name;
@@ -48,6 +62,8 @@ enum WxRustEvent {
 template<typename T> wxEventTypeTag<T> TypeTagOf(int eventType) {
     return wxEVT_NULL;
 }
+DEFINE_TYPE_TAG_OF_EVT(BOOKCTRL_PAGE_CHANGED, wxBookCtrlEvent)
+DEFINE_TYPE_TAG_OF_EVT(CHILD_FOCUS, wxChildFocusEvent)
 template<> wxEventTypeTag<wxCommandEvent> TypeTagOf(int eventType) {
     switch (eventType) {
     MAP_RUST_EVT(BUTTON)
@@ -79,12 +95,26 @@ template<> wxEventTypeTag<wxCommandEvent> TypeTagOf(int eventType) {
     }
     return wxEVT_NULL;
 }
+DEFINE_TYPE_TAG_OF_EVT(CONTEXT_MENU, wxContextMenuEvent)
+DEFINE_TYPE_TAG_OF_EVT(DISPLAY_CHANGED, wxDisplayChangedEvent)
 DEFINE_TYPE_TAG_OF_EVT(DROP_FILES, wxDropFilesEvent)
+DEFINE_TYPE_TAG_OF_EVT(ERASE_BACKGROUND, wxEraseEvent)
 DEFINE_TYPE_TAG_OF_EVT(ICONIZE, wxIconizeEvent)
+DEFINE_TYPE_TAG_OF_EVT(INIT_DIALOG, wxInitDialogEvent)
+DEFINE_TYPE_TAG_OF_EVT(MAXIMIZE, wxMaximizeEvent)
+DEFINE_TYPE_TAG_OF_EVT(MOUSE_CAPTURE_CHANGED, wxMouseCaptureChangedEvent)
+DEFINE_TYPE_TAG_OF_EVT(MOUSE_CAPTURE_LOST, wxMouseCaptureLostEvent)
+DEFINE_TYPE_TAG_OF_EVT(NAVIGATION_KEY, wxNavigationKeyEvent)
 DEFINE_TYPE_TAG_OF_EVT(PAINT, wxPaintEvent)
+DEFINE_TYPE_TAG_OF_EVT(SET_CURSOR, wxSetCursorEvent)
 DEFINE_TYPE_TAG_OF_EVT(SHOW, wxShowEvent)
+DEFINE_TYPE_TAG_OF_EVT(SYS_COLOUR_CHANGED, wxSysColourChangedEvent)
 DEFINE_TYPE_TAG_OF_EVT(THREAD, wxThreadEvent)
+DEFINE_TYPE_TAG_OF_EVT(TIMER, wxTimerEvent)
 DEFINE_TYPE_TAG_OF_EVT(UPDATE_UI, wxUpdateUIEvent)
+DEFINE_TYPE_TAG_OF_EVT(CREATE, wxWindowCreateEvent)
+DEFINE_TYPE_TAG_OF_EVT(DESTROY, wxWindowDestroyEvent)
+
 template<typename T> void BindIfEventIs(wxEvtHandler *self, int eventType, void *aFn, void *aParam) {
     wxEventTypeTag<T> typeTag = TypeTagOf<T>(eventType);
     if (typeTag != wxEVT_NULL) {
@@ -93,12 +123,26 @@ template<typename T> void BindIfEventIs(wxEvtHandler *self, int eventType, void 
     }
 }
 void wxEvtHandler_Bind(wxEvtHandler *self, int eventType, void *aFn, void *aParam) {
-    // BindIfEventIs<wxFooEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxBookCtrlEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxChildFocusEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxCommandEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxContextMenuEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxDisplayChangedEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxDropFilesEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxEraseEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxIconizeEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxInitDialogEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxMaximizeEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxMouseCaptureChangedEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxMouseCaptureLostEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxNavigationKeyEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxPaintEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxSetCursorEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxShowEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxSysColourChangedEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxThreadEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxTimerEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxUpdateUIEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxWindowCreateEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxWindowDestroyEvent>(self, eventType, aFn, aParam);
 }

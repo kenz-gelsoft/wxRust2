@@ -551,6 +551,11 @@ wx317 = [
     # Doc isn't up-to-date in wx3.1.6
     'GetSizeHint',
 ]
+[types.wxAsyncMethodCallEvent]
+event_types = [
+    # not generated until wxAsyncMethodCallEvent class to be genarated
+    'ASYNC_METHOD_CALL',
+]
 [types.wxBannerWindow]
 blocklist = [
     'wxBannerWindow1',
@@ -633,6 +638,10 @@ blocklist = [
     'wxBookCtrlBase',
     'wxBookCtrlBase1',
 ]
+[types.wxBookCtrlEvent]
+event_types = [
+    'BOOKCTRL_PAGE_CHANGED',
+]
 [types.wxBrush]
 blocklist = [
     'operator!=',
@@ -652,6 +661,10 @@ wx31 = [
 blocklist = [
     # deprecated
     'EnableYearChange',
+]
+[types.wxChildFocusEvent]
+event_types = [
+    'CHILD_FOCUS',
 ]
 [types.wxColour]
 blocklist = [
@@ -739,6 +752,10 @@ blocklist = [
 blocklist = [
     # invalid return type
     'GetCommands',
+]
+[types.wxContextMenuEvent]
+event_types = [
+    'CONTEXT_MENU',
 ]
 [types.wxControl]
 wx31 = [
@@ -1000,6 +1017,10 @@ wx31 = [
     'GetStdPPIValue',
     'GetStdPPI',
 ]
+[types.wxDisplayChangedEvent]
+event_types = [
+    'DISPLAY_CHANGED',
+]
 [types.wxDocManager]
 blocklist = [
     # invalid return type
@@ -1026,6 +1047,9 @@ blocklist = [
     'GetViews1',
 ]
 [types.wxDPIChangedEvent]
+event_types = [
+    # 'DPI_CHANGED',
+]
 blocklist = [
     # binding type by value is not supported
     'Scale',
@@ -1057,6 +1081,10 @@ gtk = [
 blocklist = [
     # abstract
     'wxDropTarget',
+]
+[types.wxEraseEvent]
+event_types = [
+    'ERASE_BACKGROUND',
 ]
 [types.wxEvent]
 returns_owned = [
@@ -1145,6 +1173,10 @@ wx31 = [
 [types.wxFrame]
 windows = [
     'MSWGetTaskBarButton',
+]
+[types.wxFullScreenEvent]
+event_types = [
+    # 'FULLSCREEN',
 ]
 [types.wxGBPosition]
 blocklist = [
@@ -1334,6 +1366,10 @@ blocklist = [
     # deprecated
     'Iconized',
 ]
+[types.wxIdleEvent]
+event_types = [
+    'IDLE',
+]
 [types.wxImage]
 blocklist = [
     'operator=',
@@ -1366,6 +1402,10 @@ wx31 = [
     'GetButtonCount',
     'GetButtonId',
     'HasButtonId',
+]
+[types.wxInitDialogEvent]
+event_types = [
+    'INIT_DIALOG',
 ]
 [types.wxItemAttr]
 blocklist = [
@@ -1430,6 +1470,14 @@ wx31 = [
     'SetSmallImages',
     'ShowSortIndicator',
 ]
+[types.wxLongPressEvent]
+event_types = [
+    # 'LONG_PRESS',
+]
+[types.wxMaximizeEvent]
+event_types = [
+    'MAXIMIZE',
+]
 [types.wxMemoryDC]
 blocklist = [
     # const vs non-const
@@ -1485,6 +1533,14 @@ wx31 = [
 wx32 = [
     'GetBitmapBundle',
 ]
+[types.wxMouseCaptureChangedEvent]
+event_types = [
+    'MOUSE_CAPTURE_CHANGED',
+]
+[types.wxMouseCaptureLostEvent]
+event_types = [
+    'MOUSE_CAPTURE_LOST',
+]
 [types.wxMouseEvent]
 wx31 = [
     'GetMagnification',
@@ -1504,6 +1560,14 @@ blocklist = [
 wx31 = [
     'GetNumericWeight',
     'SetNumericWeight',
+]
+[types.wxNavigationKeyEvent]
+event_types = [
+    'NAVIGATION_KEY',
+]
+[types.wxNcPaintEvent]
+event_types = [
+    'NC_PAINT',
 ]
 [types.wxNonOwnedWindow]
 library = 'core'
@@ -1552,6 +1616,14 @@ blocklist = [
 [types.wxPalette]
 blocklist = [
     'operator=',
+]
+[types.wxPaletteChangedEvent]
+event_types = [
+    'PALETTE_CHANGED',
+]
+[types.wxPanGestureEvent]
+event_types = [
+    # 'GESTURE_PAN',
 ]
 [types.wxPen]
 blocklist = [
@@ -1604,6 +1676,10 @@ blocklist = [
 wx31 = [
     'GetIcon',
 ]
+[types.wxPressAndTapEvent]
+event_types = [
+    # 'PRESS_AND_TAP',
+]
 [types.wxPrintData]
 blocklist = [
     'operator=',
@@ -1624,6 +1700,10 @@ blocklist = [
 blocklist = [
     # abstract
     'wxPrintout',
+]
+[types.wxQueryNewPaletteEvent]
+event_types = [
+    'QUERY_NEW_PALETTE',
 ]
 [types.wxRadioBox]
 blocklist = [
@@ -1702,6 +1782,14 @@ wx31 = [
     'GetCheckMarkSize',
     'GetCollapseButtonSize',
     'GetExpanderSize',
+]
+[types.wxRotateGestureEvent]
+event_types = [
+    # 'GESTURE_ROTATE',
+]
+[types.wxSetCursorEvent]
+event_types = [
+    'SET_CURSOR',
 ]
 [types.wxShowEvent]
 event_types = [
@@ -1814,6 +1902,10 @@ wx31 = [
     # Additional args in wx3.1
     'wxSVGFileDC',
 ]
+[types.wxSysColourChangedEvent]
+event_types = [
+    'SYS_COLOUR_CHANGED',
+]
 [types.wxTaskBarIcon]
 wx31 = [
     'SetIcon',
@@ -1881,6 +1973,10 @@ event_types = [
 blocklist = [
     # has template parameter
     'SetPayload',
+]
+[types.wxTimerEvent]
+event_types = [
+    'TIMER',
 ]
 [types.wxTipProvider]
 blocklist = [
@@ -1960,6 +2056,10 @@ blocklist = [
 blocklist = [
     # abstract
     'wxTreeListItemComparator',
+]
+[types.wxTwoFingerTapEvent]
+event_types = [
+    'TWO_FINGER_TAP',
 ]
 [types.wxUIActionSimulator]
 wx31 = [
@@ -2070,6 +2170,14 @@ wx31 = [
     'UseBackgroundColour',
     'UseForegroundColour',
 ]
+[types.wxWindowCreateEvent]
+event_types = [
+    'CREATE',
+]
+[types.wxWindowDestroyEvent]
+event_types = [
+    'DESTROY',
+]
 [types.wxWindowDisabler]
 wx317 = [
     # default argument added
@@ -2080,4 +2188,8 @@ blocklist = [
     # abstract
     'wxWizardPage',
     'wxWizardPage1',
+]
+[types.wxZoomGestureEvent]
+event_types = [
+    # 'GESTURE_ZOOM',
 ]
