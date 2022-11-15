@@ -1,6 +1,5 @@
 #include "generated.h"
 
-#define MAP_RUST_EVT(name) case RUST_EVT_##name: return wxEVT_##name;
 
 enum WxRustEvent {
     RUST_EVT_BUTTON,
@@ -36,6 +35,16 @@ enum WxRustEvent {
     RUST_EVT_THREAD,
     RUST_EVT_UPDATE_UI,
 };
+
+#define MAP_RUST_EVT(name) case RUST_EVT_##name: return wxEVT_##name;
+#define DEFINE_TYPE_TAG_OF_EVT(name, clazz) \
+    template<> wxEventTypeTag<clazz> TypeTagOf(int eventType) { \
+        switch (eventType) { \
+        MAP_RUST_EVT(name) \
+        } \
+        return wxEVT_NULL; \
+    }
+
 template<typename T> wxEventTypeTag<T> TypeTagOf(int eventType) {
     return wxEVT_NULL;
 }
@@ -70,42 +79,12 @@ template<> wxEventTypeTag<wxCommandEvent> TypeTagOf(int eventType) {
     }
     return wxEVT_NULL;
 }
-template<> wxEventTypeTag<wxDropFilesEvent> TypeTagOf(int eventType) {
-    switch (eventType) {
-    MAP_RUST_EVT(DROP_FILES)
-    }
-    return wxEVT_NULL;
-}
-template<> wxEventTypeTag<wxIconizeEvent> TypeTagOf(int eventType) {
-    switch (eventType) {
-    MAP_RUST_EVT(ICONIZE)
-    }
-    return wxEVT_NULL;
-}
-template<> wxEventTypeTag<wxPaintEvent> TypeTagOf(int eventType) {
-    switch (eventType) {
-    MAP_RUST_EVT(PAINT)
-    }
-    return wxEVT_NULL;
-}
-template<> wxEventTypeTag<wxShowEvent> TypeTagOf(int eventType) {
-    switch (eventType) {
-    MAP_RUST_EVT(SHOW)
-    }
-    return wxEVT_NULL;
-}
-template<> wxEventTypeTag<wxThreadEvent> TypeTagOf(int eventType) {
-    switch (eventType) {
-    MAP_RUST_EVT(THREAD)
-    }
-    return wxEVT_NULL;
-}
-template<> wxEventTypeTag<wxUpdateUIEvent> TypeTagOf(int eventType) {
-    switch (eventType) {
-    MAP_RUST_EVT(UPDATE_UI)
-    }
-    return wxEVT_NULL;
-}
+DEFINE_TYPE_TAG_OF_EVT(DROP_FILES, wxDropFilesEvent)
+DEFINE_TYPE_TAG_OF_EVT(ICONIZE, wxIconizeEvent)
+DEFINE_TYPE_TAG_OF_EVT(PAINT, wxPaintEvent)
+DEFINE_TYPE_TAG_OF_EVT(SHOW, wxShowEvent)
+DEFINE_TYPE_TAG_OF_EVT(THREAD, wxThreadEvent)
+DEFINE_TYPE_TAG_OF_EVT(UPDATE_UI, wxUpdateUIEvent)
 template<typename T> void BindIfEventIs(wxEvtHandler *self, int eventType, void *aFn, void *aParam) {
     wxEventTypeTag<T> typeTag = TypeTagOf<T>(eventType);
     if (typeTag != wxEVT_NULL) {

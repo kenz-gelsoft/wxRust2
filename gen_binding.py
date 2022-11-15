@@ -301,7 +301,6 @@ def events_cpp(event_classes, config):
     yield '''\
 #include "generated.h"
 
-#define MAP_RUST_EVT(name) case RUST_EVT_##name: return wxEVT_##name;
 
 enum WxRustEvent {\
 '''
@@ -310,11 +309,27 @@ enum WxRustEvent {\
             yield '    RUST_EVT_%s,' % (event_type,)
     yield '''\
 };
+
+#define MAP_RUST_EVT(name) case RUST_EVT_##name: return wxEVT_##name;
+#define DEFINE_TYPE_TAG_OF_EVT(name, clazz) \\
+    template<> wxEventTypeTag<clazz> TypeTagOf(int eventType) { \\
+        switch (eventType) { \\
+        MAP_RUST_EVT(name) \\
+        } \\
+        return wxEVT_NULL; \\
+    }
+
 template<typename T> wxEventTypeTag<T> TypeTagOf(int eventType) {
     return wxEVT_NULL;
 }'''
     for cls in event_classes:
         if len(cls.event_types) < 1:
+            continue
+        if len(cls.event_types) == 1:
+            yield 'DEFINE_TYPE_TAG_OF_EVT(%s, %s)' % (
+                cls.event_types[0],
+                cls.name,
+            )
             continue
         yield '''\
 template<> wxEventTypeTag<%s> TypeTagOf(int eventType) {
