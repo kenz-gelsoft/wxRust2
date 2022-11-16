@@ -253,7 +253,7 @@ impl WidgetsFrame {
         let frame_copy = frame.clone();
         frame
             .base
-            .bind(wx::RustEvent::UpdateUi, move |event: &wx::UpdateUIEvent| {
+            .bind(wx::RustEvent::UpdateUI, move |event: &wx::UpdateUIEvent| {
                 frame_copy.current_page().handle_update_ui(event);
             });
 

@@ -640,7 +640,7 @@ blocklist = [
 ]
 [types.wxBookCtrlEvent]
 event_types = [
-    'BOOKCTRL_PAGE_CHANGED',
+    'BookctrlPageChanged',
 ]
 [types.wxBrush]
 blocklist = [
@@ -664,7 +664,7 @@ blocklist = [
 ]
 [types.wxChildFocusEvent]
 event_types = [
-    'CHILD_FOCUS',
+    'ChildFocus',
 ]
 [types.wxColour]
 blocklist = [
@@ -702,32 +702,32 @@ blocklist = [
 ]
 [types.wxCommandEvent]
 event_types = [
-    'BUTTON',
-    'CHECKBOX',
-    'CHECKLISTBOX',
-    'CHOICE',
-    'COMBOBOX',
-    'COMBOBOX_CLOSEUP',
-    'COMBOBOX_DROPDOWN',
-    'COMMAND_ENTER',
-    'COMMAND_KILL_FOCUS',
-    'COMMAND_LEFT_CLICK',
-    'COMMAND_LEFT_DCLICK',
-    'COMMAND_RIGHT_CLICK',
-    'COMMAND_RIGHT_DCLICK',
-    'COMMAND_SET_FOCUS',
-    'LISTBOX',
-    'LISTBOX_DCLICK',
-    'MENU',
-    'RADIOBOX',
-    'RADIOBUTTON',
-    'SCROLLBAR',
-    'SLIDER',
-    'TEXT',
-    'TOOL_DROPDOWN',
-    'TOOL_ENTER',
-    'TOOL_RCLICKED',
-    'VLBOX',
+    'Button',
+    'Checkbox',
+    'Checklistbox',
+    'Choice',
+    'Combobox',
+    'ComboboxCloseup',
+    'ComboboxDropdown',
+    'CommandEnter',
+    'CommandKillFocus',
+    'CommandLeftClick',
+    'CommandLeftDclick',
+    'CommandRightClick',
+    'CommandRightDclick',
+    'CommandSetFocus',
+    'Listbox',
+    'ListboxDclick',
+    'Menu',
+    'Radiobox',
+    'Radiobutton',
+    'Scrollbar',
+    'Slider',
+    'Text',
+    'ToolDropdown',
+    'ToolEnter',
+    'ToolRclicked',
+    'Vlbox',
 ]
 [types.wxComboCtrl]
 blocklist = [
@@ -755,7 +755,7 @@ blocklist = [
 ]
 [types.wxContextMenuEvent]
 event_types = [
-    'CONTEXT_MENU',
+    'ContextMenu',
 ]
 [types.wxControl]
 wx31 = [
@@ -1019,7 +1019,7 @@ wx31 = [
 ]
 [types.wxDisplayChangedEvent]
 event_types = [
-    'DISPLAY_CHANGED',
+    'DisplayChanged',
 ]
 [types.wxDocManager]
 blocklist = [
@@ -1062,7 +1062,7 @@ not_windows = [
 ]
 [types.wxDropFilesEvent]
 event_types = [
-    'DROP_FILES',
+    'DropFiles',
 ]
 blocklist = [
     # cannot convert Cstr to rust string yet
@@ -1084,7 +1084,7 @@ blocklist = [
 ]
 [types.wxEraseEvent]
 event_types = [
-    'ERASE_BACKGROUND',
+    'EraseBackground',
 ]
 [types.wxEvent]
 returns_owned = [
@@ -1360,7 +1360,7 @@ blocklist = [
 ]
 [types.wxIconizeEvent]
 event_types = [
-    'ICONIZE',
+    'Iconize',
 ]
 blocklist = [
     # deprecated
@@ -1405,7 +1405,7 @@ wx31 = [
 ]
 [types.wxInitDialogEvent]
 event_types = [
-    'INIT_DIALOG',
+    'InitDialog',
 ]
 [types.wxItemAttr]
 blocklist = [
@@ -1476,7 +1476,7 @@ event_types = [
 ]
 [types.wxMaximizeEvent]
 event_types = [
-    'MAXIMIZE',
+    'Maximize',
 ]
 [types.wxMemoryDC]
 blocklist = [
@@ -1535,11 +1535,11 @@ wx32 = [
 ]
 [types.wxMouseCaptureChangedEvent]
 event_types = [
-    'MOUSE_CAPTURE_CHANGED',
+    'MouseCaptureChanged',
 ]
 [types.wxMouseCaptureLostEvent]
 event_types = [
-    'MOUSE_CAPTURE_LOST',
+    'MouseCaptureLost',
 ]
 [types.wxMouseEvent]
 wx31 = [
@@ -1563,7 +1563,7 @@ wx31 = [
 ]
 [types.wxNavigationKeyEvent]
 event_types = [
-    'NAVIGATION_KEY',
+    'NavigationKey',
 ]
 [types.wxNcPaintEvent]
 event_types = [
@@ -1608,7 +1608,7 @@ blocklist = [
 ]
 [types.wxPaintEvent]
 event_types = [
-    'PAINT',
+    'Paint',
 ]
 blocklist = [
     'wxPaintEvent',
@@ -1789,11 +1789,11 @@ event_types = [
 ]
 [types.wxSetCursorEvent]
 event_types = [
-    'SET_CURSOR',
+    'SetCursor',
 ]
 [types.wxShowEvent]
 event_types = [
-    'SHOW',
+    'Show',
 ]
 blocklist = [
     # deprecated
@@ -1904,7 +1904,7 @@ wx31 = [
 ]
 [types.wxSysColourChangedEvent]
 event_types = [
-    'SYS_COLOUR_CHANGED',
+    'SysColourChanged',
 ]
 [types.wxTaskBarIcon]
 wx31 = [
@@ -1968,7 +1968,7 @@ wx31 = [
 ]
 [types.wxThreadEvent]
 event_types = [
-    'THREAD',
+    'Thread',
 ]
 blocklist = [
     # has template parameter
@@ -1976,7 +1976,7 @@ blocklist = [
 ]
 [types.wxTimerEvent]
 event_types = [
-    'TIMER',
+    'Timer',
 ]
 [types.wxTipProvider]
 blocklist = [
@@ -2067,7 +2067,7 @@ wx31 = [
 ]
 [types.wxUpdateUIEvent]
 event_types = [
-    'UPDATE_UI',
+    'UpdateUI',
 ]
 wx31 = [
     'IsCheckable',
@@ -2172,11 +2172,11 @@ wx31 = [
 ]
 [types.wxWindowCreateEvent]
 event_types = [
-    'CREATE',
+    'Create',
 ]
 [types.wxWindowDestroyEvent]
 event_types = [
-    'DESTROY',
+    'Destroy',
 ]
 [types.wxWindowDisabler]
 wx317 = [

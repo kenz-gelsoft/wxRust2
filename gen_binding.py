@@ -1,4 +1,4 @@
-from doxybindgen.model import Class, ClassManager
+from doxybindgen.model import Class, ClassManager, pascal_to_snake
 from doxybindgen.binding import CxxClassBinding, RustClassBinding
 
 from itertools import chain
@@ -287,17 +287,12 @@ def generate_events(classes, config):
                 print(error)
 
 def events_rs(event_classes, config):
-    def snake_to_pascal(s):
-        def capitalized(word):
-            return word[0].upper() + word[1:].lower()
-        words = s.split('_')
-        return ''.join(capitalized(word) for word in words)
     yield '''\
 pub enum RustEvent {\
 '''
     event_types = sorted(chain.from_iterable(c.event_types for c in event_classes))
     for event_type in event_types:
-        yield '    %s,' % (snake_to_pascal(event_type),)
+        yield '    %s,' % (event_type,)
     yield '''\
 }
 '''
@@ -313,7 +308,7 @@ enum WxRustEvent {\
 '''
     event_types = sorted(chain.from_iterable(c.event_types for c in event_classes))
     for event_type in event_types:
-        yield '    RUST_EVT_%s,' % (event_type,)
+        yield '    RUST_EVT_%s,' % (pascal_to_snake(event_type).upper(),)
     yield '''\
 };
 
@@ -334,7 +329,7 @@ template<typename T> wxEventTypeTag<T> TypeTagOf(int eventType) {
             continue
         if len(cls.event_types) == 1:
             yield 'DEFINE_TYPE_TAG_OF_EVT(%s, %s)' % (
-                cls.event_types[0],
+                pascal_to_snake(cls.event_types[0]).upper(),
                 cls.name,
             )
             continue
@@ -343,7 +338,9 @@ template<> wxEventTypeTag<%s> TypeTagOf(int eventType) {
     switch (eventType) {\
 ''' % (cls.name,)
         for event_type in cls.event_types:
-            yield '    MAP_RUST_EVT(%s)' % (event_type,)
+            yield '    MAP_RUST_EVT(%s)' % (
+                pascal_to_snake(event_type).upper(),
+            )
         yield '''\
     }
     return wxEVT_NULL;
