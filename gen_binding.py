@@ -299,7 +299,10 @@ pub enum RustEvent {\
 
 def events_cpp(event_classes, config):
     yield '''\
-#include "generated.h"
+#include <wx/bookctrl.h>
+
+#include "manual.h"
+
 
 enum WxRustEvent {\
 '''

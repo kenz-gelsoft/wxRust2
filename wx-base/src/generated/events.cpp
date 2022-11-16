@@ -1,4 +1,7 @@
-#include "generated.h"
+#include <wx/bookctrl.h>
+
+#include "manual.h"
+
 
 enum WxRustEvent {
     RUST_EVT_BOOKCTRL_PAGE_CHANGED,
