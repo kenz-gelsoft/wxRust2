@@ -44,6 +44,6 @@ pub enum RustEvent {
     ToolDropdown,
     ToolEnter,
     ToolRclicked,
-    UpdateUi,
+    UpdateUI,
     Vlbox,
 }
