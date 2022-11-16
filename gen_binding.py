@@ -217,6 +217,11 @@ use std::os::raw::{c_double, c_int, c_long, c_uchar, c_uint, c_void};
 use super::*;
 use methods::*;
 '''
+    if libname == 'base':
+        yield '''\
+pub use events::*;
+mod events;
+'''
     yield 'mod ffi;'
     for i in initials:
         yield 'mod ffi_%s;' % (i,)
@@ -286,8 +291,6 @@ def events_rs(event_classes, config):
         words = s.split('_')
         return ''.join(capitalized(word) for word in words)
     yield '''\
-use super::*;
-
 pub enum RustEvent {\
 '''
     for cls in event_classes:

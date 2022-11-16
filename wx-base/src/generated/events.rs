@@ -1,5 +1,3 @@
-use super::*;
-
 pub enum RustEvent {
     BookctrlPageChanged,
     ChildFocus,
