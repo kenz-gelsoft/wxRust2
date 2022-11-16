@@ -241,19 +241,19 @@ impl WidgetsFrame {
         let frame_copy = frame.clone();
         frame
             .base
-            .bind(wx::RustEvent::CheckBox, move |event: &wx::CommandEvent| {
+            .bind(wx::RustEvent::Checkbox, move |event: &wx::CommandEvent| {
                 frame_copy.current_page().handle_checkbox(event);
             });
         let frame_copy = frame.clone();
         frame
             .base
-            .bind(wx::RustEvent::RadioBox, move |event: &wx::CommandEvent| {
+            .bind(wx::RustEvent::Radiobox, move |event: &wx::CommandEvent| {
                 frame_copy.current_page().handle_radiobox(event);
             });
         let frame_copy = frame.clone();
         frame
             .base
-            .bind(wx::RustEvent::UpdateUI, move |event: &wx::UpdateUIEvent| {
+            .bind(wx::RustEvent::UpdateUi, move |event: &wx::UpdateUIEvent| {
                 frame_copy.current_page().handle_update_ui(event);
             });
 
