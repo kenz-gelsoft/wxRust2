@@ -640,7 +640,7 @@ blocklist = [
 ]
 [types.wxBookCtrlEvent]
 event_types = [
-   'BookctrlPageChanged',
+    'BookctrlPageChanged',
 ]
 [types.wxBrush]
 blocklist = [
