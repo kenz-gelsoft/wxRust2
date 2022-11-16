@@ -1,6 +1,8 @@
 from doxybindgen.model import Class, ClassManager
 from doxybindgen.binding import CxxClassBinding, RustClassBinding
 
+from itertools import chain
+
 import string
 import subprocess
 import toml
@@ -273,9 +275,9 @@ def generate_events(classes, config):
         'wx-base/src/generated/events.rs': events_rs,
         'wx-base/src/generated/events.cpp': events_cpp,
     }
+    event_classes = [c for c in classes.all() if classes.is_a(c, 'wxEvent')]
     for path, generator in to_be_generated.items():
         is_rust = path.endswith('.rs')
-        event_classes = [cls for cls in classes.all() if classes.is_a(cls, 'wxEvent')]
         with open(path, 'w', newline='\n', encoding='utf-8') as f:
             for chunk in generator(event_classes, config):
                 print(chunk, file=f)
@@ -293,9 +295,9 @@ def events_rs(event_classes, config):
     yield '''\
 pub enum RustEvent {\
 '''
-    for cls in event_classes:
-        for event_type in cls.event_types:
-            yield '    %s,' % (snake_to_pascal(event_type),)
+    event_types = sorted(chain.from_iterable(c.event_types for c in event_classes))
+    for event_type in event_types:
+        yield '    %s,' % (snake_to_pascal(event_type),)
     yield '''\
 }
 '''
@@ -309,9 +311,9 @@ def events_cpp(event_classes, config):
 
 enum WxRustEvent {\
 '''
-    for cls in event_classes:
-        for event_type in cls.event_types:
-            yield '    RUST_EVT_%s,' % (event_type,)
+    event_types = sorted(chain.from_iterable(c.event_types for c in event_classes))
+    for event_type in event_types:
+        yield '    RUST_EVT_%s,' % (event_type,)
     yield '''\
 };
 

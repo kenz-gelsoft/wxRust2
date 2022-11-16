@@ -724,8 +724,8 @@ event_types = [
     'SCROLLBAR',
     'SLIDER',
     'TEXT',
-    'TOOL_ENTER',
     'TOOL_DROPDOWN',
+    'TOOL_ENTER',
     'TOOL_RCLICKED',
     'VLBOX',
 ]
