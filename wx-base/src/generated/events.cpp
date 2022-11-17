@@ -4,6 +4,7 @@
 
 
 enum WxRustEvent {
+    RUST_EVT_AFTER_CHAR,
     RUST_EVT_AUX1_DCLICK,
     RUST_EVT_AUX1_DOWN,
     RUST_EVT_AUX1_UP,
@@ -12,6 +13,8 @@ enum WxRustEvent {
     RUST_EVT_AUX2_UP,
     RUST_EVT_BOOKCTRL_PAGE_CHANGED,
     RUST_EVT_BUTTON,
+    RUST_EVT_CHAR,
+    RUST_EVT_CHAR_HOOK,
     RUST_EVT_CHECKBOX,
     RUST_EVT_CHECKLISTBOX,
     RUST_EVT_CHILD_FOCUS,
@@ -33,8 +36,11 @@ enum WxRustEvent {
     RUST_EVT_DROP_FILES,
     RUST_EVT_ENTER_WINDOW,
     RUST_EVT_ERASE_BACKGROUND,
+    RUST_EVT_HOTKEY,
     RUST_EVT_ICONIZE,
     RUST_EVT_INIT_DIALOG,
+    RUST_EVT_KEY_DOWN,
+    RUST_EVT_KEY_UP,
     RUST_EVT_LEAVE_WINDOW,
     RUST_EVT_LEFT_DCLICK,
     RUST_EVT_LEFT_DOWN,
@@ -124,6 +130,17 @@ DEFINE_TYPE_TAG_OF_EVT(DROP_FILES, wxDropFilesEvent)
 DEFINE_TYPE_TAG_OF_EVT(ERASE_BACKGROUND, wxEraseEvent)
 DEFINE_TYPE_TAG_OF_EVT(ICONIZE, wxIconizeEvent)
 DEFINE_TYPE_TAG_OF_EVT(INIT_DIALOG, wxInitDialogEvent)
+template<> wxEventTypeTag<wxKeyEvent> TypeTagOf(int eventType) {
+    switch (eventType) {
+    MAP_RUST_EVT(AFTER_CHAR)
+    MAP_RUST_EVT(CHAR)
+    MAP_RUST_EVT(CHAR_HOOK)
+    MAP_RUST_EVT(HOTKEY)
+    MAP_RUST_EVT(KEY_DOWN)
+    MAP_RUST_EVT(KEY_UP)
+    }
+    return wxEVT_NULL;
+}
 DEFINE_TYPE_TAG_OF_EVT(MAXIMIZE, wxMaximizeEvent)
 DEFINE_TYPE_TAG_OF_EVT(MOUSE_CAPTURE_CHANGED, wxMouseCaptureChangedEvent)
 DEFINE_TYPE_TAG_OF_EVT(MOUSE_CAPTURE_LOST, wxMouseCaptureLostEvent)
@@ -180,6 +197,7 @@ void wxEvtHandler_Bind(wxEvtHandler *self, int eventType, void *aFn, void *aPara
     BindIfEventIs<wxEraseEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxIconizeEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxInitDialogEvent>(self, eventType, aFn, aParam);
+    BindIfEventIs<wxKeyEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxMaximizeEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxMouseCaptureChangedEvent>(self, eventType, aFn, aParam);
     BindIfEventIs<wxMouseCaptureLostEvent>(self, eventType, aFn, aParam);

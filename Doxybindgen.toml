@@ -1430,6 +1430,14 @@ wx31 = [
     'GetButtonOrdinal',
 ]
 [types.wxKeyEvent]
+event_types = [
+    'AfterChar',
+    'Char',
+    'CharHook',
+    'Hotkey',
+    'KeyDown',
+    'KeyUp',
+]
 wx31 = [
     'IsAutoRepeat',
 ]
