@@ -1434,7 +1434,8 @@ event_types = [
     'AfterChar',
     'Char',
     'CharHook',
-    'Hotkey',
+    # Configuration specific
+    # 'Hotkey',
     'KeyDown',
     'KeyUp',
 ]
@@ -1565,7 +1566,8 @@ event_types = [
     'LeftDclick',
     'LeftDown',
     'LeftUp',
-    'Magnify',
+    # wx31 introduced event type
+    # 'Magnify',
     'MiddleDclick',
     'MiddleDown',
     'MiddleUp',
