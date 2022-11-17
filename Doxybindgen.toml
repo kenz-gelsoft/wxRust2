@@ -512,6 +512,12 @@ blocklist = [
 blocklist = [
     'wxAcceleratorTable2',
 ]
+[types.wxActivateEvent]
+event_types = [
+    'ActivateApp',
+    'Activate',
+    'Hibernate',
+]
 [types.wxAddRemoveAdaptor]
 blocklist = [
     'wxAddRemoveAdaptor',
@@ -665,6 +671,18 @@ blocklist = [
 [types.wxChildFocusEvent]
 event_types = [
     'ChildFocus',
+]
+[types.wxClipboardTextEvent]
+event_types = [
+    'TextCopy',
+    'TextCut',
+    'TextPaste',
+]
+[types.wxCloseEvent]
+event_types = [
+    'CloseWindow',
+    'EndSession',
+    'QueryEndSession',
 ]
 [types.wxColour]
 blocklist = [
@@ -1128,6 +1146,11 @@ wx31 = [
     'ResolveLink',
     'URLToFileName',
 ]
+[types.wxFocusEvent]
+event_types = [
+    'SetFocus',
+    'KillFocus',
+]
 [types.wxFont]
 blocklist = [
     'operator=',
@@ -1328,6 +1351,11 @@ blocklist = [
 wx31 = [
     'GetColumnTitleWidth1',
 ]
+[types.wxHelpEvent]
+event_types = [
+    'Help',
+    'DetailedHelp',
+]
 [types.wxHScrolledWindow]
 blocklist = [
     'wxHScrolledWindow',
@@ -1370,7 +1398,7 @@ blocklist = [
 ]
 [types.wxIdleEvent]
 event_types = [
-    'IDLE',
+    'Idle',
 ]
 [types.wxImage]
 blocklist = [
@@ -1426,6 +1454,12 @@ blocklist = [
     'wxItemContainerImmutable',
 ]
 [types.wxJoystickEvent]
+event_types = [
+    'JoyButtonDown',
+    'JoyButtonUp',
+    'JoyMove',
+    'JoyZmove',
+]
 wx31 = [
     'GetButtonOrdinal',
 ]
@@ -1511,6 +1545,12 @@ mac = [
     'MacSetCommonMenuBar',
     'OSXGetAppleMenu',
 ]
+[types.wxMenuEvent]
+event_types = [
+    'MenuOpen',
+    'MenuClose',
+    'MenuHighlight',
+]
 [types.wxMenuItem]
 blocklist = [
     'GetLabelFromText',
@@ -1588,6 +1628,13 @@ blocklist = [
     'wxMouseEventsManager',
     'wxMouseEventsManager1',
 ]
+[types.wxMoveEvent]
+event_types = [
+    'Move',
+    'Moving',
+    'MoveStart',
+    'MoveEnd',
+]
 [types.wxNativeFontInfo]
 blocklist = [
     'operator=',
@@ -1602,7 +1649,7 @@ event_types = [
 ]
 [types.wxNcPaintEvent]
 event_types = [
-    'NC_PAINT',
+    'NcPaint',
 ]
 [types.wxNonOwnedWindow]
 library = 'core'
@@ -1654,7 +1701,7 @@ blocklist = [
 ]
 [types.wxPaletteChangedEvent]
 event_types = [
-    'PALETTE_CHANGED',
+    'PaletteChanged',
 ]
 [types.wxPanGestureEvent]
 event_types = [
@@ -1740,7 +1787,7 @@ blocklist = [
 ]
 [types.wxQueryNewPaletteEvent]
 event_types = [
-    'QUERY_NEW_PALETTE',
+    'QueryNewPalette',
 ]
 [types.wxRadioBox]
 blocklist = [
@@ -1825,6 +1872,29 @@ event_types = [
     # MEMO: wx32 introduced event types are commented out
     # 'GestureRotate',
 ]
+[types.wxScrollEvent]
+event_types = [
+    'ScrollTop',
+    'ScrollBottom',
+    'ScrollLineup',
+    'ScrollLinedown',
+    'ScrollPageup',
+    'ScrollPagedown',
+    'ScrollThumbtrack',
+    'ScrollThumbrelease',
+    'ScrollChanged',
+]
+[types.wxScrollWinEvent]
+event_types = [
+    'ScrollwinTop',
+    'ScrollwinBottom',
+    'ScrollwinLineup',
+    'ScrollwinLinedown',
+    'ScrollwinPageup',
+    'ScrollwinPagedown',
+    'ScrollwinThumbtrack',
+    'ScrollwinThumbrelease',
+]
 [types.wxSetCursorEvent]
 event_types = [
     'SetCursor',
@@ -1860,6 +1930,10 @@ blocklist = [
     'Scale',
 ]
 [types.wxSizeEvent]
+event_types = [
+    'Size',
+    'Sizing',
+]
 blocklist = [
     # binding type by value is not supported
     'SetSize',
@@ -1895,6 +1969,13 @@ blocklist = [
     'SetSizer',
     'SetSpacer',
     'SetWindow',
+]
+[types.wxSpinEvent]
+event_types = [
+    # Configuration specific
+    # 'SpinUp',
+    # 'SpinDown',
+    # 'Spin',
 ]
 [types.wxStandardPaths]
 windows = [
