@@ -1545,6 +1545,28 @@ event_types = [
     'MouseCaptureLost',
 ]
 [types.wxMouseEvent]
+event_types = [
+    'Aux1Dclick',
+    'Aux1Down',
+    'Aux1Up',
+    'Aux2Dclick',
+    'Aux2Down',
+    'Aux2Up',
+    'EnterWindow',
+    'LeaveWindow',
+    'LeftDclick',
+    'LeftDown',
+    'LeftUp',
+    'Magnify',
+    'MiddleDclick',
+    'MiddleDown',
+    'MiddleUp',
+    'Motion',
+    'Mousewheel',
+    'RightDclick',
+    'RightDown',
+    'RightUp',
+]
 wx31 = [
     'GetMagnification',
     'IsWheelInverted',
