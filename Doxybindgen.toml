@@ -554,7 +554,7 @@ wx317 = [
 [types.wxAsyncMethodCallEvent]
 event_types = [
     # not generated until wxAsyncMethodCallEvent class to be genarated
-    'ASYNC_METHOD_CALL',
+    'AsyncMethodCall',
 ]
 [types.wxBannerWindow]
 blocklist = [
@@ -1048,7 +1048,8 @@ blocklist = [
 ]
 [types.wxDPIChangedEvent]
 event_types = [
-    # 'DPI_CHANGED',
+    # MEMO: wx32 introduced event types are commented out
+    # 'DpiChanged',
 ]
 blocklist = [
     # binding type by value is not supported
@@ -1176,7 +1177,8 @@ windows = [
 ]
 [types.wxFullScreenEvent]
 event_types = [
-    # 'FULLSCREEN',
+    # MEMO: wx32 introduced event types are commented out
+    # 'Fullscreen',
 ]
 [types.wxGBPosition]
 blocklist = [
@@ -1472,7 +1474,8 @@ wx31 = [
 ]
 [types.wxLongPressEvent]
 event_types = [
-    # 'LONG_PRESS',
+    # MEMO: wx32 introduced event types are commented out
+    # 'LongPress',
 ]
 [types.wxMaximizeEvent]
 event_types = [
@@ -1623,7 +1626,8 @@ event_types = [
 ]
 [types.wxPanGestureEvent]
 event_types = [
-    # 'GESTURE_PAN',
+    # MEMO: wx32 introduced event types are commented out
+    # 'GesturePan',
 ]
 [types.wxPen]
 blocklist = [
@@ -1678,7 +1682,8 @@ wx31 = [
 ]
 [types.wxPressAndTapEvent]
 event_types = [
-    # 'PRESS_AND_TAP',
+    # MEMO: wx32 introduced event types are commented out
+    # 'PressAndTap',
 ]
 [types.wxPrintData]
 blocklist = [
@@ -1785,7 +1790,8 @@ wx31 = [
 ]
 [types.wxRotateGestureEvent]
 event_types = [
-    # 'GESTURE_ROTATE',
+    # MEMO: wx32 introduced event types are commented out
+    # 'GestureRotate',
 ]
 [types.wxSetCursorEvent]
 event_types = [
@@ -2059,7 +2065,8 @@ blocklist = [
 ]
 [types.wxTwoFingerTapEvent]
 event_types = [
-    'TWO_FINGER_TAP',
+    # not generated until wxAsyncMethodCallEvent class to be genarated
+    'TwoFingerTap',
 ]
 [types.wxUIActionSimulator]
 wx31 = [
@@ -2191,5 +2198,6 @@ blocklist = [
 ]
 [types.wxZoomGestureEvent]
 event_types = [
-    # 'GESTURE_ZOOM',
+    # MEMO: wx32 introduced event types are commented out
+    # 'GestureZoom',
 ]
