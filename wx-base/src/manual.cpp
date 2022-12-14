@@ -129,6 +129,6 @@ void *OpaqueWeakRef_Get(void *self) {
     return weakRef->Get();
 }
 
-int wxRustEntry(int *argc, char **argv) {
+int wxRustEntry(int *argc, wxChar **argv) {
     return wxEntry(*argc, argv);
 }

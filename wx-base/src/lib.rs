@@ -2,7 +2,8 @@
 
 use std::marker::PhantomData;
 use std::mem;
-use std::os::raw::{c_char, c_int, c_void};
+use std::os::raw::{c_int, c_void};
+use std::os::windows::prelude::OsStrExt;
 use std::ptr;
 use std::slice;
 use std::str;
@@ -23,7 +24,7 @@ pub use generated::RustEvent;
 use methods::*;
 
 mod ffi {
-    use std::os::raw::{c_char, c_int, c_uchar, c_void};
+    use std::os::raw::{c_int, c_uchar, c_void};
 
     #[repr(C)]
     pub struct UTF8Data {
@@ -64,7 +65,7 @@ mod ffi {
         pub fn wxArrayString_delete(self_: *mut c_void);
         pub fn wxArrayString_Add(self_: *mut c_void, s: *const c_void);
 
-        pub fn wxRustEntry(argc: *mut c_int, argv: *mut *mut c_char) -> c_int;
+        pub fn wxRustEntry(argc: *mut c_int, argv: *mut *const u16) -> c_int;
 
         // WeakRef
         pub fn OpaqueWeakRef_new(obj: *mut c_void) -> *mut c_void;
@@ -292,13 +293,15 @@ impl<const OWNED: bool> Drop for StringConstIteratorIsOwned<OWNED> {
 
 // wxEntry
 pub fn entry() {
-    let args: Vec<String> = std::env::args().collect();
-    let mut argv: Vec<*mut c_char> = Vec::with_capacity(args.len() + 1);
-    for arg in &args {
-        argv.push(arg.as_ptr() as *mut c_char);
-    }
-    argv.push(ptr::null_mut()); // Nul terminator.
+    let args: Vec<Vec<u16>> = std::env::args_os()
+        .map(|arg| {
+            let mut wide: Vec<u16> = arg.encode_wide().collect();
+            wide.push(0);
+            wide
+        })
+        .collect();
     let mut argc: c_int = args.len().try_into().unwrap();
+    let mut argv: Vec<*const u16> = args.iter().map(|arg| arg.as_ptr()).collect();
     unsafe {
         ffi::wxRustEntry(&mut argc, argv.as_mut_ptr());
     }
