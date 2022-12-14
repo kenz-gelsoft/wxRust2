@@ -1,9 +1,9 @@
 #![doc = include_str!("../README.md")]
 
+use std::ffi::OsString;
 use std::marker::PhantomData;
 use std::mem;
 use std::os::raw::{c_int, c_void};
-use std::os::windows::prelude::OsStrExt;
 use std::ptr;
 use std::slice;
 use std::str;
@@ -22,6 +22,11 @@ pub use generated::class::*;
 pub use generated::RustEvent;
 
 use methods::*;
+
+#[cfg(windows)]
+type ArgChar = u16;
+#[cfg(not(windows))]
+type ArgChar = u8;
 
 mod ffi {
     use std::os::raw::{c_int, c_uchar, c_void};
@@ -65,7 +70,7 @@ mod ffi {
         pub fn wxArrayString_delete(self_: *mut c_void);
         pub fn wxArrayString_Add(self_: *mut c_void, s: *const c_void);
 
-        pub fn wxRustEntry(argc: *mut c_int, argv: *mut *const u16) -> c_int;
+        pub fn wxRustEntry(argc: *mut c_int, argv: *mut *const super::ArgChar) -> c_int;
 
         // WeakRef
         pub fn OpaqueWeakRef_new(obj: *mut c_void) -> *mut c_void;
@@ -293,15 +298,29 @@ impl<const OWNED: bool> Drop for StringConstIteratorIsOwned<OWNED> {
 
 // wxEntry
 pub fn entry() {
-    let args: Vec<Vec<u16>> = std::env::args_os()
-        .map(|arg| {
-            let mut wide: Vec<u16> = arg.encode_wide().collect();
-            wide.push(0);
-            wide
-        })
-        .collect();
+    #[cfg(windows)]
+    fn to_wx_arg(arg: OsString) -> Vec<ArgChar> {
+        use std::os::windows::prelude::OsStrExt;
+
+        let mut wide: Vec<ArgChar> = arg.encode_wide().collect();
+        wide.push(0);
+        wide
+    }
+    #[cfg(not(windows))]
+    fn to_wx_arg(arg: OsString) -> Vec<ArgChar> {
+        use std::os::unix::prelude::OsStringExt;
+
+        let mut vec: Vec<ArgChar> = arg.into_vec();
+        vec.push(0);
+        vec
+    }
+
+    let args: Vec<Vec<ArgChar>> = std::env::args_os().map(to_wx_arg).collect();
     let mut argc: c_int = args.len().try_into().unwrap();
-    let mut argv: Vec<*const u16> = args.iter().map(|arg| arg.as_ptr()).collect();
+    let mut argv: Vec<*const ArgChar> = args
+        .iter()
+        .map(|arg| arg.as_ptr() as *const ArgChar)
+        .collect();
     unsafe {
         ffi::wxRustEntry(&mut argc, argv.as_mut_ptr());
     }

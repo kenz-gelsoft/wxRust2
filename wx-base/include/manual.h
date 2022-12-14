@@ -83,6 +83,11 @@ void *OpaqueWeakRef_copy(void *obj);
 void OpaqueWeakRef_delete(void *self);
 void *OpaqueWeakRef_Get(void *self);
 
-int wxRustEntry(int *argc, wxChar **argv);
+#ifdef __WXMSW__
+typedef wxChar ArgChar;
+#else
+typedef char ArgChar;
+#endif // __WXMSW__
+int wxRustEntry(int *argc, ArgChar **argv);
 
 } // extern "C"
