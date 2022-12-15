@@ -15,6 +15,13 @@ bool App::OnInit() {
     return true;
 }
 
+int wxApp_argc() {
+    return wxGetApp().argc;
+}
+wxString *wxApp_argv(int i) {
+    return new wxString(wxGetApp().argv[i]);
+}
+
 void wxObject_delete(wxObject *self) {
     delete self;
 }
@@ -129,6 +136,6 @@ void *OpaqueWeakRef_Get(void *self) {
     return weakRef->Get();
 }
 
-int wxRustEntry(int *argc, char **argv) {
+int wxRustEntry(int *argc, ArgChar **argv) {
     return wxEntry(*argc, argv);
 }

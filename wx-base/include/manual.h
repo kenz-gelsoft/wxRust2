@@ -44,6 +44,9 @@ class App : public wxApp {
     virtual bool OnInit();
 };
 
+int wxApp_argc();
+wxString *wxApp_argv(int i);
+
 void wxObject_delete(wxObject *self);
 
 void wxEvtHandler_Bind(wxEvtHandler *evtHandler, int eventType, void *aFn, void *aParam);
@@ -83,6 +86,11 @@ void *OpaqueWeakRef_copy(void *obj);
 void OpaqueWeakRef_delete(void *self);
 void *OpaqueWeakRef_Get(void *self);
 
-int wxRustEntry(int *argc, char **argv);
+#ifdef __WXMSW__
+typedef wxChar ArgChar;
+#else
+typedef char ArgChar;
+#endif // __WXMSW__
+int wxRustEntry(int *argc, ArgChar **argv);
 
 } // extern "C"

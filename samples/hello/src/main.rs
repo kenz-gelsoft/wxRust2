@@ -10,8 +10,12 @@ use wx::methods::*;
 
 fn main() {
     wx::App::run(|_| {
+        let mut first_arg = "世界".to_owned();
+        if let Some(arg) = wx::App::args().nth(1) {
+            first_arg = arg;
+        }
         let frame = wx::Frame::builder(wx::Window::none())
-            .title("Hello, 世界")
+            .title(&format!("Hello, {}", first_arg))
             .build();
         let button = wx::Button::builder(Some(&frame)).label("Greet").build();
         let i = 3;

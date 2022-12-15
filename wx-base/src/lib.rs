@@ -1,8 +1,9 @@
 #![doc = include_str!("../README.md")]
 
+use std::ffi::OsString;
 use std::marker::PhantomData;
 use std::mem;
-use std::os::raw::{c_char, c_int, c_void};
+use std::os::raw::{c_int, c_void};
 use std::ptr;
 use std::slice;
 use std::str;
@@ -22,8 +23,13 @@ pub use generated::RustEvent;
 
 use methods::*;
 
+#[cfg(windows)]
+type ArgChar = u16;
+#[cfg(not(windows))]
+type ArgChar = u8;
+
 mod ffi {
-    use std::os::raw::{c_char, c_int, c_uchar, c_void};
+    use std::os::raw::{c_int, c_uchar, c_void};
 
     #[repr(C)]
     pub struct UTF8Data {
@@ -32,6 +38,9 @@ mod ffi {
     }
     extern "C" {
         pub fn wxObject_delete(self_: *mut c_void);
+
+        pub fn wxApp_argc() -> c_int;
+        pub fn wxApp_argv(i: c_int) -> *mut c_void;
 
         pub fn AppSetOnInit(aFn: *mut c_void, aParam: *mut c_void);
         pub fn wxEvtHandler_Bind(
@@ -64,7 +73,7 @@ mod ffi {
         pub fn wxArrayString_delete(self_: *mut c_void);
         pub fn wxArrayString_Add(self_: *mut c_void, s: *const c_void);
 
-        pub fn wxRustEntry(argc: *mut c_int, argv: *mut *mut c_char) -> c_int;
+        pub fn wxRustEntry(argc: *mut c_int, argv: *mut *const super::ArgChar) -> c_int;
 
         // WeakRef
         pub fn OpaqueWeakRef_new(obj: *mut c_void) -> *mut c_void;
@@ -220,6 +229,24 @@ impl<T: EvtHandlerMethods> Trackable<T> for T {
     }
 }
 
+pub struct WxArgs {
+    argc: c_int,
+    i: c_int,
+}
+impl Iterator for WxArgs {
+    type Item = String;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        let i = self.i;
+        self.i += 1;
+        if i == self.argc {
+            None
+        } else {
+            unsafe { Some(WxString::from_ptr(ffi::wxApp_argv(i)).into()) }
+        }
+    }
+}
+
 // wxApp
 pub enum App {}
 impl App {
@@ -232,6 +259,14 @@ impl App {
     pub fn run<F: Fn(*mut c_void) + 'static>(closure: F) {
         Self::on_init(closure);
         entry();
+    }
+    pub fn args() -> WxArgs {
+        unsafe {
+            WxArgs {
+                argc: ffi::wxApp_argc(),
+                i: 0,
+            }
+        }
     }
 }
 
@@ -292,13 +327,29 @@ impl<const OWNED: bool> Drop for StringConstIteratorIsOwned<OWNED> {
 
 // wxEntry
 pub fn entry() {
-    let args: Vec<String> = std::env::args().collect();
-    let mut argv: Vec<*mut c_char> = Vec::with_capacity(args.len() + 1);
-    for arg in &args {
-        argv.push(arg.as_ptr() as *mut c_char);
+    #[cfg(windows)]
+    fn to_wx_arg(arg: OsString) -> Vec<ArgChar> {
+        use std::os::windows::prelude::OsStrExt;
+
+        let mut wide: Vec<ArgChar> = arg.encode_wide().collect();
+        wide.push(0);
+        wide
     }
-    argv.push(ptr::null_mut()); // Nul terminator.
+    #[cfg(not(windows))]
+    fn to_wx_arg(arg: OsString) -> Vec<ArgChar> {
+        use std::os::unix::prelude::OsStringExt;
+
+        let mut vec: Vec<ArgChar> = arg.into_vec();
+        vec.push(0);
+        vec
+    }
+
+    let args: Vec<Vec<ArgChar>> = std::env::args_os().map(to_wx_arg).collect();
     let mut argc: c_int = args.len().try_into().unwrap();
+    let mut argv: Vec<*const ArgChar> = args
+        .iter()
+        .map(|arg| arg.as_ptr() as *const ArgChar)
+        .collect();
     unsafe {
         ffi::wxRustEntry(&mut argc, argv.as_mut_ptr());
     }
