@@ -39,6 +39,9 @@ mod ffi {
     extern "C" {
         pub fn wxObject_delete(self_: *mut c_void);
 
+        pub fn wxApp_argc() -> c_int;
+        pub fn wxApp_argv(i: c_int) -> *mut c_void;
+
         pub fn AppSetOnInit(aFn: *mut c_void, aParam: *mut c_void);
         pub fn wxEvtHandler_Bind(
             self_: *mut c_void,
@@ -226,6 +229,24 @@ impl<T: EvtHandlerMethods> Trackable<T> for T {
     }
 }
 
+pub struct WxArgs {
+    argc: c_int,
+    i: c_int,
+}
+impl Iterator for WxArgs {
+    type Item = String;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        let i = self.i;
+        self.i += 1;
+        if i == self.argc {
+            None
+        } else {
+            unsafe { Some(WxString::from_ptr(ffi::wxApp_argv(i)).into()) }
+        }
+    }
+}
+
 // wxApp
 pub enum App {}
 impl App {
@@ -238,6 +259,14 @@ impl App {
     pub fn run<F: Fn(*mut c_void) + 'static>(closure: F) {
         Self::on_init(closure);
         entry();
+    }
+    pub fn args() -> WxArgs {
+        unsafe {
+            WxArgs {
+                argc: ffi::wxApp_argc(),
+                i: 0,
+            }
+        }
     }
 }
 

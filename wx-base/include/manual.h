@@ -44,6 +44,9 @@ class App : public wxApp {
     virtual bool OnInit();
 };
 
+int wxApp_argc();
+wxString *wxApp_argv(int i);
+
 void wxObject_delete(wxObject *self);
 
 void wxEvtHandler_Bind(wxEvtHandler *evtHandler, int eventType, void *aFn, void *aParam);
