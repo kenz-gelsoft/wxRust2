@@ -82,12 +82,8 @@ impl WidgetsPage for DatePickerWidgetsPage {
         // left pane: style
         let sizer_left = wx::BoxSizer::new(wx::VERTICAL);
 
-        let kinds = wx::ArrayString::new();
-        kinds.add("&Default");
-        kinds.add("&Spin");
-        kinds.add("Drop do&wn");
         let radio_kind = wx::RadioBox::builder(Some(&self.base))
-            .choices(kinds)
+            .choices(["&Default", "&Spin", "Drop do&wn"].into())
             .major_dimension(1)
             .style(wx::RA_SPECIFY_COLS.into())
             .build();

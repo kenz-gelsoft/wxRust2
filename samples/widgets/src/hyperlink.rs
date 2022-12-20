@@ -127,14 +127,9 @@ impl WidgetsPage for HyperlinkWidgetsPage {
             wx::Object::none(),
         );
 
-        let alignments = wx::ArrayString::new();
-        alignments.add("&left");
-        alignments.add("&centre");
-        alignments.add("&right");
-
         let radio_align_mode = wx::RadioBox::builder(Some(&self.base))
             .label("alignment")
-            .choices(alignments)
+            .choices(["&left", "&centre", "&right"].into())
             .build();
         radio_align_mode.set_selection(1); // start with "centre" selected since
                                            // wxHL_DEFAULT_STYLE contains wxHL_ALIGN_CENTRE

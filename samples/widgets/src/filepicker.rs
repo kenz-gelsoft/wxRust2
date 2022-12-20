@@ -98,12 +98,9 @@ impl WidgetsPage for FilePickerWidgetsPage {
         // left pane
         let boxleft = wx::BoxSizer::new(wx::VERTICAL);
 
-        let mode = wx::ArrayString::new();
-        mode.add("open");
-        mode.add("save");
         let radio_file_picker_mode = wx::RadioBox::builder(Some(&self.base))
             .label("wxFilePicker mode")
-            .choices(mode)
+            .choices(["open", "save"].into())
             .build();
         boxleft.add_window_int(
             Some(&radio_file_picker_mode),

@@ -95,11 +95,7 @@ impl WidgetsPage for HeaderCtrlWidgetsPage {
         // column flags
         let mut col_settings: Vec<ColSetting> = vec![];
         for i in 0..NUMBER_OF_COLUMNS {
-            let col_alignments = wx::ArrayString::new();
-            col_alignments.add("none");
-            col_alignments.add("left");
-            col_alignments.add("centre");
-            col_alignments.add("right");
+            let col_alignments = ["none", "left", "centre", "right"].into();
 
             let sizer_col = wx::StaticBoxSizer::new_with_int(
                 wx::VERTICAL,

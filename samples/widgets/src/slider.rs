@@ -182,12 +182,7 @@ impl WidgetsPage for SliderWidgetsPage {
         let chk_value_label =
             self.create_check_box_and_add_to_sizer(&sizer_left, "Show &value label", wx::ID_ANY);
 
-        let sides = wx::ArrayString::new();
-        sides.add("default");
-        sides.add("top");
-        sides.add("bottom");
-        sides.add("left");
-        sides.add("right");
+        let sides = ["default", "top", "bottom", "left", "right"].into();
         let radio_sides = wx::RadioBox::builder(Some(&self.base))
             .id(SliderPage::RadioSides.into())
             .label("&Label position")

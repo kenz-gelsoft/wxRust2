@@ -103,10 +103,12 @@ impl WidgetsPage for CheckBoxWidgetsPage {
 
         sizer_left.add_spacer(10);
 
-        let kinds = wx::ArrayString::new();
-        kinds.add("usual &2-state checkbox");
-        kinds.add("&3rd state settable by program");
-        kinds.add("&user-settable 3rd state");
+        let kinds = [
+            "usual &2-state checkbox",
+            "&3rd state settable by program",
+            "&user-settable 3rd state",
+        ]
+        .into();
         let radio_kind = wx::RadioBox::builder(Some(&self.base))
             .label("&Kind")
             .choices(kinds)
