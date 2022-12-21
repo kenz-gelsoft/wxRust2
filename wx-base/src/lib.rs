@@ -314,7 +314,7 @@ where
     fn from(items: T) -> Self {
         let array_string = Self::new();
         for item in items {
-            array_string.add(&format!("{item}"));
+            array_string.add(&item.to_string());
         }
         array_string
     }
