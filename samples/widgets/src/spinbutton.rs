@@ -158,14 +158,9 @@ impl WidgetsPage for SpinButtonWidgetsPage {
 
         sizer_left.add_int_int(5, 5, 0, wx::GROW | wx::ALL, 5, wx::Object::none()); // spacer
 
-        let halign = wx::ArrayString::new();
-        halign.add("left");
-        halign.add("centre");
-        halign.add("right");
-
         let radio_align = wx::RadioBox::builder(Some(&self.base))
             .label("&Text alignment")
-            .choices(halign)
+            .choices(["left", "centre", "right"].into())
             .major_dimension(1)
             .build();
         sizer_left.add_window_int(

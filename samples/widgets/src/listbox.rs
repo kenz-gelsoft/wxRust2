@@ -183,11 +183,7 @@ impl WidgetsPage for ListboxWidgetsPage {
             .build();
         let sizer_left = wx::StaticBoxSizer::new_with_staticbox(Some(&s_box), wx::VERTICAL);
 
-        let modes = wx::ArrayString::new();
-        modes.add("single");
-        modes.add("extended");
-        modes.add("multiple");
-
+        let modes = ["single", "extended", "multiple"].into();
         let radio_sel_mode = wx::RadioBox::builder(Some(&self.base))
             .label("Selection &mode:")
             .choices(modes)
@@ -195,11 +191,7 @@ impl WidgetsPage for ListboxWidgetsPage {
             .style(wx::RA_SPECIFY_COLS.into())
             .build();
 
-        let list_types = wx::ArrayString::new();
-        list_types.add("list box");
-        list_types.add("check list box");
-        list_types.add("rearrange list");
-
+        let list_types = ["list box", "check list box", "rearrange list"].into();
         let radio_list_type = wx::RadioBox::builder(Some(&self.base))
             .label("&List type:")
             .choices(list_types)
@@ -699,10 +691,12 @@ impl ListboxWidgetsPage {
     }
 
     fn on_button_add_several(&self) {
-        let items = wx::ArrayString::new();
-        items.add("First");
-        items.add("another one");
-        items.add("and the last (very very very very very very very very very very long) one");
+        let items: wx::ArrayString = [
+            "First",
+            "another one",
+            "and the last (very very very very very very very very very very long) one",
+        ]
+        .into();
         if let Some(lbox) = self.lbox.borrow().as_ref() {
             lbox.insert_arraystring(&items, 0);
         }

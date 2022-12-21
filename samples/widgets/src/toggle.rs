@@ -157,14 +157,9 @@ impl WidgetsPage for ToggleWidgetsPage {
 
         sizer_left.add_spacer(10);
 
-        let dirs = wx::ArrayString::new();
-        dirs.add("left");
-        dirs.add("right");
-        dirs.add("top");
-        dirs.add("bottom");
         let radio_image_pos = wx::RadioBox::builder(Some(&self.base))
             .label("Image &position")
-            .choices(dirs)
+            .choices(["left", "right", "top", "bottom"].into())
             .build();
         sizer_left.add_window_sizerflags(
             Some(&radio_image_pos),
@@ -172,22 +167,14 @@ impl WidgetsPage for ToggleWidgetsPage {
         );
         sizer_left.add_spacer(15);
 
-        let halign = wx::ArrayString::new();
-        halign.add("left");
-        halign.add("centre");
-        halign.add("right");
         let radio_halign = wx::RadioBox::builder(Some(&self.base))
             .label("&Horz alignment")
-            .choices(halign)
+            .choices(["left", "centre", "right"].into())
             .build();
 
-        let valign = wx::ArrayString::new();
-        valign.add("top");
-        valign.add("centre");
-        valign.add("bottom");
         let radio_valign = wx::RadioBox::builder(Some(&self.base))
             .label("&Vert alignment")
-            .choices(valign)
+            .choices(["top", "centre", "bottom"].into())
             .build();
 
         sizer_left.add_window_sizerflags(

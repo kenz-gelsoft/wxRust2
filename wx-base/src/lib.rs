@@ -306,6 +306,20 @@ impl<const OWNED: bool> Drop for ArrayStringIsOwned<OWNED> {
     }
 }
 
+impl<T> From<T> for ArrayString
+where
+    T: IntoIterator,
+    T::Item: std::fmt::Display,
+{
+    fn from(items: T) -> Self {
+        let array_string = Self::new();
+        for item in items {
+            array_string.add(&item.to_string());
+        }
+        array_string
+    }
+}
+
 // (wx)String::const_iterator
 wxwidgets! {
     class StringConstIterator

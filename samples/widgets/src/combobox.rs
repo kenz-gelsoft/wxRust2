@@ -149,14 +149,9 @@ impl WidgetsPage for ComboboxWidgetsPage {
         // upper left pane
 
         // should be in sync with ComboKind_XXX values
-        let kinds = wx::ArrayString::new();
-        kinds.add("default");
-        kinds.add("simple");
-        kinds.add("drop down");
-
         let radio_kind = wx::RadioBox::builder(Some(&self.base))
             .label("Combobox &kind:")
-            .choices(kinds)
+            .choices(["default", "simple", "drop down"].into())
             .major_dimension(1)
             .style(wx::RA_SPECIFY_COLS.into())
             .build();
@@ -658,10 +653,12 @@ impl ComboboxWidgetsPage {
     }
 
     fn on_button_add_several(&self) {
-        let items = wx::ArrayString::new();
-        items.add("First");
-        items.add("another one");
-        items.add("and the last (very very very very very very very very very very long) one");
+        let items: wx::ArrayString = [
+            "First",
+            "another one",
+            "and the last (very very very very very very very very very very long) one",
+        ]
+        .into();
         if let Some(combobox) = self.combobox.borrow().as_ref() {
             combobox.insert_arraystring(&items, 0);
         }

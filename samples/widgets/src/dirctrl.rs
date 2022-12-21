@@ -221,8 +221,7 @@ impl WidgetsPage for DirCtrlWidgetsPage {
             wx::Object::none(),
         );
 
-        let std_paths = wx::ArrayString::new();
-        for path in [
+        let std_paths = [
             "&none",
             "&config",
             "&data",
@@ -233,9 +232,8 @@ impl WidgetsPage for DirCtrlWidgetsPage {
             "&user config",
             "&user data",
             "&user local data",
-        ] {
-            std_paths.add(path);
-        }
+        ]
+        .into();
 
         // middle pane
         let radio_std_path = wx::RadioBox::builder(Some(&self.base))

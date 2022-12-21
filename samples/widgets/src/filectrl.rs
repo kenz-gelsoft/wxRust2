@@ -106,12 +106,9 @@ impl WidgetsPage for FileCtrlWidgetsPage {
         // left pane
         let sizer_left = wx::BoxSizer::new(wx::VERTICAL);
 
-        let mode = wx::ArrayString::new();
-        mode.add("open");
-        mode.add("save");
         let radio_file_ctrl_mode = wx::RadioBox::builder(Some(&self.base))
             .label("wxFileCtrl mode")
-            .choices(mode)
+            .choices(["open", "save"].into())
             .build();
 
         sizer_left.add_window_int(
