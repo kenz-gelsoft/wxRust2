@@ -143,7 +143,7 @@ pub mod methods {
     }
 
     pub trait DynamicCast: ObjectMethods {
-        fn class_info() -> ClassInfoFromCpp<false>;
+        fn class_info() -> ClassInfoFromCpp<true>;
         fn dynanic_cast<T: DynamicCast>(&self) -> Option<T::CppManaged> {
             if self.is_kind_of(Some(&T::class_info())) {
                 unsafe { Some(T::from_cpp_managed_ptr(self.as_ptr())) }
@@ -272,7 +272,7 @@ impl App {
 
 wxwidgets! {
     class ArrayInt
-        = ArrayIntFromCpp<true>(wxArrayInt) impl
+        = ArrayIntFromCpp<false>(wxArrayInt) impl
         ArrayIntMethods
 }
 impl<const FROM_CPP: bool> ArrayIntFromCpp<FROM_CPP> {
@@ -282,7 +282,7 @@ impl<const FROM_CPP: bool> ArrayIntFromCpp<FROM_CPP> {
 }
 impl<const FROM_CPP: bool> Drop for ArrayIntFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxArrayInt_delete(self.0) }
         }
     }
@@ -290,7 +290,7 @@ impl<const FROM_CPP: bool> Drop for ArrayIntFromCpp<FROM_CPP> {
 
 wxwidgets! {
     class ArrayString
-        = ArrayStringFromCpp<true>(wxArrayString) impl
+        = ArrayStringFromCpp<false>(wxArrayString) impl
         ArrayStringMethods
 }
 impl<const FROM_CPP: bool> ArrayStringFromCpp<FROM_CPP> {
@@ -300,7 +300,7 @@ impl<const FROM_CPP: bool> ArrayStringFromCpp<FROM_CPP> {
 }
 impl<const FROM_CPP: bool> Drop for ArrayStringFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxArrayString_delete(self.0) }
         }
     }
@@ -323,7 +323,7 @@ where
 // (wx)String::const_iterator
 wxwidgets! {
     class StringConstIterator
-        = StringConstIteratorFromCpp<true>(wxStringConstIterator) impl
+        = StringConstIteratorFromCpp<false>(wxStringConstIterator) impl
         StringConstIteratorMethods
 }
 impl<const FROM_CPP: bool> StringConstIteratorFromCpp<FROM_CPP> {
@@ -333,7 +333,7 @@ impl<const FROM_CPP: bool> StringConstIteratorFromCpp<FROM_CPP> {
 }
 impl<const FROM_CPP: bool> Drop for StringConstIteratorFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxStringConstIterator_delete(self.0) }
         }
     }

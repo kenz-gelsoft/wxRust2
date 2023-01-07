@@ -55,7 +55,7 @@ class RustClassBinding:
             unprefixed = self.__model.unprefixed()
             yield 'wxwidgets! {'
             yield '    /// %s' % (self.__model.doc,)
-            yield "    /// - [`%s`] represents a C++ `%s` class instance which your code has ownership, [`%sFromCpp`]`<false>` represents one which don't own." % (
+            yield "    /// - [`%s`] represents a C++ `%s` class instance which your code has ownership, [`%sFromCpp`]`<true>` represents one which don't own." % (
                 unprefixed,
                 self.__model.name,
                 unprefixed,
@@ -74,7 +74,7 @@ class RustClassBinding:
             for alias in (self.__model.name, unprefixed):
                 yield '    #[doc(alias = "%s")]' % (alias,)
             yield '    class %s' % (unprefixed,)
-            yield '        = %sFromCpp<true>(%s) impl' % (
+            yield '        = %sFromCpp<false>(%s) impl' % (
                 unprefixed,
                 self.__model.name,
             )
@@ -144,11 +144,11 @@ class RustClassBinding:
         return True
 
     def _impl_clone(self):
-        in_rust = '%sFromCpp' % (self.__model.unprefixed(),)
+        from_cpp = '%sFromCpp' % (self.__model.unprefixed(),)
         if self._has_drop():
-            yield 'impl Clone for %s<false> {' % (in_rust,)
+            yield 'impl Clone for %s<true> {' % (from_cpp,)
         else:
-            yield 'impl<const FROM_CPP: bool> Clone for %s<FROM_CPP> {' % (in_rust,)
+            yield 'impl<const FROM_CPP: bool> Clone for %s<FROM_CPP> {' % (from_cpp,)
         yield '    fn clone(&self) -> Self {'
         yield '        Self(self.0)'
         yield '    }'
@@ -173,7 +173,7 @@ class RustClassBinding:
         if not self.is_a('wxObject'):
             return
         yield 'impl<const FROM_CPP: bool> DynamicCast for %sFromCpp<FROM_CPP> {' % (self.__model.unprefixed(),)
-        yield '    fn class_info() -> ClassInfoFromCpp<false> {'
+        yield '    fn class_info() -> ClassInfoFromCpp<true> {'
         yield '        unsafe { ClassInfoFromCpp::from_ptr(ffi::%s_CLASSINFO()) }' % (self.__model.name)
         yield '    }'
         yield '}'
@@ -187,7 +187,7 @@ class RustClassBinding:
             deleter_class = 'wxObject'
         yield 'impl<const FROM_CPP: bool> Drop for %sFromCpp<FROM_CPP> {' % (self.__model.unprefixed(),)
         yield '    fn drop(&mut self) {'
-        yield '        if FROM_CPP {'
+        yield '        if !FROM_CPP {'
         yield '            unsafe { ffi::%s_delete(self.0) }' % (deleter_class,)
         yield '        }'
         yield '    }'

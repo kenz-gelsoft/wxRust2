@@ -2435,7 +2435,7 @@ impl<const FROM_CPP: bool> Default for ValidatorFromCpp<FROM_CPP> {
 
 wxwidgets! {
     class SizerItemList
-        = SizerItemListFromCpp<true>(wxSizerItemList) impl
+        = SizerItemListFromCpp<false>(wxSizerItemList) impl
         SizerItemListMethods
 }
 impl<const FROM_CPP: bool> SizerItemListFromCpp<FROM_CPP> {
@@ -2445,7 +2445,7 @@ impl<const FROM_CPP: bool> SizerItemListFromCpp<FROM_CPP> {
 }
 impl<const FROM_CPP: bool> Drop for SizerItemListFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxSizerItemList_delete(self.0) }
         }
     }
@@ -2453,7 +2453,7 @@ impl<const FROM_CPP: bool> Drop for SizerItemListFromCpp<FROM_CPP> {
 
 wxwidgets! {
     class WindowList
-        = WindowListFromCpp<true>(wxWindowList) impl
+        = WindowListFromCpp<false>(wxWindowList) impl
         WindowListMethods
 }
 impl<const FROM_CPP: bool> WindowListFromCpp<FROM_CPP> {
@@ -2463,7 +2463,7 @@ impl<const FROM_CPP: bool> WindowListFromCpp<FROM_CPP> {
 }
 impl<const FROM_CPP: bool> Drop for WindowListFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxWindowList_delete(self.0) }
         }
     }

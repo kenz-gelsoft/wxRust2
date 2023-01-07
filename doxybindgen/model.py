@@ -287,7 +287,7 @@ class ReturnTypeWrapper:
             return ['%sFromCpp<FROM_CPP>' % (returns,),
                     '%sFromCpp(%s)' % (returns, call)]
         if self.__returns.is_ref_to_binding():
-            return ['%sFromCpp<false>' % (returns,),
+            return ['%sFromCpp<true>' % (returns,),
                     '%sFromCpp::from_ptr(%s)' % (returns, call)]
         if self.__returns.is_ptr_to_binding():
             if not self.is_owned:
@@ -295,7 +295,7 @@ class ReturnTypeWrapper:
                     return ['WeakRef<%s>' % (returns,),
                             'WeakRef::<%s>::from(%s)' % (returns, call)]
                 else:
-                    return ['Option<%sFromCpp<false>>' % (returns,),
+                    return ['Option<%sFromCpp<true>>' % (returns,),
                             '%s::option_from(%s)' % (returns, call)]
         return [returns,
                 '%s::from_ptr(%s)' % (returns, call)]
